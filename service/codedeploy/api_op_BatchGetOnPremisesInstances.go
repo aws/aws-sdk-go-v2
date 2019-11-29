@@ -6,51 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/codedeploy/types"
 )
-
-// Represents the input of a BatchGetOnPremisesInstances operation.
-type BatchGetOnPremisesInstancesInput struct {
-	_ struct{} `type:"structure"`
-
-	// The names of the on-premises instances about which to get information. The
-	// maximum number of instance names you can specify is 25.
-	//
-	// InstanceNames is a required field
-	InstanceNames []string `locationName:"instanceNames" type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s BatchGetOnPremisesInstancesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *BatchGetOnPremisesInstancesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "BatchGetOnPremisesInstancesInput"}
-
-	if s.InstanceNames == nil {
-		invalidParams.Add(aws.NewErrParamRequired("InstanceNames"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Represents the output of a BatchGetOnPremisesInstances operation.
-type BatchGetOnPremisesInstancesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Information about the on-premises instances.
-	InstanceInfos []InstanceInfo `locationName:"instanceInfos" type:"list"`
-}
-
-// String returns the string representation
-func (s BatchGetOnPremisesInstancesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opBatchGetOnPremisesInstances = "BatchGetOnPremisesInstances"
 
@@ -68,7 +25,7 @@ const opBatchGetOnPremisesInstances = "BatchGetOnPremisesInstances"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/BatchGetOnPremisesInstances
-func (c *Client) BatchGetOnPremisesInstancesRequest(input *BatchGetOnPremisesInstancesInput) BatchGetOnPremisesInstancesRequest {
+func (c *Client) BatchGetOnPremisesInstancesRequest(input *types.BatchGetOnPremisesInstancesInput) BatchGetOnPremisesInstancesRequest {
 	op := &aws.Operation{
 		Name:       opBatchGetOnPremisesInstances,
 		HTTPMethod: "POST",
@@ -76,10 +33,10 @@ func (c *Client) BatchGetOnPremisesInstancesRequest(input *BatchGetOnPremisesIns
 	}
 
 	if input == nil {
-		input = &BatchGetOnPremisesInstancesInput{}
+		input = &types.BatchGetOnPremisesInstancesInput{}
 	}
 
-	req := c.newRequest(op, input, &BatchGetOnPremisesInstancesOutput{})
+	req := c.newRequest(op, input, &types.BatchGetOnPremisesInstancesOutput{})
 	return BatchGetOnPremisesInstancesRequest{Request: req, Input: input, Copy: c.BatchGetOnPremisesInstancesRequest}
 }
 
@@ -87,8 +44,8 @@ func (c *Client) BatchGetOnPremisesInstancesRequest(input *BatchGetOnPremisesIns
 // BatchGetOnPremisesInstances API operation.
 type BatchGetOnPremisesInstancesRequest struct {
 	*aws.Request
-	Input *BatchGetOnPremisesInstancesInput
-	Copy  func(*BatchGetOnPremisesInstancesInput) BatchGetOnPremisesInstancesRequest
+	Input *types.BatchGetOnPremisesInstancesInput
+	Copy  func(*types.BatchGetOnPremisesInstancesInput) BatchGetOnPremisesInstancesRequest
 }
 
 // Send marshals and sends the BatchGetOnPremisesInstances API request.
@@ -100,7 +57,7 @@ func (r BatchGetOnPremisesInstancesRequest) Send(ctx context.Context) (*BatchGet
 	}
 
 	resp := &BatchGetOnPremisesInstancesResponse{
-		BatchGetOnPremisesInstancesOutput: r.Request.Data.(*BatchGetOnPremisesInstancesOutput),
+		BatchGetOnPremisesInstancesOutput: r.Request.Data.(*types.BatchGetOnPremisesInstancesOutput),
 		response:                          &aws.Response{Request: r.Request},
 	}
 
@@ -110,7 +67,7 @@ func (r BatchGetOnPremisesInstancesRequest) Send(ctx context.Context) (*BatchGet
 // BatchGetOnPremisesInstancesResponse is the response type for the
 // BatchGetOnPremisesInstances API operation.
 type BatchGetOnPremisesInstancesResponse struct {
-	*BatchGetOnPremisesInstancesOutput
+	*types.BatchGetOnPremisesInstancesOutput
 
 	response *aws.Response
 }

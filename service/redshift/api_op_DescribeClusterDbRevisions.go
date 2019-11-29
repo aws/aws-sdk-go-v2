@@ -6,62 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/redshift/types"
 )
-
-type DescribeClusterDbRevisionsInput struct {
-	_ struct{} `type:"structure"`
-
-	// A unique identifier for a cluster whose ClusterDbRevisions you are requesting.
-	// This parameter is case sensitive. All clusters defined for an account are
-	// returned by default.
-	ClusterIdentifier *string `type:"string"`
-
-	// An optional parameter that specifies the starting point for returning a set
-	// of response records. When the results of a DescribeClusterDbRevisions request
-	// exceed the value specified in MaxRecords, Amazon Redshift returns a value
-	// in the marker field of the response. You can retrieve the next set of response
-	// records by providing the returned marker value in the marker parameter and
-	// retrying the request.
-	//
-	// Constraints: You can specify either the ClusterIdentifier parameter, or the
-	// marker parameter, but not both.
-	Marker *string `type:"string"`
-
-	// The maximum number of response records to return in each call. If the number
-	// of remaining response records exceeds the specified MaxRecords value, a value
-	// is returned in the marker field of the response. You can retrieve the next
-	// set of response records by providing the returned marker value in the marker
-	// parameter and retrying the request.
-	//
-	// Default: 100
-	//
-	// Constraints: minimum 20, maximum 100.
-	MaxRecords *int64 `type:"integer"`
-}
-
-// String returns the string representation
-func (s DescribeClusterDbRevisionsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type DescribeClusterDbRevisionsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A list of revisions.
-	ClusterDbRevisions []ClusterDbRevision `locationNameList:"ClusterDbRevision" type:"list"`
-
-	// A string representing the starting point for the next set of revisions. If
-	// a value is returned in a response, you can retrieve the next set of revisions
-	// by providing the value in the marker parameter and retrying the command.
-	// If the marker field is empty, all revisions have already been returned.
-	Marker *string `type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeClusterDbRevisionsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeClusterDbRevisions = "DescribeClusterDbRevisions"
 
@@ -78,7 +24,7 @@ const opDescribeClusterDbRevisions = "DescribeClusterDbRevisions"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeClusterDbRevisions
-func (c *Client) DescribeClusterDbRevisionsRequest(input *DescribeClusterDbRevisionsInput) DescribeClusterDbRevisionsRequest {
+func (c *Client) DescribeClusterDbRevisionsRequest(input *types.DescribeClusterDbRevisionsInput) DescribeClusterDbRevisionsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeClusterDbRevisions,
 		HTTPMethod: "POST",
@@ -86,10 +32,10 @@ func (c *Client) DescribeClusterDbRevisionsRequest(input *DescribeClusterDbRevis
 	}
 
 	if input == nil {
-		input = &DescribeClusterDbRevisionsInput{}
+		input = &types.DescribeClusterDbRevisionsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeClusterDbRevisionsOutput{})
+	req := c.newRequest(op, input, &types.DescribeClusterDbRevisionsOutput{})
 	return DescribeClusterDbRevisionsRequest{Request: req, Input: input, Copy: c.DescribeClusterDbRevisionsRequest}
 }
 
@@ -97,8 +43,8 @@ func (c *Client) DescribeClusterDbRevisionsRequest(input *DescribeClusterDbRevis
 // DescribeClusterDbRevisions API operation.
 type DescribeClusterDbRevisionsRequest struct {
 	*aws.Request
-	Input *DescribeClusterDbRevisionsInput
-	Copy  func(*DescribeClusterDbRevisionsInput) DescribeClusterDbRevisionsRequest
+	Input *types.DescribeClusterDbRevisionsInput
+	Copy  func(*types.DescribeClusterDbRevisionsInput) DescribeClusterDbRevisionsRequest
 }
 
 // Send marshals and sends the DescribeClusterDbRevisions API request.
@@ -110,7 +56,7 @@ func (r DescribeClusterDbRevisionsRequest) Send(ctx context.Context) (*DescribeC
 	}
 
 	resp := &DescribeClusterDbRevisionsResponse{
-		DescribeClusterDbRevisionsOutput: r.Request.Data.(*DescribeClusterDbRevisionsOutput),
+		DescribeClusterDbRevisionsOutput: r.Request.Data.(*types.DescribeClusterDbRevisionsOutput),
 		response:                         &aws.Response{Request: r.Request},
 	}
 
@@ -120,7 +66,7 @@ func (r DescribeClusterDbRevisionsRequest) Send(ctx context.Context) (*DescribeC
 // DescribeClusterDbRevisionsResponse is the response type for the
 // DescribeClusterDbRevisions API operation.
 type DescribeClusterDbRevisionsResponse struct {
-	*DescribeClusterDbRevisionsOutput
+	*types.DescribeClusterDbRevisionsOutput
 
 	response *aws.Response
 }

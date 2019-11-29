@@ -4,76 +4,10 @@ package datasync
 
 import (
 	"context"
-	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/datasync/types"
 )
-
-// DescribeAgent
-type DescribeAgentInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the agent to describe.
-	//
-	// AgentArn is a required field
-	AgentArn *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeAgentInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeAgentInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeAgentInput"}
-
-	if s.AgentArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("AgentArn"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// DescribeAgentResponse
-type DescribeAgentOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the agent.
-	AgentArn *string `type:"string"`
-
-	// The time that the agent was activated (that is, created in your account).
-	CreationTime *time.Time `type:"timestamp"`
-
-	// The type of endpoint that your agent is connected to. If the endpoint is
-	// a VPC endpoint, the agent is not accessible over the public Internet.
-	EndpointType EndpointType `type:"string" enum:"true"`
-
-	// The time that the agent last connected to DataSyc.
-	LastConnectionTime *time.Time `type:"timestamp"`
-
-	// The name of the agent.
-	Name *string `min:"1" type:"string"`
-
-	// The subnet and the security group that DataSync used to access a VPC endpoint.
-	PrivateLinkConfig *PrivateLinkConfig `type:"structure"`
-
-	// The status of the agent. If the status is ONLINE, then the agent is configured
-	// properly and is available to use. The Running status is the normal running
-	// status for an agent. If the status is OFFLINE, the agent's VM is turned off
-	// or the agent is in an unhealthy state. When the issue that caused the unhealthy
-	// state is resolved, the agent returns to ONLINE status.
-	Status AgentStatus `type:"string" enum:"true"`
-}
-
-// String returns the string representation
-func (s DescribeAgentOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeAgent = "DescribeAgent"
 
@@ -93,7 +27,7 @@ const opDescribeAgent = "DescribeAgent"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/DescribeAgent
-func (c *Client) DescribeAgentRequest(input *DescribeAgentInput) DescribeAgentRequest {
+func (c *Client) DescribeAgentRequest(input *types.DescribeAgentInput) DescribeAgentRequest {
 	op := &aws.Operation{
 		Name:       opDescribeAgent,
 		HTTPMethod: "POST",
@@ -101,10 +35,10 @@ func (c *Client) DescribeAgentRequest(input *DescribeAgentInput) DescribeAgentRe
 	}
 
 	if input == nil {
-		input = &DescribeAgentInput{}
+		input = &types.DescribeAgentInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeAgentOutput{})
+	req := c.newRequest(op, input, &types.DescribeAgentOutput{})
 	return DescribeAgentRequest{Request: req, Input: input, Copy: c.DescribeAgentRequest}
 }
 
@@ -112,8 +46,8 @@ func (c *Client) DescribeAgentRequest(input *DescribeAgentInput) DescribeAgentRe
 // DescribeAgent API operation.
 type DescribeAgentRequest struct {
 	*aws.Request
-	Input *DescribeAgentInput
-	Copy  func(*DescribeAgentInput) DescribeAgentRequest
+	Input *types.DescribeAgentInput
+	Copy  func(*types.DescribeAgentInput) DescribeAgentRequest
 }
 
 // Send marshals and sends the DescribeAgent API request.
@@ -125,7 +59,7 @@ func (r DescribeAgentRequest) Send(ctx context.Context) (*DescribeAgentResponse,
 	}
 
 	resp := &DescribeAgentResponse{
-		DescribeAgentOutput: r.Request.Data.(*DescribeAgentOutput),
+		DescribeAgentOutput: r.Request.Data.(*types.DescribeAgentOutput),
 		response:            &aws.Response{Request: r.Request},
 	}
 
@@ -135,7 +69,7 @@ func (r DescribeAgentRequest) Send(ctx context.Context) (*DescribeAgentResponse,
 // DescribeAgentResponse is the response type for the
 // DescribeAgent API operation.
 type DescribeAgentResponse struct {
-	*DescribeAgentOutput
+	*types.DescribeAgentOutput
 
 	response *aws.Response
 }

@@ -6,99 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/kinesisvideo/types"
 )
-
-type GetDataEndpointInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the API action for which to get an endpoint.
-	//
-	// APIName is a required field
-	APIName APIName `type:"string" required:"true" enum:"true"`
-
-	// The Amazon Resource Name (ARN) of the stream that you want to get the endpoint
-	// for. You must specify either this parameter or a StreamName in the request.
-	StreamARN *string `min:"1" type:"string"`
-
-	// The name of the stream that you want to get the endpoint for. You must specify
-	// either this parameter or a StreamARN in the request.
-	StreamName *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s GetDataEndpointInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetDataEndpointInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetDataEndpointInput"}
-	if len(s.APIName) == 0 {
-		invalidParams.Add(aws.NewErrParamRequired("APIName"))
-	}
-	if s.StreamARN != nil && len(*s.StreamARN) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("StreamARN", 1))
-	}
-	if s.StreamName != nil && len(*s.StreamName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("StreamName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetDataEndpointInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if len(s.APIName) > 0 {
-		v := s.APIName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "APIName", protocol.QuotedValue{ValueMarshaler: v}, metadata)
-	}
-	if s.StreamARN != nil {
-		v := *s.StreamARN
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "StreamARN", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.StreamName != nil {
-		v := *s.StreamName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "StreamName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type GetDataEndpointOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The endpoint value. To read data from the stream or to write data to it,
-	// specify this endpoint in your application.
-	DataEndpoint *string `type:"string"`
-}
-
-// String returns the string representation
-func (s GetDataEndpointOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetDataEndpointOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.DataEndpoint != nil {
-		v := *s.DataEndpoint
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "DataEndpoint", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opGetDataEndpoint = "GetDataEndpoint"
 
@@ -123,7 +32,7 @@ const opGetDataEndpoint = "GetDataEndpoint"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesisvideo-2017-09-30/GetDataEndpoint
-func (c *Client) GetDataEndpointRequest(input *GetDataEndpointInput) GetDataEndpointRequest {
+func (c *Client) GetDataEndpointRequest(input *types.GetDataEndpointInput) GetDataEndpointRequest {
 	op := &aws.Operation{
 		Name:       opGetDataEndpoint,
 		HTTPMethod: "POST",
@@ -131,10 +40,10 @@ func (c *Client) GetDataEndpointRequest(input *GetDataEndpointInput) GetDataEndp
 	}
 
 	if input == nil {
-		input = &GetDataEndpointInput{}
+		input = &types.GetDataEndpointInput{}
 	}
 
-	req := c.newRequest(op, input, &GetDataEndpointOutput{})
+	req := c.newRequest(op, input, &types.GetDataEndpointOutput{})
 	return GetDataEndpointRequest{Request: req, Input: input, Copy: c.GetDataEndpointRequest}
 }
 
@@ -142,8 +51,8 @@ func (c *Client) GetDataEndpointRequest(input *GetDataEndpointInput) GetDataEndp
 // GetDataEndpoint API operation.
 type GetDataEndpointRequest struct {
 	*aws.Request
-	Input *GetDataEndpointInput
-	Copy  func(*GetDataEndpointInput) GetDataEndpointRequest
+	Input *types.GetDataEndpointInput
+	Copy  func(*types.GetDataEndpointInput) GetDataEndpointRequest
 }
 
 // Send marshals and sends the GetDataEndpoint API request.
@@ -155,7 +64,7 @@ func (r GetDataEndpointRequest) Send(ctx context.Context) (*GetDataEndpointRespo
 	}
 
 	resp := &GetDataEndpointResponse{
-		GetDataEndpointOutput: r.Request.Data.(*GetDataEndpointOutput),
+		GetDataEndpointOutput: r.Request.Data.(*types.GetDataEndpointOutput),
 		response:              &aws.Response{Request: r.Request},
 	}
 
@@ -165,7 +74,7 @@ func (r GetDataEndpointRequest) Send(ctx context.Context) (*GetDataEndpointRespo
 // GetDataEndpointResponse is the response type for the
 // GetDataEndpoint API operation.
 type GetDataEndpointResponse struct {
-	*GetDataEndpointOutput
+	*types.GetDataEndpointOutput
 
 	response *aws.Response
 }

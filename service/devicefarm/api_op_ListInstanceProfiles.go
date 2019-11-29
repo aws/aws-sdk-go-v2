@@ -6,54 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/devicefarm/types"
 )
-
-type ListInstanceProfilesInput struct {
-	_ struct{} `type:"structure"`
-
-	// An integer specifying the maximum number of items you want to return in the
-	// API response.
-	MaxResults *int64 `locationName:"maxResults" type:"integer"`
-
-	// An identifier that was returned from the previous call to this operation,
-	// which can be used to return the next set of items in the list.
-	NextToken *string `locationName:"nextToken" min:"4" type:"string"`
-}
-
-// String returns the string representation
-func (s ListInstanceProfilesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListInstanceProfilesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListInstanceProfilesInput"}
-	if s.NextToken != nil && len(*s.NextToken) < 4 {
-		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 4))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ListInstanceProfilesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// An object containing information about your instance profiles.
-	InstanceProfiles []InstanceProfile `locationName:"instanceProfiles" type:"list"`
-
-	// An identifier that can be used in the next call to this operation to return
-	// the next set of items in the list.
-	NextToken *string `locationName:"nextToken" min:"4" type:"string"`
-}
-
-// String returns the string representation
-func (s ListInstanceProfilesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListInstanceProfiles = "ListInstanceProfiles"
 
@@ -70,7 +24,7 @@ const opListInstanceProfiles = "ListInstanceProfiles"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ListInstanceProfiles
-func (c *Client) ListInstanceProfilesRequest(input *ListInstanceProfilesInput) ListInstanceProfilesRequest {
+func (c *Client) ListInstanceProfilesRequest(input *types.ListInstanceProfilesInput) ListInstanceProfilesRequest {
 	op := &aws.Operation{
 		Name:       opListInstanceProfiles,
 		HTTPMethod: "POST",
@@ -78,10 +32,10 @@ func (c *Client) ListInstanceProfilesRequest(input *ListInstanceProfilesInput) L
 	}
 
 	if input == nil {
-		input = &ListInstanceProfilesInput{}
+		input = &types.ListInstanceProfilesInput{}
 	}
 
-	req := c.newRequest(op, input, &ListInstanceProfilesOutput{})
+	req := c.newRequest(op, input, &types.ListInstanceProfilesOutput{})
 	return ListInstanceProfilesRequest{Request: req, Input: input, Copy: c.ListInstanceProfilesRequest}
 }
 
@@ -89,8 +43,8 @@ func (c *Client) ListInstanceProfilesRequest(input *ListInstanceProfilesInput) L
 // ListInstanceProfiles API operation.
 type ListInstanceProfilesRequest struct {
 	*aws.Request
-	Input *ListInstanceProfilesInput
-	Copy  func(*ListInstanceProfilesInput) ListInstanceProfilesRequest
+	Input *types.ListInstanceProfilesInput
+	Copy  func(*types.ListInstanceProfilesInput) ListInstanceProfilesRequest
 }
 
 // Send marshals and sends the ListInstanceProfiles API request.
@@ -102,7 +56,7 @@ func (r ListInstanceProfilesRequest) Send(ctx context.Context) (*ListInstancePro
 	}
 
 	resp := &ListInstanceProfilesResponse{
-		ListInstanceProfilesOutput: r.Request.Data.(*ListInstanceProfilesOutput),
+		ListInstanceProfilesOutput: r.Request.Data.(*types.ListInstanceProfilesOutput),
 		response:                   &aws.Response{Request: r.Request},
 	}
 
@@ -112,7 +66,7 @@ func (r ListInstanceProfilesRequest) Send(ctx context.Context) (*ListInstancePro
 // ListInstanceProfilesResponse is the response type for the
 // ListInstanceProfiles API operation.
 type ListInstanceProfilesResponse struct {
-	*ListInstanceProfilesOutput
+	*types.ListInstanceProfilesOutput
 
 	response *aws.Response
 }

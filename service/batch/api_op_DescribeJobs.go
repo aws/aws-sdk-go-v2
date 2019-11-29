@@ -6,85 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/batch/types"
 )
-
-type DescribeJobsInput struct {
-	_ struct{} `type:"structure"`
-
-	// A list of up to 100 job IDs.
-	//
-	// Jobs is a required field
-	Jobs []string `locationName:"jobs" type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeJobsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeJobsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeJobsInput"}
-
-	if s.Jobs == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Jobs"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DescribeJobsInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.Jobs != nil {
-		v := s.Jobs
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "jobs", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
-		}
-		ls0.End()
-
-	}
-	return nil
-}
-
-type DescribeJobsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The list of jobs.
-	Jobs []JobDetail `locationName:"jobs" type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeJobsOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DescribeJobsOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.Jobs != nil {
-		v := s.Jobs
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "jobs", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	return nil
-}
 
 const opDescribeJobs = "DescribeJobs"
 
@@ -101,7 +24,7 @@ const opDescribeJobs = "DescribeJobs"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/DescribeJobs
-func (c *Client) DescribeJobsRequest(input *DescribeJobsInput) DescribeJobsRequest {
+func (c *Client) DescribeJobsRequest(input *types.DescribeJobsInput) DescribeJobsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeJobs,
 		HTTPMethod: "POST",
@@ -109,10 +32,10 @@ func (c *Client) DescribeJobsRequest(input *DescribeJobsInput) DescribeJobsReque
 	}
 
 	if input == nil {
-		input = &DescribeJobsInput{}
+		input = &types.DescribeJobsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeJobsOutput{})
+	req := c.newRequest(op, input, &types.DescribeJobsOutput{})
 	return DescribeJobsRequest{Request: req, Input: input, Copy: c.DescribeJobsRequest}
 }
 
@@ -120,8 +43,8 @@ func (c *Client) DescribeJobsRequest(input *DescribeJobsInput) DescribeJobsReque
 // DescribeJobs API operation.
 type DescribeJobsRequest struct {
 	*aws.Request
-	Input *DescribeJobsInput
-	Copy  func(*DescribeJobsInput) DescribeJobsRequest
+	Input *types.DescribeJobsInput
+	Copy  func(*types.DescribeJobsInput) DescribeJobsRequest
 }
 
 // Send marshals and sends the DescribeJobs API request.
@@ -133,7 +56,7 @@ func (r DescribeJobsRequest) Send(ctx context.Context) (*DescribeJobsResponse, e
 	}
 
 	resp := &DescribeJobsResponse{
-		DescribeJobsOutput: r.Request.Data.(*DescribeJobsOutput),
+		DescribeJobsOutput: r.Request.Data.(*types.DescribeJobsOutput),
 		response:           &aws.Response{Request: r.Request},
 	}
 
@@ -143,7 +66,7 @@ func (r DescribeJobsRequest) Send(ctx context.Context) (*DescribeJobsResponse, e
 // DescribeJobsResponse is the response type for the
 // DescribeJobs API operation.
 type DescribeJobsResponse struct {
-	*DescribeJobsOutput
+	*types.DescribeJobsOutput
 
 	response *aws.Response
 }

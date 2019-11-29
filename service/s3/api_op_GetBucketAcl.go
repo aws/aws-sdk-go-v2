@@ -6,98 +6,23 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/s3/types"
 )
-
-type GetBucketAclInput struct {
-	_ struct{} `type:"structure"`
-
-	// Bucket is a required field
-	Bucket *string `location:"uri" locationName:"Bucket" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetBucketAclInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetBucketAclInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetBucketAclInput"}
-
-	if s.Bucket == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Bucket"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-func (s *GetBucketAclInput) getBucket() (v string) {
-	if s.Bucket == nil {
-		return v
-	}
-	return *s.Bucket
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetBucketAclInput) MarshalFields(e protocol.FieldEncoder) error {
-
-	if s.Bucket != nil {
-		v := *s.Bucket
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "Bucket", protocol.StringValue(v), metadata)
-	}
-	return nil
-}
-
-type GetBucketAclOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A list of grants.
-	Grants []Grant `locationName:"AccessControlList" locationNameList:"Grant" type:"list"`
-
-	Owner *Owner `type:"structure"`
-}
-
-// String returns the string representation
-func (s GetBucketAclOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetBucketAclOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.Grants != nil {
-		v := s.Grants
-
-		metadata := protocol.Metadata{ListLocationName: "Grant"}
-		ls0 := e.List(protocol.BodyTarget, "AccessControlList", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	if s.Owner != nil {
-		v := s.Owner
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "Owner", v, metadata)
-	}
-	return nil
-}
 
 const opGetBucketAcl = "GetBucketAcl"
 
 // GetBucketAclRequest returns a request value for making API operation for
 // Amazon Simple Storage Service.
 //
-// Gets the access control policy for the bucket.
+// This implementation of the GET operation uses the acl subresource to return
+// the access control list (ACL) of a bucket. To use GET to return the ACL of
+// the bucket, you must have READ_ACP access to the bucket. If READ_ACP permission
+// is granted to the anonymous user, you can return the ACL of the bucket without
+// using an authorization header.
+//
+// Related Resources
+//
+//    *
 //
 //    // Example sending a request using GetBucketAclRequest.
 //    req := client.GetBucketAclRequest(params)
@@ -107,7 +32,7 @@ const opGetBucketAcl = "GetBucketAcl"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetBucketAcl
-func (c *Client) GetBucketAclRequest(input *GetBucketAclInput) GetBucketAclRequest {
+func (c *Client) GetBucketAclRequest(input *types.GetBucketAclInput) GetBucketAclRequest {
 	op := &aws.Operation{
 		Name:       opGetBucketAcl,
 		HTTPMethod: "GET",
@@ -115,10 +40,10 @@ func (c *Client) GetBucketAclRequest(input *GetBucketAclInput) GetBucketAclReque
 	}
 
 	if input == nil {
-		input = &GetBucketAclInput{}
+		input = &types.GetBucketAclInput{}
 	}
 
-	req := c.newRequest(op, input, &GetBucketAclOutput{})
+	req := c.newRequest(op, input, &types.GetBucketAclOutput{})
 	return GetBucketAclRequest{Request: req, Input: input, Copy: c.GetBucketAclRequest}
 }
 
@@ -126,8 +51,8 @@ func (c *Client) GetBucketAclRequest(input *GetBucketAclInput) GetBucketAclReque
 // GetBucketAcl API operation.
 type GetBucketAclRequest struct {
 	*aws.Request
-	Input *GetBucketAclInput
-	Copy  func(*GetBucketAclInput) GetBucketAclRequest
+	Input *types.GetBucketAclInput
+	Copy  func(*types.GetBucketAclInput) GetBucketAclRequest
 }
 
 // Send marshals and sends the GetBucketAcl API request.
@@ -139,7 +64,7 @@ func (r GetBucketAclRequest) Send(ctx context.Context) (*GetBucketAclResponse, e
 	}
 
 	resp := &GetBucketAclResponse{
-		GetBucketAclOutput: r.Request.Data.(*GetBucketAclOutput),
+		GetBucketAclOutput: r.Request.Data.(*types.GetBucketAclOutput),
 		response:           &aws.Response{Request: r.Request},
 	}
 
@@ -149,7 +74,7 @@ func (r GetBucketAclRequest) Send(ctx context.Context) (*GetBucketAclResponse, e
 // GetBucketAclResponse is the response type for the
 // GetBucketAcl API operation.
 type GetBucketAclResponse struct {
-	*GetBucketAclOutput
+	*types.GetBucketAclOutput
 
 	response *aws.Response
 }

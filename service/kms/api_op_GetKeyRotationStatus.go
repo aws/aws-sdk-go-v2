@@ -6,62 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/kms/types"
 )
-
-type GetKeyRotationStatusInput struct {
-	_ struct{} `type:"structure"`
-
-	// A unique identifier for the customer master key (CMK).
-	//
-	// Specify the key ID or the Amazon Resource Name (ARN) of the CMK. To specify
-	// a CMK in a different AWS account, you must use the key ARN.
-	//
-	// For example:
-	//
-	//    * Key ID: 1234abcd-12ab-34cd-56ef-1234567890ab
-	//
-	//    * Key ARN: arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab
-	//
-	// To get the key ID and key ARN for a CMK, use ListKeys or DescribeKey.
-	//
-	// KeyId is a required field
-	KeyId *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetKeyRotationStatusInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetKeyRotationStatusInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetKeyRotationStatusInput"}
-
-	if s.KeyId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("KeyId"))
-	}
-	if s.KeyId != nil && len(*s.KeyId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("KeyId", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type GetKeyRotationStatusOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A Boolean value that specifies whether key rotation is enabled.
-	KeyRotationEnabled *bool `type:"boolean"`
-}
-
-// String returns the string representation
-func (s GetKeyRotationStatusOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetKeyRotationStatus = "GetKeyRotationStatus"
 
@@ -95,7 +41,7 @@ const opGetKeyRotationStatus = "GetKeyRotationStatus"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/GetKeyRotationStatus
-func (c *Client) GetKeyRotationStatusRequest(input *GetKeyRotationStatusInput) GetKeyRotationStatusRequest {
+func (c *Client) GetKeyRotationStatusRequest(input *types.GetKeyRotationStatusInput) GetKeyRotationStatusRequest {
 	op := &aws.Operation{
 		Name:       opGetKeyRotationStatus,
 		HTTPMethod: "POST",
@@ -103,10 +49,10 @@ func (c *Client) GetKeyRotationStatusRequest(input *GetKeyRotationStatusInput) G
 	}
 
 	if input == nil {
-		input = &GetKeyRotationStatusInput{}
+		input = &types.GetKeyRotationStatusInput{}
 	}
 
-	req := c.newRequest(op, input, &GetKeyRotationStatusOutput{})
+	req := c.newRequest(op, input, &types.GetKeyRotationStatusOutput{})
 	return GetKeyRotationStatusRequest{Request: req, Input: input, Copy: c.GetKeyRotationStatusRequest}
 }
 
@@ -114,8 +60,8 @@ func (c *Client) GetKeyRotationStatusRequest(input *GetKeyRotationStatusInput) G
 // GetKeyRotationStatus API operation.
 type GetKeyRotationStatusRequest struct {
 	*aws.Request
-	Input *GetKeyRotationStatusInput
-	Copy  func(*GetKeyRotationStatusInput) GetKeyRotationStatusRequest
+	Input *types.GetKeyRotationStatusInput
+	Copy  func(*types.GetKeyRotationStatusInput) GetKeyRotationStatusRequest
 }
 
 // Send marshals and sends the GetKeyRotationStatus API request.
@@ -127,7 +73,7 @@ func (r GetKeyRotationStatusRequest) Send(ctx context.Context) (*GetKeyRotationS
 	}
 
 	resp := &GetKeyRotationStatusResponse{
-		GetKeyRotationStatusOutput: r.Request.Data.(*GetKeyRotationStatusOutput),
+		GetKeyRotationStatusOutput: r.Request.Data.(*types.GetKeyRotationStatusOutput),
 		response:                   &aws.Response{Request: r.Request},
 	}
 
@@ -137,7 +83,7 @@ func (r GetKeyRotationStatusRequest) Send(ctx context.Context) (*GetKeyRotationS
 // GetKeyRotationStatusResponse is the response type for the
 // GetKeyRotationStatus API operation.
 type GetKeyRotationStatusResponse struct {
-	*GetKeyRotationStatusOutput
+	*types.GetKeyRotationStatusOutput
 
 	response *aws.Response
 }

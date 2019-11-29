@@ -6,305 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/elastictranscoder/types"
 )
-
-// The UpdatePipelineRequest structure.
-type UpdatePipelineInput struct {
-	_ struct{} `type:"structure"`
-
-	// The AWS Key Management Service (AWS KMS) key that you want to use with this
-	// pipeline.
-	//
-	// If you use either s3 or s3-aws-kms as your Encryption:Mode, you don't need
-	// to provide a key with your job because a default key, known as an AWS-KMS
-	// key, is created for you automatically. You need to provide an AWS-KMS key
-	// only if you want to use a non-default AWS-KMS key, or if you are using an
-	// Encryption:Mode of aes-cbc-pkcs7, aes-ctr, or aes-gcm.
-	AwsKmsKeyArn *string `type:"string"`
-
-	// The optional ContentConfig object specifies information about the Amazon
-	// S3 bucket in which you want Elastic Transcoder to save transcoded files and
-	// playlists: which bucket to use, which users you want to have access to the
-	// files, the type of access you want users to have, and the storage class that
-	// you want to assign to the files.
-	//
-	// If you specify values for ContentConfig, you must also specify values for
-	// ThumbnailConfig.
-	//
-	// If you specify values for ContentConfig and ThumbnailConfig, omit the OutputBucket
-	// object.
-	//
-	//    * Bucket: The Amazon S3 bucket in which you want Elastic Transcoder to
-	//    save transcoded files and playlists.
-	//
-	//    * Permissions (Optional): The Permissions object specifies which users
-	//    you want to have access to transcoded files and the type of access you
-	//    want them to have. You can grant permissions to a maximum of 30 users
-	//    and/or predefined Amazon S3 groups.
-	//
-	//    * Grantee Type: Specify the type of value that appears in the Grantee
-	//    object: Canonical: The value in the Grantee object is either the canonical
-	//    user ID for an AWS account or an origin access identity for an Amazon
-	//    CloudFront distribution. For more information about canonical user IDs,
-	//    see Access Control List (ACL) Overview in the Amazon Simple Storage Service
-	//    Developer Guide. For more information about using CloudFront origin access
-	//    identities to require that users use CloudFront URLs instead of Amazon
-	//    S3 URLs, see Using an Origin Access Identity to Restrict Access to Your
-	//    Amazon S3 Content. A canonical user ID is not the same as an AWS account
-	//    number. Email: The value in the Grantee object is the registered email
-	//    address of an AWS account. Group: The value in the Grantee object is one
-	//    of the following predefined Amazon S3 groups: AllUsers, AuthenticatedUsers,
-	//    or LogDelivery.
-	//
-	//    * Grantee: The AWS user or group that you want to have access to transcoded
-	//    files and playlists. To identify the user or group, you can specify the
-	//    canonical user ID for an AWS account, an origin access identity for a
-	//    CloudFront distribution, the registered email address of an AWS account,
-	//    or a predefined Amazon S3 group
-	//
-	//    * Access: The permission that you want to give to the AWS user that you
-	//    specified in Grantee. Permissions are granted on the files that Elastic
-	//    Transcoder adds to the bucket, including playlists and video files. Valid
-	//    values include: READ: The grantee can read the objects and metadata for
-	//    objects that Elastic Transcoder adds to the Amazon S3 bucket. READ_ACP:
-	//    The grantee can read the object ACL for objects that Elastic Transcoder
-	//    adds to the Amazon S3 bucket. WRITE_ACP: The grantee can write the ACL
-	//    for the objects that Elastic Transcoder adds to the Amazon S3 bucket.
-	//    FULL_CONTROL: The grantee has READ, READ_ACP, and WRITE_ACP permissions
-	//    for the objects that Elastic Transcoder adds to the Amazon S3 bucket.
-	//
-	//    * StorageClass: The Amazon S3 storage class, Standard or ReducedRedundancy,
-	//    that you want Elastic Transcoder to assign to the video files and playlists
-	//    that it stores in your Amazon S3 bucket.
-	ContentConfig *PipelineOutputConfig `type:"structure"`
-
-	// The ID of the pipeline that you want to update.
-	//
-	// Id is a required field
-	Id *string `location:"uri" locationName:"Id" type:"string" required:"true"`
-
-	// The Amazon S3 bucket in which you saved the media files that you want to
-	// transcode and the graphics that you want to use as watermarks.
-	InputBucket *string `type:"string"`
-
-	// The name of the pipeline. We recommend that the name be unique within the
-	// AWS account, but uniqueness is not enforced.
-	//
-	// Constraints: Maximum 40 characters
-	Name *string `min:"1" type:"string"`
-
-	// The topic ARN for the Amazon Simple Notification Service (Amazon SNS) topic
-	// that you want to notify to report job status.
-	//
-	// To receive notifications, you must also subscribe to the new topic in the
-	// Amazon SNS console.
-	//
-	//    * Progressing: The topic ARN for the Amazon Simple Notification Service
-	//    (Amazon SNS) topic that you want to notify when Elastic Transcoder has
-	//    started to process jobs that are added to this pipeline. This is the ARN
-	//    that Amazon SNS returned when you created the topic.
-	//
-	//    * Complete: The topic ARN for the Amazon SNS topic that you want to notify
-	//    when Elastic Transcoder has finished processing a job. This is the ARN
-	//    that Amazon SNS returned when you created the topic.
-	//
-	//    * Warning: The topic ARN for the Amazon SNS topic that you want to notify
-	//    when Elastic Transcoder encounters a warning condition. This is the ARN
-	//    that Amazon SNS returned when you created the topic.
-	//
-	//    * Error: The topic ARN for the Amazon SNS topic that you want to notify
-	//    when Elastic Transcoder encounters an error condition. This is the ARN
-	//    that Amazon SNS returned when you created the topic.
-	Notifications *Notifications `type:"structure"`
-
-	// The IAM Amazon Resource Name (ARN) for the role that you want Elastic Transcoder
-	// to use to transcode jobs for this pipeline.
-	Role *string `type:"string"`
-
-	// The ThumbnailConfig object specifies several values, including the Amazon
-	// S3 bucket in which you want Elastic Transcoder to save thumbnail files, which
-	// users you want to have access to the files, the type of access you want users
-	// to have, and the storage class that you want to assign to the files.
-	//
-	// If you specify values for ContentConfig, you must also specify values for
-	// ThumbnailConfig even if you don't want to create thumbnails.
-	//
-	// If you specify values for ContentConfig and ThumbnailConfig, omit the OutputBucket
-	// object.
-	//
-	//    * Bucket: The Amazon S3 bucket in which you want Elastic Transcoder to
-	//    save thumbnail files.
-	//
-	//    * Permissions (Optional): The Permissions object specifies which users
-	//    and/or predefined Amazon S3 groups you want to have access to thumbnail
-	//    files, and the type of access you want them to have. You can grant permissions
-	//    to a maximum of 30 users and/or predefined Amazon S3 groups.
-	//
-	//    * GranteeType: Specify the type of value that appears in the Grantee object:
-	//    Canonical: The value in the Grantee object is either the canonical user
-	//    ID for an AWS account or an origin access identity for an Amazon CloudFront
-	//    distribution. A canonical user ID is not the same as an AWS account number.
-	//    Email: The value in the Grantee object is the registered email address
-	//    of an AWS account. Group: The value in the Grantee object is one of the
-	//    following predefined Amazon S3 groups: AllUsers, AuthenticatedUsers, or
-	//    LogDelivery.
-	//
-	//    * Grantee: The AWS user or group that you want to have access to thumbnail
-	//    files. To identify the user or group, you can specify the canonical user
-	//    ID for an AWS account, an origin access identity for a CloudFront distribution,
-	//    the registered email address of an AWS account, or a predefined Amazon
-	//    S3 group.
-	//
-	//    * Access: The permission that you want to give to the AWS user that you
-	//    specified in Grantee. Permissions are granted on the thumbnail files that
-	//    Elastic Transcoder adds to the bucket. Valid values include: READ: The
-	//    grantee can read the thumbnails and metadata for objects that Elastic
-	//    Transcoder adds to the Amazon S3 bucket. READ_ACP: The grantee can read
-	//    the object ACL for thumbnails that Elastic Transcoder adds to the Amazon
-	//    S3 bucket. WRITE_ACP: The grantee can write the ACL for the thumbnails
-	//    that Elastic Transcoder adds to the Amazon S3 bucket. FULL_CONTROL: The
-	//    grantee has READ, READ_ACP, and WRITE_ACP permissions for the thumbnails
-	//    that Elastic Transcoder adds to the Amazon S3 bucket.
-	//
-	//    * StorageClass: The Amazon S3 storage class, Standard or ReducedRedundancy,
-	//    that you want Elastic Transcoder to assign to the thumbnails that it stores
-	//    in your Amazon S3 bucket.
-	ThumbnailConfig *PipelineOutputConfig `type:"structure"`
-}
-
-// String returns the string representation
-func (s UpdatePipelineInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdatePipelineInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdatePipelineInput"}
-
-	if s.Id == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Id"))
-	}
-	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
-	}
-	if s.ContentConfig != nil {
-		if err := s.ContentConfig.Validate(); err != nil {
-			invalidParams.AddNested("ContentConfig", err.(aws.ErrInvalidParams))
-		}
-	}
-	if s.ThumbnailConfig != nil {
-		if err := s.ThumbnailConfig.Validate(); err != nil {
-			invalidParams.AddNested("ThumbnailConfig", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s UpdatePipelineInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.AwsKmsKeyArn != nil {
-		v := *s.AwsKmsKeyArn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "AwsKmsKeyArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.ContentConfig != nil {
-		v := s.ContentConfig
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "ContentConfig", v, metadata)
-	}
-	if s.InputBucket != nil {
-		v := *s.InputBucket
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "InputBucket", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Name != nil {
-		v := *s.Name
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "Name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Notifications != nil {
-		v := s.Notifications
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "Notifications", v, metadata)
-	}
-	if s.Role != nil {
-		v := *s.Role
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "Role", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.ThumbnailConfig != nil {
-		v := s.ThumbnailConfig
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "ThumbnailConfig", v, metadata)
-	}
-	if s.Id != nil {
-		v := *s.Id
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "Id", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-// When you update a pipeline, Elastic Transcoder returns the values that you
-// specified in the request.
-type UpdatePipelineOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The pipeline updated by this UpdatePipelineResponse call.
-	Pipeline *Pipeline `type:"structure"`
-
-	// Elastic Transcoder returns a warning if the resources used by your pipeline
-	// are not in the same region as the pipeline.
-	//
-	// Using resources in the same region, such as your Amazon S3 buckets, Amazon
-	// SNS notification topics, and AWS KMS key, reduces processing time and prevents
-	// cross-regional charges.
-	Warnings []Warning `type:"list"`
-}
-
-// String returns the string representation
-func (s UpdatePipelineOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s UpdatePipelineOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.Pipeline != nil {
-		v := s.Pipeline
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "Pipeline", v, metadata)
-	}
-	if s.Warnings != nil {
-		v := s.Warnings
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "Warnings", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	return nil
-}
 
 const opUpdatePipeline = "UpdatePipeline"
 
@@ -324,7 +27,7 @@ const opUpdatePipeline = "UpdatePipeline"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) UpdatePipelineRequest(input *UpdatePipelineInput) UpdatePipelineRequest {
+func (c *Client) UpdatePipelineRequest(input *types.UpdatePipelineInput) UpdatePipelineRequest {
 	op := &aws.Operation{
 		Name:       opUpdatePipeline,
 		HTTPMethod: "PUT",
@@ -332,10 +35,10 @@ func (c *Client) UpdatePipelineRequest(input *UpdatePipelineInput) UpdatePipelin
 	}
 
 	if input == nil {
-		input = &UpdatePipelineInput{}
+		input = &types.UpdatePipelineInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdatePipelineOutput{})
+	req := c.newRequest(op, input, &types.UpdatePipelineOutput{})
 	return UpdatePipelineRequest{Request: req, Input: input, Copy: c.UpdatePipelineRequest}
 }
 
@@ -343,8 +46,8 @@ func (c *Client) UpdatePipelineRequest(input *UpdatePipelineInput) UpdatePipelin
 // UpdatePipeline API operation.
 type UpdatePipelineRequest struct {
 	*aws.Request
-	Input *UpdatePipelineInput
-	Copy  func(*UpdatePipelineInput) UpdatePipelineRequest
+	Input *types.UpdatePipelineInput
+	Copy  func(*types.UpdatePipelineInput) UpdatePipelineRequest
 }
 
 // Send marshals and sends the UpdatePipeline API request.
@@ -356,7 +59,7 @@ func (r UpdatePipelineRequest) Send(ctx context.Context) (*UpdatePipelineRespons
 	}
 
 	resp := &UpdatePipelineResponse{
-		UpdatePipelineOutput: r.Request.Data.(*UpdatePipelineOutput),
+		UpdatePipelineOutput: r.Request.Data.(*types.UpdatePipelineOutput),
 		response:             &aws.Response{Request: r.Request},
 	}
 
@@ -366,7 +69,7 @@ func (r UpdatePipelineRequest) Send(ctx context.Context) (*UpdatePipelineRespons
 // UpdatePipelineResponse is the response type for the
 // UpdatePipeline API operation.
 type UpdatePipelineResponse struct {
-	*UpdatePipelineOutput
+	*types.UpdatePipelineOutput
 
 	response *aws.Response
 }

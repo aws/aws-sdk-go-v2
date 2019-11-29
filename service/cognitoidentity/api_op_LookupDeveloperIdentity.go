@@ -6,97 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/cognitoidentity/types"
 )
-
-// Input to the LookupDeveloperIdentityInput action.
-type LookupDeveloperIdentityInput struct {
-	_ struct{} `type:"structure"`
-
-	// A unique ID used by your backend authentication process to identify a user.
-	// Typically, a developer identity provider would issue many developer user
-	// identifiers, in keeping with the number of users.
-	DeveloperUserIdentifier *string `min:"1" type:"string"`
-
-	// A unique identifier in the format REGION:GUID.
-	IdentityId *string `min:"1" type:"string"`
-
-	// An identity pool ID in the format REGION:GUID.
-	//
-	// IdentityPoolId is a required field
-	IdentityPoolId *string `min:"1" type:"string" required:"true"`
-
-	// The maximum number of identities to return.
-	MaxResults *int64 `min:"1" type:"integer"`
-
-	// A pagination token. The first call you make will have NextToken set to null.
-	// After that the service will return NextToken values as needed. For example,
-	// let's say you make a request with MaxResults set to 10, and there are 20
-	// matches in the database. The service will return a pagination token as a
-	// part of the response. This token can be used to call the API again and get
-	// results starting from the 11th match.
-	NextToken *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s LookupDeveloperIdentityInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *LookupDeveloperIdentityInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "LookupDeveloperIdentityInput"}
-	if s.DeveloperUserIdentifier != nil && len(*s.DeveloperUserIdentifier) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("DeveloperUserIdentifier", 1))
-	}
-	if s.IdentityId != nil && len(*s.IdentityId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("IdentityId", 1))
-	}
-
-	if s.IdentityPoolId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("IdentityPoolId"))
-	}
-	if s.IdentityPoolId != nil && len(*s.IdentityPoolId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("IdentityPoolId", 1))
-	}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-	if s.NextToken != nil && len(*s.NextToken) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Returned in response to a successful LookupDeveloperIdentity action.
-type LookupDeveloperIdentityOutput struct {
-	_ struct{} `type:"structure"`
-
-	// This is the list of developer user identifiers associated with an identity
-	// ID. Cognito supports the association of multiple developer user identifiers
-	// with an identity ID.
-	DeveloperUserIdentifierList []string `type:"list"`
-
-	// A unique identifier in the format REGION:GUID.
-	IdentityId *string `min:"1" type:"string"`
-
-	// A pagination token. The first call you make will have NextToken set to null.
-	// After that the service will return NextToken values as needed. For example,
-	// let's say you make a request with MaxResults set to 10, and there are 20
-	// matches in the database. The service will return a pagination token as a
-	// part of the response. This token can be used to call the API again and get
-	// results starting from the 11th match.
-	NextToken *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s LookupDeveloperIdentityOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opLookupDeveloperIdentity = "LookupDeveloperIdentity"
 
@@ -129,7 +40,7 @@ const opLookupDeveloperIdentity = "LookupDeveloperIdentity"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-identity-2014-06-30/LookupDeveloperIdentity
-func (c *Client) LookupDeveloperIdentityRequest(input *LookupDeveloperIdentityInput) LookupDeveloperIdentityRequest {
+func (c *Client) LookupDeveloperIdentityRequest(input *types.LookupDeveloperIdentityInput) LookupDeveloperIdentityRequest {
 	op := &aws.Operation{
 		Name:       opLookupDeveloperIdentity,
 		HTTPMethod: "POST",
@@ -137,10 +48,10 @@ func (c *Client) LookupDeveloperIdentityRequest(input *LookupDeveloperIdentityIn
 	}
 
 	if input == nil {
-		input = &LookupDeveloperIdentityInput{}
+		input = &types.LookupDeveloperIdentityInput{}
 	}
 
-	req := c.newRequest(op, input, &LookupDeveloperIdentityOutput{})
+	req := c.newRequest(op, input, &types.LookupDeveloperIdentityOutput{})
 	return LookupDeveloperIdentityRequest{Request: req, Input: input, Copy: c.LookupDeveloperIdentityRequest}
 }
 
@@ -148,8 +59,8 @@ func (c *Client) LookupDeveloperIdentityRequest(input *LookupDeveloperIdentityIn
 // LookupDeveloperIdentity API operation.
 type LookupDeveloperIdentityRequest struct {
 	*aws.Request
-	Input *LookupDeveloperIdentityInput
-	Copy  func(*LookupDeveloperIdentityInput) LookupDeveloperIdentityRequest
+	Input *types.LookupDeveloperIdentityInput
+	Copy  func(*types.LookupDeveloperIdentityInput) LookupDeveloperIdentityRequest
 }
 
 // Send marshals and sends the LookupDeveloperIdentity API request.
@@ -161,7 +72,7 @@ func (r LookupDeveloperIdentityRequest) Send(ctx context.Context) (*LookupDevelo
 	}
 
 	resp := &LookupDeveloperIdentityResponse{
-		LookupDeveloperIdentityOutput: r.Request.Data.(*LookupDeveloperIdentityOutput),
+		LookupDeveloperIdentityOutput: r.Request.Data.(*types.LookupDeveloperIdentityOutput),
 		response:                      &aws.Response{Request: r.Request},
 	}
 
@@ -171,7 +82,7 @@ func (r LookupDeveloperIdentityRequest) Send(ctx context.Context) (*LookupDevelo
 // LookupDeveloperIdentityResponse is the response type for the
 // LookupDeveloperIdentity API operation.
 type LookupDeveloperIdentityResponse struct {
-	*LookupDeveloperIdentityOutput
+	*types.LookupDeveloperIdentityOutput
 
 	response *aws.Response
 }

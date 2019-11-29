@@ -6,72 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/appstream/types"
 )
-
-type CreateDirectoryConfigInput struct {
-	_ struct{} `type:"structure"`
-
-	// The fully qualified name of the directory (for example, corp.example.com).
-	//
-	// DirectoryName is a required field
-	DirectoryName *string `type:"string" required:"true"`
-
-	// The distinguished names of the organizational units for computer accounts.
-	//
-	// OrganizationalUnitDistinguishedNames is a required field
-	OrganizationalUnitDistinguishedNames []string `type:"list" required:"true"`
-
-	// The credentials for the service account used by the fleet or image builder
-	// to connect to the directory.
-	//
-	// ServiceAccountCredentials is a required field
-	ServiceAccountCredentials *ServiceAccountCredentials `type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s CreateDirectoryConfigInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateDirectoryConfigInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateDirectoryConfigInput"}
-
-	if s.DirectoryName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DirectoryName"))
-	}
-
-	if s.OrganizationalUnitDistinguishedNames == nil {
-		invalidParams.Add(aws.NewErrParamRequired("OrganizationalUnitDistinguishedNames"))
-	}
-
-	if s.ServiceAccountCredentials == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ServiceAccountCredentials"))
-	}
-	if s.ServiceAccountCredentials != nil {
-		if err := s.ServiceAccountCredentials.Validate(); err != nil {
-			invalidParams.AddNested("ServiceAccountCredentials", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type CreateDirectoryConfigOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Information about the directory configuration.
-	DirectoryConfig *DirectoryConfig `type:"structure"`
-}
-
-// String returns the string representation
-func (s CreateDirectoryConfigOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCreateDirectoryConfig = "CreateDirectoryConfig"
 
@@ -90,7 +26,7 @@ const opCreateDirectoryConfig = "CreateDirectoryConfig"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/CreateDirectoryConfig
-func (c *Client) CreateDirectoryConfigRequest(input *CreateDirectoryConfigInput) CreateDirectoryConfigRequest {
+func (c *Client) CreateDirectoryConfigRequest(input *types.CreateDirectoryConfigInput) CreateDirectoryConfigRequest {
 	op := &aws.Operation{
 		Name:       opCreateDirectoryConfig,
 		HTTPMethod: "POST",
@@ -98,10 +34,10 @@ func (c *Client) CreateDirectoryConfigRequest(input *CreateDirectoryConfigInput)
 	}
 
 	if input == nil {
-		input = &CreateDirectoryConfigInput{}
+		input = &types.CreateDirectoryConfigInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateDirectoryConfigOutput{})
+	req := c.newRequest(op, input, &types.CreateDirectoryConfigOutput{})
 	return CreateDirectoryConfigRequest{Request: req, Input: input, Copy: c.CreateDirectoryConfigRequest}
 }
 
@@ -109,8 +45,8 @@ func (c *Client) CreateDirectoryConfigRequest(input *CreateDirectoryConfigInput)
 // CreateDirectoryConfig API operation.
 type CreateDirectoryConfigRequest struct {
 	*aws.Request
-	Input *CreateDirectoryConfigInput
-	Copy  func(*CreateDirectoryConfigInput) CreateDirectoryConfigRequest
+	Input *types.CreateDirectoryConfigInput
+	Copy  func(*types.CreateDirectoryConfigInput) CreateDirectoryConfigRequest
 }
 
 // Send marshals and sends the CreateDirectoryConfig API request.
@@ -122,7 +58,7 @@ func (r CreateDirectoryConfigRequest) Send(ctx context.Context) (*CreateDirector
 	}
 
 	resp := &CreateDirectoryConfigResponse{
-		CreateDirectoryConfigOutput: r.Request.Data.(*CreateDirectoryConfigOutput),
+		CreateDirectoryConfigOutput: r.Request.Data.(*types.CreateDirectoryConfigOutput),
 		response:                    &aws.Response{Request: r.Request},
 	}
 
@@ -132,7 +68,7 @@ func (r CreateDirectoryConfigRequest) Send(ctx context.Context) (*CreateDirector
 // CreateDirectoryConfigResponse is the response type for the
 // CreateDirectoryConfig API operation.
 type CreateDirectoryConfigResponse struct {
-	*CreateDirectoryConfigOutput
+	*types.CreateDirectoryConfigOutput
 
 	response *aws.Response
 }

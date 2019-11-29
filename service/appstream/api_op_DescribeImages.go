@@ -6,62 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/appstream/types"
 )
-
-type DescribeImagesInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ARNs of the public, private, and shared images to describe.
-	Arns []string `type:"list"`
-
-	// The maximum size of each page of results.
-	MaxResults *int64 `type:"integer"`
-
-	// The names of the public or private images to describe.
-	Names []string `type:"list"`
-
-	// The pagination token to use to retrieve the next page of results for this
-	// operation. If this value is null, it retrieves the first page.
-	NextToken *string `min:"1" type:"string"`
-
-	// The type of image (public, private, or shared) to describe.
-	Type VisibilityType `type:"string" enum:"true"`
-}
-
-// String returns the string representation
-func (s DescribeImagesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeImagesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeImagesInput"}
-	if s.NextToken != nil && len(*s.NextToken) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribeImagesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Information about the images.
-	Images []Image `type:"list"`
-
-	// The pagination token to use to retrieve the next page of results for this
-	// operation. If there are no more pages, this value is null.
-	NextToken *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeImagesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeImages = "DescribeImages"
 
@@ -80,7 +26,7 @@ const opDescribeImages = "DescribeImages"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DescribeImages
-func (c *Client) DescribeImagesRequest(input *DescribeImagesInput) DescribeImagesRequest {
+func (c *Client) DescribeImagesRequest(input *types.DescribeImagesInput) DescribeImagesRequest {
 	op := &aws.Operation{
 		Name:       opDescribeImages,
 		HTTPMethod: "POST",
@@ -94,10 +40,10 @@ func (c *Client) DescribeImagesRequest(input *DescribeImagesInput) DescribeImage
 	}
 
 	if input == nil {
-		input = &DescribeImagesInput{}
+		input = &types.DescribeImagesInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeImagesOutput{})
+	req := c.newRequest(op, input, &types.DescribeImagesOutput{})
 	return DescribeImagesRequest{Request: req, Input: input, Copy: c.DescribeImagesRequest}
 }
 
@@ -105,8 +51,8 @@ func (c *Client) DescribeImagesRequest(input *DescribeImagesInput) DescribeImage
 // DescribeImages API operation.
 type DescribeImagesRequest struct {
 	*aws.Request
-	Input *DescribeImagesInput
-	Copy  func(*DescribeImagesInput) DescribeImagesRequest
+	Input *types.DescribeImagesInput
+	Copy  func(*types.DescribeImagesInput) DescribeImagesRequest
 }
 
 // Send marshals and sends the DescribeImages API request.
@@ -118,7 +64,7 @@ func (r DescribeImagesRequest) Send(ctx context.Context) (*DescribeImagesRespons
 	}
 
 	resp := &DescribeImagesResponse{
-		DescribeImagesOutput: r.Request.Data.(*DescribeImagesOutput),
+		DescribeImagesOutput: r.Request.Data.(*types.DescribeImagesOutput),
 		response:             &aws.Response{Request: r.Request},
 	}
 
@@ -148,7 +94,7 @@ func NewDescribeImagesPaginator(req DescribeImagesRequest) DescribeImagesPaginat
 	return DescribeImagesPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *DescribeImagesInput
+				var inCpy *types.DescribeImagesInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -168,14 +114,14 @@ type DescribeImagesPaginator struct {
 	aws.Pager
 }
 
-func (p *DescribeImagesPaginator) CurrentPage() *DescribeImagesOutput {
-	return p.Pager.CurrentPage().(*DescribeImagesOutput)
+func (p *DescribeImagesPaginator) CurrentPage() *types.DescribeImagesOutput {
+	return p.Pager.CurrentPage().(*types.DescribeImagesOutput)
 }
 
 // DescribeImagesResponse is the response type for the
 // DescribeImages API operation.
 type DescribeImagesResponse struct {
-	*DescribeImagesOutput
+	*types.DescribeImagesOutput
 
 	response *aws.Response
 }

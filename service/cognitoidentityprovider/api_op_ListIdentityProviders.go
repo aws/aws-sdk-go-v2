@@ -6,65 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/types"
 )
-
-type ListIdentityProvidersInput struct {
-	_ struct{} `type:"structure"`
-
-	// The maximum number of identity providers to return.
-	MaxResults *int64 `type:"integer"`
-
-	// A pagination token.
-	NextToken *string `min:"1" type:"string"`
-
-	// The user pool ID.
-	//
-	// UserPoolId is a required field
-	UserPoolId *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s ListIdentityProvidersInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListIdentityProvidersInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListIdentityProvidersInput"}
-	if s.NextToken != nil && len(*s.NextToken) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
-	}
-
-	if s.UserPoolId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("UserPoolId"))
-	}
-	if s.UserPoolId != nil && len(*s.UserPoolId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("UserPoolId", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ListIdentityProvidersOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A pagination token.
-	NextToken *string `min:"1" type:"string"`
-
-	// A list of identity provider objects.
-	//
-	// Providers is a required field
-	Providers []ProviderDescription `type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s ListIdentityProvidersOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListIdentityProviders = "ListIdentityProviders"
 
@@ -81,7 +24,7 @@ const opListIdentityProviders = "ListIdentityProviders"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/ListIdentityProviders
-func (c *Client) ListIdentityProvidersRequest(input *ListIdentityProvidersInput) ListIdentityProvidersRequest {
+func (c *Client) ListIdentityProvidersRequest(input *types.ListIdentityProvidersInput) ListIdentityProvidersRequest {
 	op := &aws.Operation{
 		Name:       opListIdentityProviders,
 		HTTPMethod: "POST",
@@ -95,10 +38,10 @@ func (c *Client) ListIdentityProvidersRequest(input *ListIdentityProvidersInput)
 	}
 
 	if input == nil {
-		input = &ListIdentityProvidersInput{}
+		input = &types.ListIdentityProvidersInput{}
 	}
 
-	req := c.newRequest(op, input, &ListIdentityProvidersOutput{})
+	req := c.newRequest(op, input, &types.ListIdentityProvidersOutput{})
 	return ListIdentityProvidersRequest{Request: req, Input: input, Copy: c.ListIdentityProvidersRequest}
 }
 
@@ -106,8 +49,8 @@ func (c *Client) ListIdentityProvidersRequest(input *ListIdentityProvidersInput)
 // ListIdentityProviders API operation.
 type ListIdentityProvidersRequest struct {
 	*aws.Request
-	Input *ListIdentityProvidersInput
-	Copy  func(*ListIdentityProvidersInput) ListIdentityProvidersRequest
+	Input *types.ListIdentityProvidersInput
+	Copy  func(*types.ListIdentityProvidersInput) ListIdentityProvidersRequest
 }
 
 // Send marshals and sends the ListIdentityProviders API request.
@@ -119,7 +62,7 @@ func (r ListIdentityProvidersRequest) Send(ctx context.Context) (*ListIdentityPr
 	}
 
 	resp := &ListIdentityProvidersResponse{
-		ListIdentityProvidersOutput: r.Request.Data.(*ListIdentityProvidersOutput),
+		ListIdentityProvidersOutput: r.Request.Data.(*types.ListIdentityProvidersOutput),
 		response:                    &aws.Response{Request: r.Request},
 	}
 
@@ -149,7 +92,7 @@ func NewListIdentityProvidersPaginator(req ListIdentityProvidersRequest) ListIde
 	return ListIdentityProvidersPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListIdentityProvidersInput
+				var inCpy *types.ListIdentityProvidersInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -169,14 +112,14 @@ type ListIdentityProvidersPaginator struct {
 	aws.Pager
 }
 
-func (p *ListIdentityProvidersPaginator) CurrentPage() *ListIdentityProvidersOutput {
-	return p.Pager.CurrentPage().(*ListIdentityProvidersOutput)
+func (p *ListIdentityProvidersPaginator) CurrentPage() *types.ListIdentityProvidersOutput {
+	return p.Pager.CurrentPage().(*types.ListIdentityProvidersOutput)
 }
 
 // ListIdentityProvidersResponse is the response type for the
 // ListIdentityProviders API operation.
 type ListIdentityProvidersResponse struct {
-	*ListIdentityProvidersOutput
+	*types.ListIdentityProvidersOutput
 
 	response *aws.Response
 }

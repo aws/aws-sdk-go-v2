@@ -6,62 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-type ModifyVpcTenancyInput struct {
-	_ struct{} `type:"structure"`
-
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have
-	// the required permissions, the error response is DryRunOperation. Otherwise,
-	// it is UnauthorizedOperation.
-	DryRun *bool `type:"boolean"`
-
-	// The instance tenancy attribute for the VPC.
-	//
-	// InstanceTenancy is a required field
-	InstanceTenancy VpcTenancy `type:"string" required:"true" enum:"true"`
-
-	// The ID of the VPC.
-	//
-	// VpcId is a required field
-	VpcId *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s ModifyVpcTenancyInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ModifyVpcTenancyInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ModifyVpcTenancyInput"}
-	if len(s.InstanceTenancy) == 0 {
-		invalidParams.Add(aws.NewErrParamRequired("InstanceTenancy"))
-	}
-
-	if s.VpcId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("VpcId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ModifyVpcTenancyOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Returns true if the request succeeds; otherwise, returns an error.
-	ReturnValue *bool `locationName:"return" type:"boolean"`
-}
-
-// String returns the string representation
-func (s ModifyVpcTenancyOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opModifyVpcTenancy = "ModifyVpcTenancy"
 
@@ -87,7 +33,7 @@ const opModifyVpcTenancy = "ModifyVpcTenancy"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyVpcTenancy
-func (c *Client) ModifyVpcTenancyRequest(input *ModifyVpcTenancyInput) ModifyVpcTenancyRequest {
+func (c *Client) ModifyVpcTenancyRequest(input *types.ModifyVpcTenancyInput) ModifyVpcTenancyRequest {
 	op := &aws.Operation{
 		Name:       opModifyVpcTenancy,
 		HTTPMethod: "POST",
@@ -95,10 +41,10 @@ func (c *Client) ModifyVpcTenancyRequest(input *ModifyVpcTenancyInput) ModifyVpc
 	}
 
 	if input == nil {
-		input = &ModifyVpcTenancyInput{}
+		input = &types.ModifyVpcTenancyInput{}
 	}
 
-	req := c.newRequest(op, input, &ModifyVpcTenancyOutput{})
+	req := c.newRequest(op, input, &types.ModifyVpcTenancyOutput{})
 	return ModifyVpcTenancyRequest{Request: req, Input: input, Copy: c.ModifyVpcTenancyRequest}
 }
 
@@ -106,8 +52,8 @@ func (c *Client) ModifyVpcTenancyRequest(input *ModifyVpcTenancyInput) ModifyVpc
 // ModifyVpcTenancy API operation.
 type ModifyVpcTenancyRequest struct {
 	*aws.Request
-	Input *ModifyVpcTenancyInput
-	Copy  func(*ModifyVpcTenancyInput) ModifyVpcTenancyRequest
+	Input *types.ModifyVpcTenancyInput
+	Copy  func(*types.ModifyVpcTenancyInput) ModifyVpcTenancyRequest
 }
 
 // Send marshals and sends the ModifyVpcTenancy API request.
@@ -119,7 +65,7 @@ func (r ModifyVpcTenancyRequest) Send(ctx context.Context) (*ModifyVpcTenancyRes
 	}
 
 	resp := &ModifyVpcTenancyResponse{
-		ModifyVpcTenancyOutput: r.Request.Data.(*ModifyVpcTenancyOutput),
+		ModifyVpcTenancyOutput: r.Request.Data.(*types.ModifyVpcTenancyOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -129,7 +75,7 @@ func (r ModifyVpcTenancyRequest) Send(ctx context.Context) (*ModifyVpcTenancyRes
 // ModifyVpcTenancyResponse is the response type for the
 // ModifyVpcTenancy API operation.
 type ModifyVpcTenancyResponse struct {
-	*ModifyVpcTenancyOutput
+	*types.ModifyVpcTenancyOutput
 
 	response *aws.Response
 }

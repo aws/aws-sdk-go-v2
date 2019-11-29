@@ -6,53 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/codedeploy/types"
 )
-
-// Represents the input of a ListOnPremisesInstances operation.
-type ListOnPremisesInstancesInput struct {
-	_ struct{} `type:"structure"`
-
-	// An identifier returned from the previous list on-premises instances call.
-	// It can be used to return the next set of on-premises instances in the list.
-	NextToken *string `locationName:"nextToken" type:"string"`
-
-	// The registration status of the on-premises instances:
-	//
-	//    * Deregistered: Include deregistered on-premises instances in the resulting
-	//    list.
-	//
-	//    * Registered: Include registered on-premises instances in the resulting
-	//    list.
-	RegistrationStatus RegistrationStatus `locationName:"registrationStatus" type:"string" enum:"true"`
-
-	// The on-premises instance tags that are used to restrict the on-premises instance
-	// names returned.
-	TagFilters []TagFilter `locationName:"tagFilters" type:"list"`
-}
-
-// String returns the string representation
-func (s ListOnPremisesInstancesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Represents the output of the list on-premises instances operation.
-type ListOnPremisesInstancesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The list of matching on-premises instance names.
-	InstanceNames []string `locationName:"instanceNames" type:"list"`
-
-	// If a large amount of information is returned, an identifier is also returned.
-	// It can be used in a subsequent list on-premises instances call to return
-	// the next set of on-premises instances in the list.
-	NextToken *string `locationName:"nextToken" type:"string"`
-}
-
-// String returns the string representation
-func (s ListOnPremisesInstancesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListOnPremisesInstances = "ListOnPremisesInstances"
 
@@ -73,7 +28,7 @@ const opListOnPremisesInstances = "ListOnPremisesInstances"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/ListOnPremisesInstances
-func (c *Client) ListOnPremisesInstancesRequest(input *ListOnPremisesInstancesInput) ListOnPremisesInstancesRequest {
+func (c *Client) ListOnPremisesInstancesRequest(input *types.ListOnPremisesInstancesInput) ListOnPremisesInstancesRequest {
 	op := &aws.Operation{
 		Name:       opListOnPremisesInstances,
 		HTTPMethod: "POST",
@@ -81,10 +36,10 @@ func (c *Client) ListOnPremisesInstancesRequest(input *ListOnPremisesInstancesIn
 	}
 
 	if input == nil {
-		input = &ListOnPremisesInstancesInput{}
+		input = &types.ListOnPremisesInstancesInput{}
 	}
 
-	req := c.newRequest(op, input, &ListOnPremisesInstancesOutput{})
+	req := c.newRequest(op, input, &types.ListOnPremisesInstancesOutput{})
 	return ListOnPremisesInstancesRequest{Request: req, Input: input, Copy: c.ListOnPremisesInstancesRequest}
 }
 
@@ -92,8 +47,8 @@ func (c *Client) ListOnPremisesInstancesRequest(input *ListOnPremisesInstancesIn
 // ListOnPremisesInstances API operation.
 type ListOnPremisesInstancesRequest struct {
 	*aws.Request
-	Input *ListOnPremisesInstancesInput
-	Copy  func(*ListOnPremisesInstancesInput) ListOnPremisesInstancesRequest
+	Input *types.ListOnPremisesInstancesInput
+	Copy  func(*types.ListOnPremisesInstancesInput) ListOnPremisesInstancesRequest
 }
 
 // Send marshals and sends the ListOnPremisesInstances API request.
@@ -105,7 +60,7 @@ func (r ListOnPremisesInstancesRequest) Send(ctx context.Context) (*ListOnPremis
 	}
 
 	resp := &ListOnPremisesInstancesResponse{
-		ListOnPremisesInstancesOutput: r.Request.Data.(*ListOnPremisesInstancesOutput),
+		ListOnPremisesInstancesOutput: r.Request.Data.(*types.ListOnPremisesInstancesOutput),
 		response:                      &aws.Response{Request: r.Request},
 	}
 
@@ -115,7 +70,7 @@ func (r ListOnPremisesInstancesRequest) Send(ctx context.Context) (*ListOnPremis
 // ListOnPremisesInstancesResponse is the response type for the
 // ListOnPremisesInstances API operation.
 type ListOnPremisesInstancesResponse struct {
-	*ListOnPremisesInstancesOutput
+	*types.ListOnPremisesInstancesOutput
 
 	response *aws.Response
 }

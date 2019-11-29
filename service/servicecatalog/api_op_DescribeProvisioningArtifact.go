@@ -6,81 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/types"
 )
-
-type DescribeProvisioningArtifactInput struct {
-	_ struct{} `type:"structure"`
-
-	// The language code.
-	//
-	//    * en - English (default)
-	//
-	//    * jp - Japanese
-	//
-	//    * zh - Chinese
-	AcceptLanguage *string `type:"string"`
-
-	// The product identifier.
-	//
-	// ProductId is a required field
-	ProductId *string `min:"1" type:"string" required:"true"`
-
-	// The identifier of the provisioning artifact.
-	//
-	// ProvisioningArtifactId is a required field
-	ProvisioningArtifactId *string `min:"1" type:"string" required:"true"`
-
-	// Indicates whether a verbose level of detail is enabled.
-	Verbose *bool `type:"boolean"`
-}
-
-// String returns the string representation
-func (s DescribeProvisioningArtifactInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeProvisioningArtifactInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeProvisioningArtifactInput"}
-
-	if s.ProductId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ProductId"))
-	}
-	if s.ProductId != nil && len(*s.ProductId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ProductId", 1))
-	}
-
-	if s.ProvisioningArtifactId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ProvisioningArtifactId"))
-	}
-	if s.ProvisioningArtifactId != nil && len(*s.ProvisioningArtifactId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ProvisioningArtifactId", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribeProvisioningArtifactOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The URL of the CloudFormation template in Amazon S3.
-	Info map[string]string `min:"1" type:"map"`
-
-	// Information about the provisioning artifact.
-	ProvisioningArtifactDetail *ProvisioningArtifactDetail `type:"structure"`
-
-	// The status of the current request.
-	Status Status `type:"string" enum:"true"`
-}
-
-// String returns the string representation
-func (s DescribeProvisioningArtifactOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeProvisioningArtifact = "DescribeProvisioningArtifact"
 
@@ -98,7 +25,7 @@ const opDescribeProvisioningArtifact = "DescribeProvisioningArtifact"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DescribeProvisioningArtifact
-func (c *Client) DescribeProvisioningArtifactRequest(input *DescribeProvisioningArtifactInput) DescribeProvisioningArtifactRequest {
+func (c *Client) DescribeProvisioningArtifactRequest(input *types.DescribeProvisioningArtifactInput) DescribeProvisioningArtifactRequest {
 	op := &aws.Operation{
 		Name:       opDescribeProvisioningArtifact,
 		HTTPMethod: "POST",
@@ -106,10 +33,10 @@ func (c *Client) DescribeProvisioningArtifactRequest(input *DescribeProvisioning
 	}
 
 	if input == nil {
-		input = &DescribeProvisioningArtifactInput{}
+		input = &types.DescribeProvisioningArtifactInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeProvisioningArtifactOutput{})
+	req := c.newRequest(op, input, &types.DescribeProvisioningArtifactOutput{})
 	return DescribeProvisioningArtifactRequest{Request: req, Input: input, Copy: c.DescribeProvisioningArtifactRequest}
 }
 
@@ -117,8 +44,8 @@ func (c *Client) DescribeProvisioningArtifactRequest(input *DescribeProvisioning
 // DescribeProvisioningArtifact API operation.
 type DescribeProvisioningArtifactRequest struct {
 	*aws.Request
-	Input *DescribeProvisioningArtifactInput
-	Copy  func(*DescribeProvisioningArtifactInput) DescribeProvisioningArtifactRequest
+	Input *types.DescribeProvisioningArtifactInput
+	Copy  func(*types.DescribeProvisioningArtifactInput) DescribeProvisioningArtifactRequest
 }
 
 // Send marshals and sends the DescribeProvisioningArtifact API request.
@@ -130,7 +57,7 @@ func (r DescribeProvisioningArtifactRequest) Send(ctx context.Context) (*Describ
 	}
 
 	resp := &DescribeProvisioningArtifactResponse{
-		DescribeProvisioningArtifactOutput: r.Request.Data.(*DescribeProvisioningArtifactOutput),
+		DescribeProvisioningArtifactOutput: r.Request.Data.(*types.DescribeProvisioningArtifactOutput),
 		response:                           &aws.Response{Request: r.Request},
 	}
 
@@ -140,7 +67,7 @@ func (r DescribeProvisioningArtifactRequest) Send(ctx context.Context) (*Describ
 // DescribeProvisioningArtifactResponse is the response type for the
 // DescribeProvisioningArtifact API operation.
 type DescribeProvisioningArtifactResponse struct {
-	*DescribeProvisioningArtifactOutput
+	*types.DescribeProvisioningArtifactOutput
 
 	response *aws.Response
 }

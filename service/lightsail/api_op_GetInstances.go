@@ -6,37 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/lightsail/types"
 )
-
-type GetInstancesInput struct {
-	_ struct{} `type:"structure"`
-
-	// A token used for advancing to the next page of results from your get instances
-	// request.
-	PageToken *string `locationName:"pageToken" type:"string"`
-}
-
-// String returns the string representation
-func (s GetInstancesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type GetInstancesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// An array of key-value pairs containing information about your instances.
-	Instances []Instance `locationName:"instances" type:"list"`
-
-	// A token used for advancing to the next page of results from your get instances
-	// request.
-	NextPageToken *string `locationName:"nextPageToken" type:"string"`
-}
-
-// String returns the string representation
-func (s GetInstancesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetInstances = "GetInstances"
 
@@ -54,7 +25,7 @@ const opGetInstances = "GetInstances"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetInstances
-func (c *Client) GetInstancesRequest(input *GetInstancesInput) GetInstancesRequest {
+func (c *Client) GetInstancesRequest(input *types.GetInstancesInput) GetInstancesRequest {
 	op := &aws.Operation{
 		Name:       opGetInstances,
 		HTTPMethod: "POST",
@@ -62,10 +33,10 @@ func (c *Client) GetInstancesRequest(input *GetInstancesInput) GetInstancesReque
 	}
 
 	if input == nil {
-		input = &GetInstancesInput{}
+		input = &types.GetInstancesInput{}
 	}
 
-	req := c.newRequest(op, input, &GetInstancesOutput{})
+	req := c.newRequest(op, input, &types.GetInstancesOutput{})
 	return GetInstancesRequest{Request: req, Input: input, Copy: c.GetInstancesRequest}
 }
 
@@ -73,8 +44,8 @@ func (c *Client) GetInstancesRequest(input *GetInstancesInput) GetInstancesReque
 // GetInstances API operation.
 type GetInstancesRequest struct {
 	*aws.Request
-	Input *GetInstancesInput
-	Copy  func(*GetInstancesInput) GetInstancesRequest
+	Input *types.GetInstancesInput
+	Copy  func(*types.GetInstancesInput) GetInstancesRequest
 }
 
 // Send marshals and sends the GetInstances API request.
@@ -86,7 +57,7 @@ func (r GetInstancesRequest) Send(ctx context.Context) (*GetInstancesResponse, e
 	}
 
 	resp := &GetInstancesResponse{
-		GetInstancesOutput: r.Request.Data.(*GetInstancesOutput),
+		GetInstancesOutput: r.Request.Data.(*types.GetInstancesOutput),
 		response:           &aws.Response{Request: r.Request},
 	}
 
@@ -96,7 +67,7 @@ func (r GetInstancesRequest) Send(ctx context.Context) (*GetInstancesResponse, e
 // GetInstancesResponse is the response type for the
 // GetInstances API operation.
 type GetInstancesResponse struct {
-	*GetInstancesOutput
+	*types.GetInstancesOutput
 
 	response *aws.Response
 }

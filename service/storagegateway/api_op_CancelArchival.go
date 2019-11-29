@@ -6,68 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/storagegateway/types"
 )
-
-// CancelArchivalInput
-type CancelArchivalInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation
-	// to return a list of gateways for your account and AWS Region.
-	//
-	// GatewayARN is a required field
-	GatewayARN *string `min:"50" type:"string" required:"true"`
-
-	// The Amazon Resource Name (ARN) of the virtual tape you want to cancel archiving
-	// for.
-	//
-	// TapeARN is a required field
-	TapeARN *string `min:"50" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s CancelArchivalInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CancelArchivalInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CancelArchivalInput"}
-
-	if s.GatewayARN == nil {
-		invalidParams.Add(aws.NewErrParamRequired("GatewayARN"))
-	}
-	if s.GatewayARN != nil && len(*s.GatewayARN) < 50 {
-		invalidParams.Add(aws.NewErrParamMinLen("GatewayARN", 50))
-	}
-
-	if s.TapeARN == nil {
-		invalidParams.Add(aws.NewErrParamRequired("TapeARN"))
-	}
-	if s.TapeARN != nil && len(*s.TapeARN) < 50 {
-		invalidParams.Add(aws.NewErrParamMinLen("TapeARN", 50))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// CancelArchivalOutput
-type CancelArchivalOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the virtual tape for which archiving was
-	// canceled.
-	TapeARN *string `min:"50" type:"string"`
-}
-
-// String returns the string representation
-func (s CancelArchivalOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCancelArchival = "CancelArchival"
 
@@ -86,7 +26,7 @@ const opCancelArchival = "CancelArchival"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/CancelArchival
-func (c *Client) CancelArchivalRequest(input *CancelArchivalInput) CancelArchivalRequest {
+func (c *Client) CancelArchivalRequest(input *types.CancelArchivalInput) CancelArchivalRequest {
 	op := &aws.Operation{
 		Name:       opCancelArchival,
 		HTTPMethod: "POST",
@@ -94,10 +34,10 @@ func (c *Client) CancelArchivalRequest(input *CancelArchivalInput) CancelArchiva
 	}
 
 	if input == nil {
-		input = &CancelArchivalInput{}
+		input = &types.CancelArchivalInput{}
 	}
 
-	req := c.newRequest(op, input, &CancelArchivalOutput{})
+	req := c.newRequest(op, input, &types.CancelArchivalOutput{})
 	return CancelArchivalRequest{Request: req, Input: input, Copy: c.CancelArchivalRequest}
 }
 
@@ -105,8 +45,8 @@ func (c *Client) CancelArchivalRequest(input *CancelArchivalInput) CancelArchiva
 // CancelArchival API operation.
 type CancelArchivalRequest struct {
 	*aws.Request
-	Input *CancelArchivalInput
-	Copy  func(*CancelArchivalInput) CancelArchivalRequest
+	Input *types.CancelArchivalInput
+	Copy  func(*types.CancelArchivalInput) CancelArchivalRequest
 }
 
 // Send marshals and sends the CancelArchival API request.
@@ -118,7 +58,7 @@ func (r CancelArchivalRequest) Send(ctx context.Context) (*CancelArchivalRespons
 	}
 
 	resp := &CancelArchivalResponse{
-		CancelArchivalOutput: r.Request.Data.(*CancelArchivalOutput),
+		CancelArchivalOutput: r.Request.Data.(*types.CancelArchivalOutput),
 		response:             &aws.Response{Request: r.Request},
 	}
 
@@ -128,7 +68,7 @@ func (r CancelArchivalRequest) Send(ctx context.Context) (*CancelArchivalRespons
 // CancelArchivalResponse is the response type for the
 // CancelArchival API operation.
 type CancelArchivalResponse struct {
-	*CancelArchivalOutput
+	*types.CancelArchivalOutput
 
 	response *aws.Response
 }

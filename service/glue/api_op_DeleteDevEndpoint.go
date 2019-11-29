@@ -6,45 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/glue/types"
 )
-
-type DeleteDevEndpointInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the DevEndpoint.
-	//
-	// EndpointName is a required field
-	EndpointName *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteDevEndpointInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteDevEndpointInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteDevEndpointInput"}
-
-	if s.EndpointName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("EndpointName"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteDevEndpointOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteDevEndpointOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteDevEndpoint = "DeleteDevEndpoint"
 
@@ -61,7 +24,7 @@ const opDeleteDevEndpoint = "DeleteDevEndpoint"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DeleteDevEndpoint
-func (c *Client) DeleteDevEndpointRequest(input *DeleteDevEndpointInput) DeleteDevEndpointRequest {
+func (c *Client) DeleteDevEndpointRequest(input *types.DeleteDevEndpointInput) DeleteDevEndpointRequest {
 	op := &aws.Operation{
 		Name:       opDeleteDevEndpoint,
 		HTTPMethod: "POST",
@@ -69,10 +32,10 @@ func (c *Client) DeleteDevEndpointRequest(input *DeleteDevEndpointInput) DeleteD
 	}
 
 	if input == nil {
-		input = &DeleteDevEndpointInput{}
+		input = &types.DeleteDevEndpointInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteDevEndpointOutput{})
+	req := c.newRequest(op, input, &types.DeleteDevEndpointOutput{})
 	return DeleteDevEndpointRequest{Request: req, Input: input, Copy: c.DeleteDevEndpointRequest}
 }
 
@@ -80,8 +43,8 @@ func (c *Client) DeleteDevEndpointRequest(input *DeleteDevEndpointInput) DeleteD
 // DeleteDevEndpoint API operation.
 type DeleteDevEndpointRequest struct {
 	*aws.Request
-	Input *DeleteDevEndpointInput
-	Copy  func(*DeleteDevEndpointInput) DeleteDevEndpointRequest
+	Input *types.DeleteDevEndpointInput
+	Copy  func(*types.DeleteDevEndpointInput) DeleteDevEndpointRequest
 }
 
 // Send marshals and sends the DeleteDevEndpoint API request.
@@ -93,7 +56,7 @@ func (r DeleteDevEndpointRequest) Send(ctx context.Context) (*DeleteDevEndpointR
 	}
 
 	resp := &DeleteDevEndpointResponse{
-		DeleteDevEndpointOutput: r.Request.Data.(*DeleteDevEndpointOutput),
+		DeleteDevEndpointOutput: r.Request.Data.(*types.DeleteDevEndpointOutput),
 		response:                &aws.Response{Request: r.Request},
 	}
 
@@ -103,7 +66,7 @@ func (r DeleteDevEndpointRequest) Send(ctx context.Context) (*DeleteDevEndpointR
 // DeleteDevEndpointResponse is the response type for the
 // DeleteDevEndpoint API operation.
 type DeleteDevEndpointResponse struct {
-	*DeleteDevEndpointOutput
+	*types.DeleteDevEndpointOutput
 
 	response *aws.Response
 }

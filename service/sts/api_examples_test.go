@@ -12,6 +12,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws/awserr"
 	"github.com/aws/aws-sdk-go-v2/aws/external"
 	"github.com/aws/aws-sdk-go-v2/service/sts"
+	"github.com/aws/aws-sdk-go-v2/service/sts/types"
 )
 
 var _ time.Duration
@@ -36,7 +37,7 @@ func ExampleClient_AssumeRoleRequest_shared00() {
 	}
 
 	svc := sts.New(cfg)
-	input := &sts.AssumeRoleInput{
+	input := &types.AssumeRoleInput{
 		DurationSeconds: aws.Int64(3600),
 		ExternalId:      aws.String("123ABC"),
 		Policy:          aws.String("{\"Version\":\"2012-10-17\",\"Statement\":[{\"Sid\":\"Stmt1\",\"Effect\":\"Allow\",\"Action\":\"s3:ListAllMyBuckets\",\"Resource\":\"*\"}]}"),
@@ -79,7 +80,7 @@ func ExampleClient_AssumeRoleWithWebIdentityRequest_shared00() {
 	}
 
 	svc := sts.New(cfg)
-	input := &sts.AssumeRoleWithWebIdentityInput{
+	input := &types.AssumeRoleWithWebIdentityInput{
 		DurationSeconds:  aws.Int64(3600),
 		Policy:           aws.String("{\"Version\":\"2012-10-17\",\"Statement\":[{\"Sid\":\"Stmt1\",\"Effect\":\"Allow\",\"Action\":\"s3:ListAllMyBuckets\",\"Resource\":\"*\"}]}"),
 		ProviderId:       aws.String("www.amazon.com"),
@@ -131,7 +132,7 @@ func ExampleClient_DecodeAuthorizationMessageRequest_shared00() {
 	}
 
 	svc := sts.New(cfg)
-	input := &sts.DecodeAuthorizationMessageInput{
+	input := &types.DecodeAuthorizationMessageInput{
 		EncodedMessage: aws.String("<encoded-message>"),
 	}
 
@@ -167,7 +168,7 @@ func ExampleClient_GetCallerIdentityRequest_shared00() {
 	}
 
 	svc := sts.New(cfg)
-	input := &sts.GetCallerIdentityInput{}
+	input := &types.GetCallerIdentityInput{}
 
 	req := svc.GetCallerIdentityRequest(input)
 	result, err := req.Send(context.Background())
@@ -200,7 +201,7 @@ func ExampleClient_GetCallerIdentityRequest_shared01() {
 	}
 
 	svc := sts.New(cfg)
-	input := &sts.GetCallerIdentityInput{}
+	input := &types.GetCallerIdentityInput{}
 
 	req := svc.GetCallerIdentityRequest(input)
 	result, err := req.Send(context.Background())
@@ -232,7 +233,7 @@ func ExampleClient_GetCallerIdentityRequest_shared02() {
 	}
 
 	svc := sts.New(cfg)
-	input := &sts.GetCallerIdentityInput{}
+	input := &types.GetCallerIdentityInput{}
 
 	req := svc.GetCallerIdentityRequest(input)
 	result, err := req.Send(context.Background())
@@ -263,7 +264,7 @@ func ExampleClient_GetFederationTokenRequest_shared00() {
 	}
 
 	svc := sts.New(cfg)
-	input := &sts.GetFederationTokenInput{
+	input := &types.GetFederationTokenInput{
 		DurationSeconds: aws.Int64(3600),
 		Name:            aws.String("Bob"),
 		Policy:          aws.String("{\"Version\":\"2012-10-17\",\"Statement\":[{\"Sid\":\"Stmt1\",\"Effect\":\"Allow\",\"Action\":\"s3:ListAllMyBuckets\",\"Resource\":\"*\"}]}"),
@@ -304,7 +305,7 @@ func ExampleClient_GetSessionTokenRequest_shared00() {
 	}
 
 	svc := sts.New(cfg)
-	input := &sts.GetSessionTokenInput{
+	input := &types.GetSessionTokenInput{
 		DurationSeconds: aws.Int64(3600),
 		SerialNumber:    aws.String("YourMFASerialNumber"),
 		TokenCode:       aws.String("123456"),

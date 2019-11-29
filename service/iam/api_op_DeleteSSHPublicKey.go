@@ -6,70 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/query"
+	"github.com/aws/aws-sdk-go-v2/service/iam/types"
 )
-
-type DeleteSSHPublicKeyInput struct {
-	_ struct{} `type:"structure"`
-
-	// The unique identifier for the SSH public key.
-	//
-	// This parameter allows (through its regex pattern (http://wikipedia.org/wiki/regex))
-	// a string of characters that can consist of any upper or lowercased letter
-	// or digit.
-	//
-	// SSHPublicKeyId is a required field
-	SSHPublicKeyId *string `min:"20" type:"string" required:"true"`
-
-	// The name of the IAM user associated with the SSH public key.
-	//
-	// This parameter allows (through its regex pattern (http://wikipedia.org/wiki/regex))
-	// a string of characters consisting of upper and lowercase alphanumeric characters
-	// with no spaces. You can also include any of the following characters: _+=,.@-
-	//
-	// UserName is a required field
-	UserName *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteSSHPublicKeyInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteSSHPublicKeyInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteSSHPublicKeyInput"}
-
-	if s.SSHPublicKeyId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("SSHPublicKeyId"))
-	}
-	if s.SSHPublicKeyId != nil && len(*s.SSHPublicKeyId) < 20 {
-		invalidParams.Add(aws.NewErrParamMinLen("SSHPublicKeyId", 20))
-	}
-
-	if s.UserName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("UserName"))
-	}
-	if s.UserName != nil && len(*s.UserName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("UserName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteSSHPublicKeyOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteSSHPublicKeyOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteSSHPublicKey = "DeleteSSHPublicKey"
 
@@ -92,7 +32,7 @@ const opDeleteSSHPublicKey = "DeleteSSHPublicKey"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeleteSSHPublicKey
-func (c *Client) DeleteSSHPublicKeyRequest(input *DeleteSSHPublicKeyInput) DeleteSSHPublicKeyRequest {
+func (c *Client) DeleteSSHPublicKeyRequest(input *types.DeleteSSHPublicKeyInput) DeleteSSHPublicKeyRequest {
 	op := &aws.Operation{
 		Name:       opDeleteSSHPublicKey,
 		HTTPMethod: "POST",
@@ -100,10 +40,10 @@ func (c *Client) DeleteSSHPublicKeyRequest(input *DeleteSSHPublicKeyInput) Delet
 	}
 
 	if input == nil {
-		input = &DeleteSSHPublicKeyInput{}
+		input = &types.DeleteSSHPublicKeyInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteSSHPublicKeyOutput{})
+	req := c.newRequest(op, input, &types.DeleteSSHPublicKeyOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return DeleteSSHPublicKeyRequest{Request: req, Input: input, Copy: c.DeleteSSHPublicKeyRequest}
@@ -113,8 +53,8 @@ func (c *Client) DeleteSSHPublicKeyRequest(input *DeleteSSHPublicKeyInput) Delet
 // DeleteSSHPublicKey API operation.
 type DeleteSSHPublicKeyRequest struct {
 	*aws.Request
-	Input *DeleteSSHPublicKeyInput
-	Copy  func(*DeleteSSHPublicKeyInput) DeleteSSHPublicKeyRequest
+	Input *types.DeleteSSHPublicKeyInput
+	Copy  func(*types.DeleteSSHPublicKeyInput) DeleteSSHPublicKeyRequest
 }
 
 // Send marshals and sends the DeleteSSHPublicKey API request.
@@ -126,7 +66,7 @@ func (r DeleteSSHPublicKeyRequest) Send(ctx context.Context) (*DeleteSSHPublicKe
 	}
 
 	resp := &DeleteSSHPublicKeyResponse{
-		DeleteSSHPublicKeyOutput: r.Request.Data.(*DeleteSSHPublicKeyOutput),
+		DeleteSSHPublicKeyOutput: r.Request.Data.(*types.DeleteSSHPublicKeyOutput),
 		response:                 &aws.Response{Request: r.Request},
 	}
 
@@ -136,7 +76,7 @@ func (r DeleteSSHPublicKeyRequest) Send(ctx context.Context) (*DeleteSSHPublicKe
 // DeleteSSHPublicKeyResponse is the response type for the
 // DeleteSSHPublicKey API operation.
 type DeleteSSHPublicKeyResponse struct {
-	*DeleteSSHPublicKeyOutput
+	*types.DeleteSSHPublicKeyOutput
 
 	response *aws.Response
 }

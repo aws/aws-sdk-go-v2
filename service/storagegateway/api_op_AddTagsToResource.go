@@ -4,78 +4,10 @@ package storagegateway
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/storagegateway/types"
 )
-
-// AddTagsToResourceInput
-type AddTagsToResourceInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the resource you want to add tags to.
-	//
-	// ResourceARN is a required field
-	ResourceARN *string `min:"50" type:"string" required:"true"`
-
-	// The key-value pair that represents the tag you want to add to the resource.
-	// The value can be an empty string.
-	//
-	// Valid characters for key and value are letters, spaces, and numbers representable
-	// in UTF-8 format, and the following special characters: + - = . _ : / @. The
-	// maximum length of a tag's key is 128 characters, and the maximum length for
-	// a tag's value is 256.
-	//
-	// Tags is a required field
-	Tags []Tag `type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s AddTagsToResourceInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *AddTagsToResourceInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "AddTagsToResourceInput"}
-
-	if s.ResourceARN == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ResourceARN"))
-	}
-	if s.ResourceARN != nil && len(*s.ResourceARN) < 50 {
-		invalidParams.Add(aws.NewErrParamMinLen("ResourceARN", 50))
-	}
-
-	if s.Tags == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Tags"))
-	}
-	if s.Tags != nil {
-		for i, v := range s.Tags {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// AddTagsToResourceOutput
-type AddTagsToResourceOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the resource you want to add tags to.
-	ResourceARN *string `min:"50" type:"string"`
-}
-
-// String returns the string representation
-func (s AddTagsToResourceOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opAddTagsToResource = "AddTagsToResource"
 
@@ -107,7 +39,7 @@ const opAddTagsToResource = "AddTagsToResource"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/AddTagsToResource
-func (c *Client) AddTagsToResourceRequest(input *AddTagsToResourceInput) AddTagsToResourceRequest {
+func (c *Client) AddTagsToResourceRequest(input *types.AddTagsToResourceInput) AddTagsToResourceRequest {
 	op := &aws.Operation{
 		Name:       opAddTagsToResource,
 		HTTPMethod: "POST",
@@ -115,10 +47,10 @@ func (c *Client) AddTagsToResourceRequest(input *AddTagsToResourceInput) AddTags
 	}
 
 	if input == nil {
-		input = &AddTagsToResourceInput{}
+		input = &types.AddTagsToResourceInput{}
 	}
 
-	req := c.newRequest(op, input, &AddTagsToResourceOutput{})
+	req := c.newRequest(op, input, &types.AddTagsToResourceOutput{})
 	return AddTagsToResourceRequest{Request: req, Input: input, Copy: c.AddTagsToResourceRequest}
 }
 
@@ -126,8 +58,8 @@ func (c *Client) AddTagsToResourceRequest(input *AddTagsToResourceInput) AddTags
 // AddTagsToResource API operation.
 type AddTagsToResourceRequest struct {
 	*aws.Request
-	Input *AddTagsToResourceInput
-	Copy  func(*AddTagsToResourceInput) AddTagsToResourceRequest
+	Input *types.AddTagsToResourceInput
+	Copy  func(*types.AddTagsToResourceInput) AddTagsToResourceRequest
 }
 
 // Send marshals and sends the AddTagsToResource API request.
@@ -139,7 +71,7 @@ func (r AddTagsToResourceRequest) Send(ctx context.Context) (*AddTagsToResourceR
 	}
 
 	resp := &AddTagsToResourceResponse{
-		AddTagsToResourceOutput: r.Request.Data.(*AddTagsToResourceOutput),
+		AddTagsToResourceOutput: r.Request.Data.(*types.AddTagsToResourceOutput),
 		response:                &aws.Response{Request: r.Request},
 	}
 
@@ -149,7 +81,7 @@ func (r AddTagsToResourceRequest) Send(ctx context.Context) (*AddTagsToResourceR
 // AddTagsToResourceResponse is the response type for the
 // AddTagsToResource API operation.
 type AddTagsToResourceResponse struct {
-	*AddTagsToResourceOutput
+	*types.AddTagsToResourceOutput
 
 	response *aws.Response
 }

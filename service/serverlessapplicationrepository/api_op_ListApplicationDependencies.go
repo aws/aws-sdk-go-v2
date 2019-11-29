@@ -6,111 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/serverlessapplicationrepository/types"
 )
-
-type ListApplicationDependenciesInput struct {
-	_ struct{} `type:"structure"`
-
-	// ApplicationId is a required field
-	ApplicationId *string `location:"uri" locationName:"applicationId" type:"string" required:"true"`
-
-	MaxItems *int64 `location:"querystring" locationName:"maxItems" min:"1" type:"integer"`
-
-	NextToken *string `location:"querystring" locationName:"nextToken" type:"string"`
-
-	SemanticVersion *string `location:"querystring" locationName:"semanticVersion" type:"string"`
-}
-
-// String returns the string representation
-func (s ListApplicationDependenciesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListApplicationDependenciesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListApplicationDependenciesInput"}
-
-	if s.ApplicationId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ApplicationId"))
-	}
-	if s.MaxItems != nil && *s.MaxItems < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxItems", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListApplicationDependenciesInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.ApplicationId != nil {
-		v := *s.ApplicationId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "applicationId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.MaxItems != nil {
-		v := *s.MaxItems
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "maxItems", protocol.Int64Value(v), metadata)
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.SemanticVersion != nil {
-		v := *s.SemanticVersion
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "semanticVersion", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type ListApplicationDependenciesOutput struct {
-	_ struct{} `type:"structure"`
-
-	Dependencies []ApplicationDependencySummary `locationName:"dependencies" type:"list"`
-
-	NextToken *string `locationName:"nextToken" type:"string"`
-}
-
-// String returns the string representation
-func (s ListApplicationDependenciesOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListApplicationDependenciesOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.Dependencies != nil {
-		v := s.Dependencies
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "dependencies", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opListApplicationDependencies = "ListApplicationDependencies"
 
@@ -127,7 +24,7 @@ const opListApplicationDependencies = "ListApplicationDependencies"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/serverlessrepo-2017-09-08/ListApplicationDependencies
-func (c *Client) ListApplicationDependenciesRequest(input *ListApplicationDependenciesInput) ListApplicationDependenciesRequest {
+func (c *Client) ListApplicationDependenciesRequest(input *types.ListApplicationDependenciesInput) ListApplicationDependenciesRequest {
 	op := &aws.Operation{
 		Name:       opListApplicationDependencies,
 		HTTPMethod: "GET",
@@ -141,10 +38,10 @@ func (c *Client) ListApplicationDependenciesRequest(input *ListApplicationDepend
 	}
 
 	if input == nil {
-		input = &ListApplicationDependenciesInput{}
+		input = &types.ListApplicationDependenciesInput{}
 	}
 
-	req := c.newRequest(op, input, &ListApplicationDependenciesOutput{})
+	req := c.newRequest(op, input, &types.ListApplicationDependenciesOutput{})
 	return ListApplicationDependenciesRequest{Request: req, Input: input, Copy: c.ListApplicationDependenciesRequest}
 }
 
@@ -152,8 +49,8 @@ func (c *Client) ListApplicationDependenciesRequest(input *ListApplicationDepend
 // ListApplicationDependencies API operation.
 type ListApplicationDependenciesRequest struct {
 	*aws.Request
-	Input *ListApplicationDependenciesInput
-	Copy  func(*ListApplicationDependenciesInput) ListApplicationDependenciesRequest
+	Input *types.ListApplicationDependenciesInput
+	Copy  func(*types.ListApplicationDependenciesInput) ListApplicationDependenciesRequest
 }
 
 // Send marshals and sends the ListApplicationDependencies API request.
@@ -165,7 +62,7 @@ func (r ListApplicationDependenciesRequest) Send(ctx context.Context) (*ListAppl
 	}
 
 	resp := &ListApplicationDependenciesResponse{
-		ListApplicationDependenciesOutput: r.Request.Data.(*ListApplicationDependenciesOutput),
+		ListApplicationDependenciesOutput: r.Request.Data.(*types.ListApplicationDependenciesOutput),
 		response:                          &aws.Response{Request: r.Request},
 	}
 
@@ -195,7 +92,7 @@ func NewListApplicationDependenciesPaginator(req ListApplicationDependenciesRequ
 	return ListApplicationDependenciesPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListApplicationDependenciesInput
+				var inCpy *types.ListApplicationDependenciesInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -215,14 +112,14 @@ type ListApplicationDependenciesPaginator struct {
 	aws.Pager
 }
 
-func (p *ListApplicationDependenciesPaginator) CurrentPage() *ListApplicationDependenciesOutput {
-	return p.Pager.CurrentPage().(*ListApplicationDependenciesOutput)
+func (p *ListApplicationDependenciesPaginator) CurrentPage() *types.ListApplicationDependenciesOutput {
+	return p.Pager.CurrentPage().(*types.ListApplicationDependenciesOutput)
 }
 
 // ListApplicationDependenciesResponse is the response type for the
 // ListApplicationDependencies API operation.
 type ListApplicationDependenciesResponse struct {
-	*ListApplicationDependenciesOutput
+	*types.ListApplicationDependenciesOutput
 
 	response *aws.Response
 }

@@ -6,93 +6,15 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/guardduty/types"
 )
-
-type UpdateDetectorInput struct {
-	_ struct{} `type:"structure"`
-
-	// The unique ID of the detector that you want to update.
-	//
-	// DetectorId is a required field
-	DetectorId *string `location:"uri" locationName:"detectorId" min:"1" type:"string" required:"true"`
-
-	// Updated boolean value for the detector that specifies whether the detector
-	// is enabled.
-	Enable *bool `locationName:"enable" type:"boolean"`
-
-	// A enum value that specifies how frequently customer got Finding updates published.
-	FindingPublishingFrequency FindingPublishingFrequency `locationName:"findingPublishingFrequency" type:"string" enum:"true"`
-}
-
-// String returns the string representation
-func (s UpdateDetectorInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateDetectorInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateDetectorInput"}
-
-	if s.DetectorId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DetectorId"))
-	}
-	if s.DetectorId != nil && len(*s.DetectorId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("DetectorId", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s UpdateDetectorInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.Enable != nil {
-		v := *s.Enable
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "enable", protocol.BoolValue(v), metadata)
-	}
-	if len(s.FindingPublishingFrequency) > 0 {
-		v := s.FindingPublishingFrequency
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "findingPublishingFrequency", protocol.QuotedValue{ValueMarshaler: v}, metadata)
-	}
-	if s.DetectorId != nil {
-		v := *s.DetectorId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "detectorId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type UpdateDetectorOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s UpdateDetectorOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s UpdateDetectorOutput) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
 
 const opUpdateDetector = "UpdateDetector"
 
 // UpdateDetectorRequest returns a request value for making API operation for
 // Amazon GuardDuty.
 //
-// Updates an Amazon GuardDuty detector specified by the detectorId.
+// Updates the Amazon GuardDuty detector specified by the detectorId.
 //
 //    // Example sending a request using UpdateDetectorRequest.
 //    req := client.UpdateDetectorRequest(params)
@@ -102,7 +24,7 @@ const opUpdateDetector = "UpdateDetector"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/UpdateDetector
-func (c *Client) UpdateDetectorRequest(input *UpdateDetectorInput) UpdateDetectorRequest {
+func (c *Client) UpdateDetectorRequest(input *types.UpdateDetectorInput) UpdateDetectorRequest {
 	op := &aws.Operation{
 		Name:       opUpdateDetector,
 		HTTPMethod: "POST",
@@ -110,10 +32,10 @@ func (c *Client) UpdateDetectorRequest(input *UpdateDetectorInput) UpdateDetecto
 	}
 
 	if input == nil {
-		input = &UpdateDetectorInput{}
+		input = &types.UpdateDetectorInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateDetectorOutput{})
+	req := c.newRequest(op, input, &types.UpdateDetectorOutput{})
 	return UpdateDetectorRequest{Request: req, Input: input, Copy: c.UpdateDetectorRequest}
 }
 
@@ -121,8 +43,8 @@ func (c *Client) UpdateDetectorRequest(input *UpdateDetectorInput) UpdateDetecto
 // UpdateDetector API operation.
 type UpdateDetectorRequest struct {
 	*aws.Request
-	Input *UpdateDetectorInput
-	Copy  func(*UpdateDetectorInput) UpdateDetectorRequest
+	Input *types.UpdateDetectorInput
+	Copy  func(*types.UpdateDetectorInput) UpdateDetectorRequest
 }
 
 // Send marshals and sends the UpdateDetector API request.
@@ -134,7 +56,7 @@ func (r UpdateDetectorRequest) Send(ctx context.Context) (*UpdateDetectorRespons
 	}
 
 	resp := &UpdateDetectorResponse{
-		UpdateDetectorOutput: r.Request.Data.(*UpdateDetectorOutput),
+		UpdateDetectorOutput: r.Request.Data.(*types.UpdateDetectorOutput),
 		response:             &aws.Response{Request: r.Request},
 	}
 
@@ -144,7 +66,7 @@ func (r UpdateDetectorRequest) Send(ctx context.Context) (*UpdateDetectorRespons
 // UpdateDetectorResponse is the response type for the
 // UpdateDetector API operation.
 type UpdateDetectorResponse struct {
-	*UpdateDetectorOutput
+	*types.UpdateDetectorOutput
 
 	response *aws.Response
 }

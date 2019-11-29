@@ -6,122 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/iot/types"
 )
-
-// The input for the CreateThingType operation.
-type CreateThingTypeInput struct {
-	_ struct{} `type:"structure"`
-
-	// Metadata which can be used to manage the thing type.
-	Tags []Tag `locationName:"tags" type:"list"`
-
-	// The name of the thing type.
-	//
-	// ThingTypeName is a required field
-	ThingTypeName *string `location:"uri" locationName:"thingTypeName" min:"1" type:"string" required:"true"`
-
-	// The ThingTypeProperties for the thing type to create. It contains information
-	// about the new thing type including a description, and a list of searchable
-	// thing attribute names.
-	ThingTypeProperties *ThingTypeProperties `locationName:"thingTypeProperties" type:"structure"`
-}
-
-// String returns the string representation
-func (s CreateThingTypeInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateThingTypeInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateThingTypeInput"}
-
-	if s.ThingTypeName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ThingTypeName"))
-	}
-	if s.ThingTypeName != nil && len(*s.ThingTypeName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ThingTypeName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s CreateThingTypeInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.Tags != nil {
-		v := s.Tags
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "tags", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	if s.ThingTypeProperties != nil {
-		v := s.ThingTypeProperties
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "thingTypeProperties", v, metadata)
-	}
-	if s.ThingTypeName != nil {
-		v := *s.ThingTypeName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "thingTypeName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-// The output of the CreateThingType operation.
-type CreateThingTypeOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the thing type.
-	ThingTypeArn *string `locationName:"thingTypeArn" type:"string"`
-
-	// The thing type ID.
-	ThingTypeId *string `locationName:"thingTypeId" type:"string"`
-
-	// The name of the thing type.
-	ThingTypeName *string `locationName:"thingTypeName" min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s CreateThingTypeOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s CreateThingTypeOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.ThingTypeArn != nil {
-		v := *s.ThingTypeArn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "thingTypeArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.ThingTypeId != nil {
-		v := *s.ThingTypeId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "thingTypeId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.ThingTypeName != nil {
-		v := *s.ThingTypeName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "thingTypeName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opCreateThingType = "CreateThingType"
 
@@ -136,7 +22,7 @@ const opCreateThingType = "CreateThingType"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) CreateThingTypeRequest(input *CreateThingTypeInput) CreateThingTypeRequest {
+func (c *Client) CreateThingTypeRequest(input *types.CreateThingTypeInput) CreateThingTypeRequest {
 	op := &aws.Operation{
 		Name:       opCreateThingType,
 		HTTPMethod: "POST",
@@ -144,10 +30,10 @@ func (c *Client) CreateThingTypeRequest(input *CreateThingTypeInput) CreateThing
 	}
 
 	if input == nil {
-		input = &CreateThingTypeInput{}
+		input = &types.CreateThingTypeInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateThingTypeOutput{})
+	req := c.newRequest(op, input, &types.CreateThingTypeOutput{})
 	return CreateThingTypeRequest{Request: req, Input: input, Copy: c.CreateThingTypeRequest}
 }
 
@@ -155,8 +41,8 @@ func (c *Client) CreateThingTypeRequest(input *CreateThingTypeInput) CreateThing
 // CreateThingType API operation.
 type CreateThingTypeRequest struct {
 	*aws.Request
-	Input *CreateThingTypeInput
-	Copy  func(*CreateThingTypeInput) CreateThingTypeRequest
+	Input *types.CreateThingTypeInput
+	Copy  func(*types.CreateThingTypeInput) CreateThingTypeRequest
 }
 
 // Send marshals and sends the CreateThingType API request.
@@ -168,7 +54,7 @@ func (r CreateThingTypeRequest) Send(ctx context.Context) (*CreateThingTypeRespo
 	}
 
 	resp := &CreateThingTypeResponse{
-		CreateThingTypeOutput: r.Request.Data.(*CreateThingTypeOutput),
+		CreateThingTypeOutput: r.Request.Data.(*types.CreateThingTypeOutput),
 		response:              &aws.Response{Request: r.Request},
 	}
 
@@ -178,7 +64,7 @@ func (r CreateThingTypeRequest) Send(ctx context.Context) (*CreateThingTypeRespo
 // CreateThingTypeResponse is the response type for the
 // CreateThingType API operation.
 type CreateThingTypeResponse struct {
-	*CreateThingTypeOutput
+	*types.CreateThingTypeOutput
 
 	response *aws.Response
 }

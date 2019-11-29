@@ -13,6 +13,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws/awserr"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting/integration"
 	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider"
+	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/types"
 )
 
 var _ aws.Config
@@ -24,7 +25,7 @@ func TestInteg_00_ListUserPools(t *testing.T) {
 
 	cfg := integration.ConfigWithDefaultRegion("us-west-2")
 	svc := cognitoidentityprovider.New(cfg)
-	params := &cognitoidentityprovider.ListUserPoolsInput{
+	params := &types.ListUserPoolsInput{
 		MaxResults: aws.Int64(10),
 	}
 
@@ -41,7 +42,7 @@ func TestInteg_01_DescribeUserPool(t *testing.T) {
 
 	cfg := integration.ConfigWithDefaultRegion("us-west-2")
 	svc := cognitoidentityprovider.New(cfg)
-	params := &cognitoidentityprovider.DescribeUserPoolInput{
+	params := &types.DescribeUserPoolInput{
 		UserPoolId: aws.String("us-east-1:aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee"),
 	}
 

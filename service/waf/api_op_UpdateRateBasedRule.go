@@ -4,102 +4,10 @@ package waf
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/waf/types"
 )
-
-type UpdateRateBasedRuleInput struct {
-	_ struct{} `type:"structure"`
-
-	// The value returned by the most recent call to GetChangeToken.
-	//
-	// ChangeToken is a required field
-	ChangeToken *string `min:"1" type:"string" required:"true"`
-
-	// The maximum number of requests, which have an identical value in the field
-	// specified by the RateKey, allowed in a five-minute period. If the number
-	// of requests exceeds the RateLimit and the other predicates specified in the
-	// rule are also met, AWS WAF triggers the action that is specified for this
-	// rule.
-	//
-	// RateLimit is a required field
-	RateLimit *int64 `min:"100" type:"long" required:"true"`
-
-	// The RuleId of the RateBasedRule that you want to update. RuleId is returned
-	// by CreateRateBasedRule and by ListRateBasedRules.
-	//
-	// RuleId is a required field
-	RuleId *string `min:"1" type:"string" required:"true"`
-
-	// An array of RuleUpdate objects that you want to insert into or delete from
-	// a RateBasedRule.
-	//
-	// Updates is a required field
-	Updates []RuleUpdate `type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s UpdateRateBasedRuleInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateRateBasedRuleInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateRateBasedRuleInput"}
-
-	if s.ChangeToken == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ChangeToken"))
-	}
-	if s.ChangeToken != nil && len(*s.ChangeToken) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ChangeToken", 1))
-	}
-
-	if s.RateLimit == nil {
-		invalidParams.Add(aws.NewErrParamRequired("RateLimit"))
-	}
-	if s.RateLimit != nil && *s.RateLimit < 100 {
-		invalidParams.Add(aws.NewErrParamMinValue("RateLimit", 100))
-	}
-
-	if s.RuleId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("RuleId"))
-	}
-	if s.RuleId != nil && len(*s.RuleId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("RuleId", 1))
-	}
-
-	if s.Updates == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Updates"))
-	}
-	if s.Updates != nil {
-		for i, v := range s.Updates {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Updates", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type UpdateRateBasedRuleOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The ChangeToken that you used to submit the UpdateRateBasedRule request.
-	// You can also use this value to query the status of the request. For more
-	// information, see GetChangeTokenStatus.
-	ChangeToken *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s UpdateRateBasedRuleOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opUpdateRateBasedRule = "UpdateRateBasedRule"
 
@@ -153,7 +61,7 @@ const opUpdateRateBasedRule = "UpdateRateBasedRule"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/UpdateRateBasedRule
-func (c *Client) UpdateRateBasedRuleRequest(input *UpdateRateBasedRuleInput) UpdateRateBasedRuleRequest {
+func (c *Client) UpdateRateBasedRuleRequest(input *types.UpdateRateBasedRuleInput) UpdateRateBasedRuleRequest {
 	op := &aws.Operation{
 		Name:       opUpdateRateBasedRule,
 		HTTPMethod: "POST",
@@ -161,10 +69,10 @@ func (c *Client) UpdateRateBasedRuleRequest(input *UpdateRateBasedRuleInput) Upd
 	}
 
 	if input == nil {
-		input = &UpdateRateBasedRuleInput{}
+		input = &types.UpdateRateBasedRuleInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateRateBasedRuleOutput{})
+	req := c.newRequest(op, input, &types.UpdateRateBasedRuleOutput{})
 	return UpdateRateBasedRuleRequest{Request: req, Input: input, Copy: c.UpdateRateBasedRuleRequest}
 }
 
@@ -172,8 +80,8 @@ func (c *Client) UpdateRateBasedRuleRequest(input *UpdateRateBasedRuleInput) Upd
 // UpdateRateBasedRule API operation.
 type UpdateRateBasedRuleRequest struct {
 	*aws.Request
-	Input *UpdateRateBasedRuleInput
-	Copy  func(*UpdateRateBasedRuleInput) UpdateRateBasedRuleRequest
+	Input *types.UpdateRateBasedRuleInput
+	Copy  func(*types.UpdateRateBasedRuleInput) UpdateRateBasedRuleRequest
 }
 
 // Send marshals and sends the UpdateRateBasedRule API request.
@@ -185,7 +93,7 @@ func (r UpdateRateBasedRuleRequest) Send(ctx context.Context) (*UpdateRateBasedR
 	}
 
 	resp := &UpdateRateBasedRuleResponse{
-		UpdateRateBasedRuleOutput: r.Request.Data.(*UpdateRateBasedRuleOutput),
+		UpdateRateBasedRuleOutput: r.Request.Data.(*types.UpdateRateBasedRuleOutput),
 		response:                  &aws.Response{Request: r.Request},
 	}
 
@@ -195,7 +103,7 @@ func (r UpdateRateBasedRuleRequest) Send(ctx context.Context) (*UpdateRateBasedR
 // UpdateRateBasedRuleResponse is the response type for the
 // UpdateRateBasedRule API operation.
 type UpdateRateBasedRuleResponse struct {
-	*UpdateRateBasedRuleOutput
+	*types.UpdateRateBasedRuleOutput
 
 	response *aws.Response
 }

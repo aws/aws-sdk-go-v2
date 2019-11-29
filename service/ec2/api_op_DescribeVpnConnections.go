@@ -6,82 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-// Contains the parameters for DescribeVpnConnections.
-type DescribeVpnConnectionsInput struct {
-	_ struct{} `type:"structure"`
-
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have
-	// the required permissions, the error response is DryRunOperation. Otherwise,
-	// it is UnauthorizedOperation.
-	DryRun *bool `locationName:"dryRun" type:"boolean"`
-
-	// One or more filters.
-	//
-	//    * customer-gateway-configuration - The configuration information for the
-	//    customer gateway.
-	//
-	//    * customer-gateway-id - The ID of a customer gateway associated with the
-	//    VPN connection.
-	//
-	//    * state - The state of the VPN connection (pending | available | deleting
-	//    | deleted).
-	//
-	//    * option.static-routes-only - Indicates whether the connection has static
-	//    routes only. Used for devices that do not support Border Gateway Protocol
-	//    (BGP).
-	//
-	//    * route.destination-cidr-block - The destination CIDR block. This corresponds
-	//    to the subnet used in a customer data center.
-	//
-	//    * bgp-asn - The BGP Autonomous System Number (ASN) associated with a BGP
-	//    device.
-	//
-	//    * tag:<key> - The key/value combination of a tag assigned to the resource.
-	//    Use the tag key in the filter name and the tag value as the filter value.
-	//    For example, to find all resources that have a tag with the key Owner
-	//    and the value TeamA, specify tag:Owner for the filter name and TeamA for
-	//    the filter value.
-	//
-	//    * tag-key - The key of a tag assigned to the resource. Use this filter
-	//    to find all resources assigned a tag with a specific key, regardless of
-	//    the tag value.
-	//
-	//    * type - The type of VPN connection. Currently the only supported type
-	//    is ipsec.1.
-	//
-	//    * vpn-connection-id - The ID of the VPN connection.
-	//
-	//    * vpn-gateway-id - The ID of a virtual private gateway associated with
-	//    the VPN connection.
-	Filters []Filter `locationName:"Filter" locationNameList:"Filter" type:"list"`
-
-	// One or more VPN connection IDs.
-	//
-	// Default: Describes your VPN connections.
-	VpnConnectionIds []string `locationName:"VpnConnectionId" locationNameList:"VpnConnectionId" type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeVpnConnectionsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Contains the output of DescribeVpnConnections.
-type DescribeVpnConnectionsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Information about one or more VPN connections.
-	VpnConnections []VpnConnection `locationName:"vpnConnectionSet" locationNameList:"item" type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeVpnConnectionsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeVpnConnections = "DescribeVpnConnections"
 
@@ -101,7 +27,7 @@ const opDescribeVpnConnections = "DescribeVpnConnections"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeVpnConnections
-func (c *Client) DescribeVpnConnectionsRequest(input *DescribeVpnConnectionsInput) DescribeVpnConnectionsRequest {
+func (c *Client) DescribeVpnConnectionsRequest(input *types.DescribeVpnConnectionsInput) DescribeVpnConnectionsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeVpnConnections,
 		HTTPMethod: "POST",
@@ -109,10 +35,10 @@ func (c *Client) DescribeVpnConnectionsRequest(input *DescribeVpnConnectionsInpu
 	}
 
 	if input == nil {
-		input = &DescribeVpnConnectionsInput{}
+		input = &types.DescribeVpnConnectionsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeVpnConnectionsOutput{})
+	req := c.newRequest(op, input, &types.DescribeVpnConnectionsOutput{})
 	return DescribeVpnConnectionsRequest{Request: req, Input: input, Copy: c.DescribeVpnConnectionsRequest}
 }
 
@@ -120,8 +46,8 @@ func (c *Client) DescribeVpnConnectionsRequest(input *DescribeVpnConnectionsInpu
 // DescribeVpnConnections API operation.
 type DescribeVpnConnectionsRequest struct {
 	*aws.Request
-	Input *DescribeVpnConnectionsInput
-	Copy  func(*DescribeVpnConnectionsInput) DescribeVpnConnectionsRequest
+	Input *types.DescribeVpnConnectionsInput
+	Copy  func(*types.DescribeVpnConnectionsInput) DescribeVpnConnectionsRequest
 }
 
 // Send marshals and sends the DescribeVpnConnections API request.
@@ -133,7 +59,7 @@ func (r DescribeVpnConnectionsRequest) Send(ctx context.Context) (*DescribeVpnCo
 	}
 
 	resp := &DescribeVpnConnectionsResponse{
-		DescribeVpnConnectionsOutput: r.Request.Data.(*DescribeVpnConnectionsOutput),
+		DescribeVpnConnectionsOutput: r.Request.Data.(*types.DescribeVpnConnectionsOutput),
 		response:                     &aws.Response{Request: r.Request},
 	}
 
@@ -143,7 +69,7 @@ func (r DescribeVpnConnectionsRequest) Send(ctx context.Context) (*DescribeVpnCo
 // DescribeVpnConnectionsResponse is the response type for the
 // DescribeVpnConnections API operation.
 type DescribeVpnConnectionsResponse struct {
-	*DescribeVpnConnectionsOutput
+	*types.DescribeVpnConnectionsOutput
 
 	response *aws.Response
 }

@@ -6,69 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/cloudformation/types"
 )
-
-// The input for an EstimateTemplateCost action.
-type EstimateTemplateCostInput struct {
-	_ struct{} `type:"structure"`
-
-	// A list of Parameter structures that specify input parameters.
-	Parameters []Parameter `type:"list"`
-
-	// Structure containing the template body with a minimum length of 1 byte and
-	// a maximum length of 51,200 bytes. (For more information, go to Template Anatomy
-	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-anatomy.html)
-	// in the AWS CloudFormation User Guide.)
-	//
-	// Conditional: You must pass TemplateBody or TemplateURL. If both are passed,
-	// only TemplateBody is used.
-	TemplateBody *string `min:"1" type:"string"`
-
-	// Location of file containing the template body. The URL must point to a template
-	// that is located in an Amazon S3 bucket. For more information, go to Template
-	// Anatomy (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-anatomy.html)
-	// in the AWS CloudFormation User Guide.
-	//
-	// Conditional: You must pass TemplateURL or TemplateBody. If both are passed,
-	// only TemplateBody is used.
-	TemplateURL *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s EstimateTemplateCostInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *EstimateTemplateCostInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "EstimateTemplateCostInput"}
-	if s.TemplateBody != nil && len(*s.TemplateBody) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("TemplateBody", 1))
-	}
-	if s.TemplateURL != nil && len(*s.TemplateURL) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("TemplateURL", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// The output for a EstimateTemplateCost action.
-type EstimateTemplateCostOutput struct {
-	_ struct{} `type:"structure"`
-
-	// An AWS Simple Monthly Calculator URL with a query string that describes the
-	// resources required to run the template.
-	Url *string `type:"string"`
-}
-
-// String returns the string representation
-func (s EstimateTemplateCostOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opEstimateTemplateCost = "EstimateTemplateCost"
 
@@ -87,7 +26,7 @@ const opEstimateTemplateCost = "EstimateTemplateCost"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/EstimateTemplateCost
-func (c *Client) EstimateTemplateCostRequest(input *EstimateTemplateCostInput) EstimateTemplateCostRequest {
+func (c *Client) EstimateTemplateCostRequest(input *types.EstimateTemplateCostInput) EstimateTemplateCostRequest {
 	op := &aws.Operation{
 		Name:       opEstimateTemplateCost,
 		HTTPMethod: "POST",
@@ -95,10 +34,10 @@ func (c *Client) EstimateTemplateCostRequest(input *EstimateTemplateCostInput) E
 	}
 
 	if input == nil {
-		input = &EstimateTemplateCostInput{}
+		input = &types.EstimateTemplateCostInput{}
 	}
 
-	req := c.newRequest(op, input, &EstimateTemplateCostOutput{})
+	req := c.newRequest(op, input, &types.EstimateTemplateCostOutput{})
 	return EstimateTemplateCostRequest{Request: req, Input: input, Copy: c.EstimateTemplateCostRequest}
 }
 
@@ -106,8 +45,8 @@ func (c *Client) EstimateTemplateCostRequest(input *EstimateTemplateCostInput) E
 // EstimateTemplateCost API operation.
 type EstimateTemplateCostRequest struct {
 	*aws.Request
-	Input *EstimateTemplateCostInput
-	Copy  func(*EstimateTemplateCostInput) EstimateTemplateCostRequest
+	Input *types.EstimateTemplateCostInput
+	Copy  func(*types.EstimateTemplateCostInput) EstimateTemplateCostRequest
 }
 
 // Send marshals and sends the EstimateTemplateCost API request.
@@ -119,7 +58,7 @@ func (r EstimateTemplateCostRequest) Send(ctx context.Context) (*EstimateTemplat
 	}
 
 	resp := &EstimateTemplateCostResponse{
-		EstimateTemplateCostOutput: r.Request.Data.(*EstimateTemplateCostOutput),
+		EstimateTemplateCostOutput: r.Request.Data.(*types.EstimateTemplateCostOutput),
 		response:                   &aws.Response{Request: r.Request},
 	}
 
@@ -129,7 +68,7 @@ func (r EstimateTemplateCostRequest) Send(ctx context.Context) (*EstimateTemplat
 // EstimateTemplateCostResponse is the response type for the
 // EstimateTemplateCost API operation.
 type EstimateTemplateCostResponse struct {
-	*EstimateTemplateCostOutput
+	*types.EstimateTemplateCostOutput
 
 	response *aws.Response
 }

@@ -6,74 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/polly/types"
 )
-
-type GetSpeechSynthesisTaskInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Polly generated identifier for a speech synthesis task.
-	//
-	// TaskId is a required field
-	TaskId *string `location:"uri" locationName:"TaskId" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetSpeechSynthesisTaskInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetSpeechSynthesisTaskInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetSpeechSynthesisTaskInput"}
-
-	if s.TaskId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("TaskId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetSpeechSynthesisTaskInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.TaskId != nil {
-		v := *s.TaskId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "TaskId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type GetSpeechSynthesisTaskOutput struct {
-	_ struct{} `type:"structure"`
-
-	// SynthesisTask object that provides information from the requested task, including
-	// output format, creation time, task status, and so on.
-	SynthesisTask *SynthesisTask `type:"structure"`
-}
-
-// String returns the string representation
-func (s GetSpeechSynthesisTaskOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetSpeechSynthesisTaskOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.SynthesisTask != nil {
-		v := s.SynthesisTask
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "SynthesisTask", v, metadata)
-	}
-	return nil
-}
 
 const opGetSpeechSynthesisTask = "GetSpeechSynthesisTask"
 
@@ -93,7 +27,7 @@ const opGetSpeechSynthesisTask = "GetSpeechSynthesisTask"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/polly-2016-06-10/GetSpeechSynthesisTask
-func (c *Client) GetSpeechSynthesisTaskRequest(input *GetSpeechSynthesisTaskInput) GetSpeechSynthesisTaskRequest {
+func (c *Client) GetSpeechSynthesisTaskRequest(input *types.GetSpeechSynthesisTaskInput) GetSpeechSynthesisTaskRequest {
 	op := &aws.Operation{
 		Name:       opGetSpeechSynthesisTask,
 		HTTPMethod: "GET",
@@ -101,10 +35,10 @@ func (c *Client) GetSpeechSynthesisTaskRequest(input *GetSpeechSynthesisTaskInpu
 	}
 
 	if input == nil {
-		input = &GetSpeechSynthesisTaskInput{}
+		input = &types.GetSpeechSynthesisTaskInput{}
 	}
 
-	req := c.newRequest(op, input, &GetSpeechSynthesisTaskOutput{})
+	req := c.newRequest(op, input, &types.GetSpeechSynthesisTaskOutput{})
 	return GetSpeechSynthesisTaskRequest{Request: req, Input: input, Copy: c.GetSpeechSynthesisTaskRequest}
 }
 
@@ -112,8 +46,8 @@ func (c *Client) GetSpeechSynthesisTaskRequest(input *GetSpeechSynthesisTaskInpu
 // GetSpeechSynthesisTask API operation.
 type GetSpeechSynthesisTaskRequest struct {
 	*aws.Request
-	Input *GetSpeechSynthesisTaskInput
-	Copy  func(*GetSpeechSynthesisTaskInput) GetSpeechSynthesisTaskRequest
+	Input *types.GetSpeechSynthesisTaskInput
+	Copy  func(*types.GetSpeechSynthesisTaskInput) GetSpeechSynthesisTaskRequest
 }
 
 // Send marshals and sends the GetSpeechSynthesisTask API request.
@@ -125,7 +59,7 @@ func (r GetSpeechSynthesisTaskRequest) Send(ctx context.Context) (*GetSpeechSynt
 	}
 
 	resp := &GetSpeechSynthesisTaskResponse{
-		GetSpeechSynthesisTaskOutput: r.Request.Data.(*GetSpeechSynthesisTaskOutput),
+		GetSpeechSynthesisTaskOutput: r.Request.Data.(*types.GetSpeechSynthesisTaskOutput),
 		response:                     &aws.Response{Request: r.Request},
 	}
 
@@ -135,7 +69,7 @@ func (r GetSpeechSynthesisTaskRequest) Send(ctx context.Context) (*GetSpeechSynt
 // GetSpeechSynthesisTaskResponse is the response type for the
 // GetSpeechSynthesisTask API operation.
 type GetSpeechSynthesisTaskResponse struct {
-	*GetSpeechSynthesisTaskOutput
+	*types.GetSpeechSynthesisTaskOutput
 
 	response *aws.Response
 }

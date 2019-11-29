@@ -4,142 +4,10 @@ package servicecatalog
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/types"
 )
-
-type ProvisionProductInput struct {
-	_ struct{} `type:"structure"`
-
-	// The language code.
-	//
-	//    * en - English (default)
-	//
-	//    * jp - Japanese
-	//
-	//    * zh - Chinese
-	AcceptLanguage *string `type:"string"`
-
-	// Passed to CloudFormation. The SNS topic ARNs to which to publish stack-related
-	// events.
-	NotificationArns []string `type:"list"`
-
-	// The path identifier of the product. This value is optional if the product
-	// has a default path, and required if the product has more than one path. To
-	// list the paths for a product, use ListLaunchPaths.
-	PathId *string `min:"1" type:"string"`
-
-	// The product identifier.
-	//
-	// ProductId is a required field
-	ProductId *string `min:"1" type:"string" required:"true"`
-
-	// An idempotency token that uniquely identifies the provisioning request.
-	//
-	// ProvisionToken is a required field
-	ProvisionToken *string `min:"1" type:"string" required:"true" idempotencyToken:"true"`
-
-	// A user-friendly name for the provisioned product. This value must be unique
-	// for the AWS account and cannot be updated after the product is provisioned.
-	//
-	// ProvisionedProductName is a required field
-	ProvisionedProductName *string `min:"1" type:"string" required:"true"`
-
-	// The identifier of the provisioning artifact.
-	//
-	// ProvisioningArtifactId is a required field
-	ProvisioningArtifactId *string `min:"1" type:"string" required:"true"`
-
-	// Parameters specified by the administrator that are required for provisioning
-	// the product.
-	ProvisioningParameters []ProvisioningParameter `type:"list"`
-
-	// An object that contains information about the provisioning preferences for
-	// a stack set.
-	ProvisioningPreferences *ProvisioningPreferences `type:"structure"`
-
-	// One or more tags.
-	Tags []Tag `type:"list"`
-}
-
-// String returns the string representation
-func (s ProvisionProductInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ProvisionProductInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ProvisionProductInput"}
-	if s.PathId != nil && len(*s.PathId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("PathId", 1))
-	}
-
-	if s.ProductId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ProductId"))
-	}
-	if s.ProductId != nil && len(*s.ProductId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ProductId", 1))
-	}
-
-	if s.ProvisionToken == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ProvisionToken"))
-	}
-	if s.ProvisionToken != nil && len(*s.ProvisionToken) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ProvisionToken", 1))
-	}
-
-	if s.ProvisionedProductName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ProvisionedProductName"))
-	}
-	if s.ProvisionedProductName != nil && len(*s.ProvisionedProductName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ProvisionedProductName", 1))
-	}
-
-	if s.ProvisioningArtifactId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ProvisioningArtifactId"))
-	}
-	if s.ProvisioningArtifactId != nil && len(*s.ProvisioningArtifactId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ProvisioningArtifactId", 1))
-	}
-	if s.ProvisioningParameters != nil {
-		for i, v := range s.ProvisioningParameters {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "ProvisioningParameters", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-	if s.ProvisioningPreferences != nil {
-		if err := s.ProvisioningPreferences.Validate(); err != nil {
-			invalidParams.AddNested("ProvisioningPreferences", err.(aws.ErrInvalidParams))
-		}
-	}
-	if s.Tags != nil {
-		for i, v := range s.Tags {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ProvisionProductOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Information about the result of provisioning the product.
-	RecordDetail *RecordDetail `type:"structure"`
-}
-
-// String returns the string representation
-func (s ProvisionProductOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opProvisionProduct = "ProvisionProduct"
 
@@ -166,7 +34,7 @@ const opProvisionProduct = "ProvisionProduct"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ProvisionProduct
-func (c *Client) ProvisionProductRequest(input *ProvisionProductInput) ProvisionProductRequest {
+func (c *Client) ProvisionProductRequest(input *types.ProvisionProductInput) ProvisionProductRequest {
 	op := &aws.Operation{
 		Name:       opProvisionProduct,
 		HTTPMethod: "POST",
@@ -174,10 +42,10 @@ func (c *Client) ProvisionProductRequest(input *ProvisionProductInput) Provision
 	}
 
 	if input == nil {
-		input = &ProvisionProductInput{}
+		input = &types.ProvisionProductInput{}
 	}
 
-	req := c.newRequest(op, input, &ProvisionProductOutput{})
+	req := c.newRequest(op, input, &types.ProvisionProductOutput{})
 	return ProvisionProductRequest{Request: req, Input: input, Copy: c.ProvisionProductRequest}
 }
 
@@ -185,8 +53,8 @@ func (c *Client) ProvisionProductRequest(input *ProvisionProductInput) Provision
 // ProvisionProduct API operation.
 type ProvisionProductRequest struct {
 	*aws.Request
-	Input *ProvisionProductInput
-	Copy  func(*ProvisionProductInput) ProvisionProductRequest
+	Input *types.ProvisionProductInput
+	Copy  func(*types.ProvisionProductInput) ProvisionProductRequest
 }
 
 // Send marshals and sends the ProvisionProduct API request.
@@ -198,7 +66,7 @@ func (r ProvisionProductRequest) Send(ctx context.Context) (*ProvisionProductRes
 	}
 
 	resp := &ProvisionProductResponse{
-		ProvisionProductOutput: r.Request.Data.(*ProvisionProductOutput),
+		ProvisionProductOutput: r.Request.Data.(*types.ProvisionProductOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -208,7 +76,7 @@ func (r ProvisionProductRequest) Send(ctx context.Context) (*ProvisionProductRes
 // ProvisionProductResponse is the response type for the
 // ProvisionProduct API operation.
 type ProvisionProductResponse struct {
-	*ProvisionProductOutput
+	*types.ProvisionProductOutput
 
 	response *aws.Response
 }

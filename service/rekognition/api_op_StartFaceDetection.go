@@ -6,90 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/rekognition/types"
 )
-
-type StartFaceDetectionInput struct {
-	_ struct{} `type:"structure"`
-
-	// Idempotent token used to identify the start request. If you use the same
-	// token with multiple StartFaceDetection requests, the same JobId is returned.
-	// Use ClientRequestToken to prevent the same job from being accidently started
-	// more than once.
-	ClientRequestToken *string `min:"1" type:"string"`
-
-	// The face attributes you want returned.
-	//
-	// DEFAULT - The following subset of facial attributes are returned: BoundingBox,
-	// Confidence, Pose, Quality and Landmarks.
-	//
-	// ALL - All facial attributes are returned.
-	FaceAttributes FaceAttributes `type:"string" enum:"true"`
-
-	// An identifier you specify that's returned in the completion notification
-	// that's published to your Amazon Simple Notification Service topic. For example,
-	// you can use JobTag to group related jobs and identify them in the completion
-	// notification.
-	JobTag *string `min:"1" type:"string"`
-
-	// The ARN of the Amazon SNS topic to which you want Amazon Rekognition Video
-	// to publish the completion status of the face detection operation.
-	NotificationChannel *NotificationChannel `type:"structure"`
-
-	// The video in which you want to detect faces. The video must be stored in
-	// an Amazon S3 bucket.
-	//
-	// Video is a required field
-	Video *Video `type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s StartFaceDetectionInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *StartFaceDetectionInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "StartFaceDetectionInput"}
-	if s.ClientRequestToken != nil && len(*s.ClientRequestToken) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ClientRequestToken", 1))
-	}
-	if s.JobTag != nil && len(*s.JobTag) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("JobTag", 1))
-	}
-
-	if s.Video == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Video"))
-	}
-	if s.NotificationChannel != nil {
-		if err := s.NotificationChannel.Validate(); err != nil {
-			invalidParams.AddNested("NotificationChannel", err.(aws.ErrInvalidParams))
-		}
-	}
-	if s.Video != nil {
-		if err := s.Video.Validate(); err != nil {
-			invalidParams.AddNested("Video", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type StartFaceDetectionOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The identifier for the face detection job. Use JobId to identify the job
-	// in a subsequent call to GetFaceDetection.
-	JobId *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s StartFaceDetectionOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opStartFaceDetection = "StartFaceDetection"
 
@@ -117,7 +35,7 @@ const opStartFaceDetection = "StartFaceDetection"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) StartFaceDetectionRequest(input *StartFaceDetectionInput) StartFaceDetectionRequest {
+func (c *Client) StartFaceDetectionRequest(input *types.StartFaceDetectionInput) StartFaceDetectionRequest {
 	op := &aws.Operation{
 		Name:       opStartFaceDetection,
 		HTTPMethod: "POST",
@@ -125,10 +43,10 @@ func (c *Client) StartFaceDetectionRequest(input *StartFaceDetectionInput) Start
 	}
 
 	if input == nil {
-		input = &StartFaceDetectionInput{}
+		input = &types.StartFaceDetectionInput{}
 	}
 
-	req := c.newRequest(op, input, &StartFaceDetectionOutput{})
+	req := c.newRequest(op, input, &types.StartFaceDetectionOutput{})
 	return StartFaceDetectionRequest{Request: req, Input: input, Copy: c.StartFaceDetectionRequest}
 }
 
@@ -136,8 +54,8 @@ func (c *Client) StartFaceDetectionRequest(input *StartFaceDetectionInput) Start
 // StartFaceDetection API operation.
 type StartFaceDetectionRequest struct {
 	*aws.Request
-	Input *StartFaceDetectionInput
-	Copy  func(*StartFaceDetectionInput) StartFaceDetectionRequest
+	Input *types.StartFaceDetectionInput
+	Copy  func(*types.StartFaceDetectionInput) StartFaceDetectionRequest
 }
 
 // Send marshals and sends the StartFaceDetection API request.
@@ -149,7 +67,7 @@ func (r StartFaceDetectionRequest) Send(ctx context.Context) (*StartFaceDetectio
 	}
 
 	resp := &StartFaceDetectionResponse{
-		StartFaceDetectionOutput: r.Request.Data.(*StartFaceDetectionOutput),
+		StartFaceDetectionOutput: r.Request.Data.(*types.StartFaceDetectionOutput),
 		response:                 &aws.Response{Request: r.Request},
 	}
 
@@ -159,7 +77,7 @@ func (r StartFaceDetectionRequest) Send(ctx context.Context) (*StartFaceDetectio
 // StartFaceDetectionResponse is the response type for the
 // StartFaceDetection API operation.
 type StartFaceDetectionResponse struct {
-	*StartFaceDetectionOutput
+	*types.StartFaceDetectionOutput
 
 	response *aws.Response
 }

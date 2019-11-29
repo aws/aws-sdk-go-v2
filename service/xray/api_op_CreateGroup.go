@@ -6,88 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/xray/types"
 )
-
-type CreateGroupInput struct {
-	_ struct{} `type:"structure"`
-
-	// The filter expression defining criteria by which to group traces.
-	FilterExpression *string `type:"string"`
-
-	// The case-sensitive name of the new group. Default is a reserved name and
-	// names must be unique.
-	//
-	// GroupName is a required field
-	GroupName *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s CreateGroupInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateGroupInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateGroupInput"}
-
-	if s.GroupName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("GroupName"))
-	}
-	if s.GroupName != nil && len(*s.GroupName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("GroupName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s CreateGroupInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.FilterExpression != nil {
-		v := *s.FilterExpression
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "FilterExpression", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.GroupName != nil {
-		v := *s.GroupName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "GroupName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type CreateGroupOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The group that was created. Contains the name of the group that was created,
-	// the ARN of the group that was generated based on the group name, and the
-	// filter expression that was assigned to the group.
-	Group *Group `type:"structure"`
-}
-
-// String returns the string representation
-func (s CreateGroupOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s CreateGroupOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.Group != nil {
-		v := s.Group
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "Group", v, metadata)
-	}
-	return nil
-}
 
 const opCreateGroup = "CreateGroup"
 
@@ -104,7 +24,7 @@ const opCreateGroup = "CreateGroup"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/CreateGroup
-func (c *Client) CreateGroupRequest(input *CreateGroupInput) CreateGroupRequest {
+func (c *Client) CreateGroupRequest(input *types.CreateGroupInput) CreateGroupRequest {
 	op := &aws.Operation{
 		Name:       opCreateGroup,
 		HTTPMethod: "POST",
@@ -112,10 +32,10 @@ func (c *Client) CreateGroupRequest(input *CreateGroupInput) CreateGroupRequest 
 	}
 
 	if input == nil {
-		input = &CreateGroupInput{}
+		input = &types.CreateGroupInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateGroupOutput{})
+	req := c.newRequest(op, input, &types.CreateGroupOutput{})
 	return CreateGroupRequest{Request: req, Input: input, Copy: c.CreateGroupRequest}
 }
 
@@ -123,8 +43,8 @@ func (c *Client) CreateGroupRequest(input *CreateGroupInput) CreateGroupRequest 
 // CreateGroup API operation.
 type CreateGroupRequest struct {
 	*aws.Request
-	Input *CreateGroupInput
-	Copy  func(*CreateGroupInput) CreateGroupRequest
+	Input *types.CreateGroupInput
+	Copy  func(*types.CreateGroupInput) CreateGroupRequest
 }
 
 // Send marshals and sends the CreateGroup API request.
@@ -136,7 +56,7 @@ func (r CreateGroupRequest) Send(ctx context.Context) (*CreateGroupResponse, err
 	}
 
 	resp := &CreateGroupResponse{
-		CreateGroupOutput: r.Request.Data.(*CreateGroupOutput),
+		CreateGroupOutput: r.Request.Data.(*types.CreateGroupOutput),
 		response:          &aws.Response{Request: r.Request},
 	}
 
@@ -146,7 +66,7 @@ func (r CreateGroupRequest) Send(ctx context.Context) (*CreateGroupResponse, err
 // CreateGroupResponse is the response type for the
 // CreateGroup API operation.
 type CreateGroupResponse struct {
-	*CreateGroupOutput
+	*types.CreateGroupOutput
 
 	response *aws.Response
 }

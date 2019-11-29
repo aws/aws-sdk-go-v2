@@ -6,70 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/query"
+	"github.com/aws/aws-sdk-go-v2/service/iam/types"
 )
-
-type AddRoleToInstanceProfileInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the instance profile to update.
-	//
-	// This parameter allows (through its regex pattern (http://wikipedia.org/wiki/regex))
-	// a string of characters consisting of upper and lowercase alphanumeric characters
-	// with no spaces. You can also include any of the following characters: _+=,.@-
-	//
-	// InstanceProfileName is a required field
-	InstanceProfileName *string `min:"1" type:"string" required:"true"`
-
-	// The name of the role to add.
-	//
-	// This parameter allows (through its regex pattern (http://wikipedia.org/wiki/regex))
-	// a string of characters consisting of upper and lowercase alphanumeric characters
-	// with no spaces. You can also include any of the following characters: _+=,.@-
-	//
-	// RoleName is a required field
-	RoleName *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s AddRoleToInstanceProfileInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *AddRoleToInstanceProfileInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "AddRoleToInstanceProfileInput"}
-
-	if s.InstanceProfileName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("InstanceProfileName"))
-	}
-	if s.InstanceProfileName != nil && len(*s.InstanceProfileName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("InstanceProfileName", 1))
-	}
-
-	if s.RoleName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("RoleName"))
-	}
-	if s.RoleName != nil && len(*s.RoleName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("RoleName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type AddRoleToInstanceProfileOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s AddRoleToInstanceProfileOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opAddRoleToInstanceProfile = "AddRoleToInstanceProfile"
 
@@ -100,7 +40,7 @@ const opAddRoleToInstanceProfile = "AddRoleToInstanceProfile"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/AddRoleToInstanceProfile
-func (c *Client) AddRoleToInstanceProfileRequest(input *AddRoleToInstanceProfileInput) AddRoleToInstanceProfileRequest {
+func (c *Client) AddRoleToInstanceProfileRequest(input *types.AddRoleToInstanceProfileInput) AddRoleToInstanceProfileRequest {
 	op := &aws.Operation{
 		Name:       opAddRoleToInstanceProfile,
 		HTTPMethod: "POST",
@@ -108,10 +48,10 @@ func (c *Client) AddRoleToInstanceProfileRequest(input *AddRoleToInstanceProfile
 	}
 
 	if input == nil {
-		input = &AddRoleToInstanceProfileInput{}
+		input = &types.AddRoleToInstanceProfileInput{}
 	}
 
-	req := c.newRequest(op, input, &AddRoleToInstanceProfileOutput{})
+	req := c.newRequest(op, input, &types.AddRoleToInstanceProfileOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return AddRoleToInstanceProfileRequest{Request: req, Input: input, Copy: c.AddRoleToInstanceProfileRequest}
@@ -121,8 +61,8 @@ func (c *Client) AddRoleToInstanceProfileRequest(input *AddRoleToInstanceProfile
 // AddRoleToInstanceProfile API operation.
 type AddRoleToInstanceProfileRequest struct {
 	*aws.Request
-	Input *AddRoleToInstanceProfileInput
-	Copy  func(*AddRoleToInstanceProfileInput) AddRoleToInstanceProfileRequest
+	Input *types.AddRoleToInstanceProfileInput
+	Copy  func(*types.AddRoleToInstanceProfileInput) AddRoleToInstanceProfileRequest
 }
 
 // Send marshals and sends the AddRoleToInstanceProfile API request.
@@ -134,7 +74,7 @@ func (r AddRoleToInstanceProfileRequest) Send(ctx context.Context) (*AddRoleToIn
 	}
 
 	resp := &AddRoleToInstanceProfileResponse{
-		AddRoleToInstanceProfileOutput: r.Request.Data.(*AddRoleToInstanceProfileOutput),
+		AddRoleToInstanceProfileOutput: r.Request.Data.(*types.AddRoleToInstanceProfileOutput),
 		response:                       &aws.Response{Request: r.Request},
 	}
 
@@ -144,7 +84,7 @@ func (r AddRoleToInstanceProfileRequest) Send(ctx context.Context) (*AddRoleToIn
 // AddRoleToInstanceProfileResponse is the response type for the
 // AddRoleToInstanceProfile API operation.
 type AddRoleToInstanceProfileResponse struct {
-	*AddRoleToInstanceProfileOutput
+	*types.AddRoleToInstanceProfileOutput
 
 	response *aws.Response
 }

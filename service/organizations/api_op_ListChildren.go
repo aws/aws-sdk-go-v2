@@ -6,95 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/organizations/types"
 )
-
-type ListChildrenInput struct {
-	_ struct{} `type:"structure"`
-
-	// Filters the output to include only the specified child type.
-	//
-	// ChildType is a required field
-	ChildType ChildType `type:"string" required:"true" enum:"true"`
-
-	// (Optional) Use this to limit the number of results you want included per
-	// page in the response. If you do not include this parameter, it defaults to
-	// a value that is specific to the operation. If additional items exist beyond
-	// the maximum you specify, the NextToken response element is present and has
-	// a value (is not null). Include that value as the NextToken request parameter
-	// in the next call to the operation to get the next part of the results. Note
-	// that Organizations might return fewer results than the maximum even when
-	// there are more results available. You should check NextToken after every
-	// operation to ensure that you receive all of the results.
-	MaxResults *int64 `min:"1" type:"integer"`
-
-	// Use this parameter if you receive a NextToken response in a previous request
-	// that indicates that there is more output available. Set it to the value of
-	// the previous call's NextToken response to indicate where the output should
-	// continue from.
-	NextToken *string `type:"string"`
-
-	// The unique identifier (ID) for the parent root or OU whose children you want
-	// to list.
-	//
-	// The regex pattern (http://wikipedia.org/wiki/regex) for a parent ID string
-	// requires one of the following:
-	//
-	//    * Root - A string that begins with "r-" followed by from 4 to 32 lower-case
-	//    letters or digits.
-	//
-	//    * Organizational unit (OU) - A string that begins with "ou-" followed
-	//    by from 4 to 32 lower-case letters or digits (the ID of the root that
-	//    the OU is in) followed by a second "-" dash and from 8 to 32 additional
-	//    lower-case letters or digits.
-	//
-	// ParentId is a required field
-	ParentId *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s ListChildrenInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListChildrenInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListChildrenInput"}
-	if len(s.ChildType) == 0 {
-		invalidParams.Add(aws.NewErrParamRequired("ChildType"))
-	}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-
-	if s.ParentId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ParentId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ListChildrenOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The list of children of the specified parent container.
-	Children []Child `type:"list"`
-
-	// If present, this value indicates that there is more output available than
-	// is included in the current response. Use this value in the NextToken request
-	// parameter in a subsequent call to the operation to get the next part of the
-	// output. You should repeat this until the NextToken response element comes
-	// back as null.
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s ListChildrenOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListChildren = "ListChildren"
 
@@ -120,7 +33,7 @@ const opListChildren = "ListChildren"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListChildren
-func (c *Client) ListChildrenRequest(input *ListChildrenInput) ListChildrenRequest {
+func (c *Client) ListChildrenRequest(input *types.ListChildrenInput) ListChildrenRequest {
 	op := &aws.Operation{
 		Name:       opListChildren,
 		HTTPMethod: "POST",
@@ -134,10 +47,10 @@ func (c *Client) ListChildrenRequest(input *ListChildrenInput) ListChildrenReque
 	}
 
 	if input == nil {
-		input = &ListChildrenInput{}
+		input = &types.ListChildrenInput{}
 	}
 
-	req := c.newRequest(op, input, &ListChildrenOutput{})
+	req := c.newRequest(op, input, &types.ListChildrenOutput{})
 	return ListChildrenRequest{Request: req, Input: input, Copy: c.ListChildrenRequest}
 }
 
@@ -145,8 +58,8 @@ func (c *Client) ListChildrenRequest(input *ListChildrenInput) ListChildrenReque
 // ListChildren API operation.
 type ListChildrenRequest struct {
 	*aws.Request
-	Input *ListChildrenInput
-	Copy  func(*ListChildrenInput) ListChildrenRequest
+	Input *types.ListChildrenInput
+	Copy  func(*types.ListChildrenInput) ListChildrenRequest
 }
 
 // Send marshals and sends the ListChildren API request.
@@ -158,7 +71,7 @@ func (r ListChildrenRequest) Send(ctx context.Context) (*ListChildrenResponse, e
 	}
 
 	resp := &ListChildrenResponse{
-		ListChildrenOutput: r.Request.Data.(*ListChildrenOutput),
+		ListChildrenOutput: r.Request.Data.(*types.ListChildrenOutput),
 		response:           &aws.Response{Request: r.Request},
 	}
 
@@ -188,7 +101,7 @@ func NewListChildrenPaginator(req ListChildrenRequest) ListChildrenPaginator {
 	return ListChildrenPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListChildrenInput
+				var inCpy *types.ListChildrenInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -208,14 +121,14 @@ type ListChildrenPaginator struct {
 	aws.Pager
 }
 
-func (p *ListChildrenPaginator) CurrentPage() *ListChildrenOutput {
-	return p.Pager.CurrentPage().(*ListChildrenOutput)
+func (p *ListChildrenPaginator) CurrentPage() *types.ListChildrenOutput {
+	return p.Pager.CurrentPage().(*types.ListChildrenOutput)
 }
 
 // ListChildrenResponse is the response type for the
 // ListChildren API operation.
 type ListChildrenResponse struct {
-	*ListChildrenOutput
+	*types.ListChildrenOutput
 
 	response *aws.Response
 }

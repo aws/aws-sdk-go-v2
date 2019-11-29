@@ -6,61 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/transfer/types"
 )
-
-type ListServersInput struct {
-	_ struct{} `type:"structure"`
-
-	// Specifies the number of servers to return as a response to the ListServers
-	// query.
-	MaxResults *int64 `min:"1" type:"integer"`
-
-	// When additional results are obtained from the ListServers command, a NextToken
-	// parameter is returned in the output. You can then pass the NextToken parameter
-	// in a subsequent command to continue listing additional servers.
-	NextToken *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s ListServersInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListServersInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListServersInput"}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-	if s.NextToken != nil && len(*s.NextToken) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ListServersOutput struct {
-	_ struct{} `type:"structure"`
-
-	// When you can get additional results from the ListServers operation, a NextToken
-	// parameter is returned in the output. In a following command, you can pass
-	// in the NextToken parameter to continue listing additional servers.
-	NextToken *string `min:"1" type:"string"`
-
-	// An array of servers that were listed.
-	//
-	// Servers is a required field
-	Servers []ListedServer `type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s ListServersOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListServers = "ListServers"
 
@@ -78,7 +25,7 @@ const opListServers = "ListServers"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/ListServers
-func (c *Client) ListServersRequest(input *ListServersInput) ListServersRequest {
+func (c *Client) ListServersRequest(input *types.ListServersInput) ListServersRequest {
 	op := &aws.Operation{
 		Name:       opListServers,
 		HTTPMethod: "POST",
@@ -92,10 +39,10 @@ func (c *Client) ListServersRequest(input *ListServersInput) ListServersRequest 
 	}
 
 	if input == nil {
-		input = &ListServersInput{}
+		input = &types.ListServersInput{}
 	}
 
-	req := c.newRequest(op, input, &ListServersOutput{})
+	req := c.newRequest(op, input, &types.ListServersOutput{})
 	return ListServersRequest{Request: req, Input: input, Copy: c.ListServersRequest}
 }
 
@@ -103,8 +50,8 @@ func (c *Client) ListServersRequest(input *ListServersInput) ListServersRequest 
 // ListServers API operation.
 type ListServersRequest struct {
 	*aws.Request
-	Input *ListServersInput
-	Copy  func(*ListServersInput) ListServersRequest
+	Input *types.ListServersInput
+	Copy  func(*types.ListServersInput) ListServersRequest
 }
 
 // Send marshals and sends the ListServers API request.
@@ -116,7 +63,7 @@ func (r ListServersRequest) Send(ctx context.Context) (*ListServersResponse, err
 	}
 
 	resp := &ListServersResponse{
-		ListServersOutput: r.Request.Data.(*ListServersOutput),
+		ListServersOutput: r.Request.Data.(*types.ListServersOutput),
 		response:          &aws.Response{Request: r.Request},
 	}
 
@@ -146,7 +93,7 @@ func NewListServersPaginator(req ListServersRequest) ListServersPaginator {
 	return ListServersPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListServersInput
+				var inCpy *types.ListServersInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -166,14 +113,14 @@ type ListServersPaginator struct {
 	aws.Pager
 }
 
-func (p *ListServersPaginator) CurrentPage() *ListServersOutput {
-	return p.Pager.CurrentPage().(*ListServersOutput)
+func (p *ListServersPaginator) CurrentPage() *types.ListServersOutput {
+	return p.Pager.CurrentPage().(*types.ListServersOutput)
 }
 
 // ListServersResponse is the response type for the
 // ListServers API operation.
 type ListServersResponse struct {
-	*ListServersOutput
+	*types.ListServersOutput
 
 	response *aws.Response
 }

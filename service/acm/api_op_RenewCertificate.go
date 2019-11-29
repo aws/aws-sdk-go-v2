@@ -6,56 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
+	"github.com/aws/aws-sdk-go-v2/service/acm/types"
 )
-
-type RenewCertificateInput struct {
-	_ struct{} `type:"structure"`
-
-	// String that contains the ARN of the ACM certificate to be renewed. This must
-	// be of the form:
-	//
-	// arn:aws:acm:region:123456789012:certificate/12345678-1234-1234-1234-123456789012
-	//
-	// For more information about ARNs, see Amazon Resource Names (ARNs) and AWS
-	// Service Namespaces (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html).
-	//
-	// CertificateArn is a required field
-	CertificateArn *string `min:"20" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s RenewCertificateInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *RenewCertificateInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "RenewCertificateInput"}
-
-	if s.CertificateArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("CertificateArn"))
-	}
-	if s.CertificateArn != nil && len(*s.CertificateArn) < 20 {
-		invalidParams.Add(aws.NewErrParamMinLen("CertificateArn", 20))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type RenewCertificateOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s RenewCertificateOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opRenewCertificate = "RenewCertificate"
 
@@ -77,7 +31,7 @@ const opRenewCertificate = "RenewCertificate"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/RenewCertificate
-func (c *Client) RenewCertificateRequest(input *RenewCertificateInput) RenewCertificateRequest {
+func (c *Client) RenewCertificateRequest(input *types.RenewCertificateInput) RenewCertificateRequest {
 	op := &aws.Operation{
 		Name:       opRenewCertificate,
 		HTTPMethod: "POST",
@@ -85,10 +39,10 @@ func (c *Client) RenewCertificateRequest(input *RenewCertificateInput) RenewCert
 	}
 
 	if input == nil {
-		input = &RenewCertificateInput{}
+		input = &types.RenewCertificateInput{}
 	}
 
-	req := c.newRequest(op, input, &RenewCertificateOutput{})
+	req := c.newRequest(op, input, &types.RenewCertificateOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return RenewCertificateRequest{Request: req, Input: input, Copy: c.RenewCertificateRequest}
@@ -98,8 +52,8 @@ func (c *Client) RenewCertificateRequest(input *RenewCertificateInput) RenewCert
 // RenewCertificate API operation.
 type RenewCertificateRequest struct {
 	*aws.Request
-	Input *RenewCertificateInput
-	Copy  func(*RenewCertificateInput) RenewCertificateRequest
+	Input *types.RenewCertificateInput
+	Copy  func(*types.RenewCertificateInput) RenewCertificateRequest
 }
 
 // Send marshals and sends the RenewCertificate API request.
@@ -111,7 +65,7 @@ func (r RenewCertificateRequest) Send(ctx context.Context) (*RenewCertificateRes
 	}
 
 	resp := &RenewCertificateResponse{
-		RenewCertificateOutput: r.Request.Data.(*RenewCertificateOutput),
+		RenewCertificateOutput: r.Request.Data.(*types.RenewCertificateOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -121,7 +75,7 @@ func (r RenewCertificateRequest) Send(ctx context.Context) (*RenewCertificateRes
 // RenewCertificateResponse is the response type for the
 // RenewCertificate API operation.
 type RenewCertificateResponse struct {
-	*RenewCertificateOutput
+	*types.RenewCertificateOutput
 
 	response *aws.Response
 }

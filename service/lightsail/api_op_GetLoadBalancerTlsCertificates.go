@@ -6,48 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/lightsail/types"
 )
-
-type GetLoadBalancerTlsCertificatesInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the load balancer you associated with your SSL/TLS certificate.
-	//
-	// LoadBalancerName is a required field
-	LoadBalancerName *string `locationName:"loadBalancerName" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetLoadBalancerTlsCertificatesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetLoadBalancerTlsCertificatesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetLoadBalancerTlsCertificatesInput"}
-
-	if s.LoadBalancerName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("LoadBalancerName"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type GetLoadBalancerTlsCertificatesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// An array of LoadBalancerTlsCertificate objects describing your SSL/TLS certificates.
-	TlsCertificates []LoadBalancerTlsCertificate `locationName:"tlsCertificates" type:"list"`
-}
-
-// String returns the string representation
-func (s GetLoadBalancerTlsCertificatesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetLoadBalancerTlsCertificates = "GetLoadBalancerTlsCertificates"
 
@@ -70,7 +30,7 @@ const opGetLoadBalancerTlsCertificates = "GetLoadBalancerTlsCertificates"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetLoadBalancerTlsCertificates
-func (c *Client) GetLoadBalancerTlsCertificatesRequest(input *GetLoadBalancerTlsCertificatesInput) GetLoadBalancerTlsCertificatesRequest {
+func (c *Client) GetLoadBalancerTlsCertificatesRequest(input *types.GetLoadBalancerTlsCertificatesInput) GetLoadBalancerTlsCertificatesRequest {
 	op := &aws.Operation{
 		Name:       opGetLoadBalancerTlsCertificates,
 		HTTPMethod: "POST",
@@ -78,10 +38,10 @@ func (c *Client) GetLoadBalancerTlsCertificatesRequest(input *GetLoadBalancerTls
 	}
 
 	if input == nil {
-		input = &GetLoadBalancerTlsCertificatesInput{}
+		input = &types.GetLoadBalancerTlsCertificatesInput{}
 	}
 
-	req := c.newRequest(op, input, &GetLoadBalancerTlsCertificatesOutput{})
+	req := c.newRequest(op, input, &types.GetLoadBalancerTlsCertificatesOutput{})
 	return GetLoadBalancerTlsCertificatesRequest{Request: req, Input: input, Copy: c.GetLoadBalancerTlsCertificatesRequest}
 }
 
@@ -89,8 +49,8 @@ func (c *Client) GetLoadBalancerTlsCertificatesRequest(input *GetLoadBalancerTls
 // GetLoadBalancerTlsCertificates API operation.
 type GetLoadBalancerTlsCertificatesRequest struct {
 	*aws.Request
-	Input *GetLoadBalancerTlsCertificatesInput
-	Copy  func(*GetLoadBalancerTlsCertificatesInput) GetLoadBalancerTlsCertificatesRequest
+	Input *types.GetLoadBalancerTlsCertificatesInput
+	Copy  func(*types.GetLoadBalancerTlsCertificatesInput) GetLoadBalancerTlsCertificatesRequest
 }
 
 // Send marshals and sends the GetLoadBalancerTlsCertificates API request.
@@ -102,7 +62,7 @@ func (r GetLoadBalancerTlsCertificatesRequest) Send(ctx context.Context) (*GetLo
 	}
 
 	resp := &GetLoadBalancerTlsCertificatesResponse{
-		GetLoadBalancerTlsCertificatesOutput: r.Request.Data.(*GetLoadBalancerTlsCertificatesOutput),
+		GetLoadBalancerTlsCertificatesOutput: r.Request.Data.(*types.GetLoadBalancerTlsCertificatesOutput),
 		response:                             &aws.Response{Request: r.Request},
 	}
 
@@ -112,7 +72,7 @@ func (r GetLoadBalancerTlsCertificatesRequest) Send(ctx context.Context) (*GetLo
 // GetLoadBalancerTlsCertificatesResponse is the response type for the
 // GetLoadBalancerTlsCertificates API operation.
 type GetLoadBalancerTlsCertificatesResponse struct {
-	*GetLoadBalancerTlsCertificatesOutput
+	*types.GetLoadBalancerTlsCertificatesOutput
 
 	response *aws.Response
 }

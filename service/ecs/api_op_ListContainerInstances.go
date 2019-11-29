@@ -6,73 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ecs/types"
 )
-
-type ListContainerInstancesInput struct {
-	_ struct{} `type:"structure"`
-
-	// The short name or full Amazon Resource Name (ARN) of the cluster that hosts
-	// the container instances to list. If you do not specify a cluster, the default
-	// cluster is assumed.
-	Cluster *string `locationName:"cluster" type:"string"`
-
-	// You can filter the results of a ListContainerInstances operation with cluster
-	// query language statements. For more information, see Cluster Query Language
-	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/cluster-query-language.html)
-	// in the Amazon Elastic Container Service Developer Guide.
-	Filter *string `locationName:"filter" type:"string"`
-
-	// The maximum number of container instance results returned by ListContainerInstances
-	// in paginated output. When this parameter is used, ListContainerInstances
-	// only returns maxResults results in a single page along with a nextToken response
-	// element. The remaining results of the initial request can be seen by sending
-	// another ListContainerInstances request with the returned nextToken value.
-	// This value can be between 1 and 100. If this parameter is not used, then
-	// ListContainerInstances returns up to 100 results and a nextToken value if
-	// applicable.
-	MaxResults *int64 `locationName:"maxResults" type:"integer"`
-
-	// The nextToken value returned from a previous paginated ListContainerInstances
-	// request where maxResults was used and the results exceeded the value of that
-	// parameter. Pagination continues from the end of the previous results that
-	// returned the nextToken value.
-	//
-	// This token should be treated as an opaque identifier that is only used to
-	// retrieve the next items in a list and not for other programmatic purposes.
-	NextToken *string `locationName:"nextToken" type:"string"`
-
-	// Filters the container instances by status. For example, if you specify the
-	// DRAINING status, the results include only container instances that have been
-	// set to DRAINING using UpdateContainerInstancesState. If you do not specify
-	// this parameter, the default is to include container instances set to all
-	// states other than INACTIVE.
-	Status ContainerInstanceStatus `locationName:"status" type:"string" enum:"true"`
-}
-
-// String returns the string representation
-func (s ListContainerInstancesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type ListContainerInstancesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The list of container instances with full ARN entries for each container
-	// instance associated with the specified cluster.
-	ContainerInstanceArns []string `locationName:"containerInstanceArns" type:"list"`
-
-	// The nextToken value to include in a future ListContainerInstances request.
-	// When the results of a ListContainerInstances request exceed maxResults, this
-	// value can be used to retrieve the next page of results. This value is null
-	// when there are no more results to return.
-	NextToken *string `locationName:"nextToken" type:"string"`
-}
-
-// String returns the string representation
-func (s ListContainerInstancesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListContainerInstances = "ListContainerInstances"
 
@@ -93,7 +28,7 @@ const opListContainerInstances = "ListContainerInstances"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ListContainerInstances
-func (c *Client) ListContainerInstancesRequest(input *ListContainerInstancesInput) ListContainerInstancesRequest {
+func (c *Client) ListContainerInstancesRequest(input *types.ListContainerInstancesInput) ListContainerInstancesRequest {
 	op := &aws.Operation{
 		Name:       opListContainerInstances,
 		HTTPMethod: "POST",
@@ -107,10 +42,10 @@ func (c *Client) ListContainerInstancesRequest(input *ListContainerInstancesInpu
 	}
 
 	if input == nil {
-		input = &ListContainerInstancesInput{}
+		input = &types.ListContainerInstancesInput{}
 	}
 
-	req := c.newRequest(op, input, &ListContainerInstancesOutput{})
+	req := c.newRequest(op, input, &types.ListContainerInstancesOutput{})
 	return ListContainerInstancesRequest{Request: req, Input: input, Copy: c.ListContainerInstancesRequest}
 }
 
@@ -118,8 +53,8 @@ func (c *Client) ListContainerInstancesRequest(input *ListContainerInstancesInpu
 // ListContainerInstances API operation.
 type ListContainerInstancesRequest struct {
 	*aws.Request
-	Input *ListContainerInstancesInput
-	Copy  func(*ListContainerInstancesInput) ListContainerInstancesRequest
+	Input *types.ListContainerInstancesInput
+	Copy  func(*types.ListContainerInstancesInput) ListContainerInstancesRequest
 }
 
 // Send marshals and sends the ListContainerInstances API request.
@@ -131,7 +66,7 @@ func (r ListContainerInstancesRequest) Send(ctx context.Context) (*ListContainer
 	}
 
 	resp := &ListContainerInstancesResponse{
-		ListContainerInstancesOutput: r.Request.Data.(*ListContainerInstancesOutput),
+		ListContainerInstancesOutput: r.Request.Data.(*types.ListContainerInstancesOutput),
 		response:                     &aws.Response{Request: r.Request},
 	}
 
@@ -161,7 +96,7 @@ func NewListContainerInstancesPaginator(req ListContainerInstancesRequest) ListC
 	return ListContainerInstancesPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListContainerInstancesInput
+				var inCpy *types.ListContainerInstancesInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -181,14 +116,14 @@ type ListContainerInstancesPaginator struct {
 	aws.Pager
 }
 
-func (p *ListContainerInstancesPaginator) CurrentPage() *ListContainerInstancesOutput {
-	return p.Pager.CurrentPage().(*ListContainerInstancesOutput)
+func (p *ListContainerInstancesPaginator) CurrentPage() *types.ListContainerInstancesOutput {
+	return p.Pager.CurrentPage().(*types.ListContainerInstancesOutput)
 }
 
 // ListContainerInstancesResponse is the response type for the
 // ListContainerInstances API operation.
 type ListContainerInstancesResponse struct {
-	*ListContainerInstancesOutput
+	*types.ListContainerInstancesOutput
 
 	response *aws.Response
 }

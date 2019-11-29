@@ -10,6 +10,7 @@ package cloudwatchlogsiface
 
 import (
 	"github.com/aws/aws-sdk-go-v2/service/cloudwatchlogs"
+	"github.com/aws/aws-sdk-go-v2/service/cloudwatchlogs/types"
 )
 
 // ClientAPI provides an interface to enable mocking the
@@ -43,7 +44,7 @@ import (
 //    type mockClientClient struct {
 //        cloudwatchlogsiface.ClientPI
 //    }
-//    func (m *mockClientClient) AssociateKmsKey(input *cloudwatchlogs.AssociateKmsKeyInput) (*cloudwatchlogs.AssociateKmsKeyOutput, error) {
+//    func (m *mockClientClient) AssociateKmsKey(input *types.AssociateKmsKeyInput) (*types.AssociateKmsKeyOutput, error) {
 //        // mock response/functionality
 //    }
 //
@@ -61,83 +62,83 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type ClientAPI interface {
-	AssociateKmsKeyRequest(*cloudwatchlogs.AssociateKmsKeyInput) cloudwatchlogs.AssociateKmsKeyRequest
+	AssociateKmsKeyRequest(*types.AssociateKmsKeyInput) cloudwatchlogs.AssociateKmsKeyRequest
 
-	CancelExportTaskRequest(*cloudwatchlogs.CancelExportTaskInput) cloudwatchlogs.CancelExportTaskRequest
+	CancelExportTaskRequest(*types.CancelExportTaskInput) cloudwatchlogs.CancelExportTaskRequest
 
-	CreateExportTaskRequest(*cloudwatchlogs.CreateExportTaskInput) cloudwatchlogs.CreateExportTaskRequest
+	CreateExportTaskRequest(*types.CreateExportTaskInput) cloudwatchlogs.CreateExportTaskRequest
 
-	CreateLogGroupRequest(*cloudwatchlogs.CreateLogGroupInput) cloudwatchlogs.CreateLogGroupRequest
+	CreateLogGroupRequest(*types.CreateLogGroupInput) cloudwatchlogs.CreateLogGroupRequest
 
-	CreateLogStreamRequest(*cloudwatchlogs.CreateLogStreamInput) cloudwatchlogs.CreateLogStreamRequest
+	CreateLogStreamRequest(*types.CreateLogStreamInput) cloudwatchlogs.CreateLogStreamRequest
 
-	DeleteDestinationRequest(*cloudwatchlogs.DeleteDestinationInput) cloudwatchlogs.DeleteDestinationRequest
+	DeleteDestinationRequest(*types.DeleteDestinationInput) cloudwatchlogs.DeleteDestinationRequest
 
-	DeleteLogGroupRequest(*cloudwatchlogs.DeleteLogGroupInput) cloudwatchlogs.DeleteLogGroupRequest
+	DeleteLogGroupRequest(*types.DeleteLogGroupInput) cloudwatchlogs.DeleteLogGroupRequest
 
-	DeleteLogStreamRequest(*cloudwatchlogs.DeleteLogStreamInput) cloudwatchlogs.DeleteLogStreamRequest
+	DeleteLogStreamRequest(*types.DeleteLogStreamInput) cloudwatchlogs.DeleteLogStreamRequest
 
-	DeleteMetricFilterRequest(*cloudwatchlogs.DeleteMetricFilterInput) cloudwatchlogs.DeleteMetricFilterRequest
+	DeleteMetricFilterRequest(*types.DeleteMetricFilterInput) cloudwatchlogs.DeleteMetricFilterRequest
 
-	DeleteResourcePolicyRequest(*cloudwatchlogs.DeleteResourcePolicyInput) cloudwatchlogs.DeleteResourcePolicyRequest
+	DeleteResourcePolicyRequest(*types.DeleteResourcePolicyInput) cloudwatchlogs.DeleteResourcePolicyRequest
 
-	DeleteRetentionPolicyRequest(*cloudwatchlogs.DeleteRetentionPolicyInput) cloudwatchlogs.DeleteRetentionPolicyRequest
+	DeleteRetentionPolicyRequest(*types.DeleteRetentionPolicyInput) cloudwatchlogs.DeleteRetentionPolicyRequest
 
-	DeleteSubscriptionFilterRequest(*cloudwatchlogs.DeleteSubscriptionFilterInput) cloudwatchlogs.DeleteSubscriptionFilterRequest
+	DeleteSubscriptionFilterRequest(*types.DeleteSubscriptionFilterInput) cloudwatchlogs.DeleteSubscriptionFilterRequest
 
-	DescribeDestinationsRequest(*cloudwatchlogs.DescribeDestinationsInput) cloudwatchlogs.DescribeDestinationsRequest
+	DescribeDestinationsRequest(*types.DescribeDestinationsInput) cloudwatchlogs.DescribeDestinationsRequest
 
-	DescribeExportTasksRequest(*cloudwatchlogs.DescribeExportTasksInput) cloudwatchlogs.DescribeExportTasksRequest
+	DescribeExportTasksRequest(*types.DescribeExportTasksInput) cloudwatchlogs.DescribeExportTasksRequest
 
-	DescribeLogGroupsRequest(*cloudwatchlogs.DescribeLogGroupsInput) cloudwatchlogs.DescribeLogGroupsRequest
+	DescribeLogGroupsRequest(*types.DescribeLogGroupsInput) cloudwatchlogs.DescribeLogGroupsRequest
 
-	DescribeLogStreamsRequest(*cloudwatchlogs.DescribeLogStreamsInput) cloudwatchlogs.DescribeLogStreamsRequest
+	DescribeLogStreamsRequest(*types.DescribeLogStreamsInput) cloudwatchlogs.DescribeLogStreamsRequest
 
-	DescribeMetricFiltersRequest(*cloudwatchlogs.DescribeMetricFiltersInput) cloudwatchlogs.DescribeMetricFiltersRequest
+	DescribeMetricFiltersRequest(*types.DescribeMetricFiltersInput) cloudwatchlogs.DescribeMetricFiltersRequest
 
-	DescribeQueriesRequest(*cloudwatchlogs.DescribeQueriesInput) cloudwatchlogs.DescribeQueriesRequest
+	DescribeQueriesRequest(*types.DescribeQueriesInput) cloudwatchlogs.DescribeQueriesRequest
 
-	DescribeResourcePoliciesRequest(*cloudwatchlogs.DescribeResourcePoliciesInput) cloudwatchlogs.DescribeResourcePoliciesRequest
+	DescribeResourcePoliciesRequest(*types.DescribeResourcePoliciesInput) cloudwatchlogs.DescribeResourcePoliciesRequest
 
-	DescribeSubscriptionFiltersRequest(*cloudwatchlogs.DescribeSubscriptionFiltersInput) cloudwatchlogs.DescribeSubscriptionFiltersRequest
+	DescribeSubscriptionFiltersRequest(*types.DescribeSubscriptionFiltersInput) cloudwatchlogs.DescribeSubscriptionFiltersRequest
 
-	DisassociateKmsKeyRequest(*cloudwatchlogs.DisassociateKmsKeyInput) cloudwatchlogs.DisassociateKmsKeyRequest
+	DisassociateKmsKeyRequest(*types.DisassociateKmsKeyInput) cloudwatchlogs.DisassociateKmsKeyRequest
 
-	FilterLogEventsRequest(*cloudwatchlogs.FilterLogEventsInput) cloudwatchlogs.FilterLogEventsRequest
+	FilterLogEventsRequest(*types.FilterLogEventsInput) cloudwatchlogs.FilterLogEventsRequest
 
-	GetLogEventsRequest(*cloudwatchlogs.GetLogEventsInput) cloudwatchlogs.GetLogEventsRequest
+	GetLogEventsRequest(*types.GetLogEventsInput) cloudwatchlogs.GetLogEventsRequest
 
-	GetLogGroupFieldsRequest(*cloudwatchlogs.GetLogGroupFieldsInput) cloudwatchlogs.GetLogGroupFieldsRequest
+	GetLogGroupFieldsRequest(*types.GetLogGroupFieldsInput) cloudwatchlogs.GetLogGroupFieldsRequest
 
-	GetLogRecordRequest(*cloudwatchlogs.GetLogRecordInput) cloudwatchlogs.GetLogRecordRequest
+	GetLogRecordRequest(*types.GetLogRecordInput) cloudwatchlogs.GetLogRecordRequest
 
-	GetQueryResultsRequest(*cloudwatchlogs.GetQueryResultsInput) cloudwatchlogs.GetQueryResultsRequest
+	GetQueryResultsRequest(*types.GetQueryResultsInput) cloudwatchlogs.GetQueryResultsRequest
 
-	ListTagsLogGroupRequest(*cloudwatchlogs.ListTagsLogGroupInput) cloudwatchlogs.ListTagsLogGroupRequest
+	ListTagsLogGroupRequest(*types.ListTagsLogGroupInput) cloudwatchlogs.ListTagsLogGroupRequest
 
-	PutDestinationRequest(*cloudwatchlogs.PutDestinationInput) cloudwatchlogs.PutDestinationRequest
+	PutDestinationRequest(*types.PutDestinationInput) cloudwatchlogs.PutDestinationRequest
 
-	PutDestinationPolicyRequest(*cloudwatchlogs.PutDestinationPolicyInput) cloudwatchlogs.PutDestinationPolicyRequest
+	PutDestinationPolicyRequest(*types.PutDestinationPolicyInput) cloudwatchlogs.PutDestinationPolicyRequest
 
-	PutLogEventsRequest(*cloudwatchlogs.PutLogEventsInput) cloudwatchlogs.PutLogEventsRequest
+	PutLogEventsRequest(*types.PutLogEventsInput) cloudwatchlogs.PutLogEventsRequest
 
-	PutMetricFilterRequest(*cloudwatchlogs.PutMetricFilterInput) cloudwatchlogs.PutMetricFilterRequest
+	PutMetricFilterRequest(*types.PutMetricFilterInput) cloudwatchlogs.PutMetricFilterRequest
 
-	PutResourcePolicyRequest(*cloudwatchlogs.PutResourcePolicyInput) cloudwatchlogs.PutResourcePolicyRequest
+	PutResourcePolicyRequest(*types.PutResourcePolicyInput) cloudwatchlogs.PutResourcePolicyRequest
 
-	PutRetentionPolicyRequest(*cloudwatchlogs.PutRetentionPolicyInput) cloudwatchlogs.PutRetentionPolicyRequest
+	PutRetentionPolicyRequest(*types.PutRetentionPolicyInput) cloudwatchlogs.PutRetentionPolicyRequest
 
-	PutSubscriptionFilterRequest(*cloudwatchlogs.PutSubscriptionFilterInput) cloudwatchlogs.PutSubscriptionFilterRequest
+	PutSubscriptionFilterRequest(*types.PutSubscriptionFilterInput) cloudwatchlogs.PutSubscriptionFilterRequest
 
-	StartQueryRequest(*cloudwatchlogs.StartQueryInput) cloudwatchlogs.StartQueryRequest
+	StartQueryRequest(*types.StartQueryInput) cloudwatchlogs.StartQueryRequest
 
-	StopQueryRequest(*cloudwatchlogs.StopQueryInput) cloudwatchlogs.StopQueryRequest
+	StopQueryRequest(*types.StopQueryInput) cloudwatchlogs.StopQueryRequest
 
-	TagLogGroupRequest(*cloudwatchlogs.TagLogGroupInput) cloudwatchlogs.TagLogGroupRequest
+	TagLogGroupRequest(*types.TagLogGroupInput) cloudwatchlogs.TagLogGroupRequest
 
-	TestMetricFilterRequest(*cloudwatchlogs.TestMetricFilterInput) cloudwatchlogs.TestMetricFilterRequest
+	TestMetricFilterRequest(*types.TestMetricFilterInput) cloudwatchlogs.TestMetricFilterRequest
 
-	UntagLogGroupRequest(*cloudwatchlogs.UntagLogGroupInput) cloudwatchlogs.UntagLogGroupRequest
+	UntagLogGroupRequest(*types.UntagLogGroupInput) cloudwatchlogs.UntagLogGroupRequest
 }
 
 var _ ClientAPI = (*cloudwatchlogs.Client)(nil)

@@ -6,111 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/ram/types"
 )
-
-type ListPendingInvitationResourcesInput struct {
-	_ struct{} `type:"structure"`
-
-	// The maximum number of results to return with a single call. To retrieve the
-	// remaining results, make another call with the returned nextToken value.
-	MaxResults *int64 `locationName:"maxResults" min:"1" type:"integer"`
-
-	// The token for the next page of results.
-	NextToken *string `locationName:"nextToken" type:"string"`
-
-	// The Amazon Resource Name (ARN) of the invitation.
-	//
-	// ResourceShareInvitationArn is a required field
-	ResourceShareInvitationArn *string `locationName:"resourceShareInvitationArn" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s ListPendingInvitationResourcesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListPendingInvitationResourcesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListPendingInvitationResourcesInput"}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-
-	if s.ResourceShareInvitationArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ResourceShareInvitationArn"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListPendingInvitationResourcesInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.MaxResults != nil {
-		v := *s.MaxResults
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "maxResults", protocol.Int64Value(v), metadata)
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.ResourceShareInvitationArn != nil {
-		v := *s.ResourceShareInvitationArn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "resourceShareInvitationArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type ListPendingInvitationResourcesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The token to use to retrieve the next page of results. This value is null
-	// when there are no more results to return.
-	NextToken *string `locationName:"nextToken" type:"string"`
-
-	// Information about the resources included the resource share.
-	Resources []Resource `locationName:"resources" type:"list"`
-}
-
-// String returns the string representation
-func (s ListPendingInvitationResourcesOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListPendingInvitationResourcesOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Resources != nil {
-		v := s.Resources
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "resources", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	return nil
-}
 
 const opListPendingInvitationResources = "ListPendingInvitationResources"
 
@@ -128,7 +25,7 @@ const opListPendingInvitationResources = "ListPendingInvitationResources"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/ListPendingInvitationResources
-func (c *Client) ListPendingInvitationResourcesRequest(input *ListPendingInvitationResourcesInput) ListPendingInvitationResourcesRequest {
+func (c *Client) ListPendingInvitationResourcesRequest(input *types.ListPendingInvitationResourcesInput) ListPendingInvitationResourcesRequest {
 	op := &aws.Operation{
 		Name:       opListPendingInvitationResources,
 		HTTPMethod: "POST",
@@ -142,10 +39,10 @@ func (c *Client) ListPendingInvitationResourcesRequest(input *ListPendingInvitat
 	}
 
 	if input == nil {
-		input = &ListPendingInvitationResourcesInput{}
+		input = &types.ListPendingInvitationResourcesInput{}
 	}
 
-	req := c.newRequest(op, input, &ListPendingInvitationResourcesOutput{})
+	req := c.newRequest(op, input, &types.ListPendingInvitationResourcesOutput{})
 	return ListPendingInvitationResourcesRequest{Request: req, Input: input, Copy: c.ListPendingInvitationResourcesRequest}
 }
 
@@ -153,8 +50,8 @@ func (c *Client) ListPendingInvitationResourcesRequest(input *ListPendingInvitat
 // ListPendingInvitationResources API operation.
 type ListPendingInvitationResourcesRequest struct {
 	*aws.Request
-	Input *ListPendingInvitationResourcesInput
-	Copy  func(*ListPendingInvitationResourcesInput) ListPendingInvitationResourcesRequest
+	Input *types.ListPendingInvitationResourcesInput
+	Copy  func(*types.ListPendingInvitationResourcesInput) ListPendingInvitationResourcesRequest
 }
 
 // Send marshals and sends the ListPendingInvitationResources API request.
@@ -166,7 +63,7 @@ func (r ListPendingInvitationResourcesRequest) Send(ctx context.Context) (*ListP
 	}
 
 	resp := &ListPendingInvitationResourcesResponse{
-		ListPendingInvitationResourcesOutput: r.Request.Data.(*ListPendingInvitationResourcesOutput),
+		ListPendingInvitationResourcesOutput: r.Request.Data.(*types.ListPendingInvitationResourcesOutput),
 		response:                             &aws.Response{Request: r.Request},
 	}
 
@@ -196,7 +93,7 @@ func NewListPendingInvitationResourcesPaginator(req ListPendingInvitationResourc
 	return ListPendingInvitationResourcesPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListPendingInvitationResourcesInput
+				var inCpy *types.ListPendingInvitationResourcesInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -216,14 +113,14 @@ type ListPendingInvitationResourcesPaginator struct {
 	aws.Pager
 }
 
-func (p *ListPendingInvitationResourcesPaginator) CurrentPage() *ListPendingInvitationResourcesOutput {
-	return p.Pager.CurrentPage().(*ListPendingInvitationResourcesOutput)
+func (p *ListPendingInvitationResourcesPaginator) CurrentPage() *types.ListPendingInvitationResourcesOutput {
+	return p.Pager.CurrentPage().(*types.ListPendingInvitationResourcesOutput)
 }
 
 // ListPendingInvitationResourcesResponse is the response type for the
 // ListPendingInvitationResources API operation.
 type ListPendingInvitationResourcesResponse struct {
-	*ListPendingInvitationResourcesOutput
+	*types.ListPendingInvitationResourcesOutput
 
 	response *aws.Response
 }

@@ -10,6 +10,7 @@ package qldbiface
 
 import (
 	"github.com/aws/aws-sdk-go-v2/service/qldb"
+	"github.com/aws/aws-sdk-go-v2/service/qldb/types"
 )
 
 // ClientAPI provides an interface to enable mocking the
@@ -43,7 +44,7 @@ import (
 //    type mockClientClient struct {
 //        qldbiface.ClientPI
 //    }
-//    func (m *mockClientClient) CreateLedger(input *qldb.CreateLedgerInput) (*qldb.CreateLedgerOutput, error) {
+//    func (m *mockClientClient) CreateLedger(input *types.CreateLedgerInput) (*types.CreateLedgerOutput, error) {
 //        // mock response/functionality
 //    }
 //
@@ -61,35 +62,35 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type ClientAPI interface {
-	CreateLedgerRequest(*qldb.CreateLedgerInput) qldb.CreateLedgerRequest
+	CreateLedgerRequest(*types.CreateLedgerInput) qldb.CreateLedgerRequest
 
-	DeleteLedgerRequest(*qldb.DeleteLedgerInput) qldb.DeleteLedgerRequest
+	DeleteLedgerRequest(*types.DeleteLedgerInput) qldb.DeleteLedgerRequest
 
-	DescribeJournalS3ExportRequest(*qldb.DescribeJournalS3ExportInput) qldb.DescribeJournalS3ExportRequest
+	DescribeJournalS3ExportRequest(*types.DescribeJournalS3ExportInput) qldb.DescribeJournalS3ExportRequest
 
-	DescribeLedgerRequest(*qldb.DescribeLedgerInput) qldb.DescribeLedgerRequest
+	DescribeLedgerRequest(*types.DescribeLedgerInput) qldb.DescribeLedgerRequest
 
-	ExportJournalToS3Request(*qldb.ExportJournalToS3Input) qldb.ExportJournalToS3Request
+	ExportJournalToS3Request(*types.ExportJournalToS3Input) qldb.ExportJournalToS3Request
 
-	GetBlockRequest(*qldb.GetBlockInput) qldb.GetBlockRequest
+	GetBlockRequest(*types.GetBlockInput) qldb.GetBlockRequest
 
-	GetDigestRequest(*qldb.GetDigestInput) qldb.GetDigestRequest
+	GetDigestRequest(*types.GetDigestInput) qldb.GetDigestRequest
 
-	GetRevisionRequest(*qldb.GetRevisionInput) qldb.GetRevisionRequest
+	GetRevisionRequest(*types.GetRevisionInput) qldb.GetRevisionRequest
 
-	ListJournalS3ExportsRequest(*qldb.ListJournalS3ExportsInput) qldb.ListJournalS3ExportsRequest
+	ListJournalS3ExportsRequest(*types.ListJournalS3ExportsInput) qldb.ListJournalS3ExportsRequest
 
-	ListJournalS3ExportsForLedgerRequest(*qldb.ListJournalS3ExportsForLedgerInput) qldb.ListJournalS3ExportsForLedgerRequest
+	ListJournalS3ExportsForLedgerRequest(*types.ListJournalS3ExportsForLedgerInput) qldb.ListJournalS3ExportsForLedgerRequest
 
-	ListLedgersRequest(*qldb.ListLedgersInput) qldb.ListLedgersRequest
+	ListLedgersRequest(*types.ListLedgersInput) qldb.ListLedgersRequest
 
-	ListTagsForResourceRequest(*qldb.ListTagsForResourceInput) qldb.ListTagsForResourceRequest
+	ListTagsForResourceRequest(*types.ListTagsForResourceInput) qldb.ListTagsForResourceRequest
 
-	TagResourceRequest(*qldb.TagResourceInput) qldb.TagResourceRequest
+	TagResourceRequest(*types.TagResourceInput) qldb.TagResourceRequest
 
-	UntagResourceRequest(*qldb.UntagResourceInput) qldb.UntagResourceRequest
+	UntagResourceRequest(*types.UntagResourceInput) qldb.UntagResourceRequest
 
-	UpdateLedgerRequest(*qldb.UpdateLedgerInput) qldb.UpdateLedgerRequest
+	UpdateLedgerRequest(*types.UpdateLedgerInput) qldb.UpdateLedgerRequest
 }
 
 var _ ClientAPI = (*qldb.Client)(nil)

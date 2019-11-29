@@ -6,67 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/elasticloadbalancing/types"
 )
-
-// Contains the parameters for ModifyLoadBalancerAttributes.
-type ModifyLoadBalancerAttributesInput struct {
-	_ struct{} `type:"structure"`
-
-	// The attributes for the load balancer.
-	//
-	// LoadBalancerAttributes is a required field
-	LoadBalancerAttributes *LoadBalancerAttributes `type:"structure" required:"true"`
-
-	// The name of the load balancer.
-	//
-	// LoadBalancerName is a required field
-	LoadBalancerName *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s ModifyLoadBalancerAttributesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ModifyLoadBalancerAttributesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ModifyLoadBalancerAttributesInput"}
-
-	if s.LoadBalancerAttributes == nil {
-		invalidParams.Add(aws.NewErrParamRequired("LoadBalancerAttributes"))
-	}
-
-	if s.LoadBalancerName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("LoadBalancerName"))
-	}
-	if s.LoadBalancerAttributes != nil {
-		if err := s.LoadBalancerAttributes.Validate(); err != nil {
-			invalidParams.AddNested("LoadBalancerAttributes", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Contains the output of ModifyLoadBalancerAttributes.
-type ModifyLoadBalancerAttributesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Information about the load balancer attributes.
-	LoadBalancerAttributes *LoadBalancerAttributes `type:"structure"`
-
-	// The name of the load balancer.
-	LoadBalancerName *string `type:"string"`
-}
-
-// String returns the string representation
-func (s ModifyLoadBalancerAttributesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opModifyLoadBalancerAttributes = "ModifyLoadBalancerAttributes"
 
@@ -98,7 +39,7 @@ const opModifyLoadBalancerAttributes = "ModifyLoadBalancerAttributes"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/ModifyLoadBalancerAttributes
-func (c *Client) ModifyLoadBalancerAttributesRequest(input *ModifyLoadBalancerAttributesInput) ModifyLoadBalancerAttributesRequest {
+func (c *Client) ModifyLoadBalancerAttributesRequest(input *types.ModifyLoadBalancerAttributesInput) ModifyLoadBalancerAttributesRequest {
 	op := &aws.Operation{
 		Name:       opModifyLoadBalancerAttributes,
 		HTTPMethod: "POST",
@@ -106,10 +47,10 @@ func (c *Client) ModifyLoadBalancerAttributesRequest(input *ModifyLoadBalancerAt
 	}
 
 	if input == nil {
-		input = &ModifyLoadBalancerAttributesInput{}
+		input = &types.ModifyLoadBalancerAttributesInput{}
 	}
 
-	req := c.newRequest(op, input, &ModifyLoadBalancerAttributesOutput{})
+	req := c.newRequest(op, input, &types.ModifyLoadBalancerAttributesOutput{})
 	return ModifyLoadBalancerAttributesRequest{Request: req, Input: input, Copy: c.ModifyLoadBalancerAttributesRequest}
 }
 
@@ -117,8 +58,8 @@ func (c *Client) ModifyLoadBalancerAttributesRequest(input *ModifyLoadBalancerAt
 // ModifyLoadBalancerAttributes API operation.
 type ModifyLoadBalancerAttributesRequest struct {
 	*aws.Request
-	Input *ModifyLoadBalancerAttributesInput
-	Copy  func(*ModifyLoadBalancerAttributesInput) ModifyLoadBalancerAttributesRequest
+	Input *types.ModifyLoadBalancerAttributesInput
+	Copy  func(*types.ModifyLoadBalancerAttributesInput) ModifyLoadBalancerAttributesRequest
 }
 
 // Send marshals and sends the ModifyLoadBalancerAttributes API request.
@@ -130,7 +71,7 @@ func (r ModifyLoadBalancerAttributesRequest) Send(ctx context.Context) (*ModifyL
 	}
 
 	resp := &ModifyLoadBalancerAttributesResponse{
-		ModifyLoadBalancerAttributesOutput: r.Request.Data.(*ModifyLoadBalancerAttributesOutput),
+		ModifyLoadBalancerAttributesOutput: r.Request.Data.(*types.ModifyLoadBalancerAttributesOutput),
 		response:                           &aws.Response{Request: r.Request},
 	}
 
@@ -140,7 +81,7 @@ func (r ModifyLoadBalancerAttributesRequest) Send(ctx context.Context) (*ModifyL
 // ModifyLoadBalancerAttributesResponse is the response type for the
 // ModifyLoadBalancerAttributes API operation.
 type ModifyLoadBalancerAttributesResponse struct {
-	*ModifyLoadBalancerAttributesOutput
+	*types.ModifyLoadBalancerAttributesOutput
 
 	response *aws.Response
 }

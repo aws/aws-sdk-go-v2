@@ -6,48 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/comprehend/types"
 )
-
-type DescribeEntityRecognizerInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) that identifies the entity recognizer.
-	//
-	// EntityRecognizerArn is a required field
-	EntityRecognizerArn *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeEntityRecognizerInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeEntityRecognizerInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeEntityRecognizerInput"}
-
-	if s.EntityRecognizerArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("EntityRecognizerArn"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribeEntityRecognizerOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Describes information associated with an entity recognizer.
-	EntityRecognizerProperties *EntityRecognizerProperties `type:"structure"`
-}
-
-// String returns the string representation
-func (s DescribeEntityRecognizerOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeEntityRecognizer = "DescribeEntityRecognizer"
 
@@ -65,7 +25,7 @@ const opDescribeEntityRecognizer = "DescribeEntityRecognizer"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/DescribeEntityRecognizer
-func (c *Client) DescribeEntityRecognizerRequest(input *DescribeEntityRecognizerInput) DescribeEntityRecognizerRequest {
+func (c *Client) DescribeEntityRecognizerRequest(input *types.DescribeEntityRecognizerInput) DescribeEntityRecognizerRequest {
 	op := &aws.Operation{
 		Name:       opDescribeEntityRecognizer,
 		HTTPMethod: "POST",
@@ -73,10 +33,10 @@ func (c *Client) DescribeEntityRecognizerRequest(input *DescribeEntityRecognizer
 	}
 
 	if input == nil {
-		input = &DescribeEntityRecognizerInput{}
+		input = &types.DescribeEntityRecognizerInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeEntityRecognizerOutput{})
+	req := c.newRequest(op, input, &types.DescribeEntityRecognizerOutput{})
 	return DescribeEntityRecognizerRequest{Request: req, Input: input, Copy: c.DescribeEntityRecognizerRequest}
 }
 
@@ -84,8 +44,8 @@ func (c *Client) DescribeEntityRecognizerRequest(input *DescribeEntityRecognizer
 // DescribeEntityRecognizer API operation.
 type DescribeEntityRecognizerRequest struct {
 	*aws.Request
-	Input *DescribeEntityRecognizerInput
-	Copy  func(*DescribeEntityRecognizerInput) DescribeEntityRecognizerRequest
+	Input *types.DescribeEntityRecognizerInput
+	Copy  func(*types.DescribeEntityRecognizerInput) DescribeEntityRecognizerRequest
 }
 
 // Send marshals and sends the DescribeEntityRecognizer API request.
@@ -97,7 +57,7 @@ func (r DescribeEntityRecognizerRequest) Send(ctx context.Context) (*DescribeEnt
 	}
 
 	resp := &DescribeEntityRecognizerResponse{
-		DescribeEntityRecognizerOutput: r.Request.Data.(*DescribeEntityRecognizerOutput),
+		DescribeEntityRecognizerOutput: r.Request.Data.(*types.DescribeEntityRecognizerOutput),
 		response:                       &aws.Response{Request: r.Request},
 	}
 
@@ -107,7 +67,7 @@ func (r DescribeEntityRecognizerRequest) Send(ctx context.Context) (*DescribeEnt
 // DescribeEntityRecognizerResponse is the response type for the
 // DescribeEntityRecognizer API operation.
 type DescribeEntityRecognizerResponse struct {
-	*DescribeEntityRecognizerOutput
+	*types.DescribeEntityRecognizerOutput
 
 	response *aws.Response
 }

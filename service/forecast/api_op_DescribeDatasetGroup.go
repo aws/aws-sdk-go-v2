@@ -4,90 +4,10 @@ package forecast
 
 import (
 	"context"
-	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/forecast/types"
 )
-
-type DescribeDatasetGroupInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the dataset group.
-	//
-	// DatasetGroupArn is a required field
-	DatasetGroupArn *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeDatasetGroupInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeDatasetGroupInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeDatasetGroupInput"}
-
-	if s.DatasetGroupArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DatasetGroupArn"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribeDatasetGroupOutput struct {
-	_ struct{} `type:"structure"`
-
-	// When the dataset group was created.
-	CreationTime *time.Time `type:"timestamp"`
-
-	// An array of Amazon Resource Names (ARNs) of the datasets contained in the
-	// dataset group.
-	DatasetArns []string `type:"list"`
-
-	// The ARN of the dataset group.
-	DatasetGroupArn *string `type:"string"`
-
-	// The name of the dataset group.
-	DatasetGroupName *string `min:"1" type:"string"`
-
-	// The domain associated with the dataset group. The Domain and DatasetType
-	// that you choose determine the fields that must be present in the training
-	// data that you import to the dataset. For example, if you choose the RETAIL
-	// domain and TARGET_TIME_SERIES as the DatasetType, Amazon Forecast requires
-	// item_id, timestamp, and demand fields to be present in your data. For more
-	// information, see howitworks-datasets-groups.
-	Domain Domain `type:"string" enum:"true"`
-
-	// When the dataset group was created or last updated from a call to the UpdateDatasetGroup
-	// operation. While the dataset group is being updated, LastModificationTime
-	// is the current query time.
-	LastModificationTime *time.Time `type:"timestamp"`
-
-	// The status of the dataset group. States include:
-	//
-	//    * ACTIVE
-	//
-	//    * CREATE_PENDING, CREATE_IN_PROGRESS, CREATE_FAILED
-	//
-	//    * DELETE_PENDING, DELETE_IN_PROGRESS, DELETE_FAILED
-	//
-	//    * UPDATE_PENDING, UPDATE_IN_PROGRESS, UPDATE_FAILED
-	//
-	// The UPDATE states apply when the UpdateDatasetGroup operation is called.
-	//
-	// The Status of the dataset group must be ACTIVE before creating a predictor
-	// using the dataset group.
-	Status *string `type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeDatasetGroupOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeDatasetGroup = "DescribeDatasetGroup"
 
@@ -115,7 +35,7 @@ const opDescribeDatasetGroup = "DescribeDatasetGroup"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/DescribeDatasetGroup
-func (c *Client) DescribeDatasetGroupRequest(input *DescribeDatasetGroupInput) DescribeDatasetGroupRequest {
+func (c *Client) DescribeDatasetGroupRequest(input *types.DescribeDatasetGroupInput) DescribeDatasetGroupRequest {
 	op := &aws.Operation{
 		Name:       opDescribeDatasetGroup,
 		HTTPMethod: "POST",
@@ -123,10 +43,10 @@ func (c *Client) DescribeDatasetGroupRequest(input *DescribeDatasetGroupInput) D
 	}
 
 	if input == nil {
-		input = &DescribeDatasetGroupInput{}
+		input = &types.DescribeDatasetGroupInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeDatasetGroupOutput{})
+	req := c.newRequest(op, input, &types.DescribeDatasetGroupOutput{})
 	return DescribeDatasetGroupRequest{Request: req, Input: input, Copy: c.DescribeDatasetGroupRequest}
 }
 
@@ -134,8 +54,8 @@ func (c *Client) DescribeDatasetGroupRequest(input *DescribeDatasetGroupInput) D
 // DescribeDatasetGroup API operation.
 type DescribeDatasetGroupRequest struct {
 	*aws.Request
-	Input *DescribeDatasetGroupInput
-	Copy  func(*DescribeDatasetGroupInput) DescribeDatasetGroupRequest
+	Input *types.DescribeDatasetGroupInput
+	Copy  func(*types.DescribeDatasetGroupInput) DescribeDatasetGroupRequest
 }
 
 // Send marshals and sends the DescribeDatasetGroup API request.
@@ -147,7 +67,7 @@ func (r DescribeDatasetGroupRequest) Send(ctx context.Context) (*DescribeDataset
 	}
 
 	resp := &DescribeDatasetGroupResponse{
-		DescribeDatasetGroupOutput: r.Request.Data.(*DescribeDatasetGroupOutput),
+		DescribeDatasetGroupOutput: r.Request.Data.(*types.DescribeDatasetGroupOutput),
 		response:                   &aws.Response{Request: r.Request},
 	}
 
@@ -157,7 +77,7 @@ func (r DescribeDatasetGroupRequest) Send(ctx context.Context) (*DescribeDataset
 // DescribeDatasetGroupResponse is the response type for the
 // DescribeDatasetGroup API operation.
 type DescribeDatasetGroupResponse struct {
-	*DescribeDatasetGroupOutput
+	*types.DescribeDatasetGroupOutput
 
 	response *aws.Response
 }

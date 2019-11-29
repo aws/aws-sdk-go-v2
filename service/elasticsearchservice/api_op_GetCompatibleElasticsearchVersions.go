@@ -6,82 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/elasticsearchservice/types"
 )
-
-// Container for request parameters to GetCompatibleElasticsearchVersions operation.
-type GetCompatibleElasticsearchVersionsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of an Elasticsearch domain. Domain names are unique across the domains
-	// owned by an account within an AWS region. Domain names start with a letter
-	// or number and can contain the following characters: a-z (lowercase), 0-9,
-	// and - (hyphen).
-	DomainName *string `location:"querystring" locationName:"domainName" min:"3" type:"string"`
-}
-
-// String returns the string representation
-func (s GetCompatibleElasticsearchVersionsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetCompatibleElasticsearchVersionsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetCompatibleElasticsearchVersionsInput"}
-	if s.DomainName != nil && len(*s.DomainName) < 3 {
-		invalidParams.Add(aws.NewErrParamMinLen("DomainName", 3))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetCompatibleElasticsearchVersionsInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.DomainName != nil {
-		v := *s.DomainName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "domainName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-// Container for response returned by GetCompatibleElasticsearchVersions operation.
-type GetCompatibleElasticsearchVersionsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A map of compatible Elasticsearch versions returned as part of the GetCompatibleElasticsearchVersions
-	// operation.
-	CompatibleElasticsearchVersions []CompatibleVersionsMap `type:"list"`
-}
-
-// String returns the string representation
-func (s GetCompatibleElasticsearchVersionsOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetCompatibleElasticsearchVersionsOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.CompatibleElasticsearchVersions != nil {
-		v := s.CompatibleElasticsearchVersions
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "CompatibleElasticsearchVersions", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	return nil
-}
 
 const opGetCompatibleElasticsearchVersions = "GetCompatibleElasticsearchVersions"
 
@@ -98,7 +24,7 @@ const opGetCompatibleElasticsearchVersions = "GetCompatibleElasticsearchVersions
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) GetCompatibleElasticsearchVersionsRequest(input *GetCompatibleElasticsearchVersionsInput) GetCompatibleElasticsearchVersionsRequest {
+func (c *Client) GetCompatibleElasticsearchVersionsRequest(input *types.GetCompatibleElasticsearchVersionsInput) GetCompatibleElasticsearchVersionsRequest {
 	op := &aws.Operation{
 		Name:       opGetCompatibleElasticsearchVersions,
 		HTTPMethod: "GET",
@@ -106,10 +32,10 @@ func (c *Client) GetCompatibleElasticsearchVersionsRequest(input *GetCompatibleE
 	}
 
 	if input == nil {
-		input = &GetCompatibleElasticsearchVersionsInput{}
+		input = &types.GetCompatibleElasticsearchVersionsInput{}
 	}
 
-	req := c.newRequest(op, input, &GetCompatibleElasticsearchVersionsOutput{})
+	req := c.newRequest(op, input, &types.GetCompatibleElasticsearchVersionsOutput{})
 	return GetCompatibleElasticsearchVersionsRequest{Request: req, Input: input, Copy: c.GetCompatibleElasticsearchVersionsRequest}
 }
 
@@ -117,8 +43,8 @@ func (c *Client) GetCompatibleElasticsearchVersionsRequest(input *GetCompatibleE
 // GetCompatibleElasticsearchVersions API operation.
 type GetCompatibleElasticsearchVersionsRequest struct {
 	*aws.Request
-	Input *GetCompatibleElasticsearchVersionsInput
-	Copy  func(*GetCompatibleElasticsearchVersionsInput) GetCompatibleElasticsearchVersionsRequest
+	Input *types.GetCompatibleElasticsearchVersionsInput
+	Copy  func(*types.GetCompatibleElasticsearchVersionsInput) GetCompatibleElasticsearchVersionsRequest
 }
 
 // Send marshals and sends the GetCompatibleElasticsearchVersions API request.
@@ -130,7 +56,7 @@ func (r GetCompatibleElasticsearchVersionsRequest) Send(ctx context.Context) (*G
 	}
 
 	resp := &GetCompatibleElasticsearchVersionsResponse{
-		GetCompatibleElasticsearchVersionsOutput: r.Request.Data.(*GetCompatibleElasticsearchVersionsOutput),
+		GetCompatibleElasticsearchVersionsOutput: r.Request.Data.(*types.GetCompatibleElasticsearchVersionsOutput),
 		response:                                 &aws.Response{Request: r.Request},
 	}
 
@@ -140,7 +66,7 @@ func (r GetCompatibleElasticsearchVersionsRequest) Send(ctx context.Context) (*G
 // GetCompatibleElasticsearchVersionsResponse is the response type for the
 // GetCompatibleElasticsearchVersions API operation.
 type GetCompatibleElasticsearchVersionsResponse struct {
-	*GetCompatibleElasticsearchVersionsOutput
+	*types.GetCompatibleElasticsearchVersionsOutput
 
 	response *aws.Response
 }

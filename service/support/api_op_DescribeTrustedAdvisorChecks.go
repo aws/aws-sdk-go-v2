@@ -6,54 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/support/types"
 )
-
-type DescribeTrustedAdvisorChecksInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ISO 639-1 code for the language in which AWS provides support. AWS Support
-	// currently supports English ("en") and Japanese ("ja"). Language parameters
-	// must be passed explicitly for operations that take them.
-	//
-	// Language is a required field
-	Language *string `locationName:"language" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeTrustedAdvisorChecksInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeTrustedAdvisorChecksInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeTrustedAdvisorChecksInput"}
-
-	if s.Language == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Language"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Information about the Trusted Advisor checks returned by the DescribeTrustedAdvisorChecks
-// operation.
-type DescribeTrustedAdvisorChecksOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Information about all available Trusted Advisor checks.
-	//
-	// Checks is a required field
-	Checks []TrustedAdvisorCheckDescription `locationName:"checks" type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeTrustedAdvisorChecksOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeTrustedAdvisorChecks = "DescribeTrustedAdvisorChecks"
 
@@ -63,7 +17,8 @@ const opDescribeTrustedAdvisorChecks = "DescribeTrustedAdvisorChecks"
 // Returns information about all available Trusted Advisor checks, including
 // name, ID, category, description, and metadata. You must specify a language
 // code; English ("en") and Japanese ("ja") are currently supported. The response
-// contains a TrustedAdvisorCheckDescription for each check.
+// contains a TrustedAdvisorCheckDescription for each check. The region must
+// be set to us-east-1.
 //
 //    // Example sending a request using DescribeTrustedAdvisorChecksRequest.
 //    req := client.DescribeTrustedAdvisorChecksRequest(params)
@@ -73,7 +28,7 @@ const opDescribeTrustedAdvisorChecks = "DescribeTrustedAdvisorChecks"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/support-2013-04-15/DescribeTrustedAdvisorChecks
-func (c *Client) DescribeTrustedAdvisorChecksRequest(input *DescribeTrustedAdvisorChecksInput) DescribeTrustedAdvisorChecksRequest {
+func (c *Client) DescribeTrustedAdvisorChecksRequest(input *types.DescribeTrustedAdvisorChecksInput) DescribeTrustedAdvisorChecksRequest {
 	op := &aws.Operation{
 		Name:       opDescribeTrustedAdvisorChecks,
 		HTTPMethod: "POST",
@@ -81,10 +36,10 @@ func (c *Client) DescribeTrustedAdvisorChecksRequest(input *DescribeTrustedAdvis
 	}
 
 	if input == nil {
-		input = &DescribeTrustedAdvisorChecksInput{}
+		input = &types.DescribeTrustedAdvisorChecksInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeTrustedAdvisorChecksOutput{})
+	req := c.newRequest(op, input, &types.DescribeTrustedAdvisorChecksOutput{})
 	return DescribeTrustedAdvisorChecksRequest{Request: req, Input: input, Copy: c.DescribeTrustedAdvisorChecksRequest}
 }
 
@@ -92,8 +47,8 @@ func (c *Client) DescribeTrustedAdvisorChecksRequest(input *DescribeTrustedAdvis
 // DescribeTrustedAdvisorChecks API operation.
 type DescribeTrustedAdvisorChecksRequest struct {
 	*aws.Request
-	Input *DescribeTrustedAdvisorChecksInput
-	Copy  func(*DescribeTrustedAdvisorChecksInput) DescribeTrustedAdvisorChecksRequest
+	Input *types.DescribeTrustedAdvisorChecksInput
+	Copy  func(*types.DescribeTrustedAdvisorChecksInput) DescribeTrustedAdvisorChecksRequest
 }
 
 // Send marshals and sends the DescribeTrustedAdvisorChecks API request.
@@ -105,7 +60,7 @@ func (r DescribeTrustedAdvisorChecksRequest) Send(ctx context.Context) (*Describ
 	}
 
 	resp := &DescribeTrustedAdvisorChecksResponse{
-		DescribeTrustedAdvisorChecksOutput: r.Request.Data.(*DescribeTrustedAdvisorChecksOutput),
+		DescribeTrustedAdvisorChecksOutput: r.Request.Data.(*types.DescribeTrustedAdvisorChecksOutput),
 		response:                           &aws.Response{Request: r.Request},
 	}
 
@@ -115,7 +70,7 @@ func (r DescribeTrustedAdvisorChecksRequest) Send(ctx context.Context) (*Describ
 // DescribeTrustedAdvisorChecksResponse is the response type for the
 // DescribeTrustedAdvisorChecks API operation.
 type DescribeTrustedAdvisorChecksResponse struct {
-	*DescribeTrustedAdvisorChecksOutput
+	*types.DescribeTrustedAdvisorChecksOutput
 
 	response *aws.Response
 }

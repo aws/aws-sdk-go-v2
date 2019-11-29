@@ -4,67 +4,10 @@ package workspaces
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/workspaces/types"
 )
-
-type CreateIpGroupInput struct {
-	_ struct{} `type:"structure"`
-
-	// The description of the group.
-	GroupDesc *string `type:"string"`
-
-	// The name of the group.
-	//
-	// GroupName is a required field
-	GroupName *string `type:"string" required:"true"`
-
-	// The tags. Each WorkSpaces resource can have a maximum of 50 tags.
-	Tags []Tag `type:"list"`
-
-	// The rules to add to the group.
-	UserRules []IpRuleItem `type:"list"`
-}
-
-// String returns the string representation
-func (s CreateIpGroupInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateIpGroupInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateIpGroupInput"}
-
-	if s.GroupName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("GroupName"))
-	}
-	if s.Tags != nil {
-		for i, v := range s.Tags {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type CreateIpGroupOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The identifier of the group.
-	GroupId *string `type:"string"`
-}
-
-// String returns the string representation
-func (s CreateIpGroupOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCreateIpGroup = "CreateIpGroup"
 
@@ -93,7 +36,7 @@ const opCreateIpGroup = "CreateIpGroup"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/CreateIpGroup
-func (c *Client) CreateIpGroupRequest(input *CreateIpGroupInput) CreateIpGroupRequest {
+func (c *Client) CreateIpGroupRequest(input *types.CreateIpGroupInput) CreateIpGroupRequest {
 	op := &aws.Operation{
 		Name:       opCreateIpGroup,
 		HTTPMethod: "POST",
@@ -101,10 +44,10 @@ func (c *Client) CreateIpGroupRequest(input *CreateIpGroupInput) CreateIpGroupRe
 	}
 
 	if input == nil {
-		input = &CreateIpGroupInput{}
+		input = &types.CreateIpGroupInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateIpGroupOutput{})
+	req := c.newRequest(op, input, &types.CreateIpGroupOutput{})
 	return CreateIpGroupRequest{Request: req, Input: input, Copy: c.CreateIpGroupRequest}
 }
 
@@ -112,8 +55,8 @@ func (c *Client) CreateIpGroupRequest(input *CreateIpGroupInput) CreateIpGroupRe
 // CreateIpGroup API operation.
 type CreateIpGroupRequest struct {
 	*aws.Request
-	Input *CreateIpGroupInput
-	Copy  func(*CreateIpGroupInput) CreateIpGroupRequest
+	Input *types.CreateIpGroupInput
+	Copy  func(*types.CreateIpGroupInput) CreateIpGroupRequest
 }
 
 // Send marshals and sends the CreateIpGroup API request.
@@ -125,7 +68,7 @@ func (r CreateIpGroupRequest) Send(ctx context.Context) (*CreateIpGroupResponse,
 	}
 
 	resp := &CreateIpGroupResponse{
-		CreateIpGroupOutput: r.Request.Data.(*CreateIpGroupOutput),
+		CreateIpGroupOutput: r.Request.Data.(*types.CreateIpGroupOutput),
 		response:            &aws.Response{Request: r.Request},
 	}
 
@@ -135,7 +78,7 @@ func (r CreateIpGroupRequest) Send(ctx context.Context) (*CreateIpGroupResponse,
 // CreateIpGroupResponse is the response type for the
 // CreateIpGroup API operation.
 type CreateIpGroupResponse struct {
-	*CreateIpGroupOutput
+	*types.CreateIpGroupOutput
 
 	response *aws.Response
 }

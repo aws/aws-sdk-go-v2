@@ -6,85 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-type ImportVolumeInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Availability Zone for the resulting EBS volume.
-	//
-	// AvailabilityZone is a required field
-	AvailabilityZone *string `locationName:"availabilityZone" type:"string" required:"true"`
-
-	// A description of the volume.
-	Description *string `locationName:"description" type:"string"`
-
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have
-	// the required permissions, the error response is DryRunOperation. Otherwise,
-	// it is UnauthorizedOperation.
-	DryRun *bool `locationName:"dryRun" type:"boolean"`
-
-	// The disk image.
-	//
-	// Image is a required field
-	Image *DiskImageDetail `locationName:"image" type:"structure" required:"true"`
-
-	// The volume size.
-	//
-	// Volume is a required field
-	Volume *VolumeDetail `locationName:"volume" type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s ImportVolumeInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ImportVolumeInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ImportVolumeInput"}
-
-	if s.AvailabilityZone == nil {
-		invalidParams.Add(aws.NewErrParamRequired("AvailabilityZone"))
-	}
-
-	if s.Image == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Image"))
-	}
-
-	if s.Volume == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Volume"))
-	}
-	if s.Image != nil {
-		if err := s.Image.Validate(); err != nil {
-			invalidParams.AddNested("Image", err.(aws.ErrInvalidParams))
-		}
-	}
-	if s.Volume != nil {
-		if err := s.Volume.Validate(); err != nil {
-			invalidParams.AddNested("Volume", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ImportVolumeOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Information about the conversion task.
-	ConversionTask *ConversionTask `locationName:"conversionTask" type:"structure"`
-}
-
-// String returns the string representation
-func (s ImportVolumeOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opImportVolume = "ImportVolume"
 
@@ -105,7 +28,7 @@ const opImportVolume = "ImportVolume"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ImportVolume
-func (c *Client) ImportVolumeRequest(input *ImportVolumeInput) ImportVolumeRequest {
+func (c *Client) ImportVolumeRequest(input *types.ImportVolumeInput) ImportVolumeRequest {
 	op := &aws.Operation{
 		Name:       opImportVolume,
 		HTTPMethod: "POST",
@@ -113,10 +36,10 @@ func (c *Client) ImportVolumeRequest(input *ImportVolumeInput) ImportVolumeReque
 	}
 
 	if input == nil {
-		input = &ImportVolumeInput{}
+		input = &types.ImportVolumeInput{}
 	}
 
-	req := c.newRequest(op, input, &ImportVolumeOutput{})
+	req := c.newRequest(op, input, &types.ImportVolumeOutput{})
 	return ImportVolumeRequest{Request: req, Input: input, Copy: c.ImportVolumeRequest}
 }
 
@@ -124,8 +47,8 @@ func (c *Client) ImportVolumeRequest(input *ImportVolumeInput) ImportVolumeReque
 // ImportVolume API operation.
 type ImportVolumeRequest struct {
 	*aws.Request
-	Input *ImportVolumeInput
-	Copy  func(*ImportVolumeInput) ImportVolumeRequest
+	Input *types.ImportVolumeInput
+	Copy  func(*types.ImportVolumeInput) ImportVolumeRequest
 }
 
 // Send marshals and sends the ImportVolume API request.
@@ -137,7 +60,7 @@ func (r ImportVolumeRequest) Send(ctx context.Context) (*ImportVolumeResponse, e
 	}
 
 	resp := &ImportVolumeResponse{
-		ImportVolumeOutput: r.Request.Data.(*ImportVolumeOutput),
+		ImportVolumeOutput: r.Request.Data.(*types.ImportVolumeOutput),
 		response:           &aws.Response{Request: r.Request},
 	}
 
@@ -147,7 +70,7 @@ func (r ImportVolumeRequest) Send(ctx context.Context) (*ImportVolumeResponse, e
 // ImportVolumeResponse is the response type for the
 // ImportVolume API operation.
 type ImportVolumeResponse struct {
-	*ImportVolumeOutput
+	*types.ImportVolumeOutput
 
 	response *aws.Response
 }

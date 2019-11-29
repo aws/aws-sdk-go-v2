@@ -4,70 +4,10 @@ package emr
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/emr/types"
 )
-
-// The input argument to the AddJobFlowSteps operation.
-type AddJobFlowStepsInput struct {
-	_ struct{} `type:"structure"`
-
-	// A string that uniquely identifies the job flow. This identifier is returned
-	// by RunJobFlow and can also be obtained from ListClusters.
-	//
-	// JobFlowId is a required field
-	JobFlowId *string `type:"string" required:"true"`
-
-	// A list of StepConfig to be executed by the job flow.
-	//
-	// Steps is a required field
-	Steps []StepConfig `type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s AddJobFlowStepsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *AddJobFlowStepsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "AddJobFlowStepsInput"}
-
-	if s.JobFlowId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("JobFlowId"))
-	}
-
-	if s.Steps == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Steps"))
-	}
-	if s.Steps != nil {
-		for i, v := range s.Steps {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Steps", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// The output for the AddJobFlowSteps operation.
-type AddJobFlowStepsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The identifiers of the list of steps added to the job flow.
-	StepIds []string `type:"list"`
-}
-
-// String returns the string representation
-func (s AddJobFlowStepsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opAddJobFlowSteps = "AddJobFlowSteps"
 
@@ -106,7 +46,7 @@ const opAddJobFlowSteps = "AddJobFlowSteps"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/AddJobFlowSteps
-func (c *Client) AddJobFlowStepsRequest(input *AddJobFlowStepsInput) AddJobFlowStepsRequest {
+func (c *Client) AddJobFlowStepsRequest(input *types.AddJobFlowStepsInput) AddJobFlowStepsRequest {
 	op := &aws.Operation{
 		Name:       opAddJobFlowSteps,
 		HTTPMethod: "POST",
@@ -114,10 +54,10 @@ func (c *Client) AddJobFlowStepsRequest(input *AddJobFlowStepsInput) AddJobFlowS
 	}
 
 	if input == nil {
-		input = &AddJobFlowStepsInput{}
+		input = &types.AddJobFlowStepsInput{}
 	}
 
-	req := c.newRequest(op, input, &AddJobFlowStepsOutput{})
+	req := c.newRequest(op, input, &types.AddJobFlowStepsOutput{})
 	return AddJobFlowStepsRequest{Request: req, Input: input, Copy: c.AddJobFlowStepsRequest}
 }
 
@@ -125,8 +65,8 @@ func (c *Client) AddJobFlowStepsRequest(input *AddJobFlowStepsInput) AddJobFlowS
 // AddJobFlowSteps API operation.
 type AddJobFlowStepsRequest struct {
 	*aws.Request
-	Input *AddJobFlowStepsInput
-	Copy  func(*AddJobFlowStepsInput) AddJobFlowStepsRequest
+	Input *types.AddJobFlowStepsInput
+	Copy  func(*types.AddJobFlowStepsInput) AddJobFlowStepsRequest
 }
 
 // Send marshals and sends the AddJobFlowSteps API request.
@@ -138,7 +78,7 @@ func (r AddJobFlowStepsRequest) Send(ctx context.Context) (*AddJobFlowStepsRespo
 	}
 
 	resp := &AddJobFlowStepsResponse{
-		AddJobFlowStepsOutput: r.Request.Data.(*AddJobFlowStepsOutput),
+		AddJobFlowStepsOutput: r.Request.Data.(*types.AddJobFlowStepsOutput),
 		response:              &aws.Response{Request: r.Request},
 	}
 
@@ -148,7 +88,7 @@ func (r AddJobFlowStepsRequest) Send(ctx context.Context) (*AddJobFlowStepsRespo
 // AddJobFlowStepsResponse is the response type for the
 // AddJobFlowSteps API operation.
 type AddJobFlowStepsResponse struct {
-	*AddJobFlowStepsOutput
+	*types.AddJobFlowStepsOutput
 
 	response *aws.Response
 }

@@ -6,84 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/eventbridge/types"
 )
-
-type DescribeRuleInput struct {
-	_ struct{} `type:"structure"`
-
-	// The event bus associated with the rule. If you omit this, the default event
-	// bus is used.
-	EventBusName *string `min:"1" type:"string"`
-
-	// The name of the rule.
-	//
-	// Name is a required field
-	Name *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeRuleInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeRuleInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeRuleInput"}
-	if s.EventBusName != nil && len(*s.EventBusName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("EventBusName", 1))
-	}
-
-	if s.Name == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Name"))
-	}
-	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribeRuleOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the rule.
-	Arn *string `min:"1" type:"string"`
-
-	// The description of the rule.
-	Description *string `type:"string"`
-
-	// The event bus associated with the rule.
-	EventBusName *string `min:"1" type:"string"`
-
-	// The event pattern. For more information, see Event Patterns (https://docs.aws.amazon.com/eventbridge/latest/userguide/eventbridge-and-event-patterns.html)
-	// in the Amazon EventBridge User Guide.
-	EventPattern *string `type:"string"`
-
-	// If this is a managed rule, created by an AWS service on your behalf, this
-	// field displays the principal name of the AWS service that created the rule.
-	ManagedBy *string `min:"1" type:"string"`
-
-	// The name of the rule.
-	Name *string `min:"1" type:"string"`
-
-	// The Amazon Resource Name (ARN) of the IAM role associated with the rule.
-	RoleArn *string `min:"1" type:"string"`
-
-	// The scheduling expression: for example, "cron(0 20 * * ? *)" or "rate(5 minutes)".
-	ScheduleExpression *string `type:"string"`
-
-	// Specifies whether the rule is enabled or disabled.
-	State RuleState `type:"string" enum:"true"`
-}
-
-// String returns the string representation
-func (s DescribeRuleOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeRule = "DescribeRule"
 
@@ -103,7 +27,7 @@ const opDescribeRule = "DescribeRule"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/DescribeRule
-func (c *Client) DescribeRuleRequest(input *DescribeRuleInput) DescribeRuleRequest {
+func (c *Client) DescribeRuleRequest(input *types.DescribeRuleInput) DescribeRuleRequest {
 	op := &aws.Operation{
 		Name:       opDescribeRule,
 		HTTPMethod: "POST",
@@ -111,10 +35,10 @@ func (c *Client) DescribeRuleRequest(input *DescribeRuleInput) DescribeRuleReque
 	}
 
 	if input == nil {
-		input = &DescribeRuleInput{}
+		input = &types.DescribeRuleInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeRuleOutput{})
+	req := c.newRequest(op, input, &types.DescribeRuleOutput{})
 	return DescribeRuleRequest{Request: req, Input: input, Copy: c.DescribeRuleRequest}
 }
 
@@ -122,8 +46,8 @@ func (c *Client) DescribeRuleRequest(input *DescribeRuleInput) DescribeRuleReque
 // DescribeRule API operation.
 type DescribeRuleRequest struct {
 	*aws.Request
-	Input *DescribeRuleInput
-	Copy  func(*DescribeRuleInput) DescribeRuleRequest
+	Input *types.DescribeRuleInput
+	Copy  func(*types.DescribeRuleInput) DescribeRuleRequest
 }
 
 // Send marshals and sends the DescribeRule API request.
@@ -135,7 +59,7 @@ func (r DescribeRuleRequest) Send(ctx context.Context) (*DescribeRuleResponse, e
 	}
 
 	resp := &DescribeRuleResponse{
-		DescribeRuleOutput: r.Request.Data.(*DescribeRuleOutput),
+		DescribeRuleOutput: r.Request.Data.(*types.DescribeRuleOutput),
 		response:           &aws.Response{Request: r.Request},
 	}
 
@@ -145,7 +69,7 @@ func (r DescribeRuleRequest) Send(ctx context.Context) (*DescribeRuleResponse, e
 // DescribeRuleResponse is the response type for the
 // DescribeRule API operation.
 type DescribeRuleResponse struct {
-	*DescribeRuleOutput
+	*types.DescribeRuleOutput
 
 	response *aws.Response
 }

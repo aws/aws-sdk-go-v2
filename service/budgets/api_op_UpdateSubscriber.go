@@ -6,105 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/budgets/types"
 )
-
-// Request of UpdateSubscriber
-type UpdateSubscriberInput struct {
-	_ struct{} `type:"structure"`
-
-	// The accountId that is associated with the budget whose subscriber you want
-	// to update.
-	//
-	// AccountId is a required field
-	AccountId *string `min:"12" type:"string" required:"true"`
-
-	// The name of the budget whose subscriber you want to update.
-	//
-	// BudgetName is a required field
-	BudgetName *string `min:"1" type:"string" required:"true"`
-
-	// The updated subscriber that is associated with a budget notification.
-	//
-	// NewSubscriber is a required field
-	NewSubscriber *Subscriber `type:"structure" required:"true"`
-
-	// The notification whose subscriber you want to update.
-	//
-	// Notification is a required field
-	Notification *Notification `type:"structure" required:"true"`
-
-	// The previous subscriber that is associated with a budget notification.
-	//
-	// OldSubscriber is a required field
-	OldSubscriber *Subscriber `type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s UpdateSubscriberInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateSubscriberInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateSubscriberInput"}
-
-	if s.AccountId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("AccountId"))
-	}
-	if s.AccountId != nil && len(*s.AccountId) < 12 {
-		invalidParams.Add(aws.NewErrParamMinLen("AccountId", 12))
-	}
-
-	if s.BudgetName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("BudgetName"))
-	}
-	if s.BudgetName != nil && len(*s.BudgetName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("BudgetName", 1))
-	}
-
-	if s.NewSubscriber == nil {
-		invalidParams.Add(aws.NewErrParamRequired("NewSubscriber"))
-	}
-
-	if s.Notification == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Notification"))
-	}
-
-	if s.OldSubscriber == nil {
-		invalidParams.Add(aws.NewErrParamRequired("OldSubscriber"))
-	}
-	if s.NewSubscriber != nil {
-		if err := s.NewSubscriber.Validate(); err != nil {
-			invalidParams.AddNested("NewSubscriber", err.(aws.ErrInvalidParams))
-		}
-	}
-	if s.Notification != nil {
-		if err := s.Notification.Validate(); err != nil {
-			invalidParams.AddNested("Notification", err.(aws.ErrInvalidParams))
-		}
-	}
-	if s.OldSubscriber != nil {
-		if err := s.OldSubscriber.Validate(); err != nil {
-			invalidParams.AddNested("OldSubscriber", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Response of UpdateSubscriber
-type UpdateSubscriberOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s UpdateSubscriberOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opUpdateSubscriber = "UpdateSubscriber"
 
@@ -119,7 +22,7 @@ const opUpdateSubscriber = "UpdateSubscriber"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) UpdateSubscriberRequest(input *UpdateSubscriberInput) UpdateSubscriberRequest {
+func (c *Client) UpdateSubscriberRequest(input *types.UpdateSubscriberInput) UpdateSubscriberRequest {
 	op := &aws.Operation{
 		Name:       opUpdateSubscriber,
 		HTTPMethod: "POST",
@@ -127,10 +30,10 @@ func (c *Client) UpdateSubscriberRequest(input *UpdateSubscriberInput) UpdateSub
 	}
 
 	if input == nil {
-		input = &UpdateSubscriberInput{}
+		input = &types.UpdateSubscriberInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateSubscriberOutput{})
+	req := c.newRequest(op, input, &types.UpdateSubscriberOutput{})
 	return UpdateSubscriberRequest{Request: req, Input: input, Copy: c.UpdateSubscriberRequest}
 }
 
@@ -138,8 +41,8 @@ func (c *Client) UpdateSubscriberRequest(input *UpdateSubscriberInput) UpdateSub
 // UpdateSubscriber API operation.
 type UpdateSubscriberRequest struct {
 	*aws.Request
-	Input *UpdateSubscriberInput
-	Copy  func(*UpdateSubscriberInput) UpdateSubscriberRequest
+	Input *types.UpdateSubscriberInput
+	Copy  func(*types.UpdateSubscriberInput) UpdateSubscriberRequest
 }
 
 // Send marshals and sends the UpdateSubscriber API request.
@@ -151,7 +54,7 @@ func (r UpdateSubscriberRequest) Send(ctx context.Context) (*UpdateSubscriberRes
 	}
 
 	resp := &UpdateSubscriberResponse{
-		UpdateSubscriberOutput: r.Request.Data.(*UpdateSubscriberOutput),
+		UpdateSubscriberOutput: r.Request.Data.(*types.UpdateSubscriberOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -161,7 +64,7 @@ func (r UpdateSubscriberRequest) Send(ctx context.Context) (*UpdateSubscriberRes
 // UpdateSubscriberResponse is the response type for the
 // UpdateSubscriber API operation.
 type UpdateSubscriberResponse struct {
-	*UpdateSubscriberOutput
+	*types.UpdateSubscriberOutput
 
 	response *aws.Response
 }

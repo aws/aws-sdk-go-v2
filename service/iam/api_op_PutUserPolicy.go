@@ -6,99 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/query"
+	"github.com/aws/aws-sdk-go-v2/service/iam/types"
 )
-
-type PutUserPolicyInput struct {
-	_ struct{} `type:"structure"`
-
-	// The policy document.
-	//
-	// You must provide policies in JSON format in IAM. However, for AWS CloudFormation
-	// templates formatted in YAML, you can provide the policy in JSON or YAML format.
-	// AWS CloudFormation always converts a YAML policy to JSON format before submitting
-	// it to IAM.
-	//
-	// The regex pattern (http://wikipedia.org/wiki/regex) used to validate this
-	// parameter is a string of characters consisting of the following:
-	//
-	//    * Any printable ASCII character ranging from the space character (\u0020)
-	//    through the end of the ASCII character range
-	//
-	//    * The printable characters in the Basic Latin and Latin-1 Supplement character
-	//    set (through \u00FF)
-	//
-	//    * The special characters tab (\u0009), line feed (\u000A), and carriage
-	//    return (\u000D)
-	//
-	// PolicyDocument is a required field
-	PolicyDocument *string `min:"1" type:"string" required:"true"`
-
-	// The name of the policy document.
-	//
-	// This parameter allows (through its regex pattern (http://wikipedia.org/wiki/regex))
-	// a string of characters consisting of upper and lowercase alphanumeric characters
-	// with no spaces. You can also include any of the following characters: _+=,.@-
-	//
-	// PolicyName is a required field
-	PolicyName *string `min:"1" type:"string" required:"true"`
-
-	// The name of the user to associate the policy with.
-	//
-	// This parameter allows (through its regex pattern (http://wikipedia.org/wiki/regex))
-	// a string of characters consisting of upper and lowercase alphanumeric characters
-	// with no spaces. You can also include any of the following characters: _+=,.@-
-	//
-	// UserName is a required field
-	UserName *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s PutUserPolicyInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *PutUserPolicyInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "PutUserPolicyInput"}
-
-	if s.PolicyDocument == nil {
-		invalidParams.Add(aws.NewErrParamRequired("PolicyDocument"))
-	}
-	if s.PolicyDocument != nil && len(*s.PolicyDocument) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("PolicyDocument", 1))
-	}
-
-	if s.PolicyName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("PolicyName"))
-	}
-	if s.PolicyName != nil && len(*s.PolicyName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("PolicyName", 1))
-	}
-
-	if s.UserName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("UserName"))
-	}
-	if s.UserName != nil && len(*s.UserName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("UserName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type PutUserPolicyOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s PutUserPolicyOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opPutUserPolicy = "PutUserPolicy"
 
@@ -131,7 +42,7 @@ const opPutUserPolicy = "PutUserPolicy"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/PutUserPolicy
-func (c *Client) PutUserPolicyRequest(input *PutUserPolicyInput) PutUserPolicyRequest {
+func (c *Client) PutUserPolicyRequest(input *types.PutUserPolicyInput) PutUserPolicyRequest {
 	op := &aws.Operation{
 		Name:       opPutUserPolicy,
 		HTTPMethod: "POST",
@@ -139,10 +50,10 @@ func (c *Client) PutUserPolicyRequest(input *PutUserPolicyInput) PutUserPolicyRe
 	}
 
 	if input == nil {
-		input = &PutUserPolicyInput{}
+		input = &types.PutUserPolicyInput{}
 	}
 
-	req := c.newRequest(op, input, &PutUserPolicyOutput{})
+	req := c.newRequest(op, input, &types.PutUserPolicyOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return PutUserPolicyRequest{Request: req, Input: input, Copy: c.PutUserPolicyRequest}
@@ -152,8 +63,8 @@ func (c *Client) PutUserPolicyRequest(input *PutUserPolicyInput) PutUserPolicyRe
 // PutUserPolicy API operation.
 type PutUserPolicyRequest struct {
 	*aws.Request
-	Input *PutUserPolicyInput
-	Copy  func(*PutUserPolicyInput) PutUserPolicyRequest
+	Input *types.PutUserPolicyInput
+	Copy  func(*types.PutUserPolicyInput) PutUserPolicyRequest
 }
 
 // Send marshals and sends the PutUserPolicy API request.
@@ -165,7 +76,7 @@ func (r PutUserPolicyRequest) Send(ctx context.Context) (*PutUserPolicyResponse,
 	}
 
 	resp := &PutUserPolicyResponse{
-		PutUserPolicyOutput: r.Request.Data.(*PutUserPolicyOutput),
+		PutUserPolicyOutput: r.Request.Data.(*types.PutUserPolicyOutput),
 		response:            &aws.Response{Request: r.Request},
 	}
 
@@ -175,7 +86,7 @@ func (r PutUserPolicyRequest) Send(ctx context.Context) (*PutUserPolicyResponse,
 // PutUserPolicyResponse is the response type for the
 // PutUserPolicy API operation.
 type PutUserPolicyResponse struct {
-	*PutUserPolicyOutput
+	*types.PutUserPolicyOutput
 
 	response *aws.Response
 }

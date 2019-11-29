@@ -6,73 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/pinpoint/types"
 )
-
-type DeleteEmailTemplateInput struct {
-	_ struct{} `type:"structure"`
-
-	// TemplateName is a required field
-	TemplateName *string `location:"uri" locationName:"template-name" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteEmailTemplateInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteEmailTemplateInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteEmailTemplateInput"}
-
-	if s.TemplateName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("TemplateName"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteEmailTemplateInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.TemplateName != nil {
-		v := *s.TemplateName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "template-name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type DeleteEmailTemplateOutput struct {
-	_ struct{} `type:"structure" payload:"MessageBody"`
-
-	// Provides information about an API request or response.
-	//
-	// MessageBody is a required field
-	MessageBody *MessageBody `type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteEmailTemplateOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteEmailTemplateOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.MessageBody != nil {
-		v := s.MessageBody
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.PayloadTarget, "MessageBody", v, metadata)
-	}
-	return nil
-}
 
 const opDeleteEmailTemplate = "DeleteEmailTemplate"
 
@@ -90,7 +25,7 @@ const opDeleteEmailTemplate = "DeleteEmailTemplate"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/DeleteEmailTemplate
-func (c *Client) DeleteEmailTemplateRequest(input *DeleteEmailTemplateInput) DeleteEmailTemplateRequest {
+func (c *Client) DeleteEmailTemplateRequest(input *types.DeleteEmailTemplateInput) DeleteEmailTemplateRequest {
 	op := &aws.Operation{
 		Name:       opDeleteEmailTemplate,
 		HTTPMethod: "DELETE",
@@ -98,10 +33,10 @@ func (c *Client) DeleteEmailTemplateRequest(input *DeleteEmailTemplateInput) Del
 	}
 
 	if input == nil {
-		input = &DeleteEmailTemplateInput{}
+		input = &types.DeleteEmailTemplateInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteEmailTemplateOutput{})
+	req := c.newRequest(op, input, &types.DeleteEmailTemplateOutput{})
 	return DeleteEmailTemplateRequest{Request: req, Input: input, Copy: c.DeleteEmailTemplateRequest}
 }
 
@@ -109,8 +44,8 @@ func (c *Client) DeleteEmailTemplateRequest(input *DeleteEmailTemplateInput) Del
 // DeleteEmailTemplate API operation.
 type DeleteEmailTemplateRequest struct {
 	*aws.Request
-	Input *DeleteEmailTemplateInput
-	Copy  func(*DeleteEmailTemplateInput) DeleteEmailTemplateRequest
+	Input *types.DeleteEmailTemplateInput
+	Copy  func(*types.DeleteEmailTemplateInput) DeleteEmailTemplateRequest
 }
 
 // Send marshals and sends the DeleteEmailTemplate API request.
@@ -122,7 +57,7 @@ func (r DeleteEmailTemplateRequest) Send(ctx context.Context) (*DeleteEmailTempl
 	}
 
 	resp := &DeleteEmailTemplateResponse{
-		DeleteEmailTemplateOutput: r.Request.Data.(*DeleteEmailTemplateOutput),
+		DeleteEmailTemplateOutput: r.Request.Data.(*types.DeleteEmailTemplateOutput),
 		response:                  &aws.Response{Request: r.Request},
 	}
 
@@ -132,7 +67,7 @@ func (r DeleteEmailTemplateRequest) Send(ctx context.Context) (*DeleteEmailTempl
 // DeleteEmailTemplateResponse is the response type for the
 // DeleteEmailTemplate API operation.
 type DeleteEmailTemplateResponse struct {
-	*DeleteEmailTemplateOutput
+	*types.DeleteEmailTemplateOutput
 
 	response *aws.Response
 }

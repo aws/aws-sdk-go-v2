@@ -6,106 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/iot/types"
 )
-
-type DescribeIndexInput struct {
-	_ struct{} `type:"structure"`
-
-	// The index name.
-	//
-	// IndexName is a required field
-	IndexName *string `location:"uri" locationName:"indexName" min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeIndexInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeIndexInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeIndexInput"}
-
-	if s.IndexName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("IndexName"))
-	}
-	if s.IndexName != nil && len(*s.IndexName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("IndexName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DescribeIndexInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.IndexName != nil {
-		v := *s.IndexName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "indexName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type DescribeIndexOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The index name.
-	IndexName *string `locationName:"indexName" min:"1" type:"string"`
-
-	// The index status.
-	IndexStatus IndexStatus `locationName:"indexStatus" type:"string" enum:"true"`
-
-	// Contains a value that specifies the type of indexing performed. Valid values
-	// are:
-	//
-	//    * REGISTRY – Your thing index contains only registry data.
-	//
-	//    * REGISTRY_AND_SHADOW - Your thing index contains registry data and shadow
-	//    data.
-	//
-	//    * REGISTRY_AND_CONNECTIVITY_STATUS - Your thing index contains registry
-	//    data and thing connectivity status data.
-	//
-	//    * REGISTRY_AND_SHADOW_AND_CONNECTIVITY_STATUS - Your thing index contains
-	//    registry data, shadow data, and thing connectivity status data.
-	Schema *string `locationName:"schema" type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeIndexOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DescribeIndexOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.IndexName != nil {
-		v := *s.IndexName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "indexName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if len(s.IndexStatus) > 0 {
-		v := s.IndexStatus
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "indexStatus", protocol.QuotedValue{ValueMarshaler: v}, metadata)
-	}
-	if s.Schema != nil {
-		v := *s.Schema
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "schema", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opDescribeIndex = "DescribeIndex"
 
@@ -120,7 +22,7 @@ const opDescribeIndex = "DescribeIndex"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) DescribeIndexRequest(input *DescribeIndexInput) DescribeIndexRequest {
+func (c *Client) DescribeIndexRequest(input *types.DescribeIndexInput) DescribeIndexRequest {
 	op := &aws.Operation{
 		Name:       opDescribeIndex,
 		HTTPMethod: "GET",
@@ -128,10 +30,10 @@ func (c *Client) DescribeIndexRequest(input *DescribeIndexInput) DescribeIndexRe
 	}
 
 	if input == nil {
-		input = &DescribeIndexInput{}
+		input = &types.DescribeIndexInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeIndexOutput{})
+	req := c.newRequest(op, input, &types.DescribeIndexOutput{})
 	return DescribeIndexRequest{Request: req, Input: input, Copy: c.DescribeIndexRequest}
 }
 
@@ -139,8 +41,8 @@ func (c *Client) DescribeIndexRequest(input *DescribeIndexInput) DescribeIndexRe
 // DescribeIndex API operation.
 type DescribeIndexRequest struct {
 	*aws.Request
-	Input *DescribeIndexInput
-	Copy  func(*DescribeIndexInput) DescribeIndexRequest
+	Input *types.DescribeIndexInput
+	Copy  func(*types.DescribeIndexInput) DescribeIndexRequest
 }
 
 // Send marshals and sends the DescribeIndex API request.
@@ -152,7 +54,7 @@ func (r DescribeIndexRequest) Send(ctx context.Context) (*DescribeIndexResponse,
 	}
 
 	resp := &DescribeIndexResponse{
-		DescribeIndexOutput: r.Request.Data.(*DescribeIndexOutput),
+		DescribeIndexOutput: r.Request.Data.(*types.DescribeIndexOutput),
 		response:            &aws.Response{Request: r.Request},
 	}
 
@@ -162,7 +64,7 @@ func (r DescribeIndexRequest) Send(ctx context.Context) (*DescribeIndexResponse,
 // DescribeIndexResponse is the response type for the
 // DescribeIndex API operation.
 type DescribeIndexResponse struct {
-	*DescribeIndexOutput
+	*types.DescribeIndexOutput
 
 	response *aws.Response
 }

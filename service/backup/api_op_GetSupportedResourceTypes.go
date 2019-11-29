@@ -6,64 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/backup/types"
 )
-
-type GetSupportedResourceTypesInput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s GetSupportedResourceTypesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetSupportedResourceTypesInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	return nil
-}
-
-type GetSupportedResourceTypesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Contains a string with the supported AWS resource types:
-	//
-	//    * EBS for Amazon Elastic Block Store
-	//
-	//    * SGW for AWS Storage Gateway
-	//
-	//    * RDS for Amazon Relational Database Service
-	//
-	//    * DDB for Amazon DynamoDB
-	//
-	//    * EFS for Amazon Elastic File System
-	ResourceTypes []string `type:"list"`
-}
-
-// String returns the string representation
-func (s GetSupportedResourceTypesOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetSupportedResourceTypesOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.ResourceTypes != nil {
-		v := s.ResourceTypes
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "ResourceTypes", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
-		}
-		ls0.End()
-
-	}
-	return nil
-}
 
 const opGetSupportedResourceTypes = "GetSupportedResourceTypes"
 
@@ -80,7 +24,7 @@ const opGetSupportedResourceTypes = "GetSupportedResourceTypes"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/GetSupportedResourceTypes
-func (c *Client) GetSupportedResourceTypesRequest(input *GetSupportedResourceTypesInput) GetSupportedResourceTypesRequest {
+func (c *Client) GetSupportedResourceTypesRequest(input *types.GetSupportedResourceTypesInput) GetSupportedResourceTypesRequest {
 	op := &aws.Operation{
 		Name:       opGetSupportedResourceTypes,
 		HTTPMethod: "GET",
@@ -88,10 +32,10 @@ func (c *Client) GetSupportedResourceTypesRequest(input *GetSupportedResourceTyp
 	}
 
 	if input == nil {
-		input = &GetSupportedResourceTypesInput{}
+		input = &types.GetSupportedResourceTypesInput{}
 	}
 
-	req := c.newRequest(op, input, &GetSupportedResourceTypesOutput{})
+	req := c.newRequest(op, input, &types.GetSupportedResourceTypesOutput{})
 	return GetSupportedResourceTypesRequest{Request: req, Input: input, Copy: c.GetSupportedResourceTypesRequest}
 }
 
@@ -99,8 +43,8 @@ func (c *Client) GetSupportedResourceTypesRequest(input *GetSupportedResourceTyp
 // GetSupportedResourceTypes API operation.
 type GetSupportedResourceTypesRequest struct {
 	*aws.Request
-	Input *GetSupportedResourceTypesInput
-	Copy  func(*GetSupportedResourceTypesInput) GetSupportedResourceTypesRequest
+	Input *types.GetSupportedResourceTypesInput
+	Copy  func(*types.GetSupportedResourceTypesInput) GetSupportedResourceTypesRequest
 }
 
 // Send marshals and sends the GetSupportedResourceTypes API request.
@@ -112,7 +56,7 @@ func (r GetSupportedResourceTypesRequest) Send(ctx context.Context) (*GetSupport
 	}
 
 	resp := &GetSupportedResourceTypesResponse{
-		GetSupportedResourceTypesOutput: r.Request.Data.(*GetSupportedResourceTypesOutput),
+		GetSupportedResourceTypesOutput: r.Request.Data.(*types.GetSupportedResourceTypesOutput),
 		response:                        &aws.Response{Request: r.Request},
 	}
 
@@ -122,7 +66,7 @@ func (r GetSupportedResourceTypesRequest) Send(ctx context.Context) (*GetSupport
 // GetSupportedResourceTypesResponse is the response type for the
 // GetSupportedResourceTypes API operation.
 type GetSupportedResourceTypesResponse struct {
-	*GetSupportedResourceTypesOutput
+	*types.GetSupportedResourceTypesOutput
 
 	response *aws.Response
 }

@@ -6,65 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/restjson"
+	"github.com/aws/aws-sdk-go-v2/service/backup/types"
 )
-
-type StopBackupJobInput struct {
-	_ struct{} `type:"structure"`
-
-	// Uniquely identifies a request to AWS Backup to back up a resource.
-	//
-	// BackupJobId is a required field
-	BackupJobId *string `location:"uri" locationName:"backupJobId" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s StopBackupJobInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *StopBackupJobInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "StopBackupJobInput"}
-
-	if s.BackupJobId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("BackupJobId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s StopBackupJobInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.BackupJobId != nil {
-		v := *s.BackupJobId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "backupJobId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type StopBackupJobOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s StopBackupJobOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s StopBackupJobOutput) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
 
 const opStopBackupJob = "StopBackupJob"
 
@@ -81,7 +26,7 @@ const opStopBackupJob = "StopBackupJob"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/StopBackupJob
-func (c *Client) StopBackupJobRequest(input *StopBackupJobInput) StopBackupJobRequest {
+func (c *Client) StopBackupJobRequest(input *types.StopBackupJobInput) StopBackupJobRequest {
 	op := &aws.Operation{
 		Name:       opStopBackupJob,
 		HTTPMethod: "POST",
@@ -89,10 +34,10 @@ func (c *Client) StopBackupJobRequest(input *StopBackupJobInput) StopBackupJobRe
 	}
 
 	if input == nil {
-		input = &StopBackupJobInput{}
+		input = &types.StopBackupJobInput{}
 	}
 
-	req := c.newRequest(op, input, &StopBackupJobOutput{})
+	req := c.newRequest(op, input, &types.StopBackupJobOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return StopBackupJobRequest{Request: req, Input: input, Copy: c.StopBackupJobRequest}
@@ -102,8 +47,8 @@ func (c *Client) StopBackupJobRequest(input *StopBackupJobInput) StopBackupJobRe
 // StopBackupJob API operation.
 type StopBackupJobRequest struct {
 	*aws.Request
-	Input *StopBackupJobInput
-	Copy  func(*StopBackupJobInput) StopBackupJobRequest
+	Input *types.StopBackupJobInput
+	Copy  func(*types.StopBackupJobInput) StopBackupJobRequest
 }
 
 // Send marshals and sends the StopBackupJob API request.
@@ -115,7 +60,7 @@ func (r StopBackupJobRequest) Send(ctx context.Context) (*StopBackupJobResponse,
 	}
 
 	resp := &StopBackupJobResponse{
-		StopBackupJobOutput: r.Request.Data.(*StopBackupJobOutput),
+		StopBackupJobOutput: r.Request.Data.(*types.StopBackupJobOutput),
 		response:            &aws.Response{Request: r.Request},
 	}
 
@@ -125,7 +70,7 @@ func (r StopBackupJobRequest) Send(ctx context.Context) (*StopBackupJobResponse,
 // StopBackupJobResponse is the response type for the
 // StopBackupJob API operation.
 type StopBackupJobResponse struct {
-	*StopBackupJobOutput
+	*types.StopBackupJobOutput
 
 	response *aws.Response
 }

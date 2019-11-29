@@ -6,78 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/query"
+	"github.com/aws/aws-sdk-go-v2/service/iam/types"
 )
-
-type UpdateGroupInput struct {
-	_ struct{} `type:"structure"`
-
-	// Name of the IAM group to update. If you're changing the name of the group,
-	// this is the original name.
-	//
-	// This parameter allows (through its regex pattern (http://wikipedia.org/wiki/regex))
-	// a string of characters consisting of upper and lowercase alphanumeric characters
-	// with no spaces. You can also include any of the following characters: _+=,.@-
-	//
-	// GroupName is a required field
-	GroupName *string `min:"1" type:"string" required:"true"`
-
-	// New name for the IAM group. Only include this if changing the group's name.
-	//
-	// IAM user, group, role, and policy names must be unique within the account.
-	// Names are not distinguished by case. For example, you cannot create resources
-	// named both "MyResource" and "myresource".
-	NewGroupName *string `min:"1" type:"string"`
-
-	// New path for the IAM group. Only include this if changing the group's path.
-	//
-	// This parameter allows (through its regex pattern (http://wikipedia.org/wiki/regex))
-	// a string of characters consisting of either a forward slash (/) by itself
-	// or a string that must begin and end with forward slashes. In addition, it
-	// can contain any ASCII character from the ! (\u0021) through the DEL character
-	// (\u007F), including most punctuation characters, digits, and upper and lowercased
-	// letters.
-	NewPath *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s UpdateGroupInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateGroupInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateGroupInput"}
-
-	if s.GroupName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("GroupName"))
-	}
-	if s.GroupName != nil && len(*s.GroupName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("GroupName", 1))
-	}
-	if s.NewGroupName != nil && len(*s.NewGroupName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("NewGroupName", 1))
-	}
-	if s.NewPath != nil && len(*s.NewPath) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("NewPath", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type UpdateGroupOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s UpdateGroupOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opUpdateGroup = "UpdateGroup"
 
@@ -105,7 +37,7 @@ const opUpdateGroup = "UpdateGroup"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/UpdateGroup
-func (c *Client) UpdateGroupRequest(input *UpdateGroupInput) UpdateGroupRequest {
+func (c *Client) UpdateGroupRequest(input *types.UpdateGroupInput) UpdateGroupRequest {
 	op := &aws.Operation{
 		Name:       opUpdateGroup,
 		HTTPMethod: "POST",
@@ -113,10 +45,10 @@ func (c *Client) UpdateGroupRequest(input *UpdateGroupInput) UpdateGroupRequest 
 	}
 
 	if input == nil {
-		input = &UpdateGroupInput{}
+		input = &types.UpdateGroupInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateGroupOutput{})
+	req := c.newRequest(op, input, &types.UpdateGroupOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return UpdateGroupRequest{Request: req, Input: input, Copy: c.UpdateGroupRequest}
@@ -126,8 +58,8 @@ func (c *Client) UpdateGroupRequest(input *UpdateGroupInput) UpdateGroupRequest 
 // UpdateGroup API operation.
 type UpdateGroupRequest struct {
 	*aws.Request
-	Input *UpdateGroupInput
-	Copy  func(*UpdateGroupInput) UpdateGroupRequest
+	Input *types.UpdateGroupInput
+	Copy  func(*types.UpdateGroupInput) UpdateGroupRequest
 }
 
 // Send marshals and sends the UpdateGroup API request.
@@ -139,7 +71,7 @@ func (r UpdateGroupRequest) Send(ctx context.Context) (*UpdateGroupResponse, err
 	}
 
 	resp := &UpdateGroupResponse{
-		UpdateGroupOutput: r.Request.Data.(*UpdateGroupOutput),
+		UpdateGroupOutput: r.Request.Data.(*types.UpdateGroupOutput),
 		response:          &aws.Response{Request: r.Request},
 	}
 
@@ -149,7 +81,7 @@ func (r UpdateGroupRequest) Send(ctx context.Context) (*UpdateGroupResponse, err
 // UpdateGroupResponse is the response type for the
 // UpdateGroup API operation.
 type UpdateGroupResponse struct {
-	*UpdateGroupOutput
+	*types.UpdateGroupOutput
 
 	response *aws.Response
 }

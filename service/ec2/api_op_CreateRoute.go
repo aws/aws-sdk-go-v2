@@ -6,85 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-type CreateRouteInput struct {
-	_ struct{} `type:"structure"`
-
-	// The IPv4 CIDR address block used for the destination match. Routing decisions
-	// are based on the most specific match.
-	DestinationCidrBlock *string `locationName:"destinationCidrBlock" type:"string"`
-
-	// The IPv6 CIDR block used for the destination match. Routing decisions are
-	// based on the most specific match.
-	DestinationIpv6CidrBlock *string `locationName:"destinationIpv6CidrBlock" type:"string"`
-
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have
-	// the required permissions, the error response is DryRunOperation. Otherwise,
-	// it is UnauthorizedOperation.
-	DryRun *bool `locationName:"dryRun" type:"boolean"`
-
-	// [IPv6 traffic only] The ID of an egress-only internet gateway.
-	EgressOnlyInternetGatewayId *string `locationName:"egressOnlyInternetGatewayId" type:"string"`
-
-	// The ID of an internet gateway or virtual private gateway attached to your
-	// VPC.
-	GatewayId *string `locationName:"gatewayId" type:"string"`
-
-	// The ID of a NAT instance in your VPC. The operation fails if you specify
-	// an instance ID unless exactly one network interface is attached.
-	InstanceId *string `locationName:"instanceId" type:"string"`
-
-	// [IPv4 traffic only] The ID of a NAT gateway.
-	NatGatewayId *string `locationName:"natGatewayId" type:"string"`
-
-	// The ID of a network interface.
-	NetworkInterfaceId *string `locationName:"networkInterfaceId" type:"string"`
-
-	// The ID of the route table for the route.
-	//
-	// RouteTableId is a required field
-	RouteTableId *string `locationName:"routeTableId" type:"string" required:"true"`
-
-	// The ID of a transit gateway.
-	TransitGatewayId *string `type:"string"`
-
-	// The ID of a VPC peering connection.
-	VpcPeeringConnectionId *string `locationName:"vpcPeeringConnectionId" type:"string"`
-}
-
-// String returns the string representation
-func (s CreateRouteInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateRouteInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateRouteInput"}
-
-	if s.RouteTableId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("RouteTableId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type CreateRouteOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Returns true if the request succeeds; otherwise, it returns an error.
-	Return *bool `locationName:"return" type:"boolean"`
-}
-
-// String returns the string representation
-func (s CreateRouteOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCreateRoute = "CreateRoute"
 
@@ -120,7 +43,7 @@ const opCreateRoute = "CreateRoute"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateRoute
-func (c *Client) CreateRouteRequest(input *CreateRouteInput) CreateRouteRequest {
+func (c *Client) CreateRouteRequest(input *types.CreateRouteInput) CreateRouteRequest {
 	op := &aws.Operation{
 		Name:       opCreateRoute,
 		HTTPMethod: "POST",
@@ -128,10 +51,10 @@ func (c *Client) CreateRouteRequest(input *CreateRouteInput) CreateRouteRequest 
 	}
 
 	if input == nil {
-		input = &CreateRouteInput{}
+		input = &types.CreateRouteInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateRouteOutput{})
+	req := c.newRequest(op, input, &types.CreateRouteOutput{})
 	return CreateRouteRequest{Request: req, Input: input, Copy: c.CreateRouteRequest}
 }
 
@@ -139,8 +62,8 @@ func (c *Client) CreateRouteRequest(input *CreateRouteInput) CreateRouteRequest 
 // CreateRoute API operation.
 type CreateRouteRequest struct {
 	*aws.Request
-	Input *CreateRouteInput
-	Copy  func(*CreateRouteInput) CreateRouteRequest
+	Input *types.CreateRouteInput
+	Copy  func(*types.CreateRouteInput) CreateRouteRequest
 }
 
 // Send marshals and sends the CreateRoute API request.
@@ -152,7 +75,7 @@ func (r CreateRouteRequest) Send(ctx context.Context) (*CreateRouteResponse, err
 	}
 
 	resp := &CreateRouteResponse{
-		CreateRouteOutput: r.Request.Data.(*CreateRouteOutput),
+		CreateRouteOutput: r.Request.Data.(*types.CreateRouteOutput),
 		response:          &aws.Response{Request: r.Request},
 	}
 
@@ -162,7 +85,7 @@ func (r CreateRouteRequest) Send(ctx context.Context) (*CreateRouteResponse, err
 // CreateRouteResponse is the response type for the
 // CreateRoute API operation.
 type CreateRouteResponse struct {
-	*CreateRouteOutput
+	*types.CreateRouteOutput
 
 	response *aws.Response
 }

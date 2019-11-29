@@ -6,48 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/redshift/types"
 )
-
-type DescribeClusterTracksInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the maintenance track.
-	MaintenanceTrackName *string `type:"string"`
-
-	// An optional parameter that specifies the starting point to return a set of
-	// response records. When the results of a DescribeClusterTracks request exceed
-	// the value specified in MaxRecords, Amazon Redshift returns a value in the
-	// Marker field of the response. You can retrieve the next set of response records
-	// by providing the returned marker value in the Marker parameter and retrying
-	// the request.
-	Marker *string `type:"string"`
-
-	// An integer value for the maximum number of maintenance tracks to return.
-	MaxRecords *int64 `type:"integer"`
-}
-
-// String returns the string representation
-func (s DescribeClusterTracksInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type DescribeClusterTracksOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A list of maintenance tracks output by the DescribeClusterTracks operation.
-	MaintenanceTracks []MaintenanceTrack `locationNameList:"MaintenanceTrack" type:"list"`
-
-	// The starting point to return a set of response tracklist records. You can
-	// retrieve the next set of response records by providing the returned marker
-	// value in the Marker parameter and retrying the request.
-	Marker *string `type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeClusterTracksOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeClusterTracks = "DescribeClusterTracks"
 
@@ -64,7 +24,7 @@ const opDescribeClusterTracks = "DescribeClusterTracks"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeClusterTracks
-func (c *Client) DescribeClusterTracksRequest(input *DescribeClusterTracksInput) DescribeClusterTracksRequest {
+func (c *Client) DescribeClusterTracksRequest(input *types.DescribeClusterTracksInput) DescribeClusterTracksRequest {
 	op := &aws.Operation{
 		Name:       opDescribeClusterTracks,
 		HTTPMethod: "POST",
@@ -72,10 +32,10 @@ func (c *Client) DescribeClusterTracksRequest(input *DescribeClusterTracksInput)
 	}
 
 	if input == nil {
-		input = &DescribeClusterTracksInput{}
+		input = &types.DescribeClusterTracksInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeClusterTracksOutput{})
+	req := c.newRequest(op, input, &types.DescribeClusterTracksOutput{})
 	return DescribeClusterTracksRequest{Request: req, Input: input, Copy: c.DescribeClusterTracksRequest}
 }
 
@@ -83,8 +43,8 @@ func (c *Client) DescribeClusterTracksRequest(input *DescribeClusterTracksInput)
 // DescribeClusterTracks API operation.
 type DescribeClusterTracksRequest struct {
 	*aws.Request
-	Input *DescribeClusterTracksInput
-	Copy  func(*DescribeClusterTracksInput) DescribeClusterTracksRequest
+	Input *types.DescribeClusterTracksInput
+	Copy  func(*types.DescribeClusterTracksInput) DescribeClusterTracksRequest
 }
 
 // Send marshals and sends the DescribeClusterTracks API request.
@@ -96,7 +56,7 @@ func (r DescribeClusterTracksRequest) Send(ctx context.Context) (*DescribeCluste
 	}
 
 	resp := &DescribeClusterTracksResponse{
-		DescribeClusterTracksOutput: r.Request.Data.(*DescribeClusterTracksOutput),
+		DescribeClusterTracksOutput: r.Request.Data.(*types.DescribeClusterTracksOutput),
 		response:                    &aws.Response{Request: r.Request},
 	}
 
@@ -106,7 +66,7 @@ func (r DescribeClusterTracksRequest) Send(ctx context.Context) (*DescribeCluste
 // DescribeClusterTracksResponse is the response type for the
 // DescribeClusterTracks API operation.
 type DescribeClusterTracksResponse struct {
-	*DescribeClusterTracksOutput
+	*types.DescribeClusterTracksOutput
 
 	response *aws.Response
 }

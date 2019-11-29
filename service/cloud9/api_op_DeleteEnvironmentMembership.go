@@ -6,55 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/cloud9/types"
 )
-
-type DeleteEnvironmentMembershipInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the environment to delete the environment member from.
-	//
-	// EnvironmentId is a required field
-	EnvironmentId *string `locationName:"environmentId" type:"string" required:"true"`
-
-	// The Amazon Resource Name (ARN) of the environment member to delete from the
-	// environment.
-	//
-	// UserArn is a required field
-	UserArn *string `locationName:"userArn" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteEnvironmentMembershipInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteEnvironmentMembershipInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteEnvironmentMembershipInput"}
-
-	if s.EnvironmentId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("EnvironmentId"))
-	}
-
-	if s.UserArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("UserArn"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteEnvironmentMembershipOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteEnvironmentMembershipOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteEnvironmentMembership = "DeleteEnvironmentMembership"
 
@@ -71,7 +24,7 @@ const opDeleteEnvironmentMembership = "DeleteEnvironmentMembership"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloud9-2017-09-23/DeleteEnvironmentMembership
-func (c *Client) DeleteEnvironmentMembershipRequest(input *DeleteEnvironmentMembershipInput) DeleteEnvironmentMembershipRequest {
+func (c *Client) DeleteEnvironmentMembershipRequest(input *types.DeleteEnvironmentMembershipInput) DeleteEnvironmentMembershipRequest {
 	op := &aws.Operation{
 		Name:       opDeleteEnvironmentMembership,
 		HTTPMethod: "POST",
@@ -79,10 +32,10 @@ func (c *Client) DeleteEnvironmentMembershipRequest(input *DeleteEnvironmentMemb
 	}
 
 	if input == nil {
-		input = &DeleteEnvironmentMembershipInput{}
+		input = &types.DeleteEnvironmentMembershipInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteEnvironmentMembershipOutput{})
+	req := c.newRequest(op, input, &types.DeleteEnvironmentMembershipOutput{})
 	return DeleteEnvironmentMembershipRequest{Request: req, Input: input, Copy: c.DeleteEnvironmentMembershipRequest}
 }
 
@@ -90,8 +43,8 @@ func (c *Client) DeleteEnvironmentMembershipRequest(input *DeleteEnvironmentMemb
 // DeleteEnvironmentMembership API operation.
 type DeleteEnvironmentMembershipRequest struct {
 	*aws.Request
-	Input *DeleteEnvironmentMembershipInput
-	Copy  func(*DeleteEnvironmentMembershipInput) DeleteEnvironmentMembershipRequest
+	Input *types.DeleteEnvironmentMembershipInput
+	Copy  func(*types.DeleteEnvironmentMembershipInput) DeleteEnvironmentMembershipRequest
 }
 
 // Send marshals and sends the DeleteEnvironmentMembership API request.
@@ -103,7 +56,7 @@ func (r DeleteEnvironmentMembershipRequest) Send(ctx context.Context) (*DeleteEn
 	}
 
 	resp := &DeleteEnvironmentMembershipResponse{
-		DeleteEnvironmentMembershipOutput: r.Request.Data.(*DeleteEnvironmentMembershipOutput),
+		DeleteEnvironmentMembershipOutput: r.Request.Data.(*types.DeleteEnvironmentMembershipOutput),
 		response:                          &aws.Response{Request: r.Request},
 	}
 
@@ -113,7 +66,7 @@ func (r DeleteEnvironmentMembershipRequest) Send(ctx context.Context) (*DeleteEn
 // DeleteEnvironmentMembershipResponse is the response type for the
 // DeleteEnvironmentMembership API operation.
 type DeleteEnvironmentMembershipResponse struct {
-	*DeleteEnvironmentMembershipOutput
+	*types.DeleteEnvironmentMembershipOutput
 
 	response *aws.Response
 }

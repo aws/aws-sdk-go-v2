@@ -6,57 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/directconnect/types"
 )
-
-type DescribeConnectionLoaInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the connection.
-	//
-	// ConnectionId is a required field
-	ConnectionId *string `locationName:"connectionId" type:"string" required:"true"`
-
-	// The standard media type for the LOA-CFA document. The only supported value
-	// is application/pdf.
-	LoaContentType LoaContentType `locationName:"loaContentType" type:"string" enum:"true"`
-
-	// The name of the APN partner or service provider who establishes connectivity
-	// on your behalf. If you specify this parameter, the LOA-CFA lists the provider
-	// name alongside your company name as the requester of the cross connect.
-	ProviderName *string `locationName:"providerName" type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeConnectionLoaInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeConnectionLoaInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeConnectionLoaInput"}
-
-	if s.ConnectionId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ConnectionId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribeConnectionLoaOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The Letter of Authorization - Connecting Facility Assignment (LOA-CFA).
-	Loa *Loa `locationName:"loa" type:"structure"`
-}
-
-// String returns the string representation
-func (s DescribeConnectionLoaOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeConnectionLoa = "DescribeConnectionLoa"
 
@@ -81,7 +32,7 @@ const opDescribeConnectionLoa = "DescribeConnectionLoa"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DescribeConnectionLoa
-func (c *Client) DescribeConnectionLoaRequest(input *DescribeConnectionLoaInput) DescribeConnectionLoaRequest {
+func (c *Client) DescribeConnectionLoaRequest(input *types.DescribeConnectionLoaInput) DescribeConnectionLoaRequest {
 	if c.Client.Config.Logger != nil {
 		c.Client.Config.Logger.Log("This operation, DescribeConnectionLoa, has been deprecated")
 	}
@@ -92,10 +43,10 @@ func (c *Client) DescribeConnectionLoaRequest(input *DescribeConnectionLoaInput)
 	}
 
 	if input == nil {
-		input = &DescribeConnectionLoaInput{}
+		input = &types.DescribeConnectionLoaInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeConnectionLoaOutput{})
+	req := c.newRequest(op, input, &types.DescribeConnectionLoaOutput{})
 	return DescribeConnectionLoaRequest{Request: req, Input: input, Copy: c.DescribeConnectionLoaRequest}
 }
 
@@ -103,8 +54,8 @@ func (c *Client) DescribeConnectionLoaRequest(input *DescribeConnectionLoaInput)
 // DescribeConnectionLoa API operation.
 type DescribeConnectionLoaRequest struct {
 	*aws.Request
-	Input *DescribeConnectionLoaInput
-	Copy  func(*DescribeConnectionLoaInput) DescribeConnectionLoaRequest
+	Input *types.DescribeConnectionLoaInput
+	Copy  func(*types.DescribeConnectionLoaInput) DescribeConnectionLoaRequest
 }
 
 // Send marshals and sends the DescribeConnectionLoa API request.
@@ -116,7 +67,7 @@ func (r DescribeConnectionLoaRequest) Send(ctx context.Context) (*DescribeConnec
 	}
 
 	resp := &DescribeConnectionLoaResponse{
-		DescribeConnectionLoaOutput: r.Request.Data.(*DescribeConnectionLoaOutput),
+		DescribeConnectionLoaOutput: r.Request.Data.(*types.DescribeConnectionLoaOutput),
 		response:                    &aws.Response{Request: r.Request},
 	}
 
@@ -126,7 +77,7 @@ func (r DescribeConnectionLoaRequest) Send(ctx context.Context) (*DescribeConnec
 // DescribeConnectionLoaResponse is the response type for the
 // DescribeConnectionLoa API operation.
 type DescribeConnectionLoaResponse struct {
-	*DescribeConnectionLoaOutput
+	*types.DescribeConnectionLoaOutput
 
 	response *aws.Response
 }

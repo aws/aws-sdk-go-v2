@@ -4,137 +4,10 @@ package pinpoint
 
 import (
 	"context"
-	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/pinpoint/types"
 )
-
-type GetCampaignDateRangeKpiInput struct {
-	_ struct{} `type:"structure"`
-
-	// ApplicationId is a required field
-	ApplicationId *string `location:"uri" locationName:"application-id" type:"string" required:"true"`
-
-	// CampaignId is a required field
-	CampaignId *string `location:"uri" locationName:"campaign-id" type:"string" required:"true"`
-
-	EndTime *time.Time `location:"querystring" locationName:"end-time" type:"timestamp" timestampFormat:"iso8601"`
-
-	// KpiName is a required field
-	KpiName *string `location:"uri" locationName:"kpi-name" type:"string" required:"true"`
-
-	NextToken *string `location:"querystring" locationName:"next-token" type:"string"`
-
-	PageSize *string `location:"querystring" locationName:"page-size" type:"string"`
-
-	StartTime *time.Time `location:"querystring" locationName:"start-time" type:"timestamp" timestampFormat:"iso8601"`
-}
-
-// String returns the string representation
-func (s GetCampaignDateRangeKpiInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetCampaignDateRangeKpiInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetCampaignDateRangeKpiInput"}
-
-	if s.ApplicationId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ApplicationId"))
-	}
-
-	if s.CampaignId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("CampaignId"))
-	}
-
-	if s.KpiName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("KpiName"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetCampaignDateRangeKpiInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.ApplicationId != nil {
-		v := *s.ApplicationId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "application-id", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.CampaignId != nil {
-		v := *s.CampaignId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "campaign-id", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.KpiName != nil {
-		v := *s.KpiName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "kpi-name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.EndTime != nil {
-		v := *s.EndTime
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "end-time",
-			protocol.TimeValue{V: v, Format: "iso8601", QuotedFormatTime: false}, metadata)
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "next-token", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.PageSize != nil {
-		v := *s.PageSize
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "page-size", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.StartTime != nil {
-		v := *s.StartTime
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "start-time",
-			protocol.TimeValue{V: v, Format: "iso8601", QuotedFormatTime: false}, metadata)
-	}
-	return nil
-}
-
-type GetCampaignDateRangeKpiOutput struct {
-	_ struct{} `type:"structure" payload:"CampaignDateRangeKpiResponse"`
-
-	// Provides the results of a query that retrieved the data for a standard metric
-	// that applies to a campaign, and provides information about that query.
-	//
-	// CampaignDateRangeKpiResponse is a required field
-	CampaignDateRangeKpiResponse *CampaignDateRangeKpiResponse `type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s GetCampaignDateRangeKpiOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetCampaignDateRangeKpiOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.CampaignDateRangeKpiResponse != nil {
-		v := s.CampaignDateRangeKpiResponse
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.PayloadTarget, "CampaignDateRangeKpiResponse", v, metadata)
-	}
-	return nil
-}
 
 const opGetCampaignDateRangeKpi = "GetCampaignDateRangeKpi"
 
@@ -152,7 +25,7 @@ const opGetCampaignDateRangeKpi = "GetCampaignDateRangeKpi"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetCampaignDateRangeKpi
-func (c *Client) GetCampaignDateRangeKpiRequest(input *GetCampaignDateRangeKpiInput) GetCampaignDateRangeKpiRequest {
+func (c *Client) GetCampaignDateRangeKpiRequest(input *types.GetCampaignDateRangeKpiInput) GetCampaignDateRangeKpiRequest {
 	op := &aws.Operation{
 		Name:       opGetCampaignDateRangeKpi,
 		HTTPMethod: "GET",
@@ -160,10 +33,10 @@ func (c *Client) GetCampaignDateRangeKpiRequest(input *GetCampaignDateRangeKpiIn
 	}
 
 	if input == nil {
-		input = &GetCampaignDateRangeKpiInput{}
+		input = &types.GetCampaignDateRangeKpiInput{}
 	}
 
-	req := c.newRequest(op, input, &GetCampaignDateRangeKpiOutput{})
+	req := c.newRequest(op, input, &types.GetCampaignDateRangeKpiOutput{})
 	return GetCampaignDateRangeKpiRequest{Request: req, Input: input, Copy: c.GetCampaignDateRangeKpiRequest}
 }
 
@@ -171,8 +44,8 @@ func (c *Client) GetCampaignDateRangeKpiRequest(input *GetCampaignDateRangeKpiIn
 // GetCampaignDateRangeKpi API operation.
 type GetCampaignDateRangeKpiRequest struct {
 	*aws.Request
-	Input *GetCampaignDateRangeKpiInput
-	Copy  func(*GetCampaignDateRangeKpiInput) GetCampaignDateRangeKpiRequest
+	Input *types.GetCampaignDateRangeKpiInput
+	Copy  func(*types.GetCampaignDateRangeKpiInput) GetCampaignDateRangeKpiRequest
 }
 
 // Send marshals and sends the GetCampaignDateRangeKpi API request.
@@ -184,7 +57,7 @@ func (r GetCampaignDateRangeKpiRequest) Send(ctx context.Context) (*GetCampaignD
 	}
 
 	resp := &GetCampaignDateRangeKpiResponse{
-		GetCampaignDateRangeKpiOutput: r.Request.Data.(*GetCampaignDateRangeKpiOutput),
+		GetCampaignDateRangeKpiOutput: r.Request.Data.(*types.GetCampaignDateRangeKpiOutput),
 		response:                      &aws.Response{Request: r.Request},
 	}
 
@@ -194,7 +67,7 @@ func (r GetCampaignDateRangeKpiRequest) Send(ctx context.Context) (*GetCampaignD
 // GetCampaignDateRangeKpiResponse is the response type for the
 // GetCampaignDateRangeKpi API operation.
 type GetCampaignDateRangeKpiResponse struct {
-	*GetCampaignDateRangeKpiOutput
+	*types.GetCampaignDateRangeKpiOutput
 
 	response *aws.Response
 }

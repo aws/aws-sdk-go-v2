@@ -4,67 +4,10 @@ package sagemaker
 
 import (
 	"context"
-	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
 )
-
-type DescribeNotebookInstanceLifecycleConfigInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the lifecycle configuration to describe.
-	//
-	// NotebookInstanceLifecycleConfigName is a required field
-	NotebookInstanceLifecycleConfigName *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeNotebookInstanceLifecycleConfigInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeNotebookInstanceLifecycleConfigInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeNotebookInstanceLifecycleConfigInput"}
-
-	if s.NotebookInstanceLifecycleConfigName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("NotebookInstanceLifecycleConfigName"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribeNotebookInstanceLifecycleConfigOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A timestamp that tells when the lifecycle configuration was created.
-	CreationTime *time.Time `type:"timestamp"`
-
-	// A timestamp that tells when the lifecycle configuration was last modified.
-	LastModifiedTime *time.Time `type:"timestamp"`
-
-	// The Amazon Resource Name (ARN) of the lifecycle configuration.
-	NotebookInstanceLifecycleConfigArn *string `type:"string"`
-
-	// The name of the lifecycle configuration.
-	NotebookInstanceLifecycleConfigName *string `type:"string"`
-
-	// The shell script that runs only once, when you create a notebook instance.
-	OnCreate []NotebookInstanceLifecycleHook `type:"list"`
-
-	// The shell script that runs every time you start a notebook instance, including
-	// when you create the notebook instance.
-	OnStart []NotebookInstanceLifecycleHook `type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeNotebookInstanceLifecycleConfigOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeNotebookInstanceLifecycleConfig = "DescribeNotebookInstanceLifecycleConfig"
 
@@ -84,7 +27,7 @@ const opDescribeNotebookInstanceLifecycleConfig = "DescribeNotebookInstanceLifec
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeNotebookInstanceLifecycleConfig
-func (c *Client) DescribeNotebookInstanceLifecycleConfigRequest(input *DescribeNotebookInstanceLifecycleConfigInput) DescribeNotebookInstanceLifecycleConfigRequest {
+func (c *Client) DescribeNotebookInstanceLifecycleConfigRequest(input *types.DescribeNotebookInstanceLifecycleConfigInput) DescribeNotebookInstanceLifecycleConfigRequest {
 	op := &aws.Operation{
 		Name:       opDescribeNotebookInstanceLifecycleConfig,
 		HTTPMethod: "POST",
@@ -92,10 +35,10 @@ func (c *Client) DescribeNotebookInstanceLifecycleConfigRequest(input *DescribeN
 	}
 
 	if input == nil {
-		input = &DescribeNotebookInstanceLifecycleConfigInput{}
+		input = &types.DescribeNotebookInstanceLifecycleConfigInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeNotebookInstanceLifecycleConfigOutput{})
+	req := c.newRequest(op, input, &types.DescribeNotebookInstanceLifecycleConfigOutput{})
 	return DescribeNotebookInstanceLifecycleConfigRequest{Request: req, Input: input, Copy: c.DescribeNotebookInstanceLifecycleConfigRequest}
 }
 
@@ -103,8 +46,8 @@ func (c *Client) DescribeNotebookInstanceLifecycleConfigRequest(input *DescribeN
 // DescribeNotebookInstanceLifecycleConfig API operation.
 type DescribeNotebookInstanceLifecycleConfigRequest struct {
 	*aws.Request
-	Input *DescribeNotebookInstanceLifecycleConfigInput
-	Copy  func(*DescribeNotebookInstanceLifecycleConfigInput) DescribeNotebookInstanceLifecycleConfigRequest
+	Input *types.DescribeNotebookInstanceLifecycleConfigInput
+	Copy  func(*types.DescribeNotebookInstanceLifecycleConfigInput) DescribeNotebookInstanceLifecycleConfigRequest
 }
 
 // Send marshals and sends the DescribeNotebookInstanceLifecycleConfig API request.
@@ -116,7 +59,7 @@ func (r DescribeNotebookInstanceLifecycleConfigRequest) Send(ctx context.Context
 	}
 
 	resp := &DescribeNotebookInstanceLifecycleConfigResponse{
-		DescribeNotebookInstanceLifecycleConfigOutput: r.Request.Data.(*DescribeNotebookInstanceLifecycleConfigOutput),
+		DescribeNotebookInstanceLifecycleConfigOutput: r.Request.Data.(*types.DescribeNotebookInstanceLifecycleConfigOutput),
 		response: &aws.Response{Request: r.Request},
 	}
 
@@ -126,7 +69,7 @@ func (r DescribeNotebookInstanceLifecycleConfigRequest) Send(ctx context.Context
 // DescribeNotebookInstanceLifecycleConfigResponse is the response type for the
 // DescribeNotebookInstanceLifecycleConfig API operation.
 type DescribeNotebookInstanceLifecycleConfigResponse struct {
-	*DescribeNotebookInstanceLifecycleConfigOutput
+	*types.DescribeNotebookInstanceLifecycleConfigOutput
 
 	response *aws.Response
 }

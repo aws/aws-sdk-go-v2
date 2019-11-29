@@ -6,60 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-type UnassignIpv6AddressesInput struct {
-	_ struct{} `type:"structure"`
-
-	// The IPv6 addresses to unassign from the network interface.
-	//
-	// Ipv6Addresses is a required field
-	Ipv6Addresses []string `locationName:"ipv6Addresses" locationNameList:"item" type:"list" required:"true"`
-
-	// The ID of the network interface.
-	//
-	// NetworkInterfaceId is a required field
-	NetworkInterfaceId *string `locationName:"networkInterfaceId" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s UnassignIpv6AddressesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UnassignIpv6AddressesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UnassignIpv6AddressesInput"}
-
-	if s.Ipv6Addresses == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Ipv6Addresses"))
-	}
-
-	if s.NetworkInterfaceId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("NetworkInterfaceId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type UnassignIpv6AddressesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the network interface.
-	NetworkInterfaceId *string `locationName:"networkInterfaceId" type:"string"`
-
-	// The IPv6 addresses that have been unassigned from the network interface.
-	UnassignedIpv6Addresses []string `locationName:"unassignedIpv6Addresses" locationNameList:"item" type:"list"`
-}
-
-// String returns the string representation
-func (s UnassignIpv6AddressesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opUnassignIpv6Addresses = "UnassignIpv6Addresses"
 
@@ -76,7 +24,7 @@ const opUnassignIpv6Addresses = "UnassignIpv6Addresses"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/UnassignIpv6Addresses
-func (c *Client) UnassignIpv6AddressesRequest(input *UnassignIpv6AddressesInput) UnassignIpv6AddressesRequest {
+func (c *Client) UnassignIpv6AddressesRequest(input *types.UnassignIpv6AddressesInput) UnassignIpv6AddressesRequest {
 	op := &aws.Operation{
 		Name:       opUnassignIpv6Addresses,
 		HTTPMethod: "POST",
@@ -84,10 +32,10 @@ func (c *Client) UnassignIpv6AddressesRequest(input *UnassignIpv6AddressesInput)
 	}
 
 	if input == nil {
-		input = &UnassignIpv6AddressesInput{}
+		input = &types.UnassignIpv6AddressesInput{}
 	}
 
-	req := c.newRequest(op, input, &UnassignIpv6AddressesOutput{})
+	req := c.newRequest(op, input, &types.UnassignIpv6AddressesOutput{})
 	return UnassignIpv6AddressesRequest{Request: req, Input: input, Copy: c.UnassignIpv6AddressesRequest}
 }
 
@@ -95,8 +43,8 @@ func (c *Client) UnassignIpv6AddressesRequest(input *UnassignIpv6AddressesInput)
 // UnassignIpv6Addresses API operation.
 type UnassignIpv6AddressesRequest struct {
 	*aws.Request
-	Input *UnassignIpv6AddressesInput
-	Copy  func(*UnassignIpv6AddressesInput) UnassignIpv6AddressesRequest
+	Input *types.UnassignIpv6AddressesInput
+	Copy  func(*types.UnassignIpv6AddressesInput) UnassignIpv6AddressesRequest
 }
 
 // Send marshals and sends the UnassignIpv6Addresses API request.
@@ -108,7 +56,7 @@ func (r UnassignIpv6AddressesRequest) Send(ctx context.Context) (*UnassignIpv6Ad
 	}
 
 	resp := &UnassignIpv6AddressesResponse{
-		UnassignIpv6AddressesOutput: r.Request.Data.(*UnassignIpv6AddressesOutput),
+		UnassignIpv6AddressesOutput: r.Request.Data.(*types.UnassignIpv6AddressesOutput),
 		response:                    &aws.Response{Request: r.Request},
 	}
 
@@ -118,7 +66,7 @@ func (r UnassignIpv6AddressesRequest) Send(ctx context.Context) (*UnassignIpv6Ad
 // UnassignIpv6AddressesResponse is the response type for the
 // UnassignIpv6Addresses API operation.
 type UnassignIpv6AddressesResponse struct {
-	*UnassignIpv6AddressesOutput
+	*types.UnassignIpv6AddressesOutput
 
 	response *aws.Response
 }

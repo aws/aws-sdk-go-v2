@@ -6,142 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/medialive/types"
 )
-
-type UpdateInputInput struct {
-	_ struct{} `type:"structure"`
-
-	Destinations []InputDestinationRequest `locationName:"destinations" type:"list"`
-
-	// InputId is a required field
-	InputId *string `location:"uri" locationName:"inputId" type:"string" required:"true"`
-
-	InputSecurityGroups []string `locationName:"inputSecurityGroups" type:"list"`
-
-	MediaConnectFlows []MediaConnectFlowRequest `locationName:"mediaConnectFlows" type:"list"`
-
-	Name *string `locationName:"name" type:"string"`
-
-	RoleArn *string `locationName:"roleArn" type:"string"`
-
-	Sources []InputSourceRequest `locationName:"sources" type:"list"`
-}
-
-// String returns the string representation
-func (s UpdateInputInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateInputInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateInputInput"}
-
-	if s.InputId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("InputId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s UpdateInputInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.Destinations != nil {
-		v := s.Destinations
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "destinations", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	if s.InputSecurityGroups != nil {
-		v := s.InputSecurityGroups
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "inputSecurityGroups", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
-		}
-		ls0.End()
-
-	}
-	if s.MediaConnectFlows != nil {
-		v := s.MediaConnectFlows
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "mediaConnectFlows", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	if s.Name != nil {
-		v := *s.Name
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.RoleArn != nil {
-		v := *s.RoleArn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "roleArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Sources != nil {
-		v := s.Sources
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "sources", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	if s.InputId != nil {
-		v := *s.InputId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "inputId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type UpdateInputOutput struct {
-	_ struct{} `type:"structure"`
-
-	Input *Input `locationName:"input" type:"structure"`
-}
-
-// String returns the string representation
-func (s UpdateInputOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s UpdateInputOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.Input != nil {
-		v := s.Input
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "input", v, metadata)
-	}
-	return nil
-}
 
 const opUpdateInput = "UpdateInput"
 
@@ -158,7 +24,7 @@ const opUpdateInput = "UpdateInput"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/UpdateInput
-func (c *Client) UpdateInputRequest(input *UpdateInputInput) UpdateInputRequest {
+func (c *Client) UpdateInputRequest(input *types.UpdateInputInput) UpdateInputRequest {
 	op := &aws.Operation{
 		Name:       opUpdateInput,
 		HTTPMethod: "PUT",
@@ -166,10 +32,10 @@ func (c *Client) UpdateInputRequest(input *UpdateInputInput) UpdateInputRequest 
 	}
 
 	if input == nil {
-		input = &UpdateInputInput{}
+		input = &types.UpdateInputInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateInputOutput{})
+	req := c.newRequest(op, input, &types.UpdateInputOutput{})
 	return UpdateInputRequest{Request: req, Input: input, Copy: c.UpdateInputRequest}
 }
 
@@ -177,8 +43,8 @@ func (c *Client) UpdateInputRequest(input *UpdateInputInput) UpdateInputRequest 
 // UpdateInput API operation.
 type UpdateInputRequest struct {
 	*aws.Request
-	Input *UpdateInputInput
-	Copy  func(*UpdateInputInput) UpdateInputRequest
+	Input *types.UpdateInputInput
+	Copy  func(*types.UpdateInputInput) UpdateInputRequest
 }
 
 // Send marshals and sends the UpdateInput API request.
@@ -190,7 +56,7 @@ func (r UpdateInputRequest) Send(ctx context.Context) (*UpdateInputResponse, err
 	}
 
 	resp := &UpdateInputResponse{
-		UpdateInputOutput: r.Request.Data.(*UpdateInputOutput),
+		UpdateInputOutput: r.Request.Data.(*types.UpdateInputOutput),
 		response:          &aws.Response{Request: r.Request},
 	}
 
@@ -200,7 +66,7 @@ func (r UpdateInputRequest) Send(ctx context.Context) (*UpdateInputResponse, err
 // UpdateInputResponse is the response type for the
 // UpdateInput API operation.
 type UpdateInputResponse struct {
-	*UpdateInputOutput
+	*types.UpdateInputOutput
 
 	response *aws.Response
 }

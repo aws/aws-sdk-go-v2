@@ -6,36 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/rds/types"
 )
-
-type RemoveFromGlobalClusterInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) identifying the cluster that was detached
-	// from the Aurora global database cluster.
-	DbClusterIdentifier *string `type:"string"`
-
-	// The cluster identifier to detach from the Aurora global database cluster.
-	GlobalClusterIdentifier *string `type:"string"`
-}
-
-// String returns the string representation
-func (s RemoveFromGlobalClusterInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type RemoveFromGlobalClusterOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A data type representing an Aurora global database.
-	GlobalCluster *GlobalCluster `type:"structure"`
-}
-
-// String returns the string representation
-func (s RemoveFromGlobalClusterOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opRemoveFromGlobalCluster = "RemoveFromGlobalCluster"
 
@@ -57,7 +29,7 @@ const opRemoveFromGlobalCluster = "RemoveFromGlobalCluster"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RemoveFromGlobalCluster
-func (c *Client) RemoveFromGlobalClusterRequest(input *RemoveFromGlobalClusterInput) RemoveFromGlobalClusterRequest {
+func (c *Client) RemoveFromGlobalClusterRequest(input *types.RemoveFromGlobalClusterInput) RemoveFromGlobalClusterRequest {
 	op := &aws.Operation{
 		Name:       opRemoveFromGlobalCluster,
 		HTTPMethod: "POST",
@@ -65,10 +37,10 @@ func (c *Client) RemoveFromGlobalClusterRequest(input *RemoveFromGlobalClusterIn
 	}
 
 	if input == nil {
-		input = &RemoveFromGlobalClusterInput{}
+		input = &types.RemoveFromGlobalClusterInput{}
 	}
 
-	req := c.newRequest(op, input, &RemoveFromGlobalClusterOutput{})
+	req := c.newRequest(op, input, &types.RemoveFromGlobalClusterOutput{})
 	return RemoveFromGlobalClusterRequest{Request: req, Input: input, Copy: c.RemoveFromGlobalClusterRequest}
 }
 
@@ -76,8 +48,8 @@ func (c *Client) RemoveFromGlobalClusterRequest(input *RemoveFromGlobalClusterIn
 // RemoveFromGlobalCluster API operation.
 type RemoveFromGlobalClusterRequest struct {
 	*aws.Request
-	Input *RemoveFromGlobalClusterInput
-	Copy  func(*RemoveFromGlobalClusterInput) RemoveFromGlobalClusterRequest
+	Input *types.RemoveFromGlobalClusterInput
+	Copy  func(*types.RemoveFromGlobalClusterInput) RemoveFromGlobalClusterRequest
 }
 
 // Send marshals and sends the RemoveFromGlobalCluster API request.
@@ -89,7 +61,7 @@ func (r RemoveFromGlobalClusterRequest) Send(ctx context.Context) (*RemoveFromGl
 	}
 
 	resp := &RemoveFromGlobalClusterResponse{
-		RemoveFromGlobalClusterOutput: r.Request.Data.(*RemoveFromGlobalClusterOutput),
+		RemoveFromGlobalClusterOutput: r.Request.Data.(*types.RemoveFromGlobalClusterOutput),
 		response:                      &aws.Response{Request: r.Request},
 	}
 
@@ -99,7 +71,7 @@ func (r RemoveFromGlobalClusterRequest) Send(ctx context.Context) (*RemoveFromGl
 // RemoveFromGlobalClusterResponse is the response type for the
 // RemoveFromGlobalCluster API operation.
 type RemoveFromGlobalClusterResponse struct {
-	*RemoveFromGlobalClusterOutput
+	*types.RemoveFromGlobalClusterOutput
 
 	response *aws.Response
 }

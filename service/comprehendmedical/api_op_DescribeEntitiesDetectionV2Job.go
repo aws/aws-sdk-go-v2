@@ -6,52 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/comprehendmedical/types"
 )
-
-type DescribeEntitiesDetectionV2JobInput struct {
-	_ struct{} `type:"structure"`
-
-	// The identifier that Amazon Comprehend Medical generated for the job. The
-	// StartEntitiesDetectionV2Job operation returns this identifier in its response.
-	//
-	// JobId is a required field
-	JobId *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeEntitiesDetectionV2JobInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeEntitiesDetectionV2JobInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeEntitiesDetectionV2JobInput"}
-
-	if s.JobId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("JobId"))
-	}
-	if s.JobId != nil && len(*s.JobId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("JobId", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribeEntitiesDetectionV2JobOutput struct {
-	_ struct{} `type:"structure"`
-
-	// An object that contains the properties associated with a detection job.
-	ComprehendMedicalAsyncJobProperties *ComprehendMedicalAsyncJobProperties `type:"structure"`
-}
-
-// String returns the string representation
-func (s DescribeEntitiesDetectionV2JobOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeEntitiesDetectionV2Job = "DescribeEntitiesDetectionV2Job"
 
@@ -69,7 +25,7 @@ const opDescribeEntitiesDetectionV2Job = "DescribeEntitiesDetectionV2Job"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/comprehendmedical-2018-10-30/DescribeEntitiesDetectionV2Job
-func (c *Client) DescribeEntitiesDetectionV2JobRequest(input *DescribeEntitiesDetectionV2JobInput) DescribeEntitiesDetectionV2JobRequest {
+func (c *Client) DescribeEntitiesDetectionV2JobRequest(input *types.DescribeEntitiesDetectionV2JobInput) DescribeEntitiesDetectionV2JobRequest {
 	op := &aws.Operation{
 		Name:       opDescribeEntitiesDetectionV2Job,
 		HTTPMethod: "POST",
@@ -77,10 +33,10 @@ func (c *Client) DescribeEntitiesDetectionV2JobRequest(input *DescribeEntitiesDe
 	}
 
 	if input == nil {
-		input = &DescribeEntitiesDetectionV2JobInput{}
+		input = &types.DescribeEntitiesDetectionV2JobInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeEntitiesDetectionV2JobOutput{})
+	req := c.newRequest(op, input, &types.DescribeEntitiesDetectionV2JobOutput{})
 	return DescribeEntitiesDetectionV2JobRequest{Request: req, Input: input, Copy: c.DescribeEntitiesDetectionV2JobRequest}
 }
 
@@ -88,8 +44,8 @@ func (c *Client) DescribeEntitiesDetectionV2JobRequest(input *DescribeEntitiesDe
 // DescribeEntitiesDetectionV2Job API operation.
 type DescribeEntitiesDetectionV2JobRequest struct {
 	*aws.Request
-	Input *DescribeEntitiesDetectionV2JobInput
-	Copy  func(*DescribeEntitiesDetectionV2JobInput) DescribeEntitiesDetectionV2JobRequest
+	Input *types.DescribeEntitiesDetectionV2JobInput
+	Copy  func(*types.DescribeEntitiesDetectionV2JobInput) DescribeEntitiesDetectionV2JobRequest
 }
 
 // Send marshals and sends the DescribeEntitiesDetectionV2Job API request.
@@ -101,7 +57,7 @@ func (r DescribeEntitiesDetectionV2JobRequest) Send(ctx context.Context) (*Descr
 	}
 
 	resp := &DescribeEntitiesDetectionV2JobResponse{
-		DescribeEntitiesDetectionV2JobOutput: r.Request.Data.(*DescribeEntitiesDetectionV2JobOutput),
+		DescribeEntitiesDetectionV2JobOutput: r.Request.Data.(*types.DescribeEntitiesDetectionV2JobOutput),
 		response:                             &aws.Response{Request: r.Request},
 	}
 
@@ -111,7 +67,7 @@ func (r DescribeEntitiesDetectionV2JobRequest) Send(ctx context.Context) (*Descr
 // DescribeEntitiesDetectionV2JobResponse is the response type for the
 // DescribeEntitiesDetectionV2Job API operation.
 type DescribeEntitiesDetectionV2JobResponse struct {
-	*DescribeEntitiesDetectionV2JobOutput
+	*types.DescribeEntitiesDetectionV2JobOutput
 
 	response *aws.Response
 }

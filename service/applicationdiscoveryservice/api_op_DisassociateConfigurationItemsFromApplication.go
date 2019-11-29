@@ -6,54 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/applicationdiscoveryservice/types"
 )
-
-type DisassociateConfigurationItemsFromApplicationInput struct {
-	_ struct{} `type:"structure"`
-
-	// Configuration ID of an application from which each item is disassociated.
-	//
-	// ApplicationConfigurationId is a required field
-	ApplicationConfigurationId *string `locationName:"applicationConfigurationId" type:"string" required:"true"`
-
-	// Configuration ID of each item to be disassociated from an application.
-	//
-	// ConfigurationIds is a required field
-	ConfigurationIds []string `locationName:"configurationIds" type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s DisassociateConfigurationItemsFromApplicationInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DisassociateConfigurationItemsFromApplicationInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DisassociateConfigurationItemsFromApplicationInput"}
-
-	if s.ApplicationConfigurationId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ApplicationConfigurationId"))
-	}
-
-	if s.ConfigurationIds == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ConfigurationIds"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DisassociateConfigurationItemsFromApplicationOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DisassociateConfigurationItemsFromApplicationOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDisassociateConfigurationItemsFromApplication = "DisassociateConfigurationItemsFromApplication"
 
@@ -70,7 +24,7 @@ const opDisassociateConfigurationItemsFromApplication = "DisassociateConfigurati
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/discovery-2015-11-01/DisassociateConfigurationItemsFromApplication
-func (c *Client) DisassociateConfigurationItemsFromApplicationRequest(input *DisassociateConfigurationItemsFromApplicationInput) DisassociateConfigurationItemsFromApplicationRequest {
+func (c *Client) DisassociateConfigurationItemsFromApplicationRequest(input *types.DisassociateConfigurationItemsFromApplicationInput) DisassociateConfigurationItemsFromApplicationRequest {
 	op := &aws.Operation{
 		Name:       opDisassociateConfigurationItemsFromApplication,
 		HTTPMethod: "POST",
@@ -78,10 +32,10 @@ func (c *Client) DisassociateConfigurationItemsFromApplicationRequest(input *Dis
 	}
 
 	if input == nil {
-		input = &DisassociateConfigurationItemsFromApplicationInput{}
+		input = &types.DisassociateConfigurationItemsFromApplicationInput{}
 	}
 
-	req := c.newRequest(op, input, &DisassociateConfigurationItemsFromApplicationOutput{})
+	req := c.newRequest(op, input, &types.DisassociateConfigurationItemsFromApplicationOutput{})
 	return DisassociateConfigurationItemsFromApplicationRequest{Request: req, Input: input, Copy: c.DisassociateConfigurationItemsFromApplicationRequest}
 }
 
@@ -89,8 +43,8 @@ func (c *Client) DisassociateConfigurationItemsFromApplicationRequest(input *Dis
 // DisassociateConfigurationItemsFromApplication API operation.
 type DisassociateConfigurationItemsFromApplicationRequest struct {
 	*aws.Request
-	Input *DisassociateConfigurationItemsFromApplicationInput
-	Copy  func(*DisassociateConfigurationItemsFromApplicationInput) DisassociateConfigurationItemsFromApplicationRequest
+	Input *types.DisassociateConfigurationItemsFromApplicationInput
+	Copy  func(*types.DisassociateConfigurationItemsFromApplicationInput) DisassociateConfigurationItemsFromApplicationRequest
 }
 
 // Send marshals and sends the DisassociateConfigurationItemsFromApplication API request.
@@ -102,7 +56,7 @@ func (r DisassociateConfigurationItemsFromApplicationRequest) Send(ctx context.C
 	}
 
 	resp := &DisassociateConfigurationItemsFromApplicationResponse{
-		DisassociateConfigurationItemsFromApplicationOutput: r.Request.Data.(*DisassociateConfigurationItemsFromApplicationOutput),
+		DisassociateConfigurationItemsFromApplicationOutput: r.Request.Data.(*types.DisassociateConfigurationItemsFromApplicationOutput),
 		response: &aws.Response{Request: r.Request},
 	}
 
@@ -112,7 +66,7 @@ func (r DisassociateConfigurationItemsFromApplicationRequest) Send(ctx context.C
 // DisassociateConfigurationItemsFromApplicationResponse is the response type for the
 // DisassociateConfigurationItemsFromApplication API operation.
 type DisassociateConfigurationItemsFromApplicationResponse struct {
-	*DisassociateConfigurationItemsFromApplicationOutput
+	*types.DisassociateConfigurationItemsFromApplicationOutput
 
 	response *aws.Response
 }

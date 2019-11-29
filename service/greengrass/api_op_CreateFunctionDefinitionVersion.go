@@ -4,136 +4,10 @@ package greengrass
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/greengrass/types"
 )
-
-type CreateFunctionDefinitionVersionInput struct {
-	_ struct{} `type:"structure"`
-
-	AmznClientToken *string `location:"header" locationName:"X-Amzn-Client-Token" type:"string"`
-
-	// The default configuration that applies to all Lambda functions in the group.
-	// Individual Lambda functions can override these settings.
-	DefaultConfig *FunctionDefaultConfig `type:"structure"`
-
-	// FunctionDefinitionId is a required field
-	FunctionDefinitionId *string `location:"uri" locationName:"FunctionDefinitionId" type:"string" required:"true"`
-
-	Functions []Function `type:"list"`
-}
-
-// String returns the string representation
-func (s CreateFunctionDefinitionVersionInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateFunctionDefinitionVersionInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateFunctionDefinitionVersionInput"}
-
-	if s.FunctionDefinitionId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("FunctionDefinitionId"))
-	}
-	if s.Functions != nil {
-		for i, v := range s.Functions {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Functions", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s CreateFunctionDefinitionVersionInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.DefaultConfig != nil {
-		v := s.DefaultConfig
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "DefaultConfig", v, metadata)
-	}
-	if s.Functions != nil {
-		v := s.Functions
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "Functions", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	if s.AmznClientToken != nil {
-		v := *s.AmznClientToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "X-Amzn-Client-Token", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.FunctionDefinitionId != nil {
-		v := *s.FunctionDefinitionId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "FunctionDefinitionId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type CreateFunctionDefinitionVersionOutput struct {
-	_ struct{} `type:"structure"`
-
-	Arn *string `type:"string"`
-
-	CreationTimestamp *string `type:"string"`
-
-	Id *string `type:"string"`
-
-	Version *string `type:"string"`
-}
-
-// String returns the string representation
-func (s CreateFunctionDefinitionVersionOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s CreateFunctionDefinitionVersionOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.Arn != nil {
-		v := *s.Arn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "Arn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.CreationTimestamp != nil {
-		v := *s.CreationTimestamp
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "CreationTimestamp", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Id != nil {
-		v := *s.Id
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "Id", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Version != nil {
-		v := *s.Version
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "Version", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opCreateFunctionDefinitionVersion = "CreateFunctionDefinitionVersion"
 
@@ -150,7 +24,7 @@ const opCreateFunctionDefinitionVersion = "CreateFunctionDefinitionVersion"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/CreateFunctionDefinitionVersion
-func (c *Client) CreateFunctionDefinitionVersionRequest(input *CreateFunctionDefinitionVersionInput) CreateFunctionDefinitionVersionRequest {
+func (c *Client) CreateFunctionDefinitionVersionRequest(input *types.CreateFunctionDefinitionVersionInput) CreateFunctionDefinitionVersionRequest {
 	op := &aws.Operation{
 		Name:       opCreateFunctionDefinitionVersion,
 		HTTPMethod: "POST",
@@ -158,10 +32,10 @@ func (c *Client) CreateFunctionDefinitionVersionRequest(input *CreateFunctionDef
 	}
 
 	if input == nil {
-		input = &CreateFunctionDefinitionVersionInput{}
+		input = &types.CreateFunctionDefinitionVersionInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateFunctionDefinitionVersionOutput{})
+	req := c.newRequest(op, input, &types.CreateFunctionDefinitionVersionOutput{})
 	return CreateFunctionDefinitionVersionRequest{Request: req, Input: input, Copy: c.CreateFunctionDefinitionVersionRequest}
 }
 
@@ -169,8 +43,8 @@ func (c *Client) CreateFunctionDefinitionVersionRequest(input *CreateFunctionDef
 // CreateFunctionDefinitionVersion API operation.
 type CreateFunctionDefinitionVersionRequest struct {
 	*aws.Request
-	Input *CreateFunctionDefinitionVersionInput
-	Copy  func(*CreateFunctionDefinitionVersionInput) CreateFunctionDefinitionVersionRequest
+	Input *types.CreateFunctionDefinitionVersionInput
+	Copy  func(*types.CreateFunctionDefinitionVersionInput) CreateFunctionDefinitionVersionRequest
 }
 
 // Send marshals and sends the CreateFunctionDefinitionVersion API request.
@@ -182,7 +56,7 @@ func (r CreateFunctionDefinitionVersionRequest) Send(ctx context.Context) (*Crea
 	}
 
 	resp := &CreateFunctionDefinitionVersionResponse{
-		CreateFunctionDefinitionVersionOutput: r.Request.Data.(*CreateFunctionDefinitionVersionOutput),
+		CreateFunctionDefinitionVersionOutput: r.Request.Data.(*types.CreateFunctionDefinitionVersionOutput),
 		response:                              &aws.Response{Request: r.Request},
 	}
 
@@ -192,7 +66,7 @@ func (r CreateFunctionDefinitionVersionRequest) Send(ctx context.Context) (*Crea
 // CreateFunctionDefinitionVersionResponse is the response type for the
 // CreateFunctionDefinitionVersion API operation.
 type CreateFunctionDefinitionVersionResponse struct {
-	*CreateFunctionDefinitionVersionOutput
+	*types.CreateFunctionDefinitionVersionOutput
 
 	response *aws.Response
 }

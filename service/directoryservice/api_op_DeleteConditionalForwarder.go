@@ -6,57 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/directoryservice/types"
 )
-
-// Deletes a conditional forwarder.
-type DeleteConditionalForwarderInput struct {
-	_ struct{} `type:"structure"`
-
-	// The directory ID for which you are deleting the conditional forwarder.
-	//
-	// DirectoryId is a required field
-	DirectoryId *string `type:"string" required:"true"`
-
-	// The fully qualified domain name (FQDN) of the remote domain with which you
-	// are deleting the conditional forwarder.
-	//
-	// RemoteDomainName is a required field
-	RemoteDomainName *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteConditionalForwarderInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteConditionalForwarderInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteConditionalForwarderInput"}
-
-	if s.DirectoryId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DirectoryId"))
-	}
-
-	if s.RemoteDomainName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("RemoteDomainName"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// The result of a DeleteConditionalForwarder request.
-type DeleteConditionalForwarderOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteConditionalForwarderOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteConditionalForwarder = "DeleteConditionalForwarder"
 
@@ -73,7 +24,7 @@ const opDeleteConditionalForwarder = "DeleteConditionalForwarder"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DeleteConditionalForwarder
-func (c *Client) DeleteConditionalForwarderRequest(input *DeleteConditionalForwarderInput) DeleteConditionalForwarderRequest {
+func (c *Client) DeleteConditionalForwarderRequest(input *types.DeleteConditionalForwarderInput) DeleteConditionalForwarderRequest {
 	op := &aws.Operation{
 		Name:       opDeleteConditionalForwarder,
 		HTTPMethod: "POST",
@@ -81,10 +32,10 @@ func (c *Client) DeleteConditionalForwarderRequest(input *DeleteConditionalForwa
 	}
 
 	if input == nil {
-		input = &DeleteConditionalForwarderInput{}
+		input = &types.DeleteConditionalForwarderInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteConditionalForwarderOutput{})
+	req := c.newRequest(op, input, &types.DeleteConditionalForwarderOutput{})
 	return DeleteConditionalForwarderRequest{Request: req, Input: input, Copy: c.DeleteConditionalForwarderRequest}
 }
 
@@ -92,8 +43,8 @@ func (c *Client) DeleteConditionalForwarderRequest(input *DeleteConditionalForwa
 // DeleteConditionalForwarder API operation.
 type DeleteConditionalForwarderRequest struct {
 	*aws.Request
-	Input *DeleteConditionalForwarderInput
-	Copy  func(*DeleteConditionalForwarderInput) DeleteConditionalForwarderRequest
+	Input *types.DeleteConditionalForwarderInput
+	Copy  func(*types.DeleteConditionalForwarderInput) DeleteConditionalForwarderRequest
 }
 
 // Send marshals and sends the DeleteConditionalForwarder API request.
@@ -105,7 +56,7 @@ func (r DeleteConditionalForwarderRequest) Send(ctx context.Context) (*DeleteCon
 	}
 
 	resp := &DeleteConditionalForwarderResponse{
-		DeleteConditionalForwarderOutput: r.Request.Data.(*DeleteConditionalForwarderOutput),
+		DeleteConditionalForwarderOutput: r.Request.Data.(*types.DeleteConditionalForwarderOutput),
 		response:                         &aws.Response{Request: r.Request},
 	}
 
@@ -115,7 +66,7 @@ func (r DeleteConditionalForwarderRequest) Send(ctx context.Context) (*DeleteCon
 // DeleteConditionalForwarderResponse is the response type for the
 // DeleteConditionalForwarder API operation.
 type DeleteConditionalForwarderResponse struct {
-	*DeleteConditionalForwarderOutput
+	*types.DeleteConditionalForwarderOutput
 
 	response *aws.Response
 }

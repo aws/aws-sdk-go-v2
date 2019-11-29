@@ -6,91 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/budgets/types"
 )
-
-// Request of UpdateNotification
-type UpdateNotificationInput struct {
-	_ struct{} `type:"structure"`
-
-	// The accountId that is associated with the budget whose notification you want
-	// to update.
-	//
-	// AccountId is a required field
-	AccountId *string `min:"12" type:"string" required:"true"`
-
-	// The name of the budget whose notification you want to update.
-	//
-	// BudgetName is a required field
-	BudgetName *string `min:"1" type:"string" required:"true"`
-
-	// The updated notification to be associated with a budget.
-	//
-	// NewNotification is a required field
-	NewNotification *Notification `type:"structure" required:"true"`
-
-	// The previous notification that is associated with a budget.
-	//
-	// OldNotification is a required field
-	OldNotification *Notification `type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s UpdateNotificationInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateNotificationInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateNotificationInput"}
-
-	if s.AccountId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("AccountId"))
-	}
-	if s.AccountId != nil && len(*s.AccountId) < 12 {
-		invalidParams.Add(aws.NewErrParamMinLen("AccountId", 12))
-	}
-
-	if s.BudgetName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("BudgetName"))
-	}
-	if s.BudgetName != nil && len(*s.BudgetName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("BudgetName", 1))
-	}
-
-	if s.NewNotification == nil {
-		invalidParams.Add(aws.NewErrParamRequired("NewNotification"))
-	}
-
-	if s.OldNotification == nil {
-		invalidParams.Add(aws.NewErrParamRequired("OldNotification"))
-	}
-	if s.NewNotification != nil {
-		if err := s.NewNotification.Validate(); err != nil {
-			invalidParams.AddNested("NewNotification", err.(aws.ErrInvalidParams))
-		}
-	}
-	if s.OldNotification != nil {
-		if err := s.OldNotification.Validate(); err != nil {
-			invalidParams.AddNested("OldNotification", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Response of UpdateNotification
-type UpdateNotificationOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s UpdateNotificationOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opUpdateNotification = "UpdateNotification"
 
@@ -105,7 +22,7 @@ const opUpdateNotification = "UpdateNotification"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) UpdateNotificationRequest(input *UpdateNotificationInput) UpdateNotificationRequest {
+func (c *Client) UpdateNotificationRequest(input *types.UpdateNotificationInput) UpdateNotificationRequest {
 	op := &aws.Operation{
 		Name:       opUpdateNotification,
 		HTTPMethod: "POST",
@@ -113,10 +30,10 @@ func (c *Client) UpdateNotificationRequest(input *UpdateNotificationInput) Updat
 	}
 
 	if input == nil {
-		input = &UpdateNotificationInput{}
+		input = &types.UpdateNotificationInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateNotificationOutput{})
+	req := c.newRequest(op, input, &types.UpdateNotificationOutput{})
 	return UpdateNotificationRequest{Request: req, Input: input, Copy: c.UpdateNotificationRequest}
 }
 
@@ -124,8 +41,8 @@ func (c *Client) UpdateNotificationRequest(input *UpdateNotificationInput) Updat
 // UpdateNotification API operation.
 type UpdateNotificationRequest struct {
 	*aws.Request
-	Input *UpdateNotificationInput
-	Copy  func(*UpdateNotificationInput) UpdateNotificationRequest
+	Input *types.UpdateNotificationInput
+	Copy  func(*types.UpdateNotificationInput) UpdateNotificationRequest
 }
 
 // Send marshals and sends the UpdateNotification API request.
@@ -137,7 +54,7 @@ func (r UpdateNotificationRequest) Send(ctx context.Context) (*UpdateNotificatio
 	}
 
 	resp := &UpdateNotificationResponse{
-		UpdateNotificationOutput: r.Request.Data.(*UpdateNotificationOutput),
+		UpdateNotificationOutput: r.Request.Data.(*types.UpdateNotificationOutput),
 		response:                 &aws.Response{Request: r.Request},
 	}
 
@@ -147,7 +64,7 @@ func (r UpdateNotificationRequest) Send(ctx context.Context) (*UpdateNotificatio
 // UpdateNotificationResponse is the response type for the
 // UpdateNotification API operation.
 type UpdateNotificationResponse struct {
-	*UpdateNotificationOutput
+	*types.UpdateNotificationOutput
 
 	response *aws.Response
 }

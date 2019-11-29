@@ -6,83 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/iam/types"
 )
-
-type ListVirtualMFADevicesInput struct {
-	_ struct{} `type:"structure"`
-
-	// The status (Unassigned or Assigned) of the devices to list. If you do not
-	// specify an AssignmentStatus, the operation defaults to Any, which lists both
-	// assigned and unassigned virtual MFA devices.,
-	AssignmentStatus AssignmentStatusType `type:"string" enum:"true"`
-
-	// Use this parameter only when paginating results and only after you receive
-	// a response indicating that the results are truncated. Set it to the value
-	// of the Marker element in the response that you received to indicate where
-	// the next call should start.
-	Marker *string `min:"1" type:"string"`
-
-	// Use this only when paginating results to indicate the maximum number of items
-	// you want in the response. If additional items exist beyond the maximum you
-	// specify, the IsTruncated response element is true.
-	//
-	// If you do not include this parameter, the number of items defaults to 100.
-	// Note that IAM might return fewer results, even when there are more results
-	// available. In that case, the IsTruncated response element returns true, and
-	// Marker contains a value to include in the subsequent call that tells the
-	// service where to continue from.
-	MaxItems *int64 `min:"1" type:"integer"`
-}
-
-// String returns the string representation
-func (s ListVirtualMFADevicesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListVirtualMFADevicesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListVirtualMFADevicesInput"}
-	if s.Marker != nil && len(*s.Marker) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Marker", 1))
-	}
-	if s.MaxItems != nil && *s.MaxItems < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxItems", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Contains the response to a successful ListVirtualMFADevices request.
-type ListVirtualMFADevicesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A flag that indicates whether there are more items to return. If your results
-	// were truncated, you can make a subsequent pagination request using the Marker
-	// request parameter to retrieve more items. Note that IAM might return fewer
-	// than the MaxItems number of results even when there are more results available.
-	// We recommend that you check IsTruncated after every call to ensure that you
-	// receive all your results.
-	IsTruncated *bool `type:"boolean"`
-
-	// When IsTruncated is true, this element is present and contains the value
-	// to use for the Marker parameter in a subsequent pagination request.
-	Marker *string `type:"string"`
-
-	// The list of virtual MFA devices in the current account that match the AssignmentStatus
-	// value that was passed in the request.
-	//
-	// VirtualMFADevices is a required field
-	VirtualMFADevices []VirtualMFADevice `type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s ListVirtualMFADevicesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListVirtualMFADevices = "ListVirtualMFADevices"
 
@@ -104,7 +29,7 @@ const opListVirtualMFADevices = "ListVirtualMFADevices"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListVirtualMFADevices
-func (c *Client) ListVirtualMFADevicesRequest(input *ListVirtualMFADevicesInput) ListVirtualMFADevicesRequest {
+func (c *Client) ListVirtualMFADevicesRequest(input *types.ListVirtualMFADevicesInput) ListVirtualMFADevicesRequest {
 	op := &aws.Operation{
 		Name:       opListVirtualMFADevices,
 		HTTPMethod: "POST",
@@ -118,10 +43,10 @@ func (c *Client) ListVirtualMFADevicesRequest(input *ListVirtualMFADevicesInput)
 	}
 
 	if input == nil {
-		input = &ListVirtualMFADevicesInput{}
+		input = &types.ListVirtualMFADevicesInput{}
 	}
 
-	req := c.newRequest(op, input, &ListVirtualMFADevicesOutput{})
+	req := c.newRequest(op, input, &types.ListVirtualMFADevicesOutput{})
 	return ListVirtualMFADevicesRequest{Request: req, Input: input, Copy: c.ListVirtualMFADevicesRequest}
 }
 
@@ -129,8 +54,8 @@ func (c *Client) ListVirtualMFADevicesRequest(input *ListVirtualMFADevicesInput)
 // ListVirtualMFADevices API operation.
 type ListVirtualMFADevicesRequest struct {
 	*aws.Request
-	Input *ListVirtualMFADevicesInput
-	Copy  func(*ListVirtualMFADevicesInput) ListVirtualMFADevicesRequest
+	Input *types.ListVirtualMFADevicesInput
+	Copy  func(*types.ListVirtualMFADevicesInput) ListVirtualMFADevicesRequest
 }
 
 // Send marshals and sends the ListVirtualMFADevices API request.
@@ -142,7 +67,7 @@ func (r ListVirtualMFADevicesRequest) Send(ctx context.Context) (*ListVirtualMFA
 	}
 
 	resp := &ListVirtualMFADevicesResponse{
-		ListVirtualMFADevicesOutput: r.Request.Data.(*ListVirtualMFADevicesOutput),
+		ListVirtualMFADevicesOutput: r.Request.Data.(*types.ListVirtualMFADevicesOutput),
 		response:                    &aws.Response{Request: r.Request},
 	}
 
@@ -172,7 +97,7 @@ func NewListVirtualMFADevicesPaginator(req ListVirtualMFADevicesRequest) ListVir
 	return ListVirtualMFADevicesPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListVirtualMFADevicesInput
+				var inCpy *types.ListVirtualMFADevicesInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -192,14 +117,14 @@ type ListVirtualMFADevicesPaginator struct {
 	aws.Pager
 }
 
-func (p *ListVirtualMFADevicesPaginator) CurrentPage() *ListVirtualMFADevicesOutput {
-	return p.Pager.CurrentPage().(*ListVirtualMFADevicesOutput)
+func (p *ListVirtualMFADevicesPaginator) CurrentPage() *types.ListVirtualMFADevicesOutput {
+	return p.Pager.CurrentPage().(*types.ListVirtualMFADevicesOutput)
 }
 
 // ListVirtualMFADevicesResponse is the response type for the
 // ListVirtualMFADevices API operation.
 type ListVirtualMFADevicesResponse struct {
-	*ListVirtualMFADevicesOutput
+	*types.ListVirtualMFADevicesOutput
 
 	response *aws.Response
 }

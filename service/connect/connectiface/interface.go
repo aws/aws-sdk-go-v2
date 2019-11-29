@@ -10,6 +10,7 @@ package connectiface
 
 import (
 	"github.com/aws/aws-sdk-go-v2/service/connect"
+	"github.com/aws/aws-sdk-go-v2/service/connect/types"
 )
 
 // ClientAPI provides an interface to enable mocking the
@@ -43,7 +44,7 @@ import (
 //    type mockClientClient struct {
 //        connectiface.ClientPI
 //    }
-//    func (m *mockClientClient) CreateUser(input *connect.CreateUserInput) (*connect.CreateUserOutput, error) {
+//    func (m *mockClientClient) CreateUser(input *types.CreateUserInput) (*types.CreateUserOutput, error) {
 //        // mock response/functionality
 //    }
 //
@@ -61,47 +62,61 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type ClientAPI interface {
-	CreateUserRequest(*connect.CreateUserInput) connect.CreateUserRequest
+	CreateUserRequest(*types.CreateUserInput) connect.CreateUserRequest
 
-	DeleteUserRequest(*connect.DeleteUserInput) connect.DeleteUserRequest
+	DeleteUserRequest(*types.DeleteUserInput) connect.DeleteUserRequest
 
-	DescribeUserRequest(*connect.DescribeUserInput) connect.DescribeUserRequest
+	DescribeUserRequest(*types.DescribeUserInput) connect.DescribeUserRequest
 
-	DescribeUserHierarchyGroupRequest(*connect.DescribeUserHierarchyGroupInput) connect.DescribeUserHierarchyGroupRequest
+	DescribeUserHierarchyGroupRequest(*types.DescribeUserHierarchyGroupInput) connect.DescribeUserHierarchyGroupRequest
 
-	DescribeUserHierarchyStructureRequest(*connect.DescribeUserHierarchyStructureInput) connect.DescribeUserHierarchyStructureRequest
+	DescribeUserHierarchyStructureRequest(*types.DescribeUserHierarchyStructureInput) connect.DescribeUserHierarchyStructureRequest
 
-	GetContactAttributesRequest(*connect.GetContactAttributesInput) connect.GetContactAttributesRequest
+	GetContactAttributesRequest(*types.GetContactAttributesInput) connect.GetContactAttributesRequest
 
-	GetCurrentMetricDataRequest(*connect.GetCurrentMetricDataInput) connect.GetCurrentMetricDataRequest
+	GetCurrentMetricDataRequest(*types.GetCurrentMetricDataInput) connect.GetCurrentMetricDataRequest
 
-	GetFederationTokenRequest(*connect.GetFederationTokenInput) connect.GetFederationTokenRequest
+	GetFederationTokenRequest(*types.GetFederationTokenInput) connect.GetFederationTokenRequest
 
-	GetMetricDataRequest(*connect.GetMetricDataInput) connect.GetMetricDataRequest
+	GetMetricDataRequest(*types.GetMetricDataInput) connect.GetMetricDataRequest
 
-	ListRoutingProfilesRequest(*connect.ListRoutingProfilesInput) connect.ListRoutingProfilesRequest
+	ListContactFlowsRequest(*types.ListContactFlowsInput) connect.ListContactFlowsRequest
 
-	ListSecurityProfilesRequest(*connect.ListSecurityProfilesInput) connect.ListSecurityProfilesRequest
+	ListHoursOfOperationsRequest(*types.ListHoursOfOperationsInput) connect.ListHoursOfOperationsRequest
 
-	ListUserHierarchyGroupsRequest(*connect.ListUserHierarchyGroupsInput) connect.ListUserHierarchyGroupsRequest
+	ListPhoneNumbersRequest(*types.ListPhoneNumbersInput) connect.ListPhoneNumbersRequest
 
-	ListUsersRequest(*connect.ListUsersInput) connect.ListUsersRequest
+	ListQueuesRequest(*types.ListQueuesInput) connect.ListQueuesRequest
 
-	StartOutboundVoiceContactRequest(*connect.StartOutboundVoiceContactInput) connect.StartOutboundVoiceContactRequest
+	ListRoutingProfilesRequest(*types.ListRoutingProfilesInput) connect.ListRoutingProfilesRequest
 
-	StopContactRequest(*connect.StopContactInput) connect.StopContactRequest
+	ListSecurityProfilesRequest(*types.ListSecurityProfilesInput) connect.ListSecurityProfilesRequest
 
-	UpdateContactAttributesRequest(*connect.UpdateContactAttributesInput) connect.UpdateContactAttributesRequest
+	ListTagsForResourceRequest(*types.ListTagsForResourceInput) connect.ListTagsForResourceRequest
 
-	UpdateUserHierarchyRequest(*connect.UpdateUserHierarchyInput) connect.UpdateUserHierarchyRequest
+	ListUserHierarchyGroupsRequest(*types.ListUserHierarchyGroupsInput) connect.ListUserHierarchyGroupsRequest
 
-	UpdateUserIdentityInfoRequest(*connect.UpdateUserIdentityInfoInput) connect.UpdateUserIdentityInfoRequest
+	ListUsersRequest(*types.ListUsersInput) connect.ListUsersRequest
 
-	UpdateUserPhoneConfigRequest(*connect.UpdateUserPhoneConfigInput) connect.UpdateUserPhoneConfigRequest
+	StartOutboundVoiceContactRequest(*types.StartOutboundVoiceContactInput) connect.StartOutboundVoiceContactRequest
 
-	UpdateUserRoutingProfileRequest(*connect.UpdateUserRoutingProfileInput) connect.UpdateUserRoutingProfileRequest
+	StopContactRequest(*types.StopContactInput) connect.StopContactRequest
 
-	UpdateUserSecurityProfilesRequest(*connect.UpdateUserSecurityProfilesInput) connect.UpdateUserSecurityProfilesRequest
+	TagResourceRequest(*types.TagResourceInput) connect.TagResourceRequest
+
+	UntagResourceRequest(*types.UntagResourceInput) connect.UntagResourceRequest
+
+	UpdateContactAttributesRequest(*types.UpdateContactAttributesInput) connect.UpdateContactAttributesRequest
+
+	UpdateUserHierarchyRequest(*types.UpdateUserHierarchyInput) connect.UpdateUserHierarchyRequest
+
+	UpdateUserIdentityInfoRequest(*types.UpdateUserIdentityInfoInput) connect.UpdateUserIdentityInfoRequest
+
+	UpdateUserPhoneConfigRequest(*types.UpdateUserPhoneConfigInput) connect.UpdateUserPhoneConfigRequest
+
+	UpdateUserRoutingProfileRequest(*types.UpdateUserRoutingProfileInput) connect.UpdateUserRoutingProfileRequest
+
+	UpdateUserSecurityProfilesRequest(*types.UpdateUserSecurityProfilesInput) connect.UpdateUserSecurityProfilesRequest
 }
 
 var _ ClientAPI = (*connect.Client)(nil)

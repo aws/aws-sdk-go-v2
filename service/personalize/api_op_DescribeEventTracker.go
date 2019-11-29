@@ -6,48 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/personalize/types"
 )
-
-type DescribeEventTrackerInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the event tracker to describe.
-	//
-	// EventTrackerArn is a required field
-	EventTrackerArn *string `locationName:"eventTrackerArn" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeEventTrackerInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeEventTrackerInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeEventTrackerInput"}
-
-	if s.EventTrackerArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("EventTrackerArn"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribeEventTrackerOutput struct {
-	_ struct{} `type:"structure"`
-
-	// An object that describes the event tracker.
-	EventTracker *EventTracker `locationName:"eventTracker" type:"structure"`
-}
-
-// String returns the string representation
-func (s DescribeEventTrackerOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeEventTracker = "DescribeEventTracker"
 
@@ -65,7 +25,7 @@ const opDescribeEventTracker = "DescribeEventTracker"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/DescribeEventTracker
-func (c *Client) DescribeEventTrackerRequest(input *DescribeEventTrackerInput) DescribeEventTrackerRequest {
+func (c *Client) DescribeEventTrackerRequest(input *types.DescribeEventTrackerInput) DescribeEventTrackerRequest {
 	op := &aws.Operation{
 		Name:       opDescribeEventTracker,
 		HTTPMethod: "POST",
@@ -73,10 +33,10 @@ func (c *Client) DescribeEventTrackerRequest(input *DescribeEventTrackerInput) D
 	}
 
 	if input == nil {
-		input = &DescribeEventTrackerInput{}
+		input = &types.DescribeEventTrackerInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeEventTrackerOutput{})
+	req := c.newRequest(op, input, &types.DescribeEventTrackerOutput{})
 	return DescribeEventTrackerRequest{Request: req, Input: input, Copy: c.DescribeEventTrackerRequest}
 }
 
@@ -84,8 +44,8 @@ func (c *Client) DescribeEventTrackerRequest(input *DescribeEventTrackerInput) D
 // DescribeEventTracker API operation.
 type DescribeEventTrackerRequest struct {
 	*aws.Request
-	Input *DescribeEventTrackerInput
-	Copy  func(*DescribeEventTrackerInput) DescribeEventTrackerRequest
+	Input *types.DescribeEventTrackerInput
+	Copy  func(*types.DescribeEventTrackerInput) DescribeEventTrackerRequest
 }
 
 // Send marshals and sends the DescribeEventTracker API request.
@@ -97,7 +57,7 @@ func (r DescribeEventTrackerRequest) Send(ctx context.Context) (*DescribeEventTr
 	}
 
 	resp := &DescribeEventTrackerResponse{
-		DescribeEventTrackerOutput: r.Request.Data.(*DescribeEventTrackerOutput),
+		DescribeEventTrackerOutput: r.Request.Data.(*types.DescribeEventTrackerOutput),
 		response:                   &aws.Response{Request: r.Request},
 	}
 
@@ -107,7 +67,7 @@ func (r DescribeEventTrackerRequest) Send(ctx context.Context) (*DescribeEventTr
 // DescribeEventTrackerResponse is the response type for the
 // DescribeEventTracker API operation.
 type DescribeEventTrackerResponse struct {
-	*DescribeEventTrackerOutput
+	*types.DescribeEventTrackerOutput
 
 	response *aws.Response
 }

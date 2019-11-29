@@ -6,55 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/pinpointemail/types"
 )
-
-// A request to change the ability of your account to send email.
-type PutAccountSendingAttributesInput struct {
-	_ struct{} `type:"structure"`
-
-	// Enables or disables your account's ability to send email. Set to true to
-	// enable email sending, or set to false to disable email sending.
-	//
-	// If AWS paused your account's ability to send email, you can't use this operation
-	// to resume your account's ability to send email.
-	SendingEnabled *bool `type:"boolean"`
-}
-
-// String returns the string representation
-func (s PutAccountSendingAttributesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s PutAccountSendingAttributesInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.SendingEnabled != nil {
-		v := *s.SendingEnabled
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "SendingEnabled", protocol.BoolValue(v), metadata)
-	}
-	return nil
-}
-
-// An HTTP 200 response if the request succeeds, or an error message if the
-// request fails.
-type PutAccountSendingAttributesOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s PutAccountSendingAttributesOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s PutAccountSendingAttributesOutput) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
 
 const opPutAccountSendingAttributes = "PutAccountSendingAttributes"
 
@@ -71,7 +24,7 @@ const opPutAccountSendingAttributes = "PutAccountSendingAttributes"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/PutAccountSendingAttributes
-func (c *Client) PutAccountSendingAttributesRequest(input *PutAccountSendingAttributesInput) PutAccountSendingAttributesRequest {
+func (c *Client) PutAccountSendingAttributesRequest(input *types.PutAccountSendingAttributesInput) PutAccountSendingAttributesRequest {
 	op := &aws.Operation{
 		Name:       opPutAccountSendingAttributes,
 		HTTPMethod: "PUT",
@@ -79,10 +32,10 @@ func (c *Client) PutAccountSendingAttributesRequest(input *PutAccountSendingAttr
 	}
 
 	if input == nil {
-		input = &PutAccountSendingAttributesInput{}
+		input = &types.PutAccountSendingAttributesInput{}
 	}
 
-	req := c.newRequest(op, input, &PutAccountSendingAttributesOutput{})
+	req := c.newRequest(op, input, &types.PutAccountSendingAttributesOutput{})
 	return PutAccountSendingAttributesRequest{Request: req, Input: input, Copy: c.PutAccountSendingAttributesRequest}
 }
 
@@ -90,8 +43,8 @@ func (c *Client) PutAccountSendingAttributesRequest(input *PutAccountSendingAttr
 // PutAccountSendingAttributes API operation.
 type PutAccountSendingAttributesRequest struct {
 	*aws.Request
-	Input *PutAccountSendingAttributesInput
-	Copy  func(*PutAccountSendingAttributesInput) PutAccountSendingAttributesRequest
+	Input *types.PutAccountSendingAttributesInput
+	Copy  func(*types.PutAccountSendingAttributesInput) PutAccountSendingAttributesRequest
 }
 
 // Send marshals and sends the PutAccountSendingAttributes API request.
@@ -103,7 +56,7 @@ func (r PutAccountSendingAttributesRequest) Send(ctx context.Context) (*PutAccou
 	}
 
 	resp := &PutAccountSendingAttributesResponse{
-		PutAccountSendingAttributesOutput: r.Request.Data.(*PutAccountSendingAttributesOutput),
+		PutAccountSendingAttributesOutput: r.Request.Data.(*types.PutAccountSendingAttributesOutput),
 		response:                          &aws.Response{Request: r.Request},
 	}
 
@@ -113,7 +66,7 @@ func (r PutAccountSendingAttributesRequest) Send(ctx context.Context) (*PutAccou
 // PutAccountSendingAttributesResponse is the response type for the
 // PutAccountSendingAttributes API operation.
 type PutAccountSendingAttributesResponse struct {
-	*PutAccountSendingAttributesOutput
+	*types.PutAccountSendingAttributesOutput
 
 	response *aws.Response
 }

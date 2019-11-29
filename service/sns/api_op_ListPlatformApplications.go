@@ -6,39 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/sns/types"
 )
-
-// Input for ListPlatformApplications action.
-type ListPlatformApplicationsInput struct {
-	_ struct{} `type:"structure"`
-
-	// NextToken string is used when calling ListPlatformApplications action to
-	// retrieve additional records that are available after the first page results.
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s ListPlatformApplicationsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Response for ListPlatformApplications action.
-type ListPlatformApplicationsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// NextToken string is returned when calling ListPlatformApplications action
-	// if additional records are available after the first page results.
-	NextToken *string `type:"string"`
-
-	// Platform applications returned when calling ListPlatformApplications action.
-	PlatformApplications []PlatformApplication `type:"list"`
-}
-
-// String returns the string representation
-func (s ListPlatformApplicationsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListPlatformApplications = "ListPlatformApplications"
 
@@ -64,7 +33,7 @@ const opListPlatformApplications = "ListPlatformApplications"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/ListPlatformApplications
-func (c *Client) ListPlatformApplicationsRequest(input *ListPlatformApplicationsInput) ListPlatformApplicationsRequest {
+func (c *Client) ListPlatformApplicationsRequest(input *types.ListPlatformApplicationsInput) ListPlatformApplicationsRequest {
 	op := &aws.Operation{
 		Name:       opListPlatformApplications,
 		HTTPMethod: "POST",
@@ -78,10 +47,10 @@ func (c *Client) ListPlatformApplicationsRequest(input *ListPlatformApplications
 	}
 
 	if input == nil {
-		input = &ListPlatformApplicationsInput{}
+		input = &types.ListPlatformApplicationsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListPlatformApplicationsOutput{})
+	req := c.newRequest(op, input, &types.ListPlatformApplicationsOutput{})
 	return ListPlatformApplicationsRequest{Request: req, Input: input, Copy: c.ListPlatformApplicationsRequest}
 }
 
@@ -89,8 +58,8 @@ func (c *Client) ListPlatformApplicationsRequest(input *ListPlatformApplications
 // ListPlatformApplications API operation.
 type ListPlatformApplicationsRequest struct {
 	*aws.Request
-	Input *ListPlatformApplicationsInput
-	Copy  func(*ListPlatformApplicationsInput) ListPlatformApplicationsRequest
+	Input *types.ListPlatformApplicationsInput
+	Copy  func(*types.ListPlatformApplicationsInput) ListPlatformApplicationsRequest
 }
 
 // Send marshals and sends the ListPlatformApplications API request.
@@ -102,7 +71,7 @@ func (r ListPlatformApplicationsRequest) Send(ctx context.Context) (*ListPlatfor
 	}
 
 	resp := &ListPlatformApplicationsResponse{
-		ListPlatformApplicationsOutput: r.Request.Data.(*ListPlatformApplicationsOutput),
+		ListPlatformApplicationsOutput: r.Request.Data.(*types.ListPlatformApplicationsOutput),
 		response:                       &aws.Response{Request: r.Request},
 	}
 
@@ -132,7 +101,7 @@ func NewListPlatformApplicationsPaginator(req ListPlatformApplicationsRequest) L
 	return ListPlatformApplicationsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListPlatformApplicationsInput
+				var inCpy *types.ListPlatformApplicationsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -152,14 +121,14 @@ type ListPlatformApplicationsPaginator struct {
 	aws.Pager
 }
 
-func (p *ListPlatformApplicationsPaginator) CurrentPage() *ListPlatformApplicationsOutput {
-	return p.Pager.CurrentPage().(*ListPlatformApplicationsOutput)
+func (p *ListPlatformApplicationsPaginator) CurrentPage() *types.ListPlatformApplicationsOutput {
+	return p.Pager.CurrentPage().(*types.ListPlatformApplicationsOutput)
 }
 
 // ListPlatformApplicationsResponse is the response type for the
 // ListPlatformApplications API operation.
 type ListPlatformApplicationsResponse struct {
-	*ListPlatformApplicationsOutput
+	*types.ListPlatformApplicationsOutput
 
 	response *aws.Response
 }

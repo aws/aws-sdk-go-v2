@@ -6,55 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/elasticache/types"
 )
-
-// Represents the input of a DeleteCacheCluster operation.
-type DeleteCacheClusterInput struct {
-	_ struct{} `type:"structure"`
-
-	// The cluster identifier for the cluster to be deleted. This parameter is not
-	// case sensitive.
-	//
-	// CacheClusterId is a required field
-	CacheClusterId *string `type:"string" required:"true"`
-
-	// The user-supplied name of a final cluster snapshot. This is the unique name
-	// that identifies the snapshot. ElastiCache creates the snapshot, and then
-	// deletes the cluster immediately afterward.
-	FinalSnapshotIdentifier *string `type:"string"`
-}
-
-// String returns the string representation
-func (s DeleteCacheClusterInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteCacheClusterInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteCacheClusterInput"}
-
-	if s.CacheClusterId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("CacheClusterId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteCacheClusterOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Contains all of the attributes of a specific cluster.
-	CacheCluster *CacheCluster `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteCacheClusterOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteCacheCluster = "DeleteCacheCluster"
 
@@ -86,7 +39,7 @@ const opDeleteCacheCluster = "DeleteCacheCluster"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DeleteCacheCluster
-func (c *Client) DeleteCacheClusterRequest(input *DeleteCacheClusterInput) DeleteCacheClusterRequest {
+func (c *Client) DeleteCacheClusterRequest(input *types.DeleteCacheClusterInput) DeleteCacheClusterRequest {
 	op := &aws.Operation{
 		Name:       opDeleteCacheCluster,
 		HTTPMethod: "POST",
@@ -94,10 +47,10 @@ func (c *Client) DeleteCacheClusterRequest(input *DeleteCacheClusterInput) Delet
 	}
 
 	if input == nil {
-		input = &DeleteCacheClusterInput{}
+		input = &types.DeleteCacheClusterInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteCacheClusterOutput{})
+	req := c.newRequest(op, input, &types.DeleteCacheClusterOutput{})
 	return DeleteCacheClusterRequest{Request: req, Input: input, Copy: c.DeleteCacheClusterRequest}
 }
 
@@ -105,8 +58,8 @@ func (c *Client) DeleteCacheClusterRequest(input *DeleteCacheClusterInput) Delet
 // DeleteCacheCluster API operation.
 type DeleteCacheClusterRequest struct {
 	*aws.Request
-	Input *DeleteCacheClusterInput
-	Copy  func(*DeleteCacheClusterInput) DeleteCacheClusterRequest
+	Input *types.DeleteCacheClusterInput
+	Copy  func(*types.DeleteCacheClusterInput) DeleteCacheClusterRequest
 }
 
 // Send marshals and sends the DeleteCacheCluster API request.
@@ -118,7 +71,7 @@ func (r DeleteCacheClusterRequest) Send(ctx context.Context) (*DeleteCacheCluste
 	}
 
 	resp := &DeleteCacheClusterResponse{
-		DeleteCacheClusterOutput: r.Request.Data.(*DeleteCacheClusterOutput),
+		DeleteCacheClusterOutput: r.Request.Data.(*types.DeleteCacheClusterOutput),
 		response:                 &aws.Response{Request: r.Request},
 	}
 
@@ -128,7 +81,7 @@ func (r DeleteCacheClusterRequest) Send(ctx context.Context) (*DeleteCacheCluste
 // DeleteCacheClusterResponse is the response type for the
 // DeleteCacheCluster API operation.
 type DeleteCacheClusterResponse struct {
-	*DeleteCacheClusterOutput
+	*types.DeleteCacheClusterOutput
 
 	response *aws.Response
 }

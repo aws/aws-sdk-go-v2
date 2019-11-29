@@ -6,87 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/restjson"
+	"github.com/aws/aws-sdk-go-v2/service/lexmodelbuildingservice/types"
 )
-
-type DeleteBotVersionInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the bot.
-	//
-	// Name is a required field
-	Name *string `location:"uri" locationName:"name" min:"2" type:"string" required:"true"`
-
-	// The version of the bot to delete. You cannot delete the $LATEST version of
-	// the bot. To delete the $LATEST version, use the DeleteBot operation.
-	//
-	// Version is a required field
-	Version *string `location:"uri" locationName:"version" min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteBotVersionInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteBotVersionInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteBotVersionInput"}
-
-	if s.Name == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Name"))
-	}
-	if s.Name != nil && len(*s.Name) < 2 {
-		invalidParams.Add(aws.NewErrParamMinLen("Name", 2))
-	}
-
-	if s.Version == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Version"))
-	}
-	if s.Version != nil && len(*s.Version) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Version", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteBotVersionInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.Name != nil {
-		v := *s.Name
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Version != nil {
-		v := *s.Version
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "version", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type DeleteBotVersionOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteBotVersionOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteBotVersionOutput) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
 
 const opDeleteBotVersion = "DeleteBotVersion"
 
@@ -106,7 +29,7 @@ const opDeleteBotVersion = "DeleteBotVersion"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/DeleteBotVersion
-func (c *Client) DeleteBotVersionRequest(input *DeleteBotVersionInput) DeleteBotVersionRequest {
+func (c *Client) DeleteBotVersionRequest(input *types.DeleteBotVersionInput) DeleteBotVersionRequest {
 	op := &aws.Operation{
 		Name:       opDeleteBotVersion,
 		HTTPMethod: "DELETE",
@@ -114,10 +37,10 @@ func (c *Client) DeleteBotVersionRequest(input *DeleteBotVersionInput) DeleteBot
 	}
 
 	if input == nil {
-		input = &DeleteBotVersionInput{}
+		input = &types.DeleteBotVersionInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteBotVersionOutput{})
+	req := c.newRequest(op, input, &types.DeleteBotVersionOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return DeleteBotVersionRequest{Request: req, Input: input, Copy: c.DeleteBotVersionRequest}
@@ -127,8 +50,8 @@ func (c *Client) DeleteBotVersionRequest(input *DeleteBotVersionInput) DeleteBot
 // DeleteBotVersion API operation.
 type DeleteBotVersionRequest struct {
 	*aws.Request
-	Input *DeleteBotVersionInput
-	Copy  func(*DeleteBotVersionInput) DeleteBotVersionRequest
+	Input *types.DeleteBotVersionInput
+	Copy  func(*types.DeleteBotVersionInput) DeleteBotVersionRequest
 }
 
 // Send marshals and sends the DeleteBotVersion API request.
@@ -140,7 +63,7 @@ func (r DeleteBotVersionRequest) Send(ctx context.Context) (*DeleteBotVersionRes
 	}
 
 	resp := &DeleteBotVersionResponse{
-		DeleteBotVersionOutput: r.Request.Data.(*DeleteBotVersionOutput),
+		DeleteBotVersionOutput: r.Request.Data.(*types.DeleteBotVersionOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -150,7 +73,7 @@ func (r DeleteBotVersionRequest) Send(ctx context.Context) (*DeleteBotVersionRes
 // DeleteBotVersionResponse is the response type for the
 // DeleteBotVersion API operation.
 type DeleteBotVersionResponse struct {
-	*DeleteBotVersionOutput
+	*types.DeleteBotVersionOutput
 
 	response *aws.Response
 }

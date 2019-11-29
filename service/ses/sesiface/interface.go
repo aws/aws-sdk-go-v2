@@ -13,6 +13,7 @@ import (
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/ses"
+	"github.com/aws/aws-sdk-go-v2/service/ses/types"
 )
 
 // ClientAPI provides an interface to enable mocking the
@@ -46,7 +47,7 @@ import (
 //    type mockClientClient struct {
 //        sesiface.ClientPI
 //    }
-//    func (m *mockClientClient) CloneReceiptRuleSet(input *ses.CloneReceiptRuleSetInput) (*ses.CloneReceiptRuleSetOutput, error) {
+//    func (m *mockClientClient) CloneReceiptRuleSet(input *types.CloneReceiptRuleSetInput) (*types.CloneReceiptRuleSetOutput, error) {
 //        // mock response/functionality
 //    }
 //
@@ -64,149 +65,149 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type ClientAPI interface {
-	CloneReceiptRuleSetRequest(*ses.CloneReceiptRuleSetInput) ses.CloneReceiptRuleSetRequest
+	CloneReceiptRuleSetRequest(*types.CloneReceiptRuleSetInput) ses.CloneReceiptRuleSetRequest
 
-	CreateConfigurationSetRequest(*ses.CreateConfigurationSetInput) ses.CreateConfigurationSetRequest
+	CreateConfigurationSetRequest(*types.CreateConfigurationSetInput) ses.CreateConfigurationSetRequest
 
-	CreateConfigurationSetEventDestinationRequest(*ses.CreateConfigurationSetEventDestinationInput) ses.CreateConfigurationSetEventDestinationRequest
+	CreateConfigurationSetEventDestinationRequest(*types.CreateConfigurationSetEventDestinationInput) ses.CreateConfigurationSetEventDestinationRequest
 
-	CreateConfigurationSetTrackingOptionsRequest(*ses.CreateConfigurationSetTrackingOptionsInput) ses.CreateConfigurationSetTrackingOptionsRequest
+	CreateConfigurationSetTrackingOptionsRequest(*types.CreateConfigurationSetTrackingOptionsInput) ses.CreateConfigurationSetTrackingOptionsRequest
 
-	CreateCustomVerificationEmailTemplateRequest(*ses.CreateCustomVerificationEmailTemplateInput) ses.CreateCustomVerificationEmailTemplateRequest
+	CreateCustomVerificationEmailTemplateRequest(*types.CreateCustomVerificationEmailTemplateInput) ses.CreateCustomVerificationEmailTemplateRequest
 
-	CreateReceiptFilterRequest(*ses.CreateReceiptFilterInput) ses.CreateReceiptFilterRequest
+	CreateReceiptFilterRequest(*types.CreateReceiptFilterInput) ses.CreateReceiptFilterRequest
 
-	CreateReceiptRuleRequest(*ses.CreateReceiptRuleInput) ses.CreateReceiptRuleRequest
+	CreateReceiptRuleRequest(*types.CreateReceiptRuleInput) ses.CreateReceiptRuleRequest
 
-	CreateReceiptRuleSetRequest(*ses.CreateReceiptRuleSetInput) ses.CreateReceiptRuleSetRequest
+	CreateReceiptRuleSetRequest(*types.CreateReceiptRuleSetInput) ses.CreateReceiptRuleSetRequest
 
-	CreateTemplateRequest(*ses.CreateTemplateInput) ses.CreateTemplateRequest
+	CreateTemplateRequest(*types.CreateTemplateInput) ses.CreateTemplateRequest
 
-	DeleteConfigurationSetRequest(*ses.DeleteConfigurationSetInput) ses.DeleteConfigurationSetRequest
+	DeleteConfigurationSetRequest(*types.DeleteConfigurationSetInput) ses.DeleteConfigurationSetRequest
 
-	DeleteConfigurationSetEventDestinationRequest(*ses.DeleteConfigurationSetEventDestinationInput) ses.DeleteConfigurationSetEventDestinationRequest
+	DeleteConfigurationSetEventDestinationRequest(*types.DeleteConfigurationSetEventDestinationInput) ses.DeleteConfigurationSetEventDestinationRequest
 
-	DeleteConfigurationSetTrackingOptionsRequest(*ses.DeleteConfigurationSetTrackingOptionsInput) ses.DeleteConfigurationSetTrackingOptionsRequest
+	DeleteConfigurationSetTrackingOptionsRequest(*types.DeleteConfigurationSetTrackingOptionsInput) ses.DeleteConfigurationSetTrackingOptionsRequest
 
-	DeleteCustomVerificationEmailTemplateRequest(*ses.DeleteCustomVerificationEmailTemplateInput) ses.DeleteCustomVerificationEmailTemplateRequest
+	DeleteCustomVerificationEmailTemplateRequest(*types.DeleteCustomVerificationEmailTemplateInput) ses.DeleteCustomVerificationEmailTemplateRequest
 
-	DeleteIdentityRequest(*ses.DeleteIdentityInput) ses.DeleteIdentityRequest
+	DeleteIdentityRequest(*types.DeleteIdentityInput) ses.DeleteIdentityRequest
 
-	DeleteIdentityPolicyRequest(*ses.DeleteIdentityPolicyInput) ses.DeleteIdentityPolicyRequest
+	DeleteIdentityPolicyRequest(*types.DeleteIdentityPolicyInput) ses.DeleteIdentityPolicyRequest
 
-	DeleteReceiptFilterRequest(*ses.DeleteReceiptFilterInput) ses.DeleteReceiptFilterRequest
+	DeleteReceiptFilterRequest(*types.DeleteReceiptFilterInput) ses.DeleteReceiptFilterRequest
 
-	DeleteReceiptRuleRequest(*ses.DeleteReceiptRuleInput) ses.DeleteReceiptRuleRequest
+	DeleteReceiptRuleRequest(*types.DeleteReceiptRuleInput) ses.DeleteReceiptRuleRequest
 
-	DeleteReceiptRuleSetRequest(*ses.DeleteReceiptRuleSetInput) ses.DeleteReceiptRuleSetRequest
+	DeleteReceiptRuleSetRequest(*types.DeleteReceiptRuleSetInput) ses.DeleteReceiptRuleSetRequest
 
-	DeleteTemplateRequest(*ses.DeleteTemplateInput) ses.DeleteTemplateRequest
+	DeleteTemplateRequest(*types.DeleteTemplateInput) ses.DeleteTemplateRequest
 
-	DeleteVerifiedEmailAddressRequest(*ses.DeleteVerifiedEmailAddressInput) ses.DeleteVerifiedEmailAddressRequest
+	DeleteVerifiedEmailAddressRequest(*types.DeleteVerifiedEmailAddressInput) ses.DeleteVerifiedEmailAddressRequest
 
-	DescribeActiveReceiptRuleSetRequest(*ses.DescribeActiveReceiptRuleSetInput) ses.DescribeActiveReceiptRuleSetRequest
+	DescribeActiveReceiptRuleSetRequest(*types.DescribeActiveReceiptRuleSetInput) ses.DescribeActiveReceiptRuleSetRequest
 
-	DescribeConfigurationSetRequest(*ses.DescribeConfigurationSetInput) ses.DescribeConfigurationSetRequest
+	DescribeConfigurationSetRequest(*types.DescribeConfigurationSetInput) ses.DescribeConfigurationSetRequest
 
-	DescribeReceiptRuleRequest(*ses.DescribeReceiptRuleInput) ses.DescribeReceiptRuleRequest
+	DescribeReceiptRuleRequest(*types.DescribeReceiptRuleInput) ses.DescribeReceiptRuleRequest
 
-	DescribeReceiptRuleSetRequest(*ses.DescribeReceiptRuleSetInput) ses.DescribeReceiptRuleSetRequest
+	DescribeReceiptRuleSetRequest(*types.DescribeReceiptRuleSetInput) ses.DescribeReceiptRuleSetRequest
 
-	GetAccountSendingEnabledRequest(*ses.GetAccountSendingEnabledInput) ses.GetAccountSendingEnabledRequest
+	GetAccountSendingEnabledRequest(*types.GetAccountSendingEnabledInput) ses.GetAccountSendingEnabledRequest
 
-	GetCustomVerificationEmailTemplateRequest(*ses.GetCustomVerificationEmailTemplateInput) ses.GetCustomVerificationEmailTemplateRequest
+	GetCustomVerificationEmailTemplateRequest(*types.GetCustomVerificationEmailTemplateInput) ses.GetCustomVerificationEmailTemplateRequest
 
-	GetIdentityDkimAttributesRequest(*ses.GetIdentityDkimAttributesInput) ses.GetIdentityDkimAttributesRequest
+	GetIdentityDkimAttributesRequest(*types.GetIdentityDkimAttributesInput) ses.GetIdentityDkimAttributesRequest
 
-	GetIdentityMailFromDomainAttributesRequest(*ses.GetIdentityMailFromDomainAttributesInput) ses.GetIdentityMailFromDomainAttributesRequest
+	GetIdentityMailFromDomainAttributesRequest(*types.GetIdentityMailFromDomainAttributesInput) ses.GetIdentityMailFromDomainAttributesRequest
 
-	GetIdentityNotificationAttributesRequest(*ses.GetIdentityNotificationAttributesInput) ses.GetIdentityNotificationAttributesRequest
+	GetIdentityNotificationAttributesRequest(*types.GetIdentityNotificationAttributesInput) ses.GetIdentityNotificationAttributesRequest
 
-	GetIdentityPoliciesRequest(*ses.GetIdentityPoliciesInput) ses.GetIdentityPoliciesRequest
+	GetIdentityPoliciesRequest(*types.GetIdentityPoliciesInput) ses.GetIdentityPoliciesRequest
 
-	GetIdentityVerificationAttributesRequest(*ses.GetIdentityVerificationAttributesInput) ses.GetIdentityVerificationAttributesRequest
+	GetIdentityVerificationAttributesRequest(*types.GetIdentityVerificationAttributesInput) ses.GetIdentityVerificationAttributesRequest
 
-	GetSendQuotaRequest(*ses.GetSendQuotaInput) ses.GetSendQuotaRequest
+	GetSendQuotaRequest(*types.GetSendQuotaInput) ses.GetSendQuotaRequest
 
-	GetSendStatisticsRequest(*ses.GetSendStatisticsInput) ses.GetSendStatisticsRequest
+	GetSendStatisticsRequest(*types.GetSendStatisticsInput) ses.GetSendStatisticsRequest
 
-	GetTemplateRequest(*ses.GetTemplateInput) ses.GetTemplateRequest
+	GetTemplateRequest(*types.GetTemplateInput) ses.GetTemplateRequest
 
-	ListConfigurationSetsRequest(*ses.ListConfigurationSetsInput) ses.ListConfigurationSetsRequest
+	ListConfigurationSetsRequest(*types.ListConfigurationSetsInput) ses.ListConfigurationSetsRequest
 
-	ListCustomVerificationEmailTemplatesRequest(*ses.ListCustomVerificationEmailTemplatesInput) ses.ListCustomVerificationEmailTemplatesRequest
+	ListCustomVerificationEmailTemplatesRequest(*types.ListCustomVerificationEmailTemplatesInput) ses.ListCustomVerificationEmailTemplatesRequest
 
-	ListIdentitiesRequest(*ses.ListIdentitiesInput) ses.ListIdentitiesRequest
+	ListIdentitiesRequest(*types.ListIdentitiesInput) ses.ListIdentitiesRequest
 
-	ListIdentityPoliciesRequest(*ses.ListIdentityPoliciesInput) ses.ListIdentityPoliciesRequest
+	ListIdentityPoliciesRequest(*types.ListIdentityPoliciesInput) ses.ListIdentityPoliciesRequest
 
-	ListReceiptFiltersRequest(*ses.ListReceiptFiltersInput) ses.ListReceiptFiltersRequest
+	ListReceiptFiltersRequest(*types.ListReceiptFiltersInput) ses.ListReceiptFiltersRequest
 
-	ListReceiptRuleSetsRequest(*ses.ListReceiptRuleSetsInput) ses.ListReceiptRuleSetsRequest
+	ListReceiptRuleSetsRequest(*types.ListReceiptRuleSetsInput) ses.ListReceiptRuleSetsRequest
 
-	ListTemplatesRequest(*ses.ListTemplatesInput) ses.ListTemplatesRequest
+	ListTemplatesRequest(*types.ListTemplatesInput) ses.ListTemplatesRequest
 
-	ListVerifiedEmailAddressesRequest(*ses.ListVerifiedEmailAddressesInput) ses.ListVerifiedEmailAddressesRequest
+	ListVerifiedEmailAddressesRequest(*types.ListVerifiedEmailAddressesInput) ses.ListVerifiedEmailAddressesRequest
 
-	PutConfigurationSetDeliveryOptionsRequest(*ses.PutConfigurationSetDeliveryOptionsInput) ses.PutConfigurationSetDeliveryOptionsRequest
+	PutConfigurationSetDeliveryOptionsRequest(*types.PutConfigurationSetDeliveryOptionsInput) ses.PutConfigurationSetDeliveryOptionsRequest
 
-	PutIdentityPolicyRequest(*ses.PutIdentityPolicyInput) ses.PutIdentityPolicyRequest
+	PutIdentityPolicyRequest(*types.PutIdentityPolicyInput) ses.PutIdentityPolicyRequest
 
-	ReorderReceiptRuleSetRequest(*ses.ReorderReceiptRuleSetInput) ses.ReorderReceiptRuleSetRequest
+	ReorderReceiptRuleSetRequest(*types.ReorderReceiptRuleSetInput) ses.ReorderReceiptRuleSetRequest
 
-	SendBounceRequest(*ses.SendBounceInput) ses.SendBounceRequest
+	SendBounceRequest(*types.SendBounceInput) ses.SendBounceRequest
 
-	SendBulkTemplatedEmailRequest(*ses.SendBulkTemplatedEmailInput) ses.SendBulkTemplatedEmailRequest
+	SendBulkTemplatedEmailRequest(*types.SendBulkTemplatedEmailInput) ses.SendBulkTemplatedEmailRequest
 
-	SendCustomVerificationEmailRequest(*ses.SendCustomVerificationEmailInput) ses.SendCustomVerificationEmailRequest
+	SendCustomVerificationEmailRequest(*types.SendCustomVerificationEmailInput) ses.SendCustomVerificationEmailRequest
 
-	SendEmailRequest(*ses.SendEmailInput) ses.SendEmailRequest
+	SendEmailRequest(*types.SendEmailInput) ses.SendEmailRequest
 
-	SendRawEmailRequest(*ses.SendRawEmailInput) ses.SendRawEmailRequest
+	SendRawEmailRequest(*types.SendRawEmailInput) ses.SendRawEmailRequest
 
-	SendTemplatedEmailRequest(*ses.SendTemplatedEmailInput) ses.SendTemplatedEmailRequest
+	SendTemplatedEmailRequest(*types.SendTemplatedEmailInput) ses.SendTemplatedEmailRequest
 
-	SetActiveReceiptRuleSetRequest(*ses.SetActiveReceiptRuleSetInput) ses.SetActiveReceiptRuleSetRequest
+	SetActiveReceiptRuleSetRequest(*types.SetActiveReceiptRuleSetInput) ses.SetActiveReceiptRuleSetRequest
 
-	SetIdentityDkimEnabledRequest(*ses.SetIdentityDkimEnabledInput) ses.SetIdentityDkimEnabledRequest
+	SetIdentityDkimEnabledRequest(*types.SetIdentityDkimEnabledInput) ses.SetIdentityDkimEnabledRequest
 
-	SetIdentityFeedbackForwardingEnabledRequest(*ses.SetIdentityFeedbackForwardingEnabledInput) ses.SetIdentityFeedbackForwardingEnabledRequest
+	SetIdentityFeedbackForwardingEnabledRequest(*types.SetIdentityFeedbackForwardingEnabledInput) ses.SetIdentityFeedbackForwardingEnabledRequest
 
-	SetIdentityHeadersInNotificationsEnabledRequest(*ses.SetIdentityHeadersInNotificationsEnabledInput) ses.SetIdentityHeadersInNotificationsEnabledRequest
+	SetIdentityHeadersInNotificationsEnabledRequest(*types.SetIdentityHeadersInNotificationsEnabledInput) ses.SetIdentityHeadersInNotificationsEnabledRequest
 
-	SetIdentityMailFromDomainRequest(*ses.SetIdentityMailFromDomainInput) ses.SetIdentityMailFromDomainRequest
+	SetIdentityMailFromDomainRequest(*types.SetIdentityMailFromDomainInput) ses.SetIdentityMailFromDomainRequest
 
-	SetIdentityNotificationTopicRequest(*ses.SetIdentityNotificationTopicInput) ses.SetIdentityNotificationTopicRequest
+	SetIdentityNotificationTopicRequest(*types.SetIdentityNotificationTopicInput) ses.SetIdentityNotificationTopicRequest
 
-	SetReceiptRulePositionRequest(*ses.SetReceiptRulePositionInput) ses.SetReceiptRulePositionRequest
+	SetReceiptRulePositionRequest(*types.SetReceiptRulePositionInput) ses.SetReceiptRulePositionRequest
 
-	TestRenderTemplateRequest(*ses.TestRenderTemplateInput) ses.TestRenderTemplateRequest
+	TestRenderTemplateRequest(*types.TestRenderTemplateInput) ses.TestRenderTemplateRequest
 
-	UpdateAccountSendingEnabledRequest(*ses.UpdateAccountSendingEnabledInput) ses.UpdateAccountSendingEnabledRequest
+	UpdateAccountSendingEnabledRequest(*types.UpdateAccountSendingEnabledInput) ses.UpdateAccountSendingEnabledRequest
 
-	UpdateConfigurationSetEventDestinationRequest(*ses.UpdateConfigurationSetEventDestinationInput) ses.UpdateConfigurationSetEventDestinationRequest
+	UpdateConfigurationSetEventDestinationRequest(*types.UpdateConfigurationSetEventDestinationInput) ses.UpdateConfigurationSetEventDestinationRequest
 
-	UpdateConfigurationSetReputationMetricsEnabledRequest(*ses.UpdateConfigurationSetReputationMetricsEnabledInput) ses.UpdateConfigurationSetReputationMetricsEnabledRequest
+	UpdateConfigurationSetReputationMetricsEnabledRequest(*types.UpdateConfigurationSetReputationMetricsEnabledInput) ses.UpdateConfigurationSetReputationMetricsEnabledRequest
 
-	UpdateConfigurationSetSendingEnabledRequest(*ses.UpdateConfigurationSetSendingEnabledInput) ses.UpdateConfigurationSetSendingEnabledRequest
+	UpdateConfigurationSetSendingEnabledRequest(*types.UpdateConfigurationSetSendingEnabledInput) ses.UpdateConfigurationSetSendingEnabledRequest
 
-	UpdateConfigurationSetTrackingOptionsRequest(*ses.UpdateConfigurationSetTrackingOptionsInput) ses.UpdateConfigurationSetTrackingOptionsRequest
+	UpdateConfigurationSetTrackingOptionsRequest(*types.UpdateConfigurationSetTrackingOptionsInput) ses.UpdateConfigurationSetTrackingOptionsRequest
 
-	UpdateCustomVerificationEmailTemplateRequest(*ses.UpdateCustomVerificationEmailTemplateInput) ses.UpdateCustomVerificationEmailTemplateRequest
+	UpdateCustomVerificationEmailTemplateRequest(*types.UpdateCustomVerificationEmailTemplateInput) ses.UpdateCustomVerificationEmailTemplateRequest
 
-	UpdateReceiptRuleRequest(*ses.UpdateReceiptRuleInput) ses.UpdateReceiptRuleRequest
+	UpdateReceiptRuleRequest(*types.UpdateReceiptRuleInput) ses.UpdateReceiptRuleRequest
 
-	UpdateTemplateRequest(*ses.UpdateTemplateInput) ses.UpdateTemplateRequest
+	UpdateTemplateRequest(*types.UpdateTemplateInput) ses.UpdateTemplateRequest
 
-	VerifyDomainDkimRequest(*ses.VerifyDomainDkimInput) ses.VerifyDomainDkimRequest
+	VerifyDomainDkimRequest(*types.VerifyDomainDkimInput) ses.VerifyDomainDkimRequest
 
-	VerifyDomainIdentityRequest(*ses.VerifyDomainIdentityInput) ses.VerifyDomainIdentityRequest
+	VerifyDomainIdentityRequest(*types.VerifyDomainIdentityInput) ses.VerifyDomainIdentityRequest
 
-	VerifyEmailAddressRequest(*ses.VerifyEmailAddressInput) ses.VerifyEmailAddressRequest
+	VerifyEmailAddressRequest(*types.VerifyEmailAddressInput) ses.VerifyEmailAddressRequest
 
-	VerifyEmailIdentityRequest(*ses.VerifyEmailIdentityInput) ses.VerifyEmailIdentityRequest
+	VerifyEmailIdentityRequest(*types.VerifyEmailIdentityInput) ses.VerifyEmailIdentityRequest
 
-	WaitUntilIdentityExists(context.Context, *ses.GetIdentityVerificationAttributesInput, ...aws.WaiterOption) error
+	WaitUntilIdentityExists(context.Context, *types.GetIdentityVerificationAttributesInput, ...aws.WaiterOption) error
 }
 
 var _ ClientAPI = (*ses.Client)(nil)

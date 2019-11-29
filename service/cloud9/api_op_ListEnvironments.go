@@ -6,46 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/cloud9/types"
 )
-
-type ListEnvironmentsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The maximum number of environments to get identifiers for.
-	MaxResults *int64 `locationName:"maxResults" type:"integer"`
-
-	// During a previous call, if there are more than 25 items in the list, only
-	// the first 25 items are returned, along with a unique string called a next
-	// token. To get the next batch of items in the list, call this operation again,
-	// adding the next token to the call. To get all of the items in the list, keep
-	// calling this operation with each subsequent next token that is returned,
-	// until no more next tokens are returned.
-	NextToken *string `locationName:"nextToken" type:"string"`
-}
-
-// String returns the string representation
-func (s ListEnvironmentsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type ListEnvironmentsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The list of environment identifiers.
-	EnvironmentIds []string `locationName:"environmentIds" type:"list"`
-
-	// If there are more than 25 items in the list, only the first 25 items are
-	// returned, along with a unique string called a next token. To get the next
-	// batch of items in the list, call this operation again, adding the next token
-	// to the call.
-	NextToken *string `locationName:"nextToken" type:"string"`
-}
-
-// String returns the string representation
-func (s ListEnvironmentsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListEnvironments = "ListEnvironments"
 
@@ -62,7 +24,7 @@ const opListEnvironments = "ListEnvironments"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloud9-2017-09-23/ListEnvironments
-func (c *Client) ListEnvironmentsRequest(input *ListEnvironmentsInput) ListEnvironmentsRequest {
+func (c *Client) ListEnvironmentsRequest(input *types.ListEnvironmentsInput) ListEnvironmentsRequest {
 	op := &aws.Operation{
 		Name:       opListEnvironments,
 		HTTPMethod: "POST",
@@ -76,10 +38,10 @@ func (c *Client) ListEnvironmentsRequest(input *ListEnvironmentsInput) ListEnvir
 	}
 
 	if input == nil {
-		input = &ListEnvironmentsInput{}
+		input = &types.ListEnvironmentsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListEnvironmentsOutput{})
+	req := c.newRequest(op, input, &types.ListEnvironmentsOutput{})
 	return ListEnvironmentsRequest{Request: req, Input: input, Copy: c.ListEnvironmentsRequest}
 }
 
@@ -87,8 +49,8 @@ func (c *Client) ListEnvironmentsRequest(input *ListEnvironmentsInput) ListEnvir
 // ListEnvironments API operation.
 type ListEnvironmentsRequest struct {
 	*aws.Request
-	Input *ListEnvironmentsInput
-	Copy  func(*ListEnvironmentsInput) ListEnvironmentsRequest
+	Input *types.ListEnvironmentsInput
+	Copy  func(*types.ListEnvironmentsInput) ListEnvironmentsRequest
 }
 
 // Send marshals and sends the ListEnvironments API request.
@@ -100,7 +62,7 @@ func (r ListEnvironmentsRequest) Send(ctx context.Context) (*ListEnvironmentsRes
 	}
 
 	resp := &ListEnvironmentsResponse{
-		ListEnvironmentsOutput: r.Request.Data.(*ListEnvironmentsOutput),
+		ListEnvironmentsOutput: r.Request.Data.(*types.ListEnvironmentsOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -130,7 +92,7 @@ func NewListEnvironmentsPaginator(req ListEnvironmentsRequest) ListEnvironmentsP
 	return ListEnvironmentsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListEnvironmentsInput
+				var inCpy *types.ListEnvironmentsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -150,14 +112,14 @@ type ListEnvironmentsPaginator struct {
 	aws.Pager
 }
 
-func (p *ListEnvironmentsPaginator) CurrentPage() *ListEnvironmentsOutput {
-	return p.Pager.CurrentPage().(*ListEnvironmentsOutput)
+func (p *ListEnvironmentsPaginator) CurrentPage() *types.ListEnvironmentsOutput {
+	return p.Pager.CurrentPage().(*types.ListEnvironmentsOutput)
 }
 
 // ListEnvironmentsResponse is the response type for the
 // ListEnvironments API operation.
 type ListEnvironmentsResponse struct {
-	*ListEnvironmentsOutput
+	*types.ListEnvironmentsOutput
 
 	response *aws.Response
 }

@@ -6,66 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/waf/types"
 )
-
-type DeleteWebACLInput struct {
-	_ struct{} `type:"structure"`
-
-	// The value returned by the most recent call to GetChangeToken.
-	//
-	// ChangeToken is a required field
-	ChangeToken *string `min:"1" type:"string" required:"true"`
-
-	// The WebACLId of the WebACL that you want to delete. WebACLId is returned
-	// by CreateWebACL and by ListWebACLs.
-	//
-	// WebACLId is a required field
-	WebACLId *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteWebACLInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteWebACLInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteWebACLInput"}
-
-	if s.ChangeToken == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ChangeToken"))
-	}
-	if s.ChangeToken != nil && len(*s.ChangeToken) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ChangeToken", 1))
-	}
-
-	if s.WebACLId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("WebACLId"))
-	}
-	if s.WebACLId != nil && len(*s.WebACLId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("WebACLId", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteWebACLOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The ChangeToken that you used to submit the DeleteWebACL request. You can
-	// also use this value to query the status of the request. For more information,
-	// see GetChangeTokenStatus.
-	ChangeToken *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s DeleteWebACLOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteWebACL = "DeleteWebACL"
 
@@ -92,7 +34,7 @@ const opDeleteWebACL = "DeleteWebACL"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/DeleteWebACL
-func (c *Client) DeleteWebACLRequest(input *DeleteWebACLInput) DeleteWebACLRequest {
+func (c *Client) DeleteWebACLRequest(input *types.DeleteWebACLInput) DeleteWebACLRequest {
 	op := &aws.Operation{
 		Name:       opDeleteWebACL,
 		HTTPMethod: "POST",
@@ -100,10 +42,10 @@ func (c *Client) DeleteWebACLRequest(input *DeleteWebACLInput) DeleteWebACLReque
 	}
 
 	if input == nil {
-		input = &DeleteWebACLInput{}
+		input = &types.DeleteWebACLInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteWebACLOutput{})
+	req := c.newRequest(op, input, &types.DeleteWebACLOutput{})
 	return DeleteWebACLRequest{Request: req, Input: input, Copy: c.DeleteWebACLRequest}
 }
 
@@ -111,8 +53,8 @@ func (c *Client) DeleteWebACLRequest(input *DeleteWebACLInput) DeleteWebACLReque
 // DeleteWebACL API operation.
 type DeleteWebACLRequest struct {
 	*aws.Request
-	Input *DeleteWebACLInput
-	Copy  func(*DeleteWebACLInput) DeleteWebACLRequest
+	Input *types.DeleteWebACLInput
+	Copy  func(*types.DeleteWebACLInput) DeleteWebACLRequest
 }
 
 // Send marshals and sends the DeleteWebACL API request.
@@ -124,7 +66,7 @@ func (r DeleteWebACLRequest) Send(ctx context.Context) (*DeleteWebACLResponse, e
 	}
 
 	resp := &DeleteWebACLResponse{
-		DeleteWebACLOutput: r.Request.Data.(*DeleteWebACLOutput),
+		DeleteWebACLOutput: r.Request.Data.(*types.DeleteWebACLOutput),
 		response:           &aws.Response{Request: r.Request},
 	}
 
@@ -134,7 +76,7 @@ func (r DeleteWebACLRequest) Send(ctx context.Context) (*DeleteWebACLResponse, e
 // DeleteWebACLResponse is the response type for the
 // DeleteWebACL API operation.
 type DeleteWebACLResponse struct {
-	*DeleteWebACLOutput
+	*types.DeleteWebACLOutput
 
 	response *aws.Response
 }

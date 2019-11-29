@@ -4,135 +4,10 @@ package workdocs
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/workdocs/types"
 )
-
-type AddResourcePermissionsInput struct {
-	_ struct{} `type:"structure"`
-
-	// Amazon WorkDocs authentication token. Do not set this field when using administrative
-	// API actions, as in accessing the API using AWS credentials.
-	AuthenticationToken *string `location:"header" locationName:"Authentication" min:"1" type:"string" sensitive:"true"`
-
-	// The notification options.
-	NotificationOptions *NotificationOptions `type:"structure"`
-
-	// The users, groups, or organization being granted permission.
-	//
-	// Principals is a required field
-	Principals []SharePrincipal `type:"list" required:"true"`
-
-	// The ID of the resource.
-	//
-	// ResourceId is a required field
-	ResourceId *string `location:"uri" locationName:"ResourceId" min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s AddResourcePermissionsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *AddResourcePermissionsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "AddResourcePermissionsInput"}
-	if s.AuthenticationToken != nil && len(*s.AuthenticationToken) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("AuthenticationToken", 1))
-	}
-
-	if s.Principals == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Principals"))
-	}
-
-	if s.ResourceId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ResourceId"))
-	}
-	if s.ResourceId != nil && len(*s.ResourceId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ResourceId", 1))
-	}
-	if s.Principals != nil {
-		for i, v := range s.Principals {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Principals", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s AddResourcePermissionsInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.NotificationOptions != nil {
-		v := s.NotificationOptions
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "NotificationOptions", v, metadata)
-	}
-	if s.Principals != nil {
-		v := s.Principals
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "Principals", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	if s.AuthenticationToken != nil {
-		v := *s.AuthenticationToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "Authentication", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.ResourceId != nil {
-		v := *s.ResourceId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "ResourceId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type AddResourcePermissionsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The share results.
-	ShareResults []ShareResult `type:"list"`
-}
-
-// String returns the string representation
-func (s AddResourcePermissionsOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s AddResourcePermissionsOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.ShareResults != nil {
-		v := s.ShareResults
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "ShareResults", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	return nil
-}
 
 const opAddResourcePermissions = "AddResourcePermissions"
 
@@ -150,7 +25,7 @@ const opAddResourcePermissions = "AddResourcePermissions"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/AddResourcePermissions
-func (c *Client) AddResourcePermissionsRequest(input *AddResourcePermissionsInput) AddResourcePermissionsRequest {
+func (c *Client) AddResourcePermissionsRequest(input *types.AddResourcePermissionsInput) AddResourcePermissionsRequest {
 	op := &aws.Operation{
 		Name:       opAddResourcePermissions,
 		HTTPMethod: "POST",
@@ -158,10 +33,10 @@ func (c *Client) AddResourcePermissionsRequest(input *AddResourcePermissionsInpu
 	}
 
 	if input == nil {
-		input = &AddResourcePermissionsInput{}
+		input = &types.AddResourcePermissionsInput{}
 	}
 
-	req := c.newRequest(op, input, &AddResourcePermissionsOutput{})
+	req := c.newRequest(op, input, &types.AddResourcePermissionsOutput{})
 	return AddResourcePermissionsRequest{Request: req, Input: input, Copy: c.AddResourcePermissionsRequest}
 }
 
@@ -169,8 +44,8 @@ func (c *Client) AddResourcePermissionsRequest(input *AddResourcePermissionsInpu
 // AddResourcePermissions API operation.
 type AddResourcePermissionsRequest struct {
 	*aws.Request
-	Input *AddResourcePermissionsInput
-	Copy  func(*AddResourcePermissionsInput) AddResourcePermissionsRequest
+	Input *types.AddResourcePermissionsInput
+	Copy  func(*types.AddResourcePermissionsInput) AddResourcePermissionsRequest
 }
 
 // Send marshals and sends the AddResourcePermissions API request.
@@ -182,7 +57,7 @@ func (r AddResourcePermissionsRequest) Send(ctx context.Context) (*AddResourcePe
 	}
 
 	resp := &AddResourcePermissionsResponse{
-		AddResourcePermissionsOutput: r.Request.Data.(*AddResourcePermissionsOutput),
+		AddResourcePermissionsOutput: r.Request.Data.(*types.AddResourcePermissionsOutput),
 		response:                     &aws.Response{Request: r.Request},
 	}
 
@@ -192,7 +67,7 @@ func (r AddResourcePermissionsRequest) Send(ctx context.Context) (*AddResourcePe
 // AddResourcePermissionsResponse is the response type for the
 // AddResourcePermissions API operation.
 type AddResourcePermissionsResponse struct {
-	*AddResourcePermissionsOutput
+	*types.AddResourcePermissionsOutput
 
 	response *aws.Response
 }

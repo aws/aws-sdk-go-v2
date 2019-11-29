@@ -6,52 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/glue/types"
 )
-
-type GetCrawlersInput struct {
-	_ struct{} `type:"structure"`
-
-	// The number of crawlers to return on each call.
-	MaxResults *int64 `min:"1" type:"integer"`
-
-	// A continuation token, if this is a continuation request.
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s GetCrawlersInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetCrawlersInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetCrawlersInput"}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type GetCrawlersOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A list of crawler metadata.
-	Crawlers []Crawler `type:"list"`
-
-	// A continuation token, if the returned list has not reached the end of those
-	// defined in this customer account.
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s GetCrawlersOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetCrawlers = "GetCrawlers"
 
@@ -68,7 +24,7 @@ const opGetCrawlers = "GetCrawlers"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetCrawlers
-func (c *Client) GetCrawlersRequest(input *GetCrawlersInput) GetCrawlersRequest {
+func (c *Client) GetCrawlersRequest(input *types.GetCrawlersInput) GetCrawlersRequest {
 	op := &aws.Operation{
 		Name:       opGetCrawlers,
 		HTTPMethod: "POST",
@@ -82,10 +38,10 @@ func (c *Client) GetCrawlersRequest(input *GetCrawlersInput) GetCrawlersRequest 
 	}
 
 	if input == nil {
-		input = &GetCrawlersInput{}
+		input = &types.GetCrawlersInput{}
 	}
 
-	req := c.newRequest(op, input, &GetCrawlersOutput{})
+	req := c.newRequest(op, input, &types.GetCrawlersOutput{})
 	return GetCrawlersRequest{Request: req, Input: input, Copy: c.GetCrawlersRequest}
 }
 
@@ -93,8 +49,8 @@ func (c *Client) GetCrawlersRequest(input *GetCrawlersInput) GetCrawlersRequest 
 // GetCrawlers API operation.
 type GetCrawlersRequest struct {
 	*aws.Request
-	Input *GetCrawlersInput
-	Copy  func(*GetCrawlersInput) GetCrawlersRequest
+	Input *types.GetCrawlersInput
+	Copy  func(*types.GetCrawlersInput) GetCrawlersRequest
 }
 
 // Send marshals and sends the GetCrawlers API request.
@@ -106,7 +62,7 @@ func (r GetCrawlersRequest) Send(ctx context.Context) (*GetCrawlersResponse, err
 	}
 
 	resp := &GetCrawlersResponse{
-		GetCrawlersOutput: r.Request.Data.(*GetCrawlersOutput),
+		GetCrawlersOutput: r.Request.Data.(*types.GetCrawlersOutput),
 		response:          &aws.Response{Request: r.Request},
 	}
 
@@ -136,7 +92,7 @@ func NewGetCrawlersPaginator(req GetCrawlersRequest) GetCrawlersPaginator {
 	return GetCrawlersPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *GetCrawlersInput
+				var inCpy *types.GetCrawlersInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -156,14 +112,14 @@ type GetCrawlersPaginator struct {
 	aws.Pager
 }
 
-func (p *GetCrawlersPaginator) CurrentPage() *GetCrawlersOutput {
-	return p.Pager.CurrentPage().(*GetCrawlersOutput)
+func (p *GetCrawlersPaginator) CurrentPage() *types.GetCrawlersOutput {
+	return p.Pager.CurrentPage().(*types.GetCrawlersOutput)
 }
 
 // GetCrawlersResponse is the response type for the
 // GetCrawlers API operation.
 type GetCrawlersResponse struct {
-	*GetCrawlersOutput
+	*types.GetCrawlersOutput
 
 	response *aws.Response
 }

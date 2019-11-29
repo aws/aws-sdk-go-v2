@@ -4,105 +4,12 @@ package autoscaling
 
 import (
 	"context"
-	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/query"
+	"github.com/aws/aws-sdk-go-v2/service/autoscaling/types"
 )
-
-type PutScheduledUpdateGroupActionInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the Auto Scaling group.
-	//
-	// AutoScalingGroupName is a required field
-	AutoScalingGroupName *string `min:"1" type:"string" required:"true"`
-
-	// The number of EC2 instances that should be running in the Auto Scaling group.
-	DesiredCapacity *int64 `type:"integer"`
-
-	// The date and time for the recurring schedule to end. Amazon EC2 Auto Scaling
-	// does not perform the action after this time.
-	EndTime *time.Time `type:"timestamp"`
-
-	// The maximum number of instances in the Auto Scaling group.
-	MaxSize *int64 `type:"integer"`
-
-	// The minimum number of instances in the Auto Scaling group.
-	MinSize *int64 `type:"integer"`
-
-	// The recurring schedule for this action, in Unix cron syntax format. This
-	// format consists of five fields separated by white spaces: [Minute] [Hour]
-	// [Day_of_Month] [Month_of_Year] [Day_of_Week]. The value must be in quotes
-	// (for example, "30 0 1 1,6,12 *"). For more information about this format,
-	// see Crontab (http://crontab.org).
-	//
-	// When StartTime and EndTime are specified with Recurrence, they form the boundaries
-	// of when the recurring action starts and stops.
-	Recurrence *string `min:"1" type:"string"`
-
-	// The name of this scaling action.
-	//
-	// ScheduledActionName is a required field
-	ScheduledActionName *string `min:"1" type:"string" required:"true"`
-
-	// The date and time for this action to start, in YYYY-MM-DDThh:mm:ssZ format
-	// in UTC/GMT only and in quotes (for example, "2019-06-01T00:00:00Z").
-	//
-	// If you specify Recurrence and StartTime, Amazon EC2 Auto Scaling performs
-	// the action at this time, and then performs the action based on the specified
-	// recurrence.
-	//
-	// If you try to schedule your action in the past, Amazon EC2 Auto Scaling returns
-	// an error message.
-	StartTime *time.Time `type:"timestamp"`
-
-	// This parameter is no longer used.
-	Time *time.Time `type:"timestamp"`
-}
-
-// String returns the string representation
-func (s PutScheduledUpdateGroupActionInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *PutScheduledUpdateGroupActionInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "PutScheduledUpdateGroupActionInput"}
-
-	if s.AutoScalingGroupName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("AutoScalingGroupName"))
-	}
-	if s.AutoScalingGroupName != nil && len(*s.AutoScalingGroupName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("AutoScalingGroupName", 1))
-	}
-	if s.Recurrence != nil && len(*s.Recurrence) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Recurrence", 1))
-	}
-
-	if s.ScheduledActionName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ScheduledActionName"))
-	}
-	if s.ScheduledActionName != nil && len(*s.ScheduledActionName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ScheduledActionName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type PutScheduledUpdateGroupActionOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s PutScheduledUpdateGroupActionOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opPutScheduledUpdateGroupAction = "PutScheduledUpdateGroupAction"
 
@@ -124,7 +31,7 @@ const opPutScheduledUpdateGroupAction = "PutScheduledUpdateGroupAction"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/PutScheduledUpdateGroupAction
-func (c *Client) PutScheduledUpdateGroupActionRequest(input *PutScheduledUpdateGroupActionInput) PutScheduledUpdateGroupActionRequest {
+func (c *Client) PutScheduledUpdateGroupActionRequest(input *types.PutScheduledUpdateGroupActionInput) PutScheduledUpdateGroupActionRequest {
 	op := &aws.Operation{
 		Name:       opPutScheduledUpdateGroupAction,
 		HTTPMethod: "POST",
@@ -132,10 +39,10 @@ func (c *Client) PutScheduledUpdateGroupActionRequest(input *PutScheduledUpdateG
 	}
 
 	if input == nil {
-		input = &PutScheduledUpdateGroupActionInput{}
+		input = &types.PutScheduledUpdateGroupActionInput{}
 	}
 
-	req := c.newRequest(op, input, &PutScheduledUpdateGroupActionOutput{})
+	req := c.newRequest(op, input, &types.PutScheduledUpdateGroupActionOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return PutScheduledUpdateGroupActionRequest{Request: req, Input: input, Copy: c.PutScheduledUpdateGroupActionRequest}
@@ -145,8 +52,8 @@ func (c *Client) PutScheduledUpdateGroupActionRequest(input *PutScheduledUpdateG
 // PutScheduledUpdateGroupAction API operation.
 type PutScheduledUpdateGroupActionRequest struct {
 	*aws.Request
-	Input *PutScheduledUpdateGroupActionInput
-	Copy  func(*PutScheduledUpdateGroupActionInput) PutScheduledUpdateGroupActionRequest
+	Input *types.PutScheduledUpdateGroupActionInput
+	Copy  func(*types.PutScheduledUpdateGroupActionInput) PutScheduledUpdateGroupActionRequest
 }
 
 // Send marshals and sends the PutScheduledUpdateGroupAction API request.
@@ -158,7 +65,7 @@ func (r PutScheduledUpdateGroupActionRequest) Send(ctx context.Context) (*PutSch
 	}
 
 	resp := &PutScheduledUpdateGroupActionResponse{
-		PutScheduledUpdateGroupActionOutput: r.Request.Data.(*PutScheduledUpdateGroupActionOutput),
+		PutScheduledUpdateGroupActionOutput: r.Request.Data.(*types.PutScheduledUpdateGroupActionOutput),
 		response:                            &aws.Response{Request: r.Request},
 	}
 
@@ -168,7 +75,7 @@ func (r PutScheduledUpdateGroupActionRequest) Send(ctx context.Context) (*PutSch
 // PutScheduledUpdateGroupActionResponse is the response type for the
 // PutScheduledUpdateGroupAction API operation.
 type PutScheduledUpdateGroupActionResponse struct {
-	*PutScheduledUpdateGroupActionOutput
+	*types.PutScheduledUpdateGroupActionOutput
 
 	response *aws.Response
 }

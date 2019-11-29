@@ -4,118 +4,10 @@ package securityhub
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/securityhub/types"
 )
-
-type BatchImportFindingsInput struct {
-	_ struct{} `type:"structure"`
-
-	// A list of findings to import. To successfully import a finding, it must follow
-	// the AWS Security Finding Format (https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-findings-format.html).
-	//
-	// Findings is a required field
-	Findings []AwsSecurityFinding `type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s BatchImportFindingsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *BatchImportFindingsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "BatchImportFindingsInput"}
-
-	if s.Findings == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Findings"))
-	}
-	if s.Findings != nil {
-		for i, v := range s.Findings {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Findings", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s BatchImportFindingsInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.Findings != nil {
-		v := s.Findings
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "Findings", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	return nil
-}
-
-type BatchImportFindingsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The number of findings that failed to import.
-	//
-	// FailedCount is a required field
-	FailedCount *int64 `type:"integer" required:"true"`
-
-	// The list of the findings that failed to import.
-	FailedFindings []ImportFindingsError `type:"list"`
-
-	// The number of findings that were successfully imported.
-	//
-	// SuccessCount is a required field
-	SuccessCount *int64 `type:"integer" required:"true"`
-}
-
-// String returns the string representation
-func (s BatchImportFindingsOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s BatchImportFindingsOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.FailedCount != nil {
-		v := *s.FailedCount
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "FailedCount", protocol.Int64Value(v), metadata)
-	}
-	if s.FailedFindings != nil {
-		v := s.FailedFindings
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "FailedFindings", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	if s.SuccessCount != nil {
-		v := *s.SuccessCount
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "SuccessCount", protocol.Int64Value(v), metadata)
-	}
-	return nil
-}
 
 const opBatchImportFindings = "BatchImportFindings"
 
@@ -135,7 +27,7 @@ const opBatchImportFindings = "BatchImportFindings"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/BatchImportFindings
-func (c *Client) BatchImportFindingsRequest(input *BatchImportFindingsInput) BatchImportFindingsRequest {
+func (c *Client) BatchImportFindingsRequest(input *types.BatchImportFindingsInput) BatchImportFindingsRequest {
 	op := &aws.Operation{
 		Name:       opBatchImportFindings,
 		HTTPMethod: "POST",
@@ -143,10 +35,10 @@ func (c *Client) BatchImportFindingsRequest(input *BatchImportFindingsInput) Bat
 	}
 
 	if input == nil {
-		input = &BatchImportFindingsInput{}
+		input = &types.BatchImportFindingsInput{}
 	}
 
-	req := c.newRequest(op, input, &BatchImportFindingsOutput{})
+	req := c.newRequest(op, input, &types.BatchImportFindingsOutput{})
 	return BatchImportFindingsRequest{Request: req, Input: input, Copy: c.BatchImportFindingsRequest}
 }
 
@@ -154,8 +46,8 @@ func (c *Client) BatchImportFindingsRequest(input *BatchImportFindingsInput) Bat
 // BatchImportFindings API operation.
 type BatchImportFindingsRequest struct {
 	*aws.Request
-	Input *BatchImportFindingsInput
-	Copy  func(*BatchImportFindingsInput) BatchImportFindingsRequest
+	Input *types.BatchImportFindingsInput
+	Copy  func(*types.BatchImportFindingsInput) BatchImportFindingsRequest
 }
 
 // Send marshals and sends the BatchImportFindings API request.
@@ -167,7 +59,7 @@ func (r BatchImportFindingsRequest) Send(ctx context.Context) (*BatchImportFindi
 	}
 
 	resp := &BatchImportFindingsResponse{
-		BatchImportFindingsOutput: r.Request.Data.(*BatchImportFindingsOutput),
+		BatchImportFindingsOutput: r.Request.Data.(*types.BatchImportFindingsOutput),
 		response:                  &aws.Response{Request: r.Request},
 	}
 
@@ -177,7 +69,7 @@ func (r BatchImportFindingsRequest) Send(ctx context.Context) (*BatchImportFindi
 // BatchImportFindingsResponse is the response type for the
 // BatchImportFindings API operation.
 type BatchImportFindingsResponse struct {
-	*BatchImportFindingsOutput
+	*types.BatchImportFindingsOutput
 
 	response *aws.Response
 }

@@ -4,113 +4,12 @@ package iotanalytics
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/restjson"
+	"github.com/aws/aws-sdk-go-v2/service/iotanalytics/types"
 )
-
-type UpdatePipelineInput struct {
-	_ struct{} `type:"structure"`
-
-	// A list of "PipelineActivity" objects. Activities perform transformations
-	// on your messages, such as removing, renaming or adding message attributes;
-	// filtering messages based on attribute values; invoking your Lambda functions
-	// on messages for advanced processing; or performing mathematical transformations
-	// to normalize device data.
-	//
-	// The list can be 2-25 PipelineActivity objects and must contain both a channel
-	// and a datastore activity. Each entry in the list must contain only one activity,
-	// for example:
-	//
-	// pipelineActivities = [ { "channel": { ... } }, { "lambda": { ... } }, ...
-	// ]
-	//
-	// PipelineActivities is a required field
-	PipelineActivities []PipelineActivity `locationName:"pipelineActivities" min:"1" type:"list" required:"true"`
-
-	// The name of the pipeline to update.
-	//
-	// PipelineName is a required field
-	PipelineName *string `location:"uri" locationName:"pipelineName" min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s UpdatePipelineInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdatePipelineInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdatePipelineInput"}
-
-	if s.PipelineActivities == nil {
-		invalidParams.Add(aws.NewErrParamRequired("PipelineActivities"))
-	}
-	if s.PipelineActivities != nil && len(s.PipelineActivities) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("PipelineActivities", 1))
-	}
-
-	if s.PipelineName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("PipelineName"))
-	}
-	if s.PipelineName != nil && len(*s.PipelineName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("PipelineName", 1))
-	}
-	if s.PipelineActivities != nil {
-		for i, v := range s.PipelineActivities {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "PipelineActivities", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s UpdatePipelineInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.PipelineActivities != nil {
-		v := s.PipelineActivities
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "pipelineActivities", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	if s.PipelineName != nil {
-		v := *s.PipelineName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "pipelineName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type UpdatePipelineOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s UpdatePipelineOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s UpdatePipelineOutput) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
 
 const opUpdatePipeline = "UpdatePipeline"
 
@@ -129,7 +28,7 @@ const opUpdatePipeline = "UpdatePipeline"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iotanalytics-2017-11-27/UpdatePipeline
-func (c *Client) UpdatePipelineRequest(input *UpdatePipelineInput) UpdatePipelineRequest {
+func (c *Client) UpdatePipelineRequest(input *types.UpdatePipelineInput) UpdatePipelineRequest {
 	op := &aws.Operation{
 		Name:       opUpdatePipeline,
 		HTTPMethod: "PUT",
@@ -137,10 +36,10 @@ func (c *Client) UpdatePipelineRequest(input *UpdatePipelineInput) UpdatePipelin
 	}
 
 	if input == nil {
-		input = &UpdatePipelineInput{}
+		input = &types.UpdatePipelineInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdatePipelineOutput{})
+	req := c.newRequest(op, input, &types.UpdatePipelineOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return UpdatePipelineRequest{Request: req, Input: input, Copy: c.UpdatePipelineRequest}
@@ -150,8 +49,8 @@ func (c *Client) UpdatePipelineRequest(input *UpdatePipelineInput) UpdatePipelin
 // UpdatePipeline API operation.
 type UpdatePipelineRequest struct {
 	*aws.Request
-	Input *UpdatePipelineInput
-	Copy  func(*UpdatePipelineInput) UpdatePipelineRequest
+	Input *types.UpdatePipelineInput
+	Copy  func(*types.UpdatePipelineInput) UpdatePipelineRequest
 }
 
 // Send marshals and sends the UpdatePipeline API request.
@@ -163,7 +62,7 @@ func (r UpdatePipelineRequest) Send(ctx context.Context) (*UpdatePipelineRespons
 	}
 
 	resp := &UpdatePipelineResponse{
-		UpdatePipelineOutput: r.Request.Data.(*UpdatePipelineOutput),
+		UpdatePipelineOutput: r.Request.Data.(*types.UpdatePipelineOutput),
 		response:             &aws.Response{Request: r.Request},
 	}
 
@@ -173,7 +72,7 @@ func (r UpdatePipelineRequest) Send(ctx context.Context) (*UpdatePipelineRespons
 // UpdatePipelineResponse is the response type for the
 // UpdatePipeline API operation.
 type UpdatePipelineResponse struct {
-	*UpdatePipelineOutput
+	*types.UpdatePipelineOutput
 
 	response *aws.Response
 }

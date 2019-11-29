@@ -6,63 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/types"
 )
-
-type CreateTagOptionInput struct {
-	_ struct{} `type:"structure"`
-
-	// The TagOption key.
-	//
-	// Key is a required field
-	Key *string `min:"1" type:"string" required:"true"`
-
-	// The TagOption value.
-	//
-	// Value is a required field
-	Value *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s CreateTagOptionInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateTagOptionInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateTagOptionInput"}
-
-	if s.Key == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Key"))
-	}
-	if s.Key != nil && len(*s.Key) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Key", 1))
-	}
-
-	if s.Value == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Value"))
-	}
-	if s.Value != nil && len(*s.Value) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Value", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type CreateTagOptionOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Information about the TagOption.
-	TagOptionDetail *TagOptionDetail `type:"structure"`
-}
-
-// String returns the string representation
-func (s CreateTagOptionOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCreateTagOption = "CreateTagOption"
 
@@ -79,7 +24,7 @@ const opCreateTagOption = "CreateTagOption"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/CreateTagOption
-func (c *Client) CreateTagOptionRequest(input *CreateTagOptionInput) CreateTagOptionRequest {
+func (c *Client) CreateTagOptionRequest(input *types.CreateTagOptionInput) CreateTagOptionRequest {
 	op := &aws.Operation{
 		Name:       opCreateTagOption,
 		HTTPMethod: "POST",
@@ -87,10 +32,10 @@ func (c *Client) CreateTagOptionRequest(input *CreateTagOptionInput) CreateTagOp
 	}
 
 	if input == nil {
-		input = &CreateTagOptionInput{}
+		input = &types.CreateTagOptionInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateTagOptionOutput{})
+	req := c.newRequest(op, input, &types.CreateTagOptionOutput{})
 	return CreateTagOptionRequest{Request: req, Input: input, Copy: c.CreateTagOptionRequest}
 }
 
@@ -98,8 +43,8 @@ func (c *Client) CreateTagOptionRequest(input *CreateTagOptionInput) CreateTagOp
 // CreateTagOption API operation.
 type CreateTagOptionRequest struct {
 	*aws.Request
-	Input *CreateTagOptionInput
-	Copy  func(*CreateTagOptionInput) CreateTagOptionRequest
+	Input *types.CreateTagOptionInput
+	Copy  func(*types.CreateTagOptionInput) CreateTagOptionRequest
 }
 
 // Send marshals and sends the CreateTagOption API request.
@@ -111,7 +56,7 @@ func (r CreateTagOptionRequest) Send(ctx context.Context) (*CreateTagOptionRespo
 	}
 
 	resp := &CreateTagOptionResponse{
-		CreateTagOptionOutput: r.Request.Data.(*CreateTagOptionOutput),
+		CreateTagOptionOutput: r.Request.Data.(*types.CreateTagOptionOutput),
 		response:              &aws.Response{Request: r.Request},
 	}
 
@@ -121,7 +66,7 @@ func (r CreateTagOptionRequest) Send(ctx context.Context) (*CreateTagOptionRespo
 // CreateTagOptionResponse is the response type for the
 // CreateTagOption API operation.
 type CreateTagOptionResponse struct {
-	*CreateTagOptionOutput
+	*types.CreateTagOptionOutput
 
 	response *aws.Response
 }

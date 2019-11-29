@@ -6,60 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/types"
 )
-
-type DeleteUserPoolDomainInput struct {
-	_ struct{} `type:"structure"`
-
-	// The domain string.
-	//
-	// Domain is a required field
-	Domain *string `min:"1" type:"string" required:"true"`
-
-	// The user pool ID.
-	//
-	// UserPoolId is a required field
-	UserPoolId *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteUserPoolDomainInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteUserPoolDomainInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteUserPoolDomainInput"}
-
-	if s.Domain == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Domain"))
-	}
-	if s.Domain != nil && len(*s.Domain) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Domain", 1))
-	}
-
-	if s.UserPoolId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("UserPoolId"))
-	}
-	if s.UserPoolId != nil && len(*s.UserPoolId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("UserPoolId", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteUserPoolDomainOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteUserPoolDomainOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteUserPoolDomain = "DeleteUserPoolDomain"
 
@@ -76,7 +24,7 @@ const opDeleteUserPoolDomain = "DeleteUserPoolDomain"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/DeleteUserPoolDomain
-func (c *Client) DeleteUserPoolDomainRequest(input *DeleteUserPoolDomainInput) DeleteUserPoolDomainRequest {
+func (c *Client) DeleteUserPoolDomainRequest(input *types.DeleteUserPoolDomainInput) DeleteUserPoolDomainRequest {
 	op := &aws.Operation{
 		Name:       opDeleteUserPoolDomain,
 		HTTPMethod: "POST",
@@ -84,10 +32,10 @@ func (c *Client) DeleteUserPoolDomainRequest(input *DeleteUserPoolDomainInput) D
 	}
 
 	if input == nil {
-		input = &DeleteUserPoolDomainInput{}
+		input = &types.DeleteUserPoolDomainInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteUserPoolDomainOutput{})
+	req := c.newRequest(op, input, &types.DeleteUserPoolDomainOutput{})
 	return DeleteUserPoolDomainRequest{Request: req, Input: input, Copy: c.DeleteUserPoolDomainRequest}
 }
 
@@ -95,8 +43,8 @@ func (c *Client) DeleteUserPoolDomainRequest(input *DeleteUserPoolDomainInput) D
 // DeleteUserPoolDomain API operation.
 type DeleteUserPoolDomainRequest struct {
 	*aws.Request
-	Input *DeleteUserPoolDomainInput
-	Copy  func(*DeleteUserPoolDomainInput) DeleteUserPoolDomainRequest
+	Input *types.DeleteUserPoolDomainInput
+	Copy  func(*types.DeleteUserPoolDomainInput) DeleteUserPoolDomainRequest
 }
 
 // Send marshals and sends the DeleteUserPoolDomain API request.
@@ -108,7 +56,7 @@ func (r DeleteUserPoolDomainRequest) Send(ctx context.Context) (*DeleteUserPoolD
 	}
 
 	resp := &DeleteUserPoolDomainResponse{
-		DeleteUserPoolDomainOutput: r.Request.Data.(*DeleteUserPoolDomainOutput),
+		DeleteUserPoolDomainOutput: r.Request.Data.(*types.DeleteUserPoolDomainOutput),
 		response:                   &aws.Response{Request: r.Request},
 	}
 
@@ -118,7 +66,7 @@ func (r DeleteUserPoolDomainRequest) Send(ctx context.Context) (*DeleteUserPoolD
 // DeleteUserPoolDomainResponse is the response type for the
 // DeleteUserPoolDomain API operation.
 type DeleteUserPoolDomainResponse struct {
-	*DeleteUserPoolDomainOutput
+	*types.DeleteUserPoolDomainOutput
 
 	response *aws.Response
 }

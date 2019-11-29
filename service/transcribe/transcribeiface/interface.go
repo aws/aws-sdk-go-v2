@@ -10,6 +10,7 @@ package transcribeiface
 
 import (
 	"github.com/aws/aws-sdk-go-v2/service/transcribe"
+	"github.com/aws/aws-sdk-go-v2/service/transcribe/types"
 )
 
 // ClientAPI provides an interface to enable mocking the
@@ -43,7 +44,7 @@ import (
 //    type mockClientClient struct {
 //        transcribeiface.ClientPI
 //    }
-//    func (m *mockClientClient) CreateVocabulary(input *transcribe.CreateVocabularyInput) (*transcribe.CreateVocabularyOutput, error) {
+//    func (m *mockClientClient) CreateVocabulary(input *types.CreateVocabularyInput) (*types.CreateVocabularyOutput, error) {
 //        // mock response/functionality
 //    }
 //
@@ -61,23 +62,23 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type ClientAPI interface {
-	CreateVocabularyRequest(*transcribe.CreateVocabularyInput) transcribe.CreateVocabularyRequest
+	CreateVocabularyRequest(*types.CreateVocabularyInput) transcribe.CreateVocabularyRequest
 
-	DeleteTranscriptionJobRequest(*transcribe.DeleteTranscriptionJobInput) transcribe.DeleteTranscriptionJobRequest
+	DeleteTranscriptionJobRequest(*types.DeleteTranscriptionJobInput) transcribe.DeleteTranscriptionJobRequest
 
-	DeleteVocabularyRequest(*transcribe.DeleteVocabularyInput) transcribe.DeleteVocabularyRequest
+	DeleteVocabularyRequest(*types.DeleteVocabularyInput) transcribe.DeleteVocabularyRequest
 
-	GetTranscriptionJobRequest(*transcribe.GetTranscriptionJobInput) transcribe.GetTranscriptionJobRequest
+	GetTranscriptionJobRequest(*types.GetTranscriptionJobInput) transcribe.GetTranscriptionJobRequest
 
-	GetVocabularyRequest(*transcribe.GetVocabularyInput) transcribe.GetVocabularyRequest
+	GetVocabularyRequest(*types.GetVocabularyInput) transcribe.GetVocabularyRequest
 
-	ListTranscriptionJobsRequest(*transcribe.ListTranscriptionJobsInput) transcribe.ListTranscriptionJobsRequest
+	ListTranscriptionJobsRequest(*types.ListTranscriptionJobsInput) transcribe.ListTranscriptionJobsRequest
 
-	ListVocabulariesRequest(*transcribe.ListVocabulariesInput) transcribe.ListVocabulariesRequest
+	ListVocabulariesRequest(*types.ListVocabulariesInput) transcribe.ListVocabulariesRequest
 
-	StartTranscriptionJobRequest(*transcribe.StartTranscriptionJobInput) transcribe.StartTranscriptionJobRequest
+	StartTranscriptionJobRequest(*types.StartTranscriptionJobInput) transcribe.StartTranscriptionJobRequest
 
-	UpdateVocabularyRequest(*transcribe.UpdateVocabularyInput) transcribe.UpdateVocabularyRequest
+	UpdateVocabularyRequest(*types.UpdateVocabularyInput) transcribe.UpdateVocabularyRequest
 }
 
 var _ ClientAPI = (*transcribe.Client)(nil)

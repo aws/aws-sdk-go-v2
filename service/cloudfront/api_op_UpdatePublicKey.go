@@ -6,111 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/cloudfront/types"
 )
-
-type UpdatePublicKeyInput struct {
-	_ struct{} `type:"structure" payload:"PublicKeyConfig"`
-
-	// ID of the public key to be updated.
-	//
-	// Id is a required field
-	Id *string `location:"uri" locationName:"Id" type:"string" required:"true"`
-
-	// The value of the ETag header that you received when retrieving the public
-	// key to update. For example: E2QWRUHAPOMQZL.
-	IfMatch *string `location:"header" locationName:"If-Match" type:"string"`
-
-	// Request to update public key information.
-	//
-	// PublicKeyConfig is a required field
-	PublicKeyConfig *PublicKeyConfig `locationName:"PublicKeyConfig" type:"structure" required:"true" xmlURI:"http://cloudfront.amazonaws.com/doc/2019-03-26/"`
-}
-
-// String returns the string representation
-func (s UpdatePublicKeyInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdatePublicKeyInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdatePublicKeyInput"}
-
-	if s.Id == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Id"))
-	}
-
-	if s.PublicKeyConfig == nil {
-		invalidParams.Add(aws.NewErrParamRequired("PublicKeyConfig"))
-	}
-	if s.PublicKeyConfig != nil {
-		if err := s.PublicKeyConfig.Validate(); err != nil {
-			invalidParams.AddNested("PublicKeyConfig", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s UpdatePublicKeyInput) MarshalFields(e protocol.FieldEncoder) error {
-
-	if s.IfMatch != nil {
-		v := *s.IfMatch
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "If-Match", protocol.StringValue(v), metadata)
-	}
-	if s.Id != nil {
-		v := *s.Id
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "Id", protocol.StringValue(v), metadata)
-	}
-	if s.PublicKeyConfig != nil {
-		v := s.PublicKeyConfig
-
-		metadata := protocol.Metadata{XMLNamespaceURI: "http://cloudfront.amazonaws.com/doc/2019-03-26/"}
-		e.SetFields(protocol.PayloadTarget, "PublicKeyConfig", v, metadata)
-	}
-	return nil
-}
-
-type UpdatePublicKeyOutput struct {
-	_ struct{} `type:"structure" payload:"PublicKey"`
-
-	// The current version of the update public key result. For example: E2QWRUHAPOMQZL.
-	ETag *string `location:"header" locationName:"ETag" type:"string"`
-
-	// Return the results of updating the public key.
-	PublicKey *PublicKey `type:"structure"`
-}
-
-// String returns the string representation
-func (s UpdatePublicKeyOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s UpdatePublicKeyOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.ETag != nil {
-		v := *s.ETag
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "ETag", protocol.StringValue(v), metadata)
-	}
-	if s.PublicKey != nil {
-		v := s.PublicKey
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.PayloadTarget, "PublicKey", v, metadata)
-	}
-	return nil
-}
 
 const opUpdatePublicKey = "UpdatePublicKey2019_03_26"
 
@@ -128,7 +25,7 @@ const opUpdatePublicKey = "UpdatePublicKey2019_03_26"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/UpdatePublicKey
-func (c *Client) UpdatePublicKeyRequest(input *UpdatePublicKeyInput) UpdatePublicKeyRequest {
+func (c *Client) UpdatePublicKeyRequest(input *types.UpdatePublicKeyInput) UpdatePublicKeyRequest {
 	op := &aws.Operation{
 		Name:       opUpdatePublicKey,
 		HTTPMethod: "PUT",
@@ -136,10 +33,10 @@ func (c *Client) UpdatePublicKeyRequest(input *UpdatePublicKeyInput) UpdatePubli
 	}
 
 	if input == nil {
-		input = &UpdatePublicKeyInput{}
+		input = &types.UpdatePublicKeyInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdatePublicKeyOutput{})
+	req := c.newRequest(op, input, &types.UpdatePublicKeyOutput{})
 	return UpdatePublicKeyRequest{Request: req, Input: input, Copy: c.UpdatePublicKeyRequest}
 }
 
@@ -147,8 +44,8 @@ func (c *Client) UpdatePublicKeyRequest(input *UpdatePublicKeyInput) UpdatePubli
 // UpdatePublicKey API operation.
 type UpdatePublicKeyRequest struct {
 	*aws.Request
-	Input *UpdatePublicKeyInput
-	Copy  func(*UpdatePublicKeyInput) UpdatePublicKeyRequest
+	Input *types.UpdatePublicKeyInput
+	Copy  func(*types.UpdatePublicKeyInput) UpdatePublicKeyRequest
 }
 
 // Send marshals and sends the UpdatePublicKey API request.
@@ -160,7 +57,7 @@ func (r UpdatePublicKeyRequest) Send(ctx context.Context) (*UpdatePublicKeyRespo
 	}
 
 	resp := &UpdatePublicKeyResponse{
-		UpdatePublicKeyOutput: r.Request.Data.(*UpdatePublicKeyOutput),
+		UpdatePublicKeyOutput: r.Request.Data.(*types.UpdatePublicKeyOutput),
 		response:              &aws.Response{Request: r.Request},
 	}
 
@@ -170,7 +67,7 @@ func (r UpdatePublicKeyRequest) Send(ctx context.Context) (*UpdatePublicKeyRespo
 // UpdatePublicKeyResponse is the response type for the
 // UpdatePublicKey API operation.
 type UpdatePublicKeyResponse struct {
-	*UpdatePublicKeyOutput
+	*types.UpdatePublicKeyOutput
 
 	response *aws.Response
 }

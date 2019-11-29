@@ -6,117 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/backup/types"
 )
-
-type GetRecoveryPointRestoreMetadataInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of a logical container where backups are stored. Backup vaults are
-	// identified by names that are unique to the account used to create them and
-	// the AWS Region where they are created. They consist of lowercase letters,
-	// numbers, and hyphens.
-	//
-	// BackupVaultName is a required field
-	BackupVaultName *string `location:"uri" locationName:"backupVaultName" type:"string" required:"true"`
-
-	// An Amazon Resource Name (ARN) that uniquely identifies a recovery point;
-	// for example, arn:aws:backup:us-east-1:123456789012:recovery-point:1EB3B5E7-9EB0-435A-A80B-108B488B0D45.
-	//
-	// RecoveryPointArn is a required field
-	RecoveryPointArn *string `location:"uri" locationName:"recoveryPointArn" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetRecoveryPointRestoreMetadataInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetRecoveryPointRestoreMetadataInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetRecoveryPointRestoreMetadataInput"}
-
-	if s.BackupVaultName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("BackupVaultName"))
-	}
-
-	if s.RecoveryPointArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("RecoveryPointArn"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetRecoveryPointRestoreMetadataInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.BackupVaultName != nil {
-		v := *s.BackupVaultName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "backupVaultName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.RecoveryPointArn != nil {
-		v := *s.RecoveryPointArn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "recoveryPointArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type GetRecoveryPointRestoreMetadataOutput struct {
-	_ struct{} `type:"structure"`
-
-	// An ARN that uniquely identifies a backup vault; for example, arn:aws:backup:us-east-1:123456789012:vault:aBackupVault.
-	BackupVaultArn *string `type:"string"`
-
-	// An ARN that uniquely identifies a recovery point; for example, arn:aws:backup:us-east-1:123456789012:recovery-point:1EB3B5E7-9EB0-435A-A80B-108B488B0D45.
-	RecoveryPointArn *string `type:"string"`
-
-	// A set of metadata key-value pairs that lists the metadata key-value pairs
-	// that are required to restore the recovery point.
-	RestoreMetadata map[string]string `type:"map"`
-}
-
-// String returns the string representation
-func (s GetRecoveryPointRestoreMetadataOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetRecoveryPointRestoreMetadataOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.BackupVaultArn != nil {
-		v := *s.BackupVaultArn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "BackupVaultArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.RecoveryPointArn != nil {
-		v := *s.RecoveryPointArn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "RecoveryPointArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.RestoreMetadata != nil {
-		v := s.RestoreMetadata
-
-		metadata := protocol.Metadata{}
-		ms0 := e.Map(protocol.BodyTarget, "RestoreMetadata", metadata)
-		ms0.Start()
-		for k1, v1 := range v {
-			ms0.MapSetValue(k1, protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
-		}
-		ms0.End()
-
-	}
-	return nil
-}
 
 const opGetRecoveryPointRestoreMetadata = "GetRecoveryPointRestoreMetadata"
 
@@ -140,7 +31,7 @@ const opGetRecoveryPointRestoreMetadata = "GetRecoveryPointRestoreMetadata"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/GetRecoveryPointRestoreMetadata
-func (c *Client) GetRecoveryPointRestoreMetadataRequest(input *GetRecoveryPointRestoreMetadataInput) GetRecoveryPointRestoreMetadataRequest {
+func (c *Client) GetRecoveryPointRestoreMetadataRequest(input *types.GetRecoveryPointRestoreMetadataInput) GetRecoveryPointRestoreMetadataRequest {
 	op := &aws.Operation{
 		Name:       opGetRecoveryPointRestoreMetadata,
 		HTTPMethod: "GET",
@@ -148,10 +39,10 @@ func (c *Client) GetRecoveryPointRestoreMetadataRequest(input *GetRecoveryPointR
 	}
 
 	if input == nil {
-		input = &GetRecoveryPointRestoreMetadataInput{}
+		input = &types.GetRecoveryPointRestoreMetadataInput{}
 	}
 
-	req := c.newRequest(op, input, &GetRecoveryPointRestoreMetadataOutput{})
+	req := c.newRequest(op, input, &types.GetRecoveryPointRestoreMetadataOutput{})
 	return GetRecoveryPointRestoreMetadataRequest{Request: req, Input: input, Copy: c.GetRecoveryPointRestoreMetadataRequest}
 }
 
@@ -159,8 +50,8 @@ func (c *Client) GetRecoveryPointRestoreMetadataRequest(input *GetRecoveryPointR
 // GetRecoveryPointRestoreMetadata API operation.
 type GetRecoveryPointRestoreMetadataRequest struct {
 	*aws.Request
-	Input *GetRecoveryPointRestoreMetadataInput
-	Copy  func(*GetRecoveryPointRestoreMetadataInput) GetRecoveryPointRestoreMetadataRequest
+	Input *types.GetRecoveryPointRestoreMetadataInput
+	Copy  func(*types.GetRecoveryPointRestoreMetadataInput) GetRecoveryPointRestoreMetadataRequest
 }
 
 // Send marshals and sends the GetRecoveryPointRestoreMetadata API request.
@@ -172,7 +63,7 @@ func (r GetRecoveryPointRestoreMetadataRequest) Send(ctx context.Context) (*GetR
 	}
 
 	resp := &GetRecoveryPointRestoreMetadataResponse{
-		GetRecoveryPointRestoreMetadataOutput: r.Request.Data.(*GetRecoveryPointRestoreMetadataOutput),
+		GetRecoveryPointRestoreMetadataOutput: r.Request.Data.(*types.GetRecoveryPointRestoreMetadataOutput),
 		response:                              &aws.Response{Request: r.Request},
 	}
 
@@ -182,7 +73,7 @@ func (r GetRecoveryPointRestoreMetadataRequest) Send(ctx context.Context) (*GetR
 // GetRecoveryPointRestoreMetadataResponse is the response type for the
 // GetRecoveryPointRestoreMetadata API operation.
 type GetRecoveryPointRestoreMetadataResponse struct {
-	*GetRecoveryPointRestoreMetadataOutput
+	*types.GetRecoveryPointRestoreMetadataOutput
 
 	response *aws.Response
 }

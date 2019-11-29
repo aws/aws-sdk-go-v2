@@ -6,77 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/iot/types"
 )
-
-type DescribeAuditFindingInput struct {
-	_ struct{} `type:"structure"`
-
-	// A unique identifier for a single audit finding. You can use this identifier
-	// to apply mitigation actions to the finding.
-	//
-	// FindingId is a required field
-	FindingId *string `location:"uri" locationName:"findingId" min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeAuditFindingInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeAuditFindingInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeAuditFindingInput"}
-
-	if s.FindingId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("FindingId"))
-	}
-	if s.FindingId != nil && len(*s.FindingId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("FindingId", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DescribeAuditFindingInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.FindingId != nil {
-		v := *s.FindingId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "findingId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type DescribeAuditFindingOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The findings (results) of the audit.
-	Finding *AuditFinding `locationName:"finding" type:"structure"`
-}
-
-// String returns the string representation
-func (s DescribeAuditFindingOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DescribeAuditFindingOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.Finding != nil {
-		v := s.Finding
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "finding", v, metadata)
-	}
-	return nil
-}
 
 const opDescribeAuditFinding = "DescribeAuditFinding"
 
@@ -93,7 +24,7 @@ const opDescribeAuditFinding = "DescribeAuditFinding"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) DescribeAuditFindingRequest(input *DescribeAuditFindingInput) DescribeAuditFindingRequest {
+func (c *Client) DescribeAuditFindingRequest(input *types.DescribeAuditFindingInput) DescribeAuditFindingRequest {
 	op := &aws.Operation{
 		Name:       opDescribeAuditFinding,
 		HTTPMethod: "GET",
@@ -101,10 +32,10 @@ func (c *Client) DescribeAuditFindingRequest(input *DescribeAuditFindingInput) D
 	}
 
 	if input == nil {
-		input = &DescribeAuditFindingInput{}
+		input = &types.DescribeAuditFindingInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeAuditFindingOutput{})
+	req := c.newRequest(op, input, &types.DescribeAuditFindingOutput{})
 	return DescribeAuditFindingRequest{Request: req, Input: input, Copy: c.DescribeAuditFindingRequest}
 }
 
@@ -112,8 +43,8 @@ func (c *Client) DescribeAuditFindingRequest(input *DescribeAuditFindingInput) D
 // DescribeAuditFinding API operation.
 type DescribeAuditFindingRequest struct {
 	*aws.Request
-	Input *DescribeAuditFindingInput
-	Copy  func(*DescribeAuditFindingInput) DescribeAuditFindingRequest
+	Input *types.DescribeAuditFindingInput
+	Copy  func(*types.DescribeAuditFindingInput) DescribeAuditFindingRequest
 }
 
 // Send marshals and sends the DescribeAuditFinding API request.
@@ -125,7 +56,7 @@ func (r DescribeAuditFindingRequest) Send(ctx context.Context) (*DescribeAuditFi
 	}
 
 	resp := &DescribeAuditFindingResponse{
-		DescribeAuditFindingOutput: r.Request.Data.(*DescribeAuditFindingOutput),
+		DescribeAuditFindingOutput: r.Request.Data.(*types.DescribeAuditFindingOutput),
 		response:                   &aws.Response{Request: r.Request},
 	}
 
@@ -135,7 +66,7 @@ func (r DescribeAuditFindingRequest) Send(ctx context.Context) (*DescribeAuditFi
 // DescribeAuditFindingResponse is the response type for the
 // DescribeAuditFinding API operation.
 type DescribeAuditFindingResponse struct {
-	*DescribeAuditFindingOutput
+	*types.DescribeAuditFindingOutput
 
 	response *aws.Response
 }

@@ -6,117 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/firehose/types"
 )
-
-type UpdateDestinationInput struct {
-	_ struct{} `type:"structure"`
-
-	// Obtain this value from the VersionId result of DeliveryStreamDescription.
-	// This value is required, and helps the service perform conditional operations.
-	// For example, if there is an interleaving update and this value is null, then
-	// the update destination fails. After the update is successful, the VersionId
-	// value is updated. The service then performs a merge of the old configuration
-	// with the new configuration.
-	//
-	// CurrentDeliveryStreamVersionId is a required field
-	CurrentDeliveryStreamVersionId *string `min:"1" type:"string" required:"true"`
-
-	// The name of the delivery stream.
-	//
-	// DeliveryStreamName is a required field
-	DeliveryStreamName *string `min:"1" type:"string" required:"true"`
-
-	// The ID of the destination.
-	//
-	// DestinationId is a required field
-	DestinationId *string `min:"1" type:"string" required:"true"`
-
-	// Describes an update for a destination in Amazon ES.
-	ElasticsearchDestinationUpdate *ElasticsearchDestinationUpdate `type:"structure"`
-
-	// Describes an update for a destination in Amazon S3.
-	ExtendedS3DestinationUpdate *ExtendedS3DestinationUpdate `type:"structure"`
-
-	// Describes an update for a destination in Amazon Redshift.
-	RedshiftDestinationUpdate *RedshiftDestinationUpdate `type:"structure"`
-
-	// [Deprecated] Describes an update for a destination in Amazon S3.
-	S3DestinationUpdate *S3DestinationUpdate `deprecated:"true" type:"structure"`
-
-	// Describes an update for a destination in Splunk.
-	SplunkDestinationUpdate *SplunkDestinationUpdate `type:"structure"`
-}
-
-// String returns the string representation
-func (s UpdateDestinationInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateDestinationInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateDestinationInput"}
-
-	if s.CurrentDeliveryStreamVersionId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("CurrentDeliveryStreamVersionId"))
-	}
-	if s.CurrentDeliveryStreamVersionId != nil && len(*s.CurrentDeliveryStreamVersionId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("CurrentDeliveryStreamVersionId", 1))
-	}
-
-	if s.DeliveryStreamName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DeliveryStreamName"))
-	}
-	if s.DeliveryStreamName != nil && len(*s.DeliveryStreamName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("DeliveryStreamName", 1))
-	}
-
-	if s.DestinationId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DestinationId"))
-	}
-	if s.DestinationId != nil && len(*s.DestinationId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("DestinationId", 1))
-	}
-	if s.ElasticsearchDestinationUpdate != nil {
-		if err := s.ElasticsearchDestinationUpdate.Validate(); err != nil {
-			invalidParams.AddNested("ElasticsearchDestinationUpdate", err.(aws.ErrInvalidParams))
-		}
-	}
-	if s.ExtendedS3DestinationUpdate != nil {
-		if err := s.ExtendedS3DestinationUpdate.Validate(); err != nil {
-			invalidParams.AddNested("ExtendedS3DestinationUpdate", err.(aws.ErrInvalidParams))
-		}
-	}
-	if s.RedshiftDestinationUpdate != nil {
-		if err := s.RedshiftDestinationUpdate.Validate(); err != nil {
-			invalidParams.AddNested("RedshiftDestinationUpdate", err.(aws.ErrInvalidParams))
-		}
-	}
-	if s.S3DestinationUpdate != nil {
-		if err := s.S3DestinationUpdate.Validate(); err != nil {
-			invalidParams.AddNested("S3DestinationUpdate", err.(aws.ErrInvalidParams))
-		}
-	}
-	if s.SplunkDestinationUpdate != nil {
-		if err := s.SplunkDestinationUpdate.Validate(); err != nil {
-			invalidParams.AddNested("SplunkDestinationUpdate", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type UpdateDestinationOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s UpdateDestinationOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opUpdateDestination = "UpdateDestination"
 
@@ -162,7 +53,7 @@ const opUpdateDestination = "UpdateDestination"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/UpdateDestination
-func (c *Client) UpdateDestinationRequest(input *UpdateDestinationInput) UpdateDestinationRequest {
+func (c *Client) UpdateDestinationRequest(input *types.UpdateDestinationInput) UpdateDestinationRequest {
 	op := &aws.Operation{
 		Name:       opUpdateDestination,
 		HTTPMethod: "POST",
@@ -170,10 +61,10 @@ func (c *Client) UpdateDestinationRequest(input *UpdateDestinationInput) UpdateD
 	}
 
 	if input == nil {
-		input = &UpdateDestinationInput{}
+		input = &types.UpdateDestinationInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateDestinationOutput{})
+	req := c.newRequest(op, input, &types.UpdateDestinationOutput{})
 	return UpdateDestinationRequest{Request: req, Input: input, Copy: c.UpdateDestinationRequest}
 }
 
@@ -181,8 +72,8 @@ func (c *Client) UpdateDestinationRequest(input *UpdateDestinationInput) UpdateD
 // UpdateDestination API operation.
 type UpdateDestinationRequest struct {
 	*aws.Request
-	Input *UpdateDestinationInput
-	Copy  func(*UpdateDestinationInput) UpdateDestinationRequest
+	Input *types.UpdateDestinationInput
+	Copy  func(*types.UpdateDestinationInput) UpdateDestinationRequest
 }
 
 // Send marshals and sends the UpdateDestination API request.
@@ -194,7 +85,7 @@ func (r UpdateDestinationRequest) Send(ctx context.Context) (*UpdateDestinationR
 	}
 
 	resp := &UpdateDestinationResponse{
-		UpdateDestinationOutput: r.Request.Data.(*UpdateDestinationOutput),
+		UpdateDestinationOutput: r.Request.Data.(*types.UpdateDestinationOutput),
 		response:                &aws.Response{Request: r.Request},
 	}
 
@@ -204,7 +95,7 @@ func (r UpdateDestinationRequest) Send(ctx context.Context) (*UpdateDestinationR
 // UpdateDestinationResponse is the response type for the
 // UpdateDestination API operation.
 type UpdateDestinationResponse struct {
-	*UpdateDestinationOutput
+	*types.UpdateDestinationOutput
 
 	response *aws.Response
 }

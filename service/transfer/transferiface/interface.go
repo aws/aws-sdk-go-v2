@@ -10,6 +10,7 @@ package transferiface
 
 import (
 	"github.com/aws/aws-sdk-go-v2/service/transfer"
+	"github.com/aws/aws-sdk-go-v2/service/transfer/types"
 )
 
 // ClientAPI provides an interface to enable mocking the
@@ -43,7 +44,7 @@ import (
 //    type mockClientClient struct {
 //        transferiface.ClientPI
 //    }
-//    func (m *mockClientClient) CreateServer(input *transfer.CreateServerInput) (*transfer.CreateServerOutput, error) {
+//    func (m *mockClientClient) CreateServer(input *types.CreateServerInput) (*types.CreateServerOutput, error) {
 //        // mock response/functionality
 //    }
 //
@@ -61,41 +62,41 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type ClientAPI interface {
-	CreateServerRequest(*transfer.CreateServerInput) transfer.CreateServerRequest
+	CreateServerRequest(*types.CreateServerInput) transfer.CreateServerRequest
 
-	CreateUserRequest(*transfer.CreateUserInput) transfer.CreateUserRequest
+	CreateUserRequest(*types.CreateUserInput) transfer.CreateUserRequest
 
-	DeleteServerRequest(*transfer.DeleteServerInput) transfer.DeleteServerRequest
+	DeleteServerRequest(*types.DeleteServerInput) transfer.DeleteServerRequest
 
-	DeleteSshPublicKeyRequest(*transfer.DeleteSshPublicKeyInput) transfer.DeleteSshPublicKeyRequest
+	DeleteSshPublicKeyRequest(*types.DeleteSshPublicKeyInput) transfer.DeleteSshPublicKeyRequest
 
-	DeleteUserRequest(*transfer.DeleteUserInput) transfer.DeleteUserRequest
+	DeleteUserRequest(*types.DeleteUserInput) transfer.DeleteUserRequest
 
-	DescribeServerRequest(*transfer.DescribeServerInput) transfer.DescribeServerRequest
+	DescribeServerRequest(*types.DescribeServerInput) transfer.DescribeServerRequest
 
-	DescribeUserRequest(*transfer.DescribeUserInput) transfer.DescribeUserRequest
+	DescribeUserRequest(*types.DescribeUserInput) transfer.DescribeUserRequest
 
-	ImportSshPublicKeyRequest(*transfer.ImportSshPublicKeyInput) transfer.ImportSshPublicKeyRequest
+	ImportSshPublicKeyRequest(*types.ImportSshPublicKeyInput) transfer.ImportSshPublicKeyRequest
 
-	ListServersRequest(*transfer.ListServersInput) transfer.ListServersRequest
+	ListServersRequest(*types.ListServersInput) transfer.ListServersRequest
 
-	ListTagsForResourceRequest(*transfer.ListTagsForResourceInput) transfer.ListTagsForResourceRequest
+	ListTagsForResourceRequest(*types.ListTagsForResourceInput) transfer.ListTagsForResourceRequest
 
-	ListUsersRequest(*transfer.ListUsersInput) transfer.ListUsersRequest
+	ListUsersRequest(*types.ListUsersInput) transfer.ListUsersRequest
 
-	StartServerRequest(*transfer.StartServerInput) transfer.StartServerRequest
+	StartServerRequest(*types.StartServerInput) transfer.StartServerRequest
 
-	StopServerRequest(*transfer.StopServerInput) transfer.StopServerRequest
+	StopServerRequest(*types.StopServerInput) transfer.StopServerRequest
 
-	TagResourceRequest(*transfer.TagResourceInput) transfer.TagResourceRequest
+	TagResourceRequest(*types.TagResourceInput) transfer.TagResourceRequest
 
-	TestIdentityProviderRequest(*transfer.TestIdentityProviderInput) transfer.TestIdentityProviderRequest
+	TestIdentityProviderRequest(*types.TestIdentityProviderInput) transfer.TestIdentityProviderRequest
 
-	UntagResourceRequest(*transfer.UntagResourceInput) transfer.UntagResourceRequest
+	UntagResourceRequest(*types.UntagResourceInput) transfer.UntagResourceRequest
 
-	UpdateServerRequest(*transfer.UpdateServerInput) transfer.UpdateServerRequest
+	UpdateServerRequest(*types.UpdateServerInput) transfer.UpdateServerRequest
 
-	UpdateUserRequest(*transfer.UpdateUserInput) transfer.UpdateUserRequest
+	UpdateUserRequest(*types.UpdateUserInput) transfer.UpdateUserRequest
 }
 
 var _ ClientAPI = (*transfer.Client)(nil)

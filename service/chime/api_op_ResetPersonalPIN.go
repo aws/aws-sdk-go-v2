@@ -6,88 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/chime/types"
 )
-
-type ResetPersonalPINInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Chime account ID.
-	//
-	// AccountId is a required field
-	AccountId *string `location:"uri" locationName:"accountId" type:"string" required:"true"`
-
-	// The user ID.
-	//
-	// UserId is a required field
-	UserId *string `location:"uri" locationName:"userId" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s ResetPersonalPINInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ResetPersonalPINInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ResetPersonalPINInput"}
-
-	if s.AccountId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("AccountId"))
-	}
-
-	if s.UserId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("UserId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ResetPersonalPINInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.AccountId != nil {
-		v := *s.AccountId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "accountId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.UserId != nil {
-		v := *s.UserId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "userId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type ResetPersonalPINOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The user details and new personal meeting PIN.
-	User *User `type:"structure"`
-}
-
-// String returns the string representation
-func (s ResetPersonalPINOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ResetPersonalPINOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.User != nil {
-		v := s.User
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "User", v, metadata)
-	}
-	return nil
-}
 
 const opResetPersonalPIN = "ResetPersonalPIN"
 
@@ -105,7 +25,7 @@ const opResetPersonalPIN = "ResetPersonalPIN"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/ResetPersonalPIN
-func (c *Client) ResetPersonalPINRequest(input *ResetPersonalPINInput) ResetPersonalPINRequest {
+func (c *Client) ResetPersonalPINRequest(input *types.ResetPersonalPINInput) ResetPersonalPINRequest {
 	op := &aws.Operation{
 		Name:       opResetPersonalPIN,
 		HTTPMethod: "POST",
@@ -113,10 +33,10 @@ func (c *Client) ResetPersonalPINRequest(input *ResetPersonalPINInput) ResetPers
 	}
 
 	if input == nil {
-		input = &ResetPersonalPINInput{}
+		input = &types.ResetPersonalPINInput{}
 	}
 
-	req := c.newRequest(op, input, &ResetPersonalPINOutput{})
+	req := c.newRequest(op, input, &types.ResetPersonalPINOutput{})
 	return ResetPersonalPINRequest{Request: req, Input: input, Copy: c.ResetPersonalPINRequest}
 }
 
@@ -124,8 +44,8 @@ func (c *Client) ResetPersonalPINRequest(input *ResetPersonalPINInput) ResetPers
 // ResetPersonalPIN API operation.
 type ResetPersonalPINRequest struct {
 	*aws.Request
-	Input *ResetPersonalPINInput
-	Copy  func(*ResetPersonalPINInput) ResetPersonalPINRequest
+	Input *types.ResetPersonalPINInput
+	Copy  func(*types.ResetPersonalPINInput) ResetPersonalPINRequest
 }
 
 // Send marshals and sends the ResetPersonalPIN API request.
@@ -137,7 +57,7 @@ func (r ResetPersonalPINRequest) Send(ctx context.Context) (*ResetPersonalPINRes
 	}
 
 	resp := &ResetPersonalPINResponse{
-		ResetPersonalPINOutput: r.Request.Data.(*ResetPersonalPINOutput),
+		ResetPersonalPINOutput: r.Request.Data.(*types.ResetPersonalPINOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -147,7 +67,7 @@ func (r ResetPersonalPINRequest) Send(ctx context.Context) (*ResetPersonalPINRes
 // ResetPersonalPINResponse is the response type for the
 // ResetPersonalPIN API operation.
 type ResetPersonalPINResponse struct {
-	*ResetPersonalPINOutput
+	*types.ResetPersonalPINOutput
 
 	response *aws.Response
 }

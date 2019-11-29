@@ -10,6 +10,7 @@ package comprehendiface
 
 import (
 	"github.com/aws/aws-sdk-go-v2/service/comprehend"
+	"github.com/aws/aws-sdk-go-v2/service/comprehend/types"
 )
 
 // ClientAPI provides an interface to enable mocking the
@@ -43,7 +44,7 @@ import (
 //    type mockClientClient struct {
 //        comprehendiface.ClientPI
 //    }
-//    func (m *mockClientClient) BatchDetectDominantLanguage(input *comprehend.BatchDetectDominantLanguageInput) (*comprehend.BatchDetectDominantLanguageOutput, error) {
+//    func (m *mockClientClient) BatchDetectDominantLanguage(input *types.BatchDetectDominantLanguageInput) (*types.BatchDetectDominantLanguageOutput, error) {
 //        // mock response/functionality
 //    }
 //
@@ -61,95 +62,95 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type ClientAPI interface {
-	BatchDetectDominantLanguageRequest(*comprehend.BatchDetectDominantLanguageInput) comprehend.BatchDetectDominantLanguageRequest
+	BatchDetectDominantLanguageRequest(*types.BatchDetectDominantLanguageInput) comprehend.BatchDetectDominantLanguageRequest
 
-	BatchDetectEntitiesRequest(*comprehend.BatchDetectEntitiesInput) comprehend.BatchDetectEntitiesRequest
+	BatchDetectEntitiesRequest(*types.BatchDetectEntitiesInput) comprehend.BatchDetectEntitiesRequest
 
-	BatchDetectKeyPhrasesRequest(*comprehend.BatchDetectKeyPhrasesInput) comprehend.BatchDetectKeyPhrasesRequest
+	BatchDetectKeyPhrasesRequest(*types.BatchDetectKeyPhrasesInput) comprehend.BatchDetectKeyPhrasesRequest
 
-	BatchDetectSentimentRequest(*comprehend.BatchDetectSentimentInput) comprehend.BatchDetectSentimentRequest
+	BatchDetectSentimentRequest(*types.BatchDetectSentimentInput) comprehend.BatchDetectSentimentRequest
 
-	BatchDetectSyntaxRequest(*comprehend.BatchDetectSyntaxInput) comprehend.BatchDetectSyntaxRequest
+	BatchDetectSyntaxRequest(*types.BatchDetectSyntaxInput) comprehend.BatchDetectSyntaxRequest
 
-	CreateDocumentClassifierRequest(*comprehend.CreateDocumentClassifierInput) comprehend.CreateDocumentClassifierRequest
+	CreateDocumentClassifierRequest(*types.CreateDocumentClassifierInput) comprehend.CreateDocumentClassifierRequest
 
-	CreateEntityRecognizerRequest(*comprehend.CreateEntityRecognizerInput) comprehend.CreateEntityRecognizerRequest
+	CreateEntityRecognizerRequest(*types.CreateEntityRecognizerInput) comprehend.CreateEntityRecognizerRequest
 
-	DeleteDocumentClassifierRequest(*comprehend.DeleteDocumentClassifierInput) comprehend.DeleteDocumentClassifierRequest
+	DeleteDocumentClassifierRequest(*types.DeleteDocumentClassifierInput) comprehend.DeleteDocumentClassifierRequest
 
-	DeleteEntityRecognizerRequest(*comprehend.DeleteEntityRecognizerInput) comprehend.DeleteEntityRecognizerRequest
+	DeleteEntityRecognizerRequest(*types.DeleteEntityRecognizerInput) comprehend.DeleteEntityRecognizerRequest
 
-	DescribeDocumentClassificationJobRequest(*comprehend.DescribeDocumentClassificationJobInput) comprehend.DescribeDocumentClassificationJobRequest
+	DescribeDocumentClassificationJobRequest(*types.DescribeDocumentClassificationJobInput) comprehend.DescribeDocumentClassificationJobRequest
 
-	DescribeDocumentClassifierRequest(*comprehend.DescribeDocumentClassifierInput) comprehend.DescribeDocumentClassifierRequest
+	DescribeDocumentClassifierRequest(*types.DescribeDocumentClassifierInput) comprehend.DescribeDocumentClassifierRequest
 
-	DescribeDominantLanguageDetectionJobRequest(*comprehend.DescribeDominantLanguageDetectionJobInput) comprehend.DescribeDominantLanguageDetectionJobRequest
+	DescribeDominantLanguageDetectionJobRequest(*types.DescribeDominantLanguageDetectionJobInput) comprehend.DescribeDominantLanguageDetectionJobRequest
 
-	DescribeEntitiesDetectionJobRequest(*comprehend.DescribeEntitiesDetectionJobInput) comprehend.DescribeEntitiesDetectionJobRequest
+	DescribeEntitiesDetectionJobRequest(*types.DescribeEntitiesDetectionJobInput) comprehend.DescribeEntitiesDetectionJobRequest
 
-	DescribeEntityRecognizerRequest(*comprehend.DescribeEntityRecognizerInput) comprehend.DescribeEntityRecognizerRequest
+	DescribeEntityRecognizerRequest(*types.DescribeEntityRecognizerInput) comprehend.DescribeEntityRecognizerRequest
 
-	DescribeKeyPhrasesDetectionJobRequest(*comprehend.DescribeKeyPhrasesDetectionJobInput) comprehend.DescribeKeyPhrasesDetectionJobRequest
+	DescribeKeyPhrasesDetectionJobRequest(*types.DescribeKeyPhrasesDetectionJobInput) comprehend.DescribeKeyPhrasesDetectionJobRequest
 
-	DescribeSentimentDetectionJobRequest(*comprehend.DescribeSentimentDetectionJobInput) comprehend.DescribeSentimentDetectionJobRequest
+	DescribeSentimentDetectionJobRequest(*types.DescribeSentimentDetectionJobInput) comprehend.DescribeSentimentDetectionJobRequest
 
-	DescribeTopicsDetectionJobRequest(*comprehend.DescribeTopicsDetectionJobInput) comprehend.DescribeTopicsDetectionJobRequest
+	DescribeTopicsDetectionJobRequest(*types.DescribeTopicsDetectionJobInput) comprehend.DescribeTopicsDetectionJobRequest
 
-	DetectDominantLanguageRequest(*comprehend.DetectDominantLanguageInput) comprehend.DetectDominantLanguageRequest
+	DetectDominantLanguageRequest(*types.DetectDominantLanguageInput) comprehend.DetectDominantLanguageRequest
 
-	DetectEntitiesRequest(*comprehend.DetectEntitiesInput) comprehend.DetectEntitiesRequest
+	DetectEntitiesRequest(*types.DetectEntitiesInput) comprehend.DetectEntitiesRequest
 
-	DetectKeyPhrasesRequest(*comprehend.DetectKeyPhrasesInput) comprehend.DetectKeyPhrasesRequest
+	DetectKeyPhrasesRequest(*types.DetectKeyPhrasesInput) comprehend.DetectKeyPhrasesRequest
 
-	DetectSentimentRequest(*comprehend.DetectSentimentInput) comprehend.DetectSentimentRequest
+	DetectSentimentRequest(*types.DetectSentimentInput) comprehend.DetectSentimentRequest
 
-	DetectSyntaxRequest(*comprehend.DetectSyntaxInput) comprehend.DetectSyntaxRequest
+	DetectSyntaxRequest(*types.DetectSyntaxInput) comprehend.DetectSyntaxRequest
 
-	ListDocumentClassificationJobsRequest(*comprehend.ListDocumentClassificationJobsInput) comprehend.ListDocumentClassificationJobsRequest
+	ListDocumentClassificationJobsRequest(*types.ListDocumentClassificationJobsInput) comprehend.ListDocumentClassificationJobsRequest
 
-	ListDocumentClassifiersRequest(*comprehend.ListDocumentClassifiersInput) comprehend.ListDocumentClassifiersRequest
+	ListDocumentClassifiersRequest(*types.ListDocumentClassifiersInput) comprehend.ListDocumentClassifiersRequest
 
-	ListDominantLanguageDetectionJobsRequest(*comprehend.ListDominantLanguageDetectionJobsInput) comprehend.ListDominantLanguageDetectionJobsRequest
+	ListDominantLanguageDetectionJobsRequest(*types.ListDominantLanguageDetectionJobsInput) comprehend.ListDominantLanguageDetectionJobsRequest
 
-	ListEntitiesDetectionJobsRequest(*comprehend.ListEntitiesDetectionJobsInput) comprehend.ListEntitiesDetectionJobsRequest
+	ListEntitiesDetectionJobsRequest(*types.ListEntitiesDetectionJobsInput) comprehend.ListEntitiesDetectionJobsRequest
 
-	ListEntityRecognizersRequest(*comprehend.ListEntityRecognizersInput) comprehend.ListEntityRecognizersRequest
+	ListEntityRecognizersRequest(*types.ListEntityRecognizersInput) comprehend.ListEntityRecognizersRequest
 
-	ListKeyPhrasesDetectionJobsRequest(*comprehend.ListKeyPhrasesDetectionJobsInput) comprehend.ListKeyPhrasesDetectionJobsRequest
+	ListKeyPhrasesDetectionJobsRequest(*types.ListKeyPhrasesDetectionJobsInput) comprehend.ListKeyPhrasesDetectionJobsRequest
 
-	ListSentimentDetectionJobsRequest(*comprehend.ListSentimentDetectionJobsInput) comprehend.ListSentimentDetectionJobsRequest
+	ListSentimentDetectionJobsRequest(*types.ListSentimentDetectionJobsInput) comprehend.ListSentimentDetectionJobsRequest
 
-	ListTagsForResourceRequest(*comprehend.ListTagsForResourceInput) comprehend.ListTagsForResourceRequest
+	ListTagsForResourceRequest(*types.ListTagsForResourceInput) comprehend.ListTagsForResourceRequest
 
-	ListTopicsDetectionJobsRequest(*comprehend.ListTopicsDetectionJobsInput) comprehend.ListTopicsDetectionJobsRequest
+	ListTopicsDetectionJobsRequest(*types.ListTopicsDetectionJobsInput) comprehend.ListTopicsDetectionJobsRequest
 
-	StartDocumentClassificationJobRequest(*comprehend.StartDocumentClassificationJobInput) comprehend.StartDocumentClassificationJobRequest
+	StartDocumentClassificationJobRequest(*types.StartDocumentClassificationJobInput) comprehend.StartDocumentClassificationJobRequest
 
-	StartDominantLanguageDetectionJobRequest(*comprehend.StartDominantLanguageDetectionJobInput) comprehend.StartDominantLanguageDetectionJobRequest
+	StartDominantLanguageDetectionJobRequest(*types.StartDominantLanguageDetectionJobInput) comprehend.StartDominantLanguageDetectionJobRequest
 
-	StartEntitiesDetectionJobRequest(*comprehend.StartEntitiesDetectionJobInput) comprehend.StartEntitiesDetectionJobRequest
+	StartEntitiesDetectionJobRequest(*types.StartEntitiesDetectionJobInput) comprehend.StartEntitiesDetectionJobRequest
 
-	StartKeyPhrasesDetectionJobRequest(*comprehend.StartKeyPhrasesDetectionJobInput) comprehend.StartKeyPhrasesDetectionJobRequest
+	StartKeyPhrasesDetectionJobRequest(*types.StartKeyPhrasesDetectionJobInput) comprehend.StartKeyPhrasesDetectionJobRequest
 
-	StartSentimentDetectionJobRequest(*comprehend.StartSentimentDetectionJobInput) comprehend.StartSentimentDetectionJobRequest
+	StartSentimentDetectionJobRequest(*types.StartSentimentDetectionJobInput) comprehend.StartSentimentDetectionJobRequest
 
-	StartTopicsDetectionJobRequest(*comprehend.StartTopicsDetectionJobInput) comprehend.StartTopicsDetectionJobRequest
+	StartTopicsDetectionJobRequest(*types.StartTopicsDetectionJobInput) comprehend.StartTopicsDetectionJobRequest
 
-	StopDominantLanguageDetectionJobRequest(*comprehend.StopDominantLanguageDetectionJobInput) comprehend.StopDominantLanguageDetectionJobRequest
+	StopDominantLanguageDetectionJobRequest(*types.StopDominantLanguageDetectionJobInput) comprehend.StopDominantLanguageDetectionJobRequest
 
-	StopEntitiesDetectionJobRequest(*comprehend.StopEntitiesDetectionJobInput) comprehend.StopEntitiesDetectionJobRequest
+	StopEntitiesDetectionJobRequest(*types.StopEntitiesDetectionJobInput) comprehend.StopEntitiesDetectionJobRequest
 
-	StopKeyPhrasesDetectionJobRequest(*comprehend.StopKeyPhrasesDetectionJobInput) comprehend.StopKeyPhrasesDetectionJobRequest
+	StopKeyPhrasesDetectionJobRequest(*types.StopKeyPhrasesDetectionJobInput) comprehend.StopKeyPhrasesDetectionJobRequest
 
-	StopSentimentDetectionJobRequest(*comprehend.StopSentimentDetectionJobInput) comprehend.StopSentimentDetectionJobRequest
+	StopSentimentDetectionJobRequest(*types.StopSentimentDetectionJobInput) comprehend.StopSentimentDetectionJobRequest
 
-	StopTrainingDocumentClassifierRequest(*comprehend.StopTrainingDocumentClassifierInput) comprehend.StopTrainingDocumentClassifierRequest
+	StopTrainingDocumentClassifierRequest(*types.StopTrainingDocumentClassifierInput) comprehend.StopTrainingDocumentClassifierRequest
 
-	StopTrainingEntityRecognizerRequest(*comprehend.StopTrainingEntityRecognizerInput) comprehend.StopTrainingEntityRecognizerRequest
+	StopTrainingEntityRecognizerRequest(*types.StopTrainingEntityRecognizerInput) comprehend.StopTrainingEntityRecognizerRequest
 
-	TagResourceRequest(*comprehend.TagResourceInput) comprehend.TagResourceRequest
+	TagResourceRequest(*types.TagResourceInput) comprehend.TagResourceRequest
 
-	UntagResourceRequest(*comprehend.UntagResourceInput) comprehend.UntagResourceRequest
+	UntagResourceRequest(*types.UntagResourceInput) comprehend.UntagResourceRequest
 }
 
 var _ ClientAPI = (*comprehend.Client)(nil)

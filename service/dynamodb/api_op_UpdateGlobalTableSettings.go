@@ -4,104 +4,10 @@ package dynamodb
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/dynamodb/types"
 )
-
-type UpdateGlobalTableSettingsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The billing mode of the global table. If GlobalTableBillingMode is not specified,
-	// the global table defaults to PROVISIONED capacity billing mode.
-	GlobalTableBillingMode BillingMode `type:"string" enum:"true"`
-
-	// Represents the settings of a global secondary index for a global table that
-	// will be modified.
-	GlobalTableGlobalSecondaryIndexSettingsUpdate []GlobalTableGlobalSecondaryIndexSettingsUpdate `min:"1" type:"list"`
-
-	// The name of the global table
-	//
-	// GlobalTableName is a required field
-	GlobalTableName *string `min:"3" type:"string" required:"true"`
-
-	// Auto scaling settings for managing provisioned write capacity for the global
-	// table.
-	GlobalTableProvisionedWriteCapacityAutoScalingSettingsUpdate *AutoScalingSettingsUpdate `type:"structure"`
-
-	// The maximum number of writes consumed per second before DynamoDB returns
-	// a ThrottlingException.
-	GlobalTableProvisionedWriteCapacityUnits *int64 `min:"1" type:"long"`
-
-	// Represents the settings for a global table in a Region that will be modified.
-	ReplicaSettingsUpdate []ReplicaSettingsUpdate `min:"1" type:"list"`
-}
-
-// String returns the string representation
-func (s UpdateGlobalTableSettingsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateGlobalTableSettingsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateGlobalTableSettingsInput"}
-	if s.GlobalTableGlobalSecondaryIndexSettingsUpdate != nil && len(s.GlobalTableGlobalSecondaryIndexSettingsUpdate) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("GlobalTableGlobalSecondaryIndexSettingsUpdate", 1))
-	}
-
-	if s.GlobalTableName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("GlobalTableName"))
-	}
-	if s.GlobalTableName != nil && len(*s.GlobalTableName) < 3 {
-		invalidParams.Add(aws.NewErrParamMinLen("GlobalTableName", 3))
-	}
-	if s.GlobalTableProvisionedWriteCapacityUnits != nil && *s.GlobalTableProvisionedWriteCapacityUnits < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("GlobalTableProvisionedWriteCapacityUnits", 1))
-	}
-	if s.ReplicaSettingsUpdate != nil && len(s.ReplicaSettingsUpdate) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ReplicaSettingsUpdate", 1))
-	}
-	if s.GlobalTableGlobalSecondaryIndexSettingsUpdate != nil {
-		for i, v := range s.GlobalTableGlobalSecondaryIndexSettingsUpdate {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "GlobalTableGlobalSecondaryIndexSettingsUpdate", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-	if s.GlobalTableProvisionedWriteCapacityAutoScalingSettingsUpdate != nil {
-		if err := s.GlobalTableProvisionedWriteCapacityAutoScalingSettingsUpdate.Validate(); err != nil {
-			invalidParams.AddNested("GlobalTableProvisionedWriteCapacityAutoScalingSettingsUpdate", err.(aws.ErrInvalidParams))
-		}
-	}
-	if s.ReplicaSettingsUpdate != nil {
-		for i, v := range s.ReplicaSettingsUpdate {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "ReplicaSettingsUpdate", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type UpdateGlobalTableSettingsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the global table.
-	GlobalTableName *string `min:"3" type:"string"`
-
-	// The Region-specific settings for the global table.
-	ReplicaSettings []ReplicaSettingsDescription `type:"list"`
-}
-
-// String returns the string representation
-func (s UpdateGlobalTableSettingsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opUpdateGlobalTableSettings = "UpdateGlobalTableSettings"
 
@@ -118,7 +24,7 @@ const opUpdateGlobalTableSettings = "UpdateGlobalTableSettings"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/UpdateGlobalTableSettings
-func (c *Client) UpdateGlobalTableSettingsRequest(input *UpdateGlobalTableSettingsInput) UpdateGlobalTableSettingsRequest {
+func (c *Client) UpdateGlobalTableSettingsRequest(input *types.UpdateGlobalTableSettingsInput) UpdateGlobalTableSettingsRequest {
 	op := &aws.Operation{
 		Name:       opUpdateGlobalTableSettings,
 		HTTPMethod: "POST",
@@ -126,10 +32,10 @@ func (c *Client) UpdateGlobalTableSettingsRequest(input *UpdateGlobalTableSettin
 	}
 
 	if input == nil {
-		input = &UpdateGlobalTableSettingsInput{}
+		input = &types.UpdateGlobalTableSettingsInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateGlobalTableSettingsOutput{})
+	req := c.newRequest(op, input, &types.UpdateGlobalTableSettingsOutput{})
 	return UpdateGlobalTableSettingsRequest{Request: req, Input: input, Copy: c.UpdateGlobalTableSettingsRequest}
 }
 
@@ -137,8 +43,8 @@ func (c *Client) UpdateGlobalTableSettingsRequest(input *UpdateGlobalTableSettin
 // UpdateGlobalTableSettings API operation.
 type UpdateGlobalTableSettingsRequest struct {
 	*aws.Request
-	Input *UpdateGlobalTableSettingsInput
-	Copy  func(*UpdateGlobalTableSettingsInput) UpdateGlobalTableSettingsRequest
+	Input *types.UpdateGlobalTableSettingsInput
+	Copy  func(*types.UpdateGlobalTableSettingsInput) UpdateGlobalTableSettingsRequest
 }
 
 // Send marshals and sends the UpdateGlobalTableSettings API request.
@@ -150,7 +56,7 @@ func (r UpdateGlobalTableSettingsRequest) Send(ctx context.Context) (*UpdateGlob
 	}
 
 	resp := &UpdateGlobalTableSettingsResponse{
-		UpdateGlobalTableSettingsOutput: r.Request.Data.(*UpdateGlobalTableSettingsOutput),
+		UpdateGlobalTableSettingsOutput: r.Request.Data.(*types.UpdateGlobalTableSettingsOutput),
 		response:                        &aws.Response{Request: r.Request},
 	}
 
@@ -160,7 +66,7 @@ func (r UpdateGlobalTableSettingsRequest) Send(ctx context.Context) (*UpdateGlob
 // UpdateGlobalTableSettingsResponse is the response type for the
 // UpdateGlobalTableSettings API operation.
 type UpdateGlobalTableSettingsResponse struct {
-	*UpdateGlobalTableSettingsOutput
+	*types.UpdateGlobalTableSettingsOutput
 
 	response *aws.Response
 }

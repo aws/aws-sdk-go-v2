@@ -6,64 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/appsync/types"
 )
-
-type DeleteGraphqlApiInput struct {
-	_ struct{} `type:"structure"`
-
-	// The API ID.
-	//
-	// ApiId is a required field
-	ApiId *string `location:"uri" locationName:"apiId" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteGraphqlApiInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteGraphqlApiInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteGraphqlApiInput"}
-
-	if s.ApiId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ApiId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteGraphqlApiInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.ApiId != nil {
-		v := *s.ApiId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "apiId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type DeleteGraphqlApiOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteGraphqlApiOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteGraphqlApiOutput) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
 
 const opDeleteGraphqlApi = "DeleteGraphqlApi"
 
@@ -80,7 +24,7 @@ const opDeleteGraphqlApi = "DeleteGraphqlApi"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/DeleteGraphqlApi
-func (c *Client) DeleteGraphqlApiRequest(input *DeleteGraphqlApiInput) DeleteGraphqlApiRequest {
+func (c *Client) DeleteGraphqlApiRequest(input *types.DeleteGraphqlApiInput) DeleteGraphqlApiRequest {
 	op := &aws.Operation{
 		Name:       opDeleteGraphqlApi,
 		HTTPMethod: "DELETE",
@@ -88,10 +32,10 @@ func (c *Client) DeleteGraphqlApiRequest(input *DeleteGraphqlApiInput) DeleteGra
 	}
 
 	if input == nil {
-		input = &DeleteGraphqlApiInput{}
+		input = &types.DeleteGraphqlApiInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteGraphqlApiOutput{})
+	req := c.newRequest(op, input, &types.DeleteGraphqlApiOutput{})
 	return DeleteGraphqlApiRequest{Request: req, Input: input, Copy: c.DeleteGraphqlApiRequest}
 }
 
@@ -99,8 +43,8 @@ func (c *Client) DeleteGraphqlApiRequest(input *DeleteGraphqlApiInput) DeleteGra
 // DeleteGraphqlApi API operation.
 type DeleteGraphqlApiRequest struct {
 	*aws.Request
-	Input *DeleteGraphqlApiInput
-	Copy  func(*DeleteGraphqlApiInput) DeleteGraphqlApiRequest
+	Input *types.DeleteGraphqlApiInput
+	Copy  func(*types.DeleteGraphqlApiInput) DeleteGraphqlApiRequest
 }
 
 // Send marshals and sends the DeleteGraphqlApi API request.
@@ -112,7 +56,7 @@ func (r DeleteGraphqlApiRequest) Send(ctx context.Context) (*DeleteGraphqlApiRes
 	}
 
 	resp := &DeleteGraphqlApiResponse{
-		DeleteGraphqlApiOutput: r.Request.Data.(*DeleteGraphqlApiOutput),
+		DeleteGraphqlApiOutput: r.Request.Data.(*types.DeleteGraphqlApiOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -122,7 +66,7 @@ func (r DeleteGraphqlApiRequest) Send(ctx context.Context) (*DeleteGraphqlApiRes
 // DeleteGraphqlApiResponse is the response type for the
 // DeleteGraphqlApi API operation.
 type DeleteGraphqlApiResponse struct {
-	*DeleteGraphqlApiOutput
+	*types.DeleteGraphqlApiOutput
 
 	response *aws.Response
 }

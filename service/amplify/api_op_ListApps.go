@@ -6,101 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/amplify/types"
 )
-
-// Request structure for an Amplify App list request.
-type ListAppsInput struct {
-	_ struct{} `type:"structure"`
-
-	// Maximum number of records to list in a single response.
-	MaxResults *int64 `location:"querystring" locationName:"maxResults" min:"1" type:"integer"`
-
-	// Pagination token. If non-null pagination token is returned in a result, then
-	// pass its value in another request to fetch more entries.
-	NextToken *string `location:"querystring" locationName:"nextToken" type:"string"`
-}
-
-// String returns the string representation
-func (s ListAppsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListAppsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListAppsInput"}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListAppsInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.MaxResults != nil {
-		v := *s.MaxResults
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "maxResults", protocol.Int64Value(v), metadata)
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-// Result structure for an Amplify App list request.
-type ListAppsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// List of Amplify Apps.
-	//
-	// Apps is a required field
-	Apps []App `locationName:"apps" type:"list" required:"true"`
-
-	// Pagination token. Set to null to start listing Apps from start. If non-null
-	// pagination token is returned in a result, then pass its value in here to
-	// list more projects.
-	NextToken *string `locationName:"nextToken" type:"string"`
-}
-
-// String returns the string representation
-func (s ListAppsOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListAppsOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.Apps != nil {
-		v := s.Apps
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "apps", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opListApps = "ListApps"
 
@@ -117,7 +24,7 @@ const opListApps = "ListApps"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/ListApps
-func (c *Client) ListAppsRequest(input *ListAppsInput) ListAppsRequest {
+func (c *Client) ListAppsRequest(input *types.ListAppsInput) ListAppsRequest {
 	op := &aws.Operation{
 		Name:       opListApps,
 		HTTPMethod: "GET",
@@ -125,10 +32,10 @@ func (c *Client) ListAppsRequest(input *ListAppsInput) ListAppsRequest {
 	}
 
 	if input == nil {
-		input = &ListAppsInput{}
+		input = &types.ListAppsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListAppsOutput{})
+	req := c.newRequest(op, input, &types.ListAppsOutput{})
 	return ListAppsRequest{Request: req, Input: input, Copy: c.ListAppsRequest}
 }
 
@@ -136,8 +43,8 @@ func (c *Client) ListAppsRequest(input *ListAppsInput) ListAppsRequest {
 // ListApps API operation.
 type ListAppsRequest struct {
 	*aws.Request
-	Input *ListAppsInput
-	Copy  func(*ListAppsInput) ListAppsRequest
+	Input *types.ListAppsInput
+	Copy  func(*types.ListAppsInput) ListAppsRequest
 }
 
 // Send marshals and sends the ListApps API request.
@@ -149,7 +56,7 @@ func (r ListAppsRequest) Send(ctx context.Context) (*ListAppsResponse, error) {
 	}
 
 	resp := &ListAppsResponse{
-		ListAppsOutput: r.Request.Data.(*ListAppsOutput),
+		ListAppsOutput: r.Request.Data.(*types.ListAppsOutput),
 		response:       &aws.Response{Request: r.Request},
 	}
 
@@ -159,7 +66,7 @@ func (r ListAppsRequest) Send(ctx context.Context) (*ListAppsResponse, error) {
 // ListAppsResponse is the response type for the
 // ListApps API operation.
 type ListAppsResponse struct {
-	*ListAppsOutput
+	*types.ListAppsOutput
 
 	response *aws.Response
 }

@@ -10,6 +10,7 @@ package daxiface
 
 import (
 	"github.com/aws/aws-sdk-go-v2/service/dax"
+	"github.com/aws/aws-sdk-go-v2/service/dax/types"
 )
 
 // ClientAPI provides an interface to enable mocking the
@@ -43,7 +44,7 @@ import (
 //    type mockClientClient struct {
 //        daxiface.ClientPI
 //    }
-//    func (m *mockClientClient) CreateCluster(input *dax.CreateClusterInput) (*dax.CreateClusterOutput, error) {
+//    func (m *mockClientClient) CreateCluster(input *types.CreateClusterInput) (*types.CreateClusterOutput, error) {
 //        // mock response/functionality
 //    }
 //
@@ -61,47 +62,47 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type ClientAPI interface {
-	CreateClusterRequest(*dax.CreateClusterInput) dax.CreateClusterRequest
+	CreateClusterRequest(*types.CreateClusterInput) dax.CreateClusterRequest
 
-	CreateParameterGroupRequest(*dax.CreateParameterGroupInput) dax.CreateParameterGroupRequest
+	CreateParameterGroupRequest(*types.CreateParameterGroupInput) dax.CreateParameterGroupRequest
 
-	CreateSubnetGroupRequest(*dax.CreateSubnetGroupInput) dax.CreateSubnetGroupRequest
+	CreateSubnetGroupRequest(*types.CreateSubnetGroupInput) dax.CreateSubnetGroupRequest
 
-	DecreaseReplicationFactorRequest(*dax.DecreaseReplicationFactorInput) dax.DecreaseReplicationFactorRequest
+	DecreaseReplicationFactorRequest(*types.DecreaseReplicationFactorInput) dax.DecreaseReplicationFactorRequest
 
-	DeleteClusterRequest(*dax.DeleteClusterInput) dax.DeleteClusterRequest
+	DeleteClusterRequest(*types.DeleteClusterInput) dax.DeleteClusterRequest
 
-	DeleteParameterGroupRequest(*dax.DeleteParameterGroupInput) dax.DeleteParameterGroupRequest
+	DeleteParameterGroupRequest(*types.DeleteParameterGroupInput) dax.DeleteParameterGroupRequest
 
-	DeleteSubnetGroupRequest(*dax.DeleteSubnetGroupInput) dax.DeleteSubnetGroupRequest
+	DeleteSubnetGroupRequest(*types.DeleteSubnetGroupInput) dax.DeleteSubnetGroupRequest
 
-	DescribeClustersRequest(*dax.DescribeClustersInput) dax.DescribeClustersRequest
+	DescribeClustersRequest(*types.DescribeClustersInput) dax.DescribeClustersRequest
 
-	DescribeDefaultParametersRequest(*dax.DescribeDefaultParametersInput) dax.DescribeDefaultParametersRequest
+	DescribeDefaultParametersRequest(*types.DescribeDefaultParametersInput) dax.DescribeDefaultParametersRequest
 
-	DescribeEventsRequest(*dax.DescribeEventsInput) dax.DescribeEventsRequest
+	DescribeEventsRequest(*types.DescribeEventsInput) dax.DescribeEventsRequest
 
-	DescribeParameterGroupsRequest(*dax.DescribeParameterGroupsInput) dax.DescribeParameterGroupsRequest
+	DescribeParameterGroupsRequest(*types.DescribeParameterGroupsInput) dax.DescribeParameterGroupsRequest
 
-	DescribeParametersRequest(*dax.DescribeParametersInput) dax.DescribeParametersRequest
+	DescribeParametersRequest(*types.DescribeParametersInput) dax.DescribeParametersRequest
 
-	DescribeSubnetGroupsRequest(*dax.DescribeSubnetGroupsInput) dax.DescribeSubnetGroupsRequest
+	DescribeSubnetGroupsRequest(*types.DescribeSubnetGroupsInput) dax.DescribeSubnetGroupsRequest
 
-	IncreaseReplicationFactorRequest(*dax.IncreaseReplicationFactorInput) dax.IncreaseReplicationFactorRequest
+	IncreaseReplicationFactorRequest(*types.IncreaseReplicationFactorInput) dax.IncreaseReplicationFactorRequest
 
-	ListTagsRequest(*dax.ListTagsInput) dax.ListTagsRequest
+	ListTagsRequest(*types.ListTagsInput) dax.ListTagsRequest
 
-	RebootNodeRequest(*dax.RebootNodeInput) dax.RebootNodeRequest
+	RebootNodeRequest(*types.RebootNodeInput) dax.RebootNodeRequest
 
-	TagResourceRequest(*dax.TagResourceInput) dax.TagResourceRequest
+	TagResourceRequest(*types.TagResourceInput) dax.TagResourceRequest
 
-	UntagResourceRequest(*dax.UntagResourceInput) dax.UntagResourceRequest
+	UntagResourceRequest(*types.UntagResourceInput) dax.UntagResourceRequest
 
-	UpdateClusterRequest(*dax.UpdateClusterInput) dax.UpdateClusterRequest
+	UpdateClusterRequest(*types.UpdateClusterInput) dax.UpdateClusterRequest
 
-	UpdateParameterGroupRequest(*dax.UpdateParameterGroupInput) dax.UpdateParameterGroupRequest
+	UpdateParameterGroupRequest(*types.UpdateParameterGroupInput) dax.UpdateParameterGroupRequest
 
-	UpdateSubnetGroupRequest(*dax.UpdateSubnetGroupInput) dax.UpdateSubnetGroupRequest
+	UpdateSubnetGroupRequest(*types.UpdateSubnetGroupInput) dax.UpdateSubnetGroupRequest
 }
 
 var _ ClientAPI = (*dax.Client)(nil)

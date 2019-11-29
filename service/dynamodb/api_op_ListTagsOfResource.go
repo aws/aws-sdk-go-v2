@@ -6,62 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/dynamodb/types"
 )
-
-type ListTagsOfResourceInput struct {
-	_ struct{} `type:"structure"`
-
-	// An optional string that, if supplied, must be copied from the output of a
-	// previous call to ListTagOfResource. When provided in this manner, this API
-	// fetches the next page of results.
-	NextToken *string `type:"string"`
-
-	// The Amazon DynamoDB resource with tags to be listed. This value is an Amazon
-	// Resource Name (ARN).
-	//
-	// ResourceArn is a required field
-	ResourceArn *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s ListTagsOfResourceInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListTagsOfResourceInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListTagsOfResourceInput"}
-
-	if s.ResourceArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ResourceArn"))
-	}
-	if s.ResourceArn != nil && len(*s.ResourceArn) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ResourceArn", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ListTagsOfResourceOutput struct {
-	_ struct{} `type:"structure"`
-
-	// If this value is returned, there are additional results to be displayed.
-	// To retrieve them, call ListTagsOfResource again, with NextToken set to this
-	// value.
-	NextToken *string `type:"string"`
-
-	// The tags currently associated with the Amazon DynamoDB resource.
-	Tags []Tag `type:"list"`
-}
-
-// String returns the string representation
-func (s ListTagsOfResourceOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListTagsOfResource = "ListTagsOfResource"
 
@@ -82,7 +28,7 @@ const opListTagsOfResource = "ListTagsOfResource"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/ListTagsOfResource
-func (c *Client) ListTagsOfResourceRequest(input *ListTagsOfResourceInput) ListTagsOfResourceRequest {
+func (c *Client) ListTagsOfResourceRequest(input *types.ListTagsOfResourceInput) ListTagsOfResourceRequest {
 	op := &aws.Operation{
 		Name:       opListTagsOfResource,
 		HTTPMethod: "POST",
@@ -90,10 +36,10 @@ func (c *Client) ListTagsOfResourceRequest(input *ListTagsOfResourceInput) ListT
 	}
 
 	if input == nil {
-		input = &ListTagsOfResourceInput{}
+		input = &types.ListTagsOfResourceInput{}
 	}
 
-	req := c.newRequest(op, input, &ListTagsOfResourceOutput{})
+	req := c.newRequest(op, input, &types.ListTagsOfResourceOutput{})
 	return ListTagsOfResourceRequest{Request: req, Input: input, Copy: c.ListTagsOfResourceRequest}
 }
 
@@ -101,8 +47,8 @@ func (c *Client) ListTagsOfResourceRequest(input *ListTagsOfResourceInput) ListT
 // ListTagsOfResource API operation.
 type ListTagsOfResourceRequest struct {
 	*aws.Request
-	Input *ListTagsOfResourceInput
-	Copy  func(*ListTagsOfResourceInput) ListTagsOfResourceRequest
+	Input *types.ListTagsOfResourceInput
+	Copy  func(*types.ListTagsOfResourceInput) ListTagsOfResourceRequest
 }
 
 // Send marshals and sends the ListTagsOfResource API request.
@@ -114,7 +60,7 @@ func (r ListTagsOfResourceRequest) Send(ctx context.Context) (*ListTagsOfResourc
 	}
 
 	resp := &ListTagsOfResourceResponse{
-		ListTagsOfResourceOutput: r.Request.Data.(*ListTagsOfResourceOutput),
+		ListTagsOfResourceOutput: r.Request.Data.(*types.ListTagsOfResourceOutput),
 		response:                 &aws.Response{Request: r.Request},
 	}
 
@@ -124,7 +70,7 @@ func (r ListTagsOfResourceRequest) Send(ctx context.Context) (*ListTagsOfResourc
 // ListTagsOfResourceResponse is the response type for the
 // ListTagsOfResource API operation.
 type ListTagsOfResourceResponse struct {
-	*ListTagsOfResourceOutput
+	*types.ListTagsOfResourceOutput
 
 	response *aws.Response
 }

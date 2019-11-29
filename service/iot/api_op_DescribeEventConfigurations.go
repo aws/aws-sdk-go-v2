@@ -4,77 +4,10 @@ package iot
 
 import (
 	"context"
-	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/iot/types"
 )
-
-type DescribeEventConfigurationsInput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DescribeEventConfigurationsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DescribeEventConfigurationsInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	return nil
-}
-
-type DescribeEventConfigurationsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The creation date of the event configuration.
-	CreationDate *time.Time `locationName:"creationDate" type:"timestamp"`
-
-	// The event configurations.
-	EventConfigurations map[string]Configuration `locationName:"eventConfigurations" type:"map"`
-
-	// The date the event configurations were last modified.
-	LastModifiedDate *time.Time `locationName:"lastModifiedDate" type:"timestamp"`
-}
-
-// String returns the string representation
-func (s DescribeEventConfigurationsOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DescribeEventConfigurationsOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.CreationDate != nil {
-		v := *s.CreationDate
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "creationDate",
-			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
-	}
-	if s.EventConfigurations != nil {
-		v := s.EventConfigurations
-
-		metadata := protocol.Metadata{}
-		ms0 := e.Map(protocol.BodyTarget, "eventConfigurations", metadata)
-		ms0.Start()
-		for k1, v1 := range v {
-			ms0.MapSetFields(k1, v1)
-		}
-		ms0.End()
-
-	}
-	if s.LastModifiedDate != nil {
-		v := *s.LastModifiedDate
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "lastModifiedDate",
-			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
-	}
-	return nil
-}
 
 const opDescribeEventConfigurations = "DescribeEventConfigurations"
 
@@ -89,7 +22,7 @@ const opDescribeEventConfigurations = "DescribeEventConfigurations"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) DescribeEventConfigurationsRequest(input *DescribeEventConfigurationsInput) DescribeEventConfigurationsRequest {
+func (c *Client) DescribeEventConfigurationsRequest(input *types.DescribeEventConfigurationsInput) DescribeEventConfigurationsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeEventConfigurations,
 		HTTPMethod: "GET",
@@ -97,10 +30,10 @@ func (c *Client) DescribeEventConfigurationsRequest(input *DescribeEventConfigur
 	}
 
 	if input == nil {
-		input = &DescribeEventConfigurationsInput{}
+		input = &types.DescribeEventConfigurationsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeEventConfigurationsOutput{})
+	req := c.newRequest(op, input, &types.DescribeEventConfigurationsOutput{})
 	return DescribeEventConfigurationsRequest{Request: req, Input: input, Copy: c.DescribeEventConfigurationsRequest}
 }
 
@@ -108,8 +41,8 @@ func (c *Client) DescribeEventConfigurationsRequest(input *DescribeEventConfigur
 // DescribeEventConfigurations API operation.
 type DescribeEventConfigurationsRequest struct {
 	*aws.Request
-	Input *DescribeEventConfigurationsInput
-	Copy  func(*DescribeEventConfigurationsInput) DescribeEventConfigurationsRequest
+	Input *types.DescribeEventConfigurationsInput
+	Copy  func(*types.DescribeEventConfigurationsInput) DescribeEventConfigurationsRequest
 }
 
 // Send marshals and sends the DescribeEventConfigurations API request.
@@ -121,7 +54,7 @@ func (r DescribeEventConfigurationsRequest) Send(ctx context.Context) (*Describe
 	}
 
 	resp := &DescribeEventConfigurationsResponse{
-		DescribeEventConfigurationsOutput: r.Request.Data.(*DescribeEventConfigurationsOutput),
+		DescribeEventConfigurationsOutput: r.Request.Data.(*types.DescribeEventConfigurationsOutput),
 		response:                          &aws.Response{Request: r.Request},
 	}
 
@@ -131,7 +64,7 @@ func (r DescribeEventConfigurationsRequest) Send(ctx context.Context) (*Describe
 // DescribeEventConfigurationsResponse is the response type for the
 // DescribeEventConfigurations API operation.
 type DescribeEventConfigurationsResponse struct {
-	*DescribeEventConfigurationsOutput
+	*types.DescribeEventConfigurationsOutput
 
 	response *aws.Response
 }

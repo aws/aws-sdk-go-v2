@@ -6,28 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/query"
+	"github.com/aws/aws-sdk-go-v2/service/iam/types"
 )
-
-type DeleteAccountPasswordPolicyInput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteAccountPasswordPolicyInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type DeleteAccountPasswordPolicyOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteAccountPasswordPolicyOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteAccountPasswordPolicy = "DeleteAccountPasswordPolicy"
 
@@ -44,7 +26,7 @@ const opDeleteAccountPasswordPolicy = "DeleteAccountPasswordPolicy"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeleteAccountPasswordPolicy
-func (c *Client) DeleteAccountPasswordPolicyRequest(input *DeleteAccountPasswordPolicyInput) DeleteAccountPasswordPolicyRequest {
+func (c *Client) DeleteAccountPasswordPolicyRequest(input *types.DeleteAccountPasswordPolicyInput) DeleteAccountPasswordPolicyRequest {
 	op := &aws.Operation{
 		Name:       opDeleteAccountPasswordPolicy,
 		HTTPMethod: "POST",
@@ -52,10 +34,10 @@ func (c *Client) DeleteAccountPasswordPolicyRequest(input *DeleteAccountPassword
 	}
 
 	if input == nil {
-		input = &DeleteAccountPasswordPolicyInput{}
+		input = &types.DeleteAccountPasswordPolicyInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteAccountPasswordPolicyOutput{})
+	req := c.newRequest(op, input, &types.DeleteAccountPasswordPolicyOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return DeleteAccountPasswordPolicyRequest{Request: req, Input: input, Copy: c.DeleteAccountPasswordPolicyRequest}
@@ -65,8 +47,8 @@ func (c *Client) DeleteAccountPasswordPolicyRequest(input *DeleteAccountPassword
 // DeleteAccountPasswordPolicy API operation.
 type DeleteAccountPasswordPolicyRequest struct {
 	*aws.Request
-	Input *DeleteAccountPasswordPolicyInput
-	Copy  func(*DeleteAccountPasswordPolicyInput) DeleteAccountPasswordPolicyRequest
+	Input *types.DeleteAccountPasswordPolicyInput
+	Copy  func(*types.DeleteAccountPasswordPolicyInput) DeleteAccountPasswordPolicyRequest
 }
 
 // Send marshals and sends the DeleteAccountPasswordPolicy API request.
@@ -78,7 +60,7 @@ func (r DeleteAccountPasswordPolicyRequest) Send(ctx context.Context) (*DeleteAc
 	}
 
 	resp := &DeleteAccountPasswordPolicyResponse{
-		DeleteAccountPasswordPolicyOutput: r.Request.Data.(*DeleteAccountPasswordPolicyOutput),
+		DeleteAccountPasswordPolicyOutput: r.Request.Data.(*types.DeleteAccountPasswordPolicyOutput),
 		response:                          &aws.Response{Request: r.Request},
 	}
 
@@ -88,7 +70,7 @@ func (r DeleteAccountPasswordPolicyRequest) Send(ctx context.Context) (*DeleteAc
 // DeleteAccountPasswordPolicyResponse is the response type for the
 // DeleteAccountPasswordPolicy API operation.
 type DeleteAccountPasswordPolicyResponse struct {
-	*DeleteAccountPasswordPolicyOutput
+	*types.DeleteAccountPasswordPolicyOutput
 
 	response *aws.Response
 }

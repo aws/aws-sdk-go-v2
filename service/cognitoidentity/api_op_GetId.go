@@ -6,76 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/cognitoidentity/types"
 )
-
-// Input to the GetId action.
-type GetIdInput struct {
-	_ struct{} `type:"structure"`
-
-	// A standard AWS account ID (9+ digits).
-	AccountId *string `min:"1" type:"string"`
-
-	// An identity pool ID in the format REGION:GUID.
-	//
-	// IdentityPoolId is a required field
-	IdentityPoolId *string `min:"1" type:"string" required:"true"`
-
-	// A set of optional name-value pairs that map provider names to provider tokens.
-	// The available provider names for Logins are as follows:
-	//
-	//    * Facebook: graph.facebook.com
-	//
-	//    * Amazon Cognito user pool: cognito-idp.<region>.amazonaws.com/<YOUR_USER_POOL_ID>,
-	//    for example, cognito-idp.us-east-1.amazonaws.com/us-east-1_123456789.
-	//
-	//    * Google: accounts.google.com
-	//
-	//    * Amazon: www.amazon.com
-	//
-	//    * Twitter: api.twitter.com
-	//
-	//    * Digits: www.digits.com
-	Logins map[string]string `type:"map"`
-}
-
-// String returns the string representation
-func (s GetIdInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetIdInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetIdInput"}
-	if s.AccountId != nil && len(*s.AccountId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("AccountId", 1))
-	}
-
-	if s.IdentityPoolId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("IdentityPoolId"))
-	}
-	if s.IdentityPoolId != nil && len(*s.IdentityPoolId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("IdentityPoolId", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Returned in response to a GetId request.
-type GetIdOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A unique identifier in the format REGION:GUID.
-	IdentityId *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s GetIdOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetId = "GetId"
 
@@ -95,7 +27,7 @@ const opGetId = "GetId"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-identity-2014-06-30/GetId
-func (c *Client) GetIdRequest(input *GetIdInput) GetIdRequest {
+func (c *Client) GetIdRequest(input *types.GetIdInput) GetIdRequest {
 	op := &aws.Operation{
 		Name:       opGetId,
 		HTTPMethod: "POST",
@@ -103,10 +35,10 @@ func (c *Client) GetIdRequest(input *GetIdInput) GetIdRequest {
 	}
 
 	if input == nil {
-		input = &GetIdInput{}
+		input = &types.GetIdInput{}
 	}
 
-	req := c.newRequest(op, input, &GetIdOutput{})
+	req := c.newRequest(op, input, &types.GetIdOutput{})
 	req.Config.Credentials = aws.AnonymousCredentials
 	return GetIdRequest{Request: req, Input: input, Copy: c.GetIdRequest}
 }
@@ -115,8 +47,8 @@ func (c *Client) GetIdRequest(input *GetIdInput) GetIdRequest {
 // GetId API operation.
 type GetIdRequest struct {
 	*aws.Request
-	Input *GetIdInput
-	Copy  func(*GetIdInput) GetIdRequest
+	Input *types.GetIdInput
+	Copy  func(*types.GetIdInput) GetIdRequest
 }
 
 // Send marshals and sends the GetId API request.
@@ -128,7 +60,7 @@ func (r GetIdRequest) Send(ctx context.Context) (*GetIdResponse, error) {
 	}
 
 	resp := &GetIdResponse{
-		GetIdOutput: r.Request.Data.(*GetIdOutput),
+		GetIdOutput: r.Request.Data.(*types.GetIdOutput),
 		response:    &aws.Response{Request: r.Request},
 	}
 
@@ -138,7 +70,7 @@ func (r GetIdRequest) Send(ctx context.Context) (*GetIdResponse, error) {
 // GetIdResponse is the response type for the
 // GetId API operation.
 type GetIdResponse struct {
-	*GetIdOutput
+	*types.GetIdOutput
 
 	response *aws.Response
 }

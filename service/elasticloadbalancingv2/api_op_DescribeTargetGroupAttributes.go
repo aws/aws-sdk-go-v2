@@ -6,48 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/elasticloadbalancingv2/types"
 )
-
-type DescribeTargetGroupAttributesInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the target group.
-	//
-	// TargetGroupArn is a required field
-	TargetGroupArn *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeTargetGroupAttributesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeTargetGroupAttributesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeTargetGroupAttributesInput"}
-
-	if s.TargetGroupArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("TargetGroupArn"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribeTargetGroupAttributesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Information about the target group attributes
-	Attributes []TargetGroupAttribute `type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeTargetGroupAttributesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeTargetGroupAttributes = "DescribeTargetGroupAttributes"
 
@@ -68,7 +28,7 @@ const opDescribeTargetGroupAttributes = "DescribeTargetGroupAttributes"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/DescribeTargetGroupAttributes
-func (c *Client) DescribeTargetGroupAttributesRequest(input *DescribeTargetGroupAttributesInput) DescribeTargetGroupAttributesRequest {
+func (c *Client) DescribeTargetGroupAttributesRequest(input *types.DescribeTargetGroupAttributesInput) DescribeTargetGroupAttributesRequest {
 	op := &aws.Operation{
 		Name:       opDescribeTargetGroupAttributes,
 		HTTPMethod: "POST",
@@ -76,10 +36,10 @@ func (c *Client) DescribeTargetGroupAttributesRequest(input *DescribeTargetGroup
 	}
 
 	if input == nil {
-		input = &DescribeTargetGroupAttributesInput{}
+		input = &types.DescribeTargetGroupAttributesInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeTargetGroupAttributesOutput{})
+	req := c.newRequest(op, input, &types.DescribeTargetGroupAttributesOutput{})
 	return DescribeTargetGroupAttributesRequest{Request: req, Input: input, Copy: c.DescribeTargetGroupAttributesRequest}
 }
 
@@ -87,8 +47,8 @@ func (c *Client) DescribeTargetGroupAttributesRequest(input *DescribeTargetGroup
 // DescribeTargetGroupAttributes API operation.
 type DescribeTargetGroupAttributesRequest struct {
 	*aws.Request
-	Input *DescribeTargetGroupAttributesInput
-	Copy  func(*DescribeTargetGroupAttributesInput) DescribeTargetGroupAttributesRequest
+	Input *types.DescribeTargetGroupAttributesInput
+	Copy  func(*types.DescribeTargetGroupAttributesInput) DescribeTargetGroupAttributesRequest
 }
 
 // Send marshals and sends the DescribeTargetGroupAttributes API request.
@@ -100,7 +60,7 @@ func (r DescribeTargetGroupAttributesRequest) Send(ctx context.Context) (*Descri
 	}
 
 	resp := &DescribeTargetGroupAttributesResponse{
-		DescribeTargetGroupAttributesOutput: r.Request.Data.(*DescribeTargetGroupAttributesOutput),
+		DescribeTargetGroupAttributesOutput: r.Request.Data.(*types.DescribeTargetGroupAttributesOutput),
 		response:                            &aws.Response{Request: r.Request},
 	}
 
@@ -110,7 +70,7 @@ func (r DescribeTargetGroupAttributesRequest) Send(ctx context.Context) (*Descri
 // DescribeTargetGroupAttributesResponse is the response type for the
 // DescribeTargetGroupAttributes API operation.
 type DescribeTargetGroupAttributesResponse struct {
-	*DescribeTargetGroupAttributesOutput
+	*types.DescribeTargetGroupAttributesOutput
 
 	response *aws.Response
 }

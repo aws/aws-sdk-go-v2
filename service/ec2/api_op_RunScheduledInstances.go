@@ -6,80 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-// Contains the parameters for RunScheduledInstances.
-type RunScheduledInstancesInput struct {
-	_ struct{} `type:"structure"`
-
-	// Unique, case-sensitive identifier that ensures the idempotency of the request.
-	// For more information, see Ensuring Idempotency (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html).
-	ClientToken *string `type:"string" idempotencyToken:"true"`
-
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have
-	// the required permissions, the error response is DryRunOperation. Otherwise,
-	// it is UnauthorizedOperation.
-	DryRun *bool `type:"boolean"`
-
-	// The number of instances.
-	//
-	// Default: 1
-	InstanceCount *int64 `type:"integer"`
-
-	// The launch specification. You must match the instance type, Availability
-	// Zone, network, and platform of the schedule that you purchased.
-	//
-	// LaunchSpecification is a required field
-	LaunchSpecification *ScheduledInstancesLaunchSpecification `type:"structure" required:"true"`
-
-	// The Scheduled Instance ID.
-	//
-	// ScheduledInstanceId is a required field
-	ScheduledInstanceId *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s RunScheduledInstancesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *RunScheduledInstancesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "RunScheduledInstancesInput"}
-
-	if s.LaunchSpecification == nil {
-		invalidParams.Add(aws.NewErrParamRequired("LaunchSpecification"))
-	}
-
-	if s.ScheduledInstanceId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ScheduledInstanceId"))
-	}
-	if s.LaunchSpecification != nil {
-		if err := s.LaunchSpecification.Validate(); err != nil {
-			invalidParams.AddNested("LaunchSpecification", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Contains the output of RunScheduledInstances.
-type RunScheduledInstancesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The IDs of the newly launched instances.
-	InstanceIdSet []string `locationName:"instanceIdSet" locationNameList:"item" type:"list"`
-}
-
-// String returns the string representation
-func (s RunScheduledInstancesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opRunScheduledInstances = "RunScheduledInstances"
 
@@ -106,7 +34,7 @@ const opRunScheduledInstances = "RunScheduledInstances"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/RunScheduledInstances
-func (c *Client) RunScheduledInstancesRequest(input *RunScheduledInstancesInput) RunScheduledInstancesRequest {
+func (c *Client) RunScheduledInstancesRequest(input *types.RunScheduledInstancesInput) RunScheduledInstancesRequest {
 	op := &aws.Operation{
 		Name:       opRunScheduledInstances,
 		HTTPMethod: "POST",
@@ -114,10 +42,10 @@ func (c *Client) RunScheduledInstancesRequest(input *RunScheduledInstancesInput)
 	}
 
 	if input == nil {
-		input = &RunScheduledInstancesInput{}
+		input = &types.RunScheduledInstancesInput{}
 	}
 
-	req := c.newRequest(op, input, &RunScheduledInstancesOutput{})
+	req := c.newRequest(op, input, &types.RunScheduledInstancesOutput{})
 	return RunScheduledInstancesRequest{Request: req, Input: input, Copy: c.RunScheduledInstancesRequest}
 }
 
@@ -125,8 +53,8 @@ func (c *Client) RunScheduledInstancesRequest(input *RunScheduledInstancesInput)
 // RunScheduledInstances API operation.
 type RunScheduledInstancesRequest struct {
 	*aws.Request
-	Input *RunScheduledInstancesInput
-	Copy  func(*RunScheduledInstancesInput) RunScheduledInstancesRequest
+	Input *types.RunScheduledInstancesInput
+	Copy  func(*types.RunScheduledInstancesInput) RunScheduledInstancesRequest
 }
 
 // Send marshals and sends the RunScheduledInstances API request.
@@ -138,7 +66,7 @@ func (r RunScheduledInstancesRequest) Send(ctx context.Context) (*RunScheduledIn
 	}
 
 	resp := &RunScheduledInstancesResponse{
-		RunScheduledInstancesOutput: r.Request.Data.(*RunScheduledInstancesOutput),
+		RunScheduledInstancesOutput: r.Request.Data.(*types.RunScheduledInstancesOutput),
 		response:                    &aws.Response{Request: r.Request},
 	}
 
@@ -148,7 +76,7 @@ func (r RunScheduledInstancesRequest) Send(ctx context.Context) (*RunScheduledIn
 // RunScheduledInstancesResponse is the response type for the
 // RunScheduledInstances API operation.
 type RunScheduledInstancesResponse struct {
-	*RunScheduledInstancesOutput
+	*types.RunScheduledInstancesOutput
 
 	response *aws.Response
 }

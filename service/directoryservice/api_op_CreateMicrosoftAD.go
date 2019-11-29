@@ -4,101 +4,10 @@ package directoryservice
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/directoryservice/types"
 )
-
-// Creates an AWS Managed Microsoft AD directory.
-type CreateMicrosoftADInput struct {
-	_ struct{} `type:"structure"`
-
-	// A textual description for the directory. This label will appear on the AWS
-	// console Directory Details page after the directory is created.
-	Description *string `type:"string"`
-
-	// AWS Managed Microsoft AD is available in two editions: Standard and Enterprise.
-	// Enterprise is the default.
-	Edition DirectoryEdition `type:"string" enum:"true"`
-
-	// The fully qualified domain name for the directory, such as corp.example.com.
-	// This name will resolve inside your VPC only. It does not need to be publicly
-	// resolvable.
-	//
-	// Name is a required field
-	Name *string `type:"string" required:"true"`
-
-	// The password for the default administrative user named Admin.
-	//
-	// Password is a required field
-	Password *string `type:"string" required:"true" sensitive:"true"`
-
-	// The NetBIOS name for your domain. A short identifier for your domain, such
-	// as CORP. If you don't specify a NetBIOS name, it will default to the first
-	// part of your directory DNS. For example, CORP for the directory DNS corp.example.com.
-	ShortName *string `type:"string"`
-
-	// The tags to be assigned to the AWS Managed Microsoft AD directory.
-	Tags []Tag `type:"list"`
-
-	// Contains VPC information for the CreateDirectory or CreateMicrosoftAD operation.
-	//
-	// VpcSettings is a required field
-	VpcSettings *DirectoryVpcSettings `type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s CreateMicrosoftADInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateMicrosoftADInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateMicrosoftADInput"}
-
-	if s.Name == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Name"))
-	}
-
-	if s.Password == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Password"))
-	}
-
-	if s.VpcSettings == nil {
-		invalidParams.Add(aws.NewErrParamRequired("VpcSettings"))
-	}
-	if s.Tags != nil {
-		for i, v := range s.Tags {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-	if s.VpcSettings != nil {
-		if err := s.VpcSettings.Validate(); err != nil {
-			invalidParams.AddNested("VpcSettings", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Result of a CreateMicrosoftAD request.
-type CreateMicrosoftADOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The identifier of the directory that was created.
-	DirectoryId *string `type:"string"`
-}
-
-// String returns the string representation
-func (s CreateMicrosoftADOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCreateMicrosoftAD = "CreateMicrosoftAD"
 
@@ -120,7 +29,7 @@ const opCreateMicrosoftAD = "CreateMicrosoftAD"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/CreateMicrosoftAD
-func (c *Client) CreateMicrosoftADRequest(input *CreateMicrosoftADInput) CreateMicrosoftADRequest {
+func (c *Client) CreateMicrosoftADRequest(input *types.CreateMicrosoftADInput) CreateMicrosoftADRequest {
 	op := &aws.Operation{
 		Name:       opCreateMicrosoftAD,
 		HTTPMethod: "POST",
@@ -128,10 +37,10 @@ func (c *Client) CreateMicrosoftADRequest(input *CreateMicrosoftADInput) CreateM
 	}
 
 	if input == nil {
-		input = &CreateMicrosoftADInput{}
+		input = &types.CreateMicrosoftADInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateMicrosoftADOutput{})
+	req := c.newRequest(op, input, &types.CreateMicrosoftADOutput{})
 	return CreateMicrosoftADRequest{Request: req, Input: input, Copy: c.CreateMicrosoftADRequest}
 }
 
@@ -139,8 +48,8 @@ func (c *Client) CreateMicrosoftADRequest(input *CreateMicrosoftADInput) CreateM
 // CreateMicrosoftAD API operation.
 type CreateMicrosoftADRequest struct {
 	*aws.Request
-	Input *CreateMicrosoftADInput
-	Copy  func(*CreateMicrosoftADInput) CreateMicrosoftADRequest
+	Input *types.CreateMicrosoftADInput
+	Copy  func(*types.CreateMicrosoftADInput) CreateMicrosoftADRequest
 }
 
 // Send marshals and sends the CreateMicrosoftAD API request.
@@ -152,7 +61,7 @@ func (r CreateMicrosoftADRequest) Send(ctx context.Context) (*CreateMicrosoftADR
 	}
 
 	resp := &CreateMicrosoftADResponse{
-		CreateMicrosoftADOutput: r.Request.Data.(*CreateMicrosoftADOutput),
+		CreateMicrosoftADOutput: r.Request.Data.(*types.CreateMicrosoftADOutput),
 		response:                &aws.Response{Request: r.Request},
 	}
 
@@ -162,7 +71,7 @@ func (r CreateMicrosoftADRequest) Send(ctx context.Context) (*CreateMicrosoftADR
 // CreateMicrosoftADResponse is the response type for the
 // CreateMicrosoftAD API operation.
 type CreateMicrosoftADResponse struct {
-	*CreateMicrosoftADOutput
+	*types.CreateMicrosoftADOutput
 
 	response *aws.Response
 }

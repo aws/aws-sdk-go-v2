@@ -6,112 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/ram/types"
 )
-
-type UpdateResourceShareInput struct {
-	_ struct{} `type:"structure"`
-
-	// Indicates whether principals outside your AWS organization can be associated
-	// with a resource share.
-	AllowExternalPrincipals *bool `locationName:"allowExternalPrincipals" type:"boolean"`
-
-	// A unique, case-sensitive identifier that you provide to ensure the idempotency
-	// of the request.
-	ClientToken *string `locationName:"clientToken" type:"string"`
-
-	// The name of the resource share.
-	Name *string `locationName:"name" type:"string"`
-
-	// The Amazon Resource Name (ARN) of the resource share.
-	//
-	// ResourceShareArn is a required field
-	ResourceShareArn *string `locationName:"resourceShareArn" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s UpdateResourceShareInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateResourceShareInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateResourceShareInput"}
-
-	if s.ResourceShareArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ResourceShareArn"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s UpdateResourceShareInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.AllowExternalPrincipals != nil {
-		v := *s.AllowExternalPrincipals
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "allowExternalPrincipals", protocol.BoolValue(v), metadata)
-	}
-	if s.ClientToken != nil {
-		v := *s.ClientToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "clientToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Name != nil {
-		v := *s.Name
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.ResourceShareArn != nil {
-		v := *s.ResourceShareArn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "resourceShareArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type UpdateResourceShareOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A unique, case-sensitive identifier that you provide to ensure the idempotency
-	// of the request.
-	ClientToken *string `locationName:"clientToken" type:"string"`
-
-	// Information about the resource share.
-	ResourceShare *ResourceShare `locationName:"resourceShare" type:"structure"`
-}
-
-// String returns the string representation
-func (s UpdateResourceShareOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s UpdateResourceShareOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.ClientToken != nil {
-		v := *s.ClientToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "clientToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.ResourceShare != nil {
-		v := s.ResourceShare
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "resourceShare", v, metadata)
-	}
-	return nil
-}
 
 const opUpdateResourceShare = "UpdateResourceShare"
 
@@ -128,7 +24,7 @@ const opUpdateResourceShare = "UpdateResourceShare"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/UpdateResourceShare
-func (c *Client) UpdateResourceShareRequest(input *UpdateResourceShareInput) UpdateResourceShareRequest {
+func (c *Client) UpdateResourceShareRequest(input *types.UpdateResourceShareInput) UpdateResourceShareRequest {
 	op := &aws.Operation{
 		Name:       opUpdateResourceShare,
 		HTTPMethod: "POST",
@@ -136,10 +32,10 @@ func (c *Client) UpdateResourceShareRequest(input *UpdateResourceShareInput) Upd
 	}
 
 	if input == nil {
-		input = &UpdateResourceShareInput{}
+		input = &types.UpdateResourceShareInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateResourceShareOutput{})
+	req := c.newRequest(op, input, &types.UpdateResourceShareOutput{})
 	return UpdateResourceShareRequest{Request: req, Input: input, Copy: c.UpdateResourceShareRequest}
 }
 
@@ -147,8 +43,8 @@ func (c *Client) UpdateResourceShareRequest(input *UpdateResourceShareInput) Upd
 // UpdateResourceShare API operation.
 type UpdateResourceShareRequest struct {
 	*aws.Request
-	Input *UpdateResourceShareInput
-	Copy  func(*UpdateResourceShareInput) UpdateResourceShareRequest
+	Input *types.UpdateResourceShareInput
+	Copy  func(*types.UpdateResourceShareInput) UpdateResourceShareRequest
 }
 
 // Send marshals and sends the UpdateResourceShare API request.
@@ -160,7 +56,7 @@ func (r UpdateResourceShareRequest) Send(ctx context.Context) (*UpdateResourceSh
 	}
 
 	resp := &UpdateResourceShareResponse{
-		UpdateResourceShareOutput: r.Request.Data.(*UpdateResourceShareOutput),
+		UpdateResourceShareOutput: r.Request.Data.(*types.UpdateResourceShareOutput),
 		response:                  &aws.Response{Request: r.Request},
 	}
 
@@ -170,7 +66,7 @@ func (r UpdateResourceShareRequest) Send(ctx context.Context) (*UpdateResourceSh
 // UpdateResourceShareResponse is the response type for the
 // UpdateResourceShare API operation.
 type UpdateResourceShareResponse struct {
-	*UpdateResourceShareOutput
+	*types.UpdateResourceShareOutput
 
 	response *aws.Response
 }

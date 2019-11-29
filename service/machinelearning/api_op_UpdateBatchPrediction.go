@@ -6,64 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/machinelearning/types"
 )
-
-type UpdateBatchPredictionInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID assigned to the BatchPrediction during creation.
-	//
-	// BatchPredictionId is a required field
-	BatchPredictionId *string `min:"1" type:"string" required:"true"`
-
-	// A new user-supplied name or description of the BatchPrediction.
-	//
-	// BatchPredictionName is a required field
-	BatchPredictionName *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s UpdateBatchPredictionInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateBatchPredictionInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateBatchPredictionInput"}
-
-	if s.BatchPredictionId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("BatchPredictionId"))
-	}
-	if s.BatchPredictionId != nil && len(*s.BatchPredictionId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("BatchPredictionId", 1))
-	}
-
-	if s.BatchPredictionName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("BatchPredictionName"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Represents the output of an UpdateBatchPrediction operation.
-//
-// You can see the updated content by using the GetBatchPrediction operation.
-type UpdateBatchPredictionOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID assigned to the BatchPrediction during creation. This value should
-	// be identical to the value of the BatchPredictionId in the request.
-	BatchPredictionId *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s UpdateBatchPredictionOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opUpdateBatchPrediction = "UpdateBatchPrediction"
 
@@ -81,7 +25,7 @@ const opUpdateBatchPrediction = "UpdateBatchPrediction"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) UpdateBatchPredictionRequest(input *UpdateBatchPredictionInput) UpdateBatchPredictionRequest {
+func (c *Client) UpdateBatchPredictionRequest(input *types.UpdateBatchPredictionInput) UpdateBatchPredictionRequest {
 	op := &aws.Operation{
 		Name:       opUpdateBatchPrediction,
 		HTTPMethod: "POST",
@@ -89,10 +33,10 @@ func (c *Client) UpdateBatchPredictionRequest(input *UpdateBatchPredictionInput)
 	}
 
 	if input == nil {
-		input = &UpdateBatchPredictionInput{}
+		input = &types.UpdateBatchPredictionInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateBatchPredictionOutput{})
+	req := c.newRequest(op, input, &types.UpdateBatchPredictionOutput{})
 	return UpdateBatchPredictionRequest{Request: req, Input: input, Copy: c.UpdateBatchPredictionRequest}
 }
 
@@ -100,8 +44,8 @@ func (c *Client) UpdateBatchPredictionRequest(input *UpdateBatchPredictionInput)
 // UpdateBatchPrediction API operation.
 type UpdateBatchPredictionRequest struct {
 	*aws.Request
-	Input *UpdateBatchPredictionInput
-	Copy  func(*UpdateBatchPredictionInput) UpdateBatchPredictionRequest
+	Input *types.UpdateBatchPredictionInput
+	Copy  func(*types.UpdateBatchPredictionInput) UpdateBatchPredictionRequest
 }
 
 // Send marshals and sends the UpdateBatchPrediction API request.
@@ -113,7 +57,7 @@ func (r UpdateBatchPredictionRequest) Send(ctx context.Context) (*UpdateBatchPre
 	}
 
 	resp := &UpdateBatchPredictionResponse{
-		UpdateBatchPredictionOutput: r.Request.Data.(*UpdateBatchPredictionOutput),
+		UpdateBatchPredictionOutput: r.Request.Data.(*types.UpdateBatchPredictionOutput),
 		response:                    &aws.Response{Request: r.Request},
 	}
 
@@ -123,7 +67,7 @@ func (r UpdateBatchPredictionRequest) Send(ctx context.Context) (*UpdateBatchPre
 // UpdateBatchPredictionResponse is the response type for the
 // UpdateBatchPrediction API operation.
 type UpdateBatchPredictionResponse struct {
-	*UpdateBatchPredictionOutput
+	*types.UpdateBatchPredictionOutput
 
 	response *aws.Response
 }

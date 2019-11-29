@@ -6,71 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/restjson"
+	"github.com/aws/aws-sdk-go-v2/service/iot/types"
 )
-
-// The input for the SetLoggingOptions operation.
-type SetLoggingOptionsInput struct {
-	_ struct{} `type:"structure" payload:"LoggingOptionsPayload"`
-
-	// The logging options payload.
-	//
-	// LoggingOptionsPayload is a required field
-	LoggingOptionsPayload *LoggingOptionsPayload `locationName:"loggingOptionsPayload" type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s SetLoggingOptionsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *SetLoggingOptionsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "SetLoggingOptionsInput"}
-
-	if s.LoggingOptionsPayload == nil {
-		invalidParams.Add(aws.NewErrParamRequired("LoggingOptionsPayload"))
-	}
-	if s.LoggingOptionsPayload != nil {
-		if err := s.LoggingOptionsPayload.Validate(); err != nil {
-			invalidParams.AddNested("LoggingOptionsPayload", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s SetLoggingOptionsInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.LoggingOptionsPayload != nil {
-		v := s.LoggingOptionsPayload
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.PayloadTarget, "loggingOptionsPayload", v, metadata)
-	}
-	return nil
-}
-
-type SetLoggingOptionsOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s SetLoggingOptionsOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s SetLoggingOptionsOutput) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
 
 const opSetLoggingOptions = "SetLoggingOptions"
 
@@ -87,7 +26,7 @@ const opSetLoggingOptions = "SetLoggingOptions"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) SetLoggingOptionsRequest(input *SetLoggingOptionsInput) SetLoggingOptionsRequest {
+func (c *Client) SetLoggingOptionsRequest(input *types.SetLoggingOptionsInput) SetLoggingOptionsRequest {
 	op := &aws.Operation{
 		Name:       opSetLoggingOptions,
 		HTTPMethod: "POST",
@@ -95,10 +34,10 @@ func (c *Client) SetLoggingOptionsRequest(input *SetLoggingOptionsInput) SetLogg
 	}
 
 	if input == nil {
-		input = &SetLoggingOptionsInput{}
+		input = &types.SetLoggingOptionsInput{}
 	}
 
-	req := c.newRequest(op, input, &SetLoggingOptionsOutput{})
+	req := c.newRequest(op, input, &types.SetLoggingOptionsOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return SetLoggingOptionsRequest{Request: req, Input: input, Copy: c.SetLoggingOptionsRequest}
@@ -108,8 +47,8 @@ func (c *Client) SetLoggingOptionsRequest(input *SetLoggingOptionsInput) SetLogg
 // SetLoggingOptions API operation.
 type SetLoggingOptionsRequest struct {
 	*aws.Request
-	Input *SetLoggingOptionsInput
-	Copy  func(*SetLoggingOptionsInput) SetLoggingOptionsRequest
+	Input *types.SetLoggingOptionsInput
+	Copy  func(*types.SetLoggingOptionsInput) SetLoggingOptionsRequest
 }
 
 // Send marshals and sends the SetLoggingOptions API request.
@@ -121,7 +60,7 @@ func (r SetLoggingOptionsRequest) Send(ctx context.Context) (*SetLoggingOptionsR
 	}
 
 	resp := &SetLoggingOptionsResponse{
-		SetLoggingOptionsOutput: r.Request.Data.(*SetLoggingOptionsOutput),
+		SetLoggingOptionsOutput: r.Request.Data.(*types.SetLoggingOptionsOutput),
 		response:                &aws.Response{Request: r.Request},
 	}
 
@@ -131,7 +70,7 @@ func (r SetLoggingOptionsRequest) Send(ctx context.Context) (*SetLoggingOptionsR
 // SetLoggingOptionsResponse is the response type for the
 // SetLoggingOptions API operation.
 type SetLoggingOptionsResponse struct {
-	*SetLoggingOptionsOutput
+	*types.SetLoggingOptionsOutput
 
 	response *aws.Response
 }

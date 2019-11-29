@@ -6,75 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/route53domains/types"
 )
-
-// The UpdateDomainContactPrivacy request includes the following elements.
-type UpdateDomainContactPrivacyInput struct {
-	_ struct{} `type:"structure"`
-
-	// Whether you want to conceal contact information from WHOIS queries. If you
-	// specify true, WHOIS ("who is") queries return contact information either
-	// for Amazon Registrar (for .com, .net, and .org domains) or for our registrar
-	// associate, Gandi (for all other TLDs). If you specify false, WHOIS queries
-	// return the information that you entered for the admin contact.
-	AdminPrivacy *bool `type:"boolean"`
-
-	// The name of the domain that you want to update the privacy setting for.
-	//
-	// DomainName is a required field
-	DomainName *string `type:"string" required:"true"`
-
-	// Whether you want to conceal contact information from WHOIS queries. If you
-	// specify true, WHOIS ("who is") queries return contact information either
-	// for Amazon Registrar (for .com, .net, and .org domains) or for our registrar
-	// associate, Gandi (for all other TLDs). If you specify false, WHOIS queries
-	// return the information that you entered for the registrant contact (domain
-	// owner).
-	RegistrantPrivacy *bool `type:"boolean"`
-
-	// Whether you want to conceal contact information from WHOIS queries. If you
-	// specify true, WHOIS ("who is") queries return contact information either
-	// for Amazon Registrar (for .com, .net, and .org domains) or for our registrar
-	// associate, Gandi (for all other TLDs). If you specify false, WHOIS queries
-	// return the information that you entered for the technical contact.
-	TechPrivacy *bool `type:"boolean"`
-}
-
-// String returns the string representation
-func (s UpdateDomainContactPrivacyInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateDomainContactPrivacyInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateDomainContactPrivacyInput"}
-
-	if s.DomainName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DomainName"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// The UpdateDomainContactPrivacy response includes the following element.
-type UpdateDomainContactPrivacyOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Identifier for tracking the progress of the request. To use this ID to query
-	// the operation status, use GetOperationDetail.
-	//
-	// OperationId is a required field
-	OperationId *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s UpdateDomainContactPrivacyOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opUpdateDomainContactPrivacy = "UpdateDomainContactPrivacy"
 
@@ -101,7 +34,7 @@ const opUpdateDomainContactPrivacy = "UpdateDomainContactPrivacy"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/UpdateDomainContactPrivacy
-func (c *Client) UpdateDomainContactPrivacyRequest(input *UpdateDomainContactPrivacyInput) UpdateDomainContactPrivacyRequest {
+func (c *Client) UpdateDomainContactPrivacyRequest(input *types.UpdateDomainContactPrivacyInput) UpdateDomainContactPrivacyRequest {
 	op := &aws.Operation{
 		Name:       opUpdateDomainContactPrivacy,
 		HTTPMethod: "POST",
@@ -109,10 +42,10 @@ func (c *Client) UpdateDomainContactPrivacyRequest(input *UpdateDomainContactPri
 	}
 
 	if input == nil {
-		input = &UpdateDomainContactPrivacyInput{}
+		input = &types.UpdateDomainContactPrivacyInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateDomainContactPrivacyOutput{})
+	req := c.newRequest(op, input, &types.UpdateDomainContactPrivacyOutput{})
 	return UpdateDomainContactPrivacyRequest{Request: req, Input: input, Copy: c.UpdateDomainContactPrivacyRequest}
 }
 
@@ -120,8 +53,8 @@ func (c *Client) UpdateDomainContactPrivacyRequest(input *UpdateDomainContactPri
 // UpdateDomainContactPrivacy API operation.
 type UpdateDomainContactPrivacyRequest struct {
 	*aws.Request
-	Input *UpdateDomainContactPrivacyInput
-	Copy  func(*UpdateDomainContactPrivacyInput) UpdateDomainContactPrivacyRequest
+	Input *types.UpdateDomainContactPrivacyInput
+	Copy  func(*types.UpdateDomainContactPrivacyInput) UpdateDomainContactPrivacyRequest
 }
 
 // Send marshals and sends the UpdateDomainContactPrivacy API request.
@@ -133,7 +66,7 @@ func (r UpdateDomainContactPrivacyRequest) Send(ctx context.Context) (*UpdateDom
 	}
 
 	resp := &UpdateDomainContactPrivacyResponse{
-		UpdateDomainContactPrivacyOutput: r.Request.Data.(*UpdateDomainContactPrivacyOutput),
+		UpdateDomainContactPrivacyOutput: r.Request.Data.(*types.UpdateDomainContactPrivacyOutput),
 		response:                         &aws.Response{Request: r.Request},
 	}
 
@@ -143,7 +76,7 @@ func (r UpdateDomainContactPrivacyRequest) Send(ctx context.Context) (*UpdateDom
 // UpdateDomainContactPrivacyResponse is the response type for the
 // UpdateDomainContactPrivacy API operation.
 type UpdateDomainContactPrivacyResponse struct {
-	*UpdateDomainContactPrivacyOutput
+	*types.UpdateDomainContactPrivacyOutput
 
 	response *aws.Response
 }

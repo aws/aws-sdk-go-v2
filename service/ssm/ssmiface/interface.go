@@ -10,6 +10,7 @@ package ssmiface
 
 import (
 	"github.com/aws/aws-sdk-go-v2/service/ssm"
+	"github.com/aws/aws-sdk-go-v2/service/ssm/types"
 )
 
 // ClientAPI provides an interface to enable mocking the
@@ -43,7 +44,7 @@ import (
 //    type mockClientClient struct {
 //        ssmiface.ClientPI
 //    }
-//    func (m *mockClientClient) AddTagsToResource(input *ssm.AddTagsToResourceInput) (*ssm.AddTagsToResourceOutput, error) {
+//    func (m *mockClientClient) AddTagsToResource(input *types.AddTagsToResourceInput) (*types.AddTagsToResourceOutput, error) {
 //        // mock response/functionality
 //    }
 //
@@ -61,245 +62,245 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type ClientAPI interface {
-	AddTagsToResourceRequest(*ssm.AddTagsToResourceInput) ssm.AddTagsToResourceRequest
+	AddTagsToResourceRequest(*types.AddTagsToResourceInput) ssm.AddTagsToResourceRequest
 
-	CancelCommandRequest(*ssm.CancelCommandInput) ssm.CancelCommandRequest
+	CancelCommandRequest(*types.CancelCommandInput) ssm.CancelCommandRequest
 
-	CancelMaintenanceWindowExecutionRequest(*ssm.CancelMaintenanceWindowExecutionInput) ssm.CancelMaintenanceWindowExecutionRequest
+	CancelMaintenanceWindowExecutionRequest(*types.CancelMaintenanceWindowExecutionInput) ssm.CancelMaintenanceWindowExecutionRequest
 
-	CreateActivationRequest(*ssm.CreateActivationInput) ssm.CreateActivationRequest
+	CreateActivationRequest(*types.CreateActivationInput) ssm.CreateActivationRequest
 
-	CreateAssociationRequest(*ssm.CreateAssociationInput) ssm.CreateAssociationRequest
+	CreateAssociationRequest(*types.CreateAssociationInput) ssm.CreateAssociationRequest
 
-	CreateAssociationBatchRequest(*ssm.CreateAssociationBatchInput) ssm.CreateAssociationBatchRequest
+	CreateAssociationBatchRequest(*types.CreateAssociationBatchInput) ssm.CreateAssociationBatchRequest
 
-	CreateDocumentRequest(*ssm.CreateDocumentInput) ssm.CreateDocumentRequest
+	CreateDocumentRequest(*types.CreateDocumentInput) ssm.CreateDocumentRequest
 
-	CreateMaintenanceWindowRequest(*ssm.CreateMaintenanceWindowInput) ssm.CreateMaintenanceWindowRequest
+	CreateMaintenanceWindowRequest(*types.CreateMaintenanceWindowInput) ssm.CreateMaintenanceWindowRequest
 
-	CreateOpsItemRequest(*ssm.CreateOpsItemInput) ssm.CreateOpsItemRequest
+	CreateOpsItemRequest(*types.CreateOpsItemInput) ssm.CreateOpsItemRequest
 
-	CreatePatchBaselineRequest(*ssm.CreatePatchBaselineInput) ssm.CreatePatchBaselineRequest
+	CreatePatchBaselineRequest(*types.CreatePatchBaselineInput) ssm.CreatePatchBaselineRequest
 
-	CreateResourceDataSyncRequest(*ssm.CreateResourceDataSyncInput) ssm.CreateResourceDataSyncRequest
+	CreateResourceDataSyncRequest(*types.CreateResourceDataSyncInput) ssm.CreateResourceDataSyncRequest
 
-	DeleteActivationRequest(*ssm.DeleteActivationInput) ssm.DeleteActivationRequest
+	DeleteActivationRequest(*types.DeleteActivationInput) ssm.DeleteActivationRequest
 
-	DeleteAssociationRequest(*ssm.DeleteAssociationInput) ssm.DeleteAssociationRequest
+	DeleteAssociationRequest(*types.DeleteAssociationInput) ssm.DeleteAssociationRequest
 
-	DeleteDocumentRequest(*ssm.DeleteDocumentInput) ssm.DeleteDocumentRequest
+	DeleteDocumentRequest(*types.DeleteDocumentInput) ssm.DeleteDocumentRequest
 
-	DeleteInventoryRequest(*ssm.DeleteInventoryInput) ssm.DeleteInventoryRequest
+	DeleteInventoryRequest(*types.DeleteInventoryInput) ssm.DeleteInventoryRequest
 
-	DeleteMaintenanceWindowRequest(*ssm.DeleteMaintenanceWindowInput) ssm.DeleteMaintenanceWindowRequest
+	DeleteMaintenanceWindowRequest(*types.DeleteMaintenanceWindowInput) ssm.DeleteMaintenanceWindowRequest
 
-	DeleteParameterRequest(*ssm.DeleteParameterInput) ssm.DeleteParameterRequest
+	DeleteParameterRequest(*types.DeleteParameterInput) ssm.DeleteParameterRequest
 
-	DeleteParametersRequest(*ssm.DeleteParametersInput) ssm.DeleteParametersRequest
+	DeleteParametersRequest(*types.DeleteParametersInput) ssm.DeleteParametersRequest
 
-	DeletePatchBaselineRequest(*ssm.DeletePatchBaselineInput) ssm.DeletePatchBaselineRequest
+	DeletePatchBaselineRequest(*types.DeletePatchBaselineInput) ssm.DeletePatchBaselineRequest
 
-	DeleteResourceDataSyncRequest(*ssm.DeleteResourceDataSyncInput) ssm.DeleteResourceDataSyncRequest
+	DeleteResourceDataSyncRequest(*types.DeleteResourceDataSyncInput) ssm.DeleteResourceDataSyncRequest
 
-	DeregisterManagedInstanceRequest(*ssm.DeregisterManagedInstanceInput) ssm.DeregisterManagedInstanceRequest
+	DeregisterManagedInstanceRequest(*types.DeregisterManagedInstanceInput) ssm.DeregisterManagedInstanceRequest
 
-	DeregisterPatchBaselineForPatchGroupRequest(*ssm.DeregisterPatchBaselineForPatchGroupInput) ssm.DeregisterPatchBaselineForPatchGroupRequest
+	DeregisterPatchBaselineForPatchGroupRequest(*types.DeregisterPatchBaselineForPatchGroupInput) ssm.DeregisterPatchBaselineForPatchGroupRequest
 
-	DeregisterTargetFromMaintenanceWindowRequest(*ssm.DeregisterTargetFromMaintenanceWindowInput) ssm.DeregisterTargetFromMaintenanceWindowRequest
+	DeregisterTargetFromMaintenanceWindowRequest(*types.DeregisterTargetFromMaintenanceWindowInput) ssm.DeregisterTargetFromMaintenanceWindowRequest
 
-	DeregisterTaskFromMaintenanceWindowRequest(*ssm.DeregisterTaskFromMaintenanceWindowInput) ssm.DeregisterTaskFromMaintenanceWindowRequest
+	DeregisterTaskFromMaintenanceWindowRequest(*types.DeregisterTaskFromMaintenanceWindowInput) ssm.DeregisterTaskFromMaintenanceWindowRequest
 
-	DescribeActivationsRequest(*ssm.DescribeActivationsInput) ssm.DescribeActivationsRequest
+	DescribeActivationsRequest(*types.DescribeActivationsInput) ssm.DescribeActivationsRequest
 
-	DescribeAssociationRequest(*ssm.DescribeAssociationInput) ssm.DescribeAssociationRequest
+	DescribeAssociationRequest(*types.DescribeAssociationInput) ssm.DescribeAssociationRequest
 
-	DescribeAssociationExecutionTargetsRequest(*ssm.DescribeAssociationExecutionTargetsInput) ssm.DescribeAssociationExecutionTargetsRequest
+	DescribeAssociationExecutionTargetsRequest(*types.DescribeAssociationExecutionTargetsInput) ssm.DescribeAssociationExecutionTargetsRequest
 
-	DescribeAssociationExecutionsRequest(*ssm.DescribeAssociationExecutionsInput) ssm.DescribeAssociationExecutionsRequest
+	DescribeAssociationExecutionsRequest(*types.DescribeAssociationExecutionsInput) ssm.DescribeAssociationExecutionsRequest
 
-	DescribeAutomationExecutionsRequest(*ssm.DescribeAutomationExecutionsInput) ssm.DescribeAutomationExecutionsRequest
+	DescribeAutomationExecutionsRequest(*types.DescribeAutomationExecutionsInput) ssm.DescribeAutomationExecutionsRequest
 
-	DescribeAutomationStepExecutionsRequest(*ssm.DescribeAutomationStepExecutionsInput) ssm.DescribeAutomationStepExecutionsRequest
+	DescribeAutomationStepExecutionsRequest(*types.DescribeAutomationStepExecutionsInput) ssm.DescribeAutomationStepExecutionsRequest
 
-	DescribeAvailablePatchesRequest(*ssm.DescribeAvailablePatchesInput) ssm.DescribeAvailablePatchesRequest
+	DescribeAvailablePatchesRequest(*types.DescribeAvailablePatchesInput) ssm.DescribeAvailablePatchesRequest
 
-	DescribeDocumentRequest(*ssm.DescribeDocumentInput) ssm.DescribeDocumentRequest
+	DescribeDocumentRequest(*types.DescribeDocumentInput) ssm.DescribeDocumentRequest
 
-	DescribeDocumentPermissionRequest(*ssm.DescribeDocumentPermissionInput) ssm.DescribeDocumentPermissionRequest
+	DescribeDocumentPermissionRequest(*types.DescribeDocumentPermissionInput) ssm.DescribeDocumentPermissionRequest
 
-	DescribeEffectiveInstanceAssociationsRequest(*ssm.DescribeEffectiveInstanceAssociationsInput) ssm.DescribeEffectiveInstanceAssociationsRequest
+	DescribeEffectiveInstanceAssociationsRequest(*types.DescribeEffectiveInstanceAssociationsInput) ssm.DescribeEffectiveInstanceAssociationsRequest
 
-	DescribeEffectivePatchesForPatchBaselineRequest(*ssm.DescribeEffectivePatchesForPatchBaselineInput) ssm.DescribeEffectivePatchesForPatchBaselineRequest
+	DescribeEffectivePatchesForPatchBaselineRequest(*types.DescribeEffectivePatchesForPatchBaselineInput) ssm.DescribeEffectivePatchesForPatchBaselineRequest
 
-	DescribeInstanceAssociationsStatusRequest(*ssm.DescribeInstanceAssociationsStatusInput) ssm.DescribeInstanceAssociationsStatusRequest
+	DescribeInstanceAssociationsStatusRequest(*types.DescribeInstanceAssociationsStatusInput) ssm.DescribeInstanceAssociationsStatusRequest
 
-	DescribeInstanceInformationRequest(*ssm.DescribeInstanceInformationInput) ssm.DescribeInstanceInformationRequest
+	DescribeInstanceInformationRequest(*types.DescribeInstanceInformationInput) ssm.DescribeInstanceInformationRequest
 
-	DescribeInstancePatchStatesRequest(*ssm.DescribeInstancePatchStatesInput) ssm.DescribeInstancePatchStatesRequest
+	DescribeInstancePatchStatesRequest(*types.DescribeInstancePatchStatesInput) ssm.DescribeInstancePatchStatesRequest
 
-	DescribeInstancePatchStatesForPatchGroupRequest(*ssm.DescribeInstancePatchStatesForPatchGroupInput) ssm.DescribeInstancePatchStatesForPatchGroupRequest
+	DescribeInstancePatchStatesForPatchGroupRequest(*types.DescribeInstancePatchStatesForPatchGroupInput) ssm.DescribeInstancePatchStatesForPatchGroupRequest
 
-	DescribeInstancePatchesRequest(*ssm.DescribeInstancePatchesInput) ssm.DescribeInstancePatchesRequest
+	DescribeInstancePatchesRequest(*types.DescribeInstancePatchesInput) ssm.DescribeInstancePatchesRequest
 
-	DescribeInventoryDeletionsRequest(*ssm.DescribeInventoryDeletionsInput) ssm.DescribeInventoryDeletionsRequest
+	DescribeInventoryDeletionsRequest(*types.DescribeInventoryDeletionsInput) ssm.DescribeInventoryDeletionsRequest
 
-	DescribeMaintenanceWindowExecutionTaskInvocationsRequest(*ssm.DescribeMaintenanceWindowExecutionTaskInvocationsInput) ssm.DescribeMaintenanceWindowExecutionTaskInvocationsRequest
+	DescribeMaintenanceWindowExecutionTaskInvocationsRequest(*types.DescribeMaintenanceWindowExecutionTaskInvocationsInput) ssm.DescribeMaintenanceWindowExecutionTaskInvocationsRequest
 
-	DescribeMaintenanceWindowExecutionTasksRequest(*ssm.DescribeMaintenanceWindowExecutionTasksInput) ssm.DescribeMaintenanceWindowExecutionTasksRequest
+	DescribeMaintenanceWindowExecutionTasksRequest(*types.DescribeMaintenanceWindowExecutionTasksInput) ssm.DescribeMaintenanceWindowExecutionTasksRequest
 
-	DescribeMaintenanceWindowExecutionsRequest(*ssm.DescribeMaintenanceWindowExecutionsInput) ssm.DescribeMaintenanceWindowExecutionsRequest
+	DescribeMaintenanceWindowExecutionsRequest(*types.DescribeMaintenanceWindowExecutionsInput) ssm.DescribeMaintenanceWindowExecutionsRequest
 
-	DescribeMaintenanceWindowScheduleRequest(*ssm.DescribeMaintenanceWindowScheduleInput) ssm.DescribeMaintenanceWindowScheduleRequest
+	DescribeMaintenanceWindowScheduleRequest(*types.DescribeMaintenanceWindowScheduleInput) ssm.DescribeMaintenanceWindowScheduleRequest
 
-	DescribeMaintenanceWindowTargetsRequest(*ssm.DescribeMaintenanceWindowTargetsInput) ssm.DescribeMaintenanceWindowTargetsRequest
+	DescribeMaintenanceWindowTargetsRequest(*types.DescribeMaintenanceWindowTargetsInput) ssm.DescribeMaintenanceWindowTargetsRequest
 
-	DescribeMaintenanceWindowTasksRequest(*ssm.DescribeMaintenanceWindowTasksInput) ssm.DescribeMaintenanceWindowTasksRequest
+	DescribeMaintenanceWindowTasksRequest(*types.DescribeMaintenanceWindowTasksInput) ssm.DescribeMaintenanceWindowTasksRequest
 
-	DescribeMaintenanceWindowsRequest(*ssm.DescribeMaintenanceWindowsInput) ssm.DescribeMaintenanceWindowsRequest
+	DescribeMaintenanceWindowsRequest(*types.DescribeMaintenanceWindowsInput) ssm.DescribeMaintenanceWindowsRequest
 
-	DescribeMaintenanceWindowsForTargetRequest(*ssm.DescribeMaintenanceWindowsForTargetInput) ssm.DescribeMaintenanceWindowsForTargetRequest
+	DescribeMaintenanceWindowsForTargetRequest(*types.DescribeMaintenanceWindowsForTargetInput) ssm.DescribeMaintenanceWindowsForTargetRequest
 
-	DescribeOpsItemsRequest(*ssm.DescribeOpsItemsInput) ssm.DescribeOpsItemsRequest
+	DescribeOpsItemsRequest(*types.DescribeOpsItemsInput) ssm.DescribeOpsItemsRequest
 
-	DescribeParametersRequest(*ssm.DescribeParametersInput) ssm.DescribeParametersRequest
+	DescribeParametersRequest(*types.DescribeParametersInput) ssm.DescribeParametersRequest
 
-	DescribePatchBaselinesRequest(*ssm.DescribePatchBaselinesInput) ssm.DescribePatchBaselinesRequest
+	DescribePatchBaselinesRequest(*types.DescribePatchBaselinesInput) ssm.DescribePatchBaselinesRequest
 
-	DescribePatchGroupStateRequest(*ssm.DescribePatchGroupStateInput) ssm.DescribePatchGroupStateRequest
+	DescribePatchGroupStateRequest(*types.DescribePatchGroupStateInput) ssm.DescribePatchGroupStateRequest
 
-	DescribePatchGroupsRequest(*ssm.DescribePatchGroupsInput) ssm.DescribePatchGroupsRequest
+	DescribePatchGroupsRequest(*types.DescribePatchGroupsInput) ssm.DescribePatchGroupsRequest
 
-	DescribePatchPropertiesRequest(*ssm.DescribePatchPropertiesInput) ssm.DescribePatchPropertiesRequest
+	DescribePatchPropertiesRequest(*types.DescribePatchPropertiesInput) ssm.DescribePatchPropertiesRequest
 
-	DescribeSessionsRequest(*ssm.DescribeSessionsInput) ssm.DescribeSessionsRequest
+	DescribeSessionsRequest(*types.DescribeSessionsInput) ssm.DescribeSessionsRequest
 
-	GetAutomationExecutionRequest(*ssm.GetAutomationExecutionInput) ssm.GetAutomationExecutionRequest
+	GetAutomationExecutionRequest(*types.GetAutomationExecutionInput) ssm.GetAutomationExecutionRequest
 
-	GetCommandInvocationRequest(*ssm.GetCommandInvocationInput) ssm.GetCommandInvocationRequest
+	GetCommandInvocationRequest(*types.GetCommandInvocationInput) ssm.GetCommandInvocationRequest
 
-	GetConnectionStatusRequest(*ssm.GetConnectionStatusInput) ssm.GetConnectionStatusRequest
+	GetConnectionStatusRequest(*types.GetConnectionStatusInput) ssm.GetConnectionStatusRequest
 
-	GetDefaultPatchBaselineRequest(*ssm.GetDefaultPatchBaselineInput) ssm.GetDefaultPatchBaselineRequest
+	GetDefaultPatchBaselineRequest(*types.GetDefaultPatchBaselineInput) ssm.GetDefaultPatchBaselineRequest
 
-	GetDeployablePatchSnapshotForInstanceRequest(*ssm.GetDeployablePatchSnapshotForInstanceInput) ssm.GetDeployablePatchSnapshotForInstanceRequest
+	GetDeployablePatchSnapshotForInstanceRequest(*types.GetDeployablePatchSnapshotForInstanceInput) ssm.GetDeployablePatchSnapshotForInstanceRequest
 
-	GetDocumentRequest(*ssm.GetDocumentInput) ssm.GetDocumentRequest
+	GetDocumentRequest(*types.GetDocumentInput) ssm.GetDocumentRequest
 
-	GetInventoryRequest(*ssm.GetInventoryInput) ssm.GetInventoryRequest
+	GetInventoryRequest(*types.GetInventoryInput) ssm.GetInventoryRequest
 
-	GetInventorySchemaRequest(*ssm.GetInventorySchemaInput) ssm.GetInventorySchemaRequest
+	GetInventorySchemaRequest(*types.GetInventorySchemaInput) ssm.GetInventorySchemaRequest
 
-	GetMaintenanceWindowRequest(*ssm.GetMaintenanceWindowInput) ssm.GetMaintenanceWindowRequest
+	GetMaintenanceWindowRequest(*types.GetMaintenanceWindowInput) ssm.GetMaintenanceWindowRequest
 
-	GetMaintenanceWindowExecutionRequest(*ssm.GetMaintenanceWindowExecutionInput) ssm.GetMaintenanceWindowExecutionRequest
+	GetMaintenanceWindowExecutionRequest(*types.GetMaintenanceWindowExecutionInput) ssm.GetMaintenanceWindowExecutionRequest
 
-	GetMaintenanceWindowExecutionTaskRequest(*ssm.GetMaintenanceWindowExecutionTaskInput) ssm.GetMaintenanceWindowExecutionTaskRequest
+	GetMaintenanceWindowExecutionTaskRequest(*types.GetMaintenanceWindowExecutionTaskInput) ssm.GetMaintenanceWindowExecutionTaskRequest
 
-	GetMaintenanceWindowExecutionTaskInvocationRequest(*ssm.GetMaintenanceWindowExecutionTaskInvocationInput) ssm.GetMaintenanceWindowExecutionTaskInvocationRequest
+	GetMaintenanceWindowExecutionTaskInvocationRequest(*types.GetMaintenanceWindowExecutionTaskInvocationInput) ssm.GetMaintenanceWindowExecutionTaskInvocationRequest
 
-	GetMaintenanceWindowTaskRequest(*ssm.GetMaintenanceWindowTaskInput) ssm.GetMaintenanceWindowTaskRequest
+	GetMaintenanceWindowTaskRequest(*types.GetMaintenanceWindowTaskInput) ssm.GetMaintenanceWindowTaskRequest
 
-	GetOpsItemRequest(*ssm.GetOpsItemInput) ssm.GetOpsItemRequest
+	GetOpsItemRequest(*types.GetOpsItemInput) ssm.GetOpsItemRequest
 
-	GetOpsSummaryRequest(*ssm.GetOpsSummaryInput) ssm.GetOpsSummaryRequest
+	GetOpsSummaryRequest(*types.GetOpsSummaryInput) ssm.GetOpsSummaryRequest
 
-	GetParameterRequest(*ssm.GetParameterInput) ssm.GetParameterRequest
+	GetParameterRequest(*types.GetParameterInput) ssm.GetParameterRequest
 
-	GetParameterHistoryRequest(*ssm.GetParameterHistoryInput) ssm.GetParameterHistoryRequest
+	GetParameterHistoryRequest(*types.GetParameterHistoryInput) ssm.GetParameterHistoryRequest
 
-	GetParametersRequest(*ssm.GetParametersInput) ssm.GetParametersRequest
+	GetParametersRequest(*types.GetParametersInput) ssm.GetParametersRequest
 
-	GetParametersByPathRequest(*ssm.GetParametersByPathInput) ssm.GetParametersByPathRequest
+	GetParametersByPathRequest(*types.GetParametersByPathInput) ssm.GetParametersByPathRequest
 
-	GetPatchBaselineRequest(*ssm.GetPatchBaselineInput) ssm.GetPatchBaselineRequest
+	GetPatchBaselineRequest(*types.GetPatchBaselineInput) ssm.GetPatchBaselineRequest
 
-	GetPatchBaselineForPatchGroupRequest(*ssm.GetPatchBaselineForPatchGroupInput) ssm.GetPatchBaselineForPatchGroupRequest
+	GetPatchBaselineForPatchGroupRequest(*types.GetPatchBaselineForPatchGroupInput) ssm.GetPatchBaselineForPatchGroupRequest
 
-	GetServiceSettingRequest(*ssm.GetServiceSettingInput) ssm.GetServiceSettingRequest
+	GetServiceSettingRequest(*types.GetServiceSettingInput) ssm.GetServiceSettingRequest
 
-	LabelParameterVersionRequest(*ssm.LabelParameterVersionInput) ssm.LabelParameterVersionRequest
+	LabelParameterVersionRequest(*types.LabelParameterVersionInput) ssm.LabelParameterVersionRequest
 
-	ListAssociationVersionsRequest(*ssm.ListAssociationVersionsInput) ssm.ListAssociationVersionsRequest
+	ListAssociationVersionsRequest(*types.ListAssociationVersionsInput) ssm.ListAssociationVersionsRequest
 
-	ListAssociationsRequest(*ssm.ListAssociationsInput) ssm.ListAssociationsRequest
+	ListAssociationsRequest(*types.ListAssociationsInput) ssm.ListAssociationsRequest
 
-	ListCommandInvocationsRequest(*ssm.ListCommandInvocationsInput) ssm.ListCommandInvocationsRequest
+	ListCommandInvocationsRequest(*types.ListCommandInvocationsInput) ssm.ListCommandInvocationsRequest
 
-	ListCommandsRequest(*ssm.ListCommandsInput) ssm.ListCommandsRequest
+	ListCommandsRequest(*types.ListCommandsInput) ssm.ListCommandsRequest
 
-	ListComplianceItemsRequest(*ssm.ListComplianceItemsInput) ssm.ListComplianceItemsRequest
+	ListComplianceItemsRequest(*types.ListComplianceItemsInput) ssm.ListComplianceItemsRequest
 
-	ListComplianceSummariesRequest(*ssm.ListComplianceSummariesInput) ssm.ListComplianceSummariesRequest
+	ListComplianceSummariesRequest(*types.ListComplianceSummariesInput) ssm.ListComplianceSummariesRequest
 
-	ListDocumentVersionsRequest(*ssm.ListDocumentVersionsInput) ssm.ListDocumentVersionsRequest
+	ListDocumentVersionsRequest(*types.ListDocumentVersionsInput) ssm.ListDocumentVersionsRequest
 
-	ListDocumentsRequest(*ssm.ListDocumentsInput) ssm.ListDocumentsRequest
+	ListDocumentsRequest(*types.ListDocumentsInput) ssm.ListDocumentsRequest
 
-	ListInventoryEntriesRequest(*ssm.ListInventoryEntriesInput) ssm.ListInventoryEntriesRequest
+	ListInventoryEntriesRequest(*types.ListInventoryEntriesInput) ssm.ListInventoryEntriesRequest
 
-	ListResourceComplianceSummariesRequest(*ssm.ListResourceComplianceSummariesInput) ssm.ListResourceComplianceSummariesRequest
+	ListResourceComplianceSummariesRequest(*types.ListResourceComplianceSummariesInput) ssm.ListResourceComplianceSummariesRequest
 
-	ListResourceDataSyncRequest(*ssm.ListResourceDataSyncInput) ssm.ListResourceDataSyncRequest
+	ListResourceDataSyncRequest(*types.ListResourceDataSyncInput) ssm.ListResourceDataSyncRequest
 
-	ListTagsForResourceRequest(*ssm.ListTagsForResourceInput) ssm.ListTagsForResourceRequest
+	ListTagsForResourceRequest(*types.ListTagsForResourceInput) ssm.ListTagsForResourceRequest
 
-	ModifyDocumentPermissionRequest(*ssm.ModifyDocumentPermissionInput) ssm.ModifyDocumentPermissionRequest
+	ModifyDocumentPermissionRequest(*types.ModifyDocumentPermissionInput) ssm.ModifyDocumentPermissionRequest
 
-	PutComplianceItemsRequest(*ssm.PutComplianceItemsInput) ssm.PutComplianceItemsRequest
+	PutComplianceItemsRequest(*types.PutComplianceItemsInput) ssm.PutComplianceItemsRequest
 
-	PutInventoryRequest(*ssm.PutInventoryInput) ssm.PutInventoryRequest
+	PutInventoryRequest(*types.PutInventoryInput) ssm.PutInventoryRequest
 
-	PutParameterRequest(*ssm.PutParameterInput) ssm.PutParameterRequest
+	PutParameterRequest(*types.PutParameterInput) ssm.PutParameterRequest
 
-	RegisterDefaultPatchBaselineRequest(*ssm.RegisterDefaultPatchBaselineInput) ssm.RegisterDefaultPatchBaselineRequest
+	RegisterDefaultPatchBaselineRequest(*types.RegisterDefaultPatchBaselineInput) ssm.RegisterDefaultPatchBaselineRequest
 
-	RegisterPatchBaselineForPatchGroupRequest(*ssm.RegisterPatchBaselineForPatchGroupInput) ssm.RegisterPatchBaselineForPatchGroupRequest
+	RegisterPatchBaselineForPatchGroupRequest(*types.RegisterPatchBaselineForPatchGroupInput) ssm.RegisterPatchBaselineForPatchGroupRequest
 
-	RegisterTargetWithMaintenanceWindowRequest(*ssm.RegisterTargetWithMaintenanceWindowInput) ssm.RegisterTargetWithMaintenanceWindowRequest
+	RegisterTargetWithMaintenanceWindowRequest(*types.RegisterTargetWithMaintenanceWindowInput) ssm.RegisterTargetWithMaintenanceWindowRequest
 
-	RegisterTaskWithMaintenanceWindowRequest(*ssm.RegisterTaskWithMaintenanceWindowInput) ssm.RegisterTaskWithMaintenanceWindowRequest
+	RegisterTaskWithMaintenanceWindowRequest(*types.RegisterTaskWithMaintenanceWindowInput) ssm.RegisterTaskWithMaintenanceWindowRequest
 
-	RemoveTagsFromResourceRequest(*ssm.RemoveTagsFromResourceInput) ssm.RemoveTagsFromResourceRequest
+	RemoveTagsFromResourceRequest(*types.RemoveTagsFromResourceInput) ssm.RemoveTagsFromResourceRequest
 
-	ResetServiceSettingRequest(*ssm.ResetServiceSettingInput) ssm.ResetServiceSettingRequest
+	ResetServiceSettingRequest(*types.ResetServiceSettingInput) ssm.ResetServiceSettingRequest
 
-	ResumeSessionRequest(*ssm.ResumeSessionInput) ssm.ResumeSessionRequest
+	ResumeSessionRequest(*types.ResumeSessionInput) ssm.ResumeSessionRequest
 
-	SendAutomationSignalRequest(*ssm.SendAutomationSignalInput) ssm.SendAutomationSignalRequest
+	SendAutomationSignalRequest(*types.SendAutomationSignalInput) ssm.SendAutomationSignalRequest
 
-	SendCommandRequest(*ssm.SendCommandInput) ssm.SendCommandRequest
+	SendCommandRequest(*types.SendCommandInput) ssm.SendCommandRequest
 
-	StartAssociationsOnceRequest(*ssm.StartAssociationsOnceInput) ssm.StartAssociationsOnceRequest
+	StartAssociationsOnceRequest(*types.StartAssociationsOnceInput) ssm.StartAssociationsOnceRequest
 
-	StartAutomationExecutionRequest(*ssm.StartAutomationExecutionInput) ssm.StartAutomationExecutionRequest
+	StartAutomationExecutionRequest(*types.StartAutomationExecutionInput) ssm.StartAutomationExecutionRequest
 
-	StartSessionRequest(*ssm.StartSessionInput) ssm.StartSessionRequest
+	StartSessionRequest(*types.StartSessionInput) ssm.StartSessionRequest
 
-	StopAutomationExecutionRequest(*ssm.StopAutomationExecutionInput) ssm.StopAutomationExecutionRequest
+	StopAutomationExecutionRequest(*types.StopAutomationExecutionInput) ssm.StopAutomationExecutionRequest
 
-	TerminateSessionRequest(*ssm.TerminateSessionInput) ssm.TerminateSessionRequest
+	TerminateSessionRequest(*types.TerminateSessionInput) ssm.TerminateSessionRequest
 
-	UpdateAssociationRequest(*ssm.UpdateAssociationInput) ssm.UpdateAssociationRequest
+	UpdateAssociationRequest(*types.UpdateAssociationInput) ssm.UpdateAssociationRequest
 
-	UpdateAssociationStatusRequest(*ssm.UpdateAssociationStatusInput) ssm.UpdateAssociationStatusRequest
+	UpdateAssociationStatusRequest(*types.UpdateAssociationStatusInput) ssm.UpdateAssociationStatusRequest
 
-	UpdateDocumentRequest(*ssm.UpdateDocumentInput) ssm.UpdateDocumentRequest
+	UpdateDocumentRequest(*types.UpdateDocumentInput) ssm.UpdateDocumentRequest
 
-	UpdateDocumentDefaultVersionRequest(*ssm.UpdateDocumentDefaultVersionInput) ssm.UpdateDocumentDefaultVersionRequest
+	UpdateDocumentDefaultVersionRequest(*types.UpdateDocumentDefaultVersionInput) ssm.UpdateDocumentDefaultVersionRequest
 
-	UpdateMaintenanceWindowRequest(*ssm.UpdateMaintenanceWindowInput) ssm.UpdateMaintenanceWindowRequest
+	UpdateMaintenanceWindowRequest(*types.UpdateMaintenanceWindowInput) ssm.UpdateMaintenanceWindowRequest
 
-	UpdateMaintenanceWindowTargetRequest(*ssm.UpdateMaintenanceWindowTargetInput) ssm.UpdateMaintenanceWindowTargetRequest
+	UpdateMaintenanceWindowTargetRequest(*types.UpdateMaintenanceWindowTargetInput) ssm.UpdateMaintenanceWindowTargetRequest
 
-	UpdateMaintenanceWindowTaskRequest(*ssm.UpdateMaintenanceWindowTaskInput) ssm.UpdateMaintenanceWindowTaskRequest
+	UpdateMaintenanceWindowTaskRequest(*types.UpdateMaintenanceWindowTaskInput) ssm.UpdateMaintenanceWindowTaskRequest
 
-	UpdateManagedInstanceRoleRequest(*ssm.UpdateManagedInstanceRoleInput) ssm.UpdateManagedInstanceRoleRequest
+	UpdateManagedInstanceRoleRequest(*types.UpdateManagedInstanceRoleInput) ssm.UpdateManagedInstanceRoleRequest
 
-	UpdateOpsItemRequest(*ssm.UpdateOpsItemInput) ssm.UpdateOpsItemRequest
+	UpdateOpsItemRequest(*types.UpdateOpsItemInput) ssm.UpdateOpsItemRequest
 
-	UpdatePatchBaselineRequest(*ssm.UpdatePatchBaselineInput) ssm.UpdatePatchBaselineRequest
+	UpdatePatchBaselineRequest(*types.UpdatePatchBaselineInput) ssm.UpdatePatchBaselineRequest
 
-	UpdateServiceSettingRequest(*ssm.UpdateServiceSettingInput) ssm.UpdateServiceSettingRequest
+	UpdateServiceSettingRequest(*types.UpdateServiceSettingInput) ssm.UpdateServiceSettingRequest
 }
 
 var _ ClientAPI = (*ssm.Client)(nil)

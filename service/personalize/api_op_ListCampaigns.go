@@ -6,57 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/personalize/types"
 )
-
-type ListCampaignsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The maximum number of campaigns to return.
-	MaxResults *int64 `locationName:"maxResults" min:"1" type:"integer"`
-
-	// A token returned from the previous call to ListCampaigns for getting the
-	// next set of campaigns (if they exist).
-	NextToken *string `locationName:"nextToken" type:"string"`
-
-	// The Amazon Resource Name (ARN) of the solution to list the campaigns for.
-	// When a solution is not specified, all the campaigns associated with the account
-	// are listed.
-	SolutionArn *string `locationName:"solutionArn" type:"string"`
-}
-
-// String returns the string representation
-func (s ListCampaignsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListCampaignsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListCampaignsInput"}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ListCampaignsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A list of the campaigns.
-	Campaigns []CampaignSummary `locationName:"campaigns" type:"list"`
-
-	// A token for getting the next set of campaigns (if they exist).
-	NextToken *string `locationName:"nextToken" type:"string"`
-}
-
-// String returns the string representation
-func (s ListCampaignsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListCampaigns = "ListCampaigns"
 
@@ -76,7 +27,7 @@ const opListCampaigns = "ListCampaigns"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/ListCampaigns
-func (c *Client) ListCampaignsRequest(input *ListCampaignsInput) ListCampaignsRequest {
+func (c *Client) ListCampaignsRequest(input *types.ListCampaignsInput) ListCampaignsRequest {
 	op := &aws.Operation{
 		Name:       opListCampaigns,
 		HTTPMethod: "POST",
@@ -90,10 +41,10 @@ func (c *Client) ListCampaignsRequest(input *ListCampaignsInput) ListCampaignsRe
 	}
 
 	if input == nil {
-		input = &ListCampaignsInput{}
+		input = &types.ListCampaignsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListCampaignsOutput{})
+	req := c.newRequest(op, input, &types.ListCampaignsOutput{})
 	return ListCampaignsRequest{Request: req, Input: input, Copy: c.ListCampaignsRequest}
 }
 
@@ -101,8 +52,8 @@ func (c *Client) ListCampaignsRequest(input *ListCampaignsInput) ListCampaignsRe
 // ListCampaigns API operation.
 type ListCampaignsRequest struct {
 	*aws.Request
-	Input *ListCampaignsInput
-	Copy  func(*ListCampaignsInput) ListCampaignsRequest
+	Input *types.ListCampaignsInput
+	Copy  func(*types.ListCampaignsInput) ListCampaignsRequest
 }
 
 // Send marshals and sends the ListCampaigns API request.
@@ -114,7 +65,7 @@ func (r ListCampaignsRequest) Send(ctx context.Context) (*ListCampaignsResponse,
 	}
 
 	resp := &ListCampaignsResponse{
-		ListCampaignsOutput: r.Request.Data.(*ListCampaignsOutput),
+		ListCampaignsOutput: r.Request.Data.(*types.ListCampaignsOutput),
 		response:            &aws.Response{Request: r.Request},
 	}
 
@@ -144,7 +95,7 @@ func NewListCampaignsPaginator(req ListCampaignsRequest) ListCampaignsPaginator 
 	return ListCampaignsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListCampaignsInput
+				var inCpy *types.ListCampaignsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -164,14 +115,14 @@ type ListCampaignsPaginator struct {
 	aws.Pager
 }
 
-func (p *ListCampaignsPaginator) CurrentPage() *ListCampaignsOutput {
-	return p.Pager.CurrentPage().(*ListCampaignsOutput)
+func (p *ListCampaignsPaginator) CurrentPage() *types.ListCampaignsOutput {
+	return p.Pager.CurrentPage().(*types.ListCampaignsOutput)
 }
 
 // ListCampaignsResponse is the response type for the
 // ListCampaigns API operation.
 type ListCampaignsResponse struct {
-	*ListCampaignsOutput
+	*types.ListCampaignsOutput
 
 	response *aws.Response
 }

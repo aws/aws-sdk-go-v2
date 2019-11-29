@@ -6,45 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/route53domains/types"
 )
-
-type DisableDomainAutoRenewInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the domain that you want to disable automatic renewal for.
-	//
-	// DomainName is a required field
-	DomainName *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DisableDomainAutoRenewInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DisableDomainAutoRenewInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DisableDomainAutoRenewInput"}
-
-	if s.DomainName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DomainName"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DisableDomainAutoRenewOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DisableDomainAutoRenewOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDisableDomainAutoRenew = "DisableDomainAutoRenew"
 
@@ -62,7 +25,7 @@ const opDisableDomainAutoRenew = "DisableDomainAutoRenew"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/DisableDomainAutoRenew
-func (c *Client) DisableDomainAutoRenewRequest(input *DisableDomainAutoRenewInput) DisableDomainAutoRenewRequest {
+func (c *Client) DisableDomainAutoRenewRequest(input *types.DisableDomainAutoRenewInput) DisableDomainAutoRenewRequest {
 	op := &aws.Operation{
 		Name:       opDisableDomainAutoRenew,
 		HTTPMethod: "POST",
@@ -70,10 +33,10 @@ func (c *Client) DisableDomainAutoRenewRequest(input *DisableDomainAutoRenewInpu
 	}
 
 	if input == nil {
-		input = &DisableDomainAutoRenewInput{}
+		input = &types.DisableDomainAutoRenewInput{}
 	}
 
-	req := c.newRequest(op, input, &DisableDomainAutoRenewOutput{})
+	req := c.newRequest(op, input, &types.DisableDomainAutoRenewOutput{})
 	return DisableDomainAutoRenewRequest{Request: req, Input: input, Copy: c.DisableDomainAutoRenewRequest}
 }
 
@@ -81,8 +44,8 @@ func (c *Client) DisableDomainAutoRenewRequest(input *DisableDomainAutoRenewInpu
 // DisableDomainAutoRenew API operation.
 type DisableDomainAutoRenewRequest struct {
 	*aws.Request
-	Input *DisableDomainAutoRenewInput
-	Copy  func(*DisableDomainAutoRenewInput) DisableDomainAutoRenewRequest
+	Input *types.DisableDomainAutoRenewInput
+	Copy  func(*types.DisableDomainAutoRenewInput) DisableDomainAutoRenewRequest
 }
 
 // Send marshals and sends the DisableDomainAutoRenew API request.
@@ -94,7 +57,7 @@ func (r DisableDomainAutoRenewRequest) Send(ctx context.Context) (*DisableDomain
 	}
 
 	resp := &DisableDomainAutoRenewResponse{
-		DisableDomainAutoRenewOutput: r.Request.Data.(*DisableDomainAutoRenewOutput),
+		DisableDomainAutoRenewOutput: r.Request.Data.(*types.DisableDomainAutoRenewOutput),
 		response:                     &aws.Response{Request: r.Request},
 	}
 
@@ -104,7 +67,7 @@ func (r DisableDomainAutoRenewRequest) Send(ctx context.Context) (*DisableDomain
 // DisableDomainAutoRenewResponse is the response type for the
 // DisableDomainAutoRenew API operation.
 type DisableDomainAutoRenewResponse struct {
-	*DisableDomainAutoRenewOutput
+	*types.DisableDomainAutoRenewOutput
 
 	response *aws.Response
 }

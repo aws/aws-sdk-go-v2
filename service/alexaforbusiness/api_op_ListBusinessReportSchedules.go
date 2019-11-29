@@ -6,54 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/alexaforbusiness/types"
 )
-
-type ListBusinessReportSchedulesInput struct {
-	_ struct{} `type:"structure"`
-
-	// The maximum number of schedules listed in the call.
-	MaxResults *int64 `min:"1" type:"integer"`
-
-	// The token used to list the remaining schedules from the previous API call.
-	NextToken *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s ListBusinessReportSchedulesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListBusinessReportSchedulesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListBusinessReportSchedulesInput"}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-	if s.NextToken != nil && len(*s.NextToken) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ListBusinessReportSchedulesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The schedule of the reports.
-	BusinessReportSchedules []BusinessReportSchedule `type:"list"`
-
-	// The token used to list the remaining schedules from the previous API call.
-	NextToken *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s ListBusinessReportSchedulesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListBusinessReportSchedules = "ListBusinessReportSchedules"
 
@@ -70,7 +24,7 @@ const opListBusinessReportSchedules = "ListBusinessReportSchedules"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/ListBusinessReportSchedules
-func (c *Client) ListBusinessReportSchedulesRequest(input *ListBusinessReportSchedulesInput) ListBusinessReportSchedulesRequest {
+func (c *Client) ListBusinessReportSchedulesRequest(input *types.ListBusinessReportSchedulesInput) ListBusinessReportSchedulesRequest {
 	op := &aws.Operation{
 		Name:       opListBusinessReportSchedules,
 		HTTPMethod: "POST",
@@ -84,10 +38,10 @@ func (c *Client) ListBusinessReportSchedulesRequest(input *ListBusinessReportSch
 	}
 
 	if input == nil {
-		input = &ListBusinessReportSchedulesInput{}
+		input = &types.ListBusinessReportSchedulesInput{}
 	}
 
-	req := c.newRequest(op, input, &ListBusinessReportSchedulesOutput{})
+	req := c.newRequest(op, input, &types.ListBusinessReportSchedulesOutput{})
 	return ListBusinessReportSchedulesRequest{Request: req, Input: input, Copy: c.ListBusinessReportSchedulesRequest}
 }
 
@@ -95,8 +49,8 @@ func (c *Client) ListBusinessReportSchedulesRequest(input *ListBusinessReportSch
 // ListBusinessReportSchedules API operation.
 type ListBusinessReportSchedulesRequest struct {
 	*aws.Request
-	Input *ListBusinessReportSchedulesInput
-	Copy  func(*ListBusinessReportSchedulesInput) ListBusinessReportSchedulesRequest
+	Input *types.ListBusinessReportSchedulesInput
+	Copy  func(*types.ListBusinessReportSchedulesInput) ListBusinessReportSchedulesRequest
 }
 
 // Send marshals and sends the ListBusinessReportSchedules API request.
@@ -108,7 +62,7 @@ func (r ListBusinessReportSchedulesRequest) Send(ctx context.Context) (*ListBusi
 	}
 
 	resp := &ListBusinessReportSchedulesResponse{
-		ListBusinessReportSchedulesOutput: r.Request.Data.(*ListBusinessReportSchedulesOutput),
+		ListBusinessReportSchedulesOutput: r.Request.Data.(*types.ListBusinessReportSchedulesOutput),
 		response:                          &aws.Response{Request: r.Request},
 	}
 
@@ -138,7 +92,7 @@ func NewListBusinessReportSchedulesPaginator(req ListBusinessReportSchedulesRequ
 	return ListBusinessReportSchedulesPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListBusinessReportSchedulesInput
+				var inCpy *types.ListBusinessReportSchedulesInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -158,14 +112,14 @@ type ListBusinessReportSchedulesPaginator struct {
 	aws.Pager
 }
 
-func (p *ListBusinessReportSchedulesPaginator) CurrentPage() *ListBusinessReportSchedulesOutput {
-	return p.Pager.CurrentPage().(*ListBusinessReportSchedulesOutput)
+func (p *ListBusinessReportSchedulesPaginator) CurrentPage() *types.ListBusinessReportSchedulesOutput {
+	return p.Pager.CurrentPage().(*types.ListBusinessReportSchedulesOutput)
 }
 
 // ListBusinessReportSchedulesResponse is the response type for the
 // ListBusinessReportSchedules API operation.
 type ListBusinessReportSchedulesResponse struct {
-	*ListBusinessReportSchedulesOutput
+	*types.ListBusinessReportSchedulesOutput
 
 	response *aws.Response
 }

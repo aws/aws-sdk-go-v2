@@ -6,61 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/ec2query"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-type DeleteRouteInput struct {
-	_ struct{} `type:"structure"`
-
-	// The IPv4 CIDR range for the route. The value you specify must match the CIDR
-	// for the route exactly.
-	DestinationCidrBlock *string `locationName:"destinationCidrBlock" type:"string"`
-
-	// The IPv6 CIDR range for the route. The value you specify must match the CIDR
-	// for the route exactly.
-	DestinationIpv6CidrBlock *string `locationName:"destinationIpv6CidrBlock" type:"string"`
-
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have
-	// the required permissions, the error response is DryRunOperation. Otherwise,
-	// it is UnauthorizedOperation.
-	DryRun *bool `locationName:"dryRun" type:"boolean"`
-
-	// The ID of the route table.
-	//
-	// RouteTableId is a required field
-	RouteTableId *string `locationName:"routeTableId" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteRouteInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteRouteInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteRouteInput"}
-
-	if s.RouteTableId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("RouteTableId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteRouteOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteRouteOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteRoute = "DeleteRoute"
 
@@ -77,7 +26,7 @@ const opDeleteRoute = "DeleteRoute"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteRoute
-func (c *Client) DeleteRouteRequest(input *DeleteRouteInput) DeleteRouteRequest {
+func (c *Client) DeleteRouteRequest(input *types.DeleteRouteInput) DeleteRouteRequest {
 	op := &aws.Operation{
 		Name:       opDeleteRoute,
 		HTTPMethod: "POST",
@@ -85,10 +34,10 @@ func (c *Client) DeleteRouteRequest(input *DeleteRouteInput) DeleteRouteRequest 
 	}
 
 	if input == nil {
-		input = &DeleteRouteInput{}
+		input = &types.DeleteRouteInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteRouteOutput{})
+	req := c.newRequest(op, input, &types.DeleteRouteOutput{})
 	req.Handlers.Unmarshal.Remove(ec2query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return DeleteRouteRequest{Request: req, Input: input, Copy: c.DeleteRouteRequest}
@@ -98,8 +47,8 @@ func (c *Client) DeleteRouteRequest(input *DeleteRouteInput) DeleteRouteRequest 
 // DeleteRoute API operation.
 type DeleteRouteRequest struct {
 	*aws.Request
-	Input *DeleteRouteInput
-	Copy  func(*DeleteRouteInput) DeleteRouteRequest
+	Input *types.DeleteRouteInput
+	Copy  func(*types.DeleteRouteInput) DeleteRouteRequest
 }
 
 // Send marshals and sends the DeleteRoute API request.
@@ -111,7 +60,7 @@ func (r DeleteRouteRequest) Send(ctx context.Context) (*DeleteRouteResponse, err
 	}
 
 	resp := &DeleteRouteResponse{
-		DeleteRouteOutput: r.Request.Data.(*DeleteRouteOutput),
+		DeleteRouteOutput: r.Request.Data.(*types.DeleteRouteOutput),
 		response:          &aws.Response{Request: r.Request},
 	}
 
@@ -121,7 +70,7 @@ func (r DeleteRouteRequest) Send(ctx context.Context) (*DeleteRouteResponse, err
 // DeleteRouteResponse is the response type for the
 // DeleteRoute API operation.
 type DeleteRouteResponse struct {
-	*DeleteRouteOutput
+	*types.DeleteRouteOutput
 
 	response *aws.Response
 }

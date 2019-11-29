@@ -6,54 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-type DisableVpcClassicLinkInput struct {
-	_ struct{} `type:"structure"`
-
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have
-	// the required permissions, the error response is DryRunOperation. Otherwise,
-	// it is UnauthorizedOperation.
-	DryRun *bool `locationName:"dryRun" type:"boolean"`
-
-	// The ID of the VPC.
-	//
-	// VpcId is a required field
-	VpcId *string `locationName:"vpcId" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DisableVpcClassicLinkInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DisableVpcClassicLinkInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DisableVpcClassicLinkInput"}
-
-	if s.VpcId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("VpcId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DisableVpcClassicLinkOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Returns true if the request succeeds; otherwise, it returns an error.
-	Return *bool `locationName:"return" type:"boolean"`
-}
-
-// String returns the string representation
-func (s DisableVpcClassicLinkOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDisableVpcClassicLink = "DisableVpcClassicLink"
 
@@ -71,7 +25,7 @@ const opDisableVpcClassicLink = "DisableVpcClassicLink"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DisableVpcClassicLink
-func (c *Client) DisableVpcClassicLinkRequest(input *DisableVpcClassicLinkInput) DisableVpcClassicLinkRequest {
+func (c *Client) DisableVpcClassicLinkRequest(input *types.DisableVpcClassicLinkInput) DisableVpcClassicLinkRequest {
 	op := &aws.Operation{
 		Name:       opDisableVpcClassicLink,
 		HTTPMethod: "POST",
@@ -79,10 +33,10 @@ func (c *Client) DisableVpcClassicLinkRequest(input *DisableVpcClassicLinkInput)
 	}
 
 	if input == nil {
-		input = &DisableVpcClassicLinkInput{}
+		input = &types.DisableVpcClassicLinkInput{}
 	}
 
-	req := c.newRequest(op, input, &DisableVpcClassicLinkOutput{})
+	req := c.newRequest(op, input, &types.DisableVpcClassicLinkOutput{})
 	return DisableVpcClassicLinkRequest{Request: req, Input: input, Copy: c.DisableVpcClassicLinkRequest}
 }
 
@@ -90,8 +44,8 @@ func (c *Client) DisableVpcClassicLinkRequest(input *DisableVpcClassicLinkInput)
 // DisableVpcClassicLink API operation.
 type DisableVpcClassicLinkRequest struct {
 	*aws.Request
-	Input *DisableVpcClassicLinkInput
-	Copy  func(*DisableVpcClassicLinkInput) DisableVpcClassicLinkRequest
+	Input *types.DisableVpcClassicLinkInput
+	Copy  func(*types.DisableVpcClassicLinkInput) DisableVpcClassicLinkRequest
 }
 
 // Send marshals and sends the DisableVpcClassicLink API request.
@@ -103,7 +57,7 @@ func (r DisableVpcClassicLinkRequest) Send(ctx context.Context) (*DisableVpcClas
 	}
 
 	resp := &DisableVpcClassicLinkResponse{
-		DisableVpcClassicLinkOutput: r.Request.Data.(*DisableVpcClassicLinkOutput),
+		DisableVpcClassicLinkOutput: r.Request.Data.(*types.DisableVpcClassicLinkOutput),
 		response:                    &aws.Response{Request: r.Request},
 	}
 
@@ -113,7 +67,7 @@ func (r DisableVpcClassicLinkRequest) Send(ctx context.Context) (*DisableVpcClas
 // DisableVpcClassicLinkResponse is the response type for the
 // DisableVpcClassicLink API operation.
 type DisableVpcClassicLinkResponse struct {
-	*DisableVpcClassicLinkOutput
+	*types.DisableVpcClassicLinkOutput
 
 	response *aws.Response
 }

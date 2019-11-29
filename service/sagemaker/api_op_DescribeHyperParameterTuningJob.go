@@ -4,120 +4,10 @@ package sagemaker
 
 import (
 	"context"
-	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
 )
-
-type DescribeHyperParameterTuningJobInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the tuning job to describe.
-	//
-	// HyperParameterTuningJobName is a required field
-	HyperParameterTuningJobName *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeHyperParameterTuningJobInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeHyperParameterTuningJobInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeHyperParameterTuningJobInput"}
-
-	if s.HyperParameterTuningJobName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("HyperParameterTuningJobName"))
-	}
-	if s.HyperParameterTuningJobName != nil && len(*s.HyperParameterTuningJobName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("HyperParameterTuningJobName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribeHyperParameterTuningJobOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A TrainingJobSummary object that describes the training job that completed
-	// with the best current HyperParameterTuningJobObjective.
-	BestTrainingJob *HyperParameterTrainingJobSummary `type:"structure"`
-
-	// The date and time that the tuning job started.
-	//
-	// CreationTime is a required field
-	CreationTime *time.Time `type:"timestamp" required:"true"`
-
-	// If the tuning job failed, the reason it failed.
-	FailureReason *string `type:"string"`
-
-	// The date and time that the tuning job ended.
-	HyperParameterTuningEndTime *time.Time `type:"timestamp"`
-
-	// The Amazon Resource Name (ARN) of the tuning job.
-	//
-	// HyperParameterTuningJobArn is a required field
-	HyperParameterTuningJobArn *string `type:"string" required:"true"`
-
-	// The HyperParameterTuningJobConfig object that specifies the configuration
-	// of the tuning job.
-	//
-	// HyperParameterTuningJobConfig is a required field
-	HyperParameterTuningJobConfig *HyperParameterTuningJobConfig `type:"structure" required:"true"`
-
-	// The name of the tuning job.
-	//
-	// HyperParameterTuningJobName is a required field
-	HyperParameterTuningJobName *string `min:"1" type:"string" required:"true"`
-
-	// The status of the tuning job: InProgress, Completed, Failed, Stopping, or
-	// Stopped.
-	//
-	// HyperParameterTuningJobStatus is a required field
-	HyperParameterTuningJobStatus HyperParameterTuningJobStatus `type:"string" required:"true" enum:"true"`
-
-	// The date and time that the status of the tuning job was modified.
-	LastModifiedTime *time.Time `type:"timestamp"`
-
-	// The ObjectiveStatusCounters object that specifies the number of training
-	// jobs, categorized by the status of their final objective metric, that this
-	// tuning job launched.
-	//
-	// ObjectiveStatusCounters is a required field
-	ObjectiveStatusCounters *ObjectiveStatusCounters `type:"structure" required:"true"`
-
-	// If the hyperparameter tuning job is an warm start tuning job with a WarmStartType
-	// of IDENTICAL_DATA_AND_ALGORITHM, this is the TrainingJobSummary for the training
-	// job with the best objective metric value of all training jobs launched by
-	// this tuning job and all parent jobs specified for the warm start tuning job.
-	OverallBestTrainingJob *HyperParameterTrainingJobSummary `type:"structure"`
-
-	// The HyperParameterTrainingJobDefinition object that specifies the definition
-	// of the training jobs that this tuning job launches.
-	TrainingJobDefinition *HyperParameterTrainingJobDefinition `type:"structure"`
-
-	// The TrainingJobStatusCounters object that specifies the number of training
-	// jobs, categorized by status, that this tuning job launched.
-	//
-	// TrainingJobStatusCounters is a required field
-	TrainingJobStatusCounters *TrainingJobStatusCounters `type:"structure" required:"true"`
-
-	// The configuration for starting the hyperparameter parameter tuning job using
-	// one or more previous tuning jobs as a starting point. The results of previous
-	// tuning jobs are used to inform which combinations of hyperparameters to search
-	// over in the new tuning job.
-	WarmStartConfig *HyperParameterTuningJobWarmStartConfig `type:"structure"`
-}
-
-// String returns the string representation
-func (s DescribeHyperParameterTuningJobOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeHyperParameterTuningJob = "DescribeHyperParameterTuningJob"
 
@@ -134,7 +24,7 @@ const opDescribeHyperParameterTuningJob = "DescribeHyperParameterTuningJob"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeHyperParameterTuningJob
-func (c *Client) DescribeHyperParameterTuningJobRequest(input *DescribeHyperParameterTuningJobInput) DescribeHyperParameterTuningJobRequest {
+func (c *Client) DescribeHyperParameterTuningJobRequest(input *types.DescribeHyperParameterTuningJobInput) DescribeHyperParameterTuningJobRequest {
 	op := &aws.Operation{
 		Name:       opDescribeHyperParameterTuningJob,
 		HTTPMethod: "POST",
@@ -142,10 +32,10 @@ func (c *Client) DescribeHyperParameterTuningJobRequest(input *DescribeHyperPara
 	}
 
 	if input == nil {
-		input = &DescribeHyperParameterTuningJobInput{}
+		input = &types.DescribeHyperParameterTuningJobInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeHyperParameterTuningJobOutput{})
+	req := c.newRequest(op, input, &types.DescribeHyperParameterTuningJobOutput{})
 	return DescribeHyperParameterTuningJobRequest{Request: req, Input: input, Copy: c.DescribeHyperParameterTuningJobRequest}
 }
 
@@ -153,8 +43,8 @@ func (c *Client) DescribeHyperParameterTuningJobRequest(input *DescribeHyperPara
 // DescribeHyperParameterTuningJob API operation.
 type DescribeHyperParameterTuningJobRequest struct {
 	*aws.Request
-	Input *DescribeHyperParameterTuningJobInput
-	Copy  func(*DescribeHyperParameterTuningJobInput) DescribeHyperParameterTuningJobRequest
+	Input *types.DescribeHyperParameterTuningJobInput
+	Copy  func(*types.DescribeHyperParameterTuningJobInput) DescribeHyperParameterTuningJobRequest
 }
 
 // Send marshals and sends the DescribeHyperParameterTuningJob API request.
@@ -166,7 +56,7 @@ func (r DescribeHyperParameterTuningJobRequest) Send(ctx context.Context) (*Desc
 	}
 
 	resp := &DescribeHyperParameterTuningJobResponse{
-		DescribeHyperParameterTuningJobOutput: r.Request.Data.(*DescribeHyperParameterTuningJobOutput),
+		DescribeHyperParameterTuningJobOutput: r.Request.Data.(*types.DescribeHyperParameterTuningJobOutput),
 		response:                              &aws.Response{Request: r.Request},
 	}
 
@@ -176,7 +66,7 @@ func (r DescribeHyperParameterTuningJobRequest) Send(ctx context.Context) (*Desc
 // DescribeHyperParameterTuningJobResponse is the response type for the
 // DescribeHyperParameterTuningJob API operation.
 type DescribeHyperParameterTuningJobResponse struct {
-	*DescribeHyperParameterTuningJobOutput
+	*types.DescribeHyperParameterTuningJobOutput
 
 	response *aws.Response
 }

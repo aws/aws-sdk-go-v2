@@ -6,112 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/qldbsession/types"
 )
-
-type SendCommandInput struct {
-	_ struct{} `type:"structure"`
-
-	// Command to abort the current transaction.
-	AbortTransaction *AbortTransactionRequest `type:"structure"`
-
-	// Command to commit the specified transaction.
-	CommitTransaction *CommitTransactionRequest `type:"structure"`
-
-	// Command to end the current session.
-	EndSession *EndSessionRequest `type:"structure"`
-
-	// Command to execute a statement in the specified transaction.
-	ExecuteStatement *ExecuteStatementRequest `type:"structure"`
-
-	// Command to fetch a page.
-	FetchPage *FetchPageRequest `type:"structure"`
-
-	// Specifies the session token for the current command. A session token is constant
-	// throughout the life of the session.
-	//
-	// To obtain a session token, run the StartSession command. This SessionToken
-	// is required for every subsequent command that is issued during the current
-	// session.
-	SessionToken *string `min:"4" type:"string"`
-
-	// Command to start a new session. A session token is obtained as part of the
-	// response.
-	StartSession *StartSessionRequest `type:"structure"`
-
-	// Command to start a new transaction.
-	StartTransaction *StartTransactionRequest `type:"structure"`
-}
-
-// String returns the string representation
-func (s SendCommandInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *SendCommandInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "SendCommandInput"}
-	if s.SessionToken != nil && len(*s.SessionToken) < 4 {
-		invalidParams.Add(aws.NewErrParamMinLen("SessionToken", 4))
-	}
-	if s.CommitTransaction != nil {
-		if err := s.CommitTransaction.Validate(); err != nil {
-			invalidParams.AddNested("CommitTransaction", err.(aws.ErrInvalidParams))
-		}
-	}
-	if s.ExecuteStatement != nil {
-		if err := s.ExecuteStatement.Validate(); err != nil {
-			invalidParams.AddNested("ExecuteStatement", err.(aws.ErrInvalidParams))
-		}
-	}
-	if s.FetchPage != nil {
-		if err := s.FetchPage.Validate(); err != nil {
-			invalidParams.AddNested("FetchPage", err.(aws.ErrInvalidParams))
-		}
-	}
-	if s.StartSession != nil {
-		if err := s.StartSession.Validate(); err != nil {
-			invalidParams.AddNested("StartSession", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type SendCommandOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Contains the details of the aborted transaction.
-	AbortTransaction *AbortTransactionResult `type:"structure"`
-
-	// Contains the details of the committed transaction.
-	CommitTransaction *CommitTransactionResult `type:"structure"`
-
-	// Contains the details of the ended session.
-	EndSession *EndSessionResult `type:"structure"`
-
-	// Contains the details of the executed statement.
-	ExecuteStatement *ExecuteStatementResult `type:"structure"`
-
-	// Contains the details of the fetched page.
-	FetchPage *FetchPageResult `type:"structure"`
-
-	// Contains the details of the started session that includes a session token.
-	// This SessionToken is required for every subsequent command that is issued
-	// during the current session.
-	StartSession *StartSessionResult `type:"structure"`
-
-	// Contains the details of the started transaction.
-	StartTransaction *StartTransactionResult `type:"structure"`
-}
-
-// String returns the string representation
-func (s SendCommandOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opSendCommand = "SendCommand"
 
@@ -128,7 +24,7 @@ const opSendCommand = "SendCommand"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/qldb-session-2019-07-11/SendCommand
-func (c *Client) SendCommandRequest(input *SendCommandInput) SendCommandRequest {
+func (c *Client) SendCommandRequest(input *types.SendCommandInput) SendCommandRequest {
 	op := &aws.Operation{
 		Name:       opSendCommand,
 		HTTPMethod: "POST",
@@ -136,10 +32,10 @@ func (c *Client) SendCommandRequest(input *SendCommandInput) SendCommandRequest 
 	}
 
 	if input == nil {
-		input = &SendCommandInput{}
+		input = &types.SendCommandInput{}
 	}
 
-	req := c.newRequest(op, input, &SendCommandOutput{})
+	req := c.newRequest(op, input, &types.SendCommandOutput{})
 	return SendCommandRequest{Request: req, Input: input, Copy: c.SendCommandRequest}
 }
 
@@ -147,8 +43,8 @@ func (c *Client) SendCommandRequest(input *SendCommandInput) SendCommandRequest 
 // SendCommand API operation.
 type SendCommandRequest struct {
 	*aws.Request
-	Input *SendCommandInput
-	Copy  func(*SendCommandInput) SendCommandRequest
+	Input *types.SendCommandInput
+	Copy  func(*types.SendCommandInput) SendCommandRequest
 }
 
 // Send marshals and sends the SendCommand API request.
@@ -160,7 +56,7 @@ func (r SendCommandRequest) Send(ctx context.Context) (*SendCommandResponse, err
 	}
 
 	resp := &SendCommandResponse{
-		SendCommandOutput: r.Request.Data.(*SendCommandOutput),
+		SendCommandOutput: r.Request.Data.(*types.SendCommandOutput),
 		response:          &aws.Response{Request: r.Request},
 	}
 
@@ -170,7 +66,7 @@ func (r SendCommandRequest) Send(ctx context.Context) (*SendCommandResponse, err
 // SendCommandResponse is the response type for the
 // SendCommand API operation.
 type SendCommandResponse struct {
-	*SendCommandOutput
+	*types.SendCommandOutput
 
 	response *aws.Response
 }

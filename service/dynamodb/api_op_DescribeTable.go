@@ -6,53 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/dynamodb/types"
 )
-
-// Represents the input of a DescribeTable operation.
-type DescribeTableInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the table to describe.
-	//
-	// TableName is a required field
-	TableName *string `min:"3" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeTableInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeTableInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeTableInput"}
-
-	if s.TableName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("TableName"))
-	}
-	if s.TableName != nil && len(*s.TableName) < 3 {
-		invalidParams.Add(aws.NewErrParamMinLen("TableName", 3))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Represents the output of a DescribeTable operation.
-type DescribeTableOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The properties of the table.
-	Table *TableDescription `type:"structure"`
-}
-
-// String returns the string representation
-func (s DescribeTableOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeTable = "DescribeTable"
 
@@ -77,7 +32,7 @@ const opDescribeTable = "DescribeTable"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/DescribeTable
-func (c *Client) DescribeTableRequest(input *DescribeTableInput) DescribeTableRequest {
+func (c *Client) DescribeTableRequest(input *types.DescribeTableInput) DescribeTableRequest {
 	op := &aws.Operation{
 		Name:       opDescribeTable,
 		HTTPMethod: "POST",
@@ -85,10 +40,10 @@ func (c *Client) DescribeTableRequest(input *DescribeTableInput) DescribeTableRe
 	}
 
 	if input == nil {
-		input = &DescribeTableInput{}
+		input = &types.DescribeTableInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeTableOutput{})
+	req := c.newRequest(op, input, &types.DescribeTableOutput{})
 	return DescribeTableRequest{Request: req, Input: input, Copy: c.DescribeTableRequest}
 }
 
@@ -96,8 +51,8 @@ func (c *Client) DescribeTableRequest(input *DescribeTableInput) DescribeTableRe
 // DescribeTable API operation.
 type DescribeTableRequest struct {
 	*aws.Request
-	Input *DescribeTableInput
-	Copy  func(*DescribeTableInput) DescribeTableRequest
+	Input *types.DescribeTableInput
+	Copy  func(*types.DescribeTableInput) DescribeTableRequest
 }
 
 // Send marshals and sends the DescribeTable API request.
@@ -109,7 +64,7 @@ func (r DescribeTableRequest) Send(ctx context.Context) (*DescribeTableResponse,
 	}
 
 	resp := &DescribeTableResponse{
-		DescribeTableOutput: r.Request.Data.(*DescribeTableOutput),
+		DescribeTableOutput: r.Request.Data.(*types.DescribeTableOutput),
 		response:            &aws.Response{Request: r.Request},
 	}
 
@@ -119,7 +74,7 @@ func (r DescribeTableRequest) Send(ctx context.Context) (*DescribeTableResponse,
 // DescribeTableResponse is the response type for the
 // DescribeTable API operation.
 type DescribeTableResponse struct {
-	*DescribeTableOutput
+	*types.DescribeTableOutput
 
 	response *aws.Response
 }

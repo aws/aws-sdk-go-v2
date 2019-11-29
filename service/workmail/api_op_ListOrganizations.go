@@ -6,56 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/workmail/types"
 )
-
-type ListOrganizationsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The maximum number of results to return in a single call.
-	MaxResults *int64 `min:"1" type:"integer"`
-
-	// The token to use to retrieve the next page of results. The first call does
-	// not contain any tokens.
-	NextToken *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s ListOrganizationsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListOrganizationsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListOrganizationsInput"}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-	if s.NextToken != nil && len(*s.NextToken) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ListOrganizationsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The token to use to retrieve the next page of results. The value is "null"
-	// when there are no more results to return.
-	NextToken *string `min:"1" type:"string"`
-
-	// The overview of owned organizations presented as a list of organization summaries.
-	OrganizationSummaries []OrganizationSummary `type:"list"`
-}
-
-// String returns the string representation
-func (s ListOrganizationsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListOrganizations = "ListOrganizations"
 
@@ -72,7 +24,7 @@ const opListOrganizations = "ListOrganizations"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/ListOrganizations
-func (c *Client) ListOrganizationsRequest(input *ListOrganizationsInput) ListOrganizationsRequest {
+func (c *Client) ListOrganizationsRequest(input *types.ListOrganizationsInput) ListOrganizationsRequest {
 	op := &aws.Operation{
 		Name:       opListOrganizations,
 		HTTPMethod: "POST",
@@ -86,10 +38,10 @@ func (c *Client) ListOrganizationsRequest(input *ListOrganizationsInput) ListOrg
 	}
 
 	if input == nil {
-		input = &ListOrganizationsInput{}
+		input = &types.ListOrganizationsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListOrganizationsOutput{})
+	req := c.newRequest(op, input, &types.ListOrganizationsOutput{})
 	return ListOrganizationsRequest{Request: req, Input: input, Copy: c.ListOrganizationsRequest}
 }
 
@@ -97,8 +49,8 @@ func (c *Client) ListOrganizationsRequest(input *ListOrganizationsInput) ListOrg
 // ListOrganizations API operation.
 type ListOrganizationsRequest struct {
 	*aws.Request
-	Input *ListOrganizationsInput
-	Copy  func(*ListOrganizationsInput) ListOrganizationsRequest
+	Input *types.ListOrganizationsInput
+	Copy  func(*types.ListOrganizationsInput) ListOrganizationsRequest
 }
 
 // Send marshals and sends the ListOrganizations API request.
@@ -110,7 +62,7 @@ func (r ListOrganizationsRequest) Send(ctx context.Context) (*ListOrganizationsR
 	}
 
 	resp := &ListOrganizationsResponse{
-		ListOrganizationsOutput: r.Request.Data.(*ListOrganizationsOutput),
+		ListOrganizationsOutput: r.Request.Data.(*types.ListOrganizationsOutput),
 		response:                &aws.Response{Request: r.Request},
 	}
 
@@ -140,7 +92,7 @@ func NewListOrganizationsPaginator(req ListOrganizationsRequest) ListOrganizatio
 	return ListOrganizationsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListOrganizationsInput
+				var inCpy *types.ListOrganizationsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -160,14 +112,14 @@ type ListOrganizationsPaginator struct {
 	aws.Pager
 }
 
-func (p *ListOrganizationsPaginator) CurrentPage() *ListOrganizationsOutput {
-	return p.Pager.CurrentPage().(*ListOrganizationsOutput)
+func (p *ListOrganizationsPaginator) CurrentPage() *types.ListOrganizationsOutput {
+	return p.Pager.CurrentPage().(*types.ListOrganizationsOutput)
 }
 
 // ListOrganizationsResponse is the response type for the
 // ListOrganizations API operation.
 type ListOrganizationsResponse struct {
-	*ListOrganizationsOutput
+	*types.ListOrganizationsOutput
 
 	response *aws.Response
 }

@@ -4,77 +4,10 @@ package sagemaker
 
 import (
 	"context"
-	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
 )
-
-type DescribeCodeRepositoryInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the Git repository to describe.
-	//
-	// CodeRepositoryName is a required field
-	CodeRepositoryName *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeCodeRepositoryInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeCodeRepositoryInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeCodeRepositoryInput"}
-
-	if s.CodeRepositoryName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("CodeRepositoryName"))
-	}
-	if s.CodeRepositoryName != nil && len(*s.CodeRepositoryName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("CodeRepositoryName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribeCodeRepositoryOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the Git repository.
-	//
-	// CodeRepositoryArn is a required field
-	CodeRepositoryArn *string `min:"1" type:"string" required:"true"`
-
-	// The name of the Git repository.
-	//
-	// CodeRepositoryName is a required field
-	CodeRepositoryName *string `min:"1" type:"string" required:"true"`
-
-	// The date and time that the repository was created.
-	//
-	// CreationTime is a required field
-	CreationTime *time.Time `type:"timestamp" required:"true"`
-
-	// Configuration details about the repository, including the URL where the repository
-	// is located, the default branch, and the Amazon Resource Name (ARN) of the
-	// AWS Secrets Manager secret that contains the credentials used to access the
-	// repository.
-	GitConfig *GitConfig `type:"structure"`
-
-	// The date and time that the repository was last changed.
-	//
-	// LastModifiedTime is a required field
-	LastModifiedTime *time.Time `type:"timestamp" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeCodeRepositoryOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeCodeRepository = "DescribeCodeRepository"
 
@@ -91,7 +24,7 @@ const opDescribeCodeRepository = "DescribeCodeRepository"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeCodeRepository
-func (c *Client) DescribeCodeRepositoryRequest(input *DescribeCodeRepositoryInput) DescribeCodeRepositoryRequest {
+func (c *Client) DescribeCodeRepositoryRequest(input *types.DescribeCodeRepositoryInput) DescribeCodeRepositoryRequest {
 	op := &aws.Operation{
 		Name:       opDescribeCodeRepository,
 		HTTPMethod: "POST",
@@ -99,10 +32,10 @@ func (c *Client) DescribeCodeRepositoryRequest(input *DescribeCodeRepositoryInpu
 	}
 
 	if input == nil {
-		input = &DescribeCodeRepositoryInput{}
+		input = &types.DescribeCodeRepositoryInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeCodeRepositoryOutput{})
+	req := c.newRequest(op, input, &types.DescribeCodeRepositoryOutput{})
 	return DescribeCodeRepositoryRequest{Request: req, Input: input, Copy: c.DescribeCodeRepositoryRequest}
 }
 
@@ -110,8 +43,8 @@ func (c *Client) DescribeCodeRepositoryRequest(input *DescribeCodeRepositoryInpu
 // DescribeCodeRepository API operation.
 type DescribeCodeRepositoryRequest struct {
 	*aws.Request
-	Input *DescribeCodeRepositoryInput
-	Copy  func(*DescribeCodeRepositoryInput) DescribeCodeRepositoryRequest
+	Input *types.DescribeCodeRepositoryInput
+	Copy  func(*types.DescribeCodeRepositoryInput) DescribeCodeRepositoryRequest
 }
 
 // Send marshals and sends the DescribeCodeRepository API request.
@@ -123,7 +56,7 @@ func (r DescribeCodeRepositoryRequest) Send(ctx context.Context) (*DescribeCodeR
 	}
 
 	resp := &DescribeCodeRepositoryResponse{
-		DescribeCodeRepositoryOutput: r.Request.Data.(*DescribeCodeRepositoryOutput),
+		DescribeCodeRepositoryOutput: r.Request.Data.(*types.DescribeCodeRepositoryOutput),
 		response:                     &aws.Response{Request: r.Request},
 	}
 
@@ -133,7 +66,7 @@ func (r DescribeCodeRepositoryRequest) Send(ctx context.Context) (*DescribeCodeR
 // DescribeCodeRepositoryResponse is the response type for the
 // DescribeCodeRepository API operation.
 type DescribeCodeRepositoryResponse struct {
-	*DescribeCodeRepositoryOutput
+	*types.DescribeCodeRepositoryOutput
 
 	response *aws.Response
 }

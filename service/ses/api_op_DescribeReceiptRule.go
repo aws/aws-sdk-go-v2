@@ -6,63 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ses/types"
 )
-
-// Represents a request to return the details of a receipt rule. You use receipt
-// rules to receive email with Amazon SES. For more information, see the Amazon
-// SES Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-concepts.html).
-type DescribeReceiptRuleInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the receipt rule.
-	//
-	// RuleName is a required field
-	RuleName *string `type:"string" required:"true"`
-
-	// The name of the receipt rule set that the receipt rule belongs to.
-	//
-	// RuleSetName is a required field
-	RuleSetName *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeReceiptRuleInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeReceiptRuleInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeReceiptRuleInput"}
-
-	if s.RuleName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("RuleName"))
-	}
-
-	if s.RuleSetName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("RuleSetName"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Represents the details of a receipt rule.
-type DescribeReceiptRuleOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A data structure that contains the specified receipt rule's name, actions,
-	// recipients, domains, enabled status, scan status, and Transport Layer Security
-	// (TLS) policy.
-	Rule *ReceiptRule `type:"structure"`
-}
-
-// String returns the string representation
-func (s DescribeReceiptRuleOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeReceiptRule = "DescribeReceiptRule"
 
@@ -84,7 +29,7 @@ const opDescribeReceiptRule = "DescribeReceiptRule"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/DescribeReceiptRule
-func (c *Client) DescribeReceiptRuleRequest(input *DescribeReceiptRuleInput) DescribeReceiptRuleRequest {
+func (c *Client) DescribeReceiptRuleRequest(input *types.DescribeReceiptRuleInput) DescribeReceiptRuleRequest {
 	op := &aws.Operation{
 		Name:       opDescribeReceiptRule,
 		HTTPMethod: "POST",
@@ -92,10 +37,10 @@ func (c *Client) DescribeReceiptRuleRequest(input *DescribeReceiptRuleInput) Des
 	}
 
 	if input == nil {
-		input = &DescribeReceiptRuleInput{}
+		input = &types.DescribeReceiptRuleInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeReceiptRuleOutput{})
+	req := c.newRequest(op, input, &types.DescribeReceiptRuleOutput{})
 	return DescribeReceiptRuleRequest{Request: req, Input: input, Copy: c.DescribeReceiptRuleRequest}
 }
 
@@ -103,8 +48,8 @@ func (c *Client) DescribeReceiptRuleRequest(input *DescribeReceiptRuleInput) Des
 // DescribeReceiptRule API operation.
 type DescribeReceiptRuleRequest struct {
 	*aws.Request
-	Input *DescribeReceiptRuleInput
-	Copy  func(*DescribeReceiptRuleInput) DescribeReceiptRuleRequest
+	Input *types.DescribeReceiptRuleInput
+	Copy  func(*types.DescribeReceiptRuleInput) DescribeReceiptRuleRequest
 }
 
 // Send marshals and sends the DescribeReceiptRule API request.
@@ -116,7 +61,7 @@ func (r DescribeReceiptRuleRequest) Send(ctx context.Context) (*DescribeReceiptR
 	}
 
 	resp := &DescribeReceiptRuleResponse{
-		DescribeReceiptRuleOutput: r.Request.Data.(*DescribeReceiptRuleOutput),
+		DescribeReceiptRuleOutput: r.Request.Data.(*types.DescribeReceiptRuleOutput),
 		response:                  &aws.Response{Request: r.Request},
 	}
 
@@ -126,7 +71,7 @@ func (r DescribeReceiptRuleRequest) Send(ctx context.Context) (*DescribeReceiptR
 // DescribeReceiptRuleResponse is the response type for the
 // DescribeReceiptRule API operation.
 type DescribeReceiptRuleResponse struct {
-	*DescribeReceiptRuleOutput
+	*types.DescribeReceiptRuleOutput
 
 	response *aws.Response
 }

@@ -4,73 +4,10 @@ package ec2
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-// Contains the parameters for PurchaseScheduledInstances.
-type PurchaseScheduledInstancesInput struct {
-	_ struct{} `type:"structure"`
-
-	// Unique, case-sensitive identifier that ensures the idempotency of the request.
-	// For more information, see Ensuring Idempotency (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html).
-	ClientToken *string `type:"string" idempotencyToken:"true"`
-
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have
-	// the required permissions, the error response is DryRunOperation. Otherwise,
-	// it is UnauthorizedOperation.
-	DryRun *bool `type:"boolean"`
-
-	// The purchase requests.
-	//
-	// PurchaseRequests is a required field
-	PurchaseRequests []PurchaseRequest `locationName:"PurchaseRequest" locationNameList:"PurchaseRequest" min:"1" type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s PurchaseScheduledInstancesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *PurchaseScheduledInstancesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "PurchaseScheduledInstancesInput"}
-
-	if s.PurchaseRequests == nil {
-		invalidParams.Add(aws.NewErrParamRequired("PurchaseRequests"))
-	}
-	if s.PurchaseRequests != nil && len(s.PurchaseRequests) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("PurchaseRequests", 1))
-	}
-	if s.PurchaseRequests != nil {
-		for i, v := range s.PurchaseRequests {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "PurchaseRequests", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Contains the output of PurchaseScheduledInstances.
-type PurchaseScheduledInstancesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Information about the Scheduled Instances.
-	ScheduledInstanceSet []ScheduledInstance `locationName:"scheduledInstanceSet" locationNameList:"item" type:"list"`
-}
-
-// String returns the string representation
-func (s PurchaseScheduledInstancesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opPurchaseScheduledInstances = "PurchaseScheduledInstances"
 
@@ -96,7 +33,7 @@ const opPurchaseScheduledInstances = "PurchaseScheduledInstances"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/PurchaseScheduledInstances
-func (c *Client) PurchaseScheduledInstancesRequest(input *PurchaseScheduledInstancesInput) PurchaseScheduledInstancesRequest {
+func (c *Client) PurchaseScheduledInstancesRequest(input *types.PurchaseScheduledInstancesInput) PurchaseScheduledInstancesRequest {
 	op := &aws.Operation{
 		Name:       opPurchaseScheduledInstances,
 		HTTPMethod: "POST",
@@ -104,10 +41,10 @@ func (c *Client) PurchaseScheduledInstancesRequest(input *PurchaseScheduledInsta
 	}
 
 	if input == nil {
-		input = &PurchaseScheduledInstancesInput{}
+		input = &types.PurchaseScheduledInstancesInput{}
 	}
 
-	req := c.newRequest(op, input, &PurchaseScheduledInstancesOutput{})
+	req := c.newRequest(op, input, &types.PurchaseScheduledInstancesOutput{})
 	return PurchaseScheduledInstancesRequest{Request: req, Input: input, Copy: c.PurchaseScheduledInstancesRequest}
 }
 
@@ -115,8 +52,8 @@ func (c *Client) PurchaseScheduledInstancesRequest(input *PurchaseScheduledInsta
 // PurchaseScheduledInstances API operation.
 type PurchaseScheduledInstancesRequest struct {
 	*aws.Request
-	Input *PurchaseScheduledInstancesInput
-	Copy  func(*PurchaseScheduledInstancesInput) PurchaseScheduledInstancesRequest
+	Input *types.PurchaseScheduledInstancesInput
+	Copy  func(*types.PurchaseScheduledInstancesInput) PurchaseScheduledInstancesRequest
 }
 
 // Send marshals and sends the PurchaseScheduledInstances API request.
@@ -128,7 +65,7 @@ func (r PurchaseScheduledInstancesRequest) Send(ctx context.Context) (*PurchaseS
 	}
 
 	resp := &PurchaseScheduledInstancesResponse{
-		PurchaseScheduledInstancesOutput: r.Request.Data.(*PurchaseScheduledInstancesOutput),
+		PurchaseScheduledInstancesOutput: r.Request.Data.(*types.PurchaseScheduledInstancesOutput),
 		response:                         &aws.Response{Request: r.Request},
 	}
 
@@ -138,7 +75,7 @@ func (r PurchaseScheduledInstancesRequest) Send(ctx context.Context) (*PurchaseS
 // PurchaseScheduledInstancesResponse is the response type for the
 // PurchaseScheduledInstances API operation.
 type PurchaseScheduledInstancesResponse struct {
-	*PurchaseScheduledInstancesOutput
+	*types.PurchaseScheduledInstancesOutput
 
 	response *aws.Response
 }

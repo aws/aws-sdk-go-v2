@@ -6,61 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/wafregional/types"
 )
-
-type GetRateBasedRuleManagedKeysInput struct {
-	_ struct{} `type:"structure"`
-
-	// A null value and not currently used. Do not include this in your request.
-	NextMarker *string `min:"1" type:"string"`
-
-	// The RuleId of the RateBasedRule for which you want to get a list of ManagedKeys.
-	// RuleId is returned by CreateRateBasedRule and by ListRateBasedRules.
-	//
-	// RuleId is a required field
-	RuleId *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetRateBasedRuleManagedKeysInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetRateBasedRuleManagedKeysInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetRateBasedRuleManagedKeysInput"}
-	if s.NextMarker != nil && len(*s.NextMarker) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("NextMarker", 1))
-	}
-
-	if s.RuleId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("RuleId"))
-	}
-	if s.RuleId != nil && len(*s.RuleId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("RuleId", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type GetRateBasedRuleManagedKeysOutput struct {
-	_ struct{} `type:"structure"`
-
-	// An array of IP addresses that currently are blocked by the specified RateBasedRule.
-	ManagedKeys []string `type:"list"`
-
-	// A null value and not currently used.
-	NextMarker *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s GetRateBasedRuleManagedKeysOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetRateBasedRuleManagedKeys = "GetRateBasedRuleManagedKeys"
 
@@ -80,7 +27,7 @@ const opGetRateBasedRuleManagedKeys = "GetRateBasedRuleManagedKeys"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/GetRateBasedRuleManagedKeys
-func (c *Client) GetRateBasedRuleManagedKeysRequest(input *GetRateBasedRuleManagedKeysInput) GetRateBasedRuleManagedKeysRequest {
+func (c *Client) GetRateBasedRuleManagedKeysRequest(input *types.GetRateBasedRuleManagedKeysInput) GetRateBasedRuleManagedKeysRequest {
 	op := &aws.Operation{
 		Name:       opGetRateBasedRuleManagedKeys,
 		HTTPMethod: "POST",
@@ -88,10 +35,10 @@ func (c *Client) GetRateBasedRuleManagedKeysRequest(input *GetRateBasedRuleManag
 	}
 
 	if input == nil {
-		input = &GetRateBasedRuleManagedKeysInput{}
+		input = &types.GetRateBasedRuleManagedKeysInput{}
 	}
 
-	req := c.newRequest(op, input, &GetRateBasedRuleManagedKeysOutput{})
+	req := c.newRequest(op, input, &types.GetRateBasedRuleManagedKeysOutput{})
 	return GetRateBasedRuleManagedKeysRequest{Request: req, Input: input, Copy: c.GetRateBasedRuleManagedKeysRequest}
 }
 
@@ -99,8 +46,8 @@ func (c *Client) GetRateBasedRuleManagedKeysRequest(input *GetRateBasedRuleManag
 // GetRateBasedRuleManagedKeys API operation.
 type GetRateBasedRuleManagedKeysRequest struct {
 	*aws.Request
-	Input *GetRateBasedRuleManagedKeysInput
-	Copy  func(*GetRateBasedRuleManagedKeysInput) GetRateBasedRuleManagedKeysRequest
+	Input *types.GetRateBasedRuleManagedKeysInput
+	Copy  func(*types.GetRateBasedRuleManagedKeysInput) GetRateBasedRuleManagedKeysRequest
 }
 
 // Send marshals and sends the GetRateBasedRuleManagedKeys API request.
@@ -112,7 +59,7 @@ func (r GetRateBasedRuleManagedKeysRequest) Send(ctx context.Context) (*GetRateB
 	}
 
 	resp := &GetRateBasedRuleManagedKeysResponse{
-		GetRateBasedRuleManagedKeysOutput: r.Request.Data.(*GetRateBasedRuleManagedKeysOutput),
+		GetRateBasedRuleManagedKeysOutput: r.Request.Data.(*types.GetRateBasedRuleManagedKeysOutput),
 		response:                          &aws.Response{Request: r.Request},
 	}
 
@@ -122,7 +69,7 @@ func (r GetRateBasedRuleManagedKeysRequest) Send(ctx context.Context) (*GetRateB
 // GetRateBasedRuleManagedKeysResponse is the response type for the
 // GetRateBasedRuleManagedKeys API operation.
 type GetRateBasedRuleManagedKeysResponse struct {
-	*GetRateBasedRuleManagedKeysOutput
+	*types.GetRateBasedRuleManagedKeysOutput
 
 	response *aws.Response
 }

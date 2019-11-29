@@ -6,55 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/directoryservice/types"
 )
-
-// Contains the inputs for the DescribeSnapshots operation.
-type DescribeSnapshotsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The identifier of the directory for which to retrieve snapshot information.
-	DirectoryId *string `type:"string"`
-
-	// The maximum number of objects to return.
-	Limit *int64 `type:"integer"`
-
-	// The DescribeSnapshotsResult.NextToken value from a previous call to DescribeSnapshots.
-	// Pass null if this is the first call.
-	NextToken *string `type:"string"`
-
-	// A list of identifiers of the snapshots to obtain the information for. If
-	// this member is null or empty, all snapshots are returned using the Limit
-	// and NextToken members.
-	SnapshotIds []string `type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeSnapshotsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Contains the results of the DescribeSnapshots operation.
-type DescribeSnapshotsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// If not null, more results are available. Pass this value in the NextToken
-	// member of a subsequent call to DescribeSnapshots.
-	NextToken *string `type:"string"`
-
-	// The list of Snapshot objects that were retrieved.
-	//
-	// It is possible that this list contains less than the number of items specified
-	// in the Limit member of the request. This occurs if there are less than the
-	// requested number of items left to retrieve, or if the limitations of the
-	// operation have been exceeded.
-	Snapshots []Snapshot `type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeSnapshotsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeSnapshots = "DescribeSnapshots"
 
@@ -78,7 +31,7 @@ const opDescribeSnapshots = "DescribeSnapshots"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DescribeSnapshots
-func (c *Client) DescribeSnapshotsRequest(input *DescribeSnapshotsInput) DescribeSnapshotsRequest {
+func (c *Client) DescribeSnapshotsRequest(input *types.DescribeSnapshotsInput) DescribeSnapshotsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeSnapshots,
 		HTTPMethod: "POST",
@@ -86,10 +39,10 @@ func (c *Client) DescribeSnapshotsRequest(input *DescribeSnapshotsInput) Describ
 	}
 
 	if input == nil {
-		input = &DescribeSnapshotsInput{}
+		input = &types.DescribeSnapshotsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeSnapshotsOutput{})
+	req := c.newRequest(op, input, &types.DescribeSnapshotsOutput{})
 	return DescribeSnapshotsRequest{Request: req, Input: input, Copy: c.DescribeSnapshotsRequest}
 }
 
@@ -97,8 +50,8 @@ func (c *Client) DescribeSnapshotsRequest(input *DescribeSnapshotsInput) Describ
 // DescribeSnapshots API operation.
 type DescribeSnapshotsRequest struct {
 	*aws.Request
-	Input *DescribeSnapshotsInput
-	Copy  func(*DescribeSnapshotsInput) DescribeSnapshotsRequest
+	Input *types.DescribeSnapshotsInput
+	Copy  func(*types.DescribeSnapshotsInput) DescribeSnapshotsRequest
 }
 
 // Send marshals and sends the DescribeSnapshots API request.
@@ -110,7 +63,7 @@ func (r DescribeSnapshotsRequest) Send(ctx context.Context) (*DescribeSnapshotsR
 	}
 
 	resp := &DescribeSnapshotsResponse{
-		DescribeSnapshotsOutput: r.Request.Data.(*DescribeSnapshotsOutput),
+		DescribeSnapshotsOutput: r.Request.Data.(*types.DescribeSnapshotsOutput),
 		response:                &aws.Response{Request: r.Request},
 	}
 
@@ -120,7 +73,7 @@ func (r DescribeSnapshotsRequest) Send(ctx context.Context) (*DescribeSnapshotsR
 // DescribeSnapshotsResponse is the response type for the
 // DescribeSnapshots API operation.
 type DescribeSnapshotsResponse struct {
-	*DescribeSnapshotsOutput
+	*types.DescribeSnapshotsOutput
 
 	response *aws.Response
 }

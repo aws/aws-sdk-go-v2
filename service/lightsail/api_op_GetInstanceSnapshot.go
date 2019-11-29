@@ -6,49 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/lightsail/types"
 )
-
-type GetInstanceSnapshotInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the snapshot for which you are requesting information.
-	//
-	// InstanceSnapshotName is a required field
-	InstanceSnapshotName *string `locationName:"instanceSnapshotName" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetInstanceSnapshotInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetInstanceSnapshotInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetInstanceSnapshotInput"}
-
-	if s.InstanceSnapshotName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("InstanceSnapshotName"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type GetInstanceSnapshotOutput struct {
-	_ struct{} `type:"structure"`
-
-	// An array of key-value pairs containing information about the results of your
-	// get instance snapshot request.
-	InstanceSnapshot *InstanceSnapshot `locationName:"instanceSnapshot" type:"structure"`
-}
-
-// String returns the string representation
-func (s GetInstanceSnapshotOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetInstanceSnapshot = "GetInstanceSnapshot"
 
@@ -65,7 +24,7 @@ const opGetInstanceSnapshot = "GetInstanceSnapshot"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetInstanceSnapshot
-func (c *Client) GetInstanceSnapshotRequest(input *GetInstanceSnapshotInput) GetInstanceSnapshotRequest {
+func (c *Client) GetInstanceSnapshotRequest(input *types.GetInstanceSnapshotInput) GetInstanceSnapshotRequest {
 	op := &aws.Operation{
 		Name:       opGetInstanceSnapshot,
 		HTTPMethod: "POST",
@@ -73,10 +32,10 @@ func (c *Client) GetInstanceSnapshotRequest(input *GetInstanceSnapshotInput) Get
 	}
 
 	if input == nil {
-		input = &GetInstanceSnapshotInput{}
+		input = &types.GetInstanceSnapshotInput{}
 	}
 
-	req := c.newRequest(op, input, &GetInstanceSnapshotOutput{})
+	req := c.newRequest(op, input, &types.GetInstanceSnapshotOutput{})
 	return GetInstanceSnapshotRequest{Request: req, Input: input, Copy: c.GetInstanceSnapshotRequest}
 }
 
@@ -84,8 +43,8 @@ func (c *Client) GetInstanceSnapshotRequest(input *GetInstanceSnapshotInput) Get
 // GetInstanceSnapshot API operation.
 type GetInstanceSnapshotRequest struct {
 	*aws.Request
-	Input *GetInstanceSnapshotInput
-	Copy  func(*GetInstanceSnapshotInput) GetInstanceSnapshotRequest
+	Input *types.GetInstanceSnapshotInput
+	Copy  func(*types.GetInstanceSnapshotInput) GetInstanceSnapshotRequest
 }
 
 // Send marshals and sends the GetInstanceSnapshot API request.
@@ -97,7 +56,7 @@ func (r GetInstanceSnapshotRequest) Send(ctx context.Context) (*GetInstanceSnaps
 	}
 
 	resp := &GetInstanceSnapshotResponse{
-		GetInstanceSnapshotOutput: r.Request.Data.(*GetInstanceSnapshotOutput),
+		GetInstanceSnapshotOutput: r.Request.Data.(*types.GetInstanceSnapshotOutput),
 		response:                  &aws.Response{Request: r.Request},
 	}
 
@@ -107,7 +66,7 @@ func (r GetInstanceSnapshotRequest) Send(ctx context.Context) (*GetInstanceSnaps
 // GetInstanceSnapshotResponse is the response type for the
 // GetInstanceSnapshot API operation.
 type GetInstanceSnapshotResponse struct {
-	*GetInstanceSnapshotOutput
+	*types.GetInstanceSnapshotOutput
 
 	response *aws.Response
 }

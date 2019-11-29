@@ -6,107 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/iot/types"
 )
-
-// The input for the CreateCertificateFromCsr operation.
-type CreateCertificateFromCsrInput struct {
-	_ struct{} `type:"structure"`
-
-	// The certificate signing request (CSR).
-	//
-	// CertificateSigningRequest is a required field
-	CertificateSigningRequest *string `locationName:"certificateSigningRequest" min:"1" type:"string" required:"true"`
-
-	// Specifies whether the certificate is active.
-	SetAsActive *bool `location:"querystring" locationName:"setAsActive" type:"boolean"`
-}
-
-// String returns the string representation
-func (s CreateCertificateFromCsrInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateCertificateFromCsrInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateCertificateFromCsrInput"}
-
-	if s.CertificateSigningRequest == nil {
-		invalidParams.Add(aws.NewErrParamRequired("CertificateSigningRequest"))
-	}
-	if s.CertificateSigningRequest != nil && len(*s.CertificateSigningRequest) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("CertificateSigningRequest", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s CreateCertificateFromCsrInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.CertificateSigningRequest != nil {
-		v := *s.CertificateSigningRequest
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "certificateSigningRequest", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.SetAsActive != nil {
-		v := *s.SetAsActive
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "setAsActive", protocol.BoolValue(v), metadata)
-	}
-	return nil
-}
-
-// The output from the CreateCertificateFromCsr operation.
-type CreateCertificateFromCsrOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the certificate. You can use the ARN as
-	// a principal for policy operations.
-	CertificateArn *string `locationName:"certificateArn" type:"string"`
-
-	// The ID of the certificate. Certificate management operations only take a
-	// certificateId.
-	CertificateId *string `locationName:"certificateId" min:"64" type:"string"`
-
-	// The certificate data, in PEM format.
-	CertificatePem *string `locationName:"certificatePem" min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s CreateCertificateFromCsrOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s CreateCertificateFromCsrOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.CertificateArn != nil {
-		v := *s.CertificateArn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "certificateArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.CertificateId != nil {
-		v := *s.CertificateId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "certificateId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.CertificatePem != nil {
-		v := *s.CertificatePem
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "certificatePem", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opCreateCertificateFromCsr = "CreateCertificateFromCsr"
 
@@ -162,7 +63,7 @@ const opCreateCertificateFromCsr = "CreateCertificateFromCsr"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) CreateCertificateFromCsrRequest(input *CreateCertificateFromCsrInput) CreateCertificateFromCsrRequest {
+func (c *Client) CreateCertificateFromCsrRequest(input *types.CreateCertificateFromCsrInput) CreateCertificateFromCsrRequest {
 	op := &aws.Operation{
 		Name:       opCreateCertificateFromCsr,
 		HTTPMethod: "POST",
@@ -170,10 +71,10 @@ func (c *Client) CreateCertificateFromCsrRequest(input *CreateCertificateFromCsr
 	}
 
 	if input == nil {
-		input = &CreateCertificateFromCsrInput{}
+		input = &types.CreateCertificateFromCsrInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateCertificateFromCsrOutput{})
+	req := c.newRequest(op, input, &types.CreateCertificateFromCsrOutput{})
 	return CreateCertificateFromCsrRequest{Request: req, Input: input, Copy: c.CreateCertificateFromCsrRequest}
 }
 
@@ -181,8 +82,8 @@ func (c *Client) CreateCertificateFromCsrRequest(input *CreateCertificateFromCsr
 // CreateCertificateFromCsr API operation.
 type CreateCertificateFromCsrRequest struct {
 	*aws.Request
-	Input *CreateCertificateFromCsrInput
-	Copy  func(*CreateCertificateFromCsrInput) CreateCertificateFromCsrRequest
+	Input *types.CreateCertificateFromCsrInput
+	Copy  func(*types.CreateCertificateFromCsrInput) CreateCertificateFromCsrRequest
 }
 
 // Send marshals and sends the CreateCertificateFromCsr API request.
@@ -194,7 +95,7 @@ func (r CreateCertificateFromCsrRequest) Send(ctx context.Context) (*CreateCerti
 	}
 
 	resp := &CreateCertificateFromCsrResponse{
-		CreateCertificateFromCsrOutput: r.Request.Data.(*CreateCertificateFromCsrOutput),
+		CreateCertificateFromCsrOutput: r.Request.Data.(*types.CreateCertificateFromCsrOutput),
 		response:                       &aws.Response{Request: r.Request},
 	}
 
@@ -204,7 +105,7 @@ func (r CreateCertificateFromCsrRequest) Send(ctx context.Context) (*CreateCerti
 // CreateCertificateFromCsrResponse is the response type for the
 // CreateCertificateFromCsr API operation.
 type CreateCertificateFromCsrResponse struct {
-	*CreateCertificateFromCsrOutput
+	*types.CreateCertificateFromCsrOutput
 
 	response *aws.Response
 }

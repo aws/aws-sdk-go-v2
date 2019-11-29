@@ -6,49 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/dax/types"
 )
-
-type DeleteSubnetGroupInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the subnet group to delete.
-	//
-	// SubnetGroupName is a required field
-	SubnetGroupName *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteSubnetGroupInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteSubnetGroupInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteSubnetGroupInput"}
-
-	if s.SubnetGroupName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("SubnetGroupName"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteSubnetGroupOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A user-specified message for this action (i.e., a reason for deleting the
-	// subnet group).
-	DeletionMessage *string `type:"string"`
-}
-
-// String returns the string representation
-func (s DeleteSubnetGroupOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteSubnetGroup = "DeleteSubnetGroup"
 
@@ -67,7 +26,7 @@ const opDeleteSubnetGroup = "DeleteSubnetGroup"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dax-2017-04-19/DeleteSubnetGroup
-func (c *Client) DeleteSubnetGroupRequest(input *DeleteSubnetGroupInput) DeleteSubnetGroupRequest {
+func (c *Client) DeleteSubnetGroupRequest(input *types.DeleteSubnetGroupInput) DeleteSubnetGroupRequest {
 	op := &aws.Operation{
 		Name:       opDeleteSubnetGroup,
 		HTTPMethod: "POST",
@@ -75,10 +34,10 @@ func (c *Client) DeleteSubnetGroupRequest(input *DeleteSubnetGroupInput) DeleteS
 	}
 
 	if input == nil {
-		input = &DeleteSubnetGroupInput{}
+		input = &types.DeleteSubnetGroupInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteSubnetGroupOutput{})
+	req := c.newRequest(op, input, &types.DeleteSubnetGroupOutput{})
 	return DeleteSubnetGroupRequest{Request: req, Input: input, Copy: c.DeleteSubnetGroupRequest}
 }
 
@@ -86,8 +45,8 @@ func (c *Client) DeleteSubnetGroupRequest(input *DeleteSubnetGroupInput) DeleteS
 // DeleteSubnetGroup API operation.
 type DeleteSubnetGroupRequest struct {
 	*aws.Request
-	Input *DeleteSubnetGroupInput
-	Copy  func(*DeleteSubnetGroupInput) DeleteSubnetGroupRequest
+	Input *types.DeleteSubnetGroupInput
+	Copy  func(*types.DeleteSubnetGroupInput) DeleteSubnetGroupRequest
 }
 
 // Send marshals and sends the DeleteSubnetGroup API request.
@@ -99,7 +58,7 @@ func (r DeleteSubnetGroupRequest) Send(ctx context.Context) (*DeleteSubnetGroupR
 	}
 
 	resp := &DeleteSubnetGroupResponse{
-		DeleteSubnetGroupOutput: r.Request.Data.(*DeleteSubnetGroupOutput),
+		DeleteSubnetGroupOutput: r.Request.Data.(*types.DeleteSubnetGroupOutput),
 		response:                &aws.Response{Request: r.Request},
 	}
 
@@ -109,7 +68,7 @@ func (r DeleteSubnetGroupRequest) Send(ctx context.Context) (*DeleteSubnetGroupR
 // DeleteSubnetGroupResponse is the response type for the
 // DeleteSubnetGroup API operation.
 type DeleteSubnetGroupResponse struct {
-	*DeleteSubnetGroupOutput
+	*types.DeleteSubnetGroupOutput
 
 	response *aws.Response
 }

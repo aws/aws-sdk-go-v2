@@ -4,73 +4,12 @@ package cloudwatch
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/query"
+	"github.com/aws/aws-sdk-go-v2/service/cloudwatch/types"
 )
-
-type PutMetricDataInput struct {
-	_ struct{} `type:"structure"`
-
-	// The data for the metric. The array can include no more than 20 metrics per
-	// call.
-	//
-	// MetricData is a required field
-	MetricData []MetricDatum `type:"list" required:"true"`
-
-	// The namespace for the metric data.
-	//
-	// To avoid conflicts with AWS service namespaces, you should not specify a
-	// namespace that begins with AWS/
-	//
-	// Namespace is a required field
-	Namespace *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s PutMetricDataInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *PutMetricDataInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "PutMetricDataInput"}
-
-	if s.MetricData == nil {
-		invalidParams.Add(aws.NewErrParamRequired("MetricData"))
-	}
-
-	if s.Namespace == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Namespace"))
-	}
-	if s.Namespace != nil && len(*s.Namespace) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Namespace", 1))
-	}
-	if s.MetricData != nil {
-		for i, v := range s.MetricData {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "MetricData", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type PutMetricDataOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s PutMetricDataOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opPutMetricData = "PutMetricData"
 
@@ -125,7 +64,7 @@ const opPutMetricData = "PutMetricData"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/PutMetricData
-func (c *Client) PutMetricDataRequest(input *PutMetricDataInput) PutMetricDataRequest {
+func (c *Client) PutMetricDataRequest(input *types.PutMetricDataInput) PutMetricDataRequest {
 	op := &aws.Operation{
 		Name:       opPutMetricData,
 		HTTPMethod: "POST",
@@ -133,10 +72,10 @@ func (c *Client) PutMetricDataRequest(input *PutMetricDataInput) PutMetricDataRe
 	}
 
 	if input == nil {
-		input = &PutMetricDataInput{}
+		input = &types.PutMetricDataInput{}
 	}
 
-	req := c.newRequest(op, input, &PutMetricDataOutput{})
+	req := c.newRequest(op, input, &types.PutMetricDataOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return PutMetricDataRequest{Request: req, Input: input, Copy: c.PutMetricDataRequest}
@@ -146,8 +85,8 @@ func (c *Client) PutMetricDataRequest(input *PutMetricDataInput) PutMetricDataRe
 // PutMetricData API operation.
 type PutMetricDataRequest struct {
 	*aws.Request
-	Input *PutMetricDataInput
-	Copy  func(*PutMetricDataInput) PutMetricDataRequest
+	Input *types.PutMetricDataInput
+	Copy  func(*types.PutMetricDataInput) PutMetricDataRequest
 }
 
 // Send marshals and sends the PutMetricData API request.
@@ -159,7 +98,7 @@ func (r PutMetricDataRequest) Send(ctx context.Context) (*PutMetricDataResponse,
 	}
 
 	resp := &PutMetricDataResponse{
-		PutMetricDataOutput: r.Request.Data.(*PutMetricDataOutput),
+		PutMetricDataOutput: r.Request.Data.(*types.PutMetricDataOutput),
 		response:            &aws.Response{Request: r.Request},
 	}
 
@@ -169,7 +108,7 @@ func (r PutMetricDataRequest) Send(ctx context.Context) (*PutMetricDataResponse,
 // PutMetricDataResponse is the response type for the
 // PutMetricData API operation.
 type PutMetricDataResponse struct {
-	*PutMetricDataOutput
+	*types.PutMetricDataOutput
 
 	response *aws.Response
 }

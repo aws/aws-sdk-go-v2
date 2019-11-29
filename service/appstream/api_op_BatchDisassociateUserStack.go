@@ -4,61 +4,10 @@ package appstream
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/appstream/types"
 )
-
-type BatchDisassociateUserStackInput struct {
-	_ struct{} `type:"structure"`
-
-	// The list of UserStackAssociation objects.
-	//
-	// UserStackAssociations is a required field
-	UserStackAssociations []UserStackAssociation `min:"1" type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s BatchDisassociateUserStackInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *BatchDisassociateUserStackInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "BatchDisassociateUserStackInput"}
-
-	if s.UserStackAssociations == nil {
-		invalidParams.Add(aws.NewErrParamRequired("UserStackAssociations"))
-	}
-	if s.UserStackAssociations != nil && len(s.UserStackAssociations) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("UserStackAssociations", 1))
-	}
-	if s.UserStackAssociations != nil {
-		for i, v := range s.UserStackAssociations {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "UserStackAssociations", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type BatchDisassociateUserStackOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The list of UserStackAssociationError objects.
-	Errors []UserStackAssociationError `locationName:"errors" type:"list"`
-}
-
-// String returns the string representation
-func (s BatchDisassociateUserStackOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opBatchDisassociateUserStack = "BatchDisassociateUserStack"
 
@@ -75,7 +24,7 @@ const opBatchDisassociateUserStack = "BatchDisassociateUserStack"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/BatchDisassociateUserStack
-func (c *Client) BatchDisassociateUserStackRequest(input *BatchDisassociateUserStackInput) BatchDisassociateUserStackRequest {
+func (c *Client) BatchDisassociateUserStackRequest(input *types.BatchDisassociateUserStackInput) BatchDisassociateUserStackRequest {
 	op := &aws.Operation{
 		Name:       opBatchDisassociateUserStack,
 		HTTPMethod: "POST",
@@ -83,10 +32,10 @@ func (c *Client) BatchDisassociateUserStackRequest(input *BatchDisassociateUserS
 	}
 
 	if input == nil {
-		input = &BatchDisassociateUserStackInput{}
+		input = &types.BatchDisassociateUserStackInput{}
 	}
 
-	req := c.newRequest(op, input, &BatchDisassociateUserStackOutput{})
+	req := c.newRequest(op, input, &types.BatchDisassociateUserStackOutput{})
 	return BatchDisassociateUserStackRequest{Request: req, Input: input, Copy: c.BatchDisassociateUserStackRequest}
 }
 
@@ -94,8 +43,8 @@ func (c *Client) BatchDisassociateUserStackRequest(input *BatchDisassociateUserS
 // BatchDisassociateUserStack API operation.
 type BatchDisassociateUserStackRequest struct {
 	*aws.Request
-	Input *BatchDisassociateUserStackInput
-	Copy  func(*BatchDisassociateUserStackInput) BatchDisassociateUserStackRequest
+	Input *types.BatchDisassociateUserStackInput
+	Copy  func(*types.BatchDisassociateUserStackInput) BatchDisassociateUserStackRequest
 }
 
 // Send marshals and sends the BatchDisassociateUserStack API request.
@@ -107,7 +56,7 @@ func (r BatchDisassociateUserStackRequest) Send(ctx context.Context) (*BatchDisa
 	}
 
 	resp := &BatchDisassociateUserStackResponse{
-		BatchDisassociateUserStackOutput: r.Request.Data.(*BatchDisassociateUserStackOutput),
+		BatchDisassociateUserStackOutput: r.Request.Data.(*types.BatchDisassociateUserStackOutput),
 		response:                         &aws.Response{Request: r.Request},
 	}
 
@@ -117,7 +66,7 @@ func (r BatchDisassociateUserStackRequest) Send(ctx context.Context) (*BatchDisa
 // BatchDisassociateUserStackResponse is the response type for the
 // BatchDisassociateUserStack API operation.
 type BatchDisassociateUserStackResponse struct {
-	*BatchDisassociateUserStackOutput
+	*types.BatchDisassociateUserStackOutput
 
 	response *aws.Response
 }

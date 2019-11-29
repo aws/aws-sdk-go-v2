@@ -6,61 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/service/waf"
+	"github.com/aws/aws-sdk-go-v2/service/wafregional/types"
 )
-
-type ListRateBasedRulesInput struct {
-	_ struct{} `type:"structure"`
-
-	// Specifies the number of Rules that you want AWS WAF to return for this request.
-	// If you have more Rules than the number that you specify for Limit, the response
-	// includes a NextMarker value that you can use to get another batch of Rules.
-	Limit *int64 `type:"integer"`
-
-	// If you specify a value for Limit and you have more Rules than the value of
-	// Limit, AWS WAF returns a NextMarker value in the response that allows you
-	// to list another group of Rules. For the second and subsequent ListRateBasedRules
-	// requests, specify the value of NextMarker from the previous response to get
-	// information about another batch of Rules.
-	NextMarker *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s ListRateBasedRulesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListRateBasedRulesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListRateBasedRulesInput"}
-	if s.NextMarker != nil && len(*s.NextMarker) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("NextMarker", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ListRateBasedRulesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// If you have more Rules than the number that you specified for Limit in the
-	// request, the response includes a NextMarker value. To list more Rules, submit
-	// another ListRateBasedRules request, and specify the NextMarker value from
-	// the response in the NextMarker value in the next request.
-	NextMarker *string `min:"1" type:"string"`
-
-	// An array of RuleSummary objects.
-	Rules []waf.RuleSummary `type:"list"`
-}
-
-// String returns the string representation
-func (s ListRateBasedRulesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListRateBasedRules = "ListRateBasedRules"
 
@@ -77,7 +24,7 @@ const opListRateBasedRules = "ListRateBasedRules"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/ListRateBasedRules
-func (c *Client) ListRateBasedRulesRequest(input *ListRateBasedRulesInput) ListRateBasedRulesRequest {
+func (c *Client) ListRateBasedRulesRequest(input *types.ListRateBasedRulesInput) ListRateBasedRulesRequest {
 	op := &aws.Operation{
 		Name:       opListRateBasedRules,
 		HTTPMethod: "POST",
@@ -85,10 +32,10 @@ func (c *Client) ListRateBasedRulesRequest(input *ListRateBasedRulesInput) ListR
 	}
 
 	if input == nil {
-		input = &ListRateBasedRulesInput{}
+		input = &types.ListRateBasedRulesInput{}
 	}
 
-	req := c.newRequest(op, input, &ListRateBasedRulesOutput{})
+	req := c.newRequest(op, input, &types.ListRateBasedRulesOutput{})
 	return ListRateBasedRulesRequest{Request: req, Input: input, Copy: c.ListRateBasedRulesRequest}
 }
 
@@ -96,8 +43,8 @@ func (c *Client) ListRateBasedRulesRequest(input *ListRateBasedRulesInput) ListR
 // ListRateBasedRules API operation.
 type ListRateBasedRulesRequest struct {
 	*aws.Request
-	Input *ListRateBasedRulesInput
-	Copy  func(*ListRateBasedRulesInput) ListRateBasedRulesRequest
+	Input *types.ListRateBasedRulesInput
+	Copy  func(*types.ListRateBasedRulesInput) ListRateBasedRulesRequest
 }
 
 // Send marshals and sends the ListRateBasedRules API request.
@@ -109,7 +56,7 @@ func (r ListRateBasedRulesRequest) Send(ctx context.Context) (*ListRateBasedRule
 	}
 
 	resp := &ListRateBasedRulesResponse{
-		ListRateBasedRulesOutput: r.Request.Data.(*ListRateBasedRulesOutput),
+		ListRateBasedRulesOutput: r.Request.Data.(*types.ListRateBasedRulesOutput),
 		response:                 &aws.Response{Request: r.Request},
 	}
 
@@ -119,7 +66,7 @@ func (r ListRateBasedRulesRequest) Send(ctx context.Context) (*ListRateBasedRule
 // ListRateBasedRulesResponse is the response type for the
 // ListRateBasedRules API operation.
 type ListRateBasedRulesResponse struct {
-	*ListRateBasedRulesOutput
+	*types.ListRateBasedRulesOutput
 
 	response *aws.Response
 }

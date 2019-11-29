@@ -6,61 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/codestar/types"
 )
-
-type DisassociateTeamMemberInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the AWS CodeStar project from which you want to remove a team member.
-	//
-	// ProjectId is a required field
-	ProjectId *string `locationName:"projectId" min:"2" type:"string" required:"true"`
-
-	// The Amazon Resource Name (ARN) of the IAM user or group whom you want to
-	// remove from the project.
-	//
-	// UserArn is a required field
-	UserArn *string `locationName:"userArn" min:"32" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DisassociateTeamMemberInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DisassociateTeamMemberInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DisassociateTeamMemberInput"}
-
-	if s.ProjectId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ProjectId"))
-	}
-	if s.ProjectId != nil && len(*s.ProjectId) < 2 {
-		invalidParams.Add(aws.NewErrParamMinLen("ProjectId", 2))
-	}
-
-	if s.UserArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("UserArn"))
-	}
-	if s.UserArn != nil && len(*s.UserArn) < 32 {
-		invalidParams.Add(aws.NewErrParamMinLen("UserArn", 32))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DisassociateTeamMemberOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DisassociateTeamMemberOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDisassociateTeamMember = "DisassociateTeamMember"
 
@@ -80,7 +27,7 @@ const opDisassociateTeamMember = "DisassociateTeamMember"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codestar-2017-04-19/DisassociateTeamMember
-func (c *Client) DisassociateTeamMemberRequest(input *DisassociateTeamMemberInput) DisassociateTeamMemberRequest {
+func (c *Client) DisassociateTeamMemberRequest(input *types.DisassociateTeamMemberInput) DisassociateTeamMemberRequest {
 	op := &aws.Operation{
 		Name:       opDisassociateTeamMember,
 		HTTPMethod: "POST",
@@ -88,10 +35,10 @@ func (c *Client) DisassociateTeamMemberRequest(input *DisassociateTeamMemberInpu
 	}
 
 	if input == nil {
-		input = &DisassociateTeamMemberInput{}
+		input = &types.DisassociateTeamMemberInput{}
 	}
 
-	req := c.newRequest(op, input, &DisassociateTeamMemberOutput{})
+	req := c.newRequest(op, input, &types.DisassociateTeamMemberOutput{})
 	return DisassociateTeamMemberRequest{Request: req, Input: input, Copy: c.DisassociateTeamMemberRequest}
 }
 
@@ -99,8 +46,8 @@ func (c *Client) DisassociateTeamMemberRequest(input *DisassociateTeamMemberInpu
 // DisassociateTeamMember API operation.
 type DisassociateTeamMemberRequest struct {
 	*aws.Request
-	Input *DisassociateTeamMemberInput
-	Copy  func(*DisassociateTeamMemberInput) DisassociateTeamMemberRequest
+	Input *types.DisassociateTeamMemberInput
+	Copy  func(*types.DisassociateTeamMemberInput) DisassociateTeamMemberRequest
 }
 
 // Send marshals and sends the DisassociateTeamMember API request.
@@ -112,7 +59,7 @@ func (r DisassociateTeamMemberRequest) Send(ctx context.Context) (*DisassociateT
 	}
 
 	resp := &DisassociateTeamMemberResponse{
-		DisassociateTeamMemberOutput: r.Request.Data.(*DisassociateTeamMemberOutput),
+		DisassociateTeamMemberOutput: r.Request.Data.(*types.DisassociateTeamMemberOutput),
 		response:                     &aws.Response{Request: r.Request},
 	}
 
@@ -122,7 +69,7 @@ func (r DisassociateTeamMemberRequest) Send(ctx context.Context) (*DisassociateT
 // DisassociateTeamMemberResponse is the response type for the
 // DisassociateTeamMember API operation.
 type DisassociateTeamMemberResponse struct {
-	*DisassociateTeamMemberOutput
+	*types.DisassociateTeamMemberOutput
 
 	response *aws.Response
 }

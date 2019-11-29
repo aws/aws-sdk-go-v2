@@ -6,94 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/chime/types"
 )
-
-type AssociatePhoneNumberWithUserInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Chime account ID.
-	//
-	// AccountId is a required field
-	AccountId *string `location:"uri" locationName:"accountId" type:"string" required:"true"`
-
-	// The phone number, in E.164 format.
-	//
-	// E164PhoneNumber is a required field
-	E164PhoneNumber *string `type:"string" required:"true" sensitive:"true"`
-
-	// The user ID.
-	//
-	// UserId is a required field
-	UserId *string `location:"uri" locationName:"userId" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s AssociatePhoneNumberWithUserInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *AssociatePhoneNumberWithUserInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "AssociatePhoneNumberWithUserInput"}
-
-	if s.AccountId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("AccountId"))
-	}
-
-	if s.E164PhoneNumber == nil {
-		invalidParams.Add(aws.NewErrParamRequired("E164PhoneNumber"))
-	}
-
-	if s.UserId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("UserId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s AssociatePhoneNumberWithUserInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.E164PhoneNumber != nil {
-		v := *s.E164PhoneNumber
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "E164PhoneNumber", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.AccountId != nil {
-		v := *s.AccountId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "accountId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.UserId != nil {
-		v := *s.UserId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "userId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type AssociatePhoneNumberWithUserOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s AssociatePhoneNumberWithUserOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s AssociatePhoneNumberWithUserOutput) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
 
 const opAssociatePhoneNumberWithUser = "AssociatePhoneNumberWithUser"
 
@@ -110,7 +24,7 @@ const opAssociatePhoneNumberWithUser = "AssociatePhoneNumberWithUser"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/AssociatePhoneNumberWithUser
-func (c *Client) AssociatePhoneNumberWithUserRequest(input *AssociatePhoneNumberWithUserInput) AssociatePhoneNumberWithUserRequest {
+func (c *Client) AssociatePhoneNumberWithUserRequest(input *types.AssociatePhoneNumberWithUserInput) AssociatePhoneNumberWithUserRequest {
 	op := &aws.Operation{
 		Name:       opAssociatePhoneNumberWithUser,
 		HTTPMethod: "POST",
@@ -118,10 +32,10 @@ func (c *Client) AssociatePhoneNumberWithUserRequest(input *AssociatePhoneNumber
 	}
 
 	if input == nil {
-		input = &AssociatePhoneNumberWithUserInput{}
+		input = &types.AssociatePhoneNumberWithUserInput{}
 	}
 
-	req := c.newRequest(op, input, &AssociatePhoneNumberWithUserOutput{})
+	req := c.newRequest(op, input, &types.AssociatePhoneNumberWithUserOutput{})
 	return AssociatePhoneNumberWithUserRequest{Request: req, Input: input, Copy: c.AssociatePhoneNumberWithUserRequest}
 }
 
@@ -129,8 +43,8 @@ func (c *Client) AssociatePhoneNumberWithUserRequest(input *AssociatePhoneNumber
 // AssociatePhoneNumberWithUser API operation.
 type AssociatePhoneNumberWithUserRequest struct {
 	*aws.Request
-	Input *AssociatePhoneNumberWithUserInput
-	Copy  func(*AssociatePhoneNumberWithUserInput) AssociatePhoneNumberWithUserRequest
+	Input *types.AssociatePhoneNumberWithUserInput
+	Copy  func(*types.AssociatePhoneNumberWithUserInput) AssociatePhoneNumberWithUserRequest
 }
 
 // Send marshals and sends the AssociatePhoneNumberWithUser API request.
@@ -142,7 +56,7 @@ func (r AssociatePhoneNumberWithUserRequest) Send(ctx context.Context) (*Associa
 	}
 
 	resp := &AssociatePhoneNumberWithUserResponse{
-		AssociatePhoneNumberWithUserOutput: r.Request.Data.(*AssociatePhoneNumberWithUserOutput),
+		AssociatePhoneNumberWithUserOutput: r.Request.Data.(*types.AssociatePhoneNumberWithUserOutput),
 		response:                           &aws.Response{Request: r.Request},
 	}
 
@@ -152,7 +66,7 @@ func (r AssociatePhoneNumberWithUserRequest) Send(ctx context.Context) (*Associa
 // AssociatePhoneNumberWithUserResponse is the response type for the
 // AssociatePhoneNumberWithUser API operation.
 type AssociatePhoneNumberWithUserResponse struct {
-	*AssociatePhoneNumberWithUserOutput
+	*types.AssociatePhoneNumberWithUserOutput
 
 	response *aws.Response
 }

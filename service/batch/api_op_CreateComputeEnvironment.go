@@ -6,153 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/batch/types"
 )
-
-type CreateComputeEnvironmentInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name for your compute environment. Up to 128 letters (uppercase and lowercase),
-	// numbers, hyphens, and underscores are allowed.
-	//
-	// ComputeEnvironmentName is a required field
-	ComputeEnvironmentName *string `locationName:"computeEnvironmentName" type:"string" required:"true"`
-
-	// Details of the compute resources managed by the compute environment. This
-	// parameter is required for managed compute environments. For more information,
-	// see Compute Environments (https://docs.aws.amazon.com/batch/latest/userguide/compute_environments.html)
-	// in the AWS Batch User Guide.
-	ComputeResources *ComputeResource `locationName:"computeResources" type:"structure"`
-
-	// The full Amazon Resource Name (ARN) of the IAM role that allows AWS Batch
-	// to make calls to other AWS services on your behalf.
-	//
-	// If your specified role has a path other than /, then you must either specify
-	// the full role ARN (this is recommended) or prefix the role name with the
-	// path.
-	//
-	// Depending on how you created your AWS Batch service role, its ARN may contain
-	// the service-role path prefix. When you only specify the name of the service
-	// role, AWS Batch assumes that your ARN does not use the service-role path
-	// prefix. Because of this, we recommend that you specify the full ARN of your
-	// service role when you create compute environments.
-	//
-	// ServiceRole is a required field
-	ServiceRole *string `locationName:"serviceRole" type:"string" required:"true"`
-
-	// The state of the compute environment. If the state is ENABLED, then the compute
-	// environment accepts jobs from a queue and can scale out automatically based
-	// on queues.
-	State CEState `locationName:"state" type:"string" enum:"true"`
-
-	// The type of the compute environment. For more information, see Compute Environments
-	// (https://docs.aws.amazon.com/batch/latest/userguide/compute_environments.html)
-	// in the AWS Batch User Guide.
-	//
-	// Type is a required field
-	Type CEType `locationName:"type" type:"string" required:"true" enum:"true"`
-}
-
-// String returns the string representation
-func (s CreateComputeEnvironmentInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateComputeEnvironmentInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateComputeEnvironmentInput"}
-
-	if s.ComputeEnvironmentName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ComputeEnvironmentName"))
-	}
-
-	if s.ServiceRole == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ServiceRole"))
-	}
-	if len(s.Type) == 0 {
-		invalidParams.Add(aws.NewErrParamRequired("Type"))
-	}
-	if s.ComputeResources != nil {
-		if err := s.ComputeResources.Validate(); err != nil {
-			invalidParams.AddNested("ComputeResources", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s CreateComputeEnvironmentInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.ComputeEnvironmentName != nil {
-		v := *s.ComputeEnvironmentName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "computeEnvironmentName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.ComputeResources != nil {
-		v := s.ComputeResources
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "computeResources", v, metadata)
-	}
-	if s.ServiceRole != nil {
-		v := *s.ServiceRole
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "serviceRole", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if len(s.State) > 0 {
-		v := s.State
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "state", protocol.QuotedValue{ValueMarshaler: v}, metadata)
-	}
-	if len(s.Type) > 0 {
-		v := s.Type
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "type", protocol.QuotedValue{ValueMarshaler: v}, metadata)
-	}
-	return nil
-}
-
-type CreateComputeEnvironmentOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the compute environment.
-	ComputeEnvironmentArn *string `locationName:"computeEnvironmentArn" type:"string"`
-
-	// The name of the compute environment.
-	ComputeEnvironmentName *string `locationName:"computeEnvironmentName" type:"string"`
-}
-
-// String returns the string representation
-func (s CreateComputeEnvironmentOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s CreateComputeEnvironmentOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.ComputeEnvironmentArn != nil {
-		v := *s.ComputeEnvironmentArn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "computeEnvironmentArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.ComputeEnvironmentName != nil {
-		v := *s.ComputeEnvironmentName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "computeEnvironmentName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opCreateComputeEnvironment = "CreateComputeEnvironment"
 
@@ -208,7 +63,7 @@ const opCreateComputeEnvironment = "CreateComputeEnvironment"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/CreateComputeEnvironment
-func (c *Client) CreateComputeEnvironmentRequest(input *CreateComputeEnvironmentInput) CreateComputeEnvironmentRequest {
+func (c *Client) CreateComputeEnvironmentRequest(input *types.CreateComputeEnvironmentInput) CreateComputeEnvironmentRequest {
 	op := &aws.Operation{
 		Name:       opCreateComputeEnvironment,
 		HTTPMethod: "POST",
@@ -216,10 +71,10 @@ func (c *Client) CreateComputeEnvironmentRequest(input *CreateComputeEnvironment
 	}
 
 	if input == nil {
-		input = &CreateComputeEnvironmentInput{}
+		input = &types.CreateComputeEnvironmentInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateComputeEnvironmentOutput{})
+	req := c.newRequest(op, input, &types.CreateComputeEnvironmentOutput{})
 	return CreateComputeEnvironmentRequest{Request: req, Input: input, Copy: c.CreateComputeEnvironmentRequest}
 }
 
@@ -227,8 +82,8 @@ func (c *Client) CreateComputeEnvironmentRequest(input *CreateComputeEnvironment
 // CreateComputeEnvironment API operation.
 type CreateComputeEnvironmentRequest struct {
 	*aws.Request
-	Input *CreateComputeEnvironmentInput
-	Copy  func(*CreateComputeEnvironmentInput) CreateComputeEnvironmentRequest
+	Input *types.CreateComputeEnvironmentInput
+	Copy  func(*types.CreateComputeEnvironmentInput) CreateComputeEnvironmentRequest
 }
 
 // Send marshals and sends the CreateComputeEnvironment API request.
@@ -240,7 +95,7 @@ func (r CreateComputeEnvironmentRequest) Send(ctx context.Context) (*CreateCompu
 	}
 
 	resp := &CreateComputeEnvironmentResponse{
-		CreateComputeEnvironmentOutput: r.Request.Data.(*CreateComputeEnvironmentOutput),
+		CreateComputeEnvironmentOutput: r.Request.Data.(*types.CreateComputeEnvironmentOutput),
 		response:                       &aws.Response{Request: r.Request},
 	}
 
@@ -250,7 +105,7 @@ func (r CreateComputeEnvironmentRequest) Send(ctx context.Context) (*CreateCompu
 // CreateComputeEnvironmentResponse is the response type for the
 // CreateComputeEnvironment API operation.
 type CreateComputeEnvironmentResponse struct {
-	*CreateComputeEnvironmentOutput
+	*types.CreateComputeEnvironmentOutput
 
 	response *aws.Response
 }

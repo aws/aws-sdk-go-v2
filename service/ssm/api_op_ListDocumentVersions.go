@@ -6,64 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ssm/types"
 )
-
-type ListDocumentVersionsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The maximum number of items to return for this call. The call also returns
-	// a token that you can specify in a subsequent call to get the next set of
-	// results.
-	MaxResults *int64 `min:"1" type:"integer"`
-
-	// The name of the document about which you want version information.
-	//
-	// Name is a required field
-	Name *string `type:"string" required:"true"`
-
-	// The token for the next set of items to return. (You received this token from
-	// a previous call.)
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s ListDocumentVersionsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListDocumentVersionsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListDocumentVersionsInput"}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-
-	if s.Name == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Name"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ListDocumentVersionsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The document versions.
-	DocumentVersions []DocumentVersionInfo `min:"1" type:"list"`
-
-	// The token to use when requesting the next set of items. If there are no additional
-	// items to return, the string is empty.
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s ListDocumentVersionsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListDocumentVersions = "ListDocumentVersions"
 
@@ -80,7 +24,7 @@ const opListDocumentVersions = "ListDocumentVersions"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ListDocumentVersions
-func (c *Client) ListDocumentVersionsRequest(input *ListDocumentVersionsInput) ListDocumentVersionsRequest {
+func (c *Client) ListDocumentVersionsRequest(input *types.ListDocumentVersionsInput) ListDocumentVersionsRequest {
 	op := &aws.Operation{
 		Name:       opListDocumentVersions,
 		HTTPMethod: "POST",
@@ -88,10 +32,10 @@ func (c *Client) ListDocumentVersionsRequest(input *ListDocumentVersionsInput) L
 	}
 
 	if input == nil {
-		input = &ListDocumentVersionsInput{}
+		input = &types.ListDocumentVersionsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListDocumentVersionsOutput{})
+	req := c.newRequest(op, input, &types.ListDocumentVersionsOutput{})
 	return ListDocumentVersionsRequest{Request: req, Input: input, Copy: c.ListDocumentVersionsRequest}
 }
 
@@ -99,8 +43,8 @@ func (c *Client) ListDocumentVersionsRequest(input *ListDocumentVersionsInput) L
 // ListDocumentVersions API operation.
 type ListDocumentVersionsRequest struct {
 	*aws.Request
-	Input *ListDocumentVersionsInput
-	Copy  func(*ListDocumentVersionsInput) ListDocumentVersionsRequest
+	Input *types.ListDocumentVersionsInput
+	Copy  func(*types.ListDocumentVersionsInput) ListDocumentVersionsRequest
 }
 
 // Send marshals and sends the ListDocumentVersions API request.
@@ -112,7 +56,7 @@ func (r ListDocumentVersionsRequest) Send(ctx context.Context) (*ListDocumentVer
 	}
 
 	resp := &ListDocumentVersionsResponse{
-		ListDocumentVersionsOutput: r.Request.Data.(*ListDocumentVersionsOutput),
+		ListDocumentVersionsOutput: r.Request.Data.(*types.ListDocumentVersionsOutput),
 		response:                   &aws.Response{Request: r.Request},
 	}
 
@@ -122,7 +66,7 @@ func (r ListDocumentVersionsRequest) Send(ctx context.Context) (*ListDocumentVer
 // ListDocumentVersionsResponse is the response type for the
 // ListDocumentVersions API operation.
 type ListDocumentVersionsResponse struct {
-	*ListDocumentVersionsOutput
+	*types.ListDocumentVersionsOutput
 
 	response *aws.Response
 }

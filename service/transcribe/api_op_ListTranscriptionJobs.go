@@ -6,73 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/transcribe/types"
 )
-
-type ListTranscriptionJobsInput struct {
-	_ struct{} `type:"structure"`
-
-	// When specified, the jobs returned in the list are limited to jobs whose name
-	// contains the specified string.
-	JobNameContains *string `min:"1" type:"string"`
-
-	// The maximum number of jobs to return in the response. If there are fewer
-	// results in the list, this response contains only the actual results.
-	MaxResults *int64 `min:"1" type:"integer"`
-
-	// If the result of the previous request to ListTranscriptionJobs was truncated,
-	// include the NextToken to fetch the next set of jobs.
-	NextToken *string `type:"string"`
-
-	// When specified, returns only transcription jobs with the specified status.
-	// Jobs are ordered by creation date, with the newest jobs returned first. If
-	// you don’t specify a status, Amazon Transcribe returns all transcription
-	// jobs ordered by creation date.
-	Status TranscriptionJobStatus `type:"string" enum:"true"`
-}
-
-// String returns the string representation
-func (s ListTranscriptionJobsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListTranscriptionJobsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListTranscriptionJobsInput"}
-	if s.JobNameContains != nil && len(*s.JobNameContains) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("JobNameContains", 1))
-	}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ListTranscriptionJobsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The ListTranscriptionJobs operation returns a page of jobs at a time. The
-	// maximum size of the page is set by the MaxResults parameter. If there are
-	// more jobs in the list than the page size, Amazon Transcribe returns the NextPage
-	// token. Include the token in the next request to the ListTranscriptionJobs
-	// operation to return in the next page of jobs.
-	NextToken *string `type:"string"`
-
-	// The requested status of the jobs returned.
-	Status TranscriptionJobStatus `type:"string" enum:"true"`
-
-	// A list of objects containing summary information for a transcription job.
-	TranscriptionJobSummaries []TranscriptionJobSummary `type:"list"`
-}
-
-// String returns the string representation
-func (s ListTranscriptionJobsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListTranscriptionJobs = "ListTranscriptionJobs"
 
@@ -89,7 +24,7 @@ const opListTranscriptionJobs = "ListTranscriptionJobs"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/ListTranscriptionJobs
-func (c *Client) ListTranscriptionJobsRequest(input *ListTranscriptionJobsInput) ListTranscriptionJobsRequest {
+func (c *Client) ListTranscriptionJobsRequest(input *types.ListTranscriptionJobsInput) ListTranscriptionJobsRequest {
 	op := &aws.Operation{
 		Name:       opListTranscriptionJobs,
 		HTTPMethod: "POST",
@@ -103,10 +38,10 @@ func (c *Client) ListTranscriptionJobsRequest(input *ListTranscriptionJobsInput)
 	}
 
 	if input == nil {
-		input = &ListTranscriptionJobsInput{}
+		input = &types.ListTranscriptionJobsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListTranscriptionJobsOutput{})
+	req := c.newRequest(op, input, &types.ListTranscriptionJobsOutput{})
 	return ListTranscriptionJobsRequest{Request: req, Input: input, Copy: c.ListTranscriptionJobsRequest}
 }
 
@@ -114,8 +49,8 @@ func (c *Client) ListTranscriptionJobsRequest(input *ListTranscriptionJobsInput)
 // ListTranscriptionJobs API operation.
 type ListTranscriptionJobsRequest struct {
 	*aws.Request
-	Input *ListTranscriptionJobsInput
-	Copy  func(*ListTranscriptionJobsInput) ListTranscriptionJobsRequest
+	Input *types.ListTranscriptionJobsInput
+	Copy  func(*types.ListTranscriptionJobsInput) ListTranscriptionJobsRequest
 }
 
 // Send marshals and sends the ListTranscriptionJobs API request.
@@ -127,7 +62,7 @@ func (r ListTranscriptionJobsRequest) Send(ctx context.Context) (*ListTranscript
 	}
 
 	resp := &ListTranscriptionJobsResponse{
-		ListTranscriptionJobsOutput: r.Request.Data.(*ListTranscriptionJobsOutput),
+		ListTranscriptionJobsOutput: r.Request.Data.(*types.ListTranscriptionJobsOutput),
 		response:                    &aws.Response{Request: r.Request},
 	}
 
@@ -157,7 +92,7 @@ func NewListTranscriptionJobsPaginator(req ListTranscriptionJobsRequest) ListTra
 	return ListTranscriptionJobsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListTranscriptionJobsInput
+				var inCpy *types.ListTranscriptionJobsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -177,14 +112,14 @@ type ListTranscriptionJobsPaginator struct {
 	aws.Pager
 }
 
-func (p *ListTranscriptionJobsPaginator) CurrentPage() *ListTranscriptionJobsOutput {
-	return p.Pager.CurrentPage().(*ListTranscriptionJobsOutput)
+func (p *ListTranscriptionJobsPaginator) CurrentPage() *types.ListTranscriptionJobsOutput {
+	return p.Pager.CurrentPage().(*types.ListTranscriptionJobsOutput)
 }
 
 // ListTranscriptionJobsResponse is the response type for the
 // ListTranscriptionJobs API operation.
 type ListTranscriptionJobsResponse struct {
-	*ListTranscriptionJobsOutput
+	*types.ListTranscriptionJobsOutput
 
 	response *aws.Response
 }

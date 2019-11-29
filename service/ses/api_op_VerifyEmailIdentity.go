@@ -6,49 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ses/types"
 )
-
-// Represents a request to begin email address verification with Amazon SES.
-// For information about email address verification, see the Amazon SES Developer
-// Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/verify-email-addresses.html).
-type VerifyEmailIdentityInput struct {
-	_ struct{} `type:"structure"`
-
-	// The email address to be verified.
-	//
-	// EmailAddress is a required field
-	EmailAddress *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s VerifyEmailIdentityInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *VerifyEmailIdentityInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "VerifyEmailIdentityInput"}
-
-	if s.EmailAddress == nil {
-		invalidParams.Add(aws.NewErrParamRequired("EmailAddress"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// An empty element returned on a successful request.
-type VerifyEmailIdentityOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s VerifyEmailIdentityOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opVerifyEmailIdentity = "VerifyEmailIdentity"
 
@@ -69,7 +28,7 @@ const opVerifyEmailIdentity = "VerifyEmailIdentity"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/VerifyEmailIdentity
-func (c *Client) VerifyEmailIdentityRequest(input *VerifyEmailIdentityInput) VerifyEmailIdentityRequest {
+func (c *Client) VerifyEmailIdentityRequest(input *types.VerifyEmailIdentityInput) VerifyEmailIdentityRequest {
 	op := &aws.Operation{
 		Name:       opVerifyEmailIdentity,
 		HTTPMethod: "POST",
@@ -77,10 +36,10 @@ func (c *Client) VerifyEmailIdentityRequest(input *VerifyEmailIdentityInput) Ver
 	}
 
 	if input == nil {
-		input = &VerifyEmailIdentityInput{}
+		input = &types.VerifyEmailIdentityInput{}
 	}
 
-	req := c.newRequest(op, input, &VerifyEmailIdentityOutput{})
+	req := c.newRequest(op, input, &types.VerifyEmailIdentityOutput{})
 	return VerifyEmailIdentityRequest{Request: req, Input: input, Copy: c.VerifyEmailIdentityRequest}
 }
 
@@ -88,8 +47,8 @@ func (c *Client) VerifyEmailIdentityRequest(input *VerifyEmailIdentityInput) Ver
 // VerifyEmailIdentity API operation.
 type VerifyEmailIdentityRequest struct {
 	*aws.Request
-	Input *VerifyEmailIdentityInput
-	Copy  func(*VerifyEmailIdentityInput) VerifyEmailIdentityRequest
+	Input *types.VerifyEmailIdentityInput
+	Copy  func(*types.VerifyEmailIdentityInput) VerifyEmailIdentityRequest
 }
 
 // Send marshals and sends the VerifyEmailIdentity API request.
@@ -101,7 +60,7 @@ func (r VerifyEmailIdentityRequest) Send(ctx context.Context) (*VerifyEmailIdent
 	}
 
 	resp := &VerifyEmailIdentityResponse{
-		VerifyEmailIdentityOutput: r.Request.Data.(*VerifyEmailIdentityOutput),
+		VerifyEmailIdentityOutput: r.Request.Data.(*types.VerifyEmailIdentityOutput),
 		response:                  &aws.Response{Request: r.Request},
 	}
 
@@ -111,7 +70,7 @@ func (r VerifyEmailIdentityRequest) Send(ctx context.Context) (*VerifyEmailIdent
 // VerifyEmailIdentityResponse is the response type for the
 // VerifyEmailIdentity API operation.
 type VerifyEmailIdentityResponse struct {
-	*VerifyEmailIdentityOutput
+	*types.VerifyEmailIdentityOutput
 
 	response *aws.Response
 }

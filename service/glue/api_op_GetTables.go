@@ -6,75 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/glue/types"
 )
-
-type GetTablesInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the Data Catalog where the tables reside. If none is provided,
-	// the AWS account ID is used by default.
-	CatalogId *string `min:"1" type:"string"`
-
-	// The database in the catalog whose tables to list. For Hive compatibility,
-	// this name is entirely lowercase.
-	//
-	// DatabaseName is a required field
-	DatabaseName *string `min:"1" type:"string" required:"true"`
-
-	// A regular expression pattern. If present, only those tables whose names match
-	// the pattern are returned.
-	Expression *string `type:"string"`
-
-	// The maximum number of tables to return in a single response.
-	MaxResults *int64 `min:"1" type:"integer"`
-
-	// A continuation token, included if this is a continuation call.
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s GetTablesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetTablesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetTablesInput"}
-	if s.CatalogId != nil && len(*s.CatalogId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("CatalogId", 1))
-	}
-
-	if s.DatabaseName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DatabaseName"))
-	}
-	if s.DatabaseName != nil && len(*s.DatabaseName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("DatabaseName", 1))
-	}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type GetTablesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A continuation token, present if the current list segment is not the last.
-	NextToken *string `type:"string"`
-
-	// A list of the requested Table objects.
-	TableList []Table `type:"list"`
-}
-
-// String returns the string representation
-func (s GetTablesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetTables = "GetTables"
 
@@ -91,7 +24,7 @@ const opGetTables = "GetTables"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetTables
-func (c *Client) GetTablesRequest(input *GetTablesInput) GetTablesRequest {
+func (c *Client) GetTablesRequest(input *types.GetTablesInput) GetTablesRequest {
 	op := &aws.Operation{
 		Name:       opGetTables,
 		HTTPMethod: "POST",
@@ -105,10 +38,10 @@ func (c *Client) GetTablesRequest(input *GetTablesInput) GetTablesRequest {
 	}
 
 	if input == nil {
-		input = &GetTablesInput{}
+		input = &types.GetTablesInput{}
 	}
 
-	req := c.newRequest(op, input, &GetTablesOutput{})
+	req := c.newRequest(op, input, &types.GetTablesOutput{})
 	return GetTablesRequest{Request: req, Input: input, Copy: c.GetTablesRequest}
 }
 
@@ -116,8 +49,8 @@ func (c *Client) GetTablesRequest(input *GetTablesInput) GetTablesRequest {
 // GetTables API operation.
 type GetTablesRequest struct {
 	*aws.Request
-	Input *GetTablesInput
-	Copy  func(*GetTablesInput) GetTablesRequest
+	Input *types.GetTablesInput
+	Copy  func(*types.GetTablesInput) GetTablesRequest
 }
 
 // Send marshals and sends the GetTables API request.
@@ -129,7 +62,7 @@ func (r GetTablesRequest) Send(ctx context.Context) (*GetTablesResponse, error) 
 	}
 
 	resp := &GetTablesResponse{
-		GetTablesOutput: r.Request.Data.(*GetTablesOutput),
+		GetTablesOutput: r.Request.Data.(*types.GetTablesOutput),
 		response:        &aws.Response{Request: r.Request},
 	}
 
@@ -159,7 +92,7 @@ func NewGetTablesPaginator(req GetTablesRequest) GetTablesPaginator {
 	return GetTablesPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *GetTablesInput
+				var inCpy *types.GetTablesInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -179,14 +112,14 @@ type GetTablesPaginator struct {
 	aws.Pager
 }
 
-func (p *GetTablesPaginator) CurrentPage() *GetTablesOutput {
-	return p.Pager.CurrentPage().(*GetTablesOutput)
+func (p *GetTablesPaginator) CurrentPage() *types.GetTablesOutput {
+	return p.Pager.CurrentPage().(*types.GetTablesOutput)
 }
 
 // GetTablesResponse is the response type for the
 // GetTables API operation.
 type GetTablesResponse struct {
-	*GetTablesOutput
+	*types.GetTablesOutput
 
 	response *aws.Response
 }

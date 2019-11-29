@@ -7,6 +7,7 @@ import (
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
+	"github.com/aws/aws-sdk-go-v2/service/elastictranscoder/types"
 )
 
 // WaitUntilJobComplete uses the Amazon Elastic Transcoder API operation
@@ -18,7 +19,7 @@ import (
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Client) WaitUntilJobComplete(ctx context.Context, input *ReadJobInput, opts ...aws.WaiterOption) error {
+func (c *Client) WaitUntilJobComplete(ctx context.Context, input *types.ReadJobInput, opts ...aws.WaiterOption) error {
 	w := aws.Waiter{
 		Name:        "WaitUntilJobComplete",
 		MaxAttempts: 120,
@@ -42,7 +43,7 @@ func (c *Client) WaitUntilJobComplete(ctx context.Context, input *ReadJobInput, 
 		},
 		Logger: c.Config.Logger,
 		NewRequest: func(opts []aws.Option) (*aws.Request, error) {
-			var inCpy *ReadJobInput
+			var inCpy *types.ReadJobInput
 			if input != nil {
 				tmp := *input
 				inCpy = &tmp

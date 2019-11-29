@@ -6,46 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/datasync/types"
 )
-
-// CancelTaskExecutionRequest
-type CancelTaskExecutionInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the task execution to cancel.
-	//
-	// TaskExecutionArn is a required field
-	TaskExecutionArn *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s CancelTaskExecutionInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CancelTaskExecutionInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CancelTaskExecutionInput"}
-
-	if s.TaskExecutionArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("TaskExecutionArn"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type CancelTaskExecutionOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s CancelTaskExecutionOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCancelTaskExecution = "CancelTaskExecution"
 
@@ -71,7 +33,7 @@ const opCancelTaskExecution = "CancelTaskExecution"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/CancelTaskExecution
-func (c *Client) CancelTaskExecutionRequest(input *CancelTaskExecutionInput) CancelTaskExecutionRequest {
+func (c *Client) CancelTaskExecutionRequest(input *types.CancelTaskExecutionInput) CancelTaskExecutionRequest {
 	op := &aws.Operation{
 		Name:       opCancelTaskExecution,
 		HTTPMethod: "POST",
@@ -79,10 +41,10 @@ func (c *Client) CancelTaskExecutionRequest(input *CancelTaskExecutionInput) Can
 	}
 
 	if input == nil {
-		input = &CancelTaskExecutionInput{}
+		input = &types.CancelTaskExecutionInput{}
 	}
 
-	req := c.newRequest(op, input, &CancelTaskExecutionOutput{})
+	req := c.newRequest(op, input, &types.CancelTaskExecutionOutput{})
 	return CancelTaskExecutionRequest{Request: req, Input: input, Copy: c.CancelTaskExecutionRequest}
 }
 
@@ -90,8 +52,8 @@ func (c *Client) CancelTaskExecutionRequest(input *CancelTaskExecutionInput) Can
 // CancelTaskExecution API operation.
 type CancelTaskExecutionRequest struct {
 	*aws.Request
-	Input *CancelTaskExecutionInput
-	Copy  func(*CancelTaskExecutionInput) CancelTaskExecutionRequest
+	Input *types.CancelTaskExecutionInput
+	Copy  func(*types.CancelTaskExecutionInput) CancelTaskExecutionRequest
 }
 
 // Send marshals and sends the CancelTaskExecution API request.
@@ -103,7 +65,7 @@ func (r CancelTaskExecutionRequest) Send(ctx context.Context) (*CancelTaskExecut
 	}
 
 	resp := &CancelTaskExecutionResponse{
-		CancelTaskExecutionOutput: r.Request.Data.(*CancelTaskExecutionOutput),
+		CancelTaskExecutionOutput: r.Request.Data.(*types.CancelTaskExecutionOutput),
 		response:                  &aws.Response{Request: r.Request},
 	}
 
@@ -113,7 +75,7 @@ func (r CancelTaskExecutionRequest) Send(ctx context.Context) (*CancelTaskExecut
 // CancelTaskExecutionResponse is the response type for the
 // CancelTaskExecution API operation.
 type CancelTaskExecutionResponse struct {
-	*CancelTaskExecutionOutput
+	*types.CancelTaskExecutionOutput
 
 	response *aws.Response
 }

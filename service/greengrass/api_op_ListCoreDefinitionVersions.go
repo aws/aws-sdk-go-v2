@@ -6,100 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/greengrass/types"
 )
-
-type ListCoreDefinitionVersionsInput struct {
-	_ struct{} `type:"structure"`
-
-	// CoreDefinitionId is a required field
-	CoreDefinitionId *string `location:"uri" locationName:"CoreDefinitionId" type:"string" required:"true"`
-
-	MaxResults *string `location:"querystring" locationName:"MaxResults" type:"string"`
-
-	NextToken *string `location:"querystring" locationName:"NextToken" type:"string"`
-}
-
-// String returns the string representation
-func (s ListCoreDefinitionVersionsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListCoreDefinitionVersionsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListCoreDefinitionVersionsInput"}
-
-	if s.CoreDefinitionId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("CoreDefinitionId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListCoreDefinitionVersionsInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.CoreDefinitionId != nil {
-		v := *s.CoreDefinitionId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "CoreDefinitionId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.MaxResults != nil {
-		v := *s.MaxResults
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "MaxResults", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type ListCoreDefinitionVersionsOutput struct {
-	_ struct{} `type:"structure"`
-
-	NextToken *string `type:"string"`
-
-	Versions []VersionInformation `type:"list"`
-}
-
-// String returns the string representation
-func (s ListCoreDefinitionVersionsOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListCoreDefinitionVersionsOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Versions != nil {
-		v := s.Versions
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "Versions", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	return nil
-}
 
 const opListCoreDefinitionVersions = "ListCoreDefinitionVersions"
 
@@ -116,7 +24,7 @@ const opListCoreDefinitionVersions = "ListCoreDefinitionVersions"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/ListCoreDefinitionVersions
-func (c *Client) ListCoreDefinitionVersionsRequest(input *ListCoreDefinitionVersionsInput) ListCoreDefinitionVersionsRequest {
+func (c *Client) ListCoreDefinitionVersionsRequest(input *types.ListCoreDefinitionVersionsInput) ListCoreDefinitionVersionsRequest {
 	op := &aws.Operation{
 		Name:       opListCoreDefinitionVersions,
 		HTTPMethod: "GET",
@@ -124,10 +32,10 @@ func (c *Client) ListCoreDefinitionVersionsRequest(input *ListCoreDefinitionVers
 	}
 
 	if input == nil {
-		input = &ListCoreDefinitionVersionsInput{}
+		input = &types.ListCoreDefinitionVersionsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListCoreDefinitionVersionsOutput{})
+	req := c.newRequest(op, input, &types.ListCoreDefinitionVersionsOutput{})
 	return ListCoreDefinitionVersionsRequest{Request: req, Input: input, Copy: c.ListCoreDefinitionVersionsRequest}
 }
 
@@ -135,8 +43,8 @@ func (c *Client) ListCoreDefinitionVersionsRequest(input *ListCoreDefinitionVers
 // ListCoreDefinitionVersions API operation.
 type ListCoreDefinitionVersionsRequest struct {
 	*aws.Request
-	Input *ListCoreDefinitionVersionsInput
-	Copy  func(*ListCoreDefinitionVersionsInput) ListCoreDefinitionVersionsRequest
+	Input *types.ListCoreDefinitionVersionsInput
+	Copy  func(*types.ListCoreDefinitionVersionsInput) ListCoreDefinitionVersionsRequest
 }
 
 // Send marshals and sends the ListCoreDefinitionVersions API request.
@@ -148,7 +56,7 @@ func (r ListCoreDefinitionVersionsRequest) Send(ctx context.Context) (*ListCoreD
 	}
 
 	resp := &ListCoreDefinitionVersionsResponse{
-		ListCoreDefinitionVersionsOutput: r.Request.Data.(*ListCoreDefinitionVersionsOutput),
+		ListCoreDefinitionVersionsOutput: r.Request.Data.(*types.ListCoreDefinitionVersionsOutput),
 		response:                         &aws.Response{Request: r.Request},
 	}
 
@@ -158,7 +66,7 @@ func (r ListCoreDefinitionVersionsRequest) Send(ctx context.Context) (*ListCoreD
 // ListCoreDefinitionVersionsResponse is the response type for the
 // ListCoreDefinitionVersions API operation.
 type ListCoreDefinitionVersionsResponse struct {
-	*ListCoreDefinitionVersionsOutput
+	*types.ListCoreDefinitionVersionsOutput
 
 	response *aws.Response
 }

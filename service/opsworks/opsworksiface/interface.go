@@ -13,6 +13,7 @@ import (
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/opsworks"
+	"github.com/aws/aws-sdk-go-v2/service/opsworks/types"
 )
 
 // ClientAPI provides an interface to enable mocking the
@@ -46,7 +47,7 @@ import (
 //    type mockClientClient struct {
 //        opsworksiface.ClientPI
 //    }
-//    func (m *mockClientClient) AssignInstance(input *opsworks.AssignInstanceInput) (*opsworks.AssignInstanceOutput, error) {
+//    func (m *mockClientClient) AssignInstance(input *types.AssignInstanceInput) (*types.AssignInstanceOutput, error) {
 //        // mock response/functionality
 //    }
 //
@@ -64,165 +65,165 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type ClientAPI interface {
-	AssignInstanceRequest(*opsworks.AssignInstanceInput) opsworks.AssignInstanceRequest
+	AssignInstanceRequest(*types.AssignInstanceInput) opsworks.AssignInstanceRequest
 
-	AssignVolumeRequest(*opsworks.AssignVolumeInput) opsworks.AssignVolumeRequest
+	AssignVolumeRequest(*types.AssignVolumeInput) opsworks.AssignVolumeRequest
 
-	AssociateElasticIpRequest(*opsworks.AssociateElasticIpInput) opsworks.AssociateElasticIpRequest
+	AssociateElasticIpRequest(*types.AssociateElasticIpInput) opsworks.AssociateElasticIpRequest
 
-	AttachElasticLoadBalancerRequest(*opsworks.AttachElasticLoadBalancerInput) opsworks.AttachElasticLoadBalancerRequest
+	AttachElasticLoadBalancerRequest(*types.AttachElasticLoadBalancerInput) opsworks.AttachElasticLoadBalancerRequest
 
-	CloneStackRequest(*opsworks.CloneStackInput) opsworks.CloneStackRequest
+	CloneStackRequest(*types.CloneStackInput) opsworks.CloneStackRequest
 
-	CreateAppRequest(*opsworks.CreateAppInput) opsworks.CreateAppRequest
+	CreateAppRequest(*types.CreateAppInput) opsworks.CreateAppRequest
 
-	CreateDeploymentRequest(*opsworks.CreateDeploymentInput) opsworks.CreateDeploymentRequest
+	CreateDeploymentRequest(*types.CreateDeploymentInput) opsworks.CreateDeploymentRequest
 
-	CreateInstanceRequest(*opsworks.CreateInstanceInput) opsworks.CreateInstanceRequest
+	CreateInstanceRequest(*types.CreateInstanceInput) opsworks.CreateInstanceRequest
 
-	CreateLayerRequest(*opsworks.CreateLayerInput) opsworks.CreateLayerRequest
+	CreateLayerRequest(*types.CreateLayerInput) opsworks.CreateLayerRequest
 
-	CreateStackRequest(*opsworks.CreateStackInput) opsworks.CreateStackRequest
+	CreateStackRequest(*types.CreateStackInput) opsworks.CreateStackRequest
 
-	CreateUserProfileRequest(*opsworks.CreateUserProfileInput) opsworks.CreateUserProfileRequest
+	CreateUserProfileRequest(*types.CreateUserProfileInput) opsworks.CreateUserProfileRequest
 
-	DeleteAppRequest(*opsworks.DeleteAppInput) opsworks.DeleteAppRequest
+	DeleteAppRequest(*types.DeleteAppInput) opsworks.DeleteAppRequest
 
-	DeleteInstanceRequest(*opsworks.DeleteInstanceInput) opsworks.DeleteInstanceRequest
+	DeleteInstanceRequest(*types.DeleteInstanceInput) opsworks.DeleteInstanceRequest
 
-	DeleteLayerRequest(*opsworks.DeleteLayerInput) opsworks.DeleteLayerRequest
+	DeleteLayerRequest(*types.DeleteLayerInput) opsworks.DeleteLayerRequest
 
-	DeleteStackRequest(*opsworks.DeleteStackInput) opsworks.DeleteStackRequest
+	DeleteStackRequest(*types.DeleteStackInput) opsworks.DeleteStackRequest
 
-	DeleteUserProfileRequest(*opsworks.DeleteUserProfileInput) opsworks.DeleteUserProfileRequest
+	DeleteUserProfileRequest(*types.DeleteUserProfileInput) opsworks.DeleteUserProfileRequest
 
-	DeregisterEcsClusterRequest(*opsworks.DeregisterEcsClusterInput) opsworks.DeregisterEcsClusterRequest
+	DeregisterEcsClusterRequest(*types.DeregisterEcsClusterInput) opsworks.DeregisterEcsClusterRequest
 
-	DeregisterElasticIpRequest(*opsworks.DeregisterElasticIpInput) opsworks.DeregisterElasticIpRequest
+	DeregisterElasticIpRequest(*types.DeregisterElasticIpInput) opsworks.DeregisterElasticIpRequest
 
-	DeregisterInstanceRequest(*opsworks.DeregisterInstanceInput) opsworks.DeregisterInstanceRequest
+	DeregisterInstanceRequest(*types.DeregisterInstanceInput) opsworks.DeregisterInstanceRequest
 
-	DeregisterRdsDbInstanceRequest(*opsworks.DeregisterRdsDbInstanceInput) opsworks.DeregisterRdsDbInstanceRequest
+	DeregisterRdsDbInstanceRequest(*types.DeregisterRdsDbInstanceInput) opsworks.DeregisterRdsDbInstanceRequest
 
-	DeregisterVolumeRequest(*opsworks.DeregisterVolumeInput) opsworks.DeregisterVolumeRequest
+	DeregisterVolumeRequest(*types.DeregisterVolumeInput) opsworks.DeregisterVolumeRequest
 
-	DescribeAgentVersionsRequest(*opsworks.DescribeAgentVersionsInput) opsworks.DescribeAgentVersionsRequest
+	DescribeAgentVersionsRequest(*types.DescribeAgentVersionsInput) opsworks.DescribeAgentVersionsRequest
 
-	DescribeAppsRequest(*opsworks.DescribeAppsInput) opsworks.DescribeAppsRequest
+	DescribeAppsRequest(*types.DescribeAppsInput) opsworks.DescribeAppsRequest
 
-	DescribeCommandsRequest(*opsworks.DescribeCommandsInput) opsworks.DescribeCommandsRequest
+	DescribeCommandsRequest(*types.DescribeCommandsInput) opsworks.DescribeCommandsRequest
 
-	DescribeDeploymentsRequest(*opsworks.DescribeDeploymentsInput) opsworks.DescribeDeploymentsRequest
+	DescribeDeploymentsRequest(*types.DescribeDeploymentsInput) opsworks.DescribeDeploymentsRequest
 
-	DescribeEcsClustersRequest(*opsworks.DescribeEcsClustersInput) opsworks.DescribeEcsClustersRequest
+	DescribeEcsClustersRequest(*types.DescribeEcsClustersInput) opsworks.DescribeEcsClustersRequest
 
-	DescribeElasticIpsRequest(*opsworks.DescribeElasticIpsInput) opsworks.DescribeElasticIpsRequest
+	DescribeElasticIpsRequest(*types.DescribeElasticIpsInput) opsworks.DescribeElasticIpsRequest
 
-	DescribeElasticLoadBalancersRequest(*opsworks.DescribeElasticLoadBalancersInput) opsworks.DescribeElasticLoadBalancersRequest
+	DescribeElasticLoadBalancersRequest(*types.DescribeElasticLoadBalancersInput) opsworks.DescribeElasticLoadBalancersRequest
 
-	DescribeInstancesRequest(*opsworks.DescribeInstancesInput) opsworks.DescribeInstancesRequest
+	DescribeInstancesRequest(*types.DescribeInstancesInput) opsworks.DescribeInstancesRequest
 
-	DescribeLayersRequest(*opsworks.DescribeLayersInput) opsworks.DescribeLayersRequest
+	DescribeLayersRequest(*types.DescribeLayersInput) opsworks.DescribeLayersRequest
 
-	DescribeLoadBasedAutoScalingRequest(*opsworks.DescribeLoadBasedAutoScalingInput) opsworks.DescribeLoadBasedAutoScalingRequest
+	DescribeLoadBasedAutoScalingRequest(*types.DescribeLoadBasedAutoScalingInput) opsworks.DescribeLoadBasedAutoScalingRequest
 
-	DescribeMyUserProfileRequest(*opsworks.DescribeMyUserProfileInput) opsworks.DescribeMyUserProfileRequest
+	DescribeMyUserProfileRequest(*types.DescribeMyUserProfileInput) opsworks.DescribeMyUserProfileRequest
 
-	DescribeOperatingSystemsRequest(*opsworks.DescribeOperatingSystemsInput) opsworks.DescribeOperatingSystemsRequest
+	DescribeOperatingSystemsRequest(*types.DescribeOperatingSystemsInput) opsworks.DescribeOperatingSystemsRequest
 
-	DescribePermissionsRequest(*opsworks.DescribePermissionsInput) opsworks.DescribePermissionsRequest
+	DescribePermissionsRequest(*types.DescribePermissionsInput) opsworks.DescribePermissionsRequest
 
-	DescribeRaidArraysRequest(*opsworks.DescribeRaidArraysInput) opsworks.DescribeRaidArraysRequest
+	DescribeRaidArraysRequest(*types.DescribeRaidArraysInput) opsworks.DescribeRaidArraysRequest
 
-	DescribeRdsDbInstancesRequest(*opsworks.DescribeRdsDbInstancesInput) opsworks.DescribeRdsDbInstancesRequest
+	DescribeRdsDbInstancesRequest(*types.DescribeRdsDbInstancesInput) opsworks.DescribeRdsDbInstancesRequest
 
-	DescribeServiceErrorsRequest(*opsworks.DescribeServiceErrorsInput) opsworks.DescribeServiceErrorsRequest
+	DescribeServiceErrorsRequest(*types.DescribeServiceErrorsInput) opsworks.DescribeServiceErrorsRequest
 
-	DescribeStackProvisioningParametersRequest(*opsworks.DescribeStackProvisioningParametersInput) opsworks.DescribeStackProvisioningParametersRequest
+	DescribeStackProvisioningParametersRequest(*types.DescribeStackProvisioningParametersInput) opsworks.DescribeStackProvisioningParametersRequest
 
-	DescribeStackSummaryRequest(*opsworks.DescribeStackSummaryInput) opsworks.DescribeStackSummaryRequest
+	DescribeStackSummaryRequest(*types.DescribeStackSummaryInput) opsworks.DescribeStackSummaryRequest
 
-	DescribeStacksRequest(*opsworks.DescribeStacksInput) opsworks.DescribeStacksRequest
+	DescribeStacksRequest(*types.DescribeStacksInput) opsworks.DescribeStacksRequest
 
-	DescribeTimeBasedAutoScalingRequest(*opsworks.DescribeTimeBasedAutoScalingInput) opsworks.DescribeTimeBasedAutoScalingRequest
+	DescribeTimeBasedAutoScalingRequest(*types.DescribeTimeBasedAutoScalingInput) opsworks.DescribeTimeBasedAutoScalingRequest
 
-	DescribeUserProfilesRequest(*opsworks.DescribeUserProfilesInput) opsworks.DescribeUserProfilesRequest
+	DescribeUserProfilesRequest(*types.DescribeUserProfilesInput) opsworks.DescribeUserProfilesRequest
 
-	DescribeVolumesRequest(*opsworks.DescribeVolumesInput) opsworks.DescribeVolumesRequest
+	DescribeVolumesRequest(*types.DescribeVolumesInput) opsworks.DescribeVolumesRequest
 
-	DetachElasticLoadBalancerRequest(*opsworks.DetachElasticLoadBalancerInput) opsworks.DetachElasticLoadBalancerRequest
+	DetachElasticLoadBalancerRequest(*types.DetachElasticLoadBalancerInput) opsworks.DetachElasticLoadBalancerRequest
 
-	DisassociateElasticIpRequest(*opsworks.DisassociateElasticIpInput) opsworks.DisassociateElasticIpRequest
+	DisassociateElasticIpRequest(*types.DisassociateElasticIpInput) opsworks.DisassociateElasticIpRequest
 
-	GetHostnameSuggestionRequest(*opsworks.GetHostnameSuggestionInput) opsworks.GetHostnameSuggestionRequest
+	GetHostnameSuggestionRequest(*types.GetHostnameSuggestionInput) opsworks.GetHostnameSuggestionRequest
 
-	GrantAccessRequest(*opsworks.GrantAccessInput) opsworks.GrantAccessRequest
+	GrantAccessRequest(*types.GrantAccessInput) opsworks.GrantAccessRequest
 
-	ListTagsRequest(*opsworks.ListTagsInput) opsworks.ListTagsRequest
+	ListTagsRequest(*types.ListTagsInput) opsworks.ListTagsRequest
 
-	RebootInstanceRequest(*opsworks.RebootInstanceInput) opsworks.RebootInstanceRequest
+	RebootInstanceRequest(*types.RebootInstanceInput) opsworks.RebootInstanceRequest
 
-	RegisterEcsClusterRequest(*opsworks.RegisterEcsClusterInput) opsworks.RegisterEcsClusterRequest
+	RegisterEcsClusterRequest(*types.RegisterEcsClusterInput) opsworks.RegisterEcsClusterRequest
 
-	RegisterElasticIpRequest(*opsworks.RegisterElasticIpInput) opsworks.RegisterElasticIpRequest
+	RegisterElasticIpRequest(*types.RegisterElasticIpInput) opsworks.RegisterElasticIpRequest
 
-	RegisterInstanceRequest(*opsworks.RegisterInstanceInput) opsworks.RegisterInstanceRequest
+	RegisterInstanceRequest(*types.RegisterInstanceInput) opsworks.RegisterInstanceRequest
 
-	RegisterRdsDbInstanceRequest(*opsworks.RegisterRdsDbInstanceInput) opsworks.RegisterRdsDbInstanceRequest
+	RegisterRdsDbInstanceRequest(*types.RegisterRdsDbInstanceInput) opsworks.RegisterRdsDbInstanceRequest
 
-	RegisterVolumeRequest(*opsworks.RegisterVolumeInput) opsworks.RegisterVolumeRequest
+	RegisterVolumeRequest(*types.RegisterVolumeInput) opsworks.RegisterVolumeRequest
 
-	SetLoadBasedAutoScalingRequest(*opsworks.SetLoadBasedAutoScalingInput) opsworks.SetLoadBasedAutoScalingRequest
+	SetLoadBasedAutoScalingRequest(*types.SetLoadBasedAutoScalingInput) opsworks.SetLoadBasedAutoScalingRequest
 
-	SetPermissionRequest(*opsworks.SetPermissionInput) opsworks.SetPermissionRequest
+	SetPermissionRequest(*types.SetPermissionInput) opsworks.SetPermissionRequest
 
-	SetTimeBasedAutoScalingRequest(*opsworks.SetTimeBasedAutoScalingInput) opsworks.SetTimeBasedAutoScalingRequest
+	SetTimeBasedAutoScalingRequest(*types.SetTimeBasedAutoScalingInput) opsworks.SetTimeBasedAutoScalingRequest
 
-	StartInstanceRequest(*opsworks.StartInstanceInput) opsworks.StartInstanceRequest
+	StartInstanceRequest(*types.StartInstanceInput) opsworks.StartInstanceRequest
 
-	StartStackRequest(*opsworks.StartStackInput) opsworks.StartStackRequest
+	StartStackRequest(*types.StartStackInput) opsworks.StartStackRequest
 
-	StopInstanceRequest(*opsworks.StopInstanceInput) opsworks.StopInstanceRequest
+	StopInstanceRequest(*types.StopInstanceInput) opsworks.StopInstanceRequest
 
-	StopStackRequest(*opsworks.StopStackInput) opsworks.StopStackRequest
+	StopStackRequest(*types.StopStackInput) opsworks.StopStackRequest
 
-	TagResourceRequest(*opsworks.TagResourceInput) opsworks.TagResourceRequest
+	TagResourceRequest(*types.TagResourceInput) opsworks.TagResourceRequest
 
-	UnassignInstanceRequest(*opsworks.UnassignInstanceInput) opsworks.UnassignInstanceRequest
+	UnassignInstanceRequest(*types.UnassignInstanceInput) opsworks.UnassignInstanceRequest
 
-	UnassignVolumeRequest(*opsworks.UnassignVolumeInput) opsworks.UnassignVolumeRequest
+	UnassignVolumeRequest(*types.UnassignVolumeInput) opsworks.UnassignVolumeRequest
 
-	UntagResourceRequest(*opsworks.UntagResourceInput) opsworks.UntagResourceRequest
+	UntagResourceRequest(*types.UntagResourceInput) opsworks.UntagResourceRequest
 
-	UpdateAppRequest(*opsworks.UpdateAppInput) opsworks.UpdateAppRequest
+	UpdateAppRequest(*types.UpdateAppInput) opsworks.UpdateAppRequest
 
-	UpdateElasticIpRequest(*opsworks.UpdateElasticIpInput) opsworks.UpdateElasticIpRequest
+	UpdateElasticIpRequest(*types.UpdateElasticIpInput) opsworks.UpdateElasticIpRequest
 
-	UpdateInstanceRequest(*opsworks.UpdateInstanceInput) opsworks.UpdateInstanceRequest
+	UpdateInstanceRequest(*types.UpdateInstanceInput) opsworks.UpdateInstanceRequest
 
-	UpdateLayerRequest(*opsworks.UpdateLayerInput) opsworks.UpdateLayerRequest
+	UpdateLayerRequest(*types.UpdateLayerInput) opsworks.UpdateLayerRequest
 
-	UpdateMyUserProfileRequest(*opsworks.UpdateMyUserProfileInput) opsworks.UpdateMyUserProfileRequest
+	UpdateMyUserProfileRequest(*types.UpdateMyUserProfileInput) opsworks.UpdateMyUserProfileRequest
 
-	UpdateRdsDbInstanceRequest(*opsworks.UpdateRdsDbInstanceInput) opsworks.UpdateRdsDbInstanceRequest
+	UpdateRdsDbInstanceRequest(*types.UpdateRdsDbInstanceInput) opsworks.UpdateRdsDbInstanceRequest
 
-	UpdateStackRequest(*opsworks.UpdateStackInput) opsworks.UpdateStackRequest
+	UpdateStackRequest(*types.UpdateStackInput) opsworks.UpdateStackRequest
 
-	UpdateUserProfileRequest(*opsworks.UpdateUserProfileInput) opsworks.UpdateUserProfileRequest
+	UpdateUserProfileRequest(*types.UpdateUserProfileInput) opsworks.UpdateUserProfileRequest
 
-	UpdateVolumeRequest(*opsworks.UpdateVolumeInput) opsworks.UpdateVolumeRequest
+	UpdateVolumeRequest(*types.UpdateVolumeInput) opsworks.UpdateVolumeRequest
 
-	WaitUntilAppExists(context.Context, *opsworks.DescribeAppsInput, ...aws.WaiterOption) error
+	WaitUntilAppExists(context.Context, *types.DescribeAppsInput, ...aws.WaiterOption) error
 
-	WaitUntilDeploymentSuccessful(context.Context, *opsworks.DescribeDeploymentsInput, ...aws.WaiterOption) error
+	WaitUntilDeploymentSuccessful(context.Context, *types.DescribeDeploymentsInput, ...aws.WaiterOption) error
 
-	WaitUntilInstanceOnline(context.Context, *opsworks.DescribeInstancesInput, ...aws.WaiterOption) error
+	WaitUntilInstanceOnline(context.Context, *types.DescribeInstancesInput, ...aws.WaiterOption) error
 
-	WaitUntilInstanceRegistered(context.Context, *opsworks.DescribeInstancesInput, ...aws.WaiterOption) error
+	WaitUntilInstanceRegistered(context.Context, *types.DescribeInstancesInput, ...aws.WaiterOption) error
 
-	WaitUntilInstanceStopped(context.Context, *opsworks.DescribeInstancesInput, ...aws.WaiterOption) error
+	WaitUntilInstanceStopped(context.Context, *types.DescribeInstancesInput, ...aws.WaiterOption) error
 
-	WaitUntilInstanceTerminated(context.Context, *opsworks.DescribeInstancesInput, ...aws.WaiterOption) error
+	WaitUntilInstanceTerminated(context.Context, *types.DescribeInstancesInput, ...aws.WaiterOption) error
 }
 
 var _ ClientAPI = (*opsworks.Client)(nil)

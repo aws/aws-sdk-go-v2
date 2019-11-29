@@ -6,81 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/cloudfront/types"
 )
-
-type GetPublicKeyInput struct {
-	_ struct{} `type:"structure"`
-
-	// Request the ID for the public key.
-	//
-	// Id is a required field
-	Id *string `location:"uri" locationName:"Id" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetPublicKeyInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetPublicKeyInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetPublicKeyInput"}
-
-	if s.Id == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Id"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetPublicKeyInput) MarshalFields(e protocol.FieldEncoder) error {
-
-	if s.Id != nil {
-		v := *s.Id
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "Id", protocol.StringValue(v), metadata)
-	}
-	return nil
-}
-
-type GetPublicKeyOutput struct {
-	_ struct{} `type:"structure" payload:"PublicKey"`
-
-	// The current version of the public key. For example: E2QWRUHAPOMQZL.
-	ETag *string `location:"header" locationName:"ETag" type:"string"`
-
-	// Return the public key.
-	PublicKey *PublicKey `type:"structure"`
-}
-
-// String returns the string representation
-func (s GetPublicKeyOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetPublicKeyOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.ETag != nil {
-		v := *s.ETag
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "ETag", protocol.StringValue(v), metadata)
-	}
-	if s.PublicKey != nil {
-		v := s.PublicKey
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.PayloadTarget, "PublicKey", v, metadata)
-	}
-	return nil
-}
 
 const opGetPublicKey = "GetPublicKey2019_03_26"
 
@@ -97,7 +24,7 @@ const opGetPublicKey = "GetPublicKey2019_03_26"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/GetPublicKey
-func (c *Client) GetPublicKeyRequest(input *GetPublicKeyInput) GetPublicKeyRequest {
+func (c *Client) GetPublicKeyRequest(input *types.GetPublicKeyInput) GetPublicKeyRequest {
 	op := &aws.Operation{
 		Name:       opGetPublicKey,
 		HTTPMethod: "GET",
@@ -105,10 +32,10 @@ func (c *Client) GetPublicKeyRequest(input *GetPublicKeyInput) GetPublicKeyReque
 	}
 
 	if input == nil {
-		input = &GetPublicKeyInput{}
+		input = &types.GetPublicKeyInput{}
 	}
 
-	req := c.newRequest(op, input, &GetPublicKeyOutput{})
+	req := c.newRequest(op, input, &types.GetPublicKeyOutput{})
 	return GetPublicKeyRequest{Request: req, Input: input, Copy: c.GetPublicKeyRequest}
 }
 
@@ -116,8 +43,8 @@ func (c *Client) GetPublicKeyRequest(input *GetPublicKeyInput) GetPublicKeyReque
 // GetPublicKey API operation.
 type GetPublicKeyRequest struct {
 	*aws.Request
-	Input *GetPublicKeyInput
-	Copy  func(*GetPublicKeyInput) GetPublicKeyRequest
+	Input *types.GetPublicKeyInput
+	Copy  func(*types.GetPublicKeyInput) GetPublicKeyRequest
 }
 
 // Send marshals and sends the GetPublicKey API request.
@@ -129,7 +56,7 @@ func (r GetPublicKeyRequest) Send(ctx context.Context) (*GetPublicKeyResponse, e
 	}
 
 	resp := &GetPublicKeyResponse{
-		GetPublicKeyOutput: r.Request.Data.(*GetPublicKeyOutput),
+		GetPublicKeyOutput: r.Request.Data.(*types.GetPublicKeyOutput),
 		response:           &aws.Response{Request: r.Request},
 	}
 
@@ -139,7 +66,7 @@ func (r GetPublicKeyRequest) Send(ctx context.Context) (*GetPublicKeyResponse, e
 // GetPublicKeyResponse is the response type for the
 // GetPublicKey API operation.
 type GetPublicKeyResponse struct {
-	*GetPublicKeyOutput
+	*types.GetPublicKeyOutput
 
 	response *aws.Response
 }

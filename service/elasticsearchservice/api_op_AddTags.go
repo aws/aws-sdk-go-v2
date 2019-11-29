@@ -4,98 +4,12 @@ package elasticsearchservice
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/restjson"
+	"github.com/aws/aws-sdk-go-v2/service/elasticsearchservice/types"
 )
-
-// Container for the parameters to the AddTags operation. Specify the tags that
-// you want to attach to the Elasticsearch domain.
-type AddTagsInput struct {
-	_ struct{} `type:"structure"`
-
-	// Specify the ARN for which you want to add the tags.
-	//
-	// ARN is a required field
-	ARN *string `type:"string" required:"true"`
-
-	// List of Tag that need to be added for the Elasticsearch domain.
-	//
-	// TagList is a required field
-	TagList []Tag `type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s AddTagsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *AddTagsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "AddTagsInput"}
-
-	if s.ARN == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ARN"))
-	}
-
-	if s.TagList == nil {
-		invalidParams.Add(aws.NewErrParamRequired("TagList"))
-	}
-	if s.TagList != nil {
-		for i, v := range s.TagList {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "TagList", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s AddTagsInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.ARN != nil {
-		v := *s.ARN
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "ARN", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.TagList != nil {
-		v := s.TagList
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "TagList", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	return nil
-}
-
-type AddTagsOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s AddTagsOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s AddTagsOutput) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
 
 const opAddTags = "AddTags"
 
@@ -112,7 +26,7 @@ const opAddTags = "AddTags"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) AddTagsRequest(input *AddTagsInput) AddTagsRequest {
+func (c *Client) AddTagsRequest(input *types.AddTagsInput) AddTagsRequest {
 	op := &aws.Operation{
 		Name:       opAddTags,
 		HTTPMethod: "POST",
@@ -120,10 +34,10 @@ func (c *Client) AddTagsRequest(input *AddTagsInput) AddTagsRequest {
 	}
 
 	if input == nil {
-		input = &AddTagsInput{}
+		input = &types.AddTagsInput{}
 	}
 
-	req := c.newRequest(op, input, &AddTagsOutput{})
+	req := c.newRequest(op, input, &types.AddTagsOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return AddTagsRequest{Request: req, Input: input, Copy: c.AddTagsRequest}
@@ -133,8 +47,8 @@ func (c *Client) AddTagsRequest(input *AddTagsInput) AddTagsRequest {
 // AddTags API operation.
 type AddTagsRequest struct {
 	*aws.Request
-	Input *AddTagsInput
-	Copy  func(*AddTagsInput) AddTagsRequest
+	Input *types.AddTagsInput
+	Copy  func(*types.AddTagsInput) AddTagsRequest
 }
 
 // Send marshals and sends the AddTags API request.
@@ -146,7 +60,7 @@ func (r AddTagsRequest) Send(ctx context.Context) (*AddTagsResponse, error) {
 	}
 
 	resp := &AddTagsResponse{
-		AddTagsOutput: r.Request.Data.(*AddTagsOutput),
+		AddTagsOutput: r.Request.Data.(*types.AddTagsOutput),
 		response:      &aws.Response{Request: r.Request},
 	}
 
@@ -156,7 +70,7 @@ func (r AddTagsRequest) Send(ctx context.Context) (*AddTagsResponse, error) {
 // AddTagsResponse is the response type for the
 // AddTags API operation.
 type AddTagsResponse struct {
-	*AddTagsOutput
+	*types.AddTagsOutput
 
 	response *aws.Response
 }

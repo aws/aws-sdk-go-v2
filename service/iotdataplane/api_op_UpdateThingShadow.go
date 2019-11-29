@@ -6,92 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/iotdataplane/types"
 )
-
-// The input for the UpdateThingShadow operation.
-type UpdateThingShadowInput struct {
-	_ struct{} `type:"structure" payload:"Payload"`
-
-	// The state information, in JSON format.
-	//
-	// Payload is a required field
-	Payload []byte `locationName:"payload" type:"blob" required:"true"`
-
-	// The name of the thing.
-	//
-	// ThingName is a required field
-	ThingName *string `location:"uri" locationName:"thingName" min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s UpdateThingShadowInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateThingShadowInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateThingShadowInput"}
-
-	if s.Payload == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Payload"))
-	}
-
-	if s.ThingName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ThingName"))
-	}
-	if s.ThingName != nil && len(*s.ThingName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ThingName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s UpdateThingShadowInput) MarshalFields(e protocol.FieldEncoder) error {
-
-	if s.ThingName != nil {
-		v := *s.ThingName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "thingName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Payload != nil {
-		v := s.Payload
-
-		metadata := protocol.Metadata{}
-		e.SetStream(protocol.PayloadTarget, "payload", protocol.BytesStream(v), metadata)
-	}
-	return nil
-}
-
-// The output from the UpdateThingShadow operation.
-type UpdateThingShadowOutput struct {
-	_ struct{} `type:"structure" payload:"Payload"`
-
-	// The state information, in JSON format.
-	Payload []byte `locationName:"payload" type:"blob"`
-}
-
-// String returns the string representation
-func (s UpdateThingShadowOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s UpdateThingShadowOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.Payload != nil {
-		v := s.Payload
-
-		metadata := protocol.Metadata{}
-		e.SetStream(protocol.PayloadTarget, "payload", protocol.BytesStream(v), metadata)
-	}
-	return nil
-}
 
 const opUpdateThingShadow = "UpdateThingShadow"
 
@@ -109,7 +25,7 @@ const opUpdateThingShadow = "UpdateThingShadow"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) UpdateThingShadowRequest(input *UpdateThingShadowInput) UpdateThingShadowRequest {
+func (c *Client) UpdateThingShadowRequest(input *types.UpdateThingShadowInput) UpdateThingShadowRequest {
 	op := &aws.Operation{
 		Name:       opUpdateThingShadow,
 		HTTPMethod: "POST",
@@ -117,10 +33,10 @@ func (c *Client) UpdateThingShadowRequest(input *UpdateThingShadowInput) UpdateT
 	}
 
 	if input == nil {
-		input = &UpdateThingShadowInput{}
+		input = &types.UpdateThingShadowInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateThingShadowOutput{})
+	req := c.newRequest(op, input, &types.UpdateThingShadowOutput{})
 	return UpdateThingShadowRequest{Request: req, Input: input, Copy: c.UpdateThingShadowRequest}
 }
 
@@ -128,8 +44,8 @@ func (c *Client) UpdateThingShadowRequest(input *UpdateThingShadowInput) UpdateT
 // UpdateThingShadow API operation.
 type UpdateThingShadowRequest struct {
 	*aws.Request
-	Input *UpdateThingShadowInput
-	Copy  func(*UpdateThingShadowInput) UpdateThingShadowRequest
+	Input *types.UpdateThingShadowInput
+	Copy  func(*types.UpdateThingShadowInput) UpdateThingShadowRequest
 }
 
 // Send marshals and sends the UpdateThingShadow API request.
@@ -141,7 +57,7 @@ func (r UpdateThingShadowRequest) Send(ctx context.Context) (*UpdateThingShadowR
 	}
 
 	resp := &UpdateThingShadowResponse{
-		UpdateThingShadowOutput: r.Request.Data.(*UpdateThingShadowOutput),
+		UpdateThingShadowOutput: r.Request.Data.(*types.UpdateThingShadowOutput),
 		response:                &aws.Response{Request: r.Request},
 	}
 
@@ -151,7 +67,7 @@ func (r UpdateThingShadowRequest) Send(ctx context.Context) (*UpdateThingShadowR
 // UpdateThingShadowResponse is the response type for the
 // UpdateThingShadow API operation.
 type UpdateThingShadowResponse struct {
-	*UpdateThingShadowOutput
+	*types.UpdateThingShadowOutput
 
 	response *aws.Response
 }

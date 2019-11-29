@@ -6,135 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/guardduty/types"
 )
-
-type UpdateFilterInput struct {
-	_ struct{} `type:"structure"`
-
-	// Specifies the action that is to be applied to the findings that match the
-	// filter.
-	Action FilterAction `locationName:"action" min:"1" type:"string" enum:"true"`
-
-	// The description of the filter.
-	Description *string `locationName:"description" type:"string"`
-
-	// The unique ID of the detector that specifies the GuardDuty service where
-	// you want to update a filter.
-	//
-	// DetectorId is a required field
-	DetectorId *string `location:"uri" locationName:"detectorId" min:"1" type:"string" required:"true"`
-
-	// The name of the filter.
-	//
-	// FilterName is a required field
-	FilterName *string `location:"uri" locationName:"filterName" type:"string" required:"true"`
-
-	// Represents the criteria to be used in the filter for querying findings.
-	FindingCriteria *FindingCriteria `locationName:"findingCriteria" type:"structure"`
-
-	// Specifies the position of the filter in the list of current filters. Also
-	// specifies the order in which this filter is applied to the findings.
-	Rank *int64 `locationName:"rank" min:"1" type:"integer"`
-}
-
-// String returns the string representation
-func (s UpdateFilterInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateFilterInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateFilterInput"}
-
-	if s.DetectorId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DetectorId"))
-	}
-	if s.DetectorId != nil && len(*s.DetectorId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("DetectorId", 1))
-	}
-
-	if s.FilterName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("FilterName"))
-	}
-	if s.Rank != nil && *s.Rank < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("Rank", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s UpdateFilterInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if len(s.Action) > 0 {
-		v := s.Action
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "action", protocol.QuotedValue{ValueMarshaler: v}, metadata)
-	}
-	if s.Description != nil {
-		v := *s.Description
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "description", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.FindingCriteria != nil {
-		v := s.FindingCriteria
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "findingCriteria", v, metadata)
-	}
-	if s.Rank != nil {
-		v := *s.Rank
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "rank", protocol.Int64Value(v), metadata)
-	}
-	if s.DetectorId != nil {
-		v := *s.DetectorId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "detectorId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.FilterName != nil {
-		v := *s.FilterName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "filterName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type UpdateFilterOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the filter.
-	//
-	// Name is a required field
-	Name *string `locationName:"name" min:"3" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s UpdateFilterOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s UpdateFilterOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.Name != nil {
-		v := *s.Name
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opUpdateFilter = "UpdateFilter"
 
@@ -151,7 +24,7 @@ const opUpdateFilter = "UpdateFilter"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/UpdateFilter
-func (c *Client) UpdateFilterRequest(input *UpdateFilterInput) UpdateFilterRequest {
+func (c *Client) UpdateFilterRequest(input *types.UpdateFilterInput) UpdateFilterRequest {
 	op := &aws.Operation{
 		Name:       opUpdateFilter,
 		HTTPMethod: "POST",
@@ -159,10 +32,10 @@ func (c *Client) UpdateFilterRequest(input *UpdateFilterInput) UpdateFilterReque
 	}
 
 	if input == nil {
-		input = &UpdateFilterInput{}
+		input = &types.UpdateFilterInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateFilterOutput{})
+	req := c.newRequest(op, input, &types.UpdateFilterOutput{})
 	return UpdateFilterRequest{Request: req, Input: input, Copy: c.UpdateFilterRequest}
 }
 
@@ -170,8 +43,8 @@ func (c *Client) UpdateFilterRequest(input *UpdateFilterInput) UpdateFilterReque
 // UpdateFilter API operation.
 type UpdateFilterRequest struct {
 	*aws.Request
-	Input *UpdateFilterInput
-	Copy  func(*UpdateFilterInput) UpdateFilterRequest
+	Input *types.UpdateFilterInput
+	Copy  func(*types.UpdateFilterInput) UpdateFilterRequest
 }
 
 // Send marshals and sends the UpdateFilter API request.
@@ -183,7 +56,7 @@ func (r UpdateFilterRequest) Send(ctx context.Context) (*UpdateFilterResponse, e
 	}
 
 	resp := &UpdateFilterResponse{
-		UpdateFilterOutput: r.Request.Data.(*UpdateFilterOutput),
+		UpdateFilterOutput: r.Request.Data.(*types.UpdateFilterOutput),
 		response:           &aws.Response{Request: r.Request},
 	}
 
@@ -193,7 +66,7 @@ func (r UpdateFilterRequest) Send(ctx context.Context) (*UpdateFilterResponse, e
 // UpdateFilterResponse is the response type for the
 // UpdateFilter API operation.
 type UpdateFilterResponse struct {
-	*UpdateFilterOutput
+	*types.UpdateFilterOutput
 
 	response *aws.Response
 }

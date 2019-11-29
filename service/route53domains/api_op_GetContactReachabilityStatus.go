@@ -6,48 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/route53domains/types"
 )
-
-type GetContactReachabilityStatusInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the domain for which you want to know whether the registrant
-	// contact has confirmed that the email address is valid.
-	DomainName *string `locationName:"domainName" type:"string"`
-}
-
-// String returns the string representation
-func (s GetContactReachabilityStatusInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type GetContactReachabilityStatusOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The domain name for which you requested the reachability status.
-	DomainName *string `locationName:"domainName" type:"string"`
-
-	// Whether the registrant contact has responded. Values include the following:
-	//
-	// PENDING
-	//
-	// We sent the confirmation email and haven't received a response yet.
-	//
-	// DONE
-	//
-	// We sent the email and got confirmation from the registrant contact.
-	//
-	// EXPIRED
-	//
-	// The time limit expired before the registrant contact responded.
-	Status ReachabilityStatus `locationName:"status" type:"string" enum:"true"`
-}
-
-// String returns the string representation
-func (s GetContactReachabilityStatusOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetContactReachabilityStatus = "GetContactReachabilityStatus"
 
@@ -69,7 +29,7 @@ const opGetContactReachabilityStatus = "GetContactReachabilityStatus"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/GetContactReachabilityStatus
-func (c *Client) GetContactReachabilityStatusRequest(input *GetContactReachabilityStatusInput) GetContactReachabilityStatusRequest {
+func (c *Client) GetContactReachabilityStatusRequest(input *types.GetContactReachabilityStatusInput) GetContactReachabilityStatusRequest {
 	op := &aws.Operation{
 		Name:       opGetContactReachabilityStatus,
 		HTTPMethod: "POST",
@@ -77,10 +37,10 @@ func (c *Client) GetContactReachabilityStatusRequest(input *GetContactReachabili
 	}
 
 	if input == nil {
-		input = &GetContactReachabilityStatusInput{}
+		input = &types.GetContactReachabilityStatusInput{}
 	}
 
-	req := c.newRequest(op, input, &GetContactReachabilityStatusOutput{})
+	req := c.newRequest(op, input, &types.GetContactReachabilityStatusOutput{})
 	return GetContactReachabilityStatusRequest{Request: req, Input: input, Copy: c.GetContactReachabilityStatusRequest}
 }
 
@@ -88,8 +48,8 @@ func (c *Client) GetContactReachabilityStatusRequest(input *GetContactReachabili
 // GetContactReachabilityStatus API operation.
 type GetContactReachabilityStatusRequest struct {
 	*aws.Request
-	Input *GetContactReachabilityStatusInput
-	Copy  func(*GetContactReachabilityStatusInput) GetContactReachabilityStatusRequest
+	Input *types.GetContactReachabilityStatusInput
+	Copy  func(*types.GetContactReachabilityStatusInput) GetContactReachabilityStatusRequest
 }
 
 // Send marshals and sends the GetContactReachabilityStatus API request.
@@ -101,7 +61,7 @@ func (r GetContactReachabilityStatusRequest) Send(ctx context.Context) (*GetCont
 	}
 
 	resp := &GetContactReachabilityStatusResponse{
-		GetContactReachabilityStatusOutput: r.Request.Data.(*GetContactReachabilityStatusOutput),
+		GetContactReachabilityStatusOutput: r.Request.Data.(*types.GetContactReachabilityStatusOutput),
 		response:                           &aws.Response{Request: r.Request},
 	}
 
@@ -111,7 +71,7 @@ func (r GetContactReachabilityStatusRequest) Send(ctx context.Context) (*GetCont
 // GetContactReachabilityStatusResponse is the response type for the
 // GetContactReachabilityStatus API operation.
 type GetContactReachabilityStatusResponse struct {
-	*GetContactReachabilityStatusOutput
+	*types.GetContactReachabilityStatusOutput
 
 	response *aws.Response
 }

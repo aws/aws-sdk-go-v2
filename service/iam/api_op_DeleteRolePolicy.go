@@ -6,71 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/query"
+	"github.com/aws/aws-sdk-go-v2/service/iam/types"
 )
-
-type DeleteRolePolicyInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the inline policy to delete from the specified IAM role.
-	//
-	// This parameter allows (through its regex pattern (http://wikipedia.org/wiki/regex))
-	// a string of characters consisting of upper and lowercase alphanumeric characters
-	// with no spaces. You can also include any of the following characters: _+=,.@-
-	//
-	// PolicyName is a required field
-	PolicyName *string `min:"1" type:"string" required:"true"`
-
-	// The name (friendly name, not ARN) identifying the role that the policy is
-	// embedded in.
-	//
-	// This parameter allows (through its regex pattern (http://wikipedia.org/wiki/regex))
-	// a string of characters consisting of upper and lowercase alphanumeric characters
-	// with no spaces. You can also include any of the following characters: _+=,.@-
-	//
-	// RoleName is a required field
-	RoleName *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteRolePolicyInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteRolePolicyInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteRolePolicyInput"}
-
-	if s.PolicyName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("PolicyName"))
-	}
-	if s.PolicyName != nil && len(*s.PolicyName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("PolicyName", 1))
-	}
-
-	if s.RoleName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("RoleName"))
-	}
-	if s.RoleName != nil && len(*s.RoleName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("RoleName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteRolePolicyOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteRolePolicyOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteRolePolicy = "DeleteRolePolicy"
 
@@ -93,7 +32,7 @@ const opDeleteRolePolicy = "DeleteRolePolicy"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeleteRolePolicy
-func (c *Client) DeleteRolePolicyRequest(input *DeleteRolePolicyInput) DeleteRolePolicyRequest {
+func (c *Client) DeleteRolePolicyRequest(input *types.DeleteRolePolicyInput) DeleteRolePolicyRequest {
 	op := &aws.Operation{
 		Name:       opDeleteRolePolicy,
 		HTTPMethod: "POST",
@@ -101,10 +40,10 @@ func (c *Client) DeleteRolePolicyRequest(input *DeleteRolePolicyInput) DeleteRol
 	}
 
 	if input == nil {
-		input = &DeleteRolePolicyInput{}
+		input = &types.DeleteRolePolicyInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteRolePolicyOutput{})
+	req := c.newRequest(op, input, &types.DeleteRolePolicyOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return DeleteRolePolicyRequest{Request: req, Input: input, Copy: c.DeleteRolePolicyRequest}
@@ -114,8 +53,8 @@ func (c *Client) DeleteRolePolicyRequest(input *DeleteRolePolicyInput) DeleteRol
 // DeleteRolePolicy API operation.
 type DeleteRolePolicyRequest struct {
 	*aws.Request
-	Input *DeleteRolePolicyInput
-	Copy  func(*DeleteRolePolicyInput) DeleteRolePolicyRequest
+	Input *types.DeleteRolePolicyInput
+	Copy  func(*types.DeleteRolePolicyInput) DeleteRolePolicyRequest
 }
 
 // Send marshals and sends the DeleteRolePolicy API request.
@@ -127,7 +66,7 @@ func (r DeleteRolePolicyRequest) Send(ctx context.Context) (*DeleteRolePolicyRes
 	}
 
 	resp := &DeleteRolePolicyResponse{
-		DeleteRolePolicyOutput: r.Request.Data.(*DeleteRolePolicyOutput),
+		DeleteRolePolicyOutput: r.Request.Data.(*types.DeleteRolePolicyOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -137,7 +76,7 @@ func (r DeleteRolePolicyRequest) Send(ctx context.Context) (*DeleteRolePolicyRes
 // DeleteRolePolicyResponse is the response type for the
 // DeleteRolePolicy API operation.
 type DeleteRolePolicyResponse struct {
-	*DeleteRolePolicyOutput
+	*types.DeleteRolePolicyOutput
 
 	response *aws.Response
 }

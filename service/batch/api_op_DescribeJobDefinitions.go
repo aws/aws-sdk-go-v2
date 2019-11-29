@@ -6,131 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/batch/types"
 )
-
-type DescribeJobDefinitionsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the job definition to describe.
-	JobDefinitionName *string `locationName:"jobDefinitionName" type:"string"`
-
-	// A list of up to 100 job definition names or full Amazon Resource Name (ARN)
-	// entries.
-	JobDefinitions []string `locationName:"jobDefinitions" type:"list"`
-
-	// The maximum number of results returned by DescribeJobDefinitions in paginated
-	// output. When this parameter is used, DescribeJobDefinitions only returns
-	// maxResults results in a single page along with a nextToken response element.
-	// The remaining results of the initial request can be seen by sending another
-	// DescribeJobDefinitions request with the returned nextToken value. This value
-	// can be between 1 and 100. If this parameter is not used, then DescribeJobDefinitions
-	// returns up to 100 results and a nextToken value if applicable.
-	MaxResults *int64 `locationName:"maxResults" type:"integer"`
-
-	// The nextToken value returned from a previous paginated DescribeJobDefinitions
-	// request where maxResults was used and the results exceeded the value of that
-	// parameter. Pagination continues from the end of the previous results that
-	// returned the nextToken value. This value is null when there are no more results
-	// to return.
-	//
-	// This token should be treated as an opaque identifier that is only used to
-	// retrieve the next items in a list and not for other programmatic purposes.
-	NextToken *string `locationName:"nextToken" type:"string"`
-
-	// The status with which to filter job definitions.
-	Status *string `locationName:"status" type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeJobDefinitionsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DescribeJobDefinitionsInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.JobDefinitionName != nil {
-		v := *s.JobDefinitionName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "jobDefinitionName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.JobDefinitions != nil {
-		v := s.JobDefinitions
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "jobDefinitions", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
-		}
-		ls0.End()
-
-	}
-	if s.MaxResults != nil {
-		v := *s.MaxResults
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "maxResults", protocol.Int64Value(v), metadata)
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Status != nil {
-		v := *s.Status
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "status", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type DescribeJobDefinitionsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The list of job definitions.
-	JobDefinitions []JobDefinition `locationName:"jobDefinitions" type:"list"`
-
-	// The nextToken value to include in a future DescribeJobDefinitions request.
-	// When the results of a DescribeJobDefinitions request exceed maxResults, this
-	// value can be used to retrieve the next page of results. This value is null
-	// when there are no more results to return.
-	NextToken *string `locationName:"nextToken" type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeJobDefinitionsOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DescribeJobDefinitionsOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.JobDefinitions != nil {
-		v := s.JobDefinitions
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "jobDefinitions", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opDescribeJobDefinitions = "DescribeJobDefinitions"
 
@@ -148,7 +25,7 @@ const opDescribeJobDefinitions = "DescribeJobDefinitions"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/DescribeJobDefinitions
-func (c *Client) DescribeJobDefinitionsRequest(input *DescribeJobDefinitionsInput) DescribeJobDefinitionsRequest {
+func (c *Client) DescribeJobDefinitionsRequest(input *types.DescribeJobDefinitionsInput) DescribeJobDefinitionsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeJobDefinitions,
 		HTTPMethod: "POST",
@@ -162,10 +39,10 @@ func (c *Client) DescribeJobDefinitionsRequest(input *DescribeJobDefinitionsInpu
 	}
 
 	if input == nil {
-		input = &DescribeJobDefinitionsInput{}
+		input = &types.DescribeJobDefinitionsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeJobDefinitionsOutput{})
+	req := c.newRequest(op, input, &types.DescribeJobDefinitionsOutput{})
 	return DescribeJobDefinitionsRequest{Request: req, Input: input, Copy: c.DescribeJobDefinitionsRequest}
 }
 
@@ -173,8 +50,8 @@ func (c *Client) DescribeJobDefinitionsRequest(input *DescribeJobDefinitionsInpu
 // DescribeJobDefinitions API operation.
 type DescribeJobDefinitionsRequest struct {
 	*aws.Request
-	Input *DescribeJobDefinitionsInput
-	Copy  func(*DescribeJobDefinitionsInput) DescribeJobDefinitionsRequest
+	Input *types.DescribeJobDefinitionsInput
+	Copy  func(*types.DescribeJobDefinitionsInput) DescribeJobDefinitionsRequest
 }
 
 // Send marshals and sends the DescribeJobDefinitions API request.
@@ -186,7 +63,7 @@ func (r DescribeJobDefinitionsRequest) Send(ctx context.Context) (*DescribeJobDe
 	}
 
 	resp := &DescribeJobDefinitionsResponse{
-		DescribeJobDefinitionsOutput: r.Request.Data.(*DescribeJobDefinitionsOutput),
+		DescribeJobDefinitionsOutput: r.Request.Data.(*types.DescribeJobDefinitionsOutput),
 		response:                     &aws.Response{Request: r.Request},
 	}
 
@@ -216,7 +93,7 @@ func NewDescribeJobDefinitionsPaginator(req DescribeJobDefinitionsRequest) Descr
 	return DescribeJobDefinitionsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *DescribeJobDefinitionsInput
+				var inCpy *types.DescribeJobDefinitionsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -236,14 +113,14 @@ type DescribeJobDefinitionsPaginator struct {
 	aws.Pager
 }
 
-func (p *DescribeJobDefinitionsPaginator) CurrentPage() *DescribeJobDefinitionsOutput {
-	return p.Pager.CurrentPage().(*DescribeJobDefinitionsOutput)
+func (p *DescribeJobDefinitionsPaginator) CurrentPage() *types.DescribeJobDefinitionsOutput {
+	return p.Pager.CurrentPage().(*types.DescribeJobDefinitionsOutput)
 }
 
 // DescribeJobDefinitionsResponse is the response type for the
 // DescribeJobDefinitions API operation.
 type DescribeJobDefinitionsResponse struct {
-	*DescribeJobDefinitionsOutput
+	*types.DescribeJobDefinitionsOutput
 
 	response *aws.Response
 }

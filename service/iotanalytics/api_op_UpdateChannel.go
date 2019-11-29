@@ -6,99 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/restjson"
+	"github.com/aws/aws-sdk-go-v2/service/iotanalytics/types"
 )
-
-type UpdateChannelInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the channel to be updated.
-	//
-	// ChannelName is a required field
-	ChannelName *string `location:"uri" locationName:"channelName" min:"1" type:"string" required:"true"`
-
-	// Where channel data is stored. You may choose one of "serviceManagedS3" or
-	// "customerManagedS3" storage. If not specified, the default is "serviceManagedS3".
-	// This cannot be changed after creation of the channel.
-	ChannelStorage *ChannelStorage `locationName:"channelStorage" type:"structure"`
-
-	// How long, in days, message data is kept for the channel. The retention period
-	// cannot be updated if the channel's S3 storage is customer-managed.
-	RetentionPeriod *RetentionPeriod `locationName:"retentionPeriod" type:"structure"`
-}
-
-// String returns the string representation
-func (s UpdateChannelInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateChannelInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateChannelInput"}
-
-	if s.ChannelName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ChannelName"))
-	}
-	if s.ChannelName != nil && len(*s.ChannelName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ChannelName", 1))
-	}
-	if s.ChannelStorage != nil {
-		if err := s.ChannelStorage.Validate(); err != nil {
-			invalidParams.AddNested("ChannelStorage", err.(aws.ErrInvalidParams))
-		}
-	}
-	if s.RetentionPeriod != nil {
-		if err := s.RetentionPeriod.Validate(); err != nil {
-			invalidParams.AddNested("RetentionPeriod", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s UpdateChannelInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.ChannelStorage != nil {
-		v := s.ChannelStorage
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "channelStorage", v, metadata)
-	}
-	if s.RetentionPeriod != nil {
-		v := s.RetentionPeriod
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "retentionPeriod", v, metadata)
-	}
-	if s.ChannelName != nil {
-		v := *s.ChannelName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "channelName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type UpdateChannelOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s UpdateChannelOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s UpdateChannelOutput) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
 
 const opUpdateChannel = "UpdateChannel"
 
@@ -115,7 +26,7 @@ const opUpdateChannel = "UpdateChannel"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iotanalytics-2017-11-27/UpdateChannel
-func (c *Client) UpdateChannelRequest(input *UpdateChannelInput) UpdateChannelRequest {
+func (c *Client) UpdateChannelRequest(input *types.UpdateChannelInput) UpdateChannelRequest {
 	op := &aws.Operation{
 		Name:       opUpdateChannel,
 		HTTPMethod: "PUT",
@@ -123,10 +34,10 @@ func (c *Client) UpdateChannelRequest(input *UpdateChannelInput) UpdateChannelRe
 	}
 
 	if input == nil {
-		input = &UpdateChannelInput{}
+		input = &types.UpdateChannelInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateChannelOutput{})
+	req := c.newRequest(op, input, &types.UpdateChannelOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return UpdateChannelRequest{Request: req, Input: input, Copy: c.UpdateChannelRequest}
@@ -136,8 +47,8 @@ func (c *Client) UpdateChannelRequest(input *UpdateChannelInput) UpdateChannelRe
 // UpdateChannel API operation.
 type UpdateChannelRequest struct {
 	*aws.Request
-	Input *UpdateChannelInput
-	Copy  func(*UpdateChannelInput) UpdateChannelRequest
+	Input *types.UpdateChannelInput
+	Copy  func(*types.UpdateChannelInput) UpdateChannelRequest
 }
 
 // Send marshals and sends the UpdateChannel API request.
@@ -149,7 +60,7 @@ func (r UpdateChannelRequest) Send(ctx context.Context) (*UpdateChannelResponse,
 	}
 
 	resp := &UpdateChannelResponse{
-		UpdateChannelOutput: r.Request.Data.(*UpdateChannelOutput),
+		UpdateChannelOutput: r.Request.Data.(*types.UpdateChannelOutput),
 		response:            &aws.Response{Request: r.Request},
 	}
 
@@ -159,7 +70,7 @@ func (r UpdateChannelRequest) Send(ctx context.Context) (*UpdateChannelResponse,
 // UpdateChannelResponse is the response type for the
 // UpdateChannel API operation.
 type UpdateChannelResponse struct {
-	*UpdateChannelOutput
+	*types.UpdateChannelOutput
 
 	response *aws.Response
 }

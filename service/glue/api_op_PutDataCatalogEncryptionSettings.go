@@ -6,57 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/glue/types"
 )
-
-type PutDataCatalogEncryptionSettingsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the Data Catalog to set the security configuration for. If none
-	// is provided, the AWS account ID is used by default.
-	CatalogId *string `min:"1" type:"string"`
-
-	// The security configuration to set.
-	//
-	// DataCatalogEncryptionSettings is a required field
-	DataCatalogEncryptionSettings *DataCatalogEncryptionSettings `type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s PutDataCatalogEncryptionSettingsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *PutDataCatalogEncryptionSettingsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "PutDataCatalogEncryptionSettingsInput"}
-	if s.CatalogId != nil && len(*s.CatalogId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("CatalogId", 1))
-	}
-
-	if s.DataCatalogEncryptionSettings == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DataCatalogEncryptionSettings"))
-	}
-	if s.DataCatalogEncryptionSettings != nil {
-		if err := s.DataCatalogEncryptionSettings.Validate(); err != nil {
-			invalidParams.AddNested("DataCatalogEncryptionSettings", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type PutDataCatalogEncryptionSettingsOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s PutDataCatalogEncryptionSettingsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opPutDataCatalogEncryptionSettings = "PutDataCatalogEncryptionSettings"
 
@@ -75,7 +26,7 @@ const opPutDataCatalogEncryptionSettings = "PutDataCatalogEncryptionSettings"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/PutDataCatalogEncryptionSettings
-func (c *Client) PutDataCatalogEncryptionSettingsRequest(input *PutDataCatalogEncryptionSettingsInput) PutDataCatalogEncryptionSettingsRequest {
+func (c *Client) PutDataCatalogEncryptionSettingsRequest(input *types.PutDataCatalogEncryptionSettingsInput) PutDataCatalogEncryptionSettingsRequest {
 	op := &aws.Operation{
 		Name:       opPutDataCatalogEncryptionSettings,
 		HTTPMethod: "POST",
@@ -83,10 +34,10 @@ func (c *Client) PutDataCatalogEncryptionSettingsRequest(input *PutDataCatalogEn
 	}
 
 	if input == nil {
-		input = &PutDataCatalogEncryptionSettingsInput{}
+		input = &types.PutDataCatalogEncryptionSettingsInput{}
 	}
 
-	req := c.newRequest(op, input, &PutDataCatalogEncryptionSettingsOutput{})
+	req := c.newRequest(op, input, &types.PutDataCatalogEncryptionSettingsOutput{})
 	return PutDataCatalogEncryptionSettingsRequest{Request: req, Input: input, Copy: c.PutDataCatalogEncryptionSettingsRequest}
 }
 
@@ -94,8 +45,8 @@ func (c *Client) PutDataCatalogEncryptionSettingsRequest(input *PutDataCatalogEn
 // PutDataCatalogEncryptionSettings API operation.
 type PutDataCatalogEncryptionSettingsRequest struct {
 	*aws.Request
-	Input *PutDataCatalogEncryptionSettingsInput
-	Copy  func(*PutDataCatalogEncryptionSettingsInput) PutDataCatalogEncryptionSettingsRequest
+	Input *types.PutDataCatalogEncryptionSettingsInput
+	Copy  func(*types.PutDataCatalogEncryptionSettingsInput) PutDataCatalogEncryptionSettingsRequest
 }
 
 // Send marshals and sends the PutDataCatalogEncryptionSettings API request.
@@ -107,7 +58,7 @@ func (r PutDataCatalogEncryptionSettingsRequest) Send(ctx context.Context) (*Put
 	}
 
 	resp := &PutDataCatalogEncryptionSettingsResponse{
-		PutDataCatalogEncryptionSettingsOutput: r.Request.Data.(*PutDataCatalogEncryptionSettingsOutput),
+		PutDataCatalogEncryptionSettingsOutput: r.Request.Data.(*types.PutDataCatalogEncryptionSettingsOutput),
 		response:                               &aws.Response{Request: r.Request},
 	}
 
@@ -117,7 +68,7 @@ func (r PutDataCatalogEncryptionSettingsRequest) Send(ctx context.Context) (*Put
 // PutDataCatalogEncryptionSettingsResponse is the response type for the
 // PutDataCatalogEncryptionSettings API operation.
 type PutDataCatalogEncryptionSettingsResponse struct {
-	*PutDataCatalogEncryptionSettingsOutput
+	*types.PutDataCatalogEncryptionSettingsOutput
 
 	response *aws.Response
 }

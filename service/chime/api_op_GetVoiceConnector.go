@@ -6,73 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/chime/types"
 )
-
-type GetVoiceConnectorInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Chime Voice Connector ID.
-	//
-	// VoiceConnectorId is a required field
-	VoiceConnectorId *string `location:"uri" locationName:"voiceConnectorId" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetVoiceConnectorInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetVoiceConnectorInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetVoiceConnectorInput"}
-
-	if s.VoiceConnectorId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("VoiceConnectorId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetVoiceConnectorInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.VoiceConnectorId != nil {
-		v := *s.VoiceConnectorId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "voiceConnectorId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type GetVoiceConnectorOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Chime Voice Connector details.
-	VoiceConnector *VoiceConnector `type:"structure"`
-}
-
-// String returns the string representation
-func (s GetVoiceConnectorOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetVoiceConnectorOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.VoiceConnector != nil {
-		v := s.VoiceConnector
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "VoiceConnector", v, metadata)
-	}
-	return nil
-}
 
 const opGetVoiceConnector = "GetVoiceConnector"
 
@@ -90,7 +25,7 @@ const opGetVoiceConnector = "GetVoiceConnector"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/GetVoiceConnector
-func (c *Client) GetVoiceConnectorRequest(input *GetVoiceConnectorInput) GetVoiceConnectorRequest {
+func (c *Client) GetVoiceConnectorRequest(input *types.GetVoiceConnectorInput) GetVoiceConnectorRequest {
 	op := &aws.Operation{
 		Name:       opGetVoiceConnector,
 		HTTPMethod: "GET",
@@ -98,10 +33,10 @@ func (c *Client) GetVoiceConnectorRequest(input *GetVoiceConnectorInput) GetVoic
 	}
 
 	if input == nil {
-		input = &GetVoiceConnectorInput{}
+		input = &types.GetVoiceConnectorInput{}
 	}
 
-	req := c.newRequest(op, input, &GetVoiceConnectorOutput{})
+	req := c.newRequest(op, input, &types.GetVoiceConnectorOutput{})
 	return GetVoiceConnectorRequest{Request: req, Input: input, Copy: c.GetVoiceConnectorRequest}
 }
 
@@ -109,8 +44,8 @@ func (c *Client) GetVoiceConnectorRequest(input *GetVoiceConnectorInput) GetVoic
 // GetVoiceConnector API operation.
 type GetVoiceConnectorRequest struct {
 	*aws.Request
-	Input *GetVoiceConnectorInput
-	Copy  func(*GetVoiceConnectorInput) GetVoiceConnectorRequest
+	Input *types.GetVoiceConnectorInput
+	Copy  func(*types.GetVoiceConnectorInput) GetVoiceConnectorRequest
 }
 
 // Send marshals and sends the GetVoiceConnector API request.
@@ -122,7 +57,7 @@ func (r GetVoiceConnectorRequest) Send(ctx context.Context) (*GetVoiceConnectorR
 	}
 
 	resp := &GetVoiceConnectorResponse{
-		GetVoiceConnectorOutput: r.Request.Data.(*GetVoiceConnectorOutput),
+		GetVoiceConnectorOutput: r.Request.Data.(*types.GetVoiceConnectorOutput),
 		response:                &aws.Response{Request: r.Request},
 	}
 
@@ -132,7 +67,7 @@ func (r GetVoiceConnectorRequest) Send(ctx context.Context) (*GetVoiceConnectorR
 // GetVoiceConnectorResponse is the response type for the
 // GetVoiceConnector API operation.
 type GetVoiceConnectorResponse struct {
-	*GetVoiceConnectorOutput
+	*types.GetVoiceConnectorOutput
 
 	response *aws.Response
 }

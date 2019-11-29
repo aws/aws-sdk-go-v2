@@ -6,74 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/types"
 )
-
-type ExecuteProvisionedProductPlanInput struct {
-	_ struct{} `type:"structure"`
-
-	// The language code.
-	//
-	//    * en - English (default)
-	//
-	//    * jp - Japanese
-	//
-	//    * zh - Chinese
-	AcceptLanguage *string `type:"string"`
-
-	// A unique identifier that you provide to ensure idempotency. If multiple requests
-	// differ only by the idempotency token, the same response is returned for each
-	// repeated request.
-	//
-	// IdempotencyToken is a required field
-	IdempotencyToken *string `min:"1" type:"string" required:"true" idempotencyToken:"true"`
-
-	// The plan identifier.
-	//
-	// PlanId is a required field
-	PlanId *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s ExecuteProvisionedProductPlanInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ExecuteProvisionedProductPlanInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ExecuteProvisionedProductPlanInput"}
-
-	if s.IdempotencyToken == nil {
-		invalidParams.Add(aws.NewErrParamRequired("IdempotencyToken"))
-	}
-	if s.IdempotencyToken != nil && len(*s.IdempotencyToken) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("IdempotencyToken", 1))
-	}
-
-	if s.PlanId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("PlanId"))
-	}
-	if s.PlanId != nil && len(*s.PlanId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("PlanId", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ExecuteProvisionedProductPlanOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Information about the result of provisioning the product.
-	RecordDetail *RecordDetail `type:"structure"`
-}
-
-// String returns the string representation
-func (s ExecuteProvisionedProductPlanOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opExecuteProvisionedProductPlan = "ExecuteProvisionedProductPlan"
 
@@ -91,7 +25,7 @@ const opExecuteProvisionedProductPlan = "ExecuteProvisionedProductPlan"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ExecuteProvisionedProductPlan
-func (c *Client) ExecuteProvisionedProductPlanRequest(input *ExecuteProvisionedProductPlanInput) ExecuteProvisionedProductPlanRequest {
+func (c *Client) ExecuteProvisionedProductPlanRequest(input *types.ExecuteProvisionedProductPlanInput) ExecuteProvisionedProductPlanRequest {
 	op := &aws.Operation{
 		Name:       opExecuteProvisionedProductPlan,
 		HTTPMethod: "POST",
@@ -99,10 +33,10 @@ func (c *Client) ExecuteProvisionedProductPlanRequest(input *ExecuteProvisionedP
 	}
 
 	if input == nil {
-		input = &ExecuteProvisionedProductPlanInput{}
+		input = &types.ExecuteProvisionedProductPlanInput{}
 	}
 
-	req := c.newRequest(op, input, &ExecuteProvisionedProductPlanOutput{})
+	req := c.newRequest(op, input, &types.ExecuteProvisionedProductPlanOutput{})
 	return ExecuteProvisionedProductPlanRequest{Request: req, Input: input, Copy: c.ExecuteProvisionedProductPlanRequest}
 }
 
@@ -110,8 +44,8 @@ func (c *Client) ExecuteProvisionedProductPlanRequest(input *ExecuteProvisionedP
 // ExecuteProvisionedProductPlan API operation.
 type ExecuteProvisionedProductPlanRequest struct {
 	*aws.Request
-	Input *ExecuteProvisionedProductPlanInput
-	Copy  func(*ExecuteProvisionedProductPlanInput) ExecuteProvisionedProductPlanRequest
+	Input *types.ExecuteProvisionedProductPlanInput
+	Copy  func(*types.ExecuteProvisionedProductPlanInput) ExecuteProvisionedProductPlanRequest
 }
 
 // Send marshals and sends the ExecuteProvisionedProductPlan API request.
@@ -123,7 +57,7 @@ func (r ExecuteProvisionedProductPlanRequest) Send(ctx context.Context) (*Execut
 	}
 
 	resp := &ExecuteProvisionedProductPlanResponse{
-		ExecuteProvisionedProductPlanOutput: r.Request.Data.(*ExecuteProvisionedProductPlanOutput),
+		ExecuteProvisionedProductPlanOutput: r.Request.Data.(*types.ExecuteProvisionedProductPlanOutput),
 		response:                            &aws.Response{Request: r.Request},
 	}
 
@@ -133,7 +67,7 @@ func (r ExecuteProvisionedProductPlanRequest) Send(ctx context.Context) (*Execut
 // ExecuteProvisionedProductPlanResponse is the response type for the
 // ExecuteProvisionedProductPlan API operation.
 type ExecuteProvisionedProductPlanResponse struct {
-	*ExecuteProvisionedProductPlanOutput
+	*types.ExecuteProvisionedProductPlanOutput
 
 	response *aws.Response
 }

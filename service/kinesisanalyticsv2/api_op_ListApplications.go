@@ -6,61 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/kinesisanalyticsv2/types"
 )
-
-type ListApplicationsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The maximum number of applications to list.
-	Limit *int64 `min:"1" type:"integer"`
-
-	// If a previous command returned a pagination token, pass it into this value
-	// to retrieve the next set of results. For more information about pagination,
-	// see Using the AWS Command Line Interface's Pagination Options (https://docs.aws.amazon.com/cli/latest/userguide/pagination.html).
-	NextToken *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s ListApplicationsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListApplicationsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListApplicationsInput"}
-	if s.Limit != nil && *s.Limit < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("Limit", 1))
-	}
-	if s.NextToken != nil && len(*s.NextToken) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ListApplicationsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A list of ApplicationSummary objects.
-	//
-	// ApplicationSummaries is a required field
-	ApplicationSummaries []ApplicationSummary `type:"list" required:"true"`
-
-	// The pagination token for the next set of results, or null if there are no
-	// additional results. Pass this token into a subsequent command to retrieve
-	// the next set of items For more information about pagination, see Using the
-	// AWS Command Line Interface's Pagination Options (https://docs.aws.amazon.com/cli/latest/userguide/pagination.html).
-	NextToken *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s ListApplicationsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListApplications = "ListApplications"
 
@@ -81,7 +28,7 @@ const opListApplications = "ListApplications"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/ListApplications
-func (c *Client) ListApplicationsRequest(input *ListApplicationsInput) ListApplicationsRequest {
+func (c *Client) ListApplicationsRequest(input *types.ListApplicationsInput) ListApplicationsRequest {
 	op := &aws.Operation{
 		Name:       opListApplications,
 		HTTPMethod: "POST",
@@ -89,10 +36,10 @@ func (c *Client) ListApplicationsRequest(input *ListApplicationsInput) ListAppli
 	}
 
 	if input == nil {
-		input = &ListApplicationsInput{}
+		input = &types.ListApplicationsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListApplicationsOutput{})
+	req := c.newRequest(op, input, &types.ListApplicationsOutput{})
 	return ListApplicationsRequest{Request: req, Input: input, Copy: c.ListApplicationsRequest}
 }
 
@@ -100,8 +47,8 @@ func (c *Client) ListApplicationsRequest(input *ListApplicationsInput) ListAppli
 // ListApplications API operation.
 type ListApplicationsRequest struct {
 	*aws.Request
-	Input *ListApplicationsInput
-	Copy  func(*ListApplicationsInput) ListApplicationsRequest
+	Input *types.ListApplicationsInput
+	Copy  func(*types.ListApplicationsInput) ListApplicationsRequest
 }
 
 // Send marshals and sends the ListApplications API request.
@@ -113,7 +60,7 @@ func (r ListApplicationsRequest) Send(ctx context.Context) (*ListApplicationsRes
 	}
 
 	resp := &ListApplicationsResponse{
-		ListApplicationsOutput: r.Request.Data.(*ListApplicationsOutput),
+		ListApplicationsOutput: r.Request.Data.(*types.ListApplicationsOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -123,7 +70,7 @@ func (r ListApplicationsRequest) Send(ctx context.Context) (*ListApplicationsRes
 // ListApplicationsResponse is the response type for the
 // ListApplications API operation.
 type ListApplicationsResponse struct {
-	*ListApplicationsOutput
+	*types.ListApplicationsOutput
 
 	response *aws.Response
 }

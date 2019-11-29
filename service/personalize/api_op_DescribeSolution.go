@@ -6,48 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/personalize/types"
 )
-
-type DescribeSolutionInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the solution to describe.
-	//
-	// SolutionArn is a required field
-	SolutionArn *string `locationName:"solutionArn" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeSolutionInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeSolutionInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeSolutionInput"}
-
-	if s.SolutionArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("SolutionArn"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribeSolutionOutput struct {
-	_ struct{} `type:"structure"`
-
-	// An object that describes the solution.
-	Solution *Solution `locationName:"solution" type:"structure"`
-}
-
-// String returns the string representation
-func (s DescribeSolutionOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeSolution = "DescribeSolution"
 
@@ -64,7 +24,7 @@ const opDescribeSolution = "DescribeSolution"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/DescribeSolution
-func (c *Client) DescribeSolutionRequest(input *DescribeSolutionInput) DescribeSolutionRequest {
+func (c *Client) DescribeSolutionRequest(input *types.DescribeSolutionInput) DescribeSolutionRequest {
 	op := &aws.Operation{
 		Name:       opDescribeSolution,
 		HTTPMethod: "POST",
@@ -72,10 +32,10 @@ func (c *Client) DescribeSolutionRequest(input *DescribeSolutionInput) DescribeS
 	}
 
 	if input == nil {
-		input = &DescribeSolutionInput{}
+		input = &types.DescribeSolutionInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeSolutionOutput{})
+	req := c.newRequest(op, input, &types.DescribeSolutionOutput{})
 	return DescribeSolutionRequest{Request: req, Input: input, Copy: c.DescribeSolutionRequest}
 }
 
@@ -83,8 +43,8 @@ func (c *Client) DescribeSolutionRequest(input *DescribeSolutionInput) DescribeS
 // DescribeSolution API operation.
 type DescribeSolutionRequest struct {
 	*aws.Request
-	Input *DescribeSolutionInput
-	Copy  func(*DescribeSolutionInput) DescribeSolutionRequest
+	Input *types.DescribeSolutionInput
+	Copy  func(*types.DescribeSolutionInput) DescribeSolutionRequest
 }
 
 // Send marshals and sends the DescribeSolution API request.
@@ -96,7 +56,7 @@ func (r DescribeSolutionRequest) Send(ctx context.Context) (*DescribeSolutionRes
 	}
 
 	resp := &DescribeSolutionResponse{
-		DescribeSolutionOutput: r.Request.Data.(*DescribeSolutionOutput),
+		DescribeSolutionOutput: r.Request.Data.(*types.DescribeSolutionOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -106,7 +66,7 @@ func (r DescribeSolutionRequest) Send(ctx context.Context) (*DescribeSolutionRes
 // DescribeSolutionResponse is the response type for the
 // DescribeSolution API operation.
 type DescribeSolutionResponse struct {
-	*DescribeSolutionOutput
+	*types.DescribeSolutionOutput
 
 	response *aws.Response
 }

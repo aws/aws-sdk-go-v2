@@ -6,61 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/applicationinsights/types"
 )
-
-type DescribeComponentInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the component.
-	//
-	// ComponentName is a required field
-	ComponentName *string `type:"string" required:"true"`
-
-	// The name of the resource group.
-	//
-	// ResourceGroupName is a required field
-	ResourceGroupName *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeComponentInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeComponentInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeComponentInput"}
-
-	if s.ComponentName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ComponentName"))
-	}
-
-	if s.ResourceGroupName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ResourceGroupName"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribeComponentOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Describes a standalone resource or similarly grouped resources that the application
-	// is made up of.
-	ApplicationComponent *ApplicationComponent `type:"structure"`
-
-	// The list of resource ARNs that belong to the component.
-	ResourceList []string `type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeComponentOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeComponent = "DescribeComponent"
 
@@ -78,7 +25,7 @@ const opDescribeComponent = "DescribeComponent"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/application-insights-2018-11-25/DescribeComponent
-func (c *Client) DescribeComponentRequest(input *DescribeComponentInput) DescribeComponentRequest {
+func (c *Client) DescribeComponentRequest(input *types.DescribeComponentInput) DescribeComponentRequest {
 	op := &aws.Operation{
 		Name:       opDescribeComponent,
 		HTTPMethod: "POST",
@@ -86,10 +33,10 @@ func (c *Client) DescribeComponentRequest(input *DescribeComponentInput) Describ
 	}
 
 	if input == nil {
-		input = &DescribeComponentInput{}
+		input = &types.DescribeComponentInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeComponentOutput{})
+	req := c.newRequest(op, input, &types.DescribeComponentOutput{})
 	return DescribeComponentRequest{Request: req, Input: input, Copy: c.DescribeComponentRequest}
 }
 
@@ -97,8 +44,8 @@ func (c *Client) DescribeComponentRequest(input *DescribeComponentInput) Describ
 // DescribeComponent API operation.
 type DescribeComponentRequest struct {
 	*aws.Request
-	Input *DescribeComponentInput
-	Copy  func(*DescribeComponentInput) DescribeComponentRequest
+	Input *types.DescribeComponentInput
+	Copy  func(*types.DescribeComponentInput) DescribeComponentRequest
 }
 
 // Send marshals and sends the DescribeComponent API request.
@@ -110,7 +57,7 @@ func (r DescribeComponentRequest) Send(ctx context.Context) (*DescribeComponentR
 	}
 
 	resp := &DescribeComponentResponse{
-		DescribeComponentOutput: r.Request.Data.(*DescribeComponentOutput),
+		DescribeComponentOutput: r.Request.Data.(*types.DescribeComponentOutput),
 		response:                &aws.Response{Request: r.Request},
 	}
 
@@ -120,7 +67,7 @@ func (r DescribeComponentRequest) Send(ctx context.Context) (*DescribeComponentR
 // DescribeComponentResponse is the response type for the
 // DescribeComponent API operation.
 type DescribeComponentResponse struct {
-	*DescribeComponentOutput
+	*types.DescribeComponentOutput
 
 	response *aws.Response
 }

@@ -6,51 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/glue/types"
 )
-
-type GetTagsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the resource for which to retrieve tags.
-	//
-	// ResourceArn is a required field
-	ResourceArn *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetTagsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetTagsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetTagsInput"}
-
-	if s.ResourceArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ResourceArn"))
-	}
-	if s.ResourceArn != nil && len(*s.ResourceArn) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ResourceArn", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type GetTagsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The requested tags.
-	Tags map[string]string `type:"map"`
-}
-
-// String returns the string representation
-func (s GetTagsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetTags = "GetTags"
 
@@ -67,7 +24,7 @@ const opGetTags = "GetTags"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetTags
-func (c *Client) GetTagsRequest(input *GetTagsInput) GetTagsRequest {
+func (c *Client) GetTagsRequest(input *types.GetTagsInput) GetTagsRequest {
 	op := &aws.Operation{
 		Name:       opGetTags,
 		HTTPMethod: "POST",
@@ -75,10 +32,10 @@ func (c *Client) GetTagsRequest(input *GetTagsInput) GetTagsRequest {
 	}
 
 	if input == nil {
-		input = &GetTagsInput{}
+		input = &types.GetTagsInput{}
 	}
 
-	req := c.newRequest(op, input, &GetTagsOutput{})
+	req := c.newRequest(op, input, &types.GetTagsOutput{})
 	return GetTagsRequest{Request: req, Input: input, Copy: c.GetTagsRequest}
 }
 
@@ -86,8 +43,8 @@ func (c *Client) GetTagsRequest(input *GetTagsInput) GetTagsRequest {
 // GetTags API operation.
 type GetTagsRequest struct {
 	*aws.Request
-	Input *GetTagsInput
-	Copy  func(*GetTagsInput) GetTagsRequest
+	Input *types.GetTagsInput
+	Copy  func(*types.GetTagsInput) GetTagsRequest
 }
 
 // Send marshals and sends the GetTags API request.
@@ -99,7 +56,7 @@ func (r GetTagsRequest) Send(ctx context.Context) (*GetTagsResponse, error) {
 	}
 
 	resp := &GetTagsResponse{
-		GetTagsOutput: r.Request.Data.(*GetTagsOutput),
+		GetTagsOutput: r.Request.Data.(*types.GetTagsOutput),
 		response:      &aws.Response{Request: r.Request},
 	}
 
@@ -109,7 +66,7 @@ func (r GetTagsRequest) Send(ctx context.Context) (*GetTagsResponse, error) {
 // GetTagsResponse is the response type for the
 // GetTags API operation.
 type GetTagsResponse struct {
-	*GetTagsOutput
+	*types.GetTagsOutput
 
 	response *aws.Response
 }

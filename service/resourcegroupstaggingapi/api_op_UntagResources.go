@@ -6,68 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/resourcegroupstaggingapi/types"
 )
-
-type UntagResourcesInput struct {
-	_ struct{} `type:"structure"`
-
-	// A list of ARNs. An ARN (Amazon Resource Name) uniquely identifies a resource.
-	// You can specify a minimum of 1 and a maximum of 20 ARNs (resources) to untag.
-	// An ARN can be set to a maximum of 1600 characters. For more information,
-	// see Amazon Resource Names (ARNs) and AWS Service Namespaces (http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
-	// in the AWS General Reference.
-	//
-	// ResourceARNList is a required field
-	ResourceARNList []string `min:"1" type:"list" required:"true"`
-
-	// A list of the tag keys that you want to remove from the specified resources.
-	//
-	// TagKeys is a required field
-	TagKeys []string `min:"1" type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s UntagResourcesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UntagResourcesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UntagResourcesInput"}
-
-	if s.ResourceARNList == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ResourceARNList"))
-	}
-	if s.ResourceARNList != nil && len(s.ResourceARNList) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ResourceARNList", 1))
-	}
-
-	if s.TagKeys == nil {
-		invalidParams.Add(aws.NewErrParamRequired("TagKeys"))
-	}
-	if s.TagKeys != nil && len(s.TagKeys) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("TagKeys", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type UntagResourcesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Details of resources that could not be untagged. An error code, status code,
-	// and error message are returned for each failed item.
-	FailedResourcesMap map[string]FailureInfo `type:"map"`
-}
-
-// String returns the string representation
-func (s UntagResourcesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opUntagResources = "UntagResources"
 
@@ -95,7 +35,7 @@ const opUntagResources = "UntagResources"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/resourcegroupstaggingapi-2017-01-26/UntagResources
-func (c *Client) UntagResourcesRequest(input *UntagResourcesInput) UntagResourcesRequest {
+func (c *Client) UntagResourcesRequest(input *types.UntagResourcesInput) UntagResourcesRequest {
 	op := &aws.Operation{
 		Name:       opUntagResources,
 		HTTPMethod: "POST",
@@ -103,10 +43,10 @@ func (c *Client) UntagResourcesRequest(input *UntagResourcesInput) UntagResource
 	}
 
 	if input == nil {
-		input = &UntagResourcesInput{}
+		input = &types.UntagResourcesInput{}
 	}
 
-	req := c.newRequest(op, input, &UntagResourcesOutput{})
+	req := c.newRequest(op, input, &types.UntagResourcesOutput{})
 	return UntagResourcesRequest{Request: req, Input: input, Copy: c.UntagResourcesRequest}
 }
 
@@ -114,8 +54,8 @@ func (c *Client) UntagResourcesRequest(input *UntagResourcesInput) UntagResource
 // UntagResources API operation.
 type UntagResourcesRequest struct {
 	*aws.Request
-	Input *UntagResourcesInput
-	Copy  func(*UntagResourcesInput) UntagResourcesRequest
+	Input *types.UntagResourcesInput
+	Copy  func(*types.UntagResourcesInput) UntagResourcesRequest
 }
 
 // Send marshals and sends the UntagResources API request.
@@ -127,7 +67,7 @@ func (r UntagResourcesRequest) Send(ctx context.Context) (*UntagResourcesRespons
 	}
 
 	resp := &UntagResourcesResponse{
-		UntagResourcesOutput: r.Request.Data.(*UntagResourcesOutput),
+		UntagResourcesOutput: r.Request.Data.(*types.UntagResourcesOutput),
 		response:             &aws.Response{Request: r.Request},
 	}
 
@@ -137,7 +77,7 @@ func (r UntagResourcesRequest) Send(ctx context.Context) (*UntagResourcesRespons
 // UntagResourcesResponse is the response type for the
 // UntagResources API operation.
 type UntagResourcesResponse struct {
-	*UntagResourcesOutput
+	*types.UntagResourcesOutput
 
 	response *aws.Response
 }

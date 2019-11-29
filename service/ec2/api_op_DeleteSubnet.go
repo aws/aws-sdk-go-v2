@@ -6,53 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/ec2query"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-type DeleteSubnetInput struct {
-	_ struct{} `type:"structure"`
-
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have
-	// the required permissions, the error response is DryRunOperation. Otherwise,
-	// it is UnauthorizedOperation.
-	DryRun *bool `locationName:"dryRun" type:"boolean"`
-
-	// The ID of the subnet.
-	//
-	// SubnetId is a required field
-	SubnetId *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteSubnetInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteSubnetInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteSubnetInput"}
-
-	if s.SubnetId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("SubnetId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteSubnetOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteSubnetOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteSubnet = "DeleteSubnet"
 
@@ -70,7 +27,7 @@ const opDeleteSubnet = "DeleteSubnet"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteSubnet
-func (c *Client) DeleteSubnetRequest(input *DeleteSubnetInput) DeleteSubnetRequest {
+func (c *Client) DeleteSubnetRequest(input *types.DeleteSubnetInput) DeleteSubnetRequest {
 	op := &aws.Operation{
 		Name:       opDeleteSubnet,
 		HTTPMethod: "POST",
@@ -78,10 +35,10 @@ func (c *Client) DeleteSubnetRequest(input *DeleteSubnetInput) DeleteSubnetReque
 	}
 
 	if input == nil {
-		input = &DeleteSubnetInput{}
+		input = &types.DeleteSubnetInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteSubnetOutput{})
+	req := c.newRequest(op, input, &types.DeleteSubnetOutput{})
 	req.Handlers.Unmarshal.Remove(ec2query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return DeleteSubnetRequest{Request: req, Input: input, Copy: c.DeleteSubnetRequest}
@@ -91,8 +48,8 @@ func (c *Client) DeleteSubnetRequest(input *DeleteSubnetInput) DeleteSubnetReque
 // DeleteSubnet API operation.
 type DeleteSubnetRequest struct {
 	*aws.Request
-	Input *DeleteSubnetInput
-	Copy  func(*DeleteSubnetInput) DeleteSubnetRequest
+	Input *types.DeleteSubnetInput
+	Copy  func(*types.DeleteSubnetInput) DeleteSubnetRequest
 }
 
 // Send marshals and sends the DeleteSubnet API request.
@@ -104,7 +61,7 @@ func (r DeleteSubnetRequest) Send(ctx context.Context) (*DeleteSubnetResponse, e
 	}
 
 	resp := &DeleteSubnetResponse{
-		DeleteSubnetOutput: r.Request.Data.(*DeleteSubnetOutput),
+		DeleteSubnetOutput: r.Request.Data.(*types.DeleteSubnetOutput),
 		response:           &aws.Response{Request: r.Request},
 	}
 
@@ -114,7 +71,7 @@ func (r DeleteSubnetRequest) Send(ctx context.Context) (*DeleteSubnetResponse, e
 // DeleteSubnetResponse is the response type for the
 // DeleteSubnet API operation.
 type DeleteSubnetResponse struct {
-	*DeleteSubnetOutput
+	*types.DeleteSubnetOutput
 
 	response *aws.Response
 }

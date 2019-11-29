@@ -6,52 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/elasticache/types"
 )
-
-// Represents the input of a DescribeCacheSecurityGroups operation.
-type DescribeCacheSecurityGroupsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the cache security group to return details for.
-	CacheSecurityGroupName *string `type:"string"`
-
-	// An optional marker returned from a prior request. Use this marker for pagination
-	// of results from this operation. If this parameter is specified, the response
-	// includes only records beyond the marker, up to the value specified by MaxRecords.
-	Marker *string `type:"string"`
-
-	// The maximum number of records to include in the response. If more records
-	// exist than the specified MaxRecords value, a marker is included in the response
-	// so that the remaining results can be retrieved.
-	//
-	// Default: 100
-	//
-	// Constraints: minimum 20; maximum 100.
-	MaxRecords *int64 `type:"integer"`
-}
-
-// String returns the string representation
-func (s DescribeCacheSecurityGroupsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Represents the output of a DescribeCacheSecurityGroups operation.
-type DescribeCacheSecurityGroupsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A list of cache security groups. Each element in the list contains detailed
-	// information about one group.
-	CacheSecurityGroups []CacheSecurityGroup `locationNameList:"CacheSecurityGroup" type:"list"`
-
-	// Provides an identifier to allow retrieval of paginated results.
-	Marker *string `type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeCacheSecurityGroupsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeCacheSecurityGroups = "DescribeCacheSecurityGroups"
 
@@ -70,7 +26,7 @@ const opDescribeCacheSecurityGroups = "DescribeCacheSecurityGroups"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DescribeCacheSecurityGroups
-func (c *Client) DescribeCacheSecurityGroupsRequest(input *DescribeCacheSecurityGroupsInput) DescribeCacheSecurityGroupsRequest {
+func (c *Client) DescribeCacheSecurityGroupsRequest(input *types.DescribeCacheSecurityGroupsInput) DescribeCacheSecurityGroupsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeCacheSecurityGroups,
 		HTTPMethod: "POST",
@@ -84,10 +40,10 @@ func (c *Client) DescribeCacheSecurityGroupsRequest(input *DescribeCacheSecurity
 	}
 
 	if input == nil {
-		input = &DescribeCacheSecurityGroupsInput{}
+		input = &types.DescribeCacheSecurityGroupsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeCacheSecurityGroupsOutput{})
+	req := c.newRequest(op, input, &types.DescribeCacheSecurityGroupsOutput{})
 	return DescribeCacheSecurityGroupsRequest{Request: req, Input: input, Copy: c.DescribeCacheSecurityGroupsRequest}
 }
 
@@ -95,8 +51,8 @@ func (c *Client) DescribeCacheSecurityGroupsRequest(input *DescribeCacheSecurity
 // DescribeCacheSecurityGroups API operation.
 type DescribeCacheSecurityGroupsRequest struct {
 	*aws.Request
-	Input *DescribeCacheSecurityGroupsInput
-	Copy  func(*DescribeCacheSecurityGroupsInput) DescribeCacheSecurityGroupsRequest
+	Input *types.DescribeCacheSecurityGroupsInput
+	Copy  func(*types.DescribeCacheSecurityGroupsInput) DescribeCacheSecurityGroupsRequest
 }
 
 // Send marshals and sends the DescribeCacheSecurityGroups API request.
@@ -108,7 +64,7 @@ func (r DescribeCacheSecurityGroupsRequest) Send(ctx context.Context) (*Describe
 	}
 
 	resp := &DescribeCacheSecurityGroupsResponse{
-		DescribeCacheSecurityGroupsOutput: r.Request.Data.(*DescribeCacheSecurityGroupsOutput),
+		DescribeCacheSecurityGroupsOutput: r.Request.Data.(*types.DescribeCacheSecurityGroupsOutput),
 		response:                          &aws.Response{Request: r.Request},
 	}
 
@@ -138,7 +94,7 @@ func NewDescribeCacheSecurityGroupsPaginator(req DescribeCacheSecurityGroupsRequ
 	return DescribeCacheSecurityGroupsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *DescribeCacheSecurityGroupsInput
+				var inCpy *types.DescribeCacheSecurityGroupsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -158,14 +114,14 @@ type DescribeCacheSecurityGroupsPaginator struct {
 	aws.Pager
 }
 
-func (p *DescribeCacheSecurityGroupsPaginator) CurrentPage() *DescribeCacheSecurityGroupsOutput {
-	return p.Pager.CurrentPage().(*DescribeCacheSecurityGroupsOutput)
+func (p *DescribeCacheSecurityGroupsPaginator) CurrentPage() *types.DescribeCacheSecurityGroupsOutput {
+	return p.Pager.CurrentPage().(*types.DescribeCacheSecurityGroupsOutput)
 }
 
 // DescribeCacheSecurityGroupsResponse is the response type for the
 // DescribeCacheSecurityGroups API operation.
 type DescribeCacheSecurityGroupsResponse struct {
-	*DescribeCacheSecurityGroupsOutput
+	*types.DescribeCacheSecurityGroupsOutput
 
 	response *aws.Response
 }

@@ -6,110 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/mediapackage/types"
 )
-
-type RotateChannelCredentialsInput struct {
-	_ struct{} `deprecated:"true" type:"structure"`
-
-	// Id is a required field
-	Id *string `location:"uri" locationName:"id" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s RotateChannelCredentialsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *RotateChannelCredentialsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "RotateChannelCredentialsInput"}
-
-	if s.Id == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Id"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s RotateChannelCredentialsInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.Id != nil {
-		v := *s.Id
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "id", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type RotateChannelCredentialsOutput struct {
-	_ struct{} `deprecated:"true" type:"structure"`
-
-	Arn *string `locationName:"arn" type:"string"`
-
-	Description *string `locationName:"description" type:"string"`
-
-	// An HTTP Live Streaming (HLS) ingest resource configuration.
-	HlsIngest *HlsIngest `locationName:"hlsIngest" type:"structure"`
-
-	Id *string `locationName:"id" type:"string"`
-
-	// A collection of tags associated with a resource
-	Tags map[string]string `locationName:"tags" type:"map"`
-}
-
-// String returns the string representation
-func (s RotateChannelCredentialsOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s RotateChannelCredentialsOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.Arn != nil {
-		v := *s.Arn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "arn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Description != nil {
-		v := *s.Description
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "description", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.HlsIngest != nil {
-		v := s.HlsIngest
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "hlsIngest", v, metadata)
-	}
-	if s.Id != nil {
-		v := *s.Id
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "id", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Tags != nil {
-		v := s.Tags
-
-		metadata := protocol.Metadata{}
-		ms0 := e.Map(protocol.BodyTarget, "tags", metadata)
-		ms0.Start()
-		for k1, v1 := range v {
-			ms0.MapSetValue(k1, protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
-		}
-		ms0.End()
-
-	}
-	return nil
-}
 
 const opRotateChannelCredentials = "RotateChannelCredentials"
 
@@ -127,7 +25,7 @@ const opRotateChannelCredentials = "RotateChannelCredentials"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mediapackage-2017-10-12/RotateChannelCredentials
-func (c *Client) RotateChannelCredentialsRequest(input *RotateChannelCredentialsInput) RotateChannelCredentialsRequest {
+func (c *Client) RotateChannelCredentialsRequest(input *types.RotateChannelCredentialsInput) RotateChannelCredentialsRequest {
 	if c.Client.Config.Logger != nil {
 		c.Client.Config.Logger.Log("This operation, RotateChannelCredentials, has been deprecated")
 	}
@@ -138,10 +36,10 @@ func (c *Client) RotateChannelCredentialsRequest(input *RotateChannelCredentials
 	}
 
 	if input == nil {
-		input = &RotateChannelCredentialsInput{}
+		input = &types.RotateChannelCredentialsInput{}
 	}
 
-	req := c.newRequest(op, input, &RotateChannelCredentialsOutput{})
+	req := c.newRequest(op, input, &types.RotateChannelCredentialsOutput{})
 	return RotateChannelCredentialsRequest{Request: req, Input: input, Copy: c.RotateChannelCredentialsRequest}
 }
 
@@ -149,8 +47,8 @@ func (c *Client) RotateChannelCredentialsRequest(input *RotateChannelCredentials
 // RotateChannelCredentials API operation.
 type RotateChannelCredentialsRequest struct {
 	*aws.Request
-	Input *RotateChannelCredentialsInput
-	Copy  func(*RotateChannelCredentialsInput) RotateChannelCredentialsRequest
+	Input *types.RotateChannelCredentialsInput
+	Copy  func(*types.RotateChannelCredentialsInput) RotateChannelCredentialsRequest
 }
 
 // Send marshals and sends the RotateChannelCredentials API request.
@@ -162,7 +60,7 @@ func (r RotateChannelCredentialsRequest) Send(ctx context.Context) (*RotateChann
 	}
 
 	resp := &RotateChannelCredentialsResponse{
-		RotateChannelCredentialsOutput: r.Request.Data.(*RotateChannelCredentialsOutput),
+		RotateChannelCredentialsOutput: r.Request.Data.(*types.RotateChannelCredentialsOutput),
 		response:                       &aws.Response{Request: r.Request},
 	}
 
@@ -172,7 +70,7 @@ func (r RotateChannelCredentialsRequest) Send(ctx context.Context) (*RotateChann
 // RotateChannelCredentialsResponse is the response type for the
 // RotateChannelCredentials API operation.
 type RotateChannelCredentialsResponse struct {
-	*RotateChannelCredentialsOutput
+	*types.RotateChannelCredentialsOutput
 
 	response *aws.Response
 }

@@ -6,48 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/directconnect/types"
 )
-
-type DescribeHostedConnectionsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the interconnect or LAG.
-	//
-	// ConnectionId is a required field
-	ConnectionId *string `locationName:"connectionId" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeHostedConnectionsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeHostedConnectionsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeHostedConnectionsInput"}
-
-	if s.ConnectionId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ConnectionId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribeHostedConnectionsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The connections.
-	Connections []Connection `locationName:"connections" type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeHostedConnectionsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeHostedConnections = "DescribeHostedConnections"
 
@@ -67,7 +27,7 @@ const opDescribeHostedConnections = "DescribeHostedConnections"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DescribeHostedConnections
-func (c *Client) DescribeHostedConnectionsRequest(input *DescribeHostedConnectionsInput) DescribeHostedConnectionsRequest {
+func (c *Client) DescribeHostedConnectionsRequest(input *types.DescribeHostedConnectionsInput) DescribeHostedConnectionsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeHostedConnections,
 		HTTPMethod: "POST",
@@ -75,10 +35,10 @@ func (c *Client) DescribeHostedConnectionsRequest(input *DescribeHostedConnectio
 	}
 
 	if input == nil {
-		input = &DescribeHostedConnectionsInput{}
+		input = &types.DescribeHostedConnectionsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeHostedConnectionsOutput{})
+	req := c.newRequest(op, input, &types.DescribeHostedConnectionsOutput{})
 	return DescribeHostedConnectionsRequest{Request: req, Input: input, Copy: c.DescribeHostedConnectionsRequest}
 }
 
@@ -86,8 +46,8 @@ func (c *Client) DescribeHostedConnectionsRequest(input *DescribeHostedConnectio
 // DescribeHostedConnections API operation.
 type DescribeHostedConnectionsRequest struct {
 	*aws.Request
-	Input *DescribeHostedConnectionsInput
-	Copy  func(*DescribeHostedConnectionsInput) DescribeHostedConnectionsRequest
+	Input *types.DescribeHostedConnectionsInput
+	Copy  func(*types.DescribeHostedConnectionsInput) DescribeHostedConnectionsRequest
 }
 
 // Send marshals and sends the DescribeHostedConnections API request.
@@ -99,7 +59,7 @@ func (r DescribeHostedConnectionsRequest) Send(ctx context.Context) (*DescribeHo
 	}
 
 	resp := &DescribeHostedConnectionsResponse{
-		DescribeHostedConnectionsOutput: r.Request.Data.(*DescribeHostedConnectionsOutput),
+		DescribeHostedConnectionsOutput: r.Request.Data.(*types.DescribeHostedConnectionsOutput),
 		response:                        &aws.Response{Request: r.Request},
 	}
 
@@ -109,7 +69,7 @@ func (r DescribeHostedConnectionsRequest) Send(ctx context.Context) (*DescribeHo
 // DescribeHostedConnectionsResponse is the response type for the
 // DescribeHostedConnections API operation.
 type DescribeHostedConnectionsResponse struct {
-	*DescribeHostedConnectionsOutput
+	*types.DescribeHostedConnectionsOutput
 
 	response *aws.Response
 }

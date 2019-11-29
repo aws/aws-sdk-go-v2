@@ -6,83 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/restjson"
+	"github.com/aws/aws-sdk-go-v2/service/apigateway/types"
 )
-
-// A request to delete the BasePathMapping resource.
-type DeleteBasePathMappingInput struct {
-	_ struct{} `type:"structure"`
-
-	// [Required] The base path name of the BasePathMapping resource to delete.
-	//
-	// To specify an empty base path, set this parameter to '(none)'.
-	//
-	// BasePath is a required field
-	BasePath *string `location:"uri" locationName:"base_path" type:"string" required:"true"`
-
-	// [Required] The domain name of the BasePathMapping resource to delete.
-	//
-	// DomainName is a required field
-	DomainName *string `location:"uri" locationName:"domain_name" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteBasePathMappingInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteBasePathMappingInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteBasePathMappingInput"}
-
-	if s.BasePath == nil {
-		invalidParams.Add(aws.NewErrParamRequired("BasePath"))
-	}
-
-	if s.DomainName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DomainName"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteBasePathMappingInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.BasePath != nil {
-		v := *s.BasePath
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "base_path", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.DomainName != nil {
-		v := *s.DomainName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "domain_name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type DeleteBasePathMappingOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteBasePathMappingOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteBasePathMappingOutput) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
 
 const opDeleteBasePathMapping = "DeleteBasePathMapping"
 
@@ -97,7 +24,7 @@ const opDeleteBasePathMapping = "DeleteBasePathMapping"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) DeleteBasePathMappingRequest(input *DeleteBasePathMappingInput) DeleteBasePathMappingRequest {
+func (c *Client) DeleteBasePathMappingRequest(input *types.DeleteBasePathMappingInput) DeleteBasePathMappingRequest {
 	op := &aws.Operation{
 		Name:       opDeleteBasePathMapping,
 		HTTPMethod: "DELETE",
@@ -105,10 +32,10 @@ func (c *Client) DeleteBasePathMappingRequest(input *DeleteBasePathMappingInput)
 	}
 
 	if input == nil {
-		input = &DeleteBasePathMappingInput{}
+		input = &types.DeleteBasePathMappingInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteBasePathMappingOutput{})
+	req := c.newRequest(op, input, &types.DeleteBasePathMappingOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return DeleteBasePathMappingRequest{Request: req, Input: input, Copy: c.DeleteBasePathMappingRequest}
@@ -118,8 +45,8 @@ func (c *Client) DeleteBasePathMappingRequest(input *DeleteBasePathMappingInput)
 // DeleteBasePathMapping API operation.
 type DeleteBasePathMappingRequest struct {
 	*aws.Request
-	Input *DeleteBasePathMappingInput
-	Copy  func(*DeleteBasePathMappingInput) DeleteBasePathMappingRequest
+	Input *types.DeleteBasePathMappingInput
+	Copy  func(*types.DeleteBasePathMappingInput) DeleteBasePathMappingRequest
 }
 
 // Send marshals and sends the DeleteBasePathMapping API request.
@@ -131,7 +58,7 @@ func (r DeleteBasePathMappingRequest) Send(ctx context.Context) (*DeleteBasePath
 	}
 
 	resp := &DeleteBasePathMappingResponse{
-		DeleteBasePathMappingOutput: r.Request.Data.(*DeleteBasePathMappingOutput),
+		DeleteBasePathMappingOutput: r.Request.Data.(*types.DeleteBasePathMappingOutput),
 		response:                    &aws.Response{Request: r.Request},
 	}
 
@@ -141,7 +68,7 @@ func (r DeleteBasePathMappingRequest) Send(ctx context.Context) (*DeleteBasePath
 // DeleteBasePathMappingResponse is the response type for the
 // DeleteBasePathMapping API operation.
 type DeleteBasePathMappingResponse struct {
-	*DeleteBasePathMappingOutput
+	*types.DeleteBasePathMappingOutput
 
 	response *aws.Response
 }

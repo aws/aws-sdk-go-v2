@@ -6,140 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/apigateway/types"
 )
-
-// The POST request to create a usage plan key for adding an existing API key
-// to a usage plan.
-type CreateUsagePlanKeyInput struct {
-	_ struct{} `type:"structure"`
-
-	// [Required] The identifier of a UsagePlanKey resource for a plan customer.
-	//
-	// KeyId is a required field
-	KeyId *string `locationName:"keyId" type:"string" required:"true"`
-
-	// [Required] The type of a UsagePlanKey resource for a plan customer.
-	//
-	// KeyType is a required field
-	KeyType *string `locationName:"keyType" type:"string" required:"true"`
-
-	// [Required] The Id of the UsagePlan resource representing the usage plan containing
-	// the to-be-created UsagePlanKey resource representing a plan customer.
-	//
-	// UsagePlanId is a required field
-	UsagePlanId *string `location:"uri" locationName:"usageplanId" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s CreateUsagePlanKeyInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateUsagePlanKeyInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateUsagePlanKeyInput"}
-
-	if s.KeyId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("KeyId"))
-	}
-
-	if s.KeyType == nil {
-		invalidParams.Add(aws.NewErrParamRequired("KeyType"))
-	}
-
-	if s.UsagePlanId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("UsagePlanId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s CreateUsagePlanKeyInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.KeyId != nil {
-		v := *s.KeyId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "keyId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.KeyType != nil {
-		v := *s.KeyType
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "keyType", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.UsagePlanId != nil {
-		v := *s.UsagePlanId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "usageplanId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-// Represents a usage plan key to identify a plan customer.
-//
-// To associate an API stage with a selected API key in a usage plan, you must
-// create a UsagePlanKey resource to represent the selected ApiKey.
-//
-// "
-// Create and Use Usage Plans (https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-api-usage-plans.html)
-type CreateUsagePlanKeyOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The Id of a usage plan key.
-	Id *string `locationName:"id" type:"string"`
-
-	// The name of a usage plan key.
-	Name *string `locationName:"name" type:"string"`
-
-	// The type of a usage plan key. Currently, the valid key type is API_KEY.
-	Type *string `locationName:"type" type:"string"`
-
-	// The value of a usage plan key.
-	Value *string `locationName:"value" type:"string"`
-}
-
-// String returns the string representation
-func (s CreateUsagePlanKeyOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s CreateUsagePlanKeyOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.Id != nil {
-		v := *s.Id
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "id", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Name != nil {
-		v := *s.Name
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Type != nil {
-		v := *s.Type
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "type", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Value != nil {
-		v := *s.Value
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "value", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opCreateUsagePlanKey = "CreateUsagePlanKey"
 
@@ -154,7 +22,7 @@ const opCreateUsagePlanKey = "CreateUsagePlanKey"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) CreateUsagePlanKeyRequest(input *CreateUsagePlanKeyInput) CreateUsagePlanKeyRequest {
+func (c *Client) CreateUsagePlanKeyRequest(input *types.CreateUsagePlanKeyInput) CreateUsagePlanKeyRequest {
 	op := &aws.Operation{
 		Name:       opCreateUsagePlanKey,
 		HTTPMethod: "POST",
@@ -162,10 +30,10 @@ func (c *Client) CreateUsagePlanKeyRequest(input *CreateUsagePlanKeyInput) Creat
 	}
 
 	if input == nil {
-		input = &CreateUsagePlanKeyInput{}
+		input = &types.CreateUsagePlanKeyInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateUsagePlanKeyOutput{})
+	req := c.newRequest(op, input, &types.CreateUsagePlanKeyOutput{})
 	return CreateUsagePlanKeyRequest{Request: req, Input: input, Copy: c.CreateUsagePlanKeyRequest}
 }
 
@@ -173,8 +41,8 @@ func (c *Client) CreateUsagePlanKeyRequest(input *CreateUsagePlanKeyInput) Creat
 // CreateUsagePlanKey API operation.
 type CreateUsagePlanKeyRequest struct {
 	*aws.Request
-	Input *CreateUsagePlanKeyInput
-	Copy  func(*CreateUsagePlanKeyInput) CreateUsagePlanKeyRequest
+	Input *types.CreateUsagePlanKeyInput
+	Copy  func(*types.CreateUsagePlanKeyInput) CreateUsagePlanKeyRequest
 }
 
 // Send marshals and sends the CreateUsagePlanKey API request.
@@ -186,7 +54,7 @@ func (r CreateUsagePlanKeyRequest) Send(ctx context.Context) (*CreateUsagePlanKe
 	}
 
 	resp := &CreateUsagePlanKeyResponse{
-		CreateUsagePlanKeyOutput: r.Request.Data.(*CreateUsagePlanKeyOutput),
+		CreateUsagePlanKeyOutput: r.Request.Data.(*types.CreateUsagePlanKeyOutput),
 		response:                 &aws.Response{Request: r.Request},
 	}
 
@@ -196,7 +64,7 @@ func (r CreateUsagePlanKeyRequest) Send(ctx context.Context) (*CreateUsagePlanKe
 // CreateUsagePlanKeyResponse is the response type for the
 // CreateUsagePlanKey API operation.
 type CreateUsagePlanKeyResponse struct {
-	*CreateUsagePlanKeyOutput
+	*types.CreateUsagePlanKeyOutput
 
 	response *aws.Response
 }

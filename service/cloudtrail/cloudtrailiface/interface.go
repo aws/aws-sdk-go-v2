@@ -10,6 +10,7 @@ package cloudtrailiface
 
 import (
 	"github.com/aws/aws-sdk-go-v2/service/cloudtrail"
+	"github.com/aws/aws-sdk-go-v2/service/cloudtrail/types"
 )
 
 // ClientAPI provides an interface to enable mocking the
@@ -43,7 +44,7 @@ import (
 //    type mockClientClient struct {
 //        cloudtrailiface.ClientPI
 //    }
-//    func (m *mockClientClient) AddTags(input *cloudtrail.AddTagsInput) (*cloudtrail.AddTagsOutput, error) {
+//    func (m *mockClientClient) AddTags(input *types.AddTagsInput) (*types.AddTagsOutput, error) {
 //        // mock response/functionality
 //    }
 //
@@ -61,33 +62,41 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type ClientAPI interface {
-	AddTagsRequest(*cloudtrail.AddTagsInput) cloudtrail.AddTagsRequest
+	AddTagsRequest(*types.AddTagsInput) cloudtrail.AddTagsRequest
 
-	CreateTrailRequest(*cloudtrail.CreateTrailInput) cloudtrail.CreateTrailRequest
+	CreateTrailRequest(*types.CreateTrailInput) cloudtrail.CreateTrailRequest
 
-	DeleteTrailRequest(*cloudtrail.DeleteTrailInput) cloudtrail.DeleteTrailRequest
+	DeleteTrailRequest(*types.DeleteTrailInput) cloudtrail.DeleteTrailRequest
 
-	DescribeTrailsRequest(*cloudtrail.DescribeTrailsInput) cloudtrail.DescribeTrailsRequest
+	DescribeTrailsRequest(*types.DescribeTrailsInput) cloudtrail.DescribeTrailsRequest
 
-	GetEventSelectorsRequest(*cloudtrail.GetEventSelectorsInput) cloudtrail.GetEventSelectorsRequest
+	GetEventSelectorsRequest(*types.GetEventSelectorsInput) cloudtrail.GetEventSelectorsRequest
 
-	GetTrailStatusRequest(*cloudtrail.GetTrailStatusInput) cloudtrail.GetTrailStatusRequest
+	GetInsightSelectorsRequest(*types.GetInsightSelectorsInput) cloudtrail.GetInsightSelectorsRequest
 
-	ListPublicKeysRequest(*cloudtrail.ListPublicKeysInput) cloudtrail.ListPublicKeysRequest
+	GetTrailRequest(*types.GetTrailInput) cloudtrail.GetTrailRequest
 
-	ListTagsRequest(*cloudtrail.ListTagsInput) cloudtrail.ListTagsRequest
+	GetTrailStatusRequest(*types.GetTrailStatusInput) cloudtrail.GetTrailStatusRequest
 
-	LookupEventsRequest(*cloudtrail.LookupEventsInput) cloudtrail.LookupEventsRequest
+	ListPublicKeysRequest(*types.ListPublicKeysInput) cloudtrail.ListPublicKeysRequest
 
-	PutEventSelectorsRequest(*cloudtrail.PutEventSelectorsInput) cloudtrail.PutEventSelectorsRequest
+	ListTagsRequest(*types.ListTagsInput) cloudtrail.ListTagsRequest
 
-	RemoveTagsRequest(*cloudtrail.RemoveTagsInput) cloudtrail.RemoveTagsRequest
+	ListTrailsRequest(*types.ListTrailsInput) cloudtrail.ListTrailsRequest
 
-	StartLoggingRequest(*cloudtrail.StartLoggingInput) cloudtrail.StartLoggingRequest
+	LookupEventsRequest(*types.LookupEventsInput) cloudtrail.LookupEventsRequest
 
-	StopLoggingRequest(*cloudtrail.StopLoggingInput) cloudtrail.StopLoggingRequest
+	PutEventSelectorsRequest(*types.PutEventSelectorsInput) cloudtrail.PutEventSelectorsRequest
 
-	UpdateTrailRequest(*cloudtrail.UpdateTrailInput) cloudtrail.UpdateTrailRequest
+	PutInsightSelectorsRequest(*types.PutInsightSelectorsInput) cloudtrail.PutInsightSelectorsRequest
+
+	RemoveTagsRequest(*types.RemoveTagsInput) cloudtrail.RemoveTagsRequest
+
+	StartLoggingRequest(*types.StartLoggingInput) cloudtrail.StartLoggingRequest
+
+	StopLoggingRequest(*types.StopLoggingInput) cloudtrail.StopLoggingRequest
+
+	UpdateTrailRequest(*types.UpdateTrailInput) cloudtrail.UpdateTrailRequest
 }
 
 var _ ClientAPI = (*cloudtrail.Client)(nil)

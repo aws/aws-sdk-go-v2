@@ -4,103 +4,10 @@ package rds
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/rds/types"
 )
-
-type DescribeDBInstancesInput struct {
-	_ struct{} `type:"structure"`
-
-	// The user-supplied instance identifier. If this parameter is specified, information
-	// from only the specific DB instance is returned. This parameter isn't case-sensitive.
-	//
-	// Constraints:
-	//
-	//    * If supplied, must match the identifier of an existing DBInstance.
-	DBInstanceIdentifier *string `type:"string"`
-
-	// A filter that specifies one or more DB instances to describe.
-	//
-	// Supported filters:
-	//
-	//    * db-cluster-id - Accepts DB cluster identifiers and DB cluster Amazon
-	//    Resource Names (ARNs). The results list will only include information
-	//    about the DB instances associated with the DB clusters identified by these
-	//    ARNs.
-	//
-	//    * db-instance-id - Accepts DB instance identifiers and DB instance Amazon
-	//    Resource Names (ARNs). The results list will only include information
-	//    about the DB instances identified by these ARNs.
-	//
-	//    * dbi-resource-id - Accepts DB instance resource identifiers. The results
-	//    list will only include information about the DB instances identified by
-	//    these DB instance resource identifiers.
-	//
-	//    * domain - Accepts Active Directory directory IDs. The results list will
-	//    only include information about the DB instances associated with these
-	//    domains.
-	//
-	//    * engine - Accepts engine names. The results list will only include information
-	//    about the DB instances for these engines.
-	Filters []Filter `locationNameList:"Filter" type:"list"`
-
-	// An optional pagination token provided by a previous DescribeDBInstances request.
-	// If this parameter is specified, the response includes only records beyond
-	// the marker, up to the value specified by MaxRecords.
-	Marker *string `type:"string"`
-
-	// The maximum number of records to include in the response. If more records
-	// exist than the specified MaxRecords value, a pagination token called a marker
-	// is included in the response so that you can retrieve the remaining results.
-	//
-	// Default: 100
-	//
-	// Constraints: Minimum 20, maximum 100.
-	MaxRecords *int64 `type:"integer"`
-}
-
-// String returns the string representation
-func (s DescribeDBInstancesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeDBInstancesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeDBInstancesInput"}
-	if s.Filters != nil {
-		for i, v := range s.Filters {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Contains the result of a successful invocation of the DescribeDBInstances
-// action.
-type DescribeDBInstancesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A list of DBInstance instances.
-	DBInstances []DBInstance `locationNameList:"DBInstance" type:"list"`
-
-	// An optional pagination token provided by a previous request. If this parameter
-	// is specified, the response includes only records beyond the marker, up to
-	// the value specified by MaxRecords .
-	Marker *string `type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeDBInstancesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeDBInstances = "DescribeDBInstances"
 
@@ -117,7 +24,7 @@ const opDescribeDBInstances = "DescribeDBInstances"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeDBInstances
-func (c *Client) DescribeDBInstancesRequest(input *DescribeDBInstancesInput) DescribeDBInstancesRequest {
+func (c *Client) DescribeDBInstancesRequest(input *types.DescribeDBInstancesInput) DescribeDBInstancesRequest {
 	op := &aws.Operation{
 		Name:       opDescribeDBInstances,
 		HTTPMethod: "POST",
@@ -131,10 +38,10 @@ func (c *Client) DescribeDBInstancesRequest(input *DescribeDBInstancesInput) Des
 	}
 
 	if input == nil {
-		input = &DescribeDBInstancesInput{}
+		input = &types.DescribeDBInstancesInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeDBInstancesOutput{})
+	req := c.newRequest(op, input, &types.DescribeDBInstancesOutput{})
 	return DescribeDBInstancesRequest{Request: req, Input: input, Copy: c.DescribeDBInstancesRequest}
 }
 
@@ -142,8 +49,8 @@ func (c *Client) DescribeDBInstancesRequest(input *DescribeDBInstancesInput) Des
 // DescribeDBInstances API operation.
 type DescribeDBInstancesRequest struct {
 	*aws.Request
-	Input *DescribeDBInstancesInput
-	Copy  func(*DescribeDBInstancesInput) DescribeDBInstancesRequest
+	Input *types.DescribeDBInstancesInput
+	Copy  func(*types.DescribeDBInstancesInput) DescribeDBInstancesRequest
 }
 
 // Send marshals and sends the DescribeDBInstances API request.
@@ -155,7 +62,7 @@ func (r DescribeDBInstancesRequest) Send(ctx context.Context) (*DescribeDBInstan
 	}
 
 	resp := &DescribeDBInstancesResponse{
-		DescribeDBInstancesOutput: r.Request.Data.(*DescribeDBInstancesOutput),
+		DescribeDBInstancesOutput: r.Request.Data.(*types.DescribeDBInstancesOutput),
 		response:                  &aws.Response{Request: r.Request},
 	}
 
@@ -185,7 +92,7 @@ func NewDescribeDBInstancesPaginator(req DescribeDBInstancesRequest) DescribeDBI
 	return DescribeDBInstancesPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *DescribeDBInstancesInput
+				var inCpy *types.DescribeDBInstancesInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -205,14 +112,14 @@ type DescribeDBInstancesPaginator struct {
 	aws.Pager
 }
 
-func (p *DescribeDBInstancesPaginator) CurrentPage() *DescribeDBInstancesOutput {
-	return p.Pager.CurrentPage().(*DescribeDBInstancesOutput)
+func (p *DescribeDBInstancesPaginator) CurrentPage() *types.DescribeDBInstancesOutput {
+	return p.Pager.CurrentPage().(*types.DescribeDBInstancesOutput)
 }
 
 // DescribeDBInstancesResponse is the response type for the
 // DescribeDBInstances API operation.
 type DescribeDBInstancesResponse struct {
-	*DescribeDBInstancesOutput
+	*types.DescribeDBInstancesOutput
 
 	response *aws.Response
 }

@@ -6,67 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/ec2query"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-type CreateTagsInput struct {
-	_ struct{} `type:"structure"`
-
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have
-	// the required permissions, the error response is DryRunOperation. Otherwise,
-	// it is UnauthorizedOperation.
-	DryRun *bool `locationName:"dryRun" type:"boolean"`
-
-	// The IDs of the resources, separated by spaces.
-	//
-	// Constraints: Up to 1000 resource IDs. We recommend breaking up this request
-	// into smaller batches.
-	//
-	// Resources is a required field
-	Resources []string `locationName:"ResourceId" type:"list" required:"true"`
-
-	// The tags. The value parameter is required, but if you don't want the tag
-	// to have a value, specify the parameter with no value, and we set the value
-	// to an empty string.
-	//
-	// Tags is a required field
-	Tags []Tag `locationName:"Tag" locationNameList:"item" type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s CreateTagsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateTagsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateTagsInput"}
-
-	if s.Resources == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Resources"))
-	}
-
-	if s.Tags == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Tags"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type CreateTagsOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s CreateTagsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCreateTags = "CreateTags"
 
@@ -91,7 +34,7 @@ const opCreateTags = "CreateTags"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateTags
-func (c *Client) CreateTagsRequest(input *CreateTagsInput) CreateTagsRequest {
+func (c *Client) CreateTagsRequest(input *types.CreateTagsInput) CreateTagsRequest {
 	op := &aws.Operation{
 		Name:       opCreateTags,
 		HTTPMethod: "POST",
@@ -99,10 +42,10 @@ func (c *Client) CreateTagsRequest(input *CreateTagsInput) CreateTagsRequest {
 	}
 
 	if input == nil {
-		input = &CreateTagsInput{}
+		input = &types.CreateTagsInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateTagsOutput{})
+	req := c.newRequest(op, input, &types.CreateTagsOutput{})
 	req.Handlers.Unmarshal.Remove(ec2query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return CreateTagsRequest{Request: req, Input: input, Copy: c.CreateTagsRequest}
@@ -112,8 +55,8 @@ func (c *Client) CreateTagsRequest(input *CreateTagsInput) CreateTagsRequest {
 // CreateTags API operation.
 type CreateTagsRequest struct {
 	*aws.Request
-	Input *CreateTagsInput
-	Copy  func(*CreateTagsInput) CreateTagsRequest
+	Input *types.CreateTagsInput
+	Copy  func(*types.CreateTagsInput) CreateTagsRequest
 }
 
 // Send marshals and sends the CreateTags API request.
@@ -125,7 +68,7 @@ func (r CreateTagsRequest) Send(ctx context.Context) (*CreateTagsResponse, error
 	}
 
 	resp := &CreateTagsResponse{
-		CreateTagsOutput: r.Request.Data.(*CreateTagsOutput),
+		CreateTagsOutput: r.Request.Data.(*types.CreateTagsOutput),
 		response:         &aws.Response{Request: r.Request},
 	}
 
@@ -135,7 +78,7 @@ func (r CreateTagsRequest) Send(ctx context.Context) (*CreateTagsResponse, error
 // CreateTagsResponse is the response type for the
 // CreateTags API operation.
 type CreateTagsResponse struct {
-	*CreateTagsOutput
+	*types.CreateTagsOutput
 
 	response *aws.Response
 }

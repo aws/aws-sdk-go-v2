@@ -6,75 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ssm/types"
 )
-
-type DescribePatchPropertiesInput struct {
-	_ struct{} `type:"structure"`
-
-	// The maximum number of items to return for this call. The call also returns
-	// a token that you can specify in a subsequent call to get the next set of
-	// results.
-	MaxResults *int64 `min:"1" type:"integer"`
-
-	// The token for the next set of items to return. (You received this token from
-	// a previous call.)
-	NextToken *string `type:"string"`
-
-	// The operating system type for which to list patches.
-	//
-	// OperatingSystem is a required field
-	OperatingSystem OperatingSystem `type:"string" required:"true" enum:"true"`
-
-	// Indicates whether to list patches for the Windows operating system or for
-	// Microsoft applications. Not applicable for Linux operating systems.
-	PatchSet PatchSet `type:"string" enum:"true"`
-
-	// The patch property for which you want to view patch details.
-	//
-	// Property is a required field
-	Property PatchProperty `type:"string" required:"true" enum:"true"`
-}
-
-// String returns the string representation
-func (s DescribePatchPropertiesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribePatchPropertiesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribePatchPropertiesInput"}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-	if len(s.OperatingSystem) == 0 {
-		invalidParams.Add(aws.NewErrParamRequired("OperatingSystem"))
-	}
-	if len(s.Property) == 0 {
-		invalidParams.Add(aws.NewErrParamRequired("Property"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribePatchPropertiesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The token for the next set of items to return. (You use this token in the
-	// next call.)
-	NextToken *string `type:"string"`
-
-	// A list of the properties for patches matching the filter request parameters.
-	Properties []map[string]string `type:"list"`
-}
-
-// String returns the string representation
-func (s DescribePatchPropertiesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribePatchProperties = "DescribePatchProperties"
 
@@ -126,7 +59,7 @@ const opDescribePatchProperties = "DescribePatchProperties"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribePatchProperties
-func (c *Client) DescribePatchPropertiesRequest(input *DescribePatchPropertiesInput) DescribePatchPropertiesRequest {
+func (c *Client) DescribePatchPropertiesRequest(input *types.DescribePatchPropertiesInput) DescribePatchPropertiesRequest {
 	op := &aws.Operation{
 		Name:       opDescribePatchProperties,
 		HTTPMethod: "POST",
@@ -134,10 +67,10 @@ func (c *Client) DescribePatchPropertiesRequest(input *DescribePatchPropertiesIn
 	}
 
 	if input == nil {
-		input = &DescribePatchPropertiesInput{}
+		input = &types.DescribePatchPropertiesInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribePatchPropertiesOutput{})
+	req := c.newRequest(op, input, &types.DescribePatchPropertiesOutput{})
 	return DescribePatchPropertiesRequest{Request: req, Input: input, Copy: c.DescribePatchPropertiesRequest}
 }
 
@@ -145,8 +78,8 @@ func (c *Client) DescribePatchPropertiesRequest(input *DescribePatchPropertiesIn
 // DescribePatchProperties API operation.
 type DescribePatchPropertiesRequest struct {
 	*aws.Request
-	Input *DescribePatchPropertiesInput
-	Copy  func(*DescribePatchPropertiesInput) DescribePatchPropertiesRequest
+	Input *types.DescribePatchPropertiesInput
+	Copy  func(*types.DescribePatchPropertiesInput) DescribePatchPropertiesRequest
 }
 
 // Send marshals and sends the DescribePatchProperties API request.
@@ -158,7 +91,7 @@ func (r DescribePatchPropertiesRequest) Send(ctx context.Context) (*DescribePatc
 	}
 
 	resp := &DescribePatchPropertiesResponse{
-		DescribePatchPropertiesOutput: r.Request.Data.(*DescribePatchPropertiesOutput),
+		DescribePatchPropertiesOutput: r.Request.Data.(*types.DescribePatchPropertiesOutput),
 		response:                      &aws.Response{Request: r.Request},
 	}
 
@@ -168,7 +101,7 @@ func (r DescribePatchPropertiesRequest) Send(ctx context.Context) (*DescribePatc
 // DescribePatchPropertiesResponse is the response type for the
 // DescribePatchProperties API operation.
 type DescribePatchPropertiesResponse struct {
-	*DescribePatchPropertiesOutput
+	*types.DescribePatchPropertiesOutput
 
 	response *aws.Response
 }

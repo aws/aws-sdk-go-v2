@@ -7,6 +7,7 @@ import (
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
+	"github.com/aws/aws-sdk-go-v2/service/autoscaling/types"
 )
 
 // WaitUntilGroupExists uses the Auto Scaling API operation
@@ -18,7 +19,7 @@ import (
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Client) WaitUntilGroupExists(ctx context.Context, input *DescribeAutoScalingGroupsInput, opts ...aws.WaiterOption) error {
+func (c *Client) WaitUntilGroupExists(ctx context.Context, input *types.DescribeAutoScalingGroupsInput, opts ...aws.WaiterOption) error {
 	w := aws.Waiter{
 		Name:        "WaitUntilGroupExists",
 		MaxAttempts: 10,
@@ -37,7 +38,7 @@ func (c *Client) WaitUntilGroupExists(ctx context.Context, input *DescribeAutoSc
 		},
 		Logger: c.Config.Logger,
 		NewRequest: func(opts []aws.Option) (*aws.Request, error) {
-			var inCpy *DescribeAutoScalingGroupsInput
+			var inCpy *types.DescribeAutoScalingGroupsInput
 			if input != nil {
 				tmp := *input
 				inCpy = &tmp
@@ -62,7 +63,7 @@ func (c *Client) WaitUntilGroupExists(ctx context.Context, input *DescribeAutoSc
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Client) WaitUntilGroupInService(ctx context.Context, input *DescribeAutoScalingGroupsInput, opts ...aws.WaiterOption) error {
+func (c *Client) WaitUntilGroupInService(ctx context.Context, input *types.DescribeAutoScalingGroupsInput, opts ...aws.WaiterOption) error {
 	w := aws.Waiter{
 		Name:        "WaitUntilGroupInService",
 		MaxAttempts: 40,
@@ -81,7 +82,7 @@ func (c *Client) WaitUntilGroupInService(ctx context.Context, input *DescribeAut
 		},
 		Logger: c.Config.Logger,
 		NewRequest: func(opts []aws.Option) (*aws.Request, error) {
-			var inCpy *DescribeAutoScalingGroupsInput
+			var inCpy *types.DescribeAutoScalingGroupsInput
 			if input != nil {
 				tmp := *input
 				inCpy = &tmp
@@ -106,7 +107,7 @@ func (c *Client) WaitUntilGroupInService(ctx context.Context, input *DescribeAut
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Client) WaitUntilGroupNotExists(ctx context.Context, input *DescribeAutoScalingGroupsInput, opts ...aws.WaiterOption) error {
+func (c *Client) WaitUntilGroupNotExists(ctx context.Context, input *types.DescribeAutoScalingGroupsInput, opts ...aws.WaiterOption) error {
 	w := aws.Waiter{
 		Name:        "WaitUntilGroupNotExists",
 		MaxAttempts: 40,
@@ -125,7 +126,7 @@ func (c *Client) WaitUntilGroupNotExists(ctx context.Context, input *DescribeAut
 		},
 		Logger: c.Config.Logger,
 		NewRequest: func(opts []aws.Option) (*aws.Request, error) {
-			var inCpy *DescribeAutoScalingGroupsInput
+			var inCpy *types.DescribeAutoScalingGroupsInput
 			if input != nil {
 				tmp := *input
 				inCpy = &tmp

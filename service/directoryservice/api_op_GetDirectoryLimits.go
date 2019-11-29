@@ -6,32 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/directoryservice/types"
 )
-
-// Contains the inputs for the GetDirectoryLimits operation.
-type GetDirectoryLimitsInput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s GetDirectoryLimitsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Contains the results of the GetDirectoryLimits operation.
-type GetDirectoryLimitsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A DirectoryLimits object that contains the directory limits for the current
-	// region.
-	DirectoryLimits *DirectoryLimits `type:"structure"`
-}
-
-// String returns the string representation
-func (s GetDirectoryLimitsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetDirectoryLimits = "GetDirectoryLimits"
 
@@ -48,7 +24,7 @@ const opGetDirectoryLimits = "GetDirectoryLimits"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/GetDirectoryLimits
-func (c *Client) GetDirectoryLimitsRequest(input *GetDirectoryLimitsInput) GetDirectoryLimitsRequest {
+func (c *Client) GetDirectoryLimitsRequest(input *types.GetDirectoryLimitsInput) GetDirectoryLimitsRequest {
 	op := &aws.Operation{
 		Name:       opGetDirectoryLimits,
 		HTTPMethod: "POST",
@@ -56,10 +32,10 @@ func (c *Client) GetDirectoryLimitsRequest(input *GetDirectoryLimitsInput) GetDi
 	}
 
 	if input == nil {
-		input = &GetDirectoryLimitsInput{}
+		input = &types.GetDirectoryLimitsInput{}
 	}
 
-	req := c.newRequest(op, input, &GetDirectoryLimitsOutput{})
+	req := c.newRequest(op, input, &types.GetDirectoryLimitsOutput{})
 	return GetDirectoryLimitsRequest{Request: req, Input: input, Copy: c.GetDirectoryLimitsRequest}
 }
 
@@ -67,8 +43,8 @@ func (c *Client) GetDirectoryLimitsRequest(input *GetDirectoryLimitsInput) GetDi
 // GetDirectoryLimits API operation.
 type GetDirectoryLimitsRequest struct {
 	*aws.Request
-	Input *GetDirectoryLimitsInput
-	Copy  func(*GetDirectoryLimitsInput) GetDirectoryLimitsRequest
+	Input *types.GetDirectoryLimitsInput
+	Copy  func(*types.GetDirectoryLimitsInput) GetDirectoryLimitsRequest
 }
 
 // Send marshals and sends the GetDirectoryLimits API request.
@@ -80,7 +56,7 @@ func (r GetDirectoryLimitsRequest) Send(ctx context.Context) (*GetDirectoryLimit
 	}
 
 	resp := &GetDirectoryLimitsResponse{
-		GetDirectoryLimitsOutput: r.Request.Data.(*GetDirectoryLimitsOutput),
+		GetDirectoryLimitsOutput: r.Request.Data.(*types.GetDirectoryLimitsOutput),
 		response:                 &aws.Response{Request: r.Request},
 	}
 
@@ -90,7 +66,7 @@ func (r GetDirectoryLimitsRequest) Send(ctx context.Context) (*GetDirectoryLimit
 // GetDirectoryLimitsResponse is the response type for the
 // GetDirectoryLimits API operation.
 type GetDirectoryLimitsResponse struct {
-	*GetDirectoryLimitsOutput
+	*types.GetDirectoryLimitsOutput
 
 	response *aws.Response
 }

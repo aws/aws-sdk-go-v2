@@ -6,49 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/lightsail/types"
 )
-
-type AllocateStaticIpInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the static IP address.
-	//
-	// StaticIpName is a required field
-	StaticIpName *string `locationName:"staticIpName" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s AllocateStaticIpInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *AllocateStaticIpInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "AllocateStaticIpInput"}
-
-	if s.StaticIpName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("StaticIpName"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type AllocateStaticIpOutput struct {
-	_ struct{} `type:"structure"`
-
-	// An array of key-value pairs containing information about the static IP address
-	// you allocated.
-	Operations []Operation `locationName:"operations" type:"list"`
-}
-
-// String returns the string representation
-func (s AllocateStaticIpOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opAllocateStaticIp = "AllocateStaticIp"
 
@@ -65,7 +24,7 @@ const opAllocateStaticIp = "AllocateStaticIp"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/AllocateStaticIp
-func (c *Client) AllocateStaticIpRequest(input *AllocateStaticIpInput) AllocateStaticIpRequest {
+func (c *Client) AllocateStaticIpRequest(input *types.AllocateStaticIpInput) AllocateStaticIpRequest {
 	op := &aws.Operation{
 		Name:       opAllocateStaticIp,
 		HTTPMethod: "POST",
@@ -73,10 +32,10 @@ func (c *Client) AllocateStaticIpRequest(input *AllocateStaticIpInput) AllocateS
 	}
 
 	if input == nil {
-		input = &AllocateStaticIpInput{}
+		input = &types.AllocateStaticIpInput{}
 	}
 
-	req := c.newRequest(op, input, &AllocateStaticIpOutput{})
+	req := c.newRequest(op, input, &types.AllocateStaticIpOutput{})
 	return AllocateStaticIpRequest{Request: req, Input: input, Copy: c.AllocateStaticIpRequest}
 }
 
@@ -84,8 +43,8 @@ func (c *Client) AllocateStaticIpRequest(input *AllocateStaticIpInput) AllocateS
 // AllocateStaticIp API operation.
 type AllocateStaticIpRequest struct {
 	*aws.Request
-	Input *AllocateStaticIpInput
-	Copy  func(*AllocateStaticIpInput) AllocateStaticIpRequest
+	Input *types.AllocateStaticIpInput
+	Copy  func(*types.AllocateStaticIpInput) AllocateStaticIpRequest
 }
 
 // Send marshals and sends the AllocateStaticIp API request.
@@ -97,7 +56,7 @@ func (r AllocateStaticIpRequest) Send(ctx context.Context) (*AllocateStaticIpRes
 	}
 
 	resp := &AllocateStaticIpResponse{
-		AllocateStaticIpOutput: r.Request.Data.(*AllocateStaticIpOutput),
+		AllocateStaticIpOutput: r.Request.Data.(*types.AllocateStaticIpOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -107,7 +66,7 @@ func (r AllocateStaticIpRequest) Send(ctx context.Context) (*AllocateStaticIpRes
 // AllocateStaticIpResponse is the response type for the
 // AllocateStaticIp API operation.
 type AllocateStaticIpResponse struct {
-	*AllocateStaticIpOutput
+	*types.AllocateStaticIpOutput
 
 	response *aws.Response
 }

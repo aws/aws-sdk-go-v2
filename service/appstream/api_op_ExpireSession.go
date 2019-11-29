@@ -6,48 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/appstream/types"
 )
-
-type ExpireSessionInput struct {
-	_ struct{} `type:"structure"`
-
-	// The identifier of the streaming session.
-	//
-	// SessionId is a required field
-	SessionId *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s ExpireSessionInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ExpireSessionInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ExpireSessionInput"}
-
-	if s.SessionId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("SessionId"))
-	}
-	if s.SessionId != nil && len(*s.SessionId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("SessionId", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ExpireSessionOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s ExpireSessionOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opExpireSession = "ExpireSession"
 
@@ -64,7 +24,7 @@ const opExpireSession = "ExpireSession"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/ExpireSession
-func (c *Client) ExpireSessionRequest(input *ExpireSessionInput) ExpireSessionRequest {
+func (c *Client) ExpireSessionRequest(input *types.ExpireSessionInput) ExpireSessionRequest {
 	op := &aws.Operation{
 		Name:       opExpireSession,
 		HTTPMethod: "POST",
@@ -72,10 +32,10 @@ func (c *Client) ExpireSessionRequest(input *ExpireSessionInput) ExpireSessionRe
 	}
 
 	if input == nil {
-		input = &ExpireSessionInput{}
+		input = &types.ExpireSessionInput{}
 	}
 
-	req := c.newRequest(op, input, &ExpireSessionOutput{})
+	req := c.newRequest(op, input, &types.ExpireSessionOutput{})
 	return ExpireSessionRequest{Request: req, Input: input, Copy: c.ExpireSessionRequest}
 }
 
@@ -83,8 +43,8 @@ func (c *Client) ExpireSessionRequest(input *ExpireSessionInput) ExpireSessionRe
 // ExpireSession API operation.
 type ExpireSessionRequest struct {
 	*aws.Request
-	Input *ExpireSessionInput
-	Copy  func(*ExpireSessionInput) ExpireSessionRequest
+	Input *types.ExpireSessionInput
+	Copy  func(*types.ExpireSessionInput) ExpireSessionRequest
 }
 
 // Send marshals and sends the ExpireSession API request.
@@ -96,7 +56,7 @@ func (r ExpireSessionRequest) Send(ctx context.Context) (*ExpireSessionResponse,
 	}
 
 	resp := &ExpireSessionResponse{
-		ExpireSessionOutput: r.Request.Data.(*ExpireSessionOutput),
+		ExpireSessionOutput: r.Request.Data.(*types.ExpireSessionOutput),
 		response:            &aws.Response{Request: r.Request},
 	}
 
@@ -106,7 +66,7 @@ func (r ExpireSessionRequest) Send(ctx context.Context) (*ExpireSessionResponse,
 // ExpireSessionResponse is the response type for the
 // ExpireSession API operation.
 type ExpireSessionResponse struct {
-	*ExpireSessionOutput
+	*types.ExpireSessionOutput
 
 	response *aws.Response
 }

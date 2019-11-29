@@ -6,69 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/autoscaling/types"
 )
-
-type DescribePoliciesInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the Auto Scaling group.
-	AutoScalingGroupName *string `min:"1" type:"string"`
-
-	// The maximum number of items to be returned with each call. The default value
-	// is 50 and the maximum value is 100.
-	MaxRecords *int64 `type:"integer"`
-
-	// The token for the next set of items to return. (You received this token from
-	// a previous call.)
-	NextToken *string `type:"string"`
-
-	// The names of one or more policies. If you omit this parameter, all policies
-	// are described. If a group name is provided, the results are limited to that
-	// group. This list is limited to 50 items. If you specify an unknown policy
-	// name, it is ignored with no error.
-	PolicyNames []string `type:"list"`
-
-	// One or more policy types. The valid values are SimpleScaling, StepScaling,
-	// and TargetTrackingScaling.
-	PolicyTypes []string `type:"list"`
-}
-
-// String returns the string representation
-func (s DescribePoliciesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribePoliciesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribePoliciesInput"}
-	if s.AutoScalingGroupName != nil && len(*s.AutoScalingGroupName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("AutoScalingGroupName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribePoliciesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A string that indicates that the response contains more items than can be
-	// returned in a single response. To receive additional items, specify this
-	// string for the NextToken value when requesting the next set of items. This
-	// value is null when there are no more items to return.
-	NextToken *string `type:"string"`
-
-	// The scaling policies.
-	ScalingPolicies []ScalingPolicy `type:"list"`
-}
-
-// String returns the string representation
-func (s DescribePoliciesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribePolicies = "DescribePolicies"
 
@@ -85,7 +24,7 @@ const opDescribePolicies = "DescribePolicies"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DescribePolicies
-func (c *Client) DescribePoliciesRequest(input *DescribePoliciesInput) DescribePoliciesRequest {
+func (c *Client) DescribePoliciesRequest(input *types.DescribePoliciesInput) DescribePoliciesRequest {
 	op := &aws.Operation{
 		Name:       opDescribePolicies,
 		HTTPMethod: "POST",
@@ -99,10 +38,10 @@ func (c *Client) DescribePoliciesRequest(input *DescribePoliciesInput) DescribeP
 	}
 
 	if input == nil {
-		input = &DescribePoliciesInput{}
+		input = &types.DescribePoliciesInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribePoliciesOutput{})
+	req := c.newRequest(op, input, &types.DescribePoliciesOutput{})
 	return DescribePoliciesRequest{Request: req, Input: input, Copy: c.DescribePoliciesRequest}
 }
 
@@ -110,8 +49,8 @@ func (c *Client) DescribePoliciesRequest(input *DescribePoliciesInput) DescribeP
 // DescribePolicies API operation.
 type DescribePoliciesRequest struct {
 	*aws.Request
-	Input *DescribePoliciesInput
-	Copy  func(*DescribePoliciesInput) DescribePoliciesRequest
+	Input *types.DescribePoliciesInput
+	Copy  func(*types.DescribePoliciesInput) DescribePoliciesRequest
 }
 
 // Send marshals and sends the DescribePolicies API request.
@@ -123,7 +62,7 @@ func (r DescribePoliciesRequest) Send(ctx context.Context) (*DescribePoliciesRes
 	}
 
 	resp := &DescribePoliciesResponse{
-		DescribePoliciesOutput: r.Request.Data.(*DescribePoliciesOutput),
+		DescribePoliciesOutput: r.Request.Data.(*types.DescribePoliciesOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -153,7 +92,7 @@ func NewDescribePoliciesPaginator(req DescribePoliciesRequest) DescribePoliciesP
 	return DescribePoliciesPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *DescribePoliciesInput
+				var inCpy *types.DescribePoliciesInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -173,14 +112,14 @@ type DescribePoliciesPaginator struct {
 	aws.Pager
 }
 
-func (p *DescribePoliciesPaginator) CurrentPage() *DescribePoliciesOutput {
-	return p.Pager.CurrentPage().(*DescribePoliciesOutput)
+func (p *DescribePoliciesPaginator) CurrentPage() *types.DescribePoliciesOutput {
+	return p.Pager.CurrentPage().(*types.DescribePoliciesOutput)
 }
 
 // DescribePoliciesResponse is the response type for the
 // DescribePolicies API operation.
 type DescribePoliciesResponse struct {
-	*DescribePoliciesOutput
+	*types.DescribePoliciesOutput
 
 	response *aws.Response
 }

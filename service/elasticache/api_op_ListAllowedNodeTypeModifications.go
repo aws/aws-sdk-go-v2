@@ -6,60 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/elasticache/types"
 )
-
-// The input parameters for the ListAllowedNodeTypeModifications operation.
-type ListAllowedNodeTypeModificationsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the cluster you want to scale up to a larger node instanced type.
-	// ElastiCache uses the cluster id to identify the current node type of this
-	// cluster and from that to create a list of node types you can scale up to.
-	//
-	// You must provide a value for either the CacheClusterId or the ReplicationGroupId.
-	CacheClusterId *string `type:"string"`
-
-	// The name of the replication group want to scale up to a larger node type.
-	// ElastiCache uses the replication group id to identify the current node type
-	// being used by this replication group, and from that to create a list of node
-	// types you can scale up to.
-	//
-	// You must provide a value for either the CacheClusterId or the ReplicationGroupId.
-	ReplicationGroupId *string `type:"string"`
-}
-
-// String returns the string representation
-func (s ListAllowedNodeTypeModificationsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Represents the allowed node types you can use to modify your cluster or replication
-// group.
-type ListAllowedNodeTypeModificationsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A string list, each element of which specifies a cache node type which you
-	// can use to scale your cluster or replication group.
-	//
-	// When scaling down on a Redis cluster or replication group using ModifyCacheCluster
-	// or ModifyReplicationGroup, use a value from this list for the CacheNodeType
-	// parameter.
-	ScaleDownModifications []string `type:"list"`
-
-	// A string list, each element of which specifies a cache node type which you
-	// can use to scale your cluster or replication group.
-	//
-	// When scaling up a Redis cluster or replication group using ModifyCacheCluster
-	// or ModifyReplicationGroup, use a value from this list for the CacheNodeType
-	// parameter.
-	ScaleUpModifications []string `type:"list"`
-}
-
-// String returns the string representation
-func (s ListAllowedNodeTypeModificationsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListAllowedNodeTypeModifications = "ListAllowedNodeTypeModifications"
 
@@ -81,7 +29,7 @@ const opListAllowedNodeTypeModifications = "ListAllowedNodeTypeModifications"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/ListAllowedNodeTypeModifications
-func (c *Client) ListAllowedNodeTypeModificationsRequest(input *ListAllowedNodeTypeModificationsInput) ListAllowedNodeTypeModificationsRequest {
+func (c *Client) ListAllowedNodeTypeModificationsRequest(input *types.ListAllowedNodeTypeModificationsInput) ListAllowedNodeTypeModificationsRequest {
 	op := &aws.Operation{
 		Name:       opListAllowedNodeTypeModifications,
 		HTTPMethod: "POST",
@@ -89,10 +37,10 @@ func (c *Client) ListAllowedNodeTypeModificationsRequest(input *ListAllowedNodeT
 	}
 
 	if input == nil {
-		input = &ListAllowedNodeTypeModificationsInput{}
+		input = &types.ListAllowedNodeTypeModificationsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListAllowedNodeTypeModificationsOutput{})
+	req := c.newRequest(op, input, &types.ListAllowedNodeTypeModificationsOutput{})
 	return ListAllowedNodeTypeModificationsRequest{Request: req, Input: input, Copy: c.ListAllowedNodeTypeModificationsRequest}
 }
 
@@ -100,8 +48,8 @@ func (c *Client) ListAllowedNodeTypeModificationsRequest(input *ListAllowedNodeT
 // ListAllowedNodeTypeModifications API operation.
 type ListAllowedNodeTypeModificationsRequest struct {
 	*aws.Request
-	Input *ListAllowedNodeTypeModificationsInput
-	Copy  func(*ListAllowedNodeTypeModificationsInput) ListAllowedNodeTypeModificationsRequest
+	Input *types.ListAllowedNodeTypeModificationsInput
+	Copy  func(*types.ListAllowedNodeTypeModificationsInput) ListAllowedNodeTypeModificationsRequest
 }
 
 // Send marshals and sends the ListAllowedNodeTypeModifications API request.
@@ -113,7 +61,7 @@ func (r ListAllowedNodeTypeModificationsRequest) Send(ctx context.Context) (*Lis
 	}
 
 	resp := &ListAllowedNodeTypeModificationsResponse{
-		ListAllowedNodeTypeModificationsOutput: r.Request.Data.(*ListAllowedNodeTypeModificationsOutput),
+		ListAllowedNodeTypeModificationsOutput: r.Request.Data.(*types.ListAllowedNodeTypeModificationsOutput),
 		response:                               &aws.Response{Request: r.Request},
 	}
 
@@ -123,7 +71,7 @@ func (r ListAllowedNodeTypeModificationsRequest) Send(ctx context.Context) (*Lis
 // ListAllowedNodeTypeModificationsResponse is the response type for the
 // ListAllowedNodeTypeModifications API operation.
 type ListAllowedNodeTypeModificationsResponse struct {
-	*ListAllowedNodeTypeModificationsOutput
+	*types.ListAllowedNodeTypeModificationsOutput
 
 	response *aws.Response
 }

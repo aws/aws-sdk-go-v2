@@ -6,69 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/redshift/types"
 )
-
-type ResizeClusterInput struct {
-	_ struct{} `type:"structure"`
-
-	// A boolean value indicating whether the resize operation is using the classic
-	// resize process. If you don't provide this parameter or set the value to false,
-	// the resize type is elastic.
-	Classic *bool `type:"boolean"`
-
-	// The unique identifier for the cluster to resize.
-	//
-	// ClusterIdentifier is a required field
-	ClusterIdentifier *string `type:"string" required:"true"`
-
-	// The new cluster type for the specified cluster.
-	ClusterType *string `type:"string"`
-
-	// The new node type for the nodes you are adding. If not specified, the cluster's
-	// current node type is used.
-	NodeType *string `type:"string"`
-
-	// The new number of nodes for the cluster.
-	//
-	// NumberOfNodes is a required field
-	NumberOfNodes *int64 `type:"integer" required:"true"`
-}
-
-// String returns the string representation
-func (s ResizeClusterInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ResizeClusterInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ResizeClusterInput"}
-
-	if s.ClusterIdentifier == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ClusterIdentifier"))
-	}
-
-	if s.NumberOfNodes == nil {
-		invalidParams.Add(aws.NewErrParamRequired("NumberOfNodes"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ResizeClusterOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Describes a cluster.
-	Cluster *Cluster `type:"structure"`
-}
-
-// String returns the string representation
-func (s ResizeClusterOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opResizeCluster = "ResizeCluster"
 
@@ -95,7 +34,7 @@ const opResizeCluster = "ResizeCluster"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ResizeCluster
-func (c *Client) ResizeClusterRequest(input *ResizeClusterInput) ResizeClusterRequest {
+func (c *Client) ResizeClusterRequest(input *types.ResizeClusterInput) ResizeClusterRequest {
 	op := &aws.Operation{
 		Name:       opResizeCluster,
 		HTTPMethod: "POST",
@@ -103,10 +42,10 @@ func (c *Client) ResizeClusterRequest(input *ResizeClusterInput) ResizeClusterRe
 	}
 
 	if input == nil {
-		input = &ResizeClusterInput{}
+		input = &types.ResizeClusterInput{}
 	}
 
-	req := c.newRequest(op, input, &ResizeClusterOutput{})
+	req := c.newRequest(op, input, &types.ResizeClusterOutput{})
 	return ResizeClusterRequest{Request: req, Input: input, Copy: c.ResizeClusterRequest}
 }
 
@@ -114,8 +53,8 @@ func (c *Client) ResizeClusterRequest(input *ResizeClusterInput) ResizeClusterRe
 // ResizeCluster API operation.
 type ResizeClusterRequest struct {
 	*aws.Request
-	Input *ResizeClusterInput
-	Copy  func(*ResizeClusterInput) ResizeClusterRequest
+	Input *types.ResizeClusterInput
+	Copy  func(*types.ResizeClusterInput) ResizeClusterRequest
 }
 
 // Send marshals and sends the ResizeCluster API request.
@@ -127,7 +66,7 @@ func (r ResizeClusterRequest) Send(ctx context.Context) (*ResizeClusterResponse,
 	}
 
 	resp := &ResizeClusterResponse{
-		ResizeClusterOutput: r.Request.Data.(*ResizeClusterOutput),
+		ResizeClusterOutput: r.Request.Data.(*types.ResizeClusterOutput),
 		response:            &aws.Response{Request: r.Request},
 	}
 
@@ -137,7 +76,7 @@ func (r ResizeClusterRequest) Send(ctx context.Context) (*ResizeClusterResponse,
 // ResizeClusterResponse is the response type for the
 // ResizeCluster API operation.
 type ResizeClusterResponse struct {
-	*ResizeClusterOutput
+	*types.ResizeClusterOutput
 
 	response *aws.Response
 }

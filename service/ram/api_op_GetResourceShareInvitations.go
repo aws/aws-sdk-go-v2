@@ -6,126 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/ram/types"
 )
-
-type GetResourceShareInvitationsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The maximum number of results to return with a single call. To retrieve the
-	// remaining results, make another call with the returned nextToken value.
-	MaxResults *int64 `locationName:"maxResults" min:"1" type:"integer"`
-
-	// The token for the next page of results.
-	NextToken *string `locationName:"nextToken" type:"string"`
-
-	// The Amazon Resource Names (ARN) of the resource shares.
-	ResourceShareArns []string `locationName:"resourceShareArns" type:"list"`
-
-	// The Amazon Resource Names (ARN) of the invitations.
-	ResourceShareInvitationArns []string `locationName:"resourceShareInvitationArns" type:"list"`
-}
-
-// String returns the string representation
-func (s GetResourceShareInvitationsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetResourceShareInvitationsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetResourceShareInvitationsInput"}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetResourceShareInvitationsInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.MaxResults != nil {
-		v := *s.MaxResults
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "maxResults", protocol.Int64Value(v), metadata)
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.ResourceShareArns != nil {
-		v := s.ResourceShareArns
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "resourceShareArns", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
-		}
-		ls0.End()
-
-	}
-	if s.ResourceShareInvitationArns != nil {
-		v := s.ResourceShareInvitationArns
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "resourceShareInvitationArns", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
-		}
-		ls0.End()
-
-	}
-	return nil
-}
-
-type GetResourceShareInvitationsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The token to use to retrieve the next page of results. This value is null
-	// when there are no more results to return.
-	NextToken *string `locationName:"nextToken" type:"string"`
-
-	// Information about the invitations.
-	ResourceShareInvitations []ResourceShareInvitation `locationName:"resourceShareInvitations" type:"list"`
-}
-
-// String returns the string representation
-func (s GetResourceShareInvitationsOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetResourceShareInvitationsOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.ResourceShareInvitations != nil {
-		v := s.ResourceShareInvitations
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "resourceShareInvitations", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	return nil
-}
 
 const opGetResourceShareInvitations = "GetResourceShareInvitations"
 
@@ -142,7 +24,7 @@ const opGetResourceShareInvitations = "GetResourceShareInvitations"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/GetResourceShareInvitations
-func (c *Client) GetResourceShareInvitationsRequest(input *GetResourceShareInvitationsInput) GetResourceShareInvitationsRequest {
+func (c *Client) GetResourceShareInvitationsRequest(input *types.GetResourceShareInvitationsInput) GetResourceShareInvitationsRequest {
 	op := &aws.Operation{
 		Name:       opGetResourceShareInvitations,
 		HTTPMethod: "POST",
@@ -156,10 +38,10 @@ func (c *Client) GetResourceShareInvitationsRequest(input *GetResourceShareInvit
 	}
 
 	if input == nil {
-		input = &GetResourceShareInvitationsInput{}
+		input = &types.GetResourceShareInvitationsInput{}
 	}
 
-	req := c.newRequest(op, input, &GetResourceShareInvitationsOutput{})
+	req := c.newRequest(op, input, &types.GetResourceShareInvitationsOutput{})
 	return GetResourceShareInvitationsRequest{Request: req, Input: input, Copy: c.GetResourceShareInvitationsRequest}
 }
 
@@ -167,8 +49,8 @@ func (c *Client) GetResourceShareInvitationsRequest(input *GetResourceShareInvit
 // GetResourceShareInvitations API operation.
 type GetResourceShareInvitationsRequest struct {
 	*aws.Request
-	Input *GetResourceShareInvitationsInput
-	Copy  func(*GetResourceShareInvitationsInput) GetResourceShareInvitationsRequest
+	Input *types.GetResourceShareInvitationsInput
+	Copy  func(*types.GetResourceShareInvitationsInput) GetResourceShareInvitationsRequest
 }
 
 // Send marshals and sends the GetResourceShareInvitations API request.
@@ -180,7 +62,7 @@ func (r GetResourceShareInvitationsRequest) Send(ctx context.Context) (*GetResou
 	}
 
 	resp := &GetResourceShareInvitationsResponse{
-		GetResourceShareInvitationsOutput: r.Request.Data.(*GetResourceShareInvitationsOutput),
+		GetResourceShareInvitationsOutput: r.Request.Data.(*types.GetResourceShareInvitationsOutput),
 		response:                          &aws.Response{Request: r.Request},
 	}
 
@@ -210,7 +92,7 @@ func NewGetResourceShareInvitationsPaginator(req GetResourceShareInvitationsRequ
 	return GetResourceShareInvitationsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *GetResourceShareInvitationsInput
+				var inCpy *types.GetResourceShareInvitationsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -230,14 +112,14 @@ type GetResourceShareInvitationsPaginator struct {
 	aws.Pager
 }
 
-func (p *GetResourceShareInvitationsPaginator) CurrentPage() *GetResourceShareInvitationsOutput {
-	return p.Pager.CurrentPage().(*GetResourceShareInvitationsOutput)
+func (p *GetResourceShareInvitationsPaginator) CurrentPage() *types.GetResourceShareInvitationsOutput {
+	return p.Pager.CurrentPage().(*types.GetResourceShareInvitationsOutput)
 }
 
 // GetResourceShareInvitationsResponse is the response type for the
 // GetResourceShareInvitations API operation.
 type GetResourceShareInvitationsResponse struct {
-	*GetResourceShareInvitationsOutput
+	*types.GetResourceShareInvitationsOutput
 
 	response *aws.Response
 }

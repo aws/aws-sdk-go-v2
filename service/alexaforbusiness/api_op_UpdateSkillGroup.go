@@ -6,51 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/alexaforbusiness/types"
 )
-
-type UpdateSkillGroupInput struct {
-	_ struct{} `type:"structure"`
-
-	// The updated description for the skill group.
-	Description *string `min:"1" type:"string"`
-
-	// The ARN of the skill group to update.
-	SkillGroupArn *string `type:"string"`
-
-	// The updated name for the skill group.
-	SkillGroupName *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s UpdateSkillGroupInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateSkillGroupInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateSkillGroupInput"}
-	if s.Description != nil && len(*s.Description) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Description", 1))
-	}
-	if s.SkillGroupName != nil && len(*s.SkillGroupName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("SkillGroupName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type UpdateSkillGroupOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s UpdateSkillGroupOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opUpdateSkillGroup = "UpdateSkillGroup"
 
@@ -67,7 +24,7 @@ const opUpdateSkillGroup = "UpdateSkillGroup"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/UpdateSkillGroup
-func (c *Client) UpdateSkillGroupRequest(input *UpdateSkillGroupInput) UpdateSkillGroupRequest {
+func (c *Client) UpdateSkillGroupRequest(input *types.UpdateSkillGroupInput) UpdateSkillGroupRequest {
 	op := &aws.Operation{
 		Name:       opUpdateSkillGroup,
 		HTTPMethod: "POST",
@@ -75,10 +32,10 @@ func (c *Client) UpdateSkillGroupRequest(input *UpdateSkillGroupInput) UpdateSki
 	}
 
 	if input == nil {
-		input = &UpdateSkillGroupInput{}
+		input = &types.UpdateSkillGroupInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateSkillGroupOutput{})
+	req := c.newRequest(op, input, &types.UpdateSkillGroupOutput{})
 	return UpdateSkillGroupRequest{Request: req, Input: input, Copy: c.UpdateSkillGroupRequest}
 }
 
@@ -86,8 +43,8 @@ func (c *Client) UpdateSkillGroupRequest(input *UpdateSkillGroupInput) UpdateSki
 // UpdateSkillGroup API operation.
 type UpdateSkillGroupRequest struct {
 	*aws.Request
-	Input *UpdateSkillGroupInput
-	Copy  func(*UpdateSkillGroupInput) UpdateSkillGroupRequest
+	Input *types.UpdateSkillGroupInput
+	Copy  func(*types.UpdateSkillGroupInput) UpdateSkillGroupRequest
 }
 
 // Send marshals and sends the UpdateSkillGroup API request.
@@ -99,7 +56,7 @@ func (r UpdateSkillGroupRequest) Send(ctx context.Context) (*UpdateSkillGroupRes
 	}
 
 	resp := &UpdateSkillGroupResponse{
-		UpdateSkillGroupOutput: r.Request.Data.(*UpdateSkillGroupOutput),
+		UpdateSkillGroupOutput: r.Request.Data.(*types.UpdateSkillGroupOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -109,7 +66,7 @@ func (r UpdateSkillGroupRequest) Send(ctx context.Context) (*UpdateSkillGroupRes
 // UpdateSkillGroupResponse is the response type for the
 // UpdateSkillGroup API operation.
 type UpdateSkillGroupResponse struct {
-	*UpdateSkillGroupOutput
+	*types.UpdateSkillGroupOutput
 
 	response *aws.Response
 }

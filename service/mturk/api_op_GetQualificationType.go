@@ -6,51 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/mturk/types"
 )
-
-type GetQualificationTypeInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the QualificationType.
-	//
-	// QualificationTypeId is a required field
-	QualificationTypeId *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetQualificationTypeInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetQualificationTypeInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetQualificationTypeInput"}
-
-	if s.QualificationTypeId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("QualificationTypeId"))
-	}
-	if s.QualificationTypeId != nil && len(*s.QualificationTypeId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("QualificationTypeId", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type GetQualificationTypeOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The returned Qualification Type
-	QualificationType *QualificationType `type:"structure"`
-}
-
-// String returns the string representation
-func (s GetQualificationTypeOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetQualificationType = "GetQualificationType"
 
@@ -68,7 +25,7 @@ const opGetQualificationType = "GetQualificationType"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/GetQualificationType
-func (c *Client) GetQualificationTypeRequest(input *GetQualificationTypeInput) GetQualificationTypeRequest {
+func (c *Client) GetQualificationTypeRequest(input *types.GetQualificationTypeInput) GetQualificationTypeRequest {
 	op := &aws.Operation{
 		Name:       opGetQualificationType,
 		HTTPMethod: "POST",
@@ -76,10 +33,10 @@ func (c *Client) GetQualificationTypeRequest(input *GetQualificationTypeInput) G
 	}
 
 	if input == nil {
-		input = &GetQualificationTypeInput{}
+		input = &types.GetQualificationTypeInput{}
 	}
 
-	req := c.newRequest(op, input, &GetQualificationTypeOutput{})
+	req := c.newRequest(op, input, &types.GetQualificationTypeOutput{})
 	return GetQualificationTypeRequest{Request: req, Input: input, Copy: c.GetQualificationTypeRequest}
 }
 
@@ -87,8 +44,8 @@ func (c *Client) GetQualificationTypeRequest(input *GetQualificationTypeInput) G
 // GetQualificationType API operation.
 type GetQualificationTypeRequest struct {
 	*aws.Request
-	Input *GetQualificationTypeInput
-	Copy  func(*GetQualificationTypeInput) GetQualificationTypeRequest
+	Input *types.GetQualificationTypeInput
+	Copy  func(*types.GetQualificationTypeInput) GetQualificationTypeRequest
 }
 
 // Send marshals and sends the GetQualificationType API request.
@@ -100,7 +57,7 @@ func (r GetQualificationTypeRequest) Send(ctx context.Context) (*GetQualificatio
 	}
 
 	resp := &GetQualificationTypeResponse{
-		GetQualificationTypeOutput: r.Request.Data.(*GetQualificationTypeOutput),
+		GetQualificationTypeOutput: r.Request.Data.(*types.GetQualificationTypeOutput),
 		response:                   &aws.Response{Request: r.Request},
 	}
 
@@ -110,7 +67,7 @@ func (r GetQualificationTypeRequest) Send(ctx context.Context) (*GetQualificatio
 // GetQualificationTypeResponse is the response type for the
 // GetQualificationType API operation.
 type GetQualificationTypeResponse struct {
-	*GetQualificationTypeOutput
+	*types.GetQualificationTypeOutput
 
 	response *aws.Response
 }

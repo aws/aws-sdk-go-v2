@@ -4,80 +4,10 @@ package gamelift
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/gamelift/types"
 )
-
-// Represents the input for a request action.
-type StartMatchmakingInput struct {
-	_ struct{} `type:"structure"`
-
-	// Name of the matchmaking configuration to use for this request. Matchmaking
-	// configurations must exist in the same region as this request.
-	//
-	// ConfigurationName is a required field
-	ConfigurationName *string `type:"string" required:"true"`
-
-	// Information on each player to be matched. This information must include a
-	// player ID, and may contain player attributes and latency data to be used
-	// in the matchmaking process. After a successful match, Player objects contain
-	// the name of the team the player is assigned to.
-	//
-	// Players is a required field
-	Players []Player `type:"list" required:"true"`
-
-	// Unique identifier for a matchmaking ticket. If no ticket ID is specified
-	// here, Amazon GameLift will generate one in the form of a UUID. Use this identifier
-	// to track the matchmaking ticket status and retrieve match results.
-	TicketId *string `type:"string"`
-}
-
-// String returns the string representation
-func (s StartMatchmakingInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *StartMatchmakingInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "StartMatchmakingInput"}
-
-	if s.ConfigurationName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ConfigurationName"))
-	}
-
-	if s.Players == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Players"))
-	}
-	if s.Players != nil {
-		for i, v := range s.Players {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Players", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Represents the returned data in response to a request action.
-type StartMatchmakingOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Ticket representing the matchmaking request. This object include the information
-	// included in the request, ticket status, and match results as generated during
-	// the matchmaking process.
-	MatchmakingTicket *MatchmakingTicket `type:"structure"`
-}
-
-// String returns the string representation
-func (s StartMatchmakingOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opStartMatchmaking = "StartMatchmaking"
 
@@ -174,7 +104,7 @@ const opStartMatchmaking = "StartMatchmaking"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/StartMatchmaking
-func (c *Client) StartMatchmakingRequest(input *StartMatchmakingInput) StartMatchmakingRequest {
+func (c *Client) StartMatchmakingRequest(input *types.StartMatchmakingInput) StartMatchmakingRequest {
 	op := &aws.Operation{
 		Name:       opStartMatchmaking,
 		HTTPMethod: "POST",
@@ -182,10 +112,10 @@ func (c *Client) StartMatchmakingRequest(input *StartMatchmakingInput) StartMatc
 	}
 
 	if input == nil {
-		input = &StartMatchmakingInput{}
+		input = &types.StartMatchmakingInput{}
 	}
 
-	req := c.newRequest(op, input, &StartMatchmakingOutput{})
+	req := c.newRequest(op, input, &types.StartMatchmakingOutput{})
 	return StartMatchmakingRequest{Request: req, Input: input, Copy: c.StartMatchmakingRequest}
 }
 
@@ -193,8 +123,8 @@ func (c *Client) StartMatchmakingRequest(input *StartMatchmakingInput) StartMatc
 // StartMatchmaking API operation.
 type StartMatchmakingRequest struct {
 	*aws.Request
-	Input *StartMatchmakingInput
-	Copy  func(*StartMatchmakingInput) StartMatchmakingRequest
+	Input *types.StartMatchmakingInput
+	Copy  func(*types.StartMatchmakingInput) StartMatchmakingRequest
 }
 
 // Send marshals and sends the StartMatchmaking API request.
@@ -206,7 +136,7 @@ func (r StartMatchmakingRequest) Send(ctx context.Context) (*StartMatchmakingRes
 	}
 
 	resp := &StartMatchmakingResponse{
-		StartMatchmakingOutput: r.Request.Data.(*StartMatchmakingOutput),
+		StartMatchmakingOutput: r.Request.Data.(*types.StartMatchmakingOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -216,7 +146,7 @@ func (r StartMatchmakingRequest) Send(ctx context.Context) (*StartMatchmakingRes
 // StartMatchmakingResponse is the response type for the
 // StartMatchmaking API operation.
 type StartMatchmakingResponse struct {
-	*StartMatchmakingOutput
+	*types.StartMatchmakingOutput
 
 	response *aws.Response
 }

@@ -4,91 +4,10 @@ package sagemaker
 
 import (
 	"context"
-	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
 )
-
-type ListCompilationJobsInput struct {
-	_ struct{} `type:"structure"`
-
-	// A filter that returns the model compilation jobs that were created after
-	// a specified time.
-	CreationTimeAfter *time.Time `type:"timestamp"`
-
-	// A filter that returns the model compilation jobs that were created before
-	// a specified time.
-	CreationTimeBefore *time.Time `type:"timestamp"`
-
-	// A filter that returns the model compilation jobs that were modified after
-	// a specified time.
-	LastModifiedTimeAfter *time.Time `type:"timestamp"`
-
-	// A filter that returns the model compilation jobs that were modified before
-	// a specified time.
-	LastModifiedTimeBefore *time.Time `type:"timestamp"`
-
-	// The maximum number of model compilation jobs to return in the response.
-	MaxResults *int64 `min:"1" type:"integer"`
-
-	// A filter that returns the model compilation jobs whose name contains a specified
-	// string.
-	NameContains *string `type:"string"`
-
-	// If the result of the previous ListCompilationJobs request was truncated,
-	// the response includes a NextToken. To retrieve the next set of model compilation
-	// jobs, use the token in the next request.
-	NextToken *string `type:"string"`
-
-	// The field by which to sort results. The default is CreationTime.
-	SortBy ListCompilationJobsSortBy `type:"string" enum:"true"`
-
-	// The sort order for results. The default is Ascending.
-	SortOrder SortOrder `type:"string" enum:"true"`
-
-	// A filter that retrieves model compilation jobs with a specific DescribeCompilationJobResponse$CompilationJobStatus
-	// status.
-	StatusEquals CompilationJobStatus `type:"string" enum:"true"`
-}
-
-// String returns the string representation
-func (s ListCompilationJobsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListCompilationJobsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListCompilationJobsInput"}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ListCompilationJobsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// An array of CompilationJobSummary objects, each describing a model compilation
-	// job.
-	//
-	// CompilationJobSummaries is a required field
-	CompilationJobSummaries []CompilationJobSummary `type:"list" required:"true"`
-
-	// If the response is truncated, Amazon SageMaker returns this NextToken. To
-	// retrieve the next set of model compilation jobs, use this token in the next
-	// request.
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s ListCompilationJobsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListCompilationJobs = "ListCompilationJobs"
 
@@ -108,7 +27,7 @@ const opListCompilationJobs = "ListCompilationJobs"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListCompilationJobs
-func (c *Client) ListCompilationJobsRequest(input *ListCompilationJobsInput) ListCompilationJobsRequest {
+func (c *Client) ListCompilationJobsRequest(input *types.ListCompilationJobsInput) ListCompilationJobsRequest {
 	op := &aws.Operation{
 		Name:       opListCompilationJobs,
 		HTTPMethod: "POST",
@@ -122,10 +41,10 @@ func (c *Client) ListCompilationJobsRequest(input *ListCompilationJobsInput) Lis
 	}
 
 	if input == nil {
-		input = &ListCompilationJobsInput{}
+		input = &types.ListCompilationJobsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListCompilationJobsOutput{})
+	req := c.newRequest(op, input, &types.ListCompilationJobsOutput{})
 	return ListCompilationJobsRequest{Request: req, Input: input, Copy: c.ListCompilationJobsRequest}
 }
 
@@ -133,8 +52,8 @@ func (c *Client) ListCompilationJobsRequest(input *ListCompilationJobsInput) Lis
 // ListCompilationJobs API operation.
 type ListCompilationJobsRequest struct {
 	*aws.Request
-	Input *ListCompilationJobsInput
-	Copy  func(*ListCompilationJobsInput) ListCompilationJobsRequest
+	Input *types.ListCompilationJobsInput
+	Copy  func(*types.ListCompilationJobsInput) ListCompilationJobsRequest
 }
 
 // Send marshals and sends the ListCompilationJobs API request.
@@ -146,7 +65,7 @@ func (r ListCompilationJobsRequest) Send(ctx context.Context) (*ListCompilationJ
 	}
 
 	resp := &ListCompilationJobsResponse{
-		ListCompilationJobsOutput: r.Request.Data.(*ListCompilationJobsOutput),
+		ListCompilationJobsOutput: r.Request.Data.(*types.ListCompilationJobsOutput),
 		response:                  &aws.Response{Request: r.Request},
 	}
 
@@ -176,7 +95,7 @@ func NewListCompilationJobsPaginator(req ListCompilationJobsRequest) ListCompila
 	return ListCompilationJobsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListCompilationJobsInput
+				var inCpy *types.ListCompilationJobsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -196,14 +115,14 @@ type ListCompilationJobsPaginator struct {
 	aws.Pager
 }
 
-func (p *ListCompilationJobsPaginator) CurrentPage() *ListCompilationJobsOutput {
-	return p.Pager.CurrentPage().(*ListCompilationJobsOutput)
+func (p *ListCompilationJobsPaginator) CurrentPage() *types.ListCompilationJobsOutput {
+	return p.Pager.CurrentPage().(*types.ListCompilationJobsOutput)
 }
 
 // ListCompilationJobsResponse is the response type for the
 // ListCompilationJobs API operation.
 type ListCompilationJobsResponse struct {
-	*ListCompilationJobsOutput
+	*types.ListCompilationJobsOutput
 
 	response *aws.Response
 }

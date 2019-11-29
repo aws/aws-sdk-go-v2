@@ -6,95 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/swf/types"
 )
-
-type ListActivityTypesInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the domain in which the activity types have been registered.
-	//
-	// Domain is a required field
-	Domain *string `locationName:"domain" min:"1" type:"string" required:"true"`
-
-	// The maximum number of results that are returned per call. Use nextPageToken
-	// to obtain further pages of results.
-	MaximumPageSize *int64 `locationName:"maximumPageSize" type:"integer"`
-
-	// If specified, only lists the activity types that have this name.
-	Name *string `locationName:"name" min:"1" type:"string"`
-
-	// If NextPageToken is returned there are more results available. The value
-	// of NextPageToken is a unique pagination token for each page. Make the call
-	// again using the returned token to retrieve the next page. Keep all other
-	// arguments unchanged. Each pagination token expires after 60 seconds. Using
-	// an expired pagination token will return a 400 error: "Specified token has
-	// exceeded its maximum lifetime".
-	//
-	// The configured maximumPageSize determines how many results can be returned
-	// in a single call.
-	NextPageToken *string `locationName:"nextPageToken" type:"string"`
-
-	// Specifies the registration status of the activity types to list.
-	//
-	// RegistrationStatus is a required field
-	RegistrationStatus RegistrationStatus `locationName:"registrationStatus" type:"string" required:"true" enum:"true"`
-
-	// When set to true, returns the results in reverse order. By default, the results
-	// are returned in ascending alphabetical order by name of the activity types.
-	ReverseOrder *bool `locationName:"reverseOrder" type:"boolean"`
-}
-
-// String returns the string representation
-func (s ListActivityTypesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListActivityTypesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListActivityTypesInput"}
-
-	if s.Domain == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Domain"))
-	}
-	if s.Domain != nil && len(*s.Domain) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Domain", 1))
-	}
-	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
-	}
-	if len(s.RegistrationStatus) == 0 {
-		invalidParams.Add(aws.NewErrParamRequired("RegistrationStatus"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Contains a paginated list of activity type information structures.
-type ListActivityTypesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// If a NextPageToken was returned by a previous call, there are more results
-	// available. To retrieve the next page of results, make the call again using
-	// the returned token in nextPageToken. Keep all other arguments unchanged.
-	//
-	// The configured maximumPageSize determines how many results can be returned
-	// in a single call.
-	NextPageToken *string `locationName:"nextPageToken" type:"string"`
-
-	// List of activity type information.
-	//
-	// TypeInfos is a required field
-	TypeInfos []ActivityTypeInfo `locationName:"typeInfos" type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s ListActivityTypesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListActivityTypes = "ListActivityTypes"
 
@@ -132,7 +45,7 @@ const opListActivityTypes = "ListActivityTypes"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) ListActivityTypesRequest(input *ListActivityTypesInput) ListActivityTypesRequest {
+func (c *Client) ListActivityTypesRequest(input *types.ListActivityTypesInput) ListActivityTypesRequest {
 	op := &aws.Operation{
 		Name:       opListActivityTypes,
 		HTTPMethod: "POST",
@@ -146,10 +59,10 @@ func (c *Client) ListActivityTypesRequest(input *ListActivityTypesInput) ListAct
 	}
 
 	if input == nil {
-		input = &ListActivityTypesInput{}
+		input = &types.ListActivityTypesInput{}
 	}
 
-	req := c.newRequest(op, input, &ListActivityTypesOutput{})
+	req := c.newRequest(op, input, &types.ListActivityTypesOutput{})
 	return ListActivityTypesRequest{Request: req, Input: input, Copy: c.ListActivityTypesRequest}
 }
 
@@ -157,8 +70,8 @@ func (c *Client) ListActivityTypesRequest(input *ListActivityTypesInput) ListAct
 // ListActivityTypes API operation.
 type ListActivityTypesRequest struct {
 	*aws.Request
-	Input *ListActivityTypesInput
-	Copy  func(*ListActivityTypesInput) ListActivityTypesRequest
+	Input *types.ListActivityTypesInput
+	Copy  func(*types.ListActivityTypesInput) ListActivityTypesRequest
 }
 
 // Send marshals and sends the ListActivityTypes API request.
@@ -170,7 +83,7 @@ func (r ListActivityTypesRequest) Send(ctx context.Context) (*ListActivityTypesR
 	}
 
 	resp := &ListActivityTypesResponse{
-		ListActivityTypesOutput: r.Request.Data.(*ListActivityTypesOutput),
+		ListActivityTypesOutput: r.Request.Data.(*types.ListActivityTypesOutput),
 		response:                &aws.Response{Request: r.Request},
 	}
 
@@ -200,7 +113,7 @@ func NewListActivityTypesPaginator(req ListActivityTypesRequest) ListActivityTyp
 	return ListActivityTypesPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListActivityTypesInput
+				var inCpy *types.ListActivityTypesInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -220,14 +133,14 @@ type ListActivityTypesPaginator struct {
 	aws.Pager
 }
 
-func (p *ListActivityTypesPaginator) CurrentPage() *ListActivityTypesOutput {
-	return p.Pager.CurrentPage().(*ListActivityTypesOutput)
+func (p *ListActivityTypesPaginator) CurrentPage() *types.ListActivityTypesOutput {
+	return p.Pager.CurrentPage().(*types.ListActivityTypesOutput)
 }
 
 // ListActivityTypesResponse is the response type for the
 // ListActivityTypes API operation.
 type ListActivityTypesResponse struct {
-	*ListActivityTypesOutput
+	*types.ListActivityTypesOutput
 
 	response *aws.Response
 }

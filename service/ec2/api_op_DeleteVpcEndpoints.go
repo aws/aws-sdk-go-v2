@@ -6,56 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-// Contains the parameters for DeleteVpcEndpoints.
-type DeleteVpcEndpointsInput struct {
-	_ struct{} `type:"structure"`
-
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have
-	// the required permissions, the error response is DryRunOperation. Otherwise,
-	// it is UnauthorizedOperation.
-	DryRun *bool `type:"boolean"`
-
-	// One or more VPC endpoint IDs.
-	//
-	// VpcEndpointIds is a required field
-	VpcEndpointIds []string `locationName:"VpcEndpointId" locationNameList:"item" type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteVpcEndpointsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteVpcEndpointsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteVpcEndpointsInput"}
-
-	if s.VpcEndpointIds == nil {
-		invalidParams.Add(aws.NewErrParamRequired("VpcEndpointIds"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Contains the output of DeleteVpcEndpoints.
-type DeleteVpcEndpointsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Information about the VPC endpoints that were not successfully deleted.
-	Unsuccessful []UnsuccessfulItem `locationName:"unsuccessful" locationNameList:"item" type:"list"`
-}
-
-// String returns the string representation
-func (s DeleteVpcEndpointsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteVpcEndpoints = "DeleteVpcEndpoints"
 
@@ -75,7 +27,7 @@ const opDeleteVpcEndpoints = "DeleteVpcEndpoints"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteVpcEndpoints
-func (c *Client) DeleteVpcEndpointsRequest(input *DeleteVpcEndpointsInput) DeleteVpcEndpointsRequest {
+func (c *Client) DeleteVpcEndpointsRequest(input *types.DeleteVpcEndpointsInput) DeleteVpcEndpointsRequest {
 	op := &aws.Operation{
 		Name:       opDeleteVpcEndpoints,
 		HTTPMethod: "POST",
@@ -83,10 +35,10 @@ func (c *Client) DeleteVpcEndpointsRequest(input *DeleteVpcEndpointsInput) Delet
 	}
 
 	if input == nil {
-		input = &DeleteVpcEndpointsInput{}
+		input = &types.DeleteVpcEndpointsInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteVpcEndpointsOutput{})
+	req := c.newRequest(op, input, &types.DeleteVpcEndpointsOutput{})
 	return DeleteVpcEndpointsRequest{Request: req, Input: input, Copy: c.DeleteVpcEndpointsRequest}
 }
 
@@ -94,8 +46,8 @@ func (c *Client) DeleteVpcEndpointsRequest(input *DeleteVpcEndpointsInput) Delet
 // DeleteVpcEndpoints API operation.
 type DeleteVpcEndpointsRequest struct {
 	*aws.Request
-	Input *DeleteVpcEndpointsInput
-	Copy  func(*DeleteVpcEndpointsInput) DeleteVpcEndpointsRequest
+	Input *types.DeleteVpcEndpointsInput
+	Copy  func(*types.DeleteVpcEndpointsInput) DeleteVpcEndpointsRequest
 }
 
 // Send marshals and sends the DeleteVpcEndpoints API request.
@@ -107,7 +59,7 @@ func (r DeleteVpcEndpointsRequest) Send(ctx context.Context) (*DeleteVpcEndpoint
 	}
 
 	resp := &DeleteVpcEndpointsResponse{
-		DeleteVpcEndpointsOutput: r.Request.Data.(*DeleteVpcEndpointsOutput),
+		DeleteVpcEndpointsOutput: r.Request.Data.(*types.DeleteVpcEndpointsOutput),
 		response:                 &aws.Response{Request: r.Request},
 	}
 
@@ -117,7 +69,7 @@ func (r DeleteVpcEndpointsRequest) Send(ctx context.Context) (*DeleteVpcEndpoint
 // DeleteVpcEndpointsResponse is the response type for the
 // DeleteVpcEndpoints API operation.
 type DeleteVpcEndpointsResponse struct {
-	*DeleteVpcEndpointsOutput
+	*types.DeleteVpcEndpointsOutput
 
 	response *aws.Response
 }

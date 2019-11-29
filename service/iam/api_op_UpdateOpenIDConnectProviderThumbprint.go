@@ -6,66 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/query"
+	"github.com/aws/aws-sdk-go-v2/service/iam/types"
 )
-
-type UpdateOpenIDConnectProviderThumbprintInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the IAM OIDC provider resource object for
-	// which you want to update the thumbprint. You can get a list of OIDC provider
-	// ARNs by using the ListOpenIDConnectProviders operation.
-	//
-	// For more information about ARNs, see Amazon Resource Names (ARNs) and AWS
-	// Service Namespaces (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
-	// in the AWS General Reference.
-	//
-	// OpenIDConnectProviderArn is a required field
-	OpenIDConnectProviderArn *string `min:"20" type:"string" required:"true"`
-
-	// A list of certificate thumbprints that are associated with the specified
-	// IAM OpenID Connect provider. For more information, see CreateOpenIDConnectProvider.
-	//
-	// ThumbprintList is a required field
-	ThumbprintList []string `type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s UpdateOpenIDConnectProviderThumbprintInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateOpenIDConnectProviderThumbprintInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateOpenIDConnectProviderThumbprintInput"}
-
-	if s.OpenIDConnectProviderArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("OpenIDConnectProviderArn"))
-	}
-	if s.OpenIDConnectProviderArn != nil && len(*s.OpenIDConnectProviderArn) < 20 {
-		invalidParams.Add(aws.NewErrParamMinLen("OpenIDConnectProviderArn", 20))
-	}
-
-	if s.ThumbprintList == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ThumbprintList"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type UpdateOpenIDConnectProviderThumbprintOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s UpdateOpenIDConnectProviderThumbprintOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opUpdateOpenIDConnectProviderThumbprint = "UpdateOpenIDConnectProviderThumbprint"
 
@@ -96,7 +40,7 @@ const opUpdateOpenIDConnectProviderThumbprint = "UpdateOpenIDConnectProviderThum
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/UpdateOpenIDConnectProviderThumbprint
-func (c *Client) UpdateOpenIDConnectProviderThumbprintRequest(input *UpdateOpenIDConnectProviderThumbprintInput) UpdateOpenIDConnectProviderThumbprintRequest {
+func (c *Client) UpdateOpenIDConnectProviderThumbprintRequest(input *types.UpdateOpenIDConnectProviderThumbprintInput) UpdateOpenIDConnectProviderThumbprintRequest {
 	op := &aws.Operation{
 		Name:       opUpdateOpenIDConnectProviderThumbprint,
 		HTTPMethod: "POST",
@@ -104,10 +48,10 @@ func (c *Client) UpdateOpenIDConnectProviderThumbprintRequest(input *UpdateOpenI
 	}
 
 	if input == nil {
-		input = &UpdateOpenIDConnectProviderThumbprintInput{}
+		input = &types.UpdateOpenIDConnectProviderThumbprintInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateOpenIDConnectProviderThumbprintOutput{})
+	req := c.newRequest(op, input, &types.UpdateOpenIDConnectProviderThumbprintOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return UpdateOpenIDConnectProviderThumbprintRequest{Request: req, Input: input, Copy: c.UpdateOpenIDConnectProviderThumbprintRequest}
@@ -117,8 +61,8 @@ func (c *Client) UpdateOpenIDConnectProviderThumbprintRequest(input *UpdateOpenI
 // UpdateOpenIDConnectProviderThumbprint API operation.
 type UpdateOpenIDConnectProviderThumbprintRequest struct {
 	*aws.Request
-	Input *UpdateOpenIDConnectProviderThumbprintInput
-	Copy  func(*UpdateOpenIDConnectProviderThumbprintInput) UpdateOpenIDConnectProviderThumbprintRequest
+	Input *types.UpdateOpenIDConnectProviderThumbprintInput
+	Copy  func(*types.UpdateOpenIDConnectProviderThumbprintInput) UpdateOpenIDConnectProviderThumbprintRequest
 }
 
 // Send marshals and sends the UpdateOpenIDConnectProviderThumbprint API request.
@@ -130,7 +74,7 @@ func (r UpdateOpenIDConnectProviderThumbprintRequest) Send(ctx context.Context) 
 	}
 
 	resp := &UpdateOpenIDConnectProviderThumbprintResponse{
-		UpdateOpenIDConnectProviderThumbprintOutput: r.Request.Data.(*UpdateOpenIDConnectProviderThumbprintOutput),
+		UpdateOpenIDConnectProviderThumbprintOutput: r.Request.Data.(*types.UpdateOpenIDConnectProviderThumbprintOutput),
 		response: &aws.Response{Request: r.Request},
 	}
 
@@ -140,7 +84,7 @@ func (r UpdateOpenIDConnectProviderThumbprintRequest) Send(ctx context.Context) 
 // UpdateOpenIDConnectProviderThumbprintResponse is the response type for the
 // UpdateOpenIDConnectProviderThumbprint API operation.
 type UpdateOpenIDConnectProviderThumbprintResponse struct {
-	*UpdateOpenIDConnectProviderThumbprintOutput
+	*types.UpdateOpenIDConnectProviderThumbprintOutput
 
 	response *aws.Response
 }

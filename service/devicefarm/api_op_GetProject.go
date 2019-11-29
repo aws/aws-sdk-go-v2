@@ -6,53 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/devicefarm/types"
 )
-
-// Represents a request to the get project operation.
-type GetProjectInput struct {
-	_ struct{} `type:"structure"`
-
-	// The project's ARN.
-	//
-	// Arn is a required field
-	Arn *string `locationName:"arn" min:"32" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetProjectInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetProjectInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetProjectInput"}
-
-	if s.Arn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Arn"))
-	}
-	if s.Arn != nil && len(*s.Arn) < 32 {
-		invalidParams.Add(aws.NewErrParamMinLen("Arn", 32))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Represents the result of a get project request.
-type GetProjectOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The project you wish to get information about.
-	Project *Project `locationName:"project" type:"structure"`
-}
-
-// String returns the string representation
-func (s GetProjectOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetProject = "GetProject"
 
@@ -69,7 +24,7 @@ const opGetProject = "GetProject"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/GetProject
-func (c *Client) GetProjectRequest(input *GetProjectInput) GetProjectRequest {
+func (c *Client) GetProjectRequest(input *types.GetProjectInput) GetProjectRequest {
 	op := &aws.Operation{
 		Name:       opGetProject,
 		HTTPMethod: "POST",
@@ -77,10 +32,10 @@ func (c *Client) GetProjectRequest(input *GetProjectInput) GetProjectRequest {
 	}
 
 	if input == nil {
-		input = &GetProjectInput{}
+		input = &types.GetProjectInput{}
 	}
 
-	req := c.newRequest(op, input, &GetProjectOutput{})
+	req := c.newRequest(op, input, &types.GetProjectOutput{})
 	return GetProjectRequest{Request: req, Input: input, Copy: c.GetProjectRequest}
 }
 
@@ -88,8 +43,8 @@ func (c *Client) GetProjectRequest(input *GetProjectInput) GetProjectRequest {
 // GetProject API operation.
 type GetProjectRequest struct {
 	*aws.Request
-	Input *GetProjectInput
-	Copy  func(*GetProjectInput) GetProjectRequest
+	Input *types.GetProjectInput
+	Copy  func(*types.GetProjectInput) GetProjectRequest
 }
 
 // Send marshals and sends the GetProject API request.
@@ -101,7 +56,7 @@ func (r GetProjectRequest) Send(ctx context.Context) (*GetProjectResponse, error
 	}
 
 	resp := &GetProjectResponse{
-		GetProjectOutput: r.Request.Data.(*GetProjectOutput),
+		GetProjectOutput: r.Request.Data.(*types.GetProjectOutput),
 		response:         &aws.Response{Request: r.Request},
 	}
 
@@ -111,7 +66,7 @@ func (r GetProjectRequest) Send(ctx context.Context) (*GetProjectResponse, error
 // GetProjectResponse is the response type for the
 // GetProject API operation.
 type GetProjectResponse struct {
-	*GetProjectOutput
+	*types.GetProjectOutput
 
 	response *aws.Response
 }

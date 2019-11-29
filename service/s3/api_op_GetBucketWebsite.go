@@ -6,115 +6,29 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/s3/types"
 )
-
-type GetBucketWebsiteInput struct {
-	_ struct{} `type:"structure"`
-
-	// Bucket is a required field
-	Bucket *string `location:"uri" locationName:"Bucket" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetBucketWebsiteInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetBucketWebsiteInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetBucketWebsiteInput"}
-
-	if s.Bucket == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Bucket"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-func (s *GetBucketWebsiteInput) getBucket() (v string) {
-	if s.Bucket == nil {
-		return v
-	}
-	return *s.Bucket
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetBucketWebsiteInput) MarshalFields(e protocol.FieldEncoder) error {
-
-	if s.Bucket != nil {
-		v := *s.Bucket
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "Bucket", protocol.StringValue(v), metadata)
-	}
-	return nil
-}
-
-type GetBucketWebsiteOutput struct {
-	_ struct{} `type:"structure"`
-
-	ErrorDocument *ErrorDocument `type:"structure"`
-
-	IndexDocument *IndexDocument `type:"structure"`
-
-	// Specifies the redirect behavior of all requests to a website endpoint of
-	// an Amazon S3 bucket.
-	RedirectAllRequestsTo *RedirectAllRequestsTo `type:"structure"`
-
-	RoutingRules []RoutingRule `locationNameList:"RoutingRule" type:"list"`
-}
-
-// String returns the string representation
-func (s GetBucketWebsiteOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetBucketWebsiteOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.ErrorDocument != nil {
-		v := s.ErrorDocument
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "ErrorDocument", v, metadata)
-	}
-	if s.IndexDocument != nil {
-		v := s.IndexDocument
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "IndexDocument", v, metadata)
-	}
-	if s.RedirectAllRequestsTo != nil {
-		v := s.RedirectAllRequestsTo
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "RedirectAllRequestsTo", v, metadata)
-	}
-	if s.RoutingRules != nil {
-		v := s.RoutingRules
-
-		metadata := protocol.Metadata{ListLocationName: "RoutingRule"}
-		ls0 := e.List(protocol.BodyTarget, "RoutingRules", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	return nil
-}
 
 const opGetBucketWebsite = "GetBucketWebsite"
 
 // GetBucketWebsiteRequest returns a request value for making API operation for
 // Amazon Simple Storage Service.
 //
-// Returns the website configuration for a bucket.
+// Returns the website configuration for a bucket. To host website on Amazon
+// S3, you can configure a bucket as website by adding a website configuration.
+// For more information about hosting websites, see Hosting Websites on Amazon
+// S3 (https://docs.aws.amazon.com/AmazonS3/latest/dev/WebsiteHosting.html).
+//
+// This GET operation requires the S3:GetBucketWebsite permission. By default,
+// only the bucket owner can read the bucket website configuration. However,
+// bucket owners can allow other users to read the website configuration by
+// writing a bucket policy granting them the S3:GetBucketWebsite permission.
+//
+// The following operations are related to DeleteBucketWebsite
+//
+//    * DeleteBucketWebsite
+//
+//    * PutBucketWebsite
 //
 //    // Example sending a request using GetBucketWebsiteRequest.
 //    req := client.GetBucketWebsiteRequest(params)
@@ -124,7 +38,7 @@ const opGetBucketWebsite = "GetBucketWebsite"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetBucketWebsite
-func (c *Client) GetBucketWebsiteRequest(input *GetBucketWebsiteInput) GetBucketWebsiteRequest {
+func (c *Client) GetBucketWebsiteRequest(input *types.GetBucketWebsiteInput) GetBucketWebsiteRequest {
 	op := &aws.Operation{
 		Name:       opGetBucketWebsite,
 		HTTPMethod: "GET",
@@ -132,10 +46,10 @@ func (c *Client) GetBucketWebsiteRequest(input *GetBucketWebsiteInput) GetBucket
 	}
 
 	if input == nil {
-		input = &GetBucketWebsiteInput{}
+		input = &types.GetBucketWebsiteInput{}
 	}
 
-	req := c.newRequest(op, input, &GetBucketWebsiteOutput{})
+	req := c.newRequest(op, input, &types.GetBucketWebsiteOutput{})
 	return GetBucketWebsiteRequest{Request: req, Input: input, Copy: c.GetBucketWebsiteRequest}
 }
 
@@ -143,8 +57,8 @@ func (c *Client) GetBucketWebsiteRequest(input *GetBucketWebsiteInput) GetBucket
 // GetBucketWebsite API operation.
 type GetBucketWebsiteRequest struct {
 	*aws.Request
-	Input *GetBucketWebsiteInput
-	Copy  func(*GetBucketWebsiteInput) GetBucketWebsiteRequest
+	Input *types.GetBucketWebsiteInput
+	Copy  func(*types.GetBucketWebsiteInput) GetBucketWebsiteRequest
 }
 
 // Send marshals and sends the GetBucketWebsite API request.
@@ -156,7 +70,7 @@ func (r GetBucketWebsiteRequest) Send(ctx context.Context) (*GetBucketWebsiteRes
 	}
 
 	resp := &GetBucketWebsiteResponse{
-		GetBucketWebsiteOutput: r.Request.Data.(*GetBucketWebsiteOutput),
+		GetBucketWebsiteOutput: r.Request.Data.(*types.GetBucketWebsiteOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -166,7 +80,7 @@ func (r GetBucketWebsiteRequest) Send(ctx context.Context) (*GetBucketWebsiteRes
 // GetBucketWebsiteResponse is the response type for the
 // GetBucketWebsite API operation.
 type GetBucketWebsiteResponse struct {
-	*GetBucketWebsiteOutput
+	*types.GetBucketWebsiteOutput
 
 	response *aws.Response
 }

@@ -6,97 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/personalize/types"
 )
-
-type CreateSolutionInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the dataset group that provides the training
-	// data.
-	//
-	// DatasetGroupArn is a required field
-	DatasetGroupArn *string `locationName:"datasetGroupArn" type:"string" required:"true"`
-
-	// When your have multiple event types (using an EVENT_TYPE schema field), this
-	// parameter specifies which event type (for example, 'click' or 'like') is
-	// used for training the model.
-	EventType *string `locationName:"eventType" type:"string"`
-
-	// The name for the solution.
-	//
-	// Name is a required field
-	Name *string `locationName:"name" min:"1" type:"string" required:"true"`
-
-	// Whether to perform automated machine learning (AutoML). The default is false.
-	// For this case, you must specify recipeArn.
-	//
-	// When set to true, Amazon Personalize analyzes your training data and selects
-	// the optimal USER_PERSONALIZATION recipe and hyperparameters. In this case,
-	// you must omit recipeArn. Amazon Personalize determines the optimal recipe
-	// by running tests with different values for the hyperparameters. AutoML lengthens
-	// the training process as compared to selecting a specific recipe.
-	PerformAutoML *bool `locationName:"performAutoML" type:"boolean"`
-
-	// Whether to perform hyperparameter optimization (HPO) on the specified or
-	// selected recipe. The default is false.
-	//
-	// When performing AutoML, this parameter is always true and you should not
-	// set it to false.
-	PerformHPO *bool `locationName:"performHPO" type:"boolean"`
-
-	// The ARN of the recipe to use for model training. Only specified when performAutoML
-	// is false.
-	RecipeArn *string `locationName:"recipeArn" type:"string"`
-
-	// The configuration to use with the solution. When performAutoML is set to
-	// true, Amazon Personalize only evaluates the autoMLConfig section of the solution
-	// configuration.
-	SolutionConfig *SolutionConfig `locationName:"solutionConfig" type:"structure"`
-}
-
-// String returns the string representation
-func (s CreateSolutionInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateSolutionInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateSolutionInput"}
-
-	if s.DatasetGroupArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DatasetGroupArn"))
-	}
-
-	if s.Name == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Name"))
-	}
-	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
-	}
-	if s.SolutionConfig != nil {
-		if err := s.SolutionConfig.Validate(); err != nil {
-			invalidParams.AddNested("SolutionConfig", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type CreateSolutionOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The ARN of the solution.
-	SolutionArn *string `locationName:"solutionArn" type:"string"`
-}
-
-// String returns the string representation
-func (s CreateSolutionOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCreateSolution = "CreateSolution"
 
@@ -155,7 +66,7 @@ const opCreateSolution = "CreateSolution"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/CreateSolution
-func (c *Client) CreateSolutionRequest(input *CreateSolutionInput) CreateSolutionRequest {
+func (c *Client) CreateSolutionRequest(input *types.CreateSolutionInput) CreateSolutionRequest {
 	op := &aws.Operation{
 		Name:       opCreateSolution,
 		HTTPMethod: "POST",
@@ -163,10 +74,10 @@ func (c *Client) CreateSolutionRequest(input *CreateSolutionInput) CreateSolutio
 	}
 
 	if input == nil {
-		input = &CreateSolutionInput{}
+		input = &types.CreateSolutionInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateSolutionOutput{})
+	req := c.newRequest(op, input, &types.CreateSolutionOutput{})
 	return CreateSolutionRequest{Request: req, Input: input, Copy: c.CreateSolutionRequest}
 }
 
@@ -174,8 +85,8 @@ func (c *Client) CreateSolutionRequest(input *CreateSolutionInput) CreateSolutio
 // CreateSolution API operation.
 type CreateSolutionRequest struct {
 	*aws.Request
-	Input *CreateSolutionInput
-	Copy  func(*CreateSolutionInput) CreateSolutionRequest
+	Input *types.CreateSolutionInput
+	Copy  func(*types.CreateSolutionInput) CreateSolutionRequest
 }
 
 // Send marshals and sends the CreateSolution API request.
@@ -187,7 +98,7 @@ func (r CreateSolutionRequest) Send(ctx context.Context) (*CreateSolutionRespons
 	}
 
 	resp := &CreateSolutionResponse{
-		CreateSolutionOutput: r.Request.Data.(*CreateSolutionOutput),
+		CreateSolutionOutput: r.Request.Data.(*types.CreateSolutionOutput),
 		response:             &aws.Response{Request: r.Request},
 	}
 
@@ -197,7 +108,7 @@ func (r CreateSolutionRequest) Send(ctx context.Context) (*CreateSolutionRespons
 // CreateSolutionResponse is the response type for the
 // CreateSolution API operation.
 type CreateSolutionResponse struct {
-	*CreateSolutionOutput
+	*types.CreateSolutionOutput
 
 	response *aws.Response
 }

@@ -6,86 +6,40 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/s3/types"
 )
-
-type GetBucketAccelerateConfigurationInput struct {
-	_ struct{} `type:"structure"`
-
-	// Name of the bucket for which the accelerate configuration is retrieved.
-	//
-	// Bucket is a required field
-	Bucket *string `location:"uri" locationName:"Bucket" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetBucketAccelerateConfigurationInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetBucketAccelerateConfigurationInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetBucketAccelerateConfigurationInput"}
-
-	if s.Bucket == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Bucket"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-func (s *GetBucketAccelerateConfigurationInput) getBucket() (v string) {
-	if s.Bucket == nil {
-		return v
-	}
-	return *s.Bucket
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetBucketAccelerateConfigurationInput) MarshalFields(e protocol.FieldEncoder) error {
-
-	if s.Bucket != nil {
-		v := *s.Bucket
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "Bucket", protocol.StringValue(v), metadata)
-	}
-	return nil
-}
-
-type GetBucketAccelerateConfigurationOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The accelerate configuration of the bucket.
-	Status BucketAccelerateStatus `type:"string" enum:"true"`
-}
-
-// String returns the string representation
-func (s GetBucketAccelerateConfigurationOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetBucketAccelerateConfigurationOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.Status) > 0 {
-		v := s.Status
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "Status", v, metadata)
-	}
-	return nil
-}
 
 const opGetBucketAccelerateConfiguration = "GetBucketAccelerateConfiguration"
 
 // GetBucketAccelerateConfigurationRequest returns a request value for making API operation for
 // Amazon Simple Storage Service.
 //
-// Returns the accelerate configuration of a bucket.
+// This implementation of the GET operation uses the accelerate subresource
+// to return the Transfer Acceleration state of a bucket, which is either Enabled
+// or Suspended. Amazon S3 Transfer Acceleration is a bucket-level feature that
+// enables you to perform faster data transfers to and from Amazon S3.
+//
+// To use this operation, you must have permission to perform the s3:GetAccelerateConfiguration
+// action. The bucket owner has this permission by default. The bucket owner
+// can grant this permission to others. For more information about permissions,
+// see Permissions Related to Bucket Subresource Operations (https://docs.aws.amazon.com/AmazonS3/latest/dev//using-with-s3-actions.html#using-with-s3-actions-related-to-bucket-subresources)
+// and Managing Access Permissions to your Amazon S3 Resources (https://docs.aws.amazon.com/AmazonS3/latest/dev//s3-access-control.html)
+// in the Amazon Simple Storage Service Developer Guide.
+//
+// You set the Transfer Acceleration state of an existing bucket to Enabled
+// or Suspended by using the PutBucketAccelerateConfiguration operation.
+//
+// A GET accelerate request does not return a state value for a bucket that
+// has no transfer acceleration state. A bucket has no Transfer Acceleration
+// state, if a state has never been set on the bucket.
+//
+// For more information on transfer acceleration, see Transfer Acceleration
+// (https://docs.aws.amazon.com/AmazonS3/latest/dev//transfer-acceleration.html)
+// in the Amazon Simple Storage Service Developer Guide.
+//
+// Related Resources
+//
+//    * PutBucketAccelerateConfiguration
 //
 //    // Example sending a request using GetBucketAccelerateConfigurationRequest.
 //    req := client.GetBucketAccelerateConfigurationRequest(params)
@@ -95,7 +49,7 @@ const opGetBucketAccelerateConfiguration = "GetBucketAccelerateConfiguration"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetBucketAccelerateConfiguration
-func (c *Client) GetBucketAccelerateConfigurationRequest(input *GetBucketAccelerateConfigurationInput) GetBucketAccelerateConfigurationRequest {
+func (c *Client) GetBucketAccelerateConfigurationRequest(input *types.GetBucketAccelerateConfigurationInput) GetBucketAccelerateConfigurationRequest {
 	op := &aws.Operation{
 		Name:       opGetBucketAccelerateConfiguration,
 		HTTPMethod: "GET",
@@ -103,10 +57,10 @@ func (c *Client) GetBucketAccelerateConfigurationRequest(input *GetBucketAcceler
 	}
 
 	if input == nil {
-		input = &GetBucketAccelerateConfigurationInput{}
+		input = &types.GetBucketAccelerateConfigurationInput{}
 	}
 
-	req := c.newRequest(op, input, &GetBucketAccelerateConfigurationOutput{})
+	req := c.newRequest(op, input, &types.GetBucketAccelerateConfigurationOutput{})
 	return GetBucketAccelerateConfigurationRequest{Request: req, Input: input, Copy: c.GetBucketAccelerateConfigurationRequest}
 }
 
@@ -114,8 +68,8 @@ func (c *Client) GetBucketAccelerateConfigurationRequest(input *GetBucketAcceler
 // GetBucketAccelerateConfiguration API operation.
 type GetBucketAccelerateConfigurationRequest struct {
 	*aws.Request
-	Input *GetBucketAccelerateConfigurationInput
-	Copy  func(*GetBucketAccelerateConfigurationInput) GetBucketAccelerateConfigurationRequest
+	Input *types.GetBucketAccelerateConfigurationInput
+	Copy  func(*types.GetBucketAccelerateConfigurationInput) GetBucketAccelerateConfigurationRequest
 }
 
 // Send marshals and sends the GetBucketAccelerateConfiguration API request.
@@ -127,7 +81,7 @@ func (r GetBucketAccelerateConfigurationRequest) Send(ctx context.Context) (*Get
 	}
 
 	resp := &GetBucketAccelerateConfigurationResponse{
-		GetBucketAccelerateConfigurationOutput: r.Request.Data.(*GetBucketAccelerateConfigurationOutput),
+		GetBucketAccelerateConfigurationOutput: r.Request.Data.(*types.GetBucketAccelerateConfigurationOutput),
 		response:                               &aws.Response{Request: r.Request},
 	}
 
@@ -137,7 +91,7 @@ func (r GetBucketAccelerateConfigurationRequest) Send(ctx context.Context) (*Get
 // GetBucketAccelerateConfigurationResponse is the response type for the
 // GetBucketAccelerateConfiguration API operation.
 type GetBucketAccelerateConfigurationResponse struct {
-	*GetBucketAccelerateConfigurationOutput
+	*types.GetBucketAccelerateConfigurationOutput
 
 	response *aws.Response
 }

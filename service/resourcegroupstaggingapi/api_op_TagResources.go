@@ -6,69 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/resourcegroupstaggingapi/types"
 )
-
-type TagResourcesInput struct {
-	_ struct{} `type:"structure"`
-
-	// A list of ARNs. An ARN (Amazon Resource Name) uniquely identifies a resource.
-	// You can specify a minimum of 1 and a maximum of 20 ARNs (resources) to tag.
-	// An ARN can be set to a maximum of 1600 characters. For more information,
-	// see Amazon Resource Names (ARNs) and AWS Service Namespaces (http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
-	// in the AWS General Reference.
-	//
-	// ResourceARNList is a required field
-	ResourceARNList []string `min:"1" type:"list" required:"true"`
-
-	// The tags that you want to add to the specified resources. A tag consists
-	// of a key and a value that you define.
-	//
-	// Tags is a required field
-	Tags map[string]string `min:"1" type:"map" required:"true"`
-}
-
-// String returns the string representation
-func (s TagResourcesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *TagResourcesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "TagResourcesInput"}
-
-	if s.ResourceARNList == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ResourceARNList"))
-	}
-	if s.ResourceARNList != nil && len(s.ResourceARNList) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ResourceARNList", 1))
-	}
-
-	if s.Tags == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Tags"))
-	}
-	if s.Tags != nil && len(s.Tags) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Tags", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type TagResourcesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Details of resources that could not be tagged. An error code, status code,
-	// and error message are returned for each failed item.
-	FailedResourcesMap map[string]FailureInfo `type:"map"`
-}
-
-// String returns the string representation
-func (s TagResourcesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opTagResources = "TagResources"
 
@@ -101,7 +40,7 @@ const opTagResources = "TagResources"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/resourcegroupstaggingapi-2017-01-26/TagResources
-func (c *Client) TagResourcesRequest(input *TagResourcesInput) TagResourcesRequest {
+func (c *Client) TagResourcesRequest(input *types.TagResourcesInput) TagResourcesRequest {
 	op := &aws.Operation{
 		Name:       opTagResources,
 		HTTPMethod: "POST",
@@ -109,10 +48,10 @@ func (c *Client) TagResourcesRequest(input *TagResourcesInput) TagResourcesReque
 	}
 
 	if input == nil {
-		input = &TagResourcesInput{}
+		input = &types.TagResourcesInput{}
 	}
 
-	req := c.newRequest(op, input, &TagResourcesOutput{})
+	req := c.newRequest(op, input, &types.TagResourcesOutput{})
 	return TagResourcesRequest{Request: req, Input: input, Copy: c.TagResourcesRequest}
 }
 
@@ -120,8 +59,8 @@ func (c *Client) TagResourcesRequest(input *TagResourcesInput) TagResourcesReque
 // TagResources API operation.
 type TagResourcesRequest struct {
 	*aws.Request
-	Input *TagResourcesInput
-	Copy  func(*TagResourcesInput) TagResourcesRequest
+	Input *types.TagResourcesInput
+	Copy  func(*types.TagResourcesInput) TagResourcesRequest
 }
 
 // Send marshals and sends the TagResources API request.
@@ -133,7 +72,7 @@ func (r TagResourcesRequest) Send(ctx context.Context) (*TagResourcesResponse, e
 	}
 
 	resp := &TagResourcesResponse{
-		TagResourcesOutput: r.Request.Data.(*TagResourcesOutput),
+		TagResourcesOutput: r.Request.Data.(*types.TagResourcesOutput),
 		response:           &aws.Response{Request: r.Request},
 	}
 
@@ -143,7 +82,7 @@ func (r TagResourcesRequest) Send(ctx context.Context) (*TagResourcesResponse, e
 // TagResourcesResponse is the response type for the
 // TagResources API operation.
 type TagResourcesResponse struct {
-	*TagResourcesOutput
+	*types.TagResourcesOutput
 
 	response *aws.Response
 }

@@ -6,55 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/iam/types"
 )
-
-type ListServiceSpecificCredentialsInput struct {
-	_ struct{} `type:"structure"`
-
-	// Filters the returned results to only those for the specified AWS service.
-	// If not specified, then AWS returns service-specific credentials for all services.
-	ServiceName *string `type:"string"`
-
-	// The name of the user whose service-specific credentials you want information
-	// about. If this value is not specified, then the operation assumes the user
-	// whose credentials are used to call the operation.
-	//
-	// This parameter allows (through its regex pattern (http://wikipedia.org/wiki/regex))
-	// a string of characters consisting of upper and lowercase alphanumeric characters
-	// with no spaces. You can also include any of the following characters: _+=,.@-
-	UserName *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s ListServiceSpecificCredentialsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListServiceSpecificCredentialsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListServiceSpecificCredentialsInput"}
-	if s.UserName != nil && len(*s.UserName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("UserName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ListServiceSpecificCredentialsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A list of structures that each contain details about a service-specific credential.
-	ServiceSpecificCredentials []ServiceSpecificCredentialMetadata `type:"list"`
-}
-
-// String returns the string representation
-func (s ListServiceSpecificCredentialsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListServiceSpecificCredentials = "ListServiceSpecificCredentials"
 
@@ -77,7 +30,7 @@ const opListServiceSpecificCredentials = "ListServiceSpecificCredentials"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListServiceSpecificCredentials
-func (c *Client) ListServiceSpecificCredentialsRequest(input *ListServiceSpecificCredentialsInput) ListServiceSpecificCredentialsRequest {
+func (c *Client) ListServiceSpecificCredentialsRequest(input *types.ListServiceSpecificCredentialsInput) ListServiceSpecificCredentialsRequest {
 	op := &aws.Operation{
 		Name:       opListServiceSpecificCredentials,
 		HTTPMethod: "POST",
@@ -85,10 +38,10 @@ func (c *Client) ListServiceSpecificCredentialsRequest(input *ListServiceSpecifi
 	}
 
 	if input == nil {
-		input = &ListServiceSpecificCredentialsInput{}
+		input = &types.ListServiceSpecificCredentialsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListServiceSpecificCredentialsOutput{})
+	req := c.newRequest(op, input, &types.ListServiceSpecificCredentialsOutput{})
 	return ListServiceSpecificCredentialsRequest{Request: req, Input: input, Copy: c.ListServiceSpecificCredentialsRequest}
 }
 
@@ -96,8 +49,8 @@ func (c *Client) ListServiceSpecificCredentialsRequest(input *ListServiceSpecifi
 // ListServiceSpecificCredentials API operation.
 type ListServiceSpecificCredentialsRequest struct {
 	*aws.Request
-	Input *ListServiceSpecificCredentialsInput
-	Copy  func(*ListServiceSpecificCredentialsInput) ListServiceSpecificCredentialsRequest
+	Input *types.ListServiceSpecificCredentialsInput
+	Copy  func(*types.ListServiceSpecificCredentialsInput) ListServiceSpecificCredentialsRequest
 }
 
 // Send marshals and sends the ListServiceSpecificCredentials API request.
@@ -109,7 +62,7 @@ func (r ListServiceSpecificCredentialsRequest) Send(ctx context.Context) (*ListS
 	}
 
 	resp := &ListServiceSpecificCredentialsResponse{
-		ListServiceSpecificCredentialsOutput: r.Request.Data.(*ListServiceSpecificCredentialsOutput),
+		ListServiceSpecificCredentialsOutput: r.Request.Data.(*types.ListServiceSpecificCredentialsOutput),
 		response:                             &aws.Response{Request: r.Request},
 	}
 
@@ -119,7 +72,7 @@ func (r ListServiceSpecificCredentialsRequest) Send(ctx context.Context) (*ListS
 // ListServiceSpecificCredentialsResponse is the response type for the
 // ListServiceSpecificCredentials API operation.
 type ListServiceSpecificCredentialsResponse struct {
-	*ListServiceSpecificCredentialsOutput
+	*types.ListServiceSpecificCredentialsOutput
 
 	response *aws.Response
 }

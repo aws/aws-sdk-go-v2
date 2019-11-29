@@ -6,48 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/alexaforbusiness/types"
 )
-
-type DisassociateSkillFromSkillGroupInput struct {
-	_ struct{} `type:"structure"`
-
-	// The unique identifier of a skill. Required.
-	SkillGroupArn *string `type:"string"`
-
-	// The ARN of a skill group to associate to a skill.
-	//
-	// SkillId is a required field
-	SkillId *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DisassociateSkillFromSkillGroupInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DisassociateSkillFromSkillGroupInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DisassociateSkillFromSkillGroupInput"}
-
-	if s.SkillId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("SkillId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DisassociateSkillFromSkillGroupOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DisassociateSkillFromSkillGroupOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDisassociateSkillFromSkillGroup = "DisassociateSkillFromSkillGroup"
 
@@ -64,7 +24,7 @@ const opDisassociateSkillFromSkillGroup = "DisassociateSkillFromSkillGroup"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/DisassociateSkillFromSkillGroup
-func (c *Client) DisassociateSkillFromSkillGroupRequest(input *DisassociateSkillFromSkillGroupInput) DisassociateSkillFromSkillGroupRequest {
+func (c *Client) DisassociateSkillFromSkillGroupRequest(input *types.DisassociateSkillFromSkillGroupInput) DisassociateSkillFromSkillGroupRequest {
 	op := &aws.Operation{
 		Name:       opDisassociateSkillFromSkillGroup,
 		HTTPMethod: "POST",
@@ -72,10 +32,10 @@ func (c *Client) DisassociateSkillFromSkillGroupRequest(input *DisassociateSkill
 	}
 
 	if input == nil {
-		input = &DisassociateSkillFromSkillGroupInput{}
+		input = &types.DisassociateSkillFromSkillGroupInput{}
 	}
 
-	req := c.newRequest(op, input, &DisassociateSkillFromSkillGroupOutput{})
+	req := c.newRequest(op, input, &types.DisassociateSkillFromSkillGroupOutput{})
 	return DisassociateSkillFromSkillGroupRequest{Request: req, Input: input, Copy: c.DisassociateSkillFromSkillGroupRequest}
 }
 
@@ -83,8 +43,8 @@ func (c *Client) DisassociateSkillFromSkillGroupRequest(input *DisassociateSkill
 // DisassociateSkillFromSkillGroup API operation.
 type DisassociateSkillFromSkillGroupRequest struct {
 	*aws.Request
-	Input *DisassociateSkillFromSkillGroupInput
-	Copy  func(*DisassociateSkillFromSkillGroupInput) DisassociateSkillFromSkillGroupRequest
+	Input *types.DisassociateSkillFromSkillGroupInput
+	Copy  func(*types.DisassociateSkillFromSkillGroupInput) DisassociateSkillFromSkillGroupRequest
 }
 
 // Send marshals and sends the DisassociateSkillFromSkillGroup API request.
@@ -96,7 +56,7 @@ func (r DisassociateSkillFromSkillGroupRequest) Send(ctx context.Context) (*Disa
 	}
 
 	resp := &DisassociateSkillFromSkillGroupResponse{
-		DisassociateSkillFromSkillGroupOutput: r.Request.Data.(*DisassociateSkillFromSkillGroupOutput),
+		DisassociateSkillFromSkillGroupOutput: r.Request.Data.(*types.DisassociateSkillFromSkillGroupOutput),
 		response:                              &aws.Response{Request: r.Request},
 	}
 
@@ -106,7 +66,7 @@ func (r DisassociateSkillFromSkillGroupRequest) Send(ctx context.Context) (*Disa
 // DisassociateSkillFromSkillGroupResponse is the response type for the
 // DisassociateSkillFromSkillGroup API operation.
 type DisassociateSkillFromSkillGroupResponse struct {
-	*DisassociateSkillFromSkillGroupOutput
+	*types.DisassociateSkillFromSkillGroupOutput
 
 	response *aws.Response
 }

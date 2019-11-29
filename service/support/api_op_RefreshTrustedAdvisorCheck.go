@@ -6,54 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/support/types"
 )
-
-type RefreshTrustedAdvisorCheckInput struct {
-	_ struct{} `type:"structure"`
-
-	// The unique identifier for the Trusted Advisor check to refresh. Note: Specifying
-	// the check ID of a check that is automatically refreshed causes an InvalidParameterValue
-	// error.
-	//
-	// CheckId is a required field
-	CheckId *string `locationName:"checkId" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s RefreshTrustedAdvisorCheckInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *RefreshTrustedAdvisorCheckInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "RefreshTrustedAdvisorCheckInput"}
-
-	if s.CheckId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("CheckId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// The current refresh status of a Trusted Advisor check.
-type RefreshTrustedAdvisorCheckOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The current refresh status for a check, including the amount of time until
-	// the check is eligible for refresh.
-	//
-	// Status is a required field
-	Status *TrustedAdvisorCheckRefreshStatus `locationName:"status" type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s RefreshTrustedAdvisorCheckOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opRefreshTrustedAdvisorCheck = "RefreshTrustedAdvisorCheck"
 
@@ -70,8 +24,11 @@ const opRefreshTrustedAdvisorCheck = "RefreshTrustedAdvisorCheck"
 // The response contains a TrustedAdvisorCheckRefreshStatus object, which contains
 // these fields:
 //
-//    * status. The refresh status of the check: "none", "enqueued", "processing",
-//    "success", or "abandoned".
+//    * status. The refresh status of the check: none: The check is not refreshed
+//    or the non-success status exceeds the timeout enqueued: The check refresh
+//    requests has entered the refresh queue processing: The check refresh request
+//    is picked up by the rule processing engine success: The check is successfully
+//    refreshed abandoned: The check refresh has failed
 //
 //    * millisUntilNextRefreshable. The amount of time, in milliseconds, until
 //    the check is eligible for refresh.
@@ -86,7 +43,7 @@ const opRefreshTrustedAdvisorCheck = "RefreshTrustedAdvisorCheck"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/support-2013-04-15/RefreshTrustedAdvisorCheck
-func (c *Client) RefreshTrustedAdvisorCheckRequest(input *RefreshTrustedAdvisorCheckInput) RefreshTrustedAdvisorCheckRequest {
+func (c *Client) RefreshTrustedAdvisorCheckRequest(input *types.RefreshTrustedAdvisorCheckInput) RefreshTrustedAdvisorCheckRequest {
 	op := &aws.Operation{
 		Name:       opRefreshTrustedAdvisorCheck,
 		HTTPMethod: "POST",
@@ -94,10 +51,10 @@ func (c *Client) RefreshTrustedAdvisorCheckRequest(input *RefreshTrustedAdvisorC
 	}
 
 	if input == nil {
-		input = &RefreshTrustedAdvisorCheckInput{}
+		input = &types.RefreshTrustedAdvisorCheckInput{}
 	}
 
-	req := c.newRequest(op, input, &RefreshTrustedAdvisorCheckOutput{})
+	req := c.newRequest(op, input, &types.RefreshTrustedAdvisorCheckOutput{})
 	return RefreshTrustedAdvisorCheckRequest{Request: req, Input: input, Copy: c.RefreshTrustedAdvisorCheckRequest}
 }
 
@@ -105,8 +62,8 @@ func (c *Client) RefreshTrustedAdvisorCheckRequest(input *RefreshTrustedAdvisorC
 // RefreshTrustedAdvisorCheck API operation.
 type RefreshTrustedAdvisorCheckRequest struct {
 	*aws.Request
-	Input *RefreshTrustedAdvisorCheckInput
-	Copy  func(*RefreshTrustedAdvisorCheckInput) RefreshTrustedAdvisorCheckRequest
+	Input *types.RefreshTrustedAdvisorCheckInput
+	Copy  func(*types.RefreshTrustedAdvisorCheckInput) RefreshTrustedAdvisorCheckRequest
 }
 
 // Send marshals and sends the RefreshTrustedAdvisorCheck API request.
@@ -118,7 +75,7 @@ func (r RefreshTrustedAdvisorCheckRequest) Send(ctx context.Context) (*RefreshTr
 	}
 
 	resp := &RefreshTrustedAdvisorCheckResponse{
-		RefreshTrustedAdvisorCheckOutput: r.Request.Data.(*RefreshTrustedAdvisorCheckOutput),
+		RefreshTrustedAdvisorCheckOutput: r.Request.Data.(*types.RefreshTrustedAdvisorCheckOutput),
 		response:                         &aws.Response{Request: r.Request},
 	}
 
@@ -128,7 +85,7 @@ func (r RefreshTrustedAdvisorCheckRequest) Send(ctx context.Context) (*RefreshTr
 // RefreshTrustedAdvisorCheckResponse is the response type for the
 // RefreshTrustedAdvisorCheck API operation.
 type RefreshTrustedAdvisorCheckResponse struct {
-	*RefreshTrustedAdvisorCheckOutput
+	*types.RefreshTrustedAdvisorCheckOutput
 
 	response *aws.Response
 }

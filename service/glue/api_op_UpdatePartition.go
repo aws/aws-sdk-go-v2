@@ -6,90 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/glue/types"
 )
-
-type UpdatePartitionInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the Data Catalog where the partition to be updated resides. If
-	// none is provided, the AWS account ID is used by default.
-	CatalogId *string `min:"1" type:"string"`
-
-	// The name of the catalog database in which the table in question resides.
-	//
-	// DatabaseName is a required field
-	DatabaseName *string `min:"1" type:"string" required:"true"`
-
-	// The new partition object to update the partition to.
-	//
-	// PartitionInput is a required field
-	PartitionInput *PartitionInput `type:"structure" required:"true"`
-
-	// A list of the values defining the partition.
-	//
-	// PartitionValueList is a required field
-	PartitionValueList []string `type:"list" required:"true"`
-
-	// The name of the table in which the partition to be updated is located.
-	//
-	// TableName is a required field
-	TableName *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s UpdatePartitionInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdatePartitionInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdatePartitionInput"}
-	if s.CatalogId != nil && len(*s.CatalogId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("CatalogId", 1))
-	}
-
-	if s.DatabaseName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DatabaseName"))
-	}
-	if s.DatabaseName != nil && len(*s.DatabaseName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("DatabaseName", 1))
-	}
-
-	if s.PartitionInput == nil {
-		invalidParams.Add(aws.NewErrParamRequired("PartitionInput"))
-	}
-
-	if s.PartitionValueList == nil {
-		invalidParams.Add(aws.NewErrParamRequired("PartitionValueList"))
-	}
-
-	if s.TableName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("TableName"))
-	}
-	if s.TableName != nil && len(*s.TableName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("TableName", 1))
-	}
-	if s.PartitionInput != nil {
-		if err := s.PartitionInput.Validate(); err != nil {
-			invalidParams.AddNested("PartitionInput", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type UpdatePartitionOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s UpdatePartitionOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opUpdatePartition = "UpdatePartition"
 
@@ -106,7 +24,7 @@ const opUpdatePartition = "UpdatePartition"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/UpdatePartition
-func (c *Client) UpdatePartitionRequest(input *UpdatePartitionInput) UpdatePartitionRequest {
+func (c *Client) UpdatePartitionRequest(input *types.UpdatePartitionInput) UpdatePartitionRequest {
 	op := &aws.Operation{
 		Name:       opUpdatePartition,
 		HTTPMethod: "POST",
@@ -114,10 +32,10 @@ func (c *Client) UpdatePartitionRequest(input *UpdatePartitionInput) UpdateParti
 	}
 
 	if input == nil {
-		input = &UpdatePartitionInput{}
+		input = &types.UpdatePartitionInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdatePartitionOutput{})
+	req := c.newRequest(op, input, &types.UpdatePartitionOutput{})
 	return UpdatePartitionRequest{Request: req, Input: input, Copy: c.UpdatePartitionRequest}
 }
 
@@ -125,8 +43,8 @@ func (c *Client) UpdatePartitionRequest(input *UpdatePartitionInput) UpdateParti
 // UpdatePartition API operation.
 type UpdatePartitionRequest struct {
 	*aws.Request
-	Input *UpdatePartitionInput
-	Copy  func(*UpdatePartitionInput) UpdatePartitionRequest
+	Input *types.UpdatePartitionInput
+	Copy  func(*types.UpdatePartitionInput) UpdatePartitionRequest
 }
 
 // Send marshals and sends the UpdatePartition API request.
@@ -138,7 +56,7 @@ func (r UpdatePartitionRequest) Send(ctx context.Context) (*UpdatePartitionRespo
 	}
 
 	resp := &UpdatePartitionResponse{
-		UpdatePartitionOutput: r.Request.Data.(*UpdatePartitionOutput),
+		UpdatePartitionOutput: r.Request.Data.(*types.UpdatePartitionOutput),
 		response:              &aws.Response{Request: r.Request},
 	}
 
@@ -148,7 +66,7 @@ func (r UpdatePartitionRequest) Send(ctx context.Context) (*UpdatePartitionRespo
 // UpdatePartitionResponse is the response type for the
 // UpdatePartition API operation.
 type UpdatePartitionResponse struct {
-	*UpdatePartitionOutput
+	*types.UpdatePartitionOutput
 
 	response *aws.Response
 }

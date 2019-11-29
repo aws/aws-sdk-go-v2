@@ -6,58 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/autoscaling/types"
 )
-
-type DetachLoadBalancerTargetGroupsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the Auto Scaling group.
-	//
-	// AutoScalingGroupName is a required field
-	AutoScalingGroupName *string `min:"1" type:"string" required:"true"`
-
-	// The Amazon Resource Names (ARN) of the target groups. You can specify up
-	// to 10 target groups.
-	//
-	// TargetGroupARNs is a required field
-	TargetGroupARNs []string `type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s DetachLoadBalancerTargetGroupsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DetachLoadBalancerTargetGroupsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DetachLoadBalancerTargetGroupsInput"}
-
-	if s.AutoScalingGroupName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("AutoScalingGroupName"))
-	}
-	if s.AutoScalingGroupName != nil && len(*s.AutoScalingGroupName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("AutoScalingGroupName", 1))
-	}
-
-	if s.TargetGroupARNs == nil {
-		invalidParams.Add(aws.NewErrParamRequired("TargetGroupARNs"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DetachLoadBalancerTargetGroupsOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DetachLoadBalancerTargetGroupsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDetachLoadBalancerTargetGroups = "DetachLoadBalancerTargetGroups"
 
@@ -74,7 +24,7 @@ const opDetachLoadBalancerTargetGroups = "DetachLoadBalancerTargetGroups"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DetachLoadBalancerTargetGroups
-func (c *Client) DetachLoadBalancerTargetGroupsRequest(input *DetachLoadBalancerTargetGroupsInput) DetachLoadBalancerTargetGroupsRequest {
+func (c *Client) DetachLoadBalancerTargetGroupsRequest(input *types.DetachLoadBalancerTargetGroupsInput) DetachLoadBalancerTargetGroupsRequest {
 	op := &aws.Operation{
 		Name:       opDetachLoadBalancerTargetGroups,
 		HTTPMethod: "POST",
@@ -82,10 +32,10 @@ func (c *Client) DetachLoadBalancerTargetGroupsRequest(input *DetachLoadBalancer
 	}
 
 	if input == nil {
-		input = &DetachLoadBalancerTargetGroupsInput{}
+		input = &types.DetachLoadBalancerTargetGroupsInput{}
 	}
 
-	req := c.newRequest(op, input, &DetachLoadBalancerTargetGroupsOutput{})
+	req := c.newRequest(op, input, &types.DetachLoadBalancerTargetGroupsOutput{})
 	return DetachLoadBalancerTargetGroupsRequest{Request: req, Input: input, Copy: c.DetachLoadBalancerTargetGroupsRequest}
 }
 
@@ -93,8 +43,8 @@ func (c *Client) DetachLoadBalancerTargetGroupsRequest(input *DetachLoadBalancer
 // DetachLoadBalancerTargetGroups API operation.
 type DetachLoadBalancerTargetGroupsRequest struct {
 	*aws.Request
-	Input *DetachLoadBalancerTargetGroupsInput
-	Copy  func(*DetachLoadBalancerTargetGroupsInput) DetachLoadBalancerTargetGroupsRequest
+	Input *types.DetachLoadBalancerTargetGroupsInput
+	Copy  func(*types.DetachLoadBalancerTargetGroupsInput) DetachLoadBalancerTargetGroupsRequest
 }
 
 // Send marshals and sends the DetachLoadBalancerTargetGroups API request.
@@ -106,7 +56,7 @@ func (r DetachLoadBalancerTargetGroupsRequest) Send(ctx context.Context) (*Detac
 	}
 
 	resp := &DetachLoadBalancerTargetGroupsResponse{
-		DetachLoadBalancerTargetGroupsOutput: r.Request.Data.(*DetachLoadBalancerTargetGroupsOutput),
+		DetachLoadBalancerTargetGroupsOutput: r.Request.Data.(*types.DetachLoadBalancerTargetGroupsOutput),
 		response:                             &aws.Response{Request: r.Request},
 	}
 
@@ -116,7 +66,7 @@ func (r DetachLoadBalancerTargetGroupsRequest) Send(ctx context.Context) (*Detac
 // DetachLoadBalancerTargetGroupsResponse is the response type for the
 // DetachLoadBalancerTargetGroups API operation.
 type DetachLoadBalancerTargetGroupsResponse struct {
-	*DetachLoadBalancerTargetGroupsOutput
+	*types.DetachLoadBalancerTargetGroupsOutput
 
 	response *aws.Response
 }

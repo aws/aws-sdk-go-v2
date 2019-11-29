@@ -6,97 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/qldb/types"
 )
-
-type DescribeJournalS3ExportInput struct {
-	_ struct{} `type:"structure"`
-
-	// The unique ID of the journal export job that you want to describe.
-	//
-	// ExportId is a required field
-	ExportId *string `location:"uri" locationName:"exportId" min:"22" type:"string" required:"true"`
-
-	// The name of the ledger.
-	//
-	// Name is a required field
-	Name *string `location:"uri" locationName:"name" min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeJournalS3ExportInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeJournalS3ExportInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeJournalS3ExportInput"}
-
-	if s.ExportId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ExportId"))
-	}
-	if s.ExportId != nil && len(*s.ExportId) < 22 {
-		invalidParams.Add(aws.NewErrParamMinLen("ExportId", 22))
-	}
-
-	if s.Name == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Name"))
-	}
-	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DescribeJournalS3ExportInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.ExportId != nil {
-		v := *s.ExportId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "exportId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Name != nil {
-		v := *s.Name
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type DescribeJournalS3ExportOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Information about the journal export job returned by a DescribeJournalS3Export
-	// request.
-	//
-	// ExportDescription is a required field
-	ExportDescription *JournalS3ExportDescription `type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeJournalS3ExportOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DescribeJournalS3ExportOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.ExportDescription != nil {
-		v := s.ExportDescription
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "ExportDescription", v, metadata)
-	}
-	return nil
-}
 
 const opDescribeJournalS3Export = "DescribeJournalS3Export"
 
@@ -119,7 +30,7 @@ const opDescribeJournalS3Export = "DescribeJournalS3Export"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/qldb-2019-01-02/DescribeJournalS3Export
-func (c *Client) DescribeJournalS3ExportRequest(input *DescribeJournalS3ExportInput) DescribeJournalS3ExportRequest {
+func (c *Client) DescribeJournalS3ExportRequest(input *types.DescribeJournalS3ExportInput) DescribeJournalS3ExportRequest {
 	op := &aws.Operation{
 		Name:       opDescribeJournalS3Export,
 		HTTPMethod: "GET",
@@ -127,10 +38,10 @@ func (c *Client) DescribeJournalS3ExportRequest(input *DescribeJournalS3ExportIn
 	}
 
 	if input == nil {
-		input = &DescribeJournalS3ExportInput{}
+		input = &types.DescribeJournalS3ExportInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeJournalS3ExportOutput{})
+	req := c.newRequest(op, input, &types.DescribeJournalS3ExportOutput{})
 	return DescribeJournalS3ExportRequest{Request: req, Input: input, Copy: c.DescribeJournalS3ExportRequest}
 }
 
@@ -138,8 +49,8 @@ func (c *Client) DescribeJournalS3ExportRequest(input *DescribeJournalS3ExportIn
 // DescribeJournalS3Export API operation.
 type DescribeJournalS3ExportRequest struct {
 	*aws.Request
-	Input *DescribeJournalS3ExportInput
-	Copy  func(*DescribeJournalS3ExportInput) DescribeJournalS3ExportRequest
+	Input *types.DescribeJournalS3ExportInput
+	Copy  func(*types.DescribeJournalS3ExportInput) DescribeJournalS3ExportRequest
 }
 
 // Send marshals and sends the DescribeJournalS3Export API request.
@@ -151,7 +62,7 @@ func (r DescribeJournalS3ExportRequest) Send(ctx context.Context) (*DescribeJour
 	}
 
 	resp := &DescribeJournalS3ExportResponse{
-		DescribeJournalS3ExportOutput: r.Request.Data.(*DescribeJournalS3ExportOutput),
+		DescribeJournalS3ExportOutput: r.Request.Data.(*types.DescribeJournalS3ExportOutput),
 		response:                      &aws.Response{Request: r.Request},
 	}
 
@@ -161,7 +72,7 @@ func (r DescribeJournalS3ExportRequest) Send(ctx context.Context) (*DescribeJour
 // DescribeJournalS3ExportResponse is the response type for the
 // DescribeJournalS3Export API operation.
 type DescribeJournalS3ExportResponse struct {
-	*DescribeJournalS3ExportOutput
+	*types.DescribeJournalS3ExportOutput
 
 	response *aws.Response
 }

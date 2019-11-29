@@ -6,110 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/apigateway/types"
 )
-
-// Request to list existing Models defined for a RestApi resource.
-type GetModelsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The maximum number of returned results per page. The default value is 25
-	// and the maximum value is 500.
-	Limit *int64 `location:"querystring" locationName:"limit" type:"integer"`
-
-	// The current pagination position in the paged result set.
-	Position *string `location:"querystring" locationName:"position" type:"string"`
-
-	// [Required] The string identifier of the associated RestApi.
-	//
-	// RestApiId is a required field
-	RestApiId *string `location:"uri" locationName:"restapi_id" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetModelsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetModelsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetModelsInput"}
-
-	if s.RestApiId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("RestApiId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetModelsInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.RestApiId != nil {
-		v := *s.RestApiId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "restapi_id", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Limit != nil {
-		v := *s.Limit
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "limit", protocol.Int64Value(v), metadata)
-	}
-	if s.Position != nil {
-		v := *s.Position
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "position", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-// Represents a collection of Model resources.
-//
-// Method, MethodResponse, Models and Mappings (https://docs.aws.amazon.com/apigateway/latest/developerguide/models-mappings.html)
-type GetModelsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The current page of elements from this collection.
-	Items []Model `locationName:"item" type:"list"`
-
-	Position *string `locationName:"position" type:"string"`
-}
-
-// String returns the string representation
-func (s GetModelsOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetModelsOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.Items != nil {
-		v := s.Items
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "item", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	if s.Position != nil {
-		v := *s.Position
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "position", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opGetModels = "GetModels"
 
@@ -124,7 +22,7 @@ const opGetModels = "GetModels"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) GetModelsRequest(input *GetModelsInput) GetModelsRequest {
+func (c *Client) GetModelsRequest(input *types.GetModelsInput) GetModelsRequest {
 	op := &aws.Operation{
 		Name:       opGetModels,
 		HTTPMethod: "GET",
@@ -138,10 +36,10 @@ func (c *Client) GetModelsRequest(input *GetModelsInput) GetModelsRequest {
 	}
 
 	if input == nil {
-		input = &GetModelsInput{}
+		input = &types.GetModelsInput{}
 	}
 
-	req := c.newRequest(op, input, &GetModelsOutput{})
+	req := c.newRequest(op, input, &types.GetModelsOutput{})
 	return GetModelsRequest{Request: req, Input: input, Copy: c.GetModelsRequest}
 }
 
@@ -149,8 +47,8 @@ func (c *Client) GetModelsRequest(input *GetModelsInput) GetModelsRequest {
 // GetModels API operation.
 type GetModelsRequest struct {
 	*aws.Request
-	Input *GetModelsInput
-	Copy  func(*GetModelsInput) GetModelsRequest
+	Input *types.GetModelsInput
+	Copy  func(*types.GetModelsInput) GetModelsRequest
 }
 
 // Send marshals and sends the GetModels API request.
@@ -162,7 +60,7 @@ func (r GetModelsRequest) Send(ctx context.Context) (*GetModelsResponse, error) 
 	}
 
 	resp := &GetModelsResponse{
-		GetModelsOutput: r.Request.Data.(*GetModelsOutput),
+		GetModelsOutput: r.Request.Data.(*types.GetModelsOutput),
 		response:        &aws.Response{Request: r.Request},
 	}
 
@@ -192,7 +90,7 @@ func NewGetModelsPaginator(req GetModelsRequest) GetModelsPaginator {
 	return GetModelsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *GetModelsInput
+				var inCpy *types.GetModelsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -212,14 +110,14 @@ type GetModelsPaginator struct {
 	aws.Pager
 }
 
-func (p *GetModelsPaginator) CurrentPage() *GetModelsOutput {
-	return p.Pager.CurrentPage().(*GetModelsOutput)
+func (p *GetModelsPaginator) CurrentPage() *types.GetModelsOutput {
+	return p.Pager.CurrentPage().(*types.GetModelsOutput)
 }
 
 // GetModelsResponse is the response type for the
 // GetModels API operation.
 type GetModelsResponse struct {
-	*GetModelsOutput
+	*types.GetModelsOutput
 
 	response *aws.Response
 }

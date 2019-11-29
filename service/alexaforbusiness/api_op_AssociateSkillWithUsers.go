@@ -6,45 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/alexaforbusiness/types"
 )
-
-type AssociateSkillWithUsersInput struct {
-	_ struct{} `type:"structure"`
-
-	// The private skill ID you want to make available to enrolled users.
-	//
-	// SkillId is a required field
-	SkillId *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s AssociateSkillWithUsersInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *AssociateSkillWithUsersInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "AssociateSkillWithUsersInput"}
-
-	if s.SkillId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("SkillId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type AssociateSkillWithUsersOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s AssociateSkillWithUsersOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opAssociateSkillWithUsers = "AssociateSkillWithUsers"
 
@@ -61,7 +24,7 @@ const opAssociateSkillWithUsers = "AssociateSkillWithUsers"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/AssociateSkillWithUsers
-func (c *Client) AssociateSkillWithUsersRequest(input *AssociateSkillWithUsersInput) AssociateSkillWithUsersRequest {
+func (c *Client) AssociateSkillWithUsersRequest(input *types.AssociateSkillWithUsersInput) AssociateSkillWithUsersRequest {
 	op := &aws.Operation{
 		Name:       opAssociateSkillWithUsers,
 		HTTPMethod: "POST",
@@ -69,10 +32,10 @@ func (c *Client) AssociateSkillWithUsersRequest(input *AssociateSkillWithUsersIn
 	}
 
 	if input == nil {
-		input = &AssociateSkillWithUsersInput{}
+		input = &types.AssociateSkillWithUsersInput{}
 	}
 
-	req := c.newRequest(op, input, &AssociateSkillWithUsersOutput{})
+	req := c.newRequest(op, input, &types.AssociateSkillWithUsersOutput{})
 	return AssociateSkillWithUsersRequest{Request: req, Input: input, Copy: c.AssociateSkillWithUsersRequest}
 }
 
@@ -80,8 +43,8 @@ func (c *Client) AssociateSkillWithUsersRequest(input *AssociateSkillWithUsersIn
 // AssociateSkillWithUsers API operation.
 type AssociateSkillWithUsersRequest struct {
 	*aws.Request
-	Input *AssociateSkillWithUsersInput
-	Copy  func(*AssociateSkillWithUsersInput) AssociateSkillWithUsersRequest
+	Input *types.AssociateSkillWithUsersInput
+	Copy  func(*types.AssociateSkillWithUsersInput) AssociateSkillWithUsersRequest
 }
 
 // Send marshals and sends the AssociateSkillWithUsers API request.
@@ -93,7 +56,7 @@ func (r AssociateSkillWithUsersRequest) Send(ctx context.Context) (*AssociateSki
 	}
 
 	resp := &AssociateSkillWithUsersResponse{
-		AssociateSkillWithUsersOutput: r.Request.Data.(*AssociateSkillWithUsersOutput),
+		AssociateSkillWithUsersOutput: r.Request.Data.(*types.AssociateSkillWithUsersOutput),
 		response:                      &aws.Response{Request: r.Request},
 	}
 
@@ -103,7 +66,7 @@ func (r AssociateSkillWithUsersRequest) Send(ctx context.Context) (*AssociateSki
 // AssociateSkillWithUsersResponse is the response type for the
 // AssociateSkillWithUsers API operation.
 type AssociateSkillWithUsersResponse struct {
-	*AssociateSkillWithUsersOutput
+	*types.AssociateSkillWithUsersOutput
 
 	response *aws.Response
 }

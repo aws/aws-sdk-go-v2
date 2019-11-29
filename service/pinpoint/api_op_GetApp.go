@@ -6,73 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/pinpoint/types"
 )
-
-type GetAppInput struct {
-	_ struct{} `type:"structure"`
-
-	// ApplicationId is a required field
-	ApplicationId *string `location:"uri" locationName:"application-id" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetAppInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetAppInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetAppInput"}
-
-	if s.ApplicationId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ApplicationId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetAppInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.ApplicationId != nil {
-		v := *s.ApplicationId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "application-id", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type GetAppOutput struct {
-	_ struct{} `type:"structure" payload:"ApplicationResponse"`
-
-	// Provides information about an application.
-	//
-	// ApplicationResponse is a required field
-	ApplicationResponse *ApplicationResponse `type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s GetAppOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetAppOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.ApplicationResponse != nil {
-		v := s.ApplicationResponse
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.PayloadTarget, "ApplicationResponse", v, metadata)
-	}
-	return nil
-}
 
 const opGetApp = "GetApp"
 
@@ -89,7 +24,7 @@ const opGetApp = "GetApp"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetApp
-func (c *Client) GetAppRequest(input *GetAppInput) GetAppRequest {
+func (c *Client) GetAppRequest(input *types.GetAppInput) GetAppRequest {
 	op := &aws.Operation{
 		Name:       opGetApp,
 		HTTPMethod: "GET",
@@ -97,10 +32,10 @@ func (c *Client) GetAppRequest(input *GetAppInput) GetAppRequest {
 	}
 
 	if input == nil {
-		input = &GetAppInput{}
+		input = &types.GetAppInput{}
 	}
 
-	req := c.newRequest(op, input, &GetAppOutput{})
+	req := c.newRequest(op, input, &types.GetAppOutput{})
 	return GetAppRequest{Request: req, Input: input, Copy: c.GetAppRequest}
 }
 
@@ -108,8 +43,8 @@ func (c *Client) GetAppRequest(input *GetAppInput) GetAppRequest {
 // GetApp API operation.
 type GetAppRequest struct {
 	*aws.Request
-	Input *GetAppInput
-	Copy  func(*GetAppInput) GetAppRequest
+	Input *types.GetAppInput
+	Copy  func(*types.GetAppInput) GetAppRequest
 }
 
 // Send marshals and sends the GetApp API request.
@@ -121,7 +56,7 @@ func (r GetAppRequest) Send(ctx context.Context) (*GetAppResponse, error) {
 	}
 
 	resp := &GetAppResponse{
-		GetAppOutput: r.Request.Data.(*GetAppOutput),
+		GetAppOutput: r.Request.Data.(*types.GetAppOutput),
 		response:     &aws.Response{Request: r.Request},
 	}
 
@@ -131,7 +66,7 @@ func (r GetAppRequest) Send(ctx context.Context) (*GetAppResponse, error) {
 // GetAppResponse is the response type for the
 // GetApp API operation.
 type GetAppResponse struct {
-	*GetAppOutput
+	*types.GetAppOutput
 
 	response *aws.Response
 }

@@ -4,90 +4,10 @@ package autoscalingplans
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/autoscalingplans/types"
 )
-
-type CreateScalingPlanInput struct {
-	_ struct{} `type:"structure"`
-
-	// A CloudFormation stack or set of tags. You can create one scaling plan per
-	// application source.
-	//
-	// ApplicationSource is a required field
-	ApplicationSource *ApplicationSource `type:"structure" required:"true"`
-
-	// The scaling instructions.
-	//
-	// ScalingInstructions is a required field
-	ScalingInstructions []ScalingInstruction `type:"list" required:"true"`
-
-	// The name of the scaling plan. Names cannot contain vertical bars, colons,
-	// or forward slashes.
-	//
-	// ScalingPlanName is a required field
-	ScalingPlanName *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s CreateScalingPlanInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateScalingPlanInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateScalingPlanInput"}
-
-	if s.ApplicationSource == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ApplicationSource"))
-	}
-
-	if s.ScalingInstructions == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ScalingInstructions"))
-	}
-
-	if s.ScalingPlanName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ScalingPlanName"))
-	}
-	if s.ScalingPlanName != nil && len(*s.ScalingPlanName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ScalingPlanName", 1))
-	}
-	if s.ApplicationSource != nil {
-		if err := s.ApplicationSource.Validate(); err != nil {
-			invalidParams.AddNested("ApplicationSource", err.(aws.ErrInvalidParams))
-		}
-	}
-	if s.ScalingInstructions != nil {
-		for i, v := range s.ScalingInstructions {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "ScalingInstructions", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type CreateScalingPlanOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The version number of the scaling plan. This value is always 1.
-	//
-	// Currently, you cannot specify multiple scaling plan versions.
-	//
-	// ScalingPlanVersion is a required field
-	ScalingPlanVersion *int64 `type:"long" required:"true"`
-}
-
-// String returns the string representation
-func (s CreateScalingPlanOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCreateScalingPlan = "CreateScalingPlan"
 
@@ -104,7 +24,7 @@ const opCreateScalingPlan = "CreateScalingPlan"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-plans-2018-01-06/CreateScalingPlan
-func (c *Client) CreateScalingPlanRequest(input *CreateScalingPlanInput) CreateScalingPlanRequest {
+func (c *Client) CreateScalingPlanRequest(input *types.CreateScalingPlanInput) CreateScalingPlanRequest {
 	op := &aws.Operation{
 		Name:       opCreateScalingPlan,
 		HTTPMethod: "POST",
@@ -112,10 +32,10 @@ func (c *Client) CreateScalingPlanRequest(input *CreateScalingPlanInput) CreateS
 	}
 
 	if input == nil {
-		input = &CreateScalingPlanInput{}
+		input = &types.CreateScalingPlanInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateScalingPlanOutput{})
+	req := c.newRequest(op, input, &types.CreateScalingPlanOutput{})
 	return CreateScalingPlanRequest{Request: req, Input: input, Copy: c.CreateScalingPlanRequest}
 }
 
@@ -123,8 +43,8 @@ func (c *Client) CreateScalingPlanRequest(input *CreateScalingPlanInput) CreateS
 // CreateScalingPlan API operation.
 type CreateScalingPlanRequest struct {
 	*aws.Request
-	Input *CreateScalingPlanInput
-	Copy  func(*CreateScalingPlanInput) CreateScalingPlanRequest
+	Input *types.CreateScalingPlanInput
+	Copy  func(*types.CreateScalingPlanInput) CreateScalingPlanRequest
 }
 
 // Send marshals and sends the CreateScalingPlan API request.
@@ -136,7 +56,7 @@ func (r CreateScalingPlanRequest) Send(ctx context.Context) (*CreateScalingPlanR
 	}
 
 	resp := &CreateScalingPlanResponse{
-		CreateScalingPlanOutput: r.Request.Data.(*CreateScalingPlanOutput),
+		CreateScalingPlanOutput: r.Request.Data.(*types.CreateScalingPlanOutput),
 		response:                &aws.Response{Request: r.Request},
 	}
 
@@ -146,7 +66,7 @@ func (r CreateScalingPlanRequest) Send(ctx context.Context) (*CreateScalingPlanR
 // CreateScalingPlanResponse is the response type for the
 // CreateScalingPlan API operation.
 type CreateScalingPlanResponse struct {
-	*CreateScalingPlanOutput
+	*types.CreateScalingPlanOutput
 
 	response *aws.Response
 }

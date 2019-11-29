@@ -6,55 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ssm/types"
 )
-
-type CancelCommandInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the command you want to cancel.
-	//
-	// CommandId is a required field
-	CommandId *string `min:"36" type:"string" required:"true"`
-
-	// (Optional) A list of instance IDs on which you want to cancel the command.
-	// If not provided, the command is canceled on every instance on which it was
-	// requested.
-	InstanceIds []string `type:"list"`
-}
-
-// String returns the string representation
-func (s CancelCommandInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CancelCommandInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CancelCommandInput"}
-
-	if s.CommandId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("CommandId"))
-	}
-	if s.CommandId != nil && len(*s.CommandId) < 36 {
-		invalidParams.Add(aws.NewErrParamMinLen("CommandId", 36))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Whether or not the command was successfully canceled. There is no guarantee
-// that a request can be canceled.
-type CancelCommandOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s CancelCommandOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCancelCommand = "CancelCommand"
 
@@ -72,7 +25,7 @@ const opCancelCommand = "CancelCommand"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/CancelCommand
-func (c *Client) CancelCommandRequest(input *CancelCommandInput) CancelCommandRequest {
+func (c *Client) CancelCommandRequest(input *types.CancelCommandInput) CancelCommandRequest {
 	op := &aws.Operation{
 		Name:       opCancelCommand,
 		HTTPMethod: "POST",
@@ -80,10 +33,10 @@ func (c *Client) CancelCommandRequest(input *CancelCommandInput) CancelCommandRe
 	}
 
 	if input == nil {
-		input = &CancelCommandInput{}
+		input = &types.CancelCommandInput{}
 	}
 
-	req := c.newRequest(op, input, &CancelCommandOutput{})
+	req := c.newRequest(op, input, &types.CancelCommandOutput{})
 	return CancelCommandRequest{Request: req, Input: input, Copy: c.CancelCommandRequest}
 }
 
@@ -91,8 +44,8 @@ func (c *Client) CancelCommandRequest(input *CancelCommandInput) CancelCommandRe
 // CancelCommand API operation.
 type CancelCommandRequest struct {
 	*aws.Request
-	Input *CancelCommandInput
-	Copy  func(*CancelCommandInput) CancelCommandRequest
+	Input *types.CancelCommandInput
+	Copy  func(*types.CancelCommandInput) CancelCommandRequest
 }
 
 // Send marshals and sends the CancelCommand API request.
@@ -104,7 +57,7 @@ func (r CancelCommandRequest) Send(ctx context.Context) (*CancelCommandResponse,
 	}
 
 	resp := &CancelCommandResponse{
-		CancelCommandOutput: r.Request.Data.(*CancelCommandOutput),
+		CancelCommandOutput: r.Request.Data.(*types.CancelCommandOutput),
 		response:            &aws.Response{Request: r.Request},
 	}
 
@@ -114,7 +67,7 @@ func (r CancelCommandRequest) Send(ctx context.Context) (*CancelCommandResponse,
 // CancelCommandResponse is the response type for the
 // CancelCommand API operation.
 type CancelCommandResponse struct {
-	*CancelCommandOutput
+	*types.CancelCommandOutput
 
 	response *aws.Response
 }

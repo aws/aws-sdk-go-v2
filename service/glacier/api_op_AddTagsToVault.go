@@ -6,101 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/restjson"
+	"github.com/aws/aws-sdk-go-v2/service/glacier/types"
 )
-
-// The input values for AddTagsToVault.
-type AddTagsToVaultInput struct {
-	_ struct{} `type:"structure"`
-
-	// The AccountId value is the AWS account ID of the account that owns the vault.
-	// You can either specify an AWS account ID or optionally a single '-' (hyphen),
-	// in which case Amazon S3 Glacier uses the AWS account ID associated with the
-	// credentials used to sign the request. If you use an account ID, do not include
-	// any hyphens ('-') in the ID.
-	//
-	// AccountId is a required field
-	AccountId *string `location:"uri" locationName:"accountId" type:"string" required:"true"`
-
-	// The tags to add to the vault. Each tag is composed of a key and a value.
-	// The value can be an empty string.
-	Tags map[string]string `type:"map"`
-
-	// The name of the vault.
-	//
-	// VaultName is a required field
-	VaultName *string `location:"uri" locationName:"vaultName" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s AddTagsToVaultInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *AddTagsToVaultInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "AddTagsToVaultInput"}
-
-	if s.AccountId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("AccountId"))
-	}
-
-	if s.VaultName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("VaultName"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s AddTagsToVaultInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.Tags != nil {
-		v := s.Tags
-
-		metadata := protocol.Metadata{}
-		ms0 := e.Map(protocol.BodyTarget, "Tags", metadata)
-		ms0.Start()
-		for k1, v1 := range v {
-			ms0.MapSetValue(k1, protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
-		}
-		ms0.End()
-
-	}
-	if s.AccountId != nil {
-		v := *s.AccountId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "accountId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.VaultName != nil {
-		v := *s.VaultName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "vaultName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type AddTagsToVaultOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s AddTagsToVaultOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s AddTagsToVaultOutput) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
 
 const opAddTagsToVault = "AddTagsToVault"
 
@@ -120,7 +29,7 @@ const opAddTagsToVault = "AddTagsToVault"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) AddTagsToVaultRequest(input *AddTagsToVaultInput) AddTagsToVaultRequest {
+func (c *Client) AddTagsToVaultRequest(input *types.AddTagsToVaultInput) AddTagsToVaultRequest {
 	op := &aws.Operation{
 		Name:       opAddTagsToVault,
 		HTTPMethod: "POST",
@@ -128,10 +37,10 @@ func (c *Client) AddTagsToVaultRequest(input *AddTagsToVaultInput) AddTagsToVaul
 	}
 
 	if input == nil {
-		input = &AddTagsToVaultInput{}
+		input = &types.AddTagsToVaultInput{}
 	}
 
-	req := c.newRequest(op, input, &AddTagsToVaultOutput{})
+	req := c.newRequest(op, input, &types.AddTagsToVaultOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return AddTagsToVaultRequest{Request: req, Input: input, Copy: c.AddTagsToVaultRequest}
@@ -141,8 +50,8 @@ func (c *Client) AddTagsToVaultRequest(input *AddTagsToVaultInput) AddTagsToVaul
 // AddTagsToVault API operation.
 type AddTagsToVaultRequest struct {
 	*aws.Request
-	Input *AddTagsToVaultInput
-	Copy  func(*AddTagsToVaultInput) AddTagsToVaultRequest
+	Input *types.AddTagsToVaultInput
+	Copy  func(*types.AddTagsToVaultInput) AddTagsToVaultRequest
 }
 
 // Send marshals and sends the AddTagsToVault API request.
@@ -154,7 +63,7 @@ func (r AddTagsToVaultRequest) Send(ctx context.Context) (*AddTagsToVaultRespons
 	}
 
 	resp := &AddTagsToVaultResponse{
-		AddTagsToVaultOutput: r.Request.Data.(*AddTagsToVaultOutput),
+		AddTagsToVaultOutput: r.Request.Data.(*types.AddTagsToVaultOutput),
 		response:             &aws.Response{Request: r.Request},
 	}
 
@@ -164,7 +73,7 @@ func (r AddTagsToVaultRequest) Send(ctx context.Context) (*AddTagsToVaultRespons
 // AddTagsToVaultResponse is the response type for the
 // AddTagsToVault API operation.
 type AddTagsToVaultResponse struct {
-	*AddTagsToVaultOutput
+	*types.AddTagsToVaultOutput
 
 	response *aws.Response
 }

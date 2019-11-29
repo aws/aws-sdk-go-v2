@@ -6,32 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/elasticbeanstalk/types"
 )
-
-type DeletePlatformVersionInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ARN of the version of the custom platform.
-	PlatformArn *string `type:"string"`
-}
-
-// String returns the string representation
-func (s DeletePlatformVersionInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type DeletePlatformVersionOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Detailed information about the version of the custom platform.
-	PlatformSummary *PlatformSummary `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeletePlatformVersionOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeletePlatformVersion = "DeletePlatformVersion"
 
@@ -48,7 +24,7 @@ const opDeletePlatformVersion = "DeletePlatformVersion"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/DeletePlatformVersion
-func (c *Client) DeletePlatformVersionRequest(input *DeletePlatformVersionInput) DeletePlatformVersionRequest {
+func (c *Client) DeletePlatformVersionRequest(input *types.DeletePlatformVersionInput) DeletePlatformVersionRequest {
 	op := &aws.Operation{
 		Name:       opDeletePlatformVersion,
 		HTTPMethod: "POST",
@@ -56,10 +32,10 @@ func (c *Client) DeletePlatformVersionRequest(input *DeletePlatformVersionInput)
 	}
 
 	if input == nil {
-		input = &DeletePlatformVersionInput{}
+		input = &types.DeletePlatformVersionInput{}
 	}
 
-	req := c.newRequest(op, input, &DeletePlatformVersionOutput{})
+	req := c.newRequest(op, input, &types.DeletePlatformVersionOutput{})
 	return DeletePlatformVersionRequest{Request: req, Input: input, Copy: c.DeletePlatformVersionRequest}
 }
 
@@ -67,8 +43,8 @@ func (c *Client) DeletePlatformVersionRequest(input *DeletePlatformVersionInput)
 // DeletePlatformVersion API operation.
 type DeletePlatformVersionRequest struct {
 	*aws.Request
-	Input *DeletePlatformVersionInput
-	Copy  func(*DeletePlatformVersionInput) DeletePlatformVersionRequest
+	Input *types.DeletePlatformVersionInput
+	Copy  func(*types.DeletePlatformVersionInput) DeletePlatformVersionRequest
 }
 
 // Send marshals and sends the DeletePlatformVersion API request.
@@ -80,7 +56,7 @@ func (r DeletePlatformVersionRequest) Send(ctx context.Context) (*DeletePlatform
 	}
 
 	resp := &DeletePlatformVersionResponse{
-		DeletePlatformVersionOutput: r.Request.Data.(*DeletePlatformVersionOutput),
+		DeletePlatformVersionOutput: r.Request.Data.(*types.DeletePlatformVersionOutput),
 		response:                    &aws.Response{Request: r.Request},
 	}
 
@@ -90,7 +66,7 @@ func (r DeletePlatformVersionRequest) Send(ctx context.Context) (*DeletePlatform
 // DeletePlatformVersionResponse is the response type for the
 // DeletePlatformVersion API operation.
 type DeletePlatformVersionResponse struct {
-	*DeletePlatformVersionOutput
+	*types.DeletePlatformVersionOutput
 
 	response *aws.Response
 }

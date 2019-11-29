@@ -6,105 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/storagegateway/types"
 )
-
-// A JSON object containing the ID of the gateway.
-type DescribeGatewayInformationInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation
-	// to return a list of gateways for your account and AWS Region.
-	//
-	// GatewayARN is a required field
-	GatewayARN *string `min:"50" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeGatewayInformationInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeGatewayInformationInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeGatewayInformationInput"}
-
-	if s.GatewayARN == nil {
-		invalidParams.Add(aws.NewErrParamRequired("GatewayARN"))
-	}
-	if s.GatewayARN != nil && len(*s.GatewayARN) < 50 {
-		invalidParams.Add(aws.NewErrParamMinLen("GatewayARN", 50))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// A JSON object containing the following fields:
-type DescribeGatewayInformationOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the Amazon CloudWatch log group that was
-	// used to monitor and log events in the gateway.
-	CloudWatchLogGroupARN *string `type:"string"`
-
-	// The ID of the Amazon EC2 instance that was used to launch the gateway.
-	Ec2InstanceId *string `type:"string"`
-
-	// The AWS Region where the Amazon EC2 instance is located.
-	Ec2InstanceRegion *string `type:"string"`
-
-	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation
-	// to return a list of gateways for your account and AWS Region.
-	GatewayARN *string `min:"50" type:"string"`
-
-	// The unique identifier assigned to your gateway during activation. This ID
-	// becomes part of the gateway Amazon Resource Name (ARN), which you use as
-	// input for other operations.
-	GatewayId *string `min:"12" type:"string"`
-
-	// The name you configured for your gateway.
-	GatewayName *string `type:"string"`
-
-	// A NetworkInterface array that contains descriptions of the gateway network
-	// interfaces.
-	GatewayNetworkInterfaces []NetworkInterface `type:"list"`
-
-	// A value that indicates the operating state of the gateway.
-	GatewayState *string `min:"2" type:"string"`
-
-	// A value that indicates the time zone configured for the gateway.
-	GatewayTimezone *string `min:"3" type:"string"`
-
-	// The type of the gateway.
-	GatewayType *string `min:"2" type:"string"`
-
-	// The date on which the last software update was applied to the gateway. If
-	// the gateway has never been updated, this field does not return a value in
-	// the response.
-	LastSoftwareUpdate *string `min:"1" type:"string"`
-
-	// The date on which an update to the gateway is available. This date is in
-	// the time zone of the gateway. If the gateway is not available for an update
-	// this field is not returned in the response.
-	NextUpdateAvailabilityDate *string `min:"1" type:"string"`
-
-	// A list of up to 50 tags assigned to the gateway, sorted alphabetically by
-	// key name. Each tag is a key-value pair. For a gateway with more than 10 tags
-	// assigned, you can view all tags using the ListTagsForResource API operation.
-	Tags []Tag `type:"list"`
-
-	// The configuration settings for the virtual private cloud (VPC) endpoint for
-	// your gateway.
-	VPCEndpoint *string `type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeGatewayInformationOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeGatewayInformation = "DescribeGatewayInformation"
 
@@ -124,7 +27,7 @@ const opDescribeGatewayInformation = "DescribeGatewayInformation"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DescribeGatewayInformation
-func (c *Client) DescribeGatewayInformationRequest(input *DescribeGatewayInformationInput) DescribeGatewayInformationRequest {
+func (c *Client) DescribeGatewayInformationRequest(input *types.DescribeGatewayInformationInput) DescribeGatewayInformationRequest {
 	op := &aws.Operation{
 		Name:       opDescribeGatewayInformation,
 		HTTPMethod: "POST",
@@ -132,10 +35,10 @@ func (c *Client) DescribeGatewayInformationRequest(input *DescribeGatewayInforma
 	}
 
 	if input == nil {
-		input = &DescribeGatewayInformationInput{}
+		input = &types.DescribeGatewayInformationInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeGatewayInformationOutput{})
+	req := c.newRequest(op, input, &types.DescribeGatewayInformationOutput{})
 	return DescribeGatewayInformationRequest{Request: req, Input: input, Copy: c.DescribeGatewayInformationRequest}
 }
 
@@ -143,8 +46,8 @@ func (c *Client) DescribeGatewayInformationRequest(input *DescribeGatewayInforma
 // DescribeGatewayInformation API operation.
 type DescribeGatewayInformationRequest struct {
 	*aws.Request
-	Input *DescribeGatewayInformationInput
-	Copy  func(*DescribeGatewayInformationInput) DescribeGatewayInformationRequest
+	Input *types.DescribeGatewayInformationInput
+	Copy  func(*types.DescribeGatewayInformationInput) DescribeGatewayInformationRequest
 }
 
 // Send marshals and sends the DescribeGatewayInformation API request.
@@ -156,7 +59,7 @@ func (r DescribeGatewayInformationRequest) Send(ctx context.Context) (*DescribeG
 	}
 
 	resp := &DescribeGatewayInformationResponse{
-		DescribeGatewayInformationOutput: r.Request.Data.(*DescribeGatewayInformationOutput),
+		DescribeGatewayInformationOutput: r.Request.Data.(*types.DescribeGatewayInformationOutput),
 		response:                         &aws.Response{Request: r.Request},
 	}
 
@@ -166,7 +69,7 @@ func (r DescribeGatewayInformationRequest) Send(ctx context.Context) (*DescribeG
 // DescribeGatewayInformationResponse is the response type for the
 // DescribeGatewayInformation API operation.
 type DescribeGatewayInformationResponse struct {
-	*DescribeGatewayInformationOutput
+	*types.DescribeGatewayInformationOutput
 
 	response *aws.Response
 }

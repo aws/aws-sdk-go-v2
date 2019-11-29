@@ -6,50 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
+	"github.com/aws/aws-sdk-go-v2/service/translate/types"
 )
-
-type DeleteTerminologyInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the custom terminology being deleted.
-	//
-	// Name is a required field
-	Name *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteTerminologyInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteTerminologyInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteTerminologyInput"}
-
-	if s.Name == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Name"))
-	}
-	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteTerminologyOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteTerminologyOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteTerminology = "DeleteTerminology"
 
@@ -66,7 +26,7 @@ const opDeleteTerminology = "DeleteTerminology"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/translate-2017-07-01/DeleteTerminology
-func (c *Client) DeleteTerminologyRequest(input *DeleteTerminologyInput) DeleteTerminologyRequest {
+func (c *Client) DeleteTerminologyRequest(input *types.DeleteTerminologyInput) DeleteTerminologyRequest {
 	op := &aws.Operation{
 		Name:       opDeleteTerminology,
 		HTTPMethod: "POST",
@@ -74,10 +34,10 @@ func (c *Client) DeleteTerminologyRequest(input *DeleteTerminologyInput) DeleteT
 	}
 
 	if input == nil {
-		input = &DeleteTerminologyInput{}
+		input = &types.DeleteTerminologyInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteTerminologyOutput{})
+	req := c.newRequest(op, input, &types.DeleteTerminologyOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return DeleteTerminologyRequest{Request: req, Input: input, Copy: c.DeleteTerminologyRequest}
@@ -87,8 +47,8 @@ func (c *Client) DeleteTerminologyRequest(input *DeleteTerminologyInput) DeleteT
 // DeleteTerminology API operation.
 type DeleteTerminologyRequest struct {
 	*aws.Request
-	Input *DeleteTerminologyInput
-	Copy  func(*DeleteTerminologyInput) DeleteTerminologyRequest
+	Input *types.DeleteTerminologyInput
+	Copy  func(*types.DeleteTerminologyInput) DeleteTerminologyRequest
 }
 
 // Send marshals and sends the DeleteTerminology API request.
@@ -100,7 +60,7 @@ func (r DeleteTerminologyRequest) Send(ctx context.Context) (*DeleteTerminologyR
 	}
 
 	resp := &DeleteTerminologyResponse{
-		DeleteTerminologyOutput: r.Request.Data.(*DeleteTerminologyOutput),
+		DeleteTerminologyOutput: r.Request.Data.(*types.DeleteTerminologyOutput),
 		response:                &aws.Response{Request: r.Request},
 	}
 
@@ -110,7 +70,7 @@ func (r DeleteTerminologyRequest) Send(ctx context.Context) (*DeleteTerminologyR
 // DeleteTerminologyResponse is the response type for the
 // DeleteTerminology API operation.
 type DeleteTerminologyResponse struct {
-	*DeleteTerminologyOutput
+	*types.DeleteTerminologyOutput
 
 	response *aws.Response
 }

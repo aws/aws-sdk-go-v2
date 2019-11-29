@@ -6,55 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/athena/types"
 )
-
-type ListWorkGroupsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The maximum number of workgroups to return in this request.
-	MaxResults *int64 `min:"1" type:"integer"`
-
-	// A token to be used by the next request if this request is truncated.
-	NextToken *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s ListWorkGroupsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListWorkGroupsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListWorkGroupsInput"}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-	if s.NextToken != nil && len(*s.NextToken) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ListWorkGroupsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A token to be used by the next request if this request is truncated.
-	NextToken *string `min:"1" type:"string"`
-
-	// The list of workgroups, including their names, descriptions, creation times,
-	// and states.
-	WorkGroups []WorkGroupSummary `type:"list"`
-}
-
-// String returns the string representation
-func (s ListWorkGroupsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListWorkGroups = "ListWorkGroups"
 
@@ -71,7 +24,7 @@ const opListWorkGroups = "ListWorkGroups"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/ListWorkGroups
-func (c *Client) ListWorkGroupsRequest(input *ListWorkGroupsInput) ListWorkGroupsRequest {
+func (c *Client) ListWorkGroupsRequest(input *types.ListWorkGroupsInput) ListWorkGroupsRequest {
 	op := &aws.Operation{
 		Name:       opListWorkGroups,
 		HTTPMethod: "POST",
@@ -85,10 +38,10 @@ func (c *Client) ListWorkGroupsRequest(input *ListWorkGroupsInput) ListWorkGroup
 	}
 
 	if input == nil {
-		input = &ListWorkGroupsInput{}
+		input = &types.ListWorkGroupsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListWorkGroupsOutput{})
+	req := c.newRequest(op, input, &types.ListWorkGroupsOutput{})
 	return ListWorkGroupsRequest{Request: req, Input: input, Copy: c.ListWorkGroupsRequest}
 }
 
@@ -96,8 +49,8 @@ func (c *Client) ListWorkGroupsRequest(input *ListWorkGroupsInput) ListWorkGroup
 // ListWorkGroups API operation.
 type ListWorkGroupsRequest struct {
 	*aws.Request
-	Input *ListWorkGroupsInput
-	Copy  func(*ListWorkGroupsInput) ListWorkGroupsRequest
+	Input *types.ListWorkGroupsInput
+	Copy  func(*types.ListWorkGroupsInput) ListWorkGroupsRequest
 }
 
 // Send marshals and sends the ListWorkGroups API request.
@@ -109,7 +62,7 @@ func (r ListWorkGroupsRequest) Send(ctx context.Context) (*ListWorkGroupsRespons
 	}
 
 	resp := &ListWorkGroupsResponse{
-		ListWorkGroupsOutput: r.Request.Data.(*ListWorkGroupsOutput),
+		ListWorkGroupsOutput: r.Request.Data.(*types.ListWorkGroupsOutput),
 		response:             &aws.Response{Request: r.Request},
 	}
 
@@ -139,7 +92,7 @@ func NewListWorkGroupsPaginator(req ListWorkGroupsRequest) ListWorkGroupsPaginat
 	return ListWorkGroupsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListWorkGroupsInput
+				var inCpy *types.ListWorkGroupsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -159,14 +112,14 @@ type ListWorkGroupsPaginator struct {
 	aws.Pager
 }
 
-func (p *ListWorkGroupsPaginator) CurrentPage() *ListWorkGroupsOutput {
-	return p.Pager.CurrentPage().(*ListWorkGroupsOutput)
+func (p *ListWorkGroupsPaginator) CurrentPage() *types.ListWorkGroupsOutput {
+	return p.Pager.CurrentPage().(*types.ListWorkGroupsOutput)
 }
 
 // ListWorkGroupsResponse is the response type for the
 // ListWorkGroups API operation.
 type ListWorkGroupsResponse struct {
-	*ListWorkGroupsOutput
+	*types.ListWorkGroupsOutput
 
 	response *aws.Response
 }

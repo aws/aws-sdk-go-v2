@@ -6,69 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/elasticloadbalancing/types"
 )
-
-// Contains the parameters for CreateLoadBalancerPolicy.
-type CreateLoadBalancerPolicyInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the load balancer.
-	//
-	// LoadBalancerName is a required field
-	LoadBalancerName *string `type:"string" required:"true"`
-
-	// The policy attributes.
-	PolicyAttributes []PolicyAttribute `type:"list"`
-
-	// The name of the load balancer policy to be created. This name must be unique
-	// within the set of policies for this load balancer.
-	//
-	// PolicyName is a required field
-	PolicyName *string `type:"string" required:"true"`
-
-	// The name of the base policy type. To get the list of policy types, use DescribeLoadBalancerPolicyTypes.
-	//
-	// PolicyTypeName is a required field
-	PolicyTypeName *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s CreateLoadBalancerPolicyInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateLoadBalancerPolicyInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateLoadBalancerPolicyInput"}
-
-	if s.LoadBalancerName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("LoadBalancerName"))
-	}
-
-	if s.PolicyName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("PolicyName"))
-	}
-
-	if s.PolicyTypeName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("PolicyTypeName"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Contains the output of CreateLoadBalancerPolicy.
-type CreateLoadBalancerPolicyOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s CreateLoadBalancerPolicyOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCreateLoadBalancerPolicy = "CreateLoadBalancerPolicy"
 
@@ -89,7 +28,7 @@ const opCreateLoadBalancerPolicy = "CreateLoadBalancerPolicy"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/CreateLoadBalancerPolicy
-func (c *Client) CreateLoadBalancerPolicyRequest(input *CreateLoadBalancerPolicyInput) CreateLoadBalancerPolicyRequest {
+func (c *Client) CreateLoadBalancerPolicyRequest(input *types.CreateLoadBalancerPolicyInput) CreateLoadBalancerPolicyRequest {
 	op := &aws.Operation{
 		Name:       opCreateLoadBalancerPolicy,
 		HTTPMethod: "POST",
@@ -97,10 +36,10 @@ func (c *Client) CreateLoadBalancerPolicyRequest(input *CreateLoadBalancerPolicy
 	}
 
 	if input == nil {
-		input = &CreateLoadBalancerPolicyInput{}
+		input = &types.CreateLoadBalancerPolicyInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateLoadBalancerPolicyOutput{})
+	req := c.newRequest(op, input, &types.CreateLoadBalancerPolicyOutput{})
 	return CreateLoadBalancerPolicyRequest{Request: req, Input: input, Copy: c.CreateLoadBalancerPolicyRequest}
 }
 
@@ -108,8 +47,8 @@ func (c *Client) CreateLoadBalancerPolicyRequest(input *CreateLoadBalancerPolicy
 // CreateLoadBalancerPolicy API operation.
 type CreateLoadBalancerPolicyRequest struct {
 	*aws.Request
-	Input *CreateLoadBalancerPolicyInput
-	Copy  func(*CreateLoadBalancerPolicyInput) CreateLoadBalancerPolicyRequest
+	Input *types.CreateLoadBalancerPolicyInput
+	Copy  func(*types.CreateLoadBalancerPolicyInput) CreateLoadBalancerPolicyRequest
 }
 
 // Send marshals and sends the CreateLoadBalancerPolicy API request.
@@ -121,7 +60,7 @@ func (r CreateLoadBalancerPolicyRequest) Send(ctx context.Context) (*CreateLoadB
 	}
 
 	resp := &CreateLoadBalancerPolicyResponse{
-		CreateLoadBalancerPolicyOutput: r.Request.Data.(*CreateLoadBalancerPolicyOutput),
+		CreateLoadBalancerPolicyOutput: r.Request.Data.(*types.CreateLoadBalancerPolicyOutput),
 		response:                       &aws.Response{Request: r.Request},
 	}
 
@@ -131,7 +70,7 @@ func (r CreateLoadBalancerPolicyRequest) Send(ctx context.Context) (*CreateLoadB
 // CreateLoadBalancerPolicyResponse is the response type for the
 // CreateLoadBalancerPolicy API operation.
 type CreateLoadBalancerPolicyResponse struct {
-	*CreateLoadBalancerPolicyOutput
+	*types.CreateLoadBalancerPolicyOutput
 
 	response *aws.Response
 }

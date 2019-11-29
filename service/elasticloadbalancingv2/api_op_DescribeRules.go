@@ -6,59 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/elasticloadbalancingv2/types"
 )
-
-type DescribeRulesInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the listener.
-	ListenerArn *string `type:"string"`
-
-	// The marker for the next set of results. (You received this marker from a
-	// previous call.)
-	Marker *string `type:"string"`
-
-	// The maximum number of results to return with this call.
-	PageSize *int64 `min:"1" type:"integer"`
-
-	// The Amazon Resource Names (ARN) of the rules.
-	RuleArns []string `type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeRulesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeRulesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeRulesInput"}
-	if s.PageSize != nil && *s.PageSize < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("PageSize", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribeRulesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// If there are additional results, this is the marker for the next set of results.
-	// Otherwise, this is null.
-	NextMarker *string `type:"string"`
-
-	// Information about the rules.
-	Rules []Rule `type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeRulesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeRules = "DescribeRules"
 
@@ -76,7 +25,7 @@ const opDescribeRules = "DescribeRules"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/DescribeRules
-func (c *Client) DescribeRulesRequest(input *DescribeRulesInput) DescribeRulesRequest {
+func (c *Client) DescribeRulesRequest(input *types.DescribeRulesInput) DescribeRulesRequest {
 	op := &aws.Operation{
 		Name:       opDescribeRules,
 		HTTPMethod: "POST",
@@ -84,10 +33,10 @@ func (c *Client) DescribeRulesRequest(input *DescribeRulesInput) DescribeRulesRe
 	}
 
 	if input == nil {
-		input = &DescribeRulesInput{}
+		input = &types.DescribeRulesInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeRulesOutput{})
+	req := c.newRequest(op, input, &types.DescribeRulesOutput{})
 	return DescribeRulesRequest{Request: req, Input: input, Copy: c.DescribeRulesRequest}
 }
 
@@ -95,8 +44,8 @@ func (c *Client) DescribeRulesRequest(input *DescribeRulesInput) DescribeRulesRe
 // DescribeRules API operation.
 type DescribeRulesRequest struct {
 	*aws.Request
-	Input *DescribeRulesInput
-	Copy  func(*DescribeRulesInput) DescribeRulesRequest
+	Input *types.DescribeRulesInput
+	Copy  func(*types.DescribeRulesInput) DescribeRulesRequest
 }
 
 // Send marshals and sends the DescribeRules API request.
@@ -108,7 +57,7 @@ func (r DescribeRulesRequest) Send(ctx context.Context) (*DescribeRulesResponse,
 	}
 
 	resp := &DescribeRulesResponse{
-		DescribeRulesOutput: r.Request.Data.(*DescribeRulesOutput),
+		DescribeRulesOutput: r.Request.Data.(*types.DescribeRulesOutput),
 		response:            &aws.Response{Request: r.Request},
 	}
 
@@ -118,7 +67,7 @@ func (r DescribeRulesRequest) Send(ctx context.Context) (*DescribeRulesResponse,
 // DescribeRulesResponse is the response type for the
 // DescribeRules API operation.
 type DescribeRulesResponse struct {
-	*DescribeRulesOutput
+	*types.DescribeRulesOutput
 
 	response *aws.Response
 }

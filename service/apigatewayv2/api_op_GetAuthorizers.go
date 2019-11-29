@@ -6,102 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/apigatewayv2/types"
 )
-
-type GetAuthorizersInput struct {
-	_ struct{} `type:"structure"`
-
-	// ApiId is a required field
-	ApiId *string `location:"uri" locationName:"apiId" type:"string" required:"true"`
-
-	MaxResults *string `location:"querystring" locationName:"maxResults" type:"string"`
-
-	NextToken *string `location:"querystring" locationName:"nextToken" type:"string"`
-}
-
-// String returns the string representation
-func (s GetAuthorizersInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetAuthorizersInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetAuthorizersInput"}
-
-	if s.ApiId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ApiId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetAuthorizersInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.ApiId != nil {
-		v := *s.ApiId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "apiId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.MaxResults != nil {
-		v := *s.MaxResults
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "maxResults", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type GetAuthorizersOutput struct {
-	_ struct{} `type:"structure"`
-
-	Items []Authorizer `locationName:"items" type:"list"`
-
-	// The next page of elements from this collection. Not valid for the last element
-	// of the collection.
-	NextToken *string `locationName:"nextToken" type:"string"`
-}
-
-// String returns the string representation
-func (s GetAuthorizersOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetAuthorizersOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.Items != nil {
-		v := s.Items
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "items", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opGetAuthorizers = "GetAuthorizers"
 
@@ -118,7 +24,7 @@ const opGetAuthorizers = "GetAuthorizers"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/apigatewayv2-2018-11-29/GetAuthorizers
-func (c *Client) GetAuthorizersRequest(input *GetAuthorizersInput) GetAuthorizersRequest {
+func (c *Client) GetAuthorizersRequest(input *types.GetAuthorizersInput) GetAuthorizersRequest {
 	op := &aws.Operation{
 		Name:       opGetAuthorizers,
 		HTTPMethod: "GET",
@@ -126,10 +32,10 @@ func (c *Client) GetAuthorizersRequest(input *GetAuthorizersInput) GetAuthorizer
 	}
 
 	if input == nil {
-		input = &GetAuthorizersInput{}
+		input = &types.GetAuthorizersInput{}
 	}
 
-	req := c.newRequest(op, input, &GetAuthorizersOutput{})
+	req := c.newRequest(op, input, &types.GetAuthorizersOutput{})
 	return GetAuthorizersRequest{Request: req, Input: input, Copy: c.GetAuthorizersRequest}
 }
 
@@ -137,8 +43,8 @@ func (c *Client) GetAuthorizersRequest(input *GetAuthorizersInput) GetAuthorizer
 // GetAuthorizers API operation.
 type GetAuthorizersRequest struct {
 	*aws.Request
-	Input *GetAuthorizersInput
-	Copy  func(*GetAuthorizersInput) GetAuthorizersRequest
+	Input *types.GetAuthorizersInput
+	Copy  func(*types.GetAuthorizersInput) GetAuthorizersRequest
 }
 
 // Send marshals and sends the GetAuthorizers API request.
@@ -150,7 +56,7 @@ func (r GetAuthorizersRequest) Send(ctx context.Context) (*GetAuthorizersRespons
 	}
 
 	resp := &GetAuthorizersResponse{
-		GetAuthorizersOutput: r.Request.Data.(*GetAuthorizersOutput),
+		GetAuthorizersOutput: r.Request.Data.(*types.GetAuthorizersOutput),
 		response:             &aws.Response{Request: r.Request},
 	}
 
@@ -160,7 +66,7 @@ func (r GetAuthorizersRequest) Send(ctx context.Context) (*GetAuthorizersRespons
 // GetAuthorizersResponse is the response type for the
 // GetAuthorizers API operation.
 type GetAuthorizersResponse struct {
-	*GetAuthorizersOutput
+	*types.GetAuthorizersOutput
 
 	response *aws.Response
 }

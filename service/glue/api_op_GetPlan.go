@@ -4,89 +4,10 @@ package glue
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/glue/types"
 )
-
-type GetPlanInput struct {
-	_ struct{} `type:"structure"`
-
-	// The programming language of the code to perform the mapping.
-	Language Language `type:"string" enum:"true"`
-
-	// The parameters for the mapping.
-	Location *Location `type:"structure"`
-
-	// The list of mappings from a source table to target tables.
-	//
-	// Mapping is a required field
-	Mapping []MappingEntry `type:"list" required:"true"`
-
-	// The target tables.
-	Sinks []CatalogEntry `type:"list"`
-
-	// The source table.
-	//
-	// Source is a required field
-	Source *CatalogEntry `type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s GetPlanInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetPlanInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetPlanInput"}
-
-	if s.Mapping == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Mapping"))
-	}
-
-	if s.Source == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Source"))
-	}
-	if s.Location != nil {
-		if err := s.Location.Validate(); err != nil {
-			invalidParams.AddNested("Location", err.(aws.ErrInvalidParams))
-		}
-	}
-	if s.Sinks != nil {
-		for i, v := range s.Sinks {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Sinks", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-	if s.Source != nil {
-		if err := s.Source.Validate(); err != nil {
-			invalidParams.AddNested("Source", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type GetPlanOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A Python script to perform the mapping.
-	PythonScript *string `type:"string"`
-
-	// The Scala code to perform the mapping.
-	ScalaCode *string `type:"string"`
-}
-
-// String returns the string representation
-func (s GetPlanOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetPlan = "GetPlan"
 
@@ -103,7 +24,7 @@ const opGetPlan = "GetPlan"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetPlan
-func (c *Client) GetPlanRequest(input *GetPlanInput) GetPlanRequest {
+func (c *Client) GetPlanRequest(input *types.GetPlanInput) GetPlanRequest {
 	op := &aws.Operation{
 		Name:       opGetPlan,
 		HTTPMethod: "POST",
@@ -111,10 +32,10 @@ func (c *Client) GetPlanRequest(input *GetPlanInput) GetPlanRequest {
 	}
 
 	if input == nil {
-		input = &GetPlanInput{}
+		input = &types.GetPlanInput{}
 	}
 
-	req := c.newRequest(op, input, &GetPlanOutput{})
+	req := c.newRequest(op, input, &types.GetPlanOutput{})
 	return GetPlanRequest{Request: req, Input: input, Copy: c.GetPlanRequest}
 }
 
@@ -122,8 +43,8 @@ func (c *Client) GetPlanRequest(input *GetPlanInput) GetPlanRequest {
 // GetPlan API operation.
 type GetPlanRequest struct {
 	*aws.Request
-	Input *GetPlanInput
-	Copy  func(*GetPlanInput) GetPlanRequest
+	Input *types.GetPlanInput
+	Copy  func(*types.GetPlanInput) GetPlanRequest
 }
 
 // Send marshals and sends the GetPlan API request.
@@ -135,7 +56,7 @@ func (r GetPlanRequest) Send(ctx context.Context) (*GetPlanResponse, error) {
 	}
 
 	resp := &GetPlanResponse{
-		GetPlanOutput: r.Request.Data.(*GetPlanOutput),
+		GetPlanOutput: r.Request.Data.(*types.GetPlanOutput),
 		response:      &aws.Response{Request: r.Request},
 	}
 
@@ -145,7 +66,7 @@ func (r GetPlanRequest) Send(ctx context.Context) (*GetPlanResponse, error) {
 // GetPlanResponse is the response type for the
 // GetPlan API operation.
 type GetPlanResponse struct {
-	*GetPlanOutput
+	*types.GetPlanOutput
 
 	response *aws.Response
 }

@@ -6,63 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/opsworks/types"
 )
-
-type CreateUserProfileInput struct {
-	_ struct{} `type:"structure"`
-
-	// Whether users can specify their own SSH public key through the My Settings
-	// page. For more information, see Setting an IAM User's Public SSH Key (https://docs.aws.amazon.com/opsworks/latest/userguide/security-settingsshkey.html).
-	AllowSelfManagement *bool `type:"boolean"`
-
-	// The user's IAM ARN; this can also be a federated user's ARN.
-	//
-	// IamUserArn is a required field
-	IamUserArn *string `type:"string" required:"true"`
-
-	// The user's public SSH key.
-	SshPublicKey *string `type:"string"`
-
-	// The user's SSH user name. The allowable characters are [a-z], [A-Z], [0-9],
-	// '-', and '_'. If the specified name includes other punctuation marks, AWS
-	// OpsWorks Stacks removes them. For example, my.name will be changed to myname.
-	// If you do not specify an SSH user name, AWS OpsWorks Stacks generates one
-	// from the IAM user name.
-	SshUsername *string `type:"string"`
-}
-
-// String returns the string representation
-func (s CreateUserProfileInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateUserProfileInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateUserProfileInput"}
-
-	if s.IamUserArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("IamUserArn"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Contains the response to a CreateUserProfile request.
-type CreateUserProfileOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The user's IAM ARN.
-	IamUserArn *string `type:"string"`
-}
-
-// String returns the string representation
-func (s CreateUserProfileOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCreateUserProfile = "CreateUserProfile"
 
@@ -83,7 +28,7 @@ const opCreateUserProfile = "CreateUserProfile"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/CreateUserProfile
-func (c *Client) CreateUserProfileRequest(input *CreateUserProfileInput) CreateUserProfileRequest {
+func (c *Client) CreateUserProfileRequest(input *types.CreateUserProfileInput) CreateUserProfileRequest {
 	op := &aws.Operation{
 		Name:       opCreateUserProfile,
 		HTTPMethod: "POST",
@@ -91,10 +36,10 @@ func (c *Client) CreateUserProfileRequest(input *CreateUserProfileInput) CreateU
 	}
 
 	if input == nil {
-		input = &CreateUserProfileInput{}
+		input = &types.CreateUserProfileInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateUserProfileOutput{})
+	req := c.newRequest(op, input, &types.CreateUserProfileOutput{})
 	return CreateUserProfileRequest{Request: req, Input: input, Copy: c.CreateUserProfileRequest}
 }
 
@@ -102,8 +47,8 @@ func (c *Client) CreateUserProfileRequest(input *CreateUserProfileInput) CreateU
 // CreateUserProfile API operation.
 type CreateUserProfileRequest struct {
 	*aws.Request
-	Input *CreateUserProfileInput
-	Copy  func(*CreateUserProfileInput) CreateUserProfileRequest
+	Input *types.CreateUserProfileInput
+	Copy  func(*types.CreateUserProfileInput) CreateUserProfileRequest
 }
 
 // Send marshals and sends the CreateUserProfile API request.
@@ -115,7 +60,7 @@ func (r CreateUserProfileRequest) Send(ctx context.Context) (*CreateUserProfileR
 	}
 
 	resp := &CreateUserProfileResponse{
-		CreateUserProfileOutput: r.Request.Data.(*CreateUserProfileOutput),
+		CreateUserProfileOutput: r.Request.Data.(*types.CreateUserProfileOutput),
 		response:                &aws.Response{Request: r.Request},
 	}
 
@@ -125,7 +70,7 @@ func (r CreateUserProfileRequest) Send(ctx context.Context) (*CreateUserProfileR
 // CreateUserProfileResponse is the response type for the
 // CreateUserProfile API operation.
 type CreateUserProfileResponse struct {
-	*CreateUserProfileOutput
+	*types.CreateUserProfileOutput
 
 	response *aws.Response
 }

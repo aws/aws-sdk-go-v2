@@ -6,56 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-type DescribeAvailabilityZonesInput struct {
-	_ struct{} `type:"structure"`
-
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have
-	// the required permissions, the error response is DryRunOperation. Otherwise,
-	// it is UnauthorizedOperation.
-	DryRun *bool `locationName:"dryRun" type:"boolean"`
-
-	// The filters.
-	//
-	//    * message - Information about the Availability Zone.
-	//
-	//    * region-name - The name of the Region for the Availability Zone (for
-	//    example, us-east-1).
-	//
-	//    * state - The state of the Availability Zone (available | information
-	//    | impaired | unavailable).
-	//
-	//    * zone-id - The ID of the Availability Zone (for example, use1-az1).
-	//
-	//    * zone-name - The name of the Availability Zone (for example, us-east-1a).
-	Filters []Filter `locationName:"Filter" locationNameList:"Filter" type:"list"`
-
-	// The IDs of the Availability Zones.
-	ZoneIds []string `locationName:"ZoneId" locationNameList:"ZoneId" type:"list"`
-
-	// The names of the Availability Zones.
-	ZoneNames []string `locationName:"ZoneName" locationNameList:"ZoneName" type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeAvailabilityZonesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type DescribeAvailabilityZonesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Information about the Availability Zones.
-	AvailabilityZones []AvailabilityZone `locationName:"availabilityZoneInfo" locationNameList:"item" type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeAvailabilityZonesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeAvailabilityZones = "DescribeAvailabilityZones"
 
@@ -78,7 +30,7 @@ const opDescribeAvailabilityZones = "DescribeAvailabilityZones"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeAvailabilityZones
-func (c *Client) DescribeAvailabilityZonesRequest(input *DescribeAvailabilityZonesInput) DescribeAvailabilityZonesRequest {
+func (c *Client) DescribeAvailabilityZonesRequest(input *types.DescribeAvailabilityZonesInput) DescribeAvailabilityZonesRequest {
 	op := &aws.Operation{
 		Name:       opDescribeAvailabilityZones,
 		HTTPMethod: "POST",
@@ -86,10 +38,10 @@ func (c *Client) DescribeAvailabilityZonesRequest(input *DescribeAvailabilityZon
 	}
 
 	if input == nil {
-		input = &DescribeAvailabilityZonesInput{}
+		input = &types.DescribeAvailabilityZonesInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeAvailabilityZonesOutput{})
+	req := c.newRequest(op, input, &types.DescribeAvailabilityZonesOutput{})
 	return DescribeAvailabilityZonesRequest{Request: req, Input: input, Copy: c.DescribeAvailabilityZonesRequest}
 }
 
@@ -97,8 +49,8 @@ func (c *Client) DescribeAvailabilityZonesRequest(input *DescribeAvailabilityZon
 // DescribeAvailabilityZones API operation.
 type DescribeAvailabilityZonesRequest struct {
 	*aws.Request
-	Input *DescribeAvailabilityZonesInput
-	Copy  func(*DescribeAvailabilityZonesInput) DescribeAvailabilityZonesRequest
+	Input *types.DescribeAvailabilityZonesInput
+	Copy  func(*types.DescribeAvailabilityZonesInput) DescribeAvailabilityZonesRequest
 }
 
 // Send marshals and sends the DescribeAvailabilityZones API request.
@@ -110,7 +62,7 @@ func (r DescribeAvailabilityZonesRequest) Send(ctx context.Context) (*DescribeAv
 	}
 
 	resp := &DescribeAvailabilityZonesResponse{
-		DescribeAvailabilityZonesOutput: r.Request.Data.(*DescribeAvailabilityZonesOutput),
+		DescribeAvailabilityZonesOutput: r.Request.Data.(*types.DescribeAvailabilityZonesOutput),
 		response:                        &aws.Response{Request: r.Request},
 	}
 
@@ -120,7 +72,7 @@ func (r DescribeAvailabilityZonesRequest) Send(ctx context.Context) (*DescribeAv
 // DescribeAvailabilityZonesResponse is the response type for the
 // DescribeAvailabilityZones API operation.
 type DescribeAvailabilityZonesResponse struct {
-	*DescribeAvailabilityZonesOutput
+	*types.DescribeAvailabilityZonesOutput
 
 	response *aws.Response
 }

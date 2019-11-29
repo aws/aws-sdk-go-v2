@@ -6,68 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/codestar/types"
 )
-
-type ListResourcesInput struct {
-	_ struct{} `type:"structure"`
-
-	// The maximum amount of data that can be contained in a single set of results.
-	MaxResults *int64 `locationName:"maxResults" min:"1" type:"integer"`
-
-	// The continuation token for the next set of results, if the results cannot
-	// be returned in one response.
-	NextToken *string `locationName:"nextToken" min:"1" type:"string"`
-
-	// The ID of the project.
-	//
-	// ProjectId is a required field
-	ProjectId *string `locationName:"projectId" min:"2" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s ListResourcesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListResourcesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListResourcesInput"}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-	if s.NextToken != nil && len(*s.NextToken) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
-	}
-
-	if s.ProjectId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ProjectId"))
-	}
-	if s.ProjectId != nil && len(*s.ProjectId) < 2 {
-		invalidParams.Add(aws.NewErrParamMinLen("ProjectId", 2))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ListResourcesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The continuation token to use when requesting the next set of results, if
-	// there are more results to be returned.
-	NextToken *string `locationName:"nextToken" min:"1" type:"string"`
-
-	// An array of resources associated with the project.
-	Resources []Resource `locationName:"resources" type:"list"`
-}
-
-// String returns the string representation
-func (s ListResourcesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListResources = "ListResources"
 
@@ -84,7 +24,7 @@ const opListResources = "ListResources"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codestar-2017-04-19/ListResources
-func (c *Client) ListResourcesRequest(input *ListResourcesInput) ListResourcesRequest {
+func (c *Client) ListResourcesRequest(input *types.ListResourcesInput) ListResourcesRequest {
 	op := &aws.Operation{
 		Name:       opListResources,
 		HTTPMethod: "POST",
@@ -92,10 +32,10 @@ func (c *Client) ListResourcesRequest(input *ListResourcesInput) ListResourcesRe
 	}
 
 	if input == nil {
-		input = &ListResourcesInput{}
+		input = &types.ListResourcesInput{}
 	}
 
-	req := c.newRequest(op, input, &ListResourcesOutput{})
+	req := c.newRequest(op, input, &types.ListResourcesOutput{})
 	return ListResourcesRequest{Request: req, Input: input, Copy: c.ListResourcesRequest}
 }
 
@@ -103,8 +43,8 @@ func (c *Client) ListResourcesRequest(input *ListResourcesInput) ListResourcesRe
 // ListResources API operation.
 type ListResourcesRequest struct {
 	*aws.Request
-	Input *ListResourcesInput
-	Copy  func(*ListResourcesInput) ListResourcesRequest
+	Input *types.ListResourcesInput
+	Copy  func(*types.ListResourcesInput) ListResourcesRequest
 }
 
 // Send marshals and sends the ListResources API request.
@@ -116,7 +56,7 @@ func (r ListResourcesRequest) Send(ctx context.Context) (*ListResourcesResponse,
 	}
 
 	resp := &ListResourcesResponse{
-		ListResourcesOutput: r.Request.Data.(*ListResourcesOutput),
+		ListResourcesOutput: r.Request.Data.(*types.ListResourcesOutput),
 		response:            &aws.Response{Request: r.Request},
 	}
 
@@ -126,7 +66,7 @@ func (r ListResourcesRequest) Send(ctx context.Context) (*ListResourcesResponse,
 // ListResourcesResponse is the response type for the
 // ListResources API operation.
 type ListResourcesResponse struct {
-	*ListResourcesOutput
+	*types.ListResourcesOutput
 
 	response *aws.Response
 }

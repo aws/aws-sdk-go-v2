@@ -6,63 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ses/types"
 )
-
-// Represents a request to update a receipt rule. You use receipt rules to receive
-// email with Amazon SES. For more information, see the Amazon SES Developer
-// Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-concepts.html).
-type UpdateReceiptRuleInput struct {
-	_ struct{} `type:"structure"`
-
-	// A data structure that contains the updated receipt rule information.
-	//
-	// Rule is a required field
-	Rule *ReceiptRule `type:"structure" required:"true"`
-
-	// The name of the receipt rule set that the receipt rule belongs to.
-	//
-	// RuleSetName is a required field
-	RuleSetName *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s UpdateReceiptRuleInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateReceiptRuleInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateReceiptRuleInput"}
-
-	if s.Rule == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Rule"))
-	}
-
-	if s.RuleSetName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("RuleSetName"))
-	}
-	if s.Rule != nil {
-		if err := s.Rule.Validate(); err != nil {
-			invalidParams.AddNested("Rule", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// An empty element returned on a successful request.
-type UpdateReceiptRuleOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s UpdateReceiptRuleOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opUpdateReceiptRule = "UpdateReceiptRule"
 
@@ -84,7 +29,7 @@ const opUpdateReceiptRule = "UpdateReceiptRule"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/UpdateReceiptRule
-func (c *Client) UpdateReceiptRuleRequest(input *UpdateReceiptRuleInput) UpdateReceiptRuleRequest {
+func (c *Client) UpdateReceiptRuleRequest(input *types.UpdateReceiptRuleInput) UpdateReceiptRuleRequest {
 	op := &aws.Operation{
 		Name:       opUpdateReceiptRule,
 		HTTPMethod: "POST",
@@ -92,10 +37,10 @@ func (c *Client) UpdateReceiptRuleRequest(input *UpdateReceiptRuleInput) UpdateR
 	}
 
 	if input == nil {
-		input = &UpdateReceiptRuleInput{}
+		input = &types.UpdateReceiptRuleInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateReceiptRuleOutput{})
+	req := c.newRequest(op, input, &types.UpdateReceiptRuleOutput{})
 	return UpdateReceiptRuleRequest{Request: req, Input: input, Copy: c.UpdateReceiptRuleRequest}
 }
 
@@ -103,8 +48,8 @@ func (c *Client) UpdateReceiptRuleRequest(input *UpdateReceiptRuleInput) UpdateR
 // UpdateReceiptRule API operation.
 type UpdateReceiptRuleRequest struct {
 	*aws.Request
-	Input *UpdateReceiptRuleInput
-	Copy  func(*UpdateReceiptRuleInput) UpdateReceiptRuleRequest
+	Input *types.UpdateReceiptRuleInput
+	Copy  func(*types.UpdateReceiptRuleInput) UpdateReceiptRuleRequest
 }
 
 // Send marshals and sends the UpdateReceiptRule API request.
@@ -116,7 +61,7 @@ func (r UpdateReceiptRuleRequest) Send(ctx context.Context) (*UpdateReceiptRuleR
 	}
 
 	resp := &UpdateReceiptRuleResponse{
-		UpdateReceiptRuleOutput: r.Request.Data.(*UpdateReceiptRuleOutput),
+		UpdateReceiptRuleOutput: r.Request.Data.(*types.UpdateReceiptRuleOutput),
 		response:                &aws.Response{Request: r.Request},
 	}
 
@@ -126,7 +71,7 @@ func (r UpdateReceiptRuleRequest) Send(ctx context.Context) (*UpdateReceiptRuleR
 // UpdateReceiptRuleResponse is the response type for the
 // UpdateReceiptRule API operation.
 type UpdateReceiptRuleResponse struct {
-	*UpdateReceiptRuleOutput
+	*types.UpdateReceiptRuleOutput
 
 	response *aws.Response
 }

@@ -13,6 +13,7 @@ import (
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/cloudwatch"
+	"github.com/aws/aws-sdk-go-v2/service/cloudwatch/types"
 )
 
 // ClientAPI provides an interface to enable mocking the
@@ -46,7 +47,7 @@ import (
 //    type mockClientClient struct {
 //        cloudwatchiface.ClientPI
 //    }
-//    func (m *mockClientClient) DeleteAlarms(input *cloudwatch.DeleteAlarmsInput) (*cloudwatch.DeleteAlarmsOutput, error) {
+//    func (m *mockClientClient) DeleteAlarms(input *types.DeleteAlarmsInput) (*types.DeleteAlarmsOutput, error) {
 //        // mock response/functionality
 //    }
 //
@@ -64,53 +65,53 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type ClientAPI interface {
-	DeleteAlarmsRequest(*cloudwatch.DeleteAlarmsInput) cloudwatch.DeleteAlarmsRequest
+	DeleteAlarmsRequest(*types.DeleteAlarmsInput) cloudwatch.DeleteAlarmsRequest
 
-	DeleteAnomalyDetectorRequest(*cloudwatch.DeleteAnomalyDetectorInput) cloudwatch.DeleteAnomalyDetectorRequest
+	DeleteAnomalyDetectorRequest(*types.DeleteAnomalyDetectorInput) cloudwatch.DeleteAnomalyDetectorRequest
 
-	DeleteDashboardsRequest(*cloudwatch.DeleteDashboardsInput) cloudwatch.DeleteDashboardsRequest
+	DeleteDashboardsRequest(*types.DeleteDashboardsInput) cloudwatch.DeleteDashboardsRequest
 
-	DescribeAlarmHistoryRequest(*cloudwatch.DescribeAlarmHistoryInput) cloudwatch.DescribeAlarmHistoryRequest
+	DescribeAlarmHistoryRequest(*types.DescribeAlarmHistoryInput) cloudwatch.DescribeAlarmHistoryRequest
 
-	DescribeAlarmsRequest(*cloudwatch.DescribeAlarmsInput) cloudwatch.DescribeAlarmsRequest
+	DescribeAlarmsRequest(*types.DescribeAlarmsInput) cloudwatch.DescribeAlarmsRequest
 
-	DescribeAlarmsForMetricRequest(*cloudwatch.DescribeAlarmsForMetricInput) cloudwatch.DescribeAlarmsForMetricRequest
+	DescribeAlarmsForMetricRequest(*types.DescribeAlarmsForMetricInput) cloudwatch.DescribeAlarmsForMetricRequest
 
-	DescribeAnomalyDetectorsRequest(*cloudwatch.DescribeAnomalyDetectorsInput) cloudwatch.DescribeAnomalyDetectorsRequest
+	DescribeAnomalyDetectorsRequest(*types.DescribeAnomalyDetectorsInput) cloudwatch.DescribeAnomalyDetectorsRequest
 
-	DisableAlarmActionsRequest(*cloudwatch.DisableAlarmActionsInput) cloudwatch.DisableAlarmActionsRequest
+	DisableAlarmActionsRequest(*types.DisableAlarmActionsInput) cloudwatch.DisableAlarmActionsRequest
 
-	EnableAlarmActionsRequest(*cloudwatch.EnableAlarmActionsInput) cloudwatch.EnableAlarmActionsRequest
+	EnableAlarmActionsRequest(*types.EnableAlarmActionsInput) cloudwatch.EnableAlarmActionsRequest
 
-	GetDashboardRequest(*cloudwatch.GetDashboardInput) cloudwatch.GetDashboardRequest
+	GetDashboardRequest(*types.GetDashboardInput) cloudwatch.GetDashboardRequest
 
-	GetMetricDataRequest(*cloudwatch.GetMetricDataInput) cloudwatch.GetMetricDataRequest
+	GetMetricDataRequest(*types.GetMetricDataInput) cloudwatch.GetMetricDataRequest
 
-	GetMetricStatisticsRequest(*cloudwatch.GetMetricStatisticsInput) cloudwatch.GetMetricStatisticsRequest
+	GetMetricStatisticsRequest(*types.GetMetricStatisticsInput) cloudwatch.GetMetricStatisticsRequest
 
-	GetMetricWidgetImageRequest(*cloudwatch.GetMetricWidgetImageInput) cloudwatch.GetMetricWidgetImageRequest
+	GetMetricWidgetImageRequest(*types.GetMetricWidgetImageInput) cloudwatch.GetMetricWidgetImageRequest
 
-	ListDashboardsRequest(*cloudwatch.ListDashboardsInput) cloudwatch.ListDashboardsRequest
+	ListDashboardsRequest(*types.ListDashboardsInput) cloudwatch.ListDashboardsRequest
 
-	ListMetricsRequest(*cloudwatch.ListMetricsInput) cloudwatch.ListMetricsRequest
+	ListMetricsRequest(*types.ListMetricsInput) cloudwatch.ListMetricsRequest
 
-	ListTagsForResourceRequest(*cloudwatch.ListTagsForResourceInput) cloudwatch.ListTagsForResourceRequest
+	ListTagsForResourceRequest(*types.ListTagsForResourceInput) cloudwatch.ListTagsForResourceRequest
 
-	PutAnomalyDetectorRequest(*cloudwatch.PutAnomalyDetectorInput) cloudwatch.PutAnomalyDetectorRequest
+	PutAnomalyDetectorRequest(*types.PutAnomalyDetectorInput) cloudwatch.PutAnomalyDetectorRequest
 
-	PutDashboardRequest(*cloudwatch.PutDashboardInput) cloudwatch.PutDashboardRequest
+	PutDashboardRequest(*types.PutDashboardInput) cloudwatch.PutDashboardRequest
 
-	PutMetricAlarmRequest(*cloudwatch.PutMetricAlarmInput) cloudwatch.PutMetricAlarmRequest
+	PutMetricAlarmRequest(*types.PutMetricAlarmInput) cloudwatch.PutMetricAlarmRequest
 
-	PutMetricDataRequest(*cloudwatch.PutMetricDataInput) cloudwatch.PutMetricDataRequest
+	PutMetricDataRequest(*types.PutMetricDataInput) cloudwatch.PutMetricDataRequest
 
-	SetAlarmStateRequest(*cloudwatch.SetAlarmStateInput) cloudwatch.SetAlarmStateRequest
+	SetAlarmStateRequest(*types.SetAlarmStateInput) cloudwatch.SetAlarmStateRequest
 
-	TagResourceRequest(*cloudwatch.TagResourceInput) cloudwatch.TagResourceRequest
+	TagResourceRequest(*types.TagResourceInput) cloudwatch.TagResourceRequest
 
-	UntagResourceRequest(*cloudwatch.UntagResourceInput) cloudwatch.UntagResourceRequest
+	UntagResourceRequest(*types.UntagResourceInput) cloudwatch.UntagResourceRequest
 
-	WaitUntilAlarmExists(context.Context, *cloudwatch.DescribeAlarmsInput, ...aws.WaiterOption) error
+	WaitUntilAlarmExists(context.Context, *types.DescribeAlarmsInput, ...aws.WaiterOption) error
 }
 
 var _ ClientAPI = (*cloudwatch.Client)(nil)

@@ -6,130 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/swf/types"
 )
-
-type ListOpenWorkflowExecutionsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the domain that contains the workflow executions to list.
-	//
-	// Domain is a required field
-	Domain *string `locationName:"domain" min:"1" type:"string" required:"true"`
-
-	// If specified, only workflow executions matching the workflow ID specified
-	// in the filter are returned.
-	//
-	// executionFilter, typeFilter and tagFilter are mutually exclusive. You can
-	// specify at most one of these in a request.
-	ExecutionFilter *WorkflowExecutionFilter `locationName:"executionFilter" type:"structure"`
-
-	// The maximum number of results that are returned per call. Use nextPageToken
-	// to obtain further pages of results.
-	MaximumPageSize *int64 `locationName:"maximumPageSize" type:"integer"`
-
-	// If NextPageToken is returned there are more results available. The value
-	// of NextPageToken is a unique pagination token for each page. Make the call
-	// again using the returned token to retrieve the next page. Keep all other
-	// arguments unchanged. Each pagination token expires after 60 seconds. Using
-	// an expired pagination token will return a 400 error: "Specified token has
-	// exceeded its maximum lifetime".
-	//
-	// The configured maximumPageSize determines how many results can be returned
-	// in a single call.
-	NextPageToken *string `locationName:"nextPageToken" type:"string"`
-
-	// When set to true, returns the results in reverse order. By default the results
-	// are returned in descending order of the start time of the executions.
-	ReverseOrder *bool `locationName:"reverseOrder" type:"boolean"`
-
-	// Workflow executions are included in the returned results based on whether
-	// their start times are within the range specified by this filter.
-	//
-	// StartTimeFilter is a required field
-	StartTimeFilter *ExecutionTimeFilter `locationName:"startTimeFilter" type:"structure" required:"true"`
-
-	// If specified, only executions that have the matching tag are listed.
-	//
-	// executionFilter, typeFilter and tagFilter are mutually exclusive. You can
-	// specify at most one of these in a request.
-	TagFilter *TagFilter `locationName:"tagFilter" type:"structure"`
-
-	// If specified, only executions of the type specified in the filter are returned.
-	//
-	// executionFilter, typeFilter and tagFilter are mutually exclusive. You can
-	// specify at most one of these in a request.
-	TypeFilter *WorkflowTypeFilter `locationName:"typeFilter" type:"structure"`
-}
-
-// String returns the string representation
-func (s ListOpenWorkflowExecutionsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListOpenWorkflowExecutionsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListOpenWorkflowExecutionsInput"}
-
-	if s.Domain == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Domain"))
-	}
-	if s.Domain != nil && len(*s.Domain) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Domain", 1))
-	}
-
-	if s.StartTimeFilter == nil {
-		invalidParams.Add(aws.NewErrParamRequired("StartTimeFilter"))
-	}
-	if s.ExecutionFilter != nil {
-		if err := s.ExecutionFilter.Validate(); err != nil {
-			invalidParams.AddNested("ExecutionFilter", err.(aws.ErrInvalidParams))
-		}
-	}
-	if s.StartTimeFilter != nil {
-		if err := s.StartTimeFilter.Validate(); err != nil {
-			invalidParams.AddNested("StartTimeFilter", err.(aws.ErrInvalidParams))
-		}
-	}
-	if s.TagFilter != nil {
-		if err := s.TagFilter.Validate(); err != nil {
-			invalidParams.AddNested("TagFilter", err.(aws.ErrInvalidParams))
-		}
-	}
-	if s.TypeFilter != nil {
-		if err := s.TypeFilter.Validate(); err != nil {
-			invalidParams.AddNested("TypeFilter", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Contains a paginated list of information about workflow executions.
-type ListOpenWorkflowExecutionsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The list of workflow information structures.
-	//
-	// ExecutionInfos is a required field
-	ExecutionInfos []WorkflowExecutionInfo `locationName:"executionInfos" type:"list" required:"true"`
-
-	// If a NextPageToken was returned by a previous call, there are more results
-	// available. To retrieve the next page of results, make the call again using
-	// the returned token in nextPageToken. Keep all other arguments unchanged.
-	//
-	// The configured maximumPageSize determines how many results can be returned
-	// in a single call.
-	NextPageToken *string `locationName:"nextPageToken" type:"string"`
-}
-
-// String returns the string representation
-func (s ListOpenWorkflowExecutionsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListOpenWorkflowExecutions = "ListOpenWorkflowExecutions"
 
@@ -172,7 +50,7 @@ const opListOpenWorkflowExecutions = "ListOpenWorkflowExecutions"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) ListOpenWorkflowExecutionsRequest(input *ListOpenWorkflowExecutionsInput) ListOpenWorkflowExecutionsRequest {
+func (c *Client) ListOpenWorkflowExecutionsRequest(input *types.ListOpenWorkflowExecutionsInput) ListOpenWorkflowExecutionsRequest {
 	op := &aws.Operation{
 		Name:       opListOpenWorkflowExecutions,
 		HTTPMethod: "POST",
@@ -186,10 +64,10 @@ func (c *Client) ListOpenWorkflowExecutionsRequest(input *ListOpenWorkflowExecut
 	}
 
 	if input == nil {
-		input = &ListOpenWorkflowExecutionsInput{}
+		input = &types.ListOpenWorkflowExecutionsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListOpenWorkflowExecutionsOutput{})
+	req := c.newRequest(op, input, &types.ListOpenWorkflowExecutionsOutput{})
 	return ListOpenWorkflowExecutionsRequest{Request: req, Input: input, Copy: c.ListOpenWorkflowExecutionsRequest}
 }
 
@@ -197,8 +75,8 @@ func (c *Client) ListOpenWorkflowExecutionsRequest(input *ListOpenWorkflowExecut
 // ListOpenWorkflowExecutions API operation.
 type ListOpenWorkflowExecutionsRequest struct {
 	*aws.Request
-	Input *ListOpenWorkflowExecutionsInput
-	Copy  func(*ListOpenWorkflowExecutionsInput) ListOpenWorkflowExecutionsRequest
+	Input *types.ListOpenWorkflowExecutionsInput
+	Copy  func(*types.ListOpenWorkflowExecutionsInput) ListOpenWorkflowExecutionsRequest
 }
 
 // Send marshals and sends the ListOpenWorkflowExecutions API request.
@@ -210,7 +88,7 @@ func (r ListOpenWorkflowExecutionsRequest) Send(ctx context.Context) (*ListOpenW
 	}
 
 	resp := &ListOpenWorkflowExecutionsResponse{
-		ListOpenWorkflowExecutionsOutput: r.Request.Data.(*ListOpenWorkflowExecutionsOutput),
+		ListOpenWorkflowExecutionsOutput: r.Request.Data.(*types.ListOpenWorkflowExecutionsOutput),
 		response:                         &aws.Response{Request: r.Request},
 	}
 
@@ -240,7 +118,7 @@ func NewListOpenWorkflowExecutionsPaginator(req ListOpenWorkflowExecutionsReques
 	return ListOpenWorkflowExecutionsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListOpenWorkflowExecutionsInput
+				var inCpy *types.ListOpenWorkflowExecutionsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -260,14 +138,14 @@ type ListOpenWorkflowExecutionsPaginator struct {
 	aws.Pager
 }
 
-func (p *ListOpenWorkflowExecutionsPaginator) CurrentPage() *ListOpenWorkflowExecutionsOutput {
-	return p.Pager.CurrentPage().(*ListOpenWorkflowExecutionsOutput)
+func (p *ListOpenWorkflowExecutionsPaginator) CurrentPage() *types.ListOpenWorkflowExecutionsOutput {
+	return p.Pager.CurrentPage().(*types.ListOpenWorkflowExecutionsOutput)
 }
 
 // ListOpenWorkflowExecutionsResponse is the response type for the
 // ListOpenWorkflowExecutions API operation.
 type ListOpenWorkflowExecutionsResponse struct {
-	*ListOpenWorkflowExecutionsOutput
+	*types.ListOpenWorkflowExecutionsOutput
 
 	response *aws.Response
 }

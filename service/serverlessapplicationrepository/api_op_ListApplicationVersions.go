@@ -6,103 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/serverlessapplicationrepository/types"
 )
-
-type ListApplicationVersionsInput struct {
-	_ struct{} `type:"structure"`
-
-	// ApplicationId is a required field
-	ApplicationId *string `location:"uri" locationName:"applicationId" type:"string" required:"true"`
-
-	MaxItems *int64 `location:"querystring" locationName:"maxItems" min:"1" type:"integer"`
-
-	NextToken *string `location:"querystring" locationName:"nextToken" type:"string"`
-}
-
-// String returns the string representation
-func (s ListApplicationVersionsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListApplicationVersionsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListApplicationVersionsInput"}
-
-	if s.ApplicationId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ApplicationId"))
-	}
-	if s.MaxItems != nil && *s.MaxItems < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxItems", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListApplicationVersionsInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.ApplicationId != nil {
-		v := *s.ApplicationId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "applicationId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.MaxItems != nil {
-		v := *s.MaxItems
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "maxItems", protocol.Int64Value(v), metadata)
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type ListApplicationVersionsOutput struct {
-	_ struct{} `type:"structure"`
-
-	NextToken *string `locationName:"nextToken" type:"string"`
-
-	Versions []VersionSummary `locationName:"versions" type:"list"`
-}
-
-// String returns the string representation
-func (s ListApplicationVersionsOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListApplicationVersionsOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Versions != nil {
-		v := s.Versions
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "versions", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	return nil
-}
 
 const opListApplicationVersions = "ListApplicationVersions"
 
@@ -119,7 +24,7 @@ const opListApplicationVersions = "ListApplicationVersions"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/serverlessrepo-2017-09-08/ListApplicationVersions
-func (c *Client) ListApplicationVersionsRequest(input *ListApplicationVersionsInput) ListApplicationVersionsRequest {
+func (c *Client) ListApplicationVersionsRequest(input *types.ListApplicationVersionsInput) ListApplicationVersionsRequest {
 	op := &aws.Operation{
 		Name:       opListApplicationVersions,
 		HTTPMethod: "GET",
@@ -133,10 +38,10 @@ func (c *Client) ListApplicationVersionsRequest(input *ListApplicationVersionsIn
 	}
 
 	if input == nil {
-		input = &ListApplicationVersionsInput{}
+		input = &types.ListApplicationVersionsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListApplicationVersionsOutput{})
+	req := c.newRequest(op, input, &types.ListApplicationVersionsOutput{})
 	return ListApplicationVersionsRequest{Request: req, Input: input, Copy: c.ListApplicationVersionsRequest}
 }
 
@@ -144,8 +49,8 @@ func (c *Client) ListApplicationVersionsRequest(input *ListApplicationVersionsIn
 // ListApplicationVersions API operation.
 type ListApplicationVersionsRequest struct {
 	*aws.Request
-	Input *ListApplicationVersionsInput
-	Copy  func(*ListApplicationVersionsInput) ListApplicationVersionsRequest
+	Input *types.ListApplicationVersionsInput
+	Copy  func(*types.ListApplicationVersionsInput) ListApplicationVersionsRequest
 }
 
 // Send marshals and sends the ListApplicationVersions API request.
@@ -157,7 +62,7 @@ func (r ListApplicationVersionsRequest) Send(ctx context.Context) (*ListApplicat
 	}
 
 	resp := &ListApplicationVersionsResponse{
-		ListApplicationVersionsOutput: r.Request.Data.(*ListApplicationVersionsOutput),
+		ListApplicationVersionsOutput: r.Request.Data.(*types.ListApplicationVersionsOutput),
 		response:                      &aws.Response{Request: r.Request},
 	}
 
@@ -187,7 +92,7 @@ func NewListApplicationVersionsPaginator(req ListApplicationVersionsRequest) Lis
 	return ListApplicationVersionsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListApplicationVersionsInput
+				var inCpy *types.ListApplicationVersionsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -207,14 +112,14 @@ type ListApplicationVersionsPaginator struct {
 	aws.Pager
 }
 
-func (p *ListApplicationVersionsPaginator) CurrentPage() *ListApplicationVersionsOutput {
-	return p.Pager.CurrentPage().(*ListApplicationVersionsOutput)
+func (p *ListApplicationVersionsPaginator) CurrentPage() *types.ListApplicationVersionsOutput {
+	return p.Pager.CurrentPage().(*types.ListApplicationVersionsOutput)
 }
 
 // ListApplicationVersionsResponse is the response type for the
 // ListApplicationVersions API operation.
 type ListApplicationVersionsResponse struct {
-	*ListApplicationVersionsOutput
+	*types.ListApplicationVersionsOutput
 
 	response *aws.Response
 }

@@ -6,63 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
+	"github.com/aws/aws-sdk-go-v2/service/kinesis/types"
 )
-
-// Represents the input for RemoveTagsFromStream.
-type RemoveTagsFromStreamInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the stream.
-	//
-	// StreamName is a required field
-	StreamName *string `min:"1" type:"string" required:"true"`
-
-	// A list of tag keys. Each corresponding tag is removed from the stream.
-	//
-	// TagKeys is a required field
-	TagKeys []string `min:"1" type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s RemoveTagsFromStreamInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *RemoveTagsFromStreamInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "RemoveTagsFromStreamInput"}
-
-	if s.StreamName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("StreamName"))
-	}
-	if s.StreamName != nil && len(*s.StreamName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("StreamName", 1))
-	}
-
-	if s.TagKeys == nil {
-		invalidParams.Add(aws.NewErrParamRequired("TagKeys"))
-	}
-	if s.TagKeys != nil && len(s.TagKeys) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("TagKeys", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type RemoveTagsFromStreamOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s RemoveTagsFromStreamOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opRemoveTagsFromStream = "RemoveTagsFromStream"
 
@@ -84,7 +31,7 @@ const opRemoveTagsFromStream = "RemoveTagsFromStream"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/RemoveTagsFromStream
-func (c *Client) RemoveTagsFromStreamRequest(input *RemoveTagsFromStreamInput) RemoveTagsFromStreamRequest {
+func (c *Client) RemoveTagsFromStreamRequest(input *types.RemoveTagsFromStreamInput) RemoveTagsFromStreamRequest {
 	op := &aws.Operation{
 		Name:       opRemoveTagsFromStream,
 		HTTPMethod: "POST",
@@ -92,10 +39,10 @@ func (c *Client) RemoveTagsFromStreamRequest(input *RemoveTagsFromStreamInput) R
 	}
 
 	if input == nil {
-		input = &RemoveTagsFromStreamInput{}
+		input = &types.RemoveTagsFromStreamInput{}
 	}
 
-	req := c.newRequest(op, input, &RemoveTagsFromStreamOutput{})
+	req := c.newRequest(op, input, &types.RemoveTagsFromStreamOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return RemoveTagsFromStreamRequest{Request: req, Input: input, Copy: c.RemoveTagsFromStreamRequest}
@@ -105,8 +52,8 @@ func (c *Client) RemoveTagsFromStreamRequest(input *RemoveTagsFromStreamInput) R
 // RemoveTagsFromStream API operation.
 type RemoveTagsFromStreamRequest struct {
 	*aws.Request
-	Input *RemoveTagsFromStreamInput
-	Copy  func(*RemoveTagsFromStreamInput) RemoveTagsFromStreamRequest
+	Input *types.RemoveTagsFromStreamInput
+	Copy  func(*types.RemoveTagsFromStreamInput) RemoveTagsFromStreamRequest
 }
 
 // Send marshals and sends the RemoveTagsFromStream API request.
@@ -118,7 +65,7 @@ func (r RemoveTagsFromStreamRequest) Send(ctx context.Context) (*RemoveTagsFromS
 	}
 
 	resp := &RemoveTagsFromStreamResponse{
-		RemoveTagsFromStreamOutput: r.Request.Data.(*RemoveTagsFromStreamOutput),
+		RemoveTagsFromStreamOutput: r.Request.Data.(*types.RemoveTagsFromStreamOutput),
 		response:                   &aws.Response{Request: r.Request},
 	}
 
@@ -128,7 +75,7 @@ func (r RemoveTagsFromStreamRequest) Send(ctx context.Context) (*RemoveTagsFromS
 // RemoveTagsFromStreamResponse is the response type for the
 // RemoveTagsFromStream API operation.
 type RemoveTagsFromStreamResponse struct {
-	*RemoveTagsFromStreamOutput
+	*types.RemoveTagsFromStreamOutput
 
 	response *aws.Response
 }

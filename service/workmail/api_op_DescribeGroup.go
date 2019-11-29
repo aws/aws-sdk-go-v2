@@ -4,81 +4,10 @@ package workmail
 
 import (
 	"context"
-	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/workmail/types"
 )
-
-type DescribeGroupInput struct {
-	_ struct{} `type:"structure"`
-
-	// The identifier for the group to be described.
-	//
-	// GroupId is a required field
-	GroupId *string `min:"12" type:"string" required:"true"`
-
-	// The identifier for the organization under which the group exists.
-	//
-	// OrganizationId is a required field
-	OrganizationId *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeGroupInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeGroupInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeGroupInput"}
-
-	if s.GroupId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("GroupId"))
-	}
-	if s.GroupId != nil && len(*s.GroupId) < 12 {
-		invalidParams.Add(aws.NewErrParamMinLen("GroupId", 12))
-	}
-
-	if s.OrganizationId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("OrganizationId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribeGroupOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The date and time when a user was deregistered from WorkMail, in UNIX epoch
-	// time format.
-	DisabledDate *time.Time `type:"timestamp"`
-
-	// The email of the described group.
-	Email *string `min:"1" type:"string"`
-
-	// The date and time when a user was registered to WorkMail, in UNIX epoch time
-	// format.
-	EnabledDate *time.Time `type:"timestamp"`
-
-	// The identifier of the described group.
-	GroupId *string `min:"12" type:"string"`
-
-	// The name of the described group.
-	Name *string `min:"1" type:"string"`
-
-	// The state of the user: enabled (registered to Amazon WorkMail) or disabled
-	// (deregistered or never registered to WorkMail).
-	State EntityState `type:"string" enum:"true"`
-}
-
-// String returns the string representation
-func (s DescribeGroupOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeGroup = "DescribeGroup"
 
@@ -95,7 +24,7 @@ const opDescribeGroup = "DescribeGroup"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/DescribeGroup
-func (c *Client) DescribeGroupRequest(input *DescribeGroupInput) DescribeGroupRequest {
+func (c *Client) DescribeGroupRequest(input *types.DescribeGroupInput) DescribeGroupRequest {
 	op := &aws.Operation{
 		Name:       opDescribeGroup,
 		HTTPMethod: "POST",
@@ -103,10 +32,10 @@ func (c *Client) DescribeGroupRequest(input *DescribeGroupInput) DescribeGroupRe
 	}
 
 	if input == nil {
-		input = &DescribeGroupInput{}
+		input = &types.DescribeGroupInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeGroupOutput{})
+	req := c.newRequest(op, input, &types.DescribeGroupOutput{})
 	return DescribeGroupRequest{Request: req, Input: input, Copy: c.DescribeGroupRequest}
 }
 
@@ -114,8 +43,8 @@ func (c *Client) DescribeGroupRequest(input *DescribeGroupInput) DescribeGroupRe
 // DescribeGroup API operation.
 type DescribeGroupRequest struct {
 	*aws.Request
-	Input *DescribeGroupInput
-	Copy  func(*DescribeGroupInput) DescribeGroupRequest
+	Input *types.DescribeGroupInput
+	Copy  func(*types.DescribeGroupInput) DescribeGroupRequest
 }
 
 // Send marshals and sends the DescribeGroup API request.
@@ -127,7 +56,7 @@ func (r DescribeGroupRequest) Send(ctx context.Context) (*DescribeGroupResponse,
 	}
 
 	resp := &DescribeGroupResponse{
-		DescribeGroupOutput: r.Request.Data.(*DescribeGroupOutput),
+		DescribeGroupOutput: r.Request.Data.(*types.DescribeGroupOutput),
 		response:            &aws.Response{Request: r.Request},
 	}
 
@@ -137,7 +66,7 @@ func (r DescribeGroupRequest) Send(ctx context.Context) (*DescribeGroupResponse,
 // DescribeGroupResponse is the response type for the
 // DescribeGroup API operation.
 type DescribeGroupResponse struct {
-	*DescribeGroupOutput
+	*types.DescribeGroupOutput
 
 	response *aws.Response
 }

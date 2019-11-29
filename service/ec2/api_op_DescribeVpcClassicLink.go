@@ -6,54 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-type DescribeVpcClassicLinkInput struct {
-	_ struct{} `type:"structure"`
-
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have
-	// the required permissions, the error response is DryRunOperation. Otherwise,
-	// it is UnauthorizedOperation.
-	DryRun *bool `locationName:"dryRun" type:"boolean"`
-
-	// One or more filters.
-	//
-	//    * is-classic-link-enabled - Whether the VPC is enabled for ClassicLink
-	//    (true | false).
-	//
-	//    * tag:<key> - The key/value combination of a tag assigned to the resource.
-	//    Use the tag key in the filter name and the tag value as the filter value.
-	//    For example, to find all resources that have a tag with the key Owner
-	//    and the value TeamA, specify tag:Owner for the filter name and TeamA for
-	//    the filter value.
-	//
-	//    * tag-key - The key of a tag assigned to the resource. Use this filter
-	//    to find all resources assigned a tag with a specific key, regardless of
-	//    the tag value.
-	Filters []Filter `locationName:"Filter" locationNameList:"Filter" type:"list"`
-
-	// One or more VPCs for which you want to describe the ClassicLink status.
-	VpcIds []string `locationName:"VpcId" locationNameList:"VpcId" type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeVpcClassicLinkInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type DescribeVpcClassicLinkOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The ClassicLink status of one or more VPCs.
-	Vpcs []VpcClassicLink `locationName:"vpcSet" locationNameList:"item" type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeVpcClassicLinkOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeVpcClassicLink = "DescribeVpcClassicLink"
 
@@ -70,7 +24,7 @@ const opDescribeVpcClassicLink = "DescribeVpcClassicLink"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeVpcClassicLink
-func (c *Client) DescribeVpcClassicLinkRequest(input *DescribeVpcClassicLinkInput) DescribeVpcClassicLinkRequest {
+func (c *Client) DescribeVpcClassicLinkRequest(input *types.DescribeVpcClassicLinkInput) DescribeVpcClassicLinkRequest {
 	op := &aws.Operation{
 		Name:       opDescribeVpcClassicLink,
 		HTTPMethod: "POST",
@@ -78,10 +32,10 @@ func (c *Client) DescribeVpcClassicLinkRequest(input *DescribeVpcClassicLinkInpu
 	}
 
 	if input == nil {
-		input = &DescribeVpcClassicLinkInput{}
+		input = &types.DescribeVpcClassicLinkInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeVpcClassicLinkOutput{})
+	req := c.newRequest(op, input, &types.DescribeVpcClassicLinkOutput{})
 	return DescribeVpcClassicLinkRequest{Request: req, Input: input, Copy: c.DescribeVpcClassicLinkRequest}
 }
 
@@ -89,8 +43,8 @@ func (c *Client) DescribeVpcClassicLinkRequest(input *DescribeVpcClassicLinkInpu
 // DescribeVpcClassicLink API operation.
 type DescribeVpcClassicLinkRequest struct {
 	*aws.Request
-	Input *DescribeVpcClassicLinkInput
-	Copy  func(*DescribeVpcClassicLinkInput) DescribeVpcClassicLinkRequest
+	Input *types.DescribeVpcClassicLinkInput
+	Copy  func(*types.DescribeVpcClassicLinkInput) DescribeVpcClassicLinkRequest
 }
 
 // Send marshals and sends the DescribeVpcClassicLink API request.
@@ -102,7 +56,7 @@ func (r DescribeVpcClassicLinkRequest) Send(ctx context.Context) (*DescribeVpcCl
 	}
 
 	resp := &DescribeVpcClassicLinkResponse{
-		DescribeVpcClassicLinkOutput: r.Request.Data.(*DescribeVpcClassicLinkOutput),
+		DescribeVpcClassicLinkOutput: r.Request.Data.(*types.DescribeVpcClassicLinkOutput),
 		response:                     &aws.Response{Request: r.Request},
 	}
 
@@ -112,7 +66,7 @@ func (r DescribeVpcClassicLinkRequest) Send(ctx context.Context) (*DescribeVpcCl
 // DescribeVpcClassicLinkResponse is the response type for the
 // DescribeVpcClassicLink API operation.
 type DescribeVpcClassicLinkResponse struct {
-	*DescribeVpcClassicLinkOutput
+	*types.DescribeVpcClassicLinkOutput
 
 	response *aws.Response
 }

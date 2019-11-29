@@ -4,73 +4,10 @@ package mediastore
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/mediastore/types"
 )
-
-type TagResourceInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) for the container.
-	//
-	// Resource is a required field
-	Resource *string `min:"1" type:"string" required:"true"`
-
-	// An array of key:value pairs that you want to add to the container. You need
-	// to specify only the tags that you want to add or update. For example, suppose
-	// a container already has two tags (customer:CompanyA and priority:High). You
-	// want to change the priority tag and also add a third tag (type:Contract).
-	// For TagResource, you specify the following tags: priority:Medium, type:Contract.
-	// The result is that your container has three tags: customer:CompanyA, priority:Medium,
-	// and type:Contract.
-	//
-	// Tags is a required field
-	Tags []Tag `type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s TagResourceInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *TagResourceInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "TagResourceInput"}
-
-	if s.Resource == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Resource"))
-	}
-	if s.Resource != nil && len(*s.Resource) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Resource", 1))
-	}
-
-	if s.Tags == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Tags"))
-	}
-	if s.Tags != nil {
-		for i, v := range s.Tags {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type TagResourceOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s TagResourceOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opTagResource = "TagResource"
 
@@ -82,7 +19,7 @@ const opTagResource = "TagResource"
 // might be "customer" and the tag value might be "companyA." You can specify
 // one or more tags to add to each container. You can add up to 50 tags to each
 // container. For more information about tagging, including naming and usage
-// conventions, see Tagging Resources in MediaStore (https://aws.amazon.com/documentation/mediastore/tagging).
+// conventions, see Tagging Resources in MediaStore (https://docs.aws.amazon.com/mediastore/latest/ug/tagging.html).
 //
 //    // Example sending a request using TagResourceRequest.
 //    req := client.TagResourceRequest(params)
@@ -92,7 +29,7 @@ const opTagResource = "TagResource"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mediastore-2017-09-01/TagResource
-func (c *Client) TagResourceRequest(input *TagResourceInput) TagResourceRequest {
+func (c *Client) TagResourceRequest(input *types.TagResourceInput) TagResourceRequest {
 	op := &aws.Operation{
 		Name:       opTagResource,
 		HTTPMethod: "POST",
@@ -100,10 +37,10 @@ func (c *Client) TagResourceRequest(input *TagResourceInput) TagResourceRequest 
 	}
 
 	if input == nil {
-		input = &TagResourceInput{}
+		input = &types.TagResourceInput{}
 	}
 
-	req := c.newRequest(op, input, &TagResourceOutput{})
+	req := c.newRequest(op, input, &types.TagResourceOutput{})
 	return TagResourceRequest{Request: req, Input: input, Copy: c.TagResourceRequest}
 }
 
@@ -111,8 +48,8 @@ func (c *Client) TagResourceRequest(input *TagResourceInput) TagResourceRequest 
 // TagResource API operation.
 type TagResourceRequest struct {
 	*aws.Request
-	Input *TagResourceInput
-	Copy  func(*TagResourceInput) TagResourceRequest
+	Input *types.TagResourceInput
+	Copy  func(*types.TagResourceInput) TagResourceRequest
 }
 
 // Send marshals and sends the TagResource API request.
@@ -124,7 +61,7 @@ func (r TagResourceRequest) Send(ctx context.Context) (*TagResourceResponse, err
 	}
 
 	resp := &TagResourceResponse{
-		TagResourceOutput: r.Request.Data.(*TagResourceOutput),
+		TagResourceOutput: r.Request.Data.(*types.TagResourceOutput),
 		response:          &aws.Response{Request: r.Request},
 	}
 
@@ -134,7 +71,7 @@ func (r TagResourceRequest) Send(ctx context.Context) (*TagResourceResponse, err
 // TagResourceResponse is the response type for the
 // TagResource API operation.
 type TagResourceResponse struct {
-	*TagResourceOutput
+	*types.TagResourceOutput
 
 	response *aws.Response
 }

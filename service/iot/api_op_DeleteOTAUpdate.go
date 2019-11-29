@@ -6,87 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/iot/types"
 )
-
-type DeleteOTAUpdateInput struct {
-	_ struct{} `type:"structure"`
-
-	// Specifies if the stream associated with an OTA update should be deleted when
-	// the OTA update is deleted.
-	DeleteStream *bool `location:"querystring" locationName:"deleteStream" type:"boolean"`
-
-	// Specifies if the AWS Job associated with the OTA update should be deleted
-	// with the OTA update is deleted.
-	ForceDeleteAWSJob *bool `location:"querystring" locationName:"forceDeleteAWSJob" type:"boolean"`
-
-	// The OTA update ID to delete.
-	//
-	// OtaUpdateId is a required field
-	OtaUpdateId *string `location:"uri" locationName:"otaUpdateId" min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteOTAUpdateInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteOTAUpdateInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteOTAUpdateInput"}
-
-	if s.OtaUpdateId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("OtaUpdateId"))
-	}
-	if s.OtaUpdateId != nil && len(*s.OtaUpdateId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("OtaUpdateId", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteOTAUpdateInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.OtaUpdateId != nil {
-		v := *s.OtaUpdateId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "otaUpdateId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.DeleteStream != nil {
-		v := *s.DeleteStream
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "deleteStream", protocol.BoolValue(v), metadata)
-	}
-	if s.ForceDeleteAWSJob != nil {
-		v := *s.ForceDeleteAWSJob
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "forceDeleteAWSJob", protocol.BoolValue(v), metadata)
-	}
-	return nil
-}
-
-type DeleteOTAUpdateOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteOTAUpdateOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteOTAUpdateOutput) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
 
 const opDeleteOTAUpdate = "DeleteOTAUpdate"
 
@@ -101,7 +22,7 @@ const opDeleteOTAUpdate = "DeleteOTAUpdate"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) DeleteOTAUpdateRequest(input *DeleteOTAUpdateInput) DeleteOTAUpdateRequest {
+func (c *Client) DeleteOTAUpdateRequest(input *types.DeleteOTAUpdateInput) DeleteOTAUpdateRequest {
 	op := &aws.Operation{
 		Name:       opDeleteOTAUpdate,
 		HTTPMethod: "DELETE",
@@ -109,10 +30,10 @@ func (c *Client) DeleteOTAUpdateRequest(input *DeleteOTAUpdateInput) DeleteOTAUp
 	}
 
 	if input == nil {
-		input = &DeleteOTAUpdateInput{}
+		input = &types.DeleteOTAUpdateInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteOTAUpdateOutput{})
+	req := c.newRequest(op, input, &types.DeleteOTAUpdateOutput{})
 	return DeleteOTAUpdateRequest{Request: req, Input: input, Copy: c.DeleteOTAUpdateRequest}
 }
 
@@ -120,8 +41,8 @@ func (c *Client) DeleteOTAUpdateRequest(input *DeleteOTAUpdateInput) DeleteOTAUp
 // DeleteOTAUpdate API operation.
 type DeleteOTAUpdateRequest struct {
 	*aws.Request
-	Input *DeleteOTAUpdateInput
-	Copy  func(*DeleteOTAUpdateInput) DeleteOTAUpdateRequest
+	Input *types.DeleteOTAUpdateInput
+	Copy  func(*types.DeleteOTAUpdateInput) DeleteOTAUpdateRequest
 }
 
 // Send marshals and sends the DeleteOTAUpdate API request.
@@ -133,7 +54,7 @@ func (r DeleteOTAUpdateRequest) Send(ctx context.Context) (*DeleteOTAUpdateRespo
 	}
 
 	resp := &DeleteOTAUpdateResponse{
-		DeleteOTAUpdateOutput: r.Request.Data.(*DeleteOTAUpdateOutput),
+		DeleteOTAUpdateOutput: r.Request.Data.(*types.DeleteOTAUpdateOutput),
 		response:              &aws.Response{Request: r.Request},
 	}
 
@@ -143,7 +64,7 @@ func (r DeleteOTAUpdateRequest) Send(ctx context.Context) (*DeleteOTAUpdateRespo
 // DeleteOTAUpdateResponse is the response type for the
 // DeleteOTAUpdate API operation.
 type DeleteOTAUpdateResponse struct {
-	*DeleteOTAUpdateOutput
+	*types.DeleteOTAUpdateOutput
 
 	response *aws.Response
 }

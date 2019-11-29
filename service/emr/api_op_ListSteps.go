@@ -6,63 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/emr/types"
 )
-
-// This input determines which steps to list.
-type ListStepsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The identifier of the cluster for which to list the steps.
-	//
-	// ClusterId is a required field
-	ClusterId *string `type:"string" required:"true"`
-
-	// The pagination token that indicates the next set of results to retrieve.
-	Marker *string `type:"string"`
-
-	// The filter to limit the step list based on the identifier of the steps.
-	StepIds []string `type:"list"`
-
-	// The filter to limit the step list based on certain states.
-	StepStates []StepState `type:"list"`
-}
-
-// String returns the string representation
-func (s ListStepsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListStepsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListStepsInput"}
-
-	if s.ClusterId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ClusterId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// This output contains the list of steps returned in reverse order. This means
-// that the last step is the first element in the list.
-type ListStepsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The pagination token that indicates the next set of results to retrieve.
-	Marker *string `type:"string"`
-
-	// The filtered list of steps for the cluster.
-	Steps []StepSummary `type:"list"`
-}
-
-// String returns the string representation
-func (s ListStepsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListSteps = "ListSteps"
 
@@ -70,7 +15,8 @@ const opListSteps = "ListSteps"
 // Amazon Elastic MapReduce.
 //
 // Provides a list of steps for the cluster in reverse order unless you specify
-// stepIds with the request.
+// stepIds with the request of filter by StepStates. You can specify a maximum
+// of ten stepIDs.
 //
 //    // Example sending a request using ListStepsRequest.
 //    req := client.ListStepsRequest(params)
@@ -80,7 +26,7 @@ const opListSteps = "ListSteps"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/ListSteps
-func (c *Client) ListStepsRequest(input *ListStepsInput) ListStepsRequest {
+func (c *Client) ListStepsRequest(input *types.ListStepsInput) ListStepsRequest {
 	op := &aws.Operation{
 		Name:       opListSteps,
 		HTTPMethod: "POST",
@@ -94,10 +40,10 @@ func (c *Client) ListStepsRequest(input *ListStepsInput) ListStepsRequest {
 	}
 
 	if input == nil {
-		input = &ListStepsInput{}
+		input = &types.ListStepsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListStepsOutput{})
+	req := c.newRequest(op, input, &types.ListStepsOutput{})
 	return ListStepsRequest{Request: req, Input: input, Copy: c.ListStepsRequest}
 }
 
@@ -105,8 +51,8 @@ func (c *Client) ListStepsRequest(input *ListStepsInput) ListStepsRequest {
 // ListSteps API operation.
 type ListStepsRequest struct {
 	*aws.Request
-	Input *ListStepsInput
-	Copy  func(*ListStepsInput) ListStepsRequest
+	Input *types.ListStepsInput
+	Copy  func(*types.ListStepsInput) ListStepsRequest
 }
 
 // Send marshals and sends the ListSteps API request.
@@ -118,7 +64,7 @@ func (r ListStepsRequest) Send(ctx context.Context) (*ListStepsResponse, error) 
 	}
 
 	resp := &ListStepsResponse{
-		ListStepsOutput: r.Request.Data.(*ListStepsOutput),
+		ListStepsOutput: r.Request.Data.(*types.ListStepsOutput),
 		response:        &aws.Response{Request: r.Request},
 	}
 
@@ -148,7 +94,7 @@ func NewListStepsPaginator(req ListStepsRequest) ListStepsPaginator {
 	return ListStepsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListStepsInput
+				var inCpy *types.ListStepsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -168,14 +114,14 @@ type ListStepsPaginator struct {
 	aws.Pager
 }
 
-func (p *ListStepsPaginator) CurrentPage() *ListStepsOutput {
-	return p.Pager.CurrentPage().(*ListStepsOutput)
+func (p *ListStepsPaginator) CurrentPage() *types.ListStepsOutput {
+	return p.Pager.CurrentPage().(*types.ListStepsOutput)
 }
 
 // ListStepsResponse is the response type for the
 // ListSteps API operation.
 type ListStepsResponse struct {
-	*ListStepsOutput
+	*types.ListStepsOutput
 
 	response *aws.Response
 }

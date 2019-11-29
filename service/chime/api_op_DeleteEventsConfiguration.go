@@ -6,80 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/restjson"
+	"github.com/aws/aws-sdk-go-v2/service/chime/types"
 )
-
-type DeleteEventsConfigurationInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Chime account ID.
-	//
-	// AccountId is a required field
-	AccountId *string `location:"uri" locationName:"accountId" type:"string" required:"true"`
-
-	// The bot ID.
-	//
-	// BotId is a required field
-	BotId *string `location:"uri" locationName:"botId" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteEventsConfigurationInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteEventsConfigurationInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteEventsConfigurationInput"}
-
-	if s.AccountId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("AccountId"))
-	}
-
-	if s.BotId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("BotId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteEventsConfigurationInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.AccountId != nil {
-		v := *s.AccountId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "accountId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.BotId != nil {
-		v := *s.BotId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "botId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type DeleteEventsConfigurationOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteEventsConfigurationOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteEventsConfigurationOutput) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
 
 const opDeleteEventsConfiguration = "DeleteEventsConfiguration"
 
@@ -96,7 +26,7 @@ const opDeleteEventsConfiguration = "DeleteEventsConfiguration"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/DeleteEventsConfiguration
-func (c *Client) DeleteEventsConfigurationRequest(input *DeleteEventsConfigurationInput) DeleteEventsConfigurationRequest {
+func (c *Client) DeleteEventsConfigurationRequest(input *types.DeleteEventsConfigurationInput) DeleteEventsConfigurationRequest {
 	op := &aws.Operation{
 		Name:       opDeleteEventsConfiguration,
 		HTTPMethod: "DELETE",
@@ -104,10 +34,10 @@ func (c *Client) DeleteEventsConfigurationRequest(input *DeleteEventsConfigurati
 	}
 
 	if input == nil {
-		input = &DeleteEventsConfigurationInput{}
+		input = &types.DeleteEventsConfigurationInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteEventsConfigurationOutput{})
+	req := c.newRequest(op, input, &types.DeleteEventsConfigurationOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return DeleteEventsConfigurationRequest{Request: req, Input: input, Copy: c.DeleteEventsConfigurationRequest}
@@ -117,8 +47,8 @@ func (c *Client) DeleteEventsConfigurationRequest(input *DeleteEventsConfigurati
 // DeleteEventsConfiguration API operation.
 type DeleteEventsConfigurationRequest struct {
 	*aws.Request
-	Input *DeleteEventsConfigurationInput
-	Copy  func(*DeleteEventsConfigurationInput) DeleteEventsConfigurationRequest
+	Input *types.DeleteEventsConfigurationInput
+	Copy  func(*types.DeleteEventsConfigurationInput) DeleteEventsConfigurationRequest
 }
 
 // Send marshals and sends the DeleteEventsConfiguration API request.
@@ -130,7 +60,7 @@ func (r DeleteEventsConfigurationRequest) Send(ctx context.Context) (*DeleteEven
 	}
 
 	resp := &DeleteEventsConfigurationResponse{
-		DeleteEventsConfigurationOutput: r.Request.Data.(*DeleteEventsConfigurationOutput),
+		DeleteEventsConfigurationOutput: r.Request.Data.(*types.DeleteEventsConfigurationOutput),
 		response:                        &aws.Response{Request: r.Request},
 	}
 
@@ -140,7 +70,7 @@ func (r DeleteEventsConfigurationRequest) Send(ctx context.Context) (*DeleteEven
 // DeleteEventsConfigurationResponse is the response type for the
 // DeleteEventsConfiguration API operation.
 type DeleteEventsConfigurationResponse struct {
-	*DeleteEventsConfigurationOutput
+	*types.DeleteEventsConfigurationOutput
 
 	response *aws.Response
 }

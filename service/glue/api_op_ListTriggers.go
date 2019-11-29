@@ -6,64 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/glue/types"
 )
-
-type ListTriggersInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the job for which to retrieve triggers. The trigger that can
-	// start this job is returned. If there is no such trigger, all triggers are
-	// returned.
-	DependentJobName *string `min:"1" type:"string"`
-
-	// The maximum size of a list to return.
-	MaxResults *int64 `min:"1" type:"integer"`
-
-	// A continuation token, if this is a continuation request.
-	NextToken *string `type:"string"`
-
-	// Specifies to return only these tagged resources.
-	Tags map[string]string `type:"map"`
-}
-
-// String returns the string representation
-func (s ListTriggersInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListTriggersInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListTriggersInput"}
-	if s.DependentJobName != nil && len(*s.DependentJobName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("DependentJobName", 1))
-	}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ListTriggersOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A continuation token, if the returned list does not contain the last metric
-	// available.
-	NextToken *string `type:"string"`
-
-	// The names of all triggers in the account, or the triggers with the specified
-	// tags.
-	TriggerNames []string `type:"list"`
-}
-
-// String returns the string representation
-func (s ListTriggersOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListTriggers = "ListTriggers"
 
@@ -86,7 +30,7 @@ const opListTriggers = "ListTriggers"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ListTriggers
-func (c *Client) ListTriggersRequest(input *ListTriggersInput) ListTriggersRequest {
+func (c *Client) ListTriggersRequest(input *types.ListTriggersInput) ListTriggersRequest {
 	op := &aws.Operation{
 		Name:       opListTriggers,
 		HTTPMethod: "POST",
@@ -100,10 +44,10 @@ func (c *Client) ListTriggersRequest(input *ListTriggersInput) ListTriggersReque
 	}
 
 	if input == nil {
-		input = &ListTriggersInput{}
+		input = &types.ListTriggersInput{}
 	}
 
-	req := c.newRequest(op, input, &ListTriggersOutput{})
+	req := c.newRequest(op, input, &types.ListTriggersOutput{})
 	return ListTriggersRequest{Request: req, Input: input, Copy: c.ListTriggersRequest}
 }
 
@@ -111,8 +55,8 @@ func (c *Client) ListTriggersRequest(input *ListTriggersInput) ListTriggersReque
 // ListTriggers API operation.
 type ListTriggersRequest struct {
 	*aws.Request
-	Input *ListTriggersInput
-	Copy  func(*ListTriggersInput) ListTriggersRequest
+	Input *types.ListTriggersInput
+	Copy  func(*types.ListTriggersInput) ListTriggersRequest
 }
 
 // Send marshals and sends the ListTriggers API request.
@@ -124,7 +68,7 @@ func (r ListTriggersRequest) Send(ctx context.Context) (*ListTriggersResponse, e
 	}
 
 	resp := &ListTriggersResponse{
-		ListTriggersOutput: r.Request.Data.(*ListTriggersOutput),
+		ListTriggersOutput: r.Request.Data.(*types.ListTriggersOutput),
 		response:           &aws.Response{Request: r.Request},
 	}
 
@@ -154,7 +98,7 @@ func NewListTriggersPaginator(req ListTriggersRequest) ListTriggersPaginator {
 	return ListTriggersPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListTriggersInput
+				var inCpy *types.ListTriggersInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -174,14 +118,14 @@ type ListTriggersPaginator struct {
 	aws.Pager
 }
 
-func (p *ListTriggersPaginator) CurrentPage() *ListTriggersOutput {
-	return p.Pager.CurrentPage().(*ListTriggersOutput)
+func (p *ListTriggersPaginator) CurrentPage() *types.ListTriggersOutput {
+	return p.Pager.CurrentPage().(*types.ListTriggersOutput)
 }
 
 // ListTriggersResponse is the response type for the
 // ListTriggers API operation.
 type ListTriggersResponse struct {
-	*ListTriggersOutput
+	*types.ListTriggersOutput
 
 	response *aws.Response
 }

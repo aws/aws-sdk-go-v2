@@ -6,37 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/lightsail/types"
 )
-
-type GetCloudFormationStackRecordsInput struct {
-	_ struct{} `type:"structure"`
-
-	// A token used for advancing to a specific page of results for your get cloud
-	// formation stack records request.
-	PageToken *string `locationName:"pageToken" type:"string"`
-}
-
-// String returns the string representation
-func (s GetCloudFormationStackRecordsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type GetCloudFormationStackRecordsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A list of objects describing the CloudFormation stack records.
-	CloudFormationStackRecords []CloudFormationStackRecord `locationName:"cloudFormationStackRecords" type:"list"`
-
-	// A token used for advancing to the next page of results of your get relational
-	// database bundles request.
-	NextPageToken *string `locationName:"nextPageToken" type:"string"`
-}
-
-// String returns the string representation
-func (s GetCloudFormationStackRecordsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetCloudFormationStackRecords = "GetCloudFormationStackRecords"
 
@@ -57,7 +28,7 @@ const opGetCloudFormationStackRecords = "GetCloudFormationStackRecords"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetCloudFormationStackRecords
-func (c *Client) GetCloudFormationStackRecordsRequest(input *GetCloudFormationStackRecordsInput) GetCloudFormationStackRecordsRequest {
+func (c *Client) GetCloudFormationStackRecordsRequest(input *types.GetCloudFormationStackRecordsInput) GetCloudFormationStackRecordsRequest {
 	op := &aws.Operation{
 		Name:       opGetCloudFormationStackRecords,
 		HTTPMethod: "POST",
@@ -65,10 +36,10 @@ func (c *Client) GetCloudFormationStackRecordsRequest(input *GetCloudFormationSt
 	}
 
 	if input == nil {
-		input = &GetCloudFormationStackRecordsInput{}
+		input = &types.GetCloudFormationStackRecordsInput{}
 	}
 
-	req := c.newRequest(op, input, &GetCloudFormationStackRecordsOutput{})
+	req := c.newRequest(op, input, &types.GetCloudFormationStackRecordsOutput{})
 	return GetCloudFormationStackRecordsRequest{Request: req, Input: input, Copy: c.GetCloudFormationStackRecordsRequest}
 }
 
@@ -76,8 +47,8 @@ func (c *Client) GetCloudFormationStackRecordsRequest(input *GetCloudFormationSt
 // GetCloudFormationStackRecords API operation.
 type GetCloudFormationStackRecordsRequest struct {
 	*aws.Request
-	Input *GetCloudFormationStackRecordsInput
-	Copy  func(*GetCloudFormationStackRecordsInput) GetCloudFormationStackRecordsRequest
+	Input *types.GetCloudFormationStackRecordsInput
+	Copy  func(*types.GetCloudFormationStackRecordsInput) GetCloudFormationStackRecordsRequest
 }
 
 // Send marshals and sends the GetCloudFormationStackRecords API request.
@@ -89,7 +60,7 @@ func (r GetCloudFormationStackRecordsRequest) Send(ctx context.Context) (*GetClo
 	}
 
 	resp := &GetCloudFormationStackRecordsResponse{
-		GetCloudFormationStackRecordsOutput: r.Request.Data.(*GetCloudFormationStackRecordsOutput),
+		GetCloudFormationStackRecordsOutput: r.Request.Data.(*types.GetCloudFormationStackRecordsOutput),
 		response:                            &aws.Response{Request: r.Request},
 	}
 
@@ -99,7 +70,7 @@ func (r GetCloudFormationStackRecordsRequest) Send(ctx context.Context) (*GetClo
 // GetCloudFormationStackRecordsResponse is the response type for the
 // GetCloudFormationStackRecords API operation.
 type GetCloudFormationStackRecordsResponse struct {
-	*GetCloudFormationStackRecordsOutput
+	*types.GetCloudFormationStackRecordsOutput
 
 	response *aws.Response
 }

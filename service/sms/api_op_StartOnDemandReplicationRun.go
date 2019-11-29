@@ -6,51 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/sms/types"
 )
-
-type StartOnDemandReplicationRunInput struct {
-	_ struct{} `type:"structure"`
-
-	// The description of the replication run.
-	Description *string `locationName:"description" type:"string"`
-
-	// The identifier of the replication job.
-	//
-	// ReplicationJobId is a required field
-	ReplicationJobId *string `locationName:"replicationJobId" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s StartOnDemandReplicationRunInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *StartOnDemandReplicationRunInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "StartOnDemandReplicationRunInput"}
-
-	if s.ReplicationJobId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ReplicationJobId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type StartOnDemandReplicationRunOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The identifier of the replication run.
-	ReplicationRunId *string `locationName:"replicationRunId" type:"string"`
-}
-
-// String returns the string representation
-func (s StartOnDemandReplicationRunOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opStartOnDemandReplicationRun = "StartOnDemandReplicationRun"
 
@@ -72,7 +29,7 @@ const opStartOnDemandReplicationRun = "StartOnDemandReplicationRun"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sms-2016-10-24/StartOnDemandReplicationRun
-func (c *Client) StartOnDemandReplicationRunRequest(input *StartOnDemandReplicationRunInput) StartOnDemandReplicationRunRequest {
+func (c *Client) StartOnDemandReplicationRunRequest(input *types.StartOnDemandReplicationRunInput) StartOnDemandReplicationRunRequest {
 	op := &aws.Operation{
 		Name:       opStartOnDemandReplicationRun,
 		HTTPMethod: "POST",
@@ -80,10 +37,10 @@ func (c *Client) StartOnDemandReplicationRunRequest(input *StartOnDemandReplicat
 	}
 
 	if input == nil {
-		input = &StartOnDemandReplicationRunInput{}
+		input = &types.StartOnDemandReplicationRunInput{}
 	}
 
-	req := c.newRequest(op, input, &StartOnDemandReplicationRunOutput{})
+	req := c.newRequest(op, input, &types.StartOnDemandReplicationRunOutput{})
 	return StartOnDemandReplicationRunRequest{Request: req, Input: input, Copy: c.StartOnDemandReplicationRunRequest}
 }
 
@@ -91,8 +48,8 @@ func (c *Client) StartOnDemandReplicationRunRequest(input *StartOnDemandReplicat
 // StartOnDemandReplicationRun API operation.
 type StartOnDemandReplicationRunRequest struct {
 	*aws.Request
-	Input *StartOnDemandReplicationRunInput
-	Copy  func(*StartOnDemandReplicationRunInput) StartOnDemandReplicationRunRequest
+	Input *types.StartOnDemandReplicationRunInput
+	Copy  func(*types.StartOnDemandReplicationRunInput) StartOnDemandReplicationRunRequest
 }
 
 // Send marshals and sends the StartOnDemandReplicationRun API request.
@@ -104,7 +61,7 @@ func (r StartOnDemandReplicationRunRequest) Send(ctx context.Context) (*StartOnD
 	}
 
 	resp := &StartOnDemandReplicationRunResponse{
-		StartOnDemandReplicationRunOutput: r.Request.Data.(*StartOnDemandReplicationRunOutput),
+		StartOnDemandReplicationRunOutput: r.Request.Data.(*types.StartOnDemandReplicationRunOutput),
 		response:                          &aws.Response{Request: r.Request},
 	}
 
@@ -114,7 +71,7 @@ func (r StartOnDemandReplicationRunRequest) Send(ctx context.Context) (*StartOnD
 // StartOnDemandReplicationRunResponse is the response type for the
 // StartOnDemandReplicationRun API operation.
 type StartOnDemandReplicationRunResponse struct {
-	*StartOnDemandReplicationRunOutput
+	*types.StartOnDemandReplicationRunOutput
 
 	response *aws.Response
 }

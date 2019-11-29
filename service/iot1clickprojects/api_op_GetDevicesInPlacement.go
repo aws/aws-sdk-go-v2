@@ -6,102 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/iot1clickprojects/types"
 )
-
-type GetDevicesInPlacementInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the placement to get the devices from.
-	//
-	// PlacementName is a required field
-	PlacementName *string `location:"uri" locationName:"placementName" min:"1" type:"string" required:"true"`
-
-	// The name of the project containing the placement.
-	//
-	// ProjectName is a required field
-	ProjectName *string `location:"uri" locationName:"projectName" min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetDevicesInPlacementInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetDevicesInPlacementInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetDevicesInPlacementInput"}
-
-	if s.PlacementName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("PlacementName"))
-	}
-	if s.PlacementName != nil && len(*s.PlacementName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("PlacementName", 1))
-	}
-
-	if s.ProjectName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ProjectName"))
-	}
-	if s.ProjectName != nil && len(*s.ProjectName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ProjectName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetDevicesInPlacementInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.PlacementName != nil {
-		v := *s.PlacementName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "placementName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.ProjectName != nil {
-		v := *s.ProjectName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "projectName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type GetDevicesInPlacementOutput struct {
-	_ struct{} `type:"structure"`
-
-	// An object containing the devices (zero or more) within the placement.
-	//
-	// Devices is a required field
-	Devices map[string]string `locationName:"devices" type:"map" required:"true"`
-}
-
-// String returns the string representation
-func (s GetDevicesInPlacementOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetDevicesInPlacementOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.Devices != nil {
-		v := s.Devices
-
-		metadata := protocol.Metadata{}
-		ms0 := e.Map(protocol.BodyTarget, "devices", metadata)
-		ms0.Start()
-		for k1, v1 := range v {
-			ms0.MapSetValue(k1, protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
-		}
-		ms0.End()
-
-	}
-	return nil
-}
 
 const opGetDevicesInPlacement = "GetDevicesInPlacement"
 
@@ -118,7 +24,7 @@ const opGetDevicesInPlacement = "GetDevicesInPlacement"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iot1click-projects-2018-05-14/GetDevicesInPlacement
-func (c *Client) GetDevicesInPlacementRequest(input *GetDevicesInPlacementInput) GetDevicesInPlacementRequest {
+func (c *Client) GetDevicesInPlacementRequest(input *types.GetDevicesInPlacementInput) GetDevicesInPlacementRequest {
 	op := &aws.Operation{
 		Name:       opGetDevicesInPlacement,
 		HTTPMethod: "GET",
@@ -126,10 +32,10 @@ func (c *Client) GetDevicesInPlacementRequest(input *GetDevicesInPlacementInput)
 	}
 
 	if input == nil {
-		input = &GetDevicesInPlacementInput{}
+		input = &types.GetDevicesInPlacementInput{}
 	}
 
-	req := c.newRequest(op, input, &GetDevicesInPlacementOutput{})
+	req := c.newRequest(op, input, &types.GetDevicesInPlacementOutput{})
 	return GetDevicesInPlacementRequest{Request: req, Input: input, Copy: c.GetDevicesInPlacementRequest}
 }
 
@@ -137,8 +43,8 @@ func (c *Client) GetDevicesInPlacementRequest(input *GetDevicesInPlacementInput)
 // GetDevicesInPlacement API operation.
 type GetDevicesInPlacementRequest struct {
 	*aws.Request
-	Input *GetDevicesInPlacementInput
-	Copy  func(*GetDevicesInPlacementInput) GetDevicesInPlacementRequest
+	Input *types.GetDevicesInPlacementInput
+	Copy  func(*types.GetDevicesInPlacementInput) GetDevicesInPlacementRequest
 }
 
 // Send marshals and sends the GetDevicesInPlacement API request.
@@ -150,7 +56,7 @@ func (r GetDevicesInPlacementRequest) Send(ctx context.Context) (*GetDevicesInPl
 	}
 
 	resp := &GetDevicesInPlacementResponse{
-		GetDevicesInPlacementOutput: r.Request.Data.(*GetDevicesInPlacementOutput),
+		GetDevicesInPlacementOutput: r.Request.Data.(*types.GetDevicesInPlacementOutput),
 		response:                    &aws.Response{Request: r.Request},
 	}
 
@@ -160,7 +66,7 @@ func (r GetDevicesInPlacementRequest) Send(ctx context.Context) (*GetDevicesInPl
 // GetDevicesInPlacementResponse is the response type for the
 // GetDevicesInPlacement API operation.
 type GetDevicesInPlacementResponse struct {
-	*GetDevicesInPlacementOutput
+	*types.GetDevicesInPlacementOutput
 
 	response *aws.Response
 }

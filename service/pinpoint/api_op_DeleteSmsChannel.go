@@ -6,74 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/pinpoint/types"
 )
-
-type DeleteSmsChannelInput struct {
-	_ struct{} `type:"structure"`
-
-	// ApplicationId is a required field
-	ApplicationId *string `location:"uri" locationName:"application-id" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteSmsChannelInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteSmsChannelInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteSmsChannelInput"}
-
-	if s.ApplicationId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ApplicationId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteSmsChannelInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.ApplicationId != nil {
-		v := *s.ApplicationId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "application-id", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type DeleteSmsChannelOutput struct {
-	_ struct{} `type:"structure" payload:"SMSChannelResponse"`
-
-	// Provides information about the status and settings of the SMS channel for
-	// an application.
-	//
-	// SMSChannelResponse is a required field
-	SMSChannelResponse *SMSChannelResponse `type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteSmsChannelOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteSmsChannelOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.SMSChannelResponse != nil {
-		v := s.SMSChannelResponse
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.PayloadTarget, "SMSChannelResponse", v, metadata)
-	}
-	return nil
-}
 
 const opDeleteSmsChannel = "DeleteSmsChannel"
 
@@ -91,7 +25,7 @@ const opDeleteSmsChannel = "DeleteSmsChannel"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/DeleteSmsChannel
-func (c *Client) DeleteSmsChannelRequest(input *DeleteSmsChannelInput) DeleteSmsChannelRequest {
+func (c *Client) DeleteSmsChannelRequest(input *types.DeleteSmsChannelInput) DeleteSmsChannelRequest {
 	op := &aws.Operation{
 		Name:       opDeleteSmsChannel,
 		HTTPMethod: "DELETE",
@@ -99,10 +33,10 @@ func (c *Client) DeleteSmsChannelRequest(input *DeleteSmsChannelInput) DeleteSms
 	}
 
 	if input == nil {
-		input = &DeleteSmsChannelInput{}
+		input = &types.DeleteSmsChannelInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteSmsChannelOutput{})
+	req := c.newRequest(op, input, &types.DeleteSmsChannelOutput{})
 	return DeleteSmsChannelRequest{Request: req, Input: input, Copy: c.DeleteSmsChannelRequest}
 }
 
@@ -110,8 +44,8 @@ func (c *Client) DeleteSmsChannelRequest(input *DeleteSmsChannelInput) DeleteSms
 // DeleteSmsChannel API operation.
 type DeleteSmsChannelRequest struct {
 	*aws.Request
-	Input *DeleteSmsChannelInput
-	Copy  func(*DeleteSmsChannelInput) DeleteSmsChannelRequest
+	Input *types.DeleteSmsChannelInput
+	Copy  func(*types.DeleteSmsChannelInput) DeleteSmsChannelRequest
 }
 
 // Send marshals and sends the DeleteSmsChannel API request.
@@ -123,7 +57,7 @@ func (r DeleteSmsChannelRequest) Send(ctx context.Context) (*DeleteSmsChannelRes
 	}
 
 	resp := &DeleteSmsChannelResponse{
-		DeleteSmsChannelOutput: r.Request.Data.(*DeleteSmsChannelOutput),
+		DeleteSmsChannelOutput: r.Request.Data.(*types.DeleteSmsChannelOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -133,7 +67,7 @@ func (r DeleteSmsChannelRequest) Send(ctx context.Context) (*DeleteSmsChannelRes
 // DeleteSmsChannelResponse is the response type for the
 // DeleteSmsChannel API operation.
 type DeleteSmsChannelResponse struct {
-	*DeleteSmsChannelOutput
+	*types.DeleteSmsChannelOutput
 
 	response *aws.Response
 }

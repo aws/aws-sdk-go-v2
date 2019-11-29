@@ -6,63 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/types"
 )
-
-type DescribeProvisionedProductInput struct {
-	_ struct{} `type:"structure"`
-
-	// The language code.
-	//
-	//    * en - English (default)
-	//
-	//    * jp - Japanese
-	//
-	//    * zh - Chinese
-	AcceptLanguage *string `type:"string"`
-
-	// The provisioned product identifier.
-	//
-	// Id is a required field
-	Id *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeProvisionedProductInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeProvisionedProductInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeProvisionedProductInput"}
-
-	if s.Id == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Id"))
-	}
-	if s.Id != nil && len(*s.Id) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Id", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribeProvisionedProductOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Any CloudWatch dashboards that were created when provisioning the product.
-	CloudWatchDashboards []CloudWatchDashboard `type:"list"`
-
-	// Information about the provisioned product.
-	ProvisionedProductDetail *ProvisionedProductDetail `type:"structure"`
-}
-
-// String returns the string representation
-func (s DescribeProvisionedProductOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeProvisionedProduct = "DescribeProvisionedProduct"
 
@@ -79,7 +24,7 @@ const opDescribeProvisionedProduct = "DescribeProvisionedProduct"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DescribeProvisionedProduct
-func (c *Client) DescribeProvisionedProductRequest(input *DescribeProvisionedProductInput) DescribeProvisionedProductRequest {
+func (c *Client) DescribeProvisionedProductRequest(input *types.DescribeProvisionedProductInput) DescribeProvisionedProductRequest {
 	op := &aws.Operation{
 		Name:       opDescribeProvisionedProduct,
 		HTTPMethod: "POST",
@@ -87,10 +32,10 @@ func (c *Client) DescribeProvisionedProductRequest(input *DescribeProvisionedPro
 	}
 
 	if input == nil {
-		input = &DescribeProvisionedProductInput{}
+		input = &types.DescribeProvisionedProductInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeProvisionedProductOutput{})
+	req := c.newRequest(op, input, &types.DescribeProvisionedProductOutput{})
 	return DescribeProvisionedProductRequest{Request: req, Input: input, Copy: c.DescribeProvisionedProductRequest}
 }
 
@@ -98,8 +43,8 @@ func (c *Client) DescribeProvisionedProductRequest(input *DescribeProvisionedPro
 // DescribeProvisionedProduct API operation.
 type DescribeProvisionedProductRequest struct {
 	*aws.Request
-	Input *DescribeProvisionedProductInput
-	Copy  func(*DescribeProvisionedProductInput) DescribeProvisionedProductRequest
+	Input *types.DescribeProvisionedProductInput
+	Copy  func(*types.DescribeProvisionedProductInput) DescribeProvisionedProductRequest
 }
 
 // Send marshals and sends the DescribeProvisionedProduct API request.
@@ -111,7 +56,7 @@ func (r DescribeProvisionedProductRequest) Send(ctx context.Context) (*DescribeP
 	}
 
 	resp := &DescribeProvisionedProductResponse{
-		DescribeProvisionedProductOutput: r.Request.Data.(*DescribeProvisionedProductOutput),
+		DescribeProvisionedProductOutput: r.Request.Data.(*types.DescribeProvisionedProductOutput),
 		response:                         &aws.Response{Request: r.Request},
 	}
 
@@ -121,7 +66,7 @@ func (r DescribeProvisionedProductRequest) Send(ctx context.Context) (*DescribeP
 // DescribeProvisionedProductResponse is the response type for the
 // DescribeProvisionedProduct API operation.
 type DescribeProvisionedProductResponse struct {
-	*DescribeProvisionedProductOutput
+	*types.DescribeProvisionedProductOutput
 
 	response *aws.Response
 }

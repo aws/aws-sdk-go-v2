@@ -6,28 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
+	"github.com/aws/aws-sdk-go-v2/service/fms/types"
 )
-
-type DisassociateAdminAccountInput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DisassociateAdminAccountInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type DisassociateAdminAccountOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DisassociateAdminAccountOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDisassociateAdminAccount = "DisassociateAdminAccount"
 
@@ -46,7 +28,7 @@ const opDisassociateAdminAccount = "DisassociateAdminAccount"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/DisassociateAdminAccount
-func (c *Client) DisassociateAdminAccountRequest(input *DisassociateAdminAccountInput) DisassociateAdminAccountRequest {
+func (c *Client) DisassociateAdminAccountRequest(input *types.DisassociateAdminAccountInput) DisassociateAdminAccountRequest {
 	op := &aws.Operation{
 		Name:       opDisassociateAdminAccount,
 		HTTPMethod: "POST",
@@ -54,10 +36,10 @@ func (c *Client) DisassociateAdminAccountRequest(input *DisassociateAdminAccount
 	}
 
 	if input == nil {
-		input = &DisassociateAdminAccountInput{}
+		input = &types.DisassociateAdminAccountInput{}
 	}
 
-	req := c.newRequest(op, input, &DisassociateAdminAccountOutput{})
+	req := c.newRequest(op, input, &types.DisassociateAdminAccountOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return DisassociateAdminAccountRequest{Request: req, Input: input, Copy: c.DisassociateAdminAccountRequest}
@@ -67,8 +49,8 @@ func (c *Client) DisassociateAdminAccountRequest(input *DisassociateAdminAccount
 // DisassociateAdminAccount API operation.
 type DisassociateAdminAccountRequest struct {
 	*aws.Request
-	Input *DisassociateAdminAccountInput
-	Copy  func(*DisassociateAdminAccountInput) DisassociateAdminAccountRequest
+	Input *types.DisassociateAdminAccountInput
+	Copy  func(*types.DisassociateAdminAccountInput) DisassociateAdminAccountRequest
 }
 
 // Send marshals and sends the DisassociateAdminAccount API request.
@@ -80,7 +62,7 @@ func (r DisassociateAdminAccountRequest) Send(ctx context.Context) (*Disassociat
 	}
 
 	resp := &DisassociateAdminAccountResponse{
-		DisassociateAdminAccountOutput: r.Request.Data.(*DisassociateAdminAccountOutput),
+		DisassociateAdminAccountOutput: r.Request.Data.(*types.DisassociateAdminAccountOutput),
 		response:                       &aws.Response{Request: r.Request},
 	}
 
@@ -90,7 +72,7 @@ func (r DisassociateAdminAccountRequest) Send(ctx context.Context) (*Disassociat
 // DisassociateAdminAccountResponse is the response type for the
 // DisassociateAdminAccount API operation.
 type DisassociateAdminAccountResponse struct {
-	*DisassociateAdminAccountOutput
+	*types.DisassociateAdminAccountOutput
 
 	response *aws.Response
 }

@@ -6,56 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-type DescribePrefixListsInput struct {
-	_ struct{} `type:"structure"`
-
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have
-	// the required permissions, the error response is DryRunOperation. Otherwise,
-	// it is UnauthorizedOperation.
-	DryRun *bool `type:"boolean"`
-
-	// One or more filters.
-	//
-	//    * prefix-list-id: The ID of a prefix list.
-	//
-	//    * prefix-list-name: The name of a prefix list.
-	Filters []Filter `locationName:"Filter" locationNameList:"Filter" type:"list"`
-
-	// The maximum number of results to return with a single call. To retrieve the
-	// remaining results, make another call with the returned nextToken value.
-	MaxResults *int64 `type:"integer"`
-
-	// The token for the next page of results.
-	NextToken *string `type:"string"`
-
-	// One or more prefix list IDs.
-	PrefixListIds []string `locationName:"PrefixListId" locationNameList:"item" type:"list"`
-}
-
-// String returns the string representation
-func (s DescribePrefixListsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type DescribePrefixListsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The token to use to retrieve the next page of results. This value is null
-	// when there are no more results to return.
-	NextToken *string `locationName:"nextToken" type:"string"`
-
-	// All available prefix lists.
-	PrefixLists []PrefixList `locationName:"prefixListSet" locationNameList:"item" type:"list"`
-}
-
-// String returns the string representation
-func (s DescribePrefixListsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribePrefixLists = "DescribePrefixLists"
 
@@ -77,7 +29,7 @@ const opDescribePrefixLists = "DescribePrefixLists"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribePrefixLists
-func (c *Client) DescribePrefixListsRequest(input *DescribePrefixListsInput) DescribePrefixListsRequest {
+func (c *Client) DescribePrefixListsRequest(input *types.DescribePrefixListsInput) DescribePrefixListsRequest {
 	op := &aws.Operation{
 		Name:       opDescribePrefixLists,
 		HTTPMethod: "POST",
@@ -91,10 +43,10 @@ func (c *Client) DescribePrefixListsRequest(input *DescribePrefixListsInput) Des
 	}
 
 	if input == nil {
-		input = &DescribePrefixListsInput{}
+		input = &types.DescribePrefixListsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribePrefixListsOutput{})
+	req := c.newRequest(op, input, &types.DescribePrefixListsOutput{})
 	return DescribePrefixListsRequest{Request: req, Input: input, Copy: c.DescribePrefixListsRequest}
 }
 
@@ -102,8 +54,8 @@ func (c *Client) DescribePrefixListsRequest(input *DescribePrefixListsInput) Des
 // DescribePrefixLists API operation.
 type DescribePrefixListsRequest struct {
 	*aws.Request
-	Input *DescribePrefixListsInput
-	Copy  func(*DescribePrefixListsInput) DescribePrefixListsRequest
+	Input *types.DescribePrefixListsInput
+	Copy  func(*types.DescribePrefixListsInput) DescribePrefixListsRequest
 }
 
 // Send marshals and sends the DescribePrefixLists API request.
@@ -115,7 +67,7 @@ func (r DescribePrefixListsRequest) Send(ctx context.Context) (*DescribePrefixLi
 	}
 
 	resp := &DescribePrefixListsResponse{
-		DescribePrefixListsOutput: r.Request.Data.(*DescribePrefixListsOutput),
+		DescribePrefixListsOutput: r.Request.Data.(*types.DescribePrefixListsOutput),
 		response:                  &aws.Response{Request: r.Request},
 	}
 
@@ -145,7 +97,7 @@ func NewDescribePrefixListsPaginator(req DescribePrefixListsRequest) DescribePre
 	return DescribePrefixListsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *DescribePrefixListsInput
+				var inCpy *types.DescribePrefixListsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -165,14 +117,14 @@ type DescribePrefixListsPaginator struct {
 	aws.Pager
 }
 
-func (p *DescribePrefixListsPaginator) CurrentPage() *DescribePrefixListsOutput {
-	return p.Pager.CurrentPage().(*DescribePrefixListsOutput)
+func (p *DescribePrefixListsPaginator) CurrentPage() *types.DescribePrefixListsOutput {
+	return p.Pager.CurrentPage().(*types.DescribePrefixListsOutput)
 }
 
 // DescribePrefixListsResponse is the response type for the
 // DescribePrefixLists API operation.
 type DescribePrefixListsResponse struct {
-	*DescribePrefixListsOutput
+	*types.DescribePrefixListsOutput
 
 	response *aws.Response
 }

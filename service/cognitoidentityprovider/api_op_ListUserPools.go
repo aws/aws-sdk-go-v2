@@ -6,65 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/types"
 )
-
-// Represents the request to list user pools.
-type ListUserPoolsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The maximum number of results you want the request to return when listing
-	// the user pools.
-	//
-	// MaxResults is a required field
-	MaxResults *int64 `min:"1" type:"integer" required:"true"`
-
-	// An identifier that was returned from the previous call to this operation,
-	// which can be used to return the next set of items in the list.
-	NextToken *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s ListUserPoolsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListUserPoolsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListUserPoolsInput"}
-
-	if s.MaxResults == nil {
-		invalidParams.Add(aws.NewErrParamRequired("MaxResults"))
-	}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-	if s.NextToken != nil && len(*s.NextToken) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Represents the response to list user pools.
-type ListUserPoolsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// An identifier that was returned from the previous call to this operation,
-	// which can be used to return the next set of items in the list.
-	NextToken *string `min:"1" type:"string"`
-
-	// The user pools from the response to list users.
-	UserPools []UserPoolDescriptionType `type:"list"`
-}
-
-// String returns the string representation
-func (s ListUserPoolsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListUserPools = "ListUserPools"
 
@@ -81,7 +24,7 @@ const opListUserPools = "ListUserPools"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/ListUserPools
-func (c *Client) ListUserPoolsRequest(input *ListUserPoolsInput) ListUserPoolsRequest {
+func (c *Client) ListUserPoolsRequest(input *types.ListUserPoolsInput) ListUserPoolsRequest {
 	op := &aws.Operation{
 		Name:       opListUserPools,
 		HTTPMethod: "POST",
@@ -95,10 +38,10 @@ func (c *Client) ListUserPoolsRequest(input *ListUserPoolsInput) ListUserPoolsRe
 	}
 
 	if input == nil {
-		input = &ListUserPoolsInput{}
+		input = &types.ListUserPoolsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListUserPoolsOutput{})
+	req := c.newRequest(op, input, &types.ListUserPoolsOutput{})
 	return ListUserPoolsRequest{Request: req, Input: input, Copy: c.ListUserPoolsRequest}
 }
 
@@ -106,8 +49,8 @@ func (c *Client) ListUserPoolsRequest(input *ListUserPoolsInput) ListUserPoolsRe
 // ListUserPools API operation.
 type ListUserPoolsRequest struct {
 	*aws.Request
-	Input *ListUserPoolsInput
-	Copy  func(*ListUserPoolsInput) ListUserPoolsRequest
+	Input *types.ListUserPoolsInput
+	Copy  func(*types.ListUserPoolsInput) ListUserPoolsRequest
 }
 
 // Send marshals and sends the ListUserPools API request.
@@ -119,7 +62,7 @@ func (r ListUserPoolsRequest) Send(ctx context.Context) (*ListUserPoolsResponse,
 	}
 
 	resp := &ListUserPoolsResponse{
-		ListUserPoolsOutput: r.Request.Data.(*ListUserPoolsOutput),
+		ListUserPoolsOutput: r.Request.Data.(*types.ListUserPoolsOutput),
 		response:            &aws.Response{Request: r.Request},
 	}
 
@@ -149,7 +92,7 @@ func NewListUserPoolsPaginator(req ListUserPoolsRequest) ListUserPoolsPaginator 
 	return ListUserPoolsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListUserPoolsInput
+				var inCpy *types.ListUserPoolsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -169,14 +112,14 @@ type ListUserPoolsPaginator struct {
 	aws.Pager
 }
 
-func (p *ListUserPoolsPaginator) CurrentPage() *ListUserPoolsOutput {
-	return p.Pager.CurrentPage().(*ListUserPoolsOutput)
+func (p *ListUserPoolsPaginator) CurrentPage() *types.ListUserPoolsOutput {
+	return p.Pager.CurrentPage().(*types.ListUserPoolsOutput)
 }
 
 // ListUserPoolsResponse is the response type for the
 // ListUserPools API operation.
 type ListUserPoolsResponse struct {
-	*ListUserPoolsOutput
+	*types.ListUserPoolsOutput
 
 	response *aws.Response
 }

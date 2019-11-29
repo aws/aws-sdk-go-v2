@@ -4,73 +4,10 @@ package databasemigrationservice
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/databasemigrationservice/types"
 )
-
-type DescribePendingMaintenanceActionsInput struct {
-	_ struct{} `type:"structure"`
-
-	Filters []Filter `type:"list"`
-
-	// An optional pagination token provided by a previous request. If this parameter
-	// is specified, the response includes only records beyond the marker, up to
-	// the value specified by MaxRecords.
-	Marker *string `type:"string"`
-
-	// The maximum number of records to include in the response. If more records
-	// exist than the specified MaxRecords value, a pagination token called a marker
-	// is included in the response so that the remaining results can be retrieved.
-	//
-	// Default: 100
-	//
-	// Constraints: Minimum 20, maximum 100.
-	MaxRecords *int64 `type:"integer"`
-
-	// The Amazon Resource Name (ARN) of the replication instance.
-	ReplicationInstanceArn *string `type:"string"`
-}
-
-// String returns the string representation
-func (s DescribePendingMaintenanceActionsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribePendingMaintenanceActionsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribePendingMaintenanceActionsInput"}
-	if s.Filters != nil {
-		for i, v := range s.Filters {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribePendingMaintenanceActionsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// An optional pagination token provided by a previous request. If this parameter
-	// is specified, the response includes only records beyond the marker, up to
-	// the value specified by MaxRecords.
-	Marker *string `type:"string"`
-
-	// The pending maintenance action.
-	PendingMaintenanceActions []ResourcePendingMaintenanceActions `type:"list"`
-}
-
-// String returns the string representation
-func (s DescribePendingMaintenanceActionsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribePendingMaintenanceActions = "DescribePendingMaintenanceActions"
 
@@ -87,7 +24,7 @@ const opDescribePendingMaintenanceActions = "DescribePendingMaintenanceActions"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribePendingMaintenanceActions
-func (c *Client) DescribePendingMaintenanceActionsRequest(input *DescribePendingMaintenanceActionsInput) DescribePendingMaintenanceActionsRequest {
+func (c *Client) DescribePendingMaintenanceActionsRequest(input *types.DescribePendingMaintenanceActionsInput) DescribePendingMaintenanceActionsRequest {
 	op := &aws.Operation{
 		Name:       opDescribePendingMaintenanceActions,
 		HTTPMethod: "POST",
@@ -101,10 +38,10 @@ func (c *Client) DescribePendingMaintenanceActionsRequest(input *DescribePending
 	}
 
 	if input == nil {
-		input = &DescribePendingMaintenanceActionsInput{}
+		input = &types.DescribePendingMaintenanceActionsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribePendingMaintenanceActionsOutput{})
+	req := c.newRequest(op, input, &types.DescribePendingMaintenanceActionsOutput{})
 	return DescribePendingMaintenanceActionsRequest{Request: req, Input: input, Copy: c.DescribePendingMaintenanceActionsRequest}
 }
 
@@ -112,8 +49,8 @@ func (c *Client) DescribePendingMaintenanceActionsRequest(input *DescribePending
 // DescribePendingMaintenanceActions API operation.
 type DescribePendingMaintenanceActionsRequest struct {
 	*aws.Request
-	Input *DescribePendingMaintenanceActionsInput
-	Copy  func(*DescribePendingMaintenanceActionsInput) DescribePendingMaintenanceActionsRequest
+	Input *types.DescribePendingMaintenanceActionsInput
+	Copy  func(*types.DescribePendingMaintenanceActionsInput) DescribePendingMaintenanceActionsRequest
 }
 
 // Send marshals and sends the DescribePendingMaintenanceActions API request.
@@ -125,7 +62,7 @@ func (r DescribePendingMaintenanceActionsRequest) Send(ctx context.Context) (*De
 	}
 
 	resp := &DescribePendingMaintenanceActionsResponse{
-		DescribePendingMaintenanceActionsOutput: r.Request.Data.(*DescribePendingMaintenanceActionsOutput),
+		DescribePendingMaintenanceActionsOutput: r.Request.Data.(*types.DescribePendingMaintenanceActionsOutput),
 		response:                                &aws.Response{Request: r.Request},
 	}
 
@@ -155,7 +92,7 @@ func NewDescribePendingMaintenanceActionsPaginator(req DescribePendingMaintenanc
 	return DescribePendingMaintenanceActionsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *DescribePendingMaintenanceActionsInput
+				var inCpy *types.DescribePendingMaintenanceActionsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -175,14 +112,14 @@ type DescribePendingMaintenanceActionsPaginator struct {
 	aws.Pager
 }
 
-func (p *DescribePendingMaintenanceActionsPaginator) CurrentPage() *DescribePendingMaintenanceActionsOutput {
-	return p.Pager.CurrentPage().(*DescribePendingMaintenanceActionsOutput)
+func (p *DescribePendingMaintenanceActionsPaginator) CurrentPage() *types.DescribePendingMaintenanceActionsOutput {
+	return p.Pager.CurrentPage().(*types.DescribePendingMaintenanceActionsOutput)
 }
 
 // DescribePendingMaintenanceActionsResponse is the response type for the
 // DescribePendingMaintenanceActions API operation.
 type DescribePendingMaintenanceActionsResponse struct {
-	*DescribePendingMaintenanceActionsOutput
+	*types.DescribePendingMaintenanceActionsOutput
 
 	response *aws.Response
 }

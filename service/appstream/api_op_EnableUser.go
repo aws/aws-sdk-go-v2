@@ -6,61 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/appstream/types"
 )
-
-type EnableUserInput struct {
-	_ struct{} `type:"structure"`
-
-	// The authentication type for the user. You must specify USERPOOL.
-	//
-	// AuthenticationType is a required field
-	AuthenticationType AuthenticationType `type:"string" required:"true" enum:"true"`
-
-	// The email address of the user.
-	//
-	// Users' email addresses are case-sensitive. During login, if they specify
-	// an email address that doesn't use the same capitalization as the email address
-	// specified when their user pool account was created, a "user does not exist"
-	// error message displays.
-	//
-	// UserName is a required field
-	UserName *string `min:"1" type:"string" required:"true" sensitive:"true"`
-}
-
-// String returns the string representation
-func (s EnableUserInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *EnableUserInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "EnableUserInput"}
-	if len(s.AuthenticationType) == 0 {
-		invalidParams.Add(aws.NewErrParamRequired("AuthenticationType"))
-	}
-
-	if s.UserName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("UserName"))
-	}
-	if s.UserName != nil && len(*s.UserName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("UserName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type EnableUserOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s EnableUserOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opEnableUser = "EnableUser"
 
@@ -78,7 +25,7 @@ const opEnableUser = "EnableUser"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/EnableUser
-func (c *Client) EnableUserRequest(input *EnableUserInput) EnableUserRequest {
+func (c *Client) EnableUserRequest(input *types.EnableUserInput) EnableUserRequest {
 	op := &aws.Operation{
 		Name:       opEnableUser,
 		HTTPMethod: "POST",
@@ -86,10 +33,10 @@ func (c *Client) EnableUserRequest(input *EnableUserInput) EnableUserRequest {
 	}
 
 	if input == nil {
-		input = &EnableUserInput{}
+		input = &types.EnableUserInput{}
 	}
 
-	req := c.newRequest(op, input, &EnableUserOutput{})
+	req := c.newRequest(op, input, &types.EnableUserOutput{})
 	return EnableUserRequest{Request: req, Input: input, Copy: c.EnableUserRequest}
 }
 
@@ -97,8 +44,8 @@ func (c *Client) EnableUserRequest(input *EnableUserInput) EnableUserRequest {
 // EnableUser API operation.
 type EnableUserRequest struct {
 	*aws.Request
-	Input *EnableUserInput
-	Copy  func(*EnableUserInput) EnableUserRequest
+	Input *types.EnableUserInput
+	Copy  func(*types.EnableUserInput) EnableUserRequest
 }
 
 // Send marshals and sends the EnableUser API request.
@@ -110,7 +57,7 @@ func (r EnableUserRequest) Send(ctx context.Context) (*EnableUserResponse, error
 	}
 
 	resp := &EnableUserResponse{
-		EnableUserOutput: r.Request.Data.(*EnableUserOutput),
+		EnableUserOutput: r.Request.Data.(*types.EnableUserOutput),
 		response:         &aws.Response{Request: r.Request},
 	}
 
@@ -120,7 +67,7 @@ func (r EnableUserRequest) Send(ctx context.Context) (*EnableUserResponse, error
 // EnableUserResponse is the response type for the
 // EnableUser API operation.
 type EnableUserResponse struct {
-	*EnableUserOutput
+	*types.EnableUserOutput
 
 	response *aws.Response
 }

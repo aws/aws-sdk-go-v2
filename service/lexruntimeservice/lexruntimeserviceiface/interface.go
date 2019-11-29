@@ -10,6 +10,7 @@ package lexruntimeserviceiface
 
 import (
 	"github.com/aws/aws-sdk-go-v2/service/lexruntimeservice"
+	"github.com/aws/aws-sdk-go-v2/service/lexruntimeservice/types"
 )
 
 // ClientAPI provides an interface to enable mocking the
@@ -43,7 +44,7 @@ import (
 //    type mockClientClient struct {
 //        lexruntimeserviceiface.ClientPI
 //    }
-//    func (m *mockClientClient) DeleteSession(input *lexruntimeservice.DeleteSessionInput) (*lexruntimeservice.DeleteSessionOutput, error) {
+//    func (m *mockClientClient) DeleteSession(input *types.DeleteSessionInput) (*types.DeleteSessionOutput, error) {
 //        // mock response/functionality
 //    }
 //
@@ -61,15 +62,15 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type ClientAPI interface {
-	DeleteSessionRequest(*lexruntimeservice.DeleteSessionInput) lexruntimeservice.DeleteSessionRequest
+	DeleteSessionRequest(*types.DeleteSessionInput) lexruntimeservice.DeleteSessionRequest
 
-	GetSessionRequest(*lexruntimeservice.GetSessionInput) lexruntimeservice.GetSessionRequest
+	GetSessionRequest(*types.GetSessionInput) lexruntimeservice.GetSessionRequest
 
-	PostContentRequest(*lexruntimeservice.PostContentInput) lexruntimeservice.PostContentRequest
+	PostContentRequest(*types.PostContentInput) lexruntimeservice.PostContentRequest
 
-	PostTextRequest(*lexruntimeservice.PostTextInput) lexruntimeservice.PostTextRequest
+	PostTextRequest(*types.PostTextInput) lexruntimeservice.PostTextRequest
 
-	PutSessionRequest(*lexruntimeservice.PutSessionInput) lexruntimeservice.PutSessionRequest
+	PutSessionRequest(*types.PutSessionInput) lexruntimeservice.PutSessionRequest
 }
 
 var _ ClientAPI = (*lexruntimeservice.Client)(nil)

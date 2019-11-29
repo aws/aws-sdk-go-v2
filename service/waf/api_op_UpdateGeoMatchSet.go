@@ -4,95 +4,10 @@ package waf
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/waf/types"
 )
-
-type UpdateGeoMatchSetInput struct {
-	_ struct{} `type:"structure"`
-
-	// The value returned by the most recent call to GetChangeToken.
-	//
-	// ChangeToken is a required field
-	ChangeToken *string `min:"1" type:"string" required:"true"`
-
-	// The GeoMatchSetId of the GeoMatchSet that you want to update. GeoMatchSetId
-	// is returned by CreateGeoMatchSet and by ListGeoMatchSets.
-	//
-	// GeoMatchSetId is a required field
-	GeoMatchSetId *string `min:"1" type:"string" required:"true"`
-
-	// An array of GeoMatchSetUpdate objects that you want to insert into or delete
-	// from an GeoMatchSet. For more information, see the applicable data types:
-	//
-	//    * GeoMatchSetUpdate: Contains Action and GeoMatchConstraint
-	//
-	//    * GeoMatchConstraint: Contains Type and Value You can have only one Type
-	//    and Value per GeoMatchConstraint. To add multiple countries, include multiple
-	//    GeoMatchSetUpdate objects in your request.
-	//
-	// Updates is a required field
-	Updates []GeoMatchSetUpdate `min:"1" type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s UpdateGeoMatchSetInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateGeoMatchSetInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateGeoMatchSetInput"}
-
-	if s.ChangeToken == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ChangeToken"))
-	}
-	if s.ChangeToken != nil && len(*s.ChangeToken) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ChangeToken", 1))
-	}
-
-	if s.GeoMatchSetId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("GeoMatchSetId"))
-	}
-	if s.GeoMatchSetId != nil && len(*s.GeoMatchSetId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("GeoMatchSetId", 1))
-	}
-
-	if s.Updates == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Updates"))
-	}
-	if s.Updates != nil && len(s.Updates) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Updates", 1))
-	}
-	if s.Updates != nil {
-		for i, v := range s.Updates {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Updates", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type UpdateGeoMatchSetOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The ChangeToken that you used to submit the UpdateGeoMatchSet request. You
-	// can also use this value to query the status of the request. For more information,
-	// see GetChangeTokenStatus.
-	ChangeToken *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s UpdateGeoMatchSetOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opUpdateGeoMatchSet = "UpdateGeoMatchSet"
 
@@ -136,7 +51,7 @@ const opUpdateGeoMatchSet = "UpdateGeoMatchSet"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/UpdateGeoMatchSet
-func (c *Client) UpdateGeoMatchSetRequest(input *UpdateGeoMatchSetInput) UpdateGeoMatchSetRequest {
+func (c *Client) UpdateGeoMatchSetRequest(input *types.UpdateGeoMatchSetInput) UpdateGeoMatchSetRequest {
 	op := &aws.Operation{
 		Name:       opUpdateGeoMatchSet,
 		HTTPMethod: "POST",
@@ -144,10 +59,10 @@ func (c *Client) UpdateGeoMatchSetRequest(input *UpdateGeoMatchSetInput) UpdateG
 	}
 
 	if input == nil {
-		input = &UpdateGeoMatchSetInput{}
+		input = &types.UpdateGeoMatchSetInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateGeoMatchSetOutput{})
+	req := c.newRequest(op, input, &types.UpdateGeoMatchSetOutput{})
 	return UpdateGeoMatchSetRequest{Request: req, Input: input, Copy: c.UpdateGeoMatchSetRequest}
 }
 
@@ -155,8 +70,8 @@ func (c *Client) UpdateGeoMatchSetRequest(input *UpdateGeoMatchSetInput) UpdateG
 // UpdateGeoMatchSet API operation.
 type UpdateGeoMatchSetRequest struct {
 	*aws.Request
-	Input *UpdateGeoMatchSetInput
-	Copy  func(*UpdateGeoMatchSetInput) UpdateGeoMatchSetRequest
+	Input *types.UpdateGeoMatchSetInput
+	Copy  func(*types.UpdateGeoMatchSetInput) UpdateGeoMatchSetRequest
 }
 
 // Send marshals and sends the UpdateGeoMatchSet API request.
@@ -168,7 +83,7 @@ func (r UpdateGeoMatchSetRequest) Send(ctx context.Context) (*UpdateGeoMatchSetR
 	}
 
 	resp := &UpdateGeoMatchSetResponse{
-		UpdateGeoMatchSetOutput: r.Request.Data.(*UpdateGeoMatchSetOutput),
+		UpdateGeoMatchSetOutput: r.Request.Data.(*types.UpdateGeoMatchSetOutput),
 		response:                &aws.Response{Request: r.Request},
 	}
 
@@ -178,7 +93,7 @@ func (r UpdateGeoMatchSetRequest) Send(ctx context.Context) (*UpdateGeoMatchSetR
 // UpdateGeoMatchSetResponse is the response type for the
 // UpdateGeoMatchSet API operation.
 type UpdateGeoMatchSetResponse struct {
-	*UpdateGeoMatchSetOutput
+	*types.UpdateGeoMatchSetOutput
 
 	response *aws.Response
 }

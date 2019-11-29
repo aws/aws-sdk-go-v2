@@ -6,68 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/types"
 )
-
-type VerifySoftwareTokenInput struct {
-	_ struct{} `type:"structure"`
-
-	// The access token.
-	AccessToken *string `type:"string" sensitive:"true"`
-
-	// The friendly device name.
-	FriendlyDeviceName *string `type:"string"`
-
-	// The session which should be passed both ways in challenge-response calls
-	// to the service.
-	Session *string `min:"20" type:"string"`
-
-	// The one time password computed using the secret code returned by
-	//
-	// UserCode is a required field
-	UserCode *string `min:"6" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s VerifySoftwareTokenInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *VerifySoftwareTokenInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "VerifySoftwareTokenInput"}
-	if s.Session != nil && len(*s.Session) < 20 {
-		invalidParams.Add(aws.NewErrParamMinLen("Session", 20))
-	}
-
-	if s.UserCode == nil {
-		invalidParams.Add(aws.NewErrParamRequired("UserCode"))
-	}
-	if s.UserCode != nil && len(*s.UserCode) < 6 {
-		invalidParams.Add(aws.NewErrParamMinLen("UserCode", 6))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type VerifySoftwareTokenOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The session which should be passed both ways in challenge-response calls
-	// to the service.
-	Session *string `min:"20" type:"string"`
-
-	// The status of the verify software token.
-	Status VerifySoftwareTokenResponseType `type:"string" enum:"true"`
-}
-
-// String returns the string representation
-func (s VerifySoftwareTokenOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opVerifySoftwareToken = "VerifySoftwareToken"
 
@@ -86,7 +26,7 @@ const opVerifySoftwareToken = "VerifySoftwareToken"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/VerifySoftwareToken
-func (c *Client) VerifySoftwareTokenRequest(input *VerifySoftwareTokenInput) VerifySoftwareTokenRequest {
+func (c *Client) VerifySoftwareTokenRequest(input *types.VerifySoftwareTokenInput) VerifySoftwareTokenRequest {
 	op := &aws.Operation{
 		Name:       opVerifySoftwareToken,
 		HTTPMethod: "POST",
@@ -94,10 +34,10 @@ func (c *Client) VerifySoftwareTokenRequest(input *VerifySoftwareTokenInput) Ver
 	}
 
 	if input == nil {
-		input = &VerifySoftwareTokenInput{}
+		input = &types.VerifySoftwareTokenInput{}
 	}
 
-	req := c.newRequest(op, input, &VerifySoftwareTokenOutput{})
+	req := c.newRequest(op, input, &types.VerifySoftwareTokenOutput{})
 	return VerifySoftwareTokenRequest{Request: req, Input: input, Copy: c.VerifySoftwareTokenRequest}
 }
 
@@ -105,8 +45,8 @@ func (c *Client) VerifySoftwareTokenRequest(input *VerifySoftwareTokenInput) Ver
 // VerifySoftwareToken API operation.
 type VerifySoftwareTokenRequest struct {
 	*aws.Request
-	Input *VerifySoftwareTokenInput
-	Copy  func(*VerifySoftwareTokenInput) VerifySoftwareTokenRequest
+	Input *types.VerifySoftwareTokenInput
+	Copy  func(*types.VerifySoftwareTokenInput) VerifySoftwareTokenRequest
 }
 
 // Send marshals and sends the VerifySoftwareToken API request.
@@ -118,7 +58,7 @@ func (r VerifySoftwareTokenRequest) Send(ctx context.Context) (*VerifySoftwareTo
 	}
 
 	resp := &VerifySoftwareTokenResponse{
-		VerifySoftwareTokenOutput: r.Request.Data.(*VerifySoftwareTokenOutput),
+		VerifySoftwareTokenOutput: r.Request.Data.(*types.VerifySoftwareTokenOutput),
 		response:                  &aws.Response{Request: r.Request},
 	}
 
@@ -128,7 +68,7 @@ func (r VerifySoftwareTokenRequest) Send(ctx context.Context) (*VerifySoftwareTo
 // VerifySoftwareTokenResponse is the response type for the
 // VerifySoftwareToken API operation.
 type VerifySoftwareTokenResponse struct {
-	*VerifySoftwareTokenOutput
+	*types.VerifySoftwareTokenOutput
 
 	response *aws.Response
 }

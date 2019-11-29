@@ -4,91 +4,10 @@ package ssm
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ssm/types"
 )
-
-type DescribeMaintenanceWindowScheduleInput struct {
-	_ struct{} `type:"structure"`
-
-	// Filters used to limit the range of results. For example, you can limit maintenance
-	// window executions to only those scheduled before or after a certain date
-	// and time.
-	Filters []PatchOrchestratorFilter `type:"list"`
-
-	// The maximum number of items to return for this call. The call also returns
-	// a token that you can specify in a subsequent call to get the next set of
-	// results.
-	MaxResults *int64 `min:"1" type:"integer"`
-
-	// The token for the next set of items to return. (You received this token from
-	// a previous call.)
-	NextToken *string `type:"string"`
-
-	// The type of resource you want to retrieve information about. For example,
-	// "INSTANCE".
-	ResourceType MaintenanceWindowResourceType `type:"string" enum:"true"`
-
-	// The instance ID or key/value pair to retrieve information about.
-	Targets []Target `type:"list"`
-
-	// The ID of the maintenance window to retrieve information about.
-	WindowId *string `min:"20" type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeMaintenanceWindowScheduleInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeMaintenanceWindowScheduleInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeMaintenanceWindowScheduleInput"}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-	if s.WindowId != nil && len(*s.WindowId) < 20 {
-		invalidParams.Add(aws.NewErrParamMinLen("WindowId", 20))
-	}
-	if s.Filters != nil {
-		for i, v := range s.Filters {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-	if s.Targets != nil {
-		for i, v := range s.Targets {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Targets", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribeMaintenanceWindowScheduleOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The token for the next set of items to return. (You use this token in the
-	// next call.)
-	NextToken *string `type:"string"`
-
-	// Information about maintenance window executions scheduled for the specified
-	// time range.
-	ScheduledWindowExecutions []ScheduledWindowExecution `type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeMaintenanceWindowScheduleOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeMaintenanceWindowSchedule = "DescribeMaintenanceWindowSchedule"
 
@@ -105,7 +24,7 @@ const opDescribeMaintenanceWindowSchedule = "DescribeMaintenanceWindowSchedule"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeMaintenanceWindowSchedule
-func (c *Client) DescribeMaintenanceWindowScheduleRequest(input *DescribeMaintenanceWindowScheduleInput) DescribeMaintenanceWindowScheduleRequest {
+func (c *Client) DescribeMaintenanceWindowScheduleRequest(input *types.DescribeMaintenanceWindowScheduleInput) DescribeMaintenanceWindowScheduleRequest {
 	op := &aws.Operation{
 		Name:       opDescribeMaintenanceWindowSchedule,
 		HTTPMethod: "POST",
@@ -113,10 +32,10 @@ func (c *Client) DescribeMaintenanceWindowScheduleRequest(input *DescribeMainten
 	}
 
 	if input == nil {
-		input = &DescribeMaintenanceWindowScheduleInput{}
+		input = &types.DescribeMaintenanceWindowScheduleInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeMaintenanceWindowScheduleOutput{})
+	req := c.newRequest(op, input, &types.DescribeMaintenanceWindowScheduleOutput{})
 	return DescribeMaintenanceWindowScheduleRequest{Request: req, Input: input, Copy: c.DescribeMaintenanceWindowScheduleRequest}
 }
 
@@ -124,8 +43,8 @@ func (c *Client) DescribeMaintenanceWindowScheduleRequest(input *DescribeMainten
 // DescribeMaintenanceWindowSchedule API operation.
 type DescribeMaintenanceWindowScheduleRequest struct {
 	*aws.Request
-	Input *DescribeMaintenanceWindowScheduleInput
-	Copy  func(*DescribeMaintenanceWindowScheduleInput) DescribeMaintenanceWindowScheduleRequest
+	Input *types.DescribeMaintenanceWindowScheduleInput
+	Copy  func(*types.DescribeMaintenanceWindowScheduleInput) DescribeMaintenanceWindowScheduleRequest
 }
 
 // Send marshals and sends the DescribeMaintenanceWindowSchedule API request.
@@ -137,7 +56,7 @@ func (r DescribeMaintenanceWindowScheduleRequest) Send(ctx context.Context) (*De
 	}
 
 	resp := &DescribeMaintenanceWindowScheduleResponse{
-		DescribeMaintenanceWindowScheduleOutput: r.Request.Data.(*DescribeMaintenanceWindowScheduleOutput),
+		DescribeMaintenanceWindowScheduleOutput: r.Request.Data.(*types.DescribeMaintenanceWindowScheduleOutput),
 		response:                                &aws.Response{Request: r.Request},
 	}
 
@@ -147,7 +66,7 @@ func (r DescribeMaintenanceWindowScheduleRequest) Send(ctx context.Context) (*De
 // DescribeMaintenanceWindowScheduleResponse is the response type for the
 // DescribeMaintenanceWindowSchedule API operation.
 type DescribeMaintenanceWindowScheduleResponse struct {
-	*DescribeMaintenanceWindowScheduleOutput
+	*types.DescribeMaintenanceWindowScheduleOutput
 
 	response *aws.Response
 }

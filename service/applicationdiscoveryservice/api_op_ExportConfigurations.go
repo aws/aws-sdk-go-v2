@@ -6,29 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/applicationdiscoveryservice/types"
 )
-
-type ExportConfigurationsInput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s ExportConfigurationsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type ExportConfigurationsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A unique identifier that you can use to query the export status.
-	ExportId *string `locationName:"exportId" type:"string"`
-}
-
-// String returns the string representation
-func (s ExportConfigurationsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opExportConfigurations = "ExportConfigurations"
 
@@ -51,7 +30,7 @@ const opExportConfigurations = "ExportConfigurations"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/discovery-2015-11-01/ExportConfigurations
-func (c *Client) ExportConfigurationsRequest(input *ExportConfigurationsInput) ExportConfigurationsRequest {
+func (c *Client) ExportConfigurationsRequest(input *types.ExportConfigurationsInput) ExportConfigurationsRequest {
 	if c.Client.Config.Logger != nil {
 		c.Client.Config.Logger.Log("This operation, ExportConfigurations, has been deprecated")
 	}
@@ -62,10 +41,10 @@ func (c *Client) ExportConfigurationsRequest(input *ExportConfigurationsInput) E
 	}
 
 	if input == nil {
-		input = &ExportConfigurationsInput{}
+		input = &types.ExportConfigurationsInput{}
 	}
 
-	req := c.newRequest(op, input, &ExportConfigurationsOutput{})
+	req := c.newRequest(op, input, &types.ExportConfigurationsOutput{})
 	return ExportConfigurationsRequest{Request: req, Input: input, Copy: c.ExportConfigurationsRequest}
 }
 
@@ -73,8 +52,8 @@ func (c *Client) ExportConfigurationsRequest(input *ExportConfigurationsInput) E
 // ExportConfigurations API operation.
 type ExportConfigurationsRequest struct {
 	*aws.Request
-	Input *ExportConfigurationsInput
-	Copy  func(*ExportConfigurationsInput) ExportConfigurationsRequest
+	Input *types.ExportConfigurationsInput
+	Copy  func(*types.ExportConfigurationsInput) ExportConfigurationsRequest
 }
 
 // Send marshals and sends the ExportConfigurations API request.
@@ -86,7 +65,7 @@ func (r ExportConfigurationsRequest) Send(ctx context.Context) (*ExportConfigura
 	}
 
 	resp := &ExportConfigurationsResponse{
-		ExportConfigurationsOutput: r.Request.Data.(*ExportConfigurationsOutput),
+		ExportConfigurationsOutput: r.Request.Data.(*types.ExportConfigurationsOutput),
 		response:                   &aws.Response{Request: r.Request},
 	}
 
@@ -96,7 +75,7 @@ func (r ExportConfigurationsRequest) Send(ctx context.Context) (*ExportConfigura
 // ExportConfigurationsResponse is the response type for the
 // ExportConfigurations API operation.
 type ExportConfigurationsResponse struct {
-	*ExportConfigurationsOutput
+	*types.ExportConfigurationsOutput
 
 	response *aws.Response
 }

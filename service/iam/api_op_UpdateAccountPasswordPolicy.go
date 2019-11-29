@@ -6,119 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/query"
+	"github.com/aws/aws-sdk-go-v2/service/iam/types"
 )
-
-type UpdateAccountPasswordPolicyInput struct {
-	_ struct{} `type:"structure"`
-
-	// Allows all IAM users in your account to use the AWS Management Console to
-	// change their own passwords. For more information, see Letting IAM Users Change
-	// Their Own Passwords (https://docs.aws.amazon.com/IAM/latest/UserGuide/HowToPwdIAMUser.html)
-	// in the IAM User Guide.
-	//
-	// If you do not specify a value for this parameter, then the operation uses
-	// the default value of false. The result is that IAM users in the account do
-	// not automatically have permissions to change their own password.
-	AllowUsersToChangePassword *bool `type:"boolean"`
-
-	// Prevents IAM users from setting a new password after their password has expired.
-	// The IAM user cannot be accessed until an administrator resets the password.
-	//
-	// If you do not specify a value for this parameter, then the operation uses
-	// the default value of false. The result is that IAM users can change their
-	// passwords after they expire and continue to sign in as the user.
-	HardExpiry *bool `type:"boolean"`
-
-	// The number of days that an IAM user password is valid.
-	//
-	// If you do not specify a value for this parameter, then the operation uses
-	// the default value of 0. The result is that IAM user passwords never expire.
-	MaxPasswordAge *int64 `min:"1" type:"integer"`
-
-	// The minimum number of characters allowed in an IAM user password.
-	//
-	// If you do not specify a value for this parameter, then the operation uses
-	// the default value of 6.
-	MinimumPasswordLength *int64 `min:"6" type:"integer"`
-
-	// Specifies the number of previous passwords that IAM users are prevented from
-	// reusing.
-	//
-	// If you do not specify a value for this parameter, then the operation uses
-	// the default value of 0. The result is that IAM users are not prevented from
-	// reusing previous passwords.
-	PasswordReusePrevention *int64 `min:"1" type:"integer"`
-
-	// Specifies whether IAM user passwords must contain at least one lowercase
-	// character from the ISO basic Latin alphabet (a to z).
-	//
-	// If you do not specify a value for this parameter, then the operation uses
-	// the default value of false. The result is that passwords do not require at
-	// least one lowercase character.
-	RequireLowercaseCharacters *bool `type:"boolean"`
-
-	// Specifies whether IAM user passwords must contain at least one numeric character
-	// (0 to 9).
-	//
-	// If you do not specify a value for this parameter, then the operation uses
-	// the default value of false. The result is that passwords do not require at
-	// least one numeric character.
-	RequireNumbers *bool `type:"boolean"`
-
-	// Specifies whether IAM user passwords must contain at least one of the following
-	// non-alphanumeric characters:
-	//
-	// ! @ # $ % ^ & * ( ) _ + - = [ ] { } | '
-	//
-	// If you do not specify a value for this parameter, then the operation uses
-	// the default value of false. The result is that passwords do not require at
-	// least one symbol character.
-	RequireSymbols *bool `type:"boolean"`
-
-	// Specifies whether IAM user passwords must contain at least one uppercase
-	// character from the ISO basic Latin alphabet (A to Z).
-	//
-	// If you do not specify a value for this parameter, then the operation uses
-	// the default value of false. The result is that passwords do not require at
-	// least one uppercase character.
-	RequireUppercaseCharacters *bool `type:"boolean"`
-}
-
-// String returns the string representation
-func (s UpdateAccountPasswordPolicyInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateAccountPasswordPolicyInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateAccountPasswordPolicyInput"}
-	if s.MaxPasswordAge != nil && *s.MaxPasswordAge < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxPasswordAge", 1))
-	}
-	if s.MinimumPasswordLength != nil && *s.MinimumPasswordLength < 6 {
-		invalidParams.Add(aws.NewErrParamMinValue("MinimumPasswordLength", 6))
-	}
-	if s.PasswordReusePrevention != nil && *s.PasswordReusePrevention < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("PasswordReusePrevention", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type UpdateAccountPasswordPolicyOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s UpdateAccountPasswordPolicyOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opUpdateAccountPasswordPolicy = "UpdateAccountPasswordPolicy"
 
@@ -146,7 +37,7 @@ const opUpdateAccountPasswordPolicy = "UpdateAccountPasswordPolicy"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/UpdateAccountPasswordPolicy
-func (c *Client) UpdateAccountPasswordPolicyRequest(input *UpdateAccountPasswordPolicyInput) UpdateAccountPasswordPolicyRequest {
+func (c *Client) UpdateAccountPasswordPolicyRequest(input *types.UpdateAccountPasswordPolicyInput) UpdateAccountPasswordPolicyRequest {
 	op := &aws.Operation{
 		Name:       opUpdateAccountPasswordPolicy,
 		HTTPMethod: "POST",
@@ -154,10 +45,10 @@ func (c *Client) UpdateAccountPasswordPolicyRequest(input *UpdateAccountPassword
 	}
 
 	if input == nil {
-		input = &UpdateAccountPasswordPolicyInput{}
+		input = &types.UpdateAccountPasswordPolicyInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateAccountPasswordPolicyOutput{})
+	req := c.newRequest(op, input, &types.UpdateAccountPasswordPolicyOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return UpdateAccountPasswordPolicyRequest{Request: req, Input: input, Copy: c.UpdateAccountPasswordPolicyRequest}
@@ -167,8 +58,8 @@ func (c *Client) UpdateAccountPasswordPolicyRequest(input *UpdateAccountPassword
 // UpdateAccountPasswordPolicy API operation.
 type UpdateAccountPasswordPolicyRequest struct {
 	*aws.Request
-	Input *UpdateAccountPasswordPolicyInput
-	Copy  func(*UpdateAccountPasswordPolicyInput) UpdateAccountPasswordPolicyRequest
+	Input *types.UpdateAccountPasswordPolicyInput
+	Copy  func(*types.UpdateAccountPasswordPolicyInput) UpdateAccountPasswordPolicyRequest
 }
 
 // Send marshals and sends the UpdateAccountPasswordPolicy API request.
@@ -180,7 +71,7 @@ func (r UpdateAccountPasswordPolicyRequest) Send(ctx context.Context) (*UpdateAc
 	}
 
 	resp := &UpdateAccountPasswordPolicyResponse{
-		UpdateAccountPasswordPolicyOutput: r.Request.Data.(*UpdateAccountPasswordPolicyOutput),
+		UpdateAccountPasswordPolicyOutput: r.Request.Data.(*types.UpdateAccountPasswordPolicyOutput),
 		response:                          &aws.Response{Request: r.Request},
 	}
 
@@ -190,7 +81,7 @@ func (r UpdateAccountPasswordPolicyRequest) Send(ctx context.Context) (*UpdateAc
 // UpdateAccountPasswordPolicyResponse is the response type for the
 // UpdateAccountPasswordPolicy API operation.
 type UpdateAccountPasswordPolicyResponse struct {
-	*UpdateAccountPasswordPolicyOutput
+	*types.UpdateAccountPasswordPolicyOutput
 
 	response *aws.Response
 }

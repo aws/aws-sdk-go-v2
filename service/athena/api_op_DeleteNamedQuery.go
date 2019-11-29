@@ -6,45 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/athena/types"
 )
-
-type DeleteNamedQueryInput struct {
-	_ struct{} `type:"structure"`
-
-	// The unique ID of the query to delete.
-	//
-	// NamedQueryId is a required field
-	NamedQueryId *string `type:"string" required:"true" idempotencyToken:"true"`
-}
-
-// String returns the string representation
-func (s DeleteNamedQueryInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteNamedQueryInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteNamedQueryInput"}
-
-	if s.NamedQueryId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("NamedQueryId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteNamedQueryOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteNamedQueryOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteNamedQuery = "DeleteNamedQuery"
 
@@ -66,7 +29,7 @@ const opDeleteNamedQuery = "DeleteNamedQuery"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/DeleteNamedQuery
-func (c *Client) DeleteNamedQueryRequest(input *DeleteNamedQueryInput) DeleteNamedQueryRequest {
+func (c *Client) DeleteNamedQueryRequest(input *types.DeleteNamedQueryInput) DeleteNamedQueryRequest {
 	op := &aws.Operation{
 		Name:       opDeleteNamedQuery,
 		HTTPMethod: "POST",
@@ -74,10 +37,10 @@ func (c *Client) DeleteNamedQueryRequest(input *DeleteNamedQueryInput) DeleteNam
 	}
 
 	if input == nil {
-		input = &DeleteNamedQueryInput{}
+		input = &types.DeleteNamedQueryInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteNamedQueryOutput{})
+	req := c.newRequest(op, input, &types.DeleteNamedQueryOutput{})
 	return DeleteNamedQueryRequest{Request: req, Input: input, Copy: c.DeleteNamedQueryRequest}
 }
 
@@ -85,8 +48,8 @@ func (c *Client) DeleteNamedQueryRequest(input *DeleteNamedQueryInput) DeleteNam
 // DeleteNamedQuery API operation.
 type DeleteNamedQueryRequest struct {
 	*aws.Request
-	Input *DeleteNamedQueryInput
-	Copy  func(*DeleteNamedQueryInput) DeleteNamedQueryRequest
+	Input *types.DeleteNamedQueryInput
+	Copy  func(*types.DeleteNamedQueryInput) DeleteNamedQueryRequest
 }
 
 // Send marshals and sends the DeleteNamedQuery API request.
@@ -98,7 +61,7 @@ func (r DeleteNamedQueryRequest) Send(ctx context.Context) (*DeleteNamedQueryRes
 	}
 
 	resp := &DeleteNamedQueryResponse{
-		DeleteNamedQueryOutput: r.Request.Data.(*DeleteNamedQueryOutput),
+		DeleteNamedQueryOutput: r.Request.Data.(*types.DeleteNamedQueryOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -108,7 +71,7 @@ func (r DeleteNamedQueryRequest) Send(ctx context.Context) (*DeleteNamedQueryRes
 // DeleteNamedQueryResponse is the response type for the
 // DeleteNamedQuery API operation.
 type DeleteNamedQueryResponse struct {
-	*DeleteNamedQueryOutput
+	*types.DeleteNamedQueryOutput
 
 	response *aws.Response
 }

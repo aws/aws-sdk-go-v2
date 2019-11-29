@@ -6,49 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/iotthingsgraph/types"
 )
-
-type DeleteFlowTemplateInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the workflow to be deleted.
-	//
-	// The ID should be in the following format.
-	//
-	// urn:tdm:REGION/ACCOUNT ID/default:workflow:WORKFLOWNAME
-	//
-	// Id is a required field
-	Id *string `locationName:"id" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteFlowTemplateInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteFlowTemplateInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteFlowTemplateInput"}
-
-	if s.Id == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Id"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteFlowTemplateOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteFlowTemplateOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteFlowTemplate = "DeleteFlowTemplate"
 
@@ -68,7 +27,7 @@ const opDeleteFlowTemplate = "DeleteFlowTemplate"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iotthingsgraph-2018-09-06/DeleteFlowTemplate
-func (c *Client) DeleteFlowTemplateRequest(input *DeleteFlowTemplateInput) DeleteFlowTemplateRequest {
+func (c *Client) DeleteFlowTemplateRequest(input *types.DeleteFlowTemplateInput) DeleteFlowTemplateRequest {
 	op := &aws.Operation{
 		Name:       opDeleteFlowTemplate,
 		HTTPMethod: "POST",
@@ -76,10 +35,10 @@ func (c *Client) DeleteFlowTemplateRequest(input *DeleteFlowTemplateInput) Delet
 	}
 
 	if input == nil {
-		input = &DeleteFlowTemplateInput{}
+		input = &types.DeleteFlowTemplateInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteFlowTemplateOutput{})
+	req := c.newRequest(op, input, &types.DeleteFlowTemplateOutput{})
 	return DeleteFlowTemplateRequest{Request: req, Input: input, Copy: c.DeleteFlowTemplateRequest}
 }
 
@@ -87,8 +46,8 @@ func (c *Client) DeleteFlowTemplateRequest(input *DeleteFlowTemplateInput) Delet
 // DeleteFlowTemplate API operation.
 type DeleteFlowTemplateRequest struct {
 	*aws.Request
-	Input *DeleteFlowTemplateInput
-	Copy  func(*DeleteFlowTemplateInput) DeleteFlowTemplateRequest
+	Input *types.DeleteFlowTemplateInput
+	Copy  func(*types.DeleteFlowTemplateInput) DeleteFlowTemplateRequest
 }
 
 // Send marshals and sends the DeleteFlowTemplate API request.
@@ -100,7 +59,7 @@ func (r DeleteFlowTemplateRequest) Send(ctx context.Context) (*DeleteFlowTemplat
 	}
 
 	resp := &DeleteFlowTemplateResponse{
-		DeleteFlowTemplateOutput: r.Request.Data.(*DeleteFlowTemplateOutput),
+		DeleteFlowTemplateOutput: r.Request.Data.(*types.DeleteFlowTemplateOutput),
 		response:                 &aws.Response{Request: r.Request},
 	}
 
@@ -110,7 +69,7 @@ func (r DeleteFlowTemplateRequest) Send(ctx context.Context) (*DeleteFlowTemplat
 // DeleteFlowTemplateResponse is the response type for the
 // DeleteFlowTemplate API operation.
 type DeleteFlowTemplateResponse struct {
-	*DeleteFlowTemplateOutput
+	*types.DeleteFlowTemplateOutput
 
 	response *aws.Response
 }

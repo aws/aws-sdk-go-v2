@@ -6,45 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/elasticloadbalancingv2/types"
 )
-
-type DeleteTargetGroupInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the target group.
-	//
-	// TargetGroupArn is a required field
-	TargetGroupArn *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteTargetGroupInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteTargetGroupInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteTargetGroupInput"}
-
-	if s.TargetGroupArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("TargetGroupArn"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteTargetGroupOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteTargetGroupOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteTargetGroup = "DeleteTargetGroup"
 
@@ -64,7 +27,7 @@ const opDeleteTargetGroup = "DeleteTargetGroup"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/DeleteTargetGroup
-func (c *Client) DeleteTargetGroupRequest(input *DeleteTargetGroupInput) DeleteTargetGroupRequest {
+func (c *Client) DeleteTargetGroupRequest(input *types.DeleteTargetGroupInput) DeleteTargetGroupRequest {
 	op := &aws.Operation{
 		Name:       opDeleteTargetGroup,
 		HTTPMethod: "POST",
@@ -72,10 +35,10 @@ func (c *Client) DeleteTargetGroupRequest(input *DeleteTargetGroupInput) DeleteT
 	}
 
 	if input == nil {
-		input = &DeleteTargetGroupInput{}
+		input = &types.DeleteTargetGroupInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteTargetGroupOutput{})
+	req := c.newRequest(op, input, &types.DeleteTargetGroupOutput{})
 	return DeleteTargetGroupRequest{Request: req, Input: input, Copy: c.DeleteTargetGroupRequest}
 }
 
@@ -83,8 +46,8 @@ func (c *Client) DeleteTargetGroupRequest(input *DeleteTargetGroupInput) DeleteT
 // DeleteTargetGroup API operation.
 type DeleteTargetGroupRequest struct {
 	*aws.Request
-	Input *DeleteTargetGroupInput
-	Copy  func(*DeleteTargetGroupInput) DeleteTargetGroupRequest
+	Input *types.DeleteTargetGroupInput
+	Copy  func(*types.DeleteTargetGroupInput) DeleteTargetGroupRequest
 }
 
 // Send marshals and sends the DeleteTargetGroup API request.
@@ -96,7 +59,7 @@ func (r DeleteTargetGroupRequest) Send(ctx context.Context) (*DeleteTargetGroupR
 	}
 
 	resp := &DeleteTargetGroupResponse{
-		DeleteTargetGroupOutput: r.Request.Data.(*DeleteTargetGroupOutput),
+		DeleteTargetGroupOutput: r.Request.Data.(*types.DeleteTargetGroupOutput),
 		response:                &aws.Response{Request: r.Request},
 	}
 
@@ -106,7 +69,7 @@ func (r DeleteTargetGroupRequest) Send(ctx context.Context) (*DeleteTargetGroupR
 // DeleteTargetGroupResponse is the response type for the
 // DeleteTargetGroup API operation.
 type DeleteTargetGroupResponse struct {
-	*DeleteTargetGroupOutput
+	*types.DeleteTargetGroupOutput
 
 	response *aws.Response
 }

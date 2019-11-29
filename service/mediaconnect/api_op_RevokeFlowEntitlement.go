@@ -6,96 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/mediaconnect/types"
 )
-
-type RevokeFlowEntitlementInput struct {
-	_ struct{} `type:"structure"`
-
-	// EntitlementArn is a required field
-	EntitlementArn *string `location:"uri" locationName:"entitlementArn" type:"string" required:"true"`
-
-	// FlowArn is a required field
-	FlowArn *string `location:"uri" locationName:"flowArn" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s RevokeFlowEntitlementInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *RevokeFlowEntitlementInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "RevokeFlowEntitlementInput"}
-
-	if s.EntitlementArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("EntitlementArn"))
-	}
-
-	if s.FlowArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("FlowArn"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s RevokeFlowEntitlementInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.EntitlementArn != nil {
-		v := *s.EntitlementArn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "entitlementArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.FlowArn != nil {
-		v := *s.FlowArn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "flowArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-// The result of a successful RevokeFlowEntitlement request. The response includes
-// the ARN of the flow that was updated and the ARN of the entitlement that
-// was revoked.
-type RevokeFlowEntitlementOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The ARN of the entitlement that was revoked.
-	EntitlementArn *string `locationName:"entitlementArn" type:"string"`
-
-	// The ARN of the flow that the entitlement was revoked from.
-	FlowArn *string `locationName:"flowArn" type:"string"`
-}
-
-// String returns the string representation
-func (s RevokeFlowEntitlementOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s RevokeFlowEntitlementOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.EntitlementArn != nil {
-		v := *s.EntitlementArn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "entitlementArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.FlowArn != nil {
-		v := *s.FlowArn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "flowArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opRevokeFlowEntitlement = "RevokeFlowEntitlement"
 
@@ -113,7 +25,7 @@ const opRevokeFlowEntitlement = "RevokeFlowEntitlement"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/RevokeFlowEntitlement
-func (c *Client) RevokeFlowEntitlementRequest(input *RevokeFlowEntitlementInput) RevokeFlowEntitlementRequest {
+func (c *Client) RevokeFlowEntitlementRequest(input *types.RevokeFlowEntitlementInput) RevokeFlowEntitlementRequest {
 	op := &aws.Operation{
 		Name:       opRevokeFlowEntitlement,
 		HTTPMethod: "DELETE",
@@ -121,10 +33,10 @@ func (c *Client) RevokeFlowEntitlementRequest(input *RevokeFlowEntitlementInput)
 	}
 
 	if input == nil {
-		input = &RevokeFlowEntitlementInput{}
+		input = &types.RevokeFlowEntitlementInput{}
 	}
 
-	req := c.newRequest(op, input, &RevokeFlowEntitlementOutput{})
+	req := c.newRequest(op, input, &types.RevokeFlowEntitlementOutput{})
 	return RevokeFlowEntitlementRequest{Request: req, Input: input, Copy: c.RevokeFlowEntitlementRequest}
 }
 
@@ -132,8 +44,8 @@ func (c *Client) RevokeFlowEntitlementRequest(input *RevokeFlowEntitlementInput)
 // RevokeFlowEntitlement API operation.
 type RevokeFlowEntitlementRequest struct {
 	*aws.Request
-	Input *RevokeFlowEntitlementInput
-	Copy  func(*RevokeFlowEntitlementInput) RevokeFlowEntitlementRequest
+	Input *types.RevokeFlowEntitlementInput
+	Copy  func(*types.RevokeFlowEntitlementInput) RevokeFlowEntitlementRequest
 }
 
 // Send marshals and sends the RevokeFlowEntitlement API request.
@@ -145,7 +57,7 @@ func (r RevokeFlowEntitlementRequest) Send(ctx context.Context) (*RevokeFlowEnti
 	}
 
 	resp := &RevokeFlowEntitlementResponse{
-		RevokeFlowEntitlementOutput: r.Request.Data.(*RevokeFlowEntitlementOutput),
+		RevokeFlowEntitlementOutput: r.Request.Data.(*types.RevokeFlowEntitlementOutput),
 		response:                    &aws.Response{Request: r.Request},
 	}
 
@@ -155,7 +67,7 @@ func (r RevokeFlowEntitlementRequest) Send(ctx context.Context) (*RevokeFlowEnti
 // RevokeFlowEntitlementResponse is the response type for the
 // RevokeFlowEntitlement API operation.
 type RevokeFlowEntitlementResponse struct {
-	*RevokeFlowEntitlementOutput
+	*types.RevokeFlowEntitlementOutput
 
 	response *aws.Response
 }

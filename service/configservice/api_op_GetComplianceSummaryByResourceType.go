@@ -6,38 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/configservice/types"
 )
-
-type GetComplianceSummaryByResourceTypeInput struct {
-	_ struct{} `type:"structure"`
-
-	// Specify one or more resource types to get the number of resources that are
-	// compliant and the number that are noncompliant for each resource type.
-	//
-	// For this request, you can specify an AWS resource type such as AWS::EC2::Instance.
-	// You can specify that the resource type is an AWS account by specifying AWS::::Account.
-	ResourceTypes []string `type:"list"`
-}
-
-// String returns the string representation
-func (s GetComplianceSummaryByResourceTypeInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type GetComplianceSummaryByResourceTypeOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The number of resources that are compliant and the number that are noncompliant.
-	// If one or more resource types were provided with the request, the numbers
-	// are returned for each resource type. The maximum number returned is 100.
-	ComplianceSummariesByResourceType []ComplianceSummaryByResourceType `type:"list"`
-}
-
-// String returns the string representation
-func (s GetComplianceSummaryByResourceTypeOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetComplianceSummaryByResourceType = "GetComplianceSummaryByResourceType"
 
@@ -56,7 +26,7 @@ const opGetComplianceSummaryByResourceType = "GetComplianceSummaryByResourceType
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/GetComplianceSummaryByResourceType
-func (c *Client) GetComplianceSummaryByResourceTypeRequest(input *GetComplianceSummaryByResourceTypeInput) GetComplianceSummaryByResourceTypeRequest {
+func (c *Client) GetComplianceSummaryByResourceTypeRequest(input *types.GetComplianceSummaryByResourceTypeInput) GetComplianceSummaryByResourceTypeRequest {
 	op := &aws.Operation{
 		Name:       opGetComplianceSummaryByResourceType,
 		HTTPMethod: "POST",
@@ -64,10 +34,10 @@ func (c *Client) GetComplianceSummaryByResourceTypeRequest(input *GetComplianceS
 	}
 
 	if input == nil {
-		input = &GetComplianceSummaryByResourceTypeInput{}
+		input = &types.GetComplianceSummaryByResourceTypeInput{}
 	}
 
-	req := c.newRequest(op, input, &GetComplianceSummaryByResourceTypeOutput{})
+	req := c.newRequest(op, input, &types.GetComplianceSummaryByResourceTypeOutput{})
 	return GetComplianceSummaryByResourceTypeRequest{Request: req, Input: input, Copy: c.GetComplianceSummaryByResourceTypeRequest}
 }
 
@@ -75,8 +45,8 @@ func (c *Client) GetComplianceSummaryByResourceTypeRequest(input *GetComplianceS
 // GetComplianceSummaryByResourceType API operation.
 type GetComplianceSummaryByResourceTypeRequest struct {
 	*aws.Request
-	Input *GetComplianceSummaryByResourceTypeInput
-	Copy  func(*GetComplianceSummaryByResourceTypeInput) GetComplianceSummaryByResourceTypeRequest
+	Input *types.GetComplianceSummaryByResourceTypeInput
+	Copy  func(*types.GetComplianceSummaryByResourceTypeInput) GetComplianceSummaryByResourceTypeRequest
 }
 
 // Send marshals and sends the GetComplianceSummaryByResourceType API request.
@@ -88,7 +58,7 @@ func (r GetComplianceSummaryByResourceTypeRequest) Send(ctx context.Context) (*G
 	}
 
 	resp := &GetComplianceSummaryByResourceTypeResponse{
-		GetComplianceSummaryByResourceTypeOutput: r.Request.Data.(*GetComplianceSummaryByResourceTypeOutput),
+		GetComplianceSummaryByResourceTypeOutput: r.Request.Data.(*types.GetComplianceSummaryByResourceTypeOutput),
 		response:                                 &aws.Response{Request: r.Request},
 	}
 
@@ -98,7 +68,7 @@ func (r GetComplianceSummaryByResourceTypeRequest) Send(ctx context.Context) (*G
 // GetComplianceSummaryByResourceTypeResponse is the response type for the
 // GetComplianceSummaryByResourceType API operation.
 type GetComplianceSummaryByResourceTypeResponse struct {
-	*GetComplianceSummaryByResourceTypeOutput
+	*types.GetComplianceSummaryByResourceTypeOutput
 
 	response *aws.Response
 }

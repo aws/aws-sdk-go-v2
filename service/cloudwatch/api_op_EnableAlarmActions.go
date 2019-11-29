@@ -6,47 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/query"
+	"github.com/aws/aws-sdk-go-v2/service/cloudwatch/types"
 )
-
-type EnableAlarmActionsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The names of the alarms.
-	//
-	// AlarmNames is a required field
-	AlarmNames []string `type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s EnableAlarmActionsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *EnableAlarmActionsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "EnableAlarmActionsInput"}
-
-	if s.AlarmNames == nil {
-		invalidParams.Add(aws.NewErrParamRequired("AlarmNames"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type EnableAlarmActionsOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s EnableAlarmActionsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opEnableAlarmActions = "EnableAlarmActions"
 
@@ -63,7 +26,7 @@ const opEnableAlarmActions = "EnableAlarmActions"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/EnableAlarmActions
-func (c *Client) EnableAlarmActionsRequest(input *EnableAlarmActionsInput) EnableAlarmActionsRequest {
+func (c *Client) EnableAlarmActionsRequest(input *types.EnableAlarmActionsInput) EnableAlarmActionsRequest {
 	op := &aws.Operation{
 		Name:       opEnableAlarmActions,
 		HTTPMethod: "POST",
@@ -71,10 +34,10 @@ func (c *Client) EnableAlarmActionsRequest(input *EnableAlarmActionsInput) Enabl
 	}
 
 	if input == nil {
-		input = &EnableAlarmActionsInput{}
+		input = &types.EnableAlarmActionsInput{}
 	}
 
-	req := c.newRequest(op, input, &EnableAlarmActionsOutput{})
+	req := c.newRequest(op, input, &types.EnableAlarmActionsOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return EnableAlarmActionsRequest{Request: req, Input: input, Copy: c.EnableAlarmActionsRequest}
@@ -84,8 +47,8 @@ func (c *Client) EnableAlarmActionsRequest(input *EnableAlarmActionsInput) Enabl
 // EnableAlarmActions API operation.
 type EnableAlarmActionsRequest struct {
 	*aws.Request
-	Input *EnableAlarmActionsInput
-	Copy  func(*EnableAlarmActionsInput) EnableAlarmActionsRequest
+	Input *types.EnableAlarmActionsInput
+	Copy  func(*types.EnableAlarmActionsInput) EnableAlarmActionsRequest
 }
 
 // Send marshals and sends the EnableAlarmActions API request.
@@ -97,7 +60,7 @@ func (r EnableAlarmActionsRequest) Send(ctx context.Context) (*EnableAlarmAction
 	}
 
 	resp := &EnableAlarmActionsResponse{
-		EnableAlarmActionsOutput: r.Request.Data.(*EnableAlarmActionsOutput),
+		EnableAlarmActionsOutput: r.Request.Data.(*types.EnableAlarmActionsOutput),
 		response:                 &aws.Response{Request: r.Request},
 	}
 
@@ -107,7 +70,7 @@ func (r EnableAlarmActionsRequest) Send(ctx context.Context) (*EnableAlarmAction
 // EnableAlarmActionsResponse is the response type for the
 // EnableAlarmActions API operation.
 type EnableAlarmActionsResponse struct {
-	*EnableAlarmActionsOutput
+	*types.EnableAlarmActionsOutput
 
 	response *aws.Response
 }

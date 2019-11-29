@@ -6,70 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/iot1clickdevicesservice/types"
 )
-
-type UnclaimDeviceInput struct {
-	_ struct{} `type:"structure"`
-
-	// DeviceId is a required field
-	DeviceId *string `location:"uri" locationName:"deviceId" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s UnclaimDeviceInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UnclaimDeviceInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UnclaimDeviceInput"}
-
-	if s.DeviceId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DeviceId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s UnclaimDeviceInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.DeviceId != nil {
-		v := *s.DeviceId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "deviceId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type UnclaimDeviceOutput struct {
-	_ struct{} `type:"structure"`
-
-	State *string `locationName:"state" type:"string"`
-}
-
-// String returns the string representation
-func (s UnclaimDeviceOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s UnclaimDeviceOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.State != nil {
-		v := *s.State
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "state", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opUnclaimDevice = "UnclaimDevice"
 
@@ -86,7 +24,7 @@ const opUnclaimDevice = "UnclaimDevice"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/devices-2018-05-14/UnclaimDevice
-func (c *Client) UnclaimDeviceRequest(input *UnclaimDeviceInput) UnclaimDeviceRequest {
+func (c *Client) UnclaimDeviceRequest(input *types.UnclaimDeviceInput) UnclaimDeviceRequest {
 	op := &aws.Operation{
 		Name:       opUnclaimDevice,
 		HTTPMethod: "PUT",
@@ -94,10 +32,10 @@ func (c *Client) UnclaimDeviceRequest(input *UnclaimDeviceInput) UnclaimDeviceRe
 	}
 
 	if input == nil {
-		input = &UnclaimDeviceInput{}
+		input = &types.UnclaimDeviceInput{}
 	}
 
-	req := c.newRequest(op, input, &UnclaimDeviceOutput{})
+	req := c.newRequest(op, input, &types.UnclaimDeviceOutput{})
 	return UnclaimDeviceRequest{Request: req, Input: input, Copy: c.UnclaimDeviceRequest}
 }
 
@@ -105,8 +43,8 @@ func (c *Client) UnclaimDeviceRequest(input *UnclaimDeviceInput) UnclaimDeviceRe
 // UnclaimDevice API operation.
 type UnclaimDeviceRequest struct {
 	*aws.Request
-	Input *UnclaimDeviceInput
-	Copy  func(*UnclaimDeviceInput) UnclaimDeviceRequest
+	Input *types.UnclaimDeviceInput
+	Copy  func(*types.UnclaimDeviceInput) UnclaimDeviceRequest
 }
 
 // Send marshals and sends the UnclaimDevice API request.
@@ -118,7 +56,7 @@ func (r UnclaimDeviceRequest) Send(ctx context.Context) (*UnclaimDeviceResponse,
 	}
 
 	resp := &UnclaimDeviceResponse{
-		UnclaimDeviceOutput: r.Request.Data.(*UnclaimDeviceOutput),
+		UnclaimDeviceOutput: r.Request.Data.(*types.UnclaimDeviceOutput),
 		response:            &aws.Response{Request: r.Request},
 	}
 
@@ -128,7 +66,7 @@ func (r UnclaimDeviceRequest) Send(ctx context.Context) (*UnclaimDeviceResponse,
 // UnclaimDeviceResponse is the response type for the
 // UnclaimDevice API operation.
 type UnclaimDeviceResponse struct {
-	*UnclaimDeviceOutput
+	*types.UnclaimDeviceOutput
 
 	response *aws.Response
 }

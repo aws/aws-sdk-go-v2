@@ -6,72 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/workmail/types"
 )
-
-type DeleteAliasInput struct {
-	_ struct{} `type:"structure"`
-
-	// The aliases to be removed from the user's set of aliases. Duplicate entries
-	// in the list are collapsed into single entries (the list is transformed into
-	// a set).
-	//
-	// Alias is a required field
-	Alias *string `min:"1" type:"string" required:"true"`
-
-	// The identifier for the member (user or group) from which to have the aliases
-	// removed.
-	//
-	// EntityId is a required field
-	EntityId *string `min:"12" type:"string" required:"true"`
-
-	// The identifier for the organization under which the user exists.
-	//
-	// OrganizationId is a required field
-	OrganizationId *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteAliasInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteAliasInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteAliasInput"}
-
-	if s.Alias == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Alias"))
-	}
-	if s.Alias != nil && len(*s.Alias) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Alias", 1))
-	}
-
-	if s.EntityId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("EntityId"))
-	}
-	if s.EntityId != nil && len(*s.EntityId) < 12 {
-		invalidParams.Add(aws.NewErrParamMinLen("EntityId", 12))
-	}
-
-	if s.OrganizationId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("OrganizationId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteAliasOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteAliasOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteAlias = "DeleteAlias"
 
@@ -88,7 +24,7 @@ const opDeleteAlias = "DeleteAlias"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/DeleteAlias
-func (c *Client) DeleteAliasRequest(input *DeleteAliasInput) DeleteAliasRequest {
+func (c *Client) DeleteAliasRequest(input *types.DeleteAliasInput) DeleteAliasRequest {
 	op := &aws.Operation{
 		Name:       opDeleteAlias,
 		HTTPMethod: "POST",
@@ -96,10 +32,10 @@ func (c *Client) DeleteAliasRequest(input *DeleteAliasInput) DeleteAliasRequest 
 	}
 
 	if input == nil {
-		input = &DeleteAliasInput{}
+		input = &types.DeleteAliasInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteAliasOutput{})
+	req := c.newRequest(op, input, &types.DeleteAliasOutput{})
 	return DeleteAliasRequest{Request: req, Input: input, Copy: c.DeleteAliasRequest}
 }
 
@@ -107,8 +43,8 @@ func (c *Client) DeleteAliasRequest(input *DeleteAliasInput) DeleteAliasRequest 
 // DeleteAlias API operation.
 type DeleteAliasRequest struct {
 	*aws.Request
-	Input *DeleteAliasInput
-	Copy  func(*DeleteAliasInput) DeleteAliasRequest
+	Input *types.DeleteAliasInput
+	Copy  func(*types.DeleteAliasInput) DeleteAliasRequest
 }
 
 // Send marshals and sends the DeleteAlias API request.
@@ -120,7 +56,7 @@ func (r DeleteAliasRequest) Send(ctx context.Context) (*DeleteAliasResponse, err
 	}
 
 	resp := &DeleteAliasResponse{
-		DeleteAliasOutput: r.Request.Data.(*DeleteAliasOutput),
+		DeleteAliasOutput: r.Request.Data.(*types.DeleteAliasOutput),
 		response:          &aws.Response{Request: r.Request},
 	}
 
@@ -130,7 +66,7 @@ func (r DeleteAliasRequest) Send(ctx context.Context) (*DeleteAliasResponse, err
 // DeleteAliasResponse is the response type for the
 // DeleteAlias API operation.
 type DeleteAliasResponse struct {
-	*DeleteAliasOutput
+	*types.DeleteAliasOutput
 
 	response *aws.Response
 }

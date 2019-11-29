@@ -6,104 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/appmesh/types"
 )
-
-type ListTagsForResourceInput struct {
-	_ struct{} `type:"structure"`
-
-	Limit *int64 `location:"querystring" locationName:"limit" min:"1" type:"integer"`
-
-	NextToken *string `location:"querystring" locationName:"nextToken" type:"string"`
-
-	// ResourceArn is a required field
-	ResourceArn *string `location:"querystring" locationName:"resourceArn" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s ListTagsForResourceInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListTagsForResourceInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListTagsForResourceInput"}
-	if s.Limit != nil && *s.Limit < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("Limit", 1))
-	}
-
-	if s.ResourceArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ResourceArn"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListTagsForResourceInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.Limit != nil {
-		v := *s.Limit
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "limit", protocol.Int64Value(v), metadata)
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.ResourceArn != nil {
-		v := *s.ResourceArn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "resourceArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type ListTagsForResourceOutput struct {
-	_ struct{} `type:"structure"`
-
-	NextToken *string `locationName:"nextToken" type:"string"`
-
-	// Tags is a required field
-	Tags []TagRef `locationName:"tags" type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s ListTagsForResourceOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListTagsForResourceOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Tags != nil {
-		v := s.Tags
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "tags", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	return nil
-}
 
 const opListTagsForResource = "ListTagsForResource"
 
@@ -120,7 +24,7 @@ const opListTagsForResource = "ListTagsForResource"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/ListTagsForResource
-func (c *Client) ListTagsForResourceRequest(input *ListTagsForResourceInput) ListTagsForResourceRequest {
+func (c *Client) ListTagsForResourceRequest(input *types.ListTagsForResourceInput) ListTagsForResourceRequest {
 	op := &aws.Operation{
 		Name:       opListTagsForResource,
 		HTTPMethod: "GET",
@@ -134,10 +38,10 @@ func (c *Client) ListTagsForResourceRequest(input *ListTagsForResourceInput) Lis
 	}
 
 	if input == nil {
-		input = &ListTagsForResourceInput{}
+		input = &types.ListTagsForResourceInput{}
 	}
 
-	req := c.newRequest(op, input, &ListTagsForResourceOutput{})
+	req := c.newRequest(op, input, &types.ListTagsForResourceOutput{})
 	return ListTagsForResourceRequest{Request: req, Input: input, Copy: c.ListTagsForResourceRequest}
 }
 
@@ -145,8 +49,8 @@ func (c *Client) ListTagsForResourceRequest(input *ListTagsForResourceInput) Lis
 // ListTagsForResource API operation.
 type ListTagsForResourceRequest struct {
 	*aws.Request
-	Input *ListTagsForResourceInput
-	Copy  func(*ListTagsForResourceInput) ListTagsForResourceRequest
+	Input *types.ListTagsForResourceInput
+	Copy  func(*types.ListTagsForResourceInput) ListTagsForResourceRequest
 }
 
 // Send marshals and sends the ListTagsForResource API request.
@@ -158,7 +62,7 @@ func (r ListTagsForResourceRequest) Send(ctx context.Context) (*ListTagsForResou
 	}
 
 	resp := &ListTagsForResourceResponse{
-		ListTagsForResourceOutput: r.Request.Data.(*ListTagsForResourceOutput),
+		ListTagsForResourceOutput: r.Request.Data.(*types.ListTagsForResourceOutput),
 		response:                  &aws.Response{Request: r.Request},
 	}
 
@@ -188,7 +92,7 @@ func NewListTagsForResourcePaginator(req ListTagsForResourceRequest) ListTagsFor
 	return ListTagsForResourcePaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListTagsForResourceInput
+				var inCpy *types.ListTagsForResourceInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -208,14 +112,14 @@ type ListTagsForResourcePaginator struct {
 	aws.Pager
 }
 
-func (p *ListTagsForResourcePaginator) CurrentPage() *ListTagsForResourceOutput {
-	return p.Pager.CurrentPage().(*ListTagsForResourceOutput)
+func (p *ListTagsForResourcePaginator) CurrentPage() *types.ListTagsForResourceOutput {
+	return p.Pager.CurrentPage().(*types.ListTagsForResourceOutput)
 }
 
 // ListTagsForResourceResponse is the response type for the
 // ListTagsForResource API operation.
 type ListTagsForResourceResponse struct {
-	*ListTagsForResourceOutput
+	*types.ListTagsForResourceOutput
 
 	response *aws.Response
 }

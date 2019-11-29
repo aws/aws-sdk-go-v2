@@ -6,66 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/organizations/types"
 )
-
-type ListAccountsInput struct {
-	_ struct{} `type:"structure"`
-
-	// (Optional) Use this to limit the number of results you want included per
-	// page in the response. If you do not include this parameter, it defaults to
-	// a value that is specific to the operation. If additional items exist beyond
-	// the maximum you specify, the NextToken response element is present and has
-	// a value (is not null). Include that value as the NextToken request parameter
-	// in the next call to the operation to get the next part of the results. Note
-	// that Organizations might return fewer results than the maximum even when
-	// there are more results available. You should check NextToken after every
-	// operation to ensure that you receive all of the results.
-	MaxResults *int64 `min:"1" type:"integer"`
-
-	// Use this parameter if you receive a NextToken response in a previous request
-	// that indicates that there is more output available. Set it to the value of
-	// the previous call's NextToken response to indicate where the output should
-	// continue from.
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s ListAccountsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListAccountsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListAccountsInput"}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ListAccountsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A list of objects in the organization.
-	Accounts []Account `type:"list"`
-
-	// If present, this value indicates that there is more output available than
-	// is included in the current response. Use this value in the NextToken request
-	// parameter in a subsequent call to the operation to get the next part of the
-	// output. You should repeat this until the NextToken response element comes
-	// back as null.
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s ListAccountsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListAccounts = "ListAccounts"
 
@@ -91,7 +33,7 @@ const opListAccounts = "ListAccounts"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListAccounts
-func (c *Client) ListAccountsRequest(input *ListAccountsInput) ListAccountsRequest {
+func (c *Client) ListAccountsRequest(input *types.ListAccountsInput) ListAccountsRequest {
 	op := &aws.Operation{
 		Name:       opListAccounts,
 		HTTPMethod: "POST",
@@ -105,10 +47,10 @@ func (c *Client) ListAccountsRequest(input *ListAccountsInput) ListAccountsReque
 	}
 
 	if input == nil {
-		input = &ListAccountsInput{}
+		input = &types.ListAccountsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListAccountsOutput{})
+	req := c.newRequest(op, input, &types.ListAccountsOutput{})
 	return ListAccountsRequest{Request: req, Input: input, Copy: c.ListAccountsRequest}
 }
 
@@ -116,8 +58,8 @@ func (c *Client) ListAccountsRequest(input *ListAccountsInput) ListAccountsReque
 // ListAccounts API operation.
 type ListAccountsRequest struct {
 	*aws.Request
-	Input *ListAccountsInput
-	Copy  func(*ListAccountsInput) ListAccountsRequest
+	Input *types.ListAccountsInput
+	Copy  func(*types.ListAccountsInput) ListAccountsRequest
 }
 
 // Send marshals and sends the ListAccounts API request.
@@ -129,7 +71,7 @@ func (r ListAccountsRequest) Send(ctx context.Context) (*ListAccountsResponse, e
 	}
 
 	resp := &ListAccountsResponse{
-		ListAccountsOutput: r.Request.Data.(*ListAccountsOutput),
+		ListAccountsOutput: r.Request.Data.(*types.ListAccountsOutput),
 		response:           &aws.Response{Request: r.Request},
 	}
 
@@ -159,7 +101,7 @@ func NewListAccountsPaginator(req ListAccountsRequest) ListAccountsPaginator {
 	return ListAccountsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListAccountsInput
+				var inCpy *types.ListAccountsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -179,14 +121,14 @@ type ListAccountsPaginator struct {
 	aws.Pager
 }
 
-func (p *ListAccountsPaginator) CurrentPage() *ListAccountsOutput {
-	return p.Pager.CurrentPage().(*ListAccountsOutput)
+func (p *ListAccountsPaginator) CurrentPage() *types.ListAccountsOutput {
+	return p.Pager.CurrentPage().(*types.ListAccountsOutput)
 }
 
 // ListAccountsResponse is the response type for the
 // ListAccounts API operation.
 type ListAccountsResponse struct {
-	*ListAccountsOutput
+	*types.ListAccountsOutput
 
 	response *aws.Response
 }

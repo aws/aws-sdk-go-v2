@@ -6,59 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/rekognition/types"
 )
-
-type CreateCollectionInput struct {
-	_ struct{} `type:"structure"`
-
-	// ID for the collection that you are creating.
-	//
-	// CollectionId is a required field
-	CollectionId *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s CreateCollectionInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateCollectionInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateCollectionInput"}
-
-	if s.CollectionId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("CollectionId"))
-	}
-	if s.CollectionId != nil && len(*s.CollectionId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("CollectionId", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type CreateCollectionOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Amazon Resource Name (ARN) of the collection. You can use this to manage
-	// permissions on your resources.
-	CollectionArn *string `type:"string"`
-
-	// Version number of the face detection model associated with the collection
-	// you are creating.
-	FaceModelVersion *string `type:"string"`
-
-	// HTTP status code indicating the result of the operation.
-	StatusCode *int64 `type:"integer"`
-}
-
-// String returns the string representation
-func (s CreateCollectionOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCreateCollection = "CreateCollection"
 
@@ -87,7 +36,7 @@ const opCreateCollection = "CreateCollection"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) CreateCollectionRequest(input *CreateCollectionInput) CreateCollectionRequest {
+func (c *Client) CreateCollectionRequest(input *types.CreateCollectionInput) CreateCollectionRequest {
 	op := &aws.Operation{
 		Name:       opCreateCollection,
 		HTTPMethod: "POST",
@@ -95,10 +44,10 @@ func (c *Client) CreateCollectionRequest(input *CreateCollectionInput) CreateCol
 	}
 
 	if input == nil {
-		input = &CreateCollectionInput{}
+		input = &types.CreateCollectionInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateCollectionOutput{})
+	req := c.newRequest(op, input, &types.CreateCollectionOutput{})
 	return CreateCollectionRequest{Request: req, Input: input, Copy: c.CreateCollectionRequest}
 }
 
@@ -106,8 +55,8 @@ func (c *Client) CreateCollectionRequest(input *CreateCollectionInput) CreateCol
 // CreateCollection API operation.
 type CreateCollectionRequest struct {
 	*aws.Request
-	Input *CreateCollectionInput
-	Copy  func(*CreateCollectionInput) CreateCollectionRequest
+	Input *types.CreateCollectionInput
+	Copy  func(*types.CreateCollectionInput) CreateCollectionRequest
 }
 
 // Send marshals and sends the CreateCollection API request.
@@ -119,7 +68,7 @@ func (r CreateCollectionRequest) Send(ctx context.Context) (*CreateCollectionRes
 	}
 
 	resp := &CreateCollectionResponse{
-		CreateCollectionOutput: r.Request.Data.(*CreateCollectionOutput),
+		CreateCollectionOutput: r.Request.Data.(*types.CreateCollectionOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -129,7 +78,7 @@ func (r CreateCollectionRequest) Send(ctx context.Context) (*CreateCollectionRes
 // CreateCollectionResponse is the response type for the
 // CreateCollection API operation.
 type CreateCollectionResponse struct {
-	*CreateCollectionOutput
+	*types.CreateCollectionOutput
 
 	response *aws.Response
 }

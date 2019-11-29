@@ -6,106 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/qldb/types"
 )
-
-type ListJournalS3ExportsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The maximum number of results to return in a single ListJournalS3Exports
-	// request. (The actual number of results returned might be fewer.)
-	MaxResults *int64 `location:"querystring" locationName:"max_results" min:"1" type:"integer"`
-
-	// A pagination token, indicating that you want to retrieve the next page of
-	// results. If you received a value for NextToken in the response from a previous
-	// ListJournalS3Exports call, then you should use that value as input here.
-	NextToken *string `location:"querystring" locationName:"next_token" min:"4" type:"string"`
-}
-
-// String returns the string representation
-func (s ListJournalS3ExportsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListJournalS3ExportsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListJournalS3ExportsInput"}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-	if s.NextToken != nil && len(*s.NextToken) < 4 {
-		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 4))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListJournalS3ExportsInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.MaxResults != nil {
-		v := *s.MaxResults
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "max_results", protocol.Int64Value(v), metadata)
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "next_token", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type ListJournalS3ExportsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The array of journal export job descriptions for all ledgers that are associated
-	// with the current AWS account and Region.
-	JournalS3Exports []JournalS3ExportDescription `type:"list"`
-
-	//    * If NextToken is empty, then the last page of results has been processed
-	//    and there are no more results to be retrieved.
-	//
-	//    * If NextToken is not empty, then there are more results available. To
-	//    retrieve the next page of results, use the value of NextToken in a subsequent
-	//    ListJournalS3Exports call.
-	NextToken *string `min:"4" type:"string"`
-}
-
-// String returns the string representation
-func (s ListJournalS3ExportsOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListJournalS3ExportsOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.JournalS3Exports != nil {
-		v := s.JournalS3Exports
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "JournalS3Exports", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opListJournalS3Exports = "ListJournalS3Exports"
 
@@ -126,7 +28,7 @@ const opListJournalS3Exports = "ListJournalS3Exports"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/qldb-2019-01-02/ListJournalS3Exports
-func (c *Client) ListJournalS3ExportsRequest(input *ListJournalS3ExportsInput) ListJournalS3ExportsRequest {
+func (c *Client) ListJournalS3ExportsRequest(input *types.ListJournalS3ExportsInput) ListJournalS3ExportsRequest {
 	op := &aws.Operation{
 		Name:       opListJournalS3Exports,
 		HTTPMethod: "GET",
@@ -140,10 +42,10 @@ func (c *Client) ListJournalS3ExportsRequest(input *ListJournalS3ExportsInput) L
 	}
 
 	if input == nil {
-		input = &ListJournalS3ExportsInput{}
+		input = &types.ListJournalS3ExportsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListJournalS3ExportsOutput{})
+	req := c.newRequest(op, input, &types.ListJournalS3ExportsOutput{})
 	return ListJournalS3ExportsRequest{Request: req, Input: input, Copy: c.ListJournalS3ExportsRequest}
 }
 
@@ -151,8 +53,8 @@ func (c *Client) ListJournalS3ExportsRequest(input *ListJournalS3ExportsInput) L
 // ListJournalS3Exports API operation.
 type ListJournalS3ExportsRequest struct {
 	*aws.Request
-	Input *ListJournalS3ExportsInput
-	Copy  func(*ListJournalS3ExportsInput) ListJournalS3ExportsRequest
+	Input *types.ListJournalS3ExportsInput
+	Copy  func(*types.ListJournalS3ExportsInput) ListJournalS3ExportsRequest
 }
 
 // Send marshals and sends the ListJournalS3Exports API request.
@@ -164,7 +66,7 @@ func (r ListJournalS3ExportsRequest) Send(ctx context.Context) (*ListJournalS3Ex
 	}
 
 	resp := &ListJournalS3ExportsResponse{
-		ListJournalS3ExportsOutput: r.Request.Data.(*ListJournalS3ExportsOutput),
+		ListJournalS3ExportsOutput: r.Request.Data.(*types.ListJournalS3ExportsOutput),
 		response:                   &aws.Response{Request: r.Request},
 	}
 
@@ -194,7 +96,7 @@ func NewListJournalS3ExportsPaginator(req ListJournalS3ExportsRequest) ListJourn
 	return ListJournalS3ExportsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListJournalS3ExportsInput
+				var inCpy *types.ListJournalS3ExportsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -214,14 +116,14 @@ type ListJournalS3ExportsPaginator struct {
 	aws.Pager
 }
 
-func (p *ListJournalS3ExportsPaginator) CurrentPage() *ListJournalS3ExportsOutput {
-	return p.Pager.CurrentPage().(*ListJournalS3ExportsOutput)
+func (p *ListJournalS3ExportsPaginator) CurrentPage() *types.ListJournalS3ExportsOutput {
+	return p.Pager.CurrentPage().(*types.ListJournalS3ExportsOutput)
 }
 
 // ListJournalS3ExportsResponse is the response type for the
 // ListJournalS3Exports API operation.
 type ListJournalS3ExportsResponse struct {
-	*ListJournalS3ExportsOutput
+	*types.ListJournalS3ExportsOutput
 
 	response *aws.Response
 }

@@ -6,103 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/iot1clickprojects/types"
 )
-
-type DisassociateDeviceFromPlacementInput struct {
-	_ struct{} `type:"structure"`
-
-	// The device ID that should be removed from the placement.
-	//
-	// DeviceTemplateName is a required field
-	DeviceTemplateName *string `location:"uri" locationName:"deviceTemplateName" min:"1" type:"string" required:"true"`
-
-	// The name of the placement that the device should be removed from.
-	//
-	// PlacementName is a required field
-	PlacementName *string `location:"uri" locationName:"placementName" min:"1" type:"string" required:"true"`
-
-	// The name of the project that contains the placement.
-	//
-	// ProjectName is a required field
-	ProjectName *string `location:"uri" locationName:"projectName" min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DisassociateDeviceFromPlacementInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DisassociateDeviceFromPlacementInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DisassociateDeviceFromPlacementInput"}
-
-	if s.DeviceTemplateName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DeviceTemplateName"))
-	}
-	if s.DeviceTemplateName != nil && len(*s.DeviceTemplateName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("DeviceTemplateName", 1))
-	}
-
-	if s.PlacementName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("PlacementName"))
-	}
-	if s.PlacementName != nil && len(*s.PlacementName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("PlacementName", 1))
-	}
-
-	if s.ProjectName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ProjectName"))
-	}
-	if s.ProjectName != nil && len(*s.ProjectName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ProjectName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DisassociateDeviceFromPlacementInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.DeviceTemplateName != nil {
-		v := *s.DeviceTemplateName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "deviceTemplateName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.PlacementName != nil {
-		v := *s.PlacementName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "placementName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.ProjectName != nil {
-		v := *s.ProjectName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "projectName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type DisassociateDeviceFromPlacementOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DisassociateDeviceFromPlacementOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DisassociateDeviceFromPlacementOutput) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
 
 const opDisassociateDeviceFromPlacement = "DisassociateDeviceFromPlacement"
 
@@ -119,7 +24,7 @@ const opDisassociateDeviceFromPlacement = "DisassociateDeviceFromPlacement"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iot1click-projects-2018-05-14/DisassociateDeviceFromPlacement
-func (c *Client) DisassociateDeviceFromPlacementRequest(input *DisassociateDeviceFromPlacementInput) DisassociateDeviceFromPlacementRequest {
+func (c *Client) DisassociateDeviceFromPlacementRequest(input *types.DisassociateDeviceFromPlacementInput) DisassociateDeviceFromPlacementRequest {
 	op := &aws.Operation{
 		Name:       opDisassociateDeviceFromPlacement,
 		HTTPMethod: "DELETE",
@@ -127,10 +32,10 @@ func (c *Client) DisassociateDeviceFromPlacementRequest(input *DisassociateDevic
 	}
 
 	if input == nil {
-		input = &DisassociateDeviceFromPlacementInput{}
+		input = &types.DisassociateDeviceFromPlacementInput{}
 	}
 
-	req := c.newRequest(op, input, &DisassociateDeviceFromPlacementOutput{})
+	req := c.newRequest(op, input, &types.DisassociateDeviceFromPlacementOutput{})
 	return DisassociateDeviceFromPlacementRequest{Request: req, Input: input, Copy: c.DisassociateDeviceFromPlacementRequest}
 }
 
@@ -138,8 +43,8 @@ func (c *Client) DisassociateDeviceFromPlacementRequest(input *DisassociateDevic
 // DisassociateDeviceFromPlacement API operation.
 type DisassociateDeviceFromPlacementRequest struct {
 	*aws.Request
-	Input *DisassociateDeviceFromPlacementInput
-	Copy  func(*DisassociateDeviceFromPlacementInput) DisassociateDeviceFromPlacementRequest
+	Input *types.DisassociateDeviceFromPlacementInput
+	Copy  func(*types.DisassociateDeviceFromPlacementInput) DisassociateDeviceFromPlacementRequest
 }
 
 // Send marshals and sends the DisassociateDeviceFromPlacement API request.
@@ -151,7 +56,7 @@ func (r DisassociateDeviceFromPlacementRequest) Send(ctx context.Context) (*Disa
 	}
 
 	resp := &DisassociateDeviceFromPlacementResponse{
-		DisassociateDeviceFromPlacementOutput: r.Request.Data.(*DisassociateDeviceFromPlacementOutput),
+		DisassociateDeviceFromPlacementOutput: r.Request.Data.(*types.DisassociateDeviceFromPlacementOutput),
 		response:                              &aws.Response{Request: r.Request},
 	}
 
@@ -161,7 +66,7 @@ func (r DisassociateDeviceFromPlacementRequest) Send(ctx context.Context) (*Disa
 // DisassociateDeviceFromPlacementResponse is the response type for the
 // DisassociateDeviceFromPlacement API operation.
 type DisassociateDeviceFromPlacementResponse struct {
-	*DisassociateDeviceFromPlacementOutput
+	*types.DisassociateDeviceFromPlacementOutput
 
 	response *aws.Response
 }

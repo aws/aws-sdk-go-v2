@@ -6,96 +6,15 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/guardduty/types"
 )
-
-type UnarchiveFindingsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the detector that specifies the GuardDuty service whose findings
-	// you want to unarchive.
-	//
-	// DetectorId is a required field
-	DetectorId *string `location:"uri" locationName:"detectorId" min:"1" type:"string" required:"true"`
-
-	// IDs of the findings that you want to unarchive.
-	//
-	// FindingIds is a required field
-	FindingIds []string `locationName:"findingIds" type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s UnarchiveFindingsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UnarchiveFindingsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UnarchiveFindingsInput"}
-
-	if s.DetectorId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DetectorId"))
-	}
-	if s.DetectorId != nil && len(*s.DetectorId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("DetectorId", 1))
-	}
-
-	if s.FindingIds == nil {
-		invalidParams.Add(aws.NewErrParamRequired("FindingIds"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s UnarchiveFindingsInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.FindingIds != nil {
-		v := s.FindingIds
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "findingIds", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
-		}
-		ls0.End()
-
-	}
-	if s.DetectorId != nil {
-		v := *s.DetectorId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "detectorId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type UnarchiveFindingsOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s UnarchiveFindingsOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s UnarchiveFindingsOutput) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
 
 const opUnarchiveFindings = "UnarchiveFindings"
 
 // UnarchiveFindingsRequest returns a request value for making API operation for
 // Amazon GuardDuty.
 //
-// Unarchives Amazon GuardDuty findings specified by the list of finding IDs.
+// Unarchives GuardDuty findings specified by the findingIds.
 //
 //    // Example sending a request using UnarchiveFindingsRequest.
 //    req := client.UnarchiveFindingsRequest(params)
@@ -105,7 +24,7 @@ const opUnarchiveFindings = "UnarchiveFindings"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/UnarchiveFindings
-func (c *Client) UnarchiveFindingsRequest(input *UnarchiveFindingsInput) UnarchiveFindingsRequest {
+func (c *Client) UnarchiveFindingsRequest(input *types.UnarchiveFindingsInput) UnarchiveFindingsRequest {
 	op := &aws.Operation{
 		Name:       opUnarchiveFindings,
 		HTTPMethod: "POST",
@@ -113,10 +32,10 @@ func (c *Client) UnarchiveFindingsRequest(input *UnarchiveFindingsInput) Unarchi
 	}
 
 	if input == nil {
-		input = &UnarchiveFindingsInput{}
+		input = &types.UnarchiveFindingsInput{}
 	}
 
-	req := c.newRequest(op, input, &UnarchiveFindingsOutput{})
+	req := c.newRequest(op, input, &types.UnarchiveFindingsOutput{})
 	return UnarchiveFindingsRequest{Request: req, Input: input, Copy: c.UnarchiveFindingsRequest}
 }
 
@@ -124,8 +43,8 @@ func (c *Client) UnarchiveFindingsRequest(input *UnarchiveFindingsInput) Unarchi
 // UnarchiveFindings API operation.
 type UnarchiveFindingsRequest struct {
 	*aws.Request
-	Input *UnarchiveFindingsInput
-	Copy  func(*UnarchiveFindingsInput) UnarchiveFindingsRequest
+	Input *types.UnarchiveFindingsInput
+	Copy  func(*types.UnarchiveFindingsInput) UnarchiveFindingsRequest
 }
 
 // Send marshals and sends the UnarchiveFindings API request.
@@ -137,7 +56,7 @@ func (r UnarchiveFindingsRequest) Send(ctx context.Context) (*UnarchiveFindingsR
 	}
 
 	resp := &UnarchiveFindingsResponse{
-		UnarchiveFindingsOutput: r.Request.Data.(*UnarchiveFindingsOutput),
+		UnarchiveFindingsOutput: r.Request.Data.(*types.UnarchiveFindingsOutput),
 		response:                &aws.Response{Request: r.Request},
 	}
 
@@ -147,7 +66,7 @@ func (r UnarchiveFindingsRequest) Send(ctx context.Context) (*UnarchiveFindingsR
 // UnarchiveFindingsResponse is the response type for the
 // UnarchiveFindings API operation.
 type UnarchiveFindingsResponse struct {
-	*UnarchiveFindingsOutput
+	*types.UnarchiveFindingsOutput
 
 	response *aws.Response
 }

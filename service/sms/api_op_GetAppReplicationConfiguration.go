@@ -6,32 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/sms/types"
 )
-
-type GetAppReplicationConfigurationInput struct {
-	_ struct{} `type:"structure"`
-
-	// ID of the application associated with the replication configuration.
-	AppId *string `locationName:"appId" type:"string"`
-}
-
-// String returns the string representation
-func (s GetAppReplicationConfigurationInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type GetAppReplicationConfigurationOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Replication configurations associated with server groups in this application.
-	ServerGroupReplicationConfigurations []ServerGroupReplicationConfiguration `locationName:"serverGroupReplicationConfigurations" type:"list"`
-}
-
-// String returns the string representation
-func (s GetAppReplicationConfigurationOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetAppReplicationConfiguration = "GetAppReplicationConfiguration"
 
@@ -48,7 +24,7 @@ const opGetAppReplicationConfiguration = "GetAppReplicationConfiguration"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sms-2016-10-24/GetAppReplicationConfiguration
-func (c *Client) GetAppReplicationConfigurationRequest(input *GetAppReplicationConfigurationInput) GetAppReplicationConfigurationRequest {
+func (c *Client) GetAppReplicationConfigurationRequest(input *types.GetAppReplicationConfigurationInput) GetAppReplicationConfigurationRequest {
 	op := &aws.Operation{
 		Name:       opGetAppReplicationConfiguration,
 		HTTPMethod: "POST",
@@ -56,10 +32,10 @@ func (c *Client) GetAppReplicationConfigurationRequest(input *GetAppReplicationC
 	}
 
 	if input == nil {
-		input = &GetAppReplicationConfigurationInput{}
+		input = &types.GetAppReplicationConfigurationInput{}
 	}
 
-	req := c.newRequest(op, input, &GetAppReplicationConfigurationOutput{})
+	req := c.newRequest(op, input, &types.GetAppReplicationConfigurationOutput{})
 	return GetAppReplicationConfigurationRequest{Request: req, Input: input, Copy: c.GetAppReplicationConfigurationRequest}
 }
 
@@ -67,8 +43,8 @@ func (c *Client) GetAppReplicationConfigurationRequest(input *GetAppReplicationC
 // GetAppReplicationConfiguration API operation.
 type GetAppReplicationConfigurationRequest struct {
 	*aws.Request
-	Input *GetAppReplicationConfigurationInput
-	Copy  func(*GetAppReplicationConfigurationInput) GetAppReplicationConfigurationRequest
+	Input *types.GetAppReplicationConfigurationInput
+	Copy  func(*types.GetAppReplicationConfigurationInput) GetAppReplicationConfigurationRequest
 }
 
 // Send marshals and sends the GetAppReplicationConfiguration API request.
@@ -80,7 +56,7 @@ func (r GetAppReplicationConfigurationRequest) Send(ctx context.Context) (*GetAp
 	}
 
 	resp := &GetAppReplicationConfigurationResponse{
-		GetAppReplicationConfigurationOutput: r.Request.Data.(*GetAppReplicationConfigurationOutput),
+		GetAppReplicationConfigurationOutput: r.Request.Data.(*types.GetAppReplicationConfigurationOutput),
 		response:                             &aws.Response{Request: r.Request},
 	}
 
@@ -90,7 +66,7 @@ func (r GetAppReplicationConfigurationRequest) Send(ctx context.Context) (*GetAp
 // GetAppReplicationConfigurationResponse is the response type for the
 // GetAppReplicationConfiguration API operation.
 type GetAppReplicationConfigurationResponse struct {
-	*GetAppReplicationConfigurationOutput
+	*types.GetAppReplicationConfigurationOutput
 
 	response *aws.Response
 }

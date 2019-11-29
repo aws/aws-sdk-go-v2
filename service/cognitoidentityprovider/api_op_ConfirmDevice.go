@@ -6,72 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/types"
 )
-
-// Confirms the device request.
-type ConfirmDeviceInput struct {
-	_ struct{} `type:"structure"`
-
-	// The access token.
-	//
-	// AccessToken is a required field
-	AccessToken *string `type:"string" required:"true" sensitive:"true"`
-
-	// The device key.
-	//
-	// DeviceKey is a required field
-	DeviceKey *string `min:"1" type:"string" required:"true"`
-
-	// The device name.
-	DeviceName *string `min:"1" type:"string"`
-
-	// The configuration of the device secret verifier.
-	DeviceSecretVerifierConfig *DeviceSecretVerifierConfigType `type:"structure"`
-}
-
-// String returns the string representation
-func (s ConfirmDeviceInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ConfirmDeviceInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ConfirmDeviceInput"}
-
-	if s.AccessToken == nil {
-		invalidParams.Add(aws.NewErrParamRequired("AccessToken"))
-	}
-
-	if s.DeviceKey == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DeviceKey"))
-	}
-	if s.DeviceKey != nil && len(*s.DeviceKey) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("DeviceKey", 1))
-	}
-	if s.DeviceName != nil && len(*s.DeviceName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("DeviceName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Confirms the device response.
-type ConfirmDeviceOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Indicates whether the user confirmation is necessary to confirm the device
-	// response.
-	UserConfirmationNecessary *bool `type:"boolean"`
-}
-
-// String returns the string representation
-func (s ConfirmDeviceOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opConfirmDevice = "ConfirmDevice"
 
@@ -89,7 +25,7 @@ const opConfirmDevice = "ConfirmDevice"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/ConfirmDevice
-func (c *Client) ConfirmDeviceRequest(input *ConfirmDeviceInput) ConfirmDeviceRequest {
+func (c *Client) ConfirmDeviceRequest(input *types.ConfirmDeviceInput) ConfirmDeviceRequest {
 	op := &aws.Operation{
 		Name:       opConfirmDevice,
 		HTTPMethod: "POST",
@@ -97,10 +33,10 @@ func (c *Client) ConfirmDeviceRequest(input *ConfirmDeviceInput) ConfirmDeviceRe
 	}
 
 	if input == nil {
-		input = &ConfirmDeviceInput{}
+		input = &types.ConfirmDeviceInput{}
 	}
 
-	req := c.newRequest(op, input, &ConfirmDeviceOutput{})
+	req := c.newRequest(op, input, &types.ConfirmDeviceOutput{})
 	return ConfirmDeviceRequest{Request: req, Input: input, Copy: c.ConfirmDeviceRequest}
 }
 
@@ -108,8 +44,8 @@ func (c *Client) ConfirmDeviceRequest(input *ConfirmDeviceInput) ConfirmDeviceRe
 // ConfirmDevice API operation.
 type ConfirmDeviceRequest struct {
 	*aws.Request
-	Input *ConfirmDeviceInput
-	Copy  func(*ConfirmDeviceInput) ConfirmDeviceRequest
+	Input *types.ConfirmDeviceInput
+	Copy  func(*types.ConfirmDeviceInput) ConfirmDeviceRequest
 }
 
 // Send marshals and sends the ConfirmDevice API request.
@@ -121,7 +57,7 @@ func (r ConfirmDeviceRequest) Send(ctx context.Context) (*ConfirmDeviceResponse,
 	}
 
 	resp := &ConfirmDeviceResponse{
-		ConfirmDeviceOutput: r.Request.Data.(*ConfirmDeviceOutput),
+		ConfirmDeviceOutput: r.Request.Data.(*types.ConfirmDeviceOutput),
 		response:            &aws.Response{Request: r.Request},
 	}
 
@@ -131,7 +67,7 @@ func (r ConfirmDeviceRequest) Send(ctx context.Context) (*ConfirmDeviceResponse,
 // ConfirmDeviceResponse is the response type for the
 // ConfirmDevice API operation.
 type ConfirmDeviceResponse struct {
-	*ConfirmDeviceOutput
+	*types.ConfirmDeviceOutput
 
 	response *aws.Response
 }

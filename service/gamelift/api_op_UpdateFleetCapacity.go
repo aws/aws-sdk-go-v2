@@ -6,61 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/gamelift/types"
 )
-
-// Represents the input for a request action.
-type UpdateFleetCapacityInput struct {
-	_ struct{} `type:"structure"`
-
-	// Number of EC2 instances you want this fleet to host.
-	DesiredInstances *int64 `type:"integer"`
-
-	// Unique identifier for a fleet to update capacity for.
-	//
-	// FleetId is a required field
-	FleetId *string `type:"string" required:"true"`
-
-	// Maximum value allowed for the fleet's instance count. Default if not set
-	// is 1.
-	MaxSize *int64 `type:"integer"`
-
-	// Minimum value allowed for the fleet's instance count. Default if not set
-	// is 0.
-	MinSize *int64 `type:"integer"`
-}
-
-// String returns the string representation
-func (s UpdateFleetCapacityInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateFleetCapacityInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateFleetCapacityInput"}
-
-	if s.FleetId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("FleetId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Represents the returned data in response to a request action.
-type UpdateFleetCapacityOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Unique identifier for a fleet that was updated.
-	FleetId *string `type:"string"`
-}
-
-// String returns the string representation
-func (s UpdateFleetCapacityOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opUpdateFleetCapacity = "UpdateFleetCapacity"
 
@@ -113,7 +60,7 @@ const opUpdateFleetCapacity = "UpdateFleetCapacity"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/UpdateFleetCapacity
-func (c *Client) UpdateFleetCapacityRequest(input *UpdateFleetCapacityInput) UpdateFleetCapacityRequest {
+func (c *Client) UpdateFleetCapacityRequest(input *types.UpdateFleetCapacityInput) UpdateFleetCapacityRequest {
 	op := &aws.Operation{
 		Name:       opUpdateFleetCapacity,
 		HTTPMethod: "POST",
@@ -121,10 +68,10 @@ func (c *Client) UpdateFleetCapacityRequest(input *UpdateFleetCapacityInput) Upd
 	}
 
 	if input == nil {
-		input = &UpdateFleetCapacityInput{}
+		input = &types.UpdateFleetCapacityInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateFleetCapacityOutput{})
+	req := c.newRequest(op, input, &types.UpdateFleetCapacityOutput{})
 	return UpdateFleetCapacityRequest{Request: req, Input: input, Copy: c.UpdateFleetCapacityRequest}
 }
 
@@ -132,8 +79,8 @@ func (c *Client) UpdateFleetCapacityRequest(input *UpdateFleetCapacityInput) Upd
 // UpdateFleetCapacity API operation.
 type UpdateFleetCapacityRequest struct {
 	*aws.Request
-	Input *UpdateFleetCapacityInput
-	Copy  func(*UpdateFleetCapacityInput) UpdateFleetCapacityRequest
+	Input *types.UpdateFleetCapacityInput
+	Copy  func(*types.UpdateFleetCapacityInput) UpdateFleetCapacityRequest
 }
 
 // Send marshals and sends the UpdateFleetCapacity API request.
@@ -145,7 +92,7 @@ func (r UpdateFleetCapacityRequest) Send(ctx context.Context) (*UpdateFleetCapac
 	}
 
 	resp := &UpdateFleetCapacityResponse{
-		UpdateFleetCapacityOutput: r.Request.Data.(*UpdateFleetCapacityOutput),
+		UpdateFleetCapacityOutput: r.Request.Data.(*types.UpdateFleetCapacityOutput),
 		response:                  &aws.Response{Request: r.Request},
 	}
 
@@ -155,7 +102,7 @@ func (r UpdateFleetCapacityRequest) Send(ctx context.Context) (*UpdateFleetCapac
 // UpdateFleetCapacityResponse is the response type for the
 // UpdateFleetCapacity API operation.
 type UpdateFleetCapacityResponse struct {
-	*UpdateFleetCapacityOutput
+	*types.UpdateFleetCapacityOutput
 
 	response *aws.Response
 }

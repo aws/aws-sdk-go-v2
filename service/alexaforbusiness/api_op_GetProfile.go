@@ -6,32 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/alexaforbusiness/types"
 )
-
-type GetProfileInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ARN of the room profile for which to request details. Required.
-	ProfileArn *string `type:"string"`
-}
-
-// String returns the string representation
-func (s GetProfileInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type GetProfileOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The details of the room profile requested. Required.
-	Profile *Profile `type:"structure"`
-}
-
-// String returns the string representation
-func (s GetProfileOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetProfile = "GetProfile"
 
@@ -48,7 +24,7 @@ const opGetProfile = "GetProfile"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/GetProfile
-func (c *Client) GetProfileRequest(input *GetProfileInput) GetProfileRequest {
+func (c *Client) GetProfileRequest(input *types.GetProfileInput) GetProfileRequest {
 	op := &aws.Operation{
 		Name:       opGetProfile,
 		HTTPMethod: "POST",
@@ -56,10 +32,10 @@ func (c *Client) GetProfileRequest(input *GetProfileInput) GetProfileRequest {
 	}
 
 	if input == nil {
-		input = &GetProfileInput{}
+		input = &types.GetProfileInput{}
 	}
 
-	req := c.newRequest(op, input, &GetProfileOutput{})
+	req := c.newRequest(op, input, &types.GetProfileOutput{})
 	return GetProfileRequest{Request: req, Input: input, Copy: c.GetProfileRequest}
 }
 
@@ -67,8 +43,8 @@ func (c *Client) GetProfileRequest(input *GetProfileInput) GetProfileRequest {
 // GetProfile API operation.
 type GetProfileRequest struct {
 	*aws.Request
-	Input *GetProfileInput
-	Copy  func(*GetProfileInput) GetProfileRequest
+	Input *types.GetProfileInput
+	Copy  func(*types.GetProfileInput) GetProfileRequest
 }
 
 // Send marshals and sends the GetProfile API request.
@@ -80,7 +56,7 @@ func (r GetProfileRequest) Send(ctx context.Context) (*GetProfileResponse, error
 	}
 
 	resp := &GetProfileResponse{
-		GetProfileOutput: r.Request.Data.(*GetProfileOutput),
+		GetProfileOutput: r.Request.Data.(*types.GetProfileOutput),
 		response:         &aws.Response{Request: r.Request},
 	}
 
@@ -90,7 +66,7 @@ func (r GetProfileRequest) Send(ctx context.Context) (*GetProfileResponse, error
 // GetProfileResponse is the response type for the
 // GetProfile API operation.
 type GetProfileResponse struct {
-	*GetProfileOutput
+	*types.GetProfileOutput
 
 	response *aws.Response
 }

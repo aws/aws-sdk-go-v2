@@ -6,62 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/costandusagereportservice/types"
 )
-
-type ModifyReportDefinitionInput struct {
-	_ struct{} `type:"structure"`
-
-	// The definition of AWS Cost and Usage Report. You can specify the report name,
-	// time unit, report format, compression format, S3 bucket, additional artifacts,
-	// and schema elements in the definition.
-	//
-	// ReportDefinition is a required field
-	ReportDefinition *ReportDefinition `type:"structure" required:"true"`
-
-	// The name of the report that you want to create. The name must be unique,
-	// is case sensitive, and can't include spaces.
-	//
-	// ReportName is a required field
-	ReportName *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s ModifyReportDefinitionInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ModifyReportDefinitionInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ModifyReportDefinitionInput"}
-
-	if s.ReportDefinition == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ReportDefinition"))
-	}
-
-	if s.ReportName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ReportName"))
-	}
-	if s.ReportDefinition != nil {
-		if err := s.ReportDefinition.Validate(); err != nil {
-			invalidParams.AddNested("ReportDefinition", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ModifyReportDefinitionOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s ModifyReportDefinitionOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opModifyReportDefinition = "ModifyReportDefinition"
 
@@ -78,7 +24,7 @@ const opModifyReportDefinition = "ModifyReportDefinition"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cur-2017-01-06/ModifyReportDefinition
-func (c *Client) ModifyReportDefinitionRequest(input *ModifyReportDefinitionInput) ModifyReportDefinitionRequest {
+func (c *Client) ModifyReportDefinitionRequest(input *types.ModifyReportDefinitionInput) ModifyReportDefinitionRequest {
 	op := &aws.Operation{
 		Name:       opModifyReportDefinition,
 		HTTPMethod: "POST",
@@ -86,10 +32,10 @@ func (c *Client) ModifyReportDefinitionRequest(input *ModifyReportDefinitionInpu
 	}
 
 	if input == nil {
-		input = &ModifyReportDefinitionInput{}
+		input = &types.ModifyReportDefinitionInput{}
 	}
 
-	req := c.newRequest(op, input, &ModifyReportDefinitionOutput{})
+	req := c.newRequest(op, input, &types.ModifyReportDefinitionOutput{})
 	return ModifyReportDefinitionRequest{Request: req, Input: input, Copy: c.ModifyReportDefinitionRequest}
 }
 
@@ -97,8 +43,8 @@ func (c *Client) ModifyReportDefinitionRequest(input *ModifyReportDefinitionInpu
 // ModifyReportDefinition API operation.
 type ModifyReportDefinitionRequest struct {
 	*aws.Request
-	Input *ModifyReportDefinitionInput
-	Copy  func(*ModifyReportDefinitionInput) ModifyReportDefinitionRequest
+	Input *types.ModifyReportDefinitionInput
+	Copy  func(*types.ModifyReportDefinitionInput) ModifyReportDefinitionRequest
 }
 
 // Send marshals and sends the ModifyReportDefinition API request.
@@ -110,7 +56,7 @@ func (r ModifyReportDefinitionRequest) Send(ctx context.Context) (*ModifyReportD
 	}
 
 	resp := &ModifyReportDefinitionResponse{
-		ModifyReportDefinitionOutput: r.Request.Data.(*ModifyReportDefinitionOutput),
+		ModifyReportDefinitionOutput: r.Request.Data.(*types.ModifyReportDefinitionOutput),
 		response:                     &aws.Response{Request: r.Request},
 	}
 
@@ -120,7 +66,7 @@ func (r ModifyReportDefinitionRequest) Send(ctx context.Context) (*ModifyReportD
 // ModifyReportDefinitionResponse is the response type for the
 // ModifyReportDefinition API operation.
 type ModifyReportDefinitionResponse struct {
-	*ModifyReportDefinitionOutput
+	*types.ModifyReportDefinitionOutput
 
 	response *aws.Response
 }

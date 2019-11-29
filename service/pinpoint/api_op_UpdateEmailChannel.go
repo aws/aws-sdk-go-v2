@@ -6,94 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/pinpoint/types"
 )
-
-type UpdateEmailChannelInput struct {
-	_ struct{} `type:"structure" payload:"EmailChannelRequest"`
-
-	// ApplicationId is a required field
-	ApplicationId *string `location:"uri" locationName:"application-id" type:"string" required:"true"`
-
-	// Specifies the status and settings of the email channel for an application.
-	//
-	// EmailChannelRequest is a required field
-	EmailChannelRequest *EmailChannelRequest `type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s UpdateEmailChannelInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateEmailChannelInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateEmailChannelInput"}
-
-	if s.ApplicationId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ApplicationId"))
-	}
-
-	if s.EmailChannelRequest == nil {
-		invalidParams.Add(aws.NewErrParamRequired("EmailChannelRequest"))
-	}
-	if s.EmailChannelRequest != nil {
-		if err := s.EmailChannelRequest.Validate(); err != nil {
-			invalidParams.AddNested("EmailChannelRequest", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s UpdateEmailChannelInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.ApplicationId != nil {
-		v := *s.ApplicationId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "application-id", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.EmailChannelRequest != nil {
-		v := s.EmailChannelRequest
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.PayloadTarget, "EmailChannelRequest", v, metadata)
-	}
-	return nil
-}
-
-type UpdateEmailChannelOutput struct {
-	_ struct{} `type:"structure" payload:"EmailChannelResponse"`
-
-	// Provides information about the status and settings of the email channel for
-	// an application.
-	//
-	// EmailChannelResponse is a required field
-	EmailChannelResponse *EmailChannelResponse `type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s UpdateEmailChannelOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s UpdateEmailChannelOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.EmailChannelResponse != nil {
-		v := s.EmailChannelResponse
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.PayloadTarget, "EmailChannelResponse", v, metadata)
-	}
-	return nil
-}
 
 const opUpdateEmailChannel = "UpdateEmailChannel"
 
@@ -111,7 +25,7 @@ const opUpdateEmailChannel = "UpdateEmailChannel"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/UpdateEmailChannel
-func (c *Client) UpdateEmailChannelRequest(input *UpdateEmailChannelInput) UpdateEmailChannelRequest {
+func (c *Client) UpdateEmailChannelRequest(input *types.UpdateEmailChannelInput) UpdateEmailChannelRequest {
 	op := &aws.Operation{
 		Name:       opUpdateEmailChannel,
 		HTTPMethod: "PUT",
@@ -119,10 +33,10 @@ func (c *Client) UpdateEmailChannelRequest(input *UpdateEmailChannelInput) Updat
 	}
 
 	if input == nil {
-		input = &UpdateEmailChannelInput{}
+		input = &types.UpdateEmailChannelInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateEmailChannelOutput{})
+	req := c.newRequest(op, input, &types.UpdateEmailChannelOutput{})
 	return UpdateEmailChannelRequest{Request: req, Input: input, Copy: c.UpdateEmailChannelRequest}
 }
 
@@ -130,8 +44,8 @@ func (c *Client) UpdateEmailChannelRequest(input *UpdateEmailChannelInput) Updat
 // UpdateEmailChannel API operation.
 type UpdateEmailChannelRequest struct {
 	*aws.Request
-	Input *UpdateEmailChannelInput
-	Copy  func(*UpdateEmailChannelInput) UpdateEmailChannelRequest
+	Input *types.UpdateEmailChannelInput
+	Copy  func(*types.UpdateEmailChannelInput) UpdateEmailChannelRequest
 }
 
 // Send marshals and sends the UpdateEmailChannel API request.
@@ -143,7 +57,7 @@ func (r UpdateEmailChannelRequest) Send(ctx context.Context) (*UpdateEmailChanne
 	}
 
 	resp := &UpdateEmailChannelResponse{
-		UpdateEmailChannelOutput: r.Request.Data.(*UpdateEmailChannelOutput),
+		UpdateEmailChannelOutput: r.Request.Data.(*types.UpdateEmailChannelOutput),
 		response:                 &aws.Response{Request: r.Request},
 	}
 
@@ -153,7 +67,7 @@ func (r UpdateEmailChannelRequest) Send(ctx context.Context) (*UpdateEmailChanne
 // UpdateEmailChannelResponse is the response type for the
 // UpdateEmailChannel API operation.
 type UpdateEmailChannelResponse struct {
-	*UpdateEmailChannelOutput
+	*types.UpdateEmailChannelOutput
 
 	response *aws.Response
 }

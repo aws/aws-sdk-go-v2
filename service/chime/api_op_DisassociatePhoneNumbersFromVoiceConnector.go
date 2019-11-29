@@ -6,103 +6,15 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/chime/types"
 )
-
-type DisassociatePhoneNumbersFromVoiceConnectorInput struct {
-	_ struct{} `type:"structure"`
-
-	// List of phone numbers, in E.164 format.
-	E164PhoneNumbers []string `type:"list"`
-
-	// The Amazon Chime Voice Connector ID.
-	//
-	// VoiceConnectorId is a required field
-	VoiceConnectorId *string `location:"uri" locationName:"voiceConnectorId" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DisassociatePhoneNumbersFromVoiceConnectorInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DisassociatePhoneNumbersFromVoiceConnectorInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DisassociatePhoneNumbersFromVoiceConnectorInput"}
-
-	if s.VoiceConnectorId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("VoiceConnectorId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DisassociatePhoneNumbersFromVoiceConnectorInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.E164PhoneNumbers != nil {
-		v := s.E164PhoneNumbers
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "E164PhoneNumbers", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
-		}
-		ls0.End()
-
-	}
-	if s.VoiceConnectorId != nil {
-		v := *s.VoiceConnectorId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "voiceConnectorId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type DisassociatePhoneNumbersFromVoiceConnectorOutput struct {
-	_ struct{} `type:"structure"`
-
-	// If the action fails for one or more of the phone numbers in the request,
-	// a list of the phone numbers is returned, along with error codes and error
-	// messages.
-	PhoneNumberErrors []PhoneNumberError `type:"list"`
-}
-
-// String returns the string representation
-func (s DisassociatePhoneNumbersFromVoiceConnectorOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DisassociatePhoneNumbersFromVoiceConnectorOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.PhoneNumberErrors != nil {
-		v := s.PhoneNumberErrors
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "PhoneNumberErrors", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	return nil
-}
 
 const opDisassociatePhoneNumbersFromVoiceConnector = "DisassociatePhoneNumbersFromVoiceConnector"
 
 // DisassociatePhoneNumbersFromVoiceConnectorRequest returns a request value for making API operation for
 // Amazon Chime.
 //
-// Disassociates the specified phone number from the specified Amazon Chime
+// Disassociates the specified phone numbers from the specified Amazon Chime
 // Voice Connector.
 //
 //    // Example sending a request using DisassociatePhoneNumbersFromVoiceConnectorRequest.
@@ -113,7 +25,7 @@ const opDisassociatePhoneNumbersFromVoiceConnector = "DisassociatePhoneNumbersFr
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/DisassociatePhoneNumbersFromVoiceConnector
-func (c *Client) DisassociatePhoneNumbersFromVoiceConnectorRequest(input *DisassociatePhoneNumbersFromVoiceConnectorInput) DisassociatePhoneNumbersFromVoiceConnectorRequest {
+func (c *Client) DisassociatePhoneNumbersFromVoiceConnectorRequest(input *types.DisassociatePhoneNumbersFromVoiceConnectorInput) DisassociatePhoneNumbersFromVoiceConnectorRequest {
 	op := &aws.Operation{
 		Name:       opDisassociatePhoneNumbersFromVoiceConnector,
 		HTTPMethod: "POST",
@@ -121,10 +33,10 @@ func (c *Client) DisassociatePhoneNumbersFromVoiceConnectorRequest(input *Disass
 	}
 
 	if input == nil {
-		input = &DisassociatePhoneNumbersFromVoiceConnectorInput{}
+		input = &types.DisassociatePhoneNumbersFromVoiceConnectorInput{}
 	}
 
-	req := c.newRequest(op, input, &DisassociatePhoneNumbersFromVoiceConnectorOutput{})
+	req := c.newRequest(op, input, &types.DisassociatePhoneNumbersFromVoiceConnectorOutput{})
 	return DisassociatePhoneNumbersFromVoiceConnectorRequest{Request: req, Input: input, Copy: c.DisassociatePhoneNumbersFromVoiceConnectorRequest}
 }
 
@@ -132,8 +44,8 @@ func (c *Client) DisassociatePhoneNumbersFromVoiceConnectorRequest(input *Disass
 // DisassociatePhoneNumbersFromVoiceConnector API operation.
 type DisassociatePhoneNumbersFromVoiceConnectorRequest struct {
 	*aws.Request
-	Input *DisassociatePhoneNumbersFromVoiceConnectorInput
-	Copy  func(*DisassociatePhoneNumbersFromVoiceConnectorInput) DisassociatePhoneNumbersFromVoiceConnectorRequest
+	Input *types.DisassociatePhoneNumbersFromVoiceConnectorInput
+	Copy  func(*types.DisassociatePhoneNumbersFromVoiceConnectorInput) DisassociatePhoneNumbersFromVoiceConnectorRequest
 }
 
 // Send marshals and sends the DisassociatePhoneNumbersFromVoiceConnector API request.
@@ -145,7 +57,7 @@ func (r DisassociatePhoneNumbersFromVoiceConnectorRequest) Send(ctx context.Cont
 	}
 
 	resp := &DisassociatePhoneNumbersFromVoiceConnectorResponse{
-		DisassociatePhoneNumbersFromVoiceConnectorOutput: r.Request.Data.(*DisassociatePhoneNumbersFromVoiceConnectorOutput),
+		DisassociatePhoneNumbersFromVoiceConnectorOutput: r.Request.Data.(*types.DisassociatePhoneNumbersFromVoiceConnectorOutput),
 		response: &aws.Response{Request: r.Request},
 	}
 
@@ -155,7 +67,7 @@ func (r DisassociatePhoneNumbersFromVoiceConnectorRequest) Send(ctx context.Cont
 // DisassociatePhoneNumbersFromVoiceConnectorResponse is the response type for the
 // DisassociatePhoneNumbersFromVoiceConnector API operation.
 type DisassociatePhoneNumbersFromVoiceConnectorResponse struct {
-	*DisassociatePhoneNumbersFromVoiceConnectorOutput
+	*types.DisassociatePhoneNumbersFromVoiceConnectorOutput
 
 	response *aws.Response
 }

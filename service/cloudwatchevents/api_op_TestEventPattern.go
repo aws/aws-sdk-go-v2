@@ -6,58 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/cloudwatchevents/types"
 )
-
-type TestEventPatternInput struct {
-	_ struct{} `type:"structure"`
-
-	// The event, in JSON format, to test against the event pattern.
-	//
-	// Event is a required field
-	Event *string `type:"string" required:"true"`
-
-	// The event pattern. For more information, see Event Patterns (https://docs.aws.amazon.com/eventbridge/latest/userguide/eventbridge-and-event-patterns.html)
-	// in the Amazon EventBridge User Guide.
-	//
-	// EventPattern is a required field
-	EventPattern *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s TestEventPatternInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *TestEventPatternInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "TestEventPatternInput"}
-
-	if s.Event == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Event"))
-	}
-
-	if s.EventPattern == nil {
-		invalidParams.Add(aws.NewErrParamRequired("EventPattern"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type TestEventPatternOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Indicates whether the event matches the event pattern.
-	Result *bool `type:"boolean"`
-}
-
-// String returns the string representation
-func (s TestEventPatternOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opTestEventPattern = "TestEventPattern"
 
@@ -80,7 +30,7 @@ const opTestEventPattern = "TestEventPattern"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/TestEventPattern
-func (c *Client) TestEventPatternRequest(input *TestEventPatternInput) TestEventPatternRequest {
+func (c *Client) TestEventPatternRequest(input *types.TestEventPatternInput) TestEventPatternRequest {
 	op := &aws.Operation{
 		Name:       opTestEventPattern,
 		HTTPMethod: "POST",
@@ -88,10 +38,10 @@ func (c *Client) TestEventPatternRequest(input *TestEventPatternInput) TestEvent
 	}
 
 	if input == nil {
-		input = &TestEventPatternInput{}
+		input = &types.TestEventPatternInput{}
 	}
 
-	req := c.newRequest(op, input, &TestEventPatternOutput{})
+	req := c.newRequest(op, input, &types.TestEventPatternOutput{})
 	return TestEventPatternRequest{Request: req, Input: input, Copy: c.TestEventPatternRequest}
 }
 
@@ -99,8 +49,8 @@ func (c *Client) TestEventPatternRequest(input *TestEventPatternInput) TestEvent
 // TestEventPattern API operation.
 type TestEventPatternRequest struct {
 	*aws.Request
-	Input *TestEventPatternInput
-	Copy  func(*TestEventPatternInput) TestEventPatternRequest
+	Input *types.TestEventPatternInput
+	Copy  func(*types.TestEventPatternInput) TestEventPatternRequest
 }
 
 // Send marshals and sends the TestEventPattern API request.
@@ -112,7 +62,7 @@ func (r TestEventPatternRequest) Send(ctx context.Context) (*TestEventPatternRes
 	}
 
 	resp := &TestEventPatternResponse{
-		TestEventPatternOutput: r.Request.Data.(*TestEventPatternOutput),
+		TestEventPatternOutput: r.Request.Data.(*types.TestEventPatternOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -122,7 +72,7 @@ func (r TestEventPatternRequest) Send(ctx context.Context) (*TestEventPatternRes
 // TestEventPatternResponse is the response type for the
 // TestEventPattern API operation.
 type TestEventPatternResponse struct {
-	*TestEventPatternOutput
+	*types.TestEventPatternOutput
 
 	response *aws.Response
 }

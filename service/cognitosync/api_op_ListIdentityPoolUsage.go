@@ -6,101 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/cognitosync/types"
 )
-
-// A request for usage information on an identity pool.
-type ListIdentityPoolUsageInput struct {
-	_ struct{} `type:"structure"`
-
-	// The maximum number of results to be returned.
-	MaxResults *int64 `location:"querystring" locationName:"maxResults" type:"integer"`
-
-	// A pagination token for obtaining the next page of results.
-	NextToken *string `location:"querystring" locationName:"nextToken" type:"string"`
-}
-
-// String returns the string representation
-func (s ListIdentityPoolUsageInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListIdentityPoolUsageInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.MaxResults != nil {
-		v := *s.MaxResults
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "maxResults", protocol.Int64Value(v), metadata)
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-// Returned for a successful ListIdentityPoolUsage request.
-type ListIdentityPoolUsageOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Total number of identities for the identity pool.
-	Count *int64 `type:"integer"`
-
-	// Usage information for the identity pools.
-	IdentityPoolUsages []IdentityPoolUsage `type:"list"`
-
-	// The maximum number of results to be returned.
-	MaxResults *int64 `type:"integer"`
-
-	// A pagination token for obtaining the next page of results.
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s ListIdentityPoolUsageOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListIdentityPoolUsageOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.Count != nil {
-		v := *s.Count
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "Count", protocol.Int64Value(v), metadata)
-	}
-	if s.IdentityPoolUsages != nil {
-		v := s.IdentityPoolUsages
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "IdentityPoolUsages", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	if s.MaxResults != nil {
-		v := *s.MaxResults
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "MaxResults", protocol.Int64Value(v), metadata)
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opListIdentityPoolUsage = "ListIdentityPoolUsage"
 
@@ -121,7 +28,7 @@ const opListIdentityPoolUsage = "ListIdentityPoolUsage"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-sync-2014-06-30/ListIdentityPoolUsage
-func (c *Client) ListIdentityPoolUsageRequest(input *ListIdentityPoolUsageInput) ListIdentityPoolUsageRequest {
+func (c *Client) ListIdentityPoolUsageRequest(input *types.ListIdentityPoolUsageInput) ListIdentityPoolUsageRequest {
 	op := &aws.Operation{
 		Name:       opListIdentityPoolUsage,
 		HTTPMethod: "GET",
@@ -129,10 +36,10 @@ func (c *Client) ListIdentityPoolUsageRequest(input *ListIdentityPoolUsageInput)
 	}
 
 	if input == nil {
-		input = &ListIdentityPoolUsageInput{}
+		input = &types.ListIdentityPoolUsageInput{}
 	}
 
-	req := c.newRequest(op, input, &ListIdentityPoolUsageOutput{})
+	req := c.newRequest(op, input, &types.ListIdentityPoolUsageOutput{})
 	return ListIdentityPoolUsageRequest{Request: req, Input: input, Copy: c.ListIdentityPoolUsageRequest}
 }
 
@@ -140,8 +47,8 @@ func (c *Client) ListIdentityPoolUsageRequest(input *ListIdentityPoolUsageInput)
 // ListIdentityPoolUsage API operation.
 type ListIdentityPoolUsageRequest struct {
 	*aws.Request
-	Input *ListIdentityPoolUsageInput
-	Copy  func(*ListIdentityPoolUsageInput) ListIdentityPoolUsageRequest
+	Input *types.ListIdentityPoolUsageInput
+	Copy  func(*types.ListIdentityPoolUsageInput) ListIdentityPoolUsageRequest
 }
 
 // Send marshals and sends the ListIdentityPoolUsage API request.
@@ -153,7 +60,7 @@ func (r ListIdentityPoolUsageRequest) Send(ctx context.Context) (*ListIdentityPo
 	}
 
 	resp := &ListIdentityPoolUsageResponse{
-		ListIdentityPoolUsageOutput: r.Request.Data.(*ListIdentityPoolUsageOutput),
+		ListIdentityPoolUsageOutput: r.Request.Data.(*types.ListIdentityPoolUsageOutput),
 		response:                    &aws.Response{Request: r.Request},
 	}
 
@@ -163,7 +70,7 @@ func (r ListIdentityPoolUsageRequest) Send(ctx context.Context) (*ListIdentityPo
 // ListIdentityPoolUsageResponse is the response type for the
 // ListIdentityPoolUsage API operation.
 type ListIdentityPoolUsageResponse struct {
-	*ListIdentityPoolUsageOutput
+	*types.ListIdentityPoolUsageOutput
 
 	response *aws.Response
 }

@@ -6,69 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ecs/types"
 )
-
-type UpdateContainerInstancesStateInput struct {
-	_ struct{} `type:"structure"`
-
-	// The short name or full Amazon Resource Name (ARN) of the cluster that hosts
-	// the container instance to update. If you do not specify a cluster, the default
-	// cluster is assumed.
-	Cluster *string `locationName:"cluster" type:"string"`
-
-	// A list of container instance IDs or full ARN entries.
-	//
-	// ContainerInstances is a required field
-	ContainerInstances []string `locationName:"containerInstances" type:"list" required:"true"`
-
-	// The container instance state with which to update the container instance.
-	// The only valid values for this action are ACTIVE and DRAINING. A container
-	// instance can only be updated to DRAINING status once it has reached an ACTIVE
-	// state. If a container instance is in REGISTERING, DEREGISTERING, or REGISTRATION_FAILED
-	// state you can describe the container instance but will be unable to update
-	// the container instance state.
-	//
-	// Status is a required field
-	Status ContainerInstanceStatus `locationName:"status" type:"string" required:"true" enum:"true"`
-}
-
-// String returns the string representation
-func (s UpdateContainerInstancesStateInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateContainerInstancesStateInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateContainerInstancesStateInput"}
-
-	if s.ContainerInstances == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ContainerInstances"))
-	}
-	if len(s.Status) == 0 {
-		invalidParams.Add(aws.NewErrParamRequired("Status"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type UpdateContainerInstancesStateOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The list of container instances.
-	ContainerInstances []ContainerInstance `locationName:"containerInstances" type:"list"`
-
-	// Any failures associated with the call.
-	Failures []Failure `locationName:"failures" type:"list"`
-}
-
-// String returns the string representation
-func (s UpdateContainerInstancesStateOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opUpdateContainerInstancesState = "UpdateContainerInstancesState"
 
@@ -133,7 +72,7 @@ const opUpdateContainerInstancesState = "UpdateContainerInstancesState"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/UpdateContainerInstancesState
-func (c *Client) UpdateContainerInstancesStateRequest(input *UpdateContainerInstancesStateInput) UpdateContainerInstancesStateRequest {
+func (c *Client) UpdateContainerInstancesStateRequest(input *types.UpdateContainerInstancesStateInput) UpdateContainerInstancesStateRequest {
 	op := &aws.Operation{
 		Name:       opUpdateContainerInstancesState,
 		HTTPMethod: "POST",
@@ -141,10 +80,10 @@ func (c *Client) UpdateContainerInstancesStateRequest(input *UpdateContainerInst
 	}
 
 	if input == nil {
-		input = &UpdateContainerInstancesStateInput{}
+		input = &types.UpdateContainerInstancesStateInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateContainerInstancesStateOutput{})
+	req := c.newRequest(op, input, &types.UpdateContainerInstancesStateOutput{})
 	return UpdateContainerInstancesStateRequest{Request: req, Input: input, Copy: c.UpdateContainerInstancesStateRequest}
 }
 
@@ -152,8 +91,8 @@ func (c *Client) UpdateContainerInstancesStateRequest(input *UpdateContainerInst
 // UpdateContainerInstancesState API operation.
 type UpdateContainerInstancesStateRequest struct {
 	*aws.Request
-	Input *UpdateContainerInstancesStateInput
-	Copy  func(*UpdateContainerInstancesStateInput) UpdateContainerInstancesStateRequest
+	Input *types.UpdateContainerInstancesStateInput
+	Copy  func(*types.UpdateContainerInstancesStateInput) UpdateContainerInstancesStateRequest
 }
 
 // Send marshals and sends the UpdateContainerInstancesState API request.
@@ -165,7 +104,7 @@ func (r UpdateContainerInstancesStateRequest) Send(ctx context.Context) (*Update
 	}
 
 	resp := &UpdateContainerInstancesStateResponse{
-		UpdateContainerInstancesStateOutput: r.Request.Data.(*UpdateContainerInstancesStateOutput),
+		UpdateContainerInstancesStateOutput: r.Request.Data.(*types.UpdateContainerInstancesStateOutput),
 		response:                            &aws.Response{Request: r.Request},
 	}
 
@@ -175,7 +114,7 @@ func (r UpdateContainerInstancesStateRequest) Send(ctx context.Context) (*Update
 // UpdateContainerInstancesStateResponse is the response type for the
 // UpdateContainerInstancesState API operation.
 type UpdateContainerInstancesStateResponse struct {
-	*UpdateContainerInstancesStateOutput
+	*types.UpdateContainerInstancesStateOutput
 
 	response *aws.Response
 }

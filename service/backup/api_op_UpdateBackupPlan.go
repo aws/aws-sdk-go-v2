@@ -4,130 +4,10 @@ package backup
 
 import (
 	"context"
-	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/backup/types"
 )
-
-type UpdateBackupPlanInput struct {
-	_ struct{} `type:"structure"`
-
-	// Specifies the body of a backup plan. Includes a BackupPlanName and one or
-	// more sets of Rules.
-	//
-	// BackupPlan is a required field
-	BackupPlan *BackupPlanInput `type:"structure" required:"true"`
-
-	// Uniquely identifies a backup plan.
-	//
-	// BackupPlanId is a required field
-	BackupPlanId *string `location:"uri" locationName:"backupPlanId" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s UpdateBackupPlanInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateBackupPlanInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateBackupPlanInput"}
-
-	if s.BackupPlan == nil {
-		invalidParams.Add(aws.NewErrParamRequired("BackupPlan"))
-	}
-
-	if s.BackupPlanId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("BackupPlanId"))
-	}
-	if s.BackupPlan != nil {
-		if err := s.BackupPlan.Validate(); err != nil {
-			invalidParams.AddNested("BackupPlan", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s UpdateBackupPlanInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.BackupPlan != nil {
-		v := s.BackupPlan
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "BackupPlan", v, metadata)
-	}
-	if s.BackupPlanId != nil {
-		v := *s.BackupPlanId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "backupPlanId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type UpdateBackupPlanOutput struct {
-	_ struct{} `type:"structure"`
-
-	// An Amazon Resource Name (ARN) that uniquely identifies a backup plan; for
-	// example, arn:aws:backup:us-east-1:123456789012:plan:8F81F553-3A74-4A3F-B93D-B3360DC80C50.
-	BackupPlanArn *string `type:"string"`
-
-	// Uniquely identifies a backup plan.
-	BackupPlanId *string `type:"string"`
-
-	// The date and time a backup plan is updated, in Unix format and Coordinated
-	// Universal Time (UTC). The value of CreationDate is accurate to milliseconds.
-	// For example, the value 1516925490.087 represents Friday, January 26, 2018
-	// 12:11:30.087 AM.
-	CreationDate *time.Time `type:"timestamp"`
-
-	// Unique, randomly generated, Unicode, UTF-8 encoded strings that are at most
-	// 1,024 bytes long. Version Ids cannot be edited.
-	VersionId *string `type:"string"`
-}
-
-// String returns the string representation
-func (s UpdateBackupPlanOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s UpdateBackupPlanOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.BackupPlanArn != nil {
-		v := *s.BackupPlanArn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "BackupPlanArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.BackupPlanId != nil {
-		v := *s.BackupPlanId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "BackupPlanId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.CreationDate != nil {
-		v := *s.CreationDate
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "CreationDate",
-			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
-	}
-	if s.VersionId != nil {
-		v := *s.VersionId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "VersionId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opUpdateBackupPlan = "UpdateBackupPlan"
 
@@ -146,7 +26,7 @@ const opUpdateBackupPlan = "UpdateBackupPlan"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/UpdateBackupPlan
-func (c *Client) UpdateBackupPlanRequest(input *UpdateBackupPlanInput) UpdateBackupPlanRequest {
+func (c *Client) UpdateBackupPlanRequest(input *types.UpdateBackupPlanInput) UpdateBackupPlanRequest {
 	op := &aws.Operation{
 		Name:       opUpdateBackupPlan,
 		HTTPMethod: "POST",
@@ -154,10 +34,10 @@ func (c *Client) UpdateBackupPlanRequest(input *UpdateBackupPlanInput) UpdateBac
 	}
 
 	if input == nil {
-		input = &UpdateBackupPlanInput{}
+		input = &types.UpdateBackupPlanInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateBackupPlanOutput{})
+	req := c.newRequest(op, input, &types.UpdateBackupPlanOutput{})
 	return UpdateBackupPlanRequest{Request: req, Input: input, Copy: c.UpdateBackupPlanRequest}
 }
 
@@ -165,8 +45,8 @@ func (c *Client) UpdateBackupPlanRequest(input *UpdateBackupPlanInput) UpdateBac
 // UpdateBackupPlan API operation.
 type UpdateBackupPlanRequest struct {
 	*aws.Request
-	Input *UpdateBackupPlanInput
-	Copy  func(*UpdateBackupPlanInput) UpdateBackupPlanRequest
+	Input *types.UpdateBackupPlanInput
+	Copy  func(*types.UpdateBackupPlanInput) UpdateBackupPlanRequest
 }
 
 // Send marshals and sends the UpdateBackupPlan API request.
@@ -178,7 +58,7 @@ func (r UpdateBackupPlanRequest) Send(ctx context.Context) (*UpdateBackupPlanRes
 	}
 
 	resp := &UpdateBackupPlanResponse{
-		UpdateBackupPlanOutput: r.Request.Data.(*UpdateBackupPlanOutput),
+		UpdateBackupPlanOutput: r.Request.Data.(*types.UpdateBackupPlanOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -188,7 +68,7 @@ func (r UpdateBackupPlanRequest) Send(ctx context.Context) (*UpdateBackupPlanRes
 // UpdateBackupPlanResponse is the response type for the
 // UpdateBackupPlan API operation.
 type UpdateBackupPlanResponse struct {
-	*UpdateBackupPlanOutput
+	*types.UpdateBackupPlanOutput
 
 	response *aws.Response
 }

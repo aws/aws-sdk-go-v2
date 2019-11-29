@@ -6,63 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/restjson"
+	"github.com/aws/aws-sdk-go-v2/service/apigatewayv2/types"
 )
-
-type DeleteApiInput struct {
-	_ struct{} `type:"structure"`
-
-	// ApiId is a required field
-	ApiId *string `location:"uri" locationName:"apiId" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteApiInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteApiInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteApiInput"}
-
-	if s.ApiId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ApiId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteApiInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.ApiId != nil {
-		v := *s.ApiId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "apiId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type DeleteApiOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteApiOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteApiOutput) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
 
 const opDeleteApi = "DeleteApi"
 
@@ -79,7 +26,7 @@ const opDeleteApi = "DeleteApi"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/apigatewayv2-2018-11-29/DeleteApi
-func (c *Client) DeleteApiRequest(input *DeleteApiInput) DeleteApiRequest {
+func (c *Client) DeleteApiRequest(input *types.DeleteApiInput) DeleteApiRequest {
 	op := &aws.Operation{
 		Name:       opDeleteApi,
 		HTTPMethod: "DELETE",
@@ -87,10 +34,10 @@ func (c *Client) DeleteApiRequest(input *DeleteApiInput) DeleteApiRequest {
 	}
 
 	if input == nil {
-		input = &DeleteApiInput{}
+		input = &types.DeleteApiInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteApiOutput{})
+	req := c.newRequest(op, input, &types.DeleteApiOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return DeleteApiRequest{Request: req, Input: input, Copy: c.DeleteApiRequest}
@@ -100,8 +47,8 @@ func (c *Client) DeleteApiRequest(input *DeleteApiInput) DeleteApiRequest {
 // DeleteApi API operation.
 type DeleteApiRequest struct {
 	*aws.Request
-	Input *DeleteApiInput
-	Copy  func(*DeleteApiInput) DeleteApiRequest
+	Input *types.DeleteApiInput
+	Copy  func(*types.DeleteApiInput) DeleteApiRequest
 }
 
 // Send marshals and sends the DeleteApi API request.
@@ -113,7 +60,7 @@ func (r DeleteApiRequest) Send(ctx context.Context) (*DeleteApiResponse, error) 
 	}
 
 	resp := &DeleteApiResponse{
-		DeleteApiOutput: r.Request.Data.(*DeleteApiOutput),
+		DeleteApiOutput: r.Request.Data.(*types.DeleteApiOutput),
 		response:        &aws.Response{Request: r.Request},
 	}
 
@@ -123,7 +70,7 @@ func (r DeleteApiRequest) Send(ctx context.Context) (*DeleteApiResponse, error) 
 // DeleteApiResponse is the response type for the
 // DeleteApi API operation.
 type DeleteApiResponse struct {
-	*DeleteApiOutput
+	*types.DeleteApiOutput
 
 	response *aws.Response
 }

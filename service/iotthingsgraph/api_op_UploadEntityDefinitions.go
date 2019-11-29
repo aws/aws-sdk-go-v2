@@ -6,60 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/iotthingsgraph/types"
 )
-
-type UploadEntityDefinitionsInput struct {
-	_ struct{} `type:"structure"`
-
-	// A Boolean that specifies whether to deprecate all entities in the latest
-	// version before uploading the new DefinitionDocument. If set to true, the
-	// upload will create a new namespace version.
-	DeprecateExistingEntities *bool `locationName:"deprecateExistingEntities" type:"boolean"`
-
-	// The DefinitionDocument that defines the updated entities.
-	Document *DefinitionDocument `locationName:"document" type:"structure"`
-
-	// A Boolean that specifies whether to synchronize with the latest version of
-	// the public namespace. If set to true, the upload will create a new namespace
-	// version.
-	SyncWithPublicNamespace *bool `locationName:"syncWithPublicNamespace" type:"boolean"`
-}
-
-// String returns the string representation
-func (s UploadEntityDefinitionsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UploadEntityDefinitionsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UploadEntityDefinitionsInput"}
-	if s.Document != nil {
-		if err := s.Document.Validate(); err != nil {
-			invalidParams.AddNested("Document", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type UploadEntityDefinitionsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID that specifies the upload action. You can use this to track the status
-	// of the upload.
-	//
-	// UploadId is a required field
-	UploadId *string `locationName:"uploadId" min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s UploadEntityDefinitionsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opUploadEntityDefinitions = "UploadEntityDefinitions"
 
@@ -95,7 +43,7 @@ const opUploadEntityDefinitions = "UploadEntityDefinitions"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iotthingsgraph-2018-09-06/UploadEntityDefinitions
-func (c *Client) UploadEntityDefinitionsRequest(input *UploadEntityDefinitionsInput) UploadEntityDefinitionsRequest {
+func (c *Client) UploadEntityDefinitionsRequest(input *types.UploadEntityDefinitionsInput) UploadEntityDefinitionsRequest {
 	op := &aws.Operation{
 		Name:       opUploadEntityDefinitions,
 		HTTPMethod: "POST",
@@ -103,10 +51,10 @@ func (c *Client) UploadEntityDefinitionsRequest(input *UploadEntityDefinitionsIn
 	}
 
 	if input == nil {
-		input = &UploadEntityDefinitionsInput{}
+		input = &types.UploadEntityDefinitionsInput{}
 	}
 
-	req := c.newRequest(op, input, &UploadEntityDefinitionsOutput{})
+	req := c.newRequest(op, input, &types.UploadEntityDefinitionsOutput{})
 	return UploadEntityDefinitionsRequest{Request: req, Input: input, Copy: c.UploadEntityDefinitionsRequest}
 }
 
@@ -114,8 +62,8 @@ func (c *Client) UploadEntityDefinitionsRequest(input *UploadEntityDefinitionsIn
 // UploadEntityDefinitions API operation.
 type UploadEntityDefinitionsRequest struct {
 	*aws.Request
-	Input *UploadEntityDefinitionsInput
-	Copy  func(*UploadEntityDefinitionsInput) UploadEntityDefinitionsRequest
+	Input *types.UploadEntityDefinitionsInput
+	Copy  func(*types.UploadEntityDefinitionsInput) UploadEntityDefinitionsRequest
 }
 
 // Send marshals and sends the UploadEntityDefinitions API request.
@@ -127,7 +75,7 @@ func (r UploadEntityDefinitionsRequest) Send(ctx context.Context) (*UploadEntity
 	}
 
 	resp := &UploadEntityDefinitionsResponse{
-		UploadEntityDefinitionsOutput: r.Request.Data.(*UploadEntityDefinitionsOutput),
+		UploadEntityDefinitionsOutput: r.Request.Data.(*types.UploadEntityDefinitionsOutput),
 		response:                      &aws.Response{Request: r.Request},
 	}
 
@@ -137,7 +85,7 @@ func (r UploadEntityDefinitionsRequest) Send(ctx context.Context) (*UploadEntity
 // UploadEntityDefinitionsResponse is the response type for the
 // UploadEntityDefinitions API operation.
 type UploadEntityDefinitionsResponse struct {
-	*UploadEntityDefinitionsOutput
+	*types.UploadEntityDefinitionsOutput
 
 	response *aws.Response
 }

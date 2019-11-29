@@ -13,6 +13,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws/awserr"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting/integration"
 	"github.com/aws/aws-sdk-go-v2/service/codecommit"
+	"github.com/aws/aws-sdk-go-v2/service/codecommit/types"
 )
 
 var _ aws.Config
@@ -24,7 +25,7 @@ func TestInteg_00_ListRepositories(t *testing.T) {
 
 	cfg := integration.ConfigWithDefaultRegion("us-west-2")
 	svc := codecommit.New(cfg)
-	params := &codecommit.ListRepositoriesInput{}
+	params := &types.ListRepositoriesInput{}
 
 	req := svc.ListRepositoriesRequest(params)
 
@@ -39,7 +40,7 @@ func TestInteg_01_ListBranches(t *testing.T) {
 
 	cfg := integration.ConfigWithDefaultRegion("us-west-2")
 	svc := codecommit.New(cfg)
-	params := &codecommit.ListBranchesInput{
+	params := &types.ListBranchesInput{
 		RepositoryName: aws.String("fake-repo"),
 	}
 

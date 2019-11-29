@@ -6,65 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/autoscaling/types"
 )
-
-type DescribeLoadBalancerTargetGroupsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the Auto Scaling group.
-	//
-	// AutoScalingGroupName is a required field
-	AutoScalingGroupName *string `min:"1" type:"string" required:"true"`
-
-	// The maximum number of items to return with this call. The default value is
-	// 100 and the maximum value is 100.
-	MaxRecords *int64 `type:"integer"`
-
-	// The token for the next set of items to return. (You received this token from
-	// a previous call.)
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeLoadBalancerTargetGroupsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeLoadBalancerTargetGroupsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeLoadBalancerTargetGroupsInput"}
-
-	if s.AutoScalingGroupName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("AutoScalingGroupName"))
-	}
-	if s.AutoScalingGroupName != nil && len(*s.AutoScalingGroupName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("AutoScalingGroupName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribeLoadBalancerTargetGroupsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Information about the target groups.
-	LoadBalancerTargetGroups []LoadBalancerTargetGroupState `type:"list"`
-
-	// A string that indicates that the response contains more items than can be
-	// returned in a single response. To receive additional items, specify this
-	// string for the NextToken value when requesting the next set of items. This
-	// value is null when there are no more items to return.
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeLoadBalancerTargetGroupsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeLoadBalancerTargetGroups = "DescribeLoadBalancerTargetGroups"
 
@@ -81,7 +24,7 @@ const opDescribeLoadBalancerTargetGroups = "DescribeLoadBalancerTargetGroups"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DescribeLoadBalancerTargetGroups
-func (c *Client) DescribeLoadBalancerTargetGroupsRequest(input *DescribeLoadBalancerTargetGroupsInput) DescribeLoadBalancerTargetGroupsRequest {
+func (c *Client) DescribeLoadBalancerTargetGroupsRequest(input *types.DescribeLoadBalancerTargetGroupsInput) DescribeLoadBalancerTargetGroupsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeLoadBalancerTargetGroups,
 		HTTPMethod: "POST",
@@ -89,10 +32,10 @@ func (c *Client) DescribeLoadBalancerTargetGroupsRequest(input *DescribeLoadBala
 	}
 
 	if input == nil {
-		input = &DescribeLoadBalancerTargetGroupsInput{}
+		input = &types.DescribeLoadBalancerTargetGroupsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeLoadBalancerTargetGroupsOutput{})
+	req := c.newRequest(op, input, &types.DescribeLoadBalancerTargetGroupsOutput{})
 	return DescribeLoadBalancerTargetGroupsRequest{Request: req, Input: input, Copy: c.DescribeLoadBalancerTargetGroupsRequest}
 }
 
@@ -100,8 +43,8 @@ func (c *Client) DescribeLoadBalancerTargetGroupsRequest(input *DescribeLoadBala
 // DescribeLoadBalancerTargetGroups API operation.
 type DescribeLoadBalancerTargetGroupsRequest struct {
 	*aws.Request
-	Input *DescribeLoadBalancerTargetGroupsInput
-	Copy  func(*DescribeLoadBalancerTargetGroupsInput) DescribeLoadBalancerTargetGroupsRequest
+	Input *types.DescribeLoadBalancerTargetGroupsInput
+	Copy  func(*types.DescribeLoadBalancerTargetGroupsInput) DescribeLoadBalancerTargetGroupsRequest
 }
 
 // Send marshals and sends the DescribeLoadBalancerTargetGroups API request.
@@ -113,7 +56,7 @@ func (r DescribeLoadBalancerTargetGroupsRequest) Send(ctx context.Context) (*Des
 	}
 
 	resp := &DescribeLoadBalancerTargetGroupsResponse{
-		DescribeLoadBalancerTargetGroupsOutput: r.Request.Data.(*DescribeLoadBalancerTargetGroupsOutput),
+		DescribeLoadBalancerTargetGroupsOutput: r.Request.Data.(*types.DescribeLoadBalancerTargetGroupsOutput),
 		response:                               &aws.Response{Request: r.Request},
 	}
 
@@ -123,7 +66,7 @@ func (r DescribeLoadBalancerTargetGroupsRequest) Send(ctx context.Context) (*Des
 // DescribeLoadBalancerTargetGroupsResponse is the response type for the
 // DescribeLoadBalancerTargetGroups API operation.
 type DescribeLoadBalancerTargetGroupsResponse struct {
-	*DescribeLoadBalancerTargetGroupsOutput
+	*types.DescribeLoadBalancerTargetGroupsOutput
 
 	response *aws.Response
 }

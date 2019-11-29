@@ -6,93 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/servicequotas/types"
 )
-
-type ListRequestedServiceQuotaChangeHistoryByQuotaInput struct {
-	_ struct{} `type:"structure"`
-
-	// (Optional) Limits the number of results that you want to include in the response.
-	// If you don't include this parameter, the response defaults to a value that's
-	// specific to the operation. If additional items exist beyond the specified
-	// maximum, the NextToken element is present and has a value (isn't null). Include
-	// that value as the NextToken request parameter in the call to the operation
-	// to get the next part of the results. You should check NextToken after every
-	// operation to ensure that you receive all of the results.
-	MaxResults *int64 `min:"1" type:"integer"`
-
-	// (Optional) Use this parameter in a request if you receive a NextToken response
-	// in a previous request that indicates that there's more output available.
-	// In a subsequent call, set it to the value of the previous call's NextToken
-	// response to indicate where the output should continue from.
-	NextToken *string `type:"string"`
-
-	// Specifies the service quota that you want to use
-	//
-	// QuotaCode is a required field
-	QuotaCode *string `min:"1" type:"string" required:"true"`
-
-	// Specifies the service that you want to use.
-	//
-	// ServiceCode is a required field
-	ServiceCode *string `min:"1" type:"string" required:"true"`
-
-	// Specifies the status value of the quota increase request.
-	Status RequestStatus `type:"string" enum:"true"`
-}
-
-// String returns the string representation
-func (s ListRequestedServiceQuotaChangeHistoryByQuotaInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListRequestedServiceQuotaChangeHistoryByQuotaInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListRequestedServiceQuotaChangeHistoryByQuotaInput"}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-
-	if s.QuotaCode == nil {
-		invalidParams.Add(aws.NewErrParamRequired("QuotaCode"))
-	}
-	if s.QuotaCode != nil && len(*s.QuotaCode) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("QuotaCode", 1))
-	}
-
-	if s.ServiceCode == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ServiceCode"))
-	}
-	if s.ServiceCode != nil && len(*s.ServiceCode) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ServiceCode", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ListRequestedServiceQuotaChangeHistoryByQuotaOutput struct {
-	_ struct{} `type:"structure"`
-
-	// If present in the response, this value indicates there's more output available
-	// that what's included in the current response. This can occur even when the
-	// response includes no values at all, such as when you ask for a filtered view
-	// of a very long list. Use this value in the NextToken request parameter in
-	// a subsequent call to the operation to continue processing and get the next
-	// part of the output. You should repeat this until the NextToken response element
-	// comes back empty (as null).
-	NextToken *string `type:"string"`
-
-	// Returns a list of service quota requests.
-	RequestedQuotas []RequestedServiceQuotaChange `type:"list"`
-}
-
-// String returns the string representation
-func (s ListRequestedServiceQuotaChangeHistoryByQuotaOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListRequestedServiceQuotaChangeHistoryByQuota = "ListRequestedServiceQuotaChangeHistoryByQuota"
 
@@ -112,7 +27,7 @@ const opListRequestedServiceQuotaChangeHistoryByQuota = "ListRequestedServiceQuo
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/service-quotas-2019-06-24/ListRequestedServiceQuotaChangeHistoryByQuota
-func (c *Client) ListRequestedServiceQuotaChangeHistoryByQuotaRequest(input *ListRequestedServiceQuotaChangeHistoryByQuotaInput) ListRequestedServiceQuotaChangeHistoryByQuotaRequest {
+func (c *Client) ListRequestedServiceQuotaChangeHistoryByQuotaRequest(input *types.ListRequestedServiceQuotaChangeHistoryByQuotaInput) ListRequestedServiceQuotaChangeHistoryByQuotaRequest {
 	op := &aws.Operation{
 		Name:       opListRequestedServiceQuotaChangeHistoryByQuota,
 		HTTPMethod: "POST",
@@ -126,10 +41,10 @@ func (c *Client) ListRequestedServiceQuotaChangeHistoryByQuotaRequest(input *Lis
 	}
 
 	if input == nil {
-		input = &ListRequestedServiceQuotaChangeHistoryByQuotaInput{}
+		input = &types.ListRequestedServiceQuotaChangeHistoryByQuotaInput{}
 	}
 
-	req := c.newRequest(op, input, &ListRequestedServiceQuotaChangeHistoryByQuotaOutput{})
+	req := c.newRequest(op, input, &types.ListRequestedServiceQuotaChangeHistoryByQuotaOutput{})
 	return ListRequestedServiceQuotaChangeHistoryByQuotaRequest{Request: req, Input: input, Copy: c.ListRequestedServiceQuotaChangeHistoryByQuotaRequest}
 }
 
@@ -137,8 +52,8 @@ func (c *Client) ListRequestedServiceQuotaChangeHistoryByQuotaRequest(input *Lis
 // ListRequestedServiceQuotaChangeHistoryByQuota API operation.
 type ListRequestedServiceQuotaChangeHistoryByQuotaRequest struct {
 	*aws.Request
-	Input *ListRequestedServiceQuotaChangeHistoryByQuotaInput
-	Copy  func(*ListRequestedServiceQuotaChangeHistoryByQuotaInput) ListRequestedServiceQuotaChangeHistoryByQuotaRequest
+	Input *types.ListRequestedServiceQuotaChangeHistoryByQuotaInput
+	Copy  func(*types.ListRequestedServiceQuotaChangeHistoryByQuotaInput) ListRequestedServiceQuotaChangeHistoryByQuotaRequest
 }
 
 // Send marshals and sends the ListRequestedServiceQuotaChangeHistoryByQuota API request.
@@ -150,7 +65,7 @@ func (r ListRequestedServiceQuotaChangeHistoryByQuotaRequest) Send(ctx context.C
 	}
 
 	resp := &ListRequestedServiceQuotaChangeHistoryByQuotaResponse{
-		ListRequestedServiceQuotaChangeHistoryByQuotaOutput: r.Request.Data.(*ListRequestedServiceQuotaChangeHistoryByQuotaOutput),
+		ListRequestedServiceQuotaChangeHistoryByQuotaOutput: r.Request.Data.(*types.ListRequestedServiceQuotaChangeHistoryByQuotaOutput),
 		response: &aws.Response{Request: r.Request},
 	}
 
@@ -180,7 +95,7 @@ func NewListRequestedServiceQuotaChangeHistoryByQuotaPaginator(req ListRequested
 	return ListRequestedServiceQuotaChangeHistoryByQuotaPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListRequestedServiceQuotaChangeHistoryByQuotaInput
+				var inCpy *types.ListRequestedServiceQuotaChangeHistoryByQuotaInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -200,14 +115,14 @@ type ListRequestedServiceQuotaChangeHistoryByQuotaPaginator struct {
 	aws.Pager
 }
 
-func (p *ListRequestedServiceQuotaChangeHistoryByQuotaPaginator) CurrentPage() *ListRequestedServiceQuotaChangeHistoryByQuotaOutput {
-	return p.Pager.CurrentPage().(*ListRequestedServiceQuotaChangeHistoryByQuotaOutput)
+func (p *ListRequestedServiceQuotaChangeHistoryByQuotaPaginator) CurrentPage() *types.ListRequestedServiceQuotaChangeHistoryByQuotaOutput {
+	return p.Pager.CurrentPage().(*types.ListRequestedServiceQuotaChangeHistoryByQuotaOutput)
 }
 
 // ListRequestedServiceQuotaChangeHistoryByQuotaResponse is the response type for the
 // ListRequestedServiceQuotaChangeHistoryByQuota API operation.
 type ListRequestedServiceQuotaChangeHistoryByQuotaResponse struct {
-	*ListRequestedServiceQuotaChangeHistoryByQuotaOutput
+	*types.ListRequestedServiceQuotaChangeHistoryByQuotaOutput
 
 	response *aws.Response
 }

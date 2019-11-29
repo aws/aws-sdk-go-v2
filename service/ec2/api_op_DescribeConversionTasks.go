@@ -6,38 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-type DescribeConversionTasksInput struct {
-	_ struct{} `type:"structure"`
-
-	// The conversion task IDs.
-	ConversionTaskIds []string `locationName:"conversionTaskId" locationNameList:"item" type:"list"`
-
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have
-	// the required permissions, the error response is DryRunOperation. Otherwise,
-	// it is UnauthorizedOperation.
-	DryRun *bool `locationName:"dryRun" type:"boolean"`
-}
-
-// String returns the string representation
-func (s DescribeConversionTasksInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type DescribeConversionTasksOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Information about the conversion tasks.
-	ConversionTasks []ConversionTask `locationName:"conversionTasks" locationNameList:"item" type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeConversionTasksOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeConversionTasks = "DescribeConversionTasks"
 
@@ -58,7 +28,7 @@ const opDescribeConversionTasks = "DescribeConversionTasks"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeConversionTasks
-func (c *Client) DescribeConversionTasksRequest(input *DescribeConversionTasksInput) DescribeConversionTasksRequest {
+func (c *Client) DescribeConversionTasksRequest(input *types.DescribeConversionTasksInput) DescribeConversionTasksRequest {
 	op := &aws.Operation{
 		Name:       opDescribeConversionTasks,
 		HTTPMethod: "POST",
@@ -66,10 +36,10 @@ func (c *Client) DescribeConversionTasksRequest(input *DescribeConversionTasksIn
 	}
 
 	if input == nil {
-		input = &DescribeConversionTasksInput{}
+		input = &types.DescribeConversionTasksInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeConversionTasksOutput{})
+	req := c.newRequest(op, input, &types.DescribeConversionTasksOutput{})
 	return DescribeConversionTasksRequest{Request: req, Input: input, Copy: c.DescribeConversionTasksRequest}
 }
 
@@ -77,8 +47,8 @@ func (c *Client) DescribeConversionTasksRequest(input *DescribeConversionTasksIn
 // DescribeConversionTasks API operation.
 type DescribeConversionTasksRequest struct {
 	*aws.Request
-	Input *DescribeConversionTasksInput
-	Copy  func(*DescribeConversionTasksInput) DescribeConversionTasksRequest
+	Input *types.DescribeConversionTasksInput
+	Copy  func(*types.DescribeConversionTasksInput) DescribeConversionTasksRequest
 }
 
 // Send marshals and sends the DescribeConversionTasks API request.
@@ -90,7 +60,7 @@ func (r DescribeConversionTasksRequest) Send(ctx context.Context) (*DescribeConv
 	}
 
 	resp := &DescribeConversionTasksResponse{
-		DescribeConversionTasksOutput: r.Request.Data.(*DescribeConversionTasksOutput),
+		DescribeConversionTasksOutput: r.Request.Data.(*types.DescribeConversionTasksOutput),
 		response:                      &aws.Response{Request: r.Request},
 	}
 
@@ -100,7 +70,7 @@ func (r DescribeConversionTasksRequest) Send(ctx context.Context) (*DescribeConv
 // DescribeConversionTasksResponse is the response type for the
 // DescribeConversionTasks API operation.
 type DescribeConversionTasksResponse struct {
-	*DescribeConversionTasksOutput
+	*types.DescribeConversionTasksOutput
 
 	response *aws.Response
 }

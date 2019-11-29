@@ -6,136 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/mediapackage/types"
 )
-
-type DescribeHarvestJobInput struct {
-	_ struct{} `type:"structure"`
-
-	// Id is a required field
-	Id *string `location:"uri" locationName:"id" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeHarvestJobInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeHarvestJobInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeHarvestJobInput"}
-
-	if s.Id == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Id"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DescribeHarvestJobInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.Id != nil {
-		v := *s.Id
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "id", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type DescribeHarvestJobOutput struct {
-	_ struct{} `type:"structure"`
-
-	Arn *string `locationName:"arn" type:"string"`
-
-	ChannelId *string `locationName:"channelId" type:"string"`
-
-	CreatedAt *string `locationName:"createdAt" type:"string"`
-
-	EndTime *string `locationName:"endTime" type:"string"`
-
-	Id *string `locationName:"id" type:"string"`
-
-	OriginEndpointId *string `locationName:"originEndpointId" type:"string"`
-
-	// Configuration parameters for where in an S3 bucket to place the harvested
-	// content
-	S3Destination *S3Destination `locationName:"s3Destination" type:"structure"`
-
-	StartTime *string `locationName:"startTime" type:"string"`
-
-	Status Status `locationName:"status" type:"string" enum:"true"`
-}
-
-// String returns the string representation
-func (s DescribeHarvestJobOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DescribeHarvestJobOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.Arn != nil {
-		v := *s.Arn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "arn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.ChannelId != nil {
-		v := *s.ChannelId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "channelId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.CreatedAt != nil {
-		v := *s.CreatedAt
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "createdAt", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.EndTime != nil {
-		v := *s.EndTime
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "endTime", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Id != nil {
-		v := *s.Id
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "id", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.OriginEndpointId != nil {
-		v := *s.OriginEndpointId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "originEndpointId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.S3Destination != nil {
-		v := s.S3Destination
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "s3Destination", v, metadata)
-	}
-	if s.StartTime != nil {
-		v := *s.StartTime
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "startTime", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if len(s.Status) > 0 {
-		v := s.Status
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "status", protocol.QuotedValue{ValueMarshaler: v}, metadata)
-	}
-	return nil
-}
 
 const opDescribeHarvestJob = "DescribeHarvestJob"
 
@@ -152,7 +24,7 @@ const opDescribeHarvestJob = "DescribeHarvestJob"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mediapackage-2017-10-12/DescribeHarvestJob
-func (c *Client) DescribeHarvestJobRequest(input *DescribeHarvestJobInput) DescribeHarvestJobRequest {
+func (c *Client) DescribeHarvestJobRequest(input *types.DescribeHarvestJobInput) DescribeHarvestJobRequest {
 	op := &aws.Operation{
 		Name:       opDescribeHarvestJob,
 		HTTPMethod: "GET",
@@ -160,10 +32,10 @@ func (c *Client) DescribeHarvestJobRequest(input *DescribeHarvestJobInput) Descr
 	}
 
 	if input == nil {
-		input = &DescribeHarvestJobInput{}
+		input = &types.DescribeHarvestJobInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeHarvestJobOutput{})
+	req := c.newRequest(op, input, &types.DescribeHarvestJobOutput{})
 	return DescribeHarvestJobRequest{Request: req, Input: input, Copy: c.DescribeHarvestJobRequest}
 }
 
@@ -171,8 +43,8 @@ func (c *Client) DescribeHarvestJobRequest(input *DescribeHarvestJobInput) Descr
 // DescribeHarvestJob API operation.
 type DescribeHarvestJobRequest struct {
 	*aws.Request
-	Input *DescribeHarvestJobInput
-	Copy  func(*DescribeHarvestJobInput) DescribeHarvestJobRequest
+	Input *types.DescribeHarvestJobInput
+	Copy  func(*types.DescribeHarvestJobInput) DescribeHarvestJobRequest
 }
 
 // Send marshals and sends the DescribeHarvestJob API request.
@@ -184,7 +56,7 @@ func (r DescribeHarvestJobRequest) Send(ctx context.Context) (*DescribeHarvestJo
 	}
 
 	resp := &DescribeHarvestJobResponse{
-		DescribeHarvestJobOutput: r.Request.Data.(*DescribeHarvestJobOutput),
+		DescribeHarvestJobOutput: r.Request.Data.(*types.DescribeHarvestJobOutput),
 		response:                 &aws.Response{Request: r.Request},
 	}
 
@@ -194,7 +66,7 @@ func (r DescribeHarvestJobRequest) Send(ctx context.Context) (*DescribeHarvestJo
 // DescribeHarvestJobResponse is the response type for the
 // DescribeHarvestJob API operation.
 type DescribeHarvestJobResponse struct {
-	*DescribeHarvestJobOutput
+	*types.DescribeHarvestJobOutput
 
 	response *aws.Response
 }

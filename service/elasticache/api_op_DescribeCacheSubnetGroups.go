@@ -6,52 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/elasticache/types"
 )
-
-// Represents the input of a DescribeCacheSubnetGroups operation.
-type DescribeCacheSubnetGroupsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the cache subnet group to return details for.
-	CacheSubnetGroupName *string `type:"string"`
-
-	// An optional marker returned from a prior request. Use this marker for pagination
-	// of results from this operation. If this parameter is specified, the response
-	// includes only records beyond the marker, up to the value specified by MaxRecords.
-	Marker *string `type:"string"`
-
-	// The maximum number of records to include in the response. If more records
-	// exist than the specified MaxRecords value, a marker is included in the response
-	// so that the remaining results can be retrieved.
-	//
-	// Default: 100
-	//
-	// Constraints: minimum 20; maximum 100.
-	MaxRecords *int64 `type:"integer"`
-}
-
-// String returns the string representation
-func (s DescribeCacheSubnetGroupsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Represents the output of a DescribeCacheSubnetGroups operation.
-type DescribeCacheSubnetGroupsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A list of cache subnet groups. Each element in the list contains detailed
-	// information about one group.
-	CacheSubnetGroups []CacheSubnetGroup `locationNameList:"CacheSubnetGroup" type:"list"`
-
-	// Provides an identifier to allow retrieval of paginated results.
-	Marker *string `type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeCacheSubnetGroupsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeCacheSubnetGroups = "DescribeCacheSubnetGroups"
 
@@ -71,7 +27,7 @@ const opDescribeCacheSubnetGroups = "DescribeCacheSubnetGroups"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DescribeCacheSubnetGroups
-func (c *Client) DescribeCacheSubnetGroupsRequest(input *DescribeCacheSubnetGroupsInput) DescribeCacheSubnetGroupsRequest {
+func (c *Client) DescribeCacheSubnetGroupsRequest(input *types.DescribeCacheSubnetGroupsInput) DescribeCacheSubnetGroupsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeCacheSubnetGroups,
 		HTTPMethod: "POST",
@@ -85,10 +41,10 @@ func (c *Client) DescribeCacheSubnetGroupsRequest(input *DescribeCacheSubnetGrou
 	}
 
 	if input == nil {
-		input = &DescribeCacheSubnetGroupsInput{}
+		input = &types.DescribeCacheSubnetGroupsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeCacheSubnetGroupsOutput{})
+	req := c.newRequest(op, input, &types.DescribeCacheSubnetGroupsOutput{})
 	return DescribeCacheSubnetGroupsRequest{Request: req, Input: input, Copy: c.DescribeCacheSubnetGroupsRequest}
 }
 
@@ -96,8 +52,8 @@ func (c *Client) DescribeCacheSubnetGroupsRequest(input *DescribeCacheSubnetGrou
 // DescribeCacheSubnetGroups API operation.
 type DescribeCacheSubnetGroupsRequest struct {
 	*aws.Request
-	Input *DescribeCacheSubnetGroupsInput
-	Copy  func(*DescribeCacheSubnetGroupsInput) DescribeCacheSubnetGroupsRequest
+	Input *types.DescribeCacheSubnetGroupsInput
+	Copy  func(*types.DescribeCacheSubnetGroupsInput) DescribeCacheSubnetGroupsRequest
 }
 
 // Send marshals and sends the DescribeCacheSubnetGroups API request.
@@ -109,7 +65,7 @@ func (r DescribeCacheSubnetGroupsRequest) Send(ctx context.Context) (*DescribeCa
 	}
 
 	resp := &DescribeCacheSubnetGroupsResponse{
-		DescribeCacheSubnetGroupsOutput: r.Request.Data.(*DescribeCacheSubnetGroupsOutput),
+		DescribeCacheSubnetGroupsOutput: r.Request.Data.(*types.DescribeCacheSubnetGroupsOutput),
 		response:                        &aws.Response{Request: r.Request},
 	}
 
@@ -139,7 +95,7 @@ func NewDescribeCacheSubnetGroupsPaginator(req DescribeCacheSubnetGroupsRequest)
 	return DescribeCacheSubnetGroupsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *DescribeCacheSubnetGroupsInput
+				var inCpy *types.DescribeCacheSubnetGroupsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -159,14 +115,14 @@ type DescribeCacheSubnetGroupsPaginator struct {
 	aws.Pager
 }
 
-func (p *DescribeCacheSubnetGroupsPaginator) CurrentPage() *DescribeCacheSubnetGroupsOutput {
-	return p.Pager.CurrentPage().(*DescribeCacheSubnetGroupsOutput)
+func (p *DescribeCacheSubnetGroupsPaginator) CurrentPage() *types.DescribeCacheSubnetGroupsOutput {
+	return p.Pager.CurrentPage().(*types.DescribeCacheSubnetGroupsOutput)
 }
 
 // DescribeCacheSubnetGroupsResponse is the response type for the
 // DescribeCacheSubnetGroups API operation.
 type DescribeCacheSubnetGroupsResponse struct {
-	*DescribeCacheSubnetGroupsOutput
+	*types.DescribeCacheSubnetGroupsOutput
 
 	response *aws.Response
 }

@@ -4,85 +4,10 @@ package workmail
 
 import (
 	"context"
-	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/workmail/types"
 )
-
-type DescribeResourceInput struct {
-	_ struct{} `type:"structure"`
-
-	// The identifier associated with the organization for which the resource is
-	// described.
-	//
-	// OrganizationId is a required field
-	OrganizationId *string `type:"string" required:"true"`
-
-	// The identifier of the resource to be described.
-	//
-	// ResourceId is a required field
-	ResourceId *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeResourceInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeResourceInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeResourceInput"}
-
-	if s.OrganizationId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("OrganizationId"))
-	}
-
-	if s.ResourceId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ResourceId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribeResourceOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The booking options for the described resource.
-	BookingOptions *BookingOptions `type:"structure"`
-
-	// The date and time when a resource was disabled from WorkMail, in UNIX epoch
-	// time format.
-	DisabledDate *time.Time `type:"timestamp"`
-
-	// The email of the described resource.
-	Email *string `min:"1" type:"string"`
-
-	// The date and time when a resource was enabled for WorkMail, in UNIX epoch
-	// time format.
-	EnabledDate *time.Time `type:"timestamp"`
-
-	// The name of the described resource.
-	Name *string `min:"1" type:"string"`
-
-	// The identifier of the described resource.
-	ResourceId *string `type:"string"`
-
-	// The state of the resource: enabled (registered to Amazon WorkMail) or disabled
-	// (deregistered or never registered to WorkMail).
-	State EntityState `type:"string" enum:"true"`
-
-	// The type of the described resource.
-	Type ResourceType `type:"string" enum:"true"`
-}
-
-// String returns the string representation
-func (s DescribeResourceOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeResource = "DescribeResource"
 
@@ -99,7 +24,7 @@ const opDescribeResource = "DescribeResource"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/DescribeResource
-func (c *Client) DescribeResourceRequest(input *DescribeResourceInput) DescribeResourceRequest {
+func (c *Client) DescribeResourceRequest(input *types.DescribeResourceInput) DescribeResourceRequest {
 	op := &aws.Operation{
 		Name:       opDescribeResource,
 		HTTPMethod: "POST",
@@ -107,10 +32,10 @@ func (c *Client) DescribeResourceRequest(input *DescribeResourceInput) DescribeR
 	}
 
 	if input == nil {
-		input = &DescribeResourceInput{}
+		input = &types.DescribeResourceInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeResourceOutput{})
+	req := c.newRequest(op, input, &types.DescribeResourceOutput{})
 	return DescribeResourceRequest{Request: req, Input: input, Copy: c.DescribeResourceRequest}
 }
 
@@ -118,8 +43,8 @@ func (c *Client) DescribeResourceRequest(input *DescribeResourceInput) DescribeR
 // DescribeResource API operation.
 type DescribeResourceRequest struct {
 	*aws.Request
-	Input *DescribeResourceInput
-	Copy  func(*DescribeResourceInput) DescribeResourceRequest
+	Input *types.DescribeResourceInput
+	Copy  func(*types.DescribeResourceInput) DescribeResourceRequest
 }
 
 // Send marshals and sends the DescribeResource API request.
@@ -131,7 +56,7 @@ func (r DescribeResourceRequest) Send(ctx context.Context) (*DescribeResourceRes
 	}
 
 	resp := &DescribeResourceResponse{
-		DescribeResourceOutput: r.Request.Data.(*DescribeResourceOutput),
+		DescribeResourceOutput: r.Request.Data.(*types.DescribeResourceOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -141,7 +66,7 @@ func (r DescribeResourceRequest) Send(ctx context.Context) (*DescribeResourceRes
 // DescribeResourceResponse is the response type for the
 // DescribeResource API operation.
 type DescribeResourceResponse struct {
-	*DescribeResourceOutput
+	*types.DescribeResourceOutput
 
 	response *aws.Response
 }

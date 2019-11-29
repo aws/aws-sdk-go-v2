@@ -6,38 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/lightsail/types"
 )
-
-type GetDomainsInput struct {
-	_ struct{} `type:"structure"`
-
-	// A token used for advancing to the next page of results from your get domains
-	// request.
-	PageToken *string `locationName:"pageToken" type:"string"`
-}
-
-// String returns the string representation
-func (s GetDomainsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type GetDomainsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// An array of key-value pairs containing information about each of the domain
-	// entries in the user's account.
-	Domains []Domain `locationName:"domains" type:"list"`
-
-	// A token used for advancing to the next page of results from your get active
-	// names request.
-	NextPageToken *string `locationName:"nextPageToken" type:"string"`
-}
-
-// String returns the string representation
-func (s GetDomainsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetDomains = "GetDomains"
 
@@ -54,7 +24,7 @@ const opGetDomains = "GetDomains"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetDomains
-func (c *Client) GetDomainsRequest(input *GetDomainsInput) GetDomainsRequest {
+func (c *Client) GetDomainsRequest(input *types.GetDomainsInput) GetDomainsRequest {
 	op := &aws.Operation{
 		Name:       opGetDomains,
 		HTTPMethod: "POST",
@@ -62,10 +32,10 @@ func (c *Client) GetDomainsRequest(input *GetDomainsInput) GetDomainsRequest {
 	}
 
 	if input == nil {
-		input = &GetDomainsInput{}
+		input = &types.GetDomainsInput{}
 	}
 
-	req := c.newRequest(op, input, &GetDomainsOutput{})
+	req := c.newRequest(op, input, &types.GetDomainsOutput{})
 	return GetDomainsRequest{Request: req, Input: input, Copy: c.GetDomainsRequest}
 }
 
@@ -73,8 +43,8 @@ func (c *Client) GetDomainsRequest(input *GetDomainsInput) GetDomainsRequest {
 // GetDomains API operation.
 type GetDomainsRequest struct {
 	*aws.Request
-	Input *GetDomainsInput
-	Copy  func(*GetDomainsInput) GetDomainsRequest
+	Input *types.GetDomainsInput
+	Copy  func(*types.GetDomainsInput) GetDomainsRequest
 }
 
 // Send marshals and sends the GetDomains API request.
@@ -86,7 +56,7 @@ func (r GetDomainsRequest) Send(ctx context.Context) (*GetDomainsResponse, error
 	}
 
 	resp := &GetDomainsResponse{
-		GetDomainsOutput: r.Request.Data.(*GetDomainsOutput),
+		GetDomainsOutput: r.Request.Data.(*types.GetDomainsOutput),
 		response:         &aws.Response{Request: r.Request},
 	}
 
@@ -96,7 +66,7 @@ func (r GetDomainsRequest) Send(ctx context.Context) (*GetDomainsResponse, error
 // GetDomainsResponse is the response type for the
 // GetDomains API operation.
 type GetDomainsResponse struct {
-	*GetDomainsOutput
+	*types.GetDomainsOutput
 
 	response *aws.Response
 }

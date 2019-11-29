@@ -6,76 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/iot/types"
 )
-
-type DescribeStreamInput struct {
-	_ struct{} `type:"structure"`
-
-	// The stream ID.
-	//
-	// StreamId is a required field
-	StreamId *string `location:"uri" locationName:"streamId" min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeStreamInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeStreamInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeStreamInput"}
-
-	if s.StreamId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("StreamId"))
-	}
-	if s.StreamId != nil && len(*s.StreamId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("StreamId", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DescribeStreamInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.StreamId != nil {
-		v := *s.StreamId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "streamId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type DescribeStreamOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Information about the stream.
-	StreamInfo *StreamInfo `locationName:"streamInfo" type:"structure"`
-}
-
-// String returns the string representation
-func (s DescribeStreamOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DescribeStreamOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.StreamInfo != nil {
-		v := s.StreamInfo
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "streamInfo", v, metadata)
-	}
-	return nil
-}
 
 const opDescribeStream = "DescribeStream"
 
@@ -90,7 +22,7 @@ const opDescribeStream = "DescribeStream"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) DescribeStreamRequest(input *DescribeStreamInput) DescribeStreamRequest {
+func (c *Client) DescribeStreamRequest(input *types.DescribeStreamInput) DescribeStreamRequest {
 	op := &aws.Operation{
 		Name:       opDescribeStream,
 		HTTPMethod: "GET",
@@ -98,10 +30,10 @@ func (c *Client) DescribeStreamRequest(input *DescribeStreamInput) DescribeStrea
 	}
 
 	if input == nil {
-		input = &DescribeStreamInput{}
+		input = &types.DescribeStreamInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeStreamOutput{})
+	req := c.newRequest(op, input, &types.DescribeStreamOutput{})
 	return DescribeStreamRequest{Request: req, Input: input, Copy: c.DescribeStreamRequest}
 }
 
@@ -109,8 +41,8 @@ func (c *Client) DescribeStreamRequest(input *DescribeStreamInput) DescribeStrea
 // DescribeStream API operation.
 type DescribeStreamRequest struct {
 	*aws.Request
-	Input *DescribeStreamInput
-	Copy  func(*DescribeStreamInput) DescribeStreamRequest
+	Input *types.DescribeStreamInput
+	Copy  func(*types.DescribeStreamInput) DescribeStreamRequest
 }
 
 // Send marshals and sends the DescribeStream API request.
@@ -122,7 +54,7 @@ func (r DescribeStreamRequest) Send(ctx context.Context) (*DescribeStreamRespons
 	}
 
 	resp := &DescribeStreamResponse{
-		DescribeStreamOutput: r.Request.Data.(*DescribeStreamOutput),
+		DescribeStreamOutput: r.Request.Data.(*types.DescribeStreamOutput),
 		response:             &aws.Response{Request: r.Request},
 	}
 
@@ -132,7 +64,7 @@ func (r DescribeStreamRequest) Send(ctx context.Context) (*DescribeStreamRespons
 // DescribeStreamResponse is the response type for the
 // DescribeStream API operation.
 type DescribeStreamResponse struct {
-	*DescribeStreamOutput
+	*types.DescribeStreamOutput
 
 	response *aws.Response
 }

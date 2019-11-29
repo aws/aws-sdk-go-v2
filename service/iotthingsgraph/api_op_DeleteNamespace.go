@@ -6,32 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/iotthingsgraph/types"
 )
-
-type DeleteNamespaceInput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteNamespaceInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type DeleteNamespaceOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The ARN of the namespace to be deleted.
-	NamespaceArn *string `locationName:"namespaceArn" type:"string"`
-
-	// The name of the namespace to be deleted.
-	NamespaceName *string `locationName:"namespaceName" type:"string"`
-}
-
-// String returns the string representation
-func (s DeleteNamespaceOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteNamespace = "DeleteNamespace"
 
@@ -50,7 +26,7 @@ const opDeleteNamespace = "DeleteNamespace"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iotthingsgraph-2018-09-06/DeleteNamespace
-func (c *Client) DeleteNamespaceRequest(input *DeleteNamespaceInput) DeleteNamespaceRequest {
+func (c *Client) DeleteNamespaceRequest(input *types.DeleteNamespaceInput) DeleteNamespaceRequest {
 	op := &aws.Operation{
 		Name:       opDeleteNamespace,
 		HTTPMethod: "POST",
@@ -58,10 +34,10 @@ func (c *Client) DeleteNamespaceRequest(input *DeleteNamespaceInput) DeleteNames
 	}
 
 	if input == nil {
-		input = &DeleteNamespaceInput{}
+		input = &types.DeleteNamespaceInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteNamespaceOutput{})
+	req := c.newRequest(op, input, &types.DeleteNamespaceOutput{})
 	return DeleteNamespaceRequest{Request: req, Input: input, Copy: c.DeleteNamespaceRequest}
 }
 
@@ -69,8 +45,8 @@ func (c *Client) DeleteNamespaceRequest(input *DeleteNamespaceInput) DeleteNames
 // DeleteNamespace API operation.
 type DeleteNamespaceRequest struct {
 	*aws.Request
-	Input *DeleteNamespaceInput
-	Copy  func(*DeleteNamespaceInput) DeleteNamespaceRequest
+	Input *types.DeleteNamespaceInput
+	Copy  func(*types.DeleteNamespaceInput) DeleteNamespaceRequest
 }
 
 // Send marshals and sends the DeleteNamespace API request.
@@ -82,7 +58,7 @@ func (r DeleteNamespaceRequest) Send(ctx context.Context) (*DeleteNamespaceRespo
 	}
 
 	resp := &DeleteNamespaceResponse{
-		DeleteNamespaceOutput: r.Request.Data.(*DeleteNamespaceOutput),
+		DeleteNamespaceOutput: r.Request.Data.(*types.DeleteNamespaceOutput),
 		response:              &aws.Response{Request: r.Request},
 	}
 
@@ -92,7 +68,7 @@ func (r DeleteNamespaceRequest) Send(ctx context.Context) (*DeleteNamespaceRespo
 // DeleteNamespaceResponse is the response type for the
 // DeleteNamespace API operation.
 type DeleteNamespaceResponse struct {
-	*DeleteNamespaceOutput
+	*types.DeleteNamespaceOutput
 
 	response *aws.Response
 }

@@ -4,99 +4,10 @@ package datapipeline
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/datapipeline/types"
 )
-
-// Contains the parameters for CreatePipeline.
-type CreatePipelineInput struct {
-	_ struct{} `type:"structure"`
-
-	// The description for the pipeline.
-	Description *string `locationName:"description" type:"string"`
-
-	// The name for the pipeline. You can use the same name for multiple pipelines
-	// associated with your AWS account, because AWS Data Pipeline assigns each
-	// pipeline a unique pipeline identifier.
-	//
-	// Name is a required field
-	Name *string `locationName:"name" min:"1" type:"string" required:"true"`
-
-	// A list of tags to associate with the pipeline at creation. Tags let you control
-	// access to pipelines. For more information, see Controlling User Access to
-	// Pipelines (http://docs.aws.amazon.com/datapipeline/latest/DeveloperGuide/dp-control-access.html)
-	// in the AWS Data Pipeline Developer Guide.
-	Tags []Tag `locationName:"tags" type:"list"`
-
-	// A unique identifier. This identifier is not the same as the pipeline identifier
-	// assigned by AWS Data Pipeline. You are responsible for defining the format
-	// and ensuring the uniqueness of this identifier. You use this parameter to
-	// ensure idempotency during repeated calls to CreatePipeline. For example,
-	// if the first call to CreatePipeline does not succeed, you can pass in the
-	// same unique identifier and pipeline name combination on a subsequent call
-	// to CreatePipeline. CreatePipeline ensures that if a pipeline already exists
-	// with the same name and unique identifier, a new pipeline is not created.
-	// Instead, you'll receive the pipeline identifier from the previous attempt.
-	// The uniqueness of the name and unique identifier combination is scoped to
-	// the AWS account or IAM user credentials.
-	//
-	// UniqueId is a required field
-	UniqueId *string `locationName:"uniqueId" min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s CreatePipelineInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreatePipelineInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreatePipelineInput"}
-
-	if s.Name == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Name"))
-	}
-	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
-	}
-
-	if s.UniqueId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("UniqueId"))
-	}
-	if s.UniqueId != nil && len(*s.UniqueId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("UniqueId", 1))
-	}
-	if s.Tags != nil {
-		for i, v := range s.Tags {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Contains the output of CreatePipeline.
-type CreatePipelineOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID that AWS Data Pipeline assigns the newly created pipeline. For example,
-	// df-06372391ZG65EXAMPLE.
-	//
-	// PipelineId is a required field
-	PipelineId *string `locationName:"pipelineId" min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s CreatePipelineOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCreatePipeline = "CreatePipeline"
 
@@ -114,7 +25,7 @@ const opCreatePipeline = "CreatePipeline"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/datapipeline-2012-10-29/CreatePipeline
-func (c *Client) CreatePipelineRequest(input *CreatePipelineInput) CreatePipelineRequest {
+func (c *Client) CreatePipelineRequest(input *types.CreatePipelineInput) CreatePipelineRequest {
 	op := &aws.Operation{
 		Name:       opCreatePipeline,
 		HTTPMethod: "POST",
@@ -122,10 +33,10 @@ func (c *Client) CreatePipelineRequest(input *CreatePipelineInput) CreatePipelin
 	}
 
 	if input == nil {
-		input = &CreatePipelineInput{}
+		input = &types.CreatePipelineInput{}
 	}
 
-	req := c.newRequest(op, input, &CreatePipelineOutput{})
+	req := c.newRequest(op, input, &types.CreatePipelineOutput{})
 	return CreatePipelineRequest{Request: req, Input: input, Copy: c.CreatePipelineRequest}
 }
 
@@ -133,8 +44,8 @@ func (c *Client) CreatePipelineRequest(input *CreatePipelineInput) CreatePipelin
 // CreatePipeline API operation.
 type CreatePipelineRequest struct {
 	*aws.Request
-	Input *CreatePipelineInput
-	Copy  func(*CreatePipelineInput) CreatePipelineRequest
+	Input *types.CreatePipelineInput
+	Copy  func(*types.CreatePipelineInput) CreatePipelineRequest
 }
 
 // Send marshals and sends the CreatePipeline API request.
@@ -146,7 +57,7 @@ func (r CreatePipelineRequest) Send(ctx context.Context) (*CreatePipelineRespons
 	}
 
 	resp := &CreatePipelineResponse{
-		CreatePipelineOutput: r.Request.Data.(*CreatePipelineOutput),
+		CreatePipelineOutput: r.Request.Data.(*types.CreatePipelineOutput),
 		response:             &aws.Response{Request: r.Request},
 	}
 
@@ -156,7 +67,7 @@ func (r CreatePipelineRequest) Send(ctx context.Context) (*CreatePipelineRespons
 // CreatePipelineResponse is the response type for the
 // CreatePipeline API operation.
 type CreatePipelineResponse struct {
-	*CreatePipelineOutput
+	*types.CreatePipelineOutput
 
 	response *aws.Response
 }

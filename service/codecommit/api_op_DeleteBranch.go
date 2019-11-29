@@ -6,66 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/codecommit/types"
 )
-
-// Represents the input of a delete branch operation.
-type DeleteBranchInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the branch to delete.
-	//
-	// BranchName is a required field
-	BranchName *string `locationName:"branchName" min:"1" type:"string" required:"true"`
-
-	// The name of the repository that contains the branch to be deleted.
-	//
-	// RepositoryName is a required field
-	RepositoryName *string `locationName:"repositoryName" min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteBranchInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteBranchInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteBranchInput"}
-
-	if s.BranchName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("BranchName"))
-	}
-	if s.BranchName != nil && len(*s.BranchName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("BranchName", 1))
-	}
-
-	if s.RepositoryName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("RepositoryName"))
-	}
-	if s.RepositoryName != nil && len(*s.RepositoryName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("RepositoryName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Represents the output of a delete branch operation.
-type DeleteBranchOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Information about the branch deleted by the operation, including the branch
-	// name and the commit ID that was the tip of the branch.
-	DeletedBranch *BranchInfo `locationName:"deletedBranch" type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteBranchOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteBranch = "DeleteBranch"
 
@@ -83,7 +25,7 @@ const opDeleteBranch = "DeleteBranch"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/DeleteBranch
-func (c *Client) DeleteBranchRequest(input *DeleteBranchInput) DeleteBranchRequest {
+func (c *Client) DeleteBranchRequest(input *types.DeleteBranchInput) DeleteBranchRequest {
 	op := &aws.Operation{
 		Name:       opDeleteBranch,
 		HTTPMethod: "POST",
@@ -91,10 +33,10 @@ func (c *Client) DeleteBranchRequest(input *DeleteBranchInput) DeleteBranchReque
 	}
 
 	if input == nil {
-		input = &DeleteBranchInput{}
+		input = &types.DeleteBranchInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteBranchOutput{})
+	req := c.newRequest(op, input, &types.DeleteBranchOutput{})
 	return DeleteBranchRequest{Request: req, Input: input, Copy: c.DeleteBranchRequest}
 }
 
@@ -102,8 +44,8 @@ func (c *Client) DeleteBranchRequest(input *DeleteBranchInput) DeleteBranchReque
 // DeleteBranch API operation.
 type DeleteBranchRequest struct {
 	*aws.Request
-	Input *DeleteBranchInput
-	Copy  func(*DeleteBranchInput) DeleteBranchRequest
+	Input *types.DeleteBranchInput
+	Copy  func(*types.DeleteBranchInput) DeleteBranchRequest
 }
 
 // Send marshals and sends the DeleteBranch API request.
@@ -115,7 +57,7 @@ func (r DeleteBranchRequest) Send(ctx context.Context) (*DeleteBranchResponse, e
 	}
 
 	resp := &DeleteBranchResponse{
-		DeleteBranchOutput: r.Request.Data.(*DeleteBranchOutput),
+		DeleteBranchOutput: r.Request.Data.(*types.DeleteBranchOutput),
 		response:           &aws.Response{Request: r.Request},
 	}
 
@@ -125,7 +67,7 @@ func (r DeleteBranchRequest) Send(ctx context.Context) (*DeleteBranchResponse, e
 // DeleteBranchResponse is the response type for the
 // DeleteBranch API operation.
 type DeleteBranchResponse struct {
-	*DeleteBranchOutput
+	*types.DeleteBranchOutput
 
 	response *aws.Response
 }

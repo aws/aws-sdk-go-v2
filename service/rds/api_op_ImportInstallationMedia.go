@@ -6,146 +6,16 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/rds/types"
 )
-
-type ImportInstallationMediaInput struct {
-	_ struct{} `type:"structure"`
-
-	// The identifier of the custom Availability Zone (AZ) to import the installation
-	// media to.
-	//
-	// CustomAvailabilityZoneId is a required field
-	CustomAvailabilityZoneId *string `type:"string" required:"true"`
-
-	// The name of the database engine to be used for this instance.
-	//
-	// The list only includes supported on-premises, bring your own media (BYOM)
-	// DB engines.
-	//
-	// Valid Values:
-	//
-	//    * sqlserver-ee
-	//
-	//    * sqlserver-se
-	//
-	//    * sqlserver-ex
-	//
-	//    * sqlserver-web
-	//
-	// Engine is a required field
-	Engine *string `type:"string" required:"true"`
-
-	// The path to the installation media for the specified DB engine.
-	//
-	// Example: SQLServerISO/en_sql_server_2016_enterprise_x64_dvd_8701793.iso
-	//
-	// EngineInstallationMediaPath is a required field
-	EngineInstallationMediaPath *string `type:"string" required:"true"`
-
-	// The version number of the database engine to use.
-	//
-	// For a list of valid engine versions, call DescribeDBEngineVersions.
-	//
-	// The following are the database engines and links to information about the
-	// major and minor versions. The list only includes supported on-premises, bring
-	// your own media (BYOM) DB engines.
-	//
-	// Microsoft SQL Server
-	//
-	// See Version and Feature Support on Amazon RDS (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_SQLServer.html#SQLServer.Concepts.General.FeatureSupport)
-	// in the Amazon RDS User Guide.
-	//
-	// EngineVersion is a required field
-	EngineVersion *string `type:"string" required:"true"`
-
-	// The path to the installation media for the operating system associated with
-	// the specified DB engine.
-	//
-	// Example: WindowsISO/en_windows_server_2016_x64_dvd_9327751.iso
-	//
-	// OSInstallationMediaPath is a required field
-	OSInstallationMediaPath *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s ImportInstallationMediaInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ImportInstallationMediaInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ImportInstallationMediaInput"}
-
-	if s.CustomAvailabilityZoneId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("CustomAvailabilityZoneId"))
-	}
-
-	if s.Engine == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Engine"))
-	}
-
-	if s.EngineInstallationMediaPath == nil {
-		invalidParams.Add(aws.NewErrParamRequired("EngineInstallationMediaPath"))
-	}
-
-	if s.EngineVersion == nil {
-		invalidParams.Add(aws.NewErrParamRequired("EngineVersion"))
-	}
-
-	if s.OSInstallationMediaPath == nil {
-		invalidParams.Add(aws.NewErrParamRequired("OSInstallationMediaPath"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Contains the installation media for on-premises, bring your own media (BYOM)
-// DB engines, such as Microsoft SQL Server.
-type ImportInstallationMediaOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The custom Availability Zone (AZ) that contains the installation media.
-	CustomAvailabilityZoneId *string `type:"string"`
-
-	// The DB engine.
-	Engine *string `type:"string"`
-
-	// The path to the installation media for the DB engine.
-	EngineInstallationMediaPath *string `type:"string"`
-
-	// The engine version of the DB engine.
-	EngineVersion *string `type:"string"`
-
-	// If an installation media failure occurred, the cause of the failure.
-	FailureCause *InstallationMediaFailureCause `type:"structure"`
-
-	// The installation media ID.
-	InstallationMediaId *string `type:"string"`
-
-	// The path to the installation media for the operating system associated with
-	// the DB engine.
-	OSInstallationMediaPath *string `type:"string"`
-
-	// The status of the installation media.
-	Status *string `type:"string"`
-}
-
-// String returns the string representation
-func (s ImportInstallationMediaOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opImportInstallationMedia = "ImportInstallationMedia"
 
 // ImportInstallationMediaRequest returns a request value for making API operation for
 // Amazon Relational Database Service.
 //
-// Imports the installation media for an on-premises, bring your own media (BYOM)
-// DB engine, such as SQL Server.
+// Imports the installation media for a DB engine that requires an on-premises
+// customer provided license, such as SQL Server.
 //
 //    // Example sending a request using ImportInstallationMediaRequest.
 //    req := client.ImportInstallationMediaRequest(params)
@@ -155,7 +25,7 @@ const opImportInstallationMedia = "ImportInstallationMedia"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ImportInstallationMedia
-func (c *Client) ImportInstallationMediaRequest(input *ImportInstallationMediaInput) ImportInstallationMediaRequest {
+func (c *Client) ImportInstallationMediaRequest(input *types.ImportInstallationMediaInput) ImportInstallationMediaRequest {
 	op := &aws.Operation{
 		Name:       opImportInstallationMedia,
 		HTTPMethod: "POST",
@@ -163,10 +33,10 @@ func (c *Client) ImportInstallationMediaRequest(input *ImportInstallationMediaIn
 	}
 
 	if input == nil {
-		input = &ImportInstallationMediaInput{}
+		input = &types.ImportInstallationMediaInput{}
 	}
 
-	req := c.newRequest(op, input, &ImportInstallationMediaOutput{})
+	req := c.newRequest(op, input, &types.ImportInstallationMediaOutput{})
 	return ImportInstallationMediaRequest{Request: req, Input: input, Copy: c.ImportInstallationMediaRequest}
 }
 
@@ -174,8 +44,8 @@ func (c *Client) ImportInstallationMediaRequest(input *ImportInstallationMediaIn
 // ImportInstallationMedia API operation.
 type ImportInstallationMediaRequest struct {
 	*aws.Request
-	Input *ImportInstallationMediaInput
-	Copy  func(*ImportInstallationMediaInput) ImportInstallationMediaRequest
+	Input *types.ImportInstallationMediaInput
+	Copy  func(*types.ImportInstallationMediaInput) ImportInstallationMediaRequest
 }
 
 // Send marshals and sends the ImportInstallationMedia API request.
@@ -187,7 +57,7 @@ func (r ImportInstallationMediaRequest) Send(ctx context.Context) (*ImportInstal
 	}
 
 	resp := &ImportInstallationMediaResponse{
-		ImportInstallationMediaOutput: r.Request.Data.(*ImportInstallationMediaOutput),
+		ImportInstallationMediaOutput: r.Request.Data.(*types.ImportInstallationMediaOutput),
 		response:                      &aws.Response{Request: r.Request},
 	}
 
@@ -197,7 +67,7 @@ func (r ImportInstallationMediaRequest) Send(ctx context.Context) (*ImportInstal
 // ImportInstallationMediaResponse is the response type for the
 // ImportInstallationMedia API operation.
 type ImportInstallationMediaResponse struct {
-	*ImportInstallationMediaOutput
+	*types.ImportInstallationMediaOutput
 
 	response *aws.Response
 }

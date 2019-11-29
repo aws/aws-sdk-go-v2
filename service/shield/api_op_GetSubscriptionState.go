@@ -6,31 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/shield/types"
 )
-
-type GetSubscriptionStateInput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s GetSubscriptionStateInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type GetSubscriptionStateOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The status of the subscription.
-	//
-	// SubscriptionState is a required field
-	SubscriptionState SubscriptionState `type:"string" required:"true" enum:"true"`
-}
-
-// String returns the string representation
-func (s GetSubscriptionStateOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetSubscriptionState = "GetSubscriptionState"
 
@@ -47,7 +24,7 @@ const opGetSubscriptionState = "GetSubscriptionState"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/GetSubscriptionState
-func (c *Client) GetSubscriptionStateRequest(input *GetSubscriptionStateInput) GetSubscriptionStateRequest {
+func (c *Client) GetSubscriptionStateRequest(input *types.GetSubscriptionStateInput) GetSubscriptionStateRequest {
 	op := &aws.Operation{
 		Name:       opGetSubscriptionState,
 		HTTPMethod: "POST",
@@ -55,10 +32,10 @@ func (c *Client) GetSubscriptionStateRequest(input *GetSubscriptionStateInput) G
 	}
 
 	if input == nil {
-		input = &GetSubscriptionStateInput{}
+		input = &types.GetSubscriptionStateInput{}
 	}
 
-	req := c.newRequest(op, input, &GetSubscriptionStateOutput{})
+	req := c.newRequest(op, input, &types.GetSubscriptionStateOutput{})
 	return GetSubscriptionStateRequest{Request: req, Input: input, Copy: c.GetSubscriptionStateRequest}
 }
 
@@ -66,8 +43,8 @@ func (c *Client) GetSubscriptionStateRequest(input *GetSubscriptionStateInput) G
 // GetSubscriptionState API operation.
 type GetSubscriptionStateRequest struct {
 	*aws.Request
-	Input *GetSubscriptionStateInput
-	Copy  func(*GetSubscriptionStateInput) GetSubscriptionStateRequest
+	Input *types.GetSubscriptionStateInput
+	Copy  func(*types.GetSubscriptionStateInput) GetSubscriptionStateRequest
 }
 
 // Send marshals and sends the GetSubscriptionState API request.
@@ -79,7 +56,7 @@ func (r GetSubscriptionStateRequest) Send(ctx context.Context) (*GetSubscription
 	}
 
 	resp := &GetSubscriptionStateResponse{
-		GetSubscriptionStateOutput: r.Request.Data.(*GetSubscriptionStateOutput),
+		GetSubscriptionStateOutput: r.Request.Data.(*types.GetSubscriptionStateOutput),
 		response:                   &aws.Response{Request: r.Request},
 	}
 
@@ -89,7 +66,7 @@ func (r GetSubscriptionStateRequest) Send(ctx context.Context) (*GetSubscription
 // GetSubscriptionStateResponse is the response type for the
 // GetSubscriptionState API operation.
 type GetSubscriptionStateResponse struct {
-	*GetSubscriptionStateOutput
+	*types.GetSubscriptionStateOutput
 
 	response *aws.Response
 }

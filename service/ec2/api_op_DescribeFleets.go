@@ -6,67 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-type DescribeFleetsInput struct {
-	_ struct{} `type:"structure"`
-
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have
-	// the required permissions, the error response is DryRunOperation. Otherwise,
-	// it is UnauthorizedOperation.
-	DryRun *bool `type:"boolean"`
-
-	// The filters.
-	//
-	//    * activity-status - The progress of the EC2 Fleet ( error | pending-fulfillment
-	//    | pending-termination | fulfilled).
-	//
-	//    * excess-capacity-termination-policy - Indicates whether to terminate
-	//    running instances if the target capacity is decreased below the current
-	//    EC2 Fleet size (true | false).
-	//
-	//    * fleet-state - The state of the EC2 Fleet (submitted | active | deleted
-	//    | failed | deleted-running | deleted-terminating | modifying).
-	//
-	//    * replace-unhealthy-instances - Indicates whether EC2 Fleet should replace
-	//    unhealthy instances (true | false).
-	//
-	//    * type - The type of request (instant | request | maintain).
-	Filters []Filter `locationName:"Filter" locationNameList:"Filter" type:"list"`
-
-	// The ID of the EC2 Fleets.
-	FleetIds []string `locationName:"FleetId" type:"list"`
-
-	// The maximum number of results to return in a single call. Specify a value
-	// between 1 and 1000. The default value is 1000. To retrieve the remaining
-	// results, make another call with the returned NextToken value.
-	MaxResults *int64 `type:"integer"`
-
-	// The token for the next set of results.
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeFleetsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type DescribeFleetsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Information about the EC2 Fleets.
-	Fleets []FleetData `locationName:"fleetSet" locationNameList:"item" type:"list"`
-
-	// The token for the next set of results.
-	NextToken *string `locationName:"nextToken" type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeFleetsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeFleets = "DescribeFleets"
 
@@ -83,7 +24,7 @@ const opDescribeFleets = "DescribeFleets"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeFleets
-func (c *Client) DescribeFleetsRequest(input *DescribeFleetsInput) DescribeFleetsRequest {
+func (c *Client) DescribeFleetsRequest(input *types.DescribeFleetsInput) DescribeFleetsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeFleets,
 		HTTPMethod: "POST",
@@ -97,10 +38,10 @@ func (c *Client) DescribeFleetsRequest(input *DescribeFleetsInput) DescribeFleet
 	}
 
 	if input == nil {
-		input = &DescribeFleetsInput{}
+		input = &types.DescribeFleetsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeFleetsOutput{})
+	req := c.newRequest(op, input, &types.DescribeFleetsOutput{})
 	return DescribeFleetsRequest{Request: req, Input: input, Copy: c.DescribeFleetsRequest}
 }
 
@@ -108,8 +49,8 @@ func (c *Client) DescribeFleetsRequest(input *DescribeFleetsInput) DescribeFleet
 // DescribeFleets API operation.
 type DescribeFleetsRequest struct {
 	*aws.Request
-	Input *DescribeFleetsInput
-	Copy  func(*DescribeFleetsInput) DescribeFleetsRequest
+	Input *types.DescribeFleetsInput
+	Copy  func(*types.DescribeFleetsInput) DescribeFleetsRequest
 }
 
 // Send marshals and sends the DescribeFleets API request.
@@ -121,7 +62,7 @@ func (r DescribeFleetsRequest) Send(ctx context.Context) (*DescribeFleetsRespons
 	}
 
 	resp := &DescribeFleetsResponse{
-		DescribeFleetsOutput: r.Request.Data.(*DescribeFleetsOutput),
+		DescribeFleetsOutput: r.Request.Data.(*types.DescribeFleetsOutput),
 		response:             &aws.Response{Request: r.Request},
 	}
 
@@ -151,7 +92,7 @@ func NewDescribeFleetsPaginator(req DescribeFleetsRequest) DescribeFleetsPaginat
 	return DescribeFleetsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *DescribeFleetsInput
+				var inCpy *types.DescribeFleetsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -171,14 +112,14 @@ type DescribeFleetsPaginator struct {
 	aws.Pager
 }
 
-func (p *DescribeFleetsPaginator) CurrentPage() *DescribeFleetsOutput {
-	return p.Pager.CurrentPage().(*DescribeFleetsOutput)
+func (p *DescribeFleetsPaginator) CurrentPage() *types.DescribeFleetsOutput {
+	return p.Pager.CurrentPage().(*types.DescribeFleetsOutput)
 }
 
 // DescribeFleetsResponse is the response type for the
 // DescribeFleets API operation.
 type DescribeFleetsResponse struct {
-	*DescribeFleetsOutput
+	*types.DescribeFleetsOutput
 
 	response *aws.Response
 }

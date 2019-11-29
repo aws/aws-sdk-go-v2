@@ -6,63 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/applicationinsights/types"
 )
-
-type CreateComponentInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the component.
-	//
-	// ComponentName is a required field
-	ComponentName *string `type:"string" required:"true"`
-
-	// The name of the resource group.
-	//
-	// ResourceGroupName is a required field
-	ResourceGroupName *string `type:"string" required:"true"`
-
-	// The list of resource ARNs that belong to the component.
-	//
-	// ResourceList is a required field
-	ResourceList []string `type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s CreateComponentInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateComponentInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateComponentInput"}
-
-	if s.ComponentName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ComponentName"))
-	}
-
-	if s.ResourceGroupName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ResourceGroupName"))
-	}
-
-	if s.ResourceList == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ResourceList"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type CreateComponentOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s CreateComponentOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCreateComponent = "CreateComponent"
 
@@ -79,7 +24,7 @@ const opCreateComponent = "CreateComponent"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/application-insights-2018-11-25/CreateComponent
-func (c *Client) CreateComponentRequest(input *CreateComponentInput) CreateComponentRequest {
+func (c *Client) CreateComponentRequest(input *types.CreateComponentInput) CreateComponentRequest {
 	op := &aws.Operation{
 		Name:       opCreateComponent,
 		HTTPMethod: "POST",
@@ -87,10 +32,10 @@ func (c *Client) CreateComponentRequest(input *CreateComponentInput) CreateCompo
 	}
 
 	if input == nil {
-		input = &CreateComponentInput{}
+		input = &types.CreateComponentInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateComponentOutput{})
+	req := c.newRequest(op, input, &types.CreateComponentOutput{})
 	return CreateComponentRequest{Request: req, Input: input, Copy: c.CreateComponentRequest}
 }
 
@@ -98,8 +43,8 @@ func (c *Client) CreateComponentRequest(input *CreateComponentInput) CreateCompo
 // CreateComponent API operation.
 type CreateComponentRequest struct {
 	*aws.Request
-	Input *CreateComponentInput
-	Copy  func(*CreateComponentInput) CreateComponentRequest
+	Input *types.CreateComponentInput
+	Copy  func(*types.CreateComponentInput) CreateComponentRequest
 }
 
 // Send marshals and sends the CreateComponent API request.
@@ -111,7 +56,7 @@ func (r CreateComponentRequest) Send(ctx context.Context) (*CreateComponentRespo
 	}
 
 	resp := &CreateComponentResponse{
-		CreateComponentOutput: r.Request.Data.(*CreateComponentOutput),
+		CreateComponentOutput: r.Request.Data.(*types.CreateComponentOutput),
 		response:              &aws.Response{Request: r.Request},
 	}
 
@@ -121,7 +66,7 @@ func (r CreateComponentRequest) Send(ctx context.Context) (*CreateComponentRespo
 // CreateComponentResponse is the response type for the
 // CreateComponent API operation.
 type CreateComponentResponse struct {
-	*CreateComponentOutput
+	*types.CreateComponentOutput
 
 	response *aws.Response
 }

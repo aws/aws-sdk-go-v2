@@ -6,83 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/iot/types"
 )
-
-type DescribeAccountAuditConfigurationInput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DescribeAccountAuditConfigurationInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DescribeAccountAuditConfigurationInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	return nil
-}
-
-type DescribeAccountAuditConfigurationOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Which audit checks are enabled and disabled for this account.
-	AuditCheckConfigurations map[string]AuditCheckConfiguration `locationName:"auditCheckConfigurations" type:"map"`
-
-	// Information about the targets to which audit notifications are sent for this
-	// account.
-	AuditNotificationTargetConfigurations map[string]AuditNotificationTarget `locationName:"auditNotificationTargetConfigurations" type:"map"`
-
-	// The ARN of the role that grants permission to AWS IoT to access information
-	// about your devices, policies, certificates, and other items as required when
-	// performing an audit.
-	//
-	// On the first call to UpdateAccountAuditConfiguration, this parameter is required.
-	RoleArn *string `locationName:"roleArn" min:"20" type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeAccountAuditConfigurationOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DescribeAccountAuditConfigurationOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.AuditCheckConfigurations != nil {
-		v := s.AuditCheckConfigurations
-
-		metadata := protocol.Metadata{}
-		ms0 := e.Map(protocol.BodyTarget, "auditCheckConfigurations", metadata)
-		ms0.Start()
-		for k1, v1 := range v {
-			ms0.MapSetFields(k1, v1)
-		}
-		ms0.End()
-
-	}
-	if s.AuditNotificationTargetConfigurations != nil {
-		v := s.AuditNotificationTargetConfigurations
-
-		metadata := protocol.Metadata{}
-		ms0 := e.Map(protocol.BodyTarget, "auditNotificationTargetConfigurations", metadata)
-		ms0.Start()
-		for k1, v1 := range v {
-			ms0.MapSetFields(k1, v1)
-		}
-		ms0.End()
-
-	}
-	if s.RoleArn != nil {
-		v := *s.RoleArn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "roleArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opDescribeAccountAuditConfiguration = "DescribeAccountAuditConfiguration"
 
@@ -99,7 +24,7 @@ const opDescribeAccountAuditConfiguration = "DescribeAccountAuditConfiguration"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) DescribeAccountAuditConfigurationRequest(input *DescribeAccountAuditConfigurationInput) DescribeAccountAuditConfigurationRequest {
+func (c *Client) DescribeAccountAuditConfigurationRequest(input *types.DescribeAccountAuditConfigurationInput) DescribeAccountAuditConfigurationRequest {
 	op := &aws.Operation{
 		Name:       opDescribeAccountAuditConfiguration,
 		HTTPMethod: "GET",
@@ -107,10 +32,10 @@ func (c *Client) DescribeAccountAuditConfigurationRequest(input *DescribeAccount
 	}
 
 	if input == nil {
-		input = &DescribeAccountAuditConfigurationInput{}
+		input = &types.DescribeAccountAuditConfigurationInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeAccountAuditConfigurationOutput{})
+	req := c.newRequest(op, input, &types.DescribeAccountAuditConfigurationOutput{})
 	return DescribeAccountAuditConfigurationRequest{Request: req, Input: input, Copy: c.DescribeAccountAuditConfigurationRequest}
 }
 
@@ -118,8 +43,8 @@ func (c *Client) DescribeAccountAuditConfigurationRequest(input *DescribeAccount
 // DescribeAccountAuditConfiguration API operation.
 type DescribeAccountAuditConfigurationRequest struct {
 	*aws.Request
-	Input *DescribeAccountAuditConfigurationInput
-	Copy  func(*DescribeAccountAuditConfigurationInput) DescribeAccountAuditConfigurationRequest
+	Input *types.DescribeAccountAuditConfigurationInput
+	Copy  func(*types.DescribeAccountAuditConfigurationInput) DescribeAccountAuditConfigurationRequest
 }
 
 // Send marshals and sends the DescribeAccountAuditConfiguration API request.
@@ -131,7 +56,7 @@ func (r DescribeAccountAuditConfigurationRequest) Send(ctx context.Context) (*De
 	}
 
 	resp := &DescribeAccountAuditConfigurationResponse{
-		DescribeAccountAuditConfigurationOutput: r.Request.Data.(*DescribeAccountAuditConfigurationOutput),
+		DescribeAccountAuditConfigurationOutput: r.Request.Data.(*types.DescribeAccountAuditConfigurationOutput),
 		response:                                &aws.Response{Request: r.Request},
 	}
 
@@ -141,7 +66,7 @@ func (r DescribeAccountAuditConfigurationRequest) Send(ctx context.Context) (*De
 // DescribeAccountAuditConfigurationResponse is the response type for the
 // DescribeAccountAuditConfiguration API operation.
 type DescribeAccountAuditConfigurationResponse struct {
-	*DescribeAccountAuditConfigurationOutput
+	*types.DescribeAccountAuditConfigurationOutput
 
 	response *aws.Response
 }

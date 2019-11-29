@@ -6,63 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
+	"github.com/aws/aws-sdk-go-v2/service/kinesis/types"
 )
-
-// Represents the input for AddTagsToStream.
-type AddTagsToStreamInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the stream.
-	//
-	// StreamName is a required field
-	StreamName *string `min:"1" type:"string" required:"true"`
-
-	// A set of up to 10 key-value pairs to use to create the tags.
-	//
-	// Tags is a required field
-	Tags map[string]string `min:"1" type:"map" required:"true"`
-}
-
-// String returns the string representation
-func (s AddTagsToStreamInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *AddTagsToStreamInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "AddTagsToStreamInput"}
-
-	if s.StreamName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("StreamName"))
-	}
-	if s.StreamName != nil && len(*s.StreamName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("StreamName", 1))
-	}
-
-	if s.Tags == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Tags"))
-	}
-	if s.Tags != nil && len(s.Tags) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Tags", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type AddTagsToStreamOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s AddTagsToStreamOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opAddTagsToStream = "AddTagsToStream"
 
@@ -87,7 +34,7 @@ const opAddTagsToStream = "AddTagsToStream"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/AddTagsToStream
-func (c *Client) AddTagsToStreamRequest(input *AddTagsToStreamInput) AddTagsToStreamRequest {
+func (c *Client) AddTagsToStreamRequest(input *types.AddTagsToStreamInput) AddTagsToStreamRequest {
 	op := &aws.Operation{
 		Name:       opAddTagsToStream,
 		HTTPMethod: "POST",
@@ -95,10 +42,10 @@ func (c *Client) AddTagsToStreamRequest(input *AddTagsToStreamInput) AddTagsToSt
 	}
 
 	if input == nil {
-		input = &AddTagsToStreamInput{}
+		input = &types.AddTagsToStreamInput{}
 	}
 
-	req := c.newRequest(op, input, &AddTagsToStreamOutput{})
+	req := c.newRequest(op, input, &types.AddTagsToStreamOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return AddTagsToStreamRequest{Request: req, Input: input, Copy: c.AddTagsToStreamRequest}
@@ -108,8 +55,8 @@ func (c *Client) AddTagsToStreamRequest(input *AddTagsToStreamInput) AddTagsToSt
 // AddTagsToStream API operation.
 type AddTagsToStreamRequest struct {
 	*aws.Request
-	Input *AddTagsToStreamInput
-	Copy  func(*AddTagsToStreamInput) AddTagsToStreamRequest
+	Input *types.AddTagsToStreamInput
+	Copy  func(*types.AddTagsToStreamInput) AddTagsToStreamRequest
 }
 
 // Send marshals and sends the AddTagsToStream API request.
@@ -121,7 +68,7 @@ func (r AddTagsToStreamRequest) Send(ctx context.Context) (*AddTagsToStreamRespo
 	}
 
 	resp := &AddTagsToStreamResponse{
-		AddTagsToStreamOutput: r.Request.Data.(*AddTagsToStreamOutput),
+		AddTagsToStreamOutput: r.Request.Data.(*types.AddTagsToStreamOutput),
 		response:              &aws.Response{Request: r.Request},
 	}
 
@@ -131,7 +78,7 @@ func (r AddTagsToStreamRequest) Send(ctx context.Context) (*AddTagsToStreamRespo
 // AddTagsToStreamResponse is the response type for the
 // AddTagsToStream API operation.
 type AddTagsToStreamResponse struct {
-	*AddTagsToStreamOutput
+	*types.AddTagsToStreamOutput
 
 	response *aws.Response
 }

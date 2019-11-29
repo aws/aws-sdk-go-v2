@@ -10,6 +10,7 @@ package servicequotasiface
 
 import (
 	"github.com/aws/aws-sdk-go-v2/service/servicequotas"
+	"github.com/aws/aws-sdk-go-v2/service/servicequotas/types"
 )
 
 // ClientAPI provides an interface to enable mocking the
@@ -43,7 +44,7 @@ import (
 //    type mockClientClient struct {
 //        servicequotasiface.ClientPI
 //    }
-//    func (m *mockClientClient) AssociateServiceQuotaTemplate(input *servicequotas.AssociateServiceQuotaTemplateInput) (*servicequotas.AssociateServiceQuotaTemplateOutput, error) {
+//    func (m *mockClientClient) AssociateServiceQuotaTemplate(input *types.AssociateServiceQuotaTemplateInput) (*types.AssociateServiceQuotaTemplateOutput, error) {
 //        // mock response/functionality
 //    }
 //
@@ -61,37 +62,37 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type ClientAPI interface {
-	AssociateServiceQuotaTemplateRequest(*servicequotas.AssociateServiceQuotaTemplateInput) servicequotas.AssociateServiceQuotaTemplateRequest
+	AssociateServiceQuotaTemplateRequest(*types.AssociateServiceQuotaTemplateInput) servicequotas.AssociateServiceQuotaTemplateRequest
 
-	DeleteServiceQuotaIncreaseRequestFromTemplateRequest(*servicequotas.DeleteServiceQuotaIncreaseRequestFromTemplateInput) servicequotas.DeleteServiceQuotaIncreaseRequestFromTemplateRequest
+	DeleteServiceQuotaIncreaseRequestFromTemplateRequest(*types.DeleteServiceQuotaIncreaseRequestFromTemplateInput) servicequotas.DeleteServiceQuotaIncreaseRequestFromTemplateRequest
 
-	DisassociateServiceQuotaTemplateRequest(*servicequotas.DisassociateServiceQuotaTemplateInput) servicequotas.DisassociateServiceQuotaTemplateRequest
+	DisassociateServiceQuotaTemplateRequest(*types.DisassociateServiceQuotaTemplateInput) servicequotas.DisassociateServiceQuotaTemplateRequest
 
-	GetAWSDefaultServiceQuotaRequest(*servicequotas.GetAWSDefaultServiceQuotaInput) servicequotas.GetAWSDefaultServiceQuotaRequest
+	GetAWSDefaultServiceQuotaRequest(*types.GetAWSDefaultServiceQuotaInput) servicequotas.GetAWSDefaultServiceQuotaRequest
 
-	GetAssociationForServiceQuotaTemplateRequest(*servicequotas.GetAssociationForServiceQuotaTemplateInput) servicequotas.GetAssociationForServiceQuotaTemplateRequest
+	GetAssociationForServiceQuotaTemplateRequest(*types.GetAssociationForServiceQuotaTemplateInput) servicequotas.GetAssociationForServiceQuotaTemplateRequest
 
-	GetRequestedServiceQuotaChangeRequest(*servicequotas.GetRequestedServiceQuotaChangeInput) servicequotas.GetRequestedServiceQuotaChangeRequest
+	GetRequestedServiceQuotaChangeRequest(*types.GetRequestedServiceQuotaChangeInput) servicequotas.GetRequestedServiceQuotaChangeRequest
 
-	GetServiceQuotaRequest(*servicequotas.GetServiceQuotaInput) servicequotas.GetServiceQuotaRequest
+	GetServiceQuotaRequest(*types.GetServiceQuotaInput) servicequotas.GetServiceQuotaRequest
 
-	GetServiceQuotaIncreaseRequestFromTemplateRequest(*servicequotas.GetServiceQuotaIncreaseRequestFromTemplateInput) servicequotas.GetServiceQuotaIncreaseRequestFromTemplateRequest
+	GetServiceQuotaIncreaseRequestFromTemplateRequest(*types.GetServiceQuotaIncreaseRequestFromTemplateInput) servicequotas.GetServiceQuotaIncreaseRequestFromTemplateRequest
 
-	ListAWSDefaultServiceQuotasRequest(*servicequotas.ListAWSDefaultServiceQuotasInput) servicequotas.ListAWSDefaultServiceQuotasRequest
+	ListAWSDefaultServiceQuotasRequest(*types.ListAWSDefaultServiceQuotasInput) servicequotas.ListAWSDefaultServiceQuotasRequest
 
-	ListRequestedServiceQuotaChangeHistoryRequest(*servicequotas.ListRequestedServiceQuotaChangeHistoryInput) servicequotas.ListRequestedServiceQuotaChangeHistoryRequest
+	ListRequestedServiceQuotaChangeHistoryRequest(*types.ListRequestedServiceQuotaChangeHistoryInput) servicequotas.ListRequestedServiceQuotaChangeHistoryRequest
 
-	ListRequestedServiceQuotaChangeHistoryByQuotaRequest(*servicequotas.ListRequestedServiceQuotaChangeHistoryByQuotaInput) servicequotas.ListRequestedServiceQuotaChangeHistoryByQuotaRequest
+	ListRequestedServiceQuotaChangeHistoryByQuotaRequest(*types.ListRequestedServiceQuotaChangeHistoryByQuotaInput) servicequotas.ListRequestedServiceQuotaChangeHistoryByQuotaRequest
 
-	ListServiceQuotaIncreaseRequestsInTemplateRequest(*servicequotas.ListServiceQuotaIncreaseRequestsInTemplateInput) servicequotas.ListServiceQuotaIncreaseRequestsInTemplateRequest
+	ListServiceQuotaIncreaseRequestsInTemplateRequest(*types.ListServiceQuotaIncreaseRequestsInTemplateInput) servicequotas.ListServiceQuotaIncreaseRequestsInTemplateRequest
 
-	ListServiceQuotasRequest(*servicequotas.ListServiceQuotasInput) servicequotas.ListServiceQuotasRequest
+	ListServiceQuotasRequest(*types.ListServiceQuotasInput) servicequotas.ListServiceQuotasRequest
 
-	ListServicesRequest(*servicequotas.ListServicesInput) servicequotas.ListServicesRequest
+	ListServicesRequest(*types.ListServicesInput) servicequotas.ListServicesRequest
 
-	PutServiceQuotaIncreaseRequestIntoTemplateRequest(*servicequotas.PutServiceQuotaIncreaseRequestIntoTemplateInput) servicequotas.PutServiceQuotaIncreaseRequestIntoTemplateRequest
+	PutServiceQuotaIncreaseRequestIntoTemplateRequest(*types.PutServiceQuotaIncreaseRequestIntoTemplateInput) servicequotas.PutServiceQuotaIncreaseRequestIntoTemplateRequest
 
-	RequestServiceQuotaIncreaseRequest(*servicequotas.RequestServiceQuotaIncreaseInput) servicequotas.RequestServiceQuotaIncreaseRequest
+	RequestServiceQuotaIncreaseRequest(*types.RequestServiceQuotaIncreaseInput) servicequotas.RequestServiceQuotaIncreaseRequest
 }
 
 var _ ClientAPI = (*servicequotas.Client)(nil)

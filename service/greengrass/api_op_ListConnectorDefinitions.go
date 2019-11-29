@@ -6,77 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/greengrass/types"
 )
-
-type ListConnectorDefinitionsInput struct {
-	_ struct{} `type:"structure"`
-
-	MaxResults *string `location:"querystring" locationName:"MaxResults" type:"string"`
-
-	NextToken *string `location:"querystring" locationName:"NextToken" type:"string"`
-}
-
-// String returns the string representation
-func (s ListConnectorDefinitionsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListConnectorDefinitionsInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.MaxResults != nil {
-		v := *s.MaxResults
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "MaxResults", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type ListConnectorDefinitionsOutput struct {
-	_ struct{} `type:"structure"`
-
-	Definitions []DefinitionInformation `type:"list"`
-
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s ListConnectorDefinitionsOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListConnectorDefinitionsOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.Definitions != nil {
-		v := s.Definitions
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "Definitions", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opListConnectorDefinitions = "ListConnectorDefinitions"
 
@@ -93,7 +24,7 @@ const opListConnectorDefinitions = "ListConnectorDefinitions"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/ListConnectorDefinitions
-func (c *Client) ListConnectorDefinitionsRequest(input *ListConnectorDefinitionsInput) ListConnectorDefinitionsRequest {
+func (c *Client) ListConnectorDefinitionsRequest(input *types.ListConnectorDefinitionsInput) ListConnectorDefinitionsRequest {
 	op := &aws.Operation{
 		Name:       opListConnectorDefinitions,
 		HTTPMethod: "GET",
@@ -101,10 +32,10 @@ func (c *Client) ListConnectorDefinitionsRequest(input *ListConnectorDefinitions
 	}
 
 	if input == nil {
-		input = &ListConnectorDefinitionsInput{}
+		input = &types.ListConnectorDefinitionsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListConnectorDefinitionsOutput{})
+	req := c.newRequest(op, input, &types.ListConnectorDefinitionsOutput{})
 	return ListConnectorDefinitionsRequest{Request: req, Input: input, Copy: c.ListConnectorDefinitionsRequest}
 }
 
@@ -112,8 +43,8 @@ func (c *Client) ListConnectorDefinitionsRequest(input *ListConnectorDefinitions
 // ListConnectorDefinitions API operation.
 type ListConnectorDefinitionsRequest struct {
 	*aws.Request
-	Input *ListConnectorDefinitionsInput
-	Copy  func(*ListConnectorDefinitionsInput) ListConnectorDefinitionsRequest
+	Input *types.ListConnectorDefinitionsInput
+	Copy  func(*types.ListConnectorDefinitionsInput) ListConnectorDefinitionsRequest
 }
 
 // Send marshals and sends the ListConnectorDefinitions API request.
@@ -125,7 +56,7 @@ func (r ListConnectorDefinitionsRequest) Send(ctx context.Context) (*ListConnect
 	}
 
 	resp := &ListConnectorDefinitionsResponse{
-		ListConnectorDefinitionsOutput: r.Request.Data.(*ListConnectorDefinitionsOutput),
+		ListConnectorDefinitionsOutput: r.Request.Data.(*types.ListConnectorDefinitionsOutput),
 		response:                       &aws.Response{Request: r.Request},
 	}
 
@@ -135,7 +66,7 @@ func (r ListConnectorDefinitionsRequest) Send(ctx context.Context) (*ListConnect
 // ListConnectorDefinitionsResponse is the response type for the
 // ListConnectorDefinitions API operation.
 type ListConnectorDefinitionsResponse struct {
-	*ListConnectorDefinitionsOutput
+	*types.ListConnectorDefinitionsOutput
 
 	response *aws.Response
 }

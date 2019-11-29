@@ -6,57 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-type TerminateInstancesInput struct {
-	_ struct{} `type:"structure"`
-
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have
-	// the required permissions, the error response is DryRunOperation. Otherwise,
-	// it is UnauthorizedOperation.
-	DryRun *bool `locationName:"dryRun" type:"boolean"`
-
-	// The IDs of the instances.
-	//
-	// Constraints: Up to 1000 instance IDs. We recommend breaking up this request
-	// into smaller batches.
-	//
-	// InstanceIds is a required field
-	InstanceIds []string `locationName:"InstanceId" locationNameList:"InstanceId" type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s TerminateInstancesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *TerminateInstancesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "TerminateInstancesInput"}
-
-	if s.InstanceIds == nil {
-		invalidParams.Add(aws.NewErrParamRequired("InstanceIds"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type TerminateInstancesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Information about the terminated instances.
-	TerminatingInstances []InstanceStateChange `locationName:"instancesSet" locationNameList:"item" type:"list"`
-}
-
-// String returns the string representation
-func (s TerminateInstancesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opTerminateInstances = "TerminateInstances"
 
@@ -97,7 +48,7 @@ const opTerminateInstances = "TerminateInstances"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/TerminateInstances
-func (c *Client) TerminateInstancesRequest(input *TerminateInstancesInput) TerminateInstancesRequest {
+func (c *Client) TerminateInstancesRequest(input *types.TerminateInstancesInput) TerminateInstancesRequest {
 	op := &aws.Operation{
 		Name:       opTerminateInstances,
 		HTTPMethod: "POST",
@@ -105,10 +56,10 @@ func (c *Client) TerminateInstancesRequest(input *TerminateInstancesInput) Termi
 	}
 
 	if input == nil {
-		input = &TerminateInstancesInput{}
+		input = &types.TerminateInstancesInput{}
 	}
 
-	req := c.newRequest(op, input, &TerminateInstancesOutput{})
+	req := c.newRequest(op, input, &types.TerminateInstancesOutput{})
 	return TerminateInstancesRequest{Request: req, Input: input, Copy: c.TerminateInstancesRequest}
 }
 
@@ -116,8 +67,8 @@ func (c *Client) TerminateInstancesRequest(input *TerminateInstancesInput) Termi
 // TerminateInstances API operation.
 type TerminateInstancesRequest struct {
 	*aws.Request
-	Input *TerminateInstancesInput
-	Copy  func(*TerminateInstancesInput) TerminateInstancesRequest
+	Input *types.TerminateInstancesInput
+	Copy  func(*types.TerminateInstancesInput) TerminateInstancesRequest
 }
 
 // Send marshals and sends the TerminateInstances API request.
@@ -129,7 +80,7 @@ func (r TerminateInstancesRequest) Send(ctx context.Context) (*TerminateInstance
 	}
 
 	resp := &TerminateInstancesResponse{
-		TerminateInstancesOutput: r.Request.Data.(*TerminateInstancesOutput),
+		TerminateInstancesOutput: r.Request.Data.(*types.TerminateInstancesOutput),
 		response:                 &aws.Response{Request: r.Request},
 	}
 
@@ -139,7 +90,7 @@ func (r TerminateInstancesRequest) Send(ctx context.Context) (*TerminateInstance
 // TerminateInstancesResponse is the response type for the
 // TerminateInstances API operation.
 type TerminateInstancesResponse struct {
-	*TerminateInstancesOutput
+	*types.TerminateInstancesOutput
 
 	response *aws.Response
 }

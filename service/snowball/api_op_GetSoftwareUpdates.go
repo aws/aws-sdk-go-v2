@@ -6,55 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/snowball/types"
 )
-
-type GetSoftwareUpdatesInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID for a job that you want to get the software update file for, for example
-	// JID123e4567-e89b-12d3-a456-426655440000.
-	//
-	// JobId is a required field
-	JobId *string `min:"39" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetSoftwareUpdatesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetSoftwareUpdatesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetSoftwareUpdatesInput"}
-
-	if s.JobId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("JobId"))
-	}
-	if s.JobId != nil && len(*s.JobId) < 39 {
-		invalidParams.Add(aws.NewErrParamMinLen("JobId", 39))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type GetSoftwareUpdatesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon S3 presigned URL for the update file associated with the specified
-	// JobId value. The software update will be available for 2 days after this
-	// request is made. To access an update after the 2 days have passed, you'll
-	// have to make another call to GetSoftwareUpdates.
-	UpdatesURI *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s GetSoftwareUpdatesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetSoftwareUpdates = "GetSoftwareUpdates"
 
@@ -72,7 +25,7 @@ const opGetSoftwareUpdates = "GetSoftwareUpdates"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/GetSoftwareUpdates
-func (c *Client) GetSoftwareUpdatesRequest(input *GetSoftwareUpdatesInput) GetSoftwareUpdatesRequest {
+func (c *Client) GetSoftwareUpdatesRequest(input *types.GetSoftwareUpdatesInput) GetSoftwareUpdatesRequest {
 	op := &aws.Operation{
 		Name:       opGetSoftwareUpdates,
 		HTTPMethod: "POST",
@@ -80,10 +33,10 @@ func (c *Client) GetSoftwareUpdatesRequest(input *GetSoftwareUpdatesInput) GetSo
 	}
 
 	if input == nil {
-		input = &GetSoftwareUpdatesInput{}
+		input = &types.GetSoftwareUpdatesInput{}
 	}
 
-	req := c.newRequest(op, input, &GetSoftwareUpdatesOutput{})
+	req := c.newRequest(op, input, &types.GetSoftwareUpdatesOutput{})
 	return GetSoftwareUpdatesRequest{Request: req, Input: input, Copy: c.GetSoftwareUpdatesRequest}
 }
 
@@ -91,8 +44,8 @@ func (c *Client) GetSoftwareUpdatesRequest(input *GetSoftwareUpdatesInput) GetSo
 // GetSoftwareUpdates API operation.
 type GetSoftwareUpdatesRequest struct {
 	*aws.Request
-	Input *GetSoftwareUpdatesInput
-	Copy  func(*GetSoftwareUpdatesInput) GetSoftwareUpdatesRequest
+	Input *types.GetSoftwareUpdatesInput
+	Copy  func(*types.GetSoftwareUpdatesInput) GetSoftwareUpdatesRequest
 }
 
 // Send marshals and sends the GetSoftwareUpdates API request.
@@ -104,7 +57,7 @@ func (r GetSoftwareUpdatesRequest) Send(ctx context.Context) (*GetSoftwareUpdate
 	}
 
 	resp := &GetSoftwareUpdatesResponse{
-		GetSoftwareUpdatesOutput: r.Request.Data.(*GetSoftwareUpdatesOutput),
+		GetSoftwareUpdatesOutput: r.Request.Data.(*types.GetSoftwareUpdatesOutput),
 		response:                 &aws.Response{Request: r.Request},
 	}
 
@@ -114,7 +67,7 @@ func (r GetSoftwareUpdatesRequest) Send(ctx context.Context) (*GetSoftwareUpdate
 // GetSoftwareUpdatesResponse is the response type for the
 // GetSoftwareUpdates API operation.
 type GetSoftwareUpdatesResponse struct {
-	*GetSoftwareUpdatesOutput
+	*types.GetSoftwareUpdatesOutput
 
 	response *aws.Response
 }

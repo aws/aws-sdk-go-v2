@@ -6,94 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/iot/types"
 )
-
-type GetEffectivePoliciesInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Cognito identity pool ID.
-	CognitoIdentityPoolId *string `locationName:"cognitoIdentityPoolId" type:"string"`
-
-	// The principal.
-	Principal *string `locationName:"principal" type:"string"`
-
-	// The thing name.
-	ThingName *string `location:"querystring" locationName:"thingName" min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s GetEffectivePoliciesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetEffectivePoliciesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetEffectivePoliciesInput"}
-	if s.ThingName != nil && len(*s.ThingName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ThingName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetEffectivePoliciesInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.CognitoIdentityPoolId != nil {
-		v := *s.CognitoIdentityPoolId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "cognitoIdentityPoolId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Principal != nil {
-		v := *s.Principal
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "principal", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.ThingName != nil {
-		v := *s.ThingName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "thingName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type GetEffectivePoliciesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The effective policies.
-	EffectivePolicies []EffectivePolicy `locationName:"effectivePolicies" type:"list"`
-}
-
-// String returns the string representation
-func (s GetEffectivePoliciesOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetEffectivePoliciesOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.EffectivePolicies != nil {
-		v := s.EffectivePolicies
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "effectivePolicies", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	return nil
-}
 
 const opGetEffectivePolicies = "GetEffectivePolicies"
 
@@ -109,7 +23,7 @@ const opGetEffectivePolicies = "GetEffectivePolicies"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) GetEffectivePoliciesRequest(input *GetEffectivePoliciesInput) GetEffectivePoliciesRequest {
+func (c *Client) GetEffectivePoliciesRequest(input *types.GetEffectivePoliciesInput) GetEffectivePoliciesRequest {
 	op := &aws.Operation{
 		Name:       opGetEffectivePolicies,
 		HTTPMethod: "POST",
@@ -117,10 +31,10 @@ func (c *Client) GetEffectivePoliciesRequest(input *GetEffectivePoliciesInput) G
 	}
 
 	if input == nil {
-		input = &GetEffectivePoliciesInput{}
+		input = &types.GetEffectivePoliciesInput{}
 	}
 
-	req := c.newRequest(op, input, &GetEffectivePoliciesOutput{})
+	req := c.newRequest(op, input, &types.GetEffectivePoliciesOutput{})
 	return GetEffectivePoliciesRequest{Request: req, Input: input, Copy: c.GetEffectivePoliciesRequest}
 }
 
@@ -128,8 +42,8 @@ func (c *Client) GetEffectivePoliciesRequest(input *GetEffectivePoliciesInput) G
 // GetEffectivePolicies API operation.
 type GetEffectivePoliciesRequest struct {
 	*aws.Request
-	Input *GetEffectivePoliciesInput
-	Copy  func(*GetEffectivePoliciesInput) GetEffectivePoliciesRequest
+	Input *types.GetEffectivePoliciesInput
+	Copy  func(*types.GetEffectivePoliciesInput) GetEffectivePoliciesRequest
 }
 
 // Send marshals and sends the GetEffectivePolicies API request.
@@ -141,7 +55,7 @@ func (r GetEffectivePoliciesRequest) Send(ctx context.Context) (*GetEffectivePol
 	}
 
 	resp := &GetEffectivePoliciesResponse{
-		GetEffectivePoliciesOutput: r.Request.Data.(*GetEffectivePoliciesOutput),
+		GetEffectivePoliciesOutput: r.Request.Data.(*types.GetEffectivePoliciesOutput),
 		response:                   &aws.Response{Request: r.Request},
 	}
 
@@ -151,7 +65,7 @@ func (r GetEffectivePoliciesRequest) Send(ctx context.Context) (*GetEffectivePol
 // GetEffectivePoliciesResponse is the response type for the
 // GetEffectivePolicies API operation.
 type GetEffectivePoliciesResponse struct {
-	*GetEffectivePoliciesOutput
+	*types.GetEffectivePoliciesOutput
 
 	response *aws.Response
 }

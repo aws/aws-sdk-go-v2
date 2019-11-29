@@ -6,51 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/glue/types"
 )
-
-type GetTriggerInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the trigger to retrieve.
-	//
-	// Name is a required field
-	Name *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetTriggerInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetTriggerInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetTriggerInput"}
-
-	if s.Name == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Name"))
-	}
-	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type GetTriggerOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The requested trigger definition.
-	Trigger *Trigger `type:"structure"`
-}
-
-// String returns the string representation
-func (s GetTriggerOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetTrigger = "GetTrigger"
 
@@ -67,7 +24,7 @@ const opGetTrigger = "GetTrigger"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetTrigger
-func (c *Client) GetTriggerRequest(input *GetTriggerInput) GetTriggerRequest {
+func (c *Client) GetTriggerRequest(input *types.GetTriggerInput) GetTriggerRequest {
 	op := &aws.Operation{
 		Name:       opGetTrigger,
 		HTTPMethod: "POST",
@@ -75,10 +32,10 @@ func (c *Client) GetTriggerRequest(input *GetTriggerInput) GetTriggerRequest {
 	}
 
 	if input == nil {
-		input = &GetTriggerInput{}
+		input = &types.GetTriggerInput{}
 	}
 
-	req := c.newRequest(op, input, &GetTriggerOutput{})
+	req := c.newRequest(op, input, &types.GetTriggerOutput{})
 	return GetTriggerRequest{Request: req, Input: input, Copy: c.GetTriggerRequest}
 }
 
@@ -86,8 +43,8 @@ func (c *Client) GetTriggerRequest(input *GetTriggerInput) GetTriggerRequest {
 // GetTrigger API operation.
 type GetTriggerRequest struct {
 	*aws.Request
-	Input *GetTriggerInput
-	Copy  func(*GetTriggerInput) GetTriggerRequest
+	Input *types.GetTriggerInput
+	Copy  func(*types.GetTriggerInput) GetTriggerRequest
 }
 
 // Send marshals and sends the GetTrigger API request.
@@ -99,7 +56,7 @@ func (r GetTriggerRequest) Send(ctx context.Context) (*GetTriggerResponse, error
 	}
 
 	resp := &GetTriggerResponse{
-		GetTriggerOutput: r.Request.Data.(*GetTriggerOutput),
+		GetTriggerOutput: r.Request.Data.(*types.GetTriggerOutput),
 		response:         &aws.Response{Request: r.Request},
 	}
 
@@ -109,7 +66,7 @@ func (r GetTriggerRequest) Send(ctx context.Context) (*GetTriggerResponse, error
 // GetTriggerResponse is the response type for the
 // GetTrigger API operation.
 type GetTriggerResponse struct {
-	*GetTriggerOutput
+	*types.GetTriggerOutput
 
 	response *aws.Response
 }

@@ -6,58 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/personalize/types"
 )
-
-type UpdateCampaignInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the campaign.
-	//
-	// CampaignArn is a required field
-	CampaignArn *string `locationName:"campaignArn" type:"string" required:"true"`
-
-	// Specifies the requested minimum provisioned transactions (recommendations)
-	// per second that Amazon Personalize will support.
-	MinProvisionedTPS *int64 `locationName:"minProvisionedTPS" min:"1" type:"integer"`
-
-	// The ARN of a new solution version to deploy.
-	SolutionVersionArn *string `locationName:"solutionVersionArn" type:"string"`
-}
-
-// String returns the string representation
-func (s UpdateCampaignInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateCampaignInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateCampaignInput"}
-
-	if s.CampaignArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("CampaignArn"))
-	}
-	if s.MinProvisionedTPS != nil && *s.MinProvisionedTPS < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MinProvisionedTPS", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type UpdateCampaignOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The same campaign ARN as given in the request.
-	CampaignArn *string `locationName:"campaignArn" type:"string"`
-}
-
-// String returns the string representation
-func (s UpdateCampaignOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opUpdateCampaign = "UpdateCampaign"
 
@@ -83,7 +33,7 @@ const opUpdateCampaign = "UpdateCampaign"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/UpdateCampaign
-func (c *Client) UpdateCampaignRequest(input *UpdateCampaignInput) UpdateCampaignRequest {
+func (c *Client) UpdateCampaignRequest(input *types.UpdateCampaignInput) UpdateCampaignRequest {
 	op := &aws.Operation{
 		Name:       opUpdateCampaign,
 		HTTPMethod: "POST",
@@ -91,10 +41,10 @@ func (c *Client) UpdateCampaignRequest(input *UpdateCampaignInput) UpdateCampaig
 	}
 
 	if input == nil {
-		input = &UpdateCampaignInput{}
+		input = &types.UpdateCampaignInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateCampaignOutput{})
+	req := c.newRequest(op, input, &types.UpdateCampaignOutput{})
 	return UpdateCampaignRequest{Request: req, Input: input, Copy: c.UpdateCampaignRequest}
 }
 
@@ -102,8 +52,8 @@ func (c *Client) UpdateCampaignRequest(input *UpdateCampaignInput) UpdateCampaig
 // UpdateCampaign API operation.
 type UpdateCampaignRequest struct {
 	*aws.Request
-	Input *UpdateCampaignInput
-	Copy  func(*UpdateCampaignInput) UpdateCampaignRequest
+	Input *types.UpdateCampaignInput
+	Copy  func(*types.UpdateCampaignInput) UpdateCampaignRequest
 }
 
 // Send marshals and sends the UpdateCampaign API request.
@@ -115,7 +65,7 @@ func (r UpdateCampaignRequest) Send(ctx context.Context) (*UpdateCampaignRespons
 	}
 
 	resp := &UpdateCampaignResponse{
-		UpdateCampaignOutput: r.Request.Data.(*UpdateCampaignOutput),
+		UpdateCampaignOutput: r.Request.Data.(*types.UpdateCampaignOutput),
 		response:             &aws.Response{Request: r.Request},
 	}
 
@@ -125,7 +75,7 @@ func (r UpdateCampaignRequest) Send(ctx context.Context) (*UpdateCampaignRespons
 // UpdateCampaignResponse is the response type for the
 // UpdateCampaign API operation.
 type UpdateCampaignResponse struct {
-	*UpdateCampaignOutput
+	*types.UpdateCampaignOutput
 
 	response *aws.Response
 }

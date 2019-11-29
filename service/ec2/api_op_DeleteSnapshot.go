@@ -6,54 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/ec2query"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-// Contains the parameters for DeleteSnapshot.
-type DeleteSnapshotInput struct {
-	_ struct{} `type:"structure"`
-
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have
-	// the required permissions, the error response is DryRunOperation. Otherwise,
-	// it is UnauthorizedOperation.
-	DryRun *bool `locationName:"dryRun" type:"boolean"`
-
-	// The ID of the EBS snapshot.
-	//
-	// SnapshotId is a required field
-	SnapshotId *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteSnapshotInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteSnapshotInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteSnapshotInput"}
-
-	if s.SnapshotId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("SnapshotId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteSnapshotOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteSnapshotOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteSnapshot = "DeleteSnapshot"
 
@@ -84,7 +40,7 @@ const opDeleteSnapshot = "DeleteSnapshot"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteSnapshot
-func (c *Client) DeleteSnapshotRequest(input *DeleteSnapshotInput) DeleteSnapshotRequest {
+func (c *Client) DeleteSnapshotRequest(input *types.DeleteSnapshotInput) DeleteSnapshotRequest {
 	op := &aws.Operation{
 		Name:       opDeleteSnapshot,
 		HTTPMethod: "POST",
@@ -92,10 +48,10 @@ func (c *Client) DeleteSnapshotRequest(input *DeleteSnapshotInput) DeleteSnapsho
 	}
 
 	if input == nil {
-		input = &DeleteSnapshotInput{}
+		input = &types.DeleteSnapshotInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteSnapshotOutput{})
+	req := c.newRequest(op, input, &types.DeleteSnapshotOutput{})
 	req.Handlers.Unmarshal.Remove(ec2query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return DeleteSnapshotRequest{Request: req, Input: input, Copy: c.DeleteSnapshotRequest}
@@ -105,8 +61,8 @@ func (c *Client) DeleteSnapshotRequest(input *DeleteSnapshotInput) DeleteSnapsho
 // DeleteSnapshot API operation.
 type DeleteSnapshotRequest struct {
 	*aws.Request
-	Input *DeleteSnapshotInput
-	Copy  func(*DeleteSnapshotInput) DeleteSnapshotRequest
+	Input *types.DeleteSnapshotInput
+	Copy  func(*types.DeleteSnapshotInput) DeleteSnapshotRequest
 }
 
 // Send marshals and sends the DeleteSnapshot API request.
@@ -118,7 +74,7 @@ func (r DeleteSnapshotRequest) Send(ctx context.Context) (*DeleteSnapshotRespons
 	}
 
 	resp := &DeleteSnapshotResponse{
-		DeleteSnapshotOutput: r.Request.Data.(*DeleteSnapshotOutput),
+		DeleteSnapshotOutput: r.Request.Data.(*types.DeleteSnapshotOutput),
 		response:             &aws.Response{Request: r.Request},
 	}
 
@@ -128,7 +84,7 @@ func (r DeleteSnapshotRequest) Send(ctx context.Context) (*DeleteSnapshotRespons
 // DeleteSnapshotResponse is the response type for the
 // DeleteSnapshot API operation.
 type DeleteSnapshotResponse struct {
-	*DeleteSnapshotOutput
+	*types.DeleteSnapshotOutput
 
 	response *aws.Response
 }

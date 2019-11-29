@@ -6,66 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/types"
 )
-
-// Represents the request to describe a user pool client.
-type DescribeUserPoolClientInput struct {
-	_ struct{} `type:"structure"`
-
-	// The app client ID of the app associated with the user pool.
-	//
-	// ClientId is a required field
-	ClientId *string `min:"1" type:"string" required:"true" sensitive:"true"`
-
-	// The user pool ID for the user pool you want to describe.
-	//
-	// UserPoolId is a required field
-	UserPoolId *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeUserPoolClientInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeUserPoolClientInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeUserPoolClientInput"}
-
-	if s.ClientId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ClientId"))
-	}
-	if s.ClientId != nil && len(*s.ClientId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ClientId", 1))
-	}
-
-	if s.UserPoolId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("UserPoolId"))
-	}
-	if s.UserPoolId != nil && len(*s.UserPoolId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("UserPoolId", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Represents the response from the server from a request to describe the user
-// pool client.
-type DescribeUserPoolClientOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The user pool client from a server response to describe the user pool client.
-	UserPoolClient *UserPoolClientType `type:"structure"`
-}
-
-// String returns the string representation
-func (s DescribeUserPoolClientOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeUserPoolClient = "DescribeUserPoolClient"
 
@@ -83,7 +25,7 @@ const opDescribeUserPoolClient = "DescribeUserPoolClient"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/DescribeUserPoolClient
-func (c *Client) DescribeUserPoolClientRequest(input *DescribeUserPoolClientInput) DescribeUserPoolClientRequest {
+func (c *Client) DescribeUserPoolClientRequest(input *types.DescribeUserPoolClientInput) DescribeUserPoolClientRequest {
 	op := &aws.Operation{
 		Name:       opDescribeUserPoolClient,
 		HTTPMethod: "POST",
@@ -91,10 +33,10 @@ func (c *Client) DescribeUserPoolClientRequest(input *DescribeUserPoolClientInpu
 	}
 
 	if input == nil {
-		input = &DescribeUserPoolClientInput{}
+		input = &types.DescribeUserPoolClientInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeUserPoolClientOutput{})
+	req := c.newRequest(op, input, &types.DescribeUserPoolClientOutput{})
 	return DescribeUserPoolClientRequest{Request: req, Input: input, Copy: c.DescribeUserPoolClientRequest}
 }
 
@@ -102,8 +44,8 @@ func (c *Client) DescribeUserPoolClientRequest(input *DescribeUserPoolClientInpu
 // DescribeUserPoolClient API operation.
 type DescribeUserPoolClientRequest struct {
 	*aws.Request
-	Input *DescribeUserPoolClientInput
-	Copy  func(*DescribeUserPoolClientInput) DescribeUserPoolClientRequest
+	Input *types.DescribeUserPoolClientInput
+	Copy  func(*types.DescribeUserPoolClientInput) DescribeUserPoolClientRequest
 }
 
 // Send marshals and sends the DescribeUserPoolClient API request.
@@ -115,7 +57,7 @@ func (r DescribeUserPoolClientRequest) Send(ctx context.Context) (*DescribeUserP
 	}
 
 	resp := &DescribeUserPoolClientResponse{
-		DescribeUserPoolClientOutput: r.Request.Data.(*DescribeUserPoolClientOutput),
+		DescribeUserPoolClientOutput: r.Request.Data.(*types.DescribeUserPoolClientOutput),
 		response:                     &aws.Response{Request: r.Request},
 	}
 
@@ -125,7 +67,7 @@ func (r DescribeUserPoolClientRequest) Send(ctx context.Context) (*DescribeUserP
 // DescribeUserPoolClientResponse is the response type for the
 // DescribeUserPoolClient API operation.
 type DescribeUserPoolClientResponse struct {
-	*DescribeUserPoolClientOutput
+	*types.DescribeUserPoolClientOutput
 
 	response *aws.Response
 }

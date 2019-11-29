@@ -6,68 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/kms/types"
 )
-
-type ListKeysInput struct {
-	_ struct{} `type:"structure"`
-
-	// Use this parameter to specify the maximum number of items to return. When
-	// this value is present, AWS KMS does not return more than the specified number
-	// of items, but it might return fewer.
-	//
-	// This value is optional. If you include a value, it must be between 1 and
-	// 1000, inclusive. If you do not include a value, it defaults to 100.
-	Limit *int64 `min:"1" type:"integer"`
-
-	// Use this parameter in a subsequent request after you receive a response with
-	// truncated results. Set it to the value of NextMarker from the truncated response
-	// you just received.
-	Marker *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s ListKeysInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListKeysInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListKeysInput"}
-	if s.Limit != nil && *s.Limit < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("Limit", 1))
-	}
-	if s.Marker != nil && len(*s.Marker) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Marker", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ListKeysOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A list of customer master keys (CMKs).
-	Keys []KeyListEntry `type:"list"`
-
-	// When Truncated is true, this element is present and contains the value to
-	// use for the Marker parameter in a subsequent request.
-	NextMarker *string `min:"1" type:"string"`
-
-	// A flag that indicates whether there are more items in the list. When this
-	// value is true, the list in this response is truncated. To get more items,
-	// pass the value of the NextMarker element in thisresponse to the Marker parameter
-	// in a subsequent request.
-	Truncated *bool `type:"boolean"`
-}
-
-// String returns the string representation
-func (s ListKeysOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListKeys = "ListKeys"
 
@@ -85,7 +25,7 @@ const opListKeys = "ListKeys"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/ListKeys
-func (c *Client) ListKeysRequest(input *ListKeysInput) ListKeysRequest {
+func (c *Client) ListKeysRequest(input *types.ListKeysInput) ListKeysRequest {
 	op := &aws.Operation{
 		Name:       opListKeys,
 		HTTPMethod: "POST",
@@ -99,10 +39,10 @@ func (c *Client) ListKeysRequest(input *ListKeysInput) ListKeysRequest {
 	}
 
 	if input == nil {
-		input = &ListKeysInput{}
+		input = &types.ListKeysInput{}
 	}
 
-	req := c.newRequest(op, input, &ListKeysOutput{})
+	req := c.newRequest(op, input, &types.ListKeysOutput{})
 	return ListKeysRequest{Request: req, Input: input, Copy: c.ListKeysRequest}
 }
 
@@ -110,8 +50,8 @@ func (c *Client) ListKeysRequest(input *ListKeysInput) ListKeysRequest {
 // ListKeys API operation.
 type ListKeysRequest struct {
 	*aws.Request
-	Input *ListKeysInput
-	Copy  func(*ListKeysInput) ListKeysRequest
+	Input *types.ListKeysInput
+	Copy  func(*types.ListKeysInput) ListKeysRequest
 }
 
 // Send marshals and sends the ListKeys API request.
@@ -123,7 +63,7 @@ func (r ListKeysRequest) Send(ctx context.Context) (*ListKeysResponse, error) {
 	}
 
 	resp := &ListKeysResponse{
-		ListKeysOutput: r.Request.Data.(*ListKeysOutput),
+		ListKeysOutput: r.Request.Data.(*types.ListKeysOutput),
 		response:       &aws.Response{Request: r.Request},
 	}
 
@@ -153,7 +93,7 @@ func NewListKeysPaginator(req ListKeysRequest) ListKeysPaginator {
 	return ListKeysPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListKeysInput
+				var inCpy *types.ListKeysInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -173,14 +113,14 @@ type ListKeysPaginator struct {
 	aws.Pager
 }
 
-func (p *ListKeysPaginator) CurrentPage() *ListKeysOutput {
-	return p.Pager.CurrentPage().(*ListKeysOutput)
+func (p *ListKeysPaginator) CurrentPage() *types.ListKeysOutput {
+	return p.Pager.CurrentPage().(*types.ListKeysOutput)
 }
 
 // ListKeysResponse is the response type for the
 // ListKeys API operation.
 type ListKeysResponse struct {
-	*ListKeysOutput
+	*types.ListKeysOutput
 
 	response *aws.Response
 }

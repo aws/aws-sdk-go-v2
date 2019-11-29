@@ -6,60 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/elasticloadbalancing/types"
 )
-
-// Contains the parameters for AttachLoaBalancerToSubnets.
-type AttachLoadBalancerToSubnetsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the load balancer.
-	//
-	// LoadBalancerName is a required field
-	LoadBalancerName *string `type:"string" required:"true"`
-
-	// The IDs of the subnets to add. You can add only one subnet per Availability
-	// Zone.
-	//
-	// Subnets is a required field
-	Subnets []string `type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s AttachLoadBalancerToSubnetsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *AttachLoadBalancerToSubnetsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "AttachLoadBalancerToSubnetsInput"}
-
-	if s.LoadBalancerName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("LoadBalancerName"))
-	}
-
-	if s.Subnets == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Subnets"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Contains the output of AttachLoadBalancerToSubnets.
-type AttachLoadBalancerToSubnetsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The IDs of the subnets attached to the load balancer.
-	Subnets []string `type:"list"`
-}
-
-// String returns the string representation
-func (s AttachLoadBalancerToSubnetsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opAttachLoadBalancerToSubnets = "AttachLoadBalancerToSubnets"
 
@@ -82,7 +30,7 @@ const opAttachLoadBalancerToSubnets = "AttachLoadBalancerToSubnets"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/AttachLoadBalancerToSubnets
-func (c *Client) AttachLoadBalancerToSubnetsRequest(input *AttachLoadBalancerToSubnetsInput) AttachLoadBalancerToSubnetsRequest {
+func (c *Client) AttachLoadBalancerToSubnetsRequest(input *types.AttachLoadBalancerToSubnetsInput) AttachLoadBalancerToSubnetsRequest {
 	op := &aws.Operation{
 		Name:       opAttachLoadBalancerToSubnets,
 		HTTPMethod: "POST",
@@ -90,10 +38,10 @@ func (c *Client) AttachLoadBalancerToSubnetsRequest(input *AttachLoadBalancerToS
 	}
 
 	if input == nil {
-		input = &AttachLoadBalancerToSubnetsInput{}
+		input = &types.AttachLoadBalancerToSubnetsInput{}
 	}
 
-	req := c.newRequest(op, input, &AttachLoadBalancerToSubnetsOutput{})
+	req := c.newRequest(op, input, &types.AttachLoadBalancerToSubnetsOutput{})
 	return AttachLoadBalancerToSubnetsRequest{Request: req, Input: input, Copy: c.AttachLoadBalancerToSubnetsRequest}
 }
 
@@ -101,8 +49,8 @@ func (c *Client) AttachLoadBalancerToSubnetsRequest(input *AttachLoadBalancerToS
 // AttachLoadBalancerToSubnets API operation.
 type AttachLoadBalancerToSubnetsRequest struct {
 	*aws.Request
-	Input *AttachLoadBalancerToSubnetsInput
-	Copy  func(*AttachLoadBalancerToSubnetsInput) AttachLoadBalancerToSubnetsRequest
+	Input *types.AttachLoadBalancerToSubnetsInput
+	Copy  func(*types.AttachLoadBalancerToSubnetsInput) AttachLoadBalancerToSubnetsRequest
 }
 
 // Send marshals and sends the AttachLoadBalancerToSubnets API request.
@@ -114,7 +62,7 @@ func (r AttachLoadBalancerToSubnetsRequest) Send(ctx context.Context) (*AttachLo
 	}
 
 	resp := &AttachLoadBalancerToSubnetsResponse{
-		AttachLoadBalancerToSubnetsOutput: r.Request.Data.(*AttachLoadBalancerToSubnetsOutput),
+		AttachLoadBalancerToSubnetsOutput: r.Request.Data.(*types.AttachLoadBalancerToSubnetsOutput),
 		response:                          &aws.Response{Request: r.Request},
 	}
 
@@ -124,7 +72,7 @@ func (r AttachLoadBalancerToSubnetsRequest) Send(ctx context.Context) (*AttachLo
 // AttachLoadBalancerToSubnetsResponse is the response type for the
 // AttachLoadBalancerToSubnets API operation.
 type AttachLoadBalancerToSubnetsResponse struct {
-	*AttachLoadBalancerToSubnetsOutput
+	*types.AttachLoadBalancerToSubnetsOutput
 
 	response *aws.Response
 }

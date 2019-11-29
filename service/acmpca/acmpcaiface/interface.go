@@ -13,6 +13,7 @@ import (
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/acmpca"
+	"github.com/aws/aws-sdk-go-v2/service/acmpca/types"
 )
 
 // ClientAPI provides an interface to enable mocking the
@@ -46,7 +47,7 @@ import (
 //    type mockClientClient struct {
 //        acmpcaiface.ClientPI
 //    }
-//    func (m *mockClientClient) CreateCertificateAuthority(input *acmpca.CreateCertificateAuthorityInput) (*acmpca.CreateCertificateAuthorityOutput, error) {
+//    func (m *mockClientClient) CreateCertificateAuthority(input *types.CreateCertificateAuthorityInput) (*types.CreateCertificateAuthorityOutput, error) {
 //        // mock response/functionality
 //    }
 //
@@ -64,51 +65,51 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type ClientAPI interface {
-	CreateCertificateAuthorityRequest(*acmpca.CreateCertificateAuthorityInput) acmpca.CreateCertificateAuthorityRequest
+	CreateCertificateAuthorityRequest(*types.CreateCertificateAuthorityInput) acmpca.CreateCertificateAuthorityRequest
 
-	CreateCertificateAuthorityAuditReportRequest(*acmpca.CreateCertificateAuthorityAuditReportInput) acmpca.CreateCertificateAuthorityAuditReportRequest
+	CreateCertificateAuthorityAuditReportRequest(*types.CreateCertificateAuthorityAuditReportInput) acmpca.CreateCertificateAuthorityAuditReportRequest
 
-	CreatePermissionRequest(*acmpca.CreatePermissionInput) acmpca.CreatePermissionRequest
+	CreatePermissionRequest(*types.CreatePermissionInput) acmpca.CreatePermissionRequest
 
-	DeleteCertificateAuthorityRequest(*acmpca.DeleteCertificateAuthorityInput) acmpca.DeleteCertificateAuthorityRequest
+	DeleteCertificateAuthorityRequest(*types.DeleteCertificateAuthorityInput) acmpca.DeleteCertificateAuthorityRequest
 
-	DeletePermissionRequest(*acmpca.DeletePermissionInput) acmpca.DeletePermissionRequest
+	DeletePermissionRequest(*types.DeletePermissionInput) acmpca.DeletePermissionRequest
 
-	DescribeCertificateAuthorityRequest(*acmpca.DescribeCertificateAuthorityInput) acmpca.DescribeCertificateAuthorityRequest
+	DescribeCertificateAuthorityRequest(*types.DescribeCertificateAuthorityInput) acmpca.DescribeCertificateAuthorityRequest
 
-	DescribeCertificateAuthorityAuditReportRequest(*acmpca.DescribeCertificateAuthorityAuditReportInput) acmpca.DescribeCertificateAuthorityAuditReportRequest
+	DescribeCertificateAuthorityAuditReportRequest(*types.DescribeCertificateAuthorityAuditReportInput) acmpca.DescribeCertificateAuthorityAuditReportRequest
 
-	GetCertificateRequest(*acmpca.GetCertificateInput) acmpca.GetCertificateRequest
+	GetCertificateRequest(*types.GetCertificateInput) acmpca.GetCertificateRequest
 
-	GetCertificateAuthorityCertificateRequest(*acmpca.GetCertificateAuthorityCertificateInput) acmpca.GetCertificateAuthorityCertificateRequest
+	GetCertificateAuthorityCertificateRequest(*types.GetCertificateAuthorityCertificateInput) acmpca.GetCertificateAuthorityCertificateRequest
 
-	GetCertificateAuthorityCsrRequest(*acmpca.GetCertificateAuthorityCsrInput) acmpca.GetCertificateAuthorityCsrRequest
+	GetCertificateAuthorityCsrRequest(*types.GetCertificateAuthorityCsrInput) acmpca.GetCertificateAuthorityCsrRequest
 
-	ImportCertificateAuthorityCertificateRequest(*acmpca.ImportCertificateAuthorityCertificateInput) acmpca.ImportCertificateAuthorityCertificateRequest
+	ImportCertificateAuthorityCertificateRequest(*types.ImportCertificateAuthorityCertificateInput) acmpca.ImportCertificateAuthorityCertificateRequest
 
-	IssueCertificateRequest(*acmpca.IssueCertificateInput) acmpca.IssueCertificateRequest
+	IssueCertificateRequest(*types.IssueCertificateInput) acmpca.IssueCertificateRequest
 
-	ListCertificateAuthoritiesRequest(*acmpca.ListCertificateAuthoritiesInput) acmpca.ListCertificateAuthoritiesRequest
+	ListCertificateAuthoritiesRequest(*types.ListCertificateAuthoritiesInput) acmpca.ListCertificateAuthoritiesRequest
 
-	ListPermissionsRequest(*acmpca.ListPermissionsInput) acmpca.ListPermissionsRequest
+	ListPermissionsRequest(*types.ListPermissionsInput) acmpca.ListPermissionsRequest
 
-	ListTagsRequest(*acmpca.ListTagsInput) acmpca.ListTagsRequest
+	ListTagsRequest(*types.ListTagsInput) acmpca.ListTagsRequest
 
-	RestoreCertificateAuthorityRequest(*acmpca.RestoreCertificateAuthorityInput) acmpca.RestoreCertificateAuthorityRequest
+	RestoreCertificateAuthorityRequest(*types.RestoreCertificateAuthorityInput) acmpca.RestoreCertificateAuthorityRequest
 
-	RevokeCertificateRequest(*acmpca.RevokeCertificateInput) acmpca.RevokeCertificateRequest
+	RevokeCertificateRequest(*types.RevokeCertificateInput) acmpca.RevokeCertificateRequest
 
-	TagCertificateAuthorityRequest(*acmpca.TagCertificateAuthorityInput) acmpca.TagCertificateAuthorityRequest
+	TagCertificateAuthorityRequest(*types.TagCertificateAuthorityInput) acmpca.TagCertificateAuthorityRequest
 
-	UntagCertificateAuthorityRequest(*acmpca.UntagCertificateAuthorityInput) acmpca.UntagCertificateAuthorityRequest
+	UntagCertificateAuthorityRequest(*types.UntagCertificateAuthorityInput) acmpca.UntagCertificateAuthorityRequest
 
-	UpdateCertificateAuthorityRequest(*acmpca.UpdateCertificateAuthorityInput) acmpca.UpdateCertificateAuthorityRequest
+	UpdateCertificateAuthorityRequest(*types.UpdateCertificateAuthorityInput) acmpca.UpdateCertificateAuthorityRequest
 
-	WaitUntilAuditReportCreated(context.Context, *acmpca.DescribeCertificateAuthorityAuditReportInput, ...aws.WaiterOption) error
+	WaitUntilAuditReportCreated(context.Context, *types.DescribeCertificateAuthorityAuditReportInput, ...aws.WaiterOption) error
 
-	WaitUntilCertificateAuthorityCSRCreated(context.Context, *acmpca.GetCertificateAuthorityCsrInput, ...aws.WaiterOption) error
+	WaitUntilCertificateAuthorityCSRCreated(context.Context, *types.GetCertificateAuthorityCsrInput, ...aws.WaiterOption) error
 
-	WaitUntilCertificateIssued(context.Context, *acmpca.GetCertificateInput, ...aws.WaiterOption) error
+	WaitUntilCertificateIssued(context.Context, *types.GetCertificateInput, ...aws.WaiterOption) error
 }
 
 var _ ClientAPI = (*acmpca.Client)(nil)

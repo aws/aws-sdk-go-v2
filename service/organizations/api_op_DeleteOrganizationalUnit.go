@@ -6,53 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
+	"github.com/aws/aws-sdk-go-v2/service/organizations/types"
 )
-
-type DeleteOrganizationalUnitInput struct {
-	_ struct{} `type:"structure"`
-
-	// The unique identifier (ID) of the organizational unit that you want to delete.
-	// You can get the ID from the ListOrganizationalUnitsForParent operation.
-	//
-	// The regex pattern (http://wikipedia.org/wiki/regex) for an organizational
-	// unit ID string requires "ou-" followed by from 4 to 32 lower-case letters
-	// or digits (the ID of the root that contains the OU) followed by a second
-	// "-" dash and from 8 to 32 additional lower-case letters or digits.
-	//
-	// OrganizationalUnitId is a required field
-	OrganizationalUnitId *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteOrganizationalUnitInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteOrganizationalUnitInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteOrganizationalUnitInput"}
-
-	if s.OrganizationalUnitId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("OrganizationalUnitId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteOrganizationalUnitOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteOrganizationalUnitOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteOrganizationalUnit = "DeleteOrganizationalUnit"
 
@@ -72,7 +29,7 @@ const opDeleteOrganizationalUnit = "DeleteOrganizationalUnit"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/DeleteOrganizationalUnit
-func (c *Client) DeleteOrganizationalUnitRequest(input *DeleteOrganizationalUnitInput) DeleteOrganizationalUnitRequest {
+func (c *Client) DeleteOrganizationalUnitRequest(input *types.DeleteOrganizationalUnitInput) DeleteOrganizationalUnitRequest {
 	op := &aws.Operation{
 		Name:       opDeleteOrganizationalUnit,
 		HTTPMethod: "POST",
@@ -80,10 +37,10 @@ func (c *Client) DeleteOrganizationalUnitRequest(input *DeleteOrganizationalUnit
 	}
 
 	if input == nil {
-		input = &DeleteOrganizationalUnitInput{}
+		input = &types.DeleteOrganizationalUnitInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteOrganizationalUnitOutput{})
+	req := c.newRequest(op, input, &types.DeleteOrganizationalUnitOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return DeleteOrganizationalUnitRequest{Request: req, Input: input, Copy: c.DeleteOrganizationalUnitRequest}
@@ -93,8 +50,8 @@ func (c *Client) DeleteOrganizationalUnitRequest(input *DeleteOrganizationalUnit
 // DeleteOrganizationalUnit API operation.
 type DeleteOrganizationalUnitRequest struct {
 	*aws.Request
-	Input *DeleteOrganizationalUnitInput
-	Copy  func(*DeleteOrganizationalUnitInput) DeleteOrganizationalUnitRequest
+	Input *types.DeleteOrganizationalUnitInput
+	Copy  func(*types.DeleteOrganizationalUnitInput) DeleteOrganizationalUnitRequest
 }
 
 // Send marshals and sends the DeleteOrganizationalUnit API request.
@@ -106,7 +63,7 @@ func (r DeleteOrganizationalUnitRequest) Send(ctx context.Context) (*DeleteOrgan
 	}
 
 	resp := &DeleteOrganizationalUnitResponse{
-		DeleteOrganizationalUnitOutput: r.Request.Data.(*DeleteOrganizationalUnitOutput),
+		DeleteOrganizationalUnitOutput: r.Request.Data.(*types.DeleteOrganizationalUnitOutput),
 		response:                       &aws.Response{Request: r.Request},
 	}
 
@@ -116,7 +73,7 @@ func (r DeleteOrganizationalUnitRequest) Send(ctx context.Context) (*DeleteOrgan
 // DeleteOrganizationalUnitResponse is the response type for the
 // DeleteOrganizationalUnit API operation.
 type DeleteOrganizationalUnitResponse struct {
-	*DeleteOrganizationalUnitOutput
+	*types.DeleteOrganizationalUnitOutput
 
 	response *aws.Response
 }

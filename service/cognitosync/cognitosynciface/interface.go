@@ -10,6 +10,7 @@ package cognitosynciface
 
 import (
 	"github.com/aws/aws-sdk-go-v2/service/cognitosync"
+	"github.com/aws/aws-sdk-go-v2/service/cognitosync/types"
 )
 
 // ClientAPI provides an interface to enable mocking the
@@ -43,7 +44,7 @@ import (
 //    type mockClientClient struct {
 //        cognitosynciface.ClientPI
 //    }
-//    func (m *mockClientClient) BulkPublish(input *cognitosync.BulkPublishInput) (*cognitosync.BulkPublishOutput, error) {
+//    func (m *mockClientClient) BulkPublish(input *types.BulkPublishInput) (*types.BulkPublishOutput, error) {
 //        // mock response/functionality
 //    }
 //
@@ -61,39 +62,39 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type ClientAPI interface {
-	BulkPublishRequest(*cognitosync.BulkPublishInput) cognitosync.BulkPublishRequest
+	BulkPublishRequest(*types.BulkPublishInput) cognitosync.BulkPublishRequest
 
-	DeleteDatasetRequest(*cognitosync.DeleteDatasetInput) cognitosync.DeleteDatasetRequest
+	DeleteDatasetRequest(*types.DeleteDatasetInput) cognitosync.DeleteDatasetRequest
 
-	DescribeDatasetRequest(*cognitosync.DescribeDatasetInput) cognitosync.DescribeDatasetRequest
+	DescribeDatasetRequest(*types.DescribeDatasetInput) cognitosync.DescribeDatasetRequest
 
-	DescribeIdentityPoolUsageRequest(*cognitosync.DescribeIdentityPoolUsageInput) cognitosync.DescribeIdentityPoolUsageRequest
+	DescribeIdentityPoolUsageRequest(*types.DescribeIdentityPoolUsageInput) cognitosync.DescribeIdentityPoolUsageRequest
 
-	DescribeIdentityUsageRequest(*cognitosync.DescribeIdentityUsageInput) cognitosync.DescribeIdentityUsageRequest
+	DescribeIdentityUsageRequest(*types.DescribeIdentityUsageInput) cognitosync.DescribeIdentityUsageRequest
 
-	GetBulkPublishDetailsRequest(*cognitosync.GetBulkPublishDetailsInput) cognitosync.GetBulkPublishDetailsRequest
+	GetBulkPublishDetailsRequest(*types.GetBulkPublishDetailsInput) cognitosync.GetBulkPublishDetailsRequest
 
-	GetCognitoEventsRequest(*cognitosync.GetCognitoEventsInput) cognitosync.GetCognitoEventsRequest
+	GetCognitoEventsRequest(*types.GetCognitoEventsInput) cognitosync.GetCognitoEventsRequest
 
-	GetIdentityPoolConfigurationRequest(*cognitosync.GetIdentityPoolConfigurationInput) cognitosync.GetIdentityPoolConfigurationRequest
+	GetIdentityPoolConfigurationRequest(*types.GetIdentityPoolConfigurationInput) cognitosync.GetIdentityPoolConfigurationRequest
 
-	ListDatasetsRequest(*cognitosync.ListDatasetsInput) cognitosync.ListDatasetsRequest
+	ListDatasetsRequest(*types.ListDatasetsInput) cognitosync.ListDatasetsRequest
 
-	ListIdentityPoolUsageRequest(*cognitosync.ListIdentityPoolUsageInput) cognitosync.ListIdentityPoolUsageRequest
+	ListIdentityPoolUsageRequest(*types.ListIdentityPoolUsageInput) cognitosync.ListIdentityPoolUsageRequest
 
-	ListRecordsRequest(*cognitosync.ListRecordsInput) cognitosync.ListRecordsRequest
+	ListRecordsRequest(*types.ListRecordsInput) cognitosync.ListRecordsRequest
 
-	RegisterDeviceRequest(*cognitosync.RegisterDeviceInput) cognitosync.RegisterDeviceRequest
+	RegisterDeviceRequest(*types.RegisterDeviceInput) cognitosync.RegisterDeviceRequest
 
-	SetCognitoEventsRequest(*cognitosync.SetCognitoEventsInput) cognitosync.SetCognitoEventsRequest
+	SetCognitoEventsRequest(*types.SetCognitoEventsInput) cognitosync.SetCognitoEventsRequest
 
-	SetIdentityPoolConfigurationRequest(*cognitosync.SetIdentityPoolConfigurationInput) cognitosync.SetIdentityPoolConfigurationRequest
+	SetIdentityPoolConfigurationRequest(*types.SetIdentityPoolConfigurationInput) cognitosync.SetIdentityPoolConfigurationRequest
 
-	SubscribeToDatasetRequest(*cognitosync.SubscribeToDatasetInput) cognitosync.SubscribeToDatasetRequest
+	SubscribeToDatasetRequest(*types.SubscribeToDatasetInput) cognitosync.SubscribeToDatasetRequest
 
-	UnsubscribeFromDatasetRequest(*cognitosync.UnsubscribeFromDatasetInput) cognitosync.UnsubscribeFromDatasetRequest
+	UnsubscribeFromDatasetRequest(*types.UnsubscribeFromDatasetInput) cognitosync.UnsubscribeFromDatasetRequest
 
-	UpdateRecordsRequest(*cognitosync.UpdateRecordsInput) cognitosync.UpdateRecordsRequest
+	UpdateRecordsRequest(*types.UpdateRecordsInput) cognitosync.UpdateRecordsRequest
 }
 
 var _ ClientAPI = (*cognitosync.Client)(nil)

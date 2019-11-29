@@ -6,71 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/sns/types"
 )
-
-// Input for CreatePlatformEndpoint action.
-type CreatePlatformEndpointInput struct {
-	_ struct{} `type:"structure"`
-
-	// For a list of attributes, see SetEndpointAttributes (https://docs.aws.amazon.com/sns/latest/api/API_SetEndpointAttributes.html).
-	Attributes map[string]string `type:"map"`
-
-	// Arbitrary user data to associate with the endpoint. Amazon SNS does not use
-	// this data. The data must be in UTF-8 format and less than 2KB.
-	CustomUserData *string `type:"string"`
-
-	// PlatformApplicationArn returned from CreatePlatformApplication is used to
-	// create a an endpoint.
-	//
-	// PlatformApplicationArn is a required field
-	PlatformApplicationArn *string `type:"string" required:"true"`
-
-	// Unique identifier created by the notification service for an app on a device.
-	// The specific name for Token will vary, depending on which notification service
-	// is being used. For example, when using APNS as the notification service,
-	// you need the device token. Alternatively, when using GCM or ADM, the device
-	// token equivalent is called the registration ID.
-	//
-	// Token is a required field
-	Token *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s CreatePlatformEndpointInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreatePlatformEndpointInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreatePlatformEndpointInput"}
-
-	if s.PlatformApplicationArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("PlatformApplicationArn"))
-	}
-
-	if s.Token == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Token"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Response from CreateEndpoint action.
-type CreatePlatformEndpointOutput struct {
-	_ struct{} `type:"structure"`
-
-	// EndpointArn returned from CreateEndpoint action.
-	EndpointArn *string `type:"string"`
-}
-
-// String returns the string representation
-func (s CreatePlatformEndpointOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCreatePlatformEndpoint = "CreatePlatformEndpoint"
 
@@ -100,7 +37,7 @@ const opCreatePlatformEndpoint = "CreatePlatformEndpoint"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/CreatePlatformEndpoint
-func (c *Client) CreatePlatformEndpointRequest(input *CreatePlatformEndpointInput) CreatePlatformEndpointRequest {
+func (c *Client) CreatePlatformEndpointRequest(input *types.CreatePlatformEndpointInput) CreatePlatformEndpointRequest {
 	op := &aws.Operation{
 		Name:       opCreatePlatformEndpoint,
 		HTTPMethod: "POST",
@@ -108,10 +45,10 @@ func (c *Client) CreatePlatformEndpointRequest(input *CreatePlatformEndpointInpu
 	}
 
 	if input == nil {
-		input = &CreatePlatformEndpointInput{}
+		input = &types.CreatePlatformEndpointInput{}
 	}
 
-	req := c.newRequest(op, input, &CreatePlatformEndpointOutput{})
+	req := c.newRequest(op, input, &types.CreatePlatformEndpointOutput{})
 	return CreatePlatformEndpointRequest{Request: req, Input: input, Copy: c.CreatePlatformEndpointRequest}
 }
 
@@ -119,8 +56,8 @@ func (c *Client) CreatePlatformEndpointRequest(input *CreatePlatformEndpointInpu
 // CreatePlatformEndpoint API operation.
 type CreatePlatformEndpointRequest struct {
 	*aws.Request
-	Input *CreatePlatformEndpointInput
-	Copy  func(*CreatePlatformEndpointInput) CreatePlatformEndpointRequest
+	Input *types.CreatePlatformEndpointInput
+	Copy  func(*types.CreatePlatformEndpointInput) CreatePlatformEndpointRequest
 }
 
 // Send marshals and sends the CreatePlatformEndpoint API request.
@@ -132,7 +69,7 @@ func (r CreatePlatformEndpointRequest) Send(ctx context.Context) (*CreatePlatfor
 	}
 
 	resp := &CreatePlatformEndpointResponse{
-		CreatePlatformEndpointOutput: r.Request.Data.(*CreatePlatformEndpointOutput),
+		CreatePlatformEndpointOutput: r.Request.Data.(*types.CreatePlatformEndpointOutput),
 		response:                     &aws.Response{Request: r.Request},
 	}
 
@@ -142,7 +79,7 @@ func (r CreatePlatformEndpointRequest) Send(ctx context.Context) (*CreatePlatfor
 // CreatePlatformEndpointResponse is the response type for the
 // CreatePlatformEndpoint API operation.
 type CreatePlatformEndpointResponse struct {
-	*CreatePlatformEndpointOutput
+	*types.CreatePlatformEndpointOutput
 
 	response *aws.Response
 }

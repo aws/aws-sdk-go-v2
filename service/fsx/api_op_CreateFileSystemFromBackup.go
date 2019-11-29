@@ -4,103 +4,10 @@ package fsx
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/fsx/types"
 )
-
-// The request object for the CreateFileSystemFromBackup operation.
-type CreateFileSystemFromBackupInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the backup. Specifies the backup to use if you're creating a file
-	// system from an existing backup.
-	//
-	// BackupId is a required field
-	BackupId *string `min:"12" type:"string" required:"true"`
-
-	// (Optional) A string of up to 64 ASCII characters that Amazon FSx uses to
-	// ensure idempotent creation. This string is automatically filled on your behalf
-	// when you use the AWS Command Line Interface (AWS CLI) or an AWS SDK.
-	ClientRequestToken *string `min:"1" type:"string" idempotencyToken:"true"`
-
-	// A list of IDs for the security groups that apply to the specified network
-	// interfaces created for file system access. These security groups apply to
-	// all network interfaces. This value isn't returned in later describe requests.
-	SecurityGroupIds []string `type:"list"`
-
-	// A list of IDs for the subnets that the file system will be accessible from.
-	// Currently, you can specify only one subnet. The file server is also launched
-	// in that subnet's Availability Zone.
-	//
-	// SubnetIds is a required field
-	SubnetIds []string `type:"list" required:"true"`
-
-	// The tags to be applied to the file system at file system creation. The key
-	// value of the Name tag appears in the console as the file system name.
-	Tags []Tag `min:"1" type:"list"`
-
-	// The configuration for this Microsoft Windows file system.
-	WindowsConfiguration *CreateFileSystemWindowsConfiguration `type:"structure"`
-}
-
-// String returns the string representation
-func (s CreateFileSystemFromBackupInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateFileSystemFromBackupInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateFileSystemFromBackupInput"}
-
-	if s.BackupId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("BackupId"))
-	}
-	if s.BackupId != nil && len(*s.BackupId) < 12 {
-		invalidParams.Add(aws.NewErrParamMinLen("BackupId", 12))
-	}
-	if s.ClientRequestToken != nil && len(*s.ClientRequestToken) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ClientRequestToken", 1))
-	}
-
-	if s.SubnetIds == nil {
-		invalidParams.Add(aws.NewErrParamRequired("SubnetIds"))
-	}
-	if s.Tags != nil && len(s.Tags) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Tags", 1))
-	}
-	if s.Tags != nil {
-		for i, v := range s.Tags {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-	if s.WindowsConfiguration != nil {
-		if err := s.WindowsConfiguration.Validate(); err != nil {
-			invalidParams.AddNested("WindowsConfiguration", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// The response object for the CreateFileSystemFromBackup operation.
-type CreateFileSystemFromBackupOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A description of the file system.
-	FileSystem *FileSystem `type:"structure"`
-}
-
-// String returns the string representation
-func (s CreateFileSystemFromBackupOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCreateFileSystemFromBackup = "CreateFileSystemFromBackup"
 
@@ -147,7 +54,7 @@ const opCreateFileSystemFromBackup = "CreateFileSystemFromBackup"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/CreateFileSystemFromBackup
-func (c *Client) CreateFileSystemFromBackupRequest(input *CreateFileSystemFromBackupInput) CreateFileSystemFromBackupRequest {
+func (c *Client) CreateFileSystemFromBackupRequest(input *types.CreateFileSystemFromBackupInput) CreateFileSystemFromBackupRequest {
 	op := &aws.Operation{
 		Name:       opCreateFileSystemFromBackup,
 		HTTPMethod: "POST",
@@ -155,10 +62,10 @@ func (c *Client) CreateFileSystemFromBackupRequest(input *CreateFileSystemFromBa
 	}
 
 	if input == nil {
-		input = &CreateFileSystemFromBackupInput{}
+		input = &types.CreateFileSystemFromBackupInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateFileSystemFromBackupOutput{})
+	req := c.newRequest(op, input, &types.CreateFileSystemFromBackupOutput{})
 	return CreateFileSystemFromBackupRequest{Request: req, Input: input, Copy: c.CreateFileSystemFromBackupRequest}
 }
 
@@ -166,8 +73,8 @@ func (c *Client) CreateFileSystemFromBackupRequest(input *CreateFileSystemFromBa
 // CreateFileSystemFromBackup API operation.
 type CreateFileSystemFromBackupRequest struct {
 	*aws.Request
-	Input *CreateFileSystemFromBackupInput
-	Copy  func(*CreateFileSystemFromBackupInput) CreateFileSystemFromBackupRequest
+	Input *types.CreateFileSystemFromBackupInput
+	Copy  func(*types.CreateFileSystemFromBackupInput) CreateFileSystemFromBackupRequest
 }
 
 // Send marshals and sends the CreateFileSystemFromBackup API request.
@@ -179,7 +86,7 @@ func (r CreateFileSystemFromBackupRequest) Send(ctx context.Context) (*CreateFil
 	}
 
 	resp := &CreateFileSystemFromBackupResponse{
-		CreateFileSystemFromBackupOutput: r.Request.Data.(*CreateFileSystemFromBackupOutput),
+		CreateFileSystemFromBackupOutput: r.Request.Data.(*types.CreateFileSystemFromBackupOutput),
 		response:                         &aws.Response{Request: r.Request},
 	}
 
@@ -189,7 +96,7 @@ func (r CreateFileSystemFromBackupRequest) Send(ctx context.Context) (*CreateFil
 // CreateFileSystemFromBackupResponse is the response type for the
 // CreateFileSystemFromBackup API operation.
 type CreateFileSystemFromBackupResponse struct {
-	*CreateFileSystemFromBackupOutput
+	*types.CreateFileSystemFromBackupOutput
 
 	response *aws.Response
 }

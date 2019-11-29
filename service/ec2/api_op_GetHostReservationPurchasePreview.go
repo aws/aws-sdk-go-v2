@@ -6,68 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-type GetHostReservationPurchasePreviewInput struct {
-	_ struct{} `type:"structure"`
-
-	// The IDs of the Dedicated Hosts with which the reservation is associated.
-	//
-	// HostIdSet is a required field
-	HostIdSet []string `locationNameList:"item" type:"list" required:"true"`
-
-	// The offering ID of the reservation.
-	//
-	// OfferingId is a required field
-	OfferingId *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetHostReservationPurchasePreviewInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetHostReservationPurchasePreviewInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetHostReservationPurchasePreviewInput"}
-
-	if s.HostIdSet == nil {
-		invalidParams.Add(aws.NewErrParamRequired("HostIdSet"))
-	}
-
-	if s.OfferingId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("OfferingId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type GetHostReservationPurchasePreviewOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The currency in which the totalUpfrontPrice and totalHourlyPrice amounts
-	// are specified. At this time, the only supported currency is USD.
-	CurrencyCode CurrencyCodeValues `locationName:"currencyCode" type:"string" enum:"true"`
-
-	// The purchase information of the Dedicated Host reservation and the Dedicated
-	// Hosts associated with it.
-	Purchase []Purchase `locationName:"purchase" locationNameList:"item" type:"list"`
-
-	// The potential total hourly price of the reservation per hour.
-	TotalHourlyPrice *string `locationName:"totalHourlyPrice" type:"string"`
-
-	// The potential total upfront price. This is billed immediately.
-	TotalUpfrontPrice *string `locationName:"totalUpfrontPrice" type:"string"`
-}
-
-// String returns the string representation
-func (s GetHostReservationPurchasePreviewOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetHostReservationPurchasePreview = "GetHostReservationPurchasePreview"
 
@@ -89,7 +29,7 @@ const opGetHostReservationPurchasePreview = "GetHostReservationPurchasePreview"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetHostReservationPurchasePreview
-func (c *Client) GetHostReservationPurchasePreviewRequest(input *GetHostReservationPurchasePreviewInput) GetHostReservationPurchasePreviewRequest {
+func (c *Client) GetHostReservationPurchasePreviewRequest(input *types.GetHostReservationPurchasePreviewInput) GetHostReservationPurchasePreviewRequest {
 	op := &aws.Operation{
 		Name:       opGetHostReservationPurchasePreview,
 		HTTPMethod: "POST",
@@ -97,10 +37,10 @@ func (c *Client) GetHostReservationPurchasePreviewRequest(input *GetHostReservat
 	}
 
 	if input == nil {
-		input = &GetHostReservationPurchasePreviewInput{}
+		input = &types.GetHostReservationPurchasePreviewInput{}
 	}
 
-	req := c.newRequest(op, input, &GetHostReservationPurchasePreviewOutput{})
+	req := c.newRequest(op, input, &types.GetHostReservationPurchasePreviewOutput{})
 	return GetHostReservationPurchasePreviewRequest{Request: req, Input: input, Copy: c.GetHostReservationPurchasePreviewRequest}
 }
 
@@ -108,8 +48,8 @@ func (c *Client) GetHostReservationPurchasePreviewRequest(input *GetHostReservat
 // GetHostReservationPurchasePreview API operation.
 type GetHostReservationPurchasePreviewRequest struct {
 	*aws.Request
-	Input *GetHostReservationPurchasePreviewInput
-	Copy  func(*GetHostReservationPurchasePreviewInput) GetHostReservationPurchasePreviewRequest
+	Input *types.GetHostReservationPurchasePreviewInput
+	Copy  func(*types.GetHostReservationPurchasePreviewInput) GetHostReservationPurchasePreviewRequest
 }
 
 // Send marshals and sends the GetHostReservationPurchasePreview API request.
@@ -121,7 +61,7 @@ func (r GetHostReservationPurchasePreviewRequest) Send(ctx context.Context) (*Ge
 	}
 
 	resp := &GetHostReservationPurchasePreviewResponse{
-		GetHostReservationPurchasePreviewOutput: r.Request.Data.(*GetHostReservationPurchasePreviewOutput),
+		GetHostReservationPurchasePreviewOutput: r.Request.Data.(*types.GetHostReservationPurchasePreviewOutput),
 		response:                                &aws.Response{Request: r.Request},
 	}
 
@@ -131,7 +71,7 @@ func (r GetHostReservationPurchasePreviewRequest) Send(ctx context.Context) (*Ge
 // GetHostReservationPurchasePreviewResponse is the response type for the
 // GetHostReservationPurchasePreview API operation.
 type GetHostReservationPurchasePreviewResponse struct {
-	*GetHostReservationPurchasePreviewOutput
+	*types.GetHostReservationPurchasePreviewOutput
 
 	response *aws.Response
 }

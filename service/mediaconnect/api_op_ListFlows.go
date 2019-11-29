@@ -6,98 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/mediaconnect/types"
 )
-
-type ListFlowsInput struct {
-	_ struct{} `type:"structure"`
-
-	MaxResults *int64 `location:"querystring" locationName:"maxResults" min:"1" type:"integer"`
-
-	NextToken *string `location:"querystring" locationName:"nextToken" type:"string"`
-}
-
-// String returns the string representation
-func (s ListFlowsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListFlowsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListFlowsInput"}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListFlowsInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.MaxResults != nil {
-		v := *s.MaxResults
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "maxResults", protocol.Int64Value(v), metadata)
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-// The result of a successful ListFlows request. The response includes flow
-// summaries and the NextToken to use in a subsequent ListFlows request.
-type ListFlowsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A list of flow summaries.
-	Flows []ListedFlow `locationName:"flows" type:"list"`
-
-	// The token that identifies which batch of results that you want to see. For
-	// example, you submit a ListFlows request with MaxResults set at 5. The service
-	// returns the first batch of results (up to 5) and a NextToken value. To see
-	// the next batch of results, you can submit the ListFlows request a second
-	// time and specify the NextToken value.
-	NextToken *string `locationName:"nextToken" type:"string"`
-}
-
-// String returns the string representation
-func (s ListFlowsOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListFlowsOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.Flows != nil {
-		v := s.Flows
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "flows", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opListFlows = "ListFlows"
 
@@ -115,7 +25,7 @@ const opListFlows = "ListFlows"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/ListFlows
-func (c *Client) ListFlowsRequest(input *ListFlowsInput) ListFlowsRequest {
+func (c *Client) ListFlowsRequest(input *types.ListFlowsInput) ListFlowsRequest {
 	op := &aws.Operation{
 		Name:       opListFlows,
 		HTTPMethod: "GET",
@@ -129,10 +39,10 @@ func (c *Client) ListFlowsRequest(input *ListFlowsInput) ListFlowsRequest {
 	}
 
 	if input == nil {
-		input = &ListFlowsInput{}
+		input = &types.ListFlowsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListFlowsOutput{})
+	req := c.newRequest(op, input, &types.ListFlowsOutput{})
 	return ListFlowsRequest{Request: req, Input: input, Copy: c.ListFlowsRequest}
 }
 
@@ -140,8 +50,8 @@ func (c *Client) ListFlowsRequest(input *ListFlowsInput) ListFlowsRequest {
 // ListFlows API operation.
 type ListFlowsRequest struct {
 	*aws.Request
-	Input *ListFlowsInput
-	Copy  func(*ListFlowsInput) ListFlowsRequest
+	Input *types.ListFlowsInput
+	Copy  func(*types.ListFlowsInput) ListFlowsRequest
 }
 
 // Send marshals and sends the ListFlows API request.
@@ -153,7 +63,7 @@ func (r ListFlowsRequest) Send(ctx context.Context) (*ListFlowsResponse, error) 
 	}
 
 	resp := &ListFlowsResponse{
-		ListFlowsOutput: r.Request.Data.(*ListFlowsOutput),
+		ListFlowsOutput: r.Request.Data.(*types.ListFlowsOutput),
 		response:        &aws.Response{Request: r.Request},
 	}
 
@@ -183,7 +93,7 @@ func NewListFlowsPaginator(req ListFlowsRequest) ListFlowsPaginator {
 	return ListFlowsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListFlowsInput
+				var inCpy *types.ListFlowsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -203,14 +113,14 @@ type ListFlowsPaginator struct {
 	aws.Pager
 }
 
-func (p *ListFlowsPaginator) CurrentPage() *ListFlowsOutput {
-	return p.Pager.CurrentPage().(*ListFlowsOutput)
+func (p *ListFlowsPaginator) CurrentPage() *types.ListFlowsOutput {
+	return p.Pager.CurrentPage().(*types.ListFlowsOutput)
 }
 
 // ListFlowsResponse is the response type for the
 // ListFlows API operation.
 type ListFlowsResponse struct {
-	*ListFlowsOutput
+	*types.ListFlowsOutput
 
 	response *aws.Response
 }

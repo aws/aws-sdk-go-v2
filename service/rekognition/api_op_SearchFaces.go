@@ -6,80 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/rekognition/types"
 )
-
-type SearchFacesInput struct {
-	_ struct{} `type:"structure"`
-
-	// ID of the collection the face belongs to.
-	//
-	// CollectionId is a required field
-	CollectionId *string `min:"1" type:"string" required:"true"`
-
-	// ID of a face to find matches for in the collection.
-	//
-	// FaceId is a required field
-	FaceId *string `type:"string" required:"true"`
-
-	// Optional value specifying the minimum confidence in the face match to return.
-	// For example, don't return any matches where confidence in matches is less
-	// than 70%. The default value is 80%.
-	FaceMatchThreshold *float64 `type:"float"`
-
-	// Maximum number of faces to return. The operation returns the maximum number
-	// of faces with the highest confidence in the match.
-	MaxFaces *int64 `min:"1" type:"integer"`
-}
-
-// String returns the string representation
-func (s SearchFacesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *SearchFacesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "SearchFacesInput"}
-
-	if s.CollectionId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("CollectionId"))
-	}
-	if s.CollectionId != nil && len(*s.CollectionId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("CollectionId", 1))
-	}
-
-	if s.FaceId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("FaceId"))
-	}
-	if s.MaxFaces != nil && *s.MaxFaces < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxFaces", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type SearchFacesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// An array of faces that matched the input face, along with the confidence
-	// in the match.
-	FaceMatches []FaceMatch `type:"list"`
-
-	// Version number of the face detection model associated with the input collection
-	// (CollectionId).
-	FaceModelVersion *string `type:"string"`
-
-	// ID of the face that was searched for matches in a collection.
-	SearchedFaceId *string `type:"string"`
-}
-
-// String returns the string representation
-func (s SearchFacesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opSearchFaces = "SearchFaces"
 
@@ -112,7 +40,7 @@ const opSearchFaces = "SearchFaces"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) SearchFacesRequest(input *SearchFacesInput) SearchFacesRequest {
+func (c *Client) SearchFacesRequest(input *types.SearchFacesInput) SearchFacesRequest {
 	op := &aws.Operation{
 		Name:       opSearchFaces,
 		HTTPMethod: "POST",
@@ -120,10 +48,10 @@ func (c *Client) SearchFacesRequest(input *SearchFacesInput) SearchFacesRequest 
 	}
 
 	if input == nil {
-		input = &SearchFacesInput{}
+		input = &types.SearchFacesInput{}
 	}
 
-	req := c.newRequest(op, input, &SearchFacesOutput{})
+	req := c.newRequest(op, input, &types.SearchFacesOutput{})
 	return SearchFacesRequest{Request: req, Input: input, Copy: c.SearchFacesRequest}
 }
 
@@ -131,8 +59,8 @@ func (c *Client) SearchFacesRequest(input *SearchFacesInput) SearchFacesRequest 
 // SearchFaces API operation.
 type SearchFacesRequest struct {
 	*aws.Request
-	Input *SearchFacesInput
-	Copy  func(*SearchFacesInput) SearchFacesRequest
+	Input *types.SearchFacesInput
+	Copy  func(*types.SearchFacesInput) SearchFacesRequest
 }
 
 // Send marshals and sends the SearchFaces API request.
@@ -144,7 +72,7 @@ func (r SearchFacesRequest) Send(ctx context.Context) (*SearchFacesResponse, err
 	}
 
 	resp := &SearchFacesResponse{
-		SearchFacesOutput: r.Request.Data.(*SearchFacesOutput),
+		SearchFacesOutput: r.Request.Data.(*types.SearchFacesOutput),
 		response:          &aws.Response{Request: r.Request},
 	}
 
@@ -154,7 +82,7 @@ func (r SearchFacesRequest) Send(ctx context.Context) (*SearchFacesResponse, err
 // SearchFacesResponse is the response type for the
 // SearchFaces API operation.
 type SearchFacesResponse struct {
-	*SearchFacesOutput
+	*types.SearchFacesOutput
 
 	response *aws.Response
 }

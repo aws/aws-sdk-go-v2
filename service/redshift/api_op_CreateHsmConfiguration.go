@@ -6,100 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/redshift/types"
 )
-
-type CreateHsmConfigurationInput struct {
-	_ struct{} `type:"structure"`
-
-	// A text description of the HSM configuration to be created.
-	//
-	// Description is a required field
-	Description *string `type:"string" required:"true"`
-
-	// The identifier to be assigned to the new Amazon Redshift HSM configuration.
-	//
-	// HsmConfigurationIdentifier is a required field
-	HsmConfigurationIdentifier *string `type:"string" required:"true"`
-
-	// The IP address that the Amazon Redshift cluster must use to access the HSM.
-	//
-	// HsmIpAddress is a required field
-	HsmIpAddress *string `type:"string" required:"true"`
-
-	// The name of the partition in the HSM where the Amazon Redshift clusters will
-	// store their database encryption keys.
-	//
-	// HsmPartitionName is a required field
-	HsmPartitionName *string `type:"string" required:"true"`
-
-	// The password required to access the HSM partition.
-	//
-	// HsmPartitionPassword is a required field
-	HsmPartitionPassword *string `type:"string" required:"true"`
-
-	// The HSMs public certificate file. When using Cloud HSM, the file name is
-	// server.pem.
-	//
-	// HsmServerPublicCertificate is a required field
-	HsmServerPublicCertificate *string `type:"string" required:"true"`
-
-	// A list of tag instances.
-	Tags []Tag `locationNameList:"Tag" type:"list"`
-}
-
-// String returns the string representation
-func (s CreateHsmConfigurationInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateHsmConfigurationInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateHsmConfigurationInput"}
-
-	if s.Description == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Description"))
-	}
-
-	if s.HsmConfigurationIdentifier == nil {
-		invalidParams.Add(aws.NewErrParamRequired("HsmConfigurationIdentifier"))
-	}
-
-	if s.HsmIpAddress == nil {
-		invalidParams.Add(aws.NewErrParamRequired("HsmIpAddress"))
-	}
-
-	if s.HsmPartitionName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("HsmPartitionName"))
-	}
-
-	if s.HsmPartitionPassword == nil {
-		invalidParams.Add(aws.NewErrParamRequired("HsmPartitionPassword"))
-	}
-
-	if s.HsmServerPublicCertificate == nil {
-		invalidParams.Add(aws.NewErrParamRequired("HsmServerPublicCertificate"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type CreateHsmConfigurationOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Returns information about an HSM configuration, which is an object that describes
-	// to Amazon Redshift clusters the information they require to connect to an
-	// HSM where they can store database encryption keys.
-	HsmConfiguration *HsmConfiguration `type:"structure"`
-}
-
-// String returns the string representation
-func (s CreateHsmConfigurationOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCreateHsmConfiguration = "CreateHsmConfiguration"
 
@@ -125,7 +33,7 @@ const opCreateHsmConfiguration = "CreateHsmConfiguration"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/CreateHsmConfiguration
-func (c *Client) CreateHsmConfigurationRequest(input *CreateHsmConfigurationInput) CreateHsmConfigurationRequest {
+func (c *Client) CreateHsmConfigurationRequest(input *types.CreateHsmConfigurationInput) CreateHsmConfigurationRequest {
 	op := &aws.Operation{
 		Name:       opCreateHsmConfiguration,
 		HTTPMethod: "POST",
@@ -133,10 +41,10 @@ func (c *Client) CreateHsmConfigurationRequest(input *CreateHsmConfigurationInpu
 	}
 
 	if input == nil {
-		input = &CreateHsmConfigurationInput{}
+		input = &types.CreateHsmConfigurationInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateHsmConfigurationOutput{})
+	req := c.newRequest(op, input, &types.CreateHsmConfigurationOutput{})
 	return CreateHsmConfigurationRequest{Request: req, Input: input, Copy: c.CreateHsmConfigurationRequest}
 }
 
@@ -144,8 +52,8 @@ func (c *Client) CreateHsmConfigurationRequest(input *CreateHsmConfigurationInpu
 // CreateHsmConfiguration API operation.
 type CreateHsmConfigurationRequest struct {
 	*aws.Request
-	Input *CreateHsmConfigurationInput
-	Copy  func(*CreateHsmConfigurationInput) CreateHsmConfigurationRequest
+	Input *types.CreateHsmConfigurationInput
+	Copy  func(*types.CreateHsmConfigurationInput) CreateHsmConfigurationRequest
 }
 
 // Send marshals and sends the CreateHsmConfiguration API request.
@@ -157,7 +65,7 @@ func (r CreateHsmConfigurationRequest) Send(ctx context.Context) (*CreateHsmConf
 	}
 
 	resp := &CreateHsmConfigurationResponse{
-		CreateHsmConfigurationOutput: r.Request.Data.(*CreateHsmConfigurationOutput),
+		CreateHsmConfigurationOutput: r.Request.Data.(*types.CreateHsmConfigurationOutput),
 		response:                     &aws.Response{Request: r.Request},
 	}
 
@@ -167,7 +75,7 @@ func (r CreateHsmConfigurationRequest) Send(ctx context.Context) (*CreateHsmConf
 // CreateHsmConfigurationResponse is the response type for the
 // CreateHsmConfiguration API operation.
 type CreateHsmConfigurationResponse struct {
-	*CreateHsmConfigurationOutput
+	*types.CreateHsmConfigurationOutput
 
 	response *aws.Response
 }

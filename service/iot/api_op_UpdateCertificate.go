@@ -6,91 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/restjson"
+	"github.com/aws/aws-sdk-go-v2/service/iot/types"
 )
-
-// The input for the UpdateCertificate operation.
-type UpdateCertificateInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the certificate. (The last part of the certificate ARN contains
-	// the certificate ID.)
-	//
-	// CertificateId is a required field
-	CertificateId *string `location:"uri" locationName:"certificateId" min:"64" type:"string" required:"true"`
-
-	// The new status.
-	//
-	// Note: Setting the status to PENDING_TRANSFER will result in an exception
-	// being thrown. PENDING_TRANSFER is a status used internally by AWS IoT. It
-	// is not intended for developer use.
-	//
-	// Note: The status value REGISTER_INACTIVE is deprecated and should not be
-	// used.
-	//
-	// NewStatus is a required field
-	NewStatus CertificateStatus `location:"querystring" locationName:"newStatus" type:"string" required:"true" enum:"true"`
-}
-
-// String returns the string representation
-func (s UpdateCertificateInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateCertificateInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateCertificateInput"}
-
-	if s.CertificateId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("CertificateId"))
-	}
-	if s.CertificateId != nil && len(*s.CertificateId) < 64 {
-		invalidParams.Add(aws.NewErrParamMinLen("CertificateId", 64))
-	}
-	if len(s.NewStatus) == 0 {
-		invalidParams.Add(aws.NewErrParamRequired("NewStatus"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s UpdateCertificateInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.CertificateId != nil {
-		v := *s.CertificateId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "certificateId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if len(s.NewStatus) > 0 {
-		v := s.NewStatus
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "newStatus", protocol.QuotedValue{ValueMarshaler: v}, metadata)
-	}
-	return nil
-}
-
-type UpdateCertificateOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s UpdateCertificateOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s UpdateCertificateOutput) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
 
 const opUpdateCertificate = "UpdateCertificate"
 
@@ -111,7 +30,7 @@ const opUpdateCertificate = "UpdateCertificate"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) UpdateCertificateRequest(input *UpdateCertificateInput) UpdateCertificateRequest {
+func (c *Client) UpdateCertificateRequest(input *types.UpdateCertificateInput) UpdateCertificateRequest {
 	op := &aws.Operation{
 		Name:       opUpdateCertificate,
 		HTTPMethod: "PUT",
@@ -119,10 +38,10 @@ func (c *Client) UpdateCertificateRequest(input *UpdateCertificateInput) UpdateC
 	}
 
 	if input == nil {
-		input = &UpdateCertificateInput{}
+		input = &types.UpdateCertificateInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateCertificateOutput{})
+	req := c.newRequest(op, input, &types.UpdateCertificateOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return UpdateCertificateRequest{Request: req, Input: input, Copy: c.UpdateCertificateRequest}
@@ -132,8 +51,8 @@ func (c *Client) UpdateCertificateRequest(input *UpdateCertificateInput) UpdateC
 // UpdateCertificate API operation.
 type UpdateCertificateRequest struct {
 	*aws.Request
-	Input *UpdateCertificateInput
-	Copy  func(*UpdateCertificateInput) UpdateCertificateRequest
+	Input *types.UpdateCertificateInput
+	Copy  func(*types.UpdateCertificateInput) UpdateCertificateRequest
 }
 
 // Send marshals and sends the UpdateCertificate API request.
@@ -145,7 +64,7 @@ func (r UpdateCertificateRequest) Send(ctx context.Context) (*UpdateCertificateR
 	}
 
 	resp := &UpdateCertificateResponse{
-		UpdateCertificateOutput: r.Request.Data.(*UpdateCertificateOutput),
+		UpdateCertificateOutput: r.Request.Data.(*types.UpdateCertificateOutput),
 		response:                &aws.Response{Request: r.Request},
 	}
 
@@ -155,7 +74,7 @@ func (r UpdateCertificateRequest) Send(ctx context.Context) (*UpdateCertificateR
 // UpdateCertificateResponse is the response type for the
 // UpdateCertificate API operation.
 type UpdateCertificateResponse struct {
-	*UpdateCertificateOutput
+	*types.UpdateCertificateOutput
 
 	response *aws.Response
 }

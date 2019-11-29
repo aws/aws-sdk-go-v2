@@ -6,37 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/lightsail/types"
 )
-
-type GetExportSnapshotRecordsInput struct {
-	_ struct{} `type:"structure"`
-
-	// A token used for advancing to a specific page of results for your get export
-	// snapshot records request.
-	PageToken *string `locationName:"pageToken" type:"string"`
-}
-
-// String returns the string representation
-func (s GetExportSnapshotRecordsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type GetExportSnapshotRecordsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A list of objects describing the export snapshot records.
-	ExportSnapshotRecords []ExportSnapshotRecord `locationName:"exportSnapshotRecords" type:"list"`
-
-	// A token used for advancing to the next page of results of your get relational
-	// database bundles request.
-	NextPageToken *string `locationName:"nextPageToken" type:"string"`
-}
-
-// String returns the string representation
-func (s GetExportSnapshotRecordsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetExportSnapshotRecords = "GetExportSnapshotRecords"
 
@@ -57,7 +28,7 @@ const opGetExportSnapshotRecords = "GetExportSnapshotRecords"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetExportSnapshotRecords
-func (c *Client) GetExportSnapshotRecordsRequest(input *GetExportSnapshotRecordsInput) GetExportSnapshotRecordsRequest {
+func (c *Client) GetExportSnapshotRecordsRequest(input *types.GetExportSnapshotRecordsInput) GetExportSnapshotRecordsRequest {
 	op := &aws.Operation{
 		Name:       opGetExportSnapshotRecords,
 		HTTPMethod: "POST",
@@ -65,10 +36,10 @@ func (c *Client) GetExportSnapshotRecordsRequest(input *GetExportSnapshotRecords
 	}
 
 	if input == nil {
-		input = &GetExportSnapshotRecordsInput{}
+		input = &types.GetExportSnapshotRecordsInput{}
 	}
 
-	req := c.newRequest(op, input, &GetExportSnapshotRecordsOutput{})
+	req := c.newRequest(op, input, &types.GetExportSnapshotRecordsOutput{})
 	return GetExportSnapshotRecordsRequest{Request: req, Input: input, Copy: c.GetExportSnapshotRecordsRequest}
 }
 
@@ -76,8 +47,8 @@ func (c *Client) GetExportSnapshotRecordsRequest(input *GetExportSnapshotRecords
 // GetExportSnapshotRecords API operation.
 type GetExportSnapshotRecordsRequest struct {
 	*aws.Request
-	Input *GetExportSnapshotRecordsInput
-	Copy  func(*GetExportSnapshotRecordsInput) GetExportSnapshotRecordsRequest
+	Input *types.GetExportSnapshotRecordsInput
+	Copy  func(*types.GetExportSnapshotRecordsInput) GetExportSnapshotRecordsRequest
 }
 
 // Send marshals and sends the GetExportSnapshotRecords API request.
@@ -89,7 +60,7 @@ func (r GetExportSnapshotRecordsRequest) Send(ctx context.Context) (*GetExportSn
 	}
 
 	resp := &GetExportSnapshotRecordsResponse{
-		GetExportSnapshotRecordsOutput: r.Request.Data.(*GetExportSnapshotRecordsOutput),
+		GetExportSnapshotRecordsOutput: r.Request.Data.(*types.GetExportSnapshotRecordsOutput),
 		response:                       &aws.Response{Request: r.Request},
 	}
 
@@ -99,7 +70,7 @@ func (r GetExportSnapshotRecordsRequest) Send(ctx context.Context) (*GetExportSn
 // GetExportSnapshotRecordsResponse is the response type for the
 // GetExportSnapshotRecords API operation.
 type GetExportSnapshotRecordsResponse struct {
-	*GetExportSnapshotRecordsOutput
+	*types.GetExportSnapshotRecordsOutput
 
 	response *aws.Response
 }

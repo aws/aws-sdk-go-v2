@@ -6,66 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/redshift/types"
 )
-
-type BatchModifyClusterSnapshotsInput struct {
-	_ struct{} `type:"structure"`
-
-	// A boolean value indicating whether to override an exception if the retention
-	// period has passed.
-	Force *bool `type:"boolean"`
-
-	// The number of days that a manual snapshot is retained. If you specify the
-	// value -1, the manual snapshot is retained indefinitely.
-	//
-	// The number must be either -1 or an integer between 1 and 3,653.
-	//
-	// If you decrease the manual snapshot retention period from its current value,
-	// existing manual snapshots that fall outside of the new retention period will
-	// return an error. If you want to suppress the errors and delete the snapshots,
-	// use the force option.
-	ManualSnapshotRetentionPeriod *int64 `type:"integer"`
-
-	// A list of snapshot identifiers you want to modify.
-	//
-	// SnapshotIdentifierList is a required field
-	SnapshotIdentifierList []string `locationNameList:"String" type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s BatchModifyClusterSnapshotsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *BatchModifyClusterSnapshotsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "BatchModifyClusterSnapshotsInput"}
-
-	if s.SnapshotIdentifierList == nil {
-		invalidParams.Add(aws.NewErrParamRequired("SnapshotIdentifierList"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type BatchModifyClusterSnapshotsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A list of any errors returned.
-	Errors []SnapshotErrorMessage `locationNameList:"SnapshotErrorMessage" type:"list"`
-
-	// A list of the snapshots that were modified.
-	Resources []string `locationNameList:"String" type:"list"`
-}
-
-// String returns the string representation
-func (s BatchModifyClusterSnapshotsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opBatchModifyClusterSnapshots = "BatchModifyClusterSnapshots"
 
@@ -82,7 +24,7 @@ const opBatchModifyClusterSnapshots = "BatchModifyClusterSnapshots"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/BatchModifyClusterSnapshots
-func (c *Client) BatchModifyClusterSnapshotsRequest(input *BatchModifyClusterSnapshotsInput) BatchModifyClusterSnapshotsRequest {
+func (c *Client) BatchModifyClusterSnapshotsRequest(input *types.BatchModifyClusterSnapshotsInput) BatchModifyClusterSnapshotsRequest {
 	op := &aws.Operation{
 		Name:       opBatchModifyClusterSnapshots,
 		HTTPMethod: "POST",
@@ -90,10 +32,10 @@ func (c *Client) BatchModifyClusterSnapshotsRequest(input *BatchModifyClusterSna
 	}
 
 	if input == nil {
-		input = &BatchModifyClusterSnapshotsInput{}
+		input = &types.BatchModifyClusterSnapshotsInput{}
 	}
 
-	req := c.newRequest(op, input, &BatchModifyClusterSnapshotsOutput{})
+	req := c.newRequest(op, input, &types.BatchModifyClusterSnapshotsOutput{})
 	return BatchModifyClusterSnapshotsRequest{Request: req, Input: input, Copy: c.BatchModifyClusterSnapshotsRequest}
 }
 
@@ -101,8 +43,8 @@ func (c *Client) BatchModifyClusterSnapshotsRequest(input *BatchModifyClusterSna
 // BatchModifyClusterSnapshots API operation.
 type BatchModifyClusterSnapshotsRequest struct {
 	*aws.Request
-	Input *BatchModifyClusterSnapshotsInput
-	Copy  func(*BatchModifyClusterSnapshotsInput) BatchModifyClusterSnapshotsRequest
+	Input *types.BatchModifyClusterSnapshotsInput
+	Copy  func(*types.BatchModifyClusterSnapshotsInput) BatchModifyClusterSnapshotsRequest
 }
 
 // Send marshals and sends the BatchModifyClusterSnapshots API request.
@@ -114,7 +56,7 @@ func (r BatchModifyClusterSnapshotsRequest) Send(ctx context.Context) (*BatchMod
 	}
 
 	resp := &BatchModifyClusterSnapshotsResponse{
-		BatchModifyClusterSnapshotsOutput: r.Request.Data.(*BatchModifyClusterSnapshotsOutput),
+		BatchModifyClusterSnapshotsOutput: r.Request.Data.(*types.BatchModifyClusterSnapshotsOutput),
 		response:                          &aws.Response{Request: r.Request},
 	}
 
@@ -124,7 +66,7 @@ func (r BatchModifyClusterSnapshotsRequest) Send(ctx context.Context) (*BatchMod
 // BatchModifyClusterSnapshotsResponse is the response type for the
 // BatchModifyClusterSnapshots API operation.
 type BatchModifyClusterSnapshotsResponse struct {
-	*BatchModifyClusterSnapshotsOutput
+	*types.BatchModifyClusterSnapshotsOutput
 
 	response *aws.Response
 }

@@ -6,49 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ses/types"
 )
-
-// Represents a request to delete a configuration set. Configuration sets enable
-// you to publish email sending events. For information about using configuration
-// sets, see the Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html).
-type DeleteConfigurationSetInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the configuration set to delete.
-	//
-	// ConfigurationSetName is a required field
-	ConfigurationSetName *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteConfigurationSetInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteConfigurationSetInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteConfigurationSetInput"}
-
-	if s.ConfigurationSetName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ConfigurationSetName"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// An empty element returned on a successful request.
-type DeleteConfigurationSetOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteConfigurationSetOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteConfigurationSet = "DeleteConfigurationSet"
 
@@ -69,7 +28,7 @@ const opDeleteConfigurationSet = "DeleteConfigurationSet"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/DeleteConfigurationSet
-func (c *Client) DeleteConfigurationSetRequest(input *DeleteConfigurationSetInput) DeleteConfigurationSetRequest {
+func (c *Client) DeleteConfigurationSetRequest(input *types.DeleteConfigurationSetInput) DeleteConfigurationSetRequest {
 	op := &aws.Operation{
 		Name:       opDeleteConfigurationSet,
 		HTTPMethod: "POST",
@@ -77,10 +36,10 @@ func (c *Client) DeleteConfigurationSetRequest(input *DeleteConfigurationSetInpu
 	}
 
 	if input == nil {
-		input = &DeleteConfigurationSetInput{}
+		input = &types.DeleteConfigurationSetInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteConfigurationSetOutput{})
+	req := c.newRequest(op, input, &types.DeleteConfigurationSetOutput{})
 	return DeleteConfigurationSetRequest{Request: req, Input: input, Copy: c.DeleteConfigurationSetRequest}
 }
 
@@ -88,8 +47,8 @@ func (c *Client) DeleteConfigurationSetRequest(input *DeleteConfigurationSetInpu
 // DeleteConfigurationSet API operation.
 type DeleteConfigurationSetRequest struct {
 	*aws.Request
-	Input *DeleteConfigurationSetInput
-	Copy  func(*DeleteConfigurationSetInput) DeleteConfigurationSetRequest
+	Input *types.DeleteConfigurationSetInput
+	Copy  func(*types.DeleteConfigurationSetInput) DeleteConfigurationSetRequest
 }
 
 // Send marshals and sends the DeleteConfigurationSet API request.
@@ -101,7 +60,7 @@ func (r DeleteConfigurationSetRequest) Send(ctx context.Context) (*DeleteConfigu
 	}
 
 	resp := &DeleteConfigurationSetResponse{
-		DeleteConfigurationSetOutput: r.Request.Data.(*DeleteConfigurationSetOutput),
+		DeleteConfigurationSetOutput: r.Request.Data.(*types.DeleteConfigurationSetOutput),
 		response:                     &aws.Response{Request: r.Request},
 	}
 
@@ -111,7 +70,7 @@ func (r DeleteConfigurationSetRequest) Send(ctx context.Context) (*DeleteConfigu
 // DeleteConfigurationSetResponse is the response type for the
 // DeleteConfigurationSet API operation.
 type DeleteConfigurationSetResponse struct {
-	*DeleteConfigurationSetOutput
+	*types.DeleteConfigurationSetOutput
 
 	response *aws.Response
 }

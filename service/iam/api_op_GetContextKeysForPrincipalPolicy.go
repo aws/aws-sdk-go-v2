@@ -6,80 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/iam/types"
 )
-
-type GetContextKeysForPrincipalPolicyInput struct {
-	_ struct{} `type:"structure"`
-
-	// An optional list of additional policies for which you want the list of context
-	// keys that are referenced.
-	//
-	// The regex pattern (http://wikipedia.org/wiki/regex) used to validate this
-	// parameter is a string of characters consisting of the following:
-	//
-	//    * Any printable ASCII character ranging from the space character (\u0020)
-	//    through the end of the ASCII character range
-	//
-	//    * The printable characters in the Basic Latin and Latin-1 Supplement character
-	//    set (through \u00FF)
-	//
-	//    * The special characters tab (\u0009), line feed (\u000A), and carriage
-	//    return (\u000D)
-	PolicyInputList []string `type:"list"`
-
-	// The ARN of a user, group, or role whose policies contain the context keys
-	// that you want listed. If you specify a user, the list includes context keys
-	// that are found in all policies that are attached to the user. The list also
-	// includes all groups that the user is a member of. If you pick a group or
-	// a role, then it includes only those context keys that are found in policies
-	// attached to that entity. Note that all parameters are shown in unencoded
-	// form here for clarity, but must be URL encoded to be included as a part of
-	// a real HTML request.
-	//
-	// For more information about ARNs, see Amazon Resource Names (ARNs) and AWS
-	// Service Namespaces (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
-	// in the AWS General Reference.
-	//
-	// PolicySourceArn is a required field
-	PolicySourceArn *string `min:"20" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetContextKeysForPrincipalPolicyInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetContextKeysForPrincipalPolicyInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetContextKeysForPrincipalPolicyInput"}
-
-	if s.PolicySourceArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("PolicySourceArn"))
-	}
-	if s.PolicySourceArn != nil && len(*s.PolicySourceArn) < 20 {
-		invalidParams.Add(aws.NewErrParamMinLen("PolicySourceArn", 20))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Contains the response to a successful GetContextKeysForPrincipalPolicy or
-// GetContextKeysForCustomPolicy request.
-type GetContextKeysForPrincipalPolicyOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The list of context keys that are referenced in the input policies.
-	ContextKeyNames []string `type:"list"`
-}
-
-// String returns the string representation
-func (s GetContextKeysForPrincipalPolicyOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetContextKeysForPrincipalPolicy = "GetContextKeysForPrincipalPolicy"
 
@@ -112,7 +40,7 @@ const opGetContextKeysForPrincipalPolicy = "GetContextKeysForPrincipalPolicy"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetContextKeysForPrincipalPolicy
-func (c *Client) GetContextKeysForPrincipalPolicyRequest(input *GetContextKeysForPrincipalPolicyInput) GetContextKeysForPrincipalPolicyRequest {
+func (c *Client) GetContextKeysForPrincipalPolicyRequest(input *types.GetContextKeysForPrincipalPolicyInput) GetContextKeysForPrincipalPolicyRequest {
 	op := &aws.Operation{
 		Name:       opGetContextKeysForPrincipalPolicy,
 		HTTPMethod: "POST",
@@ -120,10 +48,10 @@ func (c *Client) GetContextKeysForPrincipalPolicyRequest(input *GetContextKeysFo
 	}
 
 	if input == nil {
-		input = &GetContextKeysForPrincipalPolicyInput{}
+		input = &types.GetContextKeysForPrincipalPolicyInput{}
 	}
 
-	req := c.newRequest(op, input, &GetContextKeysForPrincipalPolicyOutput{})
+	req := c.newRequest(op, input, &types.GetContextKeysForPrincipalPolicyOutput{})
 	return GetContextKeysForPrincipalPolicyRequest{Request: req, Input: input, Copy: c.GetContextKeysForPrincipalPolicyRequest}
 }
 
@@ -131,8 +59,8 @@ func (c *Client) GetContextKeysForPrincipalPolicyRequest(input *GetContextKeysFo
 // GetContextKeysForPrincipalPolicy API operation.
 type GetContextKeysForPrincipalPolicyRequest struct {
 	*aws.Request
-	Input *GetContextKeysForPrincipalPolicyInput
-	Copy  func(*GetContextKeysForPrincipalPolicyInput) GetContextKeysForPrincipalPolicyRequest
+	Input *types.GetContextKeysForPrincipalPolicyInput
+	Copy  func(*types.GetContextKeysForPrincipalPolicyInput) GetContextKeysForPrincipalPolicyRequest
 }
 
 // Send marshals and sends the GetContextKeysForPrincipalPolicy API request.
@@ -144,7 +72,7 @@ func (r GetContextKeysForPrincipalPolicyRequest) Send(ctx context.Context) (*Get
 	}
 
 	resp := &GetContextKeysForPrincipalPolicyResponse{
-		GetContextKeysForPrincipalPolicyOutput: r.Request.Data.(*GetContextKeysForPrincipalPolicyOutput),
+		GetContextKeysForPrincipalPolicyOutput: r.Request.Data.(*types.GetContextKeysForPrincipalPolicyOutput),
 		response:                               &aws.Response{Request: r.Request},
 	}
 
@@ -154,7 +82,7 @@ func (r GetContextKeysForPrincipalPolicyRequest) Send(ctx context.Context) (*Get
 // GetContextKeysForPrincipalPolicyResponse is the response type for the
 // GetContextKeysForPrincipalPolicy API operation.
 type GetContextKeysForPrincipalPolicyResponse struct {
-	*GetContextKeysForPrincipalPolicyOutput
+	*types.GetContextKeysForPrincipalPolicyOutput
 
 	response *aws.Response
 }

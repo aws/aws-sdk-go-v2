@@ -4,131 +4,10 @@ package batch
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/batch/types"
 )
-
-type UpdateJobQueueInput struct {
-	_ struct{} `type:"structure"`
-
-	// Details the set of compute environments mapped to a job queue and their order
-	// relative to each other. This is one of the parameters used by the job scheduler
-	// to determine which compute environment should execute a given job.
-	ComputeEnvironmentOrder []ComputeEnvironmentOrder `locationName:"computeEnvironmentOrder" type:"list"`
-
-	// The name or the Amazon Resource Name (ARN) of the job queue.
-	//
-	// JobQueue is a required field
-	JobQueue *string `locationName:"jobQueue" type:"string" required:"true"`
-
-	// The priority of the job queue. Job queues with a higher priority (or a higher
-	// integer value for the priority parameter) are evaluated first when associated
-	// with the same compute environment. Priority is determined in descending order,
-	// for example, a job queue with a priority value of 10 is given scheduling
-	// preference over a job queue with a priority value of 1.
-	Priority *int64 `locationName:"priority" type:"integer"`
-
-	// Describes the queue's ability to accept new jobs.
-	State JQState `locationName:"state" type:"string" enum:"true"`
-}
-
-// String returns the string representation
-func (s UpdateJobQueueInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateJobQueueInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateJobQueueInput"}
-
-	if s.JobQueue == nil {
-		invalidParams.Add(aws.NewErrParamRequired("JobQueue"))
-	}
-	if s.ComputeEnvironmentOrder != nil {
-		for i, v := range s.ComputeEnvironmentOrder {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "ComputeEnvironmentOrder", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s UpdateJobQueueInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.ComputeEnvironmentOrder != nil {
-		v := s.ComputeEnvironmentOrder
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "computeEnvironmentOrder", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	if s.JobQueue != nil {
-		v := *s.JobQueue
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "jobQueue", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Priority != nil {
-		v := *s.Priority
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "priority", protocol.Int64Value(v), metadata)
-	}
-	if len(s.State) > 0 {
-		v := s.State
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "state", protocol.QuotedValue{ValueMarshaler: v}, metadata)
-	}
-	return nil
-}
-
-type UpdateJobQueueOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the job queue.
-	JobQueueArn *string `locationName:"jobQueueArn" type:"string"`
-
-	// The name of the job queue.
-	JobQueueName *string `locationName:"jobQueueName" type:"string"`
-}
-
-// String returns the string representation
-func (s UpdateJobQueueOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s UpdateJobQueueOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.JobQueueArn != nil {
-		v := *s.JobQueueArn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "jobQueueArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.JobQueueName != nil {
-		v := *s.JobQueueName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "jobQueueName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opUpdateJobQueue = "UpdateJobQueue"
 
@@ -145,7 +24,7 @@ const opUpdateJobQueue = "UpdateJobQueue"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/UpdateJobQueue
-func (c *Client) UpdateJobQueueRequest(input *UpdateJobQueueInput) UpdateJobQueueRequest {
+func (c *Client) UpdateJobQueueRequest(input *types.UpdateJobQueueInput) UpdateJobQueueRequest {
 	op := &aws.Operation{
 		Name:       opUpdateJobQueue,
 		HTTPMethod: "POST",
@@ -153,10 +32,10 @@ func (c *Client) UpdateJobQueueRequest(input *UpdateJobQueueInput) UpdateJobQueu
 	}
 
 	if input == nil {
-		input = &UpdateJobQueueInput{}
+		input = &types.UpdateJobQueueInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateJobQueueOutput{})
+	req := c.newRequest(op, input, &types.UpdateJobQueueOutput{})
 	return UpdateJobQueueRequest{Request: req, Input: input, Copy: c.UpdateJobQueueRequest}
 }
 
@@ -164,8 +43,8 @@ func (c *Client) UpdateJobQueueRequest(input *UpdateJobQueueInput) UpdateJobQueu
 // UpdateJobQueue API operation.
 type UpdateJobQueueRequest struct {
 	*aws.Request
-	Input *UpdateJobQueueInput
-	Copy  func(*UpdateJobQueueInput) UpdateJobQueueRequest
+	Input *types.UpdateJobQueueInput
+	Copy  func(*types.UpdateJobQueueInput) UpdateJobQueueRequest
 }
 
 // Send marshals and sends the UpdateJobQueue API request.
@@ -177,7 +56,7 @@ func (r UpdateJobQueueRequest) Send(ctx context.Context) (*UpdateJobQueueRespons
 	}
 
 	resp := &UpdateJobQueueResponse{
-		UpdateJobQueueOutput: r.Request.Data.(*UpdateJobQueueOutput),
+		UpdateJobQueueOutput: r.Request.Data.(*types.UpdateJobQueueOutput),
 		response:             &aws.Response{Request: r.Request},
 	}
 
@@ -187,7 +66,7 @@ func (r UpdateJobQueueRequest) Send(ctx context.Context) (*UpdateJobQueueRespons
 // UpdateJobQueueResponse is the response type for the
 // UpdateJobQueue API operation.
 type UpdateJobQueueResponse struct {
-	*UpdateJobQueueOutput
+	*types.UpdateJobQueueOutput
 
 	response *aws.Response
 }

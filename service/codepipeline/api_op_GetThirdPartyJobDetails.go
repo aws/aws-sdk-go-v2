@@ -6,66 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/codepipeline/types"
 )
-
-// Represents the input of a GetThirdPartyJobDetails action.
-type GetThirdPartyJobDetailsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The clientToken portion of the clientId and clientToken pair used to verify
-	// that the calling entity is allowed access to the job and its details.
-	//
-	// ClientToken is a required field
-	ClientToken *string `locationName:"clientToken" min:"1" type:"string" required:"true"`
-
-	// The unique system-generated ID used for identifying the job.
-	//
-	// JobId is a required field
-	JobId *string `locationName:"jobId" min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetThirdPartyJobDetailsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetThirdPartyJobDetailsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetThirdPartyJobDetailsInput"}
-
-	if s.ClientToken == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ClientToken"))
-	}
-	if s.ClientToken != nil && len(*s.ClientToken) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ClientToken", 1))
-	}
-
-	if s.JobId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("JobId"))
-	}
-	if s.JobId != nil && len(*s.JobId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("JobId", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Represents the output of a GetThirdPartyJobDetails action.
-type GetThirdPartyJobDetailsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The details of the job, including any protected values defined for the job.
-	JobDetails *ThirdPartyJobDetails `locationName:"jobDetails" type:"structure"`
-}
-
-// String returns the string representation
-func (s GetThirdPartyJobDetailsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetThirdPartyJobDetails = "GetThirdPartyJobDetails"
 
@@ -88,7 +30,7 @@ const opGetThirdPartyJobDetails = "GetThirdPartyJobDetails"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/GetThirdPartyJobDetails
-func (c *Client) GetThirdPartyJobDetailsRequest(input *GetThirdPartyJobDetailsInput) GetThirdPartyJobDetailsRequest {
+func (c *Client) GetThirdPartyJobDetailsRequest(input *types.GetThirdPartyJobDetailsInput) GetThirdPartyJobDetailsRequest {
 	op := &aws.Operation{
 		Name:       opGetThirdPartyJobDetails,
 		HTTPMethod: "POST",
@@ -96,10 +38,10 @@ func (c *Client) GetThirdPartyJobDetailsRequest(input *GetThirdPartyJobDetailsIn
 	}
 
 	if input == nil {
-		input = &GetThirdPartyJobDetailsInput{}
+		input = &types.GetThirdPartyJobDetailsInput{}
 	}
 
-	req := c.newRequest(op, input, &GetThirdPartyJobDetailsOutput{})
+	req := c.newRequest(op, input, &types.GetThirdPartyJobDetailsOutput{})
 	return GetThirdPartyJobDetailsRequest{Request: req, Input: input, Copy: c.GetThirdPartyJobDetailsRequest}
 }
 
@@ -107,8 +49,8 @@ func (c *Client) GetThirdPartyJobDetailsRequest(input *GetThirdPartyJobDetailsIn
 // GetThirdPartyJobDetails API operation.
 type GetThirdPartyJobDetailsRequest struct {
 	*aws.Request
-	Input *GetThirdPartyJobDetailsInput
-	Copy  func(*GetThirdPartyJobDetailsInput) GetThirdPartyJobDetailsRequest
+	Input *types.GetThirdPartyJobDetailsInput
+	Copy  func(*types.GetThirdPartyJobDetailsInput) GetThirdPartyJobDetailsRequest
 }
 
 // Send marshals and sends the GetThirdPartyJobDetails API request.
@@ -120,7 +62,7 @@ func (r GetThirdPartyJobDetailsRequest) Send(ctx context.Context) (*GetThirdPart
 	}
 
 	resp := &GetThirdPartyJobDetailsResponse{
-		GetThirdPartyJobDetailsOutput: r.Request.Data.(*GetThirdPartyJobDetailsOutput),
+		GetThirdPartyJobDetailsOutput: r.Request.Data.(*types.GetThirdPartyJobDetailsOutput),
 		response:                      &aws.Response{Request: r.Request},
 	}
 
@@ -130,7 +72,7 @@ func (r GetThirdPartyJobDetailsRequest) Send(ctx context.Context) (*GetThirdPart
 // GetThirdPartyJobDetailsResponse is the response type for the
 // GetThirdPartyJobDetails API operation.
 type GetThirdPartyJobDetailsResponse struct {
-	*GetThirdPartyJobDetailsOutput
+	*types.GetThirdPartyJobDetailsOutput
 
 	response *aws.Response
 }

@@ -6,54 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
+	"github.com/aws/aws-sdk-go-v2/service/configservice/types"
 )
-
-// The input for the PutConfigurationRecorder action.
-type PutConfigurationRecorderInput struct {
-	_ struct{} `type:"structure"`
-
-	// The configuration recorder object that records each configuration change
-	// made to the resources.
-	//
-	// ConfigurationRecorder is a required field
-	ConfigurationRecorder *ConfigurationRecorder `type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s PutConfigurationRecorderInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *PutConfigurationRecorderInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "PutConfigurationRecorderInput"}
-
-	if s.ConfigurationRecorder == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ConfigurationRecorder"))
-	}
-	if s.ConfigurationRecorder != nil {
-		if err := s.ConfigurationRecorder.Validate(); err != nil {
-			invalidParams.AddNested("ConfigurationRecorder", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type PutConfigurationRecorderOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s PutConfigurationRecorderOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opPutConfigurationRecorder = "PutConfigurationRecorder"
 
@@ -80,7 +36,7 @@ const opPutConfigurationRecorder = "PutConfigurationRecorder"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/PutConfigurationRecorder
-func (c *Client) PutConfigurationRecorderRequest(input *PutConfigurationRecorderInput) PutConfigurationRecorderRequest {
+func (c *Client) PutConfigurationRecorderRequest(input *types.PutConfigurationRecorderInput) PutConfigurationRecorderRequest {
 	op := &aws.Operation{
 		Name:       opPutConfigurationRecorder,
 		HTTPMethod: "POST",
@@ -88,10 +44,10 @@ func (c *Client) PutConfigurationRecorderRequest(input *PutConfigurationRecorder
 	}
 
 	if input == nil {
-		input = &PutConfigurationRecorderInput{}
+		input = &types.PutConfigurationRecorderInput{}
 	}
 
-	req := c.newRequest(op, input, &PutConfigurationRecorderOutput{})
+	req := c.newRequest(op, input, &types.PutConfigurationRecorderOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return PutConfigurationRecorderRequest{Request: req, Input: input, Copy: c.PutConfigurationRecorderRequest}
@@ -101,8 +57,8 @@ func (c *Client) PutConfigurationRecorderRequest(input *PutConfigurationRecorder
 // PutConfigurationRecorder API operation.
 type PutConfigurationRecorderRequest struct {
 	*aws.Request
-	Input *PutConfigurationRecorderInput
-	Copy  func(*PutConfigurationRecorderInput) PutConfigurationRecorderRequest
+	Input *types.PutConfigurationRecorderInput
+	Copy  func(*types.PutConfigurationRecorderInput) PutConfigurationRecorderRequest
 }
 
 // Send marshals and sends the PutConfigurationRecorder API request.
@@ -114,7 +70,7 @@ func (r PutConfigurationRecorderRequest) Send(ctx context.Context) (*PutConfigur
 	}
 
 	resp := &PutConfigurationRecorderResponse{
-		PutConfigurationRecorderOutput: r.Request.Data.(*PutConfigurationRecorderOutput),
+		PutConfigurationRecorderOutput: r.Request.Data.(*types.PutConfigurationRecorderOutput),
 		response:                       &aws.Response{Request: r.Request},
 	}
 
@@ -124,7 +80,7 @@ func (r PutConfigurationRecorderRequest) Send(ctx context.Context) (*PutConfigur
 // PutConfigurationRecorderResponse is the response type for the
 // PutConfigurationRecorder API operation.
 type PutConfigurationRecorderResponse struct {
-	*PutConfigurationRecorderOutput
+	*types.PutConfigurationRecorderOutput
 
 	response *aws.Response
 }

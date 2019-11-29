@@ -6,49 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ecs/types"
 )
-
-type DeregisterTaskDefinitionInput struct {
-	_ struct{} `type:"structure"`
-
-	// The family and revision (family:revision) or full Amazon Resource Name (ARN)
-	// of the task definition to deregister. You must specify a revision.
-	//
-	// TaskDefinition is a required field
-	TaskDefinition *string `locationName:"taskDefinition" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeregisterTaskDefinitionInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeregisterTaskDefinitionInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeregisterTaskDefinitionInput"}
-
-	if s.TaskDefinition == nil {
-		invalidParams.Add(aws.NewErrParamRequired("TaskDefinition"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeregisterTaskDefinitionOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The full description of the deregistered task.
-	TaskDefinition *TaskDefinition `locationName:"taskDefinition" type:"structure"`
-}
-
-// String returns the string representation
-func (s DeregisterTaskDefinitionOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeregisterTaskDefinition = "DeregisterTaskDefinition"
 
@@ -79,7 +38,7 @@ const opDeregisterTaskDefinition = "DeregisterTaskDefinition"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DeregisterTaskDefinition
-func (c *Client) DeregisterTaskDefinitionRequest(input *DeregisterTaskDefinitionInput) DeregisterTaskDefinitionRequest {
+func (c *Client) DeregisterTaskDefinitionRequest(input *types.DeregisterTaskDefinitionInput) DeregisterTaskDefinitionRequest {
 	op := &aws.Operation{
 		Name:       opDeregisterTaskDefinition,
 		HTTPMethod: "POST",
@@ -87,10 +46,10 @@ func (c *Client) DeregisterTaskDefinitionRequest(input *DeregisterTaskDefinition
 	}
 
 	if input == nil {
-		input = &DeregisterTaskDefinitionInput{}
+		input = &types.DeregisterTaskDefinitionInput{}
 	}
 
-	req := c.newRequest(op, input, &DeregisterTaskDefinitionOutput{})
+	req := c.newRequest(op, input, &types.DeregisterTaskDefinitionOutput{})
 	return DeregisterTaskDefinitionRequest{Request: req, Input: input, Copy: c.DeregisterTaskDefinitionRequest}
 }
 
@@ -98,8 +57,8 @@ func (c *Client) DeregisterTaskDefinitionRequest(input *DeregisterTaskDefinition
 // DeregisterTaskDefinition API operation.
 type DeregisterTaskDefinitionRequest struct {
 	*aws.Request
-	Input *DeregisterTaskDefinitionInput
-	Copy  func(*DeregisterTaskDefinitionInput) DeregisterTaskDefinitionRequest
+	Input *types.DeregisterTaskDefinitionInput
+	Copy  func(*types.DeregisterTaskDefinitionInput) DeregisterTaskDefinitionRequest
 }
 
 // Send marshals and sends the DeregisterTaskDefinition API request.
@@ -111,7 +70,7 @@ func (r DeregisterTaskDefinitionRequest) Send(ctx context.Context) (*DeregisterT
 	}
 
 	resp := &DeregisterTaskDefinitionResponse{
-		DeregisterTaskDefinitionOutput: r.Request.Data.(*DeregisterTaskDefinitionOutput),
+		DeregisterTaskDefinitionOutput: r.Request.Data.(*types.DeregisterTaskDefinitionOutput),
 		response:                       &aws.Response{Request: r.Request},
 	}
 
@@ -121,7 +80,7 @@ func (r DeregisterTaskDefinitionRequest) Send(ctx context.Context) (*DeregisterT
 // DeregisterTaskDefinitionResponse is the response type for the
 // DeregisterTaskDefinition API operation.
 type DeregisterTaskDefinitionResponse struct {
-	*DeregisterTaskDefinitionOutput
+	*types.DeregisterTaskDefinitionOutput
 
 	response *aws.Response
 }

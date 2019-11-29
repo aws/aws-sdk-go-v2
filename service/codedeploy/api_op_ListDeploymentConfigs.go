@@ -6,41 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/codedeploy/types"
 )
-
-// Represents the input of a ListDeploymentConfigs operation.
-type ListDeploymentConfigsInput struct {
-	_ struct{} `type:"structure"`
-
-	// An identifier returned from the previous ListDeploymentConfigs call. It can
-	// be used to return the next set of deployment configurations in the list.
-	NextToken *string `locationName:"nextToken" type:"string"`
-}
-
-// String returns the string representation
-func (s ListDeploymentConfigsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Represents the output of a ListDeploymentConfigs operation.
-type ListDeploymentConfigsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A list of deployment configurations, including built-in configurations such
-	// as CodeDeployDefault.OneAtATime.
-	DeploymentConfigsList []string `locationName:"deploymentConfigsList" type:"list"`
-
-	// If a large amount of information is returned, an identifier is also returned.
-	// It can be used in a subsequent list deployment configurations call to return
-	// the next set of deployment configurations in the list.
-	NextToken *string `locationName:"nextToken" type:"string"`
-}
-
-// String returns the string representation
-func (s ListDeploymentConfigsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListDeploymentConfigs = "ListDeploymentConfigs"
 
@@ -57,7 +24,7 @@ const opListDeploymentConfigs = "ListDeploymentConfigs"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/ListDeploymentConfigs
-func (c *Client) ListDeploymentConfigsRequest(input *ListDeploymentConfigsInput) ListDeploymentConfigsRequest {
+func (c *Client) ListDeploymentConfigsRequest(input *types.ListDeploymentConfigsInput) ListDeploymentConfigsRequest {
 	op := &aws.Operation{
 		Name:       opListDeploymentConfigs,
 		HTTPMethod: "POST",
@@ -71,10 +38,10 @@ func (c *Client) ListDeploymentConfigsRequest(input *ListDeploymentConfigsInput)
 	}
 
 	if input == nil {
-		input = &ListDeploymentConfigsInput{}
+		input = &types.ListDeploymentConfigsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListDeploymentConfigsOutput{})
+	req := c.newRequest(op, input, &types.ListDeploymentConfigsOutput{})
 	return ListDeploymentConfigsRequest{Request: req, Input: input, Copy: c.ListDeploymentConfigsRequest}
 }
 
@@ -82,8 +49,8 @@ func (c *Client) ListDeploymentConfigsRequest(input *ListDeploymentConfigsInput)
 // ListDeploymentConfigs API operation.
 type ListDeploymentConfigsRequest struct {
 	*aws.Request
-	Input *ListDeploymentConfigsInput
-	Copy  func(*ListDeploymentConfigsInput) ListDeploymentConfigsRequest
+	Input *types.ListDeploymentConfigsInput
+	Copy  func(*types.ListDeploymentConfigsInput) ListDeploymentConfigsRequest
 }
 
 // Send marshals and sends the ListDeploymentConfigs API request.
@@ -95,7 +62,7 @@ func (r ListDeploymentConfigsRequest) Send(ctx context.Context) (*ListDeployment
 	}
 
 	resp := &ListDeploymentConfigsResponse{
-		ListDeploymentConfigsOutput: r.Request.Data.(*ListDeploymentConfigsOutput),
+		ListDeploymentConfigsOutput: r.Request.Data.(*types.ListDeploymentConfigsOutput),
 		response:                    &aws.Response{Request: r.Request},
 	}
 
@@ -125,7 +92,7 @@ func NewListDeploymentConfigsPaginator(req ListDeploymentConfigsRequest) ListDep
 	return ListDeploymentConfigsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListDeploymentConfigsInput
+				var inCpy *types.ListDeploymentConfigsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -145,14 +112,14 @@ type ListDeploymentConfigsPaginator struct {
 	aws.Pager
 }
 
-func (p *ListDeploymentConfigsPaginator) CurrentPage() *ListDeploymentConfigsOutput {
-	return p.Pager.CurrentPage().(*ListDeploymentConfigsOutput)
+func (p *ListDeploymentConfigsPaginator) CurrentPage() *types.ListDeploymentConfigsOutput {
+	return p.Pager.CurrentPage().(*types.ListDeploymentConfigsOutput)
 }
 
 // ListDeploymentConfigsResponse is the response type for the
 // ListDeploymentConfigs API operation.
 type ListDeploymentConfigsResponse struct {
-	*ListDeploymentConfigsOutput
+	*types.ListDeploymentConfigsOutput
 
 	response *aws.Response
 }

@@ -4,57 +4,10 @@ package migrationhub
 
 import (
 	"context"
-	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/migrationhub/types"
 )
-
-type DescribeApplicationStateInput struct {
-	_ struct{} `type:"structure"`
-
-	// The configurationId in ADS that uniquely identifies the grouped application.
-	//
-	// ApplicationId is a required field
-	ApplicationId *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeApplicationStateInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeApplicationStateInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeApplicationStateInput"}
-
-	if s.ApplicationId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ApplicationId"))
-	}
-	if s.ApplicationId != nil && len(*s.ApplicationId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ApplicationId", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribeApplicationStateOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Status of the application - Not Started, In-Progress, Complete.
-	ApplicationStatus ApplicationStatus `type:"string" enum:"true"`
-
-	// The timestamp when the application status was last updated.
-	LastUpdatedTime *time.Time `type:"timestamp"`
-}
-
-// String returns the string representation
-func (s DescribeApplicationStateOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeApplicationState = "DescribeApplicationState"
 
@@ -71,7 +24,7 @@ const opDescribeApplicationState = "DescribeApplicationState"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/DescribeApplicationState
-func (c *Client) DescribeApplicationStateRequest(input *DescribeApplicationStateInput) DescribeApplicationStateRequest {
+func (c *Client) DescribeApplicationStateRequest(input *types.DescribeApplicationStateInput) DescribeApplicationStateRequest {
 	op := &aws.Operation{
 		Name:       opDescribeApplicationState,
 		HTTPMethod: "POST",
@@ -79,10 +32,10 @@ func (c *Client) DescribeApplicationStateRequest(input *DescribeApplicationState
 	}
 
 	if input == nil {
-		input = &DescribeApplicationStateInput{}
+		input = &types.DescribeApplicationStateInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeApplicationStateOutput{})
+	req := c.newRequest(op, input, &types.DescribeApplicationStateOutput{})
 	return DescribeApplicationStateRequest{Request: req, Input: input, Copy: c.DescribeApplicationStateRequest}
 }
 
@@ -90,8 +43,8 @@ func (c *Client) DescribeApplicationStateRequest(input *DescribeApplicationState
 // DescribeApplicationState API operation.
 type DescribeApplicationStateRequest struct {
 	*aws.Request
-	Input *DescribeApplicationStateInput
-	Copy  func(*DescribeApplicationStateInput) DescribeApplicationStateRequest
+	Input *types.DescribeApplicationStateInput
+	Copy  func(*types.DescribeApplicationStateInput) DescribeApplicationStateRequest
 }
 
 // Send marshals and sends the DescribeApplicationState API request.
@@ -103,7 +56,7 @@ func (r DescribeApplicationStateRequest) Send(ctx context.Context) (*DescribeApp
 	}
 
 	resp := &DescribeApplicationStateResponse{
-		DescribeApplicationStateOutput: r.Request.Data.(*DescribeApplicationStateOutput),
+		DescribeApplicationStateOutput: r.Request.Data.(*types.DescribeApplicationStateOutput),
 		response:                       &aws.Response{Request: r.Request},
 	}
 
@@ -113,7 +66,7 @@ func (r DescribeApplicationStateRequest) Send(ctx context.Context) (*DescribeApp
 // DescribeApplicationStateResponse is the response type for the
 // DescribeApplicationState API operation.
 type DescribeApplicationStateResponse struct {
-	*DescribeApplicationStateOutput
+	*types.DescribeApplicationStateOutput
 
 	response *aws.Response
 }

@@ -6,83 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/iam/types"
 )
-
-type UploadSSHPublicKeyInput struct {
-	_ struct{} `type:"structure"`
-
-	// The SSH public key. The public key must be encoded in ssh-rsa format or PEM
-	// format. The minimum bit-length of the public key is 2048 bits. For example,
-	// you can generate a 2048-bit key, and the resulting PEM file is 1679 bytes
-	// long.
-	//
-	// The regex pattern (http://wikipedia.org/wiki/regex) used to validate this
-	// parameter is a string of characters consisting of the following:
-	//
-	//    * Any printable ASCII character ranging from the space character (\u0020)
-	//    through the end of the ASCII character range
-	//
-	//    * The printable characters in the Basic Latin and Latin-1 Supplement character
-	//    set (through \u00FF)
-	//
-	//    * The special characters tab (\u0009), line feed (\u000A), and carriage
-	//    return (\u000D)
-	//
-	// SSHPublicKeyBody is a required field
-	SSHPublicKeyBody *string `min:"1" type:"string" required:"true"`
-
-	// The name of the IAM user to associate the SSH public key with.
-	//
-	// This parameter allows (through its regex pattern (http://wikipedia.org/wiki/regex))
-	// a string of characters consisting of upper and lowercase alphanumeric characters
-	// with no spaces. You can also include any of the following characters: _+=,.@-
-	//
-	// UserName is a required field
-	UserName *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s UploadSSHPublicKeyInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UploadSSHPublicKeyInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UploadSSHPublicKeyInput"}
-
-	if s.SSHPublicKeyBody == nil {
-		invalidParams.Add(aws.NewErrParamRequired("SSHPublicKeyBody"))
-	}
-	if s.SSHPublicKeyBody != nil && len(*s.SSHPublicKeyBody) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("SSHPublicKeyBody", 1))
-	}
-
-	if s.UserName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("UserName"))
-	}
-	if s.UserName != nil && len(*s.UserName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("UserName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Contains the response to a successful UploadSSHPublicKey request.
-type UploadSSHPublicKeyOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Contains information about the SSH public key.
-	SSHPublicKey *SSHPublicKey `type:"structure"`
-}
-
-// String returns the string representation
-func (s UploadSSHPublicKeyOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opUploadSSHPublicKey = "UploadSSHPublicKey"
 
@@ -105,7 +30,7 @@ const opUploadSSHPublicKey = "UploadSSHPublicKey"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/UploadSSHPublicKey
-func (c *Client) UploadSSHPublicKeyRequest(input *UploadSSHPublicKeyInput) UploadSSHPublicKeyRequest {
+func (c *Client) UploadSSHPublicKeyRequest(input *types.UploadSSHPublicKeyInput) UploadSSHPublicKeyRequest {
 	op := &aws.Operation{
 		Name:       opUploadSSHPublicKey,
 		HTTPMethod: "POST",
@@ -113,10 +38,10 @@ func (c *Client) UploadSSHPublicKeyRequest(input *UploadSSHPublicKeyInput) Uploa
 	}
 
 	if input == nil {
-		input = &UploadSSHPublicKeyInput{}
+		input = &types.UploadSSHPublicKeyInput{}
 	}
 
-	req := c.newRequest(op, input, &UploadSSHPublicKeyOutput{})
+	req := c.newRequest(op, input, &types.UploadSSHPublicKeyOutput{})
 	return UploadSSHPublicKeyRequest{Request: req, Input: input, Copy: c.UploadSSHPublicKeyRequest}
 }
 
@@ -124,8 +49,8 @@ func (c *Client) UploadSSHPublicKeyRequest(input *UploadSSHPublicKeyInput) Uploa
 // UploadSSHPublicKey API operation.
 type UploadSSHPublicKeyRequest struct {
 	*aws.Request
-	Input *UploadSSHPublicKeyInput
-	Copy  func(*UploadSSHPublicKeyInput) UploadSSHPublicKeyRequest
+	Input *types.UploadSSHPublicKeyInput
+	Copy  func(*types.UploadSSHPublicKeyInput) UploadSSHPublicKeyRequest
 }
 
 // Send marshals and sends the UploadSSHPublicKey API request.
@@ -137,7 +62,7 @@ func (r UploadSSHPublicKeyRequest) Send(ctx context.Context) (*UploadSSHPublicKe
 	}
 
 	resp := &UploadSSHPublicKeyResponse{
-		UploadSSHPublicKeyOutput: r.Request.Data.(*UploadSSHPublicKeyOutput),
+		UploadSSHPublicKeyOutput: r.Request.Data.(*types.UploadSSHPublicKeyOutput),
 		response:                 &aws.Response{Request: r.Request},
 	}
 
@@ -147,7 +72,7 @@ func (r UploadSSHPublicKeyRequest) Send(ctx context.Context) (*UploadSSHPublicKe
 // UploadSSHPublicKeyResponse is the response type for the
 // UploadSSHPublicKey API operation.
 type UploadSSHPublicKeyResponse struct {
-	*UploadSSHPublicKeyOutput
+	*types.UploadSSHPublicKeyOutput
 
 	response *aws.Response
 }

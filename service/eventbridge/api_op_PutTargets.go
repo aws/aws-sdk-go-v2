@@ -4,83 +4,10 @@ package eventbridge
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/eventbridge/types"
 )
-
-type PutTargetsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the event bus associated with the rule. If you omit this, the
-	// default event bus is used.
-	EventBusName *string `min:"1" type:"string"`
-
-	// The name of the rule.
-	//
-	// Rule is a required field
-	Rule *string `min:"1" type:"string" required:"true"`
-
-	// The targets to update or add to the rule.
-	//
-	// Targets is a required field
-	Targets []Target `min:"1" type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s PutTargetsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *PutTargetsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "PutTargetsInput"}
-	if s.EventBusName != nil && len(*s.EventBusName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("EventBusName", 1))
-	}
-
-	if s.Rule == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Rule"))
-	}
-	if s.Rule != nil && len(*s.Rule) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Rule", 1))
-	}
-
-	if s.Targets == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Targets"))
-	}
-	if s.Targets != nil && len(s.Targets) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Targets", 1))
-	}
-	if s.Targets != nil {
-		for i, v := range s.Targets {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Targets", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type PutTargetsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The failed target entries.
-	FailedEntries []PutTargetsResultEntry `type:"list"`
-
-	// The number of failed entries.
-	FailedEntryCount *int64 `type:"integer"`
-}
-
-// String returns the string representation
-func (s PutTargetsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opPutTargets = "PutTargets"
 
@@ -199,7 +126,7 @@ const opPutTargets = "PutTargets"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/PutTargets
-func (c *Client) PutTargetsRequest(input *PutTargetsInput) PutTargetsRequest {
+func (c *Client) PutTargetsRequest(input *types.PutTargetsInput) PutTargetsRequest {
 	op := &aws.Operation{
 		Name:       opPutTargets,
 		HTTPMethod: "POST",
@@ -207,10 +134,10 @@ func (c *Client) PutTargetsRequest(input *PutTargetsInput) PutTargetsRequest {
 	}
 
 	if input == nil {
-		input = &PutTargetsInput{}
+		input = &types.PutTargetsInput{}
 	}
 
-	req := c.newRequest(op, input, &PutTargetsOutput{})
+	req := c.newRequest(op, input, &types.PutTargetsOutput{})
 	return PutTargetsRequest{Request: req, Input: input, Copy: c.PutTargetsRequest}
 }
 
@@ -218,8 +145,8 @@ func (c *Client) PutTargetsRequest(input *PutTargetsInput) PutTargetsRequest {
 // PutTargets API operation.
 type PutTargetsRequest struct {
 	*aws.Request
-	Input *PutTargetsInput
-	Copy  func(*PutTargetsInput) PutTargetsRequest
+	Input *types.PutTargetsInput
+	Copy  func(*types.PutTargetsInput) PutTargetsRequest
 }
 
 // Send marshals and sends the PutTargets API request.
@@ -231,7 +158,7 @@ func (r PutTargetsRequest) Send(ctx context.Context) (*PutTargetsResponse, error
 	}
 
 	resp := &PutTargetsResponse{
-		PutTargetsOutput: r.Request.Data.(*PutTargetsOutput),
+		PutTargetsOutput: r.Request.Data.(*types.PutTargetsOutput),
 		response:         &aws.Response{Request: r.Request},
 	}
 
@@ -241,7 +168,7 @@ func (r PutTargetsRequest) Send(ctx context.Context) (*PutTargetsResponse, error
 // PutTargetsResponse is the response type for the
 // PutTargets API operation.
 type PutTargetsResponse struct {
-	*PutTargetsOutput
+	*types.PutTargetsOutput
 
 	response *aws.Response
 }

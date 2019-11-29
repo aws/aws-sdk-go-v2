@@ -6,55 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/iotthingsgraph/types"
 )
-
-type GetFlowTemplateInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the workflow.
-	//
-	// The ID should be in the following format.
-	//
-	// urn:tdm:REGION/ACCOUNT ID/default:workflow:WORKFLOWNAME
-	//
-	// Id is a required field
-	Id *string `locationName:"id" type:"string" required:"true"`
-
-	// The number of the workflow revision to retrieve.
-	RevisionNumber *int64 `locationName:"revisionNumber" type:"long"`
-}
-
-// String returns the string representation
-func (s GetFlowTemplateInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetFlowTemplateInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetFlowTemplateInput"}
-
-	if s.Id == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Id"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type GetFlowTemplateOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The object that describes the specified workflow.
-	Description *FlowTemplateDescription `locationName:"description" type:"structure"`
-}
-
-// String returns the string representation
-func (s GetFlowTemplateOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetFlowTemplate = "GetFlowTemplate"
 
@@ -72,7 +25,7 @@ const opGetFlowTemplate = "GetFlowTemplate"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iotthingsgraph-2018-09-06/GetFlowTemplate
-func (c *Client) GetFlowTemplateRequest(input *GetFlowTemplateInput) GetFlowTemplateRequest {
+func (c *Client) GetFlowTemplateRequest(input *types.GetFlowTemplateInput) GetFlowTemplateRequest {
 	op := &aws.Operation{
 		Name:       opGetFlowTemplate,
 		HTTPMethod: "POST",
@@ -80,10 +33,10 @@ func (c *Client) GetFlowTemplateRequest(input *GetFlowTemplateInput) GetFlowTemp
 	}
 
 	if input == nil {
-		input = &GetFlowTemplateInput{}
+		input = &types.GetFlowTemplateInput{}
 	}
 
-	req := c.newRequest(op, input, &GetFlowTemplateOutput{})
+	req := c.newRequest(op, input, &types.GetFlowTemplateOutput{})
 	return GetFlowTemplateRequest{Request: req, Input: input, Copy: c.GetFlowTemplateRequest}
 }
 
@@ -91,8 +44,8 @@ func (c *Client) GetFlowTemplateRequest(input *GetFlowTemplateInput) GetFlowTemp
 // GetFlowTemplate API operation.
 type GetFlowTemplateRequest struct {
 	*aws.Request
-	Input *GetFlowTemplateInput
-	Copy  func(*GetFlowTemplateInput) GetFlowTemplateRequest
+	Input *types.GetFlowTemplateInput
+	Copy  func(*types.GetFlowTemplateInput) GetFlowTemplateRequest
 }
 
 // Send marshals and sends the GetFlowTemplate API request.
@@ -104,7 +57,7 @@ func (r GetFlowTemplateRequest) Send(ctx context.Context) (*GetFlowTemplateRespo
 	}
 
 	resp := &GetFlowTemplateResponse{
-		GetFlowTemplateOutput: r.Request.Data.(*GetFlowTemplateOutput),
+		GetFlowTemplateOutput: r.Request.Data.(*types.GetFlowTemplateOutput),
 		response:              &aws.Response{Request: r.Request},
 	}
 
@@ -114,7 +67,7 @@ func (r GetFlowTemplateRequest) Send(ctx context.Context) (*GetFlowTemplateRespo
 // GetFlowTemplateResponse is the response type for the
 // GetFlowTemplate API operation.
 type GetFlowTemplateResponse struct {
-	*GetFlowTemplateOutput
+	*types.GetFlowTemplateOutput
 
 	response *aws.Response
 }

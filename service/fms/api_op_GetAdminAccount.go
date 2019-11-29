@@ -6,32 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/fms/types"
 )
-
-type GetAdminAccountInput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s GetAdminAccountInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type GetAdminAccountOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The AWS account that is set as the AWS Firewall Manager administrator.
-	AdminAccount *string `min:"1" type:"string"`
-
-	// The status of the AWS account that you set as the AWS Firewall Manager administrator.
-	RoleStatus AccountRoleStatus `type:"string" enum:"true"`
-}
-
-// String returns the string representation
-func (s GetAdminAccountOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetAdminAccount = "GetAdminAccount"
 
@@ -49,7 +25,7 @@ const opGetAdminAccount = "GetAdminAccount"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/GetAdminAccount
-func (c *Client) GetAdminAccountRequest(input *GetAdminAccountInput) GetAdminAccountRequest {
+func (c *Client) GetAdminAccountRequest(input *types.GetAdminAccountInput) GetAdminAccountRequest {
 	op := &aws.Operation{
 		Name:       opGetAdminAccount,
 		HTTPMethod: "POST",
@@ -57,10 +33,10 @@ func (c *Client) GetAdminAccountRequest(input *GetAdminAccountInput) GetAdminAcc
 	}
 
 	if input == nil {
-		input = &GetAdminAccountInput{}
+		input = &types.GetAdminAccountInput{}
 	}
 
-	req := c.newRequest(op, input, &GetAdminAccountOutput{})
+	req := c.newRequest(op, input, &types.GetAdminAccountOutput{})
 	return GetAdminAccountRequest{Request: req, Input: input, Copy: c.GetAdminAccountRequest}
 }
 
@@ -68,8 +44,8 @@ func (c *Client) GetAdminAccountRequest(input *GetAdminAccountInput) GetAdminAcc
 // GetAdminAccount API operation.
 type GetAdminAccountRequest struct {
 	*aws.Request
-	Input *GetAdminAccountInput
-	Copy  func(*GetAdminAccountInput) GetAdminAccountRequest
+	Input *types.GetAdminAccountInput
+	Copy  func(*types.GetAdminAccountInput) GetAdminAccountRequest
 }
 
 // Send marshals and sends the GetAdminAccount API request.
@@ -81,7 +57,7 @@ func (r GetAdminAccountRequest) Send(ctx context.Context) (*GetAdminAccountRespo
 	}
 
 	resp := &GetAdminAccountResponse{
-		GetAdminAccountOutput: r.Request.Data.(*GetAdminAccountOutput),
+		GetAdminAccountOutput: r.Request.Data.(*types.GetAdminAccountOutput),
 		response:              &aws.Response{Request: r.Request},
 	}
 
@@ -91,7 +67,7 @@ func (r GetAdminAccountRequest) Send(ctx context.Context) (*GetAdminAccountRespo
 // GetAdminAccountResponse is the response type for the
 // GetAdminAccount API operation.
 type GetAdminAccountResponse struct {
-	*GetAdminAccountOutput
+	*types.GetAdminAccountOutput
 
 	response *aws.Response
 }

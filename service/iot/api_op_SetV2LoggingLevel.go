@@ -6,84 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/restjson"
+	"github.com/aws/aws-sdk-go-v2/service/iot/types"
 )
-
-type SetV2LoggingLevelInput struct {
-	_ struct{} `type:"structure"`
-
-	// The log level.
-	//
-	// LogLevel is a required field
-	LogLevel LogLevel `locationName:"logLevel" type:"string" required:"true" enum:"true"`
-
-	// The log target.
-	//
-	// LogTarget is a required field
-	LogTarget *LogTarget `locationName:"logTarget" type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s SetV2LoggingLevelInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *SetV2LoggingLevelInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "SetV2LoggingLevelInput"}
-	if len(s.LogLevel) == 0 {
-		invalidParams.Add(aws.NewErrParamRequired("LogLevel"))
-	}
-
-	if s.LogTarget == nil {
-		invalidParams.Add(aws.NewErrParamRequired("LogTarget"))
-	}
-	if s.LogTarget != nil {
-		if err := s.LogTarget.Validate(); err != nil {
-			invalidParams.AddNested("LogTarget", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s SetV2LoggingLevelInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if len(s.LogLevel) > 0 {
-		v := s.LogLevel
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "logLevel", protocol.QuotedValue{ValueMarshaler: v}, metadata)
-	}
-	if s.LogTarget != nil {
-		v := s.LogTarget
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "logTarget", v, metadata)
-	}
-	return nil
-}
-
-type SetV2LoggingLevelOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s SetV2LoggingLevelOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s SetV2LoggingLevelOutput) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
 
 const opSetV2LoggingLevel = "SetV2LoggingLevel"
 
@@ -98,7 +24,7 @@ const opSetV2LoggingLevel = "SetV2LoggingLevel"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) SetV2LoggingLevelRequest(input *SetV2LoggingLevelInput) SetV2LoggingLevelRequest {
+func (c *Client) SetV2LoggingLevelRequest(input *types.SetV2LoggingLevelInput) SetV2LoggingLevelRequest {
 	op := &aws.Operation{
 		Name:       opSetV2LoggingLevel,
 		HTTPMethod: "POST",
@@ -106,10 +32,10 @@ func (c *Client) SetV2LoggingLevelRequest(input *SetV2LoggingLevelInput) SetV2Lo
 	}
 
 	if input == nil {
-		input = &SetV2LoggingLevelInput{}
+		input = &types.SetV2LoggingLevelInput{}
 	}
 
-	req := c.newRequest(op, input, &SetV2LoggingLevelOutput{})
+	req := c.newRequest(op, input, &types.SetV2LoggingLevelOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return SetV2LoggingLevelRequest{Request: req, Input: input, Copy: c.SetV2LoggingLevelRequest}
@@ -119,8 +45,8 @@ func (c *Client) SetV2LoggingLevelRequest(input *SetV2LoggingLevelInput) SetV2Lo
 // SetV2LoggingLevel API operation.
 type SetV2LoggingLevelRequest struct {
 	*aws.Request
-	Input *SetV2LoggingLevelInput
-	Copy  func(*SetV2LoggingLevelInput) SetV2LoggingLevelRequest
+	Input *types.SetV2LoggingLevelInput
+	Copy  func(*types.SetV2LoggingLevelInput) SetV2LoggingLevelRequest
 }
 
 // Send marshals and sends the SetV2LoggingLevel API request.
@@ -132,7 +58,7 @@ func (r SetV2LoggingLevelRequest) Send(ctx context.Context) (*SetV2LoggingLevelR
 	}
 
 	resp := &SetV2LoggingLevelResponse{
-		SetV2LoggingLevelOutput: r.Request.Data.(*SetV2LoggingLevelOutput),
+		SetV2LoggingLevelOutput: r.Request.Data.(*types.SetV2LoggingLevelOutput),
 		response:                &aws.Response{Request: r.Request},
 	}
 
@@ -142,7 +68,7 @@ func (r SetV2LoggingLevelRequest) Send(ctx context.Context) (*SetV2LoggingLevelR
 // SetV2LoggingLevelResponse is the response type for the
 // SetV2LoggingLevel API operation.
 type SetV2LoggingLevelResponse struct {
-	*SetV2LoggingLevelOutput
+	*types.SetV2LoggingLevelOutput
 
 	response *aws.Response
 }

@@ -6,73 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ses/types"
 )
-
-// Represents a request to set whether Amazon SES includes the original email
-// headers in the Amazon SNS notifications of a specified type. For information
-// about notifications, see the Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/notifications-via-sns.html).
-type SetIdentityHeadersInNotificationsEnabledInput struct {
-	_ struct{} `type:"structure"`
-
-	// Sets whether Amazon SES includes the original email headers in Amazon SNS
-	// notifications of the specified notification type. A value of true specifies
-	// that Amazon SES will include headers in notifications, and a value of false
-	// specifies that Amazon SES will not include headers in notifications.
-	//
-	// This value can only be set when NotificationType is already set to use a
-	// particular Amazon SNS topic.
-	//
-	// Enabled is a required field
-	Enabled *bool `type:"boolean" required:"true"`
-
-	// The identity for which to enable or disable headers in notifications. Examples:
-	// user@example.com, example.com.
-	//
-	// Identity is a required field
-	Identity *string `type:"string" required:"true"`
-
-	// The notification type for which to enable or disable headers in notifications.
-	//
-	// NotificationType is a required field
-	NotificationType NotificationType `type:"string" required:"true" enum:"true"`
-}
-
-// String returns the string representation
-func (s SetIdentityHeadersInNotificationsEnabledInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *SetIdentityHeadersInNotificationsEnabledInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "SetIdentityHeadersInNotificationsEnabledInput"}
-
-	if s.Enabled == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Enabled"))
-	}
-
-	if s.Identity == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Identity"))
-	}
-	if len(s.NotificationType) == 0 {
-		invalidParams.Add(aws.NewErrParamRequired("NotificationType"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// An empty element returned on a successful request.
-type SetIdentityHeadersInNotificationsEnabledOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s SetIdentityHeadersInNotificationsEnabledOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opSetIdentityHeadersInNotificationsEnabled = "SetIdentityHeadersInNotificationsEnabled"
 
@@ -96,7 +31,7 @@ const opSetIdentityHeadersInNotificationsEnabled = "SetIdentityHeadersInNotifica
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/SetIdentityHeadersInNotificationsEnabled
-func (c *Client) SetIdentityHeadersInNotificationsEnabledRequest(input *SetIdentityHeadersInNotificationsEnabledInput) SetIdentityHeadersInNotificationsEnabledRequest {
+func (c *Client) SetIdentityHeadersInNotificationsEnabledRequest(input *types.SetIdentityHeadersInNotificationsEnabledInput) SetIdentityHeadersInNotificationsEnabledRequest {
 	op := &aws.Operation{
 		Name:       opSetIdentityHeadersInNotificationsEnabled,
 		HTTPMethod: "POST",
@@ -104,10 +39,10 @@ func (c *Client) SetIdentityHeadersInNotificationsEnabledRequest(input *SetIdent
 	}
 
 	if input == nil {
-		input = &SetIdentityHeadersInNotificationsEnabledInput{}
+		input = &types.SetIdentityHeadersInNotificationsEnabledInput{}
 	}
 
-	req := c.newRequest(op, input, &SetIdentityHeadersInNotificationsEnabledOutput{})
+	req := c.newRequest(op, input, &types.SetIdentityHeadersInNotificationsEnabledOutput{})
 	return SetIdentityHeadersInNotificationsEnabledRequest{Request: req, Input: input, Copy: c.SetIdentityHeadersInNotificationsEnabledRequest}
 }
 
@@ -115,8 +50,8 @@ func (c *Client) SetIdentityHeadersInNotificationsEnabledRequest(input *SetIdent
 // SetIdentityHeadersInNotificationsEnabled API operation.
 type SetIdentityHeadersInNotificationsEnabledRequest struct {
 	*aws.Request
-	Input *SetIdentityHeadersInNotificationsEnabledInput
-	Copy  func(*SetIdentityHeadersInNotificationsEnabledInput) SetIdentityHeadersInNotificationsEnabledRequest
+	Input *types.SetIdentityHeadersInNotificationsEnabledInput
+	Copy  func(*types.SetIdentityHeadersInNotificationsEnabledInput) SetIdentityHeadersInNotificationsEnabledRequest
 }
 
 // Send marshals and sends the SetIdentityHeadersInNotificationsEnabled API request.
@@ -128,7 +63,7 @@ func (r SetIdentityHeadersInNotificationsEnabledRequest) Send(ctx context.Contex
 	}
 
 	resp := &SetIdentityHeadersInNotificationsEnabledResponse{
-		SetIdentityHeadersInNotificationsEnabledOutput: r.Request.Data.(*SetIdentityHeadersInNotificationsEnabledOutput),
+		SetIdentityHeadersInNotificationsEnabledOutput: r.Request.Data.(*types.SetIdentityHeadersInNotificationsEnabledOutput),
 		response: &aws.Response{Request: r.Request},
 	}
 
@@ -138,7 +73,7 @@ func (r SetIdentityHeadersInNotificationsEnabledRequest) Send(ctx context.Contex
 // SetIdentityHeadersInNotificationsEnabledResponse is the response type for the
 // SetIdentityHeadersInNotificationsEnabled API operation.
 type SetIdentityHeadersInNotificationsEnabledResponse struct {
-	*SetIdentityHeadersInNotificationsEnabledOutput
+	*types.SetIdentityHeadersInNotificationsEnabledOutput
 
 	response *aws.Response
 }

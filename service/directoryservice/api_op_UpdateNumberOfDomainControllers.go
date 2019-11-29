@@ -6,58 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/directoryservice/types"
 )
-
-type UpdateNumberOfDomainControllersInput struct {
-	_ struct{} `type:"structure"`
-
-	// The number of domain controllers desired in the directory.
-	//
-	// DesiredNumber is a required field
-	DesiredNumber *int64 `min:"2" type:"integer" required:"true"`
-
-	// Identifier of the directory to which the domain controllers will be added
-	// or removed.
-	//
-	// DirectoryId is a required field
-	DirectoryId *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s UpdateNumberOfDomainControllersInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateNumberOfDomainControllersInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateNumberOfDomainControllersInput"}
-
-	if s.DesiredNumber == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DesiredNumber"))
-	}
-	if s.DesiredNumber != nil && *s.DesiredNumber < 2 {
-		invalidParams.Add(aws.NewErrParamMinValue("DesiredNumber", 2))
-	}
-
-	if s.DirectoryId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DirectoryId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type UpdateNumberOfDomainControllersOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s UpdateNumberOfDomainControllersOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opUpdateNumberOfDomainControllers = "UpdateNumberOfDomainControllers"
 
@@ -79,7 +29,7 @@ const opUpdateNumberOfDomainControllers = "UpdateNumberOfDomainControllers"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/UpdateNumberOfDomainControllers
-func (c *Client) UpdateNumberOfDomainControllersRequest(input *UpdateNumberOfDomainControllersInput) UpdateNumberOfDomainControllersRequest {
+func (c *Client) UpdateNumberOfDomainControllersRequest(input *types.UpdateNumberOfDomainControllersInput) UpdateNumberOfDomainControllersRequest {
 	op := &aws.Operation{
 		Name:       opUpdateNumberOfDomainControllers,
 		HTTPMethod: "POST",
@@ -87,10 +37,10 @@ func (c *Client) UpdateNumberOfDomainControllersRequest(input *UpdateNumberOfDom
 	}
 
 	if input == nil {
-		input = &UpdateNumberOfDomainControllersInput{}
+		input = &types.UpdateNumberOfDomainControllersInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateNumberOfDomainControllersOutput{})
+	req := c.newRequest(op, input, &types.UpdateNumberOfDomainControllersOutput{})
 	return UpdateNumberOfDomainControllersRequest{Request: req, Input: input, Copy: c.UpdateNumberOfDomainControllersRequest}
 }
 
@@ -98,8 +48,8 @@ func (c *Client) UpdateNumberOfDomainControllersRequest(input *UpdateNumberOfDom
 // UpdateNumberOfDomainControllers API operation.
 type UpdateNumberOfDomainControllersRequest struct {
 	*aws.Request
-	Input *UpdateNumberOfDomainControllersInput
-	Copy  func(*UpdateNumberOfDomainControllersInput) UpdateNumberOfDomainControllersRequest
+	Input *types.UpdateNumberOfDomainControllersInput
+	Copy  func(*types.UpdateNumberOfDomainControllersInput) UpdateNumberOfDomainControllersRequest
 }
 
 // Send marshals and sends the UpdateNumberOfDomainControllers API request.
@@ -111,7 +61,7 @@ func (r UpdateNumberOfDomainControllersRequest) Send(ctx context.Context) (*Upda
 	}
 
 	resp := &UpdateNumberOfDomainControllersResponse{
-		UpdateNumberOfDomainControllersOutput: r.Request.Data.(*UpdateNumberOfDomainControllersOutput),
+		UpdateNumberOfDomainControllersOutput: r.Request.Data.(*types.UpdateNumberOfDomainControllersOutput),
 		response:                              &aws.Response{Request: r.Request},
 	}
 
@@ -121,7 +71,7 @@ func (r UpdateNumberOfDomainControllersRequest) Send(ctx context.Context) (*Upda
 // UpdateNumberOfDomainControllersResponse is the response type for the
 // UpdateNumberOfDomainControllers API operation.
 type UpdateNumberOfDomainControllersResponse struct {
-	*UpdateNumberOfDomainControllersOutput
+	*types.UpdateNumberOfDomainControllersOutput
 
 	response *aws.Response
 }

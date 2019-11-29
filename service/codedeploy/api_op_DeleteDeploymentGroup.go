@@ -6,71 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/codedeploy/types"
 )
-
-// Represents the input of a DeleteDeploymentGroup operation.
-type DeleteDeploymentGroupInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of an AWS CodeDeploy application associated with the IAM user or
-	// AWS account.
-	//
-	// ApplicationName is a required field
-	ApplicationName *string `locationName:"applicationName" min:"1" type:"string" required:"true"`
-
-	// The name of a deployment group for the specified application.
-	//
-	// DeploymentGroupName is a required field
-	DeploymentGroupName *string `locationName:"deploymentGroupName" min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteDeploymentGroupInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteDeploymentGroupInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteDeploymentGroupInput"}
-
-	if s.ApplicationName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ApplicationName"))
-	}
-	if s.ApplicationName != nil && len(*s.ApplicationName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ApplicationName", 1))
-	}
-
-	if s.DeploymentGroupName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DeploymentGroupName"))
-	}
-	if s.DeploymentGroupName != nil && len(*s.DeploymentGroupName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("DeploymentGroupName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Represents the output of a DeleteDeploymentGroup operation.
-type DeleteDeploymentGroupOutput struct {
-	_ struct{} `type:"structure"`
-
-	// If the output contains no data, and the corresponding deployment group contained
-	// at least one Auto Scaling group, AWS CodeDeploy successfully removed all
-	// corresponding Auto Scaling lifecycle event hooks from the Amazon EC2 instances
-	// in the Auto Scaling group. If the output contains data, AWS CodeDeploy could
-	// not remove some Auto Scaling lifecycle event hooks from the Amazon EC2 instances
-	// in the Auto Scaling group.
-	HooksNotCleanedUp []AutoScalingGroup `locationName:"hooksNotCleanedUp" type:"list"`
-}
-
-// String returns the string representation
-func (s DeleteDeploymentGroupOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteDeploymentGroup = "DeleteDeploymentGroup"
 
@@ -87,7 +24,7 @@ const opDeleteDeploymentGroup = "DeleteDeploymentGroup"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/DeleteDeploymentGroup
-func (c *Client) DeleteDeploymentGroupRequest(input *DeleteDeploymentGroupInput) DeleteDeploymentGroupRequest {
+func (c *Client) DeleteDeploymentGroupRequest(input *types.DeleteDeploymentGroupInput) DeleteDeploymentGroupRequest {
 	op := &aws.Operation{
 		Name:       opDeleteDeploymentGroup,
 		HTTPMethod: "POST",
@@ -95,10 +32,10 @@ func (c *Client) DeleteDeploymentGroupRequest(input *DeleteDeploymentGroupInput)
 	}
 
 	if input == nil {
-		input = &DeleteDeploymentGroupInput{}
+		input = &types.DeleteDeploymentGroupInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteDeploymentGroupOutput{})
+	req := c.newRequest(op, input, &types.DeleteDeploymentGroupOutput{})
 	return DeleteDeploymentGroupRequest{Request: req, Input: input, Copy: c.DeleteDeploymentGroupRequest}
 }
 
@@ -106,8 +43,8 @@ func (c *Client) DeleteDeploymentGroupRequest(input *DeleteDeploymentGroupInput)
 // DeleteDeploymentGroup API operation.
 type DeleteDeploymentGroupRequest struct {
 	*aws.Request
-	Input *DeleteDeploymentGroupInput
-	Copy  func(*DeleteDeploymentGroupInput) DeleteDeploymentGroupRequest
+	Input *types.DeleteDeploymentGroupInput
+	Copy  func(*types.DeleteDeploymentGroupInput) DeleteDeploymentGroupRequest
 }
 
 // Send marshals and sends the DeleteDeploymentGroup API request.
@@ -119,7 +56,7 @@ func (r DeleteDeploymentGroupRequest) Send(ctx context.Context) (*DeleteDeployme
 	}
 
 	resp := &DeleteDeploymentGroupResponse{
-		DeleteDeploymentGroupOutput: r.Request.Data.(*DeleteDeploymentGroupOutput),
+		DeleteDeploymentGroupOutput: r.Request.Data.(*types.DeleteDeploymentGroupOutput),
 		response:                    &aws.Response{Request: r.Request},
 	}
 
@@ -129,7 +66,7 @@ func (r DeleteDeploymentGroupRequest) Send(ctx context.Context) (*DeleteDeployme
 // DeleteDeploymentGroupResponse is the response type for the
 // DeleteDeploymentGroup API operation.
 type DeleteDeploymentGroupResponse struct {
-	*DeleteDeploymentGroupOutput
+	*types.DeleteDeploymentGroupOutput
 
 	response *aws.Response
 }

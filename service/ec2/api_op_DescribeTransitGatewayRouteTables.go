@@ -6,80 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-type DescribeTransitGatewayRouteTablesInput struct {
-	_ struct{} `type:"structure"`
-
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have
-	// the required permissions, the error response is DryRunOperation. Otherwise,
-	// it is UnauthorizedOperation.
-	DryRun *bool `type:"boolean"`
-
-	// One or more filters. The possible values are:
-	//
-	//    * default-association-route-table - Indicates whether this is the default
-	//    association route table for the transit gateway (true | false).
-	//
-	//    * default-propagation-route-table - Indicates whether this is the default
-	//    propagation route table for the transit gateway (true | false).
-	//
-	//    * state - The state of the attachment (available | deleted | deleting
-	//    | failed | modifying | pendingAcceptance | pending | rollingBack | rejected
-	//    | rejecting).
-	//
-	//    * transit-gateway-id - The ID of the transit gateway.
-	//
-	//    * transit-gateway-route-table-id - The ID of the transit gateway route
-	//    table.
-	Filters []Filter `locationName:"Filter" locationNameList:"Filter" type:"list"`
-
-	// The maximum number of results to return with a single call. To retrieve the
-	// remaining results, make another call with the returned nextToken value.
-	MaxResults *int64 `min:"5" type:"integer"`
-
-	// The token for the next page of results.
-	NextToken *string `type:"string"`
-
-	// The IDs of the transit gateway route tables.
-	TransitGatewayRouteTableIds []string `locationNameList:"item" type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeTransitGatewayRouteTablesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeTransitGatewayRouteTablesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeTransitGatewayRouteTablesInput"}
-	if s.MaxResults != nil && *s.MaxResults < 5 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 5))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribeTransitGatewayRouteTablesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The token to use to retrieve the next page of results. This value is null
-	// when there are no more results to return.
-	NextToken *string `locationName:"nextToken" type:"string"`
-
-	// Information about the transit gateway route tables.
-	TransitGatewayRouteTables []TransitGatewayRouteTable `locationName:"transitGatewayRouteTables" locationNameList:"item" type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeTransitGatewayRouteTablesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeTransitGatewayRouteTables = "DescribeTransitGatewayRouteTables"
 
@@ -97,7 +25,7 @@ const opDescribeTransitGatewayRouteTables = "DescribeTransitGatewayRouteTables"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeTransitGatewayRouteTables
-func (c *Client) DescribeTransitGatewayRouteTablesRequest(input *DescribeTransitGatewayRouteTablesInput) DescribeTransitGatewayRouteTablesRequest {
+func (c *Client) DescribeTransitGatewayRouteTablesRequest(input *types.DescribeTransitGatewayRouteTablesInput) DescribeTransitGatewayRouteTablesRequest {
 	op := &aws.Operation{
 		Name:       opDescribeTransitGatewayRouteTables,
 		HTTPMethod: "POST",
@@ -111,10 +39,10 @@ func (c *Client) DescribeTransitGatewayRouteTablesRequest(input *DescribeTransit
 	}
 
 	if input == nil {
-		input = &DescribeTransitGatewayRouteTablesInput{}
+		input = &types.DescribeTransitGatewayRouteTablesInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeTransitGatewayRouteTablesOutput{})
+	req := c.newRequest(op, input, &types.DescribeTransitGatewayRouteTablesOutput{})
 	return DescribeTransitGatewayRouteTablesRequest{Request: req, Input: input, Copy: c.DescribeTransitGatewayRouteTablesRequest}
 }
 
@@ -122,8 +50,8 @@ func (c *Client) DescribeTransitGatewayRouteTablesRequest(input *DescribeTransit
 // DescribeTransitGatewayRouteTables API operation.
 type DescribeTransitGatewayRouteTablesRequest struct {
 	*aws.Request
-	Input *DescribeTransitGatewayRouteTablesInput
-	Copy  func(*DescribeTransitGatewayRouteTablesInput) DescribeTransitGatewayRouteTablesRequest
+	Input *types.DescribeTransitGatewayRouteTablesInput
+	Copy  func(*types.DescribeTransitGatewayRouteTablesInput) DescribeTransitGatewayRouteTablesRequest
 }
 
 // Send marshals and sends the DescribeTransitGatewayRouteTables API request.
@@ -135,7 +63,7 @@ func (r DescribeTransitGatewayRouteTablesRequest) Send(ctx context.Context) (*De
 	}
 
 	resp := &DescribeTransitGatewayRouteTablesResponse{
-		DescribeTransitGatewayRouteTablesOutput: r.Request.Data.(*DescribeTransitGatewayRouteTablesOutput),
+		DescribeTransitGatewayRouteTablesOutput: r.Request.Data.(*types.DescribeTransitGatewayRouteTablesOutput),
 		response:                                &aws.Response{Request: r.Request},
 	}
 
@@ -165,7 +93,7 @@ func NewDescribeTransitGatewayRouteTablesPaginator(req DescribeTransitGatewayRou
 	return DescribeTransitGatewayRouteTablesPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *DescribeTransitGatewayRouteTablesInput
+				var inCpy *types.DescribeTransitGatewayRouteTablesInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -185,14 +113,14 @@ type DescribeTransitGatewayRouteTablesPaginator struct {
 	aws.Pager
 }
 
-func (p *DescribeTransitGatewayRouteTablesPaginator) CurrentPage() *DescribeTransitGatewayRouteTablesOutput {
-	return p.Pager.CurrentPage().(*DescribeTransitGatewayRouteTablesOutput)
+func (p *DescribeTransitGatewayRouteTablesPaginator) CurrentPage() *types.DescribeTransitGatewayRouteTablesOutput {
+	return p.Pager.CurrentPage().(*types.DescribeTransitGatewayRouteTablesOutput)
 }
 
 // DescribeTransitGatewayRouteTablesResponse is the response type for the
 // DescribeTransitGatewayRouteTables API operation.
 type DescribeTransitGatewayRouteTablesResponse struct {
-	*DescribeTransitGatewayRouteTablesOutput
+	*types.DescribeTransitGatewayRouteTablesOutput
 
 	response *aws.Response
 }

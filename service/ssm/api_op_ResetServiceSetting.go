@@ -6,54 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ssm/types"
 )
-
-// The request body of the ResetServiceSetting API action.
-type ResetServiceSettingInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the service setting to reset.
-	//
-	// SettingId is a required field
-	SettingId *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s ResetServiceSettingInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ResetServiceSettingInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ResetServiceSettingInput"}
-
-	if s.SettingId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("SettingId"))
-	}
-	if s.SettingId != nil && len(*s.SettingId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("SettingId", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// The result body of the ResetServiceSetting API action.
-type ResetServiceSettingOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The current, effective service setting after calling the ResetServiceSetting
-	// API action.
-	ServiceSetting *ServiceSetting `type:"structure"`
-}
-
-// String returns the string representation
-func (s ResetServiceSettingOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opResetServiceSetting = "ResetServiceSetting"
 
@@ -85,7 +39,7 @@ const opResetServiceSetting = "ResetServiceSetting"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ResetServiceSetting
-func (c *Client) ResetServiceSettingRequest(input *ResetServiceSettingInput) ResetServiceSettingRequest {
+func (c *Client) ResetServiceSettingRequest(input *types.ResetServiceSettingInput) ResetServiceSettingRequest {
 	op := &aws.Operation{
 		Name:       opResetServiceSetting,
 		HTTPMethod: "POST",
@@ -93,10 +47,10 @@ func (c *Client) ResetServiceSettingRequest(input *ResetServiceSettingInput) Res
 	}
 
 	if input == nil {
-		input = &ResetServiceSettingInput{}
+		input = &types.ResetServiceSettingInput{}
 	}
 
-	req := c.newRequest(op, input, &ResetServiceSettingOutput{})
+	req := c.newRequest(op, input, &types.ResetServiceSettingOutput{})
 	return ResetServiceSettingRequest{Request: req, Input: input, Copy: c.ResetServiceSettingRequest}
 }
 
@@ -104,8 +58,8 @@ func (c *Client) ResetServiceSettingRequest(input *ResetServiceSettingInput) Res
 // ResetServiceSetting API operation.
 type ResetServiceSettingRequest struct {
 	*aws.Request
-	Input *ResetServiceSettingInput
-	Copy  func(*ResetServiceSettingInput) ResetServiceSettingRequest
+	Input *types.ResetServiceSettingInput
+	Copy  func(*types.ResetServiceSettingInput) ResetServiceSettingRequest
 }
 
 // Send marshals and sends the ResetServiceSetting API request.
@@ -117,7 +71,7 @@ func (r ResetServiceSettingRequest) Send(ctx context.Context) (*ResetServiceSett
 	}
 
 	resp := &ResetServiceSettingResponse{
-		ResetServiceSettingOutput: r.Request.Data.(*ResetServiceSettingOutput),
+		ResetServiceSettingOutput: r.Request.Data.(*types.ResetServiceSettingOutput),
 		response:                  &aws.Response{Request: r.Request},
 	}
 
@@ -127,7 +81,7 @@ func (r ResetServiceSettingRequest) Send(ctx context.Context) (*ResetServiceSett
 // ResetServiceSettingResponse is the response type for the
 // ResetServiceSetting API operation.
 type ResetServiceSettingResponse struct {
-	*ResetServiceSettingOutput
+	*types.ResetServiceSettingOutput
 
 	response *aws.Response
 }

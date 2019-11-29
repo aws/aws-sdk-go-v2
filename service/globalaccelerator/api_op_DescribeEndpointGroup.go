@@ -6,48 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/globalaccelerator/types"
 )
-
-type DescribeEndpointGroupInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the endpoint group to describe.
-	//
-	// EndpointGroupArn is a required field
-	EndpointGroupArn *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeEndpointGroupInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeEndpointGroupInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeEndpointGroupInput"}
-
-	if s.EndpointGroupArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("EndpointGroupArn"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribeEndpointGroupOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The description of an endpoint group.
-	EndpointGroup *EndpointGroup `type:"structure"`
-}
-
-// String returns the string representation
-func (s DescribeEndpointGroupOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeEndpointGroup = "DescribeEndpointGroup"
 
@@ -64,7 +24,7 @@ const opDescribeEndpointGroup = "DescribeEndpointGroup"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/DescribeEndpointGroup
-func (c *Client) DescribeEndpointGroupRequest(input *DescribeEndpointGroupInput) DescribeEndpointGroupRequest {
+func (c *Client) DescribeEndpointGroupRequest(input *types.DescribeEndpointGroupInput) DescribeEndpointGroupRequest {
 	op := &aws.Operation{
 		Name:       opDescribeEndpointGroup,
 		HTTPMethod: "POST",
@@ -72,10 +32,10 @@ func (c *Client) DescribeEndpointGroupRequest(input *DescribeEndpointGroupInput)
 	}
 
 	if input == nil {
-		input = &DescribeEndpointGroupInput{}
+		input = &types.DescribeEndpointGroupInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeEndpointGroupOutput{})
+	req := c.newRequest(op, input, &types.DescribeEndpointGroupOutput{})
 	return DescribeEndpointGroupRequest{Request: req, Input: input, Copy: c.DescribeEndpointGroupRequest}
 }
 
@@ -83,8 +43,8 @@ func (c *Client) DescribeEndpointGroupRequest(input *DescribeEndpointGroupInput)
 // DescribeEndpointGroup API operation.
 type DescribeEndpointGroupRequest struct {
 	*aws.Request
-	Input *DescribeEndpointGroupInput
-	Copy  func(*DescribeEndpointGroupInput) DescribeEndpointGroupRequest
+	Input *types.DescribeEndpointGroupInput
+	Copy  func(*types.DescribeEndpointGroupInput) DescribeEndpointGroupRequest
 }
 
 // Send marshals and sends the DescribeEndpointGroup API request.
@@ -96,7 +56,7 @@ func (r DescribeEndpointGroupRequest) Send(ctx context.Context) (*DescribeEndpoi
 	}
 
 	resp := &DescribeEndpointGroupResponse{
-		DescribeEndpointGroupOutput: r.Request.Data.(*DescribeEndpointGroupOutput),
+		DescribeEndpointGroupOutput: r.Request.Data.(*types.DescribeEndpointGroupOutput),
 		response:                    &aws.Response{Request: r.Request},
 	}
 
@@ -106,7 +66,7 @@ func (r DescribeEndpointGroupRequest) Send(ctx context.Context) (*DescribeEndpoi
 // DescribeEndpointGroupResponse is the response type for the
 // DescribeEndpointGroup API operation.
 type DescribeEndpointGroupResponse struct {
-	*DescribeEndpointGroupOutput
+	*types.DescribeEndpointGroupOutput
 
 	response *aws.Response
 }

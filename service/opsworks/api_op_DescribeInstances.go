@@ -6,43 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/opsworks/types"
 )
-
-type DescribeInstancesInput struct {
-	_ struct{} `type:"structure"`
-
-	// An array of instance IDs to be described. If you use this parameter, DescribeInstances
-	// returns a description of the specified instances. Otherwise, it returns a
-	// description of every instance.
-	InstanceIds []string `type:"list"`
-
-	// A layer ID. If you use this parameter, DescribeInstances returns descriptions
-	// of the instances associated with the specified layer.
-	LayerId *string `type:"string"`
-
-	// A stack ID. If you use this parameter, DescribeInstances returns descriptions
-	// of the instances associated with the specified stack.
-	StackId *string `type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeInstancesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Contains the response to a DescribeInstances request.
-type DescribeInstancesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// An array of Instance objects that describe the instances.
-	Instances []Instance `type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeInstancesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeInstances = "DescribeInstances"
 
@@ -66,7 +31,7 @@ const opDescribeInstances = "DescribeInstances"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DescribeInstances
-func (c *Client) DescribeInstancesRequest(input *DescribeInstancesInput) DescribeInstancesRequest {
+func (c *Client) DescribeInstancesRequest(input *types.DescribeInstancesInput) DescribeInstancesRequest {
 	op := &aws.Operation{
 		Name:       opDescribeInstances,
 		HTTPMethod: "POST",
@@ -74,10 +39,10 @@ func (c *Client) DescribeInstancesRequest(input *DescribeInstancesInput) Describ
 	}
 
 	if input == nil {
-		input = &DescribeInstancesInput{}
+		input = &types.DescribeInstancesInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeInstancesOutput{})
+	req := c.newRequest(op, input, &types.DescribeInstancesOutput{})
 	return DescribeInstancesRequest{Request: req, Input: input, Copy: c.DescribeInstancesRequest}
 }
 
@@ -85,8 +50,8 @@ func (c *Client) DescribeInstancesRequest(input *DescribeInstancesInput) Describ
 // DescribeInstances API operation.
 type DescribeInstancesRequest struct {
 	*aws.Request
-	Input *DescribeInstancesInput
-	Copy  func(*DescribeInstancesInput) DescribeInstancesRequest
+	Input *types.DescribeInstancesInput
+	Copy  func(*types.DescribeInstancesInput) DescribeInstancesRequest
 }
 
 // Send marshals and sends the DescribeInstances API request.
@@ -98,7 +63,7 @@ func (r DescribeInstancesRequest) Send(ctx context.Context) (*DescribeInstancesR
 	}
 
 	resp := &DescribeInstancesResponse{
-		DescribeInstancesOutput: r.Request.Data.(*DescribeInstancesOutput),
+		DescribeInstancesOutput: r.Request.Data.(*types.DescribeInstancesOutput),
 		response:                &aws.Response{Request: r.Request},
 	}
 
@@ -108,7 +73,7 @@ func (r DescribeInstancesRequest) Send(ctx context.Context) (*DescribeInstancesR
 // DescribeInstancesResponse is the response type for the
 // DescribeInstances API operation.
 type DescribeInstancesResponse struct {
-	*DescribeInstancesOutput
+	*types.DescribeInstancesOutput
 
 	response *aws.Response
 }

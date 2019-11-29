@@ -6,66 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/cloudhsmv2/types"
 )
-
-type ListTagsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The maximum number of tags to return in the response. When there are more
-	// tags than the number you specify, the response contains a NextToken value.
-	MaxResults *int64 `min:"1" type:"integer"`
-
-	// The NextToken value that you received in the previous response. Use this
-	// value to get more tags.
-	NextToken *string `type:"string"`
-
-	// The cluster identifier (ID) for the cluster whose tags you are getting. To
-	// find the cluster ID, use DescribeClusters.
-	//
-	// ResourceId is a required field
-	ResourceId *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s ListTagsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListTagsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListTagsInput"}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-
-	if s.ResourceId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ResourceId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ListTagsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// An opaque string that indicates that the response contains only a subset
-	// of tags. Use this value in a subsequent ListTags request to get more tags.
-	NextToken *string `type:"string"`
-
-	// A list of tags.
-	//
-	// TagList is a required field
-	TagList []Tag `min:"1" type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s ListTagsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListTags = "ListTags"
 
@@ -88,7 +30,7 @@ const opListTags = "ListTags"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudhsmv2-2017-04-28/ListTags
-func (c *Client) ListTagsRequest(input *ListTagsInput) ListTagsRequest {
+func (c *Client) ListTagsRequest(input *types.ListTagsInput) ListTagsRequest {
 	op := &aws.Operation{
 		Name:       opListTags,
 		HTTPMethod: "POST",
@@ -102,10 +44,10 @@ func (c *Client) ListTagsRequest(input *ListTagsInput) ListTagsRequest {
 	}
 
 	if input == nil {
-		input = &ListTagsInput{}
+		input = &types.ListTagsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListTagsOutput{})
+	req := c.newRequest(op, input, &types.ListTagsOutput{})
 	return ListTagsRequest{Request: req, Input: input, Copy: c.ListTagsRequest}
 }
 
@@ -113,8 +55,8 @@ func (c *Client) ListTagsRequest(input *ListTagsInput) ListTagsRequest {
 // ListTags API operation.
 type ListTagsRequest struct {
 	*aws.Request
-	Input *ListTagsInput
-	Copy  func(*ListTagsInput) ListTagsRequest
+	Input *types.ListTagsInput
+	Copy  func(*types.ListTagsInput) ListTagsRequest
 }
 
 // Send marshals and sends the ListTags API request.
@@ -126,7 +68,7 @@ func (r ListTagsRequest) Send(ctx context.Context) (*ListTagsResponse, error) {
 	}
 
 	resp := &ListTagsResponse{
-		ListTagsOutput: r.Request.Data.(*ListTagsOutput),
+		ListTagsOutput: r.Request.Data.(*types.ListTagsOutput),
 		response:       &aws.Response{Request: r.Request},
 	}
 
@@ -156,7 +98,7 @@ func NewListTagsPaginator(req ListTagsRequest) ListTagsPaginator {
 	return ListTagsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListTagsInput
+				var inCpy *types.ListTagsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -176,14 +118,14 @@ type ListTagsPaginator struct {
 	aws.Pager
 }
 
-func (p *ListTagsPaginator) CurrentPage() *ListTagsOutput {
-	return p.Pager.CurrentPage().(*ListTagsOutput)
+func (p *ListTagsPaginator) CurrentPage() *types.ListTagsOutput {
+	return p.Pager.CurrentPage().(*types.ListTagsOutput)
 }
 
 // ListTagsResponse is the response type for the
 // ListTags API operation.
 type ListTagsResponse struct {
-	*ListTagsOutput
+	*types.ListTagsOutput
 
 	response *aws.Response
 }

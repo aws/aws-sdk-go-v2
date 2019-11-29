@@ -6,48 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/servicediscovery/types"
 )
-
-type GetNamespaceInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the namespace that you want to get information about.
-	//
-	// Id is a required field
-	Id *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetNamespaceInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetNamespaceInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetNamespaceInput"}
-
-	if s.Id == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Id"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type GetNamespaceOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A complex type that contains information about the specified namespace.
-	Namespace *Namespace `type:"structure"`
-}
-
-// String returns the string representation
-func (s GetNamespaceOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetNamespace = "GetNamespace"
 
@@ -64,7 +24,7 @@ const opGetNamespace = "GetNamespace"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicediscovery-2017-03-14/GetNamespace
-func (c *Client) GetNamespaceRequest(input *GetNamespaceInput) GetNamespaceRequest {
+func (c *Client) GetNamespaceRequest(input *types.GetNamespaceInput) GetNamespaceRequest {
 	op := &aws.Operation{
 		Name:       opGetNamespace,
 		HTTPMethod: "POST",
@@ -72,10 +32,10 @@ func (c *Client) GetNamespaceRequest(input *GetNamespaceInput) GetNamespaceReque
 	}
 
 	if input == nil {
-		input = &GetNamespaceInput{}
+		input = &types.GetNamespaceInput{}
 	}
 
-	req := c.newRequest(op, input, &GetNamespaceOutput{})
+	req := c.newRequest(op, input, &types.GetNamespaceOutput{})
 	return GetNamespaceRequest{Request: req, Input: input, Copy: c.GetNamespaceRequest}
 }
 
@@ -83,8 +43,8 @@ func (c *Client) GetNamespaceRequest(input *GetNamespaceInput) GetNamespaceReque
 // GetNamespace API operation.
 type GetNamespaceRequest struct {
 	*aws.Request
-	Input *GetNamespaceInput
-	Copy  func(*GetNamespaceInput) GetNamespaceRequest
+	Input *types.GetNamespaceInput
+	Copy  func(*types.GetNamespaceInput) GetNamespaceRequest
 }
 
 // Send marshals and sends the GetNamespace API request.
@@ -96,7 +56,7 @@ func (r GetNamespaceRequest) Send(ctx context.Context) (*GetNamespaceResponse, e
 	}
 
 	resp := &GetNamespaceResponse{
-		GetNamespaceOutput: r.Request.Data.(*GetNamespaceOutput),
+		GetNamespaceOutput: r.Request.Data.(*types.GetNamespaceOutput),
 		response:           &aws.Response{Request: r.Request},
 	}
 
@@ -106,7 +66,7 @@ func (r GetNamespaceRequest) Send(ctx context.Context) (*GetNamespaceResponse, e
 // GetNamespaceResponse is the response type for the
 // GetNamespace API operation.
 type GetNamespaceResponse struct {
-	*GetNamespaceOutput
+	*types.GetNamespaceOutput
 
 	response *aws.Response
 }

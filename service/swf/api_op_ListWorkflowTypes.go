@@ -6,96 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/swf/types"
 )
-
-type ListWorkflowTypesInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the domain in which the workflow types have been registered.
-	//
-	// Domain is a required field
-	Domain *string `locationName:"domain" min:"1" type:"string" required:"true"`
-
-	// The maximum number of results that are returned per call. Use nextPageToken
-	// to obtain further pages of results.
-	MaximumPageSize *int64 `locationName:"maximumPageSize" type:"integer"`
-
-	// If specified, lists the workflow type with this name.
-	Name *string `locationName:"name" min:"1" type:"string"`
-
-	// If NextPageToken is returned there are more results available. The value
-	// of NextPageToken is a unique pagination token for each page. Make the call
-	// again using the returned token to retrieve the next page. Keep all other
-	// arguments unchanged. Each pagination token expires after 60 seconds. Using
-	// an expired pagination token will return a 400 error: "Specified token has
-	// exceeded its maximum lifetime".
-	//
-	// The configured maximumPageSize determines how many results can be returned
-	// in a single call.
-	NextPageToken *string `locationName:"nextPageToken" type:"string"`
-
-	// Specifies the registration status of the workflow types to list.
-	//
-	// RegistrationStatus is a required field
-	RegistrationStatus RegistrationStatus `locationName:"registrationStatus" type:"string" required:"true" enum:"true"`
-
-	// When set to true, returns the results in reverse order. By default the results
-	// are returned in ascending alphabetical order of the name of the workflow
-	// types.
-	ReverseOrder *bool `locationName:"reverseOrder" type:"boolean"`
-}
-
-// String returns the string representation
-func (s ListWorkflowTypesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListWorkflowTypesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListWorkflowTypesInput"}
-
-	if s.Domain == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Domain"))
-	}
-	if s.Domain != nil && len(*s.Domain) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Domain", 1))
-	}
-	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
-	}
-	if len(s.RegistrationStatus) == 0 {
-		invalidParams.Add(aws.NewErrParamRequired("RegistrationStatus"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Contains a paginated list of information structures about workflow types.
-type ListWorkflowTypesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// If a NextPageToken was returned by a previous call, there are more results
-	// available. To retrieve the next page of results, make the call again using
-	// the returned token in nextPageToken. Keep all other arguments unchanged.
-	//
-	// The configured maximumPageSize determines how many results can be returned
-	// in a single call.
-	NextPageToken *string `locationName:"nextPageToken" type:"string"`
-
-	// The list of workflow type information.
-	//
-	// TypeInfos is a required field
-	TypeInfos []WorkflowTypeInfo `locationName:"typeInfos" type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s ListWorkflowTypesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListWorkflowTypes = "ListWorkflowTypes"
 
@@ -131,7 +43,7 @@ const opListWorkflowTypes = "ListWorkflowTypes"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) ListWorkflowTypesRequest(input *ListWorkflowTypesInput) ListWorkflowTypesRequest {
+func (c *Client) ListWorkflowTypesRequest(input *types.ListWorkflowTypesInput) ListWorkflowTypesRequest {
 	op := &aws.Operation{
 		Name:       opListWorkflowTypes,
 		HTTPMethod: "POST",
@@ -145,10 +57,10 @@ func (c *Client) ListWorkflowTypesRequest(input *ListWorkflowTypesInput) ListWor
 	}
 
 	if input == nil {
-		input = &ListWorkflowTypesInput{}
+		input = &types.ListWorkflowTypesInput{}
 	}
 
-	req := c.newRequest(op, input, &ListWorkflowTypesOutput{})
+	req := c.newRequest(op, input, &types.ListWorkflowTypesOutput{})
 	return ListWorkflowTypesRequest{Request: req, Input: input, Copy: c.ListWorkflowTypesRequest}
 }
 
@@ -156,8 +68,8 @@ func (c *Client) ListWorkflowTypesRequest(input *ListWorkflowTypesInput) ListWor
 // ListWorkflowTypes API operation.
 type ListWorkflowTypesRequest struct {
 	*aws.Request
-	Input *ListWorkflowTypesInput
-	Copy  func(*ListWorkflowTypesInput) ListWorkflowTypesRequest
+	Input *types.ListWorkflowTypesInput
+	Copy  func(*types.ListWorkflowTypesInput) ListWorkflowTypesRequest
 }
 
 // Send marshals and sends the ListWorkflowTypes API request.
@@ -169,7 +81,7 @@ func (r ListWorkflowTypesRequest) Send(ctx context.Context) (*ListWorkflowTypesR
 	}
 
 	resp := &ListWorkflowTypesResponse{
-		ListWorkflowTypesOutput: r.Request.Data.(*ListWorkflowTypesOutput),
+		ListWorkflowTypesOutput: r.Request.Data.(*types.ListWorkflowTypesOutput),
 		response:                &aws.Response{Request: r.Request},
 	}
 
@@ -199,7 +111,7 @@ func NewListWorkflowTypesPaginator(req ListWorkflowTypesRequest) ListWorkflowTyp
 	return ListWorkflowTypesPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListWorkflowTypesInput
+				var inCpy *types.ListWorkflowTypesInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -219,14 +131,14 @@ type ListWorkflowTypesPaginator struct {
 	aws.Pager
 }
 
-func (p *ListWorkflowTypesPaginator) CurrentPage() *ListWorkflowTypesOutput {
-	return p.Pager.CurrentPage().(*ListWorkflowTypesOutput)
+func (p *ListWorkflowTypesPaginator) CurrentPage() *types.ListWorkflowTypesOutput {
+	return p.Pager.CurrentPage().(*types.ListWorkflowTypesOutput)
 }
 
 // ListWorkflowTypesResponse is the response type for the
 // ListWorkflowTypes API operation.
 type ListWorkflowTypesResponse struct {
-	*ListWorkflowTypesOutput
+	*types.ListWorkflowTypesOutput
 
 	response *aws.Response
 }

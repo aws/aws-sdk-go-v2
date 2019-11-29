@@ -4,62 +4,10 @@ package sfn
 
 import (
 	"context"
-	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/sfn/types"
 )
-
-type StopExecutionInput struct {
-	_ struct{} `type:"structure"`
-
-	// A more detailed explanation of the cause of the failure.
-	Cause *string `locationName:"cause" type:"string" sensitive:"true"`
-
-	// The error code of the failure.
-	Error *string `locationName:"error" type:"string" sensitive:"true"`
-
-	// The Amazon Resource Name (ARN) of the execution to stop.
-	//
-	// ExecutionArn is a required field
-	ExecutionArn *string `locationName:"executionArn" min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s StopExecutionInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *StopExecutionInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "StopExecutionInput"}
-
-	if s.ExecutionArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ExecutionArn"))
-	}
-	if s.ExecutionArn != nil && len(*s.ExecutionArn) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ExecutionArn", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type StopExecutionOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The date the execution is stopped.
-	//
-	// StopDate is a required field
-	StopDate *time.Time `locationName:"stopDate" type:"timestamp" required:"true"`
-}
-
-// String returns the string representation
-func (s StopExecutionOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opStopExecution = "StopExecution"
 
@@ -76,7 +24,7 @@ const opStopExecution = "StopExecution"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/StopExecution
-func (c *Client) StopExecutionRequest(input *StopExecutionInput) StopExecutionRequest {
+func (c *Client) StopExecutionRequest(input *types.StopExecutionInput) StopExecutionRequest {
 	op := &aws.Operation{
 		Name:       opStopExecution,
 		HTTPMethod: "POST",
@@ -84,10 +32,10 @@ func (c *Client) StopExecutionRequest(input *StopExecutionInput) StopExecutionRe
 	}
 
 	if input == nil {
-		input = &StopExecutionInput{}
+		input = &types.StopExecutionInput{}
 	}
 
-	req := c.newRequest(op, input, &StopExecutionOutput{})
+	req := c.newRequest(op, input, &types.StopExecutionOutput{})
 	return StopExecutionRequest{Request: req, Input: input, Copy: c.StopExecutionRequest}
 }
 
@@ -95,8 +43,8 @@ func (c *Client) StopExecutionRequest(input *StopExecutionInput) StopExecutionRe
 // StopExecution API operation.
 type StopExecutionRequest struct {
 	*aws.Request
-	Input *StopExecutionInput
-	Copy  func(*StopExecutionInput) StopExecutionRequest
+	Input *types.StopExecutionInput
+	Copy  func(*types.StopExecutionInput) StopExecutionRequest
 }
 
 // Send marshals and sends the StopExecution API request.
@@ -108,7 +56,7 @@ func (r StopExecutionRequest) Send(ctx context.Context) (*StopExecutionResponse,
 	}
 
 	resp := &StopExecutionResponse{
-		StopExecutionOutput: r.Request.Data.(*StopExecutionOutput),
+		StopExecutionOutput: r.Request.Data.(*types.StopExecutionOutput),
 		response:            &aws.Response{Request: r.Request},
 	}
 
@@ -118,7 +66,7 @@ func (r StopExecutionRequest) Send(ctx context.Context) (*StopExecutionResponse,
 // StopExecutionResponse is the response type for the
 // StopExecution API operation.
 type StopExecutionResponse struct {
-	*StopExecutionOutput
+	*types.StopExecutionOutput
 
 	response *aws.Response
 }

@@ -6,61 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/cloudwatchlogs/types"
 )
-
-type GetLogGroupFieldsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the log group to search.
-	//
-	// LogGroupName is a required field
-	LogGroupName *string `locationName:"logGroupName" min:"1" type:"string" required:"true"`
-
-	// The time to set as the center of the query. If you specify time, the 8 minutes
-	// before and 8 minutes after this time are searched. If you omit time, the
-	// past 15 minutes are queried.
-	//
-	// The time value is specified as epoch time, the number of seconds since January
-	// 1, 1970, 00:00:00 UTC.
-	Time *int64 `locationName:"time" type:"long"`
-}
-
-// String returns the string representation
-func (s GetLogGroupFieldsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetLogGroupFieldsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetLogGroupFieldsInput"}
-
-	if s.LogGroupName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("LogGroupName"))
-	}
-	if s.LogGroupName != nil && len(*s.LogGroupName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("LogGroupName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type GetLogGroupFieldsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The array of fields found in the query. Each object in the array contains
-	// the name of the field, along with the percentage of time it appeared in the
-	// log events that were queried.
-	LogGroupFields []LogGroupField `locationName:"logGroupFields" type:"list"`
-}
-
-// String returns the string representation
-func (s GetLogGroupFieldsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetLogGroupFields = "GetLogGroupFields"
 
@@ -85,7 +32,7 @@ const opGetLogGroupFields = "GetLogGroupFields"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/GetLogGroupFields
-func (c *Client) GetLogGroupFieldsRequest(input *GetLogGroupFieldsInput) GetLogGroupFieldsRequest {
+func (c *Client) GetLogGroupFieldsRequest(input *types.GetLogGroupFieldsInput) GetLogGroupFieldsRequest {
 	op := &aws.Operation{
 		Name:       opGetLogGroupFields,
 		HTTPMethod: "POST",
@@ -93,10 +40,10 @@ func (c *Client) GetLogGroupFieldsRequest(input *GetLogGroupFieldsInput) GetLogG
 	}
 
 	if input == nil {
-		input = &GetLogGroupFieldsInput{}
+		input = &types.GetLogGroupFieldsInput{}
 	}
 
-	req := c.newRequest(op, input, &GetLogGroupFieldsOutput{})
+	req := c.newRequest(op, input, &types.GetLogGroupFieldsOutput{})
 	return GetLogGroupFieldsRequest{Request: req, Input: input, Copy: c.GetLogGroupFieldsRequest}
 }
 
@@ -104,8 +51,8 @@ func (c *Client) GetLogGroupFieldsRequest(input *GetLogGroupFieldsInput) GetLogG
 // GetLogGroupFields API operation.
 type GetLogGroupFieldsRequest struct {
 	*aws.Request
-	Input *GetLogGroupFieldsInput
-	Copy  func(*GetLogGroupFieldsInput) GetLogGroupFieldsRequest
+	Input *types.GetLogGroupFieldsInput
+	Copy  func(*types.GetLogGroupFieldsInput) GetLogGroupFieldsRequest
 }
 
 // Send marshals and sends the GetLogGroupFields API request.
@@ -117,7 +64,7 @@ func (r GetLogGroupFieldsRequest) Send(ctx context.Context) (*GetLogGroupFieldsR
 	}
 
 	resp := &GetLogGroupFieldsResponse{
-		GetLogGroupFieldsOutput: r.Request.Data.(*GetLogGroupFieldsOutput),
+		GetLogGroupFieldsOutput: r.Request.Data.(*types.GetLogGroupFieldsOutput),
 		response:                &aws.Response{Request: r.Request},
 	}
 
@@ -127,7 +74,7 @@ func (r GetLogGroupFieldsRequest) Send(ctx context.Context) (*GetLogGroupFieldsR
 // GetLogGroupFieldsResponse is the response type for the
 // GetLogGroupFields API operation.
 type GetLogGroupFieldsResponse struct {
-	*GetLogGroupFieldsOutput
+	*types.GetLogGroupFieldsOutput
 
 	response *aws.Response
 }

@@ -6,56 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/devicefarm/types"
 )
-
-// Represents the request to get information about the specified remote access
-// session.
-type GetRemoteAccessSessionInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the remote access session about which you
-	// want to get session information.
-	//
-	// Arn is a required field
-	Arn *string `locationName:"arn" min:"32" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetRemoteAccessSessionInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetRemoteAccessSessionInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetRemoteAccessSessionInput"}
-
-	if s.Arn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Arn"))
-	}
-	if s.Arn != nil && len(*s.Arn) < 32 {
-		invalidParams.Add(aws.NewErrParamMinLen("Arn", 32))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Represents the response from the server that lists detailed information about
-// the remote access session.
-type GetRemoteAccessSessionOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A container that lists detailed information about the remote access session.
-	RemoteAccessSession *RemoteAccessSession `locationName:"remoteAccessSession" type:"structure"`
-}
-
-// String returns the string representation
-func (s GetRemoteAccessSessionOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetRemoteAccessSession = "GetRemoteAccessSession"
 
@@ -72,7 +24,7 @@ const opGetRemoteAccessSession = "GetRemoteAccessSession"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/GetRemoteAccessSession
-func (c *Client) GetRemoteAccessSessionRequest(input *GetRemoteAccessSessionInput) GetRemoteAccessSessionRequest {
+func (c *Client) GetRemoteAccessSessionRequest(input *types.GetRemoteAccessSessionInput) GetRemoteAccessSessionRequest {
 	op := &aws.Operation{
 		Name:       opGetRemoteAccessSession,
 		HTTPMethod: "POST",
@@ -80,10 +32,10 @@ func (c *Client) GetRemoteAccessSessionRequest(input *GetRemoteAccessSessionInpu
 	}
 
 	if input == nil {
-		input = &GetRemoteAccessSessionInput{}
+		input = &types.GetRemoteAccessSessionInput{}
 	}
 
-	req := c.newRequest(op, input, &GetRemoteAccessSessionOutput{})
+	req := c.newRequest(op, input, &types.GetRemoteAccessSessionOutput{})
 	return GetRemoteAccessSessionRequest{Request: req, Input: input, Copy: c.GetRemoteAccessSessionRequest}
 }
 
@@ -91,8 +43,8 @@ func (c *Client) GetRemoteAccessSessionRequest(input *GetRemoteAccessSessionInpu
 // GetRemoteAccessSession API operation.
 type GetRemoteAccessSessionRequest struct {
 	*aws.Request
-	Input *GetRemoteAccessSessionInput
-	Copy  func(*GetRemoteAccessSessionInput) GetRemoteAccessSessionRequest
+	Input *types.GetRemoteAccessSessionInput
+	Copy  func(*types.GetRemoteAccessSessionInput) GetRemoteAccessSessionRequest
 }
 
 // Send marshals and sends the GetRemoteAccessSession API request.
@@ -104,7 +56,7 @@ func (r GetRemoteAccessSessionRequest) Send(ctx context.Context) (*GetRemoteAcce
 	}
 
 	resp := &GetRemoteAccessSessionResponse{
-		GetRemoteAccessSessionOutput: r.Request.Data.(*GetRemoteAccessSessionOutput),
+		GetRemoteAccessSessionOutput: r.Request.Data.(*types.GetRemoteAccessSessionOutput),
 		response:                     &aws.Response{Request: r.Request},
 	}
 
@@ -114,7 +66,7 @@ func (r GetRemoteAccessSessionRequest) Send(ctx context.Context) (*GetRemoteAcce
 // GetRemoteAccessSessionResponse is the response type for the
 // GetRemoteAccessSession API operation.
 type GetRemoteAccessSessionResponse struct {
-	*GetRemoteAccessSessionOutput
+	*types.GetRemoteAccessSessionOutput
 
 	response *aws.Response
 }

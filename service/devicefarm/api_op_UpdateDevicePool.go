@@ -6,88 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/devicefarm/types"
 )
-
-// Represents a request to the update device pool operation.
-type UpdateDevicePoolInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the Device Farm device pool you wish to
-	// update.
-	//
-	// Arn is a required field
-	Arn *string `locationName:"arn" min:"32" type:"string" required:"true"`
-
-	// Sets whether the maxDevices parameter applies to your device pool. If you
-	// set this parameter to true, the maxDevices parameter does not apply, and
-	// Device Farm does not limit the number of devices that it adds to your device
-	// pool. In this case, Device Farm adds all available devices that meet the
-	// criteria that are specified for the rules parameter.
-	//
-	// If you use this parameter in your request, you cannot use the maxDevices
-	// parameter in the same request.
-	ClearMaxDevices *bool `locationName:"clearMaxDevices" type:"boolean"`
-
-	// A description of the device pool you wish to update.
-	Description *string `locationName:"description" type:"string"`
-
-	// The number of devices that Device Farm can add to your device pool. Device
-	// Farm adds devices that are available and that meet the criteria that you
-	// assign for the rules parameter. Depending on how many devices meet these
-	// constraints, your device pool might contain fewer devices than the value
-	// for this parameter.
-	//
-	// By specifying the maximum number of devices, you can control the costs that
-	// you incur by running tests.
-	//
-	// If you use this parameter in your request, you cannot use the clearMaxDevices
-	// parameter in the same request.
-	MaxDevices *int64 `locationName:"maxDevices" type:"integer"`
-
-	// A string representing the name of the device pool you wish to update.
-	Name *string `locationName:"name" type:"string"`
-
-	// Represents the rules you wish to modify for the device pool. Updating rules
-	// is optional; however, if you choose to update rules for your request, the
-	// update will replace the existing rules.
-	Rules []Rule `locationName:"rules" type:"list"`
-}
-
-// String returns the string representation
-func (s UpdateDevicePoolInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateDevicePoolInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateDevicePoolInput"}
-
-	if s.Arn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Arn"))
-	}
-	if s.Arn != nil && len(*s.Arn) < 32 {
-		invalidParams.Add(aws.NewErrParamMinLen("Arn", 32))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Represents the result of an update device pool request.
-type UpdateDevicePoolOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The device pool you just updated.
-	DevicePool *DevicePool `locationName:"devicePool" type:"structure"`
-}
-
-// String returns the string representation
-func (s UpdateDevicePoolOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opUpdateDevicePool = "UpdateDevicePool"
 
@@ -106,7 +26,7 @@ const opUpdateDevicePool = "UpdateDevicePool"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/UpdateDevicePool
-func (c *Client) UpdateDevicePoolRequest(input *UpdateDevicePoolInput) UpdateDevicePoolRequest {
+func (c *Client) UpdateDevicePoolRequest(input *types.UpdateDevicePoolInput) UpdateDevicePoolRequest {
 	op := &aws.Operation{
 		Name:       opUpdateDevicePool,
 		HTTPMethod: "POST",
@@ -114,10 +34,10 @@ func (c *Client) UpdateDevicePoolRequest(input *UpdateDevicePoolInput) UpdateDev
 	}
 
 	if input == nil {
-		input = &UpdateDevicePoolInput{}
+		input = &types.UpdateDevicePoolInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateDevicePoolOutput{})
+	req := c.newRequest(op, input, &types.UpdateDevicePoolOutput{})
 	return UpdateDevicePoolRequest{Request: req, Input: input, Copy: c.UpdateDevicePoolRequest}
 }
 
@@ -125,8 +45,8 @@ func (c *Client) UpdateDevicePoolRequest(input *UpdateDevicePoolInput) UpdateDev
 // UpdateDevicePool API operation.
 type UpdateDevicePoolRequest struct {
 	*aws.Request
-	Input *UpdateDevicePoolInput
-	Copy  func(*UpdateDevicePoolInput) UpdateDevicePoolRequest
+	Input *types.UpdateDevicePoolInput
+	Copy  func(*types.UpdateDevicePoolInput) UpdateDevicePoolRequest
 }
 
 // Send marshals and sends the UpdateDevicePool API request.
@@ -138,7 +58,7 @@ func (r UpdateDevicePoolRequest) Send(ctx context.Context) (*UpdateDevicePoolRes
 	}
 
 	resp := &UpdateDevicePoolResponse{
-		UpdateDevicePoolOutput: r.Request.Data.(*UpdateDevicePoolOutput),
+		UpdateDevicePoolOutput: r.Request.Data.(*types.UpdateDevicePoolOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -148,7 +68,7 @@ func (r UpdateDevicePoolRequest) Send(ctx context.Context) (*UpdateDevicePoolRes
 // UpdateDevicePoolResponse is the response type for the
 // UpdateDevicePool API operation.
 type UpdateDevicePoolResponse struct {
-	*UpdateDevicePoolOutput
+	*types.UpdateDevicePoolOutput
 
 	response *aws.Response
 }

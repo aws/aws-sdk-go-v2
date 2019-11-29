@@ -6,98 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/cloudfront/types"
 )
-
-// The request to create a new streaming distribution.
-type CreateStreamingDistributionInput struct {
-	_ struct{} `type:"structure" payload:"StreamingDistributionConfig"`
-
-	// The streaming distribution's configuration information.
-	//
-	// StreamingDistributionConfig is a required field
-	StreamingDistributionConfig *StreamingDistributionConfig `locationName:"StreamingDistributionConfig" type:"structure" required:"true" xmlURI:"http://cloudfront.amazonaws.com/doc/2019-03-26/"`
-}
-
-// String returns the string representation
-func (s CreateStreamingDistributionInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateStreamingDistributionInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateStreamingDistributionInput"}
-
-	if s.StreamingDistributionConfig == nil {
-		invalidParams.Add(aws.NewErrParamRequired("StreamingDistributionConfig"))
-	}
-	if s.StreamingDistributionConfig != nil {
-		if err := s.StreamingDistributionConfig.Validate(); err != nil {
-			invalidParams.AddNested("StreamingDistributionConfig", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s CreateStreamingDistributionInput) MarshalFields(e protocol.FieldEncoder) error {
-
-	if s.StreamingDistributionConfig != nil {
-		v := s.StreamingDistributionConfig
-
-		metadata := protocol.Metadata{XMLNamespaceURI: "http://cloudfront.amazonaws.com/doc/2019-03-26/"}
-		e.SetFields(protocol.PayloadTarget, "StreamingDistributionConfig", v, metadata)
-	}
-	return nil
-}
-
-// The returned result of the corresponding request.
-type CreateStreamingDistributionOutput struct {
-	_ struct{} `type:"structure" payload:"StreamingDistribution"`
-
-	// The current version of the streaming distribution created.
-	ETag *string `location:"header" locationName:"ETag" type:"string"`
-
-	// The fully qualified URI of the new streaming distribution resource just created.
-	// For example: https://cloudfront.amazonaws.com/2010-11-01/streaming-distribution/EGTXBD79H29TRA8.
-	Location *string `location:"header" locationName:"Location" type:"string"`
-
-	// The streaming distribution's information.
-	StreamingDistribution *StreamingDistribution `type:"structure"`
-}
-
-// String returns the string representation
-func (s CreateStreamingDistributionOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s CreateStreamingDistributionOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.ETag != nil {
-		v := *s.ETag
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "ETag", protocol.StringValue(v), metadata)
-	}
-	if s.Location != nil {
-		v := *s.Location
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "Location", protocol.StringValue(v), metadata)
-	}
-	if s.StreamingDistribution != nil {
-		v := s.StreamingDistribution
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.PayloadTarget, "StreamingDistribution", v, metadata)
-	}
-	return nil
-}
 
 const opCreateStreamingDistribution = "CreateStreamingDistribution2019_03_26"
 
@@ -141,7 +51,7 @@ const opCreateStreamingDistribution = "CreateStreamingDistribution2019_03_26"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/CreateStreamingDistribution
-func (c *Client) CreateStreamingDistributionRequest(input *CreateStreamingDistributionInput) CreateStreamingDistributionRequest {
+func (c *Client) CreateStreamingDistributionRequest(input *types.CreateStreamingDistributionInput) CreateStreamingDistributionRequest {
 	op := &aws.Operation{
 		Name:       opCreateStreamingDistribution,
 		HTTPMethod: "POST",
@@ -149,10 +59,10 @@ func (c *Client) CreateStreamingDistributionRequest(input *CreateStreamingDistri
 	}
 
 	if input == nil {
-		input = &CreateStreamingDistributionInput{}
+		input = &types.CreateStreamingDistributionInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateStreamingDistributionOutput{})
+	req := c.newRequest(op, input, &types.CreateStreamingDistributionOutput{})
 	return CreateStreamingDistributionRequest{Request: req, Input: input, Copy: c.CreateStreamingDistributionRequest}
 }
 
@@ -160,8 +70,8 @@ func (c *Client) CreateStreamingDistributionRequest(input *CreateStreamingDistri
 // CreateStreamingDistribution API operation.
 type CreateStreamingDistributionRequest struct {
 	*aws.Request
-	Input *CreateStreamingDistributionInput
-	Copy  func(*CreateStreamingDistributionInput) CreateStreamingDistributionRequest
+	Input *types.CreateStreamingDistributionInput
+	Copy  func(*types.CreateStreamingDistributionInput) CreateStreamingDistributionRequest
 }
 
 // Send marshals and sends the CreateStreamingDistribution API request.
@@ -173,7 +83,7 @@ func (r CreateStreamingDistributionRequest) Send(ctx context.Context) (*CreateSt
 	}
 
 	resp := &CreateStreamingDistributionResponse{
-		CreateStreamingDistributionOutput: r.Request.Data.(*CreateStreamingDistributionOutput),
+		CreateStreamingDistributionOutput: r.Request.Data.(*types.CreateStreamingDistributionOutput),
 		response:                          &aws.Response{Request: r.Request},
 	}
 
@@ -183,7 +93,7 @@ func (r CreateStreamingDistributionRequest) Send(ctx context.Context) (*CreateSt
 // CreateStreamingDistributionResponse is the response type for the
 // CreateStreamingDistribution API operation.
 type CreateStreamingDistributionResponse struct {
-	*CreateStreamingDistributionOutput
+	*types.CreateStreamingDistributionOutput
 
 	response *aws.Response
 }

@@ -6,77 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/greengrass/types"
 )
-
-type ListLoggerDefinitionsInput struct {
-	_ struct{} `type:"structure"`
-
-	MaxResults *string `location:"querystring" locationName:"MaxResults" type:"string"`
-
-	NextToken *string `location:"querystring" locationName:"NextToken" type:"string"`
-}
-
-// String returns the string representation
-func (s ListLoggerDefinitionsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListLoggerDefinitionsInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.MaxResults != nil {
-		v := *s.MaxResults
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "MaxResults", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type ListLoggerDefinitionsOutput struct {
-	_ struct{} `type:"structure"`
-
-	Definitions []DefinitionInformation `type:"list"`
-
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s ListLoggerDefinitionsOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListLoggerDefinitionsOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.Definitions != nil {
-		v := s.Definitions
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "Definitions", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opListLoggerDefinitions = "ListLoggerDefinitions"
 
@@ -93,7 +24,7 @@ const opListLoggerDefinitions = "ListLoggerDefinitions"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/ListLoggerDefinitions
-func (c *Client) ListLoggerDefinitionsRequest(input *ListLoggerDefinitionsInput) ListLoggerDefinitionsRequest {
+func (c *Client) ListLoggerDefinitionsRequest(input *types.ListLoggerDefinitionsInput) ListLoggerDefinitionsRequest {
 	op := &aws.Operation{
 		Name:       opListLoggerDefinitions,
 		HTTPMethod: "GET",
@@ -101,10 +32,10 @@ func (c *Client) ListLoggerDefinitionsRequest(input *ListLoggerDefinitionsInput)
 	}
 
 	if input == nil {
-		input = &ListLoggerDefinitionsInput{}
+		input = &types.ListLoggerDefinitionsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListLoggerDefinitionsOutput{})
+	req := c.newRequest(op, input, &types.ListLoggerDefinitionsOutput{})
 	return ListLoggerDefinitionsRequest{Request: req, Input: input, Copy: c.ListLoggerDefinitionsRequest}
 }
 
@@ -112,8 +43,8 @@ func (c *Client) ListLoggerDefinitionsRequest(input *ListLoggerDefinitionsInput)
 // ListLoggerDefinitions API operation.
 type ListLoggerDefinitionsRequest struct {
 	*aws.Request
-	Input *ListLoggerDefinitionsInput
-	Copy  func(*ListLoggerDefinitionsInput) ListLoggerDefinitionsRequest
+	Input *types.ListLoggerDefinitionsInput
+	Copy  func(*types.ListLoggerDefinitionsInput) ListLoggerDefinitionsRequest
 }
 
 // Send marshals and sends the ListLoggerDefinitions API request.
@@ -125,7 +56,7 @@ func (r ListLoggerDefinitionsRequest) Send(ctx context.Context) (*ListLoggerDefi
 	}
 
 	resp := &ListLoggerDefinitionsResponse{
-		ListLoggerDefinitionsOutput: r.Request.Data.(*ListLoggerDefinitionsOutput),
+		ListLoggerDefinitionsOutput: r.Request.Data.(*types.ListLoggerDefinitionsOutput),
 		response:                    &aws.Response{Request: r.Request},
 	}
 
@@ -135,7 +66,7 @@ func (r ListLoggerDefinitionsRequest) Send(ctx context.Context) (*ListLoggerDefi
 // ListLoggerDefinitionsResponse is the response type for the
 // ListLoggerDefinitions API operation.
 type ListLoggerDefinitionsResponse struct {
-	*ListLoggerDefinitionsOutput
+	*types.ListLoggerDefinitionsOutput
 
 	response *aws.Response
 }

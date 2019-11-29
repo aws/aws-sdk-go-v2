@@ -6,68 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-type ProvisionByoipCidrInput struct {
-	_ struct{} `type:"structure"`
-
-	// The public IPv4 address range, in CIDR notation. The most specific prefix
-	// that you can specify is /24. The address range cannot overlap with another
-	// address range that you've brought to this or another Region.
-	//
-	// Cidr is a required field
-	Cidr *string `type:"string" required:"true"`
-
-	// A signed document that proves that you are authorized to bring the specified
-	// IP address range to Amazon using BYOIP.
-	CidrAuthorizationContext *CidrAuthorizationContext `type:"structure"`
-
-	// A description for the address range and the address pool.
-	Description *string `type:"string"`
-
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have
-	// the required permissions, the error response is DryRunOperation. Otherwise,
-	// it is UnauthorizedOperation.
-	DryRun *bool `type:"boolean"`
-}
-
-// String returns the string representation
-func (s ProvisionByoipCidrInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ProvisionByoipCidrInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ProvisionByoipCidrInput"}
-
-	if s.Cidr == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Cidr"))
-	}
-	if s.CidrAuthorizationContext != nil {
-		if err := s.CidrAuthorizationContext.Validate(); err != nil {
-			invalidParams.AddNested("CidrAuthorizationContext", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ProvisionByoipCidrOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Information about the address pool.
-	ByoipCidr *ByoipCidr `locationName:"byoipCidr" type:"structure"`
-}
-
-// String returns the string representation
-func (s ProvisionByoipCidrOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opProvisionByoipCidr = "ProvisionByoipCidr"
 
@@ -100,7 +40,7 @@ const opProvisionByoipCidr = "ProvisionByoipCidr"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ProvisionByoipCidr
-func (c *Client) ProvisionByoipCidrRequest(input *ProvisionByoipCidrInput) ProvisionByoipCidrRequest {
+func (c *Client) ProvisionByoipCidrRequest(input *types.ProvisionByoipCidrInput) ProvisionByoipCidrRequest {
 	op := &aws.Operation{
 		Name:       opProvisionByoipCidr,
 		HTTPMethod: "POST",
@@ -108,10 +48,10 @@ func (c *Client) ProvisionByoipCidrRequest(input *ProvisionByoipCidrInput) Provi
 	}
 
 	if input == nil {
-		input = &ProvisionByoipCidrInput{}
+		input = &types.ProvisionByoipCidrInput{}
 	}
 
-	req := c.newRequest(op, input, &ProvisionByoipCidrOutput{})
+	req := c.newRequest(op, input, &types.ProvisionByoipCidrOutput{})
 	return ProvisionByoipCidrRequest{Request: req, Input: input, Copy: c.ProvisionByoipCidrRequest}
 }
 
@@ -119,8 +59,8 @@ func (c *Client) ProvisionByoipCidrRequest(input *ProvisionByoipCidrInput) Provi
 // ProvisionByoipCidr API operation.
 type ProvisionByoipCidrRequest struct {
 	*aws.Request
-	Input *ProvisionByoipCidrInput
-	Copy  func(*ProvisionByoipCidrInput) ProvisionByoipCidrRequest
+	Input *types.ProvisionByoipCidrInput
+	Copy  func(*types.ProvisionByoipCidrInput) ProvisionByoipCidrRequest
 }
 
 // Send marshals and sends the ProvisionByoipCidr API request.
@@ -132,7 +72,7 @@ func (r ProvisionByoipCidrRequest) Send(ctx context.Context) (*ProvisionByoipCid
 	}
 
 	resp := &ProvisionByoipCidrResponse{
-		ProvisionByoipCidrOutput: r.Request.Data.(*ProvisionByoipCidrOutput),
+		ProvisionByoipCidrOutput: r.Request.Data.(*types.ProvisionByoipCidrOutput),
 		response:                 &aws.Response{Request: r.Request},
 	}
 
@@ -142,7 +82,7 @@ func (r ProvisionByoipCidrRequest) Send(ctx context.Context) (*ProvisionByoipCid
 // ProvisionByoipCidrResponse is the response type for the
 // ProvisionByoipCidr API operation.
 type ProvisionByoipCidrResponse struct {
-	*ProvisionByoipCidrOutput
+	*types.ProvisionByoipCidrOutput
 
 	response *aws.Response
 }

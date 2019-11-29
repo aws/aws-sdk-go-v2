@@ -6,59 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/elasticloadbalancing/types"
 )
-
-// Contains the parameters for EnableAvailabilityZonesForLoadBalancer.
-type EnableAvailabilityZonesForLoadBalancerInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Availability Zones. These must be in the same region as the load balancer.
-	//
-	// AvailabilityZones is a required field
-	AvailabilityZones []string `type:"list" required:"true"`
-
-	// The name of the load balancer.
-	//
-	// LoadBalancerName is a required field
-	LoadBalancerName *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s EnableAvailabilityZonesForLoadBalancerInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *EnableAvailabilityZonesForLoadBalancerInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "EnableAvailabilityZonesForLoadBalancerInput"}
-
-	if s.AvailabilityZones == nil {
-		invalidParams.Add(aws.NewErrParamRequired("AvailabilityZones"))
-	}
-
-	if s.LoadBalancerName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("LoadBalancerName"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Contains the output of EnableAvailabilityZonesForLoadBalancer.
-type EnableAvailabilityZonesForLoadBalancerOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The updated list of Availability Zones for the load balancer.
-	AvailabilityZones []string `type:"list"`
-}
-
-// String returns the string representation
-func (s EnableAvailabilityZonesForLoadBalancerOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opEnableAvailabilityZonesForLoadBalancer = "EnableAvailabilityZonesForLoadBalancer"
 
@@ -83,7 +32,7 @@ const opEnableAvailabilityZonesForLoadBalancer = "EnableAvailabilityZonesForLoad
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/EnableAvailabilityZonesForLoadBalancer
-func (c *Client) EnableAvailabilityZonesForLoadBalancerRequest(input *EnableAvailabilityZonesForLoadBalancerInput) EnableAvailabilityZonesForLoadBalancerRequest {
+func (c *Client) EnableAvailabilityZonesForLoadBalancerRequest(input *types.EnableAvailabilityZonesForLoadBalancerInput) EnableAvailabilityZonesForLoadBalancerRequest {
 	op := &aws.Operation{
 		Name:       opEnableAvailabilityZonesForLoadBalancer,
 		HTTPMethod: "POST",
@@ -91,10 +40,10 @@ func (c *Client) EnableAvailabilityZonesForLoadBalancerRequest(input *EnableAvai
 	}
 
 	if input == nil {
-		input = &EnableAvailabilityZonesForLoadBalancerInput{}
+		input = &types.EnableAvailabilityZonesForLoadBalancerInput{}
 	}
 
-	req := c.newRequest(op, input, &EnableAvailabilityZonesForLoadBalancerOutput{})
+	req := c.newRequest(op, input, &types.EnableAvailabilityZonesForLoadBalancerOutput{})
 	return EnableAvailabilityZonesForLoadBalancerRequest{Request: req, Input: input, Copy: c.EnableAvailabilityZonesForLoadBalancerRequest}
 }
 
@@ -102,8 +51,8 @@ func (c *Client) EnableAvailabilityZonesForLoadBalancerRequest(input *EnableAvai
 // EnableAvailabilityZonesForLoadBalancer API operation.
 type EnableAvailabilityZonesForLoadBalancerRequest struct {
 	*aws.Request
-	Input *EnableAvailabilityZonesForLoadBalancerInput
-	Copy  func(*EnableAvailabilityZonesForLoadBalancerInput) EnableAvailabilityZonesForLoadBalancerRequest
+	Input *types.EnableAvailabilityZonesForLoadBalancerInput
+	Copy  func(*types.EnableAvailabilityZonesForLoadBalancerInput) EnableAvailabilityZonesForLoadBalancerRequest
 }
 
 // Send marshals and sends the EnableAvailabilityZonesForLoadBalancer API request.
@@ -115,7 +64,7 @@ func (r EnableAvailabilityZonesForLoadBalancerRequest) Send(ctx context.Context)
 	}
 
 	resp := &EnableAvailabilityZonesForLoadBalancerResponse{
-		EnableAvailabilityZonesForLoadBalancerOutput: r.Request.Data.(*EnableAvailabilityZonesForLoadBalancerOutput),
+		EnableAvailabilityZonesForLoadBalancerOutput: r.Request.Data.(*types.EnableAvailabilityZonesForLoadBalancerOutput),
 		response: &aws.Response{Request: r.Request},
 	}
 
@@ -125,7 +74,7 @@ func (r EnableAvailabilityZonesForLoadBalancerRequest) Send(ctx context.Context)
 // EnableAvailabilityZonesForLoadBalancerResponse is the response type for the
 // EnableAvailabilityZonesForLoadBalancer API operation.
 type EnableAvailabilityZonesForLoadBalancerResponse struct {
-	*EnableAvailabilityZonesForLoadBalancerOutput
+	*types.EnableAvailabilityZonesForLoadBalancerOutput
 
 	response *aws.Response
 }

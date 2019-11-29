@@ -6,73 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/acmpca/types"
 )
-
-type GetCertificateInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ARN of the issued certificate. The ARN contains the certificate serial
-	// number and must be in the following form:
-	//
-	// arn:aws:acm-pca:region:account:certificate-authority/12345678-1234-1234-1234-123456789012/certificate/286535153982981100925020015808220737245
-	//
-	// CertificateArn is a required field
-	CertificateArn *string `min:"5" type:"string" required:"true"`
-
-	// The Amazon Resource Name (ARN) that was returned when you called CreateCertificateAuthority.
-	// This must be of the form:
-	//
-	// arn:aws:acm-pca:region:account:certificate-authority/12345678-1234-1234-1234-123456789012 .
-	//
-	// CertificateAuthorityArn is a required field
-	CertificateAuthorityArn *string `min:"5" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetCertificateInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetCertificateInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetCertificateInput"}
-
-	if s.CertificateArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("CertificateArn"))
-	}
-	if s.CertificateArn != nil && len(*s.CertificateArn) < 5 {
-		invalidParams.Add(aws.NewErrParamMinLen("CertificateArn", 5))
-	}
-
-	if s.CertificateAuthorityArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("CertificateAuthorityArn"))
-	}
-	if s.CertificateAuthorityArn != nil && len(*s.CertificateAuthorityArn) < 5 {
-		invalidParams.Add(aws.NewErrParamMinLen("CertificateAuthorityArn", 5))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type GetCertificateOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The base64 PEM-encoded certificate specified by the CertificateArn parameter.
-	Certificate *string `type:"string"`
-
-	// The base64 PEM-encoded certificate chain that chains up to the on-premises
-	// root CA certificate that you used to sign your private CA certificate.
-	CertificateChain *string `type:"string"`
-}
-
-// String returns the string representation
-func (s GetCertificateOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetCertificate = "GetCertificate"
 
@@ -95,7 +30,7 @@ const opGetCertificate = "GetCertificate"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/acm-pca-2017-08-22/GetCertificate
-func (c *Client) GetCertificateRequest(input *GetCertificateInput) GetCertificateRequest {
+func (c *Client) GetCertificateRequest(input *types.GetCertificateInput) GetCertificateRequest {
 	op := &aws.Operation{
 		Name:       opGetCertificate,
 		HTTPMethod: "POST",
@@ -103,10 +38,10 @@ func (c *Client) GetCertificateRequest(input *GetCertificateInput) GetCertificat
 	}
 
 	if input == nil {
-		input = &GetCertificateInput{}
+		input = &types.GetCertificateInput{}
 	}
 
-	req := c.newRequest(op, input, &GetCertificateOutput{})
+	req := c.newRequest(op, input, &types.GetCertificateOutput{})
 	return GetCertificateRequest{Request: req, Input: input, Copy: c.GetCertificateRequest}
 }
 
@@ -114,8 +49,8 @@ func (c *Client) GetCertificateRequest(input *GetCertificateInput) GetCertificat
 // GetCertificate API operation.
 type GetCertificateRequest struct {
 	*aws.Request
-	Input *GetCertificateInput
-	Copy  func(*GetCertificateInput) GetCertificateRequest
+	Input *types.GetCertificateInput
+	Copy  func(*types.GetCertificateInput) GetCertificateRequest
 }
 
 // Send marshals and sends the GetCertificate API request.
@@ -127,7 +62,7 @@ func (r GetCertificateRequest) Send(ctx context.Context) (*GetCertificateRespons
 	}
 
 	resp := &GetCertificateResponse{
-		GetCertificateOutput: r.Request.Data.(*GetCertificateOutput),
+		GetCertificateOutput: r.Request.Data.(*types.GetCertificateOutput),
 		response:             &aws.Response{Request: r.Request},
 	}
 
@@ -137,7 +72,7 @@ func (r GetCertificateRequest) Send(ctx context.Context) (*GetCertificateRespons
 // GetCertificateResponse is the response type for the
 // GetCertificate API operation.
 type GetCertificateResponse struct {
-	*GetCertificateOutput
+	*types.GetCertificateOutput
 
 	response *aws.Response
 }

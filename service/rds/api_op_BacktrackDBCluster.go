@@ -4,126 +4,10 @@ package rds
 
 import (
 	"context"
-	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/rds/types"
 )
-
-type BacktrackDBClusterInput struct {
-	_ struct{} `type:"structure"`
-
-	// The timestamp of the time to backtrack the DB cluster to, specified in ISO
-	// 8601 format. For more information about ISO 8601, see the ISO8601 Wikipedia
-	// page. (http://en.wikipedia.org/wiki/ISO_8601)
-	//
-	// If the specified time is not a consistent time for the DB cluster, Aurora
-	// automatically chooses the nearest possible consistent time for the DB cluster.
-	//
-	// Constraints:
-	//
-	//    * Must contain a valid ISO 8601 timestamp.
-	//
-	//    * Can't contain a timestamp set in the future.
-	//
-	// Example: 2017-07-08T18:00Z
-	//
-	// BacktrackTo is a required field
-	BacktrackTo *time.Time `type:"timestamp" required:"true"`
-
-	// The DB cluster identifier of the DB cluster to be backtracked. This parameter
-	// is stored as a lowercase string.
-	//
-	// Constraints:
-	//
-	//    * Must contain from 1 to 63 alphanumeric characters or hyphens.
-	//
-	//    * First character must be a letter.
-	//
-	//    * Can't end with a hyphen or contain two consecutive hyphens.
-	//
-	// Example: my-cluster1
-	//
-	// DBClusterIdentifier is a required field
-	DBClusterIdentifier *string `type:"string" required:"true"`
-
-	// A value that indicates whether to force the DB cluster to backtrack when
-	// binary logging is enabled. Otherwise, an error occurs when binary logging
-	// is enabled.
-	Force *bool `type:"boolean"`
-
-	// A value that indicates whether to backtrack the DB cluster to the earliest
-	// possible backtrack time when BacktrackTo is set to a timestamp earlier than
-	// the earliest backtrack time. When this parameter is disabled and BacktrackTo
-	// is set to a timestamp earlier than the earliest backtrack time, an error
-	// occurs.
-	UseEarliestTimeOnPointInTimeUnavailable *bool `type:"boolean"`
-}
-
-// String returns the string representation
-func (s BacktrackDBClusterInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *BacktrackDBClusterInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "BacktrackDBClusterInput"}
-
-	if s.BacktrackTo == nil {
-		invalidParams.Add(aws.NewErrParamRequired("BacktrackTo"))
-	}
-
-	if s.DBClusterIdentifier == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DBClusterIdentifier"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// This data type is used as a response element in the DescribeDBClusterBacktracks
-// action.
-type BacktrackDBClusterOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Contains the backtrack identifier.
-	BacktrackIdentifier *string `type:"string"`
-
-	// The timestamp of the time at which the backtrack was requested.
-	BacktrackRequestCreationTime *time.Time `type:"timestamp"`
-
-	// The timestamp of the time to which the DB cluster was backtracked.
-	BacktrackTo *time.Time `type:"timestamp"`
-
-	// The timestamp of the time from which the DB cluster was backtracked.
-	BacktrackedFrom *time.Time `type:"timestamp"`
-
-	// Contains a user-supplied DB cluster identifier. This identifier is the unique
-	// key that identifies a DB cluster.
-	DBClusterIdentifier *string `type:"string"`
-
-	// The status of the backtrack. This property returns one of the following values:
-	//
-	//    * applying - The backtrack is currently being applied to or rolled back
-	//    from the DB cluster.
-	//
-	//    * completed - The backtrack has successfully been applied to or rolled
-	//    back from the DB cluster.
-	//
-	//    * failed - An error occurred while the backtrack was applied to or rolled
-	//    back from the DB cluster.
-	//
-	//    * pending - The backtrack is currently pending application to or rollback
-	//    from the DB cluster.
-	Status *string `type:"string"`
-}
-
-// String returns the string representation
-func (s BacktrackDBClusterOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opBacktrackDBCluster = "BacktrackDBCluster"
 
@@ -146,7 +30,7 @@ const opBacktrackDBCluster = "BacktrackDBCluster"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/BacktrackDBCluster
-func (c *Client) BacktrackDBClusterRequest(input *BacktrackDBClusterInput) BacktrackDBClusterRequest {
+func (c *Client) BacktrackDBClusterRequest(input *types.BacktrackDBClusterInput) BacktrackDBClusterRequest {
 	op := &aws.Operation{
 		Name:       opBacktrackDBCluster,
 		HTTPMethod: "POST",
@@ -154,10 +38,10 @@ func (c *Client) BacktrackDBClusterRequest(input *BacktrackDBClusterInput) Backt
 	}
 
 	if input == nil {
-		input = &BacktrackDBClusterInput{}
+		input = &types.BacktrackDBClusterInput{}
 	}
 
-	req := c.newRequest(op, input, &BacktrackDBClusterOutput{})
+	req := c.newRequest(op, input, &types.BacktrackDBClusterOutput{})
 	return BacktrackDBClusterRequest{Request: req, Input: input, Copy: c.BacktrackDBClusterRequest}
 }
 
@@ -165,8 +49,8 @@ func (c *Client) BacktrackDBClusterRequest(input *BacktrackDBClusterInput) Backt
 // BacktrackDBCluster API operation.
 type BacktrackDBClusterRequest struct {
 	*aws.Request
-	Input *BacktrackDBClusterInput
-	Copy  func(*BacktrackDBClusterInput) BacktrackDBClusterRequest
+	Input *types.BacktrackDBClusterInput
+	Copy  func(*types.BacktrackDBClusterInput) BacktrackDBClusterRequest
 }
 
 // Send marshals and sends the BacktrackDBCluster API request.
@@ -178,7 +62,7 @@ func (r BacktrackDBClusterRequest) Send(ctx context.Context) (*BacktrackDBCluste
 	}
 
 	resp := &BacktrackDBClusterResponse{
-		BacktrackDBClusterOutput: r.Request.Data.(*BacktrackDBClusterOutput),
+		BacktrackDBClusterOutput: r.Request.Data.(*types.BacktrackDBClusterOutput),
 		response:                 &aws.Response{Request: r.Request},
 	}
 
@@ -188,7 +72,7 @@ func (r BacktrackDBClusterRequest) Send(ctx context.Context) (*BacktrackDBCluste
 // BacktrackDBClusterResponse is the response type for the
 // BacktrackDBCluster API operation.
 type BacktrackDBClusterResponse struct {
-	*BacktrackDBClusterOutput
+	*types.BacktrackDBClusterOutput
 
 	response *aws.Response
 }

@@ -6,63 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/sms/types"
 )
-
-type GetReplicationRunsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The maximum number of results to return in a single call. The default value
-	// is 50. To retrieve the remaining results, make another call with the returned
-	// NextToken value.
-	MaxResults *int64 `locationName:"maxResults" type:"integer"`
-
-	// The token for the next set of results.
-	NextToken *string `locationName:"nextToken" type:"string"`
-
-	// The identifier of the replication job.
-	//
-	// ReplicationJobId is a required field
-	ReplicationJobId *string `locationName:"replicationJobId" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetReplicationRunsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetReplicationRunsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetReplicationRunsInput"}
-
-	if s.ReplicationJobId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ReplicationJobId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type GetReplicationRunsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The token required to retrieve the next set of results. This value is null
-	// when there are no more results to return.
-	NextToken *string `locationName:"nextToken" type:"string"`
-
-	// Information about the replication job.
-	ReplicationJob *ReplicationJob `locationName:"replicationJob" type:"structure"`
-
-	// Information about the replication runs.
-	ReplicationRunList []ReplicationRun `locationName:"replicationRunList" type:"list"`
-}
-
-// String returns the string representation
-func (s GetReplicationRunsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetReplicationRuns = "GetReplicationRuns"
 
@@ -79,7 +24,7 @@ const opGetReplicationRuns = "GetReplicationRuns"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sms-2016-10-24/GetReplicationRuns
-func (c *Client) GetReplicationRunsRequest(input *GetReplicationRunsInput) GetReplicationRunsRequest {
+func (c *Client) GetReplicationRunsRequest(input *types.GetReplicationRunsInput) GetReplicationRunsRequest {
 	op := &aws.Operation{
 		Name:       opGetReplicationRuns,
 		HTTPMethod: "POST",
@@ -93,10 +38,10 @@ func (c *Client) GetReplicationRunsRequest(input *GetReplicationRunsInput) GetRe
 	}
 
 	if input == nil {
-		input = &GetReplicationRunsInput{}
+		input = &types.GetReplicationRunsInput{}
 	}
 
-	req := c.newRequest(op, input, &GetReplicationRunsOutput{})
+	req := c.newRequest(op, input, &types.GetReplicationRunsOutput{})
 	return GetReplicationRunsRequest{Request: req, Input: input, Copy: c.GetReplicationRunsRequest}
 }
 
@@ -104,8 +49,8 @@ func (c *Client) GetReplicationRunsRequest(input *GetReplicationRunsInput) GetRe
 // GetReplicationRuns API operation.
 type GetReplicationRunsRequest struct {
 	*aws.Request
-	Input *GetReplicationRunsInput
-	Copy  func(*GetReplicationRunsInput) GetReplicationRunsRequest
+	Input *types.GetReplicationRunsInput
+	Copy  func(*types.GetReplicationRunsInput) GetReplicationRunsRequest
 }
 
 // Send marshals and sends the GetReplicationRuns API request.
@@ -117,7 +62,7 @@ func (r GetReplicationRunsRequest) Send(ctx context.Context) (*GetReplicationRun
 	}
 
 	resp := &GetReplicationRunsResponse{
-		GetReplicationRunsOutput: r.Request.Data.(*GetReplicationRunsOutput),
+		GetReplicationRunsOutput: r.Request.Data.(*types.GetReplicationRunsOutput),
 		response:                 &aws.Response{Request: r.Request},
 	}
 
@@ -147,7 +92,7 @@ func NewGetReplicationRunsPaginator(req GetReplicationRunsRequest) GetReplicatio
 	return GetReplicationRunsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *GetReplicationRunsInput
+				var inCpy *types.GetReplicationRunsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -167,14 +112,14 @@ type GetReplicationRunsPaginator struct {
 	aws.Pager
 }
 
-func (p *GetReplicationRunsPaginator) CurrentPage() *GetReplicationRunsOutput {
-	return p.Pager.CurrentPage().(*GetReplicationRunsOutput)
+func (p *GetReplicationRunsPaginator) CurrentPage() *types.GetReplicationRunsOutput {
+	return p.Pager.CurrentPage().(*types.GetReplicationRunsOutput)
 }
 
 // GetReplicationRunsResponse is the response type for the
 // GetReplicationRuns API operation.
 type GetReplicationRunsResponse struct {
-	*GetReplicationRunsOutput
+	*types.GetReplicationRunsOutput
 
 	response *aws.Response
 }

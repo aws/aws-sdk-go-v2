@@ -6,116 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/kafka/types"
 )
-
-// Request body for UpdateBrokerCount.
-type UpdateBrokerCountInput struct {
-	_ struct{} `type:"structure"`
-
-	// ClusterArn is a required field
-	ClusterArn *string `location:"uri" locationName:"clusterArn" type:"string" required:"true"`
-
-	// The current version of the cluster.
-	//
-	// CurrentVersion is a required field
-	CurrentVersion *string `locationName:"currentVersion" type:"string" required:"true"`
-
-	// The number of broker nodes that you want the cluster to have after this operation
-	// completes successfully.
-	//
-	// TargetNumberOfBrokerNodes is a required field
-	TargetNumberOfBrokerNodes *int64 `locationName:"targetNumberOfBrokerNodes" min:"1" type:"integer" required:"true"`
-}
-
-// String returns the string representation
-func (s UpdateBrokerCountInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateBrokerCountInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateBrokerCountInput"}
-
-	if s.ClusterArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ClusterArn"))
-	}
-
-	if s.CurrentVersion == nil {
-		invalidParams.Add(aws.NewErrParamRequired("CurrentVersion"))
-	}
-
-	if s.TargetNumberOfBrokerNodes == nil {
-		invalidParams.Add(aws.NewErrParamRequired("TargetNumberOfBrokerNodes"))
-	}
-	if s.TargetNumberOfBrokerNodes != nil && *s.TargetNumberOfBrokerNodes < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("TargetNumberOfBrokerNodes", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s UpdateBrokerCountInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.CurrentVersion != nil {
-		v := *s.CurrentVersion
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "currentVersion", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.TargetNumberOfBrokerNodes != nil {
-		v := *s.TargetNumberOfBrokerNodes
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "targetNumberOfBrokerNodes", protocol.Int64Value(v), metadata)
-	}
-	if s.ClusterArn != nil {
-		v := *s.ClusterArn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "clusterArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-// Response body for UpdateBrokerCount.
-type UpdateBrokerCountOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the cluster.
-	ClusterArn *string `locationName:"clusterArn" type:"string"`
-
-	// The Amazon Resource Name (ARN) of the cluster operation.
-	ClusterOperationArn *string `locationName:"clusterOperationArn" type:"string"`
-}
-
-// String returns the string representation
-func (s UpdateBrokerCountOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s UpdateBrokerCountOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.ClusterArn != nil {
-		v := *s.ClusterArn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "clusterArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.ClusterOperationArn != nil {
-		v := *s.ClusterOperationArn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "clusterOperationArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opUpdateBrokerCount = "UpdateBrokerCount"
 
@@ -134,7 +26,7 @@ const opUpdateBrokerCount = "UpdateBrokerCount"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/UpdateBrokerCount
-func (c *Client) UpdateBrokerCountRequest(input *UpdateBrokerCountInput) UpdateBrokerCountRequest {
+func (c *Client) UpdateBrokerCountRequest(input *types.UpdateBrokerCountInput) UpdateBrokerCountRequest {
 	op := &aws.Operation{
 		Name:       opUpdateBrokerCount,
 		HTTPMethod: "PUT",
@@ -142,10 +34,10 @@ func (c *Client) UpdateBrokerCountRequest(input *UpdateBrokerCountInput) UpdateB
 	}
 
 	if input == nil {
-		input = &UpdateBrokerCountInput{}
+		input = &types.UpdateBrokerCountInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateBrokerCountOutput{})
+	req := c.newRequest(op, input, &types.UpdateBrokerCountOutput{})
 	return UpdateBrokerCountRequest{Request: req, Input: input, Copy: c.UpdateBrokerCountRequest}
 }
 
@@ -153,8 +45,8 @@ func (c *Client) UpdateBrokerCountRequest(input *UpdateBrokerCountInput) UpdateB
 // UpdateBrokerCount API operation.
 type UpdateBrokerCountRequest struct {
 	*aws.Request
-	Input *UpdateBrokerCountInput
-	Copy  func(*UpdateBrokerCountInput) UpdateBrokerCountRequest
+	Input *types.UpdateBrokerCountInput
+	Copy  func(*types.UpdateBrokerCountInput) UpdateBrokerCountRequest
 }
 
 // Send marshals and sends the UpdateBrokerCount API request.
@@ -166,7 +58,7 @@ func (r UpdateBrokerCountRequest) Send(ctx context.Context) (*UpdateBrokerCountR
 	}
 
 	resp := &UpdateBrokerCountResponse{
-		UpdateBrokerCountOutput: r.Request.Data.(*UpdateBrokerCountOutput),
+		UpdateBrokerCountOutput: r.Request.Data.(*types.UpdateBrokerCountOutput),
 		response:                &aws.Response{Request: r.Request},
 	}
 
@@ -176,7 +68,7 @@ func (r UpdateBrokerCountRequest) Send(ctx context.Context) (*UpdateBrokerCountR
 // UpdateBrokerCountResponse is the response type for the
 // UpdateBrokerCount API operation.
 type UpdateBrokerCountResponse struct {
-	*UpdateBrokerCountOutput
+	*types.UpdateBrokerCountOutput
 
 	response *aws.Response
 }

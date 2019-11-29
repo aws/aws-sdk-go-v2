@@ -6,47 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
 )
-
-type StopNotebookInstanceInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the notebook instance to terminate.
-	//
-	// NotebookInstanceName is a required field
-	NotebookInstanceName *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s StopNotebookInstanceInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *StopNotebookInstanceInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "StopNotebookInstanceInput"}
-
-	if s.NotebookInstanceName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("NotebookInstanceName"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type StopNotebookInstanceOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s StopNotebookInstanceOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opStopNotebookInstance = "StopNotebookInstance"
 
@@ -71,7 +34,7 @@ const opStopNotebookInstance = "StopNotebookInstance"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/StopNotebookInstance
-func (c *Client) StopNotebookInstanceRequest(input *StopNotebookInstanceInput) StopNotebookInstanceRequest {
+func (c *Client) StopNotebookInstanceRequest(input *types.StopNotebookInstanceInput) StopNotebookInstanceRequest {
 	op := &aws.Operation{
 		Name:       opStopNotebookInstance,
 		HTTPMethod: "POST",
@@ -79,10 +42,10 @@ func (c *Client) StopNotebookInstanceRequest(input *StopNotebookInstanceInput) S
 	}
 
 	if input == nil {
-		input = &StopNotebookInstanceInput{}
+		input = &types.StopNotebookInstanceInput{}
 	}
 
-	req := c.newRequest(op, input, &StopNotebookInstanceOutput{})
+	req := c.newRequest(op, input, &types.StopNotebookInstanceOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return StopNotebookInstanceRequest{Request: req, Input: input, Copy: c.StopNotebookInstanceRequest}
@@ -92,8 +55,8 @@ func (c *Client) StopNotebookInstanceRequest(input *StopNotebookInstanceInput) S
 // StopNotebookInstance API operation.
 type StopNotebookInstanceRequest struct {
 	*aws.Request
-	Input *StopNotebookInstanceInput
-	Copy  func(*StopNotebookInstanceInput) StopNotebookInstanceRequest
+	Input *types.StopNotebookInstanceInput
+	Copy  func(*types.StopNotebookInstanceInput) StopNotebookInstanceRequest
 }
 
 // Send marshals and sends the StopNotebookInstance API request.
@@ -105,7 +68,7 @@ func (r StopNotebookInstanceRequest) Send(ctx context.Context) (*StopNotebookIns
 	}
 
 	resp := &StopNotebookInstanceResponse{
-		StopNotebookInstanceOutput: r.Request.Data.(*StopNotebookInstanceOutput),
+		StopNotebookInstanceOutput: r.Request.Data.(*types.StopNotebookInstanceOutput),
 		response:                   &aws.Response{Request: r.Request},
 	}
 
@@ -115,7 +78,7 @@ func (r StopNotebookInstanceRequest) Send(ctx context.Context) (*StopNotebookIns
 // StopNotebookInstanceResponse is the response type for the
 // StopNotebookInstance API operation.
 type StopNotebookInstanceResponse struct {
-	*StopNotebookInstanceOutput
+	*types.StopNotebookInstanceOutput
 
 	response *aws.Response
 }

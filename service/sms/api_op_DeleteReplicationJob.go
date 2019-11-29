@@ -6,45 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/sms/types"
 )
-
-type DeleteReplicationJobInput struct {
-	_ struct{} `type:"structure"`
-
-	// The identifier of the replication job.
-	//
-	// ReplicationJobId is a required field
-	ReplicationJobId *string `locationName:"replicationJobId" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteReplicationJobInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteReplicationJobInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteReplicationJobInput"}
-
-	if s.ReplicationJobId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ReplicationJobId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteReplicationJobOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteReplicationJobOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteReplicationJob = "DeleteReplicationJob"
 
@@ -65,7 +28,7 @@ const opDeleteReplicationJob = "DeleteReplicationJob"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sms-2016-10-24/DeleteReplicationJob
-func (c *Client) DeleteReplicationJobRequest(input *DeleteReplicationJobInput) DeleteReplicationJobRequest {
+func (c *Client) DeleteReplicationJobRequest(input *types.DeleteReplicationJobInput) DeleteReplicationJobRequest {
 	op := &aws.Operation{
 		Name:       opDeleteReplicationJob,
 		HTTPMethod: "POST",
@@ -73,10 +36,10 @@ func (c *Client) DeleteReplicationJobRequest(input *DeleteReplicationJobInput) D
 	}
 
 	if input == nil {
-		input = &DeleteReplicationJobInput{}
+		input = &types.DeleteReplicationJobInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteReplicationJobOutput{})
+	req := c.newRequest(op, input, &types.DeleteReplicationJobOutput{})
 	return DeleteReplicationJobRequest{Request: req, Input: input, Copy: c.DeleteReplicationJobRequest}
 }
 
@@ -84,8 +47,8 @@ func (c *Client) DeleteReplicationJobRequest(input *DeleteReplicationJobInput) D
 // DeleteReplicationJob API operation.
 type DeleteReplicationJobRequest struct {
 	*aws.Request
-	Input *DeleteReplicationJobInput
-	Copy  func(*DeleteReplicationJobInput) DeleteReplicationJobRequest
+	Input *types.DeleteReplicationJobInput
+	Copy  func(*types.DeleteReplicationJobInput) DeleteReplicationJobRequest
 }
 
 // Send marshals and sends the DeleteReplicationJob API request.
@@ -97,7 +60,7 @@ func (r DeleteReplicationJobRequest) Send(ctx context.Context) (*DeleteReplicati
 	}
 
 	resp := &DeleteReplicationJobResponse{
-		DeleteReplicationJobOutput: r.Request.Data.(*DeleteReplicationJobOutput),
+		DeleteReplicationJobOutput: r.Request.Data.(*types.DeleteReplicationJobOutput),
 		response:                   &aws.Response{Request: r.Request},
 	}
 
@@ -107,7 +70,7 @@ func (r DeleteReplicationJobRequest) Send(ctx context.Context) (*DeleteReplicati
 // DeleteReplicationJobResponse is the response type for the
 // DeleteReplicationJob API operation.
 type DeleteReplicationJobResponse struct {
-	*DeleteReplicationJobOutput
+	*types.DeleteReplicationJobOutput
 
 	response *aws.Response
 }

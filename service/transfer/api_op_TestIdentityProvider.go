@@ -6,74 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/transfer/types"
 )
-
-type TestIdentityProviderInput struct {
-	_ struct{} `type:"structure"`
-
-	// A system-assigned identifier for a specific server. That server's user authentication
-	// method is tested with a user name and password.
-	//
-	// ServerId is a required field
-	ServerId *string `type:"string" required:"true"`
-
-	// This request parameter is the name of the user account to be tested.
-	//
-	// UserName is a required field
-	UserName *string `type:"string" required:"true"`
-
-	// The password of the user account to be tested.
-	UserPassword *string `type:"string" sensitive:"true"`
-}
-
-// String returns the string representation
-func (s TestIdentityProviderInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *TestIdentityProviderInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "TestIdentityProviderInput"}
-
-	if s.ServerId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ServerId"))
-	}
-
-	if s.UserName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("UserName"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type TestIdentityProviderOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A message that indicates whether the test was successful or not.
-	Message *string `type:"string"`
-
-	// The response that is returned from your API Gateway.
-	Response *string `type:"string"`
-
-	// The HTTP status code that is the response from your API Gateway.
-	//
-	// StatusCode is a required field
-	StatusCode *int64 `type:"integer" required:"true"`
-
-	// The endpoint of the service used to authenticate a user.
-	//
-	// Url is a required field
-	Url *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s TestIdentityProviderOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opTestIdentityProvider = "TestIdentityProvider"
 
@@ -94,7 +28,7 @@ const opTestIdentityProvider = "TestIdentityProvider"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/TestIdentityProvider
-func (c *Client) TestIdentityProviderRequest(input *TestIdentityProviderInput) TestIdentityProviderRequest {
+func (c *Client) TestIdentityProviderRequest(input *types.TestIdentityProviderInput) TestIdentityProviderRequest {
 	op := &aws.Operation{
 		Name:       opTestIdentityProvider,
 		HTTPMethod: "POST",
@@ -102,10 +36,10 @@ func (c *Client) TestIdentityProviderRequest(input *TestIdentityProviderInput) T
 	}
 
 	if input == nil {
-		input = &TestIdentityProviderInput{}
+		input = &types.TestIdentityProviderInput{}
 	}
 
-	req := c.newRequest(op, input, &TestIdentityProviderOutput{})
+	req := c.newRequest(op, input, &types.TestIdentityProviderOutput{})
 	return TestIdentityProviderRequest{Request: req, Input: input, Copy: c.TestIdentityProviderRequest}
 }
 
@@ -113,8 +47,8 @@ func (c *Client) TestIdentityProviderRequest(input *TestIdentityProviderInput) T
 // TestIdentityProvider API operation.
 type TestIdentityProviderRequest struct {
 	*aws.Request
-	Input *TestIdentityProviderInput
-	Copy  func(*TestIdentityProviderInput) TestIdentityProviderRequest
+	Input *types.TestIdentityProviderInput
+	Copy  func(*types.TestIdentityProviderInput) TestIdentityProviderRequest
 }
 
 // Send marshals and sends the TestIdentityProvider API request.
@@ -126,7 +60,7 @@ func (r TestIdentityProviderRequest) Send(ctx context.Context) (*TestIdentityPro
 	}
 
 	resp := &TestIdentityProviderResponse{
-		TestIdentityProviderOutput: r.Request.Data.(*TestIdentityProviderOutput),
+		TestIdentityProviderOutput: r.Request.Data.(*types.TestIdentityProviderOutput),
 		response:                   &aws.Response{Request: r.Request},
 	}
 
@@ -136,7 +70,7 @@ func (r TestIdentityProviderRequest) Send(ctx context.Context) (*TestIdentityPro
 // TestIdentityProviderResponse is the response type for the
 // TestIdentityProvider API operation.
 type TestIdentityProviderResponse struct {
-	*TestIdentityProviderOutput
+	*types.TestIdentityProviderOutput
 
 	response *aws.Response
 }

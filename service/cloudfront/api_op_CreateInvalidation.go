@@ -6,104 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/cloudfront/types"
 )
-
-// The request to create an invalidation.
-type CreateInvalidationInput struct {
-	_ struct{} `type:"structure" payload:"InvalidationBatch"`
-
-	// The distribution's id.
-	//
-	// DistributionId is a required field
-	DistributionId *string `location:"uri" locationName:"DistributionId" type:"string" required:"true"`
-
-	// The batch information for the invalidation.
-	//
-	// InvalidationBatch is a required field
-	InvalidationBatch *InvalidationBatch `locationName:"InvalidationBatch" type:"structure" required:"true" xmlURI:"http://cloudfront.amazonaws.com/doc/2019-03-26/"`
-}
-
-// String returns the string representation
-func (s CreateInvalidationInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateInvalidationInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateInvalidationInput"}
-
-	if s.DistributionId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DistributionId"))
-	}
-
-	if s.InvalidationBatch == nil {
-		invalidParams.Add(aws.NewErrParamRequired("InvalidationBatch"))
-	}
-	if s.InvalidationBatch != nil {
-		if err := s.InvalidationBatch.Validate(); err != nil {
-			invalidParams.AddNested("InvalidationBatch", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s CreateInvalidationInput) MarshalFields(e protocol.FieldEncoder) error {
-
-	if s.DistributionId != nil {
-		v := *s.DistributionId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "DistributionId", protocol.StringValue(v), metadata)
-	}
-	if s.InvalidationBatch != nil {
-		v := s.InvalidationBatch
-
-		metadata := protocol.Metadata{XMLNamespaceURI: "http://cloudfront.amazonaws.com/doc/2019-03-26/"}
-		e.SetFields(protocol.PayloadTarget, "InvalidationBatch", v, metadata)
-	}
-	return nil
-}
-
-// The returned result of the corresponding request.
-type CreateInvalidationOutput struct {
-	_ struct{} `type:"structure" payload:"Invalidation"`
-
-	// The invalidation's information.
-	Invalidation *Invalidation `type:"structure"`
-
-	// The fully qualified URI of the distribution and invalidation batch request,
-	// including the Invalidation ID.
-	Location *string `location:"header" locationName:"Location" type:"string"`
-}
-
-// String returns the string representation
-func (s CreateInvalidationOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s CreateInvalidationOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.Location != nil {
-		v := *s.Location
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "Location", protocol.StringValue(v), metadata)
-	}
-	if s.Invalidation != nil {
-		v := s.Invalidation
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.PayloadTarget, "Invalidation", v, metadata)
-	}
-	return nil
-}
 
 const opCreateInvalidation = "CreateInvalidation2019_03_26"
 
@@ -120,7 +24,7 @@ const opCreateInvalidation = "CreateInvalidation2019_03_26"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/CreateInvalidation
-func (c *Client) CreateInvalidationRequest(input *CreateInvalidationInput) CreateInvalidationRequest {
+func (c *Client) CreateInvalidationRequest(input *types.CreateInvalidationInput) CreateInvalidationRequest {
 	op := &aws.Operation{
 		Name:       opCreateInvalidation,
 		HTTPMethod: "POST",
@@ -128,10 +32,10 @@ func (c *Client) CreateInvalidationRequest(input *CreateInvalidationInput) Creat
 	}
 
 	if input == nil {
-		input = &CreateInvalidationInput{}
+		input = &types.CreateInvalidationInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateInvalidationOutput{})
+	req := c.newRequest(op, input, &types.CreateInvalidationOutput{})
 	return CreateInvalidationRequest{Request: req, Input: input, Copy: c.CreateInvalidationRequest}
 }
 
@@ -139,8 +43,8 @@ func (c *Client) CreateInvalidationRequest(input *CreateInvalidationInput) Creat
 // CreateInvalidation API operation.
 type CreateInvalidationRequest struct {
 	*aws.Request
-	Input *CreateInvalidationInput
-	Copy  func(*CreateInvalidationInput) CreateInvalidationRequest
+	Input *types.CreateInvalidationInput
+	Copy  func(*types.CreateInvalidationInput) CreateInvalidationRequest
 }
 
 // Send marshals and sends the CreateInvalidation API request.
@@ -152,7 +56,7 @@ func (r CreateInvalidationRequest) Send(ctx context.Context) (*CreateInvalidatio
 	}
 
 	resp := &CreateInvalidationResponse{
-		CreateInvalidationOutput: r.Request.Data.(*CreateInvalidationOutput),
+		CreateInvalidationOutput: r.Request.Data.(*types.CreateInvalidationOutput),
 		response:                 &aws.Response{Request: r.Request},
 	}
 
@@ -162,7 +66,7 @@ func (r CreateInvalidationRequest) Send(ctx context.Context) (*CreateInvalidatio
 // CreateInvalidationResponse is the response type for the
 // CreateInvalidation API operation.
 type CreateInvalidationResponse struct {
-	*CreateInvalidationOutput
+	*types.CreateInvalidationOutput
 
 	response *aws.Response
 }

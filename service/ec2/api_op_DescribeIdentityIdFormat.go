@@ -6,58 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-type DescribeIdentityIdFormatInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ARN of the principal, which can be an IAM role, IAM user, or the root
-	// user.
-	//
-	// PrincipalArn is a required field
-	PrincipalArn *string `locationName:"principalArn" type:"string" required:"true"`
-
-	// The type of resource: bundle | conversion-task | customer-gateway | dhcp-options
-	// | elastic-ip-allocation | elastic-ip-association | export-task | flow-log
-	// | image | import-task | instance | internet-gateway | network-acl | network-acl-association
-	// | network-interface | network-interface-attachment | prefix-list | reservation
-	// | route-table | route-table-association | security-group | snapshot | subnet
-	// | subnet-cidr-block-association | volume | vpc | vpc-cidr-block-association
-	// | vpc-endpoint | vpc-peering-connection | vpn-connection | vpn-gateway
-	Resource *string `locationName:"resource" type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeIdentityIdFormatInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeIdentityIdFormatInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeIdentityIdFormatInput"}
-
-	if s.PrincipalArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("PrincipalArn"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribeIdentityIdFormatOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Information about the ID format for the resources.
-	Statuses []IdFormat `locationName:"statusSet" locationNameList:"item" type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeIdentityIdFormatOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeIdentityIdFormat = "DescribeIdentityIdFormat"
 
@@ -90,7 +40,7 @@ const opDescribeIdentityIdFormat = "DescribeIdentityIdFormat"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeIdentityIdFormat
-func (c *Client) DescribeIdentityIdFormatRequest(input *DescribeIdentityIdFormatInput) DescribeIdentityIdFormatRequest {
+func (c *Client) DescribeIdentityIdFormatRequest(input *types.DescribeIdentityIdFormatInput) DescribeIdentityIdFormatRequest {
 	op := &aws.Operation{
 		Name:       opDescribeIdentityIdFormat,
 		HTTPMethod: "POST",
@@ -98,10 +48,10 @@ func (c *Client) DescribeIdentityIdFormatRequest(input *DescribeIdentityIdFormat
 	}
 
 	if input == nil {
-		input = &DescribeIdentityIdFormatInput{}
+		input = &types.DescribeIdentityIdFormatInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeIdentityIdFormatOutput{})
+	req := c.newRequest(op, input, &types.DescribeIdentityIdFormatOutput{})
 	return DescribeIdentityIdFormatRequest{Request: req, Input: input, Copy: c.DescribeIdentityIdFormatRequest}
 }
 
@@ -109,8 +59,8 @@ func (c *Client) DescribeIdentityIdFormatRequest(input *DescribeIdentityIdFormat
 // DescribeIdentityIdFormat API operation.
 type DescribeIdentityIdFormatRequest struct {
 	*aws.Request
-	Input *DescribeIdentityIdFormatInput
-	Copy  func(*DescribeIdentityIdFormatInput) DescribeIdentityIdFormatRequest
+	Input *types.DescribeIdentityIdFormatInput
+	Copy  func(*types.DescribeIdentityIdFormatInput) DescribeIdentityIdFormatRequest
 }
 
 // Send marshals and sends the DescribeIdentityIdFormat API request.
@@ -122,7 +72,7 @@ func (r DescribeIdentityIdFormatRequest) Send(ctx context.Context) (*DescribeIde
 	}
 
 	resp := &DescribeIdentityIdFormatResponse{
-		DescribeIdentityIdFormatOutput: r.Request.Data.(*DescribeIdentityIdFormatOutput),
+		DescribeIdentityIdFormatOutput: r.Request.Data.(*types.DescribeIdentityIdFormatOutput),
 		response:                       &aws.Response{Request: r.Request},
 	}
 
@@ -132,7 +82,7 @@ func (r DescribeIdentityIdFormatRequest) Send(ctx context.Context) (*DescribeIde
 // DescribeIdentityIdFormatResponse is the response type for the
 // DescribeIdentityIdFormat API operation.
 type DescribeIdentityIdFormatResponse struct {
-	*DescribeIdentityIdFormatOutput
+	*types.DescribeIdentityIdFormatOutput
 
 	response *aws.Response
 }

@@ -6,55 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/glue/types"
 )
-
-type BatchGetDevEndpointsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The list of DevEndpoint names, which might be the names returned from the
-	// ListDevEndpoint operation.
-	//
-	// DevEndpointNames is a required field
-	DevEndpointNames []string `min:"1" type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s BatchGetDevEndpointsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *BatchGetDevEndpointsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "BatchGetDevEndpointsInput"}
-
-	if s.DevEndpointNames == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DevEndpointNames"))
-	}
-	if s.DevEndpointNames != nil && len(s.DevEndpointNames) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("DevEndpointNames", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type BatchGetDevEndpointsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A list of DevEndpoint definitions.
-	DevEndpoints []DevEndpoint `type:"list"`
-
-	// A list of DevEndpoints not found.
-	DevEndpointsNotFound []string `min:"1" type:"list"`
-}
-
-// String returns the string representation
-func (s BatchGetDevEndpointsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opBatchGetDevEndpoints = "BatchGetDevEndpoints"
 
@@ -74,7 +27,7 @@ const opBatchGetDevEndpoints = "BatchGetDevEndpoints"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/BatchGetDevEndpoints
-func (c *Client) BatchGetDevEndpointsRequest(input *BatchGetDevEndpointsInput) BatchGetDevEndpointsRequest {
+func (c *Client) BatchGetDevEndpointsRequest(input *types.BatchGetDevEndpointsInput) BatchGetDevEndpointsRequest {
 	op := &aws.Operation{
 		Name:       opBatchGetDevEndpoints,
 		HTTPMethod: "POST",
@@ -82,10 +35,10 @@ func (c *Client) BatchGetDevEndpointsRequest(input *BatchGetDevEndpointsInput) B
 	}
 
 	if input == nil {
-		input = &BatchGetDevEndpointsInput{}
+		input = &types.BatchGetDevEndpointsInput{}
 	}
 
-	req := c.newRequest(op, input, &BatchGetDevEndpointsOutput{})
+	req := c.newRequest(op, input, &types.BatchGetDevEndpointsOutput{})
 	return BatchGetDevEndpointsRequest{Request: req, Input: input, Copy: c.BatchGetDevEndpointsRequest}
 }
 
@@ -93,8 +46,8 @@ func (c *Client) BatchGetDevEndpointsRequest(input *BatchGetDevEndpointsInput) B
 // BatchGetDevEndpoints API operation.
 type BatchGetDevEndpointsRequest struct {
 	*aws.Request
-	Input *BatchGetDevEndpointsInput
-	Copy  func(*BatchGetDevEndpointsInput) BatchGetDevEndpointsRequest
+	Input *types.BatchGetDevEndpointsInput
+	Copy  func(*types.BatchGetDevEndpointsInput) BatchGetDevEndpointsRequest
 }
 
 // Send marshals and sends the BatchGetDevEndpoints API request.
@@ -106,7 +59,7 @@ func (r BatchGetDevEndpointsRequest) Send(ctx context.Context) (*BatchGetDevEndp
 	}
 
 	resp := &BatchGetDevEndpointsResponse{
-		BatchGetDevEndpointsOutput: r.Request.Data.(*BatchGetDevEndpointsOutput),
+		BatchGetDevEndpointsOutput: r.Request.Data.(*types.BatchGetDevEndpointsOutput),
 		response:                   &aws.Response{Request: r.Request},
 	}
 
@@ -116,7 +69,7 @@ func (r BatchGetDevEndpointsRequest) Send(ctx context.Context) (*BatchGetDevEndp
 // BatchGetDevEndpointsResponse is the response type for the
 // BatchGetDevEndpoints API operation.
 type BatchGetDevEndpointsResponse struct {
-	*BatchGetDevEndpointsOutput
+	*types.BatchGetDevEndpointsOutput
 
 	response *aws.Response
 }

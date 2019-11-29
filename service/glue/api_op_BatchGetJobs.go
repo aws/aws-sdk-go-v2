@@ -6,52 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/glue/types"
 )
-
-type BatchGetJobsInput struct {
-	_ struct{} `type:"structure"`
-
-	// A list of job names, which might be the names returned from the ListJobs
-	// operation.
-	//
-	// JobNames is a required field
-	JobNames []string `type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s BatchGetJobsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *BatchGetJobsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "BatchGetJobsInput"}
-
-	if s.JobNames == nil {
-		invalidParams.Add(aws.NewErrParamRequired("JobNames"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type BatchGetJobsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A list of job definitions.
-	Jobs []Job `type:"list"`
-
-	// A list of names of jobs not found.
-	JobsNotFound []string `type:"list"`
-}
-
-// String returns the string representation
-func (s BatchGetJobsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opBatchGetJobs = "BatchGetJobs"
 
@@ -71,7 +27,7 @@ const opBatchGetJobs = "BatchGetJobs"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/BatchGetJobs
-func (c *Client) BatchGetJobsRequest(input *BatchGetJobsInput) BatchGetJobsRequest {
+func (c *Client) BatchGetJobsRequest(input *types.BatchGetJobsInput) BatchGetJobsRequest {
 	op := &aws.Operation{
 		Name:       opBatchGetJobs,
 		HTTPMethod: "POST",
@@ -79,10 +35,10 @@ func (c *Client) BatchGetJobsRequest(input *BatchGetJobsInput) BatchGetJobsReque
 	}
 
 	if input == nil {
-		input = &BatchGetJobsInput{}
+		input = &types.BatchGetJobsInput{}
 	}
 
-	req := c.newRequest(op, input, &BatchGetJobsOutput{})
+	req := c.newRequest(op, input, &types.BatchGetJobsOutput{})
 	return BatchGetJobsRequest{Request: req, Input: input, Copy: c.BatchGetJobsRequest}
 }
 
@@ -90,8 +46,8 @@ func (c *Client) BatchGetJobsRequest(input *BatchGetJobsInput) BatchGetJobsReque
 // BatchGetJobs API operation.
 type BatchGetJobsRequest struct {
 	*aws.Request
-	Input *BatchGetJobsInput
-	Copy  func(*BatchGetJobsInput) BatchGetJobsRequest
+	Input *types.BatchGetJobsInput
+	Copy  func(*types.BatchGetJobsInput) BatchGetJobsRequest
 }
 
 // Send marshals and sends the BatchGetJobs API request.
@@ -103,7 +59,7 @@ func (r BatchGetJobsRequest) Send(ctx context.Context) (*BatchGetJobsResponse, e
 	}
 
 	resp := &BatchGetJobsResponse{
-		BatchGetJobsOutput: r.Request.Data.(*BatchGetJobsOutput),
+		BatchGetJobsOutput: r.Request.Data.(*types.BatchGetJobsOutput),
 		response:           &aws.Response{Request: r.Request},
 	}
 
@@ -113,7 +69,7 @@ func (r BatchGetJobsRequest) Send(ctx context.Context) (*BatchGetJobsResponse, e
 // BatchGetJobsResponse is the response type for the
 // BatchGetJobs API operation.
 type BatchGetJobsResponse struct {
-	*BatchGetJobsOutput
+	*types.BatchGetJobsOutput
 
 	response *aws.Response
 }

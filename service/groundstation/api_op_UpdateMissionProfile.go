@@ -6,141 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/groundstation/types"
 )
-
-type UpdateMissionProfileInput struct {
-	_ struct{} `type:"structure"`
-
-	ContactPostPassDurationSeconds *int64 `locationName:"contactPostPassDurationSeconds" min:"1" type:"integer"`
-
-	ContactPrePassDurationSeconds *int64 `locationName:"contactPrePassDurationSeconds" min:"1" type:"integer"`
-
-	DataflowEdges [][]string `locationName:"dataflowEdges" type:"list"`
-
-	MinimumViableContactDurationSeconds *int64 `locationName:"minimumViableContactDurationSeconds" min:"1" type:"integer"`
-
-	// MissionProfileId is a required field
-	MissionProfileId *string `location:"uri" locationName:"missionProfileId" type:"string" required:"true"`
-
-	Name *string `locationName:"name" min:"1" type:"string"`
-
-	TrackingConfigArn *string `locationName:"trackingConfigArn" type:"string"`
-}
-
-// String returns the string representation
-func (s UpdateMissionProfileInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateMissionProfileInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateMissionProfileInput"}
-	if s.ContactPostPassDurationSeconds != nil && *s.ContactPostPassDurationSeconds < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("ContactPostPassDurationSeconds", 1))
-	}
-	if s.ContactPrePassDurationSeconds != nil && *s.ContactPrePassDurationSeconds < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("ContactPrePassDurationSeconds", 1))
-	}
-	if s.MinimumViableContactDurationSeconds != nil && *s.MinimumViableContactDurationSeconds < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MinimumViableContactDurationSeconds", 1))
-	}
-
-	if s.MissionProfileId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("MissionProfileId"))
-	}
-	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s UpdateMissionProfileInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.ContactPostPassDurationSeconds != nil {
-		v := *s.ContactPostPassDurationSeconds
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "contactPostPassDurationSeconds", protocol.Int64Value(v), metadata)
-	}
-	if s.ContactPrePassDurationSeconds != nil {
-		v := *s.ContactPrePassDurationSeconds
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "contactPrePassDurationSeconds", protocol.Int64Value(v), metadata)
-	}
-	if s.DataflowEdges != nil {
-		v := s.DataflowEdges
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "dataflowEdges", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls1 := ls0.List()
-			ls1.Start()
-			for _, v2 := range v1 {
-				ls1.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v2)})
-			}
-			ls1.End()
-		}
-		ls0.End()
-
-	}
-	if s.MinimumViableContactDurationSeconds != nil {
-		v := *s.MinimumViableContactDurationSeconds
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "minimumViableContactDurationSeconds", protocol.Int64Value(v), metadata)
-	}
-	if s.Name != nil {
-		v := *s.Name
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.TrackingConfigArn != nil {
-		v := *s.TrackingConfigArn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "trackingConfigArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.MissionProfileId != nil {
-		v := *s.MissionProfileId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "missionProfileId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type UpdateMissionProfileOutput struct {
-	_ struct{} `type:"structure"`
-
-	MissionProfileId *string `locationName:"missionProfileId" type:"string"`
-}
-
-// String returns the string representation
-func (s UpdateMissionProfileOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s UpdateMissionProfileOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.MissionProfileId != nil {
-		v := *s.MissionProfileId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "missionProfileId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opUpdateMissionProfile = "UpdateMissionProfile"
 
@@ -160,7 +27,7 @@ const opUpdateMissionProfile = "UpdateMissionProfile"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/groundstation-2019-05-23/UpdateMissionProfile
-func (c *Client) UpdateMissionProfileRequest(input *UpdateMissionProfileInput) UpdateMissionProfileRequest {
+func (c *Client) UpdateMissionProfileRequest(input *types.UpdateMissionProfileInput) UpdateMissionProfileRequest {
 	op := &aws.Operation{
 		Name:       opUpdateMissionProfile,
 		HTTPMethod: "PUT",
@@ -168,10 +35,10 @@ func (c *Client) UpdateMissionProfileRequest(input *UpdateMissionProfileInput) U
 	}
 
 	if input == nil {
-		input = &UpdateMissionProfileInput{}
+		input = &types.UpdateMissionProfileInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateMissionProfileOutput{})
+	req := c.newRequest(op, input, &types.UpdateMissionProfileOutput{})
 	return UpdateMissionProfileRequest{Request: req, Input: input, Copy: c.UpdateMissionProfileRequest}
 }
 
@@ -179,8 +46,8 @@ func (c *Client) UpdateMissionProfileRequest(input *UpdateMissionProfileInput) U
 // UpdateMissionProfile API operation.
 type UpdateMissionProfileRequest struct {
 	*aws.Request
-	Input *UpdateMissionProfileInput
-	Copy  func(*UpdateMissionProfileInput) UpdateMissionProfileRequest
+	Input *types.UpdateMissionProfileInput
+	Copy  func(*types.UpdateMissionProfileInput) UpdateMissionProfileRequest
 }
 
 // Send marshals and sends the UpdateMissionProfile API request.
@@ -192,7 +59,7 @@ func (r UpdateMissionProfileRequest) Send(ctx context.Context) (*UpdateMissionPr
 	}
 
 	resp := &UpdateMissionProfileResponse{
-		UpdateMissionProfileOutput: r.Request.Data.(*UpdateMissionProfileOutput),
+		UpdateMissionProfileOutput: r.Request.Data.(*types.UpdateMissionProfileOutput),
 		response:                   &aws.Response{Request: r.Request},
 	}
 
@@ -202,7 +69,7 @@ func (r UpdateMissionProfileRequest) Send(ctx context.Context) (*UpdateMissionPr
 // UpdateMissionProfileResponse is the response type for the
 // UpdateMissionProfile API operation.
 type UpdateMissionProfileResponse struct {
-	*UpdateMissionProfileOutput
+	*types.UpdateMissionProfileOutput
 
 	response *aws.Response
 }

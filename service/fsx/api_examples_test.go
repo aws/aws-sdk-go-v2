@@ -12,6 +12,8 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws/awserr"
 	"github.com/aws/aws-sdk-go-v2/aws/external"
 	"github.com/aws/aws-sdk-go-v2/service/fsx"
+	"github.com/aws/aws-sdk-go-v2/service/fsx/enums"
+	"github.com/aws/aws-sdk-go-v2/service/fsx/types"
 )
 
 var _ time.Duration
@@ -36,9 +38,9 @@ func ExampleClient_CreateBackupRequest_shared00() {
 	}
 
 	svc := fsx.New(cfg)
-	input := &fsx.CreateBackupInput{
+	input := &types.CreateBackupInput{
 		FileSystemId: aws.String("fs-0498eed5fe91001ec"),
-		Tags: []fsx.Tag{
+		Tags: []types.Tag{
 			{
 				Key:   aws.String("Name"),
 				Value: aws.String("MyBackup"),
@@ -89,9 +91,9 @@ func ExampleClient_CreateFileSystemRequest_shared00() {
 	}
 
 	svc := fsx.New(cfg)
-	input := &fsx.CreateFileSystemInput{
+	input := &types.CreateFileSystemInput{
 		ClientRequestToken: aws.String("a8ca07e4-61ec-4399-99f4-19853801bcd5"),
-		FileSystemType:     fsx.FileSystemTypeWindows,
+		FileSystemType:     enums.FileSystemTypeWindows,
 		KmsKeyId:           aws.String("arn:aws:kms:us-east-1:012345678912:key/0ff3ea8d-130e-4133-877f-93908b6fdbd6"),
 		SecurityGroupIds: []string{
 			"sg-edcd9784",
@@ -100,13 +102,13 @@ func ExampleClient_CreateFileSystemRequest_shared00() {
 		SubnetIds: []string{
 			"subnet-1234abcd",
 		},
-		Tags: []fsx.Tag{
+		Tags: []types.Tag{
 			{
 				Key:   aws.String("Name"),
 				Value: aws.String("MyFileSystem"),
 			},
 		},
-		WindowsConfiguration: &fsx.CreateFileSystemWindowsConfiguration{
+		WindowsConfiguration: &types.CreateFileSystemWindowsConfiguration{
 			ActiveDirectoryId:             aws.String("d-1234abcd12"),
 			AutomaticBackupRetentionDays:  aws.Int64(30),
 			DailyAutomaticBackupStartTime: aws.String("05:00"),
@@ -162,7 +164,7 @@ func ExampleClient_CreateFileSystemFromBackupRequest_shared00() {
 	}
 
 	svc := fsx.New(cfg)
-	input := &fsx.CreateFileSystemFromBackupInput{
+	input := &types.CreateFileSystemFromBackupInput{
 		BackupId:           aws.String("backup-03e3c82e0183b7b6b"),
 		ClientRequestToken: aws.String("f4c94ed7-238d-4c46-93db-48cd62ec33b7"),
 		SecurityGroupIds: []string{
@@ -171,13 +173,13 @@ func ExampleClient_CreateFileSystemFromBackupRequest_shared00() {
 		SubnetIds: []string{
 			"subnet-1234abcd",
 		},
-		Tags: []fsx.Tag{
+		Tags: []types.Tag{
 			{
 				Key:   aws.String("Name"),
 				Value: aws.String("MyFileSystem"),
 			},
 		},
-		WindowsConfiguration: &fsx.CreateFileSystemWindowsConfiguration{
+		WindowsConfiguration: &types.CreateFileSystemWindowsConfiguration{
 			ThroughputCapacity: aws.Int64(8),
 		},
 	}
@@ -227,7 +229,7 @@ func ExampleClient_DeleteBackupRequest_shared00() {
 	}
 
 	svc := fsx.New(cfg)
-	input := &fsx.DeleteBackupInput{
+	input := &types.DeleteBackupInput{
 		BackupId: aws.String("backup-03e3c82e0183b7b6b"),
 	}
 
@@ -272,7 +274,7 @@ func ExampleClient_DeleteFileSystemRequest_shared00() {
 	}
 
 	svc := fsx.New(cfg)
-	input := &fsx.DeleteFileSystemInput{
+	input := &types.DeleteFileSystemInput{
 		FileSystemId: aws.String("fs-0498eed5fe91001ec"),
 	}
 
@@ -315,7 +317,7 @@ func ExampleClient_DescribeBackupsRequest_shared00() {
 	}
 
 	svc := fsx.New(cfg)
-	input := &fsx.DescribeBackupsInput{}
+	input := &types.DescribeBackupsInput{}
 
 	req := svc.DescribeBackupsRequest(input)
 	result, err := req.Send(context.Background())
@@ -354,7 +356,7 @@ func ExampleClient_DescribeFileSystemsRequest_shared00() {
 	}
 
 	svc := fsx.New(cfg)
-	input := &fsx.DescribeFileSystemsInput{}
+	input := &types.DescribeFileSystemsInput{}
 
 	req := svc.DescribeFileSystemsRequest(input)
 	result, err := req.Send(context.Background())
@@ -391,7 +393,7 @@ func ExampleClient_ListTagsForResourceRequest_shared00() {
 	}
 
 	svc := fsx.New(cfg)
-	input := &fsx.ListTagsForResourceInput{
+	input := &types.ListTagsForResourceInput{
 		ResourceARN: aws.String("arn:aws:fsx:us-east-1:012345678912:file-system/fs-0498eed5fe91001ec"),
 	}
 
@@ -434,9 +436,9 @@ func ExampleClient_TagResourceRequest_shared00() {
 	}
 
 	svc := fsx.New(cfg)
-	input := &fsx.TagResourceInput{
+	input := &types.TagResourceInput{
 		ResourceARN: aws.String("arn:aws:fsx:us-east-1:012345678912:file-system/fs-0498eed5fe91001ec"),
-		Tags: []fsx.Tag{
+		Tags: []types.Tag{
 			{
 				Key:   aws.String("Name"),
 				Value: aws.String("MyFileSystem"),
@@ -483,7 +485,7 @@ func ExampleClient_UntagResourceRequest_shared00() {
 	}
 
 	svc := fsx.New(cfg)
-	input := &fsx.UntagResourceInput{
+	input := &types.UntagResourceInput{
 		ResourceARN: aws.String("arn:aws:fsx:us-east-1:012345678912:file-system/fs-0498eed5fe91001ec"),
 		TagKeys: []string{
 			"Name",
@@ -529,9 +531,9 @@ func ExampleClient_UpdateFileSystemRequest_shared00() {
 	}
 
 	svc := fsx.New(cfg)
-	input := &fsx.UpdateFileSystemInput{
+	input := &types.UpdateFileSystemInput{
 		FileSystemId: aws.String("fs-0498eed5fe91001ec"),
-		WindowsConfiguration: &fsx.UpdateFileSystemWindowsConfiguration{
+		WindowsConfiguration: &types.UpdateFileSystemWindowsConfiguration{
 			AutomaticBackupRetentionDays:  aws.Int64(10),
 			DailyAutomaticBackupStartTime: aws.String("06:00"),
 			WeeklyMaintenanceStartTime:    aws.String("3:06:00"),

@@ -6,43 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/codepipeline/types"
 )
-
-type RegisterWebhookWithThirdPartyInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of an existing webhook created with PutWebhook to register with
-	// a supported third party.
-	WebhookName *string `locationName:"webhookName" min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s RegisterWebhookWithThirdPartyInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *RegisterWebhookWithThirdPartyInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "RegisterWebhookWithThirdPartyInput"}
-	if s.WebhookName != nil && len(*s.WebhookName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("WebhookName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type RegisterWebhookWithThirdPartyOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s RegisterWebhookWithThirdPartyOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opRegisterWebhookWithThirdParty = "RegisterWebhookWithThirdParty"
 
@@ -60,7 +25,7 @@ const opRegisterWebhookWithThirdParty = "RegisterWebhookWithThirdParty"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/RegisterWebhookWithThirdParty
-func (c *Client) RegisterWebhookWithThirdPartyRequest(input *RegisterWebhookWithThirdPartyInput) RegisterWebhookWithThirdPartyRequest {
+func (c *Client) RegisterWebhookWithThirdPartyRequest(input *types.RegisterWebhookWithThirdPartyInput) RegisterWebhookWithThirdPartyRequest {
 	op := &aws.Operation{
 		Name:       opRegisterWebhookWithThirdParty,
 		HTTPMethod: "POST",
@@ -68,10 +33,10 @@ func (c *Client) RegisterWebhookWithThirdPartyRequest(input *RegisterWebhookWith
 	}
 
 	if input == nil {
-		input = &RegisterWebhookWithThirdPartyInput{}
+		input = &types.RegisterWebhookWithThirdPartyInput{}
 	}
 
-	req := c.newRequest(op, input, &RegisterWebhookWithThirdPartyOutput{})
+	req := c.newRequest(op, input, &types.RegisterWebhookWithThirdPartyOutput{})
 	return RegisterWebhookWithThirdPartyRequest{Request: req, Input: input, Copy: c.RegisterWebhookWithThirdPartyRequest}
 }
 
@@ -79,8 +44,8 @@ func (c *Client) RegisterWebhookWithThirdPartyRequest(input *RegisterWebhookWith
 // RegisterWebhookWithThirdParty API operation.
 type RegisterWebhookWithThirdPartyRequest struct {
 	*aws.Request
-	Input *RegisterWebhookWithThirdPartyInput
-	Copy  func(*RegisterWebhookWithThirdPartyInput) RegisterWebhookWithThirdPartyRequest
+	Input *types.RegisterWebhookWithThirdPartyInput
+	Copy  func(*types.RegisterWebhookWithThirdPartyInput) RegisterWebhookWithThirdPartyRequest
 }
 
 // Send marshals and sends the RegisterWebhookWithThirdParty API request.
@@ -92,7 +57,7 @@ func (r RegisterWebhookWithThirdPartyRequest) Send(ctx context.Context) (*Regist
 	}
 
 	resp := &RegisterWebhookWithThirdPartyResponse{
-		RegisterWebhookWithThirdPartyOutput: r.Request.Data.(*RegisterWebhookWithThirdPartyOutput),
+		RegisterWebhookWithThirdPartyOutput: r.Request.Data.(*types.RegisterWebhookWithThirdPartyOutput),
 		response:                            &aws.Response{Request: r.Request},
 	}
 
@@ -102,7 +67,7 @@ func (r RegisterWebhookWithThirdPartyRequest) Send(ctx context.Context) (*Regist
 // RegisterWebhookWithThirdPartyResponse is the response type for the
 // RegisterWebhookWithThirdParty API operation.
 type RegisterWebhookWithThirdPartyResponse struct {
-	*RegisterWebhookWithThirdPartyOutput
+	*types.RegisterWebhookWithThirdPartyOutput
 
 	response *aws.Response
 }

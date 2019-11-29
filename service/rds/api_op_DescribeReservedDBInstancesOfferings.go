@@ -4,105 +4,10 @@ package rds
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/rds/types"
 )
-
-type DescribeReservedDBInstancesOfferingsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The DB instance class filter value. Specify this parameter to show only the
-	// available offerings matching the specified DB instance class.
-	DBInstanceClass *string `type:"string"`
-
-	// Duration filter value, specified in years or seconds. Specify this parameter
-	// to show only reservations for this duration.
-	//
-	// Valid Values: 1 | 3 | 31536000 | 94608000
-	Duration *string `type:"string"`
-
-	// This parameter is not currently supported.
-	Filters []Filter `locationNameList:"Filter" type:"list"`
-
-	// An optional pagination token provided by a previous request. If this parameter
-	// is specified, the response includes only records beyond the marker, up to
-	// the value specified by MaxRecords.
-	Marker *string `type:"string"`
-
-	// The maximum number of records to include in the response. If more than the
-	// MaxRecords value is available, a pagination token called a marker is included
-	// in the response so that you can retrieve the reamaining results.
-	//
-	// Default: 100
-	//
-	// Constraints: Minimum 20, maximum 100.
-	MaxRecords *int64 `type:"integer"`
-
-	// A value that indicates whether to show only those reservations that support
-	// Multi-AZ.
-	MultiAZ *bool `type:"boolean"`
-
-	// The offering type filter value. Specify this parameter to show only the available
-	// offerings matching the specified offering type.
-	//
-	// Valid Values: "Partial Upfront" | "All Upfront" | "No Upfront"
-	OfferingType *string `type:"string"`
-
-	// Product description filter value. Specify this parameter to show only the
-	// available offerings that contain the specified product description.
-	//
-	// The results show offerings that partially match the filter value.
-	ProductDescription *string `type:"string"`
-
-	// The offering identifier filter value. Specify this parameter to show only
-	// the available offering that matches the specified reservation identifier.
-	//
-	// Example: 438012d3-4052-4cc7-b2e3-8d3372e0e706
-	ReservedDBInstancesOfferingId *string `type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeReservedDBInstancesOfferingsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeReservedDBInstancesOfferingsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeReservedDBInstancesOfferingsInput"}
-	if s.Filters != nil {
-		for i, v := range s.Filters {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Contains the result of a successful invocation of the DescribeReservedDBInstancesOfferings
-// action.
-type DescribeReservedDBInstancesOfferingsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// An optional pagination token provided by a previous request. If this parameter
-	// is specified, the response includes only records beyond the marker, up to
-	// the value specified by MaxRecords.
-	Marker *string `type:"string"`
-
-	// A list of reserved DB instance offerings.
-	ReservedDBInstancesOfferings []ReservedDBInstancesOffering `locationNameList:"ReservedDBInstancesOffering" type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeReservedDBInstancesOfferingsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeReservedDBInstancesOfferings = "DescribeReservedDBInstancesOfferings"
 
@@ -119,7 +24,7 @@ const opDescribeReservedDBInstancesOfferings = "DescribeReservedDBInstancesOffer
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeReservedDBInstancesOfferings
-func (c *Client) DescribeReservedDBInstancesOfferingsRequest(input *DescribeReservedDBInstancesOfferingsInput) DescribeReservedDBInstancesOfferingsRequest {
+func (c *Client) DescribeReservedDBInstancesOfferingsRequest(input *types.DescribeReservedDBInstancesOfferingsInput) DescribeReservedDBInstancesOfferingsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeReservedDBInstancesOfferings,
 		HTTPMethod: "POST",
@@ -133,10 +38,10 @@ func (c *Client) DescribeReservedDBInstancesOfferingsRequest(input *DescribeRese
 	}
 
 	if input == nil {
-		input = &DescribeReservedDBInstancesOfferingsInput{}
+		input = &types.DescribeReservedDBInstancesOfferingsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeReservedDBInstancesOfferingsOutput{})
+	req := c.newRequest(op, input, &types.DescribeReservedDBInstancesOfferingsOutput{})
 	return DescribeReservedDBInstancesOfferingsRequest{Request: req, Input: input, Copy: c.DescribeReservedDBInstancesOfferingsRequest}
 }
 
@@ -144,8 +49,8 @@ func (c *Client) DescribeReservedDBInstancesOfferingsRequest(input *DescribeRese
 // DescribeReservedDBInstancesOfferings API operation.
 type DescribeReservedDBInstancesOfferingsRequest struct {
 	*aws.Request
-	Input *DescribeReservedDBInstancesOfferingsInput
-	Copy  func(*DescribeReservedDBInstancesOfferingsInput) DescribeReservedDBInstancesOfferingsRequest
+	Input *types.DescribeReservedDBInstancesOfferingsInput
+	Copy  func(*types.DescribeReservedDBInstancesOfferingsInput) DescribeReservedDBInstancesOfferingsRequest
 }
 
 // Send marshals and sends the DescribeReservedDBInstancesOfferings API request.
@@ -157,7 +62,7 @@ func (r DescribeReservedDBInstancesOfferingsRequest) Send(ctx context.Context) (
 	}
 
 	resp := &DescribeReservedDBInstancesOfferingsResponse{
-		DescribeReservedDBInstancesOfferingsOutput: r.Request.Data.(*DescribeReservedDBInstancesOfferingsOutput),
+		DescribeReservedDBInstancesOfferingsOutput: r.Request.Data.(*types.DescribeReservedDBInstancesOfferingsOutput),
 		response: &aws.Response{Request: r.Request},
 	}
 
@@ -187,7 +92,7 @@ func NewDescribeReservedDBInstancesOfferingsPaginator(req DescribeReservedDBInst
 	return DescribeReservedDBInstancesOfferingsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *DescribeReservedDBInstancesOfferingsInput
+				var inCpy *types.DescribeReservedDBInstancesOfferingsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -207,14 +112,14 @@ type DescribeReservedDBInstancesOfferingsPaginator struct {
 	aws.Pager
 }
 
-func (p *DescribeReservedDBInstancesOfferingsPaginator) CurrentPage() *DescribeReservedDBInstancesOfferingsOutput {
-	return p.Pager.CurrentPage().(*DescribeReservedDBInstancesOfferingsOutput)
+func (p *DescribeReservedDBInstancesOfferingsPaginator) CurrentPage() *types.DescribeReservedDBInstancesOfferingsOutput {
+	return p.Pager.CurrentPage().(*types.DescribeReservedDBInstancesOfferingsOutput)
 }
 
 // DescribeReservedDBInstancesOfferingsResponse is the response type for the
 // DescribeReservedDBInstancesOfferings API operation.
 type DescribeReservedDBInstancesOfferingsResponse struct {
-	*DescribeReservedDBInstancesOfferingsOutput
+	*types.DescribeReservedDBInstancesOfferingsOutput
 
 	response *aws.Response
 }

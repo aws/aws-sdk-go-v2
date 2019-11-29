@@ -6,119 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/apigateway/types"
 )
-
-// Requests API Gateway to get information about a Deployments collection.
-type GetDeploymentsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The maximum number of returned results per page. The default value is 25
-	// and the maximum value is 500.
-	Limit *int64 `location:"querystring" locationName:"limit" type:"integer"`
-
-	// The current pagination position in the paged result set.
-	Position *string `location:"querystring" locationName:"position" type:"string"`
-
-	// [Required] The string identifier of the associated RestApi.
-	//
-	// RestApiId is a required field
-	RestApiId *string `location:"uri" locationName:"restapi_id" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetDeploymentsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetDeploymentsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetDeploymentsInput"}
-
-	if s.RestApiId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("RestApiId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetDeploymentsInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.RestApiId != nil {
-		v := *s.RestApiId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "restapi_id", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Limit != nil {
-		v := *s.Limit
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "limit", protocol.Int64Value(v), metadata)
-	}
-	if s.Position != nil {
-		v := *s.Position
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "position", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-// Represents a collection resource that contains zero or more references to
-// your existing deployments, and links that guide you on how to interact with
-// your collection. The collection offers a paginated view of the contained
-// deployments.
-//
-// To create a new deployment of a RestApi, make a POST request against this
-// resource. To view, update, or delete an existing deployment, make a GET,
-// PATCH, or DELETE request, respectively, on a specified Deployment resource.
-//
-// Deploying an API (https://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-deploy-api.html),
-// AWS CLI (https://docs.aws.amazon.com/cli/latest/reference/apigateway/get-deployment.html),
-// AWS SDKs (https://aws.amazon.com/tools/)
-type GetDeploymentsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The current page of elements from this collection.
-	Items []Deployment `locationName:"item" type:"list"`
-
-	Position *string `locationName:"position" type:"string"`
-}
-
-// String returns the string representation
-func (s GetDeploymentsOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetDeploymentsOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.Items != nil {
-		v := s.Items
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "item", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	if s.Position != nil {
-		v := *s.Position
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "position", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opGetDeployments = "GetDeployments"
 
@@ -133,7 +22,7 @@ const opGetDeployments = "GetDeployments"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) GetDeploymentsRequest(input *GetDeploymentsInput) GetDeploymentsRequest {
+func (c *Client) GetDeploymentsRequest(input *types.GetDeploymentsInput) GetDeploymentsRequest {
 	op := &aws.Operation{
 		Name:       opGetDeployments,
 		HTTPMethod: "GET",
@@ -147,10 +36,10 @@ func (c *Client) GetDeploymentsRequest(input *GetDeploymentsInput) GetDeployment
 	}
 
 	if input == nil {
-		input = &GetDeploymentsInput{}
+		input = &types.GetDeploymentsInput{}
 	}
 
-	req := c.newRequest(op, input, &GetDeploymentsOutput{})
+	req := c.newRequest(op, input, &types.GetDeploymentsOutput{})
 	return GetDeploymentsRequest{Request: req, Input: input, Copy: c.GetDeploymentsRequest}
 }
 
@@ -158,8 +47,8 @@ func (c *Client) GetDeploymentsRequest(input *GetDeploymentsInput) GetDeployment
 // GetDeployments API operation.
 type GetDeploymentsRequest struct {
 	*aws.Request
-	Input *GetDeploymentsInput
-	Copy  func(*GetDeploymentsInput) GetDeploymentsRequest
+	Input *types.GetDeploymentsInput
+	Copy  func(*types.GetDeploymentsInput) GetDeploymentsRequest
 }
 
 // Send marshals and sends the GetDeployments API request.
@@ -171,7 +60,7 @@ func (r GetDeploymentsRequest) Send(ctx context.Context) (*GetDeploymentsRespons
 	}
 
 	resp := &GetDeploymentsResponse{
-		GetDeploymentsOutput: r.Request.Data.(*GetDeploymentsOutput),
+		GetDeploymentsOutput: r.Request.Data.(*types.GetDeploymentsOutput),
 		response:             &aws.Response{Request: r.Request},
 	}
 
@@ -201,7 +90,7 @@ func NewGetDeploymentsPaginator(req GetDeploymentsRequest) GetDeploymentsPaginat
 	return GetDeploymentsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *GetDeploymentsInput
+				var inCpy *types.GetDeploymentsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -221,14 +110,14 @@ type GetDeploymentsPaginator struct {
 	aws.Pager
 }
 
-func (p *GetDeploymentsPaginator) CurrentPage() *GetDeploymentsOutput {
-	return p.Pager.CurrentPage().(*GetDeploymentsOutput)
+func (p *GetDeploymentsPaginator) CurrentPage() *types.GetDeploymentsOutput {
+	return p.Pager.CurrentPage().(*types.GetDeploymentsOutput)
 }
 
 // GetDeploymentsResponse is the response type for the
 // GetDeployments API operation.
 type GetDeploymentsResponse struct {
-	*GetDeploymentsOutput
+	*types.GetDeploymentsOutput
 
 	response *aws.Response
 }

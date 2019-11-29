@@ -6,112 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/elastictranscoder/types"
 )
-
-// The ListJobsByPipelineRequest structure.
-type ListJobsByPipelineInput struct {
-	_ struct{} `type:"structure"`
-
-	// To list jobs in chronological order by the date and time that they were submitted,
-	// enter true. To list jobs in reverse chronological order, enter false.
-	Ascending *string `location:"querystring" locationName:"Ascending" type:"string"`
-
-	// When Elastic Transcoder returns more than one page of results, use pageToken
-	// in subsequent GET requests to get each successive page of results.
-	PageToken *string `location:"querystring" locationName:"PageToken" type:"string"`
-
-	// The ID of the pipeline for which you want to get job information.
-	//
-	// PipelineId is a required field
-	PipelineId *string `location:"uri" locationName:"PipelineId" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s ListJobsByPipelineInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListJobsByPipelineInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListJobsByPipelineInput"}
-
-	if s.PipelineId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("PipelineId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListJobsByPipelineInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.PipelineId != nil {
-		v := *s.PipelineId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "PipelineId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Ascending != nil {
-		v := *s.Ascending
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "Ascending", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.PageToken != nil {
-		v := *s.PageToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "PageToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-// The ListJobsByPipelineResponse structure.
-type ListJobsByPipelineOutput struct {
-	_ struct{} `type:"structure"`
-
-	// An array of Job objects that are in the specified pipeline.
-	Jobs []Job `type:"list"`
-
-	// A value that you use to access the second and subsequent pages of results,
-	// if any. When the jobs in the specified pipeline fit on one page or when you've
-	// reached the last page of results, the value of NextPageToken is null.
-	NextPageToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s ListJobsByPipelineOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListJobsByPipelineOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.Jobs != nil {
-		v := s.Jobs
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "Jobs", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	if s.NextPageToken != nil {
-		v := *s.NextPageToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "NextPageToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opListJobsByPipeline = "ListJobsByPipeline"
 
@@ -130,7 +26,7 @@ const opListJobsByPipeline = "ListJobsByPipeline"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) ListJobsByPipelineRequest(input *ListJobsByPipelineInput) ListJobsByPipelineRequest {
+func (c *Client) ListJobsByPipelineRequest(input *types.ListJobsByPipelineInput) ListJobsByPipelineRequest {
 	op := &aws.Operation{
 		Name:       opListJobsByPipeline,
 		HTTPMethod: "GET",
@@ -144,10 +40,10 @@ func (c *Client) ListJobsByPipelineRequest(input *ListJobsByPipelineInput) ListJ
 	}
 
 	if input == nil {
-		input = &ListJobsByPipelineInput{}
+		input = &types.ListJobsByPipelineInput{}
 	}
 
-	req := c.newRequest(op, input, &ListJobsByPipelineOutput{})
+	req := c.newRequest(op, input, &types.ListJobsByPipelineOutput{})
 	return ListJobsByPipelineRequest{Request: req, Input: input, Copy: c.ListJobsByPipelineRequest}
 }
 
@@ -155,8 +51,8 @@ func (c *Client) ListJobsByPipelineRequest(input *ListJobsByPipelineInput) ListJ
 // ListJobsByPipeline API operation.
 type ListJobsByPipelineRequest struct {
 	*aws.Request
-	Input *ListJobsByPipelineInput
-	Copy  func(*ListJobsByPipelineInput) ListJobsByPipelineRequest
+	Input *types.ListJobsByPipelineInput
+	Copy  func(*types.ListJobsByPipelineInput) ListJobsByPipelineRequest
 }
 
 // Send marshals and sends the ListJobsByPipeline API request.
@@ -168,7 +64,7 @@ func (r ListJobsByPipelineRequest) Send(ctx context.Context) (*ListJobsByPipelin
 	}
 
 	resp := &ListJobsByPipelineResponse{
-		ListJobsByPipelineOutput: r.Request.Data.(*ListJobsByPipelineOutput),
+		ListJobsByPipelineOutput: r.Request.Data.(*types.ListJobsByPipelineOutput),
 		response:                 &aws.Response{Request: r.Request},
 	}
 
@@ -198,7 +94,7 @@ func NewListJobsByPipelinePaginator(req ListJobsByPipelineRequest) ListJobsByPip
 	return ListJobsByPipelinePaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListJobsByPipelineInput
+				var inCpy *types.ListJobsByPipelineInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -218,14 +114,14 @@ type ListJobsByPipelinePaginator struct {
 	aws.Pager
 }
 
-func (p *ListJobsByPipelinePaginator) CurrentPage() *ListJobsByPipelineOutput {
-	return p.Pager.CurrentPage().(*ListJobsByPipelineOutput)
+func (p *ListJobsByPipelinePaginator) CurrentPage() *types.ListJobsByPipelineOutput {
+	return p.Pager.CurrentPage().(*types.ListJobsByPipelineOutput)
 }
 
 // ListJobsByPipelineResponse is the response type for the
 // ListJobsByPipeline API operation.
 type ListJobsByPipelineResponse struct {
-	*ListJobsByPipelineOutput
+	*types.ListJobsByPipelineOutput
 
 	response *aws.Response
 }

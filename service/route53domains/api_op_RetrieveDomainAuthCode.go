@@ -6,53 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/route53domains/types"
 )
-
-// A request for the authorization code for the specified domain. To transfer
-// a domain to another registrar, you provide this value to the new registrar.
-type RetrieveDomainAuthCodeInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the domain that you want to get an authorization code for.
-	//
-	// DomainName is a required field
-	DomainName *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s RetrieveDomainAuthCodeInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *RetrieveDomainAuthCodeInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "RetrieveDomainAuthCodeInput"}
-
-	if s.DomainName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DomainName"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// The RetrieveDomainAuthCode response includes the following element.
-type RetrieveDomainAuthCodeOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The authorization code for the domain.
-	//
-	// AuthCode is a required field
-	AuthCode *string `type:"string" required:"true" sensitive:"true"`
-}
-
-// String returns the string representation
-func (s RetrieveDomainAuthCodeOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opRetrieveDomainAuthCode = "RetrieveDomainAuthCode"
 
@@ -70,7 +25,7 @@ const opRetrieveDomainAuthCode = "RetrieveDomainAuthCode"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/RetrieveDomainAuthCode
-func (c *Client) RetrieveDomainAuthCodeRequest(input *RetrieveDomainAuthCodeInput) RetrieveDomainAuthCodeRequest {
+func (c *Client) RetrieveDomainAuthCodeRequest(input *types.RetrieveDomainAuthCodeInput) RetrieveDomainAuthCodeRequest {
 	op := &aws.Operation{
 		Name:       opRetrieveDomainAuthCode,
 		HTTPMethod: "POST",
@@ -78,10 +33,10 @@ func (c *Client) RetrieveDomainAuthCodeRequest(input *RetrieveDomainAuthCodeInpu
 	}
 
 	if input == nil {
-		input = &RetrieveDomainAuthCodeInput{}
+		input = &types.RetrieveDomainAuthCodeInput{}
 	}
 
-	req := c.newRequest(op, input, &RetrieveDomainAuthCodeOutput{})
+	req := c.newRequest(op, input, &types.RetrieveDomainAuthCodeOutput{})
 	return RetrieveDomainAuthCodeRequest{Request: req, Input: input, Copy: c.RetrieveDomainAuthCodeRequest}
 }
 
@@ -89,8 +44,8 @@ func (c *Client) RetrieveDomainAuthCodeRequest(input *RetrieveDomainAuthCodeInpu
 // RetrieveDomainAuthCode API operation.
 type RetrieveDomainAuthCodeRequest struct {
 	*aws.Request
-	Input *RetrieveDomainAuthCodeInput
-	Copy  func(*RetrieveDomainAuthCodeInput) RetrieveDomainAuthCodeRequest
+	Input *types.RetrieveDomainAuthCodeInput
+	Copy  func(*types.RetrieveDomainAuthCodeInput) RetrieveDomainAuthCodeRequest
 }
 
 // Send marshals and sends the RetrieveDomainAuthCode API request.
@@ -102,7 +57,7 @@ func (r RetrieveDomainAuthCodeRequest) Send(ctx context.Context) (*RetrieveDomai
 	}
 
 	resp := &RetrieveDomainAuthCodeResponse{
-		RetrieveDomainAuthCodeOutput: r.Request.Data.(*RetrieveDomainAuthCodeOutput),
+		RetrieveDomainAuthCodeOutput: r.Request.Data.(*types.RetrieveDomainAuthCodeOutput),
 		response:                     &aws.Response{Request: r.Request},
 	}
 
@@ -112,7 +67,7 @@ func (r RetrieveDomainAuthCodeRequest) Send(ctx context.Context) (*RetrieveDomai
 // RetrieveDomainAuthCodeResponse is the response type for the
 // RetrieveDomainAuthCode API operation.
 type RetrieveDomainAuthCodeResponse struct {
-	*RetrieveDomainAuthCodeOutput
+	*types.RetrieveDomainAuthCodeOutput
 
 	response *aws.Response
 }

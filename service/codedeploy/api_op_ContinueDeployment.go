@@ -6,37 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
+	"github.com/aws/aws-sdk-go-v2/service/codedeploy/types"
 )
-
-type ContinueDeploymentInput struct {
-	_ struct{} `type:"structure"`
-
-	// The unique ID of a blue/green deployment for which you want to start rerouting
-	// traffic to the replacement environment.
-	DeploymentId *string `locationName:"deploymentId" type:"string"`
-
-	// The status of the deployment's waiting period. READY_WAIT indicates the deployment
-	// is ready to start shifting traffic. TERMINATION_WAIT indicates the traffic
-	// is shifted, but the original target is not terminated.
-	DeploymentWaitType DeploymentWaitType `locationName:"deploymentWaitType" type:"string" enum:"true"`
-}
-
-// String returns the string representation
-func (s ContinueDeploymentInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type ContinueDeploymentOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s ContinueDeploymentOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opContinueDeployment = "ContinueDeployment"
 
@@ -58,7 +31,7 @@ const opContinueDeployment = "ContinueDeployment"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/ContinueDeployment
-func (c *Client) ContinueDeploymentRequest(input *ContinueDeploymentInput) ContinueDeploymentRequest {
+func (c *Client) ContinueDeploymentRequest(input *types.ContinueDeploymentInput) ContinueDeploymentRequest {
 	op := &aws.Operation{
 		Name:       opContinueDeployment,
 		HTTPMethod: "POST",
@@ -66,10 +39,10 @@ func (c *Client) ContinueDeploymentRequest(input *ContinueDeploymentInput) Conti
 	}
 
 	if input == nil {
-		input = &ContinueDeploymentInput{}
+		input = &types.ContinueDeploymentInput{}
 	}
 
-	req := c.newRequest(op, input, &ContinueDeploymentOutput{})
+	req := c.newRequest(op, input, &types.ContinueDeploymentOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return ContinueDeploymentRequest{Request: req, Input: input, Copy: c.ContinueDeploymentRequest}
@@ -79,8 +52,8 @@ func (c *Client) ContinueDeploymentRequest(input *ContinueDeploymentInput) Conti
 // ContinueDeployment API operation.
 type ContinueDeploymentRequest struct {
 	*aws.Request
-	Input *ContinueDeploymentInput
-	Copy  func(*ContinueDeploymentInput) ContinueDeploymentRequest
+	Input *types.ContinueDeploymentInput
+	Copy  func(*types.ContinueDeploymentInput) ContinueDeploymentRequest
 }
 
 // Send marshals and sends the ContinueDeployment API request.
@@ -92,7 +65,7 @@ func (r ContinueDeploymentRequest) Send(ctx context.Context) (*ContinueDeploymen
 	}
 
 	resp := &ContinueDeploymentResponse{
-		ContinueDeploymentOutput: r.Request.Data.(*ContinueDeploymentOutput),
+		ContinueDeploymentOutput: r.Request.Data.(*types.ContinueDeploymentOutput),
 		response:                 &aws.Response{Request: r.Request},
 	}
 
@@ -102,7 +75,7 @@ func (r ContinueDeploymentRequest) Send(ctx context.Context) (*ContinueDeploymen
 // ContinueDeploymentResponse is the response type for the
 // ContinueDeployment API operation.
 type ContinueDeploymentResponse struct {
-	*ContinueDeploymentOutput
+	*types.ContinueDeploymentOutput
 
 	response *aws.Response
 }

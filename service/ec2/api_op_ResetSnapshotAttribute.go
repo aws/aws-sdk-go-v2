@@ -6,63 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/ec2query"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-// Contains the parameters for ResetSnapshotAttribute.
-type ResetSnapshotAttributeInput struct {
-	_ struct{} `type:"structure"`
-
-	// The attribute to reset. Currently, only the attribute for permission to create
-	// volumes can be reset.
-	//
-	// Attribute is a required field
-	Attribute SnapshotAttributeName `type:"string" required:"true" enum:"true"`
-
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have
-	// the required permissions, the error response is DryRunOperation. Otherwise,
-	// it is UnauthorizedOperation.
-	DryRun *bool `locationName:"dryRun" type:"boolean"`
-
-	// The ID of the snapshot.
-	//
-	// SnapshotId is a required field
-	SnapshotId *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s ResetSnapshotAttributeInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ResetSnapshotAttributeInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ResetSnapshotAttributeInput"}
-	if len(s.Attribute) == 0 {
-		invalidParams.Add(aws.NewErrParamRequired("Attribute"))
-	}
-
-	if s.SnapshotId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("SnapshotId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ResetSnapshotAttributeOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s ResetSnapshotAttributeOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opResetSnapshotAttribute = "ResetSnapshotAttribute"
 
@@ -83,7 +30,7 @@ const opResetSnapshotAttribute = "ResetSnapshotAttribute"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ResetSnapshotAttribute
-func (c *Client) ResetSnapshotAttributeRequest(input *ResetSnapshotAttributeInput) ResetSnapshotAttributeRequest {
+func (c *Client) ResetSnapshotAttributeRequest(input *types.ResetSnapshotAttributeInput) ResetSnapshotAttributeRequest {
 	op := &aws.Operation{
 		Name:       opResetSnapshotAttribute,
 		HTTPMethod: "POST",
@@ -91,10 +38,10 @@ func (c *Client) ResetSnapshotAttributeRequest(input *ResetSnapshotAttributeInpu
 	}
 
 	if input == nil {
-		input = &ResetSnapshotAttributeInput{}
+		input = &types.ResetSnapshotAttributeInput{}
 	}
 
-	req := c.newRequest(op, input, &ResetSnapshotAttributeOutput{})
+	req := c.newRequest(op, input, &types.ResetSnapshotAttributeOutput{})
 	req.Handlers.Unmarshal.Remove(ec2query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return ResetSnapshotAttributeRequest{Request: req, Input: input, Copy: c.ResetSnapshotAttributeRequest}
@@ -104,8 +51,8 @@ func (c *Client) ResetSnapshotAttributeRequest(input *ResetSnapshotAttributeInpu
 // ResetSnapshotAttribute API operation.
 type ResetSnapshotAttributeRequest struct {
 	*aws.Request
-	Input *ResetSnapshotAttributeInput
-	Copy  func(*ResetSnapshotAttributeInput) ResetSnapshotAttributeRequest
+	Input *types.ResetSnapshotAttributeInput
+	Copy  func(*types.ResetSnapshotAttributeInput) ResetSnapshotAttributeRequest
 }
 
 // Send marshals and sends the ResetSnapshotAttribute API request.
@@ -117,7 +64,7 @@ func (r ResetSnapshotAttributeRequest) Send(ctx context.Context) (*ResetSnapshot
 	}
 
 	resp := &ResetSnapshotAttributeResponse{
-		ResetSnapshotAttributeOutput: r.Request.Data.(*ResetSnapshotAttributeOutput),
+		ResetSnapshotAttributeOutput: r.Request.Data.(*types.ResetSnapshotAttributeOutput),
 		response:                     &aws.Response{Request: r.Request},
 	}
 
@@ -127,7 +74,7 @@ func (r ResetSnapshotAttributeRequest) Send(ctx context.Context) (*ResetSnapshot
 // ResetSnapshotAttributeResponse is the response type for the
 // ResetSnapshotAttribute API operation.
 type ResetSnapshotAttributeResponse struct {
-	*ResetSnapshotAttributeOutput
+	*types.ResetSnapshotAttributeOutput
 
 	response *aws.Response
 }

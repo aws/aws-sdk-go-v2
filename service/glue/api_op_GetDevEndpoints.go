@@ -6,51 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/glue/types"
 )
-
-type GetDevEndpointsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The maximum size of information to return.
-	MaxResults *int64 `min:"1" type:"integer"`
-
-	// A continuation token, if this is a continuation call.
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s GetDevEndpointsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetDevEndpointsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetDevEndpointsInput"}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type GetDevEndpointsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A list of DevEndpoint definitions.
-	DevEndpoints []DevEndpoint `type:"list"`
-
-	// A continuation token, if not all DevEndpoint definitions have yet been returned.
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s GetDevEndpointsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetDevEndpoints = "GetDevEndpoints"
 
@@ -72,7 +29,7 @@ const opGetDevEndpoints = "GetDevEndpoints"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetDevEndpoints
-func (c *Client) GetDevEndpointsRequest(input *GetDevEndpointsInput) GetDevEndpointsRequest {
+func (c *Client) GetDevEndpointsRequest(input *types.GetDevEndpointsInput) GetDevEndpointsRequest {
 	op := &aws.Operation{
 		Name:       opGetDevEndpoints,
 		HTTPMethod: "POST",
@@ -86,10 +43,10 @@ func (c *Client) GetDevEndpointsRequest(input *GetDevEndpointsInput) GetDevEndpo
 	}
 
 	if input == nil {
-		input = &GetDevEndpointsInput{}
+		input = &types.GetDevEndpointsInput{}
 	}
 
-	req := c.newRequest(op, input, &GetDevEndpointsOutput{})
+	req := c.newRequest(op, input, &types.GetDevEndpointsOutput{})
 	return GetDevEndpointsRequest{Request: req, Input: input, Copy: c.GetDevEndpointsRequest}
 }
 
@@ -97,8 +54,8 @@ func (c *Client) GetDevEndpointsRequest(input *GetDevEndpointsInput) GetDevEndpo
 // GetDevEndpoints API operation.
 type GetDevEndpointsRequest struct {
 	*aws.Request
-	Input *GetDevEndpointsInput
-	Copy  func(*GetDevEndpointsInput) GetDevEndpointsRequest
+	Input *types.GetDevEndpointsInput
+	Copy  func(*types.GetDevEndpointsInput) GetDevEndpointsRequest
 }
 
 // Send marshals and sends the GetDevEndpoints API request.
@@ -110,7 +67,7 @@ func (r GetDevEndpointsRequest) Send(ctx context.Context) (*GetDevEndpointsRespo
 	}
 
 	resp := &GetDevEndpointsResponse{
-		GetDevEndpointsOutput: r.Request.Data.(*GetDevEndpointsOutput),
+		GetDevEndpointsOutput: r.Request.Data.(*types.GetDevEndpointsOutput),
 		response:              &aws.Response{Request: r.Request},
 	}
 
@@ -140,7 +97,7 @@ func NewGetDevEndpointsPaginator(req GetDevEndpointsRequest) GetDevEndpointsPagi
 	return GetDevEndpointsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *GetDevEndpointsInput
+				var inCpy *types.GetDevEndpointsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -160,14 +117,14 @@ type GetDevEndpointsPaginator struct {
 	aws.Pager
 }
 
-func (p *GetDevEndpointsPaginator) CurrentPage() *GetDevEndpointsOutput {
-	return p.Pager.CurrentPage().(*GetDevEndpointsOutput)
+func (p *GetDevEndpointsPaginator) CurrentPage() *types.GetDevEndpointsOutput {
+	return p.Pager.CurrentPage().(*types.GetDevEndpointsOutput)
 }
 
 // GetDevEndpointsResponse is the response type for the
 // GetDevEndpoints API operation.
 type GetDevEndpointsResponse struct {
-	*GetDevEndpointsOutput
+	*types.GetDevEndpointsOutput
 
 	response *aws.Response
 }

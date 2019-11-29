@@ -6,58 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/ec2query"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-// Contains the parameters for UnassignPrivateIpAddresses.
-type UnassignPrivateIpAddressesInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the network interface.
-	//
-	// NetworkInterfaceId is a required field
-	NetworkInterfaceId *string `locationName:"networkInterfaceId" type:"string" required:"true"`
-
-	// The secondary private IP addresses to unassign from the network interface.
-	// You can specify this option multiple times to unassign more than one IP address.
-	//
-	// PrivateIpAddresses is a required field
-	PrivateIpAddresses []string `locationName:"privateIpAddress" locationNameList:"PrivateIpAddress" type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s UnassignPrivateIpAddressesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UnassignPrivateIpAddressesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UnassignPrivateIpAddressesInput"}
-
-	if s.NetworkInterfaceId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("NetworkInterfaceId"))
-	}
-
-	if s.PrivateIpAddresses == nil {
-		invalidParams.Add(aws.NewErrParamRequired("PrivateIpAddresses"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type UnassignPrivateIpAddressesOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s UnassignPrivateIpAddressesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opUnassignPrivateIpAddresses = "UnassignPrivateIpAddresses"
 
@@ -74,7 +26,7 @@ const opUnassignPrivateIpAddresses = "UnassignPrivateIpAddresses"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/UnassignPrivateIpAddresses
-func (c *Client) UnassignPrivateIpAddressesRequest(input *UnassignPrivateIpAddressesInput) UnassignPrivateIpAddressesRequest {
+func (c *Client) UnassignPrivateIpAddressesRequest(input *types.UnassignPrivateIpAddressesInput) UnassignPrivateIpAddressesRequest {
 	op := &aws.Operation{
 		Name:       opUnassignPrivateIpAddresses,
 		HTTPMethod: "POST",
@@ -82,10 +34,10 @@ func (c *Client) UnassignPrivateIpAddressesRequest(input *UnassignPrivateIpAddre
 	}
 
 	if input == nil {
-		input = &UnassignPrivateIpAddressesInput{}
+		input = &types.UnassignPrivateIpAddressesInput{}
 	}
 
-	req := c.newRequest(op, input, &UnassignPrivateIpAddressesOutput{})
+	req := c.newRequest(op, input, &types.UnassignPrivateIpAddressesOutput{})
 	req.Handlers.Unmarshal.Remove(ec2query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return UnassignPrivateIpAddressesRequest{Request: req, Input: input, Copy: c.UnassignPrivateIpAddressesRequest}
@@ -95,8 +47,8 @@ func (c *Client) UnassignPrivateIpAddressesRequest(input *UnassignPrivateIpAddre
 // UnassignPrivateIpAddresses API operation.
 type UnassignPrivateIpAddressesRequest struct {
 	*aws.Request
-	Input *UnassignPrivateIpAddressesInput
-	Copy  func(*UnassignPrivateIpAddressesInput) UnassignPrivateIpAddressesRequest
+	Input *types.UnassignPrivateIpAddressesInput
+	Copy  func(*types.UnassignPrivateIpAddressesInput) UnassignPrivateIpAddressesRequest
 }
 
 // Send marshals and sends the UnassignPrivateIpAddresses API request.
@@ -108,7 +60,7 @@ func (r UnassignPrivateIpAddressesRequest) Send(ctx context.Context) (*UnassignP
 	}
 
 	resp := &UnassignPrivateIpAddressesResponse{
-		UnassignPrivateIpAddressesOutput: r.Request.Data.(*UnassignPrivateIpAddressesOutput),
+		UnassignPrivateIpAddressesOutput: r.Request.Data.(*types.UnassignPrivateIpAddressesOutput),
 		response:                         &aws.Response{Request: r.Request},
 	}
 
@@ -118,7 +70,7 @@ func (r UnassignPrivateIpAddressesRequest) Send(ctx context.Context) (*UnassignP
 // UnassignPrivateIpAddressesResponse is the response type for the
 // UnassignPrivateIpAddresses API operation.
 type UnassignPrivateIpAddressesResponse struct {
-	*UnassignPrivateIpAddressesOutput
+	*types.UnassignPrivateIpAddressesOutput
 
 	response *aws.Response
 }

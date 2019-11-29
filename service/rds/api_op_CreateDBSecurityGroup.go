@@ -6,75 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/rds/types"
 )
-
-type CreateDBSecurityGroupInput struct {
-	_ struct{} `type:"structure"`
-
-	// The description for the DB security group.
-	//
-	// DBSecurityGroupDescription is a required field
-	DBSecurityGroupDescription *string `type:"string" required:"true"`
-
-	// The name for the DB security group. This value is stored as a lowercase string.
-	//
-	// Constraints:
-	//
-	//    * Must be 1 to 255 letters, numbers, or hyphens.
-	//
-	//    * First character must be a letter
-	//
-	//    * Can't end with a hyphen or contain two consecutive hyphens
-	//
-	//    * Must not be "Default"
-	//
-	// Example: mysecuritygroup
-	//
-	// DBSecurityGroupName is a required field
-	DBSecurityGroupName *string `type:"string" required:"true"`
-
-	// Tags to assign to the DB security group.
-	Tags []Tag `locationNameList:"Tag" type:"list"`
-}
-
-// String returns the string representation
-func (s CreateDBSecurityGroupInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateDBSecurityGroupInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateDBSecurityGroupInput"}
-
-	if s.DBSecurityGroupDescription == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DBSecurityGroupDescription"))
-	}
-
-	if s.DBSecurityGroupName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DBSecurityGroupName"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type CreateDBSecurityGroupOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Contains the details for an Amazon RDS DB security group.
-	//
-	// This data type is used as a response element in the DescribeDBSecurityGroups
-	// action.
-	DBSecurityGroup *DBSecurityGroup `type:"structure"`
-}
-
-// String returns the string representation
-func (s CreateDBSecurityGroupOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCreateDBSecurityGroup = "CreateDBSecurityGroup"
 
@@ -95,7 +28,7 @@ const opCreateDBSecurityGroup = "CreateDBSecurityGroup"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBSecurityGroup
-func (c *Client) CreateDBSecurityGroupRequest(input *CreateDBSecurityGroupInput) CreateDBSecurityGroupRequest {
+func (c *Client) CreateDBSecurityGroupRequest(input *types.CreateDBSecurityGroupInput) CreateDBSecurityGroupRequest {
 	op := &aws.Operation{
 		Name:       opCreateDBSecurityGroup,
 		HTTPMethod: "POST",
@@ -103,10 +36,10 @@ func (c *Client) CreateDBSecurityGroupRequest(input *CreateDBSecurityGroupInput)
 	}
 
 	if input == nil {
-		input = &CreateDBSecurityGroupInput{}
+		input = &types.CreateDBSecurityGroupInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateDBSecurityGroupOutput{})
+	req := c.newRequest(op, input, &types.CreateDBSecurityGroupOutput{})
 	return CreateDBSecurityGroupRequest{Request: req, Input: input, Copy: c.CreateDBSecurityGroupRequest}
 }
 
@@ -114,8 +47,8 @@ func (c *Client) CreateDBSecurityGroupRequest(input *CreateDBSecurityGroupInput)
 // CreateDBSecurityGroup API operation.
 type CreateDBSecurityGroupRequest struct {
 	*aws.Request
-	Input *CreateDBSecurityGroupInput
-	Copy  func(*CreateDBSecurityGroupInput) CreateDBSecurityGroupRequest
+	Input *types.CreateDBSecurityGroupInput
+	Copy  func(*types.CreateDBSecurityGroupInput) CreateDBSecurityGroupRequest
 }
 
 // Send marshals and sends the CreateDBSecurityGroup API request.
@@ -127,7 +60,7 @@ func (r CreateDBSecurityGroupRequest) Send(ctx context.Context) (*CreateDBSecuri
 	}
 
 	resp := &CreateDBSecurityGroupResponse{
-		CreateDBSecurityGroupOutput: r.Request.Data.(*CreateDBSecurityGroupOutput),
+		CreateDBSecurityGroupOutput: r.Request.Data.(*types.CreateDBSecurityGroupOutput),
 		response:                    &aws.Response{Request: r.Request},
 	}
 
@@ -137,7 +70,7 @@ func (r CreateDBSecurityGroupRequest) Send(ctx context.Context) (*CreateDBSecuri
 // CreateDBSecurityGroupResponse is the response type for the
 // CreateDBSecurityGroup API operation.
 type CreateDBSecurityGroupResponse struct {
-	*CreateDBSecurityGroupOutput
+	*types.CreateDBSecurityGroupOutput
 
 	response *aws.Response
 }

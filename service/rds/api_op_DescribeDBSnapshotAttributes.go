@@ -6,53 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/rds/types"
 )
-
-type DescribeDBSnapshotAttributesInput struct {
-	_ struct{} `type:"structure"`
-
-	// The identifier for the DB snapshot to describe the attributes for.
-	//
-	// DBSnapshotIdentifier is a required field
-	DBSnapshotIdentifier *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeDBSnapshotAttributesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeDBSnapshotAttributesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeDBSnapshotAttributesInput"}
-
-	if s.DBSnapshotIdentifier == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DBSnapshotIdentifier"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribeDBSnapshotAttributesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Contains the results of a successful call to the DescribeDBSnapshotAttributes
-	// API action.
-	//
-	// Manual DB snapshot attributes are used to authorize other AWS accounts to
-	// copy or restore a manual DB snapshot. For more information, see the ModifyDBSnapshotAttribute
-	// API action.
-	DBSnapshotAttributesResult *DBSnapshotAttributesResult `type:"structure"`
-}
-
-// String returns the string representation
-func (s DescribeDBSnapshotAttributesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeDBSnapshotAttributes = "DescribeDBSnapshotAttributes"
 
@@ -80,7 +35,7 @@ const opDescribeDBSnapshotAttributes = "DescribeDBSnapshotAttributes"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeDBSnapshotAttributes
-func (c *Client) DescribeDBSnapshotAttributesRequest(input *DescribeDBSnapshotAttributesInput) DescribeDBSnapshotAttributesRequest {
+func (c *Client) DescribeDBSnapshotAttributesRequest(input *types.DescribeDBSnapshotAttributesInput) DescribeDBSnapshotAttributesRequest {
 	op := &aws.Operation{
 		Name:       opDescribeDBSnapshotAttributes,
 		HTTPMethod: "POST",
@@ -88,10 +43,10 @@ func (c *Client) DescribeDBSnapshotAttributesRequest(input *DescribeDBSnapshotAt
 	}
 
 	if input == nil {
-		input = &DescribeDBSnapshotAttributesInput{}
+		input = &types.DescribeDBSnapshotAttributesInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeDBSnapshotAttributesOutput{})
+	req := c.newRequest(op, input, &types.DescribeDBSnapshotAttributesOutput{})
 	return DescribeDBSnapshotAttributesRequest{Request: req, Input: input, Copy: c.DescribeDBSnapshotAttributesRequest}
 }
 
@@ -99,8 +54,8 @@ func (c *Client) DescribeDBSnapshotAttributesRequest(input *DescribeDBSnapshotAt
 // DescribeDBSnapshotAttributes API operation.
 type DescribeDBSnapshotAttributesRequest struct {
 	*aws.Request
-	Input *DescribeDBSnapshotAttributesInput
-	Copy  func(*DescribeDBSnapshotAttributesInput) DescribeDBSnapshotAttributesRequest
+	Input *types.DescribeDBSnapshotAttributesInput
+	Copy  func(*types.DescribeDBSnapshotAttributesInput) DescribeDBSnapshotAttributesRequest
 }
 
 // Send marshals and sends the DescribeDBSnapshotAttributes API request.
@@ -112,7 +67,7 @@ func (r DescribeDBSnapshotAttributesRequest) Send(ctx context.Context) (*Describ
 	}
 
 	resp := &DescribeDBSnapshotAttributesResponse{
-		DescribeDBSnapshotAttributesOutput: r.Request.Data.(*DescribeDBSnapshotAttributesOutput),
+		DescribeDBSnapshotAttributesOutput: r.Request.Data.(*types.DescribeDBSnapshotAttributesOutput),
 		response:                           &aws.Response{Request: r.Request},
 	}
 
@@ -122,7 +77,7 @@ func (r DescribeDBSnapshotAttributesRequest) Send(ctx context.Context) (*Describ
 // DescribeDBSnapshotAttributesResponse is the response type for the
 // DescribeDBSnapshotAttributes API operation.
 type DescribeDBSnapshotAttributesResponse struct {
-	*DescribeDBSnapshotAttributesOutput
+	*types.DescribeDBSnapshotAttributesOutput
 
 	response *aws.Response
 }

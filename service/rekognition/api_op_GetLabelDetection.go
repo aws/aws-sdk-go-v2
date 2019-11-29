@@ -6,91 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/rekognition/types"
 )
-
-type GetLabelDetectionInput struct {
-	_ struct{} `type:"structure"`
-
-	// Job identifier for the label detection operation for which you want results
-	// returned. You get the job identifer from an initial call to StartlabelDetection.
-	//
-	// JobId is a required field
-	JobId *string `min:"1" type:"string" required:"true"`
-
-	// Maximum number of results to return per paginated call. The largest value
-	// you can specify is 1000. If you specify a value greater than 1000, a maximum
-	// of 1000 results is returned. The default value is 1000.
-	MaxResults *int64 `min:"1" type:"integer"`
-
-	// If the previous response was incomplete (because there are more labels to
-	// retrieve), Amazon Rekognition Video returns a pagination token in the response.
-	// You can use this pagination token to retrieve the next set of labels.
-	NextToken *string `type:"string"`
-
-	// Sort to use for elements in the Labels array. Use TIMESTAMP to sort array
-	// elements by the time labels are detected. Use NAME to alphabetically group
-	// elements for a label together. Within each label group, the array element
-	// are sorted by detection confidence. The default sort is by TIMESTAMP.
-	SortBy LabelDetectionSortBy `type:"string" enum:"true"`
-}
-
-// String returns the string representation
-func (s GetLabelDetectionInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetLabelDetectionInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetLabelDetectionInput"}
-
-	if s.JobId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("JobId"))
-	}
-	if s.JobId != nil && len(*s.JobId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("JobId", 1))
-	}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type GetLabelDetectionOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The current status of the label detection job.
-	JobStatus VideoJobStatus `type:"string" enum:"true"`
-
-	// Version number of the label detection model that was used to detect labels.
-	LabelModelVersion *string `type:"string"`
-
-	// An array of labels detected in the video. Each element contains the detected
-	// label and the time, in milliseconds from the start of the video, that the
-	// label was detected.
-	Labels []LabelDetection `type:"list"`
-
-	// If the response is truncated, Amazon Rekognition Video returns this token
-	// that you can use in the subsequent request to retrieve the next set of labels.
-	NextToken *string `type:"string"`
-
-	// If the job fails, StatusMessage provides a descriptive error message.
-	StatusMessage *string `type:"string"`
-
-	// Information about a video that Amazon Rekognition Video analyzed. Videometadata
-	// is returned in every page of paginated responses from a Amazon Rekognition
-	// video operation.
-	VideoMetadata *VideoMetadata `type:"structure"`
-}
-
-// String returns the string representation
-func (s GetLabelDetectionOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetLabelDetection = "GetLabelDetection"
 
@@ -134,7 +51,7 @@ const opGetLabelDetection = "GetLabelDetection"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) GetLabelDetectionRequest(input *GetLabelDetectionInput) GetLabelDetectionRequest {
+func (c *Client) GetLabelDetectionRequest(input *types.GetLabelDetectionInput) GetLabelDetectionRequest {
 	op := &aws.Operation{
 		Name:       opGetLabelDetection,
 		HTTPMethod: "POST",
@@ -148,10 +65,10 @@ func (c *Client) GetLabelDetectionRequest(input *GetLabelDetectionInput) GetLabe
 	}
 
 	if input == nil {
-		input = &GetLabelDetectionInput{}
+		input = &types.GetLabelDetectionInput{}
 	}
 
-	req := c.newRequest(op, input, &GetLabelDetectionOutput{})
+	req := c.newRequest(op, input, &types.GetLabelDetectionOutput{})
 	return GetLabelDetectionRequest{Request: req, Input: input, Copy: c.GetLabelDetectionRequest}
 }
 
@@ -159,8 +76,8 @@ func (c *Client) GetLabelDetectionRequest(input *GetLabelDetectionInput) GetLabe
 // GetLabelDetection API operation.
 type GetLabelDetectionRequest struct {
 	*aws.Request
-	Input *GetLabelDetectionInput
-	Copy  func(*GetLabelDetectionInput) GetLabelDetectionRequest
+	Input *types.GetLabelDetectionInput
+	Copy  func(*types.GetLabelDetectionInput) GetLabelDetectionRequest
 }
 
 // Send marshals and sends the GetLabelDetection API request.
@@ -172,7 +89,7 @@ func (r GetLabelDetectionRequest) Send(ctx context.Context) (*GetLabelDetectionR
 	}
 
 	resp := &GetLabelDetectionResponse{
-		GetLabelDetectionOutput: r.Request.Data.(*GetLabelDetectionOutput),
+		GetLabelDetectionOutput: r.Request.Data.(*types.GetLabelDetectionOutput),
 		response:                &aws.Response{Request: r.Request},
 	}
 
@@ -202,7 +119,7 @@ func NewGetLabelDetectionPaginator(req GetLabelDetectionRequest) GetLabelDetecti
 	return GetLabelDetectionPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *GetLabelDetectionInput
+				var inCpy *types.GetLabelDetectionInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -222,14 +139,14 @@ type GetLabelDetectionPaginator struct {
 	aws.Pager
 }
 
-func (p *GetLabelDetectionPaginator) CurrentPage() *GetLabelDetectionOutput {
-	return p.Pager.CurrentPage().(*GetLabelDetectionOutput)
+func (p *GetLabelDetectionPaginator) CurrentPage() *types.GetLabelDetectionOutput {
+	return p.Pager.CurrentPage().(*types.GetLabelDetectionOutput)
 }
 
 // GetLabelDetectionResponse is the response type for the
 // GetLabelDetection API operation.
 type GetLabelDetectionResponse struct {
-	*GetLabelDetectionOutput
+	*types.GetLabelDetectionOutput
 
 	response *aws.Response
 }

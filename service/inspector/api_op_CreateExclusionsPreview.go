@@ -6,56 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/inspector/types"
 )
-
-type CreateExclusionsPreviewInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ARN that specifies the assessment template for which you want to create
-	// an exclusions preview.
-	//
-	// AssessmentTemplateArn is a required field
-	AssessmentTemplateArn *string `locationName:"assessmentTemplateArn" min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s CreateExclusionsPreviewInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateExclusionsPreviewInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateExclusionsPreviewInput"}
-
-	if s.AssessmentTemplateArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("AssessmentTemplateArn"))
-	}
-	if s.AssessmentTemplateArn != nil && len(*s.AssessmentTemplateArn) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("AssessmentTemplateArn", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type CreateExclusionsPreviewOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Specifies the unique identifier of the requested exclusions preview. You
-	// can use the unique identifier to retrieve the exclusions preview when running
-	// the GetExclusionsPreview API.
-	//
-	// PreviewToken is a required field
-	PreviewToken *string `locationName:"previewToken" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s CreateExclusionsPreviewOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCreateExclusionsPreview = "CreateExclusionsPreview"
 
@@ -74,7 +26,7 @@ const opCreateExclusionsPreview = "CreateExclusionsPreview"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/CreateExclusionsPreview
-func (c *Client) CreateExclusionsPreviewRequest(input *CreateExclusionsPreviewInput) CreateExclusionsPreviewRequest {
+func (c *Client) CreateExclusionsPreviewRequest(input *types.CreateExclusionsPreviewInput) CreateExclusionsPreviewRequest {
 	op := &aws.Operation{
 		Name:       opCreateExclusionsPreview,
 		HTTPMethod: "POST",
@@ -82,10 +34,10 @@ func (c *Client) CreateExclusionsPreviewRequest(input *CreateExclusionsPreviewIn
 	}
 
 	if input == nil {
-		input = &CreateExclusionsPreviewInput{}
+		input = &types.CreateExclusionsPreviewInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateExclusionsPreviewOutput{})
+	req := c.newRequest(op, input, &types.CreateExclusionsPreviewOutput{})
 	return CreateExclusionsPreviewRequest{Request: req, Input: input, Copy: c.CreateExclusionsPreviewRequest}
 }
 
@@ -93,8 +45,8 @@ func (c *Client) CreateExclusionsPreviewRequest(input *CreateExclusionsPreviewIn
 // CreateExclusionsPreview API operation.
 type CreateExclusionsPreviewRequest struct {
 	*aws.Request
-	Input *CreateExclusionsPreviewInput
-	Copy  func(*CreateExclusionsPreviewInput) CreateExclusionsPreviewRequest
+	Input *types.CreateExclusionsPreviewInput
+	Copy  func(*types.CreateExclusionsPreviewInput) CreateExclusionsPreviewRequest
 }
 
 // Send marshals and sends the CreateExclusionsPreview API request.
@@ -106,7 +58,7 @@ func (r CreateExclusionsPreviewRequest) Send(ctx context.Context) (*CreateExclus
 	}
 
 	resp := &CreateExclusionsPreviewResponse{
-		CreateExclusionsPreviewOutput: r.Request.Data.(*CreateExclusionsPreviewOutput),
+		CreateExclusionsPreviewOutput: r.Request.Data.(*types.CreateExclusionsPreviewOutput),
 		response:                      &aws.Response{Request: r.Request},
 	}
 
@@ -116,7 +68,7 @@ func (r CreateExclusionsPreviewRequest) Send(ctx context.Context) (*CreateExclus
 // CreateExclusionsPreviewResponse is the response type for the
 // CreateExclusionsPreview API operation.
 type CreateExclusionsPreviewResponse struct {
-	*CreateExclusionsPreviewOutput
+	*types.CreateExclusionsPreviewOutput
 
 	response *aws.Response
 }

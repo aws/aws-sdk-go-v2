@@ -6,135 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/restjson"
+	"github.com/aws/aws-sdk-go-v2/service/iot/types"
 )
-
-type CancelJobExecutionInput struct {
-	_ struct{} `type:"structure"`
-
-	// (Optional) The expected current version of the job execution. Each time you
-	// update the job execution, its version is incremented. If the version of the
-	// job execution stored in Jobs does not match, the update is rejected with
-	// a VersionMismatch error, and an ErrorResponse that contains the current job
-	// execution status data is returned. (This makes it unnecessary to perform
-	// a separate DescribeJobExecution request in order to obtain the job execution
-	// status data.)
-	ExpectedVersion *int64 `locationName:"expectedVersion" type:"long"`
-
-	// (Optional) If true the job execution will be canceled if it has status IN_PROGRESS
-	// or QUEUED, otherwise the job execution will be canceled only if it has status
-	// QUEUED. If you attempt to cancel a job execution that is IN_PROGRESS, and
-	// you do not set force to true, then an InvalidStateTransitionException will
-	// be thrown. The default is false.
-	//
-	// Canceling a job execution which is "IN_PROGRESS", will cause the device to
-	// be unable to update the job execution status. Use caution and ensure that
-	// the device is able to recover to a valid state.
-	Force *bool `location:"querystring" locationName:"force" type:"boolean"`
-
-	// The ID of the job to be canceled.
-	//
-	// JobId is a required field
-	JobId *string `location:"uri" locationName:"jobId" min:"1" type:"string" required:"true"`
-
-	// A collection of name/value pairs that describe the status of the job execution.
-	// If not specified, the statusDetails are unchanged. You can specify at most
-	// 10 name/value pairs.
-	StatusDetails map[string]string `locationName:"statusDetails" type:"map"`
-
-	// The name of the thing whose execution of the job will be canceled.
-	//
-	// ThingName is a required field
-	ThingName *string `location:"uri" locationName:"thingName" min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s CancelJobExecutionInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CancelJobExecutionInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CancelJobExecutionInput"}
-
-	if s.JobId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("JobId"))
-	}
-	if s.JobId != nil && len(*s.JobId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("JobId", 1))
-	}
-
-	if s.ThingName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ThingName"))
-	}
-	if s.ThingName != nil && len(*s.ThingName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ThingName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s CancelJobExecutionInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.ExpectedVersion != nil {
-		v := *s.ExpectedVersion
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "expectedVersion", protocol.Int64Value(v), metadata)
-	}
-	if s.StatusDetails != nil {
-		v := s.StatusDetails
-
-		metadata := protocol.Metadata{}
-		ms0 := e.Map(protocol.BodyTarget, "statusDetails", metadata)
-		ms0.Start()
-		for k1, v1 := range v {
-			ms0.MapSetValue(k1, protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
-		}
-		ms0.End()
-
-	}
-	if s.JobId != nil {
-		v := *s.JobId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "jobId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.ThingName != nil {
-		v := *s.ThingName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "thingName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Force != nil {
-		v := *s.Force
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "force", protocol.BoolValue(v), metadata)
-	}
-	return nil
-}
-
-type CancelJobExecutionOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s CancelJobExecutionOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s CancelJobExecutionOutput) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
 
 const opCancelJobExecution = "CancelJobExecution"
 
@@ -149,7 +24,7 @@ const opCancelJobExecution = "CancelJobExecution"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) CancelJobExecutionRequest(input *CancelJobExecutionInput) CancelJobExecutionRequest {
+func (c *Client) CancelJobExecutionRequest(input *types.CancelJobExecutionInput) CancelJobExecutionRequest {
 	op := &aws.Operation{
 		Name:       opCancelJobExecution,
 		HTTPMethod: "PUT",
@@ -157,10 +32,10 @@ func (c *Client) CancelJobExecutionRequest(input *CancelJobExecutionInput) Cance
 	}
 
 	if input == nil {
-		input = &CancelJobExecutionInput{}
+		input = &types.CancelJobExecutionInput{}
 	}
 
-	req := c.newRequest(op, input, &CancelJobExecutionOutput{})
+	req := c.newRequest(op, input, &types.CancelJobExecutionOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return CancelJobExecutionRequest{Request: req, Input: input, Copy: c.CancelJobExecutionRequest}
@@ -170,8 +45,8 @@ func (c *Client) CancelJobExecutionRequest(input *CancelJobExecutionInput) Cance
 // CancelJobExecution API operation.
 type CancelJobExecutionRequest struct {
 	*aws.Request
-	Input *CancelJobExecutionInput
-	Copy  func(*CancelJobExecutionInput) CancelJobExecutionRequest
+	Input *types.CancelJobExecutionInput
+	Copy  func(*types.CancelJobExecutionInput) CancelJobExecutionRequest
 }
 
 // Send marshals and sends the CancelJobExecution API request.
@@ -183,7 +58,7 @@ func (r CancelJobExecutionRequest) Send(ctx context.Context) (*CancelJobExecutio
 	}
 
 	resp := &CancelJobExecutionResponse{
-		CancelJobExecutionOutput: r.Request.Data.(*CancelJobExecutionOutput),
+		CancelJobExecutionOutput: r.Request.Data.(*types.CancelJobExecutionOutput),
 		response:                 &aws.Response{Request: r.Request},
 	}
 
@@ -193,7 +68,7 @@ func (r CancelJobExecutionRequest) Send(ctx context.Context) (*CancelJobExecutio
 // CancelJobExecutionResponse is the response type for the
 // CancelJobExecution API operation.
 type CancelJobExecutionResponse struct {
-	*CancelJobExecutionOutput
+	*types.CancelJobExecutionOutput
 
 	response *aws.Response
 }

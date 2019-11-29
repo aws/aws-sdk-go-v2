@@ -6,81 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/polly/types"
 )
-
-type PutLexiconInput struct {
-	_ struct{} `type:"structure"`
-
-	// Content of the PLS lexicon as string data.
-	//
-	// Content is a required field
-	Content *string `type:"string" required:"true"`
-
-	// Name of the lexicon. The name must follow the regular express format [0-9A-Za-z]{1,20}.
-	// That is, the name is a case-sensitive alphanumeric string up to 20 characters
-	// long.
-	//
-	// Name is a required field
-	Name *string `location:"uri" locationName:"LexiconName" type:"string" required:"true" sensitive:"true"`
-}
-
-// String returns the string representation
-func (s PutLexiconInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *PutLexiconInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "PutLexiconInput"}
-
-	if s.Content == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Content"))
-	}
-
-	if s.Name == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Name"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s PutLexiconInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.Content != nil {
-		v := *s.Content
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "Content", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Name != nil {
-		v := *s.Name
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "LexiconName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type PutLexiconOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s PutLexiconOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s PutLexiconOutput) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
 
 const opPutLexicon = "PutLexicon"
 
@@ -102,7 +29,7 @@ const opPutLexicon = "PutLexicon"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/polly-2016-06-10/PutLexicon
-func (c *Client) PutLexiconRequest(input *PutLexiconInput) PutLexiconRequest {
+func (c *Client) PutLexiconRequest(input *types.PutLexiconInput) PutLexiconRequest {
 	op := &aws.Operation{
 		Name:       opPutLexicon,
 		HTTPMethod: "PUT",
@@ -110,10 +37,10 @@ func (c *Client) PutLexiconRequest(input *PutLexiconInput) PutLexiconRequest {
 	}
 
 	if input == nil {
-		input = &PutLexiconInput{}
+		input = &types.PutLexiconInput{}
 	}
 
-	req := c.newRequest(op, input, &PutLexiconOutput{})
+	req := c.newRequest(op, input, &types.PutLexiconOutput{})
 	return PutLexiconRequest{Request: req, Input: input, Copy: c.PutLexiconRequest}
 }
 
@@ -121,8 +48,8 @@ func (c *Client) PutLexiconRequest(input *PutLexiconInput) PutLexiconRequest {
 // PutLexicon API operation.
 type PutLexiconRequest struct {
 	*aws.Request
-	Input *PutLexiconInput
-	Copy  func(*PutLexiconInput) PutLexiconRequest
+	Input *types.PutLexiconInput
+	Copy  func(*types.PutLexiconInput) PutLexiconRequest
 }
 
 // Send marshals and sends the PutLexicon API request.
@@ -134,7 +61,7 @@ func (r PutLexiconRequest) Send(ctx context.Context) (*PutLexiconResponse, error
 	}
 
 	resp := &PutLexiconResponse{
-		PutLexiconOutput: r.Request.Data.(*PutLexiconOutput),
+		PutLexiconOutput: r.Request.Data.(*types.PutLexiconOutput),
 		response:         &aws.Response{Request: r.Request},
 	}
 
@@ -144,7 +71,7 @@ func (r PutLexiconRequest) Send(ctx context.Context) (*PutLexiconResponse, error
 // PutLexiconResponse is the response type for the
 // PutLexicon API operation.
 type PutLexiconResponse struct {
-	*PutLexiconOutput
+	*types.PutLexiconOutput
 
 	response *aws.Response
 }

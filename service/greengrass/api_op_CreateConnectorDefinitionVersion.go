@@ -4,126 +4,10 @@ package greengrass
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/greengrass/types"
 )
-
-type CreateConnectorDefinitionVersionInput struct {
-	_ struct{} `type:"structure"`
-
-	AmznClientToken *string `location:"header" locationName:"X-Amzn-Client-Token" type:"string"`
-
-	// ConnectorDefinitionId is a required field
-	ConnectorDefinitionId *string `location:"uri" locationName:"ConnectorDefinitionId" type:"string" required:"true"`
-
-	Connectors []Connector `type:"list"`
-}
-
-// String returns the string representation
-func (s CreateConnectorDefinitionVersionInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateConnectorDefinitionVersionInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateConnectorDefinitionVersionInput"}
-
-	if s.ConnectorDefinitionId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ConnectorDefinitionId"))
-	}
-	if s.Connectors != nil {
-		for i, v := range s.Connectors {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Connectors", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s CreateConnectorDefinitionVersionInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.Connectors != nil {
-		v := s.Connectors
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "Connectors", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	if s.AmznClientToken != nil {
-		v := *s.AmznClientToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "X-Amzn-Client-Token", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.ConnectorDefinitionId != nil {
-		v := *s.ConnectorDefinitionId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "ConnectorDefinitionId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type CreateConnectorDefinitionVersionOutput struct {
-	_ struct{} `type:"structure"`
-
-	Arn *string `type:"string"`
-
-	CreationTimestamp *string `type:"string"`
-
-	Id *string `type:"string"`
-
-	Version *string `type:"string"`
-}
-
-// String returns the string representation
-func (s CreateConnectorDefinitionVersionOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s CreateConnectorDefinitionVersionOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.Arn != nil {
-		v := *s.Arn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "Arn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.CreationTimestamp != nil {
-		v := *s.CreationTimestamp
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "CreationTimestamp", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Id != nil {
-		v := *s.Id
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "Id", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Version != nil {
-		v := *s.Version
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "Version", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opCreateConnectorDefinitionVersion = "CreateConnectorDefinitionVersion"
 
@@ -140,7 +24,7 @@ const opCreateConnectorDefinitionVersion = "CreateConnectorDefinitionVersion"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/CreateConnectorDefinitionVersion
-func (c *Client) CreateConnectorDefinitionVersionRequest(input *CreateConnectorDefinitionVersionInput) CreateConnectorDefinitionVersionRequest {
+func (c *Client) CreateConnectorDefinitionVersionRequest(input *types.CreateConnectorDefinitionVersionInput) CreateConnectorDefinitionVersionRequest {
 	op := &aws.Operation{
 		Name:       opCreateConnectorDefinitionVersion,
 		HTTPMethod: "POST",
@@ -148,10 +32,10 @@ func (c *Client) CreateConnectorDefinitionVersionRequest(input *CreateConnectorD
 	}
 
 	if input == nil {
-		input = &CreateConnectorDefinitionVersionInput{}
+		input = &types.CreateConnectorDefinitionVersionInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateConnectorDefinitionVersionOutput{})
+	req := c.newRequest(op, input, &types.CreateConnectorDefinitionVersionOutput{})
 	return CreateConnectorDefinitionVersionRequest{Request: req, Input: input, Copy: c.CreateConnectorDefinitionVersionRequest}
 }
 
@@ -159,8 +43,8 @@ func (c *Client) CreateConnectorDefinitionVersionRequest(input *CreateConnectorD
 // CreateConnectorDefinitionVersion API operation.
 type CreateConnectorDefinitionVersionRequest struct {
 	*aws.Request
-	Input *CreateConnectorDefinitionVersionInput
-	Copy  func(*CreateConnectorDefinitionVersionInput) CreateConnectorDefinitionVersionRequest
+	Input *types.CreateConnectorDefinitionVersionInput
+	Copy  func(*types.CreateConnectorDefinitionVersionInput) CreateConnectorDefinitionVersionRequest
 }
 
 // Send marshals and sends the CreateConnectorDefinitionVersion API request.
@@ -172,7 +56,7 @@ func (r CreateConnectorDefinitionVersionRequest) Send(ctx context.Context) (*Cre
 	}
 
 	resp := &CreateConnectorDefinitionVersionResponse{
-		CreateConnectorDefinitionVersionOutput: r.Request.Data.(*CreateConnectorDefinitionVersionOutput),
+		CreateConnectorDefinitionVersionOutput: r.Request.Data.(*types.CreateConnectorDefinitionVersionOutput),
 		response:                               &aws.Response{Request: r.Request},
 	}
 
@@ -182,7 +66,7 @@ func (r CreateConnectorDefinitionVersionRequest) Send(ctx context.Context) (*Cre
 // CreateConnectorDefinitionVersionResponse is the response type for the
 // CreateConnectorDefinitionVersion API operation.
 type CreateConnectorDefinitionVersionResponse struct {
-	*CreateConnectorDefinitionVersionOutput
+	*types.CreateConnectorDefinitionVersionOutput
 
 	response *aws.Response
 }

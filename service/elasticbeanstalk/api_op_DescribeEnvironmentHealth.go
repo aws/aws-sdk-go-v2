@@ -4,86 +4,10 @@ package elasticbeanstalk
 
 import (
 	"context"
-	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/elasticbeanstalk/types"
 )
-
-// See the example below to learn how to create a request body.
-type DescribeEnvironmentHealthInput struct {
-	_ struct{} `type:"structure"`
-
-	// Specify the response elements to return. To retrieve all attributes, set
-	// to All. If no attribute names are specified, returns the name of the environment.
-	AttributeNames []EnvironmentHealthAttribute `type:"list"`
-
-	// Specify the environment by ID.
-	//
-	// You must specify either this or an EnvironmentName, or both.
-	EnvironmentId *string `type:"string"`
-
-	// Specify the environment by name.
-	//
-	// You must specify either this or an EnvironmentName, or both.
-	EnvironmentName *string `min:"4" type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeEnvironmentHealthInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeEnvironmentHealthInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeEnvironmentHealthInput"}
-	if s.EnvironmentName != nil && len(*s.EnvironmentName) < 4 {
-		invalidParams.Add(aws.NewErrParamMinLen("EnvironmentName", 4))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Health details for an AWS Elastic Beanstalk environment.
-type DescribeEnvironmentHealthOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Application request metrics for the environment.
-	ApplicationMetrics *ApplicationMetrics `type:"structure"`
-
-	// Descriptions of the data that contributed to the environment's current health
-	// status.
-	Causes []string `type:"list"`
-
-	// The health color (https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/health-enhanced-status.html)
-	// of the environment.
-	Color *string `type:"string"`
-
-	// The environment's name.
-	EnvironmentName *string `min:"4" type:"string"`
-
-	// The health status (https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/health-enhanced-status.html)
-	// of the environment. For example, Ok.
-	HealthStatus *string `type:"string"`
-
-	// Summary health information for the instances in the environment.
-	InstancesHealth *InstanceHealthSummary `type:"structure"`
-
-	// The date and time that the health information was retrieved.
-	RefreshedAt *time.Time `type:"timestamp"`
-
-	// The environment's operational status. Ready, Launching, Updating, Terminating,
-	// or Terminated.
-	Status EnvironmentHealth `type:"string" enum:"true"`
-}
-
-// String returns the string representation
-func (s DescribeEnvironmentHealthOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeEnvironmentHealth = "DescribeEnvironmentHealth"
 
@@ -102,7 +26,7 @@ const opDescribeEnvironmentHealth = "DescribeEnvironmentHealth"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/DescribeEnvironmentHealth
-func (c *Client) DescribeEnvironmentHealthRequest(input *DescribeEnvironmentHealthInput) DescribeEnvironmentHealthRequest {
+func (c *Client) DescribeEnvironmentHealthRequest(input *types.DescribeEnvironmentHealthInput) DescribeEnvironmentHealthRequest {
 	op := &aws.Operation{
 		Name:       opDescribeEnvironmentHealth,
 		HTTPMethod: "POST",
@@ -110,10 +34,10 @@ func (c *Client) DescribeEnvironmentHealthRequest(input *DescribeEnvironmentHeal
 	}
 
 	if input == nil {
-		input = &DescribeEnvironmentHealthInput{}
+		input = &types.DescribeEnvironmentHealthInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeEnvironmentHealthOutput{})
+	req := c.newRequest(op, input, &types.DescribeEnvironmentHealthOutput{})
 	return DescribeEnvironmentHealthRequest{Request: req, Input: input, Copy: c.DescribeEnvironmentHealthRequest}
 }
 
@@ -121,8 +45,8 @@ func (c *Client) DescribeEnvironmentHealthRequest(input *DescribeEnvironmentHeal
 // DescribeEnvironmentHealth API operation.
 type DescribeEnvironmentHealthRequest struct {
 	*aws.Request
-	Input *DescribeEnvironmentHealthInput
-	Copy  func(*DescribeEnvironmentHealthInput) DescribeEnvironmentHealthRequest
+	Input *types.DescribeEnvironmentHealthInput
+	Copy  func(*types.DescribeEnvironmentHealthInput) DescribeEnvironmentHealthRequest
 }
 
 // Send marshals and sends the DescribeEnvironmentHealth API request.
@@ -134,7 +58,7 @@ func (r DescribeEnvironmentHealthRequest) Send(ctx context.Context) (*DescribeEn
 	}
 
 	resp := &DescribeEnvironmentHealthResponse{
-		DescribeEnvironmentHealthOutput: r.Request.Data.(*DescribeEnvironmentHealthOutput),
+		DescribeEnvironmentHealthOutput: r.Request.Data.(*types.DescribeEnvironmentHealthOutput),
 		response:                        &aws.Response{Request: r.Request},
 	}
 
@@ -144,7 +68,7 @@ func (r DescribeEnvironmentHealthRequest) Send(ctx context.Context) (*DescribeEn
 // DescribeEnvironmentHealthResponse is the response type for the
 // DescribeEnvironmentHealth API operation.
 type DescribeEnvironmentHealthResponse struct {
-	*DescribeEnvironmentHealthOutput
+	*types.DescribeEnvironmentHealthOutput
 
 	response *aws.Response
 }

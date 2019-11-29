@@ -6,110 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/medialive/types"
 )
-
-// A request to create actions (add actions to the schedule), delete actions
-// (remove actions from the schedule), or both create and delete actions.
-type BatchUpdateScheduleInput struct {
-	_ struct{} `type:"structure"`
-
-	// ChannelId is a required field
-	ChannelId *string `location:"uri" locationName:"channelId" type:"string" required:"true"`
-
-	// Schedule actions to create in the schedule.
-	Creates *BatchScheduleActionCreateRequest `locationName:"creates" type:"structure"`
-
-	// Schedule actions to delete from the schedule.
-	Deletes *BatchScheduleActionDeleteRequest `locationName:"deletes" type:"structure"`
-}
-
-// String returns the string representation
-func (s BatchUpdateScheduleInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *BatchUpdateScheduleInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "BatchUpdateScheduleInput"}
-
-	if s.ChannelId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ChannelId"))
-	}
-	if s.Creates != nil {
-		if err := s.Creates.Validate(); err != nil {
-			invalidParams.AddNested("Creates", err.(aws.ErrInvalidParams))
-		}
-	}
-	if s.Deletes != nil {
-		if err := s.Deletes.Validate(); err != nil {
-			invalidParams.AddNested("Deletes", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s BatchUpdateScheduleInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.Creates != nil {
-		v := s.Creates
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "creates", v, metadata)
-	}
-	if s.Deletes != nil {
-		v := s.Deletes
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "deletes", v, metadata)
-	}
-	if s.ChannelId != nil {
-		v := *s.ChannelId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "channelId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type BatchUpdateScheduleOutput struct {
-	_ struct{} `type:"structure"`
-
-	// List of actions that have been created in the schedule.
-	Creates *BatchScheduleActionCreateResult `locationName:"creates" type:"structure"`
-
-	// List of actions that have been deleted from the schedule.
-	Deletes *BatchScheduleActionDeleteResult `locationName:"deletes" type:"structure"`
-}
-
-// String returns the string representation
-func (s BatchUpdateScheduleOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s BatchUpdateScheduleOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.Creates != nil {
-		v := s.Creates
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "creates", v, metadata)
-	}
-	if s.Deletes != nil {
-		v := s.Deletes
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "deletes", v, metadata)
-	}
-	return nil
-}
 
 const opBatchUpdateSchedule = "BatchUpdateSchedule"
 
@@ -126,7 +24,7 @@ const opBatchUpdateSchedule = "BatchUpdateSchedule"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/BatchUpdateSchedule
-func (c *Client) BatchUpdateScheduleRequest(input *BatchUpdateScheduleInput) BatchUpdateScheduleRequest {
+func (c *Client) BatchUpdateScheduleRequest(input *types.BatchUpdateScheduleInput) BatchUpdateScheduleRequest {
 	op := &aws.Operation{
 		Name:       opBatchUpdateSchedule,
 		HTTPMethod: "PUT",
@@ -134,10 +32,10 @@ func (c *Client) BatchUpdateScheduleRequest(input *BatchUpdateScheduleInput) Bat
 	}
 
 	if input == nil {
-		input = &BatchUpdateScheduleInput{}
+		input = &types.BatchUpdateScheduleInput{}
 	}
 
-	req := c.newRequest(op, input, &BatchUpdateScheduleOutput{})
+	req := c.newRequest(op, input, &types.BatchUpdateScheduleOutput{})
 	return BatchUpdateScheduleRequest{Request: req, Input: input, Copy: c.BatchUpdateScheduleRequest}
 }
 
@@ -145,8 +43,8 @@ func (c *Client) BatchUpdateScheduleRequest(input *BatchUpdateScheduleInput) Bat
 // BatchUpdateSchedule API operation.
 type BatchUpdateScheduleRequest struct {
 	*aws.Request
-	Input *BatchUpdateScheduleInput
-	Copy  func(*BatchUpdateScheduleInput) BatchUpdateScheduleRequest
+	Input *types.BatchUpdateScheduleInput
+	Copy  func(*types.BatchUpdateScheduleInput) BatchUpdateScheduleRequest
 }
 
 // Send marshals and sends the BatchUpdateSchedule API request.
@@ -158,7 +56,7 @@ func (r BatchUpdateScheduleRequest) Send(ctx context.Context) (*BatchUpdateSched
 	}
 
 	resp := &BatchUpdateScheduleResponse{
-		BatchUpdateScheduleOutput: r.Request.Data.(*BatchUpdateScheduleOutput),
+		BatchUpdateScheduleOutput: r.Request.Data.(*types.BatchUpdateScheduleOutput),
 		response:                  &aws.Response{Request: r.Request},
 	}
 
@@ -168,7 +66,7 @@ func (r BatchUpdateScheduleRequest) Send(ctx context.Context) (*BatchUpdateSched
 // BatchUpdateScheduleResponse is the response type for the
 // BatchUpdateSchedule API operation.
 type BatchUpdateScheduleResponse struct {
-	*BatchUpdateScheduleOutput
+	*types.BatchUpdateScheduleOutput
 
 	response *aws.Response
 }

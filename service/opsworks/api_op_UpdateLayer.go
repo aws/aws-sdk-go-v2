@@ -4,126 +4,12 @@ package opsworks
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
+	"github.com/aws/aws-sdk-go-v2/service/opsworks/types"
 )
-
-type UpdateLayerInput struct {
-	_ struct{} `type:"structure"`
-
-	// One or more user-defined key/value pairs to be added to the stack attributes.
-	Attributes map[string]string `type:"map"`
-
-	// Whether to automatically assign an Elastic IP address (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html)
-	// to the layer's instances. For more information, see How to Edit a Layer (https://docs.aws.amazon.com/opsworks/latest/userguide/workinglayers-basics-edit.html).
-	AutoAssignElasticIps *bool `type:"boolean"`
-
-	// For stacks that are running in a VPC, whether to automatically assign a public
-	// IP address to the layer's instances. For more information, see How to Edit
-	// a Layer (https://docs.aws.amazon.com/opsworks/latest/userguide/workinglayers-basics-edit.html).
-	AutoAssignPublicIps *bool `type:"boolean"`
-
-	// Specifies CloudWatch Logs configuration options for the layer. For more information,
-	// see CloudWatchLogsLogStream.
-	CloudWatchLogsConfiguration *CloudWatchLogsConfiguration `type:"structure"`
-
-	// The ARN of an IAM profile to be used for all of the layer's EC2 instances.
-	// For more information about IAM ARNs, see Using Identifiers (https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html).
-	CustomInstanceProfileArn *string `type:"string"`
-
-	// A JSON-formatted string containing custom stack configuration and deployment
-	// attributes to be installed on the layer's instances. For more information,
-	// see Using Custom JSON (https://docs.aws.amazon.com/opsworks/latest/userguide/workingcookbook-json-override.html).
-	CustomJson *string `type:"string"`
-
-	// A LayerCustomRecipes object that specifies the layer's custom recipes.
-	CustomRecipes *Recipes `type:"structure"`
-
-	// An array containing the layer's custom security group IDs.
-	CustomSecurityGroupIds []string `type:"list"`
-
-	// Whether to disable auto healing for the layer.
-	EnableAutoHealing *bool `type:"boolean"`
-
-	// Whether to install operating system and package updates when the instance
-	// boots. The default value is true. To control when updates are installed,
-	// set this value to false. You must then update your instances manually by
-	// using CreateDeployment to run the update_dependencies stack command or manually
-	// running yum (Amazon Linux) or apt-get (Ubuntu) on the instances.
-	//
-	// We strongly recommend using the default value of true, to ensure that your
-	// instances have the latest security updates.
-	InstallUpdatesOnBoot *bool `type:"boolean"`
-
-	// The layer ID.
-	//
-	// LayerId is a required field
-	LayerId *string `type:"string" required:"true"`
-
-	// Specifies the lifecycle event configuration
-	LifecycleEventConfiguration *LifecycleEventConfiguration `type:"structure"`
-
-	// The layer name, which is used by the console.
-	Name *string `type:"string"`
-
-	// An array of Package objects that describe the layer's packages.
-	Packages []string `type:"list"`
-
-	// For custom layers only, use this parameter to specify the layer's short name,
-	// which is used internally by AWS OpsWorks Stacks and by Chef. The short name
-	// is also used as the name for the directory where your app files are installed.
-	// It can have a maximum of 200 characters and must be in the following format:
-	// /\A[a-z0-9\-\_\.]+\Z/.
-	//
-	// The built-in layers' short names are defined by AWS OpsWorks Stacks. For
-	// more information, see the Layer Reference (https://docs.aws.amazon.com/opsworks/latest/userguide/layers.html)
-	Shortname *string `type:"string"`
-
-	// Whether to use Amazon EBS-optimized instances.
-	UseEbsOptimizedInstances *bool `type:"boolean"`
-
-	// A VolumeConfigurations object that describes the layer's Amazon EBS volumes.
-	VolumeConfigurations []VolumeConfiguration `type:"list"`
-}
-
-// String returns the string representation
-func (s UpdateLayerInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateLayerInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateLayerInput"}
-
-	if s.LayerId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("LayerId"))
-	}
-	if s.VolumeConfigurations != nil {
-		for i, v := range s.VolumeConfigurations {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "VolumeConfigurations", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type UpdateLayerOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s UpdateLayerOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opUpdateLayer = "UpdateLayer"
 
@@ -145,7 +31,7 @@ const opUpdateLayer = "UpdateLayer"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/UpdateLayer
-func (c *Client) UpdateLayerRequest(input *UpdateLayerInput) UpdateLayerRequest {
+func (c *Client) UpdateLayerRequest(input *types.UpdateLayerInput) UpdateLayerRequest {
 	op := &aws.Operation{
 		Name:       opUpdateLayer,
 		HTTPMethod: "POST",
@@ -153,10 +39,10 @@ func (c *Client) UpdateLayerRequest(input *UpdateLayerInput) UpdateLayerRequest 
 	}
 
 	if input == nil {
-		input = &UpdateLayerInput{}
+		input = &types.UpdateLayerInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateLayerOutput{})
+	req := c.newRequest(op, input, &types.UpdateLayerOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return UpdateLayerRequest{Request: req, Input: input, Copy: c.UpdateLayerRequest}
@@ -166,8 +52,8 @@ func (c *Client) UpdateLayerRequest(input *UpdateLayerInput) UpdateLayerRequest 
 // UpdateLayer API operation.
 type UpdateLayerRequest struct {
 	*aws.Request
-	Input *UpdateLayerInput
-	Copy  func(*UpdateLayerInput) UpdateLayerRequest
+	Input *types.UpdateLayerInput
+	Copy  func(*types.UpdateLayerInput) UpdateLayerRequest
 }
 
 // Send marshals and sends the UpdateLayer API request.
@@ -179,7 +65,7 @@ func (r UpdateLayerRequest) Send(ctx context.Context) (*UpdateLayerResponse, err
 	}
 
 	resp := &UpdateLayerResponse{
-		UpdateLayerOutput: r.Request.Data.(*UpdateLayerOutput),
+		UpdateLayerOutput: r.Request.Data.(*types.UpdateLayerOutput),
 		response:          &aws.Response{Request: r.Request},
 	}
 
@@ -189,7 +75,7 @@ func (r UpdateLayerRequest) Send(ctx context.Context) (*UpdateLayerResponse, err
 // UpdateLayerResponse is the response type for the
 // UpdateLayer API operation.
 type UpdateLayerResponse struct {
-	*UpdateLayerOutput
+	*types.UpdateLayerOutput
 
 	response *aws.Response
 }

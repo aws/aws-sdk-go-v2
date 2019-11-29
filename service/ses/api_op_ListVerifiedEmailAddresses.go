@@ -6,31 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ses/types"
 )
-
-type ListVerifiedEmailAddressesInput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s ListVerifiedEmailAddressesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// A list of email addresses that you have verified with Amazon SES under your
-// AWS account.
-type ListVerifiedEmailAddressesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A list of email addresses that have been verified.
-	VerifiedEmailAddresses []string `type:"list"`
-}
-
-// String returns the string representation
-func (s ListVerifiedEmailAddressesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListVerifiedEmailAddresses = "ListVerifiedEmailAddresses"
 
@@ -48,7 +25,7 @@ const opListVerifiedEmailAddresses = "ListVerifiedEmailAddresses"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/ListVerifiedEmailAddresses
-func (c *Client) ListVerifiedEmailAddressesRequest(input *ListVerifiedEmailAddressesInput) ListVerifiedEmailAddressesRequest {
+func (c *Client) ListVerifiedEmailAddressesRequest(input *types.ListVerifiedEmailAddressesInput) ListVerifiedEmailAddressesRequest {
 	op := &aws.Operation{
 		Name:       opListVerifiedEmailAddresses,
 		HTTPMethod: "POST",
@@ -56,10 +33,10 @@ func (c *Client) ListVerifiedEmailAddressesRequest(input *ListVerifiedEmailAddre
 	}
 
 	if input == nil {
-		input = &ListVerifiedEmailAddressesInput{}
+		input = &types.ListVerifiedEmailAddressesInput{}
 	}
 
-	req := c.newRequest(op, input, &ListVerifiedEmailAddressesOutput{})
+	req := c.newRequest(op, input, &types.ListVerifiedEmailAddressesOutput{})
 	return ListVerifiedEmailAddressesRequest{Request: req, Input: input, Copy: c.ListVerifiedEmailAddressesRequest}
 }
 
@@ -67,8 +44,8 @@ func (c *Client) ListVerifiedEmailAddressesRequest(input *ListVerifiedEmailAddre
 // ListVerifiedEmailAddresses API operation.
 type ListVerifiedEmailAddressesRequest struct {
 	*aws.Request
-	Input *ListVerifiedEmailAddressesInput
-	Copy  func(*ListVerifiedEmailAddressesInput) ListVerifiedEmailAddressesRequest
+	Input *types.ListVerifiedEmailAddressesInput
+	Copy  func(*types.ListVerifiedEmailAddressesInput) ListVerifiedEmailAddressesRequest
 }
 
 // Send marshals and sends the ListVerifiedEmailAddresses API request.
@@ -80,7 +57,7 @@ func (r ListVerifiedEmailAddressesRequest) Send(ctx context.Context) (*ListVerif
 	}
 
 	resp := &ListVerifiedEmailAddressesResponse{
-		ListVerifiedEmailAddressesOutput: r.Request.Data.(*ListVerifiedEmailAddressesOutput),
+		ListVerifiedEmailAddressesOutput: r.Request.Data.(*types.ListVerifiedEmailAddressesOutput),
 		response:                         &aws.Response{Request: r.Request},
 	}
 
@@ -90,7 +67,7 @@ func (r ListVerifiedEmailAddressesRequest) Send(ctx context.Context) (*ListVerif
 // ListVerifiedEmailAddressesResponse is the response type for the
 // ListVerifiedEmailAddresses API operation.
 type ListVerifiedEmailAddressesResponse struct {
-	*ListVerifiedEmailAddressesOutput
+	*types.ListVerifiedEmailAddressesOutput
 
 	response *aws.Response
 }

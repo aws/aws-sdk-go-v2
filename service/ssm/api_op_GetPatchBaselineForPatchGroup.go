@@ -6,61 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ssm/types"
 )
-
-type GetPatchBaselineForPatchGroupInput struct {
-	_ struct{} `type:"structure"`
-
-	// Returns he operating system rule specified for patch groups using the patch
-	// baseline.
-	OperatingSystem OperatingSystem `type:"string" enum:"true"`
-
-	// The name of the patch group whose patch baseline should be retrieved.
-	//
-	// PatchGroup is a required field
-	PatchGroup *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetPatchBaselineForPatchGroupInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetPatchBaselineForPatchGroupInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetPatchBaselineForPatchGroupInput"}
-
-	if s.PatchGroup == nil {
-		invalidParams.Add(aws.NewErrParamRequired("PatchGroup"))
-	}
-	if s.PatchGroup != nil && len(*s.PatchGroup) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("PatchGroup", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type GetPatchBaselineForPatchGroupOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the patch baseline that should be used for the patch group.
-	BaselineId *string `min:"20" type:"string"`
-
-	// The operating system rule specified for patch groups using the patch baseline.
-	OperatingSystem OperatingSystem `type:"string" enum:"true"`
-
-	// The name of the patch group.
-	PatchGroup *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s GetPatchBaselineForPatchGroupOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetPatchBaselineForPatchGroup = "GetPatchBaselineForPatchGroup"
 
@@ -78,7 +25,7 @@ const opGetPatchBaselineForPatchGroup = "GetPatchBaselineForPatchGroup"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetPatchBaselineForPatchGroup
-func (c *Client) GetPatchBaselineForPatchGroupRequest(input *GetPatchBaselineForPatchGroupInput) GetPatchBaselineForPatchGroupRequest {
+func (c *Client) GetPatchBaselineForPatchGroupRequest(input *types.GetPatchBaselineForPatchGroupInput) GetPatchBaselineForPatchGroupRequest {
 	op := &aws.Operation{
 		Name:       opGetPatchBaselineForPatchGroup,
 		HTTPMethod: "POST",
@@ -86,10 +33,10 @@ func (c *Client) GetPatchBaselineForPatchGroupRequest(input *GetPatchBaselineFor
 	}
 
 	if input == nil {
-		input = &GetPatchBaselineForPatchGroupInput{}
+		input = &types.GetPatchBaselineForPatchGroupInput{}
 	}
 
-	req := c.newRequest(op, input, &GetPatchBaselineForPatchGroupOutput{})
+	req := c.newRequest(op, input, &types.GetPatchBaselineForPatchGroupOutput{})
 	return GetPatchBaselineForPatchGroupRequest{Request: req, Input: input, Copy: c.GetPatchBaselineForPatchGroupRequest}
 }
 
@@ -97,8 +44,8 @@ func (c *Client) GetPatchBaselineForPatchGroupRequest(input *GetPatchBaselineFor
 // GetPatchBaselineForPatchGroup API operation.
 type GetPatchBaselineForPatchGroupRequest struct {
 	*aws.Request
-	Input *GetPatchBaselineForPatchGroupInput
-	Copy  func(*GetPatchBaselineForPatchGroupInput) GetPatchBaselineForPatchGroupRequest
+	Input *types.GetPatchBaselineForPatchGroupInput
+	Copy  func(*types.GetPatchBaselineForPatchGroupInput) GetPatchBaselineForPatchGroupRequest
 }
 
 // Send marshals and sends the GetPatchBaselineForPatchGroup API request.
@@ -110,7 +57,7 @@ func (r GetPatchBaselineForPatchGroupRequest) Send(ctx context.Context) (*GetPat
 	}
 
 	resp := &GetPatchBaselineForPatchGroupResponse{
-		GetPatchBaselineForPatchGroupOutput: r.Request.Data.(*GetPatchBaselineForPatchGroupOutput),
+		GetPatchBaselineForPatchGroupOutput: r.Request.Data.(*types.GetPatchBaselineForPatchGroupOutput),
 		response:                            &aws.Response{Request: r.Request},
 	}
 
@@ -120,7 +67,7 @@ func (r GetPatchBaselineForPatchGroupRequest) Send(ctx context.Context) (*GetPat
 // GetPatchBaselineForPatchGroupResponse is the response type for the
 // GetPatchBaselineForPatchGroup API operation.
 type GetPatchBaselineForPatchGroupResponse struct {
-	*GetPatchBaselineForPatchGroupOutput
+	*types.GetPatchBaselineForPatchGroupOutput
 
 	response *aws.Response
 }

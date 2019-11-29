@@ -6,82 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/restjson"
+	"github.com/aws/aws-sdk-go-v2/service/iotanalytics/types"
 )
-
-type DeleteDatasetContentInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the data set whose content is deleted.
-	//
-	// DatasetName is a required field
-	DatasetName *string `location:"uri" locationName:"datasetName" min:"1" type:"string" required:"true"`
-
-	// The version of the data set whose content is deleted. You can also use the
-	// strings "$LATEST" or "$LATEST_SUCCEEDED" to delete the latest or latest successfully
-	// completed data set. If not specified, "$LATEST_SUCCEEDED" is the default.
-	VersionId *string `location:"querystring" locationName:"versionId" min:"7" type:"string"`
-}
-
-// String returns the string representation
-func (s DeleteDatasetContentInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteDatasetContentInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteDatasetContentInput"}
-
-	if s.DatasetName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DatasetName"))
-	}
-	if s.DatasetName != nil && len(*s.DatasetName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("DatasetName", 1))
-	}
-	if s.VersionId != nil && len(*s.VersionId) < 7 {
-		invalidParams.Add(aws.NewErrParamMinLen("VersionId", 7))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteDatasetContentInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.DatasetName != nil {
-		v := *s.DatasetName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "datasetName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.VersionId != nil {
-		v := *s.VersionId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "versionId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type DeleteDatasetContentOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteDatasetContentOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteDatasetContentOutput) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
 
 const opDeleteDatasetContent = "DeleteDatasetContent"
 
@@ -98,7 +26,7 @@ const opDeleteDatasetContent = "DeleteDatasetContent"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iotanalytics-2017-11-27/DeleteDatasetContent
-func (c *Client) DeleteDatasetContentRequest(input *DeleteDatasetContentInput) DeleteDatasetContentRequest {
+func (c *Client) DeleteDatasetContentRequest(input *types.DeleteDatasetContentInput) DeleteDatasetContentRequest {
 	op := &aws.Operation{
 		Name:       opDeleteDatasetContent,
 		HTTPMethod: "DELETE",
@@ -106,10 +34,10 @@ func (c *Client) DeleteDatasetContentRequest(input *DeleteDatasetContentInput) D
 	}
 
 	if input == nil {
-		input = &DeleteDatasetContentInput{}
+		input = &types.DeleteDatasetContentInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteDatasetContentOutput{})
+	req := c.newRequest(op, input, &types.DeleteDatasetContentOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return DeleteDatasetContentRequest{Request: req, Input: input, Copy: c.DeleteDatasetContentRequest}
@@ -119,8 +47,8 @@ func (c *Client) DeleteDatasetContentRequest(input *DeleteDatasetContentInput) D
 // DeleteDatasetContent API operation.
 type DeleteDatasetContentRequest struct {
 	*aws.Request
-	Input *DeleteDatasetContentInput
-	Copy  func(*DeleteDatasetContentInput) DeleteDatasetContentRequest
+	Input *types.DeleteDatasetContentInput
+	Copy  func(*types.DeleteDatasetContentInput) DeleteDatasetContentRequest
 }
 
 // Send marshals and sends the DeleteDatasetContent API request.
@@ -132,7 +60,7 @@ func (r DeleteDatasetContentRequest) Send(ctx context.Context) (*DeleteDatasetCo
 	}
 
 	resp := &DeleteDatasetContentResponse{
-		DeleteDatasetContentOutput: r.Request.Data.(*DeleteDatasetContentOutput),
+		DeleteDatasetContentOutput: r.Request.Data.(*types.DeleteDatasetContentOutput),
 		response:                   &aws.Response{Request: r.Request},
 	}
 
@@ -142,7 +70,7 @@ func (r DeleteDatasetContentRequest) Send(ctx context.Context) (*DeleteDatasetCo
 // DeleteDatasetContentResponse is the response type for the
 // DeleteDatasetContent API operation.
 type DeleteDatasetContentResponse struct {
-	*DeleteDatasetContentOutput
+	*types.DeleteDatasetContentOutput
 
 	response *aws.Response
 }

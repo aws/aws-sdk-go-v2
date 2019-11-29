@@ -6,52 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/snowball/types"
 )
-
-type DescribeAddressInput struct {
-	_ struct{} `type:"structure"`
-
-	// The automatically generated ID for a specific address.
-	//
-	// AddressId is a required field
-	AddressId *string `min:"40" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeAddressInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeAddressInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeAddressInput"}
-
-	if s.AddressId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("AddressId"))
-	}
-	if s.AddressId != nil && len(*s.AddressId) < 40 {
-		invalidParams.Add(aws.NewErrParamMinLen("AddressId", 40))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribeAddressOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The address that you want the Snowball or Snowballs associated with a specific
-	// job to be shipped to.
-	Address *Address `type:"structure"`
-}
-
-// String returns the string representation
-func (s DescribeAddressOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeAddress = "DescribeAddress"
 
@@ -69,7 +25,7 @@ const opDescribeAddress = "DescribeAddress"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/DescribeAddress
-func (c *Client) DescribeAddressRequest(input *DescribeAddressInput) DescribeAddressRequest {
+func (c *Client) DescribeAddressRequest(input *types.DescribeAddressInput) DescribeAddressRequest {
 	op := &aws.Operation{
 		Name:       opDescribeAddress,
 		HTTPMethod: "POST",
@@ -77,10 +33,10 @@ func (c *Client) DescribeAddressRequest(input *DescribeAddressInput) DescribeAdd
 	}
 
 	if input == nil {
-		input = &DescribeAddressInput{}
+		input = &types.DescribeAddressInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeAddressOutput{})
+	req := c.newRequest(op, input, &types.DescribeAddressOutput{})
 	return DescribeAddressRequest{Request: req, Input: input, Copy: c.DescribeAddressRequest}
 }
 
@@ -88,8 +44,8 @@ func (c *Client) DescribeAddressRequest(input *DescribeAddressInput) DescribeAdd
 // DescribeAddress API operation.
 type DescribeAddressRequest struct {
 	*aws.Request
-	Input *DescribeAddressInput
-	Copy  func(*DescribeAddressInput) DescribeAddressRequest
+	Input *types.DescribeAddressInput
+	Copy  func(*types.DescribeAddressInput) DescribeAddressRequest
 }
 
 // Send marshals and sends the DescribeAddress API request.
@@ -101,7 +57,7 @@ func (r DescribeAddressRequest) Send(ctx context.Context) (*DescribeAddressRespo
 	}
 
 	resp := &DescribeAddressResponse{
-		DescribeAddressOutput: r.Request.Data.(*DescribeAddressOutput),
+		DescribeAddressOutput: r.Request.Data.(*types.DescribeAddressOutput),
 		response:              &aws.Response{Request: r.Request},
 	}
 
@@ -111,7 +67,7 @@ func (r DescribeAddressRequest) Send(ctx context.Context) (*DescribeAddressRespo
 // DescribeAddressResponse is the response type for the
 // DescribeAddress API operation.
 type DescribeAddressResponse struct {
-	*DescribeAddressOutput
+	*types.DescribeAddressOutput
 
 	response *aws.Response
 }

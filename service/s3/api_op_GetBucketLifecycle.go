@@ -6,89 +6,41 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/s3/types"
 )
-
-type GetBucketLifecycleInput struct {
-	_ struct{} `type:"structure"`
-
-	// Bucket is a required field
-	Bucket *string `location:"uri" locationName:"Bucket" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetBucketLifecycleInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetBucketLifecycleInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetBucketLifecycleInput"}
-
-	if s.Bucket == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Bucket"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-func (s *GetBucketLifecycleInput) getBucket() (v string) {
-	if s.Bucket == nil {
-		return v
-	}
-	return *s.Bucket
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetBucketLifecycleInput) MarshalFields(e protocol.FieldEncoder) error {
-
-	if s.Bucket != nil {
-		v := *s.Bucket
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "Bucket", protocol.StringValue(v), metadata)
-	}
-	return nil
-}
-
-type GetBucketLifecycleOutput struct {
-	_ struct{} `type:"structure"`
-
-	Rules []Rule `locationName:"Rule" type:"list" flattened:"true"`
-}
-
-// String returns the string representation
-func (s GetBucketLifecycleOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetBucketLifecycleOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.Rules != nil {
-		v := s.Rules
-
-		metadata := protocol.Metadata{Flatten: true}
-		ls0 := e.List(protocol.BodyTarget, "Rule", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	return nil
-}
 
 const opGetBucketLifecycle = "GetBucketLifecycle"
 
 // GetBucketLifecycleRequest returns a request value for making API operation for
 // Amazon Simple Storage Service.
 //
-// No longer used, see the GetBucketLifecycleConfiguration operation.
+//
+// For an updated version of this API, see GetBucketLifecycleConfiguration.
+// If you configured a bucket lifecycle using the filter element, you should
+// the updated version of this topic. This topic is provided for backward compatibility.
+//
+// Returns the lifecycle configuration information set on the bucket. For information
+// about lifecycle configuration, see Object Lifecycle Management (https://docs.aws.amazon.com/AmazonS3/latest/dev/object-lifecycle-mgmt.html).
+//
+// To use this operation, you must have permission to perform the s3:GetLifecycleConfiguration
+// action. The bucket owner has this permission by default. The bucket owner
+// can grant this permission to others. For more information about permissions,
+// see Permissions Related to Bucket Subresource Operations (https://docs.aws.amazon.com/AmazonS3/latest/dev/using-with-s3-actions.html#using-with-s3-actions-related-to-bucket-subresources)
+// and Managing Access Permissions to Your Amazon S3 Resources (https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-access-control.html).
+//
+// GetBucketLifecycle has the following special error:
+//
+//    * Error code: NoSuchLifecycleConfiguration Description: The lifecycle
+//    configuration does not exist. HTTP Status Code: 404 Not Found SOAP Fault
+//    Code Prefix: Client
+//
+// The following operations are related to GetBucketLifecycle:
+//
+//    * GetBucketLifecycleConfiguration
+//
+//    * PutBucketLifecycle
+//
+//    * DeleteBucketLifecycle
 //
 //    // Example sending a request using GetBucketLifecycleRequest.
 //    req := client.GetBucketLifecycleRequest(params)
@@ -98,7 +50,7 @@ const opGetBucketLifecycle = "GetBucketLifecycle"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetBucketLifecycle
-func (c *Client) GetBucketLifecycleRequest(input *GetBucketLifecycleInput) GetBucketLifecycleRequest {
+func (c *Client) GetBucketLifecycleRequest(input *types.GetBucketLifecycleInput) GetBucketLifecycleRequest {
 	if c.Client.Config.Logger != nil {
 		c.Client.Config.Logger.Log("This operation, GetBucketLifecycle, has been deprecated")
 	}
@@ -109,10 +61,10 @@ func (c *Client) GetBucketLifecycleRequest(input *GetBucketLifecycleInput) GetBu
 	}
 
 	if input == nil {
-		input = &GetBucketLifecycleInput{}
+		input = &types.GetBucketLifecycleInput{}
 	}
 
-	req := c.newRequest(op, input, &GetBucketLifecycleOutput{})
+	req := c.newRequest(op, input, &types.GetBucketLifecycleOutput{})
 	return GetBucketLifecycleRequest{Request: req, Input: input, Copy: c.GetBucketLifecycleRequest}
 }
 
@@ -120,8 +72,8 @@ func (c *Client) GetBucketLifecycleRequest(input *GetBucketLifecycleInput) GetBu
 // GetBucketLifecycle API operation.
 type GetBucketLifecycleRequest struct {
 	*aws.Request
-	Input *GetBucketLifecycleInput
-	Copy  func(*GetBucketLifecycleInput) GetBucketLifecycleRequest
+	Input *types.GetBucketLifecycleInput
+	Copy  func(*types.GetBucketLifecycleInput) GetBucketLifecycleRequest
 }
 
 // Send marshals and sends the GetBucketLifecycle API request.
@@ -133,7 +85,7 @@ func (r GetBucketLifecycleRequest) Send(ctx context.Context) (*GetBucketLifecycl
 	}
 
 	resp := &GetBucketLifecycleResponse{
-		GetBucketLifecycleOutput: r.Request.Data.(*GetBucketLifecycleOutput),
+		GetBucketLifecycleOutput: r.Request.Data.(*types.GetBucketLifecycleOutput),
 		response:                 &aws.Response{Request: r.Request},
 	}
 
@@ -143,7 +95,7 @@ func (r GetBucketLifecycleRequest) Send(ctx context.Context) (*GetBucketLifecycl
 // GetBucketLifecycleResponse is the response type for the
 // GetBucketLifecycle API operation.
 type GetBucketLifecycleResponse struct {
-	*GetBucketLifecycleOutput
+	*types.GetBucketLifecycleOutput
 
 	response *aws.Response
 }

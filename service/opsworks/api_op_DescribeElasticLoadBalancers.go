@@ -6,38 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/opsworks/types"
 )
-
-type DescribeElasticLoadBalancersInput struct {
-	_ struct{} `type:"structure"`
-
-	// A list of layer IDs. The action describes the Elastic Load Balancing instances
-	// for the specified layers.
-	LayerIds []string `type:"list"`
-
-	// A stack ID. The action describes the stack's Elastic Load Balancing instances.
-	StackId *string `type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeElasticLoadBalancersInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Contains the response to a DescribeElasticLoadBalancers request.
-type DescribeElasticLoadBalancersOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A list of ElasticLoadBalancer objects that describe the specified Elastic
-	// Load Balancing instances.
-	ElasticLoadBalancers []ElasticLoadBalancer `type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeElasticLoadBalancersOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeElasticLoadBalancers = "DescribeElasticLoadBalancers"
 
@@ -61,7 +31,7 @@ const opDescribeElasticLoadBalancers = "DescribeElasticLoadBalancers"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DescribeElasticLoadBalancers
-func (c *Client) DescribeElasticLoadBalancersRequest(input *DescribeElasticLoadBalancersInput) DescribeElasticLoadBalancersRequest {
+func (c *Client) DescribeElasticLoadBalancersRequest(input *types.DescribeElasticLoadBalancersInput) DescribeElasticLoadBalancersRequest {
 	op := &aws.Operation{
 		Name:       opDescribeElasticLoadBalancers,
 		HTTPMethod: "POST",
@@ -69,10 +39,10 @@ func (c *Client) DescribeElasticLoadBalancersRequest(input *DescribeElasticLoadB
 	}
 
 	if input == nil {
-		input = &DescribeElasticLoadBalancersInput{}
+		input = &types.DescribeElasticLoadBalancersInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeElasticLoadBalancersOutput{})
+	req := c.newRequest(op, input, &types.DescribeElasticLoadBalancersOutput{})
 	return DescribeElasticLoadBalancersRequest{Request: req, Input: input, Copy: c.DescribeElasticLoadBalancersRequest}
 }
 
@@ -80,8 +50,8 @@ func (c *Client) DescribeElasticLoadBalancersRequest(input *DescribeElasticLoadB
 // DescribeElasticLoadBalancers API operation.
 type DescribeElasticLoadBalancersRequest struct {
 	*aws.Request
-	Input *DescribeElasticLoadBalancersInput
-	Copy  func(*DescribeElasticLoadBalancersInput) DescribeElasticLoadBalancersRequest
+	Input *types.DescribeElasticLoadBalancersInput
+	Copy  func(*types.DescribeElasticLoadBalancersInput) DescribeElasticLoadBalancersRequest
 }
 
 // Send marshals and sends the DescribeElasticLoadBalancers API request.
@@ -93,7 +63,7 @@ func (r DescribeElasticLoadBalancersRequest) Send(ctx context.Context) (*Describ
 	}
 
 	resp := &DescribeElasticLoadBalancersResponse{
-		DescribeElasticLoadBalancersOutput: r.Request.Data.(*DescribeElasticLoadBalancersOutput),
+		DescribeElasticLoadBalancersOutput: r.Request.Data.(*types.DescribeElasticLoadBalancersOutput),
 		response:                           &aws.Response{Request: r.Request},
 	}
 
@@ -103,7 +73,7 @@ func (r DescribeElasticLoadBalancersRequest) Send(ctx context.Context) (*Describ
 // DescribeElasticLoadBalancersResponse is the response type for the
 // DescribeElasticLoadBalancers API operation.
 type DescribeElasticLoadBalancersResponse struct {
-	*DescribeElasticLoadBalancersOutput
+	*types.DescribeElasticLoadBalancersOutput
 
 	response *aws.Response
 }

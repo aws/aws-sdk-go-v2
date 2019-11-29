@@ -4,85 +4,10 @@ package ssm
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ssm/types"
 )
-
-type DescribeInstancePatchStatesForPatchGroupInput struct {
-	_ struct{} `type:"structure"`
-
-	// Each entry in the array is a structure containing:
-	//
-	// Key (string between 1 and 200 characters)
-	//
-	// Values (array containing a single string)
-	//
-	// Type (string "Equal", "NotEqual", "LessThan", "GreaterThan")
-	Filters []InstancePatchStateFilter `type:"list"`
-
-	// The maximum number of patches to return (per page).
-	MaxResults *int64 `min:"10" type:"integer"`
-
-	// The token for the next set of items to return. (You received this token from
-	// a previous call.)
-	NextToken *string `type:"string"`
-
-	// The name of the patch group for which the patch state information should
-	// be retrieved.
-	//
-	// PatchGroup is a required field
-	PatchGroup *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeInstancePatchStatesForPatchGroupInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeInstancePatchStatesForPatchGroupInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeInstancePatchStatesForPatchGroupInput"}
-	if s.MaxResults != nil && *s.MaxResults < 10 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 10))
-	}
-
-	if s.PatchGroup == nil {
-		invalidParams.Add(aws.NewErrParamRequired("PatchGroup"))
-	}
-	if s.PatchGroup != nil && len(*s.PatchGroup) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("PatchGroup", 1))
-	}
-	if s.Filters != nil {
-		for i, v := range s.Filters {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribeInstancePatchStatesForPatchGroupOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The high-level patch state for the requested instances.
-	InstancePatchStates []InstancePatchState `min:"1" type:"list"`
-
-	// The token to use when requesting the next set of items. If there are no additional
-	// items to return, the string is empty.
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeInstancePatchStatesForPatchGroupOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeInstancePatchStatesForPatchGroup = "DescribeInstancePatchStatesForPatchGroup"
 
@@ -100,7 +25,7 @@ const opDescribeInstancePatchStatesForPatchGroup = "DescribeInstancePatchStatesF
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeInstancePatchStatesForPatchGroup
-func (c *Client) DescribeInstancePatchStatesForPatchGroupRequest(input *DescribeInstancePatchStatesForPatchGroupInput) DescribeInstancePatchStatesForPatchGroupRequest {
+func (c *Client) DescribeInstancePatchStatesForPatchGroupRequest(input *types.DescribeInstancePatchStatesForPatchGroupInput) DescribeInstancePatchStatesForPatchGroupRequest {
 	op := &aws.Operation{
 		Name:       opDescribeInstancePatchStatesForPatchGroup,
 		HTTPMethod: "POST",
@@ -108,10 +33,10 @@ func (c *Client) DescribeInstancePatchStatesForPatchGroupRequest(input *Describe
 	}
 
 	if input == nil {
-		input = &DescribeInstancePatchStatesForPatchGroupInput{}
+		input = &types.DescribeInstancePatchStatesForPatchGroupInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeInstancePatchStatesForPatchGroupOutput{})
+	req := c.newRequest(op, input, &types.DescribeInstancePatchStatesForPatchGroupOutput{})
 	return DescribeInstancePatchStatesForPatchGroupRequest{Request: req, Input: input, Copy: c.DescribeInstancePatchStatesForPatchGroupRequest}
 }
 
@@ -119,8 +44,8 @@ func (c *Client) DescribeInstancePatchStatesForPatchGroupRequest(input *Describe
 // DescribeInstancePatchStatesForPatchGroup API operation.
 type DescribeInstancePatchStatesForPatchGroupRequest struct {
 	*aws.Request
-	Input *DescribeInstancePatchStatesForPatchGroupInput
-	Copy  func(*DescribeInstancePatchStatesForPatchGroupInput) DescribeInstancePatchStatesForPatchGroupRequest
+	Input *types.DescribeInstancePatchStatesForPatchGroupInput
+	Copy  func(*types.DescribeInstancePatchStatesForPatchGroupInput) DescribeInstancePatchStatesForPatchGroupRequest
 }
 
 // Send marshals and sends the DescribeInstancePatchStatesForPatchGroup API request.
@@ -132,7 +57,7 @@ func (r DescribeInstancePatchStatesForPatchGroupRequest) Send(ctx context.Contex
 	}
 
 	resp := &DescribeInstancePatchStatesForPatchGroupResponse{
-		DescribeInstancePatchStatesForPatchGroupOutput: r.Request.Data.(*DescribeInstancePatchStatesForPatchGroupOutput),
+		DescribeInstancePatchStatesForPatchGroupOutput: r.Request.Data.(*types.DescribeInstancePatchStatesForPatchGroupOutput),
 		response: &aws.Response{Request: r.Request},
 	}
 
@@ -142,7 +67,7 @@ func (r DescribeInstancePatchStatesForPatchGroupRequest) Send(ctx context.Contex
 // DescribeInstancePatchStatesForPatchGroupResponse is the response type for the
 // DescribeInstancePatchStatesForPatchGroup API operation.
 type DescribeInstancePatchStatesForPatchGroupResponse struct {
-	*DescribeInstancePatchStatesForPatchGroupOutput
+	*types.DescribeInstancePatchStatesForPatchGroupOutput
 
 	response *aws.Response
 }

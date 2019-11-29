@@ -10,6 +10,7 @@ package stsiface
 
 import (
 	"github.com/aws/aws-sdk-go-v2/service/sts"
+	"github.com/aws/aws-sdk-go-v2/service/sts/types"
 )
 
 // ClientAPI provides an interface to enable mocking the
@@ -43,7 +44,7 @@ import (
 //    type mockClientClient struct {
 //        stsiface.ClientPI
 //    }
-//    func (m *mockClientClient) AssumeRole(input *sts.AssumeRoleInput) (*sts.AssumeRoleOutput, error) {
+//    func (m *mockClientClient) AssumeRole(input *types.AssumeRoleInput) (*types.AssumeRoleOutput, error) {
 //        // mock response/functionality
 //    }
 //
@@ -61,21 +62,21 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type ClientAPI interface {
-	AssumeRoleRequest(*sts.AssumeRoleInput) sts.AssumeRoleRequest
+	AssumeRoleRequest(*types.AssumeRoleInput) sts.AssumeRoleRequest
 
-	AssumeRoleWithSAMLRequest(*sts.AssumeRoleWithSAMLInput) sts.AssumeRoleWithSAMLRequest
+	AssumeRoleWithSAMLRequest(*types.AssumeRoleWithSAMLInput) sts.AssumeRoleWithSAMLRequest
 
-	AssumeRoleWithWebIdentityRequest(*sts.AssumeRoleWithWebIdentityInput) sts.AssumeRoleWithWebIdentityRequest
+	AssumeRoleWithWebIdentityRequest(*types.AssumeRoleWithWebIdentityInput) sts.AssumeRoleWithWebIdentityRequest
 
-	DecodeAuthorizationMessageRequest(*sts.DecodeAuthorizationMessageInput) sts.DecodeAuthorizationMessageRequest
+	DecodeAuthorizationMessageRequest(*types.DecodeAuthorizationMessageInput) sts.DecodeAuthorizationMessageRequest
 
-	GetAccessKeyInfoRequest(*sts.GetAccessKeyInfoInput) sts.GetAccessKeyInfoRequest
+	GetAccessKeyInfoRequest(*types.GetAccessKeyInfoInput) sts.GetAccessKeyInfoRequest
 
-	GetCallerIdentityRequest(*sts.GetCallerIdentityInput) sts.GetCallerIdentityRequest
+	GetCallerIdentityRequest(*types.GetCallerIdentityInput) sts.GetCallerIdentityRequest
 
-	GetFederationTokenRequest(*sts.GetFederationTokenInput) sts.GetFederationTokenRequest
+	GetFederationTokenRequest(*types.GetFederationTokenInput) sts.GetFederationTokenRequest
 
-	GetSessionTokenRequest(*sts.GetSessionTokenInput) sts.GetSessionTokenRequest
+	GetSessionTokenRequest(*types.GetSessionTokenInput) sts.GetSessionTokenRequest
 }
 
 var _ ClientAPI = (*sts.Client)(nil)

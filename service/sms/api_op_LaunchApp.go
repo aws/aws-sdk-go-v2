@@ -6,29 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/sms/types"
 )
-
-type LaunchAppInput struct {
-	_ struct{} `type:"structure"`
-
-	// ID of the application to launch.
-	AppId *string `locationName:"appId" type:"string"`
-}
-
-// String returns the string representation
-func (s LaunchAppInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type LaunchAppOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s LaunchAppOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opLaunchApp = "LaunchApp"
 
@@ -45,7 +24,7 @@ const opLaunchApp = "LaunchApp"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sms-2016-10-24/LaunchApp
-func (c *Client) LaunchAppRequest(input *LaunchAppInput) LaunchAppRequest {
+func (c *Client) LaunchAppRequest(input *types.LaunchAppInput) LaunchAppRequest {
 	op := &aws.Operation{
 		Name:       opLaunchApp,
 		HTTPMethod: "POST",
@@ -53,10 +32,10 @@ func (c *Client) LaunchAppRequest(input *LaunchAppInput) LaunchAppRequest {
 	}
 
 	if input == nil {
-		input = &LaunchAppInput{}
+		input = &types.LaunchAppInput{}
 	}
 
-	req := c.newRequest(op, input, &LaunchAppOutput{})
+	req := c.newRequest(op, input, &types.LaunchAppOutput{})
 	return LaunchAppRequest{Request: req, Input: input, Copy: c.LaunchAppRequest}
 }
 
@@ -64,8 +43,8 @@ func (c *Client) LaunchAppRequest(input *LaunchAppInput) LaunchAppRequest {
 // LaunchApp API operation.
 type LaunchAppRequest struct {
 	*aws.Request
-	Input *LaunchAppInput
-	Copy  func(*LaunchAppInput) LaunchAppRequest
+	Input *types.LaunchAppInput
+	Copy  func(*types.LaunchAppInput) LaunchAppRequest
 }
 
 // Send marshals and sends the LaunchApp API request.
@@ -77,7 +56,7 @@ func (r LaunchAppRequest) Send(ctx context.Context) (*LaunchAppResponse, error) 
 	}
 
 	resp := &LaunchAppResponse{
-		LaunchAppOutput: r.Request.Data.(*LaunchAppOutput),
+		LaunchAppOutput: r.Request.Data.(*types.LaunchAppOutput),
 		response:        &aws.Response{Request: r.Request},
 	}
 
@@ -87,7 +66,7 @@ func (r LaunchAppRequest) Send(ctx context.Context) (*LaunchAppResponse, error) 
 // LaunchAppResponse is the response type for the
 // LaunchApp API operation.
 type LaunchAppResponse struct {
-	*LaunchAppOutput
+	*types.LaunchAppOutput
 
 	response *aws.Response
 }

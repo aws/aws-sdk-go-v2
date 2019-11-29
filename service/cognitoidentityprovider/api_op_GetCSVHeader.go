@@ -6,58 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/types"
 )
-
-// Represents the request to get the header information for the .csv file for
-// the user import job.
-type GetCSVHeaderInput struct {
-	_ struct{} `type:"structure"`
-
-	// The user pool ID for the user pool that the users are to be imported into.
-	//
-	// UserPoolId is a required field
-	UserPoolId *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetCSVHeaderInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetCSVHeaderInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetCSVHeaderInput"}
-
-	if s.UserPoolId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("UserPoolId"))
-	}
-	if s.UserPoolId != nil && len(*s.UserPoolId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("UserPoolId", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Represents the response from the server to the request to get the header
-// information for the .csv file for the user import job.
-type GetCSVHeaderOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The header information for the .csv file for the user import job.
-	CSVHeader []string `type:"list"`
-
-	// The user pool ID for the user pool that the users are to be imported into.
-	UserPoolId *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s GetCSVHeaderOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetCSVHeader = "GetCSVHeader"
 
@@ -75,7 +25,7 @@ const opGetCSVHeader = "GetCSVHeader"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/GetCSVHeader
-func (c *Client) GetCSVHeaderRequest(input *GetCSVHeaderInput) GetCSVHeaderRequest {
+func (c *Client) GetCSVHeaderRequest(input *types.GetCSVHeaderInput) GetCSVHeaderRequest {
 	op := &aws.Operation{
 		Name:       opGetCSVHeader,
 		HTTPMethod: "POST",
@@ -83,10 +33,10 @@ func (c *Client) GetCSVHeaderRequest(input *GetCSVHeaderInput) GetCSVHeaderReque
 	}
 
 	if input == nil {
-		input = &GetCSVHeaderInput{}
+		input = &types.GetCSVHeaderInput{}
 	}
 
-	req := c.newRequest(op, input, &GetCSVHeaderOutput{})
+	req := c.newRequest(op, input, &types.GetCSVHeaderOutput{})
 	return GetCSVHeaderRequest{Request: req, Input: input, Copy: c.GetCSVHeaderRequest}
 }
 
@@ -94,8 +44,8 @@ func (c *Client) GetCSVHeaderRequest(input *GetCSVHeaderInput) GetCSVHeaderReque
 // GetCSVHeader API operation.
 type GetCSVHeaderRequest struct {
 	*aws.Request
-	Input *GetCSVHeaderInput
-	Copy  func(*GetCSVHeaderInput) GetCSVHeaderRequest
+	Input *types.GetCSVHeaderInput
+	Copy  func(*types.GetCSVHeaderInput) GetCSVHeaderRequest
 }
 
 // Send marshals and sends the GetCSVHeader API request.
@@ -107,7 +57,7 @@ func (r GetCSVHeaderRequest) Send(ctx context.Context) (*GetCSVHeaderResponse, e
 	}
 
 	resp := &GetCSVHeaderResponse{
-		GetCSVHeaderOutput: r.Request.Data.(*GetCSVHeaderOutput),
+		GetCSVHeaderOutput: r.Request.Data.(*types.GetCSVHeaderOutput),
 		response:           &aws.Response{Request: r.Request},
 	}
 
@@ -117,7 +67,7 @@ func (r GetCSVHeaderRequest) Send(ctx context.Context) (*GetCSVHeaderResponse, e
 // GetCSVHeaderResponse is the response type for the
 // GetCSVHeader API operation.
 type GetCSVHeaderResponse struct {
-	*GetCSVHeaderOutput
+	*types.GetCSVHeaderOutput
 
 	response *aws.Response
 }

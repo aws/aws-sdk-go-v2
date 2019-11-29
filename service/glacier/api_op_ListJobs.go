@@ -6,154 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/glacier/types"
 )
-
-// Provides options for retrieving a job list for an Amazon S3 Glacier vault.
-type ListJobsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The AccountId value is the AWS account ID of the account that owns the vault.
-	// You can either specify an AWS account ID or optionally a single '-' (hyphen),
-	// in which case Amazon S3 Glacier uses the AWS account ID associated with the
-	// credentials used to sign the request. If you use an account ID, do not include
-	// any hyphens ('-') in the ID.
-	//
-	// AccountId is a required field
-	AccountId *string `location:"uri" locationName:"accountId" type:"string" required:"true"`
-
-	// The state of the jobs to return. You can specify true or false.
-	Completed *string `location:"querystring" locationName:"completed" type:"string"`
-
-	// The maximum number of jobs to be returned. The default limit is 50. The number
-	// of jobs returned might be fewer than the specified limit, but the number
-	// of returned jobs never exceeds the limit.
-	Limit *string `location:"querystring" locationName:"limit" type:"string"`
-
-	// An opaque string used for pagination. This value specifies the job at which
-	// the listing of jobs should begin. Get the marker value from a previous List
-	// Jobs response. You only need to include the marker if you are continuing
-	// the pagination of results started in a previous List Jobs request.
-	Marker *string `location:"querystring" locationName:"marker" type:"string"`
-
-	// The type of job status to return. You can specify the following values: InProgress,
-	// Succeeded, or Failed.
-	Statuscode *string `location:"querystring" locationName:"statuscode" type:"string"`
-
-	// The name of the vault.
-	//
-	// VaultName is a required field
-	VaultName *string `location:"uri" locationName:"vaultName" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s ListJobsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListJobsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListJobsInput"}
-
-	if s.AccountId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("AccountId"))
-	}
-
-	if s.VaultName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("VaultName"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListJobsInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.AccountId != nil {
-		v := *s.AccountId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "accountId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.VaultName != nil {
-		v := *s.VaultName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "vaultName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Completed != nil {
-		v := *s.Completed
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "completed", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Limit != nil {
-		v := *s.Limit
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "limit", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Marker != nil {
-		v := *s.Marker
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "marker", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Statuscode != nil {
-		v := *s.Statuscode
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "statuscode", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-// Contains the Amazon S3 Glacier response to your request.
-type ListJobsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A list of job objects. Each job object contains metadata describing the job.
-	JobList []GlacierJobDescription `type:"list"`
-
-	// An opaque string used for pagination that specifies the job at which the
-	// listing of jobs should begin. You get the marker value from a previous List
-	// Jobs response. You only need to include the marker if you are continuing
-	// the pagination of the results started in a previous List Jobs request.
-	Marker *string `type:"string"`
-}
-
-// String returns the string representation
-func (s ListJobsOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListJobsOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.JobList != nil {
-		v := s.JobList
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "JobList", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	if s.Marker != nil {
-		v := *s.Marker
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "Marker", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opListJobs = "ListJobs"
 
@@ -203,7 +57,7 @@ const opListJobs = "ListJobs"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) ListJobsRequest(input *ListJobsInput) ListJobsRequest {
+func (c *Client) ListJobsRequest(input *types.ListJobsInput) ListJobsRequest {
 	op := &aws.Operation{
 		Name:       opListJobs,
 		HTTPMethod: "GET",
@@ -217,10 +71,10 @@ func (c *Client) ListJobsRequest(input *ListJobsInput) ListJobsRequest {
 	}
 
 	if input == nil {
-		input = &ListJobsInput{}
+		input = &types.ListJobsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListJobsOutput{})
+	req := c.newRequest(op, input, &types.ListJobsOutput{})
 	return ListJobsRequest{Request: req, Input: input, Copy: c.ListJobsRequest}
 }
 
@@ -228,8 +82,8 @@ func (c *Client) ListJobsRequest(input *ListJobsInput) ListJobsRequest {
 // ListJobs API operation.
 type ListJobsRequest struct {
 	*aws.Request
-	Input *ListJobsInput
-	Copy  func(*ListJobsInput) ListJobsRequest
+	Input *types.ListJobsInput
+	Copy  func(*types.ListJobsInput) ListJobsRequest
 }
 
 // Send marshals and sends the ListJobs API request.
@@ -241,7 +95,7 @@ func (r ListJobsRequest) Send(ctx context.Context) (*ListJobsResponse, error) {
 	}
 
 	resp := &ListJobsResponse{
-		ListJobsOutput: r.Request.Data.(*ListJobsOutput),
+		ListJobsOutput: r.Request.Data.(*types.ListJobsOutput),
 		response:       &aws.Response{Request: r.Request},
 	}
 
@@ -271,7 +125,7 @@ func NewListJobsPaginator(req ListJobsRequest) ListJobsPaginator {
 	return ListJobsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListJobsInput
+				var inCpy *types.ListJobsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -291,14 +145,14 @@ type ListJobsPaginator struct {
 	aws.Pager
 }
 
-func (p *ListJobsPaginator) CurrentPage() *ListJobsOutput {
-	return p.Pager.CurrentPage().(*ListJobsOutput)
+func (p *ListJobsPaginator) CurrentPage() *types.ListJobsOutput {
+	return p.Pager.CurrentPage().(*types.ListJobsOutput)
 }
 
 // ListJobsResponse is the response type for the
 // ListJobs API operation.
 type ListJobsResponse struct {
-	*ListJobsOutput
+	*types.ListJobsOutput
 
 	response *aws.Response
 }

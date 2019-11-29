@@ -6,81 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/textract/types"
 )
-
-type StartDocumentTextDetectionInput struct {
-	_ struct{} `type:"structure"`
-
-	// The idempotent token that's used to identify the start request. If you use
-	// the same token with multiple StartDocumentTextDetection requests, the same
-	// JobId is returned. Use ClientRequestToken to prevent the same job from being
-	// accidentally started more than once.
-	ClientRequestToken *string `min:"1" type:"string"`
-
-	// The location of the document to be processed.
-	//
-	// DocumentLocation is a required field
-	DocumentLocation *DocumentLocation `type:"structure" required:"true"`
-
-	// An identifier you specify that's included in the completion notification
-	// that's published to the Amazon SNS topic. For example, you can use JobTag
-	// to identify the type of document, such as a tax form or a receipt, that the
-	// completion notification corresponds to.
-	JobTag *string `min:"1" type:"string"`
-
-	// The Amazon SNS topic ARN that you want Amazon Textract to publish the completion
-	// status of the operation to.
-	NotificationChannel *NotificationChannel `type:"structure"`
-}
-
-// String returns the string representation
-func (s StartDocumentTextDetectionInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *StartDocumentTextDetectionInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "StartDocumentTextDetectionInput"}
-	if s.ClientRequestToken != nil && len(*s.ClientRequestToken) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ClientRequestToken", 1))
-	}
-
-	if s.DocumentLocation == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DocumentLocation"))
-	}
-	if s.JobTag != nil && len(*s.JobTag) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("JobTag", 1))
-	}
-	if s.DocumentLocation != nil {
-		if err := s.DocumentLocation.Validate(); err != nil {
-			invalidParams.AddNested("DocumentLocation", err.(aws.ErrInvalidParams))
-		}
-	}
-	if s.NotificationChannel != nil {
-		if err := s.NotificationChannel.Validate(); err != nil {
-			invalidParams.AddNested("NotificationChannel", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type StartDocumentTextDetectionOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The identifier for the document text-detection job. Use JobId to identify
-	// the job in a subsequent call to GetDocumentTextDetection.
-	JobId *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s StartDocumentTextDetectionOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opStartDocumentTextDetection = "StartDocumentTextDetection"
 
@@ -112,7 +39,7 @@ const opStartDocumentTextDetection = "StartDocumentTextDetection"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/textract-2018-06-27/StartDocumentTextDetection
-func (c *Client) StartDocumentTextDetectionRequest(input *StartDocumentTextDetectionInput) StartDocumentTextDetectionRequest {
+func (c *Client) StartDocumentTextDetectionRequest(input *types.StartDocumentTextDetectionInput) StartDocumentTextDetectionRequest {
 	op := &aws.Operation{
 		Name:       opStartDocumentTextDetection,
 		HTTPMethod: "POST",
@@ -120,10 +47,10 @@ func (c *Client) StartDocumentTextDetectionRequest(input *StartDocumentTextDetec
 	}
 
 	if input == nil {
-		input = &StartDocumentTextDetectionInput{}
+		input = &types.StartDocumentTextDetectionInput{}
 	}
 
-	req := c.newRequest(op, input, &StartDocumentTextDetectionOutput{})
+	req := c.newRequest(op, input, &types.StartDocumentTextDetectionOutput{})
 	return StartDocumentTextDetectionRequest{Request: req, Input: input, Copy: c.StartDocumentTextDetectionRequest}
 }
 
@@ -131,8 +58,8 @@ func (c *Client) StartDocumentTextDetectionRequest(input *StartDocumentTextDetec
 // StartDocumentTextDetection API operation.
 type StartDocumentTextDetectionRequest struct {
 	*aws.Request
-	Input *StartDocumentTextDetectionInput
-	Copy  func(*StartDocumentTextDetectionInput) StartDocumentTextDetectionRequest
+	Input *types.StartDocumentTextDetectionInput
+	Copy  func(*types.StartDocumentTextDetectionInput) StartDocumentTextDetectionRequest
 }
 
 // Send marshals and sends the StartDocumentTextDetection API request.
@@ -144,7 +71,7 @@ func (r StartDocumentTextDetectionRequest) Send(ctx context.Context) (*StartDocu
 	}
 
 	resp := &StartDocumentTextDetectionResponse{
-		StartDocumentTextDetectionOutput: r.Request.Data.(*StartDocumentTextDetectionOutput),
+		StartDocumentTextDetectionOutput: r.Request.Data.(*types.StartDocumentTextDetectionOutput),
 		response:                         &aws.Response{Request: r.Request},
 	}
 
@@ -154,7 +81,7 @@ func (r StartDocumentTextDetectionRequest) Send(ctx context.Context) (*StartDocu
 // StartDocumentTextDetectionResponse is the response type for the
 // StartDocumentTextDetection API operation.
 type StartDocumentTextDetectionResponse struct {
-	*StartDocumentTextDetectionOutput
+	*types.StartDocumentTextDetectionOutput
 
 	response *aws.Response
 }

@@ -6,43 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/glue/types"
 )
-
-type ImportCatalogToGlueInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the catalog to import. Currently, this should be the AWS account
-	// ID.
-	CatalogId *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s ImportCatalogToGlueInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ImportCatalogToGlueInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ImportCatalogToGlueInput"}
-	if s.CatalogId != nil && len(*s.CatalogId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("CatalogId", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ImportCatalogToGlueOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s ImportCatalogToGlueOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opImportCatalogToGlue = "ImportCatalogToGlue"
 
@@ -59,7 +24,7 @@ const opImportCatalogToGlue = "ImportCatalogToGlue"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ImportCatalogToGlue
-func (c *Client) ImportCatalogToGlueRequest(input *ImportCatalogToGlueInput) ImportCatalogToGlueRequest {
+func (c *Client) ImportCatalogToGlueRequest(input *types.ImportCatalogToGlueInput) ImportCatalogToGlueRequest {
 	op := &aws.Operation{
 		Name:       opImportCatalogToGlue,
 		HTTPMethod: "POST",
@@ -67,10 +32,10 @@ func (c *Client) ImportCatalogToGlueRequest(input *ImportCatalogToGlueInput) Imp
 	}
 
 	if input == nil {
-		input = &ImportCatalogToGlueInput{}
+		input = &types.ImportCatalogToGlueInput{}
 	}
 
-	req := c.newRequest(op, input, &ImportCatalogToGlueOutput{})
+	req := c.newRequest(op, input, &types.ImportCatalogToGlueOutput{})
 	return ImportCatalogToGlueRequest{Request: req, Input: input, Copy: c.ImportCatalogToGlueRequest}
 }
 
@@ -78,8 +43,8 @@ func (c *Client) ImportCatalogToGlueRequest(input *ImportCatalogToGlueInput) Imp
 // ImportCatalogToGlue API operation.
 type ImportCatalogToGlueRequest struct {
 	*aws.Request
-	Input *ImportCatalogToGlueInput
-	Copy  func(*ImportCatalogToGlueInput) ImportCatalogToGlueRequest
+	Input *types.ImportCatalogToGlueInput
+	Copy  func(*types.ImportCatalogToGlueInput) ImportCatalogToGlueRequest
 }
 
 // Send marshals and sends the ImportCatalogToGlue API request.
@@ -91,7 +56,7 @@ func (r ImportCatalogToGlueRequest) Send(ctx context.Context) (*ImportCatalogToG
 	}
 
 	resp := &ImportCatalogToGlueResponse{
-		ImportCatalogToGlueOutput: r.Request.Data.(*ImportCatalogToGlueOutput),
+		ImportCatalogToGlueOutput: r.Request.Data.(*types.ImportCatalogToGlueOutput),
 		response:                  &aws.Response{Request: r.Request},
 	}
 
@@ -101,7 +66,7 @@ func (r ImportCatalogToGlueRequest) Send(ctx context.Context) (*ImportCatalogToG
 // ImportCatalogToGlueResponse is the response type for the
 // ImportCatalogToGlue API operation.
 type ImportCatalogToGlueResponse struct {
-	*ImportCatalogToGlueOutput
+	*types.ImportCatalogToGlueOutput
 
 	response *aws.Response
 }

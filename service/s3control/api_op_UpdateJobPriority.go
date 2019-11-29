@@ -6,116 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/s3control/types"
 )
-
-type UpdateJobPriorityInput struct {
-	_ struct{} `type:"structure"`
-
-	// AccountId is a required field
-	AccountId *string `location:"header" locationName:"x-amz-account-id" type:"string" required:"true"`
-
-	// The ID for the job whose priority you want to update.
-	//
-	// JobId is a required field
-	JobId *string `location:"uri" locationName:"id" min:"5" type:"string" required:"true"`
-
-	// The priority you want to assign to this job.
-	//
-	// Priority is a required field
-	Priority *int64 `location:"querystring" locationName:"priority" type:"integer" required:"true"`
-}
-
-// String returns the string representation
-func (s UpdateJobPriorityInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateJobPriorityInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateJobPriorityInput"}
-
-	if s.AccountId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("AccountId"))
-	}
-
-	if s.JobId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("JobId"))
-	}
-	if s.JobId != nil && len(*s.JobId) < 5 {
-		invalidParams.Add(aws.NewErrParamMinLen("JobId", 5))
-	}
-
-	if s.Priority == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Priority"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s UpdateJobPriorityInput) MarshalFields(e protocol.FieldEncoder) error {
-
-	if s.AccountId != nil {
-		v := *s.AccountId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "x-amz-account-id", protocol.StringValue(v), metadata)
-	}
-	if s.JobId != nil {
-		v := *s.JobId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "id", protocol.StringValue(v), metadata)
-	}
-	if s.Priority != nil {
-		v := *s.Priority
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "priority", protocol.Int64Value(v), metadata)
-	}
-	return nil
-}
-
-type UpdateJobPriorityOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID for the job whose priority Amazon S3 updated.
-	//
-	// JobId is a required field
-	JobId *string `min:"5" type:"string" required:"true"`
-
-	// The new priority assigned to the specified job.
-	//
-	// Priority is a required field
-	Priority *int64 `type:"integer" required:"true"`
-}
-
-// String returns the string representation
-func (s UpdateJobPriorityOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s UpdateJobPriorityOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.JobId != nil {
-		v := *s.JobId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "JobId", protocol.StringValue(v), metadata)
-	}
-	if s.Priority != nil {
-		v := *s.Priority
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "Priority", protocol.Int64Value(v), metadata)
-	}
-	return nil
-}
 
 const opUpdateJobPriority = "UpdateJobPriority"
 
@@ -132,7 +24,7 @@ const opUpdateJobPriority = "UpdateJobPriority"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/UpdateJobPriority
-func (c *Client) UpdateJobPriorityRequest(input *UpdateJobPriorityInput) UpdateJobPriorityRequest {
+func (c *Client) UpdateJobPriorityRequest(input *types.UpdateJobPriorityInput) UpdateJobPriorityRequest {
 	op := &aws.Operation{
 		Name:       opUpdateJobPriority,
 		HTTPMethod: "POST",
@@ -140,10 +32,10 @@ func (c *Client) UpdateJobPriorityRequest(input *UpdateJobPriorityInput) UpdateJ
 	}
 
 	if input == nil {
-		input = &UpdateJobPriorityInput{}
+		input = &types.UpdateJobPriorityInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateJobPriorityOutput{})
+	req := c.newRequest(op, input, &types.UpdateJobPriorityOutput{})
 	req.Handlers.Build.PushBackNamed(buildPrefixHostHandler("AccountID", aws.StringValue(input.AccountId)))
 	req.Handlers.Build.PushBackNamed(buildRemoveHeaderHandler("X-Amz-Account-Id"))
 	return UpdateJobPriorityRequest{Request: req, Input: input, Copy: c.UpdateJobPriorityRequest}
@@ -153,8 +45,8 @@ func (c *Client) UpdateJobPriorityRequest(input *UpdateJobPriorityInput) UpdateJ
 // UpdateJobPriority API operation.
 type UpdateJobPriorityRequest struct {
 	*aws.Request
-	Input *UpdateJobPriorityInput
-	Copy  func(*UpdateJobPriorityInput) UpdateJobPriorityRequest
+	Input *types.UpdateJobPriorityInput
+	Copy  func(*types.UpdateJobPriorityInput) UpdateJobPriorityRequest
 }
 
 // Send marshals and sends the UpdateJobPriority API request.
@@ -166,7 +58,7 @@ func (r UpdateJobPriorityRequest) Send(ctx context.Context) (*UpdateJobPriorityR
 	}
 
 	resp := &UpdateJobPriorityResponse{
-		UpdateJobPriorityOutput: r.Request.Data.(*UpdateJobPriorityOutput),
+		UpdateJobPriorityOutput: r.Request.Data.(*types.UpdateJobPriorityOutput),
 		response:                &aws.Response{Request: r.Request},
 	}
 
@@ -176,7 +68,7 @@ func (r UpdateJobPriorityRequest) Send(ctx context.Context) (*UpdateJobPriorityR
 // UpdateJobPriorityResponse is the response type for the
 // UpdateJobPriority API operation.
 type UpdateJobPriorityResponse struct {
-	*UpdateJobPriorityOutput
+	*types.UpdateJobPriorityOutput
 
 	response *aws.Response
 }

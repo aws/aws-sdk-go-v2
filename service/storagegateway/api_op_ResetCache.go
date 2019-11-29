@@ -6,53 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/storagegateway/types"
 )
-
-type ResetCacheInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation
-	// to return a list of gateways for your account and AWS Region.
-	//
-	// GatewayARN is a required field
-	GatewayARN *string `min:"50" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s ResetCacheInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ResetCacheInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ResetCacheInput"}
-
-	if s.GatewayARN == nil {
-		invalidParams.Add(aws.NewErrParamRequired("GatewayARN"))
-	}
-	if s.GatewayARN != nil && len(*s.GatewayARN) < 50 {
-		invalidParams.Add(aws.NewErrParamMinLen("GatewayARN", 50))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ResetCacheOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation
-	// to return a list of gateways for your account and AWS Region.
-	GatewayARN *string `min:"50" type:"string"`
-}
-
-// String returns the string representation
-func (s ResetCacheOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opResetCache = "ResetCache"
 
@@ -80,7 +35,7 @@ const opResetCache = "ResetCache"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/ResetCache
-func (c *Client) ResetCacheRequest(input *ResetCacheInput) ResetCacheRequest {
+func (c *Client) ResetCacheRequest(input *types.ResetCacheInput) ResetCacheRequest {
 	op := &aws.Operation{
 		Name:       opResetCache,
 		HTTPMethod: "POST",
@@ -88,10 +43,10 @@ func (c *Client) ResetCacheRequest(input *ResetCacheInput) ResetCacheRequest {
 	}
 
 	if input == nil {
-		input = &ResetCacheInput{}
+		input = &types.ResetCacheInput{}
 	}
 
-	req := c.newRequest(op, input, &ResetCacheOutput{})
+	req := c.newRequest(op, input, &types.ResetCacheOutput{})
 	return ResetCacheRequest{Request: req, Input: input, Copy: c.ResetCacheRequest}
 }
 
@@ -99,8 +54,8 @@ func (c *Client) ResetCacheRequest(input *ResetCacheInput) ResetCacheRequest {
 // ResetCache API operation.
 type ResetCacheRequest struct {
 	*aws.Request
-	Input *ResetCacheInput
-	Copy  func(*ResetCacheInput) ResetCacheRequest
+	Input *types.ResetCacheInput
+	Copy  func(*types.ResetCacheInput) ResetCacheRequest
 }
 
 // Send marshals and sends the ResetCache API request.
@@ -112,7 +67,7 @@ func (r ResetCacheRequest) Send(ctx context.Context) (*ResetCacheResponse, error
 	}
 
 	resp := &ResetCacheResponse{
-		ResetCacheOutput: r.Request.Data.(*ResetCacheOutput),
+		ResetCacheOutput: r.Request.Data.(*types.ResetCacheOutput),
 		response:         &aws.Response{Request: r.Request},
 	}
 
@@ -122,7 +77,7 @@ func (r ResetCacheRequest) Send(ctx context.Context) (*ResetCacheResponse, error
 // ResetCacheResponse is the response type for the
 // ResetCache API operation.
 type ResetCacheResponse struct {
-	*ResetCacheOutput
+	*types.ResetCacheOutput
 
 	response *aws.Response
 }

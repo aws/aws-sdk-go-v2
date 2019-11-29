@@ -6,84 +6,16 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/migrationhub/types"
 )
-
-type DisassociateDiscoveredResourceInput struct {
-	_ struct{} `type:"structure"`
-
-	// ConfigurationId of the ADS resource to be disassociated.
-	//
-	// ConfigurationId is a required field
-	ConfigurationId *string `min:"1" type:"string" required:"true"`
-
-	// Optional boolean flag to indicate whether any effect should take place. Used
-	// to test if the caller has permission to make the call.
-	DryRun *bool `type:"boolean"`
-
-	// The identifier given to the MigrationTask.
-	//
-	// MigrationTaskName is a required field
-	MigrationTaskName *string `min:"1" type:"string" required:"true"`
-
-	// The name of the ProgressUpdateStream.
-	//
-	// ProgressUpdateStream is a required field
-	ProgressUpdateStream *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DisassociateDiscoveredResourceInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DisassociateDiscoveredResourceInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DisassociateDiscoveredResourceInput"}
-
-	if s.ConfigurationId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ConfigurationId"))
-	}
-	if s.ConfigurationId != nil && len(*s.ConfigurationId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ConfigurationId", 1))
-	}
-
-	if s.MigrationTaskName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("MigrationTaskName"))
-	}
-	if s.MigrationTaskName != nil && len(*s.MigrationTaskName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("MigrationTaskName", 1))
-	}
-
-	if s.ProgressUpdateStream == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ProgressUpdateStream"))
-	}
-	if s.ProgressUpdateStream != nil && len(*s.ProgressUpdateStream) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ProgressUpdateStream", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DisassociateDiscoveredResourceOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DisassociateDiscoveredResourceOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDisassociateDiscoveredResource = "DisassociateDiscoveredResource"
 
 // DisassociateDiscoveredResourceRequest returns a request value for making API operation for
 // AWS Migration Hub.
 //
-// Disassociate an Application Discovery Service (ADS) discovered resource from
-// a migration task.
+// Disassociate an Application Discovery Service discovered resource from a
+// migration task.
 //
 //    // Example sending a request using DisassociateDiscoveredResourceRequest.
 //    req := client.DisassociateDiscoveredResourceRequest(params)
@@ -93,7 +25,7 @@ const opDisassociateDiscoveredResource = "DisassociateDiscoveredResource"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/DisassociateDiscoveredResource
-func (c *Client) DisassociateDiscoveredResourceRequest(input *DisassociateDiscoveredResourceInput) DisassociateDiscoveredResourceRequest {
+func (c *Client) DisassociateDiscoveredResourceRequest(input *types.DisassociateDiscoveredResourceInput) DisassociateDiscoveredResourceRequest {
 	op := &aws.Operation{
 		Name:       opDisassociateDiscoveredResource,
 		HTTPMethod: "POST",
@@ -101,10 +33,10 @@ func (c *Client) DisassociateDiscoveredResourceRequest(input *DisassociateDiscov
 	}
 
 	if input == nil {
-		input = &DisassociateDiscoveredResourceInput{}
+		input = &types.DisassociateDiscoveredResourceInput{}
 	}
 
-	req := c.newRequest(op, input, &DisassociateDiscoveredResourceOutput{})
+	req := c.newRequest(op, input, &types.DisassociateDiscoveredResourceOutput{})
 	return DisassociateDiscoveredResourceRequest{Request: req, Input: input, Copy: c.DisassociateDiscoveredResourceRequest}
 }
 
@@ -112,8 +44,8 @@ func (c *Client) DisassociateDiscoveredResourceRequest(input *DisassociateDiscov
 // DisassociateDiscoveredResource API operation.
 type DisassociateDiscoveredResourceRequest struct {
 	*aws.Request
-	Input *DisassociateDiscoveredResourceInput
-	Copy  func(*DisassociateDiscoveredResourceInput) DisassociateDiscoveredResourceRequest
+	Input *types.DisassociateDiscoveredResourceInput
+	Copy  func(*types.DisassociateDiscoveredResourceInput) DisassociateDiscoveredResourceRequest
 }
 
 // Send marshals and sends the DisassociateDiscoveredResource API request.
@@ -125,7 +57,7 @@ func (r DisassociateDiscoveredResourceRequest) Send(ctx context.Context) (*Disas
 	}
 
 	resp := &DisassociateDiscoveredResourceResponse{
-		DisassociateDiscoveredResourceOutput: r.Request.Data.(*DisassociateDiscoveredResourceOutput),
+		DisassociateDiscoveredResourceOutput: r.Request.Data.(*types.DisassociateDiscoveredResourceOutput),
 		response:                             &aws.Response{Request: r.Request},
 	}
 
@@ -135,7 +67,7 @@ func (r DisassociateDiscoveredResourceRequest) Send(ctx context.Context) (*Disas
 // DisassociateDiscoveredResourceResponse is the response type for the
 // DisassociateDiscoveredResource API operation.
 type DisassociateDiscoveredResourceResponse struct {
-	*DisassociateDiscoveredResourceOutput
+	*types.DisassociateDiscoveredResourceOutput
 
 	response *aws.Response
 }

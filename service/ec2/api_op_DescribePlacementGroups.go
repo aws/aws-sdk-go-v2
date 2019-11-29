@@ -6,50 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-type DescribePlacementGroupsInput struct {
-	_ struct{} `type:"structure"`
-
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have
-	// the required permissions, the error response is DryRunOperation. Otherwise,
-	// it is UnauthorizedOperation.
-	DryRun *bool `locationName:"dryRun" type:"boolean"`
-
-	// The filters.
-	//
-	//    * group-name - The name of the placement group.
-	//
-	//    * state - The state of the placement group (pending | available | deleting
-	//    | deleted).
-	//
-	//    * strategy - The strategy of the placement group (cluster | spread | partition).
-	Filters []Filter `locationName:"Filter" locationNameList:"Filter" type:"list"`
-
-	// The names of the placement groups.
-	//
-	// Default: Describes all your placement groups, or only those otherwise specified.
-	GroupNames []string `locationName:"groupName" type:"list"`
-}
-
-// String returns the string representation
-func (s DescribePlacementGroupsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type DescribePlacementGroupsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Information about the placement groups.
-	PlacementGroups []PlacementGroup `locationName:"placementGroupSet" locationNameList:"item" type:"list"`
-}
-
-// String returns the string representation
-func (s DescribePlacementGroupsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribePlacementGroups = "DescribePlacementGroups"
 
@@ -68,7 +26,7 @@ const opDescribePlacementGroups = "DescribePlacementGroups"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribePlacementGroups
-func (c *Client) DescribePlacementGroupsRequest(input *DescribePlacementGroupsInput) DescribePlacementGroupsRequest {
+func (c *Client) DescribePlacementGroupsRequest(input *types.DescribePlacementGroupsInput) DescribePlacementGroupsRequest {
 	op := &aws.Operation{
 		Name:       opDescribePlacementGroups,
 		HTTPMethod: "POST",
@@ -76,10 +34,10 @@ func (c *Client) DescribePlacementGroupsRequest(input *DescribePlacementGroupsIn
 	}
 
 	if input == nil {
-		input = &DescribePlacementGroupsInput{}
+		input = &types.DescribePlacementGroupsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribePlacementGroupsOutput{})
+	req := c.newRequest(op, input, &types.DescribePlacementGroupsOutput{})
 	return DescribePlacementGroupsRequest{Request: req, Input: input, Copy: c.DescribePlacementGroupsRequest}
 }
 
@@ -87,8 +45,8 @@ func (c *Client) DescribePlacementGroupsRequest(input *DescribePlacementGroupsIn
 // DescribePlacementGroups API operation.
 type DescribePlacementGroupsRequest struct {
 	*aws.Request
-	Input *DescribePlacementGroupsInput
-	Copy  func(*DescribePlacementGroupsInput) DescribePlacementGroupsRequest
+	Input *types.DescribePlacementGroupsInput
+	Copy  func(*types.DescribePlacementGroupsInput) DescribePlacementGroupsRequest
 }
 
 // Send marshals and sends the DescribePlacementGroups API request.
@@ -100,7 +58,7 @@ func (r DescribePlacementGroupsRequest) Send(ctx context.Context) (*DescribePlac
 	}
 
 	resp := &DescribePlacementGroupsResponse{
-		DescribePlacementGroupsOutput: r.Request.Data.(*DescribePlacementGroupsOutput),
+		DescribePlacementGroupsOutput: r.Request.Data.(*types.DescribePlacementGroupsOutput),
 		response:                      &aws.Response{Request: r.Request},
 	}
 
@@ -110,7 +68,7 @@ func (r DescribePlacementGroupsRequest) Send(ctx context.Context) (*DescribePlac
 // DescribePlacementGroupsResponse is the response type for the
 // DescribePlacementGroups API operation.
 type DescribePlacementGroupsResponse struct {
-	*DescribePlacementGroupsOutput
+	*types.DescribePlacementGroupsOutput
 
 	response *aws.Response
 }

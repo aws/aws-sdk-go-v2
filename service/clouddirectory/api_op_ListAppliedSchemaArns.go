@@ -6,119 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/clouddirectory/types"
 )
-
-type ListAppliedSchemaArnsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ARN of the directory you are listing.
-	//
-	// DirectoryArn is a required field
-	DirectoryArn *string `type:"string" required:"true"`
-
-	// The maximum number of results to retrieve.
-	MaxResults *int64 `min:"1" type:"integer"`
-
-	// The pagination token.
-	NextToken *string `type:"string"`
-
-	// The response for ListAppliedSchemaArns when this parameter is used will list
-	// all minor version ARNs for a major version.
-	SchemaArn *string `type:"string"`
-}
-
-// String returns the string representation
-func (s ListAppliedSchemaArnsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListAppliedSchemaArnsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListAppliedSchemaArnsInput"}
-
-	if s.DirectoryArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DirectoryArn"))
-	}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListAppliedSchemaArnsInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.DirectoryArn != nil {
-		v := *s.DirectoryArn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "DirectoryArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.MaxResults != nil {
-		v := *s.MaxResults
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "MaxResults", protocol.Int64Value(v), metadata)
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.SchemaArn != nil {
-		v := *s.SchemaArn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "SchemaArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type ListAppliedSchemaArnsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The pagination token.
-	NextToken *string `type:"string"`
-
-	// The ARNs of schemas that are applied to the directory.
-	SchemaArns []string `type:"list"`
-}
-
-// String returns the string representation
-func (s ListAppliedSchemaArnsOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListAppliedSchemaArnsOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.SchemaArns != nil {
-		v := s.SchemaArns
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "SchemaArns", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
-		}
-		ls0.End()
-
-	}
-	return nil
-}
 
 const opListAppliedSchemaArns = "ListAppliedSchemaArns"
 
@@ -136,7 +25,7 @@ const opListAppliedSchemaArns = "ListAppliedSchemaArns"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/ListAppliedSchemaArns
-func (c *Client) ListAppliedSchemaArnsRequest(input *ListAppliedSchemaArnsInput) ListAppliedSchemaArnsRequest {
+func (c *Client) ListAppliedSchemaArnsRequest(input *types.ListAppliedSchemaArnsInput) ListAppliedSchemaArnsRequest {
 	op := &aws.Operation{
 		Name:       opListAppliedSchemaArns,
 		HTTPMethod: "POST",
@@ -150,10 +39,10 @@ func (c *Client) ListAppliedSchemaArnsRequest(input *ListAppliedSchemaArnsInput)
 	}
 
 	if input == nil {
-		input = &ListAppliedSchemaArnsInput{}
+		input = &types.ListAppliedSchemaArnsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListAppliedSchemaArnsOutput{})
+	req := c.newRequest(op, input, &types.ListAppliedSchemaArnsOutput{})
 	return ListAppliedSchemaArnsRequest{Request: req, Input: input, Copy: c.ListAppliedSchemaArnsRequest}
 }
 
@@ -161,8 +50,8 @@ func (c *Client) ListAppliedSchemaArnsRequest(input *ListAppliedSchemaArnsInput)
 // ListAppliedSchemaArns API operation.
 type ListAppliedSchemaArnsRequest struct {
 	*aws.Request
-	Input *ListAppliedSchemaArnsInput
-	Copy  func(*ListAppliedSchemaArnsInput) ListAppliedSchemaArnsRequest
+	Input *types.ListAppliedSchemaArnsInput
+	Copy  func(*types.ListAppliedSchemaArnsInput) ListAppliedSchemaArnsRequest
 }
 
 // Send marshals and sends the ListAppliedSchemaArns API request.
@@ -174,7 +63,7 @@ func (r ListAppliedSchemaArnsRequest) Send(ctx context.Context) (*ListAppliedSch
 	}
 
 	resp := &ListAppliedSchemaArnsResponse{
-		ListAppliedSchemaArnsOutput: r.Request.Data.(*ListAppliedSchemaArnsOutput),
+		ListAppliedSchemaArnsOutput: r.Request.Data.(*types.ListAppliedSchemaArnsOutput),
 		response:                    &aws.Response{Request: r.Request},
 	}
 
@@ -204,7 +93,7 @@ func NewListAppliedSchemaArnsPaginator(req ListAppliedSchemaArnsRequest) ListApp
 	return ListAppliedSchemaArnsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListAppliedSchemaArnsInput
+				var inCpy *types.ListAppliedSchemaArnsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -224,14 +113,14 @@ type ListAppliedSchemaArnsPaginator struct {
 	aws.Pager
 }
 
-func (p *ListAppliedSchemaArnsPaginator) CurrentPage() *ListAppliedSchemaArnsOutput {
-	return p.Pager.CurrentPage().(*ListAppliedSchemaArnsOutput)
+func (p *ListAppliedSchemaArnsPaginator) CurrentPage() *types.ListAppliedSchemaArnsOutput {
+	return p.Pager.CurrentPage().(*types.ListAppliedSchemaArnsOutput)
 }
 
 // ListAppliedSchemaArnsResponse is the response type for the
 // ListAppliedSchemaArns API operation.
 type ListAppliedSchemaArnsResponse struct {
-	*ListAppliedSchemaArnsOutput
+	*types.ListAppliedSchemaArnsOutput
 
 	response *aws.Response
 }

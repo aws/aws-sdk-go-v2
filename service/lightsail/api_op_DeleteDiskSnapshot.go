@@ -6,48 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/lightsail/types"
 )
-
-type DeleteDiskSnapshotInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the disk snapshot you want to delete (e.g., my-disk-snapshot).
-	//
-	// DiskSnapshotName is a required field
-	DiskSnapshotName *string `locationName:"diskSnapshotName" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteDiskSnapshotInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteDiskSnapshotInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteDiskSnapshotInput"}
-
-	if s.DiskSnapshotName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DiskSnapshotName"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteDiskSnapshotOutput struct {
-	_ struct{} `type:"structure"`
-
-	// An object describing the API operations.
-	Operations []Operation `locationName:"operations" type:"list"`
-}
-
-// String returns the string representation
-func (s DeleteDiskSnapshotOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteDiskSnapshot = "DeleteDiskSnapshot"
 
@@ -75,7 +35,7 @@ const opDeleteDiskSnapshot = "DeleteDiskSnapshot"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/DeleteDiskSnapshot
-func (c *Client) DeleteDiskSnapshotRequest(input *DeleteDiskSnapshotInput) DeleteDiskSnapshotRequest {
+func (c *Client) DeleteDiskSnapshotRequest(input *types.DeleteDiskSnapshotInput) DeleteDiskSnapshotRequest {
 	op := &aws.Operation{
 		Name:       opDeleteDiskSnapshot,
 		HTTPMethod: "POST",
@@ -83,10 +43,10 @@ func (c *Client) DeleteDiskSnapshotRequest(input *DeleteDiskSnapshotInput) Delet
 	}
 
 	if input == nil {
-		input = &DeleteDiskSnapshotInput{}
+		input = &types.DeleteDiskSnapshotInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteDiskSnapshotOutput{})
+	req := c.newRequest(op, input, &types.DeleteDiskSnapshotOutput{})
 	return DeleteDiskSnapshotRequest{Request: req, Input: input, Copy: c.DeleteDiskSnapshotRequest}
 }
 
@@ -94,8 +54,8 @@ func (c *Client) DeleteDiskSnapshotRequest(input *DeleteDiskSnapshotInput) Delet
 // DeleteDiskSnapshot API operation.
 type DeleteDiskSnapshotRequest struct {
 	*aws.Request
-	Input *DeleteDiskSnapshotInput
-	Copy  func(*DeleteDiskSnapshotInput) DeleteDiskSnapshotRequest
+	Input *types.DeleteDiskSnapshotInput
+	Copy  func(*types.DeleteDiskSnapshotInput) DeleteDiskSnapshotRequest
 }
 
 // Send marshals and sends the DeleteDiskSnapshot API request.
@@ -107,7 +67,7 @@ func (r DeleteDiskSnapshotRequest) Send(ctx context.Context) (*DeleteDiskSnapsho
 	}
 
 	resp := &DeleteDiskSnapshotResponse{
-		DeleteDiskSnapshotOutput: r.Request.Data.(*DeleteDiskSnapshotOutput),
+		DeleteDiskSnapshotOutput: r.Request.Data.(*types.DeleteDiskSnapshotOutput),
 		response:                 &aws.Response{Request: r.Request},
 	}
 
@@ -117,7 +77,7 @@ func (r DeleteDiskSnapshotRequest) Send(ctx context.Context) (*DeleteDiskSnapsho
 // DeleteDiskSnapshotResponse is the response type for the
 // DeleteDiskSnapshot API operation.
 type DeleteDiskSnapshotResponse struct {
-	*DeleteDiskSnapshotOutput
+	*types.DeleteDiskSnapshotOutput
 
 	response *aws.Response
 }

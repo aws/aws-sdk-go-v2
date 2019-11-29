@@ -6,84 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
+	"github.com/aws/aws-sdk-go-v2/service/kinesis/types"
 )
-
-type StopStreamEncryptionInput struct {
-	_ struct{} `type:"structure"`
-
-	// The encryption type. The only valid value is KMS.
-	//
-	// EncryptionType is a required field
-	EncryptionType EncryptionType `type:"string" required:"true" enum:"true"`
-
-	// The GUID for the customer-managed AWS KMS key to use for encryption. This
-	// value can be a globally unique identifier, a fully specified Amazon Resource
-	// Name (ARN) to either an alias or a key, or an alias name prefixed by "alias/".You
-	// can also use a master key owned by Kinesis Data Streams by specifying the
-	// alias aws/kinesis.
-	//
-	//    * Key ARN example: arn:aws:kms:us-east-1:123456789012:key/12345678-1234-1234-1234-123456789012
-	//
-	//    * Alias ARN example: arn:aws:kms:us-east-1:123456789012:alias/MyAliasName
-	//
-	//    * Globally unique key ID example: 12345678-1234-1234-1234-123456789012
-	//
-	//    * Alias name example: alias/MyAliasName
-	//
-	//    * Master key owned by Kinesis Data Streams: alias/aws/kinesis
-	//
-	// KeyId is a required field
-	KeyId *string `min:"1" type:"string" required:"true"`
-
-	// The name of the stream on which to stop encrypting records.
-	//
-	// StreamName is a required field
-	StreamName *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s StopStreamEncryptionInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *StopStreamEncryptionInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "StopStreamEncryptionInput"}
-	if len(s.EncryptionType) == 0 {
-		invalidParams.Add(aws.NewErrParamRequired("EncryptionType"))
-	}
-
-	if s.KeyId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("KeyId"))
-	}
-	if s.KeyId != nil && len(*s.KeyId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("KeyId", 1))
-	}
-
-	if s.StreamName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("StreamName"))
-	}
-	if s.StreamName != nil && len(*s.StreamName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("StreamName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type StopStreamEncryptionOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s StopStreamEncryptionOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opStopStreamEncryption = "StopStreamEncryption"
 
@@ -117,7 +43,7 @@ const opStopStreamEncryption = "StopStreamEncryption"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/StopStreamEncryption
-func (c *Client) StopStreamEncryptionRequest(input *StopStreamEncryptionInput) StopStreamEncryptionRequest {
+func (c *Client) StopStreamEncryptionRequest(input *types.StopStreamEncryptionInput) StopStreamEncryptionRequest {
 	op := &aws.Operation{
 		Name:       opStopStreamEncryption,
 		HTTPMethod: "POST",
@@ -125,10 +51,10 @@ func (c *Client) StopStreamEncryptionRequest(input *StopStreamEncryptionInput) S
 	}
 
 	if input == nil {
-		input = &StopStreamEncryptionInput{}
+		input = &types.StopStreamEncryptionInput{}
 	}
 
-	req := c.newRequest(op, input, &StopStreamEncryptionOutput{})
+	req := c.newRequest(op, input, &types.StopStreamEncryptionOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return StopStreamEncryptionRequest{Request: req, Input: input, Copy: c.StopStreamEncryptionRequest}
@@ -138,8 +64,8 @@ func (c *Client) StopStreamEncryptionRequest(input *StopStreamEncryptionInput) S
 // StopStreamEncryption API operation.
 type StopStreamEncryptionRequest struct {
 	*aws.Request
-	Input *StopStreamEncryptionInput
-	Copy  func(*StopStreamEncryptionInput) StopStreamEncryptionRequest
+	Input *types.StopStreamEncryptionInput
+	Copy  func(*types.StopStreamEncryptionInput) StopStreamEncryptionRequest
 }
 
 // Send marshals and sends the StopStreamEncryption API request.
@@ -151,7 +77,7 @@ func (r StopStreamEncryptionRequest) Send(ctx context.Context) (*StopStreamEncry
 	}
 
 	resp := &StopStreamEncryptionResponse{
-		StopStreamEncryptionOutput: r.Request.Data.(*StopStreamEncryptionOutput),
+		StopStreamEncryptionOutput: r.Request.Data.(*types.StopStreamEncryptionOutput),
 		response:                   &aws.Response{Request: r.Request},
 	}
 
@@ -161,7 +87,7 @@ func (r StopStreamEncryptionRequest) Send(ctx context.Context) (*StopStreamEncry
 // StopStreamEncryptionResponse is the response type for the
 // StopStreamEncryption API operation.
 type StopStreamEncryptionResponse struct {
-	*StopStreamEncryptionOutput
+	*types.StopStreamEncryptionOutput
 
 	response *aws.Response
 }

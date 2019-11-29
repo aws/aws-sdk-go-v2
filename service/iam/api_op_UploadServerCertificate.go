@@ -6,146 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/iam/types"
 )
-
-type UploadServerCertificateInput struct {
-	_ struct{} `type:"structure"`
-
-	// The contents of the public key certificate in PEM-encoded format.
-	//
-	// The regex pattern (http://wikipedia.org/wiki/regex) used to validate this
-	// parameter is a string of characters consisting of the following:
-	//
-	//    * Any printable ASCII character ranging from the space character (\u0020)
-	//    through the end of the ASCII character range
-	//
-	//    * The printable characters in the Basic Latin and Latin-1 Supplement character
-	//    set (through \u00FF)
-	//
-	//    * The special characters tab (\u0009), line feed (\u000A), and carriage
-	//    return (\u000D)
-	//
-	// CertificateBody is a required field
-	CertificateBody *string `min:"1" type:"string" required:"true"`
-
-	// The contents of the certificate chain. This is typically a concatenation
-	// of the PEM-encoded public key certificates of the chain.
-	//
-	// The regex pattern (http://wikipedia.org/wiki/regex) used to validate this
-	// parameter is a string of characters consisting of the following:
-	//
-	//    * Any printable ASCII character ranging from the space character (\u0020)
-	//    through the end of the ASCII character range
-	//
-	//    * The printable characters in the Basic Latin and Latin-1 Supplement character
-	//    set (through \u00FF)
-	//
-	//    * The special characters tab (\u0009), line feed (\u000A), and carriage
-	//    return (\u000D)
-	CertificateChain *string `min:"1" type:"string"`
-
-	// The path for the server certificate. For more information about paths, see
-	// IAM Identifiers (https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html)
-	// in the IAM User Guide.
-	//
-	// This parameter is optional. If it is not included, it defaults to a slash
-	// (/). This parameter allows (through its regex pattern (http://wikipedia.org/wiki/regex))
-	// a string of characters consisting of either a forward slash (/) by itself
-	// or a string that must begin and end with forward slashes. In addition, it
-	// can contain any ASCII character from the ! (\u0021) through the DEL character
-	// (\u007F), including most punctuation characters, digits, and upper and lowercased
-	// letters.
-	//
-	// If you are uploading a server certificate specifically for use with Amazon
-	// CloudFront distributions, you must specify a path using the path parameter.
-	// The path must begin with /cloudfront and must include a trailing slash (for
-	// example, /cloudfront/test/).
-	Path *string `min:"1" type:"string"`
-
-	// The contents of the private key in PEM-encoded format.
-	//
-	// The regex pattern (http://wikipedia.org/wiki/regex) used to validate this
-	// parameter is a string of characters consisting of the following:
-	//
-	//    * Any printable ASCII character ranging from the space character (\u0020)
-	//    through the end of the ASCII character range
-	//
-	//    * The printable characters in the Basic Latin and Latin-1 Supplement character
-	//    set (through \u00FF)
-	//
-	//    * The special characters tab (\u0009), line feed (\u000A), and carriage
-	//    return (\u000D)
-	//
-	// PrivateKey is a required field
-	PrivateKey *string `min:"1" type:"string" required:"true" sensitive:"true"`
-
-	// The name for the server certificate. Do not include the path in this value.
-	// The name of the certificate cannot contain any spaces.
-	//
-	// This parameter allows (through its regex pattern (http://wikipedia.org/wiki/regex))
-	// a string of characters consisting of upper and lowercase alphanumeric characters
-	// with no spaces. You can also include any of the following characters: _+=,.@-
-	//
-	// ServerCertificateName is a required field
-	ServerCertificateName *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s UploadServerCertificateInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UploadServerCertificateInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UploadServerCertificateInput"}
-
-	if s.CertificateBody == nil {
-		invalidParams.Add(aws.NewErrParamRequired("CertificateBody"))
-	}
-	if s.CertificateBody != nil && len(*s.CertificateBody) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("CertificateBody", 1))
-	}
-	if s.CertificateChain != nil && len(*s.CertificateChain) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("CertificateChain", 1))
-	}
-	if s.Path != nil && len(*s.Path) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Path", 1))
-	}
-
-	if s.PrivateKey == nil {
-		invalidParams.Add(aws.NewErrParamRequired("PrivateKey"))
-	}
-	if s.PrivateKey != nil && len(*s.PrivateKey) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("PrivateKey", 1))
-	}
-
-	if s.ServerCertificateName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ServerCertificateName"))
-	}
-	if s.ServerCertificateName != nil && len(*s.ServerCertificateName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ServerCertificateName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Contains the response to a successful UploadServerCertificate request.
-type UploadServerCertificateOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The meta information of the uploaded server certificate without its certificate
-	// body, certificate chain, and private key.
-	ServerCertificateMetadata *ServerCertificateMetadata `type:"structure"`
-}
-
-// String returns the string representation
-func (s UploadServerCertificateOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opUploadServerCertificate = "UploadServerCertificate"
 
@@ -187,7 +49,7 @@ const opUploadServerCertificate = "UploadServerCertificate"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/UploadServerCertificate
-func (c *Client) UploadServerCertificateRequest(input *UploadServerCertificateInput) UploadServerCertificateRequest {
+func (c *Client) UploadServerCertificateRequest(input *types.UploadServerCertificateInput) UploadServerCertificateRequest {
 	op := &aws.Operation{
 		Name:       opUploadServerCertificate,
 		HTTPMethod: "POST",
@@ -195,10 +57,10 @@ func (c *Client) UploadServerCertificateRequest(input *UploadServerCertificateIn
 	}
 
 	if input == nil {
-		input = &UploadServerCertificateInput{}
+		input = &types.UploadServerCertificateInput{}
 	}
 
-	req := c.newRequest(op, input, &UploadServerCertificateOutput{})
+	req := c.newRequest(op, input, &types.UploadServerCertificateOutput{})
 	return UploadServerCertificateRequest{Request: req, Input: input, Copy: c.UploadServerCertificateRequest}
 }
 
@@ -206,8 +68,8 @@ func (c *Client) UploadServerCertificateRequest(input *UploadServerCertificateIn
 // UploadServerCertificate API operation.
 type UploadServerCertificateRequest struct {
 	*aws.Request
-	Input *UploadServerCertificateInput
-	Copy  func(*UploadServerCertificateInput) UploadServerCertificateRequest
+	Input *types.UploadServerCertificateInput
+	Copy  func(*types.UploadServerCertificateInput) UploadServerCertificateRequest
 }
 
 // Send marshals and sends the UploadServerCertificate API request.
@@ -219,7 +81,7 @@ func (r UploadServerCertificateRequest) Send(ctx context.Context) (*UploadServer
 	}
 
 	resp := &UploadServerCertificateResponse{
-		UploadServerCertificateOutput: r.Request.Data.(*UploadServerCertificateOutput),
+		UploadServerCertificateOutput: r.Request.Data.(*types.UploadServerCertificateOutput),
 		response:                      &aws.Response{Request: r.Request},
 	}
 
@@ -229,7 +91,7 @@ func (r UploadServerCertificateRequest) Send(ctx context.Context) (*UploadServer
 // UploadServerCertificateResponse is the response type for the
 // UploadServerCertificate API operation.
 type UploadServerCertificateResponse struct {
-	*UploadServerCertificateOutput
+	*types.UploadServerCertificateOutput
 
 	response *aws.Response
 }

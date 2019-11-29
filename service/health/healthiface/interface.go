@@ -10,6 +10,7 @@ package healthiface
 
 import (
 	"github.com/aws/aws-sdk-go-v2/service/health"
+	"github.com/aws/aws-sdk-go-v2/service/health/types"
 )
 
 // ClientAPI provides an interface to enable mocking the
@@ -43,7 +44,7 @@ import (
 //    type mockClientClient struct {
 //        healthiface.ClientPI
 //    }
-//    func (m *mockClientClient) DescribeAffectedEntities(input *health.DescribeAffectedEntitiesInput) (*health.DescribeAffectedEntitiesOutput, error) {
+//    func (m *mockClientClient) DescribeAffectedEntities(input *types.DescribeAffectedEntitiesInput) (*types.DescribeAffectedEntitiesOutput, error) {
 //        // mock response/functionality
 //    }
 //
@@ -61,17 +62,17 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type ClientAPI interface {
-	DescribeAffectedEntitiesRequest(*health.DescribeAffectedEntitiesInput) health.DescribeAffectedEntitiesRequest
+	DescribeAffectedEntitiesRequest(*types.DescribeAffectedEntitiesInput) health.DescribeAffectedEntitiesRequest
 
-	DescribeEntityAggregatesRequest(*health.DescribeEntityAggregatesInput) health.DescribeEntityAggregatesRequest
+	DescribeEntityAggregatesRequest(*types.DescribeEntityAggregatesInput) health.DescribeEntityAggregatesRequest
 
-	DescribeEventAggregatesRequest(*health.DescribeEventAggregatesInput) health.DescribeEventAggregatesRequest
+	DescribeEventAggregatesRequest(*types.DescribeEventAggregatesInput) health.DescribeEventAggregatesRequest
 
-	DescribeEventDetailsRequest(*health.DescribeEventDetailsInput) health.DescribeEventDetailsRequest
+	DescribeEventDetailsRequest(*types.DescribeEventDetailsInput) health.DescribeEventDetailsRequest
 
-	DescribeEventTypesRequest(*health.DescribeEventTypesInput) health.DescribeEventTypesRequest
+	DescribeEventTypesRequest(*types.DescribeEventTypesInput) health.DescribeEventTypesRequest
 
-	DescribeEventsRequest(*health.DescribeEventsInput) health.DescribeEventsRequest
+	DescribeEventsRequest(*types.DescribeEventsInput) health.DescribeEventsRequest
 }
 
 var _ ClientAPI = (*health.Client)(nil)

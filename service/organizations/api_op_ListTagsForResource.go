@@ -6,61 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/organizations/types"
 )
-
-type ListTagsForResourceInput struct {
-	_ struct{} `type:"structure"`
-
-	// Use this parameter if you receive a NextToken response in a previous request
-	// that indicates that there is more output available. Set it to the value of
-	// the previous call's NextToken response to indicate where the output should
-	// continue from.
-	NextToken *string `type:"string"`
-
-	// The ID of the resource that you want to retrieve tags for.
-	//
-	// ResourceId is a required field
-	ResourceId *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s ListTagsForResourceInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListTagsForResourceInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListTagsForResourceInput"}
-
-	if s.ResourceId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ResourceId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ListTagsForResourceOutput struct {
-	_ struct{} `type:"structure"`
-
-	// If present, this value indicates that there is more output available than
-	// is included in the current response. Use this value in the NextToken request
-	// parameter in a subsequent call to the operation to get the next part of the
-	// output. You should repeat this until the NextToken response element comes
-	// back as null.
-	NextToken *string `type:"string"`
-
-	// The tags that are assigned to the resource.
-	Tags []Tag `type:"list"`
-}
-
-// String returns the string representation
-func (s ListTagsForResourceOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListTagsForResource = "ListTagsForResource"
 
@@ -81,7 +28,7 @@ const opListTagsForResource = "ListTagsForResource"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListTagsForResource
-func (c *Client) ListTagsForResourceRequest(input *ListTagsForResourceInput) ListTagsForResourceRequest {
+func (c *Client) ListTagsForResourceRequest(input *types.ListTagsForResourceInput) ListTagsForResourceRequest {
 	op := &aws.Operation{
 		Name:       opListTagsForResource,
 		HTTPMethod: "POST",
@@ -95,10 +42,10 @@ func (c *Client) ListTagsForResourceRequest(input *ListTagsForResourceInput) Lis
 	}
 
 	if input == nil {
-		input = &ListTagsForResourceInput{}
+		input = &types.ListTagsForResourceInput{}
 	}
 
-	req := c.newRequest(op, input, &ListTagsForResourceOutput{})
+	req := c.newRequest(op, input, &types.ListTagsForResourceOutput{})
 	return ListTagsForResourceRequest{Request: req, Input: input, Copy: c.ListTagsForResourceRequest}
 }
 
@@ -106,8 +53,8 @@ func (c *Client) ListTagsForResourceRequest(input *ListTagsForResourceInput) Lis
 // ListTagsForResource API operation.
 type ListTagsForResourceRequest struct {
 	*aws.Request
-	Input *ListTagsForResourceInput
-	Copy  func(*ListTagsForResourceInput) ListTagsForResourceRequest
+	Input *types.ListTagsForResourceInput
+	Copy  func(*types.ListTagsForResourceInput) ListTagsForResourceRequest
 }
 
 // Send marshals and sends the ListTagsForResource API request.
@@ -119,7 +66,7 @@ func (r ListTagsForResourceRequest) Send(ctx context.Context) (*ListTagsForResou
 	}
 
 	resp := &ListTagsForResourceResponse{
-		ListTagsForResourceOutput: r.Request.Data.(*ListTagsForResourceOutput),
+		ListTagsForResourceOutput: r.Request.Data.(*types.ListTagsForResourceOutput),
 		response:                  &aws.Response{Request: r.Request},
 	}
 
@@ -149,7 +96,7 @@ func NewListTagsForResourcePaginator(req ListTagsForResourceRequest) ListTagsFor
 	return ListTagsForResourcePaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListTagsForResourceInput
+				var inCpy *types.ListTagsForResourceInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -169,14 +116,14 @@ type ListTagsForResourcePaginator struct {
 	aws.Pager
 }
 
-func (p *ListTagsForResourcePaginator) CurrentPage() *ListTagsForResourceOutput {
-	return p.Pager.CurrentPage().(*ListTagsForResourceOutput)
+func (p *ListTagsForResourcePaginator) CurrentPage() *types.ListTagsForResourceOutput {
+	return p.Pager.CurrentPage().(*types.ListTagsForResourceOutput)
 }
 
 // ListTagsForResourceResponse is the response type for the
 // ListTagsForResource API operation.
 type ListTagsForResourceResponse struct {
-	*ListTagsForResourceOutput
+	*types.ListTagsForResourceOutput
 
 	response *aws.Response
 }

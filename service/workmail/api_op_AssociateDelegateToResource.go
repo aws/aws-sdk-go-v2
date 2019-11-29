@@ -6,66 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/workmail/types"
 )
-
-type AssociateDelegateToResourceInput struct {
-	_ struct{} `type:"structure"`
-
-	// The member (user or group) to associate to the resource.
-	//
-	// EntityId is a required field
-	EntityId *string `min:"12" type:"string" required:"true"`
-
-	// The organization under which the resource exists.
-	//
-	// OrganizationId is a required field
-	OrganizationId *string `type:"string" required:"true"`
-
-	// The resource for which members (users or groups) are associated.
-	//
-	// ResourceId is a required field
-	ResourceId *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s AssociateDelegateToResourceInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *AssociateDelegateToResourceInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "AssociateDelegateToResourceInput"}
-
-	if s.EntityId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("EntityId"))
-	}
-	if s.EntityId != nil && len(*s.EntityId) < 12 {
-		invalidParams.Add(aws.NewErrParamMinLen("EntityId", 12))
-	}
-
-	if s.OrganizationId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("OrganizationId"))
-	}
-
-	if s.ResourceId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ResourceId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type AssociateDelegateToResourceOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s AssociateDelegateToResourceOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opAssociateDelegateToResource = "AssociateDelegateToResource"
 
@@ -82,7 +24,7 @@ const opAssociateDelegateToResource = "AssociateDelegateToResource"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/AssociateDelegateToResource
-func (c *Client) AssociateDelegateToResourceRequest(input *AssociateDelegateToResourceInput) AssociateDelegateToResourceRequest {
+func (c *Client) AssociateDelegateToResourceRequest(input *types.AssociateDelegateToResourceInput) AssociateDelegateToResourceRequest {
 	op := &aws.Operation{
 		Name:       opAssociateDelegateToResource,
 		HTTPMethod: "POST",
@@ -90,10 +32,10 @@ func (c *Client) AssociateDelegateToResourceRequest(input *AssociateDelegateToRe
 	}
 
 	if input == nil {
-		input = &AssociateDelegateToResourceInput{}
+		input = &types.AssociateDelegateToResourceInput{}
 	}
 
-	req := c.newRequest(op, input, &AssociateDelegateToResourceOutput{})
+	req := c.newRequest(op, input, &types.AssociateDelegateToResourceOutput{})
 	return AssociateDelegateToResourceRequest{Request: req, Input: input, Copy: c.AssociateDelegateToResourceRequest}
 }
 
@@ -101,8 +43,8 @@ func (c *Client) AssociateDelegateToResourceRequest(input *AssociateDelegateToRe
 // AssociateDelegateToResource API operation.
 type AssociateDelegateToResourceRequest struct {
 	*aws.Request
-	Input *AssociateDelegateToResourceInput
-	Copy  func(*AssociateDelegateToResourceInput) AssociateDelegateToResourceRequest
+	Input *types.AssociateDelegateToResourceInput
+	Copy  func(*types.AssociateDelegateToResourceInput) AssociateDelegateToResourceRequest
 }
 
 // Send marshals and sends the AssociateDelegateToResource API request.
@@ -114,7 +56,7 @@ func (r AssociateDelegateToResourceRequest) Send(ctx context.Context) (*Associat
 	}
 
 	resp := &AssociateDelegateToResourceResponse{
-		AssociateDelegateToResourceOutput: r.Request.Data.(*AssociateDelegateToResourceOutput),
+		AssociateDelegateToResourceOutput: r.Request.Data.(*types.AssociateDelegateToResourceOutput),
 		response:                          &aws.Response{Request: r.Request},
 	}
 
@@ -124,7 +66,7 @@ func (r AssociateDelegateToResourceRequest) Send(ctx context.Context) (*Associat
 // AssociateDelegateToResourceResponse is the response type for the
 // AssociateDelegateToResource API operation.
 type AssociateDelegateToResourceResponse struct {
-	*AssociateDelegateToResourceOutput
+	*types.AssociateDelegateToResourceOutput
 
 	response *aws.Response
 }

@@ -12,6 +12,8 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws/awserr"
 	"github.com/aws/aws-sdk-go-v2/aws/external"
 	"github.com/aws/aws-sdk-go-v2/service/route53"
+	"github.com/aws/aws-sdk-go-v2/service/route53/enums"
+	"github.com/aws/aws-sdk-go-v2/service/route53/types"
 )
 
 var _ time.Duration
@@ -37,12 +39,12 @@ func ExampleClient_AssociateVPCWithHostedZoneRequest_shared00() {
 	}
 
 	svc := route53.New(cfg)
-	input := &route53.AssociateVPCWithHostedZoneInput{
+	input := &types.AssociateVPCWithHostedZoneInput{
 		Comment:      aws.String(""),
 		HostedZoneId: aws.String("Z3M3LMPEXAMPLE"),
-		VPC: &route53.VPC{
+		VPC: &types.VPC{
 			VPCId:     aws.String("vpc-1a2b3c4d"),
-			VPCRegion: route53.VPCRegionUsEast2,
+			VPCRegion: enums.VPCRegionUsEast2,
 		},
 	}
 
@@ -90,11 +92,11 @@ func ExampleClient_ChangeResourceRecordSetsRequest_shared00() {
 	}
 
 	svc := route53.New(cfg)
-	input := &route53.ChangeResourceRecordSetsInput{
-		ChangeBatch: &route53.ChangeBatch{
-			Changes: []route53.Change{
+	input := &types.ChangeResourceRecordSetsInput{
+		ChangeBatch: &types.ChangeBatch{
+			Changes: []types.Change{
 				{
-					Action: route53.ChangeActionCreate,
+					Action: enums.ChangeActionCreate,
 				},
 			},
 			Comment: aws.String("Web server for example.com"),
@@ -143,14 +145,14 @@ func ExampleClient_ChangeResourceRecordSetsRequest_shared01() {
 	}
 
 	svc := route53.New(cfg)
-	input := &route53.ChangeResourceRecordSetsInput{
-		ChangeBatch: &route53.ChangeBatch{
-			Changes: []route53.Change{
+	input := &types.ChangeResourceRecordSetsInput{
+		ChangeBatch: &types.ChangeBatch{
+			Changes: []types.Change{
 				{
-					Action: route53.ChangeActionCreate,
+					Action: enums.ChangeActionCreate,
 				},
 				{
-					Action: route53.ChangeActionCreate,
+					Action: enums.ChangeActionCreate,
 				},
 			},
 			Comment: aws.String("Web servers for example.com"),
@@ -198,11 +200,11 @@ func ExampleClient_ChangeResourceRecordSetsRequest_shared02() {
 	}
 
 	svc := route53.New(cfg)
-	input := &route53.ChangeResourceRecordSetsInput{
-		ChangeBatch: &route53.ChangeBatch{
-			Changes: []route53.Change{
+	input := &types.ChangeResourceRecordSetsInput{
+		ChangeBatch: &types.ChangeBatch{
+			Changes: []types.Change{
 				{
-					Action: route53.ChangeActionCreate,
+					Action: enums.ChangeActionCreate,
 				},
 			},
 			Comment: aws.String("CloudFront distribution for example.com"),
@@ -252,14 +254,14 @@ func ExampleClient_ChangeResourceRecordSetsRequest_shared03() {
 	}
 
 	svc := route53.New(cfg)
-	input := &route53.ChangeResourceRecordSetsInput{
-		ChangeBatch: &route53.ChangeBatch{
-			Changes: []route53.Change{
+	input := &types.ChangeResourceRecordSetsInput{
+		ChangeBatch: &types.ChangeBatch{
+			Changes: []types.Change{
 				{
-					Action: route53.ChangeActionCreate,
+					Action: enums.ChangeActionCreate,
 				},
 				{
-					Action: route53.ChangeActionCreate,
+					Action: enums.ChangeActionCreate,
 				},
 			},
 			Comment: aws.String("ELB load balancers for example.com"),
@@ -308,14 +310,14 @@ func ExampleClient_ChangeResourceRecordSetsRequest_shared04() {
 	}
 
 	svc := route53.New(cfg)
-	input := &route53.ChangeResourceRecordSetsInput{
-		ChangeBatch: &route53.ChangeBatch{
-			Changes: []route53.Change{
+	input := &types.ChangeResourceRecordSetsInput{
+		ChangeBatch: &types.ChangeBatch{
+			Changes: []types.Change{
 				{
-					Action: route53.ChangeActionCreate,
+					Action: enums.ChangeActionCreate,
 				},
 				{
-					Action: route53.ChangeActionCreate,
+					Action: enums.ChangeActionCreate,
 				},
 			},
 			Comment: aws.String("EC2 instances for example.com"),
@@ -364,14 +366,14 @@ func ExampleClient_ChangeResourceRecordSetsRequest_shared05() {
 	}
 
 	svc := route53.New(cfg)
-	input := &route53.ChangeResourceRecordSetsInput{
-		ChangeBatch: &route53.ChangeBatch{
-			Changes: []route53.Change{
+	input := &types.ChangeResourceRecordSetsInput{
+		ChangeBatch: &types.ChangeBatch{
+			Changes: []types.Change{
 				{
-					Action: route53.ChangeActionCreate,
+					Action: enums.ChangeActionCreate,
 				},
 				{
-					Action: route53.ChangeActionCreate,
+					Action: enums.ChangeActionCreate,
 				},
 			},
 			Comment: aws.String("ELB load balancers for example.com"),
@@ -421,14 +423,14 @@ func ExampleClient_ChangeResourceRecordSetsRequest_shared06() {
 	}
 
 	svc := route53.New(cfg)
-	input := &route53.ChangeResourceRecordSetsInput{
-		ChangeBatch: &route53.ChangeBatch{
-			Changes: []route53.Change{
+	input := &types.ChangeResourceRecordSetsInput{
+		ChangeBatch: &types.ChangeBatch{
+			Changes: []types.Change{
 				{
-					Action: route53.ChangeActionCreate,
+					Action: enums.ChangeActionCreate,
 				},
 				{
-					Action: route53.ChangeActionCreate,
+					Action: enums.ChangeActionCreate,
 				},
 			},
 			Comment: aws.String("Failover configuration for example.com"),
@@ -478,14 +480,14 @@ func ExampleClient_ChangeResourceRecordSetsRequest_shared07() {
 	}
 
 	svc := route53.New(cfg)
-	input := &route53.ChangeResourceRecordSetsInput{
-		ChangeBatch: &route53.ChangeBatch{
-			Changes: []route53.Change{
+	input := &types.ChangeResourceRecordSetsInput{
+		ChangeBatch: &types.ChangeBatch{
+			Changes: []types.Change{
 				{
-					Action: route53.ChangeActionCreate,
+					Action: enums.ChangeActionCreate,
 				},
 				{
-					Action: route53.ChangeActionCreate,
+					Action: enums.ChangeActionCreate,
 				},
 			},
 			Comment: aws.String("Failover alias configuration for example.com"),
@@ -535,20 +537,20 @@ func ExampleClient_ChangeResourceRecordSetsRequest_shared08() {
 	}
 
 	svc := route53.New(cfg)
-	input := &route53.ChangeResourceRecordSetsInput{
-		ChangeBatch: &route53.ChangeBatch{
-			Changes: []route53.Change{
+	input := &types.ChangeResourceRecordSetsInput{
+		ChangeBatch: &types.ChangeBatch{
+			Changes: []types.Change{
 				{
-					Action: route53.ChangeActionCreate,
+					Action: enums.ChangeActionCreate,
 				},
 				{
-					Action: route53.ChangeActionCreate,
+					Action: enums.ChangeActionCreate,
 				},
 				{
-					Action: route53.ChangeActionCreate,
+					Action: enums.ChangeActionCreate,
 				},
 				{
-					Action: route53.ChangeActionCreate,
+					Action: enums.ChangeActionCreate,
 				},
 			},
 			Comment: aws.String("Geolocation configuration for example.com"),
@@ -598,20 +600,20 @@ func ExampleClient_ChangeResourceRecordSetsRequest_shared09() {
 	}
 
 	svc := route53.New(cfg)
-	input := &route53.ChangeResourceRecordSetsInput{
-		ChangeBatch: &route53.ChangeBatch{
-			Changes: []route53.Change{
+	input := &types.ChangeResourceRecordSetsInput{
+		ChangeBatch: &types.ChangeBatch{
+			Changes: []types.Change{
 				{
-					Action: route53.ChangeActionCreate,
+					Action: enums.ChangeActionCreate,
 				},
 				{
-					Action: route53.ChangeActionCreate,
+					Action: enums.ChangeActionCreate,
 				},
 				{
-					Action: route53.ChangeActionCreate,
+					Action: enums.ChangeActionCreate,
 				},
 				{
-					Action: route53.ChangeActionCreate,
+					Action: enums.ChangeActionCreate,
 				},
 			},
 			Comment: aws.String("Geolocation alias configuration for example.com"),
@@ -659,8 +661,8 @@ func ExampleClient_ChangeTagsForResourceRequest_shared00() {
 	}
 
 	svc := route53.New(cfg)
-	input := &route53.ChangeTagsForResourceInput{
-		AddTags: []route53.Tag{
+	input := &types.ChangeTagsForResourceInput{
+		AddTags: []types.Tag{
 			{
 				Key:   aws.String("apex"),
 				Value: aws.String("3874"),
@@ -674,7 +676,7 @@ func ExampleClient_ChangeTagsForResourceRequest_shared00() {
 			"Nadir",
 		},
 		ResourceId:   aws.String("Z3M3LMPEXAMPLE"),
-		ResourceType: route53.TagResourceTypeHostedzone,
+		ResourceType: enums.TagResourceTypeHostedzone,
 	}
 
 	req := svc.ChangeTagsForResourceRequest(input)
@@ -716,7 +718,7 @@ func ExampleClient_GetHostedZoneRequest_shared00() {
 	}
 
 	svc := route53.New(cfg)
-	input := &route53.GetHostedZoneInput{
+	input := &types.GetHostedZoneInput{
 		Id: aws.String("Z3M3LMPEXAMPLE"),
 	}
 

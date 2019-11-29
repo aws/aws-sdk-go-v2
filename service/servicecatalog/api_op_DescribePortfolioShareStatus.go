@@ -6,65 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/types"
 )
-
-type DescribePortfolioShareStatusInput struct {
-	_ struct{} `type:"structure"`
-
-	// The token for the portfolio share operation. This token is returned either
-	// by CreatePortfolioShare or by DeletePortfolioShare.
-	//
-	// PortfolioShareToken is a required field
-	PortfolioShareToken *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribePortfolioShareStatusInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribePortfolioShareStatusInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribePortfolioShareStatusInput"}
-
-	if s.PortfolioShareToken == nil {
-		invalidParams.Add(aws.NewErrParamRequired("PortfolioShareToken"))
-	}
-	if s.PortfolioShareToken != nil && len(*s.PortfolioShareToken) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("PortfolioShareToken", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribePortfolioShareStatusOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Organization node identifier. It can be either account id, organizational
-	// unit id or organization id.
-	OrganizationNodeValue *string `type:"string"`
-
-	// The portfolio identifier.
-	PortfolioId *string `min:"1" type:"string"`
-
-	// The token for the portfolio share operation. For example, share-6v24abcdefghi.
-	PortfolioShareToken *string `min:"1" type:"string"`
-
-	// Information about the portfolio share operation.
-	ShareDetails *ShareDetails `type:"structure"`
-
-	// Status of the portfolio share operation.
-	Status ShareStatus `type:"string" enum:"true"`
-}
-
-// String returns the string representation
-func (s DescribePortfolioShareStatusOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribePortfolioShareStatus = "DescribePortfolioShareStatus"
 
@@ -82,7 +25,7 @@ const opDescribePortfolioShareStatus = "DescribePortfolioShareStatus"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DescribePortfolioShareStatus
-func (c *Client) DescribePortfolioShareStatusRequest(input *DescribePortfolioShareStatusInput) DescribePortfolioShareStatusRequest {
+func (c *Client) DescribePortfolioShareStatusRequest(input *types.DescribePortfolioShareStatusInput) DescribePortfolioShareStatusRequest {
 	op := &aws.Operation{
 		Name:       opDescribePortfolioShareStatus,
 		HTTPMethod: "POST",
@@ -90,10 +33,10 @@ func (c *Client) DescribePortfolioShareStatusRequest(input *DescribePortfolioSha
 	}
 
 	if input == nil {
-		input = &DescribePortfolioShareStatusInput{}
+		input = &types.DescribePortfolioShareStatusInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribePortfolioShareStatusOutput{})
+	req := c.newRequest(op, input, &types.DescribePortfolioShareStatusOutput{})
 	return DescribePortfolioShareStatusRequest{Request: req, Input: input, Copy: c.DescribePortfolioShareStatusRequest}
 }
 
@@ -101,8 +44,8 @@ func (c *Client) DescribePortfolioShareStatusRequest(input *DescribePortfolioSha
 // DescribePortfolioShareStatus API operation.
 type DescribePortfolioShareStatusRequest struct {
 	*aws.Request
-	Input *DescribePortfolioShareStatusInput
-	Copy  func(*DescribePortfolioShareStatusInput) DescribePortfolioShareStatusRequest
+	Input *types.DescribePortfolioShareStatusInput
+	Copy  func(*types.DescribePortfolioShareStatusInput) DescribePortfolioShareStatusRequest
 }
 
 // Send marshals and sends the DescribePortfolioShareStatus API request.
@@ -114,7 +57,7 @@ func (r DescribePortfolioShareStatusRequest) Send(ctx context.Context) (*Describ
 	}
 
 	resp := &DescribePortfolioShareStatusResponse{
-		DescribePortfolioShareStatusOutput: r.Request.Data.(*DescribePortfolioShareStatusOutput),
+		DescribePortfolioShareStatusOutput: r.Request.Data.(*types.DescribePortfolioShareStatusOutput),
 		response:                           &aws.Response{Request: r.Request},
 	}
 
@@ -124,7 +67,7 @@ func (r DescribePortfolioShareStatusRequest) Send(ctx context.Context) (*Describ
 // DescribePortfolioShareStatusResponse is the response type for the
 // DescribePortfolioShareStatus API operation.
 type DescribePortfolioShareStatusResponse struct {
-	*DescribePortfolioShareStatusOutput
+	*types.DescribePortfolioShareStatusOutput
 
 	response *aws.Response
 }

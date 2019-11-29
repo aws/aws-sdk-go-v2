@@ -6,59 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/comprehend/types"
 )
-
-type ListDocumentClassifiersInput struct {
-	_ struct{} `type:"structure"`
-
-	// Filters the jobs that are returned. You can filter jobs on their name, status,
-	// or the date and time that they were submitted. You can only set one filter
-	// at a time.
-	Filter *DocumentClassifierFilter `type:"structure"`
-
-	// The maximum number of results to return in each page. The default is 100.
-	MaxResults *int64 `min:"1" type:"integer"`
-
-	// Identifies the next page of results to return.
-	NextToken *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s ListDocumentClassifiersInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListDocumentClassifiersInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListDocumentClassifiersInput"}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-	if s.NextToken != nil && len(*s.NextToken) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ListDocumentClassifiersOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A list containing the properties of each job returned.
-	DocumentClassifierPropertiesList []DocumentClassifierProperties `type:"list"`
-
-	// Identifies the next page of results to return.
-	NextToken *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s ListDocumentClassifiersOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListDocumentClassifiers = "ListDocumentClassifiers"
 
@@ -75,7 +24,7 @@ const opListDocumentClassifiers = "ListDocumentClassifiers"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/ListDocumentClassifiers
-func (c *Client) ListDocumentClassifiersRequest(input *ListDocumentClassifiersInput) ListDocumentClassifiersRequest {
+func (c *Client) ListDocumentClassifiersRequest(input *types.ListDocumentClassifiersInput) ListDocumentClassifiersRequest {
 	op := &aws.Operation{
 		Name:       opListDocumentClassifiers,
 		HTTPMethod: "POST",
@@ -89,10 +38,10 @@ func (c *Client) ListDocumentClassifiersRequest(input *ListDocumentClassifiersIn
 	}
 
 	if input == nil {
-		input = &ListDocumentClassifiersInput{}
+		input = &types.ListDocumentClassifiersInput{}
 	}
 
-	req := c.newRequest(op, input, &ListDocumentClassifiersOutput{})
+	req := c.newRequest(op, input, &types.ListDocumentClassifiersOutput{})
 	return ListDocumentClassifiersRequest{Request: req, Input: input, Copy: c.ListDocumentClassifiersRequest}
 }
 
@@ -100,8 +49,8 @@ func (c *Client) ListDocumentClassifiersRequest(input *ListDocumentClassifiersIn
 // ListDocumentClassifiers API operation.
 type ListDocumentClassifiersRequest struct {
 	*aws.Request
-	Input *ListDocumentClassifiersInput
-	Copy  func(*ListDocumentClassifiersInput) ListDocumentClassifiersRequest
+	Input *types.ListDocumentClassifiersInput
+	Copy  func(*types.ListDocumentClassifiersInput) ListDocumentClassifiersRequest
 }
 
 // Send marshals and sends the ListDocumentClassifiers API request.
@@ -113,7 +62,7 @@ func (r ListDocumentClassifiersRequest) Send(ctx context.Context) (*ListDocument
 	}
 
 	resp := &ListDocumentClassifiersResponse{
-		ListDocumentClassifiersOutput: r.Request.Data.(*ListDocumentClassifiersOutput),
+		ListDocumentClassifiersOutput: r.Request.Data.(*types.ListDocumentClassifiersOutput),
 		response:                      &aws.Response{Request: r.Request},
 	}
 
@@ -143,7 +92,7 @@ func NewListDocumentClassifiersPaginator(req ListDocumentClassifiersRequest) Lis
 	return ListDocumentClassifiersPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListDocumentClassifiersInput
+				var inCpy *types.ListDocumentClassifiersInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -163,14 +112,14 @@ type ListDocumentClassifiersPaginator struct {
 	aws.Pager
 }
 
-func (p *ListDocumentClassifiersPaginator) CurrentPage() *ListDocumentClassifiersOutput {
-	return p.Pager.CurrentPage().(*ListDocumentClassifiersOutput)
+func (p *ListDocumentClassifiersPaginator) CurrentPage() *types.ListDocumentClassifiersOutput {
+	return p.Pager.CurrentPage().(*types.ListDocumentClassifiersOutput)
 }
 
 // ListDocumentClassifiersResponse is the response type for the
 // ListDocumentClassifiers API operation.
 type ListDocumentClassifiersResponse struct {
-	*ListDocumentClassifiersOutput
+	*types.ListDocumentClassifiersOutput
 
 	response *aws.Response
 }

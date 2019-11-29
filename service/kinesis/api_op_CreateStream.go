@@ -6,71 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
+	"github.com/aws/aws-sdk-go-v2/service/kinesis/types"
 )
-
-// Represents the input for CreateStream.
-type CreateStreamInput struct {
-	_ struct{} `type:"structure"`
-
-	// The number of shards that the stream will use. The throughput of the stream
-	// is a function of the number of shards; more shards are required for greater
-	// provisioned throughput.
-	//
-	// DefaultShardLimit;
-	//
-	// ShardCount is a required field
-	ShardCount *int64 `min:"1" type:"integer" required:"true"`
-
-	// A name to identify the stream. The stream name is scoped to the AWS account
-	// used by the application that creates the stream. It is also scoped by AWS
-	// Region. That is, two streams in two different AWS accounts can have the same
-	// name. Two streams in the same AWS account but in two different Regions can
-	// also have the same name.
-	//
-	// StreamName is a required field
-	StreamName *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s CreateStreamInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateStreamInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateStreamInput"}
-
-	if s.ShardCount == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ShardCount"))
-	}
-	if s.ShardCount != nil && *s.ShardCount < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("ShardCount", 1))
-	}
-
-	if s.StreamName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("StreamName"))
-	}
-	if s.StreamName != nil && len(*s.StreamName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("StreamName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type CreateStreamOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s CreateStreamOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCreateStream = "CreateStream"
 
@@ -125,7 +64,7 @@ const opCreateStream = "CreateStream"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/CreateStream
-func (c *Client) CreateStreamRequest(input *CreateStreamInput) CreateStreamRequest {
+func (c *Client) CreateStreamRequest(input *types.CreateStreamInput) CreateStreamRequest {
 	op := &aws.Operation{
 		Name:       opCreateStream,
 		HTTPMethod: "POST",
@@ -133,10 +72,10 @@ func (c *Client) CreateStreamRequest(input *CreateStreamInput) CreateStreamReque
 	}
 
 	if input == nil {
-		input = &CreateStreamInput{}
+		input = &types.CreateStreamInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateStreamOutput{})
+	req := c.newRequest(op, input, &types.CreateStreamOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return CreateStreamRequest{Request: req, Input: input, Copy: c.CreateStreamRequest}
@@ -146,8 +85,8 @@ func (c *Client) CreateStreamRequest(input *CreateStreamInput) CreateStreamReque
 // CreateStream API operation.
 type CreateStreamRequest struct {
 	*aws.Request
-	Input *CreateStreamInput
-	Copy  func(*CreateStreamInput) CreateStreamRequest
+	Input *types.CreateStreamInput
+	Copy  func(*types.CreateStreamInput) CreateStreamRequest
 }
 
 // Send marshals and sends the CreateStream API request.
@@ -159,7 +98,7 @@ func (r CreateStreamRequest) Send(ctx context.Context) (*CreateStreamResponse, e
 	}
 
 	resp := &CreateStreamResponse{
-		CreateStreamOutput: r.Request.Data.(*CreateStreamOutput),
+		CreateStreamOutput: r.Request.Data.(*types.CreateStreamOutput),
 		response:           &aws.Response{Request: r.Request},
 	}
 
@@ -169,7 +108,7 @@ func (r CreateStreamRequest) Send(ctx context.Context) (*CreateStreamResponse, e
 // CreateStreamResponse is the response type for the
 // CreateStream API operation.
 type CreateStreamResponse struct {
-	*CreateStreamOutput
+	*types.CreateStreamOutput
 
 	response *aws.Response
 }

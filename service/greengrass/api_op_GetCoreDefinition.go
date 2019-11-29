@@ -6,133 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/greengrass/types"
 )
-
-type GetCoreDefinitionInput struct {
-	_ struct{} `type:"structure"`
-
-	// CoreDefinitionId is a required field
-	CoreDefinitionId *string `location:"uri" locationName:"CoreDefinitionId" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetCoreDefinitionInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetCoreDefinitionInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetCoreDefinitionInput"}
-
-	if s.CoreDefinitionId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("CoreDefinitionId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetCoreDefinitionInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.CoreDefinitionId != nil {
-		v := *s.CoreDefinitionId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "CoreDefinitionId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type GetCoreDefinitionOutput struct {
-	_ struct{} `type:"structure"`
-
-	Arn *string `type:"string"`
-
-	CreationTimestamp *string `type:"string"`
-
-	Id *string `type:"string"`
-
-	LastUpdatedTimestamp *string `type:"string"`
-
-	LatestVersion *string `type:"string"`
-
-	LatestVersionArn *string `type:"string"`
-
-	Name *string `type:"string"`
-
-	// The key-value pair for the resource tag.
-	Tags map[string]string `locationName:"tags" type:"map"`
-}
-
-// String returns the string representation
-func (s GetCoreDefinitionOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetCoreDefinitionOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.Arn != nil {
-		v := *s.Arn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "Arn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.CreationTimestamp != nil {
-		v := *s.CreationTimestamp
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "CreationTimestamp", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Id != nil {
-		v := *s.Id
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "Id", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.LastUpdatedTimestamp != nil {
-		v := *s.LastUpdatedTimestamp
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "LastUpdatedTimestamp", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.LatestVersion != nil {
-		v := *s.LatestVersion
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "LatestVersion", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.LatestVersionArn != nil {
-		v := *s.LatestVersionArn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "LatestVersionArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Name != nil {
-		v := *s.Name
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "Name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Tags != nil {
-		v := s.Tags
-
-		metadata := protocol.Metadata{}
-		ms0 := e.Map(protocol.BodyTarget, "tags", metadata)
-		ms0.Start()
-		for k1, v1 := range v {
-			ms0.MapSetValue(k1, protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
-		}
-		ms0.End()
-
-	}
-	return nil
-}
 
 const opGetCoreDefinition = "GetCoreDefinition"
 
@@ -149,7 +24,7 @@ const opGetCoreDefinition = "GetCoreDefinition"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GetCoreDefinition
-func (c *Client) GetCoreDefinitionRequest(input *GetCoreDefinitionInput) GetCoreDefinitionRequest {
+func (c *Client) GetCoreDefinitionRequest(input *types.GetCoreDefinitionInput) GetCoreDefinitionRequest {
 	op := &aws.Operation{
 		Name:       opGetCoreDefinition,
 		HTTPMethod: "GET",
@@ -157,10 +32,10 @@ func (c *Client) GetCoreDefinitionRequest(input *GetCoreDefinitionInput) GetCore
 	}
 
 	if input == nil {
-		input = &GetCoreDefinitionInput{}
+		input = &types.GetCoreDefinitionInput{}
 	}
 
-	req := c.newRequest(op, input, &GetCoreDefinitionOutput{})
+	req := c.newRequest(op, input, &types.GetCoreDefinitionOutput{})
 	return GetCoreDefinitionRequest{Request: req, Input: input, Copy: c.GetCoreDefinitionRequest}
 }
 
@@ -168,8 +43,8 @@ func (c *Client) GetCoreDefinitionRequest(input *GetCoreDefinitionInput) GetCore
 // GetCoreDefinition API operation.
 type GetCoreDefinitionRequest struct {
 	*aws.Request
-	Input *GetCoreDefinitionInput
-	Copy  func(*GetCoreDefinitionInput) GetCoreDefinitionRequest
+	Input *types.GetCoreDefinitionInput
+	Copy  func(*types.GetCoreDefinitionInput) GetCoreDefinitionRequest
 }
 
 // Send marshals and sends the GetCoreDefinition API request.
@@ -181,7 +56,7 @@ func (r GetCoreDefinitionRequest) Send(ctx context.Context) (*GetCoreDefinitionR
 	}
 
 	resp := &GetCoreDefinitionResponse{
-		GetCoreDefinitionOutput: r.Request.Data.(*GetCoreDefinitionOutput),
+		GetCoreDefinitionOutput: r.Request.Data.(*types.GetCoreDefinitionOutput),
 		response:                &aws.Response{Request: r.Request},
 	}
 
@@ -191,7 +66,7 @@ func (r GetCoreDefinitionRequest) Send(ctx context.Context) (*GetCoreDefinitionR
 // GetCoreDefinitionResponse is the response type for the
 // GetCoreDefinition API operation.
 type GetCoreDefinitionResponse struct {
-	*GetCoreDefinitionOutput
+	*types.GetCoreDefinitionOutput
 
 	response *aws.Response
 }

@@ -6,90 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/pinpointemail/types"
 )
-
-// A request to associate a configuration set with a dedicated IP pool.
-type PutConfigurationSetDeliveryOptionsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the configuration set that you want to associate with a dedicated
-	// IP pool.
-	//
-	// ConfigurationSetName is a required field
-	ConfigurationSetName *string `location:"uri" locationName:"ConfigurationSetName" type:"string" required:"true"`
-
-	// The name of the dedicated IP pool that you want to associate with the configuration
-	// set.
-	SendingPoolName *string `type:"string"`
-
-	// Specifies whether messages that use the configuration set are required to
-	// use Transport Layer Security (TLS). If the value is Require, messages are
-	// only delivered if a TLS connection can be established. If the value is Optional,
-	// messages can be delivered in plain text if a TLS connection can't be established.
-	TlsPolicy TlsPolicy `type:"string" enum:"true"`
-}
-
-// String returns the string representation
-func (s PutConfigurationSetDeliveryOptionsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *PutConfigurationSetDeliveryOptionsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "PutConfigurationSetDeliveryOptionsInput"}
-
-	if s.ConfigurationSetName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ConfigurationSetName"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s PutConfigurationSetDeliveryOptionsInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.SendingPoolName != nil {
-		v := *s.SendingPoolName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "SendingPoolName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if len(s.TlsPolicy) > 0 {
-		v := s.TlsPolicy
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "TlsPolicy", protocol.QuotedValue{ValueMarshaler: v}, metadata)
-	}
-	if s.ConfigurationSetName != nil {
-		v := *s.ConfigurationSetName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "ConfigurationSetName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-// An HTTP 200 response if the request succeeds, or an error message if the
-// request fails.
-type PutConfigurationSetDeliveryOptionsOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s PutConfigurationSetDeliveryOptionsOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s PutConfigurationSetDeliveryOptionsOutput) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
 
 const opPutConfigurationSetDeliveryOptions = "PutConfigurationSetDeliveryOptions"
 
@@ -108,7 +26,7 @@ const opPutConfigurationSetDeliveryOptions = "PutConfigurationSetDeliveryOptions
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/PutConfigurationSetDeliveryOptions
-func (c *Client) PutConfigurationSetDeliveryOptionsRequest(input *PutConfigurationSetDeliveryOptionsInput) PutConfigurationSetDeliveryOptionsRequest {
+func (c *Client) PutConfigurationSetDeliveryOptionsRequest(input *types.PutConfigurationSetDeliveryOptionsInput) PutConfigurationSetDeliveryOptionsRequest {
 	op := &aws.Operation{
 		Name:       opPutConfigurationSetDeliveryOptions,
 		HTTPMethod: "PUT",
@@ -116,10 +34,10 @@ func (c *Client) PutConfigurationSetDeliveryOptionsRequest(input *PutConfigurati
 	}
 
 	if input == nil {
-		input = &PutConfigurationSetDeliveryOptionsInput{}
+		input = &types.PutConfigurationSetDeliveryOptionsInput{}
 	}
 
-	req := c.newRequest(op, input, &PutConfigurationSetDeliveryOptionsOutput{})
+	req := c.newRequest(op, input, &types.PutConfigurationSetDeliveryOptionsOutput{})
 	return PutConfigurationSetDeliveryOptionsRequest{Request: req, Input: input, Copy: c.PutConfigurationSetDeliveryOptionsRequest}
 }
 
@@ -127,8 +45,8 @@ func (c *Client) PutConfigurationSetDeliveryOptionsRequest(input *PutConfigurati
 // PutConfigurationSetDeliveryOptions API operation.
 type PutConfigurationSetDeliveryOptionsRequest struct {
 	*aws.Request
-	Input *PutConfigurationSetDeliveryOptionsInput
-	Copy  func(*PutConfigurationSetDeliveryOptionsInput) PutConfigurationSetDeliveryOptionsRequest
+	Input *types.PutConfigurationSetDeliveryOptionsInput
+	Copy  func(*types.PutConfigurationSetDeliveryOptionsInput) PutConfigurationSetDeliveryOptionsRequest
 }
 
 // Send marshals and sends the PutConfigurationSetDeliveryOptions API request.
@@ -140,7 +58,7 @@ func (r PutConfigurationSetDeliveryOptionsRequest) Send(ctx context.Context) (*P
 	}
 
 	resp := &PutConfigurationSetDeliveryOptionsResponse{
-		PutConfigurationSetDeliveryOptionsOutput: r.Request.Data.(*PutConfigurationSetDeliveryOptionsOutput),
+		PutConfigurationSetDeliveryOptionsOutput: r.Request.Data.(*types.PutConfigurationSetDeliveryOptionsOutput),
 		response:                                 &aws.Response{Request: r.Request},
 	}
 
@@ -150,7 +68,7 @@ func (r PutConfigurationSetDeliveryOptionsRequest) Send(ctx context.Context) (*P
 // PutConfigurationSetDeliveryOptionsResponse is the response type for the
 // PutConfigurationSetDeliveryOptions API operation.
 type PutConfigurationSetDeliveryOptionsResponse struct {
-	*PutConfigurationSetDeliveryOptionsOutput
+	*types.PutConfigurationSetDeliveryOptionsOutput
 
 	response *aws.Response
 }

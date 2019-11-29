@@ -6,59 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/query"
+	"github.com/aws/aws-sdk-go-v2/service/rds/types"
 )
-
-type DeleteDBSecurityGroupInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the DB security group to delete.
-	//
-	// You can't delete the default DB security group.
-	//
-	// Constraints:
-	//
-	//    * Must be 1 to 255 letters, numbers, or hyphens.
-	//
-	//    * First character must be a letter
-	//
-	//    * Can't end with a hyphen or contain two consecutive hyphens
-	//
-	//    * Must not be "Default"
-	//
-	// DBSecurityGroupName is a required field
-	DBSecurityGroupName *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteDBSecurityGroupInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteDBSecurityGroupInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteDBSecurityGroupInput"}
-
-	if s.DBSecurityGroupName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DBSecurityGroupName"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteDBSecurityGroupOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteDBSecurityGroupOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteDBSecurityGroup = "DeleteDBSecurityGroup"
 
@@ -77,7 +28,7 @@ const opDeleteDBSecurityGroup = "DeleteDBSecurityGroup"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteDBSecurityGroup
-func (c *Client) DeleteDBSecurityGroupRequest(input *DeleteDBSecurityGroupInput) DeleteDBSecurityGroupRequest {
+func (c *Client) DeleteDBSecurityGroupRequest(input *types.DeleteDBSecurityGroupInput) DeleteDBSecurityGroupRequest {
 	op := &aws.Operation{
 		Name:       opDeleteDBSecurityGroup,
 		HTTPMethod: "POST",
@@ -85,10 +36,10 @@ func (c *Client) DeleteDBSecurityGroupRequest(input *DeleteDBSecurityGroupInput)
 	}
 
 	if input == nil {
-		input = &DeleteDBSecurityGroupInput{}
+		input = &types.DeleteDBSecurityGroupInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteDBSecurityGroupOutput{})
+	req := c.newRequest(op, input, &types.DeleteDBSecurityGroupOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return DeleteDBSecurityGroupRequest{Request: req, Input: input, Copy: c.DeleteDBSecurityGroupRequest}
@@ -98,8 +49,8 @@ func (c *Client) DeleteDBSecurityGroupRequest(input *DeleteDBSecurityGroupInput)
 // DeleteDBSecurityGroup API operation.
 type DeleteDBSecurityGroupRequest struct {
 	*aws.Request
-	Input *DeleteDBSecurityGroupInput
-	Copy  func(*DeleteDBSecurityGroupInput) DeleteDBSecurityGroupRequest
+	Input *types.DeleteDBSecurityGroupInput
+	Copy  func(*types.DeleteDBSecurityGroupInput) DeleteDBSecurityGroupRequest
 }
 
 // Send marshals and sends the DeleteDBSecurityGroup API request.
@@ -111,7 +62,7 @@ func (r DeleteDBSecurityGroupRequest) Send(ctx context.Context) (*DeleteDBSecuri
 	}
 
 	resp := &DeleteDBSecurityGroupResponse{
-		DeleteDBSecurityGroupOutput: r.Request.Data.(*DeleteDBSecurityGroupOutput),
+		DeleteDBSecurityGroupOutput: r.Request.Data.(*types.DeleteDBSecurityGroupOutput),
 		response:                    &aws.Response{Request: r.Request},
 	}
 
@@ -121,7 +72,7 @@ func (r DeleteDBSecurityGroupRequest) Send(ctx context.Context) (*DeleteDBSecuri
 // DeleteDBSecurityGroupResponse is the response type for the
 // DeleteDBSecurityGroup API operation.
 type DeleteDBSecurityGroupResponse struct {
-	*DeleteDBSecurityGroupOutput
+	*types.DeleteDBSecurityGroupOutput
 
 	response *aws.Response
 }

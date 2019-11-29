@@ -6,63 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/query"
+	"github.com/aws/aws-sdk-go-v2/service/autoscaling/types"
 )
-
-type DeleteNotificationConfigurationInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the Auto Scaling group.
-	//
-	// AutoScalingGroupName is a required field
-	AutoScalingGroupName *string `min:"1" type:"string" required:"true"`
-
-	// The Amazon Resource Name (ARN) of the Amazon Simple Notification Service
-	// (Amazon SNS) topic.
-	//
-	// TopicARN is a required field
-	TopicARN *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteNotificationConfigurationInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteNotificationConfigurationInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteNotificationConfigurationInput"}
-
-	if s.AutoScalingGroupName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("AutoScalingGroupName"))
-	}
-	if s.AutoScalingGroupName != nil && len(*s.AutoScalingGroupName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("AutoScalingGroupName", 1))
-	}
-
-	if s.TopicARN == nil {
-		invalidParams.Add(aws.NewErrParamRequired("TopicARN"))
-	}
-	if s.TopicARN != nil && len(*s.TopicARN) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("TopicARN", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteNotificationConfigurationOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteNotificationConfigurationOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteNotificationConfiguration = "DeleteNotificationConfiguration"
 
@@ -79,7 +26,7 @@ const opDeleteNotificationConfiguration = "DeleteNotificationConfiguration"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DeleteNotificationConfiguration
-func (c *Client) DeleteNotificationConfigurationRequest(input *DeleteNotificationConfigurationInput) DeleteNotificationConfigurationRequest {
+func (c *Client) DeleteNotificationConfigurationRequest(input *types.DeleteNotificationConfigurationInput) DeleteNotificationConfigurationRequest {
 	op := &aws.Operation{
 		Name:       opDeleteNotificationConfiguration,
 		HTTPMethod: "POST",
@@ -87,10 +34,10 @@ func (c *Client) DeleteNotificationConfigurationRequest(input *DeleteNotificatio
 	}
 
 	if input == nil {
-		input = &DeleteNotificationConfigurationInput{}
+		input = &types.DeleteNotificationConfigurationInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteNotificationConfigurationOutput{})
+	req := c.newRequest(op, input, &types.DeleteNotificationConfigurationOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return DeleteNotificationConfigurationRequest{Request: req, Input: input, Copy: c.DeleteNotificationConfigurationRequest}
@@ -100,8 +47,8 @@ func (c *Client) DeleteNotificationConfigurationRequest(input *DeleteNotificatio
 // DeleteNotificationConfiguration API operation.
 type DeleteNotificationConfigurationRequest struct {
 	*aws.Request
-	Input *DeleteNotificationConfigurationInput
-	Copy  func(*DeleteNotificationConfigurationInput) DeleteNotificationConfigurationRequest
+	Input *types.DeleteNotificationConfigurationInput
+	Copy  func(*types.DeleteNotificationConfigurationInput) DeleteNotificationConfigurationRequest
 }
 
 // Send marshals and sends the DeleteNotificationConfiguration API request.
@@ -113,7 +60,7 @@ func (r DeleteNotificationConfigurationRequest) Send(ctx context.Context) (*Dele
 	}
 
 	resp := &DeleteNotificationConfigurationResponse{
-		DeleteNotificationConfigurationOutput: r.Request.Data.(*DeleteNotificationConfigurationOutput),
+		DeleteNotificationConfigurationOutput: r.Request.Data.(*types.DeleteNotificationConfigurationOutput),
 		response:                              &aws.Response{Request: r.Request},
 	}
 
@@ -123,7 +70,7 @@ func (r DeleteNotificationConfigurationRequest) Send(ctx context.Context) (*Dele
 // DeleteNotificationConfigurationResponse is the response type for the
 // DeleteNotificationConfiguration API operation.
 type DeleteNotificationConfigurationResponse struct {
-	*DeleteNotificationConfigurationOutput
+	*types.DeleteNotificationConfigurationOutput
 
 	response *aws.Response
 }

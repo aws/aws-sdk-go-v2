@@ -6,237 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/cognitosync/types"
 )
-
-// A request for a list of records.
-type ListRecordsInput struct {
-	_ struct{} `type:"structure"`
-
-	// A string of up to 128 characters. Allowed characters are a-z, A-Z, 0-9, '_'
-	// (underscore), '-' (dash), and '.' (dot).
-	//
-	// DatasetName is a required field
-	DatasetName *string `location:"uri" locationName:"DatasetName" min:"1" type:"string" required:"true"`
-
-	// A name-spaced GUID (for example, us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE)
-	// created by Amazon Cognito. GUID generation is unique within a region.
-	//
-	// IdentityId is a required field
-	IdentityId *string `location:"uri" locationName:"IdentityId" min:"1" type:"string" required:"true"`
-
-	// A name-spaced GUID (for example, us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE)
-	// created by Amazon Cognito. GUID generation is unique within a region.
-	//
-	// IdentityPoolId is a required field
-	IdentityPoolId *string `location:"uri" locationName:"IdentityPoolId" min:"1" type:"string" required:"true"`
-
-	// The last server sync count for this record.
-	LastSyncCount *int64 `location:"querystring" locationName:"lastSyncCount" type:"long"`
-
-	// The maximum number of results to be returned.
-	MaxResults *int64 `location:"querystring" locationName:"maxResults" type:"integer"`
-
-	// A pagination token for obtaining the next page of results.
-	NextToken *string `location:"querystring" locationName:"nextToken" type:"string"`
-
-	// A token containing a session ID, identity ID, and expiration.
-	SyncSessionToken *string `location:"querystring" locationName:"syncSessionToken" type:"string"`
-}
-
-// String returns the string representation
-func (s ListRecordsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListRecordsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListRecordsInput"}
-
-	if s.DatasetName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DatasetName"))
-	}
-	if s.DatasetName != nil && len(*s.DatasetName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("DatasetName", 1))
-	}
-
-	if s.IdentityId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("IdentityId"))
-	}
-	if s.IdentityId != nil && len(*s.IdentityId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("IdentityId", 1))
-	}
-
-	if s.IdentityPoolId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("IdentityPoolId"))
-	}
-	if s.IdentityPoolId != nil && len(*s.IdentityPoolId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("IdentityPoolId", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListRecordsInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.DatasetName != nil {
-		v := *s.DatasetName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "DatasetName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.IdentityId != nil {
-		v := *s.IdentityId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "IdentityId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.IdentityPoolId != nil {
-		v := *s.IdentityPoolId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "IdentityPoolId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.LastSyncCount != nil {
-		v := *s.LastSyncCount
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "lastSyncCount", protocol.Int64Value(v), metadata)
-	}
-	if s.MaxResults != nil {
-		v := *s.MaxResults
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "maxResults", protocol.Int64Value(v), metadata)
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.SyncSessionToken != nil {
-		v := *s.SyncSessionToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "syncSessionToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-// Returned for a successful ListRecordsRequest.
-type ListRecordsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Total number of records.
-	Count *int64 `type:"integer"`
-
-	// A boolean value specifying whether to delete the dataset locally.
-	DatasetDeletedAfterRequestedSyncCount *bool `type:"boolean"`
-
-	// Indicates whether the dataset exists.
-	DatasetExists *bool `type:"boolean"`
-
-	// Server sync count for this dataset.
-	DatasetSyncCount *int64 `type:"long"`
-
-	// The user/device that made the last change to this record.
-	LastModifiedBy *string `type:"string"`
-
-	// Names of merged datasets.
-	MergedDatasetNames []string `type:"list"`
-
-	// A pagination token for obtaining the next page of results.
-	NextToken *string `type:"string"`
-
-	// A list of all records.
-	Records []Record `type:"list"`
-
-	// A token containing a session ID, identity ID, and expiration.
-	SyncSessionToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s ListRecordsOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListRecordsOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.Count != nil {
-		v := *s.Count
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "Count", protocol.Int64Value(v), metadata)
-	}
-	if s.DatasetDeletedAfterRequestedSyncCount != nil {
-		v := *s.DatasetDeletedAfterRequestedSyncCount
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "DatasetDeletedAfterRequestedSyncCount", protocol.BoolValue(v), metadata)
-	}
-	if s.DatasetExists != nil {
-		v := *s.DatasetExists
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "DatasetExists", protocol.BoolValue(v), metadata)
-	}
-	if s.DatasetSyncCount != nil {
-		v := *s.DatasetSyncCount
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "DatasetSyncCount", protocol.Int64Value(v), metadata)
-	}
-	if s.LastModifiedBy != nil {
-		v := *s.LastModifiedBy
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "LastModifiedBy", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.MergedDatasetNames != nil {
-		v := s.MergedDatasetNames
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "MergedDatasetNames", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
-		}
-		ls0.End()
-
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Records != nil {
-		v := s.Records
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "Records", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	if s.SyncSessionToken != nil {
-		v := *s.SyncSessionToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "SyncSessionToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opListRecords = "ListRecords"
 
@@ -260,7 +31,7 @@ const opListRecords = "ListRecords"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-sync-2014-06-30/ListRecords
-func (c *Client) ListRecordsRequest(input *ListRecordsInput) ListRecordsRequest {
+func (c *Client) ListRecordsRequest(input *types.ListRecordsInput) ListRecordsRequest {
 	op := &aws.Operation{
 		Name:       opListRecords,
 		HTTPMethod: "GET",
@@ -268,10 +39,10 @@ func (c *Client) ListRecordsRequest(input *ListRecordsInput) ListRecordsRequest 
 	}
 
 	if input == nil {
-		input = &ListRecordsInput{}
+		input = &types.ListRecordsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListRecordsOutput{})
+	req := c.newRequest(op, input, &types.ListRecordsOutput{})
 	return ListRecordsRequest{Request: req, Input: input, Copy: c.ListRecordsRequest}
 }
 
@@ -279,8 +50,8 @@ func (c *Client) ListRecordsRequest(input *ListRecordsInput) ListRecordsRequest 
 // ListRecords API operation.
 type ListRecordsRequest struct {
 	*aws.Request
-	Input *ListRecordsInput
-	Copy  func(*ListRecordsInput) ListRecordsRequest
+	Input *types.ListRecordsInput
+	Copy  func(*types.ListRecordsInput) ListRecordsRequest
 }
 
 // Send marshals and sends the ListRecords API request.
@@ -292,7 +63,7 @@ func (r ListRecordsRequest) Send(ctx context.Context) (*ListRecordsResponse, err
 	}
 
 	resp := &ListRecordsResponse{
-		ListRecordsOutput: r.Request.Data.(*ListRecordsOutput),
+		ListRecordsOutput: r.Request.Data.(*types.ListRecordsOutput),
 		response:          &aws.Response{Request: r.Request},
 	}
 
@@ -302,7 +73,7 @@ func (r ListRecordsRequest) Send(ctx context.Context) (*ListRecordsResponse, err
 // ListRecordsResponse is the response type for the
 // ListRecords API operation.
 type ListRecordsResponse struct {
-	*ListRecordsOutput
+	*types.ListRecordsOutput
 
 	response *aws.Response
 }

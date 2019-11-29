@@ -6,94 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/elasticsearchservice/types"
 )
-
-// Container for the parameters to the ListElasticsearchVersions operation.
-// Use MaxResults to control the maximum number of results to retrieve in a
-// single call.
-//
-// Use NextToken in response to retrieve more results. If the received response
-// does not contain a NextToken, then there are no more results to retrieve.
-type ListElasticsearchVersionsInput struct {
-	_ struct{} `type:"structure"`
-
-	// Set this value to limit the number of results returned. Value provided must
-	// be greater than 10 else it wont be honored.
-	MaxResults *int64 `location:"querystring" locationName:"maxResults" type:"integer"`
-
-	// Paginated APIs accepts NextToken input to returns next page results and provides
-	// a NextToken output in the response which can be used by the client to retrieve
-	// more results.
-	NextToken *string `location:"querystring" locationName:"nextToken" type:"string"`
-}
-
-// String returns the string representation
-func (s ListElasticsearchVersionsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListElasticsearchVersionsInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.MaxResults != nil {
-		v := *s.MaxResults
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "maxResults", protocol.Int64Value(v), metadata)
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-// Container for the parameters for response received from ListElasticsearchVersions
-// operation.
-type ListElasticsearchVersionsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// List of supported elastic search versions.
-	ElasticsearchVersions []string `type:"list"`
-
-	// Paginated APIs accepts NextToken input to returns next page results and provides
-	// a NextToken output in the response which can be used by the client to retrieve
-	// more results.
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s ListElasticsearchVersionsOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListElasticsearchVersionsOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.ElasticsearchVersions != nil {
-		v := s.ElasticsearchVersions
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "ElasticsearchVersions", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
-		}
-		ls0.End()
-
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opListElasticsearchVersions = "ListElasticsearchVersions"
 
@@ -108,7 +22,7 @@ const opListElasticsearchVersions = "ListElasticsearchVersions"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) ListElasticsearchVersionsRequest(input *ListElasticsearchVersionsInput) ListElasticsearchVersionsRequest {
+func (c *Client) ListElasticsearchVersionsRequest(input *types.ListElasticsearchVersionsInput) ListElasticsearchVersionsRequest {
 	op := &aws.Operation{
 		Name:       opListElasticsearchVersions,
 		HTTPMethod: "GET",
@@ -122,10 +36,10 @@ func (c *Client) ListElasticsearchVersionsRequest(input *ListElasticsearchVersio
 	}
 
 	if input == nil {
-		input = &ListElasticsearchVersionsInput{}
+		input = &types.ListElasticsearchVersionsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListElasticsearchVersionsOutput{})
+	req := c.newRequest(op, input, &types.ListElasticsearchVersionsOutput{})
 	return ListElasticsearchVersionsRequest{Request: req, Input: input, Copy: c.ListElasticsearchVersionsRequest}
 }
 
@@ -133,8 +47,8 @@ func (c *Client) ListElasticsearchVersionsRequest(input *ListElasticsearchVersio
 // ListElasticsearchVersions API operation.
 type ListElasticsearchVersionsRequest struct {
 	*aws.Request
-	Input *ListElasticsearchVersionsInput
-	Copy  func(*ListElasticsearchVersionsInput) ListElasticsearchVersionsRequest
+	Input *types.ListElasticsearchVersionsInput
+	Copy  func(*types.ListElasticsearchVersionsInput) ListElasticsearchVersionsRequest
 }
 
 // Send marshals and sends the ListElasticsearchVersions API request.
@@ -146,7 +60,7 @@ func (r ListElasticsearchVersionsRequest) Send(ctx context.Context) (*ListElasti
 	}
 
 	resp := &ListElasticsearchVersionsResponse{
-		ListElasticsearchVersionsOutput: r.Request.Data.(*ListElasticsearchVersionsOutput),
+		ListElasticsearchVersionsOutput: r.Request.Data.(*types.ListElasticsearchVersionsOutput),
 		response:                        &aws.Response{Request: r.Request},
 	}
 
@@ -176,7 +90,7 @@ func NewListElasticsearchVersionsPaginator(req ListElasticsearchVersionsRequest)
 	return ListElasticsearchVersionsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListElasticsearchVersionsInput
+				var inCpy *types.ListElasticsearchVersionsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -196,14 +110,14 @@ type ListElasticsearchVersionsPaginator struct {
 	aws.Pager
 }
 
-func (p *ListElasticsearchVersionsPaginator) CurrentPage() *ListElasticsearchVersionsOutput {
-	return p.Pager.CurrentPage().(*ListElasticsearchVersionsOutput)
+func (p *ListElasticsearchVersionsPaginator) CurrentPage() *types.ListElasticsearchVersionsOutput {
+	return p.Pager.CurrentPage().(*types.ListElasticsearchVersionsOutput)
 }
 
 // ListElasticsearchVersionsResponse is the response type for the
 // ListElasticsearchVersions API operation.
 type ListElasticsearchVersionsResponse struct {
-	*ListElasticsearchVersionsOutput
+	*types.ListElasticsearchVersionsOutput
 
 	response *aws.Response
 }

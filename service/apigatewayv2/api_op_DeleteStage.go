@@ -6,76 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/restjson"
+	"github.com/aws/aws-sdk-go-v2/service/apigatewayv2/types"
 )
-
-type DeleteStageInput struct {
-	_ struct{} `type:"structure"`
-
-	// ApiId is a required field
-	ApiId *string `location:"uri" locationName:"apiId" type:"string" required:"true"`
-
-	// StageName is a required field
-	StageName *string `location:"uri" locationName:"stageName" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteStageInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteStageInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteStageInput"}
-
-	if s.ApiId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ApiId"))
-	}
-
-	if s.StageName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("StageName"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteStageInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.ApiId != nil {
-		v := *s.ApiId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "apiId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.StageName != nil {
-		v := *s.StageName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "stageName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type DeleteStageOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteStageOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteStageOutput) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
 
 const opDeleteStage = "DeleteStage"
 
@@ -92,7 +26,7 @@ const opDeleteStage = "DeleteStage"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/apigatewayv2-2018-11-29/DeleteStage
-func (c *Client) DeleteStageRequest(input *DeleteStageInput) DeleteStageRequest {
+func (c *Client) DeleteStageRequest(input *types.DeleteStageInput) DeleteStageRequest {
 	op := &aws.Operation{
 		Name:       opDeleteStage,
 		HTTPMethod: "DELETE",
@@ -100,10 +34,10 @@ func (c *Client) DeleteStageRequest(input *DeleteStageInput) DeleteStageRequest 
 	}
 
 	if input == nil {
-		input = &DeleteStageInput{}
+		input = &types.DeleteStageInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteStageOutput{})
+	req := c.newRequest(op, input, &types.DeleteStageOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return DeleteStageRequest{Request: req, Input: input, Copy: c.DeleteStageRequest}
@@ -113,8 +47,8 @@ func (c *Client) DeleteStageRequest(input *DeleteStageInput) DeleteStageRequest 
 // DeleteStage API operation.
 type DeleteStageRequest struct {
 	*aws.Request
-	Input *DeleteStageInput
-	Copy  func(*DeleteStageInput) DeleteStageRequest
+	Input *types.DeleteStageInput
+	Copy  func(*types.DeleteStageInput) DeleteStageRequest
 }
 
 // Send marshals and sends the DeleteStage API request.
@@ -126,7 +60,7 @@ func (r DeleteStageRequest) Send(ctx context.Context) (*DeleteStageResponse, err
 	}
 
 	resp := &DeleteStageResponse{
-		DeleteStageOutput: r.Request.Data.(*DeleteStageOutput),
+		DeleteStageOutput: r.Request.Data.(*types.DeleteStageOutput),
 		response:          &aws.Response{Request: r.Request},
 	}
 
@@ -136,7 +70,7 @@ func (r DeleteStageRequest) Send(ctx context.Context) (*DeleteStageResponse, err
 // DeleteStageResponse is the response type for the
 // DeleteStage API operation.
 type DeleteStageResponse struct {
-	*DeleteStageOutput
+	*types.DeleteStageOutput
 
 	response *aws.Response
 }

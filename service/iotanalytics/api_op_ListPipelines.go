@@ -6,97 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/iotanalytics/types"
 )
-
-type ListPipelinesInput struct {
-	_ struct{} `type:"structure"`
-
-	// The maximum number of results to return in this request.
-	//
-	// The default value is 100.
-	MaxResults *int64 `location:"querystring" locationName:"maxResults" min:"1" type:"integer"`
-
-	// The token for the next set of results.
-	NextToken *string `location:"querystring" locationName:"nextToken" type:"string"`
-}
-
-// String returns the string representation
-func (s ListPipelinesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListPipelinesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListPipelinesInput"}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListPipelinesInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.MaxResults != nil {
-		v := *s.MaxResults
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "maxResults", protocol.Int64Value(v), metadata)
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type ListPipelinesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The token to retrieve the next set of results, or null if there are no more
-	// results.
-	NextToken *string `locationName:"nextToken" type:"string"`
-
-	// A list of "PipelineSummary" objects.
-	PipelineSummaries []PipelineSummary `locationName:"pipelineSummaries" type:"list"`
-}
-
-// String returns the string representation
-func (s ListPipelinesOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListPipelinesOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.PipelineSummaries != nil {
-		v := s.PipelineSummaries
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "pipelineSummaries", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	return nil
-}
 
 const opListPipelines = "ListPipelines"
 
@@ -113,7 +24,7 @@ const opListPipelines = "ListPipelines"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iotanalytics-2017-11-27/ListPipelines
-func (c *Client) ListPipelinesRequest(input *ListPipelinesInput) ListPipelinesRequest {
+func (c *Client) ListPipelinesRequest(input *types.ListPipelinesInput) ListPipelinesRequest {
 	op := &aws.Operation{
 		Name:       opListPipelines,
 		HTTPMethod: "GET",
@@ -127,10 +38,10 @@ func (c *Client) ListPipelinesRequest(input *ListPipelinesInput) ListPipelinesRe
 	}
 
 	if input == nil {
-		input = &ListPipelinesInput{}
+		input = &types.ListPipelinesInput{}
 	}
 
-	req := c.newRequest(op, input, &ListPipelinesOutput{})
+	req := c.newRequest(op, input, &types.ListPipelinesOutput{})
 	return ListPipelinesRequest{Request: req, Input: input, Copy: c.ListPipelinesRequest}
 }
 
@@ -138,8 +49,8 @@ func (c *Client) ListPipelinesRequest(input *ListPipelinesInput) ListPipelinesRe
 // ListPipelines API operation.
 type ListPipelinesRequest struct {
 	*aws.Request
-	Input *ListPipelinesInput
-	Copy  func(*ListPipelinesInput) ListPipelinesRequest
+	Input *types.ListPipelinesInput
+	Copy  func(*types.ListPipelinesInput) ListPipelinesRequest
 }
 
 // Send marshals and sends the ListPipelines API request.
@@ -151,7 +62,7 @@ func (r ListPipelinesRequest) Send(ctx context.Context) (*ListPipelinesResponse,
 	}
 
 	resp := &ListPipelinesResponse{
-		ListPipelinesOutput: r.Request.Data.(*ListPipelinesOutput),
+		ListPipelinesOutput: r.Request.Data.(*types.ListPipelinesOutput),
 		response:            &aws.Response{Request: r.Request},
 	}
 
@@ -181,7 +92,7 @@ func NewListPipelinesPaginator(req ListPipelinesRequest) ListPipelinesPaginator 
 	return ListPipelinesPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListPipelinesInput
+				var inCpy *types.ListPipelinesInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -201,14 +112,14 @@ type ListPipelinesPaginator struct {
 	aws.Pager
 }
 
-func (p *ListPipelinesPaginator) CurrentPage() *ListPipelinesOutput {
-	return p.Pager.CurrentPage().(*ListPipelinesOutput)
+func (p *ListPipelinesPaginator) CurrentPage() *types.ListPipelinesOutput {
+	return p.Pager.CurrentPage().(*types.ListPipelinesOutput)
 }
 
 // ListPipelinesResponse is the response type for the
 // ListPipelines API operation.
 type ListPipelinesResponse struct {
-	*ListPipelinesOutput
+	*types.ListPipelinesOutput
 
 	response *aws.Response
 }

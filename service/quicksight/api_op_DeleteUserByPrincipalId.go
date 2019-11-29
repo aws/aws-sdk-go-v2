@@ -6,111 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/quicksight/types"
 )
-
-type DeleteUserByPrincipalIdInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID for the AWS account that the user is in. Currently, you use the ID
-	// for the AWS account that contains your Amazon QuickSight account.
-	//
-	// AwsAccountId is a required field
-	AwsAccountId *string `location:"uri" locationName:"AwsAccountId" min:"12" type:"string" required:"true"`
-
-	// The namespace. Currently, you should set this to default.
-	//
-	// Namespace is a required field
-	Namespace *string `location:"uri" locationName:"Namespace" type:"string" required:"true"`
-
-	// The principal ID of the user.
-	//
-	// PrincipalId is a required field
-	PrincipalId *string `location:"uri" locationName:"PrincipalId" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteUserByPrincipalIdInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteUserByPrincipalIdInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteUserByPrincipalIdInput"}
-
-	if s.AwsAccountId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("AwsAccountId"))
-	}
-	if s.AwsAccountId != nil && len(*s.AwsAccountId) < 12 {
-		invalidParams.Add(aws.NewErrParamMinLen("AwsAccountId", 12))
-	}
-
-	if s.Namespace == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Namespace"))
-	}
-
-	if s.PrincipalId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("PrincipalId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteUserByPrincipalIdInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.AwsAccountId != nil {
-		v := *s.AwsAccountId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "AwsAccountId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Namespace != nil {
-		v := *s.Namespace
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "Namespace", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.PrincipalId != nil {
-		v := *s.PrincipalId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "PrincipalId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type DeleteUserByPrincipalIdOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The AWS request ID for this operation.
-	RequestId *string `type:"string"`
-
-	// The http status of the request.
-	Status *int64 `location:"statusCode" type:"integer"`
-}
-
-// String returns the string representation
-func (s DeleteUserByPrincipalIdOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteUserByPrincipalIdOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.RequestId != nil {
-		v := *s.RequestId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "RequestId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	// ignoring invalid encode state, StatusCode. Status
-	return nil
-}
 
 const opDeleteUserByPrincipalId = "DeleteUserByPrincipalId"
 
@@ -118,8 +15,6 @@ const opDeleteUserByPrincipalId = "DeleteUserByPrincipalId"
 // Amazon QuickSight.
 //
 // Deletes a user identified by its principal ID.
-//
-// The permission resource is arn:aws:quicksight:us-east-1:<aws-account-id>:user/default/<user-name> .
 //
 // CLI Sample:
 //
@@ -134,7 +29,7 @@ const opDeleteUserByPrincipalId = "DeleteUserByPrincipalId"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DeleteUserByPrincipalId
-func (c *Client) DeleteUserByPrincipalIdRequest(input *DeleteUserByPrincipalIdInput) DeleteUserByPrincipalIdRequest {
+func (c *Client) DeleteUserByPrincipalIdRequest(input *types.DeleteUserByPrincipalIdInput) DeleteUserByPrincipalIdRequest {
 	op := &aws.Operation{
 		Name:       opDeleteUserByPrincipalId,
 		HTTPMethod: "DELETE",
@@ -142,10 +37,10 @@ func (c *Client) DeleteUserByPrincipalIdRequest(input *DeleteUserByPrincipalIdIn
 	}
 
 	if input == nil {
-		input = &DeleteUserByPrincipalIdInput{}
+		input = &types.DeleteUserByPrincipalIdInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteUserByPrincipalIdOutput{})
+	req := c.newRequest(op, input, &types.DeleteUserByPrincipalIdOutput{})
 	return DeleteUserByPrincipalIdRequest{Request: req, Input: input, Copy: c.DeleteUserByPrincipalIdRequest}
 }
 
@@ -153,8 +48,8 @@ func (c *Client) DeleteUserByPrincipalIdRequest(input *DeleteUserByPrincipalIdIn
 // DeleteUserByPrincipalId API operation.
 type DeleteUserByPrincipalIdRequest struct {
 	*aws.Request
-	Input *DeleteUserByPrincipalIdInput
-	Copy  func(*DeleteUserByPrincipalIdInput) DeleteUserByPrincipalIdRequest
+	Input *types.DeleteUserByPrincipalIdInput
+	Copy  func(*types.DeleteUserByPrincipalIdInput) DeleteUserByPrincipalIdRequest
 }
 
 // Send marshals and sends the DeleteUserByPrincipalId API request.
@@ -166,7 +61,7 @@ func (r DeleteUserByPrincipalIdRequest) Send(ctx context.Context) (*DeleteUserBy
 	}
 
 	resp := &DeleteUserByPrincipalIdResponse{
-		DeleteUserByPrincipalIdOutput: r.Request.Data.(*DeleteUserByPrincipalIdOutput),
+		DeleteUserByPrincipalIdOutput: r.Request.Data.(*types.DeleteUserByPrincipalIdOutput),
 		response:                      &aws.Response{Request: r.Request},
 	}
 
@@ -176,7 +71,7 @@ func (r DeleteUserByPrincipalIdRequest) Send(ctx context.Context) (*DeleteUserBy
 // DeleteUserByPrincipalIdResponse is the response type for the
 // DeleteUserByPrincipalId API operation.
 type DeleteUserByPrincipalIdResponse struct {
-	*DeleteUserByPrincipalIdOutput
+	*types.DeleteUserByPrincipalIdOutput
 
 	response *aws.Response
 }

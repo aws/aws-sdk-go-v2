@@ -6,54 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/elasticloadbalancingv2/types"
 )
-
-type RemoveTagsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the resource.
-	//
-	// ResourceArns is a required field
-	ResourceArns []string `type:"list" required:"true"`
-
-	// The tag keys for the tags to remove.
-	//
-	// TagKeys is a required field
-	TagKeys []string `type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s RemoveTagsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *RemoveTagsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "RemoveTagsInput"}
-
-	if s.ResourceArns == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ResourceArns"))
-	}
-
-	if s.TagKeys == nil {
-		invalidParams.Add(aws.NewErrParamRequired("TagKeys"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type RemoveTagsOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s RemoveTagsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opRemoveTags = "RemoveTags"
 
@@ -72,7 +26,7 @@ const opRemoveTags = "RemoveTags"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/RemoveTags
-func (c *Client) RemoveTagsRequest(input *RemoveTagsInput) RemoveTagsRequest {
+func (c *Client) RemoveTagsRequest(input *types.RemoveTagsInput) RemoveTagsRequest {
 	op := &aws.Operation{
 		Name:       opRemoveTags,
 		HTTPMethod: "POST",
@@ -80,10 +34,10 @@ func (c *Client) RemoveTagsRequest(input *RemoveTagsInput) RemoveTagsRequest {
 	}
 
 	if input == nil {
-		input = &RemoveTagsInput{}
+		input = &types.RemoveTagsInput{}
 	}
 
-	req := c.newRequest(op, input, &RemoveTagsOutput{})
+	req := c.newRequest(op, input, &types.RemoveTagsOutput{})
 	return RemoveTagsRequest{Request: req, Input: input, Copy: c.RemoveTagsRequest}
 }
 
@@ -91,8 +45,8 @@ func (c *Client) RemoveTagsRequest(input *RemoveTagsInput) RemoveTagsRequest {
 // RemoveTags API operation.
 type RemoveTagsRequest struct {
 	*aws.Request
-	Input *RemoveTagsInput
-	Copy  func(*RemoveTagsInput) RemoveTagsRequest
+	Input *types.RemoveTagsInput
+	Copy  func(*types.RemoveTagsInput) RemoveTagsRequest
 }
 
 // Send marshals and sends the RemoveTags API request.
@@ -104,7 +58,7 @@ func (r RemoveTagsRequest) Send(ctx context.Context) (*RemoveTagsResponse, error
 	}
 
 	resp := &RemoveTagsResponse{
-		RemoveTagsOutput: r.Request.Data.(*RemoveTagsOutput),
+		RemoveTagsOutput: r.Request.Data.(*types.RemoveTagsOutput),
 		response:         &aws.Response{Request: r.Request},
 	}
 
@@ -114,7 +68,7 @@ func (r RemoveTagsRequest) Send(ctx context.Context) (*RemoveTagsResponse, error
 // RemoveTagsResponse is the response type for the
 // RemoveTags API operation.
 type RemoveTagsResponse struct {
-	*RemoveTagsOutput
+	*types.RemoveTagsOutput
 
 	response *aws.Response
 }

@@ -6,121 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/codecommit/types"
 )
-
-type CreateUnreferencedMergeCommitInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the author who created the unreferenced commit. This information
-	// will be used as both the author and committer for the commit.
-	AuthorName *string `locationName:"authorName" type:"string"`
-
-	// The commit message for the unreferenced commit.
-	CommitMessage *string `locationName:"commitMessage" type:"string"`
-
-	// The level of conflict detail to use. If unspecified, the default FILE_LEVEL
-	// is used, which will return a not mergeable result if the same file has differences
-	// in both branches. If LINE_LEVEL is specified, a conflict will be considered
-	// not mergeable if the same file in both branches has differences on the same
-	// line.
-	ConflictDetailLevel ConflictDetailLevelTypeEnum `locationName:"conflictDetailLevel" type:"string" enum:"true"`
-
-	// A list of inputs to use when resolving conflicts during a merge if AUTOMERGE
-	// is chosen as the conflict resolution strategy.
-	ConflictResolution *ConflictResolution `locationName:"conflictResolution" type:"structure"`
-
-	// Specifies which branch to use when resolving conflicts, or whether to attempt
-	// automatically merging two versions of a file. The default is NONE, which
-	// requires any conflicts to be resolved manually before the merge operation
-	// will be successful.
-	ConflictResolutionStrategy ConflictResolutionStrategyTypeEnum `locationName:"conflictResolutionStrategy" type:"string" enum:"true"`
-
-	// The branch, tag, HEAD, or other fully qualified reference used to identify
-	// a commit. For example, a branch name or a full commit ID.
-	//
-	// DestinationCommitSpecifier is a required field
-	DestinationCommitSpecifier *string `locationName:"destinationCommitSpecifier" type:"string" required:"true"`
-
-	// The email address for the person who created the unreferenced commit.
-	Email *string `locationName:"email" type:"string"`
-
-	// If the commit contains deletions, whether to keep a folder or folder structure
-	// if the changes leave the folders empty. If this is specified as true, a .gitkeep
-	// file will be created for empty folders. The default is false.
-	KeepEmptyFolders *bool `locationName:"keepEmptyFolders" type:"boolean"`
-
-	// The merge option or strategy you want to use to merge the code.
-	//
-	// MergeOption is a required field
-	MergeOption MergeOptionTypeEnum `locationName:"mergeOption" type:"string" required:"true" enum:"true"`
-
-	// The name of the repository where you want to create the unreferenced merge
-	// commit.
-	//
-	// RepositoryName is a required field
-	RepositoryName *string `locationName:"repositoryName" min:"1" type:"string" required:"true"`
-
-	// The branch, tag, HEAD, or other fully qualified reference used to identify
-	// a commit. For example, a branch name or a full commit ID.
-	//
-	// SourceCommitSpecifier is a required field
-	SourceCommitSpecifier *string `locationName:"sourceCommitSpecifier" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s CreateUnreferencedMergeCommitInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateUnreferencedMergeCommitInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateUnreferencedMergeCommitInput"}
-
-	if s.DestinationCommitSpecifier == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DestinationCommitSpecifier"))
-	}
-	if len(s.MergeOption) == 0 {
-		invalidParams.Add(aws.NewErrParamRequired("MergeOption"))
-	}
-
-	if s.RepositoryName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("RepositoryName"))
-	}
-	if s.RepositoryName != nil && len(*s.RepositoryName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("RepositoryName", 1))
-	}
-
-	if s.SourceCommitSpecifier == nil {
-		invalidParams.Add(aws.NewErrParamRequired("SourceCommitSpecifier"))
-	}
-	if s.ConflictResolution != nil {
-		if err := s.ConflictResolution.Validate(); err != nil {
-			invalidParams.AddNested("ConflictResolution", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type CreateUnreferencedMergeCommitOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The full commit ID of the commit that contains your merge results.
-	CommitId *string `locationName:"commitId" type:"string"`
-
-	// The full SHA-1 pointer of the tree information for the commit that contains
-	// the merge results.
-	TreeId *string `locationName:"treeId" type:"string"`
-}
-
-// String returns the string representation
-func (s CreateUnreferencedMergeCommitOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCreateUnreferencedMergeCommit = "CreateUnreferencedMergeCommit"
 
@@ -130,7 +17,7 @@ const opCreateUnreferencedMergeCommit = "CreateUnreferencedMergeCommit"
 // Creates an unreferenced commit that represents the result of merging two
 // branches using a specified merge strategy. This can help you determine the
 // outcome of a potential merge. This API cannot be used with the fast-forward
-// merge strategy, as that strategy does not create a merge commit.
+// merge strategy because that strategy does not create a merge commit.
 //
 // This unreferenced merge commit can only be accessed using the GetCommit API
 // or through git commands such as git fetch. To retrieve this commit, you must
@@ -144,7 +31,7 @@ const opCreateUnreferencedMergeCommit = "CreateUnreferencedMergeCommit"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/CreateUnreferencedMergeCommit
-func (c *Client) CreateUnreferencedMergeCommitRequest(input *CreateUnreferencedMergeCommitInput) CreateUnreferencedMergeCommitRequest {
+func (c *Client) CreateUnreferencedMergeCommitRequest(input *types.CreateUnreferencedMergeCommitInput) CreateUnreferencedMergeCommitRequest {
 	op := &aws.Operation{
 		Name:       opCreateUnreferencedMergeCommit,
 		HTTPMethod: "POST",
@@ -152,10 +39,10 @@ func (c *Client) CreateUnreferencedMergeCommitRequest(input *CreateUnreferencedM
 	}
 
 	if input == nil {
-		input = &CreateUnreferencedMergeCommitInput{}
+		input = &types.CreateUnreferencedMergeCommitInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateUnreferencedMergeCommitOutput{})
+	req := c.newRequest(op, input, &types.CreateUnreferencedMergeCommitOutput{})
 	return CreateUnreferencedMergeCommitRequest{Request: req, Input: input, Copy: c.CreateUnreferencedMergeCommitRequest}
 }
 
@@ -163,8 +50,8 @@ func (c *Client) CreateUnreferencedMergeCommitRequest(input *CreateUnreferencedM
 // CreateUnreferencedMergeCommit API operation.
 type CreateUnreferencedMergeCommitRequest struct {
 	*aws.Request
-	Input *CreateUnreferencedMergeCommitInput
-	Copy  func(*CreateUnreferencedMergeCommitInput) CreateUnreferencedMergeCommitRequest
+	Input *types.CreateUnreferencedMergeCommitInput
+	Copy  func(*types.CreateUnreferencedMergeCommitInput) CreateUnreferencedMergeCommitRequest
 }
 
 // Send marshals and sends the CreateUnreferencedMergeCommit API request.
@@ -176,7 +63,7 @@ func (r CreateUnreferencedMergeCommitRequest) Send(ctx context.Context) (*Create
 	}
 
 	resp := &CreateUnreferencedMergeCommitResponse{
-		CreateUnreferencedMergeCommitOutput: r.Request.Data.(*CreateUnreferencedMergeCommitOutput),
+		CreateUnreferencedMergeCommitOutput: r.Request.Data.(*types.CreateUnreferencedMergeCommitOutput),
 		response:                            &aws.Response{Request: r.Request},
 	}
 
@@ -186,7 +73,7 @@ func (r CreateUnreferencedMergeCommitRequest) Send(ctx context.Context) (*Create
 // CreateUnreferencedMergeCommitResponse is the response type for the
 // CreateUnreferencedMergeCommit API operation.
 type CreateUnreferencedMergeCommitResponse struct {
-	*CreateUnreferencedMergeCommitOutput
+	*types.CreateUnreferencedMergeCommitOutput
 
 	response *aws.Response
 }

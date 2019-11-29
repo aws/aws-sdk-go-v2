@@ -6,62 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/medialive/types"
 )
-
-type DeleteScheduleInput struct {
-	_ struct{} `type:"structure"`
-
-	// ChannelId is a required field
-	ChannelId *string `location:"uri" locationName:"channelId" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteScheduleInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteScheduleInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteScheduleInput"}
-
-	if s.ChannelId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ChannelId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteScheduleInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.ChannelId != nil {
-		v := *s.ChannelId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "channelId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type DeleteScheduleOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteScheduleOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteScheduleOutput) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
 
 const opDeleteSchedule = "DeleteSchedule"
 
@@ -78,7 +24,7 @@ const opDeleteSchedule = "DeleteSchedule"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/DeleteSchedule
-func (c *Client) DeleteScheduleRequest(input *DeleteScheduleInput) DeleteScheduleRequest {
+func (c *Client) DeleteScheduleRequest(input *types.DeleteScheduleInput) DeleteScheduleRequest {
 	op := &aws.Operation{
 		Name:       opDeleteSchedule,
 		HTTPMethod: "DELETE",
@@ -86,10 +32,10 @@ func (c *Client) DeleteScheduleRequest(input *DeleteScheduleInput) DeleteSchedul
 	}
 
 	if input == nil {
-		input = &DeleteScheduleInput{}
+		input = &types.DeleteScheduleInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteScheduleOutput{})
+	req := c.newRequest(op, input, &types.DeleteScheduleOutput{})
 	return DeleteScheduleRequest{Request: req, Input: input, Copy: c.DeleteScheduleRequest}
 }
 
@@ -97,8 +43,8 @@ func (c *Client) DeleteScheduleRequest(input *DeleteScheduleInput) DeleteSchedul
 // DeleteSchedule API operation.
 type DeleteScheduleRequest struct {
 	*aws.Request
-	Input *DeleteScheduleInput
-	Copy  func(*DeleteScheduleInput) DeleteScheduleRequest
+	Input *types.DeleteScheduleInput
+	Copy  func(*types.DeleteScheduleInput) DeleteScheduleRequest
 }
 
 // Send marshals and sends the DeleteSchedule API request.
@@ -110,7 +56,7 @@ func (r DeleteScheduleRequest) Send(ctx context.Context) (*DeleteScheduleRespons
 	}
 
 	resp := &DeleteScheduleResponse{
-		DeleteScheduleOutput: r.Request.Data.(*DeleteScheduleOutput),
+		DeleteScheduleOutput: r.Request.Data.(*types.DeleteScheduleOutput),
 		response:             &aws.Response{Request: r.Request},
 	}
 
@@ -120,7 +66,7 @@ func (r DeleteScheduleRequest) Send(ctx context.Context) (*DeleteScheduleRespons
 // DeleteScheduleResponse is the response type for the
 // DeleteSchedule API operation.
 type DeleteScheduleResponse struct {
-	*DeleteScheduleOutput
+	*types.DeleteScheduleOutput
 
 	response *aws.Response
 }

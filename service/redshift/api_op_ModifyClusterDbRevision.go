@@ -6,60 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/redshift/types"
 )
-
-type ModifyClusterDbRevisionInput struct {
-	_ struct{} `type:"structure"`
-
-	// The unique identifier of a cluster whose database revision you want to modify.
-	//
-	// Example: examplecluster
-	//
-	// ClusterIdentifier is a required field
-	ClusterIdentifier *string `type:"string" required:"true"`
-
-	// The identifier of the database revision. You can retrieve this value from
-	// the response to the DescribeClusterDbRevisions request.
-	//
-	// RevisionTarget is a required field
-	RevisionTarget *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s ModifyClusterDbRevisionInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ModifyClusterDbRevisionInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ModifyClusterDbRevisionInput"}
-
-	if s.ClusterIdentifier == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ClusterIdentifier"))
-	}
-
-	if s.RevisionTarget == nil {
-		invalidParams.Add(aws.NewErrParamRequired("RevisionTarget"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ModifyClusterDbRevisionOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Describes a cluster.
-	Cluster *Cluster `type:"structure"`
-}
-
-// String returns the string representation
-func (s ModifyClusterDbRevisionOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opModifyClusterDbRevision = "ModifyClusterDbRevision"
 
@@ -77,7 +25,7 @@ const opModifyClusterDbRevision = "ModifyClusterDbRevision"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ModifyClusterDbRevision
-func (c *Client) ModifyClusterDbRevisionRequest(input *ModifyClusterDbRevisionInput) ModifyClusterDbRevisionRequest {
+func (c *Client) ModifyClusterDbRevisionRequest(input *types.ModifyClusterDbRevisionInput) ModifyClusterDbRevisionRequest {
 	op := &aws.Operation{
 		Name:       opModifyClusterDbRevision,
 		HTTPMethod: "POST",
@@ -85,10 +33,10 @@ func (c *Client) ModifyClusterDbRevisionRequest(input *ModifyClusterDbRevisionIn
 	}
 
 	if input == nil {
-		input = &ModifyClusterDbRevisionInput{}
+		input = &types.ModifyClusterDbRevisionInput{}
 	}
 
-	req := c.newRequest(op, input, &ModifyClusterDbRevisionOutput{})
+	req := c.newRequest(op, input, &types.ModifyClusterDbRevisionOutput{})
 	return ModifyClusterDbRevisionRequest{Request: req, Input: input, Copy: c.ModifyClusterDbRevisionRequest}
 }
 
@@ -96,8 +44,8 @@ func (c *Client) ModifyClusterDbRevisionRequest(input *ModifyClusterDbRevisionIn
 // ModifyClusterDbRevision API operation.
 type ModifyClusterDbRevisionRequest struct {
 	*aws.Request
-	Input *ModifyClusterDbRevisionInput
-	Copy  func(*ModifyClusterDbRevisionInput) ModifyClusterDbRevisionRequest
+	Input *types.ModifyClusterDbRevisionInput
+	Copy  func(*types.ModifyClusterDbRevisionInput) ModifyClusterDbRevisionRequest
 }
 
 // Send marshals and sends the ModifyClusterDbRevision API request.
@@ -109,7 +57,7 @@ func (r ModifyClusterDbRevisionRequest) Send(ctx context.Context) (*ModifyCluste
 	}
 
 	resp := &ModifyClusterDbRevisionResponse{
-		ModifyClusterDbRevisionOutput: r.Request.Data.(*ModifyClusterDbRevisionOutput),
+		ModifyClusterDbRevisionOutput: r.Request.Data.(*types.ModifyClusterDbRevisionOutput),
 		response:                      &aws.Response{Request: r.Request},
 	}
 
@@ -119,7 +67,7 @@ func (r ModifyClusterDbRevisionRequest) Send(ctx context.Context) (*ModifyCluste
 // ModifyClusterDbRevisionResponse is the response type for the
 // ModifyClusterDbRevision API operation.
 type ModifyClusterDbRevisionResponse struct {
-	*ModifyClusterDbRevisionOutput
+	*types.ModifyClusterDbRevisionOutput
 
 	response *aws.Response
 }

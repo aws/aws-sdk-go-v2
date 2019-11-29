@@ -4,141 +4,10 @@ package glacier
 
 import (
 	"context"
-	"io"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/glacier/types"
 )
-
-// Provides options to upload a part of an archive in a multipart upload operation.
-type UploadMultipartPartInput struct {
-	_ struct{} `type:"structure" payload:"Body"`
-
-	// The AccountId value is the AWS account ID of the account that owns the vault.
-	// You can either specify an AWS account ID or optionally a single '-' (hyphen),
-	// in which case Amazon S3 Glacier uses the AWS account ID associated with the
-	// credentials used to sign the request. If you use an account ID, do not include
-	// any hyphens ('-') in the ID.
-	//
-	// AccountId is a required field
-	AccountId *string `location:"uri" locationName:"accountId" type:"string" required:"true"`
-
-	// The data to upload.
-	Body io.ReadSeeker `locationName:"body" type:"blob"`
-
-	// The SHA256 tree hash of the data being uploaded.
-	Checksum *string `location:"header" locationName:"x-amz-sha256-tree-hash" type:"string"`
-
-	// Identifies the range of bytes in the assembled archive that will be uploaded
-	// in this part. Amazon S3 Glacier uses this information to assemble the archive
-	// in the proper sequence. The format of this header follows RFC 2616. An example
-	// header is Content-Range:bytes 0-4194303/*.
-	Range *string `location:"header" locationName:"Content-Range" type:"string"`
-
-	// The upload ID of the multipart upload.
-	//
-	// UploadId is a required field
-	UploadId *string `location:"uri" locationName:"uploadId" type:"string" required:"true"`
-
-	// The name of the vault.
-	//
-	// VaultName is a required field
-	VaultName *string `location:"uri" locationName:"vaultName" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s UploadMultipartPartInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UploadMultipartPartInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UploadMultipartPartInput"}
-
-	if s.AccountId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("AccountId"))
-	}
-
-	if s.UploadId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("UploadId"))
-	}
-
-	if s.VaultName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("VaultName"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s UploadMultipartPartInput) MarshalFields(e protocol.FieldEncoder) error {
-
-	if s.Checksum != nil {
-		v := *s.Checksum
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "x-amz-sha256-tree-hash", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Range != nil {
-		v := *s.Range
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "Content-Range", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.AccountId != nil {
-		v := *s.AccountId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "accountId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.UploadId != nil {
-		v := *s.UploadId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "uploadId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.VaultName != nil {
-		v := *s.VaultName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "vaultName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Body != nil {
-		v := s.Body
-
-		metadata := protocol.Metadata{}
-		e.SetStream(protocol.PayloadTarget, "body", protocol.ReadSeekerStream{V: v}, metadata)
-	}
-	return nil
-}
-
-// Contains the Amazon S3 Glacier response to your request.
-type UploadMultipartPartOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The SHA256 tree hash that Amazon S3 Glacier computed for the uploaded part.
-	Checksum *string `location:"header" locationName:"x-amz-sha256-tree-hash" type:"string"`
-}
-
-// String returns the string representation
-func (s UploadMultipartPartOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s UploadMultipartPartOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.Checksum != nil {
-		v := *s.Checksum
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "x-amz-sha256-tree-hash", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opUploadMultipartPart = "UploadMultipartPart"
 
@@ -195,7 +64,7 @@ const opUploadMultipartPart = "UploadMultipartPart"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) UploadMultipartPartRequest(input *UploadMultipartPartInput) UploadMultipartPartRequest {
+func (c *Client) UploadMultipartPartRequest(input *types.UploadMultipartPartInput) UploadMultipartPartRequest {
 	op := &aws.Operation{
 		Name:       opUploadMultipartPart,
 		HTTPMethod: "PUT",
@@ -203,10 +72,10 @@ func (c *Client) UploadMultipartPartRequest(input *UploadMultipartPartInput) Upl
 	}
 
 	if input == nil {
-		input = &UploadMultipartPartInput{}
+		input = &types.UploadMultipartPartInput{}
 	}
 
-	req := c.newRequest(op, input, &UploadMultipartPartOutput{})
+	req := c.newRequest(op, input, &types.UploadMultipartPartOutput{})
 	return UploadMultipartPartRequest{Request: req, Input: input, Copy: c.UploadMultipartPartRequest}
 }
 
@@ -214,8 +83,8 @@ func (c *Client) UploadMultipartPartRequest(input *UploadMultipartPartInput) Upl
 // UploadMultipartPart API operation.
 type UploadMultipartPartRequest struct {
 	*aws.Request
-	Input *UploadMultipartPartInput
-	Copy  func(*UploadMultipartPartInput) UploadMultipartPartRequest
+	Input *types.UploadMultipartPartInput
+	Copy  func(*types.UploadMultipartPartInput) UploadMultipartPartRequest
 }
 
 // Send marshals and sends the UploadMultipartPart API request.
@@ -227,7 +96,7 @@ func (r UploadMultipartPartRequest) Send(ctx context.Context) (*UploadMultipartP
 	}
 
 	resp := &UploadMultipartPartResponse{
-		UploadMultipartPartOutput: r.Request.Data.(*UploadMultipartPartOutput),
+		UploadMultipartPartOutput: r.Request.Data.(*types.UploadMultipartPartOutput),
 		response:                  &aws.Response{Request: r.Request},
 	}
 
@@ -237,7 +106,7 @@ func (r UploadMultipartPartRequest) Send(ctx context.Context) (*UploadMultipartP
 // UploadMultipartPartResponse is the response type for the
 // UploadMultipartPart API operation.
 type UploadMultipartPartResponse struct {
-	*UploadMultipartPartOutput
+	*types.UploadMultipartPartOutput
 
 	response *aws.Response
 }

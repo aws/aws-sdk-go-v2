@@ -6,106 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/chime/types"
 )
-
-type UpdateVoiceConnectorInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the Amazon Chime Voice Connector.
-	//
-	// Name is a required field
-	Name *string `min:"1" type:"string" required:"true"`
-
-	// When enabled, requires encryption for the Amazon Chime Voice Connector.
-	//
-	// RequireEncryption is a required field
-	RequireEncryption *bool `type:"boolean" required:"true"`
-
-	// The Amazon Chime Voice Connector ID.
-	//
-	// VoiceConnectorId is a required field
-	VoiceConnectorId *string `location:"uri" locationName:"voiceConnectorId" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s UpdateVoiceConnectorInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateVoiceConnectorInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateVoiceConnectorInput"}
-
-	if s.Name == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Name"))
-	}
-	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
-	}
-
-	if s.RequireEncryption == nil {
-		invalidParams.Add(aws.NewErrParamRequired("RequireEncryption"))
-	}
-
-	if s.VoiceConnectorId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("VoiceConnectorId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s UpdateVoiceConnectorInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.Name != nil {
-		v := *s.Name
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "Name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.RequireEncryption != nil {
-		v := *s.RequireEncryption
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "RequireEncryption", protocol.BoolValue(v), metadata)
-	}
-	if s.VoiceConnectorId != nil {
-		v := *s.VoiceConnectorId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "voiceConnectorId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type UpdateVoiceConnectorOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Chime Voice Connector details.
-	VoiceConnector *VoiceConnector `type:"structure"`
-}
-
-// String returns the string representation
-func (s UpdateVoiceConnectorOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s UpdateVoiceConnectorOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.VoiceConnector != nil {
-		v := s.VoiceConnector
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "VoiceConnector", v, metadata)
-	}
-	return nil
-}
 
 const opUpdateVoiceConnector = "UpdateVoiceConnector"
 
@@ -122,7 +24,7 @@ const opUpdateVoiceConnector = "UpdateVoiceConnector"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/UpdateVoiceConnector
-func (c *Client) UpdateVoiceConnectorRequest(input *UpdateVoiceConnectorInput) UpdateVoiceConnectorRequest {
+func (c *Client) UpdateVoiceConnectorRequest(input *types.UpdateVoiceConnectorInput) UpdateVoiceConnectorRequest {
 	op := &aws.Operation{
 		Name:       opUpdateVoiceConnector,
 		HTTPMethod: "PUT",
@@ -130,10 +32,10 @@ func (c *Client) UpdateVoiceConnectorRequest(input *UpdateVoiceConnectorInput) U
 	}
 
 	if input == nil {
-		input = &UpdateVoiceConnectorInput{}
+		input = &types.UpdateVoiceConnectorInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateVoiceConnectorOutput{})
+	req := c.newRequest(op, input, &types.UpdateVoiceConnectorOutput{})
 	return UpdateVoiceConnectorRequest{Request: req, Input: input, Copy: c.UpdateVoiceConnectorRequest}
 }
 
@@ -141,8 +43,8 @@ func (c *Client) UpdateVoiceConnectorRequest(input *UpdateVoiceConnectorInput) U
 // UpdateVoiceConnector API operation.
 type UpdateVoiceConnectorRequest struct {
 	*aws.Request
-	Input *UpdateVoiceConnectorInput
-	Copy  func(*UpdateVoiceConnectorInput) UpdateVoiceConnectorRequest
+	Input *types.UpdateVoiceConnectorInput
+	Copy  func(*types.UpdateVoiceConnectorInput) UpdateVoiceConnectorRequest
 }
 
 // Send marshals and sends the UpdateVoiceConnector API request.
@@ -154,7 +56,7 @@ func (r UpdateVoiceConnectorRequest) Send(ctx context.Context) (*UpdateVoiceConn
 	}
 
 	resp := &UpdateVoiceConnectorResponse{
-		UpdateVoiceConnectorOutput: r.Request.Data.(*UpdateVoiceConnectorOutput),
+		UpdateVoiceConnectorOutput: r.Request.Data.(*types.UpdateVoiceConnectorOutput),
 		response:                   &aws.Response{Request: r.Request},
 	}
 
@@ -164,7 +66,7 @@ func (r UpdateVoiceConnectorRequest) Send(ctx context.Context) (*UpdateVoiceConn
 // UpdateVoiceConnectorResponse is the response type for the
 // UpdateVoiceConnector API operation.
 type UpdateVoiceConnectorResponse struct {
-	*UpdateVoiceConnectorOutput
+	*types.UpdateVoiceConnectorOutput
 
 	response *aws.Response
 }

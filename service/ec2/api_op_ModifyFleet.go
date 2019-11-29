@@ -6,73 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-type ModifyFleetInput struct {
-	_ struct{} `type:"structure"`
-
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have
-	// the required permissions, the error response is DryRunOperation. Otherwise,
-	// it is UnauthorizedOperation.
-	DryRun *bool `type:"boolean"`
-
-	// Indicates whether running instances should be terminated if the total target
-	// capacity of the EC2 Fleet is decreased below the current size of the EC2
-	// Fleet.
-	ExcessCapacityTerminationPolicy FleetExcessCapacityTerminationPolicy `type:"string" enum:"true"`
-
-	// The ID of the EC2 Fleet.
-	//
-	// FleetId is a required field
-	FleetId *string `type:"string" required:"true"`
-
-	// The size of the EC2 Fleet.
-	//
-	// TargetCapacitySpecification is a required field
-	TargetCapacitySpecification *TargetCapacitySpecificationRequest `type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s ModifyFleetInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ModifyFleetInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ModifyFleetInput"}
-
-	if s.FleetId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("FleetId"))
-	}
-
-	if s.TargetCapacitySpecification == nil {
-		invalidParams.Add(aws.NewErrParamRequired("TargetCapacitySpecification"))
-	}
-	if s.TargetCapacitySpecification != nil {
-		if err := s.TargetCapacitySpecification.Validate(); err != nil {
-			invalidParams.AddNested("TargetCapacitySpecification", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ModifyFleetOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Is true if the request succeeds, and an error otherwise.
-	Return *bool `locationName:"return" type:"boolean"`
-}
-
-// String returns the string representation
-func (s ModifyFleetOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opModifyFleet = "ModifyFleet"
 
@@ -87,10 +22,10 @@ const opModifyFleet = "ModifyFleet"
 //
 // To scale up your EC2 Fleet, increase its target capacity. The EC2 Fleet launches
 // the additional Spot Instances according to the allocation strategy for the
-// EC2 Fleet request. If the allocation strategy is lowestPrice, the EC2 Fleet
+// EC2 Fleet request. If the allocation strategy is lowest-price, the EC2 Fleet
 // launches instances using the Spot Instance pool with the lowest price. If
 // the allocation strategy is diversified, the EC2 Fleet distributes the instances
-// across the Spot Instance pools. If the allocation strategy is capacityOptimized,
+// across the Spot Instance pools. If the allocation strategy is capacity-optimized,
 // EC2 Fleet launches instances from Spot Instance pools with optimal capacity
 // for the number of instances that are launching.
 //
@@ -98,11 +33,11 @@ const opModifyFleet = "ModifyFleet"
 // Fleet cancels any open requests that exceed the new target capacity. You
 // can request that the EC2 Fleet terminate Spot Instances until the size of
 // the fleet no longer exceeds the new target capacity. If the allocation strategy
-// is lowestPrice, the EC2 Fleet terminates the instances with the highest price
-// per unit. If the allocation strategy is capacityOptimized, the EC2 Fleet
-// terminates the instances in the Spot Instance pools that have the least available
-// Spot Instance capacity. If the allocation strategy is diversified, the EC2
-// Fleet terminates instances across the Spot Instance pools. Alternatively,
+// is lowest-price, the EC2 Fleet terminates the instances with the highest
+// price per unit. If the allocation strategy is capacity-optimized, the EC2
+// Fleet terminates the instances in the Spot Instance pools that have the least
+// available Spot Instance capacity. If the allocation strategy is diversified,
+// the EC2 Fleet terminates instances across the Spot Instance pools. Alternatively,
 // you can request that the EC2 Fleet keep the fleet at its current size, but
 // not replace any Spot Instances that are interrupted or that you terminate
 // manually.
@@ -118,7 +53,7 @@ const opModifyFleet = "ModifyFleet"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyFleet
-func (c *Client) ModifyFleetRequest(input *ModifyFleetInput) ModifyFleetRequest {
+func (c *Client) ModifyFleetRequest(input *types.ModifyFleetInput) ModifyFleetRequest {
 	op := &aws.Operation{
 		Name:       opModifyFleet,
 		HTTPMethod: "POST",
@@ -126,10 +61,10 @@ func (c *Client) ModifyFleetRequest(input *ModifyFleetInput) ModifyFleetRequest 
 	}
 
 	if input == nil {
-		input = &ModifyFleetInput{}
+		input = &types.ModifyFleetInput{}
 	}
 
-	req := c.newRequest(op, input, &ModifyFleetOutput{})
+	req := c.newRequest(op, input, &types.ModifyFleetOutput{})
 	return ModifyFleetRequest{Request: req, Input: input, Copy: c.ModifyFleetRequest}
 }
 
@@ -137,8 +72,8 @@ func (c *Client) ModifyFleetRequest(input *ModifyFleetInput) ModifyFleetRequest 
 // ModifyFleet API operation.
 type ModifyFleetRequest struct {
 	*aws.Request
-	Input *ModifyFleetInput
-	Copy  func(*ModifyFleetInput) ModifyFleetRequest
+	Input *types.ModifyFleetInput
+	Copy  func(*types.ModifyFleetInput) ModifyFleetRequest
 }
 
 // Send marshals and sends the ModifyFleet API request.
@@ -150,7 +85,7 @@ func (r ModifyFleetRequest) Send(ctx context.Context) (*ModifyFleetResponse, err
 	}
 
 	resp := &ModifyFleetResponse{
-		ModifyFleetOutput: r.Request.Data.(*ModifyFleetOutput),
+		ModifyFleetOutput: r.Request.Data.(*types.ModifyFleetOutput),
 		response:          &aws.Response{Request: r.Request},
 	}
 
@@ -160,7 +95,7 @@ func (r ModifyFleetRequest) Send(ctx context.Context) (*ModifyFleetResponse, err
 // ModifyFleetResponse is the response type for the
 // ModifyFleet API operation.
 type ModifyFleetResponse struct {
-	*ModifyFleetOutput
+	*types.ModifyFleetOutput
 
 	response *aws.Response
 }

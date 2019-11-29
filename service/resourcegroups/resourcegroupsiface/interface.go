@@ -10,6 +10,7 @@ package resourcegroupsiface
 
 import (
 	"github.com/aws/aws-sdk-go-v2/service/resourcegroups"
+	"github.com/aws/aws-sdk-go-v2/service/resourcegroups/types"
 )
 
 // ClientAPI provides an interface to enable mocking the
@@ -43,7 +44,7 @@ import (
 //    type mockClientClient struct {
 //        resourcegroupsiface.ClientPI
 //    }
-//    func (m *mockClientClient) CreateGroup(input *resourcegroups.CreateGroupInput) (*resourcegroups.CreateGroupOutput, error) {
+//    func (m *mockClientClient) CreateGroup(input *types.CreateGroupInput) (*types.CreateGroupOutput, error) {
 //        // mock response/functionality
 //    }
 //
@@ -61,29 +62,29 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type ClientAPI interface {
-	CreateGroupRequest(*resourcegroups.CreateGroupInput) resourcegroups.CreateGroupRequest
+	CreateGroupRequest(*types.CreateGroupInput) resourcegroups.CreateGroupRequest
 
-	DeleteGroupRequest(*resourcegroups.DeleteGroupInput) resourcegroups.DeleteGroupRequest
+	DeleteGroupRequest(*types.DeleteGroupInput) resourcegroups.DeleteGroupRequest
 
-	GetGroupRequest(*resourcegroups.GetGroupInput) resourcegroups.GetGroupRequest
+	GetGroupRequest(*types.GetGroupInput) resourcegroups.GetGroupRequest
 
-	GetGroupQueryRequest(*resourcegroups.GetGroupQueryInput) resourcegroups.GetGroupQueryRequest
+	GetGroupQueryRequest(*types.GetGroupQueryInput) resourcegroups.GetGroupQueryRequest
 
-	GetTagsRequest(*resourcegroups.GetTagsInput) resourcegroups.GetTagsRequest
+	GetTagsRequest(*types.GetTagsInput) resourcegroups.GetTagsRequest
 
-	ListGroupResourcesRequest(*resourcegroups.ListGroupResourcesInput) resourcegroups.ListGroupResourcesRequest
+	ListGroupResourcesRequest(*types.ListGroupResourcesInput) resourcegroups.ListGroupResourcesRequest
 
-	ListGroupsRequest(*resourcegroups.ListGroupsInput) resourcegroups.ListGroupsRequest
+	ListGroupsRequest(*types.ListGroupsInput) resourcegroups.ListGroupsRequest
 
-	SearchResourcesRequest(*resourcegroups.SearchResourcesInput) resourcegroups.SearchResourcesRequest
+	SearchResourcesRequest(*types.SearchResourcesInput) resourcegroups.SearchResourcesRequest
 
-	TagRequest(*resourcegroups.TagInput) resourcegroups.TagRequest
+	TagRequest(*types.TagInput) resourcegroups.TagRequest
 
-	UntagRequest(*resourcegroups.UntagInput) resourcegroups.UntagRequest
+	UntagRequest(*types.UntagInput) resourcegroups.UntagRequest
 
-	UpdateGroupRequest(*resourcegroups.UpdateGroupInput) resourcegroups.UpdateGroupRequest
+	UpdateGroupRequest(*types.UpdateGroupInput) resourcegroups.UpdateGroupRequest
 
-	UpdateGroupQueryRequest(*resourcegroups.UpdateGroupQueryInput) resourcegroups.UpdateGroupQueryRequest
+	UpdateGroupQueryRequest(*types.UpdateGroupQueryInput) resourcegroups.UpdateGroupQueryRequest
 }
 
 var _ ClientAPI = (*resourcegroups.Client)(nil)

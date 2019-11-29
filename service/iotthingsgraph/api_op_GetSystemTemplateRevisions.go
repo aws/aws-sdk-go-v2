@@ -6,65 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/iotthingsgraph/types"
 )
-
-type GetSystemTemplateRevisionsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the system template.
-	//
-	// The ID should be in the following format.
-	//
-	// urn:tdm:REGION/ACCOUNT ID/default:system:SYSTEMNAME
-	//
-	// Id is a required field
-	Id *string `locationName:"id" type:"string" required:"true"`
-
-	// The maximum number of results to return in the response.
-	MaxResults *int64 `locationName:"maxResults" min:"1" type:"integer"`
-
-	// The string that specifies the next page of results. Use this when you're
-	// paginating results.
-	NextToken *string `locationName:"nextToken" type:"string"`
-}
-
-// String returns the string representation
-func (s GetSystemTemplateRevisionsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetSystemTemplateRevisionsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetSystemTemplateRevisionsInput"}
-
-	if s.Id == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Id"))
-	}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type GetSystemTemplateRevisionsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The string to specify as nextToken when you request the next page of results.
-	NextToken *string `locationName:"nextToken" type:"string"`
-
-	// An array of objects that contain summary data about the system template revisions.
-	Summaries []SystemTemplateSummary `locationName:"summaries" type:"list"`
-}
-
-// String returns the string representation
-func (s GetSystemTemplateRevisionsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetSystemTemplateRevisions = "GetSystemTemplateRevisions"
 
@@ -84,7 +27,7 @@ const opGetSystemTemplateRevisions = "GetSystemTemplateRevisions"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iotthingsgraph-2018-09-06/GetSystemTemplateRevisions
-func (c *Client) GetSystemTemplateRevisionsRequest(input *GetSystemTemplateRevisionsInput) GetSystemTemplateRevisionsRequest {
+func (c *Client) GetSystemTemplateRevisionsRequest(input *types.GetSystemTemplateRevisionsInput) GetSystemTemplateRevisionsRequest {
 	op := &aws.Operation{
 		Name:       opGetSystemTemplateRevisions,
 		HTTPMethod: "POST",
@@ -98,10 +41,10 @@ func (c *Client) GetSystemTemplateRevisionsRequest(input *GetSystemTemplateRevis
 	}
 
 	if input == nil {
-		input = &GetSystemTemplateRevisionsInput{}
+		input = &types.GetSystemTemplateRevisionsInput{}
 	}
 
-	req := c.newRequest(op, input, &GetSystemTemplateRevisionsOutput{})
+	req := c.newRequest(op, input, &types.GetSystemTemplateRevisionsOutput{})
 	return GetSystemTemplateRevisionsRequest{Request: req, Input: input, Copy: c.GetSystemTemplateRevisionsRequest}
 }
 
@@ -109,8 +52,8 @@ func (c *Client) GetSystemTemplateRevisionsRequest(input *GetSystemTemplateRevis
 // GetSystemTemplateRevisions API operation.
 type GetSystemTemplateRevisionsRequest struct {
 	*aws.Request
-	Input *GetSystemTemplateRevisionsInput
-	Copy  func(*GetSystemTemplateRevisionsInput) GetSystemTemplateRevisionsRequest
+	Input *types.GetSystemTemplateRevisionsInput
+	Copy  func(*types.GetSystemTemplateRevisionsInput) GetSystemTemplateRevisionsRequest
 }
 
 // Send marshals and sends the GetSystemTemplateRevisions API request.
@@ -122,7 +65,7 @@ func (r GetSystemTemplateRevisionsRequest) Send(ctx context.Context) (*GetSystem
 	}
 
 	resp := &GetSystemTemplateRevisionsResponse{
-		GetSystemTemplateRevisionsOutput: r.Request.Data.(*GetSystemTemplateRevisionsOutput),
+		GetSystemTemplateRevisionsOutput: r.Request.Data.(*types.GetSystemTemplateRevisionsOutput),
 		response:                         &aws.Response{Request: r.Request},
 	}
 
@@ -152,7 +95,7 @@ func NewGetSystemTemplateRevisionsPaginator(req GetSystemTemplateRevisionsReques
 	return GetSystemTemplateRevisionsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *GetSystemTemplateRevisionsInput
+				var inCpy *types.GetSystemTemplateRevisionsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -172,14 +115,14 @@ type GetSystemTemplateRevisionsPaginator struct {
 	aws.Pager
 }
 
-func (p *GetSystemTemplateRevisionsPaginator) CurrentPage() *GetSystemTemplateRevisionsOutput {
-	return p.Pager.CurrentPage().(*GetSystemTemplateRevisionsOutput)
+func (p *GetSystemTemplateRevisionsPaginator) CurrentPage() *types.GetSystemTemplateRevisionsOutput {
+	return p.Pager.CurrentPage().(*types.GetSystemTemplateRevisionsOutput)
 }
 
 // GetSystemTemplateRevisionsResponse is the response type for the
 // GetSystemTemplateRevisions API operation.
 type GetSystemTemplateRevisionsResponse struct {
-	*GetSystemTemplateRevisionsOutput
+	*types.GetSystemTemplateRevisionsOutput
 
 	response *aws.Response
 }

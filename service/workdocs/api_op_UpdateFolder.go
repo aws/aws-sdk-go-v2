@@ -6,115 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/restjson"
+	"github.com/aws/aws-sdk-go-v2/service/workdocs/types"
 )
-
-type UpdateFolderInput struct {
-	_ struct{} `type:"structure"`
-
-	// Amazon WorkDocs authentication token. Do not set this field when using administrative
-	// API actions, as in accessing the API using AWS credentials.
-	AuthenticationToken *string `location:"header" locationName:"Authentication" min:"1" type:"string" sensitive:"true"`
-
-	// The ID of the folder.
-	//
-	// FolderId is a required field
-	FolderId *string `location:"uri" locationName:"FolderId" min:"1" type:"string" required:"true"`
-
-	// The name of the folder.
-	Name *string `min:"1" type:"string"`
-
-	// The ID of the parent folder.
-	ParentFolderId *string `min:"1" type:"string"`
-
-	// The resource state of the folder. Only ACTIVE and RECYCLED are accepted values
-	// from the API.
-	ResourceState ResourceStateType `type:"string" enum:"true"`
-}
-
-// String returns the string representation
-func (s UpdateFolderInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateFolderInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateFolderInput"}
-	if s.AuthenticationToken != nil && len(*s.AuthenticationToken) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("AuthenticationToken", 1))
-	}
-
-	if s.FolderId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("FolderId"))
-	}
-	if s.FolderId != nil && len(*s.FolderId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("FolderId", 1))
-	}
-	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
-	}
-	if s.ParentFolderId != nil && len(*s.ParentFolderId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ParentFolderId", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s UpdateFolderInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.Name != nil {
-		v := *s.Name
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "Name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.ParentFolderId != nil {
-		v := *s.ParentFolderId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "ParentFolderId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if len(s.ResourceState) > 0 {
-		v := s.ResourceState
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "ResourceState", protocol.QuotedValue{ValueMarshaler: v}, metadata)
-	}
-	if s.AuthenticationToken != nil {
-		v := *s.AuthenticationToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "Authentication", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.FolderId != nil {
-		v := *s.FolderId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "FolderId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type UpdateFolderOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s UpdateFolderOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s UpdateFolderOutput) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
 
 const opUpdateFolder = "UpdateFolder"
 
@@ -132,7 +27,7 @@ const opUpdateFolder = "UpdateFolder"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/UpdateFolder
-func (c *Client) UpdateFolderRequest(input *UpdateFolderInput) UpdateFolderRequest {
+func (c *Client) UpdateFolderRequest(input *types.UpdateFolderInput) UpdateFolderRequest {
 	op := &aws.Operation{
 		Name:       opUpdateFolder,
 		HTTPMethod: "PATCH",
@@ -140,10 +35,10 @@ func (c *Client) UpdateFolderRequest(input *UpdateFolderInput) UpdateFolderReque
 	}
 
 	if input == nil {
-		input = &UpdateFolderInput{}
+		input = &types.UpdateFolderInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateFolderOutput{})
+	req := c.newRequest(op, input, &types.UpdateFolderOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return UpdateFolderRequest{Request: req, Input: input, Copy: c.UpdateFolderRequest}
@@ -153,8 +48,8 @@ func (c *Client) UpdateFolderRequest(input *UpdateFolderInput) UpdateFolderReque
 // UpdateFolder API operation.
 type UpdateFolderRequest struct {
 	*aws.Request
-	Input *UpdateFolderInput
-	Copy  func(*UpdateFolderInput) UpdateFolderRequest
+	Input *types.UpdateFolderInput
+	Copy  func(*types.UpdateFolderInput) UpdateFolderRequest
 }
 
 // Send marshals and sends the UpdateFolder API request.
@@ -166,7 +61,7 @@ func (r UpdateFolderRequest) Send(ctx context.Context) (*UpdateFolderResponse, e
 	}
 
 	resp := &UpdateFolderResponse{
-		UpdateFolderOutput: r.Request.Data.(*UpdateFolderOutput),
+		UpdateFolderOutput: r.Request.Data.(*types.UpdateFolderOutput),
 		response:           &aws.Response{Request: r.Request},
 	}
 
@@ -176,7 +71,7 @@ func (r UpdateFolderRequest) Send(ctx context.Context) (*UpdateFolderResponse, e
 // UpdateFolderResponse is the response type for the
 // UpdateFolder API operation.
 type UpdateFolderResponse struct {
-	*UpdateFolderOutput
+	*types.UpdateFolderOutput
 
 	response *aws.Response
 }

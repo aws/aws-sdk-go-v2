@@ -6,85 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/worklink/types"
 )
-
-type DisassociateWebsiteAuthorizationProviderInput struct {
-	_ struct{} `type:"structure"`
-
-	// A unique identifier for the authorization provider.
-	//
-	// AuthorizationProviderId is a required field
-	AuthorizationProviderId *string `min:"1" type:"string" required:"true"`
-
-	// The ARN of the fleet.
-	//
-	// FleetArn is a required field
-	FleetArn *string `min:"20" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DisassociateWebsiteAuthorizationProviderInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DisassociateWebsiteAuthorizationProviderInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DisassociateWebsiteAuthorizationProviderInput"}
-
-	if s.AuthorizationProviderId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("AuthorizationProviderId"))
-	}
-	if s.AuthorizationProviderId != nil && len(*s.AuthorizationProviderId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("AuthorizationProviderId", 1))
-	}
-
-	if s.FleetArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("FleetArn"))
-	}
-	if s.FleetArn != nil && len(*s.FleetArn) < 20 {
-		invalidParams.Add(aws.NewErrParamMinLen("FleetArn", 20))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DisassociateWebsiteAuthorizationProviderInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.AuthorizationProviderId != nil {
-		v := *s.AuthorizationProviderId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "AuthorizationProviderId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.FleetArn != nil {
-		v := *s.FleetArn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "FleetArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type DisassociateWebsiteAuthorizationProviderOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DisassociateWebsiteAuthorizationProviderOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DisassociateWebsiteAuthorizationProviderOutput) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
 
 const opDisassociateWebsiteAuthorizationProvider = "DisassociateWebsiteAuthorizationProvider"
 
@@ -103,7 +26,7 @@ const opDisassociateWebsiteAuthorizationProvider = "DisassociateWebsiteAuthoriza
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/worklink-2018-09-25/DisassociateWebsiteAuthorizationProvider
-func (c *Client) DisassociateWebsiteAuthorizationProviderRequest(input *DisassociateWebsiteAuthorizationProviderInput) DisassociateWebsiteAuthorizationProviderRequest {
+func (c *Client) DisassociateWebsiteAuthorizationProviderRequest(input *types.DisassociateWebsiteAuthorizationProviderInput) DisassociateWebsiteAuthorizationProviderRequest {
 	op := &aws.Operation{
 		Name:       opDisassociateWebsiteAuthorizationProvider,
 		HTTPMethod: "POST",
@@ -111,10 +34,10 @@ func (c *Client) DisassociateWebsiteAuthorizationProviderRequest(input *Disassoc
 	}
 
 	if input == nil {
-		input = &DisassociateWebsiteAuthorizationProviderInput{}
+		input = &types.DisassociateWebsiteAuthorizationProviderInput{}
 	}
 
-	req := c.newRequest(op, input, &DisassociateWebsiteAuthorizationProviderOutput{})
+	req := c.newRequest(op, input, &types.DisassociateWebsiteAuthorizationProviderOutput{})
 	return DisassociateWebsiteAuthorizationProviderRequest{Request: req, Input: input, Copy: c.DisassociateWebsiteAuthorizationProviderRequest}
 }
 
@@ -122,8 +45,8 @@ func (c *Client) DisassociateWebsiteAuthorizationProviderRequest(input *Disassoc
 // DisassociateWebsiteAuthorizationProvider API operation.
 type DisassociateWebsiteAuthorizationProviderRequest struct {
 	*aws.Request
-	Input *DisassociateWebsiteAuthorizationProviderInput
-	Copy  func(*DisassociateWebsiteAuthorizationProviderInput) DisassociateWebsiteAuthorizationProviderRequest
+	Input *types.DisassociateWebsiteAuthorizationProviderInput
+	Copy  func(*types.DisassociateWebsiteAuthorizationProviderInput) DisassociateWebsiteAuthorizationProviderRequest
 }
 
 // Send marshals and sends the DisassociateWebsiteAuthorizationProvider API request.
@@ -135,7 +58,7 @@ func (r DisassociateWebsiteAuthorizationProviderRequest) Send(ctx context.Contex
 	}
 
 	resp := &DisassociateWebsiteAuthorizationProviderResponse{
-		DisassociateWebsiteAuthorizationProviderOutput: r.Request.Data.(*DisassociateWebsiteAuthorizationProviderOutput),
+		DisassociateWebsiteAuthorizationProviderOutput: r.Request.Data.(*types.DisassociateWebsiteAuthorizationProviderOutput),
 		response: &aws.Response{Request: r.Request},
 	}
 
@@ -145,7 +68,7 @@ func (r DisassociateWebsiteAuthorizationProviderRequest) Send(ctx context.Contex
 // DisassociateWebsiteAuthorizationProviderResponse is the response type for the
 // DisassociateWebsiteAuthorizationProvider API operation.
 type DisassociateWebsiteAuthorizationProviderResponse struct {
-	*DisassociateWebsiteAuthorizationProviderOutput
+	*types.DisassociateWebsiteAuthorizationProviderOutput
 
 	response *aws.Response
 }

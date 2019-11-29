@@ -6,54 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ses/types"
 )
-
-// Represents a request to create a configuration set. Configuration sets enable
-// you to publish email sending events. For information about using configuration
-// sets, see the Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html).
-type CreateConfigurationSetInput struct {
-	_ struct{} `type:"structure"`
-
-	// A data structure that contains the name of the configuration set.
-	//
-	// ConfigurationSet is a required field
-	ConfigurationSet *ConfigurationSet `type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s CreateConfigurationSetInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateConfigurationSetInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateConfigurationSetInput"}
-
-	if s.ConfigurationSet == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ConfigurationSet"))
-	}
-	if s.ConfigurationSet != nil {
-		if err := s.ConfigurationSet.Validate(); err != nil {
-			invalidParams.AddNested("ConfigurationSet", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// An empty element returned on a successful request.
-type CreateConfigurationSetOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s CreateConfigurationSetOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCreateConfigurationSet = "CreateConfigurationSet"
 
@@ -75,7 +29,7 @@ const opCreateConfigurationSet = "CreateConfigurationSet"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/CreateConfigurationSet
-func (c *Client) CreateConfigurationSetRequest(input *CreateConfigurationSetInput) CreateConfigurationSetRequest {
+func (c *Client) CreateConfigurationSetRequest(input *types.CreateConfigurationSetInput) CreateConfigurationSetRequest {
 	op := &aws.Operation{
 		Name:       opCreateConfigurationSet,
 		HTTPMethod: "POST",
@@ -83,10 +37,10 @@ func (c *Client) CreateConfigurationSetRequest(input *CreateConfigurationSetInpu
 	}
 
 	if input == nil {
-		input = &CreateConfigurationSetInput{}
+		input = &types.CreateConfigurationSetInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateConfigurationSetOutput{})
+	req := c.newRequest(op, input, &types.CreateConfigurationSetOutput{})
 	return CreateConfigurationSetRequest{Request: req, Input: input, Copy: c.CreateConfigurationSetRequest}
 }
 
@@ -94,8 +48,8 @@ func (c *Client) CreateConfigurationSetRequest(input *CreateConfigurationSetInpu
 // CreateConfigurationSet API operation.
 type CreateConfigurationSetRequest struct {
 	*aws.Request
-	Input *CreateConfigurationSetInput
-	Copy  func(*CreateConfigurationSetInput) CreateConfigurationSetRequest
+	Input *types.CreateConfigurationSetInput
+	Copy  func(*types.CreateConfigurationSetInput) CreateConfigurationSetRequest
 }
 
 // Send marshals and sends the CreateConfigurationSet API request.
@@ -107,7 +61,7 @@ func (r CreateConfigurationSetRequest) Send(ctx context.Context) (*CreateConfigu
 	}
 
 	resp := &CreateConfigurationSetResponse{
-		CreateConfigurationSetOutput: r.Request.Data.(*CreateConfigurationSetOutput),
+		CreateConfigurationSetOutput: r.Request.Data.(*types.CreateConfigurationSetOutput),
 		response:                     &aws.Response{Request: r.Request},
 	}
 
@@ -117,7 +71,7 @@ func (r CreateConfigurationSetRequest) Send(ctx context.Context) (*CreateConfigu
 // CreateConfigurationSetResponse is the response type for the
 // CreateConfigurationSet API operation.
 type CreateConfigurationSetResponse struct {
-	*CreateConfigurationSetOutput
+	*types.CreateConfigurationSetOutput
 
 	response *aws.Response
 }

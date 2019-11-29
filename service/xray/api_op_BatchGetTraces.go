@@ -6,118 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/xray/types"
 )
-
-type BatchGetTracesInput struct {
-	_ struct{} `type:"structure"`
-
-	// Pagination token. Not used.
-	NextToken *string `type:"string"`
-
-	// Specify the trace IDs of requests for which to retrieve segments.
-	//
-	// TraceIds is a required field
-	TraceIds []string `type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s BatchGetTracesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *BatchGetTracesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "BatchGetTracesInput"}
-
-	if s.TraceIds == nil {
-		invalidParams.Add(aws.NewErrParamRequired("TraceIds"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s BatchGetTracesInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.TraceIds != nil {
-		v := s.TraceIds
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "TraceIds", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
-		}
-		ls0.End()
-
-	}
-	return nil
-}
-
-type BatchGetTracesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Pagination token. Not used.
-	NextToken *string `type:"string"`
-
-	// Full traces for the specified requests.
-	Traces []Trace `type:"list"`
-
-	// Trace IDs of requests that haven't been processed.
-	UnprocessedTraceIds []string `type:"list"`
-}
-
-// String returns the string representation
-func (s BatchGetTracesOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s BatchGetTracesOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Traces != nil {
-		v := s.Traces
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "Traces", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	if s.UnprocessedTraceIds != nil {
-		v := s.UnprocessedTraceIds
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "UnprocessedTraceIds", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
-		}
-		ls0.End()
-
-	}
-	return nil
-}
 
 const opBatchGetTraces = "BatchGetTraces"
 
@@ -136,7 +26,7 @@ const opBatchGetTraces = "BatchGetTraces"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/BatchGetTraces
-func (c *Client) BatchGetTracesRequest(input *BatchGetTracesInput) BatchGetTracesRequest {
+func (c *Client) BatchGetTracesRequest(input *types.BatchGetTracesInput) BatchGetTracesRequest {
 	op := &aws.Operation{
 		Name:       opBatchGetTraces,
 		HTTPMethod: "POST",
@@ -150,10 +40,10 @@ func (c *Client) BatchGetTracesRequest(input *BatchGetTracesInput) BatchGetTrace
 	}
 
 	if input == nil {
-		input = &BatchGetTracesInput{}
+		input = &types.BatchGetTracesInput{}
 	}
 
-	req := c.newRequest(op, input, &BatchGetTracesOutput{})
+	req := c.newRequest(op, input, &types.BatchGetTracesOutput{})
 	return BatchGetTracesRequest{Request: req, Input: input, Copy: c.BatchGetTracesRequest}
 }
 
@@ -161,8 +51,8 @@ func (c *Client) BatchGetTracesRequest(input *BatchGetTracesInput) BatchGetTrace
 // BatchGetTraces API operation.
 type BatchGetTracesRequest struct {
 	*aws.Request
-	Input *BatchGetTracesInput
-	Copy  func(*BatchGetTracesInput) BatchGetTracesRequest
+	Input *types.BatchGetTracesInput
+	Copy  func(*types.BatchGetTracesInput) BatchGetTracesRequest
 }
 
 // Send marshals and sends the BatchGetTraces API request.
@@ -174,7 +64,7 @@ func (r BatchGetTracesRequest) Send(ctx context.Context) (*BatchGetTracesRespons
 	}
 
 	resp := &BatchGetTracesResponse{
-		BatchGetTracesOutput: r.Request.Data.(*BatchGetTracesOutput),
+		BatchGetTracesOutput: r.Request.Data.(*types.BatchGetTracesOutput),
 		response:             &aws.Response{Request: r.Request},
 	}
 
@@ -204,7 +94,7 @@ func NewBatchGetTracesPaginator(req BatchGetTracesRequest) BatchGetTracesPaginat
 	return BatchGetTracesPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *BatchGetTracesInput
+				var inCpy *types.BatchGetTracesInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -224,14 +114,14 @@ type BatchGetTracesPaginator struct {
 	aws.Pager
 }
 
-func (p *BatchGetTracesPaginator) CurrentPage() *BatchGetTracesOutput {
-	return p.Pager.CurrentPage().(*BatchGetTracesOutput)
+func (p *BatchGetTracesPaginator) CurrentPage() *types.BatchGetTracesOutput {
+	return p.Pager.CurrentPage().(*types.BatchGetTracesOutput)
 }
 
 // BatchGetTracesResponse is the response type for the
 // BatchGetTraces API operation.
 type BatchGetTracesResponse struct {
-	*BatchGetTracesOutput
+	*types.BatchGetTracesOutput
 
 	response *aws.Response
 }

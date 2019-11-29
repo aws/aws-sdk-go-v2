@@ -4,66 +4,10 @@ package elasticloadbalancing
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/elasticloadbalancing/types"
 )
-
-// Contains the parameters for CreateLoadBalancerListeners.
-type CreateLoadBalancerListenersInput struct {
-	_ struct{} `type:"structure"`
-
-	// The listeners.
-	//
-	// Listeners is a required field
-	Listeners []Listener `type:"list" required:"true"`
-
-	// The name of the load balancer.
-	//
-	// LoadBalancerName is a required field
-	LoadBalancerName *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s CreateLoadBalancerListenersInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateLoadBalancerListenersInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateLoadBalancerListenersInput"}
-
-	if s.Listeners == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Listeners"))
-	}
-
-	if s.LoadBalancerName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("LoadBalancerName"))
-	}
-	if s.Listeners != nil {
-		for i, v := range s.Listeners {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Listeners", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Contains the parameters for CreateLoadBalancerListener.
-type CreateLoadBalancerListenersOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s CreateLoadBalancerListenersOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCreateLoadBalancerListeners = "CreateLoadBalancerListeners"
 
@@ -86,7 +30,7 @@ const opCreateLoadBalancerListeners = "CreateLoadBalancerListeners"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/CreateLoadBalancerListeners
-func (c *Client) CreateLoadBalancerListenersRequest(input *CreateLoadBalancerListenersInput) CreateLoadBalancerListenersRequest {
+func (c *Client) CreateLoadBalancerListenersRequest(input *types.CreateLoadBalancerListenersInput) CreateLoadBalancerListenersRequest {
 	op := &aws.Operation{
 		Name:       opCreateLoadBalancerListeners,
 		HTTPMethod: "POST",
@@ -94,10 +38,10 @@ func (c *Client) CreateLoadBalancerListenersRequest(input *CreateLoadBalancerLis
 	}
 
 	if input == nil {
-		input = &CreateLoadBalancerListenersInput{}
+		input = &types.CreateLoadBalancerListenersInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateLoadBalancerListenersOutput{})
+	req := c.newRequest(op, input, &types.CreateLoadBalancerListenersOutput{})
 	return CreateLoadBalancerListenersRequest{Request: req, Input: input, Copy: c.CreateLoadBalancerListenersRequest}
 }
 
@@ -105,8 +49,8 @@ func (c *Client) CreateLoadBalancerListenersRequest(input *CreateLoadBalancerLis
 // CreateLoadBalancerListeners API operation.
 type CreateLoadBalancerListenersRequest struct {
 	*aws.Request
-	Input *CreateLoadBalancerListenersInput
-	Copy  func(*CreateLoadBalancerListenersInput) CreateLoadBalancerListenersRequest
+	Input *types.CreateLoadBalancerListenersInput
+	Copy  func(*types.CreateLoadBalancerListenersInput) CreateLoadBalancerListenersRequest
 }
 
 // Send marshals and sends the CreateLoadBalancerListeners API request.
@@ -118,7 +62,7 @@ func (r CreateLoadBalancerListenersRequest) Send(ctx context.Context) (*CreateLo
 	}
 
 	resp := &CreateLoadBalancerListenersResponse{
-		CreateLoadBalancerListenersOutput: r.Request.Data.(*CreateLoadBalancerListenersOutput),
+		CreateLoadBalancerListenersOutput: r.Request.Data.(*types.CreateLoadBalancerListenersOutput),
 		response:                          &aws.Response{Request: r.Request},
 	}
 
@@ -128,7 +72,7 @@ func (r CreateLoadBalancerListenersRequest) Send(ctx context.Context) (*CreateLo
 // CreateLoadBalancerListenersResponse is the response type for the
 // CreateLoadBalancerListeners API operation.
 type CreateLoadBalancerListenersResponse struct {
-	*CreateLoadBalancerListenersOutput
+	*types.CreateLoadBalancerListenersOutput
 
 	response *aws.Response
 }

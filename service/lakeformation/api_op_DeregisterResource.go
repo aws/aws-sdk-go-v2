@@ -6,45 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/lakeformation/types"
 )
-
-type DeregisterResourceInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the resource that you want to deregister.
-	//
-	// ResourceArn is a required field
-	ResourceArn *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeregisterResourceInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeregisterResourceInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeregisterResourceInput"}
-
-	if s.ResourceArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ResourceArn"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeregisterResourceOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeregisterResourceOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeregisterResource = "DeregisterResource"
 
@@ -64,7 +27,7 @@ const opDeregisterResource = "DeregisterResource"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/DeregisterResource
-func (c *Client) DeregisterResourceRequest(input *DeregisterResourceInput) DeregisterResourceRequest {
+func (c *Client) DeregisterResourceRequest(input *types.DeregisterResourceInput) DeregisterResourceRequest {
 	op := &aws.Operation{
 		Name:       opDeregisterResource,
 		HTTPMethod: "POST",
@@ -72,10 +35,10 @@ func (c *Client) DeregisterResourceRequest(input *DeregisterResourceInput) Dereg
 	}
 
 	if input == nil {
-		input = &DeregisterResourceInput{}
+		input = &types.DeregisterResourceInput{}
 	}
 
-	req := c.newRequest(op, input, &DeregisterResourceOutput{})
+	req := c.newRequest(op, input, &types.DeregisterResourceOutput{})
 	return DeregisterResourceRequest{Request: req, Input: input, Copy: c.DeregisterResourceRequest}
 }
 
@@ -83,8 +46,8 @@ func (c *Client) DeregisterResourceRequest(input *DeregisterResourceInput) Dereg
 // DeregisterResource API operation.
 type DeregisterResourceRequest struct {
 	*aws.Request
-	Input *DeregisterResourceInput
-	Copy  func(*DeregisterResourceInput) DeregisterResourceRequest
+	Input *types.DeregisterResourceInput
+	Copy  func(*types.DeregisterResourceInput) DeregisterResourceRequest
 }
 
 // Send marshals and sends the DeregisterResource API request.
@@ -96,7 +59,7 @@ func (r DeregisterResourceRequest) Send(ctx context.Context) (*DeregisterResourc
 	}
 
 	resp := &DeregisterResourceResponse{
-		DeregisterResourceOutput: r.Request.Data.(*DeregisterResourceOutput),
+		DeregisterResourceOutput: r.Request.Data.(*types.DeregisterResourceOutput),
 		response:                 &aws.Response{Request: r.Request},
 	}
 
@@ -106,7 +69,7 @@ func (r DeregisterResourceRequest) Send(ctx context.Context) (*DeregisterResourc
 // DeregisterResourceResponse is the response type for the
 // DeregisterResource API operation.
 type DeregisterResourceResponse struct {
-	*DeregisterResourceOutput
+	*types.DeregisterResourceOutput
 
 	response *aws.Response
 }

@@ -6,63 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/lightsail/types"
 )
-
-type CreateInstanceSnapshotInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Lightsail instance on which to base your snapshot.
-	//
-	// InstanceName is a required field
-	InstanceName *string `locationName:"instanceName" type:"string" required:"true"`
-
-	// The name for your new snapshot.
-	//
-	// InstanceSnapshotName is a required field
-	InstanceSnapshotName *string `locationName:"instanceSnapshotName" type:"string" required:"true"`
-
-	// The tag keys and optional values to add to the resource during create.
-	//
-	// To tag a resource after it has been created, see the tag resource operation.
-	Tags []Tag `locationName:"tags" type:"list"`
-}
-
-// String returns the string representation
-func (s CreateInstanceSnapshotInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateInstanceSnapshotInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateInstanceSnapshotInput"}
-
-	if s.InstanceName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("InstanceName"))
-	}
-
-	if s.InstanceSnapshotName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("InstanceSnapshotName"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type CreateInstanceSnapshotOutput struct {
-	_ struct{} `type:"structure"`
-
-	// An array of key-value pairs containing information about the results of your
-	// create instances snapshot request.
-	Operations []Operation `locationName:"operations" type:"list"`
-}
-
-// String returns the string representation
-func (s CreateInstanceSnapshotOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCreateInstanceSnapshot = "CreateInstanceSnapshot"
 
@@ -83,7 +28,7 @@ const opCreateInstanceSnapshot = "CreateInstanceSnapshot"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/CreateInstanceSnapshot
-func (c *Client) CreateInstanceSnapshotRequest(input *CreateInstanceSnapshotInput) CreateInstanceSnapshotRequest {
+func (c *Client) CreateInstanceSnapshotRequest(input *types.CreateInstanceSnapshotInput) CreateInstanceSnapshotRequest {
 	op := &aws.Operation{
 		Name:       opCreateInstanceSnapshot,
 		HTTPMethod: "POST",
@@ -91,10 +36,10 @@ func (c *Client) CreateInstanceSnapshotRequest(input *CreateInstanceSnapshotInpu
 	}
 
 	if input == nil {
-		input = &CreateInstanceSnapshotInput{}
+		input = &types.CreateInstanceSnapshotInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateInstanceSnapshotOutput{})
+	req := c.newRequest(op, input, &types.CreateInstanceSnapshotOutput{})
 	return CreateInstanceSnapshotRequest{Request: req, Input: input, Copy: c.CreateInstanceSnapshotRequest}
 }
 
@@ -102,8 +47,8 @@ func (c *Client) CreateInstanceSnapshotRequest(input *CreateInstanceSnapshotInpu
 // CreateInstanceSnapshot API operation.
 type CreateInstanceSnapshotRequest struct {
 	*aws.Request
-	Input *CreateInstanceSnapshotInput
-	Copy  func(*CreateInstanceSnapshotInput) CreateInstanceSnapshotRequest
+	Input *types.CreateInstanceSnapshotInput
+	Copy  func(*types.CreateInstanceSnapshotInput) CreateInstanceSnapshotRequest
 }
 
 // Send marshals and sends the CreateInstanceSnapshot API request.
@@ -115,7 +60,7 @@ func (r CreateInstanceSnapshotRequest) Send(ctx context.Context) (*CreateInstanc
 	}
 
 	resp := &CreateInstanceSnapshotResponse{
-		CreateInstanceSnapshotOutput: r.Request.Data.(*CreateInstanceSnapshotOutput),
+		CreateInstanceSnapshotOutput: r.Request.Data.(*types.CreateInstanceSnapshotOutput),
 		response:                     &aws.Response{Request: r.Request},
 	}
 
@@ -125,7 +70,7 @@ func (r CreateInstanceSnapshotRequest) Send(ctx context.Context) (*CreateInstanc
 // CreateInstanceSnapshotResponse is the response type for the
 // CreateInstanceSnapshot API operation.
 type CreateInstanceSnapshotResponse struct {
-	*CreateInstanceSnapshotOutput
+	*types.CreateInstanceSnapshotOutput
 
 	response *aws.Response
 }

@@ -6,103 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/codecommit/types"
 )
-
-type GetMergeOptionsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The level of conflict detail to use. If unspecified, the default FILE_LEVEL
-	// is used, which will return a not mergeable result if the same file has differences
-	// in both branches. If LINE_LEVEL is specified, a conflict will be considered
-	// not mergeable if the same file in both branches has differences on the same
-	// line.
-	ConflictDetailLevel ConflictDetailLevelTypeEnum `locationName:"conflictDetailLevel" type:"string" enum:"true"`
-
-	// Specifies which branch to use when resolving conflicts, or whether to attempt
-	// automatically merging two versions of a file. The default is NONE, which
-	// requires any conflicts to be resolved manually before the merge operation
-	// will be successful.
-	ConflictResolutionStrategy ConflictResolutionStrategyTypeEnum `locationName:"conflictResolutionStrategy" type:"string" enum:"true"`
-
-	// The branch, tag, HEAD, or other fully qualified reference used to identify
-	// a commit. For example, a branch name or a full commit ID.
-	//
-	// DestinationCommitSpecifier is a required field
-	DestinationCommitSpecifier *string `locationName:"destinationCommitSpecifier" type:"string" required:"true"`
-
-	// The name of the repository that contains the commits about which you want
-	// to get merge options.
-	//
-	// RepositoryName is a required field
-	RepositoryName *string `locationName:"repositoryName" min:"1" type:"string" required:"true"`
-
-	// The branch, tag, HEAD, or other fully qualified reference used to identify
-	// a commit. For example, a branch name or a full commit ID.
-	//
-	// SourceCommitSpecifier is a required field
-	SourceCommitSpecifier *string `locationName:"sourceCommitSpecifier" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetMergeOptionsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetMergeOptionsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetMergeOptionsInput"}
-
-	if s.DestinationCommitSpecifier == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DestinationCommitSpecifier"))
-	}
-
-	if s.RepositoryName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("RepositoryName"))
-	}
-	if s.RepositoryName != nil && len(*s.RepositoryName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("RepositoryName", 1))
-	}
-
-	if s.SourceCommitSpecifier == nil {
-		invalidParams.Add(aws.NewErrParamRequired("SourceCommitSpecifier"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type GetMergeOptionsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The commit ID of the merge base.
-	//
-	// BaseCommitId is a required field
-	BaseCommitId *string `locationName:"baseCommitId" type:"string" required:"true"`
-
-	// The commit ID of the destination commit specifier that was used in the merge
-	// evaluation.
-	//
-	// DestinationCommitId is a required field
-	DestinationCommitId *string `locationName:"destinationCommitId" type:"string" required:"true"`
-
-	// The merge option or strategy used to merge the code.
-	//
-	// MergeOptions is a required field
-	MergeOptions []MergeOptionTypeEnum `locationName:"mergeOptions" type:"list" required:"true"`
-
-	// The commit ID of the source commit specifier that was used in the merge evaluation.
-	//
-	// SourceCommitId is a required field
-	SourceCommitId *string `locationName:"sourceCommitId" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetMergeOptionsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetMergeOptions = "GetMergeOptions"
 
@@ -110,8 +15,8 @@ const opGetMergeOptions = "GetMergeOptions"
 // AWS CodeCommit.
 //
 // Returns information about the merge options available for merging two specified
-// branches. For details about why a particular merge option is not available,
-// use GetMergeConflicts or DescribeMergeConflicts.
+// branches. For details about why a merge option is not available, use GetMergeConflicts
+// or DescribeMergeConflicts.
 //
 //    // Example sending a request using GetMergeOptionsRequest.
 //    req := client.GetMergeOptionsRequest(params)
@@ -121,7 +26,7 @@ const opGetMergeOptions = "GetMergeOptions"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/GetMergeOptions
-func (c *Client) GetMergeOptionsRequest(input *GetMergeOptionsInput) GetMergeOptionsRequest {
+func (c *Client) GetMergeOptionsRequest(input *types.GetMergeOptionsInput) GetMergeOptionsRequest {
 	op := &aws.Operation{
 		Name:       opGetMergeOptions,
 		HTTPMethod: "POST",
@@ -129,10 +34,10 @@ func (c *Client) GetMergeOptionsRequest(input *GetMergeOptionsInput) GetMergeOpt
 	}
 
 	if input == nil {
-		input = &GetMergeOptionsInput{}
+		input = &types.GetMergeOptionsInput{}
 	}
 
-	req := c.newRequest(op, input, &GetMergeOptionsOutput{})
+	req := c.newRequest(op, input, &types.GetMergeOptionsOutput{})
 	return GetMergeOptionsRequest{Request: req, Input: input, Copy: c.GetMergeOptionsRequest}
 }
 
@@ -140,8 +45,8 @@ func (c *Client) GetMergeOptionsRequest(input *GetMergeOptionsInput) GetMergeOpt
 // GetMergeOptions API operation.
 type GetMergeOptionsRequest struct {
 	*aws.Request
-	Input *GetMergeOptionsInput
-	Copy  func(*GetMergeOptionsInput) GetMergeOptionsRequest
+	Input *types.GetMergeOptionsInput
+	Copy  func(*types.GetMergeOptionsInput) GetMergeOptionsRequest
 }
 
 // Send marshals and sends the GetMergeOptions API request.
@@ -153,7 +58,7 @@ func (r GetMergeOptionsRequest) Send(ctx context.Context) (*GetMergeOptionsRespo
 	}
 
 	resp := &GetMergeOptionsResponse{
-		GetMergeOptionsOutput: r.Request.Data.(*GetMergeOptionsOutput),
+		GetMergeOptionsOutput: r.Request.Data.(*types.GetMergeOptionsOutput),
 		response:              &aws.Response{Request: r.Request},
 	}
 
@@ -163,7 +68,7 @@ func (r GetMergeOptionsRequest) Send(ctx context.Context) (*GetMergeOptionsRespo
 // GetMergeOptionsResponse is the response type for the
 // GetMergeOptions API operation.
 type GetMergeOptionsResponse struct {
-	*GetMergeOptionsOutput
+	*types.GetMergeOptionsOutput
 
 	response *aws.Response
 }

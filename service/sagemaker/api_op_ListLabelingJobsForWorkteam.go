@@ -4,90 +4,10 @@ package sagemaker
 
 import (
 	"context"
-	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
 )
-
-type ListLabelingJobsForWorkteamInput struct {
-	_ struct{} `type:"structure"`
-
-	// A filter that returns only labeling jobs created after the specified time
-	// (timestamp).
-	CreationTimeAfter *time.Time `type:"timestamp"`
-
-	// A filter that returns only labeling jobs created before the specified time
-	// (timestamp).
-	CreationTimeBefore *time.Time `type:"timestamp"`
-
-	// A filter the limits jobs to only the ones whose job reference code contains
-	// the specified string.
-	JobReferenceCodeContains *string `min:"1" type:"string"`
-
-	// The maximum number of labeling jobs to return in each page of the response.
-	MaxResults *int64 `min:"1" type:"integer"`
-
-	// If the result of the previous ListLabelingJobsForWorkteam request was truncated,
-	// the response includes a NextToken. To retrieve the next set of labeling jobs,
-	// use the token in the next request.
-	NextToken *string `type:"string"`
-
-	// The field to sort results by. The default is CreationTime.
-	SortBy ListLabelingJobsForWorkteamSortByOptions `type:"string" enum:"true"`
-
-	// The sort order for results. The default is Ascending.
-	SortOrder SortOrder `type:"string" enum:"true"`
-
-	// The Amazon Resource Name (ARN) of the work team for which you want to see
-	// labeling jobs for.
-	//
-	// WorkteamArn is a required field
-	WorkteamArn *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s ListLabelingJobsForWorkteamInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListLabelingJobsForWorkteamInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListLabelingJobsForWorkteamInput"}
-	if s.JobReferenceCodeContains != nil && len(*s.JobReferenceCodeContains) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("JobReferenceCodeContains", 1))
-	}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-
-	if s.WorkteamArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("WorkteamArn"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ListLabelingJobsForWorkteamOutput struct {
-	_ struct{} `type:"structure"`
-
-	// An array of LabelingJobSummary objects, each describing a labeling job.
-	//
-	// LabelingJobSummaryList is a required field
-	LabelingJobSummaryList []LabelingJobForWorkteamSummary `type:"list" required:"true"`
-
-	// If the response is truncated, Amazon SageMaker returns this token. To retrieve
-	// the next set of labeling jobs, use it in the subsequent request.
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s ListLabelingJobsForWorkteamOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListLabelingJobsForWorkteam = "ListLabelingJobsForWorkteam"
 
@@ -104,7 +24,7 @@ const opListLabelingJobsForWorkteam = "ListLabelingJobsForWorkteam"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListLabelingJobsForWorkteam
-func (c *Client) ListLabelingJobsForWorkteamRequest(input *ListLabelingJobsForWorkteamInput) ListLabelingJobsForWorkteamRequest {
+func (c *Client) ListLabelingJobsForWorkteamRequest(input *types.ListLabelingJobsForWorkteamInput) ListLabelingJobsForWorkteamRequest {
 	op := &aws.Operation{
 		Name:       opListLabelingJobsForWorkteam,
 		HTTPMethod: "POST",
@@ -118,10 +38,10 @@ func (c *Client) ListLabelingJobsForWorkteamRequest(input *ListLabelingJobsForWo
 	}
 
 	if input == nil {
-		input = &ListLabelingJobsForWorkteamInput{}
+		input = &types.ListLabelingJobsForWorkteamInput{}
 	}
 
-	req := c.newRequest(op, input, &ListLabelingJobsForWorkteamOutput{})
+	req := c.newRequest(op, input, &types.ListLabelingJobsForWorkteamOutput{})
 	return ListLabelingJobsForWorkteamRequest{Request: req, Input: input, Copy: c.ListLabelingJobsForWorkteamRequest}
 }
 
@@ -129,8 +49,8 @@ func (c *Client) ListLabelingJobsForWorkteamRequest(input *ListLabelingJobsForWo
 // ListLabelingJobsForWorkteam API operation.
 type ListLabelingJobsForWorkteamRequest struct {
 	*aws.Request
-	Input *ListLabelingJobsForWorkteamInput
-	Copy  func(*ListLabelingJobsForWorkteamInput) ListLabelingJobsForWorkteamRequest
+	Input *types.ListLabelingJobsForWorkteamInput
+	Copy  func(*types.ListLabelingJobsForWorkteamInput) ListLabelingJobsForWorkteamRequest
 }
 
 // Send marshals and sends the ListLabelingJobsForWorkteam API request.
@@ -142,7 +62,7 @@ func (r ListLabelingJobsForWorkteamRequest) Send(ctx context.Context) (*ListLabe
 	}
 
 	resp := &ListLabelingJobsForWorkteamResponse{
-		ListLabelingJobsForWorkteamOutput: r.Request.Data.(*ListLabelingJobsForWorkteamOutput),
+		ListLabelingJobsForWorkteamOutput: r.Request.Data.(*types.ListLabelingJobsForWorkteamOutput),
 		response:                          &aws.Response{Request: r.Request},
 	}
 
@@ -172,7 +92,7 @@ func NewListLabelingJobsForWorkteamPaginator(req ListLabelingJobsForWorkteamRequ
 	return ListLabelingJobsForWorkteamPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListLabelingJobsForWorkteamInput
+				var inCpy *types.ListLabelingJobsForWorkteamInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -192,14 +112,14 @@ type ListLabelingJobsForWorkteamPaginator struct {
 	aws.Pager
 }
 
-func (p *ListLabelingJobsForWorkteamPaginator) CurrentPage() *ListLabelingJobsForWorkteamOutput {
-	return p.Pager.CurrentPage().(*ListLabelingJobsForWorkteamOutput)
+func (p *ListLabelingJobsForWorkteamPaginator) CurrentPage() *types.ListLabelingJobsForWorkteamOutput {
+	return p.Pager.CurrentPage().(*types.ListLabelingJobsForWorkteamOutput)
 }
 
 // ListLabelingJobsForWorkteamResponse is the response type for the
 // ListLabelingJobsForWorkteam API operation.
 type ListLabelingJobsForWorkteamResponse struct {
-	*ListLabelingJobsForWorkteamOutput
+	*types.ListLabelingJobsForWorkteamOutput
 
 	response *aws.Response
 }

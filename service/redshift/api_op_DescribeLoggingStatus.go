@@ -4,69 +4,10 @@ package redshift
 
 import (
 	"context"
-	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/redshift/types"
 )
-
-type DescribeLoggingStatusInput struct {
-	_ struct{} `type:"structure"`
-
-	// The identifier of the cluster from which to get the logging status.
-	//
-	// Example: examplecluster
-	//
-	// ClusterIdentifier is a required field
-	ClusterIdentifier *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeLoggingStatusInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeLoggingStatusInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeLoggingStatusInput"}
-
-	if s.ClusterIdentifier == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ClusterIdentifier"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Describes the status of logging for a cluster.
-type DescribeLoggingStatusOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the S3 bucket where the log files are stored.
-	BucketName *string `type:"string"`
-
-	// The message indicating that logs failed to be delivered.
-	LastFailureMessage *string `type:"string"`
-
-	// The last time when logs failed to be delivered.
-	LastFailureTime *time.Time `type:"timestamp"`
-
-	// The last time that logs were delivered.
-	LastSuccessfulDeliveryTime *time.Time `type:"timestamp"`
-
-	// true if logging is on, false if logging is off.
-	LoggingEnabled *bool `type:"boolean"`
-
-	// The prefix applied to the log file names.
-	S3KeyPrefix *string `type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeLoggingStatusOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeLoggingStatus = "DescribeLoggingStatus"
 
@@ -84,7 +25,7 @@ const opDescribeLoggingStatus = "DescribeLoggingStatus"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeLoggingStatus
-func (c *Client) DescribeLoggingStatusRequest(input *DescribeLoggingStatusInput) DescribeLoggingStatusRequest {
+func (c *Client) DescribeLoggingStatusRequest(input *types.DescribeLoggingStatusInput) DescribeLoggingStatusRequest {
 	op := &aws.Operation{
 		Name:       opDescribeLoggingStatus,
 		HTTPMethod: "POST",
@@ -92,10 +33,10 @@ func (c *Client) DescribeLoggingStatusRequest(input *DescribeLoggingStatusInput)
 	}
 
 	if input == nil {
-		input = &DescribeLoggingStatusInput{}
+		input = &types.DescribeLoggingStatusInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeLoggingStatusOutput{})
+	req := c.newRequest(op, input, &types.DescribeLoggingStatusOutput{})
 	return DescribeLoggingStatusRequest{Request: req, Input: input, Copy: c.DescribeLoggingStatusRequest}
 }
 
@@ -103,8 +44,8 @@ func (c *Client) DescribeLoggingStatusRequest(input *DescribeLoggingStatusInput)
 // DescribeLoggingStatus API operation.
 type DescribeLoggingStatusRequest struct {
 	*aws.Request
-	Input *DescribeLoggingStatusInput
-	Copy  func(*DescribeLoggingStatusInput) DescribeLoggingStatusRequest
+	Input *types.DescribeLoggingStatusInput
+	Copy  func(*types.DescribeLoggingStatusInput) DescribeLoggingStatusRequest
 }
 
 // Send marshals and sends the DescribeLoggingStatus API request.
@@ -116,7 +57,7 @@ func (r DescribeLoggingStatusRequest) Send(ctx context.Context) (*DescribeLoggin
 	}
 
 	resp := &DescribeLoggingStatusResponse{
-		DescribeLoggingStatusOutput: r.Request.Data.(*DescribeLoggingStatusOutput),
+		DescribeLoggingStatusOutput: r.Request.Data.(*types.DescribeLoggingStatusOutput),
 		response:                    &aws.Response{Request: r.Request},
 	}
 
@@ -126,7 +67,7 @@ func (r DescribeLoggingStatusRequest) Send(ctx context.Context) (*DescribeLoggin
 // DescribeLoggingStatusResponse is the response type for the
 // DescribeLoggingStatus API operation.
 type DescribeLoggingStatusResponse struct {
-	*DescribeLoggingStatusOutput
+	*types.DescribeLoggingStatusOutput
 
 	response *aws.Response
 }

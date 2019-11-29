@@ -12,6 +12,8 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws/awserr"
 	"github.com/aws/aws-sdk-go-v2/aws/external"
 	"github.com/aws/aws-sdk-go-v2/service/dynamodb"
+	"github.com/aws/aws-sdk-go-v2/service/dynamodb/enums"
+	"github.com/aws/aws-sdk-go-v2/service/dynamodb/types"
 )
 
 var _ time.Duration
@@ -37,31 +39,31 @@ func ExampleClient_BatchGetItemRequest_shared00() {
 	}
 
 	svc := dynamodb.New(cfg)
-	input := &dynamodb.BatchGetItemInput{
-		RequestItems: map[string]dynamodb.KeysAndAttributes{
+	input := &types.BatchGetItemInput{
+		RequestItems: map[string]types.KeysAndAttributes{
 			"Music": {
-				Keys: []map[string]dynamodb.AttributeValue{
+				Keys: []map[string]types.AttributeValue{
 					{
-						"Artist": dynamodb.AttributeValue{
+						"Artist": types.AttributeValue{
 							S: aws.String("No One You Know"),
 						},
-						"SongTitle": dynamodb.AttributeValue{
+						"SongTitle": types.AttributeValue{
 							S: aws.String("Call Me Today"),
 						},
 					},
 					{
-						"Artist": dynamodb.AttributeValue{
+						"Artist": types.AttributeValue{
 							S: aws.String("Acme Band"),
 						},
-						"SongTitle": dynamodb.AttributeValue{
+						"SongTitle": types.AttributeValue{
 							S: aws.String("Happy Day"),
 						},
 					},
 					{
-						"Artist": dynamodb.AttributeValue{
+						"Artist": types.AttributeValue{
 							S: aws.String("No One You Know"),
 						},
-						"SongTitle": dynamodb.AttributeValue{
+						"SongTitle": types.AttributeValue{
 							S: aws.String("Scared of My Shadow"),
 						},
 					},
@@ -109,12 +111,12 @@ func ExampleClient_BatchWriteItemRequest_shared00() {
 	}
 
 	svc := dynamodb.New(cfg)
-	input := &dynamodb.BatchWriteItemInput{
-		RequestItems: map[string][]dynamodb.WriteRequest{
+	input := &types.BatchWriteItemInput{
+		RequestItems: map[string][]types.WriteRequest{
 			"Music": {
 				{
-					PutRequest: &dynamodb.PutRequest{
-						Item: map[string]dynamodb.AttributeValue{
+					PutRequest: &types.PutRequest{
+						Item: map[string]types.AttributeValue{
 							"AlbumTitle": {
 								S: aws.String("Somewhat Famous"),
 							},
@@ -128,8 +130,8 @@ func ExampleClient_BatchWriteItemRequest_shared00() {
 					},
 				},
 				{
-					PutRequest: &dynamodb.PutRequest{
-						Item: map[string]dynamodb.AttributeValue{
+					PutRequest: &types.PutRequest{
+						Item: map[string]types.AttributeValue{
 							"AlbumTitle": {
 								S: aws.String("Songs About Life"),
 							},
@@ -143,8 +145,8 @@ func ExampleClient_BatchWriteItemRequest_shared00() {
 					},
 				},
 				{
-					PutRequest: &dynamodb.PutRequest{
-						Item: map[string]dynamodb.AttributeValue{
+					PutRequest: &types.PutRequest{
+						Item: map[string]types.AttributeValue{
 							"AlbumTitle": {
 								S: aws.String("Blue Sky Blues"),
 							},
@@ -200,28 +202,28 @@ func ExampleClient_CreateTableRequest_shared00() {
 	}
 
 	svc := dynamodb.New(cfg)
-	input := &dynamodb.CreateTableInput{
-		AttributeDefinitions: []dynamodb.AttributeDefinition{
+	input := &types.CreateTableInput{
+		AttributeDefinitions: []types.AttributeDefinition{
 			{
 				AttributeName: aws.String("Artist"),
-				AttributeType: dynamodb.ScalarAttributeTypeS,
+				AttributeType: enums.ScalarAttributeTypeS,
 			},
 			{
 				AttributeName: aws.String("SongTitle"),
-				AttributeType: dynamodb.ScalarAttributeTypeS,
+				AttributeType: enums.ScalarAttributeTypeS,
 			},
 		},
-		KeySchema: []dynamodb.KeySchemaElement{
+		KeySchema: []types.KeySchemaElement{
 			{
 				AttributeName: aws.String("Artist"),
-				KeyType:       dynamodb.KeyTypeHash,
+				KeyType:       enums.KeyTypeHash,
 			},
 			{
 				AttributeName: aws.String("SongTitle"),
-				KeyType:       dynamodb.KeyTypeRange,
+				KeyType:       enums.KeyTypeRange,
 			},
 		},
-		ProvisionedThroughput: &dynamodb.ProvisionedThroughput{
+		ProvisionedThroughput: &types.ProvisionedThroughput{
 			ReadCapacityUnits:  aws.Int64(5),
 			WriteCapacityUnits: aws.Int64(5),
 		},
@@ -263,8 +265,8 @@ func ExampleClient_DeleteItemRequest_shared00() {
 	}
 
 	svc := dynamodb.New(cfg)
-	input := &dynamodb.DeleteItemInput{
-		Key: map[string]dynamodb.AttributeValue{
+	input := &types.DeleteItemInput{
+		Key: map[string]types.AttributeValue{
 			"Artist": {
 				S: aws.String("No One You Know"),
 			},
@@ -318,7 +320,7 @@ func ExampleClient_DeleteTableRequest_shared00() {
 	}
 
 	svc := dynamodb.New(cfg)
-	input := &dynamodb.DeleteTableInput{
+	input := &types.DeleteTableInput{
 		TableName: aws.String("Music"),
 	}
 
@@ -360,7 +362,7 @@ func ExampleClient_DescribeLimitsRequest_shared00() {
 	}
 
 	svc := dynamodb.New(cfg)
-	input := &dynamodb.DescribeLimitsInput{}
+	input := &types.DescribeLimitsInput{}
 
 	req := svc.DescribeLimitsRequest(input)
 	result, err := req.Send(context.Background())
@@ -393,7 +395,7 @@ func ExampleClient_DescribeTableRequest_shared00() {
 	}
 
 	svc := dynamodb.New(cfg)
-	input := &dynamodb.DescribeTableInput{
+	input := &types.DescribeTableInput{
 		TableName: aws.String("Music"),
 	}
 
@@ -431,8 +433,8 @@ func ExampleClient_GetItemRequest_shared00() {
 	}
 
 	svc := dynamodb.New(cfg)
-	input := &dynamodb.GetItemInput{
-		Key: map[string]dynamodb.AttributeValue{
+	input := &types.GetItemInput{
+		Key: map[string]types.AttributeValue{
 			"Artist": {
 				S: aws.String("Acme Band"),
 			},
@@ -481,7 +483,7 @@ func ExampleClient_ListTablesRequest_shared00() {
 	}
 
 	svc := dynamodb.New(cfg)
-	input := &dynamodb.ListTablesInput{}
+	input := &types.ListTablesInput{}
 
 	req := svc.ListTablesRequest(input)
 	result, err := req.Send(context.Background())
@@ -514,8 +516,8 @@ func ExampleClient_PutItemRequest_shared00() {
 	}
 
 	svc := dynamodb.New(cfg)
-	input := &dynamodb.PutItemInput{
-		Item: map[string]dynamodb.AttributeValue{
+	input := &types.PutItemInput{
+		Item: map[string]types.AttributeValue{
 			"AlbumTitle": {
 				S: aws.String("Somewhat Famous"),
 			},
@@ -526,7 +528,7 @@ func ExampleClient_PutItemRequest_shared00() {
 				S: aws.String("Call Me Today"),
 			},
 		},
-		ReturnConsumedCapacity: dynamodb.ReturnConsumedCapacityTotal,
+		ReturnConsumedCapacity: enums.ReturnConsumedCapacityTotal,
 		TableName:              aws.String("Music"),
 	}
 
@@ -575,8 +577,8 @@ func ExampleClient_QueryRequest_shared00() {
 	}
 
 	svc := dynamodb.New(cfg)
-	input := &dynamodb.QueryInput{
-		ExpressionAttributeValues: map[string]dynamodb.AttributeValue{
+	input := &types.QueryInput{
+		ExpressionAttributeValues: map[string]types.AttributeValue{
 			":v1": {
 				S: aws.String("No One You Know"),
 			},
@@ -625,12 +627,12 @@ func ExampleClient_ScanRequest_shared00() {
 	}
 
 	svc := dynamodb.New(cfg)
-	input := &dynamodb.ScanInput{
+	input := &types.ScanInput{
 		ExpressionAttributeNames: map[string]string{
 			"#AT": "AlbumTitle",
 			"#ST": "SongTitle",
 		},
-		ExpressionAttributeValues: map[string]dynamodb.AttributeValue{
+		ExpressionAttributeValues: map[string]types.AttributeValue{
 			":a": {
 				S: aws.String("No One You Know"),
 			},
@@ -679,12 +681,12 @@ func ExampleClient_UpdateItemRequest_shared00() {
 	}
 
 	svc := dynamodb.New(cfg)
-	input := &dynamodb.UpdateItemInput{
+	input := &types.UpdateItemInput{
 		ExpressionAttributeNames: map[string]string{
 			"#AT": "AlbumTitle",
 			"#Y":  "Year",
 		},
-		ExpressionAttributeValues: map[string]dynamodb.AttributeValue{
+		ExpressionAttributeValues: map[string]types.AttributeValue{
 			":t": {
 				S: aws.String("Louder Than Ever"),
 			},
@@ -692,7 +694,7 @@ func ExampleClient_UpdateItemRequest_shared00() {
 				N: aws.String("2015"),
 			},
 		},
-		Key: map[string]dynamodb.AttributeValue{
+		Key: map[string]types.AttributeValue{
 			"Artist": {
 				S: aws.String("Acme Band"),
 			},
@@ -700,7 +702,7 @@ func ExampleClient_UpdateItemRequest_shared00() {
 				S: aws.String("Happy Day"),
 			},
 		},
-		ReturnValues:     dynamodb.ReturnValueAllNew,
+		ReturnValues:     enums.ReturnValueAllNew,
 		TableName:        aws.String("Music"),
 		UpdateExpression: aws.String("SET #Y = :y, #AT = :t"),
 	}
@@ -748,8 +750,8 @@ func ExampleClient_UpdateTableRequest_shared00() {
 	}
 
 	svc := dynamodb.New(cfg)
-	input := &dynamodb.UpdateTableInput{
-		ProvisionedThroughput: &dynamodb.ProvisionedThroughput{
+	input := &types.UpdateTableInput{
+		ProvisionedThroughput: &types.ProvisionedThroughput{
 			ReadCapacityUnits:  aws.Int64(10),
 			WriteCapacityUnits: aws.Int64(10),
 		},

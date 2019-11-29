@@ -6,78 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/iot/types"
 )
-
-type DeleteBillingGroupInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the billing group.
-	//
-	// BillingGroupName is a required field
-	BillingGroupName *string `location:"uri" locationName:"billingGroupName" min:"1" type:"string" required:"true"`
-
-	// The expected version of the billing group. If the version of the billing
-	// group does not match the expected version specified in the request, the DeleteBillingGroup
-	// request is rejected with a VersionConflictException.
-	ExpectedVersion *int64 `location:"querystring" locationName:"expectedVersion" type:"long"`
-}
-
-// String returns the string representation
-func (s DeleteBillingGroupInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteBillingGroupInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteBillingGroupInput"}
-
-	if s.BillingGroupName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("BillingGroupName"))
-	}
-	if s.BillingGroupName != nil && len(*s.BillingGroupName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("BillingGroupName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteBillingGroupInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.BillingGroupName != nil {
-		v := *s.BillingGroupName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "billingGroupName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.ExpectedVersion != nil {
-		v := *s.ExpectedVersion
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "expectedVersion", protocol.Int64Value(v), metadata)
-	}
-	return nil
-}
-
-type DeleteBillingGroupOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteBillingGroupOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteBillingGroupOutput) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
 
 const opDeleteBillingGroup = "DeleteBillingGroup"
 
@@ -92,7 +22,7 @@ const opDeleteBillingGroup = "DeleteBillingGroup"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) DeleteBillingGroupRequest(input *DeleteBillingGroupInput) DeleteBillingGroupRequest {
+func (c *Client) DeleteBillingGroupRequest(input *types.DeleteBillingGroupInput) DeleteBillingGroupRequest {
 	op := &aws.Operation{
 		Name:       opDeleteBillingGroup,
 		HTTPMethod: "DELETE",
@@ -100,10 +30,10 @@ func (c *Client) DeleteBillingGroupRequest(input *DeleteBillingGroupInput) Delet
 	}
 
 	if input == nil {
-		input = &DeleteBillingGroupInput{}
+		input = &types.DeleteBillingGroupInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteBillingGroupOutput{})
+	req := c.newRequest(op, input, &types.DeleteBillingGroupOutput{})
 	return DeleteBillingGroupRequest{Request: req, Input: input, Copy: c.DeleteBillingGroupRequest}
 }
 
@@ -111,8 +41,8 @@ func (c *Client) DeleteBillingGroupRequest(input *DeleteBillingGroupInput) Delet
 // DeleteBillingGroup API operation.
 type DeleteBillingGroupRequest struct {
 	*aws.Request
-	Input *DeleteBillingGroupInput
-	Copy  func(*DeleteBillingGroupInput) DeleteBillingGroupRequest
+	Input *types.DeleteBillingGroupInput
+	Copy  func(*types.DeleteBillingGroupInput) DeleteBillingGroupRequest
 }
 
 // Send marshals and sends the DeleteBillingGroup API request.
@@ -124,7 +54,7 @@ func (r DeleteBillingGroupRequest) Send(ctx context.Context) (*DeleteBillingGrou
 	}
 
 	resp := &DeleteBillingGroupResponse{
-		DeleteBillingGroupOutput: r.Request.Data.(*DeleteBillingGroupOutput),
+		DeleteBillingGroupOutput: r.Request.Data.(*types.DeleteBillingGroupOutput),
 		response:                 &aws.Response{Request: r.Request},
 	}
 
@@ -134,7 +64,7 @@ func (r DeleteBillingGroupRequest) Send(ctx context.Context) (*DeleteBillingGrou
 // DeleteBillingGroupResponse is the response type for the
 // DeleteBillingGroup API operation.
 type DeleteBillingGroupResponse struct {
-	*DeleteBillingGroupOutput
+	*types.DeleteBillingGroupOutput
 
 	response *aws.Response
 }

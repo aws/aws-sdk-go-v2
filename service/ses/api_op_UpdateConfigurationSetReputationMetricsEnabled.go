@@ -6,59 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/query"
+	"github.com/aws/aws-sdk-go-v2/service/ses/types"
 )
-
-// Represents a request to modify the reputation metric publishing settings
-// for a configuration set.
-type UpdateConfigurationSetReputationMetricsEnabledInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the configuration set that you want to update.
-	//
-	// ConfigurationSetName is a required field
-	ConfigurationSetName *string `type:"string" required:"true"`
-
-	// Describes whether or not Amazon SES will publish reputation metrics for the
-	// configuration set, such as bounce and complaint rates, to Amazon CloudWatch.
-	//
-	// Enabled is a required field
-	Enabled *bool `type:"boolean" required:"true"`
-}
-
-// String returns the string representation
-func (s UpdateConfigurationSetReputationMetricsEnabledInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateConfigurationSetReputationMetricsEnabledInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateConfigurationSetReputationMetricsEnabledInput"}
-
-	if s.ConfigurationSetName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ConfigurationSetName"))
-	}
-
-	if s.Enabled == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Enabled"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type UpdateConfigurationSetReputationMetricsEnabledOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s UpdateConfigurationSetReputationMetricsEnabledOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opUpdateConfigurationSetReputationMetricsEnabled = "UpdateConfigurationSetReputationMetricsEnabled"
 
@@ -81,7 +32,7 @@ const opUpdateConfigurationSetReputationMetricsEnabled = "UpdateConfigurationSet
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/UpdateConfigurationSetReputationMetricsEnabled
-func (c *Client) UpdateConfigurationSetReputationMetricsEnabledRequest(input *UpdateConfigurationSetReputationMetricsEnabledInput) UpdateConfigurationSetReputationMetricsEnabledRequest {
+func (c *Client) UpdateConfigurationSetReputationMetricsEnabledRequest(input *types.UpdateConfigurationSetReputationMetricsEnabledInput) UpdateConfigurationSetReputationMetricsEnabledRequest {
 	op := &aws.Operation{
 		Name:       opUpdateConfigurationSetReputationMetricsEnabled,
 		HTTPMethod: "POST",
@@ -89,10 +40,10 @@ func (c *Client) UpdateConfigurationSetReputationMetricsEnabledRequest(input *Up
 	}
 
 	if input == nil {
-		input = &UpdateConfigurationSetReputationMetricsEnabledInput{}
+		input = &types.UpdateConfigurationSetReputationMetricsEnabledInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateConfigurationSetReputationMetricsEnabledOutput{})
+	req := c.newRequest(op, input, &types.UpdateConfigurationSetReputationMetricsEnabledOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return UpdateConfigurationSetReputationMetricsEnabledRequest{Request: req, Input: input, Copy: c.UpdateConfigurationSetReputationMetricsEnabledRequest}
@@ -102,8 +53,8 @@ func (c *Client) UpdateConfigurationSetReputationMetricsEnabledRequest(input *Up
 // UpdateConfigurationSetReputationMetricsEnabled API operation.
 type UpdateConfigurationSetReputationMetricsEnabledRequest struct {
 	*aws.Request
-	Input *UpdateConfigurationSetReputationMetricsEnabledInput
-	Copy  func(*UpdateConfigurationSetReputationMetricsEnabledInput) UpdateConfigurationSetReputationMetricsEnabledRequest
+	Input *types.UpdateConfigurationSetReputationMetricsEnabledInput
+	Copy  func(*types.UpdateConfigurationSetReputationMetricsEnabledInput) UpdateConfigurationSetReputationMetricsEnabledRequest
 }
 
 // Send marshals and sends the UpdateConfigurationSetReputationMetricsEnabled API request.
@@ -115,7 +66,7 @@ func (r UpdateConfigurationSetReputationMetricsEnabledRequest) Send(ctx context.
 	}
 
 	resp := &UpdateConfigurationSetReputationMetricsEnabledResponse{
-		UpdateConfigurationSetReputationMetricsEnabledOutput: r.Request.Data.(*UpdateConfigurationSetReputationMetricsEnabledOutput),
+		UpdateConfigurationSetReputationMetricsEnabledOutput: r.Request.Data.(*types.UpdateConfigurationSetReputationMetricsEnabledOutput),
 		response: &aws.Response{Request: r.Request},
 	}
 
@@ -125,7 +76,7 @@ func (r UpdateConfigurationSetReputationMetricsEnabledRequest) Send(ctx context.
 // UpdateConfigurationSetReputationMetricsEnabledResponse is the response type for the
 // UpdateConfigurationSetReputationMetricsEnabled API operation.
 type UpdateConfigurationSetReputationMetricsEnabledResponse struct {
-	*UpdateConfigurationSetReputationMetricsEnabledOutput
+	*types.UpdateConfigurationSetReputationMetricsEnabledOutput
 
 	response *aws.Response
 }

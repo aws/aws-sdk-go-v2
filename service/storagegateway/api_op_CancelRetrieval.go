@@ -6,68 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/storagegateway/types"
 )
-
-// CancelRetrievalInput
-type CancelRetrievalInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation
-	// to return a list of gateways for your account and AWS Region.
-	//
-	// GatewayARN is a required field
-	GatewayARN *string `min:"50" type:"string" required:"true"`
-
-	// The Amazon Resource Name (ARN) of the virtual tape you want to cancel retrieval
-	// for.
-	//
-	// TapeARN is a required field
-	TapeARN *string `min:"50" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s CancelRetrievalInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CancelRetrievalInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CancelRetrievalInput"}
-
-	if s.GatewayARN == nil {
-		invalidParams.Add(aws.NewErrParamRequired("GatewayARN"))
-	}
-	if s.GatewayARN != nil && len(*s.GatewayARN) < 50 {
-		invalidParams.Add(aws.NewErrParamMinLen("GatewayARN", 50))
-	}
-
-	if s.TapeARN == nil {
-		invalidParams.Add(aws.NewErrParamRequired("TapeARN"))
-	}
-	if s.TapeARN != nil && len(*s.TapeARN) < 50 {
-		invalidParams.Add(aws.NewErrParamMinLen("TapeARN", 50))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// CancelRetrievalOutput
-type CancelRetrievalOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the virtual tape for which retrieval was
-	// canceled.
-	TapeARN *string `min:"50" type:"string"`
-}
-
-// String returns the string representation
-func (s CancelRetrievalOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCancelRetrieval = "CancelRetrieval"
 
@@ -86,7 +26,7 @@ const opCancelRetrieval = "CancelRetrieval"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/CancelRetrieval
-func (c *Client) CancelRetrievalRequest(input *CancelRetrievalInput) CancelRetrievalRequest {
+func (c *Client) CancelRetrievalRequest(input *types.CancelRetrievalInput) CancelRetrievalRequest {
 	op := &aws.Operation{
 		Name:       opCancelRetrieval,
 		HTTPMethod: "POST",
@@ -94,10 +34,10 @@ func (c *Client) CancelRetrievalRequest(input *CancelRetrievalInput) CancelRetri
 	}
 
 	if input == nil {
-		input = &CancelRetrievalInput{}
+		input = &types.CancelRetrievalInput{}
 	}
 
-	req := c.newRequest(op, input, &CancelRetrievalOutput{})
+	req := c.newRequest(op, input, &types.CancelRetrievalOutput{})
 	return CancelRetrievalRequest{Request: req, Input: input, Copy: c.CancelRetrievalRequest}
 }
 
@@ -105,8 +45,8 @@ func (c *Client) CancelRetrievalRequest(input *CancelRetrievalInput) CancelRetri
 // CancelRetrieval API operation.
 type CancelRetrievalRequest struct {
 	*aws.Request
-	Input *CancelRetrievalInput
-	Copy  func(*CancelRetrievalInput) CancelRetrievalRequest
+	Input *types.CancelRetrievalInput
+	Copy  func(*types.CancelRetrievalInput) CancelRetrievalRequest
 }
 
 // Send marshals and sends the CancelRetrieval API request.
@@ -118,7 +58,7 @@ func (r CancelRetrievalRequest) Send(ctx context.Context) (*CancelRetrievalRespo
 	}
 
 	resp := &CancelRetrievalResponse{
-		CancelRetrievalOutput: r.Request.Data.(*CancelRetrievalOutput),
+		CancelRetrievalOutput: r.Request.Data.(*types.CancelRetrievalOutput),
 		response:              &aws.Response{Request: r.Request},
 	}
 
@@ -128,7 +68,7 @@ func (r CancelRetrievalRequest) Send(ctx context.Context) (*CancelRetrievalRespo
 // CancelRetrievalResponse is the response type for the
 // CancelRetrieval API operation.
 type CancelRetrievalResponse struct {
-	*CancelRetrievalOutput
+	*types.CancelRetrievalOutput
 
 	response *aws.Response
 }

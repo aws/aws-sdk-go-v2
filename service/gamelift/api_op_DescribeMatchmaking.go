@@ -6,50 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/gamelift/types"
 )
-
-// Represents the input for a request action.
-type DescribeMatchmakingInput struct {
-	_ struct{} `type:"structure"`
-
-	// Unique identifier for a matchmaking ticket. You can include up to 10 ID values.
-	//
-	// TicketIds is a required field
-	TicketIds []string `type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeMatchmakingInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeMatchmakingInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeMatchmakingInput"}
-
-	if s.TicketIds == nil {
-		invalidParams.Add(aws.NewErrParamRequired("TicketIds"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Represents the returned data in response to a request action.
-type DescribeMatchmakingOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Collection of existing matchmaking ticket objects matching the request.
-	TicketList []MatchmakingTicket `type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeMatchmakingOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeMatchmaking = "DescribeMatchmaking"
 
@@ -95,7 +53,7 @@ const opDescribeMatchmaking = "DescribeMatchmaking"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DescribeMatchmaking
-func (c *Client) DescribeMatchmakingRequest(input *DescribeMatchmakingInput) DescribeMatchmakingRequest {
+func (c *Client) DescribeMatchmakingRequest(input *types.DescribeMatchmakingInput) DescribeMatchmakingRequest {
 	op := &aws.Operation{
 		Name:       opDescribeMatchmaking,
 		HTTPMethod: "POST",
@@ -103,10 +61,10 @@ func (c *Client) DescribeMatchmakingRequest(input *DescribeMatchmakingInput) Des
 	}
 
 	if input == nil {
-		input = &DescribeMatchmakingInput{}
+		input = &types.DescribeMatchmakingInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeMatchmakingOutput{})
+	req := c.newRequest(op, input, &types.DescribeMatchmakingOutput{})
 	return DescribeMatchmakingRequest{Request: req, Input: input, Copy: c.DescribeMatchmakingRequest}
 }
 
@@ -114,8 +72,8 @@ func (c *Client) DescribeMatchmakingRequest(input *DescribeMatchmakingInput) Des
 // DescribeMatchmaking API operation.
 type DescribeMatchmakingRequest struct {
 	*aws.Request
-	Input *DescribeMatchmakingInput
-	Copy  func(*DescribeMatchmakingInput) DescribeMatchmakingRequest
+	Input *types.DescribeMatchmakingInput
+	Copy  func(*types.DescribeMatchmakingInput) DescribeMatchmakingRequest
 }
 
 // Send marshals and sends the DescribeMatchmaking API request.
@@ -127,7 +85,7 @@ func (r DescribeMatchmakingRequest) Send(ctx context.Context) (*DescribeMatchmak
 	}
 
 	resp := &DescribeMatchmakingResponse{
-		DescribeMatchmakingOutput: r.Request.Data.(*DescribeMatchmakingOutput),
+		DescribeMatchmakingOutput: r.Request.Data.(*types.DescribeMatchmakingOutput),
 		response:                  &aws.Response{Request: r.Request},
 	}
 
@@ -137,7 +95,7 @@ func (r DescribeMatchmakingRequest) Send(ctx context.Context) (*DescribeMatchmak
 // DescribeMatchmakingResponse is the response type for the
 // DescribeMatchmaking API operation.
 type DescribeMatchmakingResponse struct {
-	*DescribeMatchmakingOutput
+	*types.DescribeMatchmakingOutput
 
 	response *aws.Response
 }

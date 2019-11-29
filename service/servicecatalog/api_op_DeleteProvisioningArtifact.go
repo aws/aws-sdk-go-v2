@@ -6,69 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/types"
 )
-
-type DeleteProvisioningArtifactInput struct {
-	_ struct{} `type:"structure"`
-
-	// The language code.
-	//
-	//    * en - English (default)
-	//
-	//    * jp - Japanese
-	//
-	//    * zh - Chinese
-	AcceptLanguage *string `type:"string"`
-
-	// The product identifier.
-	//
-	// ProductId is a required field
-	ProductId *string `min:"1" type:"string" required:"true"`
-
-	// The identifier of the provisioning artifact.
-	//
-	// ProvisioningArtifactId is a required field
-	ProvisioningArtifactId *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteProvisioningArtifactInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteProvisioningArtifactInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteProvisioningArtifactInput"}
-
-	if s.ProductId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ProductId"))
-	}
-	if s.ProductId != nil && len(*s.ProductId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ProductId", 1))
-	}
-
-	if s.ProvisioningArtifactId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ProvisioningArtifactId"))
-	}
-	if s.ProvisioningArtifactId != nil && len(*s.ProvisioningArtifactId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ProvisioningArtifactId", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteProvisioningArtifactOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteProvisioningArtifactOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteProvisioningArtifact = "DeleteProvisioningArtifact"
 
@@ -90,7 +29,7 @@ const opDeleteProvisioningArtifact = "DeleteProvisioningArtifact"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DeleteProvisioningArtifact
-func (c *Client) DeleteProvisioningArtifactRequest(input *DeleteProvisioningArtifactInput) DeleteProvisioningArtifactRequest {
+func (c *Client) DeleteProvisioningArtifactRequest(input *types.DeleteProvisioningArtifactInput) DeleteProvisioningArtifactRequest {
 	op := &aws.Operation{
 		Name:       opDeleteProvisioningArtifact,
 		HTTPMethod: "POST",
@@ -98,10 +37,10 @@ func (c *Client) DeleteProvisioningArtifactRequest(input *DeleteProvisioningArti
 	}
 
 	if input == nil {
-		input = &DeleteProvisioningArtifactInput{}
+		input = &types.DeleteProvisioningArtifactInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteProvisioningArtifactOutput{})
+	req := c.newRequest(op, input, &types.DeleteProvisioningArtifactOutput{})
 	return DeleteProvisioningArtifactRequest{Request: req, Input: input, Copy: c.DeleteProvisioningArtifactRequest}
 }
 
@@ -109,8 +48,8 @@ func (c *Client) DeleteProvisioningArtifactRequest(input *DeleteProvisioningArti
 // DeleteProvisioningArtifact API operation.
 type DeleteProvisioningArtifactRequest struct {
 	*aws.Request
-	Input *DeleteProvisioningArtifactInput
-	Copy  func(*DeleteProvisioningArtifactInput) DeleteProvisioningArtifactRequest
+	Input *types.DeleteProvisioningArtifactInput
+	Copy  func(*types.DeleteProvisioningArtifactInput) DeleteProvisioningArtifactRequest
 }
 
 // Send marshals and sends the DeleteProvisioningArtifact API request.
@@ -122,7 +61,7 @@ func (r DeleteProvisioningArtifactRequest) Send(ctx context.Context) (*DeletePro
 	}
 
 	resp := &DeleteProvisioningArtifactResponse{
-		DeleteProvisioningArtifactOutput: r.Request.Data.(*DeleteProvisioningArtifactOutput),
+		DeleteProvisioningArtifactOutput: r.Request.Data.(*types.DeleteProvisioningArtifactOutput),
 		response:                         &aws.Response{Request: r.Request},
 	}
 
@@ -132,7 +71,7 @@ func (r DeleteProvisioningArtifactRequest) Send(ctx context.Context) (*DeletePro
 // DeleteProvisioningArtifactResponse is the response type for the
 // DeleteProvisioningArtifact API operation.
 type DeleteProvisioningArtifactResponse struct {
-	*DeleteProvisioningArtifactOutput
+	*types.DeleteProvisioningArtifactOutput
 
 	response *aws.Response
 }

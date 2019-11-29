@@ -6,66 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ses/types"
 )
-
-// Represents a request to delete a sending authorization policy for an identity.
-// Sending authorization is an Amazon SES feature that enables you to authorize
-// other senders to use your identities. For information, see the Amazon SES
-// Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html).
-type DeleteIdentityPolicyInput struct {
-	_ struct{} `type:"structure"`
-
-	// The identity that is associated with the policy that you want to delete.
-	// You can specify the identity by using its name or by using its Amazon Resource
-	// Name (ARN). Examples: user@example.com, example.com, arn:aws:ses:us-east-1:123456789012:identity/example.com.
-	//
-	// To successfully call this API, you must own the identity.
-	//
-	// Identity is a required field
-	Identity *string `type:"string" required:"true"`
-
-	// The name of the policy to be deleted.
-	//
-	// PolicyName is a required field
-	PolicyName *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteIdentityPolicyInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteIdentityPolicyInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteIdentityPolicyInput"}
-
-	if s.Identity == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Identity"))
-	}
-
-	if s.PolicyName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("PolicyName"))
-	}
-	if s.PolicyName != nil && len(*s.PolicyName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("PolicyName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// An empty element returned on a successful request.
-type DeleteIdentityPolicyOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteIdentityPolicyOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteIdentityPolicy = "DeleteIdentityPolicy"
 
@@ -93,7 +35,7 @@ const opDeleteIdentityPolicy = "DeleteIdentityPolicy"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/DeleteIdentityPolicy
-func (c *Client) DeleteIdentityPolicyRequest(input *DeleteIdentityPolicyInput) DeleteIdentityPolicyRequest {
+func (c *Client) DeleteIdentityPolicyRequest(input *types.DeleteIdentityPolicyInput) DeleteIdentityPolicyRequest {
 	op := &aws.Operation{
 		Name:       opDeleteIdentityPolicy,
 		HTTPMethod: "POST",
@@ -101,10 +43,10 @@ func (c *Client) DeleteIdentityPolicyRequest(input *DeleteIdentityPolicyInput) D
 	}
 
 	if input == nil {
-		input = &DeleteIdentityPolicyInput{}
+		input = &types.DeleteIdentityPolicyInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteIdentityPolicyOutput{})
+	req := c.newRequest(op, input, &types.DeleteIdentityPolicyOutput{})
 	return DeleteIdentityPolicyRequest{Request: req, Input: input, Copy: c.DeleteIdentityPolicyRequest}
 }
 
@@ -112,8 +54,8 @@ func (c *Client) DeleteIdentityPolicyRequest(input *DeleteIdentityPolicyInput) D
 // DeleteIdentityPolicy API operation.
 type DeleteIdentityPolicyRequest struct {
 	*aws.Request
-	Input *DeleteIdentityPolicyInput
-	Copy  func(*DeleteIdentityPolicyInput) DeleteIdentityPolicyRequest
+	Input *types.DeleteIdentityPolicyInput
+	Copy  func(*types.DeleteIdentityPolicyInput) DeleteIdentityPolicyRequest
 }
 
 // Send marshals and sends the DeleteIdentityPolicy API request.
@@ -125,7 +67,7 @@ func (r DeleteIdentityPolicyRequest) Send(ctx context.Context) (*DeleteIdentityP
 	}
 
 	resp := &DeleteIdentityPolicyResponse{
-		DeleteIdentityPolicyOutput: r.Request.Data.(*DeleteIdentityPolicyOutput),
+		DeleteIdentityPolicyOutput: r.Request.Data.(*types.DeleteIdentityPolicyOutput),
 		response:                   &aws.Response{Request: r.Request},
 	}
 
@@ -135,7 +77,7 @@ func (r DeleteIdentityPolicyRequest) Send(ctx context.Context) (*DeleteIdentityP
 // DeleteIdentityPolicyResponse is the response type for the
 // DeleteIdentityPolicy API operation.
 type DeleteIdentityPolicyResponse struct {
-	*DeleteIdentityPolicyOutput
+	*types.DeleteIdentityPolicyOutput
 
 	response *aws.Response
 }

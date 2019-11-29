@@ -6,79 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/appsync/types"
 )
-
-type DeleteFunctionInput struct {
-	_ struct{} `type:"structure"`
-
-	// The GraphQL API ID.
-	//
-	// ApiId is a required field
-	ApiId *string `location:"uri" locationName:"apiId" type:"string" required:"true"`
-
-	// The Function ID.
-	//
-	// FunctionId is a required field
-	FunctionId *string `location:"uri" locationName:"functionId" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteFunctionInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteFunctionInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteFunctionInput"}
-
-	if s.ApiId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ApiId"))
-	}
-
-	if s.FunctionId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("FunctionId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteFunctionInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.ApiId != nil {
-		v := *s.ApiId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "apiId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.FunctionId != nil {
-		v := *s.FunctionId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "functionId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type DeleteFunctionOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteFunctionOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteFunctionOutput) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
 
 const opDeleteFunction = "DeleteFunction"
 
@@ -95,7 +24,7 @@ const opDeleteFunction = "DeleteFunction"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/DeleteFunction
-func (c *Client) DeleteFunctionRequest(input *DeleteFunctionInput) DeleteFunctionRequest {
+func (c *Client) DeleteFunctionRequest(input *types.DeleteFunctionInput) DeleteFunctionRequest {
 	op := &aws.Operation{
 		Name:       opDeleteFunction,
 		HTTPMethod: "DELETE",
@@ -103,10 +32,10 @@ func (c *Client) DeleteFunctionRequest(input *DeleteFunctionInput) DeleteFunctio
 	}
 
 	if input == nil {
-		input = &DeleteFunctionInput{}
+		input = &types.DeleteFunctionInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteFunctionOutput{})
+	req := c.newRequest(op, input, &types.DeleteFunctionOutput{})
 	return DeleteFunctionRequest{Request: req, Input: input, Copy: c.DeleteFunctionRequest}
 }
 
@@ -114,8 +43,8 @@ func (c *Client) DeleteFunctionRequest(input *DeleteFunctionInput) DeleteFunctio
 // DeleteFunction API operation.
 type DeleteFunctionRequest struct {
 	*aws.Request
-	Input *DeleteFunctionInput
-	Copy  func(*DeleteFunctionInput) DeleteFunctionRequest
+	Input *types.DeleteFunctionInput
+	Copy  func(*types.DeleteFunctionInput) DeleteFunctionRequest
 }
 
 // Send marshals and sends the DeleteFunction API request.
@@ -127,7 +56,7 @@ func (r DeleteFunctionRequest) Send(ctx context.Context) (*DeleteFunctionRespons
 	}
 
 	resp := &DeleteFunctionResponse{
-		DeleteFunctionOutput: r.Request.Data.(*DeleteFunctionOutput),
+		DeleteFunctionOutput: r.Request.Data.(*types.DeleteFunctionOutput),
 		response:             &aws.Response{Request: r.Request},
 	}
 
@@ -137,7 +66,7 @@ func (r DeleteFunctionRequest) Send(ctx context.Context) (*DeleteFunctionRespons
 // DeleteFunctionResponse is the response type for the
 // DeleteFunction API operation.
 type DeleteFunctionResponse struct {
-	*DeleteFunctionOutput
+	*types.DeleteFunctionOutput
 
 	response *aws.Response
 }

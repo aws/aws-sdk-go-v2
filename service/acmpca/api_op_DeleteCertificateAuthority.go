@@ -6,60 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
+	"github.com/aws/aws-sdk-go-v2/service/acmpca/types"
 )
-
-type DeleteCertificateAuthorityInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) that was returned when you called CreateCertificateAuthority.
-	// This must have the following form:
-	//
-	// arn:aws:acm-pca:region:account:certificate-authority/12345678-1234-1234-1234-123456789012 .
-	//
-	// CertificateAuthorityArn is a required field
-	CertificateAuthorityArn *string `min:"5" type:"string" required:"true"`
-
-	// The number of days to make a CA restorable after it has been deleted. This
-	// can be anywhere from 7 to 30 days, with 30 being the default.
-	PermanentDeletionTimeInDays *int64 `min:"7" type:"integer"`
-}
-
-// String returns the string representation
-func (s DeleteCertificateAuthorityInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteCertificateAuthorityInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteCertificateAuthorityInput"}
-
-	if s.CertificateAuthorityArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("CertificateAuthorityArn"))
-	}
-	if s.CertificateAuthorityArn != nil && len(*s.CertificateAuthorityArn) < 5 {
-		invalidParams.Add(aws.NewErrParamMinLen("CertificateAuthorityArn", 5))
-	}
-	if s.PermanentDeletionTimeInDays != nil && *s.PermanentDeletionTimeInDays < 7 {
-		invalidParams.Add(aws.NewErrParamMinValue("PermanentDeletionTimeInDays", 7))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteCertificateAuthorityOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteCertificateAuthorityOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteCertificateAuthority = "DeleteCertificateAuthority"
 
@@ -98,7 +48,7 @@ const opDeleteCertificateAuthority = "DeleteCertificateAuthority"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/acm-pca-2017-08-22/DeleteCertificateAuthority
-func (c *Client) DeleteCertificateAuthorityRequest(input *DeleteCertificateAuthorityInput) DeleteCertificateAuthorityRequest {
+func (c *Client) DeleteCertificateAuthorityRequest(input *types.DeleteCertificateAuthorityInput) DeleteCertificateAuthorityRequest {
 	op := &aws.Operation{
 		Name:       opDeleteCertificateAuthority,
 		HTTPMethod: "POST",
@@ -106,10 +56,10 @@ func (c *Client) DeleteCertificateAuthorityRequest(input *DeleteCertificateAutho
 	}
 
 	if input == nil {
-		input = &DeleteCertificateAuthorityInput{}
+		input = &types.DeleteCertificateAuthorityInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteCertificateAuthorityOutput{})
+	req := c.newRequest(op, input, &types.DeleteCertificateAuthorityOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return DeleteCertificateAuthorityRequest{Request: req, Input: input, Copy: c.DeleteCertificateAuthorityRequest}
@@ -119,8 +69,8 @@ func (c *Client) DeleteCertificateAuthorityRequest(input *DeleteCertificateAutho
 // DeleteCertificateAuthority API operation.
 type DeleteCertificateAuthorityRequest struct {
 	*aws.Request
-	Input *DeleteCertificateAuthorityInput
-	Copy  func(*DeleteCertificateAuthorityInput) DeleteCertificateAuthorityRequest
+	Input *types.DeleteCertificateAuthorityInput
+	Copy  func(*types.DeleteCertificateAuthorityInput) DeleteCertificateAuthorityRequest
 }
 
 // Send marshals and sends the DeleteCertificateAuthority API request.
@@ -132,7 +82,7 @@ func (r DeleteCertificateAuthorityRequest) Send(ctx context.Context) (*DeleteCer
 	}
 
 	resp := &DeleteCertificateAuthorityResponse{
-		DeleteCertificateAuthorityOutput: r.Request.Data.(*DeleteCertificateAuthorityOutput),
+		DeleteCertificateAuthorityOutput: r.Request.Data.(*types.DeleteCertificateAuthorityOutput),
 		response:                         &aws.Response{Request: r.Request},
 	}
 
@@ -142,7 +92,7 @@ func (r DeleteCertificateAuthorityRequest) Send(ctx context.Context) (*DeleteCer
 // DeleteCertificateAuthorityResponse is the response type for the
 // DeleteCertificateAuthority API operation.
 type DeleteCertificateAuthorityResponse struct {
-	*DeleteCertificateAuthorityOutput
+	*types.DeleteCertificateAuthorityOutput
 
 	response *aws.Response
 }

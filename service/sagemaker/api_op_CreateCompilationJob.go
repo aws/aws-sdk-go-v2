@@ -6,131 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
 )
-
-type CreateCompilationJobInput struct {
-	_ struct{} `type:"structure"`
-
-	// A name for the model compilation job. The name must be unique within the
-	// AWS Region and within your AWS account.
-	//
-	// CompilationJobName is a required field
-	CompilationJobName *string `min:"1" type:"string" required:"true"`
-
-	// Provides information about the location of input model artifacts, the name
-	// and shape of the expected data inputs, and the framework in which the model
-	// was trained.
-	//
-	// InputConfig is a required field
-	InputConfig *InputConfig `type:"structure" required:"true"`
-
-	// Provides information about the output location for the compiled model and
-	// the target device the model runs on.
-	//
-	// OutputConfig is a required field
-	OutputConfig *OutputConfig `type:"structure" required:"true"`
-
-	// The Amazon Resource Name (ARN) of an IAM role that enables Amazon SageMaker
-	// to perform tasks on your behalf.
-	//
-	// During model compilation, Amazon SageMaker needs your permission to:
-	//
-	//    * Read input data from an S3 bucket
-	//
-	//    * Write model artifacts to an S3 bucket
-	//
-	//    * Write logs to Amazon CloudWatch Logs
-	//
-	//    * Publish metrics to Amazon CloudWatch
-	//
-	// You grant permissions for all of these tasks to an IAM role. To pass this
-	// role to Amazon SageMaker, the caller of this API must have the iam:PassRole
-	// permission. For more information, see Amazon SageMaker Roles. (https://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-roles.html)
-	//
-	// RoleArn is a required field
-	RoleArn *string `min:"20" type:"string" required:"true"`
-
-	// Specifies a limit to how long a model compilation job can run. When the job
-	// reaches the time limit, Amazon SageMaker ends the compilation job. Use this
-	// API to cap model training costs.
-	//
-	// StoppingCondition is a required field
-	StoppingCondition *StoppingCondition `type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s CreateCompilationJobInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateCompilationJobInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateCompilationJobInput"}
-
-	if s.CompilationJobName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("CompilationJobName"))
-	}
-	if s.CompilationJobName != nil && len(*s.CompilationJobName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("CompilationJobName", 1))
-	}
-
-	if s.InputConfig == nil {
-		invalidParams.Add(aws.NewErrParamRequired("InputConfig"))
-	}
-
-	if s.OutputConfig == nil {
-		invalidParams.Add(aws.NewErrParamRequired("OutputConfig"))
-	}
-
-	if s.RoleArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("RoleArn"))
-	}
-	if s.RoleArn != nil && len(*s.RoleArn) < 20 {
-		invalidParams.Add(aws.NewErrParamMinLen("RoleArn", 20))
-	}
-
-	if s.StoppingCondition == nil {
-		invalidParams.Add(aws.NewErrParamRequired("StoppingCondition"))
-	}
-	if s.InputConfig != nil {
-		if err := s.InputConfig.Validate(); err != nil {
-			invalidParams.AddNested("InputConfig", err.(aws.ErrInvalidParams))
-		}
-	}
-	if s.OutputConfig != nil {
-		if err := s.OutputConfig.Validate(); err != nil {
-			invalidParams.AddNested("OutputConfig", err.(aws.ErrInvalidParams))
-		}
-	}
-	if s.StoppingCondition != nil {
-		if err := s.StoppingCondition.Validate(); err != nil {
-			invalidParams.AddNested("StoppingCondition", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type CreateCompilationJobOutput struct {
-	_ struct{} `type:"structure"`
-
-	// If the action is successful, the service sends back an HTTP 200 response.
-	// Amazon SageMaker returns the following data in JSON format:
-	//
-	//    * CompilationJobArn: The Amazon Resource Name (ARN) of the compiled job.
-	//
-	// CompilationJobArn is a required field
-	CompilationJobArn *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s CreateCompilationJobOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCreateCompilationJob = "CreateCompilationJob"
 
@@ -174,7 +51,7 @@ const opCreateCompilationJob = "CreateCompilationJob"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateCompilationJob
-func (c *Client) CreateCompilationJobRequest(input *CreateCompilationJobInput) CreateCompilationJobRequest {
+func (c *Client) CreateCompilationJobRequest(input *types.CreateCompilationJobInput) CreateCompilationJobRequest {
 	op := &aws.Operation{
 		Name:       opCreateCompilationJob,
 		HTTPMethod: "POST",
@@ -182,10 +59,10 @@ func (c *Client) CreateCompilationJobRequest(input *CreateCompilationJobInput) C
 	}
 
 	if input == nil {
-		input = &CreateCompilationJobInput{}
+		input = &types.CreateCompilationJobInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateCompilationJobOutput{})
+	req := c.newRequest(op, input, &types.CreateCompilationJobOutput{})
 	return CreateCompilationJobRequest{Request: req, Input: input, Copy: c.CreateCompilationJobRequest}
 }
 
@@ -193,8 +70,8 @@ func (c *Client) CreateCompilationJobRequest(input *CreateCompilationJobInput) C
 // CreateCompilationJob API operation.
 type CreateCompilationJobRequest struct {
 	*aws.Request
-	Input *CreateCompilationJobInput
-	Copy  func(*CreateCompilationJobInput) CreateCompilationJobRequest
+	Input *types.CreateCompilationJobInput
+	Copy  func(*types.CreateCompilationJobInput) CreateCompilationJobRequest
 }
 
 // Send marshals and sends the CreateCompilationJob API request.
@@ -206,7 +83,7 @@ func (r CreateCompilationJobRequest) Send(ctx context.Context) (*CreateCompilati
 	}
 
 	resp := &CreateCompilationJobResponse{
-		CreateCompilationJobOutput: r.Request.Data.(*CreateCompilationJobOutput),
+		CreateCompilationJobOutput: r.Request.Data.(*types.CreateCompilationJobOutput),
 		response:                   &aws.Response{Request: r.Request},
 	}
 
@@ -216,7 +93,7 @@ func (r CreateCompilationJobRequest) Send(ctx context.Context) (*CreateCompilati
 // CreateCompilationJobResponse is the response type for the
 // CreateCompilationJob API operation.
 type CreateCompilationJobResponse struct {
-	*CreateCompilationJobOutput
+	*types.CreateCompilationJobOutput
 
 	response *aws.Response
 }

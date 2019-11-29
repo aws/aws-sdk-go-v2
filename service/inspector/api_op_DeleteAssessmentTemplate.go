@@ -6,50 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
+	"github.com/aws/aws-sdk-go-v2/service/inspector/types"
 )
-
-type DeleteAssessmentTemplateInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ARN that specifies the assessment template that you want to delete.
-	//
-	// AssessmentTemplateArn is a required field
-	AssessmentTemplateArn *string `locationName:"assessmentTemplateArn" min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteAssessmentTemplateInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteAssessmentTemplateInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteAssessmentTemplateInput"}
-
-	if s.AssessmentTemplateArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("AssessmentTemplateArn"))
-	}
-	if s.AssessmentTemplateArn != nil && len(*s.AssessmentTemplateArn) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("AssessmentTemplateArn", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteAssessmentTemplateOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteAssessmentTemplateOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteAssessmentTemplate = "DeleteAssessmentTemplate"
 
@@ -67,7 +27,7 @@ const opDeleteAssessmentTemplate = "DeleteAssessmentTemplate"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/DeleteAssessmentTemplate
-func (c *Client) DeleteAssessmentTemplateRequest(input *DeleteAssessmentTemplateInput) DeleteAssessmentTemplateRequest {
+func (c *Client) DeleteAssessmentTemplateRequest(input *types.DeleteAssessmentTemplateInput) DeleteAssessmentTemplateRequest {
 	op := &aws.Operation{
 		Name:       opDeleteAssessmentTemplate,
 		HTTPMethod: "POST",
@@ -75,10 +35,10 @@ func (c *Client) DeleteAssessmentTemplateRequest(input *DeleteAssessmentTemplate
 	}
 
 	if input == nil {
-		input = &DeleteAssessmentTemplateInput{}
+		input = &types.DeleteAssessmentTemplateInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteAssessmentTemplateOutput{})
+	req := c.newRequest(op, input, &types.DeleteAssessmentTemplateOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return DeleteAssessmentTemplateRequest{Request: req, Input: input, Copy: c.DeleteAssessmentTemplateRequest}
@@ -88,8 +48,8 @@ func (c *Client) DeleteAssessmentTemplateRequest(input *DeleteAssessmentTemplate
 // DeleteAssessmentTemplate API operation.
 type DeleteAssessmentTemplateRequest struct {
 	*aws.Request
-	Input *DeleteAssessmentTemplateInput
-	Copy  func(*DeleteAssessmentTemplateInput) DeleteAssessmentTemplateRequest
+	Input *types.DeleteAssessmentTemplateInput
+	Copy  func(*types.DeleteAssessmentTemplateInput) DeleteAssessmentTemplateRequest
 }
 
 // Send marshals and sends the DeleteAssessmentTemplate API request.
@@ -101,7 +61,7 @@ func (r DeleteAssessmentTemplateRequest) Send(ctx context.Context) (*DeleteAsses
 	}
 
 	resp := &DeleteAssessmentTemplateResponse{
-		DeleteAssessmentTemplateOutput: r.Request.Data.(*DeleteAssessmentTemplateOutput),
+		DeleteAssessmentTemplateOutput: r.Request.Data.(*types.DeleteAssessmentTemplateOutput),
 		response:                       &aws.Response{Request: r.Request},
 	}
 
@@ -111,7 +71,7 @@ func (r DeleteAssessmentTemplateRequest) Send(ctx context.Context) (*DeleteAsses
 // DeleteAssessmentTemplateResponse is the response type for the
 // DeleteAssessmentTemplate API operation.
 type DeleteAssessmentTemplateResponse struct {
-	*DeleteAssessmentTemplateOutput
+	*types.DeleteAssessmentTemplateOutput
 
 	response *aws.Response
 }

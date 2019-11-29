@@ -10,6 +10,7 @@ package mediastoredataiface
 
 import (
 	"github.com/aws/aws-sdk-go-v2/service/mediastoredata"
+	"github.com/aws/aws-sdk-go-v2/service/mediastoredata/types"
 )
 
 // ClientAPI provides an interface to enable mocking the
@@ -43,7 +44,7 @@ import (
 //    type mockClientClient struct {
 //        mediastoredataiface.ClientPI
 //    }
-//    func (m *mockClientClient) DeleteObject(input *mediastoredata.DeleteObjectInput) (*mediastoredata.DeleteObjectOutput, error) {
+//    func (m *mockClientClient) DeleteObject(input *types.DeleteObjectInput) (*types.DeleteObjectOutput, error) {
 //        // mock response/functionality
 //    }
 //
@@ -61,15 +62,15 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type ClientAPI interface {
-	DeleteObjectRequest(*mediastoredata.DeleteObjectInput) mediastoredata.DeleteObjectRequest
+	DeleteObjectRequest(*types.DeleteObjectInput) mediastoredata.DeleteObjectRequest
 
-	DescribeObjectRequest(*mediastoredata.DescribeObjectInput) mediastoredata.DescribeObjectRequest
+	DescribeObjectRequest(*types.DescribeObjectInput) mediastoredata.DescribeObjectRequest
 
-	GetObjectRequest(*mediastoredata.GetObjectInput) mediastoredata.GetObjectRequest
+	GetObjectRequest(*types.GetObjectInput) mediastoredata.GetObjectRequest
 
-	ListItemsRequest(*mediastoredata.ListItemsInput) mediastoredata.ListItemsRequest
+	ListItemsRequest(*types.ListItemsInput) mediastoredata.ListItemsRequest
 
-	PutObjectRequest(*mediastoredata.PutObjectInput) mediastoredata.PutObjectRequest
+	PutObjectRequest(*types.PutObjectInput) mediastoredata.PutObjectRequest
 }
 
 var _ ClientAPI = (*mediastoredata.Client)(nil)

@@ -13,6 +13,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws/awserr"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting/integration"
 	"github.com/aws/aws-sdk-go-v2/service/ses"
+	"github.com/aws/aws-sdk-go-v2/service/ses/types"
 )
 
 var _ aws.Config
@@ -24,7 +25,7 @@ func TestInteg_00_ListIdentities(t *testing.T) {
 
 	cfg := integration.ConfigWithDefaultRegion("us-west-2")
 	svc := ses.New(cfg)
-	params := &ses.ListIdentitiesInput{}
+	params := &types.ListIdentitiesInput{}
 
 	req := svc.ListIdentitiesRequest(params)
 
@@ -39,7 +40,7 @@ func TestInteg_01_VerifyEmailIdentity(t *testing.T) {
 
 	cfg := integration.ConfigWithDefaultRegion("us-west-2")
 	svc := ses.New(cfg)
-	params := &ses.VerifyEmailIdentityInput{
+	params := &types.VerifyEmailIdentityInput{
 		EmailAddress: aws.String("fake_email"),
 	}
 

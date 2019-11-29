@@ -4,177 +4,10 @@ package qldb
 
 import (
 	"context"
-	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/qldb/types"
 )
-
-type ExportJournalToS3Input struct {
-	_ struct{} `type:"structure"`
-
-	// The exclusive end date and time for the range of journal contents that you
-	// want to export.
-	//
-	// The ExclusiveEndTime must be in ISO 8601 date and time format and in Universal
-	// Coordinated Time (UTC). For example: 2019-06-13T21:36:34Z
-	//
-	// The ExclusiveEndTime must be less than or equal to the current UTC date and
-	// time.
-	//
-	// ExclusiveEndTime is a required field
-	ExclusiveEndTime *time.Time `type:"timestamp" required:"true"`
-
-	// The inclusive start date and time for the range of journal contents that
-	// you want to export.
-	//
-	// The InclusiveStartTime must be in ISO 8601 date and time format and in Universal
-	// Coordinated Time (UTC). For example: 2019-06-13T21:36:34Z
-	//
-	// The InclusiveStartTime must be before ExclusiveEndTime.
-	//
-	// If you provide an InclusiveStartTime that is before the ledger's CreationDateTime,
-	// Amazon QLDB defaults it to the ledger's CreationDateTime.
-	//
-	// InclusiveStartTime is a required field
-	InclusiveStartTime *time.Time `type:"timestamp" required:"true"`
-
-	// The name of the ledger.
-	//
-	// Name is a required field
-	Name *string `location:"uri" locationName:"name" min:"1" type:"string" required:"true"`
-
-	// The Amazon Resource Name (ARN) of the IAM role that grants QLDB permissions
-	// for a journal export job to do the following:
-	//
-	//    * Write objects into your Amazon Simple Storage Service (Amazon S3) bucket.
-	//
-	//    * (Optional) Use your customer master key (CMK) in AWS Key Management
-	//    Service (AWS KMS) for server-side encryption of your exported data.
-	//
-	// RoleArn is a required field
-	RoleArn *string `min:"20" type:"string" required:"true"`
-
-	// The configuration settings of the Amazon S3 bucket destination for your export
-	// request.
-	//
-	// S3ExportConfiguration is a required field
-	S3ExportConfiguration *S3ExportConfiguration `type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s ExportJournalToS3Input) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ExportJournalToS3Input) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ExportJournalToS3Input"}
-
-	if s.ExclusiveEndTime == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ExclusiveEndTime"))
-	}
-
-	if s.InclusiveStartTime == nil {
-		invalidParams.Add(aws.NewErrParamRequired("InclusiveStartTime"))
-	}
-
-	if s.Name == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Name"))
-	}
-	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
-	}
-
-	if s.RoleArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("RoleArn"))
-	}
-	if s.RoleArn != nil && len(*s.RoleArn) < 20 {
-		invalidParams.Add(aws.NewErrParamMinLen("RoleArn", 20))
-	}
-
-	if s.S3ExportConfiguration == nil {
-		invalidParams.Add(aws.NewErrParamRequired("S3ExportConfiguration"))
-	}
-	if s.S3ExportConfiguration != nil {
-		if err := s.S3ExportConfiguration.Validate(); err != nil {
-			invalidParams.AddNested("S3ExportConfiguration", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ExportJournalToS3Input) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.ExclusiveEndTime != nil {
-		v := *s.ExclusiveEndTime
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "ExclusiveEndTime",
-			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
-	}
-	if s.InclusiveStartTime != nil {
-		v := *s.InclusiveStartTime
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "InclusiveStartTime",
-			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
-	}
-	if s.RoleArn != nil {
-		v := *s.RoleArn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "RoleArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.S3ExportConfiguration != nil {
-		v := s.S3ExportConfiguration
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "S3ExportConfiguration", v, metadata)
-	}
-	if s.Name != nil {
-		v := *s.Name
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type ExportJournalToS3Output struct {
-	_ struct{} `type:"structure"`
-
-	// The unique ID that QLDB assigns to each journal export job.
-	//
-	// To describe your export request and check the status of the job, you can
-	// use ExportId to call DescribeJournalS3Export.
-	//
-	// ExportId is a required field
-	ExportId *string `min:"22" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s ExportJournalToS3Output) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ExportJournalToS3Output) MarshalFields(e protocol.FieldEncoder) error {
-	if s.ExportId != nil {
-		v := *s.ExportId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "ExportId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opExportJournalToS3 = "ExportJournalToS3"
 
@@ -200,7 +33,7 @@ const opExportJournalToS3 = "ExportJournalToS3"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/qldb-2019-01-02/ExportJournalToS3
-func (c *Client) ExportJournalToS3Request(input *ExportJournalToS3Input) ExportJournalToS3Request {
+func (c *Client) ExportJournalToS3Request(input *types.ExportJournalToS3Input) ExportJournalToS3Request {
 	op := &aws.Operation{
 		Name:       opExportJournalToS3,
 		HTTPMethod: "POST",
@@ -208,10 +41,10 @@ func (c *Client) ExportJournalToS3Request(input *ExportJournalToS3Input) ExportJ
 	}
 
 	if input == nil {
-		input = &ExportJournalToS3Input{}
+		input = &types.ExportJournalToS3Input{}
 	}
 
-	req := c.newRequest(op, input, &ExportJournalToS3Output{})
+	req := c.newRequest(op, input, &types.ExportJournalToS3Output{})
 	return ExportJournalToS3Request{Request: req, Input: input, Copy: c.ExportJournalToS3Request}
 }
 
@@ -219,8 +52,8 @@ func (c *Client) ExportJournalToS3Request(input *ExportJournalToS3Input) ExportJ
 // ExportJournalToS3 API operation.
 type ExportJournalToS3Request struct {
 	*aws.Request
-	Input *ExportJournalToS3Input
-	Copy  func(*ExportJournalToS3Input) ExportJournalToS3Request
+	Input *types.ExportJournalToS3Input
+	Copy  func(*types.ExportJournalToS3Input) ExportJournalToS3Request
 }
 
 // Send marshals and sends the ExportJournalToS3 API request.
@@ -232,7 +65,7 @@ func (r ExportJournalToS3Request) Send(ctx context.Context) (*ExportJournalToS3R
 	}
 
 	resp := &ExportJournalToS3Response{
-		ExportJournalToS3Output: r.Request.Data.(*ExportJournalToS3Output),
+		ExportJournalToS3Output: r.Request.Data.(*types.ExportJournalToS3Output),
 		response:                &aws.Response{Request: r.Request},
 	}
 
@@ -242,7 +75,7 @@ func (r ExportJournalToS3Request) Send(ctx context.Context) (*ExportJournalToS3R
 // ExportJournalToS3Response is the response type for the
 // ExportJournalToS3 API operation.
 type ExportJournalToS3Response struct {
-	*ExportJournalToS3Output
+	*types.ExportJournalToS3Output
 
 	response *aws.Response
 }

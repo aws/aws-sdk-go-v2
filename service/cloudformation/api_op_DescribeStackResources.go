@@ -6,64 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/cloudformation/types"
 )
-
-// The input for DescribeStackResources action.
-type DescribeStackResourcesInput struct {
-	_ struct{} `type:"structure"`
-
-	// The logical name of the resource as specified in the template.
-	//
-	// Default: There is no default value.
-	LogicalResourceId *string `type:"string"`
-
-	// The name or unique identifier that corresponds to a physical instance ID
-	// of a resource supported by AWS CloudFormation.
-	//
-	// For example, for an Amazon Elastic Compute Cloud (EC2) instance, PhysicalResourceId
-	// corresponds to the InstanceId. You can pass the EC2 InstanceId to DescribeStackResources
-	// to find which stack the instance belongs to and what other resources are
-	// part of the stack.
-	//
-	// Required: Conditional. If you do not specify PhysicalResourceId, you must
-	// specify StackName.
-	//
-	// Default: There is no default value.
-	PhysicalResourceId *string `type:"string"`
-
-	// The name or the unique stack ID that is associated with the stack, which
-	// are not always interchangeable:
-	//
-	//    * Running stacks: You can specify either the stack's name or its unique
-	//    stack ID.
-	//
-	//    * Deleted stacks: You must specify the unique stack ID.
-	//
-	// Default: There is no default value.
-	//
-	// Required: Conditional. If you do not specify StackName, you must specify
-	// PhysicalResourceId.
-	StackName *string `type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeStackResourcesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// The output for a DescribeStackResources action.
-type DescribeStackResourcesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A list of StackResource structures.
-	StackResources []StackResource `type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeStackResourcesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeStackResources = "DescribeStackResources"
 
@@ -97,7 +41,7 @@ const opDescribeStackResources = "DescribeStackResources"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DescribeStackResources
-func (c *Client) DescribeStackResourcesRequest(input *DescribeStackResourcesInput) DescribeStackResourcesRequest {
+func (c *Client) DescribeStackResourcesRequest(input *types.DescribeStackResourcesInput) DescribeStackResourcesRequest {
 	op := &aws.Operation{
 		Name:       opDescribeStackResources,
 		HTTPMethod: "POST",
@@ -105,10 +49,10 @@ func (c *Client) DescribeStackResourcesRequest(input *DescribeStackResourcesInpu
 	}
 
 	if input == nil {
-		input = &DescribeStackResourcesInput{}
+		input = &types.DescribeStackResourcesInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeStackResourcesOutput{})
+	req := c.newRequest(op, input, &types.DescribeStackResourcesOutput{})
 	return DescribeStackResourcesRequest{Request: req, Input: input, Copy: c.DescribeStackResourcesRequest}
 }
 
@@ -116,8 +60,8 @@ func (c *Client) DescribeStackResourcesRequest(input *DescribeStackResourcesInpu
 // DescribeStackResources API operation.
 type DescribeStackResourcesRequest struct {
 	*aws.Request
-	Input *DescribeStackResourcesInput
-	Copy  func(*DescribeStackResourcesInput) DescribeStackResourcesRequest
+	Input *types.DescribeStackResourcesInput
+	Copy  func(*types.DescribeStackResourcesInput) DescribeStackResourcesRequest
 }
 
 // Send marshals and sends the DescribeStackResources API request.
@@ -129,7 +73,7 @@ func (r DescribeStackResourcesRequest) Send(ctx context.Context) (*DescribeStack
 	}
 
 	resp := &DescribeStackResourcesResponse{
-		DescribeStackResourcesOutput: r.Request.Data.(*DescribeStackResourcesOutput),
+		DescribeStackResourcesOutput: r.Request.Data.(*types.DescribeStackResourcesOutput),
 		response:                     &aws.Response{Request: r.Request},
 	}
 
@@ -139,7 +83,7 @@ func (r DescribeStackResourcesRequest) Send(ctx context.Context) (*DescribeStack
 // DescribeStackResourcesResponse is the response type for the
 // DescribeStackResources API operation.
 type DescribeStackResourcesResponse struct {
-	*DescribeStackResourcesOutput
+	*types.DescribeStackResourcesOutput
 
 	response *aws.Response
 }

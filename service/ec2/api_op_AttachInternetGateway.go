@@ -6,62 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/ec2query"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-type AttachInternetGatewayInput struct {
-	_ struct{} `type:"structure"`
-
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have
-	// the required permissions, the error response is DryRunOperation. Otherwise,
-	// it is UnauthorizedOperation.
-	DryRun *bool `locationName:"dryRun" type:"boolean"`
-
-	// The ID of the internet gateway.
-	//
-	// InternetGatewayId is a required field
-	InternetGatewayId *string `locationName:"internetGatewayId" type:"string" required:"true"`
-
-	// The ID of the VPC.
-	//
-	// VpcId is a required field
-	VpcId *string `locationName:"vpcId" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s AttachInternetGatewayInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *AttachInternetGatewayInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "AttachInternetGatewayInput"}
-
-	if s.InternetGatewayId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("InternetGatewayId"))
-	}
-
-	if s.VpcId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("VpcId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type AttachInternetGatewayOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s AttachInternetGatewayOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opAttachInternetGateway = "AttachInternetGateway"
 
@@ -80,7 +28,7 @@ const opAttachInternetGateway = "AttachInternetGateway"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AttachInternetGateway
-func (c *Client) AttachInternetGatewayRequest(input *AttachInternetGatewayInput) AttachInternetGatewayRequest {
+func (c *Client) AttachInternetGatewayRequest(input *types.AttachInternetGatewayInput) AttachInternetGatewayRequest {
 	op := &aws.Operation{
 		Name:       opAttachInternetGateway,
 		HTTPMethod: "POST",
@@ -88,10 +36,10 @@ func (c *Client) AttachInternetGatewayRequest(input *AttachInternetGatewayInput)
 	}
 
 	if input == nil {
-		input = &AttachInternetGatewayInput{}
+		input = &types.AttachInternetGatewayInput{}
 	}
 
-	req := c.newRequest(op, input, &AttachInternetGatewayOutput{})
+	req := c.newRequest(op, input, &types.AttachInternetGatewayOutput{})
 	req.Handlers.Unmarshal.Remove(ec2query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return AttachInternetGatewayRequest{Request: req, Input: input, Copy: c.AttachInternetGatewayRequest}
@@ -101,8 +49,8 @@ func (c *Client) AttachInternetGatewayRequest(input *AttachInternetGatewayInput)
 // AttachInternetGateway API operation.
 type AttachInternetGatewayRequest struct {
 	*aws.Request
-	Input *AttachInternetGatewayInput
-	Copy  func(*AttachInternetGatewayInput) AttachInternetGatewayRequest
+	Input *types.AttachInternetGatewayInput
+	Copy  func(*types.AttachInternetGatewayInput) AttachInternetGatewayRequest
 }
 
 // Send marshals and sends the AttachInternetGateway API request.
@@ -114,7 +62,7 @@ func (r AttachInternetGatewayRequest) Send(ctx context.Context) (*AttachInternet
 	}
 
 	resp := &AttachInternetGatewayResponse{
-		AttachInternetGatewayOutput: r.Request.Data.(*AttachInternetGatewayOutput),
+		AttachInternetGatewayOutput: r.Request.Data.(*types.AttachInternetGatewayOutput),
 		response:                    &aws.Response{Request: r.Request},
 	}
 
@@ -124,7 +72,7 @@ func (r AttachInternetGatewayRequest) Send(ctx context.Context) (*AttachInternet
 // AttachInternetGatewayResponse is the response type for the
 // AttachInternetGateway API operation.
 type AttachInternetGatewayResponse struct {
-	*AttachInternetGatewayOutput
+	*types.AttachInternetGatewayOutput
 
 	response *aws.Response
 }

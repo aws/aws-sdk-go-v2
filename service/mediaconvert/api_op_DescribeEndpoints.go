@@ -6,98 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/mediaconvert/types"
 )
-
-// Send an request with an empty body to the regional API endpoint to get your
-// account API endpoint.
-type DescribeEndpointsInput struct {
-	_ struct{} `type:"structure"`
-
-	// Optional. Max number of endpoints, up to twenty, that will be returned at
-	// one time.
-	MaxResults *int64 `locationName:"maxResults" type:"integer"`
-
-	// Optional field, defaults to DEFAULT. Specify DEFAULT for this operation to
-	// return your endpoints if any exist, or to create an endpoint for you and
-	// return it if one doesn't already exist. Specify GET_ONLY to return your endpoints
-	// if any exist, or an empty list if none exist.
-	Mode DescribeEndpointsMode `locationName:"mode" type:"string" enum:"true"`
-
-	// Use this string, provided with the response to a previous request, to request
-	// the next batch of endpoints.
-	NextToken *string `locationName:"nextToken" type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeEndpointsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DescribeEndpointsInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.MaxResults != nil {
-		v := *s.MaxResults
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "maxResults", protocol.Int64Value(v), metadata)
-	}
-	if len(s.Mode) > 0 {
-		v := s.Mode
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "mode", protocol.QuotedValue{ValueMarshaler: v}, metadata)
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-// Successful describe endpoints requests will return your account API endpoint.
-type DescribeEndpointsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// List of endpoints
-	Endpoints []Endpoint `locationName:"endpoints" type:"list"`
-
-	// Use this string to request the next batch of endpoints.
-	NextToken *string `locationName:"nextToken" type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeEndpointsOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DescribeEndpointsOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.Endpoints != nil {
-		v := s.Endpoints
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "endpoints", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opDescribeEndpoints = "DescribeEndpoints"
 
@@ -115,7 +25,7 @@ const opDescribeEndpoints = "DescribeEndpoints"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/DescribeEndpoints
-func (c *Client) DescribeEndpointsRequest(input *DescribeEndpointsInput) DescribeEndpointsRequest {
+func (c *Client) DescribeEndpointsRequest(input *types.DescribeEndpointsInput) DescribeEndpointsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeEndpoints,
 		HTTPMethod: "POST",
@@ -129,10 +39,10 @@ func (c *Client) DescribeEndpointsRequest(input *DescribeEndpointsInput) Describ
 	}
 
 	if input == nil {
-		input = &DescribeEndpointsInput{}
+		input = &types.DescribeEndpointsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeEndpointsOutput{})
+	req := c.newRequest(op, input, &types.DescribeEndpointsOutput{})
 	return DescribeEndpointsRequest{Request: req, Input: input, Copy: c.DescribeEndpointsRequest}
 }
 
@@ -140,8 +50,8 @@ func (c *Client) DescribeEndpointsRequest(input *DescribeEndpointsInput) Describ
 // DescribeEndpoints API operation.
 type DescribeEndpointsRequest struct {
 	*aws.Request
-	Input *DescribeEndpointsInput
-	Copy  func(*DescribeEndpointsInput) DescribeEndpointsRequest
+	Input *types.DescribeEndpointsInput
+	Copy  func(*types.DescribeEndpointsInput) DescribeEndpointsRequest
 }
 
 // Send marshals and sends the DescribeEndpoints API request.
@@ -153,7 +63,7 @@ func (r DescribeEndpointsRequest) Send(ctx context.Context) (*DescribeEndpointsR
 	}
 
 	resp := &DescribeEndpointsResponse{
-		DescribeEndpointsOutput: r.Request.Data.(*DescribeEndpointsOutput),
+		DescribeEndpointsOutput: r.Request.Data.(*types.DescribeEndpointsOutput),
 		response:                &aws.Response{Request: r.Request},
 	}
 
@@ -183,7 +93,7 @@ func NewDescribeEndpointsPaginator(req DescribeEndpointsRequest) DescribeEndpoin
 	return DescribeEndpointsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *DescribeEndpointsInput
+				var inCpy *types.DescribeEndpointsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -203,14 +113,14 @@ type DescribeEndpointsPaginator struct {
 	aws.Pager
 }
 
-func (p *DescribeEndpointsPaginator) CurrentPage() *DescribeEndpointsOutput {
-	return p.Pager.CurrentPage().(*DescribeEndpointsOutput)
+func (p *DescribeEndpointsPaginator) CurrentPage() *types.DescribeEndpointsOutput {
+	return p.Pager.CurrentPage().(*types.DescribeEndpointsOutput)
 }
 
 // DescribeEndpointsResponse is the response type for the
 // DescribeEndpoints API operation.
 type DescribeEndpointsResponse struct {
-	*DescribeEndpointsOutput
+	*types.DescribeEndpointsOutput
 
 	response *aws.Response
 }

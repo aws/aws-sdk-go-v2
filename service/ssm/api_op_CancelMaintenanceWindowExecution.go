@@ -6,51 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ssm/types"
 )
-
-type CancelMaintenanceWindowExecutionInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the maintenance window execution to stop.
-	//
-	// WindowExecutionId is a required field
-	WindowExecutionId *string `min:"36" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s CancelMaintenanceWindowExecutionInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CancelMaintenanceWindowExecutionInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CancelMaintenanceWindowExecutionInput"}
-
-	if s.WindowExecutionId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("WindowExecutionId"))
-	}
-	if s.WindowExecutionId != nil && len(*s.WindowExecutionId) < 36 {
-		invalidParams.Add(aws.NewErrParamMinLen("WindowExecutionId", 36))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type CancelMaintenanceWindowExecutionOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the maintenance window execution that has been stopped.
-	WindowExecutionId *string `min:"36" type:"string"`
-}
-
-// String returns the string representation
-func (s CancelMaintenanceWindowExecutionOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCancelMaintenanceWindowExecution = "CancelMaintenanceWindowExecution"
 
@@ -69,7 +26,7 @@ const opCancelMaintenanceWindowExecution = "CancelMaintenanceWindowExecution"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/CancelMaintenanceWindowExecution
-func (c *Client) CancelMaintenanceWindowExecutionRequest(input *CancelMaintenanceWindowExecutionInput) CancelMaintenanceWindowExecutionRequest {
+func (c *Client) CancelMaintenanceWindowExecutionRequest(input *types.CancelMaintenanceWindowExecutionInput) CancelMaintenanceWindowExecutionRequest {
 	op := &aws.Operation{
 		Name:       opCancelMaintenanceWindowExecution,
 		HTTPMethod: "POST",
@@ -77,10 +34,10 @@ func (c *Client) CancelMaintenanceWindowExecutionRequest(input *CancelMaintenanc
 	}
 
 	if input == nil {
-		input = &CancelMaintenanceWindowExecutionInput{}
+		input = &types.CancelMaintenanceWindowExecutionInput{}
 	}
 
-	req := c.newRequest(op, input, &CancelMaintenanceWindowExecutionOutput{})
+	req := c.newRequest(op, input, &types.CancelMaintenanceWindowExecutionOutput{})
 	return CancelMaintenanceWindowExecutionRequest{Request: req, Input: input, Copy: c.CancelMaintenanceWindowExecutionRequest}
 }
 
@@ -88,8 +45,8 @@ func (c *Client) CancelMaintenanceWindowExecutionRequest(input *CancelMaintenanc
 // CancelMaintenanceWindowExecution API operation.
 type CancelMaintenanceWindowExecutionRequest struct {
 	*aws.Request
-	Input *CancelMaintenanceWindowExecutionInput
-	Copy  func(*CancelMaintenanceWindowExecutionInput) CancelMaintenanceWindowExecutionRequest
+	Input *types.CancelMaintenanceWindowExecutionInput
+	Copy  func(*types.CancelMaintenanceWindowExecutionInput) CancelMaintenanceWindowExecutionRequest
 }
 
 // Send marshals and sends the CancelMaintenanceWindowExecution API request.
@@ -101,7 +58,7 @@ func (r CancelMaintenanceWindowExecutionRequest) Send(ctx context.Context) (*Can
 	}
 
 	resp := &CancelMaintenanceWindowExecutionResponse{
-		CancelMaintenanceWindowExecutionOutput: r.Request.Data.(*CancelMaintenanceWindowExecutionOutput),
+		CancelMaintenanceWindowExecutionOutput: r.Request.Data.(*types.CancelMaintenanceWindowExecutionOutput),
 		response:                               &aws.Response{Request: r.Request},
 	}
 
@@ -111,7 +68,7 @@ func (r CancelMaintenanceWindowExecutionRequest) Send(ctx context.Context) (*Can
 // CancelMaintenanceWindowExecutionResponse is the response type for the
 // CancelMaintenanceWindowExecution API operation.
 type CancelMaintenanceWindowExecutionResponse struct {
-	*CancelMaintenanceWindowExecutionOutput
+	*types.CancelMaintenanceWindowExecutionOutput
 
 	response *aws.Response
 }

@@ -10,6 +10,7 @@ package ioteventsiface
 
 import (
 	"github.com/aws/aws-sdk-go-v2/service/iotevents"
+	"github.com/aws/aws-sdk-go-v2/service/iotevents/types"
 )
 
 // ClientAPI provides an interface to enable mocking the
@@ -43,7 +44,7 @@ import (
 //    type mockClientClient struct {
 //        ioteventsiface.ClientPI
 //    }
-//    func (m *mockClientClient) CreateDetectorModel(input *iotevents.CreateDetectorModelInput) (*iotevents.CreateDetectorModelOutput, error) {
+//    func (m *mockClientClient) CreateDetectorModel(input *types.CreateDetectorModelInput) (*types.CreateDetectorModelOutput, error) {
 //        // mock response/functionality
 //    }
 //
@@ -61,37 +62,37 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type ClientAPI interface {
-	CreateDetectorModelRequest(*iotevents.CreateDetectorModelInput) iotevents.CreateDetectorModelRequest
+	CreateDetectorModelRequest(*types.CreateDetectorModelInput) iotevents.CreateDetectorModelRequest
 
-	CreateInputRequest(*iotevents.CreateInputInput) iotevents.CreateInputRequest
+	CreateInputRequest(*types.CreateInputInput) iotevents.CreateInputRequest
 
-	DeleteDetectorModelRequest(*iotevents.DeleteDetectorModelInput) iotevents.DeleteDetectorModelRequest
+	DeleteDetectorModelRequest(*types.DeleteDetectorModelInput) iotevents.DeleteDetectorModelRequest
 
-	DeleteInputRequest(*iotevents.DeleteInputInput) iotevents.DeleteInputRequest
+	DeleteInputRequest(*types.DeleteInputInput) iotevents.DeleteInputRequest
 
-	DescribeDetectorModelRequest(*iotevents.DescribeDetectorModelInput) iotevents.DescribeDetectorModelRequest
+	DescribeDetectorModelRequest(*types.DescribeDetectorModelInput) iotevents.DescribeDetectorModelRequest
 
-	DescribeInputRequest(*iotevents.DescribeInputInput) iotevents.DescribeInputRequest
+	DescribeInputRequest(*types.DescribeInputInput) iotevents.DescribeInputRequest
 
-	DescribeLoggingOptionsRequest(*iotevents.DescribeLoggingOptionsInput) iotevents.DescribeLoggingOptionsRequest
+	DescribeLoggingOptionsRequest(*types.DescribeLoggingOptionsInput) iotevents.DescribeLoggingOptionsRequest
 
-	ListDetectorModelVersionsRequest(*iotevents.ListDetectorModelVersionsInput) iotevents.ListDetectorModelVersionsRequest
+	ListDetectorModelVersionsRequest(*types.ListDetectorModelVersionsInput) iotevents.ListDetectorModelVersionsRequest
 
-	ListDetectorModelsRequest(*iotevents.ListDetectorModelsInput) iotevents.ListDetectorModelsRequest
+	ListDetectorModelsRequest(*types.ListDetectorModelsInput) iotevents.ListDetectorModelsRequest
 
-	ListInputsRequest(*iotevents.ListInputsInput) iotevents.ListInputsRequest
+	ListInputsRequest(*types.ListInputsInput) iotevents.ListInputsRequest
 
-	ListTagsForResourceRequest(*iotevents.ListTagsForResourceInput) iotevents.ListTagsForResourceRequest
+	ListTagsForResourceRequest(*types.ListTagsForResourceInput) iotevents.ListTagsForResourceRequest
 
-	PutLoggingOptionsRequest(*iotevents.PutLoggingOptionsInput) iotevents.PutLoggingOptionsRequest
+	PutLoggingOptionsRequest(*types.PutLoggingOptionsInput) iotevents.PutLoggingOptionsRequest
 
-	TagResourceRequest(*iotevents.TagResourceInput) iotevents.TagResourceRequest
+	TagResourceRequest(*types.TagResourceInput) iotevents.TagResourceRequest
 
-	UntagResourceRequest(*iotevents.UntagResourceInput) iotevents.UntagResourceRequest
+	UntagResourceRequest(*types.UntagResourceInput) iotevents.UntagResourceRequest
 
-	UpdateDetectorModelRequest(*iotevents.UpdateDetectorModelInput) iotevents.UpdateDetectorModelRequest
+	UpdateDetectorModelRequest(*types.UpdateDetectorModelInput) iotevents.UpdateDetectorModelRequest
 
-	UpdateInputRequest(*iotevents.UpdateInputInput) iotevents.UpdateInputRequest
+	UpdateInputRequest(*types.UpdateInputInput) iotevents.UpdateInputRequest
 }
 
 var _ ClientAPI = (*iotevents.Client)(nil)

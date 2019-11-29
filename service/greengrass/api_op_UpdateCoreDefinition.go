@@ -6,70 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/greengrass/types"
 )
-
-type UpdateCoreDefinitionInput struct {
-	_ struct{} `type:"structure"`
-
-	// CoreDefinitionId is a required field
-	CoreDefinitionId *string `location:"uri" locationName:"CoreDefinitionId" type:"string" required:"true"`
-
-	Name *string `type:"string"`
-}
-
-// String returns the string representation
-func (s UpdateCoreDefinitionInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateCoreDefinitionInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateCoreDefinitionInput"}
-
-	if s.CoreDefinitionId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("CoreDefinitionId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s UpdateCoreDefinitionInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.Name != nil {
-		v := *s.Name
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "Name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.CoreDefinitionId != nil {
-		v := *s.CoreDefinitionId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "CoreDefinitionId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type UpdateCoreDefinitionOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s UpdateCoreDefinitionOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s UpdateCoreDefinitionOutput) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
 
 const opUpdateCoreDefinition = "UpdateCoreDefinition"
 
@@ -86,7 +24,7 @@ const opUpdateCoreDefinition = "UpdateCoreDefinition"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/UpdateCoreDefinition
-func (c *Client) UpdateCoreDefinitionRequest(input *UpdateCoreDefinitionInput) UpdateCoreDefinitionRequest {
+func (c *Client) UpdateCoreDefinitionRequest(input *types.UpdateCoreDefinitionInput) UpdateCoreDefinitionRequest {
 	op := &aws.Operation{
 		Name:       opUpdateCoreDefinition,
 		HTTPMethod: "PUT",
@@ -94,10 +32,10 @@ func (c *Client) UpdateCoreDefinitionRequest(input *UpdateCoreDefinitionInput) U
 	}
 
 	if input == nil {
-		input = &UpdateCoreDefinitionInput{}
+		input = &types.UpdateCoreDefinitionInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateCoreDefinitionOutput{})
+	req := c.newRequest(op, input, &types.UpdateCoreDefinitionOutput{})
 	return UpdateCoreDefinitionRequest{Request: req, Input: input, Copy: c.UpdateCoreDefinitionRequest}
 }
 
@@ -105,8 +43,8 @@ func (c *Client) UpdateCoreDefinitionRequest(input *UpdateCoreDefinitionInput) U
 // UpdateCoreDefinition API operation.
 type UpdateCoreDefinitionRequest struct {
 	*aws.Request
-	Input *UpdateCoreDefinitionInput
-	Copy  func(*UpdateCoreDefinitionInput) UpdateCoreDefinitionRequest
+	Input *types.UpdateCoreDefinitionInput
+	Copy  func(*types.UpdateCoreDefinitionInput) UpdateCoreDefinitionRequest
 }
 
 // Send marshals and sends the UpdateCoreDefinition API request.
@@ -118,7 +56,7 @@ func (r UpdateCoreDefinitionRequest) Send(ctx context.Context) (*UpdateCoreDefin
 	}
 
 	resp := &UpdateCoreDefinitionResponse{
-		UpdateCoreDefinitionOutput: r.Request.Data.(*UpdateCoreDefinitionOutput),
+		UpdateCoreDefinitionOutput: r.Request.Data.(*types.UpdateCoreDefinitionOutput),
 		response:                   &aws.Response{Request: r.Request},
 	}
 
@@ -128,7 +66,7 @@ func (r UpdateCoreDefinitionRequest) Send(ctx context.Context) (*UpdateCoreDefin
 // UpdateCoreDefinitionResponse is the response type for the
 // UpdateCoreDefinition API operation.
 type UpdateCoreDefinitionResponse struct {
-	*UpdateCoreDefinitionOutput
+	*types.UpdateCoreDefinitionOutput
 
 	response *aws.Response
 }

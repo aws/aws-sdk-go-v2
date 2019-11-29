@@ -6,114 +6,15 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/pinpoint/types"
 )
-
-type UpdateCampaignInput struct {
-	_ struct{} `type:"structure" payload:"WriteCampaignRequest"`
-
-	// ApplicationId is a required field
-	ApplicationId *string `location:"uri" locationName:"application-id" type:"string" required:"true"`
-
-	// CampaignId is a required field
-	CampaignId *string `location:"uri" locationName:"campaign-id" type:"string" required:"true"`
-
-	// Specifies the configuration and other settings for a campaign.
-	//
-	// WriteCampaignRequest is a required field
-	WriteCampaignRequest *WriteCampaignRequest `type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s UpdateCampaignInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateCampaignInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateCampaignInput"}
-
-	if s.ApplicationId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ApplicationId"))
-	}
-
-	if s.CampaignId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("CampaignId"))
-	}
-
-	if s.WriteCampaignRequest == nil {
-		invalidParams.Add(aws.NewErrParamRequired("WriteCampaignRequest"))
-	}
-	if s.WriteCampaignRequest != nil {
-		if err := s.WriteCampaignRequest.Validate(); err != nil {
-			invalidParams.AddNested("WriteCampaignRequest", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s UpdateCampaignInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.ApplicationId != nil {
-		v := *s.ApplicationId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "application-id", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.CampaignId != nil {
-		v := *s.CampaignId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "campaign-id", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.WriteCampaignRequest != nil {
-		v := s.WriteCampaignRequest
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.PayloadTarget, "WriteCampaignRequest", v, metadata)
-	}
-	return nil
-}
-
-type UpdateCampaignOutput struct {
-	_ struct{} `type:"structure" payload:"CampaignResponse"`
-
-	// Provides information about the status, configuration, and other settings
-	// for a campaign.
-	//
-	// CampaignResponse is a required field
-	CampaignResponse *CampaignResponse `type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s UpdateCampaignOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s UpdateCampaignOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.CampaignResponse != nil {
-		v := s.CampaignResponse
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.PayloadTarget, "CampaignResponse", v, metadata)
-	}
-	return nil
-}
 
 const opUpdateCampaign = "UpdateCampaign"
 
 // UpdateCampaignRequest returns a request value for making API operation for
 // Amazon Pinpoint.
 //
-// Updates the settings for a campaign.
+// Updates the configuration and other settings for a campaign.
 //
 //    // Example sending a request using UpdateCampaignRequest.
 //    req := client.UpdateCampaignRequest(params)
@@ -123,7 +24,7 @@ const opUpdateCampaign = "UpdateCampaign"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/UpdateCampaign
-func (c *Client) UpdateCampaignRequest(input *UpdateCampaignInput) UpdateCampaignRequest {
+func (c *Client) UpdateCampaignRequest(input *types.UpdateCampaignInput) UpdateCampaignRequest {
 	op := &aws.Operation{
 		Name:       opUpdateCampaign,
 		HTTPMethod: "PUT",
@@ -131,10 +32,10 @@ func (c *Client) UpdateCampaignRequest(input *UpdateCampaignInput) UpdateCampaig
 	}
 
 	if input == nil {
-		input = &UpdateCampaignInput{}
+		input = &types.UpdateCampaignInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateCampaignOutput{})
+	req := c.newRequest(op, input, &types.UpdateCampaignOutput{})
 	return UpdateCampaignRequest{Request: req, Input: input, Copy: c.UpdateCampaignRequest}
 }
 
@@ -142,8 +43,8 @@ func (c *Client) UpdateCampaignRequest(input *UpdateCampaignInput) UpdateCampaig
 // UpdateCampaign API operation.
 type UpdateCampaignRequest struct {
 	*aws.Request
-	Input *UpdateCampaignInput
-	Copy  func(*UpdateCampaignInput) UpdateCampaignRequest
+	Input *types.UpdateCampaignInput
+	Copy  func(*types.UpdateCampaignInput) UpdateCampaignRequest
 }
 
 // Send marshals and sends the UpdateCampaign API request.
@@ -155,7 +56,7 @@ func (r UpdateCampaignRequest) Send(ctx context.Context) (*UpdateCampaignRespons
 	}
 
 	resp := &UpdateCampaignResponse{
-		UpdateCampaignOutput: r.Request.Data.(*UpdateCampaignOutput),
+		UpdateCampaignOutput: r.Request.Data.(*types.UpdateCampaignOutput),
 		response:             &aws.Response{Request: r.Request},
 	}
 
@@ -165,7 +66,7 @@ func (r UpdateCampaignRequest) Send(ctx context.Context) (*UpdateCampaignRespons
 // UpdateCampaignResponse is the response type for the
 // UpdateCampaign API operation.
 type UpdateCampaignResponse struct {
-	*UpdateCampaignOutput
+	*types.UpdateCampaignOutput
 
 	response *aws.Response
 }

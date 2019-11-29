@@ -6,100 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/pinpoint/types"
 )
-
-type GetCampaignVersionInput struct {
-	_ struct{} `type:"structure"`
-
-	// ApplicationId is a required field
-	ApplicationId *string `location:"uri" locationName:"application-id" type:"string" required:"true"`
-
-	// CampaignId is a required field
-	CampaignId *string `location:"uri" locationName:"campaign-id" type:"string" required:"true"`
-
-	// Version is a required field
-	Version *string `location:"uri" locationName:"version" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetCampaignVersionInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetCampaignVersionInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetCampaignVersionInput"}
-
-	if s.ApplicationId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ApplicationId"))
-	}
-
-	if s.CampaignId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("CampaignId"))
-	}
-
-	if s.Version == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Version"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetCampaignVersionInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.ApplicationId != nil {
-		v := *s.ApplicationId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "application-id", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.CampaignId != nil {
-		v := *s.CampaignId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "campaign-id", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Version != nil {
-		v := *s.Version
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "version", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type GetCampaignVersionOutput struct {
-	_ struct{} `type:"structure" payload:"CampaignResponse"`
-
-	// Provides information about the status, configuration, and other settings
-	// for a campaign.
-	//
-	// CampaignResponse is a required field
-	CampaignResponse *CampaignResponse `type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s GetCampaignVersionOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetCampaignVersionOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.CampaignResponse != nil {
-		v := s.CampaignResponse
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.PayloadTarget, "CampaignResponse", v, metadata)
-	}
-	return nil
-}
 
 const opGetCampaignVersion = "GetCampaignVersion"
 
@@ -117,7 +25,7 @@ const opGetCampaignVersion = "GetCampaignVersion"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetCampaignVersion
-func (c *Client) GetCampaignVersionRequest(input *GetCampaignVersionInput) GetCampaignVersionRequest {
+func (c *Client) GetCampaignVersionRequest(input *types.GetCampaignVersionInput) GetCampaignVersionRequest {
 	op := &aws.Operation{
 		Name:       opGetCampaignVersion,
 		HTTPMethod: "GET",
@@ -125,10 +33,10 @@ func (c *Client) GetCampaignVersionRequest(input *GetCampaignVersionInput) GetCa
 	}
 
 	if input == nil {
-		input = &GetCampaignVersionInput{}
+		input = &types.GetCampaignVersionInput{}
 	}
 
-	req := c.newRequest(op, input, &GetCampaignVersionOutput{})
+	req := c.newRequest(op, input, &types.GetCampaignVersionOutput{})
 	return GetCampaignVersionRequest{Request: req, Input: input, Copy: c.GetCampaignVersionRequest}
 }
 
@@ -136,8 +44,8 @@ func (c *Client) GetCampaignVersionRequest(input *GetCampaignVersionInput) GetCa
 // GetCampaignVersion API operation.
 type GetCampaignVersionRequest struct {
 	*aws.Request
-	Input *GetCampaignVersionInput
-	Copy  func(*GetCampaignVersionInput) GetCampaignVersionRequest
+	Input *types.GetCampaignVersionInput
+	Copy  func(*types.GetCampaignVersionInput) GetCampaignVersionRequest
 }
 
 // Send marshals and sends the GetCampaignVersion API request.
@@ -149,7 +57,7 @@ func (r GetCampaignVersionRequest) Send(ctx context.Context) (*GetCampaignVersio
 	}
 
 	resp := &GetCampaignVersionResponse{
-		GetCampaignVersionOutput: r.Request.Data.(*GetCampaignVersionOutput),
+		GetCampaignVersionOutput: r.Request.Data.(*types.GetCampaignVersionOutput),
 		response:                 &aws.Response{Request: r.Request},
 	}
 
@@ -159,7 +67,7 @@ func (r GetCampaignVersionRequest) Send(ctx context.Context) (*GetCampaignVersio
 // GetCampaignVersionResponse is the response type for the
 // GetCampaignVersion API operation.
 type GetCampaignVersionResponse struct {
-	*GetCampaignVersionOutput
+	*types.GetCampaignVersionOutput
 
 	response *aws.Response
 }

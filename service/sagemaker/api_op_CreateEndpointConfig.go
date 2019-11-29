@@ -4,104 +4,10 @@ package sagemaker
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
 )
-
-type CreateEndpointConfigInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the endpoint configuration. You specify this name in a CreateEndpoint
-	// (https://docs.aws.amazon.com/sagemaker/latest/dg/API_CreateEndpoint.html)
-	// request.
-	//
-	// EndpointConfigName is a required field
-	EndpointConfigName *string `type:"string" required:"true"`
-
-	// The Amazon Resource Name (ARN) of a AWS Key Management Service key that Amazon
-	// SageMaker uses to encrypt data on the storage volume attached to the ML compute
-	// instance that hosts the endpoint.
-	//
-	// Nitro-based instances do not support encryption with AWS KMS. If any of the
-	// models that you specify in the ProductionVariants parameter use nitro-based
-	// instances, do not specify a value for the KmsKeyId parameter. If you specify
-	// a value for KmsKeyId when using any nitro-based instances, the call to CreateEndpointConfig
-	// fails.
-	//
-	// For a list of nitro-based instances, see Nitro-based Instances (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html#ec2-nitro-instances)
-	// in the Amazon Elastic Compute Cloud User Guide for Linux Instances.
-	//
-	// For more information about storage volumes on nitro-based instances, see
-	// Amazon EBS and NVMe on Linux Instances (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/nvme-ebs-volumes.html).
-	KmsKeyId *string `type:"string"`
-
-	// An list of ProductionVariant objects, one for each model that you want to
-	// host at this endpoint.
-	//
-	// ProductionVariants is a required field
-	ProductionVariants []ProductionVariant `min:"1" type:"list" required:"true"`
-
-	// A list of key-value pairs. For more information, see Using Cost Allocation
-	// Tags (https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-what)
-	// in the AWS Billing and Cost Management User Guide.
-	Tags []Tag `type:"list"`
-}
-
-// String returns the string representation
-func (s CreateEndpointConfigInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateEndpointConfigInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateEndpointConfigInput"}
-
-	if s.EndpointConfigName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("EndpointConfigName"))
-	}
-
-	if s.ProductionVariants == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ProductionVariants"))
-	}
-	if s.ProductionVariants != nil && len(s.ProductionVariants) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ProductionVariants", 1))
-	}
-	if s.ProductionVariants != nil {
-		for i, v := range s.ProductionVariants {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "ProductionVariants", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-	if s.Tags != nil {
-		for i, v := range s.Tags {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type CreateEndpointConfigOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the endpoint configuration.
-	//
-	// EndpointConfigArn is a required field
-	EndpointConfigArn *string `min:"20" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s CreateEndpointConfigOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCreateEndpointConfig = "CreateEndpointConfig"
 
@@ -136,7 +42,7 @@ const opCreateEndpointConfig = "CreateEndpointConfig"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateEndpointConfig
-func (c *Client) CreateEndpointConfigRequest(input *CreateEndpointConfigInput) CreateEndpointConfigRequest {
+func (c *Client) CreateEndpointConfigRequest(input *types.CreateEndpointConfigInput) CreateEndpointConfigRequest {
 	op := &aws.Operation{
 		Name:       opCreateEndpointConfig,
 		HTTPMethod: "POST",
@@ -144,10 +50,10 @@ func (c *Client) CreateEndpointConfigRequest(input *CreateEndpointConfigInput) C
 	}
 
 	if input == nil {
-		input = &CreateEndpointConfigInput{}
+		input = &types.CreateEndpointConfigInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateEndpointConfigOutput{})
+	req := c.newRequest(op, input, &types.CreateEndpointConfigOutput{})
 	return CreateEndpointConfigRequest{Request: req, Input: input, Copy: c.CreateEndpointConfigRequest}
 }
 
@@ -155,8 +61,8 @@ func (c *Client) CreateEndpointConfigRequest(input *CreateEndpointConfigInput) C
 // CreateEndpointConfig API operation.
 type CreateEndpointConfigRequest struct {
 	*aws.Request
-	Input *CreateEndpointConfigInput
-	Copy  func(*CreateEndpointConfigInput) CreateEndpointConfigRequest
+	Input *types.CreateEndpointConfigInput
+	Copy  func(*types.CreateEndpointConfigInput) CreateEndpointConfigRequest
 }
 
 // Send marshals and sends the CreateEndpointConfig API request.
@@ -168,7 +74,7 @@ func (r CreateEndpointConfigRequest) Send(ctx context.Context) (*CreateEndpointC
 	}
 
 	resp := &CreateEndpointConfigResponse{
-		CreateEndpointConfigOutput: r.Request.Data.(*CreateEndpointConfigOutput),
+		CreateEndpointConfigOutput: r.Request.Data.(*types.CreateEndpointConfigOutput),
 		response:                   &aws.Response{Request: r.Request},
 	}
 
@@ -178,7 +84,7 @@ func (r CreateEndpointConfigRequest) Send(ctx context.Context) (*CreateEndpointC
 // CreateEndpointConfigResponse is the response type for the
 // CreateEndpointConfig API operation.
 type CreateEndpointConfigResponse struct {
-	*CreateEndpointConfigOutput
+	*types.CreateEndpointConfigOutput
 
 	response *aws.Response
 }

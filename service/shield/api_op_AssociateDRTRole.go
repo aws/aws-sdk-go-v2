@@ -6,54 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/shield/types"
 )
-
-type AssociateDRTRoleInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the role the DRT will use to access your
-	// AWS account.
-	//
-	// Prior to making the AssociateDRTRole request, you must attach the AWSShieldDRTAccessPolicy
-	// (https://console.aws.amazon.com/iam/home?#/policies/arn:aws:iam::aws:policy/service-role/AWSShieldDRTAccessPolicy)
-	// managed policy to this role. For more information see Attaching and Detaching
-	// IAM Policies (https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_manage-attach-detach.html).
-	//
-	// RoleArn is a required field
-	RoleArn *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s AssociateDRTRoleInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *AssociateDRTRoleInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "AssociateDRTRoleInput"}
-
-	if s.RoleArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("RoleArn"))
-	}
-	if s.RoleArn != nil && len(*s.RoleArn) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("RoleArn", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type AssociateDRTRoleOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s AssociateDRTRoleOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opAssociateDRTRole = "AssociateDRTRole"
 
@@ -97,7 +51,7 @@ const opAssociateDRTRole = "AssociateDRTRole"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/AssociateDRTRole
-func (c *Client) AssociateDRTRoleRequest(input *AssociateDRTRoleInput) AssociateDRTRoleRequest {
+func (c *Client) AssociateDRTRoleRequest(input *types.AssociateDRTRoleInput) AssociateDRTRoleRequest {
 	op := &aws.Operation{
 		Name:       opAssociateDRTRole,
 		HTTPMethod: "POST",
@@ -105,10 +59,10 @@ func (c *Client) AssociateDRTRoleRequest(input *AssociateDRTRoleInput) Associate
 	}
 
 	if input == nil {
-		input = &AssociateDRTRoleInput{}
+		input = &types.AssociateDRTRoleInput{}
 	}
 
-	req := c.newRequest(op, input, &AssociateDRTRoleOutput{})
+	req := c.newRequest(op, input, &types.AssociateDRTRoleOutput{})
 	return AssociateDRTRoleRequest{Request: req, Input: input, Copy: c.AssociateDRTRoleRequest}
 }
 
@@ -116,8 +70,8 @@ func (c *Client) AssociateDRTRoleRequest(input *AssociateDRTRoleInput) Associate
 // AssociateDRTRole API operation.
 type AssociateDRTRoleRequest struct {
 	*aws.Request
-	Input *AssociateDRTRoleInput
-	Copy  func(*AssociateDRTRoleInput) AssociateDRTRoleRequest
+	Input *types.AssociateDRTRoleInput
+	Copy  func(*types.AssociateDRTRoleInput) AssociateDRTRoleRequest
 }
 
 // Send marshals and sends the AssociateDRTRole API request.
@@ -129,7 +83,7 @@ func (r AssociateDRTRoleRequest) Send(ctx context.Context) (*AssociateDRTRoleRes
 	}
 
 	resp := &AssociateDRTRoleResponse{
-		AssociateDRTRoleOutput: r.Request.Data.(*AssociateDRTRoleOutput),
+		AssociateDRTRoleOutput: r.Request.Data.(*types.AssociateDRTRoleOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -139,7 +93,7 @@ func (r AssociateDRTRoleRequest) Send(ctx context.Context) (*AssociateDRTRoleRes
 // AssociateDRTRoleResponse is the response type for the
 // AssociateDRTRole API operation.
 type AssociateDRTRoleResponse struct {
-	*AssociateDRTRoleOutput
+	*types.AssociateDRTRoleOutput
 
 	response *aws.Response
 }

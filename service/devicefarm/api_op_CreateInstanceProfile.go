@@ -6,65 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/devicefarm/types"
 )
-
-type CreateInstanceProfileInput struct {
-	_ struct{} `type:"structure"`
-
-	// The description of your instance profile.
-	Description *string `locationName:"description" type:"string"`
-
-	// An array of strings specifying the list of app packages that should not be
-	// cleaned up from the device after a test run is over.
-	//
-	// The list of packages is only considered if you set packageCleanup to true.
-	ExcludeAppPackagesFromCleanup []string `locationName:"excludeAppPackagesFromCleanup" type:"list"`
-
-	// The name of your instance profile.
-	//
-	// Name is a required field
-	Name *string `locationName:"name" type:"string" required:"true"`
-
-	// When set to true, Device Farm will remove app packages after a test run.
-	// The default value is false for private devices.
-	PackageCleanup *bool `locationName:"packageCleanup" type:"boolean"`
-
-	// When set to true, Device Farm will reboot the instance after a test run.
-	// The default value is true.
-	RebootAfterUse *bool `locationName:"rebootAfterUse" type:"boolean"`
-}
-
-// String returns the string representation
-func (s CreateInstanceProfileInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateInstanceProfileInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateInstanceProfileInput"}
-
-	if s.Name == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Name"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type CreateInstanceProfileOutput struct {
-	_ struct{} `type:"structure"`
-
-	// An object containing information about your instance profile.
-	InstanceProfile *InstanceProfile `locationName:"instanceProfile" type:"structure"`
-}
-
-// String returns the string representation
-func (s CreateInstanceProfileOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCreateInstanceProfile = "CreateInstanceProfile"
 
@@ -82,7 +25,7 @@ const opCreateInstanceProfile = "CreateInstanceProfile"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/CreateInstanceProfile
-func (c *Client) CreateInstanceProfileRequest(input *CreateInstanceProfileInput) CreateInstanceProfileRequest {
+func (c *Client) CreateInstanceProfileRequest(input *types.CreateInstanceProfileInput) CreateInstanceProfileRequest {
 	op := &aws.Operation{
 		Name:       opCreateInstanceProfile,
 		HTTPMethod: "POST",
@@ -90,10 +33,10 @@ func (c *Client) CreateInstanceProfileRequest(input *CreateInstanceProfileInput)
 	}
 
 	if input == nil {
-		input = &CreateInstanceProfileInput{}
+		input = &types.CreateInstanceProfileInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateInstanceProfileOutput{})
+	req := c.newRequest(op, input, &types.CreateInstanceProfileOutput{})
 	return CreateInstanceProfileRequest{Request: req, Input: input, Copy: c.CreateInstanceProfileRequest}
 }
 
@@ -101,8 +44,8 @@ func (c *Client) CreateInstanceProfileRequest(input *CreateInstanceProfileInput)
 // CreateInstanceProfile API operation.
 type CreateInstanceProfileRequest struct {
 	*aws.Request
-	Input *CreateInstanceProfileInput
-	Copy  func(*CreateInstanceProfileInput) CreateInstanceProfileRequest
+	Input *types.CreateInstanceProfileInput
+	Copy  func(*types.CreateInstanceProfileInput) CreateInstanceProfileRequest
 }
 
 // Send marshals and sends the CreateInstanceProfile API request.
@@ -114,7 +57,7 @@ func (r CreateInstanceProfileRequest) Send(ctx context.Context) (*CreateInstance
 	}
 
 	resp := &CreateInstanceProfileResponse{
-		CreateInstanceProfileOutput: r.Request.Data.(*CreateInstanceProfileOutput),
+		CreateInstanceProfileOutput: r.Request.Data.(*types.CreateInstanceProfileOutput),
 		response:                    &aws.Response{Request: r.Request},
 	}
 
@@ -124,7 +67,7 @@ func (r CreateInstanceProfileRequest) Send(ctx context.Context) (*CreateInstance
 // CreateInstanceProfileResponse is the response type for the
 // CreateInstanceProfile API operation.
 type CreateInstanceProfileResponse struct {
-	*CreateInstanceProfileOutput
+	*types.CreateInstanceProfileOutput
 
 	response *aws.Response
 }

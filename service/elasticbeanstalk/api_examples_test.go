@@ -12,6 +12,8 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws/awserr"
 	"github.com/aws/aws-sdk-go-v2/aws/external"
 	"github.com/aws/aws-sdk-go-v2/service/elasticbeanstalk"
+	"github.com/aws/aws-sdk-go-v2/service/elasticbeanstalk/enums"
+	"github.com/aws/aws-sdk-go-v2/service/elasticbeanstalk/types"
 )
 
 var _ time.Duration
@@ -37,7 +39,7 @@ func ExampleClient_AbortEnvironmentUpdateRequest_shared00() {
 	}
 
 	svc := elasticbeanstalk.New(cfg)
-	input := &elasticbeanstalk.AbortEnvironmentUpdateInput{
+	input := &types.AbortEnvironmentUpdateInput{
 		EnvironmentName: aws.String("my-env"),
 	}
 
@@ -72,7 +74,7 @@ func ExampleClient_CheckDNSAvailabilityRequest_shared00() {
 	}
 
 	svc := elasticbeanstalk.New(cfg)
-	input := &elasticbeanstalk.CheckDNSAvailabilityInput{
+	input := &types.CheckDNSAvailabilityInput{
 		CNAMEPrefix: aws.String("my-cname"),
 	}
 
@@ -105,7 +107,7 @@ func ExampleClient_CreateApplicationRequest_shared00() {
 	}
 
 	svc := elasticbeanstalk.New(cfg)
-	input := &elasticbeanstalk.CreateApplicationInput{
+	input := &types.CreateApplicationInput{
 		ApplicationName: aws.String("my-app"),
 		Description:     aws.String("my application"),
 	}
@@ -141,12 +143,12 @@ func ExampleClient_CreateApplicationVersionRequest_shared00() {
 	}
 
 	svc := elasticbeanstalk.New(cfg)
-	input := &elasticbeanstalk.CreateApplicationVersionInput{
+	input := &types.CreateApplicationVersionInput{
 		ApplicationName:       aws.String("my-app"),
 		AutoCreateApplication: aws.Bool(true),
 		Description:           aws.String("my-app-v1"),
 		Process:               aws.Bool(true),
-		SourceBundle: &elasticbeanstalk.S3Location{
+		SourceBundle: &types.S3Location{
 			S3Bucket: aws.String("my-bucket"),
 			S3Key:    aws.String("sample.war"),
 		},
@@ -193,7 +195,7 @@ func ExampleClient_CreateConfigurationTemplateRequest_shared00() {
 	}
 
 	svc := elasticbeanstalk.New(cfg)
-	input := &elasticbeanstalk.CreateConfigurationTemplateInput{
+	input := &types.CreateConfigurationTemplateInput{
 		ApplicationName: aws.String("my-app"),
 		EnvironmentId:   aws.String("e-rpqsewtp2j"),
 		TemplateName:    aws.String("my-app-v1"),
@@ -235,7 +237,7 @@ func ExampleClient_CreateEnvironmentRequest_shared00() {
 	}
 
 	svc := elasticbeanstalk.New(cfg)
-	input := &elasticbeanstalk.CreateEnvironmentInput{
+	input := &types.CreateEnvironmentInput{
 		ApplicationName:   aws.String("my-app"),
 		CNAMEPrefix:       aws.String("my-app"),
 		EnvironmentName:   aws.String("my-env"),
@@ -277,7 +279,7 @@ func ExampleClient_CreateStorageLocationRequest_shared00() {
 	}
 
 	svc := elasticbeanstalk.New(cfg)
-	input := &elasticbeanstalk.CreateStorageLocationInput{}
+	input := &types.CreateStorageLocationInput{}
 
 	req := svc.CreateStorageLocationRequest(input)
 	result, err := req.Send(context.Background())
@@ -314,7 +316,7 @@ func ExampleClient_DeleteApplicationRequest_shared00() {
 	}
 
 	svc := elasticbeanstalk.New(cfg)
-	input := &elasticbeanstalk.DeleteApplicationInput{
+	input := &types.DeleteApplicationInput{
 		ApplicationName: aws.String("my-app"),
 	}
 
@@ -350,7 +352,7 @@ func ExampleClient_DeleteApplicationVersionRequest_shared00() {
 	}
 
 	svc := elasticbeanstalk.New(cfg)
-	input := &elasticbeanstalk.DeleteApplicationVersionInput{
+	input := &types.DeleteApplicationVersionInput{
 		ApplicationName:    aws.String("my-app"),
 		DeleteSourceBundle: aws.Bool(true),
 		VersionLabel:       aws.String("22a0-stage-150819_182129"),
@@ -394,7 +396,7 @@ func ExampleClient_DeleteConfigurationTemplateRequest_shared00() {
 	}
 
 	svc := elasticbeanstalk.New(cfg)
-	input := &elasticbeanstalk.DeleteConfigurationTemplateInput{
+	input := &types.DeleteConfigurationTemplateInput{
 		ApplicationName: aws.String("my-app"),
 		TemplateName:    aws.String("my-template"),
 	}
@@ -430,7 +432,7 @@ func ExampleClient_DeleteEnvironmentConfigurationRequest_shared00() {
 	}
 
 	svc := elasticbeanstalk.New(cfg)
-	input := &elasticbeanstalk.DeleteEnvironmentConfigurationInput{
+	input := &types.DeleteEnvironmentConfigurationInput{
 		ApplicationName: aws.String("my-app"),
 		EnvironmentName: aws.String("my-env"),
 	}
@@ -465,7 +467,7 @@ func ExampleClient_DescribeApplicationVersionsRequest_shared00() {
 	}
 
 	svc := elasticbeanstalk.New(cfg)
-	input := &elasticbeanstalk.DescribeApplicationVersionsInput{
+	input := &types.DescribeApplicationVersionsInput{
 		ApplicationName: aws.String("my-app"),
 		VersionLabels: []string{
 			"v2",
@@ -501,7 +503,7 @@ func ExampleClient_DescribeApplicationsRequest_shared00() {
 	}
 
 	svc := elasticbeanstalk.New(cfg)
-	input := &elasticbeanstalk.DescribeApplicationsInput{}
+	input := &types.DescribeApplicationsInput{}
 
 	req := svc.DescribeApplicationsRequest(input)
 	result, err := req.Send(context.Background())
@@ -533,7 +535,7 @@ func ExampleClient_DescribeConfigurationOptionsRequest_shared00() {
 	}
 
 	svc := elasticbeanstalk.New(cfg)
-	input := &elasticbeanstalk.DescribeConfigurationOptionsInput{
+	input := &types.DescribeConfigurationOptionsInput{
 		ApplicationName: aws.String("my-app"),
 		EnvironmentName: aws.String("my-env"),
 	}
@@ -570,7 +572,7 @@ func ExampleClient_DescribeConfigurationSettingsRequest_shared00() {
 	}
 
 	svc := elasticbeanstalk.New(cfg)
-	input := &elasticbeanstalk.DescribeConfigurationSettingsInput{
+	input := &types.DescribeConfigurationSettingsInput{
 		ApplicationName: aws.String("my-app"),
 		EnvironmentName: aws.String("my-env"),
 	}
@@ -607,9 +609,9 @@ func ExampleClient_DescribeEnvironmentHealthRequest_shared00() {
 	}
 
 	svc := elasticbeanstalk.New(cfg)
-	input := &elasticbeanstalk.DescribeEnvironmentHealthInput{
-		AttributeNames: []elasticbeanstalk.EnvironmentHealthAttribute{
-			elasticbeanstalk.EnvironmentHealthAttribute("All"),
+	input := &types.DescribeEnvironmentHealthInput{
+		AttributeNames: []enums.EnvironmentHealthAttribute{
+			enums.EnvironmentHealthAttribute("All"),
 		},
 		EnvironmentName: aws.String("my-env"),
 	}
@@ -648,7 +650,7 @@ func ExampleClient_DescribeEnvironmentResourcesRequest_shared00() {
 	}
 
 	svc := elasticbeanstalk.New(cfg)
-	input := &elasticbeanstalk.DescribeEnvironmentResourcesInput{
+	input := &types.DescribeEnvironmentResourcesInput{
 		EnvironmentName: aws.String("my-env"),
 	}
 
@@ -683,7 +685,7 @@ func ExampleClient_DescribeEnvironmentsRequest_shared00() {
 	}
 
 	svc := elasticbeanstalk.New(cfg)
-	input := &elasticbeanstalk.DescribeEnvironmentsInput{
+	input := &types.DescribeEnvironmentsInput{
 		EnvironmentNames: []string{
 			"my-env",
 		},
@@ -718,7 +720,7 @@ func ExampleClient_DescribeEventsRequest_shared00() {
 	}
 
 	svc := elasticbeanstalk.New(cfg)
-	input := &elasticbeanstalk.DescribeEventsInput{
+	input := &types.DescribeEventsInput{
 		EnvironmentName: aws.String("my-env"),
 	}
 
@@ -752,9 +754,9 @@ func ExampleClient_DescribeInstancesHealthRequest_shared00() {
 	}
 
 	svc := elasticbeanstalk.New(cfg)
-	input := &elasticbeanstalk.DescribeInstancesHealthInput{
-		AttributeNames: []elasticbeanstalk.InstancesHealthAttribute{
-			elasticbeanstalk.InstancesHealthAttribute("All"),
+	input := &types.DescribeInstancesHealthInput{
+		AttributeNames: []enums.InstancesHealthAttribute{
+			enums.InstancesHealthAttribute("All"),
 		},
 		EnvironmentName: aws.String("my-env"),
 	}
@@ -793,7 +795,7 @@ func ExampleClient_ListAvailableSolutionStacksRequest_shared00() {
 	}
 
 	svc := elasticbeanstalk.New(cfg)
-	input := &elasticbeanstalk.ListAvailableSolutionStacksInput{}
+	input := &types.ListAvailableSolutionStacksInput{}
 
 	req := svc.ListAvailableSolutionStacksRequest(input)
 	result, err := req.Send(context.Background())
@@ -825,7 +827,7 @@ func ExampleClient_RebuildEnvironmentRequest_shared00() {
 	}
 
 	svc := elasticbeanstalk.New(cfg)
-	input := &elasticbeanstalk.RebuildEnvironmentInput{
+	input := &types.RebuildEnvironmentInput{
 		EnvironmentName: aws.String("my-env"),
 	}
 
@@ -860,9 +862,9 @@ func ExampleClient_RequestEnvironmentInfoRequest_shared00() {
 	}
 
 	svc := elasticbeanstalk.New(cfg)
-	input := &elasticbeanstalk.RequestEnvironmentInfoInput{
+	input := &types.RequestEnvironmentInfoInput{
 		EnvironmentName: aws.String("my-env"),
-		InfoType:        elasticbeanstalk.EnvironmentInfoTypeTail,
+		InfoType:        enums.EnvironmentInfoTypeTail,
 	}
 
 	req := svc.RequestEnvironmentInfoRequest(input)
@@ -895,7 +897,7 @@ func ExampleClient_RestartAppServerRequest_shared00() {
 	}
 
 	svc := elasticbeanstalk.New(cfg)
-	input := &elasticbeanstalk.RestartAppServerInput{
+	input := &types.RestartAppServerInput{
 		EnvironmentName: aws.String("my-env"),
 	}
 
@@ -928,9 +930,9 @@ func ExampleClient_RetrieveEnvironmentInfoRequest_shared00() {
 	}
 
 	svc := elasticbeanstalk.New(cfg)
-	input := &elasticbeanstalk.RetrieveEnvironmentInfoInput{
+	input := &types.RetrieveEnvironmentInfoInput{
 		EnvironmentName: aws.String("my-env"),
-		InfoType:        elasticbeanstalk.EnvironmentInfoTypeTail,
+		InfoType:        enums.EnvironmentInfoTypeTail,
 	}
 
 	req := svc.RetrieveEnvironmentInfoRequest(input)
@@ -962,7 +964,7 @@ func ExampleClient_SwapEnvironmentCNAMEsRequest_shared00() {
 	}
 
 	svc := elasticbeanstalk.New(cfg)
-	input := &elasticbeanstalk.SwapEnvironmentCNAMEsInput{
+	input := &types.SwapEnvironmentCNAMEsInput{
 		DestinationEnvironmentName: aws.String("my-env-green"),
 		SourceEnvironmentName:      aws.String("my-env-blue"),
 	}
@@ -996,7 +998,7 @@ func ExampleClient_TerminateEnvironmentRequest_shared00() {
 	}
 
 	svc := elasticbeanstalk.New(cfg)
-	input := &elasticbeanstalk.TerminateEnvironmentInput{
+	input := &types.TerminateEnvironmentInput{
 		EnvironmentName: aws.String("my-env"),
 	}
 
@@ -1031,7 +1033,7 @@ func ExampleClient_UpdateApplicationRequest_shared00() {
 	}
 
 	svc := elasticbeanstalk.New(cfg)
-	input := &elasticbeanstalk.UpdateApplicationInput{
+	input := &types.UpdateApplicationInput{
 		ApplicationName: aws.String("my-app"),
 		Description:     aws.String("my Elastic Beanstalk application"),
 	}
@@ -1065,7 +1067,7 @@ func ExampleClient_UpdateApplicationVersionRequest_shared00() {
 	}
 
 	svc := elasticbeanstalk.New(cfg)
-	input := &elasticbeanstalk.UpdateApplicationVersionInput{
+	input := &types.UpdateApplicationVersionInput{
 		ApplicationName: aws.String("my-app"),
 		Description:     aws.String("new description"),
 		VersionLabel:    aws.String("22a0-stage-150819_185942"),
@@ -1101,9 +1103,9 @@ func ExampleClient_UpdateConfigurationTemplateRequest_shared00() {
 	}
 
 	svc := elasticbeanstalk.New(cfg)
-	input := &elasticbeanstalk.UpdateConfigurationTemplateInput{
+	input := &types.UpdateConfigurationTemplateInput{
 		ApplicationName: aws.String("my-app"),
-		OptionsToRemove: []elasticbeanstalk.OptionSpecification{
+		OptionsToRemove: []types.OptionSpecification{
 			{
 				Namespace:  aws.String("aws:elasticbeanstalk:healthreporting:system"),
 				OptionName: aws.String("ConfigDocument"),
@@ -1146,7 +1148,7 @@ func ExampleClient_UpdateEnvironmentRequest_shared00() {
 	}
 
 	svc := elasticbeanstalk.New(cfg)
-	input := &elasticbeanstalk.UpdateEnvironmentInput{
+	input := &types.UpdateEnvironmentInput{
 		EnvironmentName: aws.String("my-env"),
 		VersionLabel:    aws.String("v2"),
 	}
@@ -1184,9 +1186,9 @@ func ExampleClient_UpdateEnvironmentRequest_shared01() {
 	}
 
 	svc := elasticbeanstalk.New(cfg)
-	input := &elasticbeanstalk.UpdateEnvironmentInput{
+	input := &types.UpdateEnvironmentInput{
 		EnvironmentName: aws.String("my-env"),
-		OptionSettings: []elasticbeanstalk.ConfigurationOptionSetting{
+		OptionSettings: []types.ConfigurationOptionSetting{
 			{
 				Namespace:  aws.String("aws:elb:healthcheck"),
 				OptionName: aws.String("Interval"),
@@ -1243,10 +1245,10 @@ func ExampleClient_ValidateConfigurationSettingsRequest_shared00() {
 	}
 
 	svc := elasticbeanstalk.New(cfg)
-	input := &elasticbeanstalk.ValidateConfigurationSettingsInput{
+	input := &types.ValidateConfigurationSettingsInput{
 		ApplicationName: aws.String("my-app"),
 		EnvironmentName: aws.String("my-env"),
-		OptionSettings: []elasticbeanstalk.ConfigurationOptionSetting{
+		OptionSettings: []types.ConfigurationOptionSetting{
 			{
 				Namespace:  aws.String("aws:elasticbeanstalk:healthreporting:system"),
 				OptionName: aws.String("ConfigDocument"),

@@ -6,76 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/marketplaceentitlementservice/types"
 )
-
-// The GetEntitlementsRequest contains parameters for the GetEntitlements operation.
-type GetEntitlementsInput struct {
-	_ struct{} `type:"structure"`
-
-	// Filter is used to return entitlements for a specific customer or for a specific
-	// dimension. Filters are described as keys mapped to a lists of values. Filtered
-	// requests are unioned for each value in the value list, and then intersected
-	// for each filter key.
-	Filter map[string][]string `type:"map"`
-
-	// The maximum number of items to retrieve from the GetEntitlements operation.
-	// For pagination, use the NextToken field in subsequent calls to GetEntitlements.
-	MaxResults *int64 `type:"integer"`
-
-	// For paginated calls to GetEntitlements, pass the NextToken from the previous
-	// GetEntitlementsResult.
-	NextToken *string `type:"string"`
-
-	// Product code is used to uniquely identify a product in AWS Marketplace. The
-	// product code will be provided by AWS Marketplace when the product listing
-	// is created.
-	//
-	// ProductCode is a required field
-	ProductCode *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetEntitlementsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetEntitlementsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetEntitlementsInput"}
-
-	if s.ProductCode == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ProductCode"))
-	}
-	if s.ProductCode != nil && len(*s.ProductCode) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ProductCode", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// The GetEntitlementsRequest contains results from the GetEntitlements operation.
-type GetEntitlementsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The set of entitlements found through the GetEntitlements operation. If the
-	// result contains an empty set of entitlements, NextToken might still be present
-	// and should be used.
-	Entitlements []Entitlement `type:"list"`
-
-	// For paginated results, use NextToken in subsequent calls to GetEntitlements.
-	// If the result contains an empty set of entitlements, NextToken might still
-	// be present and should be used.
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s GetEntitlementsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetEntitlements = "GetEntitlements"
 
@@ -93,7 +25,7 @@ const opGetEntitlements = "GetEntitlements"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/entitlement.marketplace-2017-01-11/GetEntitlements
-func (c *Client) GetEntitlementsRequest(input *GetEntitlementsInput) GetEntitlementsRequest {
+func (c *Client) GetEntitlementsRequest(input *types.GetEntitlementsInput) GetEntitlementsRequest {
 	op := &aws.Operation{
 		Name:       opGetEntitlements,
 		HTTPMethod: "POST",
@@ -101,10 +33,10 @@ func (c *Client) GetEntitlementsRequest(input *GetEntitlementsInput) GetEntitlem
 	}
 
 	if input == nil {
-		input = &GetEntitlementsInput{}
+		input = &types.GetEntitlementsInput{}
 	}
 
-	req := c.newRequest(op, input, &GetEntitlementsOutput{})
+	req := c.newRequest(op, input, &types.GetEntitlementsOutput{})
 	return GetEntitlementsRequest{Request: req, Input: input, Copy: c.GetEntitlementsRequest}
 }
 
@@ -112,8 +44,8 @@ func (c *Client) GetEntitlementsRequest(input *GetEntitlementsInput) GetEntitlem
 // GetEntitlements API operation.
 type GetEntitlementsRequest struct {
 	*aws.Request
-	Input *GetEntitlementsInput
-	Copy  func(*GetEntitlementsInput) GetEntitlementsRequest
+	Input *types.GetEntitlementsInput
+	Copy  func(*types.GetEntitlementsInput) GetEntitlementsRequest
 }
 
 // Send marshals and sends the GetEntitlements API request.
@@ -125,7 +57,7 @@ func (r GetEntitlementsRequest) Send(ctx context.Context) (*GetEntitlementsRespo
 	}
 
 	resp := &GetEntitlementsResponse{
-		GetEntitlementsOutput: r.Request.Data.(*GetEntitlementsOutput),
+		GetEntitlementsOutput: r.Request.Data.(*types.GetEntitlementsOutput),
 		response:              &aws.Response{Request: r.Request},
 	}
 
@@ -135,7 +67,7 @@ func (r GetEntitlementsRequest) Send(ctx context.Context) (*GetEntitlementsRespo
 // GetEntitlementsResponse is the response type for the
 // GetEntitlements API operation.
 type GetEntitlementsResponse struct {
-	*GetEntitlementsOutput
+	*types.GetEntitlementsOutput
 
 	response *aws.Response
 }

@@ -6,62 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/greengrass/types"
 )
-
-type DeleteDeviceDefinitionInput struct {
-	_ struct{} `type:"structure"`
-
-	// DeviceDefinitionId is a required field
-	DeviceDefinitionId *string `location:"uri" locationName:"DeviceDefinitionId" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteDeviceDefinitionInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteDeviceDefinitionInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteDeviceDefinitionInput"}
-
-	if s.DeviceDefinitionId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DeviceDefinitionId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteDeviceDefinitionInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.DeviceDefinitionId != nil {
-		v := *s.DeviceDefinitionId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "DeviceDefinitionId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type DeleteDeviceDefinitionOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteDeviceDefinitionOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteDeviceDefinitionOutput) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
 
 const opDeleteDeviceDefinition = "DeleteDeviceDefinition"
 
@@ -78,7 +24,7 @@ const opDeleteDeviceDefinition = "DeleteDeviceDefinition"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/DeleteDeviceDefinition
-func (c *Client) DeleteDeviceDefinitionRequest(input *DeleteDeviceDefinitionInput) DeleteDeviceDefinitionRequest {
+func (c *Client) DeleteDeviceDefinitionRequest(input *types.DeleteDeviceDefinitionInput) DeleteDeviceDefinitionRequest {
 	op := &aws.Operation{
 		Name:       opDeleteDeviceDefinition,
 		HTTPMethod: "DELETE",
@@ -86,10 +32,10 @@ func (c *Client) DeleteDeviceDefinitionRequest(input *DeleteDeviceDefinitionInpu
 	}
 
 	if input == nil {
-		input = &DeleteDeviceDefinitionInput{}
+		input = &types.DeleteDeviceDefinitionInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteDeviceDefinitionOutput{})
+	req := c.newRequest(op, input, &types.DeleteDeviceDefinitionOutput{})
 	return DeleteDeviceDefinitionRequest{Request: req, Input: input, Copy: c.DeleteDeviceDefinitionRequest}
 }
 
@@ -97,8 +43,8 @@ func (c *Client) DeleteDeviceDefinitionRequest(input *DeleteDeviceDefinitionInpu
 // DeleteDeviceDefinition API operation.
 type DeleteDeviceDefinitionRequest struct {
 	*aws.Request
-	Input *DeleteDeviceDefinitionInput
-	Copy  func(*DeleteDeviceDefinitionInput) DeleteDeviceDefinitionRequest
+	Input *types.DeleteDeviceDefinitionInput
+	Copy  func(*types.DeleteDeviceDefinitionInput) DeleteDeviceDefinitionRequest
 }
 
 // Send marshals and sends the DeleteDeviceDefinition API request.
@@ -110,7 +56,7 @@ func (r DeleteDeviceDefinitionRequest) Send(ctx context.Context) (*DeleteDeviceD
 	}
 
 	resp := &DeleteDeviceDefinitionResponse{
-		DeleteDeviceDefinitionOutput: r.Request.Data.(*DeleteDeviceDefinitionOutput),
+		DeleteDeviceDefinitionOutput: r.Request.Data.(*types.DeleteDeviceDefinitionOutput),
 		response:                     &aws.Response{Request: r.Request},
 	}
 
@@ -120,7 +66,7 @@ func (r DeleteDeviceDefinitionRequest) Send(ctx context.Context) (*DeleteDeviceD
 // DeleteDeviceDefinitionResponse is the response type for the
 // DeleteDeviceDefinition API operation.
 type DeleteDeviceDefinitionResponse struct {
-	*DeleteDeviceDefinitionOutput
+	*types.DeleteDeviceDefinitionOutput
 
 	response *aws.Response
 }

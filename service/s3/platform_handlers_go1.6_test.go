@@ -9,11 +9,12 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting/unit"
 	"github.com/aws/aws-sdk-go-v2/service/s3"
+	"github.com/aws/aws-sdk-go-v2/service/s3/types"
 )
 
 func TestAdd100Continue_Added(t *testing.T) {
 	svc := s3.New(unit.Config())
-	r := svc.PutObjectRequest(&s3.PutObjectInput{
+	r := svc.PutObjectRequest(&types.PutObjectInput{
 		Bucket: aws.String("bucket"),
 		Key:    aws.String("dest"),
 		Body:   bytes.NewReader(make([]byte, 1024*1024*5)),
@@ -34,7 +35,7 @@ func TestAdd100Continue_SkipDisabled(t *testing.T) {
 
 	svc := s3.New(cfg)
 	svc.Disable100Continue = true
-	r := svc.PutObjectRequest(&s3.PutObjectInput{
+	r := svc.PutObjectRequest(&types.PutObjectInput{
 		Bucket: aws.String("bucket"),
 		Key:    aws.String("dest"),
 		Body:   bytes.NewReader(make([]byte, 1024*1024*5)),
@@ -52,7 +53,7 @@ func TestAdd100Continue_SkipDisabled(t *testing.T) {
 
 func TestAdd100Continue_SkipNonPUT(t *testing.T) {
 	svc := s3.New(unit.Config())
-	r := svc.GetObjectRequest(&s3.GetObjectInput{
+	r := svc.GetObjectRequest(&types.GetObjectInput{
 		Bucket: aws.String("bucket"),
 		Key:    aws.String("dest"),
 	})
@@ -69,7 +70,7 @@ func TestAdd100Continue_SkipNonPUT(t *testing.T) {
 
 func TestAdd100Continue_SkipTooSmall(t *testing.T) {
 	svc := s3.New(unit.Config())
-	r := svc.PutObjectRequest(&s3.PutObjectInput{
+	r := svc.PutObjectRequest(&types.PutObjectInput{
 		Bucket: aws.String("bucket"),
 		Key:    aws.String("dest"),
 		Body:   bytes.NewReader(make([]byte, 1024*1024*1)),

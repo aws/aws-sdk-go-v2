@@ -6,118 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/apigateway/types"
 )
-
-// Request to describe a BasePathMapping resource.
-type GetBasePathMappingInput struct {
-	_ struct{} `type:"structure"`
-
-	// [Required] The base path name that callers of the API must provide as part
-	// of the URL after the domain name. This value must be unique for all of the
-	// mappings across a single API. Specify '(none)' if you do not want callers
-	// to specify any base path name after the domain name.
-	//
-	// BasePath is a required field
-	BasePath *string `location:"uri" locationName:"base_path" type:"string" required:"true"`
-
-	// [Required] The domain name of the BasePathMapping resource to be described.
-	//
-	// DomainName is a required field
-	DomainName *string `location:"uri" locationName:"domain_name" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetBasePathMappingInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetBasePathMappingInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetBasePathMappingInput"}
-
-	if s.BasePath == nil {
-		invalidParams.Add(aws.NewErrParamRequired("BasePath"))
-	}
-
-	if s.DomainName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DomainName"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetBasePathMappingInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.BasePath != nil {
-		v := *s.BasePath
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "base_path", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.DomainName != nil {
-		v := *s.DomainName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "domain_name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-// Represents the base path that callers of the API must provide as part of
-// the URL after the domain name.
-//
-// A custom domain name plus a BasePathMapping specification identifies a deployed
-// RestApi in a given stage of the owner Account.
-//
-// Use Custom Domain Names (https://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-custom-domains.html)
-type GetBasePathMappingOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The base path name that callers of the API must provide as part of the URL
-	// after the domain name.
-	BasePath *string `locationName:"basePath" type:"string"`
-
-	// The string identifier of the associated RestApi.
-	RestApiId *string `locationName:"restApiId" type:"string"`
-
-	// The name of the associated stage.
-	Stage *string `locationName:"stage" type:"string"`
-}
-
-// String returns the string representation
-func (s GetBasePathMappingOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetBasePathMappingOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.BasePath != nil {
-		v := *s.BasePath
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "basePath", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.RestApiId != nil {
-		v := *s.RestApiId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "restApiId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Stage != nil {
-		v := *s.Stage
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "stage", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opGetBasePathMapping = "GetBasePathMapping"
 
@@ -132,7 +22,7 @@ const opGetBasePathMapping = "GetBasePathMapping"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) GetBasePathMappingRequest(input *GetBasePathMappingInput) GetBasePathMappingRequest {
+func (c *Client) GetBasePathMappingRequest(input *types.GetBasePathMappingInput) GetBasePathMappingRequest {
 	op := &aws.Operation{
 		Name:       opGetBasePathMapping,
 		HTTPMethod: "GET",
@@ -140,10 +30,10 @@ func (c *Client) GetBasePathMappingRequest(input *GetBasePathMappingInput) GetBa
 	}
 
 	if input == nil {
-		input = &GetBasePathMappingInput{}
+		input = &types.GetBasePathMappingInput{}
 	}
 
-	req := c.newRequest(op, input, &GetBasePathMappingOutput{})
+	req := c.newRequest(op, input, &types.GetBasePathMappingOutput{})
 	return GetBasePathMappingRequest{Request: req, Input: input, Copy: c.GetBasePathMappingRequest}
 }
 
@@ -151,8 +41,8 @@ func (c *Client) GetBasePathMappingRequest(input *GetBasePathMappingInput) GetBa
 // GetBasePathMapping API operation.
 type GetBasePathMappingRequest struct {
 	*aws.Request
-	Input *GetBasePathMappingInput
-	Copy  func(*GetBasePathMappingInput) GetBasePathMappingRequest
+	Input *types.GetBasePathMappingInput
+	Copy  func(*types.GetBasePathMappingInput) GetBasePathMappingRequest
 }
 
 // Send marshals and sends the GetBasePathMapping API request.
@@ -164,7 +54,7 @@ func (r GetBasePathMappingRequest) Send(ctx context.Context) (*GetBasePathMappin
 	}
 
 	resp := &GetBasePathMappingResponse{
-		GetBasePathMappingOutput: r.Request.Data.(*GetBasePathMappingOutput),
+		GetBasePathMappingOutput: r.Request.Data.(*types.GetBasePathMappingOutput),
 		response:                 &aws.Response{Request: r.Request},
 	}
 
@@ -174,7 +64,7 @@ func (r GetBasePathMappingRequest) Send(ctx context.Context) (*GetBasePathMappin
 // GetBasePathMappingResponse is the response type for the
 // GetBasePathMapping API operation.
 type GetBasePathMappingResponse struct {
-	*GetBasePathMappingOutput
+	*types.GetBasePathMappingOutput
 
 	response *aws.Response
 }

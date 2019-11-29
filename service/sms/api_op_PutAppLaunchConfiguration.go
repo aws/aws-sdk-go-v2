@@ -6,36 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/sms/types"
 )
-
-type PutAppLaunchConfigurationInput struct {
-	_ struct{} `type:"structure"`
-
-	// ID of the application associated with the launch configuration.
-	AppId *string `locationName:"appId" type:"string"`
-
-	// Name of service role in the customer's account that Amazon CloudFormation
-	// uses to launch the application.
-	RoleName *string `locationName:"roleName" type:"string"`
-
-	// Launch configurations for server groups in the application.
-	ServerGroupLaunchConfigurations []ServerGroupLaunchConfiguration `locationName:"serverGroupLaunchConfigurations" type:"list"`
-}
-
-// String returns the string representation
-func (s PutAppLaunchConfigurationInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type PutAppLaunchConfigurationOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s PutAppLaunchConfigurationOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opPutAppLaunchConfiguration = "PutAppLaunchConfiguration"
 
@@ -52,7 +24,7 @@ const opPutAppLaunchConfiguration = "PutAppLaunchConfiguration"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sms-2016-10-24/PutAppLaunchConfiguration
-func (c *Client) PutAppLaunchConfigurationRequest(input *PutAppLaunchConfigurationInput) PutAppLaunchConfigurationRequest {
+func (c *Client) PutAppLaunchConfigurationRequest(input *types.PutAppLaunchConfigurationInput) PutAppLaunchConfigurationRequest {
 	op := &aws.Operation{
 		Name:       opPutAppLaunchConfiguration,
 		HTTPMethod: "POST",
@@ -60,10 +32,10 @@ func (c *Client) PutAppLaunchConfigurationRequest(input *PutAppLaunchConfigurati
 	}
 
 	if input == nil {
-		input = &PutAppLaunchConfigurationInput{}
+		input = &types.PutAppLaunchConfigurationInput{}
 	}
 
-	req := c.newRequest(op, input, &PutAppLaunchConfigurationOutput{})
+	req := c.newRequest(op, input, &types.PutAppLaunchConfigurationOutput{})
 	return PutAppLaunchConfigurationRequest{Request: req, Input: input, Copy: c.PutAppLaunchConfigurationRequest}
 }
 
@@ -71,8 +43,8 @@ func (c *Client) PutAppLaunchConfigurationRequest(input *PutAppLaunchConfigurati
 // PutAppLaunchConfiguration API operation.
 type PutAppLaunchConfigurationRequest struct {
 	*aws.Request
-	Input *PutAppLaunchConfigurationInput
-	Copy  func(*PutAppLaunchConfigurationInput) PutAppLaunchConfigurationRequest
+	Input *types.PutAppLaunchConfigurationInput
+	Copy  func(*types.PutAppLaunchConfigurationInput) PutAppLaunchConfigurationRequest
 }
 
 // Send marshals and sends the PutAppLaunchConfiguration API request.
@@ -84,7 +56,7 @@ func (r PutAppLaunchConfigurationRequest) Send(ctx context.Context) (*PutAppLaun
 	}
 
 	resp := &PutAppLaunchConfigurationResponse{
-		PutAppLaunchConfigurationOutput: r.Request.Data.(*PutAppLaunchConfigurationOutput),
+		PutAppLaunchConfigurationOutput: r.Request.Data.(*types.PutAppLaunchConfigurationOutput),
 		response:                        &aws.Response{Request: r.Request},
 	}
 
@@ -94,7 +66,7 @@ func (r PutAppLaunchConfigurationRequest) Send(ctx context.Context) (*PutAppLaun
 // PutAppLaunchConfigurationResponse is the response type for the
 // PutAppLaunchConfiguration API operation.
 type PutAppLaunchConfigurationResponse struct {
-	*PutAppLaunchConfigurationOutput
+	*types.PutAppLaunchConfigurationOutput
 
 	response *aws.Response
 }

@@ -6,50 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/gamelift/types"
 )
-
-// Represents the input for a request action.
-type DescribeAliasInput struct {
-	_ struct{} `type:"structure"`
-
-	// Unique identifier for a fleet alias. Specify the alias you want to retrieve.
-	//
-	// AliasId is a required field
-	AliasId *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeAliasInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeAliasInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeAliasInput"}
-
-	if s.AliasId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("AliasId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Represents the returned data in response to a request action.
-type DescribeAliasOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Object that contains the requested alias.
-	Alias *Alias `type:"structure"`
-}
-
-// String returns the string representation
-func (s DescribeAliasOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeAlias = "DescribeAlias"
 
@@ -82,7 +40,7 @@ const opDescribeAlias = "DescribeAlias"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DescribeAlias
-func (c *Client) DescribeAliasRequest(input *DescribeAliasInput) DescribeAliasRequest {
+func (c *Client) DescribeAliasRequest(input *types.DescribeAliasInput) DescribeAliasRequest {
 	op := &aws.Operation{
 		Name:       opDescribeAlias,
 		HTTPMethod: "POST",
@@ -90,10 +48,10 @@ func (c *Client) DescribeAliasRequest(input *DescribeAliasInput) DescribeAliasRe
 	}
 
 	if input == nil {
-		input = &DescribeAliasInput{}
+		input = &types.DescribeAliasInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeAliasOutput{})
+	req := c.newRequest(op, input, &types.DescribeAliasOutput{})
 	return DescribeAliasRequest{Request: req, Input: input, Copy: c.DescribeAliasRequest}
 }
 
@@ -101,8 +59,8 @@ func (c *Client) DescribeAliasRequest(input *DescribeAliasInput) DescribeAliasRe
 // DescribeAlias API operation.
 type DescribeAliasRequest struct {
 	*aws.Request
-	Input *DescribeAliasInput
-	Copy  func(*DescribeAliasInput) DescribeAliasRequest
+	Input *types.DescribeAliasInput
+	Copy  func(*types.DescribeAliasInput) DescribeAliasRequest
 }
 
 // Send marshals and sends the DescribeAlias API request.
@@ -114,7 +72,7 @@ func (r DescribeAliasRequest) Send(ctx context.Context) (*DescribeAliasResponse,
 	}
 
 	resp := &DescribeAliasResponse{
-		DescribeAliasOutput: r.Request.Data.(*DescribeAliasOutput),
+		DescribeAliasOutput: r.Request.Data.(*types.DescribeAliasOutput),
 		response:            &aws.Response{Request: r.Request},
 	}
 
@@ -124,7 +82,7 @@ func (r DescribeAliasRequest) Send(ctx context.Context) (*DescribeAliasResponse,
 // DescribeAliasResponse is the response type for the
 // DescribeAlias API operation.
 type DescribeAliasResponse struct {
-	*DescribeAliasOutput
+	*types.DescribeAliasOutput
 
 	response *aws.Response
 }

@@ -6,43 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ses/types"
 )
-
-// Represents a request to list the receipt rule sets that exist under your
-// AWS account. You use receipt rule sets to receive email with Amazon SES.
-// For more information, see the Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-concepts.html).
-type ListReceiptRuleSetsInput struct {
-	_ struct{} `type:"structure"`
-
-	// A token returned from a previous call to ListReceiptRuleSets to indicate
-	// the position in the receipt rule set list.
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s ListReceiptRuleSetsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// A list of receipt rule sets that exist under your AWS account.
-type ListReceiptRuleSetsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A token indicating that there are additional receipt rule sets available
-	// to be listed. Pass this token to successive calls of ListReceiptRuleSets
-	// to retrieve up to 100 receipt rule sets at a time.
-	NextToken *string `type:"string"`
-
-	// The metadata for the currently active receipt rule set. The metadata consists
-	// of the rule set name and the timestamp of when the rule set was created.
-	RuleSets []ReceiptRuleSetMetadata `type:"list"`
-}
-
-// String returns the string representation
-func (s ListReceiptRuleSetsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListReceiptRuleSets = "ListReceiptRuleSets"
 
@@ -67,7 +32,7 @@ const opListReceiptRuleSets = "ListReceiptRuleSets"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/ListReceiptRuleSets
-func (c *Client) ListReceiptRuleSetsRequest(input *ListReceiptRuleSetsInput) ListReceiptRuleSetsRequest {
+func (c *Client) ListReceiptRuleSetsRequest(input *types.ListReceiptRuleSetsInput) ListReceiptRuleSetsRequest {
 	op := &aws.Operation{
 		Name:       opListReceiptRuleSets,
 		HTTPMethod: "POST",
@@ -75,10 +40,10 @@ func (c *Client) ListReceiptRuleSetsRequest(input *ListReceiptRuleSetsInput) Lis
 	}
 
 	if input == nil {
-		input = &ListReceiptRuleSetsInput{}
+		input = &types.ListReceiptRuleSetsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListReceiptRuleSetsOutput{})
+	req := c.newRequest(op, input, &types.ListReceiptRuleSetsOutput{})
 	return ListReceiptRuleSetsRequest{Request: req, Input: input, Copy: c.ListReceiptRuleSetsRequest}
 }
 
@@ -86,8 +51,8 @@ func (c *Client) ListReceiptRuleSetsRequest(input *ListReceiptRuleSetsInput) Lis
 // ListReceiptRuleSets API operation.
 type ListReceiptRuleSetsRequest struct {
 	*aws.Request
-	Input *ListReceiptRuleSetsInput
-	Copy  func(*ListReceiptRuleSetsInput) ListReceiptRuleSetsRequest
+	Input *types.ListReceiptRuleSetsInput
+	Copy  func(*types.ListReceiptRuleSetsInput) ListReceiptRuleSetsRequest
 }
 
 // Send marshals and sends the ListReceiptRuleSets API request.
@@ -99,7 +64,7 @@ func (r ListReceiptRuleSetsRequest) Send(ctx context.Context) (*ListReceiptRuleS
 	}
 
 	resp := &ListReceiptRuleSetsResponse{
-		ListReceiptRuleSetsOutput: r.Request.Data.(*ListReceiptRuleSetsOutput),
+		ListReceiptRuleSetsOutput: r.Request.Data.(*types.ListReceiptRuleSetsOutput),
 		response:                  &aws.Response{Request: r.Request},
 	}
 
@@ -109,7 +74,7 @@ func (r ListReceiptRuleSetsRequest) Send(ctx context.Context) (*ListReceiptRuleS
 // ListReceiptRuleSetsResponse is the response type for the
 // ListReceiptRuleSets API operation.
 type ListReceiptRuleSetsResponse struct {
-	*ListReceiptRuleSetsOutput
+	*types.ListReceiptRuleSetsOutput
 
 	response *aws.Response
 }

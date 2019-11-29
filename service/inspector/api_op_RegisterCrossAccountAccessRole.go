@@ -6,51 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
+	"github.com/aws/aws-sdk-go-v2/service/inspector/types"
 )
-
-type RegisterCrossAccountAccessRoleInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ARN of the IAM role that grants Amazon Inspector access to AWS Services
-	// needed to perform security assessments.
-	//
-	// RoleArn is a required field
-	RoleArn *string `locationName:"roleArn" min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s RegisterCrossAccountAccessRoleInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *RegisterCrossAccountAccessRoleInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "RegisterCrossAccountAccessRoleInput"}
-
-	if s.RoleArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("RoleArn"))
-	}
-	if s.RoleArn != nil && len(*s.RoleArn) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("RoleArn", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type RegisterCrossAccountAccessRoleOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s RegisterCrossAccountAccessRoleOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opRegisterCrossAccountAccessRole = "RegisterCrossAccountAccessRole"
 
@@ -68,7 +27,7 @@ const opRegisterCrossAccountAccessRole = "RegisterCrossAccountAccessRole"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/RegisterCrossAccountAccessRole
-func (c *Client) RegisterCrossAccountAccessRoleRequest(input *RegisterCrossAccountAccessRoleInput) RegisterCrossAccountAccessRoleRequest {
+func (c *Client) RegisterCrossAccountAccessRoleRequest(input *types.RegisterCrossAccountAccessRoleInput) RegisterCrossAccountAccessRoleRequest {
 	op := &aws.Operation{
 		Name:       opRegisterCrossAccountAccessRole,
 		HTTPMethod: "POST",
@@ -76,10 +35,10 @@ func (c *Client) RegisterCrossAccountAccessRoleRequest(input *RegisterCrossAccou
 	}
 
 	if input == nil {
-		input = &RegisterCrossAccountAccessRoleInput{}
+		input = &types.RegisterCrossAccountAccessRoleInput{}
 	}
 
-	req := c.newRequest(op, input, &RegisterCrossAccountAccessRoleOutput{})
+	req := c.newRequest(op, input, &types.RegisterCrossAccountAccessRoleOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return RegisterCrossAccountAccessRoleRequest{Request: req, Input: input, Copy: c.RegisterCrossAccountAccessRoleRequest}
@@ -89,8 +48,8 @@ func (c *Client) RegisterCrossAccountAccessRoleRequest(input *RegisterCrossAccou
 // RegisterCrossAccountAccessRole API operation.
 type RegisterCrossAccountAccessRoleRequest struct {
 	*aws.Request
-	Input *RegisterCrossAccountAccessRoleInput
-	Copy  func(*RegisterCrossAccountAccessRoleInput) RegisterCrossAccountAccessRoleRequest
+	Input *types.RegisterCrossAccountAccessRoleInput
+	Copy  func(*types.RegisterCrossAccountAccessRoleInput) RegisterCrossAccountAccessRoleRequest
 }
 
 // Send marshals and sends the RegisterCrossAccountAccessRole API request.
@@ -102,7 +61,7 @@ func (r RegisterCrossAccountAccessRoleRequest) Send(ctx context.Context) (*Regis
 	}
 
 	resp := &RegisterCrossAccountAccessRoleResponse{
-		RegisterCrossAccountAccessRoleOutput: r.Request.Data.(*RegisterCrossAccountAccessRoleOutput),
+		RegisterCrossAccountAccessRoleOutput: r.Request.Data.(*types.RegisterCrossAccountAccessRoleOutput),
 		response:                             &aws.Response{Request: r.Request},
 	}
 
@@ -112,7 +71,7 @@ func (r RegisterCrossAccountAccessRoleRequest) Send(ctx context.Context) (*Regis
 // RegisterCrossAccountAccessRoleResponse is the response type for the
 // RegisterCrossAccountAccessRole API operation.
 type RegisterCrossAccountAccessRoleResponse struct {
-	*RegisterCrossAccountAccessRoleOutput
+	*types.RegisterCrossAccountAccessRoleOutput
 
 	response *aws.Response
 }

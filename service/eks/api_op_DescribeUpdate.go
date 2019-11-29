@@ -6,95 +6,16 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/eks/types"
 )
-
-type DescribeUpdateInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the Amazon EKS cluster to update.
-	//
-	// Name is a required field
-	Name *string `location:"uri" locationName:"name" type:"string" required:"true"`
-
-	// The ID of the update to describe.
-	//
-	// UpdateId is a required field
-	UpdateId *string `location:"uri" locationName:"updateId" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeUpdateInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeUpdateInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeUpdateInput"}
-
-	if s.Name == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Name"))
-	}
-
-	if s.UpdateId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("UpdateId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DescribeUpdateInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.Name != nil {
-		v := *s.Name
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.UpdateId != nil {
-		v := *s.UpdateId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "updateId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type DescribeUpdateOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The full description of the specified update.
-	Update *Update `locationName:"update" type:"structure"`
-}
-
-// String returns the string representation
-func (s DescribeUpdateOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DescribeUpdateOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.Update != nil {
-		v := s.Update
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "update", v, metadata)
-	}
-	return nil
-}
 
 const opDescribeUpdate = "DescribeUpdate"
 
 // DescribeUpdateRequest returns a request value for making API operation for
 // Amazon Elastic Kubernetes Service.
 //
-// Returns descriptive information about an update against your Amazon EKS cluster.
+// Returns descriptive information about an update against your Amazon EKS cluster
+// or associated managed node group.
 //
 // When the status of the update is Succeeded, the update is complete. If an
 // update fails, the status is Failed, and an error detail explains the reason
@@ -108,7 +29,7 @@ const opDescribeUpdate = "DescribeUpdate"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/DescribeUpdate
-func (c *Client) DescribeUpdateRequest(input *DescribeUpdateInput) DescribeUpdateRequest {
+func (c *Client) DescribeUpdateRequest(input *types.DescribeUpdateInput) DescribeUpdateRequest {
 	op := &aws.Operation{
 		Name:       opDescribeUpdate,
 		HTTPMethod: "GET",
@@ -116,10 +37,10 @@ func (c *Client) DescribeUpdateRequest(input *DescribeUpdateInput) DescribeUpdat
 	}
 
 	if input == nil {
-		input = &DescribeUpdateInput{}
+		input = &types.DescribeUpdateInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeUpdateOutput{})
+	req := c.newRequest(op, input, &types.DescribeUpdateOutput{})
 	return DescribeUpdateRequest{Request: req, Input: input, Copy: c.DescribeUpdateRequest}
 }
 
@@ -127,8 +48,8 @@ func (c *Client) DescribeUpdateRequest(input *DescribeUpdateInput) DescribeUpdat
 // DescribeUpdate API operation.
 type DescribeUpdateRequest struct {
 	*aws.Request
-	Input *DescribeUpdateInput
-	Copy  func(*DescribeUpdateInput) DescribeUpdateRequest
+	Input *types.DescribeUpdateInput
+	Copy  func(*types.DescribeUpdateInput) DescribeUpdateRequest
 }
 
 // Send marshals and sends the DescribeUpdate API request.
@@ -140,7 +61,7 @@ func (r DescribeUpdateRequest) Send(ctx context.Context) (*DescribeUpdateRespons
 	}
 
 	resp := &DescribeUpdateResponse{
-		DescribeUpdateOutput: r.Request.Data.(*DescribeUpdateOutput),
+		DescribeUpdateOutput: r.Request.Data.(*types.DescribeUpdateOutput),
 		response:             &aws.Response{Request: r.Request},
 	}
 
@@ -150,7 +71,7 @@ func (r DescribeUpdateRequest) Send(ctx context.Context) (*DescribeUpdateRespons
 // DescribeUpdateResponse is the response type for the
 // DescribeUpdate API operation.
 type DescribeUpdateResponse struct {
-	*DescribeUpdateOutput
+	*types.DescribeUpdateOutput
 
 	response *aws.Response
 }

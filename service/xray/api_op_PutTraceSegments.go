@@ -6,85 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/xray/types"
 )
-
-type PutTraceSegmentsInput struct {
-	_ struct{} `type:"structure"`
-
-	// A string containing a JSON document defining one or more segments or subsegments.
-	//
-	// TraceSegmentDocuments is a required field
-	TraceSegmentDocuments []string `type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s PutTraceSegmentsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *PutTraceSegmentsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "PutTraceSegmentsInput"}
-
-	if s.TraceSegmentDocuments == nil {
-		invalidParams.Add(aws.NewErrParamRequired("TraceSegmentDocuments"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s PutTraceSegmentsInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.TraceSegmentDocuments != nil {
-		v := s.TraceSegmentDocuments
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "TraceSegmentDocuments", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
-		}
-		ls0.End()
-
-	}
-	return nil
-}
-
-type PutTraceSegmentsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Segments that failed processing.
-	UnprocessedTraceSegments []UnprocessedTraceSegment `type:"list"`
-}
-
-// String returns the string representation
-func (s PutTraceSegmentsOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s PutTraceSegmentsOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.UnprocessedTraceSegments != nil {
-		v := s.UnprocessedTraceSegments
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "UnprocessedTraceSegments", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	return nil
-}
 
 const opPutTraceSegments = "PutTraceSegments"
 
@@ -146,7 +69,7 @@ const opPutTraceSegments = "PutTraceSegments"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/PutTraceSegments
-func (c *Client) PutTraceSegmentsRequest(input *PutTraceSegmentsInput) PutTraceSegmentsRequest {
+func (c *Client) PutTraceSegmentsRequest(input *types.PutTraceSegmentsInput) PutTraceSegmentsRequest {
 	op := &aws.Operation{
 		Name:       opPutTraceSegments,
 		HTTPMethod: "POST",
@@ -154,10 +77,10 @@ func (c *Client) PutTraceSegmentsRequest(input *PutTraceSegmentsInput) PutTraceS
 	}
 
 	if input == nil {
-		input = &PutTraceSegmentsInput{}
+		input = &types.PutTraceSegmentsInput{}
 	}
 
-	req := c.newRequest(op, input, &PutTraceSegmentsOutput{})
+	req := c.newRequest(op, input, &types.PutTraceSegmentsOutput{})
 	return PutTraceSegmentsRequest{Request: req, Input: input, Copy: c.PutTraceSegmentsRequest}
 }
 
@@ -165,8 +88,8 @@ func (c *Client) PutTraceSegmentsRequest(input *PutTraceSegmentsInput) PutTraceS
 // PutTraceSegments API operation.
 type PutTraceSegmentsRequest struct {
 	*aws.Request
-	Input *PutTraceSegmentsInput
-	Copy  func(*PutTraceSegmentsInput) PutTraceSegmentsRequest
+	Input *types.PutTraceSegmentsInput
+	Copy  func(*types.PutTraceSegmentsInput) PutTraceSegmentsRequest
 }
 
 // Send marshals and sends the PutTraceSegments API request.
@@ -178,7 +101,7 @@ func (r PutTraceSegmentsRequest) Send(ctx context.Context) (*PutTraceSegmentsRes
 	}
 
 	resp := &PutTraceSegmentsResponse{
-		PutTraceSegmentsOutput: r.Request.Data.(*PutTraceSegmentsOutput),
+		PutTraceSegmentsOutput: r.Request.Data.(*types.PutTraceSegmentsOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -188,7 +111,7 @@ func (r PutTraceSegmentsRequest) Send(ctx context.Context) (*PutTraceSegmentsRes
 // PutTraceSegmentsResponse is the response type for the
 // PutTraceSegments API operation.
 type PutTraceSegmentsResponse struct {
-	*PutTraceSegmentsOutput
+	*types.PutTraceSegmentsOutput
 
 	response *aws.Response
 }

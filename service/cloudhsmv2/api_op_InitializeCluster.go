@@ -6,76 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/cloudhsmv2/types"
 )
-
-type InitializeClusterInput struct {
-	_ struct{} `type:"structure"`
-
-	// The identifier (ID) of the cluster that you are claiming. To find the cluster
-	// ID, use DescribeClusters.
-	//
-	// ClusterId is a required field
-	ClusterId *string `type:"string" required:"true"`
-
-	// The cluster certificate issued (signed) by your issuing certificate authority
-	// (CA). The certificate must be in PEM format and can contain a maximum of
-	// 5000 characters.
-	//
-	// SignedCert is a required field
-	SignedCert *string `type:"string" required:"true"`
-
-	// The issuing certificate of the issuing certificate authority (CA) that issued
-	// (signed) the cluster certificate. This can be a root (self-signed) certificate
-	// or a certificate chain that begins with the certificate that issued the cluster
-	// certificate and ends with a root certificate. The certificate or certificate
-	// chain must be in PEM format and can contain a maximum of 5000 characters.
-	//
-	// TrustAnchor is a required field
-	TrustAnchor *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s InitializeClusterInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *InitializeClusterInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "InitializeClusterInput"}
-
-	if s.ClusterId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ClusterId"))
-	}
-
-	if s.SignedCert == nil {
-		invalidParams.Add(aws.NewErrParamRequired("SignedCert"))
-	}
-
-	if s.TrustAnchor == nil {
-		invalidParams.Add(aws.NewErrParamRequired("TrustAnchor"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type InitializeClusterOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The cluster's state.
-	State ClusterState `type:"string" enum:"true"`
-
-	// A description of the cluster's state.
-	StateMessage *string `type:"string"`
-}
-
-// String returns the string representation
-func (s InitializeClusterOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opInitializeCluster = "InitializeCluster"
 
@@ -95,7 +27,7 @@ const opInitializeCluster = "InitializeCluster"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudhsmv2-2017-04-28/InitializeCluster
-func (c *Client) InitializeClusterRequest(input *InitializeClusterInput) InitializeClusterRequest {
+func (c *Client) InitializeClusterRequest(input *types.InitializeClusterInput) InitializeClusterRequest {
 	op := &aws.Operation{
 		Name:       opInitializeCluster,
 		HTTPMethod: "POST",
@@ -103,10 +35,10 @@ func (c *Client) InitializeClusterRequest(input *InitializeClusterInput) Initial
 	}
 
 	if input == nil {
-		input = &InitializeClusterInput{}
+		input = &types.InitializeClusterInput{}
 	}
 
-	req := c.newRequest(op, input, &InitializeClusterOutput{})
+	req := c.newRequest(op, input, &types.InitializeClusterOutput{})
 	return InitializeClusterRequest{Request: req, Input: input, Copy: c.InitializeClusterRequest}
 }
 
@@ -114,8 +46,8 @@ func (c *Client) InitializeClusterRequest(input *InitializeClusterInput) Initial
 // InitializeCluster API operation.
 type InitializeClusterRequest struct {
 	*aws.Request
-	Input *InitializeClusterInput
-	Copy  func(*InitializeClusterInput) InitializeClusterRequest
+	Input *types.InitializeClusterInput
+	Copy  func(*types.InitializeClusterInput) InitializeClusterRequest
 }
 
 // Send marshals and sends the InitializeCluster API request.
@@ -127,7 +59,7 @@ func (r InitializeClusterRequest) Send(ctx context.Context) (*InitializeClusterR
 	}
 
 	resp := &InitializeClusterResponse{
-		InitializeClusterOutput: r.Request.Data.(*InitializeClusterOutput),
+		InitializeClusterOutput: r.Request.Data.(*types.InitializeClusterOutput),
 		response:                &aws.Response{Request: r.Request},
 	}
 
@@ -137,7 +69,7 @@ func (r InitializeClusterRequest) Send(ctx context.Context) (*InitializeClusterR
 // InitializeClusterResponse is the response type for the
 // InitializeCluster API operation.
 type InitializeClusterResponse struct {
-	*InitializeClusterOutput
+	*types.InitializeClusterOutput
 
 	response *aws.Response
 }

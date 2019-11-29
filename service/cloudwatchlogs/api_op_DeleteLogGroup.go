@@ -6,50 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
+	"github.com/aws/aws-sdk-go-v2/service/cloudwatchlogs/types"
 )
-
-type DeleteLogGroupInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the log group.
-	//
-	// LogGroupName is a required field
-	LogGroupName *string `locationName:"logGroupName" min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteLogGroupInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteLogGroupInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteLogGroupInput"}
-
-	if s.LogGroupName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("LogGroupName"))
-	}
-	if s.LogGroupName != nil && len(*s.LogGroupName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("LogGroupName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteLogGroupOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteLogGroupOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteLogGroup = "DeleteLogGroup"
 
@@ -67,7 +27,7 @@ const opDeleteLogGroup = "DeleteLogGroup"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/DeleteLogGroup
-func (c *Client) DeleteLogGroupRequest(input *DeleteLogGroupInput) DeleteLogGroupRequest {
+func (c *Client) DeleteLogGroupRequest(input *types.DeleteLogGroupInput) DeleteLogGroupRequest {
 	op := &aws.Operation{
 		Name:       opDeleteLogGroup,
 		HTTPMethod: "POST",
@@ -75,10 +35,10 @@ func (c *Client) DeleteLogGroupRequest(input *DeleteLogGroupInput) DeleteLogGrou
 	}
 
 	if input == nil {
-		input = &DeleteLogGroupInput{}
+		input = &types.DeleteLogGroupInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteLogGroupOutput{})
+	req := c.newRequest(op, input, &types.DeleteLogGroupOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return DeleteLogGroupRequest{Request: req, Input: input, Copy: c.DeleteLogGroupRequest}
@@ -88,8 +48,8 @@ func (c *Client) DeleteLogGroupRequest(input *DeleteLogGroupInput) DeleteLogGrou
 // DeleteLogGroup API operation.
 type DeleteLogGroupRequest struct {
 	*aws.Request
-	Input *DeleteLogGroupInput
-	Copy  func(*DeleteLogGroupInput) DeleteLogGroupRequest
+	Input *types.DeleteLogGroupInput
+	Copy  func(*types.DeleteLogGroupInput) DeleteLogGroupRequest
 }
 
 // Send marshals and sends the DeleteLogGroup API request.
@@ -101,7 +61,7 @@ func (r DeleteLogGroupRequest) Send(ctx context.Context) (*DeleteLogGroupRespons
 	}
 
 	resp := &DeleteLogGroupResponse{
-		DeleteLogGroupOutput: r.Request.Data.(*DeleteLogGroupOutput),
+		DeleteLogGroupOutput: r.Request.Data.(*types.DeleteLogGroupOutput),
 		response:             &aws.Response{Request: r.Request},
 	}
 
@@ -111,7 +71,7 @@ func (r DeleteLogGroupRequest) Send(ctx context.Context) (*DeleteLogGroupRespons
 // DeleteLogGroupResponse is the response type for the
 // DeleteLogGroup API operation.
 type DeleteLogGroupResponse struct {
-	*DeleteLogGroupOutput
+	*types.DeleteLogGroupOutput
 
 	response *aws.Response
 }

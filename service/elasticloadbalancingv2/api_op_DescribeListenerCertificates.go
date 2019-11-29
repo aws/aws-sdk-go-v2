@@ -6,62 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/elasticloadbalancingv2/types"
 )
-
-type DescribeListenerCertificatesInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Names (ARN) of the listener.
-	//
-	// ListenerArn is a required field
-	ListenerArn *string `type:"string" required:"true"`
-
-	// The marker for the next set of results. (You received this marker from a
-	// previous call.)
-	Marker *string `type:"string"`
-
-	// The maximum number of results to return with this call.
-	PageSize *int64 `min:"1" type:"integer"`
-}
-
-// String returns the string representation
-func (s DescribeListenerCertificatesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeListenerCertificatesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeListenerCertificatesInput"}
-
-	if s.ListenerArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ListenerArn"))
-	}
-	if s.PageSize != nil && *s.PageSize < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("PageSize", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribeListenerCertificatesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Information about the certificates.
-	Certificates []Certificate `type:"list"`
-
-	// If there are additional results, this is the marker for the next set of results.
-	// Otherwise, this is null.
-	NextMarker *string `type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeListenerCertificatesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeListenerCertificates = "DescribeListenerCertificates"
 
@@ -86,7 +32,7 @@ const opDescribeListenerCertificates = "DescribeListenerCertificates"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/DescribeListenerCertificates
-func (c *Client) DescribeListenerCertificatesRequest(input *DescribeListenerCertificatesInput) DescribeListenerCertificatesRequest {
+func (c *Client) DescribeListenerCertificatesRequest(input *types.DescribeListenerCertificatesInput) DescribeListenerCertificatesRequest {
 	op := &aws.Operation{
 		Name:       opDescribeListenerCertificates,
 		HTTPMethod: "POST",
@@ -94,10 +40,10 @@ func (c *Client) DescribeListenerCertificatesRequest(input *DescribeListenerCert
 	}
 
 	if input == nil {
-		input = &DescribeListenerCertificatesInput{}
+		input = &types.DescribeListenerCertificatesInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeListenerCertificatesOutput{})
+	req := c.newRequest(op, input, &types.DescribeListenerCertificatesOutput{})
 	return DescribeListenerCertificatesRequest{Request: req, Input: input, Copy: c.DescribeListenerCertificatesRequest}
 }
 
@@ -105,8 +51,8 @@ func (c *Client) DescribeListenerCertificatesRequest(input *DescribeListenerCert
 // DescribeListenerCertificates API operation.
 type DescribeListenerCertificatesRequest struct {
 	*aws.Request
-	Input *DescribeListenerCertificatesInput
-	Copy  func(*DescribeListenerCertificatesInput) DescribeListenerCertificatesRequest
+	Input *types.DescribeListenerCertificatesInput
+	Copy  func(*types.DescribeListenerCertificatesInput) DescribeListenerCertificatesRequest
 }
 
 // Send marshals and sends the DescribeListenerCertificates API request.
@@ -118,7 +64,7 @@ func (r DescribeListenerCertificatesRequest) Send(ctx context.Context) (*Describ
 	}
 
 	resp := &DescribeListenerCertificatesResponse{
-		DescribeListenerCertificatesOutput: r.Request.Data.(*DescribeListenerCertificatesOutput),
+		DescribeListenerCertificatesOutput: r.Request.Data.(*types.DescribeListenerCertificatesOutput),
 		response:                           &aws.Response{Request: r.Request},
 	}
 
@@ -128,7 +74,7 @@ func (r DescribeListenerCertificatesRequest) Send(ctx context.Context) (*Describ
 // DescribeListenerCertificatesResponse is the response type for the
 // DescribeListenerCertificates API operation.
 type DescribeListenerCertificatesResponse struct {
-	*DescribeListenerCertificatesOutput
+	*types.DescribeListenerCertificatesOutput
 
 	response *aws.Response
 }

@@ -6,52 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/devicefarm/types"
 )
-
-// Represents the request to delete the specified remote access session.
-type DeleteRemoteAccessSessionInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the session for which you want to delete
-	// remote access.
-	//
-	// Arn is a required field
-	Arn *string `locationName:"arn" min:"32" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteRemoteAccessSessionInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteRemoteAccessSessionInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteRemoteAccessSessionInput"}
-
-	if s.Arn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Arn"))
-	}
-	if s.Arn != nil && len(*s.Arn) < 32 {
-		invalidParams.Add(aws.NewErrParamMinLen("Arn", 32))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// The response from the server when a request is made to delete the remote
-// access session.
-type DeleteRemoteAccessSessionOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteRemoteAccessSessionOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteRemoteAccessSession = "DeleteRemoteAccessSession"
 
@@ -68,7 +24,7 @@ const opDeleteRemoteAccessSession = "DeleteRemoteAccessSession"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/DeleteRemoteAccessSession
-func (c *Client) DeleteRemoteAccessSessionRequest(input *DeleteRemoteAccessSessionInput) DeleteRemoteAccessSessionRequest {
+func (c *Client) DeleteRemoteAccessSessionRequest(input *types.DeleteRemoteAccessSessionInput) DeleteRemoteAccessSessionRequest {
 	op := &aws.Operation{
 		Name:       opDeleteRemoteAccessSession,
 		HTTPMethod: "POST",
@@ -76,10 +32,10 @@ func (c *Client) DeleteRemoteAccessSessionRequest(input *DeleteRemoteAccessSessi
 	}
 
 	if input == nil {
-		input = &DeleteRemoteAccessSessionInput{}
+		input = &types.DeleteRemoteAccessSessionInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteRemoteAccessSessionOutput{})
+	req := c.newRequest(op, input, &types.DeleteRemoteAccessSessionOutput{})
 	return DeleteRemoteAccessSessionRequest{Request: req, Input: input, Copy: c.DeleteRemoteAccessSessionRequest}
 }
 
@@ -87,8 +43,8 @@ func (c *Client) DeleteRemoteAccessSessionRequest(input *DeleteRemoteAccessSessi
 // DeleteRemoteAccessSession API operation.
 type DeleteRemoteAccessSessionRequest struct {
 	*aws.Request
-	Input *DeleteRemoteAccessSessionInput
-	Copy  func(*DeleteRemoteAccessSessionInput) DeleteRemoteAccessSessionRequest
+	Input *types.DeleteRemoteAccessSessionInput
+	Copy  func(*types.DeleteRemoteAccessSessionInput) DeleteRemoteAccessSessionRequest
 }
 
 // Send marshals and sends the DeleteRemoteAccessSession API request.
@@ -100,7 +56,7 @@ func (r DeleteRemoteAccessSessionRequest) Send(ctx context.Context) (*DeleteRemo
 	}
 
 	resp := &DeleteRemoteAccessSessionResponse{
-		DeleteRemoteAccessSessionOutput: r.Request.Data.(*DeleteRemoteAccessSessionOutput),
+		DeleteRemoteAccessSessionOutput: r.Request.Data.(*types.DeleteRemoteAccessSessionOutput),
 		response:                        &aws.Response{Request: r.Request},
 	}
 
@@ -110,7 +66,7 @@ func (r DeleteRemoteAccessSessionRequest) Send(ctx context.Context) (*DeleteRemo
 // DeleteRemoteAccessSessionResponse is the response type for the
 // DeleteRemoteAccessSession API operation.
 type DeleteRemoteAccessSessionResponse struct {
-	*DeleteRemoteAccessSessionOutput
+	*types.DeleteRemoteAccessSessionOutput
 
 	response *aws.Response
 }

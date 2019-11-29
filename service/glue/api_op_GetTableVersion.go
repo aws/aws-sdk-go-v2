@@ -6,78 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/glue/types"
 )
-
-type GetTableVersionInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the Data Catalog where the tables reside. If none is provided,
-	// the AWS account ID is used by default.
-	CatalogId *string `min:"1" type:"string"`
-
-	// The database in the catalog in which the table resides. For Hive compatibility,
-	// this name is entirely lowercase.
-	//
-	// DatabaseName is a required field
-	DatabaseName *string `min:"1" type:"string" required:"true"`
-
-	// The name of the table. For Hive compatibility, this name is entirely lowercase.
-	//
-	// TableName is a required field
-	TableName *string `min:"1" type:"string" required:"true"`
-
-	// The ID value of the table version to be retrieved. A VersionID is a string
-	// representation of an integer. Each version is incremented by 1.
-	VersionId *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s GetTableVersionInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetTableVersionInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetTableVersionInput"}
-	if s.CatalogId != nil && len(*s.CatalogId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("CatalogId", 1))
-	}
-
-	if s.DatabaseName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DatabaseName"))
-	}
-	if s.DatabaseName != nil && len(*s.DatabaseName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("DatabaseName", 1))
-	}
-
-	if s.TableName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("TableName"))
-	}
-	if s.TableName != nil && len(*s.TableName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("TableName", 1))
-	}
-	if s.VersionId != nil && len(*s.VersionId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("VersionId", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type GetTableVersionOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The requested table version.
-	TableVersion *TableVersion `type:"structure"`
-}
-
-// String returns the string representation
-func (s GetTableVersionOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetTableVersion = "GetTableVersion"
 
@@ -94,7 +24,7 @@ const opGetTableVersion = "GetTableVersion"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetTableVersion
-func (c *Client) GetTableVersionRequest(input *GetTableVersionInput) GetTableVersionRequest {
+func (c *Client) GetTableVersionRequest(input *types.GetTableVersionInput) GetTableVersionRequest {
 	op := &aws.Operation{
 		Name:       opGetTableVersion,
 		HTTPMethod: "POST",
@@ -102,10 +32,10 @@ func (c *Client) GetTableVersionRequest(input *GetTableVersionInput) GetTableVer
 	}
 
 	if input == nil {
-		input = &GetTableVersionInput{}
+		input = &types.GetTableVersionInput{}
 	}
 
-	req := c.newRequest(op, input, &GetTableVersionOutput{})
+	req := c.newRequest(op, input, &types.GetTableVersionOutput{})
 	return GetTableVersionRequest{Request: req, Input: input, Copy: c.GetTableVersionRequest}
 }
 
@@ -113,8 +43,8 @@ func (c *Client) GetTableVersionRequest(input *GetTableVersionInput) GetTableVer
 // GetTableVersion API operation.
 type GetTableVersionRequest struct {
 	*aws.Request
-	Input *GetTableVersionInput
-	Copy  func(*GetTableVersionInput) GetTableVersionRequest
+	Input *types.GetTableVersionInput
+	Copy  func(*types.GetTableVersionInput) GetTableVersionRequest
 }
 
 // Send marshals and sends the GetTableVersion API request.
@@ -126,7 +56,7 @@ func (r GetTableVersionRequest) Send(ctx context.Context) (*GetTableVersionRespo
 	}
 
 	resp := &GetTableVersionResponse{
-		GetTableVersionOutput: r.Request.Data.(*GetTableVersionOutput),
+		GetTableVersionOutput: r.Request.Data.(*types.GetTableVersionOutput),
 		response:              &aws.Response{Request: r.Request},
 	}
 
@@ -136,7 +66,7 @@ func (r GetTableVersionRequest) Send(ctx context.Context) (*GetTableVersionRespo
 // GetTableVersionResponse is the response type for the
 // GetTableVersion API operation.
 type GetTableVersionResponse struct {
-	*GetTableVersionOutput
+	*types.GetTableVersionOutput
 
 	response *aws.Response
 }

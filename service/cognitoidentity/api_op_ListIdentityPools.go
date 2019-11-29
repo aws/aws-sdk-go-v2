@@ -6,62 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/cognitoidentity/types"
 )
-
-// Input to the ListIdentityPools action.
-type ListIdentityPoolsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The maximum number of identities to return.
-	//
-	// MaxResults is a required field
-	MaxResults *int64 `min:"1" type:"integer" required:"true"`
-
-	// A pagination token.
-	NextToken *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s ListIdentityPoolsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListIdentityPoolsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListIdentityPoolsInput"}
-
-	if s.MaxResults == nil {
-		invalidParams.Add(aws.NewErrParamRequired("MaxResults"))
-	}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-	if s.NextToken != nil && len(*s.NextToken) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// The result of a successful ListIdentityPools action.
-type ListIdentityPoolsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The identity pools returned by the ListIdentityPools action.
-	IdentityPools []IdentityPoolShortDescription `type:"list"`
-
-	// A pagination token.
-	NextToken *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s ListIdentityPoolsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListIdentityPools = "ListIdentityPools"
 
@@ -80,7 +26,7 @@ const opListIdentityPools = "ListIdentityPools"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-identity-2014-06-30/ListIdentityPools
-func (c *Client) ListIdentityPoolsRequest(input *ListIdentityPoolsInput) ListIdentityPoolsRequest {
+func (c *Client) ListIdentityPoolsRequest(input *types.ListIdentityPoolsInput) ListIdentityPoolsRequest {
 	op := &aws.Operation{
 		Name:       opListIdentityPools,
 		HTTPMethod: "POST",
@@ -88,10 +34,10 @@ func (c *Client) ListIdentityPoolsRequest(input *ListIdentityPoolsInput) ListIde
 	}
 
 	if input == nil {
-		input = &ListIdentityPoolsInput{}
+		input = &types.ListIdentityPoolsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListIdentityPoolsOutput{})
+	req := c.newRequest(op, input, &types.ListIdentityPoolsOutput{})
 	return ListIdentityPoolsRequest{Request: req, Input: input, Copy: c.ListIdentityPoolsRequest}
 }
 
@@ -99,8 +45,8 @@ func (c *Client) ListIdentityPoolsRequest(input *ListIdentityPoolsInput) ListIde
 // ListIdentityPools API operation.
 type ListIdentityPoolsRequest struct {
 	*aws.Request
-	Input *ListIdentityPoolsInput
-	Copy  func(*ListIdentityPoolsInput) ListIdentityPoolsRequest
+	Input *types.ListIdentityPoolsInput
+	Copy  func(*types.ListIdentityPoolsInput) ListIdentityPoolsRequest
 }
 
 // Send marshals and sends the ListIdentityPools API request.
@@ -112,7 +58,7 @@ func (r ListIdentityPoolsRequest) Send(ctx context.Context) (*ListIdentityPoolsR
 	}
 
 	resp := &ListIdentityPoolsResponse{
-		ListIdentityPoolsOutput: r.Request.Data.(*ListIdentityPoolsOutput),
+		ListIdentityPoolsOutput: r.Request.Data.(*types.ListIdentityPoolsOutput),
 		response:                &aws.Response{Request: r.Request},
 	}
 
@@ -122,7 +68,7 @@ func (r ListIdentityPoolsRequest) Send(ctx context.Context) (*ListIdentityPoolsR
 // ListIdentityPoolsResponse is the response type for the
 // ListIdentityPools API operation.
 type ListIdentityPoolsResponse struct {
-	*ListIdentityPoolsOutput
+	*types.ListIdentityPoolsOutput
 
 	response *aws.Response
 }

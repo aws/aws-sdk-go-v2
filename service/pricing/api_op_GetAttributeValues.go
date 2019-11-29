@@ -6,73 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/pricing/types"
 )
-
-type GetAttributeValuesInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the attribute that you want to retrieve the values for, such
-	// as volumeType.
-	//
-	// AttributeName is a required field
-	AttributeName *string `type:"string" required:"true"`
-
-	// The maximum number of results to return in response.
-	MaxResults *int64 `min:"1" type:"integer"`
-
-	// The pagination token that indicates the next set of results that you want
-	// to retrieve.
-	NextToken *string `type:"string"`
-
-	// The service code for the service whose attributes you want to retrieve. For
-	// example, if you want the retrieve an EC2 attribute, use AmazonEC2.
-	//
-	// ServiceCode is a required field
-	ServiceCode *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetAttributeValuesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetAttributeValuesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetAttributeValuesInput"}
-
-	if s.AttributeName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("AttributeName"))
-	}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-
-	if s.ServiceCode == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ServiceCode"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type GetAttributeValuesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The list of values for an attribute. For example, Throughput Optimized HDD
-	// and Provisioned IOPS are two available values for the AmazonEC2 volumeType.
-	AttributeValues []AttributeValue `type:"list"`
-
-	// The pagination token that indicates the next set of results to retrieve.
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s GetAttributeValuesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetAttributeValues = "GetAttributeValues"
 
@@ -92,7 +27,7 @@ const opGetAttributeValues = "GetAttributeValues"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pricing-2017-10-15/GetAttributeValues
-func (c *Client) GetAttributeValuesRequest(input *GetAttributeValuesInput) GetAttributeValuesRequest {
+func (c *Client) GetAttributeValuesRequest(input *types.GetAttributeValuesInput) GetAttributeValuesRequest {
 	op := &aws.Operation{
 		Name:       opGetAttributeValues,
 		HTTPMethod: "POST",
@@ -106,10 +41,10 @@ func (c *Client) GetAttributeValuesRequest(input *GetAttributeValuesInput) GetAt
 	}
 
 	if input == nil {
-		input = &GetAttributeValuesInput{}
+		input = &types.GetAttributeValuesInput{}
 	}
 
-	req := c.newRequest(op, input, &GetAttributeValuesOutput{})
+	req := c.newRequest(op, input, &types.GetAttributeValuesOutput{})
 	return GetAttributeValuesRequest{Request: req, Input: input, Copy: c.GetAttributeValuesRequest}
 }
 
@@ -117,8 +52,8 @@ func (c *Client) GetAttributeValuesRequest(input *GetAttributeValuesInput) GetAt
 // GetAttributeValues API operation.
 type GetAttributeValuesRequest struct {
 	*aws.Request
-	Input *GetAttributeValuesInput
-	Copy  func(*GetAttributeValuesInput) GetAttributeValuesRequest
+	Input *types.GetAttributeValuesInput
+	Copy  func(*types.GetAttributeValuesInput) GetAttributeValuesRequest
 }
 
 // Send marshals and sends the GetAttributeValues API request.
@@ -130,7 +65,7 @@ func (r GetAttributeValuesRequest) Send(ctx context.Context) (*GetAttributeValue
 	}
 
 	resp := &GetAttributeValuesResponse{
-		GetAttributeValuesOutput: r.Request.Data.(*GetAttributeValuesOutput),
+		GetAttributeValuesOutput: r.Request.Data.(*types.GetAttributeValuesOutput),
 		response:                 &aws.Response{Request: r.Request},
 	}
 
@@ -160,7 +95,7 @@ func NewGetAttributeValuesPaginator(req GetAttributeValuesRequest) GetAttributeV
 	return GetAttributeValuesPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *GetAttributeValuesInput
+				var inCpy *types.GetAttributeValuesInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -180,14 +115,14 @@ type GetAttributeValuesPaginator struct {
 	aws.Pager
 }
 
-func (p *GetAttributeValuesPaginator) CurrentPage() *GetAttributeValuesOutput {
-	return p.Pager.CurrentPage().(*GetAttributeValuesOutput)
+func (p *GetAttributeValuesPaginator) CurrentPage() *types.GetAttributeValuesOutput {
+	return p.Pager.CurrentPage().(*types.GetAttributeValuesOutput)
 }
 
 // GetAttributeValuesResponse is the response type for the
 // GetAttributeValues API operation.
 type GetAttributeValuesResponse struct {
-	*GetAttributeValuesOutput
+	*types.GetAttributeValuesOutput
 
 	response *aws.Response
 }

@@ -4,92 +4,10 @@ package workmail
 
 import (
 	"context"
-	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/workmail/types"
 )
-
-type DescribeUserInput struct {
-	_ struct{} `type:"structure"`
-
-	// The identifier for the organization under which the user exists.
-	//
-	// OrganizationId is a required field
-	OrganizationId *string `type:"string" required:"true"`
-
-	// The identifier for the user to be described.
-	//
-	// UserId is a required field
-	UserId *string `min:"12" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeUserInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeUserInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeUserInput"}
-
-	if s.OrganizationId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("OrganizationId"))
-	}
-
-	if s.UserId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("UserId"))
-	}
-	if s.UserId != nil && len(*s.UserId) < 12 {
-		invalidParams.Add(aws.NewErrParamMinLen("UserId", 12))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribeUserOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The date and time at which the user was disabled for Amazon WorkMail usage,
-	// in UNIX epoch time format.
-	DisabledDate *time.Time `type:"timestamp"`
-
-	// The display name of the user.
-	DisplayName *string `type:"string"`
-
-	// The email of the user.
-	Email *string `min:"1" type:"string"`
-
-	// The date and time at which the user was enabled for Amazon WorkMail usage,
-	// in UNIX epoch time format.
-	EnabledDate *time.Time `type:"timestamp"`
-
-	// The name for the user.
-	Name *string `min:"1" type:"string"`
-
-	// The state of a user: enabled (registered to Amazon WorkMail) or disabled
-	// (deregistered or never registered to WorkMail).
-	State EntityState `type:"string" enum:"true"`
-
-	// The identifier for the described user.
-	UserId *string `min:"12" type:"string"`
-
-	// In certain cases, other entities are modeled as users. If interoperability
-	// is enabled, resources are imported into Amazon WorkMail as users. Because
-	// different WorkMail organizations rely on different directory types, administrators
-	// can distinguish between an unregistered user (account is disabled and has
-	// a user role) and the directory administrators. The values are USER, RESOURCE,
-	// and SYSTEM_USER.
-	UserRole UserRole `type:"string" enum:"true"`
-}
-
-// String returns the string representation
-func (s DescribeUserOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeUser = "DescribeUser"
 
@@ -106,7 +24,7 @@ const opDescribeUser = "DescribeUser"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/DescribeUser
-func (c *Client) DescribeUserRequest(input *DescribeUserInput) DescribeUserRequest {
+func (c *Client) DescribeUserRequest(input *types.DescribeUserInput) DescribeUserRequest {
 	op := &aws.Operation{
 		Name:       opDescribeUser,
 		HTTPMethod: "POST",
@@ -114,10 +32,10 @@ func (c *Client) DescribeUserRequest(input *DescribeUserInput) DescribeUserReque
 	}
 
 	if input == nil {
-		input = &DescribeUserInput{}
+		input = &types.DescribeUserInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeUserOutput{})
+	req := c.newRequest(op, input, &types.DescribeUserOutput{})
 	return DescribeUserRequest{Request: req, Input: input, Copy: c.DescribeUserRequest}
 }
 
@@ -125,8 +43,8 @@ func (c *Client) DescribeUserRequest(input *DescribeUserInput) DescribeUserReque
 // DescribeUser API operation.
 type DescribeUserRequest struct {
 	*aws.Request
-	Input *DescribeUserInput
-	Copy  func(*DescribeUserInput) DescribeUserRequest
+	Input *types.DescribeUserInput
+	Copy  func(*types.DescribeUserInput) DescribeUserRequest
 }
 
 // Send marshals and sends the DescribeUser API request.
@@ -138,7 +56,7 @@ func (r DescribeUserRequest) Send(ctx context.Context) (*DescribeUserResponse, e
 	}
 
 	resp := &DescribeUserResponse{
-		DescribeUserOutput: r.Request.Data.(*DescribeUserOutput),
+		DescribeUserOutput: r.Request.Data.(*types.DescribeUserOutput),
 		response:           &aws.Response{Request: r.Request},
 	}
 
@@ -148,7 +66,7 @@ func (r DescribeUserRequest) Send(ctx context.Context) (*DescribeUserResponse, e
 // DescribeUserResponse is the response type for the
 // DescribeUser API operation.
 type DescribeUserResponse struct {
-	*DescribeUserOutput
+	*types.DescribeUserOutput
 
 	response *aws.Response
 }

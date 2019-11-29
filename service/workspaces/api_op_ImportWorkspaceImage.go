@@ -4,100 +4,17 @@ package workspaces
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/workspaces/types"
 )
-
-type ImportWorkspaceImageInput struct {
-	_ struct{} `type:"structure"`
-
-	// The identifier of the EC2 image.
-	//
-	// Ec2ImageId is a required field
-	Ec2ImageId *string `type:"string" required:"true"`
-
-	// The description of the WorkSpace image.
-	//
-	// ImageDescription is a required field
-	ImageDescription *string `min:"1" type:"string" required:"true"`
-
-	// The name of the WorkSpace image.
-	//
-	// ImageName is a required field
-	ImageName *string `min:"1" type:"string" required:"true"`
-
-	// The ingestion process to be used when importing the image.
-	//
-	// IngestionProcess is a required field
-	IngestionProcess WorkspaceImageIngestionProcess `type:"string" required:"true" enum:"true"`
-
-	// The tags. Each WorkSpaces resource can have a maximum of 50 tags.
-	Tags []Tag `type:"list"`
-}
-
-// String returns the string representation
-func (s ImportWorkspaceImageInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ImportWorkspaceImageInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ImportWorkspaceImageInput"}
-
-	if s.Ec2ImageId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Ec2ImageId"))
-	}
-
-	if s.ImageDescription == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ImageDescription"))
-	}
-	if s.ImageDescription != nil && len(*s.ImageDescription) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ImageDescription", 1))
-	}
-
-	if s.ImageName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ImageName"))
-	}
-	if s.ImageName != nil && len(*s.ImageName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ImageName", 1))
-	}
-	if len(s.IngestionProcess) == 0 {
-		invalidParams.Add(aws.NewErrParamRequired("IngestionProcess"))
-	}
-	if s.Tags != nil {
-		for i, v := range s.Tags {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ImportWorkspaceImageOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The identifier of the WorkSpace image.
-	ImageId *string `type:"string"`
-}
-
-// String returns the string representation
-func (s ImportWorkspaceImageOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opImportWorkspaceImage = "ImportWorkspaceImage"
 
 // ImportWorkspaceImageRequest returns a request value for making API operation for
 // Amazon WorkSpaces.
 //
-// Imports the specified Windows 7 or Windows 10 bring your own license (BYOL)
+// Imports the specified Windows 7 or Windows 10 Bring Your Own License (BYOL)
 // image into Amazon WorkSpaces. The image must be an already licensed EC2 image
 // that is in your AWS account, and you must own the image.
 //
@@ -109,7 +26,7 @@ const opImportWorkspaceImage = "ImportWorkspaceImage"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/ImportWorkspaceImage
-func (c *Client) ImportWorkspaceImageRequest(input *ImportWorkspaceImageInput) ImportWorkspaceImageRequest {
+func (c *Client) ImportWorkspaceImageRequest(input *types.ImportWorkspaceImageInput) ImportWorkspaceImageRequest {
 	op := &aws.Operation{
 		Name:       opImportWorkspaceImage,
 		HTTPMethod: "POST",
@@ -117,10 +34,10 @@ func (c *Client) ImportWorkspaceImageRequest(input *ImportWorkspaceImageInput) I
 	}
 
 	if input == nil {
-		input = &ImportWorkspaceImageInput{}
+		input = &types.ImportWorkspaceImageInput{}
 	}
 
-	req := c.newRequest(op, input, &ImportWorkspaceImageOutput{})
+	req := c.newRequest(op, input, &types.ImportWorkspaceImageOutput{})
 	return ImportWorkspaceImageRequest{Request: req, Input: input, Copy: c.ImportWorkspaceImageRequest}
 }
 
@@ -128,8 +45,8 @@ func (c *Client) ImportWorkspaceImageRequest(input *ImportWorkspaceImageInput) I
 // ImportWorkspaceImage API operation.
 type ImportWorkspaceImageRequest struct {
 	*aws.Request
-	Input *ImportWorkspaceImageInput
-	Copy  func(*ImportWorkspaceImageInput) ImportWorkspaceImageRequest
+	Input *types.ImportWorkspaceImageInput
+	Copy  func(*types.ImportWorkspaceImageInput) ImportWorkspaceImageRequest
 }
 
 // Send marshals and sends the ImportWorkspaceImage API request.
@@ -141,7 +58,7 @@ func (r ImportWorkspaceImageRequest) Send(ctx context.Context) (*ImportWorkspace
 	}
 
 	resp := &ImportWorkspaceImageResponse{
-		ImportWorkspaceImageOutput: r.Request.Data.(*ImportWorkspaceImageOutput),
+		ImportWorkspaceImageOutput: r.Request.Data.(*types.ImportWorkspaceImageOutput),
 		response:                   &aws.Response{Request: r.Request},
 	}
 
@@ -151,7 +68,7 @@ func (r ImportWorkspaceImageRequest) Send(ctx context.Context) (*ImportWorkspace
 // ImportWorkspaceImageResponse is the response type for the
 // ImportWorkspaceImage API operation.
 type ImportWorkspaceImageResponse struct {
-	*ImportWorkspaceImageOutput
+	*types.ImportWorkspaceImageOutput
 
 	response *aws.Response
 }

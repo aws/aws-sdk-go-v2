@@ -6,86 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/secretsmanager/types"
 )
-
-type GetRandomPasswordInput struct {
-	_ struct{} `type:"structure"`
-
-	// A string that includes characters that should not be included in the generated
-	// password. The default is that all characters from the included sets can be
-	// used.
-	ExcludeCharacters *string `type:"string"`
-
-	// Specifies that the generated password should not include lowercase letters.
-	// The default if you do not include this switch parameter is that lowercase
-	// letters can be included.
-	ExcludeLowercase *bool `type:"boolean"`
-
-	// Specifies that the generated password should not include digits. The default
-	// if you do not include this switch parameter is that digits can be included.
-	ExcludeNumbers *bool `type:"boolean"`
-
-	// Specifies that the generated password should not include punctuation characters.
-	// The default if you do not include this switch parameter is that punctuation
-	// characters can be included.
-	//
-	// The following are the punctuation characters that can be included in the
-	// generated password if you don't explicitly exclude them with ExcludeCharacters
-	// or ExcludePunctuation:
-	//
-	// ! " # $ % & ' ( ) * + , - . / : ; < = > ? @ [ \ ] ^ _ ` { | } ~
-	ExcludePunctuation *bool `type:"boolean"`
-
-	// Specifies that the generated password should not include uppercase letters.
-	// The default if you do not include this switch parameter is that uppercase
-	// letters can be included.
-	ExcludeUppercase *bool `type:"boolean"`
-
-	// Specifies that the generated password can include the space character. The
-	// default if you do not include this switch parameter is that the space character
-	// is not included.
-	IncludeSpace *bool `type:"boolean"`
-
-	// The desired length of the generated password. The default value if you do
-	// not include this parameter is 32 characters.
-	PasswordLength *int64 `min:"1" type:"long"`
-
-	// A boolean value that specifies whether the generated password must include
-	// at least one of every allowed character type. The default value is True and
-	// the operation requires at least one of every character type.
-	RequireEachIncludedType *bool `type:"boolean"`
-}
-
-// String returns the string representation
-func (s GetRandomPasswordInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetRandomPasswordInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetRandomPasswordInput"}
-	if s.PasswordLength != nil && *s.PasswordLength < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("PasswordLength", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type GetRandomPasswordOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A string with the generated password.
-	RandomPassword *string `type:"string" sensitive:"true"`
-}
-
-// String returns the string representation
-func (s GetRandomPasswordOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetRandomPassword = "GetRandomPassword"
 
@@ -111,7 +33,7 @@ const opGetRandomPassword = "GetRandomPassword"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/secretsmanager-2017-10-17/GetRandomPassword
-func (c *Client) GetRandomPasswordRequest(input *GetRandomPasswordInput) GetRandomPasswordRequest {
+func (c *Client) GetRandomPasswordRequest(input *types.GetRandomPasswordInput) GetRandomPasswordRequest {
 	op := &aws.Operation{
 		Name:       opGetRandomPassword,
 		HTTPMethod: "POST",
@@ -119,10 +41,10 @@ func (c *Client) GetRandomPasswordRequest(input *GetRandomPasswordInput) GetRand
 	}
 
 	if input == nil {
-		input = &GetRandomPasswordInput{}
+		input = &types.GetRandomPasswordInput{}
 	}
 
-	req := c.newRequest(op, input, &GetRandomPasswordOutput{})
+	req := c.newRequest(op, input, &types.GetRandomPasswordOutput{})
 	return GetRandomPasswordRequest{Request: req, Input: input, Copy: c.GetRandomPasswordRequest}
 }
 
@@ -130,8 +52,8 @@ func (c *Client) GetRandomPasswordRequest(input *GetRandomPasswordInput) GetRand
 // GetRandomPassword API operation.
 type GetRandomPasswordRequest struct {
 	*aws.Request
-	Input *GetRandomPasswordInput
-	Copy  func(*GetRandomPasswordInput) GetRandomPasswordRequest
+	Input *types.GetRandomPasswordInput
+	Copy  func(*types.GetRandomPasswordInput) GetRandomPasswordRequest
 }
 
 // Send marshals and sends the GetRandomPassword API request.
@@ -143,7 +65,7 @@ func (r GetRandomPasswordRequest) Send(ctx context.Context) (*GetRandomPasswordR
 	}
 
 	resp := &GetRandomPasswordResponse{
-		GetRandomPasswordOutput: r.Request.Data.(*GetRandomPasswordOutput),
+		GetRandomPasswordOutput: r.Request.Data.(*types.GetRandomPasswordOutput),
 		response:                &aws.Response{Request: r.Request},
 	}
 
@@ -153,7 +75,7 @@ func (r GetRandomPasswordRequest) Send(ctx context.Context) (*GetRandomPasswordR
 // GetRandomPasswordResponse is the response type for the
 // GetRandomPassword API operation.
 type GetRandomPasswordResponse struct {
-	*GetRandomPasswordOutput
+	*types.GetRandomPasswordOutput
 
 	response *aws.Response
 }

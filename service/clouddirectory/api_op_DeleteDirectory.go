@@ -6,75 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/clouddirectory/types"
 )
-
-type DeleteDirectoryInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ARN of the directory to delete.
-	//
-	// DirectoryArn is a required field
-	DirectoryArn *string `location:"header" locationName:"x-amz-data-partition" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteDirectoryInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteDirectoryInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteDirectoryInput"}
-
-	if s.DirectoryArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DirectoryArn"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteDirectoryInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.DirectoryArn != nil {
-		v := *s.DirectoryArn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "x-amz-data-partition", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type DeleteDirectoryOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The ARN of the deleted directory.
-	//
-	// DirectoryArn is a required field
-	DirectoryArn *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteDirectoryOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteDirectoryOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.DirectoryArn != nil {
-		v := *s.DirectoryArn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "DirectoryArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opDeleteDirectory = "DeleteDirectory"
 
@@ -92,7 +25,7 @@ const opDeleteDirectory = "DeleteDirectory"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/DeleteDirectory
-func (c *Client) DeleteDirectoryRequest(input *DeleteDirectoryInput) DeleteDirectoryRequest {
+func (c *Client) DeleteDirectoryRequest(input *types.DeleteDirectoryInput) DeleteDirectoryRequest {
 	op := &aws.Operation{
 		Name:       opDeleteDirectory,
 		HTTPMethod: "PUT",
@@ -100,10 +33,10 @@ func (c *Client) DeleteDirectoryRequest(input *DeleteDirectoryInput) DeleteDirec
 	}
 
 	if input == nil {
-		input = &DeleteDirectoryInput{}
+		input = &types.DeleteDirectoryInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteDirectoryOutput{})
+	req := c.newRequest(op, input, &types.DeleteDirectoryOutput{})
 	return DeleteDirectoryRequest{Request: req, Input: input, Copy: c.DeleteDirectoryRequest}
 }
 
@@ -111,8 +44,8 @@ func (c *Client) DeleteDirectoryRequest(input *DeleteDirectoryInput) DeleteDirec
 // DeleteDirectory API operation.
 type DeleteDirectoryRequest struct {
 	*aws.Request
-	Input *DeleteDirectoryInput
-	Copy  func(*DeleteDirectoryInput) DeleteDirectoryRequest
+	Input *types.DeleteDirectoryInput
+	Copy  func(*types.DeleteDirectoryInput) DeleteDirectoryRequest
 }
 
 // Send marshals and sends the DeleteDirectory API request.
@@ -124,7 +57,7 @@ func (r DeleteDirectoryRequest) Send(ctx context.Context) (*DeleteDirectoryRespo
 	}
 
 	resp := &DeleteDirectoryResponse{
-		DeleteDirectoryOutput: r.Request.Data.(*DeleteDirectoryOutput),
+		DeleteDirectoryOutput: r.Request.Data.(*types.DeleteDirectoryOutput),
 		response:              &aws.Response{Request: r.Request},
 	}
 
@@ -134,7 +67,7 @@ func (r DeleteDirectoryRequest) Send(ctx context.Context) (*DeleteDirectoryRespo
 // DeleteDirectoryResponse is the response type for the
 // DeleteDirectory API operation.
 type DeleteDirectoryResponse struct {
-	*DeleteDirectoryOutput
+	*types.DeleteDirectoryOutput
 
 	response *aws.Response
 }

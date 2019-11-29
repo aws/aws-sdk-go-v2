@@ -6,56 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/comprehend/types"
 )
-
-type DetectDominantLanguageInput struct {
-	_ struct{} `type:"structure"`
-
-	// A UTF-8 text string. Each string should contain at least 20 characters and
-	// must contain fewer that 5,000 bytes of UTF-8 encoded characters.
-	//
-	// Text is a required field
-	Text *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DetectDominantLanguageInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DetectDominantLanguageInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DetectDominantLanguageInput"}
-
-	if s.Text == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Text"))
-	}
-	if s.Text != nil && len(*s.Text) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Text", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DetectDominantLanguageOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The languages that Amazon Comprehend detected in the input text. For each
-	// language, the response returns the RFC 5646 language code and the level of
-	// confidence that Amazon Comprehend has in the accuracy of its inference. For
-	// more information about RFC 5646, see Tags for Identifying Languages (https://tools.ietf.org/html/rfc5646)
-	// on the IETF Tools web site.
-	Languages []DominantLanguage `type:"list"`
-}
-
-// String returns the string representation
-func (s DetectDominantLanguageOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDetectDominantLanguage = "DetectDominantLanguage"
 
@@ -74,7 +26,7 @@ const opDetectDominantLanguage = "DetectDominantLanguage"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/DetectDominantLanguage
-func (c *Client) DetectDominantLanguageRequest(input *DetectDominantLanguageInput) DetectDominantLanguageRequest {
+func (c *Client) DetectDominantLanguageRequest(input *types.DetectDominantLanguageInput) DetectDominantLanguageRequest {
 	op := &aws.Operation{
 		Name:       opDetectDominantLanguage,
 		HTTPMethod: "POST",
@@ -82,10 +34,10 @@ func (c *Client) DetectDominantLanguageRequest(input *DetectDominantLanguageInpu
 	}
 
 	if input == nil {
-		input = &DetectDominantLanguageInput{}
+		input = &types.DetectDominantLanguageInput{}
 	}
 
-	req := c.newRequest(op, input, &DetectDominantLanguageOutput{})
+	req := c.newRequest(op, input, &types.DetectDominantLanguageOutput{})
 	return DetectDominantLanguageRequest{Request: req, Input: input, Copy: c.DetectDominantLanguageRequest}
 }
 
@@ -93,8 +45,8 @@ func (c *Client) DetectDominantLanguageRequest(input *DetectDominantLanguageInpu
 // DetectDominantLanguage API operation.
 type DetectDominantLanguageRequest struct {
 	*aws.Request
-	Input *DetectDominantLanguageInput
-	Copy  func(*DetectDominantLanguageInput) DetectDominantLanguageRequest
+	Input *types.DetectDominantLanguageInput
+	Copy  func(*types.DetectDominantLanguageInput) DetectDominantLanguageRequest
 }
 
 // Send marshals and sends the DetectDominantLanguage API request.
@@ -106,7 +58,7 @@ func (r DetectDominantLanguageRequest) Send(ctx context.Context) (*DetectDominan
 	}
 
 	resp := &DetectDominantLanguageResponse{
-		DetectDominantLanguageOutput: r.Request.Data.(*DetectDominantLanguageOutput),
+		DetectDominantLanguageOutput: r.Request.Data.(*types.DetectDominantLanguageOutput),
 		response:                     &aws.Response{Request: r.Request},
 	}
 
@@ -116,7 +68,7 @@ func (r DetectDominantLanguageRequest) Send(ctx context.Context) (*DetectDominan
 // DetectDominantLanguageResponse is the response type for the
 // DetectDominantLanguage API operation.
 type DetectDominantLanguageResponse struct {
-	*DetectDominantLanguageOutput
+	*types.DetectDominantLanguageOutput
 
 	response *aws.Response
 }

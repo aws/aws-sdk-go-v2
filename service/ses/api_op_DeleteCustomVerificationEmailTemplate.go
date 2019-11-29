@@ -6,48 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/query"
+	"github.com/aws/aws-sdk-go-v2/service/ses/types"
 )
-
-// Represents a request to delete an existing custom verification email template.
-type DeleteCustomVerificationEmailTemplateInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the custom verification email template that you want to delete.
-	//
-	// TemplateName is a required field
-	TemplateName *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteCustomVerificationEmailTemplateInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteCustomVerificationEmailTemplateInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteCustomVerificationEmailTemplateInput"}
-
-	if s.TemplateName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("TemplateName"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteCustomVerificationEmailTemplateOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteCustomVerificationEmailTemplateOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteCustomVerificationEmailTemplate = "DeleteCustomVerificationEmailTemplate"
 
@@ -70,7 +32,7 @@ const opDeleteCustomVerificationEmailTemplate = "DeleteCustomVerificationEmailTe
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/DeleteCustomVerificationEmailTemplate
-func (c *Client) DeleteCustomVerificationEmailTemplateRequest(input *DeleteCustomVerificationEmailTemplateInput) DeleteCustomVerificationEmailTemplateRequest {
+func (c *Client) DeleteCustomVerificationEmailTemplateRequest(input *types.DeleteCustomVerificationEmailTemplateInput) DeleteCustomVerificationEmailTemplateRequest {
 	op := &aws.Operation{
 		Name:       opDeleteCustomVerificationEmailTemplate,
 		HTTPMethod: "POST",
@@ -78,10 +40,10 @@ func (c *Client) DeleteCustomVerificationEmailTemplateRequest(input *DeleteCusto
 	}
 
 	if input == nil {
-		input = &DeleteCustomVerificationEmailTemplateInput{}
+		input = &types.DeleteCustomVerificationEmailTemplateInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteCustomVerificationEmailTemplateOutput{})
+	req := c.newRequest(op, input, &types.DeleteCustomVerificationEmailTemplateOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return DeleteCustomVerificationEmailTemplateRequest{Request: req, Input: input, Copy: c.DeleteCustomVerificationEmailTemplateRequest}
@@ -91,8 +53,8 @@ func (c *Client) DeleteCustomVerificationEmailTemplateRequest(input *DeleteCusto
 // DeleteCustomVerificationEmailTemplate API operation.
 type DeleteCustomVerificationEmailTemplateRequest struct {
 	*aws.Request
-	Input *DeleteCustomVerificationEmailTemplateInput
-	Copy  func(*DeleteCustomVerificationEmailTemplateInput) DeleteCustomVerificationEmailTemplateRequest
+	Input *types.DeleteCustomVerificationEmailTemplateInput
+	Copy  func(*types.DeleteCustomVerificationEmailTemplateInput) DeleteCustomVerificationEmailTemplateRequest
 }
 
 // Send marshals and sends the DeleteCustomVerificationEmailTemplate API request.
@@ -104,7 +66,7 @@ func (r DeleteCustomVerificationEmailTemplateRequest) Send(ctx context.Context) 
 	}
 
 	resp := &DeleteCustomVerificationEmailTemplateResponse{
-		DeleteCustomVerificationEmailTemplateOutput: r.Request.Data.(*DeleteCustomVerificationEmailTemplateOutput),
+		DeleteCustomVerificationEmailTemplateOutput: r.Request.Data.(*types.DeleteCustomVerificationEmailTemplateOutput),
 		response: &aws.Response{Request: r.Request},
 	}
 
@@ -114,7 +76,7 @@ func (r DeleteCustomVerificationEmailTemplateRequest) Send(ctx context.Context) 
 // DeleteCustomVerificationEmailTemplateResponse is the response type for the
 // DeleteCustomVerificationEmailTemplate API operation.
 type DeleteCustomVerificationEmailTemplateResponse struct {
-	*DeleteCustomVerificationEmailTemplateOutput
+	*types.DeleteCustomVerificationEmailTemplateOutput
 
 	response *aws.Response
 }

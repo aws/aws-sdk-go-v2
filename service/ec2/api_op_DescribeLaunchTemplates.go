@@ -6,83 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-type DescribeLaunchTemplatesInput struct {
-	_ struct{} `type:"structure"`
-
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have
-	// the required permissions, the error response is DryRunOperation. Otherwise,
-	// it is UnauthorizedOperation.
-	DryRun *bool `type:"boolean"`
-
-	// One or more filters.
-	//
-	//    * create-time - The time the launch template was created.
-	//
-	//    * launch-template-name - The name of the launch template.
-	//
-	//    * tag:<key> - The key/value combination of a tag assigned to the resource.
-	//    Use the tag key in the filter name and the tag value as the filter value.
-	//    For example, to find all resources that have a tag with the key Owner
-	//    and the value TeamA, specify tag:Owner for the filter name and TeamA for
-	//    the filter value.
-	//
-	//    * tag-key - The key of a tag assigned to the resource. Use this filter
-	//    to find all resources assigned a tag with a specific key, regardless of
-	//    the tag value.
-	Filters []Filter `locationName:"Filter" locationNameList:"Filter" type:"list"`
-
-	// One or more launch template IDs.
-	LaunchTemplateIds []string `locationName:"LaunchTemplateId" locationNameList:"item" type:"list"`
-
-	// One or more launch template names.
-	LaunchTemplateNames []string `locationName:"LaunchTemplateName" locationNameList:"item" type:"list"`
-
-	// The maximum number of results to return in a single call. To retrieve the
-	// remaining results, make another call with the returned NextToken value. This
-	// value can be between 1 and 200.
-	MaxResults *int64 `min:"1" type:"integer"`
-
-	// The token to request the next page of results.
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeLaunchTemplatesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeLaunchTemplatesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeLaunchTemplatesInput"}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribeLaunchTemplatesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Information about the launch templates.
-	LaunchTemplates []LaunchTemplate `locationName:"launchTemplates" locationNameList:"item" type:"list"`
-
-	// The token to use to retrieve the next page of results. This value is null
-	// when there are no more results to return.
-	NextToken *string `locationName:"nextToken" type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeLaunchTemplatesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeLaunchTemplates = "DescribeLaunchTemplates"
 
@@ -99,7 +24,7 @@ const opDescribeLaunchTemplates = "DescribeLaunchTemplates"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeLaunchTemplates
-func (c *Client) DescribeLaunchTemplatesRequest(input *DescribeLaunchTemplatesInput) DescribeLaunchTemplatesRequest {
+func (c *Client) DescribeLaunchTemplatesRequest(input *types.DescribeLaunchTemplatesInput) DescribeLaunchTemplatesRequest {
 	op := &aws.Operation{
 		Name:       opDescribeLaunchTemplates,
 		HTTPMethod: "POST",
@@ -113,10 +38,10 @@ func (c *Client) DescribeLaunchTemplatesRequest(input *DescribeLaunchTemplatesIn
 	}
 
 	if input == nil {
-		input = &DescribeLaunchTemplatesInput{}
+		input = &types.DescribeLaunchTemplatesInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeLaunchTemplatesOutput{})
+	req := c.newRequest(op, input, &types.DescribeLaunchTemplatesOutput{})
 	return DescribeLaunchTemplatesRequest{Request: req, Input: input, Copy: c.DescribeLaunchTemplatesRequest}
 }
 
@@ -124,8 +49,8 @@ func (c *Client) DescribeLaunchTemplatesRequest(input *DescribeLaunchTemplatesIn
 // DescribeLaunchTemplates API operation.
 type DescribeLaunchTemplatesRequest struct {
 	*aws.Request
-	Input *DescribeLaunchTemplatesInput
-	Copy  func(*DescribeLaunchTemplatesInput) DescribeLaunchTemplatesRequest
+	Input *types.DescribeLaunchTemplatesInput
+	Copy  func(*types.DescribeLaunchTemplatesInput) DescribeLaunchTemplatesRequest
 }
 
 // Send marshals and sends the DescribeLaunchTemplates API request.
@@ -137,7 +62,7 @@ func (r DescribeLaunchTemplatesRequest) Send(ctx context.Context) (*DescribeLaun
 	}
 
 	resp := &DescribeLaunchTemplatesResponse{
-		DescribeLaunchTemplatesOutput: r.Request.Data.(*DescribeLaunchTemplatesOutput),
+		DescribeLaunchTemplatesOutput: r.Request.Data.(*types.DescribeLaunchTemplatesOutput),
 		response:                      &aws.Response{Request: r.Request},
 	}
 
@@ -167,7 +92,7 @@ func NewDescribeLaunchTemplatesPaginator(req DescribeLaunchTemplatesRequest) Des
 	return DescribeLaunchTemplatesPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *DescribeLaunchTemplatesInput
+				var inCpy *types.DescribeLaunchTemplatesInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -187,14 +112,14 @@ type DescribeLaunchTemplatesPaginator struct {
 	aws.Pager
 }
 
-func (p *DescribeLaunchTemplatesPaginator) CurrentPage() *DescribeLaunchTemplatesOutput {
-	return p.Pager.CurrentPage().(*DescribeLaunchTemplatesOutput)
+func (p *DescribeLaunchTemplatesPaginator) CurrentPage() *types.DescribeLaunchTemplatesOutput {
+	return p.Pager.CurrentPage().(*types.DescribeLaunchTemplatesOutput)
 }
 
 // DescribeLaunchTemplatesResponse is the response type for the
 // DescribeLaunchTemplates API operation.
 type DescribeLaunchTemplatesResponse struct {
-	*DescribeLaunchTemplatesOutput
+	*types.DescribeLaunchTemplatesOutput
 
 	response *aws.Response
 }

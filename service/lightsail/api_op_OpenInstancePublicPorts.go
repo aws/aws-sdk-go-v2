@@ -6,57 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/lightsail/types"
 )
-
-type OpenInstancePublicPortsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the instance for which you want to open the public ports.
-	//
-	// InstanceName is a required field
-	InstanceName *string `locationName:"instanceName" type:"string" required:"true"`
-
-	// An array of key-value pairs containing information about the port mappings.
-	//
-	// PortInfo is a required field
-	PortInfo *PortInfo `locationName:"portInfo" type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s OpenInstancePublicPortsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *OpenInstancePublicPortsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "OpenInstancePublicPortsInput"}
-
-	if s.InstanceName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("InstanceName"))
-	}
-
-	if s.PortInfo == nil {
-		invalidParams.Add(aws.NewErrParamRequired("PortInfo"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type OpenInstancePublicPortsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// An array of key-value pairs containing information about the request operation.
-	Operation *Operation `locationName:"operation" type:"structure"`
-}
-
-// String returns the string representation
-func (s OpenInstancePublicPortsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opOpenInstancePublicPorts = "OpenInstancePublicPorts"
 
@@ -77,7 +28,7 @@ const opOpenInstancePublicPorts = "OpenInstancePublicPorts"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/OpenInstancePublicPorts
-func (c *Client) OpenInstancePublicPortsRequest(input *OpenInstancePublicPortsInput) OpenInstancePublicPortsRequest {
+func (c *Client) OpenInstancePublicPortsRequest(input *types.OpenInstancePublicPortsInput) OpenInstancePublicPortsRequest {
 	op := &aws.Operation{
 		Name:       opOpenInstancePublicPorts,
 		HTTPMethod: "POST",
@@ -85,10 +36,10 @@ func (c *Client) OpenInstancePublicPortsRequest(input *OpenInstancePublicPortsIn
 	}
 
 	if input == nil {
-		input = &OpenInstancePublicPortsInput{}
+		input = &types.OpenInstancePublicPortsInput{}
 	}
 
-	req := c.newRequest(op, input, &OpenInstancePublicPortsOutput{})
+	req := c.newRequest(op, input, &types.OpenInstancePublicPortsOutput{})
 	return OpenInstancePublicPortsRequest{Request: req, Input: input, Copy: c.OpenInstancePublicPortsRequest}
 }
 
@@ -96,8 +47,8 @@ func (c *Client) OpenInstancePublicPortsRequest(input *OpenInstancePublicPortsIn
 // OpenInstancePublicPorts API operation.
 type OpenInstancePublicPortsRequest struct {
 	*aws.Request
-	Input *OpenInstancePublicPortsInput
-	Copy  func(*OpenInstancePublicPortsInput) OpenInstancePublicPortsRequest
+	Input *types.OpenInstancePublicPortsInput
+	Copy  func(*types.OpenInstancePublicPortsInput) OpenInstancePublicPortsRequest
 }
 
 // Send marshals and sends the OpenInstancePublicPorts API request.
@@ -109,7 +60,7 @@ func (r OpenInstancePublicPortsRequest) Send(ctx context.Context) (*OpenInstance
 	}
 
 	resp := &OpenInstancePublicPortsResponse{
-		OpenInstancePublicPortsOutput: r.Request.Data.(*OpenInstancePublicPortsOutput),
+		OpenInstancePublicPortsOutput: r.Request.Data.(*types.OpenInstancePublicPortsOutput),
 		response:                      &aws.Response{Request: r.Request},
 	}
 
@@ -119,7 +70,7 @@ func (r OpenInstancePublicPortsRequest) Send(ctx context.Context) (*OpenInstance
 // OpenInstancePublicPortsResponse is the response type for the
 // OpenInstancePublicPorts API operation.
 type OpenInstancePublicPortsResponse struct {
-	*OpenInstancePublicPortsOutput
+	*types.OpenInstancePublicPortsOutput
 
 	response *aws.Response
 }

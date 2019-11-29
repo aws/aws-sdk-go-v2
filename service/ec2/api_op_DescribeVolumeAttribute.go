@@ -6,70 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-// Contains the parameters for DescribeVolumeAttribute.
-type DescribeVolumeAttributeInput struct {
-	_ struct{} `type:"structure"`
-
-	// The attribute of the volume. This parameter is required.
-	//
-	// Attribute is a required field
-	Attribute VolumeAttributeName `type:"string" required:"true" enum:"true"`
-
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have
-	// the required permissions, the error response is DryRunOperation. Otherwise,
-	// it is UnauthorizedOperation.
-	DryRun *bool `locationName:"dryRun" type:"boolean"`
-
-	// The ID of the volume.
-	//
-	// VolumeId is a required field
-	VolumeId *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeVolumeAttributeInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeVolumeAttributeInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeVolumeAttributeInput"}
-	if len(s.Attribute) == 0 {
-		invalidParams.Add(aws.NewErrParamRequired("Attribute"))
-	}
-
-	if s.VolumeId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("VolumeId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Contains the output of DescribeVolumeAttribute.
-type DescribeVolumeAttributeOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The state of autoEnableIO attribute.
-	AutoEnableIO *AttributeBooleanValue `locationName:"autoEnableIO" type:"structure"`
-
-	// A list of product codes.
-	ProductCodes []ProductCode `locationName:"productCodes" locationNameList:"item" type:"list"`
-
-	// The ID of the volume.
-	VolumeId *string `locationName:"volumeId" type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeVolumeAttributeOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeVolumeAttribute = "DescribeVolumeAttribute"
 
@@ -90,7 +28,7 @@ const opDescribeVolumeAttribute = "DescribeVolumeAttribute"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeVolumeAttribute
-func (c *Client) DescribeVolumeAttributeRequest(input *DescribeVolumeAttributeInput) DescribeVolumeAttributeRequest {
+func (c *Client) DescribeVolumeAttributeRequest(input *types.DescribeVolumeAttributeInput) DescribeVolumeAttributeRequest {
 	op := &aws.Operation{
 		Name:       opDescribeVolumeAttribute,
 		HTTPMethod: "POST",
@@ -98,10 +36,10 @@ func (c *Client) DescribeVolumeAttributeRequest(input *DescribeVolumeAttributeIn
 	}
 
 	if input == nil {
-		input = &DescribeVolumeAttributeInput{}
+		input = &types.DescribeVolumeAttributeInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeVolumeAttributeOutput{})
+	req := c.newRequest(op, input, &types.DescribeVolumeAttributeOutput{})
 	return DescribeVolumeAttributeRequest{Request: req, Input: input, Copy: c.DescribeVolumeAttributeRequest}
 }
 
@@ -109,8 +47,8 @@ func (c *Client) DescribeVolumeAttributeRequest(input *DescribeVolumeAttributeIn
 // DescribeVolumeAttribute API operation.
 type DescribeVolumeAttributeRequest struct {
 	*aws.Request
-	Input *DescribeVolumeAttributeInput
-	Copy  func(*DescribeVolumeAttributeInput) DescribeVolumeAttributeRequest
+	Input *types.DescribeVolumeAttributeInput
+	Copy  func(*types.DescribeVolumeAttributeInput) DescribeVolumeAttributeRequest
 }
 
 // Send marshals and sends the DescribeVolumeAttribute API request.
@@ -122,7 +60,7 @@ func (r DescribeVolumeAttributeRequest) Send(ctx context.Context) (*DescribeVolu
 	}
 
 	resp := &DescribeVolumeAttributeResponse{
-		DescribeVolumeAttributeOutput: r.Request.Data.(*DescribeVolumeAttributeOutput),
+		DescribeVolumeAttributeOutput: r.Request.Data.(*types.DescribeVolumeAttributeOutput),
 		response:                      &aws.Response{Request: r.Request},
 	}
 
@@ -132,7 +70,7 @@ func (r DescribeVolumeAttributeRequest) Send(ctx context.Context) (*DescribeVolu
 // DescribeVolumeAttributeResponse is the response type for the
 // DescribeVolumeAttribute API operation.
 type DescribeVolumeAttributeResponse struct {
-	*DescribeVolumeAttributeOutput
+	*types.DescribeVolumeAttributeOutput
 
 	response *aws.Response
 }

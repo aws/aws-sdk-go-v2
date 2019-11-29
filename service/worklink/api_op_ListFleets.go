@@ -6,99 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/worklink/types"
 )
-
-type ListFleetsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The maximum number of results to be included in the next page.
-	MaxResults *int64 `min:"1" type:"integer"`
-
-	// The pagination token used to retrieve the next page of results for this operation.
-	// If this value is null, it retrieves the first page.
-	NextToken *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s ListFleetsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListFleetsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListFleetsInput"}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-	if s.NextToken != nil && len(*s.NextToken) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListFleetsInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.MaxResults != nil {
-		v := *s.MaxResults
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "MaxResults", protocol.Int64Value(v), metadata)
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type ListFleetsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The summary list of the fleets.
-	FleetSummaryList []FleetSummary `type:"list"`
-
-	// The pagination token used to retrieve the next page of results for this operation.
-	// If there are no more pages, this value is null.
-	NextToken *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s ListFleetsOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListFleetsOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.FleetSummaryList != nil {
-		v := s.FleetSummaryList
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "FleetSummaryList", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opListFleets = "ListFleets"
 
@@ -115,7 +24,7 @@ const opListFleets = "ListFleets"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/worklink-2018-09-25/ListFleets
-func (c *Client) ListFleetsRequest(input *ListFleetsInput) ListFleetsRequest {
+func (c *Client) ListFleetsRequest(input *types.ListFleetsInput) ListFleetsRequest {
 	op := &aws.Operation{
 		Name:       opListFleets,
 		HTTPMethod: "POST",
@@ -129,10 +38,10 @@ func (c *Client) ListFleetsRequest(input *ListFleetsInput) ListFleetsRequest {
 	}
 
 	if input == nil {
-		input = &ListFleetsInput{}
+		input = &types.ListFleetsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListFleetsOutput{})
+	req := c.newRequest(op, input, &types.ListFleetsOutput{})
 	return ListFleetsRequest{Request: req, Input: input, Copy: c.ListFleetsRequest}
 }
 
@@ -140,8 +49,8 @@ func (c *Client) ListFleetsRequest(input *ListFleetsInput) ListFleetsRequest {
 // ListFleets API operation.
 type ListFleetsRequest struct {
 	*aws.Request
-	Input *ListFleetsInput
-	Copy  func(*ListFleetsInput) ListFleetsRequest
+	Input *types.ListFleetsInput
+	Copy  func(*types.ListFleetsInput) ListFleetsRequest
 }
 
 // Send marshals and sends the ListFleets API request.
@@ -153,7 +62,7 @@ func (r ListFleetsRequest) Send(ctx context.Context) (*ListFleetsResponse, error
 	}
 
 	resp := &ListFleetsResponse{
-		ListFleetsOutput: r.Request.Data.(*ListFleetsOutput),
+		ListFleetsOutput: r.Request.Data.(*types.ListFleetsOutput),
 		response:         &aws.Response{Request: r.Request},
 	}
 
@@ -183,7 +92,7 @@ func NewListFleetsPaginator(req ListFleetsRequest) ListFleetsPaginator {
 	return ListFleetsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListFleetsInput
+				var inCpy *types.ListFleetsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -203,14 +112,14 @@ type ListFleetsPaginator struct {
 	aws.Pager
 }
 
-func (p *ListFleetsPaginator) CurrentPage() *ListFleetsOutput {
-	return p.Pager.CurrentPage().(*ListFleetsOutput)
+func (p *ListFleetsPaginator) CurrentPage() *types.ListFleetsOutput {
+	return p.Pager.CurrentPage().(*types.ListFleetsOutput)
 }
 
 // ListFleetsResponse is the response type for the
 // ListFleets API operation.
 type ListFleetsResponse struct {
-	*ListFleetsOutput
+	*types.ListFleetsOutput
 
 	response *aws.Response
 }

@@ -6,101 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/workdocs/types"
 )
-
-type CreateFolderInput struct {
-	_ struct{} `type:"structure"`
-
-	// Amazon WorkDocs authentication token. Do not set this field when using administrative
-	// API actions, as in accessing the API using AWS credentials.
-	AuthenticationToken *string `location:"header" locationName:"Authentication" min:"1" type:"string" sensitive:"true"`
-
-	// The name of the new folder.
-	Name *string `min:"1" type:"string"`
-
-	// The ID of the parent folder.
-	//
-	// ParentFolderId is a required field
-	ParentFolderId *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s CreateFolderInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateFolderInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateFolderInput"}
-	if s.AuthenticationToken != nil && len(*s.AuthenticationToken) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("AuthenticationToken", 1))
-	}
-	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
-	}
-
-	if s.ParentFolderId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ParentFolderId"))
-	}
-	if s.ParentFolderId != nil && len(*s.ParentFolderId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ParentFolderId", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s CreateFolderInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.Name != nil {
-		v := *s.Name
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "Name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.ParentFolderId != nil {
-		v := *s.ParentFolderId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "ParentFolderId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.AuthenticationToken != nil {
-		v := *s.AuthenticationToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "Authentication", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type CreateFolderOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The metadata of the folder.
-	Metadata *FolderMetadata `type:"structure"`
-}
-
-// String returns the string representation
-func (s CreateFolderOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s CreateFolderOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.Metadata != nil {
-		v := s.Metadata
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "Metadata", v, metadata)
-	}
-	return nil
-}
 
 const opCreateFolder = "CreateFolder"
 
@@ -117,7 +24,7 @@ const opCreateFolder = "CreateFolder"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/CreateFolder
-func (c *Client) CreateFolderRequest(input *CreateFolderInput) CreateFolderRequest {
+func (c *Client) CreateFolderRequest(input *types.CreateFolderInput) CreateFolderRequest {
 	op := &aws.Operation{
 		Name:       opCreateFolder,
 		HTTPMethod: "POST",
@@ -125,10 +32,10 @@ func (c *Client) CreateFolderRequest(input *CreateFolderInput) CreateFolderReque
 	}
 
 	if input == nil {
-		input = &CreateFolderInput{}
+		input = &types.CreateFolderInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateFolderOutput{})
+	req := c.newRequest(op, input, &types.CreateFolderOutput{})
 	return CreateFolderRequest{Request: req, Input: input, Copy: c.CreateFolderRequest}
 }
 
@@ -136,8 +43,8 @@ func (c *Client) CreateFolderRequest(input *CreateFolderInput) CreateFolderReque
 // CreateFolder API operation.
 type CreateFolderRequest struct {
 	*aws.Request
-	Input *CreateFolderInput
-	Copy  func(*CreateFolderInput) CreateFolderRequest
+	Input *types.CreateFolderInput
+	Copy  func(*types.CreateFolderInput) CreateFolderRequest
 }
 
 // Send marshals and sends the CreateFolder API request.
@@ -149,7 +56,7 @@ func (r CreateFolderRequest) Send(ctx context.Context) (*CreateFolderResponse, e
 	}
 
 	resp := &CreateFolderResponse{
-		CreateFolderOutput: r.Request.Data.(*CreateFolderOutput),
+		CreateFolderOutput: r.Request.Data.(*types.CreateFolderOutput),
 		response:           &aws.Response{Request: r.Request},
 	}
 
@@ -159,7 +66,7 @@ func (r CreateFolderRequest) Send(ctx context.Context) (*CreateFolderResponse, e
 // CreateFolderResponse is the response type for the
 // CreateFolder API operation.
 type CreateFolderResponse struct {
-	*CreateFolderOutput
+	*types.CreateFolderOutput
 
 	response *aws.Response
 }

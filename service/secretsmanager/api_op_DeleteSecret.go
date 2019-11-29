@@ -4,98 +4,10 @@ package secretsmanager
 
 import (
 	"context"
-	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/secretsmanager/types"
 )
-
-type DeleteSecretInput struct {
-	_ struct{} `type:"structure"`
-
-	// (Optional) Specifies that the secret is to be deleted without any recovery
-	// window. You can't use both this parameter and the RecoveryWindowInDays parameter
-	// in the same API call.
-	//
-	// An asynchronous background process performs the actual deletion, so there
-	// can be a short delay before the operation completes. If you write code to
-	// delete and then immediately recreate a secret with the same name, ensure
-	// that your code includes appropriate back off and retry logic.
-	//
-	// Use this parameter with caution. This parameter causes the operation to skip
-	// the normal waiting period before the permanent deletion that AWS would normally
-	// impose with the RecoveryWindowInDays parameter. If you delete a secret with
-	// the ForceDeleteWithouRecovery parameter, then you have no opportunity to
-	// recover the secret. It is permanently lost.
-	ForceDeleteWithoutRecovery *bool `type:"boolean"`
-
-	// (Optional) Specifies the number of days that Secrets Manager waits before
-	// it can delete the secret. You can't use both this parameter and the ForceDeleteWithoutRecovery
-	// parameter in the same API call.
-	//
-	// This value can range from 7 to 30 days. The default value is 30.
-	RecoveryWindowInDays *int64 `type:"long"`
-
-	// Specifies the secret that you want to delete. You can specify either the
-	// Amazon Resource Name (ARN) or the friendly name of the secret.
-	//
-	// If you specify an ARN, we generally recommend that you specify a complete
-	// ARN. You can specify a partial ARN too—for example, if you don’t include
-	// the final hyphen and six random characters that Secrets Manager adds at the
-	// end of the ARN when you created the secret. A partial ARN match can work
-	// as long as it uniquely matches only one secret. However, if your secret has
-	// a name that ends in a hyphen followed by six characters (before Secrets Manager
-	// adds the hyphen and six characters to the ARN) and you try to use that as
-	// a partial ARN, then those characters cause Secrets Manager to assume that
-	// you’re specifying a complete ARN. This confusion can cause unexpected results.
-	// To avoid this situation, we recommend that you don’t create secret names
-	// that end with a hyphen followed by six characters.
-	//
-	// SecretId is a required field
-	SecretId *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteSecretInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteSecretInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteSecretInput"}
-
-	if s.SecretId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("SecretId"))
-	}
-	if s.SecretId != nil && len(*s.SecretId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("SecretId", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteSecretOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The ARN of the secret that is now scheduled for deletion.
-	ARN *string `min:"20" type:"string"`
-
-	// The date and time after which this secret can be deleted by Secrets Manager
-	// and can no longer be restored. This value is the date and time of the delete
-	// request plus the number of days specified in RecoveryWindowInDays.
-	DeletionDate *time.Time `type:"timestamp"`
-
-	// The friendly name of the secret that is now scheduled for deletion.
-	Name *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s DeleteSecretOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteSecret = "DeleteSecret"
 
@@ -147,7 +59,7 @@ const opDeleteSecret = "DeleteSecret"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/secretsmanager-2017-10-17/DeleteSecret
-func (c *Client) DeleteSecretRequest(input *DeleteSecretInput) DeleteSecretRequest {
+func (c *Client) DeleteSecretRequest(input *types.DeleteSecretInput) DeleteSecretRequest {
 	op := &aws.Operation{
 		Name:       opDeleteSecret,
 		HTTPMethod: "POST",
@@ -155,10 +67,10 @@ func (c *Client) DeleteSecretRequest(input *DeleteSecretInput) DeleteSecretReque
 	}
 
 	if input == nil {
-		input = &DeleteSecretInput{}
+		input = &types.DeleteSecretInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteSecretOutput{})
+	req := c.newRequest(op, input, &types.DeleteSecretOutput{})
 	return DeleteSecretRequest{Request: req, Input: input, Copy: c.DeleteSecretRequest}
 }
 
@@ -166,8 +78,8 @@ func (c *Client) DeleteSecretRequest(input *DeleteSecretInput) DeleteSecretReque
 // DeleteSecret API operation.
 type DeleteSecretRequest struct {
 	*aws.Request
-	Input *DeleteSecretInput
-	Copy  func(*DeleteSecretInput) DeleteSecretRequest
+	Input *types.DeleteSecretInput
+	Copy  func(*types.DeleteSecretInput) DeleteSecretRequest
 }
 
 // Send marshals and sends the DeleteSecret API request.
@@ -179,7 +91,7 @@ func (r DeleteSecretRequest) Send(ctx context.Context) (*DeleteSecretResponse, e
 	}
 
 	resp := &DeleteSecretResponse{
-		DeleteSecretOutput: r.Request.Data.(*DeleteSecretOutput),
+		DeleteSecretOutput: r.Request.Data.(*types.DeleteSecretOutput),
 		response:           &aws.Response{Request: r.Request},
 	}
 
@@ -189,7 +101,7 @@ func (r DeleteSecretRequest) Send(ctx context.Context) (*DeleteSecretResponse, e
 // DeleteSecretResponse is the response type for the
 // DeleteSecret API operation.
 type DeleteSecretResponse struct {
-	*DeleteSecretOutput
+	*types.DeleteSecretOutput
 
 	response *aws.Response
 }

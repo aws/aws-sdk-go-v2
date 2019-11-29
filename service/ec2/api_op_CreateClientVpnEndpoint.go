@@ -6,132 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-type CreateClientVpnEndpointInput struct {
-	_ struct{} `type:"structure"`
-
-	// Information about the authentication method to be used to authenticate clients.
-	//
-	// AuthenticationOptions is a required field
-	AuthenticationOptions []VpnAuthenticationRequest `locationName:"Authentication" type:"list" required:"true"`
-
-	// The IPv4 address range, in CIDR notation, from which to assign client IP
-	// addresses. The address range cannot overlap with the local CIDR of the VPC
-	// in which the associated subnet is located, or the routes that you add manually.
-	// The address range cannot be changed after the Client VPN endpoint has been
-	// created. The CIDR block should be /22 or greater.
-	//
-	// ClientCidrBlock is a required field
-	ClientCidrBlock *string `type:"string" required:"true"`
-
-	// Unique, case-sensitive identifier that you provide to ensure the idempotency
-	// of the request. For more information, see How to Ensure Idempotency (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html).
-	ClientToken *string `type:"string" idempotencyToken:"true"`
-
-	// Information about the client connection logging options.
-	//
-	// If you enable client connection logging, data about client connections is
-	// sent to a Cloudwatch Logs log stream. The following information is logged:
-	//
-	//    * Client connection requests
-	//
-	//    * Client connection results (successful and unsuccessful)
-	//
-	//    * Reasons for unsuccessful client connection requests
-	//
-	//    * Client connection termination time
-	//
-	// ConnectionLogOptions is a required field
-	ConnectionLogOptions *ConnectionLogOptions `type:"structure" required:"true"`
-
-	// A brief description of the Client VPN endpoint.
-	Description *string `type:"string"`
-
-	// Information about the DNS servers to be used for DNS resolution. A Client
-	// VPN endpoint can have up to two DNS servers. If no DNS server is specified,
-	// the DNS address configured on the device is used for the DNS server.
-	DnsServers []string `locationNameList:"item" type:"list"`
-
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have
-	// the required permissions, the error response is DryRunOperation. Otherwise,
-	// it is UnauthorizedOperation.
-	DryRun *bool `type:"boolean"`
-
-	// The ARN of the server certificate. For more information, see the AWS Certificate
-	// Manager User Guide (https://docs.aws.amazon.com/acm/latest/userguide/).
-	//
-	// ServerCertificateArn is a required field
-	ServerCertificateArn *string `type:"string" required:"true"`
-
-	// Indicates whether split-tunnel is enabled on the AWS Client VPN endpoint.
-	//
-	// By default, split-tunnel on a VPN endpoint is disabled.
-	//
-	// For information about split-tunnel VPN endpoints, see Split-Tunnel AWS Client
-	// VPN Endpoint (https://docs.aws.amazon.com/vpn/latest/clientvpn-admin/split-tunnel-vpn.html)
-	// in the AWS Client VPN Administrator Guide.
-	SplitTunnel *bool `type:"boolean"`
-
-	// The tags to apply to the Client VPN endpoint during creation.
-	TagSpecifications []TagSpecification `locationName:"TagSpecification" locationNameList:"item" type:"list"`
-
-	// The transport protocol to be used by the VPN session.
-	//
-	// Default value: udp
-	TransportProtocol TransportProtocol `type:"string" enum:"true"`
-}
-
-// String returns the string representation
-func (s CreateClientVpnEndpointInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateClientVpnEndpointInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateClientVpnEndpointInput"}
-
-	if s.AuthenticationOptions == nil {
-		invalidParams.Add(aws.NewErrParamRequired("AuthenticationOptions"))
-	}
-
-	if s.ClientCidrBlock == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ClientCidrBlock"))
-	}
-
-	if s.ConnectionLogOptions == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ConnectionLogOptions"))
-	}
-
-	if s.ServerCertificateArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ServerCertificateArn"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type CreateClientVpnEndpointOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the Client VPN endpoint.
-	ClientVpnEndpointId *string `locationName:"clientVpnEndpointId" type:"string"`
-
-	// The DNS name to be used by clients when establishing their VPN session.
-	DnsName *string `locationName:"dnsName" type:"string"`
-
-	// The current state of the Client VPN endpoint.
-	Status *VpnEndpointStatus `locationName:"status" type:"structure"`
-}
-
-// String returns the string representation
-func (s CreateClientVpnEndpointOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCreateClientVpnEndpoint = "CreateClientVpnEndpoint"
 
@@ -150,7 +26,7 @@ const opCreateClientVpnEndpoint = "CreateClientVpnEndpoint"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateClientVpnEndpoint
-func (c *Client) CreateClientVpnEndpointRequest(input *CreateClientVpnEndpointInput) CreateClientVpnEndpointRequest {
+func (c *Client) CreateClientVpnEndpointRequest(input *types.CreateClientVpnEndpointInput) CreateClientVpnEndpointRequest {
 	op := &aws.Operation{
 		Name:       opCreateClientVpnEndpoint,
 		HTTPMethod: "POST",
@@ -158,10 +34,10 @@ func (c *Client) CreateClientVpnEndpointRequest(input *CreateClientVpnEndpointIn
 	}
 
 	if input == nil {
-		input = &CreateClientVpnEndpointInput{}
+		input = &types.CreateClientVpnEndpointInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateClientVpnEndpointOutput{})
+	req := c.newRequest(op, input, &types.CreateClientVpnEndpointOutput{})
 	return CreateClientVpnEndpointRequest{Request: req, Input: input, Copy: c.CreateClientVpnEndpointRequest}
 }
 
@@ -169,8 +45,8 @@ func (c *Client) CreateClientVpnEndpointRequest(input *CreateClientVpnEndpointIn
 // CreateClientVpnEndpoint API operation.
 type CreateClientVpnEndpointRequest struct {
 	*aws.Request
-	Input *CreateClientVpnEndpointInput
-	Copy  func(*CreateClientVpnEndpointInput) CreateClientVpnEndpointRequest
+	Input *types.CreateClientVpnEndpointInput
+	Copy  func(*types.CreateClientVpnEndpointInput) CreateClientVpnEndpointRequest
 }
 
 // Send marshals and sends the CreateClientVpnEndpoint API request.
@@ -182,7 +58,7 @@ func (r CreateClientVpnEndpointRequest) Send(ctx context.Context) (*CreateClient
 	}
 
 	resp := &CreateClientVpnEndpointResponse{
-		CreateClientVpnEndpointOutput: r.Request.Data.(*CreateClientVpnEndpointOutput),
+		CreateClientVpnEndpointOutput: r.Request.Data.(*types.CreateClientVpnEndpointOutput),
 		response:                      &aws.Response{Request: r.Request},
 	}
 
@@ -192,7 +68,7 @@ func (r CreateClientVpnEndpointRequest) Send(ctx context.Context) (*CreateClient
 // CreateClientVpnEndpointResponse is the response type for the
 // CreateClientVpnEndpoint API operation.
 type CreateClientVpnEndpointResponse struct {
-	*CreateClientVpnEndpointOutput
+	*types.CreateClientVpnEndpointOutput
 
 	response *aws.Response
 }

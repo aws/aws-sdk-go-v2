@@ -6,39 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/sns/types"
 )
-
-// The input for the GetSMSAttributes request.
-type GetSMSAttributesInput struct {
-	_ struct{} `type:"structure"`
-
-	// A list of the individual attribute names, such as MonthlySpendLimit, for
-	// which you want values.
-	//
-	// For all attribute names, see SetSMSAttributes (https://docs.aws.amazon.com/sns/latest/api/API_SetSMSAttributes.html).
-	//
-	// If you don't use this parameter, Amazon SNS returns all SMS attributes.
-	Attributes []string `locationName:"attributes" type:"list"`
-}
-
-// String returns the string representation
-func (s GetSMSAttributesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// The response from the GetSMSAttributes request.
-type GetSMSAttributesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The SMS attribute names and their values.
-	Attributes map[string]string `locationName:"attributes" type:"map"`
-}
-
-// String returns the string representation
-func (s GetSMSAttributesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetSMSAttributes = "GetSMSAttributes"
 
@@ -57,7 +26,7 @@ const opGetSMSAttributes = "GetSMSAttributes"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/GetSMSAttributes
-func (c *Client) GetSMSAttributesRequest(input *GetSMSAttributesInput) GetSMSAttributesRequest {
+func (c *Client) GetSMSAttributesRequest(input *types.GetSMSAttributesInput) GetSMSAttributesRequest {
 	op := &aws.Operation{
 		Name:       opGetSMSAttributes,
 		HTTPMethod: "POST",
@@ -65,10 +34,10 @@ func (c *Client) GetSMSAttributesRequest(input *GetSMSAttributesInput) GetSMSAtt
 	}
 
 	if input == nil {
-		input = &GetSMSAttributesInput{}
+		input = &types.GetSMSAttributesInput{}
 	}
 
-	req := c.newRequest(op, input, &GetSMSAttributesOutput{})
+	req := c.newRequest(op, input, &types.GetSMSAttributesOutput{})
 	return GetSMSAttributesRequest{Request: req, Input: input, Copy: c.GetSMSAttributesRequest}
 }
 
@@ -76,8 +45,8 @@ func (c *Client) GetSMSAttributesRequest(input *GetSMSAttributesInput) GetSMSAtt
 // GetSMSAttributes API operation.
 type GetSMSAttributesRequest struct {
 	*aws.Request
-	Input *GetSMSAttributesInput
-	Copy  func(*GetSMSAttributesInput) GetSMSAttributesRequest
+	Input *types.GetSMSAttributesInput
+	Copy  func(*types.GetSMSAttributesInput) GetSMSAttributesRequest
 }
 
 // Send marshals and sends the GetSMSAttributes API request.
@@ -89,7 +58,7 @@ func (r GetSMSAttributesRequest) Send(ctx context.Context) (*GetSMSAttributesRes
 	}
 
 	resp := &GetSMSAttributesResponse{
-		GetSMSAttributesOutput: r.Request.Data.(*GetSMSAttributesOutput),
+		GetSMSAttributesOutput: r.Request.Data.(*types.GetSMSAttributesOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -99,7 +68,7 @@ func (r GetSMSAttributesRequest) Send(ctx context.Context) (*GetSMSAttributesRes
 // GetSMSAttributesResponse is the response type for the
 // GetSMSAttributes API operation.
 type GetSMSAttributesResponse struct {
-	*GetSMSAttributesOutput
+	*types.GetSMSAttributesOutput
 
 	response *aws.Response
 }

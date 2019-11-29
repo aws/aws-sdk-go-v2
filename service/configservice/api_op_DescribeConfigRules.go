@@ -6,41 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/configservice/types"
 )
-
-type DescribeConfigRulesInput struct {
-	_ struct{} `type:"structure"`
-
-	// The names of the AWS Config rules for which you want details. If you do not
-	// specify any names, AWS Config returns details for all your rules.
-	ConfigRuleNames []string `type:"list"`
-
-	// The nextToken string returned on a previous page that you use to get the
-	// next page of results in a paginated response.
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeConfigRulesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type DescribeConfigRulesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The details about your AWS Config rules.
-	ConfigRules []ConfigRule `type:"list"`
-
-	// The string that you use in a subsequent request to get the next page of results
-	// in a paginated response.
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeConfigRulesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeConfigRules = "DescribeConfigRules"
 
@@ -57,7 +24,7 @@ const opDescribeConfigRules = "DescribeConfigRules"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DescribeConfigRules
-func (c *Client) DescribeConfigRulesRequest(input *DescribeConfigRulesInput) DescribeConfigRulesRequest {
+func (c *Client) DescribeConfigRulesRequest(input *types.DescribeConfigRulesInput) DescribeConfigRulesRequest {
 	op := &aws.Operation{
 		Name:       opDescribeConfigRules,
 		HTTPMethod: "POST",
@@ -65,10 +32,10 @@ func (c *Client) DescribeConfigRulesRequest(input *DescribeConfigRulesInput) Des
 	}
 
 	if input == nil {
-		input = &DescribeConfigRulesInput{}
+		input = &types.DescribeConfigRulesInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeConfigRulesOutput{})
+	req := c.newRequest(op, input, &types.DescribeConfigRulesOutput{})
 	return DescribeConfigRulesRequest{Request: req, Input: input, Copy: c.DescribeConfigRulesRequest}
 }
 
@@ -76,8 +43,8 @@ func (c *Client) DescribeConfigRulesRequest(input *DescribeConfigRulesInput) Des
 // DescribeConfigRules API operation.
 type DescribeConfigRulesRequest struct {
 	*aws.Request
-	Input *DescribeConfigRulesInput
-	Copy  func(*DescribeConfigRulesInput) DescribeConfigRulesRequest
+	Input *types.DescribeConfigRulesInput
+	Copy  func(*types.DescribeConfigRulesInput) DescribeConfigRulesRequest
 }
 
 // Send marshals and sends the DescribeConfigRules API request.
@@ -89,7 +56,7 @@ func (r DescribeConfigRulesRequest) Send(ctx context.Context) (*DescribeConfigRu
 	}
 
 	resp := &DescribeConfigRulesResponse{
-		DescribeConfigRulesOutput: r.Request.Data.(*DescribeConfigRulesOutput),
+		DescribeConfigRulesOutput: r.Request.Data.(*types.DescribeConfigRulesOutput),
 		response:                  &aws.Response{Request: r.Request},
 	}
 
@@ -99,7 +66,7 @@ func (r DescribeConfigRulesRequest) Send(ctx context.Context) (*DescribeConfigRu
 // DescribeConfigRulesResponse is the response type for the
 // DescribeConfigRules API operation.
 type DescribeConfigRulesResponse struct {
-	*DescribeConfigRulesOutput
+	*types.DescribeConfigRulesOutput
 
 	response *aws.Response
 }

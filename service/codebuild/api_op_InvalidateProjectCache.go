@@ -6,48 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/codebuild/types"
 )
-
-type InvalidateProjectCacheInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the AWS CodeBuild build project that the cache is reset for.
-	//
-	// ProjectName is a required field
-	ProjectName *string `locationName:"projectName" min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s InvalidateProjectCacheInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *InvalidateProjectCacheInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "InvalidateProjectCacheInput"}
-
-	if s.ProjectName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ProjectName"))
-	}
-	if s.ProjectName != nil && len(*s.ProjectName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ProjectName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type InvalidateProjectCacheOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s InvalidateProjectCacheOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opInvalidateProjectCache = "InvalidateProjectCache"
 
@@ -64,7 +24,7 @@ const opInvalidateProjectCache = "InvalidateProjectCache"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/InvalidateProjectCache
-func (c *Client) InvalidateProjectCacheRequest(input *InvalidateProjectCacheInput) InvalidateProjectCacheRequest {
+func (c *Client) InvalidateProjectCacheRequest(input *types.InvalidateProjectCacheInput) InvalidateProjectCacheRequest {
 	op := &aws.Operation{
 		Name:       opInvalidateProjectCache,
 		HTTPMethod: "POST",
@@ -72,10 +32,10 @@ func (c *Client) InvalidateProjectCacheRequest(input *InvalidateProjectCacheInpu
 	}
 
 	if input == nil {
-		input = &InvalidateProjectCacheInput{}
+		input = &types.InvalidateProjectCacheInput{}
 	}
 
-	req := c.newRequest(op, input, &InvalidateProjectCacheOutput{})
+	req := c.newRequest(op, input, &types.InvalidateProjectCacheOutput{})
 	return InvalidateProjectCacheRequest{Request: req, Input: input, Copy: c.InvalidateProjectCacheRequest}
 }
 
@@ -83,8 +43,8 @@ func (c *Client) InvalidateProjectCacheRequest(input *InvalidateProjectCacheInpu
 // InvalidateProjectCache API operation.
 type InvalidateProjectCacheRequest struct {
 	*aws.Request
-	Input *InvalidateProjectCacheInput
-	Copy  func(*InvalidateProjectCacheInput) InvalidateProjectCacheRequest
+	Input *types.InvalidateProjectCacheInput
+	Copy  func(*types.InvalidateProjectCacheInput) InvalidateProjectCacheRequest
 }
 
 // Send marshals and sends the InvalidateProjectCache API request.
@@ -96,7 +56,7 @@ func (r InvalidateProjectCacheRequest) Send(ctx context.Context) (*InvalidatePro
 	}
 
 	resp := &InvalidateProjectCacheResponse{
-		InvalidateProjectCacheOutput: r.Request.Data.(*InvalidateProjectCacheOutput),
+		InvalidateProjectCacheOutput: r.Request.Data.(*types.InvalidateProjectCacheOutput),
 		response:                     &aws.Response{Request: r.Request},
 	}
 
@@ -106,7 +66,7 @@ func (r InvalidateProjectCacheRequest) Send(ctx context.Context) (*InvalidatePro
 // InvalidateProjectCacheResponse is the response type for the
 // InvalidateProjectCache API operation.
 type InvalidateProjectCacheResponse struct {
-	*InvalidateProjectCacheOutput
+	*types.InvalidateProjectCacheOutput
 
 	response *aws.Response
 }

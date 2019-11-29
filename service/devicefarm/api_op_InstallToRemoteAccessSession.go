@@ -6,69 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/devicefarm/types"
 )
-
-// Represents the request to install an Android application (in .apk format)
-// or an iOS application (in .ipa format) as part of a remote access session.
-type InstallToRemoteAccessSessionInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the app about which you are requesting
-	// information.
-	//
-	// AppArn is a required field
-	AppArn *string `locationName:"appArn" min:"32" type:"string" required:"true"`
-
-	// The Amazon Resource Name (ARN) of the remote access session about which you
-	// are requesting information.
-	//
-	// RemoteAccessSessionArn is a required field
-	RemoteAccessSessionArn *string `locationName:"remoteAccessSessionArn" min:"32" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s InstallToRemoteAccessSessionInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *InstallToRemoteAccessSessionInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "InstallToRemoteAccessSessionInput"}
-
-	if s.AppArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("AppArn"))
-	}
-	if s.AppArn != nil && len(*s.AppArn) < 32 {
-		invalidParams.Add(aws.NewErrParamMinLen("AppArn", 32))
-	}
-
-	if s.RemoteAccessSessionArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("RemoteAccessSessionArn"))
-	}
-	if s.RemoteAccessSessionArn != nil && len(*s.RemoteAccessSessionArn) < 32 {
-		invalidParams.Add(aws.NewErrParamMinLen("RemoteAccessSessionArn", 32))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Represents the response from the server after AWS Device Farm makes a request
-// to install to a remote access session.
-type InstallToRemoteAccessSessionOutput struct {
-	_ struct{} `type:"structure"`
-
-	// An app to upload or that has been uploaded.
-	AppUpload *Upload `locationName:"appUpload" type:"structure"`
-}
-
-// String returns the string representation
-func (s InstallToRemoteAccessSessionOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opInstallToRemoteAccessSession = "InstallToRemoteAccessSession"
 
@@ -87,7 +26,7 @@ const opInstallToRemoteAccessSession = "InstallToRemoteAccessSession"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/InstallToRemoteAccessSession
-func (c *Client) InstallToRemoteAccessSessionRequest(input *InstallToRemoteAccessSessionInput) InstallToRemoteAccessSessionRequest {
+func (c *Client) InstallToRemoteAccessSessionRequest(input *types.InstallToRemoteAccessSessionInput) InstallToRemoteAccessSessionRequest {
 	op := &aws.Operation{
 		Name:       opInstallToRemoteAccessSession,
 		HTTPMethod: "POST",
@@ -95,10 +34,10 @@ func (c *Client) InstallToRemoteAccessSessionRequest(input *InstallToRemoteAcces
 	}
 
 	if input == nil {
-		input = &InstallToRemoteAccessSessionInput{}
+		input = &types.InstallToRemoteAccessSessionInput{}
 	}
 
-	req := c.newRequest(op, input, &InstallToRemoteAccessSessionOutput{})
+	req := c.newRequest(op, input, &types.InstallToRemoteAccessSessionOutput{})
 	return InstallToRemoteAccessSessionRequest{Request: req, Input: input, Copy: c.InstallToRemoteAccessSessionRequest}
 }
 
@@ -106,8 +45,8 @@ func (c *Client) InstallToRemoteAccessSessionRequest(input *InstallToRemoteAcces
 // InstallToRemoteAccessSession API operation.
 type InstallToRemoteAccessSessionRequest struct {
 	*aws.Request
-	Input *InstallToRemoteAccessSessionInput
-	Copy  func(*InstallToRemoteAccessSessionInput) InstallToRemoteAccessSessionRequest
+	Input *types.InstallToRemoteAccessSessionInput
+	Copy  func(*types.InstallToRemoteAccessSessionInput) InstallToRemoteAccessSessionRequest
 }
 
 // Send marshals and sends the InstallToRemoteAccessSession API request.
@@ -119,7 +58,7 @@ func (r InstallToRemoteAccessSessionRequest) Send(ctx context.Context) (*Install
 	}
 
 	resp := &InstallToRemoteAccessSessionResponse{
-		InstallToRemoteAccessSessionOutput: r.Request.Data.(*InstallToRemoteAccessSessionOutput),
+		InstallToRemoteAccessSessionOutput: r.Request.Data.(*types.InstallToRemoteAccessSessionOutput),
 		response:                           &aws.Response{Request: r.Request},
 	}
 
@@ -129,7 +68,7 @@ func (r InstallToRemoteAccessSessionRequest) Send(ctx context.Context) (*Install
 // InstallToRemoteAccessSessionResponse is the response type for the
 // InstallToRemoteAccessSession API operation.
 type InstallToRemoteAccessSessionResponse struct {
-	*InstallToRemoteAccessSessionOutput
+	*types.InstallToRemoteAccessSessionOutput
 
 	response *aws.Response
 }

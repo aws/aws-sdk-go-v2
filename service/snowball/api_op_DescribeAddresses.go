@@ -6,55 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/snowball/types"
 )
-
-type DescribeAddressesInput struct {
-	_ struct{} `type:"structure"`
-
-	// The number of ADDRESS objects to return.
-	MaxResults *int64 `type:"integer"`
-
-	// HTTP requests are stateless. To identify what object comes "next" in the
-	// list of ADDRESS objects, you have the option of specifying a value for NextToken
-	// as the starting point for your list of returned addresses.
-	NextToken *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeAddressesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeAddressesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeAddressesInput"}
-	if s.NextToken != nil && len(*s.NextToken) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribeAddressesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The Snowball shipping addresses that were created for this account.
-	Addresses []Address `type:"list"`
-
-	// HTTP requests are stateless. If you use the automatically generated NextToken
-	// value in your next DescribeAddresses call, your list of returned addresses
-	// will start from this point in the array.
-	NextToken *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeAddressesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeAddresses = "DescribeAddresses"
 
@@ -73,7 +26,7 @@ const opDescribeAddresses = "DescribeAddresses"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/DescribeAddresses
-func (c *Client) DescribeAddressesRequest(input *DescribeAddressesInput) DescribeAddressesRequest {
+func (c *Client) DescribeAddressesRequest(input *types.DescribeAddressesInput) DescribeAddressesRequest {
 	op := &aws.Operation{
 		Name:       opDescribeAddresses,
 		HTTPMethod: "POST",
@@ -87,10 +40,10 @@ func (c *Client) DescribeAddressesRequest(input *DescribeAddressesInput) Describ
 	}
 
 	if input == nil {
-		input = &DescribeAddressesInput{}
+		input = &types.DescribeAddressesInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeAddressesOutput{})
+	req := c.newRequest(op, input, &types.DescribeAddressesOutput{})
 	return DescribeAddressesRequest{Request: req, Input: input, Copy: c.DescribeAddressesRequest}
 }
 
@@ -98,8 +51,8 @@ func (c *Client) DescribeAddressesRequest(input *DescribeAddressesInput) Describ
 // DescribeAddresses API operation.
 type DescribeAddressesRequest struct {
 	*aws.Request
-	Input *DescribeAddressesInput
-	Copy  func(*DescribeAddressesInput) DescribeAddressesRequest
+	Input *types.DescribeAddressesInput
+	Copy  func(*types.DescribeAddressesInput) DescribeAddressesRequest
 }
 
 // Send marshals and sends the DescribeAddresses API request.
@@ -111,7 +64,7 @@ func (r DescribeAddressesRequest) Send(ctx context.Context) (*DescribeAddressesR
 	}
 
 	resp := &DescribeAddressesResponse{
-		DescribeAddressesOutput: r.Request.Data.(*DescribeAddressesOutput),
+		DescribeAddressesOutput: r.Request.Data.(*types.DescribeAddressesOutput),
 		response:                &aws.Response{Request: r.Request},
 	}
 
@@ -141,7 +94,7 @@ func NewDescribeAddressesPaginator(req DescribeAddressesRequest) DescribeAddress
 	return DescribeAddressesPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *DescribeAddressesInput
+				var inCpy *types.DescribeAddressesInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -161,14 +114,14 @@ type DescribeAddressesPaginator struct {
 	aws.Pager
 }
 
-func (p *DescribeAddressesPaginator) CurrentPage() *DescribeAddressesOutput {
-	return p.Pager.CurrentPage().(*DescribeAddressesOutput)
+func (p *DescribeAddressesPaginator) CurrentPage() *types.DescribeAddressesOutput {
+	return p.Pager.CurrentPage().(*types.DescribeAddressesOutput)
 }
 
 // DescribeAddressesResponse is the response type for the
 // DescribeAddresses API operation.
 type DescribeAddressesResponse struct {
-	*DescribeAddressesOutput
+	*types.DescribeAddressesOutput
 
 	response *aws.Response
 }

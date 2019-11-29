@@ -4,164 +4,10 @@ package resourcegroups
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/resourcegroups/types"
 )
-
-type ListGroupResourcesInput struct {
-	_ struct{} `type:"structure"`
-
-	// Filters, formatted as ResourceFilter objects, that you want to apply to a
-	// ListGroupResources operation.
-	//
-	//    * resource-type - Filter resources by their type. Specify up to five resource
-	//    types in the format AWS::ServiceCode::ResourceType. For example, AWS::EC2::Instance,
-	//    or AWS::S3::Bucket.
-	Filters []ResourceFilter `type:"list"`
-
-	// The name of the resource group.
-	//
-	// GroupName is a required field
-	GroupName *string `location:"uri" locationName:"GroupName" min:"1" type:"string" required:"true"`
-
-	// The maximum number of group member ARNs that are returned in a single call
-	// by ListGroupResources, in paginated output. By default, this number is 50.
-	MaxResults *int64 `location:"querystring" locationName:"maxResults" min:"1" type:"integer"`
-
-	// The NextToken value that is returned in a paginated ListGroupResources request.
-	// To get the next page of results, run the call again, add the NextToken parameter,
-	// and specify the NextToken value.
-	NextToken *string `location:"querystring" locationName:"nextToken" type:"string"`
-}
-
-// String returns the string representation
-func (s ListGroupResourcesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListGroupResourcesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListGroupResourcesInput"}
-
-	if s.GroupName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("GroupName"))
-	}
-	if s.GroupName != nil && len(*s.GroupName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("GroupName", 1))
-	}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-	if s.Filters != nil {
-		for i, v := range s.Filters {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListGroupResourcesInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.Filters != nil {
-		v := s.Filters
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "Filters", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	if s.GroupName != nil {
-		v := *s.GroupName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "GroupName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.MaxResults != nil {
-		v := *s.MaxResults
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "maxResults", protocol.Int64Value(v), metadata)
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type ListGroupResourcesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The NextToken value to include in a subsequent ListGroupResources request,
-	// to get more results.
-	NextToken *string `type:"string"`
-
-	// A list of QueryError objects. Each error is an object that contains ErrorCode
-	// and Message structures. Possible values for ErrorCode are CLOUDFORMATION_STACK_INACTIVE
-	// and CLOUDFORMATION_STACK_NOT_EXISTING.
-	QueryErrors []QueryError `type:"list"`
-
-	// The ARNs and resource types of resources that are members of the group that
-	// you specified.
-	ResourceIdentifiers []ResourceIdentifier `type:"list"`
-}
-
-// String returns the string representation
-func (s ListGroupResourcesOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListGroupResourcesOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.QueryErrors != nil {
-		v := s.QueryErrors
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "QueryErrors", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	if s.ResourceIdentifiers != nil {
-		v := s.ResourceIdentifiers
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "ResourceIdentifiers", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	return nil
-}
 
 const opListGroupResources = "ListGroupResources"
 
@@ -179,7 +25,7 @@ const opListGroupResources = "ListGroupResources"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/resource-groups-2017-11-27/ListGroupResources
-func (c *Client) ListGroupResourcesRequest(input *ListGroupResourcesInput) ListGroupResourcesRequest {
+func (c *Client) ListGroupResourcesRequest(input *types.ListGroupResourcesInput) ListGroupResourcesRequest {
 	op := &aws.Operation{
 		Name:       opListGroupResources,
 		HTTPMethod: "POST",
@@ -193,10 +39,10 @@ func (c *Client) ListGroupResourcesRequest(input *ListGroupResourcesInput) ListG
 	}
 
 	if input == nil {
-		input = &ListGroupResourcesInput{}
+		input = &types.ListGroupResourcesInput{}
 	}
 
-	req := c.newRequest(op, input, &ListGroupResourcesOutput{})
+	req := c.newRequest(op, input, &types.ListGroupResourcesOutput{})
 	return ListGroupResourcesRequest{Request: req, Input: input, Copy: c.ListGroupResourcesRequest}
 }
 
@@ -204,8 +50,8 @@ func (c *Client) ListGroupResourcesRequest(input *ListGroupResourcesInput) ListG
 // ListGroupResources API operation.
 type ListGroupResourcesRequest struct {
 	*aws.Request
-	Input *ListGroupResourcesInput
-	Copy  func(*ListGroupResourcesInput) ListGroupResourcesRequest
+	Input *types.ListGroupResourcesInput
+	Copy  func(*types.ListGroupResourcesInput) ListGroupResourcesRequest
 }
 
 // Send marshals and sends the ListGroupResources API request.
@@ -217,7 +63,7 @@ func (r ListGroupResourcesRequest) Send(ctx context.Context) (*ListGroupResource
 	}
 
 	resp := &ListGroupResourcesResponse{
-		ListGroupResourcesOutput: r.Request.Data.(*ListGroupResourcesOutput),
+		ListGroupResourcesOutput: r.Request.Data.(*types.ListGroupResourcesOutput),
 		response:                 &aws.Response{Request: r.Request},
 	}
 
@@ -247,7 +93,7 @@ func NewListGroupResourcesPaginator(req ListGroupResourcesRequest) ListGroupReso
 	return ListGroupResourcesPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListGroupResourcesInput
+				var inCpy *types.ListGroupResourcesInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -267,14 +113,14 @@ type ListGroupResourcesPaginator struct {
 	aws.Pager
 }
 
-func (p *ListGroupResourcesPaginator) CurrentPage() *ListGroupResourcesOutput {
-	return p.Pager.CurrentPage().(*ListGroupResourcesOutput)
+func (p *ListGroupResourcesPaginator) CurrentPage() *types.ListGroupResourcesOutput {
+	return p.Pager.CurrentPage().(*types.ListGroupResourcesOutput)
 }
 
 // ListGroupResourcesResponse is the response type for the
 // ListGroupResources API operation.
 type ListGroupResourcesResponse struct {
-	*ListGroupResourcesOutput
+	*types.ListGroupResourcesOutput
 
 	response *aws.Response
 }

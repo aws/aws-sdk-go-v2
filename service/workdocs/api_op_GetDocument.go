@@ -6,113 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/workdocs/types"
 )
-
-type GetDocumentInput struct {
-	_ struct{} `type:"structure"`
-
-	// Amazon WorkDocs authentication token. Do not set this field when using administrative
-	// API actions, as in accessing the API using AWS credentials.
-	AuthenticationToken *string `location:"header" locationName:"Authentication" min:"1" type:"string" sensitive:"true"`
-
-	// The ID of the document.
-	//
-	// DocumentId is a required field
-	DocumentId *string `location:"uri" locationName:"DocumentId" min:"1" type:"string" required:"true"`
-
-	// Set this to TRUE to include custom metadata in the response.
-	IncludeCustomMetadata *bool `location:"querystring" locationName:"includeCustomMetadata" type:"boolean"`
-}
-
-// String returns the string representation
-func (s GetDocumentInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetDocumentInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetDocumentInput"}
-	if s.AuthenticationToken != nil && len(*s.AuthenticationToken) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("AuthenticationToken", 1))
-	}
-
-	if s.DocumentId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DocumentId"))
-	}
-	if s.DocumentId != nil && len(*s.DocumentId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("DocumentId", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetDocumentInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.AuthenticationToken != nil {
-		v := *s.AuthenticationToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "Authentication", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.DocumentId != nil {
-		v := *s.DocumentId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "DocumentId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.IncludeCustomMetadata != nil {
-		v := *s.IncludeCustomMetadata
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "includeCustomMetadata", protocol.BoolValue(v), metadata)
-	}
-	return nil
-}
-
-type GetDocumentOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The custom metadata on the document.
-	CustomMetadata map[string]string `min:"1" type:"map"`
-
-	// The metadata details of the document.
-	Metadata *DocumentMetadata `type:"structure"`
-}
-
-// String returns the string representation
-func (s GetDocumentOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetDocumentOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.CustomMetadata != nil {
-		v := s.CustomMetadata
-
-		metadata := protocol.Metadata{}
-		ms0 := e.Map(protocol.BodyTarget, "CustomMetadata", metadata)
-		ms0.Start()
-		for k1, v1 := range v {
-			ms0.MapSetValue(k1, protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
-		}
-		ms0.End()
-
-	}
-	if s.Metadata != nil {
-		v := s.Metadata
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "Metadata", v, metadata)
-	}
-	return nil
-}
 
 const opGetDocument = "GetDocument"
 
@@ -129,7 +24,7 @@ const opGetDocument = "GetDocument"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/GetDocument
-func (c *Client) GetDocumentRequest(input *GetDocumentInput) GetDocumentRequest {
+func (c *Client) GetDocumentRequest(input *types.GetDocumentInput) GetDocumentRequest {
 	op := &aws.Operation{
 		Name:       opGetDocument,
 		HTTPMethod: "GET",
@@ -137,10 +32,10 @@ func (c *Client) GetDocumentRequest(input *GetDocumentInput) GetDocumentRequest 
 	}
 
 	if input == nil {
-		input = &GetDocumentInput{}
+		input = &types.GetDocumentInput{}
 	}
 
-	req := c.newRequest(op, input, &GetDocumentOutput{})
+	req := c.newRequest(op, input, &types.GetDocumentOutput{})
 	return GetDocumentRequest{Request: req, Input: input, Copy: c.GetDocumentRequest}
 }
 
@@ -148,8 +43,8 @@ func (c *Client) GetDocumentRequest(input *GetDocumentInput) GetDocumentRequest 
 // GetDocument API operation.
 type GetDocumentRequest struct {
 	*aws.Request
-	Input *GetDocumentInput
-	Copy  func(*GetDocumentInput) GetDocumentRequest
+	Input *types.GetDocumentInput
+	Copy  func(*types.GetDocumentInput) GetDocumentRequest
 }
 
 // Send marshals and sends the GetDocument API request.
@@ -161,7 +56,7 @@ func (r GetDocumentRequest) Send(ctx context.Context) (*GetDocumentResponse, err
 	}
 
 	resp := &GetDocumentResponse{
-		GetDocumentOutput: r.Request.Data.(*GetDocumentOutput),
+		GetDocumentOutput: r.Request.Data.(*types.GetDocumentOutput),
 		response:          &aws.Response{Request: r.Request},
 	}
 
@@ -171,7 +66,7 @@ func (r GetDocumentRequest) Send(ctx context.Context) (*GetDocumentResponse, err
 // GetDocumentResponse is the response type for the
 // GetDocument API operation.
 type GetDocumentResponse struct {
-	*GetDocumentOutput
+	*types.GetDocumentOutput
 
 	response *aws.Response
 }

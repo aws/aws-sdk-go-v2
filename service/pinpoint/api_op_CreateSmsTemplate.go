@@ -6,89 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/pinpoint/types"
 )
-
-type CreateSmsTemplateInput struct {
-	_ struct{} `type:"structure" payload:"SMSTemplateRequest"`
-
-	// Specifies the content and settings for a message template that can be used
-	// in text messages that are sent through the SMS channel.
-	//
-	// SMSTemplateRequest is a required field
-	SMSTemplateRequest *SMSTemplateRequest `type:"structure" required:"true"`
-
-	// TemplateName is a required field
-	TemplateName *string `location:"uri" locationName:"template-name" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s CreateSmsTemplateInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateSmsTemplateInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateSmsTemplateInput"}
-
-	if s.SMSTemplateRequest == nil {
-		invalidParams.Add(aws.NewErrParamRequired("SMSTemplateRequest"))
-	}
-
-	if s.TemplateName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("TemplateName"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s CreateSmsTemplateInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.TemplateName != nil {
-		v := *s.TemplateName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "template-name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.SMSTemplateRequest != nil {
-		v := s.SMSTemplateRequest
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.PayloadTarget, "SMSTemplateRequest", v, metadata)
-	}
-	return nil
-}
-
-type CreateSmsTemplateOutput struct {
-	_ struct{} `type:"structure" payload:"CreateTemplateMessageBody"`
-
-	// Provides information about an API request or response.
-	//
-	// CreateTemplateMessageBody is a required field
-	CreateTemplateMessageBody *CreateTemplateMessageBody `type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s CreateSmsTemplateOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s CreateSmsTemplateOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.CreateTemplateMessageBody != nil {
-		v := s.CreateTemplateMessageBody
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.PayloadTarget, "CreateTemplateMessageBody", v, metadata)
-	}
-	return nil
-}
 
 const opCreateSmsTemplate = "CreateSmsTemplate"
 
@@ -106,7 +25,7 @@ const opCreateSmsTemplate = "CreateSmsTemplate"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/CreateSmsTemplate
-func (c *Client) CreateSmsTemplateRequest(input *CreateSmsTemplateInput) CreateSmsTemplateRequest {
+func (c *Client) CreateSmsTemplateRequest(input *types.CreateSmsTemplateInput) CreateSmsTemplateRequest {
 	op := &aws.Operation{
 		Name:       opCreateSmsTemplate,
 		HTTPMethod: "POST",
@@ -114,10 +33,10 @@ func (c *Client) CreateSmsTemplateRequest(input *CreateSmsTemplateInput) CreateS
 	}
 
 	if input == nil {
-		input = &CreateSmsTemplateInput{}
+		input = &types.CreateSmsTemplateInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateSmsTemplateOutput{})
+	req := c.newRequest(op, input, &types.CreateSmsTemplateOutput{})
 	return CreateSmsTemplateRequest{Request: req, Input: input, Copy: c.CreateSmsTemplateRequest}
 }
 
@@ -125,8 +44,8 @@ func (c *Client) CreateSmsTemplateRequest(input *CreateSmsTemplateInput) CreateS
 // CreateSmsTemplate API operation.
 type CreateSmsTemplateRequest struct {
 	*aws.Request
-	Input *CreateSmsTemplateInput
-	Copy  func(*CreateSmsTemplateInput) CreateSmsTemplateRequest
+	Input *types.CreateSmsTemplateInput
+	Copy  func(*types.CreateSmsTemplateInput) CreateSmsTemplateRequest
 }
 
 // Send marshals and sends the CreateSmsTemplate API request.
@@ -138,7 +57,7 @@ func (r CreateSmsTemplateRequest) Send(ctx context.Context) (*CreateSmsTemplateR
 	}
 
 	resp := &CreateSmsTemplateResponse{
-		CreateSmsTemplateOutput: r.Request.Data.(*CreateSmsTemplateOutput),
+		CreateSmsTemplateOutput: r.Request.Data.(*types.CreateSmsTemplateOutput),
 		response:                &aws.Response{Request: r.Request},
 	}
 
@@ -148,7 +67,7 @@ func (r CreateSmsTemplateRequest) Send(ctx context.Context) (*CreateSmsTemplateR
 // CreateSmsTemplateResponse is the response type for the
 // CreateSmsTemplate API operation.
 type CreateSmsTemplateResponse struct {
-	*CreateSmsTemplateOutput
+	*types.CreateSmsTemplateOutput
 
 	response *aws.Response
 }

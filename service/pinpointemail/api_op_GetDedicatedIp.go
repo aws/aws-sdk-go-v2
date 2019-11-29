@@ -6,77 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/pinpointemail/types"
 )
-
-// A request to obtain more information about a dedicated IP address.
-type GetDedicatedIpInput struct {
-	_ struct{} `type:"structure"`
-
-	// The IP address that you want to obtain more information about. The value
-	// you specify has to be a dedicated IP address that's assocaited with your
-	// Amazon Pinpoint account.
-	//
-	// Ip is a required field
-	Ip *string `location:"uri" locationName:"IP" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetDedicatedIpInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetDedicatedIpInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetDedicatedIpInput"}
-
-	if s.Ip == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Ip"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetDedicatedIpInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.Ip != nil {
-		v := *s.Ip
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "IP", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-// Information about a dedicated IP address.
-type GetDedicatedIpOutput struct {
-	_ struct{} `type:"structure"`
-
-	// An object that contains information about a dedicated IP address.
-	DedicatedIp *DedicatedIp `type:"structure"`
-}
-
-// String returns the string representation
-func (s GetDedicatedIpOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetDedicatedIpOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.DedicatedIp != nil {
-		v := s.DedicatedIp
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "DedicatedIp", v, metadata)
-	}
-	return nil
-}
 
 const opGetDedicatedIp = "GetDedicatedIp"
 
@@ -95,7 +26,7 @@ const opGetDedicatedIp = "GetDedicatedIp"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/GetDedicatedIp
-func (c *Client) GetDedicatedIpRequest(input *GetDedicatedIpInput) GetDedicatedIpRequest {
+func (c *Client) GetDedicatedIpRequest(input *types.GetDedicatedIpInput) GetDedicatedIpRequest {
 	op := &aws.Operation{
 		Name:       opGetDedicatedIp,
 		HTTPMethod: "GET",
@@ -103,10 +34,10 @@ func (c *Client) GetDedicatedIpRequest(input *GetDedicatedIpInput) GetDedicatedI
 	}
 
 	if input == nil {
-		input = &GetDedicatedIpInput{}
+		input = &types.GetDedicatedIpInput{}
 	}
 
-	req := c.newRequest(op, input, &GetDedicatedIpOutput{})
+	req := c.newRequest(op, input, &types.GetDedicatedIpOutput{})
 	return GetDedicatedIpRequest{Request: req, Input: input, Copy: c.GetDedicatedIpRequest}
 }
 
@@ -114,8 +45,8 @@ func (c *Client) GetDedicatedIpRequest(input *GetDedicatedIpInput) GetDedicatedI
 // GetDedicatedIp API operation.
 type GetDedicatedIpRequest struct {
 	*aws.Request
-	Input *GetDedicatedIpInput
-	Copy  func(*GetDedicatedIpInput) GetDedicatedIpRequest
+	Input *types.GetDedicatedIpInput
+	Copy  func(*types.GetDedicatedIpInput) GetDedicatedIpRequest
 }
 
 // Send marshals and sends the GetDedicatedIp API request.
@@ -127,7 +58,7 @@ func (r GetDedicatedIpRequest) Send(ctx context.Context) (*GetDedicatedIpRespons
 	}
 
 	resp := &GetDedicatedIpResponse{
-		GetDedicatedIpOutput: r.Request.Data.(*GetDedicatedIpOutput),
+		GetDedicatedIpOutput: r.Request.Data.(*types.GetDedicatedIpOutput),
 		response:             &aws.Response{Request: r.Request},
 	}
 
@@ -137,7 +68,7 @@ func (r GetDedicatedIpRequest) Send(ctx context.Context) (*GetDedicatedIpRespons
 // GetDedicatedIpResponse is the response type for the
 // GetDedicatedIp API operation.
 type GetDedicatedIpResponse struct {
-	*GetDedicatedIpOutput
+	*types.GetDedicatedIpOutput
 
 	response *aws.Response
 }

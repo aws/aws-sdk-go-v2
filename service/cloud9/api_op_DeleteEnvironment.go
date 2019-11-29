@@ -6,45 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/cloud9/types"
 )
-
-type DeleteEnvironmentInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the environment to delete.
-	//
-	// EnvironmentId is a required field
-	EnvironmentId *string `locationName:"environmentId" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteEnvironmentInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteEnvironmentInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteEnvironmentInput"}
-
-	if s.EnvironmentId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("EnvironmentId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteEnvironmentOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteEnvironmentOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteEnvironment = "DeleteEnvironment"
 
@@ -62,7 +25,7 @@ const opDeleteEnvironment = "DeleteEnvironment"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloud9-2017-09-23/DeleteEnvironment
-func (c *Client) DeleteEnvironmentRequest(input *DeleteEnvironmentInput) DeleteEnvironmentRequest {
+func (c *Client) DeleteEnvironmentRequest(input *types.DeleteEnvironmentInput) DeleteEnvironmentRequest {
 	op := &aws.Operation{
 		Name:       opDeleteEnvironment,
 		HTTPMethod: "POST",
@@ -70,10 +33,10 @@ func (c *Client) DeleteEnvironmentRequest(input *DeleteEnvironmentInput) DeleteE
 	}
 
 	if input == nil {
-		input = &DeleteEnvironmentInput{}
+		input = &types.DeleteEnvironmentInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteEnvironmentOutput{})
+	req := c.newRequest(op, input, &types.DeleteEnvironmentOutput{})
 	return DeleteEnvironmentRequest{Request: req, Input: input, Copy: c.DeleteEnvironmentRequest}
 }
 
@@ -81,8 +44,8 @@ func (c *Client) DeleteEnvironmentRequest(input *DeleteEnvironmentInput) DeleteE
 // DeleteEnvironment API operation.
 type DeleteEnvironmentRequest struct {
 	*aws.Request
-	Input *DeleteEnvironmentInput
-	Copy  func(*DeleteEnvironmentInput) DeleteEnvironmentRequest
+	Input *types.DeleteEnvironmentInput
+	Copy  func(*types.DeleteEnvironmentInput) DeleteEnvironmentRequest
 }
 
 // Send marshals and sends the DeleteEnvironment API request.
@@ -94,7 +57,7 @@ func (r DeleteEnvironmentRequest) Send(ctx context.Context) (*DeleteEnvironmentR
 	}
 
 	resp := &DeleteEnvironmentResponse{
-		DeleteEnvironmentOutput: r.Request.Data.(*DeleteEnvironmentOutput),
+		DeleteEnvironmentOutput: r.Request.Data.(*types.DeleteEnvironmentOutput),
 		response:                &aws.Response{Request: r.Request},
 	}
 
@@ -104,7 +67,7 @@ func (r DeleteEnvironmentRequest) Send(ctx context.Context) (*DeleteEnvironmentR
 // DeleteEnvironmentResponse is the response type for the
 // DeleteEnvironment API operation.
 type DeleteEnvironmentResponse struct {
-	*DeleteEnvironmentOutput
+	*types.DeleteEnvironmentOutput
 
 	response *aws.Response
 }

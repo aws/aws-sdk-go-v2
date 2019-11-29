@@ -6,117 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/workdocs/types"
 )
-
-type CreateCustomMetadataInput struct {
-	_ struct{} `type:"structure"`
-
-	// Amazon WorkDocs authentication token. Do not set this field when using administrative
-	// API actions, as in accessing the API using AWS credentials.
-	AuthenticationToken *string `location:"header" locationName:"Authentication" min:"1" type:"string" sensitive:"true"`
-
-	// Custom metadata in the form of name-value pairs.
-	//
-	// CustomMetadata is a required field
-	CustomMetadata map[string]string `min:"1" type:"map" required:"true"`
-
-	// The ID of the resource.
-	//
-	// ResourceId is a required field
-	ResourceId *string `location:"uri" locationName:"ResourceId" min:"1" type:"string" required:"true"`
-
-	// The ID of the version, if the custom metadata is being added to a document
-	// version.
-	VersionId *string `location:"querystring" locationName:"versionid" min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s CreateCustomMetadataInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateCustomMetadataInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateCustomMetadataInput"}
-	if s.AuthenticationToken != nil && len(*s.AuthenticationToken) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("AuthenticationToken", 1))
-	}
-
-	if s.CustomMetadata == nil {
-		invalidParams.Add(aws.NewErrParamRequired("CustomMetadata"))
-	}
-	if s.CustomMetadata != nil && len(s.CustomMetadata) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("CustomMetadata", 1))
-	}
-
-	if s.ResourceId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ResourceId"))
-	}
-	if s.ResourceId != nil && len(*s.ResourceId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ResourceId", 1))
-	}
-	if s.VersionId != nil && len(*s.VersionId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("VersionId", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s CreateCustomMetadataInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.CustomMetadata != nil {
-		v := s.CustomMetadata
-
-		metadata := protocol.Metadata{}
-		ms0 := e.Map(protocol.BodyTarget, "CustomMetadata", metadata)
-		ms0.Start()
-		for k1, v1 := range v {
-			ms0.MapSetValue(k1, protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
-		}
-		ms0.End()
-
-	}
-	if s.AuthenticationToken != nil {
-		v := *s.AuthenticationToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "Authentication", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.ResourceId != nil {
-		v := *s.ResourceId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "ResourceId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.VersionId != nil {
-		v := *s.VersionId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "versionid", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type CreateCustomMetadataOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s CreateCustomMetadataOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s CreateCustomMetadataOutput) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
 
 const opCreateCustomMetadata = "CreateCustomMetadata"
 
@@ -134,7 +25,7 @@ const opCreateCustomMetadata = "CreateCustomMetadata"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/CreateCustomMetadata
-func (c *Client) CreateCustomMetadataRequest(input *CreateCustomMetadataInput) CreateCustomMetadataRequest {
+func (c *Client) CreateCustomMetadataRequest(input *types.CreateCustomMetadataInput) CreateCustomMetadataRequest {
 	op := &aws.Operation{
 		Name:       opCreateCustomMetadata,
 		HTTPMethod: "PUT",
@@ -142,10 +33,10 @@ func (c *Client) CreateCustomMetadataRequest(input *CreateCustomMetadataInput) C
 	}
 
 	if input == nil {
-		input = &CreateCustomMetadataInput{}
+		input = &types.CreateCustomMetadataInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateCustomMetadataOutput{})
+	req := c.newRequest(op, input, &types.CreateCustomMetadataOutput{})
 	return CreateCustomMetadataRequest{Request: req, Input: input, Copy: c.CreateCustomMetadataRequest}
 }
 
@@ -153,8 +44,8 @@ func (c *Client) CreateCustomMetadataRequest(input *CreateCustomMetadataInput) C
 // CreateCustomMetadata API operation.
 type CreateCustomMetadataRequest struct {
 	*aws.Request
-	Input *CreateCustomMetadataInput
-	Copy  func(*CreateCustomMetadataInput) CreateCustomMetadataRequest
+	Input *types.CreateCustomMetadataInput
+	Copy  func(*types.CreateCustomMetadataInput) CreateCustomMetadataRequest
 }
 
 // Send marshals and sends the CreateCustomMetadata API request.
@@ -166,7 +57,7 @@ func (r CreateCustomMetadataRequest) Send(ctx context.Context) (*CreateCustomMet
 	}
 
 	resp := &CreateCustomMetadataResponse{
-		CreateCustomMetadataOutput: r.Request.Data.(*CreateCustomMetadataOutput),
+		CreateCustomMetadataOutput: r.Request.Data.(*types.CreateCustomMetadataOutput),
 		response:                   &aws.Response{Request: r.Request},
 	}
 
@@ -176,7 +67,7 @@ func (r CreateCustomMetadataRequest) Send(ctx context.Context) (*CreateCustomMet
 // CreateCustomMetadataResponse is the response type for the
 // CreateCustomMetadata API operation.
 type CreateCustomMetadataResponse struct {
-	*CreateCustomMetadataOutput
+	*types.CreateCustomMetadataOutput
 
 	response *aws.Response
 }

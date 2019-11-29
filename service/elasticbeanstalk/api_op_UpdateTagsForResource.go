@@ -4,69 +4,12 @@ package elasticbeanstalk
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/query"
+	"github.com/aws/aws-sdk-go-v2/service/elasticbeanstalk/types"
 )
-
-type UpdateTagsForResourceInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the resouce to be updated.
-	//
-	// Must be the ARN of an Elastic Beanstalk environment.
-	//
-	// ResourceArn is a required field
-	ResourceArn *string `type:"string" required:"true"`
-
-	// A list of tags to add or update.
-	//
-	// If a key of an existing tag is added, the tag's value is updated.
-	TagsToAdd []Tag `type:"list"`
-
-	// A list of tag keys to remove.
-	//
-	// If a tag key doesn't exist, it is silently ignored.
-	TagsToRemove []string `type:"list"`
-}
-
-// String returns the string representation
-func (s UpdateTagsForResourceInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateTagsForResourceInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateTagsForResourceInput"}
-
-	if s.ResourceArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ResourceArn"))
-	}
-	if s.TagsToAdd != nil {
-		for i, v := range s.TagsToAdd {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "TagsToAdd", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type UpdateTagsForResourceOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s UpdateTagsForResourceOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opUpdateTagsForResource = "UpdateTagsForResource"
 
@@ -105,7 +48,7 @@ const opUpdateTagsForResource = "UpdateTagsForResource"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/UpdateTagsForResource
-func (c *Client) UpdateTagsForResourceRequest(input *UpdateTagsForResourceInput) UpdateTagsForResourceRequest {
+func (c *Client) UpdateTagsForResourceRequest(input *types.UpdateTagsForResourceInput) UpdateTagsForResourceRequest {
 	op := &aws.Operation{
 		Name:       opUpdateTagsForResource,
 		HTTPMethod: "POST",
@@ -113,10 +56,10 @@ func (c *Client) UpdateTagsForResourceRequest(input *UpdateTagsForResourceInput)
 	}
 
 	if input == nil {
-		input = &UpdateTagsForResourceInput{}
+		input = &types.UpdateTagsForResourceInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateTagsForResourceOutput{})
+	req := c.newRequest(op, input, &types.UpdateTagsForResourceOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return UpdateTagsForResourceRequest{Request: req, Input: input, Copy: c.UpdateTagsForResourceRequest}
@@ -126,8 +69,8 @@ func (c *Client) UpdateTagsForResourceRequest(input *UpdateTagsForResourceInput)
 // UpdateTagsForResource API operation.
 type UpdateTagsForResourceRequest struct {
 	*aws.Request
-	Input *UpdateTagsForResourceInput
-	Copy  func(*UpdateTagsForResourceInput) UpdateTagsForResourceRequest
+	Input *types.UpdateTagsForResourceInput
+	Copy  func(*types.UpdateTagsForResourceInput) UpdateTagsForResourceRequest
 }
 
 // Send marshals and sends the UpdateTagsForResource API request.
@@ -139,7 +82,7 @@ func (r UpdateTagsForResourceRequest) Send(ctx context.Context) (*UpdateTagsForR
 	}
 
 	resp := &UpdateTagsForResourceResponse{
-		UpdateTagsForResourceOutput: r.Request.Data.(*UpdateTagsForResourceOutput),
+		UpdateTagsForResourceOutput: r.Request.Data.(*types.UpdateTagsForResourceOutput),
 		response:                    &aws.Response{Request: r.Request},
 	}
 
@@ -149,7 +92,7 @@ func (r UpdateTagsForResourceRequest) Send(ctx context.Context) (*UpdateTagsForR
 // UpdateTagsForResourceResponse is the response type for the
 // UpdateTagsForResource API operation.
 type UpdateTagsForResourceResponse struct {
-	*UpdateTagsForResourceOutput
+	*types.UpdateTagsForResourceOutput
 
 	response *aws.Response
 }

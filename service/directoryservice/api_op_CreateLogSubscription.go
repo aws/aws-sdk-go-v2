@@ -6,59 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/directoryservice/types"
 )
-
-type CreateLogSubscriptionInput struct {
-	_ struct{} `type:"structure"`
-
-	// Identifier (ID) of the directory to which you want to subscribe and receive
-	// real-time logs to your specified CloudWatch log group.
-	//
-	// DirectoryId is a required field
-	DirectoryId *string `type:"string" required:"true"`
-
-	// The name of the CloudWatch log group where the real-time domain controller
-	// logs are forwarded.
-	//
-	// LogGroupName is a required field
-	LogGroupName *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s CreateLogSubscriptionInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateLogSubscriptionInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateLogSubscriptionInput"}
-
-	if s.DirectoryId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DirectoryId"))
-	}
-
-	if s.LogGroupName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("LogGroupName"))
-	}
-	if s.LogGroupName != nil && len(*s.LogGroupName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("LogGroupName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type CreateLogSubscriptionOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s CreateLogSubscriptionOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCreateLogSubscription = "CreateLogSubscription"
 
@@ -76,7 +25,7 @@ const opCreateLogSubscription = "CreateLogSubscription"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/CreateLogSubscription
-func (c *Client) CreateLogSubscriptionRequest(input *CreateLogSubscriptionInput) CreateLogSubscriptionRequest {
+func (c *Client) CreateLogSubscriptionRequest(input *types.CreateLogSubscriptionInput) CreateLogSubscriptionRequest {
 	op := &aws.Operation{
 		Name:       opCreateLogSubscription,
 		HTTPMethod: "POST",
@@ -84,10 +33,10 @@ func (c *Client) CreateLogSubscriptionRequest(input *CreateLogSubscriptionInput)
 	}
 
 	if input == nil {
-		input = &CreateLogSubscriptionInput{}
+		input = &types.CreateLogSubscriptionInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateLogSubscriptionOutput{})
+	req := c.newRequest(op, input, &types.CreateLogSubscriptionOutput{})
 	return CreateLogSubscriptionRequest{Request: req, Input: input, Copy: c.CreateLogSubscriptionRequest}
 }
 
@@ -95,8 +44,8 @@ func (c *Client) CreateLogSubscriptionRequest(input *CreateLogSubscriptionInput)
 // CreateLogSubscription API operation.
 type CreateLogSubscriptionRequest struct {
 	*aws.Request
-	Input *CreateLogSubscriptionInput
-	Copy  func(*CreateLogSubscriptionInput) CreateLogSubscriptionRequest
+	Input *types.CreateLogSubscriptionInput
+	Copy  func(*types.CreateLogSubscriptionInput) CreateLogSubscriptionRequest
 }
 
 // Send marshals and sends the CreateLogSubscription API request.
@@ -108,7 +57,7 @@ func (r CreateLogSubscriptionRequest) Send(ctx context.Context) (*CreateLogSubsc
 	}
 
 	resp := &CreateLogSubscriptionResponse{
-		CreateLogSubscriptionOutput: r.Request.Data.(*CreateLogSubscriptionOutput),
+		CreateLogSubscriptionOutput: r.Request.Data.(*types.CreateLogSubscriptionOutput),
 		response:                    &aws.Response{Request: r.Request},
 	}
 
@@ -118,7 +67,7 @@ func (r CreateLogSubscriptionRequest) Send(ctx context.Context) (*CreateLogSubsc
 // CreateLogSubscriptionResponse is the response type for the
 // CreateLogSubscription API operation.
 type CreateLogSubscriptionResponse struct {
-	*CreateLogSubscriptionOutput
+	*types.CreateLogSubscriptionOutput
 
 	response *aws.Response
 }

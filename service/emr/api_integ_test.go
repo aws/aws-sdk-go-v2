@@ -13,6 +13,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws/awserr"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting/integration"
 	"github.com/aws/aws-sdk-go-v2/service/emr"
+	"github.com/aws/aws-sdk-go-v2/service/emr/types"
 )
 
 var _ aws.Config
@@ -24,7 +25,7 @@ func TestInteg_00_ListClusters(t *testing.T) {
 
 	cfg := integration.ConfigWithDefaultRegion("us-west-2")
 	svc := emr.New(cfg)
-	params := &emr.ListClustersInput{}
+	params := &types.ListClustersInput{}
 
 	req := svc.ListClustersRequest(params)
 
@@ -39,7 +40,7 @@ func TestInteg_01_DescribeCluster(t *testing.T) {
 
 	cfg := integration.ConfigWithDefaultRegion("us-west-2")
 	svc := emr.New(cfg)
-	params := &emr.DescribeClusterInput{
+	params := &types.DescribeClusterInput{
 		ClusterId: aws.String("fake_cluster"),
 	}
 

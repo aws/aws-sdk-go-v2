@@ -6,69 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
+	"github.com/aws/aws-sdk-go-v2/service/kms/types"
 )
-
-type UpdateKeyDescriptionInput struct {
-	_ struct{} `type:"structure"`
-
-	// New description for the CMK.
-	//
-	// Description is a required field
-	Description *string `type:"string" required:"true"`
-
-	// A unique identifier for the customer master key (CMK).
-	//
-	// Specify the key ID or the Amazon Resource Name (ARN) of the CMK.
-	//
-	// For example:
-	//
-	//    * Key ID: 1234abcd-12ab-34cd-56ef-1234567890ab
-	//
-	//    * Key ARN: arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab
-	//
-	// To get the key ID and key ARN for a CMK, use ListKeys or DescribeKey.
-	//
-	// KeyId is a required field
-	KeyId *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s UpdateKeyDescriptionInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateKeyDescriptionInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateKeyDescriptionInput"}
-
-	if s.Description == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Description"))
-	}
-
-	if s.KeyId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("KeyId"))
-	}
-	if s.KeyId != nil && len(*s.KeyId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("KeyId", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type UpdateKeyDescriptionOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s UpdateKeyDescriptionOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opUpdateKeyDescription = "UpdateKeyDescription"
 
@@ -92,7 +33,7 @@ const opUpdateKeyDescription = "UpdateKeyDescription"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/UpdateKeyDescription
-func (c *Client) UpdateKeyDescriptionRequest(input *UpdateKeyDescriptionInput) UpdateKeyDescriptionRequest {
+func (c *Client) UpdateKeyDescriptionRequest(input *types.UpdateKeyDescriptionInput) UpdateKeyDescriptionRequest {
 	op := &aws.Operation{
 		Name:       opUpdateKeyDescription,
 		HTTPMethod: "POST",
@@ -100,10 +41,10 @@ func (c *Client) UpdateKeyDescriptionRequest(input *UpdateKeyDescriptionInput) U
 	}
 
 	if input == nil {
-		input = &UpdateKeyDescriptionInput{}
+		input = &types.UpdateKeyDescriptionInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateKeyDescriptionOutput{})
+	req := c.newRequest(op, input, &types.UpdateKeyDescriptionOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return UpdateKeyDescriptionRequest{Request: req, Input: input, Copy: c.UpdateKeyDescriptionRequest}
@@ -113,8 +54,8 @@ func (c *Client) UpdateKeyDescriptionRequest(input *UpdateKeyDescriptionInput) U
 // UpdateKeyDescription API operation.
 type UpdateKeyDescriptionRequest struct {
 	*aws.Request
-	Input *UpdateKeyDescriptionInput
-	Copy  func(*UpdateKeyDescriptionInput) UpdateKeyDescriptionRequest
+	Input *types.UpdateKeyDescriptionInput
+	Copy  func(*types.UpdateKeyDescriptionInput) UpdateKeyDescriptionRequest
 }
 
 // Send marshals and sends the UpdateKeyDescription API request.
@@ -126,7 +67,7 @@ func (r UpdateKeyDescriptionRequest) Send(ctx context.Context) (*UpdateKeyDescri
 	}
 
 	resp := &UpdateKeyDescriptionResponse{
-		UpdateKeyDescriptionOutput: r.Request.Data.(*UpdateKeyDescriptionOutput),
+		UpdateKeyDescriptionOutput: r.Request.Data.(*types.UpdateKeyDescriptionOutput),
 		response:                   &aws.Response{Request: r.Request},
 	}
 
@@ -136,7 +77,7 @@ func (r UpdateKeyDescriptionRequest) Send(ctx context.Context) (*UpdateKeyDescri
 // UpdateKeyDescriptionResponse is the response type for the
 // UpdateKeyDescription API operation.
 type UpdateKeyDescriptionResponse struct {
-	*UpdateKeyDescriptionOutput
+	*types.UpdateKeyDescriptionOutput
 
 	response *aws.Response
 }

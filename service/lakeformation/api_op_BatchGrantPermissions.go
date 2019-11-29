@@ -4,68 +4,10 @@ package lakeformation
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/lakeformation/types"
 )
-
-type BatchGrantPermissionsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The identifier for the Data Catalog. By default, the account ID. The Data
-	// Catalog is the persistent metadata store. It contains database definitions,
-	// table definitions, and other control information to manage your AWS Lake
-	// Formation environment.
-	CatalogId *string `min:"1" type:"string"`
-
-	// A list of up to 20 entries for resource permissions to be granted by batch
-	// operation to the principal.
-	//
-	// Entries is a required field
-	Entries []BatchPermissionsRequestEntry `type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s BatchGrantPermissionsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *BatchGrantPermissionsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "BatchGrantPermissionsInput"}
-	if s.CatalogId != nil && len(*s.CatalogId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("CatalogId", 1))
-	}
-
-	if s.Entries == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Entries"))
-	}
-	if s.Entries != nil {
-		for i, v := range s.Entries {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Entries", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type BatchGrantPermissionsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A list of failures to grant permissions to the resources.
-	Failures []BatchPermissionsFailureEntry `type:"list"`
-}
-
-// String returns the string representation
-func (s BatchGrantPermissionsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opBatchGrantPermissions = "BatchGrantPermissions"
 
@@ -82,7 +24,7 @@ const opBatchGrantPermissions = "BatchGrantPermissions"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/BatchGrantPermissions
-func (c *Client) BatchGrantPermissionsRequest(input *BatchGrantPermissionsInput) BatchGrantPermissionsRequest {
+func (c *Client) BatchGrantPermissionsRequest(input *types.BatchGrantPermissionsInput) BatchGrantPermissionsRequest {
 	op := &aws.Operation{
 		Name:       opBatchGrantPermissions,
 		HTTPMethod: "POST",
@@ -90,10 +32,10 @@ func (c *Client) BatchGrantPermissionsRequest(input *BatchGrantPermissionsInput)
 	}
 
 	if input == nil {
-		input = &BatchGrantPermissionsInput{}
+		input = &types.BatchGrantPermissionsInput{}
 	}
 
-	req := c.newRequest(op, input, &BatchGrantPermissionsOutput{})
+	req := c.newRequest(op, input, &types.BatchGrantPermissionsOutput{})
 	return BatchGrantPermissionsRequest{Request: req, Input: input, Copy: c.BatchGrantPermissionsRequest}
 }
 
@@ -101,8 +43,8 @@ func (c *Client) BatchGrantPermissionsRequest(input *BatchGrantPermissionsInput)
 // BatchGrantPermissions API operation.
 type BatchGrantPermissionsRequest struct {
 	*aws.Request
-	Input *BatchGrantPermissionsInput
-	Copy  func(*BatchGrantPermissionsInput) BatchGrantPermissionsRequest
+	Input *types.BatchGrantPermissionsInput
+	Copy  func(*types.BatchGrantPermissionsInput) BatchGrantPermissionsRequest
 }
 
 // Send marshals and sends the BatchGrantPermissions API request.
@@ -114,7 +56,7 @@ func (r BatchGrantPermissionsRequest) Send(ctx context.Context) (*BatchGrantPerm
 	}
 
 	resp := &BatchGrantPermissionsResponse{
-		BatchGrantPermissionsOutput: r.Request.Data.(*BatchGrantPermissionsOutput),
+		BatchGrantPermissionsOutput: r.Request.Data.(*types.BatchGrantPermissionsOutput),
 		response:                    &aws.Response{Request: r.Request},
 	}
 
@@ -124,7 +66,7 @@ func (r BatchGrantPermissionsRequest) Send(ctx context.Context) (*BatchGrantPerm
 // BatchGrantPermissionsResponse is the response type for the
 // BatchGrantPermissions API operation.
 type BatchGrantPermissionsResponse struct {
-	*BatchGrantPermissionsOutput
+	*types.BatchGrantPermissionsOutput
 
 	response *aws.Response
 }

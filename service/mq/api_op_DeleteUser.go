@@ -6,75 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/mq/types"
 )
-
-type DeleteUserInput struct {
-	_ struct{} `type:"structure"`
-
-	// BrokerId is a required field
-	BrokerId *string `location:"uri" locationName:"broker-id" type:"string" required:"true"`
-
-	// Username is a required field
-	Username *string `location:"uri" locationName:"username" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteUserInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteUserInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteUserInput"}
-
-	if s.BrokerId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("BrokerId"))
-	}
-
-	if s.Username == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Username"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteUserInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.BrokerId != nil {
-		v := *s.BrokerId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "broker-id", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Username != nil {
-		v := *s.Username
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "username", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type DeleteUserOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteUserOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteUserOutput) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
 
 const opDeleteUser = "DeleteUser"
 
@@ -91,7 +24,7 @@ const opDeleteUser = "DeleteUser"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/DeleteUser
-func (c *Client) DeleteUserRequest(input *DeleteUserInput) DeleteUserRequest {
+func (c *Client) DeleteUserRequest(input *types.DeleteUserInput) DeleteUserRequest {
 	op := &aws.Operation{
 		Name:       opDeleteUser,
 		HTTPMethod: "DELETE",
@@ -99,10 +32,10 @@ func (c *Client) DeleteUserRequest(input *DeleteUserInput) DeleteUserRequest {
 	}
 
 	if input == nil {
-		input = &DeleteUserInput{}
+		input = &types.DeleteUserInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteUserOutput{})
+	req := c.newRequest(op, input, &types.DeleteUserOutput{})
 	return DeleteUserRequest{Request: req, Input: input, Copy: c.DeleteUserRequest}
 }
 
@@ -110,8 +43,8 @@ func (c *Client) DeleteUserRequest(input *DeleteUserInput) DeleteUserRequest {
 // DeleteUser API operation.
 type DeleteUserRequest struct {
 	*aws.Request
-	Input *DeleteUserInput
-	Copy  func(*DeleteUserInput) DeleteUserRequest
+	Input *types.DeleteUserInput
+	Copy  func(*types.DeleteUserInput) DeleteUserRequest
 }
 
 // Send marshals and sends the DeleteUser API request.
@@ -123,7 +56,7 @@ func (r DeleteUserRequest) Send(ctx context.Context) (*DeleteUserResponse, error
 	}
 
 	resp := &DeleteUserResponse{
-		DeleteUserOutput: r.Request.Data.(*DeleteUserOutput),
+		DeleteUserOutput: r.Request.Data.(*types.DeleteUserOutput),
 		response:         &aws.Response{Request: r.Request},
 	}
 
@@ -133,7 +66,7 @@ func (r DeleteUserRequest) Send(ctx context.Context) (*DeleteUserResponse, error
 // DeleteUserResponse is the response type for the
 // DeleteUser API operation.
 type DeleteUserResponse struct {
-	*DeleteUserOutput
+	*types.DeleteUserOutput
 
 	response *aws.Response
 }

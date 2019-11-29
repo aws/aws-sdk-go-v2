@@ -6,69 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/workmail/types"
 )
-
-type CreateResourceInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the new resource.
-	//
-	// Name is a required field
-	Name *string `min:"1" type:"string" required:"true"`
-
-	// The identifier associated with the organization for which the resource is
-	// created.
-	//
-	// OrganizationId is a required field
-	OrganizationId *string `type:"string" required:"true"`
-
-	// The type of the new resource. The available types are equipment and room.
-	//
-	// Type is a required field
-	Type ResourceType `type:"string" required:"true" enum:"true"`
-}
-
-// String returns the string representation
-func (s CreateResourceInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateResourceInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateResourceInput"}
-
-	if s.Name == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Name"))
-	}
-	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
-	}
-
-	if s.OrganizationId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("OrganizationId"))
-	}
-	if len(s.Type) == 0 {
-		invalidParams.Add(aws.NewErrParamRequired("Type"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type CreateResourceOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The identifier of the new resource.
-	ResourceId *string `type:"string"`
-}
-
-// String returns the string representation
-func (s CreateResourceOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCreateResource = "CreateResource"
 
@@ -85,7 +24,7 @@ const opCreateResource = "CreateResource"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/CreateResource
-func (c *Client) CreateResourceRequest(input *CreateResourceInput) CreateResourceRequest {
+func (c *Client) CreateResourceRequest(input *types.CreateResourceInput) CreateResourceRequest {
 	op := &aws.Operation{
 		Name:       opCreateResource,
 		HTTPMethod: "POST",
@@ -93,10 +32,10 @@ func (c *Client) CreateResourceRequest(input *CreateResourceInput) CreateResourc
 	}
 
 	if input == nil {
-		input = &CreateResourceInput{}
+		input = &types.CreateResourceInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateResourceOutput{})
+	req := c.newRequest(op, input, &types.CreateResourceOutput{})
 	return CreateResourceRequest{Request: req, Input: input, Copy: c.CreateResourceRequest}
 }
 
@@ -104,8 +43,8 @@ func (c *Client) CreateResourceRequest(input *CreateResourceInput) CreateResourc
 // CreateResource API operation.
 type CreateResourceRequest struct {
 	*aws.Request
-	Input *CreateResourceInput
-	Copy  func(*CreateResourceInput) CreateResourceRequest
+	Input *types.CreateResourceInput
+	Copy  func(*types.CreateResourceInput) CreateResourceRequest
 }
 
 // Send marshals and sends the CreateResource API request.
@@ -117,7 +56,7 @@ func (r CreateResourceRequest) Send(ctx context.Context) (*CreateResourceRespons
 	}
 
 	resp := &CreateResourceResponse{
-		CreateResourceOutput: r.Request.Data.(*CreateResourceOutput),
+		CreateResourceOutput: r.Request.Data.(*types.CreateResourceOutput),
 		response:             &aws.Response{Request: r.Request},
 	}
 
@@ -127,7 +66,7 @@ func (r CreateResourceRequest) Send(ctx context.Context) (*CreateResourceRespons
 // CreateResourceResponse is the response type for the
 // CreateResource API operation.
 type CreateResourceResponse struct {
-	*CreateResourceOutput
+	*types.CreateResourceOutput
 
 	response *aws.Response
 }

@@ -6,56 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ses/types"
 )
-
-// Represents a request to return the details of a receipt rule set. You use
-// receipt rule sets to receive email with Amazon SES. For more information,
-// see the Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-concepts.html).
-type DescribeReceiptRuleSetInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the receipt rule set to describe.
-	//
-	// RuleSetName is a required field
-	RuleSetName *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeReceiptRuleSetInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeReceiptRuleSetInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeReceiptRuleSetInput"}
-
-	if s.RuleSetName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("RuleSetName"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Represents the details of the specified receipt rule set.
-type DescribeReceiptRuleSetOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The metadata for the receipt rule set, which consists of the rule set name
-	// and the timestamp of when the rule set was created.
-	Metadata *ReceiptRuleSetMetadata `type:"structure"`
-
-	// A list of the receipt rules that belong to the specified receipt rule set.
-	Rules []ReceiptRule `type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeReceiptRuleSetOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeReceiptRuleSet = "DescribeReceiptRuleSet"
 
@@ -77,7 +29,7 @@ const opDescribeReceiptRuleSet = "DescribeReceiptRuleSet"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/DescribeReceiptRuleSet
-func (c *Client) DescribeReceiptRuleSetRequest(input *DescribeReceiptRuleSetInput) DescribeReceiptRuleSetRequest {
+func (c *Client) DescribeReceiptRuleSetRequest(input *types.DescribeReceiptRuleSetInput) DescribeReceiptRuleSetRequest {
 	op := &aws.Operation{
 		Name:       opDescribeReceiptRuleSet,
 		HTTPMethod: "POST",
@@ -85,10 +37,10 @@ func (c *Client) DescribeReceiptRuleSetRequest(input *DescribeReceiptRuleSetInpu
 	}
 
 	if input == nil {
-		input = &DescribeReceiptRuleSetInput{}
+		input = &types.DescribeReceiptRuleSetInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeReceiptRuleSetOutput{})
+	req := c.newRequest(op, input, &types.DescribeReceiptRuleSetOutput{})
 	return DescribeReceiptRuleSetRequest{Request: req, Input: input, Copy: c.DescribeReceiptRuleSetRequest}
 }
 
@@ -96,8 +48,8 @@ func (c *Client) DescribeReceiptRuleSetRequest(input *DescribeReceiptRuleSetInpu
 // DescribeReceiptRuleSet API operation.
 type DescribeReceiptRuleSetRequest struct {
 	*aws.Request
-	Input *DescribeReceiptRuleSetInput
-	Copy  func(*DescribeReceiptRuleSetInput) DescribeReceiptRuleSetRequest
+	Input *types.DescribeReceiptRuleSetInput
+	Copy  func(*types.DescribeReceiptRuleSetInput) DescribeReceiptRuleSetRequest
 }
 
 // Send marshals and sends the DescribeReceiptRuleSet API request.
@@ -109,7 +61,7 @@ func (r DescribeReceiptRuleSetRequest) Send(ctx context.Context) (*DescribeRecei
 	}
 
 	resp := &DescribeReceiptRuleSetResponse{
-		DescribeReceiptRuleSetOutput: r.Request.Data.(*DescribeReceiptRuleSetOutput),
+		DescribeReceiptRuleSetOutput: r.Request.Data.(*types.DescribeReceiptRuleSetOutput),
 		response:                     &aws.Response{Request: r.Request},
 	}
 
@@ -119,7 +71,7 @@ func (r DescribeReceiptRuleSetRequest) Send(ctx context.Context) (*DescribeRecei
 // DescribeReceiptRuleSetResponse is the response type for the
 // DescribeReceiptRuleSet API operation.
 type DescribeReceiptRuleSetResponse struct {
-	*DescribeReceiptRuleSetOutput
+	*types.DescribeReceiptRuleSetOutput
 
 	response *aws.Response
 }

@@ -6,66 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/comprehend/types"
 )
-
-type DetectKeyPhrasesInput struct {
-	_ struct{} `type:"structure"`
-
-	// The language of the input documents. You can specify any of the primary languages
-	// supported by Amazon Comprehend: German ("de"), English ("en"), Spanish ("es"),
-	// French ("fr"), Italian ("it"), or Portuguese ("pt"). All documents must be
-	// in the same language.
-	//
-	// LanguageCode is a required field
-	LanguageCode LanguageCode `type:"string" required:"true" enum:"true"`
-
-	// A UTF-8 text string. Each string must contain fewer that 5,000 bytes of UTF-8
-	// encoded characters.
-	//
-	// Text is a required field
-	Text *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DetectKeyPhrasesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DetectKeyPhrasesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DetectKeyPhrasesInput"}
-	if len(s.LanguageCode) == 0 {
-		invalidParams.Add(aws.NewErrParamRequired("LanguageCode"))
-	}
-
-	if s.Text == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Text"))
-	}
-	if s.Text != nil && len(*s.Text) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Text", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DetectKeyPhrasesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A collection of key phrases that Amazon Comprehend identified in the input
-	// text. For each key phrase, the response provides the text of the key phrase,
-	// where the key phrase begins and ends, and the level of confidence that Amazon
-	// Comprehend has in the accuracy of the detection.
-	KeyPhrases []KeyPhrase `type:"list"`
-}
-
-// String returns the string representation
-func (s DetectKeyPhrasesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDetectKeyPhrases = "DetectKeyPhrases"
 
@@ -82,7 +24,7 @@ const opDetectKeyPhrases = "DetectKeyPhrases"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/DetectKeyPhrases
-func (c *Client) DetectKeyPhrasesRequest(input *DetectKeyPhrasesInput) DetectKeyPhrasesRequest {
+func (c *Client) DetectKeyPhrasesRequest(input *types.DetectKeyPhrasesInput) DetectKeyPhrasesRequest {
 	op := &aws.Operation{
 		Name:       opDetectKeyPhrases,
 		HTTPMethod: "POST",
@@ -90,10 +32,10 @@ func (c *Client) DetectKeyPhrasesRequest(input *DetectKeyPhrasesInput) DetectKey
 	}
 
 	if input == nil {
-		input = &DetectKeyPhrasesInput{}
+		input = &types.DetectKeyPhrasesInput{}
 	}
 
-	req := c.newRequest(op, input, &DetectKeyPhrasesOutput{})
+	req := c.newRequest(op, input, &types.DetectKeyPhrasesOutput{})
 	return DetectKeyPhrasesRequest{Request: req, Input: input, Copy: c.DetectKeyPhrasesRequest}
 }
 
@@ -101,8 +43,8 @@ func (c *Client) DetectKeyPhrasesRequest(input *DetectKeyPhrasesInput) DetectKey
 // DetectKeyPhrases API operation.
 type DetectKeyPhrasesRequest struct {
 	*aws.Request
-	Input *DetectKeyPhrasesInput
-	Copy  func(*DetectKeyPhrasesInput) DetectKeyPhrasesRequest
+	Input *types.DetectKeyPhrasesInput
+	Copy  func(*types.DetectKeyPhrasesInput) DetectKeyPhrasesRequest
 }
 
 // Send marshals and sends the DetectKeyPhrases API request.
@@ -114,7 +56,7 @@ func (r DetectKeyPhrasesRequest) Send(ctx context.Context) (*DetectKeyPhrasesRes
 	}
 
 	resp := &DetectKeyPhrasesResponse{
-		DetectKeyPhrasesOutput: r.Request.Data.(*DetectKeyPhrasesOutput),
+		DetectKeyPhrasesOutput: r.Request.Data.(*types.DetectKeyPhrasesOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -124,7 +66,7 @@ func (r DetectKeyPhrasesRequest) Send(ctx context.Context) (*DetectKeyPhrasesRes
 // DetectKeyPhrasesResponse is the response type for the
 // DetectKeyPhrases API operation.
 type DetectKeyPhrasesResponse struct {
-	*DetectKeyPhrasesOutput
+	*types.DetectKeyPhrasesOutput
 
 	response *aws.Response
 }

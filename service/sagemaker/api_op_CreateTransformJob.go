@@ -4,172 +4,10 @@ package sagemaker
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
 )
-
-type CreateTransformJobInput struct {
-	_ struct{} `type:"structure"`
-
-	// Specifies the number of records to include in a mini-batch for an HTTP inference
-	// request. A record is a single unit of input data that inference can be made
-	// on. For example, a single line in a CSV file is a record.
-	//
-	// To enable the batch strategy, you must set SplitType to Line, RecordIO, or
-	// TFRecord.
-	//
-	// To use only one record when making an HTTP invocation request to a container,
-	// set BatchStrategy to SingleRecord and SplitType to Line.
-	//
-	// To fit as many records in a mini-batch as can fit within the MaxPayloadInMB
-	// limit, set BatchStrategy to MultiRecord and SplitType to Line.
-	BatchStrategy BatchStrategy `type:"string" enum:"true"`
-
-	// The data structure used to specify the data to be used for inference in a
-	// batch transform job and to associate the data that is relevant to the prediction
-	// results in the output. The input filter provided allows you to exclude input
-	// data that is not needed for inference in a batch transform job. The output
-	// filter provided allows you to include input data relevant to interpreting
-	// the predictions in the output from the job. For more information, see Associate
-	// Prediction Results with their Corresponding Input Records (https://docs.aws.amazon.com/sagemaker/latest/dg/batch-transform-data-processing.html).
-	DataProcessing *DataProcessing `type:"structure"`
-
-	// The environment variables to set in the Docker container. We support up to
-	// 16 key and values entries in the map.
-	Environment map[string]string `type:"map"`
-
-	// The maximum number of parallel requests that can be sent to each instance
-	// in a transform job. If MaxConcurrentTransforms is set to 0 or left unset,
-	// Amazon SageMaker checks the optional execution-parameters to determine the
-	// optimal settings for your chosen algorithm. If the execution-parameters endpoint
-	// is not enabled, the default value is 1. For more information on execution-parameters,
-	// see How Containers Serve Requests (https://docs.aws.amazon.com/sagemaker/latest/dg/your-algorithms-batch-code.html#your-algorithms-batch-code-how-containe-serves-requests).
-	// For built-in algorithms, you don't need to set a value for MaxConcurrentTransforms.
-	MaxConcurrentTransforms *int64 `type:"integer"`
-
-	// The maximum allowed size of the payload, in MB. A payload is the data portion
-	// of a record (without metadata). The value in MaxPayloadInMB must be greater
-	// than, or equal to, the size of a single record. To estimate the size of a
-	// record in MB, divide the size of your dataset by the number of records. To
-	// ensure that the records fit within the maximum payload size, we recommend
-	// using a slightly larger value. The default value is 6 MB.
-	//
-	// For cases where the payload might be arbitrarily large and is transmitted
-	// using HTTP chunked encoding, set the value to 0. This feature works only
-	// in supported algorithms. Currently, Amazon SageMaker built-in algorithms
-	// do not support HTTP chunked encoding.
-	MaxPayloadInMB *int64 `type:"integer"`
-
-	// The name of the model that you want to use for the transform job. ModelName
-	// must be the name of an existing Amazon SageMaker model within an AWS Region
-	// in an AWS account.
-	//
-	// ModelName is a required field
-	ModelName *string `type:"string" required:"true"`
-
-	// (Optional) An array of key-value pairs. For more information, see Using Cost
-	// Allocation Tags (https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-what)
-	// in the AWS Billing and Cost Management User Guide.
-	Tags []Tag `type:"list"`
-
-	// Describes the input source and the way the transform job consumes it.
-	//
-	// TransformInput is a required field
-	TransformInput *TransformInput `type:"structure" required:"true"`
-
-	// The name of the transform job. The name must be unique within an AWS Region
-	// in an AWS account.
-	//
-	// TransformJobName is a required field
-	TransformJobName *string `min:"1" type:"string" required:"true"`
-
-	// Describes the results of the transform job.
-	//
-	// TransformOutput is a required field
-	TransformOutput *TransformOutput `type:"structure" required:"true"`
-
-	// Describes the resources, including ML instance types and ML instance count,
-	// to use for the transform job.
-	//
-	// TransformResources is a required field
-	TransformResources *TransformResources `type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s CreateTransformJobInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateTransformJobInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateTransformJobInput"}
-
-	if s.ModelName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ModelName"))
-	}
-
-	if s.TransformInput == nil {
-		invalidParams.Add(aws.NewErrParamRequired("TransformInput"))
-	}
-
-	if s.TransformJobName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("TransformJobName"))
-	}
-	if s.TransformJobName != nil && len(*s.TransformJobName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("TransformJobName", 1))
-	}
-
-	if s.TransformOutput == nil {
-		invalidParams.Add(aws.NewErrParamRequired("TransformOutput"))
-	}
-
-	if s.TransformResources == nil {
-		invalidParams.Add(aws.NewErrParamRequired("TransformResources"))
-	}
-	if s.Tags != nil {
-		for i, v := range s.Tags {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-	if s.TransformInput != nil {
-		if err := s.TransformInput.Validate(); err != nil {
-			invalidParams.AddNested("TransformInput", err.(aws.ErrInvalidParams))
-		}
-	}
-	if s.TransformOutput != nil {
-		if err := s.TransformOutput.Validate(); err != nil {
-			invalidParams.AddNested("TransformOutput", err.(aws.ErrInvalidParams))
-		}
-	}
-	if s.TransformResources != nil {
-		if err := s.TransformResources.Validate(); err != nil {
-			invalidParams.AddNested("TransformResources", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type CreateTransformJobOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the transform job.
-	//
-	// TransformJobArn is a required field
-	TransformJobArn *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s CreateTransformJobOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCreateTransformJob = "CreateTransformJob"
 
@@ -200,8 +38,8 @@ const opCreateTransformJob = "CreateTransformJob"
 //    * TransformResources - Identifies the ML compute instances for the transform
 //    job.
 //
-// For more information about how batch transformation works Amazon SageMaker,
-// see How It Works (https://docs.aws.amazon.com/sagemaker/latest/dg/batch-transform.html).
+// For more information about how batch transformation works, see Batch Transform
+// (https://docs.aws.amazon.com/sagemaker/latest/dg/batch-transform.html).
 //
 //    // Example sending a request using CreateTransformJobRequest.
 //    req := client.CreateTransformJobRequest(params)
@@ -211,7 +49,7 @@ const opCreateTransformJob = "CreateTransformJob"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateTransformJob
-func (c *Client) CreateTransformJobRequest(input *CreateTransformJobInput) CreateTransformJobRequest {
+func (c *Client) CreateTransformJobRequest(input *types.CreateTransformJobInput) CreateTransformJobRequest {
 	op := &aws.Operation{
 		Name:       opCreateTransformJob,
 		HTTPMethod: "POST",
@@ -219,10 +57,10 @@ func (c *Client) CreateTransformJobRequest(input *CreateTransformJobInput) Creat
 	}
 
 	if input == nil {
-		input = &CreateTransformJobInput{}
+		input = &types.CreateTransformJobInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateTransformJobOutput{})
+	req := c.newRequest(op, input, &types.CreateTransformJobOutput{})
 	return CreateTransformJobRequest{Request: req, Input: input, Copy: c.CreateTransformJobRequest}
 }
 
@@ -230,8 +68,8 @@ func (c *Client) CreateTransformJobRequest(input *CreateTransformJobInput) Creat
 // CreateTransformJob API operation.
 type CreateTransformJobRequest struct {
 	*aws.Request
-	Input *CreateTransformJobInput
-	Copy  func(*CreateTransformJobInput) CreateTransformJobRequest
+	Input *types.CreateTransformJobInput
+	Copy  func(*types.CreateTransformJobInput) CreateTransformJobRequest
 }
 
 // Send marshals and sends the CreateTransformJob API request.
@@ -243,7 +81,7 @@ func (r CreateTransformJobRequest) Send(ctx context.Context) (*CreateTransformJo
 	}
 
 	resp := &CreateTransformJobResponse{
-		CreateTransformJobOutput: r.Request.Data.(*CreateTransformJobOutput),
+		CreateTransformJobOutput: r.Request.Data.(*types.CreateTransformJobOutput),
 		response:                 &aws.Response{Request: r.Request},
 	}
 
@@ -253,7 +91,7 @@ func (r CreateTransformJobRequest) Send(ctx context.Context) (*CreateTransformJo
 // CreateTransformJobResponse is the response type for the
 // CreateTransformJob API operation.
 type CreateTransformJobResponse struct {
-	*CreateTransformJobOutput
+	*types.CreateTransformJobOutput
 
 	response *aws.Response
 }

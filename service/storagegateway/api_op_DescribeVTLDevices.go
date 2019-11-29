@@ -6,87 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/storagegateway/types"
 )
-
-// DescribeVTLDevicesInput
-type DescribeVTLDevicesInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation
-	// to return a list of gateways for your account and AWS Region.
-	//
-	// GatewayARN is a required field
-	GatewayARN *string `min:"50" type:"string" required:"true"`
-
-	// Specifies that the number of VTL devices described be limited to the specified
-	// number.
-	Limit *int64 `min:"1" type:"integer"`
-
-	// An opaque string that indicates the position at which to begin describing
-	// the VTL devices.
-	Marker *string `min:"1" type:"string"`
-
-	// An array of strings, where each string represents the Amazon Resource Name
-	// (ARN) of a VTL device.
-	//
-	// All of the specified VTL devices must be from the same gateway. If no VTL
-	// devices are specified, the result will contain all devices on the specified
-	// gateway.
-	VTLDeviceARNs []string `type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeVTLDevicesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeVTLDevicesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeVTLDevicesInput"}
-
-	if s.GatewayARN == nil {
-		invalidParams.Add(aws.NewErrParamRequired("GatewayARN"))
-	}
-	if s.GatewayARN != nil && len(*s.GatewayARN) < 50 {
-		invalidParams.Add(aws.NewErrParamMinLen("GatewayARN", 50))
-	}
-	if s.Limit != nil && *s.Limit < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("Limit", 1))
-	}
-	if s.Marker != nil && len(*s.Marker) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Marker", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// DescribeVTLDevicesOutput
-type DescribeVTLDevicesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation
-	// to return a list of gateways for your account and AWS Region.
-	GatewayARN *string `min:"50" type:"string"`
-
-	// An opaque string that indicates the position at which the VTL devices that
-	// were fetched for description ended. Use the marker in your next request to
-	// fetch the next set of VTL devices in the list. If there are no more VTL devices
-	// to describe, this field does not appear in the response.
-	Marker *string `min:"1" type:"string"`
-
-	// An array of VTL device objects composed of the Amazon Resource Name(ARN)
-	// of the VTL devices.
-	VTLDevices []VTLDevice `type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeVTLDevicesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeVTLDevices = "DescribeVTLDevices"
 
@@ -106,7 +27,7 @@ const opDescribeVTLDevices = "DescribeVTLDevices"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DescribeVTLDevices
-func (c *Client) DescribeVTLDevicesRequest(input *DescribeVTLDevicesInput) DescribeVTLDevicesRequest {
+func (c *Client) DescribeVTLDevicesRequest(input *types.DescribeVTLDevicesInput) DescribeVTLDevicesRequest {
 	op := &aws.Operation{
 		Name:       opDescribeVTLDevices,
 		HTTPMethod: "POST",
@@ -120,10 +41,10 @@ func (c *Client) DescribeVTLDevicesRequest(input *DescribeVTLDevicesInput) Descr
 	}
 
 	if input == nil {
-		input = &DescribeVTLDevicesInput{}
+		input = &types.DescribeVTLDevicesInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeVTLDevicesOutput{})
+	req := c.newRequest(op, input, &types.DescribeVTLDevicesOutput{})
 	return DescribeVTLDevicesRequest{Request: req, Input: input, Copy: c.DescribeVTLDevicesRequest}
 }
 
@@ -131,8 +52,8 @@ func (c *Client) DescribeVTLDevicesRequest(input *DescribeVTLDevicesInput) Descr
 // DescribeVTLDevices API operation.
 type DescribeVTLDevicesRequest struct {
 	*aws.Request
-	Input *DescribeVTLDevicesInput
-	Copy  func(*DescribeVTLDevicesInput) DescribeVTLDevicesRequest
+	Input *types.DescribeVTLDevicesInput
+	Copy  func(*types.DescribeVTLDevicesInput) DescribeVTLDevicesRequest
 }
 
 // Send marshals and sends the DescribeVTLDevices API request.
@@ -144,7 +65,7 @@ func (r DescribeVTLDevicesRequest) Send(ctx context.Context) (*DescribeVTLDevice
 	}
 
 	resp := &DescribeVTLDevicesResponse{
-		DescribeVTLDevicesOutput: r.Request.Data.(*DescribeVTLDevicesOutput),
+		DescribeVTLDevicesOutput: r.Request.Data.(*types.DescribeVTLDevicesOutput),
 		response:                 &aws.Response{Request: r.Request},
 	}
 
@@ -174,7 +95,7 @@ func NewDescribeVTLDevicesPaginator(req DescribeVTLDevicesRequest) DescribeVTLDe
 	return DescribeVTLDevicesPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *DescribeVTLDevicesInput
+				var inCpy *types.DescribeVTLDevicesInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -194,14 +115,14 @@ type DescribeVTLDevicesPaginator struct {
 	aws.Pager
 }
 
-func (p *DescribeVTLDevicesPaginator) CurrentPage() *DescribeVTLDevicesOutput {
-	return p.Pager.CurrentPage().(*DescribeVTLDevicesOutput)
+func (p *DescribeVTLDevicesPaginator) CurrentPage() *types.DescribeVTLDevicesOutput {
+	return p.Pager.CurrentPage().(*types.DescribeVTLDevicesOutput)
 }
 
 // DescribeVTLDevicesResponse is the response type for the
 // DescribeVTLDevices API operation.
 type DescribeVTLDevicesResponse struct {
-	*DescribeVTLDevicesOutput
+	*types.DescribeVTLDevicesOutput
 
 	response *aws.Response
 }

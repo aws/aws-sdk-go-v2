@@ -6,57 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/chime/types"
 )
-
-type GetGlobalSettingsInput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s GetGlobalSettingsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetGlobalSettingsInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	return nil
-}
-
-type GetGlobalSettingsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Chime Business Calling settings.
-	BusinessCalling *BusinessCallingSettings `type:"structure"`
-
-	// The Amazon Chime Voice Connector settings.
-	VoiceConnector *VoiceConnectorSettings `type:"structure"`
-}
-
-// String returns the string representation
-func (s GetGlobalSettingsOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetGlobalSettingsOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.BusinessCalling != nil {
-		v := s.BusinessCalling
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "BusinessCalling", v, metadata)
-	}
-	if s.VoiceConnector != nil {
-		v := s.VoiceConnector
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "VoiceConnector", v, metadata)
-	}
-	return nil
-}
 
 const opGetGlobalSettings = "GetGlobalSettings"
 
@@ -74,7 +25,7 @@ const opGetGlobalSettings = "GetGlobalSettings"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/GetGlobalSettings
-func (c *Client) GetGlobalSettingsRequest(input *GetGlobalSettingsInput) GetGlobalSettingsRequest {
+func (c *Client) GetGlobalSettingsRequest(input *types.GetGlobalSettingsInput) GetGlobalSettingsRequest {
 	op := &aws.Operation{
 		Name:       opGetGlobalSettings,
 		HTTPMethod: "GET",
@@ -82,10 +33,10 @@ func (c *Client) GetGlobalSettingsRequest(input *GetGlobalSettingsInput) GetGlob
 	}
 
 	if input == nil {
-		input = &GetGlobalSettingsInput{}
+		input = &types.GetGlobalSettingsInput{}
 	}
 
-	req := c.newRequest(op, input, &GetGlobalSettingsOutput{})
+	req := c.newRequest(op, input, &types.GetGlobalSettingsOutput{})
 	return GetGlobalSettingsRequest{Request: req, Input: input, Copy: c.GetGlobalSettingsRequest}
 }
 
@@ -93,8 +44,8 @@ func (c *Client) GetGlobalSettingsRequest(input *GetGlobalSettingsInput) GetGlob
 // GetGlobalSettings API operation.
 type GetGlobalSettingsRequest struct {
 	*aws.Request
-	Input *GetGlobalSettingsInput
-	Copy  func(*GetGlobalSettingsInput) GetGlobalSettingsRequest
+	Input *types.GetGlobalSettingsInput
+	Copy  func(*types.GetGlobalSettingsInput) GetGlobalSettingsRequest
 }
 
 // Send marshals and sends the GetGlobalSettings API request.
@@ -106,7 +57,7 @@ func (r GetGlobalSettingsRequest) Send(ctx context.Context) (*GetGlobalSettingsR
 	}
 
 	resp := &GetGlobalSettingsResponse{
-		GetGlobalSettingsOutput: r.Request.Data.(*GetGlobalSettingsOutput),
+		GetGlobalSettingsOutput: r.Request.Data.(*types.GetGlobalSettingsOutput),
 		response:                &aws.Response{Request: r.Request},
 	}
 
@@ -116,7 +67,7 @@ func (r GetGlobalSettingsRequest) Send(ctx context.Context) (*GetGlobalSettingsR
 // GetGlobalSettingsResponse is the response type for the
 // GetGlobalSettings API operation.
 type GetGlobalSettingsResponse struct {
-	*GetGlobalSettingsOutput
+	*types.GetGlobalSettingsOutput
 
 	response *aws.Response
 }

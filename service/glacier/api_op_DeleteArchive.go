@@ -6,100 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/restjson"
+	"github.com/aws/aws-sdk-go-v2/service/glacier/types"
 )
-
-// Provides options for deleting an archive from an Amazon S3 Glacier vault.
-type DeleteArchiveInput struct {
-	_ struct{} `type:"structure"`
-
-	// The AccountId value is the AWS account ID of the account that owns the vault.
-	// You can either specify an AWS account ID or optionally a single '-' (hyphen),
-	// in which case Amazon S3 Glacier uses the AWS account ID associated with the
-	// credentials used to sign the request. If you use an account ID, do not include
-	// any hyphens ('-') in the ID.
-	//
-	// AccountId is a required field
-	AccountId *string `location:"uri" locationName:"accountId" type:"string" required:"true"`
-
-	// The ID of the archive to delete.
-	//
-	// ArchiveId is a required field
-	ArchiveId *string `location:"uri" locationName:"archiveId" type:"string" required:"true"`
-
-	// The name of the vault.
-	//
-	// VaultName is a required field
-	VaultName *string `location:"uri" locationName:"vaultName" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteArchiveInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteArchiveInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteArchiveInput"}
-
-	if s.AccountId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("AccountId"))
-	}
-
-	if s.ArchiveId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ArchiveId"))
-	}
-
-	if s.VaultName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("VaultName"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteArchiveInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.AccountId != nil {
-		v := *s.AccountId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "accountId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.ArchiveId != nil {
-		v := *s.ArchiveId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "archiveId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.VaultName != nil {
-		v := *s.VaultName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "vaultName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type DeleteArchiveOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteArchiveOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteArchiveOutput) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
 
 const opDeleteArchive = "DeleteArchive"
 
@@ -138,7 +48,7 @@ const opDeleteArchive = "DeleteArchive"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) DeleteArchiveRequest(input *DeleteArchiveInput) DeleteArchiveRequest {
+func (c *Client) DeleteArchiveRequest(input *types.DeleteArchiveInput) DeleteArchiveRequest {
 	op := &aws.Operation{
 		Name:       opDeleteArchive,
 		HTTPMethod: "DELETE",
@@ -146,10 +56,10 @@ func (c *Client) DeleteArchiveRequest(input *DeleteArchiveInput) DeleteArchiveRe
 	}
 
 	if input == nil {
-		input = &DeleteArchiveInput{}
+		input = &types.DeleteArchiveInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteArchiveOutput{})
+	req := c.newRequest(op, input, &types.DeleteArchiveOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return DeleteArchiveRequest{Request: req, Input: input, Copy: c.DeleteArchiveRequest}
@@ -159,8 +69,8 @@ func (c *Client) DeleteArchiveRequest(input *DeleteArchiveInput) DeleteArchiveRe
 // DeleteArchive API operation.
 type DeleteArchiveRequest struct {
 	*aws.Request
-	Input *DeleteArchiveInput
-	Copy  func(*DeleteArchiveInput) DeleteArchiveRequest
+	Input *types.DeleteArchiveInput
+	Copy  func(*types.DeleteArchiveInput) DeleteArchiveRequest
 }
 
 // Send marshals and sends the DeleteArchive API request.
@@ -172,7 +82,7 @@ func (r DeleteArchiveRequest) Send(ctx context.Context) (*DeleteArchiveResponse,
 	}
 
 	resp := &DeleteArchiveResponse{
-		DeleteArchiveOutput: r.Request.Data.(*DeleteArchiveOutput),
+		DeleteArchiveOutput: r.Request.Data.(*types.DeleteArchiveOutput),
 		response:            &aws.Response{Request: r.Request},
 	}
 
@@ -182,7 +92,7 @@ func (r DeleteArchiveRequest) Send(ctx context.Context) (*DeleteArchiveResponse,
 // DeleteArchiveResponse is the response type for the
 // DeleteArchive API operation.
 type DeleteArchiveResponse struct {
-	*DeleteArchiveOutput
+	*types.DeleteArchiveOutput
 
 	response *aws.Response
 }

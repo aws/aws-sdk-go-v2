@@ -6,50 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
+	"github.com/aws/aws-sdk-go-v2/service/configservice/types"
 )
-
-type DeleteConfigurationAggregatorInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the configuration aggregator.
-	//
-	// ConfigurationAggregatorName is a required field
-	ConfigurationAggregatorName *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteConfigurationAggregatorInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteConfigurationAggregatorInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteConfigurationAggregatorInput"}
-
-	if s.ConfigurationAggregatorName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ConfigurationAggregatorName"))
-	}
-	if s.ConfigurationAggregatorName != nil && len(*s.ConfigurationAggregatorName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ConfigurationAggregatorName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteConfigurationAggregatorOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteConfigurationAggregatorOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteConfigurationAggregator = "DeleteConfigurationAggregator"
 
@@ -67,7 +27,7 @@ const opDeleteConfigurationAggregator = "DeleteConfigurationAggregator"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DeleteConfigurationAggregator
-func (c *Client) DeleteConfigurationAggregatorRequest(input *DeleteConfigurationAggregatorInput) DeleteConfigurationAggregatorRequest {
+func (c *Client) DeleteConfigurationAggregatorRequest(input *types.DeleteConfigurationAggregatorInput) DeleteConfigurationAggregatorRequest {
 	op := &aws.Operation{
 		Name:       opDeleteConfigurationAggregator,
 		HTTPMethod: "POST",
@@ -75,10 +35,10 @@ func (c *Client) DeleteConfigurationAggregatorRequest(input *DeleteConfiguration
 	}
 
 	if input == nil {
-		input = &DeleteConfigurationAggregatorInput{}
+		input = &types.DeleteConfigurationAggregatorInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteConfigurationAggregatorOutput{})
+	req := c.newRequest(op, input, &types.DeleteConfigurationAggregatorOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return DeleteConfigurationAggregatorRequest{Request: req, Input: input, Copy: c.DeleteConfigurationAggregatorRequest}
@@ -88,8 +48,8 @@ func (c *Client) DeleteConfigurationAggregatorRequest(input *DeleteConfiguration
 // DeleteConfigurationAggregator API operation.
 type DeleteConfigurationAggregatorRequest struct {
 	*aws.Request
-	Input *DeleteConfigurationAggregatorInput
-	Copy  func(*DeleteConfigurationAggregatorInput) DeleteConfigurationAggregatorRequest
+	Input *types.DeleteConfigurationAggregatorInput
+	Copy  func(*types.DeleteConfigurationAggregatorInput) DeleteConfigurationAggregatorRequest
 }
 
 // Send marshals and sends the DeleteConfigurationAggregator API request.
@@ -101,7 +61,7 @@ func (r DeleteConfigurationAggregatorRequest) Send(ctx context.Context) (*Delete
 	}
 
 	resp := &DeleteConfigurationAggregatorResponse{
-		DeleteConfigurationAggregatorOutput: r.Request.Data.(*DeleteConfigurationAggregatorOutput),
+		DeleteConfigurationAggregatorOutput: r.Request.Data.(*types.DeleteConfigurationAggregatorOutput),
 		response:                            &aws.Response{Request: r.Request},
 	}
 
@@ -111,7 +71,7 @@ func (r DeleteConfigurationAggregatorRequest) Send(ctx context.Context) (*Delete
 // DeleteConfigurationAggregatorResponse is the response type for the
 // DeleteConfigurationAggregator API operation.
 type DeleteConfigurationAggregatorResponse struct {
-	*DeleteConfigurationAggregatorOutput
+	*types.DeleteConfigurationAggregatorOutput
 
 	response *aws.Response
 }

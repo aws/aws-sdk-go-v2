@@ -6,69 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/storagegateway/types"
 )
-
-// A JSON object containing one or more of the following fields:
-//
-//    * AddWorkingStorageInput$DiskIds
-type AddWorkingStorageInput struct {
-	_ struct{} `type:"structure"`
-
-	// An array of strings that identify disks that are to be configured as working
-	// storage. Each string have a minimum length of 1 and maximum length of 300.
-	// You can get the disk IDs from the ListLocalDisks API.
-	//
-	// DiskIds is a required field
-	DiskIds []string `type:"list" required:"true"`
-
-	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation
-	// to return a list of gateways for your account and AWS Region.
-	//
-	// GatewayARN is a required field
-	GatewayARN *string `min:"50" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s AddWorkingStorageInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *AddWorkingStorageInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "AddWorkingStorageInput"}
-
-	if s.DiskIds == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DiskIds"))
-	}
-
-	if s.GatewayARN == nil {
-		invalidParams.Add(aws.NewErrParamRequired("GatewayARN"))
-	}
-	if s.GatewayARN != nil && len(*s.GatewayARN) < 50 {
-		invalidParams.Add(aws.NewErrParamMinLen("GatewayARN", 50))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// A JSON object containing the of the gateway for which working storage was
-// configured.
-type AddWorkingStorageOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation
-	// to return a list of gateways for your account and AWS Region.
-	GatewayARN *string `min:"50" type:"string"`
-}
-
-// String returns the string representation
-func (s AddWorkingStorageOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opAddWorkingStorage = "AddWorkingStorage"
 
@@ -95,7 +34,7 @@ const opAddWorkingStorage = "AddWorkingStorage"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/AddWorkingStorage
-func (c *Client) AddWorkingStorageRequest(input *AddWorkingStorageInput) AddWorkingStorageRequest {
+func (c *Client) AddWorkingStorageRequest(input *types.AddWorkingStorageInput) AddWorkingStorageRequest {
 	op := &aws.Operation{
 		Name:       opAddWorkingStorage,
 		HTTPMethod: "POST",
@@ -103,10 +42,10 @@ func (c *Client) AddWorkingStorageRequest(input *AddWorkingStorageInput) AddWork
 	}
 
 	if input == nil {
-		input = &AddWorkingStorageInput{}
+		input = &types.AddWorkingStorageInput{}
 	}
 
-	req := c.newRequest(op, input, &AddWorkingStorageOutput{})
+	req := c.newRequest(op, input, &types.AddWorkingStorageOutput{})
 	return AddWorkingStorageRequest{Request: req, Input: input, Copy: c.AddWorkingStorageRequest}
 }
 
@@ -114,8 +53,8 @@ func (c *Client) AddWorkingStorageRequest(input *AddWorkingStorageInput) AddWork
 // AddWorkingStorage API operation.
 type AddWorkingStorageRequest struct {
 	*aws.Request
-	Input *AddWorkingStorageInput
-	Copy  func(*AddWorkingStorageInput) AddWorkingStorageRequest
+	Input *types.AddWorkingStorageInput
+	Copy  func(*types.AddWorkingStorageInput) AddWorkingStorageRequest
 }
 
 // Send marshals and sends the AddWorkingStorage API request.
@@ -127,7 +66,7 @@ func (r AddWorkingStorageRequest) Send(ctx context.Context) (*AddWorkingStorageR
 	}
 
 	resp := &AddWorkingStorageResponse{
-		AddWorkingStorageOutput: r.Request.Data.(*AddWorkingStorageOutput),
+		AddWorkingStorageOutput: r.Request.Data.(*types.AddWorkingStorageOutput),
 		response:                &aws.Response{Request: r.Request},
 	}
 
@@ -137,7 +76,7 @@ func (r AddWorkingStorageRequest) Send(ctx context.Context) (*AddWorkingStorageR
 // AddWorkingStorageResponse is the response type for the
 // AddWorkingStorage API operation.
 type AddWorkingStorageResponse struct {
-	*AddWorkingStorageOutput
+	*types.AddWorkingStorageOutput
 
 	response *aws.Response
 }

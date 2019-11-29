@@ -6,69 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/secretsmanager/types"
 )
-
-type DeleteResourcePolicyInput struct {
-	_ struct{} `type:"structure"`
-
-	// Specifies the secret that you want to delete the attached resource-based
-	// policy for. You can specify either the Amazon Resource Name (ARN) or the
-	// friendly name of the secret.
-	//
-	// If you specify an ARN, we generally recommend that you specify a complete
-	// ARN. You can specify a partial ARN too—for example, if you don’t include
-	// the final hyphen and six random characters that Secrets Manager adds at the
-	// end of the ARN when you created the secret. A partial ARN match can work
-	// as long as it uniquely matches only one secret. However, if your secret has
-	// a name that ends in a hyphen followed by six characters (before Secrets Manager
-	// adds the hyphen and six characters to the ARN) and you try to use that as
-	// a partial ARN, then those characters cause Secrets Manager to assume that
-	// you’re specifying a complete ARN. This confusion can cause unexpected results.
-	// To avoid this situation, we recommend that you don’t create secret names
-	// that end with a hyphen followed by six characters.
-	//
-	// SecretId is a required field
-	SecretId *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteResourcePolicyInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteResourcePolicyInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteResourcePolicyInput"}
-
-	if s.SecretId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("SecretId"))
-	}
-	if s.SecretId != nil && len(*s.SecretId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("SecretId", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteResourcePolicyOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The ARN of the secret that the resource-based policy was deleted for.
-	ARN *string `min:"20" type:"string"`
-
-	// The friendly name of the secret that the resource-based policy was deleted
-	// for.
-	Name *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s DeleteResourcePolicyOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteResourcePolicy = "DeleteResourcePolicy"
 
@@ -100,7 +39,7 @@ const opDeleteResourcePolicy = "DeleteResourcePolicy"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/secretsmanager-2017-10-17/DeleteResourcePolicy
-func (c *Client) DeleteResourcePolicyRequest(input *DeleteResourcePolicyInput) DeleteResourcePolicyRequest {
+func (c *Client) DeleteResourcePolicyRequest(input *types.DeleteResourcePolicyInput) DeleteResourcePolicyRequest {
 	op := &aws.Operation{
 		Name:       opDeleteResourcePolicy,
 		HTTPMethod: "POST",
@@ -108,10 +47,10 @@ func (c *Client) DeleteResourcePolicyRequest(input *DeleteResourcePolicyInput) D
 	}
 
 	if input == nil {
-		input = &DeleteResourcePolicyInput{}
+		input = &types.DeleteResourcePolicyInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteResourcePolicyOutput{})
+	req := c.newRequest(op, input, &types.DeleteResourcePolicyOutput{})
 	return DeleteResourcePolicyRequest{Request: req, Input: input, Copy: c.DeleteResourcePolicyRequest}
 }
 
@@ -119,8 +58,8 @@ func (c *Client) DeleteResourcePolicyRequest(input *DeleteResourcePolicyInput) D
 // DeleteResourcePolicy API operation.
 type DeleteResourcePolicyRequest struct {
 	*aws.Request
-	Input *DeleteResourcePolicyInput
-	Copy  func(*DeleteResourcePolicyInput) DeleteResourcePolicyRequest
+	Input *types.DeleteResourcePolicyInput
+	Copy  func(*types.DeleteResourcePolicyInput) DeleteResourcePolicyRequest
 }
 
 // Send marshals and sends the DeleteResourcePolicy API request.
@@ -132,7 +71,7 @@ func (r DeleteResourcePolicyRequest) Send(ctx context.Context) (*DeleteResourceP
 	}
 
 	resp := &DeleteResourcePolicyResponse{
-		DeleteResourcePolicyOutput: r.Request.Data.(*DeleteResourcePolicyOutput),
+		DeleteResourcePolicyOutput: r.Request.Data.(*types.DeleteResourcePolicyOutput),
 		response:                   &aws.Response{Request: r.Request},
 	}
 
@@ -142,7 +81,7 @@ func (r DeleteResourcePolicyRequest) Send(ctx context.Context) (*DeleteResourceP
 // DeleteResourcePolicyResponse is the response type for the
 // DeleteResourcePolicy API operation.
 type DeleteResourcePolicyResponse struct {
-	*DeleteResourcePolicyOutput
+	*types.DeleteResourcePolicyOutput
 
 	response *aws.Response
 }

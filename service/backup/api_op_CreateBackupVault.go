@@ -4,141 +4,10 @@ package backup
 
 import (
 	"context"
-	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/backup/types"
 )
-
-type CreateBackupVaultInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of a logical container where backups are stored. Backup vaults are
-	// identified by names that are unique to the account used to create them and
-	// the AWS Region where they are created. They consist of lowercase letters,
-	// numbers, and hyphens.
-	//
-	// BackupVaultName is a required field
-	BackupVaultName *string `location:"uri" locationName:"backupVaultName" type:"string" required:"true"`
-
-	// Metadata that you can assign to help organize the resources that you create.
-	// Each tag is a key-value pair.
-	BackupVaultTags map[string]string `type:"map" sensitive:"true"`
-
-	// A unique string that identifies the request and allows failed requests to
-	// be retried without the risk of executing the operation twice.
-	CreatorRequestId *string `type:"string"`
-
-	// The server-side encryption key that is used to protect your backups; for
-	// example, arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab.
-	EncryptionKeyArn *string `type:"string"`
-}
-
-// String returns the string representation
-func (s CreateBackupVaultInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateBackupVaultInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateBackupVaultInput"}
-
-	if s.BackupVaultName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("BackupVaultName"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s CreateBackupVaultInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.BackupVaultTags != nil {
-		v := s.BackupVaultTags
-
-		metadata := protocol.Metadata{}
-		ms0 := e.Map(protocol.BodyTarget, "BackupVaultTags", metadata)
-		ms0.Start()
-		for k1, v1 := range v {
-			ms0.MapSetValue(k1, protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
-		}
-		ms0.End()
-
-	}
-	if s.CreatorRequestId != nil {
-		v := *s.CreatorRequestId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "CreatorRequestId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.EncryptionKeyArn != nil {
-		v := *s.EncryptionKeyArn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "EncryptionKeyArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.BackupVaultName != nil {
-		v := *s.BackupVaultName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "backupVaultName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type CreateBackupVaultOutput struct {
-	_ struct{} `type:"structure"`
-
-	// An Amazon Resource Name (ARN) that uniquely identifies a backup vault; for
-	// example, arn:aws:backup:us-east-1:123456789012:vault:aBackupVault.
-	BackupVaultArn *string `type:"string"`
-
-	// The name of a logical container where backups are stored. Backup vaults are
-	// identified by names that are unique to the account used to create them and
-	// the Region where they are created. They consist of lowercase letters, numbers,
-	// and hyphens.
-	BackupVaultName *string `type:"string"`
-
-	// The date and time a backup vault is created, in Unix format and Coordinated
-	// Universal Time (UTC). The value of CreationDate is accurate to milliseconds.
-	// For example, the value 1516925490.087 represents Friday, January 26, 2018
-	// 12:11:30.087 AM.
-	CreationDate *time.Time `type:"timestamp"`
-}
-
-// String returns the string representation
-func (s CreateBackupVaultOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s CreateBackupVaultOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.BackupVaultArn != nil {
-		v := *s.BackupVaultArn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "BackupVaultArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.BackupVaultName != nil {
-		v := *s.BackupVaultName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "BackupVaultName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.CreationDate != nil {
-		v := *s.CreationDate
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "CreationDate",
-			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
-	}
-	return nil
-}
 
 const opCreateBackupVault = "CreateBackupVault"
 
@@ -160,7 +29,7 @@ const opCreateBackupVault = "CreateBackupVault"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/CreateBackupVault
-func (c *Client) CreateBackupVaultRequest(input *CreateBackupVaultInput) CreateBackupVaultRequest {
+func (c *Client) CreateBackupVaultRequest(input *types.CreateBackupVaultInput) CreateBackupVaultRequest {
 	op := &aws.Operation{
 		Name:       opCreateBackupVault,
 		HTTPMethod: "PUT",
@@ -168,10 +37,10 @@ func (c *Client) CreateBackupVaultRequest(input *CreateBackupVaultInput) CreateB
 	}
 
 	if input == nil {
-		input = &CreateBackupVaultInput{}
+		input = &types.CreateBackupVaultInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateBackupVaultOutput{})
+	req := c.newRequest(op, input, &types.CreateBackupVaultOutput{})
 	return CreateBackupVaultRequest{Request: req, Input: input, Copy: c.CreateBackupVaultRequest}
 }
 
@@ -179,8 +48,8 @@ func (c *Client) CreateBackupVaultRequest(input *CreateBackupVaultInput) CreateB
 // CreateBackupVault API operation.
 type CreateBackupVaultRequest struct {
 	*aws.Request
-	Input *CreateBackupVaultInput
-	Copy  func(*CreateBackupVaultInput) CreateBackupVaultRequest
+	Input *types.CreateBackupVaultInput
+	Copy  func(*types.CreateBackupVaultInput) CreateBackupVaultRequest
 }
 
 // Send marshals and sends the CreateBackupVault API request.
@@ -192,7 +61,7 @@ func (r CreateBackupVaultRequest) Send(ctx context.Context) (*CreateBackupVaultR
 	}
 
 	resp := &CreateBackupVaultResponse{
-		CreateBackupVaultOutput: r.Request.Data.(*CreateBackupVaultOutput),
+		CreateBackupVaultOutput: r.Request.Data.(*types.CreateBackupVaultOutput),
 		response:                &aws.Response{Request: r.Request},
 	}
 
@@ -202,7 +71,7 @@ func (r CreateBackupVaultRequest) Send(ctx context.Context) (*CreateBackupVaultR
 // CreateBackupVaultResponse is the response type for the
 // CreateBackupVault API operation.
 type CreateBackupVaultResponse struct {
-	*CreateBackupVaultOutput
+	*types.CreateBackupVaultOutput
 
 	response *aws.Response
 }

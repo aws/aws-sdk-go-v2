@@ -6,44 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/directoryservice/types"
 )
-
-type ListLogSubscriptionsInput struct {
-	_ struct{} `type:"structure"`
-
-	// If a DirectoryID is provided, lists only the log subscription associated
-	// with that directory. If no DirectoryId is provided, lists all log subscriptions
-	// associated with your AWS account. If there are no log subscriptions for the
-	// AWS account or the directory, an empty list will be returned.
-	DirectoryId *string `type:"string"`
-
-	// The maximum number of items returned.
-	Limit *int64 `type:"integer"`
-
-	// The token for the next set of items to return.
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s ListLogSubscriptionsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type ListLogSubscriptionsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A list of active LogSubscription objects for calling the AWS account.
-	LogSubscriptions []LogSubscription `type:"list"`
-
-	// The token for the next set of items to return.
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s ListLogSubscriptionsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListLogSubscriptions = "ListLogSubscriptions"
 
@@ -60,7 +24,7 @@ const opListLogSubscriptions = "ListLogSubscriptions"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/ListLogSubscriptions
-func (c *Client) ListLogSubscriptionsRequest(input *ListLogSubscriptionsInput) ListLogSubscriptionsRequest {
+func (c *Client) ListLogSubscriptionsRequest(input *types.ListLogSubscriptionsInput) ListLogSubscriptionsRequest {
 	op := &aws.Operation{
 		Name:       opListLogSubscriptions,
 		HTTPMethod: "POST",
@@ -68,10 +32,10 @@ func (c *Client) ListLogSubscriptionsRequest(input *ListLogSubscriptionsInput) L
 	}
 
 	if input == nil {
-		input = &ListLogSubscriptionsInput{}
+		input = &types.ListLogSubscriptionsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListLogSubscriptionsOutput{})
+	req := c.newRequest(op, input, &types.ListLogSubscriptionsOutput{})
 	return ListLogSubscriptionsRequest{Request: req, Input: input, Copy: c.ListLogSubscriptionsRequest}
 }
 
@@ -79,8 +43,8 @@ func (c *Client) ListLogSubscriptionsRequest(input *ListLogSubscriptionsInput) L
 // ListLogSubscriptions API operation.
 type ListLogSubscriptionsRequest struct {
 	*aws.Request
-	Input *ListLogSubscriptionsInput
-	Copy  func(*ListLogSubscriptionsInput) ListLogSubscriptionsRequest
+	Input *types.ListLogSubscriptionsInput
+	Copy  func(*types.ListLogSubscriptionsInput) ListLogSubscriptionsRequest
 }
 
 // Send marshals and sends the ListLogSubscriptions API request.
@@ -92,7 +56,7 @@ func (r ListLogSubscriptionsRequest) Send(ctx context.Context) (*ListLogSubscrip
 	}
 
 	resp := &ListLogSubscriptionsResponse{
-		ListLogSubscriptionsOutput: r.Request.Data.(*ListLogSubscriptionsOutput),
+		ListLogSubscriptionsOutput: r.Request.Data.(*types.ListLogSubscriptionsOutput),
 		response:                   &aws.Response{Request: r.Request},
 	}
 
@@ -102,7 +66,7 @@ func (r ListLogSubscriptionsRequest) Send(ctx context.Context) (*ListLogSubscrip
 // ListLogSubscriptionsResponse is the response type for the
 // ListLogSubscriptions API operation.
 type ListLogSubscriptionsResponse struct {
-	*ListLogSubscriptionsOutput
+	*types.ListLogSubscriptionsOutput
 
 	response *aws.Response
 }

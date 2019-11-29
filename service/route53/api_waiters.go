@@ -7,6 +7,7 @@ import (
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
+	"github.com/aws/aws-sdk-go-v2/service/route53/types"
 )
 
 // WaitUntilResourceRecordSetsChanged uses the Route 53 API operation
@@ -18,7 +19,7 @@ import (
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Client) WaitUntilResourceRecordSetsChanged(ctx context.Context, input *GetChangeInput, opts ...aws.WaiterOption) error {
+func (c *Client) WaitUntilResourceRecordSetsChanged(ctx context.Context, input *types.GetChangeInput, opts ...aws.WaiterOption) error {
 	w := aws.Waiter{
 		Name:        "WaitUntilResourceRecordSetsChanged",
 		MaxAttempts: 60,
@@ -32,7 +33,7 @@ func (c *Client) WaitUntilResourceRecordSetsChanged(ctx context.Context, input *
 		},
 		Logger: c.Config.Logger,
 		NewRequest: func(opts []aws.Option) (*aws.Request, error) {
-			var inCpy *GetChangeInput
+			var inCpy *types.GetChangeInput
 			if input != nil {
 				tmp := *input
 				inCpy = &tmp

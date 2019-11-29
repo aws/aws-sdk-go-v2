@@ -6,69 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
 )
-
-type ListWorkteamsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The maximum number of work teams to return in each page of the response.
-	MaxResults *int64 `min:"1" type:"integer"`
-
-	// A string in the work team's name. This filter returns only work teams whose
-	// name contains the specified string.
-	NameContains *string `min:"1" type:"string"`
-
-	// If the result of the previous ListWorkteams request was truncated, the response
-	// includes a NextToken. To retrieve the next set of labeling jobs, use the
-	// token in the next request.
-	NextToken *string `type:"string"`
-
-	// The field to sort results by. The default is CreationTime.
-	SortBy ListWorkteamsSortByOptions `type:"string" enum:"true"`
-
-	// The sort order for results. The default is Ascending.
-	SortOrder SortOrder `type:"string" enum:"true"`
-}
-
-// String returns the string representation
-func (s ListWorkteamsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListWorkteamsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListWorkteamsInput"}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-	if s.NameContains != nil && len(*s.NameContains) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("NameContains", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ListWorkteamsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// If the response is truncated, Amazon SageMaker returns this token. To retrieve
-	// the next set of work teams, use it in the subsequent request.
-	NextToken *string `type:"string"`
-
-	// An array of Workteam objects, each describing a work team.
-	//
-	// Workteams is a required field
-	Workteams []Workteam `type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s ListWorkteamsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListWorkteams = "ListWorkteams"
 
@@ -87,7 +26,7 @@ const opListWorkteams = "ListWorkteams"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListWorkteams
-func (c *Client) ListWorkteamsRequest(input *ListWorkteamsInput) ListWorkteamsRequest {
+func (c *Client) ListWorkteamsRequest(input *types.ListWorkteamsInput) ListWorkteamsRequest {
 	op := &aws.Operation{
 		Name:       opListWorkteams,
 		HTTPMethod: "POST",
@@ -101,10 +40,10 @@ func (c *Client) ListWorkteamsRequest(input *ListWorkteamsInput) ListWorkteamsRe
 	}
 
 	if input == nil {
-		input = &ListWorkteamsInput{}
+		input = &types.ListWorkteamsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListWorkteamsOutput{})
+	req := c.newRequest(op, input, &types.ListWorkteamsOutput{})
 	return ListWorkteamsRequest{Request: req, Input: input, Copy: c.ListWorkteamsRequest}
 }
 
@@ -112,8 +51,8 @@ func (c *Client) ListWorkteamsRequest(input *ListWorkteamsInput) ListWorkteamsRe
 // ListWorkteams API operation.
 type ListWorkteamsRequest struct {
 	*aws.Request
-	Input *ListWorkteamsInput
-	Copy  func(*ListWorkteamsInput) ListWorkteamsRequest
+	Input *types.ListWorkteamsInput
+	Copy  func(*types.ListWorkteamsInput) ListWorkteamsRequest
 }
 
 // Send marshals and sends the ListWorkteams API request.
@@ -125,7 +64,7 @@ func (r ListWorkteamsRequest) Send(ctx context.Context) (*ListWorkteamsResponse,
 	}
 
 	resp := &ListWorkteamsResponse{
-		ListWorkteamsOutput: r.Request.Data.(*ListWorkteamsOutput),
+		ListWorkteamsOutput: r.Request.Data.(*types.ListWorkteamsOutput),
 		response:            &aws.Response{Request: r.Request},
 	}
 
@@ -155,7 +94,7 @@ func NewListWorkteamsPaginator(req ListWorkteamsRequest) ListWorkteamsPaginator 
 	return ListWorkteamsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListWorkteamsInput
+				var inCpy *types.ListWorkteamsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -175,14 +114,14 @@ type ListWorkteamsPaginator struct {
 	aws.Pager
 }
 
-func (p *ListWorkteamsPaginator) CurrentPage() *ListWorkteamsOutput {
-	return p.Pager.CurrentPage().(*ListWorkteamsOutput)
+func (p *ListWorkteamsPaginator) CurrentPage() *types.ListWorkteamsOutput {
+	return p.Pager.CurrentPage().(*types.ListWorkteamsOutput)
 }
 
 // ListWorkteamsResponse is the response type for the
 // ListWorkteams API operation.
 type ListWorkteamsResponse struct {
-	*ListWorkteamsOutput
+	*types.ListWorkteamsOutput
 
 	response *aws.Response
 }

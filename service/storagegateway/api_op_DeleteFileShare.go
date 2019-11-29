@@ -6,59 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/storagegateway/types"
 )
-
-// DeleteFileShareInput
-type DeleteFileShareInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the file share to be deleted.
-	//
-	// FileShareARN is a required field
-	FileShareARN *string `min:"50" type:"string" required:"true"`
-
-	// If this value is set to true, the operation deletes a file share immediately
-	// and aborts all data uploads to AWS. Otherwise, the file share is not deleted
-	// until all data is uploaded to AWS. This process aborts the data upload process,
-	// and the file share enters the FORCE_DELETING status.
-	ForceDelete *bool `type:"boolean"`
-}
-
-// String returns the string representation
-func (s DeleteFileShareInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteFileShareInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteFileShareInput"}
-
-	if s.FileShareARN == nil {
-		invalidParams.Add(aws.NewErrParamRequired("FileShareARN"))
-	}
-	if s.FileShareARN != nil && len(*s.FileShareARN) < 50 {
-		invalidParams.Add(aws.NewErrParamMinLen("FileShareARN", 50))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// DeleteFileShareOutput
-type DeleteFileShareOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the deleted file share.
-	FileShareARN *string `min:"50" type:"string"`
-}
-
-// String returns the string representation
-func (s DeleteFileShareOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteFileShare = "DeleteFileShare"
 
@@ -76,7 +25,7 @@ const opDeleteFileShare = "DeleteFileShare"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DeleteFileShare
-func (c *Client) DeleteFileShareRequest(input *DeleteFileShareInput) DeleteFileShareRequest {
+func (c *Client) DeleteFileShareRequest(input *types.DeleteFileShareInput) DeleteFileShareRequest {
 	op := &aws.Operation{
 		Name:       opDeleteFileShare,
 		HTTPMethod: "POST",
@@ -84,10 +33,10 @@ func (c *Client) DeleteFileShareRequest(input *DeleteFileShareInput) DeleteFileS
 	}
 
 	if input == nil {
-		input = &DeleteFileShareInput{}
+		input = &types.DeleteFileShareInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteFileShareOutput{})
+	req := c.newRequest(op, input, &types.DeleteFileShareOutput{})
 	return DeleteFileShareRequest{Request: req, Input: input, Copy: c.DeleteFileShareRequest}
 }
 
@@ -95,8 +44,8 @@ func (c *Client) DeleteFileShareRequest(input *DeleteFileShareInput) DeleteFileS
 // DeleteFileShare API operation.
 type DeleteFileShareRequest struct {
 	*aws.Request
-	Input *DeleteFileShareInput
-	Copy  func(*DeleteFileShareInput) DeleteFileShareRequest
+	Input *types.DeleteFileShareInput
+	Copy  func(*types.DeleteFileShareInput) DeleteFileShareRequest
 }
 
 // Send marshals and sends the DeleteFileShare API request.
@@ -108,7 +57,7 @@ func (r DeleteFileShareRequest) Send(ctx context.Context) (*DeleteFileShareRespo
 	}
 
 	resp := &DeleteFileShareResponse{
-		DeleteFileShareOutput: r.Request.Data.(*DeleteFileShareOutput),
+		DeleteFileShareOutput: r.Request.Data.(*types.DeleteFileShareOutput),
 		response:              &aws.Response{Request: r.Request},
 	}
 
@@ -118,7 +67,7 @@ func (r DeleteFileShareRequest) Send(ctx context.Context) (*DeleteFileShareRespo
 // DeleteFileShareResponse is the response type for the
 // DeleteFileShare API operation.
 type DeleteFileShareResponse struct {
-	*DeleteFileShareOutput
+	*types.DeleteFileShareOutput
 
 	response *aws.Response
 }

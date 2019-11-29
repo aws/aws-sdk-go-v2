@@ -6,104 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/route53/types"
 )
-
-// A complex type that contains change information for the resource record set.
-type ChangeResourceRecordSetsInput struct {
-	_ struct{} `locationName:"ChangeResourceRecordSetsRequest" type:"structure" xmlURI:"https://route53.amazonaws.com/doc/2013-04-01/"`
-
-	// A complex type that contains an optional comment and the Changes element.
-	//
-	// ChangeBatch is a required field
-	ChangeBatch *ChangeBatch `type:"structure" required:"true"`
-
-	// The ID of the hosted zone that contains the resource record sets that you
-	// want to change.
-	//
-	// HostedZoneId is a required field
-	HostedZoneId *string `location:"uri" locationName:"Id" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s ChangeResourceRecordSetsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ChangeResourceRecordSetsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ChangeResourceRecordSetsInput"}
-
-	if s.ChangeBatch == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ChangeBatch"))
-	}
-
-	if s.HostedZoneId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("HostedZoneId"))
-	}
-	if s.ChangeBatch != nil {
-		if err := s.ChangeBatch.Validate(); err != nil {
-			invalidParams.AddNested("ChangeBatch", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ChangeResourceRecordSetsInput) MarshalFields(e protocol.FieldEncoder) error {
-
-	e.SetFields(protocol.BodyTarget, "ChangeResourceRecordSetsRequest", protocol.FieldMarshalerFunc(func(e protocol.FieldEncoder) error {
-		if s.ChangeBatch != nil {
-			v := s.ChangeBatch
-
-			metadata := protocol.Metadata{}
-			e.SetFields(protocol.BodyTarget, "ChangeBatch", v, metadata)
-		}
-		return nil
-	}), protocol.Metadata{XMLNamespaceURI: "https://route53.amazonaws.com/doc/2013-04-01/"})
-	if s.HostedZoneId != nil {
-		v := *s.HostedZoneId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "Id", protocol.StringValue(v), metadata)
-	}
-	return nil
-}
-
-// A complex type containing the response for the request.
-type ChangeResourceRecordSetsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A complex type that contains information about changes made to your hosted
-	// zone.
-	//
-	// This element contains an ID that you use when performing a GetChange (https://docs.aws.amazon.com/Route53/latest/APIReference/API_GetChange.html)
-	// action to get detailed information about the change.
-	//
-	// ChangeInfo is a required field
-	ChangeInfo *ChangeInfo `type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s ChangeResourceRecordSetsOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ChangeResourceRecordSetsOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.ChangeInfo != nil {
-		v := s.ChangeInfo
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "ChangeInfo", v, metadata)
-	}
-	return nil
-}
 
 const opChangeResourceRecordSets = "ChangeResourceRecordSets"
 
@@ -198,7 +102,7 @@ const opChangeResourceRecordSets = "ChangeResourceRecordSets"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/ChangeResourceRecordSets
-func (c *Client) ChangeResourceRecordSetsRequest(input *ChangeResourceRecordSetsInput) ChangeResourceRecordSetsRequest {
+func (c *Client) ChangeResourceRecordSetsRequest(input *types.ChangeResourceRecordSetsInput) ChangeResourceRecordSetsRequest {
 	op := &aws.Operation{
 		Name:       opChangeResourceRecordSets,
 		HTTPMethod: "POST",
@@ -206,10 +110,10 @@ func (c *Client) ChangeResourceRecordSetsRequest(input *ChangeResourceRecordSets
 	}
 
 	if input == nil {
-		input = &ChangeResourceRecordSetsInput{}
+		input = &types.ChangeResourceRecordSetsInput{}
 	}
 
-	req := c.newRequest(op, input, &ChangeResourceRecordSetsOutput{})
+	req := c.newRequest(op, input, &types.ChangeResourceRecordSetsOutput{})
 	return ChangeResourceRecordSetsRequest{Request: req, Input: input, Copy: c.ChangeResourceRecordSetsRequest}
 }
 
@@ -217,8 +121,8 @@ func (c *Client) ChangeResourceRecordSetsRequest(input *ChangeResourceRecordSets
 // ChangeResourceRecordSets API operation.
 type ChangeResourceRecordSetsRequest struct {
 	*aws.Request
-	Input *ChangeResourceRecordSetsInput
-	Copy  func(*ChangeResourceRecordSetsInput) ChangeResourceRecordSetsRequest
+	Input *types.ChangeResourceRecordSetsInput
+	Copy  func(*types.ChangeResourceRecordSetsInput) ChangeResourceRecordSetsRequest
 }
 
 // Send marshals and sends the ChangeResourceRecordSets API request.
@@ -230,7 +134,7 @@ func (r ChangeResourceRecordSetsRequest) Send(ctx context.Context) (*ChangeResou
 	}
 
 	resp := &ChangeResourceRecordSetsResponse{
-		ChangeResourceRecordSetsOutput: r.Request.Data.(*ChangeResourceRecordSetsOutput),
+		ChangeResourceRecordSetsOutput: r.Request.Data.(*types.ChangeResourceRecordSetsOutput),
 		response:                       &aws.Response{Request: r.Request},
 	}
 
@@ -240,7 +144,7 @@ func (r ChangeResourceRecordSetsRequest) Send(ctx context.Context) (*ChangeResou
 // ChangeResourceRecordSetsResponse is the response type for the
 // ChangeResourceRecordSets API operation.
 type ChangeResourceRecordSetsResponse struct {
-	*ChangeResourceRecordSetsOutput
+	*types.ChangeResourceRecordSetsOutput
 
 	response *aws.Response
 }

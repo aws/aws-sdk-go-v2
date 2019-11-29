@@ -6,67 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/query"
+	"github.com/aws/aws-sdk-go-v2/service/rds/types"
 )
-
-type AddRoleToDBInstanceInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the DB instance to associate the IAM role with.
-	//
-	// DBInstanceIdentifier is a required field
-	DBInstanceIdentifier *string `type:"string" required:"true"`
-
-	// The name of the feature for the DB instance that the IAM role is to be associated
-	// with. For the list of supported feature names, see DBEngineVersion.
-	//
-	// FeatureName is a required field
-	FeatureName *string `type:"string" required:"true"`
-
-	// The Amazon Resource Name (ARN) of the IAM role to associate with the DB instance,
-	// for example arn:aws:iam::123456789012:role/AccessRole.
-	//
-	// RoleArn is a required field
-	RoleArn *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s AddRoleToDBInstanceInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *AddRoleToDBInstanceInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "AddRoleToDBInstanceInput"}
-
-	if s.DBInstanceIdentifier == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DBInstanceIdentifier"))
-	}
-
-	if s.FeatureName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("FeatureName"))
-	}
-
-	if s.RoleArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("RoleArn"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type AddRoleToDBInstanceOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s AddRoleToDBInstanceOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opAddRoleToDBInstance = "AddRoleToDBInstance"
 
@@ -85,7 +28,7 @@ const opAddRoleToDBInstance = "AddRoleToDBInstance"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/AddRoleToDBInstance
-func (c *Client) AddRoleToDBInstanceRequest(input *AddRoleToDBInstanceInput) AddRoleToDBInstanceRequest {
+func (c *Client) AddRoleToDBInstanceRequest(input *types.AddRoleToDBInstanceInput) AddRoleToDBInstanceRequest {
 	op := &aws.Operation{
 		Name:       opAddRoleToDBInstance,
 		HTTPMethod: "POST",
@@ -93,10 +36,10 @@ func (c *Client) AddRoleToDBInstanceRequest(input *AddRoleToDBInstanceInput) Add
 	}
 
 	if input == nil {
-		input = &AddRoleToDBInstanceInput{}
+		input = &types.AddRoleToDBInstanceInput{}
 	}
 
-	req := c.newRequest(op, input, &AddRoleToDBInstanceOutput{})
+	req := c.newRequest(op, input, &types.AddRoleToDBInstanceOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return AddRoleToDBInstanceRequest{Request: req, Input: input, Copy: c.AddRoleToDBInstanceRequest}
@@ -106,8 +49,8 @@ func (c *Client) AddRoleToDBInstanceRequest(input *AddRoleToDBInstanceInput) Add
 // AddRoleToDBInstance API operation.
 type AddRoleToDBInstanceRequest struct {
 	*aws.Request
-	Input *AddRoleToDBInstanceInput
-	Copy  func(*AddRoleToDBInstanceInput) AddRoleToDBInstanceRequest
+	Input *types.AddRoleToDBInstanceInput
+	Copy  func(*types.AddRoleToDBInstanceInput) AddRoleToDBInstanceRequest
 }
 
 // Send marshals and sends the AddRoleToDBInstance API request.
@@ -119,7 +62,7 @@ func (r AddRoleToDBInstanceRequest) Send(ctx context.Context) (*AddRoleToDBInsta
 	}
 
 	resp := &AddRoleToDBInstanceResponse{
-		AddRoleToDBInstanceOutput: r.Request.Data.(*AddRoleToDBInstanceOutput),
+		AddRoleToDBInstanceOutput: r.Request.Data.(*types.AddRoleToDBInstanceOutput),
 		response:                  &aws.Response{Request: r.Request},
 	}
 
@@ -129,7 +72,7 @@ func (r AddRoleToDBInstanceRequest) Send(ctx context.Context) (*AddRoleToDBInsta
 // AddRoleToDBInstanceResponse is the response type for the
 // AddRoleToDBInstance API operation.
 type AddRoleToDBInstanceResponse struct {
-	*AddRoleToDBInstanceOutput
+	*types.AddRoleToDBInstanceOutput
 
 	response *aws.Response
 }

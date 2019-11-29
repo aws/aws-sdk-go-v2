@@ -6,55 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/personalize/types"
 )
-
-type ListSolutionVersionsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The maximum number of solution versions to return.
-	MaxResults *int64 `locationName:"maxResults" min:"1" type:"integer"`
-
-	// A token returned from the previous call to ListSolutionVersions for getting
-	// the next set of solution versions (if they exist).
-	NextToken *string `locationName:"nextToken" type:"string"`
-
-	// The Amazon Resource Name (ARN) of the solution.
-	SolutionArn *string `locationName:"solutionArn" type:"string"`
-}
-
-// String returns the string representation
-func (s ListSolutionVersionsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListSolutionVersionsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListSolutionVersionsInput"}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ListSolutionVersionsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A token for getting the next set of solution versions (if they exist).
-	NextToken *string `locationName:"nextToken" type:"string"`
-
-	// A list of solution versions describing the version properties.
-	SolutionVersions []SolutionVersionSummary `locationName:"solutionVersions" type:"list"`
-}
-
-// String returns the string representation
-func (s ListSolutionVersionsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListSolutionVersions = "ListSolutionVersions"
 
@@ -74,7 +27,7 @@ const opListSolutionVersions = "ListSolutionVersions"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/ListSolutionVersions
-func (c *Client) ListSolutionVersionsRequest(input *ListSolutionVersionsInput) ListSolutionVersionsRequest {
+func (c *Client) ListSolutionVersionsRequest(input *types.ListSolutionVersionsInput) ListSolutionVersionsRequest {
 	op := &aws.Operation{
 		Name:       opListSolutionVersions,
 		HTTPMethod: "POST",
@@ -88,10 +41,10 @@ func (c *Client) ListSolutionVersionsRequest(input *ListSolutionVersionsInput) L
 	}
 
 	if input == nil {
-		input = &ListSolutionVersionsInput{}
+		input = &types.ListSolutionVersionsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListSolutionVersionsOutput{})
+	req := c.newRequest(op, input, &types.ListSolutionVersionsOutput{})
 	return ListSolutionVersionsRequest{Request: req, Input: input, Copy: c.ListSolutionVersionsRequest}
 }
 
@@ -99,8 +52,8 @@ func (c *Client) ListSolutionVersionsRequest(input *ListSolutionVersionsInput) L
 // ListSolutionVersions API operation.
 type ListSolutionVersionsRequest struct {
 	*aws.Request
-	Input *ListSolutionVersionsInput
-	Copy  func(*ListSolutionVersionsInput) ListSolutionVersionsRequest
+	Input *types.ListSolutionVersionsInput
+	Copy  func(*types.ListSolutionVersionsInput) ListSolutionVersionsRequest
 }
 
 // Send marshals and sends the ListSolutionVersions API request.
@@ -112,7 +65,7 @@ func (r ListSolutionVersionsRequest) Send(ctx context.Context) (*ListSolutionVer
 	}
 
 	resp := &ListSolutionVersionsResponse{
-		ListSolutionVersionsOutput: r.Request.Data.(*ListSolutionVersionsOutput),
+		ListSolutionVersionsOutput: r.Request.Data.(*types.ListSolutionVersionsOutput),
 		response:                   &aws.Response{Request: r.Request},
 	}
 
@@ -142,7 +95,7 @@ func NewListSolutionVersionsPaginator(req ListSolutionVersionsRequest) ListSolut
 	return ListSolutionVersionsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListSolutionVersionsInput
+				var inCpy *types.ListSolutionVersionsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -162,14 +115,14 @@ type ListSolutionVersionsPaginator struct {
 	aws.Pager
 }
 
-func (p *ListSolutionVersionsPaginator) CurrentPage() *ListSolutionVersionsOutput {
-	return p.Pager.CurrentPage().(*ListSolutionVersionsOutput)
+func (p *ListSolutionVersionsPaginator) CurrentPage() *types.ListSolutionVersionsOutput {
+	return p.Pager.CurrentPage().(*types.ListSolutionVersionsOutput)
 }
 
 // ListSolutionVersionsResponse is the response type for the
 // ListSolutionVersions API operation.
 type ListSolutionVersionsResponse struct {
-	*ListSolutionVersionsOutput
+	*types.ListSolutionVersionsOutput
 
 	response *aws.Response
 }

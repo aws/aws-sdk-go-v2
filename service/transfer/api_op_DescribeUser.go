@@ -6,69 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/transfer/types"
 )
-
-type DescribeUserInput struct {
-	_ struct{} `type:"structure"`
-
-	// A system-assigned unique identifier for an SFTP server that has this user
-	// assigned.
-	//
-	// ServerId is a required field
-	ServerId *string `type:"string" required:"true"`
-
-	// The name of the user assigned to one or more servers. User names are part
-	// of the sign-in credentials to use the AWS Transfer for SFTP service and perform
-	// file transfer tasks.
-	//
-	// UserName is a required field
-	UserName *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeUserInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeUserInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeUserInput"}
-
-	if s.ServerId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ServerId"))
-	}
-
-	if s.UserName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("UserName"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribeUserOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A system-assigned unique identifier for an SFTP server that has this user
-	// assigned.
-	//
-	// ServerId is a required field
-	ServerId *string `type:"string" required:"true"`
-
-	// An array containing the properties of the user account for the ServerID value
-	// that you specified.
-	//
-	// User is a required field
-	User *DescribedUser `type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeUserOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeUser = "DescribeUser"
 
@@ -89,7 +28,7 @@ const opDescribeUser = "DescribeUser"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/DescribeUser
-func (c *Client) DescribeUserRequest(input *DescribeUserInput) DescribeUserRequest {
+func (c *Client) DescribeUserRequest(input *types.DescribeUserInput) DescribeUserRequest {
 	op := &aws.Operation{
 		Name:       opDescribeUser,
 		HTTPMethod: "POST",
@@ -97,10 +36,10 @@ func (c *Client) DescribeUserRequest(input *DescribeUserInput) DescribeUserReque
 	}
 
 	if input == nil {
-		input = &DescribeUserInput{}
+		input = &types.DescribeUserInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeUserOutput{})
+	req := c.newRequest(op, input, &types.DescribeUserOutput{})
 	return DescribeUserRequest{Request: req, Input: input, Copy: c.DescribeUserRequest}
 }
 
@@ -108,8 +47,8 @@ func (c *Client) DescribeUserRequest(input *DescribeUserInput) DescribeUserReque
 // DescribeUser API operation.
 type DescribeUserRequest struct {
 	*aws.Request
-	Input *DescribeUserInput
-	Copy  func(*DescribeUserInput) DescribeUserRequest
+	Input *types.DescribeUserInput
+	Copy  func(*types.DescribeUserInput) DescribeUserRequest
 }
 
 // Send marshals and sends the DescribeUser API request.
@@ -121,7 +60,7 @@ func (r DescribeUserRequest) Send(ctx context.Context) (*DescribeUserResponse, e
 	}
 
 	resp := &DescribeUserResponse{
-		DescribeUserOutput: r.Request.Data.(*DescribeUserOutput),
+		DescribeUserOutput: r.Request.Data.(*types.DescribeUserOutput),
 		response:           &aws.Response{Request: r.Request},
 	}
 
@@ -131,7 +70,7 @@ func (r DescribeUserRequest) Send(ctx context.Context) (*DescribeUserResponse, e
 // DescribeUserResponse is the response type for the
 // DescribeUser API operation.
 type DescribeUserResponse struct {
-	*DescribeUserOutput
+	*types.DescribeUserOutput
 
 	response *aws.Response
 }

@@ -4,88 +4,10 @@ package databasemigrationservice
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/databasemigrationservice/types"
 )
-
-type DescribeTableStatisticsInput struct {
-	_ struct{} `type:"structure"`
-
-	// Filters applied to the describe table statistics action.
-	//
-	// Valid filter names: schema-name | table-name | table-state
-	//
-	// A combination of filters creates an AND condition where each record matches
-	// all specified filters.
-	Filters []Filter `type:"list"`
-
-	// An optional pagination token provided by a previous request. If this parameter
-	// is specified, the response includes only records beyond the marker, up to
-	// the value specified by MaxRecords.
-	Marker *string `type:"string"`
-
-	// The maximum number of records to include in the response. If more records
-	// exist than the specified MaxRecords value, a pagination token called a marker
-	// is included in the response so that the remaining results can be retrieved.
-	//
-	// Default: 100
-	//
-	// Constraints: Minimum 20, maximum 500.
-	MaxRecords *int64 `type:"integer"`
-
-	// The Amazon Resource Name (ARN) of the replication task.
-	//
-	// ReplicationTaskArn is a required field
-	ReplicationTaskArn *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeTableStatisticsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeTableStatisticsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeTableStatisticsInput"}
-
-	if s.ReplicationTaskArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ReplicationTaskArn"))
-	}
-	if s.Filters != nil {
-		for i, v := range s.Filters {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribeTableStatisticsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// An optional pagination token provided by a previous request. If this parameter
-	// is specified, the response includes only records beyond the marker, up to
-	// the value specified by MaxRecords.
-	Marker *string `type:"string"`
-
-	// The Amazon Resource Name (ARN) of the replication task.
-	ReplicationTaskArn *string `type:"string"`
-
-	// The table statistics.
-	TableStatistics []TableStatistics `type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeTableStatisticsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeTableStatistics = "DescribeTableStatistics"
 
@@ -107,7 +29,7 @@ const opDescribeTableStatistics = "DescribeTableStatistics"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeTableStatistics
-func (c *Client) DescribeTableStatisticsRequest(input *DescribeTableStatisticsInput) DescribeTableStatisticsRequest {
+func (c *Client) DescribeTableStatisticsRequest(input *types.DescribeTableStatisticsInput) DescribeTableStatisticsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeTableStatistics,
 		HTTPMethod: "POST",
@@ -121,10 +43,10 @@ func (c *Client) DescribeTableStatisticsRequest(input *DescribeTableStatisticsIn
 	}
 
 	if input == nil {
-		input = &DescribeTableStatisticsInput{}
+		input = &types.DescribeTableStatisticsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeTableStatisticsOutput{})
+	req := c.newRequest(op, input, &types.DescribeTableStatisticsOutput{})
 	return DescribeTableStatisticsRequest{Request: req, Input: input, Copy: c.DescribeTableStatisticsRequest}
 }
 
@@ -132,8 +54,8 @@ func (c *Client) DescribeTableStatisticsRequest(input *DescribeTableStatisticsIn
 // DescribeTableStatistics API operation.
 type DescribeTableStatisticsRequest struct {
 	*aws.Request
-	Input *DescribeTableStatisticsInput
-	Copy  func(*DescribeTableStatisticsInput) DescribeTableStatisticsRequest
+	Input *types.DescribeTableStatisticsInput
+	Copy  func(*types.DescribeTableStatisticsInput) DescribeTableStatisticsRequest
 }
 
 // Send marshals and sends the DescribeTableStatistics API request.
@@ -145,7 +67,7 @@ func (r DescribeTableStatisticsRequest) Send(ctx context.Context) (*DescribeTabl
 	}
 
 	resp := &DescribeTableStatisticsResponse{
-		DescribeTableStatisticsOutput: r.Request.Data.(*DescribeTableStatisticsOutput),
+		DescribeTableStatisticsOutput: r.Request.Data.(*types.DescribeTableStatisticsOutput),
 		response:                      &aws.Response{Request: r.Request},
 	}
 
@@ -175,7 +97,7 @@ func NewDescribeTableStatisticsPaginator(req DescribeTableStatisticsRequest) Des
 	return DescribeTableStatisticsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *DescribeTableStatisticsInput
+				var inCpy *types.DescribeTableStatisticsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -195,14 +117,14 @@ type DescribeTableStatisticsPaginator struct {
 	aws.Pager
 }
 
-func (p *DescribeTableStatisticsPaginator) CurrentPage() *DescribeTableStatisticsOutput {
-	return p.Pager.CurrentPage().(*DescribeTableStatisticsOutput)
+func (p *DescribeTableStatisticsPaginator) CurrentPage() *types.DescribeTableStatisticsOutput {
+	return p.Pager.CurrentPage().(*types.DescribeTableStatisticsOutput)
 }
 
 // DescribeTableStatisticsResponse is the response type for the
 // DescribeTableStatistics API operation.
 type DescribeTableStatisticsResponse struct {
-	*DescribeTableStatisticsOutput
+	*types.DescribeTableStatisticsOutput
 
 	response *aws.Response
 }

@@ -6,116 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/lambda/types"
 )
-
-type ListFunctionsInput struct {
-	_ struct{} `type:"structure"`
-
-	// Set to ALL to include entries for all published versions of each function.
-	FunctionVersion FunctionVersion `location:"querystring" locationName:"FunctionVersion" type:"string" enum:"true"`
-
-	// Specify the pagination token that's returned by a previous request to retrieve
-	// the next page of results.
-	Marker *string `location:"querystring" locationName:"Marker" type:"string"`
-
-	// For Lambda@Edge functions, the AWS Region of the master function. For example,
-	// us-east-2 or ALL. If specified, you must set FunctionVersion to ALL.
-	MasterRegion *string `location:"querystring" locationName:"MasterRegion" type:"string"`
-
-	// Specify a value between 1 and 50 to limit the number of functions in the
-	// response.
-	MaxItems *int64 `location:"querystring" locationName:"MaxItems" min:"1" type:"integer"`
-}
-
-// String returns the string representation
-func (s ListFunctionsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListFunctionsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListFunctionsInput"}
-	if s.MaxItems != nil && *s.MaxItems < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxItems", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListFunctionsInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if len(s.FunctionVersion) > 0 {
-		v := s.FunctionVersion
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "FunctionVersion", protocol.QuotedValue{ValueMarshaler: v}, metadata)
-	}
-	if s.Marker != nil {
-		v := *s.Marker
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "Marker", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.MasterRegion != nil {
-		v := *s.MasterRegion
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "MasterRegion", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.MaxItems != nil {
-		v := *s.MaxItems
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "MaxItems", protocol.Int64Value(v), metadata)
-	}
-	return nil
-}
-
-// A list of Lambda functions.
-type ListFunctionsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A list of Lambda functions.
-	Functions []FunctionConfiguration `type:"list"`
-
-	// The pagination token that's included if more results are available.
-	NextMarker *string `type:"string"`
-}
-
-// String returns the string representation
-func (s ListFunctionsOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListFunctionsOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.Functions != nil {
-		v := s.Functions
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "Functions", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	if s.NextMarker != nil {
-		v := *s.NextMarker
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "NextMarker", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opListFunctions = "ListFunctions"
 
@@ -137,7 +29,7 @@ const opListFunctions = "ListFunctions"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/ListFunctions
-func (c *Client) ListFunctionsRequest(input *ListFunctionsInput) ListFunctionsRequest {
+func (c *Client) ListFunctionsRequest(input *types.ListFunctionsInput) ListFunctionsRequest {
 	op := &aws.Operation{
 		Name:       opListFunctions,
 		HTTPMethod: "GET",
@@ -151,10 +43,10 @@ func (c *Client) ListFunctionsRequest(input *ListFunctionsInput) ListFunctionsRe
 	}
 
 	if input == nil {
-		input = &ListFunctionsInput{}
+		input = &types.ListFunctionsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListFunctionsOutput{})
+	req := c.newRequest(op, input, &types.ListFunctionsOutput{})
 	return ListFunctionsRequest{Request: req, Input: input, Copy: c.ListFunctionsRequest}
 }
 
@@ -162,8 +54,8 @@ func (c *Client) ListFunctionsRequest(input *ListFunctionsInput) ListFunctionsRe
 // ListFunctions API operation.
 type ListFunctionsRequest struct {
 	*aws.Request
-	Input *ListFunctionsInput
-	Copy  func(*ListFunctionsInput) ListFunctionsRequest
+	Input *types.ListFunctionsInput
+	Copy  func(*types.ListFunctionsInput) ListFunctionsRequest
 }
 
 // Send marshals and sends the ListFunctions API request.
@@ -175,7 +67,7 @@ func (r ListFunctionsRequest) Send(ctx context.Context) (*ListFunctionsResponse,
 	}
 
 	resp := &ListFunctionsResponse{
-		ListFunctionsOutput: r.Request.Data.(*ListFunctionsOutput),
+		ListFunctionsOutput: r.Request.Data.(*types.ListFunctionsOutput),
 		response:            &aws.Response{Request: r.Request},
 	}
 
@@ -205,7 +97,7 @@ func NewListFunctionsPaginator(req ListFunctionsRequest) ListFunctionsPaginator 
 	return ListFunctionsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListFunctionsInput
+				var inCpy *types.ListFunctionsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -225,14 +117,14 @@ type ListFunctionsPaginator struct {
 	aws.Pager
 }
 
-func (p *ListFunctionsPaginator) CurrentPage() *ListFunctionsOutput {
-	return p.Pager.CurrentPage().(*ListFunctionsOutput)
+func (p *ListFunctionsPaginator) CurrentPage() *types.ListFunctionsOutput {
+	return p.Pager.CurrentPage().(*types.ListFunctionsOutput)
 }
 
 // ListFunctionsResponse is the response type for the
 // ListFunctions API operation.
 type ListFunctionsResponse struct {
-	*ListFunctionsOutput
+	*types.ListFunctionsOutput
 
 	response *aws.Response
 }

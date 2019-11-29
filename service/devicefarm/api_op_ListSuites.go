@@ -6,65 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/devicefarm/types"
 )
-
-// Represents a request to the list suites operation.
-type ListSuitesInput struct {
-	_ struct{} `type:"structure"`
-
-	// The job's Amazon Resource Name (ARN).
-	//
-	// Arn is a required field
-	Arn *string `locationName:"arn" min:"32" type:"string" required:"true"`
-
-	// An identifier that was returned from the previous call to this operation,
-	// which can be used to return the next set of items in the list.
-	NextToken *string `locationName:"nextToken" min:"4" type:"string"`
-}
-
-// String returns the string representation
-func (s ListSuitesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListSuitesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListSuitesInput"}
-
-	if s.Arn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Arn"))
-	}
-	if s.Arn != nil && len(*s.Arn) < 32 {
-		invalidParams.Add(aws.NewErrParamMinLen("Arn", 32))
-	}
-	if s.NextToken != nil && len(*s.NextToken) < 4 {
-		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 4))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Represents the result of a list suites request.
-type ListSuitesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// If the number of items that are returned is significantly large, this is
-	// an identifier that is also returned, which can be used in a subsequent call
-	// to this operation to return the next set of items in the list.
-	NextToken *string `locationName:"nextToken" min:"4" type:"string"`
-
-	// Information about the suites.
-	Suites []Suite `locationName:"suites" type:"list"`
-}
-
-// String returns the string representation
-func (s ListSuitesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListSuites = "ListSuites"
 
@@ -81,7 +24,7 @@ const opListSuites = "ListSuites"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ListSuites
-func (c *Client) ListSuitesRequest(input *ListSuitesInput) ListSuitesRequest {
+func (c *Client) ListSuitesRequest(input *types.ListSuitesInput) ListSuitesRequest {
 	op := &aws.Operation{
 		Name:       opListSuites,
 		HTTPMethod: "POST",
@@ -95,10 +38,10 @@ func (c *Client) ListSuitesRequest(input *ListSuitesInput) ListSuitesRequest {
 	}
 
 	if input == nil {
-		input = &ListSuitesInput{}
+		input = &types.ListSuitesInput{}
 	}
 
-	req := c.newRequest(op, input, &ListSuitesOutput{})
+	req := c.newRequest(op, input, &types.ListSuitesOutput{})
 	return ListSuitesRequest{Request: req, Input: input, Copy: c.ListSuitesRequest}
 }
 
@@ -106,8 +49,8 @@ func (c *Client) ListSuitesRequest(input *ListSuitesInput) ListSuitesRequest {
 // ListSuites API operation.
 type ListSuitesRequest struct {
 	*aws.Request
-	Input *ListSuitesInput
-	Copy  func(*ListSuitesInput) ListSuitesRequest
+	Input *types.ListSuitesInput
+	Copy  func(*types.ListSuitesInput) ListSuitesRequest
 }
 
 // Send marshals and sends the ListSuites API request.
@@ -119,7 +62,7 @@ func (r ListSuitesRequest) Send(ctx context.Context) (*ListSuitesResponse, error
 	}
 
 	resp := &ListSuitesResponse{
-		ListSuitesOutput: r.Request.Data.(*ListSuitesOutput),
+		ListSuitesOutput: r.Request.Data.(*types.ListSuitesOutput),
 		response:         &aws.Response{Request: r.Request},
 	}
 
@@ -149,7 +92,7 @@ func NewListSuitesPaginator(req ListSuitesRequest) ListSuitesPaginator {
 	return ListSuitesPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListSuitesInput
+				var inCpy *types.ListSuitesInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -169,14 +112,14 @@ type ListSuitesPaginator struct {
 	aws.Pager
 }
 
-func (p *ListSuitesPaginator) CurrentPage() *ListSuitesOutput {
-	return p.Pager.CurrentPage().(*ListSuitesOutput)
+func (p *ListSuitesPaginator) CurrentPage() *types.ListSuitesOutput {
+	return p.Pager.CurrentPage().(*types.ListSuitesOutput)
 }
 
 // ListSuitesResponse is the response type for the
 // ListSuites API operation.
 type ListSuitesResponse struct {
-	*ListSuitesOutput
+	*types.ListSuitesOutput
 
 	response *aws.Response
 }

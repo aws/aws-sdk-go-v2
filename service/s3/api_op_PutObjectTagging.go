@@ -6,118 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/s3/types"
 )
-
-type PutObjectTaggingInput struct {
-	_ struct{} `type:"structure" payload:"Tagging"`
-
-	// Bucket is a required field
-	Bucket *string `location:"uri" locationName:"Bucket" type:"string" required:"true"`
-
-	// Key is a required field
-	Key *string `location:"uri" locationName:"Key" min:"1" type:"string" required:"true"`
-
-	// Tagging is a required field
-	Tagging *Tagging `locationName:"Tagging" type:"structure" required:"true" xmlURI:"http://s3.amazonaws.com/doc/2006-03-01/"`
-
-	VersionId *string `location:"querystring" locationName:"versionId" type:"string"`
-}
-
-// String returns the string representation
-func (s PutObjectTaggingInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *PutObjectTaggingInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "PutObjectTaggingInput"}
-
-	if s.Bucket == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Bucket"))
-	}
-
-	if s.Key == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Key"))
-	}
-	if s.Key != nil && len(*s.Key) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Key", 1))
-	}
-
-	if s.Tagging == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Tagging"))
-	}
-	if s.Tagging != nil {
-		if err := s.Tagging.Validate(); err != nil {
-			invalidParams.AddNested("Tagging", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-func (s *PutObjectTaggingInput) getBucket() (v string) {
-	if s.Bucket == nil {
-		return v
-	}
-	return *s.Bucket
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s PutObjectTaggingInput) MarshalFields(e protocol.FieldEncoder) error {
-
-	if s.Bucket != nil {
-		v := *s.Bucket
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "Bucket", protocol.StringValue(v), metadata)
-	}
-	if s.Key != nil {
-		v := *s.Key
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "Key", protocol.StringValue(v), metadata)
-	}
-	if s.Tagging != nil {
-		v := s.Tagging
-
-		metadata := protocol.Metadata{XMLNamespaceURI: "http://s3.amazonaws.com/doc/2006-03-01/"}
-		e.SetFields(protocol.PayloadTarget, "Tagging", v, metadata)
-	}
-	if s.VersionId != nil {
-		v := *s.VersionId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "versionId", protocol.StringValue(v), metadata)
-	}
-	return nil
-}
-
-type PutObjectTaggingOutput struct {
-	_ struct{} `type:"structure"`
-
-	VersionId *string `location:"header" locationName:"x-amz-version-id" type:"string"`
-}
-
-// String returns the string representation
-func (s PutObjectTaggingOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s PutObjectTaggingOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.VersionId != nil {
-		v := *s.VersionId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "x-amz-version-id", protocol.StringValue(v), metadata)
-	}
-	return nil
-}
 
 const opPutObjectTagging = "PutObjectTagging"
 
@@ -125,6 +15,43 @@ const opPutObjectTagging = "PutObjectTagging"
 // Amazon Simple Storage Service.
 //
 // Sets the supplied tag-set to an object that already exists in a bucket
+//
+// A tag is a key-value pair. You can associate tags with an object by sending
+// a PUT request against the tagging subresource that is associated with the
+// object. You can retrieve tags by sending a GET request. For more information,
+// see GetObjectTagging.
+//
+// For tagging-related restrictions related to characters and encodings, see
+// Tag Restrictions (https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/allocation-tag-restrictions.html).
+// Note that Amazon S3 limits the maximum number of tags to 10 tags per object.
+//
+// To use this operation, you must have permission to perform the s3:PutObjectTagging
+// action. By default, the bucket owner has this permission and can grant this
+// permission to others.
+//
+// To put tags of any other version, use the versionId query parameter. You
+// also need permission for the s3:PutObjectVersionTagging action.
+//
+// For information about the Amazon S3 object tagging feature, see Object Tagging
+// (https://docs.aws.amazon.com/AmazonS3/latest/dev/object-tagging.html).
+//
+// Special Errors
+//
+//    * Code: InvalidTagError Cause: The tag provided was not a valid tag. This
+//    error can occur if the tag did not pass input validation. For more information,
+//    see Object Tagging (https://docs.aws.amazon.com/AmazonS3/latest/dev/object-tagging.html).
+//
+//    * Code: MalformedXMLError Cause: The XML provided does not match the schema.
+//
+//    * Code: OperationAbortedError Cause: A conflicting conditional operation
+//    is currently in progress against this resource. Please try again.
+//
+//    * Code: InternalError Cause: The service was unable to apply the provided
+//    tag to the object.
+//
+// Related Resources
+//
+//    * GetObjectTagging
 //
 //    // Example sending a request using PutObjectTaggingRequest.
 //    req := client.PutObjectTaggingRequest(params)
@@ -134,7 +61,7 @@ const opPutObjectTagging = "PutObjectTagging"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutObjectTagging
-func (c *Client) PutObjectTaggingRequest(input *PutObjectTaggingInput) PutObjectTaggingRequest {
+func (c *Client) PutObjectTaggingRequest(input *types.PutObjectTaggingInput) PutObjectTaggingRequest {
 	op := &aws.Operation{
 		Name:       opPutObjectTagging,
 		HTTPMethod: "PUT",
@@ -142,10 +69,10 @@ func (c *Client) PutObjectTaggingRequest(input *PutObjectTaggingInput) PutObject
 	}
 
 	if input == nil {
-		input = &PutObjectTaggingInput{}
+		input = &types.PutObjectTaggingInput{}
 	}
 
-	req := c.newRequest(op, input, &PutObjectTaggingOutput{})
+	req := c.newRequest(op, input, &types.PutObjectTaggingOutput{})
 	return PutObjectTaggingRequest{Request: req, Input: input, Copy: c.PutObjectTaggingRequest}
 }
 
@@ -153,8 +80,8 @@ func (c *Client) PutObjectTaggingRequest(input *PutObjectTaggingInput) PutObject
 // PutObjectTagging API operation.
 type PutObjectTaggingRequest struct {
 	*aws.Request
-	Input *PutObjectTaggingInput
-	Copy  func(*PutObjectTaggingInput) PutObjectTaggingRequest
+	Input *types.PutObjectTaggingInput
+	Copy  func(*types.PutObjectTaggingInput) PutObjectTaggingRequest
 }
 
 // Send marshals and sends the PutObjectTagging API request.
@@ -166,7 +93,7 @@ func (r PutObjectTaggingRequest) Send(ctx context.Context) (*PutObjectTaggingRes
 	}
 
 	resp := &PutObjectTaggingResponse{
-		PutObjectTaggingOutput: r.Request.Data.(*PutObjectTaggingOutput),
+		PutObjectTaggingOutput: r.Request.Data.(*types.PutObjectTaggingOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -176,7 +103,7 @@ func (r PutObjectTaggingRequest) Send(ctx context.Context) (*PutObjectTaggingRes
 // PutObjectTaggingResponse is the response type for the
 // PutObjectTagging API operation.
 type PutObjectTaggingResponse struct {
-	*PutObjectTaggingOutput
+	*types.PutObjectTaggingOutput
 
 	response *aws.Response
 }

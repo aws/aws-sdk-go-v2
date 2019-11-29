@@ -4,112 +4,10 @@ package redshift
 
 import (
 	"context"
-	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/redshift/types"
 )
-
-type DescribeEventsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The number of minutes prior to the time of the request for which to retrieve
-	// events. For example, if the request is sent at 18:00 and you specify a duration
-	// of 60, then only events which have occurred after 17:00 will be returned.
-	//
-	// Default: 60
-	Duration *int64 `type:"integer"`
-
-	// The end of the time interval for which to retrieve events, specified in ISO
-	// 8601 format. For more information about ISO 8601, go to the ISO8601 Wikipedia
-	// page. (http://en.wikipedia.org/wiki/ISO_8601)
-	//
-	// Example: 2009-07-08T18:00Z
-	EndTime *time.Time `type:"timestamp"`
-
-	// An optional parameter that specifies the starting point to return a set of
-	// response records. When the results of a DescribeEvents request exceed the
-	// value specified in MaxRecords, AWS returns a value in the Marker field of
-	// the response. You can retrieve the next set of response records by providing
-	// the returned marker value in the Marker parameter and retrying the request.
-	Marker *string `type:"string"`
-
-	// The maximum number of response records to return in each call. If the number
-	// of remaining response records exceeds the specified MaxRecords value, a value
-	// is returned in a marker field of the response. You can retrieve the next
-	// set of records by retrying the command with the returned marker value.
-	//
-	// Default: 100
-	//
-	// Constraints: minimum 20, maximum 100.
-	MaxRecords *int64 `type:"integer"`
-
-	// The identifier of the event source for which events will be returned. If
-	// this parameter is not specified, then all sources are included in the response.
-	//
-	// Constraints:
-	//
-	// If SourceIdentifier is supplied, SourceType must also be provided.
-	//
-	//    * Specify a cluster identifier when SourceType is cluster.
-	//
-	//    * Specify a cluster security group name when SourceType is cluster-security-group.
-	//
-	//    * Specify a cluster parameter group name when SourceType is cluster-parameter-group.
-	//
-	//    * Specify a cluster snapshot identifier when SourceType is cluster-snapshot.
-	SourceIdentifier *string `type:"string"`
-
-	// The event source to retrieve events for. If no value is specified, all events
-	// are returned.
-	//
-	// Constraints:
-	//
-	// If SourceType is supplied, SourceIdentifier must also be provided.
-	//
-	//    * Specify cluster when SourceIdentifier is a cluster identifier.
-	//
-	//    * Specify cluster-security-group when SourceIdentifier is a cluster security
-	//    group name.
-	//
-	//    * Specify cluster-parameter-group when SourceIdentifier is a cluster parameter
-	//    group name.
-	//
-	//    * Specify cluster-snapshot when SourceIdentifier is a cluster snapshot
-	//    identifier.
-	SourceType SourceType `type:"string" enum:"true"`
-
-	// The beginning of the time interval to retrieve events for, specified in ISO
-	// 8601 format. For more information about ISO 8601, go to the ISO8601 Wikipedia
-	// page. (http://en.wikipedia.org/wiki/ISO_8601)
-	//
-	// Example: 2009-07-08T18:00Z
-	StartTime *time.Time `type:"timestamp"`
-}
-
-// String returns the string representation
-func (s DescribeEventsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type DescribeEventsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A list of Event instances.
-	Events []Event `locationNameList:"Event" type:"list"`
-
-	// A value that indicates the starting point for the next set of response records
-	// in a subsequent request. If a value is returned in a response, you can retrieve
-	// the next set of records by providing this returned marker value in the Marker
-	// parameter and retrying the command. If the Marker field is empty, all response
-	// records have been retrieved for the request.
-	Marker *string `type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeEventsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeEvents = "DescribeEvents"
 
@@ -129,7 +27,7 @@ const opDescribeEvents = "DescribeEvents"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeEvents
-func (c *Client) DescribeEventsRequest(input *DescribeEventsInput) DescribeEventsRequest {
+func (c *Client) DescribeEventsRequest(input *types.DescribeEventsInput) DescribeEventsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeEvents,
 		HTTPMethod: "POST",
@@ -143,10 +41,10 @@ func (c *Client) DescribeEventsRequest(input *DescribeEventsInput) DescribeEvent
 	}
 
 	if input == nil {
-		input = &DescribeEventsInput{}
+		input = &types.DescribeEventsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeEventsOutput{})
+	req := c.newRequest(op, input, &types.DescribeEventsOutput{})
 	return DescribeEventsRequest{Request: req, Input: input, Copy: c.DescribeEventsRequest}
 }
 
@@ -154,8 +52,8 @@ func (c *Client) DescribeEventsRequest(input *DescribeEventsInput) DescribeEvent
 // DescribeEvents API operation.
 type DescribeEventsRequest struct {
 	*aws.Request
-	Input *DescribeEventsInput
-	Copy  func(*DescribeEventsInput) DescribeEventsRequest
+	Input *types.DescribeEventsInput
+	Copy  func(*types.DescribeEventsInput) DescribeEventsRequest
 }
 
 // Send marshals and sends the DescribeEvents API request.
@@ -167,7 +65,7 @@ func (r DescribeEventsRequest) Send(ctx context.Context) (*DescribeEventsRespons
 	}
 
 	resp := &DescribeEventsResponse{
-		DescribeEventsOutput: r.Request.Data.(*DescribeEventsOutput),
+		DescribeEventsOutput: r.Request.Data.(*types.DescribeEventsOutput),
 		response:             &aws.Response{Request: r.Request},
 	}
 
@@ -197,7 +95,7 @@ func NewDescribeEventsPaginator(req DescribeEventsRequest) DescribeEventsPaginat
 	return DescribeEventsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *DescribeEventsInput
+				var inCpy *types.DescribeEventsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -217,14 +115,14 @@ type DescribeEventsPaginator struct {
 	aws.Pager
 }
 
-func (p *DescribeEventsPaginator) CurrentPage() *DescribeEventsOutput {
-	return p.Pager.CurrentPage().(*DescribeEventsOutput)
+func (p *DescribeEventsPaginator) CurrentPage() *types.DescribeEventsOutput {
+	return p.Pager.CurrentPage().(*types.DescribeEventsOutput)
 }
 
 // DescribeEventsResponse is the response type for the
 // DescribeEvents API operation.
 type DescribeEventsResponse struct {
-	*DescribeEventsOutput
+	*types.DescribeEventsOutput
 
 	response *aws.Response
 }

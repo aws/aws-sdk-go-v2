@@ -6,87 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-type ModifyTrafficMirrorSessionInput struct {
-	_ struct{} `type:"structure"`
-
-	// The description to assign to the Traffic Mirror session.
-	Description *string `type:"string"`
-
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have
-	// the required permissions, the error response is DryRunOperation. Otherwise,
-	// it is UnauthorizedOperation.
-	DryRun *bool `type:"boolean"`
-
-	// The number of bytes in each packet to mirror. These are bytes after the VXLAN
-	// header. To mirror a subset, set this to the length (in bytes) to mirror.
-	// For example, if you set this value to 100, then the first 100 bytes that
-	// meet the filter criteria are copied to the target. Do not specify this parameter
-	// when you want to mirror the entire packet.
-	PacketLength *int64 `type:"integer"`
-
-	// The properties that you want to remove from the Traffic Mirror session.
-	//
-	// When you remove a property from a Traffic Mirror session, the property is
-	// set to the default.
-	RemoveFields []TrafficMirrorSessionField `locationName:"RemoveField" type:"list"`
-
-	// The session number determines the order in which sessions are evaluated when
-	// an interface is used by multiple sessions. The first session with a matching
-	// filter is the one that mirrors the packets.
-	//
-	// Valid values are 1-32766.
-	SessionNumber *int64 `type:"integer"`
-
-	// The ID of the Traffic Mirror filter.
-	TrafficMirrorFilterId *string `type:"string"`
-
-	// The ID of the Traffic Mirror session.
-	//
-	// TrafficMirrorSessionId is a required field
-	TrafficMirrorSessionId *string `type:"string" required:"true"`
-
-	// The Traffic Mirror target. The target must be in the same VPC as the source,
-	// or have a VPC peering connection with the source.
-	TrafficMirrorTargetId *string `type:"string"`
-
-	// The virtual network ID of the Traffic Mirror session.
-	VirtualNetworkId *int64 `type:"integer"`
-}
-
-// String returns the string representation
-func (s ModifyTrafficMirrorSessionInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ModifyTrafficMirrorSessionInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ModifyTrafficMirrorSessionInput"}
-
-	if s.TrafficMirrorSessionId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("TrafficMirrorSessionId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ModifyTrafficMirrorSessionOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Information about the Traffic Mirror session.
-	TrafficMirrorSession *TrafficMirrorSession `locationName:"trafficMirrorSession" type:"structure"`
-}
-
-// String returns the string representation
-func (s ModifyTrafficMirrorSessionOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opModifyTrafficMirrorSession = "ModifyTrafficMirrorSession"
 
@@ -103,7 +24,7 @@ const opModifyTrafficMirrorSession = "ModifyTrafficMirrorSession"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyTrafficMirrorSession
-func (c *Client) ModifyTrafficMirrorSessionRequest(input *ModifyTrafficMirrorSessionInput) ModifyTrafficMirrorSessionRequest {
+func (c *Client) ModifyTrafficMirrorSessionRequest(input *types.ModifyTrafficMirrorSessionInput) ModifyTrafficMirrorSessionRequest {
 	op := &aws.Operation{
 		Name:       opModifyTrafficMirrorSession,
 		HTTPMethod: "POST",
@@ -111,10 +32,10 @@ func (c *Client) ModifyTrafficMirrorSessionRequest(input *ModifyTrafficMirrorSes
 	}
 
 	if input == nil {
-		input = &ModifyTrafficMirrorSessionInput{}
+		input = &types.ModifyTrafficMirrorSessionInput{}
 	}
 
-	req := c.newRequest(op, input, &ModifyTrafficMirrorSessionOutput{})
+	req := c.newRequest(op, input, &types.ModifyTrafficMirrorSessionOutput{})
 	return ModifyTrafficMirrorSessionRequest{Request: req, Input: input, Copy: c.ModifyTrafficMirrorSessionRequest}
 }
 
@@ -122,8 +43,8 @@ func (c *Client) ModifyTrafficMirrorSessionRequest(input *ModifyTrafficMirrorSes
 // ModifyTrafficMirrorSession API operation.
 type ModifyTrafficMirrorSessionRequest struct {
 	*aws.Request
-	Input *ModifyTrafficMirrorSessionInput
-	Copy  func(*ModifyTrafficMirrorSessionInput) ModifyTrafficMirrorSessionRequest
+	Input *types.ModifyTrafficMirrorSessionInput
+	Copy  func(*types.ModifyTrafficMirrorSessionInput) ModifyTrafficMirrorSessionRequest
 }
 
 // Send marshals and sends the ModifyTrafficMirrorSession API request.
@@ -135,7 +56,7 @@ func (r ModifyTrafficMirrorSessionRequest) Send(ctx context.Context) (*ModifyTra
 	}
 
 	resp := &ModifyTrafficMirrorSessionResponse{
-		ModifyTrafficMirrorSessionOutput: r.Request.Data.(*ModifyTrafficMirrorSessionOutput),
+		ModifyTrafficMirrorSessionOutput: r.Request.Data.(*types.ModifyTrafficMirrorSessionOutput),
 		response:                         &aws.Response{Request: r.Request},
 	}
 
@@ -145,7 +66,7 @@ func (r ModifyTrafficMirrorSessionRequest) Send(ctx context.Context) (*ModifyTra
 // ModifyTrafficMirrorSessionResponse is the response type for the
 // ModifyTrafficMirrorSession API operation.
 type ModifyTrafficMirrorSessionResponse struct {
-	*ModifyTrafficMirrorSessionOutput
+	*types.ModifyTrafficMirrorSessionOutput
 
 	response *aws.Response
 }

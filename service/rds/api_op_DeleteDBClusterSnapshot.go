@@ -6,54 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/rds/types"
 )
-
-type DeleteDBClusterSnapshotInput struct {
-	_ struct{} `type:"structure"`
-
-	// The identifier of the DB cluster snapshot to delete.
-	//
-	// Constraints: Must be the name of an existing DB cluster snapshot in the available
-	// state.
-	//
-	// DBClusterSnapshotIdentifier is a required field
-	DBClusterSnapshotIdentifier *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteDBClusterSnapshotInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteDBClusterSnapshotInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteDBClusterSnapshotInput"}
-
-	if s.DBClusterSnapshotIdentifier == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DBClusterSnapshotIdentifier"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteDBClusterSnapshotOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Contains the details for an Amazon RDS DB cluster snapshot
-	//
-	// This data type is used as a response element in the DescribeDBClusterSnapshots
-	// action.
-	DBClusterSnapshot *DBClusterSnapshot `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteDBClusterSnapshotOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteDBClusterSnapshot = "DeleteDBClusterSnapshot"
 
@@ -78,7 +32,7 @@ const opDeleteDBClusterSnapshot = "DeleteDBClusterSnapshot"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteDBClusterSnapshot
-func (c *Client) DeleteDBClusterSnapshotRequest(input *DeleteDBClusterSnapshotInput) DeleteDBClusterSnapshotRequest {
+func (c *Client) DeleteDBClusterSnapshotRequest(input *types.DeleteDBClusterSnapshotInput) DeleteDBClusterSnapshotRequest {
 	op := &aws.Operation{
 		Name:       opDeleteDBClusterSnapshot,
 		HTTPMethod: "POST",
@@ -86,10 +40,10 @@ func (c *Client) DeleteDBClusterSnapshotRequest(input *DeleteDBClusterSnapshotIn
 	}
 
 	if input == nil {
-		input = &DeleteDBClusterSnapshotInput{}
+		input = &types.DeleteDBClusterSnapshotInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteDBClusterSnapshotOutput{})
+	req := c.newRequest(op, input, &types.DeleteDBClusterSnapshotOutput{})
 	return DeleteDBClusterSnapshotRequest{Request: req, Input: input, Copy: c.DeleteDBClusterSnapshotRequest}
 }
 
@@ -97,8 +51,8 @@ func (c *Client) DeleteDBClusterSnapshotRequest(input *DeleteDBClusterSnapshotIn
 // DeleteDBClusterSnapshot API operation.
 type DeleteDBClusterSnapshotRequest struct {
 	*aws.Request
-	Input *DeleteDBClusterSnapshotInput
-	Copy  func(*DeleteDBClusterSnapshotInput) DeleteDBClusterSnapshotRequest
+	Input *types.DeleteDBClusterSnapshotInput
+	Copy  func(*types.DeleteDBClusterSnapshotInput) DeleteDBClusterSnapshotRequest
 }
 
 // Send marshals and sends the DeleteDBClusterSnapshot API request.
@@ -110,7 +64,7 @@ func (r DeleteDBClusterSnapshotRequest) Send(ctx context.Context) (*DeleteDBClus
 	}
 
 	resp := &DeleteDBClusterSnapshotResponse{
-		DeleteDBClusterSnapshotOutput: r.Request.Data.(*DeleteDBClusterSnapshotOutput),
+		DeleteDBClusterSnapshotOutput: r.Request.Data.(*types.DeleteDBClusterSnapshotOutput),
 		response:                      &aws.Response{Request: r.Request},
 	}
 
@@ -120,7 +74,7 @@ func (r DeleteDBClusterSnapshotRequest) Send(ctx context.Context) (*DeleteDBClus
 // DeleteDBClusterSnapshotResponse is the response type for the
 // DeleteDBClusterSnapshot API operation.
 type DeleteDBClusterSnapshotResponse struct {
-	*DeleteDBClusterSnapshotOutput
+	*types.DeleteDBClusterSnapshotOutput
 
 	response *aws.Response
 }

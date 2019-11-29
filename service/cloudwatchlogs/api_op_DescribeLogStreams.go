@@ -6,96 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/cloudwatchlogs/types"
 )
-
-type DescribeLogStreamsInput struct {
-	_ struct{} `type:"structure"`
-
-	// If the value is true, results are returned in descending order. If the value
-	// is to false, results are returned in ascending order. The default value is
-	// false.
-	Descending *bool `locationName:"descending" type:"boolean"`
-
-	// The maximum number of items returned. If you don't specify a value, the default
-	// is up to 50 items.
-	Limit *int64 `locationName:"limit" min:"1" type:"integer"`
-
-	// The name of the log group.
-	//
-	// LogGroupName is a required field
-	LogGroupName *string `locationName:"logGroupName" min:"1" type:"string" required:"true"`
-
-	// The prefix to match.
-	//
-	// If orderBy is LastEventTime,you cannot specify this parameter.
-	LogStreamNamePrefix *string `locationName:"logStreamNamePrefix" min:"1" type:"string"`
-
-	// The token for the next set of items to return. (You received this token from
-	// a previous call.)
-	NextToken *string `locationName:"nextToken" min:"1" type:"string"`
-
-	// If the value is LogStreamName, the results are ordered by log stream name.
-	// If the value is LastEventTime, the results are ordered by the event time.
-	// The default value is LogStreamName.
-	//
-	// If you order the results by event time, you cannot specify the logStreamNamePrefix
-	// parameter.
-	//
-	// lastEventTimestamp represents the time of the most recent log event in the
-	// log stream in CloudWatch Logs. This number is expressed as the number of
-	// milliseconds after Jan 1, 1970 00:00:00 UTC. lastEventTimeStamp updates on
-	// an eventual consistency basis. It typically updates in less than an hour
-	// from ingestion, but may take longer in some rare situations.
-	OrderBy OrderBy `locationName:"orderBy" type:"string" enum:"true"`
-}
-
-// String returns the string representation
-func (s DescribeLogStreamsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeLogStreamsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeLogStreamsInput"}
-	if s.Limit != nil && *s.Limit < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("Limit", 1))
-	}
-
-	if s.LogGroupName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("LogGroupName"))
-	}
-	if s.LogGroupName != nil && len(*s.LogGroupName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("LogGroupName", 1))
-	}
-	if s.LogStreamNamePrefix != nil && len(*s.LogStreamNamePrefix) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("LogStreamNamePrefix", 1))
-	}
-	if s.NextToken != nil && len(*s.NextToken) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribeLogStreamsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The log streams.
-	LogStreams []LogStream `locationName:"logStreams" type:"list"`
-
-	// The token for the next set of items to return. The token expires after 24
-	// hours.
-	NextToken *string `locationName:"nextToken" min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeLogStreamsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeLogStreams = "DescribeLogStreams"
 
@@ -117,7 +29,7 @@ const opDescribeLogStreams = "DescribeLogStreams"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/DescribeLogStreams
-func (c *Client) DescribeLogStreamsRequest(input *DescribeLogStreamsInput) DescribeLogStreamsRequest {
+func (c *Client) DescribeLogStreamsRequest(input *types.DescribeLogStreamsInput) DescribeLogStreamsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeLogStreams,
 		HTTPMethod: "POST",
@@ -131,10 +43,10 @@ func (c *Client) DescribeLogStreamsRequest(input *DescribeLogStreamsInput) Descr
 	}
 
 	if input == nil {
-		input = &DescribeLogStreamsInput{}
+		input = &types.DescribeLogStreamsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeLogStreamsOutput{})
+	req := c.newRequest(op, input, &types.DescribeLogStreamsOutput{})
 	return DescribeLogStreamsRequest{Request: req, Input: input, Copy: c.DescribeLogStreamsRequest}
 }
 
@@ -142,8 +54,8 @@ func (c *Client) DescribeLogStreamsRequest(input *DescribeLogStreamsInput) Descr
 // DescribeLogStreams API operation.
 type DescribeLogStreamsRequest struct {
 	*aws.Request
-	Input *DescribeLogStreamsInput
-	Copy  func(*DescribeLogStreamsInput) DescribeLogStreamsRequest
+	Input *types.DescribeLogStreamsInput
+	Copy  func(*types.DescribeLogStreamsInput) DescribeLogStreamsRequest
 }
 
 // Send marshals and sends the DescribeLogStreams API request.
@@ -155,7 +67,7 @@ func (r DescribeLogStreamsRequest) Send(ctx context.Context) (*DescribeLogStream
 	}
 
 	resp := &DescribeLogStreamsResponse{
-		DescribeLogStreamsOutput: r.Request.Data.(*DescribeLogStreamsOutput),
+		DescribeLogStreamsOutput: r.Request.Data.(*types.DescribeLogStreamsOutput),
 		response:                 &aws.Response{Request: r.Request},
 	}
 
@@ -185,7 +97,7 @@ func NewDescribeLogStreamsPaginator(req DescribeLogStreamsRequest) DescribeLogSt
 	return DescribeLogStreamsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *DescribeLogStreamsInput
+				var inCpy *types.DescribeLogStreamsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -205,14 +117,14 @@ type DescribeLogStreamsPaginator struct {
 	aws.Pager
 }
 
-func (p *DescribeLogStreamsPaginator) CurrentPage() *DescribeLogStreamsOutput {
-	return p.Pager.CurrentPage().(*DescribeLogStreamsOutput)
+func (p *DescribeLogStreamsPaginator) CurrentPage() *types.DescribeLogStreamsOutput {
+	return p.Pager.CurrentPage().(*types.DescribeLogStreamsOutput)
 }
 
 // DescribeLogStreamsResponse is the response type for the
 // DescribeLogStreams API operation.
 type DescribeLogStreamsResponse struct {
-	*DescribeLogStreamsOutput
+	*types.DescribeLogStreamsOutput
 
 	response *aws.Response
 }

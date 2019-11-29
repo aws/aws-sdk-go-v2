@@ -6,45 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/applicationdiscoveryservice/types"
 )
-
-type DeleteApplicationsInput struct {
-	_ struct{} `type:"structure"`
-
-	// Configuration ID of an application to be deleted.
-	//
-	// ConfigurationIds is a required field
-	ConfigurationIds []string `locationName:"configurationIds" type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteApplicationsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteApplicationsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteApplicationsInput"}
-
-	if s.ConfigurationIds == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ConfigurationIds"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteApplicationsOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteApplicationsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteApplications = "DeleteApplications"
 
@@ -62,7 +25,7 @@ const opDeleteApplications = "DeleteApplications"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/discovery-2015-11-01/DeleteApplications
-func (c *Client) DeleteApplicationsRequest(input *DeleteApplicationsInput) DeleteApplicationsRequest {
+func (c *Client) DeleteApplicationsRequest(input *types.DeleteApplicationsInput) DeleteApplicationsRequest {
 	op := &aws.Operation{
 		Name:       opDeleteApplications,
 		HTTPMethod: "POST",
@@ -70,10 +33,10 @@ func (c *Client) DeleteApplicationsRequest(input *DeleteApplicationsInput) Delet
 	}
 
 	if input == nil {
-		input = &DeleteApplicationsInput{}
+		input = &types.DeleteApplicationsInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteApplicationsOutput{})
+	req := c.newRequest(op, input, &types.DeleteApplicationsOutput{})
 	return DeleteApplicationsRequest{Request: req, Input: input, Copy: c.DeleteApplicationsRequest}
 }
 
@@ -81,8 +44,8 @@ func (c *Client) DeleteApplicationsRequest(input *DeleteApplicationsInput) Delet
 // DeleteApplications API operation.
 type DeleteApplicationsRequest struct {
 	*aws.Request
-	Input *DeleteApplicationsInput
-	Copy  func(*DeleteApplicationsInput) DeleteApplicationsRequest
+	Input *types.DeleteApplicationsInput
+	Copy  func(*types.DeleteApplicationsInput) DeleteApplicationsRequest
 }
 
 // Send marshals and sends the DeleteApplications API request.
@@ -94,7 +57,7 @@ func (r DeleteApplicationsRequest) Send(ctx context.Context) (*DeleteApplication
 	}
 
 	resp := &DeleteApplicationsResponse{
-		DeleteApplicationsOutput: r.Request.Data.(*DeleteApplicationsOutput),
+		DeleteApplicationsOutput: r.Request.Data.(*types.DeleteApplicationsOutput),
 		response:                 &aws.Response{Request: r.Request},
 	}
 
@@ -104,7 +67,7 @@ func (r DeleteApplicationsRequest) Send(ctx context.Context) (*DeleteApplication
 // DeleteApplicationsResponse is the response type for the
 // DeleteApplications API operation.
 type DeleteApplicationsResponse struct {
-	*DeleteApplicationsOutput
+	*types.DeleteApplicationsOutput
 
 	response *aws.Response
 }

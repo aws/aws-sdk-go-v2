@@ -6,37 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/lightsail/types"
 )
-
-type GetDisksInput struct {
-	_ struct{} `type:"structure"`
-
-	// A token used for advancing to the next page of results from your GetDisks
-	// request.
-	PageToken *string `locationName:"pageToken" type:"string"`
-}
-
-// String returns the string representation
-func (s GetDisksInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type GetDisksOutput struct {
-	_ struct{} `type:"structure"`
-
-	// An array of objects containing information about all block storage disks.
-	Disks []Disk `locationName:"disks" type:"list"`
-
-	// A token used for advancing to the next page of results from your GetDisks
-	// request.
-	NextPageToken *string `locationName:"nextPageToken" type:"string"`
-}
-
-// String returns the string representation
-func (s GetDisksOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetDisks = "GetDisks"
 
@@ -58,7 +29,7 @@ const opGetDisks = "GetDisks"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetDisks
-func (c *Client) GetDisksRequest(input *GetDisksInput) GetDisksRequest {
+func (c *Client) GetDisksRequest(input *types.GetDisksInput) GetDisksRequest {
 	op := &aws.Operation{
 		Name:       opGetDisks,
 		HTTPMethod: "POST",
@@ -66,10 +37,10 @@ func (c *Client) GetDisksRequest(input *GetDisksInput) GetDisksRequest {
 	}
 
 	if input == nil {
-		input = &GetDisksInput{}
+		input = &types.GetDisksInput{}
 	}
 
-	req := c.newRequest(op, input, &GetDisksOutput{})
+	req := c.newRequest(op, input, &types.GetDisksOutput{})
 	return GetDisksRequest{Request: req, Input: input, Copy: c.GetDisksRequest}
 }
 
@@ -77,8 +48,8 @@ func (c *Client) GetDisksRequest(input *GetDisksInput) GetDisksRequest {
 // GetDisks API operation.
 type GetDisksRequest struct {
 	*aws.Request
-	Input *GetDisksInput
-	Copy  func(*GetDisksInput) GetDisksRequest
+	Input *types.GetDisksInput
+	Copy  func(*types.GetDisksInput) GetDisksRequest
 }
 
 // Send marshals and sends the GetDisks API request.
@@ -90,7 +61,7 @@ func (r GetDisksRequest) Send(ctx context.Context) (*GetDisksResponse, error) {
 	}
 
 	resp := &GetDisksResponse{
-		GetDisksOutput: r.Request.Data.(*GetDisksOutput),
+		GetDisksOutput: r.Request.Data.(*types.GetDisksOutput),
 		response:       &aws.Response{Request: r.Request},
 	}
 
@@ -100,7 +71,7 @@ func (r GetDisksRequest) Send(ctx context.Context) (*GetDisksResponse, error) {
 // GetDisksResponse is the response type for the
 // GetDisks API operation.
 type GetDisksResponse struct {
-	*GetDisksOutput
+	*types.GetDisksOutput
 
 	response *aws.Response
 }

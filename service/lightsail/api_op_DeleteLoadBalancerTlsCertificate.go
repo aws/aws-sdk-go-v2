@@ -6,64 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/lightsail/types"
 )
-
-type DeleteLoadBalancerTlsCertificateInput struct {
-	_ struct{} `type:"structure"`
-
-	// The SSL/TLS certificate name.
-	//
-	// CertificateName is a required field
-	CertificateName *string `locationName:"certificateName" type:"string" required:"true"`
-
-	// When true, forces the deletion of an SSL/TLS certificate.
-	//
-	// There can be two certificates associated with a Lightsail load balancer:
-	// the primary and the backup. The force parameter is required when the primary
-	// SSL/TLS certificate is in use by an instance attached to the load balancer.
-	Force *bool `locationName:"force" type:"boolean"`
-
-	// The load balancer name.
-	//
-	// LoadBalancerName is a required field
-	LoadBalancerName *string `locationName:"loadBalancerName" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteLoadBalancerTlsCertificateInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteLoadBalancerTlsCertificateInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteLoadBalancerTlsCertificateInput"}
-
-	if s.CertificateName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("CertificateName"))
-	}
-
-	if s.LoadBalancerName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("LoadBalancerName"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteLoadBalancerTlsCertificateOutput struct {
-	_ struct{} `type:"structure"`
-
-	// An object describing the API operations.
-	Operations []Operation `locationName:"operations" type:"list"`
-}
-
-// String returns the string representation
-func (s DeleteLoadBalancerTlsCertificateOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteLoadBalancerTlsCertificate = "DeleteLoadBalancerTlsCertificate"
 
@@ -84,7 +28,7 @@ const opDeleteLoadBalancerTlsCertificate = "DeleteLoadBalancerTlsCertificate"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/DeleteLoadBalancerTlsCertificate
-func (c *Client) DeleteLoadBalancerTlsCertificateRequest(input *DeleteLoadBalancerTlsCertificateInput) DeleteLoadBalancerTlsCertificateRequest {
+func (c *Client) DeleteLoadBalancerTlsCertificateRequest(input *types.DeleteLoadBalancerTlsCertificateInput) DeleteLoadBalancerTlsCertificateRequest {
 	op := &aws.Operation{
 		Name:       opDeleteLoadBalancerTlsCertificate,
 		HTTPMethod: "POST",
@@ -92,10 +36,10 @@ func (c *Client) DeleteLoadBalancerTlsCertificateRequest(input *DeleteLoadBalanc
 	}
 
 	if input == nil {
-		input = &DeleteLoadBalancerTlsCertificateInput{}
+		input = &types.DeleteLoadBalancerTlsCertificateInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteLoadBalancerTlsCertificateOutput{})
+	req := c.newRequest(op, input, &types.DeleteLoadBalancerTlsCertificateOutput{})
 	return DeleteLoadBalancerTlsCertificateRequest{Request: req, Input: input, Copy: c.DeleteLoadBalancerTlsCertificateRequest}
 }
 
@@ -103,8 +47,8 @@ func (c *Client) DeleteLoadBalancerTlsCertificateRequest(input *DeleteLoadBalanc
 // DeleteLoadBalancerTlsCertificate API operation.
 type DeleteLoadBalancerTlsCertificateRequest struct {
 	*aws.Request
-	Input *DeleteLoadBalancerTlsCertificateInput
-	Copy  func(*DeleteLoadBalancerTlsCertificateInput) DeleteLoadBalancerTlsCertificateRequest
+	Input *types.DeleteLoadBalancerTlsCertificateInput
+	Copy  func(*types.DeleteLoadBalancerTlsCertificateInput) DeleteLoadBalancerTlsCertificateRequest
 }
 
 // Send marshals and sends the DeleteLoadBalancerTlsCertificate API request.
@@ -116,7 +60,7 @@ func (r DeleteLoadBalancerTlsCertificateRequest) Send(ctx context.Context) (*Del
 	}
 
 	resp := &DeleteLoadBalancerTlsCertificateResponse{
-		DeleteLoadBalancerTlsCertificateOutput: r.Request.Data.(*DeleteLoadBalancerTlsCertificateOutput),
+		DeleteLoadBalancerTlsCertificateOutput: r.Request.Data.(*types.DeleteLoadBalancerTlsCertificateOutput),
 		response:                               &aws.Response{Request: r.Request},
 	}
 
@@ -126,7 +70,7 @@ func (r DeleteLoadBalancerTlsCertificateRequest) Send(ctx context.Context) (*Del
 // DeleteLoadBalancerTlsCertificateResponse is the response type for the
 // DeleteLoadBalancerTlsCertificate API operation.
 type DeleteLoadBalancerTlsCertificateResponse struct {
-	*DeleteLoadBalancerTlsCertificateOutput
+	*types.DeleteLoadBalancerTlsCertificateOutput
 
 	response *aws.Response
 }

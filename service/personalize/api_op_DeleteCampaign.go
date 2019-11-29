@@ -6,47 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
+	"github.com/aws/aws-sdk-go-v2/service/personalize/types"
 )
-
-type DeleteCampaignInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the campaign to delete.
-	//
-	// CampaignArn is a required field
-	CampaignArn *string `locationName:"campaignArn" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteCampaignInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteCampaignInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteCampaignInput"}
-
-	if s.CampaignArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("CampaignArn"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteCampaignOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteCampaignOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteCampaign = "DeleteCampaign"
 
@@ -66,7 +29,7 @@ const opDeleteCampaign = "DeleteCampaign"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/DeleteCampaign
-func (c *Client) DeleteCampaignRequest(input *DeleteCampaignInput) DeleteCampaignRequest {
+func (c *Client) DeleteCampaignRequest(input *types.DeleteCampaignInput) DeleteCampaignRequest {
 	op := &aws.Operation{
 		Name:       opDeleteCampaign,
 		HTTPMethod: "POST",
@@ -74,10 +37,10 @@ func (c *Client) DeleteCampaignRequest(input *DeleteCampaignInput) DeleteCampaig
 	}
 
 	if input == nil {
-		input = &DeleteCampaignInput{}
+		input = &types.DeleteCampaignInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteCampaignOutput{})
+	req := c.newRequest(op, input, &types.DeleteCampaignOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return DeleteCampaignRequest{Request: req, Input: input, Copy: c.DeleteCampaignRequest}
@@ -87,8 +50,8 @@ func (c *Client) DeleteCampaignRequest(input *DeleteCampaignInput) DeleteCampaig
 // DeleteCampaign API operation.
 type DeleteCampaignRequest struct {
 	*aws.Request
-	Input *DeleteCampaignInput
-	Copy  func(*DeleteCampaignInput) DeleteCampaignRequest
+	Input *types.DeleteCampaignInput
+	Copy  func(*types.DeleteCampaignInput) DeleteCampaignRequest
 }
 
 // Send marshals and sends the DeleteCampaign API request.
@@ -100,7 +63,7 @@ func (r DeleteCampaignRequest) Send(ctx context.Context) (*DeleteCampaignRespons
 	}
 
 	resp := &DeleteCampaignResponse{
-		DeleteCampaignOutput: r.Request.Data.(*DeleteCampaignOutput),
+		DeleteCampaignOutput: r.Request.Data.(*types.DeleteCampaignOutput),
 		response:             &aws.Response{Request: r.Request},
 	}
 
@@ -110,7 +73,7 @@ func (r DeleteCampaignRequest) Send(ctx context.Context) (*DeleteCampaignRespons
 // DeleteCampaignResponse is the response type for the
 // DeleteCampaign API operation.
 type DeleteCampaignResponse struct {
-	*DeleteCampaignOutput
+	*types.DeleteCampaignOutput
 
 	response *aws.Response
 }

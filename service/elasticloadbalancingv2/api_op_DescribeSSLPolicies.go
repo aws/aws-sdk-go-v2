@@ -6,56 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/elasticloadbalancingv2/types"
 )
-
-type DescribeSSLPoliciesInput struct {
-	_ struct{} `type:"structure"`
-
-	// The marker for the next set of results. (You received this marker from a
-	// previous call.)
-	Marker *string `type:"string"`
-
-	// The names of the policies.
-	Names []string `type:"list"`
-
-	// The maximum number of results to return with this call.
-	PageSize *int64 `min:"1" type:"integer"`
-}
-
-// String returns the string representation
-func (s DescribeSSLPoliciesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeSSLPoliciesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeSSLPoliciesInput"}
-	if s.PageSize != nil && *s.PageSize < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("PageSize", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribeSSLPoliciesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// If there are additional results, this is the marker for the next set of results.
-	// Otherwise, this is null.
-	NextMarker *string `type:"string"`
-
-	// Information about the policies.
-	SslPolicies []SslPolicy `type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeSSLPoliciesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeSSLPolicies = "DescribeSSLPolicies"
 
@@ -75,7 +27,7 @@ const opDescribeSSLPolicies = "DescribeSSLPolicies"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/DescribeSSLPolicies
-func (c *Client) DescribeSSLPoliciesRequest(input *DescribeSSLPoliciesInput) DescribeSSLPoliciesRequest {
+func (c *Client) DescribeSSLPoliciesRequest(input *types.DescribeSSLPoliciesInput) DescribeSSLPoliciesRequest {
 	op := &aws.Operation{
 		Name:       opDescribeSSLPolicies,
 		HTTPMethod: "POST",
@@ -83,10 +35,10 @@ func (c *Client) DescribeSSLPoliciesRequest(input *DescribeSSLPoliciesInput) Des
 	}
 
 	if input == nil {
-		input = &DescribeSSLPoliciesInput{}
+		input = &types.DescribeSSLPoliciesInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeSSLPoliciesOutput{})
+	req := c.newRequest(op, input, &types.DescribeSSLPoliciesOutput{})
 	return DescribeSSLPoliciesRequest{Request: req, Input: input, Copy: c.DescribeSSLPoliciesRequest}
 }
 
@@ -94,8 +46,8 @@ func (c *Client) DescribeSSLPoliciesRequest(input *DescribeSSLPoliciesInput) Des
 // DescribeSSLPolicies API operation.
 type DescribeSSLPoliciesRequest struct {
 	*aws.Request
-	Input *DescribeSSLPoliciesInput
-	Copy  func(*DescribeSSLPoliciesInput) DescribeSSLPoliciesRequest
+	Input *types.DescribeSSLPoliciesInput
+	Copy  func(*types.DescribeSSLPoliciesInput) DescribeSSLPoliciesRequest
 }
 
 // Send marshals and sends the DescribeSSLPolicies API request.
@@ -107,7 +59,7 @@ func (r DescribeSSLPoliciesRequest) Send(ctx context.Context) (*DescribeSSLPolic
 	}
 
 	resp := &DescribeSSLPoliciesResponse{
-		DescribeSSLPoliciesOutput: r.Request.Data.(*DescribeSSLPoliciesOutput),
+		DescribeSSLPoliciesOutput: r.Request.Data.(*types.DescribeSSLPoliciesOutput),
 		response:                  &aws.Response{Request: r.Request},
 	}
 
@@ -117,7 +69,7 @@ func (r DescribeSSLPoliciesRequest) Send(ctx context.Context) (*DescribeSSLPolic
 // DescribeSSLPoliciesResponse is the response type for the
 // DescribeSSLPolicies API operation.
 type DescribeSSLPoliciesResponse struct {
-	*DescribeSSLPoliciesOutput
+	*types.DescribeSSLPoliciesOutput
 
 	response *aws.Response
 }

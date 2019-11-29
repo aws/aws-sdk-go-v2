@@ -6,76 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/serverlessapplicationrepository/types"
 )
-
-type GetApplicationPolicyInput struct {
-	_ struct{} `type:"structure"`
-
-	// ApplicationId is a required field
-	ApplicationId *string `location:"uri" locationName:"applicationId" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetApplicationPolicyInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetApplicationPolicyInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetApplicationPolicyInput"}
-
-	if s.ApplicationId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ApplicationId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetApplicationPolicyInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.ApplicationId != nil {
-		v := *s.ApplicationId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "applicationId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type GetApplicationPolicyOutput struct {
-	_ struct{} `type:"structure"`
-
-	Statements []ApplicationPolicyStatement `locationName:"statements" type:"list"`
-}
-
-// String returns the string representation
-func (s GetApplicationPolicyOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetApplicationPolicyOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.Statements != nil {
-		v := s.Statements
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "statements", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	return nil
-}
 
 const opGetApplicationPolicy = "GetApplicationPolicy"
 
@@ -92,7 +24,7 @@ const opGetApplicationPolicy = "GetApplicationPolicy"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/serverlessrepo-2017-09-08/GetApplicationPolicy
-func (c *Client) GetApplicationPolicyRequest(input *GetApplicationPolicyInput) GetApplicationPolicyRequest {
+func (c *Client) GetApplicationPolicyRequest(input *types.GetApplicationPolicyInput) GetApplicationPolicyRequest {
 	op := &aws.Operation{
 		Name:       opGetApplicationPolicy,
 		HTTPMethod: "GET",
@@ -100,10 +32,10 @@ func (c *Client) GetApplicationPolicyRequest(input *GetApplicationPolicyInput) G
 	}
 
 	if input == nil {
-		input = &GetApplicationPolicyInput{}
+		input = &types.GetApplicationPolicyInput{}
 	}
 
-	req := c.newRequest(op, input, &GetApplicationPolicyOutput{})
+	req := c.newRequest(op, input, &types.GetApplicationPolicyOutput{})
 	return GetApplicationPolicyRequest{Request: req, Input: input, Copy: c.GetApplicationPolicyRequest}
 }
 
@@ -111,8 +43,8 @@ func (c *Client) GetApplicationPolicyRequest(input *GetApplicationPolicyInput) G
 // GetApplicationPolicy API operation.
 type GetApplicationPolicyRequest struct {
 	*aws.Request
-	Input *GetApplicationPolicyInput
-	Copy  func(*GetApplicationPolicyInput) GetApplicationPolicyRequest
+	Input *types.GetApplicationPolicyInput
+	Copy  func(*types.GetApplicationPolicyInput) GetApplicationPolicyRequest
 }
 
 // Send marshals and sends the GetApplicationPolicy API request.
@@ -124,7 +56,7 @@ func (r GetApplicationPolicyRequest) Send(ctx context.Context) (*GetApplicationP
 	}
 
 	resp := &GetApplicationPolicyResponse{
-		GetApplicationPolicyOutput: r.Request.Data.(*GetApplicationPolicyOutput),
+		GetApplicationPolicyOutput: r.Request.Data.(*types.GetApplicationPolicyOutput),
 		response:                   &aws.Response{Request: r.Request},
 	}
 
@@ -134,7 +66,7 @@ func (r GetApplicationPolicyRequest) Send(ctx context.Context) (*GetApplicationP
 // GetApplicationPolicyResponse is the response type for the
 // GetApplicationPolicy API operation.
 type GetApplicationPolicyResponse struct {
-	*GetApplicationPolicyOutput
+	*types.GetApplicationPolicyOutput
 
 	response *aws.Response
 }

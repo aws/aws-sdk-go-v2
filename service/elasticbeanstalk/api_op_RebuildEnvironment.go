@@ -6,55 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/query"
+	"github.com/aws/aws-sdk-go-v2/service/elasticbeanstalk/types"
 )
-
-type RebuildEnvironmentInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the environment to rebuild.
-	//
-	// Condition: You must specify either this or an EnvironmentName, or both. If
-	// you do not specify either, AWS Elastic Beanstalk returns MissingRequiredParameter
-	// error.
-	EnvironmentId *string `type:"string"`
-
-	// The name of the environment to rebuild.
-	//
-	// Condition: You must specify either this or an EnvironmentId, or both. If
-	// you do not specify either, AWS Elastic Beanstalk returns MissingRequiredParameter
-	// error.
-	EnvironmentName *string `min:"4" type:"string"`
-}
-
-// String returns the string representation
-func (s RebuildEnvironmentInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *RebuildEnvironmentInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "RebuildEnvironmentInput"}
-	if s.EnvironmentName != nil && len(*s.EnvironmentName) < 4 {
-		invalidParams.Add(aws.NewErrParamMinLen("EnvironmentName", 4))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type RebuildEnvironmentOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s RebuildEnvironmentOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opRebuildEnvironment = "RebuildEnvironment"
 
@@ -72,7 +27,7 @@ const opRebuildEnvironment = "RebuildEnvironment"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/RebuildEnvironment
-func (c *Client) RebuildEnvironmentRequest(input *RebuildEnvironmentInput) RebuildEnvironmentRequest {
+func (c *Client) RebuildEnvironmentRequest(input *types.RebuildEnvironmentInput) RebuildEnvironmentRequest {
 	op := &aws.Operation{
 		Name:       opRebuildEnvironment,
 		HTTPMethod: "POST",
@@ -80,10 +35,10 @@ func (c *Client) RebuildEnvironmentRequest(input *RebuildEnvironmentInput) Rebui
 	}
 
 	if input == nil {
-		input = &RebuildEnvironmentInput{}
+		input = &types.RebuildEnvironmentInput{}
 	}
 
-	req := c.newRequest(op, input, &RebuildEnvironmentOutput{})
+	req := c.newRequest(op, input, &types.RebuildEnvironmentOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return RebuildEnvironmentRequest{Request: req, Input: input, Copy: c.RebuildEnvironmentRequest}
@@ -93,8 +48,8 @@ func (c *Client) RebuildEnvironmentRequest(input *RebuildEnvironmentInput) Rebui
 // RebuildEnvironment API operation.
 type RebuildEnvironmentRequest struct {
 	*aws.Request
-	Input *RebuildEnvironmentInput
-	Copy  func(*RebuildEnvironmentInput) RebuildEnvironmentRequest
+	Input *types.RebuildEnvironmentInput
+	Copy  func(*types.RebuildEnvironmentInput) RebuildEnvironmentRequest
 }
 
 // Send marshals and sends the RebuildEnvironment API request.
@@ -106,7 +61,7 @@ func (r RebuildEnvironmentRequest) Send(ctx context.Context) (*RebuildEnvironmen
 	}
 
 	resp := &RebuildEnvironmentResponse{
-		RebuildEnvironmentOutput: r.Request.Data.(*RebuildEnvironmentOutput),
+		RebuildEnvironmentOutput: r.Request.Data.(*types.RebuildEnvironmentOutput),
 		response:                 &aws.Response{Request: r.Request},
 	}
 
@@ -116,7 +71,7 @@ func (r RebuildEnvironmentRequest) Send(ctx context.Context) (*RebuildEnvironmen
 // RebuildEnvironmentResponse is the response type for the
 // RebuildEnvironment API operation.
 type RebuildEnvironmentResponse struct {
-	*RebuildEnvironmentOutput
+	*types.RebuildEnvironmentOutput
 
 	response *aws.Response
 }

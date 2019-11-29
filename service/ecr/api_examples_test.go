@@ -12,6 +12,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws/awserr"
 	"github.com/aws/aws-sdk-go-v2/aws/external"
 	"github.com/aws/aws-sdk-go-v2/service/ecr"
+	"github.com/aws/aws-sdk-go-v2/service/ecr/types"
 )
 
 var _ time.Duration
@@ -37,8 +38,8 @@ func ExampleClient_BatchDeleteImageRequest_shared00() {
 	}
 
 	svc := ecr.New(cfg)
-	input := &ecr.BatchDeleteImageInput{
-		ImageIds: []ecr.ImageIdentifier{
+	input := &types.BatchDeleteImageInput{
+		ImageIds: []types.ImageIdentifier{
 			{
 				ImageTag: aws.String("precise"),
 			},
@@ -82,8 +83,8 @@ func ExampleClient_BatchGetImageRequest_shared00() {
 	}
 
 	svc := ecr.New(cfg)
-	input := &ecr.BatchGetImageInput{
-		ImageIds: []ecr.ImageIdentifier{
+	input := &types.BatchGetImageInput{
+		ImageIds: []types.ImageIdentifier{
 			{
 				ImageTag: aws.String("precise"),
 			},
@@ -127,7 +128,7 @@ func ExampleClient_CreateRepositoryRequest_shared00() {
 	}
 
 	svc := ecr.New(cfg)
-	input := &ecr.CreateRepositoryInput{
+	input := &types.CreateRepositoryInput{
 		RepositoryName: aws.String("project-a/nginx-web-app"),
 	}
 
@@ -173,7 +174,7 @@ func ExampleClient_DeleteRepositoryRequest_shared00() {
 	}
 
 	svc := ecr.New(cfg)
-	input := &ecr.DeleteRepositoryInput{
+	input := &types.DeleteRepositoryInput{
 		Force:          aws.Bool(true),
 		RepositoryName: aws.String("ubuntu"),
 	}
@@ -216,7 +217,7 @@ func ExampleClient_DeleteRepositoryPolicyRequest_shared00() {
 	}
 
 	svc := ecr.New(cfg)
-	input := &ecr.DeleteRepositoryPolicyInput{
+	input := &types.DeleteRepositoryPolicyInput{
 		RepositoryName: aws.String("ubuntu"),
 	}
 
@@ -258,7 +259,7 @@ func ExampleClient_DescribeRepositoriesRequest_shared00() {
 	}
 
 	svc := ecr.New(cfg)
-	input := &ecr.DescribeRepositoriesInput{}
+	input := &types.DescribeRepositoriesInput{}
 
 	req := svc.DescribeRepositoriesRequest(input)
 	result, err := req.Send(context.Background())
@@ -295,7 +296,7 @@ func ExampleClient_GetAuthorizationTokenRequest_shared00() {
 	}
 
 	svc := ecr.New(cfg)
-	input := &ecr.GetAuthorizationTokenInput{}
+	input := &types.GetAuthorizationTokenInput{}
 
 	req := svc.GetAuthorizationTokenRequest(input)
 	result, err := req.Send(context.Background())
@@ -330,7 +331,7 @@ func ExampleClient_GetRepositoryPolicyRequest_shared00() {
 	}
 
 	svc := ecr.New(cfg)
-	input := &ecr.GetRepositoryPolicyInput{
+	input := &types.GetRepositoryPolicyInput{
 		RepositoryName: aws.String("ubuntu"),
 	}
 
@@ -372,7 +373,7 @@ func ExampleClient_ListImagesRequest_shared00() {
 	}
 
 	svc := ecr.New(cfg)
-	input := &ecr.ListImagesInput{
+	input := &types.ListImagesInput{
 		RepositoryName: aws.String("ubuntu"),
 	}
 

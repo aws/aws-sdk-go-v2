@@ -6,84 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/iot/types"
 )
-
-// The input for the AttachThingPrincipal operation.
-type AttachThingPrincipalInput struct {
-	_ struct{} `type:"structure"`
-
-	// The principal, such as a certificate or other credential.
-	//
-	// Principal is a required field
-	Principal *string `location:"header" locationName:"x-amzn-principal" type:"string" required:"true"`
-
-	// The name of the thing.
-	//
-	// ThingName is a required field
-	ThingName *string `location:"uri" locationName:"thingName" min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s AttachThingPrincipalInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *AttachThingPrincipalInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "AttachThingPrincipalInput"}
-
-	if s.Principal == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Principal"))
-	}
-
-	if s.ThingName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ThingName"))
-	}
-	if s.ThingName != nil && len(*s.ThingName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ThingName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s AttachThingPrincipalInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.Principal != nil {
-		v := *s.Principal
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "x-amzn-principal", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.ThingName != nil {
-		v := *s.ThingName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "thingName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-// The output from the AttachThingPrincipal operation.
-type AttachThingPrincipalOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s AttachThingPrincipalOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s AttachThingPrincipalOutput) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
 
 const opAttachThingPrincipal = "AttachThingPrincipal"
 
@@ -100,7 +24,7 @@ const opAttachThingPrincipal = "AttachThingPrincipal"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) AttachThingPrincipalRequest(input *AttachThingPrincipalInput) AttachThingPrincipalRequest {
+func (c *Client) AttachThingPrincipalRequest(input *types.AttachThingPrincipalInput) AttachThingPrincipalRequest {
 	op := &aws.Operation{
 		Name:       opAttachThingPrincipal,
 		HTTPMethod: "PUT",
@@ -108,10 +32,10 @@ func (c *Client) AttachThingPrincipalRequest(input *AttachThingPrincipalInput) A
 	}
 
 	if input == nil {
-		input = &AttachThingPrincipalInput{}
+		input = &types.AttachThingPrincipalInput{}
 	}
 
-	req := c.newRequest(op, input, &AttachThingPrincipalOutput{})
+	req := c.newRequest(op, input, &types.AttachThingPrincipalOutput{})
 	return AttachThingPrincipalRequest{Request: req, Input: input, Copy: c.AttachThingPrincipalRequest}
 }
 
@@ -119,8 +43,8 @@ func (c *Client) AttachThingPrincipalRequest(input *AttachThingPrincipalInput) A
 // AttachThingPrincipal API operation.
 type AttachThingPrincipalRequest struct {
 	*aws.Request
-	Input *AttachThingPrincipalInput
-	Copy  func(*AttachThingPrincipalInput) AttachThingPrincipalRequest
+	Input *types.AttachThingPrincipalInput
+	Copy  func(*types.AttachThingPrincipalInput) AttachThingPrincipalRequest
 }
 
 // Send marshals and sends the AttachThingPrincipal API request.
@@ -132,7 +56,7 @@ func (r AttachThingPrincipalRequest) Send(ctx context.Context) (*AttachThingPrin
 	}
 
 	resp := &AttachThingPrincipalResponse{
-		AttachThingPrincipalOutput: r.Request.Data.(*AttachThingPrincipalOutput),
+		AttachThingPrincipalOutput: r.Request.Data.(*types.AttachThingPrincipalOutput),
 		response:                   &aws.Response{Request: r.Request},
 	}
 
@@ -142,7 +66,7 @@ func (r AttachThingPrincipalRequest) Send(ctx context.Context) (*AttachThingPrin
 // AttachThingPrincipalResponse is the response type for the
 // AttachThingPrincipal API operation.
 type AttachThingPrincipalResponse struct {
-	*AttachThingPrincipalOutput
+	*types.AttachThingPrincipalOutput
 
 	response *aws.Response
 }

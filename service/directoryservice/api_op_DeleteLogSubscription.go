@@ -6,45 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/directoryservice/types"
 )
-
-type DeleteLogSubscriptionInput struct {
-	_ struct{} `type:"structure"`
-
-	// Identifier (ID) of the directory whose log subscription you want to delete.
-	//
-	// DirectoryId is a required field
-	DirectoryId *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteLogSubscriptionInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteLogSubscriptionInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteLogSubscriptionInput"}
-
-	if s.DirectoryId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DirectoryId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteLogSubscriptionOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteLogSubscriptionOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteLogSubscription = "DeleteLogSubscription"
 
@@ -61,7 +24,7 @@ const opDeleteLogSubscription = "DeleteLogSubscription"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DeleteLogSubscription
-func (c *Client) DeleteLogSubscriptionRequest(input *DeleteLogSubscriptionInput) DeleteLogSubscriptionRequest {
+func (c *Client) DeleteLogSubscriptionRequest(input *types.DeleteLogSubscriptionInput) DeleteLogSubscriptionRequest {
 	op := &aws.Operation{
 		Name:       opDeleteLogSubscription,
 		HTTPMethod: "POST",
@@ -69,10 +32,10 @@ func (c *Client) DeleteLogSubscriptionRequest(input *DeleteLogSubscriptionInput)
 	}
 
 	if input == nil {
-		input = &DeleteLogSubscriptionInput{}
+		input = &types.DeleteLogSubscriptionInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteLogSubscriptionOutput{})
+	req := c.newRequest(op, input, &types.DeleteLogSubscriptionOutput{})
 	return DeleteLogSubscriptionRequest{Request: req, Input: input, Copy: c.DeleteLogSubscriptionRequest}
 }
 
@@ -80,8 +43,8 @@ func (c *Client) DeleteLogSubscriptionRequest(input *DeleteLogSubscriptionInput)
 // DeleteLogSubscription API operation.
 type DeleteLogSubscriptionRequest struct {
 	*aws.Request
-	Input *DeleteLogSubscriptionInput
-	Copy  func(*DeleteLogSubscriptionInput) DeleteLogSubscriptionRequest
+	Input *types.DeleteLogSubscriptionInput
+	Copy  func(*types.DeleteLogSubscriptionInput) DeleteLogSubscriptionRequest
 }
 
 // Send marshals and sends the DeleteLogSubscription API request.
@@ -93,7 +56,7 @@ func (r DeleteLogSubscriptionRequest) Send(ctx context.Context) (*DeleteLogSubsc
 	}
 
 	resp := &DeleteLogSubscriptionResponse{
-		DeleteLogSubscriptionOutput: r.Request.Data.(*DeleteLogSubscriptionOutput),
+		DeleteLogSubscriptionOutput: r.Request.Data.(*types.DeleteLogSubscriptionOutput),
 		response:                    &aws.Response{Request: r.Request},
 	}
 
@@ -103,7 +66,7 @@ func (r DeleteLogSubscriptionRequest) Send(ctx context.Context) (*DeleteLogSubsc
 // DeleteLogSubscriptionResponse is the response type for the
 // DeleteLogSubscription API operation.
 type DeleteLogSubscriptionResponse struct {
-	*DeleteLogSubscriptionOutput
+	*types.DeleteLogSubscriptionOutput
 
 	response *aws.Response
 }

@@ -6,51 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/personalize/types"
 )
-
-type GetSolutionMetricsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the solution version for which to get metrics.
-	//
-	// SolutionVersionArn is a required field
-	SolutionVersionArn *string `locationName:"solutionVersionArn" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetSolutionMetricsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetSolutionMetricsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetSolutionMetricsInput"}
-
-	if s.SolutionVersionArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("SolutionVersionArn"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type GetSolutionMetricsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The metrics for the solution version.
-	Metrics map[string]float64 `locationName:"metrics" type:"map"`
-
-	// The same solution version ARN as specified in the request.
-	SolutionVersionArn *string `locationName:"solutionVersionArn" type:"string"`
-}
-
-// String returns the string representation
-func (s GetSolutionMetricsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetSolutionMetrics = "GetSolutionMetrics"
 
@@ -67,7 +24,7 @@ const opGetSolutionMetrics = "GetSolutionMetrics"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/GetSolutionMetrics
-func (c *Client) GetSolutionMetricsRequest(input *GetSolutionMetricsInput) GetSolutionMetricsRequest {
+func (c *Client) GetSolutionMetricsRequest(input *types.GetSolutionMetricsInput) GetSolutionMetricsRequest {
 	op := &aws.Operation{
 		Name:       opGetSolutionMetrics,
 		HTTPMethod: "POST",
@@ -75,10 +32,10 @@ func (c *Client) GetSolutionMetricsRequest(input *GetSolutionMetricsInput) GetSo
 	}
 
 	if input == nil {
-		input = &GetSolutionMetricsInput{}
+		input = &types.GetSolutionMetricsInput{}
 	}
 
-	req := c.newRequest(op, input, &GetSolutionMetricsOutput{})
+	req := c.newRequest(op, input, &types.GetSolutionMetricsOutput{})
 	return GetSolutionMetricsRequest{Request: req, Input: input, Copy: c.GetSolutionMetricsRequest}
 }
 
@@ -86,8 +43,8 @@ func (c *Client) GetSolutionMetricsRequest(input *GetSolutionMetricsInput) GetSo
 // GetSolutionMetrics API operation.
 type GetSolutionMetricsRequest struct {
 	*aws.Request
-	Input *GetSolutionMetricsInput
-	Copy  func(*GetSolutionMetricsInput) GetSolutionMetricsRequest
+	Input *types.GetSolutionMetricsInput
+	Copy  func(*types.GetSolutionMetricsInput) GetSolutionMetricsRequest
 }
 
 // Send marshals and sends the GetSolutionMetrics API request.
@@ -99,7 +56,7 @@ func (r GetSolutionMetricsRequest) Send(ctx context.Context) (*GetSolutionMetric
 	}
 
 	resp := &GetSolutionMetricsResponse{
-		GetSolutionMetricsOutput: r.Request.Data.(*GetSolutionMetricsOutput),
+		GetSolutionMetricsOutput: r.Request.Data.(*types.GetSolutionMetricsOutput),
 		response:                 &aws.Response{Request: r.Request},
 	}
 
@@ -109,7 +66,7 @@ func (r GetSolutionMetricsRequest) Send(ctx context.Context) (*GetSolutionMetric
 // GetSolutionMetricsResponse is the response type for the
 // GetSolutionMetrics API operation.
 type GetSolutionMetricsResponse struct {
-	*GetSolutionMetricsOutput
+	*types.GetSolutionMetricsOutput
 
 	response *aws.Response
 }

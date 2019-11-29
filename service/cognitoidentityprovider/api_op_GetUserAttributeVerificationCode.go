@@ -6,97 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/types"
 )
-
-// Represents the request to get user attribute verification.
-type GetUserAttributeVerificationCodeInput struct {
-	_ struct{} `type:"structure"`
-
-	// The access token returned by the server response to get the user attribute
-	// verification code.
-	//
-	// AccessToken is a required field
-	AccessToken *string `type:"string" required:"true" sensitive:"true"`
-
-	// The attribute name returned by the server response to get the user attribute
-	// verification code.
-	//
-	// AttributeName is a required field
-	AttributeName *string `min:"1" type:"string" required:"true"`
-
-	// A map of custom key-value pairs that you can provide as input for any custom
-	// workflows that this action triggers.
-	//
-	// You create custom workflows by assigning AWS Lambda functions to user pool
-	// triggers. When you use the GetUserAttributeVerificationCode API action, Amazon
-	// Cognito invokes the function that is assigned to the custom message trigger.
-	// When Amazon Cognito invokes this function, it passes a JSON payload, which
-	// the function receives as input. This payload contains a clientMetadata attribute,
-	// which provides the data that you assigned to the ClientMetadata parameter
-	// in your GetUserAttributeVerificationCode request. In your function code in
-	// AWS Lambda, you can process the clientMetadata value to enhance your workflow
-	// for your specific needs.
-	//
-	// For more information, see Customizing User Pool Workflows with Lambda Triggers
-	// (https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools-working-with-aws-lambda-triggers.html)
-	// in the Amazon Cognito Developer Guide.
-	//
-	// Take the following limitations into consideration when you use the ClientMetadata
-	// parameter:
-	//
-	//    * Amazon Cognito does not store the ClientMetadata value. This data is
-	//    available only to AWS Lambda triggers that are assigned to a user pool
-	//    to support custom workflows. If your user pool configuration does not
-	//    include triggers, the ClientMetadata parameter serves no purpose.
-	//
-	//    * Amazon Cognito does not validate the ClientMetadata value.
-	//
-	//    * Amazon Cognito does not encrypt the the ClientMetadata value, so don't
-	//    use it to provide sensitive information.
-	ClientMetadata map[string]string `type:"map"`
-}
-
-// String returns the string representation
-func (s GetUserAttributeVerificationCodeInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetUserAttributeVerificationCodeInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetUserAttributeVerificationCodeInput"}
-
-	if s.AccessToken == nil {
-		invalidParams.Add(aws.NewErrParamRequired("AccessToken"))
-	}
-
-	if s.AttributeName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("AttributeName"))
-	}
-	if s.AttributeName != nil && len(*s.AttributeName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("AttributeName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// The verification code response returned by the server response to get the
-// user attribute verification code.
-type GetUserAttributeVerificationCodeOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The code delivery details returned by the server in response to the request
-	// to get the user attribute verification code.
-	CodeDeliveryDetails *CodeDeliveryDetailsType `type:"structure"`
-}
-
-// String returns the string representation
-func (s GetUserAttributeVerificationCodeOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetUserAttributeVerificationCode = "GetUserAttributeVerificationCode"
 
@@ -113,7 +24,7 @@ const opGetUserAttributeVerificationCode = "GetUserAttributeVerificationCode"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/GetUserAttributeVerificationCode
-func (c *Client) GetUserAttributeVerificationCodeRequest(input *GetUserAttributeVerificationCodeInput) GetUserAttributeVerificationCodeRequest {
+func (c *Client) GetUserAttributeVerificationCodeRequest(input *types.GetUserAttributeVerificationCodeInput) GetUserAttributeVerificationCodeRequest {
 	op := &aws.Operation{
 		Name:       opGetUserAttributeVerificationCode,
 		HTTPMethod: "POST",
@@ -121,10 +32,10 @@ func (c *Client) GetUserAttributeVerificationCodeRequest(input *GetUserAttribute
 	}
 
 	if input == nil {
-		input = &GetUserAttributeVerificationCodeInput{}
+		input = &types.GetUserAttributeVerificationCodeInput{}
 	}
 
-	req := c.newRequest(op, input, &GetUserAttributeVerificationCodeOutput{})
+	req := c.newRequest(op, input, &types.GetUserAttributeVerificationCodeOutput{})
 	req.Config.Credentials = aws.AnonymousCredentials
 	return GetUserAttributeVerificationCodeRequest{Request: req, Input: input, Copy: c.GetUserAttributeVerificationCodeRequest}
 }
@@ -133,8 +44,8 @@ func (c *Client) GetUserAttributeVerificationCodeRequest(input *GetUserAttribute
 // GetUserAttributeVerificationCode API operation.
 type GetUserAttributeVerificationCodeRequest struct {
 	*aws.Request
-	Input *GetUserAttributeVerificationCodeInput
-	Copy  func(*GetUserAttributeVerificationCodeInput) GetUserAttributeVerificationCodeRequest
+	Input *types.GetUserAttributeVerificationCodeInput
+	Copy  func(*types.GetUserAttributeVerificationCodeInput) GetUserAttributeVerificationCodeRequest
 }
 
 // Send marshals and sends the GetUserAttributeVerificationCode API request.
@@ -146,7 +57,7 @@ func (r GetUserAttributeVerificationCodeRequest) Send(ctx context.Context) (*Get
 	}
 
 	resp := &GetUserAttributeVerificationCodeResponse{
-		GetUserAttributeVerificationCodeOutput: r.Request.Data.(*GetUserAttributeVerificationCodeOutput),
+		GetUserAttributeVerificationCodeOutput: r.Request.Data.(*types.GetUserAttributeVerificationCodeOutput),
 		response:                               &aws.Response{Request: r.Request},
 	}
 
@@ -156,7 +67,7 @@ func (r GetUserAttributeVerificationCodeRequest) Send(ctx context.Context) (*Get
 // GetUserAttributeVerificationCodeResponse is the response type for the
 // GetUserAttributeVerificationCode API operation.
 type GetUserAttributeVerificationCodeResponse struct {
-	*GetUserAttributeVerificationCodeOutput
+	*types.GetUserAttributeVerificationCodeOutput
 
 	response *aws.Response
 }

@@ -6,96 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/cloudfront/types"
 )
-
-type CreateFieldLevelEncryptionProfileInput struct {
-	_ struct{} `type:"structure" payload:"FieldLevelEncryptionProfileConfig"`
-
-	// The request to create a field-level encryption profile.
-	//
-	// FieldLevelEncryptionProfileConfig is a required field
-	FieldLevelEncryptionProfileConfig *FieldLevelEncryptionProfileConfig `locationName:"FieldLevelEncryptionProfileConfig" type:"structure" required:"true" xmlURI:"http://cloudfront.amazonaws.com/doc/2019-03-26/"`
-}
-
-// String returns the string representation
-func (s CreateFieldLevelEncryptionProfileInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateFieldLevelEncryptionProfileInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateFieldLevelEncryptionProfileInput"}
-
-	if s.FieldLevelEncryptionProfileConfig == nil {
-		invalidParams.Add(aws.NewErrParamRequired("FieldLevelEncryptionProfileConfig"))
-	}
-	if s.FieldLevelEncryptionProfileConfig != nil {
-		if err := s.FieldLevelEncryptionProfileConfig.Validate(); err != nil {
-			invalidParams.AddNested("FieldLevelEncryptionProfileConfig", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s CreateFieldLevelEncryptionProfileInput) MarshalFields(e protocol.FieldEncoder) error {
-
-	if s.FieldLevelEncryptionProfileConfig != nil {
-		v := s.FieldLevelEncryptionProfileConfig
-
-		metadata := protocol.Metadata{XMLNamespaceURI: "http://cloudfront.amazonaws.com/doc/2019-03-26/"}
-		e.SetFields(protocol.PayloadTarget, "FieldLevelEncryptionProfileConfig", v, metadata)
-	}
-	return nil
-}
-
-type CreateFieldLevelEncryptionProfileOutput struct {
-	_ struct{} `type:"structure" payload:"FieldLevelEncryptionProfile"`
-
-	// The current version of the field level encryption profile. For example: E2QWRUHAPOMQZL.
-	ETag *string `location:"header" locationName:"ETag" type:"string"`
-
-	// Returned when you create a new field-level encryption profile.
-	FieldLevelEncryptionProfile *FieldLevelEncryptionProfile `type:"structure"`
-
-	// The fully qualified URI of the new profile resource just created. For example:
-	// https://cloudfront.amazonaws.com/2010-11-01/field-level-encryption-profile/EDFDVBD632BHDS5.
-	Location *string `location:"header" locationName:"Location" type:"string"`
-}
-
-// String returns the string representation
-func (s CreateFieldLevelEncryptionProfileOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s CreateFieldLevelEncryptionProfileOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.ETag != nil {
-		v := *s.ETag
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "ETag", protocol.StringValue(v), metadata)
-	}
-	if s.Location != nil {
-		v := *s.Location
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "Location", protocol.StringValue(v), metadata)
-	}
-	if s.FieldLevelEncryptionProfile != nil {
-		v := s.FieldLevelEncryptionProfile
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.PayloadTarget, "FieldLevelEncryptionProfile", v, metadata)
-	}
-	return nil
-}
 
 const opCreateFieldLevelEncryptionProfile = "CreateFieldLevelEncryptionProfile2019_03_26"
 
@@ -112,7 +24,7 @@ const opCreateFieldLevelEncryptionProfile = "CreateFieldLevelEncryptionProfile20
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/CreateFieldLevelEncryptionProfile
-func (c *Client) CreateFieldLevelEncryptionProfileRequest(input *CreateFieldLevelEncryptionProfileInput) CreateFieldLevelEncryptionProfileRequest {
+func (c *Client) CreateFieldLevelEncryptionProfileRequest(input *types.CreateFieldLevelEncryptionProfileInput) CreateFieldLevelEncryptionProfileRequest {
 	op := &aws.Operation{
 		Name:       opCreateFieldLevelEncryptionProfile,
 		HTTPMethod: "POST",
@@ -120,10 +32,10 @@ func (c *Client) CreateFieldLevelEncryptionProfileRequest(input *CreateFieldLeve
 	}
 
 	if input == nil {
-		input = &CreateFieldLevelEncryptionProfileInput{}
+		input = &types.CreateFieldLevelEncryptionProfileInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateFieldLevelEncryptionProfileOutput{})
+	req := c.newRequest(op, input, &types.CreateFieldLevelEncryptionProfileOutput{})
 	return CreateFieldLevelEncryptionProfileRequest{Request: req, Input: input, Copy: c.CreateFieldLevelEncryptionProfileRequest}
 }
 
@@ -131,8 +43,8 @@ func (c *Client) CreateFieldLevelEncryptionProfileRequest(input *CreateFieldLeve
 // CreateFieldLevelEncryptionProfile API operation.
 type CreateFieldLevelEncryptionProfileRequest struct {
 	*aws.Request
-	Input *CreateFieldLevelEncryptionProfileInput
-	Copy  func(*CreateFieldLevelEncryptionProfileInput) CreateFieldLevelEncryptionProfileRequest
+	Input *types.CreateFieldLevelEncryptionProfileInput
+	Copy  func(*types.CreateFieldLevelEncryptionProfileInput) CreateFieldLevelEncryptionProfileRequest
 }
 
 // Send marshals and sends the CreateFieldLevelEncryptionProfile API request.
@@ -144,7 +56,7 @@ func (r CreateFieldLevelEncryptionProfileRequest) Send(ctx context.Context) (*Cr
 	}
 
 	resp := &CreateFieldLevelEncryptionProfileResponse{
-		CreateFieldLevelEncryptionProfileOutput: r.Request.Data.(*CreateFieldLevelEncryptionProfileOutput),
+		CreateFieldLevelEncryptionProfileOutput: r.Request.Data.(*types.CreateFieldLevelEncryptionProfileOutput),
 		response:                                &aws.Response{Request: r.Request},
 	}
 
@@ -154,7 +66,7 @@ func (r CreateFieldLevelEncryptionProfileRequest) Send(ctx context.Context) (*Cr
 // CreateFieldLevelEncryptionProfileResponse is the response type for the
 // CreateFieldLevelEncryptionProfile API operation.
 type CreateFieldLevelEncryptionProfileResponse struct {
-	*CreateFieldLevelEncryptionProfileOutput
+	*types.CreateFieldLevelEncryptionProfileOutput
 
 	response *aws.Response
 }

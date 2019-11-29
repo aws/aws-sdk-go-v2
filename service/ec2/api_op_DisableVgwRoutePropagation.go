@@ -6,57 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/ec2query"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-// Contains the parameters for DisableVgwRoutePropagation.
-type DisableVgwRoutePropagationInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the virtual private gateway.
-	//
-	// GatewayId is a required field
-	GatewayId *string `type:"string" required:"true"`
-
-	// The ID of the route table.
-	//
-	// RouteTableId is a required field
-	RouteTableId *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DisableVgwRoutePropagationInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DisableVgwRoutePropagationInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DisableVgwRoutePropagationInput"}
-
-	if s.GatewayId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("GatewayId"))
-	}
-
-	if s.RouteTableId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("RouteTableId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DisableVgwRoutePropagationOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DisableVgwRoutePropagationOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDisableVgwRoutePropagation = "DisableVgwRoutePropagation"
 
@@ -74,7 +27,7 @@ const opDisableVgwRoutePropagation = "DisableVgwRoutePropagation"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DisableVgwRoutePropagation
-func (c *Client) DisableVgwRoutePropagationRequest(input *DisableVgwRoutePropagationInput) DisableVgwRoutePropagationRequest {
+func (c *Client) DisableVgwRoutePropagationRequest(input *types.DisableVgwRoutePropagationInput) DisableVgwRoutePropagationRequest {
 	op := &aws.Operation{
 		Name:       opDisableVgwRoutePropagation,
 		HTTPMethod: "POST",
@@ -82,10 +35,10 @@ func (c *Client) DisableVgwRoutePropagationRequest(input *DisableVgwRoutePropaga
 	}
 
 	if input == nil {
-		input = &DisableVgwRoutePropagationInput{}
+		input = &types.DisableVgwRoutePropagationInput{}
 	}
 
-	req := c.newRequest(op, input, &DisableVgwRoutePropagationOutput{})
+	req := c.newRequest(op, input, &types.DisableVgwRoutePropagationOutput{})
 	req.Handlers.Unmarshal.Remove(ec2query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return DisableVgwRoutePropagationRequest{Request: req, Input: input, Copy: c.DisableVgwRoutePropagationRequest}
@@ -95,8 +48,8 @@ func (c *Client) DisableVgwRoutePropagationRequest(input *DisableVgwRoutePropaga
 // DisableVgwRoutePropagation API operation.
 type DisableVgwRoutePropagationRequest struct {
 	*aws.Request
-	Input *DisableVgwRoutePropagationInput
-	Copy  func(*DisableVgwRoutePropagationInput) DisableVgwRoutePropagationRequest
+	Input *types.DisableVgwRoutePropagationInput
+	Copy  func(*types.DisableVgwRoutePropagationInput) DisableVgwRoutePropagationRequest
 }
 
 // Send marshals and sends the DisableVgwRoutePropagation API request.
@@ -108,7 +61,7 @@ func (r DisableVgwRoutePropagationRequest) Send(ctx context.Context) (*DisableVg
 	}
 
 	resp := &DisableVgwRoutePropagationResponse{
-		DisableVgwRoutePropagationOutput: r.Request.Data.(*DisableVgwRoutePropagationOutput),
+		DisableVgwRoutePropagationOutput: r.Request.Data.(*types.DisableVgwRoutePropagationOutput),
 		response:                         &aws.Response{Request: r.Request},
 	}
 
@@ -118,7 +71,7 @@ func (r DisableVgwRoutePropagationRequest) Send(ctx context.Context) (*DisableVg
 // DisableVgwRoutePropagationResponse is the response type for the
 // DisableVgwRoutePropagation API operation.
 type DisableVgwRoutePropagationResponse struct {
-	*DisableVgwRoutePropagationOutput
+	*types.DisableVgwRoutePropagationOutput
 
 	response *aws.Response
 }

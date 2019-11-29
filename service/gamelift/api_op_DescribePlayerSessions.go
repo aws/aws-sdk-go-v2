@@ -6,98 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/gamelift/types"
 )
-
-// Represents the input for a request action.
-type DescribePlayerSessionsInput struct {
-	_ struct{} `type:"structure"`
-
-	// Unique identifier for the game session to retrieve player sessions for.
-	GameSessionId *string `min:"1" type:"string"`
-
-	// Maximum number of results to return. Use this parameter with NextToken to
-	// get results as a set of sequential pages. If a player session ID is specified,
-	// this parameter is ignored.
-	Limit *int64 `min:"1" type:"integer"`
-
-	// Token that indicates the start of the next sequential page of results. Use
-	// the token that is returned with a previous call to this action. To start
-	// at the beginning of the result set, do not specify a value. If a player session
-	// ID is specified, this parameter is ignored.
-	NextToken *string `min:"1" type:"string"`
-
-	// Unique identifier for a player to retrieve player sessions for.
-	PlayerId *string `min:"1" type:"string"`
-
-	// Unique identifier for a player session to retrieve.
-	PlayerSessionId *string `type:"string"`
-
-	// Player session status to filter results on.
-	//
-	// Possible player session statuses include the following:
-	//
-	//    * RESERVED -- The player session request has been received, but the player
-	//    has not yet connected to the server process and/or been validated.
-	//
-	//    * ACTIVE -- The player has been validated by the server process and is
-	//    currently connected.
-	//
-	//    * COMPLETED -- The player connection has been dropped.
-	//
-	//    * TIMEDOUT -- A player session request was received, but the player did
-	//    not connect and/or was not validated within the timeout limit (60 seconds).
-	PlayerSessionStatusFilter *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s DescribePlayerSessionsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribePlayerSessionsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribePlayerSessionsInput"}
-	if s.GameSessionId != nil && len(*s.GameSessionId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("GameSessionId", 1))
-	}
-	if s.Limit != nil && *s.Limit < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("Limit", 1))
-	}
-	if s.NextToken != nil && len(*s.NextToken) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
-	}
-	if s.PlayerId != nil && len(*s.PlayerId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("PlayerId", 1))
-	}
-	if s.PlayerSessionStatusFilter != nil && len(*s.PlayerSessionStatusFilter) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("PlayerSessionStatusFilter", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Represents the returned data in response to a request action.
-type DescribePlayerSessionsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Token that indicates where to resume retrieving results on the next call
-	// to this action. If no token is returned, these results represent the end
-	// of the list.
-	NextToken *string `min:"1" type:"string"`
-
-	// Collection of objects containing properties for each player session that
-	// matches the request.
-	PlayerSessions []PlayerSession `type:"list"`
-}
-
-// String returns the string representation
-func (s DescribePlayerSessionsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribePlayerSessions = "DescribePlayerSessions"
 
@@ -135,7 +45,7 @@ const opDescribePlayerSessions = "DescribePlayerSessions"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DescribePlayerSessions
-func (c *Client) DescribePlayerSessionsRequest(input *DescribePlayerSessionsInput) DescribePlayerSessionsRequest {
+func (c *Client) DescribePlayerSessionsRequest(input *types.DescribePlayerSessionsInput) DescribePlayerSessionsRequest {
 	op := &aws.Operation{
 		Name:       opDescribePlayerSessions,
 		HTTPMethod: "POST",
@@ -143,10 +53,10 @@ func (c *Client) DescribePlayerSessionsRequest(input *DescribePlayerSessionsInpu
 	}
 
 	if input == nil {
-		input = &DescribePlayerSessionsInput{}
+		input = &types.DescribePlayerSessionsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribePlayerSessionsOutput{})
+	req := c.newRequest(op, input, &types.DescribePlayerSessionsOutput{})
 	return DescribePlayerSessionsRequest{Request: req, Input: input, Copy: c.DescribePlayerSessionsRequest}
 }
 
@@ -154,8 +64,8 @@ func (c *Client) DescribePlayerSessionsRequest(input *DescribePlayerSessionsInpu
 // DescribePlayerSessions API operation.
 type DescribePlayerSessionsRequest struct {
 	*aws.Request
-	Input *DescribePlayerSessionsInput
-	Copy  func(*DescribePlayerSessionsInput) DescribePlayerSessionsRequest
+	Input *types.DescribePlayerSessionsInput
+	Copy  func(*types.DescribePlayerSessionsInput) DescribePlayerSessionsRequest
 }
 
 // Send marshals and sends the DescribePlayerSessions API request.
@@ -167,7 +77,7 @@ func (r DescribePlayerSessionsRequest) Send(ctx context.Context) (*DescribePlaye
 	}
 
 	resp := &DescribePlayerSessionsResponse{
-		DescribePlayerSessionsOutput: r.Request.Data.(*DescribePlayerSessionsOutput),
+		DescribePlayerSessionsOutput: r.Request.Data.(*types.DescribePlayerSessionsOutput),
 		response:                     &aws.Response{Request: r.Request},
 	}
 
@@ -177,7 +87,7 @@ func (r DescribePlayerSessionsRequest) Send(ctx context.Context) (*DescribePlaye
 // DescribePlayerSessionsResponse is the response type for the
 // DescribePlayerSessions API operation.
 type DescribePlayerSessionsResponse struct {
-	*DescribePlayerSessionsOutput
+	*types.DescribePlayerSessionsOutput
 
 	response *aws.Response
 }

@@ -6,88 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/iam/types"
 )
-
-type GetUserPolicyInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the policy document to get.
-	//
-	// This parameter allows (through its regex pattern (http://wikipedia.org/wiki/regex))
-	// a string of characters consisting of upper and lowercase alphanumeric characters
-	// with no spaces. You can also include any of the following characters: _+=,.@-
-	//
-	// PolicyName is a required field
-	PolicyName *string `min:"1" type:"string" required:"true"`
-
-	// The name of the user who the policy is associated with.
-	//
-	// This parameter allows (through its regex pattern (http://wikipedia.org/wiki/regex))
-	// a string of characters consisting of upper and lowercase alphanumeric characters
-	// with no spaces. You can also include any of the following characters: _+=,.@-
-	//
-	// UserName is a required field
-	UserName *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetUserPolicyInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetUserPolicyInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetUserPolicyInput"}
-
-	if s.PolicyName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("PolicyName"))
-	}
-	if s.PolicyName != nil && len(*s.PolicyName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("PolicyName", 1))
-	}
-
-	if s.UserName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("UserName"))
-	}
-	if s.UserName != nil && len(*s.UserName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("UserName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Contains the response to a successful GetUserPolicy request.
-type GetUserPolicyOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The policy document.
-	//
-	// IAM stores policies in JSON format. However, resources that were created
-	// using AWS CloudFormation templates can be formatted in YAML. AWS CloudFormation
-	// always converts a YAML policy to JSON format before submitting it to IAM.
-	//
-	// PolicyDocument is a required field
-	PolicyDocument *string `min:"1" type:"string" required:"true"`
-
-	// The name of the policy.
-	//
-	// PolicyName is a required field
-	PolicyName *string `min:"1" type:"string" required:"true"`
-
-	// The user the policy is associated with.
-	//
-	// UserName is a required field
-	UserName *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetUserPolicyOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetUserPolicy = "GetUserPolicy"
 
@@ -120,7 +40,7 @@ const opGetUserPolicy = "GetUserPolicy"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetUserPolicy
-func (c *Client) GetUserPolicyRequest(input *GetUserPolicyInput) GetUserPolicyRequest {
+func (c *Client) GetUserPolicyRequest(input *types.GetUserPolicyInput) GetUserPolicyRequest {
 	op := &aws.Operation{
 		Name:       opGetUserPolicy,
 		HTTPMethod: "POST",
@@ -128,10 +48,10 @@ func (c *Client) GetUserPolicyRequest(input *GetUserPolicyInput) GetUserPolicyRe
 	}
 
 	if input == nil {
-		input = &GetUserPolicyInput{}
+		input = &types.GetUserPolicyInput{}
 	}
 
-	req := c.newRequest(op, input, &GetUserPolicyOutput{})
+	req := c.newRequest(op, input, &types.GetUserPolicyOutput{})
 	return GetUserPolicyRequest{Request: req, Input: input, Copy: c.GetUserPolicyRequest}
 }
 
@@ -139,8 +59,8 @@ func (c *Client) GetUserPolicyRequest(input *GetUserPolicyInput) GetUserPolicyRe
 // GetUserPolicy API operation.
 type GetUserPolicyRequest struct {
 	*aws.Request
-	Input *GetUserPolicyInput
-	Copy  func(*GetUserPolicyInput) GetUserPolicyRequest
+	Input *types.GetUserPolicyInput
+	Copy  func(*types.GetUserPolicyInput) GetUserPolicyRequest
 }
 
 // Send marshals and sends the GetUserPolicy API request.
@@ -152,7 +72,7 @@ func (r GetUserPolicyRequest) Send(ctx context.Context) (*GetUserPolicyResponse,
 	}
 
 	resp := &GetUserPolicyResponse{
-		GetUserPolicyOutput: r.Request.Data.(*GetUserPolicyOutput),
+		GetUserPolicyOutput: r.Request.Data.(*types.GetUserPolicyOutput),
 		response:            &aws.Response{Request: r.Request},
 	}
 
@@ -162,7 +82,7 @@ func (r GetUserPolicyRequest) Send(ctx context.Context) (*GetUserPolicyResponse,
 // GetUserPolicyResponse is the response type for the
 // GetUserPolicy API operation.
 type GetUserPolicyResponse struct {
-	*GetUserPolicyOutput
+	*types.GetUserPolicyOutput
 
 	response *aws.Response
 }

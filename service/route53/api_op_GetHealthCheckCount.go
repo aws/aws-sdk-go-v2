@@ -6,52 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/route53/types"
 )
-
-// A request for the number of health checks that are associated with the current
-// AWS account.
-type GetHealthCheckCountInput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s GetHealthCheckCountInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetHealthCheckCountInput) MarshalFields(e protocol.FieldEncoder) error {
-
-	return nil
-}
-
-// A complex type that contains the response to a GetHealthCheckCount request.
-type GetHealthCheckCountOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The number of health checks associated with the current AWS account.
-	//
-	// HealthCheckCount is a required field
-	HealthCheckCount *int64 `type:"long" required:"true"`
-}
-
-// String returns the string representation
-func (s GetHealthCheckCountOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetHealthCheckCountOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.HealthCheckCount != nil {
-		v := *s.HealthCheckCount
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "HealthCheckCount", protocol.Int64Value(v), metadata)
-	}
-	return nil
-}
 
 const opGetHealthCheckCount = "GetHealthCheckCount"
 
@@ -69,7 +25,7 @@ const opGetHealthCheckCount = "GetHealthCheckCount"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/GetHealthCheckCount
-func (c *Client) GetHealthCheckCountRequest(input *GetHealthCheckCountInput) GetHealthCheckCountRequest {
+func (c *Client) GetHealthCheckCountRequest(input *types.GetHealthCheckCountInput) GetHealthCheckCountRequest {
 	op := &aws.Operation{
 		Name:       opGetHealthCheckCount,
 		HTTPMethod: "GET",
@@ -77,10 +33,10 @@ func (c *Client) GetHealthCheckCountRequest(input *GetHealthCheckCountInput) Get
 	}
 
 	if input == nil {
-		input = &GetHealthCheckCountInput{}
+		input = &types.GetHealthCheckCountInput{}
 	}
 
-	req := c.newRequest(op, input, &GetHealthCheckCountOutput{})
+	req := c.newRequest(op, input, &types.GetHealthCheckCountOutput{})
 	return GetHealthCheckCountRequest{Request: req, Input: input, Copy: c.GetHealthCheckCountRequest}
 }
 
@@ -88,8 +44,8 @@ func (c *Client) GetHealthCheckCountRequest(input *GetHealthCheckCountInput) Get
 // GetHealthCheckCount API operation.
 type GetHealthCheckCountRequest struct {
 	*aws.Request
-	Input *GetHealthCheckCountInput
-	Copy  func(*GetHealthCheckCountInput) GetHealthCheckCountRequest
+	Input *types.GetHealthCheckCountInput
+	Copy  func(*types.GetHealthCheckCountInput) GetHealthCheckCountRequest
 }
 
 // Send marshals and sends the GetHealthCheckCount API request.
@@ -101,7 +57,7 @@ func (r GetHealthCheckCountRequest) Send(ctx context.Context) (*GetHealthCheckCo
 	}
 
 	resp := &GetHealthCheckCountResponse{
-		GetHealthCheckCountOutput: r.Request.Data.(*GetHealthCheckCountOutput),
+		GetHealthCheckCountOutput: r.Request.Data.(*types.GetHealthCheckCountOutput),
 		response:                  &aws.Response{Request: r.Request},
 	}
 
@@ -111,7 +67,7 @@ func (r GetHealthCheckCountRequest) Send(ctx context.Context) (*GetHealthCheckCo
 // GetHealthCheckCountResponse is the response type for the
 // GetHealthCheckCount API operation.
 type GetHealthCheckCountResponse struct {
-	*GetHealthCheckCountOutput
+	*types.GetHealthCheckCountOutput
 
 	response *aws.Response
 }

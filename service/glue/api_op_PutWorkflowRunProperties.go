@@ -6,69 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/glue/types"
 )
-
-type PutWorkflowRunPropertiesInput struct {
-	_ struct{} `type:"structure"`
-
-	// Name of the workflow which was run.
-	//
-	// Name is a required field
-	Name *string `min:"1" type:"string" required:"true"`
-
-	// The ID of the workflow run for which the run properties should be updated.
-	//
-	// RunId is a required field
-	RunId *string `min:"1" type:"string" required:"true"`
-
-	// The properties to put for the specified run.
-	//
-	// RunProperties is a required field
-	RunProperties map[string]string `type:"map" required:"true"`
-}
-
-// String returns the string representation
-func (s PutWorkflowRunPropertiesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *PutWorkflowRunPropertiesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "PutWorkflowRunPropertiesInput"}
-
-	if s.Name == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Name"))
-	}
-	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
-	}
-
-	if s.RunId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("RunId"))
-	}
-	if s.RunId != nil && len(*s.RunId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("RunId", 1))
-	}
-
-	if s.RunProperties == nil {
-		invalidParams.Add(aws.NewErrParamRequired("RunProperties"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type PutWorkflowRunPropertiesOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s PutWorkflowRunPropertiesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opPutWorkflowRunProperties = "PutWorkflowRunProperties"
 
@@ -87,7 +26,7 @@ const opPutWorkflowRunProperties = "PutWorkflowRunProperties"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/PutWorkflowRunProperties
-func (c *Client) PutWorkflowRunPropertiesRequest(input *PutWorkflowRunPropertiesInput) PutWorkflowRunPropertiesRequest {
+func (c *Client) PutWorkflowRunPropertiesRequest(input *types.PutWorkflowRunPropertiesInput) PutWorkflowRunPropertiesRequest {
 	op := &aws.Operation{
 		Name:       opPutWorkflowRunProperties,
 		HTTPMethod: "POST",
@@ -95,10 +34,10 @@ func (c *Client) PutWorkflowRunPropertiesRequest(input *PutWorkflowRunProperties
 	}
 
 	if input == nil {
-		input = &PutWorkflowRunPropertiesInput{}
+		input = &types.PutWorkflowRunPropertiesInput{}
 	}
 
-	req := c.newRequest(op, input, &PutWorkflowRunPropertiesOutput{})
+	req := c.newRequest(op, input, &types.PutWorkflowRunPropertiesOutput{})
 	return PutWorkflowRunPropertiesRequest{Request: req, Input: input, Copy: c.PutWorkflowRunPropertiesRequest}
 }
 
@@ -106,8 +45,8 @@ func (c *Client) PutWorkflowRunPropertiesRequest(input *PutWorkflowRunProperties
 // PutWorkflowRunProperties API operation.
 type PutWorkflowRunPropertiesRequest struct {
 	*aws.Request
-	Input *PutWorkflowRunPropertiesInput
-	Copy  func(*PutWorkflowRunPropertiesInput) PutWorkflowRunPropertiesRequest
+	Input *types.PutWorkflowRunPropertiesInput
+	Copy  func(*types.PutWorkflowRunPropertiesInput) PutWorkflowRunPropertiesRequest
 }
 
 // Send marshals and sends the PutWorkflowRunProperties API request.
@@ -119,7 +58,7 @@ func (r PutWorkflowRunPropertiesRequest) Send(ctx context.Context) (*PutWorkflow
 	}
 
 	resp := &PutWorkflowRunPropertiesResponse{
-		PutWorkflowRunPropertiesOutput: r.Request.Data.(*PutWorkflowRunPropertiesOutput),
+		PutWorkflowRunPropertiesOutput: r.Request.Data.(*types.PutWorkflowRunPropertiesOutput),
 		response:                       &aws.Response{Request: r.Request},
 	}
 
@@ -129,7 +68,7 @@ func (r PutWorkflowRunPropertiesRequest) Send(ctx context.Context) (*PutWorkflow
 // PutWorkflowRunPropertiesResponse is the response type for the
 // PutWorkflowRunProperties API operation.
 type PutWorkflowRunPropertiesResponse struct {
-	*PutWorkflowRunPropertiesOutput
+	*types.PutWorkflowRunPropertiesOutput
 
 	response *aws.Response
 }

@@ -6,32 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/redshift/types"
 )
-
-type DescribeStorageInput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DescribeStorageInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type DescribeStorageOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The total amount of storage currently used for snapshots.
-	TotalBackupSizeInMegaBytes *float64 `type:"double"`
-
-	// The total amount of storage currently provisioned.
-	TotalProvisionedStorageInMegaBytes *float64 `type:"double"`
-}
-
-// String returns the string representation
-func (s DescribeStorageOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeStorage = "DescribeStorage"
 
@@ -48,7 +24,7 @@ const opDescribeStorage = "DescribeStorage"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeStorage
-func (c *Client) DescribeStorageRequest(input *DescribeStorageInput) DescribeStorageRequest {
+func (c *Client) DescribeStorageRequest(input *types.DescribeStorageInput) DescribeStorageRequest {
 	op := &aws.Operation{
 		Name:       opDescribeStorage,
 		HTTPMethod: "POST",
@@ -56,10 +32,10 @@ func (c *Client) DescribeStorageRequest(input *DescribeStorageInput) DescribeSto
 	}
 
 	if input == nil {
-		input = &DescribeStorageInput{}
+		input = &types.DescribeStorageInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeStorageOutput{})
+	req := c.newRequest(op, input, &types.DescribeStorageOutput{})
 	return DescribeStorageRequest{Request: req, Input: input, Copy: c.DescribeStorageRequest}
 }
 
@@ -67,8 +43,8 @@ func (c *Client) DescribeStorageRequest(input *DescribeStorageInput) DescribeSto
 // DescribeStorage API operation.
 type DescribeStorageRequest struct {
 	*aws.Request
-	Input *DescribeStorageInput
-	Copy  func(*DescribeStorageInput) DescribeStorageRequest
+	Input *types.DescribeStorageInput
+	Copy  func(*types.DescribeStorageInput) DescribeStorageRequest
 }
 
 // Send marshals and sends the DescribeStorage API request.
@@ -80,7 +56,7 @@ func (r DescribeStorageRequest) Send(ctx context.Context) (*DescribeStorageRespo
 	}
 
 	resp := &DescribeStorageResponse{
-		DescribeStorageOutput: r.Request.Data.(*DescribeStorageOutput),
+		DescribeStorageOutput: r.Request.Data.(*types.DescribeStorageOutput),
 		response:              &aws.Response{Request: r.Request},
 	}
 
@@ -90,7 +66,7 @@ func (r DescribeStorageRequest) Send(ctx context.Context) (*DescribeStorageRespo
 // DescribeStorageResponse is the response type for the
 // DescribeStorage API operation.
 type DescribeStorageResponse struct {
-	*DescribeStorageOutput
+	*types.DescribeStorageOutput
 
 	response *aws.Response
 }

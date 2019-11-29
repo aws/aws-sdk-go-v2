@@ -4,243 +4,10 @@ package lexmodelbuildingservice
 
 import (
 	"context"
-	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/lexmodelbuildingservice/types"
 )
-
-type GetIntentInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the intent. The name is case sensitive.
-	//
-	// Name is a required field
-	Name *string `location:"uri" locationName:"name" min:"1" type:"string" required:"true"`
-
-	// The version of the intent.
-	//
-	// Version is a required field
-	Version *string `location:"uri" locationName:"version" min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetIntentInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetIntentInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetIntentInput"}
-
-	if s.Name == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Name"))
-	}
-	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
-	}
-
-	if s.Version == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Version"))
-	}
-	if s.Version != nil && len(*s.Version) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Version", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetIntentInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.Name != nil {
-		v := *s.Name
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Version != nil {
-		v := *s.Version
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "version", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type GetIntentOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Checksum of the intent.
-	Checksum *string `locationName:"checksum" type:"string"`
-
-	// After the Lambda function specified in the fulfillmentActivity element fulfills
-	// the intent, Amazon Lex conveys this statement to the user.
-	ConclusionStatement *Statement `locationName:"conclusionStatement" type:"structure"`
-
-	// If defined in the bot, Amazon Lex uses prompt to confirm the intent before
-	// fulfilling the user's request. For more information, see PutIntent.
-	ConfirmationPrompt *Prompt `locationName:"confirmationPrompt" type:"structure"`
-
-	// The date that the intent was created.
-	CreatedDate *time.Time `locationName:"createdDate" type:"timestamp"`
-
-	// A description of the intent.
-	Description *string `locationName:"description" type:"string"`
-
-	// If defined in the bot, Amazon Amazon Lex invokes this Lambda function for
-	// each user input. For more information, see PutIntent.
-	DialogCodeHook *CodeHook `locationName:"dialogCodeHook" type:"structure"`
-
-	// If defined in the bot, Amazon Lex uses this prompt to solicit additional
-	// user activity after the intent is fulfilled. For more information, see PutIntent.
-	FollowUpPrompt *FollowUpPrompt `locationName:"followUpPrompt" type:"structure"`
-
-	// Describes how the intent is fulfilled. For more information, see PutIntent.
-	FulfillmentActivity *FulfillmentActivity `locationName:"fulfillmentActivity" type:"structure"`
-
-	// The date that the intent was updated. When you create a resource, the creation
-	// date and the last updated date are the same.
-	LastUpdatedDate *time.Time `locationName:"lastUpdatedDate" type:"timestamp"`
-
-	// The name of the intent.
-	Name *string `locationName:"name" min:"1" type:"string"`
-
-	// A unique identifier for a built-in intent.
-	ParentIntentSignature *string `locationName:"parentIntentSignature" type:"string"`
-
-	// If the user answers "no" to the question defined in confirmationPrompt, Amazon
-	// Lex responds with this statement to acknowledge that the intent was canceled.
-	RejectionStatement *Statement `locationName:"rejectionStatement" type:"structure"`
-
-	// An array of sample utterances configured for the intent.
-	SampleUtterances []string `locationName:"sampleUtterances" type:"list"`
-
-	// An array of intent slots configured for the intent.
-	Slots []Slot `locationName:"slots" type:"list"`
-
-	// The version of the intent.
-	Version *string `locationName:"version" min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s GetIntentOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetIntentOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.Checksum != nil {
-		v := *s.Checksum
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "checksum", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.ConclusionStatement != nil {
-		v := s.ConclusionStatement
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "conclusionStatement", v, metadata)
-	}
-	if s.ConfirmationPrompt != nil {
-		v := s.ConfirmationPrompt
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "confirmationPrompt", v, metadata)
-	}
-	if s.CreatedDate != nil {
-		v := *s.CreatedDate
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "createdDate",
-			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
-	}
-	if s.Description != nil {
-		v := *s.Description
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "description", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.DialogCodeHook != nil {
-		v := s.DialogCodeHook
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "dialogCodeHook", v, metadata)
-	}
-	if s.FollowUpPrompt != nil {
-		v := s.FollowUpPrompt
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "followUpPrompt", v, metadata)
-	}
-	if s.FulfillmentActivity != nil {
-		v := s.FulfillmentActivity
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "fulfillmentActivity", v, metadata)
-	}
-	if s.LastUpdatedDate != nil {
-		v := *s.LastUpdatedDate
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "lastUpdatedDate",
-			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
-	}
-	if s.Name != nil {
-		v := *s.Name
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.ParentIntentSignature != nil {
-		v := *s.ParentIntentSignature
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "parentIntentSignature", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.RejectionStatement != nil {
-		v := s.RejectionStatement
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "rejectionStatement", v, metadata)
-	}
-	if s.SampleUtterances != nil {
-		v := s.SampleUtterances
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "sampleUtterances", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
-		}
-		ls0.End()
-
-	}
-	if s.Slots != nil {
-		v := s.Slots
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "slots", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	if s.Version != nil {
-		v := *s.Version
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "version", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opGetIntent = "GetIntent"
 
@@ -260,7 +27,7 @@ const opGetIntent = "GetIntent"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/GetIntent
-func (c *Client) GetIntentRequest(input *GetIntentInput) GetIntentRequest {
+func (c *Client) GetIntentRequest(input *types.GetIntentInput) GetIntentRequest {
 	op := &aws.Operation{
 		Name:       opGetIntent,
 		HTTPMethod: "GET",
@@ -268,10 +35,10 @@ func (c *Client) GetIntentRequest(input *GetIntentInput) GetIntentRequest {
 	}
 
 	if input == nil {
-		input = &GetIntentInput{}
+		input = &types.GetIntentInput{}
 	}
 
-	req := c.newRequest(op, input, &GetIntentOutput{})
+	req := c.newRequest(op, input, &types.GetIntentOutput{})
 	return GetIntentRequest{Request: req, Input: input, Copy: c.GetIntentRequest}
 }
 
@@ -279,8 +46,8 @@ func (c *Client) GetIntentRequest(input *GetIntentInput) GetIntentRequest {
 // GetIntent API operation.
 type GetIntentRequest struct {
 	*aws.Request
-	Input *GetIntentInput
-	Copy  func(*GetIntentInput) GetIntentRequest
+	Input *types.GetIntentInput
+	Copy  func(*types.GetIntentInput) GetIntentRequest
 }
 
 // Send marshals and sends the GetIntent API request.
@@ -292,7 +59,7 @@ func (r GetIntentRequest) Send(ctx context.Context) (*GetIntentResponse, error) 
 	}
 
 	resp := &GetIntentResponse{
-		GetIntentOutput: r.Request.Data.(*GetIntentOutput),
+		GetIntentOutput: r.Request.Data.(*types.GetIntentOutput),
 		response:        &aws.Response{Request: r.Request},
 	}
 
@@ -302,7 +69,7 @@ func (r GetIntentRequest) Send(ctx context.Context) (*GetIntentResponse, error) 
 // GetIntentResponse is the response type for the
 // GetIntent API operation.
 type GetIntentResponse struct {
-	*GetIntentOutput
+	*types.GetIntentOutput
 
 	response *aws.Response
 }

@@ -4,69 +4,10 @@ package redshift
 
 import (
 	"context"
-	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/redshift/types"
 )
-
-type DisableLoggingInput struct {
-	_ struct{} `type:"structure"`
-
-	// The identifier of the cluster on which logging is to be stopped.
-	//
-	// Example: examplecluster
-	//
-	// ClusterIdentifier is a required field
-	ClusterIdentifier *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DisableLoggingInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DisableLoggingInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DisableLoggingInput"}
-
-	if s.ClusterIdentifier == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ClusterIdentifier"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Describes the status of logging for a cluster.
-type DisableLoggingOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the S3 bucket where the log files are stored.
-	BucketName *string `type:"string"`
-
-	// The message indicating that logs failed to be delivered.
-	LastFailureMessage *string `type:"string"`
-
-	// The last time when logs failed to be delivered.
-	LastFailureTime *time.Time `type:"timestamp"`
-
-	// The last time that logs were delivered.
-	LastSuccessfulDeliveryTime *time.Time `type:"timestamp"`
-
-	// true if logging is on, false if logging is off.
-	LoggingEnabled *bool `type:"boolean"`
-
-	// The prefix applied to the log file names.
-	S3KeyPrefix *string `type:"string"`
-}
-
-// String returns the string representation
-func (s DisableLoggingOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDisableLogging = "DisableLogging"
 
@@ -84,7 +25,7 @@ const opDisableLogging = "DisableLogging"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DisableLogging
-func (c *Client) DisableLoggingRequest(input *DisableLoggingInput) DisableLoggingRequest {
+func (c *Client) DisableLoggingRequest(input *types.DisableLoggingInput) DisableLoggingRequest {
 	op := &aws.Operation{
 		Name:       opDisableLogging,
 		HTTPMethod: "POST",
@@ -92,10 +33,10 @@ func (c *Client) DisableLoggingRequest(input *DisableLoggingInput) DisableLoggin
 	}
 
 	if input == nil {
-		input = &DisableLoggingInput{}
+		input = &types.DisableLoggingInput{}
 	}
 
-	req := c.newRequest(op, input, &DisableLoggingOutput{})
+	req := c.newRequest(op, input, &types.DisableLoggingOutput{})
 	return DisableLoggingRequest{Request: req, Input: input, Copy: c.DisableLoggingRequest}
 }
 
@@ -103,8 +44,8 @@ func (c *Client) DisableLoggingRequest(input *DisableLoggingInput) DisableLoggin
 // DisableLogging API operation.
 type DisableLoggingRequest struct {
 	*aws.Request
-	Input *DisableLoggingInput
-	Copy  func(*DisableLoggingInput) DisableLoggingRequest
+	Input *types.DisableLoggingInput
+	Copy  func(*types.DisableLoggingInput) DisableLoggingRequest
 }
 
 // Send marshals and sends the DisableLogging API request.
@@ -116,7 +57,7 @@ func (r DisableLoggingRequest) Send(ctx context.Context) (*DisableLoggingRespons
 	}
 
 	resp := &DisableLoggingResponse{
-		DisableLoggingOutput: r.Request.Data.(*DisableLoggingOutput),
+		DisableLoggingOutput: r.Request.Data.(*types.DisableLoggingOutput),
 		response:             &aws.Response{Request: r.Request},
 	}
 
@@ -126,7 +67,7 @@ func (r DisableLoggingRequest) Send(ctx context.Context) (*DisableLoggingRespons
 // DisableLoggingResponse is the response type for the
 // DisableLogging API operation.
 type DisableLoggingResponse struct {
-	*DisableLoggingOutput
+	*types.DisableLoggingOutput
 
 	response *aws.Response
 }

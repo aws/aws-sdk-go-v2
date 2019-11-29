@@ -8,7 +8,7 @@ import (
 	"testing"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/service/dynamodb"
+	"github.com/aws/aws-sdk-go-v2/service/dynamodb/types"
 )
 
 // condErrorMode will help with error cases and checking error types
@@ -24,7 +24,6 @@ const (
 	invalidConditionOperand = "BuildOperand error"
 )
 
-//Compare
 func TestCompare(t *testing.T) {
 	cases := []struct {
 		name         string
@@ -55,7 +54,7 @@ func TestCompare(t *testing.T) {
 			expectedNode: exprNode{
 				children: []exprNode{
 					{
-						values: []dynamodb.AttributeValue{
+						values: []types.AttributeValue{
 							{
 								N: aws.String("5"),
 							},
@@ -63,7 +62,7 @@ func TestCompare(t *testing.T) {
 						fmtExpr: "$v",
 					},
 					{
-						values: []dynamodb.AttributeValue{
+						values: []types.AttributeValue{
 							{
 								S: aws.String("bar"),
 							},
@@ -114,7 +113,7 @@ func TestCompare(t *testing.T) {
 			expectedNode: exprNode{
 				children: []exprNode{
 					{
-						values: []dynamodb.AttributeValue{
+						values: []types.AttributeValue{
 							{
 								N: aws.String("5"),
 							},
@@ -122,7 +121,7 @@ func TestCompare(t *testing.T) {
 						fmtExpr: "$v",
 					},
 					{
-						values: []dynamodb.AttributeValue{
+						values: []types.AttributeValue{
 							{
 								S: aws.String("bar"),
 							},
@@ -173,7 +172,7 @@ func TestCompare(t *testing.T) {
 			expectedNode: exprNode{
 				children: []exprNode{
 					{
-						values: []dynamodb.AttributeValue{
+						values: []types.AttributeValue{
 							{
 								N: aws.String("5"),
 							},
@@ -181,7 +180,7 @@ func TestCompare(t *testing.T) {
 						fmtExpr: "$v",
 					},
 					{
-						values: []dynamodb.AttributeValue{
+						values: []types.AttributeValue{
 							{
 								S: aws.String("bar"),
 							},
@@ -232,7 +231,7 @@ func TestCompare(t *testing.T) {
 			expectedNode: exprNode{
 				children: []exprNode{
 					{
-						values: []dynamodb.AttributeValue{
+						values: []types.AttributeValue{
 							{
 								N: aws.String("5"),
 							},
@@ -240,7 +239,7 @@ func TestCompare(t *testing.T) {
 						fmtExpr: "$v",
 					},
 					{
-						values: []dynamodb.AttributeValue{
+						values: []types.AttributeValue{
 							{
 								S: aws.String("bar"),
 							},
@@ -291,7 +290,7 @@ func TestCompare(t *testing.T) {
 			expectedNode: exprNode{
 				children: []exprNode{
 					{
-						values: []dynamodb.AttributeValue{
+						values: []types.AttributeValue{
 							{
 								N: aws.String("5"),
 							},
@@ -299,7 +298,7 @@ func TestCompare(t *testing.T) {
 						fmtExpr: "$v",
 					},
 					{
-						values: []dynamodb.AttributeValue{
+						values: []types.AttributeValue{
 							{
 								S: aws.String("bar"),
 							},
@@ -350,7 +349,7 @@ func TestCompare(t *testing.T) {
 			expectedNode: exprNode{
 				children: []exprNode{
 					{
-						values: []dynamodb.AttributeValue{
+						values: []types.AttributeValue{
 							{
 								N: aws.String("5"),
 							},
@@ -358,7 +357,7 @@ func TestCompare(t *testing.T) {
 						fmtExpr: "$v",
 					},
 					{
-						values: []dynamodb.AttributeValue{
+						values: []types.AttributeValue{
 							{
 								S: aws.String("bar"),
 							},
@@ -497,7 +496,7 @@ func TestBoolCondition(t *testing.T) {
 								fmtExpr: "$n",
 							},
 							{
-								values: []dynamodb.AttributeValue{
+								values: []types.AttributeValue{
 									{
 										N: aws.String("5"),
 									},
@@ -514,7 +513,7 @@ func TestBoolCondition(t *testing.T) {
 								fmtExpr: "$n",
 							},
 							{
-								values: []dynamodb.AttributeValue{
+								values: []types.AttributeValue{
 									{
 										S: aws.String("baz"),
 									},
@@ -540,7 +539,7 @@ func TestBoolCondition(t *testing.T) {
 								fmtExpr: "$n",
 							},
 							{
-								values: []dynamodb.AttributeValue{
+								values: []types.AttributeValue{
 									{
 										N: aws.String("5"),
 									},
@@ -557,7 +556,7 @@ func TestBoolCondition(t *testing.T) {
 								fmtExpr: "$n",
 							},
 							{
-								values: []dynamodb.AttributeValue{
+								values: []types.AttributeValue{
 									{
 										S: aws.String("baz"),
 									},
@@ -583,7 +582,7 @@ func TestBoolCondition(t *testing.T) {
 								fmtExpr: "$n",
 							},
 							{
-								values: []dynamodb.AttributeValue{
+								values: []types.AttributeValue{
 									{
 										N: aws.String("5"),
 									},
@@ -600,7 +599,7 @@ func TestBoolCondition(t *testing.T) {
 								fmtExpr: "$n",
 							},
 							{
-								values: []dynamodb.AttributeValue{
+								values: []types.AttributeValue{
 									{
 										S: aws.String("baz"),
 									},
@@ -617,7 +616,7 @@ func TestBoolCondition(t *testing.T) {
 								fmtExpr: "$n",
 							},
 							{
-								values: []dynamodb.AttributeValue{
+								values: []types.AttributeValue{
 									{
 										BOOL: aws.Bool(true),
 									},
@@ -643,7 +642,7 @@ func TestBoolCondition(t *testing.T) {
 								fmtExpr: "$n",
 							},
 							{
-								values: []dynamodb.AttributeValue{
+								values: []types.AttributeValue{
 									{
 										N: aws.String("5"),
 									},
@@ -660,7 +659,7 @@ func TestBoolCondition(t *testing.T) {
 								fmtExpr: "$n",
 							},
 							{
-								values: []dynamodb.AttributeValue{
+								values: []types.AttributeValue{
 									{
 										S: aws.String("baz"),
 									},
@@ -677,7 +676,7 @@ func TestBoolCondition(t *testing.T) {
 								fmtExpr: "$n",
 							},
 							{
-								values: []dynamodb.AttributeValue{
+								values: []types.AttributeValue{
 									{
 										BOOL: aws.Bool(true),
 									},
@@ -745,7 +744,7 @@ func TestNotCondition(t *testing.T) {
 								fmtExpr: "$n",
 							},
 							{
-								values: []dynamodb.AttributeValue{
+								values: []types.AttributeValue{
 									{
 										N: aws.String("5"),
 									},
@@ -771,7 +770,7 @@ func TestNotCondition(t *testing.T) {
 								fmtExpr: "$n",
 							},
 							{
-								values: []dynamodb.AttributeValue{
+								values: []types.AttributeValue{
 									{
 										N: aws.String("5"),
 									},
@@ -832,7 +831,7 @@ func TestBetweenCondition(t *testing.T) {
 						fmtExpr: "$n",
 					},
 					{
-						values: []dynamodb.AttributeValue{
+						values: []types.AttributeValue{
 							{
 								N: aws.String("5"),
 							},
@@ -840,7 +839,7 @@ func TestBetweenCondition(t *testing.T) {
 						fmtExpr: "$v",
 					},
 					{
-						values: []dynamodb.AttributeValue{
+						values: []types.AttributeValue{
 							{
 								N: aws.String("7"),
 							},
@@ -857,7 +856,7 @@ func TestBetweenCondition(t *testing.T) {
 			expectedNode: exprNode{
 				children: []exprNode{
 					{
-						values: []dynamodb.AttributeValue{
+						values: []types.AttributeValue{
 							{
 								N: aws.String("6"),
 							},
@@ -865,7 +864,7 @@ func TestBetweenCondition(t *testing.T) {
 						fmtExpr: "$v",
 					},
 					{
-						values: []dynamodb.AttributeValue{
+						values: []types.AttributeValue{
 							{
 								N: aws.String("5"),
 							},
@@ -873,7 +872,7 @@ func TestBetweenCondition(t *testing.T) {
 						fmtExpr: "$v",
 					},
 					{
-						values: []dynamodb.AttributeValue{
+						values: []types.AttributeValue{
 							{
 								N: aws.String("7"),
 							},
@@ -894,7 +893,7 @@ func TestBetweenCondition(t *testing.T) {
 						fmtExpr: "size ($n)",
 					},
 					{
-						values: []dynamodb.AttributeValue{
+						values: []types.AttributeValue{
 							{
 								N: aws.String("5"),
 							},
@@ -902,7 +901,7 @@ func TestBetweenCondition(t *testing.T) {
 						fmtExpr: "$v",
 					},
 					{
-						values: []dynamodb.AttributeValue{
+						values: []types.AttributeValue{
 							{
 								N: aws.String("7"),
 							},
@@ -960,7 +959,7 @@ func TestInCondition(t *testing.T) {
 						fmtExpr: "$n",
 					},
 					{
-						values: []dynamodb.AttributeValue{
+						values: []types.AttributeValue{
 							{
 								N: aws.String("5"),
 							},
@@ -968,7 +967,7 @@ func TestInCondition(t *testing.T) {
 						fmtExpr: "$v",
 					},
 					{
-						values: []dynamodb.AttributeValue{
+						values: []types.AttributeValue{
 							{
 								N: aws.String("7"),
 							},
@@ -985,7 +984,7 @@ func TestInCondition(t *testing.T) {
 			expectedNode: exprNode{
 				children: []exprNode{
 					{
-						values: []dynamodb.AttributeValue{
+						values: []types.AttributeValue{
 							{
 								N: aws.String("6"),
 							},
@@ -993,7 +992,7 @@ func TestInCondition(t *testing.T) {
 						fmtExpr: "$v",
 					},
 					{
-						values: []dynamodb.AttributeValue{
+						values: []types.AttributeValue{
 							{
 								N: aws.String("5"),
 							},
@@ -1001,7 +1000,7 @@ func TestInCondition(t *testing.T) {
 						fmtExpr: "$v",
 					},
 					{
-						values: []dynamodb.AttributeValue{
+						values: []types.AttributeValue{
 							{
 								N: aws.String("7"),
 							},
@@ -1022,7 +1021,7 @@ func TestInCondition(t *testing.T) {
 						fmtExpr: "size ($n)",
 					},
 					{
-						values: []dynamodb.AttributeValue{
+						values: []types.AttributeValue{
 							{
 								N: aws.String("5"),
 							},
@@ -1030,7 +1029,7 @@ func TestInCondition(t *testing.T) {
 						fmtExpr: "$v",
 					},
 					{
-						values: []dynamodb.AttributeValue{
+						values: []types.AttributeValue{
 							{
 								N: aws.String("7"),
 							},
@@ -1156,7 +1155,7 @@ func TestAttrTypeCondition(t *testing.T) {
 						fmtExpr: "$n",
 					},
 					{
-						values: []dynamodb.AttributeValue{
+						values: []types.AttributeValue{
 							{
 								S: aws.String("S"),
 							},
@@ -1177,7 +1176,7 @@ func TestAttrTypeCondition(t *testing.T) {
 						fmtExpr: "$n",
 					},
 					{
-						values: []dynamodb.AttributeValue{
+						values: []types.AttributeValue{
 							{
 								S: aws.String("S"),
 							},
@@ -1198,7 +1197,7 @@ func TestAttrTypeCondition(t *testing.T) {
 						fmtExpr: "$n",
 					},
 					{
-						values: []dynamodb.AttributeValue{
+						values: []types.AttributeValue{
 							{
 								S: aws.String("SS"),
 							},
@@ -1219,7 +1218,7 @@ func TestAttrTypeCondition(t *testing.T) {
 						fmtExpr: "$n",
 					},
 					{
-						values: []dynamodb.AttributeValue{
+						values: []types.AttributeValue{
 							{
 								S: aws.String("N"),
 							},
@@ -1240,7 +1239,7 @@ func TestAttrTypeCondition(t *testing.T) {
 						fmtExpr: "$n",
 					},
 					{
-						values: []dynamodb.AttributeValue{
+						values: []types.AttributeValue{
 							{
 								S: aws.String("NS"),
 							},
@@ -1261,7 +1260,7 @@ func TestAttrTypeCondition(t *testing.T) {
 						fmtExpr: "$n",
 					},
 					{
-						values: []dynamodb.AttributeValue{
+						values: []types.AttributeValue{
 							{
 								S: aws.String("B"),
 							},
@@ -1282,7 +1281,7 @@ func TestAttrTypeCondition(t *testing.T) {
 						fmtExpr: "$n",
 					},
 					{
-						values: []dynamodb.AttributeValue{
+						values: []types.AttributeValue{
 							{
 								S: aws.String("BS"),
 							},
@@ -1303,7 +1302,7 @@ func TestAttrTypeCondition(t *testing.T) {
 						fmtExpr: "$n",
 					},
 					{
-						values: []dynamodb.AttributeValue{
+						values: []types.AttributeValue{
 							{
 								S: aws.String("BOOL"),
 							},
@@ -1324,7 +1323,7 @@ func TestAttrTypeCondition(t *testing.T) {
 						fmtExpr: "$n",
 					},
 					{
-						values: []dynamodb.AttributeValue{
+						values: []types.AttributeValue{
 							{
 								S: aws.String("NULL"),
 							},
@@ -1345,7 +1344,7 @@ func TestAttrTypeCondition(t *testing.T) {
 						fmtExpr: "$n",
 					},
 					{
-						values: []dynamodb.AttributeValue{
+						values: []types.AttributeValue{
 							{
 								S: aws.String("L"),
 							},
@@ -1366,7 +1365,7 @@ func TestAttrTypeCondition(t *testing.T) {
 						fmtExpr: "$n",
 					},
 					{
-						values: []dynamodb.AttributeValue{
+						values: []types.AttributeValue{
 							{
 								S: aws.String("M"),
 							},
@@ -1424,7 +1423,7 @@ func TestBeginsWithCondition(t *testing.T) {
 						fmtExpr: "$n",
 					},
 					{
-						values: []dynamodb.AttributeValue{
+						values: []types.AttributeValue{
 							{
 								S: aws.String("bar"),
 							},
@@ -1482,7 +1481,7 @@ func TestContainsCondition(t *testing.T) {
 						fmtExpr: "$n",
 					},
 					{
-						values: []dynamodb.AttributeValue{
+						values: []types.AttributeValue{
 							{
 								S: aws.String("bar"),
 							},

@@ -6,52 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/storagegateway/types"
 )
-
-type DescribeCachediSCSIVolumesInput struct {
-	_ struct{} `type:"structure"`
-
-	// An array of strings where each string represents the Amazon Resource Name
-	// (ARN) of a cached volume. All of the specified cached volumes must from the
-	// same gateway. Use ListVolumes to get volume ARNs for a gateway.
-	//
-	// VolumeARNs is a required field
-	VolumeARNs []string `type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeCachediSCSIVolumesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeCachediSCSIVolumesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeCachediSCSIVolumesInput"}
-
-	if s.VolumeARNs == nil {
-		invalidParams.Add(aws.NewErrParamRequired("VolumeARNs"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// A JSON object containing the following fields:
-type DescribeCachediSCSIVolumesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// An array of objects where each object contains metadata about one cached
-	// volume.
-	CachediSCSIVolumes []CachediSCSIVolume `type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeCachediSCSIVolumesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeCachediSCSIVolumes = "DescribeCachediSCSIVolumes"
 
@@ -73,7 +29,7 @@ const opDescribeCachediSCSIVolumes = "DescribeCachediSCSIVolumes"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DescribeCachediSCSIVolumes
-func (c *Client) DescribeCachediSCSIVolumesRequest(input *DescribeCachediSCSIVolumesInput) DescribeCachediSCSIVolumesRequest {
+func (c *Client) DescribeCachediSCSIVolumesRequest(input *types.DescribeCachediSCSIVolumesInput) DescribeCachediSCSIVolumesRequest {
 	op := &aws.Operation{
 		Name:       opDescribeCachediSCSIVolumes,
 		HTTPMethod: "POST",
@@ -81,10 +37,10 @@ func (c *Client) DescribeCachediSCSIVolumesRequest(input *DescribeCachediSCSIVol
 	}
 
 	if input == nil {
-		input = &DescribeCachediSCSIVolumesInput{}
+		input = &types.DescribeCachediSCSIVolumesInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeCachediSCSIVolumesOutput{})
+	req := c.newRequest(op, input, &types.DescribeCachediSCSIVolumesOutput{})
 	return DescribeCachediSCSIVolumesRequest{Request: req, Input: input, Copy: c.DescribeCachediSCSIVolumesRequest}
 }
 
@@ -92,8 +48,8 @@ func (c *Client) DescribeCachediSCSIVolumesRequest(input *DescribeCachediSCSIVol
 // DescribeCachediSCSIVolumes API operation.
 type DescribeCachediSCSIVolumesRequest struct {
 	*aws.Request
-	Input *DescribeCachediSCSIVolumesInput
-	Copy  func(*DescribeCachediSCSIVolumesInput) DescribeCachediSCSIVolumesRequest
+	Input *types.DescribeCachediSCSIVolumesInput
+	Copy  func(*types.DescribeCachediSCSIVolumesInput) DescribeCachediSCSIVolumesRequest
 }
 
 // Send marshals and sends the DescribeCachediSCSIVolumes API request.
@@ -105,7 +61,7 @@ func (r DescribeCachediSCSIVolumesRequest) Send(ctx context.Context) (*DescribeC
 	}
 
 	resp := &DescribeCachediSCSIVolumesResponse{
-		DescribeCachediSCSIVolumesOutput: r.Request.Data.(*DescribeCachediSCSIVolumesOutput),
+		DescribeCachediSCSIVolumesOutput: r.Request.Data.(*types.DescribeCachediSCSIVolumesOutput),
 		response:                         &aws.Response{Request: r.Request},
 	}
 
@@ -115,7 +71,7 @@ func (r DescribeCachediSCSIVolumesRequest) Send(ctx context.Context) (*DescribeC
 // DescribeCachediSCSIVolumesResponse is the response type for the
 // DescribeCachediSCSIVolumes API operation.
 type DescribeCachediSCSIVolumesResponse struct {
-	*DescribeCachediSCSIVolumesOutput
+	*types.DescribeCachediSCSIVolumesOutput
 
 	response *aws.Response
 }

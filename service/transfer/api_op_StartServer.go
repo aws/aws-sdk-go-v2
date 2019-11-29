@@ -6,47 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
+	"github.com/aws/aws-sdk-go-v2/service/transfer/types"
 )
-
-type StartServerInput struct {
-	_ struct{} `type:"structure"`
-
-	// A system-assigned unique identifier for an SFTP server that you start.
-	//
-	// ServerId is a required field
-	ServerId *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s StartServerInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *StartServerInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "StartServerInput"}
-
-	if s.ServerId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ServerId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type StartServerOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s StartServerOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opStartServer = "StartServer"
 
@@ -71,7 +34,7 @@ const opStartServer = "StartServer"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/StartServer
-func (c *Client) StartServerRequest(input *StartServerInput) StartServerRequest {
+func (c *Client) StartServerRequest(input *types.StartServerInput) StartServerRequest {
 	op := &aws.Operation{
 		Name:       opStartServer,
 		HTTPMethod: "POST",
@@ -79,10 +42,10 @@ func (c *Client) StartServerRequest(input *StartServerInput) StartServerRequest 
 	}
 
 	if input == nil {
-		input = &StartServerInput{}
+		input = &types.StartServerInput{}
 	}
 
-	req := c.newRequest(op, input, &StartServerOutput{})
+	req := c.newRequest(op, input, &types.StartServerOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return StartServerRequest{Request: req, Input: input, Copy: c.StartServerRequest}
@@ -92,8 +55,8 @@ func (c *Client) StartServerRequest(input *StartServerInput) StartServerRequest 
 // StartServer API operation.
 type StartServerRequest struct {
 	*aws.Request
-	Input *StartServerInput
-	Copy  func(*StartServerInput) StartServerRequest
+	Input *types.StartServerInput
+	Copy  func(*types.StartServerInput) StartServerRequest
 }
 
 // Send marshals and sends the StartServer API request.
@@ -105,7 +68,7 @@ func (r StartServerRequest) Send(ctx context.Context) (*StartServerResponse, err
 	}
 
 	resp := &StartServerResponse{
-		StartServerOutput: r.Request.Data.(*StartServerOutput),
+		StartServerOutput: r.Request.Data.(*types.StartServerOutput),
 		response:          &aws.Response{Request: r.Request},
 	}
 
@@ -115,7 +78,7 @@ func (r StartServerRequest) Send(ctx context.Context) (*StartServerResponse, err
 // StartServerResponse is the response type for the
 // StartServer API operation.
 type StartServerResponse struct {
-	*StartServerOutput
+	*types.StartServerOutput
 
 	response *aws.Response
 }

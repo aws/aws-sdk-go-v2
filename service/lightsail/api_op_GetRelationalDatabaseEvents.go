@@ -6,64 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/lightsail/types"
 )
-
-type GetRelationalDatabaseEventsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The number of minutes in the past from which to retrieve events. For example,
-	// to get all events from the past 2 hours, enter 120.
-	//
-	// Default: 60
-	//
-	// The minimum is 1 and the maximum is 14 days (20160 minutes).
-	DurationInMinutes *int64 `locationName:"durationInMinutes" type:"integer"`
-
-	// A token used for advancing to a specific page of results from for get relational
-	// database events request.
-	PageToken *string `locationName:"pageToken" type:"string"`
-
-	// The name of the database from which to get events.
-	//
-	// RelationalDatabaseName is a required field
-	RelationalDatabaseName *string `locationName:"relationalDatabaseName" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetRelationalDatabaseEventsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetRelationalDatabaseEventsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetRelationalDatabaseEventsInput"}
-
-	if s.RelationalDatabaseName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("RelationalDatabaseName"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type GetRelationalDatabaseEventsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A token used for advancing to the next page of results from your get relational
-	// database events request.
-	NextPageToken *string `locationName:"nextPageToken" type:"string"`
-
-	// An object describing the result of your get relational database events request.
-	RelationalDatabaseEvents []RelationalDatabaseEvent `locationName:"relationalDatabaseEvents" type:"list"`
-}
-
-// String returns the string representation
-func (s GetRelationalDatabaseEventsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetRelationalDatabaseEvents = "GetRelationalDatabaseEvents"
 
@@ -80,7 +24,7 @@ const opGetRelationalDatabaseEvents = "GetRelationalDatabaseEvents"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetRelationalDatabaseEvents
-func (c *Client) GetRelationalDatabaseEventsRequest(input *GetRelationalDatabaseEventsInput) GetRelationalDatabaseEventsRequest {
+func (c *Client) GetRelationalDatabaseEventsRequest(input *types.GetRelationalDatabaseEventsInput) GetRelationalDatabaseEventsRequest {
 	op := &aws.Operation{
 		Name:       opGetRelationalDatabaseEvents,
 		HTTPMethod: "POST",
@@ -88,10 +32,10 @@ func (c *Client) GetRelationalDatabaseEventsRequest(input *GetRelationalDatabase
 	}
 
 	if input == nil {
-		input = &GetRelationalDatabaseEventsInput{}
+		input = &types.GetRelationalDatabaseEventsInput{}
 	}
 
-	req := c.newRequest(op, input, &GetRelationalDatabaseEventsOutput{})
+	req := c.newRequest(op, input, &types.GetRelationalDatabaseEventsOutput{})
 	return GetRelationalDatabaseEventsRequest{Request: req, Input: input, Copy: c.GetRelationalDatabaseEventsRequest}
 }
 
@@ -99,8 +43,8 @@ func (c *Client) GetRelationalDatabaseEventsRequest(input *GetRelationalDatabase
 // GetRelationalDatabaseEvents API operation.
 type GetRelationalDatabaseEventsRequest struct {
 	*aws.Request
-	Input *GetRelationalDatabaseEventsInput
-	Copy  func(*GetRelationalDatabaseEventsInput) GetRelationalDatabaseEventsRequest
+	Input *types.GetRelationalDatabaseEventsInput
+	Copy  func(*types.GetRelationalDatabaseEventsInput) GetRelationalDatabaseEventsRequest
 }
 
 // Send marshals and sends the GetRelationalDatabaseEvents API request.
@@ -112,7 +56,7 @@ func (r GetRelationalDatabaseEventsRequest) Send(ctx context.Context) (*GetRelat
 	}
 
 	resp := &GetRelationalDatabaseEventsResponse{
-		GetRelationalDatabaseEventsOutput: r.Request.Data.(*GetRelationalDatabaseEventsOutput),
+		GetRelationalDatabaseEventsOutput: r.Request.Data.(*types.GetRelationalDatabaseEventsOutput),
 		response:                          &aws.Response{Request: r.Request},
 	}
 
@@ -122,7 +66,7 @@ func (r GetRelationalDatabaseEventsRequest) Send(ctx context.Context) (*GetRelat
 // GetRelationalDatabaseEventsResponse is the response type for the
 // GetRelationalDatabaseEvents API operation.
 type GetRelationalDatabaseEventsResponse struct {
-	*GetRelationalDatabaseEventsOutput
+	*types.GetRelationalDatabaseEventsOutput
 
 	response *aws.Response
 }

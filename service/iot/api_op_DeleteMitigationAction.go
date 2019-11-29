@@ -6,64 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/iot/types"
 )
-
-type DeleteMitigationActionInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the mitigation action that you want to delete.
-	//
-	// ActionName is a required field
-	ActionName *string `location:"uri" locationName:"actionName" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteMitigationActionInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteMitigationActionInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteMitigationActionInput"}
-
-	if s.ActionName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ActionName"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteMitigationActionInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.ActionName != nil {
-		v := *s.ActionName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "actionName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type DeleteMitigationActionOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteMitigationActionOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteMitigationActionOutput) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
 
 const opDeleteMitigationAction = "DeleteMitigationAction"
 
@@ -78,7 +22,7 @@ const opDeleteMitigationAction = "DeleteMitigationAction"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) DeleteMitigationActionRequest(input *DeleteMitigationActionInput) DeleteMitigationActionRequest {
+func (c *Client) DeleteMitigationActionRequest(input *types.DeleteMitigationActionInput) DeleteMitigationActionRequest {
 	op := &aws.Operation{
 		Name:       opDeleteMitigationAction,
 		HTTPMethod: "DELETE",
@@ -86,10 +30,10 @@ func (c *Client) DeleteMitigationActionRequest(input *DeleteMitigationActionInpu
 	}
 
 	if input == nil {
-		input = &DeleteMitigationActionInput{}
+		input = &types.DeleteMitigationActionInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteMitigationActionOutput{})
+	req := c.newRequest(op, input, &types.DeleteMitigationActionOutput{})
 	return DeleteMitigationActionRequest{Request: req, Input: input, Copy: c.DeleteMitigationActionRequest}
 }
 
@@ -97,8 +41,8 @@ func (c *Client) DeleteMitigationActionRequest(input *DeleteMitigationActionInpu
 // DeleteMitigationAction API operation.
 type DeleteMitigationActionRequest struct {
 	*aws.Request
-	Input *DeleteMitigationActionInput
-	Copy  func(*DeleteMitigationActionInput) DeleteMitigationActionRequest
+	Input *types.DeleteMitigationActionInput
+	Copy  func(*types.DeleteMitigationActionInput) DeleteMitigationActionRequest
 }
 
 // Send marshals and sends the DeleteMitigationAction API request.
@@ -110,7 +54,7 @@ func (r DeleteMitigationActionRequest) Send(ctx context.Context) (*DeleteMitigat
 	}
 
 	resp := &DeleteMitigationActionResponse{
-		DeleteMitigationActionOutput: r.Request.Data.(*DeleteMitigationActionOutput),
+		DeleteMitigationActionOutput: r.Request.Data.(*types.DeleteMitigationActionOutput),
 		response:                     &aws.Response{Request: r.Request},
 	}
 
@@ -120,7 +64,7 @@ func (r DeleteMitigationActionRequest) Send(ctx context.Context) (*DeleteMitigat
 // DeleteMitigationActionResponse is the response type for the
 // DeleteMitigationAction API operation.
 type DeleteMitigationActionResponse struct {
-	*DeleteMitigationActionOutput
+	*types.DeleteMitigationActionOutput
 
 	response *aws.Response
 }

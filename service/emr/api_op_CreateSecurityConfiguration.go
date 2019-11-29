@@ -4,69 +4,10 @@ package emr
 
 import (
 	"context"
-	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/emr/types"
 )
-
-type CreateSecurityConfigurationInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the security configuration.
-	//
-	// Name is a required field
-	Name *string `type:"string" required:"true"`
-
-	// The security configuration details in JSON format. For JSON parameters and
-	// examples, see Use Security Configurations to Set Up Cluster Security (https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-security-configurations.html)
-	// in the Amazon EMR Management Guide.
-	//
-	// SecurityConfiguration is a required field
-	SecurityConfiguration *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s CreateSecurityConfigurationInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateSecurityConfigurationInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateSecurityConfigurationInput"}
-
-	if s.Name == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Name"))
-	}
-
-	if s.SecurityConfiguration == nil {
-		invalidParams.Add(aws.NewErrParamRequired("SecurityConfiguration"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type CreateSecurityConfigurationOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The date and time the security configuration was created.
-	//
-	// CreationDateTime is a required field
-	CreationDateTime *time.Time `type:"timestamp" required:"true"`
-
-	// The name of the security configuration.
-	//
-	// Name is a required field
-	Name *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s CreateSecurityConfigurationOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCreateSecurityConfiguration = "CreateSecurityConfiguration"
 
@@ -84,7 +25,7 @@ const opCreateSecurityConfiguration = "CreateSecurityConfiguration"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/CreateSecurityConfiguration
-func (c *Client) CreateSecurityConfigurationRequest(input *CreateSecurityConfigurationInput) CreateSecurityConfigurationRequest {
+func (c *Client) CreateSecurityConfigurationRequest(input *types.CreateSecurityConfigurationInput) CreateSecurityConfigurationRequest {
 	op := &aws.Operation{
 		Name:       opCreateSecurityConfiguration,
 		HTTPMethod: "POST",
@@ -92,10 +33,10 @@ func (c *Client) CreateSecurityConfigurationRequest(input *CreateSecurityConfigu
 	}
 
 	if input == nil {
-		input = &CreateSecurityConfigurationInput{}
+		input = &types.CreateSecurityConfigurationInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateSecurityConfigurationOutput{})
+	req := c.newRequest(op, input, &types.CreateSecurityConfigurationOutput{})
 	return CreateSecurityConfigurationRequest{Request: req, Input: input, Copy: c.CreateSecurityConfigurationRequest}
 }
 
@@ -103,8 +44,8 @@ func (c *Client) CreateSecurityConfigurationRequest(input *CreateSecurityConfigu
 // CreateSecurityConfiguration API operation.
 type CreateSecurityConfigurationRequest struct {
 	*aws.Request
-	Input *CreateSecurityConfigurationInput
-	Copy  func(*CreateSecurityConfigurationInput) CreateSecurityConfigurationRequest
+	Input *types.CreateSecurityConfigurationInput
+	Copy  func(*types.CreateSecurityConfigurationInput) CreateSecurityConfigurationRequest
 }
 
 // Send marshals and sends the CreateSecurityConfiguration API request.
@@ -116,7 +57,7 @@ func (r CreateSecurityConfigurationRequest) Send(ctx context.Context) (*CreateSe
 	}
 
 	resp := &CreateSecurityConfigurationResponse{
-		CreateSecurityConfigurationOutput: r.Request.Data.(*CreateSecurityConfigurationOutput),
+		CreateSecurityConfigurationOutput: r.Request.Data.(*types.CreateSecurityConfigurationOutput),
 		response:                          &aws.Response{Request: r.Request},
 	}
 
@@ -126,7 +67,7 @@ func (r CreateSecurityConfigurationRequest) Send(ctx context.Context) (*CreateSe
 // CreateSecurityConfigurationResponse is the response type for the
 // CreateSecurityConfiguration API operation.
 type CreateSecurityConfigurationResponse struct {
-	*CreateSecurityConfigurationOutput
+	*types.CreateSecurityConfigurationOutput
 
 	response *aws.Response
 }

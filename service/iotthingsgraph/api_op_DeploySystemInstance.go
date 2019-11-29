@@ -6,43 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/iotthingsgraph/types"
 )
-
-type DeploySystemInstanceInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the system instance. This value is returned by the CreateSystemInstance
-	// action.
-	//
-	// The ID should be in the following format.
-	//
-	// urn:tdm:REGION/ACCOUNT ID/default:deployment:DEPLOYMENTNAME
-	Id *string `locationName:"id" type:"string"`
-}
-
-// String returns the string representation
-func (s DeploySystemInstanceInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type DeploySystemInstanceOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the Greengrass deployment used to deploy the system instance.
-	GreengrassDeploymentId *string `locationName:"greengrassDeploymentId" type:"string"`
-
-	// An object that contains summary information about a system instance that
-	// was deployed.
-	//
-	// Summary is a required field
-	Summary *SystemInstanceSummary `locationName:"summary" type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s DeploySystemInstanceOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeploySystemInstance = "DeploySystemInstance"
 
@@ -75,7 +40,7 @@ const opDeploySystemInstance = "DeploySystemInstance"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iotthingsgraph-2018-09-06/DeploySystemInstance
-func (c *Client) DeploySystemInstanceRequest(input *DeploySystemInstanceInput) DeploySystemInstanceRequest {
+func (c *Client) DeploySystemInstanceRequest(input *types.DeploySystemInstanceInput) DeploySystemInstanceRequest {
 	op := &aws.Operation{
 		Name:       opDeploySystemInstance,
 		HTTPMethod: "POST",
@@ -83,10 +48,10 @@ func (c *Client) DeploySystemInstanceRequest(input *DeploySystemInstanceInput) D
 	}
 
 	if input == nil {
-		input = &DeploySystemInstanceInput{}
+		input = &types.DeploySystemInstanceInput{}
 	}
 
-	req := c.newRequest(op, input, &DeploySystemInstanceOutput{})
+	req := c.newRequest(op, input, &types.DeploySystemInstanceOutput{})
 	return DeploySystemInstanceRequest{Request: req, Input: input, Copy: c.DeploySystemInstanceRequest}
 }
 
@@ -94,8 +59,8 @@ func (c *Client) DeploySystemInstanceRequest(input *DeploySystemInstanceInput) D
 // DeploySystemInstance API operation.
 type DeploySystemInstanceRequest struct {
 	*aws.Request
-	Input *DeploySystemInstanceInput
-	Copy  func(*DeploySystemInstanceInput) DeploySystemInstanceRequest
+	Input *types.DeploySystemInstanceInput
+	Copy  func(*types.DeploySystemInstanceInput) DeploySystemInstanceRequest
 }
 
 // Send marshals and sends the DeploySystemInstance API request.
@@ -107,7 +72,7 @@ func (r DeploySystemInstanceRequest) Send(ctx context.Context) (*DeploySystemIns
 	}
 
 	resp := &DeploySystemInstanceResponse{
-		DeploySystemInstanceOutput: r.Request.Data.(*DeploySystemInstanceOutput),
+		DeploySystemInstanceOutput: r.Request.Data.(*types.DeploySystemInstanceOutput),
 		response:                   &aws.Response{Request: r.Request},
 	}
 
@@ -117,7 +82,7 @@ func (r DeploySystemInstanceRequest) Send(ctx context.Context) (*DeploySystemIns
 // DeploySystemInstanceResponse is the response type for the
 // DeploySystemInstance API operation.
 type DeploySystemInstanceResponse struct {
-	*DeploySystemInstanceOutput
+	*types.DeploySystemInstanceOutput
 
 	response *aws.Response
 }

@@ -6,52 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/organizations/types"
 )
-
-type DescribePolicyInput struct {
-	_ struct{} `type:"structure"`
-
-	// The unique identifier (ID) of the policy that you want details about. You
-	// can get the ID from the ListPolicies or ListPoliciesForTarget operations.
-	//
-	// The regex pattern (http://wikipedia.org/wiki/regex) for a policy ID string
-	// requires "p-" followed by from 8 to 128 lower-case letters or digits.
-	//
-	// PolicyId is a required field
-	PolicyId *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribePolicyInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribePolicyInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribePolicyInput"}
-
-	if s.PolicyId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("PolicyId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribePolicyOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A structure that contains details about the specified policy.
-	Policy *Policy `type:"structure"`
-}
-
-// String returns the string representation
-func (s DescribePolicyOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribePolicy = "DescribePolicy"
 
@@ -70,7 +26,7 @@ const opDescribePolicy = "DescribePolicy"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/DescribePolicy
-func (c *Client) DescribePolicyRequest(input *DescribePolicyInput) DescribePolicyRequest {
+func (c *Client) DescribePolicyRequest(input *types.DescribePolicyInput) DescribePolicyRequest {
 	op := &aws.Operation{
 		Name:       opDescribePolicy,
 		HTTPMethod: "POST",
@@ -78,10 +34,10 @@ func (c *Client) DescribePolicyRequest(input *DescribePolicyInput) DescribePolic
 	}
 
 	if input == nil {
-		input = &DescribePolicyInput{}
+		input = &types.DescribePolicyInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribePolicyOutput{})
+	req := c.newRequest(op, input, &types.DescribePolicyOutput{})
 	return DescribePolicyRequest{Request: req, Input: input, Copy: c.DescribePolicyRequest}
 }
 
@@ -89,8 +45,8 @@ func (c *Client) DescribePolicyRequest(input *DescribePolicyInput) DescribePolic
 // DescribePolicy API operation.
 type DescribePolicyRequest struct {
 	*aws.Request
-	Input *DescribePolicyInput
-	Copy  func(*DescribePolicyInput) DescribePolicyRequest
+	Input *types.DescribePolicyInput
+	Copy  func(*types.DescribePolicyInput) DescribePolicyRequest
 }
 
 // Send marshals and sends the DescribePolicy API request.
@@ -102,7 +58,7 @@ func (r DescribePolicyRequest) Send(ctx context.Context) (*DescribePolicyRespons
 	}
 
 	resp := &DescribePolicyResponse{
-		DescribePolicyOutput: r.Request.Data.(*DescribePolicyOutput),
+		DescribePolicyOutput: r.Request.Data.(*types.DescribePolicyOutput),
 		response:             &aws.Response{Request: r.Request},
 	}
 
@@ -112,7 +68,7 @@ func (r DescribePolicyRequest) Send(ctx context.Context) (*DescribePolicyRespons
 // DescribePolicyResponse is the response type for the
 // DescribePolicy API operation.
 type DescribePolicyResponse struct {
-	*DescribePolicyOutput
+	*types.DescribePolicyOutput
 
 	response *aws.Response
 }

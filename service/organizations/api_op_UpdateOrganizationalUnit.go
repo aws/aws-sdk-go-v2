@@ -6,65 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/organizations/types"
 )
-
-type UpdateOrganizationalUnitInput struct {
-	_ struct{} `type:"structure"`
-
-	// The new name that you want to assign to the OU.
-	//
-	// The regex pattern (http://wikipedia.org/wiki/regex) that is used to validate
-	// this parameter is a string of any of the characters in the ASCII character
-	// range.
-	Name *string `min:"1" type:"string"`
-
-	// The unique identifier (ID) of the OU that you want to rename. You can get
-	// the ID from the ListOrganizationalUnitsForParent operation.
-	//
-	// The regex pattern (http://wikipedia.org/wiki/regex) for an organizational
-	// unit ID string requires "ou-" followed by from 4 to 32 lower-case letters
-	// or digits (the ID of the root that contains the OU) followed by a second
-	// "-" dash and from 8 to 32 additional lower-case letters or digits.
-	//
-	// OrganizationalUnitId is a required field
-	OrganizationalUnitId *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s UpdateOrganizationalUnitInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateOrganizationalUnitInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateOrganizationalUnitInput"}
-	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
-	}
-
-	if s.OrganizationalUnitId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("OrganizationalUnitId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type UpdateOrganizationalUnitOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A structure that contains the details about the specified OU, including its
-	// new name.
-	OrganizationalUnit *OrganizationalUnit `type:"structure"`
-}
-
-// String returns the string representation
-func (s UpdateOrganizationalUnitOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opUpdateOrganizationalUnit = "UpdateOrganizationalUnit"
 
@@ -85,7 +28,7 @@ const opUpdateOrganizationalUnit = "UpdateOrganizationalUnit"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/UpdateOrganizationalUnit
-func (c *Client) UpdateOrganizationalUnitRequest(input *UpdateOrganizationalUnitInput) UpdateOrganizationalUnitRequest {
+func (c *Client) UpdateOrganizationalUnitRequest(input *types.UpdateOrganizationalUnitInput) UpdateOrganizationalUnitRequest {
 	op := &aws.Operation{
 		Name:       opUpdateOrganizationalUnit,
 		HTTPMethod: "POST",
@@ -93,10 +36,10 @@ func (c *Client) UpdateOrganizationalUnitRequest(input *UpdateOrganizationalUnit
 	}
 
 	if input == nil {
-		input = &UpdateOrganizationalUnitInput{}
+		input = &types.UpdateOrganizationalUnitInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateOrganizationalUnitOutput{})
+	req := c.newRequest(op, input, &types.UpdateOrganizationalUnitOutput{})
 	return UpdateOrganizationalUnitRequest{Request: req, Input: input, Copy: c.UpdateOrganizationalUnitRequest}
 }
 
@@ -104,8 +47,8 @@ func (c *Client) UpdateOrganizationalUnitRequest(input *UpdateOrganizationalUnit
 // UpdateOrganizationalUnit API operation.
 type UpdateOrganizationalUnitRequest struct {
 	*aws.Request
-	Input *UpdateOrganizationalUnitInput
-	Copy  func(*UpdateOrganizationalUnitInput) UpdateOrganizationalUnitRequest
+	Input *types.UpdateOrganizationalUnitInput
+	Copy  func(*types.UpdateOrganizationalUnitInput) UpdateOrganizationalUnitRequest
 }
 
 // Send marshals and sends the UpdateOrganizationalUnit API request.
@@ -117,7 +60,7 @@ func (r UpdateOrganizationalUnitRequest) Send(ctx context.Context) (*UpdateOrgan
 	}
 
 	resp := &UpdateOrganizationalUnitResponse{
-		UpdateOrganizationalUnitOutput: r.Request.Data.(*UpdateOrganizationalUnitOutput),
+		UpdateOrganizationalUnitOutput: r.Request.Data.(*types.UpdateOrganizationalUnitOutput),
 		response:                       &aws.Response{Request: r.Request},
 	}
 
@@ -127,7 +70,7 @@ func (r UpdateOrganizationalUnitRequest) Send(ctx context.Context) (*UpdateOrgan
 // UpdateOrganizationalUnitResponse is the response type for the
 // UpdateOrganizationalUnit API operation.
 type UpdateOrganizationalUnitResponse struct {
-	*UpdateOrganizationalUnitOutput
+	*types.UpdateOrganizationalUnitOutput
 
 	response *aws.Response
 }

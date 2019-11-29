@@ -6,126 +6,17 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/guardduty/types"
 )
-
-type ListIPSetsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The unique ID of the detector the ipSet is associated with.
-	//
-	// DetectorId is a required field
-	DetectorId *string `location:"uri" locationName:"detectorId" min:"1" type:"string" required:"true"`
-
-	// You can use this parameter to indicate the maximum number of items you want
-	// in the response. The default value is 50. The maximum value is 50.
-	MaxResults *int64 `location:"querystring" locationName:"maxResults" min:"1" type:"integer"`
-
-	// You can use this parameter when paginating results. Set the value of this
-	// parameter to null on your first call to the list action. For subsequent calls
-	// to the action fill nextToken in the request with the value of NextToken from
-	// the previous response to continue listing data.
-	NextToken *string `location:"querystring" locationName:"nextToken" type:"string"`
-}
-
-// String returns the string representation
-func (s ListIPSetsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListIPSetsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListIPSetsInput"}
-
-	if s.DetectorId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DetectorId"))
-	}
-	if s.DetectorId != nil && len(*s.DetectorId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("DetectorId", 1))
-	}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListIPSetsInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.DetectorId != nil {
-		v := *s.DetectorId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "detectorId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.MaxResults != nil {
-		v := *s.MaxResults
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "maxResults", protocol.Int64Value(v), metadata)
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type ListIPSetsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The IDs of the IPSet resources.
-	//
-	// IpSetIds is a required field
-	IpSetIds []string `locationName:"ipSetIds" type:"list" required:"true"`
-
-	// Pagination parameter to be used on the next list operation to retrieve more
-	// items.
-	NextToken *string `locationName:"nextToken" type:"string"`
-}
-
-// String returns the string representation
-func (s ListIPSetsOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListIPSetsOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.IpSetIds != nil {
-		v := s.IpSetIds
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "ipSetIds", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
-		}
-		ls0.End()
-
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opListIPSets = "ListIPSets"
 
 // ListIPSetsRequest returns a request value for making API operation for
 // Amazon GuardDuty.
 //
-// Lists the IPSets of the GuardDuty service specified by the detector ID.
+// Lists the IPSets of the GuardDuty service specified by the detector ID. If
+// you use this operation from a member account, the IPSets returned are the
+// IPSets from the associated master account.
 //
 //    // Example sending a request using ListIPSetsRequest.
 //    req := client.ListIPSetsRequest(params)
@@ -135,7 +26,7 @@ const opListIPSets = "ListIPSets"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/ListIPSets
-func (c *Client) ListIPSetsRequest(input *ListIPSetsInput) ListIPSetsRequest {
+func (c *Client) ListIPSetsRequest(input *types.ListIPSetsInput) ListIPSetsRequest {
 	op := &aws.Operation{
 		Name:       opListIPSets,
 		HTTPMethod: "GET",
@@ -149,10 +40,10 @@ func (c *Client) ListIPSetsRequest(input *ListIPSetsInput) ListIPSetsRequest {
 	}
 
 	if input == nil {
-		input = &ListIPSetsInput{}
+		input = &types.ListIPSetsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListIPSetsOutput{})
+	req := c.newRequest(op, input, &types.ListIPSetsOutput{})
 	return ListIPSetsRequest{Request: req, Input: input, Copy: c.ListIPSetsRequest}
 }
 
@@ -160,8 +51,8 @@ func (c *Client) ListIPSetsRequest(input *ListIPSetsInput) ListIPSetsRequest {
 // ListIPSets API operation.
 type ListIPSetsRequest struct {
 	*aws.Request
-	Input *ListIPSetsInput
-	Copy  func(*ListIPSetsInput) ListIPSetsRequest
+	Input *types.ListIPSetsInput
+	Copy  func(*types.ListIPSetsInput) ListIPSetsRequest
 }
 
 // Send marshals and sends the ListIPSets API request.
@@ -173,7 +64,7 @@ func (r ListIPSetsRequest) Send(ctx context.Context) (*ListIPSetsResponse, error
 	}
 
 	resp := &ListIPSetsResponse{
-		ListIPSetsOutput: r.Request.Data.(*ListIPSetsOutput),
+		ListIPSetsOutput: r.Request.Data.(*types.ListIPSetsOutput),
 		response:         &aws.Response{Request: r.Request},
 	}
 
@@ -203,7 +94,7 @@ func NewListIPSetsPaginator(req ListIPSetsRequest) ListIPSetsPaginator {
 	return ListIPSetsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListIPSetsInput
+				var inCpy *types.ListIPSetsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -223,14 +114,14 @@ type ListIPSetsPaginator struct {
 	aws.Pager
 }
 
-func (p *ListIPSetsPaginator) CurrentPage() *ListIPSetsOutput {
-	return p.Pager.CurrentPage().(*ListIPSetsOutput)
+func (p *ListIPSetsPaginator) CurrentPage() *types.ListIPSetsOutput {
+	return p.Pager.CurrentPage().(*types.ListIPSetsOutput)
 }
 
 // ListIPSetsResponse is the response type for the
 // ListIPSets API operation.
 type ListIPSetsResponse struct {
-	*ListIPSetsOutput
+	*types.ListIPSetsOutput
 
 	response *aws.Response
 }

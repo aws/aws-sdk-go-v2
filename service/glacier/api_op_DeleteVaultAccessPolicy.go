@@ -6,85 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/restjson"
+	"github.com/aws/aws-sdk-go-v2/service/glacier/types"
 )
-
-// DeleteVaultAccessPolicy input.
-type DeleteVaultAccessPolicyInput struct {
-	_ struct{} `type:"structure"`
-
-	// The AccountId value is the AWS account ID of the account that owns the vault.
-	// You can either specify an AWS account ID or optionally a single '-' (hyphen),
-	// in which case Amazon S3 Glacier uses the AWS account ID associated with the
-	// credentials used to sign the request. If you use an account ID, do not include
-	// any hyphens ('-') in the ID.
-	//
-	// AccountId is a required field
-	AccountId *string `location:"uri" locationName:"accountId" type:"string" required:"true"`
-
-	// The name of the vault.
-	//
-	// VaultName is a required field
-	VaultName *string `location:"uri" locationName:"vaultName" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteVaultAccessPolicyInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteVaultAccessPolicyInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteVaultAccessPolicyInput"}
-
-	if s.AccountId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("AccountId"))
-	}
-
-	if s.VaultName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("VaultName"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteVaultAccessPolicyInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.AccountId != nil {
-		v := *s.AccountId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "accountId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.VaultName != nil {
-		v := *s.VaultName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "vaultName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type DeleteVaultAccessPolicyOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteVaultAccessPolicyOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteVaultAccessPolicyOutput) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
 
 const opDeleteVaultAccessPolicy = "DeleteVaultAccessPolicy"
 
@@ -108,7 +33,7 @@ const opDeleteVaultAccessPolicy = "DeleteVaultAccessPolicy"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) DeleteVaultAccessPolicyRequest(input *DeleteVaultAccessPolicyInput) DeleteVaultAccessPolicyRequest {
+func (c *Client) DeleteVaultAccessPolicyRequest(input *types.DeleteVaultAccessPolicyInput) DeleteVaultAccessPolicyRequest {
 	op := &aws.Operation{
 		Name:       opDeleteVaultAccessPolicy,
 		HTTPMethod: "DELETE",
@@ -116,10 +41,10 @@ func (c *Client) DeleteVaultAccessPolicyRequest(input *DeleteVaultAccessPolicyIn
 	}
 
 	if input == nil {
-		input = &DeleteVaultAccessPolicyInput{}
+		input = &types.DeleteVaultAccessPolicyInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteVaultAccessPolicyOutput{})
+	req := c.newRequest(op, input, &types.DeleteVaultAccessPolicyOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return DeleteVaultAccessPolicyRequest{Request: req, Input: input, Copy: c.DeleteVaultAccessPolicyRequest}
@@ -129,8 +54,8 @@ func (c *Client) DeleteVaultAccessPolicyRequest(input *DeleteVaultAccessPolicyIn
 // DeleteVaultAccessPolicy API operation.
 type DeleteVaultAccessPolicyRequest struct {
 	*aws.Request
-	Input *DeleteVaultAccessPolicyInput
-	Copy  func(*DeleteVaultAccessPolicyInput) DeleteVaultAccessPolicyRequest
+	Input *types.DeleteVaultAccessPolicyInput
+	Copy  func(*types.DeleteVaultAccessPolicyInput) DeleteVaultAccessPolicyRequest
 }
 
 // Send marshals and sends the DeleteVaultAccessPolicy API request.
@@ -142,7 +67,7 @@ func (r DeleteVaultAccessPolicyRequest) Send(ctx context.Context) (*DeleteVaultA
 	}
 
 	resp := &DeleteVaultAccessPolicyResponse{
-		DeleteVaultAccessPolicyOutput: r.Request.Data.(*DeleteVaultAccessPolicyOutput),
+		DeleteVaultAccessPolicyOutput: r.Request.Data.(*types.DeleteVaultAccessPolicyOutput),
 		response:                      &aws.Response{Request: r.Request},
 	}
 
@@ -152,7 +77,7 @@ func (r DeleteVaultAccessPolicyRequest) Send(ctx context.Context) (*DeleteVaultA
 // DeleteVaultAccessPolicyResponse is the response type for the
 // DeleteVaultAccessPolicy API operation.
 type DeleteVaultAccessPolicyResponse struct {
-	*DeleteVaultAccessPolicyOutput
+	*types.DeleteVaultAccessPolicyOutput
 
 	response *aws.Response
 }

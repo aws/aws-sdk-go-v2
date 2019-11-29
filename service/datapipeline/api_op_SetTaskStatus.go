@@ -6,78 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/datapipeline/types"
 )
-
-// Contains the parameters for SetTaskStatus.
-type SetTaskStatusInput struct {
-	_ struct{} `type:"structure"`
-
-	// If an error occurred during the task, this value specifies the error code.
-	// This value is set on the physical attempt object. It is used to display error
-	// information to the user. It should not start with string "Service_" which
-	// is reserved by the system.
-	ErrorId *string `locationName:"errorId" type:"string"`
-
-	// If an error occurred during the task, this value specifies a text description
-	// of the error. This value is set on the physical attempt object. It is used
-	// to display error information to the user. The web service does not parse
-	// this value.
-	ErrorMessage *string `locationName:"errorMessage" type:"string"`
-
-	// If an error occurred during the task, this value specifies the stack trace
-	// associated with the error. This value is set on the physical attempt object.
-	// It is used to display error information to the user. The web service does
-	// not parse this value.
-	ErrorStackTrace *string `locationName:"errorStackTrace" type:"string"`
-
-	// The ID of the task assigned to the task runner. This value is provided in
-	// the response for PollForTask.
-	//
-	// TaskId is a required field
-	TaskId *string `locationName:"taskId" min:"1" type:"string" required:"true"`
-
-	// If FINISHED, the task successfully completed. If FAILED, the task ended unsuccessfully.
-	// Preconditions use false.
-	//
-	// TaskStatus is a required field
-	TaskStatus TaskStatus `locationName:"taskStatus" type:"string" required:"true" enum:"true"`
-}
-
-// String returns the string representation
-func (s SetTaskStatusInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *SetTaskStatusInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "SetTaskStatusInput"}
-
-	if s.TaskId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("TaskId"))
-	}
-	if s.TaskId != nil && len(*s.TaskId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("TaskId", 1))
-	}
-	if len(s.TaskStatus) == 0 {
-		invalidParams.Add(aws.NewErrParamRequired("TaskStatus"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Contains the output of SetTaskStatus.
-type SetTaskStatusOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s SetTaskStatusOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opSetTaskStatus = "SetTaskStatus"
 
@@ -98,7 +28,7 @@ const opSetTaskStatus = "SetTaskStatus"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/datapipeline-2012-10-29/SetTaskStatus
-func (c *Client) SetTaskStatusRequest(input *SetTaskStatusInput) SetTaskStatusRequest {
+func (c *Client) SetTaskStatusRequest(input *types.SetTaskStatusInput) SetTaskStatusRequest {
 	op := &aws.Operation{
 		Name:       opSetTaskStatus,
 		HTTPMethod: "POST",
@@ -106,10 +36,10 @@ func (c *Client) SetTaskStatusRequest(input *SetTaskStatusInput) SetTaskStatusRe
 	}
 
 	if input == nil {
-		input = &SetTaskStatusInput{}
+		input = &types.SetTaskStatusInput{}
 	}
 
-	req := c.newRequest(op, input, &SetTaskStatusOutput{})
+	req := c.newRequest(op, input, &types.SetTaskStatusOutput{})
 	return SetTaskStatusRequest{Request: req, Input: input, Copy: c.SetTaskStatusRequest}
 }
 
@@ -117,8 +47,8 @@ func (c *Client) SetTaskStatusRequest(input *SetTaskStatusInput) SetTaskStatusRe
 // SetTaskStatus API operation.
 type SetTaskStatusRequest struct {
 	*aws.Request
-	Input *SetTaskStatusInput
-	Copy  func(*SetTaskStatusInput) SetTaskStatusRequest
+	Input *types.SetTaskStatusInput
+	Copy  func(*types.SetTaskStatusInput) SetTaskStatusRequest
 }
 
 // Send marshals and sends the SetTaskStatus API request.
@@ -130,7 +60,7 @@ func (r SetTaskStatusRequest) Send(ctx context.Context) (*SetTaskStatusResponse,
 	}
 
 	resp := &SetTaskStatusResponse{
-		SetTaskStatusOutput: r.Request.Data.(*SetTaskStatusOutput),
+		SetTaskStatusOutput: r.Request.Data.(*types.SetTaskStatusOutput),
 		response:            &aws.Response{Request: r.Request},
 	}
 
@@ -140,7 +70,7 @@ func (r SetTaskStatusRequest) Send(ctx context.Context) (*SetTaskStatusResponse,
 // SetTaskStatusResponse is the response type for the
 // SetTaskStatus API operation.
 type SetTaskStatusResponse struct {
-	*SetTaskStatusOutput
+	*types.SetTaskStatusOutput
 
 	response *aws.Response
 }

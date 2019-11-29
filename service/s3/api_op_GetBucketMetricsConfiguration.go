@@ -6,94 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/s3/types"
 )
-
-type GetBucketMetricsConfigurationInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the bucket containing the metrics configuration to retrieve.
-	//
-	// Bucket is a required field
-	Bucket *string `location:"uri" locationName:"Bucket" type:"string" required:"true"`
-
-	// The ID used to identify the metrics configuration.
-	//
-	// Id is a required field
-	Id *string `location:"querystring" locationName:"id" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetBucketMetricsConfigurationInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetBucketMetricsConfigurationInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetBucketMetricsConfigurationInput"}
-
-	if s.Bucket == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Bucket"))
-	}
-
-	if s.Id == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Id"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-func (s *GetBucketMetricsConfigurationInput) getBucket() (v string) {
-	if s.Bucket == nil {
-		return v
-	}
-	return *s.Bucket
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetBucketMetricsConfigurationInput) MarshalFields(e protocol.FieldEncoder) error {
-
-	if s.Bucket != nil {
-		v := *s.Bucket
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "Bucket", protocol.StringValue(v), metadata)
-	}
-	if s.Id != nil {
-		v := *s.Id
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "id", protocol.StringValue(v), metadata)
-	}
-	return nil
-}
-
-type GetBucketMetricsConfigurationOutput struct {
-	_ struct{} `type:"structure" payload:"MetricsConfiguration"`
-
-	// Specifies the metrics configuration.
-	MetricsConfiguration *MetricsConfiguration `type:"structure"`
-}
-
-// String returns the string representation
-func (s GetBucketMetricsConfigurationOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetBucketMetricsConfigurationOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.MetricsConfiguration != nil {
-		v := s.MetricsConfiguration
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.PayloadTarget, "MetricsConfiguration", v, metadata)
-	}
-	return nil
-}
 
 const opGetBucketMetricsConfiguration = "GetBucketMetricsConfiguration"
 
@@ -101,7 +15,26 @@ const opGetBucketMetricsConfiguration = "GetBucketMetricsConfiguration"
 // Amazon Simple Storage Service.
 //
 // Gets a metrics configuration (specified by the metrics configuration ID)
-// from the bucket.
+// from the bucket. Note that this doesn't include the daily storage metrics.
+//
+// To use this operation, you must have permissions to perform the s3:GetMetricsConfiguration
+// action. The bucket owner has this permission by default. The bucket owner
+// can grant this permission to others. For more information about permissions,
+// see Permissions Related to Bucket Subresource Operations (https://docs.aws.amazon.com/AmazonS3/latest/dev/using-with-s3-actions.html#using-with-s3-actions-related-to-bucket-subresources)
+// and Managing Access Permissions to Your Amazon S3 Resources (https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-access-control.html).
+//
+// For information about CloudWatch request metrics for Amazon S3, see Monitoring
+// Metrics with Amazon CloudWatch (https://docs.aws.amazon.com/AmazonS3/latest/dev/cloudwatch-monitoring.html).
+//
+// The following operations are related to GetBucketMetricsConfiguration:
+//
+//    * PutBucketMetricsConfiguration
+//
+//    * DeleteBucketMetricsConfiguration
+//
+//    * ListBucketMetricsConfigurations
+//
+//    * Monitoring Metrics with Amazon CloudWatch (https://docs.aws.amazon.com/AmazonS3/latest/dev/cloudwatch-monitoring.html)
 //
 //    // Example sending a request using GetBucketMetricsConfigurationRequest.
 //    req := client.GetBucketMetricsConfigurationRequest(params)
@@ -111,7 +44,7 @@ const opGetBucketMetricsConfiguration = "GetBucketMetricsConfiguration"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetBucketMetricsConfiguration
-func (c *Client) GetBucketMetricsConfigurationRequest(input *GetBucketMetricsConfigurationInput) GetBucketMetricsConfigurationRequest {
+func (c *Client) GetBucketMetricsConfigurationRequest(input *types.GetBucketMetricsConfigurationInput) GetBucketMetricsConfigurationRequest {
 	op := &aws.Operation{
 		Name:       opGetBucketMetricsConfiguration,
 		HTTPMethod: "GET",
@@ -119,10 +52,10 @@ func (c *Client) GetBucketMetricsConfigurationRequest(input *GetBucketMetricsCon
 	}
 
 	if input == nil {
-		input = &GetBucketMetricsConfigurationInput{}
+		input = &types.GetBucketMetricsConfigurationInput{}
 	}
 
-	req := c.newRequest(op, input, &GetBucketMetricsConfigurationOutput{})
+	req := c.newRequest(op, input, &types.GetBucketMetricsConfigurationOutput{})
 	return GetBucketMetricsConfigurationRequest{Request: req, Input: input, Copy: c.GetBucketMetricsConfigurationRequest}
 }
 
@@ -130,8 +63,8 @@ func (c *Client) GetBucketMetricsConfigurationRequest(input *GetBucketMetricsCon
 // GetBucketMetricsConfiguration API operation.
 type GetBucketMetricsConfigurationRequest struct {
 	*aws.Request
-	Input *GetBucketMetricsConfigurationInput
-	Copy  func(*GetBucketMetricsConfigurationInput) GetBucketMetricsConfigurationRequest
+	Input *types.GetBucketMetricsConfigurationInput
+	Copy  func(*types.GetBucketMetricsConfigurationInput) GetBucketMetricsConfigurationRequest
 }
 
 // Send marshals and sends the GetBucketMetricsConfiguration API request.
@@ -143,7 +76,7 @@ func (r GetBucketMetricsConfigurationRequest) Send(ctx context.Context) (*GetBuc
 	}
 
 	resp := &GetBucketMetricsConfigurationResponse{
-		GetBucketMetricsConfigurationOutput: r.Request.Data.(*GetBucketMetricsConfigurationOutput),
+		GetBucketMetricsConfigurationOutput: r.Request.Data.(*types.GetBucketMetricsConfigurationOutput),
 		response:                            &aws.Response{Request: r.Request},
 	}
 
@@ -153,7 +86,7 @@ func (r GetBucketMetricsConfigurationRequest) Send(ctx context.Context) (*GetBuc
 // GetBucketMetricsConfigurationResponse is the response type for the
 // GetBucketMetricsConfiguration API operation.
 type GetBucketMetricsConfigurationResponse struct {
-	*GetBucketMetricsConfigurationOutput
+	*types.GetBucketMetricsConfigurationOutput
 
 	response *aws.Response
 }

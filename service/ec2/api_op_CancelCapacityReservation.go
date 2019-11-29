@@ -6,54 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-type CancelCapacityReservationInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the Capacity Reservation to be cancelled.
-	//
-	// CapacityReservationId is a required field
-	CapacityReservationId *string `type:"string" required:"true"`
-
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have
-	// the required permissions, the error response is DryRunOperation. Otherwise,
-	// it is UnauthorizedOperation.
-	DryRun *bool `type:"boolean"`
-}
-
-// String returns the string representation
-func (s CancelCapacityReservationInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CancelCapacityReservationInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CancelCapacityReservationInput"}
-
-	if s.CapacityReservationId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("CapacityReservationId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type CancelCapacityReservationOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Returns true if the request succeeds; otherwise, it returns an error.
-	Return *bool `locationName:"return" type:"boolean"`
-}
-
-// String returns the string representation
-func (s CancelCapacityReservationOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCancelCapacityReservation = "CancelCapacityReservation"
 
@@ -77,7 +31,7 @@ const opCancelCapacityReservation = "CancelCapacityReservation"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CancelCapacityReservation
-func (c *Client) CancelCapacityReservationRequest(input *CancelCapacityReservationInput) CancelCapacityReservationRequest {
+func (c *Client) CancelCapacityReservationRequest(input *types.CancelCapacityReservationInput) CancelCapacityReservationRequest {
 	op := &aws.Operation{
 		Name:       opCancelCapacityReservation,
 		HTTPMethod: "POST",
@@ -85,10 +39,10 @@ func (c *Client) CancelCapacityReservationRequest(input *CancelCapacityReservati
 	}
 
 	if input == nil {
-		input = &CancelCapacityReservationInput{}
+		input = &types.CancelCapacityReservationInput{}
 	}
 
-	req := c.newRequest(op, input, &CancelCapacityReservationOutput{})
+	req := c.newRequest(op, input, &types.CancelCapacityReservationOutput{})
 	return CancelCapacityReservationRequest{Request: req, Input: input, Copy: c.CancelCapacityReservationRequest}
 }
 
@@ -96,8 +50,8 @@ func (c *Client) CancelCapacityReservationRequest(input *CancelCapacityReservati
 // CancelCapacityReservation API operation.
 type CancelCapacityReservationRequest struct {
 	*aws.Request
-	Input *CancelCapacityReservationInput
-	Copy  func(*CancelCapacityReservationInput) CancelCapacityReservationRequest
+	Input *types.CancelCapacityReservationInput
+	Copy  func(*types.CancelCapacityReservationInput) CancelCapacityReservationRequest
 }
 
 // Send marshals and sends the CancelCapacityReservation API request.
@@ -109,7 +63,7 @@ func (r CancelCapacityReservationRequest) Send(ctx context.Context) (*CancelCapa
 	}
 
 	resp := &CancelCapacityReservationResponse{
-		CancelCapacityReservationOutput: r.Request.Data.(*CancelCapacityReservationOutput),
+		CancelCapacityReservationOutput: r.Request.Data.(*types.CancelCapacityReservationOutput),
 		response:                        &aws.Response{Request: r.Request},
 	}
 
@@ -119,7 +73,7 @@ func (r CancelCapacityReservationRequest) Send(ctx context.Context) (*CancelCapa
 // CancelCapacityReservationResponse is the response type for the
 // CancelCapacityReservation API operation.
 type CancelCapacityReservationResponse struct {
-	*CancelCapacityReservationOutput
+	*types.CancelCapacityReservationOutput
 
 	response *aws.Response
 }

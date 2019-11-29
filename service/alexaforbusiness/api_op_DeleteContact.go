@@ -6,45 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/alexaforbusiness/types"
 )
-
-type DeleteContactInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ARN of the contact to delete.
-	//
-	// ContactArn is a required field
-	ContactArn *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteContactInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteContactInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteContactInput"}
-
-	if s.ContactArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ContactArn"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteContactOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteContactOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteContact = "DeleteContact"
 
@@ -61,7 +24,7 @@ const opDeleteContact = "DeleteContact"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/DeleteContact
-func (c *Client) DeleteContactRequest(input *DeleteContactInput) DeleteContactRequest {
+func (c *Client) DeleteContactRequest(input *types.DeleteContactInput) DeleteContactRequest {
 	op := &aws.Operation{
 		Name:       opDeleteContact,
 		HTTPMethod: "POST",
@@ -69,10 +32,10 @@ func (c *Client) DeleteContactRequest(input *DeleteContactInput) DeleteContactRe
 	}
 
 	if input == nil {
-		input = &DeleteContactInput{}
+		input = &types.DeleteContactInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteContactOutput{})
+	req := c.newRequest(op, input, &types.DeleteContactOutput{})
 	return DeleteContactRequest{Request: req, Input: input, Copy: c.DeleteContactRequest}
 }
 
@@ -80,8 +43,8 @@ func (c *Client) DeleteContactRequest(input *DeleteContactInput) DeleteContactRe
 // DeleteContact API operation.
 type DeleteContactRequest struct {
 	*aws.Request
-	Input *DeleteContactInput
-	Copy  func(*DeleteContactInput) DeleteContactRequest
+	Input *types.DeleteContactInput
+	Copy  func(*types.DeleteContactInput) DeleteContactRequest
 }
 
 // Send marshals and sends the DeleteContact API request.
@@ -93,7 +56,7 @@ func (r DeleteContactRequest) Send(ctx context.Context) (*DeleteContactResponse,
 	}
 
 	resp := &DeleteContactResponse{
-		DeleteContactOutput: r.Request.Data.(*DeleteContactOutput),
+		DeleteContactOutput: r.Request.Data.(*types.DeleteContactOutput),
 		response:            &aws.Response{Request: r.Request},
 	}
 
@@ -103,7 +66,7 @@ func (r DeleteContactRequest) Send(ctx context.Context) (*DeleteContactResponse,
 // DeleteContactResponse is the response type for the
 // DeleteContact API operation.
 type DeleteContactResponse struct {
-	*DeleteContactOutput
+	*types.DeleteContactOutput
 
 	response *aws.Response
 }

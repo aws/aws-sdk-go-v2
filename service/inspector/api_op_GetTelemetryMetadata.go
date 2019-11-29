@@ -6,54 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/inspector/types"
 )
-
-type GetTelemetryMetadataInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ARN that specifies the assessment run that has the telemetry data that
-	// you want to obtain.
-	//
-	// AssessmentRunArn is a required field
-	AssessmentRunArn *string `locationName:"assessmentRunArn" min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetTelemetryMetadataInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetTelemetryMetadataInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetTelemetryMetadataInput"}
-
-	if s.AssessmentRunArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("AssessmentRunArn"))
-	}
-	if s.AssessmentRunArn != nil && len(*s.AssessmentRunArn) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("AssessmentRunArn", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type GetTelemetryMetadataOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Telemetry details.
-	//
-	// TelemetryMetadata is a required field
-	TelemetryMetadata []TelemetryMetadata `locationName:"telemetryMetadata" type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s GetTelemetryMetadataOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetTelemetryMetadata = "GetTelemetryMetadata"
 
@@ -71,7 +25,7 @@ const opGetTelemetryMetadata = "GetTelemetryMetadata"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/GetTelemetryMetadata
-func (c *Client) GetTelemetryMetadataRequest(input *GetTelemetryMetadataInput) GetTelemetryMetadataRequest {
+func (c *Client) GetTelemetryMetadataRequest(input *types.GetTelemetryMetadataInput) GetTelemetryMetadataRequest {
 	op := &aws.Operation{
 		Name:       opGetTelemetryMetadata,
 		HTTPMethod: "POST",
@@ -79,10 +33,10 @@ func (c *Client) GetTelemetryMetadataRequest(input *GetTelemetryMetadataInput) G
 	}
 
 	if input == nil {
-		input = &GetTelemetryMetadataInput{}
+		input = &types.GetTelemetryMetadataInput{}
 	}
 
-	req := c.newRequest(op, input, &GetTelemetryMetadataOutput{})
+	req := c.newRequest(op, input, &types.GetTelemetryMetadataOutput{})
 	return GetTelemetryMetadataRequest{Request: req, Input: input, Copy: c.GetTelemetryMetadataRequest}
 }
 
@@ -90,8 +44,8 @@ func (c *Client) GetTelemetryMetadataRequest(input *GetTelemetryMetadataInput) G
 // GetTelemetryMetadata API operation.
 type GetTelemetryMetadataRequest struct {
 	*aws.Request
-	Input *GetTelemetryMetadataInput
-	Copy  func(*GetTelemetryMetadataInput) GetTelemetryMetadataRequest
+	Input *types.GetTelemetryMetadataInput
+	Copy  func(*types.GetTelemetryMetadataInput) GetTelemetryMetadataRequest
 }
 
 // Send marshals and sends the GetTelemetryMetadata API request.
@@ -103,7 +57,7 @@ func (r GetTelemetryMetadataRequest) Send(ctx context.Context) (*GetTelemetryMet
 	}
 
 	resp := &GetTelemetryMetadataResponse{
-		GetTelemetryMetadataOutput: r.Request.Data.(*GetTelemetryMetadataOutput),
+		GetTelemetryMetadataOutput: r.Request.Data.(*types.GetTelemetryMetadataOutput),
 		response:                   &aws.Response{Request: r.Request},
 	}
 
@@ -113,7 +67,7 @@ func (r GetTelemetryMetadataRequest) Send(ctx context.Context) (*GetTelemetryMet
 // GetTelemetryMetadataResponse is the response type for the
 // GetTelemetryMetadata API operation.
 type GetTelemetryMetadataResponse struct {
-	*GetTelemetryMetadataOutput
+	*types.GetTelemetryMetadataOutput
 
 	response *aws.Response
 }

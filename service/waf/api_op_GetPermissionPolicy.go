@@ -6,52 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/waf/types"
 )
-
-type GetPermissionPolicyInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the RuleGroup for which you want to get
-	// the policy.
-	//
-	// ResourceArn is a required field
-	ResourceArn *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetPermissionPolicyInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetPermissionPolicyInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetPermissionPolicyInput"}
-
-	if s.ResourceArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ResourceArn"))
-	}
-	if s.ResourceArn != nil && len(*s.ResourceArn) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ResourceArn", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type GetPermissionPolicyOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The IAM policy attached to the specified RuleGroup.
-	Policy *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s GetPermissionPolicyOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetPermissionPolicy = "GetPermissionPolicy"
 
@@ -68,7 +24,7 @@ const opGetPermissionPolicy = "GetPermissionPolicy"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/GetPermissionPolicy
-func (c *Client) GetPermissionPolicyRequest(input *GetPermissionPolicyInput) GetPermissionPolicyRequest {
+func (c *Client) GetPermissionPolicyRequest(input *types.GetPermissionPolicyInput) GetPermissionPolicyRequest {
 	op := &aws.Operation{
 		Name:       opGetPermissionPolicy,
 		HTTPMethod: "POST",
@@ -76,10 +32,10 @@ func (c *Client) GetPermissionPolicyRequest(input *GetPermissionPolicyInput) Get
 	}
 
 	if input == nil {
-		input = &GetPermissionPolicyInput{}
+		input = &types.GetPermissionPolicyInput{}
 	}
 
-	req := c.newRequest(op, input, &GetPermissionPolicyOutput{})
+	req := c.newRequest(op, input, &types.GetPermissionPolicyOutput{})
 	return GetPermissionPolicyRequest{Request: req, Input: input, Copy: c.GetPermissionPolicyRequest}
 }
 
@@ -87,8 +43,8 @@ func (c *Client) GetPermissionPolicyRequest(input *GetPermissionPolicyInput) Get
 // GetPermissionPolicy API operation.
 type GetPermissionPolicyRequest struct {
 	*aws.Request
-	Input *GetPermissionPolicyInput
-	Copy  func(*GetPermissionPolicyInput) GetPermissionPolicyRequest
+	Input *types.GetPermissionPolicyInput
+	Copy  func(*types.GetPermissionPolicyInput) GetPermissionPolicyRequest
 }
 
 // Send marshals and sends the GetPermissionPolicy API request.
@@ -100,7 +56,7 @@ func (r GetPermissionPolicyRequest) Send(ctx context.Context) (*GetPermissionPol
 	}
 
 	resp := &GetPermissionPolicyResponse{
-		GetPermissionPolicyOutput: r.Request.Data.(*GetPermissionPolicyOutput),
+		GetPermissionPolicyOutput: r.Request.Data.(*types.GetPermissionPolicyOutput),
 		response:                  &aws.Response{Request: r.Request},
 	}
 
@@ -110,7 +66,7 @@ func (r GetPermissionPolicyRequest) Send(ctx context.Context) (*GetPermissionPol
 // GetPermissionPolicyResponse is the response type for the
 // GetPermissionPolicy API operation.
 type GetPermissionPolicyResponse struct {
-	*GetPermissionPolicyOutput
+	*types.GetPermissionPolicyOutput
 
 	response *aws.Response
 }

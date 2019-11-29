@@ -6,94 +6,38 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/restxml"
+	"github.com/aws/aws-sdk-go-v2/service/s3/types"
 )
-
-type DeleteBucketMetricsConfigurationInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the bucket containing the metrics configuration to delete.
-	//
-	// Bucket is a required field
-	Bucket *string `location:"uri" locationName:"Bucket" type:"string" required:"true"`
-
-	// The ID used to identify the metrics configuration.
-	//
-	// Id is a required field
-	Id *string `location:"querystring" locationName:"id" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteBucketMetricsConfigurationInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteBucketMetricsConfigurationInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteBucketMetricsConfigurationInput"}
-
-	if s.Bucket == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Bucket"))
-	}
-
-	if s.Id == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Id"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-func (s *DeleteBucketMetricsConfigurationInput) getBucket() (v string) {
-	if s.Bucket == nil {
-		return v
-	}
-	return *s.Bucket
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteBucketMetricsConfigurationInput) MarshalFields(e protocol.FieldEncoder) error {
-
-	if s.Bucket != nil {
-		v := *s.Bucket
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "Bucket", protocol.StringValue(v), metadata)
-	}
-	if s.Id != nil {
-		v := *s.Id
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "id", protocol.StringValue(v), metadata)
-	}
-	return nil
-}
-
-type DeleteBucketMetricsConfigurationOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteBucketMetricsConfigurationOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteBucketMetricsConfigurationOutput) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
 
 const opDeleteBucketMetricsConfiguration = "DeleteBucketMetricsConfiguration"
 
 // DeleteBucketMetricsConfigurationRequest returns a request value for making API operation for
 // Amazon Simple Storage Service.
 //
-// Deletes a metrics configuration (specified by the metrics configuration ID)
-// from the bucket.
+// Deletes a metrics configuration for the Amazon CloudWatch request metrics
+// (specified by the metrics configuration ID) from the bucket. Note that this
+// doesn't include the daily storage metrics.
+//
+// To use this operation, you must have permissions to perform the s3:PutMetricsConfiguration
+// action. The bucket owner has this permission by default. The bucket owner
+// can grant this permission to others. For more information about permissions,
+// see Permissions Related to Bucket Subresource Operations (https://docs.aws.amazon.com/AmazonS3/latest/dev/using-with-s3-actions.html#using-with-s3-actions-related-to-bucket-subresources)
+// and Managing Access Permissions to Your Amazon S3 Resources (https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-access-control.html).
+//
+// For information about CloudWatch request metrics for Amazon S3, see Monitoring
+// Metrics with Amazon CloudWatch (https://docs.aws.amazon.com/AmazonS3/latest/dev/cloudwatch-monitoring.html).
+//
+// The following operations are related to DeleteBucketMetricsConfiguration
+//
+//    * GetBucketMetricsConfiguration
+//
+//    * PutBucketMetricsConfiguration
+//
+//    * ListBucketMetricsConfigurations
+//
+//    * Monitoring Metrics with Amazon CloudWatch (https://docs.aws.amazon.com/AmazonS3/latest/dev/cloudwatch-monitoring.html)
 //
 //    // Example sending a request using DeleteBucketMetricsConfigurationRequest.
 //    req := client.DeleteBucketMetricsConfigurationRequest(params)
@@ -103,7 +47,7 @@ const opDeleteBucketMetricsConfiguration = "DeleteBucketMetricsConfiguration"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/DeleteBucketMetricsConfiguration
-func (c *Client) DeleteBucketMetricsConfigurationRequest(input *DeleteBucketMetricsConfigurationInput) DeleteBucketMetricsConfigurationRequest {
+func (c *Client) DeleteBucketMetricsConfigurationRequest(input *types.DeleteBucketMetricsConfigurationInput) DeleteBucketMetricsConfigurationRequest {
 	op := &aws.Operation{
 		Name:       opDeleteBucketMetricsConfiguration,
 		HTTPMethod: "DELETE",
@@ -111,10 +55,10 @@ func (c *Client) DeleteBucketMetricsConfigurationRequest(input *DeleteBucketMetr
 	}
 
 	if input == nil {
-		input = &DeleteBucketMetricsConfigurationInput{}
+		input = &types.DeleteBucketMetricsConfigurationInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteBucketMetricsConfigurationOutput{})
+	req := c.newRequest(op, input, &types.DeleteBucketMetricsConfigurationOutput{})
 	req.Handlers.Unmarshal.Remove(restxml.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return DeleteBucketMetricsConfigurationRequest{Request: req, Input: input, Copy: c.DeleteBucketMetricsConfigurationRequest}
@@ -124,8 +68,8 @@ func (c *Client) DeleteBucketMetricsConfigurationRequest(input *DeleteBucketMetr
 // DeleteBucketMetricsConfiguration API operation.
 type DeleteBucketMetricsConfigurationRequest struct {
 	*aws.Request
-	Input *DeleteBucketMetricsConfigurationInput
-	Copy  func(*DeleteBucketMetricsConfigurationInput) DeleteBucketMetricsConfigurationRequest
+	Input *types.DeleteBucketMetricsConfigurationInput
+	Copy  func(*types.DeleteBucketMetricsConfigurationInput) DeleteBucketMetricsConfigurationRequest
 }
 
 // Send marshals and sends the DeleteBucketMetricsConfiguration API request.
@@ -137,7 +81,7 @@ func (r DeleteBucketMetricsConfigurationRequest) Send(ctx context.Context) (*Del
 	}
 
 	resp := &DeleteBucketMetricsConfigurationResponse{
-		DeleteBucketMetricsConfigurationOutput: r.Request.Data.(*DeleteBucketMetricsConfigurationOutput),
+		DeleteBucketMetricsConfigurationOutput: r.Request.Data.(*types.DeleteBucketMetricsConfigurationOutput),
 		response:                               &aws.Response{Request: r.Request},
 	}
 
@@ -147,7 +91,7 @@ func (r DeleteBucketMetricsConfigurationRequest) Send(ctx context.Context) (*Del
 // DeleteBucketMetricsConfigurationResponse is the response type for the
 // DeleteBucketMetricsConfiguration API operation.
 type DeleteBucketMetricsConfigurationResponse struct {
-	*DeleteBucketMetricsConfigurationOutput
+	*types.DeleteBucketMetricsConfigurationOutput
 
 	response *aws.Response
 }

@@ -6,104 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/restjson"
+	"github.com/aws/aws-sdk-go-v2/service/iot/types"
 )
-
-// The input for the CreateTopicRule operation.
-type CreateTopicRuleInput struct {
-	_ struct{} `type:"structure" payload:"TopicRulePayload"`
-
-	// The name of the rule.
-	//
-	// RuleName is a required field
-	RuleName *string `location:"uri" locationName:"ruleName" min:"1" type:"string" required:"true"`
-
-	// Metadata which can be used to manage the topic rule.
-	//
-	// For URI Request parameters use format: ...key1=value1&key2=value2...
-	//
-	// For the CLI command-line parameter use format: --tags "key1=value1&key2=value2..."
-	//
-	// For the cli-input-json file use format: "tags": "key1=value1&key2=value2..."
-	Tags *string `location:"header" locationName:"x-amz-tagging" type:"string"`
-
-	// The rule payload.
-	//
-	// TopicRulePayload is a required field
-	TopicRulePayload *TopicRulePayload `locationName:"topicRulePayload" type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s CreateTopicRuleInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateTopicRuleInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateTopicRuleInput"}
-
-	if s.RuleName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("RuleName"))
-	}
-	if s.RuleName != nil && len(*s.RuleName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("RuleName", 1))
-	}
-
-	if s.TopicRulePayload == nil {
-		invalidParams.Add(aws.NewErrParamRequired("TopicRulePayload"))
-	}
-	if s.TopicRulePayload != nil {
-		if err := s.TopicRulePayload.Validate(); err != nil {
-			invalidParams.AddNested("TopicRulePayload", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s CreateTopicRuleInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.Tags != nil {
-		v := *s.Tags
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "x-amz-tagging", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.RuleName != nil {
-		v := *s.RuleName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "ruleName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.TopicRulePayload != nil {
-		v := s.TopicRulePayload
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.PayloadTarget, "topicRulePayload", v, metadata)
-	}
-	return nil
-}
-
-type CreateTopicRuleOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s CreateTopicRuleOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s CreateTopicRuleOutput) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
 
 const opCreateTopicRule = "CreateTopicRule"
 
@@ -120,7 +26,7 @@ const opCreateTopicRule = "CreateTopicRule"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) CreateTopicRuleRequest(input *CreateTopicRuleInput) CreateTopicRuleRequest {
+func (c *Client) CreateTopicRuleRequest(input *types.CreateTopicRuleInput) CreateTopicRuleRequest {
 	op := &aws.Operation{
 		Name:       opCreateTopicRule,
 		HTTPMethod: "POST",
@@ -128,10 +34,10 @@ func (c *Client) CreateTopicRuleRequest(input *CreateTopicRuleInput) CreateTopic
 	}
 
 	if input == nil {
-		input = &CreateTopicRuleInput{}
+		input = &types.CreateTopicRuleInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateTopicRuleOutput{})
+	req := c.newRequest(op, input, &types.CreateTopicRuleOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return CreateTopicRuleRequest{Request: req, Input: input, Copy: c.CreateTopicRuleRequest}
@@ -141,8 +47,8 @@ func (c *Client) CreateTopicRuleRequest(input *CreateTopicRuleInput) CreateTopic
 // CreateTopicRule API operation.
 type CreateTopicRuleRequest struct {
 	*aws.Request
-	Input *CreateTopicRuleInput
-	Copy  func(*CreateTopicRuleInput) CreateTopicRuleRequest
+	Input *types.CreateTopicRuleInput
+	Copy  func(*types.CreateTopicRuleInput) CreateTopicRuleRequest
 }
 
 // Send marshals and sends the CreateTopicRule API request.
@@ -154,7 +60,7 @@ func (r CreateTopicRuleRequest) Send(ctx context.Context) (*CreateTopicRuleRespo
 	}
 
 	resp := &CreateTopicRuleResponse{
-		CreateTopicRuleOutput: r.Request.Data.(*CreateTopicRuleOutput),
+		CreateTopicRuleOutput: r.Request.Data.(*types.CreateTopicRuleOutput),
 		response:              &aws.Response{Request: r.Request},
 	}
 
@@ -164,7 +70,7 @@ func (r CreateTopicRuleRequest) Send(ctx context.Context) (*CreateTopicRuleRespo
 // CreateTopicRuleResponse is the response type for the
 // CreateTopicRule API operation.
 type CreateTopicRuleResponse struct {
-	*CreateTopicRuleOutput
+	*types.CreateTopicRuleOutput
 
 	response *aws.Response
 }

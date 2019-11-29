@@ -6,54 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-type CreateDefaultSubnetInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Availability Zone in which to create the default subnet.
-	//
-	// AvailabilityZone is a required field
-	AvailabilityZone *string `type:"string" required:"true"`
-
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have
-	// the required permissions, the error response is DryRunOperation. Otherwise,
-	// it is UnauthorizedOperation.
-	DryRun *bool `type:"boolean"`
-}
-
-// String returns the string representation
-func (s CreateDefaultSubnetInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateDefaultSubnetInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateDefaultSubnetInput"}
-
-	if s.AvailabilityZone == nil {
-		invalidParams.Add(aws.NewErrParamRequired("AvailabilityZone"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type CreateDefaultSubnetOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Information about the subnet.
-	Subnet *Subnet `locationName:"subnet" type:"structure"`
-}
-
-// String returns the string representation
-func (s CreateDefaultSubnetOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCreateDefaultSubnet = "CreateDefaultSubnet"
 
@@ -74,7 +28,7 @@ const opCreateDefaultSubnet = "CreateDefaultSubnet"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateDefaultSubnet
-func (c *Client) CreateDefaultSubnetRequest(input *CreateDefaultSubnetInput) CreateDefaultSubnetRequest {
+func (c *Client) CreateDefaultSubnetRequest(input *types.CreateDefaultSubnetInput) CreateDefaultSubnetRequest {
 	op := &aws.Operation{
 		Name:       opCreateDefaultSubnet,
 		HTTPMethod: "POST",
@@ -82,10 +36,10 @@ func (c *Client) CreateDefaultSubnetRequest(input *CreateDefaultSubnetInput) Cre
 	}
 
 	if input == nil {
-		input = &CreateDefaultSubnetInput{}
+		input = &types.CreateDefaultSubnetInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateDefaultSubnetOutput{})
+	req := c.newRequest(op, input, &types.CreateDefaultSubnetOutput{})
 	return CreateDefaultSubnetRequest{Request: req, Input: input, Copy: c.CreateDefaultSubnetRequest}
 }
 
@@ -93,8 +47,8 @@ func (c *Client) CreateDefaultSubnetRequest(input *CreateDefaultSubnetInput) Cre
 // CreateDefaultSubnet API operation.
 type CreateDefaultSubnetRequest struct {
 	*aws.Request
-	Input *CreateDefaultSubnetInput
-	Copy  func(*CreateDefaultSubnetInput) CreateDefaultSubnetRequest
+	Input *types.CreateDefaultSubnetInput
+	Copy  func(*types.CreateDefaultSubnetInput) CreateDefaultSubnetRequest
 }
 
 // Send marshals and sends the CreateDefaultSubnet API request.
@@ -106,7 +60,7 @@ func (r CreateDefaultSubnetRequest) Send(ctx context.Context) (*CreateDefaultSub
 	}
 
 	resp := &CreateDefaultSubnetResponse{
-		CreateDefaultSubnetOutput: r.Request.Data.(*CreateDefaultSubnetOutput),
+		CreateDefaultSubnetOutput: r.Request.Data.(*types.CreateDefaultSubnetOutput),
 		response:                  &aws.Response{Request: r.Request},
 	}
 
@@ -116,7 +70,7 @@ func (r CreateDefaultSubnetRequest) Send(ctx context.Context) (*CreateDefaultSub
 // CreateDefaultSubnetResponse is the response type for the
 // CreateDefaultSubnet API operation.
 type CreateDefaultSubnetResponse struct {
-	*CreateDefaultSubnetOutput
+	*types.CreateDefaultSubnetOutput
 
 	response *aws.Response
 }

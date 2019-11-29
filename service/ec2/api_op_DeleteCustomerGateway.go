@@ -6,54 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/ec2query"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-// Contains the parameters for DeleteCustomerGateway.
-type DeleteCustomerGatewayInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the customer gateway.
-	//
-	// CustomerGatewayId is a required field
-	CustomerGatewayId *string `type:"string" required:"true"`
-
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have
-	// the required permissions, the error response is DryRunOperation. Otherwise,
-	// it is UnauthorizedOperation.
-	DryRun *bool `locationName:"dryRun" type:"boolean"`
-}
-
-// String returns the string representation
-func (s DeleteCustomerGatewayInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteCustomerGatewayInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteCustomerGatewayInput"}
-
-	if s.CustomerGatewayId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("CustomerGatewayId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteCustomerGatewayOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteCustomerGatewayOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteCustomerGateway = "DeleteCustomerGateway"
 
@@ -71,7 +27,7 @@ const opDeleteCustomerGateway = "DeleteCustomerGateway"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteCustomerGateway
-func (c *Client) DeleteCustomerGatewayRequest(input *DeleteCustomerGatewayInput) DeleteCustomerGatewayRequest {
+func (c *Client) DeleteCustomerGatewayRequest(input *types.DeleteCustomerGatewayInput) DeleteCustomerGatewayRequest {
 	op := &aws.Operation{
 		Name:       opDeleteCustomerGateway,
 		HTTPMethod: "POST",
@@ -79,10 +35,10 @@ func (c *Client) DeleteCustomerGatewayRequest(input *DeleteCustomerGatewayInput)
 	}
 
 	if input == nil {
-		input = &DeleteCustomerGatewayInput{}
+		input = &types.DeleteCustomerGatewayInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteCustomerGatewayOutput{})
+	req := c.newRequest(op, input, &types.DeleteCustomerGatewayOutput{})
 	req.Handlers.Unmarshal.Remove(ec2query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return DeleteCustomerGatewayRequest{Request: req, Input: input, Copy: c.DeleteCustomerGatewayRequest}
@@ -92,8 +48,8 @@ func (c *Client) DeleteCustomerGatewayRequest(input *DeleteCustomerGatewayInput)
 // DeleteCustomerGateway API operation.
 type DeleteCustomerGatewayRequest struct {
 	*aws.Request
-	Input *DeleteCustomerGatewayInput
-	Copy  func(*DeleteCustomerGatewayInput) DeleteCustomerGatewayRequest
+	Input *types.DeleteCustomerGatewayInput
+	Copy  func(*types.DeleteCustomerGatewayInput) DeleteCustomerGatewayRequest
 }
 
 // Send marshals and sends the DeleteCustomerGateway API request.
@@ -105,7 +61,7 @@ func (r DeleteCustomerGatewayRequest) Send(ctx context.Context) (*DeleteCustomer
 	}
 
 	resp := &DeleteCustomerGatewayResponse{
-		DeleteCustomerGatewayOutput: r.Request.Data.(*DeleteCustomerGatewayOutput),
+		DeleteCustomerGatewayOutput: r.Request.Data.(*types.DeleteCustomerGatewayOutput),
 		response:                    &aws.Response{Request: r.Request},
 	}
 
@@ -115,7 +71,7 @@ func (r DeleteCustomerGatewayRequest) Send(ctx context.Context) (*DeleteCustomer
 // DeleteCustomerGatewayResponse is the response type for the
 // DeleteCustomerGateway API operation.
 type DeleteCustomerGatewayResponse struct {
-	*DeleteCustomerGatewayOutput
+	*types.DeleteCustomerGatewayOutput
 
 	response *aws.Response
 }

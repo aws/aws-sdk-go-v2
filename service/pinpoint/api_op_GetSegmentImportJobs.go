@@ -6,104 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/pinpoint/types"
 )
-
-type GetSegmentImportJobsInput struct {
-	_ struct{} `type:"structure"`
-
-	// ApplicationId is a required field
-	ApplicationId *string `location:"uri" locationName:"application-id" type:"string" required:"true"`
-
-	PageSize *string `location:"querystring" locationName:"page-size" type:"string"`
-
-	// SegmentId is a required field
-	SegmentId *string `location:"uri" locationName:"segment-id" type:"string" required:"true"`
-
-	Token *string `location:"querystring" locationName:"token" type:"string"`
-}
-
-// String returns the string representation
-func (s GetSegmentImportJobsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetSegmentImportJobsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetSegmentImportJobsInput"}
-
-	if s.ApplicationId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ApplicationId"))
-	}
-
-	if s.SegmentId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("SegmentId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetSegmentImportJobsInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.ApplicationId != nil {
-		v := *s.ApplicationId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "application-id", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.SegmentId != nil {
-		v := *s.SegmentId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "segment-id", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.PageSize != nil {
-		v := *s.PageSize
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "page-size", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Token != nil {
-		v := *s.Token
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "token", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type GetSegmentImportJobsOutput struct {
-	_ struct{} `type:"structure" payload:"ImportJobsResponse"`
-
-	// Provides information about the status and settings of all the import jobs
-	// that are associated with an application or segment. An import job is a job
-	// that imports endpoint definitions from one or more files.
-	//
-	// ImportJobsResponse is a required field
-	ImportJobsResponse *ImportJobsResponse `type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s GetSegmentImportJobsOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetSegmentImportJobsOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.ImportJobsResponse != nil {
-		v := s.ImportJobsResponse
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.PayloadTarget, "ImportJobsResponse", v, metadata)
-	}
-	return nil
-}
 
 const opGetSegmentImportJobs = "GetSegmentImportJobs"
 
@@ -121,7 +25,7 @@ const opGetSegmentImportJobs = "GetSegmentImportJobs"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetSegmentImportJobs
-func (c *Client) GetSegmentImportJobsRequest(input *GetSegmentImportJobsInput) GetSegmentImportJobsRequest {
+func (c *Client) GetSegmentImportJobsRequest(input *types.GetSegmentImportJobsInput) GetSegmentImportJobsRequest {
 	op := &aws.Operation{
 		Name:       opGetSegmentImportJobs,
 		HTTPMethod: "GET",
@@ -129,10 +33,10 @@ func (c *Client) GetSegmentImportJobsRequest(input *GetSegmentImportJobsInput) G
 	}
 
 	if input == nil {
-		input = &GetSegmentImportJobsInput{}
+		input = &types.GetSegmentImportJobsInput{}
 	}
 
-	req := c.newRequest(op, input, &GetSegmentImportJobsOutput{})
+	req := c.newRequest(op, input, &types.GetSegmentImportJobsOutput{})
 	return GetSegmentImportJobsRequest{Request: req, Input: input, Copy: c.GetSegmentImportJobsRequest}
 }
 
@@ -140,8 +44,8 @@ func (c *Client) GetSegmentImportJobsRequest(input *GetSegmentImportJobsInput) G
 // GetSegmentImportJobs API operation.
 type GetSegmentImportJobsRequest struct {
 	*aws.Request
-	Input *GetSegmentImportJobsInput
-	Copy  func(*GetSegmentImportJobsInput) GetSegmentImportJobsRequest
+	Input *types.GetSegmentImportJobsInput
+	Copy  func(*types.GetSegmentImportJobsInput) GetSegmentImportJobsRequest
 }
 
 // Send marshals and sends the GetSegmentImportJobs API request.
@@ -153,7 +57,7 @@ func (r GetSegmentImportJobsRequest) Send(ctx context.Context) (*GetSegmentImpor
 	}
 
 	resp := &GetSegmentImportJobsResponse{
-		GetSegmentImportJobsOutput: r.Request.Data.(*GetSegmentImportJobsOutput),
+		GetSegmentImportJobsOutput: r.Request.Data.(*types.GetSegmentImportJobsOutput),
 		response:                   &aws.Response{Request: r.Request},
 	}
 
@@ -163,7 +67,7 @@ func (r GetSegmentImportJobsRequest) Send(ctx context.Context) (*GetSegmentImpor
 // GetSegmentImportJobsResponse is the response type for the
 // GetSegmentImportJobs API operation.
 type GetSegmentImportJobsResponse struct {
-	*GetSegmentImportJobsOutput
+	*types.GetSegmentImportJobsOutput
 
 	response *aws.Response
 }

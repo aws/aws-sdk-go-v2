@@ -6,63 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/alexaforbusiness/types"
 )
-
-type CreateAddressBookInput struct {
-	_ struct{} `type:"structure"`
-
-	// A unique, user-specified identifier for the request that ensures idempotency.
-	ClientRequestToken *string `min:"10" type:"string" idempotencyToken:"true"`
-
-	// The description of the address book.
-	Description *string `min:"1" type:"string"`
-
-	// The name of the address book.
-	//
-	// Name is a required field
-	Name *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s CreateAddressBookInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateAddressBookInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateAddressBookInput"}
-	if s.ClientRequestToken != nil && len(*s.ClientRequestToken) < 10 {
-		invalidParams.Add(aws.NewErrParamMinLen("ClientRequestToken", 10))
-	}
-	if s.Description != nil && len(*s.Description) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Description", 1))
-	}
-
-	if s.Name == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Name"))
-	}
-	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type CreateAddressBookOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The ARN of the newly created address book.
-	AddressBookArn *string `type:"string"`
-}
-
-// String returns the string representation
-func (s CreateAddressBookOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCreateAddressBook = "CreateAddressBook"
 
@@ -79,7 +24,7 @@ const opCreateAddressBook = "CreateAddressBook"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/CreateAddressBook
-func (c *Client) CreateAddressBookRequest(input *CreateAddressBookInput) CreateAddressBookRequest {
+func (c *Client) CreateAddressBookRequest(input *types.CreateAddressBookInput) CreateAddressBookRequest {
 	op := &aws.Operation{
 		Name:       opCreateAddressBook,
 		HTTPMethod: "POST",
@@ -87,10 +32,10 @@ func (c *Client) CreateAddressBookRequest(input *CreateAddressBookInput) CreateA
 	}
 
 	if input == nil {
-		input = &CreateAddressBookInput{}
+		input = &types.CreateAddressBookInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateAddressBookOutput{})
+	req := c.newRequest(op, input, &types.CreateAddressBookOutput{})
 	return CreateAddressBookRequest{Request: req, Input: input, Copy: c.CreateAddressBookRequest}
 }
 
@@ -98,8 +43,8 @@ func (c *Client) CreateAddressBookRequest(input *CreateAddressBookInput) CreateA
 // CreateAddressBook API operation.
 type CreateAddressBookRequest struct {
 	*aws.Request
-	Input *CreateAddressBookInput
-	Copy  func(*CreateAddressBookInput) CreateAddressBookRequest
+	Input *types.CreateAddressBookInput
+	Copy  func(*types.CreateAddressBookInput) CreateAddressBookRequest
 }
 
 // Send marshals and sends the CreateAddressBook API request.
@@ -111,7 +56,7 @@ func (r CreateAddressBookRequest) Send(ctx context.Context) (*CreateAddressBookR
 	}
 
 	resp := &CreateAddressBookResponse{
-		CreateAddressBookOutput: r.Request.Data.(*CreateAddressBookOutput),
+		CreateAddressBookOutput: r.Request.Data.(*types.CreateAddressBookOutput),
 		response:                &aws.Response{Request: r.Request},
 	}
 
@@ -121,7 +66,7 @@ func (r CreateAddressBookRequest) Send(ctx context.Context) (*CreateAddressBookR
 // CreateAddressBookResponse is the response type for the
 // CreateAddressBook API operation.
 type CreateAddressBookResponse struct {
-	*CreateAddressBookOutput
+	*types.CreateAddressBookOutput
 
 	response *aws.Response
 }

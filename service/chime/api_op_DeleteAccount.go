@@ -6,64 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/chime/types"
 )
-
-type DeleteAccountInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Chime account ID.
-	//
-	// AccountId is a required field
-	AccountId *string `location:"uri" locationName:"accountId" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteAccountInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteAccountInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteAccountInput"}
-
-	if s.AccountId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("AccountId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteAccountInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.AccountId != nil {
-		v := *s.AccountId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "accountId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type DeleteAccountOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteAccountOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteAccountOutput) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
 
 const opDeleteAccount = "DeleteAccount"
 
@@ -92,7 +36,7 @@ const opDeleteAccount = "DeleteAccount"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/DeleteAccount
-func (c *Client) DeleteAccountRequest(input *DeleteAccountInput) DeleteAccountRequest {
+func (c *Client) DeleteAccountRequest(input *types.DeleteAccountInput) DeleteAccountRequest {
 	op := &aws.Operation{
 		Name:       opDeleteAccount,
 		HTTPMethod: "DELETE",
@@ -100,10 +44,10 @@ func (c *Client) DeleteAccountRequest(input *DeleteAccountInput) DeleteAccountRe
 	}
 
 	if input == nil {
-		input = &DeleteAccountInput{}
+		input = &types.DeleteAccountInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteAccountOutput{})
+	req := c.newRequest(op, input, &types.DeleteAccountOutput{})
 	return DeleteAccountRequest{Request: req, Input: input, Copy: c.DeleteAccountRequest}
 }
 
@@ -111,8 +55,8 @@ func (c *Client) DeleteAccountRequest(input *DeleteAccountInput) DeleteAccountRe
 // DeleteAccount API operation.
 type DeleteAccountRequest struct {
 	*aws.Request
-	Input *DeleteAccountInput
-	Copy  func(*DeleteAccountInput) DeleteAccountRequest
+	Input *types.DeleteAccountInput
+	Copy  func(*types.DeleteAccountInput) DeleteAccountRequest
 }
 
 // Send marshals and sends the DeleteAccount API request.
@@ -124,7 +68,7 @@ func (r DeleteAccountRequest) Send(ctx context.Context) (*DeleteAccountResponse,
 	}
 
 	resp := &DeleteAccountResponse{
-		DeleteAccountOutput: r.Request.Data.(*DeleteAccountOutput),
+		DeleteAccountOutput: r.Request.Data.(*types.DeleteAccountOutput),
 		response:            &aws.Response{Request: r.Request},
 	}
 
@@ -134,7 +78,7 @@ func (r DeleteAccountRequest) Send(ctx context.Context) (*DeleteAccountResponse,
 // DeleteAccountResponse is the response type for the
 // DeleteAccount API operation.
 type DeleteAccountResponse struct {
-	*DeleteAccountOutput
+	*types.DeleteAccountOutput
 
 	response *aws.Response
 }

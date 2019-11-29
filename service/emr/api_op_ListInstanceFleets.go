@@ -6,54 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/emr/types"
 )
-
-type ListInstanceFleetsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The unique identifier of the cluster.
-	//
-	// ClusterId is a required field
-	ClusterId *string `type:"string" required:"true"`
-
-	// The pagination token that indicates the next set of results to retrieve.
-	Marker *string `type:"string"`
-}
-
-// String returns the string representation
-func (s ListInstanceFleetsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListInstanceFleetsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListInstanceFleetsInput"}
-
-	if s.ClusterId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ClusterId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ListInstanceFleetsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The list of instance fleets for the cluster and given filters.
-	InstanceFleets []InstanceFleet `type:"list"`
-
-	// The pagination token that indicates the next set of results to retrieve.
-	Marker *string `type:"string"`
-}
-
-// String returns the string representation
-func (s ListInstanceFleetsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListInstanceFleets = "ListInstanceFleets"
 
@@ -73,7 +27,7 @@ const opListInstanceFleets = "ListInstanceFleets"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/ListInstanceFleets
-func (c *Client) ListInstanceFleetsRequest(input *ListInstanceFleetsInput) ListInstanceFleetsRequest {
+func (c *Client) ListInstanceFleetsRequest(input *types.ListInstanceFleetsInput) ListInstanceFleetsRequest {
 	op := &aws.Operation{
 		Name:       opListInstanceFleets,
 		HTTPMethod: "POST",
@@ -87,10 +41,10 @@ func (c *Client) ListInstanceFleetsRequest(input *ListInstanceFleetsInput) ListI
 	}
 
 	if input == nil {
-		input = &ListInstanceFleetsInput{}
+		input = &types.ListInstanceFleetsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListInstanceFleetsOutput{})
+	req := c.newRequest(op, input, &types.ListInstanceFleetsOutput{})
 	return ListInstanceFleetsRequest{Request: req, Input: input, Copy: c.ListInstanceFleetsRequest}
 }
 
@@ -98,8 +52,8 @@ func (c *Client) ListInstanceFleetsRequest(input *ListInstanceFleetsInput) ListI
 // ListInstanceFleets API operation.
 type ListInstanceFleetsRequest struct {
 	*aws.Request
-	Input *ListInstanceFleetsInput
-	Copy  func(*ListInstanceFleetsInput) ListInstanceFleetsRequest
+	Input *types.ListInstanceFleetsInput
+	Copy  func(*types.ListInstanceFleetsInput) ListInstanceFleetsRequest
 }
 
 // Send marshals and sends the ListInstanceFleets API request.
@@ -111,7 +65,7 @@ func (r ListInstanceFleetsRequest) Send(ctx context.Context) (*ListInstanceFleet
 	}
 
 	resp := &ListInstanceFleetsResponse{
-		ListInstanceFleetsOutput: r.Request.Data.(*ListInstanceFleetsOutput),
+		ListInstanceFleetsOutput: r.Request.Data.(*types.ListInstanceFleetsOutput),
 		response:                 &aws.Response{Request: r.Request},
 	}
 
@@ -141,7 +95,7 @@ func NewListInstanceFleetsPaginator(req ListInstanceFleetsRequest) ListInstanceF
 	return ListInstanceFleetsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListInstanceFleetsInput
+				var inCpy *types.ListInstanceFleetsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -161,14 +115,14 @@ type ListInstanceFleetsPaginator struct {
 	aws.Pager
 }
 
-func (p *ListInstanceFleetsPaginator) CurrentPage() *ListInstanceFleetsOutput {
-	return p.Pager.CurrentPage().(*ListInstanceFleetsOutput)
+func (p *ListInstanceFleetsPaginator) CurrentPage() *types.ListInstanceFleetsOutput {
+	return p.Pager.CurrentPage().(*types.ListInstanceFleetsOutput)
 }
 
 // ListInstanceFleetsResponse is the response type for the
 // ListInstanceFleets API operation.
 type ListInstanceFleetsResponse struct {
-	*ListInstanceFleetsOutput
+	*types.ListInstanceFleetsOutput
 
 	response *aws.Response
 }

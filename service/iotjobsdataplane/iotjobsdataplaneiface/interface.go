@@ -10,6 +10,7 @@ package iotjobsdataplaneiface
 
 import (
 	"github.com/aws/aws-sdk-go-v2/service/iotjobsdataplane"
+	"github.com/aws/aws-sdk-go-v2/service/iotjobsdataplane/types"
 )
 
 // ClientAPI provides an interface to enable mocking the
@@ -43,7 +44,7 @@ import (
 //    type mockClientClient struct {
 //        iotjobsdataplaneiface.ClientPI
 //    }
-//    func (m *mockClientClient) DescribeJobExecution(input *iotjobsdataplane.DescribeJobExecutionInput) (*iotjobsdataplane.DescribeJobExecutionOutput, error) {
+//    func (m *mockClientClient) DescribeJobExecution(input *types.DescribeJobExecutionInput) (*types.DescribeJobExecutionOutput, error) {
 //        // mock response/functionality
 //    }
 //
@@ -61,13 +62,13 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type ClientAPI interface {
-	DescribeJobExecutionRequest(*iotjobsdataplane.DescribeJobExecutionInput) iotjobsdataplane.DescribeJobExecutionRequest
+	DescribeJobExecutionRequest(*types.DescribeJobExecutionInput) iotjobsdataplane.DescribeJobExecutionRequest
 
-	GetPendingJobExecutionsRequest(*iotjobsdataplane.GetPendingJobExecutionsInput) iotjobsdataplane.GetPendingJobExecutionsRequest
+	GetPendingJobExecutionsRequest(*types.GetPendingJobExecutionsInput) iotjobsdataplane.GetPendingJobExecutionsRequest
 
-	StartNextPendingJobExecutionRequest(*iotjobsdataplane.StartNextPendingJobExecutionInput) iotjobsdataplane.StartNextPendingJobExecutionRequest
+	StartNextPendingJobExecutionRequest(*types.StartNextPendingJobExecutionInput) iotjobsdataplane.StartNextPendingJobExecutionRequest
 
-	UpdateJobExecutionRequest(*iotjobsdataplane.UpdateJobExecutionInput) iotjobsdataplane.UpdateJobExecutionRequest
+	UpdateJobExecutionRequest(*types.UpdateJobExecutionInput) iotjobsdataplane.UpdateJobExecutionRequest
 }
 
 var _ ClientAPI = (*iotjobsdataplane.Client)(nil)

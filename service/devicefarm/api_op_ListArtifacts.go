@@ -6,81 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/devicefarm/types"
 )
-
-// Represents a request to the list artifacts operation.
-type ListArtifactsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Run, Job, Suite, or Test ARN.
-	//
-	// Arn is a required field
-	Arn *string `locationName:"arn" min:"32" type:"string" required:"true"`
-
-	// An identifier that was returned from the previous call to this operation,
-	// which can be used to return the next set of items in the list.
-	NextToken *string `locationName:"nextToken" min:"4" type:"string"`
-
-	// The artifacts' type.
-	//
-	// Allowed values include:
-	//
-	//    * FILE: The artifacts are files.
-	//
-	//    * LOG: The artifacts are logs.
-	//
-	//    * SCREENSHOT: The artifacts are screenshots.
-	//
-	// Type is a required field
-	Type ArtifactCategory `locationName:"type" type:"string" required:"true" enum:"true"`
-}
-
-// String returns the string representation
-func (s ListArtifactsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListArtifactsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListArtifactsInput"}
-
-	if s.Arn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Arn"))
-	}
-	if s.Arn != nil && len(*s.Arn) < 32 {
-		invalidParams.Add(aws.NewErrParamMinLen("Arn", 32))
-	}
-	if s.NextToken != nil && len(*s.NextToken) < 4 {
-		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 4))
-	}
-	if len(s.Type) == 0 {
-		invalidParams.Add(aws.NewErrParamRequired("Type"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Represents the result of a list artifacts operation.
-type ListArtifactsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Information about the artifacts.
-	Artifacts []Artifact `locationName:"artifacts" type:"list"`
-
-	// If the number of items that are returned is significantly large, this is
-	// an identifier that is also returned, which can be used in a subsequent call
-	// to this operation to return the next set of items in the list.
-	NextToken *string `locationName:"nextToken" min:"4" type:"string"`
-}
-
-// String returns the string representation
-func (s ListArtifactsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListArtifacts = "ListArtifacts"
 
@@ -97,7 +24,7 @@ const opListArtifacts = "ListArtifacts"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ListArtifacts
-func (c *Client) ListArtifactsRequest(input *ListArtifactsInput) ListArtifactsRequest {
+func (c *Client) ListArtifactsRequest(input *types.ListArtifactsInput) ListArtifactsRequest {
 	op := &aws.Operation{
 		Name:       opListArtifacts,
 		HTTPMethod: "POST",
@@ -111,10 +38,10 @@ func (c *Client) ListArtifactsRequest(input *ListArtifactsInput) ListArtifactsRe
 	}
 
 	if input == nil {
-		input = &ListArtifactsInput{}
+		input = &types.ListArtifactsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListArtifactsOutput{})
+	req := c.newRequest(op, input, &types.ListArtifactsOutput{})
 	return ListArtifactsRequest{Request: req, Input: input, Copy: c.ListArtifactsRequest}
 }
 
@@ -122,8 +49,8 @@ func (c *Client) ListArtifactsRequest(input *ListArtifactsInput) ListArtifactsRe
 // ListArtifacts API operation.
 type ListArtifactsRequest struct {
 	*aws.Request
-	Input *ListArtifactsInput
-	Copy  func(*ListArtifactsInput) ListArtifactsRequest
+	Input *types.ListArtifactsInput
+	Copy  func(*types.ListArtifactsInput) ListArtifactsRequest
 }
 
 // Send marshals and sends the ListArtifacts API request.
@@ -135,7 +62,7 @@ func (r ListArtifactsRequest) Send(ctx context.Context) (*ListArtifactsResponse,
 	}
 
 	resp := &ListArtifactsResponse{
-		ListArtifactsOutput: r.Request.Data.(*ListArtifactsOutput),
+		ListArtifactsOutput: r.Request.Data.(*types.ListArtifactsOutput),
 		response:            &aws.Response{Request: r.Request},
 	}
 
@@ -165,7 +92,7 @@ func NewListArtifactsPaginator(req ListArtifactsRequest) ListArtifactsPaginator 
 	return ListArtifactsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListArtifactsInput
+				var inCpy *types.ListArtifactsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -185,14 +112,14 @@ type ListArtifactsPaginator struct {
 	aws.Pager
 }
 
-func (p *ListArtifactsPaginator) CurrentPage() *ListArtifactsOutput {
-	return p.Pager.CurrentPage().(*ListArtifactsOutput)
+func (p *ListArtifactsPaginator) CurrentPage() *types.ListArtifactsOutput {
+	return p.Pager.CurrentPage().(*types.ListArtifactsOutput)
 }
 
 // ListArtifactsResponse is the response type for the
 // ListArtifacts API operation.
 type ListArtifactsResponse struct {
-	*ListArtifactsOutput
+	*types.ListArtifactsOutput
 
 	response *aws.Response
 }

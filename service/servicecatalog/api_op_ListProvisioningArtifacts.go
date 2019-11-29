@@ -6,64 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/types"
 )
-
-type ListProvisioningArtifactsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The language code.
-	//
-	//    * en - English (default)
-	//
-	//    * jp - Japanese
-	//
-	//    * zh - Chinese
-	AcceptLanguage *string `type:"string"`
-
-	// The product identifier.
-	//
-	// ProductId is a required field
-	ProductId *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s ListProvisioningArtifactsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListProvisioningArtifactsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListProvisioningArtifactsInput"}
-
-	if s.ProductId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ProductId"))
-	}
-	if s.ProductId != nil && len(*s.ProductId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ProductId", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ListProvisioningArtifactsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The page token to use to retrieve the next set of results. If there are no
-	// additional results, this value is null.
-	NextPageToken *string `type:"string"`
-
-	// Information about the provisioning artifacts.
-	ProvisioningArtifactDetails []ProvisioningArtifactDetail `type:"list"`
-}
-
-// String returns the string representation
-func (s ListProvisioningArtifactsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListProvisioningArtifacts = "ListProvisioningArtifacts"
 
@@ -81,7 +25,7 @@ const opListProvisioningArtifacts = "ListProvisioningArtifacts"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ListProvisioningArtifacts
-func (c *Client) ListProvisioningArtifactsRequest(input *ListProvisioningArtifactsInput) ListProvisioningArtifactsRequest {
+func (c *Client) ListProvisioningArtifactsRequest(input *types.ListProvisioningArtifactsInput) ListProvisioningArtifactsRequest {
 	op := &aws.Operation{
 		Name:       opListProvisioningArtifacts,
 		HTTPMethod: "POST",
@@ -89,10 +33,10 @@ func (c *Client) ListProvisioningArtifactsRequest(input *ListProvisioningArtifac
 	}
 
 	if input == nil {
-		input = &ListProvisioningArtifactsInput{}
+		input = &types.ListProvisioningArtifactsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListProvisioningArtifactsOutput{})
+	req := c.newRequest(op, input, &types.ListProvisioningArtifactsOutput{})
 	return ListProvisioningArtifactsRequest{Request: req, Input: input, Copy: c.ListProvisioningArtifactsRequest}
 }
 
@@ -100,8 +44,8 @@ func (c *Client) ListProvisioningArtifactsRequest(input *ListProvisioningArtifac
 // ListProvisioningArtifacts API operation.
 type ListProvisioningArtifactsRequest struct {
 	*aws.Request
-	Input *ListProvisioningArtifactsInput
-	Copy  func(*ListProvisioningArtifactsInput) ListProvisioningArtifactsRequest
+	Input *types.ListProvisioningArtifactsInput
+	Copy  func(*types.ListProvisioningArtifactsInput) ListProvisioningArtifactsRequest
 }
 
 // Send marshals and sends the ListProvisioningArtifacts API request.
@@ -113,7 +57,7 @@ func (r ListProvisioningArtifactsRequest) Send(ctx context.Context) (*ListProvis
 	}
 
 	resp := &ListProvisioningArtifactsResponse{
-		ListProvisioningArtifactsOutput: r.Request.Data.(*ListProvisioningArtifactsOutput),
+		ListProvisioningArtifactsOutput: r.Request.Data.(*types.ListProvisioningArtifactsOutput),
 		response:                        &aws.Response{Request: r.Request},
 	}
 
@@ -123,7 +67,7 @@ func (r ListProvisioningArtifactsRequest) Send(ctx context.Context) (*ListProvis
 // ListProvisioningArtifactsResponse is the response type for the
 // ListProvisioningArtifacts API operation.
 type ListProvisioningArtifactsResponse struct {
-	*ListProvisioningArtifactsOutput
+	*types.ListProvisioningArtifactsOutput
 
 	response *aws.Response
 }

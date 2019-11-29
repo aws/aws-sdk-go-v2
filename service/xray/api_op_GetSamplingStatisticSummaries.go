@@ -6,72 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/xray/types"
 )
-
-type GetSamplingStatisticSummariesInput struct {
-	_ struct{} `type:"structure"`
-
-	// Pagination token. Not used.
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s GetSamplingStatisticSummariesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetSamplingStatisticSummariesInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type GetSamplingStatisticSummariesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Pagination token. Not used.
-	NextToken *string `type:"string"`
-
-	// Information about the number of requests instrumented for each sampling rule.
-	SamplingStatisticSummaries []SamplingStatisticSummary `type:"list"`
-}
-
-// String returns the string representation
-func (s GetSamplingStatisticSummariesOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetSamplingStatisticSummariesOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.SamplingStatisticSummaries != nil {
-		v := s.SamplingStatisticSummaries
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "SamplingStatisticSummaries", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	return nil
-}
 
 const opGetSamplingStatisticSummaries = "GetSamplingStatisticSummaries"
 
@@ -88,7 +24,7 @@ const opGetSamplingStatisticSummaries = "GetSamplingStatisticSummaries"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/GetSamplingStatisticSummaries
-func (c *Client) GetSamplingStatisticSummariesRequest(input *GetSamplingStatisticSummariesInput) GetSamplingStatisticSummariesRequest {
+func (c *Client) GetSamplingStatisticSummariesRequest(input *types.GetSamplingStatisticSummariesInput) GetSamplingStatisticSummariesRequest {
 	op := &aws.Operation{
 		Name:       opGetSamplingStatisticSummaries,
 		HTTPMethod: "POST",
@@ -102,10 +38,10 @@ func (c *Client) GetSamplingStatisticSummariesRequest(input *GetSamplingStatisti
 	}
 
 	if input == nil {
-		input = &GetSamplingStatisticSummariesInput{}
+		input = &types.GetSamplingStatisticSummariesInput{}
 	}
 
-	req := c.newRequest(op, input, &GetSamplingStatisticSummariesOutput{})
+	req := c.newRequest(op, input, &types.GetSamplingStatisticSummariesOutput{})
 	return GetSamplingStatisticSummariesRequest{Request: req, Input: input, Copy: c.GetSamplingStatisticSummariesRequest}
 }
 
@@ -113,8 +49,8 @@ func (c *Client) GetSamplingStatisticSummariesRequest(input *GetSamplingStatisti
 // GetSamplingStatisticSummaries API operation.
 type GetSamplingStatisticSummariesRequest struct {
 	*aws.Request
-	Input *GetSamplingStatisticSummariesInput
-	Copy  func(*GetSamplingStatisticSummariesInput) GetSamplingStatisticSummariesRequest
+	Input *types.GetSamplingStatisticSummariesInput
+	Copy  func(*types.GetSamplingStatisticSummariesInput) GetSamplingStatisticSummariesRequest
 }
 
 // Send marshals and sends the GetSamplingStatisticSummaries API request.
@@ -126,7 +62,7 @@ func (r GetSamplingStatisticSummariesRequest) Send(ctx context.Context) (*GetSam
 	}
 
 	resp := &GetSamplingStatisticSummariesResponse{
-		GetSamplingStatisticSummariesOutput: r.Request.Data.(*GetSamplingStatisticSummariesOutput),
+		GetSamplingStatisticSummariesOutput: r.Request.Data.(*types.GetSamplingStatisticSummariesOutput),
 		response:                            &aws.Response{Request: r.Request},
 	}
 
@@ -156,7 +92,7 @@ func NewGetSamplingStatisticSummariesPaginator(req GetSamplingStatisticSummaries
 	return GetSamplingStatisticSummariesPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *GetSamplingStatisticSummariesInput
+				var inCpy *types.GetSamplingStatisticSummariesInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -176,14 +112,14 @@ type GetSamplingStatisticSummariesPaginator struct {
 	aws.Pager
 }
 
-func (p *GetSamplingStatisticSummariesPaginator) CurrentPage() *GetSamplingStatisticSummariesOutput {
-	return p.Pager.CurrentPage().(*GetSamplingStatisticSummariesOutput)
+func (p *GetSamplingStatisticSummariesPaginator) CurrentPage() *types.GetSamplingStatisticSummariesOutput {
+	return p.Pager.CurrentPage().(*types.GetSamplingStatisticSummariesOutput)
 }
 
 // GetSamplingStatisticSummariesResponse is the response type for the
 // GetSamplingStatisticSummaries API operation.
 type GetSamplingStatisticSummariesResponse struct {
-	*GetSamplingStatisticSummariesOutput
+	*types.GetSamplingStatisticSummariesOutput
 
 	response *aws.Response
 }

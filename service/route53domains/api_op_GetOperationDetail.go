@@ -4,69 +4,10 @@ package route53domains
 
 import (
 	"context"
-	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/route53domains/types"
 )
-
-// The GetOperationDetail request includes the following element.
-type GetOperationDetailInput struct {
-	_ struct{} `type:"structure"`
-
-	// The identifier for the operation for which you want to get the status. Amazon
-	// Route 53 returned the identifier in the response to the original request.
-	//
-	// OperationId is a required field
-	OperationId *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetOperationDetailInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetOperationDetailInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetOperationDetailInput"}
-
-	if s.OperationId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("OperationId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// The GetOperationDetail response includes the following elements.
-type GetOperationDetailOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of a domain.
-	DomainName *string `type:"string"`
-
-	// Detailed information on the status including possible errors.
-	Message *string `type:"string"`
-
-	// The identifier for the operation.
-	OperationId *string `type:"string"`
-
-	// The current status of the requested operation in the system.
-	Status OperationStatus `type:"string" enum:"true"`
-
-	// The date when the request was submitted.
-	SubmittedDate *time.Time `type:"timestamp"`
-
-	// The type of operation that was requested.
-	Type OperationType `type:"string" enum:"true"`
-}
-
-// String returns the string representation
-func (s GetOperationDetailOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetOperationDetail = "GetOperationDetail"
 
@@ -83,7 +24,7 @@ const opGetOperationDetail = "GetOperationDetail"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/GetOperationDetail
-func (c *Client) GetOperationDetailRequest(input *GetOperationDetailInput) GetOperationDetailRequest {
+func (c *Client) GetOperationDetailRequest(input *types.GetOperationDetailInput) GetOperationDetailRequest {
 	op := &aws.Operation{
 		Name:       opGetOperationDetail,
 		HTTPMethod: "POST",
@@ -91,10 +32,10 @@ func (c *Client) GetOperationDetailRequest(input *GetOperationDetailInput) GetOp
 	}
 
 	if input == nil {
-		input = &GetOperationDetailInput{}
+		input = &types.GetOperationDetailInput{}
 	}
 
-	req := c.newRequest(op, input, &GetOperationDetailOutput{})
+	req := c.newRequest(op, input, &types.GetOperationDetailOutput{})
 	return GetOperationDetailRequest{Request: req, Input: input, Copy: c.GetOperationDetailRequest}
 }
 
@@ -102,8 +43,8 @@ func (c *Client) GetOperationDetailRequest(input *GetOperationDetailInput) GetOp
 // GetOperationDetail API operation.
 type GetOperationDetailRequest struct {
 	*aws.Request
-	Input *GetOperationDetailInput
-	Copy  func(*GetOperationDetailInput) GetOperationDetailRequest
+	Input *types.GetOperationDetailInput
+	Copy  func(*types.GetOperationDetailInput) GetOperationDetailRequest
 }
 
 // Send marshals and sends the GetOperationDetail API request.
@@ -115,7 +56,7 @@ func (r GetOperationDetailRequest) Send(ctx context.Context) (*GetOperationDetai
 	}
 
 	resp := &GetOperationDetailResponse{
-		GetOperationDetailOutput: r.Request.Data.(*GetOperationDetailOutput),
+		GetOperationDetailOutput: r.Request.Data.(*types.GetOperationDetailOutput),
 		response:                 &aws.Response{Request: r.Request},
 	}
 
@@ -125,7 +66,7 @@ func (r GetOperationDetailRequest) Send(ctx context.Context) (*GetOperationDetai
 // GetOperationDetailResponse is the response type for the
 // GetOperationDetail API operation.
 type GetOperationDetailResponse struct {
-	*GetOperationDetailOutput
+	*types.GetOperationDetailOutput
 
 	response *aws.Response
 }

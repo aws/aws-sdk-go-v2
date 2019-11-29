@@ -4,137 +4,10 @@ package iot
 
 import (
 	"context"
-	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/iot/types"
 )
-
-// The input for the GetPolicy operation.
-type GetPolicyInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the policy.
-	//
-	// PolicyName is a required field
-	PolicyName *string `location:"uri" locationName:"policyName" min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetPolicyInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetPolicyInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetPolicyInput"}
-
-	if s.PolicyName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("PolicyName"))
-	}
-	if s.PolicyName != nil && len(*s.PolicyName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("PolicyName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetPolicyInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.PolicyName != nil {
-		v := *s.PolicyName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "policyName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-// The output from the GetPolicy operation.
-type GetPolicyOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The date the policy was created.
-	CreationDate *time.Time `locationName:"creationDate" type:"timestamp"`
-
-	// The default policy version ID.
-	DefaultVersionId *string `locationName:"defaultVersionId" type:"string"`
-
-	// The generation ID of the policy.
-	GenerationId *string `locationName:"generationId" type:"string"`
-
-	// The date the policy was last modified.
-	LastModifiedDate *time.Time `locationName:"lastModifiedDate" type:"timestamp"`
-
-	// The policy ARN.
-	PolicyArn *string `locationName:"policyArn" type:"string"`
-
-	// The JSON document that describes the policy.
-	PolicyDocument *string `locationName:"policyDocument" type:"string"`
-
-	// The policy name.
-	PolicyName *string `locationName:"policyName" min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s GetPolicyOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetPolicyOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.CreationDate != nil {
-		v := *s.CreationDate
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "creationDate",
-			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
-	}
-	if s.DefaultVersionId != nil {
-		v := *s.DefaultVersionId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "defaultVersionId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.GenerationId != nil {
-		v := *s.GenerationId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "generationId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.LastModifiedDate != nil {
-		v := *s.LastModifiedDate
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "lastModifiedDate",
-			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
-	}
-	if s.PolicyArn != nil {
-		v := *s.PolicyArn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "policyArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.PolicyDocument != nil {
-		v := *s.PolicyDocument
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "policyDocument", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.PolicyName != nil {
-		v := *s.PolicyName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "policyName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opGetPolicy = "GetPolicy"
 
@@ -150,7 +23,7 @@ const opGetPolicy = "GetPolicy"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) GetPolicyRequest(input *GetPolicyInput) GetPolicyRequest {
+func (c *Client) GetPolicyRequest(input *types.GetPolicyInput) GetPolicyRequest {
 	op := &aws.Operation{
 		Name:       opGetPolicy,
 		HTTPMethod: "GET",
@@ -158,10 +31,10 @@ func (c *Client) GetPolicyRequest(input *GetPolicyInput) GetPolicyRequest {
 	}
 
 	if input == nil {
-		input = &GetPolicyInput{}
+		input = &types.GetPolicyInput{}
 	}
 
-	req := c.newRequest(op, input, &GetPolicyOutput{})
+	req := c.newRequest(op, input, &types.GetPolicyOutput{})
 	return GetPolicyRequest{Request: req, Input: input, Copy: c.GetPolicyRequest}
 }
 
@@ -169,8 +42,8 @@ func (c *Client) GetPolicyRequest(input *GetPolicyInput) GetPolicyRequest {
 // GetPolicy API operation.
 type GetPolicyRequest struct {
 	*aws.Request
-	Input *GetPolicyInput
-	Copy  func(*GetPolicyInput) GetPolicyRequest
+	Input *types.GetPolicyInput
+	Copy  func(*types.GetPolicyInput) GetPolicyRequest
 }
 
 // Send marshals and sends the GetPolicy API request.
@@ -182,7 +55,7 @@ func (r GetPolicyRequest) Send(ctx context.Context) (*GetPolicyResponse, error) 
 	}
 
 	resp := &GetPolicyResponse{
-		GetPolicyOutput: r.Request.Data.(*GetPolicyOutput),
+		GetPolicyOutput: r.Request.Data.(*types.GetPolicyOutput),
 		response:        &aws.Response{Request: r.Request},
 	}
 
@@ -192,7 +65,7 @@ func (r GetPolicyRequest) Send(ctx context.Context) (*GetPolicyResponse, error) 
 // GetPolicyResponse is the response type for the
 // GetPolicy API operation.
 type GetPolicyResponse struct {
-	*GetPolicyOutput
+	*types.GetPolicyOutput
 
 	response *aws.Response
 }

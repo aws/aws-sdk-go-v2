@@ -6,72 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-type ModifyVpnTunnelOptionsInput struct {
-	_ struct{} `type:"structure"`
-
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have
-	// the required permissions, the error response is DryRunOperation. Otherwise,
-	// it is UnauthorizedOperation.
-	DryRun *bool `type:"boolean"`
-
-	// The tunnel options to modify.
-	//
-	// TunnelOptions is a required field
-	TunnelOptions *ModifyVpnTunnelOptionsSpecification `type:"structure" required:"true"`
-
-	// The ID of the AWS Site-to-Site VPN connection.
-	//
-	// VpnConnectionId is a required field
-	VpnConnectionId *string `type:"string" required:"true"`
-
-	// The external IP address of the VPN tunnel.
-	//
-	// VpnTunnelOutsideIpAddress is a required field
-	VpnTunnelOutsideIpAddress *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s ModifyVpnTunnelOptionsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ModifyVpnTunnelOptionsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ModifyVpnTunnelOptionsInput"}
-
-	if s.TunnelOptions == nil {
-		invalidParams.Add(aws.NewErrParamRequired("TunnelOptions"))
-	}
-
-	if s.VpnConnectionId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("VpnConnectionId"))
-	}
-
-	if s.VpnTunnelOutsideIpAddress == nil {
-		invalidParams.Add(aws.NewErrParamRequired("VpnTunnelOutsideIpAddress"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ModifyVpnTunnelOptionsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Describes a VPN connection.
-	VpnConnection *VpnConnection `locationName:"vpnConnection" type:"structure"`
-}
-
-// String returns the string representation
-func (s ModifyVpnTunnelOptionsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opModifyVpnTunnelOptions = "ModifyVpnTunnelOptions"
 
@@ -92,7 +28,7 @@ const opModifyVpnTunnelOptions = "ModifyVpnTunnelOptions"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyVpnTunnelOptions
-func (c *Client) ModifyVpnTunnelOptionsRequest(input *ModifyVpnTunnelOptionsInput) ModifyVpnTunnelOptionsRequest {
+func (c *Client) ModifyVpnTunnelOptionsRequest(input *types.ModifyVpnTunnelOptionsInput) ModifyVpnTunnelOptionsRequest {
 	op := &aws.Operation{
 		Name:       opModifyVpnTunnelOptions,
 		HTTPMethod: "POST",
@@ -100,10 +36,10 @@ func (c *Client) ModifyVpnTunnelOptionsRequest(input *ModifyVpnTunnelOptionsInpu
 	}
 
 	if input == nil {
-		input = &ModifyVpnTunnelOptionsInput{}
+		input = &types.ModifyVpnTunnelOptionsInput{}
 	}
 
-	req := c.newRequest(op, input, &ModifyVpnTunnelOptionsOutput{})
+	req := c.newRequest(op, input, &types.ModifyVpnTunnelOptionsOutput{})
 	return ModifyVpnTunnelOptionsRequest{Request: req, Input: input, Copy: c.ModifyVpnTunnelOptionsRequest}
 }
 
@@ -111,8 +47,8 @@ func (c *Client) ModifyVpnTunnelOptionsRequest(input *ModifyVpnTunnelOptionsInpu
 // ModifyVpnTunnelOptions API operation.
 type ModifyVpnTunnelOptionsRequest struct {
 	*aws.Request
-	Input *ModifyVpnTunnelOptionsInput
-	Copy  func(*ModifyVpnTunnelOptionsInput) ModifyVpnTunnelOptionsRequest
+	Input *types.ModifyVpnTunnelOptionsInput
+	Copy  func(*types.ModifyVpnTunnelOptionsInput) ModifyVpnTunnelOptionsRequest
 }
 
 // Send marshals and sends the ModifyVpnTunnelOptions API request.
@@ -124,7 +60,7 @@ func (r ModifyVpnTunnelOptionsRequest) Send(ctx context.Context) (*ModifyVpnTunn
 	}
 
 	resp := &ModifyVpnTunnelOptionsResponse{
-		ModifyVpnTunnelOptionsOutput: r.Request.Data.(*ModifyVpnTunnelOptionsOutput),
+		ModifyVpnTunnelOptionsOutput: r.Request.Data.(*types.ModifyVpnTunnelOptionsOutput),
 		response:                     &aws.Response{Request: r.Request},
 	}
 
@@ -134,7 +70,7 @@ func (r ModifyVpnTunnelOptionsRequest) Send(ctx context.Context) (*ModifyVpnTunn
 // ModifyVpnTunnelOptionsResponse is the response type for the
 // ModifyVpnTunnelOptions API operation.
 type ModifyVpnTunnelOptionsResponse struct {
-	*ModifyVpnTunnelOptionsOutput
+	*types.ModifyVpnTunnelOptionsOutput
 
 	response *aws.Response
 }

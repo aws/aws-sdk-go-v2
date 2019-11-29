@@ -6,58 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/iotthingsgraph/types"
 )
-
-type CreateFlowTemplateInput struct {
-	_ struct{} `type:"structure"`
-
-	// The namespace version in which the workflow is to be created.
-	//
-	// If no value is specified, the latest version is used by default.
-	CompatibleNamespaceVersion *int64 `locationName:"compatibleNamespaceVersion" type:"long"`
-
-	// The workflow DefinitionDocument.
-	//
-	// Definition is a required field
-	Definition *DefinitionDocument `locationName:"definition" type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s CreateFlowTemplateInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateFlowTemplateInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateFlowTemplateInput"}
-
-	if s.Definition == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Definition"))
-	}
-	if s.Definition != nil {
-		if err := s.Definition.Validate(); err != nil {
-			invalidParams.AddNested("Definition", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type CreateFlowTemplateOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The summary object that describes the created workflow.
-	Summary *FlowTemplateSummary `locationName:"summary" type:"structure"`
-}
-
-// String returns the string representation
-func (s CreateFlowTemplateOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCreateFlowTemplate = "CreateFlowTemplate"
 
@@ -78,7 +28,7 @@ const opCreateFlowTemplate = "CreateFlowTemplate"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iotthingsgraph-2018-09-06/CreateFlowTemplate
-func (c *Client) CreateFlowTemplateRequest(input *CreateFlowTemplateInput) CreateFlowTemplateRequest {
+func (c *Client) CreateFlowTemplateRequest(input *types.CreateFlowTemplateInput) CreateFlowTemplateRequest {
 	op := &aws.Operation{
 		Name:       opCreateFlowTemplate,
 		HTTPMethod: "POST",
@@ -86,10 +36,10 @@ func (c *Client) CreateFlowTemplateRequest(input *CreateFlowTemplateInput) Creat
 	}
 
 	if input == nil {
-		input = &CreateFlowTemplateInput{}
+		input = &types.CreateFlowTemplateInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateFlowTemplateOutput{})
+	req := c.newRequest(op, input, &types.CreateFlowTemplateOutput{})
 	return CreateFlowTemplateRequest{Request: req, Input: input, Copy: c.CreateFlowTemplateRequest}
 }
 
@@ -97,8 +47,8 @@ func (c *Client) CreateFlowTemplateRequest(input *CreateFlowTemplateInput) Creat
 // CreateFlowTemplate API operation.
 type CreateFlowTemplateRequest struct {
 	*aws.Request
-	Input *CreateFlowTemplateInput
-	Copy  func(*CreateFlowTemplateInput) CreateFlowTemplateRequest
+	Input *types.CreateFlowTemplateInput
+	Copy  func(*types.CreateFlowTemplateInput) CreateFlowTemplateRequest
 }
 
 // Send marshals and sends the CreateFlowTemplate API request.
@@ -110,7 +60,7 @@ func (r CreateFlowTemplateRequest) Send(ctx context.Context) (*CreateFlowTemplat
 	}
 
 	resp := &CreateFlowTemplateResponse{
-		CreateFlowTemplateOutput: r.Request.Data.(*CreateFlowTemplateOutput),
+		CreateFlowTemplateOutput: r.Request.Data.(*types.CreateFlowTemplateOutput),
 		response:                 &aws.Response{Request: r.Request},
 	}
 
@@ -120,7 +70,7 @@ func (r CreateFlowTemplateRequest) Send(ctx context.Context) (*CreateFlowTemplat
 // CreateFlowTemplateResponse is the response type for the
 // CreateFlowTemplate API operation.
 type CreateFlowTemplateResponse struct {
-	*CreateFlowTemplateOutput
+	*types.CreateFlowTemplateOutput
 
 	response *aws.Response
 }

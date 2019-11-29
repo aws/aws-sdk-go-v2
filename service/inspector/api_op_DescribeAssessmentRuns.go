@@ -6,59 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/inspector/types"
 )
-
-type DescribeAssessmentRunsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ARN that specifies the assessment run that you want to describe.
-	//
-	// AssessmentRunArns is a required field
-	AssessmentRunArns []string `locationName:"assessmentRunArns" min:"1" type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeAssessmentRunsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeAssessmentRunsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeAssessmentRunsInput"}
-
-	if s.AssessmentRunArns == nil {
-		invalidParams.Add(aws.NewErrParamRequired("AssessmentRunArns"))
-	}
-	if s.AssessmentRunArns != nil && len(s.AssessmentRunArns) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("AssessmentRunArns", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribeAssessmentRunsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Information about the assessment run.
-	//
-	// AssessmentRuns is a required field
-	AssessmentRuns []AssessmentRun `locationName:"assessmentRuns" type:"list" required:"true"`
-
-	// Assessment run details that cannot be described. An error code is provided
-	// for each failed item.
-	//
-	// FailedItems is a required field
-	FailedItems map[string]FailedItemDetails `locationName:"failedItems" type:"map" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeAssessmentRunsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeAssessmentRuns = "DescribeAssessmentRuns"
 
@@ -76,7 +25,7 @@ const opDescribeAssessmentRuns = "DescribeAssessmentRuns"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/DescribeAssessmentRuns
-func (c *Client) DescribeAssessmentRunsRequest(input *DescribeAssessmentRunsInput) DescribeAssessmentRunsRequest {
+func (c *Client) DescribeAssessmentRunsRequest(input *types.DescribeAssessmentRunsInput) DescribeAssessmentRunsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeAssessmentRuns,
 		HTTPMethod: "POST",
@@ -84,10 +33,10 @@ func (c *Client) DescribeAssessmentRunsRequest(input *DescribeAssessmentRunsInpu
 	}
 
 	if input == nil {
-		input = &DescribeAssessmentRunsInput{}
+		input = &types.DescribeAssessmentRunsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeAssessmentRunsOutput{})
+	req := c.newRequest(op, input, &types.DescribeAssessmentRunsOutput{})
 	return DescribeAssessmentRunsRequest{Request: req, Input: input, Copy: c.DescribeAssessmentRunsRequest}
 }
 
@@ -95,8 +44,8 @@ func (c *Client) DescribeAssessmentRunsRequest(input *DescribeAssessmentRunsInpu
 // DescribeAssessmentRuns API operation.
 type DescribeAssessmentRunsRequest struct {
 	*aws.Request
-	Input *DescribeAssessmentRunsInput
-	Copy  func(*DescribeAssessmentRunsInput) DescribeAssessmentRunsRequest
+	Input *types.DescribeAssessmentRunsInput
+	Copy  func(*types.DescribeAssessmentRunsInput) DescribeAssessmentRunsRequest
 }
 
 // Send marshals and sends the DescribeAssessmentRuns API request.
@@ -108,7 +57,7 @@ func (r DescribeAssessmentRunsRequest) Send(ctx context.Context) (*DescribeAsses
 	}
 
 	resp := &DescribeAssessmentRunsResponse{
-		DescribeAssessmentRunsOutput: r.Request.Data.(*DescribeAssessmentRunsOutput),
+		DescribeAssessmentRunsOutput: r.Request.Data.(*types.DescribeAssessmentRunsOutput),
 		response:                     &aws.Response{Request: r.Request},
 	}
 
@@ -118,7 +67,7 @@ func (r DescribeAssessmentRunsRequest) Send(ctx context.Context) (*DescribeAsses
 // DescribeAssessmentRunsResponse is the response type for the
 // DescribeAssessmentRuns API operation.
 type DescribeAssessmentRunsResponse struct {
-	*DescribeAssessmentRunsOutput
+	*types.DescribeAssessmentRunsOutput
 
 	response *aws.Response
 }

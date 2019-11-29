@@ -6,71 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/cloudfront/types"
 )
-
-type ListFieldLevelEncryptionProfilesInput struct {
-	_ struct{} `type:"structure"`
-
-	// Use this when paginating results to indicate where to begin in your list
-	// of profiles. The results include profiles in the list that occur after the
-	// marker. To get the next page of results, set the Marker to the value of the
-	// NextMarker from the current page's response (which is also the ID of the
-	// last profile on that page).
-	Marker *string `location:"querystring" locationName:"Marker" type:"string"`
-
-	// The maximum number of field-level encryption profiles you want in the response
-	// body.
-	MaxItems *int64 `location:"querystring" locationName:"MaxItems" type:"integer"`
-}
-
-// String returns the string representation
-func (s ListFieldLevelEncryptionProfilesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListFieldLevelEncryptionProfilesInput) MarshalFields(e protocol.FieldEncoder) error {
-
-	if s.Marker != nil {
-		v := *s.Marker
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "Marker", protocol.StringValue(v), metadata)
-	}
-	if s.MaxItems != nil {
-		v := *s.MaxItems
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "MaxItems", protocol.Int64Value(v), metadata)
-	}
-	return nil
-}
-
-type ListFieldLevelEncryptionProfilesOutput struct {
-	_ struct{} `type:"structure" payload:"FieldLevelEncryptionProfileList"`
-
-	// Returns a list of the field-level encryption profiles that have been created
-	// in CloudFront for this account.
-	FieldLevelEncryptionProfileList *FieldLevelEncryptionProfileList `type:"structure"`
-}
-
-// String returns the string representation
-func (s ListFieldLevelEncryptionProfilesOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListFieldLevelEncryptionProfilesOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.FieldLevelEncryptionProfileList != nil {
-		v := s.FieldLevelEncryptionProfileList
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.PayloadTarget, "FieldLevelEncryptionProfileList", v, metadata)
-	}
-	return nil
-}
 
 const opListFieldLevelEncryptionProfiles = "ListFieldLevelEncryptionProfiles2019_03_26"
 
@@ -88,7 +25,7 @@ const opListFieldLevelEncryptionProfiles = "ListFieldLevelEncryptionProfiles2019
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/ListFieldLevelEncryptionProfiles
-func (c *Client) ListFieldLevelEncryptionProfilesRequest(input *ListFieldLevelEncryptionProfilesInput) ListFieldLevelEncryptionProfilesRequest {
+func (c *Client) ListFieldLevelEncryptionProfilesRequest(input *types.ListFieldLevelEncryptionProfilesInput) ListFieldLevelEncryptionProfilesRequest {
 	op := &aws.Operation{
 		Name:       opListFieldLevelEncryptionProfiles,
 		HTTPMethod: "GET",
@@ -96,10 +33,10 @@ func (c *Client) ListFieldLevelEncryptionProfilesRequest(input *ListFieldLevelEn
 	}
 
 	if input == nil {
-		input = &ListFieldLevelEncryptionProfilesInput{}
+		input = &types.ListFieldLevelEncryptionProfilesInput{}
 	}
 
-	req := c.newRequest(op, input, &ListFieldLevelEncryptionProfilesOutput{})
+	req := c.newRequest(op, input, &types.ListFieldLevelEncryptionProfilesOutput{})
 	return ListFieldLevelEncryptionProfilesRequest{Request: req, Input: input, Copy: c.ListFieldLevelEncryptionProfilesRequest}
 }
 
@@ -107,8 +44,8 @@ func (c *Client) ListFieldLevelEncryptionProfilesRequest(input *ListFieldLevelEn
 // ListFieldLevelEncryptionProfiles API operation.
 type ListFieldLevelEncryptionProfilesRequest struct {
 	*aws.Request
-	Input *ListFieldLevelEncryptionProfilesInput
-	Copy  func(*ListFieldLevelEncryptionProfilesInput) ListFieldLevelEncryptionProfilesRequest
+	Input *types.ListFieldLevelEncryptionProfilesInput
+	Copy  func(*types.ListFieldLevelEncryptionProfilesInput) ListFieldLevelEncryptionProfilesRequest
 }
 
 // Send marshals and sends the ListFieldLevelEncryptionProfiles API request.
@@ -120,7 +57,7 @@ func (r ListFieldLevelEncryptionProfilesRequest) Send(ctx context.Context) (*Lis
 	}
 
 	resp := &ListFieldLevelEncryptionProfilesResponse{
-		ListFieldLevelEncryptionProfilesOutput: r.Request.Data.(*ListFieldLevelEncryptionProfilesOutput),
+		ListFieldLevelEncryptionProfilesOutput: r.Request.Data.(*types.ListFieldLevelEncryptionProfilesOutput),
 		response:                               &aws.Response{Request: r.Request},
 	}
 
@@ -130,7 +67,7 @@ func (r ListFieldLevelEncryptionProfilesRequest) Send(ctx context.Context) (*Lis
 // ListFieldLevelEncryptionProfilesResponse is the response type for the
 // ListFieldLevelEncryptionProfiles API operation.
 type ListFieldLevelEncryptionProfilesResponse struct {
-	*ListFieldLevelEncryptionProfilesOutput
+	*types.ListFieldLevelEncryptionProfilesOutput
 
 	response *aws.Response
 }

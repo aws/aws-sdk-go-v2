@@ -6,53 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
 )
-
-type DescribeWorkteamInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the work team to return a description of.
-	//
-	// WorkteamName is a required field
-	WorkteamName *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeWorkteamInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeWorkteamInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeWorkteamInput"}
-
-	if s.WorkteamName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("WorkteamName"))
-	}
-	if s.WorkteamName != nil && len(*s.WorkteamName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("WorkteamName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribeWorkteamOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A Workteam instance that contains information about the work team.
-	//
-	// Workteam is a required field
-	Workteam *Workteam `type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeWorkteamOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeWorkteam = "DescribeWorkteam"
 
@@ -71,7 +26,7 @@ const opDescribeWorkteam = "DescribeWorkteam"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeWorkteam
-func (c *Client) DescribeWorkteamRequest(input *DescribeWorkteamInput) DescribeWorkteamRequest {
+func (c *Client) DescribeWorkteamRequest(input *types.DescribeWorkteamInput) DescribeWorkteamRequest {
 	op := &aws.Operation{
 		Name:       opDescribeWorkteam,
 		HTTPMethod: "POST",
@@ -79,10 +34,10 @@ func (c *Client) DescribeWorkteamRequest(input *DescribeWorkteamInput) DescribeW
 	}
 
 	if input == nil {
-		input = &DescribeWorkteamInput{}
+		input = &types.DescribeWorkteamInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeWorkteamOutput{})
+	req := c.newRequest(op, input, &types.DescribeWorkteamOutput{})
 	return DescribeWorkteamRequest{Request: req, Input: input, Copy: c.DescribeWorkteamRequest}
 }
 
@@ -90,8 +45,8 @@ func (c *Client) DescribeWorkteamRequest(input *DescribeWorkteamInput) DescribeW
 // DescribeWorkteam API operation.
 type DescribeWorkteamRequest struct {
 	*aws.Request
-	Input *DescribeWorkteamInput
-	Copy  func(*DescribeWorkteamInput) DescribeWorkteamRequest
+	Input *types.DescribeWorkteamInput
+	Copy  func(*types.DescribeWorkteamInput) DescribeWorkteamRequest
 }
 
 // Send marshals and sends the DescribeWorkteam API request.
@@ -103,7 +58,7 @@ func (r DescribeWorkteamRequest) Send(ctx context.Context) (*DescribeWorkteamRes
 	}
 
 	resp := &DescribeWorkteamResponse{
-		DescribeWorkteamOutput: r.Request.Data.(*DescribeWorkteamOutput),
+		DescribeWorkteamOutput: r.Request.Data.(*types.DescribeWorkteamOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -113,7 +68,7 @@ func (r DescribeWorkteamRequest) Send(ctx context.Context) (*DescribeWorkteamRes
 // DescribeWorkteamResponse is the response type for the
 // DescribeWorkteam API operation.
 type DescribeWorkteamResponse struct {
-	*DescribeWorkteamOutput
+	*types.DescribeWorkteamOutput
 
 	response *aws.Response
 }

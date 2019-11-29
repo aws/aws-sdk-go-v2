@@ -10,6 +10,7 @@ package mediapackageiface
 
 import (
 	"github.com/aws/aws-sdk-go-v2/service/mediapackage"
+	"github.com/aws/aws-sdk-go-v2/service/mediapackage/types"
 )
 
 // ClientAPI provides an interface to enable mocking the
@@ -43,7 +44,7 @@ import (
 //    type mockClientClient struct {
 //        mediapackageiface.ClientPI
 //    }
-//    func (m *mockClientClient) CreateChannel(input *mediapackage.CreateChannelInput) (*mediapackage.CreateChannelOutput, error) {
+//    func (m *mockClientClient) CreateChannel(input *types.CreateChannelInput) (*types.CreateChannelOutput, error) {
 //        // mock response/functionality
 //    }
 //
@@ -61,41 +62,41 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type ClientAPI interface {
-	CreateChannelRequest(*mediapackage.CreateChannelInput) mediapackage.CreateChannelRequest
+	CreateChannelRequest(*types.CreateChannelInput) mediapackage.CreateChannelRequest
 
-	CreateHarvestJobRequest(*mediapackage.CreateHarvestJobInput) mediapackage.CreateHarvestJobRequest
+	CreateHarvestJobRequest(*types.CreateHarvestJobInput) mediapackage.CreateHarvestJobRequest
 
-	CreateOriginEndpointRequest(*mediapackage.CreateOriginEndpointInput) mediapackage.CreateOriginEndpointRequest
+	CreateOriginEndpointRequest(*types.CreateOriginEndpointInput) mediapackage.CreateOriginEndpointRequest
 
-	DeleteChannelRequest(*mediapackage.DeleteChannelInput) mediapackage.DeleteChannelRequest
+	DeleteChannelRequest(*types.DeleteChannelInput) mediapackage.DeleteChannelRequest
 
-	DeleteOriginEndpointRequest(*mediapackage.DeleteOriginEndpointInput) mediapackage.DeleteOriginEndpointRequest
+	DeleteOriginEndpointRequest(*types.DeleteOriginEndpointInput) mediapackage.DeleteOriginEndpointRequest
 
-	DescribeChannelRequest(*mediapackage.DescribeChannelInput) mediapackage.DescribeChannelRequest
+	DescribeChannelRequest(*types.DescribeChannelInput) mediapackage.DescribeChannelRequest
 
-	DescribeHarvestJobRequest(*mediapackage.DescribeHarvestJobInput) mediapackage.DescribeHarvestJobRequest
+	DescribeHarvestJobRequest(*types.DescribeHarvestJobInput) mediapackage.DescribeHarvestJobRequest
 
-	DescribeOriginEndpointRequest(*mediapackage.DescribeOriginEndpointInput) mediapackage.DescribeOriginEndpointRequest
+	DescribeOriginEndpointRequest(*types.DescribeOriginEndpointInput) mediapackage.DescribeOriginEndpointRequest
 
-	ListChannelsRequest(*mediapackage.ListChannelsInput) mediapackage.ListChannelsRequest
+	ListChannelsRequest(*types.ListChannelsInput) mediapackage.ListChannelsRequest
 
-	ListHarvestJobsRequest(*mediapackage.ListHarvestJobsInput) mediapackage.ListHarvestJobsRequest
+	ListHarvestJobsRequest(*types.ListHarvestJobsInput) mediapackage.ListHarvestJobsRequest
 
-	ListOriginEndpointsRequest(*mediapackage.ListOriginEndpointsInput) mediapackage.ListOriginEndpointsRequest
+	ListOriginEndpointsRequest(*types.ListOriginEndpointsInput) mediapackage.ListOriginEndpointsRequest
 
-	ListTagsForResourceRequest(*mediapackage.ListTagsForResourceInput) mediapackage.ListTagsForResourceRequest
+	ListTagsForResourceRequest(*types.ListTagsForResourceInput) mediapackage.ListTagsForResourceRequest
 
-	RotateChannelCredentialsRequest(*mediapackage.RotateChannelCredentialsInput) mediapackage.RotateChannelCredentialsRequest
+	RotateChannelCredentialsRequest(*types.RotateChannelCredentialsInput) mediapackage.RotateChannelCredentialsRequest
 
-	RotateIngestEndpointCredentialsRequest(*mediapackage.RotateIngestEndpointCredentialsInput) mediapackage.RotateIngestEndpointCredentialsRequest
+	RotateIngestEndpointCredentialsRequest(*types.RotateIngestEndpointCredentialsInput) mediapackage.RotateIngestEndpointCredentialsRequest
 
-	TagResourceRequest(*mediapackage.TagResourceInput) mediapackage.TagResourceRequest
+	TagResourceRequest(*types.TagResourceInput) mediapackage.TagResourceRequest
 
-	UntagResourceRequest(*mediapackage.UntagResourceInput) mediapackage.UntagResourceRequest
+	UntagResourceRequest(*types.UntagResourceInput) mediapackage.UntagResourceRequest
 
-	UpdateChannelRequest(*mediapackage.UpdateChannelInput) mediapackage.UpdateChannelRequest
+	UpdateChannelRequest(*types.UpdateChannelInput) mediapackage.UpdateChannelRequest
 
-	UpdateOriginEndpointRequest(*mediapackage.UpdateOriginEndpointInput) mediapackage.UpdateOriginEndpointRequest
+	UpdateOriginEndpointRequest(*types.UpdateOriginEndpointInput) mediapackage.UpdateOriginEndpointRequest
 }
 
 var _ ClientAPI = (*mediapackage.Client)(nil)

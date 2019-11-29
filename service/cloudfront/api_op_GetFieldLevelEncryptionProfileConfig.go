@@ -6,82 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/cloudfront/types"
 )
-
-type GetFieldLevelEncryptionProfileConfigInput struct {
-	_ struct{} `type:"structure"`
-
-	// Get the ID for the field-level encryption profile configuration information.
-	//
-	// Id is a required field
-	Id *string `location:"uri" locationName:"Id" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetFieldLevelEncryptionProfileConfigInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetFieldLevelEncryptionProfileConfigInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetFieldLevelEncryptionProfileConfigInput"}
-
-	if s.Id == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Id"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetFieldLevelEncryptionProfileConfigInput) MarshalFields(e protocol.FieldEncoder) error {
-
-	if s.Id != nil {
-		v := *s.Id
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "Id", protocol.StringValue(v), metadata)
-	}
-	return nil
-}
-
-type GetFieldLevelEncryptionProfileConfigOutput struct {
-	_ struct{} `type:"structure" payload:"FieldLevelEncryptionProfileConfig"`
-
-	// The current version of the field-level encryption profile configuration result.
-	// For example: E2QWRUHAPOMQZL.
-	ETag *string `location:"header" locationName:"ETag" type:"string"`
-
-	// Return the field-level encryption profile configuration information.
-	FieldLevelEncryptionProfileConfig *FieldLevelEncryptionProfileConfig `type:"structure"`
-}
-
-// String returns the string representation
-func (s GetFieldLevelEncryptionProfileConfigOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetFieldLevelEncryptionProfileConfigOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.ETag != nil {
-		v := *s.ETag
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "ETag", protocol.StringValue(v), metadata)
-	}
-	if s.FieldLevelEncryptionProfileConfig != nil {
-		v := s.FieldLevelEncryptionProfileConfig
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.PayloadTarget, "FieldLevelEncryptionProfileConfig", v, metadata)
-	}
-	return nil
-}
 
 const opGetFieldLevelEncryptionProfileConfig = "GetFieldLevelEncryptionProfileConfig2019_03_26"
 
@@ -98,7 +24,7 @@ const opGetFieldLevelEncryptionProfileConfig = "GetFieldLevelEncryptionProfileCo
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/GetFieldLevelEncryptionProfileConfig
-func (c *Client) GetFieldLevelEncryptionProfileConfigRequest(input *GetFieldLevelEncryptionProfileConfigInput) GetFieldLevelEncryptionProfileConfigRequest {
+func (c *Client) GetFieldLevelEncryptionProfileConfigRequest(input *types.GetFieldLevelEncryptionProfileConfigInput) GetFieldLevelEncryptionProfileConfigRequest {
 	op := &aws.Operation{
 		Name:       opGetFieldLevelEncryptionProfileConfig,
 		HTTPMethod: "GET",
@@ -106,10 +32,10 @@ func (c *Client) GetFieldLevelEncryptionProfileConfigRequest(input *GetFieldLeve
 	}
 
 	if input == nil {
-		input = &GetFieldLevelEncryptionProfileConfigInput{}
+		input = &types.GetFieldLevelEncryptionProfileConfigInput{}
 	}
 
-	req := c.newRequest(op, input, &GetFieldLevelEncryptionProfileConfigOutput{})
+	req := c.newRequest(op, input, &types.GetFieldLevelEncryptionProfileConfigOutput{})
 	return GetFieldLevelEncryptionProfileConfigRequest{Request: req, Input: input, Copy: c.GetFieldLevelEncryptionProfileConfigRequest}
 }
 
@@ -117,8 +43,8 @@ func (c *Client) GetFieldLevelEncryptionProfileConfigRequest(input *GetFieldLeve
 // GetFieldLevelEncryptionProfileConfig API operation.
 type GetFieldLevelEncryptionProfileConfigRequest struct {
 	*aws.Request
-	Input *GetFieldLevelEncryptionProfileConfigInput
-	Copy  func(*GetFieldLevelEncryptionProfileConfigInput) GetFieldLevelEncryptionProfileConfigRequest
+	Input *types.GetFieldLevelEncryptionProfileConfigInput
+	Copy  func(*types.GetFieldLevelEncryptionProfileConfigInput) GetFieldLevelEncryptionProfileConfigRequest
 }
 
 // Send marshals and sends the GetFieldLevelEncryptionProfileConfig API request.
@@ -130,7 +56,7 @@ func (r GetFieldLevelEncryptionProfileConfigRequest) Send(ctx context.Context) (
 	}
 
 	resp := &GetFieldLevelEncryptionProfileConfigResponse{
-		GetFieldLevelEncryptionProfileConfigOutput: r.Request.Data.(*GetFieldLevelEncryptionProfileConfigOutput),
+		GetFieldLevelEncryptionProfileConfigOutput: r.Request.Data.(*types.GetFieldLevelEncryptionProfileConfigOutput),
 		response: &aws.Response{Request: r.Request},
 	}
 
@@ -140,7 +66,7 @@ func (r GetFieldLevelEncryptionProfileConfigRequest) Send(ctx context.Context) (
 // GetFieldLevelEncryptionProfileConfigResponse is the response type for the
 // GetFieldLevelEncryptionProfileConfig API operation.
 type GetFieldLevelEncryptionProfileConfigResponse struct {
-	*GetFieldLevelEncryptionProfileConfigOutput
+	*types.GetFieldLevelEncryptionProfileConfigOutput
 
 	response *aws.Response
 }

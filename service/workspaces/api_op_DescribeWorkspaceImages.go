@@ -6,62 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/workspaces/types"
 )
-
-type DescribeWorkspaceImagesInput struct {
-	_ struct{} `type:"structure"`
-
-	// The identifier of the image.
-	ImageIds []string `min:"1" type:"list"`
-
-	// The maximum number of items to return.
-	MaxResults *int64 `min:"1" type:"integer"`
-
-	// If you received a NextToken from a previous call that was paginated, provide
-	// this token to receive the next set of results.
-	NextToken *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeWorkspaceImagesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeWorkspaceImagesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeWorkspaceImagesInput"}
-	if s.ImageIds != nil && len(s.ImageIds) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ImageIds", 1))
-	}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-	if s.NextToken != nil && len(*s.NextToken) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribeWorkspaceImagesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Information about the images.
-	Images []WorkspaceImage `type:"list"`
-
-	// The token to use to retrieve the next set of results, or null if no more
-	// results are available.
-	NextToken *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeWorkspaceImagesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeWorkspaceImages = "DescribeWorkspaceImages"
 
@@ -79,7 +25,7 @@ const opDescribeWorkspaceImages = "DescribeWorkspaceImages"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DescribeWorkspaceImages
-func (c *Client) DescribeWorkspaceImagesRequest(input *DescribeWorkspaceImagesInput) DescribeWorkspaceImagesRequest {
+func (c *Client) DescribeWorkspaceImagesRequest(input *types.DescribeWorkspaceImagesInput) DescribeWorkspaceImagesRequest {
 	op := &aws.Operation{
 		Name:       opDescribeWorkspaceImages,
 		HTTPMethod: "POST",
@@ -87,10 +33,10 @@ func (c *Client) DescribeWorkspaceImagesRequest(input *DescribeWorkspaceImagesIn
 	}
 
 	if input == nil {
-		input = &DescribeWorkspaceImagesInput{}
+		input = &types.DescribeWorkspaceImagesInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeWorkspaceImagesOutput{})
+	req := c.newRequest(op, input, &types.DescribeWorkspaceImagesOutput{})
 	return DescribeWorkspaceImagesRequest{Request: req, Input: input, Copy: c.DescribeWorkspaceImagesRequest}
 }
 
@@ -98,8 +44,8 @@ func (c *Client) DescribeWorkspaceImagesRequest(input *DescribeWorkspaceImagesIn
 // DescribeWorkspaceImages API operation.
 type DescribeWorkspaceImagesRequest struct {
 	*aws.Request
-	Input *DescribeWorkspaceImagesInput
-	Copy  func(*DescribeWorkspaceImagesInput) DescribeWorkspaceImagesRequest
+	Input *types.DescribeWorkspaceImagesInput
+	Copy  func(*types.DescribeWorkspaceImagesInput) DescribeWorkspaceImagesRequest
 }
 
 // Send marshals and sends the DescribeWorkspaceImages API request.
@@ -111,7 +57,7 @@ func (r DescribeWorkspaceImagesRequest) Send(ctx context.Context) (*DescribeWork
 	}
 
 	resp := &DescribeWorkspaceImagesResponse{
-		DescribeWorkspaceImagesOutput: r.Request.Data.(*DescribeWorkspaceImagesOutput),
+		DescribeWorkspaceImagesOutput: r.Request.Data.(*types.DescribeWorkspaceImagesOutput),
 		response:                      &aws.Response{Request: r.Request},
 	}
 
@@ -121,7 +67,7 @@ func (r DescribeWorkspaceImagesRequest) Send(ctx context.Context) (*DescribeWork
 // DescribeWorkspaceImagesResponse is the response type for the
 // DescribeWorkspaceImages API operation.
 type DescribeWorkspaceImagesResponse struct {
-	*DescribeWorkspaceImagesOutput
+	*types.DescribeWorkspaceImagesOutput
 
 	response *aws.Response
 }

@@ -6,48 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/lightsail/types"
 )
-
-type GetRelationalDatabaseInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the database that you are looking up.
-	//
-	// RelationalDatabaseName is a required field
-	RelationalDatabaseName *string `locationName:"relationalDatabaseName" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetRelationalDatabaseInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetRelationalDatabaseInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetRelationalDatabaseInput"}
-
-	if s.RelationalDatabaseName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("RelationalDatabaseName"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type GetRelationalDatabaseOutput struct {
-	_ struct{} `type:"structure"`
-
-	// An object describing the specified database.
-	RelationalDatabase *RelationalDatabase `locationName:"relationalDatabase" type:"structure"`
-}
-
-// String returns the string representation
-func (s GetRelationalDatabaseOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetRelationalDatabase = "GetRelationalDatabase"
 
@@ -64,7 +24,7 @@ const opGetRelationalDatabase = "GetRelationalDatabase"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetRelationalDatabase
-func (c *Client) GetRelationalDatabaseRequest(input *GetRelationalDatabaseInput) GetRelationalDatabaseRequest {
+func (c *Client) GetRelationalDatabaseRequest(input *types.GetRelationalDatabaseInput) GetRelationalDatabaseRequest {
 	op := &aws.Operation{
 		Name:       opGetRelationalDatabase,
 		HTTPMethod: "POST",
@@ -72,10 +32,10 @@ func (c *Client) GetRelationalDatabaseRequest(input *GetRelationalDatabaseInput)
 	}
 
 	if input == nil {
-		input = &GetRelationalDatabaseInput{}
+		input = &types.GetRelationalDatabaseInput{}
 	}
 
-	req := c.newRequest(op, input, &GetRelationalDatabaseOutput{})
+	req := c.newRequest(op, input, &types.GetRelationalDatabaseOutput{})
 	return GetRelationalDatabaseRequest{Request: req, Input: input, Copy: c.GetRelationalDatabaseRequest}
 }
 
@@ -83,8 +43,8 @@ func (c *Client) GetRelationalDatabaseRequest(input *GetRelationalDatabaseInput)
 // GetRelationalDatabase API operation.
 type GetRelationalDatabaseRequest struct {
 	*aws.Request
-	Input *GetRelationalDatabaseInput
-	Copy  func(*GetRelationalDatabaseInput) GetRelationalDatabaseRequest
+	Input *types.GetRelationalDatabaseInput
+	Copy  func(*types.GetRelationalDatabaseInput) GetRelationalDatabaseRequest
 }
 
 // Send marshals and sends the GetRelationalDatabase API request.
@@ -96,7 +56,7 @@ func (r GetRelationalDatabaseRequest) Send(ctx context.Context) (*GetRelationalD
 	}
 
 	resp := &GetRelationalDatabaseResponse{
-		GetRelationalDatabaseOutput: r.Request.Data.(*GetRelationalDatabaseOutput),
+		GetRelationalDatabaseOutput: r.Request.Data.(*types.GetRelationalDatabaseOutput),
 		response:                    &aws.Response{Request: r.Request},
 	}
 
@@ -106,7 +66,7 @@ func (r GetRelationalDatabaseRequest) Send(ctx context.Context) (*GetRelationalD
 // GetRelationalDatabaseResponse is the response type for the
 // GetRelationalDatabase API operation.
 type GetRelationalDatabaseResponse struct {
-	*GetRelationalDatabaseOutput
+	*types.GetRelationalDatabaseOutput
 
 	response *aws.Response
 }

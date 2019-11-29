@@ -6,70 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/redshift/types"
 )
-
-type DescribeClusterVersionsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of a specific cluster parameter group family to return details for.
-	//
-	// Constraints:
-	//
-	//    * Must be 1 to 255 alphanumeric characters
-	//
-	//    * First character must be a letter
-	//
-	//    * Cannot end with a hyphen or contain two consecutive hyphens
-	ClusterParameterGroupFamily *string `type:"string"`
-
-	// The specific cluster version to return.
-	//
-	// Example: 1.0
-	ClusterVersion *string `type:"string"`
-
-	// An optional parameter that specifies the starting point to return a set of
-	// response records. When the results of a DescribeClusterVersions request exceed
-	// the value specified in MaxRecords, AWS returns a value in the Marker field
-	// of the response. You can retrieve the next set of response records by providing
-	// the returned marker value in the Marker parameter and retrying the request.
-	Marker *string `type:"string"`
-
-	// The maximum number of response records to return in each call. If the number
-	// of remaining response records exceeds the specified MaxRecords value, a value
-	// is returned in a marker field of the response. You can retrieve the next
-	// set of records by retrying the command with the returned marker value.
-	//
-	// Default: 100
-	//
-	// Constraints: minimum 20, maximum 100.
-	MaxRecords *int64 `type:"integer"`
-}
-
-// String returns the string representation
-func (s DescribeClusterVersionsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Contains the output from the DescribeClusterVersions action.
-type DescribeClusterVersionsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A list of Version elements.
-	ClusterVersions []ClusterVersion `locationNameList:"ClusterVersion" type:"list"`
-
-	// A value that indicates the starting point for the next set of response records
-	// in a subsequent request. If a value is returned in a response, you can retrieve
-	// the next set of records by providing this returned marker value in the Marker
-	// parameter and retrying the command. If the Marker field is empty, all response
-	// records have been retrieved for the request.
-	Marker *string `type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeClusterVersionsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeClusterVersions = "DescribeClusterVersions"
 
@@ -90,7 +28,7 @@ const opDescribeClusterVersions = "DescribeClusterVersions"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeClusterVersions
-func (c *Client) DescribeClusterVersionsRequest(input *DescribeClusterVersionsInput) DescribeClusterVersionsRequest {
+func (c *Client) DescribeClusterVersionsRequest(input *types.DescribeClusterVersionsInput) DescribeClusterVersionsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeClusterVersions,
 		HTTPMethod: "POST",
@@ -104,10 +42,10 @@ func (c *Client) DescribeClusterVersionsRequest(input *DescribeClusterVersionsIn
 	}
 
 	if input == nil {
-		input = &DescribeClusterVersionsInput{}
+		input = &types.DescribeClusterVersionsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeClusterVersionsOutput{})
+	req := c.newRequest(op, input, &types.DescribeClusterVersionsOutput{})
 	return DescribeClusterVersionsRequest{Request: req, Input: input, Copy: c.DescribeClusterVersionsRequest}
 }
 
@@ -115,8 +53,8 @@ func (c *Client) DescribeClusterVersionsRequest(input *DescribeClusterVersionsIn
 // DescribeClusterVersions API operation.
 type DescribeClusterVersionsRequest struct {
 	*aws.Request
-	Input *DescribeClusterVersionsInput
-	Copy  func(*DescribeClusterVersionsInput) DescribeClusterVersionsRequest
+	Input *types.DescribeClusterVersionsInput
+	Copy  func(*types.DescribeClusterVersionsInput) DescribeClusterVersionsRequest
 }
 
 // Send marshals and sends the DescribeClusterVersions API request.
@@ -128,7 +66,7 @@ func (r DescribeClusterVersionsRequest) Send(ctx context.Context) (*DescribeClus
 	}
 
 	resp := &DescribeClusterVersionsResponse{
-		DescribeClusterVersionsOutput: r.Request.Data.(*DescribeClusterVersionsOutput),
+		DescribeClusterVersionsOutput: r.Request.Data.(*types.DescribeClusterVersionsOutput),
 		response:                      &aws.Response{Request: r.Request},
 	}
 
@@ -158,7 +96,7 @@ func NewDescribeClusterVersionsPaginator(req DescribeClusterVersionsRequest) Des
 	return DescribeClusterVersionsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *DescribeClusterVersionsInput
+				var inCpy *types.DescribeClusterVersionsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -178,14 +116,14 @@ type DescribeClusterVersionsPaginator struct {
 	aws.Pager
 }
 
-func (p *DescribeClusterVersionsPaginator) CurrentPage() *DescribeClusterVersionsOutput {
-	return p.Pager.CurrentPage().(*DescribeClusterVersionsOutput)
+func (p *DescribeClusterVersionsPaginator) CurrentPage() *types.DescribeClusterVersionsOutput {
+	return p.Pager.CurrentPage().(*types.DescribeClusterVersionsOutput)
 }
 
 // DescribeClusterVersionsResponse is the response type for the
 // DescribeClusterVersions API operation.
 type DescribeClusterVersionsResponse struct {
-	*DescribeClusterVersionsOutput
+	*types.DescribeClusterVersionsOutput
 
 	response *aws.Response
 }

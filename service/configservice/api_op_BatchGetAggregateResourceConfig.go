@@ -4,77 +4,10 @@ package configservice
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/configservice/types"
 )
-
-type BatchGetAggregateResourceConfigInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the configuration aggregator.
-	//
-	// ConfigurationAggregatorName is a required field
-	ConfigurationAggregatorName *string `min:"1" type:"string" required:"true"`
-
-	// A list of aggregate ResourceIdentifiers objects.
-	//
-	// ResourceIdentifiers is a required field
-	ResourceIdentifiers []AggregateResourceIdentifier `min:"1" type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s BatchGetAggregateResourceConfigInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *BatchGetAggregateResourceConfigInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "BatchGetAggregateResourceConfigInput"}
-
-	if s.ConfigurationAggregatorName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ConfigurationAggregatorName"))
-	}
-	if s.ConfigurationAggregatorName != nil && len(*s.ConfigurationAggregatorName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ConfigurationAggregatorName", 1))
-	}
-
-	if s.ResourceIdentifiers == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ResourceIdentifiers"))
-	}
-	if s.ResourceIdentifiers != nil && len(s.ResourceIdentifiers) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ResourceIdentifiers", 1))
-	}
-	if s.ResourceIdentifiers != nil {
-		for i, v := range s.ResourceIdentifiers {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "ResourceIdentifiers", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type BatchGetAggregateResourceConfigOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A list that contains the current configuration of one or more resources.
-	BaseConfigurationItems []BaseConfigurationItem `type:"list"`
-
-	// A list of resource identifiers that were not processed with current scope.
-	// The list is empty if all the resources are processed.
-	UnprocessedResourceIdentifiers []AggregateResourceIdentifier `type:"list"`
-}
-
-// String returns the string representation
-func (s BatchGetAggregateResourceConfigOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opBatchGetAggregateResourceConfig = "BatchGetAggregateResourceConfig"
 
@@ -99,7 +32,7 @@ const opBatchGetAggregateResourceConfig = "BatchGetAggregateResourceConfig"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/BatchGetAggregateResourceConfig
-func (c *Client) BatchGetAggregateResourceConfigRequest(input *BatchGetAggregateResourceConfigInput) BatchGetAggregateResourceConfigRequest {
+func (c *Client) BatchGetAggregateResourceConfigRequest(input *types.BatchGetAggregateResourceConfigInput) BatchGetAggregateResourceConfigRequest {
 	op := &aws.Operation{
 		Name:       opBatchGetAggregateResourceConfig,
 		HTTPMethod: "POST",
@@ -107,10 +40,10 @@ func (c *Client) BatchGetAggregateResourceConfigRequest(input *BatchGetAggregate
 	}
 
 	if input == nil {
-		input = &BatchGetAggregateResourceConfigInput{}
+		input = &types.BatchGetAggregateResourceConfigInput{}
 	}
 
-	req := c.newRequest(op, input, &BatchGetAggregateResourceConfigOutput{})
+	req := c.newRequest(op, input, &types.BatchGetAggregateResourceConfigOutput{})
 	return BatchGetAggregateResourceConfigRequest{Request: req, Input: input, Copy: c.BatchGetAggregateResourceConfigRequest}
 }
 
@@ -118,8 +51,8 @@ func (c *Client) BatchGetAggregateResourceConfigRequest(input *BatchGetAggregate
 // BatchGetAggregateResourceConfig API operation.
 type BatchGetAggregateResourceConfigRequest struct {
 	*aws.Request
-	Input *BatchGetAggregateResourceConfigInput
-	Copy  func(*BatchGetAggregateResourceConfigInput) BatchGetAggregateResourceConfigRequest
+	Input *types.BatchGetAggregateResourceConfigInput
+	Copy  func(*types.BatchGetAggregateResourceConfigInput) BatchGetAggregateResourceConfigRequest
 }
 
 // Send marshals and sends the BatchGetAggregateResourceConfig API request.
@@ -131,7 +64,7 @@ func (r BatchGetAggregateResourceConfigRequest) Send(ctx context.Context) (*Batc
 	}
 
 	resp := &BatchGetAggregateResourceConfigResponse{
-		BatchGetAggregateResourceConfigOutput: r.Request.Data.(*BatchGetAggregateResourceConfigOutput),
+		BatchGetAggregateResourceConfigOutput: r.Request.Data.(*types.BatchGetAggregateResourceConfigOutput),
 		response:                              &aws.Response{Request: r.Request},
 	}
 
@@ -141,7 +74,7 @@ func (r BatchGetAggregateResourceConfigRequest) Send(ctx context.Context) (*Batc
 // BatchGetAggregateResourceConfigResponse is the response type for the
 // BatchGetAggregateResourceConfig API operation.
 type BatchGetAggregateResourceConfigResponse struct {
-	*BatchGetAggregateResourceConfigOutput
+	*types.BatchGetAggregateResourceConfigOutput
 
 	response *aws.Response
 }

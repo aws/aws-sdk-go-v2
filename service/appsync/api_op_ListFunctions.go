@@ -6,108 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/appsync/types"
 )
-
-type ListFunctionsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The GraphQL API ID.
-	//
-	// ApiId is a required field
-	ApiId *string `location:"uri" locationName:"apiId" type:"string" required:"true"`
-
-	// The maximum number of results you want the request to return.
-	MaxResults *int64 `location:"querystring" locationName:"maxResults" type:"integer"`
-
-	// An identifier that was returned from the previous call to this operation,
-	// which can be used to return the next set of items in the list.
-	NextToken *string `location:"querystring" locationName:"nextToken" type:"string"`
-}
-
-// String returns the string representation
-func (s ListFunctionsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListFunctionsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListFunctionsInput"}
-
-	if s.ApiId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ApiId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListFunctionsInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.ApiId != nil {
-		v := *s.ApiId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "apiId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.MaxResults != nil {
-		v := *s.MaxResults
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "maxResults", protocol.Int64Value(v), metadata)
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type ListFunctionsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A list of Function objects.
-	Functions []FunctionConfiguration `locationName:"functions" type:"list"`
-
-	// An identifier that was returned from the previous call to this operation,
-	// which can be used to return the next set of items in the list.
-	NextToken *string `locationName:"nextToken" type:"string"`
-}
-
-// String returns the string representation
-func (s ListFunctionsOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListFunctionsOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.Functions != nil {
-		v := s.Functions
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "functions", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opListFunctions = "ListFunctions"
 
@@ -124,7 +24,7 @@ const opListFunctions = "ListFunctions"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/ListFunctions
-func (c *Client) ListFunctionsRequest(input *ListFunctionsInput) ListFunctionsRequest {
+func (c *Client) ListFunctionsRequest(input *types.ListFunctionsInput) ListFunctionsRequest {
 	op := &aws.Operation{
 		Name:       opListFunctions,
 		HTTPMethod: "GET",
@@ -132,10 +32,10 @@ func (c *Client) ListFunctionsRequest(input *ListFunctionsInput) ListFunctionsRe
 	}
 
 	if input == nil {
-		input = &ListFunctionsInput{}
+		input = &types.ListFunctionsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListFunctionsOutput{})
+	req := c.newRequest(op, input, &types.ListFunctionsOutput{})
 	return ListFunctionsRequest{Request: req, Input: input, Copy: c.ListFunctionsRequest}
 }
 
@@ -143,8 +43,8 @@ func (c *Client) ListFunctionsRequest(input *ListFunctionsInput) ListFunctionsRe
 // ListFunctions API operation.
 type ListFunctionsRequest struct {
 	*aws.Request
-	Input *ListFunctionsInput
-	Copy  func(*ListFunctionsInput) ListFunctionsRequest
+	Input *types.ListFunctionsInput
+	Copy  func(*types.ListFunctionsInput) ListFunctionsRequest
 }
 
 // Send marshals and sends the ListFunctions API request.
@@ -156,7 +56,7 @@ func (r ListFunctionsRequest) Send(ctx context.Context) (*ListFunctionsResponse,
 	}
 
 	resp := &ListFunctionsResponse{
-		ListFunctionsOutput: r.Request.Data.(*ListFunctionsOutput),
+		ListFunctionsOutput: r.Request.Data.(*types.ListFunctionsOutput),
 		response:            &aws.Response{Request: r.Request},
 	}
 
@@ -166,7 +66,7 @@ func (r ListFunctionsRequest) Send(ctx context.Context) (*ListFunctionsResponse,
 // ListFunctionsResponse is the response type for the
 // ListFunctions API operation.
 type ListFunctionsResponse struct {
-	*ListFunctionsOutput
+	*types.ListFunctionsOutput
 
 	response *aws.Response
 }

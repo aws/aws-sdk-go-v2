@@ -6,88 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/iam/types"
 )
-
-type GetRolePolicyInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the policy document to get.
-	//
-	// This parameter allows (through its regex pattern (http://wikipedia.org/wiki/regex))
-	// a string of characters consisting of upper and lowercase alphanumeric characters
-	// with no spaces. You can also include any of the following characters: _+=,.@-
-	//
-	// PolicyName is a required field
-	PolicyName *string `min:"1" type:"string" required:"true"`
-
-	// The name of the role associated with the policy.
-	//
-	// This parameter allows (through its regex pattern (http://wikipedia.org/wiki/regex))
-	// a string of characters consisting of upper and lowercase alphanumeric characters
-	// with no spaces. You can also include any of the following characters: _+=,.@-
-	//
-	// RoleName is a required field
-	RoleName *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetRolePolicyInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetRolePolicyInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetRolePolicyInput"}
-
-	if s.PolicyName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("PolicyName"))
-	}
-	if s.PolicyName != nil && len(*s.PolicyName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("PolicyName", 1))
-	}
-
-	if s.RoleName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("RoleName"))
-	}
-	if s.RoleName != nil && len(*s.RoleName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("RoleName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Contains the response to a successful GetRolePolicy request.
-type GetRolePolicyOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The policy document.
-	//
-	// IAM stores policies in JSON format. However, resources that were created
-	// using AWS CloudFormation templates can be formatted in YAML. AWS CloudFormation
-	// always converts a YAML policy to JSON format before submitting it to IAM.
-	//
-	// PolicyDocument is a required field
-	PolicyDocument *string `min:"1" type:"string" required:"true"`
-
-	// The name of the policy.
-	//
-	// PolicyName is a required field
-	PolicyName *string `min:"1" type:"string" required:"true"`
-
-	// The role the policy is associated with.
-	//
-	// RoleName is a required field
-	RoleName *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetRolePolicyOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetRolePolicy = "GetRolePolicy"
 
@@ -123,7 +43,7 @@ const opGetRolePolicy = "GetRolePolicy"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetRolePolicy
-func (c *Client) GetRolePolicyRequest(input *GetRolePolicyInput) GetRolePolicyRequest {
+func (c *Client) GetRolePolicyRequest(input *types.GetRolePolicyInput) GetRolePolicyRequest {
 	op := &aws.Operation{
 		Name:       opGetRolePolicy,
 		HTTPMethod: "POST",
@@ -131,10 +51,10 @@ func (c *Client) GetRolePolicyRequest(input *GetRolePolicyInput) GetRolePolicyRe
 	}
 
 	if input == nil {
-		input = &GetRolePolicyInput{}
+		input = &types.GetRolePolicyInput{}
 	}
 
-	req := c.newRequest(op, input, &GetRolePolicyOutput{})
+	req := c.newRequest(op, input, &types.GetRolePolicyOutput{})
 	return GetRolePolicyRequest{Request: req, Input: input, Copy: c.GetRolePolicyRequest}
 }
 
@@ -142,8 +62,8 @@ func (c *Client) GetRolePolicyRequest(input *GetRolePolicyInput) GetRolePolicyRe
 // GetRolePolicy API operation.
 type GetRolePolicyRequest struct {
 	*aws.Request
-	Input *GetRolePolicyInput
-	Copy  func(*GetRolePolicyInput) GetRolePolicyRequest
+	Input *types.GetRolePolicyInput
+	Copy  func(*types.GetRolePolicyInput) GetRolePolicyRequest
 }
 
 // Send marshals and sends the GetRolePolicy API request.
@@ -155,7 +75,7 @@ func (r GetRolePolicyRequest) Send(ctx context.Context) (*GetRolePolicyResponse,
 	}
 
 	resp := &GetRolePolicyResponse{
-		GetRolePolicyOutput: r.Request.Data.(*GetRolePolicyOutput),
+		GetRolePolicyOutput: r.Request.Data.(*types.GetRolePolicyOutput),
 		response:            &aws.Response{Request: r.Request},
 	}
 
@@ -165,7 +85,7 @@ func (r GetRolePolicyRequest) Send(ctx context.Context) (*GetRolePolicyResponse,
 // GetRolePolicyResponse is the response type for the
 // GetRolePolicy API operation.
 type GetRolePolicyResponse struct {
-	*GetRolePolicyOutput
+	*types.GetRolePolicyOutput
 
 	response *aws.Response
 }

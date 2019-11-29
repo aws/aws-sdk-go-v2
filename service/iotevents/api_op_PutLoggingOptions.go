@@ -6,70 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/restjson"
+	"github.com/aws/aws-sdk-go-v2/service/iotevents/types"
 )
-
-type PutLoggingOptionsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The new values of the AWS IoT Events logging options.
-	//
-	// LoggingOptions is a required field
-	LoggingOptions *LoggingOptions `locationName:"loggingOptions" type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s PutLoggingOptionsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *PutLoggingOptionsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "PutLoggingOptionsInput"}
-
-	if s.LoggingOptions == nil {
-		invalidParams.Add(aws.NewErrParamRequired("LoggingOptions"))
-	}
-	if s.LoggingOptions != nil {
-		if err := s.LoggingOptions.Validate(); err != nil {
-			invalidParams.AddNested("LoggingOptions", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s PutLoggingOptionsInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.LoggingOptions != nil {
-		v := s.LoggingOptions
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "loggingOptions", v, metadata)
-	}
-	return nil
-}
-
-type PutLoggingOptionsOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s PutLoggingOptionsOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s PutLoggingOptionsOutput) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
 
 const opPutLoggingOptions = "PutLoggingOptions"
 
@@ -91,7 +31,7 @@ const opPutLoggingOptions = "PutLoggingOptions"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iotevents-2018-07-27/PutLoggingOptions
-func (c *Client) PutLoggingOptionsRequest(input *PutLoggingOptionsInput) PutLoggingOptionsRequest {
+func (c *Client) PutLoggingOptionsRequest(input *types.PutLoggingOptionsInput) PutLoggingOptionsRequest {
 	op := &aws.Operation{
 		Name:       opPutLoggingOptions,
 		HTTPMethod: "PUT",
@@ -99,10 +39,10 @@ func (c *Client) PutLoggingOptionsRequest(input *PutLoggingOptionsInput) PutLogg
 	}
 
 	if input == nil {
-		input = &PutLoggingOptionsInput{}
+		input = &types.PutLoggingOptionsInput{}
 	}
 
-	req := c.newRequest(op, input, &PutLoggingOptionsOutput{})
+	req := c.newRequest(op, input, &types.PutLoggingOptionsOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return PutLoggingOptionsRequest{Request: req, Input: input, Copy: c.PutLoggingOptionsRequest}
@@ -112,8 +52,8 @@ func (c *Client) PutLoggingOptionsRequest(input *PutLoggingOptionsInput) PutLogg
 // PutLoggingOptions API operation.
 type PutLoggingOptionsRequest struct {
 	*aws.Request
-	Input *PutLoggingOptionsInput
-	Copy  func(*PutLoggingOptionsInput) PutLoggingOptionsRequest
+	Input *types.PutLoggingOptionsInput
+	Copy  func(*types.PutLoggingOptionsInput) PutLoggingOptionsRequest
 }
 
 // Send marshals and sends the PutLoggingOptions API request.
@@ -125,7 +65,7 @@ func (r PutLoggingOptionsRequest) Send(ctx context.Context) (*PutLoggingOptionsR
 	}
 
 	resp := &PutLoggingOptionsResponse{
-		PutLoggingOptionsOutput: r.Request.Data.(*PutLoggingOptionsOutput),
+		PutLoggingOptionsOutput: r.Request.Data.(*types.PutLoggingOptionsOutput),
 		response:                &aws.Response{Request: r.Request},
 	}
 
@@ -135,7 +75,7 @@ func (r PutLoggingOptionsRequest) Send(ctx context.Context) (*PutLoggingOptionsR
 // PutLoggingOptionsResponse is the response type for the
 // PutLoggingOptions API operation.
 type PutLoggingOptionsResponse struct {
-	*PutLoggingOptionsOutput
+	*types.PutLoggingOptionsOutput
 
 	response *aws.Response
 }

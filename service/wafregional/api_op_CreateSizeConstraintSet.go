@@ -6,70 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/service/waf"
+	"github.com/aws/aws-sdk-go-v2/service/wafregional/types"
 )
-
-type CreateSizeConstraintSetInput struct {
-	_ struct{} `type:"structure"`
-
-	// The value returned by the most recent call to GetChangeToken.
-	//
-	// ChangeToken is a required field
-	ChangeToken *string `min:"1" type:"string" required:"true"`
-
-	// A friendly name or description of the SizeConstraintSet. You can't change
-	// Name after you create a SizeConstraintSet.
-	//
-	// Name is a required field
-	Name *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s CreateSizeConstraintSetInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateSizeConstraintSetInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateSizeConstraintSetInput"}
-
-	if s.ChangeToken == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ChangeToken"))
-	}
-	if s.ChangeToken != nil && len(*s.ChangeToken) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ChangeToken", 1))
-	}
-
-	if s.Name == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Name"))
-	}
-	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type CreateSizeConstraintSetOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The ChangeToken that you used to submit the CreateSizeConstraintSet request.
-	// You can also use this value to query the status of the request. For more
-	// information, see GetChangeTokenStatus.
-	ChangeToken *string `min:"1" type:"string"`
-
-	// A SizeConstraintSet that contains no SizeConstraint objects.
-	SizeConstraintSet *waf.SizeConstraintSet `type:"structure"`
-}
-
-// String returns the string representation
-func (s CreateSizeConstraintSetOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCreateSizeConstraintSet = "CreateSizeConstraintSet"
 
@@ -108,7 +46,7 @@ const opCreateSizeConstraintSet = "CreateSizeConstraintSet"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/CreateSizeConstraintSet
-func (c *Client) CreateSizeConstraintSetRequest(input *CreateSizeConstraintSetInput) CreateSizeConstraintSetRequest {
+func (c *Client) CreateSizeConstraintSetRequest(input *types.CreateSizeConstraintSetInput) CreateSizeConstraintSetRequest {
 	op := &aws.Operation{
 		Name:       opCreateSizeConstraintSet,
 		HTTPMethod: "POST",
@@ -116,10 +54,10 @@ func (c *Client) CreateSizeConstraintSetRequest(input *CreateSizeConstraintSetIn
 	}
 
 	if input == nil {
-		input = &CreateSizeConstraintSetInput{}
+		input = &types.CreateSizeConstraintSetInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateSizeConstraintSetOutput{})
+	req := c.newRequest(op, input, &types.CreateSizeConstraintSetOutput{})
 	return CreateSizeConstraintSetRequest{Request: req, Input: input, Copy: c.CreateSizeConstraintSetRequest}
 }
 
@@ -127,8 +65,8 @@ func (c *Client) CreateSizeConstraintSetRequest(input *CreateSizeConstraintSetIn
 // CreateSizeConstraintSet API operation.
 type CreateSizeConstraintSetRequest struct {
 	*aws.Request
-	Input *CreateSizeConstraintSetInput
-	Copy  func(*CreateSizeConstraintSetInput) CreateSizeConstraintSetRequest
+	Input *types.CreateSizeConstraintSetInput
+	Copy  func(*types.CreateSizeConstraintSetInput) CreateSizeConstraintSetRequest
 }
 
 // Send marshals and sends the CreateSizeConstraintSet API request.
@@ -140,7 +78,7 @@ func (r CreateSizeConstraintSetRequest) Send(ctx context.Context) (*CreateSizeCo
 	}
 
 	resp := &CreateSizeConstraintSetResponse{
-		CreateSizeConstraintSetOutput: r.Request.Data.(*CreateSizeConstraintSetOutput),
+		CreateSizeConstraintSetOutput: r.Request.Data.(*types.CreateSizeConstraintSetOutput),
 		response:                      &aws.Response{Request: r.Request},
 	}
 
@@ -150,7 +88,7 @@ func (r CreateSizeConstraintSetRequest) Send(ctx context.Context) (*CreateSizeCo
 // CreateSizeConstraintSetResponse is the response type for the
 // CreateSizeConstraintSet API operation.
 type CreateSizeConstraintSetResponse struct {
-	*CreateSizeConstraintSetOutput
+	*types.CreateSizeConstraintSetOutput
 
 	response *aws.Response
 }

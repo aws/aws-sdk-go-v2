@@ -6,113 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/lexmodelbuildingservice/types"
 )
-
-type GetBotsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The maximum number of bots to return in the response that the request will
-	// return. The default is 10.
-	MaxResults *int64 `location:"querystring" locationName:"maxResults" min:"1" type:"integer"`
-
-	// Substring to match in bot names. A bot will be returned if any part of its
-	// name matches the substring. For example, "xyz" matches both "xyzabc" and
-	// "abcxyz."
-	NameContains *string `location:"querystring" locationName:"nameContains" min:"2" type:"string"`
-
-	// A pagination token that fetches the next page of bots. If the response to
-	// this call is truncated, Amazon Lex returns a pagination token in the response.
-	// To fetch the next page of bots, specify the pagination token in the next
-	// request.
-	NextToken *string `location:"querystring" locationName:"nextToken" type:"string"`
-}
-
-// String returns the string representation
-func (s GetBotsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetBotsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetBotsInput"}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-	if s.NameContains != nil && len(*s.NameContains) < 2 {
-		invalidParams.Add(aws.NewErrParamMinLen("NameContains", 2))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetBotsInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.MaxResults != nil {
-		v := *s.MaxResults
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "maxResults", protocol.Int64Value(v), metadata)
-	}
-	if s.NameContains != nil {
-		v := *s.NameContains
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "nameContains", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type GetBotsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// An array of botMetadata objects, with one entry for each bot.
-	Bots []BotMetadata `locationName:"bots" type:"list"`
-
-	// If the response is truncated, it includes a pagination token that you can
-	// specify in your next request to fetch the next page of bots.
-	NextToken *string `locationName:"nextToken" type:"string"`
-}
-
-// String returns the string representation
-func (s GetBotsOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetBotsOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.Bots != nil {
-		v := s.Bots
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "bots", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opGetBots = "GetBots"
 
@@ -138,7 +33,7 @@ const opGetBots = "GetBots"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/GetBots
-func (c *Client) GetBotsRequest(input *GetBotsInput) GetBotsRequest {
+func (c *Client) GetBotsRequest(input *types.GetBotsInput) GetBotsRequest {
 	op := &aws.Operation{
 		Name:       opGetBots,
 		HTTPMethod: "GET",
@@ -152,10 +47,10 @@ func (c *Client) GetBotsRequest(input *GetBotsInput) GetBotsRequest {
 	}
 
 	if input == nil {
-		input = &GetBotsInput{}
+		input = &types.GetBotsInput{}
 	}
 
-	req := c.newRequest(op, input, &GetBotsOutput{})
+	req := c.newRequest(op, input, &types.GetBotsOutput{})
 	return GetBotsRequest{Request: req, Input: input, Copy: c.GetBotsRequest}
 }
 
@@ -163,8 +58,8 @@ func (c *Client) GetBotsRequest(input *GetBotsInput) GetBotsRequest {
 // GetBots API operation.
 type GetBotsRequest struct {
 	*aws.Request
-	Input *GetBotsInput
-	Copy  func(*GetBotsInput) GetBotsRequest
+	Input *types.GetBotsInput
+	Copy  func(*types.GetBotsInput) GetBotsRequest
 }
 
 // Send marshals and sends the GetBots API request.
@@ -176,7 +71,7 @@ func (r GetBotsRequest) Send(ctx context.Context) (*GetBotsResponse, error) {
 	}
 
 	resp := &GetBotsResponse{
-		GetBotsOutput: r.Request.Data.(*GetBotsOutput),
+		GetBotsOutput: r.Request.Data.(*types.GetBotsOutput),
 		response:      &aws.Response{Request: r.Request},
 	}
 
@@ -206,7 +101,7 @@ func NewGetBotsPaginator(req GetBotsRequest) GetBotsPaginator {
 	return GetBotsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *GetBotsInput
+				var inCpy *types.GetBotsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -226,14 +121,14 @@ type GetBotsPaginator struct {
 	aws.Pager
 }
 
-func (p *GetBotsPaginator) CurrentPage() *GetBotsOutput {
-	return p.Pager.CurrentPage().(*GetBotsOutput)
+func (p *GetBotsPaginator) CurrentPage() *types.GetBotsOutput {
+	return p.Pager.CurrentPage().(*types.GetBotsOutput)
 }
 
 // GetBotsResponse is the response type for the
 // GetBots API operation.
 type GetBotsResponse struct {
-	*GetBotsOutput
+	*types.GetBotsOutput
 
 	response *aws.Response
 }

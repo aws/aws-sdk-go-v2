@@ -6,58 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/mturk/types"
 )
-
-type CreateWorkerBlockInput struct {
-	_ struct{} `type:"structure"`
-
-	// A message explaining the reason for blocking the Worker. This parameter enables
-	// you to keep track of your Workers. The Worker does not see this message.
-	//
-	// Reason is a required field
-	Reason *string `type:"string" required:"true"`
-
-	// The ID of the Worker to block.
-	//
-	// WorkerId is a required field
-	WorkerId *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s CreateWorkerBlockInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateWorkerBlockInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateWorkerBlockInput"}
-
-	if s.Reason == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Reason"))
-	}
-
-	if s.WorkerId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("WorkerId"))
-	}
-	if s.WorkerId != nil && len(*s.WorkerId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("WorkerId", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type CreateWorkerBlockOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s CreateWorkerBlockOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCreateWorkerBlock = "CreateWorkerBlock"
 
@@ -76,7 +26,7 @@ const opCreateWorkerBlock = "CreateWorkerBlock"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/CreateWorkerBlock
-func (c *Client) CreateWorkerBlockRequest(input *CreateWorkerBlockInput) CreateWorkerBlockRequest {
+func (c *Client) CreateWorkerBlockRequest(input *types.CreateWorkerBlockInput) CreateWorkerBlockRequest {
 	op := &aws.Operation{
 		Name:       opCreateWorkerBlock,
 		HTTPMethod: "POST",
@@ -84,10 +34,10 @@ func (c *Client) CreateWorkerBlockRequest(input *CreateWorkerBlockInput) CreateW
 	}
 
 	if input == nil {
-		input = &CreateWorkerBlockInput{}
+		input = &types.CreateWorkerBlockInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateWorkerBlockOutput{})
+	req := c.newRequest(op, input, &types.CreateWorkerBlockOutput{})
 	return CreateWorkerBlockRequest{Request: req, Input: input, Copy: c.CreateWorkerBlockRequest}
 }
 
@@ -95,8 +45,8 @@ func (c *Client) CreateWorkerBlockRequest(input *CreateWorkerBlockInput) CreateW
 // CreateWorkerBlock API operation.
 type CreateWorkerBlockRequest struct {
 	*aws.Request
-	Input *CreateWorkerBlockInput
-	Copy  func(*CreateWorkerBlockInput) CreateWorkerBlockRequest
+	Input *types.CreateWorkerBlockInput
+	Copy  func(*types.CreateWorkerBlockInput) CreateWorkerBlockRequest
 }
 
 // Send marshals and sends the CreateWorkerBlock API request.
@@ -108,7 +58,7 @@ func (r CreateWorkerBlockRequest) Send(ctx context.Context) (*CreateWorkerBlockR
 	}
 
 	resp := &CreateWorkerBlockResponse{
-		CreateWorkerBlockOutput: r.Request.Data.(*CreateWorkerBlockOutput),
+		CreateWorkerBlockOutput: r.Request.Data.(*types.CreateWorkerBlockOutput),
 		response:                &aws.Response{Request: r.Request},
 	}
 
@@ -118,7 +68,7 @@ func (r CreateWorkerBlockRequest) Send(ctx context.Context) (*CreateWorkerBlockR
 // CreateWorkerBlockResponse is the response type for the
 // CreateWorkerBlock API operation.
 type CreateWorkerBlockResponse struct {
-	*CreateWorkerBlockOutput
+	*types.CreateWorkerBlockOutput
 
 	response *aws.Response
 }

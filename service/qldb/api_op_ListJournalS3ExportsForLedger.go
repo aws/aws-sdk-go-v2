@@ -6,125 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/qldb/types"
 )
-
-type ListJournalS3ExportsForLedgerInput struct {
-	_ struct{} `type:"structure"`
-
-	// The maximum number of results to return in a single ListJournalS3ExportsForLedger
-	// request. (The actual number of results returned might be fewer.)
-	MaxResults *int64 `location:"querystring" locationName:"max_results" min:"1" type:"integer"`
-
-	// The name of the ledger.
-	//
-	// Name is a required field
-	Name *string `location:"uri" locationName:"name" min:"1" type:"string" required:"true"`
-
-	// A pagination token, indicating that you want to retrieve the next page of
-	// results. If you received a value for NextToken in the response from a previous
-	// ListJournalS3ExportsForLedger call, then you should use that value as input
-	// here.
-	NextToken *string `location:"querystring" locationName:"next_token" min:"4" type:"string"`
-}
-
-// String returns the string representation
-func (s ListJournalS3ExportsForLedgerInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListJournalS3ExportsForLedgerInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListJournalS3ExportsForLedgerInput"}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-
-	if s.Name == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Name"))
-	}
-	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
-	}
-	if s.NextToken != nil && len(*s.NextToken) < 4 {
-		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 4))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListJournalS3ExportsForLedgerInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.Name != nil {
-		v := *s.Name
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.MaxResults != nil {
-		v := *s.MaxResults
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "max_results", protocol.Int64Value(v), metadata)
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "next_token", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type ListJournalS3ExportsForLedgerOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The array of journal export job descriptions that are associated with the
-	// specified ledger.
-	JournalS3Exports []JournalS3ExportDescription `type:"list"`
-
-	//    * If NextToken is empty, then the last page of results has been processed
-	//    and there are no more results to be retrieved.
-	//
-	//    * If NextToken is not empty, then there are more results available. To
-	//    retrieve the next page of results, use the value of NextToken in a subsequent
-	//    ListJournalS3ExportsForLedger call.
-	NextToken *string `min:"4" type:"string"`
-}
-
-// String returns the string representation
-func (s ListJournalS3ExportsForLedgerOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListJournalS3ExportsForLedgerOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.JournalS3Exports != nil {
-		v := s.JournalS3Exports
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "JournalS3Exports", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opListJournalS3ExportsForLedger = "ListJournalS3ExportsForLedger"
 
@@ -145,7 +28,7 @@ const opListJournalS3ExportsForLedger = "ListJournalS3ExportsForLedger"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/qldb-2019-01-02/ListJournalS3ExportsForLedger
-func (c *Client) ListJournalS3ExportsForLedgerRequest(input *ListJournalS3ExportsForLedgerInput) ListJournalS3ExportsForLedgerRequest {
+func (c *Client) ListJournalS3ExportsForLedgerRequest(input *types.ListJournalS3ExportsForLedgerInput) ListJournalS3ExportsForLedgerRequest {
 	op := &aws.Operation{
 		Name:       opListJournalS3ExportsForLedger,
 		HTTPMethod: "GET",
@@ -159,10 +42,10 @@ func (c *Client) ListJournalS3ExportsForLedgerRequest(input *ListJournalS3Export
 	}
 
 	if input == nil {
-		input = &ListJournalS3ExportsForLedgerInput{}
+		input = &types.ListJournalS3ExportsForLedgerInput{}
 	}
 
-	req := c.newRequest(op, input, &ListJournalS3ExportsForLedgerOutput{})
+	req := c.newRequest(op, input, &types.ListJournalS3ExportsForLedgerOutput{})
 	return ListJournalS3ExportsForLedgerRequest{Request: req, Input: input, Copy: c.ListJournalS3ExportsForLedgerRequest}
 }
 
@@ -170,8 +53,8 @@ func (c *Client) ListJournalS3ExportsForLedgerRequest(input *ListJournalS3Export
 // ListJournalS3ExportsForLedger API operation.
 type ListJournalS3ExportsForLedgerRequest struct {
 	*aws.Request
-	Input *ListJournalS3ExportsForLedgerInput
-	Copy  func(*ListJournalS3ExportsForLedgerInput) ListJournalS3ExportsForLedgerRequest
+	Input *types.ListJournalS3ExportsForLedgerInput
+	Copy  func(*types.ListJournalS3ExportsForLedgerInput) ListJournalS3ExportsForLedgerRequest
 }
 
 // Send marshals and sends the ListJournalS3ExportsForLedger API request.
@@ -183,7 +66,7 @@ func (r ListJournalS3ExportsForLedgerRequest) Send(ctx context.Context) (*ListJo
 	}
 
 	resp := &ListJournalS3ExportsForLedgerResponse{
-		ListJournalS3ExportsForLedgerOutput: r.Request.Data.(*ListJournalS3ExportsForLedgerOutput),
+		ListJournalS3ExportsForLedgerOutput: r.Request.Data.(*types.ListJournalS3ExportsForLedgerOutput),
 		response:                            &aws.Response{Request: r.Request},
 	}
 
@@ -213,7 +96,7 @@ func NewListJournalS3ExportsForLedgerPaginator(req ListJournalS3ExportsForLedger
 	return ListJournalS3ExportsForLedgerPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListJournalS3ExportsForLedgerInput
+				var inCpy *types.ListJournalS3ExportsForLedgerInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -233,14 +116,14 @@ type ListJournalS3ExportsForLedgerPaginator struct {
 	aws.Pager
 }
 
-func (p *ListJournalS3ExportsForLedgerPaginator) CurrentPage() *ListJournalS3ExportsForLedgerOutput {
-	return p.Pager.CurrentPage().(*ListJournalS3ExportsForLedgerOutput)
+func (p *ListJournalS3ExportsForLedgerPaginator) CurrentPage() *types.ListJournalS3ExportsForLedgerOutput {
+	return p.Pager.CurrentPage().(*types.ListJournalS3ExportsForLedgerOutput)
 }
 
 // ListJournalS3ExportsForLedgerResponse is the response type for the
 // ListJournalS3ExportsForLedger API operation.
 type ListJournalS3ExportsForLedgerResponse struct {
-	*ListJournalS3ExportsForLedgerOutput
+	*types.ListJournalS3ExportsForLedgerOutput
 
 	response *aws.Response
 }

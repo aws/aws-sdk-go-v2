@@ -4,87 +4,18 @@ package rds
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/rds/types"
 )
-
-type DescribeInstallationMediaInput struct {
-	_ struct{} `type:"structure"`
-
-	// A filter that specifies one or more installation media to describe. Supported
-	// filters include the following:
-	//
-	//    * custom-availability-zone-id - Accepts custom Availability Zone (AZ)
-	//    identifiers. The results list includes information about only the custom
-	//    AZs identified by these identifiers.
-	//
-	//    * engine - Accepts database engines. The results list includes information
-	//    about only the database engines identified by these identifiers. For more
-	//    information about the valid engines for installation media, see ImportInstallationMedia.
-	Filters []Filter `locationNameList:"Filter" type:"list"`
-
-	// The installation media ID.
-	InstallationMediaId *string `type:"string"`
-
-	// An optional pagination token provided by a previous request. If this parameter
-	// is specified, the response includes only records beyond the marker, up to
-	// the value specified by MaxRecords.
-	Marker *string `type:"string"`
-
-	// An optional pagination token provided by a previous DescribeInstallationMedia
-	// request. If this parameter is specified, the response includes only records
-	// beyond the marker, up to the value specified by MaxRecords.
-	MaxRecords *int64 `type:"integer"`
-}
-
-// String returns the string representation
-func (s DescribeInstallationMediaInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeInstallationMediaInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeInstallationMediaInput"}
-	if s.Filters != nil {
-		for i, v := range s.Filters {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribeInstallationMediaOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The list of InstallationMedia objects for the AWS account.
-	InstallationMedia []InstallationMedia `locationNameList:"InstallationMedia" type:"list"`
-
-	// An optional pagination token provided by a previous DescribeInstallationMedia
-	// request. If this parameter is specified, the response includes only records
-	// beyond the marker, up to the value specified by MaxRecords.
-	Marker *string `type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeInstallationMediaOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeInstallationMedia = "DescribeInstallationMedia"
 
 // DescribeInstallationMediaRequest returns a request value for making API operation for
 // Amazon Relational Database Service.
 //
-// Describes the available installation media for on-premises, bring your own
-// media (BYOM) DB engines, such as Microsoft SQL Server.
+// Describes the available installation media for a DB engine that requires
+// an on-premises customer provided license, such as Microsoft SQL Server.
 //
 //    // Example sending a request using DescribeInstallationMediaRequest.
 //    req := client.DescribeInstallationMediaRequest(params)
@@ -94,7 +25,7 @@ const opDescribeInstallationMedia = "DescribeInstallationMedia"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeInstallationMedia
-func (c *Client) DescribeInstallationMediaRequest(input *DescribeInstallationMediaInput) DescribeInstallationMediaRequest {
+func (c *Client) DescribeInstallationMediaRequest(input *types.DescribeInstallationMediaInput) DescribeInstallationMediaRequest {
 	op := &aws.Operation{
 		Name:       opDescribeInstallationMedia,
 		HTTPMethod: "POST",
@@ -108,10 +39,10 @@ func (c *Client) DescribeInstallationMediaRequest(input *DescribeInstallationMed
 	}
 
 	if input == nil {
-		input = &DescribeInstallationMediaInput{}
+		input = &types.DescribeInstallationMediaInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeInstallationMediaOutput{})
+	req := c.newRequest(op, input, &types.DescribeInstallationMediaOutput{})
 	return DescribeInstallationMediaRequest{Request: req, Input: input, Copy: c.DescribeInstallationMediaRequest}
 }
 
@@ -119,8 +50,8 @@ func (c *Client) DescribeInstallationMediaRequest(input *DescribeInstallationMed
 // DescribeInstallationMedia API operation.
 type DescribeInstallationMediaRequest struct {
 	*aws.Request
-	Input *DescribeInstallationMediaInput
-	Copy  func(*DescribeInstallationMediaInput) DescribeInstallationMediaRequest
+	Input *types.DescribeInstallationMediaInput
+	Copy  func(*types.DescribeInstallationMediaInput) DescribeInstallationMediaRequest
 }
 
 // Send marshals and sends the DescribeInstallationMedia API request.
@@ -132,7 +63,7 @@ func (r DescribeInstallationMediaRequest) Send(ctx context.Context) (*DescribeIn
 	}
 
 	resp := &DescribeInstallationMediaResponse{
-		DescribeInstallationMediaOutput: r.Request.Data.(*DescribeInstallationMediaOutput),
+		DescribeInstallationMediaOutput: r.Request.Data.(*types.DescribeInstallationMediaOutput),
 		response:                        &aws.Response{Request: r.Request},
 	}
 
@@ -162,7 +93,7 @@ func NewDescribeInstallationMediaPaginator(req DescribeInstallationMediaRequest)
 	return DescribeInstallationMediaPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *DescribeInstallationMediaInput
+				var inCpy *types.DescribeInstallationMediaInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -182,14 +113,14 @@ type DescribeInstallationMediaPaginator struct {
 	aws.Pager
 }
 
-func (p *DescribeInstallationMediaPaginator) CurrentPage() *DescribeInstallationMediaOutput {
-	return p.Pager.CurrentPage().(*DescribeInstallationMediaOutput)
+func (p *DescribeInstallationMediaPaginator) CurrentPage() *types.DescribeInstallationMediaOutput {
+	return p.Pager.CurrentPage().(*types.DescribeInstallationMediaOutput)
 }
 
 // DescribeInstallationMediaResponse is the response type for the
 // DescribeInstallationMedia API operation.
 type DescribeInstallationMediaResponse struct {
-	*DescribeInstallationMediaOutput
+	*types.DescribeInstallationMediaOutput
 
 	response *aws.Response
 }

@@ -6,32 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/directconnect/types"
 )
-
-type DescribeConnectionsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the connection.
-	ConnectionId *string `locationName:"connectionId" type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeConnectionsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type DescribeConnectionsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The connections.
-	Connections []Connection `locationName:"connections" type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeConnectionsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeConnections = "DescribeConnections"
 
@@ -48,7 +24,7 @@ const opDescribeConnections = "DescribeConnections"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DescribeConnections
-func (c *Client) DescribeConnectionsRequest(input *DescribeConnectionsInput) DescribeConnectionsRequest {
+func (c *Client) DescribeConnectionsRequest(input *types.DescribeConnectionsInput) DescribeConnectionsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeConnections,
 		HTTPMethod: "POST",
@@ -56,10 +32,10 @@ func (c *Client) DescribeConnectionsRequest(input *DescribeConnectionsInput) Des
 	}
 
 	if input == nil {
-		input = &DescribeConnectionsInput{}
+		input = &types.DescribeConnectionsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeConnectionsOutput{})
+	req := c.newRequest(op, input, &types.DescribeConnectionsOutput{})
 	return DescribeConnectionsRequest{Request: req, Input: input, Copy: c.DescribeConnectionsRequest}
 }
 
@@ -67,8 +43,8 @@ func (c *Client) DescribeConnectionsRequest(input *DescribeConnectionsInput) Des
 // DescribeConnections API operation.
 type DescribeConnectionsRequest struct {
 	*aws.Request
-	Input *DescribeConnectionsInput
-	Copy  func(*DescribeConnectionsInput) DescribeConnectionsRequest
+	Input *types.DescribeConnectionsInput
+	Copy  func(*types.DescribeConnectionsInput) DescribeConnectionsRequest
 }
 
 // Send marshals and sends the DescribeConnections API request.
@@ -80,7 +56,7 @@ func (r DescribeConnectionsRequest) Send(ctx context.Context) (*DescribeConnecti
 	}
 
 	resp := &DescribeConnectionsResponse{
-		DescribeConnectionsOutput: r.Request.Data.(*DescribeConnectionsOutput),
+		DescribeConnectionsOutput: r.Request.Data.(*types.DescribeConnectionsOutput),
 		response:                  &aws.Response{Request: r.Request},
 	}
 
@@ -90,7 +66,7 @@ func (r DescribeConnectionsRequest) Send(ctx context.Context) (*DescribeConnecti
 // DescribeConnectionsResponse is the response type for the
 // DescribeConnections API operation.
 type DescribeConnectionsResponse struct {
-	*DescribeConnectionsOutput
+	*types.DescribeConnectionsOutput
 
 	response *aws.Response
 }

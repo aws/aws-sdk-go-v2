@@ -6,81 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/restjson"
+	"github.com/aws/aws-sdk-go-v2/service/workdocs/types"
 )
-
-type DeleteDocumentInput struct {
-	_ struct{} `type:"structure"`
-
-	// Amazon WorkDocs authentication token. Do not set this field when using administrative
-	// API actions, as in accessing the API using AWS credentials.
-	AuthenticationToken *string `location:"header" locationName:"Authentication" min:"1" type:"string" sensitive:"true"`
-
-	// The ID of the document.
-	//
-	// DocumentId is a required field
-	DocumentId *string `location:"uri" locationName:"DocumentId" min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteDocumentInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteDocumentInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteDocumentInput"}
-	if s.AuthenticationToken != nil && len(*s.AuthenticationToken) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("AuthenticationToken", 1))
-	}
-
-	if s.DocumentId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DocumentId"))
-	}
-	if s.DocumentId != nil && len(*s.DocumentId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("DocumentId", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteDocumentInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.AuthenticationToken != nil {
-		v := *s.AuthenticationToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "Authentication", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.DocumentId != nil {
-		v := *s.DocumentId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "DocumentId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type DeleteDocumentOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteDocumentOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteDocumentOutput) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
 
 const opDeleteDocument = "DeleteDocument"
 
@@ -97,7 +26,7 @@ const opDeleteDocument = "DeleteDocument"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/DeleteDocument
-func (c *Client) DeleteDocumentRequest(input *DeleteDocumentInput) DeleteDocumentRequest {
+func (c *Client) DeleteDocumentRequest(input *types.DeleteDocumentInput) DeleteDocumentRequest {
 	op := &aws.Operation{
 		Name:       opDeleteDocument,
 		HTTPMethod: "DELETE",
@@ -105,10 +34,10 @@ func (c *Client) DeleteDocumentRequest(input *DeleteDocumentInput) DeleteDocumen
 	}
 
 	if input == nil {
-		input = &DeleteDocumentInput{}
+		input = &types.DeleteDocumentInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteDocumentOutput{})
+	req := c.newRequest(op, input, &types.DeleteDocumentOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return DeleteDocumentRequest{Request: req, Input: input, Copy: c.DeleteDocumentRequest}
@@ -118,8 +47,8 @@ func (c *Client) DeleteDocumentRequest(input *DeleteDocumentInput) DeleteDocumen
 // DeleteDocument API operation.
 type DeleteDocumentRequest struct {
 	*aws.Request
-	Input *DeleteDocumentInput
-	Copy  func(*DeleteDocumentInput) DeleteDocumentRequest
+	Input *types.DeleteDocumentInput
+	Copy  func(*types.DeleteDocumentInput) DeleteDocumentRequest
 }
 
 // Send marshals and sends the DeleteDocument API request.
@@ -131,7 +60,7 @@ func (r DeleteDocumentRequest) Send(ctx context.Context) (*DeleteDocumentRespons
 	}
 
 	resp := &DeleteDocumentResponse{
-		DeleteDocumentOutput: r.Request.Data.(*DeleteDocumentOutput),
+		DeleteDocumentOutput: r.Request.Data.(*types.DeleteDocumentOutput),
 		response:             &aws.Response{Request: r.Request},
 	}
 
@@ -141,7 +70,7 @@ func (r DeleteDocumentRequest) Send(ctx context.Context) (*DeleteDocumentRespons
 // DeleteDocumentResponse is the response type for the
 // DeleteDocument API operation.
 type DeleteDocumentResponse struct {
-	*DeleteDocumentOutput
+	*types.DeleteDocumentOutput
 
 	response *aws.Response
 }

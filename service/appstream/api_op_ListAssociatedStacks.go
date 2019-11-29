@@ -6,62 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/appstream/types"
 )
-
-type ListAssociatedStacksInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the fleet.
-	//
-	// FleetName is a required field
-	FleetName *string `min:"1" type:"string" required:"true"`
-
-	// The pagination token to use to retrieve the next page of results for this
-	// operation. If this value is null, it retrieves the first page.
-	NextToken *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s ListAssociatedStacksInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListAssociatedStacksInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListAssociatedStacksInput"}
-
-	if s.FleetName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("FleetName"))
-	}
-	if s.FleetName != nil && len(*s.FleetName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("FleetName", 1))
-	}
-	if s.NextToken != nil && len(*s.NextToken) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ListAssociatedStacksOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the stack.
-	Names []string `type:"list"`
-
-	// The pagination token to use to retrieve the next page of results for this
-	// operation. If there are no more pages, this value is null.
-	NextToken *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s ListAssociatedStacksOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListAssociatedStacks = "ListAssociatedStacks"
 
@@ -78,7 +24,7 @@ const opListAssociatedStacks = "ListAssociatedStacks"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/ListAssociatedStacks
-func (c *Client) ListAssociatedStacksRequest(input *ListAssociatedStacksInput) ListAssociatedStacksRequest {
+func (c *Client) ListAssociatedStacksRequest(input *types.ListAssociatedStacksInput) ListAssociatedStacksRequest {
 	op := &aws.Operation{
 		Name:       opListAssociatedStacks,
 		HTTPMethod: "POST",
@@ -86,10 +32,10 @@ func (c *Client) ListAssociatedStacksRequest(input *ListAssociatedStacksInput) L
 	}
 
 	if input == nil {
-		input = &ListAssociatedStacksInput{}
+		input = &types.ListAssociatedStacksInput{}
 	}
 
-	req := c.newRequest(op, input, &ListAssociatedStacksOutput{})
+	req := c.newRequest(op, input, &types.ListAssociatedStacksOutput{})
 	return ListAssociatedStacksRequest{Request: req, Input: input, Copy: c.ListAssociatedStacksRequest}
 }
 
@@ -97,8 +43,8 @@ func (c *Client) ListAssociatedStacksRequest(input *ListAssociatedStacksInput) L
 // ListAssociatedStacks API operation.
 type ListAssociatedStacksRequest struct {
 	*aws.Request
-	Input *ListAssociatedStacksInput
-	Copy  func(*ListAssociatedStacksInput) ListAssociatedStacksRequest
+	Input *types.ListAssociatedStacksInput
+	Copy  func(*types.ListAssociatedStacksInput) ListAssociatedStacksRequest
 }
 
 // Send marshals and sends the ListAssociatedStacks API request.
@@ -110,7 +56,7 @@ func (r ListAssociatedStacksRequest) Send(ctx context.Context) (*ListAssociatedS
 	}
 
 	resp := &ListAssociatedStacksResponse{
-		ListAssociatedStacksOutput: r.Request.Data.(*ListAssociatedStacksOutput),
+		ListAssociatedStacksOutput: r.Request.Data.(*types.ListAssociatedStacksOutput),
 		response:                   &aws.Response{Request: r.Request},
 	}
 
@@ -120,7 +66,7 @@ func (r ListAssociatedStacksRequest) Send(ctx context.Context) (*ListAssociatedS
 // ListAssociatedStacksResponse is the response type for the
 // ListAssociatedStacks API operation.
 type ListAssociatedStacksResponse struct {
-	*ListAssociatedStacksOutput
+	*types.ListAssociatedStacksOutput
 
 	response *aws.Response
 }

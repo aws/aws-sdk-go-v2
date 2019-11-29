@@ -6,68 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/redshift/types"
 )
-
-type DescribeOrderableClusterOptionsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The version filter value. Specify this parameter to show only the available
-	// offerings matching the specified version.
-	//
-	// Default: All versions.
-	//
-	// Constraints: Must be one of the version returned from DescribeClusterVersions.
-	ClusterVersion *string `type:"string"`
-
-	// An optional parameter that specifies the starting point to return a set of
-	// response records. When the results of a DescribeOrderableClusterOptions request
-	// exceed the value specified in MaxRecords, AWS returns a value in the Marker
-	// field of the response. You can retrieve the next set of response records
-	// by providing the returned marker value in the Marker parameter and retrying
-	// the request.
-	Marker *string `type:"string"`
-
-	// The maximum number of response records to return in each call. If the number
-	// of remaining response records exceeds the specified MaxRecords value, a value
-	// is returned in a marker field of the response. You can retrieve the next
-	// set of records by retrying the command with the returned marker value.
-	//
-	// Default: 100
-	//
-	// Constraints: minimum 20, maximum 100.
-	MaxRecords *int64 `type:"integer"`
-
-	// The node type filter value. Specify this parameter to show only the available
-	// offerings matching the specified node type.
-	NodeType *string `type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeOrderableClusterOptionsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Contains the output from the DescribeOrderableClusterOptions action.
-type DescribeOrderableClusterOptionsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A value that indicates the starting point for the next set of response records
-	// in a subsequent request. If a value is returned in a response, you can retrieve
-	// the next set of records by providing this returned marker value in the Marker
-	// parameter and retrying the command. If the Marker field is empty, all response
-	// records have been retrieved for the request.
-	Marker *string `type:"string"`
-
-	// An OrderableClusterOption structure containing information about orderable
-	// options for the cluster.
-	OrderableClusterOptions []OrderableClusterOption `locationNameList:"OrderableClusterOption" type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeOrderableClusterOptionsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeOrderableClusterOptions = "DescribeOrderableClusterOptions"
 
@@ -92,7 +32,7 @@ const opDescribeOrderableClusterOptions = "DescribeOrderableClusterOptions"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeOrderableClusterOptions
-func (c *Client) DescribeOrderableClusterOptionsRequest(input *DescribeOrderableClusterOptionsInput) DescribeOrderableClusterOptionsRequest {
+func (c *Client) DescribeOrderableClusterOptionsRequest(input *types.DescribeOrderableClusterOptionsInput) DescribeOrderableClusterOptionsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeOrderableClusterOptions,
 		HTTPMethod: "POST",
@@ -106,10 +46,10 @@ func (c *Client) DescribeOrderableClusterOptionsRequest(input *DescribeOrderable
 	}
 
 	if input == nil {
-		input = &DescribeOrderableClusterOptionsInput{}
+		input = &types.DescribeOrderableClusterOptionsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeOrderableClusterOptionsOutput{})
+	req := c.newRequest(op, input, &types.DescribeOrderableClusterOptionsOutput{})
 	return DescribeOrderableClusterOptionsRequest{Request: req, Input: input, Copy: c.DescribeOrderableClusterOptionsRequest}
 }
 
@@ -117,8 +57,8 @@ func (c *Client) DescribeOrderableClusterOptionsRequest(input *DescribeOrderable
 // DescribeOrderableClusterOptions API operation.
 type DescribeOrderableClusterOptionsRequest struct {
 	*aws.Request
-	Input *DescribeOrderableClusterOptionsInput
-	Copy  func(*DescribeOrderableClusterOptionsInput) DescribeOrderableClusterOptionsRequest
+	Input *types.DescribeOrderableClusterOptionsInput
+	Copy  func(*types.DescribeOrderableClusterOptionsInput) DescribeOrderableClusterOptionsRequest
 }
 
 // Send marshals and sends the DescribeOrderableClusterOptions API request.
@@ -130,7 +70,7 @@ func (r DescribeOrderableClusterOptionsRequest) Send(ctx context.Context) (*Desc
 	}
 
 	resp := &DescribeOrderableClusterOptionsResponse{
-		DescribeOrderableClusterOptionsOutput: r.Request.Data.(*DescribeOrderableClusterOptionsOutput),
+		DescribeOrderableClusterOptionsOutput: r.Request.Data.(*types.DescribeOrderableClusterOptionsOutput),
 		response:                              &aws.Response{Request: r.Request},
 	}
 
@@ -160,7 +100,7 @@ func NewDescribeOrderableClusterOptionsPaginator(req DescribeOrderableClusterOpt
 	return DescribeOrderableClusterOptionsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *DescribeOrderableClusterOptionsInput
+				var inCpy *types.DescribeOrderableClusterOptionsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -180,14 +120,14 @@ type DescribeOrderableClusterOptionsPaginator struct {
 	aws.Pager
 }
 
-func (p *DescribeOrderableClusterOptionsPaginator) CurrentPage() *DescribeOrderableClusterOptionsOutput {
-	return p.Pager.CurrentPage().(*DescribeOrderableClusterOptionsOutput)
+func (p *DescribeOrderableClusterOptionsPaginator) CurrentPage() *types.DescribeOrderableClusterOptionsOutput {
+	return p.Pager.CurrentPage().(*types.DescribeOrderableClusterOptionsOutput)
 }
 
 // DescribeOrderableClusterOptionsResponse is the response type for the
 // DescribeOrderableClusterOptions API operation.
 type DescribeOrderableClusterOptionsResponse struct {
-	*DescribeOrderableClusterOptionsOutput
+	*types.DescribeOrderableClusterOptionsOutput
 
 	response *aws.Response
 }

@@ -6,45 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/alexaforbusiness/types"
 )
-
-type RejectSkillInput struct {
-	_ struct{} `type:"structure"`
-
-	// The unique identifier of the skill.
-	//
-	// SkillId is a required field
-	SkillId *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s RejectSkillInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *RejectSkillInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "RejectSkillInput"}
-
-	if s.SkillId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("SkillId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type RejectSkillOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s RejectSkillOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opRejectSkill = "RejectSkill"
 
@@ -64,7 +27,7 @@ const opRejectSkill = "RejectSkill"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/RejectSkill
-func (c *Client) RejectSkillRequest(input *RejectSkillInput) RejectSkillRequest {
+func (c *Client) RejectSkillRequest(input *types.RejectSkillInput) RejectSkillRequest {
 	op := &aws.Operation{
 		Name:       opRejectSkill,
 		HTTPMethod: "POST",
@@ -72,10 +35,10 @@ func (c *Client) RejectSkillRequest(input *RejectSkillInput) RejectSkillRequest 
 	}
 
 	if input == nil {
-		input = &RejectSkillInput{}
+		input = &types.RejectSkillInput{}
 	}
 
-	req := c.newRequest(op, input, &RejectSkillOutput{})
+	req := c.newRequest(op, input, &types.RejectSkillOutput{})
 	return RejectSkillRequest{Request: req, Input: input, Copy: c.RejectSkillRequest}
 }
 
@@ -83,8 +46,8 @@ func (c *Client) RejectSkillRequest(input *RejectSkillInput) RejectSkillRequest 
 // RejectSkill API operation.
 type RejectSkillRequest struct {
 	*aws.Request
-	Input *RejectSkillInput
-	Copy  func(*RejectSkillInput) RejectSkillRequest
+	Input *types.RejectSkillInput
+	Copy  func(*types.RejectSkillInput) RejectSkillRequest
 }
 
 // Send marshals and sends the RejectSkill API request.
@@ -96,7 +59,7 @@ func (r RejectSkillRequest) Send(ctx context.Context) (*RejectSkillResponse, err
 	}
 
 	resp := &RejectSkillResponse{
-		RejectSkillOutput: r.Request.Data.(*RejectSkillOutput),
+		RejectSkillOutput: r.Request.Data.(*types.RejectSkillOutput),
 		response:          &aws.Response{Request: r.Request},
 	}
 
@@ -106,7 +69,7 @@ func (r RejectSkillRequest) Send(ctx context.Context) (*RejectSkillResponse, err
 // RejectSkillResponse is the response type for the
 // RejectSkill API operation.
 type RejectSkillResponse struct {
-	*RejectSkillOutput
+	*types.RejectSkillOutput
 
 	response *aws.Response
 }

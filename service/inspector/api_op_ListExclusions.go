@@ -6,73 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/inspector/types"
 )
-
-type ListExclusionsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ARN of the assessment run that generated the exclusions that you want
-	// to list.
-	//
-	// AssessmentRunArn is a required field
-	AssessmentRunArn *string `locationName:"assessmentRunArn" min:"1" type:"string" required:"true"`
-
-	// You can use this parameter to indicate the maximum number of items you want
-	// in the response. The default value is 100. The maximum value is 500.
-	MaxResults *int64 `locationName:"maxResults" type:"integer"`
-
-	// You can use this parameter when paginating results. Set the value of this
-	// parameter to null on your first call to the ListExclusionsRequest action.
-	// Subsequent calls to the action fill nextToken in the request with the value
-	// of nextToken from the previous response to continue listing data.
-	NextToken *string `locationName:"nextToken" min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s ListExclusionsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListExclusionsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListExclusionsInput"}
-
-	if s.AssessmentRunArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("AssessmentRunArn"))
-	}
-	if s.AssessmentRunArn != nil && len(*s.AssessmentRunArn) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("AssessmentRunArn", 1))
-	}
-	if s.NextToken != nil && len(*s.NextToken) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ListExclusionsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A list of exclusions' ARNs returned by the action.
-	//
-	// ExclusionArns is a required field
-	ExclusionArns []string `locationName:"exclusionArns" type:"list" required:"true"`
-
-	// When a response is generated, if there is more data to be listed, this parameters
-	// is present in the response and contains the value to use for the nextToken
-	// parameter in a subsequent pagination request. If there is no more data to
-	// be listed, this parameter is set to null.
-	NextToken *string `locationName:"nextToken" min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s ListExclusionsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListExclusions = "ListExclusions"
 
@@ -89,7 +24,7 @@ const opListExclusions = "ListExclusions"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/ListExclusions
-func (c *Client) ListExclusionsRequest(input *ListExclusionsInput) ListExclusionsRequest {
+func (c *Client) ListExclusionsRequest(input *types.ListExclusionsInput) ListExclusionsRequest {
 	op := &aws.Operation{
 		Name:       opListExclusions,
 		HTTPMethod: "POST",
@@ -103,10 +38,10 @@ func (c *Client) ListExclusionsRequest(input *ListExclusionsInput) ListExclusion
 	}
 
 	if input == nil {
-		input = &ListExclusionsInput{}
+		input = &types.ListExclusionsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListExclusionsOutput{})
+	req := c.newRequest(op, input, &types.ListExclusionsOutput{})
 	return ListExclusionsRequest{Request: req, Input: input, Copy: c.ListExclusionsRequest}
 }
 
@@ -114,8 +49,8 @@ func (c *Client) ListExclusionsRequest(input *ListExclusionsInput) ListExclusion
 // ListExclusions API operation.
 type ListExclusionsRequest struct {
 	*aws.Request
-	Input *ListExclusionsInput
-	Copy  func(*ListExclusionsInput) ListExclusionsRequest
+	Input *types.ListExclusionsInput
+	Copy  func(*types.ListExclusionsInput) ListExclusionsRequest
 }
 
 // Send marshals and sends the ListExclusions API request.
@@ -127,7 +62,7 @@ func (r ListExclusionsRequest) Send(ctx context.Context) (*ListExclusionsRespons
 	}
 
 	resp := &ListExclusionsResponse{
-		ListExclusionsOutput: r.Request.Data.(*ListExclusionsOutput),
+		ListExclusionsOutput: r.Request.Data.(*types.ListExclusionsOutput),
 		response:             &aws.Response{Request: r.Request},
 	}
 
@@ -157,7 +92,7 @@ func NewListExclusionsPaginator(req ListExclusionsRequest) ListExclusionsPaginat
 	return ListExclusionsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListExclusionsInput
+				var inCpy *types.ListExclusionsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -177,14 +112,14 @@ type ListExclusionsPaginator struct {
 	aws.Pager
 }
 
-func (p *ListExclusionsPaginator) CurrentPage() *ListExclusionsOutput {
-	return p.Pager.CurrentPage().(*ListExclusionsOutput)
+func (p *ListExclusionsPaginator) CurrentPage() *types.ListExclusionsOutput {
+	return p.Pager.CurrentPage().(*types.ListExclusionsOutput)
 }
 
 // ListExclusionsResponse is the response type for the
 // ListExclusions API operation.
 type ListExclusionsResponse struct {
-	*ListExclusionsOutput
+	*types.ListExclusionsOutput
 
 	response *aws.Response
 }

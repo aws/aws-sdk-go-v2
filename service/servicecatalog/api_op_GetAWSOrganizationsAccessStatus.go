@@ -6,29 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/types"
 )
-
-type GetAWSOrganizationsAccessStatusInput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s GetAWSOrganizationsAccessStatusInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type GetAWSOrganizationsAccessStatusOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The status of the portfolio share feature.
-	AccessStatus AccessStatus `type:"string" enum:"true"`
-}
-
-// String returns the string representation
-func (s GetAWSOrganizationsAccessStatusOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetAWSOrganizationsAccessStatus = "GetAWSOrganizationsAccessStatus"
 
@@ -46,7 +25,7 @@ const opGetAWSOrganizationsAccessStatus = "GetAWSOrganizationsAccessStatus"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/GetAWSOrganizationsAccessStatus
-func (c *Client) GetAWSOrganizationsAccessStatusRequest(input *GetAWSOrganizationsAccessStatusInput) GetAWSOrganizationsAccessStatusRequest {
+func (c *Client) GetAWSOrganizationsAccessStatusRequest(input *types.GetAWSOrganizationsAccessStatusInput) GetAWSOrganizationsAccessStatusRequest {
 	op := &aws.Operation{
 		Name:       opGetAWSOrganizationsAccessStatus,
 		HTTPMethod: "POST",
@@ -54,10 +33,10 @@ func (c *Client) GetAWSOrganizationsAccessStatusRequest(input *GetAWSOrganizatio
 	}
 
 	if input == nil {
-		input = &GetAWSOrganizationsAccessStatusInput{}
+		input = &types.GetAWSOrganizationsAccessStatusInput{}
 	}
 
-	req := c.newRequest(op, input, &GetAWSOrganizationsAccessStatusOutput{})
+	req := c.newRequest(op, input, &types.GetAWSOrganizationsAccessStatusOutput{})
 	return GetAWSOrganizationsAccessStatusRequest{Request: req, Input: input, Copy: c.GetAWSOrganizationsAccessStatusRequest}
 }
 
@@ -65,8 +44,8 @@ func (c *Client) GetAWSOrganizationsAccessStatusRequest(input *GetAWSOrganizatio
 // GetAWSOrganizationsAccessStatus API operation.
 type GetAWSOrganizationsAccessStatusRequest struct {
 	*aws.Request
-	Input *GetAWSOrganizationsAccessStatusInput
-	Copy  func(*GetAWSOrganizationsAccessStatusInput) GetAWSOrganizationsAccessStatusRequest
+	Input *types.GetAWSOrganizationsAccessStatusInput
+	Copy  func(*types.GetAWSOrganizationsAccessStatusInput) GetAWSOrganizationsAccessStatusRequest
 }
 
 // Send marshals and sends the GetAWSOrganizationsAccessStatus API request.
@@ -78,7 +57,7 @@ func (r GetAWSOrganizationsAccessStatusRequest) Send(ctx context.Context) (*GetA
 	}
 
 	resp := &GetAWSOrganizationsAccessStatusResponse{
-		GetAWSOrganizationsAccessStatusOutput: r.Request.Data.(*GetAWSOrganizationsAccessStatusOutput),
+		GetAWSOrganizationsAccessStatusOutput: r.Request.Data.(*types.GetAWSOrganizationsAccessStatusOutput),
 		response:                              &aws.Response{Request: r.Request},
 	}
 
@@ -88,7 +67,7 @@ func (r GetAWSOrganizationsAccessStatusRequest) Send(ctx context.Context) (*GetA
 // GetAWSOrganizationsAccessStatusResponse is the response type for the
 // GetAWSOrganizationsAccessStatus API operation.
 type GetAWSOrganizationsAccessStatusResponse struct {
-	*GetAWSOrganizationsAccessStatusOutput
+	*types.GetAWSOrganizationsAccessStatusOutput
 
 	response *aws.Response
 }

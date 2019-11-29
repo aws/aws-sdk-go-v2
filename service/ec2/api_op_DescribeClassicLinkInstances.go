@@ -6,85 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-type DescribeClassicLinkInstancesInput struct {
-	_ struct{} `type:"structure"`
-
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have
-	// the required permissions, the error response is DryRunOperation. Otherwise,
-	// it is UnauthorizedOperation.
-	DryRun *bool `locationName:"dryRun" type:"boolean"`
-
-	// One or more filters.
-	//
-	//    * group-id - The ID of a VPC security group that's associated with the
-	//    instance.
-	//
-	//    * instance-id - The ID of the instance.
-	//
-	//    * tag:<key> - The key/value combination of a tag assigned to the resource.
-	//    Use the tag key in the filter name and the tag value as the filter value.
-	//    For example, to find all resources that have a tag with the key Owner
-	//    and the value TeamA, specify tag:Owner for the filter name and TeamA for
-	//    the filter value.
-	//
-	//    * tag-key - The key of a tag assigned to the resource. Use this filter
-	//    to find all resources assigned a tag with a specific key, regardless of
-	//    the tag value.
-	//
-	//    * vpc-id - The ID of the VPC to which the instance is linked. vpc-id -
-	//    The ID of the VPC that the instance is linked to.
-	Filters []Filter `locationName:"Filter" locationNameList:"Filter" type:"list"`
-
-	// One or more instance IDs. Must be instances linked to a VPC through ClassicLink.
-	InstanceIds []string `locationName:"InstanceId" locationNameList:"InstanceId" type:"list"`
-
-	// The maximum number of results to return with a single call. To retrieve the
-	// remaining results, make another call with the returned nextToken value.
-	//
-	// Constraint: If the value is greater than 1000, we return only 1000 items.
-	MaxResults *int64 `locationName:"maxResults" min:"5" type:"integer"`
-
-	// The token for the next page of results.
-	NextToken *string `locationName:"nextToken" type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeClassicLinkInstancesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeClassicLinkInstancesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeClassicLinkInstancesInput"}
-	if s.MaxResults != nil && *s.MaxResults < 5 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 5))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribeClassicLinkInstancesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Information about one or more linked EC2-Classic instances.
-	Instances []ClassicLinkInstance `locationName:"instancesSet" locationNameList:"item" type:"list"`
-
-	// The token to use to retrieve the next page of results. This value is null
-	// when there are no more results to return.
-	NextToken *string `locationName:"nextToken" type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeClassicLinkInstancesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeClassicLinkInstances = "DescribeClassicLinkInstances"
 
@@ -104,7 +27,7 @@ const opDescribeClassicLinkInstances = "DescribeClassicLinkInstances"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeClassicLinkInstances
-func (c *Client) DescribeClassicLinkInstancesRequest(input *DescribeClassicLinkInstancesInput) DescribeClassicLinkInstancesRequest {
+func (c *Client) DescribeClassicLinkInstancesRequest(input *types.DescribeClassicLinkInstancesInput) DescribeClassicLinkInstancesRequest {
 	op := &aws.Operation{
 		Name:       opDescribeClassicLinkInstances,
 		HTTPMethod: "POST",
@@ -118,10 +41,10 @@ func (c *Client) DescribeClassicLinkInstancesRequest(input *DescribeClassicLinkI
 	}
 
 	if input == nil {
-		input = &DescribeClassicLinkInstancesInput{}
+		input = &types.DescribeClassicLinkInstancesInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeClassicLinkInstancesOutput{})
+	req := c.newRequest(op, input, &types.DescribeClassicLinkInstancesOutput{})
 	return DescribeClassicLinkInstancesRequest{Request: req, Input: input, Copy: c.DescribeClassicLinkInstancesRequest}
 }
 
@@ -129,8 +52,8 @@ func (c *Client) DescribeClassicLinkInstancesRequest(input *DescribeClassicLinkI
 // DescribeClassicLinkInstances API operation.
 type DescribeClassicLinkInstancesRequest struct {
 	*aws.Request
-	Input *DescribeClassicLinkInstancesInput
-	Copy  func(*DescribeClassicLinkInstancesInput) DescribeClassicLinkInstancesRequest
+	Input *types.DescribeClassicLinkInstancesInput
+	Copy  func(*types.DescribeClassicLinkInstancesInput) DescribeClassicLinkInstancesRequest
 }
 
 // Send marshals and sends the DescribeClassicLinkInstances API request.
@@ -142,7 +65,7 @@ func (r DescribeClassicLinkInstancesRequest) Send(ctx context.Context) (*Describ
 	}
 
 	resp := &DescribeClassicLinkInstancesResponse{
-		DescribeClassicLinkInstancesOutput: r.Request.Data.(*DescribeClassicLinkInstancesOutput),
+		DescribeClassicLinkInstancesOutput: r.Request.Data.(*types.DescribeClassicLinkInstancesOutput),
 		response:                           &aws.Response{Request: r.Request},
 	}
 
@@ -172,7 +95,7 @@ func NewDescribeClassicLinkInstancesPaginator(req DescribeClassicLinkInstancesRe
 	return DescribeClassicLinkInstancesPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *DescribeClassicLinkInstancesInput
+				var inCpy *types.DescribeClassicLinkInstancesInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -192,14 +115,14 @@ type DescribeClassicLinkInstancesPaginator struct {
 	aws.Pager
 }
 
-func (p *DescribeClassicLinkInstancesPaginator) CurrentPage() *DescribeClassicLinkInstancesOutput {
-	return p.Pager.CurrentPage().(*DescribeClassicLinkInstancesOutput)
+func (p *DescribeClassicLinkInstancesPaginator) CurrentPage() *types.DescribeClassicLinkInstancesOutput {
+	return p.Pager.CurrentPage().(*types.DescribeClassicLinkInstancesOutput)
 }
 
 // DescribeClassicLinkInstancesResponse is the response type for the
 // DescribeClassicLinkInstances API operation.
 type DescribeClassicLinkInstancesResponse struct {
-	*DescribeClassicLinkInstancesOutput
+	*types.DescribeClassicLinkInstancesOutput
 
 	response *aws.Response
 }

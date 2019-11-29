@@ -6,87 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/iot/types"
 )
-
-// The input for the GetTopicRule operation.
-type GetTopicRuleInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the rule.
-	//
-	// RuleName is a required field
-	RuleName *string `location:"uri" locationName:"ruleName" min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetTopicRuleInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetTopicRuleInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetTopicRuleInput"}
-
-	if s.RuleName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("RuleName"))
-	}
-	if s.RuleName != nil && len(*s.RuleName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("RuleName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetTopicRuleInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.RuleName != nil {
-		v := *s.RuleName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "ruleName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-// The output from the GetTopicRule operation.
-type GetTopicRuleOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The rule.
-	Rule *TopicRule `locationName:"rule" type:"structure"`
-
-	// The rule ARN.
-	RuleArn *string `locationName:"ruleArn" type:"string"`
-}
-
-// String returns the string representation
-func (s GetTopicRuleOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetTopicRuleOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.Rule != nil {
-		v := s.Rule
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "rule", v, metadata)
-	}
-	if s.RuleArn != nil {
-		v := *s.RuleArn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "ruleArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opGetTopicRule = "GetTopicRule"
 
@@ -101,7 +22,7 @@ const opGetTopicRule = "GetTopicRule"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) GetTopicRuleRequest(input *GetTopicRuleInput) GetTopicRuleRequest {
+func (c *Client) GetTopicRuleRequest(input *types.GetTopicRuleInput) GetTopicRuleRequest {
 	op := &aws.Operation{
 		Name:       opGetTopicRule,
 		HTTPMethod: "GET",
@@ -109,10 +30,10 @@ func (c *Client) GetTopicRuleRequest(input *GetTopicRuleInput) GetTopicRuleReque
 	}
 
 	if input == nil {
-		input = &GetTopicRuleInput{}
+		input = &types.GetTopicRuleInput{}
 	}
 
-	req := c.newRequest(op, input, &GetTopicRuleOutput{})
+	req := c.newRequest(op, input, &types.GetTopicRuleOutput{})
 	return GetTopicRuleRequest{Request: req, Input: input, Copy: c.GetTopicRuleRequest}
 }
 
@@ -120,8 +41,8 @@ func (c *Client) GetTopicRuleRequest(input *GetTopicRuleInput) GetTopicRuleReque
 // GetTopicRule API operation.
 type GetTopicRuleRequest struct {
 	*aws.Request
-	Input *GetTopicRuleInput
-	Copy  func(*GetTopicRuleInput) GetTopicRuleRequest
+	Input *types.GetTopicRuleInput
+	Copy  func(*types.GetTopicRuleInput) GetTopicRuleRequest
 }
 
 // Send marshals and sends the GetTopicRule API request.
@@ -133,7 +54,7 @@ func (r GetTopicRuleRequest) Send(ctx context.Context) (*GetTopicRuleResponse, e
 	}
 
 	resp := &GetTopicRuleResponse{
-		GetTopicRuleOutput: r.Request.Data.(*GetTopicRuleOutput),
+		GetTopicRuleOutput: r.Request.Data.(*types.GetTopicRuleOutput),
 		response:           &aws.Response{Request: r.Request},
 	}
 
@@ -143,7 +64,7 @@ func (r GetTopicRuleRequest) Send(ctx context.Context) (*GetTopicRuleResponse, e
 // GetTopicRuleResponse is the response type for the
 // GetTopicRule API operation.
 type GetTopicRuleResponse struct {
-	*GetTopicRuleOutput
+	*types.GetTopicRuleOutput
 
 	response *aws.Response
 }

@@ -6,54 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
 )
-
-type DeleteWorkteamInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the work team to delete.
-	//
-	// WorkteamName is a required field
-	WorkteamName *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteWorkteamInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteWorkteamInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteWorkteamInput"}
-
-	if s.WorkteamName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("WorkteamName"))
-	}
-	if s.WorkteamName != nil && len(*s.WorkteamName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("WorkteamName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteWorkteamOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Returns true if the work team was successfully deleted; otherwise, returns
-	// false.
-	//
-	// Success is a required field
-	Success *bool `type:"boolean" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteWorkteamOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteWorkteam = "DeleteWorkteam"
 
@@ -70,7 +24,7 @@ const opDeleteWorkteam = "DeleteWorkteam"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DeleteWorkteam
-func (c *Client) DeleteWorkteamRequest(input *DeleteWorkteamInput) DeleteWorkteamRequest {
+func (c *Client) DeleteWorkteamRequest(input *types.DeleteWorkteamInput) DeleteWorkteamRequest {
 	op := &aws.Operation{
 		Name:       opDeleteWorkteam,
 		HTTPMethod: "POST",
@@ -78,10 +32,10 @@ func (c *Client) DeleteWorkteamRequest(input *DeleteWorkteamInput) DeleteWorktea
 	}
 
 	if input == nil {
-		input = &DeleteWorkteamInput{}
+		input = &types.DeleteWorkteamInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteWorkteamOutput{})
+	req := c.newRequest(op, input, &types.DeleteWorkteamOutput{})
 	return DeleteWorkteamRequest{Request: req, Input: input, Copy: c.DeleteWorkteamRequest}
 }
 
@@ -89,8 +43,8 @@ func (c *Client) DeleteWorkteamRequest(input *DeleteWorkteamInput) DeleteWorktea
 // DeleteWorkteam API operation.
 type DeleteWorkteamRequest struct {
 	*aws.Request
-	Input *DeleteWorkteamInput
-	Copy  func(*DeleteWorkteamInput) DeleteWorkteamRequest
+	Input *types.DeleteWorkteamInput
+	Copy  func(*types.DeleteWorkteamInput) DeleteWorkteamRequest
 }
 
 // Send marshals and sends the DeleteWorkteam API request.
@@ -102,7 +56,7 @@ func (r DeleteWorkteamRequest) Send(ctx context.Context) (*DeleteWorkteamRespons
 	}
 
 	resp := &DeleteWorkteamResponse{
-		DeleteWorkteamOutput: r.Request.Data.(*DeleteWorkteamOutput),
+		DeleteWorkteamOutput: r.Request.Data.(*types.DeleteWorkteamOutput),
 		response:             &aws.Response{Request: r.Request},
 	}
 
@@ -112,7 +66,7 @@ func (r DeleteWorkteamRequest) Send(ctx context.Context) (*DeleteWorkteamRespons
 // DeleteWorkteamResponse is the response type for the
 // DeleteWorkteam API operation.
 type DeleteWorkteamResponse struct {
-	*DeleteWorkteamOutput
+	*types.DeleteWorkteamOutput
 
 	response *aws.Response
 }

@@ -6,58 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/iam/types"
 )
-
-type GetRoleInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the IAM role to get information about.
-	//
-	// This parameter allows (through its regex pattern (http://wikipedia.org/wiki/regex))
-	// a string of characters consisting of upper and lowercase alphanumeric characters
-	// with no spaces. You can also include any of the following characters: _+=,.@-
-	//
-	// RoleName is a required field
-	RoleName *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetRoleInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetRoleInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetRoleInput"}
-
-	if s.RoleName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("RoleName"))
-	}
-	if s.RoleName != nil && len(*s.RoleName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("RoleName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Contains the response to a successful GetRole request.
-type GetRoleOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A structure containing details about the IAM role.
-	//
-	// Role is a required field
-	Role *Role `type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s GetRoleOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetRole = "GetRole"
 
@@ -82,7 +32,7 @@ const opGetRole = "GetRole"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetRole
-func (c *Client) GetRoleRequest(input *GetRoleInput) GetRoleRequest {
+func (c *Client) GetRoleRequest(input *types.GetRoleInput) GetRoleRequest {
 	op := &aws.Operation{
 		Name:       opGetRole,
 		HTTPMethod: "POST",
@@ -90,10 +40,10 @@ func (c *Client) GetRoleRequest(input *GetRoleInput) GetRoleRequest {
 	}
 
 	if input == nil {
-		input = &GetRoleInput{}
+		input = &types.GetRoleInput{}
 	}
 
-	req := c.newRequest(op, input, &GetRoleOutput{})
+	req := c.newRequest(op, input, &types.GetRoleOutput{})
 	return GetRoleRequest{Request: req, Input: input, Copy: c.GetRoleRequest}
 }
 
@@ -101,8 +51,8 @@ func (c *Client) GetRoleRequest(input *GetRoleInput) GetRoleRequest {
 // GetRole API operation.
 type GetRoleRequest struct {
 	*aws.Request
-	Input *GetRoleInput
-	Copy  func(*GetRoleInput) GetRoleRequest
+	Input *types.GetRoleInput
+	Copy  func(*types.GetRoleInput) GetRoleRequest
 }
 
 // Send marshals and sends the GetRole API request.
@@ -114,7 +64,7 @@ func (r GetRoleRequest) Send(ctx context.Context) (*GetRoleResponse, error) {
 	}
 
 	resp := &GetRoleResponse{
-		GetRoleOutput: r.Request.Data.(*GetRoleOutput),
+		GetRoleOutput: r.Request.Data.(*types.GetRoleOutput),
 		response:      &aws.Response{Request: r.Request},
 	}
 
@@ -124,7 +74,7 @@ func (r GetRoleRequest) Send(ctx context.Context) (*GetRoleResponse, error) {
 // GetRoleResponse is the response type for the
 // GetRole API operation.
 type GetRoleResponse struct {
-	*GetRoleOutput
+	*types.GetRoleOutput
 
 	response *aws.Response
 }

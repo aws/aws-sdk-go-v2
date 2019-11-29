@@ -6,63 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-type DeleteTransitGatewayRouteInput struct {
-	_ struct{} `type:"structure"`
-
-	// The CIDR range for the route. This must match the CIDR for the route exactly.
-	//
-	// DestinationCidrBlock is a required field
-	DestinationCidrBlock *string `type:"string" required:"true"`
-
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have
-	// the required permissions, the error response is DryRunOperation. Otherwise,
-	// it is UnauthorizedOperation.
-	DryRun *bool `type:"boolean"`
-
-	// The ID of the transit gateway route table.
-	//
-	// TransitGatewayRouteTableId is a required field
-	TransitGatewayRouteTableId *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteTransitGatewayRouteInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteTransitGatewayRouteInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteTransitGatewayRouteInput"}
-
-	if s.DestinationCidrBlock == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DestinationCidrBlock"))
-	}
-
-	if s.TransitGatewayRouteTableId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("TransitGatewayRouteTableId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteTransitGatewayRouteOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Information about the route.
-	Route *TransitGatewayRoute `locationName:"route" type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteTransitGatewayRouteOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteTransitGatewayRoute = "DeleteTransitGatewayRoute"
 
@@ -79,7 +24,7 @@ const opDeleteTransitGatewayRoute = "DeleteTransitGatewayRoute"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteTransitGatewayRoute
-func (c *Client) DeleteTransitGatewayRouteRequest(input *DeleteTransitGatewayRouteInput) DeleteTransitGatewayRouteRequest {
+func (c *Client) DeleteTransitGatewayRouteRequest(input *types.DeleteTransitGatewayRouteInput) DeleteTransitGatewayRouteRequest {
 	op := &aws.Operation{
 		Name:       opDeleteTransitGatewayRoute,
 		HTTPMethod: "POST",
@@ -87,10 +32,10 @@ func (c *Client) DeleteTransitGatewayRouteRequest(input *DeleteTransitGatewayRou
 	}
 
 	if input == nil {
-		input = &DeleteTransitGatewayRouteInput{}
+		input = &types.DeleteTransitGatewayRouteInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteTransitGatewayRouteOutput{})
+	req := c.newRequest(op, input, &types.DeleteTransitGatewayRouteOutput{})
 	return DeleteTransitGatewayRouteRequest{Request: req, Input: input, Copy: c.DeleteTransitGatewayRouteRequest}
 }
 
@@ -98,8 +43,8 @@ func (c *Client) DeleteTransitGatewayRouteRequest(input *DeleteTransitGatewayRou
 // DeleteTransitGatewayRoute API operation.
 type DeleteTransitGatewayRouteRequest struct {
 	*aws.Request
-	Input *DeleteTransitGatewayRouteInput
-	Copy  func(*DeleteTransitGatewayRouteInput) DeleteTransitGatewayRouteRequest
+	Input *types.DeleteTransitGatewayRouteInput
+	Copy  func(*types.DeleteTransitGatewayRouteInput) DeleteTransitGatewayRouteRequest
 }
 
 // Send marshals and sends the DeleteTransitGatewayRoute API request.
@@ -111,7 +56,7 @@ func (r DeleteTransitGatewayRouteRequest) Send(ctx context.Context) (*DeleteTran
 	}
 
 	resp := &DeleteTransitGatewayRouteResponse{
-		DeleteTransitGatewayRouteOutput: r.Request.Data.(*DeleteTransitGatewayRouteOutput),
+		DeleteTransitGatewayRouteOutput: r.Request.Data.(*types.DeleteTransitGatewayRouteOutput),
 		response:                        &aws.Response{Request: r.Request},
 	}
 
@@ -121,7 +66,7 @@ func (r DeleteTransitGatewayRouteRequest) Send(ctx context.Context) (*DeleteTran
 // DeleteTransitGatewayRouteResponse is the response type for the
 // DeleteTransitGatewayRoute API operation.
 type DeleteTransitGatewayRouteResponse struct {
-	*DeleteTransitGatewayRouteOutput
+	*types.DeleteTransitGatewayRouteOutput
 
 	response *aws.Response
 }

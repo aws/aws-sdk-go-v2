@@ -6,59 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-// Contains the parameters for CreateSpotDatafeedSubscription.
-type CreateSpotDatafeedSubscriptionInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon S3 bucket in which to store the Spot Instance data feed.
-	//
-	// Bucket is a required field
-	Bucket *string `locationName:"bucket" type:"string" required:"true"`
-
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have
-	// the required permissions, the error response is DryRunOperation. Otherwise,
-	// it is UnauthorizedOperation.
-	DryRun *bool `locationName:"dryRun" type:"boolean"`
-
-	// A prefix for the data feed file names.
-	Prefix *string `locationName:"prefix" type:"string"`
-}
-
-// String returns the string representation
-func (s CreateSpotDatafeedSubscriptionInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateSpotDatafeedSubscriptionInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateSpotDatafeedSubscriptionInput"}
-
-	if s.Bucket == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Bucket"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Contains the output of CreateSpotDatafeedSubscription.
-type CreateSpotDatafeedSubscriptionOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The Spot Instance data feed subscription.
-	SpotDatafeedSubscription *SpotDatafeedSubscription `locationName:"spotDatafeedSubscription" type:"structure"`
-}
-
-// String returns the string representation
-func (s CreateSpotDatafeedSubscriptionOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCreateSpotDatafeedSubscription = "CreateSpotDatafeedSubscription"
 
@@ -78,7 +27,7 @@ const opCreateSpotDatafeedSubscription = "CreateSpotDatafeedSubscription"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateSpotDatafeedSubscription
-func (c *Client) CreateSpotDatafeedSubscriptionRequest(input *CreateSpotDatafeedSubscriptionInput) CreateSpotDatafeedSubscriptionRequest {
+func (c *Client) CreateSpotDatafeedSubscriptionRequest(input *types.CreateSpotDatafeedSubscriptionInput) CreateSpotDatafeedSubscriptionRequest {
 	op := &aws.Operation{
 		Name:       opCreateSpotDatafeedSubscription,
 		HTTPMethod: "POST",
@@ -86,10 +35,10 @@ func (c *Client) CreateSpotDatafeedSubscriptionRequest(input *CreateSpotDatafeed
 	}
 
 	if input == nil {
-		input = &CreateSpotDatafeedSubscriptionInput{}
+		input = &types.CreateSpotDatafeedSubscriptionInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateSpotDatafeedSubscriptionOutput{})
+	req := c.newRequest(op, input, &types.CreateSpotDatafeedSubscriptionOutput{})
 	return CreateSpotDatafeedSubscriptionRequest{Request: req, Input: input, Copy: c.CreateSpotDatafeedSubscriptionRequest}
 }
 
@@ -97,8 +46,8 @@ func (c *Client) CreateSpotDatafeedSubscriptionRequest(input *CreateSpotDatafeed
 // CreateSpotDatafeedSubscription API operation.
 type CreateSpotDatafeedSubscriptionRequest struct {
 	*aws.Request
-	Input *CreateSpotDatafeedSubscriptionInput
-	Copy  func(*CreateSpotDatafeedSubscriptionInput) CreateSpotDatafeedSubscriptionRequest
+	Input *types.CreateSpotDatafeedSubscriptionInput
+	Copy  func(*types.CreateSpotDatafeedSubscriptionInput) CreateSpotDatafeedSubscriptionRequest
 }
 
 // Send marshals and sends the CreateSpotDatafeedSubscription API request.
@@ -110,7 +59,7 @@ func (r CreateSpotDatafeedSubscriptionRequest) Send(ctx context.Context) (*Creat
 	}
 
 	resp := &CreateSpotDatafeedSubscriptionResponse{
-		CreateSpotDatafeedSubscriptionOutput: r.Request.Data.(*CreateSpotDatafeedSubscriptionOutput),
+		CreateSpotDatafeedSubscriptionOutput: r.Request.Data.(*types.CreateSpotDatafeedSubscriptionOutput),
 		response:                             &aws.Response{Request: r.Request},
 	}
 
@@ -120,7 +69,7 @@ func (r CreateSpotDatafeedSubscriptionRequest) Send(ctx context.Context) (*Creat
 // CreateSpotDatafeedSubscriptionResponse is the response type for the
 // CreateSpotDatafeedSubscription API operation.
 type CreateSpotDatafeedSubscriptionResponse struct {
-	*CreateSpotDatafeedSubscriptionOutput
+	*types.CreateSpotDatafeedSubscriptionOutput
 
 	response *aws.Response
 }

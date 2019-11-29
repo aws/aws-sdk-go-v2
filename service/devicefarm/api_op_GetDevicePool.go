@@ -6,53 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/devicefarm/types"
 )
-
-// Represents a request to the get device pool operation.
-type GetDevicePoolInput struct {
-	_ struct{} `type:"structure"`
-
-	// The device pool's ARN.
-	//
-	// Arn is a required field
-	Arn *string `locationName:"arn" min:"32" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetDevicePoolInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetDevicePoolInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetDevicePoolInput"}
-
-	if s.Arn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Arn"))
-	}
-	if s.Arn != nil && len(*s.Arn) < 32 {
-		invalidParams.Add(aws.NewErrParamMinLen("Arn", 32))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Represents the result of a get device pool request.
-type GetDevicePoolOutput struct {
-	_ struct{} `type:"structure"`
-
-	// An object containing information about the requested device pool.
-	DevicePool *DevicePool `locationName:"devicePool" type:"structure"`
-}
-
-// String returns the string representation
-func (s GetDevicePoolOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetDevicePool = "GetDevicePool"
 
@@ -69,7 +24,7 @@ const opGetDevicePool = "GetDevicePool"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/GetDevicePool
-func (c *Client) GetDevicePoolRequest(input *GetDevicePoolInput) GetDevicePoolRequest {
+func (c *Client) GetDevicePoolRequest(input *types.GetDevicePoolInput) GetDevicePoolRequest {
 	op := &aws.Operation{
 		Name:       opGetDevicePool,
 		HTTPMethod: "POST",
@@ -77,10 +32,10 @@ func (c *Client) GetDevicePoolRequest(input *GetDevicePoolInput) GetDevicePoolRe
 	}
 
 	if input == nil {
-		input = &GetDevicePoolInput{}
+		input = &types.GetDevicePoolInput{}
 	}
 
-	req := c.newRequest(op, input, &GetDevicePoolOutput{})
+	req := c.newRequest(op, input, &types.GetDevicePoolOutput{})
 	return GetDevicePoolRequest{Request: req, Input: input, Copy: c.GetDevicePoolRequest}
 }
 
@@ -88,8 +43,8 @@ func (c *Client) GetDevicePoolRequest(input *GetDevicePoolInput) GetDevicePoolRe
 // GetDevicePool API operation.
 type GetDevicePoolRequest struct {
 	*aws.Request
-	Input *GetDevicePoolInput
-	Copy  func(*GetDevicePoolInput) GetDevicePoolRequest
+	Input *types.GetDevicePoolInput
+	Copy  func(*types.GetDevicePoolInput) GetDevicePoolRequest
 }
 
 // Send marshals and sends the GetDevicePool API request.
@@ -101,7 +56,7 @@ func (r GetDevicePoolRequest) Send(ctx context.Context) (*GetDevicePoolResponse,
 	}
 
 	resp := &GetDevicePoolResponse{
-		GetDevicePoolOutput: r.Request.Data.(*GetDevicePoolOutput),
+		GetDevicePoolOutput: r.Request.Data.(*types.GetDevicePoolOutput),
 		response:            &aws.Response{Request: r.Request},
 	}
 
@@ -111,7 +66,7 @@ func (r GetDevicePoolRequest) Send(ctx context.Context) (*GetDevicePoolResponse,
 // GetDevicePoolResponse is the response type for the
 // GetDevicePool API operation.
 type GetDevicePoolResponse struct {
-	*GetDevicePoolOutput
+	*types.GetDevicePoolOutput
 
 	response *aws.Response
 }

@@ -6,51 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/transcribe/types"
 )
-
-type GetTranscriptionJobInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the job.
-	//
-	// TranscriptionJobName is a required field
-	TranscriptionJobName *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetTranscriptionJobInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetTranscriptionJobInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetTranscriptionJobInput"}
-
-	if s.TranscriptionJobName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("TranscriptionJobName"))
-	}
-	if s.TranscriptionJobName != nil && len(*s.TranscriptionJobName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("TranscriptionJobName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type GetTranscriptionJobOutput struct {
-	_ struct{} `type:"structure"`
-
-	// An object that contains the results of the transcription job.
-	TranscriptionJob *TranscriptionJob `type:"structure"`
-}
-
-// String returns the string representation
-func (s GetTranscriptionJobOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetTranscriptionJob = "GetTranscriptionJob"
 
@@ -70,7 +27,7 @@ const opGetTranscriptionJob = "GetTranscriptionJob"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/GetTranscriptionJob
-func (c *Client) GetTranscriptionJobRequest(input *GetTranscriptionJobInput) GetTranscriptionJobRequest {
+func (c *Client) GetTranscriptionJobRequest(input *types.GetTranscriptionJobInput) GetTranscriptionJobRequest {
 	op := &aws.Operation{
 		Name:       opGetTranscriptionJob,
 		HTTPMethod: "POST",
@@ -78,10 +35,10 @@ func (c *Client) GetTranscriptionJobRequest(input *GetTranscriptionJobInput) Get
 	}
 
 	if input == nil {
-		input = &GetTranscriptionJobInput{}
+		input = &types.GetTranscriptionJobInput{}
 	}
 
-	req := c.newRequest(op, input, &GetTranscriptionJobOutput{})
+	req := c.newRequest(op, input, &types.GetTranscriptionJobOutput{})
 	return GetTranscriptionJobRequest{Request: req, Input: input, Copy: c.GetTranscriptionJobRequest}
 }
 
@@ -89,8 +46,8 @@ func (c *Client) GetTranscriptionJobRequest(input *GetTranscriptionJobInput) Get
 // GetTranscriptionJob API operation.
 type GetTranscriptionJobRequest struct {
 	*aws.Request
-	Input *GetTranscriptionJobInput
-	Copy  func(*GetTranscriptionJobInput) GetTranscriptionJobRequest
+	Input *types.GetTranscriptionJobInput
+	Copy  func(*types.GetTranscriptionJobInput) GetTranscriptionJobRequest
 }
 
 // Send marshals and sends the GetTranscriptionJob API request.
@@ -102,7 +59,7 @@ func (r GetTranscriptionJobRequest) Send(ctx context.Context) (*GetTranscription
 	}
 
 	resp := &GetTranscriptionJobResponse{
-		GetTranscriptionJobOutput: r.Request.Data.(*GetTranscriptionJobOutput),
+		GetTranscriptionJobOutput: r.Request.Data.(*types.GetTranscriptionJobOutput),
 		response:                  &aws.Response{Request: r.Request},
 	}
 
@@ -112,7 +69,7 @@ func (r GetTranscriptionJobRequest) Send(ctx context.Context) (*GetTranscription
 // GetTranscriptionJobResponse is the response type for the
 // GetTranscriptionJob API operation.
 type GetTranscriptionJobResponse struct {
-	*GetTranscriptionJobOutput
+	*types.GetTranscriptionJobOutput
 
 	response *aws.Response
 }

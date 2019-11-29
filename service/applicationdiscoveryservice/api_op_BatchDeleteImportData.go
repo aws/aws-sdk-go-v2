@@ -6,52 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/applicationdiscoveryservice/types"
 )
-
-type BatchDeleteImportDataInput struct {
-	_ struct{} `type:"structure"`
-
-	// The IDs for the import tasks that you want to delete.
-	//
-	// ImportTaskIds is a required field
-	ImportTaskIds []string `locationName:"importTaskIds" min:"1" type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s BatchDeleteImportDataInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *BatchDeleteImportDataInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "BatchDeleteImportDataInput"}
-
-	if s.ImportTaskIds == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ImportTaskIds"))
-	}
-	if s.ImportTaskIds != nil && len(s.ImportTaskIds) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ImportTaskIds", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type BatchDeleteImportDataOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Error messages returned for each import task that you deleted as a response
-	// for this command.
-	Errors []BatchDeleteImportDataError `locationName:"errors" type:"list"`
-}
-
-// String returns the string representation
-func (s BatchDeleteImportDataOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opBatchDeleteImportData = "BatchDeleteImportData"
 
@@ -76,7 +32,7 @@ const opBatchDeleteImportData = "BatchDeleteImportData"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/discovery-2015-11-01/BatchDeleteImportData
-func (c *Client) BatchDeleteImportDataRequest(input *BatchDeleteImportDataInput) BatchDeleteImportDataRequest {
+func (c *Client) BatchDeleteImportDataRequest(input *types.BatchDeleteImportDataInput) BatchDeleteImportDataRequest {
 	op := &aws.Operation{
 		Name:       opBatchDeleteImportData,
 		HTTPMethod: "POST",
@@ -84,10 +40,10 @@ func (c *Client) BatchDeleteImportDataRequest(input *BatchDeleteImportDataInput)
 	}
 
 	if input == nil {
-		input = &BatchDeleteImportDataInput{}
+		input = &types.BatchDeleteImportDataInput{}
 	}
 
-	req := c.newRequest(op, input, &BatchDeleteImportDataOutput{})
+	req := c.newRequest(op, input, &types.BatchDeleteImportDataOutput{})
 	return BatchDeleteImportDataRequest{Request: req, Input: input, Copy: c.BatchDeleteImportDataRequest}
 }
 
@@ -95,8 +51,8 @@ func (c *Client) BatchDeleteImportDataRequest(input *BatchDeleteImportDataInput)
 // BatchDeleteImportData API operation.
 type BatchDeleteImportDataRequest struct {
 	*aws.Request
-	Input *BatchDeleteImportDataInput
-	Copy  func(*BatchDeleteImportDataInput) BatchDeleteImportDataRequest
+	Input *types.BatchDeleteImportDataInput
+	Copy  func(*types.BatchDeleteImportDataInput) BatchDeleteImportDataRequest
 }
 
 // Send marshals and sends the BatchDeleteImportData API request.
@@ -108,7 +64,7 @@ func (r BatchDeleteImportDataRequest) Send(ctx context.Context) (*BatchDeleteImp
 	}
 
 	resp := &BatchDeleteImportDataResponse{
-		BatchDeleteImportDataOutput: r.Request.Data.(*BatchDeleteImportDataOutput),
+		BatchDeleteImportDataOutput: r.Request.Data.(*types.BatchDeleteImportDataOutput),
 		response:                    &aws.Response{Request: r.Request},
 	}
 
@@ -118,7 +74,7 @@ func (r BatchDeleteImportDataRequest) Send(ctx context.Context) (*BatchDeleteImp
 // BatchDeleteImportDataResponse is the response type for the
 // BatchDeleteImportData API operation.
 type BatchDeleteImportDataResponse struct {
-	*BatchDeleteImportDataOutput
+	*types.BatchDeleteImportDataOutput
 
 	response *aws.Response
 }

@@ -6,88 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/elastictranscoder/types"
 )
-
-// The ListPresetsRequest structure.
-type ListPresetsInput struct {
-	_ struct{} `type:"structure"`
-
-	// To list presets in chronological order by the date and time that they were
-	// created, enter true. To list presets in reverse chronological order, enter
-	// false.
-	Ascending *string `location:"querystring" locationName:"Ascending" type:"string"`
-
-	// When Elastic Transcoder returns more than one page of results, use pageToken
-	// in subsequent GET requests to get each successive page of results.
-	PageToken *string `location:"querystring" locationName:"PageToken" type:"string"`
-}
-
-// String returns the string representation
-func (s ListPresetsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListPresetsInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.Ascending != nil {
-		v := *s.Ascending
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "Ascending", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.PageToken != nil {
-		v := *s.PageToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "PageToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-// The ListPresetsResponse structure.
-type ListPresetsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A value that you use to access the second and subsequent pages of results,
-	// if any. When the presets fit on one page or when you've reached the last
-	// page of results, the value of NextPageToken is null.
-	NextPageToken *string `type:"string"`
-
-	// An array of Preset objects.
-	Presets []Preset `type:"list"`
-}
-
-// String returns the string representation
-func (s ListPresetsOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListPresetsOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.NextPageToken != nil {
-		v := *s.NextPageToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "NextPageToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Presets != nil {
-		v := s.Presets
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "Presets", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	return nil
-}
 
 const opListPresets = "ListPresets"
 
@@ -103,7 +23,7 @@ const opListPresets = "ListPresets"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) ListPresetsRequest(input *ListPresetsInput) ListPresetsRequest {
+func (c *Client) ListPresetsRequest(input *types.ListPresetsInput) ListPresetsRequest {
 	op := &aws.Operation{
 		Name:       opListPresets,
 		HTTPMethod: "GET",
@@ -117,10 +37,10 @@ func (c *Client) ListPresetsRequest(input *ListPresetsInput) ListPresetsRequest 
 	}
 
 	if input == nil {
-		input = &ListPresetsInput{}
+		input = &types.ListPresetsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListPresetsOutput{})
+	req := c.newRequest(op, input, &types.ListPresetsOutput{})
 	return ListPresetsRequest{Request: req, Input: input, Copy: c.ListPresetsRequest}
 }
 
@@ -128,8 +48,8 @@ func (c *Client) ListPresetsRequest(input *ListPresetsInput) ListPresetsRequest 
 // ListPresets API operation.
 type ListPresetsRequest struct {
 	*aws.Request
-	Input *ListPresetsInput
-	Copy  func(*ListPresetsInput) ListPresetsRequest
+	Input *types.ListPresetsInput
+	Copy  func(*types.ListPresetsInput) ListPresetsRequest
 }
 
 // Send marshals and sends the ListPresets API request.
@@ -141,7 +61,7 @@ func (r ListPresetsRequest) Send(ctx context.Context) (*ListPresetsResponse, err
 	}
 
 	resp := &ListPresetsResponse{
-		ListPresetsOutput: r.Request.Data.(*ListPresetsOutput),
+		ListPresetsOutput: r.Request.Data.(*types.ListPresetsOutput),
 		response:          &aws.Response{Request: r.Request},
 	}
 
@@ -171,7 +91,7 @@ func NewListPresetsPaginator(req ListPresetsRequest) ListPresetsPaginator {
 	return ListPresetsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListPresetsInput
+				var inCpy *types.ListPresetsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -191,14 +111,14 @@ type ListPresetsPaginator struct {
 	aws.Pager
 }
 
-func (p *ListPresetsPaginator) CurrentPage() *ListPresetsOutput {
-	return p.Pager.CurrentPage().(*ListPresetsOutput)
+func (p *ListPresetsPaginator) CurrentPage() *types.ListPresetsOutput {
+	return p.Pager.CurrentPage().(*types.ListPresetsOutput)
 }
 
 // ListPresetsResponse is the response type for the
 // ListPresets API operation.
 type ListPresetsResponse struct {
-	*ListPresetsOutput
+	*types.ListPresetsOutput
 
 	response *aws.Response
 }

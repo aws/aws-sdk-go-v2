@@ -6,60 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/codecommit/types"
 )
-
-type UpdatePullRequestDescriptionInput struct {
-	_ struct{} `type:"structure"`
-
-	// The updated content of the description for the pull request. This content
-	// will replace the existing description.
-	//
-	// Description is a required field
-	Description *string `locationName:"description" type:"string" required:"true"`
-
-	// The system-generated ID of the pull request. To get this ID, use ListPullRequests.
-	//
-	// PullRequestId is a required field
-	PullRequestId *string `locationName:"pullRequestId" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s UpdatePullRequestDescriptionInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdatePullRequestDescriptionInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdatePullRequestDescriptionInput"}
-
-	if s.Description == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Description"))
-	}
-
-	if s.PullRequestId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("PullRequestId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type UpdatePullRequestDescriptionOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Information about the updated pull request.
-	//
-	// PullRequest is a required field
-	PullRequest *PullRequest `locationName:"pullRequest" type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s UpdatePullRequestDescriptionOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opUpdatePullRequestDescription = "UpdatePullRequestDescription"
 
@@ -76,7 +24,7 @@ const opUpdatePullRequestDescription = "UpdatePullRequestDescription"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/UpdatePullRequestDescription
-func (c *Client) UpdatePullRequestDescriptionRequest(input *UpdatePullRequestDescriptionInput) UpdatePullRequestDescriptionRequest {
+func (c *Client) UpdatePullRequestDescriptionRequest(input *types.UpdatePullRequestDescriptionInput) UpdatePullRequestDescriptionRequest {
 	op := &aws.Operation{
 		Name:       opUpdatePullRequestDescription,
 		HTTPMethod: "POST",
@@ -84,10 +32,10 @@ func (c *Client) UpdatePullRequestDescriptionRequest(input *UpdatePullRequestDes
 	}
 
 	if input == nil {
-		input = &UpdatePullRequestDescriptionInput{}
+		input = &types.UpdatePullRequestDescriptionInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdatePullRequestDescriptionOutput{})
+	req := c.newRequest(op, input, &types.UpdatePullRequestDescriptionOutput{})
 	return UpdatePullRequestDescriptionRequest{Request: req, Input: input, Copy: c.UpdatePullRequestDescriptionRequest}
 }
 
@@ -95,8 +43,8 @@ func (c *Client) UpdatePullRequestDescriptionRequest(input *UpdatePullRequestDes
 // UpdatePullRequestDescription API operation.
 type UpdatePullRequestDescriptionRequest struct {
 	*aws.Request
-	Input *UpdatePullRequestDescriptionInput
-	Copy  func(*UpdatePullRequestDescriptionInput) UpdatePullRequestDescriptionRequest
+	Input *types.UpdatePullRequestDescriptionInput
+	Copy  func(*types.UpdatePullRequestDescriptionInput) UpdatePullRequestDescriptionRequest
 }
 
 // Send marshals and sends the UpdatePullRequestDescription API request.
@@ -108,7 +56,7 @@ func (r UpdatePullRequestDescriptionRequest) Send(ctx context.Context) (*UpdateP
 	}
 
 	resp := &UpdatePullRequestDescriptionResponse{
-		UpdatePullRequestDescriptionOutput: r.Request.Data.(*UpdatePullRequestDescriptionOutput),
+		UpdatePullRequestDescriptionOutput: r.Request.Data.(*types.UpdatePullRequestDescriptionOutput),
 		response:                           &aws.Response{Request: r.Request},
 	}
 
@@ -118,7 +66,7 @@ func (r UpdatePullRequestDescriptionRequest) Send(ctx context.Context) (*UpdateP
 // UpdatePullRequestDescriptionResponse is the response type for the
 // UpdatePullRequestDescription API operation.
 type UpdatePullRequestDescriptionResponse struct {
-	*UpdatePullRequestDescriptionOutput
+	*types.UpdatePullRequestDescriptionOutput
 
 	response *aws.Response
 }

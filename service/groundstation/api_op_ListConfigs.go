@@ -6,77 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/groundstation/types"
 )
-
-type ListConfigsInput struct {
-	_ struct{} `type:"structure"`
-
-	MaxResults *int64 `location:"querystring" locationName:"maxResults" type:"integer"`
-
-	NextToken *string `location:"querystring" locationName:"nextToken" type:"string"`
-}
-
-// String returns the string representation
-func (s ListConfigsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListConfigsInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.MaxResults != nil {
-		v := *s.MaxResults
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "maxResults", protocol.Int64Value(v), metadata)
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type ListConfigsOutput struct {
-	_ struct{} `type:"structure"`
-
-	ConfigList []ConfigListItem `locationName:"configList" type:"list"`
-
-	NextToken *string `locationName:"nextToken" type:"string"`
-}
-
-// String returns the string representation
-func (s ListConfigsOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListConfigsOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.ConfigList != nil {
-		v := s.ConfigList
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "configList", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opListConfigs = "ListConfigs"
 
@@ -93,7 +24,7 @@ const opListConfigs = "ListConfigs"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/groundstation-2019-05-23/ListConfigs
-func (c *Client) ListConfigsRequest(input *ListConfigsInput) ListConfigsRequest {
+func (c *Client) ListConfigsRequest(input *types.ListConfigsInput) ListConfigsRequest {
 	op := &aws.Operation{
 		Name:       opListConfigs,
 		HTTPMethod: "GET",
@@ -107,10 +38,10 @@ func (c *Client) ListConfigsRequest(input *ListConfigsInput) ListConfigsRequest 
 	}
 
 	if input == nil {
-		input = &ListConfigsInput{}
+		input = &types.ListConfigsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListConfigsOutput{})
+	req := c.newRequest(op, input, &types.ListConfigsOutput{})
 	return ListConfigsRequest{Request: req, Input: input, Copy: c.ListConfigsRequest}
 }
 
@@ -118,8 +49,8 @@ func (c *Client) ListConfigsRequest(input *ListConfigsInput) ListConfigsRequest 
 // ListConfigs API operation.
 type ListConfigsRequest struct {
 	*aws.Request
-	Input *ListConfigsInput
-	Copy  func(*ListConfigsInput) ListConfigsRequest
+	Input *types.ListConfigsInput
+	Copy  func(*types.ListConfigsInput) ListConfigsRequest
 }
 
 // Send marshals and sends the ListConfigs API request.
@@ -131,7 +62,7 @@ func (r ListConfigsRequest) Send(ctx context.Context) (*ListConfigsResponse, err
 	}
 
 	resp := &ListConfigsResponse{
-		ListConfigsOutput: r.Request.Data.(*ListConfigsOutput),
+		ListConfigsOutput: r.Request.Data.(*types.ListConfigsOutput),
 		response:          &aws.Response{Request: r.Request},
 	}
 
@@ -161,7 +92,7 @@ func NewListConfigsPaginator(req ListConfigsRequest) ListConfigsPaginator {
 	return ListConfigsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListConfigsInput
+				var inCpy *types.ListConfigsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -181,14 +112,14 @@ type ListConfigsPaginator struct {
 	aws.Pager
 }
 
-func (p *ListConfigsPaginator) CurrentPage() *ListConfigsOutput {
-	return p.Pager.CurrentPage().(*ListConfigsOutput)
+func (p *ListConfigsPaginator) CurrentPage() *types.ListConfigsOutput {
+	return p.Pager.CurrentPage().(*types.ListConfigsOutput)
 }
 
 // ListConfigsResponse is the response type for the
 // ListConfigs API operation.
 type ListConfigsResponse struct {
-	*ListConfigsOutput
+	*types.ListConfigsOutput
 
 	response *aws.Response
 }

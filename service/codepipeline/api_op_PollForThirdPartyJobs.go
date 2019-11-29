@@ -6,61 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/codepipeline/types"
 )
-
-// Represents the input of a PollForThirdPartyJobs action.
-type PollForThirdPartyJobsInput struct {
-	_ struct{} `type:"structure"`
-
-	// Represents information about an action type.
-	//
-	// ActionTypeId is a required field
-	ActionTypeId *ActionTypeId `locationName:"actionTypeId" type:"structure" required:"true"`
-
-	// The maximum number of jobs to return in a poll for jobs call.
-	MaxBatchSize *int64 `locationName:"maxBatchSize" min:"1" type:"integer"`
-}
-
-// String returns the string representation
-func (s PollForThirdPartyJobsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *PollForThirdPartyJobsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "PollForThirdPartyJobsInput"}
-
-	if s.ActionTypeId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ActionTypeId"))
-	}
-	if s.MaxBatchSize != nil && *s.MaxBatchSize < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxBatchSize", 1))
-	}
-	if s.ActionTypeId != nil {
-		if err := s.ActionTypeId.Validate(); err != nil {
-			invalidParams.AddNested("ActionTypeId", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Represents the output of a PollForThirdPartyJobs action.
-type PollForThirdPartyJobsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Information about the jobs to take action on.
-	Jobs []ThirdPartyJob `locationName:"jobs" type:"list"`
-}
-
-// String returns the string representation
-func (s PollForThirdPartyJobsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opPollForThirdPartyJobs = "PollForThirdPartyJobs"
 
@@ -82,7 +29,7 @@ const opPollForThirdPartyJobs = "PollForThirdPartyJobs"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/PollForThirdPartyJobs
-func (c *Client) PollForThirdPartyJobsRequest(input *PollForThirdPartyJobsInput) PollForThirdPartyJobsRequest {
+func (c *Client) PollForThirdPartyJobsRequest(input *types.PollForThirdPartyJobsInput) PollForThirdPartyJobsRequest {
 	op := &aws.Operation{
 		Name:       opPollForThirdPartyJobs,
 		HTTPMethod: "POST",
@@ -90,10 +37,10 @@ func (c *Client) PollForThirdPartyJobsRequest(input *PollForThirdPartyJobsInput)
 	}
 
 	if input == nil {
-		input = &PollForThirdPartyJobsInput{}
+		input = &types.PollForThirdPartyJobsInput{}
 	}
 
-	req := c.newRequest(op, input, &PollForThirdPartyJobsOutput{})
+	req := c.newRequest(op, input, &types.PollForThirdPartyJobsOutput{})
 	return PollForThirdPartyJobsRequest{Request: req, Input: input, Copy: c.PollForThirdPartyJobsRequest}
 }
 
@@ -101,8 +48,8 @@ func (c *Client) PollForThirdPartyJobsRequest(input *PollForThirdPartyJobsInput)
 // PollForThirdPartyJobs API operation.
 type PollForThirdPartyJobsRequest struct {
 	*aws.Request
-	Input *PollForThirdPartyJobsInput
-	Copy  func(*PollForThirdPartyJobsInput) PollForThirdPartyJobsRequest
+	Input *types.PollForThirdPartyJobsInput
+	Copy  func(*types.PollForThirdPartyJobsInput) PollForThirdPartyJobsRequest
 }
 
 // Send marshals and sends the PollForThirdPartyJobs API request.
@@ -114,7 +61,7 @@ func (r PollForThirdPartyJobsRequest) Send(ctx context.Context) (*PollForThirdPa
 	}
 
 	resp := &PollForThirdPartyJobsResponse{
-		PollForThirdPartyJobsOutput: r.Request.Data.(*PollForThirdPartyJobsOutput),
+		PollForThirdPartyJobsOutput: r.Request.Data.(*types.PollForThirdPartyJobsOutput),
 		response:                    &aws.Response{Request: r.Request},
 	}
 
@@ -124,7 +71,7 @@ func (r PollForThirdPartyJobsRequest) Send(ctx context.Context) (*PollForThirdPa
 // PollForThirdPartyJobsResponse is the response type for the
 // PollForThirdPartyJobs API operation.
 type PollForThirdPartyJobsResponse struct {
-	*PollForThirdPartyJobsOutput
+	*types.PollForThirdPartyJobsOutput
 
 	response *aws.Response
 }

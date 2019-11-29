@@ -6,45 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/comprehend/types"
 )
-
-type DeleteEntityRecognizerInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) that identifies the entity recognizer.
-	//
-	// EntityRecognizerArn is a required field
-	EntityRecognizerArn *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteEntityRecognizerInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteEntityRecognizerInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteEntityRecognizerInput"}
-
-	if s.EntityRecognizerArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("EntityRecognizerArn"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteEntityRecognizerOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteEntityRecognizerOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteEntityRecognizer = "DeleteEntityRecognizer"
 
@@ -69,7 +32,7 @@ const opDeleteEntityRecognizer = "DeleteEntityRecognizer"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/DeleteEntityRecognizer
-func (c *Client) DeleteEntityRecognizerRequest(input *DeleteEntityRecognizerInput) DeleteEntityRecognizerRequest {
+func (c *Client) DeleteEntityRecognizerRequest(input *types.DeleteEntityRecognizerInput) DeleteEntityRecognizerRequest {
 	op := &aws.Operation{
 		Name:       opDeleteEntityRecognizer,
 		HTTPMethod: "POST",
@@ -77,10 +40,10 @@ func (c *Client) DeleteEntityRecognizerRequest(input *DeleteEntityRecognizerInpu
 	}
 
 	if input == nil {
-		input = &DeleteEntityRecognizerInput{}
+		input = &types.DeleteEntityRecognizerInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteEntityRecognizerOutput{})
+	req := c.newRequest(op, input, &types.DeleteEntityRecognizerOutput{})
 	return DeleteEntityRecognizerRequest{Request: req, Input: input, Copy: c.DeleteEntityRecognizerRequest}
 }
 
@@ -88,8 +51,8 @@ func (c *Client) DeleteEntityRecognizerRequest(input *DeleteEntityRecognizerInpu
 // DeleteEntityRecognizer API operation.
 type DeleteEntityRecognizerRequest struct {
 	*aws.Request
-	Input *DeleteEntityRecognizerInput
-	Copy  func(*DeleteEntityRecognizerInput) DeleteEntityRecognizerRequest
+	Input *types.DeleteEntityRecognizerInput
+	Copy  func(*types.DeleteEntityRecognizerInput) DeleteEntityRecognizerRequest
 }
 
 // Send marshals and sends the DeleteEntityRecognizer API request.
@@ -101,7 +64,7 @@ func (r DeleteEntityRecognizerRequest) Send(ctx context.Context) (*DeleteEntityR
 	}
 
 	resp := &DeleteEntityRecognizerResponse{
-		DeleteEntityRecognizerOutput: r.Request.Data.(*DeleteEntityRecognizerOutput),
+		DeleteEntityRecognizerOutput: r.Request.Data.(*types.DeleteEntityRecognizerOutput),
 		response:                     &aws.Response{Request: r.Request},
 	}
 
@@ -111,7 +74,7 @@ func (r DeleteEntityRecognizerRequest) Send(ctx context.Context) (*DeleteEntityR
 // DeleteEntityRecognizerResponse is the response type for the
 // DeleteEntityRecognizer API operation.
 type DeleteEntityRecognizerResponse struct {
-	*DeleteEntityRecognizerOutput
+	*types.DeleteEntityRecognizerOutput
 
 	response *aws.Response
 }

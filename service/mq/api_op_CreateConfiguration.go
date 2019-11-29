@@ -4,123 +4,10 @@ package mq
 
 import (
 	"context"
-	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/mq/types"
 )
-
-type CreateConfigurationInput struct {
-	_ struct{} `type:"structure"`
-
-	// The type of broker engine. Note: Currently, Amazon MQ supports only ActiveMQ.
-	EngineType EngineType `locationName:"engineType" type:"string" enum:"true"`
-
-	EngineVersion *string `locationName:"engineVersion" type:"string"`
-
-	Name *string `locationName:"name" type:"string"`
-
-	Tags map[string]string `locationName:"tags" type:"map"`
-}
-
-// String returns the string representation
-func (s CreateConfigurationInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s CreateConfigurationInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if len(s.EngineType) > 0 {
-		v := s.EngineType
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "engineType", protocol.QuotedValue{ValueMarshaler: v}, metadata)
-	}
-	if s.EngineVersion != nil {
-		v := *s.EngineVersion
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "engineVersion", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Name != nil {
-		v := *s.Name
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Tags != nil {
-		v := s.Tags
-
-		metadata := protocol.Metadata{}
-		ms0 := e.Map(protocol.BodyTarget, "tags", metadata)
-		ms0.Start()
-		for k1, v1 := range v {
-			ms0.MapSetValue(k1, protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
-		}
-		ms0.End()
-
-	}
-	return nil
-}
-
-type CreateConfigurationOutput struct {
-	_ struct{} `type:"structure"`
-
-	Arn *string `locationName:"arn" type:"string"`
-
-	Created *time.Time `locationName:"created" type:"timestamp" timestampFormat:"iso8601"`
-
-	Id *string `locationName:"id" type:"string"`
-
-	// Returns information about the specified configuration revision.
-	LatestRevision *ConfigurationRevision `locationName:"latestRevision" type:"structure"`
-
-	Name *string `locationName:"name" type:"string"`
-}
-
-// String returns the string representation
-func (s CreateConfigurationOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s CreateConfigurationOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.Arn != nil {
-		v := *s.Arn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "arn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Created != nil {
-		v := *s.Created
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "created",
-			protocol.TimeValue{V: v, Format: "iso8601", QuotedFormatTime: true}, metadata)
-	}
-	if s.Id != nil {
-		v := *s.Id
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "id", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.LatestRevision != nil {
-		v := s.LatestRevision
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "latestRevision", v, metadata)
-	}
-	if s.Name != nil {
-		v := *s.Name
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opCreateConfiguration = "CreateConfiguration"
 
@@ -138,7 +25,7 @@ const opCreateConfiguration = "CreateConfiguration"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/CreateConfiguration
-func (c *Client) CreateConfigurationRequest(input *CreateConfigurationInput) CreateConfigurationRequest {
+func (c *Client) CreateConfigurationRequest(input *types.CreateConfigurationInput) CreateConfigurationRequest {
 	op := &aws.Operation{
 		Name:       opCreateConfiguration,
 		HTTPMethod: "POST",
@@ -146,10 +33,10 @@ func (c *Client) CreateConfigurationRequest(input *CreateConfigurationInput) Cre
 	}
 
 	if input == nil {
-		input = &CreateConfigurationInput{}
+		input = &types.CreateConfigurationInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateConfigurationOutput{})
+	req := c.newRequest(op, input, &types.CreateConfigurationOutput{})
 	return CreateConfigurationRequest{Request: req, Input: input, Copy: c.CreateConfigurationRequest}
 }
 
@@ -157,8 +44,8 @@ func (c *Client) CreateConfigurationRequest(input *CreateConfigurationInput) Cre
 // CreateConfiguration API operation.
 type CreateConfigurationRequest struct {
 	*aws.Request
-	Input *CreateConfigurationInput
-	Copy  func(*CreateConfigurationInput) CreateConfigurationRequest
+	Input *types.CreateConfigurationInput
+	Copy  func(*types.CreateConfigurationInput) CreateConfigurationRequest
 }
 
 // Send marshals and sends the CreateConfiguration API request.
@@ -170,7 +57,7 @@ func (r CreateConfigurationRequest) Send(ctx context.Context) (*CreateConfigurat
 	}
 
 	resp := &CreateConfigurationResponse{
-		CreateConfigurationOutput: r.Request.Data.(*CreateConfigurationOutput),
+		CreateConfigurationOutput: r.Request.Data.(*types.CreateConfigurationOutput),
 		response:                  &aws.Response{Request: r.Request},
 	}
 
@@ -180,7 +67,7 @@ func (r CreateConfigurationRequest) Send(ctx context.Context) (*CreateConfigurat
 // CreateConfigurationResponse is the response type for the
 // CreateConfiguration API operation.
 type CreateConfigurationResponse struct {
-	*CreateConfigurationOutput
+	*types.CreateConfigurationOutput
 
 	response *aws.Response
 }

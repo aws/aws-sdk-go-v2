@@ -4,170 +4,10 @@ package backup
 
 import (
 	"context"
-	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/backup/types"
 )
-
-type ListRecoveryPointsByBackupVaultInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of a logical container where backups are stored. Backup vaults are
-	// identified by names that are unique to the account used to create them and
-	// the AWS Region where they are created. They consist of lowercase letters,
-	// numbers, and hyphens.
-	//
-	// BackupVaultName is a required field
-	BackupVaultName *string `location:"uri" locationName:"backupVaultName" type:"string" required:"true"`
-
-	// Returns only recovery points that match the specified backup plan ID.
-	ByBackupPlanId *string `location:"querystring" locationName:"backupPlanId" type:"string"`
-
-	// Returns only recovery points that were created after the specified timestamp.
-	ByCreatedAfter *time.Time `location:"querystring" locationName:"createdAfter" type:"timestamp"`
-
-	// Returns only recovery points that were created before the specified timestamp.
-	ByCreatedBefore *time.Time `location:"querystring" locationName:"createdBefore" type:"timestamp"`
-
-	// Returns only recovery points that match the specified resource Amazon Resource
-	// Name (ARN).
-	ByResourceArn *string `location:"querystring" locationName:"resourceArn" type:"string"`
-
-	// Returns only recovery points that match the specified resource type.
-	ByResourceType *string `location:"querystring" locationName:"resourceType" type:"string"`
-
-	// The maximum number of items to be returned.
-	MaxResults *int64 `location:"querystring" locationName:"maxResults" min:"1" type:"integer"`
-
-	// The next item following a partial list of returned items. For example, if
-	// a request is made to return maxResults number of items, NextToken allows
-	// you to return more items in your list starting at the location pointed to
-	// by the next token.
-	NextToken *string `location:"querystring" locationName:"nextToken" type:"string"`
-}
-
-// String returns the string representation
-func (s ListRecoveryPointsByBackupVaultInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListRecoveryPointsByBackupVaultInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListRecoveryPointsByBackupVaultInput"}
-
-	if s.BackupVaultName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("BackupVaultName"))
-	}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListRecoveryPointsByBackupVaultInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.BackupVaultName != nil {
-		v := *s.BackupVaultName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "backupVaultName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.ByBackupPlanId != nil {
-		v := *s.ByBackupPlanId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "backupPlanId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.ByCreatedAfter != nil {
-		v := *s.ByCreatedAfter
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "createdAfter",
-			protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormatName, QuotedFormatTime: false}, metadata)
-	}
-	if s.ByCreatedBefore != nil {
-		v := *s.ByCreatedBefore
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "createdBefore",
-			protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormatName, QuotedFormatTime: false}, metadata)
-	}
-	if s.ByResourceArn != nil {
-		v := *s.ByResourceArn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "resourceArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.ByResourceType != nil {
-		v := *s.ByResourceType
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "resourceType", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.MaxResults != nil {
-		v := *s.MaxResults
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "maxResults", protocol.Int64Value(v), metadata)
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type ListRecoveryPointsByBackupVaultOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The next item following a partial list of returned items. For example, if
-	// a request is made to return maxResults number of items, NextToken allows
-	// you to return more items in your list starting at the location pointed to
-	// by the next token.
-	NextToken *string `type:"string"`
-
-	// An array of objects that contain detailed information about recovery points
-	// saved in a backup vault.
-	RecoveryPoints []RecoveryPointByBackupVault `type:"list"`
-}
-
-// String returns the string representation
-func (s ListRecoveryPointsByBackupVaultOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListRecoveryPointsByBackupVaultOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.RecoveryPoints != nil {
-		v := s.RecoveryPoints
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "RecoveryPoints", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	return nil
-}
 
 const opListRecoveryPointsByBackupVault = "ListRecoveryPointsByBackupVault"
 
@@ -185,7 +25,7 @@ const opListRecoveryPointsByBackupVault = "ListRecoveryPointsByBackupVault"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/ListRecoveryPointsByBackupVault
-func (c *Client) ListRecoveryPointsByBackupVaultRequest(input *ListRecoveryPointsByBackupVaultInput) ListRecoveryPointsByBackupVaultRequest {
+func (c *Client) ListRecoveryPointsByBackupVaultRequest(input *types.ListRecoveryPointsByBackupVaultInput) ListRecoveryPointsByBackupVaultRequest {
 	op := &aws.Operation{
 		Name:       opListRecoveryPointsByBackupVault,
 		HTTPMethod: "GET",
@@ -199,10 +39,10 @@ func (c *Client) ListRecoveryPointsByBackupVaultRequest(input *ListRecoveryPoint
 	}
 
 	if input == nil {
-		input = &ListRecoveryPointsByBackupVaultInput{}
+		input = &types.ListRecoveryPointsByBackupVaultInput{}
 	}
 
-	req := c.newRequest(op, input, &ListRecoveryPointsByBackupVaultOutput{})
+	req := c.newRequest(op, input, &types.ListRecoveryPointsByBackupVaultOutput{})
 	return ListRecoveryPointsByBackupVaultRequest{Request: req, Input: input, Copy: c.ListRecoveryPointsByBackupVaultRequest}
 }
 
@@ -210,8 +50,8 @@ func (c *Client) ListRecoveryPointsByBackupVaultRequest(input *ListRecoveryPoint
 // ListRecoveryPointsByBackupVault API operation.
 type ListRecoveryPointsByBackupVaultRequest struct {
 	*aws.Request
-	Input *ListRecoveryPointsByBackupVaultInput
-	Copy  func(*ListRecoveryPointsByBackupVaultInput) ListRecoveryPointsByBackupVaultRequest
+	Input *types.ListRecoveryPointsByBackupVaultInput
+	Copy  func(*types.ListRecoveryPointsByBackupVaultInput) ListRecoveryPointsByBackupVaultRequest
 }
 
 // Send marshals and sends the ListRecoveryPointsByBackupVault API request.
@@ -223,7 +63,7 @@ func (r ListRecoveryPointsByBackupVaultRequest) Send(ctx context.Context) (*List
 	}
 
 	resp := &ListRecoveryPointsByBackupVaultResponse{
-		ListRecoveryPointsByBackupVaultOutput: r.Request.Data.(*ListRecoveryPointsByBackupVaultOutput),
+		ListRecoveryPointsByBackupVaultOutput: r.Request.Data.(*types.ListRecoveryPointsByBackupVaultOutput),
 		response:                              &aws.Response{Request: r.Request},
 	}
 
@@ -253,7 +93,7 @@ func NewListRecoveryPointsByBackupVaultPaginator(req ListRecoveryPointsByBackupV
 	return ListRecoveryPointsByBackupVaultPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListRecoveryPointsByBackupVaultInput
+				var inCpy *types.ListRecoveryPointsByBackupVaultInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -273,14 +113,14 @@ type ListRecoveryPointsByBackupVaultPaginator struct {
 	aws.Pager
 }
 
-func (p *ListRecoveryPointsByBackupVaultPaginator) CurrentPage() *ListRecoveryPointsByBackupVaultOutput {
-	return p.Pager.CurrentPage().(*ListRecoveryPointsByBackupVaultOutput)
+func (p *ListRecoveryPointsByBackupVaultPaginator) CurrentPage() *types.ListRecoveryPointsByBackupVaultOutput {
+	return p.Pager.CurrentPage().(*types.ListRecoveryPointsByBackupVaultOutput)
 }
 
 // ListRecoveryPointsByBackupVaultResponse is the response type for the
 // ListRecoveryPointsByBackupVault API operation.
 type ListRecoveryPointsByBackupVaultResponse struct {
-	*ListRecoveryPointsByBackupVaultOutput
+	*types.ListRecoveryPointsByBackupVaultOutput
 
 	response *aws.Response
 }

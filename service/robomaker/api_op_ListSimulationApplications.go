@@ -4,151 +4,10 @@ package robomaker
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/robomaker/types"
 )
-
-type ListSimulationApplicationsInput struct {
-	_ struct{} `type:"structure"`
-
-	// Optional list of filters to limit results.
-	//
-	// The filter name name is supported. When filtering, you must use the complete
-	// value of the filtered item. You can use up to three filters.
-	Filters []Filter `locationName:"filters" min:"1" type:"list"`
-
-	// The maximum number of deployment job results returned by ListSimulationApplications
-	// in paginated output. When this parameter is used, ListSimulationApplications
-	// only returns maxResults results in a single page along with a nextToken response
-	// element. The remaining results of the initial request can be seen by sending
-	// another ListSimulationApplications request with the returned nextToken value.
-	// This value can be between 1 and 100. If this parameter is not used, then
-	// ListSimulationApplications returns up to 100 results and a nextToken value
-	// if applicable.
-	MaxResults *int64 `locationName:"maxResults" type:"integer"`
-
-	// The nextToken value returned from a previous paginated ListSimulationApplications
-	// request where maxResults was used and the results exceeded the value of that
-	// parameter. Pagination continues from the end of the previous results that
-	// returned the nextToken value.
-	//
-	// This token should be treated as an opaque identifier that is only used to
-	// retrieve the next items in a list and not for other programmatic purposes.
-	NextToken *string `locationName:"nextToken" min:"1" type:"string"`
-
-	// The version qualifier of the simulation application.
-	VersionQualifier *string `locationName:"versionQualifier" type:"string"`
-}
-
-// String returns the string representation
-func (s ListSimulationApplicationsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListSimulationApplicationsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListSimulationApplicationsInput"}
-	if s.Filters != nil && len(s.Filters) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Filters", 1))
-	}
-	if s.NextToken != nil && len(*s.NextToken) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
-	}
-	if s.Filters != nil {
-		for i, v := range s.Filters {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListSimulationApplicationsInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.Filters != nil {
-		v := s.Filters
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "filters", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	if s.MaxResults != nil {
-		v := *s.MaxResults
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "maxResults", protocol.Int64Value(v), metadata)
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.VersionQualifier != nil {
-		v := *s.VersionQualifier
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "versionQualifier", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type ListSimulationApplicationsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The nextToken value to include in a future ListSimulationApplications request.
-	// When the results of a ListRobot request exceed maxResults, this value can
-	// be used to retrieve the next page of results. This value is null when there
-	// are no more results to return.
-	NextToken *string `locationName:"nextToken" min:"1" type:"string"`
-
-	// A list of simulation application summaries that meet the criteria of the
-	// request.
-	SimulationApplicationSummaries []SimulationApplicationSummary `locationName:"simulationApplicationSummaries" type:"list"`
-}
-
-// String returns the string representation
-func (s ListSimulationApplicationsOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListSimulationApplicationsOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.SimulationApplicationSummaries != nil {
-		v := s.SimulationApplicationSummaries
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "simulationApplicationSummaries", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	return nil
-}
 
 const opListSimulationApplications = "ListSimulationApplications"
 
@@ -166,7 +25,7 @@ const opListSimulationApplications = "ListSimulationApplications"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/ListSimulationApplications
-func (c *Client) ListSimulationApplicationsRequest(input *ListSimulationApplicationsInput) ListSimulationApplicationsRequest {
+func (c *Client) ListSimulationApplicationsRequest(input *types.ListSimulationApplicationsInput) ListSimulationApplicationsRequest {
 	op := &aws.Operation{
 		Name:       opListSimulationApplications,
 		HTTPMethod: "POST",
@@ -180,10 +39,10 @@ func (c *Client) ListSimulationApplicationsRequest(input *ListSimulationApplicat
 	}
 
 	if input == nil {
-		input = &ListSimulationApplicationsInput{}
+		input = &types.ListSimulationApplicationsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListSimulationApplicationsOutput{})
+	req := c.newRequest(op, input, &types.ListSimulationApplicationsOutput{})
 	return ListSimulationApplicationsRequest{Request: req, Input: input, Copy: c.ListSimulationApplicationsRequest}
 }
 
@@ -191,8 +50,8 @@ func (c *Client) ListSimulationApplicationsRequest(input *ListSimulationApplicat
 // ListSimulationApplications API operation.
 type ListSimulationApplicationsRequest struct {
 	*aws.Request
-	Input *ListSimulationApplicationsInput
-	Copy  func(*ListSimulationApplicationsInput) ListSimulationApplicationsRequest
+	Input *types.ListSimulationApplicationsInput
+	Copy  func(*types.ListSimulationApplicationsInput) ListSimulationApplicationsRequest
 }
 
 // Send marshals and sends the ListSimulationApplications API request.
@@ -204,7 +63,7 @@ func (r ListSimulationApplicationsRequest) Send(ctx context.Context) (*ListSimul
 	}
 
 	resp := &ListSimulationApplicationsResponse{
-		ListSimulationApplicationsOutput: r.Request.Data.(*ListSimulationApplicationsOutput),
+		ListSimulationApplicationsOutput: r.Request.Data.(*types.ListSimulationApplicationsOutput),
 		response:                         &aws.Response{Request: r.Request},
 	}
 
@@ -234,7 +93,7 @@ func NewListSimulationApplicationsPaginator(req ListSimulationApplicationsReques
 	return ListSimulationApplicationsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListSimulationApplicationsInput
+				var inCpy *types.ListSimulationApplicationsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -254,14 +113,14 @@ type ListSimulationApplicationsPaginator struct {
 	aws.Pager
 }
 
-func (p *ListSimulationApplicationsPaginator) CurrentPage() *ListSimulationApplicationsOutput {
-	return p.Pager.CurrentPage().(*ListSimulationApplicationsOutput)
+func (p *ListSimulationApplicationsPaginator) CurrentPage() *types.ListSimulationApplicationsOutput {
+	return p.Pager.CurrentPage().(*types.ListSimulationApplicationsOutput)
 }
 
 // ListSimulationApplicationsResponse is the response type for the
 // ListSimulationApplications API operation.
 type ListSimulationApplicationsResponse struct {
-	*ListSimulationApplicationsOutput
+	*types.ListSimulationApplicationsOutput
 
 	response *aws.Response
 }

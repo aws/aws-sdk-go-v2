@@ -6,71 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/configservice/types"
 )
-
-type PutOrganizationConfigRuleInput struct {
-	_ struct{} `type:"structure"`
-
-	// A comma-separated list of accounts that you want to exclude from an organization
-	// config rule.
-	ExcludedAccounts []string `type:"list"`
-
-	// The name that you assign to an organization config rule.
-	//
-	// OrganizationConfigRuleName is a required field
-	OrganizationConfigRuleName *string `min:"1" type:"string" required:"true"`
-
-	// An OrganizationCustomRuleMetadata object.
-	OrganizationCustomRuleMetadata *OrganizationCustomRuleMetadata `type:"structure"`
-
-	// An OrganizationManagedRuleMetadata object.
-	OrganizationManagedRuleMetadata *OrganizationManagedRuleMetadata `type:"structure"`
-}
-
-// String returns the string representation
-func (s PutOrganizationConfigRuleInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *PutOrganizationConfigRuleInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "PutOrganizationConfigRuleInput"}
-
-	if s.OrganizationConfigRuleName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("OrganizationConfigRuleName"))
-	}
-	if s.OrganizationConfigRuleName != nil && len(*s.OrganizationConfigRuleName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("OrganizationConfigRuleName", 1))
-	}
-	if s.OrganizationCustomRuleMetadata != nil {
-		if err := s.OrganizationCustomRuleMetadata.Validate(); err != nil {
-			invalidParams.AddNested("OrganizationCustomRuleMetadata", err.(aws.ErrInvalidParams))
-		}
-	}
-	if s.OrganizationManagedRuleMetadata != nil {
-		if err := s.OrganizationManagedRuleMetadata.Validate(); err != nil {
-			invalidParams.AddNested("OrganizationManagedRuleMetadata", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type PutOrganizationConfigRuleOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of an organization config rule.
-	OrganizationConfigRuleArn *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s PutOrganizationConfigRuleOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opPutOrganizationConfigRule = "PutOrganizationConfigRule"
 
@@ -108,7 +45,7 @@ const opPutOrganizationConfigRule = "PutOrganizationConfigRule"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/PutOrganizationConfigRule
-func (c *Client) PutOrganizationConfigRuleRequest(input *PutOrganizationConfigRuleInput) PutOrganizationConfigRuleRequest {
+func (c *Client) PutOrganizationConfigRuleRequest(input *types.PutOrganizationConfigRuleInput) PutOrganizationConfigRuleRequest {
 	op := &aws.Operation{
 		Name:       opPutOrganizationConfigRule,
 		HTTPMethod: "POST",
@@ -116,10 +53,10 @@ func (c *Client) PutOrganizationConfigRuleRequest(input *PutOrganizationConfigRu
 	}
 
 	if input == nil {
-		input = &PutOrganizationConfigRuleInput{}
+		input = &types.PutOrganizationConfigRuleInput{}
 	}
 
-	req := c.newRequest(op, input, &PutOrganizationConfigRuleOutput{})
+	req := c.newRequest(op, input, &types.PutOrganizationConfigRuleOutput{})
 	return PutOrganizationConfigRuleRequest{Request: req, Input: input, Copy: c.PutOrganizationConfigRuleRequest}
 }
 
@@ -127,8 +64,8 @@ func (c *Client) PutOrganizationConfigRuleRequest(input *PutOrganizationConfigRu
 // PutOrganizationConfigRule API operation.
 type PutOrganizationConfigRuleRequest struct {
 	*aws.Request
-	Input *PutOrganizationConfigRuleInput
-	Copy  func(*PutOrganizationConfigRuleInput) PutOrganizationConfigRuleRequest
+	Input *types.PutOrganizationConfigRuleInput
+	Copy  func(*types.PutOrganizationConfigRuleInput) PutOrganizationConfigRuleRequest
 }
 
 // Send marshals and sends the PutOrganizationConfigRule API request.
@@ -140,7 +77,7 @@ func (r PutOrganizationConfigRuleRequest) Send(ctx context.Context) (*PutOrganiz
 	}
 
 	resp := &PutOrganizationConfigRuleResponse{
-		PutOrganizationConfigRuleOutput: r.Request.Data.(*PutOrganizationConfigRuleOutput),
+		PutOrganizationConfigRuleOutput: r.Request.Data.(*types.PutOrganizationConfigRuleOutput),
 		response:                        &aws.Response{Request: r.Request},
 	}
 
@@ -150,7 +87,7 @@ func (r PutOrganizationConfigRuleRequest) Send(ctx context.Context) (*PutOrganiz
 // PutOrganizationConfigRuleResponse is the response type for the
 // PutOrganizationConfigRule API operation.
 type PutOrganizationConfigRuleResponse struct {
-	*PutOrganizationConfigRuleOutput
+	*types.PutOrganizationConfigRuleOutput
 
 	response *aws.Response
 }

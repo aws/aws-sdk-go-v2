@@ -6,95 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/iot/types"
 )
-
-type ListScheduledAuditsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The maximum number of results to return at one time. The default is 25.
-	MaxResults *int64 `location:"querystring" locationName:"maxResults" min:"1" type:"integer"`
-
-	// The token for the next set of results.
-	NextToken *string `location:"querystring" locationName:"nextToken" type:"string"`
-}
-
-// String returns the string representation
-func (s ListScheduledAuditsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListScheduledAuditsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListScheduledAuditsInput"}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListScheduledAuditsInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.MaxResults != nil {
-		v := *s.MaxResults
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "maxResults", protocol.Int64Value(v), metadata)
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type ListScheduledAuditsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A token that can be used to retrieve the next set of results, or null if
-	// there are no additional results.
-	NextToken *string `locationName:"nextToken" type:"string"`
-
-	// The list of scheduled audits.
-	ScheduledAudits []ScheduledAuditMetadata `locationName:"scheduledAudits" type:"list"`
-}
-
-// String returns the string representation
-func (s ListScheduledAuditsOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListScheduledAuditsOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.ScheduledAudits != nil {
-		v := s.ScheduledAudits
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "scheduledAudits", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	return nil
-}
 
 const opListScheduledAudits = "ListScheduledAudits"
 
@@ -109,7 +22,7 @@ const opListScheduledAudits = "ListScheduledAudits"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) ListScheduledAuditsRequest(input *ListScheduledAuditsInput) ListScheduledAuditsRequest {
+func (c *Client) ListScheduledAuditsRequest(input *types.ListScheduledAuditsInput) ListScheduledAuditsRequest {
 	op := &aws.Operation{
 		Name:       opListScheduledAudits,
 		HTTPMethod: "GET",
@@ -117,10 +30,10 @@ func (c *Client) ListScheduledAuditsRequest(input *ListScheduledAuditsInput) Lis
 	}
 
 	if input == nil {
-		input = &ListScheduledAuditsInput{}
+		input = &types.ListScheduledAuditsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListScheduledAuditsOutput{})
+	req := c.newRequest(op, input, &types.ListScheduledAuditsOutput{})
 	return ListScheduledAuditsRequest{Request: req, Input: input, Copy: c.ListScheduledAuditsRequest}
 }
 
@@ -128,8 +41,8 @@ func (c *Client) ListScheduledAuditsRequest(input *ListScheduledAuditsInput) Lis
 // ListScheduledAudits API operation.
 type ListScheduledAuditsRequest struct {
 	*aws.Request
-	Input *ListScheduledAuditsInput
-	Copy  func(*ListScheduledAuditsInput) ListScheduledAuditsRequest
+	Input *types.ListScheduledAuditsInput
+	Copy  func(*types.ListScheduledAuditsInput) ListScheduledAuditsRequest
 }
 
 // Send marshals and sends the ListScheduledAudits API request.
@@ -141,7 +54,7 @@ func (r ListScheduledAuditsRequest) Send(ctx context.Context) (*ListScheduledAud
 	}
 
 	resp := &ListScheduledAuditsResponse{
-		ListScheduledAuditsOutput: r.Request.Data.(*ListScheduledAuditsOutput),
+		ListScheduledAuditsOutput: r.Request.Data.(*types.ListScheduledAuditsOutput),
 		response:                  &aws.Response{Request: r.Request},
 	}
 
@@ -151,7 +64,7 @@ func (r ListScheduledAuditsRequest) Send(ctx context.Context) (*ListScheduledAud
 // ListScheduledAuditsResponse is the response type for the
 // ListScheduledAudits API operation.
 type ListScheduledAuditsResponse struct {
-	*ListScheduledAuditsOutput
+	*types.ListScheduledAuditsOutput
 
 	response *aws.Response
 }

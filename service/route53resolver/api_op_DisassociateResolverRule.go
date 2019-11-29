@@ -6,65 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/route53resolver/types"
 )
-
-type DisassociateResolverRuleInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the resolver rule that you want to disassociate from the specified
-	// VPC.
-	//
-	// ResolverRuleId is a required field
-	ResolverRuleId *string `min:"1" type:"string" required:"true"`
-
-	// The ID of the VPC that you want to disassociate the resolver rule from.
-	//
-	// VPCId is a required field
-	VPCId *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DisassociateResolverRuleInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DisassociateResolverRuleInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DisassociateResolverRuleInput"}
-
-	if s.ResolverRuleId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ResolverRuleId"))
-	}
-	if s.ResolverRuleId != nil && len(*s.ResolverRuleId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ResolverRuleId", 1))
-	}
-
-	if s.VPCId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("VPCId"))
-	}
-	if s.VPCId != nil && len(*s.VPCId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("VPCId", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DisassociateResolverRuleOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Information about the DisassociateResolverRule request, including the status
-	// of the request.
-	ResolverRuleAssociation *ResolverRuleAssociation `type:"structure"`
-}
-
-// String returns the string representation
-func (s DisassociateResolverRuleOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDisassociateResolverRule = "DisassociateResolverRule"
 
@@ -85,7 +28,7 @@ const opDisassociateResolverRule = "DisassociateResolverRule"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/DisassociateResolverRule
-func (c *Client) DisassociateResolverRuleRequest(input *DisassociateResolverRuleInput) DisassociateResolverRuleRequest {
+func (c *Client) DisassociateResolverRuleRequest(input *types.DisassociateResolverRuleInput) DisassociateResolverRuleRequest {
 	op := &aws.Operation{
 		Name:       opDisassociateResolverRule,
 		HTTPMethod: "POST",
@@ -93,10 +36,10 @@ func (c *Client) DisassociateResolverRuleRequest(input *DisassociateResolverRule
 	}
 
 	if input == nil {
-		input = &DisassociateResolverRuleInput{}
+		input = &types.DisassociateResolverRuleInput{}
 	}
 
-	req := c.newRequest(op, input, &DisassociateResolverRuleOutput{})
+	req := c.newRequest(op, input, &types.DisassociateResolverRuleOutput{})
 	return DisassociateResolverRuleRequest{Request: req, Input: input, Copy: c.DisassociateResolverRuleRequest}
 }
 
@@ -104,8 +47,8 @@ func (c *Client) DisassociateResolverRuleRequest(input *DisassociateResolverRule
 // DisassociateResolverRule API operation.
 type DisassociateResolverRuleRequest struct {
 	*aws.Request
-	Input *DisassociateResolverRuleInput
-	Copy  func(*DisassociateResolverRuleInput) DisassociateResolverRuleRequest
+	Input *types.DisassociateResolverRuleInput
+	Copy  func(*types.DisassociateResolverRuleInput) DisassociateResolverRuleRequest
 }
 
 // Send marshals and sends the DisassociateResolverRule API request.
@@ -117,7 +60,7 @@ func (r DisassociateResolverRuleRequest) Send(ctx context.Context) (*Disassociat
 	}
 
 	resp := &DisassociateResolverRuleResponse{
-		DisassociateResolverRuleOutput: r.Request.Data.(*DisassociateResolverRuleOutput),
+		DisassociateResolverRuleOutput: r.Request.Data.(*types.DisassociateResolverRuleOutput),
 		response:                       &aws.Response{Request: r.Request},
 	}
 
@@ -127,7 +70,7 @@ func (r DisassociateResolverRuleRequest) Send(ctx context.Context) (*Disassociat
 // DisassociateResolverRuleResponse is the response type for the
 // DisassociateResolverRule API operation.
 type DisassociateResolverRuleResponse struct {
-	*DisassociateResolverRuleOutput
+	*types.DisassociateResolverRuleOutput
 
 	response *aws.Response
 }

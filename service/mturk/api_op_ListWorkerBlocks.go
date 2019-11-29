@@ -6,60 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/mturk/types"
 )
-
-type ListWorkerBlocksInput struct {
-	_ struct{} `type:"structure"`
-
-	MaxResults *int64 `min:"1" type:"integer"`
-
-	// Pagination token
-	NextToken *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s ListWorkerBlocksInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListWorkerBlocksInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListWorkerBlocksInput"}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-	if s.NextToken != nil && len(*s.NextToken) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ListWorkerBlocksOutput struct {
-	_ struct{} `type:"structure"`
-
-	// If the previous response was incomplete (because there is more data to retrieve),
-	// Amazon Mechanical Turk returns a pagination token in the response. You can
-	// use this pagination token to retrieve the next set of results.
-	NextToken *string `min:"1" type:"string"`
-
-	// The number of assignments on the page in the filtered results list, equivalent
-	// to the number of assignments returned by this call.
-	NumResults *int64 `type:"integer"`
-
-	// The list of WorkerBlocks, containing the collection of Worker IDs and reasons
-	// for blocking.
-	WorkerBlocks []WorkerBlock `type:"list"`
-}
-
-// String returns the string representation
-func (s ListWorkerBlocksOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListWorkerBlocks = "ListWorkerBlocks"
 
@@ -77,7 +25,7 @@ const opListWorkerBlocks = "ListWorkerBlocks"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/ListWorkerBlocks
-func (c *Client) ListWorkerBlocksRequest(input *ListWorkerBlocksInput) ListWorkerBlocksRequest {
+func (c *Client) ListWorkerBlocksRequest(input *types.ListWorkerBlocksInput) ListWorkerBlocksRequest {
 	op := &aws.Operation{
 		Name:       opListWorkerBlocks,
 		HTTPMethod: "POST",
@@ -91,10 +39,10 @@ func (c *Client) ListWorkerBlocksRequest(input *ListWorkerBlocksInput) ListWorke
 	}
 
 	if input == nil {
-		input = &ListWorkerBlocksInput{}
+		input = &types.ListWorkerBlocksInput{}
 	}
 
-	req := c.newRequest(op, input, &ListWorkerBlocksOutput{})
+	req := c.newRequest(op, input, &types.ListWorkerBlocksOutput{})
 	return ListWorkerBlocksRequest{Request: req, Input: input, Copy: c.ListWorkerBlocksRequest}
 }
 
@@ -102,8 +50,8 @@ func (c *Client) ListWorkerBlocksRequest(input *ListWorkerBlocksInput) ListWorke
 // ListWorkerBlocks API operation.
 type ListWorkerBlocksRequest struct {
 	*aws.Request
-	Input *ListWorkerBlocksInput
-	Copy  func(*ListWorkerBlocksInput) ListWorkerBlocksRequest
+	Input *types.ListWorkerBlocksInput
+	Copy  func(*types.ListWorkerBlocksInput) ListWorkerBlocksRequest
 }
 
 // Send marshals and sends the ListWorkerBlocks API request.
@@ -115,7 +63,7 @@ func (r ListWorkerBlocksRequest) Send(ctx context.Context) (*ListWorkerBlocksRes
 	}
 
 	resp := &ListWorkerBlocksResponse{
-		ListWorkerBlocksOutput: r.Request.Data.(*ListWorkerBlocksOutput),
+		ListWorkerBlocksOutput: r.Request.Data.(*types.ListWorkerBlocksOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -145,7 +93,7 @@ func NewListWorkerBlocksPaginator(req ListWorkerBlocksRequest) ListWorkerBlocksP
 	return ListWorkerBlocksPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListWorkerBlocksInput
+				var inCpy *types.ListWorkerBlocksInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -165,14 +113,14 @@ type ListWorkerBlocksPaginator struct {
 	aws.Pager
 }
 
-func (p *ListWorkerBlocksPaginator) CurrentPage() *ListWorkerBlocksOutput {
-	return p.Pager.CurrentPage().(*ListWorkerBlocksOutput)
+func (p *ListWorkerBlocksPaginator) CurrentPage() *types.ListWorkerBlocksOutput {
+	return p.Pager.CurrentPage().(*types.ListWorkerBlocksOutput)
 }
 
 // ListWorkerBlocksResponse is the response type for the
 // ListWorkerBlocks API operation.
 type ListWorkerBlocksResponse struct {
-	*ListWorkerBlocksOutput
+	*types.ListWorkerBlocksOutput
 
 	response *aws.Response
 }

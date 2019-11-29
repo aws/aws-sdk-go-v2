@@ -12,6 +12,8 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws/awserr"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting/unit"
 	"github.com/aws/aws-sdk-go-v2/service/route53"
+	"github.com/aws/aws-sdk-go-v2/service/route53/enums"
+	"github.com/aws/aws-sdk-go-v2/service/route53/types"
 )
 
 func makeClientWithResponse(response string) *route53.Client {
@@ -43,7 +45,7 @@ func TestUnmarshalStandardError(t *testing.T) {
 
 	r := makeClientWithResponse(errorResponse)
 
-	req := r.CreateHostedZoneRequest(&route53.CreateHostedZoneInput{
+	req := r.CreateHostedZoneRequest(&types.CreateHostedZoneInput{
 		CallerReference: aws.String("test"),
 		Name:            aws.String("test_zone"),
 	})
@@ -77,17 +79,17 @@ but it already exists
 
 	r := makeClientWithResponse(errorResponse)
 
-	params := &route53.ChangeResourceRecordSetsInput{
+	params := &types.ChangeResourceRecordSetsInput{
 		HostedZoneId: aws.String("zoneId"),
-		ChangeBatch: &route53.ChangeBatch{
-			Changes: []route53.Change{
+		ChangeBatch: &types.ChangeBatch{
+			Changes: []types.Change{
 				{
-					Action: route53.ChangeActionCreate,
-					ResourceRecordSet: &route53.ResourceRecordSet{
+					Action: enums.ChangeActionCreate,
+					ResourceRecordSet: &types.ResourceRecordSet{
 						Name: aws.String("domain"),
-						Type: route53.RRTypeCname,
+						Type: enums.RRTypeCname,
 						TTL:  aws.Int64(120),
-						ResourceRecords: []route53.ResourceRecord{
+						ResourceRecords: []types.ResourceRecord{
 							{
 								Value: aws.String("cname"),
 							},

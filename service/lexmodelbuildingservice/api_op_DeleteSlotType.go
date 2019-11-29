@@ -6,68 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/restjson"
+	"github.com/aws/aws-sdk-go-v2/service/lexmodelbuildingservice/types"
 )
-
-type DeleteSlotTypeInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the slot type. The name is case sensitive.
-	//
-	// Name is a required field
-	Name *string `location:"uri" locationName:"name" min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteSlotTypeInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteSlotTypeInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteSlotTypeInput"}
-
-	if s.Name == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Name"))
-	}
-	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteSlotTypeInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.Name != nil {
-		v := *s.Name
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type DeleteSlotTypeOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteSlotTypeOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteSlotTypeOutput) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
 
 const opDeleteSlotType = "DeleteSlotType"
 
@@ -99,7 +41,7 @@ const opDeleteSlotType = "DeleteSlotType"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/DeleteSlotType
-func (c *Client) DeleteSlotTypeRequest(input *DeleteSlotTypeInput) DeleteSlotTypeRequest {
+func (c *Client) DeleteSlotTypeRequest(input *types.DeleteSlotTypeInput) DeleteSlotTypeRequest {
 	op := &aws.Operation{
 		Name:       opDeleteSlotType,
 		HTTPMethod: "DELETE",
@@ -107,10 +49,10 @@ func (c *Client) DeleteSlotTypeRequest(input *DeleteSlotTypeInput) DeleteSlotTyp
 	}
 
 	if input == nil {
-		input = &DeleteSlotTypeInput{}
+		input = &types.DeleteSlotTypeInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteSlotTypeOutput{})
+	req := c.newRequest(op, input, &types.DeleteSlotTypeOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return DeleteSlotTypeRequest{Request: req, Input: input, Copy: c.DeleteSlotTypeRequest}
@@ -120,8 +62,8 @@ func (c *Client) DeleteSlotTypeRequest(input *DeleteSlotTypeInput) DeleteSlotTyp
 // DeleteSlotType API operation.
 type DeleteSlotTypeRequest struct {
 	*aws.Request
-	Input *DeleteSlotTypeInput
-	Copy  func(*DeleteSlotTypeInput) DeleteSlotTypeRequest
+	Input *types.DeleteSlotTypeInput
+	Copy  func(*types.DeleteSlotTypeInput) DeleteSlotTypeRequest
 }
 
 // Send marshals and sends the DeleteSlotType API request.
@@ -133,7 +75,7 @@ func (r DeleteSlotTypeRequest) Send(ctx context.Context) (*DeleteSlotTypeRespons
 	}
 
 	resp := &DeleteSlotTypeResponse{
-		DeleteSlotTypeOutput: r.Request.Data.(*DeleteSlotTypeOutput),
+		DeleteSlotTypeOutput: r.Request.Data.(*types.DeleteSlotTypeOutput),
 		response:             &aws.Response{Request: r.Request},
 	}
 
@@ -143,7 +85,7 @@ func (r DeleteSlotTypeRequest) Send(ctx context.Context) (*DeleteSlotTypeRespons
 // DeleteSlotTypeResponse is the response type for the
 // DeleteSlotType API operation.
 type DeleteSlotTypeResponse struct {
-	*DeleteSlotTypeOutput
+	*types.DeleteSlotTypeOutput
 
 	response *aws.Response
 }

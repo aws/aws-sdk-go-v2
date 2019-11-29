@@ -6,55 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-type DeprovisionByoipCidrInput struct {
-	_ struct{} `type:"structure"`
-
-	// The public IPv4 address range, in CIDR notation. The prefix must be the same
-	// prefix that you specified when you provisioned the address range.
-	//
-	// Cidr is a required field
-	Cidr *string `type:"string" required:"true"`
-
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have
-	// the required permissions, the error response is DryRunOperation. Otherwise,
-	// it is UnauthorizedOperation.
-	DryRun *bool `type:"boolean"`
-}
-
-// String returns the string representation
-func (s DeprovisionByoipCidrInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeprovisionByoipCidrInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeprovisionByoipCidrInput"}
-
-	if s.Cidr == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Cidr"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeprovisionByoipCidrOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Information about the address range.
-	ByoipCidr *ByoipCidr `locationName:"byoipCidr" type:"structure"`
-}
-
-// String returns the string representation
-func (s DeprovisionByoipCidrOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeprovisionByoipCidr = "DeprovisionByoipCidr"
 
@@ -77,7 +30,7 @@ const opDeprovisionByoipCidr = "DeprovisionByoipCidr"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeprovisionByoipCidr
-func (c *Client) DeprovisionByoipCidrRequest(input *DeprovisionByoipCidrInput) DeprovisionByoipCidrRequest {
+func (c *Client) DeprovisionByoipCidrRequest(input *types.DeprovisionByoipCidrInput) DeprovisionByoipCidrRequest {
 	op := &aws.Operation{
 		Name:       opDeprovisionByoipCidr,
 		HTTPMethod: "POST",
@@ -85,10 +38,10 @@ func (c *Client) DeprovisionByoipCidrRequest(input *DeprovisionByoipCidrInput) D
 	}
 
 	if input == nil {
-		input = &DeprovisionByoipCidrInput{}
+		input = &types.DeprovisionByoipCidrInput{}
 	}
 
-	req := c.newRequest(op, input, &DeprovisionByoipCidrOutput{})
+	req := c.newRequest(op, input, &types.DeprovisionByoipCidrOutput{})
 	return DeprovisionByoipCidrRequest{Request: req, Input: input, Copy: c.DeprovisionByoipCidrRequest}
 }
 
@@ -96,8 +49,8 @@ func (c *Client) DeprovisionByoipCidrRequest(input *DeprovisionByoipCidrInput) D
 // DeprovisionByoipCidr API operation.
 type DeprovisionByoipCidrRequest struct {
 	*aws.Request
-	Input *DeprovisionByoipCidrInput
-	Copy  func(*DeprovisionByoipCidrInput) DeprovisionByoipCidrRequest
+	Input *types.DeprovisionByoipCidrInput
+	Copy  func(*types.DeprovisionByoipCidrInput) DeprovisionByoipCidrRequest
 }
 
 // Send marshals and sends the DeprovisionByoipCidr API request.
@@ -109,7 +62,7 @@ func (r DeprovisionByoipCidrRequest) Send(ctx context.Context) (*DeprovisionByoi
 	}
 
 	resp := &DeprovisionByoipCidrResponse{
-		DeprovisionByoipCidrOutput: r.Request.Data.(*DeprovisionByoipCidrOutput),
+		DeprovisionByoipCidrOutput: r.Request.Data.(*types.DeprovisionByoipCidrOutput),
 		response:                   &aws.Response{Request: r.Request},
 	}
 
@@ -119,7 +72,7 @@ func (r DeprovisionByoipCidrRequest) Send(ctx context.Context) (*DeprovisionByoi
 // DeprovisionByoipCidrResponse is the response type for the
 // DeprovisionByoipCidr API operation.
 type DeprovisionByoipCidrResponse struct {
-	*DeprovisionByoipCidrOutput
+	*types.DeprovisionByoipCidrOutput
 
 	response *aws.Response
 }

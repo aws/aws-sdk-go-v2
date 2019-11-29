@@ -6,75 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/cloudhsm/types"
 )
-
-// Contains the inputs for the DescribeHapg action.
-type DescribeHapgInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ARN of the high-availability partition group to describe.
-	//
-	// HapgArn is a required field
-	HapgArn *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeHapgInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeHapgInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeHapgInput"}
-
-	if s.HapgArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("HapgArn"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Contains the output of the DescribeHapg action.
-type DescribeHapgOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The ARN of the high-availability partition group.
-	HapgArn *string `type:"string"`
-
-	// The serial number of the high-availability partition group.
-	HapgSerial *string `type:"string"`
-
-	// Contains a list of ARNs that identify the HSMs.
-	HsmsLastActionFailed []string `type:"list"`
-
-	// Contains a list of ARNs that identify the HSMs.
-	HsmsPendingDeletion []string `type:"list"`
-
-	// Contains a list of ARNs that identify the HSMs.
-	HsmsPendingRegistration []string `type:"list"`
-
-	// The label for the high-availability partition group.
-	Label *string `type:"string"`
-
-	// The date and time the high-availability partition group was last modified.
-	LastModifiedTimestamp *string `type:"string"`
-
-	// The list of partition serial numbers that belong to the high-availability
-	// partition group.
-	PartitionSerialList []string `type:"list"`
-
-	// The state of the high-availability partition group.
-	State CloudHsmObjectState `type:"string" enum:"true"`
-}
-
-// String returns the string representation
-func (s DescribeHapgOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeHapg = "DescribeHapg"
 
@@ -100,7 +33,7 @@ const opDescribeHapg = "DescribeHapg"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/DescribeHapg
-func (c *Client) DescribeHapgRequest(input *DescribeHapgInput) DescribeHapgRequest {
+func (c *Client) DescribeHapgRequest(input *types.DescribeHapgInput) DescribeHapgRequest {
 	op := &aws.Operation{
 		Name:       opDescribeHapg,
 		HTTPMethod: "POST",
@@ -108,10 +41,10 @@ func (c *Client) DescribeHapgRequest(input *DescribeHapgInput) DescribeHapgReque
 	}
 
 	if input == nil {
-		input = &DescribeHapgInput{}
+		input = &types.DescribeHapgInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeHapgOutput{})
+	req := c.newRequest(op, input, &types.DescribeHapgOutput{})
 	return DescribeHapgRequest{Request: req, Input: input, Copy: c.DescribeHapgRequest}
 }
 
@@ -119,8 +52,8 @@ func (c *Client) DescribeHapgRequest(input *DescribeHapgInput) DescribeHapgReque
 // DescribeHapg API operation.
 type DescribeHapgRequest struct {
 	*aws.Request
-	Input *DescribeHapgInput
-	Copy  func(*DescribeHapgInput) DescribeHapgRequest
+	Input *types.DescribeHapgInput
+	Copy  func(*types.DescribeHapgInput) DescribeHapgRequest
 }
 
 // Send marshals and sends the DescribeHapg API request.
@@ -132,7 +65,7 @@ func (r DescribeHapgRequest) Send(ctx context.Context) (*DescribeHapgResponse, e
 	}
 
 	resp := &DescribeHapgResponse{
-		DescribeHapgOutput: r.Request.Data.(*DescribeHapgOutput),
+		DescribeHapgOutput: r.Request.Data.(*types.DescribeHapgOutput),
 		response:           &aws.Response{Request: r.Request},
 	}
 
@@ -142,7 +75,7 @@ func (r DescribeHapgRequest) Send(ctx context.Context) (*DescribeHapgResponse, e
 // DescribeHapgResponse is the response type for the
 // DescribeHapg API operation.
 type DescribeHapgResponse struct {
-	*DescribeHapgOutput
+	*types.DescribeHapgOutput
 
 	response *aws.Response
 }

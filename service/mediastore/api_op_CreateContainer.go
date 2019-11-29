@@ -4,88 +4,10 @@ package mediastore
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/mediastore/types"
 )
-
-type CreateContainerInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name for the container. The name must be from 1 to 255 characters. Container
-	// names must be unique to your AWS account within a specific region. As an
-	// example, you could create a container named movies in every region, as long
-	// as you don’t have an existing container with that name.
-	//
-	// ContainerName is a required field
-	ContainerName *string `min:"1" type:"string" required:"true"`
-
-	// An array of key:value pairs that you define. These values can be anything
-	// that you want. Typically, the tag key represents a category (such as "environment")
-	// and the tag value represents a specific value within that category (such
-	// as "test," "development," or "production"). You can add up to 50 tags to
-	// each container. For more information about tagging, including naming and
-	// usage conventions, see Tagging Resources in MediaStore (https://aws.amazon.com/documentation/mediastore/tagging).
-	Tags []Tag `type:"list"`
-}
-
-// String returns the string representation
-func (s CreateContainerInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateContainerInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateContainerInput"}
-
-	if s.ContainerName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ContainerName"))
-	}
-	if s.ContainerName != nil && len(*s.ContainerName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ContainerName", 1))
-	}
-	if s.Tags != nil {
-		for i, v := range s.Tags {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type CreateContainerOutput struct {
-	_ struct{} `type:"structure"`
-
-	// ContainerARN: The Amazon Resource Name (ARN) of the newly created container.
-	// The ARN has the following format: arn:aws:<region>:<account that owns this
-	// container>:container/<name of container>. For example: arn:aws:mediastore:us-west-2:111122223333:container/movies
-	//
-	// ContainerName: The container name as specified in the request.
-	//
-	// CreationTime: Unix time stamp.
-	//
-	// Status: The status of container creation or deletion. The status is one of
-	// the following: CREATING, ACTIVE, or DELETING. While the service is creating
-	// the container, the status is CREATING. When an endpoint is available, the
-	// status changes to ACTIVE.
-	//
-	// The return value does not include the container's endpoint. To make downstream
-	// requests, you must obtain this value by using DescribeContainer or ListContainers.
-	//
-	// Container is a required field
-	Container *Container `type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s CreateContainerOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCreateContainer = "CreateContainer"
 
@@ -103,7 +25,7 @@ const opCreateContainer = "CreateContainer"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mediastore-2017-09-01/CreateContainer
-func (c *Client) CreateContainerRequest(input *CreateContainerInput) CreateContainerRequest {
+func (c *Client) CreateContainerRequest(input *types.CreateContainerInput) CreateContainerRequest {
 	op := &aws.Operation{
 		Name:       opCreateContainer,
 		HTTPMethod: "POST",
@@ -111,10 +33,10 @@ func (c *Client) CreateContainerRequest(input *CreateContainerInput) CreateConta
 	}
 
 	if input == nil {
-		input = &CreateContainerInput{}
+		input = &types.CreateContainerInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateContainerOutput{})
+	req := c.newRequest(op, input, &types.CreateContainerOutput{})
 	return CreateContainerRequest{Request: req, Input: input, Copy: c.CreateContainerRequest}
 }
 
@@ -122,8 +44,8 @@ func (c *Client) CreateContainerRequest(input *CreateContainerInput) CreateConta
 // CreateContainer API operation.
 type CreateContainerRequest struct {
 	*aws.Request
-	Input *CreateContainerInput
-	Copy  func(*CreateContainerInput) CreateContainerRequest
+	Input *types.CreateContainerInput
+	Copy  func(*types.CreateContainerInput) CreateContainerRequest
 }
 
 // Send marshals and sends the CreateContainer API request.
@@ -135,7 +57,7 @@ func (r CreateContainerRequest) Send(ctx context.Context) (*CreateContainerRespo
 	}
 
 	resp := &CreateContainerResponse{
-		CreateContainerOutput: r.Request.Data.(*CreateContainerOutput),
+		CreateContainerOutput: r.Request.Data.(*types.CreateContainerOutput),
 		response:              &aws.Response{Request: r.Request},
 	}
 
@@ -145,7 +67,7 @@ func (r CreateContainerRequest) Send(ctx context.Context) (*CreateContainerRespo
 // CreateContainerResponse is the response type for the
 // CreateContainer API operation.
 type CreateContainerResponse struct {
-	*CreateContainerOutput
+	*types.CreateContainerOutput
 
 	response *aws.Response
 }

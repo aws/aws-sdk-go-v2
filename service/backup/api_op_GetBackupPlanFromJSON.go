@@ -6,74 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/backup/types"
 )
-
-type GetBackupPlanFromJSONInput struct {
-	_ struct{} `type:"structure"`
-
-	// A customer-supplied backup plan document in JSON format.
-	//
-	// BackupPlanTemplateJson is a required field
-	BackupPlanTemplateJson *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetBackupPlanFromJSONInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetBackupPlanFromJSONInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetBackupPlanFromJSONInput"}
-
-	if s.BackupPlanTemplateJson == nil {
-		invalidParams.Add(aws.NewErrParamRequired("BackupPlanTemplateJson"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetBackupPlanFromJSONInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.BackupPlanTemplateJson != nil {
-		v := *s.BackupPlanTemplateJson
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "BackupPlanTemplateJson", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type GetBackupPlanFromJSONOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Specifies the body of a backup plan. Includes a BackupPlanName and one or
-	// more sets of Rules.
-	BackupPlan *BackupPlan `type:"structure"`
-}
-
-// String returns the string representation
-func (s GetBackupPlanFromJSONOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetBackupPlanFromJSONOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.BackupPlan != nil {
-		v := s.BackupPlan
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "BackupPlan", v, metadata)
-	}
-	return nil
-}
 
 const opGetBackupPlanFromJSON = "GetBackupPlanFromJSON"
 
@@ -90,7 +24,7 @@ const opGetBackupPlanFromJSON = "GetBackupPlanFromJSON"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/GetBackupPlanFromJSON
-func (c *Client) GetBackupPlanFromJSONRequest(input *GetBackupPlanFromJSONInput) GetBackupPlanFromJSONRequest {
+func (c *Client) GetBackupPlanFromJSONRequest(input *types.GetBackupPlanFromJSONInput) GetBackupPlanFromJSONRequest {
 	op := &aws.Operation{
 		Name:       opGetBackupPlanFromJSON,
 		HTTPMethod: "POST",
@@ -98,10 +32,10 @@ func (c *Client) GetBackupPlanFromJSONRequest(input *GetBackupPlanFromJSONInput)
 	}
 
 	if input == nil {
-		input = &GetBackupPlanFromJSONInput{}
+		input = &types.GetBackupPlanFromJSONInput{}
 	}
 
-	req := c.newRequest(op, input, &GetBackupPlanFromJSONOutput{})
+	req := c.newRequest(op, input, &types.GetBackupPlanFromJSONOutput{})
 	return GetBackupPlanFromJSONRequest{Request: req, Input: input, Copy: c.GetBackupPlanFromJSONRequest}
 }
 
@@ -109,8 +43,8 @@ func (c *Client) GetBackupPlanFromJSONRequest(input *GetBackupPlanFromJSONInput)
 // GetBackupPlanFromJSON API operation.
 type GetBackupPlanFromJSONRequest struct {
 	*aws.Request
-	Input *GetBackupPlanFromJSONInput
-	Copy  func(*GetBackupPlanFromJSONInput) GetBackupPlanFromJSONRequest
+	Input *types.GetBackupPlanFromJSONInput
+	Copy  func(*types.GetBackupPlanFromJSONInput) GetBackupPlanFromJSONRequest
 }
 
 // Send marshals and sends the GetBackupPlanFromJSON API request.
@@ -122,7 +56,7 @@ func (r GetBackupPlanFromJSONRequest) Send(ctx context.Context) (*GetBackupPlanF
 	}
 
 	resp := &GetBackupPlanFromJSONResponse{
-		GetBackupPlanFromJSONOutput: r.Request.Data.(*GetBackupPlanFromJSONOutput),
+		GetBackupPlanFromJSONOutput: r.Request.Data.(*types.GetBackupPlanFromJSONOutput),
 		response:                    &aws.Response{Request: r.Request},
 	}
 
@@ -132,7 +66,7 @@ func (r GetBackupPlanFromJSONRequest) Send(ctx context.Context) (*GetBackupPlanF
 // GetBackupPlanFromJSONResponse is the response type for the
 // GetBackupPlanFromJSON API operation.
 type GetBackupPlanFromJSONResponse struct {
-	*GetBackupPlanFromJSONOutput
+	*types.GetBackupPlanFromJSONOutput
 
 	response *aws.Response
 }

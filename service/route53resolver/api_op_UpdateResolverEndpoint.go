@@ -6,54 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/route53resolver/types"
 )
-
-type UpdateResolverEndpointInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the resolver endpoint that you want to update.
-	Name *string `type:"string"`
-
-	// The ID of the resolver endpoint that you want to update.
-	//
-	// ResolverEndpointId is a required field
-	ResolverEndpointId *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s UpdateResolverEndpointInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateResolverEndpointInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateResolverEndpointInput"}
-
-	if s.ResolverEndpointId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ResolverEndpointId"))
-	}
-	if s.ResolverEndpointId != nil && len(*s.ResolverEndpointId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ResolverEndpointId", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type UpdateResolverEndpointOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The response to an UpdateResolverEndpoint request.
-	ResolverEndpoint *ResolverEndpoint `type:"structure"`
-}
-
-// String returns the string representation
-func (s UpdateResolverEndpointOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opUpdateResolverEndpoint = "UpdateResolverEndpoint"
 
@@ -70,7 +24,7 @@ const opUpdateResolverEndpoint = "UpdateResolverEndpoint"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/UpdateResolverEndpoint
-func (c *Client) UpdateResolverEndpointRequest(input *UpdateResolverEndpointInput) UpdateResolverEndpointRequest {
+func (c *Client) UpdateResolverEndpointRequest(input *types.UpdateResolverEndpointInput) UpdateResolverEndpointRequest {
 	op := &aws.Operation{
 		Name:       opUpdateResolverEndpoint,
 		HTTPMethod: "POST",
@@ -78,10 +32,10 @@ func (c *Client) UpdateResolverEndpointRequest(input *UpdateResolverEndpointInpu
 	}
 
 	if input == nil {
-		input = &UpdateResolverEndpointInput{}
+		input = &types.UpdateResolverEndpointInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateResolverEndpointOutput{})
+	req := c.newRequest(op, input, &types.UpdateResolverEndpointOutput{})
 	return UpdateResolverEndpointRequest{Request: req, Input: input, Copy: c.UpdateResolverEndpointRequest}
 }
 
@@ -89,8 +43,8 @@ func (c *Client) UpdateResolverEndpointRequest(input *UpdateResolverEndpointInpu
 // UpdateResolverEndpoint API operation.
 type UpdateResolverEndpointRequest struct {
 	*aws.Request
-	Input *UpdateResolverEndpointInput
-	Copy  func(*UpdateResolverEndpointInput) UpdateResolverEndpointRequest
+	Input *types.UpdateResolverEndpointInput
+	Copy  func(*types.UpdateResolverEndpointInput) UpdateResolverEndpointRequest
 }
 
 // Send marshals and sends the UpdateResolverEndpoint API request.
@@ -102,7 +56,7 @@ func (r UpdateResolverEndpointRequest) Send(ctx context.Context) (*UpdateResolve
 	}
 
 	resp := &UpdateResolverEndpointResponse{
-		UpdateResolverEndpointOutput: r.Request.Data.(*UpdateResolverEndpointOutput),
+		UpdateResolverEndpointOutput: r.Request.Data.(*types.UpdateResolverEndpointOutput),
 		response:                     &aws.Response{Request: r.Request},
 	}
 
@@ -112,7 +66,7 @@ func (r UpdateResolverEndpointRequest) Send(ctx context.Context) (*UpdateResolve
 // UpdateResolverEndpointResponse is the response type for the
 // UpdateResolverEndpoint API operation.
 type UpdateResolverEndpointResponse struct {
-	*UpdateResolverEndpointOutput
+	*types.UpdateResolverEndpointOutput
 
 	response *aws.Response
 }

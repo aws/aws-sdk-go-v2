@@ -6,48 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/mediastore/types"
 )
-
-type DeleteCorsPolicyInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the container to remove the policy from.
-	//
-	// ContainerName is a required field
-	ContainerName *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteCorsPolicyInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteCorsPolicyInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteCorsPolicyInput"}
-
-	if s.ContainerName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ContainerName"))
-	}
-	if s.ContainerName != nil && len(*s.ContainerName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ContainerName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteCorsPolicyOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteCorsPolicyOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteCorsPolicy = "DeleteCorsPolicy"
 
@@ -69,7 +29,7 @@ const opDeleteCorsPolicy = "DeleteCorsPolicy"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mediastore-2017-09-01/DeleteCorsPolicy
-func (c *Client) DeleteCorsPolicyRequest(input *DeleteCorsPolicyInput) DeleteCorsPolicyRequest {
+func (c *Client) DeleteCorsPolicyRequest(input *types.DeleteCorsPolicyInput) DeleteCorsPolicyRequest {
 	op := &aws.Operation{
 		Name:       opDeleteCorsPolicy,
 		HTTPMethod: "POST",
@@ -77,10 +37,10 @@ func (c *Client) DeleteCorsPolicyRequest(input *DeleteCorsPolicyInput) DeleteCor
 	}
 
 	if input == nil {
-		input = &DeleteCorsPolicyInput{}
+		input = &types.DeleteCorsPolicyInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteCorsPolicyOutput{})
+	req := c.newRequest(op, input, &types.DeleteCorsPolicyOutput{})
 	return DeleteCorsPolicyRequest{Request: req, Input: input, Copy: c.DeleteCorsPolicyRequest}
 }
 
@@ -88,8 +48,8 @@ func (c *Client) DeleteCorsPolicyRequest(input *DeleteCorsPolicyInput) DeleteCor
 // DeleteCorsPolicy API operation.
 type DeleteCorsPolicyRequest struct {
 	*aws.Request
-	Input *DeleteCorsPolicyInput
-	Copy  func(*DeleteCorsPolicyInput) DeleteCorsPolicyRequest
+	Input *types.DeleteCorsPolicyInput
+	Copy  func(*types.DeleteCorsPolicyInput) DeleteCorsPolicyRequest
 }
 
 // Send marshals and sends the DeleteCorsPolicy API request.
@@ -101,7 +61,7 @@ func (r DeleteCorsPolicyRequest) Send(ctx context.Context) (*DeleteCorsPolicyRes
 	}
 
 	resp := &DeleteCorsPolicyResponse{
-		DeleteCorsPolicyOutput: r.Request.Data.(*DeleteCorsPolicyOutput),
+		DeleteCorsPolicyOutput: r.Request.Data.(*types.DeleteCorsPolicyOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -111,7 +71,7 @@ func (r DeleteCorsPolicyRequest) Send(ctx context.Context) (*DeleteCorsPolicyRes
 // DeleteCorsPolicyResponse is the response type for the
 // DeleteCorsPolicy API operation.
 type DeleteCorsPolicyResponse struct {
-	*DeleteCorsPolicyOutput
+	*types.DeleteCorsPolicyOutput
 
 	response *aws.Response
 }

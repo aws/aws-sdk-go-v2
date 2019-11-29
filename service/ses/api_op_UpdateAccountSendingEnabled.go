@@ -6,34 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/query"
+	"github.com/aws/aws-sdk-go-v2/service/ses/types"
 )
-
-// Represents a request to enable or disable the email sending capabilities
-// for your entire Amazon SES account.
-type UpdateAccountSendingEnabledInput struct {
-	_ struct{} `type:"structure"`
-
-	// Describes whether email sending is enabled or disabled for your Amazon SES
-	// account in the current AWS Region.
-	Enabled *bool `type:"boolean"`
-}
-
-// String returns the string representation
-func (s UpdateAccountSendingEnabledInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type UpdateAccountSendingEnabledOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s UpdateAccountSendingEnabledOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opUpdateAccountSendingEnabled = "UpdateAccountSendingEnabled"
 
@@ -56,7 +32,7 @@ const opUpdateAccountSendingEnabled = "UpdateAccountSendingEnabled"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/UpdateAccountSendingEnabled
-func (c *Client) UpdateAccountSendingEnabledRequest(input *UpdateAccountSendingEnabledInput) UpdateAccountSendingEnabledRequest {
+func (c *Client) UpdateAccountSendingEnabledRequest(input *types.UpdateAccountSendingEnabledInput) UpdateAccountSendingEnabledRequest {
 	op := &aws.Operation{
 		Name:       opUpdateAccountSendingEnabled,
 		HTTPMethod: "POST",
@@ -64,10 +40,10 @@ func (c *Client) UpdateAccountSendingEnabledRequest(input *UpdateAccountSendingE
 	}
 
 	if input == nil {
-		input = &UpdateAccountSendingEnabledInput{}
+		input = &types.UpdateAccountSendingEnabledInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateAccountSendingEnabledOutput{})
+	req := c.newRequest(op, input, &types.UpdateAccountSendingEnabledOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return UpdateAccountSendingEnabledRequest{Request: req, Input: input, Copy: c.UpdateAccountSendingEnabledRequest}
@@ -77,8 +53,8 @@ func (c *Client) UpdateAccountSendingEnabledRequest(input *UpdateAccountSendingE
 // UpdateAccountSendingEnabled API operation.
 type UpdateAccountSendingEnabledRequest struct {
 	*aws.Request
-	Input *UpdateAccountSendingEnabledInput
-	Copy  func(*UpdateAccountSendingEnabledInput) UpdateAccountSendingEnabledRequest
+	Input *types.UpdateAccountSendingEnabledInput
+	Copy  func(*types.UpdateAccountSendingEnabledInput) UpdateAccountSendingEnabledRequest
 }
 
 // Send marshals and sends the UpdateAccountSendingEnabled API request.
@@ -90,7 +66,7 @@ func (r UpdateAccountSendingEnabledRequest) Send(ctx context.Context) (*UpdateAc
 	}
 
 	resp := &UpdateAccountSendingEnabledResponse{
-		UpdateAccountSendingEnabledOutput: r.Request.Data.(*UpdateAccountSendingEnabledOutput),
+		UpdateAccountSendingEnabledOutput: r.Request.Data.(*types.UpdateAccountSendingEnabledOutput),
 		response:                          &aws.Response{Request: r.Request},
 	}
 
@@ -100,7 +76,7 @@ func (r UpdateAccountSendingEnabledRequest) Send(ctx context.Context) (*UpdateAc
 // UpdateAccountSendingEnabledResponse is the response type for the
 // UpdateAccountSendingEnabled API operation.
 type UpdateAccountSendingEnabledResponse struct {
-	*UpdateAccountSendingEnabledOutput
+	*types.UpdateAccountSendingEnabledOutput
 
 	response *aws.Response
 }

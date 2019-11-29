@@ -6,81 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/restjson"
+	"github.com/aws/aws-sdk-go-v2/service/apigateway/types"
 )
-
-// Deletes an existing documentation part of an API.
-type DeleteDocumentationPartInput struct {
-	_ struct{} `type:"structure"`
-
-	// [Required] The identifier of the to-be-deleted documentation part.
-	//
-	// DocumentationPartId is a required field
-	DocumentationPartId *string `location:"uri" locationName:"part_id" type:"string" required:"true"`
-
-	// [Required] The string identifier of the associated RestApi.
-	//
-	// RestApiId is a required field
-	RestApiId *string `location:"uri" locationName:"restapi_id" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteDocumentationPartInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteDocumentationPartInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteDocumentationPartInput"}
-
-	if s.DocumentationPartId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DocumentationPartId"))
-	}
-
-	if s.RestApiId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("RestApiId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteDocumentationPartInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.DocumentationPartId != nil {
-		v := *s.DocumentationPartId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "part_id", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.RestApiId != nil {
-		v := *s.RestApiId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "restapi_id", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type DeleteDocumentationPartOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteDocumentationPartOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteDocumentationPartOutput) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
 
 const opDeleteDocumentationPart = "DeleteDocumentationPart"
 
@@ -93,7 +22,7 @@ const opDeleteDocumentationPart = "DeleteDocumentationPart"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) DeleteDocumentationPartRequest(input *DeleteDocumentationPartInput) DeleteDocumentationPartRequest {
+func (c *Client) DeleteDocumentationPartRequest(input *types.DeleteDocumentationPartInput) DeleteDocumentationPartRequest {
 	op := &aws.Operation{
 		Name:       opDeleteDocumentationPart,
 		HTTPMethod: "DELETE",
@@ -101,10 +30,10 @@ func (c *Client) DeleteDocumentationPartRequest(input *DeleteDocumentationPartIn
 	}
 
 	if input == nil {
-		input = &DeleteDocumentationPartInput{}
+		input = &types.DeleteDocumentationPartInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteDocumentationPartOutput{})
+	req := c.newRequest(op, input, &types.DeleteDocumentationPartOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return DeleteDocumentationPartRequest{Request: req, Input: input, Copy: c.DeleteDocumentationPartRequest}
@@ -114,8 +43,8 @@ func (c *Client) DeleteDocumentationPartRequest(input *DeleteDocumentationPartIn
 // DeleteDocumentationPart API operation.
 type DeleteDocumentationPartRequest struct {
 	*aws.Request
-	Input *DeleteDocumentationPartInput
-	Copy  func(*DeleteDocumentationPartInput) DeleteDocumentationPartRequest
+	Input *types.DeleteDocumentationPartInput
+	Copy  func(*types.DeleteDocumentationPartInput) DeleteDocumentationPartRequest
 }
 
 // Send marshals and sends the DeleteDocumentationPart API request.
@@ -127,7 +56,7 @@ func (r DeleteDocumentationPartRequest) Send(ctx context.Context) (*DeleteDocume
 	}
 
 	resp := &DeleteDocumentationPartResponse{
-		DeleteDocumentationPartOutput: r.Request.Data.(*DeleteDocumentationPartOutput),
+		DeleteDocumentationPartOutput: r.Request.Data.(*types.DeleteDocumentationPartOutput),
 		response:                      &aws.Response{Request: r.Request},
 	}
 
@@ -137,7 +66,7 @@ func (r DeleteDocumentationPartRequest) Send(ctx context.Context) (*DeleteDocume
 // DeleteDocumentationPartResponse is the response type for the
 // DeleteDocumentationPart API operation.
 type DeleteDocumentationPartResponse struct {
-	*DeleteDocumentationPartOutput
+	*types.DeleteDocumentationPartOutput
 
 	response *aws.Response
 }

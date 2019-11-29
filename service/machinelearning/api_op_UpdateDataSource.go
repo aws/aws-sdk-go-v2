@@ -6,65 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/machinelearning/types"
 )
-
-type UpdateDataSourceInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID assigned to the DataSource during creation.
-	//
-	// DataSourceId is a required field
-	DataSourceId *string `min:"1" type:"string" required:"true"`
-
-	// A new user-supplied name or description of the DataSource that will replace
-	// the current description.
-	//
-	// DataSourceName is a required field
-	DataSourceName *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s UpdateDataSourceInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateDataSourceInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateDataSourceInput"}
-
-	if s.DataSourceId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DataSourceId"))
-	}
-	if s.DataSourceId != nil && len(*s.DataSourceId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("DataSourceId", 1))
-	}
-
-	if s.DataSourceName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DataSourceName"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Represents the output of an UpdateDataSource operation.
-//
-// You can see the updated content by using the GetBatchPrediction operation.
-type UpdateDataSourceOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID assigned to the DataSource during creation. This value should be identical
-	// to the value of the DataSourceID in the request.
-	DataSourceId *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s UpdateDataSourceOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opUpdateDataSource = "UpdateDataSource"
 
@@ -82,7 +25,7 @@ const opUpdateDataSource = "UpdateDataSource"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) UpdateDataSourceRequest(input *UpdateDataSourceInput) UpdateDataSourceRequest {
+func (c *Client) UpdateDataSourceRequest(input *types.UpdateDataSourceInput) UpdateDataSourceRequest {
 	op := &aws.Operation{
 		Name:       opUpdateDataSource,
 		HTTPMethod: "POST",
@@ -90,10 +33,10 @@ func (c *Client) UpdateDataSourceRequest(input *UpdateDataSourceInput) UpdateDat
 	}
 
 	if input == nil {
-		input = &UpdateDataSourceInput{}
+		input = &types.UpdateDataSourceInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateDataSourceOutput{})
+	req := c.newRequest(op, input, &types.UpdateDataSourceOutput{})
 	return UpdateDataSourceRequest{Request: req, Input: input, Copy: c.UpdateDataSourceRequest}
 }
 
@@ -101,8 +44,8 @@ func (c *Client) UpdateDataSourceRequest(input *UpdateDataSourceInput) UpdateDat
 // UpdateDataSource API operation.
 type UpdateDataSourceRequest struct {
 	*aws.Request
-	Input *UpdateDataSourceInput
-	Copy  func(*UpdateDataSourceInput) UpdateDataSourceRequest
+	Input *types.UpdateDataSourceInput
+	Copy  func(*types.UpdateDataSourceInput) UpdateDataSourceRequest
 }
 
 // Send marshals and sends the UpdateDataSource API request.
@@ -114,7 +57,7 @@ func (r UpdateDataSourceRequest) Send(ctx context.Context) (*UpdateDataSourceRes
 	}
 
 	resp := &UpdateDataSourceResponse{
-		UpdateDataSourceOutput: r.Request.Data.(*UpdateDataSourceOutput),
+		UpdateDataSourceOutput: r.Request.Data.(*types.UpdateDataSourceOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -124,7 +67,7 @@ func (r UpdateDataSourceRequest) Send(ctx context.Context) (*UpdateDataSourceRes
 // UpdateDataSourceResponse is the response type for the
 // UpdateDataSource API operation.
 type UpdateDataSourceResponse struct {
-	*UpdateDataSourceOutput
+	*types.UpdateDataSourceOutput
 
 	response *aws.Response
 }

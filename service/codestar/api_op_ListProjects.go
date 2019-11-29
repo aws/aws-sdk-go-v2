@@ -6,58 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/codestar/types"
 )
-
-type ListProjectsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The maximum amount of data that can be contained in a single set of results.
-	MaxResults *int64 `locationName:"maxResults" min:"1" type:"integer"`
-
-	// The continuation token to be used to return the next set of results, if the
-	// results cannot be returned in one response.
-	NextToken *string `locationName:"nextToken" min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s ListProjectsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListProjectsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListProjectsInput"}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-	if s.NextToken != nil && len(*s.NextToken) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ListProjectsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The continuation token to use when requesting the next set of results, if
-	// there are more results to be returned.
-	NextToken *string `locationName:"nextToken" min:"1" type:"string"`
-
-	// A list of projects.
-	//
-	// Projects is a required field
-	Projects []ProjectSummary `locationName:"projects" type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s ListProjectsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListProjects = "ListProjects"
 
@@ -74,7 +24,7 @@ const opListProjects = "ListProjects"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codestar-2017-04-19/ListProjects
-func (c *Client) ListProjectsRequest(input *ListProjectsInput) ListProjectsRequest {
+func (c *Client) ListProjectsRequest(input *types.ListProjectsInput) ListProjectsRequest {
 	op := &aws.Operation{
 		Name:       opListProjects,
 		HTTPMethod: "POST",
@@ -82,10 +32,10 @@ func (c *Client) ListProjectsRequest(input *ListProjectsInput) ListProjectsReque
 	}
 
 	if input == nil {
-		input = &ListProjectsInput{}
+		input = &types.ListProjectsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListProjectsOutput{})
+	req := c.newRequest(op, input, &types.ListProjectsOutput{})
 	return ListProjectsRequest{Request: req, Input: input, Copy: c.ListProjectsRequest}
 }
 
@@ -93,8 +43,8 @@ func (c *Client) ListProjectsRequest(input *ListProjectsInput) ListProjectsReque
 // ListProjects API operation.
 type ListProjectsRequest struct {
 	*aws.Request
-	Input *ListProjectsInput
-	Copy  func(*ListProjectsInput) ListProjectsRequest
+	Input *types.ListProjectsInput
+	Copy  func(*types.ListProjectsInput) ListProjectsRequest
 }
 
 // Send marshals and sends the ListProjects API request.
@@ -106,7 +56,7 @@ func (r ListProjectsRequest) Send(ctx context.Context) (*ListProjectsResponse, e
 	}
 
 	resp := &ListProjectsResponse{
-		ListProjectsOutput: r.Request.Data.(*ListProjectsOutput),
+		ListProjectsOutput: r.Request.Data.(*types.ListProjectsOutput),
 		response:           &aws.Response{Request: r.Request},
 	}
 
@@ -116,7 +66,7 @@ func (r ListProjectsRequest) Send(ctx context.Context) (*ListProjectsResponse, e
 // ListProjectsResponse is the response type for the
 // ListProjects API operation.
 type ListProjectsResponse struct {
-	*ListProjectsOutput
+	*types.ListProjectsOutput
 
 	response *aws.Response
 }

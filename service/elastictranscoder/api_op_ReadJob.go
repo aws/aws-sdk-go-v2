@@ -6,75 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/elastictranscoder/types"
 )
-
-// The ReadJobRequest structure.
-type ReadJobInput struct {
-	_ struct{} `type:"structure"`
-
-	// The identifier of the job for which you want to get detailed information.
-	//
-	// Id is a required field
-	Id *string `location:"uri" locationName:"Id" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s ReadJobInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ReadJobInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ReadJobInput"}
-
-	if s.Id == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Id"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ReadJobInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.Id != nil {
-		v := *s.Id
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "Id", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-// The ReadJobResponse structure.
-type ReadJobOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A section of the response body that provides information about the job.
-	Job *Job `type:"structure"`
-}
-
-// String returns the string representation
-func (s ReadJobOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ReadJobOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.Job != nil {
-		v := s.Job
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "Job", v, metadata)
-	}
-	return nil
-}
 
 const opReadJob = "ReadJob"
 
@@ -89,7 +22,7 @@ const opReadJob = "ReadJob"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) ReadJobRequest(input *ReadJobInput) ReadJobRequest {
+func (c *Client) ReadJobRequest(input *types.ReadJobInput) ReadJobRequest {
 	op := &aws.Operation{
 		Name:       opReadJob,
 		HTTPMethod: "GET",
@@ -97,10 +30,10 @@ func (c *Client) ReadJobRequest(input *ReadJobInput) ReadJobRequest {
 	}
 
 	if input == nil {
-		input = &ReadJobInput{}
+		input = &types.ReadJobInput{}
 	}
 
-	req := c.newRequest(op, input, &ReadJobOutput{})
+	req := c.newRequest(op, input, &types.ReadJobOutput{})
 	return ReadJobRequest{Request: req, Input: input, Copy: c.ReadJobRequest}
 }
 
@@ -108,8 +41,8 @@ func (c *Client) ReadJobRequest(input *ReadJobInput) ReadJobRequest {
 // ReadJob API operation.
 type ReadJobRequest struct {
 	*aws.Request
-	Input *ReadJobInput
-	Copy  func(*ReadJobInput) ReadJobRequest
+	Input *types.ReadJobInput
+	Copy  func(*types.ReadJobInput) ReadJobRequest
 }
 
 // Send marshals and sends the ReadJob API request.
@@ -121,7 +54,7 @@ func (r ReadJobRequest) Send(ctx context.Context) (*ReadJobResponse, error) {
 	}
 
 	resp := &ReadJobResponse{
-		ReadJobOutput: r.Request.Data.(*ReadJobOutput),
+		ReadJobOutput: r.Request.Data.(*types.ReadJobOutput),
 		response:      &aws.Response{Request: r.Request},
 	}
 
@@ -131,7 +64,7 @@ func (r ReadJobRequest) Send(ctx context.Context) (*ReadJobResponse, error) {
 // ReadJobResponse is the response type for the
 // ReadJob API operation.
 type ReadJobResponse struct {
-	*ReadJobOutput
+	*types.ReadJobOutput
 
 	response *aws.Response
 }

@@ -13,6 +13,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws/awserr"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting/integration"
 	"github.com/aws/aws-sdk-go-v2/service/firehose"
+	"github.com/aws/aws-sdk-go-v2/service/firehose/types"
 )
 
 var _ aws.Config
@@ -24,7 +25,7 @@ func TestInteg_00_ListDeliveryStreams(t *testing.T) {
 
 	cfg := integration.ConfigWithDefaultRegion("us-west-2")
 	svc := firehose.New(cfg)
-	params := &firehose.ListDeliveryStreamsInput{}
+	params := &types.ListDeliveryStreamsInput{}
 
 	req := svc.ListDeliveryStreamsRequest(params)
 
@@ -39,7 +40,7 @@ func TestInteg_01_DescribeDeliveryStream(t *testing.T) {
 
 	cfg := integration.ConfigWithDefaultRegion("us-west-2")
 	svc := firehose.New(cfg)
-	params := &firehose.DescribeDeliveryStreamInput{
+	params := &types.DescribeDeliveryStreamInput{
 		DeliveryStreamName: aws.String("bogus-stream-name"),
 	}
 

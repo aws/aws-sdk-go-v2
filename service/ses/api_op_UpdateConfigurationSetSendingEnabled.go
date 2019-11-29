@@ -6,59 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/query"
+	"github.com/aws/aws-sdk-go-v2/service/ses/types"
 )
-
-// Represents a request to enable or disable the email sending capabilities
-// for a specific configuration set.
-type UpdateConfigurationSetSendingEnabledInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the configuration set that you want to update.
-	//
-	// ConfigurationSetName is a required field
-	ConfigurationSetName *string `type:"string" required:"true"`
-
-	// Describes whether email sending is enabled or disabled for the configuration
-	// set.
-	//
-	// Enabled is a required field
-	Enabled *bool `type:"boolean" required:"true"`
-}
-
-// String returns the string representation
-func (s UpdateConfigurationSetSendingEnabledInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateConfigurationSetSendingEnabledInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateConfigurationSetSendingEnabledInput"}
-
-	if s.ConfigurationSetName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ConfigurationSetName"))
-	}
-
-	if s.Enabled == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Enabled"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type UpdateConfigurationSetSendingEnabledOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s UpdateConfigurationSetSendingEnabledOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opUpdateConfigurationSetSendingEnabled = "UpdateConfigurationSetSendingEnabled"
 
@@ -81,7 +32,7 @@ const opUpdateConfigurationSetSendingEnabled = "UpdateConfigurationSetSendingEna
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/UpdateConfigurationSetSendingEnabled
-func (c *Client) UpdateConfigurationSetSendingEnabledRequest(input *UpdateConfigurationSetSendingEnabledInput) UpdateConfigurationSetSendingEnabledRequest {
+func (c *Client) UpdateConfigurationSetSendingEnabledRequest(input *types.UpdateConfigurationSetSendingEnabledInput) UpdateConfigurationSetSendingEnabledRequest {
 	op := &aws.Operation{
 		Name:       opUpdateConfigurationSetSendingEnabled,
 		HTTPMethod: "POST",
@@ -89,10 +40,10 @@ func (c *Client) UpdateConfigurationSetSendingEnabledRequest(input *UpdateConfig
 	}
 
 	if input == nil {
-		input = &UpdateConfigurationSetSendingEnabledInput{}
+		input = &types.UpdateConfigurationSetSendingEnabledInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateConfigurationSetSendingEnabledOutput{})
+	req := c.newRequest(op, input, &types.UpdateConfigurationSetSendingEnabledOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return UpdateConfigurationSetSendingEnabledRequest{Request: req, Input: input, Copy: c.UpdateConfigurationSetSendingEnabledRequest}
@@ -102,8 +53,8 @@ func (c *Client) UpdateConfigurationSetSendingEnabledRequest(input *UpdateConfig
 // UpdateConfigurationSetSendingEnabled API operation.
 type UpdateConfigurationSetSendingEnabledRequest struct {
 	*aws.Request
-	Input *UpdateConfigurationSetSendingEnabledInput
-	Copy  func(*UpdateConfigurationSetSendingEnabledInput) UpdateConfigurationSetSendingEnabledRequest
+	Input *types.UpdateConfigurationSetSendingEnabledInput
+	Copy  func(*types.UpdateConfigurationSetSendingEnabledInput) UpdateConfigurationSetSendingEnabledRequest
 }
 
 // Send marshals and sends the UpdateConfigurationSetSendingEnabled API request.
@@ -115,7 +66,7 @@ func (r UpdateConfigurationSetSendingEnabledRequest) Send(ctx context.Context) (
 	}
 
 	resp := &UpdateConfigurationSetSendingEnabledResponse{
-		UpdateConfigurationSetSendingEnabledOutput: r.Request.Data.(*UpdateConfigurationSetSendingEnabledOutput),
+		UpdateConfigurationSetSendingEnabledOutput: r.Request.Data.(*types.UpdateConfigurationSetSendingEnabledOutput),
 		response: &aws.Response{Request: r.Request},
 	}
 
@@ -125,7 +76,7 @@ func (r UpdateConfigurationSetSendingEnabledRequest) Send(ctx context.Context) (
 // UpdateConfigurationSetSendingEnabledResponse is the response type for the
 // UpdateConfigurationSetSendingEnabled API operation.
 type UpdateConfigurationSetSendingEnabledResponse struct {
-	*UpdateConfigurationSetSendingEnabledOutput
+	*types.UpdateConfigurationSetSendingEnabledOutput
 
 	response *aws.Response
 }

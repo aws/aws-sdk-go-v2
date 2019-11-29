@@ -6,35 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/redshift/types"
 )
-
-type DescribeEventCategoriesInput struct {
-	_ struct{} `type:"structure"`
-
-	// The source type, such as cluster or parameter group, to which the described
-	// event categories apply.
-	//
-	// Valid values: cluster, cluster-snapshot, cluster-parameter-group, and cluster-security-group.
-	SourceType *string `type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeEventCategoriesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type DescribeEventCategoriesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A list of event categories descriptions.
-	EventCategoriesMapList []EventCategoriesMap `locationNameList:"EventCategoriesMap" type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeEventCategoriesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeEventCategories = "DescribeEventCategories"
 
@@ -53,7 +26,7 @@ const opDescribeEventCategories = "DescribeEventCategories"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeEventCategories
-func (c *Client) DescribeEventCategoriesRequest(input *DescribeEventCategoriesInput) DescribeEventCategoriesRequest {
+func (c *Client) DescribeEventCategoriesRequest(input *types.DescribeEventCategoriesInput) DescribeEventCategoriesRequest {
 	op := &aws.Operation{
 		Name:       opDescribeEventCategories,
 		HTTPMethod: "POST",
@@ -61,10 +34,10 @@ func (c *Client) DescribeEventCategoriesRequest(input *DescribeEventCategoriesIn
 	}
 
 	if input == nil {
-		input = &DescribeEventCategoriesInput{}
+		input = &types.DescribeEventCategoriesInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeEventCategoriesOutput{})
+	req := c.newRequest(op, input, &types.DescribeEventCategoriesOutput{})
 	return DescribeEventCategoriesRequest{Request: req, Input: input, Copy: c.DescribeEventCategoriesRequest}
 }
 
@@ -72,8 +45,8 @@ func (c *Client) DescribeEventCategoriesRequest(input *DescribeEventCategoriesIn
 // DescribeEventCategories API operation.
 type DescribeEventCategoriesRequest struct {
 	*aws.Request
-	Input *DescribeEventCategoriesInput
-	Copy  func(*DescribeEventCategoriesInput) DescribeEventCategoriesRequest
+	Input *types.DescribeEventCategoriesInput
+	Copy  func(*types.DescribeEventCategoriesInput) DescribeEventCategoriesRequest
 }
 
 // Send marshals and sends the DescribeEventCategories API request.
@@ -85,7 +58,7 @@ func (r DescribeEventCategoriesRequest) Send(ctx context.Context) (*DescribeEven
 	}
 
 	resp := &DescribeEventCategoriesResponse{
-		DescribeEventCategoriesOutput: r.Request.Data.(*DescribeEventCategoriesOutput),
+		DescribeEventCategoriesOutput: r.Request.Data.(*types.DescribeEventCategoriesOutput),
 		response:                      &aws.Response{Request: r.Request},
 	}
 
@@ -95,7 +68,7 @@ func (r DescribeEventCategoriesRequest) Send(ctx context.Context) (*DescribeEven
 // DescribeEventCategoriesResponse is the response type for the
 // DescribeEventCategories API operation.
 type DescribeEventCategoriesResponse struct {
-	*DescribeEventCategoriesOutput
+	*types.DescribeEventCategoriesOutput
 
 	response *aws.Response
 }

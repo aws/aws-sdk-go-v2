@@ -6,40 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/restjson"
+	"github.com/aws/aws-sdk-go-v2/service/elasticsearchservice/types"
 )
-
-type DeleteElasticsearchServiceRoleInput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteElasticsearchServiceRoleInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteElasticsearchServiceRoleInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	return nil
-}
-
-type DeleteElasticsearchServiceRoleOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteElasticsearchServiceRoleOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteElasticsearchServiceRoleOutput) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
 
 const opDeleteElasticsearchServiceRole = "DeleteElasticsearchServiceRole"
 
@@ -58,7 +28,7 @@ const opDeleteElasticsearchServiceRole = "DeleteElasticsearchServiceRole"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) DeleteElasticsearchServiceRoleRequest(input *DeleteElasticsearchServiceRoleInput) DeleteElasticsearchServiceRoleRequest {
+func (c *Client) DeleteElasticsearchServiceRoleRequest(input *types.DeleteElasticsearchServiceRoleInput) DeleteElasticsearchServiceRoleRequest {
 	op := &aws.Operation{
 		Name:       opDeleteElasticsearchServiceRole,
 		HTTPMethod: "DELETE",
@@ -66,10 +36,10 @@ func (c *Client) DeleteElasticsearchServiceRoleRequest(input *DeleteElasticsearc
 	}
 
 	if input == nil {
-		input = &DeleteElasticsearchServiceRoleInput{}
+		input = &types.DeleteElasticsearchServiceRoleInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteElasticsearchServiceRoleOutput{})
+	req := c.newRequest(op, input, &types.DeleteElasticsearchServiceRoleOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return DeleteElasticsearchServiceRoleRequest{Request: req, Input: input, Copy: c.DeleteElasticsearchServiceRoleRequest}
@@ -79,8 +49,8 @@ func (c *Client) DeleteElasticsearchServiceRoleRequest(input *DeleteElasticsearc
 // DeleteElasticsearchServiceRole API operation.
 type DeleteElasticsearchServiceRoleRequest struct {
 	*aws.Request
-	Input *DeleteElasticsearchServiceRoleInput
-	Copy  func(*DeleteElasticsearchServiceRoleInput) DeleteElasticsearchServiceRoleRequest
+	Input *types.DeleteElasticsearchServiceRoleInput
+	Copy  func(*types.DeleteElasticsearchServiceRoleInput) DeleteElasticsearchServiceRoleRequest
 }
 
 // Send marshals and sends the DeleteElasticsearchServiceRole API request.
@@ -92,7 +62,7 @@ func (r DeleteElasticsearchServiceRoleRequest) Send(ctx context.Context) (*Delet
 	}
 
 	resp := &DeleteElasticsearchServiceRoleResponse{
-		DeleteElasticsearchServiceRoleOutput: r.Request.Data.(*DeleteElasticsearchServiceRoleOutput),
+		DeleteElasticsearchServiceRoleOutput: r.Request.Data.(*types.DeleteElasticsearchServiceRoleOutput),
 		response:                             &aws.Response{Request: r.Request},
 	}
 
@@ -102,7 +72,7 @@ func (r DeleteElasticsearchServiceRoleRequest) Send(ctx context.Context) (*Delet
 // DeleteElasticsearchServiceRoleResponse is the response type for the
 // DeleteElasticsearchServiceRole API operation.
 type DeleteElasticsearchServiceRoleResponse struct {
-	*DeleteElasticsearchServiceRoleOutput
+	*types.DeleteElasticsearchServiceRoleOutput
 
 	response *aws.Response
 }

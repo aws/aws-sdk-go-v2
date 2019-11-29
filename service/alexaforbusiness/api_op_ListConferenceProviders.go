@@ -6,55 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/alexaforbusiness/types"
 )
-
-type ListConferenceProvidersInput struct {
-	_ struct{} `type:"structure"`
-
-	// The maximum number of conference providers to be returned, per paginated
-	// calls.
-	MaxResults *int64 `min:"1" type:"integer"`
-
-	// The tokens used for pagination.
-	NextToken *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s ListConferenceProvidersInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListConferenceProvidersInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListConferenceProvidersInput"}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-	if s.NextToken != nil && len(*s.NextToken) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ListConferenceProvidersOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The conference providers.
-	ConferenceProviders []ConferenceProvider `type:"list"`
-
-	// The tokens used for pagination.
-	NextToken *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s ListConferenceProvidersOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListConferenceProviders = "ListConferenceProviders"
 
@@ -71,7 +24,7 @@ const opListConferenceProviders = "ListConferenceProviders"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/ListConferenceProviders
-func (c *Client) ListConferenceProvidersRequest(input *ListConferenceProvidersInput) ListConferenceProvidersRequest {
+func (c *Client) ListConferenceProvidersRequest(input *types.ListConferenceProvidersInput) ListConferenceProvidersRequest {
 	op := &aws.Operation{
 		Name:       opListConferenceProviders,
 		HTTPMethod: "POST",
@@ -85,10 +38,10 @@ func (c *Client) ListConferenceProvidersRequest(input *ListConferenceProvidersIn
 	}
 
 	if input == nil {
-		input = &ListConferenceProvidersInput{}
+		input = &types.ListConferenceProvidersInput{}
 	}
 
-	req := c.newRequest(op, input, &ListConferenceProvidersOutput{})
+	req := c.newRequest(op, input, &types.ListConferenceProvidersOutput{})
 	return ListConferenceProvidersRequest{Request: req, Input: input, Copy: c.ListConferenceProvidersRequest}
 }
 
@@ -96,8 +49,8 @@ func (c *Client) ListConferenceProvidersRequest(input *ListConferenceProvidersIn
 // ListConferenceProviders API operation.
 type ListConferenceProvidersRequest struct {
 	*aws.Request
-	Input *ListConferenceProvidersInput
-	Copy  func(*ListConferenceProvidersInput) ListConferenceProvidersRequest
+	Input *types.ListConferenceProvidersInput
+	Copy  func(*types.ListConferenceProvidersInput) ListConferenceProvidersRequest
 }
 
 // Send marshals and sends the ListConferenceProviders API request.
@@ -109,7 +62,7 @@ func (r ListConferenceProvidersRequest) Send(ctx context.Context) (*ListConferen
 	}
 
 	resp := &ListConferenceProvidersResponse{
-		ListConferenceProvidersOutput: r.Request.Data.(*ListConferenceProvidersOutput),
+		ListConferenceProvidersOutput: r.Request.Data.(*types.ListConferenceProvidersOutput),
 		response:                      &aws.Response{Request: r.Request},
 	}
 
@@ -139,7 +92,7 @@ func NewListConferenceProvidersPaginator(req ListConferenceProvidersRequest) Lis
 	return ListConferenceProvidersPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListConferenceProvidersInput
+				var inCpy *types.ListConferenceProvidersInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -159,14 +112,14 @@ type ListConferenceProvidersPaginator struct {
 	aws.Pager
 }
 
-func (p *ListConferenceProvidersPaginator) CurrentPage() *ListConferenceProvidersOutput {
-	return p.Pager.CurrentPage().(*ListConferenceProvidersOutput)
+func (p *ListConferenceProvidersPaginator) CurrentPage() *types.ListConferenceProvidersOutput {
+	return p.Pager.CurrentPage().(*types.ListConferenceProvidersOutput)
 }
 
 // ListConferenceProvidersResponse is the response type for the
 // ListConferenceProviders API operation.
 type ListConferenceProvidersResponse struct {
-	*ListConferenceProvidersOutput
+	*types.ListConferenceProvidersOutput
 
 	response *aws.Response
 }

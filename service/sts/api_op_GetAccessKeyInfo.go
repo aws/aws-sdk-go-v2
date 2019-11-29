@@ -6,54 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/sts/types"
 )
-
-type GetAccessKeyInfoInput struct {
-	_ struct{} `type:"structure"`
-
-	// The identifier of an access key.
-	//
-	// This parameter allows (through its regex pattern) a string of characters
-	// that can consist of any upper- or lowercased letter or digit.
-	//
-	// AccessKeyId is a required field
-	AccessKeyId *string `min:"16" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetAccessKeyInfoInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetAccessKeyInfoInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetAccessKeyInfoInput"}
-
-	if s.AccessKeyId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("AccessKeyId"))
-	}
-	if s.AccessKeyId != nil && len(*s.AccessKeyId) < 16 {
-		invalidParams.Add(aws.NewErrParamMinLen("AccessKeyId", 16))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type GetAccessKeyInfoOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The number used to identify the AWS account.
-	Account *string `type:"string"`
-}
-
-// String returns the string representation
-func (s GetAccessKeyInfoOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetAccessKeyInfo = "GetAccessKeyInfo"
 
@@ -92,7 +46,7 @@ const opGetAccessKeyInfo = "GetAccessKeyInfo"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sts-2011-06-15/GetAccessKeyInfo
-func (c *Client) GetAccessKeyInfoRequest(input *GetAccessKeyInfoInput) GetAccessKeyInfoRequest {
+func (c *Client) GetAccessKeyInfoRequest(input *types.GetAccessKeyInfoInput) GetAccessKeyInfoRequest {
 	op := &aws.Operation{
 		Name:       opGetAccessKeyInfo,
 		HTTPMethod: "POST",
@@ -100,10 +54,10 @@ func (c *Client) GetAccessKeyInfoRequest(input *GetAccessKeyInfoInput) GetAccess
 	}
 
 	if input == nil {
-		input = &GetAccessKeyInfoInput{}
+		input = &types.GetAccessKeyInfoInput{}
 	}
 
-	req := c.newRequest(op, input, &GetAccessKeyInfoOutput{})
+	req := c.newRequest(op, input, &types.GetAccessKeyInfoOutput{})
 	return GetAccessKeyInfoRequest{Request: req, Input: input, Copy: c.GetAccessKeyInfoRequest}
 }
 
@@ -111,8 +65,8 @@ func (c *Client) GetAccessKeyInfoRequest(input *GetAccessKeyInfoInput) GetAccess
 // GetAccessKeyInfo API operation.
 type GetAccessKeyInfoRequest struct {
 	*aws.Request
-	Input *GetAccessKeyInfoInput
-	Copy  func(*GetAccessKeyInfoInput) GetAccessKeyInfoRequest
+	Input *types.GetAccessKeyInfoInput
+	Copy  func(*types.GetAccessKeyInfoInput) GetAccessKeyInfoRequest
 }
 
 // Send marshals and sends the GetAccessKeyInfo API request.
@@ -124,7 +78,7 @@ func (r GetAccessKeyInfoRequest) Send(ctx context.Context) (*GetAccessKeyInfoRes
 	}
 
 	resp := &GetAccessKeyInfoResponse{
-		GetAccessKeyInfoOutput: r.Request.Data.(*GetAccessKeyInfoOutput),
+		GetAccessKeyInfoOutput: r.Request.Data.(*types.GetAccessKeyInfoOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -134,7 +88,7 @@ func (r GetAccessKeyInfoRequest) Send(ctx context.Context) (*GetAccessKeyInfoRes
 // GetAccessKeyInfoResponse is the response type for the
 // GetAccessKeyInfo API operation.
 type GetAccessKeyInfoResponse struct {
-	*GetAccessKeyInfoOutput
+	*types.GetAccessKeyInfoOutput
 
 	response *aws.Response
 }

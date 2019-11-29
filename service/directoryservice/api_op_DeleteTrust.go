@@ -6,54 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/directoryservice/types"
 )
-
-// Deletes the local side of an existing trust relationship between the AWS
-// Managed Microsoft AD directory and the external domain.
-type DeleteTrustInput struct {
-	_ struct{} `type:"structure"`
-
-	// Delete a conditional forwarder as part of a DeleteTrustRequest.
-	DeleteAssociatedConditionalForwarder *bool `type:"boolean"`
-
-	// The Trust ID of the trust relationship to be deleted.
-	//
-	// TrustId is a required field
-	TrustId *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteTrustInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteTrustInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteTrustInput"}
-
-	if s.TrustId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("TrustId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// The result of a DeleteTrust request.
-type DeleteTrustOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The Trust ID of the trust relationship that was deleted.
-	TrustId *string `type:"string"`
-}
-
-// String returns the string representation
-func (s DeleteTrustOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteTrust = "DeleteTrust"
 
@@ -71,7 +25,7 @@ const opDeleteTrust = "DeleteTrust"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DeleteTrust
-func (c *Client) DeleteTrustRequest(input *DeleteTrustInput) DeleteTrustRequest {
+func (c *Client) DeleteTrustRequest(input *types.DeleteTrustInput) DeleteTrustRequest {
 	op := &aws.Operation{
 		Name:       opDeleteTrust,
 		HTTPMethod: "POST",
@@ -79,10 +33,10 @@ func (c *Client) DeleteTrustRequest(input *DeleteTrustInput) DeleteTrustRequest 
 	}
 
 	if input == nil {
-		input = &DeleteTrustInput{}
+		input = &types.DeleteTrustInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteTrustOutput{})
+	req := c.newRequest(op, input, &types.DeleteTrustOutput{})
 	return DeleteTrustRequest{Request: req, Input: input, Copy: c.DeleteTrustRequest}
 }
 
@@ -90,8 +44,8 @@ func (c *Client) DeleteTrustRequest(input *DeleteTrustInput) DeleteTrustRequest 
 // DeleteTrust API operation.
 type DeleteTrustRequest struct {
 	*aws.Request
-	Input *DeleteTrustInput
-	Copy  func(*DeleteTrustInput) DeleteTrustRequest
+	Input *types.DeleteTrustInput
+	Copy  func(*types.DeleteTrustInput) DeleteTrustRequest
 }
 
 // Send marshals and sends the DeleteTrust API request.
@@ -103,7 +57,7 @@ func (r DeleteTrustRequest) Send(ctx context.Context) (*DeleteTrustResponse, err
 	}
 
 	resp := &DeleteTrustResponse{
-		DeleteTrustOutput: r.Request.Data.(*DeleteTrustOutput),
+		DeleteTrustOutput: r.Request.Data.(*types.DeleteTrustOutput),
 		response:          &aws.Response{Request: r.Request},
 	}
 
@@ -113,7 +67,7 @@ func (r DeleteTrustRequest) Send(ctx context.Context) (*DeleteTrustResponse, err
 // DeleteTrustResponse is the response type for the
 // DeleteTrust API operation.
 type DeleteTrustResponse struct {
-	*DeleteTrustOutput
+	*types.DeleteTrustOutput
 
 	response *aws.Response
 }

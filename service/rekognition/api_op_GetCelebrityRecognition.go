@@ -6,86 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/rekognition/types"
 )
-
-type GetCelebrityRecognitionInput struct {
-	_ struct{} `type:"structure"`
-
-	// Job identifier for the required celebrity recognition analysis. You can get
-	// the job identifer from a call to StartCelebrityRecognition.
-	//
-	// JobId is a required field
-	JobId *string `min:"1" type:"string" required:"true"`
-
-	// Maximum number of results to return per paginated call. The largest value
-	// you can specify is 1000. If you specify a value greater than 1000, a maximum
-	// of 1000 results is returned. The default value is 1000.
-	MaxResults *int64 `min:"1" type:"integer"`
-
-	// If the previous response was incomplete (because there is more recognized
-	// celebrities to retrieve), Amazon Rekognition Video returns a pagination token
-	// in the response. You can use this pagination token to retrieve the next set
-	// of celebrities.
-	NextToken *string `type:"string"`
-
-	// Sort to use for celebrities returned in Celebrities field. Specify ID to
-	// sort by the celebrity identifier, specify TIMESTAMP to sort by the time the
-	// celebrity was recognized.
-	SortBy CelebrityRecognitionSortBy `type:"string" enum:"true"`
-}
-
-// String returns the string representation
-func (s GetCelebrityRecognitionInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetCelebrityRecognitionInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetCelebrityRecognitionInput"}
-
-	if s.JobId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("JobId"))
-	}
-	if s.JobId != nil && len(*s.JobId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("JobId", 1))
-	}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type GetCelebrityRecognitionOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Array of celebrities recognized in the video.
-	Celebrities []CelebrityRecognition `type:"list"`
-
-	// The current status of the celebrity recognition job.
-	JobStatus VideoJobStatus `type:"string" enum:"true"`
-
-	// If the response is truncated, Amazon Rekognition Video returns this token
-	// that you can use in the subsequent request to retrieve the next set of celebrities.
-	NextToken *string `type:"string"`
-
-	// If the job fails, StatusMessage provides a descriptive error message.
-	StatusMessage *string `type:"string"`
-
-	// Information about a video that Amazon Rekognition Video analyzed. Videometadata
-	// is returned in every page of paginated responses from a Amazon Rekognition
-	// Video operation.
-	VideoMetadata *VideoMetadata `type:"structure"`
-}
-
-// String returns the string representation
-func (s GetCelebrityRecognitionOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetCelebrityRecognition = "GetCelebrityRecognition"
 
@@ -140,7 +62,7 @@ const opGetCelebrityRecognition = "GetCelebrityRecognition"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) GetCelebrityRecognitionRequest(input *GetCelebrityRecognitionInput) GetCelebrityRecognitionRequest {
+func (c *Client) GetCelebrityRecognitionRequest(input *types.GetCelebrityRecognitionInput) GetCelebrityRecognitionRequest {
 	op := &aws.Operation{
 		Name:       opGetCelebrityRecognition,
 		HTTPMethod: "POST",
@@ -154,10 +76,10 @@ func (c *Client) GetCelebrityRecognitionRequest(input *GetCelebrityRecognitionIn
 	}
 
 	if input == nil {
-		input = &GetCelebrityRecognitionInput{}
+		input = &types.GetCelebrityRecognitionInput{}
 	}
 
-	req := c.newRequest(op, input, &GetCelebrityRecognitionOutput{})
+	req := c.newRequest(op, input, &types.GetCelebrityRecognitionOutput{})
 	return GetCelebrityRecognitionRequest{Request: req, Input: input, Copy: c.GetCelebrityRecognitionRequest}
 }
 
@@ -165,8 +87,8 @@ func (c *Client) GetCelebrityRecognitionRequest(input *GetCelebrityRecognitionIn
 // GetCelebrityRecognition API operation.
 type GetCelebrityRecognitionRequest struct {
 	*aws.Request
-	Input *GetCelebrityRecognitionInput
-	Copy  func(*GetCelebrityRecognitionInput) GetCelebrityRecognitionRequest
+	Input *types.GetCelebrityRecognitionInput
+	Copy  func(*types.GetCelebrityRecognitionInput) GetCelebrityRecognitionRequest
 }
 
 // Send marshals and sends the GetCelebrityRecognition API request.
@@ -178,7 +100,7 @@ func (r GetCelebrityRecognitionRequest) Send(ctx context.Context) (*GetCelebrity
 	}
 
 	resp := &GetCelebrityRecognitionResponse{
-		GetCelebrityRecognitionOutput: r.Request.Data.(*GetCelebrityRecognitionOutput),
+		GetCelebrityRecognitionOutput: r.Request.Data.(*types.GetCelebrityRecognitionOutput),
 		response:                      &aws.Response{Request: r.Request},
 	}
 
@@ -208,7 +130,7 @@ func NewGetCelebrityRecognitionPaginator(req GetCelebrityRecognitionRequest) Get
 	return GetCelebrityRecognitionPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *GetCelebrityRecognitionInput
+				var inCpy *types.GetCelebrityRecognitionInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -228,14 +150,14 @@ type GetCelebrityRecognitionPaginator struct {
 	aws.Pager
 }
 
-func (p *GetCelebrityRecognitionPaginator) CurrentPage() *GetCelebrityRecognitionOutput {
-	return p.Pager.CurrentPage().(*GetCelebrityRecognitionOutput)
+func (p *GetCelebrityRecognitionPaginator) CurrentPage() *types.GetCelebrityRecognitionOutput {
+	return p.Pager.CurrentPage().(*types.GetCelebrityRecognitionOutput)
 }
 
 // GetCelebrityRecognitionResponse is the response type for the
 // GetCelebrityRecognition API operation.
 type GetCelebrityRecognitionResponse struct {
-	*GetCelebrityRecognitionOutput
+	*types.GetCelebrityRecognitionOutput
 
 	response *aws.Response
 }

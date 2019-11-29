@@ -6,117 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/iot/types"
 )
-
-// The input for the DescribeThingType operation.
-type DescribeThingTypeInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the thing type.
-	//
-	// ThingTypeName is a required field
-	ThingTypeName *string `location:"uri" locationName:"thingTypeName" min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeThingTypeInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeThingTypeInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeThingTypeInput"}
-
-	if s.ThingTypeName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ThingTypeName"))
-	}
-	if s.ThingTypeName != nil && len(*s.ThingTypeName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ThingTypeName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DescribeThingTypeInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.ThingTypeName != nil {
-		v := *s.ThingTypeName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "thingTypeName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-// The output for the DescribeThingType operation.
-type DescribeThingTypeOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The thing type ARN.
-	ThingTypeArn *string `locationName:"thingTypeArn" type:"string"`
-
-	// The thing type ID.
-	ThingTypeId *string `locationName:"thingTypeId" type:"string"`
-
-	// The ThingTypeMetadata contains additional information about the thing type
-	// including: creation date and time, a value indicating whether the thing type
-	// is deprecated, and a date and time when it was deprecated.
-	ThingTypeMetadata *ThingTypeMetadata `locationName:"thingTypeMetadata" type:"structure"`
-
-	// The name of the thing type.
-	ThingTypeName *string `locationName:"thingTypeName" min:"1" type:"string"`
-
-	// The ThingTypeProperties contains information about the thing type including
-	// description, and a list of searchable thing attribute names.
-	ThingTypeProperties *ThingTypeProperties `locationName:"thingTypeProperties" type:"structure"`
-}
-
-// String returns the string representation
-func (s DescribeThingTypeOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DescribeThingTypeOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.ThingTypeArn != nil {
-		v := *s.ThingTypeArn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "thingTypeArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.ThingTypeId != nil {
-		v := *s.ThingTypeId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "thingTypeId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.ThingTypeMetadata != nil {
-		v := s.ThingTypeMetadata
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "thingTypeMetadata", v, metadata)
-	}
-	if s.ThingTypeName != nil {
-		v := *s.ThingTypeName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "thingTypeName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.ThingTypeProperties != nil {
-		v := s.ThingTypeProperties
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "thingTypeProperties", v, metadata)
-	}
-	return nil
-}
 
 const opDescribeThingType = "DescribeThingType"
 
@@ -131,7 +22,7 @@ const opDescribeThingType = "DescribeThingType"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) DescribeThingTypeRequest(input *DescribeThingTypeInput) DescribeThingTypeRequest {
+func (c *Client) DescribeThingTypeRequest(input *types.DescribeThingTypeInput) DescribeThingTypeRequest {
 	op := &aws.Operation{
 		Name:       opDescribeThingType,
 		HTTPMethod: "GET",
@@ -139,10 +30,10 @@ func (c *Client) DescribeThingTypeRequest(input *DescribeThingTypeInput) Describ
 	}
 
 	if input == nil {
-		input = &DescribeThingTypeInput{}
+		input = &types.DescribeThingTypeInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeThingTypeOutput{})
+	req := c.newRequest(op, input, &types.DescribeThingTypeOutput{})
 	return DescribeThingTypeRequest{Request: req, Input: input, Copy: c.DescribeThingTypeRequest}
 }
 
@@ -150,8 +41,8 @@ func (c *Client) DescribeThingTypeRequest(input *DescribeThingTypeInput) Describ
 // DescribeThingType API operation.
 type DescribeThingTypeRequest struct {
 	*aws.Request
-	Input *DescribeThingTypeInput
-	Copy  func(*DescribeThingTypeInput) DescribeThingTypeRequest
+	Input *types.DescribeThingTypeInput
+	Copy  func(*types.DescribeThingTypeInput) DescribeThingTypeRequest
 }
 
 // Send marshals and sends the DescribeThingType API request.
@@ -163,7 +54,7 @@ func (r DescribeThingTypeRequest) Send(ctx context.Context) (*DescribeThingTypeR
 	}
 
 	resp := &DescribeThingTypeResponse{
-		DescribeThingTypeOutput: r.Request.Data.(*DescribeThingTypeOutput),
+		DescribeThingTypeOutput: r.Request.Data.(*types.DescribeThingTypeOutput),
 		response:                &aws.Response{Request: r.Request},
 	}
 
@@ -173,7 +64,7 @@ func (r DescribeThingTypeRequest) Send(ctx context.Context) (*DescribeThingTypeR
 // DescribeThingTypeResponse is the response type for the
 // DescribeThingType API operation.
 type DescribeThingTypeResponse struct {
-	*DescribeThingTypeOutput
+	*types.DescribeThingTypeOutput
 
 	response *aws.Response
 }

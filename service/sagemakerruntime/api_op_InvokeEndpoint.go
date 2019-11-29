@@ -6,150 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/sagemakerruntime/types"
 )
-
-type InvokeEndpointInput struct {
-	_ struct{} `type:"structure" payload:"Body"`
-
-	// The desired MIME type of the inference in the response.
-	Accept *string `location:"header" locationName:"Accept" type:"string"`
-
-	// Provides input data, in the format specified in the ContentType request header.
-	// Amazon SageMaker passes all of the data in the body to the model.
-	//
-	// For information about the format of the request body, see Common Data Formats—Inference
-	// (http://docs.aws.amazon.com/sagemaker/latest/dg/cdf-inference.html).
-	//
-	// Body is a required field
-	Body []byte `type:"blob" required:"true" sensitive:"true"`
-
-	// The MIME type of the input data in the request body.
-	ContentType *string `location:"header" locationName:"Content-Type" type:"string"`
-
-	CustomAttributes *string `location:"header" locationName:"X-Amzn-SageMaker-Custom-Attributes" type:"string" sensitive:"true"`
-
-	// The name of the endpoint that you specified when you created the endpoint
-	// using the CreateEndpoint (http://docs.aws.amazon.com/sagemaker/latest/dg/API_CreateEndpoint.html)
-	// API.
-	//
-	// EndpointName is a required field
-	EndpointName *string `location:"uri" locationName:"EndpointName" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s InvokeEndpointInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *InvokeEndpointInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "InvokeEndpointInput"}
-
-	if s.Body == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Body"))
-	}
-
-	if s.EndpointName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("EndpointName"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s InvokeEndpointInput) MarshalFields(e protocol.FieldEncoder) error {
-
-	if s.Accept != nil {
-		v := *s.Accept
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "Accept", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.ContentType != nil {
-		v := *s.ContentType
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.CustomAttributes != nil {
-		v := *s.CustomAttributes
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "X-Amzn-SageMaker-Custom-Attributes", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.EndpointName != nil {
-		v := *s.EndpointName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "EndpointName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Body != nil {
-		v := s.Body
-
-		metadata := protocol.Metadata{}
-		e.SetStream(protocol.PayloadTarget, "Body", protocol.BytesStream(v), metadata)
-	}
-	return nil
-}
-
-type InvokeEndpointOutput struct {
-	_ struct{} `type:"structure" payload:"Body"`
-
-	// Includes the inference provided by the model.
-	//
-	// For information about the format of the response body, see Common Data Formats—Inference
-	// (http://docs.aws.amazon.com/sagemaker/latest/dg/cdf-inference.html).
-	//
-	// Body is a required field
-	Body []byte `type:"blob" required:"true" sensitive:"true"`
-
-	// The MIME type of the inference returned in the response body.
-	ContentType *string `location:"header" locationName:"Content-Type" type:"string"`
-
-	CustomAttributes *string `location:"header" locationName:"X-Amzn-SageMaker-Custom-Attributes" type:"string" sensitive:"true"`
-
-	// Identifies the production variant that was invoked.
-	InvokedProductionVariant *string `location:"header" locationName:"x-Amzn-Invoked-Production-Variant" type:"string"`
-}
-
-// String returns the string representation
-func (s InvokeEndpointOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s InvokeEndpointOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.ContentType != nil {
-		v := *s.ContentType
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.CustomAttributes != nil {
-		v := *s.CustomAttributes
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "X-Amzn-SageMaker-Custom-Attributes", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.InvokedProductionVariant != nil {
-		v := *s.InvokedProductionVariant
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "x-Amzn-Invoked-Production-Variant", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Body != nil {
-		v := s.Body
-
-		metadata := protocol.Metadata{}
-		e.SetStream(protocol.PayloadTarget, "Body", protocol.BytesStream(v), metadata)
-	}
-	return nil
-}
 
 const opInvokeEndpoint = "InvokeEndpoint"
 
@@ -160,15 +18,21 @@ const opInvokeEndpoint = "InvokeEndpoint"
 // your client applications use this API to get inferences from the model hosted
 // at the specified endpoint.
 //
-// For an overview of Amazon SageMaker, see How It Works (http://docs.aws.amazon.com/sagemaker/latest/dg/how-it-works.html).
+// For an overview of Amazon SageMaker, see How It Works (https://docs.aws.amazon.com/sagemaker/latest/dg/how-it-works.html).
 //
 // Amazon SageMaker strips all POST headers except those supported by the API.
 // Amazon SageMaker might add additional headers. You should not rely on the
 // behavior of headers outside those enumerated in the request syntax.
 //
-// Cals to InvokeEndpoint are authenticated by using AWS Signature Version 4.
-// For information, see Authenticating Requests (AWS Signature Version 4) (http://docs.aws.amazon.com/AmazonS3/latest/API/sig-v4-authenticating-requests.html)
+// Calls to InvokeEndpoint are authenticated by using AWS Signature Version
+// 4. For information, see Authenticating Requests (AWS Signature Version 4)
+// (http://docs.aws.amazon.com/AmazonS3/latest/API/sig-v4-authenticating-requests.html)
 // in the Amazon S3 API Reference.
+//
+// A customer's model containers must respond to requests within 60 seconds.
+// The model itself can have a maximum processing time of 60 seconds before
+// responding to the /invocations. If your model is going to take 50-60 seconds
+// of processing time, the SDK socket timeout should be set to be 70 seconds.
 //
 // Endpoints are scoped to an individual account, and are not public. The URL
 // does not contain the account ID, but Amazon SageMaker determines the account
@@ -182,7 +46,7 @@ const opInvokeEndpoint = "InvokeEndpoint"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/runtime.sagemaker-2017-05-13/InvokeEndpoint
-func (c *Client) InvokeEndpointRequest(input *InvokeEndpointInput) InvokeEndpointRequest {
+func (c *Client) InvokeEndpointRequest(input *types.InvokeEndpointInput) InvokeEndpointRequest {
 	op := &aws.Operation{
 		Name:       opInvokeEndpoint,
 		HTTPMethod: "POST",
@@ -190,10 +54,10 @@ func (c *Client) InvokeEndpointRequest(input *InvokeEndpointInput) InvokeEndpoin
 	}
 
 	if input == nil {
-		input = &InvokeEndpointInput{}
+		input = &types.InvokeEndpointInput{}
 	}
 
-	req := c.newRequest(op, input, &InvokeEndpointOutput{})
+	req := c.newRequest(op, input, &types.InvokeEndpointOutput{})
 	return InvokeEndpointRequest{Request: req, Input: input, Copy: c.InvokeEndpointRequest}
 }
 
@@ -201,8 +65,8 @@ func (c *Client) InvokeEndpointRequest(input *InvokeEndpointInput) InvokeEndpoin
 // InvokeEndpoint API operation.
 type InvokeEndpointRequest struct {
 	*aws.Request
-	Input *InvokeEndpointInput
-	Copy  func(*InvokeEndpointInput) InvokeEndpointRequest
+	Input *types.InvokeEndpointInput
+	Copy  func(*types.InvokeEndpointInput) InvokeEndpointRequest
 }
 
 // Send marshals and sends the InvokeEndpoint API request.
@@ -214,7 +78,7 @@ func (r InvokeEndpointRequest) Send(ctx context.Context) (*InvokeEndpointRespons
 	}
 
 	resp := &InvokeEndpointResponse{
-		InvokeEndpointOutput: r.Request.Data.(*InvokeEndpointOutput),
+		InvokeEndpointOutput: r.Request.Data.(*types.InvokeEndpointOutput),
 		response:             &aws.Response{Request: r.Request},
 	}
 
@@ -224,7 +88,7 @@ func (r InvokeEndpointRequest) Send(ctx context.Context) (*InvokeEndpointRespons
 // InvokeEndpointResponse is the response type for the
 // InvokeEndpoint API operation.
 type InvokeEndpointResponse struct {
-	*InvokeEndpointOutput
+	*types.InvokeEndpointOutput
 
 	response *aws.Response
 }

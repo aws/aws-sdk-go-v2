@@ -6,54 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/lakeformation/types"
 )
-
-type UpdateResourceInput struct {
-	_ struct{} `type:"structure"`
-
-	// The resource ARN.
-	//
-	// ResourceArn is a required field
-	ResourceArn *string `type:"string" required:"true"`
-
-	// The new role to use for the given resource registered in AWS Lake Formation.
-	//
-	// RoleArn is a required field
-	RoleArn *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s UpdateResourceInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateResourceInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateResourceInput"}
-
-	if s.ResourceArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ResourceArn"))
-	}
-
-	if s.RoleArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("RoleArn"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type UpdateResourceOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s UpdateResourceOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opUpdateResource = "UpdateResource"
 
@@ -71,7 +25,7 @@ const opUpdateResource = "UpdateResource"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/UpdateResource
-func (c *Client) UpdateResourceRequest(input *UpdateResourceInput) UpdateResourceRequest {
+func (c *Client) UpdateResourceRequest(input *types.UpdateResourceInput) UpdateResourceRequest {
 	op := &aws.Operation{
 		Name:       opUpdateResource,
 		HTTPMethod: "POST",
@@ -79,10 +33,10 @@ func (c *Client) UpdateResourceRequest(input *UpdateResourceInput) UpdateResourc
 	}
 
 	if input == nil {
-		input = &UpdateResourceInput{}
+		input = &types.UpdateResourceInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateResourceOutput{})
+	req := c.newRequest(op, input, &types.UpdateResourceOutput{})
 	return UpdateResourceRequest{Request: req, Input: input, Copy: c.UpdateResourceRequest}
 }
 
@@ -90,8 +44,8 @@ func (c *Client) UpdateResourceRequest(input *UpdateResourceInput) UpdateResourc
 // UpdateResource API operation.
 type UpdateResourceRequest struct {
 	*aws.Request
-	Input *UpdateResourceInput
-	Copy  func(*UpdateResourceInput) UpdateResourceRequest
+	Input *types.UpdateResourceInput
+	Copy  func(*types.UpdateResourceInput) UpdateResourceRequest
 }
 
 // Send marshals and sends the UpdateResource API request.
@@ -103,7 +57,7 @@ func (r UpdateResourceRequest) Send(ctx context.Context) (*UpdateResourceRespons
 	}
 
 	resp := &UpdateResourceResponse{
-		UpdateResourceOutput: r.Request.Data.(*UpdateResourceOutput),
+		UpdateResourceOutput: r.Request.Data.(*types.UpdateResourceOutput),
 		response:             &aws.Response{Request: r.Request},
 	}
 
@@ -113,7 +67,7 @@ func (r UpdateResourceRequest) Send(ctx context.Context) (*UpdateResourceRespons
 // UpdateResourceResponse is the response type for the
 // UpdateResource API operation.
 type UpdateResourceResponse struct {
-	*UpdateResourceOutput
+	*types.UpdateResourceOutput
 
 	response *aws.Response
 }

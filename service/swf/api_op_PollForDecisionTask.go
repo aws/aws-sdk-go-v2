@@ -6,142 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/swf/types"
 )
-
-type PollForDecisionTaskInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the domain containing the task lists to poll.
-	//
-	// Domain is a required field
-	Domain *string `locationName:"domain" min:"1" type:"string" required:"true"`
-
-	// Identity of the decider making the request, which is recorded in the DecisionTaskStarted
-	// event in the workflow history. This enables diagnostic tracing when problems
-	// arise. The form of this identity is user defined.
-	Identity *string `locationName:"identity" type:"string"`
-
-	// The maximum number of results that are returned per call. Use nextPageToken
-	// to obtain further pages of results.
-	//
-	// This is an upper limit only; the actual number of results returned per call
-	// may be fewer than the specified maximum.
-	MaximumPageSize *int64 `locationName:"maximumPageSize" type:"integer"`
-
-	// If NextPageToken is returned there are more results available. The value
-	// of NextPageToken is a unique pagination token for each page. Make the call
-	// again using the returned token to retrieve the next page. Keep all other
-	// arguments unchanged. Each pagination token expires after 60 seconds. Using
-	// an expired pagination token will return a 400 error: "Specified token has
-	// exceeded its maximum lifetime".
-	//
-	// The configured maximumPageSize determines how many results can be returned
-	// in a single call.
-	//
-	// The nextPageToken returned by this action cannot be used with GetWorkflowExecutionHistory
-	// to get the next page. You must call PollForDecisionTask again (with the nextPageToken)
-	// to retrieve the next page of history records. Calling PollForDecisionTask
-	// with a nextPageToken doesn't return a new decision task.
-	NextPageToken *string `locationName:"nextPageToken" type:"string"`
-
-	// When set to true, returns the events in reverse order. By default the results
-	// are returned in ascending order of the eventTimestamp of the events.
-	ReverseOrder *bool `locationName:"reverseOrder" type:"boolean"`
-
-	// Specifies the task list to poll for decision tasks.
-	//
-	// The specified string must not start or end with whitespace. It must not contain
-	// a : (colon), / (slash), | (vertical bar), or any control characters (\u0000-\u001f
-	// | \u007f-\u009f). Also, it must not be the literal string arn.
-	//
-	// TaskList is a required field
-	TaskList *TaskList `locationName:"taskList" type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s PollForDecisionTaskInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *PollForDecisionTaskInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "PollForDecisionTaskInput"}
-
-	if s.Domain == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Domain"))
-	}
-	if s.Domain != nil && len(*s.Domain) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Domain", 1))
-	}
-
-	if s.TaskList == nil {
-		invalidParams.Add(aws.NewErrParamRequired("TaskList"))
-	}
-	if s.TaskList != nil {
-		if err := s.TaskList.Validate(); err != nil {
-			invalidParams.AddNested("TaskList", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// A structure that represents a decision task. Decision tasks are sent to deciders
-// in order for them to make decisions.
-type PollForDecisionTaskOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A paginated list of history events of the workflow execution. The decider
-	// uses this during the processing of the decision task.
-	//
-	// Events is a required field
-	Events []HistoryEvent `locationName:"events" type:"list" required:"true"`
-
-	// If a NextPageToken was returned by a previous call, there are more results
-	// available. To retrieve the next page of results, make the call again using
-	// the returned token in nextPageToken. Keep all other arguments unchanged.
-	//
-	// The configured maximumPageSize determines how many results can be returned
-	// in a single call.
-	NextPageToken *string `locationName:"nextPageToken" type:"string"`
-
-	// The ID of the DecisionTaskStarted event of the previous decision task of
-	// this workflow execution that was processed by the decider. This can be used
-	// to determine the events in the history new since the last decision task received
-	// by the decider.
-	PreviousStartedEventId *int64 `locationName:"previousStartedEventId" type:"long"`
-
-	// The ID of the DecisionTaskStarted event recorded in the history.
-	//
-	// StartedEventId is a required field
-	StartedEventId *int64 `locationName:"startedEventId" type:"long" required:"true"`
-
-	// The opaque string used as a handle on the task. This token is used by workers
-	// to communicate progress and response information back to the system about
-	// the task.
-	//
-	// TaskToken is a required field
-	TaskToken *string `locationName:"taskToken" min:"1" type:"string" required:"true"`
-
-	// The workflow execution for which this decision task was created.
-	//
-	// WorkflowExecution is a required field
-	WorkflowExecution *WorkflowExecution `locationName:"workflowExecution" type:"structure" required:"true"`
-
-	// The type of the workflow execution for which this decision task was created.
-	//
-	// WorkflowType is a required field
-	WorkflowType *WorkflowType `locationName:"workflowType" type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s PollForDecisionTaskOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opPollForDecisionTask = "PollForDecisionTask"
 
@@ -197,7 +63,7 @@ const opPollForDecisionTask = "PollForDecisionTask"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) PollForDecisionTaskRequest(input *PollForDecisionTaskInput) PollForDecisionTaskRequest {
+func (c *Client) PollForDecisionTaskRequest(input *types.PollForDecisionTaskInput) PollForDecisionTaskRequest {
 	op := &aws.Operation{
 		Name:       opPollForDecisionTask,
 		HTTPMethod: "POST",
@@ -211,10 +77,10 @@ func (c *Client) PollForDecisionTaskRequest(input *PollForDecisionTaskInput) Pol
 	}
 
 	if input == nil {
-		input = &PollForDecisionTaskInput{}
+		input = &types.PollForDecisionTaskInput{}
 	}
 
-	req := c.newRequest(op, input, &PollForDecisionTaskOutput{})
+	req := c.newRequest(op, input, &types.PollForDecisionTaskOutput{})
 	return PollForDecisionTaskRequest{Request: req, Input: input, Copy: c.PollForDecisionTaskRequest}
 }
 
@@ -222,8 +88,8 @@ func (c *Client) PollForDecisionTaskRequest(input *PollForDecisionTaskInput) Pol
 // PollForDecisionTask API operation.
 type PollForDecisionTaskRequest struct {
 	*aws.Request
-	Input *PollForDecisionTaskInput
-	Copy  func(*PollForDecisionTaskInput) PollForDecisionTaskRequest
+	Input *types.PollForDecisionTaskInput
+	Copy  func(*types.PollForDecisionTaskInput) PollForDecisionTaskRequest
 }
 
 // Send marshals and sends the PollForDecisionTask API request.
@@ -235,7 +101,7 @@ func (r PollForDecisionTaskRequest) Send(ctx context.Context) (*PollForDecisionT
 	}
 
 	resp := &PollForDecisionTaskResponse{
-		PollForDecisionTaskOutput: r.Request.Data.(*PollForDecisionTaskOutput),
+		PollForDecisionTaskOutput: r.Request.Data.(*types.PollForDecisionTaskOutput),
 		response:                  &aws.Response{Request: r.Request},
 	}
 
@@ -265,7 +131,7 @@ func NewPollForDecisionTaskPaginator(req PollForDecisionTaskRequest) PollForDeci
 	return PollForDecisionTaskPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *PollForDecisionTaskInput
+				var inCpy *types.PollForDecisionTaskInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -285,14 +151,14 @@ type PollForDecisionTaskPaginator struct {
 	aws.Pager
 }
 
-func (p *PollForDecisionTaskPaginator) CurrentPage() *PollForDecisionTaskOutput {
-	return p.Pager.CurrentPage().(*PollForDecisionTaskOutput)
+func (p *PollForDecisionTaskPaginator) CurrentPage() *types.PollForDecisionTaskOutput {
+	return p.Pager.CurrentPage().(*types.PollForDecisionTaskOutput)
 }
 
 // PollForDecisionTaskResponse is the response type for the
 // PollForDecisionTask API operation.
 type PollForDecisionTaskResponse struct {
-	*PollForDecisionTaskOutput
+	*types.PollForDecisionTaskOutput
 
 	response *aws.Response
 }

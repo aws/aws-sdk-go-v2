@@ -6,38 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/opsworks/types"
 )
-
-type DescribeLayersInput struct {
-	_ struct{} `type:"structure"`
-
-	// An array of layer IDs that specify the layers to be described. If you omit
-	// this parameter, DescribeLayers returns a description of every layer in the
-	// specified stack.
-	LayerIds []string `type:"list"`
-
-	// The stack ID.
-	StackId *string `type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeLayersInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Contains the response to a DescribeLayers request.
-type DescribeLayersOutput struct {
-	_ struct{} `type:"structure"`
-
-	// An array of Layer objects that describe the layers.
-	Layers []Layer `type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeLayersOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeLayers = "DescribeLayers"
 
@@ -61,7 +31,7 @@ const opDescribeLayers = "DescribeLayers"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DescribeLayers
-func (c *Client) DescribeLayersRequest(input *DescribeLayersInput) DescribeLayersRequest {
+func (c *Client) DescribeLayersRequest(input *types.DescribeLayersInput) DescribeLayersRequest {
 	op := &aws.Operation{
 		Name:       opDescribeLayers,
 		HTTPMethod: "POST",
@@ -69,10 +39,10 @@ func (c *Client) DescribeLayersRequest(input *DescribeLayersInput) DescribeLayer
 	}
 
 	if input == nil {
-		input = &DescribeLayersInput{}
+		input = &types.DescribeLayersInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeLayersOutput{})
+	req := c.newRequest(op, input, &types.DescribeLayersOutput{})
 	return DescribeLayersRequest{Request: req, Input: input, Copy: c.DescribeLayersRequest}
 }
 
@@ -80,8 +50,8 @@ func (c *Client) DescribeLayersRequest(input *DescribeLayersInput) DescribeLayer
 // DescribeLayers API operation.
 type DescribeLayersRequest struct {
 	*aws.Request
-	Input *DescribeLayersInput
-	Copy  func(*DescribeLayersInput) DescribeLayersRequest
+	Input *types.DescribeLayersInput
+	Copy  func(*types.DescribeLayersInput) DescribeLayersRequest
 }
 
 // Send marshals and sends the DescribeLayers API request.
@@ -93,7 +63,7 @@ func (r DescribeLayersRequest) Send(ctx context.Context) (*DescribeLayersRespons
 	}
 
 	resp := &DescribeLayersResponse{
-		DescribeLayersOutput: r.Request.Data.(*DescribeLayersOutput),
+		DescribeLayersOutput: r.Request.Data.(*types.DescribeLayersOutput),
 		response:             &aws.Response{Request: r.Request},
 	}
 
@@ -103,7 +73,7 @@ func (r DescribeLayersRequest) Send(ctx context.Context) (*DescribeLayersRespons
 // DescribeLayersResponse is the response type for the
 // DescribeLayers API operation.
 type DescribeLayersResponse struct {
-	*DescribeLayersOutput
+	*types.DescribeLayersOutput
 
 	response *aws.Response
 }

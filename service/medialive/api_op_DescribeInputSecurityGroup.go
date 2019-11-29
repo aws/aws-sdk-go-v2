@@ -6,128 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/medialive/types"
 )
-
-type DescribeInputSecurityGroupInput struct {
-	_ struct{} `type:"structure"`
-
-	// InputSecurityGroupId is a required field
-	InputSecurityGroupId *string `location:"uri" locationName:"inputSecurityGroupId" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeInputSecurityGroupInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeInputSecurityGroupInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeInputSecurityGroupInput"}
-
-	if s.InputSecurityGroupId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("InputSecurityGroupId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DescribeInputSecurityGroupInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.InputSecurityGroupId != nil {
-		v := *s.InputSecurityGroupId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "inputSecurityGroupId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type DescribeInputSecurityGroupOutput struct {
-	_ struct{} `type:"structure"`
-
-	Arn *string `locationName:"arn" type:"string"`
-
-	Id *string `locationName:"id" type:"string"`
-
-	Inputs []string `locationName:"inputs" type:"list"`
-
-	State InputSecurityGroupState `locationName:"state" type:"string" enum:"true"`
-
-	Tags map[string]string `locationName:"tags" type:"map"`
-
-	WhitelistRules []InputWhitelistRule `locationName:"whitelistRules" type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeInputSecurityGroupOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DescribeInputSecurityGroupOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.Arn != nil {
-		v := *s.Arn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "arn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Id != nil {
-		v := *s.Id
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "id", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Inputs != nil {
-		v := s.Inputs
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "inputs", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
-		}
-		ls0.End()
-
-	}
-	if len(s.State) > 0 {
-		v := s.State
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "state", protocol.QuotedValue{ValueMarshaler: v}, metadata)
-	}
-	if s.Tags != nil {
-		v := s.Tags
-
-		metadata := protocol.Metadata{}
-		ms0 := e.Map(protocol.BodyTarget, "tags", metadata)
-		ms0.Start()
-		for k1, v1 := range v {
-			ms0.MapSetValue(k1, protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
-		}
-		ms0.End()
-
-	}
-	if s.WhitelistRules != nil {
-		v := s.WhitelistRules
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "whitelistRules", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	return nil
-}
 
 const opDescribeInputSecurityGroup = "DescribeInputSecurityGroup"
 
@@ -144,7 +24,7 @@ const opDescribeInputSecurityGroup = "DescribeInputSecurityGroup"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/DescribeInputSecurityGroup
-func (c *Client) DescribeInputSecurityGroupRequest(input *DescribeInputSecurityGroupInput) DescribeInputSecurityGroupRequest {
+func (c *Client) DescribeInputSecurityGroupRequest(input *types.DescribeInputSecurityGroupInput) DescribeInputSecurityGroupRequest {
 	op := &aws.Operation{
 		Name:       opDescribeInputSecurityGroup,
 		HTTPMethod: "GET",
@@ -152,10 +32,10 @@ func (c *Client) DescribeInputSecurityGroupRequest(input *DescribeInputSecurityG
 	}
 
 	if input == nil {
-		input = &DescribeInputSecurityGroupInput{}
+		input = &types.DescribeInputSecurityGroupInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeInputSecurityGroupOutput{})
+	req := c.newRequest(op, input, &types.DescribeInputSecurityGroupOutput{})
 	return DescribeInputSecurityGroupRequest{Request: req, Input: input, Copy: c.DescribeInputSecurityGroupRequest}
 }
 
@@ -163,8 +43,8 @@ func (c *Client) DescribeInputSecurityGroupRequest(input *DescribeInputSecurityG
 // DescribeInputSecurityGroup API operation.
 type DescribeInputSecurityGroupRequest struct {
 	*aws.Request
-	Input *DescribeInputSecurityGroupInput
-	Copy  func(*DescribeInputSecurityGroupInput) DescribeInputSecurityGroupRequest
+	Input *types.DescribeInputSecurityGroupInput
+	Copy  func(*types.DescribeInputSecurityGroupInput) DescribeInputSecurityGroupRequest
 }
 
 // Send marshals and sends the DescribeInputSecurityGroup API request.
@@ -176,7 +56,7 @@ func (r DescribeInputSecurityGroupRequest) Send(ctx context.Context) (*DescribeI
 	}
 
 	resp := &DescribeInputSecurityGroupResponse{
-		DescribeInputSecurityGroupOutput: r.Request.Data.(*DescribeInputSecurityGroupOutput),
+		DescribeInputSecurityGroupOutput: r.Request.Data.(*types.DescribeInputSecurityGroupOutput),
 		response:                         &aws.Response{Request: r.Request},
 	}
 
@@ -186,7 +66,7 @@ func (r DescribeInputSecurityGroupRequest) Send(ctx context.Context) (*DescribeI
 // DescribeInputSecurityGroupResponse is the response type for the
 // DescribeInputSecurityGroup API operation.
 type DescribeInputSecurityGroupResponse struct {
-	*DescribeInputSecurityGroupOutput
+	*types.DescribeInputSecurityGroupOutput
 
 	response *aws.Response
 }

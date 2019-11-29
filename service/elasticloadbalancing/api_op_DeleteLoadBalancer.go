@@ -6,47 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/elasticloadbalancing/types"
 )
-
-// Contains the parameters for DeleteLoadBalancer.
-type DeleteLoadBalancerInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the load balancer.
-	//
-	// LoadBalancerName is a required field
-	LoadBalancerName *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteLoadBalancerInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteLoadBalancerInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteLoadBalancerInput"}
-
-	if s.LoadBalancerName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("LoadBalancerName"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Contains the output of DeleteLoadBalancer.
-type DeleteLoadBalancerOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteLoadBalancerOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteLoadBalancer = "DeleteLoadBalancer"
 
@@ -72,7 +33,7 @@ const opDeleteLoadBalancer = "DeleteLoadBalancer"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/DeleteLoadBalancer
-func (c *Client) DeleteLoadBalancerRequest(input *DeleteLoadBalancerInput) DeleteLoadBalancerRequest {
+func (c *Client) DeleteLoadBalancerRequest(input *types.DeleteLoadBalancerInput) DeleteLoadBalancerRequest {
 	op := &aws.Operation{
 		Name:       opDeleteLoadBalancer,
 		HTTPMethod: "POST",
@@ -80,10 +41,10 @@ func (c *Client) DeleteLoadBalancerRequest(input *DeleteLoadBalancerInput) Delet
 	}
 
 	if input == nil {
-		input = &DeleteLoadBalancerInput{}
+		input = &types.DeleteLoadBalancerInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteLoadBalancerOutput{})
+	req := c.newRequest(op, input, &types.DeleteLoadBalancerOutput{})
 	return DeleteLoadBalancerRequest{Request: req, Input: input, Copy: c.DeleteLoadBalancerRequest}
 }
 
@@ -91,8 +52,8 @@ func (c *Client) DeleteLoadBalancerRequest(input *DeleteLoadBalancerInput) Delet
 // DeleteLoadBalancer API operation.
 type DeleteLoadBalancerRequest struct {
 	*aws.Request
-	Input *DeleteLoadBalancerInput
-	Copy  func(*DeleteLoadBalancerInput) DeleteLoadBalancerRequest
+	Input *types.DeleteLoadBalancerInput
+	Copy  func(*types.DeleteLoadBalancerInput) DeleteLoadBalancerRequest
 }
 
 // Send marshals and sends the DeleteLoadBalancer API request.
@@ -104,7 +65,7 @@ func (r DeleteLoadBalancerRequest) Send(ctx context.Context) (*DeleteLoadBalance
 	}
 
 	resp := &DeleteLoadBalancerResponse{
-		DeleteLoadBalancerOutput: r.Request.Data.(*DeleteLoadBalancerOutput),
+		DeleteLoadBalancerOutput: r.Request.Data.(*types.DeleteLoadBalancerOutput),
 		response:                 &aws.Response{Request: r.Request},
 	}
 
@@ -114,7 +75,7 @@ func (r DeleteLoadBalancerRequest) Send(ctx context.Context) (*DeleteLoadBalance
 // DeleteLoadBalancerResponse is the response type for the
 // DeleteLoadBalancer API operation.
 type DeleteLoadBalancerResponse struct {
-	*DeleteLoadBalancerOutput
+	*types.DeleteLoadBalancerOutput
 
 	response *aws.Response
 }

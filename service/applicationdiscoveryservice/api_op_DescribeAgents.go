@@ -4,80 +4,10 @@ package applicationdiscoveryservice
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/applicationdiscoveryservice/types"
 )
-
-type DescribeAgentsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The agent or the Connector IDs for which you want information. If you specify
-	// no IDs, the system returns information about all agents/Connectors associated
-	// with your AWS user account.
-	AgentIds []string `locationName:"agentIds" type:"list"`
-
-	// You can filter the request using various logical operators and a key-value
-	// format. For example:
-	//
-	// {"key": "collectionStatus", "value": "STARTED"}
-	Filters []Filter `locationName:"filters" type:"list"`
-
-	// The total number of agents/Connectors to return in a single page of output.
-	// The maximum value is 100.
-	MaxResults *int64 `locationName:"maxResults" type:"integer"`
-
-	// Token to retrieve the next set of results. For example, if you previously
-	// specified 100 IDs for DescribeAgentsRequest$agentIds but set DescribeAgentsRequest$maxResults
-	// to 10, you received a set of 10 results along with a token. Use that token
-	// in this query to get the next set of 10.
-	NextToken *string `locationName:"nextToken" type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeAgentsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeAgentsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeAgentsInput"}
-	if s.Filters != nil {
-		for i, v := range s.Filters {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribeAgentsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Lists agents or the Connector by ID or lists all agents/Connectors associated
-	// with your user account if you did not specify an agent/Connector ID. The
-	// output includes agent/Connector IDs, IP addresses, media access control (MAC)
-	// addresses, agent/Connector health, host name where the agent/Connector resides,
-	// and the version number of each agent/Connector.
-	AgentsInfo []AgentInfo `locationName:"agentsInfo" type:"list"`
-
-	// Token to retrieve the next set of results. For example, if you specified
-	// 100 IDs for DescribeAgentsRequest$agentIds but set DescribeAgentsRequest$maxResults
-	// to 10, you received a set of 10 results along with this token. Use this token
-	// in the next query to retrieve the next set of 10.
-	NextToken *string `locationName:"nextToken" type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeAgentsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeAgents = "DescribeAgents"
 
@@ -96,7 +26,7 @@ const opDescribeAgents = "DescribeAgents"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/discovery-2015-11-01/DescribeAgents
-func (c *Client) DescribeAgentsRequest(input *DescribeAgentsInput) DescribeAgentsRequest {
+func (c *Client) DescribeAgentsRequest(input *types.DescribeAgentsInput) DescribeAgentsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeAgents,
 		HTTPMethod: "POST",
@@ -104,10 +34,10 @@ func (c *Client) DescribeAgentsRequest(input *DescribeAgentsInput) DescribeAgent
 	}
 
 	if input == nil {
-		input = &DescribeAgentsInput{}
+		input = &types.DescribeAgentsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeAgentsOutput{})
+	req := c.newRequest(op, input, &types.DescribeAgentsOutput{})
 	return DescribeAgentsRequest{Request: req, Input: input, Copy: c.DescribeAgentsRequest}
 }
 
@@ -115,8 +45,8 @@ func (c *Client) DescribeAgentsRequest(input *DescribeAgentsInput) DescribeAgent
 // DescribeAgents API operation.
 type DescribeAgentsRequest struct {
 	*aws.Request
-	Input *DescribeAgentsInput
-	Copy  func(*DescribeAgentsInput) DescribeAgentsRequest
+	Input *types.DescribeAgentsInput
+	Copy  func(*types.DescribeAgentsInput) DescribeAgentsRequest
 }
 
 // Send marshals and sends the DescribeAgents API request.
@@ -128,7 +58,7 @@ func (r DescribeAgentsRequest) Send(ctx context.Context) (*DescribeAgentsRespons
 	}
 
 	resp := &DescribeAgentsResponse{
-		DescribeAgentsOutput: r.Request.Data.(*DescribeAgentsOutput),
+		DescribeAgentsOutput: r.Request.Data.(*types.DescribeAgentsOutput),
 		response:             &aws.Response{Request: r.Request},
 	}
 
@@ -138,7 +68,7 @@ func (r DescribeAgentsRequest) Send(ctx context.Context) (*DescribeAgentsRespons
 // DescribeAgentsResponse is the response type for the
 // DescribeAgents API operation.
 type DescribeAgentsResponse struct {
-	*DescribeAgentsOutput
+	*types.DescribeAgentsOutput
 
 	response *aws.Response
 }

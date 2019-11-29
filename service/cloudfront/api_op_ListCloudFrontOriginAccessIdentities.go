@@ -6,71 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/cloudfront/types"
 )
-
-// The request to list origin access identities.
-type ListCloudFrontOriginAccessIdentitiesInput struct {
-	_ struct{} `type:"structure"`
-
-	// Use this when paginating results to indicate where to begin in your list
-	// of origin access identities. The results include identities in the list that
-	// occur after the marker. To get the next page of results, set the Marker to
-	// the value of the NextMarker from the current page's response (which is also
-	// the ID of the last identity on that page).
-	Marker *string `location:"querystring" locationName:"Marker" type:"string"`
-
-	// The maximum number of origin access identities you want in the response body.
-	MaxItems *int64 `location:"querystring" locationName:"MaxItems" type:"integer"`
-}
-
-// String returns the string representation
-func (s ListCloudFrontOriginAccessIdentitiesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListCloudFrontOriginAccessIdentitiesInput) MarshalFields(e protocol.FieldEncoder) error {
-
-	if s.Marker != nil {
-		v := *s.Marker
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "Marker", protocol.StringValue(v), metadata)
-	}
-	if s.MaxItems != nil {
-		v := *s.MaxItems
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "MaxItems", protocol.Int64Value(v), metadata)
-	}
-	return nil
-}
-
-// The returned result of the corresponding request.
-type ListCloudFrontOriginAccessIdentitiesOutput struct {
-	_ struct{} `type:"structure" payload:"CloudFrontOriginAccessIdentityList"`
-
-	// The CloudFrontOriginAccessIdentityList type.
-	CloudFrontOriginAccessIdentityList *CloudFrontOriginAccessIdentityList `type:"structure"`
-}
-
-// String returns the string representation
-func (s ListCloudFrontOriginAccessIdentitiesOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListCloudFrontOriginAccessIdentitiesOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.CloudFrontOriginAccessIdentityList != nil {
-		v := s.CloudFrontOriginAccessIdentityList
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.PayloadTarget, "CloudFrontOriginAccessIdentityList", v, metadata)
-	}
-	return nil
-}
 
 const opListCloudFrontOriginAccessIdentities = "ListCloudFrontOriginAccessIdentities2019_03_26"
 
@@ -87,7 +24,7 @@ const opListCloudFrontOriginAccessIdentities = "ListCloudFrontOriginAccessIdenti
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/ListCloudFrontOriginAccessIdentities
-func (c *Client) ListCloudFrontOriginAccessIdentitiesRequest(input *ListCloudFrontOriginAccessIdentitiesInput) ListCloudFrontOriginAccessIdentitiesRequest {
+func (c *Client) ListCloudFrontOriginAccessIdentitiesRequest(input *types.ListCloudFrontOriginAccessIdentitiesInput) ListCloudFrontOriginAccessIdentitiesRequest {
 	op := &aws.Operation{
 		Name:       opListCloudFrontOriginAccessIdentities,
 		HTTPMethod: "GET",
@@ -101,10 +38,10 @@ func (c *Client) ListCloudFrontOriginAccessIdentitiesRequest(input *ListCloudFro
 	}
 
 	if input == nil {
-		input = &ListCloudFrontOriginAccessIdentitiesInput{}
+		input = &types.ListCloudFrontOriginAccessIdentitiesInput{}
 	}
 
-	req := c.newRequest(op, input, &ListCloudFrontOriginAccessIdentitiesOutput{})
+	req := c.newRequest(op, input, &types.ListCloudFrontOriginAccessIdentitiesOutput{})
 	return ListCloudFrontOriginAccessIdentitiesRequest{Request: req, Input: input, Copy: c.ListCloudFrontOriginAccessIdentitiesRequest}
 }
 
@@ -112,8 +49,8 @@ func (c *Client) ListCloudFrontOriginAccessIdentitiesRequest(input *ListCloudFro
 // ListCloudFrontOriginAccessIdentities API operation.
 type ListCloudFrontOriginAccessIdentitiesRequest struct {
 	*aws.Request
-	Input *ListCloudFrontOriginAccessIdentitiesInput
-	Copy  func(*ListCloudFrontOriginAccessIdentitiesInput) ListCloudFrontOriginAccessIdentitiesRequest
+	Input *types.ListCloudFrontOriginAccessIdentitiesInput
+	Copy  func(*types.ListCloudFrontOriginAccessIdentitiesInput) ListCloudFrontOriginAccessIdentitiesRequest
 }
 
 // Send marshals and sends the ListCloudFrontOriginAccessIdentities API request.
@@ -125,7 +62,7 @@ func (r ListCloudFrontOriginAccessIdentitiesRequest) Send(ctx context.Context) (
 	}
 
 	resp := &ListCloudFrontOriginAccessIdentitiesResponse{
-		ListCloudFrontOriginAccessIdentitiesOutput: r.Request.Data.(*ListCloudFrontOriginAccessIdentitiesOutput),
+		ListCloudFrontOriginAccessIdentitiesOutput: r.Request.Data.(*types.ListCloudFrontOriginAccessIdentitiesOutput),
 		response: &aws.Response{Request: r.Request},
 	}
 
@@ -155,7 +92,7 @@ func NewListCloudFrontOriginAccessIdentitiesPaginator(req ListCloudFrontOriginAc
 	return ListCloudFrontOriginAccessIdentitiesPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListCloudFrontOriginAccessIdentitiesInput
+				var inCpy *types.ListCloudFrontOriginAccessIdentitiesInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -175,14 +112,14 @@ type ListCloudFrontOriginAccessIdentitiesPaginator struct {
 	aws.Pager
 }
 
-func (p *ListCloudFrontOriginAccessIdentitiesPaginator) CurrentPage() *ListCloudFrontOriginAccessIdentitiesOutput {
-	return p.Pager.CurrentPage().(*ListCloudFrontOriginAccessIdentitiesOutput)
+func (p *ListCloudFrontOriginAccessIdentitiesPaginator) CurrentPage() *types.ListCloudFrontOriginAccessIdentitiesOutput {
+	return p.Pager.CurrentPage().(*types.ListCloudFrontOriginAccessIdentitiesOutput)
 }
 
 // ListCloudFrontOriginAccessIdentitiesResponse is the response type for the
 // ListCloudFrontOriginAccessIdentities API operation.
 type ListCloudFrontOriginAccessIdentitiesResponse struct {
-	*ListCloudFrontOriginAccessIdentitiesOutput
+	*types.ListCloudFrontOriginAccessIdentitiesOutput
 
 	response *aws.Response
 }

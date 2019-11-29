@@ -10,6 +10,7 @@ package smsiface
 
 import (
 	"github.com/aws/aws-sdk-go-v2/service/sms"
+	"github.com/aws/aws-sdk-go-v2/service/sms/types"
 )
 
 // ClientAPI provides an interface to enable mocking the
@@ -43,7 +44,7 @@ import (
 //    type mockClientClient struct {
 //        smsiface.ClientPI
 //    }
-//    func (m *mockClientClient) CreateApp(input *sms.CreateAppInput) (*sms.CreateAppOutput, error) {
+//    func (m *mockClientClient) CreateApp(input *types.CreateAppInput) (*types.CreateAppOutput, error) {
 //        // mock response/functionality
 //    }
 //
@@ -61,61 +62,61 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type ClientAPI interface {
-	CreateAppRequest(*sms.CreateAppInput) sms.CreateAppRequest
+	CreateAppRequest(*types.CreateAppInput) sms.CreateAppRequest
 
-	CreateReplicationJobRequest(*sms.CreateReplicationJobInput) sms.CreateReplicationJobRequest
+	CreateReplicationJobRequest(*types.CreateReplicationJobInput) sms.CreateReplicationJobRequest
 
-	DeleteAppRequest(*sms.DeleteAppInput) sms.DeleteAppRequest
+	DeleteAppRequest(*types.DeleteAppInput) sms.DeleteAppRequest
 
-	DeleteAppLaunchConfigurationRequest(*sms.DeleteAppLaunchConfigurationInput) sms.DeleteAppLaunchConfigurationRequest
+	DeleteAppLaunchConfigurationRequest(*types.DeleteAppLaunchConfigurationInput) sms.DeleteAppLaunchConfigurationRequest
 
-	DeleteAppReplicationConfigurationRequest(*sms.DeleteAppReplicationConfigurationInput) sms.DeleteAppReplicationConfigurationRequest
+	DeleteAppReplicationConfigurationRequest(*types.DeleteAppReplicationConfigurationInput) sms.DeleteAppReplicationConfigurationRequest
 
-	DeleteReplicationJobRequest(*sms.DeleteReplicationJobInput) sms.DeleteReplicationJobRequest
+	DeleteReplicationJobRequest(*types.DeleteReplicationJobInput) sms.DeleteReplicationJobRequest
 
-	DeleteServerCatalogRequest(*sms.DeleteServerCatalogInput) sms.DeleteServerCatalogRequest
+	DeleteServerCatalogRequest(*types.DeleteServerCatalogInput) sms.DeleteServerCatalogRequest
 
-	DisassociateConnectorRequest(*sms.DisassociateConnectorInput) sms.DisassociateConnectorRequest
+	DisassociateConnectorRequest(*types.DisassociateConnectorInput) sms.DisassociateConnectorRequest
 
-	GenerateChangeSetRequest(*sms.GenerateChangeSetInput) sms.GenerateChangeSetRequest
+	GenerateChangeSetRequest(*types.GenerateChangeSetInput) sms.GenerateChangeSetRequest
 
-	GenerateTemplateRequest(*sms.GenerateTemplateInput) sms.GenerateTemplateRequest
+	GenerateTemplateRequest(*types.GenerateTemplateInput) sms.GenerateTemplateRequest
 
-	GetAppRequest(*sms.GetAppInput) sms.GetAppRequest
+	GetAppRequest(*types.GetAppInput) sms.GetAppRequest
 
-	GetAppLaunchConfigurationRequest(*sms.GetAppLaunchConfigurationInput) sms.GetAppLaunchConfigurationRequest
+	GetAppLaunchConfigurationRequest(*types.GetAppLaunchConfigurationInput) sms.GetAppLaunchConfigurationRequest
 
-	GetAppReplicationConfigurationRequest(*sms.GetAppReplicationConfigurationInput) sms.GetAppReplicationConfigurationRequest
+	GetAppReplicationConfigurationRequest(*types.GetAppReplicationConfigurationInput) sms.GetAppReplicationConfigurationRequest
 
-	GetConnectorsRequest(*sms.GetConnectorsInput) sms.GetConnectorsRequest
+	GetConnectorsRequest(*types.GetConnectorsInput) sms.GetConnectorsRequest
 
-	GetReplicationJobsRequest(*sms.GetReplicationJobsInput) sms.GetReplicationJobsRequest
+	GetReplicationJobsRequest(*types.GetReplicationJobsInput) sms.GetReplicationJobsRequest
 
-	GetReplicationRunsRequest(*sms.GetReplicationRunsInput) sms.GetReplicationRunsRequest
+	GetReplicationRunsRequest(*types.GetReplicationRunsInput) sms.GetReplicationRunsRequest
 
-	GetServersRequest(*sms.GetServersInput) sms.GetServersRequest
+	GetServersRequest(*types.GetServersInput) sms.GetServersRequest
 
-	ImportServerCatalogRequest(*sms.ImportServerCatalogInput) sms.ImportServerCatalogRequest
+	ImportServerCatalogRequest(*types.ImportServerCatalogInput) sms.ImportServerCatalogRequest
 
-	LaunchAppRequest(*sms.LaunchAppInput) sms.LaunchAppRequest
+	LaunchAppRequest(*types.LaunchAppInput) sms.LaunchAppRequest
 
-	ListAppsRequest(*sms.ListAppsInput) sms.ListAppsRequest
+	ListAppsRequest(*types.ListAppsInput) sms.ListAppsRequest
 
-	PutAppLaunchConfigurationRequest(*sms.PutAppLaunchConfigurationInput) sms.PutAppLaunchConfigurationRequest
+	PutAppLaunchConfigurationRequest(*types.PutAppLaunchConfigurationInput) sms.PutAppLaunchConfigurationRequest
 
-	PutAppReplicationConfigurationRequest(*sms.PutAppReplicationConfigurationInput) sms.PutAppReplicationConfigurationRequest
+	PutAppReplicationConfigurationRequest(*types.PutAppReplicationConfigurationInput) sms.PutAppReplicationConfigurationRequest
 
-	StartAppReplicationRequest(*sms.StartAppReplicationInput) sms.StartAppReplicationRequest
+	StartAppReplicationRequest(*types.StartAppReplicationInput) sms.StartAppReplicationRequest
 
-	StartOnDemandReplicationRunRequest(*sms.StartOnDemandReplicationRunInput) sms.StartOnDemandReplicationRunRequest
+	StartOnDemandReplicationRunRequest(*types.StartOnDemandReplicationRunInput) sms.StartOnDemandReplicationRunRequest
 
-	StopAppReplicationRequest(*sms.StopAppReplicationInput) sms.StopAppReplicationRequest
+	StopAppReplicationRequest(*types.StopAppReplicationInput) sms.StopAppReplicationRequest
 
-	TerminateAppRequest(*sms.TerminateAppInput) sms.TerminateAppRequest
+	TerminateAppRequest(*types.TerminateAppInput) sms.TerminateAppRequest
 
-	UpdateAppRequest(*sms.UpdateAppInput) sms.UpdateAppRequest
+	UpdateAppRequest(*types.UpdateAppInput) sms.UpdateAppRequest
 
-	UpdateReplicationJobRequest(*sms.UpdateReplicationJobInput) sms.UpdateReplicationJobRequest
+	UpdateReplicationJobRequest(*types.UpdateReplicationJobInput) sms.UpdateReplicationJobRequest
 }
 
 var _ ClientAPI = (*sms.Client)(nil)

@@ -6,47 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
+	"github.com/aws/aws-sdk-go-v2/service/transfer/types"
 )
-
-type StopServerInput struct {
-	_ struct{} `type:"structure"`
-
-	// A system-assigned unique identifier for an SFTP server that you stopped.
-	//
-	// ServerId is a required field
-	ServerId *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s StopServerInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *StopServerInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "StopServerInput"}
-
-	if s.ServerId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ServerId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type StopServerOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s StopServerOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opStopServer = "StopServer"
 
@@ -73,7 +36,7 @@ const opStopServer = "StopServer"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/StopServer
-func (c *Client) StopServerRequest(input *StopServerInput) StopServerRequest {
+func (c *Client) StopServerRequest(input *types.StopServerInput) StopServerRequest {
 	op := &aws.Operation{
 		Name:       opStopServer,
 		HTTPMethod: "POST",
@@ -81,10 +44,10 @@ func (c *Client) StopServerRequest(input *StopServerInput) StopServerRequest {
 	}
 
 	if input == nil {
-		input = &StopServerInput{}
+		input = &types.StopServerInput{}
 	}
 
-	req := c.newRequest(op, input, &StopServerOutput{})
+	req := c.newRequest(op, input, &types.StopServerOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return StopServerRequest{Request: req, Input: input, Copy: c.StopServerRequest}
@@ -94,8 +57,8 @@ func (c *Client) StopServerRequest(input *StopServerInput) StopServerRequest {
 // StopServer API operation.
 type StopServerRequest struct {
 	*aws.Request
-	Input *StopServerInput
-	Copy  func(*StopServerInput) StopServerRequest
+	Input *types.StopServerInput
+	Copy  func(*types.StopServerInput) StopServerRequest
 }
 
 // Send marshals and sends the StopServer API request.
@@ -107,7 +70,7 @@ func (r StopServerRequest) Send(ctx context.Context) (*StopServerResponse, error
 	}
 
 	resp := &StopServerResponse{
-		StopServerOutput: r.Request.Data.(*StopServerOutput),
+		StopServerOutput: r.Request.Data.(*types.StopServerOutput),
 		response:         &aws.Response{Request: r.Request},
 	}
 
@@ -117,7 +80,7 @@ func (r StopServerRequest) Send(ctx context.Context) (*StopServerResponse, error
 // StopServerResponse is the response type for the
 // StopServer API operation.
 type StopServerResponse struct {
-	*StopServerOutput
+	*types.StopServerOutput
 
 	response *aws.Response
 }

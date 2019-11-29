@@ -10,6 +10,7 @@ package simpledbiface
 
 import (
 	"github.com/aws/aws-sdk-go-v2/service/simpledb"
+	"github.com/aws/aws-sdk-go-v2/service/simpledb/types"
 )
 
 // ClientAPI provides an interface to enable mocking the
@@ -43,7 +44,7 @@ import (
 //    type mockClientClient struct {
 //        simpledbiface.ClientPI
 //    }
-//    func (m *mockClientClient) BatchDeleteAttributes(input *simpledb.BatchDeleteAttributesInput) (*simpledb.BatchDeleteAttributesOutput, error) {
+//    func (m *mockClientClient) BatchDeleteAttributes(input *types.BatchDeleteAttributesInput) (*types.BatchDeleteAttributesOutput, error) {
 //        // mock response/functionality
 //    }
 //
@@ -61,25 +62,25 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type ClientAPI interface {
-	BatchDeleteAttributesRequest(*simpledb.BatchDeleteAttributesInput) simpledb.BatchDeleteAttributesRequest
+	BatchDeleteAttributesRequest(*types.BatchDeleteAttributesInput) simpledb.BatchDeleteAttributesRequest
 
-	BatchPutAttributesRequest(*simpledb.BatchPutAttributesInput) simpledb.BatchPutAttributesRequest
+	BatchPutAttributesRequest(*types.BatchPutAttributesInput) simpledb.BatchPutAttributesRequest
 
-	CreateDomainRequest(*simpledb.CreateDomainInput) simpledb.CreateDomainRequest
+	CreateDomainRequest(*types.CreateDomainInput) simpledb.CreateDomainRequest
 
-	DeleteAttributesRequest(*simpledb.DeleteAttributesInput) simpledb.DeleteAttributesRequest
+	DeleteAttributesRequest(*types.DeleteAttributesInput) simpledb.DeleteAttributesRequest
 
-	DeleteDomainRequest(*simpledb.DeleteDomainInput) simpledb.DeleteDomainRequest
+	DeleteDomainRequest(*types.DeleteDomainInput) simpledb.DeleteDomainRequest
 
-	DomainMetadataRequest(*simpledb.DomainMetadataInput) simpledb.DomainMetadataRequest
+	DomainMetadataRequest(*types.DomainMetadataInput) simpledb.DomainMetadataRequest
 
-	GetAttributesRequest(*simpledb.GetAttributesInput) simpledb.GetAttributesRequest
+	GetAttributesRequest(*types.GetAttributesInput) simpledb.GetAttributesRequest
 
-	ListDomainsRequest(*simpledb.ListDomainsInput) simpledb.ListDomainsRequest
+	ListDomainsRequest(*types.ListDomainsInput) simpledb.ListDomainsRequest
 
-	PutAttributesRequest(*simpledb.PutAttributesInput) simpledb.PutAttributesRequest
+	PutAttributesRequest(*types.PutAttributesInput) simpledb.PutAttributesRequest
 
-	SelectRequest(*simpledb.SelectInput) simpledb.SelectRequest
+	SelectRequest(*types.SelectInput) simpledb.SelectRequest
 }
 
 var _ ClientAPI = (*simpledb.Client)(nil)

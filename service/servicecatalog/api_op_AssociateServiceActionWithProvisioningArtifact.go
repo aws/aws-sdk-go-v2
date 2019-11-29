@@ -6,81 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/types"
 )
-
-type AssociateServiceActionWithProvisioningArtifactInput struct {
-	_ struct{} `type:"structure"`
-
-	// The language code.
-	//
-	//    * en - English (default)
-	//
-	//    * jp - Japanese
-	//
-	//    * zh - Chinese
-	AcceptLanguage *string `type:"string"`
-
-	// The product identifier. For example, prod-abcdzk7xy33qa.
-	//
-	// ProductId is a required field
-	ProductId *string `min:"1" type:"string" required:"true"`
-
-	// The identifier of the provisioning artifact. For example, pa-4abcdjnxjj6ne.
-	//
-	// ProvisioningArtifactId is a required field
-	ProvisioningArtifactId *string `min:"1" type:"string" required:"true"`
-
-	// The self-service action identifier. For example, act-fs7abcd89wxyz.
-	//
-	// ServiceActionId is a required field
-	ServiceActionId *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s AssociateServiceActionWithProvisioningArtifactInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *AssociateServiceActionWithProvisioningArtifactInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "AssociateServiceActionWithProvisioningArtifactInput"}
-
-	if s.ProductId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ProductId"))
-	}
-	if s.ProductId != nil && len(*s.ProductId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ProductId", 1))
-	}
-
-	if s.ProvisioningArtifactId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ProvisioningArtifactId"))
-	}
-	if s.ProvisioningArtifactId != nil && len(*s.ProvisioningArtifactId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ProvisioningArtifactId", 1))
-	}
-
-	if s.ServiceActionId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ServiceActionId"))
-	}
-	if s.ServiceActionId != nil && len(*s.ServiceActionId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ServiceActionId", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type AssociateServiceActionWithProvisioningArtifactOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s AssociateServiceActionWithProvisioningArtifactOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opAssociateServiceActionWithProvisioningArtifact = "AssociateServiceActionWithProvisioningArtifact"
 
@@ -97,7 +24,7 @@ const opAssociateServiceActionWithProvisioningArtifact = "AssociateServiceAction
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/AssociateServiceActionWithProvisioningArtifact
-func (c *Client) AssociateServiceActionWithProvisioningArtifactRequest(input *AssociateServiceActionWithProvisioningArtifactInput) AssociateServiceActionWithProvisioningArtifactRequest {
+func (c *Client) AssociateServiceActionWithProvisioningArtifactRequest(input *types.AssociateServiceActionWithProvisioningArtifactInput) AssociateServiceActionWithProvisioningArtifactRequest {
 	op := &aws.Operation{
 		Name:       opAssociateServiceActionWithProvisioningArtifact,
 		HTTPMethod: "POST",
@@ -105,10 +32,10 @@ func (c *Client) AssociateServiceActionWithProvisioningArtifactRequest(input *As
 	}
 
 	if input == nil {
-		input = &AssociateServiceActionWithProvisioningArtifactInput{}
+		input = &types.AssociateServiceActionWithProvisioningArtifactInput{}
 	}
 
-	req := c.newRequest(op, input, &AssociateServiceActionWithProvisioningArtifactOutput{})
+	req := c.newRequest(op, input, &types.AssociateServiceActionWithProvisioningArtifactOutput{})
 	return AssociateServiceActionWithProvisioningArtifactRequest{Request: req, Input: input, Copy: c.AssociateServiceActionWithProvisioningArtifactRequest}
 }
 
@@ -116,8 +43,8 @@ func (c *Client) AssociateServiceActionWithProvisioningArtifactRequest(input *As
 // AssociateServiceActionWithProvisioningArtifact API operation.
 type AssociateServiceActionWithProvisioningArtifactRequest struct {
 	*aws.Request
-	Input *AssociateServiceActionWithProvisioningArtifactInput
-	Copy  func(*AssociateServiceActionWithProvisioningArtifactInput) AssociateServiceActionWithProvisioningArtifactRequest
+	Input *types.AssociateServiceActionWithProvisioningArtifactInput
+	Copy  func(*types.AssociateServiceActionWithProvisioningArtifactInput) AssociateServiceActionWithProvisioningArtifactRequest
 }
 
 // Send marshals and sends the AssociateServiceActionWithProvisioningArtifact API request.
@@ -129,7 +56,7 @@ func (r AssociateServiceActionWithProvisioningArtifactRequest) Send(ctx context.
 	}
 
 	resp := &AssociateServiceActionWithProvisioningArtifactResponse{
-		AssociateServiceActionWithProvisioningArtifactOutput: r.Request.Data.(*AssociateServiceActionWithProvisioningArtifactOutput),
+		AssociateServiceActionWithProvisioningArtifactOutput: r.Request.Data.(*types.AssociateServiceActionWithProvisioningArtifactOutput),
 		response: &aws.Response{Request: r.Request},
 	}
 
@@ -139,7 +66,7 @@ func (r AssociateServiceActionWithProvisioningArtifactRequest) Send(ctx context.
 // AssociateServiceActionWithProvisioningArtifactResponse is the response type for the
 // AssociateServiceActionWithProvisioningArtifact API operation.
 type AssociateServiceActionWithProvisioningArtifactResponse struct {
-	*AssociateServiceActionWithProvisioningArtifactOutput
+	*types.AssociateServiceActionWithProvisioningArtifactOutput
 
 	response *aws.Response
 }

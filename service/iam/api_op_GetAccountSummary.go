@@ -6,31 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/iam/types"
 )
-
-type GetAccountSummaryInput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s GetAccountSummaryInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Contains the response to a successful GetAccountSummary request.
-type GetAccountSummaryOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A set of key–value pairs containing information about IAM entity usage
-	// and IAM quotas.
-	SummaryMap map[string]int64 `type:"map"`
-}
-
-// String returns the string representation
-func (s GetAccountSummaryOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetAccountSummary = "GetAccountSummary"
 
@@ -51,7 +28,7 @@ const opGetAccountSummary = "GetAccountSummary"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetAccountSummary
-func (c *Client) GetAccountSummaryRequest(input *GetAccountSummaryInput) GetAccountSummaryRequest {
+func (c *Client) GetAccountSummaryRequest(input *types.GetAccountSummaryInput) GetAccountSummaryRequest {
 	op := &aws.Operation{
 		Name:       opGetAccountSummary,
 		HTTPMethod: "POST",
@@ -59,10 +36,10 @@ func (c *Client) GetAccountSummaryRequest(input *GetAccountSummaryInput) GetAcco
 	}
 
 	if input == nil {
-		input = &GetAccountSummaryInput{}
+		input = &types.GetAccountSummaryInput{}
 	}
 
-	req := c.newRequest(op, input, &GetAccountSummaryOutput{})
+	req := c.newRequest(op, input, &types.GetAccountSummaryOutput{})
 	return GetAccountSummaryRequest{Request: req, Input: input, Copy: c.GetAccountSummaryRequest}
 }
 
@@ -70,8 +47,8 @@ func (c *Client) GetAccountSummaryRequest(input *GetAccountSummaryInput) GetAcco
 // GetAccountSummary API operation.
 type GetAccountSummaryRequest struct {
 	*aws.Request
-	Input *GetAccountSummaryInput
-	Copy  func(*GetAccountSummaryInput) GetAccountSummaryRequest
+	Input *types.GetAccountSummaryInput
+	Copy  func(*types.GetAccountSummaryInput) GetAccountSummaryRequest
 }
 
 // Send marshals and sends the GetAccountSummary API request.
@@ -83,7 +60,7 @@ func (r GetAccountSummaryRequest) Send(ctx context.Context) (*GetAccountSummaryR
 	}
 
 	resp := &GetAccountSummaryResponse{
-		GetAccountSummaryOutput: r.Request.Data.(*GetAccountSummaryOutput),
+		GetAccountSummaryOutput: r.Request.Data.(*types.GetAccountSummaryOutput),
 		response:                &aws.Response{Request: r.Request},
 	}
 
@@ -93,7 +70,7 @@ func (r GetAccountSummaryRequest) Send(ctx context.Context) (*GetAccountSummaryR
 // GetAccountSummaryResponse is the response type for the
 // GetAccountSummary API operation.
 type GetAccountSummaryResponse struct {
-	*GetAccountSummaryOutput
+	*types.GetAccountSummaryOutput
 
 	response *aws.Response
 }

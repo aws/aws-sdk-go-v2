@@ -6,133 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/greengrass/types"
 )
-
-type GetResourceDefinitionInput struct {
-	_ struct{} `type:"structure"`
-
-	// ResourceDefinitionId is a required field
-	ResourceDefinitionId *string `location:"uri" locationName:"ResourceDefinitionId" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetResourceDefinitionInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetResourceDefinitionInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetResourceDefinitionInput"}
-
-	if s.ResourceDefinitionId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ResourceDefinitionId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetResourceDefinitionInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.ResourceDefinitionId != nil {
-		v := *s.ResourceDefinitionId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "ResourceDefinitionId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type GetResourceDefinitionOutput struct {
-	_ struct{} `type:"structure"`
-
-	Arn *string `type:"string"`
-
-	CreationTimestamp *string `type:"string"`
-
-	Id *string `type:"string"`
-
-	LastUpdatedTimestamp *string `type:"string"`
-
-	LatestVersion *string `type:"string"`
-
-	LatestVersionArn *string `type:"string"`
-
-	Name *string `type:"string"`
-
-	// The key-value pair for the resource tag.
-	Tags map[string]string `locationName:"tags" type:"map"`
-}
-
-// String returns the string representation
-func (s GetResourceDefinitionOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetResourceDefinitionOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.Arn != nil {
-		v := *s.Arn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "Arn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.CreationTimestamp != nil {
-		v := *s.CreationTimestamp
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "CreationTimestamp", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Id != nil {
-		v := *s.Id
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "Id", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.LastUpdatedTimestamp != nil {
-		v := *s.LastUpdatedTimestamp
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "LastUpdatedTimestamp", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.LatestVersion != nil {
-		v := *s.LatestVersion
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "LatestVersion", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.LatestVersionArn != nil {
-		v := *s.LatestVersionArn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "LatestVersionArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Name != nil {
-		v := *s.Name
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "Name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Tags != nil {
-		v := s.Tags
-
-		metadata := protocol.Metadata{}
-		ms0 := e.Map(protocol.BodyTarget, "tags", metadata)
-		ms0.Start()
-		for k1, v1 := range v {
-			ms0.MapSetValue(k1, protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
-		}
-		ms0.End()
-
-	}
-	return nil
-}
 
 const opGetResourceDefinition = "GetResourceDefinition"
 
@@ -150,7 +25,7 @@ const opGetResourceDefinition = "GetResourceDefinition"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GetResourceDefinition
-func (c *Client) GetResourceDefinitionRequest(input *GetResourceDefinitionInput) GetResourceDefinitionRequest {
+func (c *Client) GetResourceDefinitionRequest(input *types.GetResourceDefinitionInput) GetResourceDefinitionRequest {
 	op := &aws.Operation{
 		Name:       opGetResourceDefinition,
 		HTTPMethod: "GET",
@@ -158,10 +33,10 @@ func (c *Client) GetResourceDefinitionRequest(input *GetResourceDefinitionInput)
 	}
 
 	if input == nil {
-		input = &GetResourceDefinitionInput{}
+		input = &types.GetResourceDefinitionInput{}
 	}
 
-	req := c.newRequest(op, input, &GetResourceDefinitionOutput{})
+	req := c.newRequest(op, input, &types.GetResourceDefinitionOutput{})
 	return GetResourceDefinitionRequest{Request: req, Input: input, Copy: c.GetResourceDefinitionRequest}
 }
 
@@ -169,8 +44,8 @@ func (c *Client) GetResourceDefinitionRequest(input *GetResourceDefinitionInput)
 // GetResourceDefinition API operation.
 type GetResourceDefinitionRequest struct {
 	*aws.Request
-	Input *GetResourceDefinitionInput
-	Copy  func(*GetResourceDefinitionInput) GetResourceDefinitionRequest
+	Input *types.GetResourceDefinitionInput
+	Copy  func(*types.GetResourceDefinitionInput) GetResourceDefinitionRequest
 }
 
 // Send marshals and sends the GetResourceDefinition API request.
@@ -182,7 +57,7 @@ func (r GetResourceDefinitionRequest) Send(ctx context.Context) (*GetResourceDef
 	}
 
 	resp := &GetResourceDefinitionResponse{
-		GetResourceDefinitionOutput: r.Request.Data.(*GetResourceDefinitionOutput),
+		GetResourceDefinitionOutput: r.Request.Data.(*types.GetResourceDefinitionOutput),
 		response:                    &aws.Response{Request: r.Request},
 	}
 
@@ -192,7 +67,7 @@ func (r GetResourceDefinitionRequest) Send(ctx context.Context) (*GetResourceDef
 // GetResourceDefinitionResponse is the response type for the
 // GetResourceDefinition API operation.
 type GetResourceDefinitionResponse struct {
-	*GetResourceDefinitionOutput
+	*types.GetResourceDefinitionOutput
 
 	response *aws.Response
 }

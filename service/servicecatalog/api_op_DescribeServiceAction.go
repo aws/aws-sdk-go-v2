@@ -6,60 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/types"
 )
-
-type DescribeServiceActionInput struct {
-	_ struct{} `type:"structure"`
-
-	// The language code.
-	//
-	//    * en - English (default)
-	//
-	//    * jp - Japanese
-	//
-	//    * zh - Chinese
-	AcceptLanguage *string `type:"string"`
-
-	// The self-service action identifier.
-	//
-	// Id is a required field
-	Id *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeServiceActionInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeServiceActionInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeServiceActionInput"}
-
-	if s.Id == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Id"))
-	}
-	if s.Id != nil && len(*s.Id) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Id", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribeServiceActionOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Detailed information about the self-service action.
-	ServiceActionDetail *ServiceActionDetail `type:"structure"`
-}
-
-// String returns the string representation
-func (s DescribeServiceActionOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeServiceAction = "DescribeServiceAction"
 
@@ -76,7 +24,7 @@ const opDescribeServiceAction = "DescribeServiceAction"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DescribeServiceAction
-func (c *Client) DescribeServiceActionRequest(input *DescribeServiceActionInput) DescribeServiceActionRequest {
+func (c *Client) DescribeServiceActionRequest(input *types.DescribeServiceActionInput) DescribeServiceActionRequest {
 	op := &aws.Operation{
 		Name:       opDescribeServiceAction,
 		HTTPMethod: "POST",
@@ -84,10 +32,10 @@ func (c *Client) DescribeServiceActionRequest(input *DescribeServiceActionInput)
 	}
 
 	if input == nil {
-		input = &DescribeServiceActionInput{}
+		input = &types.DescribeServiceActionInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeServiceActionOutput{})
+	req := c.newRequest(op, input, &types.DescribeServiceActionOutput{})
 	return DescribeServiceActionRequest{Request: req, Input: input, Copy: c.DescribeServiceActionRequest}
 }
 
@@ -95,8 +43,8 @@ func (c *Client) DescribeServiceActionRequest(input *DescribeServiceActionInput)
 // DescribeServiceAction API operation.
 type DescribeServiceActionRequest struct {
 	*aws.Request
-	Input *DescribeServiceActionInput
-	Copy  func(*DescribeServiceActionInput) DescribeServiceActionRequest
+	Input *types.DescribeServiceActionInput
+	Copy  func(*types.DescribeServiceActionInput) DescribeServiceActionRequest
 }
 
 // Send marshals and sends the DescribeServiceAction API request.
@@ -108,7 +56,7 @@ func (r DescribeServiceActionRequest) Send(ctx context.Context) (*DescribeServic
 	}
 
 	resp := &DescribeServiceActionResponse{
-		DescribeServiceActionOutput: r.Request.Data.(*DescribeServiceActionOutput),
+		DescribeServiceActionOutput: r.Request.Data.(*types.DescribeServiceActionOutput),
 		response:                    &aws.Response{Request: r.Request},
 	}
 
@@ -118,7 +66,7 @@ func (r DescribeServiceActionRequest) Send(ctx context.Context) (*DescribeServic
 // DescribeServiceActionResponse is the response type for the
 // DescribeServiceAction API operation.
 type DescribeServiceActionResponse struct {
-	*DescribeServiceActionOutput
+	*types.DescribeServiceActionOutput
 
 	response *aws.Response
 }

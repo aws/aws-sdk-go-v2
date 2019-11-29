@@ -6,48 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/lightsail/types"
 )
-
-type DeleteKnownHostKeysInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the instance for which you want to reset the host key or certificate.
-	//
-	// InstanceName is a required field
-	InstanceName *string `locationName:"instanceName" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteKnownHostKeysInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteKnownHostKeysInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteKnownHostKeysInput"}
-
-	if s.InstanceName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("InstanceName"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteKnownHostKeysOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A list of objects describing the API operation.
-	Operations []Operation `locationName:"operations" type:"list"`
-}
-
-// String returns the string representation
-func (s DeleteKnownHostKeysOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteKnownHostKeys = "DeleteKnownHostKeys"
 
@@ -72,7 +32,7 @@ const opDeleteKnownHostKeys = "DeleteKnownHostKeys"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/DeleteKnownHostKeys
-func (c *Client) DeleteKnownHostKeysRequest(input *DeleteKnownHostKeysInput) DeleteKnownHostKeysRequest {
+func (c *Client) DeleteKnownHostKeysRequest(input *types.DeleteKnownHostKeysInput) DeleteKnownHostKeysRequest {
 	op := &aws.Operation{
 		Name:       opDeleteKnownHostKeys,
 		HTTPMethod: "POST",
@@ -80,10 +40,10 @@ func (c *Client) DeleteKnownHostKeysRequest(input *DeleteKnownHostKeysInput) Del
 	}
 
 	if input == nil {
-		input = &DeleteKnownHostKeysInput{}
+		input = &types.DeleteKnownHostKeysInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteKnownHostKeysOutput{})
+	req := c.newRequest(op, input, &types.DeleteKnownHostKeysOutput{})
 	return DeleteKnownHostKeysRequest{Request: req, Input: input, Copy: c.DeleteKnownHostKeysRequest}
 }
 
@@ -91,8 +51,8 @@ func (c *Client) DeleteKnownHostKeysRequest(input *DeleteKnownHostKeysInput) Del
 // DeleteKnownHostKeys API operation.
 type DeleteKnownHostKeysRequest struct {
 	*aws.Request
-	Input *DeleteKnownHostKeysInput
-	Copy  func(*DeleteKnownHostKeysInput) DeleteKnownHostKeysRequest
+	Input *types.DeleteKnownHostKeysInput
+	Copy  func(*types.DeleteKnownHostKeysInput) DeleteKnownHostKeysRequest
 }
 
 // Send marshals and sends the DeleteKnownHostKeys API request.
@@ -104,7 +64,7 @@ func (r DeleteKnownHostKeysRequest) Send(ctx context.Context) (*DeleteKnownHostK
 	}
 
 	resp := &DeleteKnownHostKeysResponse{
-		DeleteKnownHostKeysOutput: r.Request.Data.(*DeleteKnownHostKeysOutput),
+		DeleteKnownHostKeysOutput: r.Request.Data.(*types.DeleteKnownHostKeysOutput),
 		response:                  &aws.Response{Request: r.Request},
 	}
 
@@ -114,7 +74,7 @@ func (r DeleteKnownHostKeysRequest) Send(ctx context.Context) (*DeleteKnownHostK
 // DeleteKnownHostKeysResponse is the response type for the
 // DeleteKnownHostKeys API operation.
 type DeleteKnownHostKeysResponse struct {
-	*DeleteKnownHostKeysOutput
+	*types.DeleteKnownHostKeysOutput
 
 	response *aws.Response
 }

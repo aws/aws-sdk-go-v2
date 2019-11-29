@@ -6,79 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/appsync/types"
 )
-
-type DeleteTypeInput struct {
-	_ struct{} `type:"structure"`
-
-	// The API ID.
-	//
-	// ApiId is a required field
-	ApiId *string `location:"uri" locationName:"apiId" type:"string" required:"true"`
-
-	// The type name.
-	//
-	// TypeName is a required field
-	TypeName *string `location:"uri" locationName:"typeName" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteTypeInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteTypeInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteTypeInput"}
-
-	if s.ApiId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ApiId"))
-	}
-
-	if s.TypeName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("TypeName"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteTypeInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.ApiId != nil {
-		v := *s.ApiId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "apiId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.TypeName != nil {
-		v := *s.TypeName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "typeName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type DeleteTypeOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteTypeOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteTypeOutput) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
 
 const opDeleteType = "DeleteType"
 
@@ -95,7 +24,7 @@ const opDeleteType = "DeleteType"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/DeleteType
-func (c *Client) DeleteTypeRequest(input *DeleteTypeInput) DeleteTypeRequest {
+func (c *Client) DeleteTypeRequest(input *types.DeleteTypeInput) DeleteTypeRequest {
 	op := &aws.Operation{
 		Name:       opDeleteType,
 		HTTPMethod: "DELETE",
@@ -103,10 +32,10 @@ func (c *Client) DeleteTypeRequest(input *DeleteTypeInput) DeleteTypeRequest {
 	}
 
 	if input == nil {
-		input = &DeleteTypeInput{}
+		input = &types.DeleteTypeInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteTypeOutput{})
+	req := c.newRequest(op, input, &types.DeleteTypeOutput{})
 	return DeleteTypeRequest{Request: req, Input: input, Copy: c.DeleteTypeRequest}
 }
 
@@ -114,8 +43,8 @@ func (c *Client) DeleteTypeRequest(input *DeleteTypeInput) DeleteTypeRequest {
 // DeleteType API operation.
 type DeleteTypeRequest struct {
 	*aws.Request
-	Input *DeleteTypeInput
-	Copy  func(*DeleteTypeInput) DeleteTypeRequest
+	Input *types.DeleteTypeInput
+	Copy  func(*types.DeleteTypeInput) DeleteTypeRequest
 }
 
 // Send marshals and sends the DeleteType API request.
@@ -127,7 +56,7 @@ func (r DeleteTypeRequest) Send(ctx context.Context) (*DeleteTypeResponse, error
 	}
 
 	resp := &DeleteTypeResponse{
-		DeleteTypeOutput: r.Request.Data.(*DeleteTypeOutput),
+		DeleteTypeOutput: r.Request.Data.(*types.DeleteTypeOutput),
 		response:         &aws.Response{Request: r.Request},
 	}
 
@@ -137,7 +66,7 @@ func (r DeleteTypeRequest) Send(ctx context.Context) (*DeleteTypeResponse, error
 // DeleteTypeResponse is the response type for the
 // DeleteType API operation.
 type DeleteTypeResponse struct {
-	*DeleteTypeOutput
+	*types.DeleteTypeOutput
 
 	response *aws.Response
 }

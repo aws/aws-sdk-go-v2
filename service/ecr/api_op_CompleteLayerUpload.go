@@ -6,86 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ecr/types"
 )
-
-type CompleteLayerUploadInput struct {
-	_ struct{} `type:"structure"`
-
-	// The sha256 digest of the image layer.
-	//
-	// LayerDigests is a required field
-	LayerDigests []string `locationName:"layerDigests" min:"1" type:"list" required:"true"`
-
-	// The AWS account ID associated with the registry to which to upload layers.
-	// If you do not specify a registry, the default registry is assumed.
-	RegistryId *string `locationName:"registryId" type:"string"`
-
-	// The name of the repository to associate with the image layer.
-	//
-	// RepositoryName is a required field
-	RepositoryName *string `locationName:"repositoryName" min:"2" type:"string" required:"true"`
-
-	// The upload ID from a previous InitiateLayerUpload operation to associate
-	// with the image layer.
-	//
-	// UploadId is a required field
-	UploadId *string `locationName:"uploadId" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s CompleteLayerUploadInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CompleteLayerUploadInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CompleteLayerUploadInput"}
-
-	if s.LayerDigests == nil {
-		invalidParams.Add(aws.NewErrParamRequired("LayerDigests"))
-	}
-	if s.LayerDigests != nil && len(s.LayerDigests) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("LayerDigests", 1))
-	}
-
-	if s.RepositoryName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("RepositoryName"))
-	}
-	if s.RepositoryName != nil && len(*s.RepositoryName) < 2 {
-		invalidParams.Add(aws.NewErrParamMinLen("RepositoryName", 2))
-	}
-
-	if s.UploadId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("UploadId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type CompleteLayerUploadOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The sha256 digest of the image layer.
-	LayerDigest *string `locationName:"layerDigest" type:"string"`
-
-	// The registry ID associated with the request.
-	RegistryId *string `locationName:"registryId" type:"string"`
-
-	// The repository name associated with the request.
-	RepositoryName *string `locationName:"repositoryName" min:"2" type:"string"`
-
-	// The upload ID associated with the layer.
-	UploadId *string `locationName:"uploadId" type:"string"`
-}
-
-// String returns the string representation
-func (s CompleteLayerUploadOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCompleteLayerUpload = "CompleteLayerUpload"
 
@@ -108,7 +30,7 @@ const opCompleteLayerUpload = "CompleteLayerUpload"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/CompleteLayerUpload
-func (c *Client) CompleteLayerUploadRequest(input *CompleteLayerUploadInput) CompleteLayerUploadRequest {
+func (c *Client) CompleteLayerUploadRequest(input *types.CompleteLayerUploadInput) CompleteLayerUploadRequest {
 	op := &aws.Operation{
 		Name:       opCompleteLayerUpload,
 		HTTPMethod: "POST",
@@ -116,10 +38,10 @@ func (c *Client) CompleteLayerUploadRequest(input *CompleteLayerUploadInput) Com
 	}
 
 	if input == nil {
-		input = &CompleteLayerUploadInput{}
+		input = &types.CompleteLayerUploadInput{}
 	}
 
-	req := c.newRequest(op, input, &CompleteLayerUploadOutput{})
+	req := c.newRequest(op, input, &types.CompleteLayerUploadOutput{})
 	return CompleteLayerUploadRequest{Request: req, Input: input, Copy: c.CompleteLayerUploadRequest}
 }
 
@@ -127,8 +49,8 @@ func (c *Client) CompleteLayerUploadRequest(input *CompleteLayerUploadInput) Com
 // CompleteLayerUpload API operation.
 type CompleteLayerUploadRequest struct {
 	*aws.Request
-	Input *CompleteLayerUploadInput
-	Copy  func(*CompleteLayerUploadInput) CompleteLayerUploadRequest
+	Input *types.CompleteLayerUploadInput
+	Copy  func(*types.CompleteLayerUploadInput) CompleteLayerUploadRequest
 }
 
 // Send marshals and sends the CompleteLayerUpload API request.
@@ -140,7 +62,7 @@ func (r CompleteLayerUploadRequest) Send(ctx context.Context) (*CompleteLayerUpl
 	}
 
 	resp := &CompleteLayerUploadResponse{
-		CompleteLayerUploadOutput: r.Request.Data.(*CompleteLayerUploadOutput),
+		CompleteLayerUploadOutput: r.Request.Data.(*types.CompleteLayerUploadOutput),
 		response:                  &aws.Response{Request: r.Request},
 	}
 
@@ -150,7 +72,7 @@ func (r CompleteLayerUploadRequest) Send(ctx context.Context) (*CompleteLayerUpl
 // CompleteLayerUploadResponse is the response type for the
 // CompleteLayerUpload API operation.
 type CompleteLayerUploadResponse struct {
-	*CompleteLayerUploadOutput
+	*types.CompleteLayerUploadOutput
 
 	response *aws.Response
 }

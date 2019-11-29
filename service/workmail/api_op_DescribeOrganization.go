@@ -4,74 +4,10 @@ package workmail
 
 import (
 	"context"
-	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/workmail/types"
 )
-
-type DescribeOrganizationInput struct {
-	_ struct{} `type:"structure"`
-
-	// The identifier for the organization to be described.
-	//
-	// OrganizationId is a required field
-	OrganizationId *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeOrganizationInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeOrganizationInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeOrganizationInput"}
-
-	if s.OrganizationId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("OrganizationId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribeOrganizationOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The alias for an organization.
-	Alias *string `min:"1" type:"string"`
-
-	// The date at which the organization became usable in the WorkMail context,
-	// in UNIX epoch time format.
-	CompletedDate *time.Time `type:"timestamp"`
-
-	// The default mail domain associated with the organization.
-	DefaultMailDomain *string `type:"string"`
-
-	// The identifier for the directory associated with an Amazon WorkMail organization.
-	DirectoryId *string `type:"string"`
-
-	// The type of directory associated with the WorkMail organization.
-	DirectoryType *string `type:"string"`
-
-	// (Optional) The error message indicating if unexpected behavior was encountered
-	// with regards to the organization.
-	ErrorMessage *string `type:"string"`
-
-	// The identifier of an organization.
-	OrganizationId *string `type:"string"`
-
-	// The state of an organization.
-	State *string `type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeOrganizationOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeOrganization = "DescribeOrganization"
 
@@ -88,7 +24,7 @@ const opDescribeOrganization = "DescribeOrganization"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/DescribeOrganization
-func (c *Client) DescribeOrganizationRequest(input *DescribeOrganizationInput) DescribeOrganizationRequest {
+func (c *Client) DescribeOrganizationRequest(input *types.DescribeOrganizationInput) DescribeOrganizationRequest {
 	op := &aws.Operation{
 		Name:       opDescribeOrganization,
 		HTTPMethod: "POST",
@@ -96,10 +32,10 @@ func (c *Client) DescribeOrganizationRequest(input *DescribeOrganizationInput) D
 	}
 
 	if input == nil {
-		input = &DescribeOrganizationInput{}
+		input = &types.DescribeOrganizationInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeOrganizationOutput{})
+	req := c.newRequest(op, input, &types.DescribeOrganizationOutput{})
 	return DescribeOrganizationRequest{Request: req, Input: input, Copy: c.DescribeOrganizationRequest}
 }
 
@@ -107,8 +43,8 @@ func (c *Client) DescribeOrganizationRequest(input *DescribeOrganizationInput) D
 // DescribeOrganization API operation.
 type DescribeOrganizationRequest struct {
 	*aws.Request
-	Input *DescribeOrganizationInput
-	Copy  func(*DescribeOrganizationInput) DescribeOrganizationRequest
+	Input *types.DescribeOrganizationInput
+	Copy  func(*types.DescribeOrganizationInput) DescribeOrganizationRequest
 }
 
 // Send marshals and sends the DescribeOrganization API request.
@@ -120,7 +56,7 @@ func (r DescribeOrganizationRequest) Send(ctx context.Context) (*DescribeOrganiz
 	}
 
 	resp := &DescribeOrganizationResponse{
-		DescribeOrganizationOutput: r.Request.Data.(*DescribeOrganizationOutput),
+		DescribeOrganizationOutput: r.Request.Data.(*types.DescribeOrganizationOutput),
 		response:                   &aws.Response{Request: r.Request},
 	}
 
@@ -130,7 +66,7 @@ func (r DescribeOrganizationRequest) Send(ctx context.Context) (*DescribeOrganiz
 // DescribeOrganizationResponse is the response type for the
 // DescribeOrganization API operation.
 type DescribeOrganizationResponse struct {
-	*DescribeOrganizationOutput
+	*types.DescribeOrganizationOutput
 
 	response *aws.Response
 }

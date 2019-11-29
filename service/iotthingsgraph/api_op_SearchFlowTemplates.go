@@ -4,66 +4,10 @@ package iotthingsgraph
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/iotthingsgraph/types"
 )
-
-type SearchFlowTemplatesInput struct {
-	_ struct{} `type:"structure"`
-
-	// An array of objects that limit the result set. The only valid filter is DEVICE_MODEL_ID.
-	Filters []FlowTemplateFilter `locationName:"filters" type:"list"`
-
-	// The maximum number of results to return in the response.
-	MaxResults *int64 `locationName:"maxResults" min:"1" type:"integer"`
-
-	// The string that specifies the next page of results. Use this when you're
-	// paginating results.
-	NextToken *string `locationName:"nextToken" type:"string"`
-}
-
-// String returns the string representation
-func (s SearchFlowTemplatesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *SearchFlowTemplatesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "SearchFlowTemplatesInput"}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-	if s.Filters != nil {
-		for i, v := range s.Filters {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type SearchFlowTemplatesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The string to specify as nextToken when you request the next page of results.
-	NextToken *string `locationName:"nextToken" type:"string"`
-
-	// An array of objects that contain summary information about each workflow
-	// in the result set.
-	Summaries []FlowTemplateSummary `locationName:"summaries" type:"list"`
-}
-
-// String returns the string representation
-func (s SearchFlowTemplatesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opSearchFlowTemplates = "SearchFlowTemplates"
 
@@ -80,7 +24,7 @@ const opSearchFlowTemplates = "SearchFlowTemplates"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iotthingsgraph-2018-09-06/SearchFlowTemplates
-func (c *Client) SearchFlowTemplatesRequest(input *SearchFlowTemplatesInput) SearchFlowTemplatesRequest {
+func (c *Client) SearchFlowTemplatesRequest(input *types.SearchFlowTemplatesInput) SearchFlowTemplatesRequest {
 	op := &aws.Operation{
 		Name:       opSearchFlowTemplates,
 		HTTPMethod: "POST",
@@ -94,10 +38,10 @@ func (c *Client) SearchFlowTemplatesRequest(input *SearchFlowTemplatesInput) Sea
 	}
 
 	if input == nil {
-		input = &SearchFlowTemplatesInput{}
+		input = &types.SearchFlowTemplatesInput{}
 	}
 
-	req := c.newRequest(op, input, &SearchFlowTemplatesOutput{})
+	req := c.newRequest(op, input, &types.SearchFlowTemplatesOutput{})
 	return SearchFlowTemplatesRequest{Request: req, Input: input, Copy: c.SearchFlowTemplatesRequest}
 }
 
@@ -105,8 +49,8 @@ func (c *Client) SearchFlowTemplatesRequest(input *SearchFlowTemplatesInput) Sea
 // SearchFlowTemplates API operation.
 type SearchFlowTemplatesRequest struct {
 	*aws.Request
-	Input *SearchFlowTemplatesInput
-	Copy  func(*SearchFlowTemplatesInput) SearchFlowTemplatesRequest
+	Input *types.SearchFlowTemplatesInput
+	Copy  func(*types.SearchFlowTemplatesInput) SearchFlowTemplatesRequest
 }
 
 // Send marshals and sends the SearchFlowTemplates API request.
@@ -118,7 +62,7 @@ func (r SearchFlowTemplatesRequest) Send(ctx context.Context) (*SearchFlowTempla
 	}
 
 	resp := &SearchFlowTemplatesResponse{
-		SearchFlowTemplatesOutput: r.Request.Data.(*SearchFlowTemplatesOutput),
+		SearchFlowTemplatesOutput: r.Request.Data.(*types.SearchFlowTemplatesOutput),
 		response:                  &aws.Response{Request: r.Request},
 	}
 
@@ -148,7 +92,7 @@ func NewSearchFlowTemplatesPaginator(req SearchFlowTemplatesRequest) SearchFlowT
 	return SearchFlowTemplatesPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *SearchFlowTemplatesInput
+				var inCpy *types.SearchFlowTemplatesInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -168,14 +112,14 @@ type SearchFlowTemplatesPaginator struct {
 	aws.Pager
 }
 
-func (p *SearchFlowTemplatesPaginator) CurrentPage() *SearchFlowTemplatesOutput {
-	return p.Pager.CurrentPage().(*SearchFlowTemplatesOutput)
+func (p *SearchFlowTemplatesPaginator) CurrentPage() *types.SearchFlowTemplatesOutput {
+	return p.Pager.CurrentPage().(*types.SearchFlowTemplatesOutput)
 }
 
 // SearchFlowTemplatesResponse is the response type for the
 // SearchFlowTemplates API operation.
 type SearchFlowTemplatesResponse struct {
-	*SearchFlowTemplatesOutput
+	*types.SearchFlowTemplatesOutput
 
 	response *aws.Response
 }

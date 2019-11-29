@@ -6,60 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/firehose/types"
 )
-
-type UntagDeliveryStreamInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the delivery stream.
-	//
-	// DeliveryStreamName is a required field
-	DeliveryStreamName *string `min:"1" type:"string" required:"true"`
-
-	// A list of tag keys. Each corresponding tag is removed from the delivery stream.
-	//
-	// TagKeys is a required field
-	TagKeys []string `min:"1" type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s UntagDeliveryStreamInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UntagDeliveryStreamInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UntagDeliveryStreamInput"}
-
-	if s.DeliveryStreamName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DeliveryStreamName"))
-	}
-	if s.DeliveryStreamName != nil && len(*s.DeliveryStreamName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("DeliveryStreamName", 1))
-	}
-
-	if s.TagKeys == nil {
-		invalidParams.Add(aws.NewErrParamRequired("TagKeys"))
-	}
-	if s.TagKeys != nil && len(s.TagKeys) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("TagKeys", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type UntagDeliveryStreamOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s UntagDeliveryStreamOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opUntagDeliveryStream = "UntagDeliveryStream"
 
@@ -81,7 +29,7 @@ const opUntagDeliveryStream = "UntagDeliveryStream"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/UntagDeliveryStream
-func (c *Client) UntagDeliveryStreamRequest(input *UntagDeliveryStreamInput) UntagDeliveryStreamRequest {
+func (c *Client) UntagDeliveryStreamRequest(input *types.UntagDeliveryStreamInput) UntagDeliveryStreamRequest {
 	op := &aws.Operation{
 		Name:       opUntagDeliveryStream,
 		HTTPMethod: "POST",
@@ -89,10 +37,10 @@ func (c *Client) UntagDeliveryStreamRequest(input *UntagDeliveryStreamInput) Unt
 	}
 
 	if input == nil {
-		input = &UntagDeliveryStreamInput{}
+		input = &types.UntagDeliveryStreamInput{}
 	}
 
-	req := c.newRequest(op, input, &UntagDeliveryStreamOutput{})
+	req := c.newRequest(op, input, &types.UntagDeliveryStreamOutput{})
 	return UntagDeliveryStreamRequest{Request: req, Input: input, Copy: c.UntagDeliveryStreamRequest}
 }
 
@@ -100,8 +48,8 @@ func (c *Client) UntagDeliveryStreamRequest(input *UntagDeliveryStreamInput) Unt
 // UntagDeliveryStream API operation.
 type UntagDeliveryStreamRequest struct {
 	*aws.Request
-	Input *UntagDeliveryStreamInput
-	Copy  func(*UntagDeliveryStreamInput) UntagDeliveryStreamRequest
+	Input *types.UntagDeliveryStreamInput
+	Copy  func(*types.UntagDeliveryStreamInput) UntagDeliveryStreamRequest
 }
 
 // Send marshals and sends the UntagDeliveryStream API request.
@@ -113,7 +61,7 @@ func (r UntagDeliveryStreamRequest) Send(ctx context.Context) (*UntagDeliveryStr
 	}
 
 	resp := &UntagDeliveryStreamResponse{
-		UntagDeliveryStreamOutput: r.Request.Data.(*UntagDeliveryStreamOutput),
+		UntagDeliveryStreamOutput: r.Request.Data.(*types.UntagDeliveryStreamOutput),
 		response:                  &aws.Response{Request: r.Request},
 	}
 
@@ -123,7 +71,7 @@ func (r UntagDeliveryStreamRequest) Send(ctx context.Context) (*UntagDeliveryStr
 // UntagDeliveryStreamResponse is the response type for the
 // UntagDeliveryStream API operation.
 type UntagDeliveryStreamResponse struct {
-	*UntagDeliveryStreamOutput
+	*types.UntagDeliveryStreamOutput
 
 	response *aws.Response
 }

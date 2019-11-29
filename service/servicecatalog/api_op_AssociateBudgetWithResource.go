@@ -6,60 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/types"
 )
-
-type AssociateBudgetWithResourceInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the budget you want to associate.
-	//
-	// BudgetName is a required field
-	BudgetName *string `min:"1" type:"string" required:"true"`
-
-	// The resource identifier. Either a portfolio-id or a product-id.
-	//
-	// ResourceId is a required field
-	ResourceId *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s AssociateBudgetWithResourceInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *AssociateBudgetWithResourceInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "AssociateBudgetWithResourceInput"}
-
-	if s.BudgetName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("BudgetName"))
-	}
-	if s.BudgetName != nil && len(*s.BudgetName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("BudgetName", 1))
-	}
-
-	if s.ResourceId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ResourceId"))
-	}
-	if s.ResourceId != nil && len(*s.ResourceId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ResourceId", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type AssociateBudgetWithResourceOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s AssociateBudgetWithResourceOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opAssociateBudgetWithResource = "AssociateBudgetWithResource"
 
@@ -76,7 +24,7 @@ const opAssociateBudgetWithResource = "AssociateBudgetWithResource"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/AssociateBudgetWithResource
-func (c *Client) AssociateBudgetWithResourceRequest(input *AssociateBudgetWithResourceInput) AssociateBudgetWithResourceRequest {
+func (c *Client) AssociateBudgetWithResourceRequest(input *types.AssociateBudgetWithResourceInput) AssociateBudgetWithResourceRequest {
 	op := &aws.Operation{
 		Name:       opAssociateBudgetWithResource,
 		HTTPMethod: "POST",
@@ -84,10 +32,10 @@ func (c *Client) AssociateBudgetWithResourceRequest(input *AssociateBudgetWithRe
 	}
 
 	if input == nil {
-		input = &AssociateBudgetWithResourceInput{}
+		input = &types.AssociateBudgetWithResourceInput{}
 	}
 
-	req := c.newRequest(op, input, &AssociateBudgetWithResourceOutput{})
+	req := c.newRequest(op, input, &types.AssociateBudgetWithResourceOutput{})
 	return AssociateBudgetWithResourceRequest{Request: req, Input: input, Copy: c.AssociateBudgetWithResourceRequest}
 }
 
@@ -95,8 +43,8 @@ func (c *Client) AssociateBudgetWithResourceRequest(input *AssociateBudgetWithRe
 // AssociateBudgetWithResource API operation.
 type AssociateBudgetWithResourceRequest struct {
 	*aws.Request
-	Input *AssociateBudgetWithResourceInput
-	Copy  func(*AssociateBudgetWithResourceInput) AssociateBudgetWithResourceRequest
+	Input *types.AssociateBudgetWithResourceInput
+	Copy  func(*types.AssociateBudgetWithResourceInput) AssociateBudgetWithResourceRequest
 }
 
 // Send marshals and sends the AssociateBudgetWithResource API request.
@@ -108,7 +56,7 @@ func (r AssociateBudgetWithResourceRequest) Send(ctx context.Context) (*Associat
 	}
 
 	resp := &AssociateBudgetWithResourceResponse{
-		AssociateBudgetWithResourceOutput: r.Request.Data.(*AssociateBudgetWithResourceOutput),
+		AssociateBudgetWithResourceOutput: r.Request.Data.(*types.AssociateBudgetWithResourceOutput),
 		response:                          &aws.Response{Request: r.Request},
 	}
 
@@ -118,7 +66,7 @@ func (r AssociateBudgetWithResourceRequest) Send(ctx context.Context) (*Associat
 // AssociateBudgetWithResourceResponse is the response type for the
 // AssociateBudgetWithResource API operation.
 type AssociateBudgetWithResourceResponse struct {
-	*AssociateBudgetWithResourceOutput
+	*types.AssociateBudgetWithResourceOutput
 
 	response *aws.Response
 }

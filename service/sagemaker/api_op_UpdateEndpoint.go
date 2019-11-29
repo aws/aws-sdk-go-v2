@@ -6,59 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
 )
-
-type UpdateEndpointInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the new endpoint configuration.
-	//
-	// EndpointConfigName is a required field
-	EndpointConfigName *string `type:"string" required:"true"`
-
-	// The name of the endpoint whose configuration you want to update.
-	//
-	// EndpointName is a required field
-	EndpointName *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s UpdateEndpointInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateEndpointInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateEndpointInput"}
-
-	if s.EndpointConfigName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("EndpointConfigName"))
-	}
-
-	if s.EndpointName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("EndpointName"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type UpdateEndpointOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the endpoint.
-	//
-	// EndpointArn is a required field
-	EndpointArn *string `min:"20" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s UpdateEndpointOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opUpdateEndpoint = "UpdateEndpoint"
 
@@ -86,7 +35,7 @@ const opUpdateEndpoint = "UpdateEndpoint"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/UpdateEndpoint
-func (c *Client) UpdateEndpointRequest(input *UpdateEndpointInput) UpdateEndpointRequest {
+func (c *Client) UpdateEndpointRequest(input *types.UpdateEndpointInput) UpdateEndpointRequest {
 	op := &aws.Operation{
 		Name:       opUpdateEndpoint,
 		HTTPMethod: "POST",
@@ -94,10 +43,10 @@ func (c *Client) UpdateEndpointRequest(input *UpdateEndpointInput) UpdateEndpoin
 	}
 
 	if input == nil {
-		input = &UpdateEndpointInput{}
+		input = &types.UpdateEndpointInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateEndpointOutput{})
+	req := c.newRequest(op, input, &types.UpdateEndpointOutput{})
 	return UpdateEndpointRequest{Request: req, Input: input, Copy: c.UpdateEndpointRequest}
 }
 
@@ -105,8 +54,8 @@ func (c *Client) UpdateEndpointRequest(input *UpdateEndpointInput) UpdateEndpoin
 // UpdateEndpoint API operation.
 type UpdateEndpointRequest struct {
 	*aws.Request
-	Input *UpdateEndpointInput
-	Copy  func(*UpdateEndpointInput) UpdateEndpointRequest
+	Input *types.UpdateEndpointInput
+	Copy  func(*types.UpdateEndpointInput) UpdateEndpointRequest
 }
 
 // Send marshals and sends the UpdateEndpoint API request.
@@ -118,7 +67,7 @@ func (r UpdateEndpointRequest) Send(ctx context.Context) (*UpdateEndpointRespons
 	}
 
 	resp := &UpdateEndpointResponse{
-		UpdateEndpointOutput: r.Request.Data.(*UpdateEndpointOutput),
+		UpdateEndpointOutput: r.Request.Data.(*types.UpdateEndpointOutput),
 		response:             &aws.Response{Request: r.Request},
 	}
 
@@ -128,7 +77,7 @@ func (r UpdateEndpointRequest) Send(ctx context.Context) (*UpdateEndpointRespons
 // UpdateEndpointResponse is the response type for the
 // UpdateEndpoint API operation.
 type UpdateEndpointResponse struct {
-	*UpdateEndpointOutput
+	*types.UpdateEndpointOutput
 
 	response *aws.Response
 }

@@ -4,125 +4,10 @@ package qldb
 
 import (
 	"context"
-	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/qldb/types"
 )
-
-type DescribeLedgerInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the ledger that you want to describe.
-	//
-	// Name is a required field
-	Name *string `location:"uri" locationName:"name" min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeLedgerInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeLedgerInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeLedgerInput"}
-
-	if s.Name == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Name"))
-	}
-	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DescribeLedgerInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.Name != nil {
-		v := *s.Name
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type DescribeLedgerOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) for the ledger.
-	Arn *string `min:"20" type:"string"`
-
-	// The date and time, in epoch time format, when the ledger was created. (Epoch
-	// time format is the number of seconds elapsed since 12:00:00 AM January 1,
-	// 1970 UTC.)
-	CreationDateTime *time.Time `type:"timestamp"`
-
-	// The flag that prevents a ledger from being deleted by any user. If not provided
-	// on ledger creation, this feature is enabled (true) by default.
-	//
-	// If deletion protection is enabled, you must first disable it before you can
-	// delete the ledger using the QLDB API or the AWS Command Line Interface (AWS
-	// CLI). You can disable it by calling the UpdateLedger operation to set the
-	// flag to false. The QLDB console disables deletion protection for you when
-	// you use it to delete a ledger.
-	DeletionProtection *bool `type:"boolean"`
-
-	// The name of the ledger.
-	Name *string `min:"1" type:"string"`
-
-	// The current status of the ledger.
-	State LedgerState `type:"string" enum:"true"`
-}
-
-// String returns the string representation
-func (s DescribeLedgerOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DescribeLedgerOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.Arn != nil {
-		v := *s.Arn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "Arn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.CreationDateTime != nil {
-		v := *s.CreationDateTime
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "CreationDateTime",
-			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
-	}
-	if s.DeletionProtection != nil {
-		v := *s.DeletionProtection
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "DeletionProtection", protocol.BoolValue(v), metadata)
-	}
-	if s.Name != nil {
-		v := *s.Name
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "Name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if len(s.State) > 0 {
-		v := s.State
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "State", protocol.QuotedValue{ValueMarshaler: v}, metadata)
-	}
-	return nil
-}
 
 const opDescribeLedger = "DescribeLedger"
 
@@ -139,7 +24,7 @@ const opDescribeLedger = "DescribeLedger"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/qldb-2019-01-02/DescribeLedger
-func (c *Client) DescribeLedgerRequest(input *DescribeLedgerInput) DescribeLedgerRequest {
+func (c *Client) DescribeLedgerRequest(input *types.DescribeLedgerInput) DescribeLedgerRequest {
 	op := &aws.Operation{
 		Name:       opDescribeLedger,
 		HTTPMethod: "GET",
@@ -147,10 +32,10 @@ func (c *Client) DescribeLedgerRequest(input *DescribeLedgerInput) DescribeLedge
 	}
 
 	if input == nil {
-		input = &DescribeLedgerInput{}
+		input = &types.DescribeLedgerInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeLedgerOutput{})
+	req := c.newRequest(op, input, &types.DescribeLedgerOutput{})
 	return DescribeLedgerRequest{Request: req, Input: input, Copy: c.DescribeLedgerRequest}
 }
 
@@ -158,8 +43,8 @@ func (c *Client) DescribeLedgerRequest(input *DescribeLedgerInput) DescribeLedge
 // DescribeLedger API operation.
 type DescribeLedgerRequest struct {
 	*aws.Request
-	Input *DescribeLedgerInput
-	Copy  func(*DescribeLedgerInput) DescribeLedgerRequest
+	Input *types.DescribeLedgerInput
+	Copy  func(*types.DescribeLedgerInput) DescribeLedgerRequest
 }
 
 // Send marshals and sends the DescribeLedger API request.
@@ -171,7 +56,7 @@ func (r DescribeLedgerRequest) Send(ctx context.Context) (*DescribeLedgerRespons
 	}
 
 	resp := &DescribeLedgerResponse{
-		DescribeLedgerOutput: r.Request.Data.(*DescribeLedgerOutput),
+		DescribeLedgerOutput: r.Request.Data.(*types.DescribeLedgerOutput),
 		response:             &aws.Response{Request: r.Request},
 	}
 
@@ -181,7 +66,7 @@ func (r DescribeLedgerRequest) Send(ctx context.Context) (*DescribeLedgerRespons
 // DescribeLedgerResponse is the response type for the
 // DescribeLedger API operation.
 type DescribeLedgerResponse struct {
-	*DescribeLedgerOutput
+	*types.DescribeLedgerOutput
 
 	response *aws.Response
 }

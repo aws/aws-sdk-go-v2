@@ -6,53 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/appstream/types"
 )
-
-type DescribeFleetsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The names of the fleets to describe.
-	Names []string `type:"list"`
-
-	// The pagination token to use to retrieve the next page of results for this
-	// operation. If this value is null, it retrieves the first page.
-	NextToken *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeFleetsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeFleetsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeFleetsInput"}
-	if s.NextToken != nil && len(*s.NextToken) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribeFleetsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Information about the fleets.
-	Fleets []Fleet `type:"list"`
-
-	// The pagination token to use to retrieve the next page of results for this
-	// operation. If there are no more pages, this value is null.
-	NextToken *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeFleetsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeFleets = "DescribeFleets"
 
@@ -70,7 +25,7 @@ const opDescribeFleets = "DescribeFleets"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DescribeFleets
-func (c *Client) DescribeFleetsRequest(input *DescribeFleetsInput) DescribeFleetsRequest {
+func (c *Client) DescribeFleetsRequest(input *types.DescribeFleetsInput) DescribeFleetsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeFleets,
 		HTTPMethod: "POST",
@@ -78,10 +33,10 @@ func (c *Client) DescribeFleetsRequest(input *DescribeFleetsInput) DescribeFleet
 	}
 
 	if input == nil {
-		input = &DescribeFleetsInput{}
+		input = &types.DescribeFleetsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeFleetsOutput{})
+	req := c.newRequest(op, input, &types.DescribeFleetsOutput{})
 	return DescribeFleetsRequest{Request: req, Input: input, Copy: c.DescribeFleetsRequest}
 }
 
@@ -89,8 +44,8 @@ func (c *Client) DescribeFleetsRequest(input *DescribeFleetsInput) DescribeFleet
 // DescribeFleets API operation.
 type DescribeFleetsRequest struct {
 	*aws.Request
-	Input *DescribeFleetsInput
-	Copy  func(*DescribeFleetsInput) DescribeFleetsRequest
+	Input *types.DescribeFleetsInput
+	Copy  func(*types.DescribeFleetsInput) DescribeFleetsRequest
 }
 
 // Send marshals and sends the DescribeFleets API request.
@@ -102,7 +57,7 @@ func (r DescribeFleetsRequest) Send(ctx context.Context) (*DescribeFleetsRespons
 	}
 
 	resp := &DescribeFleetsResponse{
-		DescribeFleetsOutput: r.Request.Data.(*DescribeFleetsOutput),
+		DescribeFleetsOutput: r.Request.Data.(*types.DescribeFleetsOutput),
 		response:             &aws.Response{Request: r.Request},
 	}
 
@@ -112,7 +67,7 @@ func (r DescribeFleetsRequest) Send(ctx context.Context) (*DescribeFleetsRespons
 // DescribeFleetsResponse is the response type for the
 // DescribeFleets API operation.
 type DescribeFleetsResponse struct {
-	*DescribeFleetsOutput
+	*types.DescribeFleetsOutput
 
 	response *aws.Response
 }

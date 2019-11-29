@@ -6,82 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/gamelift/types"
 )
-
-// Represents the input for a request action.
-type ListAliasesInput struct {
-	_ struct{} `type:"structure"`
-
-	// Maximum number of results to return. Use this parameter with NextToken to
-	// get results as a set of sequential pages.
-	Limit *int64 `min:"1" type:"integer"`
-
-	// Descriptive label that is associated with an alias. Alias names do not need
-	// to be unique.
-	Name *string `min:"1" type:"string"`
-
-	// Token that indicates the start of the next sequential page of results. Use
-	// the token that is returned with a previous call to this action. To start
-	// at the beginning of the result set, do not specify a value.
-	NextToken *string `min:"1" type:"string"`
-
-	// Type of routing to filter results on. Use this parameter to retrieve only
-	// aliases of a certain type. To retrieve all aliases, leave this parameter
-	// empty.
-	//
-	// Possible routing types include the following:
-	//
-	//    * SIMPLE -- The alias resolves to one specific fleet. Use this type when
-	//    routing to active fleets.
-	//
-	//    * TERMINAL -- The alias does not resolve to a fleet but instead can be
-	//    used to display a message to the user. A terminal alias throws a TerminalRoutingStrategyException
-	//    with the RoutingStrategy message embedded.
-	RoutingStrategyType RoutingStrategyType `type:"string" enum:"true"`
-}
-
-// String returns the string representation
-func (s ListAliasesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListAliasesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListAliasesInput"}
-	if s.Limit != nil && *s.Limit < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("Limit", 1))
-	}
-	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
-	}
-	if s.NextToken != nil && len(*s.NextToken) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Represents the returned data in response to a request action.
-type ListAliasesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Collection of alias records that match the list request.
-	Aliases []Alias `type:"list"`
-
-	// Token that indicates where to resume retrieving results on the next call
-	// to this action. If no token is returned, these results represent the end
-	// of the list.
-	NextToken *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s ListAliasesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListAliases = "ListAliases"
 
@@ -114,7 +40,7 @@ const opListAliases = "ListAliases"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/ListAliases
-func (c *Client) ListAliasesRequest(input *ListAliasesInput) ListAliasesRequest {
+func (c *Client) ListAliasesRequest(input *types.ListAliasesInput) ListAliasesRequest {
 	op := &aws.Operation{
 		Name:       opListAliases,
 		HTTPMethod: "POST",
@@ -122,10 +48,10 @@ func (c *Client) ListAliasesRequest(input *ListAliasesInput) ListAliasesRequest 
 	}
 
 	if input == nil {
-		input = &ListAliasesInput{}
+		input = &types.ListAliasesInput{}
 	}
 
-	req := c.newRequest(op, input, &ListAliasesOutput{})
+	req := c.newRequest(op, input, &types.ListAliasesOutput{})
 	return ListAliasesRequest{Request: req, Input: input, Copy: c.ListAliasesRequest}
 }
 
@@ -133,8 +59,8 @@ func (c *Client) ListAliasesRequest(input *ListAliasesInput) ListAliasesRequest 
 // ListAliases API operation.
 type ListAliasesRequest struct {
 	*aws.Request
-	Input *ListAliasesInput
-	Copy  func(*ListAliasesInput) ListAliasesRequest
+	Input *types.ListAliasesInput
+	Copy  func(*types.ListAliasesInput) ListAliasesRequest
 }
 
 // Send marshals and sends the ListAliases API request.
@@ -146,7 +72,7 @@ func (r ListAliasesRequest) Send(ctx context.Context) (*ListAliasesResponse, err
 	}
 
 	resp := &ListAliasesResponse{
-		ListAliasesOutput: r.Request.Data.(*ListAliasesOutput),
+		ListAliasesOutput: r.Request.Data.(*types.ListAliasesOutput),
 		response:          &aws.Response{Request: r.Request},
 	}
 
@@ -156,7 +82,7 @@ func (r ListAliasesRequest) Send(ctx context.Context) (*ListAliasesResponse, err
 // ListAliasesResponse is the response type for the
 // ListAliases API operation.
 type ListAliasesResponse struct {
-	*ListAliasesOutput
+	*types.ListAliasesOutput
 
 	response *aws.Response
 }

@@ -6,63 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-type UpdateSecurityGroupRuleDescriptionsIngressInput struct {
-	_ struct{} `type:"structure"`
-
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have
-	// the required permissions, the error response is DryRunOperation. Otherwise,
-	// it is UnauthorizedOperation.
-	DryRun *bool `type:"boolean"`
-
-	// The ID of the security group. You must specify either the security group
-	// ID or the security group name in the request. For security groups in a nondefault
-	// VPC, you must specify the security group ID.
-	GroupId *string `type:"string"`
-
-	// [EC2-Classic, default VPC] The name of the security group. You must specify
-	// either the security group ID or the security group name in the request.
-	GroupName *string `type:"string"`
-
-	// The IP permissions for the security group rule.
-	//
-	// IpPermissions is a required field
-	IpPermissions []IpPermission `locationNameList:"item" type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s UpdateSecurityGroupRuleDescriptionsIngressInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateSecurityGroupRuleDescriptionsIngressInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateSecurityGroupRuleDescriptionsIngressInput"}
-
-	if s.IpPermissions == nil {
-		invalidParams.Add(aws.NewErrParamRequired("IpPermissions"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type UpdateSecurityGroupRuleDescriptionsIngressOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Returns true if the request succeeds; otherwise, returns an error.
-	Return *bool `locationName:"return" type:"boolean"`
-}
-
-// String returns the string representation
-func (s UpdateSecurityGroupRuleDescriptionsIngressOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opUpdateSecurityGroupRuleDescriptionsIngress = "UpdateSecurityGroupRuleDescriptionsIngress"
 
@@ -85,7 +30,7 @@ const opUpdateSecurityGroupRuleDescriptionsIngress = "UpdateSecurityGroupRuleDes
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/UpdateSecurityGroupRuleDescriptionsIngress
-func (c *Client) UpdateSecurityGroupRuleDescriptionsIngressRequest(input *UpdateSecurityGroupRuleDescriptionsIngressInput) UpdateSecurityGroupRuleDescriptionsIngressRequest {
+func (c *Client) UpdateSecurityGroupRuleDescriptionsIngressRequest(input *types.UpdateSecurityGroupRuleDescriptionsIngressInput) UpdateSecurityGroupRuleDescriptionsIngressRequest {
 	op := &aws.Operation{
 		Name:       opUpdateSecurityGroupRuleDescriptionsIngress,
 		HTTPMethod: "POST",
@@ -93,10 +38,10 @@ func (c *Client) UpdateSecurityGroupRuleDescriptionsIngressRequest(input *Update
 	}
 
 	if input == nil {
-		input = &UpdateSecurityGroupRuleDescriptionsIngressInput{}
+		input = &types.UpdateSecurityGroupRuleDescriptionsIngressInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateSecurityGroupRuleDescriptionsIngressOutput{})
+	req := c.newRequest(op, input, &types.UpdateSecurityGroupRuleDescriptionsIngressOutput{})
 	return UpdateSecurityGroupRuleDescriptionsIngressRequest{Request: req, Input: input, Copy: c.UpdateSecurityGroupRuleDescriptionsIngressRequest}
 }
 
@@ -104,8 +49,8 @@ func (c *Client) UpdateSecurityGroupRuleDescriptionsIngressRequest(input *Update
 // UpdateSecurityGroupRuleDescriptionsIngress API operation.
 type UpdateSecurityGroupRuleDescriptionsIngressRequest struct {
 	*aws.Request
-	Input *UpdateSecurityGroupRuleDescriptionsIngressInput
-	Copy  func(*UpdateSecurityGroupRuleDescriptionsIngressInput) UpdateSecurityGroupRuleDescriptionsIngressRequest
+	Input *types.UpdateSecurityGroupRuleDescriptionsIngressInput
+	Copy  func(*types.UpdateSecurityGroupRuleDescriptionsIngressInput) UpdateSecurityGroupRuleDescriptionsIngressRequest
 }
 
 // Send marshals and sends the UpdateSecurityGroupRuleDescriptionsIngress API request.
@@ -117,7 +62,7 @@ func (r UpdateSecurityGroupRuleDescriptionsIngressRequest) Send(ctx context.Cont
 	}
 
 	resp := &UpdateSecurityGroupRuleDescriptionsIngressResponse{
-		UpdateSecurityGroupRuleDescriptionsIngressOutput: r.Request.Data.(*UpdateSecurityGroupRuleDescriptionsIngressOutput),
+		UpdateSecurityGroupRuleDescriptionsIngressOutput: r.Request.Data.(*types.UpdateSecurityGroupRuleDescriptionsIngressOutput),
 		response: &aws.Response{Request: r.Request},
 	}
 
@@ -127,7 +72,7 @@ func (r UpdateSecurityGroupRuleDescriptionsIngressRequest) Send(ctx context.Cont
 // UpdateSecurityGroupRuleDescriptionsIngressResponse is the response type for the
 // UpdateSecurityGroupRuleDescriptionsIngress API operation.
 type UpdateSecurityGroupRuleDescriptionsIngressResponse struct {
-	*UpdateSecurityGroupRuleDescriptionsIngressOutput
+	*types.UpdateSecurityGroupRuleDescriptionsIngressOutput
 
 	response *aws.Response
 }

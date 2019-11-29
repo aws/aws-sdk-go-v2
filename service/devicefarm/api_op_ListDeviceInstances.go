@@ -6,54 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/devicefarm/types"
 )
-
-type ListDeviceInstancesInput struct {
-	_ struct{} `type:"structure"`
-
-	// An integer specifying the maximum number of items you want to return in the
-	// API response.
-	MaxResults *int64 `locationName:"maxResults" type:"integer"`
-
-	// An identifier that was returned from the previous call to this operation,
-	// which can be used to return the next set of items in the list.
-	NextToken *string `locationName:"nextToken" min:"4" type:"string"`
-}
-
-// String returns the string representation
-func (s ListDeviceInstancesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListDeviceInstancesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListDeviceInstancesInput"}
-	if s.NextToken != nil && len(*s.NextToken) < 4 {
-		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 4))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ListDeviceInstancesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// An object containing information about your device instances.
-	DeviceInstances []DeviceInstance `locationName:"deviceInstances" type:"list"`
-
-	// An identifier that can be used in the next call to this operation to return
-	// the next set of items in the list.
-	NextToken *string `locationName:"nextToken" min:"4" type:"string"`
-}
-
-// String returns the string representation
-func (s ListDeviceInstancesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListDeviceInstances = "ListDeviceInstances"
 
@@ -71,7 +25,7 @@ const opListDeviceInstances = "ListDeviceInstances"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ListDeviceInstances
-func (c *Client) ListDeviceInstancesRequest(input *ListDeviceInstancesInput) ListDeviceInstancesRequest {
+func (c *Client) ListDeviceInstancesRequest(input *types.ListDeviceInstancesInput) ListDeviceInstancesRequest {
 	op := &aws.Operation{
 		Name:       opListDeviceInstances,
 		HTTPMethod: "POST",
@@ -79,10 +33,10 @@ func (c *Client) ListDeviceInstancesRequest(input *ListDeviceInstancesInput) Lis
 	}
 
 	if input == nil {
-		input = &ListDeviceInstancesInput{}
+		input = &types.ListDeviceInstancesInput{}
 	}
 
-	req := c.newRequest(op, input, &ListDeviceInstancesOutput{})
+	req := c.newRequest(op, input, &types.ListDeviceInstancesOutput{})
 	return ListDeviceInstancesRequest{Request: req, Input: input, Copy: c.ListDeviceInstancesRequest}
 }
 
@@ -90,8 +44,8 @@ func (c *Client) ListDeviceInstancesRequest(input *ListDeviceInstancesInput) Lis
 // ListDeviceInstances API operation.
 type ListDeviceInstancesRequest struct {
 	*aws.Request
-	Input *ListDeviceInstancesInput
-	Copy  func(*ListDeviceInstancesInput) ListDeviceInstancesRequest
+	Input *types.ListDeviceInstancesInput
+	Copy  func(*types.ListDeviceInstancesInput) ListDeviceInstancesRequest
 }
 
 // Send marshals and sends the ListDeviceInstances API request.
@@ -103,7 +57,7 @@ func (r ListDeviceInstancesRequest) Send(ctx context.Context) (*ListDeviceInstan
 	}
 
 	resp := &ListDeviceInstancesResponse{
-		ListDeviceInstancesOutput: r.Request.Data.(*ListDeviceInstancesOutput),
+		ListDeviceInstancesOutput: r.Request.Data.(*types.ListDeviceInstancesOutput),
 		response:                  &aws.Response{Request: r.Request},
 	}
 
@@ -113,7 +67,7 @@ func (r ListDeviceInstancesRequest) Send(ctx context.Context) (*ListDeviceInstan
 // ListDeviceInstancesResponse is the response type for the
 // ListDeviceInstances API operation.
 type ListDeviceInstancesResponse struct {
-	*ListDeviceInstancesOutput
+	*types.ListDeviceInstancesOutput
 
 	response *aws.Response
 }

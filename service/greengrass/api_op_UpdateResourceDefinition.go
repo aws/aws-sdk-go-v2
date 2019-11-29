@@ -6,70 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/greengrass/types"
 )
-
-type UpdateResourceDefinitionInput struct {
-	_ struct{} `type:"structure"`
-
-	Name *string `type:"string"`
-
-	// ResourceDefinitionId is a required field
-	ResourceDefinitionId *string `location:"uri" locationName:"ResourceDefinitionId" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s UpdateResourceDefinitionInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateResourceDefinitionInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateResourceDefinitionInput"}
-
-	if s.ResourceDefinitionId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ResourceDefinitionId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s UpdateResourceDefinitionInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.Name != nil {
-		v := *s.Name
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "Name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.ResourceDefinitionId != nil {
-		v := *s.ResourceDefinitionId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "ResourceDefinitionId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type UpdateResourceDefinitionOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s UpdateResourceDefinitionOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s UpdateResourceDefinitionOutput) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
 
 const opUpdateResourceDefinition = "UpdateResourceDefinition"
 
@@ -86,7 +24,7 @@ const opUpdateResourceDefinition = "UpdateResourceDefinition"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/UpdateResourceDefinition
-func (c *Client) UpdateResourceDefinitionRequest(input *UpdateResourceDefinitionInput) UpdateResourceDefinitionRequest {
+func (c *Client) UpdateResourceDefinitionRequest(input *types.UpdateResourceDefinitionInput) UpdateResourceDefinitionRequest {
 	op := &aws.Operation{
 		Name:       opUpdateResourceDefinition,
 		HTTPMethod: "PUT",
@@ -94,10 +32,10 @@ func (c *Client) UpdateResourceDefinitionRequest(input *UpdateResourceDefinition
 	}
 
 	if input == nil {
-		input = &UpdateResourceDefinitionInput{}
+		input = &types.UpdateResourceDefinitionInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateResourceDefinitionOutput{})
+	req := c.newRequest(op, input, &types.UpdateResourceDefinitionOutput{})
 	return UpdateResourceDefinitionRequest{Request: req, Input: input, Copy: c.UpdateResourceDefinitionRequest}
 }
 
@@ -105,8 +43,8 @@ func (c *Client) UpdateResourceDefinitionRequest(input *UpdateResourceDefinition
 // UpdateResourceDefinition API operation.
 type UpdateResourceDefinitionRequest struct {
 	*aws.Request
-	Input *UpdateResourceDefinitionInput
-	Copy  func(*UpdateResourceDefinitionInput) UpdateResourceDefinitionRequest
+	Input *types.UpdateResourceDefinitionInput
+	Copy  func(*types.UpdateResourceDefinitionInput) UpdateResourceDefinitionRequest
 }
 
 // Send marshals and sends the UpdateResourceDefinition API request.
@@ -118,7 +56,7 @@ func (r UpdateResourceDefinitionRequest) Send(ctx context.Context) (*UpdateResou
 	}
 
 	resp := &UpdateResourceDefinitionResponse{
-		UpdateResourceDefinitionOutput: r.Request.Data.(*UpdateResourceDefinitionOutput),
+		UpdateResourceDefinitionOutput: r.Request.Data.(*types.UpdateResourceDefinitionOutput),
 		response:                       &aws.Response{Request: r.Request},
 	}
 
@@ -128,7 +66,7 @@ func (r UpdateResourceDefinitionRequest) Send(ctx context.Context) (*UpdateResou
 // UpdateResourceDefinitionResponse is the response type for the
 // UpdateResourceDefinition API operation.
 type UpdateResourceDefinitionResponse struct {
-	*UpdateResourceDefinitionOutput
+	*types.UpdateResourceDefinitionOutput
 
 	response *aws.Response
 }

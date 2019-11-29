@@ -6,64 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/gamelift/types"
 )
-
-// Represents the input for a request action.
-type GetInstanceAccessInput struct {
-	_ struct{} `type:"structure"`
-
-	// Unique identifier for a fleet that contains the instance you want access
-	// to. The fleet can be in any of the following statuses: ACTIVATING, ACTIVE,
-	// or ERROR. Fleets with an ERROR status may be accessible for a short time
-	// before they are deleted.
-	//
-	// FleetId is a required field
-	FleetId *string `type:"string" required:"true"`
-
-	// Unique identifier for an instance you want to get access to. You can access
-	// an instance in any status.
-	//
-	// InstanceId is a required field
-	InstanceId *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetInstanceAccessInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetInstanceAccessInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetInstanceAccessInput"}
-
-	if s.FleetId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("FleetId"))
-	}
-
-	if s.InstanceId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("InstanceId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Represents the returned data in response to a request action.
-type GetInstanceAccessOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Object that contains connection information for a fleet instance, including
-	// IP address and access credentials.
-	InstanceAccess *InstanceAccess `type:"structure"`
-}
-
-// String returns the string representation
-func (s GetInstanceAccessOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetInstanceAccess = "GetInstanceAccess"
 
@@ -96,7 +40,7 @@ const opGetInstanceAccess = "GetInstanceAccess"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/GetInstanceAccess
-func (c *Client) GetInstanceAccessRequest(input *GetInstanceAccessInput) GetInstanceAccessRequest {
+func (c *Client) GetInstanceAccessRequest(input *types.GetInstanceAccessInput) GetInstanceAccessRequest {
 	op := &aws.Operation{
 		Name:       opGetInstanceAccess,
 		HTTPMethod: "POST",
@@ -104,10 +48,10 @@ func (c *Client) GetInstanceAccessRequest(input *GetInstanceAccessInput) GetInst
 	}
 
 	if input == nil {
-		input = &GetInstanceAccessInput{}
+		input = &types.GetInstanceAccessInput{}
 	}
 
-	req := c.newRequest(op, input, &GetInstanceAccessOutput{})
+	req := c.newRequest(op, input, &types.GetInstanceAccessOutput{})
 	return GetInstanceAccessRequest{Request: req, Input: input, Copy: c.GetInstanceAccessRequest}
 }
 
@@ -115,8 +59,8 @@ func (c *Client) GetInstanceAccessRequest(input *GetInstanceAccessInput) GetInst
 // GetInstanceAccess API operation.
 type GetInstanceAccessRequest struct {
 	*aws.Request
-	Input *GetInstanceAccessInput
-	Copy  func(*GetInstanceAccessInput) GetInstanceAccessRequest
+	Input *types.GetInstanceAccessInput
+	Copy  func(*types.GetInstanceAccessInput) GetInstanceAccessRequest
 }
 
 // Send marshals and sends the GetInstanceAccess API request.
@@ -128,7 +72,7 @@ func (r GetInstanceAccessRequest) Send(ctx context.Context) (*GetInstanceAccessR
 	}
 
 	resp := &GetInstanceAccessResponse{
-		GetInstanceAccessOutput: r.Request.Data.(*GetInstanceAccessOutput),
+		GetInstanceAccessOutput: r.Request.Data.(*types.GetInstanceAccessOutput),
 		response:                &aws.Response{Request: r.Request},
 	}
 
@@ -138,7 +82,7 @@ func (r GetInstanceAccessRequest) Send(ctx context.Context) (*GetInstanceAccessR
 // GetInstanceAccessResponse is the response type for the
 // GetInstanceAccess API operation.
 type GetInstanceAccessResponse struct {
-	*GetInstanceAccessOutput
+	*types.GetInstanceAccessOutput
 
 	response *aws.Response
 }

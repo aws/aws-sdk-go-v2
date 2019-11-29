@@ -6,57 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/opsworks/types"
 )
-
-type DescribeEcsClustersInput struct {
-	_ struct{} `type:"structure"`
-
-	// A list of ARNs, one for each cluster to be described.
-	EcsClusterArns []string `type:"list"`
-
-	// To receive a paginated response, use this parameter to specify the maximum
-	// number of results to be returned with a single call. If the number of available
-	// results exceeds this maximum, the response includes a NextToken value that
-	// you can assign to the NextToken request parameter to get the next set of
-	// results.
-	MaxResults *int64 `type:"integer"`
-
-	// If the previous paginated request did not return all of the remaining results,
-	// the response object'sNextToken parameter value is set to a token. To retrieve
-	// the next set of results, call DescribeEcsClusters again and assign that token
-	// to the request object's NextToken parameter. If there are no remaining results,
-	// the previous response object's NextToken parameter is set to null.
-	NextToken *string `type:"string"`
-
-	// A stack ID. DescribeEcsClusters returns a description of the cluster that
-	// is registered with the stack.
-	StackId *string `type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeEcsClustersInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Contains the response to a DescribeEcsClusters request.
-type DescribeEcsClustersOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A list of EcsCluster objects containing the cluster descriptions.
-	EcsClusters []EcsCluster `type:"list"`
-
-	// If a paginated request does not return all of the remaining results, this
-	// parameter is set to a token that you can assign to the request object's NextToken
-	// parameter to retrieve the next set of results. If the previous paginated
-	// request returned all of the remaining results, this parameter is set to null.
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeEcsClustersOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeEcsClusters = "DescribeEcsClusters"
 
@@ -83,7 +34,7 @@ const opDescribeEcsClusters = "DescribeEcsClusters"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DescribeEcsClusters
-func (c *Client) DescribeEcsClustersRequest(input *DescribeEcsClustersInput) DescribeEcsClustersRequest {
+func (c *Client) DescribeEcsClustersRequest(input *types.DescribeEcsClustersInput) DescribeEcsClustersRequest {
 	op := &aws.Operation{
 		Name:       opDescribeEcsClusters,
 		HTTPMethod: "POST",
@@ -97,10 +48,10 @@ func (c *Client) DescribeEcsClustersRequest(input *DescribeEcsClustersInput) Des
 	}
 
 	if input == nil {
-		input = &DescribeEcsClustersInput{}
+		input = &types.DescribeEcsClustersInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeEcsClustersOutput{})
+	req := c.newRequest(op, input, &types.DescribeEcsClustersOutput{})
 	return DescribeEcsClustersRequest{Request: req, Input: input, Copy: c.DescribeEcsClustersRequest}
 }
 
@@ -108,8 +59,8 @@ func (c *Client) DescribeEcsClustersRequest(input *DescribeEcsClustersInput) Des
 // DescribeEcsClusters API operation.
 type DescribeEcsClustersRequest struct {
 	*aws.Request
-	Input *DescribeEcsClustersInput
-	Copy  func(*DescribeEcsClustersInput) DescribeEcsClustersRequest
+	Input *types.DescribeEcsClustersInput
+	Copy  func(*types.DescribeEcsClustersInput) DescribeEcsClustersRequest
 }
 
 // Send marshals and sends the DescribeEcsClusters API request.
@@ -121,7 +72,7 @@ func (r DescribeEcsClustersRequest) Send(ctx context.Context) (*DescribeEcsClust
 	}
 
 	resp := &DescribeEcsClustersResponse{
-		DescribeEcsClustersOutput: r.Request.Data.(*DescribeEcsClustersOutput),
+		DescribeEcsClustersOutput: r.Request.Data.(*types.DescribeEcsClustersOutput),
 		response:                  &aws.Response{Request: r.Request},
 	}
 
@@ -151,7 +102,7 @@ func NewDescribeEcsClustersPaginator(req DescribeEcsClustersRequest) DescribeEcs
 	return DescribeEcsClustersPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *DescribeEcsClustersInput
+				var inCpy *types.DescribeEcsClustersInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -171,14 +122,14 @@ type DescribeEcsClustersPaginator struct {
 	aws.Pager
 }
 
-func (p *DescribeEcsClustersPaginator) CurrentPage() *DescribeEcsClustersOutput {
-	return p.Pager.CurrentPage().(*DescribeEcsClustersOutput)
+func (p *DescribeEcsClustersPaginator) CurrentPage() *types.DescribeEcsClustersOutput {
+	return p.Pager.CurrentPage().(*types.DescribeEcsClustersOutput)
 }
 
 // DescribeEcsClustersResponse is the response type for the
 // DescribeEcsClusters API operation.
 type DescribeEcsClustersResponse struct {
-	*DescribeEcsClustersOutput
+	*types.DescribeEcsClustersOutput
 
 	response *aws.Response
 }

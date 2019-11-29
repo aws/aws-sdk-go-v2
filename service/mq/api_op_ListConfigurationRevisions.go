@@ -6,119 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/mq/types"
 )
-
-type ListConfigurationRevisionsInput struct {
-	_ struct{} `type:"structure"`
-
-	// ConfigurationId is a required field
-	ConfigurationId *string `location:"uri" locationName:"configuration-id" type:"string" required:"true"`
-
-	MaxResults *int64 `location:"querystring" locationName:"maxResults" min:"1" type:"integer"`
-
-	NextToken *string `location:"querystring" locationName:"nextToken" type:"string"`
-}
-
-// String returns the string representation
-func (s ListConfigurationRevisionsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListConfigurationRevisionsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListConfigurationRevisionsInput"}
-
-	if s.ConfigurationId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ConfigurationId"))
-	}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListConfigurationRevisionsInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.ConfigurationId != nil {
-		v := *s.ConfigurationId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "configuration-id", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.MaxResults != nil {
-		v := *s.MaxResults
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "maxResults", protocol.Int64Value(v), metadata)
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type ListConfigurationRevisionsOutput struct {
-	_ struct{} `type:"structure"`
-
-	ConfigurationId *string `locationName:"configurationId" type:"string"`
-
-	MaxResults *int64 `locationName:"maxResults" type:"integer"`
-
-	NextToken *string `locationName:"nextToken" type:"string"`
-
-	Revisions []ConfigurationRevision `locationName:"revisions" type:"list"`
-}
-
-// String returns the string representation
-func (s ListConfigurationRevisionsOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListConfigurationRevisionsOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.ConfigurationId != nil {
-		v := *s.ConfigurationId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "configurationId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.MaxResults != nil {
-		v := *s.MaxResults
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "maxResults", protocol.Int64Value(v), metadata)
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Revisions != nil {
-		v := s.Revisions
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "revisions", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	return nil
-}
 
 const opListConfigurationRevisions = "ListConfigurationRevisions"
 
@@ -135,7 +24,7 @@ const opListConfigurationRevisions = "ListConfigurationRevisions"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/ListConfigurationRevisions
-func (c *Client) ListConfigurationRevisionsRequest(input *ListConfigurationRevisionsInput) ListConfigurationRevisionsRequest {
+func (c *Client) ListConfigurationRevisionsRequest(input *types.ListConfigurationRevisionsInput) ListConfigurationRevisionsRequest {
 	op := &aws.Operation{
 		Name:       opListConfigurationRevisions,
 		HTTPMethod: "GET",
@@ -143,10 +32,10 @@ func (c *Client) ListConfigurationRevisionsRequest(input *ListConfigurationRevis
 	}
 
 	if input == nil {
-		input = &ListConfigurationRevisionsInput{}
+		input = &types.ListConfigurationRevisionsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListConfigurationRevisionsOutput{})
+	req := c.newRequest(op, input, &types.ListConfigurationRevisionsOutput{})
 	return ListConfigurationRevisionsRequest{Request: req, Input: input, Copy: c.ListConfigurationRevisionsRequest}
 }
 
@@ -154,8 +43,8 @@ func (c *Client) ListConfigurationRevisionsRequest(input *ListConfigurationRevis
 // ListConfigurationRevisions API operation.
 type ListConfigurationRevisionsRequest struct {
 	*aws.Request
-	Input *ListConfigurationRevisionsInput
-	Copy  func(*ListConfigurationRevisionsInput) ListConfigurationRevisionsRequest
+	Input *types.ListConfigurationRevisionsInput
+	Copy  func(*types.ListConfigurationRevisionsInput) ListConfigurationRevisionsRequest
 }
 
 // Send marshals and sends the ListConfigurationRevisions API request.
@@ -167,7 +56,7 @@ func (r ListConfigurationRevisionsRequest) Send(ctx context.Context) (*ListConfi
 	}
 
 	resp := &ListConfigurationRevisionsResponse{
-		ListConfigurationRevisionsOutput: r.Request.Data.(*ListConfigurationRevisionsOutput),
+		ListConfigurationRevisionsOutput: r.Request.Data.(*types.ListConfigurationRevisionsOutput),
 		response:                         &aws.Response{Request: r.Request},
 	}
 
@@ -177,7 +66,7 @@ func (r ListConfigurationRevisionsRequest) Send(ctx context.Context) (*ListConfi
 // ListConfigurationRevisionsResponse is the response type for the
 // ListConfigurationRevisions API operation.
 type ListConfigurationRevisionsResponse struct {
-	*ListConfigurationRevisionsOutput
+	*types.ListConfigurationRevisionsOutput
 
 	response *aws.Response
 }

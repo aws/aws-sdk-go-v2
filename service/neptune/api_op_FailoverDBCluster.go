@@ -6,44 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/neptune/types"
 )
-
-type FailoverDBClusterInput struct {
-	_ struct{} `type:"structure"`
-
-	// A DB cluster identifier to force a failover for. This parameter is not case-sensitive.
-	//
-	// Constraints:
-	//
-	//    * Must match the identifier of an existing DBCluster.
-	DBClusterIdentifier *string `type:"string"`
-
-	// The name of the instance to promote to the primary instance.
-	//
-	// You must specify the instance identifier for an Read Replica in the DB cluster.
-	// For example, mydbcluster-replica1.
-	TargetDBInstanceIdentifier *string `type:"string"`
-}
-
-// String returns the string representation
-func (s FailoverDBClusterInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type FailoverDBClusterOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Contains the details of an Amazon Neptune DB cluster.
-	//
-	// This data type is used as a response element in the DescribeDBClusters action.
-	DBCluster *DBCluster `type:"structure"`
-}
-
-// String returns the string representation
-func (s FailoverDBClusterOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opFailoverDBCluster = "FailoverDBCluster"
 
@@ -70,7 +34,7 @@ const opFailoverDBCluster = "FailoverDBCluster"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/FailoverDBCluster
-func (c *Client) FailoverDBClusterRequest(input *FailoverDBClusterInput) FailoverDBClusterRequest {
+func (c *Client) FailoverDBClusterRequest(input *types.FailoverDBClusterInput) FailoverDBClusterRequest {
 	op := &aws.Operation{
 		Name:       opFailoverDBCluster,
 		HTTPMethod: "POST",
@@ -78,10 +42,10 @@ func (c *Client) FailoverDBClusterRequest(input *FailoverDBClusterInput) Failove
 	}
 
 	if input == nil {
-		input = &FailoverDBClusterInput{}
+		input = &types.FailoverDBClusterInput{}
 	}
 
-	req := c.newRequest(op, input, &FailoverDBClusterOutput{})
+	req := c.newRequest(op, input, &types.FailoverDBClusterOutput{})
 	return FailoverDBClusterRequest{Request: req, Input: input, Copy: c.FailoverDBClusterRequest}
 }
 
@@ -89,8 +53,8 @@ func (c *Client) FailoverDBClusterRequest(input *FailoverDBClusterInput) Failove
 // FailoverDBCluster API operation.
 type FailoverDBClusterRequest struct {
 	*aws.Request
-	Input *FailoverDBClusterInput
-	Copy  func(*FailoverDBClusterInput) FailoverDBClusterRequest
+	Input *types.FailoverDBClusterInput
+	Copy  func(*types.FailoverDBClusterInput) FailoverDBClusterRequest
 }
 
 // Send marshals and sends the FailoverDBCluster API request.
@@ -102,7 +66,7 @@ func (r FailoverDBClusterRequest) Send(ctx context.Context) (*FailoverDBClusterR
 	}
 
 	resp := &FailoverDBClusterResponse{
-		FailoverDBClusterOutput: r.Request.Data.(*FailoverDBClusterOutput),
+		FailoverDBClusterOutput: r.Request.Data.(*types.FailoverDBClusterOutput),
 		response:                &aws.Response{Request: r.Request},
 	}
 
@@ -112,7 +76,7 @@ func (r FailoverDBClusterRequest) Send(ctx context.Context) (*FailoverDBClusterR
 // FailoverDBClusterResponse is the response type for the
 // FailoverDBCluster API operation.
 type FailoverDBClusterResponse struct {
-	*FailoverDBClusterOutput
+	*types.FailoverDBClusterOutput
 
 	response *aws.Response
 }

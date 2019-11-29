@@ -6,137 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/iot/types"
 )
-
-// The input to the RegisterCACertificate operation.
-type RegisterCACertificateInput struct {
-	_ struct{} `type:"structure"`
-
-	// Allows this CA certificate to be used for auto registration of device certificates.
-	AllowAutoRegistration *bool `location:"querystring" locationName:"allowAutoRegistration" type:"boolean"`
-
-	// The CA certificate.
-	//
-	// CaCertificate is a required field
-	CaCertificate *string `locationName:"caCertificate" min:"1" type:"string" required:"true"`
-
-	// Information about the registration configuration.
-	RegistrationConfig *RegistrationConfig `locationName:"registrationConfig" type:"structure"`
-
-	// A boolean value that specifies if the CA certificate is set to active.
-	SetAsActive *bool `location:"querystring" locationName:"setAsActive" type:"boolean"`
-
-	// The private key verification certificate.
-	//
-	// VerificationCertificate is a required field
-	VerificationCertificate *string `locationName:"verificationCertificate" min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s RegisterCACertificateInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *RegisterCACertificateInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "RegisterCACertificateInput"}
-
-	if s.CaCertificate == nil {
-		invalidParams.Add(aws.NewErrParamRequired("CaCertificate"))
-	}
-	if s.CaCertificate != nil && len(*s.CaCertificate) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("CaCertificate", 1))
-	}
-
-	if s.VerificationCertificate == nil {
-		invalidParams.Add(aws.NewErrParamRequired("VerificationCertificate"))
-	}
-	if s.VerificationCertificate != nil && len(*s.VerificationCertificate) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("VerificationCertificate", 1))
-	}
-	if s.RegistrationConfig != nil {
-		if err := s.RegistrationConfig.Validate(); err != nil {
-			invalidParams.AddNested("RegistrationConfig", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s RegisterCACertificateInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.CaCertificate != nil {
-		v := *s.CaCertificate
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "caCertificate", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.RegistrationConfig != nil {
-		v := s.RegistrationConfig
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "registrationConfig", v, metadata)
-	}
-	if s.VerificationCertificate != nil {
-		v := *s.VerificationCertificate
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "verificationCertificate", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.AllowAutoRegistration != nil {
-		v := *s.AllowAutoRegistration
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "allowAutoRegistration", protocol.BoolValue(v), metadata)
-	}
-	if s.SetAsActive != nil {
-		v := *s.SetAsActive
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "setAsActive", protocol.BoolValue(v), metadata)
-	}
-	return nil
-}
-
-// The output from the RegisterCACertificateResponse operation.
-type RegisterCACertificateOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The CA certificate ARN.
-	CertificateArn *string `locationName:"certificateArn" type:"string"`
-
-	// The CA certificate identifier.
-	CertificateId *string `locationName:"certificateId" min:"64" type:"string"`
-}
-
-// String returns the string representation
-func (s RegisterCACertificateOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s RegisterCACertificateOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.CertificateArn != nil {
-		v := *s.CertificateArn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "certificateArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.CertificateId != nil {
-		v := *s.CertificateId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "certificateId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opRegisterCACertificate = "RegisterCACertificate"
 
@@ -157,7 +28,7 @@ const opRegisterCACertificate = "RegisterCACertificate"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) RegisterCACertificateRequest(input *RegisterCACertificateInput) RegisterCACertificateRequest {
+func (c *Client) RegisterCACertificateRequest(input *types.RegisterCACertificateInput) RegisterCACertificateRequest {
 	op := &aws.Operation{
 		Name:       opRegisterCACertificate,
 		HTTPMethod: "POST",
@@ -165,10 +36,10 @@ func (c *Client) RegisterCACertificateRequest(input *RegisterCACertificateInput)
 	}
 
 	if input == nil {
-		input = &RegisterCACertificateInput{}
+		input = &types.RegisterCACertificateInput{}
 	}
 
-	req := c.newRequest(op, input, &RegisterCACertificateOutput{})
+	req := c.newRequest(op, input, &types.RegisterCACertificateOutput{})
 	return RegisterCACertificateRequest{Request: req, Input: input, Copy: c.RegisterCACertificateRequest}
 }
 
@@ -176,8 +47,8 @@ func (c *Client) RegisterCACertificateRequest(input *RegisterCACertificateInput)
 // RegisterCACertificate API operation.
 type RegisterCACertificateRequest struct {
 	*aws.Request
-	Input *RegisterCACertificateInput
-	Copy  func(*RegisterCACertificateInput) RegisterCACertificateRequest
+	Input *types.RegisterCACertificateInput
+	Copy  func(*types.RegisterCACertificateInput) RegisterCACertificateRequest
 }
 
 // Send marshals and sends the RegisterCACertificate API request.
@@ -189,7 +60,7 @@ func (r RegisterCACertificateRequest) Send(ctx context.Context) (*RegisterCACert
 	}
 
 	resp := &RegisterCACertificateResponse{
-		RegisterCACertificateOutput: r.Request.Data.(*RegisterCACertificateOutput),
+		RegisterCACertificateOutput: r.Request.Data.(*types.RegisterCACertificateOutput),
 		response:                    &aws.Response{Request: r.Request},
 	}
 
@@ -199,7 +70,7 @@ func (r RegisterCACertificateRequest) Send(ctx context.Context) (*RegisterCACert
 // RegisterCACertificateResponse is the response type for the
 // RegisterCACertificate API operation.
 type RegisterCACertificateResponse struct {
-	*RegisterCACertificateOutput
+	*types.RegisterCACertificateOutput
 
 	response *aws.Response
 }

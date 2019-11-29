@@ -6,128 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/route53/types"
 )
-
-// A complex type that contains information about the tags that you want to
-// add, edit, or delete.
-type ChangeTagsForResourceInput struct {
-	_ struct{} `locationName:"ChangeTagsForResourceRequest" type:"structure" xmlURI:"https://route53.amazonaws.com/doc/2013-04-01/"`
-
-	// A complex type that contains a list of the tags that you want to add to the
-	// specified health check or hosted zone and/or the tags that you want to edit
-	// Value for.
-	//
-	// You can add a maximum of 10 tags to a health check or a hosted zone.
-	AddTags []Tag `locationNameList:"Tag" min:"1" type:"list"`
-
-	// A complex type that contains a list of the tags that you want to delete from
-	// the specified health check or hosted zone. You can specify up to 10 keys.
-	RemoveTagKeys []string `locationNameList:"Key" min:"1" type:"list"`
-
-	// The ID of the resource for which you want to add, change, or delete tags.
-	//
-	// ResourceId is a required field
-	ResourceId *string `location:"uri" locationName:"ResourceId" type:"string" required:"true"`
-
-	// The type of the resource.
-	//
-	//    * The resource type for health checks is healthcheck.
-	//
-	//    * The resource type for hosted zones is hostedzone.
-	//
-	// ResourceType is a required field
-	ResourceType TagResourceType `location:"uri" locationName:"ResourceType" type:"string" required:"true" enum:"true"`
-}
-
-// String returns the string representation
-func (s ChangeTagsForResourceInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ChangeTagsForResourceInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ChangeTagsForResourceInput"}
-	if s.AddTags != nil && len(s.AddTags) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("AddTags", 1))
-	}
-	if s.RemoveTagKeys != nil && len(s.RemoveTagKeys) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("RemoveTagKeys", 1))
-	}
-
-	if s.ResourceId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ResourceId"))
-	}
-	if len(s.ResourceType) == 0 {
-		invalidParams.Add(aws.NewErrParamRequired("ResourceType"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ChangeTagsForResourceInput) MarshalFields(e protocol.FieldEncoder) error {
-
-	e.SetFields(protocol.BodyTarget, "ChangeTagsForResourceRequest", protocol.FieldMarshalerFunc(func(e protocol.FieldEncoder) error {
-		if s.AddTags != nil {
-			v := s.AddTags
-
-			metadata := protocol.Metadata{ListLocationName: "Tag"}
-			ls0 := e.List(protocol.BodyTarget, "AddTags", metadata)
-			ls0.Start()
-			for _, v1 := range v {
-				ls0.ListAddFields(v1)
-			}
-			ls0.End()
-
-		}
-		if s.RemoveTagKeys != nil {
-			v := s.RemoveTagKeys
-
-			metadata := protocol.Metadata{ListLocationName: "Key"}
-			ls0 := e.List(protocol.BodyTarget, "RemoveTagKeys", metadata)
-			ls0.Start()
-			for _, v1 := range v {
-				ls0.ListAddValue(protocol.StringValue(v1))
-			}
-			ls0.End()
-
-		}
-		return nil
-	}), protocol.Metadata{XMLNamespaceURI: "https://route53.amazonaws.com/doc/2013-04-01/"})
-	if s.ResourceId != nil {
-		v := *s.ResourceId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "ResourceId", protocol.StringValue(v), metadata)
-	}
-	if len(s.ResourceType) > 0 {
-		v := s.ResourceType
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "ResourceType", v, metadata)
-	}
-	return nil
-}
-
-// Empty response for the request.
-type ChangeTagsForResourceOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s ChangeTagsForResourceOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ChangeTagsForResourceOutput) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
 
 const opChangeTagsForResource = "ChangeTagsForResource"
 
@@ -148,7 +28,7 @@ const opChangeTagsForResource = "ChangeTagsForResource"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/ChangeTagsForResource
-func (c *Client) ChangeTagsForResourceRequest(input *ChangeTagsForResourceInput) ChangeTagsForResourceRequest {
+func (c *Client) ChangeTagsForResourceRequest(input *types.ChangeTagsForResourceInput) ChangeTagsForResourceRequest {
 	op := &aws.Operation{
 		Name:       opChangeTagsForResource,
 		HTTPMethod: "POST",
@@ -156,10 +36,10 @@ func (c *Client) ChangeTagsForResourceRequest(input *ChangeTagsForResourceInput)
 	}
 
 	if input == nil {
-		input = &ChangeTagsForResourceInput{}
+		input = &types.ChangeTagsForResourceInput{}
 	}
 
-	req := c.newRequest(op, input, &ChangeTagsForResourceOutput{})
+	req := c.newRequest(op, input, &types.ChangeTagsForResourceOutput{})
 	return ChangeTagsForResourceRequest{Request: req, Input: input, Copy: c.ChangeTagsForResourceRequest}
 }
 
@@ -167,8 +47,8 @@ func (c *Client) ChangeTagsForResourceRequest(input *ChangeTagsForResourceInput)
 // ChangeTagsForResource API operation.
 type ChangeTagsForResourceRequest struct {
 	*aws.Request
-	Input *ChangeTagsForResourceInput
-	Copy  func(*ChangeTagsForResourceInput) ChangeTagsForResourceRequest
+	Input *types.ChangeTagsForResourceInput
+	Copy  func(*types.ChangeTagsForResourceInput) ChangeTagsForResourceRequest
 }
 
 // Send marshals and sends the ChangeTagsForResource API request.
@@ -180,7 +60,7 @@ func (r ChangeTagsForResourceRequest) Send(ctx context.Context) (*ChangeTagsForR
 	}
 
 	resp := &ChangeTagsForResourceResponse{
-		ChangeTagsForResourceOutput: r.Request.Data.(*ChangeTagsForResourceOutput),
+		ChangeTagsForResourceOutput: r.Request.Data.(*types.ChangeTagsForResourceOutput),
 		response:                    &aws.Response{Request: r.Request},
 	}
 
@@ -190,7 +70,7 @@ func (r ChangeTagsForResourceRequest) Send(ctx context.Context) (*ChangeTagsForR
 // ChangeTagsForResourceResponse is the response type for the
 // ChangeTagsForResource API operation.
 type ChangeTagsForResourceResponse struct {
-	*ChangeTagsForResourceOutput
+	*types.ChangeTagsForResourceOutput
 
 	response *aws.Response
 }

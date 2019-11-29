@@ -6,76 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/configservice/types"
 )
-
-type GetComplianceDetailsByResourceInput struct {
-	_ struct{} `type:"structure"`
-
-	// Filters the results by compliance.
-	//
-	// The allowed values are COMPLIANT, NON_COMPLIANT, and NOT_APPLICABLE.
-	ComplianceTypes []ComplianceType `type:"list"`
-
-	// The nextToken string returned on a previous page that you use to get the
-	// next page of results in a paginated response.
-	NextToken *string `type:"string"`
-
-	// The ID of the AWS resource for which you want compliance information.
-	//
-	// ResourceId is a required field
-	ResourceId *string `min:"1" type:"string" required:"true"`
-
-	// The type of the AWS resource for which you want compliance information.
-	//
-	// ResourceType is a required field
-	ResourceType *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetComplianceDetailsByResourceInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetComplianceDetailsByResourceInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetComplianceDetailsByResourceInput"}
-
-	if s.ResourceId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ResourceId"))
-	}
-	if s.ResourceId != nil && len(*s.ResourceId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ResourceId", 1))
-	}
-
-	if s.ResourceType == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ResourceType"))
-	}
-	if s.ResourceType != nil && len(*s.ResourceType) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ResourceType", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type GetComplianceDetailsByResourceOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Indicates whether the specified AWS resource complies each AWS Config rule.
-	EvaluationResults []EvaluationResult `type:"list"`
-
-	// The string that you use in a subsequent request to get the next page of results
-	// in a paginated response.
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s GetComplianceDetailsByResourceOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetComplianceDetailsByResource = "GetComplianceDetailsByResource"
 
@@ -94,7 +26,7 @@ const opGetComplianceDetailsByResource = "GetComplianceDetailsByResource"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/GetComplianceDetailsByResource
-func (c *Client) GetComplianceDetailsByResourceRequest(input *GetComplianceDetailsByResourceInput) GetComplianceDetailsByResourceRequest {
+func (c *Client) GetComplianceDetailsByResourceRequest(input *types.GetComplianceDetailsByResourceInput) GetComplianceDetailsByResourceRequest {
 	op := &aws.Operation{
 		Name:       opGetComplianceDetailsByResource,
 		HTTPMethod: "POST",
@@ -102,10 +34,10 @@ func (c *Client) GetComplianceDetailsByResourceRequest(input *GetComplianceDetai
 	}
 
 	if input == nil {
-		input = &GetComplianceDetailsByResourceInput{}
+		input = &types.GetComplianceDetailsByResourceInput{}
 	}
 
-	req := c.newRequest(op, input, &GetComplianceDetailsByResourceOutput{})
+	req := c.newRequest(op, input, &types.GetComplianceDetailsByResourceOutput{})
 	return GetComplianceDetailsByResourceRequest{Request: req, Input: input, Copy: c.GetComplianceDetailsByResourceRequest}
 }
 
@@ -113,8 +45,8 @@ func (c *Client) GetComplianceDetailsByResourceRequest(input *GetComplianceDetai
 // GetComplianceDetailsByResource API operation.
 type GetComplianceDetailsByResourceRequest struct {
 	*aws.Request
-	Input *GetComplianceDetailsByResourceInput
-	Copy  func(*GetComplianceDetailsByResourceInput) GetComplianceDetailsByResourceRequest
+	Input *types.GetComplianceDetailsByResourceInput
+	Copy  func(*types.GetComplianceDetailsByResourceInput) GetComplianceDetailsByResourceRequest
 }
 
 // Send marshals and sends the GetComplianceDetailsByResource API request.
@@ -126,7 +58,7 @@ func (r GetComplianceDetailsByResourceRequest) Send(ctx context.Context) (*GetCo
 	}
 
 	resp := &GetComplianceDetailsByResourceResponse{
-		GetComplianceDetailsByResourceOutput: r.Request.Data.(*GetComplianceDetailsByResourceOutput),
+		GetComplianceDetailsByResourceOutput: r.Request.Data.(*types.GetComplianceDetailsByResourceOutput),
 		response:                             &aws.Response{Request: r.Request},
 	}
 
@@ -136,7 +68,7 @@ func (r GetComplianceDetailsByResourceRequest) Send(ctx context.Context) (*GetCo
 // GetComplianceDetailsByResourceResponse is the response type for the
 // GetComplianceDetailsByResource API operation.
 type GetComplianceDetailsByResourceResponse struct {
-	*GetComplianceDetailsByResourceOutput
+	*types.GetComplianceDetailsByResourceOutput
 
 	response *aws.Response
 }

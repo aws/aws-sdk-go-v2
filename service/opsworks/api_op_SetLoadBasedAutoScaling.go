@@ -6,70 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
+	"github.com/aws/aws-sdk-go-v2/service/opsworks/types"
 )
-
-type SetLoadBasedAutoScalingInput struct {
-	_ struct{} `type:"structure"`
-
-	// An AutoScalingThresholds object with the downscaling threshold configuration.
-	// If the load falls below these thresholds for a specified amount of time,
-	// AWS OpsWorks Stacks stops a specified number of instances.
-	DownScaling *AutoScalingThresholds `type:"structure"`
-
-	// Enables load-based auto scaling for the layer.
-	Enable *bool `type:"boolean"`
-
-	// The layer ID.
-	//
-	// LayerId is a required field
-	LayerId *string `type:"string" required:"true"`
-
-	// An AutoScalingThresholds object with the upscaling threshold configuration.
-	// If the load exceeds these thresholds for a specified amount of time, AWS
-	// OpsWorks Stacks starts a specified number of instances.
-	UpScaling *AutoScalingThresholds `type:"structure"`
-}
-
-// String returns the string representation
-func (s SetLoadBasedAutoScalingInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *SetLoadBasedAutoScalingInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "SetLoadBasedAutoScalingInput"}
-
-	if s.LayerId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("LayerId"))
-	}
-	if s.DownScaling != nil {
-		if err := s.DownScaling.Validate(); err != nil {
-			invalidParams.AddNested("DownScaling", err.(aws.ErrInvalidParams))
-		}
-	}
-	if s.UpScaling != nil {
-		if err := s.UpScaling.Validate(); err != nil {
-			invalidParams.AddNested("UpScaling", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type SetLoadBasedAutoScalingOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s SetLoadBasedAutoScalingOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opSetLoadBasedAutoScaling = "SetLoadBasedAutoScaling"
 
@@ -98,7 +38,7 @@ const opSetLoadBasedAutoScaling = "SetLoadBasedAutoScaling"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/SetLoadBasedAutoScaling
-func (c *Client) SetLoadBasedAutoScalingRequest(input *SetLoadBasedAutoScalingInput) SetLoadBasedAutoScalingRequest {
+func (c *Client) SetLoadBasedAutoScalingRequest(input *types.SetLoadBasedAutoScalingInput) SetLoadBasedAutoScalingRequest {
 	op := &aws.Operation{
 		Name:       opSetLoadBasedAutoScaling,
 		HTTPMethod: "POST",
@@ -106,10 +46,10 @@ func (c *Client) SetLoadBasedAutoScalingRequest(input *SetLoadBasedAutoScalingIn
 	}
 
 	if input == nil {
-		input = &SetLoadBasedAutoScalingInput{}
+		input = &types.SetLoadBasedAutoScalingInput{}
 	}
 
-	req := c.newRequest(op, input, &SetLoadBasedAutoScalingOutput{})
+	req := c.newRequest(op, input, &types.SetLoadBasedAutoScalingOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return SetLoadBasedAutoScalingRequest{Request: req, Input: input, Copy: c.SetLoadBasedAutoScalingRequest}
@@ -119,8 +59,8 @@ func (c *Client) SetLoadBasedAutoScalingRequest(input *SetLoadBasedAutoScalingIn
 // SetLoadBasedAutoScaling API operation.
 type SetLoadBasedAutoScalingRequest struct {
 	*aws.Request
-	Input *SetLoadBasedAutoScalingInput
-	Copy  func(*SetLoadBasedAutoScalingInput) SetLoadBasedAutoScalingRequest
+	Input *types.SetLoadBasedAutoScalingInput
+	Copy  func(*types.SetLoadBasedAutoScalingInput) SetLoadBasedAutoScalingRequest
 }
 
 // Send marshals and sends the SetLoadBasedAutoScaling API request.
@@ -132,7 +72,7 @@ func (r SetLoadBasedAutoScalingRequest) Send(ctx context.Context) (*SetLoadBased
 	}
 
 	resp := &SetLoadBasedAutoScalingResponse{
-		SetLoadBasedAutoScalingOutput: r.Request.Data.(*SetLoadBasedAutoScalingOutput),
+		SetLoadBasedAutoScalingOutput: r.Request.Data.(*types.SetLoadBasedAutoScalingOutput),
 		response:                      &aws.Response{Request: r.Request},
 	}
 
@@ -142,7 +82,7 @@ func (r SetLoadBasedAutoScalingRequest) Send(ctx context.Context) (*SetLoadBased
 // SetLoadBasedAutoScalingResponse is the response type for the
 // SetLoadBasedAutoScaling API operation.
 type SetLoadBasedAutoScalingResponse struct {
-	*SetLoadBasedAutoScalingOutput
+	*types.SetLoadBasedAutoScalingOutput
 
 	response *aws.Response
 }

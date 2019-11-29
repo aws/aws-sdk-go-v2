@@ -6,80 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/codepipeline/types"
 )
-
-// Represents the input of an AcknowledgeThirdPartyJob action.
-type AcknowledgeThirdPartyJobInput struct {
-	_ struct{} `type:"structure"`
-
-	// The clientToken portion of the clientId and clientToken pair used to verify
-	// that the calling entity is allowed access to the job and its details.
-	//
-	// ClientToken is a required field
-	ClientToken *string `locationName:"clientToken" min:"1" type:"string" required:"true"`
-
-	// The unique system-generated ID of the job.
-	//
-	// JobId is a required field
-	JobId *string `locationName:"jobId" min:"1" type:"string" required:"true"`
-
-	// A system-generated random number that AWS CodePipeline uses to ensure that
-	// the job is being worked on by only one job worker. Get this number from the
-	// response to a GetThirdPartyJobDetails request.
-	//
-	// Nonce is a required field
-	Nonce *string `locationName:"nonce" min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s AcknowledgeThirdPartyJobInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *AcknowledgeThirdPartyJobInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "AcknowledgeThirdPartyJobInput"}
-
-	if s.ClientToken == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ClientToken"))
-	}
-	if s.ClientToken != nil && len(*s.ClientToken) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ClientToken", 1))
-	}
-
-	if s.JobId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("JobId"))
-	}
-	if s.JobId != nil && len(*s.JobId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("JobId", 1))
-	}
-
-	if s.Nonce == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Nonce"))
-	}
-	if s.Nonce != nil && len(*s.Nonce) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Nonce", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Represents the output of an AcknowledgeThirdPartyJob action.
-type AcknowledgeThirdPartyJobOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The status information for the third party job, if any.
-	Status JobStatus `locationName:"status" type:"string" enum:"true"`
-}
-
-// String returns the string representation
-func (s AcknowledgeThirdPartyJobOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opAcknowledgeThirdPartyJob = "AcknowledgeThirdPartyJob"
 
@@ -97,7 +25,7 @@ const opAcknowledgeThirdPartyJob = "AcknowledgeThirdPartyJob"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/AcknowledgeThirdPartyJob
-func (c *Client) AcknowledgeThirdPartyJobRequest(input *AcknowledgeThirdPartyJobInput) AcknowledgeThirdPartyJobRequest {
+func (c *Client) AcknowledgeThirdPartyJobRequest(input *types.AcknowledgeThirdPartyJobInput) AcknowledgeThirdPartyJobRequest {
 	op := &aws.Operation{
 		Name:       opAcknowledgeThirdPartyJob,
 		HTTPMethod: "POST",
@@ -105,10 +33,10 @@ func (c *Client) AcknowledgeThirdPartyJobRequest(input *AcknowledgeThirdPartyJob
 	}
 
 	if input == nil {
-		input = &AcknowledgeThirdPartyJobInput{}
+		input = &types.AcknowledgeThirdPartyJobInput{}
 	}
 
-	req := c.newRequest(op, input, &AcknowledgeThirdPartyJobOutput{})
+	req := c.newRequest(op, input, &types.AcknowledgeThirdPartyJobOutput{})
 	return AcknowledgeThirdPartyJobRequest{Request: req, Input: input, Copy: c.AcknowledgeThirdPartyJobRequest}
 }
 
@@ -116,8 +44,8 @@ func (c *Client) AcknowledgeThirdPartyJobRequest(input *AcknowledgeThirdPartyJob
 // AcknowledgeThirdPartyJob API operation.
 type AcknowledgeThirdPartyJobRequest struct {
 	*aws.Request
-	Input *AcknowledgeThirdPartyJobInput
-	Copy  func(*AcknowledgeThirdPartyJobInput) AcknowledgeThirdPartyJobRequest
+	Input *types.AcknowledgeThirdPartyJobInput
+	Copy  func(*types.AcknowledgeThirdPartyJobInput) AcknowledgeThirdPartyJobRequest
 }
 
 // Send marshals and sends the AcknowledgeThirdPartyJob API request.
@@ -129,7 +57,7 @@ func (r AcknowledgeThirdPartyJobRequest) Send(ctx context.Context) (*Acknowledge
 	}
 
 	resp := &AcknowledgeThirdPartyJobResponse{
-		AcknowledgeThirdPartyJobOutput: r.Request.Data.(*AcknowledgeThirdPartyJobOutput),
+		AcknowledgeThirdPartyJobOutput: r.Request.Data.(*types.AcknowledgeThirdPartyJobOutput),
 		response:                       &aws.Response{Request: r.Request},
 	}
 
@@ -139,7 +67,7 @@ func (r AcknowledgeThirdPartyJobRequest) Send(ctx context.Context) (*Acknowledge
 // AcknowledgeThirdPartyJobResponse is the response type for the
 // AcknowledgeThirdPartyJob API operation.
 type AcknowledgeThirdPartyJobResponse struct {
-	*AcknowledgeThirdPartyJobOutput
+	*types.AcknowledgeThirdPartyJobOutput
 
 	response *aws.Response
 }

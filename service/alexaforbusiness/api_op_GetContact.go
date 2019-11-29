@@ -6,48 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/alexaforbusiness/types"
 )
-
-type GetContactInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ARN of the contact for which to request details.
-	//
-	// ContactArn is a required field
-	ContactArn *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetContactInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetContactInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetContactInput"}
-
-	if s.ContactArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ContactArn"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type GetContactOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The details of the requested contact.
-	Contact *Contact `type:"structure"`
-}
-
-// String returns the string representation
-func (s GetContactOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetContact = "GetContact"
 
@@ -64,7 +24,7 @@ const opGetContact = "GetContact"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/GetContact
-func (c *Client) GetContactRequest(input *GetContactInput) GetContactRequest {
+func (c *Client) GetContactRequest(input *types.GetContactInput) GetContactRequest {
 	op := &aws.Operation{
 		Name:       opGetContact,
 		HTTPMethod: "POST",
@@ -72,10 +32,10 @@ func (c *Client) GetContactRequest(input *GetContactInput) GetContactRequest {
 	}
 
 	if input == nil {
-		input = &GetContactInput{}
+		input = &types.GetContactInput{}
 	}
 
-	req := c.newRequest(op, input, &GetContactOutput{})
+	req := c.newRequest(op, input, &types.GetContactOutput{})
 	return GetContactRequest{Request: req, Input: input, Copy: c.GetContactRequest}
 }
 
@@ -83,8 +43,8 @@ func (c *Client) GetContactRequest(input *GetContactInput) GetContactRequest {
 // GetContact API operation.
 type GetContactRequest struct {
 	*aws.Request
-	Input *GetContactInput
-	Copy  func(*GetContactInput) GetContactRequest
+	Input *types.GetContactInput
+	Copy  func(*types.GetContactInput) GetContactRequest
 }
 
 // Send marshals and sends the GetContact API request.
@@ -96,7 +56,7 @@ func (r GetContactRequest) Send(ctx context.Context) (*GetContactResponse, error
 	}
 
 	resp := &GetContactResponse{
-		GetContactOutput: r.Request.Data.(*GetContactOutput),
+		GetContactOutput: r.Request.Data.(*types.GetContactOutput),
 		response:         &aws.Response{Request: r.Request},
 	}
 
@@ -106,7 +66,7 @@ func (r GetContactRequest) Send(ctx context.Context) (*GetContactResponse, error
 // GetContactResponse is the response type for the
 // GetContact API operation.
 type GetContactResponse struct {
-	*GetContactOutput
+	*types.GetContactOutput
 
 	response *aws.Response
 }

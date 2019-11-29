@@ -4,85 +4,10 @@ package ssm
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ssm/types"
 )
-
-type DescribeAssociationExecutionsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The association ID for which you want to view execution history details.
-	//
-	// AssociationId is a required field
-	AssociationId *string `type:"string" required:"true"`
-
-	// Filters for the request. You can specify the following filters and values.
-	//
-	// ExecutionId (EQUAL)
-	//
-	// Status (EQUAL)
-	//
-	// CreatedTime (EQUAL, GREATER_THAN, LESS_THAN)
-	Filters []AssociationExecutionFilter `min:"1" type:"list"`
-
-	// The maximum number of items to return for this call. The call also returns
-	// a token that you can specify in a subsequent call to get the next set of
-	// results.
-	MaxResults *int64 `min:"1" type:"integer"`
-
-	// A token to start the list. Use this token to get the next set of results.
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeAssociationExecutionsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeAssociationExecutionsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeAssociationExecutionsInput"}
-
-	if s.AssociationId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("AssociationId"))
-	}
-	if s.Filters != nil && len(s.Filters) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Filters", 1))
-	}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-	if s.Filters != nil {
-		for i, v := range s.Filters {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribeAssociationExecutionsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A list of the executions for the specified association ID.
-	AssociationExecutions []AssociationExecution `type:"list"`
-
-	// The token for the next set of items to return. Use this token to get the
-	// next set of results.
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeAssociationExecutionsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeAssociationExecutions = "DescribeAssociationExecutions"
 
@@ -99,7 +24,7 @@ const opDescribeAssociationExecutions = "DescribeAssociationExecutions"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeAssociationExecutions
-func (c *Client) DescribeAssociationExecutionsRequest(input *DescribeAssociationExecutionsInput) DescribeAssociationExecutionsRequest {
+func (c *Client) DescribeAssociationExecutionsRequest(input *types.DescribeAssociationExecutionsInput) DescribeAssociationExecutionsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeAssociationExecutions,
 		HTTPMethod: "POST",
@@ -107,10 +32,10 @@ func (c *Client) DescribeAssociationExecutionsRequest(input *DescribeAssociation
 	}
 
 	if input == nil {
-		input = &DescribeAssociationExecutionsInput{}
+		input = &types.DescribeAssociationExecutionsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeAssociationExecutionsOutput{})
+	req := c.newRequest(op, input, &types.DescribeAssociationExecutionsOutput{})
 	return DescribeAssociationExecutionsRequest{Request: req, Input: input, Copy: c.DescribeAssociationExecutionsRequest}
 }
 
@@ -118,8 +43,8 @@ func (c *Client) DescribeAssociationExecutionsRequest(input *DescribeAssociation
 // DescribeAssociationExecutions API operation.
 type DescribeAssociationExecutionsRequest struct {
 	*aws.Request
-	Input *DescribeAssociationExecutionsInput
-	Copy  func(*DescribeAssociationExecutionsInput) DescribeAssociationExecutionsRequest
+	Input *types.DescribeAssociationExecutionsInput
+	Copy  func(*types.DescribeAssociationExecutionsInput) DescribeAssociationExecutionsRequest
 }
 
 // Send marshals and sends the DescribeAssociationExecutions API request.
@@ -131,7 +56,7 @@ func (r DescribeAssociationExecutionsRequest) Send(ctx context.Context) (*Descri
 	}
 
 	resp := &DescribeAssociationExecutionsResponse{
-		DescribeAssociationExecutionsOutput: r.Request.Data.(*DescribeAssociationExecutionsOutput),
+		DescribeAssociationExecutionsOutput: r.Request.Data.(*types.DescribeAssociationExecutionsOutput),
 		response:                            &aws.Response{Request: r.Request},
 	}
 
@@ -141,7 +66,7 @@ func (r DescribeAssociationExecutionsRequest) Send(ctx context.Context) (*Descri
 // DescribeAssociationExecutionsResponse is the response type for the
 // DescribeAssociationExecutions API operation.
 type DescribeAssociationExecutionsResponse struct {
-	*DescribeAssociationExecutionsOutput
+	*types.DescribeAssociationExecutionsOutput
 
 	response *aws.Response
 }

@@ -6,115 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/elasticsearchservice/types"
 )
-
-// Container for the parameters to DescribeElasticsearchInstanceTypeLimits operation.
-type DescribeElasticsearchInstanceTypeLimitsInput struct {
-	_ struct{} `type:"structure"`
-
-	// DomainName represents the name of the Domain that we are trying to modify.
-	// This should be present only if we are querying for Elasticsearch Limits for
-	// existing domain.
-	DomainName *string `location:"querystring" locationName:"domainName" min:"3" type:"string"`
-
-	// Version of Elasticsearch for which Limits are needed.
-	//
-	// ElasticsearchVersion is a required field
-	ElasticsearchVersion *string `location:"uri" locationName:"ElasticsearchVersion" type:"string" required:"true"`
-
-	// The instance type for an Elasticsearch cluster for which Elasticsearch Limits
-	// are needed.
-	//
-	// InstanceType is a required field
-	InstanceType ESPartitionInstanceType `location:"uri" locationName:"InstanceType" type:"string" required:"true" enum:"true"`
-}
-
-// String returns the string representation
-func (s DescribeElasticsearchInstanceTypeLimitsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeElasticsearchInstanceTypeLimitsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeElasticsearchInstanceTypeLimitsInput"}
-	if s.DomainName != nil && len(*s.DomainName) < 3 {
-		invalidParams.Add(aws.NewErrParamMinLen("DomainName", 3))
-	}
-
-	if s.ElasticsearchVersion == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ElasticsearchVersion"))
-	}
-	if len(s.InstanceType) == 0 {
-		invalidParams.Add(aws.NewErrParamRequired("InstanceType"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DescribeElasticsearchInstanceTypeLimitsInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.ElasticsearchVersion != nil {
-		v := *s.ElasticsearchVersion
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "ElasticsearchVersion", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if len(s.InstanceType) > 0 {
-		v := s.InstanceType
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "InstanceType", protocol.QuotedValue{ValueMarshaler: v}, metadata)
-	}
-	if s.DomainName != nil {
-		v := *s.DomainName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "domainName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-// Container for the parameters received from DescribeElasticsearchInstanceTypeLimits
-// operation.
-type DescribeElasticsearchInstanceTypeLimitsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Map of Role of the Instance and Limits that are applicable. Role performed
-	// by given Instance in Elasticsearch can be one of the following:
-	//    * Data: If the given InstanceType is used as Data node
-	//
-	//    * Master: If the given InstanceType is used as Master node
-	LimitsByRole map[string]Limits `type:"map"`
-}
-
-// String returns the string representation
-func (s DescribeElasticsearchInstanceTypeLimitsOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DescribeElasticsearchInstanceTypeLimitsOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.LimitsByRole != nil {
-		v := s.LimitsByRole
-
-		metadata := protocol.Metadata{}
-		ms0 := e.Map(protocol.BodyTarget, "LimitsByRole", metadata)
-		ms0.Start()
-		for k1, v1 := range v {
-			ms0.MapSetFields(k1, v1)
-		}
-		ms0.End()
-
-	}
-	return nil
-}
 
 const opDescribeElasticsearchInstanceTypeLimits = "DescribeElasticsearchInstanceTypeLimits"
 
@@ -131,7 +24,7 @@ const opDescribeElasticsearchInstanceTypeLimits = "DescribeElasticsearchInstance
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) DescribeElasticsearchInstanceTypeLimitsRequest(input *DescribeElasticsearchInstanceTypeLimitsInput) DescribeElasticsearchInstanceTypeLimitsRequest {
+func (c *Client) DescribeElasticsearchInstanceTypeLimitsRequest(input *types.DescribeElasticsearchInstanceTypeLimitsInput) DescribeElasticsearchInstanceTypeLimitsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeElasticsearchInstanceTypeLimits,
 		HTTPMethod: "GET",
@@ -139,10 +32,10 @@ func (c *Client) DescribeElasticsearchInstanceTypeLimitsRequest(input *DescribeE
 	}
 
 	if input == nil {
-		input = &DescribeElasticsearchInstanceTypeLimitsInput{}
+		input = &types.DescribeElasticsearchInstanceTypeLimitsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeElasticsearchInstanceTypeLimitsOutput{})
+	req := c.newRequest(op, input, &types.DescribeElasticsearchInstanceTypeLimitsOutput{})
 	return DescribeElasticsearchInstanceTypeLimitsRequest{Request: req, Input: input, Copy: c.DescribeElasticsearchInstanceTypeLimitsRequest}
 }
 
@@ -150,8 +43,8 @@ func (c *Client) DescribeElasticsearchInstanceTypeLimitsRequest(input *DescribeE
 // DescribeElasticsearchInstanceTypeLimits API operation.
 type DescribeElasticsearchInstanceTypeLimitsRequest struct {
 	*aws.Request
-	Input *DescribeElasticsearchInstanceTypeLimitsInput
-	Copy  func(*DescribeElasticsearchInstanceTypeLimitsInput) DescribeElasticsearchInstanceTypeLimitsRequest
+	Input *types.DescribeElasticsearchInstanceTypeLimitsInput
+	Copy  func(*types.DescribeElasticsearchInstanceTypeLimitsInput) DescribeElasticsearchInstanceTypeLimitsRequest
 }
 
 // Send marshals and sends the DescribeElasticsearchInstanceTypeLimits API request.
@@ -163,7 +56,7 @@ func (r DescribeElasticsearchInstanceTypeLimitsRequest) Send(ctx context.Context
 	}
 
 	resp := &DescribeElasticsearchInstanceTypeLimitsResponse{
-		DescribeElasticsearchInstanceTypeLimitsOutput: r.Request.Data.(*DescribeElasticsearchInstanceTypeLimitsOutput),
+		DescribeElasticsearchInstanceTypeLimitsOutput: r.Request.Data.(*types.DescribeElasticsearchInstanceTypeLimitsOutput),
 		response: &aws.Response{Request: r.Request},
 	}
 
@@ -173,7 +66,7 @@ func (r DescribeElasticsearchInstanceTypeLimitsRequest) Send(ctx context.Context
 // DescribeElasticsearchInstanceTypeLimitsResponse is the response type for the
 // DescribeElasticsearchInstanceTypeLimits API operation.
 type DescribeElasticsearchInstanceTypeLimitsResponse struct {
-	*DescribeElasticsearchInstanceTypeLimitsOutput
+	*types.DescribeElasticsearchInstanceTypeLimitsOutput
 
 	response *aws.Response
 }

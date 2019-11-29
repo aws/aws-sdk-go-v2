@@ -10,6 +10,7 @@ package appsynciface
 
 import (
 	"github.com/aws/aws-sdk-go-v2/service/appsync"
+	"github.com/aws/aws-sdk-go-v2/service/appsync/types"
 )
 
 // ClientAPI provides an interface to enable mocking the
@@ -43,7 +44,7 @@ import (
 //    type mockClientClient struct {
 //        appsynciface.ClientPI
 //    }
-//    func (m *mockClientClient) CreateApiKey(input *appsync.CreateApiKeyInput) (*appsync.CreateApiKeyOutput, error) {
+//    func (m *mockClientClient) CreateApiKey(input *types.CreateApiKeyInput) (*types.CreateApiKeyOutput, error) {
 //        // mock response/functionality
 //    }
 //
@@ -61,77 +62,77 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type ClientAPI interface {
-	CreateApiKeyRequest(*appsync.CreateApiKeyInput) appsync.CreateApiKeyRequest
+	CreateApiKeyRequest(*types.CreateApiKeyInput) appsync.CreateApiKeyRequest
 
-	CreateDataSourceRequest(*appsync.CreateDataSourceInput) appsync.CreateDataSourceRequest
+	CreateDataSourceRequest(*types.CreateDataSourceInput) appsync.CreateDataSourceRequest
 
-	CreateFunctionRequest(*appsync.CreateFunctionInput) appsync.CreateFunctionRequest
+	CreateFunctionRequest(*types.CreateFunctionInput) appsync.CreateFunctionRequest
 
-	CreateGraphqlApiRequest(*appsync.CreateGraphqlApiInput) appsync.CreateGraphqlApiRequest
+	CreateGraphqlApiRequest(*types.CreateGraphqlApiInput) appsync.CreateGraphqlApiRequest
 
-	CreateResolverRequest(*appsync.CreateResolverInput) appsync.CreateResolverRequest
+	CreateResolverRequest(*types.CreateResolverInput) appsync.CreateResolverRequest
 
-	CreateTypeRequest(*appsync.CreateTypeInput) appsync.CreateTypeRequest
+	CreateTypeRequest(*types.CreateTypeInput) appsync.CreateTypeRequest
 
-	DeleteApiKeyRequest(*appsync.DeleteApiKeyInput) appsync.DeleteApiKeyRequest
+	DeleteApiKeyRequest(*types.DeleteApiKeyInput) appsync.DeleteApiKeyRequest
 
-	DeleteDataSourceRequest(*appsync.DeleteDataSourceInput) appsync.DeleteDataSourceRequest
+	DeleteDataSourceRequest(*types.DeleteDataSourceInput) appsync.DeleteDataSourceRequest
 
-	DeleteFunctionRequest(*appsync.DeleteFunctionInput) appsync.DeleteFunctionRequest
+	DeleteFunctionRequest(*types.DeleteFunctionInput) appsync.DeleteFunctionRequest
 
-	DeleteGraphqlApiRequest(*appsync.DeleteGraphqlApiInput) appsync.DeleteGraphqlApiRequest
+	DeleteGraphqlApiRequest(*types.DeleteGraphqlApiInput) appsync.DeleteGraphqlApiRequest
 
-	DeleteResolverRequest(*appsync.DeleteResolverInput) appsync.DeleteResolverRequest
+	DeleteResolverRequest(*types.DeleteResolverInput) appsync.DeleteResolverRequest
 
-	DeleteTypeRequest(*appsync.DeleteTypeInput) appsync.DeleteTypeRequest
+	DeleteTypeRequest(*types.DeleteTypeInput) appsync.DeleteTypeRequest
 
-	GetDataSourceRequest(*appsync.GetDataSourceInput) appsync.GetDataSourceRequest
+	GetDataSourceRequest(*types.GetDataSourceInput) appsync.GetDataSourceRequest
 
-	GetFunctionRequest(*appsync.GetFunctionInput) appsync.GetFunctionRequest
+	GetFunctionRequest(*types.GetFunctionInput) appsync.GetFunctionRequest
 
-	GetGraphqlApiRequest(*appsync.GetGraphqlApiInput) appsync.GetGraphqlApiRequest
+	GetGraphqlApiRequest(*types.GetGraphqlApiInput) appsync.GetGraphqlApiRequest
 
-	GetIntrospectionSchemaRequest(*appsync.GetIntrospectionSchemaInput) appsync.GetIntrospectionSchemaRequest
+	GetIntrospectionSchemaRequest(*types.GetIntrospectionSchemaInput) appsync.GetIntrospectionSchemaRequest
 
-	GetResolverRequest(*appsync.GetResolverInput) appsync.GetResolverRequest
+	GetResolverRequest(*types.GetResolverInput) appsync.GetResolverRequest
 
-	GetSchemaCreationStatusRequest(*appsync.GetSchemaCreationStatusInput) appsync.GetSchemaCreationStatusRequest
+	GetSchemaCreationStatusRequest(*types.GetSchemaCreationStatusInput) appsync.GetSchemaCreationStatusRequest
 
-	GetTypeRequest(*appsync.GetTypeInput) appsync.GetTypeRequest
+	GetTypeRequest(*types.GetTypeInput) appsync.GetTypeRequest
 
-	ListApiKeysRequest(*appsync.ListApiKeysInput) appsync.ListApiKeysRequest
+	ListApiKeysRequest(*types.ListApiKeysInput) appsync.ListApiKeysRequest
 
-	ListDataSourcesRequest(*appsync.ListDataSourcesInput) appsync.ListDataSourcesRequest
+	ListDataSourcesRequest(*types.ListDataSourcesInput) appsync.ListDataSourcesRequest
 
-	ListFunctionsRequest(*appsync.ListFunctionsInput) appsync.ListFunctionsRequest
+	ListFunctionsRequest(*types.ListFunctionsInput) appsync.ListFunctionsRequest
 
-	ListGraphqlApisRequest(*appsync.ListGraphqlApisInput) appsync.ListGraphqlApisRequest
+	ListGraphqlApisRequest(*types.ListGraphqlApisInput) appsync.ListGraphqlApisRequest
 
-	ListResolversRequest(*appsync.ListResolversInput) appsync.ListResolversRequest
+	ListResolversRequest(*types.ListResolversInput) appsync.ListResolversRequest
 
-	ListResolversByFunctionRequest(*appsync.ListResolversByFunctionInput) appsync.ListResolversByFunctionRequest
+	ListResolversByFunctionRequest(*types.ListResolversByFunctionInput) appsync.ListResolversByFunctionRequest
 
-	ListTagsForResourceRequest(*appsync.ListTagsForResourceInput) appsync.ListTagsForResourceRequest
+	ListTagsForResourceRequest(*types.ListTagsForResourceInput) appsync.ListTagsForResourceRequest
 
-	ListTypesRequest(*appsync.ListTypesInput) appsync.ListTypesRequest
+	ListTypesRequest(*types.ListTypesInput) appsync.ListTypesRequest
 
-	StartSchemaCreationRequest(*appsync.StartSchemaCreationInput) appsync.StartSchemaCreationRequest
+	StartSchemaCreationRequest(*types.StartSchemaCreationInput) appsync.StartSchemaCreationRequest
 
-	TagResourceRequest(*appsync.TagResourceInput) appsync.TagResourceRequest
+	TagResourceRequest(*types.TagResourceInput) appsync.TagResourceRequest
 
-	UntagResourceRequest(*appsync.UntagResourceInput) appsync.UntagResourceRequest
+	UntagResourceRequest(*types.UntagResourceInput) appsync.UntagResourceRequest
 
-	UpdateApiKeyRequest(*appsync.UpdateApiKeyInput) appsync.UpdateApiKeyRequest
+	UpdateApiKeyRequest(*types.UpdateApiKeyInput) appsync.UpdateApiKeyRequest
 
-	UpdateDataSourceRequest(*appsync.UpdateDataSourceInput) appsync.UpdateDataSourceRequest
+	UpdateDataSourceRequest(*types.UpdateDataSourceInput) appsync.UpdateDataSourceRequest
 
-	UpdateFunctionRequest(*appsync.UpdateFunctionInput) appsync.UpdateFunctionRequest
+	UpdateFunctionRequest(*types.UpdateFunctionInput) appsync.UpdateFunctionRequest
 
-	UpdateGraphqlApiRequest(*appsync.UpdateGraphqlApiInput) appsync.UpdateGraphqlApiRequest
+	UpdateGraphqlApiRequest(*types.UpdateGraphqlApiInput) appsync.UpdateGraphqlApiRequest
 
-	UpdateResolverRequest(*appsync.UpdateResolverInput) appsync.UpdateResolverRequest
+	UpdateResolverRequest(*types.UpdateResolverInput) appsync.UpdateResolverRequest
 
-	UpdateTypeRequest(*appsync.UpdateTypeInput) appsync.UpdateTypeRequest
+	UpdateTypeRequest(*types.UpdateTypeInput) appsync.UpdateTypeRequest
 }
 
 var _ ClientAPI = (*appsync.Client)(nil)

@@ -6,67 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/rekognition/types"
 )
-
-type ListFacesInput struct {
-	_ struct{} `type:"structure"`
-
-	// ID of the collection from which to list the faces.
-	//
-	// CollectionId is a required field
-	CollectionId *string `min:"1" type:"string" required:"true"`
-
-	// Maximum number of faces to return.
-	MaxResults *int64 `type:"integer"`
-
-	// If the previous response was incomplete (because there is more data to retrieve),
-	// Amazon Rekognition returns a pagination token in the response. You can use
-	// this pagination token to retrieve the next set of faces.
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s ListFacesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListFacesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListFacesInput"}
-
-	if s.CollectionId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("CollectionId"))
-	}
-	if s.CollectionId != nil && len(*s.CollectionId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("CollectionId", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ListFacesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Version number of the face detection model associated with the input collection
-	// (CollectionId).
-	FaceModelVersion *string `type:"string"`
-
-	// An array of Face objects.
-	Faces []Face `type:"list"`
-
-	// If the response is truncated, Amazon Rekognition returns this token that
-	// you can use in the subsequent request to retrieve the next set of faces.
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s ListFacesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListFaces = "ListFaces"
 
@@ -87,7 +28,7 @@ const opListFaces = "ListFaces"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) ListFacesRequest(input *ListFacesInput) ListFacesRequest {
+func (c *Client) ListFacesRequest(input *types.ListFacesInput) ListFacesRequest {
 	op := &aws.Operation{
 		Name:       opListFaces,
 		HTTPMethod: "POST",
@@ -101,10 +42,10 @@ func (c *Client) ListFacesRequest(input *ListFacesInput) ListFacesRequest {
 	}
 
 	if input == nil {
-		input = &ListFacesInput{}
+		input = &types.ListFacesInput{}
 	}
 
-	req := c.newRequest(op, input, &ListFacesOutput{})
+	req := c.newRequest(op, input, &types.ListFacesOutput{})
 	return ListFacesRequest{Request: req, Input: input, Copy: c.ListFacesRequest}
 }
 
@@ -112,8 +53,8 @@ func (c *Client) ListFacesRequest(input *ListFacesInput) ListFacesRequest {
 // ListFaces API operation.
 type ListFacesRequest struct {
 	*aws.Request
-	Input *ListFacesInput
-	Copy  func(*ListFacesInput) ListFacesRequest
+	Input *types.ListFacesInput
+	Copy  func(*types.ListFacesInput) ListFacesRequest
 }
 
 // Send marshals and sends the ListFaces API request.
@@ -125,7 +66,7 @@ func (r ListFacesRequest) Send(ctx context.Context) (*ListFacesResponse, error) 
 	}
 
 	resp := &ListFacesResponse{
-		ListFacesOutput: r.Request.Data.(*ListFacesOutput),
+		ListFacesOutput: r.Request.Data.(*types.ListFacesOutput),
 		response:        &aws.Response{Request: r.Request},
 	}
 
@@ -155,7 +96,7 @@ func NewListFacesPaginator(req ListFacesRequest) ListFacesPaginator {
 	return ListFacesPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListFacesInput
+				var inCpy *types.ListFacesInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -175,14 +116,14 @@ type ListFacesPaginator struct {
 	aws.Pager
 }
 
-func (p *ListFacesPaginator) CurrentPage() *ListFacesOutput {
-	return p.Pager.CurrentPage().(*ListFacesOutput)
+func (p *ListFacesPaginator) CurrentPage() *types.ListFacesOutput {
+	return p.Pager.CurrentPage().(*types.ListFacesOutput)
 }
 
 // ListFacesResponse is the response type for the
 // ListFaces API operation.
 type ListFacesResponse struct {
-	*ListFacesOutput
+	*types.ListFacesOutput
 
 	response *aws.Response
 }

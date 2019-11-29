@@ -12,6 +12,8 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws/awserr"
 	"github.com/aws/aws-sdk-go-v2/aws/external"
 	"github.com/aws/aws-sdk-go-v2/service/inspector"
+	"github.com/aws/aws-sdk-go-v2/service/inspector/enums"
+	"github.com/aws/aws-sdk-go-v2/service/inspector/types"
 )
 
 var _ time.Duration
@@ -37,8 +39,8 @@ func ExampleClient_AddAttributesToFindingsRequest_shared00() {
 	}
 
 	svc := inspector.New(cfg)
-	input := &inspector.AddAttributesToFindingsInput{
-		Attributes: []inspector.Attribute{
+	input := &types.AddAttributesToFindingsInput{
+		Attributes: []types.Attribute{
 			{
 				Key:   aws.String("Example"),
 				Value: aws.String("example"),
@@ -90,7 +92,7 @@ func ExampleClient_CreateAssessmentTargetRequest_shared00() {
 	}
 
 	svc := inspector.New(cfg)
-	input := &inspector.CreateAssessmentTargetInput{
+	input := &types.CreateAssessmentTargetInput{
 		AssessmentTargetName: aws.String("ExampleAssessmentTarget"),
 		ResourceGroupArn:     aws.String("arn:aws:inspector:us-west-2:123456789012:resourcegroup/0-AB6DMKnv"),
 	}
@@ -139,14 +141,14 @@ func ExampleClient_CreateAssessmentTemplateRequest_shared00() {
 	}
 
 	svc := inspector.New(cfg)
-	input := &inspector.CreateAssessmentTemplateInput{
+	input := &types.CreateAssessmentTemplateInput{
 		AssessmentTargetArn:    aws.String("arn:aws:inspector:us-west-2:123456789012:target/0-nvgVhaxX"),
 		AssessmentTemplateName: aws.String("ExampleAssessmentTemplate"),
 		DurationInSeconds:      aws.Int64(180),
 		RulesPackageArns: []string{
 			"arn:aws:inspector:us-west-2:758058086616:rulespackage/0-11B9DBXp",
 		},
-		UserAttributesForFindings: []inspector.Attribute{
+		UserAttributesForFindings: []types.Attribute{
 			{
 				Key:   aws.String("Example"),
 				Value: aws.String("example"),
@@ -198,8 +200,8 @@ func ExampleClient_CreateResourceGroupRequest_shared00() {
 	}
 
 	svc := inspector.New(cfg)
-	input := &inspector.CreateResourceGroupInput{
-		ResourceGroupTags: []inspector.ResourceGroupTag{
+	input := &types.CreateResourceGroupInput{
+		ResourceGroupTags: []types.ResourceGroupTag{
 			{
 				Key:   aws.String("Name"),
 				Value: aws.String("example"),
@@ -246,7 +248,7 @@ func ExampleClient_DeleteAssessmentRunRequest_shared00() {
 	}
 
 	svc := inspector.New(cfg)
-	input := &inspector.DeleteAssessmentRunInput{
+	input := &types.DeleteAssessmentRunInput{
 		AssessmentRunArn: aws.String("arn:aws:inspector:us-west-2:123456789012:target/0-nvgVhaxX/template/0-it5r2S4T/run/0-11LMTAVe"),
 	}
 
@@ -291,7 +293,7 @@ func ExampleClient_DeleteAssessmentTargetRequest_shared00() {
 	}
 
 	svc := inspector.New(cfg)
-	input := &inspector.DeleteAssessmentTargetInput{
+	input := &types.DeleteAssessmentTargetInput{
 		AssessmentTargetArn: aws.String("arn:aws:inspector:us-west-2:123456789012:target/0-0kFIPusq"),
 	}
 
@@ -336,7 +338,7 @@ func ExampleClient_DeleteAssessmentTemplateRequest_shared00() {
 	}
 
 	svc := inspector.New(cfg)
-	input := &inspector.DeleteAssessmentTemplateInput{
+	input := &types.DeleteAssessmentTemplateInput{
 		AssessmentTemplateArn: aws.String("arn:aws:inspector:us-west-2:123456789012:target/0-nvgVhaxX/template/0-it5r2S4T"),
 	}
 
@@ -381,7 +383,7 @@ func ExampleClient_DescribeAssessmentRunsRequest_shared00() {
 	}
 
 	svc := inspector.New(cfg)
-	input := &inspector.DescribeAssessmentRunsInput{
+	input := &types.DescribeAssessmentRunsInput{
 		AssessmentRunArns: []string{
 			"arn:aws:inspector:us-west-2:123456789012:target/0-0kFIPusq/template/0-4r1V2mAw/run/0-MKkpXXPE",
 		},
@@ -421,7 +423,7 @@ func ExampleClient_DescribeAssessmentTargetsRequest_shared00() {
 	}
 
 	svc := inspector.New(cfg)
-	input := &inspector.DescribeAssessmentTargetsInput{
+	input := &types.DescribeAssessmentTargetsInput{
 		AssessmentTargetArns: []string{
 			"arn:aws:inspector:us-west-2:123456789012:target/0-0kFIPusq",
 		},
@@ -461,7 +463,7 @@ func ExampleClient_DescribeAssessmentTemplatesRequest_shared00() {
 	}
 
 	svc := inspector.New(cfg)
-	input := &inspector.DescribeAssessmentTemplatesInput{
+	input := &types.DescribeAssessmentTemplatesInput{
 		AssessmentTemplateArns: []string{
 			"arn:aws:inspector:us-west-2:123456789012:target/0-0kFIPusq/template/0-4r1V2mAw",
 		},
@@ -500,7 +502,7 @@ func ExampleClient_DescribeCrossAccountAccessRoleRequest_shared00() {
 	}
 
 	svc := inspector.New(cfg)
-	input := &inspector.DescribeCrossAccountAccessRoleInput{}
+	input := &types.DescribeCrossAccountAccessRoleInput{}
 
 	req := svc.DescribeCrossAccountAccessRoleRequest(input)
 	result, err := req.Send(context.Background())
@@ -533,7 +535,7 @@ func ExampleClient_DescribeFindingsRequest_shared00() {
 	}
 
 	svc := inspector.New(cfg)
-	input := &inspector.DescribeFindingsInput{
+	input := &types.DescribeFindingsInput{
 		FindingArns: []string{
 			"arn:aws:inspector:us-west-2:123456789012:target/0-0kFIPusq/template/0-4r1V2mAw/run/0-MKkpXXPE/finding/0-HwPnsDm4",
 		},
@@ -572,7 +574,7 @@ func ExampleClient_DescribeResourceGroupsRequest_shared00() {
 	}
 
 	svc := inspector.New(cfg)
-	input := &inspector.DescribeResourceGroupsInput{
+	input := &types.DescribeResourceGroupsInput{
 		ResourceGroupArns: []string{
 			"arn:aws:inspector:us-west-2:123456789012:resourcegroup/0-PyGXopAI",
 		},
@@ -611,7 +613,7 @@ func ExampleClient_DescribeRulesPackagesRequest_shared00() {
 	}
 
 	svc := inspector.New(cfg)
-	input := &inspector.DescribeRulesPackagesInput{
+	input := &types.DescribeRulesPackagesInput{
 		RulesPackageArns: []string{
 			"arn:aws:inspector:us-west-2:758058086616:rulespackage/0-JJOtZiqQ",
 		},
@@ -650,7 +652,7 @@ func ExampleClient_GetTelemetryMetadataRequest_shared00() {
 	}
 
 	svc := inspector.New(cfg)
-	input := &inspector.GetTelemetryMetadataInput{
+	input := &types.GetTelemetryMetadataInput{
 		AssessmentRunArn: aws.String("arn:aws:inspector:us-west-2:123456789012:target/0-0kFIPusq/template/0-4r1V2mAw/run/0-MKkpXXPE"),
 	}
 
@@ -692,7 +694,7 @@ func ExampleClient_ListAssessmentRunAgentsRequest_shared00() {
 	}
 
 	svc := inspector.New(cfg)
-	input := &inspector.ListAssessmentRunAgentsInput{
+	input := &types.ListAssessmentRunAgentsInput{
 		AssessmentRunArn: aws.String("arn:aws:inspector:us-west-2:123456789012:target/0-0kFIPusq/template/0-4r1V2mAw/run/0-MKkpXXPE"),
 		MaxResults:       aws.Int64(123),
 	}
@@ -735,7 +737,7 @@ func ExampleClient_ListAssessmentRunsRequest_shared00() {
 	}
 
 	svc := inspector.New(cfg)
-	input := &inspector.ListAssessmentRunsInput{
+	input := &types.ListAssessmentRunsInput{
 		AssessmentTemplateArns: []string{
 			"arn:aws:inspector:us-west-2:123456789012:target/0-0kFIPusq/template/0-4r1V2mAw",
 		},
@@ -779,7 +781,7 @@ func ExampleClient_ListAssessmentTargetsRequest_shared00() {
 	}
 
 	svc := inspector.New(cfg)
-	input := &inspector.ListAssessmentTargetsInput{
+	input := &types.ListAssessmentTargetsInput{
 		MaxResults: aws.Int64(123),
 	}
 
@@ -819,7 +821,7 @@ func ExampleClient_ListAssessmentTemplatesRequest_shared00() {
 	}
 
 	svc := inspector.New(cfg)
-	input := &inspector.ListAssessmentTemplatesInput{
+	input := &types.ListAssessmentTemplatesInput{
 		AssessmentTargetArns: []string{
 			"arn:aws:inspector:us-west-2:123456789012:target/0-0kFIPusq",
 		},
@@ -864,7 +866,7 @@ func ExampleClient_ListEventSubscriptionsRequest_shared00() {
 	}
 
 	svc := inspector.New(cfg)
-	input := &inspector.ListEventSubscriptionsInput{
+	input := &types.ListEventSubscriptionsInput{
 		MaxResults:  aws.Int64(123),
 		ResourceArn: aws.String("arn:aws:inspector:us-west-2:123456789012:target/0-nvgVhaxX/template/0-7sbz2Kz0"),
 	}
@@ -907,7 +909,7 @@ func ExampleClient_ListFindingsRequest_shared00() {
 	}
 
 	svc := inspector.New(cfg)
-	input := &inspector.ListFindingsInput{
+	input := &types.ListFindingsInput{
 		AssessmentRunArns: []string{
 			"arn:aws:inspector:us-west-2:123456789012:target/0-0kFIPusq/template/0-4r1V2mAw/run/0-MKkpXXPE",
 		},
@@ -951,7 +953,7 @@ func ExampleClient_ListRulesPackagesRequest_shared00() {
 	}
 
 	svc := inspector.New(cfg)
-	input := &inspector.ListRulesPackagesInput{
+	input := &types.ListRulesPackagesInput{
 		MaxResults: aws.Int64(123),
 	}
 
@@ -990,7 +992,7 @@ func ExampleClient_ListTagsForResourceRequest_shared00() {
 	}
 
 	svc := inspector.New(cfg)
-	input := &inspector.ListTagsForResourceInput{
+	input := &types.ListTagsForResourceInput{
 		ResourceArn: aws.String("arn:aws:inspector:us-west-2:123456789012:target/0-0kFIPusq/template/0-gcwFliYu"),
 	}
 
@@ -1032,7 +1034,7 @@ func ExampleClient_PreviewAgentsRequest_shared00() {
 	}
 
 	svc := inspector.New(cfg)
-	input := &inspector.PreviewAgentsInput{
+	input := &types.PreviewAgentsInput{
 		MaxResults:       aws.Int64(123),
 		PreviewAgentsArn: aws.String("arn:aws:inspector:us-west-2:123456789012:target/0-0kFIPusq"),
 	}
@@ -1077,7 +1079,7 @@ func ExampleClient_RegisterCrossAccountAccessRoleRequest_shared00() {
 	}
 
 	svc := inspector.New(cfg)
-	input := &inspector.RegisterCrossAccountAccessRoleInput{
+	input := &types.RegisterCrossAccountAccessRoleInput{
 		RoleArn: aws.String("arn:aws:iam::123456789012:role/inspector"),
 	}
 
@@ -1121,7 +1123,7 @@ func ExampleClient_RemoveAttributesFromFindingsRequest_shared00() {
 	}
 
 	svc := inspector.New(cfg)
-	input := &inspector.RemoveAttributesFromFindingsInput{
+	input := &types.RemoveAttributesFromFindingsInput{
 		AttributeKeys: []string{
 			"key=Example,value=example",
 		},
@@ -1170,9 +1172,9 @@ func ExampleClient_SetTagsForResourceRequest_shared00() {
 	}
 
 	svc := inspector.New(cfg)
-	input := &inspector.SetTagsForResourceInput{
+	input := &types.SetTagsForResourceInput{
 		ResourceArn: aws.String("arn:aws:inspector:us-west-2:123456789012:target/0-nvgVhaxX/template/0-7sbz2Kz0"),
-		Tags: []inspector.Tag{
+		Tags: []types.Tag{
 			{
 				Key:   aws.String("Example"),
 				Value: aws.String("example"),
@@ -1221,7 +1223,7 @@ func ExampleClient_StartAssessmentRunRequest_shared00() {
 	}
 
 	svc := inspector.New(cfg)
-	input := &inspector.StartAssessmentRunInput{
+	input := &types.StartAssessmentRunInput{
 		AssessmentRunName:     aws.String("examplerun"),
 		AssessmentTemplateArn: aws.String("arn:aws:inspector:us-west-2:123456789012:target/0-nvgVhaxX/template/0-it5r2S4T"),
 	}
@@ -1271,7 +1273,7 @@ func ExampleClient_StopAssessmentRunRequest_shared00() {
 	}
 
 	svc := inspector.New(cfg)
-	input := &inspector.StopAssessmentRunInput{
+	input := &types.StopAssessmentRunInput{
 		AssessmentRunArn: aws.String("arn:aws:inspector:us-west-2:123456789012:target/0-nvgVhaxX/template/0-it5r2S4T/run/0-11LMTAVe"),
 	}
 
@@ -1315,8 +1317,8 @@ func ExampleClient_SubscribeToEventRequest_shared00() {
 	}
 
 	svc := inspector.New(cfg)
-	input := &inspector.SubscribeToEventInput{
-		Event:       inspector.InspectorEventAssessmentRunCompleted,
+	input := &types.SubscribeToEventInput{
+		Event:       enums.InspectorEventAssessmentRunCompleted,
 		ResourceArn: aws.String("arn:aws:inspector:us-west-2:123456789012:target/0-nvgVhaxX/template/0-7sbz2Kz0"),
 		TopicArn:    aws.String("arn:aws:sns:us-west-2:123456789012:exampletopic"),
 	}
@@ -1363,8 +1365,8 @@ func ExampleClient_UnsubscribeFromEventRequest_shared00() {
 	}
 
 	svc := inspector.New(cfg)
-	input := &inspector.UnsubscribeFromEventInput{
-		Event:       inspector.InspectorEventAssessmentRunCompleted,
+	input := &types.UnsubscribeFromEventInput{
+		Event:       enums.InspectorEventAssessmentRunCompleted,
 		ResourceArn: aws.String("arn:aws:inspector:us-west-2:123456789012:target/0-nvgVhaxX/template/0-7sbz2Kz0"),
 		TopicArn:    aws.String("arn:aws:sns:us-west-2:123456789012:exampletopic"),
 	}
@@ -1408,7 +1410,7 @@ func ExampleClient_UpdateAssessmentTargetRequest_shared00() {
 	}
 
 	svc := inspector.New(cfg)
-	input := &inspector.UpdateAssessmentTargetInput{
+	input := &types.UpdateAssessmentTargetInput{
 		AssessmentTargetArn:  aws.String("arn:aws:inspector:us-west-2:123456789012:target/0-nvgVhaxX"),
 		AssessmentTargetName: aws.String("Example"),
 		ResourceGroupArn:     aws.String("arn:aws:inspector:us-west-2:123456789012:resourcegroup/0-yNbgL5Pt"),

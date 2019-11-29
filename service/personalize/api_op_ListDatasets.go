@@ -6,56 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/personalize/types"
 )
-
-type ListDatasetsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the dataset group that contains the datasets
-	// to list.
-	DatasetGroupArn *string `locationName:"datasetGroupArn" type:"string"`
-
-	// The maximum number of datasets to return.
-	MaxResults *int64 `locationName:"maxResults" min:"1" type:"integer"`
-
-	// A token returned from the previous call to ListDatasetImportJobs for getting
-	// the next set of dataset import jobs (if they exist).
-	NextToken *string `locationName:"nextToken" type:"string"`
-}
-
-// String returns the string representation
-func (s ListDatasetsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListDatasetsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListDatasetsInput"}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ListDatasetsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// An array of Dataset objects. Each object provides metadata information.
-	Datasets []DatasetSummary `locationName:"datasets" type:"list"`
-
-	// A token for getting the next set of datasets (if they exist).
-	NextToken *string `locationName:"nextToken" type:"string"`
-}
-
-// String returns the string representation
-func (s ListDatasetsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListDatasets = "ListDatasets"
 
@@ -74,7 +26,7 @@ const opListDatasets = "ListDatasets"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/ListDatasets
-func (c *Client) ListDatasetsRequest(input *ListDatasetsInput) ListDatasetsRequest {
+func (c *Client) ListDatasetsRequest(input *types.ListDatasetsInput) ListDatasetsRequest {
 	op := &aws.Operation{
 		Name:       opListDatasets,
 		HTTPMethod: "POST",
@@ -88,10 +40,10 @@ func (c *Client) ListDatasetsRequest(input *ListDatasetsInput) ListDatasetsReque
 	}
 
 	if input == nil {
-		input = &ListDatasetsInput{}
+		input = &types.ListDatasetsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListDatasetsOutput{})
+	req := c.newRequest(op, input, &types.ListDatasetsOutput{})
 	return ListDatasetsRequest{Request: req, Input: input, Copy: c.ListDatasetsRequest}
 }
 
@@ -99,8 +51,8 @@ func (c *Client) ListDatasetsRequest(input *ListDatasetsInput) ListDatasetsReque
 // ListDatasets API operation.
 type ListDatasetsRequest struct {
 	*aws.Request
-	Input *ListDatasetsInput
-	Copy  func(*ListDatasetsInput) ListDatasetsRequest
+	Input *types.ListDatasetsInput
+	Copy  func(*types.ListDatasetsInput) ListDatasetsRequest
 }
 
 // Send marshals and sends the ListDatasets API request.
@@ -112,7 +64,7 @@ func (r ListDatasetsRequest) Send(ctx context.Context) (*ListDatasetsResponse, e
 	}
 
 	resp := &ListDatasetsResponse{
-		ListDatasetsOutput: r.Request.Data.(*ListDatasetsOutput),
+		ListDatasetsOutput: r.Request.Data.(*types.ListDatasetsOutput),
 		response:           &aws.Response{Request: r.Request},
 	}
 
@@ -142,7 +94,7 @@ func NewListDatasetsPaginator(req ListDatasetsRequest) ListDatasetsPaginator {
 	return ListDatasetsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListDatasetsInput
+				var inCpy *types.ListDatasetsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -162,14 +114,14 @@ type ListDatasetsPaginator struct {
 	aws.Pager
 }
 
-func (p *ListDatasetsPaginator) CurrentPage() *ListDatasetsOutput {
-	return p.Pager.CurrentPage().(*ListDatasetsOutput)
+func (p *ListDatasetsPaginator) CurrentPage() *types.ListDatasetsOutput {
+	return p.Pager.CurrentPage().(*types.ListDatasetsOutput)
 }
 
 // ListDatasetsResponse is the response type for the
 // ListDatasets API operation.
 type ListDatasetsResponse struct {
-	*ListDatasetsOutput
+	*types.ListDatasetsOutput
 
 	response *aws.Response
 }

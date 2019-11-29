@@ -6,58 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ssm/types"
 )
-
-type DescribeInventoryDeletionsInput struct {
-	_ struct{} `type:"structure"`
-
-	// Specify the delete inventory ID for which you want information. This ID was
-	// returned by the DeleteInventory action.
-	DeletionId *string `type:"string"`
-
-	// The maximum number of items to return for this call. The call also returns
-	// a token that you can specify in a subsequent call to get the next set of
-	// results.
-	MaxResults *int64 `min:"1" type:"integer"`
-
-	// A token to start the list. Use this token to get the next set of results.
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeInventoryDeletionsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeInventoryDeletionsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeInventoryDeletionsInput"}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribeInventoryDeletionsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A list of status items for deleted inventory.
-	InventoryDeletions []InventoryDeletionStatusItem `type:"list"`
-
-	// The token for the next set of items to return. Use this token to get the
-	// next set of results.
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeInventoryDeletionsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeInventoryDeletions = "DescribeInventoryDeletions"
 
@@ -74,7 +24,7 @@ const opDescribeInventoryDeletions = "DescribeInventoryDeletions"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeInventoryDeletions
-func (c *Client) DescribeInventoryDeletionsRequest(input *DescribeInventoryDeletionsInput) DescribeInventoryDeletionsRequest {
+func (c *Client) DescribeInventoryDeletionsRequest(input *types.DescribeInventoryDeletionsInput) DescribeInventoryDeletionsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeInventoryDeletions,
 		HTTPMethod: "POST",
@@ -82,10 +32,10 @@ func (c *Client) DescribeInventoryDeletionsRequest(input *DescribeInventoryDelet
 	}
 
 	if input == nil {
-		input = &DescribeInventoryDeletionsInput{}
+		input = &types.DescribeInventoryDeletionsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeInventoryDeletionsOutput{})
+	req := c.newRequest(op, input, &types.DescribeInventoryDeletionsOutput{})
 	return DescribeInventoryDeletionsRequest{Request: req, Input: input, Copy: c.DescribeInventoryDeletionsRequest}
 }
 
@@ -93,8 +43,8 @@ func (c *Client) DescribeInventoryDeletionsRequest(input *DescribeInventoryDelet
 // DescribeInventoryDeletions API operation.
 type DescribeInventoryDeletionsRequest struct {
 	*aws.Request
-	Input *DescribeInventoryDeletionsInput
-	Copy  func(*DescribeInventoryDeletionsInput) DescribeInventoryDeletionsRequest
+	Input *types.DescribeInventoryDeletionsInput
+	Copy  func(*types.DescribeInventoryDeletionsInput) DescribeInventoryDeletionsRequest
 }
 
 // Send marshals and sends the DescribeInventoryDeletions API request.
@@ -106,7 +56,7 @@ func (r DescribeInventoryDeletionsRequest) Send(ctx context.Context) (*DescribeI
 	}
 
 	resp := &DescribeInventoryDeletionsResponse{
-		DescribeInventoryDeletionsOutput: r.Request.Data.(*DescribeInventoryDeletionsOutput),
+		DescribeInventoryDeletionsOutput: r.Request.Data.(*types.DescribeInventoryDeletionsOutput),
 		response:                         &aws.Response{Request: r.Request},
 	}
 
@@ -116,7 +66,7 @@ func (r DescribeInventoryDeletionsRequest) Send(ctx context.Context) (*DescribeI
 // DescribeInventoryDeletionsResponse is the response type for the
 // DescribeInventoryDeletions API operation.
 type DescribeInventoryDeletionsResponse struct {
-	*DescribeInventoryDeletionsOutput
+	*types.DescribeInventoryDeletionsOutput
 
 	response *aws.Response
 }

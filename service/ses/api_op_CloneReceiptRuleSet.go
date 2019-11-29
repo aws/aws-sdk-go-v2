@@ -6,65 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ses/types"
 )
-
-// Represents a request to create a receipt rule set by cloning an existing
-// one. You use receipt rule sets to receive email with Amazon SES. For more
-// information, see the Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-concepts.html).
-type CloneReceiptRuleSetInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the rule set to clone.
-	//
-	// OriginalRuleSetName is a required field
-	OriginalRuleSetName *string `type:"string" required:"true"`
-
-	// The name of the rule set to create. The name must:
-	//
-	//    * This value can only contain ASCII letters (a-z, A-Z), numbers (0-9),
-	//    underscores (_), or dashes (-).
-	//
-	//    * Start and end with a letter or number.
-	//
-	//    * Contain less than 64 characters.
-	//
-	// RuleSetName is a required field
-	RuleSetName *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s CloneReceiptRuleSetInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CloneReceiptRuleSetInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CloneReceiptRuleSetInput"}
-
-	if s.OriginalRuleSetName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("OriginalRuleSetName"))
-	}
-
-	if s.RuleSetName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("RuleSetName"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// An empty element returned on a successful request.
-type CloneReceiptRuleSetOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s CloneReceiptRuleSetOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCloneReceiptRuleSet = "CloneReceiptRuleSet"
 
@@ -88,7 +31,7 @@ const opCloneReceiptRuleSet = "CloneReceiptRuleSet"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/CloneReceiptRuleSet
-func (c *Client) CloneReceiptRuleSetRequest(input *CloneReceiptRuleSetInput) CloneReceiptRuleSetRequest {
+func (c *Client) CloneReceiptRuleSetRequest(input *types.CloneReceiptRuleSetInput) CloneReceiptRuleSetRequest {
 	op := &aws.Operation{
 		Name:       opCloneReceiptRuleSet,
 		HTTPMethod: "POST",
@@ -96,10 +39,10 @@ func (c *Client) CloneReceiptRuleSetRequest(input *CloneReceiptRuleSetInput) Clo
 	}
 
 	if input == nil {
-		input = &CloneReceiptRuleSetInput{}
+		input = &types.CloneReceiptRuleSetInput{}
 	}
 
-	req := c.newRequest(op, input, &CloneReceiptRuleSetOutput{})
+	req := c.newRequest(op, input, &types.CloneReceiptRuleSetOutput{})
 	return CloneReceiptRuleSetRequest{Request: req, Input: input, Copy: c.CloneReceiptRuleSetRequest}
 }
 
@@ -107,8 +50,8 @@ func (c *Client) CloneReceiptRuleSetRequest(input *CloneReceiptRuleSetInput) Clo
 // CloneReceiptRuleSet API operation.
 type CloneReceiptRuleSetRequest struct {
 	*aws.Request
-	Input *CloneReceiptRuleSetInput
-	Copy  func(*CloneReceiptRuleSetInput) CloneReceiptRuleSetRequest
+	Input *types.CloneReceiptRuleSetInput
+	Copy  func(*types.CloneReceiptRuleSetInput) CloneReceiptRuleSetRequest
 }
 
 // Send marshals and sends the CloneReceiptRuleSet API request.
@@ -120,7 +63,7 @@ func (r CloneReceiptRuleSetRequest) Send(ctx context.Context) (*CloneReceiptRule
 	}
 
 	resp := &CloneReceiptRuleSetResponse{
-		CloneReceiptRuleSetOutput: r.Request.Data.(*CloneReceiptRuleSetOutput),
+		CloneReceiptRuleSetOutput: r.Request.Data.(*types.CloneReceiptRuleSetOutput),
 		response:                  &aws.Response{Request: r.Request},
 	}
 
@@ -130,7 +73,7 @@ func (r CloneReceiptRuleSetRequest) Send(ctx context.Context) (*CloneReceiptRule
 // CloneReceiptRuleSetResponse is the response type for the
 // CloneReceiptRuleSet API operation.
 type CloneReceiptRuleSetResponse struct {
-	*CloneReceiptRuleSetOutput
+	*types.CloneReceiptRuleSetOutput
 
 	response *aws.Response
 }

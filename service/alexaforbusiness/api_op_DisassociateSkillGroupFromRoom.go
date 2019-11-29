@@ -6,32 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/alexaforbusiness/types"
 )
-
-type DisassociateSkillGroupFromRoomInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ARN of the room from which the skill group is to be disassociated. Required.
-	RoomArn *string `type:"string"`
-
-	// The ARN of the skill group to disassociate from a room. Required.
-	SkillGroupArn *string `type:"string"`
-}
-
-// String returns the string representation
-func (s DisassociateSkillGroupFromRoomInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type DisassociateSkillGroupFromRoomOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DisassociateSkillGroupFromRoomOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDisassociateSkillGroupFromRoom = "DisassociateSkillGroupFromRoom"
 
@@ -49,7 +25,7 @@ const opDisassociateSkillGroupFromRoom = "DisassociateSkillGroupFromRoom"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/DisassociateSkillGroupFromRoom
-func (c *Client) DisassociateSkillGroupFromRoomRequest(input *DisassociateSkillGroupFromRoomInput) DisassociateSkillGroupFromRoomRequest {
+func (c *Client) DisassociateSkillGroupFromRoomRequest(input *types.DisassociateSkillGroupFromRoomInput) DisassociateSkillGroupFromRoomRequest {
 	op := &aws.Operation{
 		Name:       opDisassociateSkillGroupFromRoom,
 		HTTPMethod: "POST",
@@ -57,10 +33,10 @@ func (c *Client) DisassociateSkillGroupFromRoomRequest(input *DisassociateSkillG
 	}
 
 	if input == nil {
-		input = &DisassociateSkillGroupFromRoomInput{}
+		input = &types.DisassociateSkillGroupFromRoomInput{}
 	}
 
-	req := c.newRequest(op, input, &DisassociateSkillGroupFromRoomOutput{})
+	req := c.newRequest(op, input, &types.DisassociateSkillGroupFromRoomOutput{})
 	return DisassociateSkillGroupFromRoomRequest{Request: req, Input: input, Copy: c.DisassociateSkillGroupFromRoomRequest}
 }
 
@@ -68,8 +44,8 @@ func (c *Client) DisassociateSkillGroupFromRoomRequest(input *DisassociateSkillG
 // DisassociateSkillGroupFromRoom API operation.
 type DisassociateSkillGroupFromRoomRequest struct {
 	*aws.Request
-	Input *DisassociateSkillGroupFromRoomInput
-	Copy  func(*DisassociateSkillGroupFromRoomInput) DisassociateSkillGroupFromRoomRequest
+	Input *types.DisassociateSkillGroupFromRoomInput
+	Copy  func(*types.DisassociateSkillGroupFromRoomInput) DisassociateSkillGroupFromRoomRequest
 }
 
 // Send marshals and sends the DisassociateSkillGroupFromRoom API request.
@@ -81,7 +57,7 @@ func (r DisassociateSkillGroupFromRoomRequest) Send(ctx context.Context) (*Disas
 	}
 
 	resp := &DisassociateSkillGroupFromRoomResponse{
-		DisassociateSkillGroupFromRoomOutput: r.Request.Data.(*DisassociateSkillGroupFromRoomOutput),
+		DisassociateSkillGroupFromRoomOutput: r.Request.Data.(*types.DisassociateSkillGroupFromRoomOutput),
 		response:                             &aws.Response{Request: r.Request},
 	}
 
@@ -91,7 +67,7 @@ func (r DisassociateSkillGroupFromRoomRequest) Send(ctx context.Context) (*Disas
 // DisassociateSkillGroupFromRoomResponse is the response type for the
 // DisassociateSkillGroupFromRoom API operation.
 type DisassociateSkillGroupFromRoomResponse struct {
-	*DisassociateSkillGroupFromRoomOutput
+	*types.DisassociateSkillGroupFromRoomOutput
 
 	response *aws.Response
 }

@@ -6,64 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-type ModifyInstanceCreditSpecificationInput struct {
-	_ struct{} `type:"structure"`
-
-	// A unique, case-sensitive token that you provide to ensure idempotency of
-	// your modification request. For more information, see Ensuring Idempotency
-	// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html).
-	ClientToken *string `type:"string"`
-
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have
-	// the required permissions, the error response is DryRunOperation. Otherwise,
-	// it is UnauthorizedOperation.
-	DryRun *bool `type:"boolean"`
-
-	// Information about the credit option for CPU usage.
-	//
-	// InstanceCreditSpecifications is a required field
-	InstanceCreditSpecifications []InstanceCreditSpecificationRequest `locationName:"InstanceCreditSpecification" locationNameList:"item" type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s ModifyInstanceCreditSpecificationInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ModifyInstanceCreditSpecificationInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ModifyInstanceCreditSpecificationInput"}
-
-	if s.InstanceCreditSpecifications == nil {
-		invalidParams.Add(aws.NewErrParamRequired("InstanceCreditSpecifications"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ModifyInstanceCreditSpecificationOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Information about the instances whose credit option for CPU usage was successfully
-	// modified.
-	SuccessfulInstanceCreditSpecifications []SuccessfulInstanceCreditSpecificationItem `locationName:"successfulInstanceCreditSpecificationSet" locationNameList:"item" type:"list"`
-
-	// Information about the instances whose credit option for CPU usage was not
-	// modified.
-	UnsuccessfulInstanceCreditSpecifications []UnsuccessfulInstanceCreditSpecificationItem `locationName:"unsuccessfulInstanceCreditSpecificationSet" locationNameList:"item" type:"list"`
-}
-
-// String returns the string representation
-func (s ModifyInstanceCreditSpecificationOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opModifyInstanceCreditSpecification = "ModifyInstanceCreditSpecification"
 
@@ -84,7 +28,7 @@ const opModifyInstanceCreditSpecification = "ModifyInstanceCreditSpecification"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyInstanceCreditSpecification
-func (c *Client) ModifyInstanceCreditSpecificationRequest(input *ModifyInstanceCreditSpecificationInput) ModifyInstanceCreditSpecificationRequest {
+func (c *Client) ModifyInstanceCreditSpecificationRequest(input *types.ModifyInstanceCreditSpecificationInput) ModifyInstanceCreditSpecificationRequest {
 	op := &aws.Operation{
 		Name:       opModifyInstanceCreditSpecification,
 		HTTPMethod: "POST",
@@ -92,10 +36,10 @@ func (c *Client) ModifyInstanceCreditSpecificationRequest(input *ModifyInstanceC
 	}
 
 	if input == nil {
-		input = &ModifyInstanceCreditSpecificationInput{}
+		input = &types.ModifyInstanceCreditSpecificationInput{}
 	}
 
-	req := c.newRequest(op, input, &ModifyInstanceCreditSpecificationOutput{})
+	req := c.newRequest(op, input, &types.ModifyInstanceCreditSpecificationOutput{})
 	return ModifyInstanceCreditSpecificationRequest{Request: req, Input: input, Copy: c.ModifyInstanceCreditSpecificationRequest}
 }
 
@@ -103,8 +47,8 @@ func (c *Client) ModifyInstanceCreditSpecificationRequest(input *ModifyInstanceC
 // ModifyInstanceCreditSpecification API operation.
 type ModifyInstanceCreditSpecificationRequest struct {
 	*aws.Request
-	Input *ModifyInstanceCreditSpecificationInput
-	Copy  func(*ModifyInstanceCreditSpecificationInput) ModifyInstanceCreditSpecificationRequest
+	Input *types.ModifyInstanceCreditSpecificationInput
+	Copy  func(*types.ModifyInstanceCreditSpecificationInput) ModifyInstanceCreditSpecificationRequest
 }
 
 // Send marshals and sends the ModifyInstanceCreditSpecification API request.
@@ -116,7 +60,7 @@ func (r ModifyInstanceCreditSpecificationRequest) Send(ctx context.Context) (*Mo
 	}
 
 	resp := &ModifyInstanceCreditSpecificationResponse{
-		ModifyInstanceCreditSpecificationOutput: r.Request.Data.(*ModifyInstanceCreditSpecificationOutput),
+		ModifyInstanceCreditSpecificationOutput: r.Request.Data.(*types.ModifyInstanceCreditSpecificationOutput),
 		response:                                &aws.Response{Request: r.Request},
 	}
 
@@ -126,7 +70,7 @@ func (r ModifyInstanceCreditSpecificationRequest) Send(ctx context.Context) (*Mo
 // ModifyInstanceCreditSpecificationResponse is the response type for the
 // ModifyInstanceCreditSpecification API operation.
 type ModifyInstanceCreditSpecificationResponse struct {
-	*ModifyInstanceCreditSpecificationOutput
+	*types.ModifyInstanceCreditSpecificationOutput
 
 	response *aws.Response
 }

@@ -6,99 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/restjson"
+	"github.com/aws/aws-sdk-go-v2/service/iotanalytics/types"
 )
-
-type UpdateDatastoreInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the data store to be updated.
-	//
-	// DatastoreName is a required field
-	DatastoreName *string `location:"uri" locationName:"datastoreName" min:"1" type:"string" required:"true"`
-
-	// Where data store data is stored. You may choose one of "serviceManagedS3"
-	// or "customerManagedS3" storage. If not specified, the default is "serviceManagedS3".
-	// This cannot be changed after the data store is created.
-	DatastoreStorage *DatastoreStorage `locationName:"datastoreStorage" type:"structure"`
-
-	// How long, in days, message data is kept for the data store. The retention
-	// period cannot be updated if the data store's S3 storage is customer-managed.
-	RetentionPeriod *RetentionPeriod `locationName:"retentionPeriod" type:"structure"`
-}
-
-// String returns the string representation
-func (s UpdateDatastoreInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateDatastoreInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateDatastoreInput"}
-
-	if s.DatastoreName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DatastoreName"))
-	}
-	if s.DatastoreName != nil && len(*s.DatastoreName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("DatastoreName", 1))
-	}
-	if s.DatastoreStorage != nil {
-		if err := s.DatastoreStorage.Validate(); err != nil {
-			invalidParams.AddNested("DatastoreStorage", err.(aws.ErrInvalidParams))
-		}
-	}
-	if s.RetentionPeriod != nil {
-		if err := s.RetentionPeriod.Validate(); err != nil {
-			invalidParams.AddNested("RetentionPeriod", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s UpdateDatastoreInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.DatastoreStorage != nil {
-		v := s.DatastoreStorage
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "datastoreStorage", v, metadata)
-	}
-	if s.RetentionPeriod != nil {
-		v := s.RetentionPeriod
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "retentionPeriod", v, metadata)
-	}
-	if s.DatastoreName != nil {
-		v := *s.DatastoreName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "datastoreName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type UpdateDatastoreOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s UpdateDatastoreOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s UpdateDatastoreOutput) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
 
 const opUpdateDatastore = "UpdateDatastore"
 
@@ -115,7 +26,7 @@ const opUpdateDatastore = "UpdateDatastore"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iotanalytics-2017-11-27/UpdateDatastore
-func (c *Client) UpdateDatastoreRequest(input *UpdateDatastoreInput) UpdateDatastoreRequest {
+func (c *Client) UpdateDatastoreRequest(input *types.UpdateDatastoreInput) UpdateDatastoreRequest {
 	op := &aws.Operation{
 		Name:       opUpdateDatastore,
 		HTTPMethod: "PUT",
@@ -123,10 +34,10 @@ func (c *Client) UpdateDatastoreRequest(input *UpdateDatastoreInput) UpdateDatas
 	}
 
 	if input == nil {
-		input = &UpdateDatastoreInput{}
+		input = &types.UpdateDatastoreInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateDatastoreOutput{})
+	req := c.newRequest(op, input, &types.UpdateDatastoreOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return UpdateDatastoreRequest{Request: req, Input: input, Copy: c.UpdateDatastoreRequest}
@@ -136,8 +47,8 @@ func (c *Client) UpdateDatastoreRequest(input *UpdateDatastoreInput) UpdateDatas
 // UpdateDatastore API operation.
 type UpdateDatastoreRequest struct {
 	*aws.Request
-	Input *UpdateDatastoreInput
-	Copy  func(*UpdateDatastoreInput) UpdateDatastoreRequest
+	Input *types.UpdateDatastoreInput
+	Copy  func(*types.UpdateDatastoreInput) UpdateDatastoreRequest
 }
 
 // Send marshals and sends the UpdateDatastore API request.
@@ -149,7 +60,7 @@ func (r UpdateDatastoreRequest) Send(ctx context.Context) (*UpdateDatastoreRespo
 	}
 
 	resp := &UpdateDatastoreResponse{
-		UpdateDatastoreOutput: r.Request.Data.(*UpdateDatastoreOutput),
+		UpdateDatastoreOutput: r.Request.Data.(*types.UpdateDatastoreOutput),
 		response:              &aws.Response{Request: r.Request},
 	}
 
@@ -159,7 +70,7 @@ func (r UpdateDatastoreRequest) Send(ctx context.Context) (*UpdateDatastoreRespo
 // UpdateDatastoreResponse is the response type for the
 // UpdateDatastore API operation.
 type UpdateDatastoreResponse struct {
-	*UpdateDatastoreOutput
+	*types.UpdateDatastoreOutput
 
 	response *aws.Response
 }

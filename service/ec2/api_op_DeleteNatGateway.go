@@ -6,48 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-type DeleteNatGatewayInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the NAT gateway.
-	//
-	// NatGatewayId is a required field
-	NatGatewayId *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteNatGatewayInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteNatGatewayInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteNatGatewayInput"}
-
-	if s.NatGatewayId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("NatGatewayId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteNatGatewayOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the NAT gateway.
-	NatGatewayId *string `locationName:"natGatewayId" type:"string"`
-}
-
-// String returns the string representation
-func (s DeleteNatGatewayOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteNatGateway = "DeleteNatGateway"
 
@@ -66,7 +26,7 @@ const opDeleteNatGateway = "DeleteNatGateway"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteNatGateway
-func (c *Client) DeleteNatGatewayRequest(input *DeleteNatGatewayInput) DeleteNatGatewayRequest {
+func (c *Client) DeleteNatGatewayRequest(input *types.DeleteNatGatewayInput) DeleteNatGatewayRequest {
 	op := &aws.Operation{
 		Name:       opDeleteNatGateway,
 		HTTPMethod: "POST",
@@ -74,10 +34,10 @@ func (c *Client) DeleteNatGatewayRequest(input *DeleteNatGatewayInput) DeleteNat
 	}
 
 	if input == nil {
-		input = &DeleteNatGatewayInput{}
+		input = &types.DeleteNatGatewayInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteNatGatewayOutput{})
+	req := c.newRequest(op, input, &types.DeleteNatGatewayOutput{})
 	return DeleteNatGatewayRequest{Request: req, Input: input, Copy: c.DeleteNatGatewayRequest}
 }
 
@@ -85,8 +45,8 @@ func (c *Client) DeleteNatGatewayRequest(input *DeleteNatGatewayInput) DeleteNat
 // DeleteNatGateway API operation.
 type DeleteNatGatewayRequest struct {
 	*aws.Request
-	Input *DeleteNatGatewayInput
-	Copy  func(*DeleteNatGatewayInput) DeleteNatGatewayRequest
+	Input *types.DeleteNatGatewayInput
+	Copy  func(*types.DeleteNatGatewayInput) DeleteNatGatewayRequest
 }
 
 // Send marshals and sends the DeleteNatGateway API request.
@@ -98,7 +58,7 @@ func (r DeleteNatGatewayRequest) Send(ctx context.Context) (*DeleteNatGatewayRes
 	}
 
 	resp := &DeleteNatGatewayResponse{
-		DeleteNatGatewayOutput: r.Request.Data.(*DeleteNatGatewayOutput),
+		DeleteNatGatewayOutput: r.Request.Data.(*types.DeleteNatGatewayOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -108,7 +68,7 @@ func (r DeleteNatGatewayRequest) Send(ctx context.Context) (*DeleteNatGatewayRes
 // DeleteNatGatewayResponse is the response type for the
 // DeleteNatGateway API operation.
 type DeleteNatGatewayResponse struct {
-	*DeleteNatGatewayOutput
+	*types.DeleteNatGatewayOutput
 
 	response *aws.Response
 }

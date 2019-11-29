@@ -4,74 +4,10 @@ package iam
 
 import (
 	"context"
-	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/iam/types"
 )
-
-type GetOpenIDConnectProviderInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the OIDC provider resource object in IAM
-	// to get information for. You can get a list of OIDC provider resource ARNs
-	// by using the ListOpenIDConnectProviders operation.
-	//
-	// For more information about ARNs, see Amazon Resource Names (ARNs) and AWS
-	// Service Namespaces (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
-	// in the AWS General Reference.
-	//
-	// OpenIDConnectProviderArn is a required field
-	OpenIDConnectProviderArn *string `min:"20" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetOpenIDConnectProviderInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetOpenIDConnectProviderInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetOpenIDConnectProviderInput"}
-
-	if s.OpenIDConnectProviderArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("OpenIDConnectProviderArn"))
-	}
-	if s.OpenIDConnectProviderArn != nil && len(*s.OpenIDConnectProviderArn) < 20 {
-		invalidParams.Add(aws.NewErrParamMinLen("OpenIDConnectProviderArn", 20))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Contains the response to a successful GetOpenIDConnectProvider request.
-type GetOpenIDConnectProviderOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A list of client IDs (also known as audiences) that are associated with the
-	// specified IAM OIDC provider resource object. For more information, see CreateOpenIDConnectProvider.
-	ClientIDList []string `type:"list"`
-
-	// The date and time when the IAM OIDC provider resource object was created
-	// in the AWS account.
-	CreateDate *time.Time `type:"timestamp"`
-
-	// A list of certificate thumbprints that are associated with the specified
-	// IAM OIDC provider resource object. For more information, see CreateOpenIDConnectProvider.
-	ThumbprintList []string `type:"list"`
-
-	// The URL that the IAM OIDC provider resource object is associated with. For
-	// more information, see CreateOpenIDConnectProvider.
-	Url *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s GetOpenIDConnectProviderOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetOpenIDConnectProvider = "GetOpenIDConnectProvider"
 
@@ -89,7 +25,7 @@ const opGetOpenIDConnectProvider = "GetOpenIDConnectProvider"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetOpenIDConnectProvider
-func (c *Client) GetOpenIDConnectProviderRequest(input *GetOpenIDConnectProviderInput) GetOpenIDConnectProviderRequest {
+func (c *Client) GetOpenIDConnectProviderRequest(input *types.GetOpenIDConnectProviderInput) GetOpenIDConnectProviderRequest {
 	op := &aws.Operation{
 		Name:       opGetOpenIDConnectProvider,
 		HTTPMethod: "POST",
@@ -97,10 +33,10 @@ func (c *Client) GetOpenIDConnectProviderRequest(input *GetOpenIDConnectProvider
 	}
 
 	if input == nil {
-		input = &GetOpenIDConnectProviderInput{}
+		input = &types.GetOpenIDConnectProviderInput{}
 	}
 
-	req := c.newRequest(op, input, &GetOpenIDConnectProviderOutput{})
+	req := c.newRequest(op, input, &types.GetOpenIDConnectProviderOutput{})
 	return GetOpenIDConnectProviderRequest{Request: req, Input: input, Copy: c.GetOpenIDConnectProviderRequest}
 }
 
@@ -108,8 +44,8 @@ func (c *Client) GetOpenIDConnectProviderRequest(input *GetOpenIDConnectProvider
 // GetOpenIDConnectProvider API operation.
 type GetOpenIDConnectProviderRequest struct {
 	*aws.Request
-	Input *GetOpenIDConnectProviderInput
-	Copy  func(*GetOpenIDConnectProviderInput) GetOpenIDConnectProviderRequest
+	Input *types.GetOpenIDConnectProviderInput
+	Copy  func(*types.GetOpenIDConnectProviderInput) GetOpenIDConnectProviderRequest
 }
 
 // Send marshals and sends the GetOpenIDConnectProvider API request.
@@ -121,7 +57,7 @@ func (r GetOpenIDConnectProviderRequest) Send(ctx context.Context) (*GetOpenIDCo
 	}
 
 	resp := &GetOpenIDConnectProviderResponse{
-		GetOpenIDConnectProviderOutput: r.Request.Data.(*GetOpenIDConnectProviderOutput),
+		GetOpenIDConnectProviderOutput: r.Request.Data.(*types.GetOpenIDConnectProviderOutput),
 		response:                       &aws.Response{Request: r.Request},
 	}
 
@@ -131,7 +67,7 @@ func (r GetOpenIDConnectProviderRequest) Send(ctx context.Context) (*GetOpenIDCo
 // GetOpenIDConnectProviderResponse is the response type for the
 // GetOpenIDConnectProvider API operation.
 type GetOpenIDConnectProviderResponse struct {
-	*GetOpenIDConnectProviderOutput
+	*types.GetOpenIDConnectProviderOutput
 
 	response *aws.Response
 }

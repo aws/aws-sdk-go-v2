@@ -6,57 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/rekognition/types"
 )
-
-type ListStreamProcessorsInput struct {
-	_ struct{} `type:"structure"`
-
-	// Maximum number of stream processors you want Amazon Rekognition Video to
-	// return in the response. The default is 1000.
-	MaxResults *int64 `min:"1" type:"integer"`
-
-	// If the previous response was incomplete (because there are more stream processors
-	// to retrieve), Amazon Rekognition Video returns a pagination token in the
-	// response. You can use this pagination token to retrieve the next set of stream
-	// processors.
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s ListStreamProcessorsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListStreamProcessorsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListStreamProcessorsInput"}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ListStreamProcessorsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// If the response is truncated, Amazon Rekognition Video returns this token
-	// that you can use in the subsequent request to retrieve the next set of stream
-	// processors.
-	NextToken *string `type:"string"`
-
-	// List of stream processors that you have created.
-	StreamProcessors []StreamProcessor `type:"list"`
-}
-
-// String returns the string representation
-func (s ListStreamProcessorsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListStreamProcessors = "ListStreamProcessors"
 
@@ -71,7 +22,7 @@ const opListStreamProcessors = "ListStreamProcessors"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) ListStreamProcessorsRequest(input *ListStreamProcessorsInput) ListStreamProcessorsRequest {
+func (c *Client) ListStreamProcessorsRequest(input *types.ListStreamProcessorsInput) ListStreamProcessorsRequest {
 	op := &aws.Operation{
 		Name:       opListStreamProcessors,
 		HTTPMethod: "POST",
@@ -85,10 +36,10 @@ func (c *Client) ListStreamProcessorsRequest(input *ListStreamProcessorsInput) L
 	}
 
 	if input == nil {
-		input = &ListStreamProcessorsInput{}
+		input = &types.ListStreamProcessorsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListStreamProcessorsOutput{})
+	req := c.newRequest(op, input, &types.ListStreamProcessorsOutput{})
 	return ListStreamProcessorsRequest{Request: req, Input: input, Copy: c.ListStreamProcessorsRequest}
 }
 
@@ -96,8 +47,8 @@ func (c *Client) ListStreamProcessorsRequest(input *ListStreamProcessorsInput) L
 // ListStreamProcessors API operation.
 type ListStreamProcessorsRequest struct {
 	*aws.Request
-	Input *ListStreamProcessorsInput
-	Copy  func(*ListStreamProcessorsInput) ListStreamProcessorsRequest
+	Input *types.ListStreamProcessorsInput
+	Copy  func(*types.ListStreamProcessorsInput) ListStreamProcessorsRequest
 }
 
 // Send marshals and sends the ListStreamProcessors API request.
@@ -109,7 +60,7 @@ func (r ListStreamProcessorsRequest) Send(ctx context.Context) (*ListStreamProce
 	}
 
 	resp := &ListStreamProcessorsResponse{
-		ListStreamProcessorsOutput: r.Request.Data.(*ListStreamProcessorsOutput),
+		ListStreamProcessorsOutput: r.Request.Data.(*types.ListStreamProcessorsOutput),
 		response:                   &aws.Response{Request: r.Request},
 	}
 
@@ -139,7 +90,7 @@ func NewListStreamProcessorsPaginator(req ListStreamProcessorsRequest) ListStrea
 	return ListStreamProcessorsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListStreamProcessorsInput
+				var inCpy *types.ListStreamProcessorsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -159,14 +110,14 @@ type ListStreamProcessorsPaginator struct {
 	aws.Pager
 }
 
-func (p *ListStreamProcessorsPaginator) CurrentPage() *ListStreamProcessorsOutput {
-	return p.Pager.CurrentPage().(*ListStreamProcessorsOutput)
+func (p *ListStreamProcessorsPaginator) CurrentPage() *types.ListStreamProcessorsOutput {
+	return p.Pager.CurrentPage().(*types.ListStreamProcessorsOutput)
 }
 
 // ListStreamProcessorsResponse is the response type for the
 // ListStreamProcessors API operation.
 type ListStreamProcessorsResponse struct {
-	*ListStreamProcessorsOutput
+	*types.ListStreamProcessorsOutput
 
 	response *aws.Response
 }

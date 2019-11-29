@@ -6,120 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/lexmodelbuildingservice/types"
 )
-
-type GetBuiltinSlotTypesInput struct {
-	_ struct{} `type:"structure"`
-
-	// A list of locales that the slot type supports.
-	Locale Locale `location:"querystring" locationName:"locale" type:"string" enum:"true"`
-
-	// The maximum number of slot types to return in the response. The default is
-	// 10.
-	MaxResults *int64 `location:"querystring" locationName:"maxResults" min:"1" type:"integer"`
-
-	// A pagination token that fetches the next page of slot types. If the response
-	// to this API call is truncated, Amazon Lex returns a pagination token in the
-	// response. To fetch the next page of slot types, specify the pagination token
-	// in the next request.
-	NextToken *string `location:"querystring" locationName:"nextToken" type:"string"`
-
-	// Substring to match in built-in slot type signatures. A slot type will be
-	// returned if any part of its signature matches the substring. For example,
-	// "xyz" matches both "xyzabc" and "abcxyz."
-	SignatureContains *string `location:"querystring" locationName:"signatureContains" type:"string"`
-}
-
-// String returns the string representation
-func (s GetBuiltinSlotTypesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetBuiltinSlotTypesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetBuiltinSlotTypesInput"}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetBuiltinSlotTypesInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if len(s.Locale) > 0 {
-		v := s.Locale
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "locale", protocol.QuotedValue{ValueMarshaler: v}, metadata)
-	}
-	if s.MaxResults != nil {
-		v := *s.MaxResults
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "maxResults", protocol.Int64Value(v), metadata)
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.SignatureContains != nil {
-		v := *s.SignatureContains
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "signatureContains", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type GetBuiltinSlotTypesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// If the response is truncated, the response includes a pagination token that
-	// you can use in your next request to fetch the next page of slot types.
-	NextToken *string `locationName:"nextToken" type:"string"`
-
-	// An array of BuiltInSlotTypeMetadata objects, one entry for each slot type
-	// returned.
-	SlotTypes []BuiltinSlotTypeMetadata `locationName:"slotTypes" type:"list"`
-}
-
-// String returns the string representation
-func (s GetBuiltinSlotTypesOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetBuiltinSlotTypesOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.SlotTypes != nil {
-		v := s.SlotTypes
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "slotTypes", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	return nil
-}
 
 const opGetBuiltinSlotTypes = "GetBuiltinSlotTypes"
 
@@ -141,7 +29,7 @@ const opGetBuiltinSlotTypes = "GetBuiltinSlotTypes"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/GetBuiltinSlotTypes
-func (c *Client) GetBuiltinSlotTypesRequest(input *GetBuiltinSlotTypesInput) GetBuiltinSlotTypesRequest {
+func (c *Client) GetBuiltinSlotTypesRequest(input *types.GetBuiltinSlotTypesInput) GetBuiltinSlotTypesRequest {
 	op := &aws.Operation{
 		Name:       opGetBuiltinSlotTypes,
 		HTTPMethod: "GET",
@@ -155,10 +43,10 @@ func (c *Client) GetBuiltinSlotTypesRequest(input *GetBuiltinSlotTypesInput) Get
 	}
 
 	if input == nil {
-		input = &GetBuiltinSlotTypesInput{}
+		input = &types.GetBuiltinSlotTypesInput{}
 	}
 
-	req := c.newRequest(op, input, &GetBuiltinSlotTypesOutput{})
+	req := c.newRequest(op, input, &types.GetBuiltinSlotTypesOutput{})
 	return GetBuiltinSlotTypesRequest{Request: req, Input: input, Copy: c.GetBuiltinSlotTypesRequest}
 }
 
@@ -166,8 +54,8 @@ func (c *Client) GetBuiltinSlotTypesRequest(input *GetBuiltinSlotTypesInput) Get
 // GetBuiltinSlotTypes API operation.
 type GetBuiltinSlotTypesRequest struct {
 	*aws.Request
-	Input *GetBuiltinSlotTypesInput
-	Copy  func(*GetBuiltinSlotTypesInput) GetBuiltinSlotTypesRequest
+	Input *types.GetBuiltinSlotTypesInput
+	Copy  func(*types.GetBuiltinSlotTypesInput) GetBuiltinSlotTypesRequest
 }
 
 // Send marshals and sends the GetBuiltinSlotTypes API request.
@@ -179,7 +67,7 @@ func (r GetBuiltinSlotTypesRequest) Send(ctx context.Context) (*GetBuiltinSlotTy
 	}
 
 	resp := &GetBuiltinSlotTypesResponse{
-		GetBuiltinSlotTypesOutput: r.Request.Data.(*GetBuiltinSlotTypesOutput),
+		GetBuiltinSlotTypesOutput: r.Request.Data.(*types.GetBuiltinSlotTypesOutput),
 		response:                  &aws.Response{Request: r.Request},
 	}
 
@@ -209,7 +97,7 @@ func NewGetBuiltinSlotTypesPaginator(req GetBuiltinSlotTypesRequest) GetBuiltinS
 	return GetBuiltinSlotTypesPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *GetBuiltinSlotTypesInput
+				var inCpy *types.GetBuiltinSlotTypesInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -229,14 +117,14 @@ type GetBuiltinSlotTypesPaginator struct {
 	aws.Pager
 }
 
-func (p *GetBuiltinSlotTypesPaginator) CurrentPage() *GetBuiltinSlotTypesOutput {
-	return p.Pager.CurrentPage().(*GetBuiltinSlotTypesOutput)
+func (p *GetBuiltinSlotTypesPaginator) CurrentPage() *types.GetBuiltinSlotTypesOutput {
+	return p.Pager.CurrentPage().(*types.GetBuiltinSlotTypesOutput)
 }
 
 // GetBuiltinSlotTypesResponse is the response type for the
 // GetBuiltinSlotTypes API operation.
 type GetBuiltinSlotTypesResponse struct {
-	*GetBuiltinSlotTypesOutput
+	*types.GetBuiltinSlotTypesOutput
 
 	response *aws.Response
 }

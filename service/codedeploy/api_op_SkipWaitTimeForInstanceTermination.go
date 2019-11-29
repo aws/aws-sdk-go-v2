@@ -6,32 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
+	"github.com/aws/aws-sdk-go-v2/service/codedeploy/types"
 )
-
-type SkipWaitTimeForInstanceTerminationInput struct {
-	_ struct{} `type:"structure"`
-
-	// The unique ID of a blue/green deployment for which you want to skip the instance
-	// termination wait time.
-	DeploymentId *string `locationName:"deploymentId" type:"string"`
-}
-
-// String returns the string representation
-func (s SkipWaitTimeForInstanceTerminationInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type SkipWaitTimeForInstanceTerminationOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s SkipWaitTimeForInstanceTerminationOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opSkipWaitTimeForInstanceTermination = "SkipWaitTimeForInstanceTermination"
 
@@ -49,7 +27,7 @@ const opSkipWaitTimeForInstanceTermination = "SkipWaitTimeForInstanceTermination
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/SkipWaitTimeForInstanceTermination
-func (c *Client) SkipWaitTimeForInstanceTerminationRequest(input *SkipWaitTimeForInstanceTerminationInput) SkipWaitTimeForInstanceTerminationRequest {
+func (c *Client) SkipWaitTimeForInstanceTerminationRequest(input *types.SkipWaitTimeForInstanceTerminationInput) SkipWaitTimeForInstanceTerminationRequest {
 	if c.Client.Config.Logger != nil {
 		c.Client.Config.Logger.Log("This operation, SkipWaitTimeForInstanceTermination, has been deprecated")
 	}
@@ -60,10 +38,10 @@ func (c *Client) SkipWaitTimeForInstanceTerminationRequest(input *SkipWaitTimeFo
 	}
 
 	if input == nil {
-		input = &SkipWaitTimeForInstanceTerminationInput{}
+		input = &types.SkipWaitTimeForInstanceTerminationInput{}
 	}
 
-	req := c.newRequest(op, input, &SkipWaitTimeForInstanceTerminationOutput{})
+	req := c.newRequest(op, input, &types.SkipWaitTimeForInstanceTerminationOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return SkipWaitTimeForInstanceTerminationRequest{Request: req, Input: input, Copy: c.SkipWaitTimeForInstanceTerminationRequest}
@@ -73,8 +51,8 @@ func (c *Client) SkipWaitTimeForInstanceTerminationRequest(input *SkipWaitTimeFo
 // SkipWaitTimeForInstanceTermination API operation.
 type SkipWaitTimeForInstanceTerminationRequest struct {
 	*aws.Request
-	Input *SkipWaitTimeForInstanceTerminationInput
-	Copy  func(*SkipWaitTimeForInstanceTerminationInput) SkipWaitTimeForInstanceTerminationRequest
+	Input *types.SkipWaitTimeForInstanceTerminationInput
+	Copy  func(*types.SkipWaitTimeForInstanceTerminationInput) SkipWaitTimeForInstanceTerminationRequest
 }
 
 // Send marshals and sends the SkipWaitTimeForInstanceTermination API request.
@@ -86,7 +64,7 @@ func (r SkipWaitTimeForInstanceTerminationRequest) Send(ctx context.Context) (*S
 	}
 
 	resp := &SkipWaitTimeForInstanceTerminationResponse{
-		SkipWaitTimeForInstanceTerminationOutput: r.Request.Data.(*SkipWaitTimeForInstanceTerminationOutput),
+		SkipWaitTimeForInstanceTerminationOutput: r.Request.Data.(*types.SkipWaitTimeForInstanceTerminationOutput),
 		response:                                 &aws.Response{Request: r.Request},
 	}
 
@@ -96,7 +74,7 @@ func (r SkipWaitTimeForInstanceTerminationRequest) Send(ctx context.Context) (*S
 // SkipWaitTimeForInstanceTerminationResponse is the response type for the
 // SkipWaitTimeForInstanceTermination API operation.
 type SkipWaitTimeForInstanceTerminationResponse struct {
-	*SkipWaitTimeForInstanceTerminationOutput
+	*types.SkipWaitTimeForInstanceTerminationOutput
 
 	response *aws.Response
 }

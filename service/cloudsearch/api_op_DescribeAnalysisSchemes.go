@@ -6,67 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/cloudsearch/types"
 )
-
-// Container for the parameters to the DescribeAnalysisSchemes operation. Specifies
-// the name of the domain you want to describe. To limit the response to particular
-// analysis schemes, specify the names of the analysis schemes you want to describe.
-// To show the active configuration and exclude any pending changes, set the
-// Deployed option to true.
-type DescribeAnalysisSchemesInput struct {
-	_ struct{} `type:"structure"`
-
-	// The analysis schemes you want to describe.
-	AnalysisSchemeNames []string `type:"list"`
-
-	// Whether to display the deployed configuration (true) or include any pending
-	// changes (false). Defaults to false.
-	Deployed *bool `type:"boolean"`
-
-	// The name of the domain you want to describe.
-	//
-	// DomainName is a required field
-	DomainName *string `min:"3" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeAnalysisSchemesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeAnalysisSchemesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeAnalysisSchemesInput"}
-
-	if s.DomainName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DomainName"))
-	}
-	if s.DomainName != nil && len(*s.DomainName) < 3 {
-		invalidParams.Add(aws.NewErrParamMinLen("DomainName", 3))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// The result of a DescribeAnalysisSchemes request. Contains the analysis schemes
-// configured for the domain specified in the request.
-type DescribeAnalysisSchemesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The analysis scheme descriptions.
-	//
-	// AnalysisSchemes is a required field
-	AnalysisSchemes []AnalysisSchemeStatus `type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeAnalysisSchemesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeAnalysisSchemes = "DescribeAnalysisSchemes"
 
@@ -87,7 +28,7 @@ const opDescribeAnalysisSchemes = "DescribeAnalysisSchemes"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) DescribeAnalysisSchemesRequest(input *DescribeAnalysisSchemesInput) DescribeAnalysisSchemesRequest {
+func (c *Client) DescribeAnalysisSchemesRequest(input *types.DescribeAnalysisSchemesInput) DescribeAnalysisSchemesRequest {
 	op := &aws.Operation{
 		Name:       opDescribeAnalysisSchemes,
 		HTTPMethod: "POST",
@@ -95,10 +36,10 @@ func (c *Client) DescribeAnalysisSchemesRequest(input *DescribeAnalysisSchemesIn
 	}
 
 	if input == nil {
-		input = &DescribeAnalysisSchemesInput{}
+		input = &types.DescribeAnalysisSchemesInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeAnalysisSchemesOutput{})
+	req := c.newRequest(op, input, &types.DescribeAnalysisSchemesOutput{})
 	return DescribeAnalysisSchemesRequest{Request: req, Input: input, Copy: c.DescribeAnalysisSchemesRequest}
 }
 
@@ -106,8 +47,8 @@ func (c *Client) DescribeAnalysisSchemesRequest(input *DescribeAnalysisSchemesIn
 // DescribeAnalysisSchemes API operation.
 type DescribeAnalysisSchemesRequest struct {
 	*aws.Request
-	Input *DescribeAnalysisSchemesInput
-	Copy  func(*DescribeAnalysisSchemesInput) DescribeAnalysisSchemesRequest
+	Input *types.DescribeAnalysisSchemesInput
+	Copy  func(*types.DescribeAnalysisSchemesInput) DescribeAnalysisSchemesRequest
 }
 
 // Send marshals and sends the DescribeAnalysisSchemes API request.
@@ -119,7 +60,7 @@ func (r DescribeAnalysisSchemesRequest) Send(ctx context.Context) (*DescribeAnal
 	}
 
 	resp := &DescribeAnalysisSchemesResponse{
-		DescribeAnalysisSchemesOutput: r.Request.Data.(*DescribeAnalysisSchemesOutput),
+		DescribeAnalysisSchemesOutput: r.Request.Data.(*types.DescribeAnalysisSchemesOutput),
 		response:                      &aws.Response{Request: r.Request},
 	}
 
@@ -129,7 +70,7 @@ func (r DescribeAnalysisSchemesRequest) Send(ctx context.Context) (*DescribeAnal
 // DescribeAnalysisSchemesResponse is the response type for the
 // DescribeAnalysisSchemes API operation.
 type DescribeAnalysisSchemesResponse struct {
-	*DescribeAnalysisSchemesOutput
+	*types.DescribeAnalysisSchemesOutput
 
 	response *aws.Response
 }

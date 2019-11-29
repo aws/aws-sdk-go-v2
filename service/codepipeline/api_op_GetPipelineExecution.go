@@ -6,62 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/codepipeline/types"
 )
-
-// Represents the input of a GetPipelineExecution action.
-type GetPipelineExecutionInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the pipeline execution about which you want to get execution details.
-	//
-	// PipelineExecutionId is a required field
-	PipelineExecutionId *string `locationName:"pipelineExecutionId" type:"string" required:"true"`
-
-	// The name of the pipeline about which you want to get execution details.
-	//
-	// PipelineName is a required field
-	PipelineName *string `locationName:"pipelineName" min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetPipelineExecutionInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetPipelineExecutionInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetPipelineExecutionInput"}
-
-	if s.PipelineExecutionId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("PipelineExecutionId"))
-	}
-
-	if s.PipelineName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("PipelineName"))
-	}
-	if s.PipelineName != nil && len(*s.PipelineName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("PipelineName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Represents the output of a GetPipelineExecution action.
-type GetPipelineExecutionOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Represents information about the execution of a pipeline.
-	PipelineExecution *PipelineExecution `locationName:"pipelineExecution" type:"structure"`
-}
-
-// String returns the string representation
-func (s GetPipelineExecutionOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetPipelineExecution = "GetPipelineExecution"
 
@@ -80,7 +26,7 @@ const opGetPipelineExecution = "GetPipelineExecution"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/GetPipelineExecution
-func (c *Client) GetPipelineExecutionRequest(input *GetPipelineExecutionInput) GetPipelineExecutionRequest {
+func (c *Client) GetPipelineExecutionRequest(input *types.GetPipelineExecutionInput) GetPipelineExecutionRequest {
 	op := &aws.Operation{
 		Name:       opGetPipelineExecution,
 		HTTPMethod: "POST",
@@ -88,10 +34,10 @@ func (c *Client) GetPipelineExecutionRequest(input *GetPipelineExecutionInput) G
 	}
 
 	if input == nil {
-		input = &GetPipelineExecutionInput{}
+		input = &types.GetPipelineExecutionInput{}
 	}
 
-	req := c.newRequest(op, input, &GetPipelineExecutionOutput{})
+	req := c.newRequest(op, input, &types.GetPipelineExecutionOutput{})
 	return GetPipelineExecutionRequest{Request: req, Input: input, Copy: c.GetPipelineExecutionRequest}
 }
 
@@ -99,8 +45,8 @@ func (c *Client) GetPipelineExecutionRequest(input *GetPipelineExecutionInput) G
 // GetPipelineExecution API operation.
 type GetPipelineExecutionRequest struct {
 	*aws.Request
-	Input *GetPipelineExecutionInput
-	Copy  func(*GetPipelineExecutionInput) GetPipelineExecutionRequest
+	Input *types.GetPipelineExecutionInput
+	Copy  func(*types.GetPipelineExecutionInput) GetPipelineExecutionRequest
 }
 
 // Send marshals and sends the GetPipelineExecution API request.
@@ -112,7 +58,7 @@ func (r GetPipelineExecutionRequest) Send(ctx context.Context) (*GetPipelineExec
 	}
 
 	resp := &GetPipelineExecutionResponse{
-		GetPipelineExecutionOutput: r.Request.Data.(*GetPipelineExecutionOutput),
+		GetPipelineExecutionOutput: r.Request.Data.(*types.GetPipelineExecutionOutput),
 		response:                   &aws.Response{Request: r.Request},
 	}
 
@@ -122,7 +68,7 @@ func (r GetPipelineExecutionRequest) Send(ctx context.Context) (*GetPipelineExec
 // GetPipelineExecutionResponse is the response type for the
 // GetPipelineExecution API operation.
 type GetPipelineExecutionResponse struct {
-	*GetPipelineExecutionOutput
+	*types.GetPipelineExecutionOutput
 
 	response *aws.Response
 }

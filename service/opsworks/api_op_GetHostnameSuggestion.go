@@ -6,52 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/opsworks/types"
 )
-
-type GetHostnameSuggestionInput struct {
-	_ struct{} `type:"structure"`
-
-	// The layer ID.
-	//
-	// LayerId is a required field
-	LayerId *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetHostnameSuggestionInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetHostnameSuggestionInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetHostnameSuggestionInput"}
-
-	if s.LayerId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("LayerId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Contains the response to a GetHostnameSuggestion request.
-type GetHostnameSuggestionOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The generated host name.
-	Hostname *string `type:"string"`
-
-	// The layer ID.
-	LayerId *string `type:"string"`
-}
-
-// String returns the string representation
-func (s GetHostnameSuggestionOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetHostnameSuggestion = "GetHostnameSuggestion"
 
@@ -74,7 +30,7 @@ const opGetHostnameSuggestion = "GetHostnameSuggestion"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/GetHostnameSuggestion
-func (c *Client) GetHostnameSuggestionRequest(input *GetHostnameSuggestionInput) GetHostnameSuggestionRequest {
+func (c *Client) GetHostnameSuggestionRequest(input *types.GetHostnameSuggestionInput) GetHostnameSuggestionRequest {
 	op := &aws.Operation{
 		Name:       opGetHostnameSuggestion,
 		HTTPMethod: "POST",
@@ -82,10 +38,10 @@ func (c *Client) GetHostnameSuggestionRequest(input *GetHostnameSuggestionInput)
 	}
 
 	if input == nil {
-		input = &GetHostnameSuggestionInput{}
+		input = &types.GetHostnameSuggestionInput{}
 	}
 
-	req := c.newRequest(op, input, &GetHostnameSuggestionOutput{})
+	req := c.newRequest(op, input, &types.GetHostnameSuggestionOutput{})
 	return GetHostnameSuggestionRequest{Request: req, Input: input, Copy: c.GetHostnameSuggestionRequest}
 }
 
@@ -93,8 +49,8 @@ func (c *Client) GetHostnameSuggestionRequest(input *GetHostnameSuggestionInput)
 // GetHostnameSuggestion API operation.
 type GetHostnameSuggestionRequest struct {
 	*aws.Request
-	Input *GetHostnameSuggestionInput
-	Copy  func(*GetHostnameSuggestionInput) GetHostnameSuggestionRequest
+	Input *types.GetHostnameSuggestionInput
+	Copy  func(*types.GetHostnameSuggestionInput) GetHostnameSuggestionRequest
 }
 
 // Send marshals and sends the GetHostnameSuggestion API request.
@@ -106,7 +62,7 @@ func (r GetHostnameSuggestionRequest) Send(ctx context.Context) (*GetHostnameSug
 	}
 
 	resp := &GetHostnameSuggestionResponse{
-		GetHostnameSuggestionOutput: r.Request.Data.(*GetHostnameSuggestionOutput),
+		GetHostnameSuggestionOutput: r.Request.Data.(*types.GetHostnameSuggestionOutput),
 		response:                    &aws.Response{Request: r.Request},
 	}
 
@@ -116,7 +72,7 @@ func (r GetHostnameSuggestionRequest) Send(ctx context.Context) (*GetHostnameSug
 // GetHostnameSuggestionResponse is the response type for the
 // GetHostnameSuggestion API operation.
 type GetHostnameSuggestionResponse struct {
-	*GetHostnameSuggestionOutput
+	*types.GetHostnameSuggestionOutput
 
 	response *aws.Response
 }

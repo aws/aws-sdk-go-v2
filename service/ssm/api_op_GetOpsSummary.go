@@ -4,90 +4,10 @@ package ssm
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ssm/types"
 )
-
-type GetOpsSummaryInput struct {
-	_ struct{} `type:"structure"`
-
-	// Optional aggregators that return counts of OpsItems based on one or more
-	// expressions.
-	//
-	// Aggregators is a required field
-	Aggregators []OpsAggregator `min:"1" type:"list" required:"true"`
-
-	// Optional filters used to scope down the returned OpsItems.
-	Filters []OpsFilter `min:"1" type:"list"`
-
-	// The maximum number of items to return for this call. The call also returns
-	// a token that you can specify in a subsequent call to get the next set of
-	// results.
-	MaxResults *int64 `min:"1" type:"integer"`
-
-	// A token to start the list. Use this token to get the next set of results.
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s GetOpsSummaryInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetOpsSummaryInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetOpsSummaryInput"}
-
-	if s.Aggregators == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Aggregators"))
-	}
-	if s.Aggregators != nil && len(s.Aggregators) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Aggregators", 1))
-	}
-	if s.Filters != nil && len(s.Filters) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Filters", 1))
-	}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-	if s.Aggregators != nil {
-		for i, v := range s.Aggregators {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Aggregators", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-	if s.Filters != nil {
-		for i, v := range s.Filters {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type GetOpsSummaryOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The list of aggregated and filtered OpsItems.
-	Entities []OpsEntity `type:"list"`
-
-	// The token for the next set of items to return. Use this token to get the
-	// next set of results.
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s GetOpsSummaryOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetOpsSummary = "GetOpsSummary"
 
@@ -104,7 +24,7 @@ const opGetOpsSummary = "GetOpsSummary"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetOpsSummary
-func (c *Client) GetOpsSummaryRequest(input *GetOpsSummaryInput) GetOpsSummaryRequest {
+func (c *Client) GetOpsSummaryRequest(input *types.GetOpsSummaryInput) GetOpsSummaryRequest {
 	op := &aws.Operation{
 		Name:       opGetOpsSummary,
 		HTTPMethod: "POST",
@@ -112,10 +32,10 @@ func (c *Client) GetOpsSummaryRequest(input *GetOpsSummaryInput) GetOpsSummaryRe
 	}
 
 	if input == nil {
-		input = &GetOpsSummaryInput{}
+		input = &types.GetOpsSummaryInput{}
 	}
 
-	req := c.newRequest(op, input, &GetOpsSummaryOutput{})
+	req := c.newRequest(op, input, &types.GetOpsSummaryOutput{})
 	return GetOpsSummaryRequest{Request: req, Input: input, Copy: c.GetOpsSummaryRequest}
 }
 
@@ -123,8 +43,8 @@ func (c *Client) GetOpsSummaryRequest(input *GetOpsSummaryInput) GetOpsSummaryRe
 // GetOpsSummary API operation.
 type GetOpsSummaryRequest struct {
 	*aws.Request
-	Input *GetOpsSummaryInput
-	Copy  func(*GetOpsSummaryInput) GetOpsSummaryRequest
+	Input *types.GetOpsSummaryInput
+	Copy  func(*types.GetOpsSummaryInput) GetOpsSummaryRequest
 }
 
 // Send marshals and sends the GetOpsSummary API request.
@@ -136,7 +56,7 @@ func (r GetOpsSummaryRequest) Send(ctx context.Context) (*GetOpsSummaryResponse,
 	}
 
 	resp := &GetOpsSummaryResponse{
-		GetOpsSummaryOutput: r.Request.Data.(*GetOpsSummaryOutput),
+		GetOpsSummaryOutput: r.Request.Data.(*types.GetOpsSummaryOutput),
 		response:            &aws.Response{Request: r.Request},
 	}
 
@@ -146,7 +66,7 @@ func (r GetOpsSummaryRequest) Send(ctx context.Context) (*GetOpsSummaryResponse,
 // GetOpsSummaryResponse is the response type for the
 // GetOpsSummary API operation.
 type GetOpsSummaryResponse struct {
-	*GetOpsSummaryOutput
+	*types.GetOpsSummaryOutput
 
 	response *aws.Response
 }

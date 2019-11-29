@@ -6,146 +6,15 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/signer/types"
 )
-
-type PutSigningProfileInput struct {
-	_ struct{} `type:"structure"`
-
-	// A subfield of platform. This specifies any different configuration options
-	// that you want to apply to the chosen platform (such as a different hash-algorithm
-	// or signing-algorithm).
-	Overrides *SigningPlatformOverrides `locationName:"overrides" type:"structure"`
-
-	// The ID of the signing profile to be created.
-	//
-	// PlatformId is a required field
-	PlatformId *string `locationName:"platformId" type:"string" required:"true"`
-
-	// The name of the signing profile to be created.
-	//
-	// ProfileName is a required field
-	ProfileName *string `location:"uri" locationName:"profileName" min:"2" type:"string" required:"true"`
-
-	// The AWS Certificate Manager certificate that will be used to sign code with
-	// the new signing profile.
-	//
-	// SigningMaterial is a required field
-	SigningMaterial *SigningMaterial `locationName:"signingMaterial" type:"structure" required:"true"`
-
-	// Map of key-value pairs for signing. These can include any information that
-	// you want to use during signing.
-	SigningParameters map[string]string `locationName:"signingParameters" type:"map"`
-}
-
-// String returns the string representation
-func (s PutSigningProfileInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *PutSigningProfileInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "PutSigningProfileInput"}
-
-	if s.PlatformId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("PlatformId"))
-	}
-
-	if s.ProfileName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ProfileName"))
-	}
-	if s.ProfileName != nil && len(*s.ProfileName) < 2 {
-		invalidParams.Add(aws.NewErrParamMinLen("ProfileName", 2))
-	}
-
-	if s.SigningMaterial == nil {
-		invalidParams.Add(aws.NewErrParamRequired("SigningMaterial"))
-	}
-	if s.SigningMaterial != nil {
-		if err := s.SigningMaterial.Validate(); err != nil {
-			invalidParams.AddNested("SigningMaterial", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s PutSigningProfileInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.Overrides != nil {
-		v := s.Overrides
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "overrides", v, metadata)
-	}
-	if s.PlatformId != nil {
-		v := *s.PlatformId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "platformId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.SigningMaterial != nil {
-		v := s.SigningMaterial
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "signingMaterial", v, metadata)
-	}
-	if s.SigningParameters != nil {
-		v := s.SigningParameters
-
-		metadata := protocol.Metadata{}
-		ms0 := e.Map(protocol.BodyTarget, "signingParameters", metadata)
-		ms0.Start()
-		for k1, v1 := range v {
-			ms0.MapSetValue(k1, protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
-		}
-		ms0.End()
-
-	}
-	if s.ProfileName != nil {
-		v := *s.ProfileName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "profileName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type PutSigningProfileOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the signing profile created.
-	Arn *string `locationName:"arn" type:"string"`
-}
-
-// String returns the string representation
-func (s PutSigningProfileOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s PutSigningProfileOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.Arn != nil {
-		v := *s.Arn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "arn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opPutSigningProfile = "PutSigningProfile"
 
 // PutSigningProfileRequest returns a request value for making API operation for
 // AWS Signer.
 //
-// Creates a signing profile. A signing profile is an AWS Signer template that
+// Creates a signing profile. A signing profile is a code signing template that
 // can be used to carry out a pre-defined signing job. For more information,
 // see http://docs.aws.amazon.com/signer/latest/developerguide/gs-profile.html
 // (http://docs.aws.amazon.com/signer/latest/developerguide/gs-profile.html)
@@ -158,7 +27,7 @@ const opPutSigningProfile = "PutSigningProfile"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/signer-2017-08-25/PutSigningProfile
-func (c *Client) PutSigningProfileRequest(input *PutSigningProfileInput) PutSigningProfileRequest {
+func (c *Client) PutSigningProfileRequest(input *types.PutSigningProfileInput) PutSigningProfileRequest {
 	op := &aws.Operation{
 		Name:       opPutSigningProfile,
 		HTTPMethod: "PUT",
@@ -166,10 +35,10 @@ func (c *Client) PutSigningProfileRequest(input *PutSigningProfileInput) PutSign
 	}
 
 	if input == nil {
-		input = &PutSigningProfileInput{}
+		input = &types.PutSigningProfileInput{}
 	}
 
-	req := c.newRequest(op, input, &PutSigningProfileOutput{})
+	req := c.newRequest(op, input, &types.PutSigningProfileOutput{})
 	return PutSigningProfileRequest{Request: req, Input: input, Copy: c.PutSigningProfileRequest}
 }
 
@@ -177,8 +46,8 @@ func (c *Client) PutSigningProfileRequest(input *PutSigningProfileInput) PutSign
 // PutSigningProfile API operation.
 type PutSigningProfileRequest struct {
 	*aws.Request
-	Input *PutSigningProfileInput
-	Copy  func(*PutSigningProfileInput) PutSigningProfileRequest
+	Input *types.PutSigningProfileInput
+	Copy  func(*types.PutSigningProfileInput) PutSigningProfileRequest
 }
 
 // Send marshals and sends the PutSigningProfile API request.
@@ -190,7 +59,7 @@ func (r PutSigningProfileRequest) Send(ctx context.Context) (*PutSigningProfileR
 	}
 
 	resp := &PutSigningProfileResponse{
-		PutSigningProfileOutput: r.Request.Data.(*PutSigningProfileOutput),
+		PutSigningProfileOutput: r.Request.Data.(*types.PutSigningProfileOutput),
 		response:                &aws.Response{Request: r.Request},
 	}
 
@@ -200,7 +69,7 @@ func (r PutSigningProfileRequest) Send(ctx context.Context) (*PutSigningProfileR
 // PutSigningProfileResponse is the response type for the
 // PutSigningProfile API operation.
 type PutSigningProfileResponse struct {
-	*PutSigningProfileOutput
+	*types.PutSigningProfileOutput
 
 	response *aws.Response
 }

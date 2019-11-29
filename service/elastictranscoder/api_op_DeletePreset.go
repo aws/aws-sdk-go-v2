@@ -6,66 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/elastictranscoder/types"
 )
-
-// The DeletePresetRequest structure.
-type DeletePresetInput struct {
-	_ struct{} `type:"structure"`
-
-	// The identifier of the preset for which you want to get detailed information.
-	//
-	// Id is a required field
-	Id *string `location:"uri" locationName:"Id" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeletePresetInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeletePresetInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeletePresetInput"}
-
-	if s.Id == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Id"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeletePresetInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.Id != nil {
-		v := *s.Id
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "Id", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-// The DeletePresetResponse structure.
-type DeletePresetOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeletePresetOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeletePresetOutput) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
 
 const opDeletePreset = "DeletePreset"
 
@@ -82,7 +24,7 @@ const opDeletePreset = "DeletePreset"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) DeletePresetRequest(input *DeletePresetInput) DeletePresetRequest {
+func (c *Client) DeletePresetRequest(input *types.DeletePresetInput) DeletePresetRequest {
 	op := &aws.Operation{
 		Name:       opDeletePreset,
 		HTTPMethod: "DELETE",
@@ -90,10 +32,10 @@ func (c *Client) DeletePresetRequest(input *DeletePresetInput) DeletePresetReque
 	}
 
 	if input == nil {
-		input = &DeletePresetInput{}
+		input = &types.DeletePresetInput{}
 	}
 
-	req := c.newRequest(op, input, &DeletePresetOutput{})
+	req := c.newRequest(op, input, &types.DeletePresetOutput{})
 	return DeletePresetRequest{Request: req, Input: input, Copy: c.DeletePresetRequest}
 }
 
@@ -101,8 +43,8 @@ func (c *Client) DeletePresetRequest(input *DeletePresetInput) DeletePresetReque
 // DeletePreset API operation.
 type DeletePresetRequest struct {
 	*aws.Request
-	Input *DeletePresetInput
-	Copy  func(*DeletePresetInput) DeletePresetRequest
+	Input *types.DeletePresetInput
+	Copy  func(*types.DeletePresetInput) DeletePresetRequest
 }
 
 // Send marshals and sends the DeletePreset API request.
@@ -114,7 +56,7 @@ func (r DeletePresetRequest) Send(ctx context.Context) (*DeletePresetResponse, e
 	}
 
 	resp := &DeletePresetResponse{
-		DeletePresetOutput: r.Request.Data.(*DeletePresetOutput),
+		DeletePresetOutput: r.Request.Data.(*types.DeletePresetOutput),
 		response:           &aws.Response{Request: r.Request},
 	}
 
@@ -124,7 +66,7 @@ func (r DeletePresetRequest) Send(ctx context.Context) (*DeletePresetResponse, e
 // DeletePresetResponse is the response type for the
 // DeletePreset API operation.
 type DeletePresetResponse struct {
-	*DeletePresetOutput
+	*types.DeletePresetOutput
 
 	response *aws.Response
 }

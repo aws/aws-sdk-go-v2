@@ -6,112 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/securityhub/types"
 )
-
-type DescribeActionTargetsInput struct {
-	_ struct{} `type:"structure"`
-
-	// A list of custom action target ARNs for the custom action targets to retrieve.
-	ActionTargetArns []string `type:"list"`
-
-	// The maximum number of results to return.
-	MaxResults *int64 `min:"1" type:"integer"`
-
-	// The token that is required for pagination.
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeActionTargetsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeActionTargetsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeActionTargetsInput"}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DescribeActionTargetsInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.ActionTargetArns != nil {
-		v := s.ActionTargetArns
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "ActionTargetArns", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
-		}
-		ls0.End()
-
-	}
-	if s.MaxResults != nil {
-		v := *s.MaxResults
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "MaxResults", protocol.Int64Value(v), metadata)
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type DescribeActionTargetsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A list of ActionTarget objects. Each object includes the ActionTargetArn,
-	// Description, and Name of a custom action target available in Security Hub.
-	//
-	// ActionTargets is a required field
-	ActionTargets []ActionTarget `type:"list" required:"true"`
-
-	// The token that is required for pagination.
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeActionTargetsOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DescribeActionTargetsOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.ActionTargets != nil {
-		v := s.ActionTargets
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "ActionTargets", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opDescribeActionTargets = "DescribeActionTargets"
 
@@ -128,7 +24,7 @@ const opDescribeActionTargets = "DescribeActionTargets"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/DescribeActionTargets
-func (c *Client) DescribeActionTargetsRequest(input *DescribeActionTargetsInput) DescribeActionTargetsRequest {
+func (c *Client) DescribeActionTargetsRequest(input *types.DescribeActionTargetsInput) DescribeActionTargetsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeActionTargets,
 		HTTPMethod: "POST",
@@ -142,10 +38,10 @@ func (c *Client) DescribeActionTargetsRequest(input *DescribeActionTargetsInput)
 	}
 
 	if input == nil {
-		input = &DescribeActionTargetsInput{}
+		input = &types.DescribeActionTargetsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeActionTargetsOutput{})
+	req := c.newRequest(op, input, &types.DescribeActionTargetsOutput{})
 	return DescribeActionTargetsRequest{Request: req, Input: input, Copy: c.DescribeActionTargetsRequest}
 }
 
@@ -153,8 +49,8 @@ func (c *Client) DescribeActionTargetsRequest(input *DescribeActionTargetsInput)
 // DescribeActionTargets API operation.
 type DescribeActionTargetsRequest struct {
 	*aws.Request
-	Input *DescribeActionTargetsInput
-	Copy  func(*DescribeActionTargetsInput) DescribeActionTargetsRequest
+	Input *types.DescribeActionTargetsInput
+	Copy  func(*types.DescribeActionTargetsInput) DescribeActionTargetsRequest
 }
 
 // Send marshals and sends the DescribeActionTargets API request.
@@ -166,7 +62,7 @@ func (r DescribeActionTargetsRequest) Send(ctx context.Context) (*DescribeAction
 	}
 
 	resp := &DescribeActionTargetsResponse{
-		DescribeActionTargetsOutput: r.Request.Data.(*DescribeActionTargetsOutput),
+		DescribeActionTargetsOutput: r.Request.Data.(*types.DescribeActionTargetsOutput),
 		response:                    &aws.Response{Request: r.Request},
 	}
 
@@ -196,7 +92,7 @@ func NewDescribeActionTargetsPaginator(req DescribeActionTargetsRequest) Describ
 	return DescribeActionTargetsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *DescribeActionTargetsInput
+				var inCpy *types.DescribeActionTargetsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -216,14 +112,14 @@ type DescribeActionTargetsPaginator struct {
 	aws.Pager
 }
 
-func (p *DescribeActionTargetsPaginator) CurrentPage() *DescribeActionTargetsOutput {
-	return p.Pager.CurrentPage().(*DescribeActionTargetsOutput)
+func (p *DescribeActionTargetsPaginator) CurrentPage() *types.DescribeActionTargetsOutput {
+	return p.Pager.CurrentPage().(*types.DescribeActionTargetsOutput)
 }
 
 // DescribeActionTargetsResponse is the response type for the
 // DescribeActionTargets API operation.
 type DescribeActionTargetsResponse struct {
-	*DescribeActionTargetsOutput
+	*types.DescribeActionTargetsOutput
 
 	response *aws.Response
 }

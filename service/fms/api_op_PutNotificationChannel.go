@@ -6,64 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
+	"github.com/aws/aws-sdk-go-v2/service/fms/types"
 )
-
-type PutNotificationChannelInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the IAM role that allows Amazon SNS to
-	// record AWS Firewall Manager activity.
-	//
-	// SnsRoleName is a required field
-	SnsRoleName *string `min:"1" type:"string" required:"true"`
-
-	// The Amazon Resource Name (ARN) of the SNS topic that collects notifications
-	// from AWS Firewall Manager.
-	//
-	// SnsTopicArn is a required field
-	SnsTopicArn *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s PutNotificationChannelInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *PutNotificationChannelInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "PutNotificationChannelInput"}
-
-	if s.SnsRoleName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("SnsRoleName"))
-	}
-	if s.SnsRoleName != nil && len(*s.SnsRoleName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("SnsRoleName", 1))
-	}
-
-	if s.SnsTopicArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("SnsTopicArn"))
-	}
-	if s.SnsTopicArn != nil && len(*s.SnsTopicArn) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("SnsTopicArn", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type PutNotificationChannelOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s PutNotificationChannelOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opPutNotificationChannel = "PutNotificationChannel"
 
@@ -81,7 +27,7 @@ const opPutNotificationChannel = "PutNotificationChannel"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/PutNotificationChannel
-func (c *Client) PutNotificationChannelRequest(input *PutNotificationChannelInput) PutNotificationChannelRequest {
+func (c *Client) PutNotificationChannelRequest(input *types.PutNotificationChannelInput) PutNotificationChannelRequest {
 	op := &aws.Operation{
 		Name:       opPutNotificationChannel,
 		HTTPMethod: "POST",
@@ -89,10 +35,10 @@ func (c *Client) PutNotificationChannelRequest(input *PutNotificationChannelInpu
 	}
 
 	if input == nil {
-		input = &PutNotificationChannelInput{}
+		input = &types.PutNotificationChannelInput{}
 	}
 
-	req := c.newRequest(op, input, &PutNotificationChannelOutput{})
+	req := c.newRequest(op, input, &types.PutNotificationChannelOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return PutNotificationChannelRequest{Request: req, Input: input, Copy: c.PutNotificationChannelRequest}
@@ -102,8 +48,8 @@ func (c *Client) PutNotificationChannelRequest(input *PutNotificationChannelInpu
 // PutNotificationChannel API operation.
 type PutNotificationChannelRequest struct {
 	*aws.Request
-	Input *PutNotificationChannelInput
-	Copy  func(*PutNotificationChannelInput) PutNotificationChannelRequest
+	Input *types.PutNotificationChannelInput
+	Copy  func(*types.PutNotificationChannelInput) PutNotificationChannelRequest
 }
 
 // Send marshals and sends the PutNotificationChannel API request.
@@ -115,7 +61,7 @@ func (r PutNotificationChannelRequest) Send(ctx context.Context) (*PutNotificati
 	}
 
 	resp := &PutNotificationChannelResponse{
-		PutNotificationChannelOutput: r.Request.Data.(*PutNotificationChannelOutput),
+		PutNotificationChannelOutput: r.Request.Data.(*types.PutNotificationChannelOutput),
 		response:                     &aws.Response{Request: r.Request},
 	}
 
@@ -125,7 +71,7 @@ func (r PutNotificationChannelRequest) Send(ctx context.Context) (*PutNotificati
 // PutNotificationChannelResponse is the response type for the
 // PutNotificationChannel API operation.
 type PutNotificationChannelResponse struct {
-	*PutNotificationChannelOutput
+	*types.PutNotificationChannelOutput
 
 	response *aws.Response
 }

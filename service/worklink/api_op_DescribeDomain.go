@@ -4,134 +4,10 @@ package worklink
 
 import (
 	"context"
-	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/worklink/types"
 )
-
-type DescribeDomainInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the domain.
-	//
-	// DomainName is a required field
-	DomainName *string `min:"1" type:"string" required:"true"`
-
-	// The ARN of the fleet.
-	//
-	// FleetArn is a required field
-	FleetArn *string `min:"20" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeDomainInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeDomainInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeDomainInput"}
-
-	if s.DomainName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DomainName"))
-	}
-	if s.DomainName != nil && len(*s.DomainName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("DomainName", 1))
-	}
-
-	if s.FleetArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("FleetArn"))
-	}
-	if s.FleetArn != nil && len(*s.FleetArn) < 20 {
-		invalidParams.Add(aws.NewErrParamMinLen("FleetArn", 20))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DescribeDomainInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.DomainName != nil {
-		v := *s.DomainName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "DomainName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.FleetArn != nil {
-		v := *s.FleetArn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "FleetArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type DescribeDomainOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The ARN of an issued ACM certificate that is valid for the domain being associated.
-	AcmCertificateArn *string `type:"string"`
-
-	// The time that the domain was added.
-	CreatedTime *time.Time `type:"timestamp"`
-
-	// The name to display.
-	DisplayName *string `type:"string"`
-
-	// The name of the domain.
-	DomainName *string `min:"1" type:"string"`
-
-	// The current state for the domain.
-	DomainStatus DomainStatus `type:"string" enum:"true"`
-}
-
-// String returns the string representation
-func (s DescribeDomainOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DescribeDomainOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.AcmCertificateArn != nil {
-		v := *s.AcmCertificateArn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "AcmCertificateArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.CreatedTime != nil {
-		v := *s.CreatedTime
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "CreatedTime",
-			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
-	}
-	if s.DisplayName != nil {
-		v := *s.DisplayName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "DisplayName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.DomainName != nil {
-		v := *s.DomainName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "DomainName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if len(s.DomainStatus) > 0 {
-		v := s.DomainStatus
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "DomainStatus", protocol.QuotedValue{ValueMarshaler: v}, metadata)
-	}
-	return nil
-}
 
 const opDescribeDomain = "DescribeDomain"
 
@@ -148,7 +24,7 @@ const opDescribeDomain = "DescribeDomain"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/worklink-2018-09-25/DescribeDomain
-func (c *Client) DescribeDomainRequest(input *DescribeDomainInput) DescribeDomainRequest {
+func (c *Client) DescribeDomainRequest(input *types.DescribeDomainInput) DescribeDomainRequest {
 	op := &aws.Operation{
 		Name:       opDescribeDomain,
 		HTTPMethod: "POST",
@@ -156,10 +32,10 @@ func (c *Client) DescribeDomainRequest(input *DescribeDomainInput) DescribeDomai
 	}
 
 	if input == nil {
-		input = &DescribeDomainInput{}
+		input = &types.DescribeDomainInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeDomainOutput{})
+	req := c.newRequest(op, input, &types.DescribeDomainOutput{})
 	return DescribeDomainRequest{Request: req, Input: input, Copy: c.DescribeDomainRequest}
 }
 
@@ -167,8 +43,8 @@ func (c *Client) DescribeDomainRequest(input *DescribeDomainInput) DescribeDomai
 // DescribeDomain API operation.
 type DescribeDomainRequest struct {
 	*aws.Request
-	Input *DescribeDomainInput
-	Copy  func(*DescribeDomainInput) DescribeDomainRequest
+	Input *types.DescribeDomainInput
+	Copy  func(*types.DescribeDomainInput) DescribeDomainRequest
 }
 
 // Send marshals and sends the DescribeDomain API request.
@@ -180,7 +56,7 @@ func (r DescribeDomainRequest) Send(ctx context.Context) (*DescribeDomainRespons
 	}
 
 	resp := &DescribeDomainResponse{
-		DescribeDomainOutput: r.Request.Data.(*DescribeDomainOutput),
+		DescribeDomainOutput: r.Request.Data.(*types.DescribeDomainOutput),
 		response:             &aws.Response{Request: r.Request},
 	}
 
@@ -190,7 +66,7 @@ func (r DescribeDomainRequest) Send(ctx context.Context) (*DescribeDomainRespons
 // DescribeDomainResponse is the response type for the
 // DescribeDomain API operation.
 type DescribeDomainResponse struct {
-	*DescribeDomainOutput
+	*types.DescribeDomainOutput
 
 	response *aws.Response
 }

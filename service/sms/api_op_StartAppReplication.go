@@ -6,29 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/sms/types"
 )
-
-type StartAppReplicationInput struct {
-	_ struct{} `type:"structure"`
-
-	// ID of the application to replicate.
-	AppId *string `locationName:"appId" type:"string"`
-}
-
-// String returns the string representation
-func (s StartAppReplicationInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type StartAppReplicationOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s StartAppReplicationOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opStartAppReplication = "StartAppReplication"
 
@@ -45,7 +24,7 @@ const opStartAppReplication = "StartAppReplication"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sms-2016-10-24/StartAppReplication
-func (c *Client) StartAppReplicationRequest(input *StartAppReplicationInput) StartAppReplicationRequest {
+func (c *Client) StartAppReplicationRequest(input *types.StartAppReplicationInput) StartAppReplicationRequest {
 	op := &aws.Operation{
 		Name:       opStartAppReplication,
 		HTTPMethod: "POST",
@@ -53,10 +32,10 @@ func (c *Client) StartAppReplicationRequest(input *StartAppReplicationInput) Sta
 	}
 
 	if input == nil {
-		input = &StartAppReplicationInput{}
+		input = &types.StartAppReplicationInput{}
 	}
 
-	req := c.newRequest(op, input, &StartAppReplicationOutput{})
+	req := c.newRequest(op, input, &types.StartAppReplicationOutput{})
 	return StartAppReplicationRequest{Request: req, Input: input, Copy: c.StartAppReplicationRequest}
 }
 
@@ -64,8 +43,8 @@ func (c *Client) StartAppReplicationRequest(input *StartAppReplicationInput) Sta
 // StartAppReplication API operation.
 type StartAppReplicationRequest struct {
 	*aws.Request
-	Input *StartAppReplicationInput
-	Copy  func(*StartAppReplicationInput) StartAppReplicationRequest
+	Input *types.StartAppReplicationInput
+	Copy  func(*types.StartAppReplicationInput) StartAppReplicationRequest
 }
 
 // Send marshals and sends the StartAppReplication API request.
@@ -77,7 +56,7 @@ func (r StartAppReplicationRequest) Send(ctx context.Context) (*StartAppReplicat
 	}
 
 	resp := &StartAppReplicationResponse{
-		StartAppReplicationOutput: r.Request.Data.(*StartAppReplicationOutput),
+		StartAppReplicationOutput: r.Request.Data.(*types.StartAppReplicationOutput),
 		response:                  &aws.Response{Request: r.Request},
 	}
 
@@ -87,7 +66,7 @@ func (r StartAppReplicationRequest) Send(ctx context.Context) (*StartAppReplicat
 // StartAppReplicationResponse is the response type for the
 // StartAppReplication API operation.
 type StartAppReplicationResponse struct {
-	*StartAppReplicationOutput
+	*types.StartAppReplicationOutput
 
 	response *aws.Response
 }

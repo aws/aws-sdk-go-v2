@@ -6,73 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/cloudsearch/types"
 )
-
-// Container for the parameters to the DeleteSuggester operation. Specifies
-// the name of the domain you want to update and name of the suggester you want
-// to delete.
-type DeleteSuggesterInput struct {
-	_ struct{} `type:"structure"`
-
-	// A string that represents the name of a domain. Domain names are unique across
-	// the domains owned by an account within an AWS region. Domain names start
-	// with a letter or number and can contain the following characters: a-z (lowercase),
-	// 0-9, and - (hyphen).
-	//
-	// DomainName is a required field
-	DomainName *string `min:"3" type:"string" required:"true"`
-
-	// Specifies the name of the suggester you want to delete.
-	//
-	// SuggesterName is a required field
-	SuggesterName *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteSuggesterInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteSuggesterInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteSuggesterInput"}
-
-	if s.DomainName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DomainName"))
-	}
-	if s.DomainName != nil && len(*s.DomainName) < 3 {
-		invalidParams.Add(aws.NewErrParamMinLen("DomainName", 3))
-	}
-
-	if s.SuggesterName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("SuggesterName"))
-	}
-	if s.SuggesterName != nil && len(*s.SuggesterName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("SuggesterName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// The result of a DeleteSuggester request. Contains the status of the deleted
-// suggester.
-type DeleteSuggesterOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The status of the suggester being deleted.
-	//
-	// Suggester is a required field
-	Suggester *SuggesterStatus `type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteSuggesterOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteSuggester = "DeleteSuggester"
 
@@ -89,7 +24,7 @@ const opDeleteSuggester = "DeleteSuggester"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) DeleteSuggesterRequest(input *DeleteSuggesterInput) DeleteSuggesterRequest {
+func (c *Client) DeleteSuggesterRequest(input *types.DeleteSuggesterInput) DeleteSuggesterRequest {
 	op := &aws.Operation{
 		Name:       opDeleteSuggester,
 		HTTPMethod: "POST",
@@ -97,10 +32,10 @@ func (c *Client) DeleteSuggesterRequest(input *DeleteSuggesterInput) DeleteSugge
 	}
 
 	if input == nil {
-		input = &DeleteSuggesterInput{}
+		input = &types.DeleteSuggesterInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteSuggesterOutput{})
+	req := c.newRequest(op, input, &types.DeleteSuggesterOutput{})
 	return DeleteSuggesterRequest{Request: req, Input: input, Copy: c.DeleteSuggesterRequest}
 }
 
@@ -108,8 +43,8 @@ func (c *Client) DeleteSuggesterRequest(input *DeleteSuggesterInput) DeleteSugge
 // DeleteSuggester API operation.
 type DeleteSuggesterRequest struct {
 	*aws.Request
-	Input *DeleteSuggesterInput
-	Copy  func(*DeleteSuggesterInput) DeleteSuggesterRequest
+	Input *types.DeleteSuggesterInput
+	Copy  func(*types.DeleteSuggesterInput) DeleteSuggesterRequest
 }
 
 // Send marshals and sends the DeleteSuggester API request.
@@ -121,7 +56,7 @@ func (r DeleteSuggesterRequest) Send(ctx context.Context) (*DeleteSuggesterRespo
 	}
 
 	resp := &DeleteSuggesterResponse{
-		DeleteSuggesterOutput: r.Request.Data.(*DeleteSuggesterOutput),
+		DeleteSuggesterOutput: r.Request.Data.(*types.DeleteSuggesterOutput),
 		response:              &aws.Response{Request: r.Request},
 	}
 
@@ -131,7 +66,7 @@ func (r DeleteSuggesterRequest) Send(ctx context.Context) (*DeleteSuggesterRespo
 // DeleteSuggesterResponse is the response type for the
 // DeleteSuggester API operation.
 type DeleteSuggesterResponse struct {
-	*DeleteSuggesterOutput
+	*types.DeleteSuggesterOutput
 
 	response *aws.Response
 }

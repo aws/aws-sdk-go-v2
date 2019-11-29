@@ -6,90 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/serverlessapplicationrepository/types"
 )
-
-type ListApplicationsInput struct {
-	_ struct{} `type:"structure"`
-
-	MaxItems *int64 `location:"querystring" locationName:"maxItems" min:"1" type:"integer"`
-
-	NextToken *string `location:"querystring" locationName:"nextToken" type:"string"`
-}
-
-// String returns the string representation
-func (s ListApplicationsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListApplicationsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListApplicationsInput"}
-	if s.MaxItems != nil && *s.MaxItems < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxItems", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListApplicationsInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.MaxItems != nil {
-		v := *s.MaxItems
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "maxItems", protocol.Int64Value(v), metadata)
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type ListApplicationsOutput struct {
-	_ struct{} `type:"structure"`
-
-	Applications []ApplicationSummary `locationName:"applications" type:"list"`
-
-	NextToken *string `locationName:"nextToken" type:"string"`
-}
-
-// String returns the string representation
-func (s ListApplicationsOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListApplicationsOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.Applications != nil {
-		v := s.Applications
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "applications", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opListApplications = "ListApplications"
 
@@ -106,7 +24,7 @@ const opListApplications = "ListApplications"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/serverlessrepo-2017-09-08/ListApplications
-func (c *Client) ListApplicationsRequest(input *ListApplicationsInput) ListApplicationsRequest {
+func (c *Client) ListApplicationsRequest(input *types.ListApplicationsInput) ListApplicationsRequest {
 	op := &aws.Operation{
 		Name:       opListApplications,
 		HTTPMethod: "GET",
@@ -120,10 +38,10 @@ func (c *Client) ListApplicationsRequest(input *ListApplicationsInput) ListAppli
 	}
 
 	if input == nil {
-		input = &ListApplicationsInput{}
+		input = &types.ListApplicationsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListApplicationsOutput{})
+	req := c.newRequest(op, input, &types.ListApplicationsOutput{})
 	return ListApplicationsRequest{Request: req, Input: input, Copy: c.ListApplicationsRequest}
 }
 
@@ -131,8 +49,8 @@ func (c *Client) ListApplicationsRequest(input *ListApplicationsInput) ListAppli
 // ListApplications API operation.
 type ListApplicationsRequest struct {
 	*aws.Request
-	Input *ListApplicationsInput
-	Copy  func(*ListApplicationsInput) ListApplicationsRequest
+	Input *types.ListApplicationsInput
+	Copy  func(*types.ListApplicationsInput) ListApplicationsRequest
 }
 
 // Send marshals and sends the ListApplications API request.
@@ -144,7 +62,7 @@ func (r ListApplicationsRequest) Send(ctx context.Context) (*ListApplicationsRes
 	}
 
 	resp := &ListApplicationsResponse{
-		ListApplicationsOutput: r.Request.Data.(*ListApplicationsOutput),
+		ListApplicationsOutput: r.Request.Data.(*types.ListApplicationsOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -174,7 +92,7 @@ func NewListApplicationsPaginator(req ListApplicationsRequest) ListApplicationsP
 	return ListApplicationsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListApplicationsInput
+				var inCpy *types.ListApplicationsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -194,14 +112,14 @@ type ListApplicationsPaginator struct {
 	aws.Pager
 }
 
-func (p *ListApplicationsPaginator) CurrentPage() *ListApplicationsOutput {
-	return p.Pager.CurrentPage().(*ListApplicationsOutput)
+func (p *ListApplicationsPaginator) CurrentPage() *types.ListApplicationsOutput {
+	return p.Pager.CurrentPage().(*types.ListApplicationsOutput)
 }
 
 // ListApplicationsResponse is the response type for the
 // ListApplications API operation.
 type ListApplicationsResponse struct {
-	*ListApplicationsOutput
+	*types.ListApplicationsOutput
 
 	response *aws.Response
 }

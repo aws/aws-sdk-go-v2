@@ -4,153 +4,10 @@ package iotanalytics
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/iotanalytics/types"
 )
-
-type CreateChannelInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the channel.
-	//
-	// ChannelName is a required field
-	ChannelName *string `locationName:"channelName" min:"1" type:"string" required:"true"`
-
-	// Where channel data is stored. You may choose one of "serviceManagedS3" or
-	// "customerManagedS3" storage. If not specified, the default is "serviceManagedS3".
-	// This cannot be changed after creation of the channel.
-	ChannelStorage *ChannelStorage `locationName:"channelStorage" type:"structure"`
-
-	// How long, in days, message data is kept for the channel. When "customerManagedS3"
-	// storage is selected, this parameter is ignored.
-	RetentionPeriod *RetentionPeriod `locationName:"retentionPeriod" type:"structure"`
-
-	// Metadata which can be used to manage the channel.
-	Tags []Tag `locationName:"tags" min:"1" type:"list"`
-}
-
-// String returns the string representation
-func (s CreateChannelInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateChannelInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateChannelInput"}
-
-	if s.ChannelName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ChannelName"))
-	}
-	if s.ChannelName != nil && len(*s.ChannelName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ChannelName", 1))
-	}
-	if s.Tags != nil && len(s.Tags) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Tags", 1))
-	}
-	if s.ChannelStorage != nil {
-		if err := s.ChannelStorage.Validate(); err != nil {
-			invalidParams.AddNested("ChannelStorage", err.(aws.ErrInvalidParams))
-		}
-	}
-	if s.RetentionPeriod != nil {
-		if err := s.RetentionPeriod.Validate(); err != nil {
-			invalidParams.AddNested("RetentionPeriod", err.(aws.ErrInvalidParams))
-		}
-	}
-	if s.Tags != nil {
-		for i, v := range s.Tags {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s CreateChannelInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.ChannelName != nil {
-		v := *s.ChannelName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "channelName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.ChannelStorage != nil {
-		v := s.ChannelStorage
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "channelStorage", v, metadata)
-	}
-	if s.RetentionPeriod != nil {
-		v := s.RetentionPeriod
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "retentionPeriod", v, metadata)
-	}
-	if s.Tags != nil {
-		v := s.Tags
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "tags", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	return nil
-}
-
-type CreateChannelOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The ARN of the channel.
-	ChannelArn *string `locationName:"channelArn" type:"string"`
-
-	// The name of the channel.
-	ChannelName *string `locationName:"channelName" min:"1" type:"string"`
-
-	// How long, in days, message data is kept for the channel.
-	RetentionPeriod *RetentionPeriod `locationName:"retentionPeriod" type:"structure"`
-}
-
-// String returns the string representation
-func (s CreateChannelOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s CreateChannelOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.ChannelArn != nil {
-		v := *s.ChannelArn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "channelArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.ChannelName != nil {
-		v := *s.ChannelName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "channelName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.RetentionPeriod != nil {
-		v := s.RetentionPeriod
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "retentionPeriod", v, metadata)
-	}
-	return nil
-}
 
 const opCreateChannel = "CreateChannel"
 
@@ -168,7 +25,7 @@ const opCreateChannel = "CreateChannel"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iotanalytics-2017-11-27/CreateChannel
-func (c *Client) CreateChannelRequest(input *CreateChannelInput) CreateChannelRequest {
+func (c *Client) CreateChannelRequest(input *types.CreateChannelInput) CreateChannelRequest {
 	op := &aws.Operation{
 		Name:       opCreateChannel,
 		HTTPMethod: "POST",
@@ -176,10 +33,10 @@ func (c *Client) CreateChannelRequest(input *CreateChannelInput) CreateChannelRe
 	}
 
 	if input == nil {
-		input = &CreateChannelInput{}
+		input = &types.CreateChannelInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateChannelOutput{})
+	req := c.newRequest(op, input, &types.CreateChannelOutput{})
 	return CreateChannelRequest{Request: req, Input: input, Copy: c.CreateChannelRequest}
 }
 
@@ -187,8 +44,8 @@ func (c *Client) CreateChannelRequest(input *CreateChannelInput) CreateChannelRe
 // CreateChannel API operation.
 type CreateChannelRequest struct {
 	*aws.Request
-	Input *CreateChannelInput
-	Copy  func(*CreateChannelInput) CreateChannelRequest
+	Input *types.CreateChannelInput
+	Copy  func(*types.CreateChannelInput) CreateChannelRequest
 }
 
 // Send marshals and sends the CreateChannel API request.
@@ -200,7 +57,7 @@ func (r CreateChannelRequest) Send(ctx context.Context) (*CreateChannelResponse,
 	}
 
 	resp := &CreateChannelResponse{
-		CreateChannelOutput: r.Request.Data.(*CreateChannelOutput),
+		CreateChannelOutput: r.Request.Data.(*types.CreateChannelOutput),
 		response:            &aws.Response{Request: r.Request},
 	}
 
@@ -210,7 +67,7 @@ func (r CreateChannelRequest) Send(ctx context.Context) (*CreateChannelResponse,
 // CreateChannelResponse is the response type for the
 // CreateChannel API operation.
 type CreateChannelResponse struct {
-	*CreateChannelOutput
+	*types.CreateChannelOutput
 
 	response *aws.Response
 }

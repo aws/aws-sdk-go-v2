@@ -6,55 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/directoryservice/types"
 )
-
-// Describes a conditional forwarder.
-type DescribeConditionalForwardersInput struct {
-	_ struct{} `type:"structure"`
-
-	// The directory ID for which to get the list of associated conditional forwarders.
-	//
-	// DirectoryId is a required field
-	DirectoryId *string `type:"string" required:"true"`
-
-	// The fully qualified domain names (FQDN) of the remote domains for which to
-	// get the list of associated conditional forwarders. If this member is null,
-	// all conditional forwarders are returned.
-	RemoteDomainNames []string `type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeConditionalForwardersInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeConditionalForwardersInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeConditionalForwardersInput"}
-
-	if s.DirectoryId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DirectoryId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// The result of a DescribeConditionalForwarder request.
-type DescribeConditionalForwardersOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The list of conditional forwarders that have been created.
-	ConditionalForwarders []ConditionalForwarder `type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeConditionalForwardersOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeConditionalForwarders = "DescribeConditionalForwarders"
 
@@ -74,7 +27,7 @@ const opDescribeConditionalForwarders = "DescribeConditionalForwarders"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DescribeConditionalForwarders
-func (c *Client) DescribeConditionalForwardersRequest(input *DescribeConditionalForwardersInput) DescribeConditionalForwardersRequest {
+func (c *Client) DescribeConditionalForwardersRequest(input *types.DescribeConditionalForwardersInput) DescribeConditionalForwardersRequest {
 	op := &aws.Operation{
 		Name:       opDescribeConditionalForwarders,
 		HTTPMethod: "POST",
@@ -82,10 +35,10 @@ func (c *Client) DescribeConditionalForwardersRequest(input *DescribeConditional
 	}
 
 	if input == nil {
-		input = &DescribeConditionalForwardersInput{}
+		input = &types.DescribeConditionalForwardersInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeConditionalForwardersOutput{})
+	req := c.newRequest(op, input, &types.DescribeConditionalForwardersOutput{})
 	return DescribeConditionalForwardersRequest{Request: req, Input: input, Copy: c.DescribeConditionalForwardersRequest}
 }
 
@@ -93,8 +46,8 @@ func (c *Client) DescribeConditionalForwardersRequest(input *DescribeConditional
 // DescribeConditionalForwarders API operation.
 type DescribeConditionalForwardersRequest struct {
 	*aws.Request
-	Input *DescribeConditionalForwardersInput
-	Copy  func(*DescribeConditionalForwardersInput) DescribeConditionalForwardersRequest
+	Input *types.DescribeConditionalForwardersInput
+	Copy  func(*types.DescribeConditionalForwardersInput) DescribeConditionalForwardersRequest
 }
 
 // Send marshals and sends the DescribeConditionalForwarders API request.
@@ -106,7 +59,7 @@ func (r DescribeConditionalForwardersRequest) Send(ctx context.Context) (*Descri
 	}
 
 	resp := &DescribeConditionalForwardersResponse{
-		DescribeConditionalForwardersOutput: r.Request.Data.(*DescribeConditionalForwardersOutput),
+		DescribeConditionalForwardersOutput: r.Request.Data.(*types.DescribeConditionalForwardersOutput),
 		response:                            &aws.Response{Request: r.Request},
 	}
 
@@ -116,7 +69,7 @@ func (r DescribeConditionalForwardersRequest) Send(ctx context.Context) (*Descri
 // DescribeConditionalForwardersResponse is the response type for the
 // DescribeConditionalForwarders API operation.
 type DescribeConditionalForwardersResponse struct {
-	*DescribeConditionalForwardersOutput
+	*types.DescribeConditionalForwardersOutput
 
 	response *aws.Response
 }

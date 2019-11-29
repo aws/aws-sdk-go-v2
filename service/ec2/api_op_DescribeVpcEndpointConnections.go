@@ -6,61 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-type DescribeVpcEndpointConnectionsInput struct {
-	_ struct{} `type:"structure"`
-
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have
-	// the required permissions, the error response is DryRunOperation. Otherwise,
-	// it is UnauthorizedOperation.
-	DryRun *bool `type:"boolean"`
-
-	// One or more filters.
-	//
-	//    * service-id - The ID of the service.
-	//
-	//    * vpc-endpoint-owner - The AWS account number of the owner of the endpoint.
-	//
-	//    * vpc-endpoint-state - The state of the endpoint (pendingAcceptance |
-	//    pending | available | deleting | deleted | rejected | failed).
-	//
-	//    * vpc-endpoint-id - The ID of the endpoint.
-	Filters []Filter `locationName:"Filter" locationNameList:"Filter" type:"list"`
-
-	// The maximum number of results to return for the request in a single page.
-	// The remaining results of the initial request can be seen by sending another
-	// request with the returned NextToken value. This value can be between 5 and
-	// 1000; if MaxResults is given a value larger than 1000, only 1000 results
-	// are returned.
-	MaxResults *int64 `type:"integer"`
-
-	// The token to retrieve the next page of results.
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeVpcEndpointConnectionsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type DescribeVpcEndpointConnectionsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The token to use to retrieve the next page of results. This value is null
-	// when there are no more results to return.
-	NextToken *string `locationName:"nextToken" type:"string"`
-
-	// Information about one or more VPC endpoint connections.
-	VpcEndpointConnections []VpcEndpointConnection `locationName:"vpcEndpointConnectionSet" locationNameList:"item" type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeVpcEndpointConnectionsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeVpcEndpointConnections = "DescribeVpcEndpointConnections"
 
@@ -78,7 +25,7 @@ const opDescribeVpcEndpointConnections = "DescribeVpcEndpointConnections"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeVpcEndpointConnections
-func (c *Client) DescribeVpcEndpointConnectionsRequest(input *DescribeVpcEndpointConnectionsInput) DescribeVpcEndpointConnectionsRequest {
+func (c *Client) DescribeVpcEndpointConnectionsRequest(input *types.DescribeVpcEndpointConnectionsInput) DescribeVpcEndpointConnectionsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeVpcEndpointConnections,
 		HTTPMethod: "POST",
@@ -92,10 +39,10 @@ func (c *Client) DescribeVpcEndpointConnectionsRequest(input *DescribeVpcEndpoin
 	}
 
 	if input == nil {
-		input = &DescribeVpcEndpointConnectionsInput{}
+		input = &types.DescribeVpcEndpointConnectionsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeVpcEndpointConnectionsOutput{})
+	req := c.newRequest(op, input, &types.DescribeVpcEndpointConnectionsOutput{})
 	return DescribeVpcEndpointConnectionsRequest{Request: req, Input: input, Copy: c.DescribeVpcEndpointConnectionsRequest}
 }
 
@@ -103,8 +50,8 @@ func (c *Client) DescribeVpcEndpointConnectionsRequest(input *DescribeVpcEndpoin
 // DescribeVpcEndpointConnections API operation.
 type DescribeVpcEndpointConnectionsRequest struct {
 	*aws.Request
-	Input *DescribeVpcEndpointConnectionsInput
-	Copy  func(*DescribeVpcEndpointConnectionsInput) DescribeVpcEndpointConnectionsRequest
+	Input *types.DescribeVpcEndpointConnectionsInput
+	Copy  func(*types.DescribeVpcEndpointConnectionsInput) DescribeVpcEndpointConnectionsRequest
 }
 
 // Send marshals and sends the DescribeVpcEndpointConnections API request.
@@ -116,7 +63,7 @@ func (r DescribeVpcEndpointConnectionsRequest) Send(ctx context.Context) (*Descr
 	}
 
 	resp := &DescribeVpcEndpointConnectionsResponse{
-		DescribeVpcEndpointConnectionsOutput: r.Request.Data.(*DescribeVpcEndpointConnectionsOutput),
+		DescribeVpcEndpointConnectionsOutput: r.Request.Data.(*types.DescribeVpcEndpointConnectionsOutput),
 		response:                             &aws.Response{Request: r.Request},
 	}
 
@@ -146,7 +93,7 @@ func NewDescribeVpcEndpointConnectionsPaginator(req DescribeVpcEndpointConnectio
 	return DescribeVpcEndpointConnectionsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *DescribeVpcEndpointConnectionsInput
+				var inCpy *types.DescribeVpcEndpointConnectionsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -166,14 +113,14 @@ type DescribeVpcEndpointConnectionsPaginator struct {
 	aws.Pager
 }
 
-func (p *DescribeVpcEndpointConnectionsPaginator) CurrentPage() *DescribeVpcEndpointConnectionsOutput {
-	return p.Pager.CurrentPage().(*DescribeVpcEndpointConnectionsOutput)
+func (p *DescribeVpcEndpointConnectionsPaginator) CurrentPage() *types.DescribeVpcEndpointConnectionsOutput {
+	return p.Pager.CurrentPage().(*types.DescribeVpcEndpointConnectionsOutput)
 }
 
 // DescribeVpcEndpointConnectionsResponse is the response type for the
 // DescribeVpcEndpointConnections API operation.
 type DescribeVpcEndpointConnectionsResponse struct {
-	*DescribeVpcEndpointConnectionsOutput
+	*types.DescribeVpcEndpointConnectionsOutput
 
 	response *aws.Response
 }

@@ -6,57 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/alexaforbusiness/types"
 )
-
-type UpdateRoomInput struct {
-	_ struct{} `type:"structure"`
-
-	// The updated description for the room.
-	Description *string `min:"1" type:"string"`
-
-	// The updated profile ARN for the room.
-	ProfileArn *string `type:"string"`
-
-	// The updated provider calendar ARN for the room.
-	ProviderCalendarId *string `type:"string"`
-
-	// The ARN of the room to update.
-	RoomArn *string `type:"string"`
-
-	// The updated name for the room.
-	RoomName *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s UpdateRoomInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateRoomInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateRoomInput"}
-	if s.Description != nil && len(*s.Description) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Description", 1))
-	}
-	if s.RoomName != nil && len(*s.RoomName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("RoomName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type UpdateRoomOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s UpdateRoomOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opUpdateRoom = "UpdateRoom"
 
@@ -73,7 +24,7 @@ const opUpdateRoom = "UpdateRoom"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/UpdateRoom
-func (c *Client) UpdateRoomRequest(input *UpdateRoomInput) UpdateRoomRequest {
+func (c *Client) UpdateRoomRequest(input *types.UpdateRoomInput) UpdateRoomRequest {
 	op := &aws.Operation{
 		Name:       opUpdateRoom,
 		HTTPMethod: "POST",
@@ -81,10 +32,10 @@ func (c *Client) UpdateRoomRequest(input *UpdateRoomInput) UpdateRoomRequest {
 	}
 
 	if input == nil {
-		input = &UpdateRoomInput{}
+		input = &types.UpdateRoomInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateRoomOutput{})
+	req := c.newRequest(op, input, &types.UpdateRoomOutput{})
 	return UpdateRoomRequest{Request: req, Input: input, Copy: c.UpdateRoomRequest}
 }
 
@@ -92,8 +43,8 @@ func (c *Client) UpdateRoomRequest(input *UpdateRoomInput) UpdateRoomRequest {
 // UpdateRoom API operation.
 type UpdateRoomRequest struct {
 	*aws.Request
-	Input *UpdateRoomInput
-	Copy  func(*UpdateRoomInput) UpdateRoomRequest
+	Input *types.UpdateRoomInput
+	Copy  func(*types.UpdateRoomInput) UpdateRoomRequest
 }
 
 // Send marshals and sends the UpdateRoom API request.
@@ -105,7 +56,7 @@ func (r UpdateRoomRequest) Send(ctx context.Context) (*UpdateRoomResponse, error
 	}
 
 	resp := &UpdateRoomResponse{
-		UpdateRoomOutput: r.Request.Data.(*UpdateRoomOutput),
+		UpdateRoomOutput: r.Request.Data.(*types.UpdateRoomOutput),
 		response:         &aws.Response{Request: r.Request},
 	}
 
@@ -115,7 +66,7 @@ func (r UpdateRoomRequest) Send(ctx context.Context) (*UpdateRoomResponse, error
 // UpdateRoomResponse is the response type for the
 // UpdateRoom API operation.
 type UpdateRoomResponse struct {
-	*UpdateRoomOutput
+	*types.UpdateRoomOutput
 
 	response *aws.Response
 }

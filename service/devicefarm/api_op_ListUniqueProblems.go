@@ -6,81 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/devicefarm/types"
 )
-
-// Represents a request to the list unique problems operation.
-type ListUniqueProblemsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The unique problems' ARNs.
-	//
-	// Arn is a required field
-	Arn *string `locationName:"arn" min:"32" type:"string" required:"true"`
-
-	// An identifier that was returned from the previous call to this operation,
-	// which can be used to return the next set of items in the list.
-	NextToken *string `locationName:"nextToken" min:"4" type:"string"`
-}
-
-// String returns the string representation
-func (s ListUniqueProblemsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListUniqueProblemsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListUniqueProblemsInput"}
-
-	if s.Arn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Arn"))
-	}
-	if s.Arn != nil && len(*s.Arn) < 32 {
-		invalidParams.Add(aws.NewErrParamMinLen("Arn", 32))
-	}
-	if s.NextToken != nil && len(*s.NextToken) < 4 {
-		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 4))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Represents the result of a list unique problems request.
-type ListUniqueProblemsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// If the number of items that are returned is significantly large, this is
-	// an identifier that is also returned, which can be used in a subsequent call
-	// to this operation to return the next set of items in the list.
-	NextToken *string `locationName:"nextToken" min:"4" type:"string"`
-
-	// Information about the unique problems.
-	//
-	// Allowed values include:
-	//
-	//    * PENDING: A pending condition.
-	//
-	//    * PASSED: A passing condition.
-	//
-	//    * WARNED: A warning condition.
-	//
-	//    * FAILED: A failed condition.
-	//
-	//    * SKIPPED: A skipped condition.
-	//
-	//    * ERRORED: An error condition.
-	//
-	//    * STOPPED: A stopped condition.
-	UniqueProblems map[string][]UniqueProblem `locationName:"uniqueProblems" type:"map"`
-}
-
-// String returns the string representation
-func (s ListUniqueProblemsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListUniqueProblems = "ListUniqueProblems"
 
@@ -97,7 +24,7 @@ const opListUniqueProblems = "ListUniqueProblems"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ListUniqueProblems
-func (c *Client) ListUniqueProblemsRequest(input *ListUniqueProblemsInput) ListUniqueProblemsRequest {
+func (c *Client) ListUniqueProblemsRequest(input *types.ListUniqueProblemsInput) ListUniqueProblemsRequest {
 	op := &aws.Operation{
 		Name:       opListUniqueProblems,
 		HTTPMethod: "POST",
@@ -111,10 +38,10 @@ func (c *Client) ListUniqueProblemsRequest(input *ListUniqueProblemsInput) ListU
 	}
 
 	if input == nil {
-		input = &ListUniqueProblemsInput{}
+		input = &types.ListUniqueProblemsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListUniqueProblemsOutput{})
+	req := c.newRequest(op, input, &types.ListUniqueProblemsOutput{})
 	return ListUniqueProblemsRequest{Request: req, Input: input, Copy: c.ListUniqueProblemsRequest}
 }
 
@@ -122,8 +49,8 @@ func (c *Client) ListUniqueProblemsRequest(input *ListUniqueProblemsInput) ListU
 // ListUniqueProblems API operation.
 type ListUniqueProblemsRequest struct {
 	*aws.Request
-	Input *ListUniqueProblemsInput
-	Copy  func(*ListUniqueProblemsInput) ListUniqueProblemsRequest
+	Input *types.ListUniqueProblemsInput
+	Copy  func(*types.ListUniqueProblemsInput) ListUniqueProblemsRequest
 }
 
 // Send marshals and sends the ListUniqueProblems API request.
@@ -135,7 +62,7 @@ func (r ListUniqueProblemsRequest) Send(ctx context.Context) (*ListUniqueProblem
 	}
 
 	resp := &ListUniqueProblemsResponse{
-		ListUniqueProblemsOutput: r.Request.Data.(*ListUniqueProblemsOutput),
+		ListUniqueProblemsOutput: r.Request.Data.(*types.ListUniqueProblemsOutput),
 		response:                 &aws.Response{Request: r.Request},
 	}
 
@@ -165,7 +92,7 @@ func NewListUniqueProblemsPaginator(req ListUniqueProblemsRequest) ListUniquePro
 	return ListUniqueProblemsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListUniqueProblemsInput
+				var inCpy *types.ListUniqueProblemsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -185,14 +112,14 @@ type ListUniqueProblemsPaginator struct {
 	aws.Pager
 }
 
-func (p *ListUniqueProblemsPaginator) CurrentPage() *ListUniqueProblemsOutput {
-	return p.Pager.CurrentPage().(*ListUniqueProblemsOutput)
+func (p *ListUniqueProblemsPaginator) CurrentPage() *types.ListUniqueProblemsOutput {
+	return p.Pager.CurrentPage().(*types.ListUniqueProblemsOutput)
 }
 
 // ListUniqueProblemsResponse is the response type for the
 // ListUniqueProblems API operation.
 type ListUniqueProblemsResponse struct {
-	*ListUniqueProblemsOutput
+	*types.ListUniqueProblemsOutput
 
 	response *aws.Response
 }

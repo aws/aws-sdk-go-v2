@@ -6,57 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/iot/types"
 )
-
-type GetIndexingConfigurationInput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s GetIndexingConfigurationInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetIndexingConfigurationInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	return nil
-}
-
-type GetIndexingConfigurationOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The index configuration.
-	ThingGroupIndexingConfiguration *ThingGroupIndexingConfiguration `locationName:"thingGroupIndexingConfiguration" type:"structure"`
-
-	// Thing indexing configuration.
-	ThingIndexingConfiguration *ThingIndexingConfiguration `locationName:"thingIndexingConfiguration" type:"structure"`
-}
-
-// String returns the string representation
-func (s GetIndexingConfigurationOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetIndexingConfigurationOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.ThingGroupIndexingConfiguration != nil {
-		v := s.ThingGroupIndexingConfiguration
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "thingGroupIndexingConfiguration", v, metadata)
-	}
-	if s.ThingIndexingConfiguration != nil {
-		v := s.ThingIndexingConfiguration
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "thingIndexingConfiguration", v, metadata)
-	}
-	return nil
-}
 
 const opGetIndexingConfiguration = "GetIndexingConfiguration"
 
@@ -71,7 +22,7 @@ const opGetIndexingConfiguration = "GetIndexingConfiguration"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) GetIndexingConfigurationRequest(input *GetIndexingConfigurationInput) GetIndexingConfigurationRequest {
+func (c *Client) GetIndexingConfigurationRequest(input *types.GetIndexingConfigurationInput) GetIndexingConfigurationRequest {
 	op := &aws.Operation{
 		Name:       opGetIndexingConfiguration,
 		HTTPMethod: "GET",
@@ -79,10 +30,10 @@ func (c *Client) GetIndexingConfigurationRequest(input *GetIndexingConfiguration
 	}
 
 	if input == nil {
-		input = &GetIndexingConfigurationInput{}
+		input = &types.GetIndexingConfigurationInput{}
 	}
 
-	req := c.newRequest(op, input, &GetIndexingConfigurationOutput{})
+	req := c.newRequest(op, input, &types.GetIndexingConfigurationOutput{})
 	return GetIndexingConfigurationRequest{Request: req, Input: input, Copy: c.GetIndexingConfigurationRequest}
 }
 
@@ -90,8 +41,8 @@ func (c *Client) GetIndexingConfigurationRequest(input *GetIndexingConfiguration
 // GetIndexingConfiguration API operation.
 type GetIndexingConfigurationRequest struct {
 	*aws.Request
-	Input *GetIndexingConfigurationInput
-	Copy  func(*GetIndexingConfigurationInput) GetIndexingConfigurationRequest
+	Input *types.GetIndexingConfigurationInput
+	Copy  func(*types.GetIndexingConfigurationInput) GetIndexingConfigurationRequest
 }
 
 // Send marshals and sends the GetIndexingConfiguration API request.
@@ -103,7 +54,7 @@ func (r GetIndexingConfigurationRequest) Send(ctx context.Context) (*GetIndexing
 	}
 
 	resp := &GetIndexingConfigurationResponse{
-		GetIndexingConfigurationOutput: r.Request.Data.(*GetIndexingConfigurationOutput),
+		GetIndexingConfigurationOutput: r.Request.Data.(*types.GetIndexingConfigurationOutput),
 		response:                       &aws.Response{Request: r.Request},
 	}
 
@@ -113,7 +64,7 @@ func (r GetIndexingConfigurationRequest) Send(ctx context.Context) (*GetIndexing
 // GetIndexingConfigurationResponse is the response type for the
 // GetIndexingConfiguration API operation.
 type GetIndexingConfigurationResponse struct {
-	*GetIndexingConfigurationOutput
+	*types.GetIndexingConfigurationOutput
 
 	response *aws.Response
 }

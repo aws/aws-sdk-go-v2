@@ -6,97 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/securityhub/types"
 )
-
-type ListEnabledProductsForImportInput struct {
-	_ struct{} `type:"structure"`
-
-	// The maximum number of items that you want in the response.
-	MaxResults *int64 `location:"querystring" locationName:"MaxResults" min:"1" type:"integer"`
-
-	// Paginates results. On your first call to the ListEnabledProductsForImport
-	// operation, set the value of this parameter to NULL. For subsequent calls
-	// to the operation, fill nextToken in the request with the value of NextToken
-	// from the previous response to continue listing data.
-	NextToken *string `location:"querystring" locationName:"NextToken" type:"string"`
-}
-
-// String returns the string representation
-func (s ListEnabledProductsForImportInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListEnabledProductsForImportInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListEnabledProductsForImportInput"}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListEnabledProductsForImportInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.MaxResults != nil {
-		v := *s.MaxResults
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "MaxResults", protocol.Int64Value(v), metadata)
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type ListEnabledProductsForImportOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The token that is required for pagination.
-	NextToken *string `type:"string"`
-
-	// A list of ARNs for the resources that represent your subscriptions to products.
-	ProductSubscriptions []string `type:"list"`
-}
-
-// String returns the string representation
-func (s ListEnabledProductsForImportOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListEnabledProductsForImportOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.ProductSubscriptions != nil {
-		v := s.ProductSubscriptions
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "ProductSubscriptions", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
-		}
-		ls0.End()
-
-	}
-	return nil
-}
 
 const opListEnabledProductsForImport = "ListEnabledProductsForImport"
 
@@ -114,7 +25,7 @@ const opListEnabledProductsForImport = "ListEnabledProductsForImport"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ListEnabledProductsForImport
-func (c *Client) ListEnabledProductsForImportRequest(input *ListEnabledProductsForImportInput) ListEnabledProductsForImportRequest {
+func (c *Client) ListEnabledProductsForImportRequest(input *types.ListEnabledProductsForImportInput) ListEnabledProductsForImportRequest {
 	op := &aws.Operation{
 		Name:       opListEnabledProductsForImport,
 		HTTPMethod: "GET",
@@ -128,10 +39,10 @@ func (c *Client) ListEnabledProductsForImportRequest(input *ListEnabledProductsF
 	}
 
 	if input == nil {
-		input = &ListEnabledProductsForImportInput{}
+		input = &types.ListEnabledProductsForImportInput{}
 	}
 
-	req := c.newRequest(op, input, &ListEnabledProductsForImportOutput{})
+	req := c.newRequest(op, input, &types.ListEnabledProductsForImportOutput{})
 	return ListEnabledProductsForImportRequest{Request: req, Input: input, Copy: c.ListEnabledProductsForImportRequest}
 }
 
@@ -139,8 +50,8 @@ func (c *Client) ListEnabledProductsForImportRequest(input *ListEnabledProductsF
 // ListEnabledProductsForImport API operation.
 type ListEnabledProductsForImportRequest struct {
 	*aws.Request
-	Input *ListEnabledProductsForImportInput
-	Copy  func(*ListEnabledProductsForImportInput) ListEnabledProductsForImportRequest
+	Input *types.ListEnabledProductsForImportInput
+	Copy  func(*types.ListEnabledProductsForImportInput) ListEnabledProductsForImportRequest
 }
 
 // Send marshals and sends the ListEnabledProductsForImport API request.
@@ -152,7 +63,7 @@ func (r ListEnabledProductsForImportRequest) Send(ctx context.Context) (*ListEna
 	}
 
 	resp := &ListEnabledProductsForImportResponse{
-		ListEnabledProductsForImportOutput: r.Request.Data.(*ListEnabledProductsForImportOutput),
+		ListEnabledProductsForImportOutput: r.Request.Data.(*types.ListEnabledProductsForImportOutput),
 		response:                           &aws.Response{Request: r.Request},
 	}
 
@@ -182,7 +93,7 @@ func NewListEnabledProductsForImportPaginator(req ListEnabledProductsForImportRe
 	return ListEnabledProductsForImportPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListEnabledProductsForImportInput
+				var inCpy *types.ListEnabledProductsForImportInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -202,14 +113,14 @@ type ListEnabledProductsForImportPaginator struct {
 	aws.Pager
 }
 
-func (p *ListEnabledProductsForImportPaginator) CurrentPage() *ListEnabledProductsForImportOutput {
-	return p.Pager.CurrentPage().(*ListEnabledProductsForImportOutput)
+func (p *ListEnabledProductsForImportPaginator) CurrentPage() *types.ListEnabledProductsForImportOutput {
+	return p.Pager.CurrentPage().(*types.ListEnabledProductsForImportOutput)
 }
 
 // ListEnabledProductsForImportResponse is the response type for the
 // ListEnabledProductsForImport API operation.
 type ListEnabledProductsForImportResponse struct {
-	*ListEnabledProductsForImportOutput
+	*types.ListEnabledProductsForImportOutput
 
 	response *aws.Response
 }

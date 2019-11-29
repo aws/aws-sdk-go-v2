@@ -8,7 +8,7 @@ import (
 	"testing"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/service/dynamodb"
+	"github.com/aws/aws-sdk-go-v2/service/dynamodb/types"
 )
 
 // updateErrorMode will help with error cases and checking error types
@@ -43,7 +43,7 @@ func TestBuildOperation(t *testing.T) {
 						fmtExpr: "$n",
 					},
 					{
-						values: []dynamodb.AttributeValue{
+						values: []types.AttributeValue{
 							{
 								N: aws.String("5"),
 							},
@@ -68,7 +68,7 @@ func TestBuildOperation(t *testing.T) {
 						fmtExpr: "$n",
 					},
 					{
-						values: []dynamodb.AttributeValue{
+						values: []types.AttributeValue{
 							{
 								N: aws.String("5"),
 							},
@@ -149,7 +149,7 @@ func TestUpdateTree(t *testing.T) {
 										fmtExpr: "$n",
 									},
 									{
-										values: []dynamodb.AttributeValue{
+										values: []types.AttributeValue{
 											{
 												N: aws.String("5"),
 											},
@@ -203,7 +203,7 @@ func TestUpdateTree(t *testing.T) {
 										fmtExpr: "$n",
 									},
 									{
-										values: []dynamodb.AttributeValue{
+										values: []types.AttributeValue{
 											{
 												N: aws.String("5"),
 											},
@@ -234,7 +234,7 @@ func TestUpdateTree(t *testing.T) {
 										fmtExpr: "$n",
 									},
 									{
-										values: []dynamodb.AttributeValue{
+										values: []types.AttributeValue{
 											{
 												N: aws.String("5"),
 											},
@@ -269,7 +269,7 @@ func TestUpdateTree(t *testing.T) {
 									},
 									{
 										fmtExpr: "$v",
-										values: []dynamodb.AttributeValue{
+										values: []types.AttributeValue{
 											{
 												N: aws.String("5"),
 											},
@@ -286,7 +286,7 @@ func TestUpdateTree(t *testing.T) {
 									},
 									{
 										fmtExpr: "$v",
-										values: []dynamodb.AttributeValue{
+										values: []types.AttributeValue{
 											{
 												N: aws.String("6"),
 											},
@@ -326,7 +326,7 @@ func TestUpdateTree(t *testing.T) {
 										fmtExpr: "$n",
 									},
 									{
-										values: []dynamodb.AttributeValue{
+										values: []types.AttributeValue{
 											{
 												N: aws.String("5"),
 											},
@@ -348,7 +348,7 @@ func TestUpdateTree(t *testing.T) {
 										fmtExpr: "$n",
 									},
 									{
-										values: []dynamodb.AttributeValue{
+										values: []types.AttributeValue{
 											{
 												N: aws.String("5"),
 											},
@@ -384,7 +384,7 @@ func TestUpdateTree(t *testing.T) {
 										fmtExpr: "$n",
 									},
 									{
-										values: []dynamodb.AttributeValue{
+										values: []types.AttributeValue{
 											{
 												N: aws.String("5"),
 											},
@@ -512,7 +512,7 @@ func TestSetValueBuilder(t *testing.T) {
 			expected: exprNode{
 				children: []exprNode{
 					{
-						values: []dynamodb.AttributeValue{
+						values: []types.AttributeValue{
 							{
 								N: aws.String("5"),
 							},
@@ -533,7 +533,7 @@ func TestSetValueBuilder(t *testing.T) {
 			expected: exprNode{
 				children: []exprNode{
 					{
-						values: []dynamodb.AttributeValue{
+						values: []types.AttributeValue{
 							{
 								N: aws.String("5"),
 							},
@@ -554,9 +554,9 @@ func TestSetValueBuilder(t *testing.T) {
 			expected: exprNode{
 				children: []exprNode{
 					{
-						values: []dynamodb.AttributeValue{
+						values: []types.AttributeValue{
 							{
-								L: []dynamodb.AttributeValue{
+								L: []types.AttributeValue{
 									{
 										N: aws.String("1"),
 									},
@@ -678,7 +678,7 @@ func TestUpdateBuildChildNodes(t *testing.T) {
 							},
 							{
 								fmtExpr: "$v",
-								values: []dynamodb.AttributeValue{
+								values: []types.AttributeValue{
 									{
 										N: aws.String("5"),
 									},
@@ -695,7 +695,7 @@ func TestUpdateBuildChildNodes(t *testing.T) {
 							},
 							{
 								fmtExpr: "$v",
-								values: []dynamodb.AttributeValue{
+								values: []types.AttributeValue{
 									{
 										N: aws.String("6"),
 									},
@@ -712,7 +712,7 @@ func TestUpdateBuildChildNodes(t *testing.T) {
 							},
 							{
 								fmtExpr: "$v",
-								values: []dynamodb.AttributeValue{
+								values: []types.AttributeValue{
 									{
 										N: aws.String("7"),
 									},
@@ -729,7 +729,7 @@ func TestUpdateBuildChildNodes(t *testing.T) {
 							},
 							{
 								fmtExpr: "$v",
-								values: []dynamodb.AttributeValue{
+								values: []types.AttributeValue{
 									{
 										N: aws.String("8"),
 									},

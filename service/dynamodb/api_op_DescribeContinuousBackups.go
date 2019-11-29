@@ -6,53 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/dynamodb/types"
 )
-
-type DescribeContinuousBackupsInput struct {
-	_ struct{} `type:"structure"`
-
-	// Name of the table for which the customer wants to check the continuous backups
-	// and point in time recovery settings.
-	//
-	// TableName is a required field
-	TableName *string `min:"3" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeContinuousBackupsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeContinuousBackupsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeContinuousBackupsInput"}
-
-	if s.TableName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("TableName"))
-	}
-	if s.TableName != nil && len(*s.TableName) < 3 {
-		invalidParams.Add(aws.NewErrParamMinLen("TableName", 3))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribeContinuousBackupsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Represents the continuous backups and point in time recovery settings on
-	// the table.
-	ContinuousBackupsDescription *ContinuousBackupsDescription `type:"structure"`
-}
-
-// String returns the string representation
-func (s DescribeContinuousBackupsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeContinuousBackups = "DescribeContinuousBackups"
 
@@ -81,7 +36,7 @@ const opDescribeContinuousBackups = "DescribeContinuousBackups"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/DescribeContinuousBackups
-func (c *Client) DescribeContinuousBackupsRequest(input *DescribeContinuousBackupsInput) DescribeContinuousBackupsRequest {
+func (c *Client) DescribeContinuousBackupsRequest(input *types.DescribeContinuousBackupsInput) DescribeContinuousBackupsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeContinuousBackups,
 		HTTPMethod: "POST",
@@ -89,10 +44,10 @@ func (c *Client) DescribeContinuousBackupsRequest(input *DescribeContinuousBacku
 	}
 
 	if input == nil {
-		input = &DescribeContinuousBackupsInput{}
+		input = &types.DescribeContinuousBackupsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeContinuousBackupsOutput{})
+	req := c.newRequest(op, input, &types.DescribeContinuousBackupsOutput{})
 	return DescribeContinuousBackupsRequest{Request: req, Input: input, Copy: c.DescribeContinuousBackupsRequest}
 }
 
@@ -100,8 +55,8 @@ func (c *Client) DescribeContinuousBackupsRequest(input *DescribeContinuousBacku
 // DescribeContinuousBackups API operation.
 type DescribeContinuousBackupsRequest struct {
 	*aws.Request
-	Input *DescribeContinuousBackupsInput
-	Copy  func(*DescribeContinuousBackupsInput) DescribeContinuousBackupsRequest
+	Input *types.DescribeContinuousBackupsInput
+	Copy  func(*types.DescribeContinuousBackupsInput) DescribeContinuousBackupsRequest
 }
 
 // Send marshals and sends the DescribeContinuousBackups API request.
@@ -113,7 +68,7 @@ func (r DescribeContinuousBackupsRequest) Send(ctx context.Context) (*DescribeCo
 	}
 
 	resp := &DescribeContinuousBackupsResponse{
-		DescribeContinuousBackupsOutput: r.Request.Data.(*DescribeContinuousBackupsOutput),
+		DescribeContinuousBackupsOutput: r.Request.Data.(*types.DescribeContinuousBackupsOutput),
 		response:                        &aws.Response{Request: r.Request},
 	}
 
@@ -123,7 +78,7 @@ func (r DescribeContinuousBackupsRequest) Send(ctx context.Context) (*DescribeCo
 // DescribeContinuousBackupsResponse is the response type for the
 // DescribeContinuousBackups API operation.
 type DescribeContinuousBackupsResponse struct {
-	*DescribeContinuousBackupsOutput
+	*types.DescribeContinuousBackupsOutput
 
 	response *aws.Response
 }

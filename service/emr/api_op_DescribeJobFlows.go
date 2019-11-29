@@ -4,46 +4,10 @@ package emr
 
 import (
 	"context"
-	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/emr/types"
 )
-
-// The input for the DescribeJobFlows operation.
-type DescribeJobFlowsInput struct {
-	_ struct{} `type:"structure"`
-
-	// Return only job flows created after this date and time.
-	CreatedAfter *time.Time `type:"timestamp"`
-
-	// Return only job flows created before this date and time.
-	CreatedBefore *time.Time `type:"timestamp"`
-
-	// Return only job flows whose job flow ID is contained in this list.
-	JobFlowIds []string `type:"list"`
-
-	// Return only job flows whose state is contained in this list.
-	JobFlowStates []JobFlowExecutionState `type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeJobFlowsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// The output for the DescribeJobFlows operation.
-type DescribeJobFlowsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A list of job flows matching the parameters supplied.
-	JobFlows []JobFlowDetail `type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeJobFlowsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeJobFlows = "DescribeJobFlows"
 
@@ -79,7 +43,7 @@ const opDescribeJobFlows = "DescribeJobFlows"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/DescribeJobFlows
-func (c *Client) DescribeJobFlowsRequest(input *DescribeJobFlowsInput) DescribeJobFlowsRequest {
+func (c *Client) DescribeJobFlowsRequest(input *types.DescribeJobFlowsInput) DescribeJobFlowsRequest {
 	if c.Client.Config.Logger != nil {
 		c.Client.Config.Logger.Log("This operation, DescribeJobFlows, has been deprecated")
 	}
@@ -90,10 +54,10 @@ func (c *Client) DescribeJobFlowsRequest(input *DescribeJobFlowsInput) DescribeJ
 	}
 
 	if input == nil {
-		input = &DescribeJobFlowsInput{}
+		input = &types.DescribeJobFlowsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeJobFlowsOutput{})
+	req := c.newRequest(op, input, &types.DescribeJobFlowsOutput{})
 	return DescribeJobFlowsRequest{Request: req, Input: input, Copy: c.DescribeJobFlowsRequest}
 }
 
@@ -101,8 +65,8 @@ func (c *Client) DescribeJobFlowsRequest(input *DescribeJobFlowsInput) DescribeJ
 // DescribeJobFlows API operation.
 type DescribeJobFlowsRequest struct {
 	*aws.Request
-	Input *DescribeJobFlowsInput
-	Copy  func(*DescribeJobFlowsInput) DescribeJobFlowsRequest
+	Input *types.DescribeJobFlowsInput
+	Copy  func(*types.DescribeJobFlowsInput) DescribeJobFlowsRequest
 }
 
 // Send marshals and sends the DescribeJobFlows API request.
@@ -114,7 +78,7 @@ func (r DescribeJobFlowsRequest) Send(ctx context.Context) (*DescribeJobFlowsRes
 	}
 
 	resp := &DescribeJobFlowsResponse{
-		DescribeJobFlowsOutput: r.Request.Data.(*DescribeJobFlowsOutput),
+		DescribeJobFlowsOutput: r.Request.Data.(*types.DescribeJobFlowsOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -124,7 +88,7 @@ func (r DescribeJobFlowsRequest) Send(ctx context.Context) (*DescribeJobFlowsRes
 // DescribeJobFlowsResponse is the response type for the
 // DescribeJobFlows API operation.
 type DescribeJobFlowsResponse struct {
-	*DescribeJobFlowsOutput
+	*types.DescribeJobFlowsOutput
 
 	response *aws.Response
 }

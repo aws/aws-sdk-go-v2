@@ -6,61 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
+	"github.com/aws/aws-sdk-go-v2/service/kms/types"
 )
-
-type RetireGrantInput struct {
-	_ struct{} `type:"structure"`
-
-	// Unique identifier of the grant to retire. The grant ID is returned in the
-	// response to a CreateGrant operation.
-	//
-	//    * Grant ID Example - 0123456789012345678901234567890123456789012345678901234567890123
-	GrantId *string `min:"1" type:"string"`
-
-	// Token that identifies the grant to be retired.
-	GrantToken *string `min:"1" type:"string"`
-
-	// The Amazon Resource Name (ARN) of the CMK associated with the grant.
-	//
-	// For example: arn:aws:kms:us-east-2:444455556666:key/1234abcd-12ab-34cd-56ef-1234567890ab
-	KeyId *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s RetireGrantInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *RetireGrantInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "RetireGrantInput"}
-	if s.GrantId != nil && len(*s.GrantId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("GrantId", 1))
-	}
-	if s.GrantToken != nil && len(*s.GrantToken) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("GrantToken", 1))
-	}
-	if s.KeyId != nil && len(*s.KeyId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("KeyId", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type RetireGrantOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s RetireGrantOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opRetireGrant = "RetireGrant"
 
@@ -92,7 +41,7 @@ const opRetireGrant = "RetireGrant"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/RetireGrant
-func (c *Client) RetireGrantRequest(input *RetireGrantInput) RetireGrantRequest {
+func (c *Client) RetireGrantRequest(input *types.RetireGrantInput) RetireGrantRequest {
 	op := &aws.Operation{
 		Name:       opRetireGrant,
 		HTTPMethod: "POST",
@@ -100,10 +49,10 @@ func (c *Client) RetireGrantRequest(input *RetireGrantInput) RetireGrantRequest 
 	}
 
 	if input == nil {
-		input = &RetireGrantInput{}
+		input = &types.RetireGrantInput{}
 	}
 
-	req := c.newRequest(op, input, &RetireGrantOutput{})
+	req := c.newRequest(op, input, &types.RetireGrantOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return RetireGrantRequest{Request: req, Input: input, Copy: c.RetireGrantRequest}
@@ -113,8 +62,8 @@ func (c *Client) RetireGrantRequest(input *RetireGrantInput) RetireGrantRequest 
 // RetireGrant API operation.
 type RetireGrantRequest struct {
 	*aws.Request
-	Input *RetireGrantInput
-	Copy  func(*RetireGrantInput) RetireGrantRequest
+	Input *types.RetireGrantInput
+	Copy  func(*types.RetireGrantInput) RetireGrantRequest
 }
 
 // Send marshals and sends the RetireGrant API request.
@@ -126,7 +75,7 @@ func (r RetireGrantRequest) Send(ctx context.Context) (*RetireGrantResponse, err
 	}
 
 	resp := &RetireGrantResponse{
-		RetireGrantOutput: r.Request.Data.(*RetireGrantOutput),
+		RetireGrantOutput: r.Request.Data.(*types.RetireGrantOutput),
 		response:          &aws.Response{Request: r.Request},
 	}
 
@@ -136,7 +85,7 @@ func (r RetireGrantRequest) Send(ctx context.Context) (*RetireGrantResponse, err
 // RetireGrantResponse is the response type for the
 // RetireGrant API operation.
 type RetireGrantResponse struct {
-	*RetireGrantOutput
+	*types.RetireGrantOutput
 
 	response *aws.Response
 }

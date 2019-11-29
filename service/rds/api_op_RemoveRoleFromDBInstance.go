@@ -6,67 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/query"
+	"github.com/aws/aws-sdk-go-v2/service/rds/types"
 )
-
-type RemoveRoleFromDBInstanceInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the DB instance to disassociate the IAM role from.
-	//
-	// DBInstanceIdentifier is a required field
-	DBInstanceIdentifier *string `type:"string" required:"true"`
-
-	// The name of the feature for the DB instance that the IAM role is to be disassociated
-	// from. For the list of supported feature names, see DBEngineVersion.
-	//
-	// FeatureName is a required field
-	FeatureName *string `type:"string" required:"true"`
-
-	// The Amazon Resource Name (ARN) of the IAM role to disassociate from the DB
-	// instance, for example arn:aws:iam::123456789012:role/AccessRole.
-	//
-	// RoleArn is a required field
-	RoleArn *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s RemoveRoleFromDBInstanceInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *RemoveRoleFromDBInstanceInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "RemoveRoleFromDBInstanceInput"}
-
-	if s.DBInstanceIdentifier == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DBInstanceIdentifier"))
-	}
-
-	if s.FeatureName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("FeatureName"))
-	}
-
-	if s.RoleArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("RoleArn"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type RemoveRoleFromDBInstanceOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s RemoveRoleFromDBInstanceOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opRemoveRoleFromDBInstance = "RemoveRoleFromDBInstance"
 
@@ -84,7 +27,7 @@ const opRemoveRoleFromDBInstance = "RemoveRoleFromDBInstance"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RemoveRoleFromDBInstance
-func (c *Client) RemoveRoleFromDBInstanceRequest(input *RemoveRoleFromDBInstanceInput) RemoveRoleFromDBInstanceRequest {
+func (c *Client) RemoveRoleFromDBInstanceRequest(input *types.RemoveRoleFromDBInstanceInput) RemoveRoleFromDBInstanceRequest {
 	op := &aws.Operation{
 		Name:       opRemoveRoleFromDBInstance,
 		HTTPMethod: "POST",
@@ -92,10 +35,10 @@ func (c *Client) RemoveRoleFromDBInstanceRequest(input *RemoveRoleFromDBInstance
 	}
 
 	if input == nil {
-		input = &RemoveRoleFromDBInstanceInput{}
+		input = &types.RemoveRoleFromDBInstanceInput{}
 	}
 
-	req := c.newRequest(op, input, &RemoveRoleFromDBInstanceOutput{})
+	req := c.newRequest(op, input, &types.RemoveRoleFromDBInstanceOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return RemoveRoleFromDBInstanceRequest{Request: req, Input: input, Copy: c.RemoveRoleFromDBInstanceRequest}
@@ -105,8 +48,8 @@ func (c *Client) RemoveRoleFromDBInstanceRequest(input *RemoveRoleFromDBInstance
 // RemoveRoleFromDBInstance API operation.
 type RemoveRoleFromDBInstanceRequest struct {
 	*aws.Request
-	Input *RemoveRoleFromDBInstanceInput
-	Copy  func(*RemoveRoleFromDBInstanceInput) RemoveRoleFromDBInstanceRequest
+	Input *types.RemoveRoleFromDBInstanceInput
+	Copy  func(*types.RemoveRoleFromDBInstanceInput) RemoveRoleFromDBInstanceRequest
 }
 
 // Send marshals and sends the RemoveRoleFromDBInstance API request.
@@ -118,7 +61,7 @@ func (r RemoveRoleFromDBInstanceRequest) Send(ctx context.Context) (*RemoveRoleF
 	}
 
 	resp := &RemoveRoleFromDBInstanceResponse{
-		RemoveRoleFromDBInstanceOutput: r.Request.Data.(*RemoveRoleFromDBInstanceOutput),
+		RemoveRoleFromDBInstanceOutput: r.Request.Data.(*types.RemoveRoleFromDBInstanceOutput),
 		response:                       &aws.Response{Request: r.Request},
 	}
 
@@ -128,7 +71,7 @@ func (r RemoveRoleFromDBInstanceRequest) Send(ctx context.Context) (*RemoveRoleF
 // RemoveRoleFromDBInstanceResponse is the response type for the
 // RemoveRoleFromDBInstance API operation.
 type RemoveRoleFromDBInstanceResponse struct {
-	*RemoveRoleFromDBInstanceOutput
+	*types.RemoveRoleFromDBInstanceOutput
 
 	response *aws.Response
 }

@@ -6,74 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/cloudwatchevents/types"
 )
-
-type ListRuleNamesByTargetInput struct {
-	_ struct{} `type:"structure"`
-
-	// Limits the results to show only the rules associated with the specified event
-	// bus.
-	EventBusName *string `min:"1" type:"string"`
-
-	// The maximum number of results to return.
-	Limit *int64 `min:"1" type:"integer"`
-
-	// The token returned by a previous call to retrieve the next set of results.
-	NextToken *string `min:"1" type:"string"`
-
-	// The Amazon Resource Name (ARN) of the target resource.
-	//
-	// TargetArn is a required field
-	TargetArn *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s ListRuleNamesByTargetInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListRuleNamesByTargetInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListRuleNamesByTargetInput"}
-	if s.EventBusName != nil && len(*s.EventBusName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("EventBusName", 1))
-	}
-	if s.Limit != nil && *s.Limit < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("Limit", 1))
-	}
-	if s.NextToken != nil && len(*s.NextToken) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
-	}
-
-	if s.TargetArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("TargetArn"))
-	}
-	if s.TargetArn != nil && len(*s.TargetArn) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("TargetArn", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ListRuleNamesByTargetOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Indicates whether there are additional results to retrieve. If there are
-	// no more results, the value is null.
-	NextToken *string `min:"1" type:"string"`
-
-	// The names of the rules that can invoke the given target.
-	RuleNames []string `type:"list"`
-}
-
-// String returns the string representation
-func (s ListRuleNamesByTargetOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListRuleNamesByTarget = "ListRuleNamesByTarget"
 
@@ -91,7 +25,7 @@ const opListRuleNamesByTarget = "ListRuleNamesByTarget"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/ListRuleNamesByTarget
-func (c *Client) ListRuleNamesByTargetRequest(input *ListRuleNamesByTargetInput) ListRuleNamesByTargetRequest {
+func (c *Client) ListRuleNamesByTargetRequest(input *types.ListRuleNamesByTargetInput) ListRuleNamesByTargetRequest {
 	op := &aws.Operation{
 		Name:       opListRuleNamesByTarget,
 		HTTPMethod: "POST",
@@ -99,10 +33,10 @@ func (c *Client) ListRuleNamesByTargetRequest(input *ListRuleNamesByTargetInput)
 	}
 
 	if input == nil {
-		input = &ListRuleNamesByTargetInput{}
+		input = &types.ListRuleNamesByTargetInput{}
 	}
 
-	req := c.newRequest(op, input, &ListRuleNamesByTargetOutput{})
+	req := c.newRequest(op, input, &types.ListRuleNamesByTargetOutput{})
 	return ListRuleNamesByTargetRequest{Request: req, Input: input, Copy: c.ListRuleNamesByTargetRequest}
 }
 
@@ -110,8 +44,8 @@ func (c *Client) ListRuleNamesByTargetRequest(input *ListRuleNamesByTargetInput)
 // ListRuleNamesByTarget API operation.
 type ListRuleNamesByTargetRequest struct {
 	*aws.Request
-	Input *ListRuleNamesByTargetInput
-	Copy  func(*ListRuleNamesByTargetInput) ListRuleNamesByTargetRequest
+	Input *types.ListRuleNamesByTargetInput
+	Copy  func(*types.ListRuleNamesByTargetInput) ListRuleNamesByTargetRequest
 }
 
 // Send marshals and sends the ListRuleNamesByTarget API request.
@@ -123,7 +57,7 @@ func (r ListRuleNamesByTargetRequest) Send(ctx context.Context) (*ListRuleNamesB
 	}
 
 	resp := &ListRuleNamesByTargetResponse{
-		ListRuleNamesByTargetOutput: r.Request.Data.(*ListRuleNamesByTargetOutput),
+		ListRuleNamesByTargetOutput: r.Request.Data.(*types.ListRuleNamesByTargetOutput),
 		response:                    &aws.Response{Request: r.Request},
 	}
 
@@ -133,7 +67,7 @@ func (r ListRuleNamesByTargetRequest) Send(ctx context.Context) (*ListRuleNamesB
 // ListRuleNamesByTargetResponse is the response type for the
 // ListRuleNamesByTarget API operation.
 type ListRuleNamesByTargetResponse struct {
-	*ListRuleNamesByTargetOutput
+	*types.ListRuleNamesByTargetOutput
 
 	response *aws.Response
 }

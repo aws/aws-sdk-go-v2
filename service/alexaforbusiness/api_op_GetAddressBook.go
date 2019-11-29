@@ -6,48 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/alexaforbusiness/types"
 )
-
-type GetAddressBookInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ARN of the address book for which to request details.
-	//
-	// AddressBookArn is a required field
-	AddressBookArn *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetAddressBookInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetAddressBookInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetAddressBookInput"}
-
-	if s.AddressBookArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("AddressBookArn"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type GetAddressBookOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The details of the requested address book.
-	AddressBook *AddressBook `type:"structure"`
-}
-
-// String returns the string representation
-func (s GetAddressBookOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetAddressBook = "GetAddressBook"
 
@@ -64,7 +24,7 @@ const opGetAddressBook = "GetAddressBook"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/GetAddressBook
-func (c *Client) GetAddressBookRequest(input *GetAddressBookInput) GetAddressBookRequest {
+func (c *Client) GetAddressBookRequest(input *types.GetAddressBookInput) GetAddressBookRequest {
 	op := &aws.Operation{
 		Name:       opGetAddressBook,
 		HTTPMethod: "POST",
@@ -72,10 +32,10 @@ func (c *Client) GetAddressBookRequest(input *GetAddressBookInput) GetAddressBoo
 	}
 
 	if input == nil {
-		input = &GetAddressBookInput{}
+		input = &types.GetAddressBookInput{}
 	}
 
-	req := c.newRequest(op, input, &GetAddressBookOutput{})
+	req := c.newRequest(op, input, &types.GetAddressBookOutput{})
 	return GetAddressBookRequest{Request: req, Input: input, Copy: c.GetAddressBookRequest}
 }
 
@@ -83,8 +43,8 @@ func (c *Client) GetAddressBookRequest(input *GetAddressBookInput) GetAddressBoo
 // GetAddressBook API operation.
 type GetAddressBookRequest struct {
 	*aws.Request
-	Input *GetAddressBookInput
-	Copy  func(*GetAddressBookInput) GetAddressBookRequest
+	Input *types.GetAddressBookInput
+	Copy  func(*types.GetAddressBookInput) GetAddressBookRequest
 }
 
 // Send marshals and sends the GetAddressBook API request.
@@ -96,7 +56,7 @@ func (r GetAddressBookRequest) Send(ctx context.Context) (*GetAddressBookRespons
 	}
 
 	resp := &GetAddressBookResponse{
-		GetAddressBookOutput: r.Request.Data.(*GetAddressBookOutput),
+		GetAddressBookOutput: r.Request.Data.(*types.GetAddressBookOutput),
 		response:             &aws.Response{Request: r.Request},
 	}
 
@@ -106,7 +66,7 @@ func (r GetAddressBookRequest) Send(ctx context.Context) (*GetAddressBookRespons
 // GetAddressBookResponse is the response type for the
 // GetAddressBook API operation.
 type GetAddressBookResponse struct {
-	*GetAddressBookOutput
+	*types.GetAddressBookOutput
 
 	response *aws.Response
 }

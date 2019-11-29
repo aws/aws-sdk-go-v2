@@ -6,48 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/mturk/types"
 )
-
-type DeleteQualificationTypeInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the QualificationType to dispose.
-	//
-	// QualificationTypeId is a required field
-	QualificationTypeId *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteQualificationTypeInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteQualificationTypeInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteQualificationTypeInput"}
-
-	if s.QualificationTypeId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("QualificationTypeId"))
-	}
-	if s.QualificationTypeId != nil && len(*s.QualificationTypeId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("QualificationTypeId", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteQualificationTypeOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteQualificationTypeOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteQualificationType = "DeleteQualificationType"
 
@@ -76,7 +36,7 @@ const opDeleteQualificationType = "DeleteQualificationType"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/DeleteQualificationType
-func (c *Client) DeleteQualificationTypeRequest(input *DeleteQualificationTypeInput) DeleteQualificationTypeRequest {
+func (c *Client) DeleteQualificationTypeRequest(input *types.DeleteQualificationTypeInput) DeleteQualificationTypeRequest {
 	op := &aws.Operation{
 		Name:       opDeleteQualificationType,
 		HTTPMethod: "POST",
@@ -84,10 +44,10 @@ func (c *Client) DeleteQualificationTypeRequest(input *DeleteQualificationTypeIn
 	}
 
 	if input == nil {
-		input = &DeleteQualificationTypeInput{}
+		input = &types.DeleteQualificationTypeInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteQualificationTypeOutput{})
+	req := c.newRequest(op, input, &types.DeleteQualificationTypeOutput{})
 	return DeleteQualificationTypeRequest{Request: req, Input: input, Copy: c.DeleteQualificationTypeRequest}
 }
 
@@ -95,8 +55,8 @@ func (c *Client) DeleteQualificationTypeRequest(input *DeleteQualificationTypeIn
 // DeleteQualificationType API operation.
 type DeleteQualificationTypeRequest struct {
 	*aws.Request
-	Input *DeleteQualificationTypeInput
-	Copy  func(*DeleteQualificationTypeInput) DeleteQualificationTypeRequest
+	Input *types.DeleteQualificationTypeInput
+	Copy  func(*types.DeleteQualificationTypeInput) DeleteQualificationTypeRequest
 }
 
 // Send marshals and sends the DeleteQualificationType API request.
@@ -108,7 +68,7 @@ func (r DeleteQualificationTypeRequest) Send(ctx context.Context) (*DeleteQualif
 	}
 
 	resp := &DeleteQualificationTypeResponse{
-		DeleteQualificationTypeOutput: r.Request.Data.(*DeleteQualificationTypeOutput),
+		DeleteQualificationTypeOutput: r.Request.Data.(*types.DeleteQualificationTypeOutput),
 		response:                      &aws.Response{Request: r.Request},
 	}
 
@@ -118,7 +78,7 @@ func (r DeleteQualificationTypeRequest) Send(ctx context.Context) (*DeleteQualif
 // DeleteQualificationTypeResponse is the response type for the
 // DeleteQualificationType API operation.
 type DeleteQualificationTypeResponse struct {
-	*DeleteQualificationTypeOutput
+	*types.DeleteQualificationTypeOutput
 
 	response *aws.Response
 }

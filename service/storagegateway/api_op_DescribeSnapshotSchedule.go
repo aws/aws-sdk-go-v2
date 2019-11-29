@@ -6,73 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/storagegateway/types"
 )
-
-// A JSON object containing the DescribeSnapshotScheduleInput$VolumeARN of the
-// volume.
-type DescribeSnapshotScheduleInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the volume. Use the ListVolumes operation
-	// to return a list of gateway volumes.
-	//
-	// VolumeARN is a required field
-	VolumeARN *string `min:"50" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeSnapshotScheduleInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeSnapshotScheduleInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeSnapshotScheduleInput"}
-
-	if s.VolumeARN == nil {
-		invalidParams.Add(aws.NewErrParamRequired("VolumeARN"))
-	}
-	if s.VolumeARN != nil && len(*s.VolumeARN) < 50 {
-		invalidParams.Add(aws.NewErrParamMinLen("VolumeARN", 50))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribeSnapshotScheduleOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The snapshot description.
-	Description *string `min:"1" type:"string"`
-
-	// The number of hours between snapshots.
-	RecurrenceInHours *int64 `min:"1" type:"integer"`
-
-	// The hour of the day at which the snapshot schedule begins represented as
-	// hh, where hh is the hour (0 to 23). The hour of the day is in the time zone
-	// of the gateway.
-	StartAt *int64 `type:"integer"`
-
-	// A list of up to 50 tags assigned to the snapshot schedule, sorted alphabetically
-	// by key name. Each tag is a key-value pair. For a gateway with more than 10
-	// tags assigned, you can view all tags using the ListTagsForResource API operation.
-	Tags []Tag `type:"list"`
-
-	// A value that indicates the time zone of the gateway.
-	Timezone *string `min:"3" type:"string"`
-
-	// The Amazon Resource Name (ARN) of the volume that was specified in the request.
-	VolumeARN *string `min:"50" type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeSnapshotScheduleOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeSnapshotSchedule = "DescribeSnapshotSchedule"
 
@@ -92,7 +27,7 @@ const opDescribeSnapshotSchedule = "DescribeSnapshotSchedule"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DescribeSnapshotSchedule
-func (c *Client) DescribeSnapshotScheduleRequest(input *DescribeSnapshotScheduleInput) DescribeSnapshotScheduleRequest {
+func (c *Client) DescribeSnapshotScheduleRequest(input *types.DescribeSnapshotScheduleInput) DescribeSnapshotScheduleRequest {
 	op := &aws.Operation{
 		Name:       opDescribeSnapshotSchedule,
 		HTTPMethod: "POST",
@@ -100,10 +35,10 @@ func (c *Client) DescribeSnapshotScheduleRequest(input *DescribeSnapshotSchedule
 	}
 
 	if input == nil {
-		input = &DescribeSnapshotScheduleInput{}
+		input = &types.DescribeSnapshotScheduleInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeSnapshotScheduleOutput{})
+	req := c.newRequest(op, input, &types.DescribeSnapshotScheduleOutput{})
 	return DescribeSnapshotScheduleRequest{Request: req, Input: input, Copy: c.DescribeSnapshotScheduleRequest}
 }
 
@@ -111,8 +46,8 @@ func (c *Client) DescribeSnapshotScheduleRequest(input *DescribeSnapshotSchedule
 // DescribeSnapshotSchedule API operation.
 type DescribeSnapshotScheduleRequest struct {
 	*aws.Request
-	Input *DescribeSnapshotScheduleInput
-	Copy  func(*DescribeSnapshotScheduleInput) DescribeSnapshotScheduleRequest
+	Input *types.DescribeSnapshotScheduleInput
+	Copy  func(*types.DescribeSnapshotScheduleInput) DescribeSnapshotScheduleRequest
 }
 
 // Send marshals and sends the DescribeSnapshotSchedule API request.
@@ -124,7 +59,7 @@ func (r DescribeSnapshotScheduleRequest) Send(ctx context.Context) (*DescribeSna
 	}
 
 	resp := &DescribeSnapshotScheduleResponse{
-		DescribeSnapshotScheduleOutput: r.Request.Data.(*DescribeSnapshotScheduleOutput),
+		DescribeSnapshotScheduleOutput: r.Request.Data.(*types.DescribeSnapshotScheduleOutput),
 		response:                       &aws.Response{Request: r.Request},
 	}
 
@@ -134,7 +69,7 @@ func (r DescribeSnapshotScheduleRequest) Send(ctx context.Context) (*DescribeSna
 // DescribeSnapshotScheduleResponse is the response type for the
 // DescribeSnapshotSchedule API operation.
 type DescribeSnapshotScheduleResponse struct {
-	*DescribeSnapshotScheduleOutput
+	*types.DescribeSnapshotScheduleOutput
 
 	response *aws.Response
 }

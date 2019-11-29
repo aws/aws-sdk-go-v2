@@ -6,124 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/directconnect/types"
 )
-
-type UpdateLagInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the LAG.
-	//
-	// LagId is a required field
-	LagId *string `locationName:"lagId" type:"string" required:"true"`
-
-	// The name of the LAG.
-	LagName *string `locationName:"lagName" type:"string"`
-
-	// The minimum number of physical connections that must be operational for the
-	// LAG itself to be operational.
-	MinimumLinks *int64 `locationName:"minimumLinks" type:"integer"`
-}
-
-// String returns the string representation
-func (s UpdateLagInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateLagInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateLagInput"}
-
-	if s.LagId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("LagId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Information about a link aggregation group (LAG).
-type UpdateLagOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Indicates whether the LAG can host other connections.
-	AllowsHostedConnections *bool `locationName:"allowsHostedConnections" type:"boolean"`
-
-	// The AWS Direct Connect endpoint that hosts the LAG.
-	AwsDevice *string `locationName:"awsDevice" deprecated:"true" type:"string"`
-
-	// The AWS Direct Connect endpoint that hosts the LAG.
-	AwsDeviceV2 *string `locationName:"awsDeviceV2" type:"string"`
-
-	// The connections bundled by the LAG.
-	Connections []Connection `locationName:"connections" type:"list"`
-
-	// The individual bandwidth of the physical connections bundled by the LAG.
-	// The possible values are 1Gbps and 10Gbps.
-	ConnectionsBandwidth *string `locationName:"connectionsBandwidth" type:"string"`
-
-	// Indicates whether the LAG supports a secondary BGP peer in the same address
-	// family (IPv4/IPv6).
-	HasLogicalRedundancy HasLogicalRedundancy `locationName:"hasLogicalRedundancy" type:"string" enum:"true"`
-
-	// Indicates whether jumbo frames (9001 MTU) are supported.
-	JumboFrameCapable *bool `locationName:"jumboFrameCapable" type:"boolean"`
-
-	// The ID of the LAG.
-	LagId *string `locationName:"lagId" type:"string"`
-
-	// The name of the LAG.
-	LagName *string `locationName:"lagName" type:"string"`
-
-	// The state of the LAG. The following are the possible values:
-	//
-	//    * requested: The initial state of a LAG. The LAG stays in the requested
-	//    state until the Letter of Authorization (LOA) is available.
-	//
-	//    * pending: The LAG has been approved and is being initialized.
-	//
-	//    * available: The network link is established and the LAG is ready for
-	//    use.
-	//
-	//    * down: The network link is down.
-	//
-	//    * deleting: The LAG is being deleted.
-	//
-	//    * deleted: The LAG is deleted.
-	//
-	//    * unknown: The state of the LAG is not available.
-	LagState LagState `locationName:"lagState" type:"string" enum:"true"`
-
-	// The location of the LAG.
-	Location *string `locationName:"location" type:"string"`
-
-	// The minimum number of physical connections that must be operational for the
-	// LAG itself to be operational.
-	MinimumLinks *int64 `locationName:"minimumLinks" type:"integer"`
-
-	// The number of physical connections bundled by the LAG, up to a maximum of
-	// 10.
-	NumberOfConnections *int64 `locationName:"numberOfConnections" type:"integer"`
-
-	// The ID of the AWS account that owns the LAG.
-	OwnerAccount *string `locationName:"ownerAccount" type:"string"`
-
-	// The name of the service provider associated with the LAG.
-	ProviderName *string `locationName:"providerName" type:"string"`
-
-	// The AWS Region where the connection is located.
-	Region *string `locationName:"region" type:"string"`
-
-	// The tags associated with the LAG.
-	Tags []Tag `locationName:"tags" min:"1" type:"list"`
-}
-
-// String returns the string representation
-func (s UpdateLagOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opUpdateLag = "UpdateLag"
 
@@ -154,7 +38,7 @@ const opUpdateLag = "UpdateLag"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/UpdateLag
-func (c *Client) UpdateLagRequest(input *UpdateLagInput) UpdateLagRequest {
+func (c *Client) UpdateLagRequest(input *types.UpdateLagInput) UpdateLagRequest {
 	op := &aws.Operation{
 		Name:       opUpdateLag,
 		HTTPMethod: "POST",
@@ -162,10 +46,10 @@ func (c *Client) UpdateLagRequest(input *UpdateLagInput) UpdateLagRequest {
 	}
 
 	if input == nil {
-		input = &UpdateLagInput{}
+		input = &types.UpdateLagInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateLagOutput{})
+	req := c.newRequest(op, input, &types.UpdateLagOutput{})
 	return UpdateLagRequest{Request: req, Input: input, Copy: c.UpdateLagRequest}
 }
 
@@ -173,8 +57,8 @@ func (c *Client) UpdateLagRequest(input *UpdateLagInput) UpdateLagRequest {
 // UpdateLag API operation.
 type UpdateLagRequest struct {
 	*aws.Request
-	Input *UpdateLagInput
-	Copy  func(*UpdateLagInput) UpdateLagRequest
+	Input *types.UpdateLagInput
+	Copy  func(*types.UpdateLagInput) UpdateLagRequest
 }
 
 // Send marshals and sends the UpdateLag API request.
@@ -186,7 +70,7 @@ func (r UpdateLagRequest) Send(ctx context.Context) (*UpdateLagResponse, error) 
 	}
 
 	resp := &UpdateLagResponse{
-		UpdateLagOutput: r.Request.Data.(*UpdateLagOutput),
+		UpdateLagOutput: r.Request.Data.(*types.UpdateLagOutput),
 		response:        &aws.Response{Request: r.Request},
 	}
 
@@ -196,7 +80,7 @@ func (r UpdateLagRequest) Send(ctx context.Context) (*UpdateLagResponse, error) 
 // UpdateLagResponse is the response type for the
 // UpdateLag API operation.
 type UpdateLagResponse struct {
-	*UpdateLagOutput
+	*types.UpdateLagOutput
 
 	response *aws.Response
 }

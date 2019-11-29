@@ -6,64 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/elasticache/types"
 )
-
-// Represents the input of a ModifyCacheSubnetGroup operation.
-type ModifyCacheSubnetGroupInput struct {
-	_ struct{} `type:"structure"`
-
-	// A description of the cache subnet group.
-	CacheSubnetGroupDescription *string `type:"string"`
-
-	// The name for the cache subnet group. This value is stored as a lowercase
-	// string.
-	//
-	// Constraints: Must contain no more than 255 alphanumeric characters or hyphens.
-	//
-	// Example: mysubnetgroup
-	//
-	// CacheSubnetGroupName is a required field
-	CacheSubnetGroupName *string `type:"string" required:"true"`
-
-	// The EC2 subnet IDs for the cache subnet group.
-	SubnetIds []string `locationNameList:"SubnetIdentifier" type:"list"`
-}
-
-// String returns the string representation
-func (s ModifyCacheSubnetGroupInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ModifyCacheSubnetGroupInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ModifyCacheSubnetGroupInput"}
-
-	if s.CacheSubnetGroupName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("CacheSubnetGroupName"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ModifyCacheSubnetGroupOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Represents the output of one of the following operations:
-	//
-	//    * CreateCacheSubnetGroup
-	//
-	//    * ModifyCacheSubnetGroup
-	CacheSubnetGroup *CacheSubnetGroup `type:"structure"`
-}
-
-// String returns the string representation
-func (s ModifyCacheSubnetGroupOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opModifyCacheSubnetGroup = "ModifyCacheSubnetGroup"
 
@@ -80,7 +24,7 @@ const opModifyCacheSubnetGroup = "ModifyCacheSubnetGroup"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/ModifyCacheSubnetGroup
-func (c *Client) ModifyCacheSubnetGroupRequest(input *ModifyCacheSubnetGroupInput) ModifyCacheSubnetGroupRequest {
+func (c *Client) ModifyCacheSubnetGroupRequest(input *types.ModifyCacheSubnetGroupInput) ModifyCacheSubnetGroupRequest {
 	op := &aws.Operation{
 		Name:       opModifyCacheSubnetGroup,
 		HTTPMethod: "POST",
@@ -88,10 +32,10 @@ func (c *Client) ModifyCacheSubnetGroupRequest(input *ModifyCacheSubnetGroupInpu
 	}
 
 	if input == nil {
-		input = &ModifyCacheSubnetGroupInput{}
+		input = &types.ModifyCacheSubnetGroupInput{}
 	}
 
-	req := c.newRequest(op, input, &ModifyCacheSubnetGroupOutput{})
+	req := c.newRequest(op, input, &types.ModifyCacheSubnetGroupOutput{})
 	return ModifyCacheSubnetGroupRequest{Request: req, Input: input, Copy: c.ModifyCacheSubnetGroupRequest}
 }
 
@@ -99,8 +43,8 @@ func (c *Client) ModifyCacheSubnetGroupRequest(input *ModifyCacheSubnetGroupInpu
 // ModifyCacheSubnetGroup API operation.
 type ModifyCacheSubnetGroupRequest struct {
 	*aws.Request
-	Input *ModifyCacheSubnetGroupInput
-	Copy  func(*ModifyCacheSubnetGroupInput) ModifyCacheSubnetGroupRequest
+	Input *types.ModifyCacheSubnetGroupInput
+	Copy  func(*types.ModifyCacheSubnetGroupInput) ModifyCacheSubnetGroupRequest
 }
 
 // Send marshals and sends the ModifyCacheSubnetGroup API request.
@@ -112,7 +56,7 @@ func (r ModifyCacheSubnetGroupRequest) Send(ctx context.Context) (*ModifyCacheSu
 	}
 
 	resp := &ModifyCacheSubnetGroupResponse{
-		ModifyCacheSubnetGroupOutput: r.Request.Data.(*ModifyCacheSubnetGroupOutput),
+		ModifyCacheSubnetGroupOutput: r.Request.Data.(*types.ModifyCacheSubnetGroupOutput),
 		response:                     &aws.Response{Request: r.Request},
 	}
 
@@ -122,7 +66,7 @@ func (r ModifyCacheSubnetGroupRequest) Send(ctx context.Context) (*ModifyCacheSu
 // ModifyCacheSubnetGroupResponse is the response type for the
 // ModifyCacheSubnetGroup API operation.
 type ModifyCacheSubnetGroupResponse struct {
-	*ModifyCacheSubnetGroupOutput
+	*types.ModifyCacheSubnetGroupOutput
 
 	response *aws.Response
 }

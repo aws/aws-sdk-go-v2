@@ -6,67 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/workmail/types"
 )
-
-type DisassociateDelegateFromResourceInput struct {
-	_ struct{} `type:"structure"`
-
-	// The identifier for the member (user, group) to be removed from the resource's
-	// delegates.
-	//
-	// EntityId is a required field
-	EntityId *string `min:"12" type:"string" required:"true"`
-
-	// The identifier for the organization under which the resource exists.
-	//
-	// OrganizationId is a required field
-	OrganizationId *string `type:"string" required:"true"`
-
-	// The identifier of the resource from which delegates' set members are removed.
-	//
-	// ResourceId is a required field
-	ResourceId *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DisassociateDelegateFromResourceInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DisassociateDelegateFromResourceInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DisassociateDelegateFromResourceInput"}
-
-	if s.EntityId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("EntityId"))
-	}
-	if s.EntityId != nil && len(*s.EntityId) < 12 {
-		invalidParams.Add(aws.NewErrParamMinLen("EntityId", 12))
-	}
-
-	if s.OrganizationId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("OrganizationId"))
-	}
-
-	if s.ResourceId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ResourceId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DisassociateDelegateFromResourceOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DisassociateDelegateFromResourceOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDisassociateDelegateFromResource = "DisassociateDelegateFromResource"
 
@@ -83,7 +24,7 @@ const opDisassociateDelegateFromResource = "DisassociateDelegateFromResource"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/DisassociateDelegateFromResource
-func (c *Client) DisassociateDelegateFromResourceRequest(input *DisassociateDelegateFromResourceInput) DisassociateDelegateFromResourceRequest {
+func (c *Client) DisassociateDelegateFromResourceRequest(input *types.DisassociateDelegateFromResourceInput) DisassociateDelegateFromResourceRequest {
 	op := &aws.Operation{
 		Name:       opDisassociateDelegateFromResource,
 		HTTPMethod: "POST",
@@ -91,10 +32,10 @@ func (c *Client) DisassociateDelegateFromResourceRequest(input *DisassociateDele
 	}
 
 	if input == nil {
-		input = &DisassociateDelegateFromResourceInput{}
+		input = &types.DisassociateDelegateFromResourceInput{}
 	}
 
-	req := c.newRequest(op, input, &DisassociateDelegateFromResourceOutput{})
+	req := c.newRequest(op, input, &types.DisassociateDelegateFromResourceOutput{})
 	return DisassociateDelegateFromResourceRequest{Request: req, Input: input, Copy: c.DisassociateDelegateFromResourceRequest}
 }
 
@@ -102,8 +43,8 @@ func (c *Client) DisassociateDelegateFromResourceRequest(input *DisassociateDele
 // DisassociateDelegateFromResource API operation.
 type DisassociateDelegateFromResourceRequest struct {
 	*aws.Request
-	Input *DisassociateDelegateFromResourceInput
-	Copy  func(*DisassociateDelegateFromResourceInput) DisassociateDelegateFromResourceRequest
+	Input *types.DisassociateDelegateFromResourceInput
+	Copy  func(*types.DisassociateDelegateFromResourceInput) DisassociateDelegateFromResourceRequest
 }
 
 // Send marshals and sends the DisassociateDelegateFromResource API request.
@@ -115,7 +56,7 @@ func (r DisassociateDelegateFromResourceRequest) Send(ctx context.Context) (*Dis
 	}
 
 	resp := &DisassociateDelegateFromResourceResponse{
-		DisassociateDelegateFromResourceOutput: r.Request.Data.(*DisassociateDelegateFromResourceOutput),
+		DisassociateDelegateFromResourceOutput: r.Request.Data.(*types.DisassociateDelegateFromResourceOutput),
 		response:                               &aws.Response{Request: r.Request},
 	}
 
@@ -125,7 +66,7 @@ func (r DisassociateDelegateFromResourceRequest) Send(ctx context.Context) (*Dis
 // DisassociateDelegateFromResourceResponse is the response type for the
 // DisassociateDelegateFromResource API operation.
 type DisassociateDelegateFromResourceResponse struct {
-	*DisassociateDelegateFromResourceOutput
+	*types.DisassociateDelegateFromResourceOutput
 
 	response *aws.Response
 }

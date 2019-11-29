@@ -6,116 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/pinpointemail/types"
 )
-
-// A request to obtain information about the email-sending capabilities of your
-// Amazon Pinpoint account.
-type GetAccountInput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s GetAccountInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetAccountInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	return nil
-}
-
-// A list of details about the email-sending capabilities of your Amazon Pinpoint
-// account in the current AWS Region.
-type GetAccountOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Indicates whether or not the automatic warm-up feature is enabled for dedicated
-	// IP addresses that are associated with your account.
-	DedicatedIpAutoWarmupEnabled *bool `type:"boolean"`
-
-	// The reputation status of your Amazon Pinpoint account. The status can be
-	// one of the following:
-	//
-	//    * HEALTHY – There are no reputation-related issues that currently impact
-	//    your account.
-	//
-	//    * PROBATION – We've identified some issues with your Amazon Pinpoint
-	//    account. We're placing your account under review while you work on correcting
-	//    these issues.
-	//
-	//    * SHUTDOWN – Your account's ability to send email is currently paused
-	//    because of an issue with the email sent from your account. When you correct
-	//    the issue, you can contact us and request that your account's ability
-	//    to send email is resumed.
-	EnforcementStatus *string `type:"string"`
-
-	// Indicates whether or not your account has production access in the current
-	// AWS Region.
-	//
-	// If the value is false, then your account is in the sandbox. When your account
-	// is in the sandbox, you can only send email to verified identities. Additionally,
-	// the maximum number of emails you can send in a 24-hour period (your sending
-	// quota) is 200, and the maximum number of emails you can send per second (your
-	// maximum sending rate) is 1.
-	//
-	// If the value is true, then your account has production access. When your
-	// account has production access, you can send email to any address. The sending
-	// quota and maximum sending rate for your account vary based on your specific
-	// use case.
-	ProductionAccessEnabled *bool `type:"boolean"`
-
-	// An object that contains information about the per-day and per-second sending
-	// limits for your Amazon Pinpoint account in the current AWS Region.
-	SendQuota *SendQuota `type:"structure"`
-
-	// Indicates whether or not email sending is enabled for your Amazon Pinpoint
-	// account in the current AWS Region.
-	SendingEnabled *bool `type:"boolean"`
-}
-
-// String returns the string representation
-func (s GetAccountOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetAccountOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.DedicatedIpAutoWarmupEnabled != nil {
-		v := *s.DedicatedIpAutoWarmupEnabled
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "DedicatedIpAutoWarmupEnabled", protocol.BoolValue(v), metadata)
-	}
-	if s.EnforcementStatus != nil {
-		v := *s.EnforcementStatus
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "EnforcementStatus", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.ProductionAccessEnabled != nil {
-		v := *s.ProductionAccessEnabled
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "ProductionAccessEnabled", protocol.BoolValue(v), metadata)
-	}
-	if s.SendQuota != nil {
-		v := s.SendQuota
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "SendQuota", v, metadata)
-	}
-	if s.SendingEnabled != nil {
-		v := *s.SendingEnabled
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "SendingEnabled", protocol.BoolValue(v), metadata)
-	}
-	return nil
-}
 
 const opGetAccount = "GetAccount"
 
@@ -133,7 +25,7 @@ const opGetAccount = "GetAccount"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/GetAccount
-func (c *Client) GetAccountRequest(input *GetAccountInput) GetAccountRequest {
+func (c *Client) GetAccountRequest(input *types.GetAccountInput) GetAccountRequest {
 	op := &aws.Operation{
 		Name:       opGetAccount,
 		HTTPMethod: "GET",
@@ -141,10 +33,10 @@ func (c *Client) GetAccountRequest(input *GetAccountInput) GetAccountRequest {
 	}
 
 	if input == nil {
-		input = &GetAccountInput{}
+		input = &types.GetAccountInput{}
 	}
 
-	req := c.newRequest(op, input, &GetAccountOutput{})
+	req := c.newRequest(op, input, &types.GetAccountOutput{})
 	return GetAccountRequest{Request: req, Input: input, Copy: c.GetAccountRequest}
 }
 
@@ -152,8 +44,8 @@ func (c *Client) GetAccountRequest(input *GetAccountInput) GetAccountRequest {
 // GetAccount API operation.
 type GetAccountRequest struct {
 	*aws.Request
-	Input *GetAccountInput
-	Copy  func(*GetAccountInput) GetAccountRequest
+	Input *types.GetAccountInput
+	Copy  func(*types.GetAccountInput) GetAccountRequest
 }
 
 // Send marshals and sends the GetAccount API request.
@@ -165,7 +57,7 @@ func (r GetAccountRequest) Send(ctx context.Context) (*GetAccountResponse, error
 	}
 
 	resp := &GetAccountResponse{
-		GetAccountOutput: r.Request.Data.(*GetAccountOutput),
+		GetAccountOutput: r.Request.Data.(*types.GetAccountOutput),
 		response:         &aws.Response{Request: r.Request},
 	}
 
@@ -175,7 +67,7 @@ func (r GetAccountRequest) Send(ctx context.Context) (*GetAccountResponse, error
 // GetAccountResponse is the response type for the
 // GetAccount API operation.
 type GetAccountResponse struct {
-	*GetAccountOutput
+	*types.GetAccountOutput
 
 	response *aws.Response
 }

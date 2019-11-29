@@ -6,55 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/personalize/types"
 )
-
-type ListSolutionsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the dataset group.
-	DatasetGroupArn *string `locationName:"datasetGroupArn" type:"string"`
-
-	// The maximum number of solutions to return.
-	MaxResults *int64 `locationName:"maxResults" min:"1" type:"integer"`
-
-	// A token returned from the previous call to ListSolutions for getting the
-	// next set of solutions (if they exist).
-	NextToken *string `locationName:"nextToken" type:"string"`
-}
-
-// String returns the string representation
-func (s ListSolutionsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListSolutionsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListSolutionsInput"}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ListSolutionsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A token for getting the next set of solutions (if they exist).
-	NextToken *string `locationName:"nextToken" type:"string"`
-
-	// A list of the current solutions.
-	Solutions []SolutionSummary `locationName:"solutions" type:"list"`
-}
-
-// String returns the string representation
-func (s ListSolutionsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListSolutions = "ListSolutions"
 
@@ -74,7 +27,7 @@ const opListSolutions = "ListSolutions"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/ListSolutions
-func (c *Client) ListSolutionsRequest(input *ListSolutionsInput) ListSolutionsRequest {
+func (c *Client) ListSolutionsRequest(input *types.ListSolutionsInput) ListSolutionsRequest {
 	op := &aws.Operation{
 		Name:       opListSolutions,
 		HTTPMethod: "POST",
@@ -88,10 +41,10 @@ func (c *Client) ListSolutionsRequest(input *ListSolutionsInput) ListSolutionsRe
 	}
 
 	if input == nil {
-		input = &ListSolutionsInput{}
+		input = &types.ListSolutionsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListSolutionsOutput{})
+	req := c.newRequest(op, input, &types.ListSolutionsOutput{})
 	return ListSolutionsRequest{Request: req, Input: input, Copy: c.ListSolutionsRequest}
 }
 
@@ -99,8 +52,8 @@ func (c *Client) ListSolutionsRequest(input *ListSolutionsInput) ListSolutionsRe
 // ListSolutions API operation.
 type ListSolutionsRequest struct {
 	*aws.Request
-	Input *ListSolutionsInput
-	Copy  func(*ListSolutionsInput) ListSolutionsRequest
+	Input *types.ListSolutionsInput
+	Copy  func(*types.ListSolutionsInput) ListSolutionsRequest
 }
 
 // Send marshals and sends the ListSolutions API request.
@@ -112,7 +65,7 @@ func (r ListSolutionsRequest) Send(ctx context.Context) (*ListSolutionsResponse,
 	}
 
 	resp := &ListSolutionsResponse{
-		ListSolutionsOutput: r.Request.Data.(*ListSolutionsOutput),
+		ListSolutionsOutput: r.Request.Data.(*types.ListSolutionsOutput),
 		response:            &aws.Response{Request: r.Request},
 	}
 
@@ -142,7 +95,7 @@ func NewListSolutionsPaginator(req ListSolutionsRequest) ListSolutionsPaginator 
 	return ListSolutionsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListSolutionsInput
+				var inCpy *types.ListSolutionsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -162,14 +115,14 @@ type ListSolutionsPaginator struct {
 	aws.Pager
 }
 
-func (p *ListSolutionsPaginator) CurrentPage() *ListSolutionsOutput {
-	return p.Pager.CurrentPage().(*ListSolutionsOutput)
+func (p *ListSolutionsPaginator) CurrentPage() *types.ListSolutionsOutput {
+	return p.Pager.CurrentPage().(*types.ListSolutionsOutput)
 }
 
 // ListSolutionsResponse is the response type for the
 // ListSolutions API operation.
 type ListSolutionsResponse struct {
-	*ListSolutionsOutput
+	*types.ListSolutionsOutput
 
 	response *aws.Response
 }

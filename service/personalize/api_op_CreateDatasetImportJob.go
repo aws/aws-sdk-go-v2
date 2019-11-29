@@ -6,79 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/personalize/types"
 )
-
-type CreateDatasetImportJobInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon S3 bucket that contains the training data to import.
-	//
-	// DataSource is a required field
-	DataSource *DataSource `locationName:"dataSource" type:"structure" required:"true"`
-
-	// The ARN of the dataset that receives the imported data.
-	//
-	// DatasetArn is a required field
-	DatasetArn *string `locationName:"datasetArn" type:"string" required:"true"`
-
-	// The name for the dataset import job.
-	//
-	// JobName is a required field
-	JobName *string `locationName:"jobName" min:"1" type:"string" required:"true"`
-
-	// The ARN of the IAM role that has permissions to read from the Amazon S3 data
-	// source.
-	//
-	// RoleArn is a required field
-	RoleArn *string `locationName:"roleArn" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s CreateDatasetImportJobInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateDatasetImportJobInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateDatasetImportJobInput"}
-
-	if s.DataSource == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DataSource"))
-	}
-
-	if s.DatasetArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DatasetArn"))
-	}
-
-	if s.JobName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("JobName"))
-	}
-	if s.JobName != nil && len(*s.JobName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("JobName", 1))
-	}
-
-	if s.RoleArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("RoleArn"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type CreateDatasetImportJobOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The ARN of the dataset import job.
-	DatasetImportJobArn *string `locationName:"datasetImportJobArn" type:"string"`
-}
-
-// String returns the string representation
-func (s CreateDatasetImportJobOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCreateDatasetImportJob = "CreateDatasetImportJob"
 
@@ -121,7 +50,7 @@ const opCreateDatasetImportJob = "CreateDatasetImportJob"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/CreateDatasetImportJob
-func (c *Client) CreateDatasetImportJobRequest(input *CreateDatasetImportJobInput) CreateDatasetImportJobRequest {
+func (c *Client) CreateDatasetImportJobRequest(input *types.CreateDatasetImportJobInput) CreateDatasetImportJobRequest {
 	op := &aws.Operation{
 		Name:       opCreateDatasetImportJob,
 		HTTPMethod: "POST",
@@ -129,10 +58,10 @@ func (c *Client) CreateDatasetImportJobRequest(input *CreateDatasetImportJobInpu
 	}
 
 	if input == nil {
-		input = &CreateDatasetImportJobInput{}
+		input = &types.CreateDatasetImportJobInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateDatasetImportJobOutput{})
+	req := c.newRequest(op, input, &types.CreateDatasetImportJobOutput{})
 	return CreateDatasetImportJobRequest{Request: req, Input: input, Copy: c.CreateDatasetImportJobRequest}
 }
 
@@ -140,8 +69,8 @@ func (c *Client) CreateDatasetImportJobRequest(input *CreateDatasetImportJobInpu
 // CreateDatasetImportJob API operation.
 type CreateDatasetImportJobRequest struct {
 	*aws.Request
-	Input *CreateDatasetImportJobInput
-	Copy  func(*CreateDatasetImportJobInput) CreateDatasetImportJobRequest
+	Input *types.CreateDatasetImportJobInput
+	Copy  func(*types.CreateDatasetImportJobInput) CreateDatasetImportJobRequest
 }
 
 // Send marshals and sends the CreateDatasetImportJob API request.
@@ -153,7 +82,7 @@ func (r CreateDatasetImportJobRequest) Send(ctx context.Context) (*CreateDataset
 	}
 
 	resp := &CreateDatasetImportJobResponse{
-		CreateDatasetImportJobOutput: r.Request.Data.(*CreateDatasetImportJobOutput),
+		CreateDatasetImportJobOutput: r.Request.Data.(*types.CreateDatasetImportJobOutput),
 		response:                     &aws.Response{Request: r.Request},
 	}
 
@@ -163,7 +92,7 @@ func (r CreateDatasetImportJobRequest) Send(ctx context.Context) (*CreateDataset
 // CreateDatasetImportJobResponse is the response type for the
 // CreateDatasetImportJob API operation.
 type CreateDatasetImportJobResponse struct {
-	*CreateDatasetImportJobOutput
+	*types.CreateDatasetImportJobOutput
 
 	response *aws.Response
 }

@@ -4,78 +4,12 @@ package acm
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
+	"github.com/aws/aws-sdk-go-v2/service/acm/types"
 )
-
-type RemoveTagsFromCertificateInput struct {
-	_ struct{} `type:"structure"`
-
-	// String that contains the ARN of the ACM Certificate with one or more tags
-	// that you want to remove. This must be of the form:
-	//
-	// arn:aws:acm:region:123456789012:certificate/12345678-1234-1234-1234-123456789012
-	//
-	// For more information about ARNs, see Amazon Resource Names (ARNs) and AWS
-	// Service Namespaces (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html).
-	//
-	// CertificateArn is a required field
-	CertificateArn *string `min:"20" type:"string" required:"true"`
-
-	// The key-value pair that defines the tag to remove.
-	//
-	// Tags is a required field
-	Tags []Tag `min:"1" type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s RemoveTagsFromCertificateInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *RemoveTagsFromCertificateInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "RemoveTagsFromCertificateInput"}
-
-	if s.CertificateArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("CertificateArn"))
-	}
-	if s.CertificateArn != nil && len(*s.CertificateArn) < 20 {
-		invalidParams.Add(aws.NewErrParamMinLen("CertificateArn", 20))
-	}
-
-	if s.Tags == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Tags"))
-	}
-	if s.Tags != nil && len(s.Tags) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Tags", 1))
-	}
-	if s.Tags != nil {
-		for i, v := range s.Tags {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type RemoveTagsFromCertificateOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s RemoveTagsFromCertificateOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opRemoveTagsFromCertificate = "RemoveTagsFromCertificate"
 
@@ -99,7 +33,7 @@ const opRemoveTagsFromCertificate = "RemoveTagsFromCertificate"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/RemoveTagsFromCertificate
-func (c *Client) RemoveTagsFromCertificateRequest(input *RemoveTagsFromCertificateInput) RemoveTagsFromCertificateRequest {
+func (c *Client) RemoveTagsFromCertificateRequest(input *types.RemoveTagsFromCertificateInput) RemoveTagsFromCertificateRequest {
 	op := &aws.Operation{
 		Name:       opRemoveTagsFromCertificate,
 		HTTPMethod: "POST",
@@ -107,10 +41,10 @@ func (c *Client) RemoveTagsFromCertificateRequest(input *RemoveTagsFromCertifica
 	}
 
 	if input == nil {
-		input = &RemoveTagsFromCertificateInput{}
+		input = &types.RemoveTagsFromCertificateInput{}
 	}
 
-	req := c.newRequest(op, input, &RemoveTagsFromCertificateOutput{})
+	req := c.newRequest(op, input, &types.RemoveTagsFromCertificateOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return RemoveTagsFromCertificateRequest{Request: req, Input: input, Copy: c.RemoveTagsFromCertificateRequest}
@@ -120,8 +54,8 @@ func (c *Client) RemoveTagsFromCertificateRequest(input *RemoveTagsFromCertifica
 // RemoveTagsFromCertificate API operation.
 type RemoveTagsFromCertificateRequest struct {
 	*aws.Request
-	Input *RemoveTagsFromCertificateInput
-	Copy  func(*RemoveTagsFromCertificateInput) RemoveTagsFromCertificateRequest
+	Input *types.RemoveTagsFromCertificateInput
+	Copy  func(*types.RemoveTagsFromCertificateInput) RemoveTagsFromCertificateRequest
 }
 
 // Send marshals and sends the RemoveTagsFromCertificate API request.
@@ -133,7 +67,7 @@ func (r RemoveTagsFromCertificateRequest) Send(ctx context.Context) (*RemoveTags
 	}
 
 	resp := &RemoveTagsFromCertificateResponse{
-		RemoveTagsFromCertificateOutput: r.Request.Data.(*RemoveTagsFromCertificateOutput),
+		RemoveTagsFromCertificateOutput: r.Request.Data.(*types.RemoveTagsFromCertificateOutput),
 		response:                        &aws.Response{Request: r.Request},
 	}
 
@@ -143,7 +77,7 @@ func (r RemoveTagsFromCertificateRequest) Send(ctx context.Context) (*RemoveTags
 // RemoveTagsFromCertificateResponse is the response type for the
 // RemoveTagsFromCertificate API operation.
 type RemoveTagsFromCertificateResponse struct {
-	*RemoveTagsFromCertificateOutput
+	*types.RemoveTagsFromCertificateOutput
 
 	response *aws.Response
 }

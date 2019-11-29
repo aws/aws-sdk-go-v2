@@ -6,74 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
+	"github.com/aws/aws-sdk-go-v2/service/opsworks/types"
 )
-
-type RegisterRdsDbInstanceInput struct {
-	_ struct{} `type:"structure"`
-
-	// The database password.
-	//
-	// DbPassword is a required field
-	DbPassword *string `type:"string" required:"true"`
-
-	// The database's master user name.
-	//
-	// DbUser is a required field
-	DbUser *string `type:"string" required:"true"`
-
-	// The Amazon RDS instance's ARN.
-	//
-	// RdsDbInstanceArn is a required field
-	RdsDbInstanceArn *string `type:"string" required:"true"`
-
-	// The stack ID.
-	//
-	// StackId is a required field
-	StackId *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s RegisterRdsDbInstanceInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *RegisterRdsDbInstanceInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "RegisterRdsDbInstanceInput"}
-
-	if s.DbPassword == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DbPassword"))
-	}
-
-	if s.DbUser == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DbUser"))
-	}
-
-	if s.RdsDbInstanceArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("RdsDbInstanceArn"))
-	}
-
-	if s.StackId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("StackId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type RegisterRdsDbInstanceOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s RegisterRdsDbInstanceOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opRegisterRdsDbInstance = "RegisterRdsDbInstance"
 
@@ -95,7 +31,7 @@ const opRegisterRdsDbInstance = "RegisterRdsDbInstance"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/RegisterRdsDbInstance
-func (c *Client) RegisterRdsDbInstanceRequest(input *RegisterRdsDbInstanceInput) RegisterRdsDbInstanceRequest {
+func (c *Client) RegisterRdsDbInstanceRequest(input *types.RegisterRdsDbInstanceInput) RegisterRdsDbInstanceRequest {
 	op := &aws.Operation{
 		Name:       opRegisterRdsDbInstance,
 		HTTPMethod: "POST",
@@ -103,10 +39,10 @@ func (c *Client) RegisterRdsDbInstanceRequest(input *RegisterRdsDbInstanceInput)
 	}
 
 	if input == nil {
-		input = &RegisterRdsDbInstanceInput{}
+		input = &types.RegisterRdsDbInstanceInput{}
 	}
 
-	req := c.newRequest(op, input, &RegisterRdsDbInstanceOutput{})
+	req := c.newRequest(op, input, &types.RegisterRdsDbInstanceOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return RegisterRdsDbInstanceRequest{Request: req, Input: input, Copy: c.RegisterRdsDbInstanceRequest}
@@ -116,8 +52,8 @@ func (c *Client) RegisterRdsDbInstanceRequest(input *RegisterRdsDbInstanceInput)
 // RegisterRdsDbInstance API operation.
 type RegisterRdsDbInstanceRequest struct {
 	*aws.Request
-	Input *RegisterRdsDbInstanceInput
-	Copy  func(*RegisterRdsDbInstanceInput) RegisterRdsDbInstanceRequest
+	Input *types.RegisterRdsDbInstanceInput
+	Copy  func(*types.RegisterRdsDbInstanceInput) RegisterRdsDbInstanceRequest
 }
 
 // Send marshals and sends the RegisterRdsDbInstance API request.
@@ -129,7 +65,7 @@ func (r RegisterRdsDbInstanceRequest) Send(ctx context.Context) (*RegisterRdsDbI
 	}
 
 	resp := &RegisterRdsDbInstanceResponse{
-		RegisterRdsDbInstanceOutput: r.Request.Data.(*RegisterRdsDbInstanceOutput),
+		RegisterRdsDbInstanceOutput: r.Request.Data.(*types.RegisterRdsDbInstanceOutput),
 		response:                    &aws.Response{Request: r.Request},
 	}
 
@@ -139,7 +75,7 @@ func (r RegisterRdsDbInstanceRequest) Send(ctx context.Context) (*RegisterRdsDbI
 // RegisterRdsDbInstanceResponse is the response type for the
 // RegisterRdsDbInstance API operation.
 type RegisterRdsDbInstanceResponse struct {
-	*RegisterRdsDbInstanceOutput
+	*types.RegisterRdsDbInstanceOutput
 
 	response *aws.Response
 }

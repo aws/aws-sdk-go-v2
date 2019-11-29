@@ -6,50 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/gamelift/types"
 )
-
-// Represents the input for a request action.
-type DescribeFleetPortSettingsInput struct {
-	_ struct{} `type:"structure"`
-
-	// Unique identifier for a fleet to retrieve port settings for.
-	//
-	// FleetId is a required field
-	FleetId *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeFleetPortSettingsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeFleetPortSettingsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeFleetPortSettingsInput"}
-
-	if s.FleetId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("FleetId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Represents the returned data in response to a request action.
-type DescribeFleetPortSettingsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Object that contains port settings for the requested fleet ID.
-	InboundPermissions []IpPermission `type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeFleetPortSettingsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeFleetPortSettings = "DescribeFleetPortSettings"
 
@@ -92,7 +50,7 @@ const opDescribeFleetPortSettings = "DescribeFleetPortSettings"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DescribeFleetPortSettings
-func (c *Client) DescribeFleetPortSettingsRequest(input *DescribeFleetPortSettingsInput) DescribeFleetPortSettingsRequest {
+func (c *Client) DescribeFleetPortSettingsRequest(input *types.DescribeFleetPortSettingsInput) DescribeFleetPortSettingsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeFleetPortSettings,
 		HTTPMethod: "POST",
@@ -100,10 +58,10 @@ func (c *Client) DescribeFleetPortSettingsRequest(input *DescribeFleetPortSettin
 	}
 
 	if input == nil {
-		input = &DescribeFleetPortSettingsInput{}
+		input = &types.DescribeFleetPortSettingsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeFleetPortSettingsOutput{})
+	req := c.newRequest(op, input, &types.DescribeFleetPortSettingsOutput{})
 	return DescribeFleetPortSettingsRequest{Request: req, Input: input, Copy: c.DescribeFleetPortSettingsRequest}
 }
 
@@ -111,8 +69,8 @@ func (c *Client) DescribeFleetPortSettingsRequest(input *DescribeFleetPortSettin
 // DescribeFleetPortSettings API operation.
 type DescribeFleetPortSettingsRequest struct {
 	*aws.Request
-	Input *DescribeFleetPortSettingsInput
-	Copy  func(*DescribeFleetPortSettingsInput) DescribeFleetPortSettingsRequest
+	Input *types.DescribeFleetPortSettingsInput
+	Copy  func(*types.DescribeFleetPortSettingsInput) DescribeFleetPortSettingsRequest
 }
 
 // Send marshals and sends the DescribeFleetPortSettings API request.
@@ -124,7 +82,7 @@ func (r DescribeFleetPortSettingsRequest) Send(ctx context.Context) (*DescribeFl
 	}
 
 	resp := &DescribeFleetPortSettingsResponse{
-		DescribeFleetPortSettingsOutput: r.Request.Data.(*DescribeFleetPortSettingsOutput),
+		DescribeFleetPortSettingsOutput: r.Request.Data.(*types.DescribeFleetPortSettingsOutput),
 		response:                        &aws.Response{Request: r.Request},
 	}
 
@@ -134,7 +92,7 @@ func (r DescribeFleetPortSettingsRequest) Send(ctx context.Context) (*DescribeFl
 // DescribeFleetPortSettingsResponse is the response type for the
 // DescribeFleetPortSettings API operation.
 type DescribeFleetPortSettingsResponse struct {
-	*DescribeFleetPortSettingsOutput
+	*types.DescribeFleetPortSettingsOutput
 
 	response *aws.Response
 }

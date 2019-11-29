@@ -6,91 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/kinesisanalyticsv2/types"
 )
-
-type DiscoverInputSchemaInput struct {
-	_ struct{} `type:"structure"`
-
-	// The InputProcessingConfiguration to use to preprocess the records before
-	// discovering the schema of the records.
-	InputProcessingConfiguration *InputProcessingConfiguration `type:"structure"`
-
-	// The point at which you want Kinesis Data Analytics to start reading records
-	// from the specified streaming source discovery purposes.
-	InputStartingPositionConfiguration *InputStartingPositionConfiguration `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the streaming source.
-	ResourceARN *string `min:"1" type:"string"`
-
-	// Specify this parameter to discover a schema from data in an Amazon S3 object.
-	S3Configuration *S3Configuration `type:"structure"`
-
-	// The ARN of the role that is used to access the streaming source.
-	//
-	// ServiceExecutionRole is a required field
-	ServiceExecutionRole *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DiscoverInputSchemaInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DiscoverInputSchemaInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DiscoverInputSchemaInput"}
-	if s.ResourceARN != nil && len(*s.ResourceARN) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ResourceARN", 1))
-	}
-
-	if s.ServiceExecutionRole == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ServiceExecutionRole"))
-	}
-	if s.ServiceExecutionRole != nil && len(*s.ServiceExecutionRole) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ServiceExecutionRole", 1))
-	}
-	if s.InputProcessingConfiguration != nil {
-		if err := s.InputProcessingConfiguration.Validate(); err != nil {
-			invalidParams.AddNested("InputProcessingConfiguration", err.(aws.ErrInvalidParams))
-		}
-	}
-	if s.S3Configuration != nil {
-		if err := s.S3Configuration.Validate(); err != nil {
-			invalidParams.AddNested("S3Configuration", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DiscoverInputSchemaOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The schema inferred from the streaming source. It identifies the format of
-	// the data in the streaming source and how each data element maps to corresponding
-	// columns in the in-application stream that you can create.
-	InputSchema *SourceSchema `type:"structure"`
-
-	// An array of elements, where each element corresponds to a row in a stream
-	// record (a stream record can have more than one row).
-	ParsedInputRecords [][]string `type:"list"`
-
-	// The stream data that was modified by the processor specified in the InputProcessingConfiguration
-	// parameter.
-	ProcessedInputRecords []string `type:"list"`
-
-	// The raw stream data that was sampled to infer the schema.
-	RawInputRecords []string `type:"list"`
-}
-
-// String returns the string representation
-func (s DiscoverInputSchemaOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDiscoverInputSchema = "DiscoverInputSchema"
 
@@ -116,7 +33,7 @@ const opDiscoverInputSchema = "DiscoverInputSchema"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/DiscoverInputSchema
-func (c *Client) DiscoverInputSchemaRequest(input *DiscoverInputSchemaInput) DiscoverInputSchemaRequest {
+func (c *Client) DiscoverInputSchemaRequest(input *types.DiscoverInputSchemaInput) DiscoverInputSchemaRequest {
 	op := &aws.Operation{
 		Name:       opDiscoverInputSchema,
 		HTTPMethod: "POST",
@@ -124,10 +41,10 @@ func (c *Client) DiscoverInputSchemaRequest(input *DiscoverInputSchemaInput) Dis
 	}
 
 	if input == nil {
-		input = &DiscoverInputSchemaInput{}
+		input = &types.DiscoverInputSchemaInput{}
 	}
 
-	req := c.newRequest(op, input, &DiscoverInputSchemaOutput{})
+	req := c.newRequest(op, input, &types.DiscoverInputSchemaOutput{})
 	return DiscoverInputSchemaRequest{Request: req, Input: input, Copy: c.DiscoverInputSchemaRequest}
 }
 
@@ -135,8 +52,8 @@ func (c *Client) DiscoverInputSchemaRequest(input *DiscoverInputSchemaInput) Dis
 // DiscoverInputSchema API operation.
 type DiscoverInputSchemaRequest struct {
 	*aws.Request
-	Input *DiscoverInputSchemaInput
-	Copy  func(*DiscoverInputSchemaInput) DiscoverInputSchemaRequest
+	Input *types.DiscoverInputSchemaInput
+	Copy  func(*types.DiscoverInputSchemaInput) DiscoverInputSchemaRequest
 }
 
 // Send marshals and sends the DiscoverInputSchema API request.
@@ -148,7 +65,7 @@ func (r DiscoverInputSchemaRequest) Send(ctx context.Context) (*DiscoverInputSch
 	}
 
 	resp := &DiscoverInputSchemaResponse{
-		DiscoverInputSchemaOutput: r.Request.Data.(*DiscoverInputSchemaOutput),
+		DiscoverInputSchemaOutput: r.Request.Data.(*types.DiscoverInputSchemaOutput),
 		response:                  &aws.Response{Request: r.Request},
 	}
 
@@ -158,7 +75,7 @@ func (r DiscoverInputSchemaRequest) Send(ctx context.Context) (*DiscoverInputSch
 // DiscoverInputSchemaResponse is the response type for the
 // DiscoverInputSchema API operation.
 type DiscoverInputSchemaResponse struct {
-	*DiscoverInputSchemaOutput
+	*types.DiscoverInputSchemaOutput
 
 	response *aws.Response
 }

@@ -6,62 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
+	"github.com/aws/aws-sdk-go-v2/service/cloudwatchlogs/types"
 )
-
-type DeleteSubscriptionFilterInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the subscription filter.
-	//
-	// FilterName is a required field
-	FilterName *string `locationName:"filterName" min:"1" type:"string" required:"true"`
-
-	// The name of the log group.
-	//
-	// LogGroupName is a required field
-	LogGroupName *string `locationName:"logGroupName" min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteSubscriptionFilterInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteSubscriptionFilterInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteSubscriptionFilterInput"}
-
-	if s.FilterName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("FilterName"))
-	}
-	if s.FilterName != nil && len(*s.FilterName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("FilterName", 1))
-	}
-
-	if s.LogGroupName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("LogGroupName"))
-	}
-	if s.LogGroupName != nil && len(*s.LogGroupName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("LogGroupName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteSubscriptionFilterOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteSubscriptionFilterOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteSubscriptionFilter = "DeleteSubscriptionFilter"
 
@@ -78,7 +26,7 @@ const opDeleteSubscriptionFilter = "DeleteSubscriptionFilter"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/DeleteSubscriptionFilter
-func (c *Client) DeleteSubscriptionFilterRequest(input *DeleteSubscriptionFilterInput) DeleteSubscriptionFilterRequest {
+func (c *Client) DeleteSubscriptionFilterRequest(input *types.DeleteSubscriptionFilterInput) DeleteSubscriptionFilterRequest {
 	op := &aws.Operation{
 		Name:       opDeleteSubscriptionFilter,
 		HTTPMethod: "POST",
@@ -86,10 +34,10 @@ func (c *Client) DeleteSubscriptionFilterRequest(input *DeleteSubscriptionFilter
 	}
 
 	if input == nil {
-		input = &DeleteSubscriptionFilterInput{}
+		input = &types.DeleteSubscriptionFilterInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteSubscriptionFilterOutput{})
+	req := c.newRequest(op, input, &types.DeleteSubscriptionFilterOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return DeleteSubscriptionFilterRequest{Request: req, Input: input, Copy: c.DeleteSubscriptionFilterRequest}
@@ -99,8 +47,8 @@ func (c *Client) DeleteSubscriptionFilterRequest(input *DeleteSubscriptionFilter
 // DeleteSubscriptionFilter API operation.
 type DeleteSubscriptionFilterRequest struct {
 	*aws.Request
-	Input *DeleteSubscriptionFilterInput
-	Copy  func(*DeleteSubscriptionFilterInput) DeleteSubscriptionFilterRequest
+	Input *types.DeleteSubscriptionFilterInput
+	Copy  func(*types.DeleteSubscriptionFilterInput) DeleteSubscriptionFilterRequest
 }
 
 // Send marshals and sends the DeleteSubscriptionFilter API request.
@@ -112,7 +60,7 @@ func (r DeleteSubscriptionFilterRequest) Send(ctx context.Context) (*DeleteSubsc
 	}
 
 	resp := &DeleteSubscriptionFilterResponse{
-		DeleteSubscriptionFilterOutput: r.Request.Data.(*DeleteSubscriptionFilterOutput),
+		DeleteSubscriptionFilterOutput: r.Request.Data.(*types.DeleteSubscriptionFilterOutput),
 		response:                       &aws.Response{Request: r.Request},
 	}
 
@@ -122,7 +70,7 @@ func (r DeleteSubscriptionFilterRequest) Send(ctx context.Context) (*DeleteSubsc
 // DeleteSubscriptionFilterResponse is the response type for the
 // DeleteSubscriptionFilter API operation.
 type DeleteSubscriptionFilterResponse struct {
-	*DeleteSubscriptionFilterOutput
+	*types.DeleteSubscriptionFilterOutput
 
 	response *aws.Response
 }

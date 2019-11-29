@@ -4,126 +4,10 @@ package servicecatalog
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/types"
 )
-
-type UpdateProvisionedProductInput struct {
-	_ struct{} `type:"structure"`
-
-	// The language code.
-	//
-	//    * en - English (default)
-	//
-	//    * jp - Japanese
-	//
-	//    * zh - Chinese
-	AcceptLanguage *string `type:"string"`
-
-	// The new path identifier. This value is optional if the product has a default
-	// path, and required if the product has more than one path.
-	PathId *string `min:"1" type:"string"`
-
-	// The identifier of the product.
-	ProductId *string `min:"1" type:"string"`
-
-	// The identifier of the provisioned product. You cannot specify both ProvisionedProductName
-	// and ProvisionedProductId.
-	ProvisionedProductId *string `min:"1" type:"string"`
-
-	// The name of the provisioned product. You cannot specify both ProvisionedProductName
-	// and ProvisionedProductId.
-	ProvisionedProductName *string `min:"1" type:"string"`
-
-	// The identifier of the provisioning artifact.
-	ProvisioningArtifactId *string `min:"1" type:"string"`
-
-	// The new parameters.
-	ProvisioningParameters []UpdateProvisioningParameter `type:"list"`
-
-	// An object that contains information about the provisioning preferences for
-	// a stack set.
-	ProvisioningPreferences *UpdateProvisioningPreferences `type:"structure"`
-
-	// One or more tags. Requires the product to have RESOURCE_UPDATE constraint
-	// with TagUpdatesOnProvisionedProduct set to ALLOWED to allow tag updates.
-	Tags []Tag `type:"list"`
-
-	// The idempotency token that uniquely identifies the provisioning update request.
-	//
-	// UpdateToken is a required field
-	UpdateToken *string `min:"1" type:"string" required:"true" idempotencyToken:"true"`
-}
-
-// String returns the string representation
-func (s UpdateProvisionedProductInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateProvisionedProductInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateProvisionedProductInput"}
-	if s.PathId != nil && len(*s.PathId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("PathId", 1))
-	}
-	if s.ProductId != nil && len(*s.ProductId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ProductId", 1))
-	}
-	if s.ProvisionedProductId != nil && len(*s.ProvisionedProductId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ProvisionedProductId", 1))
-	}
-	if s.ProvisionedProductName != nil && len(*s.ProvisionedProductName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ProvisionedProductName", 1))
-	}
-	if s.ProvisioningArtifactId != nil && len(*s.ProvisioningArtifactId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ProvisioningArtifactId", 1))
-	}
-
-	if s.UpdateToken == nil {
-		invalidParams.Add(aws.NewErrParamRequired("UpdateToken"))
-	}
-	if s.UpdateToken != nil && len(*s.UpdateToken) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("UpdateToken", 1))
-	}
-	if s.ProvisioningParameters != nil {
-		for i, v := range s.ProvisioningParameters {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "ProvisioningParameters", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-	if s.ProvisioningPreferences != nil {
-		if err := s.ProvisioningPreferences.Validate(); err != nil {
-			invalidParams.AddNested("ProvisioningPreferences", err.(aws.ErrInvalidParams))
-		}
-	}
-	if s.Tags != nil {
-		for i, v := range s.Tags {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type UpdateProvisionedProductOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Information about the result of the request.
-	RecordDetail *RecordDetail `type:"structure"`
-}
-
-// String returns the string representation
-func (s UpdateProvisionedProductOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opUpdateProvisionedProduct = "UpdateProvisionedProduct"
 
@@ -147,7 +31,7 @@ const opUpdateProvisionedProduct = "UpdateProvisionedProduct"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/UpdateProvisionedProduct
-func (c *Client) UpdateProvisionedProductRequest(input *UpdateProvisionedProductInput) UpdateProvisionedProductRequest {
+func (c *Client) UpdateProvisionedProductRequest(input *types.UpdateProvisionedProductInput) UpdateProvisionedProductRequest {
 	op := &aws.Operation{
 		Name:       opUpdateProvisionedProduct,
 		HTTPMethod: "POST",
@@ -155,10 +39,10 @@ func (c *Client) UpdateProvisionedProductRequest(input *UpdateProvisionedProduct
 	}
 
 	if input == nil {
-		input = &UpdateProvisionedProductInput{}
+		input = &types.UpdateProvisionedProductInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateProvisionedProductOutput{})
+	req := c.newRequest(op, input, &types.UpdateProvisionedProductOutput{})
 	return UpdateProvisionedProductRequest{Request: req, Input: input, Copy: c.UpdateProvisionedProductRequest}
 }
 
@@ -166,8 +50,8 @@ func (c *Client) UpdateProvisionedProductRequest(input *UpdateProvisionedProduct
 // UpdateProvisionedProduct API operation.
 type UpdateProvisionedProductRequest struct {
 	*aws.Request
-	Input *UpdateProvisionedProductInput
-	Copy  func(*UpdateProvisionedProductInput) UpdateProvisionedProductRequest
+	Input *types.UpdateProvisionedProductInput
+	Copy  func(*types.UpdateProvisionedProductInput) UpdateProvisionedProductRequest
 }
 
 // Send marshals and sends the UpdateProvisionedProduct API request.
@@ -179,7 +63,7 @@ func (r UpdateProvisionedProductRequest) Send(ctx context.Context) (*UpdateProvi
 	}
 
 	resp := &UpdateProvisionedProductResponse{
-		UpdateProvisionedProductOutput: r.Request.Data.(*UpdateProvisionedProductOutput),
+		UpdateProvisionedProductOutput: r.Request.Data.(*types.UpdateProvisionedProductOutput),
 		response:                       &aws.Response{Request: r.Request},
 	}
 
@@ -189,7 +73,7 @@ func (r UpdateProvisionedProductRequest) Send(ctx context.Context) (*UpdateProvi
 // UpdateProvisionedProductResponse is the response type for the
 // UpdateProvisionedProduct API operation.
 type UpdateProvisionedProductResponse struct {
-	*UpdateProvisionedProductOutput
+	*types.UpdateProvisionedProductOutput
 
 	response *aws.Response
 }

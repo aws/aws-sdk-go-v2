@@ -6,70 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-type RevokeClientVpnIngressInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the Active Directory group for which to revoke access.
-	AccessGroupId *string `type:"string"`
-
-	// The ID of the Client VPN endpoint with which the authorization rule is associated.
-	//
-	// ClientVpnEndpointId is a required field
-	ClientVpnEndpointId *string `type:"string" required:"true"`
-
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have
-	// the required permissions, the error response is DryRunOperation. Otherwise,
-	// it is UnauthorizedOperation.
-	DryRun *bool `type:"boolean"`
-
-	// Indicates whether access should be revoked for all clients.
-	RevokeAllGroups *bool `type:"boolean"`
-
-	// The IPv4 address range, in CIDR notation, of the network for which access
-	// is being removed.
-	//
-	// TargetNetworkCidr is a required field
-	TargetNetworkCidr *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s RevokeClientVpnIngressInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *RevokeClientVpnIngressInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "RevokeClientVpnIngressInput"}
-
-	if s.ClientVpnEndpointId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ClientVpnEndpointId"))
-	}
-
-	if s.TargetNetworkCidr == nil {
-		invalidParams.Add(aws.NewErrParamRequired("TargetNetworkCidr"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type RevokeClientVpnIngressOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The current state of the authorization rule.
-	Status *VpnAuthorizationRuleStatus `locationName:"status" type:"structure"`
-}
-
-// String returns the string representation
-func (s RevokeClientVpnIngressOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opRevokeClientVpnIngress = "RevokeClientVpnIngress"
 
@@ -86,7 +24,7 @@ const opRevokeClientVpnIngress = "RevokeClientVpnIngress"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/RevokeClientVpnIngress
-func (c *Client) RevokeClientVpnIngressRequest(input *RevokeClientVpnIngressInput) RevokeClientVpnIngressRequest {
+func (c *Client) RevokeClientVpnIngressRequest(input *types.RevokeClientVpnIngressInput) RevokeClientVpnIngressRequest {
 	op := &aws.Operation{
 		Name:       opRevokeClientVpnIngress,
 		HTTPMethod: "POST",
@@ -94,10 +32,10 @@ func (c *Client) RevokeClientVpnIngressRequest(input *RevokeClientVpnIngressInpu
 	}
 
 	if input == nil {
-		input = &RevokeClientVpnIngressInput{}
+		input = &types.RevokeClientVpnIngressInput{}
 	}
 
-	req := c.newRequest(op, input, &RevokeClientVpnIngressOutput{})
+	req := c.newRequest(op, input, &types.RevokeClientVpnIngressOutput{})
 	return RevokeClientVpnIngressRequest{Request: req, Input: input, Copy: c.RevokeClientVpnIngressRequest}
 }
 
@@ -105,8 +43,8 @@ func (c *Client) RevokeClientVpnIngressRequest(input *RevokeClientVpnIngressInpu
 // RevokeClientVpnIngress API operation.
 type RevokeClientVpnIngressRequest struct {
 	*aws.Request
-	Input *RevokeClientVpnIngressInput
-	Copy  func(*RevokeClientVpnIngressInput) RevokeClientVpnIngressRequest
+	Input *types.RevokeClientVpnIngressInput
+	Copy  func(*types.RevokeClientVpnIngressInput) RevokeClientVpnIngressRequest
 }
 
 // Send marshals and sends the RevokeClientVpnIngress API request.
@@ -118,7 +56,7 @@ func (r RevokeClientVpnIngressRequest) Send(ctx context.Context) (*RevokeClientV
 	}
 
 	resp := &RevokeClientVpnIngressResponse{
-		RevokeClientVpnIngressOutput: r.Request.Data.(*RevokeClientVpnIngressOutput),
+		RevokeClientVpnIngressOutput: r.Request.Data.(*types.RevokeClientVpnIngressOutput),
 		response:                     &aws.Response{Request: r.Request},
 	}
 
@@ -128,7 +66,7 @@ func (r RevokeClientVpnIngressRequest) Send(ctx context.Context) (*RevokeClientV
 // RevokeClientVpnIngressResponse is the response type for the
 // RevokeClientVpnIngress API operation.
 type RevokeClientVpnIngressResponse struct {
-	*RevokeClientVpnIngressOutput
+	*types.RevokeClientVpnIngressOutput
 
 	response *aws.Response
 }

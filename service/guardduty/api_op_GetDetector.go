@@ -6,131 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/guardduty/types"
 )
-
-type GetDetectorInput struct {
-	_ struct{} `type:"structure"`
-
-	// The unique ID of the detector that you want to get.
-	//
-	// DetectorId is a required field
-	DetectorId *string `location:"uri" locationName:"detectorId" min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetDetectorInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetDetectorInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetDetectorInput"}
-
-	if s.DetectorId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DetectorId"))
-	}
-	if s.DetectorId != nil && len(*s.DetectorId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("DetectorId", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetDetectorInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.DetectorId != nil {
-		v := *s.DetectorId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "detectorId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type GetDetectorOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Detector creation timestamp.
-	CreatedAt *string `locationName:"createdAt" type:"string"`
-
-	// Finding publishing frequency.
-	FindingPublishingFrequency FindingPublishingFrequency `locationName:"findingPublishingFrequency" type:"string" enum:"true"`
-
-	// The GuardDuty service role.
-	//
-	// ServiceRole is a required field
-	ServiceRole *string `locationName:"serviceRole" type:"string" required:"true"`
-
-	// The detector status.
-	//
-	// Status is a required field
-	Status DetectorStatus `locationName:"status" min:"1" type:"string" required:"true" enum:"true"`
-
-	// The tags of the detector resource.
-	Tags map[string]string `locationName:"tags" min:"1" type:"map"`
-
-	// Detector last update timestamp.
-	UpdatedAt *string `locationName:"updatedAt" type:"string"`
-}
-
-// String returns the string representation
-func (s GetDetectorOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetDetectorOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.CreatedAt != nil {
-		v := *s.CreatedAt
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "createdAt", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if len(s.FindingPublishingFrequency) > 0 {
-		v := s.FindingPublishingFrequency
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "findingPublishingFrequency", protocol.QuotedValue{ValueMarshaler: v}, metadata)
-	}
-	if s.ServiceRole != nil {
-		v := *s.ServiceRole
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "serviceRole", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if len(s.Status) > 0 {
-		v := s.Status
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "status", protocol.QuotedValue{ValueMarshaler: v}, metadata)
-	}
-	if s.Tags != nil {
-		v := s.Tags
-
-		metadata := protocol.Metadata{}
-		ms0 := e.Map(protocol.BodyTarget, "tags", metadata)
-		ms0.Start()
-		for k1, v1 := range v {
-			ms0.MapSetValue(k1, protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
-		}
-		ms0.End()
-
-	}
-	if s.UpdatedAt != nil {
-		v := *s.UpdatedAt
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "updatedAt", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opGetDetector = "GetDetector"
 
@@ -147,7 +24,7 @@ const opGetDetector = "GetDetector"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetDetector
-func (c *Client) GetDetectorRequest(input *GetDetectorInput) GetDetectorRequest {
+func (c *Client) GetDetectorRequest(input *types.GetDetectorInput) GetDetectorRequest {
 	op := &aws.Operation{
 		Name:       opGetDetector,
 		HTTPMethod: "GET",
@@ -155,10 +32,10 @@ func (c *Client) GetDetectorRequest(input *GetDetectorInput) GetDetectorRequest 
 	}
 
 	if input == nil {
-		input = &GetDetectorInput{}
+		input = &types.GetDetectorInput{}
 	}
 
-	req := c.newRequest(op, input, &GetDetectorOutput{})
+	req := c.newRequest(op, input, &types.GetDetectorOutput{})
 	return GetDetectorRequest{Request: req, Input: input, Copy: c.GetDetectorRequest}
 }
 
@@ -166,8 +43,8 @@ func (c *Client) GetDetectorRequest(input *GetDetectorInput) GetDetectorRequest 
 // GetDetector API operation.
 type GetDetectorRequest struct {
 	*aws.Request
-	Input *GetDetectorInput
-	Copy  func(*GetDetectorInput) GetDetectorRequest
+	Input *types.GetDetectorInput
+	Copy  func(*types.GetDetectorInput) GetDetectorRequest
 }
 
 // Send marshals and sends the GetDetector API request.
@@ -179,7 +56,7 @@ func (r GetDetectorRequest) Send(ctx context.Context) (*GetDetectorResponse, err
 	}
 
 	resp := &GetDetectorResponse{
-		GetDetectorOutput: r.Request.Data.(*GetDetectorOutput),
+		GetDetectorOutput: r.Request.Data.(*types.GetDetectorOutput),
 		response:          &aws.Response{Request: r.Request},
 	}
 
@@ -189,7 +66,7 @@ func (r GetDetectorRequest) Send(ctx context.Context) (*GetDetectorResponse, err
 // GetDetectorResponse is the response type for the
 // GetDetector API operation.
 type GetDetectorResponse struct {
-	*GetDetectorOutput
+	*types.GetDetectorOutput
 
 	response *aws.Response
 }

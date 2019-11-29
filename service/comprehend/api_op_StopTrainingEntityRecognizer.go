@@ -6,46 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/comprehend/types"
 )
-
-type StopTrainingEntityRecognizerInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) that identifies the entity recognizer currently
-	// being trained.
-	//
-	// EntityRecognizerArn is a required field
-	EntityRecognizerArn *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s StopTrainingEntityRecognizerInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *StopTrainingEntityRecognizerInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "StopTrainingEntityRecognizerInput"}
-
-	if s.EntityRecognizerArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("EntityRecognizerArn"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type StopTrainingEntityRecognizerOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s StopTrainingEntityRecognizerOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opStopTrainingEntityRecognizer = "StopTrainingEntityRecognizer"
 
@@ -68,7 +30,7 @@ const opStopTrainingEntityRecognizer = "StopTrainingEntityRecognizer"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/StopTrainingEntityRecognizer
-func (c *Client) StopTrainingEntityRecognizerRequest(input *StopTrainingEntityRecognizerInput) StopTrainingEntityRecognizerRequest {
+func (c *Client) StopTrainingEntityRecognizerRequest(input *types.StopTrainingEntityRecognizerInput) StopTrainingEntityRecognizerRequest {
 	op := &aws.Operation{
 		Name:       opStopTrainingEntityRecognizer,
 		HTTPMethod: "POST",
@@ -76,10 +38,10 @@ func (c *Client) StopTrainingEntityRecognizerRequest(input *StopTrainingEntityRe
 	}
 
 	if input == nil {
-		input = &StopTrainingEntityRecognizerInput{}
+		input = &types.StopTrainingEntityRecognizerInput{}
 	}
 
-	req := c.newRequest(op, input, &StopTrainingEntityRecognizerOutput{})
+	req := c.newRequest(op, input, &types.StopTrainingEntityRecognizerOutput{})
 	return StopTrainingEntityRecognizerRequest{Request: req, Input: input, Copy: c.StopTrainingEntityRecognizerRequest}
 }
 
@@ -87,8 +49,8 @@ func (c *Client) StopTrainingEntityRecognizerRequest(input *StopTrainingEntityRe
 // StopTrainingEntityRecognizer API operation.
 type StopTrainingEntityRecognizerRequest struct {
 	*aws.Request
-	Input *StopTrainingEntityRecognizerInput
-	Copy  func(*StopTrainingEntityRecognizerInput) StopTrainingEntityRecognizerRequest
+	Input *types.StopTrainingEntityRecognizerInput
+	Copy  func(*types.StopTrainingEntityRecognizerInput) StopTrainingEntityRecognizerRequest
 }
 
 // Send marshals and sends the StopTrainingEntityRecognizer API request.
@@ -100,7 +62,7 @@ func (r StopTrainingEntityRecognizerRequest) Send(ctx context.Context) (*StopTra
 	}
 
 	resp := &StopTrainingEntityRecognizerResponse{
-		StopTrainingEntityRecognizerOutput: r.Request.Data.(*StopTrainingEntityRecognizerOutput),
+		StopTrainingEntityRecognizerOutput: r.Request.Data.(*types.StopTrainingEntityRecognizerOutput),
 		response:                           &aws.Response{Request: r.Request},
 	}
 
@@ -110,7 +72,7 @@ func (r StopTrainingEntityRecognizerRequest) Send(ctx context.Context) (*StopTra
 // StopTrainingEntityRecognizerResponse is the response type for the
 // StopTrainingEntityRecognizer API operation.
 type StopTrainingEntityRecognizerResponse struct {
-	*StopTrainingEntityRecognizerOutput
+	*types.StopTrainingEntityRecognizerOutput
 
 	response *aws.Response
 }

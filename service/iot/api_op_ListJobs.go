@@ -6,143 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/iot/types"
 )
-
-type ListJobsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The maximum number of results to return per request.
-	MaxResults *int64 `location:"querystring" locationName:"maxResults" min:"1" type:"integer"`
-
-	// The token to retrieve the next set of results.
-	NextToken *string `location:"querystring" locationName:"nextToken" type:"string"`
-
-	// An optional filter that lets you search for jobs that have the specified
-	// status.
-	Status JobStatus `location:"querystring" locationName:"status" type:"string" enum:"true"`
-
-	// Specifies whether the job will continue to run (CONTINUOUS), or will be complete
-	// after all those things specified as targets have completed the job (SNAPSHOT).
-	// If continuous, the job may also be run on a thing when a change is detected
-	// in a target. For example, a job will run on a thing when the thing is added
-	// to a target group, even after the job was completed by all things originally
-	// in the group.
-	TargetSelection TargetSelection `location:"querystring" locationName:"targetSelection" type:"string" enum:"true"`
-
-	// A filter that limits the returned jobs to those for the specified group.
-	ThingGroupId *string `location:"querystring" locationName:"thingGroupId" min:"1" type:"string"`
-
-	// A filter that limits the returned jobs to those for the specified group.
-	ThingGroupName *string `location:"querystring" locationName:"thingGroupName" min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s ListJobsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListJobsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListJobsInput"}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-	if s.ThingGroupId != nil && len(*s.ThingGroupId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ThingGroupId", 1))
-	}
-	if s.ThingGroupName != nil && len(*s.ThingGroupName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ThingGroupName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListJobsInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.MaxResults != nil {
-		v := *s.MaxResults
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "maxResults", protocol.Int64Value(v), metadata)
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if len(s.Status) > 0 {
-		v := s.Status
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "status", protocol.QuotedValue{ValueMarshaler: v}, metadata)
-	}
-	if len(s.TargetSelection) > 0 {
-		v := s.TargetSelection
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "targetSelection", protocol.QuotedValue{ValueMarshaler: v}, metadata)
-	}
-	if s.ThingGroupId != nil {
-		v := *s.ThingGroupId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "thingGroupId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.ThingGroupName != nil {
-		v := *s.ThingGroupName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "thingGroupName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type ListJobsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A list of jobs.
-	Jobs []JobSummary `locationName:"jobs" type:"list"`
-
-	// The token for the next set of results, or null if there are no additional
-	// results.
-	NextToken *string `locationName:"nextToken" type:"string"`
-}
-
-// String returns the string representation
-func (s ListJobsOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListJobsOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.Jobs != nil {
-		v := s.Jobs
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "jobs", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opListJobs = "ListJobs"
 
@@ -157,7 +22,7 @@ const opListJobs = "ListJobs"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) ListJobsRequest(input *ListJobsInput) ListJobsRequest {
+func (c *Client) ListJobsRequest(input *types.ListJobsInput) ListJobsRequest {
 	op := &aws.Operation{
 		Name:       opListJobs,
 		HTTPMethod: "GET",
@@ -165,10 +30,10 @@ func (c *Client) ListJobsRequest(input *ListJobsInput) ListJobsRequest {
 	}
 
 	if input == nil {
-		input = &ListJobsInput{}
+		input = &types.ListJobsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListJobsOutput{})
+	req := c.newRequest(op, input, &types.ListJobsOutput{})
 	return ListJobsRequest{Request: req, Input: input, Copy: c.ListJobsRequest}
 }
 
@@ -176,8 +41,8 @@ func (c *Client) ListJobsRequest(input *ListJobsInput) ListJobsRequest {
 // ListJobs API operation.
 type ListJobsRequest struct {
 	*aws.Request
-	Input *ListJobsInput
-	Copy  func(*ListJobsInput) ListJobsRequest
+	Input *types.ListJobsInput
+	Copy  func(*types.ListJobsInput) ListJobsRequest
 }
 
 // Send marshals and sends the ListJobs API request.
@@ -189,7 +54,7 @@ func (r ListJobsRequest) Send(ctx context.Context) (*ListJobsResponse, error) {
 	}
 
 	resp := &ListJobsResponse{
-		ListJobsOutput: r.Request.Data.(*ListJobsOutput),
+		ListJobsOutput: r.Request.Data.(*types.ListJobsOutput),
 		response:       &aws.Response{Request: r.Request},
 	}
 
@@ -199,7 +64,7 @@ func (r ListJobsRequest) Send(ctx context.Context) (*ListJobsResponse, error) {
 // ListJobsResponse is the response type for the
 // ListJobs API operation.
 type ListJobsResponse struct {
-	*ListJobsOutput
+	*types.ListJobsOutput
 
 	response *aws.Response
 }

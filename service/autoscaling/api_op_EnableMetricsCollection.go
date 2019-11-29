@@ -6,83 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/query"
+	"github.com/aws/aws-sdk-go-v2/service/autoscaling/types"
 )
-
-type EnableMetricsCollectionInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the Auto Scaling group.
-	//
-	// AutoScalingGroupName is a required field
-	AutoScalingGroupName *string `min:"1" type:"string" required:"true"`
-
-	// The granularity to associate with the metrics to collect. The only valid
-	// value is 1Minute.
-	//
-	// Granularity is a required field
-	Granularity *string `min:"1" type:"string" required:"true"`
-
-	// One or more of the following metrics. If you omit this parameter, all metrics
-	// are enabled.
-	//
-	//    * GroupMinSize
-	//
-	//    * GroupMaxSize
-	//
-	//    * GroupDesiredCapacity
-	//
-	//    * GroupInServiceInstances
-	//
-	//    * GroupPendingInstances
-	//
-	//    * GroupStandbyInstances
-	//
-	//    * GroupTerminatingInstances
-	//
-	//    * GroupTotalInstances
-	Metrics []string `type:"list"`
-}
-
-// String returns the string representation
-func (s EnableMetricsCollectionInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *EnableMetricsCollectionInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "EnableMetricsCollectionInput"}
-
-	if s.AutoScalingGroupName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("AutoScalingGroupName"))
-	}
-	if s.AutoScalingGroupName != nil && len(*s.AutoScalingGroupName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("AutoScalingGroupName", 1))
-	}
-
-	if s.Granularity == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Granularity"))
-	}
-	if s.Granularity != nil && len(*s.Granularity) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Granularity", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type EnableMetricsCollectionOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s EnableMetricsCollectionOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opEnableMetricsCollection = "EnableMetricsCollection"
 
@@ -101,7 +28,7 @@ const opEnableMetricsCollection = "EnableMetricsCollection"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/EnableMetricsCollection
-func (c *Client) EnableMetricsCollectionRequest(input *EnableMetricsCollectionInput) EnableMetricsCollectionRequest {
+func (c *Client) EnableMetricsCollectionRequest(input *types.EnableMetricsCollectionInput) EnableMetricsCollectionRequest {
 	op := &aws.Operation{
 		Name:       opEnableMetricsCollection,
 		HTTPMethod: "POST",
@@ -109,10 +36,10 @@ func (c *Client) EnableMetricsCollectionRequest(input *EnableMetricsCollectionIn
 	}
 
 	if input == nil {
-		input = &EnableMetricsCollectionInput{}
+		input = &types.EnableMetricsCollectionInput{}
 	}
 
-	req := c.newRequest(op, input, &EnableMetricsCollectionOutput{})
+	req := c.newRequest(op, input, &types.EnableMetricsCollectionOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return EnableMetricsCollectionRequest{Request: req, Input: input, Copy: c.EnableMetricsCollectionRequest}
@@ -122,8 +49,8 @@ func (c *Client) EnableMetricsCollectionRequest(input *EnableMetricsCollectionIn
 // EnableMetricsCollection API operation.
 type EnableMetricsCollectionRequest struct {
 	*aws.Request
-	Input *EnableMetricsCollectionInput
-	Copy  func(*EnableMetricsCollectionInput) EnableMetricsCollectionRequest
+	Input *types.EnableMetricsCollectionInput
+	Copy  func(*types.EnableMetricsCollectionInput) EnableMetricsCollectionRequest
 }
 
 // Send marshals and sends the EnableMetricsCollection API request.
@@ -135,7 +62,7 @@ func (r EnableMetricsCollectionRequest) Send(ctx context.Context) (*EnableMetric
 	}
 
 	resp := &EnableMetricsCollectionResponse{
-		EnableMetricsCollectionOutput: r.Request.Data.(*EnableMetricsCollectionOutput),
+		EnableMetricsCollectionOutput: r.Request.Data.(*types.EnableMetricsCollectionOutput),
 		response:                      &aws.Response{Request: r.Request},
 	}
 
@@ -145,7 +72,7 @@ func (r EnableMetricsCollectionRequest) Send(ctx context.Context) (*EnableMetric
 // EnableMetricsCollectionResponse is the response type for the
 // EnableMetricsCollection API operation.
 type EnableMetricsCollectionResponse struct {
-	*EnableMetricsCollectionOutput
+	*types.EnableMetricsCollectionOutput
 
 	response *aws.Response
 }

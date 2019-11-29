@@ -6,63 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/query"
+	"github.com/aws/aws-sdk-go-v2/service/elasticbeanstalk/types"
 )
-
-// Request to delete a configuration template.
-type DeleteConfigurationTemplateInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the application to delete the configuration template from.
-	//
-	// ApplicationName is a required field
-	ApplicationName *string `min:"1" type:"string" required:"true"`
-
-	// The name of the configuration template to delete.
-	//
-	// TemplateName is a required field
-	TemplateName *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteConfigurationTemplateInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteConfigurationTemplateInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteConfigurationTemplateInput"}
-
-	if s.ApplicationName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ApplicationName"))
-	}
-	if s.ApplicationName != nil && len(*s.ApplicationName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ApplicationName", 1))
-	}
-
-	if s.TemplateName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("TemplateName"))
-	}
-	if s.TemplateName != nil && len(*s.TemplateName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("TemplateName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteConfigurationTemplateOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteConfigurationTemplateOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteConfigurationTemplate = "DeleteConfigurationTemplate"
 
@@ -83,7 +30,7 @@ const opDeleteConfigurationTemplate = "DeleteConfigurationTemplate"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/DeleteConfigurationTemplate
-func (c *Client) DeleteConfigurationTemplateRequest(input *DeleteConfigurationTemplateInput) DeleteConfigurationTemplateRequest {
+func (c *Client) DeleteConfigurationTemplateRequest(input *types.DeleteConfigurationTemplateInput) DeleteConfigurationTemplateRequest {
 	op := &aws.Operation{
 		Name:       opDeleteConfigurationTemplate,
 		HTTPMethod: "POST",
@@ -91,10 +38,10 @@ func (c *Client) DeleteConfigurationTemplateRequest(input *DeleteConfigurationTe
 	}
 
 	if input == nil {
-		input = &DeleteConfigurationTemplateInput{}
+		input = &types.DeleteConfigurationTemplateInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteConfigurationTemplateOutput{})
+	req := c.newRequest(op, input, &types.DeleteConfigurationTemplateOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return DeleteConfigurationTemplateRequest{Request: req, Input: input, Copy: c.DeleteConfigurationTemplateRequest}
@@ -104,8 +51,8 @@ func (c *Client) DeleteConfigurationTemplateRequest(input *DeleteConfigurationTe
 // DeleteConfigurationTemplate API operation.
 type DeleteConfigurationTemplateRequest struct {
 	*aws.Request
-	Input *DeleteConfigurationTemplateInput
-	Copy  func(*DeleteConfigurationTemplateInput) DeleteConfigurationTemplateRequest
+	Input *types.DeleteConfigurationTemplateInput
+	Copy  func(*types.DeleteConfigurationTemplateInput) DeleteConfigurationTemplateRequest
 }
 
 // Send marshals and sends the DeleteConfigurationTemplate API request.
@@ -117,7 +64,7 @@ func (r DeleteConfigurationTemplateRequest) Send(ctx context.Context) (*DeleteCo
 	}
 
 	resp := &DeleteConfigurationTemplateResponse{
-		DeleteConfigurationTemplateOutput: r.Request.Data.(*DeleteConfigurationTemplateOutput),
+		DeleteConfigurationTemplateOutput: r.Request.Data.(*types.DeleteConfigurationTemplateOutput),
 		response:                          &aws.Response{Request: r.Request},
 	}
 
@@ -127,7 +74,7 @@ func (r DeleteConfigurationTemplateRequest) Send(ctx context.Context) (*DeleteCo
 // DeleteConfigurationTemplateResponse is the response type for the
 // DeleteConfigurationTemplate API operation.
 type DeleteConfigurationTemplateResponse struct {
-	*DeleteConfigurationTemplateOutput
+	*types.DeleteConfigurationTemplateOutput
 
 	response *aws.Response
 }

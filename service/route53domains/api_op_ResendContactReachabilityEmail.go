@@ -6,42 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/route53domains/types"
 )
-
-type ResendContactReachabilityEmailInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the domain for which you want Amazon Route 53 to resend a confirmation
-	// email to the registrant contact.
-	DomainName *string `locationName:"domainName" type:"string"`
-}
-
-// String returns the string representation
-func (s ResendContactReachabilityEmailInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type ResendContactReachabilityEmailOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The domain name for which you requested a confirmation email.
-	DomainName *string `locationName:"domainName" type:"string"`
-
-	// The email address for the registrant contact at the time that we sent the
-	// verification email.
-	EmailAddress *string `locationName:"emailAddress" type:"string"`
-
-	// True if the email address for the registrant contact has already been verified,
-	// and false otherwise. If the email address has already been verified, we don't
-	// send another confirmation email.
-	IsAlreadyVerified *bool `locationName:"isAlreadyVerified" type:"boolean"`
-}
-
-// String returns the string representation
-func (s ResendContactReachabilityEmailOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opResendContactReachabilityEmail = "ResendContactReachabilityEmail"
 
@@ -60,7 +26,7 @@ const opResendContactReachabilityEmail = "ResendContactReachabilityEmail"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/ResendContactReachabilityEmail
-func (c *Client) ResendContactReachabilityEmailRequest(input *ResendContactReachabilityEmailInput) ResendContactReachabilityEmailRequest {
+func (c *Client) ResendContactReachabilityEmailRequest(input *types.ResendContactReachabilityEmailInput) ResendContactReachabilityEmailRequest {
 	op := &aws.Operation{
 		Name:       opResendContactReachabilityEmail,
 		HTTPMethod: "POST",
@@ -68,10 +34,10 @@ func (c *Client) ResendContactReachabilityEmailRequest(input *ResendContactReach
 	}
 
 	if input == nil {
-		input = &ResendContactReachabilityEmailInput{}
+		input = &types.ResendContactReachabilityEmailInput{}
 	}
 
-	req := c.newRequest(op, input, &ResendContactReachabilityEmailOutput{})
+	req := c.newRequest(op, input, &types.ResendContactReachabilityEmailOutput{})
 	return ResendContactReachabilityEmailRequest{Request: req, Input: input, Copy: c.ResendContactReachabilityEmailRequest}
 }
 
@@ -79,8 +45,8 @@ func (c *Client) ResendContactReachabilityEmailRequest(input *ResendContactReach
 // ResendContactReachabilityEmail API operation.
 type ResendContactReachabilityEmailRequest struct {
 	*aws.Request
-	Input *ResendContactReachabilityEmailInput
-	Copy  func(*ResendContactReachabilityEmailInput) ResendContactReachabilityEmailRequest
+	Input *types.ResendContactReachabilityEmailInput
+	Copy  func(*types.ResendContactReachabilityEmailInput) ResendContactReachabilityEmailRequest
 }
 
 // Send marshals and sends the ResendContactReachabilityEmail API request.
@@ -92,7 +58,7 @@ func (r ResendContactReachabilityEmailRequest) Send(ctx context.Context) (*Resen
 	}
 
 	resp := &ResendContactReachabilityEmailResponse{
-		ResendContactReachabilityEmailOutput: r.Request.Data.(*ResendContactReachabilityEmailOutput),
+		ResendContactReachabilityEmailOutput: r.Request.Data.(*types.ResendContactReachabilityEmailOutput),
 		response:                             &aws.Response{Request: r.Request},
 	}
 
@@ -102,7 +68,7 @@ func (r ResendContactReachabilityEmailRequest) Send(ctx context.Context) (*Resen
 // ResendContactReachabilityEmailResponse is the response type for the
 // ResendContactReachabilityEmail API operation.
 type ResendContactReachabilityEmailResponse struct {
-	*ResendContactReachabilityEmailOutput
+	*types.ResendContactReachabilityEmailOutput
 
 	response *aws.Response
 }

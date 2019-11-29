@@ -6,88 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/chime/types"
 )
-
-type GetUserSettingsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Chime account ID.
-	//
-	// AccountId is a required field
-	AccountId *string `location:"uri" locationName:"accountId" type:"string" required:"true"`
-
-	// The user ID.
-	//
-	// UserId is a required field
-	UserId *string `location:"uri" locationName:"userId" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetUserSettingsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetUserSettingsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetUserSettingsInput"}
-
-	if s.AccountId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("AccountId"))
-	}
-
-	if s.UserId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("UserId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetUserSettingsInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.AccountId != nil {
-		v := *s.AccountId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "accountId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.UserId != nil {
-		v := *s.UserId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "userId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type GetUserSettingsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The user settings.
-	UserSettings *UserSettings `type:"structure"`
-}
-
-// String returns the string representation
-func (s GetUserSettingsOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetUserSettingsOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.UserSettings != nil {
-		v := s.UserSettings
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "UserSettings", v, metadata)
-	}
-	return nil
-}
 
 const opGetUserSettings = "GetUserSettings"
 
@@ -105,7 +25,7 @@ const opGetUserSettings = "GetUserSettings"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/GetUserSettings
-func (c *Client) GetUserSettingsRequest(input *GetUserSettingsInput) GetUserSettingsRequest {
+func (c *Client) GetUserSettingsRequest(input *types.GetUserSettingsInput) GetUserSettingsRequest {
 	op := &aws.Operation{
 		Name:       opGetUserSettings,
 		HTTPMethod: "GET",
@@ -113,10 +33,10 @@ func (c *Client) GetUserSettingsRequest(input *GetUserSettingsInput) GetUserSett
 	}
 
 	if input == nil {
-		input = &GetUserSettingsInput{}
+		input = &types.GetUserSettingsInput{}
 	}
 
-	req := c.newRequest(op, input, &GetUserSettingsOutput{})
+	req := c.newRequest(op, input, &types.GetUserSettingsOutput{})
 	return GetUserSettingsRequest{Request: req, Input: input, Copy: c.GetUserSettingsRequest}
 }
 
@@ -124,8 +44,8 @@ func (c *Client) GetUserSettingsRequest(input *GetUserSettingsInput) GetUserSett
 // GetUserSettings API operation.
 type GetUserSettingsRequest struct {
 	*aws.Request
-	Input *GetUserSettingsInput
-	Copy  func(*GetUserSettingsInput) GetUserSettingsRequest
+	Input *types.GetUserSettingsInput
+	Copy  func(*types.GetUserSettingsInput) GetUserSettingsRequest
 }
 
 // Send marshals and sends the GetUserSettings API request.
@@ -137,7 +57,7 @@ func (r GetUserSettingsRequest) Send(ctx context.Context) (*GetUserSettingsRespo
 	}
 
 	resp := &GetUserSettingsResponse{
-		GetUserSettingsOutput: r.Request.Data.(*GetUserSettingsOutput),
+		GetUserSettingsOutput: r.Request.Data.(*types.GetUserSettingsOutput),
 		response:              &aws.Response{Request: r.Request},
 	}
 
@@ -147,7 +67,7 @@ func (r GetUserSettingsRequest) Send(ctx context.Context) (*GetUserSettingsRespo
 // GetUserSettingsResponse is the response type for the
 // GetUserSettings API operation.
 type GetUserSettingsResponse struct {
-	*GetUserSettingsOutput
+	*types.GetUserSettingsOutput
 
 	response *aws.Response
 }

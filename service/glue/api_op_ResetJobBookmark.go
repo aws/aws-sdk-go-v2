@@ -6,51 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/glue/types"
 )
-
-type ResetJobBookmarkInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the job in question.
-	//
-	// JobName is a required field
-	JobName *string `type:"string" required:"true"`
-
-	// The unique run identifier associated with this job run.
-	RunId *string `type:"string"`
-}
-
-// String returns the string representation
-func (s ResetJobBookmarkInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ResetJobBookmarkInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ResetJobBookmarkInput"}
-
-	if s.JobName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("JobName"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ResetJobBookmarkOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The reset bookmark entry.
-	JobBookmarkEntry *JobBookmarkEntry `type:"structure"`
-}
-
-// String returns the string representation
-func (s ResetJobBookmarkOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opResetJobBookmark = "ResetJobBookmark"
 
@@ -67,7 +24,7 @@ const opResetJobBookmark = "ResetJobBookmark"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ResetJobBookmark
-func (c *Client) ResetJobBookmarkRequest(input *ResetJobBookmarkInput) ResetJobBookmarkRequest {
+func (c *Client) ResetJobBookmarkRequest(input *types.ResetJobBookmarkInput) ResetJobBookmarkRequest {
 	op := &aws.Operation{
 		Name:       opResetJobBookmark,
 		HTTPMethod: "POST",
@@ -75,10 +32,10 @@ func (c *Client) ResetJobBookmarkRequest(input *ResetJobBookmarkInput) ResetJobB
 	}
 
 	if input == nil {
-		input = &ResetJobBookmarkInput{}
+		input = &types.ResetJobBookmarkInput{}
 	}
 
-	req := c.newRequest(op, input, &ResetJobBookmarkOutput{})
+	req := c.newRequest(op, input, &types.ResetJobBookmarkOutput{})
 	return ResetJobBookmarkRequest{Request: req, Input: input, Copy: c.ResetJobBookmarkRequest}
 }
 
@@ -86,8 +43,8 @@ func (c *Client) ResetJobBookmarkRequest(input *ResetJobBookmarkInput) ResetJobB
 // ResetJobBookmark API operation.
 type ResetJobBookmarkRequest struct {
 	*aws.Request
-	Input *ResetJobBookmarkInput
-	Copy  func(*ResetJobBookmarkInput) ResetJobBookmarkRequest
+	Input *types.ResetJobBookmarkInput
+	Copy  func(*types.ResetJobBookmarkInput) ResetJobBookmarkRequest
 }
 
 // Send marshals and sends the ResetJobBookmark API request.
@@ -99,7 +56,7 @@ func (r ResetJobBookmarkRequest) Send(ctx context.Context) (*ResetJobBookmarkRes
 	}
 
 	resp := &ResetJobBookmarkResponse{
-		ResetJobBookmarkOutput: r.Request.Data.(*ResetJobBookmarkOutput),
+		ResetJobBookmarkOutput: r.Request.Data.(*types.ResetJobBookmarkOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -109,7 +66,7 @@ func (r ResetJobBookmarkRequest) Send(ctx context.Context) (*ResetJobBookmarkRes
 // ResetJobBookmarkResponse is the response type for the
 // ResetJobBookmark API operation.
 type ResetJobBookmarkResponse struct {
-	*ResetJobBookmarkOutput
+	*types.ResetJobBookmarkOutput
 
 	response *aws.Response
 }

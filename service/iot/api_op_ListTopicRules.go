@@ -6,114 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/iot/types"
 )
-
-// The input for the ListTopicRules operation.
-type ListTopicRulesInput struct {
-	_ struct{} `type:"structure"`
-
-	// The maximum number of results to return.
-	MaxResults *int64 `location:"querystring" locationName:"maxResults" min:"1" type:"integer"`
-
-	// A token used to retrieve the next value.
-	NextToken *string `location:"querystring" locationName:"nextToken" type:"string"`
-
-	// Specifies whether the rule is disabled.
-	RuleDisabled *bool `location:"querystring" locationName:"ruleDisabled" type:"boolean"`
-
-	// The topic.
-	Topic *string `location:"querystring" locationName:"topic" type:"string"`
-}
-
-// String returns the string representation
-func (s ListTopicRulesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListTopicRulesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListTopicRulesInput"}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListTopicRulesInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.MaxResults != nil {
-		v := *s.MaxResults
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "maxResults", protocol.Int64Value(v), metadata)
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.RuleDisabled != nil {
-		v := *s.RuleDisabled
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "ruleDisabled", protocol.BoolValue(v), metadata)
-	}
-	if s.Topic != nil {
-		v := *s.Topic
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "topic", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-// The output from the ListTopicRules operation.
-type ListTopicRulesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A token used to retrieve the next value.
-	NextToken *string `locationName:"nextToken" type:"string"`
-
-	// The rules.
-	Rules []TopicRuleListItem `locationName:"rules" type:"list"`
-}
-
-// String returns the string representation
-func (s ListTopicRulesOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListTopicRulesOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Rules != nil {
-		v := s.Rules
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "rules", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	return nil
-}
 
 const opListTopicRules = "ListTopicRules"
 
@@ -128,7 +22,7 @@ const opListTopicRules = "ListTopicRules"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) ListTopicRulesRequest(input *ListTopicRulesInput) ListTopicRulesRequest {
+func (c *Client) ListTopicRulesRequest(input *types.ListTopicRulesInput) ListTopicRulesRequest {
 	op := &aws.Operation{
 		Name:       opListTopicRules,
 		HTTPMethod: "GET",
@@ -136,10 +30,10 @@ func (c *Client) ListTopicRulesRequest(input *ListTopicRulesInput) ListTopicRule
 	}
 
 	if input == nil {
-		input = &ListTopicRulesInput{}
+		input = &types.ListTopicRulesInput{}
 	}
 
-	req := c.newRequest(op, input, &ListTopicRulesOutput{})
+	req := c.newRequest(op, input, &types.ListTopicRulesOutput{})
 	return ListTopicRulesRequest{Request: req, Input: input, Copy: c.ListTopicRulesRequest}
 }
 
@@ -147,8 +41,8 @@ func (c *Client) ListTopicRulesRequest(input *ListTopicRulesInput) ListTopicRule
 // ListTopicRules API operation.
 type ListTopicRulesRequest struct {
 	*aws.Request
-	Input *ListTopicRulesInput
-	Copy  func(*ListTopicRulesInput) ListTopicRulesRequest
+	Input *types.ListTopicRulesInput
+	Copy  func(*types.ListTopicRulesInput) ListTopicRulesRequest
 }
 
 // Send marshals and sends the ListTopicRules API request.
@@ -160,7 +54,7 @@ func (r ListTopicRulesRequest) Send(ctx context.Context) (*ListTopicRulesRespons
 	}
 
 	resp := &ListTopicRulesResponse{
-		ListTopicRulesOutput: r.Request.Data.(*ListTopicRulesOutput),
+		ListTopicRulesOutput: r.Request.Data.(*types.ListTopicRulesOutput),
 		response:             &aws.Response{Request: r.Request},
 	}
 
@@ -170,7 +64,7 @@ func (r ListTopicRulesRequest) Send(ctx context.Context) (*ListTopicRulesRespons
 // ListTopicRulesResponse is the response type for the
 // ListTopicRules API operation.
 type ListTopicRulesResponse struct {
-	*ListTopicRulesOutput
+	*types.ListTopicRulesOutput
 
 	response *aws.Response
 }

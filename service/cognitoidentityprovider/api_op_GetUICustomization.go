@@ -6,59 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/types"
 )
-
-type GetUICustomizationInput struct {
-	_ struct{} `type:"structure"`
-
-	// The client ID for the client app.
-	ClientId *string `min:"1" type:"string" sensitive:"true"`
-
-	// The user pool ID for the user pool.
-	//
-	// UserPoolId is a required field
-	UserPoolId *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetUICustomizationInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetUICustomizationInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetUICustomizationInput"}
-	if s.ClientId != nil && len(*s.ClientId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ClientId", 1))
-	}
-
-	if s.UserPoolId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("UserPoolId"))
-	}
-	if s.UserPoolId != nil && len(*s.UserPoolId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("UserPoolId", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type GetUICustomizationOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The UI customization information.
-	//
-	// UICustomization is a required field
-	UICustomization *UICustomizationType `type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s GetUICustomizationOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetUICustomization = "GetUICustomization"
 
@@ -78,7 +27,7 @@ const opGetUICustomization = "GetUICustomization"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/GetUICustomization
-func (c *Client) GetUICustomizationRequest(input *GetUICustomizationInput) GetUICustomizationRequest {
+func (c *Client) GetUICustomizationRequest(input *types.GetUICustomizationInput) GetUICustomizationRequest {
 	op := &aws.Operation{
 		Name:       opGetUICustomization,
 		HTTPMethod: "POST",
@@ -86,10 +35,10 @@ func (c *Client) GetUICustomizationRequest(input *GetUICustomizationInput) GetUI
 	}
 
 	if input == nil {
-		input = &GetUICustomizationInput{}
+		input = &types.GetUICustomizationInput{}
 	}
 
-	req := c.newRequest(op, input, &GetUICustomizationOutput{})
+	req := c.newRequest(op, input, &types.GetUICustomizationOutput{})
 	return GetUICustomizationRequest{Request: req, Input: input, Copy: c.GetUICustomizationRequest}
 }
 
@@ -97,8 +46,8 @@ func (c *Client) GetUICustomizationRequest(input *GetUICustomizationInput) GetUI
 // GetUICustomization API operation.
 type GetUICustomizationRequest struct {
 	*aws.Request
-	Input *GetUICustomizationInput
-	Copy  func(*GetUICustomizationInput) GetUICustomizationRequest
+	Input *types.GetUICustomizationInput
+	Copy  func(*types.GetUICustomizationInput) GetUICustomizationRequest
 }
 
 // Send marshals and sends the GetUICustomization API request.
@@ -110,7 +59,7 @@ func (r GetUICustomizationRequest) Send(ctx context.Context) (*GetUICustomizatio
 	}
 
 	resp := &GetUICustomizationResponse{
-		GetUICustomizationOutput: r.Request.Data.(*GetUICustomizationOutput),
+		GetUICustomizationOutput: r.Request.Data.(*types.GetUICustomizationOutput),
 		response:                 &aws.Response{Request: r.Request},
 	}
 
@@ -120,7 +69,7 @@ func (r GetUICustomizationRequest) Send(ctx context.Context) (*GetUICustomizatio
 // GetUICustomizationResponse is the response type for the
 // GetUICustomization API operation.
 type GetUICustomizationResponse struct {
-	*GetUICustomizationOutput
+	*types.GetUICustomizationOutput
 
 	response *aws.Response
 }

@@ -6,89 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/route53/types"
 )
-
-// A request to get the status for a health check.
-type GetHealthCheckStatusInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID for the health check that you want the current status for. When you
-	// created the health check, CreateHealthCheck returned the ID in the response,
-	// in the HealthCheckId element.
-	//
-	// If you want to check the status of a calculated health check, you must use
-	// the Amazon Route 53 console or the CloudWatch console. You can't use GetHealthCheckStatus
-	// to get the status of a calculated health check.
-	//
-	// HealthCheckId is a required field
-	HealthCheckId *string `location:"uri" locationName:"HealthCheckId" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetHealthCheckStatusInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetHealthCheckStatusInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetHealthCheckStatusInput"}
-
-	if s.HealthCheckId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("HealthCheckId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetHealthCheckStatusInput) MarshalFields(e protocol.FieldEncoder) error {
-
-	if s.HealthCheckId != nil {
-		v := *s.HealthCheckId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "HealthCheckId", protocol.StringValue(v), metadata)
-	}
-	return nil
-}
-
-// A complex type that contains the response to a GetHealthCheck request.
-type GetHealthCheckStatusOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A list that contains one HealthCheckObservation element for each Amazon Route
-	// 53 health checker that is reporting a status about the health check endpoint.
-	//
-	// HealthCheckObservations is a required field
-	HealthCheckObservations []HealthCheckObservation `locationNameList:"HealthCheckObservation" type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s GetHealthCheckStatusOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetHealthCheckStatusOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.HealthCheckObservations != nil {
-		v := s.HealthCheckObservations
-
-		metadata := protocol.Metadata{ListLocationName: "HealthCheckObservation"}
-		ls0 := e.List(protocol.BodyTarget, "HealthCheckObservations", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	return nil
-}
 
 const opGetHealthCheckStatus = "GetHealthCheckStatus"
 
@@ -105,7 +24,7 @@ const opGetHealthCheckStatus = "GetHealthCheckStatus"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/GetHealthCheckStatus
-func (c *Client) GetHealthCheckStatusRequest(input *GetHealthCheckStatusInput) GetHealthCheckStatusRequest {
+func (c *Client) GetHealthCheckStatusRequest(input *types.GetHealthCheckStatusInput) GetHealthCheckStatusRequest {
 	op := &aws.Operation{
 		Name:       opGetHealthCheckStatus,
 		HTTPMethod: "GET",
@@ -113,10 +32,10 @@ func (c *Client) GetHealthCheckStatusRequest(input *GetHealthCheckStatusInput) G
 	}
 
 	if input == nil {
-		input = &GetHealthCheckStatusInput{}
+		input = &types.GetHealthCheckStatusInput{}
 	}
 
-	req := c.newRequest(op, input, &GetHealthCheckStatusOutput{})
+	req := c.newRequest(op, input, &types.GetHealthCheckStatusOutput{})
 	return GetHealthCheckStatusRequest{Request: req, Input: input, Copy: c.GetHealthCheckStatusRequest}
 }
 
@@ -124,8 +43,8 @@ func (c *Client) GetHealthCheckStatusRequest(input *GetHealthCheckStatusInput) G
 // GetHealthCheckStatus API operation.
 type GetHealthCheckStatusRequest struct {
 	*aws.Request
-	Input *GetHealthCheckStatusInput
-	Copy  func(*GetHealthCheckStatusInput) GetHealthCheckStatusRequest
+	Input *types.GetHealthCheckStatusInput
+	Copy  func(*types.GetHealthCheckStatusInput) GetHealthCheckStatusRequest
 }
 
 // Send marshals and sends the GetHealthCheckStatus API request.
@@ -137,7 +56,7 @@ func (r GetHealthCheckStatusRequest) Send(ctx context.Context) (*GetHealthCheckS
 	}
 
 	resp := &GetHealthCheckStatusResponse{
-		GetHealthCheckStatusOutput: r.Request.Data.(*GetHealthCheckStatusOutput),
+		GetHealthCheckStatusOutput: r.Request.Data.(*types.GetHealthCheckStatusOutput),
 		response:                   &aws.Response{Request: r.Request},
 	}
 
@@ -147,7 +66,7 @@ func (r GetHealthCheckStatusRequest) Send(ctx context.Context) (*GetHealthCheckS
 // GetHealthCheckStatusResponse is the response type for the
 // GetHealthCheckStatus API operation.
 type GetHealthCheckStatusResponse struct {
-	*GetHealthCheckStatusOutput
+	*types.GetHealthCheckStatusOutput
 
 	response *aws.Response
 }

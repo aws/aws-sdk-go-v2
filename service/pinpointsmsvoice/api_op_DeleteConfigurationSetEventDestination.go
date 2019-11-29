@@ -6,76 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoice/types"
 )
-
-type DeleteConfigurationSetEventDestinationInput struct {
-	_ struct{} `type:"structure"`
-
-	// ConfigurationSetName is a required field
-	ConfigurationSetName *string `location:"uri" locationName:"ConfigurationSetName" type:"string" required:"true"`
-
-	// EventDestinationName is a required field
-	EventDestinationName *string `location:"uri" locationName:"EventDestinationName" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteConfigurationSetEventDestinationInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteConfigurationSetEventDestinationInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteConfigurationSetEventDestinationInput"}
-
-	if s.ConfigurationSetName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ConfigurationSetName"))
-	}
-
-	if s.EventDestinationName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("EventDestinationName"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteConfigurationSetEventDestinationInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.ConfigurationSetName != nil {
-		v := *s.ConfigurationSetName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "ConfigurationSetName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.EventDestinationName != nil {
-		v := *s.EventDestinationName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "EventDestinationName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-// An empty object that indicates that the event destination was deleted successfully.
-type DeleteConfigurationSetEventDestinationOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteConfigurationSetEventDestinationOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteConfigurationSetEventDestinationOutput) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
 
 const opDeleteConfigurationSetEventDestination = "DeleteConfigurationSetEventDestination"
 
@@ -92,7 +24,7 @@ const opDeleteConfigurationSetEventDestination = "DeleteConfigurationSetEventDes
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-2018-09-05/DeleteConfigurationSetEventDestination
-func (c *Client) DeleteConfigurationSetEventDestinationRequest(input *DeleteConfigurationSetEventDestinationInput) DeleteConfigurationSetEventDestinationRequest {
+func (c *Client) DeleteConfigurationSetEventDestinationRequest(input *types.DeleteConfigurationSetEventDestinationInput) DeleteConfigurationSetEventDestinationRequest {
 	op := &aws.Operation{
 		Name:       opDeleteConfigurationSetEventDestination,
 		HTTPMethod: "DELETE",
@@ -100,10 +32,10 @@ func (c *Client) DeleteConfigurationSetEventDestinationRequest(input *DeleteConf
 	}
 
 	if input == nil {
-		input = &DeleteConfigurationSetEventDestinationInput{}
+		input = &types.DeleteConfigurationSetEventDestinationInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteConfigurationSetEventDestinationOutput{})
+	req := c.newRequest(op, input, &types.DeleteConfigurationSetEventDestinationOutput{})
 	return DeleteConfigurationSetEventDestinationRequest{Request: req, Input: input, Copy: c.DeleteConfigurationSetEventDestinationRequest}
 }
 
@@ -111,8 +43,8 @@ func (c *Client) DeleteConfigurationSetEventDestinationRequest(input *DeleteConf
 // DeleteConfigurationSetEventDestination API operation.
 type DeleteConfigurationSetEventDestinationRequest struct {
 	*aws.Request
-	Input *DeleteConfigurationSetEventDestinationInput
-	Copy  func(*DeleteConfigurationSetEventDestinationInput) DeleteConfigurationSetEventDestinationRequest
+	Input *types.DeleteConfigurationSetEventDestinationInput
+	Copy  func(*types.DeleteConfigurationSetEventDestinationInput) DeleteConfigurationSetEventDestinationRequest
 }
 
 // Send marshals and sends the DeleteConfigurationSetEventDestination API request.
@@ -124,7 +56,7 @@ func (r DeleteConfigurationSetEventDestinationRequest) Send(ctx context.Context)
 	}
 
 	resp := &DeleteConfigurationSetEventDestinationResponse{
-		DeleteConfigurationSetEventDestinationOutput: r.Request.Data.(*DeleteConfigurationSetEventDestinationOutput),
+		DeleteConfigurationSetEventDestinationOutput: r.Request.Data.(*types.DeleteConfigurationSetEventDestinationOutput),
 		response: &aws.Response{Request: r.Request},
 	}
 
@@ -134,7 +66,7 @@ func (r DeleteConfigurationSetEventDestinationRequest) Send(ctx context.Context)
 // DeleteConfigurationSetEventDestinationResponse is the response type for the
 // DeleteConfigurationSetEventDestination API operation.
 type DeleteConfigurationSetEventDestinationResponse struct {
-	*DeleteConfigurationSetEventDestinationOutput
+	*types.DeleteConfigurationSetEventDestinationOutput
 
 	response *aws.Response
 }

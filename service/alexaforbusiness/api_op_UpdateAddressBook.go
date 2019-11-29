@@ -6,57 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/alexaforbusiness/types"
 )
-
-type UpdateAddressBookInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ARN of the room to update.
-	//
-	// AddressBookArn is a required field
-	AddressBookArn *string `type:"string" required:"true"`
-
-	// The updated description of the room.
-	Description *string `min:"1" type:"string"`
-
-	// The updated name of the room.
-	Name *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s UpdateAddressBookInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateAddressBookInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateAddressBookInput"}
-
-	if s.AddressBookArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("AddressBookArn"))
-	}
-	if s.Description != nil && len(*s.Description) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Description", 1))
-	}
-	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type UpdateAddressBookOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s UpdateAddressBookOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opUpdateAddressBook = "UpdateAddressBook"
 
@@ -73,7 +24,7 @@ const opUpdateAddressBook = "UpdateAddressBook"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/UpdateAddressBook
-func (c *Client) UpdateAddressBookRequest(input *UpdateAddressBookInput) UpdateAddressBookRequest {
+func (c *Client) UpdateAddressBookRequest(input *types.UpdateAddressBookInput) UpdateAddressBookRequest {
 	op := &aws.Operation{
 		Name:       opUpdateAddressBook,
 		HTTPMethod: "POST",
@@ -81,10 +32,10 @@ func (c *Client) UpdateAddressBookRequest(input *UpdateAddressBookInput) UpdateA
 	}
 
 	if input == nil {
-		input = &UpdateAddressBookInput{}
+		input = &types.UpdateAddressBookInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateAddressBookOutput{})
+	req := c.newRequest(op, input, &types.UpdateAddressBookOutput{})
 	return UpdateAddressBookRequest{Request: req, Input: input, Copy: c.UpdateAddressBookRequest}
 }
 
@@ -92,8 +43,8 @@ func (c *Client) UpdateAddressBookRequest(input *UpdateAddressBookInput) UpdateA
 // UpdateAddressBook API operation.
 type UpdateAddressBookRequest struct {
 	*aws.Request
-	Input *UpdateAddressBookInput
-	Copy  func(*UpdateAddressBookInput) UpdateAddressBookRequest
+	Input *types.UpdateAddressBookInput
+	Copy  func(*types.UpdateAddressBookInput) UpdateAddressBookRequest
 }
 
 // Send marshals and sends the UpdateAddressBook API request.
@@ -105,7 +56,7 @@ func (r UpdateAddressBookRequest) Send(ctx context.Context) (*UpdateAddressBookR
 	}
 
 	resp := &UpdateAddressBookResponse{
-		UpdateAddressBookOutput: r.Request.Data.(*UpdateAddressBookOutput),
+		UpdateAddressBookOutput: r.Request.Data.(*types.UpdateAddressBookOutput),
 		response:                &aws.Response{Request: r.Request},
 	}
 
@@ -115,7 +66,7 @@ func (r UpdateAddressBookRequest) Send(ctx context.Context) (*UpdateAddressBookR
 // UpdateAddressBookResponse is the response type for the
 // UpdateAddressBook API operation.
 type UpdateAddressBookResponse struct {
-	*UpdateAddressBookOutput
+	*types.UpdateAddressBookOutput
 
 	response *aws.Response
 }

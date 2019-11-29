@@ -6,95 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/pinpoint/types"
 )
-
-type UpdateAdmChannelInput struct {
-	_ struct{} `type:"structure" payload:"ADMChannelRequest"`
-
-	// Specifies the status and settings of the ADM (Amazon Device Messaging) channel
-	// for an application.
-	//
-	// ADMChannelRequest is a required field
-	ADMChannelRequest *ADMChannelRequest `type:"structure" required:"true"`
-
-	// ApplicationId is a required field
-	ApplicationId *string `location:"uri" locationName:"application-id" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s UpdateAdmChannelInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateAdmChannelInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateAdmChannelInput"}
-
-	if s.ADMChannelRequest == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ADMChannelRequest"))
-	}
-
-	if s.ApplicationId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ApplicationId"))
-	}
-	if s.ADMChannelRequest != nil {
-		if err := s.ADMChannelRequest.Validate(); err != nil {
-			invalidParams.AddNested("ADMChannelRequest", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s UpdateAdmChannelInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.ApplicationId != nil {
-		v := *s.ApplicationId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "application-id", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.ADMChannelRequest != nil {
-		v := s.ADMChannelRequest
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.PayloadTarget, "ADMChannelRequest", v, metadata)
-	}
-	return nil
-}
-
-type UpdateAdmChannelOutput struct {
-	_ struct{} `type:"structure" payload:"ADMChannelResponse"`
-
-	// Provides information about the status and settings of the ADM (Amazon Device
-	// Messaging) channel for an application.
-	//
-	// ADMChannelResponse is a required field
-	ADMChannelResponse *ADMChannelResponse `type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s UpdateAdmChannelOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s UpdateAdmChannelOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.ADMChannelResponse != nil {
-		v := s.ADMChannelResponse
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.PayloadTarget, "ADMChannelResponse", v, metadata)
-	}
-	return nil
-}
 
 const opUpdateAdmChannel = "UpdateAdmChannel"
 
@@ -112,7 +25,7 @@ const opUpdateAdmChannel = "UpdateAdmChannel"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/UpdateAdmChannel
-func (c *Client) UpdateAdmChannelRequest(input *UpdateAdmChannelInput) UpdateAdmChannelRequest {
+func (c *Client) UpdateAdmChannelRequest(input *types.UpdateAdmChannelInput) UpdateAdmChannelRequest {
 	op := &aws.Operation{
 		Name:       opUpdateAdmChannel,
 		HTTPMethod: "PUT",
@@ -120,10 +33,10 @@ func (c *Client) UpdateAdmChannelRequest(input *UpdateAdmChannelInput) UpdateAdm
 	}
 
 	if input == nil {
-		input = &UpdateAdmChannelInput{}
+		input = &types.UpdateAdmChannelInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateAdmChannelOutput{})
+	req := c.newRequest(op, input, &types.UpdateAdmChannelOutput{})
 	return UpdateAdmChannelRequest{Request: req, Input: input, Copy: c.UpdateAdmChannelRequest}
 }
 
@@ -131,8 +44,8 @@ func (c *Client) UpdateAdmChannelRequest(input *UpdateAdmChannelInput) UpdateAdm
 // UpdateAdmChannel API operation.
 type UpdateAdmChannelRequest struct {
 	*aws.Request
-	Input *UpdateAdmChannelInput
-	Copy  func(*UpdateAdmChannelInput) UpdateAdmChannelRequest
+	Input *types.UpdateAdmChannelInput
+	Copy  func(*types.UpdateAdmChannelInput) UpdateAdmChannelRequest
 }
 
 // Send marshals and sends the UpdateAdmChannel API request.
@@ -144,7 +57,7 @@ func (r UpdateAdmChannelRequest) Send(ctx context.Context) (*UpdateAdmChannelRes
 	}
 
 	resp := &UpdateAdmChannelResponse{
-		UpdateAdmChannelOutput: r.Request.Data.(*UpdateAdmChannelOutput),
+		UpdateAdmChannelOutput: r.Request.Data.(*types.UpdateAdmChannelOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -154,7 +67,7 @@ func (r UpdateAdmChannelRequest) Send(ctx context.Context) (*UpdateAdmChannelRes
 // UpdateAdmChannelResponse is the response type for the
 // UpdateAdmChannel API operation.
 type UpdateAdmChannelResponse struct {
-	*UpdateAdmChannelOutput
+	*types.UpdateAdmChannelOutput
 
 	response *aws.Response
 }

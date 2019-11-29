@@ -6,60 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/devicefarm/types"
 )
-
-// Represents a request to the update project operation.
-type UpdateProjectInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the project whose name you wish to update.
-	//
-	// Arn is a required field
-	Arn *string `locationName:"arn" min:"32" type:"string" required:"true"`
-
-	// The number of minutes a test run in the project will execute before it times
-	// out.
-	DefaultJobTimeoutMinutes *int64 `locationName:"defaultJobTimeoutMinutes" type:"integer"`
-
-	// A string representing the new name of the project that you are updating.
-	Name *string `locationName:"name" type:"string"`
-}
-
-// String returns the string representation
-func (s UpdateProjectInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateProjectInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateProjectInput"}
-
-	if s.Arn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Arn"))
-	}
-	if s.Arn != nil && len(*s.Arn) < 32 {
-		invalidParams.Add(aws.NewErrParamMinLen("Arn", 32))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Represents the result of an update project request.
-type UpdateProjectOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The project you wish to update.
-	Project *Project `locationName:"project" type:"structure"`
-}
-
-// String returns the string representation
-func (s UpdateProjectOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opUpdateProject = "UpdateProject"
 
@@ -76,7 +24,7 @@ const opUpdateProject = "UpdateProject"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/UpdateProject
-func (c *Client) UpdateProjectRequest(input *UpdateProjectInput) UpdateProjectRequest {
+func (c *Client) UpdateProjectRequest(input *types.UpdateProjectInput) UpdateProjectRequest {
 	op := &aws.Operation{
 		Name:       opUpdateProject,
 		HTTPMethod: "POST",
@@ -84,10 +32,10 @@ func (c *Client) UpdateProjectRequest(input *UpdateProjectInput) UpdateProjectRe
 	}
 
 	if input == nil {
-		input = &UpdateProjectInput{}
+		input = &types.UpdateProjectInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateProjectOutput{})
+	req := c.newRequest(op, input, &types.UpdateProjectOutput{})
 	return UpdateProjectRequest{Request: req, Input: input, Copy: c.UpdateProjectRequest}
 }
 
@@ -95,8 +43,8 @@ func (c *Client) UpdateProjectRequest(input *UpdateProjectInput) UpdateProjectRe
 // UpdateProject API operation.
 type UpdateProjectRequest struct {
 	*aws.Request
-	Input *UpdateProjectInput
-	Copy  func(*UpdateProjectInput) UpdateProjectRequest
+	Input *types.UpdateProjectInput
+	Copy  func(*types.UpdateProjectInput) UpdateProjectRequest
 }
 
 // Send marshals and sends the UpdateProject API request.
@@ -108,7 +56,7 @@ func (r UpdateProjectRequest) Send(ctx context.Context) (*UpdateProjectResponse,
 	}
 
 	resp := &UpdateProjectResponse{
-		UpdateProjectOutput: r.Request.Data.(*UpdateProjectOutput),
+		UpdateProjectOutput: r.Request.Data.(*types.UpdateProjectOutput),
 		response:            &aws.Response{Request: r.Request},
 	}
 
@@ -118,7 +66,7 @@ func (r UpdateProjectRequest) Send(ctx context.Context) (*UpdateProjectResponse,
 // UpdateProjectResponse is the response type for the
 // UpdateProject API operation.
 type UpdateProjectResponse struct {
-	*UpdateProjectOutput
+	*types.UpdateProjectOutput
 
 	response *aws.Response
 }

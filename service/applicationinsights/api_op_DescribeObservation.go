@@ -6,48 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/applicationinsights/types"
 )
-
-type DescribeObservationInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the observation.
-	//
-	// ObservationId is a required field
-	ObservationId *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeObservationInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeObservationInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeObservationInput"}
-
-	if s.ObservationId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ObservationId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribeObservationOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Information about the observation.
-	Observation *Observation `type:"structure"`
-}
-
-// String returns the string representation
-func (s DescribeObservationOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeObservation = "DescribeObservation"
 
@@ -64,7 +24,7 @@ const opDescribeObservation = "DescribeObservation"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/application-insights-2018-11-25/DescribeObservation
-func (c *Client) DescribeObservationRequest(input *DescribeObservationInput) DescribeObservationRequest {
+func (c *Client) DescribeObservationRequest(input *types.DescribeObservationInput) DescribeObservationRequest {
 	op := &aws.Operation{
 		Name:       opDescribeObservation,
 		HTTPMethod: "POST",
@@ -72,10 +32,10 @@ func (c *Client) DescribeObservationRequest(input *DescribeObservationInput) Des
 	}
 
 	if input == nil {
-		input = &DescribeObservationInput{}
+		input = &types.DescribeObservationInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeObservationOutput{})
+	req := c.newRequest(op, input, &types.DescribeObservationOutput{})
 	return DescribeObservationRequest{Request: req, Input: input, Copy: c.DescribeObservationRequest}
 }
 
@@ -83,8 +43,8 @@ func (c *Client) DescribeObservationRequest(input *DescribeObservationInput) Des
 // DescribeObservation API operation.
 type DescribeObservationRequest struct {
 	*aws.Request
-	Input *DescribeObservationInput
-	Copy  func(*DescribeObservationInput) DescribeObservationRequest
+	Input *types.DescribeObservationInput
+	Copy  func(*types.DescribeObservationInput) DescribeObservationRequest
 }
 
 // Send marshals and sends the DescribeObservation API request.
@@ -96,7 +56,7 @@ func (r DescribeObservationRequest) Send(ctx context.Context) (*DescribeObservat
 	}
 
 	resp := &DescribeObservationResponse{
-		DescribeObservationOutput: r.Request.Data.(*DescribeObservationOutput),
+		DescribeObservationOutput: r.Request.Data.(*types.DescribeObservationOutput),
 		response:                  &aws.Response{Request: r.Request},
 	}
 
@@ -106,7 +66,7 @@ func (r DescribeObservationRequest) Send(ctx context.Context) (*DescribeObservat
 // DescribeObservationResponse is the response type for the
 // DescribeObservation API operation.
 type DescribeObservationResponse struct {
-	*DescribeObservationOutput
+	*types.DescribeObservationOutput
 
 	response *aws.Response
 }

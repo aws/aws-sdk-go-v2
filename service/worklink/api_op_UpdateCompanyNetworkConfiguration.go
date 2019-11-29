@@ -6,124 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/worklink/types"
 )
-
-type UpdateCompanyNetworkConfigurationInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ARN of the fleet.
-	//
-	// FleetArn is a required field
-	FleetArn *string `min:"20" type:"string" required:"true"`
-
-	// The security groups associated with access to the provided subnets.
-	//
-	// SecurityGroupIds is a required field
-	SecurityGroupIds []string `type:"list" required:"true"`
-
-	// The subnets used for X-ENI connections from Amazon WorkLink rendering containers.
-	//
-	// SubnetIds is a required field
-	SubnetIds []string `type:"list" required:"true"`
-
-	// The VPC with connectivity to associated websites.
-	//
-	// VpcId is a required field
-	VpcId *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s UpdateCompanyNetworkConfigurationInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateCompanyNetworkConfigurationInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateCompanyNetworkConfigurationInput"}
-
-	if s.FleetArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("FleetArn"))
-	}
-	if s.FleetArn != nil && len(*s.FleetArn) < 20 {
-		invalidParams.Add(aws.NewErrParamMinLen("FleetArn", 20))
-	}
-
-	if s.SecurityGroupIds == nil {
-		invalidParams.Add(aws.NewErrParamRequired("SecurityGroupIds"))
-	}
-
-	if s.SubnetIds == nil {
-		invalidParams.Add(aws.NewErrParamRequired("SubnetIds"))
-	}
-
-	if s.VpcId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("VpcId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s UpdateCompanyNetworkConfigurationInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.FleetArn != nil {
-		v := *s.FleetArn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "FleetArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.SecurityGroupIds != nil {
-		v := s.SecurityGroupIds
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "SecurityGroupIds", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
-		}
-		ls0.End()
-
-	}
-	if s.SubnetIds != nil {
-		v := s.SubnetIds
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "SubnetIds", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
-		}
-		ls0.End()
-
-	}
-	if s.VpcId != nil {
-		v := *s.VpcId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "VpcId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type UpdateCompanyNetworkConfigurationOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s UpdateCompanyNetworkConfigurationOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s UpdateCompanyNetworkConfigurationOutput) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
 
 const opUpdateCompanyNetworkConfiguration = "UpdateCompanyNetworkConfiguration"
 
@@ -140,7 +24,7 @@ const opUpdateCompanyNetworkConfiguration = "UpdateCompanyNetworkConfiguration"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/worklink-2018-09-25/UpdateCompanyNetworkConfiguration
-func (c *Client) UpdateCompanyNetworkConfigurationRequest(input *UpdateCompanyNetworkConfigurationInput) UpdateCompanyNetworkConfigurationRequest {
+func (c *Client) UpdateCompanyNetworkConfigurationRequest(input *types.UpdateCompanyNetworkConfigurationInput) UpdateCompanyNetworkConfigurationRequest {
 	op := &aws.Operation{
 		Name:       opUpdateCompanyNetworkConfiguration,
 		HTTPMethod: "POST",
@@ -148,10 +32,10 @@ func (c *Client) UpdateCompanyNetworkConfigurationRequest(input *UpdateCompanyNe
 	}
 
 	if input == nil {
-		input = &UpdateCompanyNetworkConfigurationInput{}
+		input = &types.UpdateCompanyNetworkConfigurationInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateCompanyNetworkConfigurationOutput{})
+	req := c.newRequest(op, input, &types.UpdateCompanyNetworkConfigurationOutput{})
 	return UpdateCompanyNetworkConfigurationRequest{Request: req, Input: input, Copy: c.UpdateCompanyNetworkConfigurationRequest}
 }
 
@@ -159,8 +43,8 @@ func (c *Client) UpdateCompanyNetworkConfigurationRequest(input *UpdateCompanyNe
 // UpdateCompanyNetworkConfiguration API operation.
 type UpdateCompanyNetworkConfigurationRequest struct {
 	*aws.Request
-	Input *UpdateCompanyNetworkConfigurationInput
-	Copy  func(*UpdateCompanyNetworkConfigurationInput) UpdateCompanyNetworkConfigurationRequest
+	Input *types.UpdateCompanyNetworkConfigurationInput
+	Copy  func(*types.UpdateCompanyNetworkConfigurationInput) UpdateCompanyNetworkConfigurationRequest
 }
 
 // Send marshals and sends the UpdateCompanyNetworkConfiguration API request.
@@ -172,7 +56,7 @@ func (r UpdateCompanyNetworkConfigurationRequest) Send(ctx context.Context) (*Up
 	}
 
 	resp := &UpdateCompanyNetworkConfigurationResponse{
-		UpdateCompanyNetworkConfigurationOutput: r.Request.Data.(*UpdateCompanyNetworkConfigurationOutput),
+		UpdateCompanyNetworkConfigurationOutput: r.Request.Data.(*types.UpdateCompanyNetworkConfigurationOutput),
 		response:                                &aws.Response{Request: r.Request},
 	}
 
@@ -182,7 +66,7 @@ func (r UpdateCompanyNetworkConfigurationRequest) Send(ctx context.Context) (*Up
 // UpdateCompanyNetworkConfigurationResponse is the response type for the
 // UpdateCompanyNetworkConfiguration API operation.
 type UpdateCompanyNetworkConfigurationResponse struct {
-	*UpdateCompanyNetworkConfigurationOutput
+	*types.UpdateCompanyNetworkConfigurationOutput
 
 	response *aws.Response
 }

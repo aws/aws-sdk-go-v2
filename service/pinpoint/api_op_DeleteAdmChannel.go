@@ -6,74 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/pinpoint/types"
 )
-
-type DeleteAdmChannelInput struct {
-	_ struct{} `type:"structure"`
-
-	// ApplicationId is a required field
-	ApplicationId *string `location:"uri" locationName:"application-id" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteAdmChannelInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteAdmChannelInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteAdmChannelInput"}
-
-	if s.ApplicationId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ApplicationId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteAdmChannelInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.ApplicationId != nil {
-		v := *s.ApplicationId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "application-id", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type DeleteAdmChannelOutput struct {
-	_ struct{} `type:"structure" payload:"ADMChannelResponse"`
-
-	// Provides information about the status and settings of the ADM (Amazon Device
-	// Messaging) channel for an application.
-	//
-	// ADMChannelResponse is a required field
-	ADMChannelResponse *ADMChannelResponse `type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteAdmChannelOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteAdmChannelOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.ADMChannelResponse != nil {
-		v := s.ADMChannelResponse
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.PayloadTarget, "ADMChannelResponse", v, metadata)
-	}
-	return nil
-}
 
 const opDeleteAdmChannel = "DeleteAdmChannel"
 
@@ -91,7 +25,7 @@ const opDeleteAdmChannel = "DeleteAdmChannel"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/DeleteAdmChannel
-func (c *Client) DeleteAdmChannelRequest(input *DeleteAdmChannelInput) DeleteAdmChannelRequest {
+func (c *Client) DeleteAdmChannelRequest(input *types.DeleteAdmChannelInput) DeleteAdmChannelRequest {
 	op := &aws.Operation{
 		Name:       opDeleteAdmChannel,
 		HTTPMethod: "DELETE",
@@ -99,10 +33,10 @@ func (c *Client) DeleteAdmChannelRequest(input *DeleteAdmChannelInput) DeleteAdm
 	}
 
 	if input == nil {
-		input = &DeleteAdmChannelInput{}
+		input = &types.DeleteAdmChannelInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteAdmChannelOutput{})
+	req := c.newRequest(op, input, &types.DeleteAdmChannelOutput{})
 	return DeleteAdmChannelRequest{Request: req, Input: input, Copy: c.DeleteAdmChannelRequest}
 }
 
@@ -110,8 +44,8 @@ func (c *Client) DeleteAdmChannelRequest(input *DeleteAdmChannelInput) DeleteAdm
 // DeleteAdmChannel API operation.
 type DeleteAdmChannelRequest struct {
 	*aws.Request
-	Input *DeleteAdmChannelInput
-	Copy  func(*DeleteAdmChannelInput) DeleteAdmChannelRequest
+	Input *types.DeleteAdmChannelInput
+	Copy  func(*types.DeleteAdmChannelInput) DeleteAdmChannelRequest
 }
 
 // Send marshals and sends the DeleteAdmChannel API request.
@@ -123,7 +57,7 @@ func (r DeleteAdmChannelRequest) Send(ctx context.Context) (*DeleteAdmChannelRes
 	}
 
 	resp := &DeleteAdmChannelResponse{
-		DeleteAdmChannelOutput: r.Request.Data.(*DeleteAdmChannelOutput),
+		DeleteAdmChannelOutput: r.Request.Data.(*types.DeleteAdmChannelOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -133,7 +67,7 @@ func (r DeleteAdmChannelRequest) Send(ctx context.Context) (*DeleteAdmChannelRes
 // DeleteAdmChannelResponse is the response type for the
 // DeleteAdmChannel API operation.
 type DeleteAdmChannelResponse struct {
-	*DeleteAdmChannelOutput
+	*types.DeleteAdmChannelOutput
 
 	response *aws.Response
 }

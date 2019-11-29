@@ -6,57 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/servicediscovery/types"
 )
-
-type CreateHttpNamespaceInput struct {
-	_ struct{} `type:"structure"`
-
-	// A unique string that identifies the request and that allows failed CreateHttpNamespace
-	// requests to be retried without the risk of executing the operation twice.
-	// CreatorRequestId can be any unique string, for example, a date/time stamp.
-	CreatorRequestId *string `type:"string" idempotencyToken:"true"`
-
-	// A description for the namespace.
-	Description *string `type:"string"`
-
-	// The name that you want to assign to this namespace.
-	//
-	// Name is a required field
-	Name *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s CreateHttpNamespaceInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateHttpNamespaceInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateHttpNamespaceInput"}
-
-	if s.Name == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Name"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type CreateHttpNamespaceOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A value that you can use to determine whether the request completed successfully.
-	// To get the status of the operation, see GetOperation.
-	OperationId *string `type:"string"`
-}
-
-// String returns the string representation
-func (s CreateHttpNamespaceOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCreateHttpNamespace = "CreateHttpNamespace"
 
@@ -79,7 +30,7 @@ const opCreateHttpNamespace = "CreateHttpNamespace"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicediscovery-2017-03-14/CreateHttpNamespace
-func (c *Client) CreateHttpNamespaceRequest(input *CreateHttpNamespaceInput) CreateHttpNamespaceRequest {
+func (c *Client) CreateHttpNamespaceRequest(input *types.CreateHttpNamespaceInput) CreateHttpNamespaceRequest {
 	op := &aws.Operation{
 		Name:       opCreateHttpNamespace,
 		HTTPMethod: "POST",
@@ -87,10 +38,10 @@ func (c *Client) CreateHttpNamespaceRequest(input *CreateHttpNamespaceInput) Cre
 	}
 
 	if input == nil {
-		input = &CreateHttpNamespaceInput{}
+		input = &types.CreateHttpNamespaceInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateHttpNamespaceOutput{})
+	req := c.newRequest(op, input, &types.CreateHttpNamespaceOutput{})
 	return CreateHttpNamespaceRequest{Request: req, Input: input, Copy: c.CreateHttpNamespaceRequest}
 }
 
@@ -98,8 +49,8 @@ func (c *Client) CreateHttpNamespaceRequest(input *CreateHttpNamespaceInput) Cre
 // CreateHttpNamespace API operation.
 type CreateHttpNamespaceRequest struct {
 	*aws.Request
-	Input *CreateHttpNamespaceInput
-	Copy  func(*CreateHttpNamespaceInput) CreateHttpNamespaceRequest
+	Input *types.CreateHttpNamespaceInput
+	Copy  func(*types.CreateHttpNamespaceInput) CreateHttpNamespaceRequest
 }
 
 // Send marshals and sends the CreateHttpNamespace API request.
@@ -111,7 +62,7 @@ func (r CreateHttpNamespaceRequest) Send(ctx context.Context) (*CreateHttpNamesp
 	}
 
 	resp := &CreateHttpNamespaceResponse{
-		CreateHttpNamespaceOutput: r.Request.Data.(*CreateHttpNamespaceOutput),
+		CreateHttpNamespaceOutput: r.Request.Data.(*types.CreateHttpNamespaceOutput),
 		response:                  &aws.Response{Request: r.Request},
 	}
 
@@ -121,7 +72,7 @@ func (r CreateHttpNamespaceRequest) Send(ctx context.Context) (*CreateHttpNamesp
 // CreateHttpNamespaceResponse is the response type for the
 // CreateHttpNamespace API operation.
 type CreateHttpNamespaceResponse struct {
-	*CreateHttpNamespaceOutput
+	*types.CreateHttpNamespaceOutput
 
 	response *aws.Response
 }

@@ -10,6 +10,7 @@ package shieldiface
 
 import (
 	"github.com/aws/aws-sdk-go-v2/service/shield"
+	"github.com/aws/aws-sdk-go-v2/service/shield/types"
 )
 
 // ClientAPI provides an interface to enable mocking the
@@ -43,7 +44,7 @@ import (
 //    type mockClientClient struct {
 //        shieldiface.ClientPI
 //    }
-//    func (m *mockClientClient) AssociateDRTLogBucket(input *shield.AssociateDRTLogBucketInput) (*shield.AssociateDRTLogBucketOutput, error) {
+//    func (m *mockClientClient) AssociateDRTLogBucket(input *types.AssociateDRTLogBucketInput) (*types.AssociateDRTLogBucketOutput, error) {
 //        // mock response/functionality
 //    }
 //
@@ -61,41 +62,41 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type ClientAPI interface {
-	AssociateDRTLogBucketRequest(*shield.AssociateDRTLogBucketInput) shield.AssociateDRTLogBucketRequest
+	AssociateDRTLogBucketRequest(*types.AssociateDRTLogBucketInput) shield.AssociateDRTLogBucketRequest
 
-	AssociateDRTRoleRequest(*shield.AssociateDRTRoleInput) shield.AssociateDRTRoleRequest
+	AssociateDRTRoleRequest(*types.AssociateDRTRoleInput) shield.AssociateDRTRoleRequest
 
-	CreateProtectionRequest(*shield.CreateProtectionInput) shield.CreateProtectionRequest
+	CreateProtectionRequest(*types.CreateProtectionInput) shield.CreateProtectionRequest
 
-	CreateSubscriptionRequest(*shield.CreateSubscriptionInput) shield.CreateSubscriptionRequest
+	CreateSubscriptionRequest(*types.CreateSubscriptionInput) shield.CreateSubscriptionRequest
 
-	DeleteProtectionRequest(*shield.DeleteProtectionInput) shield.DeleteProtectionRequest
+	DeleteProtectionRequest(*types.DeleteProtectionInput) shield.DeleteProtectionRequest
 
-	DeleteSubscriptionRequest(*shield.DeleteSubscriptionInput) shield.DeleteSubscriptionRequest
+	DeleteSubscriptionRequest(*types.DeleteSubscriptionInput) shield.DeleteSubscriptionRequest
 
-	DescribeAttackRequest(*shield.DescribeAttackInput) shield.DescribeAttackRequest
+	DescribeAttackRequest(*types.DescribeAttackInput) shield.DescribeAttackRequest
 
-	DescribeDRTAccessRequest(*shield.DescribeDRTAccessInput) shield.DescribeDRTAccessRequest
+	DescribeDRTAccessRequest(*types.DescribeDRTAccessInput) shield.DescribeDRTAccessRequest
 
-	DescribeEmergencyContactSettingsRequest(*shield.DescribeEmergencyContactSettingsInput) shield.DescribeEmergencyContactSettingsRequest
+	DescribeEmergencyContactSettingsRequest(*types.DescribeEmergencyContactSettingsInput) shield.DescribeEmergencyContactSettingsRequest
 
-	DescribeProtectionRequest(*shield.DescribeProtectionInput) shield.DescribeProtectionRequest
+	DescribeProtectionRequest(*types.DescribeProtectionInput) shield.DescribeProtectionRequest
 
-	DescribeSubscriptionRequest(*shield.DescribeSubscriptionInput) shield.DescribeSubscriptionRequest
+	DescribeSubscriptionRequest(*types.DescribeSubscriptionInput) shield.DescribeSubscriptionRequest
 
-	DisassociateDRTLogBucketRequest(*shield.DisassociateDRTLogBucketInput) shield.DisassociateDRTLogBucketRequest
+	DisassociateDRTLogBucketRequest(*types.DisassociateDRTLogBucketInput) shield.DisassociateDRTLogBucketRequest
 
-	DisassociateDRTRoleRequest(*shield.DisassociateDRTRoleInput) shield.DisassociateDRTRoleRequest
+	DisassociateDRTRoleRequest(*types.DisassociateDRTRoleInput) shield.DisassociateDRTRoleRequest
 
-	GetSubscriptionStateRequest(*shield.GetSubscriptionStateInput) shield.GetSubscriptionStateRequest
+	GetSubscriptionStateRequest(*types.GetSubscriptionStateInput) shield.GetSubscriptionStateRequest
 
-	ListAttacksRequest(*shield.ListAttacksInput) shield.ListAttacksRequest
+	ListAttacksRequest(*types.ListAttacksInput) shield.ListAttacksRequest
 
-	ListProtectionsRequest(*shield.ListProtectionsInput) shield.ListProtectionsRequest
+	ListProtectionsRequest(*types.ListProtectionsInput) shield.ListProtectionsRequest
 
-	UpdateEmergencyContactSettingsRequest(*shield.UpdateEmergencyContactSettingsInput) shield.UpdateEmergencyContactSettingsRequest
+	UpdateEmergencyContactSettingsRequest(*types.UpdateEmergencyContactSettingsInput) shield.UpdateEmergencyContactSettingsRequest
 
-	UpdateSubscriptionRequest(*shield.UpdateSubscriptionInput) shield.UpdateSubscriptionRequest
+	UpdateSubscriptionRequest(*types.UpdateSubscriptionInput) shield.UpdateSubscriptionRequest
 }
 
 var _ ClientAPI = (*shield.Client)(nil)

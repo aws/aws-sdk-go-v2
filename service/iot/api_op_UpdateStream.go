@@ -4,153 +4,10 @@ package iot
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/iot/types"
 )
-
-type UpdateStreamInput struct {
-	_ struct{} `type:"structure"`
-
-	// The description of the stream.
-	Description *string `locationName:"description" type:"string"`
-
-	// The files associated with the stream.
-	Files []StreamFile `locationName:"files" min:"1" type:"list"`
-
-	// An IAM role that allows the IoT service principal assumes to access your
-	// S3 files.
-	RoleArn *string `locationName:"roleArn" min:"20" type:"string"`
-
-	// The stream ID.
-	//
-	// StreamId is a required field
-	StreamId *string `location:"uri" locationName:"streamId" min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s UpdateStreamInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateStreamInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateStreamInput"}
-	if s.Files != nil && len(s.Files) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Files", 1))
-	}
-	if s.RoleArn != nil && len(*s.RoleArn) < 20 {
-		invalidParams.Add(aws.NewErrParamMinLen("RoleArn", 20))
-	}
-
-	if s.StreamId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("StreamId"))
-	}
-	if s.StreamId != nil && len(*s.StreamId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("StreamId", 1))
-	}
-	if s.Files != nil {
-		for i, v := range s.Files {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Files", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s UpdateStreamInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.Description != nil {
-		v := *s.Description
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "description", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Files != nil {
-		v := s.Files
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "files", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	if s.RoleArn != nil {
-		v := *s.RoleArn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "roleArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.StreamId != nil {
-		v := *s.StreamId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "streamId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type UpdateStreamOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A description of the stream.
-	Description *string `locationName:"description" type:"string"`
-
-	// The stream ARN.
-	StreamArn *string `locationName:"streamArn" type:"string"`
-
-	// The stream ID.
-	StreamId *string `locationName:"streamId" min:"1" type:"string"`
-
-	// The stream version.
-	StreamVersion *int64 `locationName:"streamVersion" type:"integer"`
-}
-
-// String returns the string representation
-func (s UpdateStreamOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s UpdateStreamOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.Description != nil {
-		v := *s.Description
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "description", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.StreamArn != nil {
-		v := *s.StreamArn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "streamArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.StreamId != nil {
-		v := *s.StreamId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "streamId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.StreamVersion != nil {
-		v := *s.StreamVersion
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "streamVersion", protocol.Int64Value(v), metadata)
-	}
-	return nil
-}
 
 const opUpdateStream = "UpdateStream"
 
@@ -165,7 +22,7 @@ const opUpdateStream = "UpdateStream"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) UpdateStreamRequest(input *UpdateStreamInput) UpdateStreamRequest {
+func (c *Client) UpdateStreamRequest(input *types.UpdateStreamInput) UpdateStreamRequest {
 	op := &aws.Operation{
 		Name:       opUpdateStream,
 		HTTPMethod: "PUT",
@@ -173,10 +30,10 @@ func (c *Client) UpdateStreamRequest(input *UpdateStreamInput) UpdateStreamReque
 	}
 
 	if input == nil {
-		input = &UpdateStreamInput{}
+		input = &types.UpdateStreamInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateStreamOutput{})
+	req := c.newRequest(op, input, &types.UpdateStreamOutput{})
 	return UpdateStreamRequest{Request: req, Input: input, Copy: c.UpdateStreamRequest}
 }
 
@@ -184,8 +41,8 @@ func (c *Client) UpdateStreamRequest(input *UpdateStreamInput) UpdateStreamReque
 // UpdateStream API operation.
 type UpdateStreamRequest struct {
 	*aws.Request
-	Input *UpdateStreamInput
-	Copy  func(*UpdateStreamInput) UpdateStreamRequest
+	Input *types.UpdateStreamInput
+	Copy  func(*types.UpdateStreamInput) UpdateStreamRequest
 }
 
 // Send marshals and sends the UpdateStream API request.
@@ -197,7 +54,7 @@ func (r UpdateStreamRequest) Send(ctx context.Context) (*UpdateStreamResponse, e
 	}
 
 	resp := &UpdateStreamResponse{
-		UpdateStreamOutput: r.Request.Data.(*UpdateStreamOutput),
+		UpdateStreamOutput: r.Request.Data.(*types.UpdateStreamOutput),
 		response:           &aws.Response{Request: r.Request},
 	}
 
@@ -207,7 +64,7 @@ func (r UpdateStreamRequest) Send(ctx context.Context) (*UpdateStreamResponse, e
 // UpdateStreamResponse is the response type for the
 // UpdateStream API operation.
 type UpdateStreamResponse struct {
-	*UpdateStreamOutput
+	*types.UpdateStreamOutput
 
 	response *aws.Response
 }

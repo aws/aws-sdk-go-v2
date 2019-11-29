@@ -6,68 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-type ModifyInstancePlacementInput struct {
-	_ struct{} `type:"structure"`
-
-	// The affinity setting for the instance.
-	Affinity Affinity `locationName:"affinity" type:"string" enum:"true"`
-
-	// The name of the placement group in which to place the instance. For spread
-	// placement groups, the instance must have a tenancy of default. For cluster
-	// and partition placement groups, the instance must have a tenancy of default
-	// or dedicated.
-	//
-	// To remove an instance from a placement group, specify an empty string ("").
-	GroupName *string `type:"string"`
-
-	// The ID of the Dedicated Host with which to associate the instance.
-	HostId *string `locationName:"hostId" type:"string"`
-
-	// The ID of the instance that you are modifying.
-	//
-	// InstanceId is a required field
-	InstanceId *string `locationName:"instanceId" type:"string" required:"true"`
-
-	// Reserved for future use.
-	PartitionNumber *int64 `type:"integer"`
-
-	// The tenancy for the instance.
-	Tenancy HostTenancy `locationName:"tenancy" type:"string" enum:"true"`
-}
-
-// String returns the string representation
-func (s ModifyInstancePlacementInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ModifyInstancePlacementInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ModifyInstancePlacementInput"}
-
-	if s.InstanceId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("InstanceId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ModifyInstancePlacementOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Is true if the request succeeds, and an error otherwise.
-	Return *bool `locationName:"return" type:"boolean"`
-}
-
-// String returns the string representation
-func (s ModifyInstancePlacementOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opModifyInstancePlacement = "ModifyInstancePlacement"
 
@@ -105,7 +45,7 @@ const opModifyInstancePlacement = "ModifyInstancePlacement"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyInstancePlacement
-func (c *Client) ModifyInstancePlacementRequest(input *ModifyInstancePlacementInput) ModifyInstancePlacementRequest {
+func (c *Client) ModifyInstancePlacementRequest(input *types.ModifyInstancePlacementInput) ModifyInstancePlacementRequest {
 	op := &aws.Operation{
 		Name:       opModifyInstancePlacement,
 		HTTPMethod: "POST",
@@ -113,10 +53,10 @@ func (c *Client) ModifyInstancePlacementRequest(input *ModifyInstancePlacementIn
 	}
 
 	if input == nil {
-		input = &ModifyInstancePlacementInput{}
+		input = &types.ModifyInstancePlacementInput{}
 	}
 
-	req := c.newRequest(op, input, &ModifyInstancePlacementOutput{})
+	req := c.newRequest(op, input, &types.ModifyInstancePlacementOutput{})
 	return ModifyInstancePlacementRequest{Request: req, Input: input, Copy: c.ModifyInstancePlacementRequest}
 }
 
@@ -124,8 +64,8 @@ func (c *Client) ModifyInstancePlacementRequest(input *ModifyInstancePlacementIn
 // ModifyInstancePlacement API operation.
 type ModifyInstancePlacementRequest struct {
 	*aws.Request
-	Input *ModifyInstancePlacementInput
-	Copy  func(*ModifyInstancePlacementInput) ModifyInstancePlacementRequest
+	Input *types.ModifyInstancePlacementInput
+	Copy  func(*types.ModifyInstancePlacementInput) ModifyInstancePlacementRequest
 }
 
 // Send marshals and sends the ModifyInstancePlacement API request.
@@ -137,7 +77,7 @@ func (r ModifyInstancePlacementRequest) Send(ctx context.Context) (*ModifyInstan
 	}
 
 	resp := &ModifyInstancePlacementResponse{
-		ModifyInstancePlacementOutput: r.Request.Data.(*ModifyInstancePlacementOutput),
+		ModifyInstancePlacementOutput: r.Request.Data.(*types.ModifyInstancePlacementOutput),
 		response:                      &aws.Response{Request: r.Request},
 	}
 
@@ -147,7 +87,7 @@ func (r ModifyInstancePlacementRequest) Send(ctx context.Context) (*ModifyInstan
 // ModifyInstancePlacementResponse is the response type for the
 // ModifyInstancePlacement API operation.
 type ModifyInstancePlacementResponse struct {
-	*ModifyInstancePlacementOutput
+	*types.ModifyInstancePlacementOutput
 
 	response *aws.Response
 }

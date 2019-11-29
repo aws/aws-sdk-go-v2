@@ -6,81 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/mediaconnect/types"
 )
-
-type DeleteFlowInput struct {
-	_ struct{} `type:"structure"`
-
-	// FlowArn is a required field
-	FlowArn *string `location:"uri" locationName:"flowArn" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteFlowInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteFlowInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteFlowInput"}
-
-	if s.FlowArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("FlowArn"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteFlowInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.FlowArn != nil {
-		v := *s.FlowArn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "flowArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-// The result of a successful DeleteFlow request.
-type DeleteFlowOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The ARN of the flow that was deleted.
-	FlowArn *string `locationName:"flowArn" type:"string"`
-
-	// The status of the flow when the DeleteFlow process begins.
-	Status Status `locationName:"status" type:"string" enum:"true"`
-}
-
-// String returns the string representation
-func (s DeleteFlowOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteFlowOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.FlowArn != nil {
-		v := *s.FlowArn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "flowArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if len(s.Status) > 0 {
-		v := s.Status
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "status", protocol.QuotedValue{ValueMarshaler: v}, metadata)
-	}
-	return nil
-}
 
 const opDeleteFlow = "DeleteFlow"
 
@@ -97,7 +24,7 @@ const opDeleteFlow = "DeleteFlow"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/DeleteFlow
-func (c *Client) DeleteFlowRequest(input *DeleteFlowInput) DeleteFlowRequest {
+func (c *Client) DeleteFlowRequest(input *types.DeleteFlowInput) DeleteFlowRequest {
 	op := &aws.Operation{
 		Name:       opDeleteFlow,
 		HTTPMethod: "DELETE",
@@ -105,10 +32,10 @@ func (c *Client) DeleteFlowRequest(input *DeleteFlowInput) DeleteFlowRequest {
 	}
 
 	if input == nil {
-		input = &DeleteFlowInput{}
+		input = &types.DeleteFlowInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteFlowOutput{})
+	req := c.newRequest(op, input, &types.DeleteFlowOutput{})
 	return DeleteFlowRequest{Request: req, Input: input, Copy: c.DeleteFlowRequest}
 }
 
@@ -116,8 +43,8 @@ func (c *Client) DeleteFlowRequest(input *DeleteFlowInput) DeleteFlowRequest {
 // DeleteFlow API operation.
 type DeleteFlowRequest struct {
 	*aws.Request
-	Input *DeleteFlowInput
-	Copy  func(*DeleteFlowInput) DeleteFlowRequest
+	Input *types.DeleteFlowInput
+	Copy  func(*types.DeleteFlowInput) DeleteFlowRequest
 }
 
 // Send marshals and sends the DeleteFlow API request.
@@ -129,7 +56,7 @@ func (r DeleteFlowRequest) Send(ctx context.Context) (*DeleteFlowResponse, error
 	}
 
 	resp := &DeleteFlowResponse{
-		DeleteFlowOutput: r.Request.Data.(*DeleteFlowOutput),
+		DeleteFlowOutput: r.Request.Data.(*types.DeleteFlowOutput),
 		response:         &aws.Response{Request: r.Request},
 	}
 
@@ -139,7 +66,7 @@ func (r DeleteFlowRequest) Send(ctx context.Context) (*DeleteFlowResponse, error
 // DeleteFlowResponse is the response type for the
 // DeleteFlow API operation.
 type DeleteFlowResponse struct {
-	*DeleteFlowOutput
+	*types.DeleteFlowOutput
 
 	response *aws.Response
 }

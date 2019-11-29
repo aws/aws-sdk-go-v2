@@ -6,57 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
+	"github.com/aws/aws-sdk-go-v2/service/eventbridge/types"
 )
-
-type DisableRuleInput struct {
-	_ struct{} `type:"structure"`
-
-	// The event bus associated with the rule. If you omit this, the default event
-	// bus is used.
-	EventBusName *string `min:"1" type:"string"`
-
-	// The name of the rule.
-	//
-	// Name is a required field
-	Name *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DisableRuleInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DisableRuleInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DisableRuleInput"}
-	if s.EventBusName != nil && len(*s.EventBusName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("EventBusName", 1))
-	}
-
-	if s.Name == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Name"))
-	}
-	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DisableRuleOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DisableRuleOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDisableRule = "DisableRule"
 
@@ -77,7 +30,7 @@ const opDisableRule = "DisableRule"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/DisableRule
-func (c *Client) DisableRuleRequest(input *DisableRuleInput) DisableRuleRequest {
+func (c *Client) DisableRuleRequest(input *types.DisableRuleInput) DisableRuleRequest {
 	op := &aws.Operation{
 		Name:       opDisableRule,
 		HTTPMethod: "POST",
@@ -85,10 +38,10 @@ func (c *Client) DisableRuleRequest(input *DisableRuleInput) DisableRuleRequest 
 	}
 
 	if input == nil {
-		input = &DisableRuleInput{}
+		input = &types.DisableRuleInput{}
 	}
 
-	req := c.newRequest(op, input, &DisableRuleOutput{})
+	req := c.newRequest(op, input, &types.DisableRuleOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return DisableRuleRequest{Request: req, Input: input, Copy: c.DisableRuleRequest}
@@ -98,8 +51,8 @@ func (c *Client) DisableRuleRequest(input *DisableRuleInput) DisableRuleRequest 
 // DisableRule API operation.
 type DisableRuleRequest struct {
 	*aws.Request
-	Input *DisableRuleInput
-	Copy  func(*DisableRuleInput) DisableRuleRequest
+	Input *types.DisableRuleInput
+	Copy  func(*types.DisableRuleInput) DisableRuleRequest
 }
 
 // Send marshals and sends the DisableRule API request.
@@ -111,7 +64,7 @@ func (r DisableRuleRequest) Send(ctx context.Context) (*DisableRuleResponse, err
 	}
 
 	resp := &DisableRuleResponse{
-		DisableRuleOutput: r.Request.Data.(*DisableRuleOutput),
+		DisableRuleOutput: r.Request.Data.(*types.DisableRuleOutput),
 		response:          &aws.Response{Request: r.Request},
 	}
 
@@ -121,7 +74,7 @@ func (r DisableRuleRequest) Send(ctx context.Context) (*DisableRuleResponse, err
 // DisableRuleResponse is the response type for the
 // DisableRule API operation.
 type DisableRuleResponse struct {
-	*DisableRuleOutput
+	*types.DisableRuleOutput
 
 	response *aws.Response
 }

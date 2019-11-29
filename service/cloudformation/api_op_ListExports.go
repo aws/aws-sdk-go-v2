@@ -6,50 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/cloudformation/types"
 )
-
-type ListExportsInput struct {
-	_ struct{} `type:"structure"`
-
-	// A string (provided by the ListExports response output) that identifies the
-	// next page of exported output values that you asked to retrieve.
-	NextToken *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s ListExportsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListExportsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListExportsInput"}
-	if s.NextToken != nil && len(*s.NextToken) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ListExportsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The output for the ListExports action.
-	Exports []Export `type:"list"`
-
-	// If the output exceeds 100 exported output values, a string that identifies
-	// the next page of exports. If there is no additional page, this value is null.
-	NextToken *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s ListExportsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListExports = "ListExports"
 
@@ -71,7 +29,7 @@ const opListExports = "ListExports"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ListExports
-func (c *Client) ListExportsRequest(input *ListExportsInput) ListExportsRequest {
+func (c *Client) ListExportsRequest(input *types.ListExportsInput) ListExportsRequest {
 	op := &aws.Operation{
 		Name:       opListExports,
 		HTTPMethod: "POST",
@@ -85,10 +43,10 @@ func (c *Client) ListExportsRequest(input *ListExportsInput) ListExportsRequest 
 	}
 
 	if input == nil {
-		input = &ListExportsInput{}
+		input = &types.ListExportsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListExportsOutput{})
+	req := c.newRequest(op, input, &types.ListExportsOutput{})
 	return ListExportsRequest{Request: req, Input: input, Copy: c.ListExportsRequest}
 }
 
@@ -96,8 +54,8 @@ func (c *Client) ListExportsRequest(input *ListExportsInput) ListExportsRequest 
 // ListExports API operation.
 type ListExportsRequest struct {
 	*aws.Request
-	Input *ListExportsInput
-	Copy  func(*ListExportsInput) ListExportsRequest
+	Input *types.ListExportsInput
+	Copy  func(*types.ListExportsInput) ListExportsRequest
 }
 
 // Send marshals and sends the ListExports API request.
@@ -109,7 +67,7 @@ func (r ListExportsRequest) Send(ctx context.Context) (*ListExportsResponse, err
 	}
 
 	resp := &ListExportsResponse{
-		ListExportsOutput: r.Request.Data.(*ListExportsOutput),
+		ListExportsOutput: r.Request.Data.(*types.ListExportsOutput),
 		response:          &aws.Response{Request: r.Request},
 	}
 
@@ -139,7 +97,7 @@ func NewListExportsPaginator(req ListExportsRequest) ListExportsPaginator {
 	return ListExportsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListExportsInput
+				var inCpy *types.ListExportsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -159,14 +117,14 @@ type ListExportsPaginator struct {
 	aws.Pager
 }
 
-func (p *ListExportsPaginator) CurrentPage() *ListExportsOutput {
-	return p.Pager.CurrentPage().(*ListExportsOutput)
+func (p *ListExportsPaginator) CurrentPage() *types.ListExportsOutput {
+	return p.Pager.CurrentPage().(*types.ListExportsOutput)
 }
 
 // ListExportsResponse is the response type for the
 // ListExports API operation.
 type ListExportsResponse struct {
-	*ListExportsOutput
+	*types.ListExportsOutput
 
 	response *aws.Response
 }

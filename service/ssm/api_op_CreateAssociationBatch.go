@@ -4,64 +4,10 @@ package ssm
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ssm/types"
 )
-
-type CreateAssociationBatchInput struct {
-	_ struct{} `type:"structure"`
-
-	// One or more associations.
-	//
-	// Entries is a required field
-	Entries []CreateAssociationBatchRequestEntry `min:"1" type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s CreateAssociationBatchInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateAssociationBatchInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateAssociationBatchInput"}
-
-	if s.Entries == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Entries"))
-	}
-	if s.Entries != nil && len(s.Entries) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Entries", 1))
-	}
-	if s.Entries != nil {
-		for i, v := range s.Entries {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Entries", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type CreateAssociationBatchOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Information about the associations that failed.
-	Failed []FailedCreateAssociation `type:"list"`
-
-	// Information about the associations that succeeded.
-	Successful []AssociationDescription `type:"list"`
-}
-
-// String returns the string representation
-func (s CreateAssociationBatchOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCreateAssociationBatch = "CreateAssociationBatch"
 
@@ -86,7 +32,7 @@ const opCreateAssociationBatch = "CreateAssociationBatch"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/CreateAssociationBatch
-func (c *Client) CreateAssociationBatchRequest(input *CreateAssociationBatchInput) CreateAssociationBatchRequest {
+func (c *Client) CreateAssociationBatchRequest(input *types.CreateAssociationBatchInput) CreateAssociationBatchRequest {
 	op := &aws.Operation{
 		Name:       opCreateAssociationBatch,
 		HTTPMethod: "POST",
@@ -94,10 +40,10 @@ func (c *Client) CreateAssociationBatchRequest(input *CreateAssociationBatchInpu
 	}
 
 	if input == nil {
-		input = &CreateAssociationBatchInput{}
+		input = &types.CreateAssociationBatchInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateAssociationBatchOutput{})
+	req := c.newRequest(op, input, &types.CreateAssociationBatchOutput{})
 	return CreateAssociationBatchRequest{Request: req, Input: input, Copy: c.CreateAssociationBatchRequest}
 }
 
@@ -105,8 +51,8 @@ func (c *Client) CreateAssociationBatchRequest(input *CreateAssociationBatchInpu
 // CreateAssociationBatch API operation.
 type CreateAssociationBatchRequest struct {
 	*aws.Request
-	Input *CreateAssociationBatchInput
-	Copy  func(*CreateAssociationBatchInput) CreateAssociationBatchRequest
+	Input *types.CreateAssociationBatchInput
+	Copy  func(*types.CreateAssociationBatchInput) CreateAssociationBatchRequest
 }
 
 // Send marshals and sends the CreateAssociationBatch API request.
@@ -118,7 +64,7 @@ func (r CreateAssociationBatchRequest) Send(ctx context.Context) (*CreateAssocia
 	}
 
 	resp := &CreateAssociationBatchResponse{
-		CreateAssociationBatchOutput: r.Request.Data.(*CreateAssociationBatchOutput),
+		CreateAssociationBatchOutput: r.Request.Data.(*types.CreateAssociationBatchOutput),
 		response:                     &aws.Response{Request: r.Request},
 	}
 
@@ -128,7 +74,7 @@ func (r CreateAssociationBatchRequest) Send(ctx context.Context) (*CreateAssocia
 // CreateAssociationBatchResponse is the response type for the
 // CreateAssociationBatch API operation.
 type CreateAssociationBatchResponse struct {
-	*CreateAssociationBatchOutput
+	*types.CreateAssociationBatchOutput
 
 	response *aws.Response
 }

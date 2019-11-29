@@ -6,61 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/query"
+	"github.com/aws/aws-sdk-go-v2/service/rds/types"
 )
-
-type AddRoleToDBClusterInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the DB cluster to associate the IAM role with.
-	//
-	// DBClusterIdentifier is a required field
-	DBClusterIdentifier *string `type:"string" required:"true"`
-
-	// The name of the feature for the DB cluster that the IAM role is to be associated
-	// with. For the list of supported feature names, see DBEngineVersion.
-	FeatureName *string `type:"string"`
-
-	// The Amazon Resource Name (ARN) of the IAM role to associate with the Aurora
-	// DB cluster, for example arn:aws:iam::123456789012:role/AuroraAccessRole.
-	//
-	// RoleArn is a required field
-	RoleArn *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s AddRoleToDBClusterInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *AddRoleToDBClusterInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "AddRoleToDBClusterInput"}
-
-	if s.DBClusterIdentifier == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DBClusterIdentifier"))
-	}
-
-	if s.RoleArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("RoleArn"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type AddRoleToDBClusterOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s AddRoleToDBClusterOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opAddRoleToDBCluster = "AddRoleToDBCluster"
 
@@ -82,7 +31,7 @@ const opAddRoleToDBCluster = "AddRoleToDBCluster"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/AddRoleToDBCluster
-func (c *Client) AddRoleToDBClusterRequest(input *AddRoleToDBClusterInput) AddRoleToDBClusterRequest {
+func (c *Client) AddRoleToDBClusterRequest(input *types.AddRoleToDBClusterInput) AddRoleToDBClusterRequest {
 	op := &aws.Operation{
 		Name:       opAddRoleToDBCluster,
 		HTTPMethod: "POST",
@@ -90,10 +39,10 @@ func (c *Client) AddRoleToDBClusterRequest(input *AddRoleToDBClusterInput) AddRo
 	}
 
 	if input == nil {
-		input = &AddRoleToDBClusterInput{}
+		input = &types.AddRoleToDBClusterInput{}
 	}
 
-	req := c.newRequest(op, input, &AddRoleToDBClusterOutput{})
+	req := c.newRequest(op, input, &types.AddRoleToDBClusterOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return AddRoleToDBClusterRequest{Request: req, Input: input, Copy: c.AddRoleToDBClusterRequest}
@@ -103,8 +52,8 @@ func (c *Client) AddRoleToDBClusterRequest(input *AddRoleToDBClusterInput) AddRo
 // AddRoleToDBCluster API operation.
 type AddRoleToDBClusterRequest struct {
 	*aws.Request
-	Input *AddRoleToDBClusterInput
-	Copy  func(*AddRoleToDBClusterInput) AddRoleToDBClusterRequest
+	Input *types.AddRoleToDBClusterInput
+	Copy  func(*types.AddRoleToDBClusterInput) AddRoleToDBClusterRequest
 }
 
 // Send marshals and sends the AddRoleToDBCluster API request.
@@ -116,7 +65,7 @@ func (r AddRoleToDBClusterRequest) Send(ctx context.Context) (*AddRoleToDBCluste
 	}
 
 	resp := &AddRoleToDBClusterResponse{
-		AddRoleToDBClusterOutput: r.Request.Data.(*AddRoleToDBClusterOutput),
+		AddRoleToDBClusterOutput: r.Request.Data.(*types.AddRoleToDBClusterOutput),
 		response:                 &aws.Response{Request: r.Request},
 	}
 
@@ -126,7 +75,7 @@ func (r AddRoleToDBClusterRequest) Send(ctx context.Context) (*AddRoleToDBCluste
 // AddRoleToDBClusterResponse is the response type for the
 // AddRoleToDBCluster API operation.
 type AddRoleToDBClusterResponse struct {
-	*AddRoleToDBClusterOutput
+	*types.AddRoleToDBClusterOutput
 
 	response *aws.Response
 }

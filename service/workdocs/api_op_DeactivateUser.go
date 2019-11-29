@@ -6,81 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/restjson"
+	"github.com/aws/aws-sdk-go-v2/service/workdocs/types"
 )
-
-type DeactivateUserInput struct {
-	_ struct{} `type:"structure"`
-
-	// Amazon WorkDocs authentication token. Do not set this field when using administrative
-	// API actions, as in accessing the API using AWS credentials.
-	AuthenticationToken *string `location:"header" locationName:"Authentication" min:"1" type:"string" sensitive:"true"`
-
-	// The ID of the user.
-	//
-	// UserId is a required field
-	UserId *string `location:"uri" locationName:"UserId" min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeactivateUserInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeactivateUserInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeactivateUserInput"}
-	if s.AuthenticationToken != nil && len(*s.AuthenticationToken) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("AuthenticationToken", 1))
-	}
-
-	if s.UserId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("UserId"))
-	}
-	if s.UserId != nil && len(*s.UserId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("UserId", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeactivateUserInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.AuthenticationToken != nil {
-		v := *s.AuthenticationToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "Authentication", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.UserId != nil {
-		v := *s.UserId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "UserId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type DeactivateUserOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeactivateUserOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeactivateUserOutput) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
 
 const opDeactivateUser = "DeactivateUser"
 
@@ -98,7 +27,7 @@ const opDeactivateUser = "DeactivateUser"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/DeactivateUser
-func (c *Client) DeactivateUserRequest(input *DeactivateUserInput) DeactivateUserRequest {
+func (c *Client) DeactivateUserRequest(input *types.DeactivateUserInput) DeactivateUserRequest {
 	op := &aws.Operation{
 		Name:       opDeactivateUser,
 		HTTPMethod: "DELETE",
@@ -106,10 +35,10 @@ func (c *Client) DeactivateUserRequest(input *DeactivateUserInput) DeactivateUse
 	}
 
 	if input == nil {
-		input = &DeactivateUserInput{}
+		input = &types.DeactivateUserInput{}
 	}
 
-	req := c.newRequest(op, input, &DeactivateUserOutput{})
+	req := c.newRequest(op, input, &types.DeactivateUserOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return DeactivateUserRequest{Request: req, Input: input, Copy: c.DeactivateUserRequest}
@@ -119,8 +48,8 @@ func (c *Client) DeactivateUserRequest(input *DeactivateUserInput) DeactivateUse
 // DeactivateUser API operation.
 type DeactivateUserRequest struct {
 	*aws.Request
-	Input *DeactivateUserInput
-	Copy  func(*DeactivateUserInput) DeactivateUserRequest
+	Input *types.DeactivateUserInput
+	Copy  func(*types.DeactivateUserInput) DeactivateUserRequest
 }
 
 // Send marshals and sends the DeactivateUser API request.
@@ -132,7 +61,7 @@ func (r DeactivateUserRequest) Send(ctx context.Context) (*DeactivateUserRespons
 	}
 
 	resp := &DeactivateUserResponse{
-		DeactivateUserOutput: r.Request.Data.(*DeactivateUserOutput),
+		DeactivateUserOutput: r.Request.Data.(*types.DeactivateUserOutput),
 		response:             &aws.Response{Request: r.Request},
 	}
 
@@ -142,7 +71,7 @@ func (r DeactivateUserRequest) Send(ctx context.Context) (*DeactivateUserRespons
 // DeactivateUserResponse is the response type for the
 // DeactivateUser API operation.
 type DeactivateUserResponse struct {
-	*DeactivateUserOutput
+	*types.DeactivateUserOutput
 
 	response *aws.Response
 }

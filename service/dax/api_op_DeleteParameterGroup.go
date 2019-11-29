@@ -6,49 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/dax/types"
 )
-
-type DeleteParameterGroupInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the parameter group to delete.
-	//
-	// ParameterGroupName is a required field
-	ParameterGroupName *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteParameterGroupInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteParameterGroupInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteParameterGroupInput"}
-
-	if s.ParameterGroupName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ParameterGroupName"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteParameterGroupOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A user-specified message for this action (i.e., a reason for deleting the
-	// parameter group).
-	DeletionMessage *string `type:"string"`
-}
-
-// String returns the string representation
-func (s DeleteParameterGroupOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteParameterGroup = "DeleteParameterGroup"
 
@@ -66,7 +25,7 @@ const opDeleteParameterGroup = "DeleteParameterGroup"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dax-2017-04-19/DeleteParameterGroup
-func (c *Client) DeleteParameterGroupRequest(input *DeleteParameterGroupInput) DeleteParameterGroupRequest {
+func (c *Client) DeleteParameterGroupRequest(input *types.DeleteParameterGroupInput) DeleteParameterGroupRequest {
 	op := &aws.Operation{
 		Name:       opDeleteParameterGroup,
 		HTTPMethod: "POST",
@@ -74,10 +33,10 @@ func (c *Client) DeleteParameterGroupRequest(input *DeleteParameterGroupInput) D
 	}
 
 	if input == nil {
-		input = &DeleteParameterGroupInput{}
+		input = &types.DeleteParameterGroupInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteParameterGroupOutput{})
+	req := c.newRequest(op, input, &types.DeleteParameterGroupOutput{})
 	return DeleteParameterGroupRequest{Request: req, Input: input, Copy: c.DeleteParameterGroupRequest}
 }
 
@@ -85,8 +44,8 @@ func (c *Client) DeleteParameterGroupRequest(input *DeleteParameterGroupInput) D
 // DeleteParameterGroup API operation.
 type DeleteParameterGroupRequest struct {
 	*aws.Request
-	Input *DeleteParameterGroupInput
-	Copy  func(*DeleteParameterGroupInput) DeleteParameterGroupRequest
+	Input *types.DeleteParameterGroupInput
+	Copy  func(*types.DeleteParameterGroupInput) DeleteParameterGroupRequest
 }
 
 // Send marshals and sends the DeleteParameterGroup API request.
@@ -98,7 +57,7 @@ func (r DeleteParameterGroupRequest) Send(ctx context.Context) (*DeleteParameter
 	}
 
 	resp := &DeleteParameterGroupResponse{
-		DeleteParameterGroupOutput: r.Request.Data.(*DeleteParameterGroupOutput),
+		DeleteParameterGroupOutput: r.Request.Data.(*types.DeleteParameterGroupOutput),
 		response:                   &aws.Response{Request: r.Request},
 	}
 
@@ -108,7 +67,7 @@ func (r DeleteParameterGroupRequest) Send(ctx context.Context) (*DeleteParameter
 // DeleteParameterGroupResponse is the response type for the
 // DeleteParameterGroup API operation.
 type DeleteParameterGroupResponse struct {
-	*DeleteParameterGroupOutput
+	*types.DeleteParameterGroupOutput
 
 	response *aws.Response
 }

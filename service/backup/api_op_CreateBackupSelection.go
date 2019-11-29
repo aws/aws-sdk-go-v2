@@ -4,135 +4,10 @@ package backup
 
 import (
 	"context"
-	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/backup/types"
 )
-
-type CreateBackupSelectionInput struct {
-	_ struct{} `type:"structure"`
-
-	// Uniquely identifies the backup plan to be associated with the selection of
-	// resources.
-	//
-	// BackupPlanId is a required field
-	BackupPlanId *string `location:"uri" locationName:"backupPlanId" type:"string" required:"true"`
-
-	// Specifies the body of a request to assign a set of resources to a backup
-	// plan.
-	//
-	// It includes an array of resources, an optional array of patterns to exclude
-	// resources, an optional role to provide access to the AWS service the resource
-	// belongs to, and an optional array of tags used to identify a set of resources.
-	//
-	// BackupSelection is a required field
-	BackupSelection *BackupSelection `type:"structure" required:"true"`
-
-	// A unique string that identifies the request and allows failed requests to
-	// be retried without the risk of executing the operation twice.
-	CreatorRequestId *string `type:"string"`
-}
-
-// String returns the string representation
-func (s CreateBackupSelectionInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateBackupSelectionInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateBackupSelectionInput"}
-
-	if s.BackupPlanId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("BackupPlanId"))
-	}
-
-	if s.BackupSelection == nil {
-		invalidParams.Add(aws.NewErrParamRequired("BackupSelection"))
-	}
-	if s.BackupSelection != nil {
-		if err := s.BackupSelection.Validate(); err != nil {
-			invalidParams.AddNested("BackupSelection", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s CreateBackupSelectionInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.BackupSelection != nil {
-		v := s.BackupSelection
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "BackupSelection", v, metadata)
-	}
-	if s.CreatorRequestId != nil {
-		v := *s.CreatorRequestId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "CreatorRequestId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.BackupPlanId != nil {
-		v := *s.BackupPlanId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "backupPlanId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type CreateBackupSelectionOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Uniquely identifies a backup plan.
-	BackupPlanId *string `type:"string"`
-
-	// The date and time a backup selection is created, in Unix format and Coordinated
-	// Universal Time (UTC). The value of CreationDate is accurate to milliseconds.
-	// For example, the value 1516925490.087 represents Friday, January 26, 2018
-	// 12:11:30.087 AM.
-	CreationDate *time.Time `type:"timestamp"`
-
-	// Uniquely identifies the body of a request to assign a set of resources to
-	// a backup plan.
-	SelectionId *string `type:"string"`
-}
-
-// String returns the string representation
-func (s CreateBackupSelectionOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s CreateBackupSelectionOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.BackupPlanId != nil {
-		v := *s.BackupPlanId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "BackupPlanId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.CreationDate != nil {
-		v := *s.CreationDate
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "CreationDate",
-			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
-	}
-	if s.SelectionId != nil {
-		v := *s.SelectionId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "SelectionId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opCreateBackupSelection = "CreateBackupSelection"
 
@@ -169,7 +44,7 @@ const opCreateBackupSelection = "CreateBackupSelection"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/CreateBackupSelection
-func (c *Client) CreateBackupSelectionRequest(input *CreateBackupSelectionInput) CreateBackupSelectionRequest {
+func (c *Client) CreateBackupSelectionRequest(input *types.CreateBackupSelectionInput) CreateBackupSelectionRequest {
 	op := &aws.Operation{
 		Name:       opCreateBackupSelection,
 		HTTPMethod: "PUT",
@@ -177,10 +52,10 @@ func (c *Client) CreateBackupSelectionRequest(input *CreateBackupSelectionInput)
 	}
 
 	if input == nil {
-		input = &CreateBackupSelectionInput{}
+		input = &types.CreateBackupSelectionInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateBackupSelectionOutput{})
+	req := c.newRequest(op, input, &types.CreateBackupSelectionOutput{})
 	return CreateBackupSelectionRequest{Request: req, Input: input, Copy: c.CreateBackupSelectionRequest}
 }
 
@@ -188,8 +63,8 @@ func (c *Client) CreateBackupSelectionRequest(input *CreateBackupSelectionInput)
 // CreateBackupSelection API operation.
 type CreateBackupSelectionRequest struct {
 	*aws.Request
-	Input *CreateBackupSelectionInput
-	Copy  func(*CreateBackupSelectionInput) CreateBackupSelectionRequest
+	Input *types.CreateBackupSelectionInput
+	Copy  func(*types.CreateBackupSelectionInput) CreateBackupSelectionRequest
 }
 
 // Send marshals and sends the CreateBackupSelection API request.
@@ -201,7 +76,7 @@ func (r CreateBackupSelectionRequest) Send(ctx context.Context) (*CreateBackupSe
 	}
 
 	resp := &CreateBackupSelectionResponse{
-		CreateBackupSelectionOutput: r.Request.Data.(*CreateBackupSelectionOutput),
+		CreateBackupSelectionOutput: r.Request.Data.(*types.CreateBackupSelectionOutput),
 		response:                    &aws.Response{Request: r.Request},
 	}
 
@@ -211,7 +86,7 @@ func (r CreateBackupSelectionRequest) Send(ctx context.Context) (*CreateBackupSe
 // CreateBackupSelectionResponse is the response type for the
 // CreateBackupSelection API operation.
 type CreateBackupSelectionResponse struct {
-	*CreateBackupSelectionOutput
+	*types.CreateBackupSelectionOutput
 
 	response *aws.Response
 }

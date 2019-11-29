@@ -6,87 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/organizations/types"
 )
-
-type ListOrganizationalUnitsForParentInput struct {
-	_ struct{} `type:"structure"`
-
-	// (Optional) Use this to limit the number of results you want included per
-	// page in the response. If you do not include this parameter, it defaults to
-	// a value that is specific to the operation. If additional items exist beyond
-	// the maximum you specify, the NextToken response element is present and has
-	// a value (is not null). Include that value as the NextToken request parameter
-	// in the next call to the operation to get the next part of the results. Note
-	// that Organizations might return fewer results than the maximum even when
-	// there are more results available. You should check NextToken after every
-	// operation to ensure that you receive all of the results.
-	MaxResults *int64 `min:"1" type:"integer"`
-
-	// Use this parameter if you receive a NextToken response in a previous request
-	// that indicates that there is more output available. Set it to the value of
-	// the previous call's NextToken response to indicate where the output should
-	// continue from.
-	NextToken *string `type:"string"`
-
-	// The unique identifier (ID) of the root or OU whose child OUs you want to
-	// list.
-	//
-	// The regex pattern (http://wikipedia.org/wiki/regex) for a parent ID string
-	// requires one of the following:
-	//
-	//    * Root - A string that begins with "r-" followed by from 4 to 32 lower-case
-	//    letters or digits.
-	//
-	//    * Organizational unit (OU) - A string that begins with "ou-" followed
-	//    by from 4 to 32 lower-case letters or digits (the ID of the root that
-	//    the OU is in) followed by a second "-" dash and from 8 to 32 additional
-	//    lower-case letters or digits.
-	//
-	// ParentId is a required field
-	ParentId *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s ListOrganizationalUnitsForParentInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListOrganizationalUnitsForParentInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListOrganizationalUnitsForParentInput"}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-
-	if s.ParentId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ParentId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ListOrganizationalUnitsForParentOutput struct {
-	_ struct{} `type:"structure"`
-
-	// If present, this value indicates that there is more output available than
-	// is included in the current response. Use this value in the NextToken request
-	// parameter in a subsequent call to the operation to get the next part of the
-	// output. You should repeat this until the NextToken response element comes
-	// back as null.
-	NextToken *string `type:"string"`
-
-	// A list of the OUs in the specified root or parent OU.
-	OrganizationalUnits []OrganizationalUnit `type:"list"`
-}
-
-// String returns the string representation
-func (s ListOrganizationalUnitsForParentOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListOrganizationalUnitsForParent = "ListOrganizationalUnitsForParent"
 
@@ -110,7 +31,7 @@ const opListOrganizationalUnitsForParent = "ListOrganizationalUnitsForParent"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListOrganizationalUnitsForParent
-func (c *Client) ListOrganizationalUnitsForParentRequest(input *ListOrganizationalUnitsForParentInput) ListOrganizationalUnitsForParentRequest {
+func (c *Client) ListOrganizationalUnitsForParentRequest(input *types.ListOrganizationalUnitsForParentInput) ListOrganizationalUnitsForParentRequest {
 	op := &aws.Operation{
 		Name:       opListOrganizationalUnitsForParent,
 		HTTPMethod: "POST",
@@ -124,10 +45,10 @@ func (c *Client) ListOrganizationalUnitsForParentRequest(input *ListOrganization
 	}
 
 	if input == nil {
-		input = &ListOrganizationalUnitsForParentInput{}
+		input = &types.ListOrganizationalUnitsForParentInput{}
 	}
 
-	req := c.newRequest(op, input, &ListOrganizationalUnitsForParentOutput{})
+	req := c.newRequest(op, input, &types.ListOrganizationalUnitsForParentOutput{})
 	return ListOrganizationalUnitsForParentRequest{Request: req, Input: input, Copy: c.ListOrganizationalUnitsForParentRequest}
 }
 
@@ -135,8 +56,8 @@ func (c *Client) ListOrganizationalUnitsForParentRequest(input *ListOrganization
 // ListOrganizationalUnitsForParent API operation.
 type ListOrganizationalUnitsForParentRequest struct {
 	*aws.Request
-	Input *ListOrganizationalUnitsForParentInput
-	Copy  func(*ListOrganizationalUnitsForParentInput) ListOrganizationalUnitsForParentRequest
+	Input *types.ListOrganizationalUnitsForParentInput
+	Copy  func(*types.ListOrganizationalUnitsForParentInput) ListOrganizationalUnitsForParentRequest
 }
 
 // Send marshals and sends the ListOrganizationalUnitsForParent API request.
@@ -148,7 +69,7 @@ func (r ListOrganizationalUnitsForParentRequest) Send(ctx context.Context) (*Lis
 	}
 
 	resp := &ListOrganizationalUnitsForParentResponse{
-		ListOrganizationalUnitsForParentOutput: r.Request.Data.(*ListOrganizationalUnitsForParentOutput),
+		ListOrganizationalUnitsForParentOutput: r.Request.Data.(*types.ListOrganizationalUnitsForParentOutput),
 		response:                               &aws.Response{Request: r.Request},
 	}
 
@@ -178,7 +99,7 @@ func NewListOrganizationalUnitsForParentPaginator(req ListOrganizationalUnitsFor
 	return ListOrganizationalUnitsForParentPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListOrganizationalUnitsForParentInput
+				var inCpy *types.ListOrganizationalUnitsForParentInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -198,14 +119,14 @@ type ListOrganizationalUnitsForParentPaginator struct {
 	aws.Pager
 }
 
-func (p *ListOrganizationalUnitsForParentPaginator) CurrentPage() *ListOrganizationalUnitsForParentOutput {
-	return p.Pager.CurrentPage().(*ListOrganizationalUnitsForParentOutput)
+func (p *ListOrganizationalUnitsForParentPaginator) CurrentPage() *types.ListOrganizationalUnitsForParentOutput {
+	return p.Pager.CurrentPage().(*types.ListOrganizationalUnitsForParentOutput)
 }
 
 // ListOrganizationalUnitsForParentResponse is the response type for the
 // ListOrganizationalUnitsForParent API operation.
 type ListOrganizationalUnitsForParentResponse struct {
-	*ListOrganizationalUnitsForParentOutput
+	*types.ListOrganizationalUnitsForParentOutput
 
 	response *aws.Response
 }

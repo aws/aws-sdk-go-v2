@@ -6,29 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/autoscaling/types"
 )
-
-type DescribeAutoScalingNotificationTypesInput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DescribeAutoScalingNotificationTypesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type DescribeAutoScalingNotificationTypesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The notification types.
-	AutoScalingNotificationTypes []string `type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeAutoScalingNotificationTypesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeAutoScalingNotificationTypes = "DescribeAutoScalingNotificationTypes"
 
@@ -45,7 +24,7 @@ const opDescribeAutoScalingNotificationTypes = "DescribeAutoScalingNotificationT
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DescribeAutoScalingNotificationTypes
-func (c *Client) DescribeAutoScalingNotificationTypesRequest(input *DescribeAutoScalingNotificationTypesInput) DescribeAutoScalingNotificationTypesRequest {
+func (c *Client) DescribeAutoScalingNotificationTypesRequest(input *types.DescribeAutoScalingNotificationTypesInput) DescribeAutoScalingNotificationTypesRequest {
 	op := &aws.Operation{
 		Name:       opDescribeAutoScalingNotificationTypes,
 		HTTPMethod: "POST",
@@ -53,10 +32,10 @@ func (c *Client) DescribeAutoScalingNotificationTypesRequest(input *DescribeAuto
 	}
 
 	if input == nil {
-		input = &DescribeAutoScalingNotificationTypesInput{}
+		input = &types.DescribeAutoScalingNotificationTypesInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeAutoScalingNotificationTypesOutput{})
+	req := c.newRequest(op, input, &types.DescribeAutoScalingNotificationTypesOutput{})
 	return DescribeAutoScalingNotificationTypesRequest{Request: req, Input: input, Copy: c.DescribeAutoScalingNotificationTypesRequest}
 }
 
@@ -64,8 +43,8 @@ func (c *Client) DescribeAutoScalingNotificationTypesRequest(input *DescribeAuto
 // DescribeAutoScalingNotificationTypes API operation.
 type DescribeAutoScalingNotificationTypesRequest struct {
 	*aws.Request
-	Input *DescribeAutoScalingNotificationTypesInput
-	Copy  func(*DescribeAutoScalingNotificationTypesInput) DescribeAutoScalingNotificationTypesRequest
+	Input *types.DescribeAutoScalingNotificationTypesInput
+	Copy  func(*types.DescribeAutoScalingNotificationTypesInput) DescribeAutoScalingNotificationTypesRequest
 }
 
 // Send marshals and sends the DescribeAutoScalingNotificationTypes API request.
@@ -77,7 +56,7 @@ func (r DescribeAutoScalingNotificationTypesRequest) Send(ctx context.Context) (
 	}
 
 	resp := &DescribeAutoScalingNotificationTypesResponse{
-		DescribeAutoScalingNotificationTypesOutput: r.Request.Data.(*DescribeAutoScalingNotificationTypesOutput),
+		DescribeAutoScalingNotificationTypesOutput: r.Request.Data.(*types.DescribeAutoScalingNotificationTypesOutput),
 		response: &aws.Response{Request: r.Request},
 	}
 
@@ -87,7 +66,7 @@ func (r DescribeAutoScalingNotificationTypesRequest) Send(ctx context.Context) (
 // DescribeAutoScalingNotificationTypesResponse is the response type for the
 // DescribeAutoScalingNotificationTypes API operation.
 type DescribeAutoScalingNotificationTypesResponse struct {
-	*DescribeAutoScalingNotificationTypesOutput
+	*types.DescribeAutoScalingNotificationTypesOutput
 
 	response *aws.Response
 }

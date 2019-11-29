@@ -6,70 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-type AssociateClientVpnTargetNetworkInput struct {
-	_ struct{} `type:"structure"`
-
-	// Unique, case-sensitive identifier that you provide to ensure the idempotency
-	// of the request. For more information, see How to Ensure Idempotency (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html).
-	ClientToken *string `type:"string" idempotencyToken:"true"`
-
-	// The ID of the Client VPN endpoint.
-	//
-	// ClientVpnEndpointId is a required field
-	ClientVpnEndpointId *string `type:"string" required:"true"`
-
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have
-	// the required permissions, the error response is DryRunOperation. Otherwise,
-	// it is UnauthorizedOperation.
-	DryRun *bool `type:"boolean"`
-
-	// The ID of the subnet to associate with the Client VPN endpoint.
-	//
-	// SubnetId is a required field
-	SubnetId *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s AssociateClientVpnTargetNetworkInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *AssociateClientVpnTargetNetworkInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "AssociateClientVpnTargetNetworkInput"}
-
-	if s.ClientVpnEndpointId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ClientVpnEndpointId"))
-	}
-
-	if s.SubnetId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("SubnetId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type AssociateClientVpnTargetNetworkOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The unique ID of the target network association.
-	AssociationId *string `locationName:"associationId" type:"string"`
-
-	// The current state of the target network association.
-	Status *AssociationStatus `locationName:"status" type:"structure"`
-}
-
-// String returns the string representation
-func (s AssociateClientVpnTargetNetworkOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opAssociateClientVpnTargetNetwork = "AssociateClientVpnTargetNetwork"
 
@@ -90,7 +28,7 @@ const opAssociateClientVpnTargetNetwork = "AssociateClientVpnTargetNetwork"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AssociateClientVpnTargetNetwork
-func (c *Client) AssociateClientVpnTargetNetworkRequest(input *AssociateClientVpnTargetNetworkInput) AssociateClientVpnTargetNetworkRequest {
+func (c *Client) AssociateClientVpnTargetNetworkRequest(input *types.AssociateClientVpnTargetNetworkInput) AssociateClientVpnTargetNetworkRequest {
 	op := &aws.Operation{
 		Name:       opAssociateClientVpnTargetNetwork,
 		HTTPMethod: "POST",
@@ -98,10 +36,10 @@ func (c *Client) AssociateClientVpnTargetNetworkRequest(input *AssociateClientVp
 	}
 
 	if input == nil {
-		input = &AssociateClientVpnTargetNetworkInput{}
+		input = &types.AssociateClientVpnTargetNetworkInput{}
 	}
 
-	req := c.newRequest(op, input, &AssociateClientVpnTargetNetworkOutput{})
+	req := c.newRequest(op, input, &types.AssociateClientVpnTargetNetworkOutput{})
 	return AssociateClientVpnTargetNetworkRequest{Request: req, Input: input, Copy: c.AssociateClientVpnTargetNetworkRequest}
 }
 
@@ -109,8 +47,8 @@ func (c *Client) AssociateClientVpnTargetNetworkRequest(input *AssociateClientVp
 // AssociateClientVpnTargetNetwork API operation.
 type AssociateClientVpnTargetNetworkRequest struct {
 	*aws.Request
-	Input *AssociateClientVpnTargetNetworkInput
-	Copy  func(*AssociateClientVpnTargetNetworkInput) AssociateClientVpnTargetNetworkRequest
+	Input *types.AssociateClientVpnTargetNetworkInput
+	Copy  func(*types.AssociateClientVpnTargetNetworkInput) AssociateClientVpnTargetNetworkRequest
 }
 
 // Send marshals and sends the AssociateClientVpnTargetNetwork API request.
@@ -122,7 +60,7 @@ func (r AssociateClientVpnTargetNetworkRequest) Send(ctx context.Context) (*Asso
 	}
 
 	resp := &AssociateClientVpnTargetNetworkResponse{
-		AssociateClientVpnTargetNetworkOutput: r.Request.Data.(*AssociateClientVpnTargetNetworkOutput),
+		AssociateClientVpnTargetNetworkOutput: r.Request.Data.(*types.AssociateClientVpnTargetNetworkOutput),
 		response:                              &aws.Response{Request: r.Request},
 	}
 
@@ -132,7 +70,7 @@ func (r AssociateClientVpnTargetNetworkRequest) Send(ctx context.Context) (*Asso
 // AssociateClientVpnTargetNetworkResponse is the response type for the
 // AssociateClientVpnTargetNetwork API operation.
 type AssociateClientVpnTargetNetworkResponse struct {
-	*AssociateClientVpnTargetNetworkOutput
+	*types.AssociateClientVpnTargetNetworkOutput
 
 	response *aws.Response
 }

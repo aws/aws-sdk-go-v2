@@ -6,52 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/iam/types"
 )
-
-type CreateAccessKeyInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the IAM user that the new key will belong to.
-	//
-	// This parameter allows (through its regex pattern (http://wikipedia.org/wiki/regex))
-	// a string of characters consisting of upper and lowercase alphanumeric characters
-	// with no spaces. You can also include any of the following characters: _+=,.@-
-	UserName *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s CreateAccessKeyInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateAccessKeyInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateAccessKeyInput"}
-	if s.UserName != nil && len(*s.UserName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("UserName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Contains the response to a successful CreateAccessKey request.
-type CreateAccessKeyOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A structure with details about the access key.
-	//
-	// AccessKey is a required field
-	AccessKey *AccessKey `type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s CreateAccessKeyOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCreateAccessKey = "CreateAccessKey"
 
@@ -85,7 +41,7 @@ const opCreateAccessKey = "CreateAccessKey"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/CreateAccessKey
-func (c *Client) CreateAccessKeyRequest(input *CreateAccessKeyInput) CreateAccessKeyRequest {
+func (c *Client) CreateAccessKeyRequest(input *types.CreateAccessKeyInput) CreateAccessKeyRequest {
 	op := &aws.Operation{
 		Name:       opCreateAccessKey,
 		HTTPMethod: "POST",
@@ -93,10 +49,10 @@ func (c *Client) CreateAccessKeyRequest(input *CreateAccessKeyInput) CreateAcces
 	}
 
 	if input == nil {
-		input = &CreateAccessKeyInput{}
+		input = &types.CreateAccessKeyInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateAccessKeyOutput{})
+	req := c.newRequest(op, input, &types.CreateAccessKeyOutput{})
 	return CreateAccessKeyRequest{Request: req, Input: input, Copy: c.CreateAccessKeyRequest}
 }
 
@@ -104,8 +60,8 @@ func (c *Client) CreateAccessKeyRequest(input *CreateAccessKeyInput) CreateAcces
 // CreateAccessKey API operation.
 type CreateAccessKeyRequest struct {
 	*aws.Request
-	Input *CreateAccessKeyInput
-	Copy  func(*CreateAccessKeyInput) CreateAccessKeyRequest
+	Input *types.CreateAccessKeyInput
+	Copy  func(*types.CreateAccessKeyInput) CreateAccessKeyRequest
 }
 
 // Send marshals and sends the CreateAccessKey API request.
@@ -117,7 +73,7 @@ func (r CreateAccessKeyRequest) Send(ctx context.Context) (*CreateAccessKeyRespo
 	}
 
 	resp := &CreateAccessKeyResponse{
-		CreateAccessKeyOutput: r.Request.Data.(*CreateAccessKeyOutput),
+		CreateAccessKeyOutput: r.Request.Data.(*types.CreateAccessKeyOutput),
 		response:              &aws.Response{Request: r.Request},
 	}
 
@@ -127,7 +83,7 @@ func (r CreateAccessKeyRequest) Send(ctx context.Context) (*CreateAccessKeyRespo
 // CreateAccessKeyResponse is the response type for the
 // CreateAccessKey API operation.
 type CreateAccessKeyResponse struct {
-	*CreateAccessKeyOutput
+	*types.CreateAccessKeyOutput
 
 	response *aws.Response
 }

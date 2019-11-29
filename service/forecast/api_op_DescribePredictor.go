@@ -4,123 +4,10 @@ package forecast
 
 import (
 	"context"
-	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/forecast/types"
 )
-
-type DescribePredictorInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the predictor that you want information
-	// about.
-	//
-	// PredictorArn is a required field
-	PredictorArn *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribePredictorInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribePredictorInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribePredictorInput"}
-
-	if s.PredictorArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("PredictorArn"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribePredictorOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the algorithm used for model training.
-	AlgorithmArn *string `type:"string"`
-
-	// When PerformAutoML is specified, the ARN of the chosen algorithm.
-	AutoMLAlgorithmArns []string `type:"list"`
-
-	// When the model training task was created.
-	CreationTime *time.Time `type:"timestamp"`
-
-	// An array of ARNs of the dataset import jobs used to import training data
-	// for the predictor.
-	DatasetImportJobArns []string `type:"list"`
-
-	// An AWS Key Management Service (KMS) key and the AWS Identity and Access Management
-	// (IAM) role that Amazon Forecast can assume to access the key.
-	EncryptionConfig *EncryptionConfig `type:"structure"`
-
-	// Used to override the default evaluation parameters of the specified algorithm.
-	// Amazon Forecast evaluates a predictor by splitting a dataset into training
-	// data and testing data. The evaluation parameters define how to perform the
-	// split and the number of iterations.
-	EvaluationParameters *EvaluationParameters `type:"structure"`
-
-	// The featurization configuration.
-	FeaturizationConfig *FeaturizationConfig `type:"structure"`
-
-	// The number of time-steps of the forecast. The forecast horizon is also called
-	// the prediction length.
-	ForecastHorizon *int64 `type:"integer"`
-
-	// The hyperparameter override values for the algorithm.
-	HPOConfig *HyperParameterTuningJobConfig `type:"structure"`
-
-	// Describes the dataset group that contains the data to use to train the predictor.
-	InputDataConfig *InputDataConfig `type:"structure"`
-
-	// Initially, the same as CreationTime (status is CREATE_PENDING). Updated when
-	// training starts (status changed to CREATE_IN_PROGRESS), and when training
-	// is complete (status changed to ACTIVE) or fails (status changed to CREATE_FAILED).
-	LastModificationTime *time.Time `type:"timestamp"`
-
-	// If an error occurred, an informational message about the error.
-	Message *string `type:"string"`
-
-	// Whether the predictor is set to perform AutoML.
-	PerformAutoML *bool `type:"boolean"`
-
-	// Whether the predictor is set to perform HPO.
-	PerformHPO *bool `type:"boolean"`
-
-	// The ARN of the predictor.
-	PredictorArn *string `min:"1" type:"string"`
-
-	// The name of the predictor.
-	PredictorName *string `min:"1" type:"string"`
-
-	// The status of the predictor. States include:
-	//
-	//    * ACTIVE
-	//
-	//    * CREATE_PENDING, CREATE_IN_PROGRESS, CREATE_FAILED
-	//
-	//    * DELETE_PENDING, DELETE_IN_PROGRESS, DELETE_FAILED
-	//
-	//    * UPDATE_PENDING, UPDATE_IN_PROGRESS, UPDATE_FAILED
-	//
-	// The Status of the predictor must be ACTIVE before using the predictor to
-	// create a forecast.
-	Status *string `type:"string"`
-
-	// The training parameters to override for model training. The parameters that
-	// you can override are listed in the individual algorithms in aws-forecast-choosing-recipes.
-	TrainingParameters map[string]string `type:"map"`
-}
-
-// String returns the string representation
-func (s DescribePredictorOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribePredictor = "DescribePredictor"
 
@@ -153,7 +40,7 @@ const opDescribePredictor = "DescribePredictor"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/DescribePredictor
-func (c *Client) DescribePredictorRequest(input *DescribePredictorInput) DescribePredictorRequest {
+func (c *Client) DescribePredictorRequest(input *types.DescribePredictorInput) DescribePredictorRequest {
 	op := &aws.Operation{
 		Name:       opDescribePredictor,
 		HTTPMethod: "POST",
@@ -161,10 +48,10 @@ func (c *Client) DescribePredictorRequest(input *DescribePredictorInput) Describ
 	}
 
 	if input == nil {
-		input = &DescribePredictorInput{}
+		input = &types.DescribePredictorInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribePredictorOutput{})
+	req := c.newRequest(op, input, &types.DescribePredictorOutput{})
 	return DescribePredictorRequest{Request: req, Input: input, Copy: c.DescribePredictorRequest}
 }
 
@@ -172,8 +59,8 @@ func (c *Client) DescribePredictorRequest(input *DescribePredictorInput) Describ
 // DescribePredictor API operation.
 type DescribePredictorRequest struct {
 	*aws.Request
-	Input *DescribePredictorInput
-	Copy  func(*DescribePredictorInput) DescribePredictorRequest
+	Input *types.DescribePredictorInput
+	Copy  func(*types.DescribePredictorInput) DescribePredictorRequest
 }
 
 // Send marshals and sends the DescribePredictor API request.
@@ -185,7 +72,7 @@ func (r DescribePredictorRequest) Send(ctx context.Context) (*DescribePredictorR
 	}
 
 	resp := &DescribePredictorResponse{
-		DescribePredictorOutput: r.Request.Data.(*DescribePredictorOutput),
+		DescribePredictorOutput: r.Request.Data.(*types.DescribePredictorOutput),
 		response:                &aws.Response{Request: r.Request},
 	}
 
@@ -195,7 +82,7 @@ func (r DescribePredictorRequest) Send(ctx context.Context) (*DescribePredictorR
 // DescribePredictorResponse is the response type for the
 // DescribePredictor API operation.
 type DescribePredictorResponse struct {
-	*DescribePredictorOutput
+	*types.DescribePredictorOutput
 
 	response *aws.Response
 }

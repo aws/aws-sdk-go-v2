@@ -6,57 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/alexaforbusiness/types"
 )
-
-type ListGatewaysInput struct {
-	_ struct{} `type:"structure"`
-
-	// The gateway group ARN for which to list gateways.
-	GatewayGroupArn *string `type:"string"`
-
-	// The maximum number of gateway summaries to return. The default is 50.
-	MaxResults *int64 `min:"1" type:"integer"`
-
-	// The token used to paginate though multiple pages of gateway summaries.
-	NextToken *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s ListGatewaysInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListGatewaysInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListGatewaysInput"}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-	if s.NextToken != nil && len(*s.NextToken) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ListGatewaysOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The gateways in the list.
-	Gateways []GatewaySummary `type:"list"`
-
-	// The token used to paginate though multiple pages of gateway summaries.
-	NextToken *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s ListGatewaysOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListGateways = "ListGateways"
 
@@ -76,7 +27,7 @@ const opListGateways = "ListGateways"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/ListGateways
-func (c *Client) ListGatewaysRequest(input *ListGatewaysInput) ListGatewaysRequest {
+func (c *Client) ListGatewaysRequest(input *types.ListGatewaysInput) ListGatewaysRequest {
 	op := &aws.Operation{
 		Name:       opListGateways,
 		HTTPMethod: "POST",
@@ -90,10 +41,10 @@ func (c *Client) ListGatewaysRequest(input *ListGatewaysInput) ListGatewaysReque
 	}
 
 	if input == nil {
-		input = &ListGatewaysInput{}
+		input = &types.ListGatewaysInput{}
 	}
 
-	req := c.newRequest(op, input, &ListGatewaysOutput{})
+	req := c.newRequest(op, input, &types.ListGatewaysOutput{})
 	return ListGatewaysRequest{Request: req, Input: input, Copy: c.ListGatewaysRequest}
 }
 
@@ -101,8 +52,8 @@ func (c *Client) ListGatewaysRequest(input *ListGatewaysInput) ListGatewaysReque
 // ListGateways API operation.
 type ListGatewaysRequest struct {
 	*aws.Request
-	Input *ListGatewaysInput
-	Copy  func(*ListGatewaysInput) ListGatewaysRequest
+	Input *types.ListGatewaysInput
+	Copy  func(*types.ListGatewaysInput) ListGatewaysRequest
 }
 
 // Send marshals and sends the ListGateways API request.
@@ -114,7 +65,7 @@ func (r ListGatewaysRequest) Send(ctx context.Context) (*ListGatewaysResponse, e
 	}
 
 	resp := &ListGatewaysResponse{
-		ListGatewaysOutput: r.Request.Data.(*ListGatewaysOutput),
+		ListGatewaysOutput: r.Request.Data.(*types.ListGatewaysOutput),
 		response:           &aws.Response{Request: r.Request},
 	}
 
@@ -144,7 +95,7 @@ func NewListGatewaysPaginator(req ListGatewaysRequest) ListGatewaysPaginator {
 	return ListGatewaysPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListGatewaysInput
+				var inCpy *types.ListGatewaysInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -164,14 +115,14 @@ type ListGatewaysPaginator struct {
 	aws.Pager
 }
 
-func (p *ListGatewaysPaginator) CurrentPage() *ListGatewaysOutput {
-	return p.Pager.CurrentPage().(*ListGatewaysOutput)
+func (p *ListGatewaysPaginator) CurrentPage() *types.ListGatewaysOutput {
+	return p.Pager.CurrentPage().(*types.ListGatewaysOutput)
 }
 
 // ListGatewaysResponse is the response type for the
 // ListGateways API operation.
 type ListGatewaysResponse struct {
-	*ListGatewaysOutput
+	*types.ListGatewaysOutput
 
 	response *aws.Response
 }

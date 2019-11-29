@@ -6,49 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ses/types"
 )
-
-// Represents a request to delete open and click tracking options in a configuration
-// set.
-type DeleteConfigurationSetTrackingOptionsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the configuration set from which you want to delete the tracking
-	// options.
-	//
-	// ConfigurationSetName is a required field
-	ConfigurationSetName *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteConfigurationSetTrackingOptionsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteConfigurationSetTrackingOptionsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteConfigurationSetTrackingOptionsInput"}
-
-	if s.ConfigurationSetName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ConfigurationSetName"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// An empty element returned on a successful request.
-type DeleteConfigurationSetTrackingOptionsOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteConfigurationSetTrackingOptionsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteConfigurationSetTrackingOptions = "DeleteConfigurationSetTrackingOptions"
 
@@ -75,7 +34,7 @@ const opDeleteConfigurationSetTrackingOptions = "DeleteConfigurationSetTrackingO
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/DeleteConfigurationSetTrackingOptions
-func (c *Client) DeleteConfigurationSetTrackingOptionsRequest(input *DeleteConfigurationSetTrackingOptionsInput) DeleteConfigurationSetTrackingOptionsRequest {
+func (c *Client) DeleteConfigurationSetTrackingOptionsRequest(input *types.DeleteConfigurationSetTrackingOptionsInput) DeleteConfigurationSetTrackingOptionsRequest {
 	op := &aws.Operation{
 		Name:       opDeleteConfigurationSetTrackingOptions,
 		HTTPMethod: "POST",
@@ -83,10 +42,10 @@ func (c *Client) DeleteConfigurationSetTrackingOptionsRequest(input *DeleteConfi
 	}
 
 	if input == nil {
-		input = &DeleteConfigurationSetTrackingOptionsInput{}
+		input = &types.DeleteConfigurationSetTrackingOptionsInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteConfigurationSetTrackingOptionsOutput{})
+	req := c.newRequest(op, input, &types.DeleteConfigurationSetTrackingOptionsOutput{})
 	return DeleteConfigurationSetTrackingOptionsRequest{Request: req, Input: input, Copy: c.DeleteConfigurationSetTrackingOptionsRequest}
 }
 
@@ -94,8 +53,8 @@ func (c *Client) DeleteConfigurationSetTrackingOptionsRequest(input *DeleteConfi
 // DeleteConfigurationSetTrackingOptions API operation.
 type DeleteConfigurationSetTrackingOptionsRequest struct {
 	*aws.Request
-	Input *DeleteConfigurationSetTrackingOptionsInput
-	Copy  func(*DeleteConfigurationSetTrackingOptionsInput) DeleteConfigurationSetTrackingOptionsRequest
+	Input *types.DeleteConfigurationSetTrackingOptionsInput
+	Copy  func(*types.DeleteConfigurationSetTrackingOptionsInput) DeleteConfigurationSetTrackingOptionsRequest
 }
 
 // Send marshals and sends the DeleteConfigurationSetTrackingOptions API request.
@@ -107,7 +66,7 @@ func (r DeleteConfigurationSetTrackingOptionsRequest) Send(ctx context.Context) 
 	}
 
 	resp := &DeleteConfigurationSetTrackingOptionsResponse{
-		DeleteConfigurationSetTrackingOptionsOutput: r.Request.Data.(*DeleteConfigurationSetTrackingOptionsOutput),
+		DeleteConfigurationSetTrackingOptionsOutput: r.Request.Data.(*types.DeleteConfigurationSetTrackingOptionsOutput),
 		response: &aws.Response{Request: r.Request},
 	}
 
@@ -117,7 +76,7 @@ func (r DeleteConfigurationSetTrackingOptionsRequest) Send(ctx context.Context) 
 // DeleteConfigurationSetTrackingOptionsResponse is the response type for the
 // DeleteConfigurationSetTrackingOptions API operation.
 type DeleteConfigurationSetTrackingOptionsResponse struct {
-	*DeleteConfigurationSetTrackingOptionsOutput
+	*types.DeleteConfigurationSetTrackingOptionsOutput
 
 	response *aws.Response
 }

@@ -6,78 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/iot/types"
 )
-
-type DeleteSecurityProfileInput struct {
-	_ struct{} `type:"structure"`
-
-	// The expected version of the security profile. A new version is generated
-	// whenever the security profile is updated. If you specify a value that is
-	// different from the actual version, a VersionConflictException is thrown.
-	ExpectedVersion *int64 `location:"querystring" locationName:"expectedVersion" type:"long"`
-
-	// The name of the security profile to be deleted.
-	//
-	// SecurityProfileName is a required field
-	SecurityProfileName *string `location:"uri" locationName:"securityProfileName" min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteSecurityProfileInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteSecurityProfileInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteSecurityProfileInput"}
-
-	if s.SecurityProfileName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("SecurityProfileName"))
-	}
-	if s.SecurityProfileName != nil && len(*s.SecurityProfileName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("SecurityProfileName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteSecurityProfileInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.SecurityProfileName != nil {
-		v := *s.SecurityProfileName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "securityProfileName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.ExpectedVersion != nil {
-		v := *s.ExpectedVersion
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "expectedVersion", protocol.Int64Value(v), metadata)
-	}
-	return nil
-}
-
-type DeleteSecurityProfileOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteSecurityProfileOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteSecurityProfileOutput) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
 
 const opDeleteSecurityProfile = "DeleteSecurityProfile"
 
@@ -92,7 +22,7 @@ const opDeleteSecurityProfile = "DeleteSecurityProfile"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) DeleteSecurityProfileRequest(input *DeleteSecurityProfileInput) DeleteSecurityProfileRequest {
+func (c *Client) DeleteSecurityProfileRequest(input *types.DeleteSecurityProfileInput) DeleteSecurityProfileRequest {
 	op := &aws.Operation{
 		Name:       opDeleteSecurityProfile,
 		HTTPMethod: "DELETE",
@@ -100,10 +30,10 @@ func (c *Client) DeleteSecurityProfileRequest(input *DeleteSecurityProfileInput)
 	}
 
 	if input == nil {
-		input = &DeleteSecurityProfileInput{}
+		input = &types.DeleteSecurityProfileInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteSecurityProfileOutput{})
+	req := c.newRequest(op, input, &types.DeleteSecurityProfileOutput{})
 	return DeleteSecurityProfileRequest{Request: req, Input: input, Copy: c.DeleteSecurityProfileRequest}
 }
 
@@ -111,8 +41,8 @@ func (c *Client) DeleteSecurityProfileRequest(input *DeleteSecurityProfileInput)
 // DeleteSecurityProfile API operation.
 type DeleteSecurityProfileRequest struct {
 	*aws.Request
-	Input *DeleteSecurityProfileInput
-	Copy  func(*DeleteSecurityProfileInput) DeleteSecurityProfileRequest
+	Input *types.DeleteSecurityProfileInput
+	Copy  func(*types.DeleteSecurityProfileInput) DeleteSecurityProfileRequest
 }
 
 // Send marshals and sends the DeleteSecurityProfile API request.
@@ -124,7 +54,7 @@ func (r DeleteSecurityProfileRequest) Send(ctx context.Context) (*DeleteSecurity
 	}
 
 	resp := &DeleteSecurityProfileResponse{
-		DeleteSecurityProfileOutput: r.Request.Data.(*DeleteSecurityProfileOutput),
+		DeleteSecurityProfileOutput: r.Request.Data.(*types.DeleteSecurityProfileOutput),
 		response:                    &aws.Response{Request: r.Request},
 	}
 
@@ -134,7 +64,7 @@ func (r DeleteSecurityProfileRequest) Send(ctx context.Context) (*DeleteSecurity
 // DeleteSecurityProfileResponse is the response type for the
 // DeleteSecurityProfile API operation.
 type DeleteSecurityProfileResponse struct {
-	*DeleteSecurityProfileOutput
+	*types.DeleteSecurityProfileOutput
 
 	response *aws.Response
 }

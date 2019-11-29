@@ -6,87 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/pinpoint/types"
 )
-
-type DeleteSegmentInput struct {
-	_ struct{} `type:"structure"`
-
-	// ApplicationId is a required field
-	ApplicationId *string `location:"uri" locationName:"application-id" type:"string" required:"true"`
-
-	// SegmentId is a required field
-	SegmentId *string `location:"uri" locationName:"segment-id" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteSegmentInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteSegmentInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteSegmentInput"}
-
-	if s.ApplicationId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ApplicationId"))
-	}
-
-	if s.SegmentId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("SegmentId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteSegmentInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.ApplicationId != nil {
-		v := *s.ApplicationId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "application-id", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.SegmentId != nil {
-		v := *s.SegmentId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "segment-id", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type DeleteSegmentOutput struct {
-	_ struct{} `type:"structure" payload:"SegmentResponse"`
-
-	// Provides information about the configuration, dimension, and other settings
-	// for a segment.
-	//
-	// SegmentResponse is a required field
-	SegmentResponse *SegmentResponse `type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteSegmentOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteSegmentOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.SegmentResponse != nil {
-		v := s.SegmentResponse
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.PayloadTarget, "SegmentResponse", v, metadata)
-	}
-	return nil
-}
 
 const opDeleteSegment = "DeleteSegment"
 
@@ -103,7 +24,7 @@ const opDeleteSegment = "DeleteSegment"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/DeleteSegment
-func (c *Client) DeleteSegmentRequest(input *DeleteSegmentInput) DeleteSegmentRequest {
+func (c *Client) DeleteSegmentRequest(input *types.DeleteSegmentInput) DeleteSegmentRequest {
 	op := &aws.Operation{
 		Name:       opDeleteSegment,
 		HTTPMethod: "DELETE",
@@ -111,10 +32,10 @@ func (c *Client) DeleteSegmentRequest(input *DeleteSegmentInput) DeleteSegmentRe
 	}
 
 	if input == nil {
-		input = &DeleteSegmentInput{}
+		input = &types.DeleteSegmentInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteSegmentOutput{})
+	req := c.newRequest(op, input, &types.DeleteSegmentOutput{})
 	return DeleteSegmentRequest{Request: req, Input: input, Copy: c.DeleteSegmentRequest}
 }
 
@@ -122,8 +43,8 @@ func (c *Client) DeleteSegmentRequest(input *DeleteSegmentInput) DeleteSegmentRe
 // DeleteSegment API operation.
 type DeleteSegmentRequest struct {
 	*aws.Request
-	Input *DeleteSegmentInput
-	Copy  func(*DeleteSegmentInput) DeleteSegmentRequest
+	Input *types.DeleteSegmentInput
+	Copy  func(*types.DeleteSegmentInput) DeleteSegmentRequest
 }
 
 // Send marshals and sends the DeleteSegment API request.
@@ -135,7 +56,7 @@ func (r DeleteSegmentRequest) Send(ctx context.Context) (*DeleteSegmentResponse,
 	}
 
 	resp := &DeleteSegmentResponse{
-		DeleteSegmentOutput: r.Request.Data.(*DeleteSegmentOutput),
+		DeleteSegmentOutput: r.Request.Data.(*types.DeleteSegmentOutput),
 		response:            &aws.Response{Request: r.Request},
 	}
 
@@ -145,7 +66,7 @@ func (r DeleteSegmentRequest) Send(ctx context.Context) (*DeleteSegmentResponse,
 // DeleteSegmentResponse is the response type for the
 // DeleteSegment API operation.
 type DeleteSegmentResponse struct {
-	*DeleteSegmentOutput
+	*types.DeleteSegmentOutput
 
 	response *aws.Response
 }

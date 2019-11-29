@@ -6,58 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/opsworks/types"
 )
-
-type RegisterElasticIpInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Elastic IP address.
-	//
-	// ElasticIp is a required field
-	ElasticIp *string `type:"string" required:"true"`
-
-	// The stack ID.
-	//
-	// StackId is a required field
-	StackId *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s RegisterElasticIpInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *RegisterElasticIpInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "RegisterElasticIpInput"}
-
-	if s.ElasticIp == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ElasticIp"))
-	}
-
-	if s.StackId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("StackId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Contains the response to a RegisterElasticIp request.
-type RegisterElasticIpOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The Elastic IP address.
-	ElasticIp *string `type:"string"`
-}
-
-// String returns the string representation
-func (s RegisterElasticIpOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opRegisterElasticIp = "RegisterElasticIp"
 
@@ -82,7 +32,7 @@ const opRegisterElasticIp = "RegisterElasticIp"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/RegisterElasticIp
-func (c *Client) RegisterElasticIpRequest(input *RegisterElasticIpInput) RegisterElasticIpRequest {
+func (c *Client) RegisterElasticIpRequest(input *types.RegisterElasticIpInput) RegisterElasticIpRequest {
 	op := &aws.Operation{
 		Name:       opRegisterElasticIp,
 		HTTPMethod: "POST",
@@ -90,10 +40,10 @@ func (c *Client) RegisterElasticIpRequest(input *RegisterElasticIpInput) Registe
 	}
 
 	if input == nil {
-		input = &RegisterElasticIpInput{}
+		input = &types.RegisterElasticIpInput{}
 	}
 
-	req := c.newRequest(op, input, &RegisterElasticIpOutput{})
+	req := c.newRequest(op, input, &types.RegisterElasticIpOutput{})
 	return RegisterElasticIpRequest{Request: req, Input: input, Copy: c.RegisterElasticIpRequest}
 }
 
@@ -101,8 +51,8 @@ func (c *Client) RegisterElasticIpRequest(input *RegisterElasticIpInput) Registe
 // RegisterElasticIp API operation.
 type RegisterElasticIpRequest struct {
 	*aws.Request
-	Input *RegisterElasticIpInput
-	Copy  func(*RegisterElasticIpInput) RegisterElasticIpRequest
+	Input *types.RegisterElasticIpInput
+	Copy  func(*types.RegisterElasticIpInput) RegisterElasticIpRequest
 }
 
 // Send marshals and sends the RegisterElasticIp API request.
@@ -114,7 +64,7 @@ func (r RegisterElasticIpRequest) Send(ctx context.Context) (*RegisterElasticIpR
 	}
 
 	resp := &RegisterElasticIpResponse{
-		RegisterElasticIpOutput: r.Request.Data.(*RegisterElasticIpOutput),
+		RegisterElasticIpOutput: r.Request.Data.(*types.RegisterElasticIpOutput),
 		response:                &aws.Response{Request: r.Request},
 	}
 
@@ -124,7 +74,7 @@ func (r RegisterElasticIpRequest) Send(ctx context.Context) (*RegisterElasticIpR
 // RegisterElasticIpResponse is the response type for the
 // RegisterElasticIp API operation.
 type RegisterElasticIpResponse struct {
-	*RegisterElasticIpOutput
+	*types.RegisterElasticIpOutput
 
 	response *aws.Response
 }

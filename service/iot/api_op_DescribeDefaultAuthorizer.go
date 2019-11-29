@@ -6,48 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/iot/types"
 )
-
-type DescribeDefaultAuthorizerInput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DescribeDefaultAuthorizerInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DescribeDefaultAuthorizerInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	return nil
-}
-
-type DescribeDefaultAuthorizerOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The default authorizer's description.
-	AuthorizerDescription *AuthorizerDescription `locationName:"authorizerDescription" type:"structure"`
-}
-
-// String returns the string representation
-func (s DescribeDefaultAuthorizerOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DescribeDefaultAuthorizerOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.AuthorizerDescription != nil {
-		v := s.AuthorizerDescription
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "authorizerDescription", v, metadata)
-	}
-	return nil
-}
 
 const opDescribeDefaultAuthorizer = "DescribeDefaultAuthorizer"
 
@@ -62,7 +22,7 @@ const opDescribeDefaultAuthorizer = "DescribeDefaultAuthorizer"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) DescribeDefaultAuthorizerRequest(input *DescribeDefaultAuthorizerInput) DescribeDefaultAuthorizerRequest {
+func (c *Client) DescribeDefaultAuthorizerRequest(input *types.DescribeDefaultAuthorizerInput) DescribeDefaultAuthorizerRequest {
 	op := &aws.Operation{
 		Name:       opDescribeDefaultAuthorizer,
 		HTTPMethod: "GET",
@@ -70,10 +30,10 @@ func (c *Client) DescribeDefaultAuthorizerRequest(input *DescribeDefaultAuthoriz
 	}
 
 	if input == nil {
-		input = &DescribeDefaultAuthorizerInput{}
+		input = &types.DescribeDefaultAuthorizerInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeDefaultAuthorizerOutput{})
+	req := c.newRequest(op, input, &types.DescribeDefaultAuthorizerOutput{})
 	return DescribeDefaultAuthorizerRequest{Request: req, Input: input, Copy: c.DescribeDefaultAuthorizerRequest}
 }
 
@@ -81,8 +41,8 @@ func (c *Client) DescribeDefaultAuthorizerRequest(input *DescribeDefaultAuthoriz
 // DescribeDefaultAuthorizer API operation.
 type DescribeDefaultAuthorizerRequest struct {
 	*aws.Request
-	Input *DescribeDefaultAuthorizerInput
-	Copy  func(*DescribeDefaultAuthorizerInput) DescribeDefaultAuthorizerRequest
+	Input *types.DescribeDefaultAuthorizerInput
+	Copy  func(*types.DescribeDefaultAuthorizerInput) DescribeDefaultAuthorizerRequest
 }
 
 // Send marshals and sends the DescribeDefaultAuthorizer API request.
@@ -94,7 +54,7 @@ func (r DescribeDefaultAuthorizerRequest) Send(ctx context.Context) (*DescribeDe
 	}
 
 	resp := &DescribeDefaultAuthorizerResponse{
-		DescribeDefaultAuthorizerOutput: r.Request.Data.(*DescribeDefaultAuthorizerOutput),
+		DescribeDefaultAuthorizerOutput: r.Request.Data.(*types.DescribeDefaultAuthorizerOutput),
 		response:                        &aws.Response{Request: r.Request},
 	}
 
@@ -104,7 +64,7 @@ func (r DescribeDefaultAuthorizerRequest) Send(ctx context.Context) (*DescribeDe
 // DescribeDefaultAuthorizerResponse is the response type for the
 // DescribeDefaultAuthorizer API operation.
 type DescribeDefaultAuthorizerResponse struct {
-	*DescribeDefaultAuthorizerOutput
+	*types.DescribeDefaultAuthorizerOutput
 
 	response *aws.Response
 }

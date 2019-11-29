@@ -7,6 +7,7 @@ import (
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
+	"github.com/aws/aws-sdk-go-v2/service/cloudfront/types"
 )
 
 // WaitUntilDistributionDeployed uses the CloudFront API operation
@@ -18,7 +19,7 @@ import (
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Client) WaitUntilDistributionDeployed(ctx context.Context, input *GetDistributionInput, opts ...aws.WaiterOption) error {
+func (c *Client) WaitUntilDistributionDeployed(ctx context.Context, input *types.GetDistributionInput, opts ...aws.WaiterOption) error {
 	w := aws.Waiter{
 		Name:        "WaitUntilDistributionDeployed",
 		MaxAttempts: 35,
@@ -32,7 +33,7 @@ func (c *Client) WaitUntilDistributionDeployed(ctx context.Context, input *GetDi
 		},
 		Logger: c.Config.Logger,
 		NewRequest: func(opts []aws.Option) (*aws.Request, error) {
-			var inCpy *GetDistributionInput
+			var inCpy *types.GetDistributionInput
 			if input != nil {
 				tmp := *input
 				inCpy = &tmp
@@ -57,7 +58,7 @@ func (c *Client) WaitUntilDistributionDeployed(ctx context.Context, input *GetDi
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Client) WaitUntilInvalidationCompleted(ctx context.Context, input *GetInvalidationInput, opts ...aws.WaiterOption) error {
+func (c *Client) WaitUntilInvalidationCompleted(ctx context.Context, input *types.GetInvalidationInput, opts ...aws.WaiterOption) error {
 	w := aws.Waiter{
 		Name:        "WaitUntilInvalidationCompleted",
 		MaxAttempts: 30,
@@ -71,7 +72,7 @@ func (c *Client) WaitUntilInvalidationCompleted(ctx context.Context, input *GetI
 		},
 		Logger: c.Config.Logger,
 		NewRequest: func(opts []aws.Option) (*aws.Request, error) {
-			var inCpy *GetInvalidationInput
+			var inCpy *types.GetInvalidationInput
 			if input != nil {
 				tmp := *input
 				inCpy = &tmp
@@ -96,7 +97,7 @@ func (c *Client) WaitUntilInvalidationCompleted(ctx context.Context, input *GetI
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Client) WaitUntilStreamingDistributionDeployed(ctx context.Context, input *GetStreamingDistributionInput, opts ...aws.WaiterOption) error {
+func (c *Client) WaitUntilStreamingDistributionDeployed(ctx context.Context, input *types.GetStreamingDistributionInput, opts ...aws.WaiterOption) error {
 	w := aws.Waiter{
 		Name:        "WaitUntilStreamingDistributionDeployed",
 		MaxAttempts: 25,
@@ -110,7 +111,7 @@ func (c *Client) WaitUntilStreamingDistributionDeployed(ctx context.Context, inp
 		},
 		Logger: c.Config.Logger,
 		NewRequest: func(opts []aws.Option) (*aws.Request, error) {
-			var inCpy *GetStreamingDistributionInput
+			var inCpy *types.GetStreamingDistributionInput
 			if input != nil {
 				tmp := *input
 				inCpy = &tmp

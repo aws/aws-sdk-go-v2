@@ -6,35 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/costandusagereportservice/types"
 )
-
-// Deletes the specified report.
-type DeleteReportDefinitionInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the report that you want to create. The name must be unique,
-	// is case sensitive, and can't include spaces.
-	ReportName *string `type:"string"`
-}
-
-// String returns the string representation
-func (s DeleteReportDefinitionInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// If the action is successful, the service sends back an HTTP 200 response.
-type DeleteReportDefinitionOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Whether the deletion was successful or not.
-	ResponseMessage *string `type:"string"`
-}
-
-// String returns the string representation
-func (s DeleteReportDefinitionOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteReportDefinition = "DeleteReportDefinition"
 
@@ -51,7 +24,7 @@ const opDeleteReportDefinition = "DeleteReportDefinition"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cur-2017-01-06/DeleteReportDefinition
-func (c *Client) DeleteReportDefinitionRequest(input *DeleteReportDefinitionInput) DeleteReportDefinitionRequest {
+func (c *Client) DeleteReportDefinitionRequest(input *types.DeleteReportDefinitionInput) DeleteReportDefinitionRequest {
 	op := &aws.Operation{
 		Name:       opDeleteReportDefinition,
 		HTTPMethod: "POST",
@@ -59,10 +32,10 @@ func (c *Client) DeleteReportDefinitionRequest(input *DeleteReportDefinitionInpu
 	}
 
 	if input == nil {
-		input = &DeleteReportDefinitionInput{}
+		input = &types.DeleteReportDefinitionInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteReportDefinitionOutput{})
+	req := c.newRequest(op, input, &types.DeleteReportDefinitionOutput{})
 	return DeleteReportDefinitionRequest{Request: req, Input: input, Copy: c.DeleteReportDefinitionRequest}
 }
 
@@ -70,8 +43,8 @@ func (c *Client) DeleteReportDefinitionRequest(input *DeleteReportDefinitionInpu
 // DeleteReportDefinition API operation.
 type DeleteReportDefinitionRequest struct {
 	*aws.Request
-	Input *DeleteReportDefinitionInput
-	Copy  func(*DeleteReportDefinitionInput) DeleteReportDefinitionRequest
+	Input *types.DeleteReportDefinitionInput
+	Copy  func(*types.DeleteReportDefinitionInput) DeleteReportDefinitionRequest
 }
 
 // Send marshals and sends the DeleteReportDefinition API request.
@@ -83,7 +56,7 @@ func (r DeleteReportDefinitionRequest) Send(ctx context.Context) (*DeleteReportD
 	}
 
 	resp := &DeleteReportDefinitionResponse{
-		DeleteReportDefinitionOutput: r.Request.Data.(*DeleteReportDefinitionOutput),
+		DeleteReportDefinitionOutput: r.Request.Data.(*types.DeleteReportDefinitionOutput),
 		response:                     &aws.Response{Request: r.Request},
 	}
 
@@ -93,7 +66,7 @@ func (r DeleteReportDefinitionRequest) Send(ctx context.Context) (*DeleteReportD
 // DeleteReportDefinitionResponse is the response type for the
 // DeleteReportDefinition API operation.
 type DeleteReportDefinitionResponse struct {
-	*DeleteReportDefinitionOutput
+	*types.DeleteReportDefinitionOutput
 
 	response *aws.Response
 }

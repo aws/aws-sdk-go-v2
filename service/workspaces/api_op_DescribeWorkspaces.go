@@ -6,85 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/workspaces/types"
 )
-
-type DescribeWorkspacesInput struct {
-	_ struct{} `type:"structure"`
-
-	// The identifier of the bundle. All WorkSpaces that are created from this bundle
-	// are retrieved. You cannot combine this parameter with any other filter.
-	BundleId *string `type:"string"`
-
-	// The identifier of the directory. In addition, you can optionally specify
-	// a specific directory user (see UserName). You cannot combine this parameter
-	// with any other filter.
-	DirectoryId *string `type:"string"`
-
-	// The maximum number of items to return.
-	Limit *int64 `min:"1" type:"integer"`
-
-	// If you received a NextToken from a previous call that was paginated, provide
-	// this token to receive the next set of results.
-	NextToken *string `min:"1" type:"string"`
-
-	// The name of the directory user. You must specify this parameter with DirectoryId.
-	UserName *string `min:"1" type:"string"`
-
-	// The identifiers of the WorkSpaces. You cannot combine this parameter with
-	// any other filter.
-	//
-	// Because the CreateWorkspaces operation is asynchronous, the identifier it
-	// returns is not immediately available. If you immediately call DescribeWorkspaces
-	// with this identifier, no information is returned.
-	WorkspaceIds []string `min:"1" type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeWorkspacesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeWorkspacesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeWorkspacesInput"}
-	if s.Limit != nil && *s.Limit < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("Limit", 1))
-	}
-	if s.NextToken != nil && len(*s.NextToken) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
-	}
-	if s.UserName != nil && len(*s.UserName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("UserName", 1))
-	}
-	if s.WorkspaceIds != nil && len(s.WorkspaceIds) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("WorkspaceIds", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribeWorkspacesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The token to use to retrieve the next set of results, or null if no more
-	// results are available.
-	NextToken *string `min:"1" type:"string"`
-
-	// Information about the WorkSpaces.
-	//
-	// Because CreateWorkspaces is an asynchronous operation, some of the returned
-	// information could be incomplete.
-	Workspaces []Workspace `type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeWorkspacesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeWorkspaces = "DescribeWorkspaces"
 
@@ -104,7 +27,7 @@ const opDescribeWorkspaces = "DescribeWorkspaces"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DescribeWorkspaces
-func (c *Client) DescribeWorkspacesRequest(input *DescribeWorkspacesInput) DescribeWorkspacesRequest {
+func (c *Client) DescribeWorkspacesRequest(input *types.DescribeWorkspacesInput) DescribeWorkspacesRequest {
 	op := &aws.Operation{
 		Name:       opDescribeWorkspaces,
 		HTTPMethod: "POST",
@@ -118,10 +41,10 @@ func (c *Client) DescribeWorkspacesRequest(input *DescribeWorkspacesInput) Descr
 	}
 
 	if input == nil {
-		input = &DescribeWorkspacesInput{}
+		input = &types.DescribeWorkspacesInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeWorkspacesOutput{})
+	req := c.newRequest(op, input, &types.DescribeWorkspacesOutput{})
 	return DescribeWorkspacesRequest{Request: req, Input: input, Copy: c.DescribeWorkspacesRequest}
 }
 
@@ -129,8 +52,8 @@ func (c *Client) DescribeWorkspacesRequest(input *DescribeWorkspacesInput) Descr
 // DescribeWorkspaces API operation.
 type DescribeWorkspacesRequest struct {
 	*aws.Request
-	Input *DescribeWorkspacesInput
-	Copy  func(*DescribeWorkspacesInput) DescribeWorkspacesRequest
+	Input *types.DescribeWorkspacesInput
+	Copy  func(*types.DescribeWorkspacesInput) DescribeWorkspacesRequest
 }
 
 // Send marshals and sends the DescribeWorkspaces API request.
@@ -142,7 +65,7 @@ func (r DescribeWorkspacesRequest) Send(ctx context.Context) (*DescribeWorkspace
 	}
 
 	resp := &DescribeWorkspacesResponse{
-		DescribeWorkspacesOutput: r.Request.Data.(*DescribeWorkspacesOutput),
+		DescribeWorkspacesOutput: r.Request.Data.(*types.DescribeWorkspacesOutput),
 		response:                 &aws.Response{Request: r.Request},
 	}
 
@@ -172,7 +95,7 @@ func NewDescribeWorkspacesPaginator(req DescribeWorkspacesRequest) DescribeWorks
 	return DescribeWorkspacesPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *DescribeWorkspacesInput
+				var inCpy *types.DescribeWorkspacesInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -192,14 +115,14 @@ type DescribeWorkspacesPaginator struct {
 	aws.Pager
 }
 
-func (p *DescribeWorkspacesPaginator) CurrentPage() *DescribeWorkspacesOutput {
-	return p.Pager.CurrentPage().(*DescribeWorkspacesOutput)
+func (p *DescribeWorkspacesPaginator) CurrentPage() *types.DescribeWorkspacesOutput {
+	return p.Pager.CurrentPage().(*types.DescribeWorkspacesOutput)
 }
 
 // DescribeWorkspacesResponse is the response type for the
 // DescribeWorkspaces API operation.
 type DescribeWorkspacesResponse struct {
-	*DescribeWorkspacesOutput
+	*types.DescribeWorkspacesOutput
 
 	response *aws.Response
 }

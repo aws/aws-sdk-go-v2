@@ -6,67 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ses/types"
 )
-
-// Represents a request to retrieve an existing custom verification email template.
-type GetCustomVerificationEmailTemplateInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the custom verification email template that you want to retrieve.
-	//
-	// TemplateName is a required field
-	TemplateName *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetCustomVerificationEmailTemplateInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetCustomVerificationEmailTemplateInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetCustomVerificationEmailTemplateInput"}
-
-	if s.TemplateName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("TemplateName"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// The content of the custom verification email template.
-type GetCustomVerificationEmailTemplateOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The URL that the recipient of the verification email is sent to if his or
-	// her address is not successfully verified.
-	FailureRedirectionURL *string `type:"string"`
-
-	// The email address that the custom verification email is sent from.
-	FromEmailAddress *string `type:"string"`
-
-	// The URL that the recipient of the verification email is sent to if his or
-	// her address is successfully verified.
-	SuccessRedirectionURL *string `type:"string"`
-
-	// The content of the custom verification email.
-	TemplateContent *string `type:"string"`
-
-	// The name of the custom verification email template.
-	TemplateName *string `type:"string"`
-
-	// The subject line of the custom verification email.
-	TemplateSubject *string `type:"string"`
-}
-
-// String returns the string representation
-func (s GetCustomVerificationEmailTemplateOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetCustomVerificationEmailTemplate = "GetCustomVerificationEmailTemplate"
 
@@ -90,7 +31,7 @@ const opGetCustomVerificationEmailTemplate = "GetCustomVerificationEmailTemplate
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/GetCustomVerificationEmailTemplate
-func (c *Client) GetCustomVerificationEmailTemplateRequest(input *GetCustomVerificationEmailTemplateInput) GetCustomVerificationEmailTemplateRequest {
+func (c *Client) GetCustomVerificationEmailTemplateRequest(input *types.GetCustomVerificationEmailTemplateInput) GetCustomVerificationEmailTemplateRequest {
 	op := &aws.Operation{
 		Name:       opGetCustomVerificationEmailTemplate,
 		HTTPMethod: "POST",
@@ -98,10 +39,10 @@ func (c *Client) GetCustomVerificationEmailTemplateRequest(input *GetCustomVerif
 	}
 
 	if input == nil {
-		input = &GetCustomVerificationEmailTemplateInput{}
+		input = &types.GetCustomVerificationEmailTemplateInput{}
 	}
 
-	req := c.newRequest(op, input, &GetCustomVerificationEmailTemplateOutput{})
+	req := c.newRequest(op, input, &types.GetCustomVerificationEmailTemplateOutput{})
 	return GetCustomVerificationEmailTemplateRequest{Request: req, Input: input, Copy: c.GetCustomVerificationEmailTemplateRequest}
 }
 
@@ -109,8 +50,8 @@ func (c *Client) GetCustomVerificationEmailTemplateRequest(input *GetCustomVerif
 // GetCustomVerificationEmailTemplate API operation.
 type GetCustomVerificationEmailTemplateRequest struct {
 	*aws.Request
-	Input *GetCustomVerificationEmailTemplateInput
-	Copy  func(*GetCustomVerificationEmailTemplateInput) GetCustomVerificationEmailTemplateRequest
+	Input *types.GetCustomVerificationEmailTemplateInput
+	Copy  func(*types.GetCustomVerificationEmailTemplateInput) GetCustomVerificationEmailTemplateRequest
 }
 
 // Send marshals and sends the GetCustomVerificationEmailTemplate API request.
@@ -122,7 +63,7 @@ func (r GetCustomVerificationEmailTemplateRequest) Send(ctx context.Context) (*G
 	}
 
 	resp := &GetCustomVerificationEmailTemplateResponse{
-		GetCustomVerificationEmailTemplateOutput: r.Request.Data.(*GetCustomVerificationEmailTemplateOutput),
+		GetCustomVerificationEmailTemplateOutput: r.Request.Data.(*types.GetCustomVerificationEmailTemplateOutput),
 		response:                                 &aws.Response{Request: r.Request},
 	}
 
@@ -132,7 +73,7 @@ func (r GetCustomVerificationEmailTemplateRequest) Send(ctx context.Context) (*G
 // GetCustomVerificationEmailTemplateResponse is the response type for the
 // GetCustomVerificationEmailTemplate API operation.
 type GetCustomVerificationEmailTemplateResponse struct {
-	*GetCustomVerificationEmailTemplateOutput
+	*types.GetCustomVerificationEmailTemplateOutput
 
 	response *aws.Response
 }

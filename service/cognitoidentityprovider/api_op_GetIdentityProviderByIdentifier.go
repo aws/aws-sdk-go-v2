@@ -6,65 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/types"
 )
-
-type GetIdentityProviderByIdentifierInput struct {
-	_ struct{} `type:"structure"`
-
-	// The identity provider ID.
-	//
-	// IdpIdentifier is a required field
-	IdpIdentifier *string `min:"1" type:"string" required:"true"`
-
-	// The user pool ID.
-	//
-	// UserPoolId is a required field
-	UserPoolId *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetIdentityProviderByIdentifierInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetIdentityProviderByIdentifierInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetIdentityProviderByIdentifierInput"}
-
-	if s.IdpIdentifier == nil {
-		invalidParams.Add(aws.NewErrParamRequired("IdpIdentifier"))
-	}
-	if s.IdpIdentifier != nil && len(*s.IdpIdentifier) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("IdpIdentifier", 1))
-	}
-
-	if s.UserPoolId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("UserPoolId"))
-	}
-	if s.UserPoolId != nil && len(*s.UserPoolId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("UserPoolId", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type GetIdentityProviderByIdentifierOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The identity provider object.
-	//
-	// IdentityProvider is a required field
-	IdentityProvider *IdentityProviderType `type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s GetIdentityProviderByIdentifierOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetIdentityProviderByIdentifier = "GetIdentityProviderByIdentifier"
 
@@ -81,7 +24,7 @@ const opGetIdentityProviderByIdentifier = "GetIdentityProviderByIdentifier"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/GetIdentityProviderByIdentifier
-func (c *Client) GetIdentityProviderByIdentifierRequest(input *GetIdentityProviderByIdentifierInput) GetIdentityProviderByIdentifierRequest {
+func (c *Client) GetIdentityProviderByIdentifierRequest(input *types.GetIdentityProviderByIdentifierInput) GetIdentityProviderByIdentifierRequest {
 	op := &aws.Operation{
 		Name:       opGetIdentityProviderByIdentifier,
 		HTTPMethod: "POST",
@@ -89,10 +32,10 @@ func (c *Client) GetIdentityProviderByIdentifierRequest(input *GetIdentityProvid
 	}
 
 	if input == nil {
-		input = &GetIdentityProviderByIdentifierInput{}
+		input = &types.GetIdentityProviderByIdentifierInput{}
 	}
 
-	req := c.newRequest(op, input, &GetIdentityProviderByIdentifierOutput{})
+	req := c.newRequest(op, input, &types.GetIdentityProviderByIdentifierOutput{})
 	return GetIdentityProviderByIdentifierRequest{Request: req, Input: input, Copy: c.GetIdentityProviderByIdentifierRequest}
 }
 
@@ -100,8 +43,8 @@ func (c *Client) GetIdentityProviderByIdentifierRequest(input *GetIdentityProvid
 // GetIdentityProviderByIdentifier API operation.
 type GetIdentityProviderByIdentifierRequest struct {
 	*aws.Request
-	Input *GetIdentityProviderByIdentifierInput
-	Copy  func(*GetIdentityProviderByIdentifierInput) GetIdentityProviderByIdentifierRequest
+	Input *types.GetIdentityProviderByIdentifierInput
+	Copy  func(*types.GetIdentityProviderByIdentifierInput) GetIdentityProviderByIdentifierRequest
 }
 
 // Send marshals and sends the GetIdentityProviderByIdentifier API request.
@@ -113,7 +56,7 @@ func (r GetIdentityProviderByIdentifierRequest) Send(ctx context.Context) (*GetI
 	}
 
 	resp := &GetIdentityProviderByIdentifierResponse{
-		GetIdentityProviderByIdentifierOutput: r.Request.Data.(*GetIdentityProviderByIdentifierOutput),
+		GetIdentityProviderByIdentifierOutput: r.Request.Data.(*types.GetIdentityProviderByIdentifierOutput),
 		response:                              &aws.Response{Request: r.Request},
 	}
 
@@ -123,7 +66,7 @@ func (r GetIdentityProviderByIdentifierRequest) Send(ctx context.Context) (*GetI
 // GetIdentityProviderByIdentifierResponse is the response type for the
 // GetIdentityProviderByIdentifier API operation.
 type GetIdentityProviderByIdentifierResponse struct {
-	*GetIdentityProviderByIdentifierOutput
+	*types.GetIdentityProviderByIdentifierOutput
 
 	response *aws.Response
 }

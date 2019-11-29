@@ -6,60 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/gamelift/types"
 )
-
-// Represents the input for a request action.
-type DeleteVpcPeeringConnectionInput struct {
-	_ struct{} `type:"structure"`
-
-	// Unique identifier for a fleet. This value must match the fleet ID referenced
-	// in the VPC peering connection record.
-	//
-	// FleetId is a required field
-	FleetId *string `type:"string" required:"true"`
-
-	// Unique identifier for a VPC peering connection. This value is included in
-	// the VpcPeeringConnection object, which can be retrieved by calling DescribeVpcPeeringConnections.
-	//
-	// VpcPeeringConnectionId is a required field
-	VpcPeeringConnectionId *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteVpcPeeringConnectionInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteVpcPeeringConnectionInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteVpcPeeringConnectionInput"}
-
-	if s.FleetId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("FleetId"))
-	}
-
-	if s.VpcPeeringConnectionId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("VpcPeeringConnectionId"))
-	}
-	if s.VpcPeeringConnectionId != nil && len(*s.VpcPeeringConnectionId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("VpcPeeringConnectionId", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteVpcPeeringConnectionOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteVpcPeeringConnectionOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteVpcPeeringConnection = "DeleteVpcPeeringConnection"
 
@@ -96,7 +44,7 @@ const opDeleteVpcPeeringConnection = "DeleteVpcPeeringConnection"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DeleteVpcPeeringConnection
-func (c *Client) DeleteVpcPeeringConnectionRequest(input *DeleteVpcPeeringConnectionInput) DeleteVpcPeeringConnectionRequest {
+func (c *Client) DeleteVpcPeeringConnectionRequest(input *types.DeleteVpcPeeringConnectionInput) DeleteVpcPeeringConnectionRequest {
 	op := &aws.Operation{
 		Name:       opDeleteVpcPeeringConnection,
 		HTTPMethod: "POST",
@@ -104,10 +52,10 @@ func (c *Client) DeleteVpcPeeringConnectionRequest(input *DeleteVpcPeeringConnec
 	}
 
 	if input == nil {
-		input = &DeleteVpcPeeringConnectionInput{}
+		input = &types.DeleteVpcPeeringConnectionInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteVpcPeeringConnectionOutput{})
+	req := c.newRequest(op, input, &types.DeleteVpcPeeringConnectionOutput{})
 	return DeleteVpcPeeringConnectionRequest{Request: req, Input: input, Copy: c.DeleteVpcPeeringConnectionRequest}
 }
 
@@ -115,8 +63,8 @@ func (c *Client) DeleteVpcPeeringConnectionRequest(input *DeleteVpcPeeringConnec
 // DeleteVpcPeeringConnection API operation.
 type DeleteVpcPeeringConnectionRequest struct {
 	*aws.Request
-	Input *DeleteVpcPeeringConnectionInput
-	Copy  func(*DeleteVpcPeeringConnectionInput) DeleteVpcPeeringConnectionRequest
+	Input *types.DeleteVpcPeeringConnectionInput
+	Copy  func(*types.DeleteVpcPeeringConnectionInput) DeleteVpcPeeringConnectionRequest
 }
 
 // Send marshals and sends the DeleteVpcPeeringConnection API request.
@@ -128,7 +76,7 @@ func (r DeleteVpcPeeringConnectionRequest) Send(ctx context.Context) (*DeleteVpc
 	}
 
 	resp := &DeleteVpcPeeringConnectionResponse{
-		DeleteVpcPeeringConnectionOutput: r.Request.Data.(*DeleteVpcPeeringConnectionOutput),
+		DeleteVpcPeeringConnectionOutput: r.Request.Data.(*types.DeleteVpcPeeringConnectionOutput),
 		response:                         &aws.Response{Request: r.Request},
 	}
 
@@ -138,7 +86,7 @@ func (r DeleteVpcPeeringConnectionRequest) Send(ctx context.Context) (*DeleteVpc
 // DeleteVpcPeeringConnectionResponse is the response type for the
 // DeleteVpcPeeringConnection API operation.
 type DeleteVpcPeeringConnectionResponse struct {
-	*DeleteVpcPeeringConnectionOutput
+	*types.DeleteVpcPeeringConnectionOutput
 
 	response *aws.Response
 }

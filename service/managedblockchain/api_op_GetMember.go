@@ -6,94 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/managedblockchain/types"
 )
-
-type GetMemberInput struct {
-	_ struct{} `type:"structure"`
-
-	// The unique identifier of the member.
-	//
-	// MemberId is a required field
-	MemberId *string `location:"uri" locationName:"memberId" min:"1" type:"string" required:"true"`
-
-	// The unique identifier of the network to which the member belongs.
-	//
-	// NetworkId is a required field
-	NetworkId *string `location:"uri" locationName:"networkId" min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetMemberInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetMemberInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetMemberInput"}
-
-	if s.MemberId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("MemberId"))
-	}
-	if s.MemberId != nil && len(*s.MemberId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("MemberId", 1))
-	}
-
-	if s.NetworkId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("NetworkId"))
-	}
-	if s.NetworkId != nil && len(*s.NetworkId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("NetworkId", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetMemberInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.MemberId != nil {
-		v := *s.MemberId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "memberId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.NetworkId != nil {
-		v := *s.NetworkId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "networkId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type GetMemberOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The properties of a member.
-	Member *Member `type:"structure"`
-}
-
-// String returns the string representation
-func (s GetMemberOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetMemberOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.Member != nil {
-		v := s.Member
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "Member", v, metadata)
-	}
-	return nil
-}
 
 const opGetMember = "GetMember"
 
@@ -110,7 +24,7 @@ const opGetMember = "GetMember"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/managedblockchain-2018-09-24/GetMember
-func (c *Client) GetMemberRequest(input *GetMemberInput) GetMemberRequest {
+func (c *Client) GetMemberRequest(input *types.GetMemberInput) GetMemberRequest {
 	op := &aws.Operation{
 		Name:       opGetMember,
 		HTTPMethod: "GET",
@@ -118,10 +32,10 @@ func (c *Client) GetMemberRequest(input *GetMemberInput) GetMemberRequest {
 	}
 
 	if input == nil {
-		input = &GetMemberInput{}
+		input = &types.GetMemberInput{}
 	}
 
-	req := c.newRequest(op, input, &GetMemberOutput{})
+	req := c.newRequest(op, input, &types.GetMemberOutput{})
 	return GetMemberRequest{Request: req, Input: input, Copy: c.GetMemberRequest}
 }
 
@@ -129,8 +43,8 @@ func (c *Client) GetMemberRequest(input *GetMemberInput) GetMemberRequest {
 // GetMember API operation.
 type GetMemberRequest struct {
 	*aws.Request
-	Input *GetMemberInput
-	Copy  func(*GetMemberInput) GetMemberRequest
+	Input *types.GetMemberInput
+	Copy  func(*types.GetMemberInput) GetMemberRequest
 }
 
 // Send marshals and sends the GetMember API request.
@@ -142,7 +56,7 @@ func (r GetMemberRequest) Send(ctx context.Context) (*GetMemberResponse, error) 
 	}
 
 	resp := &GetMemberResponse{
-		GetMemberOutput: r.Request.Data.(*GetMemberOutput),
+		GetMemberOutput: r.Request.Data.(*types.GetMemberOutput),
 		response:        &aws.Response{Request: r.Request},
 	}
 
@@ -152,7 +66,7 @@ func (r GetMemberRequest) Send(ctx context.Context) (*GetMemberResponse, error) 
 // GetMemberResponse is the response type for the
 // GetMember API operation.
 type GetMemberResponse struct {
-	*GetMemberOutput
+	*types.GetMemberOutput
 
 	response *aws.Response
 }

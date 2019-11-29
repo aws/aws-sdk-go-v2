@@ -6,34 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ses/types"
 )
-
-// Represents a request to list the IP address filters that exist under your
-// AWS account. You use IP address filters when you receive email with Amazon
-// SES. For more information, see the Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-concepts.html).
-type ListReceiptFiltersInput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s ListReceiptFiltersInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// A list of IP address filters that exist under your AWS account.
-type ListReceiptFiltersOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A list of IP address filter data structures, which each consist of a name,
-	// an IP address range, and whether to allow or block mail from it.
-	Filters []ReceiptFilter `type:"list"`
-}
-
-// String returns the string representation
-func (s ListReceiptFiltersOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListReceiptFilters = "ListReceiptFilters"
 
@@ -56,7 +30,7 @@ const opListReceiptFilters = "ListReceiptFilters"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/ListReceiptFilters
-func (c *Client) ListReceiptFiltersRequest(input *ListReceiptFiltersInput) ListReceiptFiltersRequest {
+func (c *Client) ListReceiptFiltersRequest(input *types.ListReceiptFiltersInput) ListReceiptFiltersRequest {
 	op := &aws.Operation{
 		Name:       opListReceiptFilters,
 		HTTPMethod: "POST",
@@ -64,10 +38,10 @@ func (c *Client) ListReceiptFiltersRequest(input *ListReceiptFiltersInput) ListR
 	}
 
 	if input == nil {
-		input = &ListReceiptFiltersInput{}
+		input = &types.ListReceiptFiltersInput{}
 	}
 
-	req := c.newRequest(op, input, &ListReceiptFiltersOutput{})
+	req := c.newRequest(op, input, &types.ListReceiptFiltersOutput{})
 	return ListReceiptFiltersRequest{Request: req, Input: input, Copy: c.ListReceiptFiltersRequest}
 }
 
@@ -75,8 +49,8 @@ func (c *Client) ListReceiptFiltersRequest(input *ListReceiptFiltersInput) ListR
 // ListReceiptFilters API operation.
 type ListReceiptFiltersRequest struct {
 	*aws.Request
-	Input *ListReceiptFiltersInput
-	Copy  func(*ListReceiptFiltersInput) ListReceiptFiltersRequest
+	Input *types.ListReceiptFiltersInput
+	Copy  func(*types.ListReceiptFiltersInput) ListReceiptFiltersRequest
 }
 
 // Send marshals and sends the ListReceiptFilters API request.
@@ -88,7 +62,7 @@ func (r ListReceiptFiltersRequest) Send(ctx context.Context) (*ListReceiptFilter
 	}
 
 	resp := &ListReceiptFiltersResponse{
-		ListReceiptFiltersOutput: r.Request.Data.(*ListReceiptFiltersOutput),
+		ListReceiptFiltersOutput: r.Request.Data.(*types.ListReceiptFiltersOutput),
 		response:                 &aws.Response{Request: r.Request},
 	}
 
@@ -98,7 +72,7 @@ func (r ListReceiptFiltersRequest) Send(ctx context.Context) (*ListReceiptFilter
 // ListReceiptFiltersResponse is the response type for the
 // ListReceiptFilters API operation.
 type ListReceiptFiltersResponse struct {
-	*ListReceiptFiltersOutput
+	*types.ListReceiptFiltersOutput
 
 	response *aws.Response
 }

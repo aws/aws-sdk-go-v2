@@ -6,64 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
+	"github.com/aws/aws-sdk-go-v2/service/cloudwatchevents/types"
 )
-
-type DeleteRuleInput struct {
-	_ struct{} `type:"structure"`
-
-	// The event bus associated with the rule. If you omit this, the default event
-	// bus is used.
-	EventBusName *string `min:"1" type:"string"`
-
-	// If this is a managed rule, created by an AWS service on your behalf, you
-	// must specify Force as True to delete the rule. This parameter is ignored
-	// for rules that are not managed rules. You can check whether a rule is a managed
-	// rule by using DescribeRule or ListRules and checking the ManagedBy field
-	// of the response.
-	Force *bool `type:"boolean"`
-
-	// The name of the rule.
-	//
-	// Name is a required field
-	Name *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteRuleInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteRuleInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteRuleInput"}
-	if s.EventBusName != nil && len(*s.EventBusName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("EventBusName", 1))
-	}
-
-	if s.Name == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Name"))
-	}
-	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteRuleOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteRuleOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteRule = "DeleteRule"
 
@@ -91,7 +37,7 @@ const opDeleteRule = "DeleteRule"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/DeleteRule
-func (c *Client) DeleteRuleRequest(input *DeleteRuleInput) DeleteRuleRequest {
+func (c *Client) DeleteRuleRequest(input *types.DeleteRuleInput) DeleteRuleRequest {
 	op := &aws.Operation{
 		Name:       opDeleteRule,
 		HTTPMethod: "POST",
@@ -99,10 +45,10 @@ func (c *Client) DeleteRuleRequest(input *DeleteRuleInput) DeleteRuleRequest {
 	}
 
 	if input == nil {
-		input = &DeleteRuleInput{}
+		input = &types.DeleteRuleInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteRuleOutput{})
+	req := c.newRequest(op, input, &types.DeleteRuleOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return DeleteRuleRequest{Request: req, Input: input, Copy: c.DeleteRuleRequest}
@@ -112,8 +58,8 @@ func (c *Client) DeleteRuleRequest(input *DeleteRuleInput) DeleteRuleRequest {
 // DeleteRule API operation.
 type DeleteRuleRequest struct {
 	*aws.Request
-	Input *DeleteRuleInput
-	Copy  func(*DeleteRuleInput) DeleteRuleRequest
+	Input *types.DeleteRuleInput
+	Copy  func(*types.DeleteRuleInput) DeleteRuleRequest
 }
 
 // Send marshals and sends the DeleteRule API request.
@@ -125,7 +71,7 @@ func (r DeleteRuleRequest) Send(ctx context.Context) (*DeleteRuleResponse, error
 	}
 
 	resp := &DeleteRuleResponse{
-		DeleteRuleOutput: r.Request.Data.(*DeleteRuleOutput),
+		DeleteRuleOutput: r.Request.Data.(*types.DeleteRuleOutput),
 		response:         &aws.Response{Request: r.Request},
 	}
 
@@ -135,7 +81,7 @@ func (r DeleteRuleRequest) Send(ctx context.Context) (*DeleteRuleResponse, error
 // DeleteRuleResponse is the response type for the
 // DeleteRule API operation.
 type DeleteRuleResponse struct {
-	*DeleteRuleOutput
+	*types.DeleteRuleOutput
 
 	response *aws.Response
 }

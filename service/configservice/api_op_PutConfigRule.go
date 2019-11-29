@@ -4,65 +4,12 @@ package configservice
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
+	"github.com/aws/aws-sdk-go-v2/service/configservice/types"
 )
-
-type PutConfigRuleInput struct {
-	_ struct{} `type:"structure"`
-
-	// The rule that you want to add to your account.
-	//
-	// ConfigRule is a required field
-	ConfigRule *ConfigRule `type:"structure" required:"true"`
-
-	// An array of tag object.
-	Tags []Tag `type:"list"`
-}
-
-// String returns the string representation
-func (s PutConfigRuleInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *PutConfigRuleInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "PutConfigRuleInput"}
-
-	if s.ConfigRule == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ConfigRule"))
-	}
-	if s.ConfigRule != nil {
-		if err := s.ConfigRule.Validate(); err != nil {
-			invalidParams.AddNested("ConfigRule", err.(aws.ErrInvalidParams))
-		}
-	}
-	if s.Tags != nil {
-		for i, v := range s.Tags {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type PutConfigRuleOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s PutConfigRuleOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opPutConfigRule = "PutConfigRule"
 
@@ -114,7 +61,7 @@ const opPutConfigRule = "PutConfigRule"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/PutConfigRule
-func (c *Client) PutConfigRuleRequest(input *PutConfigRuleInput) PutConfigRuleRequest {
+func (c *Client) PutConfigRuleRequest(input *types.PutConfigRuleInput) PutConfigRuleRequest {
 	op := &aws.Operation{
 		Name:       opPutConfigRule,
 		HTTPMethod: "POST",
@@ -122,10 +69,10 @@ func (c *Client) PutConfigRuleRequest(input *PutConfigRuleInput) PutConfigRuleRe
 	}
 
 	if input == nil {
-		input = &PutConfigRuleInput{}
+		input = &types.PutConfigRuleInput{}
 	}
 
-	req := c.newRequest(op, input, &PutConfigRuleOutput{})
+	req := c.newRequest(op, input, &types.PutConfigRuleOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return PutConfigRuleRequest{Request: req, Input: input, Copy: c.PutConfigRuleRequest}
@@ -135,8 +82,8 @@ func (c *Client) PutConfigRuleRequest(input *PutConfigRuleInput) PutConfigRuleRe
 // PutConfigRule API operation.
 type PutConfigRuleRequest struct {
 	*aws.Request
-	Input *PutConfigRuleInput
-	Copy  func(*PutConfigRuleInput) PutConfigRuleRequest
+	Input *types.PutConfigRuleInput
+	Copy  func(*types.PutConfigRuleInput) PutConfigRuleRequest
 }
 
 // Send marshals and sends the PutConfigRule API request.
@@ -148,7 +95,7 @@ func (r PutConfigRuleRequest) Send(ctx context.Context) (*PutConfigRuleResponse,
 	}
 
 	resp := &PutConfigRuleResponse{
-		PutConfigRuleOutput: r.Request.Data.(*PutConfigRuleOutput),
+		PutConfigRuleOutput: r.Request.Data.(*types.PutConfigRuleOutput),
 		response:            &aws.Response{Request: r.Request},
 	}
 
@@ -158,7 +105,7 @@ func (r PutConfigRuleRequest) Send(ctx context.Context) (*PutConfigRuleResponse,
 // PutConfigRuleResponse is the response type for the
 // PutConfigRule API operation.
 type PutConfigRuleResponse struct {
-	*PutConfigRuleOutput
+	*types.PutConfigRuleOutput
 
 	response *aws.Response
 }

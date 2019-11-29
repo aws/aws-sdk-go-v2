@@ -6,55 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/service/waf"
+	"github.com/aws/aws-sdk-go-v2/service/wafregional/types"
 )
-
-type GetRegexPatternSetInput struct {
-	_ struct{} `type:"structure"`
-
-	// The RegexPatternSetId of the RegexPatternSet that you want to get. RegexPatternSetId
-	// is returned by CreateRegexPatternSet and by ListRegexPatternSets.
-	//
-	// RegexPatternSetId is a required field
-	RegexPatternSetId *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetRegexPatternSetInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetRegexPatternSetInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetRegexPatternSetInput"}
-
-	if s.RegexPatternSetId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("RegexPatternSetId"))
-	}
-	if s.RegexPatternSetId != nil && len(*s.RegexPatternSetId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("RegexPatternSetId", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type GetRegexPatternSetOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Information about the RegexPatternSet that you specified in the GetRegexPatternSet
-	// request, including the identifier of the pattern set and the regular expression
-	// patterns you want AWS WAF to search for.
-	RegexPatternSet *waf.RegexPatternSet `type:"structure"`
-}
-
-// String returns the string representation
-func (s GetRegexPatternSetOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetRegexPatternSet = "GetRegexPatternSet"
 
@@ -71,7 +24,7 @@ const opGetRegexPatternSet = "GetRegexPatternSet"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/GetRegexPatternSet
-func (c *Client) GetRegexPatternSetRequest(input *GetRegexPatternSetInput) GetRegexPatternSetRequest {
+func (c *Client) GetRegexPatternSetRequest(input *types.GetRegexPatternSetInput) GetRegexPatternSetRequest {
 	op := &aws.Operation{
 		Name:       opGetRegexPatternSet,
 		HTTPMethod: "POST",
@@ -79,10 +32,10 @@ func (c *Client) GetRegexPatternSetRequest(input *GetRegexPatternSetInput) GetRe
 	}
 
 	if input == nil {
-		input = &GetRegexPatternSetInput{}
+		input = &types.GetRegexPatternSetInput{}
 	}
 
-	req := c.newRequest(op, input, &GetRegexPatternSetOutput{})
+	req := c.newRequest(op, input, &types.GetRegexPatternSetOutput{})
 	return GetRegexPatternSetRequest{Request: req, Input: input, Copy: c.GetRegexPatternSetRequest}
 }
 
@@ -90,8 +43,8 @@ func (c *Client) GetRegexPatternSetRequest(input *GetRegexPatternSetInput) GetRe
 // GetRegexPatternSet API operation.
 type GetRegexPatternSetRequest struct {
 	*aws.Request
-	Input *GetRegexPatternSetInput
-	Copy  func(*GetRegexPatternSetInput) GetRegexPatternSetRequest
+	Input *types.GetRegexPatternSetInput
+	Copy  func(*types.GetRegexPatternSetInput) GetRegexPatternSetRequest
 }
 
 // Send marshals and sends the GetRegexPatternSet API request.
@@ -103,7 +56,7 @@ func (r GetRegexPatternSetRequest) Send(ctx context.Context) (*GetRegexPatternSe
 	}
 
 	resp := &GetRegexPatternSetResponse{
-		GetRegexPatternSetOutput: r.Request.Data.(*GetRegexPatternSetOutput),
+		GetRegexPatternSetOutput: r.Request.Data.(*types.GetRegexPatternSetOutput),
 		response:                 &aws.Response{Request: r.Request},
 	}
 
@@ -113,7 +66,7 @@ func (r GetRegexPatternSetRequest) Send(ctx context.Context) (*GetRegexPatternSe
 // GetRegexPatternSetResponse is the response type for the
 // GetRegexPatternSet API operation.
 type GetRegexPatternSetResponse struct {
-	*GetRegexPatternSetOutput
+	*types.GetRegexPatternSetOutput
 
 	response *aws.Response
 }

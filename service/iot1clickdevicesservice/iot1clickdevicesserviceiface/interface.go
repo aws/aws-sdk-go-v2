@@ -10,6 +10,7 @@ package iot1clickdevicesserviceiface
 
 import (
 	"github.com/aws/aws-sdk-go-v2/service/iot1clickdevicesservice"
+	"github.com/aws/aws-sdk-go-v2/service/iot1clickdevicesservice/types"
 )
 
 // ClientAPI provides an interface to enable mocking the
@@ -43,7 +44,7 @@ import (
 //    type mockClientClient struct {
 //        iot1clickdevicesserviceiface.ClientPI
 //    }
-//    func (m *mockClientClient) ClaimDevicesByClaimCode(input *iot1clickdevicesservice.ClaimDevicesByClaimCodeInput) (*iot1clickdevicesservice.ClaimDevicesByClaimCodeOutput, error) {
+//    func (m *mockClientClient) ClaimDevicesByClaimCode(input *types.ClaimDevicesByClaimCodeInput) (*types.ClaimDevicesByClaimCodeOutput, error) {
 //        // mock response/functionality
 //    }
 //
@@ -61,31 +62,31 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type ClientAPI interface {
-	ClaimDevicesByClaimCodeRequest(*iot1clickdevicesservice.ClaimDevicesByClaimCodeInput) iot1clickdevicesservice.ClaimDevicesByClaimCodeRequest
+	ClaimDevicesByClaimCodeRequest(*types.ClaimDevicesByClaimCodeInput) iot1clickdevicesservice.ClaimDevicesByClaimCodeRequest
 
-	DescribeDeviceRequest(*iot1clickdevicesservice.DescribeDeviceInput) iot1clickdevicesservice.DescribeDeviceRequest
+	DescribeDeviceRequest(*types.DescribeDeviceInput) iot1clickdevicesservice.DescribeDeviceRequest
 
-	FinalizeDeviceClaimRequest(*iot1clickdevicesservice.FinalizeDeviceClaimInput) iot1clickdevicesservice.FinalizeDeviceClaimRequest
+	FinalizeDeviceClaimRequest(*types.FinalizeDeviceClaimInput) iot1clickdevicesservice.FinalizeDeviceClaimRequest
 
-	GetDeviceMethodsRequest(*iot1clickdevicesservice.GetDeviceMethodsInput) iot1clickdevicesservice.GetDeviceMethodsRequest
+	GetDeviceMethodsRequest(*types.GetDeviceMethodsInput) iot1clickdevicesservice.GetDeviceMethodsRequest
 
-	InitiateDeviceClaimRequest(*iot1clickdevicesservice.InitiateDeviceClaimInput) iot1clickdevicesservice.InitiateDeviceClaimRequest
+	InitiateDeviceClaimRequest(*types.InitiateDeviceClaimInput) iot1clickdevicesservice.InitiateDeviceClaimRequest
 
-	InvokeDeviceMethodRequest(*iot1clickdevicesservice.InvokeDeviceMethodInput) iot1clickdevicesservice.InvokeDeviceMethodRequest
+	InvokeDeviceMethodRequest(*types.InvokeDeviceMethodInput) iot1clickdevicesservice.InvokeDeviceMethodRequest
 
-	ListDeviceEventsRequest(*iot1clickdevicesservice.ListDeviceEventsInput) iot1clickdevicesservice.ListDeviceEventsRequest
+	ListDeviceEventsRequest(*types.ListDeviceEventsInput) iot1clickdevicesservice.ListDeviceEventsRequest
 
-	ListDevicesRequest(*iot1clickdevicesservice.ListDevicesInput) iot1clickdevicesservice.ListDevicesRequest
+	ListDevicesRequest(*types.ListDevicesInput) iot1clickdevicesservice.ListDevicesRequest
 
-	ListTagsForResourceRequest(*iot1clickdevicesservice.ListTagsForResourceInput) iot1clickdevicesservice.ListTagsForResourceRequest
+	ListTagsForResourceRequest(*types.ListTagsForResourceInput) iot1clickdevicesservice.ListTagsForResourceRequest
 
-	TagResourceRequest(*iot1clickdevicesservice.TagResourceInput) iot1clickdevicesservice.TagResourceRequest
+	TagResourceRequest(*types.TagResourceInput) iot1clickdevicesservice.TagResourceRequest
 
-	UnclaimDeviceRequest(*iot1clickdevicesservice.UnclaimDeviceInput) iot1clickdevicesservice.UnclaimDeviceRequest
+	UnclaimDeviceRequest(*types.UnclaimDeviceInput) iot1clickdevicesservice.UnclaimDeviceRequest
 
-	UntagResourceRequest(*iot1clickdevicesservice.UntagResourceInput) iot1clickdevicesservice.UntagResourceRequest
+	UntagResourceRequest(*types.UntagResourceInput) iot1clickdevicesservice.UntagResourceRequest
 
-	UpdateDeviceStateRequest(*iot1clickdevicesservice.UpdateDeviceStateInput) iot1clickdevicesservice.UpdateDeviceStateRequest
+	UpdateDeviceStateRequest(*types.UpdateDeviceStateInput) iot1clickdevicesservice.UpdateDeviceStateRequest
 }
 
 var _ ClientAPI = (*iot1clickdevicesservice.Client)(nil)

@@ -6,309 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/mediapackage/types"
 )
-
-type UpdateOriginEndpointInput struct {
-	_ struct{} `type:"structure"`
-
-	// A Common Media Application Format (CMAF) packaging configuration.
-	CmafPackage *CmafPackageCreateOrUpdateParameters `locationName:"cmafPackage" type:"structure"`
-
-	// A Dynamic Adaptive Streaming over HTTP (DASH) packaging configuration.
-	DashPackage *DashPackage `locationName:"dashPackage" type:"structure"`
-
-	Description *string `locationName:"description" type:"string"`
-
-	// An HTTP Live Streaming (HLS) packaging configuration.
-	HlsPackage *HlsPackage `locationName:"hlsPackage" type:"structure"`
-
-	// Id is a required field
-	Id *string `location:"uri" locationName:"id" type:"string" required:"true"`
-
-	ManifestName *string `locationName:"manifestName" type:"string"`
-
-	// A Microsoft Smooth Streaming (MSS) packaging configuration.
-	MssPackage *MssPackage `locationName:"mssPackage" type:"structure"`
-
-	Origination Origination `locationName:"origination" type:"string" enum:"true"`
-
-	StartoverWindowSeconds *int64 `locationName:"startoverWindowSeconds" type:"integer"`
-
-	TimeDelaySeconds *int64 `locationName:"timeDelaySeconds" type:"integer"`
-
-	Whitelist []string `locationName:"whitelist" type:"list"`
-}
-
-// String returns the string representation
-func (s UpdateOriginEndpointInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateOriginEndpointInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateOriginEndpointInput"}
-
-	if s.Id == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Id"))
-	}
-	if s.CmafPackage != nil {
-		if err := s.CmafPackage.Validate(); err != nil {
-			invalidParams.AddNested("CmafPackage", err.(aws.ErrInvalidParams))
-		}
-	}
-	if s.DashPackage != nil {
-		if err := s.DashPackage.Validate(); err != nil {
-			invalidParams.AddNested("DashPackage", err.(aws.ErrInvalidParams))
-		}
-	}
-	if s.HlsPackage != nil {
-		if err := s.HlsPackage.Validate(); err != nil {
-			invalidParams.AddNested("HlsPackage", err.(aws.ErrInvalidParams))
-		}
-	}
-	if s.MssPackage != nil {
-		if err := s.MssPackage.Validate(); err != nil {
-			invalidParams.AddNested("MssPackage", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s UpdateOriginEndpointInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.CmafPackage != nil {
-		v := s.CmafPackage
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "cmafPackage", v, metadata)
-	}
-	if s.DashPackage != nil {
-		v := s.DashPackage
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "dashPackage", v, metadata)
-	}
-	if s.Description != nil {
-		v := *s.Description
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "description", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.HlsPackage != nil {
-		v := s.HlsPackage
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "hlsPackage", v, metadata)
-	}
-	if s.ManifestName != nil {
-		v := *s.ManifestName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "manifestName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.MssPackage != nil {
-		v := s.MssPackage
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "mssPackage", v, metadata)
-	}
-	if len(s.Origination) > 0 {
-		v := s.Origination
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "origination", protocol.QuotedValue{ValueMarshaler: v}, metadata)
-	}
-	if s.StartoverWindowSeconds != nil {
-		v := *s.StartoverWindowSeconds
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "startoverWindowSeconds", protocol.Int64Value(v), metadata)
-	}
-	if s.TimeDelaySeconds != nil {
-		v := *s.TimeDelaySeconds
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "timeDelaySeconds", protocol.Int64Value(v), metadata)
-	}
-	if s.Whitelist != nil {
-		v := s.Whitelist
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "whitelist", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
-		}
-		ls0.End()
-
-	}
-	if s.Id != nil {
-		v := *s.Id
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "id", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type UpdateOriginEndpointOutput struct {
-	_ struct{} `type:"structure"`
-
-	Arn *string `locationName:"arn" type:"string"`
-
-	ChannelId *string `locationName:"channelId" type:"string"`
-
-	// A Common Media Application Format (CMAF) packaging configuration.
-	CmafPackage *CmafPackage `locationName:"cmafPackage" type:"structure"`
-
-	// A Dynamic Adaptive Streaming over HTTP (DASH) packaging configuration.
-	DashPackage *DashPackage `locationName:"dashPackage" type:"structure"`
-
-	Description *string `locationName:"description" type:"string"`
-
-	// An HTTP Live Streaming (HLS) packaging configuration.
-	HlsPackage *HlsPackage `locationName:"hlsPackage" type:"structure"`
-
-	Id *string `locationName:"id" type:"string"`
-
-	ManifestName *string `locationName:"manifestName" type:"string"`
-
-	// A Microsoft Smooth Streaming (MSS) packaging configuration.
-	MssPackage *MssPackage `locationName:"mssPackage" type:"structure"`
-
-	Origination Origination `locationName:"origination" type:"string" enum:"true"`
-
-	StartoverWindowSeconds *int64 `locationName:"startoverWindowSeconds" type:"integer"`
-
-	// A collection of tags associated with a resource
-	Tags map[string]string `locationName:"tags" type:"map"`
-
-	TimeDelaySeconds *int64 `locationName:"timeDelaySeconds" type:"integer"`
-
-	Url *string `locationName:"url" type:"string"`
-
-	Whitelist []string `locationName:"whitelist" type:"list"`
-}
-
-// String returns the string representation
-func (s UpdateOriginEndpointOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s UpdateOriginEndpointOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.Arn != nil {
-		v := *s.Arn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "arn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.ChannelId != nil {
-		v := *s.ChannelId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "channelId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.CmafPackage != nil {
-		v := s.CmafPackage
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "cmafPackage", v, metadata)
-	}
-	if s.DashPackage != nil {
-		v := s.DashPackage
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "dashPackage", v, metadata)
-	}
-	if s.Description != nil {
-		v := *s.Description
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "description", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.HlsPackage != nil {
-		v := s.HlsPackage
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "hlsPackage", v, metadata)
-	}
-	if s.Id != nil {
-		v := *s.Id
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "id", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.ManifestName != nil {
-		v := *s.ManifestName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "manifestName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.MssPackage != nil {
-		v := s.MssPackage
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "mssPackage", v, metadata)
-	}
-	if len(s.Origination) > 0 {
-		v := s.Origination
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "origination", protocol.QuotedValue{ValueMarshaler: v}, metadata)
-	}
-	if s.StartoverWindowSeconds != nil {
-		v := *s.StartoverWindowSeconds
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "startoverWindowSeconds", protocol.Int64Value(v), metadata)
-	}
-	if s.Tags != nil {
-		v := s.Tags
-
-		metadata := protocol.Metadata{}
-		ms0 := e.Map(protocol.BodyTarget, "tags", metadata)
-		ms0.Start()
-		for k1, v1 := range v {
-			ms0.MapSetValue(k1, protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
-		}
-		ms0.End()
-
-	}
-	if s.TimeDelaySeconds != nil {
-		v := *s.TimeDelaySeconds
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "timeDelaySeconds", protocol.Int64Value(v), metadata)
-	}
-	if s.Url != nil {
-		v := *s.Url
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "url", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Whitelist != nil {
-		v := s.Whitelist
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "whitelist", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
-		}
-		ls0.End()
-
-	}
-	return nil
-}
 
 const opUpdateOriginEndpoint = "UpdateOriginEndpoint"
 
@@ -325,7 +24,7 @@ const opUpdateOriginEndpoint = "UpdateOriginEndpoint"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mediapackage-2017-10-12/UpdateOriginEndpoint
-func (c *Client) UpdateOriginEndpointRequest(input *UpdateOriginEndpointInput) UpdateOriginEndpointRequest {
+func (c *Client) UpdateOriginEndpointRequest(input *types.UpdateOriginEndpointInput) UpdateOriginEndpointRequest {
 	op := &aws.Operation{
 		Name:       opUpdateOriginEndpoint,
 		HTTPMethod: "PUT",
@@ -333,10 +32,10 @@ func (c *Client) UpdateOriginEndpointRequest(input *UpdateOriginEndpointInput) U
 	}
 
 	if input == nil {
-		input = &UpdateOriginEndpointInput{}
+		input = &types.UpdateOriginEndpointInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateOriginEndpointOutput{})
+	req := c.newRequest(op, input, &types.UpdateOriginEndpointOutput{})
 	return UpdateOriginEndpointRequest{Request: req, Input: input, Copy: c.UpdateOriginEndpointRequest}
 }
 
@@ -344,8 +43,8 @@ func (c *Client) UpdateOriginEndpointRequest(input *UpdateOriginEndpointInput) U
 // UpdateOriginEndpoint API operation.
 type UpdateOriginEndpointRequest struct {
 	*aws.Request
-	Input *UpdateOriginEndpointInput
-	Copy  func(*UpdateOriginEndpointInput) UpdateOriginEndpointRequest
+	Input *types.UpdateOriginEndpointInput
+	Copy  func(*types.UpdateOriginEndpointInput) UpdateOriginEndpointRequest
 }
 
 // Send marshals and sends the UpdateOriginEndpoint API request.
@@ -357,7 +56,7 @@ func (r UpdateOriginEndpointRequest) Send(ctx context.Context) (*UpdateOriginEnd
 	}
 
 	resp := &UpdateOriginEndpointResponse{
-		UpdateOriginEndpointOutput: r.Request.Data.(*UpdateOriginEndpointOutput),
+		UpdateOriginEndpointOutput: r.Request.Data.(*types.UpdateOriginEndpointOutput),
 		response:                   &aws.Response{Request: r.Request},
 	}
 
@@ -367,7 +66,7 @@ func (r UpdateOriginEndpointRequest) Send(ctx context.Context) (*UpdateOriginEnd
 // UpdateOriginEndpointResponse is the response type for the
 // UpdateOriginEndpoint API operation.
 type UpdateOriginEndpointResponse struct {
-	*UpdateOriginEndpointOutput
+	*types.UpdateOriginEndpointOutput
 
 	response *aws.Response
 }

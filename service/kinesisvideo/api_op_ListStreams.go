@@ -6,112 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/kinesisvideo/types"
 )
-
-type ListStreamsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The maximum number of streams to return in the response. The default is 10,000.
-	MaxResults *int64 `min:"1" type:"integer"`
-
-	// If you specify this parameter, when the result of a ListStreams operation
-	// is truncated, the call returns the NextToken in the response. To get another
-	// batch of streams, provide this token in your next request.
-	NextToken *string `type:"string"`
-
-	// Optional: Returns only streams that satisfy a specific condition. Currently,
-	// you can specify only the prefix of a stream name as a condition.
-	StreamNameCondition *StreamNameCondition `type:"structure"`
-}
-
-// String returns the string representation
-func (s ListStreamsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListStreamsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListStreamsInput"}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-	if s.StreamNameCondition != nil {
-		if err := s.StreamNameCondition.Validate(); err != nil {
-			invalidParams.AddNested("StreamNameCondition", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListStreamsInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.MaxResults != nil {
-		v := *s.MaxResults
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "MaxResults", protocol.Int64Value(v), metadata)
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.StreamNameCondition != nil {
-		v := s.StreamNameCondition
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "StreamNameCondition", v, metadata)
-	}
-	return nil
-}
-
-type ListStreamsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// If the response is truncated, the call returns this element with a token.
-	// To get the next batch of streams, use this token in your next request.
-	NextToken *string `type:"string"`
-
-	// An array of StreamInfo objects.
-	StreamInfoList []StreamInfo `type:"list"`
-}
-
-// String returns the string representation
-func (s ListStreamsOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListStreamsOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.StreamInfoList != nil {
-		v := s.StreamInfoList
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "StreamInfoList", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	return nil
-}
 
 const opListStreams = "ListStreams"
 
@@ -130,7 +26,7 @@ const opListStreams = "ListStreams"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesisvideo-2017-09-30/ListStreams
-func (c *Client) ListStreamsRequest(input *ListStreamsInput) ListStreamsRequest {
+func (c *Client) ListStreamsRequest(input *types.ListStreamsInput) ListStreamsRequest {
 	op := &aws.Operation{
 		Name:       opListStreams,
 		HTTPMethod: "POST",
@@ -144,10 +40,10 @@ func (c *Client) ListStreamsRequest(input *ListStreamsInput) ListStreamsRequest 
 	}
 
 	if input == nil {
-		input = &ListStreamsInput{}
+		input = &types.ListStreamsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListStreamsOutput{})
+	req := c.newRequest(op, input, &types.ListStreamsOutput{})
 	return ListStreamsRequest{Request: req, Input: input, Copy: c.ListStreamsRequest}
 }
 
@@ -155,8 +51,8 @@ func (c *Client) ListStreamsRequest(input *ListStreamsInput) ListStreamsRequest 
 // ListStreams API operation.
 type ListStreamsRequest struct {
 	*aws.Request
-	Input *ListStreamsInput
-	Copy  func(*ListStreamsInput) ListStreamsRequest
+	Input *types.ListStreamsInput
+	Copy  func(*types.ListStreamsInput) ListStreamsRequest
 }
 
 // Send marshals and sends the ListStreams API request.
@@ -168,7 +64,7 @@ func (r ListStreamsRequest) Send(ctx context.Context) (*ListStreamsResponse, err
 	}
 
 	resp := &ListStreamsResponse{
-		ListStreamsOutput: r.Request.Data.(*ListStreamsOutput),
+		ListStreamsOutput: r.Request.Data.(*types.ListStreamsOutput),
 		response:          &aws.Response{Request: r.Request},
 	}
 
@@ -198,7 +94,7 @@ func NewListStreamsPaginator(req ListStreamsRequest) ListStreamsPaginator {
 	return ListStreamsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListStreamsInput
+				var inCpy *types.ListStreamsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -218,14 +114,14 @@ type ListStreamsPaginator struct {
 	aws.Pager
 }
 
-func (p *ListStreamsPaginator) CurrentPage() *ListStreamsOutput {
-	return p.Pager.CurrentPage().(*ListStreamsOutput)
+func (p *ListStreamsPaginator) CurrentPage() *types.ListStreamsOutput {
+	return p.Pager.CurrentPage().(*types.ListStreamsOutput)
 }
 
 // ListStreamsResponse is the response type for the
 // ListStreams API operation.
 type ListStreamsResponse struct {
-	*ListStreamsOutput
+	*types.ListStreamsOutput
 
 	response *aws.Response
 }

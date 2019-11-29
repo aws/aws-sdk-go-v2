@@ -6,132 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/iot/types"
 )
-
-// The input for the CreatePolicyVersion operation.
-type CreatePolicyVersionInput struct {
-	_ struct{} `type:"structure"`
-
-	// The JSON document that describes the policy. Minimum length of 1. Maximum
-	// length of 2048, excluding whitespace.
-	//
-	// PolicyDocument is a required field
-	PolicyDocument *string `locationName:"policyDocument" type:"string" required:"true"`
-
-	// The policy name.
-	//
-	// PolicyName is a required field
-	PolicyName *string `location:"uri" locationName:"policyName" min:"1" type:"string" required:"true"`
-
-	// Specifies whether the policy version is set as the default. When this parameter
-	// is true, the new policy version becomes the operative version (that is, the
-	// version that is in effect for the certificates to which the policy is attached).
-	SetAsDefault *bool `location:"querystring" locationName:"setAsDefault" type:"boolean"`
-}
-
-// String returns the string representation
-func (s CreatePolicyVersionInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreatePolicyVersionInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreatePolicyVersionInput"}
-
-	if s.PolicyDocument == nil {
-		invalidParams.Add(aws.NewErrParamRequired("PolicyDocument"))
-	}
-
-	if s.PolicyName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("PolicyName"))
-	}
-	if s.PolicyName != nil && len(*s.PolicyName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("PolicyName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s CreatePolicyVersionInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.PolicyDocument != nil {
-		v := *s.PolicyDocument
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "policyDocument", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.PolicyName != nil {
-		v := *s.PolicyName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "policyName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.SetAsDefault != nil {
-		v := *s.SetAsDefault
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "setAsDefault", protocol.BoolValue(v), metadata)
-	}
-	return nil
-}
-
-// The output of the CreatePolicyVersion operation.
-type CreatePolicyVersionOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Specifies whether the policy version is the default.
-	IsDefaultVersion *bool `locationName:"isDefaultVersion" type:"boolean"`
-
-	// The policy ARN.
-	PolicyArn *string `locationName:"policyArn" type:"string"`
-
-	// The JSON document that describes the policy.
-	PolicyDocument *string `locationName:"policyDocument" type:"string"`
-
-	// The policy version ID.
-	PolicyVersionId *string `locationName:"policyVersionId" type:"string"`
-}
-
-// String returns the string representation
-func (s CreatePolicyVersionOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s CreatePolicyVersionOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.IsDefaultVersion != nil {
-		v := *s.IsDefaultVersion
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "isDefaultVersion", protocol.BoolValue(v), metadata)
-	}
-	if s.PolicyArn != nil {
-		v := *s.PolicyArn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "policyArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.PolicyDocument != nil {
-		v := *s.PolicyDocument
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "policyDocument", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.PolicyVersionId != nil {
-		v := *s.PolicyVersionId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "policyVersionId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opCreatePolicyVersion = "CreatePolicyVersion"
 
@@ -153,7 +29,7 @@ const opCreatePolicyVersion = "CreatePolicyVersion"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) CreatePolicyVersionRequest(input *CreatePolicyVersionInput) CreatePolicyVersionRequest {
+func (c *Client) CreatePolicyVersionRequest(input *types.CreatePolicyVersionInput) CreatePolicyVersionRequest {
 	op := &aws.Operation{
 		Name:       opCreatePolicyVersion,
 		HTTPMethod: "POST",
@@ -161,10 +37,10 @@ func (c *Client) CreatePolicyVersionRequest(input *CreatePolicyVersionInput) Cre
 	}
 
 	if input == nil {
-		input = &CreatePolicyVersionInput{}
+		input = &types.CreatePolicyVersionInput{}
 	}
 
-	req := c.newRequest(op, input, &CreatePolicyVersionOutput{})
+	req := c.newRequest(op, input, &types.CreatePolicyVersionOutput{})
 	return CreatePolicyVersionRequest{Request: req, Input: input, Copy: c.CreatePolicyVersionRequest}
 }
 
@@ -172,8 +48,8 @@ func (c *Client) CreatePolicyVersionRequest(input *CreatePolicyVersionInput) Cre
 // CreatePolicyVersion API operation.
 type CreatePolicyVersionRequest struct {
 	*aws.Request
-	Input *CreatePolicyVersionInput
-	Copy  func(*CreatePolicyVersionInput) CreatePolicyVersionRequest
+	Input *types.CreatePolicyVersionInput
+	Copy  func(*types.CreatePolicyVersionInput) CreatePolicyVersionRequest
 }
 
 // Send marshals and sends the CreatePolicyVersion API request.
@@ -185,7 +61,7 @@ func (r CreatePolicyVersionRequest) Send(ctx context.Context) (*CreatePolicyVers
 	}
 
 	resp := &CreatePolicyVersionResponse{
-		CreatePolicyVersionOutput: r.Request.Data.(*CreatePolicyVersionOutput),
+		CreatePolicyVersionOutput: r.Request.Data.(*types.CreatePolicyVersionOutput),
 		response:                  &aws.Response{Request: r.Request},
 	}
 
@@ -195,7 +71,7 @@ func (r CreatePolicyVersionRequest) Send(ctx context.Context) (*CreatePolicyVers
 // CreatePolicyVersionResponse is the response type for the
 // CreatePolicyVersion API operation.
 type CreatePolicyVersionResponse struct {
-	*CreatePolicyVersionOutput
+	*types.CreatePolicyVersionOutput
 
 	response *aws.Response
 }

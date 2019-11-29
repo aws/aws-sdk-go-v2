@@ -6,49 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-type CreateTrafficMirrorFilterInput struct {
-	_ struct{} `type:"structure"`
-
-	// Unique, case-sensitive identifier that you provide to ensure the idempotency
-	// of the request. For more information, see How to Ensure Idempotency (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html).
-	ClientToken *string `type:"string" idempotencyToken:"true"`
-
-	// The description of the Traffic Mirror filter.
-	Description *string `type:"string"`
-
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have
-	// the required permissions, the error response is DryRunOperation. Otherwise,
-	// it is UnauthorizedOperation.
-	DryRun *bool `type:"boolean"`
-
-	// The tags to assign to a Traffic Mirror filter.
-	TagSpecifications []TagSpecification `locationName:"TagSpecification" locationNameList:"item" type:"list"`
-}
-
-// String returns the string representation
-func (s CreateTrafficMirrorFilterInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type CreateTrafficMirrorFilterOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Unique, case-sensitive identifier that you provide to ensure the idempotency
-	// of the request. For more information, see How to Ensure Idempotency (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html).
-	ClientToken *string `locationName:"clientToken" type:"string"`
-
-	// Information about the Traffic Mirror filter.
-	TrafficMirrorFilter *TrafficMirrorFilter `locationName:"trafficMirrorFilter" type:"structure"`
-}
-
-// String returns the string representation
-func (s CreateTrafficMirrorFilterOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCreateTrafficMirrorFilter = "CreateTrafficMirrorFilter"
 
@@ -60,8 +19,10 @@ const opCreateTrafficMirrorFilter = "CreateTrafficMirrorFilter"
 // A Traffic Mirror filter is a set of rules that defines the traffic to mirror.
 //
 // By default, no traffic is mirrored. To mirror traffic, use CreateTrafficMirrorFilterRule
+// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateTrafficMirrorFilterRule.htm)
 // to add Traffic Mirror rules to the filter. The rules you add define what
 // traffic gets mirrored. You can also use ModifyTrafficMirrorFilterNetworkServices
+// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ModifyTrafficMirrorFilterNetworkServices.html)
 // to mirror supported network services.
 //
 //    // Example sending a request using CreateTrafficMirrorFilterRequest.
@@ -72,7 +33,7 @@ const opCreateTrafficMirrorFilter = "CreateTrafficMirrorFilter"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateTrafficMirrorFilter
-func (c *Client) CreateTrafficMirrorFilterRequest(input *CreateTrafficMirrorFilterInput) CreateTrafficMirrorFilterRequest {
+func (c *Client) CreateTrafficMirrorFilterRequest(input *types.CreateTrafficMirrorFilterInput) CreateTrafficMirrorFilterRequest {
 	op := &aws.Operation{
 		Name:       opCreateTrafficMirrorFilter,
 		HTTPMethod: "POST",
@@ -80,10 +41,10 @@ func (c *Client) CreateTrafficMirrorFilterRequest(input *CreateTrafficMirrorFilt
 	}
 
 	if input == nil {
-		input = &CreateTrafficMirrorFilterInput{}
+		input = &types.CreateTrafficMirrorFilterInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateTrafficMirrorFilterOutput{})
+	req := c.newRequest(op, input, &types.CreateTrafficMirrorFilterOutput{})
 	return CreateTrafficMirrorFilterRequest{Request: req, Input: input, Copy: c.CreateTrafficMirrorFilterRequest}
 }
 
@@ -91,8 +52,8 @@ func (c *Client) CreateTrafficMirrorFilterRequest(input *CreateTrafficMirrorFilt
 // CreateTrafficMirrorFilter API operation.
 type CreateTrafficMirrorFilterRequest struct {
 	*aws.Request
-	Input *CreateTrafficMirrorFilterInput
-	Copy  func(*CreateTrafficMirrorFilterInput) CreateTrafficMirrorFilterRequest
+	Input *types.CreateTrafficMirrorFilterInput
+	Copy  func(*types.CreateTrafficMirrorFilterInput) CreateTrafficMirrorFilterRequest
 }
 
 // Send marshals and sends the CreateTrafficMirrorFilter API request.
@@ -104,7 +65,7 @@ func (r CreateTrafficMirrorFilterRequest) Send(ctx context.Context) (*CreateTraf
 	}
 
 	resp := &CreateTrafficMirrorFilterResponse{
-		CreateTrafficMirrorFilterOutput: r.Request.Data.(*CreateTrafficMirrorFilterOutput),
+		CreateTrafficMirrorFilterOutput: r.Request.Data.(*types.CreateTrafficMirrorFilterOutput),
 		response:                        &aws.Response{Request: r.Request},
 	}
 
@@ -114,7 +75,7 @@ func (r CreateTrafficMirrorFilterRequest) Send(ctx context.Context) (*CreateTraf
 // CreateTrafficMirrorFilterResponse is the response type for the
 // CreateTrafficMirrorFilter API operation.
 type CreateTrafficMirrorFilterResponse struct {
-	*CreateTrafficMirrorFilterOutput
+	*types.CreateTrafficMirrorFilterOutput
 
 	response *aws.Response
 }

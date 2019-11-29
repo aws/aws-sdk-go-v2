@@ -6,57 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/acm/types"
 )
-
-type ListTagsForCertificateInput struct {
-	_ struct{} `type:"structure"`
-
-	// String that contains the ARN of the ACM certificate for which you want to
-	// list the tags. This must have the following form:
-	//
-	// arn:aws:acm:region:123456789012:certificate/12345678-1234-1234-1234-123456789012
-	//
-	// For more information about ARNs, see Amazon Resource Names (ARNs) and AWS
-	// Service Namespaces (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html).
-	//
-	// CertificateArn is a required field
-	CertificateArn *string `min:"20" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s ListTagsForCertificateInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListTagsForCertificateInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListTagsForCertificateInput"}
-
-	if s.CertificateArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("CertificateArn"))
-	}
-	if s.CertificateArn != nil && len(*s.CertificateArn) < 20 {
-		invalidParams.Add(aws.NewErrParamMinLen("CertificateArn", 20))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ListTagsForCertificateOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The key-value pairs that define the applied tags.
-	Tags []Tag `min:"1" type:"list"`
-}
-
-// String returns the string representation
-func (s ListTagsForCertificateOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListTagsForCertificate = "ListTagsForCertificate"
 
@@ -76,7 +27,7 @@ const opListTagsForCertificate = "ListTagsForCertificate"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/ListTagsForCertificate
-func (c *Client) ListTagsForCertificateRequest(input *ListTagsForCertificateInput) ListTagsForCertificateRequest {
+func (c *Client) ListTagsForCertificateRequest(input *types.ListTagsForCertificateInput) ListTagsForCertificateRequest {
 	op := &aws.Operation{
 		Name:       opListTagsForCertificate,
 		HTTPMethod: "POST",
@@ -84,10 +35,10 @@ func (c *Client) ListTagsForCertificateRequest(input *ListTagsForCertificateInpu
 	}
 
 	if input == nil {
-		input = &ListTagsForCertificateInput{}
+		input = &types.ListTagsForCertificateInput{}
 	}
 
-	req := c.newRequest(op, input, &ListTagsForCertificateOutput{})
+	req := c.newRequest(op, input, &types.ListTagsForCertificateOutput{})
 	return ListTagsForCertificateRequest{Request: req, Input: input, Copy: c.ListTagsForCertificateRequest}
 }
 
@@ -95,8 +46,8 @@ func (c *Client) ListTagsForCertificateRequest(input *ListTagsForCertificateInpu
 // ListTagsForCertificate API operation.
 type ListTagsForCertificateRequest struct {
 	*aws.Request
-	Input *ListTagsForCertificateInput
-	Copy  func(*ListTagsForCertificateInput) ListTagsForCertificateRequest
+	Input *types.ListTagsForCertificateInput
+	Copy  func(*types.ListTagsForCertificateInput) ListTagsForCertificateRequest
 }
 
 // Send marshals and sends the ListTagsForCertificate API request.
@@ -108,7 +59,7 @@ func (r ListTagsForCertificateRequest) Send(ctx context.Context) (*ListTagsForCe
 	}
 
 	resp := &ListTagsForCertificateResponse{
-		ListTagsForCertificateOutput: r.Request.Data.(*ListTagsForCertificateOutput),
+		ListTagsForCertificateOutput: r.Request.Data.(*types.ListTagsForCertificateOutput),
 		response:                     &aws.Response{Request: r.Request},
 	}
 
@@ -118,7 +69,7 @@ func (r ListTagsForCertificateRequest) Send(ctx context.Context) (*ListTagsForCe
 // ListTagsForCertificateResponse is the response type for the
 // ListTagsForCertificate API operation.
 type ListTagsForCertificateResponse struct {
-	*ListTagsForCertificateOutput
+	*types.ListTagsForCertificateOutput
 
 	response *aws.Response
 }

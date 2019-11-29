@@ -13,6 +13,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws/awserr"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting/integration"
 	"github.com/aws/aws-sdk-go-v2/service/rds"
+	"github.com/aws/aws-sdk-go-v2/service/rds/types"
 )
 
 var _ aws.Config
@@ -24,7 +25,7 @@ func TestInteg_00_DescribeDBEngineVersions(t *testing.T) {
 
 	cfg := integration.ConfigWithDefaultRegion("us-west-2")
 	svc := rds.New(cfg)
-	params := &rds.DescribeDBEngineVersionsInput{}
+	params := &types.DescribeDBEngineVersionsInput{}
 
 	req := svc.DescribeDBEngineVersionsRequest(params)
 
@@ -39,7 +40,7 @@ func TestInteg_01_DescribeDBInstances(t *testing.T) {
 
 	cfg := integration.ConfigWithDefaultRegion("us-west-2")
 	svc := rds.New(cfg)
-	params := &rds.DescribeDBInstancesInput{
+	params := &types.DescribeDBInstancesInput{
 		DBInstanceIdentifier: aws.String("fake-id"),
 	}
 

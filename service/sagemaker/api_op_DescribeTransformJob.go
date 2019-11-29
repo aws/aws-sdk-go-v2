@@ -4,139 +4,10 @@ package sagemaker
 
 import (
 	"context"
-	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
 )
-
-type DescribeTransformJobInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the transform job that you want to view details of.
-	//
-	// TransformJobName is a required field
-	TransformJobName *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeTransformJobInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeTransformJobInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeTransformJobInput"}
-
-	if s.TransformJobName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("TransformJobName"))
-	}
-	if s.TransformJobName != nil && len(*s.TransformJobName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("TransformJobName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribeTransformJobOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Specifies the number of records to include in a mini-batch for an HTTP inference
-	// request. A record is a single unit of input data that inference can be made
-	// on. For example, a single line in a CSV file is a record.
-	//
-	// To enable the batch strategy, you must set SplitType to Line, RecordIO, or
-	// TFRecord.
-	BatchStrategy BatchStrategy `type:"string" enum:"true"`
-
-	// A timestamp that shows when the transform Job was created.
-	//
-	// CreationTime is a required field
-	CreationTime *time.Time `type:"timestamp" required:"true"`
-
-	// The data structure used to specify the data to be used for inference in a
-	// batch transform job and to associate the data that is relevant to the prediction
-	// results in the output. The input filter provided allows you to exclude input
-	// data that is not needed for inference in a batch transform job. The output
-	// filter provided allows you to include input data relevant to interpreting
-	// the predictions in the output from the job. For more information, see Associate
-	// Prediction Results with their Corresponding Input Records (https://docs.aws.amazon.com/sagemaker/latest/dg/batch-transform-data-processing.html).
-	DataProcessing *DataProcessing `type:"structure"`
-
-	// The environment variables to set in the Docker container. We support up to
-	// 16 key and values entries in the map.
-	Environment map[string]string `type:"map"`
-
-	// If the transform job failed, FailureReason describes why it failed. A transform
-	// job creates a log file, which includes error messages, and stores it as an
-	// Amazon S3 object. For more information, see Log Amazon SageMaker Events with
-	// Amazon CloudWatch (https://docs.aws.amazon.com/sagemaker/latest/dg/logging-cloudwatch.html).
-	FailureReason *string `type:"string"`
-
-	// The Amazon Resource Name (ARN) of the Amazon SageMaker Ground Truth labeling
-	// job that created the transform or training job.
-	LabelingJobArn *string `type:"string"`
-
-	// The maximum number of parallel requests on each instance node that can be
-	// launched in a transform job. The default value is 1.
-	MaxConcurrentTransforms *int64 `type:"integer"`
-
-	// The maximum payload size, in MB, used in the transform job.
-	MaxPayloadInMB *int64 `type:"integer"`
-
-	// The name of the model used in the transform job.
-	//
-	// ModelName is a required field
-	ModelName *string `type:"string" required:"true"`
-
-	// Indicates when the transform job has been completed, or has stopped or failed.
-	// You are billed for the time interval between this time and the value of TransformStartTime.
-	TransformEndTime *time.Time `type:"timestamp"`
-
-	// Describes the dataset to be transformed and the Amazon S3 location where
-	// it is stored.
-	//
-	// TransformInput is a required field
-	TransformInput *TransformInput `type:"structure" required:"true"`
-
-	// The Amazon Resource Name (ARN) of the transform job.
-	//
-	// TransformJobArn is a required field
-	TransformJobArn *string `type:"string" required:"true"`
-
-	// The name of the transform job.
-	//
-	// TransformJobName is a required field
-	TransformJobName *string `min:"1" type:"string" required:"true"`
-
-	// The status of the transform job. If the transform job failed, the reason
-	// is returned in the FailureReason field.
-	//
-	// TransformJobStatus is a required field
-	TransformJobStatus TransformJobStatus `type:"string" required:"true" enum:"true"`
-
-	// Identifies the Amazon S3 location where you want Amazon SageMaker to save
-	// the results from the transform job.
-	TransformOutput *TransformOutput `type:"structure"`
-
-	// Describes the resources, including ML instance types and ML instance count,
-	// to use for the transform job.
-	//
-	// TransformResources is a required field
-	TransformResources *TransformResources `type:"structure" required:"true"`
-
-	// Indicates when the transform job starts on ML instances. You are billed for
-	// the time interval between this time and the value of TransformEndTime.
-	TransformStartTime *time.Time `type:"timestamp"`
-}
-
-// String returns the string representation
-func (s DescribeTransformJobOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeTransformJob = "DescribeTransformJob"
 
@@ -153,7 +24,7 @@ const opDescribeTransformJob = "DescribeTransformJob"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeTransformJob
-func (c *Client) DescribeTransformJobRequest(input *DescribeTransformJobInput) DescribeTransformJobRequest {
+func (c *Client) DescribeTransformJobRequest(input *types.DescribeTransformJobInput) DescribeTransformJobRequest {
 	op := &aws.Operation{
 		Name:       opDescribeTransformJob,
 		HTTPMethod: "POST",
@@ -161,10 +32,10 @@ func (c *Client) DescribeTransformJobRequest(input *DescribeTransformJobInput) D
 	}
 
 	if input == nil {
-		input = &DescribeTransformJobInput{}
+		input = &types.DescribeTransformJobInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeTransformJobOutput{})
+	req := c.newRequest(op, input, &types.DescribeTransformJobOutput{})
 	return DescribeTransformJobRequest{Request: req, Input: input, Copy: c.DescribeTransformJobRequest}
 }
 
@@ -172,8 +43,8 @@ func (c *Client) DescribeTransformJobRequest(input *DescribeTransformJobInput) D
 // DescribeTransformJob API operation.
 type DescribeTransformJobRequest struct {
 	*aws.Request
-	Input *DescribeTransformJobInput
-	Copy  func(*DescribeTransformJobInput) DescribeTransformJobRequest
+	Input *types.DescribeTransformJobInput
+	Copy  func(*types.DescribeTransformJobInput) DescribeTransformJobRequest
 }
 
 // Send marshals and sends the DescribeTransformJob API request.
@@ -185,7 +56,7 @@ func (r DescribeTransformJobRequest) Send(ctx context.Context) (*DescribeTransfo
 	}
 
 	resp := &DescribeTransformJobResponse{
-		DescribeTransformJobOutput: r.Request.Data.(*DescribeTransformJobOutput),
+		DescribeTransformJobOutput: r.Request.Data.(*types.DescribeTransformJobOutput),
 		response:                   &aws.Response{Request: r.Request},
 	}
 
@@ -195,7 +66,7 @@ func (r DescribeTransformJobRequest) Send(ctx context.Context) (*DescribeTransfo
 // DescribeTransformJobResponse is the response type for the
 // DescribeTransformJob API operation.
 type DescribeTransformJobResponse struct {
-	*DescribeTransformJobOutput
+	*types.DescribeTransformJobOutput
 
 	response *aws.Response
 }

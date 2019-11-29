@@ -6,69 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/lightsail/types"
 )
-
-type CreateRelationalDatabaseSnapshotInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the database on which to base your new snapshot.
-	//
-	// RelationalDatabaseName is a required field
-	RelationalDatabaseName *string `locationName:"relationalDatabaseName" type:"string" required:"true"`
-
-	// The name for your new database snapshot.
-	//
-	// Constraints:
-	//
-	//    * Must contain from 2 to 255 alphanumeric characters, or hyphens.
-	//
-	//    * The first and last character must be a letter or number.
-	//
-	// RelationalDatabaseSnapshotName is a required field
-	RelationalDatabaseSnapshotName *string `locationName:"relationalDatabaseSnapshotName" type:"string" required:"true"`
-
-	// The tag keys and optional values to add to the resource during create.
-	//
-	// To tag a resource after it has been created, see the tag resource operation.
-	Tags []Tag `locationName:"tags" type:"list"`
-}
-
-// String returns the string representation
-func (s CreateRelationalDatabaseSnapshotInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateRelationalDatabaseSnapshotInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateRelationalDatabaseSnapshotInput"}
-
-	if s.RelationalDatabaseName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("RelationalDatabaseName"))
-	}
-
-	if s.RelationalDatabaseSnapshotName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("RelationalDatabaseSnapshotName"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type CreateRelationalDatabaseSnapshotOutput struct {
-	_ struct{} `type:"structure"`
-
-	// An object describing the result of your create relational database snapshot
-	// request.
-	Operations []Operation `locationName:"operations" type:"list"`
-}
-
-// String returns the string representation
-func (s CreateRelationalDatabaseSnapshotOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCreateRelationalDatabaseSnapshot = "CreateRelationalDatabaseSnapshot"
 
@@ -91,7 +30,7 @@ const opCreateRelationalDatabaseSnapshot = "CreateRelationalDatabaseSnapshot"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/CreateRelationalDatabaseSnapshot
-func (c *Client) CreateRelationalDatabaseSnapshotRequest(input *CreateRelationalDatabaseSnapshotInput) CreateRelationalDatabaseSnapshotRequest {
+func (c *Client) CreateRelationalDatabaseSnapshotRequest(input *types.CreateRelationalDatabaseSnapshotInput) CreateRelationalDatabaseSnapshotRequest {
 	op := &aws.Operation{
 		Name:       opCreateRelationalDatabaseSnapshot,
 		HTTPMethod: "POST",
@@ -99,10 +38,10 @@ func (c *Client) CreateRelationalDatabaseSnapshotRequest(input *CreateRelational
 	}
 
 	if input == nil {
-		input = &CreateRelationalDatabaseSnapshotInput{}
+		input = &types.CreateRelationalDatabaseSnapshotInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateRelationalDatabaseSnapshotOutput{})
+	req := c.newRequest(op, input, &types.CreateRelationalDatabaseSnapshotOutput{})
 	return CreateRelationalDatabaseSnapshotRequest{Request: req, Input: input, Copy: c.CreateRelationalDatabaseSnapshotRequest}
 }
 
@@ -110,8 +49,8 @@ func (c *Client) CreateRelationalDatabaseSnapshotRequest(input *CreateRelational
 // CreateRelationalDatabaseSnapshot API operation.
 type CreateRelationalDatabaseSnapshotRequest struct {
 	*aws.Request
-	Input *CreateRelationalDatabaseSnapshotInput
-	Copy  func(*CreateRelationalDatabaseSnapshotInput) CreateRelationalDatabaseSnapshotRequest
+	Input *types.CreateRelationalDatabaseSnapshotInput
+	Copy  func(*types.CreateRelationalDatabaseSnapshotInput) CreateRelationalDatabaseSnapshotRequest
 }
 
 // Send marshals and sends the CreateRelationalDatabaseSnapshot API request.
@@ -123,7 +62,7 @@ func (r CreateRelationalDatabaseSnapshotRequest) Send(ctx context.Context) (*Cre
 	}
 
 	resp := &CreateRelationalDatabaseSnapshotResponse{
-		CreateRelationalDatabaseSnapshotOutput: r.Request.Data.(*CreateRelationalDatabaseSnapshotOutput),
+		CreateRelationalDatabaseSnapshotOutput: r.Request.Data.(*types.CreateRelationalDatabaseSnapshotOutput),
 		response:                               &aws.Response{Request: r.Request},
 	}
 
@@ -133,7 +72,7 @@ func (r CreateRelationalDatabaseSnapshotRequest) Send(ctx context.Context) (*Cre
 // CreateRelationalDatabaseSnapshotResponse is the response type for the
 // CreateRelationalDatabaseSnapshot API operation.
 type CreateRelationalDatabaseSnapshotResponse struct {
-	*CreateRelationalDatabaseSnapshotOutput
+	*types.CreateRelationalDatabaseSnapshotOutput
 
 	response *aws.Response
 }

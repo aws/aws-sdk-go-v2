@@ -6,48 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/greengrass/types"
 )
-
-type DisassociateServiceRoleFromAccountInput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DisassociateServiceRoleFromAccountInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DisassociateServiceRoleFromAccountInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	return nil
-}
-
-type DisassociateServiceRoleFromAccountOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The time when the service role was disassociated from the account.
-	DisassociatedAt *string `type:"string"`
-}
-
-// String returns the string representation
-func (s DisassociateServiceRoleFromAccountOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DisassociateServiceRoleFromAccountOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.DisassociatedAt != nil {
-		v := *s.DisassociatedAt
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "DisassociatedAt", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opDisassociateServiceRoleFromAccount = "DisassociateServiceRoleFromAccount"
 
@@ -65,7 +25,7 @@ const opDisassociateServiceRoleFromAccount = "DisassociateServiceRoleFromAccount
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/DisassociateServiceRoleFromAccount
-func (c *Client) DisassociateServiceRoleFromAccountRequest(input *DisassociateServiceRoleFromAccountInput) DisassociateServiceRoleFromAccountRequest {
+func (c *Client) DisassociateServiceRoleFromAccountRequest(input *types.DisassociateServiceRoleFromAccountInput) DisassociateServiceRoleFromAccountRequest {
 	op := &aws.Operation{
 		Name:       opDisassociateServiceRoleFromAccount,
 		HTTPMethod: "DELETE",
@@ -73,10 +33,10 @@ func (c *Client) DisassociateServiceRoleFromAccountRequest(input *DisassociateSe
 	}
 
 	if input == nil {
-		input = &DisassociateServiceRoleFromAccountInput{}
+		input = &types.DisassociateServiceRoleFromAccountInput{}
 	}
 
-	req := c.newRequest(op, input, &DisassociateServiceRoleFromAccountOutput{})
+	req := c.newRequest(op, input, &types.DisassociateServiceRoleFromAccountOutput{})
 	return DisassociateServiceRoleFromAccountRequest{Request: req, Input: input, Copy: c.DisassociateServiceRoleFromAccountRequest}
 }
 
@@ -84,8 +44,8 @@ func (c *Client) DisassociateServiceRoleFromAccountRequest(input *DisassociateSe
 // DisassociateServiceRoleFromAccount API operation.
 type DisassociateServiceRoleFromAccountRequest struct {
 	*aws.Request
-	Input *DisassociateServiceRoleFromAccountInput
-	Copy  func(*DisassociateServiceRoleFromAccountInput) DisassociateServiceRoleFromAccountRequest
+	Input *types.DisassociateServiceRoleFromAccountInput
+	Copy  func(*types.DisassociateServiceRoleFromAccountInput) DisassociateServiceRoleFromAccountRequest
 }
 
 // Send marshals and sends the DisassociateServiceRoleFromAccount API request.
@@ -97,7 +57,7 @@ func (r DisassociateServiceRoleFromAccountRequest) Send(ctx context.Context) (*D
 	}
 
 	resp := &DisassociateServiceRoleFromAccountResponse{
-		DisassociateServiceRoleFromAccountOutput: r.Request.Data.(*DisassociateServiceRoleFromAccountOutput),
+		DisassociateServiceRoleFromAccountOutput: r.Request.Data.(*types.DisassociateServiceRoleFromAccountOutput),
 		response:                                 &aws.Response{Request: r.Request},
 	}
 
@@ -107,7 +67,7 @@ func (r DisassociateServiceRoleFromAccountRequest) Send(ctx context.Context) (*D
 // DisassociateServiceRoleFromAccountResponse is the response type for the
 // DisassociateServiceRoleFromAccount API operation.
 type DisassociateServiceRoleFromAccountResponse struct {
-	*DisassociateServiceRoleFromAccountOutput
+	*types.DisassociateServiceRoleFromAccountOutput
 
 	response *aws.Response
 }

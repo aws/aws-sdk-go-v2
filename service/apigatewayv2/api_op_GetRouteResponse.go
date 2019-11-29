@@ -6,151 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/apigatewayv2/types"
 )
-
-type GetRouteResponseInput struct {
-	_ struct{} `type:"structure"`
-
-	// ApiId is a required field
-	ApiId *string `location:"uri" locationName:"apiId" type:"string" required:"true"`
-
-	// RouteId is a required field
-	RouteId *string `location:"uri" locationName:"routeId" type:"string" required:"true"`
-
-	// RouteResponseId is a required field
-	RouteResponseId *string `location:"uri" locationName:"routeResponseId" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetRouteResponseInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetRouteResponseInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetRouteResponseInput"}
-
-	if s.ApiId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ApiId"))
-	}
-
-	if s.RouteId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("RouteId"))
-	}
-
-	if s.RouteResponseId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("RouteResponseId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetRouteResponseInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.ApiId != nil {
-		v := *s.ApiId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "apiId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.RouteId != nil {
-		v := *s.RouteId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "routeId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.RouteResponseId != nil {
-		v := *s.RouteResponseId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "routeResponseId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type GetRouteResponseOutput struct {
-	_ struct{} `type:"structure"`
-
-	// An expression used to extract information at runtime. See Selection Expressions
-	// (https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html#apigateway-websocket-api-apikey-selection-expressions)
-	// for more information.
-	ModelSelectionExpression *string `locationName:"modelSelectionExpression" type:"string"`
-
-	// The route models.
-	ResponseModels map[string]string `locationName:"responseModels" type:"map"`
-
-	// The route parameters.
-	ResponseParameters map[string]ParameterConstraints `locationName:"responseParameters" type:"map"`
-
-	// The identifier.
-	RouteResponseId *string `locationName:"routeResponseId" type:"string"`
-
-	// After evaulating a selection expression, the result is compared against one
-	// or more selection keys to find a matching key. See Selection Expressions
-	// (https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html#apigateway-websocket-api-apikey-selection-expressions)
-	// for a list of expressions and each expression's associated selection key
-	// type.
-	RouteResponseKey *string `locationName:"routeResponseKey" type:"string"`
-}
-
-// String returns the string representation
-func (s GetRouteResponseOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetRouteResponseOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.ModelSelectionExpression != nil {
-		v := *s.ModelSelectionExpression
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "modelSelectionExpression", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.ResponseModels != nil {
-		v := s.ResponseModels
-
-		metadata := protocol.Metadata{}
-		ms0 := e.Map(protocol.BodyTarget, "responseModels", metadata)
-		ms0.Start()
-		for k1, v1 := range v {
-			ms0.MapSetValue(k1, protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
-		}
-		ms0.End()
-
-	}
-	if s.ResponseParameters != nil {
-		v := s.ResponseParameters
-
-		metadata := protocol.Metadata{}
-		ms0 := e.Map(protocol.BodyTarget, "responseParameters", metadata)
-		ms0.Start()
-		for k1, v1 := range v {
-			ms0.MapSetFields(k1, v1)
-		}
-		ms0.End()
-
-	}
-	if s.RouteResponseId != nil {
-		v := *s.RouteResponseId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "routeResponseId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.RouteResponseKey != nil {
-		v := *s.RouteResponseKey
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "routeResponseKey", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opGetRouteResponse = "GetRouteResponse"
 
@@ -167,7 +24,7 @@ const opGetRouteResponse = "GetRouteResponse"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/apigatewayv2-2018-11-29/GetRouteResponse
-func (c *Client) GetRouteResponseRequest(input *GetRouteResponseInput) GetRouteResponseRequest {
+func (c *Client) GetRouteResponseRequest(input *types.GetRouteResponseInput) GetRouteResponseRequest {
 	op := &aws.Operation{
 		Name:       opGetRouteResponse,
 		HTTPMethod: "GET",
@@ -175,10 +32,10 @@ func (c *Client) GetRouteResponseRequest(input *GetRouteResponseInput) GetRouteR
 	}
 
 	if input == nil {
-		input = &GetRouteResponseInput{}
+		input = &types.GetRouteResponseInput{}
 	}
 
-	req := c.newRequest(op, input, &GetRouteResponseOutput{})
+	req := c.newRequest(op, input, &types.GetRouteResponseOutput{})
 	return GetRouteResponseRequest{Request: req, Input: input, Copy: c.GetRouteResponseRequest}
 }
 
@@ -186,8 +43,8 @@ func (c *Client) GetRouteResponseRequest(input *GetRouteResponseInput) GetRouteR
 // GetRouteResponse API operation.
 type GetRouteResponseRequest struct {
 	*aws.Request
-	Input *GetRouteResponseInput
-	Copy  func(*GetRouteResponseInput) GetRouteResponseRequest
+	Input *types.GetRouteResponseInput
+	Copy  func(*types.GetRouteResponseInput) GetRouteResponseRequest
 }
 
 // Send marshals and sends the GetRouteResponse API request.
@@ -199,7 +56,7 @@ func (r GetRouteResponseRequest) Send(ctx context.Context) (*GetRouteResponseRes
 	}
 
 	resp := &GetRouteResponseResponse{
-		GetRouteResponseOutput: r.Request.Data.(*GetRouteResponseOutput),
+		GetRouteResponseOutput: r.Request.Data.(*types.GetRouteResponseOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -209,7 +66,7 @@ func (r GetRouteResponseRequest) Send(ctx context.Context) (*GetRouteResponseRes
 // GetRouteResponseResponse is the response type for the
 // GetRouteResponse API operation.
 type GetRouteResponseResponse struct {
-	*GetRouteResponseOutput
+	*types.GetRouteResponseOutput
 
 	response *aws.Response
 }

@@ -6,53 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ssm/types"
 )
-
-type DeleteDocumentInput struct {
-	_ struct{} `type:"structure"`
-
-	// The version of the document that you want to delete. If not provided, all
-	// versions of the document are deleted.
-	DocumentVersion *string `type:"string"`
-
-	// The name of the document.
-	//
-	// Name is a required field
-	Name *string `type:"string" required:"true"`
-
-	// The version name of the document that you want to delete. If not provided,
-	// all versions of the document are deleted.
-	VersionName *string `type:"string"`
-}
-
-// String returns the string representation
-func (s DeleteDocumentInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteDocumentInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteDocumentInput"}
-
-	if s.Name == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Name"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteDocumentOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteDocumentOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteDocument = "DeleteDocument"
 
@@ -73,7 +28,7 @@ const opDeleteDocument = "DeleteDocument"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DeleteDocument
-func (c *Client) DeleteDocumentRequest(input *DeleteDocumentInput) DeleteDocumentRequest {
+func (c *Client) DeleteDocumentRequest(input *types.DeleteDocumentInput) DeleteDocumentRequest {
 	op := &aws.Operation{
 		Name:       opDeleteDocument,
 		HTTPMethod: "POST",
@@ -81,10 +36,10 @@ func (c *Client) DeleteDocumentRequest(input *DeleteDocumentInput) DeleteDocumen
 	}
 
 	if input == nil {
-		input = &DeleteDocumentInput{}
+		input = &types.DeleteDocumentInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteDocumentOutput{})
+	req := c.newRequest(op, input, &types.DeleteDocumentOutput{})
 	return DeleteDocumentRequest{Request: req, Input: input, Copy: c.DeleteDocumentRequest}
 }
 
@@ -92,8 +47,8 @@ func (c *Client) DeleteDocumentRequest(input *DeleteDocumentInput) DeleteDocumen
 // DeleteDocument API operation.
 type DeleteDocumentRequest struct {
 	*aws.Request
-	Input *DeleteDocumentInput
-	Copy  func(*DeleteDocumentInput) DeleteDocumentRequest
+	Input *types.DeleteDocumentInput
+	Copy  func(*types.DeleteDocumentInput) DeleteDocumentRequest
 }
 
 // Send marshals and sends the DeleteDocument API request.
@@ -105,7 +60,7 @@ func (r DeleteDocumentRequest) Send(ctx context.Context) (*DeleteDocumentRespons
 	}
 
 	resp := &DeleteDocumentResponse{
-		DeleteDocumentOutput: r.Request.Data.(*DeleteDocumentOutput),
+		DeleteDocumentOutput: r.Request.Data.(*types.DeleteDocumentOutput),
 		response:             &aws.Response{Request: r.Request},
 	}
 
@@ -115,7 +70,7 @@ func (r DeleteDocumentRequest) Send(ctx context.Context) (*DeleteDocumentRespons
 // DeleteDocumentResponse is the response type for the
 // DeleteDocument API operation.
 type DeleteDocumentResponse struct {
-	*DeleteDocumentOutput
+	*types.DeleteDocumentOutput
 
 	response *aws.Response
 }

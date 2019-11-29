@@ -6,85 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/kinesisanalyticsv2/types"
 )
-
-type DeleteApplicationCloudWatchLoggingOptionInput struct {
-	_ struct{} `type:"structure"`
-
-	// The application name.
-	//
-	// ApplicationName is a required field
-	ApplicationName *string `min:"1" type:"string" required:"true"`
-
-	// The CloudWatchLoggingOptionId of the Amazon CloudWatch logging option to
-	// delete. You can get the CloudWatchLoggingOptionId by using the DescribeApplication
-	// operation.
-	//
-	// CloudWatchLoggingOptionId is a required field
-	CloudWatchLoggingOptionId *string `min:"1" type:"string" required:"true"`
-
-	// The version ID of the application. You can retrieve the application version
-	// ID using DescribeApplication.
-	//
-	// CurrentApplicationVersionId is a required field
-	CurrentApplicationVersionId *int64 `min:"1" type:"long" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteApplicationCloudWatchLoggingOptionInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteApplicationCloudWatchLoggingOptionInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteApplicationCloudWatchLoggingOptionInput"}
-
-	if s.ApplicationName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ApplicationName"))
-	}
-	if s.ApplicationName != nil && len(*s.ApplicationName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ApplicationName", 1))
-	}
-
-	if s.CloudWatchLoggingOptionId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("CloudWatchLoggingOptionId"))
-	}
-	if s.CloudWatchLoggingOptionId != nil && len(*s.CloudWatchLoggingOptionId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("CloudWatchLoggingOptionId", 1))
-	}
-
-	if s.CurrentApplicationVersionId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("CurrentApplicationVersionId"))
-	}
-	if s.CurrentApplicationVersionId != nil && *s.CurrentApplicationVersionId < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("CurrentApplicationVersionId", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteApplicationCloudWatchLoggingOptionOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The application's Amazon Resource Name (ARN).
-	ApplicationARN *string `min:"1" type:"string"`
-
-	// The version ID of the application. Kinesis Data Analytics updates the ApplicationVersionId
-	// each time you change the CloudWatch logging options.
-	ApplicationVersionId *int64 `min:"1" type:"long"`
-
-	// The descriptions of the remaining CloudWatch logging options for the application.
-	CloudWatchLoggingOptionDescriptions []CloudWatchLoggingOptionDescription `type:"list"`
-}
-
-// String returns the string representation
-func (s DeleteApplicationCloudWatchLoggingOptionOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteApplicationCloudWatchLoggingOption = "DeleteApplicationCloudWatchLoggingOption"
 
@@ -102,7 +25,7 @@ const opDeleteApplicationCloudWatchLoggingOption = "DeleteApplicationCloudWatchL
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/DeleteApplicationCloudWatchLoggingOption
-func (c *Client) DeleteApplicationCloudWatchLoggingOptionRequest(input *DeleteApplicationCloudWatchLoggingOptionInput) DeleteApplicationCloudWatchLoggingOptionRequest {
+func (c *Client) DeleteApplicationCloudWatchLoggingOptionRequest(input *types.DeleteApplicationCloudWatchLoggingOptionInput) DeleteApplicationCloudWatchLoggingOptionRequest {
 	op := &aws.Operation{
 		Name:       opDeleteApplicationCloudWatchLoggingOption,
 		HTTPMethod: "POST",
@@ -110,10 +33,10 @@ func (c *Client) DeleteApplicationCloudWatchLoggingOptionRequest(input *DeleteAp
 	}
 
 	if input == nil {
-		input = &DeleteApplicationCloudWatchLoggingOptionInput{}
+		input = &types.DeleteApplicationCloudWatchLoggingOptionInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteApplicationCloudWatchLoggingOptionOutput{})
+	req := c.newRequest(op, input, &types.DeleteApplicationCloudWatchLoggingOptionOutput{})
 	return DeleteApplicationCloudWatchLoggingOptionRequest{Request: req, Input: input, Copy: c.DeleteApplicationCloudWatchLoggingOptionRequest}
 }
 
@@ -121,8 +44,8 @@ func (c *Client) DeleteApplicationCloudWatchLoggingOptionRequest(input *DeleteAp
 // DeleteApplicationCloudWatchLoggingOption API operation.
 type DeleteApplicationCloudWatchLoggingOptionRequest struct {
 	*aws.Request
-	Input *DeleteApplicationCloudWatchLoggingOptionInput
-	Copy  func(*DeleteApplicationCloudWatchLoggingOptionInput) DeleteApplicationCloudWatchLoggingOptionRequest
+	Input *types.DeleteApplicationCloudWatchLoggingOptionInput
+	Copy  func(*types.DeleteApplicationCloudWatchLoggingOptionInput) DeleteApplicationCloudWatchLoggingOptionRequest
 }
 
 // Send marshals and sends the DeleteApplicationCloudWatchLoggingOption API request.
@@ -134,7 +57,7 @@ func (r DeleteApplicationCloudWatchLoggingOptionRequest) Send(ctx context.Contex
 	}
 
 	resp := &DeleteApplicationCloudWatchLoggingOptionResponse{
-		DeleteApplicationCloudWatchLoggingOptionOutput: r.Request.Data.(*DeleteApplicationCloudWatchLoggingOptionOutput),
+		DeleteApplicationCloudWatchLoggingOptionOutput: r.Request.Data.(*types.DeleteApplicationCloudWatchLoggingOptionOutput),
 		response: &aws.Response{Request: r.Request},
 	}
 
@@ -144,7 +67,7 @@ func (r DeleteApplicationCloudWatchLoggingOptionRequest) Send(ctx context.Contex
 // DeleteApplicationCloudWatchLoggingOptionResponse is the response type for the
 // DeleteApplicationCloudWatchLoggingOption API operation.
 type DeleteApplicationCloudWatchLoggingOptionResponse struct {
-	*DeleteApplicationCloudWatchLoggingOptionOutput
+	*types.DeleteApplicationCloudWatchLoggingOptionOutput
 
 	response *aws.Response
 }

@@ -6,70 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/query"
+	"github.com/aws/aws-sdk-go-v2/service/iam/types"
 )
-
-type AttachUserPolicyInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the IAM policy you want to attach.
-	//
-	// For more information about ARNs, see Amazon Resource Names (ARNs) and AWS
-	// Service Namespaces (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
-	// in the AWS General Reference.
-	//
-	// PolicyArn is a required field
-	PolicyArn *string `min:"20" type:"string" required:"true"`
-
-	// The name (friendly name, not ARN) of the IAM user to attach the policy to.
-	//
-	// This parameter allows (through its regex pattern (http://wikipedia.org/wiki/regex))
-	// a string of characters consisting of upper and lowercase alphanumeric characters
-	// with no spaces. You can also include any of the following characters: _+=,.@-
-	//
-	// UserName is a required field
-	UserName *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s AttachUserPolicyInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *AttachUserPolicyInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "AttachUserPolicyInput"}
-
-	if s.PolicyArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("PolicyArn"))
-	}
-	if s.PolicyArn != nil && len(*s.PolicyArn) < 20 {
-		invalidParams.Add(aws.NewErrParamMinLen("PolicyArn", 20))
-	}
-
-	if s.UserName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("UserName"))
-	}
-	if s.UserName != nil && len(*s.UserName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("UserName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type AttachUserPolicyOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s AttachUserPolicyOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opAttachUserPolicy = "AttachUserPolicy"
 
@@ -93,7 +33,7 @@ const opAttachUserPolicy = "AttachUserPolicy"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/AttachUserPolicy
-func (c *Client) AttachUserPolicyRequest(input *AttachUserPolicyInput) AttachUserPolicyRequest {
+func (c *Client) AttachUserPolicyRequest(input *types.AttachUserPolicyInput) AttachUserPolicyRequest {
 	op := &aws.Operation{
 		Name:       opAttachUserPolicy,
 		HTTPMethod: "POST",
@@ -101,10 +41,10 @@ func (c *Client) AttachUserPolicyRequest(input *AttachUserPolicyInput) AttachUse
 	}
 
 	if input == nil {
-		input = &AttachUserPolicyInput{}
+		input = &types.AttachUserPolicyInput{}
 	}
 
-	req := c.newRequest(op, input, &AttachUserPolicyOutput{})
+	req := c.newRequest(op, input, &types.AttachUserPolicyOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return AttachUserPolicyRequest{Request: req, Input: input, Copy: c.AttachUserPolicyRequest}
@@ -114,8 +54,8 @@ func (c *Client) AttachUserPolicyRequest(input *AttachUserPolicyInput) AttachUse
 // AttachUserPolicy API operation.
 type AttachUserPolicyRequest struct {
 	*aws.Request
-	Input *AttachUserPolicyInput
-	Copy  func(*AttachUserPolicyInput) AttachUserPolicyRequest
+	Input *types.AttachUserPolicyInput
+	Copy  func(*types.AttachUserPolicyInput) AttachUserPolicyRequest
 }
 
 // Send marshals and sends the AttachUserPolicy API request.
@@ -127,7 +67,7 @@ func (r AttachUserPolicyRequest) Send(ctx context.Context) (*AttachUserPolicyRes
 	}
 
 	resp := &AttachUserPolicyResponse{
-		AttachUserPolicyOutput: r.Request.Data.(*AttachUserPolicyOutput),
+		AttachUserPolicyOutput: r.Request.Data.(*types.AttachUserPolicyOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -137,7 +77,7 @@ func (r AttachUserPolicyRequest) Send(ctx context.Context) (*AttachUserPolicyRes
 // AttachUserPolicyResponse is the response type for the
 // AttachUserPolicy API operation.
 type AttachUserPolicyResponse struct {
-	*AttachUserPolicyOutput
+	*types.AttachUserPolicyOutput
 
 	response *aws.Response
 }

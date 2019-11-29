@@ -6,54 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
+	"github.com/aws/aws-sdk-go-v2/service/codedeploy/types"
 )
-
-// Represents the input of the register on-premises instance operation.
-type RegisterOnPremisesInstanceInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ARN of the IAM session to associate with the on-premises instance.
-	IamSessionArn *string `locationName:"iamSessionArn" type:"string"`
-
-	// The ARN of the IAM user to associate with the on-premises instance.
-	IamUserArn *string `locationName:"iamUserArn" type:"string"`
-
-	// The name of the on-premises instance to register.
-	//
-	// InstanceName is a required field
-	InstanceName *string `locationName:"instanceName" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s RegisterOnPremisesInstanceInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *RegisterOnPremisesInstanceInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "RegisterOnPremisesInstanceInput"}
-
-	if s.InstanceName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("InstanceName"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type RegisterOnPremisesInstanceOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s RegisterOnPremisesInstanceOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opRegisterOnPremisesInstance = "RegisterOnPremisesInstance"
 
@@ -73,7 +29,7 @@ const opRegisterOnPremisesInstance = "RegisterOnPremisesInstance"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/RegisterOnPremisesInstance
-func (c *Client) RegisterOnPremisesInstanceRequest(input *RegisterOnPremisesInstanceInput) RegisterOnPremisesInstanceRequest {
+func (c *Client) RegisterOnPremisesInstanceRequest(input *types.RegisterOnPremisesInstanceInput) RegisterOnPremisesInstanceRequest {
 	op := &aws.Operation{
 		Name:       opRegisterOnPremisesInstance,
 		HTTPMethod: "POST",
@@ -81,10 +37,10 @@ func (c *Client) RegisterOnPremisesInstanceRequest(input *RegisterOnPremisesInst
 	}
 
 	if input == nil {
-		input = &RegisterOnPremisesInstanceInput{}
+		input = &types.RegisterOnPremisesInstanceInput{}
 	}
 
-	req := c.newRequest(op, input, &RegisterOnPremisesInstanceOutput{})
+	req := c.newRequest(op, input, &types.RegisterOnPremisesInstanceOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return RegisterOnPremisesInstanceRequest{Request: req, Input: input, Copy: c.RegisterOnPremisesInstanceRequest}
@@ -94,8 +50,8 @@ func (c *Client) RegisterOnPremisesInstanceRequest(input *RegisterOnPremisesInst
 // RegisterOnPremisesInstance API operation.
 type RegisterOnPremisesInstanceRequest struct {
 	*aws.Request
-	Input *RegisterOnPremisesInstanceInput
-	Copy  func(*RegisterOnPremisesInstanceInput) RegisterOnPremisesInstanceRequest
+	Input *types.RegisterOnPremisesInstanceInput
+	Copy  func(*types.RegisterOnPremisesInstanceInput) RegisterOnPremisesInstanceRequest
 }
 
 // Send marshals and sends the RegisterOnPremisesInstance API request.
@@ -107,7 +63,7 @@ func (r RegisterOnPremisesInstanceRequest) Send(ctx context.Context) (*RegisterO
 	}
 
 	resp := &RegisterOnPremisesInstanceResponse{
-		RegisterOnPremisesInstanceOutput: r.Request.Data.(*RegisterOnPremisesInstanceOutput),
+		RegisterOnPremisesInstanceOutput: r.Request.Data.(*types.RegisterOnPremisesInstanceOutput),
 		response:                         &aws.Response{Request: r.Request},
 	}
 
@@ -117,7 +73,7 @@ func (r RegisterOnPremisesInstanceRequest) Send(ctx context.Context) (*RegisterO
 // RegisterOnPremisesInstanceResponse is the response type for the
 // RegisterOnPremisesInstance API operation.
 type RegisterOnPremisesInstanceResponse struct {
-	*RegisterOnPremisesInstanceOutput
+	*types.RegisterOnPremisesInstanceOutput
 
 	response *aws.Response
 }

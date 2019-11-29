@@ -6,70 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/greengrass/types"
 )
-
-type UpdateDeviceDefinitionInput struct {
-	_ struct{} `type:"structure"`
-
-	// DeviceDefinitionId is a required field
-	DeviceDefinitionId *string `location:"uri" locationName:"DeviceDefinitionId" type:"string" required:"true"`
-
-	Name *string `type:"string"`
-}
-
-// String returns the string representation
-func (s UpdateDeviceDefinitionInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateDeviceDefinitionInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateDeviceDefinitionInput"}
-
-	if s.DeviceDefinitionId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DeviceDefinitionId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s UpdateDeviceDefinitionInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.Name != nil {
-		v := *s.Name
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "Name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.DeviceDefinitionId != nil {
-		v := *s.DeviceDefinitionId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "DeviceDefinitionId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type UpdateDeviceDefinitionOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s UpdateDeviceDefinitionOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s UpdateDeviceDefinitionOutput) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
 
 const opUpdateDeviceDefinition = "UpdateDeviceDefinition"
 
@@ -86,7 +24,7 @@ const opUpdateDeviceDefinition = "UpdateDeviceDefinition"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/UpdateDeviceDefinition
-func (c *Client) UpdateDeviceDefinitionRequest(input *UpdateDeviceDefinitionInput) UpdateDeviceDefinitionRequest {
+func (c *Client) UpdateDeviceDefinitionRequest(input *types.UpdateDeviceDefinitionInput) UpdateDeviceDefinitionRequest {
 	op := &aws.Operation{
 		Name:       opUpdateDeviceDefinition,
 		HTTPMethod: "PUT",
@@ -94,10 +32,10 @@ func (c *Client) UpdateDeviceDefinitionRequest(input *UpdateDeviceDefinitionInpu
 	}
 
 	if input == nil {
-		input = &UpdateDeviceDefinitionInput{}
+		input = &types.UpdateDeviceDefinitionInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateDeviceDefinitionOutput{})
+	req := c.newRequest(op, input, &types.UpdateDeviceDefinitionOutput{})
 	return UpdateDeviceDefinitionRequest{Request: req, Input: input, Copy: c.UpdateDeviceDefinitionRequest}
 }
 
@@ -105,8 +43,8 @@ func (c *Client) UpdateDeviceDefinitionRequest(input *UpdateDeviceDefinitionInpu
 // UpdateDeviceDefinition API operation.
 type UpdateDeviceDefinitionRequest struct {
 	*aws.Request
-	Input *UpdateDeviceDefinitionInput
-	Copy  func(*UpdateDeviceDefinitionInput) UpdateDeviceDefinitionRequest
+	Input *types.UpdateDeviceDefinitionInput
+	Copy  func(*types.UpdateDeviceDefinitionInput) UpdateDeviceDefinitionRequest
 }
 
 // Send marshals and sends the UpdateDeviceDefinition API request.
@@ -118,7 +56,7 @@ func (r UpdateDeviceDefinitionRequest) Send(ctx context.Context) (*UpdateDeviceD
 	}
 
 	resp := &UpdateDeviceDefinitionResponse{
-		UpdateDeviceDefinitionOutput: r.Request.Data.(*UpdateDeviceDefinitionOutput),
+		UpdateDeviceDefinitionOutput: r.Request.Data.(*types.UpdateDeviceDefinitionOutput),
 		response:                     &aws.Response{Request: r.Request},
 	}
 
@@ -128,7 +66,7 @@ func (r UpdateDeviceDefinitionRequest) Send(ctx context.Context) (*UpdateDeviceD
 // UpdateDeviceDefinitionResponse is the response type for the
 // UpdateDeviceDefinition API operation.
 type UpdateDeviceDefinitionResponse struct {
-	*UpdateDeviceDefinitionOutput
+	*types.UpdateDeviceDefinitionOutput
 
 	response *aws.Response
 }

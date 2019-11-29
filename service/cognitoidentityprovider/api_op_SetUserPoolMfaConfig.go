@@ -6,85 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/types"
 )
-
-type SetUserPoolMfaConfigInput struct {
-	_ struct{} `type:"structure"`
-
-	// The MFA configuration. Valid values include:
-	//
-	//    * OFF MFA will not be used for any users.
-	//
-	//    * ON MFA is required for all users to sign in.
-	//
-	//    * OPTIONAL MFA will be required only for individual users who have an
-	//    MFA factor enabled.
-	MfaConfiguration UserPoolMfaType `type:"string" enum:"true"`
-
-	// The SMS text message MFA configuration.
-	SmsMfaConfiguration *SmsMfaConfigType `type:"structure"`
-
-	// The software token MFA configuration.
-	SoftwareTokenMfaConfiguration *SoftwareTokenMfaConfigType `type:"structure"`
-
-	// The user pool ID.
-	//
-	// UserPoolId is a required field
-	UserPoolId *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s SetUserPoolMfaConfigInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *SetUserPoolMfaConfigInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "SetUserPoolMfaConfigInput"}
-
-	if s.UserPoolId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("UserPoolId"))
-	}
-	if s.UserPoolId != nil && len(*s.UserPoolId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("UserPoolId", 1))
-	}
-	if s.SmsMfaConfiguration != nil {
-		if err := s.SmsMfaConfiguration.Validate(); err != nil {
-			invalidParams.AddNested("SmsMfaConfiguration", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type SetUserPoolMfaConfigOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The MFA configuration. Valid values include:
-	//
-	//    * OFF MFA will not be used for any users.
-	//
-	//    * ON MFA is required for all users to sign in.
-	//
-	//    * OPTIONAL MFA will be required only for individual users who have an
-	//    MFA factor enabled.
-	MfaConfiguration UserPoolMfaType `type:"string" enum:"true"`
-
-	// The SMS text message MFA configuration.
-	SmsMfaConfiguration *SmsMfaConfigType `type:"structure"`
-
-	// The software token MFA configuration.
-	SoftwareTokenMfaConfiguration *SoftwareTokenMfaConfigType `type:"structure"`
-}
-
-// String returns the string representation
-func (s SetUserPoolMfaConfigOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opSetUserPoolMfaConfig = "SetUserPoolMfaConfig"
 
@@ -101,7 +24,7 @@ const opSetUserPoolMfaConfig = "SetUserPoolMfaConfig"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/SetUserPoolMfaConfig
-func (c *Client) SetUserPoolMfaConfigRequest(input *SetUserPoolMfaConfigInput) SetUserPoolMfaConfigRequest {
+func (c *Client) SetUserPoolMfaConfigRequest(input *types.SetUserPoolMfaConfigInput) SetUserPoolMfaConfigRequest {
 	op := &aws.Operation{
 		Name:       opSetUserPoolMfaConfig,
 		HTTPMethod: "POST",
@@ -109,10 +32,10 @@ func (c *Client) SetUserPoolMfaConfigRequest(input *SetUserPoolMfaConfigInput) S
 	}
 
 	if input == nil {
-		input = &SetUserPoolMfaConfigInput{}
+		input = &types.SetUserPoolMfaConfigInput{}
 	}
 
-	req := c.newRequest(op, input, &SetUserPoolMfaConfigOutput{})
+	req := c.newRequest(op, input, &types.SetUserPoolMfaConfigOutput{})
 	return SetUserPoolMfaConfigRequest{Request: req, Input: input, Copy: c.SetUserPoolMfaConfigRequest}
 }
 
@@ -120,8 +43,8 @@ func (c *Client) SetUserPoolMfaConfigRequest(input *SetUserPoolMfaConfigInput) S
 // SetUserPoolMfaConfig API operation.
 type SetUserPoolMfaConfigRequest struct {
 	*aws.Request
-	Input *SetUserPoolMfaConfigInput
-	Copy  func(*SetUserPoolMfaConfigInput) SetUserPoolMfaConfigRequest
+	Input *types.SetUserPoolMfaConfigInput
+	Copy  func(*types.SetUserPoolMfaConfigInput) SetUserPoolMfaConfigRequest
 }
 
 // Send marshals and sends the SetUserPoolMfaConfig API request.
@@ -133,7 +56,7 @@ func (r SetUserPoolMfaConfigRequest) Send(ctx context.Context) (*SetUserPoolMfaC
 	}
 
 	resp := &SetUserPoolMfaConfigResponse{
-		SetUserPoolMfaConfigOutput: r.Request.Data.(*SetUserPoolMfaConfigOutput),
+		SetUserPoolMfaConfigOutput: r.Request.Data.(*types.SetUserPoolMfaConfigOutput),
 		response:                   &aws.Response{Request: r.Request},
 	}
 
@@ -143,7 +66,7 @@ func (r SetUserPoolMfaConfigRequest) Send(ctx context.Context) (*SetUserPoolMfaC
 // SetUserPoolMfaConfigResponse is the response type for the
 // SetUserPoolMfaConfig API operation.
 type SetUserPoolMfaConfigResponse struct {
-	*SetUserPoolMfaConfigOutput
+	*types.SetUserPoolMfaConfigOutput
 
 	response *aws.Response
 }

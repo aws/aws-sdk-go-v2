@@ -6,48 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/shield/types"
 )
-
-type DisassociateDRTLogBucketInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon S3 bucket that contains your AWS WAF logs.
-	//
-	// LogBucket is a required field
-	LogBucket *string `min:"3" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DisassociateDRTLogBucketInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DisassociateDRTLogBucketInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DisassociateDRTLogBucketInput"}
-
-	if s.LogBucket == nil {
-		invalidParams.Add(aws.NewErrParamRequired("LogBucket"))
-	}
-	if s.LogBucket != nil && len(*s.LogBucket) < 3 {
-		invalidParams.Add(aws.NewErrParamMinLen("LogBucket", 3))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DisassociateDRTLogBucketOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DisassociateDRTLogBucketOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDisassociateDRTLogBucket = "DisassociateDRTLogBucket"
 
@@ -72,7 +32,7 @@ const opDisassociateDRTLogBucket = "DisassociateDRTLogBucket"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/DisassociateDRTLogBucket
-func (c *Client) DisassociateDRTLogBucketRequest(input *DisassociateDRTLogBucketInput) DisassociateDRTLogBucketRequest {
+func (c *Client) DisassociateDRTLogBucketRequest(input *types.DisassociateDRTLogBucketInput) DisassociateDRTLogBucketRequest {
 	op := &aws.Operation{
 		Name:       opDisassociateDRTLogBucket,
 		HTTPMethod: "POST",
@@ -80,10 +40,10 @@ func (c *Client) DisassociateDRTLogBucketRequest(input *DisassociateDRTLogBucket
 	}
 
 	if input == nil {
-		input = &DisassociateDRTLogBucketInput{}
+		input = &types.DisassociateDRTLogBucketInput{}
 	}
 
-	req := c.newRequest(op, input, &DisassociateDRTLogBucketOutput{})
+	req := c.newRequest(op, input, &types.DisassociateDRTLogBucketOutput{})
 	return DisassociateDRTLogBucketRequest{Request: req, Input: input, Copy: c.DisassociateDRTLogBucketRequest}
 }
 
@@ -91,8 +51,8 @@ func (c *Client) DisassociateDRTLogBucketRequest(input *DisassociateDRTLogBucket
 // DisassociateDRTLogBucket API operation.
 type DisassociateDRTLogBucketRequest struct {
 	*aws.Request
-	Input *DisassociateDRTLogBucketInput
-	Copy  func(*DisassociateDRTLogBucketInput) DisassociateDRTLogBucketRequest
+	Input *types.DisassociateDRTLogBucketInput
+	Copy  func(*types.DisassociateDRTLogBucketInput) DisassociateDRTLogBucketRequest
 }
 
 // Send marshals and sends the DisassociateDRTLogBucket API request.
@@ -104,7 +64,7 @@ func (r DisassociateDRTLogBucketRequest) Send(ctx context.Context) (*Disassociat
 	}
 
 	resp := &DisassociateDRTLogBucketResponse{
-		DisassociateDRTLogBucketOutput: r.Request.Data.(*DisassociateDRTLogBucketOutput),
+		DisassociateDRTLogBucketOutput: r.Request.Data.(*types.DisassociateDRTLogBucketOutput),
 		response:                       &aws.Response{Request: r.Request},
 	}
 
@@ -114,7 +74,7 @@ func (r DisassociateDRTLogBucketRequest) Send(ctx context.Context) (*Disassociat
 // DisassociateDRTLogBucketResponse is the response type for the
 // DisassociateDRTLogBucket API operation.
 type DisassociateDRTLogBucketResponse struct {
-	*DisassociateDRTLogBucketOutput
+	*types.DisassociateDRTLogBucketOutput
 
 	response *aws.Response
 }

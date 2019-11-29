@@ -6,47 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
+	"github.com/aws/aws-sdk-go-v2/service/opsworks/types"
 )
-
-type DeleteLayerInput struct {
-	_ struct{} `type:"structure"`
-
-	// The layer ID.
-	//
-	// LayerId is a required field
-	LayerId *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteLayerInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteLayerInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteLayerInput"}
-
-	if s.LayerId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("LayerId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteLayerOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteLayerOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteLayer = "DeleteLayer"
 
@@ -70,7 +33,7 @@ const opDeleteLayer = "DeleteLayer"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DeleteLayer
-func (c *Client) DeleteLayerRequest(input *DeleteLayerInput) DeleteLayerRequest {
+func (c *Client) DeleteLayerRequest(input *types.DeleteLayerInput) DeleteLayerRequest {
 	op := &aws.Operation{
 		Name:       opDeleteLayer,
 		HTTPMethod: "POST",
@@ -78,10 +41,10 @@ func (c *Client) DeleteLayerRequest(input *DeleteLayerInput) DeleteLayerRequest 
 	}
 
 	if input == nil {
-		input = &DeleteLayerInput{}
+		input = &types.DeleteLayerInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteLayerOutput{})
+	req := c.newRequest(op, input, &types.DeleteLayerOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return DeleteLayerRequest{Request: req, Input: input, Copy: c.DeleteLayerRequest}
@@ -91,8 +54,8 @@ func (c *Client) DeleteLayerRequest(input *DeleteLayerInput) DeleteLayerRequest 
 // DeleteLayer API operation.
 type DeleteLayerRequest struct {
 	*aws.Request
-	Input *DeleteLayerInput
-	Copy  func(*DeleteLayerInput) DeleteLayerRequest
+	Input *types.DeleteLayerInput
+	Copy  func(*types.DeleteLayerInput) DeleteLayerRequest
 }
 
 // Send marshals and sends the DeleteLayer API request.
@@ -104,7 +67,7 @@ func (r DeleteLayerRequest) Send(ctx context.Context) (*DeleteLayerResponse, err
 	}
 
 	resp := &DeleteLayerResponse{
-		DeleteLayerOutput: r.Request.Data.(*DeleteLayerOutput),
+		DeleteLayerOutput: r.Request.Data.(*types.DeleteLayerOutput),
 		response:          &aws.Response{Request: r.Request},
 	}
 
@@ -114,7 +77,7 @@ func (r DeleteLayerRequest) Send(ctx context.Context) (*DeleteLayerResponse, err
 // DeleteLayerResponse is the response type for the
 // DeleteLayer API operation.
 type DeleteLayerResponse struct {
-	*DeleteLayerOutput
+	*types.DeleteLayerOutput
 
 	response *aws.Response
 }

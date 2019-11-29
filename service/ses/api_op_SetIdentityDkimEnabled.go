@@ -6,59 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ses/types"
 )
-
-// Represents a request to enable or disable Amazon SES Easy DKIM signing for
-// an identity. For more information about setting up Easy DKIM, see the Amazon
-// SES Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/easy-dkim.html).
-type SetIdentityDkimEnabledInput struct {
-	_ struct{} `type:"structure"`
-
-	// Sets whether DKIM signing is enabled for an identity. Set to true to enable
-	// DKIM signing for this identity; false to disable it.
-	//
-	// DkimEnabled is a required field
-	DkimEnabled *bool `type:"boolean" required:"true"`
-
-	// The identity for which DKIM signing should be enabled or disabled.
-	//
-	// Identity is a required field
-	Identity *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s SetIdentityDkimEnabledInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *SetIdentityDkimEnabledInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "SetIdentityDkimEnabledInput"}
-
-	if s.DkimEnabled == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DkimEnabled"))
-	}
-
-	if s.Identity == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Identity"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// An empty element returned on a successful request.
-type SetIdentityDkimEnabledOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s SetIdentityDkimEnabledOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opSetIdentityDkimEnabled = "SetIdentityDkimEnabled"
 
@@ -92,7 +41,7 @@ const opSetIdentityDkimEnabled = "SetIdentityDkimEnabled"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/SetIdentityDkimEnabled
-func (c *Client) SetIdentityDkimEnabledRequest(input *SetIdentityDkimEnabledInput) SetIdentityDkimEnabledRequest {
+func (c *Client) SetIdentityDkimEnabledRequest(input *types.SetIdentityDkimEnabledInput) SetIdentityDkimEnabledRequest {
 	op := &aws.Operation{
 		Name:       opSetIdentityDkimEnabled,
 		HTTPMethod: "POST",
@@ -100,10 +49,10 @@ func (c *Client) SetIdentityDkimEnabledRequest(input *SetIdentityDkimEnabledInpu
 	}
 
 	if input == nil {
-		input = &SetIdentityDkimEnabledInput{}
+		input = &types.SetIdentityDkimEnabledInput{}
 	}
 
-	req := c.newRequest(op, input, &SetIdentityDkimEnabledOutput{})
+	req := c.newRequest(op, input, &types.SetIdentityDkimEnabledOutput{})
 	return SetIdentityDkimEnabledRequest{Request: req, Input: input, Copy: c.SetIdentityDkimEnabledRequest}
 }
 
@@ -111,8 +60,8 @@ func (c *Client) SetIdentityDkimEnabledRequest(input *SetIdentityDkimEnabledInpu
 // SetIdentityDkimEnabled API operation.
 type SetIdentityDkimEnabledRequest struct {
 	*aws.Request
-	Input *SetIdentityDkimEnabledInput
-	Copy  func(*SetIdentityDkimEnabledInput) SetIdentityDkimEnabledRequest
+	Input *types.SetIdentityDkimEnabledInput
+	Copy  func(*types.SetIdentityDkimEnabledInput) SetIdentityDkimEnabledRequest
 }
 
 // Send marshals and sends the SetIdentityDkimEnabled API request.
@@ -124,7 +73,7 @@ func (r SetIdentityDkimEnabledRequest) Send(ctx context.Context) (*SetIdentityDk
 	}
 
 	resp := &SetIdentityDkimEnabledResponse{
-		SetIdentityDkimEnabledOutput: r.Request.Data.(*SetIdentityDkimEnabledOutput),
+		SetIdentityDkimEnabledOutput: r.Request.Data.(*types.SetIdentityDkimEnabledOutput),
 		response:                     &aws.Response{Request: r.Request},
 	}
 
@@ -134,7 +83,7 @@ func (r SetIdentityDkimEnabledRequest) Send(ctx context.Context) (*SetIdentityDk
 // SetIdentityDkimEnabledResponse is the response type for the
 // SetIdentityDkimEnabled API operation.
 type SetIdentityDkimEnabledResponse struct {
-	*SetIdentityDkimEnabledOutput
+	*types.SetIdentityDkimEnabledOutput
 
 	response *aws.Response
 }

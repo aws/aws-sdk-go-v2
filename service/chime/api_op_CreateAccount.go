@@ -6,76 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/chime/types"
 )
-
-type CreateAccountInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the Amazon Chime account.
-	//
-	// Name is a required field
-	Name *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s CreateAccountInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateAccountInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateAccountInput"}
-
-	if s.Name == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Name"))
-	}
-	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s CreateAccountInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.Name != nil {
-		v := *s.Name
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "Name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type CreateAccountOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Chime account details.
-	Account *Account `type:"structure"`
-}
-
-// String returns the string representation
-func (s CreateAccountOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s CreateAccountOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.Account != nil {
-		v := s.Account
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "Account", v, metadata)
-	}
-	return nil
-}
 
 const opCreateAccount = "CreateAccount"
 
@@ -95,7 +27,7 @@ const opCreateAccount = "CreateAccount"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/CreateAccount
-func (c *Client) CreateAccountRequest(input *CreateAccountInput) CreateAccountRequest {
+func (c *Client) CreateAccountRequest(input *types.CreateAccountInput) CreateAccountRequest {
 	op := &aws.Operation{
 		Name:       opCreateAccount,
 		HTTPMethod: "POST",
@@ -103,10 +35,10 @@ func (c *Client) CreateAccountRequest(input *CreateAccountInput) CreateAccountRe
 	}
 
 	if input == nil {
-		input = &CreateAccountInput{}
+		input = &types.CreateAccountInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateAccountOutput{})
+	req := c.newRequest(op, input, &types.CreateAccountOutput{})
 	return CreateAccountRequest{Request: req, Input: input, Copy: c.CreateAccountRequest}
 }
 
@@ -114,8 +46,8 @@ func (c *Client) CreateAccountRequest(input *CreateAccountInput) CreateAccountRe
 // CreateAccount API operation.
 type CreateAccountRequest struct {
 	*aws.Request
-	Input *CreateAccountInput
-	Copy  func(*CreateAccountInput) CreateAccountRequest
+	Input *types.CreateAccountInput
+	Copy  func(*types.CreateAccountInput) CreateAccountRequest
 }
 
 // Send marshals and sends the CreateAccount API request.
@@ -127,7 +59,7 @@ func (r CreateAccountRequest) Send(ctx context.Context) (*CreateAccountResponse,
 	}
 
 	resp := &CreateAccountResponse{
-		CreateAccountOutput: r.Request.Data.(*CreateAccountOutput),
+		CreateAccountOutput: r.Request.Data.(*types.CreateAccountOutput),
 		response:            &aws.Response{Request: r.Request},
 	}
 
@@ -137,7 +69,7 @@ func (r CreateAccountRequest) Send(ctx context.Context) (*CreateAccountResponse,
 // CreateAccountResponse is the response type for the
 // CreateAccount API operation.
 type CreateAccountResponse struct {
-	*CreateAccountOutput
+	*types.CreateAccountOutput
 
 	response *aws.Response
 }

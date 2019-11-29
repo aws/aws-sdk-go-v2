@@ -6,51 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/glue/types"
 )
-
-type DeleteMLTransformInput struct {
-	_ struct{} `type:"structure"`
-
-	// The unique identifier of the transform to delete.
-	//
-	// TransformId is a required field
-	TransformId *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteMLTransformInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteMLTransformInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteMLTransformInput"}
-
-	if s.TransformId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("TransformId"))
-	}
-	if s.TransformId != nil && len(*s.TransformId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("TransformId", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteMLTransformOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The unique identifier of the transform that was deleted.
-	TransformId *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s DeleteMLTransformOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteMLTransform = "DeleteMLTransform"
 
@@ -73,7 +30,7 @@ const opDeleteMLTransform = "DeleteMLTransform"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DeleteMLTransform
-func (c *Client) DeleteMLTransformRequest(input *DeleteMLTransformInput) DeleteMLTransformRequest {
+func (c *Client) DeleteMLTransformRequest(input *types.DeleteMLTransformInput) DeleteMLTransformRequest {
 	op := &aws.Operation{
 		Name:       opDeleteMLTransform,
 		HTTPMethod: "POST",
@@ -81,10 +38,10 @@ func (c *Client) DeleteMLTransformRequest(input *DeleteMLTransformInput) DeleteM
 	}
 
 	if input == nil {
-		input = &DeleteMLTransformInput{}
+		input = &types.DeleteMLTransformInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteMLTransformOutput{})
+	req := c.newRequest(op, input, &types.DeleteMLTransformOutput{})
 	return DeleteMLTransformRequest{Request: req, Input: input, Copy: c.DeleteMLTransformRequest}
 }
 
@@ -92,8 +49,8 @@ func (c *Client) DeleteMLTransformRequest(input *DeleteMLTransformInput) DeleteM
 // DeleteMLTransform API operation.
 type DeleteMLTransformRequest struct {
 	*aws.Request
-	Input *DeleteMLTransformInput
-	Copy  func(*DeleteMLTransformInput) DeleteMLTransformRequest
+	Input *types.DeleteMLTransformInput
+	Copy  func(*types.DeleteMLTransformInput) DeleteMLTransformRequest
 }
 
 // Send marshals and sends the DeleteMLTransform API request.
@@ -105,7 +62,7 @@ func (r DeleteMLTransformRequest) Send(ctx context.Context) (*DeleteMLTransformR
 	}
 
 	resp := &DeleteMLTransformResponse{
-		DeleteMLTransformOutput: r.Request.Data.(*DeleteMLTransformOutput),
+		DeleteMLTransformOutput: r.Request.Data.(*types.DeleteMLTransformOutput),
 		response:                &aws.Response{Request: r.Request},
 	}
 
@@ -115,7 +72,7 @@ func (r DeleteMLTransformRequest) Send(ctx context.Context) (*DeleteMLTransformR
 // DeleteMLTransformResponse is the response type for the
 // DeleteMLTransform API operation.
 type DeleteMLTransformResponse struct {
-	*DeleteMLTransformOutput
+	*types.DeleteMLTransformOutput
 
 	response *aws.Response
 }

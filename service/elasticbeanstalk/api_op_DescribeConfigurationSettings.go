@@ -6,76 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/elasticbeanstalk/types"
 )
-
-// Result message containing all of the configuration settings for a specified
-// solution stack or configuration template.
-type DescribeConfigurationSettingsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The application for the environment or configuration template.
-	//
-	// ApplicationName is a required field
-	ApplicationName *string `min:"1" type:"string" required:"true"`
-
-	// The name of the environment to describe.
-	//
-	// Condition: You must specify either this or a TemplateName, but not both.
-	// If you specify both, AWS Elastic Beanstalk returns an InvalidParameterCombination
-	// error. If you do not specify either, AWS Elastic Beanstalk returns MissingRequiredParameter
-	// error.
-	EnvironmentName *string `min:"4" type:"string"`
-
-	// The name of the configuration template to describe.
-	//
-	// Conditional: You must specify either this parameter or an EnvironmentName,
-	// but not both. If you specify both, AWS Elastic Beanstalk returns an InvalidParameterCombination
-	// error. If you do not specify either, AWS Elastic Beanstalk returns a MissingRequiredParameter
-	// error.
-	TemplateName *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeConfigurationSettingsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeConfigurationSettingsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeConfigurationSettingsInput"}
-
-	if s.ApplicationName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ApplicationName"))
-	}
-	if s.ApplicationName != nil && len(*s.ApplicationName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ApplicationName", 1))
-	}
-	if s.EnvironmentName != nil && len(*s.EnvironmentName) < 4 {
-		invalidParams.Add(aws.NewErrParamMinLen("EnvironmentName", 4))
-	}
-	if s.TemplateName != nil && len(*s.TemplateName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("TemplateName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// The results from a request to change the configuration settings of an environment.
-type DescribeConfigurationSettingsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A list of ConfigurationSettingsDescription.
-	ConfigurationSettings []ConfigurationSettingsDescription `type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeConfigurationSettingsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeConfigurationSettings = "DescribeConfigurationSettings"
 
@@ -104,7 +36,7 @@ const opDescribeConfigurationSettings = "DescribeConfigurationSettings"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/DescribeConfigurationSettings
-func (c *Client) DescribeConfigurationSettingsRequest(input *DescribeConfigurationSettingsInput) DescribeConfigurationSettingsRequest {
+func (c *Client) DescribeConfigurationSettingsRequest(input *types.DescribeConfigurationSettingsInput) DescribeConfigurationSettingsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeConfigurationSettings,
 		HTTPMethod: "POST",
@@ -112,10 +44,10 @@ func (c *Client) DescribeConfigurationSettingsRequest(input *DescribeConfigurati
 	}
 
 	if input == nil {
-		input = &DescribeConfigurationSettingsInput{}
+		input = &types.DescribeConfigurationSettingsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeConfigurationSettingsOutput{})
+	req := c.newRequest(op, input, &types.DescribeConfigurationSettingsOutput{})
 	return DescribeConfigurationSettingsRequest{Request: req, Input: input, Copy: c.DescribeConfigurationSettingsRequest}
 }
 
@@ -123,8 +55,8 @@ func (c *Client) DescribeConfigurationSettingsRequest(input *DescribeConfigurati
 // DescribeConfigurationSettings API operation.
 type DescribeConfigurationSettingsRequest struct {
 	*aws.Request
-	Input *DescribeConfigurationSettingsInput
-	Copy  func(*DescribeConfigurationSettingsInput) DescribeConfigurationSettingsRequest
+	Input *types.DescribeConfigurationSettingsInput
+	Copy  func(*types.DescribeConfigurationSettingsInput) DescribeConfigurationSettingsRequest
 }
 
 // Send marshals and sends the DescribeConfigurationSettings API request.
@@ -136,7 +68,7 @@ func (r DescribeConfigurationSettingsRequest) Send(ctx context.Context) (*Descri
 	}
 
 	resp := &DescribeConfigurationSettingsResponse{
-		DescribeConfigurationSettingsOutput: r.Request.Data.(*DescribeConfigurationSettingsOutput),
+		DescribeConfigurationSettingsOutput: r.Request.Data.(*types.DescribeConfigurationSettingsOutput),
 		response:                            &aws.Response{Request: r.Request},
 	}
 
@@ -146,7 +78,7 @@ func (r DescribeConfigurationSettingsRequest) Send(ctx context.Context) (*Descri
 // DescribeConfigurationSettingsResponse is the response type for the
 // DescribeConfigurationSettings API operation.
 type DescribeConfigurationSettingsResponse struct {
-	*DescribeConfigurationSettingsOutput
+	*types.DescribeConfigurationSettingsOutput
 
 	response *aws.Response
 }

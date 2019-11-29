@@ -6,81 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/batch/types"
 )
-
-type CancelJobInput struct {
-	_ struct{} `type:"structure"`
-
-	// The AWS Batch job ID of the job to cancel.
-	//
-	// JobId is a required field
-	JobId *string `locationName:"jobId" type:"string" required:"true"`
-
-	// A message to attach to the job that explains the reason for canceling it.
-	// This message is returned by future DescribeJobs operations on the job. This
-	// message is also recorded in the AWS Batch activity logs.
-	//
-	// Reason is a required field
-	Reason *string `locationName:"reason" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s CancelJobInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CancelJobInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CancelJobInput"}
-
-	if s.JobId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("JobId"))
-	}
-
-	if s.Reason == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Reason"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s CancelJobInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.JobId != nil {
-		v := *s.JobId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "jobId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Reason != nil {
-		v := *s.Reason
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "reason", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type CancelJobOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s CancelJobOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s CancelJobOutput) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
 
 const opCancelJob = "CancelJob"
 
@@ -101,7 +28,7 @@ const opCancelJob = "CancelJob"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/CancelJob
-func (c *Client) CancelJobRequest(input *CancelJobInput) CancelJobRequest {
+func (c *Client) CancelJobRequest(input *types.CancelJobInput) CancelJobRequest {
 	op := &aws.Operation{
 		Name:       opCancelJob,
 		HTTPMethod: "POST",
@@ -109,10 +36,10 @@ func (c *Client) CancelJobRequest(input *CancelJobInput) CancelJobRequest {
 	}
 
 	if input == nil {
-		input = &CancelJobInput{}
+		input = &types.CancelJobInput{}
 	}
 
-	req := c.newRequest(op, input, &CancelJobOutput{})
+	req := c.newRequest(op, input, &types.CancelJobOutput{})
 	return CancelJobRequest{Request: req, Input: input, Copy: c.CancelJobRequest}
 }
 
@@ -120,8 +47,8 @@ func (c *Client) CancelJobRequest(input *CancelJobInput) CancelJobRequest {
 // CancelJob API operation.
 type CancelJobRequest struct {
 	*aws.Request
-	Input *CancelJobInput
-	Copy  func(*CancelJobInput) CancelJobRequest
+	Input *types.CancelJobInput
+	Copy  func(*types.CancelJobInput) CancelJobRequest
 }
 
 // Send marshals and sends the CancelJob API request.
@@ -133,7 +60,7 @@ func (r CancelJobRequest) Send(ctx context.Context) (*CancelJobResponse, error) 
 	}
 
 	resp := &CancelJobResponse{
-		CancelJobOutput: r.Request.Data.(*CancelJobOutput),
+		CancelJobOutput: r.Request.Data.(*types.CancelJobOutput),
 		response:        &aws.Response{Request: r.Request},
 	}
 
@@ -143,7 +70,7 @@ func (r CancelJobRequest) Send(ctx context.Context) (*CancelJobResponse, error) 
 // CancelJobResponse is the response type for the
 // CancelJob API operation.
 type CancelJobResponse struct {
-	*CancelJobOutput
+	*types.CancelJobOutput
 
 	response *aws.Response
 }

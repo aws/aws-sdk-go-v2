@@ -6,51 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/types"
 )
-
-type DescribeTagOptionInput struct {
-	_ struct{} `type:"structure"`
-
-	// The TagOption identifier.
-	//
-	// Id is a required field
-	Id *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeTagOptionInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeTagOptionInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeTagOptionInput"}
-
-	if s.Id == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Id"))
-	}
-	if s.Id != nil && len(*s.Id) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Id", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribeTagOptionOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Information about the TagOption.
-	TagOptionDetail *TagOptionDetail `type:"structure"`
-}
-
-// String returns the string representation
-func (s DescribeTagOptionOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeTagOption = "DescribeTagOption"
 
@@ -67,7 +24,7 @@ const opDescribeTagOption = "DescribeTagOption"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DescribeTagOption
-func (c *Client) DescribeTagOptionRequest(input *DescribeTagOptionInput) DescribeTagOptionRequest {
+func (c *Client) DescribeTagOptionRequest(input *types.DescribeTagOptionInput) DescribeTagOptionRequest {
 	op := &aws.Operation{
 		Name:       opDescribeTagOption,
 		HTTPMethod: "POST",
@@ -75,10 +32,10 @@ func (c *Client) DescribeTagOptionRequest(input *DescribeTagOptionInput) Describ
 	}
 
 	if input == nil {
-		input = &DescribeTagOptionInput{}
+		input = &types.DescribeTagOptionInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeTagOptionOutput{})
+	req := c.newRequest(op, input, &types.DescribeTagOptionOutput{})
 	return DescribeTagOptionRequest{Request: req, Input: input, Copy: c.DescribeTagOptionRequest}
 }
 
@@ -86,8 +43,8 @@ func (c *Client) DescribeTagOptionRequest(input *DescribeTagOptionInput) Describ
 // DescribeTagOption API operation.
 type DescribeTagOptionRequest struct {
 	*aws.Request
-	Input *DescribeTagOptionInput
-	Copy  func(*DescribeTagOptionInput) DescribeTagOptionRequest
+	Input *types.DescribeTagOptionInput
+	Copy  func(*types.DescribeTagOptionInput) DescribeTagOptionRequest
 }
 
 // Send marshals and sends the DescribeTagOption API request.
@@ -99,7 +56,7 @@ func (r DescribeTagOptionRequest) Send(ctx context.Context) (*DescribeTagOptionR
 	}
 
 	resp := &DescribeTagOptionResponse{
-		DescribeTagOptionOutput: r.Request.Data.(*DescribeTagOptionOutput),
+		DescribeTagOptionOutput: r.Request.Data.(*types.DescribeTagOptionOutput),
 		response:                &aws.Response{Request: r.Request},
 	}
 
@@ -109,7 +66,7 @@ func (r DescribeTagOptionRequest) Send(ctx context.Context) (*DescribeTagOptionR
 // DescribeTagOptionResponse is the response type for the
 // DescribeTagOption API operation.
 type DescribeTagOptionResponse struct {
-	*DescribeTagOptionOutput
+	*types.DescribeTagOptionOutput
 
 	response *aws.Response
 }

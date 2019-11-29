@@ -6,73 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/types"
 )
-
-type DescribeProductAsAdminInput struct {
-	_ struct{} `type:"structure"`
-
-	// The language code.
-	//
-	//    * en - English (default)
-	//
-	//    * jp - Japanese
-	//
-	//    * zh - Chinese
-	AcceptLanguage *string `type:"string"`
-
-	// The product identifier.
-	//
-	// Id is a required field
-	Id *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeProductAsAdminInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeProductAsAdminInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeProductAsAdminInput"}
-
-	if s.Id == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Id"))
-	}
-	if s.Id != nil && len(*s.Id) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Id", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribeProductAsAdminOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Information about the associated budgets.
-	Budgets []BudgetDetail `type:"list"`
-
-	// Information about the product view.
-	ProductViewDetail *ProductViewDetail `type:"structure"`
-
-	// Information about the provisioning artifacts (also known as versions) for
-	// the specified product.
-	ProvisioningArtifactSummaries []ProvisioningArtifactSummary `type:"list"`
-
-	// Information about the TagOptions associated with the product.
-	TagOptions []TagOptionDetail `type:"list"`
-
-	// Information about the tags associated with the product.
-	Tags []Tag `type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeProductAsAdminOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeProductAsAdmin = "DescribeProductAsAdmin"
 
@@ -90,7 +25,7 @@ const opDescribeProductAsAdmin = "DescribeProductAsAdmin"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DescribeProductAsAdmin
-func (c *Client) DescribeProductAsAdminRequest(input *DescribeProductAsAdminInput) DescribeProductAsAdminRequest {
+func (c *Client) DescribeProductAsAdminRequest(input *types.DescribeProductAsAdminInput) DescribeProductAsAdminRequest {
 	op := &aws.Operation{
 		Name:       opDescribeProductAsAdmin,
 		HTTPMethod: "POST",
@@ -98,10 +33,10 @@ func (c *Client) DescribeProductAsAdminRequest(input *DescribeProductAsAdminInpu
 	}
 
 	if input == nil {
-		input = &DescribeProductAsAdminInput{}
+		input = &types.DescribeProductAsAdminInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeProductAsAdminOutput{})
+	req := c.newRequest(op, input, &types.DescribeProductAsAdminOutput{})
 	return DescribeProductAsAdminRequest{Request: req, Input: input, Copy: c.DescribeProductAsAdminRequest}
 }
 
@@ -109,8 +44,8 @@ func (c *Client) DescribeProductAsAdminRequest(input *DescribeProductAsAdminInpu
 // DescribeProductAsAdmin API operation.
 type DescribeProductAsAdminRequest struct {
 	*aws.Request
-	Input *DescribeProductAsAdminInput
-	Copy  func(*DescribeProductAsAdminInput) DescribeProductAsAdminRequest
+	Input *types.DescribeProductAsAdminInput
+	Copy  func(*types.DescribeProductAsAdminInput) DescribeProductAsAdminRequest
 }
 
 // Send marshals and sends the DescribeProductAsAdmin API request.
@@ -122,7 +57,7 @@ func (r DescribeProductAsAdminRequest) Send(ctx context.Context) (*DescribeProdu
 	}
 
 	resp := &DescribeProductAsAdminResponse{
-		DescribeProductAsAdminOutput: r.Request.Data.(*DescribeProductAsAdminOutput),
+		DescribeProductAsAdminOutput: r.Request.Data.(*types.DescribeProductAsAdminOutput),
 		response:                     &aws.Response{Request: r.Request},
 	}
 
@@ -132,7 +67,7 @@ func (r DescribeProductAsAdminRequest) Send(ctx context.Context) (*DescribeProdu
 // DescribeProductAsAdminResponse is the response type for the
 // DescribeProductAsAdmin API operation.
 type DescribeProductAsAdminResponse struct {
-	*DescribeProductAsAdminOutput
+	*types.DescribeProductAsAdminOutput
 
 	response *aws.Response
 }

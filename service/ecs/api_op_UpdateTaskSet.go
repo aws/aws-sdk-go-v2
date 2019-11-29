@@ -6,81 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ecs/types"
 )
-
-type UpdateTaskSetInput struct {
-	_ struct{} `type:"structure"`
-
-	// The short name or full Amazon Resource Name (ARN) of the cluster that hosts
-	// the service that the task set exists in.
-	//
-	// Cluster is a required field
-	Cluster *string `locationName:"cluster" type:"string" required:"true"`
-
-	// A floating-point percentage of the desired number of tasks to place and keep
-	// running in the task set.
-	//
-	// Scale is a required field
-	Scale *Scale `locationName:"scale" type:"structure" required:"true"`
-
-	// The short name or full Amazon Resource Name (ARN) of the service that the
-	// task set exists in.
-	//
-	// Service is a required field
-	Service *string `locationName:"service" type:"string" required:"true"`
-
-	// The short name or full Amazon Resource Name (ARN) of the task set to update.
-	//
-	// TaskSet is a required field
-	TaskSet *string `locationName:"taskSet" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s UpdateTaskSetInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateTaskSetInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateTaskSetInput"}
-
-	if s.Cluster == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Cluster"))
-	}
-
-	if s.Scale == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Scale"))
-	}
-
-	if s.Service == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Service"))
-	}
-
-	if s.TaskSet == nil {
-		invalidParams.Add(aws.NewErrParamRequired("TaskSet"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type UpdateTaskSetOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Information about a set of Amazon ECS tasks in either an AWS CodeDeploy or
-	// an EXTERNAL deployment. An Amazon ECS task set includes details such as the
-	// desired number of tasks, how many tasks are running, and whether the task
-	// set serves production traffic.
-	TaskSet *TaskSet `locationName:"taskSet" type:"structure"`
-}
-
-// String returns the string representation
-func (s UpdateTaskSetOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opUpdateTaskSet = "UpdateTaskSet"
 
@@ -99,7 +26,7 @@ const opUpdateTaskSet = "UpdateTaskSet"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/UpdateTaskSet
-func (c *Client) UpdateTaskSetRequest(input *UpdateTaskSetInput) UpdateTaskSetRequest {
+func (c *Client) UpdateTaskSetRequest(input *types.UpdateTaskSetInput) UpdateTaskSetRequest {
 	op := &aws.Operation{
 		Name:       opUpdateTaskSet,
 		HTTPMethod: "POST",
@@ -107,10 +34,10 @@ func (c *Client) UpdateTaskSetRequest(input *UpdateTaskSetInput) UpdateTaskSetRe
 	}
 
 	if input == nil {
-		input = &UpdateTaskSetInput{}
+		input = &types.UpdateTaskSetInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateTaskSetOutput{})
+	req := c.newRequest(op, input, &types.UpdateTaskSetOutput{})
 	return UpdateTaskSetRequest{Request: req, Input: input, Copy: c.UpdateTaskSetRequest}
 }
 
@@ -118,8 +45,8 @@ func (c *Client) UpdateTaskSetRequest(input *UpdateTaskSetInput) UpdateTaskSetRe
 // UpdateTaskSet API operation.
 type UpdateTaskSetRequest struct {
 	*aws.Request
-	Input *UpdateTaskSetInput
-	Copy  func(*UpdateTaskSetInput) UpdateTaskSetRequest
+	Input *types.UpdateTaskSetInput
+	Copy  func(*types.UpdateTaskSetInput) UpdateTaskSetRequest
 }
 
 // Send marshals and sends the UpdateTaskSet API request.
@@ -131,7 +58,7 @@ func (r UpdateTaskSetRequest) Send(ctx context.Context) (*UpdateTaskSetResponse,
 	}
 
 	resp := &UpdateTaskSetResponse{
-		UpdateTaskSetOutput: r.Request.Data.(*UpdateTaskSetOutput),
+		UpdateTaskSetOutput: r.Request.Data.(*types.UpdateTaskSetOutput),
 		response:            &aws.Response{Request: r.Request},
 	}
 
@@ -141,7 +68,7 @@ func (r UpdateTaskSetRequest) Send(ctx context.Context) (*UpdateTaskSetResponse,
 // UpdateTaskSetResponse is the response type for the
 // UpdateTaskSet API operation.
 type UpdateTaskSetResponse struct {
-	*UpdateTaskSetOutput
+	*types.UpdateTaskSetOutput
 
 	response *aws.Response
 }

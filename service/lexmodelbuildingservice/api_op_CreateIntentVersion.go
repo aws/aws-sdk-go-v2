@@ -4,238 +4,10 @@ package lexmodelbuildingservice
 
 import (
 	"context"
-	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/lexmodelbuildingservice/types"
 )
-
-type CreateIntentVersionInput struct {
-	_ struct{} `type:"structure"`
-
-	// Checksum of the $LATEST version of the intent that should be used to create
-	// the new version. If you specify a checksum and the $LATEST version of the
-	// intent has a different checksum, Amazon Lex returns a PreconditionFailedException
-	// exception and doesn't publish a new version. If you don't specify a checksum,
-	// Amazon Lex publishes the $LATEST version.
-	Checksum *string `locationName:"checksum" type:"string"`
-
-	// The name of the intent that you want to create a new version of. The name
-	// is case sensitive.
-	//
-	// Name is a required field
-	Name *string `location:"uri" locationName:"name" min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s CreateIntentVersionInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateIntentVersionInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateIntentVersionInput"}
-
-	if s.Name == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Name"))
-	}
-	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s CreateIntentVersionInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.Checksum != nil {
-		v := *s.Checksum
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "checksum", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Name != nil {
-		v := *s.Name
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type CreateIntentVersionOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Checksum of the intent version created.
-	Checksum *string `locationName:"checksum" type:"string"`
-
-	// After the Lambda function specified in the fulfillmentActivity field fulfills
-	// the intent, Amazon Lex conveys this statement to the user.
-	ConclusionStatement *Statement `locationName:"conclusionStatement" type:"structure"`
-
-	// If defined, the prompt that Amazon Lex uses to confirm the user's intent
-	// before fulfilling it.
-	ConfirmationPrompt *Prompt `locationName:"confirmationPrompt" type:"structure"`
-
-	// The date that the intent was created.
-	CreatedDate *time.Time `locationName:"createdDate" type:"timestamp"`
-
-	// A description of the intent.
-	Description *string `locationName:"description" type:"string"`
-
-	// If defined, Amazon Lex invokes this Lambda function for each user input.
-	DialogCodeHook *CodeHook `locationName:"dialogCodeHook" type:"structure"`
-
-	// If defined, Amazon Lex uses this prompt to solicit additional user activity
-	// after the intent is fulfilled.
-	FollowUpPrompt *FollowUpPrompt `locationName:"followUpPrompt" type:"structure"`
-
-	// Describes how the intent is fulfilled.
-	FulfillmentActivity *FulfillmentActivity `locationName:"fulfillmentActivity" type:"structure"`
-
-	// The date that the intent was updated.
-	LastUpdatedDate *time.Time `locationName:"lastUpdatedDate" type:"timestamp"`
-
-	// The name of the intent.
-	Name *string `locationName:"name" min:"1" type:"string"`
-
-	// A unique identifier for a built-in intent.
-	ParentIntentSignature *string `locationName:"parentIntentSignature" type:"string"`
-
-	// If the user answers "no" to the question defined in confirmationPrompt, Amazon
-	// Lex responds with this statement to acknowledge that the intent was canceled.
-	RejectionStatement *Statement `locationName:"rejectionStatement" type:"structure"`
-
-	// An array of sample utterances configured for the intent.
-	SampleUtterances []string `locationName:"sampleUtterances" type:"list"`
-
-	// An array of slot types that defines the information required to fulfill the
-	// intent.
-	Slots []Slot `locationName:"slots" type:"list"`
-
-	// The version number assigned to the new version of the intent.
-	Version *string `locationName:"version" min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s CreateIntentVersionOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s CreateIntentVersionOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.Checksum != nil {
-		v := *s.Checksum
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "checksum", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.ConclusionStatement != nil {
-		v := s.ConclusionStatement
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "conclusionStatement", v, metadata)
-	}
-	if s.ConfirmationPrompt != nil {
-		v := s.ConfirmationPrompt
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "confirmationPrompt", v, metadata)
-	}
-	if s.CreatedDate != nil {
-		v := *s.CreatedDate
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "createdDate",
-			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
-	}
-	if s.Description != nil {
-		v := *s.Description
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "description", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.DialogCodeHook != nil {
-		v := s.DialogCodeHook
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "dialogCodeHook", v, metadata)
-	}
-	if s.FollowUpPrompt != nil {
-		v := s.FollowUpPrompt
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "followUpPrompt", v, metadata)
-	}
-	if s.FulfillmentActivity != nil {
-		v := s.FulfillmentActivity
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "fulfillmentActivity", v, metadata)
-	}
-	if s.LastUpdatedDate != nil {
-		v := *s.LastUpdatedDate
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "lastUpdatedDate",
-			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
-	}
-	if s.Name != nil {
-		v := *s.Name
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.ParentIntentSignature != nil {
-		v := *s.ParentIntentSignature
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "parentIntentSignature", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.RejectionStatement != nil {
-		v := s.RejectionStatement
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "rejectionStatement", v, metadata)
-	}
-	if s.SampleUtterances != nil {
-		v := s.SampleUtterances
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "sampleUtterances", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
-		}
-		ls0.End()
-
-	}
-	if s.Slots != nil {
-		v := s.Slots
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "slots", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	if s.Version != nil {
-		v := *s.Version
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "version", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opCreateIntentVersion = "CreateIntentVersion"
 
@@ -264,7 +36,7 @@ const opCreateIntentVersion = "CreateIntentVersion"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/CreateIntentVersion
-func (c *Client) CreateIntentVersionRequest(input *CreateIntentVersionInput) CreateIntentVersionRequest {
+func (c *Client) CreateIntentVersionRequest(input *types.CreateIntentVersionInput) CreateIntentVersionRequest {
 	op := &aws.Operation{
 		Name:       opCreateIntentVersion,
 		HTTPMethod: "POST",
@@ -272,10 +44,10 @@ func (c *Client) CreateIntentVersionRequest(input *CreateIntentVersionInput) Cre
 	}
 
 	if input == nil {
-		input = &CreateIntentVersionInput{}
+		input = &types.CreateIntentVersionInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateIntentVersionOutput{})
+	req := c.newRequest(op, input, &types.CreateIntentVersionOutput{})
 	return CreateIntentVersionRequest{Request: req, Input: input, Copy: c.CreateIntentVersionRequest}
 }
 
@@ -283,8 +55,8 @@ func (c *Client) CreateIntentVersionRequest(input *CreateIntentVersionInput) Cre
 // CreateIntentVersion API operation.
 type CreateIntentVersionRequest struct {
 	*aws.Request
-	Input *CreateIntentVersionInput
-	Copy  func(*CreateIntentVersionInput) CreateIntentVersionRequest
+	Input *types.CreateIntentVersionInput
+	Copy  func(*types.CreateIntentVersionInput) CreateIntentVersionRequest
 }
 
 // Send marshals and sends the CreateIntentVersion API request.
@@ -296,7 +68,7 @@ func (r CreateIntentVersionRequest) Send(ctx context.Context) (*CreateIntentVers
 	}
 
 	resp := &CreateIntentVersionResponse{
-		CreateIntentVersionOutput: r.Request.Data.(*CreateIntentVersionOutput),
+		CreateIntentVersionOutput: r.Request.Data.(*types.CreateIntentVersionOutput),
 		response:                  &aws.Response{Request: r.Request},
 	}
 
@@ -306,7 +78,7 @@ func (r CreateIntentVersionRequest) Send(ctx context.Context) (*CreateIntentVers
 // CreateIntentVersionResponse is the response type for the
 // CreateIntentVersion API operation.
 type CreateIntentVersionResponse struct {
-	*CreateIntentVersionOutput
+	*types.CreateIntentVersionOutput
 
 	response *aws.Response
 }

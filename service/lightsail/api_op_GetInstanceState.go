@@ -6,48 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/lightsail/types"
 )
-
-type GetInstanceStateInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the instance to get state information about.
-	//
-	// InstanceName is a required field
-	InstanceName *string `locationName:"instanceName" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetInstanceStateInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetInstanceStateInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetInstanceStateInput"}
-
-	if s.InstanceName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("InstanceName"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type GetInstanceStateOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The state of the instance.
-	State *InstanceState `locationName:"state" type:"structure"`
-}
-
-// String returns the string representation
-func (s GetInstanceStateOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetInstanceState = "GetInstanceState"
 
@@ -64,7 +24,7 @@ const opGetInstanceState = "GetInstanceState"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetInstanceState
-func (c *Client) GetInstanceStateRequest(input *GetInstanceStateInput) GetInstanceStateRequest {
+func (c *Client) GetInstanceStateRequest(input *types.GetInstanceStateInput) GetInstanceStateRequest {
 	op := &aws.Operation{
 		Name:       opGetInstanceState,
 		HTTPMethod: "POST",
@@ -72,10 +32,10 @@ func (c *Client) GetInstanceStateRequest(input *GetInstanceStateInput) GetInstan
 	}
 
 	if input == nil {
-		input = &GetInstanceStateInput{}
+		input = &types.GetInstanceStateInput{}
 	}
 
-	req := c.newRequest(op, input, &GetInstanceStateOutput{})
+	req := c.newRequest(op, input, &types.GetInstanceStateOutput{})
 	return GetInstanceStateRequest{Request: req, Input: input, Copy: c.GetInstanceStateRequest}
 }
 
@@ -83,8 +43,8 @@ func (c *Client) GetInstanceStateRequest(input *GetInstanceStateInput) GetInstan
 // GetInstanceState API operation.
 type GetInstanceStateRequest struct {
 	*aws.Request
-	Input *GetInstanceStateInput
-	Copy  func(*GetInstanceStateInput) GetInstanceStateRequest
+	Input *types.GetInstanceStateInput
+	Copy  func(*types.GetInstanceStateInput) GetInstanceStateRequest
 }
 
 // Send marshals and sends the GetInstanceState API request.
@@ -96,7 +56,7 @@ func (r GetInstanceStateRequest) Send(ctx context.Context) (*GetInstanceStateRes
 	}
 
 	resp := &GetInstanceStateResponse{
-		GetInstanceStateOutput: r.Request.Data.(*GetInstanceStateOutput),
+		GetInstanceStateOutput: r.Request.Data.(*types.GetInstanceStateOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -106,7 +66,7 @@ func (r GetInstanceStateRequest) Send(ctx context.Context) (*GetInstanceStateRes
 // GetInstanceStateResponse is the response type for the
 // GetInstanceState API operation.
 type GetInstanceStateResponse struct {
-	*GetInstanceStateOutput
+	*types.GetInstanceStateOutput
 
 	response *aws.Response
 }

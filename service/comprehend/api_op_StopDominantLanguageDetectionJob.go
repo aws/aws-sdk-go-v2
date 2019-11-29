@@ -6,55 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/comprehend/types"
 )
-
-type StopDominantLanguageDetectionJobInput struct {
-	_ struct{} `type:"structure"`
-
-	// The identifier of the dominant language detection job to stop.
-	//
-	// JobId is a required field
-	JobId *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s StopDominantLanguageDetectionJobInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *StopDominantLanguageDetectionJobInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "StopDominantLanguageDetectionJobInput"}
-
-	if s.JobId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("JobId"))
-	}
-	if s.JobId != nil && len(*s.JobId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("JobId", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type StopDominantLanguageDetectionJobOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The identifier of the dominant language detection job to stop.
-	JobId *string `min:"1" type:"string"`
-
-	// Either STOP_REQUESTED if the job is currently running, or STOPPED if the
-	// job was previously stopped with the StopDominantLanguageDetectionJob operation.
-	JobStatus JobStatus `type:"string" enum:"true"`
-}
-
-// String returns the string representation
-func (s StopDominantLanguageDetectionJobOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opStopDominantLanguageDetectionJob = "StopDominantLanguageDetectionJob"
 
@@ -82,7 +35,7 @@ const opStopDominantLanguageDetectionJob = "StopDominantLanguageDetectionJob"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/StopDominantLanguageDetectionJob
-func (c *Client) StopDominantLanguageDetectionJobRequest(input *StopDominantLanguageDetectionJobInput) StopDominantLanguageDetectionJobRequest {
+func (c *Client) StopDominantLanguageDetectionJobRequest(input *types.StopDominantLanguageDetectionJobInput) StopDominantLanguageDetectionJobRequest {
 	op := &aws.Operation{
 		Name:       opStopDominantLanguageDetectionJob,
 		HTTPMethod: "POST",
@@ -90,10 +43,10 @@ func (c *Client) StopDominantLanguageDetectionJobRequest(input *StopDominantLang
 	}
 
 	if input == nil {
-		input = &StopDominantLanguageDetectionJobInput{}
+		input = &types.StopDominantLanguageDetectionJobInput{}
 	}
 
-	req := c.newRequest(op, input, &StopDominantLanguageDetectionJobOutput{})
+	req := c.newRequest(op, input, &types.StopDominantLanguageDetectionJobOutput{})
 	return StopDominantLanguageDetectionJobRequest{Request: req, Input: input, Copy: c.StopDominantLanguageDetectionJobRequest}
 }
 
@@ -101,8 +54,8 @@ func (c *Client) StopDominantLanguageDetectionJobRequest(input *StopDominantLang
 // StopDominantLanguageDetectionJob API operation.
 type StopDominantLanguageDetectionJobRequest struct {
 	*aws.Request
-	Input *StopDominantLanguageDetectionJobInput
-	Copy  func(*StopDominantLanguageDetectionJobInput) StopDominantLanguageDetectionJobRequest
+	Input *types.StopDominantLanguageDetectionJobInput
+	Copy  func(*types.StopDominantLanguageDetectionJobInput) StopDominantLanguageDetectionJobRequest
 }
 
 // Send marshals and sends the StopDominantLanguageDetectionJob API request.
@@ -114,7 +67,7 @@ func (r StopDominantLanguageDetectionJobRequest) Send(ctx context.Context) (*Sto
 	}
 
 	resp := &StopDominantLanguageDetectionJobResponse{
-		StopDominantLanguageDetectionJobOutput: r.Request.Data.(*StopDominantLanguageDetectionJobOutput),
+		StopDominantLanguageDetectionJobOutput: r.Request.Data.(*types.StopDominantLanguageDetectionJobOutput),
 		response:                               &aws.Response{Request: r.Request},
 	}
 
@@ -124,7 +77,7 @@ func (r StopDominantLanguageDetectionJobRequest) Send(ctx context.Context) (*Sto
 // StopDominantLanguageDetectionJobResponse is the response type for the
 // StopDominantLanguageDetectionJob API operation.
 type StopDominantLanguageDetectionJobResponse struct {
-	*StopDominantLanguageDetectionJobOutput
+	*types.StopDominantLanguageDetectionJobOutput
 
 	response *aws.Response
 }

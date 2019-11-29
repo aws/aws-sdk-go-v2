@@ -10,6 +10,7 @@ package pricingiface
 
 import (
 	"github.com/aws/aws-sdk-go-v2/service/pricing"
+	"github.com/aws/aws-sdk-go-v2/service/pricing/types"
 )
 
 // ClientAPI provides an interface to enable mocking the
@@ -43,7 +44,7 @@ import (
 //    type mockClientClient struct {
 //        pricingiface.ClientPI
 //    }
-//    func (m *mockClientClient) DescribeServices(input *pricing.DescribeServicesInput) (*pricing.DescribeServicesOutput, error) {
+//    func (m *mockClientClient) DescribeServices(input *types.DescribeServicesInput) (*types.DescribeServicesOutput, error) {
 //        // mock response/functionality
 //    }
 //
@@ -61,11 +62,11 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type ClientAPI interface {
-	DescribeServicesRequest(*pricing.DescribeServicesInput) pricing.DescribeServicesRequest
+	DescribeServicesRequest(*types.DescribeServicesInput) pricing.DescribeServicesRequest
 
-	GetAttributeValuesRequest(*pricing.GetAttributeValuesInput) pricing.GetAttributeValuesRequest
+	GetAttributeValuesRequest(*types.GetAttributeValuesInput) pricing.GetAttributeValuesRequest
 
-	GetProductsRequest(*pricing.GetProductsInput) pricing.GetProductsRequest
+	GetProductsRequest(*types.GetProductsInput) pricing.GetProductsRequest
 }
 
 var _ ClientAPI = (*pricing.Client)(nil)

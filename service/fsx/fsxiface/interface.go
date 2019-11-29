@@ -10,6 +10,7 @@ package fsxiface
 
 import (
 	"github.com/aws/aws-sdk-go-v2/service/fsx"
+	"github.com/aws/aws-sdk-go-v2/service/fsx/types"
 )
 
 // ClientAPI provides an interface to enable mocking the
@@ -43,7 +44,7 @@ import (
 //    type mockClientClient struct {
 //        fsxiface.ClientPI
 //    }
-//    func (m *mockClientClient) CreateBackup(input *fsx.CreateBackupInput) (*fsx.CreateBackupOutput, error) {
+//    func (m *mockClientClient) CreateBackup(input *types.CreateBackupInput) (*types.CreateBackupOutput, error) {
 //        // mock response/functionality
 //    }
 //
@@ -61,27 +62,27 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type ClientAPI interface {
-	CreateBackupRequest(*fsx.CreateBackupInput) fsx.CreateBackupRequest
+	CreateBackupRequest(*types.CreateBackupInput) fsx.CreateBackupRequest
 
-	CreateFileSystemRequest(*fsx.CreateFileSystemInput) fsx.CreateFileSystemRequest
+	CreateFileSystemRequest(*types.CreateFileSystemInput) fsx.CreateFileSystemRequest
 
-	CreateFileSystemFromBackupRequest(*fsx.CreateFileSystemFromBackupInput) fsx.CreateFileSystemFromBackupRequest
+	CreateFileSystemFromBackupRequest(*types.CreateFileSystemFromBackupInput) fsx.CreateFileSystemFromBackupRequest
 
-	DeleteBackupRequest(*fsx.DeleteBackupInput) fsx.DeleteBackupRequest
+	DeleteBackupRequest(*types.DeleteBackupInput) fsx.DeleteBackupRequest
 
-	DeleteFileSystemRequest(*fsx.DeleteFileSystemInput) fsx.DeleteFileSystemRequest
+	DeleteFileSystemRequest(*types.DeleteFileSystemInput) fsx.DeleteFileSystemRequest
 
-	DescribeBackupsRequest(*fsx.DescribeBackupsInput) fsx.DescribeBackupsRequest
+	DescribeBackupsRequest(*types.DescribeBackupsInput) fsx.DescribeBackupsRequest
 
-	DescribeFileSystemsRequest(*fsx.DescribeFileSystemsInput) fsx.DescribeFileSystemsRequest
+	DescribeFileSystemsRequest(*types.DescribeFileSystemsInput) fsx.DescribeFileSystemsRequest
 
-	ListTagsForResourceRequest(*fsx.ListTagsForResourceInput) fsx.ListTagsForResourceRequest
+	ListTagsForResourceRequest(*types.ListTagsForResourceInput) fsx.ListTagsForResourceRequest
 
-	TagResourceRequest(*fsx.TagResourceInput) fsx.TagResourceRequest
+	TagResourceRequest(*types.TagResourceInput) fsx.TagResourceRequest
 
-	UntagResourceRequest(*fsx.UntagResourceInput) fsx.UntagResourceRequest
+	UntagResourceRequest(*types.UntagResourceInput) fsx.UntagResourceRequest
 
-	UpdateFileSystemRequest(*fsx.UpdateFileSystemInput) fsx.UpdateFileSystemRequest
+	UpdateFileSystemRequest(*types.UpdateFileSystemInput) fsx.UpdateFileSystemRequest
 }
 
 var _ ClientAPI = (*fsx.Client)(nil)

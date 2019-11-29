@@ -6,80 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/restjson"
+	"github.com/aws/aws-sdk-go-v2/service/chime/types"
 )
-
-type UpdateGlobalSettingsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Chime Business Calling settings.
-	//
-	// BusinessCalling is a required field
-	BusinessCalling *BusinessCallingSettings `type:"structure" required:"true"`
-
-	// The Amazon Chime Voice Connector settings.
-	//
-	// VoiceConnector is a required field
-	VoiceConnector *VoiceConnectorSettings `type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s UpdateGlobalSettingsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateGlobalSettingsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateGlobalSettingsInput"}
-
-	if s.BusinessCalling == nil {
-		invalidParams.Add(aws.NewErrParamRequired("BusinessCalling"))
-	}
-
-	if s.VoiceConnector == nil {
-		invalidParams.Add(aws.NewErrParamRequired("VoiceConnector"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s UpdateGlobalSettingsInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.BusinessCalling != nil {
-		v := s.BusinessCalling
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "BusinessCalling", v, metadata)
-	}
-	if s.VoiceConnector != nil {
-		v := s.VoiceConnector
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "VoiceConnector", v, metadata)
-	}
-	return nil
-}
-
-type UpdateGlobalSettingsOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s UpdateGlobalSettingsOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s UpdateGlobalSettingsOutput) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
 
 const opUpdateGlobalSettings = "UpdateGlobalSettings"
 
@@ -97,7 +27,7 @@ const opUpdateGlobalSettings = "UpdateGlobalSettings"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/UpdateGlobalSettings
-func (c *Client) UpdateGlobalSettingsRequest(input *UpdateGlobalSettingsInput) UpdateGlobalSettingsRequest {
+func (c *Client) UpdateGlobalSettingsRequest(input *types.UpdateGlobalSettingsInput) UpdateGlobalSettingsRequest {
 	op := &aws.Operation{
 		Name:       opUpdateGlobalSettings,
 		HTTPMethod: "PUT",
@@ -105,10 +35,10 @@ func (c *Client) UpdateGlobalSettingsRequest(input *UpdateGlobalSettingsInput) U
 	}
 
 	if input == nil {
-		input = &UpdateGlobalSettingsInput{}
+		input = &types.UpdateGlobalSettingsInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateGlobalSettingsOutput{})
+	req := c.newRequest(op, input, &types.UpdateGlobalSettingsOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return UpdateGlobalSettingsRequest{Request: req, Input: input, Copy: c.UpdateGlobalSettingsRequest}
@@ -118,8 +48,8 @@ func (c *Client) UpdateGlobalSettingsRequest(input *UpdateGlobalSettingsInput) U
 // UpdateGlobalSettings API operation.
 type UpdateGlobalSettingsRequest struct {
 	*aws.Request
-	Input *UpdateGlobalSettingsInput
-	Copy  func(*UpdateGlobalSettingsInput) UpdateGlobalSettingsRequest
+	Input *types.UpdateGlobalSettingsInput
+	Copy  func(*types.UpdateGlobalSettingsInput) UpdateGlobalSettingsRequest
 }
 
 // Send marshals and sends the UpdateGlobalSettings API request.
@@ -131,7 +61,7 @@ func (r UpdateGlobalSettingsRequest) Send(ctx context.Context) (*UpdateGlobalSet
 	}
 
 	resp := &UpdateGlobalSettingsResponse{
-		UpdateGlobalSettingsOutput: r.Request.Data.(*UpdateGlobalSettingsOutput),
+		UpdateGlobalSettingsOutput: r.Request.Data.(*types.UpdateGlobalSettingsOutput),
 		response:                   &aws.Response{Request: r.Request},
 	}
 
@@ -141,7 +71,7 @@ func (r UpdateGlobalSettingsRequest) Send(ctx context.Context) (*UpdateGlobalSet
 // UpdateGlobalSettingsResponse is the response type for the
 // UpdateGlobalSettings API operation.
 type UpdateGlobalSettingsResponse struct {
-	*UpdateGlobalSettingsOutput
+	*types.UpdateGlobalSettingsOutput
 
 	response *aws.Response
 }

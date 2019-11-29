@@ -4,133 +4,10 @@ package directconnect
 
 import (
 	"context"
-	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/directconnect/types"
 )
-
-type AssociateHostedConnectionInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the hosted connection.
-	//
-	// ConnectionId is a required field
-	ConnectionId *string `locationName:"connectionId" type:"string" required:"true"`
-
-	// The ID of the interconnect or the LAG.
-	//
-	// ParentConnectionId is a required field
-	ParentConnectionId *string `locationName:"parentConnectionId" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s AssociateHostedConnectionInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *AssociateHostedConnectionInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "AssociateHostedConnectionInput"}
-
-	if s.ConnectionId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ConnectionId"))
-	}
-
-	if s.ParentConnectionId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ParentConnectionId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Information about an AWS Direct Connect connection.
-type AssociateHostedConnectionOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The Direct Connect endpoint on which the physical connection terminates.
-	AwsDevice *string `locationName:"awsDevice" deprecated:"true" type:"string"`
-
-	// The Direct Connect endpoint on which the physical connection terminates.
-	AwsDeviceV2 *string `locationName:"awsDeviceV2" type:"string"`
-
-	// The bandwidth of the connection.
-	Bandwidth *string `locationName:"bandwidth" type:"string"`
-
-	// The ID of the connection.
-	ConnectionId *string `locationName:"connectionId" type:"string"`
-
-	// The name of the connection.
-	ConnectionName *string `locationName:"connectionName" type:"string"`
-
-	// The state of the connection. The following are the possible values:
-	//
-	//    * ordering: The initial state of a hosted connection provisioned on an
-	//    interconnect. The connection stays in the ordering state until the owner
-	//    of the hosted connection confirms or declines the connection order.
-	//
-	//    * requested: The initial state of a standard connection. The connection
-	//    stays in the requested state until the Letter of Authorization (LOA) is
-	//    sent to the customer.
-	//
-	//    * pending: The connection has been approved and is being initialized.
-	//
-	//    * available: The network link is up and the connection is ready for use.
-	//
-	//    * down: The network link is down.
-	//
-	//    * deleting: The connection is being deleted.
-	//
-	//    * deleted: The connection has been deleted.
-	//
-	//    * rejected: A hosted connection in the ordering state enters the rejected
-	//    state if it is deleted by the customer.
-	//
-	//    * unknown: The state of the connection is not available.
-	ConnectionState ConnectionState `locationName:"connectionState" type:"string" enum:"true"`
-
-	// Indicates whether the connection supports a secondary BGP peer in the same
-	// address family (IPv4/IPv6).
-	HasLogicalRedundancy HasLogicalRedundancy `locationName:"hasLogicalRedundancy" type:"string" enum:"true"`
-
-	// Indicates whether jumbo frames (9001 MTU) are supported.
-	JumboFrameCapable *bool `locationName:"jumboFrameCapable" type:"boolean"`
-
-	// The ID of the LAG.
-	LagId *string `locationName:"lagId" type:"string"`
-
-	// The time of the most recent call to DescribeLoa for this connection.
-	LoaIssueTime *time.Time `locationName:"loaIssueTime" type:"timestamp"`
-
-	// The location of the connection.
-	Location *string `locationName:"location" type:"string"`
-
-	// The ID of the AWS account that owns the connection.
-	OwnerAccount *string `locationName:"ownerAccount" type:"string"`
-
-	// The name of the AWS Direct Connect service provider associated with the connection.
-	PartnerName *string `locationName:"partnerName" type:"string"`
-
-	// The name of the service provider associated with the connection.
-	ProviderName *string `locationName:"providerName" type:"string"`
-
-	// The AWS Region where the connection is located.
-	Region *string `locationName:"region" type:"string"`
-
-	// The tags associated with the connection.
-	Tags []Tag `locationName:"tags" min:"1" type:"list"`
-
-	// The ID of the VLAN.
-	Vlan *int64 `locationName:"vlan" type:"integer"`
-}
-
-// String returns the string representation
-func (s AssociateHostedConnectionOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opAssociateHostedConnection = "AssociateHostedConnection"
 
@@ -153,7 +30,7 @@ const opAssociateHostedConnection = "AssociateHostedConnection"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/AssociateHostedConnection
-func (c *Client) AssociateHostedConnectionRequest(input *AssociateHostedConnectionInput) AssociateHostedConnectionRequest {
+func (c *Client) AssociateHostedConnectionRequest(input *types.AssociateHostedConnectionInput) AssociateHostedConnectionRequest {
 	op := &aws.Operation{
 		Name:       opAssociateHostedConnection,
 		HTTPMethod: "POST",
@@ -161,10 +38,10 @@ func (c *Client) AssociateHostedConnectionRequest(input *AssociateHostedConnecti
 	}
 
 	if input == nil {
-		input = &AssociateHostedConnectionInput{}
+		input = &types.AssociateHostedConnectionInput{}
 	}
 
-	req := c.newRequest(op, input, &AssociateHostedConnectionOutput{})
+	req := c.newRequest(op, input, &types.AssociateHostedConnectionOutput{})
 	return AssociateHostedConnectionRequest{Request: req, Input: input, Copy: c.AssociateHostedConnectionRequest}
 }
 
@@ -172,8 +49,8 @@ func (c *Client) AssociateHostedConnectionRequest(input *AssociateHostedConnecti
 // AssociateHostedConnection API operation.
 type AssociateHostedConnectionRequest struct {
 	*aws.Request
-	Input *AssociateHostedConnectionInput
-	Copy  func(*AssociateHostedConnectionInput) AssociateHostedConnectionRequest
+	Input *types.AssociateHostedConnectionInput
+	Copy  func(*types.AssociateHostedConnectionInput) AssociateHostedConnectionRequest
 }
 
 // Send marshals and sends the AssociateHostedConnection API request.
@@ -185,7 +62,7 @@ func (r AssociateHostedConnectionRequest) Send(ctx context.Context) (*AssociateH
 	}
 
 	resp := &AssociateHostedConnectionResponse{
-		AssociateHostedConnectionOutput: r.Request.Data.(*AssociateHostedConnectionOutput),
+		AssociateHostedConnectionOutput: r.Request.Data.(*types.AssociateHostedConnectionOutput),
 		response:                        &aws.Response{Request: r.Request},
 	}
 
@@ -195,7 +72,7 @@ func (r AssociateHostedConnectionRequest) Send(ctx context.Context) (*AssociateH
 // AssociateHostedConnectionResponse is the response type for the
 // AssociateHostedConnection API operation.
 type AssociateHostedConnectionResponse struct {
-	*AssociateHostedConnectionOutput
+	*types.AssociateHostedConnectionOutput
 
 	response *aws.Response
 }

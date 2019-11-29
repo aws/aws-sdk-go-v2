@@ -6,38 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/lightsail/types"
 )
-
-type GetRelationalDatabaseBlueprintsInput struct {
-	_ struct{} `type:"structure"`
-
-	// A token used for advancing to a specific page of results for your get relational
-	// database blueprints request.
-	PageToken *string `locationName:"pageToken" type:"string"`
-}
-
-// String returns the string representation
-func (s GetRelationalDatabaseBlueprintsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type GetRelationalDatabaseBlueprintsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// An object describing the result of your get relational database blueprints
-	// request.
-	Blueprints []RelationalDatabaseBlueprint `locationName:"blueprints" type:"list"`
-
-	// A token used for advancing to the next page of results of your get relational
-	// database blueprints request.
-	NextPageToken *string `locationName:"nextPageToken" type:"string"`
-}
-
-// String returns the string representation
-func (s GetRelationalDatabaseBlueprintsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetRelationalDatabaseBlueprints = "GetRelationalDatabaseBlueprints"
 
@@ -58,7 +28,7 @@ const opGetRelationalDatabaseBlueprints = "GetRelationalDatabaseBlueprints"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetRelationalDatabaseBlueprints
-func (c *Client) GetRelationalDatabaseBlueprintsRequest(input *GetRelationalDatabaseBlueprintsInput) GetRelationalDatabaseBlueprintsRequest {
+func (c *Client) GetRelationalDatabaseBlueprintsRequest(input *types.GetRelationalDatabaseBlueprintsInput) GetRelationalDatabaseBlueprintsRequest {
 	op := &aws.Operation{
 		Name:       opGetRelationalDatabaseBlueprints,
 		HTTPMethod: "POST",
@@ -66,10 +36,10 @@ func (c *Client) GetRelationalDatabaseBlueprintsRequest(input *GetRelationalData
 	}
 
 	if input == nil {
-		input = &GetRelationalDatabaseBlueprintsInput{}
+		input = &types.GetRelationalDatabaseBlueprintsInput{}
 	}
 
-	req := c.newRequest(op, input, &GetRelationalDatabaseBlueprintsOutput{})
+	req := c.newRequest(op, input, &types.GetRelationalDatabaseBlueprintsOutput{})
 	return GetRelationalDatabaseBlueprintsRequest{Request: req, Input: input, Copy: c.GetRelationalDatabaseBlueprintsRequest}
 }
 
@@ -77,8 +47,8 @@ func (c *Client) GetRelationalDatabaseBlueprintsRequest(input *GetRelationalData
 // GetRelationalDatabaseBlueprints API operation.
 type GetRelationalDatabaseBlueprintsRequest struct {
 	*aws.Request
-	Input *GetRelationalDatabaseBlueprintsInput
-	Copy  func(*GetRelationalDatabaseBlueprintsInput) GetRelationalDatabaseBlueprintsRequest
+	Input *types.GetRelationalDatabaseBlueprintsInput
+	Copy  func(*types.GetRelationalDatabaseBlueprintsInput) GetRelationalDatabaseBlueprintsRequest
 }
 
 // Send marshals and sends the GetRelationalDatabaseBlueprints API request.
@@ -90,7 +60,7 @@ func (r GetRelationalDatabaseBlueprintsRequest) Send(ctx context.Context) (*GetR
 	}
 
 	resp := &GetRelationalDatabaseBlueprintsResponse{
-		GetRelationalDatabaseBlueprintsOutput: r.Request.Data.(*GetRelationalDatabaseBlueprintsOutput),
+		GetRelationalDatabaseBlueprintsOutput: r.Request.Data.(*types.GetRelationalDatabaseBlueprintsOutput),
 		response:                              &aws.Response{Request: r.Request},
 	}
 
@@ -100,7 +70,7 @@ func (r GetRelationalDatabaseBlueprintsRequest) Send(ctx context.Context) (*GetR
 // GetRelationalDatabaseBlueprintsResponse is the response type for the
 // GetRelationalDatabaseBlueprints API operation.
 type GetRelationalDatabaseBlueprintsResponse struct {
-	*GetRelationalDatabaseBlueprintsOutput
+	*types.GetRelationalDatabaseBlueprintsOutput
 
 	response *aws.Response
 }

@@ -6,26 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/shield/types"
 )
-
-type DisassociateDRTRoleInput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DisassociateDRTRoleInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type DisassociateDRTRoleOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DisassociateDRTRoleOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDisassociateDRTRole = "DisassociateDRTRole"
 
@@ -49,7 +31,7 @@ const opDisassociateDRTRole = "DisassociateDRTRole"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/DisassociateDRTRole
-func (c *Client) DisassociateDRTRoleRequest(input *DisassociateDRTRoleInput) DisassociateDRTRoleRequest {
+func (c *Client) DisassociateDRTRoleRequest(input *types.DisassociateDRTRoleInput) DisassociateDRTRoleRequest {
 	op := &aws.Operation{
 		Name:       opDisassociateDRTRole,
 		HTTPMethod: "POST",
@@ -57,10 +39,10 @@ func (c *Client) DisassociateDRTRoleRequest(input *DisassociateDRTRoleInput) Dis
 	}
 
 	if input == nil {
-		input = &DisassociateDRTRoleInput{}
+		input = &types.DisassociateDRTRoleInput{}
 	}
 
-	req := c.newRequest(op, input, &DisassociateDRTRoleOutput{})
+	req := c.newRequest(op, input, &types.DisassociateDRTRoleOutput{})
 	return DisassociateDRTRoleRequest{Request: req, Input: input, Copy: c.DisassociateDRTRoleRequest}
 }
 
@@ -68,8 +50,8 @@ func (c *Client) DisassociateDRTRoleRequest(input *DisassociateDRTRoleInput) Dis
 // DisassociateDRTRole API operation.
 type DisassociateDRTRoleRequest struct {
 	*aws.Request
-	Input *DisassociateDRTRoleInput
-	Copy  func(*DisassociateDRTRoleInput) DisassociateDRTRoleRequest
+	Input *types.DisassociateDRTRoleInput
+	Copy  func(*types.DisassociateDRTRoleInput) DisassociateDRTRoleRequest
 }
 
 // Send marshals and sends the DisassociateDRTRole API request.
@@ -81,7 +63,7 @@ func (r DisassociateDRTRoleRequest) Send(ctx context.Context) (*DisassociateDRTR
 	}
 
 	resp := &DisassociateDRTRoleResponse{
-		DisassociateDRTRoleOutput: r.Request.Data.(*DisassociateDRTRoleOutput),
+		DisassociateDRTRoleOutput: r.Request.Data.(*types.DisassociateDRTRoleOutput),
 		response:                  &aws.Response{Request: r.Request},
 	}
 
@@ -91,7 +73,7 @@ func (r DisassociateDRTRoleRequest) Send(ctx context.Context) (*DisassociateDRTR
 // DisassociateDRTRoleResponse is the response type for the
 // DisassociateDRTRole API operation.
 type DisassociateDRTRoleResponse struct {
-	*DisassociateDRTRoleOutput
+	*types.DisassociateDRTRoleOutput
 
 	response *aws.Response
 }

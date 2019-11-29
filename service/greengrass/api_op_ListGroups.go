@@ -6,80 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/greengrass/types"
 )
-
-type ListGroupsInput struct {
-	_ struct{} `type:"structure"`
-
-	MaxResults *string `location:"querystring" locationName:"MaxResults" type:"string"`
-
-	NextToken *string `location:"querystring" locationName:"NextToken" type:"string"`
-}
-
-// String returns the string representation
-func (s ListGroupsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListGroupsInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.MaxResults != nil {
-		v := *s.MaxResults
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "MaxResults", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type ListGroupsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Information about a group.
-	Groups []GroupInformation `type:"list"`
-
-	// The token for the next set of results, or ''null'' if there are no additional
-	// results.
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s ListGroupsOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListGroupsOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.Groups != nil {
-		v := s.Groups
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "Groups", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opListGroups = "ListGroups"
 
@@ -96,7 +24,7 @@ const opListGroups = "ListGroups"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/ListGroups
-func (c *Client) ListGroupsRequest(input *ListGroupsInput) ListGroupsRequest {
+func (c *Client) ListGroupsRequest(input *types.ListGroupsInput) ListGroupsRequest {
 	op := &aws.Operation{
 		Name:       opListGroups,
 		HTTPMethod: "GET",
@@ -104,10 +32,10 @@ func (c *Client) ListGroupsRequest(input *ListGroupsInput) ListGroupsRequest {
 	}
 
 	if input == nil {
-		input = &ListGroupsInput{}
+		input = &types.ListGroupsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListGroupsOutput{})
+	req := c.newRequest(op, input, &types.ListGroupsOutput{})
 	return ListGroupsRequest{Request: req, Input: input, Copy: c.ListGroupsRequest}
 }
 
@@ -115,8 +43,8 @@ func (c *Client) ListGroupsRequest(input *ListGroupsInput) ListGroupsRequest {
 // ListGroups API operation.
 type ListGroupsRequest struct {
 	*aws.Request
-	Input *ListGroupsInput
-	Copy  func(*ListGroupsInput) ListGroupsRequest
+	Input *types.ListGroupsInput
+	Copy  func(*types.ListGroupsInput) ListGroupsRequest
 }
 
 // Send marshals and sends the ListGroups API request.
@@ -128,7 +56,7 @@ func (r ListGroupsRequest) Send(ctx context.Context) (*ListGroupsResponse, error
 	}
 
 	resp := &ListGroupsResponse{
-		ListGroupsOutput: r.Request.Data.(*ListGroupsOutput),
+		ListGroupsOutput: r.Request.Data.(*types.ListGroupsOutput),
 		response:         &aws.Response{Request: r.Request},
 	}
 
@@ -138,7 +66,7 @@ func (r ListGroupsRequest) Send(ctx context.Context) (*ListGroupsResponse, error
 // ListGroupsResponse is the response type for the
 // ListGroups API operation.
 type ListGroupsResponse struct {
-	*ListGroupsOutput
+	*types.ListGroupsOutput
 
 	response *aws.Response
 }

@@ -11,6 +11,7 @@ import (
 	request "github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting/unit"
 	"github.com/aws/aws-sdk-go-v2/service/machinelearning"
+	"github.com/aws/aws-sdk-go-v2/service/machinelearning/types"
 )
 
 func TestPredictEndpoint(t *testing.T) {
@@ -24,7 +25,7 @@ func TestPredictEndpoint(t *testing.T) {
 		}
 	})
 
-	req := ml.PredictRequest(&machinelearning.PredictInput{
+	req := ml.PredictRequest(&types.PredictInput{
 		PredictEndpoint: aws.String("https://localhost/endpoint"),
 		MLModelId:       aws.String("id"),
 		Record:          map[string]string{},

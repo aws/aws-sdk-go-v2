@@ -4,75 +4,10 @@ package sagemaker
 
 import (
 	"context"
-	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
 )
-
-type ListAlgorithmsInput struct {
-	_ struct{} `type:"structure"`
-
-	// A filter that returns only algorithms created after the specified time (timestamp).
-	CreationTimeAfter *time.Time `type:"timestamp"`
-
-	// A filter that returns only algorithms created before the specified time (timestamp).
-	CreationTimeBefore *time.Time `type:"timestamp"`
-
-	// The maximum number of algorithms to return in the response.
-	MaxResults *int64 `min:"1" type:"integer"`
-
-	// A string in the algorithm name. This filter returns only algorithms whose
-	// name contains the specified string.
-	NameContains *string `type:"string"`
-
-	// If the response to a previous ListAlgorithms request was truncated, the response
-	// includes a NextToken. To retrieve the next set of algorithms, use the token
-	// in the next request.
-	NextToken *string `type:"string"`
-
-	// The parameter by which to sort the results. The default is CreationTime.
-	SortBy AlgorithmSortBy `type:"string" enum:"true"`
-
-	// The sort order for the results. The default is Ascending.
-	SortOrder SortOrder `type:"string" enum:"true"`
-}
-
-// String returns the string representation
-func (s ListAlgorithmsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListAlgorithmsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListAlgorithmsInput"}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ListAlgorithmsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// >An array of AlgorithmSummary objects, each of which lists an algorithm.
-	//
-	// AlgorithmSummaryList is a required field
-	AlgorithmSummaryList []AlgorithmSummary `type:"list" required:"true"`
-
-	// If the response is truncated, Amazon SageMaker returns this token. To retrieve
-	// the next set of algorithms, use it in the subsequent request.
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s ListAlgorithmsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListAlgorithms = "ListAlgorithms"
 
@@ -89,7 +24,7 @@ const opListAlgorithms = "ListAlgorithms"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListAlgorithms
-func (c *Client) ListAlgorithmsRequest(input *ListAlgorithmsInput) ListAlgorithmsRequest {
+func (c *Client) ListAlgorithmsRequest(input *types.ListAlgorithmsInput) ListAlgorithmsRequest {
 	op := &aws.Operation{
 		Name:       opListAlgorithms,
 		HTTPMethod: "POST",
@@ -97,10 +32,10 @@ func (c *Client) ListAlgorithmsRequest(input *ListAlgorithmsInput) ListAlgorithm
 	}
 
 	if input == nil {
-		input = &ListAlgorithmsInput{}
+		input = &types.ListAlgorithmsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListAlgorithmsOutput{})
+	req := c.newRequest(op, input, &types.ListAlgorithmsOutput{})
 	return ListAlgorithmsRequest{Request: req, Input: input, Copy: c.ListAlgorithmsRequest}
 }
 
@@ -108,8 +43,8 @@ func (c *Client) ListAlgorithmsRequest(input *ListAlgorithmsInput) ListAlgorithm
 // ListAlgorithms API operation.
 type ListAlgorithmsRequest struct {
 	*aws.Request
-	Input *ListAlgorithmsInput
-	Copy  func(*ListAlgorithmsInput) ListAlgorithmsRequest
+	Input *types.ListAlgorithmsInput
+	Copy  func(*types.ListAlgorithmsInput) ListAlgorithmsRequest
 }
 
 // Send marshals and sends the ListAlgorithms API request.
@@ -121,7 +56,7 @@ func (r ListAlgorithmsRequest) Send(ctx context.Context) (*ListAlgorithmsRespons
 	}
 
 	resp := &ListAlgorithmsResponse{
-		ListAlgorithmsOutput: r.Request.Data.(*ListAlgorithmsOutput),
+		ListAlgorithmsOutput: r.Request.Data.(*types.ListAlgorithmsOutput),
 		response:             &aws.Response{Request: r.Request},
 	}
 
@@ -131,7 +66,7 @@ func (r ListAlgorithmsRequest) Send(ctx context.Context) (*ListAlgorithmsRespons
 // ListAlgorithmsResponse is the response type for the
 // ListAlgorithms API operation.
 type ListAlgorithmsResponse struct {
-	*ListAlgorithmsOutput
+	*types.ListAlgorithmsOutput
 
 	response *aws.Response
 }

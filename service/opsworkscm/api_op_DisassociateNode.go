@@ -6,70 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/opsworkscm/types"
 )
-
-type DisassociateNodeInput struct {
-	_ struct{} `type:"structure"`
-
-	// Engine attributes that are used for disassociating the node. No attributes
-	// are required for Puppet.
-	//
-	// Attributes required in a DisassociateNode request for Chef
-	//
-	//    * CHEF_ORGANIZATION: The Chef organization with which the node was associated.
-	//    By default only one organization named default can exist.
-	EngineAttributes []EngineAttribute `type:"list"`
-
-	// The name of the client node.
-	//
-	// NodeName is a required field
-	NodeName *string `type:"string" required:"true"`
-
-	// The name of the server from which to disassociate the node.
-	//
-	// ServerName is a required field
-	ServerName *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DisassociateNodeInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DisassociateNodeInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DisassociateNodeInput"}
-
-	if s.NodeName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("NodeName"))
-	}
-
-	if s.ServerName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ServerName"))
-	}
-	if s.ServerName != nil && len(*s.ServerName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ServerName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DisassociateNodeOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Contains a token which can be passed to the DescribeNodeAssociationStatus
-	// API call to get the status of the disassociation request.
-	NodeAssociationStatusToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s DisassociateNodeOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDisassociateNode = "DisassociateNode"
 
@@ -94,7 +32,7 @@ const opDisassociateNode = "DisassociateNode"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/DisassociateNode
-func (c *Client) DisassociateNodeRequest(input *DisassociateNodeInput) DisassociateNodeRequest {
+func (c *Client) DisassociateNodeRequest(input *types.DisassociateNodeInput) DisassociateNodeRequest {
 	op := &aws.Operation{
 		Name:       opDisassociateNode,
 		HTTPMethod: "POST",
@@ -102,10 +40,10 @@ func (c *Client) DisassociateNodeRequest(input *DisassociateNodeInput) Disassoci
 	}
 
 	if input == nil {
-		input = &DisassociateNodeInput{}
+		input = &types.DisassociateNodeInput{}
 	}
 
-	req := c.newRequest(op, input, &DisassociateNodeOutput{})
+	req := c.newRequest(op, input, &types.DisassociateNodeOutput{})
 	return DisassociateNodeRequest{Request: req, Input: input, Copy: c.DisassociateNodeRequest}
 }
 
@@ -113,8 +51,8 @@ func (c *Client) DisassociateNodeRequest(input *DisassociateNodeInput) Disassoci
 // DisassociateNode API operation.
 type DisassociateNodeRequest struct {
 	*aws.Request
-	Input *DisassociateNodeInput
-	Copy  func(*DisassociateNodeInput) DisassociateNodeRequest
+	Input *types.DisassociateNodeInput
+	Copy  func(*types.DisassociateNodeInput) DisassociateNodeRequest
 }
 
 // Send marshals and sends the DisassociateNode API request.
@@ -126,7 +64,7 @@ func (r DisassociateNodeRequest) Send(ctx context.Context) (*DisassociateNodeRes
 	}
 
 	resp := &DisassociateNodeResponse{
-		DisassociateNodeOutput: r.Request.Data.(*DisassociateNodeOutput),
+		DisassociateNodeOutput: r.Request.Data.(*types.DisassociateNodeOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -136,7 +74,7 @@ func (r DisassociateNodeRequest) Send(ctx context.Context) (*DisassociateNodeRes
 // DisassociateNodeResponse is the response type for the
 // DisassociateNode API operation.
 type DisassociateNodeResponse struct {
-	*DisassociateNodeOutput
+	*types.DisassociateNodeOutput
 
 	response *aws.Response
 }

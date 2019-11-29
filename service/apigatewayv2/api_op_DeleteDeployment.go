@@ -6,76 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/restjson"
+	"github.com/aws/aws-sdk-go-v2/service/apigatewayv2/types"
 )
-
-type DeleteDeploymentInput struct {
-	_ struct{} `type:"structure"`
-
-	// ApiId is a required field
-	ApiId *string `location:"uri" locationName:"apiId" type:"string" required:"true"`
-
-	// DeploymentId is a required field
-	DeploymentId *string `location:"uri" locationName:"deploymentId" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteDeploymentInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteDeploymentInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteDeploymentInput"}
-
-	if s.ApiId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ApiId"))
-	}
-
-	if s.DeploymentId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DeploymentId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteDeploymentInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.ApiId != nil {
-		v := *s.ApiId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "apiId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.DeploymentId != nil {
-		v := *s.DeploymentId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "deploymentId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type DeleteDeploymentOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteDeploymentOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteDeploymentOutput) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
 
 const opDeleteDeployment = "DeleteDeployment"
 
@@ -92,7 +26,7 @@ const opDeleteDeployment = "DeleteDeployment"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/apigatewayv2-2018-11-29/DeleteDeployment
-func (c *Client) DeleteDeploymentRequest(input *DeleteDeploymentInput) DeleteDeploymentRequest {
+func (c *Client) DeleteDeploymentRequest(input *types.DeleteDeploymentInput) DeleteDeploymentRequest {
 	op := &aws.Operation{
 		Name:       opDeleteDeployment,
 		HTTPMethod: "DELETE",
@@ -100,10 +34,10 @@ func (c *Client) DeleteDeploymentRequest(input *DeleteDeploymentInput) DeleteDep
 	}
 
 	if input == nil {
-		input = &DeleteDeploymentInput{}
+		input = &types.DeleteDeploymentInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteDeploymentOutput{})
+	req := c.newRequest(op, input, &types.DeleteDeploymentOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return DeleteDeploymentRequest{Request: req, Input: input, Copy: c.DeleteDeploymentRequest}
@@ -113,8 +47,8 @@ func (c *Client) DeleteDeploymentRequest(input *DeleteDeploymentInput) DeleteDep
 // DeleteDeployment API operation.
 type DeleteDeploymentRequest struct {
 	*aws.Request
-	Input *DeleteDeploymentInput
-	Copy  func(*DeleteDeploymentInput) DeleteDeploymentRequest
+	Input *types.DeleteDeploymentInput
+	Copy  func(*types.DeleteDeploymentInput) DeleteDeploymentRequest
 }
 
 // Send marshals and sends the DeleteDeployment API request.
@@ -126,7 +60,7 @@ func (r DeleteDeploymentRequest) Send(ctx context.Context) (*DeleteDeploymentRes
 	}
 
 	resp := &DeleteDeploymentResponse{
-		DeleteDeploymentOutput: r.Request.Data.(*DeleteDeploymentOutput),
+		DeleteDeploymentOutput: r.Request.Data.(*types.DeleteDeploymentOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -136,7 +70,7 @@ func (r DeleteDeploymentRequest) Send(ctx context.Context) (*DeleteDeploymentRes
 // DeleteDeploymentResponse is the response type for the
 // DeleteDeployment API operation.
 type DeleteDeploymentResponse struct {
-	*DeleteDeploymentOutput
+	*types.DeleteDeploymentOutput
 
 	response *aws.Response
 }

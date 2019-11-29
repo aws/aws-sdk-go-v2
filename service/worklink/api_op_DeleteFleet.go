@@ -6,67 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/worklink/types"
 )
-
-type DeleteFleetInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ARN of the fleet.
-	//
-	// FleetArn is a required field
-	FleetArn *string `min:"20" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteFleetInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteFleetInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteFleetInput"}
-
-	if s.FleetArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("FleetArn"))
-	}
-	if s.FleetArn != nil && len(*s.FleetArn) < 20 {
-		invalidParams.Add(aws.NewErrParamMinLen("FleetArn", 20))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteFleetInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.FleetArn != nil {
-		v := *s.FleetArn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "FleetArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type DeleteFleetOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteFleetOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteFleetOutput) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
 
 const opDeleteFleet = "DeleteFleet"
 
@@ -83,7 +24,7 @@ const opDeleteFleet = "DeleteFleet"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/worklink-2018-09-25/DeleteFleet
-func (c *Client) DeleteFleetRequest(input *DeleteFleetInput) DeleteFleetRequest {
+func (c *Client) DeleteFleetRequest(input *types.DeleteFleetInput) DeleteFleetRequest {
 	op := &aws.Operation{
 		Name:       opDeleteFleet,
 		HTTPMethod: "POST",
@@ -91,10 +32,10 @@ func (c *Client) DeleteFleetRequest(input *DeleteFleetInput) DeleteFleetRequest 
 	}
 
 	if input == nil {
-		input = &DeleteFleetInput{}
+		input = &types.DeleteFleetInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteFleetOutput{})
+	req := c.newRequest(op, input, &types.DeleteFleetOutput{})
 	return DeleteFleetRequest{Request: req, Input: input, Copy: c.DeleteFleetRequest}
 }
 
@@ -102,8 +43,8 @@ func (c *Client) DeleteFleetRequest(input *DeleteFleetInput) DeleteFleetRequest 
 // DeleteFleet API operation.
 type DeleteFleetRequest struct {
 	*aws.Request
-	Input *DeleteFleetInput
-	Copy  func(*DeleteFleetInput) DeleteFleetRequest
+	Input *types.DeleteFleetInput
+	Copy  func(*types.DeleteFleetInput) DeleteFleetRequest
 }
 
 // Send marshals and sends the DeleteFleet API request.
@@ -115,7 +56,7 @@ func (r DeleteFleetRequest) Send(ctx context.Context) (*DeleteFleetResponse, err
 	}
 
 	resp := &DeleteFleetResponse{
-		DeleteFleetOutput: r.Request.Data.(*DeleteFleetOutput),
+		DeleteFleetOutput: r.Request.Data.(*types.DeleteFleetOutput),
 		response:          &aws.Response{Request: r.Request},
 	}
 
@@ -125,7 +66,7 @@ func (r DeleteFleetRequest) Send(ctx context.Context) (*DeleteFleetResponse, err
 // DeleteFleetResponse is the response type for the
 // DeleteFleet API operation.
 type DeleteFleetResponse struct {
-	*DeleteFleetOutput
+	*types.DeleteFleetOutput
 
 	response *aws.Response
 }

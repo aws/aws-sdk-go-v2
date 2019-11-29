@@ -6,50 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
+	"github.com/aws/aws-sdk-go-v2/service/inspector/types"
 )
-
-type DeleteAssessmentRunInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ARN that specifies the assessment run that you want to delete.
-	//
-	// AssessmentRunArn is a required field
-	AssessmentRunArn *string `locationName:"assessmentRunArn" min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteAssessmentRunInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteAssessmentRunInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteAssessmentRunInput"}
-
-	if s.AssessmentRunArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("AssessmentRunArn"))
-	}
-	if s.AssessmentRunArn != nil && len(*s.AssessmentRunArn) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("AssessmentRunArn", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteAssessmentRunOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteAssessmentRunOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteAssessmentRun = "DeleteAssessmentRun"
 
@@ -67,7 +27,7 @@ const opDeleteAssessmentRun = "DeleteAssessmentRun"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/DeleteAssessmentRun
-func (c *Client) DeleteAssessmentRunRequest(input *DeleteAssessmentRunInput) DeleteAssessmentRunRequest {
+func (c *Client) DeleteAssessmentRunRequest(input *types.DeleteAssessmentRunInput) DeleteAssessmentRunRequest {
 	op := &aws.Operation{
 		Name:       opDeleteAssessmentRun,
 		HTTPMethod: "POST",
@@ -75,10 +35,10 @@ func (c *Client) DeleteAssessmentRunRequest(input *DeleteAssessmentRunInput) Del
 	}
 
 	if input == nil {
-		input = &DeleteAssessmentRunInput{}
+		input = &types.DeleteAssessmentRunInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteAssessmentRunOutput{})
+	req := c.newRequest(op, input, &types.DeleteAssessmentRunOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return DeleteAssessmentRunRequest{Request: req, Input: input, Copy: c.DeleteAssessmentRunRequest}
@@ -88,8 +48,8 @@ func (c *Client) DeleteAssessmentRunRequest(input *DeleteAssessmentRunInput) Del
 // DeleteAssessmentRun API operation.
 type DeleteAssessmentRunRequest struct {
 	*aws.Request
-	Input *DeleteAssessmentRunInput
-	Copy  func(*DeleteAssessmentRunInput) DeleteAssessmentRunRequest
+	Input *types.DeleteAssessmentRunInput
+	Copy  func(*types.DeleteAssessmentRunInput) DeleteAssessmentRunRequest
 }
 
 // Send marshals and sends the DeleteAssessmentRun API request.
@@ -101,7 +61,7 @@ func (r DeleteAssessmentRunRequest) Send(ctx context.Context) (*DeleteAssessment
 	}
 
 	resp := &DeleteAssessmentRunResponse{
-		DeleteAssessmentRunOutput: r.Request.Data.(*DeleteAssessmentRunOutput),
+		DeleteAssessmentRunOutput: r.Request.Data.(*types.DeleteAssessmentRunOutput),
 		response:                  &aws.Response{Request: r.Request},
 	}
 
@@ -111,7 +71,7 @@ func (r DeleteAssessmentRunRequest) Send(ctx context.Context) (*DeleteAssessment
 // DeleteAssessmentRunResponse is the response type for the
 // DeleteAssessmentRun API operation.
 type DeleteAssessmentRunResponse struct {
-	*DeleteAssessmentRunOutput
+	*types.DeleteAssessmentRunOutput
 
 	response *aws.Response
 }

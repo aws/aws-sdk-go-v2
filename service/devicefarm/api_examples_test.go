@@ -12,6 +12,8 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws/awserr"
 	"github.com/aws/aws-sdk-go-v2/aws/external"
 	"github.com/aws/aws-sdk-go-v2/service/devicefarm"
+	"github.com/aws/aws-sdk-go-v2/service/devicefarm/enums"
+	"github.com/aws/aws-sdk-go-v2/service/devicefarm/types"
 )
 
 var _ time.Duration
@@ -37,7 +39,7 @@ func ExampleClient_CreateDevicePoolRequest_shared00() {
 	}
 
 	svc := devicefarm.New(cfg)
-	input := &devicefarm.CreateDevicePoolInput{
+	input := &types.CreateDevicePoolInput{
 		Description: aws.String("My Android devices"),
 		Name:        aws.String("MyDevicePool"),
 		ProjectArn:  aws.String("arn:aws:devicefarm:us-west-2:123456789101:project:EXAMPLE-GUID-123-456"),
@@ -80,7 +82,7 @@ func ExampleClient_CreateProjectRequest_shared00() {
 	}
 
 	svc := devicefarm.New(cfg)
-	input := &devicefarm.CreateProjectInput{
+	input := &types.CreateProjectInput{
 		Name: aws.String("MyProject"),
 	}
 
@@ -123,9 +125,9 @@ func ExampleClient_CreateRemoteAccessSessionRequest_shared00() {
 	}
 
 	svc := devicefarm.New(cfg)
-	input := &devicefarm.CreateRemoteAccessSessionInput{
-		Configuration: &devicefarm.CreateRemoteAccessSessionConfiguration{
-			BillingMethod: devicefarm.BillingMethodMetered,
+	input := &types.CreateRemoteAccessSessionInput{
+		Configuration: &types.CreateRemoteAccessSessionConfiguration{
+			BillingMethod: enums.BillingMethodMetered,
 		},
 		DeviceArn:  aws.String("arn:aws:devicefarm:us-west-2::device:123EXAMPLE"),
 		Name:       aws.String("MySession"),
@@ -170,10 +172,10 @@ func ExampleClient_CreateUploadRequest_shared00() {
 	}
 
 	svc := devicefarm.New(cfg)
-	input := &devicefarm.CreateUploadInput{
+	input := &types.CreateUploadInput{
 		Name:       aws.String("MyAppiumPythonUpload"),
 		ProjectArn: aws.String("arn:aws:devicefarm:us-west-2:123456789101:project:EXAMPLE-GUID-123-456"),
-		Type:       devicefarm.UploadTypeAppiumPythonTestPackage,
+		Type:       enums.UploadTypeAppiumPythonTestPackage,
 	}
 
 	req := svc.CreateUploadRequest(input)
@@ -213,7 +215,7 @@ func ExampleClient_DeleteDevicePoolRequest_shared00() {
 	}
 
 	svc := devicefarm.New(cfg)
-	input := &devicefarm.DeleteDevicePoolInput{
+	input := &types.DeleteDevicePoolInput{
 		Arn: aws.String("arn:aws:devicefarm:us-west-2::devicepool:123-456-EXAMPLE-GUID"),
 	}
 
@@ -254,7 +256,7 @@ func ExampleClient_DeleteProjectRequest_shared00() {
 	}
 
 	svc := devicefarm.New(cfg)
-	input := &devicefarm.DeleteProjectInput{
+	input := &types.DeleteProjectInput{
 		Arn: aws.String("arn:aws:devicefarm:us-west-2:123456789101:project:EXAMPLE-GUID-123-456"),
 	}
 
@@ -295,7 +297,7 @@ func ExampleClient_DeleteRemoteAccessSessionRequest_shared00() {
 	}
 
 	svc := devicefarm.New(cfg)
-	input := &devicefarm.DeleteRemoteAccessSessionInput{
+	input := &types.DeleteRemoteAccessSessionInput{
 		Arn: aws.String("arn:aws:devicefarm:us-west-2:123456789101:session:EXAMPLE-GUID-123-456"),
 	}
 
@@ -336,7 +338,7 @@ func ExampleClient_DeleteRunRequest_shared00() {
 	}
 
 	svc := devicefarm.New(cfg)
-	input := &devicefarm.DeleteRunInput{
+	input := &types.DeleteRunInput{
 		Arn: aws.String("arn:aws:devicefarm:us-west-2:123456789101:run:EXAMPLE-GUID-123-456"),
 	}
 
@@ -377,7 +379,7 @@ func ExampleClient_DeleteUploadRequest_shared00() {
 	}
 
 	svc := devicefarm.New(cfg)
-	input := &devicefarm.DeleteUploadInput{
+	input := &types.DeleteUploadInput{
 		Arn: aws.String("arn:aws:devicefarm:us-west-2:123456789101:upload:EXAMPLE-GUID-123-456"),
 	}
 
@@ -418,7 +420,7 @@ func ExampleClient_GetAccountSettingsRequest_shared00() {
 	}
 
 	svc := devicefarm.New(cfg)
-	input := &devicefarm.GetAccountSettingsInput{}
+	input := &types.GetAccountSettingsInput{}
 
 	req := svc.GetAccountSettingsRequest(input)
 	result, err := req.Send(context.Background())
@@ -457,7 +459,7 @@ func ExampleClient_GetDeviceRequest_shared00() {
 	}
 
 	svc := devicefarm.New(cfg)
-	input := &devicefarm.GetDeviceInput{
+	input := &types.GetDeviceInput{
 		Arn: aws.String("arn:aws:devicefarm:us-west-2::device:123EXAMPLE"),
 	}
 
@@ -499,7 +501,7 @@ func ExampleClient_GetDevicePoolRequest_shared00() {
 	}
 
 	svc := devicefarm.New(cfg)
-	input := &devicefarm.GetDevicePoolInput{
+	input := &types.GetDevicePoolInput{
 		Arn: aws.String("arn:aws:devicefarm:us-west-2:123456789101:project:EXAMPLE-GUID-123-456"),
 	}
 
@@ -541,10 +543,10 @@ func ExampleClient_GetDevicePoolCompatibilityRequest_shared00() {
 	}
 
 	svc := devicefarm.New(cfg)
-	input := &devicefarm.GetDevicePoolCompatibilityInput{
+	input := &types.GetDevicePoolCompatibilityInput{
 		AppArn:        aws.String("arn:aws:devicefarm:us-west-2::app:123-456-EXAMPLE-GUID"),
 		DevicePoolArn: aws.String("arn:aws:devicefarm:us-west-2::devicepool:123-456-EXAMPLE-GUID"),
-		TestType:      devicefarm.TestTypeAppiumPython,
+		TestType:      enums.TestTypeAppiumPython,
 	}
 
 	req := svc.GetDevicePoolCompatibilityRequest(input)
@@ -584,7 +586,7 @@ func ExampleClient_GetJobRequest_shared00() {
 	}
 
 	svc := devicefarm.New(cfg)
-	input := &devicefarm.GetJobInput{
+	input := &types.GetJobInput{
 		Arn: aws.String("arn:aws:devicefarm:us-west-2::job:123-456-EXAMPLE-GUID"),
 	}
 
@@ -626,7 +628,7 @@ func ExampleClient_GetOfferingStatusRequest_shared00() {
 	}
 
 	svc := devicefarm.New(cfg)
-	input := &devicefarm.GetOfferingStatusInput{
+	input := &types.GetOfferingStatusInput{
 		NextToken: aws.String("RW5DdDJkMWYwZjM2MzM2VHVpOHJIUXlDUXlhc2QzRGViYnc9SEXAMPLE="),
 	}
 
@@ -669,7 +671,7 @@ func ExampleClient_GetProjectRequest_shared00() {
 	}
 
 	svc := devicefarm.New(cfg)
-	input := &devicefarm.GetProjectInput{
+	input := &types.GetProjectInput{
 		Arn: aws.String("arn:aws:devicefarm:us-west-2:123456789101:project:5e01a8c7-c861-4c0a-b1d5-12345EXAMPLE"),
 	}
 
@@ -710,7 +712,7 @@ func ExampleClient_GetRemoteAccessSessionRequest_shared00() {
 	}
 
 	svc := devicefarm.New(cfg)
-	input := &devicefarm.GetRemoteAccessSessionInput{
+	input := &types.GetRemoteAccessSessionInput{
 		Arn: aws.String("arn:aws:devicefarm:us-west-2:123456789101:session:EXAMPLE-GUID-123-456"),
 	}
 
@@ -751,7 +753,7 @@ func ExampleClient_GetRunRequest_shared00() {
 	}
 
 	svc := devicefarm.New(cfg)
-	input := &devicefarm.GetRunInput{
+	input := &types.GetRunInput{
 		Arn: aws.String("arn:aws:devicefarm:us-west-2:123456789101:run:5e01a8c7-c861-4c0a-b1d5-5ec6e6c6dd23/0fcac17b-6122-44d7-ae5a-12345EXAMPLE"),
 	}
 
@@ -792,7 +794,7 @@ func ExampleClient_GetSuiteRequest_shared00() {
 	}
 
 	svc := devicefarm.New(cfg)
-	input := &devicefarm.GetSuiteInput{
+	input := &types.GetSuiteInput{
 		Arn: aws.String("arn:aws:devicefarm:us-west-2:123456789101:suite:EXAMPLE-GUID-123-456"),
 	}
 
@@ -833,7 +835,7 @@ func ExampleClient_GetTestRequest_shared00() {
 	}
 
 	svc := devicefarm.New(cfg)
-	input := &devicefarm.GetTestInput{
+	input := &types.GetTestInput{
 		Arn: aws.String("arn:aws:devicefarm:us-west-2:123456789101:test:EXAMPLE-GUID-123-456"),
 	}
 
@@ -874,7 +876,7 @@ func ExampleClient_GetUploadRequest_shared00() {
 	}
 
 	svc := devicefarm.New(cfg)
-	input := &devicefarm.GetUploadInput{
+	input := &types.GetUploadInput{
 		Arn: aws.String("arn:aws:devicefarm:us-west-2:123456789101:upload:EXAMPLE-GUID-123-456"),
 	}
 
@@ -916,7 +918,7 @@ func ExampleClient_InstallToRemoteAccessSessionRequest_shared00() {
 	}
 
 	svc := devicefarm.New(cfg)
-	input := &devicefarm.InstallToRemoteAccessSessionInput{
+	input := &types.InstallToRemoteAccessSessionInput{
 		AppArn:                 aws.String("arn:aws:devicefarm:us-west-2:123456789101:app:EXAMPLE-GUID-123-456"),
 		RemoteAccessSessionArn: aws.String("arn:aws:devicefarm:us-west-2:123456789101:session:EXAMPLE-GUID-123-456"),
 	}
@@ -958,9 +960,9 @@ func ExampleClient_ListArtifactsRequest_shared00() {
 	}
 
 	svc := devicefarm.New(cfg)
-	input := &devicefarm.ListArtifactsInput{
+	input := &types.ListArtifactsInput{
 		Arn:  aws.String("arn:aws:devicefarm:us-west-2:123456789101:run:EXAMPLE-GUID-123-456"),
-		Type: devicefarm.ArtifactCategoryScreenshot,
+		Type: enums.ArtifactCategoryScreenshot,
 	}
 
 	req := svc.ListArtifactsRequest(input)
@@ -1001,9 +1003,9 @@ func ExampleClient_ListDevicePoolsRequest_shared00() {
 	}
 
 	svc := devicefarm.New(cfg)
-	input := &devicefarm.ListDevicePoolsInput{
+	input := &types.ListDevicePoolsInput{
 		Arn:  aws.String("arn:aws:devicefarm:us-west-2:123456789101:project:EXAMPLE-GUID-123-456"),
-		Type: devicefarm.DevicePoolTypePrivate,
+		Type: enums.DevicePoolTypePrivate,
 	}
 
 	req := svc.ListDevicePoolsRequest(input)
@@ -1044,7 +1046,7 @@ func ExampleClient_ListDevicesRequest_shared00() {
 	}
 
 	svc := devicefarm.New(cfg)
-	input := &devicefarm.ListDevicesInput{
+	input := &types.ListDevicesInput{
 		Arn: aws.String("arn:aws:devicefarm:us-west-2:123456789101:project:EXAMPLE-GUID-123-456"),
 	}
 
@@ -1085,7 +1087,7 @@ func ExampleClient_ListJobsRequest_shared00() {
 	}
 
 	svc := devicefarm.New(cfg)
-	input := &devicefarm.ListJobsInput{
+	input := &types.ListJobsInput{
 		Arn: aws.String("arn:aws:devicefarm:us-west-2:123456789101:project:EXAMPLE-GUID-123-456"),
 	}
 
@@ -1126,7 +1128,7 @@ func ExampleClient_ListOfferingTransactionsRequest_shared00() {
 	}
 
 	svc := devicefarm.New(cfg)
-	input := &devicefarm.ListOfferingTransactionsInput{
+	input := &types.ListOfferingTransactionsInput{
 		NextToken: aws.String("RW5DdDJkMWYwZjM2MzM2VHVpOHJIUXlDUXlhc2QzRGViYnc9SEXAMPLE="),
 	}
 
@@ -1169,7 +1171,7 @@ func ExampleClient_ListOfferingsRequest_shared00() {
 	}
 
 	svc := devicefarm.New(cfg)
-	input := &devicefarm.ListOfferingsInput{
+	input := &types.ListOfferingsInput{
 		NextToken: aws.String("RW5DdDJkMWYwZjM2MzM2VHVpOHJIUXlDUXlhc2QzRGViYnc9SEXAMPLE="),
 	}
 
@@ -1212,7 +1214,7 @@ func ExampleClient_ListProjectsRequest_shared00() {
 	}
 
 	svc := devicefarm.New(cfg)
-	input := &devicefarm.ListProjectsInput{
+	input := &types.ListProjectsInput{
 		Arn:       aws.String("arn:aws:devicefarm:us-west-2:123456789101:project:7ad300ed-8183-41a7-bf94-12345EXAMPLE"),
 		NextToken: aws.String("RW5DdDJkMWYwZjM2MzM2VHVpOHJIUXlDUXlhc2QzRGViYnc9SEXAMPLE"),
 	}
@@ -1255,7 +1257,7 @@ func ExampleClient_ListRemoteAccessSessionsRequest_shared00() {
 	}
 
 	svc := devicefarm.New(cfg)
-	input := &devicefarm.ListRemoteAccessSessionsInput{
+	input := &types.ListRemoteAccessSessionsInput{
 		Arn:       aws.String("arn:aws:devicefarm:us-west-2:123456789101:session:EXAMPLE-GUID-123-456"),
 		NextToken: aws.String("RW5DdDJkMWYwZjM2MzM2VHVpOHJIUXlDUXlhc2QzRGViYnc9SEXAMPLE="),
 	}
@@ -1297,7 +1299,7 @@ func ExampleClient_ListRunsRequest_shared00() {
 	}
 
 	svc := devicefarm.New(cfg)
-	input := &devicefarm.ListRunsInput{
+	input := &types.ListRunsInput{
 		Arn:       aws.String("arn:aws:devicefarm:us-west-2:123456789101:run:5e01a8c7-c861-4c0a-b1d5-5ec6e6c6dd23/0fcac17b-6122-44d7-ae5a-12345EXAMPLE"),
 		NextToken: aws.String("RW5DdDJkMWYwZjM2MzM2VHVpOHJIUXlDUXlhc2QzRGViYnc9SEXAMPLE"),
 	}
@@ -1340,7 +1342,7 @@ func ExampleClient_ListSamplesRequest_shared00() {
 	}
 
 	svc := devicefarm.New(cfg)
-	input := &devicefarm.ListSamplesInput{
+	input := &types.ListSamplesInput{
 		Arn:       aws.String("arn:aws:devicefarm:us-west-2:123456789101:project:EXAMPLE-GUID-123-456"),
 		NextToken: aws.String("RW5DdDJkMWYwZjM2MzM2VHVpOHJIUXlDUXlhc2QzRGViYnc9SEXAMPLE"),
 	}
@@ -1383,7 +1385,7 @@ func ExampleClient_ListSuitesRequest_shared00() {
 	}
 
 	svc := devicefarm.New(cfg)
-	input := &devicefarm.ListSuitesInput{
+	input := &types.ListSuitesInput{
 		Arn:       aws.String("arn:aws:devicefarm:us-west-2:123456789101:job:EXAMPLE-GUID-123-456"),
 		NextToken: aws.String("RW5DdDJkMWYwZjM2MzM2VHVpOHJIUXlDUXlhc2QzRGViYnc9SEXAMPLE"),
 	}
@@ -1426,7 +1428,7 @@ func ExampleClient_ListTestsRequest_shared00() {
 	}
 
 	svc := devicefarm.New(cfg)
-	input := &devicefarm.ListTestsInput{
+	input := &types.ListTestsInput{
 		Arn:       aws.String("arn:aws:devicefarm:us-west-2:123456789101:project:EXAMPLE-GUID-123-456"),
 		NextToken: aws.String("RW5DdDJkMWYwZjM2MzM2VHVpOHJIUXlDUXlhc2QzRGViYnc9SEXAMPLE"),
 	}
@@ -1469,7 +1471,7 @@ func ExampleClient_ListUniqueProblemsRequest_shared00() {
 	}
 
 	svc := devicefarm.New(cfg)
-	input := &devicefarm.ListUniqueProblemsInput{
+	input := &types.ListUniqueProblemsInput{
 		Arn:       aws.String("arn:aws:devicefarm:us-west-2:123456789101:project:EXAMPLE-GUID-123-456"),
 		NextToken: aws.String("RW5DdDJkMWYwZjM2MzM2VHVpOHJIUXlDUXlhc2QzRGViYnc9SEXAMPLE"),
 	}
@@ -1512,7 +1514,7 @@ func ExampleClient_ListUploadsRequest_shared00() {
 	}
 
 	svc := devicefarm.New(cfg)
-	input := &devicefarm.ListUploadsInput{
+	input := &types.ListUploadsInput{
 		Arn:       aws.String("arn:aws:devicefarm:us-west-2:123456789101:project:EXAMPLE-GUID-123-456"),
 		NextToken: aws.String("RW5DdDJkMWYwZjM2MzM2VHVpOHJIUXlDUXlhc2QzRGViYnc9SEXAMPLE"),
 	}
@@ -1554,7 +1556,7 @@ func ExampleClient_PurchaseOfferingRequest_shared00() {
 	}
 
 	svc := devicefarm.New(cfg)
-	input := &devicefarm.PurchaseOfferingInput{
+	input := &types.PurchaseOfferingInput{
 		OfferingId: aws.String("D68B3C05-1BA6-4360-BC69-12345EXAMPLE"),
 		Quantity:   aws.Int64(1),
 	}
@@ -1598,7 +1600,7 @@ func ExampleClient_RenewOfferingRequest_shared00() {
 	}
 
 	svc := devicefarm.New(cfg)
-	input := &devicefarm.RenewOfferingInput{
+	input := &types.RenewOfferingInput{
 		OfferingId: aws.String("D68B3C05-1BA6-4360-BC69-12345EXAMPLE"),
 		Quantity:   aws.Int64(1),
 	}
@@ -1642,13 +1644,13 @@ func ExampleClient_ScheduleRunRequest_shared00() {
 	}
 
 	svc := devicefarm.New(cfg)
-	input := &devicefarm.ScheduleRunInput{
+	input := &types.ScheduleRunInput{
 		DevicePoolArn: aws.String("arn:aws:devicefarm:us-west-2:123456789101:pool:EXAMPLE-GUID-123-456"),
 		Name:          aws.String("MyRun"),
 		ProjectArn:    aws.String("arn:aws:devicefarm:us-west-2:123456789101:project:EXAMPLE-GUID-123-456"),
-		Test: &devicefarm.ScheduleRunTest{
+		Test: &types.ScheduleRunTest{
 			TestPackageArn: aws.String("arn:aws:devicefarm:us-west-2:123456789101:test:EXAMPLE-GUID-123-456"),
-			Type:           devicefarm.TestTypeAppiumJavaJunit,
+			Type:           enums.TestTypeAppiumJavaJunit,
 		},
 	}
 
@@ -1691,7 +1693,7 @@ func ExampleClient_StopRunRequest_shared00() {
 	}
 
 	svc := devicefarm.New(cfg)
-	input := &devicefarm.StopRunInput{
+	input := &types.StopRunInput{
 		Arn: aws.String("arn:aws:devicefarm:us-west-2:123456789101:run:EXAMPLE-GUID-123-456"),
 	}
 
@@ -1733,14 +1735,14 @@ func ExampleClient_UpdateDevicePoolRequest_shared00() {
 	}
 
 	svc := devicefarm.New(cfg)
-	input := &devicefarm.UpdateDevicePoolInput{
+	input := &types.UpdateDevicePoolInput{
 		Arn:         aws.String("arn:aws:devicefarm:us-west-2::devicepool:082d10e5-d7d7-48a5-ba5c-12345EXAMPLE"),
 		Description: aws.String("NewDescription"),
 		Name:        aws.String("NewName"),
-		Rules: []devicefarm.Rule{
+		Rules: []types.Rule{
 			{
-				Attribute: devicefarm.DeviceAttributeRemoteAccessEnabled,
-				Operator:  devicefarm.RuleOperatorEquals,
+				Attribute: enums.DeviceAttributeRemoteAccessEnabled,
+				Operator:  enums.RuleOperatorEquals,
 				Value:     aws.String("True"),
 			},
 		},
@@ -1783,7 +1785,7 @@ func ExampleClient_UpdateProjectRequest_shared00() {
 	}
 
 	svc := devicefarm.New(cfg)
-	input := &devicefarm.UpdateProjectInput{
+	input := &types.UpdateProjectInput{
 		Arn:  aws.String("arn:aws:devicefarm:us-west-2:123456789101:project:8f75187d-101e-4625-accc-12345EXAMPLE"),
 		Name: aws.String("NewName"),
 	}

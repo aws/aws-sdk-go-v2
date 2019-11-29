@@ -6,55 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/query"
+	"github.com/aws/aws-sdk-go-v2/service/iam/types"
 )
-
-type DeleteAccountAliasInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the account alias to delete.
-	//
-	// This parameter allows (through its regex pattern (http://wikipedia.org/wiki/regex))
-	// a string of characters consisting of lowercase letters, digits, and dashes.
-	// You cannot start or finish with a dash, nor can you have two dashes in a
-	// row.
-	//
-	// AccountAlias is a required field
-	AccountAlias *string `min:"3" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteAccountAliasInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteAccountAliasInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteAccountAliasInput"}
-
-	if s.AccountAlias == nil {
-		invalidParams.Add(aws.NewErrParamRequired("AccountAlias"))
-	}
-	if s.AccountAlias != nil && len(*s.AccountAlias) < 3 {
-		invalidParams.Add(aws.NewErrParamMinLen("AccountAlias", 3))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteAccountAliasOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteAccountAliasOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteAccountAlias = "DeleteAccountAlias"
 
@@ -73,7 +28,7 @@ const opDeleteAccountAlias = "DeleteAccountAlias"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeleteAccountAlias
-func (c *Client) DeleteAccountAliasRequest(input *DeleteAccountAliasInput) DeleteAccountAliasRequest {
+func (c *Client) DeleteAccountAliasRequest(input *types.DeleteAccountAliasInput) DeleteAccountAliasRequest {
 	op := &aws.Operation{
 		Name:       opDeleteAccountAlias,
 		HTTPMethod: "POST",
@@ -81,10 +36,10 @@ func (c *Client) DeleteAccountAliasRequest(input *DeleteAccountAliasInput) Delet
 	}
 
 	if input == nil {
-		input = &DeleteAccountAliasInput{}
+		input = &types.DeleteAccountAliasInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteAccountAliasOutput{})
+	req := c.newRequest(op, input, &types.DeleteAccountAliasOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return DeleteAccountAliasRequest{Request: req, Input: input, Copy: c.DeleteAccountAliasRequest}
@@ -94,8 +49,8 @@ func (c *Client) DeleteAccountAliasRequest(input *DeleteAccountAliasInput) Delet
 // DeleteAccountAlias API operation.
 type DeleteAccountAliasRequest struct {
 	*aws.Request
-	Input *DeleteAccountAliasInput
-	Copy  func(*DeleteAccountAliasInput) DeleteAccountAliasRequest
+	Input *types.DeleteAccountAliasInput
+	Copy  func(*types.DeleteAccountAliasInput) DeleteAccountAliasRequest
 }
 
 // Send marshals and sends the DeleteAccountAlias API request.
@@ -107,7 +62,7 @@ func (r DeleteAccountAliasRequest) Send(ctx context.Context) (*DeleteAccountAlia
 	}
 
 	resp := &DeleteAccountAliasResponse{
-		DeleteAccountAliasOutput: r.Request.Data.(*DeleteAccountAliasOutput),
+		DeleteAccountAliasOutput: r.Request.Data.(*types.DeleteAccountAliasOutput),
 		response:                 &aws.Response{Request: r.Request},
 	}
 
@@ -117,7 +72,7 @@ func (r DeleteAccountAliasRequest) Send(ctx context.Context) (*DeleteAccountAlia
 // DeleteAccountAliasResponse is the response type for the
 // DeleteAccountAlias API operation.
 type DeleteAccountAliasResponse struct {
-	*DeleteAccountAliasOutput
+	*types.DeleteAccountAliasOutput
 
 	response *aws.Response
 }

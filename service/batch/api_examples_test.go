@@ -12,6 +12,8 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws/awserr"
 	"github.com/aws/aws-sdk-go-v2/aws/external"
 	"github.com/aws/aws-sdk-go-v2/service/batch"
+	"github.com/aws/aws-sdk-go-v2/service/batch/enums"
+	"github.com/aws/aws-sdk-go-v2/service/batch/types"
 )
 
 var _ time.Duration
@@ -36,7 +38,7 @@ func ExampleClient_CancelJobRequest_shared00() {
 	}
 
 	svc := batch.New(cfg)
-	input := &batch.CancelJobInput{
+	input := &types.CancelJobInput{
 		JobId:  aws.String("1d828f65-7a4d-42e8-996d-3b900ed59dc4"),
 		Reason: aws.String("Cancelling job."),
 	}
@@ -75,9 +77,9 @@ func ExampleClient_CreateComputeEnvironmentRequest_shared00() {
 	}
 
 	svc := batch.New(cfg)
-	input := &batch.CreateComputeEnvironmentInput{
+	input := &types.CreateComputeEnvironmentInput{
 		ComputeEnvironmentName: aws.String("C4OnDemand"),
-		ComputeResources: &batch.ComputeResource{
+		ComputeResources: &types.ComputeResource{
 			DesiredvCpus: aws.Int64(48),
 			Ec2KeyPair:   aws.String("id_rsa"),
 			InstanceRole: aws.String("ecsInstanceRole"),
@@ -101,11 +103,11 @@ func ExampleClient_CreateComputeEnvironmentRequest_shared00() {
 			Tags: map[string]string{
 				"Name": "Batch Instance - C4OnDemand",
 			},
-			Type: batch.CRTypeEc2,
+			Type: enums.CRTypeEc2,
 		},
 		ServiceRole: aws.String("arn:aws:iam::012345678910:role/AWSBatchServiceRole"),
-		State:       batch.CEStateEnabled,
-		Type:        batch.CETypeManaged,
+		State:       enums.CEStateEnabled,
+		Type:        enums.CETypeManaged,
 	}
 
 	req := svc.CreateComputeEnvironmentRequest(input)
@@ -143,9 +145,9 @@ func ExampleClient_CreateComputeEnvironmentRequest_shared01() {
 	}
 
 	svc := batch.New(cfg)
-	input := &batch.CreateComputeEnvironmentInput{
+	input := &types.CreateComputeEnvironmentInput{
 		ComputeEnvironmentName: aws.String("M4Spot"),
-		ComputeResources: &batch.ComputeResource{
+		ComputeResources: &types.ComputeResource{
 			BidPercentage: aws.Int64(20),
 			DesiredvCpus:  aws.Int64(4),
 			Ec2KeyPair:    aws.String("id_rsa"),
@@ -167,11 +169,11 @@ func ExampleClient_CreateComputeEnvironmentRequest_shared01() {
 			Tags: map[string]string{
 				"Name": "Batch Instance - M4Spot",
 			},
-			Type: batch.CRTypeSpot,
+			Type: enums.CRTypeSpot,
 		},
 		ServiceRole: aws.String("arn:aws:iam::012345678910:role/AWSBatchServiceRole"),
-		State:       batch.CEStateEnabled,
-		Type:        batch.CETypeManaged,
+		State:       enums.CEStateEnabled,
+		Type:        enums.CETypeManaged,
 	}
 
 	req := svc.CreateComputeEnvironmentRequest(input)
@@ -208,8 +210,8 @@ func ExampleClient_CreateJobQueueRequest_shared00() {
 	}
 
 	svc := batch.New(cfg)
-	input := &batch.CreateJobQueueInput{
-		ComputeEnvironmentOrder: []batch.ComputeEnvironmentOrder{
+	input := &types.CreateJobQueueInput{
+		ComputeEnvironmentOrder: []types.ComputeEnvironmentOrder{
 			{
 				ComputeEnvironment: aws.String("M4Spot"),
 				Order:              aws.Int64(1),
@@ -217,7 +219,7 @@ func ExampleClient_CreateJobQueueRequest_shared00() {
 		},
 		JobQueueName: aws.String("LowPriority"),
 		Priority:     aws.Int64(1),
-		State:        batch.JQStateEnabled,
+		State:        enums.JQStateEnabled,
 	}
 
 	req := svc.CreateJobQueueRequest(input)
@@ -255,8 +257,8 @@ func ExampleClient_CreateJobQueueRequest_shared01() {
 	}
 
 	svc := batch.New(cfg)
-	input := &batch.CreateJobQueueInput{
-		ComputeEnvironmentOrder: []batch.ComputeEnvironmentOrder{
+	input := &types.CreateJobQueueInput{
+		ComputeEnvironmentOrder: []types.ComputeEnvironmentOrder{
 			{
 				ComputeEnvironment: aws.String("C4OnDemand"),
 				Order:              aws.Int64(1),
@@ -268,7 +270,7 @@ func ExampleClient_CreateJobQueueRequest_shared01() {
 		},
 		JobQueueName: aws.String("HighPriority"),
 		Priority:     aws.Int64(10),
-		State:        batch.JQStateEnabled,
+		State:        enums.JQStateEnabled,
 	}
 
 	req := svc.CreateJobQueueRequest(input)
@@ -304,7 +306,7 @@ func ExampleClient_DeleteComputeEnvironmentRequest_shared00() {
 	}
 
 	svc := batch.New(cfg)
-	input := &batch.DeleteComputeEnvironmentInput{
+	input := &types.DeleteComputeEnvironmentInput{
 		ComputeEnvironment: aws.String("P2OnDemand"),
 	}
 
@@ -341,7 +343,7 @@ func ExampleClient_DeleteJobQueueRequest_shared00() {
 	}
 
 	svc := batch.New(cfg)
-	input := &batch.DeleteJobQueueInput{
+	input := &types.DeleteJobQueueInput{
 		JobQueue: aws.String("GPGPU"),
 	}
 
@@ -378,7 +380,7 @@ func ExampleClient_DeregisterJobDefinitionRequest_shared00() {
 	}
 
 	svc := batch.New(cfg)
-	input := &batch.DeregisterJobDefinitionInput{
+	input := &types.DeregisterJobDefinitionInput{
 		JobDefinition: aws.String("sleep10"),
 	}
 
@@ -415,7 +417,7 @@ func ExampleClient_DescribeComputeEnvironmentsRequest_shared00() {
 	}
 
 	svc := batch.New(cfg)
-	input := &batch.DescribeComputeEnvironmentsInput{
+	input := &types.DescribeComputeEnvironmentsInput{
 		ComputeEnvironments: []string{
 			"P2OnDemand",
 		},
@@ -454,7 +456,7 @@ func ExampleClient_DescribeJobDefinitionsRequest_shared00() {
 	}
 
 	svc := batch.New(cfg)
-	input := &batch.DescribeJobDefinitionsInput{
+	input := &types.DescribeJobDefinitionsInput{
 		Status: aws.String("ACTIVE"),
 	}
 
@@ -491,7 +493,7 @@ func ExampleClient_DescribeJobQueuesRequest_shared00() {
 	}
 
 	svc := batch.New(cfg)
-	input := &batch.DescribeJobQueuesInput{
+	input := &types.DescribeJobQueuesInput{
 		JobQueues: []string{
 			"HighPriority",
 		},
@@ -530,7 +532,7 @@ func ExampleClient_DescribeJobsRequest_shared00() {
 	}
 
 	svc := batch.New(cfg)
-	input := &batch.DescribeJobsInput{
+	input := &types.DescribeJobsInput{
 		Jobs: []string{
 			"24fa2d7a-64c4-49d2-8b47-f8da4fbde8e9",
 		},
@@ -569,7 +571,7 @@ func ExampleClient_ListJobsRequest_shared00() {
 	}
 
 	svc := batch.New(cfg)
-	input := &batch.ListJobsInput{
+	input := &types.ListJobsInput{
 		JobQueue: aws.String("HighPriority"),
 	}
 
@@ -607,9 +609,9 @@ func ExampleClient_ListJobsRequest_shared01() {
 	}
 
 	svc := batch.New(cfg)
-	input := &batch.ListJobsInput{
+	input := &types.ListJobsInput{
 		JobQueue:  aws.String("HighPriority"),
-		JobStatus: batch.JobStatusSubmitted,
+		JobStatus: enums.JobStatusSubmitted,
 	}
 
 	req := svc.ListJobsRequest(input)
@@ -645,8 +647,8 @@ func ExampleClient_RegisterJobDefinitionRequest_shared00() {
 	}
 
 	svc := batch.New(cfg)
-	input := &batch.RegisterJobDefinitionInput{
-		ContainerProperties: &batch.ContainerProperties{
+	input := &types.RegisterJobDefinitionInput{
+		ContainerProperties: &types.ContainerProperties{
 			Command: []string{
 				"sleep",
 				"10",
@@ -656,7 +658,7 @@ func ExampleClient_RegisterJobDefinitionRequest_shared00() {
 			Vcpus:  aws.Int64(1),
 		},
 		JobDefinitionName: aws.String("sleep10"),
-		Type:              batch.JobDefinitionTypeContainer,
+		Type:              enums.JobDefinitionTypeContainer,
 	}
 
 	req := svc.RegisterJobDefinitionRequest(input)
@@ -693,7 +695,7 @@ func ExampleClient_SubmitJobRequest_shared00() {
 	}
 
 	svc := batch.New(cfg)
-	input := &batch.SubmitJobInput{
+	input := &types.SubmitJobInput{
 		JobDefinition: aws.String("sleep60"),
 		JobName:       aws.String("example"),
 		JobQueue:      aws.String("HighPriority"),
@@ -732,7 +734,7 @@ func ExampleClient_TerminateJobRequest_shared00() {
 	}
 
 	svc := batch.New(cfg)
-	input := &batch.TerminateJobInput{
+	input := &types.TerminateJobInput{
 		JobId:  aws.String("61e743ed-35e4-48da-b2de-5c8333821c84"),
 		Reason: aws.String("Terminating job."),
 	}
@@ -770,9 +772,9 @@ func ExampleClient_UpdateComputeEnvironmentRequest_shared00() {
 	}
 
 	svc := batch.New(cfg)
-	input := &batch.UpdateComputeEnvironmentInput{
+	input := &types.UpdateComputeEnvironmentInput{
 		ComputeEnvironment: aws.String("P2OnDemand"),
-		State:              batch.CEStateDisabled,
+		State:              enums.CEStateDisabled,
 	}
 
 	req := svc.UpdateComputeEnvironmentRequest(input)
@@ -808,9 +810,9 @@ func ExampleClient_UpdateJobQueueRequest_shared00() {
 	}
 
 	svc := batch.New(cfg)
-	input := &batch.UpdateJobQueueInput{
+	input := &types.UpdateJobQueueInput{
 		JobQueue: aws.String("GPGPU"),
-		State:    batch.JQStateDisabled,
+		State:    enums.JQStateDisabled,
 	}
 
 	req := svc.UpdateJobQueueRequest(input)

@@ -6,75 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-type DescribeTransitGatewayVpcAttachmentsInput struct {
-	_ struct{} `type:"structure"`
-
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have
-	// the required permissions, the error response is DryRunOperation. Otherwise,
-	// it is UnauthorizedOperation.
-	DryRun *bool `type:"boolean"`
-
-	// One or more filters. The possible values are:
-	//
-	//    * state - The state of the attachment (available | deleted | deleting
-	//    | failed | modifying | pendingAcceptance | pending | rollingBack | rejected
-	//    | rejecting).
-	//
-	//    * transit-gateway-attachment-id - The ID of the attachment.
-	//
-	//    * transit-gateway-id - The ID of the transit gateway.
-	//
-	//    * vpc-id - The ID of the VPC.
-	Filters []Filter `locationName:"Filter" locationNameList:"Filter" type:"list"`
-
-	// The maximum number of results to return with a single call. To retrieve the
-	// remaining results, make another call with the returned nextToken value.
-	MaxResults *int64 `min:"5" type:"integer"`
-
-	// The token for the next page of results.
-	NextToken *string `type:"string"`
-
-	// The IDs of the attachments.
-	TransitGatewayAttachmentIds []string `type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeTransitGatewayVpcAttachmentsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeTransitGatewayVpcAttachmentsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeTransitGatewayVpcAttachmentsInput"}
-	if s.MaxResults != nil && *s.MaxResults < 5 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 5))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribeTransitGatewayVpcAttachmentsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The token to use to retrieve the next page of results. This value is null
-	// when there are no more results to return.
-	NextToken *string `locationName:"nextToken" type:"string"`
-
-	// Information about the VPC attachments.
-	TransitGatewayVpcAttachments []TransitGatewayVpcAttachment `locationName:"transitGatewayVpcAttachments" locationNameList:"item" type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeTransitGatewayVpcAttachmentsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeTransitGatewayVpcAttachments = "DescribeTransitGatewayVpcAttachments"
 
@@ -92,7 +25,7 @@ const opDescribeTransitGatewayVpcAttachments = "DescribeTransitGatewayVpcAttachm
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeTransitGatewayVpcAttachments
-func (c *Client) DescribeTransitGatewayVpcAttachmentsRequest(input *DescribeTransitGatewayVpcAttachmentsInput) DescribeTransitGatewayVpcAttachmentsRequest {
+func (c *Client) DescribeTransitGatewayVpcAttachmentsRequest(input *types.DescribeTransitGatewayVpcAttachmentsInput) DescribeTransitGatewayVpcAttachmentsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeTransitGatewayVpcAttachments,
 		HTTPMethod: "POST",
@@ -106,10 +39,10 @@ func (c *Client) DescribeTransitGatewayVpcAttachmentsRequest(input *DescribeTran
 	}
 
 	if input == nil {
-		input = &DescribeTransitGatewayVpcAttachmentsInput{}
+		input = &types.DescribeTransitGatewayVpcAttachmentsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeTransitGatewayVpcAttachmentsOutput{})
+	req := c.newRequest(op, input, &types.DescribeTransitGatewayVpcAttachmentsOutput{})
 	return DescribeTransitGatewayVpcAttachmentsRequest{Request: req, Input: input, Copy: c.DescribeTransitGatewayVpcAttachmentsRequest}
 }
 
@@ -117,8 +50,8 @@ func (c *Client) DescribeTransitGatewayVpcAttachmentsRequest(input *DescribeTran
 // DescribeTransitGatewayVpcAttachments API operation.
 type DescribeTransitGatewayVpcAttachmentsRequest struct {
 	*aws.Request
-	Input *DescribeTransitGatewayVpcAttachmentsInput
-	Copy  func(*DescribeTransitGatewayVpcAttachmentsInput) DescribeTransitGatewayVpcAttachmentsRequest
+	Input *types.DescribeTransitGatewayVpcAttachmentsInput
+	Copy  func(*types.DescribeTransitGatewayVpcAttachmentsInput) DescribeTransitGatewayVpcAttachmentsRequest
 }
 
 // Send marshals and sends the DescribeTransitGatewayVpcAttachments API request.
@@ -130,7 +63,7 @@ func (r DescribeTransitGatewayVpcAttachmentsRequest) Send(ctx context.Context) (
 	}
 
 	resp := &DescribeTransitGatewayVpcAttachmentsResponse{
-		DescribeTransitGatewayVpcAttachmentsOutput: r.Request.Data.(*DescribeTransitGatewayVpcAttachmentsOutput),
+		DescribeTransitGatewayVpcAttachmentsOutput: r.Request.Data.(*types.DescribeTransitGatewayVpcAttachmentsOutput),
 		response: &aws.Response{Request: r.Request},
 	}
 
@@ -160,7 +93,7 @@ func NewDescribeTransitGatewayVpcAttachmentsPaginator(req DescribeTransitGateway
 	return DescribeTransitGatewayVpcAttachmentsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *DescribeTransitGatewayVpcAttachmentsInput
+				var inCpy *types.DescribeTransitGatewayVpcAttachmentsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -180,14 +113,14 @@ type DescribeTransitGatewayVpcAttachmentsPaginator struct {
 	aws.Pager
 }
 
-func (p *DescribeTransitGatewayVpcAttachmentsPaginator) CurrentPage() *DescribeTransitGatewayVpcAttachmentsOutput {
-	return p.Pager.CurrentPage().(*DescribeTransitGatewayVpcAttachmentsOutput)
+func (p *DescribeTransitGatewayVpcAttachmentsPaginator) CurrentPage() *types.DescribeTransitGatewayVpcAttachmentsOutput {
+	return p.Pager.CurrentPage().(*types.DescribeTransitGatewayVpcAttachmentsOutput)
 }
 
 // DescribeTransitGatewayVpcAttachmentsResponse is the response type for the
 // DescribeTransitGatewayVpcAttachments API operation.
 type DescribeTransitGatewayVpcAttachmentsResponse struct {
-	*DescribeTransitGatewayVpcAttachmentsOutput
+	*types.DescribeTransitGatewayVpcAttachmentsOutput
 
 	response *aws.Response
 }

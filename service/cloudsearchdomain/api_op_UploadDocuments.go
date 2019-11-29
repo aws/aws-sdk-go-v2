@@ -4,129 +4,10 @@ package cloudsearchdomain
 
 import (
 	"context"
-	"io"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/cloudsearchdomain/types"
 )
-
-// Container for the parameters to the UploadDocuments request.
-type UploadDocumentsInput struct {
-	_ struct{} `type:"structure" payload:"Documents"`
-
-	// The format of the batch you are uploading. Amazon CloudSearch supports two
-	// document batch formats:
-	//
-	//    * application/json
-	//
-	//    * application/xml
-	//
-	// ContentType is a required field
-	ContentType ContentType `location:"header" locationName:"Content-Type" type:"string" required:"true" enum:"true"`
-
-	// A batch of documents formatted in JSON or HTML.
-	//
-	// Documents is a required field
-	Documents io.ReadSeeker `locationName:"documents" type:"blob" required:"true"`
-}
-
-// String returns the string representation
-func (s UploadDocumentsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UploadDocumentsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UploadDocumentsInput"}
-	if len(s.ContentType) == 0 {
-		invalidParams.Add(aws.NewErrParamRequired("ContentType"))
-	}
-
-	if s.Documents == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Documents"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s UploadDocumentsInput) MarshalFields(e protocol.FieldEncoder) error {
-
-	if len(s.ContentType) > 0 {
-		v := s.ContentType
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.QuotedValue{ValueMarshaler: v}, metadata)
-	}
-	if s.Documents != nil {
-		v := s.Documents
-
-		metadata := protocol.Metadata{}
-		e.SetStream(protocol.PayloadTarget, "documents", protocol.ReadSeekerStream{V: v}, metadata)
-	}
-	return nil
-}
-
-// Contains the response to an UploadDocuments request.
-type UploadDocumentsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The number of documents that were added to the search domain.
-	Adds *int64 `locationName:"adds" type:"long"`
-
-	// The number of documents that were deleted from the search domain.
-	Deletes *int64 `locationName:"deletes" type:"long"`
-
-	// The status of an UploadDocumentsRequest.
-	Status *string `locationName:"status" type:"string"`
-
-	// Any warnings returned by the document service about the documents being uploaded.
-	Warnings []DocumentServiceWarning `locationName:"warnings" type:"list"`
-}
-
-// String returns the string representation
-func (s UploadDocumentsOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s UploadDocumentsOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.Adds != nil {
-		v := *s.Adds
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "adds", protocol.Int64Value(v), metadata)
-	}
-	if s.Deletes != nil {
-		v := *s.Deletes
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "deletes", protocol.Int64Value(v), metadata)
-	}
-	if s.Status != nil {
-		v := *s.Status
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "status", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Warnings != nil {
-		v := s.Warnings
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "warnings", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	return nil
-}
 
 const opUploadDocuments = "UploadDocuments"
 
@@ -162,7 +43,7 @@ const opUploadDocuments = "UploadDocuments"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) UploadDocumentsRequest(input *UploadDocumentsInput) UploadDocumentsRequest {
+func (c *Client) UploadDocumentsRequest(input *types.UploadDocumentsInput) UploadDocumentsRequest {
 	op := &aws.Operation{
 		Name:       opUploadDocuments,
 		HTTPMethod: "POST",
@@ -170,10 +51,10 @@ func (c *Client) UploadDocumentsRequest(input *UploadDocumentsInput) UploadDocum
 	}
 
 	if input == nil {
-		input = &UploadDocumentsInput{}
+		input = &types.UploadDocumentsInput{}
 	}
 
-	req := c.newRequest(op, input, &UploadDocumentsOutput{})
+	req := c.newRequest(op, input, &types.UploadDocumentsOutput{})
 	return UploadDocumentsRequest{Request: req, Input: input, Copy: c.UploadDocumentsRequest}
 }
 
@@ -181,8 +62,8 @@ func (c *Client) UploadDocumentsRequest(input *UploadDocumentsInput) UploadDocum
 // UploadDocuments API operation.
 type UploadDocumentsRequest struct {
 	*aws.Request
-	Input *UploadDocumentsInput
-	Copy  func(*UploadDocumentsInput) UploadDocumentsRequest
+	Input *types.UploadDocumentsInput
+	Copy  func(*types.UploadDocumentsInput) UploadDocumentsRequest
 }
 
 // Send marshals and sends the UploadDocuments API request.
@@ -194,7 +75,7 @@ func (r UploadDocumentsRequest) Send(ctx context.Context) (*UploadDocumentsRespo
 	}
 
 	resp := &UploadDocumentsResponse{
-		UploadDocumentsOutput: r.Request.Data.(*UploadDocumentsOutput),
+		UploadDocumentsOutput: r.Request.Data.(*types.UploadDocumentsOutput),
 		response:              &aws.Response{Request: r.Request},
 	}
 
@@ -204,7 +85,7 @@ func (r UploadDocumentsRequest) Send(ctx context.Context) (*UploadDocumentsRespo
 // UploadDocumentsResponse is the response type for the
 // UploadDocuments API operation.
 type UploadDocumentsResponse struct {
-	*UploadDocumentsOutput
+	*types.UploadDocumentsOutput
 
 	response *aws.Response
 }

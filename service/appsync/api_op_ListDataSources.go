@@ -6,108 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/appsync/types"
 )
-
-type ListDataSourcesInput struct {
-	_ struct{} `type:"structure"`
-
-	// The API ID.
-	//
-	// ApiId is a required field
-	ApiId *string `location:"uri" locationName:"apiId" type:"string" required:"true"`
-
-	// The maximum number of results you want the request to return.
-	MaxResults *int64 `location:"querystring" locationName:"maxResults" type:"integer"`
-
-	// An identifier that was returned from the previous call to this operation,
-	// which can be used to return the next set of items in the list.
-	NextToken *string `location:"querystring" locationName:"nextToken" type:"string"`
-}
-
-// String returns the string representation
-func (s ListDataSourcesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListDataSourcesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListDataSourcesInput"}
-
-	if s.ApiId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ApiId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListDataSourcesInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.ApiId != nil {
-		v := *s.ApiId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "apiId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.MaxResults != nil {
-		v := *s.MaxResults
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "maxResults", protocol.Int64Value(v), metadata)
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type ListDataSourcesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The DataSource objects.
-	DataSources []DataSource `locationName:"dataSources" type:"list"`
-
-	// An identifier to be passed in the next request to this operation to return
-	// the next set of items in the list.
-	NextToken *string `locationName:"nextToken" type:"string"`
-}
-
-// String returns the string representation
-func (s ListDataSourcesOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListDataSourcesOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.DataSources != nil {
-		v := s.DataSources
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "dataSources", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opListDataSources = "ListDataSources"
 
@@ -124,7 +24,7 @@ const opListDataSources = "ListDataSources"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/ListDataSources
-func (c *Client) ListDataSourcesRequest(input *ListDataSourcesInput) ListDataSourcesRequest {
+func (c *Client) ListDataSourcesRequest(input *types.ListDataSourcesInput) ListDataSourcesRequest {
 	op := &aws.Operation{
 		Name:       opListDataSources,
 		HTTPMethod: "GET",
@@ -132,10 +32,10 @@ func (c *Client) ListDataSourcesRequest(input *ListDataSourcesInput) ListDataSou
 	}
 
 	if input == nil {
-		input = &ListDataSourcesInput{}
+		input = &types.ListDataSourcesInput{}
 	}
 
-	req := c.newRequest(op, input, &ListDataSourcesOutput{})
+	req := c.newRequest(op, input, &types.ListDataSourcesOutput{})
 	return ListDataSourcesRequest{Request: req, Input: input, Copy: c.ListDataSourcesRequest}
 }
 
@@ -143,8 +43,8 @@ func (c *Client) ListDataSourcesRequest(input *ListDataSourcesInput) ListDataSou
 // ListDataSources API operation.
 type ListDataSourcesRequest struct {
 	*aws.Request
-	Input *ListDataSourcesInput
-	Copy  func(*ListDataSourcesInput) ListDataSourcesRequest
+	Input *types.ListDataSourcesInput
+	Copy  func(*types.ListDataSourcesInput) ListDataSourcesRequest
 }
 
 // Send marshals and sends the ListDataSources API request.
@@ -156,7 +56,7 @@ func (r ListDataSourcesRequest) Send(ctx context.Context) (*ListDataSourcesRespo
 	}
 
 	resp := &ListDataSourcesResponse{
-		ListDataSourcesOutput: r.Request.Data.(*ListDataSourcesOutput),
+		ListDataSourcesOutput: r.Request.Data.(*types.ListDataSourcesOutput),
 		response:              &aws.Response{Request: r.Request},
 	}
 
@@ -166,7 +66,7 @@ func (r ListDataSourcesRequest) Send(ctx context.Context) (*ListDataSourcesRespo
 // ListDataSourcesResponse is the response type for the
 // ListDataSources API operation.
 type ListDataSourcesResponse struct {
-	*ListDataSourcesOutput
+	*types.ListDataSourcesOutput
 
 	response *aws.Response
 }

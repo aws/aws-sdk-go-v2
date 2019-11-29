@@ -4,66 +4,10 @@ package datasync
 
 import (
 	"context"
-	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/datasync/types"
 )
-
-// DescribeLocationNfsRequest
-type DescribeLocationNfsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon resource Name (ARN) of the NFS location to describe.
-	//
-	// LocationArn is a required field
-	LocationArn *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeLocationNfsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeLocationNfsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeLocationNfsInput"}
-
-	if s.LocationArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("LocationArn"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// DescribeLocationNfsResponse
-type DescribeLocationNfsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The time that the NFS location was created.
-	CreationTime *time.Time `type:"timestamp"`
-
-	// The Amazon resource Name (ARN) of the NFS location that was described.
-	LocationArn *string `type:"string"`
-
-	// The URL of the source NFS location that was described.
-	LocationUri *string `type:"string"`
-
-	// The NFS mount options that DataSync used to mount your NFS share.
-	MountOptions *NfsMountOptions `type:"structure"`
-
-	// A list of Amazon Resource Names (ARNs) of agents to use for a Network File
-	// System (NFS) location.
-	OnPremConfig *OnPremConfig `type:"structure"`
-}
-
-// String returns the string representation
-func (s DescribeLocationNfsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeLocationNfs = "DescribeLocationNfs"
 
@@ -80,7 +24,7 @@ const opDescribeLocationNfs = "DescribeLocationNfs"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/DescribeLocationNfs
-func (c *Client) DescribeLocationNfsRequest(input *DescribeLocationNfsInput) DescribeLocationNfsRequest {
+func (c *Client) DescribeLocationNfsRequest(input *types.DescribeLocationNfsInput) DescribeLocationNfsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeLocationNfs,
 		HTTPMethod: "POST",
@@ -88,10 +32,10 @@ func (c *Client) DescribeLocationNfsRequest(input *DescribeLocationNfsInput) Des
 	}
 
 	if input == nil {
-		input = &DescribeLocationNfsInput{}
+		input = &types.DescribeLocationNfsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeLocationNfsOutput{})
+	req := c.newRequest(op, input, &types.DescribeLocationNfsOutput{})
 	return DescribeLocationNfsRequest{Request: req, Input: input, Copy: c.DescribeLocationNfsRequest}
 }
 
@@ -99,8 +43,8 @@ func (c *Client) DescribeLocationNfsRequest(input *DescribeLocationNfsInput) Des
 // DescribeLocationNfs API operation.
 type DescribeLocationNfsRequest struct {
 	*aws.Request
-	Input *DescribeLocationNfsInput
-	Copy  func(*DescribeLocationNfsInput) DescribeLocationNfsRequest
+	Input *types.DescribeLocationNfsInput
+	Copy  func(*types.DescribeLocationNfsInput) DescribeLocationNfsRequest
 }
 
 // Send marshals and sends the DescribeLocationNfs API request.
@@ -112,7 +56,7 @@ func (r DescribeLocationNfsRequest) Send(ctx context.Context) (*DescribeLocation
 	}
 
 	resp := &DescribeLocationNfsResponse{
-		DescribeLocationNfsOutput: r.Request.Data.(*DescribeLocationNfsOutput),
+		DescribeLocationNfsOutput: r.Request.Data.(*types.DescribeLocationNfsOutput),
 		response:                  &aws.Response{Request: r.Request},
 	}
 
@@ -122,7 +66,7 @@ func (r DescribeLocationNfsRequest) Send(ctx context.Context) (*DescribeLocation
 // DescribeLocationNfsResponse is the response type for the
 // DescribeLocationNfs API operation.
 type DescribeLocationNfsResponse struct {
-	*DescribeLocationNfsOutput
+	*types.DescribeLocationNfsOutput
 
 	response *aws.Response
 }

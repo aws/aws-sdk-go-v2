@@ -6,68 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/mturk/types"
 )
-
-type CreateAdditionalAssignmentsForHITInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the HIT to extend.
-	//
-	// HITId is a required field
-	HITId *string `min:"1" type:"string" required:"true"`
-
-	// The number of additional assignments to request for this HIT.
-	//
-	// NumberOfAdditionalAssignments is a required field
-	NumberOfAdditionalAssignments *int64 `type:"integer" required:"true"`
-
-	// A unique identifier for this request, which allows you to retry the call
-	// on error without extending the HIT multiple times. This is useful in cases
-	// such as network timeouts where it is unclear whether or not the call succeeded
-	// on the server. If the extend HIT already exists in the system from a previous
-	// call using the same UniqueRequestToken, subsequent calls will return an error
-	// with a message containing the request ID.
-	UniqueRequestToken *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s CreateAdditionalAssignmentsForHITInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateAdditionalAssignmentsForHITInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateAdditionalAssignmentsForHITInput"}
-
-	if s.HITId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("HITId"))
-	}
-	if s.HITId != nil && len(*s.HITId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("HITId", 1))
-	}
-
-	if s.NumberOfAdditionalAssignments == nil {
-		invalidParams.Add(aws.NewErrParamRequired("NumberOfAdditionalAssignments"))
-	}
-	if s.UniqueRequestToken != nil && len(*s.UniqueRequestToken) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("UniqueRequestToken", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type CreateAdditionalAssignmentsForHITOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s CreateAdditionalAssignmentsForHITOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCreateAdditionalAssignmentsForHIT = "CreateAdditionalAssignmentsForHIT"
 
@@ -98,7 +38,7 @@ const opCreateAdditionalAssignmentsForHIT = "CreateAdditionalAssignmentsForHIT"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/CreateAdditionalAssignmentsForHIT
-func (c *Client) CreateAdditionalAssignmentsForHITRequest(input *CreateAdditionalAssignmentsForHITInput) CreateAdditionalAssignmentsForHITRequest {
+func (c *Client) CreateAdditionalAssignmentsForHITRequest(input *types.CreateAdditionalAssignmentsForHITInput) CreateAdditionalAssignmentsForHITRequest {
 	op := &aws.Operation{
 		Name:       opCreateAdditionalAssignmentsForHIT,
 		HTTPMethod: "POST",
@@ -106,10 +46,10 @@ func (c *Client) CreateAdditionalAssignmentsForHITRequest(input *CreateAdditiona
 	}
 
 	if input == nil {
-		input = &CreateAdditionalAssignmentsForHITInput{}
+		input = &types.CreateAdditionalAssignmentsForHITInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateAdditionalAssignmentsForHITOutput{})
+	req := c.newRequest(op, input, &types.CreateAdditionalAssignmentsForHITOutput{})
 	return CreateAdditionalAssignmentsForHITRequest{Request: req, Input: input, Copy: c.CreateAdditionalAssignmentsForHITRequest}
 }
 
@@ -117,8 +57,8 @@ func (c *Client) CreateAdditionalAssignmentsForHITRequest(input *CreateAdditiona
 // CreateAdditionalAssignmentsForHIT API operation.
 type CreateAdditionalAssignmentsForHITRequest struct {
 	*aws.Request
-	Input *CreateAdditionalAssignmentsForHITInput
-	Copy  func(*CreateAdditionalAssignmentsForHITInput) CreateAdditionalAssignmentsForHITRequest
+	Input *types.CreateAdditionalAssignmentsForHITInput
+	Copy  func(*types.CreateAdditionalAssignmentsForHITInput) CreateAdditionalAssignmentsForHITRequest
 }
 
 // Send marshals and sends the CreateAdditionalAssignmentsForHIT API request.
@@ -130,7 +70,7 @@ func (r CreateAdditionalAssignmentsForHITRequest) Send(ctx context.Context) (*Cr
 	}
 
 	resp := &CreateAdditionalAssignmentsForHITResponse{
-		CreateAdditionalAssignmentsForHITOutput: r.Request.Data.(*CreateAdditionalAssignmentsForHITOutput),
+		CreateAdditionalAssignmentsForHITOutput: r.Request.Data.(*types.CreateAdditionalAssignmentsForHITOutput),
 		response:                                &aws.Response{Request: r.Request},
 	}
 
@@ -140,7 +80,7 @@ func (r CreateAdditionalAssignmentsForHITRequest) Send(ctx context.Context) (*Cr
 // CreateAdditionalAssignmentsForHITResponse is the response type for the
 // CreateAdditionalAssignmentsForHIT API operation.
 type CreateAdditionalAssignmentsForHITResponse struct {
-	*CreateAdditionalAssignmentsForHITOutput
+	*types.CreateAdditionalAssignmentsForHITOutput
 
 	response *aws.Response
 }

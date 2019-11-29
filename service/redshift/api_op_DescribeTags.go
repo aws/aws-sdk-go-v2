@@ -6,98 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/redshift/types"
 )
-
-type DescribeTagsInput struct {
-	_ struct{} `type:"structure"`
-
-	// A value that indicates the starting point for the next set of response records
-	// in a subsequent request. If a value is returned in a response, you can retrieve
-	// the next set of records by providing this returned marker value in the marker
-	// parameter and retrying the command. If the marker field is empty, all response
-	// records have been retrieved for the request.
-	Marker *string `type:"string"`
-
-	// The maximum number or response records to return in each call. If the number
-	// of remaining response records exceeds the specified MaxRecords value, a value
-	// is returned in a marker field of the response. You can retrieve the next
-	// set of records by retrying the command with the returned marker value.
-	MaxRecords *int64 `type:"integer"`
-
-	// The Amazon Resource Name (ARN) for which you want to describe the tag or
-	// tags. For example, arn:aws:redshift:us-east-1:123456789:cluster:t1.
-	ResourceName *string `type:"string"`
-
-	// The type of resource with which you want to view tags. Valid resource types
-	// are:
-	//
-	//    * Cluster
-	//
-	//    * CIDR/IP
-	//
-	//    * EC2 security group
-	//
-	//    * Snapshot
-	//
-	//    * Cluster security group
-	//
-	//    * Subnet group
-	//
-	//    * HSM connection
-	//
-	//    * HSM certificate
-	//
-	//    * Parameter group
-	//
-	//    * Snapshot copy grant
-	//
-	// For more information about Amazon Redshift resource types and constructing
-	// ARNs, go to Specifying Policy Elements: Actions, Effects, Resources, and
-	// Principals (https://docs.aws.amazon.com/redshift/latest/mgmt/redshift-iam-access-control-overview.html#redshift-iam-access-control-specify-actions)
-	// in the Amazon Redshift Cluster Management Guide.
-	ResourceType *string `type:"string"`
-
-	// A tag key or keys for which you want to return all matching resources that
-	// are associated with the specified key or keys. For example, suppose that
-	// you have resources tagged with keys called owner and environment. If you
-	// specify both of these tag keys in the request, Amazon Redshift returns a
-	// response with all resources that have either or both of these tag keys associated
-	// with them.
-	TagKeys []string `locationNameList:"TagKey" type:"list"`
-
-	// A tag value or values for which you want to return all matching resources
-	// that are associated with the specified value or values. For example, suppose
-	// that you have resources tagged with values called admin and test. If you
-	// specify both of these tag values in the request, Amazon Redshift returns
-	// a response with all resources that have either or both of these tag values
-	// associated with them.
-	TagValues []string `locationNameList:"TagValue" type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeTagsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type DescribeTagsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A value that indicates the starting point for the next set of response records
-	// in a subsequent request. If a value is returned in a response, you can retrieve
-	// the next set of records by providing this returned marker value in the Marker
-	// parameter and retrying the command. If the Marker field is empty, all response
-	// records have been retrieved for the request.
-	Marker *string `type:"string"`
-
-	// A list of tags with their associated resources.
-	TaggedResources []TaggedResource `locationNameList:"TaggedResource" type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeTagsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeTags = "DescribeTags"
 
@@ -136,7 +46,7 @@ const opDescribeTags = "DescribeTags"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeTags
-func (c *Client) DescribeTagsRequest(input *DescribeTagsInput) DescribeTagsRequest {
+func (c *Client) DescribeTagsRequest(input *types.DescribeTagsInput) DescribeTagsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeTags,
 		HTTPMethod: "POST",
@@ -144,10 +54,10 @@ func (c *Client) DescribeTagsRequest(input *DescribeTagsInput) DescribeTagsReque
 	}
 
 	if input == nil {
-		input = &DescribeTagsInput{}
+		input = &types.DescribeTagsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeTagsOutput{})
+	req := c.newRequest(op, input, &types.DescribeTagsOutput{})
 	return DescribeTagsRequest{Request: req, Input: input, Copy: c.DescribeTagsRequest}
 }
 
@@ -155,8 +65,8 @@ func (c *Client) DescribeTagsRequest(input *DescribeTagsInput) DescribeTagsReque
 // DescribeTags API operation.
 type DescribeTagsRequest struct {
 	*aws.Request
-	Input *DescribeTagsInput
-	Copy  func(*DescribeTagsInput) DescribeTagsRequest
+	Input *types.DescribeTagsInput
+	Copy  func(*types.DescribeTagsInput) DescribeTagsRequest
 }
 
 // Send marshals and sends the DescribeTags API request.
@@ -168,7 +78,7 @@ func (r DescribeTagsRequest) Send(ctx context.Context) (*DescribeTagsResponse, e
 	}
 
 	resp := &DescribeTagsResponse{
-		DescribeTagsOutput: r.Request.Data.(*DescribeTagsOutput),
+		DescribeTagsOutput: r.Request.Data.(*types.DescribeTagsOutput),
 		response:           &aws.Response{Request: r.Request},
 	}
 
@@ -178,7 +88,7 @@ func (r DescribeTagsRequest) Send(ctx context.Context) (*DescribeTagsResponse, e
 // DescribeTagsResponse is the response type for the
 // DescribeTags API operation.
 type DescribeTagsResponse struct {
-	*DescribeTagsOutput
+	*types.DescribeTagsOutput
 
 	response *aws.Response
 }

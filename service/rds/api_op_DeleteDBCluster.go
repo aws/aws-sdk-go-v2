@@ -6,81 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/rds/types"
 )
-
-type DeleteDBClusterInput struct {
-	_ struct{} `type:"structure"`
-
-	// The DB cluster identifier for the DB cluster to be deleted. This parameter
-	// isn't case-sensitive.
-	//
-	// Constraints:
-	//
-	//    * Must match an existing DBClusterIdentifier.
-	//
-	// DBClusterIdentifier is a required field
-	DBClusterIdentifier *string `type:"string" required:"true"`
-
-	// The DB cluster snapshot identifier of the new DB cluster snapshot created
-	// when SkipFinalSnapshot is disabled.
-	//
-	// Specifying this parameter and also skipping the creation of a final DB cluster
-	// snapshot with the SkipFinalShapshot parameter results in an error.
-	//
-	// Constraints:
-	//
-	//    * Must be 1 to 255 letters, numbers, or hyphens.
-	//
-	//    * First character must be a letter
-	//
-	//    * Can't end with a hyphen or contain two consecutive hyphens
-	FinalDBSnapshotIdentifier *string `type:"string"`
-
-	// A value that indicates whether to skip the creation of a final DB cluster
-	// snapshot before the DB cluster is deleted. If skip is specified, no DB cluster
-	// snapshot is created. If skip is not specified, a DB cluster snapshot is created
-	// before the DB cluster is deleted. By default, skip is not specified, and
-	// the DB cluster snapshot is created. By default, this parameter is disabled.
-	//
-	// You must specify a FinalDBSnapshotIdentifier parameter if SkipFinalSnapshot
-	// is disabled.
-	SkipFinalSnapshot *bool `type:"boolean"`
-}
-
-// String returns the string representation
-func (s DeleteDBClusterInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteDBClusterInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteDBClusterInput"}
-
-	if s.DBClusterIdentifier == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DBClusterIdentifier"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteDBClusterOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Contains the details of an Amazon Aurora DB cluster.
-	//
-	// This data type is used as a response element in the DescribeDBClusters, StopDBCluster,
-	// and StartDBCluster actions.
-	DBCluster *DBCluster `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteDBClusterOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteDBCluster = "DeleteDBCluster"
 
@@ -105,7 +32,7 @@ const opDeleteDBCluster = "DeleteDBCluster"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteDBCluster
-func (c *Client) DeleteDBClusterRequest(input *DeleteDBClusterInput) DeleteDBClusterRequest {
+func (c *Client) DeleteDBClusterRequest(input *types.DeleteDBClusterInput) DeleteDBClusterRequest {
 	op := &aws.Operation{
 		Name:       opDeleteDBCluster,
 		HTTPMethod: "POST",
@@ -113,10 +40,10 @@ func (c *Client) DeleteDBClusterRequest(input *DeleteDBClusterInput) DeleteDBClu
 	}
 
 	if input == nil {
-		input = &DeleteDBClusterInput{}
+		input = &types.DeleteDBClusterInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteDBClusterOutput{})
+	req := c.newRequest(op, input, &types.DeleteDBClusterOutput{})
 	return DeleteDBClusterRequest{Request: req, Input: input, Copy: c.DeleteDBClusterRequest}
 }
 
@@ -124,8 +51,8 @@ func (c *Client) DeleteDBClusterRequest(input *DeleteDBClusterInput) DeleteDBClu
 // DeleteDBCluster API operation.
 type DeleteDBClusterRequest struct {
 	*aws.Request
-	Input *DeleteDBClusterInput
-	Copy  func(*DeleteDBClusterInput) DeleteDBClusterRequest
+	Input *types.DeleteDBClusterInput
+	Copy  func(*types.DeleteDBClusterInput) DeleteDBClusterRequest
 }
 
 // Send marshals and sends the DeleteDBCluster API request.
@@ -137,7 +64,7 @@ func (r DeleteDBClusterRequest) Send(ctx context.Context) (*DeleteDBClusterRespo
 	}
 
 	resp := &DeleteDBClusterResponse{
-		DeleteDBClusterOutput: r.Request.Data.(*DeleteDBClusterOutput),
+		DeleteDBClusterOutput: r.Request.Data.(*types.DeleteDBClusterOutput),
 		response:              &aws.Response{Request: r.Request},
 	}
 
@@ -147,7 +74,7 @@ func (r DeleteDBClusterRequest) Send(ctx context.Context) (*DeleteDBClusterRespo
 // DeleteDBClusterResponse is the response type for the
 // DeleteDBCluster API operation.
 type DeleteDBClusterResponse struct {
-	*DeleteDBClusterOutput
+	*types.DeleteDBClusterOutput
 
 	response *aws.Response
 }

@@ -6,41 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/sms/types"
 )
-
-type GetConnectorsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The maximum number of results to return in a single call. The default value
-	// is 50. To retrieve the remaining results, make another call with the returned
-	// NextToken value.
-	MaxResults *int64 `locationName:"maxResults" type:"integer"`
-
-	// The token for the next set of results.
-	NextToken *string `locationName:"nextToken" type:"string"`
-}
-
-// String returns the string representation
-func (s GetConnectorsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type GetConnectorsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Information about the registered connectors.
-	ConnectorList []Connector `locationName:"connectorList" type:"list"`
-
-	// The token required to retrieve the next set of results. This value is null
-	// when there are no more results to return.
-	NextToken *string `locationName:"nextToken" type:"string"`
-}
-
-// String returns the string representation
-func (s GetConnectorsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetConnectors = "GetConnectors"
 
@@ -57,7 +24,7 @@ const opGetConnectors = "GetConnectors"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sms-2016-10-24/GetConnectors
-func (c *Client) GetConnectorsRequest(input *GetConnectorsInput) GetConnectorsRequest {
+func (c *Client) GetConnectorsRequest(input *types.GetConnectorsInput) GetConnectorsRequest {
 	op := &aws.Operation{
 		Name:       opGetConnectors,
 		HTTPMethod: "POST",
@@ -71,10 +38,10 @@ func (c *Client) GetConnectorsRequest(input *GetConnectorsInput) GetConnectorsRe
 	}
 
 	if input == nil {
-		input = &GetConnectorsInput{}
+		input = &types.GetConnectorsInput{}
 	}
 
-	req := c.newRequest(op, input, &GetConnectorsOutput{})
+	req := c.newRequest(op, input, &types.GetConnectorsOutput{})
 	return GetConnectorsRequest{Request: req, Input: input, Copy: c.GetConnectorsRequest}
 }
 
@@ -82,8 +49,8 @@ func (c *Client) GetConnectorsRequest(input *GetConnectorsInput) GetConnectorsRe
 // GetConnectors API operation.
 type GetConnectorsRequest struct {
 	*aws.Request
-	Input *GetConnectorsInput
-	Copy  func(*GetConnectorsInput) GetConnectorsRequest
+	Input *types.GetConnectorsInput
+	Copy  func(*types.GetConnectorsInput) GetConnectorsRequest
 }
 
 // Send marshals and sends the GetConnectors API request.
@@ -95,7 +62,7 @@ func (r GetConnectorsRequest) Send(ctx context.Context) (*GetConnectorsResponse,
 	}
 
 	resp := &GetConnectorsResponse{
-		GetConnectorsOutput: r.Request.Data.(*GetConnectorsOutput),
+		GetConnectorsOutput: r.Request.Data.(*types.GetConnectorsOutput),
 		response:            &aws.Response{Request: r.Request},
 	}
 
@@ -125,7 +92,7 @@ func NewGetConnectorsPaginator(req GetConnectorsRequest) GetConnectorsPaginator 
 	return GetConnectorsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *GetConnectorsInput
+				var inCpy *types.GetConnectorsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -145,14 +112,14 @@ type GetConnectorsPaginator struct {
 	aws.Pager
 }
 
-func (p *GetConnectorsPaginator) CurrentPage() *GetConnectorsOutput {
-	return p.Pager.CurrentPage().(*GetConnectorsOutput)
+func (p *GetConnectorsPaginator) CurrentPage() *types.GetConnectorsOutput {
+	return p.Pager.CurrentPage().(*types.GetConnectorsOutput)
 }
 
 // GetConnectorsResponse is the response type for the
 // GetConnectors API operation.
 type GetConnectorsResponse struct {
-	*GetConnectorsOutput
+	*types.GetConnectorsOutput
 
 	response *aws.Response
 }

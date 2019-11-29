@@ -6,56 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/query"
+	"github.com/aws/aws-sdk-go-v2/service/docdb/types"
 )
-
-// Represents the input to DeleteDBClusterParameterGroup.
-type DeleteDBClusterParameterGroupInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the DB cluster parameter group.
-	//
-	// Constraints:
-	//
-	//    * Must be the name of an existing DB cluster parameter group.
-	//
-	//    * You can't delete a default DB cluster parameter group.
-	//
-	//    * Cannot be associated with any DB clusters.
-	//
-	// DBClusterParameterGroupName is a required field
-	DBClusterParameterGroupName *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteDBClusterParameterGroupInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteDBClusterParameterGroupInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteDBClusterParameterGroupInput"}
-
-	if s.DBClusterParameterGroupName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DBClusterParameterGroupName"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteDBClusterParameterGroupOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteDBClusterParameterGroupOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteDBClusterParameterGroup = "DeleteDBClusterParameterGroup"
 
@@ -73,7 +27,7 @@ const opDeleteDBClusterParameterGroup = "DeleteDBClusterParameterGroup"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/DeleteDBClusterParameterGroup
-func (c *Client) DeleteDBClusterParameterGroupRequest(input *DeleteDBClusterParameterGroupInput) DeleteDBClusterParameterGroupRequest {
+func (c *Client) DeleteDBClusterParameterGroupRequest(input *types.DeleteDBClusterParameterGroupInput) DeleteDBClusterParameterGroupRequest {
 	op := &aws.Operation{
 		Name:       opDeleteDBClusterParameterGroup,
 		HTTPMethod: "POST",
@@ -81,10 +35,10 @@ func (c *Client) DeleteDBClusterParameterGroupRequest(input *DeleteDBClusterPara
 	}
 
 	if input == nil {
-		input = &DeleteDBClusterParameterGroupInput{}
+		input = &types.DeleteDBClusterParameterGroupInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteDBClusterParameterGroupOutput{})
+	req := c.newRequest(op, input, &types.DeleteDBClusterParameterGroupOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return DeleteDBClusterParameterGroupRequest{Request: req, Input: input, Copy: c.DeleteDBClusterParameterGroupRequest}
@@ -94,8 +48,8 @@ func (c *Client) DeleteDBClusterParameterGroupRequest(input *DeleteDBClusterPara
 // DeleteDBClusterParameterGroup API operation.
 type DeleteDBClusterParameterGroupRequest struct {
 	*aws.Request
-	Input *DeleteDBClusterParameterGroupInput
-	Copy  func(*DeleteDBClusterParameterGroupInput) DeleteDBClusterParameterGroupRequest
+	Input *types.DeleteDBClusterParameterGroupInput
+	Copy  func(*types.DeleteDBClusterParameterGroupInput) DeleteDBClusterParameterGroupRequest
 }
 
 // Send marshals and sends the DeleteDBClusterParameterGroup API request.
@@ -107,7 +61,7 @@ func (r DeleteDBClusterParameterGroupRequest) Send(ctx context.Context) (*Delete
 	}
 
 	resp := &DeleteDBClusterParameterGroupResponse{
-		DeleteDBClusterParameterGroupOutput: r.Request.Data.(*DeleteDBClusterParameterGroupOutput),
+		DeleteDBClusterParameterGroupOutput: r.Request.Data.(*types.DeleteDBClusterParameterGroupOutput),
 		response:                            &aws.Response{Request: r.Request},
 	}
 
@@ -117,7 +71,7 @@ func (r DeleteDBClusterParameterGroupRequest) Send(ctx context.Context) (*Delete
 // DeleteDBClusterParameterGroupResponse is the response type for the
 // DeleteDBClusterParameterGroup API operation.
 type DeleteDBClusterParameterGroupResponse struct {
-	*DeleteDBClusterParameterGroupOutput
+	*types.DeleteDBClusterParameterGroupOutput
 
 	response *aws.Response
 }

@@ -6,60 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/iam/types"
 )
-
-type UpdateRoleDescriptionInput struct {
-	_ struct{} `type:"structure"`
-
-	// The new description that you want to apply to the specified role.
-	//
-	// Description is a required field
-	Description *string `type:"string" required:"true"`
-
-	// The name of the role that you want to modify.
-	//
-	// RoleName is a required field
-	RoleName *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s UpdateRoleDescriptionInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateRoleDescriptionInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateRoleDescriptionInput"}
-
-	if s.Description == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Description"))
-	}
-
-	if s.RoleName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("RoleName"))
-	}
-	if s.RoleName != nil && len(*s.RoleName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("RoleName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type UpdateRoleDescriptionOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A structure that contains details about the modified role.
-	Role *Role `type:"structure"`
-}
-
-// String returns the string representation
-func (s UpdateRoleDescriptionOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opUpdateRoleDescription = "UpdateRoleDescription"
 
@@ -79,7 +27,7 @@ const opUpdateRoleDescription = "UpdateRoleDescription"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/UpdateRoleDescription
-func (c *Client) UpdateRoleDescriptionRequest(input *UpdateRoleDescriptionInput) UpdateRoleDescriptionRequest {
+func (c *Client) UpdateRoleDescriptionRequest(input *types.UpdateRoleDescriptionInput) UpdateRoleDescriptionRequest {
 	op := &aws.Operation{
 		Name:       opUpdateRoleDescription,
 		HTTPMethod: "POST",
@@ -87,10 +35,10 @@ func (c *Client) UpdateRoleDescriptionRequest(input *UpdateRoleDescriptionInput)
 	}
 
 	if input == nil {
-		input = &UpdateRoleDescriptionInput{}
+		input = &types.UpdateRoleDescriptionInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateRoleDescriptionOutput{})
+	req := c.newRequest(op, input, &types.UpdateRoleDescriptionOutput{})
 	return UpdateRoleDescriptionRequest{Request: req, Input: input, Copy: c.UpdateRoleDescriptionRequest}
 }
 
@@ -98,8 +46,8 @@ func (c *Client) UpdateRoleDescriptionRequest(input *UpdateRoleDescriptionInput)
 // UpdateRoleDescription API operation.
 type UpdateRoleDescriptionRequest struct {
 	*aws.Request
-	Input *UpdateRoleDescriptionInput
-	Copy  func(*UpdateRoleDescriptionInput) UpdateRoleDescriptionRequest
+	Input *types.UpdateRoleDescriptionInput
+	Copy  func(*types.UpdateRoleDescriptionInput) UpdateRoleDescriptionRequest
 }
 
 // Send marshals and sends the UpdateRoleDescription API request.
@@ -111,7 +59,7 @@ func (r UpdateRoleDescriptionRequest) Send(ctx context.Context) (*UpdateRoleDesc
 	}
 
 	resp := &UpdateRoleDescriptionResponse{
-		UpdateRoleDescriptionOutput: r.Request.Data.(*UpdateRoleDescriptionOutput),
+		UpdateRoleDescriptionOutput: r.Request.Data.(*types.UpdateRoleDescriptionOutput),
 		response:                    &aws.Response{Request: r.Request},
 	}
 
@@ -121,7 +69,7 @@ func (r UpdateRoleDescriptionRequest) Send(ctx context.Context) (*UpdateRoleDesc
 // UpdateRoleDescriptionResponse is the response type for the
 // UpdateRoleDescription API operation.
 type UpdateRoleDescriptionResponse struct {
-	*UpdateRoleDescriptionOutput
+	*types.UpdateRoleDescriptionOutput
 
 	response *aws.Response
 }

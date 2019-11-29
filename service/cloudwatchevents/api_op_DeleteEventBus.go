@@ -6,50 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
+	"github.com/aws/aws-sdk-go-v2/service/cloudwatchevents/types"
 )
-
-type DeleteEventBusInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the event bus to delete.
-	//
-	// Name is a required field
-	Name *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteEventBusInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteEventBusInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteEventBusInput"}
-
-	if s.Name == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Name"))
-	}
-	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteEventBusOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteEventBusOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteEventBus = "DeleteEventBus"
 
@@ -70,7 +30,7 @@ const opDeleteEventBus = "DeleteEventBus"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/DeleteEventBus
-func (c *Client) DeleteEventBusRequest(input *DeleteEventBusInput) DeleteEventBusRequest {
+func (c *Client) DeleteEventBusRequest(input *types.DeleteEventBusInput) DeleteEventBusRequest {
 	op := &aws.Operation{
 		Name:       opDeleteEventBus,
 		HTTPMethod: "POST",
@@ -78,10 +38,10 @@ func (c *Client) DeleteEventBusRequest(input *DeleteEventBusInput) DeleteEventBu
 	}
 
 	if input == nil {
-		input = &DeleteEventBusInput{}
+		input = &types.DeleteEventBusInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteEventBusOutput{})
+	req := c.newRequest(op, input, &types.DeleteEventBusOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return DeleteEventBusRequest{Request: req, Input: input, Copy: c.DeleteEventBusRequest}
@@ -91,8 +51,8 @@ func (c *Client) DeleteEventBusRequest(input *DeleteEventBusInput) DeleteEventBu
 // DeleteEventBus API operation.
 type DeleteEventBusRequest struct {
 	*aws.Request
-	Input *DeleteEventBusInput
-	Copy  func(*DeleteEventBusInput) DeleteEventBusRequest
+	Input *types.DeleteEventBusInput
+	Copy  func(*types.DeleteEventBusInput) DeleteEventBusRequest
 }
 
 // Send marshals and sends the DeleteEventBus API request.
@@ -104,7 +64,7 @@ func (r DeleteEventBusRequest) Send(ctx context.Context) (*DeleteEventBusRespons
 	}
 
 	resp := &DeleteEventBusResponse{
-		DeleteEventBusOutput: r.Request.Data.(*DeleteEventBusOutput),
+		DeleteEventBusOutput: r.Request.Data.(*types.DeleteEventBusOutput),
 		response:             &aws.Response{Request: r.Request},
 	}
 
@@ -114,7 +74,7 @@ func (r DeleteEventBusRequest) Send(ctx context.Context) (*DeleteEventBusRespons
 // DeleteEventBusResponse is the response type for the
 // DeleteEventBus API operation.
 type DeleteEventBusResponse struct {
-	*DeleteEventBusOutput
+	*types.DeleteEventBusOutput
 
 	response *aws.Response
 }

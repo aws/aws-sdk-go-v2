@@ -6,62 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ecs/types"
 )
-
-type DescribeTasksInput struct {
-	_ struct{} `type:"structure"`
-
-	// The short name or full Amazon Resource Name (ARN) of the cluster that hosts
-	// the task or tasks to describe. If you do not specify a cluster, the default
-	// cluster is assumed. This parameter is required if the task or tasks you are
-	// describing were launched in any cluster other than the default cluster.
-	Cluster *string `locationName:"cluster" type:"string"`
-
-	// Specifies whether you want to see the resource tags for the task. If TAGS
-	// is specified, the tags are included in the response. If this field is omitted,
-	// tags are not included in the response.
-	Include []TaskField `locationName:"include" type:"list"`
-
-	// A list of up to 100 task IDs or full ARN entries.
-	//
-	// Tasks is a required field
-	Tasks []string `locationName:"tasks" type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeTasksInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeTasksInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeTasksInput"}
-
-	if s.Tasks == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Tasks"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribeTasksOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Any failures associated with the call.
-	Failures []Failure `locationName:"failures" type:"list"`
-
-	// The list of tasks.
-	Tasks []Task `locationName:"tasks" type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeTasksOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeTasks = "DescribeTasks"
 
@@ -78,7 +24,7 @@ const opDescribeTasks = "DescribeTasks"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DescribeTasks
-func (c *Client) DescribeTasksRequest(input *DescribeTasksInput) DescribeTasksRequest {
+func (c *Client) DescribeTasksRequest(input *types.DescribeTasksInput) DescribeTasksRequest {
 	op := &aws.Operation{
 		Name:       opDescribeTasks,
 		HTTPMethod: "POST",
@@ -86,10 +32,10 @@ func (c *Client) DescribeTasksRequest(input *DescribeTasksInput) DescribeTasksRe
 	}
 
 	if input == nil {
-		input = &DescribeTasksInput{}
+		input = &types.DescribeTasksInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeTasksOutput{})
+	req := c.newRequest(op, input, &types.DescribeTasksOutput{})
 	return DescribeTasksRequest{Request: req, Input: input, Copy: c.DescribeTasksRequest}
 }
 
@@ -97,8 +43,8 @@ func (c *Client) DescribeTasksRequest(input *DescribeTasksInput) DescribeTasksRe
 // DescribeTasks API operation.
 type DescribeTasksRequest struct {
 	*aws.Request
-	Input *DescribeTasksInput
-	Copy  func(*DescribeTasksInput) DescribeTasksRequest
+	Input *types.DescribeTasksInput
+	Copy  func(*types.DescribeTasksInput) DescribeTasksRequest
 }
 
 // Send marshals and sends the DescribeTasks API request.
@@ -110,7 +56,7 @@ func (r DescribeTasksRequest) Send(ctx context.Context) (*DescribeTasksResponse,
 	}
 
 	resp := &DescribeTasksResponse{
-		DescribeTasksOutput: r.Request.Data.(*DescribeTasksOutput),
+		DescribeTasksOutput: r.Request.Data.(*types.DescribeTasksOutput),
 		response:            &aws.Response{Request: r.Request},
 	}
 
@@ -120,7 +66,7 @@ func (r DescribeTasksRequest) Send(ctx context.Context) (*DescribeTasksResponse,
 // DescribeTasksResponse is the response type for the
 // DescribeTasks API operation.
 type DescribeTasksResponse struct {
-	*DescribeTasksOutput
+	*types.DescribeTasksOutput
 
 	response *aws.Response
 }

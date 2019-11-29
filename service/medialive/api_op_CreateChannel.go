@@ -4,195 +4,10 @@ package medialive
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/medialive/types"
 )
-
-type CreateChannelInput struct {
-	_ struct{} `type:"structure"`
-
-	// A standard channel has two encoding pipelines and a single pipeline channel
-	// only has one.
-	ChannelClass ChannelClass `locationName:"channelClass" type:"string" enum:"true"`
-
-	Destinations []OutputDestination `locationName:"destinations" type:"list"`
-
-	// Encoder Settings
-	EncoderSettings *EncoderSettings `locationName:"encoderSettings" type:"structure"`
-
-	InputAttachments []InputAttachment `locationName:"inputAttachments" type:"list"`
-
-	InputSpecification *InputSpecification `locationName:"inputSpecification" type:"structure"`
-
-	// The log level the user wants for their channel.
-	LogLevel LogLevel `locationName:"logLevel" type:"string" enum:"true"`
-
-	Name *string `locationName:"name" type:"string"`
-
-	RequestId *string `locationName:"requestId" type:"string" idempotencyToken:"true"`
-
-	Reserved *string `locationName:"reserved" deprecated:"true" type:"string"`
-
-	RoleArn *string `locationName:"roleArn" type:"string"`
-
-	Tags map[string]string `locationName:"tags" type:"map"`
-}
-
-// String returns the string representation
-func (s CreateChannelInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateChannelInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateChannelInput"}
-	if s.Destinations != nil {
-		for i, v := range s.Destinations {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Destinations", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-	if s.EncoderSettings != nil {
-		if err := s.EncoderSettings.Validate(); err != nil {
-			invalidParams.AddNested("EncoderSettings", err.(aws.ErrInvalidParams))
-		}
-	}
-	if s.InputAttachments != nil {
-		for i, v := range s.InputAttachments {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "InputAttachments", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s CreateChannelInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if len(s.ChannelClass) > 0 {
-		v := s.ChannelClass
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "channelClass", protocol.QuotedValue{ValueMarshaler: v}, metadata)
-	}
-	if s.Destinations != nil {
-		v := s.Destinations
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "destinations", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	if s.EncoderSettings != nil {
-		v := s.EncoderSettings
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "encoderSettings", v, metadata)
-	}
-	if s.InputAttachments != nil {
-		v := s.InputAttachments
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "inputAttachments", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	if s.InputSpecification != nil {
-		v := s.InputSpecification
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "inputSpecification", v, metadata)
-	}
-	if len(s.LogLevel) > 0 {
-		v := s.LogLevel
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "logLevel", protocol.QuotedValue{ValueMarshaler: v}, metadata)
-	}
-	if s.Name != nil {
-		v := *s.Name
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	var RequestId string
-	if s.RequestId != nil {
-		RequestId = *s.RequestId
-	} else {
-		RequestId = protocol.GetIdempotencyToken()
-	}
-	{
-		v := RequestId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "requestId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Reserved != nil {
-		v := *s.Reserved
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "reserved", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.RoleArn != nil {
-		v := *s.RoleArn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "roleArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Tags != nil {
-		v := s.Tags
-
-		metadata := protocol.Metadata{}
-		ms0 := e.Map(protocol.BodyTarget, "tags", metadata)
-		ms0.Start()
-		for k1, v1 := range v {
-			ms0.MapSetValue(k1, protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
-		}
-		ms0.End()
-
-	}
-	return nil
-}
-
-type CreateChannelOutput struct {
-	_ struct{} `type:"structure"`
-
-	Channel *Channel `locationName:"channel" type:"structure"`
-}
-
-// String returns the string representation
-func (s CreateChannelOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s CreateChannelOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.Channel != nil {
-		v := s.Channel
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "channel", v, metadata)
-	}
-	return nil
-}
 
 const opCreateChannel = "CreateChannel"
 
@@ -209,7 +24,7 @@ const opCreateChannel = "CreateChannel"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/CreateChannel
-func (c *Client) CreateChannelRequest(input *CreateChannelInput) CreateChannelRequest {
+func (c *Client) CreateChannelRequest(input *types.CreateChannelInput) CreateChannelRequest {
 	op := &aws.Operation{
 		Name:       opCreateChannel,
 		HTTPMethod: "POST",
@@ -217,10 +32,10 @@ func (c *Client) CreateChannelRequest(input *CreateChannelInput) CreateChannelRe
 	}
 
 	if input == nil {
-		input = &CreateChannelInput{}
+		input = &types.CreateChannelInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateChannelOutput{})
+	req := c.newRequest(op, input, &types.CreateChannelOutput{})
 	return CreateChannelRequest{Request: req, Input: input, Copy: c.CreateChannelRequest}
 }
 
@@ -228,8 +43,8 @@ func (c *Client) CreateChannelRequest(input *CreateChannelInput) CreateChannelRe
 // CreateChannel API operation.
 type CreateChannelRequest struct {
 	*aws.Request
-	Input *CreateChannelInput
-	Copy  func(*CreateChannelInput) CreateChannelRequest
+	Input *types.CreateChannelInput
+	Copy  func(*types.CreateChannelInput) CreateChannelRequest
 }
 
 // Send marshals and sends the CreateChannel API request.
@@ -241,7 +56,7 @@ func (r CreateChannelRequest) Send(ctx context.Context) (*CreateChannelResponse,
 	}
 
 	resp := &CreateChannelResponse{
-		CreateChannelOutput: r.Request.Data.(*CreateChannelOutput),
+		CreateChannelOutput: r.Request.Data.(*types.CreateChannelOutput),
 		response:            &aws.Response{Request: r.Request},
 	}
 
@@ -251,7 +66,7 @@ func (r CreateChannelRequest) Send(ctx context.Context) (*CreateChannelResponse,
 // CreateChannelResponse is the response type for the
 // CreateChannel API operation.
 type CreateChannelResponse struct {
-	*CreateChannelOutput
+	*types.CreateChannelOutput
 
 	response *aws.Response
 }

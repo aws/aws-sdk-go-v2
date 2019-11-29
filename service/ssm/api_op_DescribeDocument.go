@@ -6,57 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ssm/types"
 )
-
-type DescribeDocumentInput struct {
-	_ struct{} `type:"structure"`
-
-	// The document version for which you want information. Can be a specific version
-	// or the default version.
-	DocumentVersion *string `type:"string"`
-
-	// The name of the Systems Manager document.
-	//
-	// Name is a required field
-	Name *string `type:"string" required:"true"`
-
-	// An optional field specifying the version of the artifact associated with
-	// the document. For example, "Release 12, Update 6". This value is unique across
-	// all versions of a document, and cannot be changed.
-	VersionName *string `type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeDocumentInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeDocumentInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeDocumentInput"}
-
-	if s.Name == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Name"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribeDocumentOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Information about the Systems Manager document.
-	Document *DocumentDescription `type:"structure"`
-}
-
-// String returns the string representation
-func (s DescribeDocumentOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeDocument = "DescribeDocument"
 
@@ -73,7 +24,7 @@ const opDescribeDocument = "DescribeDocument"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeDocument
-func (c *Client) DescribeDocumentRequest(input *DescribeDocumentInput) DescribeDocumentRequest {
+func (c *Client) DescribeDocumentRequest(input *types.DescribeDocumentInput) DescribeDocumentRequest {
 	op := &aws.Operation{
 		Name:       opDescribeDocument,
 		HTTPMethod: "POST",
@@ -81,10 +32,10 @@ func (c *Client) DescribeDocumentRequest(input *DescribeDocumentInput) DescribeD
 	}
 
 	if input == nil {
-		input = &DescribeDocumentInput{}
+		input = &types.DescribeDocumentInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeDocumentOutput{})
+	req := c.newRequest(op, input, &types.DescribeDocumentOutput{})
 	return DescribeDocumentRequest{Request: req, Input: input, Copy: c.DescribeDocumentRequest}
 }
 
@@ -92,8 +43,8 @@ func (c *Client) DescribeDocumentRequest(input *DescribeDocumentInput) DescribeD
 // DescribeDocument API operation.
 type DescribeDocumentRequest struct {
 	*aws.Request
-	Input *DescribeDocumentInput
-	Copy  func(*DescribeDocumentInput) DescribeDocumentRequest
+	Input *types.DescribeDocumentInput
+	Copy  func(*types.DescribeDocumentInput) DescribeDocumentRequest
 }
 
 // Send marshals and sends the DescribeDocument API request.
@@ -105,7 +56,7 @@ func (r DescribeDocumentRequest) Send(ctx context.Context) (*DescribeDocumentRes
 	}
 
 	resp := &DescribeDocumentResponse{
-		DescribeDocumentOutput: r.Request.Data.(*DescribeDocumentOutput),
+		DescribeDocumentOutput: r.Request.Data.(*types.DescribeDocumentOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -115,7 +66,7 @@ func (r DescribeDocumentRequest) Send(ctx context.Context) (*DescribeDocumentRes
 // DescribeDocumentResponse is the response type for the
 // DescribeDocument API operation.
 type DescribeDocumentResponse struct {
-	*DescribeDocumentOutput
+	*types.DescribeDocumentOutput
 
 	response *aws.Response
 }

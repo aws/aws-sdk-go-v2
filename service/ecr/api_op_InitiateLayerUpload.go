@@ -6,60 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ecr/types"
 )
-
-type InitiateLayerUploadInput struct {
-	_ struct{} `type:"structure"`
-
-	// The AWS account ID associated with the registry to which you intend to upload
-	// layers. If you do not specify a registry, the default registry is assumed.
-	RegistryId *string `locationName:"registryId" type:"string"`
-
-	// The name of the repository to which you intend to upload layers.
-	//
-	// RepositoryName is a required field
-	RepositoryName *string `locationName:"repositoryName" min:"2" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s InitiateLayerUploadInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *InitiateLayerUploadInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "InitiateLayerUploadInput"}
-
-	if s.RepositoryName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("RepositoryName"))
-	}
-	if s.RepositoryName != nil && len(*s.RepositoryName) < 2 {
-		invalidParams.Add(aws.NewErrParamMinLen("RepositoryName", 2))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type InitiateLayerUploadOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The size, in bytes, that Amazon ECR expects future layer part uploads to
-	// be.
-	PartSize *int64 `locationName:"partSize" type:"long"`
-
-	// The upload ID for the layer upload. This parameter is passed to further UploadLayerPart
-	// and CompleteLayerUpload operations.
-	UploadId *string `locationName:"uploadId" type:"string"`
-}
-
-// String returns the string representation
-func (s InitiateLayerUploadOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opInitiateLayerUpload = "InitiateLayerUpload"
 
@@ -80,7 +28,7 @@ const opInitiateLayerUpload = "InitiateLayerUpload"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/InitiateLayerUpload
-func (c *Client) InitiateLayerUploadRequest(input *InitiateLayerUploadInput) InitiateLayerUploadRequest {
+func (c *Client) InitiateLayerUploadRequest(input *types.InitiateLayerUploadInput) InitiateLayerUploadRequest {
 	op := &aws.Operation{
 		Name:       opInitiateLayerUpload,
 		HTTPMethod: "POST",
@@ -88,10 +36,10 @@ func (c *Client) InitiateLayerUploadRequest(input *InitiateLayerUploadInput) Ini
 	}
 
 	if input == nil {
-		input = &InitiateLayerUploadInput{}
+		input = &types.InitiateLayerUploadInput{}
 	}
 
-	req := c.newRequest(op, input, &InitiateLayerUploadOutput{})
+	req := c.newRequest(op, input, &types.InitiateLayerUploadOutput{})
 	return InitiateLayerUploadRequest{Request: req, Input: input, Copy: c.InitiateLayerUploadRequest}
 }
 
@@ -99,8 +47,8 @@ func (c *Client) InitiateLayerUploadRequest(input *InitiateLayerUploadInput) Ini
 // InitiateLayerUpload API operation.
 type InitiateLayerUploadRequest struct {
 	*aws.Request
-	Input *InitiateLayerUploadInput
-	Copy  func(*InitiateLayerUploadInput) InitiateLayerUploadRequest
+	Input *types.InitiateLayerUploadInput
+	Copy  func(*types.InitiateLayerUploadInput) InitiateLayerUploadRequest
 }
 
 // Send marshals and sends the InitiateLayerUpload API request.
@@ -112,7 +60,7 @@ func (r InitiateLayerUploadRequest) Send(ctx context.Context) (*InitiateLayerUpl
 	}
 
 	resp := &InitiateLayerUploadResponse{
-		InitiateLayerUploadOutput: r.Request.Data.(*InitiateLayerUploadOutput),
+		InitiateLayerUploadOutput: r.Request.Data.(*types.InitiateLayerUploadOutput),
 		response:                  &aws.Response{Request: r.Request},
 	}
 
@@ -122,7 +70,7 @@ func (r InitiateLayerUploadRequest) Send(ctx context.Context) (*InitiateLayerUpl
 // InitiateLayerUploadResponse is the response type for the
 // InitiateLayerUpload API operation.
 type InitiateLayerUploadResponse struct {
-	*InitiateLayerUploadOutput
+	*types.InitiateLayerUploadOutput
 
 	response *aws.Response
 }

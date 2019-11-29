@@ -4,66 +4,12 @@ package simpledb
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/query"
+	"github.com/aws/aws-sdk-go-v2/service/simpledb/types"
 )
-
-type BatchPutAttributesInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the domain in which the attributes are being stored.
-	//
-	// DomainName is a required field
-	DomainName *string `type:"string" required:"true"`
-
-	// A list of items on which to perform the operation.
-	//
-	// Items is a required field
-	Items []ReplaceableItem `locationNameList:"Item" type:"list" flattened:"true" required:"true"`
-}
-
-// String returns the string representation
-func (s BatchPutAttributesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *BatchPutAttributesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "BatchPutAttributesInput"}
-
-	if s.DomainName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DomainName"))
-	}
-
-	if s.Items == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Items"))
-	}
-	if s.Items != nil {
-		for i, v := range s.Items {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Items", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type BatchPutAttributesOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s BatchPutAttributesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opBatchPutAttributes = "BatchPutAttributes"
 
@@ -131,7 +77,7 @@ const opBatchPutAttributes = "BatchPutAttributes"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) BatchPutAttributesRequest(input *BatchPutAttributesInput) BatchPutAttributesRequest {
+func (c *Client) BatchPutAttributesRequest(input *types.BatchPutAttributesInput) BatchPutAttributesRequest {
 	op := &aws.Operation{
 		Name:       opBatchPutAttributes,
 		HTTPMethod: "POST",
@@ -139,10 +85,10 @@ func (c *Client) BatchPutAttributesRequest(input *BatchPutAttributesInput) Batch
 	}
 
 	if input == nil {
-		input = &BatchPutAttributesInput{}
+		input = &types.BatchPutAttributesInput{}
 	}
 
-	req := c.newRequest(op, input, &BatchPutAttributesOutput{})
+	req := c.newRequest(op, input, &types.BatchPutAttributesOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return BatchPutAttributesRequest{Request: req, Input: input, Copy: c.BatchPutAttributesRequest}
@@ -152,8 +98,8 @@ func (c *Client) BatchPutAttributesRequest(input *BatchPutAttributesInput) Batch
 // BatchPutAttributes API operation.
 type BatchPutAttributesRequest struct {
 	*aws.Request
-	Input *BatchPutAttributesInput
-	Copy  func(*BatchPutAttributesInput) BatchPutAttributesRequest
+	Input *types.BatchPutAttributesInput
+	Copy  func(*types.BatchPutAttributesInput) BatchPutAttributesRequest
 }
 
 // Send marshals and sends the BatchPutAttributes API request.
@@ -165,7 +111,7 @@ func (r BatchPutAttributesRequest) Send(ctx context.Context) (*BatchPutAttribute
 	}
 
 	resp := &BatchPutAttributesResponse{
-		BatchPutAttributesOutput: r.Request.Data.(*BatchPutAttributesOutput),
+		BatchPutAttributesOutput: r.Request.Data.(*types.BatchPutAttributesOutput),
 		response:                 &aws.Response{Request: r.Request},
 	}
 
@@ -175,7 +121,7 @@ func (r BatchPutAttributesRequest) Send(ctx context.Context) (*BatchPutAttribute
 // BatchPutAttributesResponse is the response type for the
 // BatchPutAttributes API operation.
 type BatchPutAttributesResponse struct {
-	*BatchPutAttributesOutput
+	*types.BatchPutAttributesOutput
 
 	response *aws.Response
 }

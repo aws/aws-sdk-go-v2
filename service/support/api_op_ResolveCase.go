@@ -6,37 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/support/types"
 )
-
-type ResolveCaseInput struct {
-	_ struct{} `type:"structure"`
-
-	// The AWS Support case ID requested or returned in the call. The case ID is
-	// an alphanumeric string formatted as shown in this example: case-12345678910-2013-c4c1d2bf33c5cf47
-	CaseId *string `locationName:"caseId" type:"string"`
-}
-
-// String returns the string representation
-func (s ResolveCaseInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// The status of the case returned by the ResolveCase operation.
-type ResolveCaseOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The status of the case after the ResolveCase request was processed.
-	FinalCaseStatus *string `locationName:"finalCaseStatus" type:"string"`
-
-	// The status of the case when the ResolveCase request was sent.
-	InitialCaseStatus *string `locationName:"initialCaseStatus" type:"string"`
-}
-
-// String returns the string representation
-func (s ResolveCaseOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opResolveCase = "ResolveCase"
 
@@ -54,7 +25,7 @@ const opResolveCase = "ResolveCase"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/support-2013-04-15/ResolveCase
-func (c *Client) ResolveCaseRequest(input *ResolveCaseInput) ResolveCaseRequest {
+func (c *Client) ResolveCaseRequest(input *types.ResolveCaseInput) ResolveCaseRequest {
 	op := &aws.Operation{
 		Name:       opResolveCase,
 		HTTPMethod: "POST",
@@ -62,10 +33,10 @@ func (c *Client) ResolveCaseRequest(input *ResolveCaseInput) ResolveCaseRequest 
 	}
 
 	if input == nil {
-		input = &ResolveCaseInput{}
+		input = &types.ResolveCaseInput{}
 	}
 
-	req := c.newRequest(op, input, &ResolveCaseOutput{})
+	req := c.newRequest(op, input, &types.ResolveCaseOutput{})
 	return ResolveCaseRequest{Request: req, Input: input, Copy: c.ResolveCaseRequest}
 }
 
@@ -73,8 +44,8 @@ func (c *Client) ResolveCaseRequest(input *ResolveCaseInput) ResolveCaseRequest 
 // ResolveCase API operation.
 type ResolveCaseRequest struct {
 	*aws.Request
-	Input *ResolveCaseInput
-	Copy  func(*ResolveCaseInput) ResolveCaseRequest
+	Input *types.ResolveCaseInput
+	Copy  func(*types.ResolveCaseInput) ResolveCaseRequest
 }
 
 // Send marshals and sends the ResolveCase API request.
@@ -86,7 +57,7 @@ func (r ResolveCaseRequest) Send(ctx context.Context) (*ResolveCaseResponse, err
 	}
 
 	resp := &ResolveCaseResponse{
-		ResolveCaseOutput: r.Request.Data.(*ResolveCaseOutput),
+		ResolveCaseOutput: r.Request.Data.(*types.ResolveCaseOutput),
 		response:          &aws.Response{Request: r.Request},
 	}
 
@@ -96,7 +67,7 @@ func (r ResolveCaseRequest) Send(ctx context.Context) (*ResolveCaseResponse, err
 // ResolveCaseResponse is the response type for the
 // ResolveCase API operation.
 type ResolveCaseResponse struct {
-	*ResolveCaseOutput
+	*types.ResolveCaseOutput
 
 	response *aws.Response
 }

@@ -6,57 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
+	"github.com/aws/aws-sdk-go-v2/service/opsworks/types"
 )
-
-type AssignInstanceInput struct {
-	_ struct{} `type:"structure"`
-
-	// The instance ID.
-	//
-	// InstanceId is a required field
-	InstanceId *string `type:"string" required:"true"`
-
-	// The layer ID, which must correspond to a custom layer. You cannot assign
-	// a registered instance to a built-in layer.
-	//
-	// LayerIds is a required field
-	LayerIds []string `type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s AssignInstanceInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *AssignInstanceInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "AssignInstanceInput"}
-
-	if s.InstanceId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("InstanceId"))
-	}
-
-	if s.LayerIds == nil {
-		invalidParams.Add(aws.NewErrParamRequired("LayerIds"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type AssignInstanceOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s AssignInstanceOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opAssignInstance = "AssignInstance"
 
@@ -85,7 +38,7 @@ const opAssignInstance = "AssignInstance"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/AssignInstance
-func (c *Client) AssignInstanceRequest(input *AssignInstanceInput) AssignInstanceRequest {
+func (c *Client) AssignInstanceRequest(input *types.AssignInstanceInput) AssignInstanceRequest {
 	op := &aws.Operation{
 		Name:       opAssignInstance,
 		HTTPMethod: "POST",
@@ -93,10 +46,10 @@ func (c *Client) AssignInstanceRequest(input *AssignInstanceInput) AssignInstanc
 	}
 
 	if input == nil {
-		input = &AssignInstanceInput{}
+		input = &types.AssignInstanceInput{}
 	}
 
-	req := c.newRequest(op, input, &AssignInstanceOutput{})
+	req := c.newRequest(op, input, &types.AssignInstanceOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return AssignInstanceRequest{Request: req, Input: input, Copy: c.AssignInstanceRequest}
@@ -106,8 +59,8 @@ func (c *Client) AssignInstanceRequest(input *AssignInstanceInput) AssignInstanc
 // AssignInstance API operation.
 type AssignInstanceRequest struct {
 	*aws.Request
-	Input *AssignInstanceInput
-	Copy  func(*AssignInstanceInput) AssignInstanceRequest
+	Input *types.AssignInstanceInput
+	Copy  func(*types.AssignInstanceInput) AssignInstanceRequest
 }
 
 // Send marshals and sends the AssignInstance API request.
@@ -119,7 +72,7 @@ func (r AssignInstanceRequest) Send(ctx context.Context) (*AssignInstanceRespons
 	}
 
 	resp := &AssignInstanceResponse{
-		AssignInstanceOutput: r.Request.Data.(*AssignInstanceOutput),
+		AssignInstanceOutput: r.Request.Data.(*types.AssignInstanceOutput),
 		response:             &aws.Response{Request: r.Request},
 	}
 
@@ -129,7 +82,7 @@ func (r AssignInstanceRequest) Send(ctx context.Context) (*AssignInstanceRespons
 // AssignInstanceResponse is the response type for the
 // AssignInstance API operation.
 type AssignInstanceResponse struct {
-	*AssignInstanceOutput
+	*types.AssignInstanceOutput
 
 	response *aws.Response
 }

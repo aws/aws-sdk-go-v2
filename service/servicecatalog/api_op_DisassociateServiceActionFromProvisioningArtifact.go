@@ -6,81 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/types"
 )
-
-type DisassociateServiceActionFromProvisioningArtifactInput struct {
-	_ struct{} `type:"structure"`
-
-	// The language code.
-	//
-	//    * en - English (default)
-	//
-	//    * jp - Japanese
-	//
-	//    * zh - Chinese
-	AcceptLanguage *string `type:"string"`
-
-	// The product identifier. For example, prod-abcdzk7xy33qa.
-	//
-	// ProductId is a required field
-	ProductId *string `min:"1" type:"string" required:"true"`
-
-	// The identifier of the provisioning artifact. For example, pa-4abcdjnxjj6ne.
-	//
-	// ProvisioningArtifactId is a required field
-	ProvisioningArtifactId *string `min:"1" type:"string" required:"true"`
-
-	// The self-service action identifier. For example, act-fs7abcd89wxyz.
-	//
-	// ServiceActionId is a required field
-	ServiceActionId *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DisassociateServiceActionFromProvisioningArtifactInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DisassociateServiceActionFromProvisioningArtifactInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DisassociateServiceActionFromProvisioningArtifactInput"}
-
-	if s.ProductId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ProductId"))
-	}
-	if s.ProductId != nil && len(*s.ProductId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ProductId", 1))
-	}
-
-	if s.ProvisioningArtifactId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ProvisioningArtifactId"))
-	}
-	if s.ProvisioningArtifactId != nil && len(*s.ProvisioningArtifactId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ProvisioningArtifactId", 1))
-	}
-
-	if s.ServiceActionId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ServiceActionId"))
-	}
-	if s.ServiceActionId != nil && len(*s.ServiceActionId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ServiceActionId", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DisassociateServiceActionFromProvisioningArtifactOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DisassociateServiceActionFromProvisioningArtifactOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDisassociateServiceActionFromProvisioningArtifact = "DisassociateServiceActionFromProvisioningArtifact"
 
@@ -98,7 +25,7 @@ const opDisassociateServiceActionFromProvisioningArtifact = "DisassociateService
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DisassociateServiceActionFromProvisioningArtifact
-func (c *Client) DisassociateServiceActionFromProvisioningArtifactRequest(input *DisassociateServiceActionFromProvisioningArtifactInput) DisassociateServiceActionFromProvisioningArtifactRequest {
+func (c *Client) DisassociateServiceActionFromProvisioningArtifactRequest(input *types.DisassociateServiceActionFromProvisioningArtifactInput) DisassociateServiceActionFromProvisioningArtifactRequest {
 	op := &aws.Operation{
 		Name:       opDisassociateServiceActionFromProvisioningArtifact,
 		HTTPMethod: "POST",
@@ -106,10 +33,10 @@ func (c *Client) DisassociateServiceActionFromProvisioningArtifactRequest(input 
 	}
 
 	if input == nil {
-		input = &DisassociateServiceActionFromProvisioningArtifactInput{}
+		input = &types.DisassociateServiceActionFromProvisioningArtifactInput{}
 	}
 
-	req := c.newRequest(op, input, &DisassociateServiceActionFromProvisioningArtifactOutput{})
+	req := c.newRequest(op, input, &types.DisassociateServiceActionFromProvisioningArtifactOutput{})
 	return DisassociateServiceActionFromProvisioningArtifactRequest{Request: req, Input: input, Copy: c.DisassociateServiceActionFromProvisioningArtifactRequest}
 }
 
@@ -117,8 +44,8 @@ func (c *Client) DisassociateServiceActionFromProvisioningArtifactRequest(input 
 // DisassociateServiceActionFromProvisioningArtifact API operation.
 type DisassociateServiceActionFromProvisioningArtifactRequest struct {
 	*aws.Request
-	Input *DisassociateServiceActionFromProvisioningArtifactInput
-	Copy  func(*DisassociateServiceActionFromProvisioningArtifactInput) DisassociateServiceActionFromProvisioningArtifactRequest
+	Input *types.DisassociateServiceActionFromProvisioningArtifactInput
+	Copy  func(*types.DisassociateServiceActionFromProvisioningArtifactInput) DisassociateServiceActionFromProvisioningArtifactRequest
 }
 
 // Send marshals and sends the DisassociateServiceActionFromProvisioningArtifact API request.
@@ -130,7 +57,7 @@ func (r DisassociateServiceActionFromProvisioningArtifactRequest) Send(ctx conte
 	}
 
 	resp := &DisassociateServiceActionFromProvisioningArtifactResponse{
-		DisassociateServiceActionFromProvisioningArtifactOutput: r.Request.Data.(*DisassociateServiceActionFromProvisioningArtifactOutput),
+		DisassociateServiceActionFromProvisioningArtifactOutput: r.Request.Data.(*types.DisassociateServiceActionFromProvisioningArtifactOutput),
 		response: &aws.Response{Request: r.Request},
 	}
 
@@ -140,7 +67,7 @@ func (r DisassociateServiceActionFromProvisioningArtifactRequest) Send(ctx conte
 // DisassociateServiceActionFromProvisioningArtifactResponse is the response type for the
 // DisassociateServiceActionFromProvisioningArtifact API operation.
 type DisassociateServiceActionFromProvisioningArtifactResponse struct {
-	*DisassociateServiceActionFromProvisioningArtifactOutput
+	*types.DisassociateServiceActionFromProvisioningArtifactOutput
 
 	response *aws.Response
 }

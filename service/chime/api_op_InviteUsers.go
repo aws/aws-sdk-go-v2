@@ -6,109 +6,17 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/chime/types"
 )
-
-type InviteUsersInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Chime account ID.
-	//
-	// AccountId is a required field
-	AccountId *string `location:"uri" locationName:"accountId" type:"string" required:"true"`
-
-	// The user email addresses to which to send the invite.
-	//
-	// UserEmailList is a required field
-	UserEmailList []string `type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s InviteUsersInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *InviteUsersInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "InviteUsersInput"}
-
-	if s.AccountId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("AccountId"))
-	}
-
-	if s.UserEmailList == nil {
-		invalidParams.Add(aws.NewErrParamRequired("UserEmailList"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s InviteUsersInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.UserEmailList != nil {
-		v := s.UserEmailList
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "UserEmailList", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
-		}
-		ls0.End()
-
-	}
-	if s.AccountId != nil {
-		v := *s.AccountId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "accountId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type InviteUsersOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The invite details.
-	Invites []Invite `type:"list"`
-}
-
-// String returns the string representation
-func (s InviteUsersOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s InviteUsersOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.Invites != nil {
-		v := s.Invites
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "Invites", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	return nil
-}
 
 const opInviteUsers = "InviteUsers"
 
 // InviteUsersRequest returns a request value for making API operation for
 // Amazon Chime.
 //
-// Sends email invites to as many as 50 users, inviting them to the specified
-// Amazon Chime Team account. Only Team account types are currently supported
-// for this action.
+// Sends email to a maximum of 50 users, inviting them to the specified Amazon
+// Chime Team account. Only Team account types are currently supported for this
+// action.
 //
 //    // Example sending a request using InviteUsersRequest.
 //    req := client.InviteUsersRequest(params)
@@ -118,7 +26,7 @@ const opInviteUsers = "InviteUsers"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/InviteUsers
-func (c *Client) InviteUsersRequest(input *InviteUsersInput) InviteUsersRequest {
+func (c *Client) InviteUsersRequest(input *types.InviteUsersInput) InviteUsersRequest {
 	op := &aws.Operation{
 		Name:       opInviteUsers,
 		HTTPMethod: "POST",
@@ -126,10 +34,10 @@ func (c *Client) InviteUsersRequest(input *InviteUsersInput) InviteUsersRequest 
 	}
 
 	if input == nil {
-		input = &InviteUsersInput{}
+		input = &types.InviteUsersInput{}
 	}
 
-	req := c.newRequest(op, input, &InviteUsersOutput{})
+	req := c.newRequest(op, input, &types.InviteUsersOutput{})
 	return InviteUsersRequest{Request: req, Input: input, Copy: c.InviteUsersRequest}
 }
 
@@ -137,8 +45,8 @@ func (c *Client) InviteUsersRequest(input *InviteUsersInput) InviteUsersRequest 
 // InviteUsers API operation.
 type InviteUsersRequest struct {
 	*aws.Request
-	Input *InviteUsersInput
-	Copy  func(*InviteUsersInput) InviteUsersRequest
+	Input *types.InviteUsersInput
+	Copy  func(*types.InviteUsersInput) InviteUsersRequest
 }
 
 // Send marshals and sends the InviteUsers API request.
@@ -150,7 +58,7 @@ func (r InviteUsersRequest) Send(ctx context.Context) (*InviteUsersResponse, err
 	}
 
 	resp := &InviteUsersResponse{
-		InviteUsersOutput: r.Request.Data.(*InviteUsersOutput),
+		InviteUsersOutput: r.Request.Data.(*types.InviteUsersOutput),
 		response:          &aws.Response{Request: r.Request},
 	}
 
@@ -160,7 +68,7 @@ func (r InviteUsersRequest) Send(ctx context.Context) (*InviteUsersResponse, err
 // InviteUsersResponse is the response type for the
 // InviteUsers API operation.
 type InviteUsersResponse struct {
-	*InviteUsersOutput
+	*types.InviteUsersOutput
 
 	response *aws.Response
 }

@@ -6,70 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/query"
+	"github.com/aws/aws-sdk-go-v2/service/iam/types"
 )
-
-type RemoveRoleFromInstanceProfileInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the instance profile to update.
-	//
-	// This parameter allows (through its regex pattern (http://wikipedia.org/wiki/regex))
-	// a string of characters consisting of upper and lowercase alphanumeric characters
-	// with no spaces. You can also include any of the following characters: _+=,.@-
-	//
-	// InstanceProfileName is a required field
-	InstanceProfileName *string `min:"1" type:"string" required:"true"`
-
-	// The name of the role to remove.
-	//
-	// This parameter allows (through its regex pattern (http://wikipedia.org/wiki/regex))
-	// a string of characters consisting of upper and lowercase alphanumeric characters
-	// with no spaces. You can also include any of the following characters: _+=,.@-
-	//
-	// RoleName is a required field
-	RoleName *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s RemoveRoleFromInstanceProfileInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *RemoveRoleFromInstanceProfileInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "RemoveRoleFromInstanceProfileInput"}
-
-	if s.InstanceProfileName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("InstanceProfileName"))
-	}
-	if s.InstanceProfileName != nil && len(*s.InstanceProfileName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("InstanceProfileName", 1))
-	}
-
-	if s.RoleName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("RoleName"))
-	}
-	if s.RoleName != nil && len(*s.RoleName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("RoleName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type RemoveRoleFromInstanceProfileOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s RemoveRoleFromInstanceProfileOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opRemoveRoleFromInstanceProfile = "RemoveRoleFromInstanceProfile"
 
@@ -95,7 +35,7 @@ const opRemoveRoleFromInstanceProfile = "RemoveRoleFromInstanceProfile"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/RemoveRoleFromInstanceProfile
-func (c *Client) RemoveRoleFromInstanceProfileRequest(input *RemoveRoleFromInstanceProfileInput) RemoveRoleFromInstanceProfileRequest {
+func (c *Client) RemoveRoleFromInstanceProfileRequest(input *types.RemoveRoleFromInstanceProfileInput) RemoveRoleFromInstanceProfileRequest {
 	op := &aws.Operation{
 		Name:       opRemoveRoleFromInstanceProfile,
 		HTTPMethod: "POST",
@@ -103,10 +43,10 @@ func (c *Client) RemoveRoleFromInstanceProfileRequest(input *RemoveRoleFromInsta
 	}
 
 	if input == nil {
-		input = &RemoveRoleFromInstanceProfileInput{}
+		input = &types.RemoveRoleFromInstanceProfileInput{}
 	}
 
-	req := c.newRequest(op, input, &RemoveRoleFromInstanceProfileOutput{})
+	req := c.newRequest(op, input, &types.RemoveRoleFromInstanceProfileOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return RemoveRoleFromInstanceProfileRequest{Request: req, Input: input, Copy: c.RemoveRoleFromInstanceProfileRequest}
@@ -116,8 +56,8 @@ func (c *Client) RemoveRoleFromInstanceProfileRequest(input *RemoveRoleFromInsta
 // RemoveRoleFromInstanceProfile API operation.
 type RemoveRoleFromInstanceProfileRequest struct {
 	*aws.Request
-	Input *RemoveRoleFromInstanceProfileInput
-	Copy  func(*RemoveRoleFromInstanceProfileInput) RemoveRoleFromInstanceProfileRequest
+	Input *types.RemoveRoleFromInstanceProfileInput
+	Copy  func(*types.RemoveRoleFromInstanceProfileInput) RemoveRoleFromInstanceProfileRequest
 }
 
 // Send marshals and sends the RemoveRoleFromInstanceProfile API request.
@@ -129,7 +69,7 @@ func (r RemoveRoleFromInstanceProfileRequest) Send(ctx context.Context) (*Remove
 	}
 
 	resp := &RemoveRoleFromInstanceProfileResponse{
-		RemoveRoleFromInstanceProfileOutput: r.Request.Data.(*RemoveRoleFromInstanceProfileOutput),
+		RemoveRoleFromInstanceProfileOutput: r.Request.Data.(*types.RemoveRoleFromInstanceProfileOutput),
 		response:                            &aws.Response{Request: r.Request},
 	}
 
@@ -139,7 +79,7 @@ func (r RemoveRoleFromInstanceProfileRequest) Send(ctx context.Context) (*Remove
 // RemoveRoleFromInstanceProfileResponse is the response type for the
 // RemoveRoleFromInstanceProfile API operation.
 type RemoveRoleFromInstanceProfileResponse struct {
-	*RemoveRoleFromInstanceProfileOutput
+	*types.RemoveRoleFromInstanceProfileOutput
 
 	response *aws.Response
 }

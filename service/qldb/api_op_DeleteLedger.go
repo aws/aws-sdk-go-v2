@@ -6,68 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/restjson"
+	"github.com/aws/aws-sdk-go-v2/service/qldb/types"
 )
-
-type DeleteLedgerInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the ledger that you want to delete.
-	//
-	// Name is a required field
-	Name *string `location:"uri" locationName:"name" min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteLedgerInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteLedgerInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteLedgerInput"}
-
-	if s.Name == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Name"))
-	}
-	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteLedgerInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.Name != nil {
-		v := *s.Name
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type DeleteLedgerOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteLedgerOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteLedgerOutput) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
 
 const opDeleteLedger = "DeleteLedger"
 
@@ -90,7 +32,7 @@ const opDeleteLedger = "DeleteLedger"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/qldb-2019-01-02/DeleteLedger
-func (c *Client) DeleteLedgerRequest(input *DeleteLedgerInput) DeleteLedgerRequest {
+func (c *Client) DeleteLedgerRequest(input *types.DeleteLedgerInput) DeleteLedgerRequest {
 	op := &aws.Operation{
 		Name:       opDeleteLedger,
 		HTTPMethod: "DELETE",
@@ -98,10 +40,10 @@ func (c *Client) DeleteLedgerRequest(input *DeleteLedgerInput) DeleteLedgerReque
 	}
 
 	if input == nil {
-		input = &DeleteLedgerInput{}
+		input = &types.DeleteLedgerInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteLedgerOutput{})
+	req := c.newRequest(op, input, &types.DeleteLedgerOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return DeleteLedgerRequest{Request: req, Input: input, Copy: c.DeleteLedgerRequest}
@@ -111,8 +53,8 @@ func (c *Client) DeleteLedgerRequest(input *DeleteLedgerInput) DeleteLedgerReque
 // DeleteLedger API operation.
 type DeleteLedgerRequest struct {
 	*aws.Request
-	Input *DeleteLedgerInput
-	Copy  func(*DeleteLedgerInput) DeleteLedgerRequest
+	Input *types.DeleteLedgerInput
+	Copy  func(*types.DeleteLedgerInput) DeleteLedgerRequest
 }
 
 // Send marshals and sends the DeleteLedger API request.
@@ -124,7 +66,7 @@ func (r DeleteLedgerRequest) Send(ctx context.Context) (*DeleteLedgerResponse, e
 	}
 
 	resp := &DeleteLedgerResponse{
-		DeleteLedgerOutput: r.Request.Data.(*DeleteLedgerOutput),
+		DeleteLedgerOutput: r.Request.Data.(*types.DeleteLedgerOutput),
 		response:           &aws.Response{Request: r.Request},
 	}
 
@@ -134,7 +76,7 @@ func (r DeleteLedgerRequest) Send(ctx context.Context) (*DeleteLedgerResponse, e
 // DeleteLedgerResponse is the response type for the
 // DeleteLedger API operation.
 type DeleteLedgerResponse struct {
-	*DeleteLedgerOutput
+	*types.DeleteLedgerOutput
 
 	response *aws.Response
 }

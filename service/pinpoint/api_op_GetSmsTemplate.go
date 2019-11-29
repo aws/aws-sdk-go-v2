@@ -6,74 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/pinpoint/types"
 )
-
-type GetSmsTemplateInput struct {
-	_ struct{} `type:"structure"`
-
-	// TemplateName is a required field
-	TemplateName *string `location:"uri" locationName:"template-name" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetSmsTemplateInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetSmsTemplateInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetSmsTemplateInput"}
-
-	if s.TemplateName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("TemplateName"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetSmsTemplateInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.TemplateName != nil {
-		v := *s.TemplateName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "template-name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type GetSmsTemplateOutput struct {
-	_ struct{} `type:"structure" payload:"SMSTemplateResponse"`
-
-	// Provides information about the content and settings for a message template
-	// that can be used in text messages that are sent through the SMS channel.
-	//
-	// SMSTemplateResponse is a required field
-	SMSTemplateResponse *SMSTemplateResponse `type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s GetSmsTemplateOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetSmsTemplateOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.SMSTemplateResponse != nil {
-		v := s.SMSTemplateResponse
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.PayloadTarget, "SMSTemplateResponse", v, metadata)
-	}
-	return nil
-}
 
 const opGetSmsTemplate = "GetSmsTemplate"
 
@@ -91,7 +25,7 @@ const opGetSmsTemplate = "GetSmsTemplate"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetSmsTemplate
-func (c *Client) GetSmsTemplateRequest(input *GetSmsTemplateInput) GetSmsTemplateRequest {
+func (c *Client) GetSmsTemplateRequest(input *types.GetSmsTemplateInput) GetSmsTemplateRequest {
 	op := &aws.Operation{
 		Name:       opGetSmsTemplate,
 		HTTPMethod: "GET",
@@ -99,10 +33,10 @@ func (c *Client) GetSmsTemplateRequest(input *GetSmsTemplateInput) GetSmsTemplat
 	}
 
 	if input == nil {
-		input = &GetSmsTemplateInput{}
+		input = &types.GetSmsTemplateInput{}
 	}
 
-	req := c.newRequest(op, input, &GetSmsTemplateOutput{})
+	req := c.newRequest(op, input, &types.GetSmsTemplateOutput{})
 	return GetSmsTemplateRequest{Request: req, Input: input, Copy: c.GetSmsTemplateRequest}
 }
 
@@ -110,8 +44,8 @@ func (c *Client) GetSmsTemplateRequest(input *GetSmsTemplateInput) GetSmsTemplat
 // GetSmsTemplate API operation.
 type GetSmsTemplateRequest struct {
 	*aws.Request
-	Input *GetSmsTemplateInput
-	Copy  func(*GetSmsTemplateInput) GetSmsTemplateRequest
+	Input *types.GetSmsTemplateInput
+	Copy  func(*types.GetSmsTemplateInput) GetSmsTemplateRequest
 }
 
 // Send marshals and sends the GetSmsTemplate API request.
@@ -123,7 +57,7 @@ func (r GetSmsTemplateRequest) Send(ctx context.Context) (*GetSmsTemplateRespons
 	}
 
 	resp := &GetSmsTemplateResponse{
-		GetSmsTemplateOutput: r.Request.Data.(*GetSmsTemplateOutput),
+		GetSmsTemplateOutput: r.Request.Data.(*types.GetSmsTemplateOutput),
 		response:             &aws.Response{Request: r.Request},
 	}
 
@@ -133,7 +67,7 @@ func (r GetSmsTemplateRequest) Send(ctx context.Context) (*GetSmsTemplateRespons
 // GetSmsTemplateResponse is the response type for the
 // GetSmsTemplate API operation.
 type GetSmsTemplateResponse struct {
-	*GetSmsTemplateOutput
+	*types.GetSmsTemplateOutput
 
 	response *aws.Response
 }

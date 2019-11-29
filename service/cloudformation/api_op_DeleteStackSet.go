@@ -6,46 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/cloudformation/types"
 )
-
-type DeleteStackSetInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name or unique ID of the stack set that you're deleting. You can obtain
-	// this value by running ListStackSets.
-	//
-	// StackSetName is a required field
-	StackSetName *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteStackSetInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteStackSetInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteStackSetInput"}
-
-	if s.StackSetName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("StackSetName"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteStackSetOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteStackSetOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteStackSet = "DeleteStackSet"
 
@@ -64,7 +26,7 @@ const opDeleteStackSet = "DeleteStackSet"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DeleteStackSet
-func (c *Client) DeleteStackSetRequest(input *DeleteStackSetInput) DeleteStackSetRequest {
+func (c *Client) DeleteStackSetRequest(input *types.DeleteStackSetInput) DeleteStackSetRequest {
 	op := &aws.Operation{
 		Name:       opDeleteStackSet,
 		HTTPMethod: "POST",
@@ -72,10 +34,10 @@ func (c *Client) DeleteStackSetRequest(input *DeleteStackSetInput) DeleteStackSe
 	}
 
 	if input == nil {
-		input = &DeleteStackSetInput{}
+		input = &types.DeleteStackSetInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteStackSetOutput{})
+	req := c.newRequest(op, input, &types.DeleteStackSetOutput{})
 	return DeleteStackSetRequest{Request: req, Input: input, Copy: c.DeleteStackSetRequest}
 }
 
@@ -83,8 +45,8 @@ func (c *Client) DeleteStackSetRequest(input *DeleteStackSetInput) DeleteStackSe
 // DeleteStackSet API operation.
 type DeleteStackSetRequest struct {
 	*aws.Request
-	Input *DeleteStackSetInput
-	Copy  func(*DeleteStackSetInput) DeleteStackSetRequest
+	Input *types.DeleteStackSetInput
+	Copy  func(*types.DeleteStackSetInput) DeleteStackSetRequest
 }
 
 // Send marshals and sends the DeleteStackSet API request.
@@ -96,7 +58,7 @@ func (r DeleteStackSetRequest) Send(ctx context.Context) (*DeleteStackSetRespons
 	}
 
 	resp := &DeleteStackSetResponse{
-		DeleteStackSetOutput: r.Request.Data.(*DeleteStackSetOutput),
+		DeleteStackSetOutput: r.Request.Data.(*types.DeleteStackSetOutput),
 		response:             &aws.Response{Request: r.Request},
 	}
 
@@ -106,7 +68,7 @@ func (r DeleteStackSetRequest) Send(ctx context.Context) (*DeleteStackSetRespons
 // DeleteStackSetResponse is the response type for the
 // DeleteStackSet API operation.
 type DeleteStackSetResponse struct {
-	*DeleteStackSetOutput
+	*types.DeleteStackSetOutput
 
 	response *aws.Response
 }

@@ -13,6 +13,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws/awserr"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting/integration"
 	"github.com/aws/aws-sdk-go-v2/service/kms"
+	"github.com/aws/aws-sdk-go-v2/service/kms/types"
 )
 
 var _ aws.Config
@@ -24,7 +25,7 @@ func TestInteg_00_ListAliases(t *testing.T) {
 
 	cfg := integration.ConfigWithDefaultRegion("us-west-2")
 	svc := kms.New(cfg)
-	params := &kms.ListAliasesInput{}
+	params := &types.ListAliasesInput{}
 
 	req := svc.ListAliasesRequest(params)
 
@@ -39,7 +40,7 @@ func TestInteg_01_GetKeyPolicy(t *testing.T) {
 
 	cfg := integration.ConfigWithDefaultRegion("us-west-2")
 	svc := kms.New(cfg)
-	params := &kms.GetKeyPolicyInput{
+	params := &types.GetKeyPolicyInput{
 		KeyId:      aws.String("12345678-1234-1234-1234-123456789012"),
 		PolicyName: aws.String("fakePolicy"),
 	}

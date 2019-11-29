@@ -6,137 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/route53/types"
 )
-
-// A request to retrieve a list of the health checks that are associated with
-// the current AWS account.
-type ListHealthChecksInput struct {
-	_ struct{} `type:"structure"`
-
-	// If the value of IsTruncated in the previous response was true, you have more
-	// health checks. To get another group, submit another ListHealthChecks request.
-	//
-	// For the value of marker, specify the value of NextMarker from the previous
-	// response, which is the ID of the first health check that Amazon Route 53
-	// will return if you submit another request.
-	//
-	// If the value of IsTruncated in the previous response was false, there are
-	// no more health checks to get.
-	Marker *string `location:"querystring" locationName:"marker" type:"string"`
-
-	// The maximum number of health checks that you want ListHealthChecks to return
-	// in response to the current request. Amazon Route 53 returns a maximum of
-	// 100 items. If you set MaxItems to a value greater than 100, Route 53 returns
-	// only the first 100 health checks.
-	MaxItems *string `location:"querystring" locationName:"maxitems" type:"string"`
-}
-
-// String returns the string representation
-func (s ListHealthChecksInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListHealthChecksInput) MarshalFields(e protocol.FieldEncoder) error {
-
-	if s.Marker != nil {
-		v := *s.Marker
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "marker", protocol.StringValue(v), metadata)
-	}
-	if s.MaxItems != nil {
-		v := *s.MaxItems
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "maxitems", protocol.StringValue(v), metadata)
-	}
-	return nil
-}
-
-// A complex type that contains the response to a ListHealthChecks request.
-type ListHealthChecksOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A complex type that contains one HealthCheck element for each health check
-	// that is associated with the current AWS account.
-	//
-	// HealthChecks is a required field
-	HealthChecks []HealthCheck `locationNameList:"HealthCheck" type:"list" required:"true"`
-
-	// A flag that indicates whether there are more health checks to be listed.
-	// If the response was truncated, you can get the next group of health checks
-	// by submitting another ListHealthChecks request and specifying the value of
-	// NextMarker in the marker parameter.
-	//
-	// IsTruncated is a required field
-	IsTruncated *bool `type:"boolean" required:"true"`
-
-	// For the second and subsequent calls to ListHealthChecks, Marker is the value
-	// that you specified for the marker parameter in the previous request.
-	//
-	// Marker is a required field
-	Marker *string `type:"string" required:"true"`
-
-	// The value that you specified for the maxitems parameter in the call to ListHealthChecks
-	// that produced the current response.
-	//
-	// MaxItems is a required field
-	MaxItems *string `type:"string" required:"true"`
-
-	// If IsTruncated is true, the value of NextMarker identifies the first health
-	// check that Amazon Route 53 returns if you submit another ListHealthChecks
-	// request and specify the value of NextMarker in the marker parameter.
-	NextMarker *string `type:"string"`
-}
-
-// String returns the string representation
-func (s ListHealthChecksOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListHealthChecksOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.HealthChecks != nil {
-		v := s.HealthChecks
-
-		metadata := protocol.Metadata{ListLocationName: "HealthCheck"}
-		ls0 := e.List(protocol.BodyTarget, "HealthChecks", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	if s.IsTruncated != nil {
-		v := *s.IsTruncated
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "IsTruncated", protocol.BoolValue(v), metadata)
-	}
-	if s.Marker != nil {
-		v := *s.Marker
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "Marker", protocol.StringValue(v), metadata)
-	}
-	if s.MaxItems != nil {
-		v := *s.MaxItems
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "MaxItems", protocol.StringValue(v), metadata)
-	}
-	if s.NextMarker != nil {
-		v := *s.NextMarker
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "NextMarker", protocol.StringValue(v), metadata)
-	}
-	return nil
-}
 
 const opListHealthChecks = "ListHealthChecks"
 
@@ -154,7 +25,7 @@ const opListHealthChecks = "ListHealthChecks"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/ListHealthChecks
-func (c *Client) ListHealthChecksRequest(input *ListHealthChecksInput) ListHealthChecksRequest {
+func (c *Client) ListHealthChecksRequest(input *types.ListHealthChecksInput) ListHealthChecksRequest {
 	op := &aws.Operation{
 		Name:       opListHealthChecks,
 		HTTPMethod: "GET",
@@ -168,10 +39,10 @@ func (c *Client) ListHealthChecksRequest(input *ListHealthChecksInput) ListHealt
 	}
 
 	if input == nil {
-		input = &ListHealthChecksInput{}
+		input = &types.ListHealthChecksInput{}
 	}
 
-	req := c.newRequest(op, input, &ListHealthChecksOutput{})
+	req := c.newRequest(op, input, &types.ListHealthChecksOutput{})
 	return ListHealthChecksRequest{Request: req, Input: input, Copy: c.ListHealthChecksRequest}
 }
 
@@ -179,8 +50,8 @@ func (c *Client) ListHealthChecksRequest(input *ListHealthChecksInput) ListHealt
 // ListHealthChecks API operation.
 type ListHealthChecksRequest struct {
 	*aws.Request
-	Input *ListHealthChecksInput
-	Copy  func(*ListHealthChecksInput) ListHealthChecksRequest
+	Input *types.ListHealthChecksInput
+	Copy  func(*types.ListHealthChecksInput) ListHealthChecksRequest
 }
 
 // Send marshals and sends the ListHealthChecks API request.
@@ -192,7 +63,7 @@ func (r ListHealthChecksRequest) Send(ctx context.Context) (*ListHealthChecksRes
 	}
 
 	resp := &ListHealthChecksResponse{
-		ListHealthChecksOutput: r.Request.Data.(*ListHealthChecksOutput),
+		ListHealthChecksOutput: r.Request.Data.(*types.ListHealthChecksOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -222,7 +93,7 @@ func NewListHealthChecksPaginator(req ListHealthChecksRequest) ListHealthChecksP
 	return ListHealthChecksPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListHealthChecksInput
+				var inCpy *types.ListHealthChecksInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -242,14 +113,14 @@ type ListHealthChecksPaginator struct {
 	aws.Pager
 }
 
-func (p *ListHealthChecksPaginator) CurrentPage() *ListHealthChecksOutput {
-	return p.Pager.CurrentPage().(*ListHealthChecksOutput)
+func (p *ListHealthChecksPaginator) CurrentPage() *types.ListHealthChecksOutput {
+	return p.Pager.CurrentPage().(*types.ListHealthChecksOutput)
 }
 
 // ListHealthChecksResponse is the response type for the
 // ListHealthChecks API operation.
 type ListHealthChecksResponse struct {
-	*ListHealthChecksOutput
+	*types.ListHealthChecksOutput
 
 	response *aws.Response
 }

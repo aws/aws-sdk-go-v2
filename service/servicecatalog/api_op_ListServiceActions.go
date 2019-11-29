@@ -6,50 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/types"
 )
-
-type ListServiceActionsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The language code.
-	//
-	//    * en - English (default)
-	//
-	//    * jp - Japanese
-	//
-	//    * zh - Chinese
-	AcceptLanguage *string `type:"string"`
-
-	// The maximum number of items to return with this call.
-	PageSize *int64 `type:"integer"`
-
-	// The page token for the next set of results. To retrieve the first set of
-	// results, use null.
-	PageToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s ListServiceActionsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type ListServiceActionsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The page token to use to retrieve the next set of results. If there are no
-	// additional results, this value is null.
-	NextPageToken *string `type:"string"`
-
-	// An object containing information about the service actions associated with
-	// the provisioning artifact.
-	ServiceActionSummaries []ServiceActionSummary `type:"list"`
-}
-
-// String returns the string representation
-func (s ListServiceActionsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListServiceActions = "ListServiceActions"
 
@@ -66,7 +24,7 @@ const opListServiceActions = "ListServiceActions"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ListServiceActions
-func (c *Client) ListServiceActionsRequest(input *ListServiceActionsInput) ListServiceActionsRequest {
+func (c *Client) ListServiceActionsRequest(input *types.ListServiceActionsInput) ListServiceActionsRequest {
 	op := &aws.Operation{
 		Name:       opListServiceActions,
 		HTTPMethod: "POST",
@@ -80,10 +38,10 @@ func (c *Client) ListServiceActionsRequest(input *ListServiceActionsInput) ListS
 	}
 
 	if input == nil {
-		input = &ListServiceActionsInput{}
+		input = &types.ListServiceActionsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListServiceActionsOutput{})
+	req := c.newRequest(op, input, &types.ListServiceActionsOutput{})
 	return ListServiceActionsRequest{Request: req, Input: input, Copy: c.ListServiceActionsRequest}
 }
 
@@ -91,8 +49,8 @@ func (c *Client) ListServiceActionsRequest(input *ListServiceActionsInput) ListS
 // ListServiceActions API operation.
 type ListServiceActionsRequest struct {
 	*aws.Request
-	Input *ListServiceActionsInput
-	Copy  func(*ListServiceActionsInput) ListServiceActionsRequest
+	Input *types.ListServiceActionsInput
+	Copy  func(*types.ListServiceActionsInput) ListServiceActionsRequest
 }
 
 // Send marshals and sends the ListServiceActions API request.
@@ -104,7 +62,7 @@ func (r ListServiceActionsRequest) Send(ctx context.Context) (*ListServiceAction
 	}
 
 	resp := &ListServiceActionsResponse{
-		ListServiceActionsOutput: r.Request.Data.(*ListServiceActionsOutput),
+		ListServiceActionsOutput: r.Request.Data.(*types.ListServiceActionsOutput),
 		response:                 &aws.Response{Request: r.Request},
 	}
 
@@ -134,7 +92,7 @@ func NewListServiceActionsPaginator(req ListServiceActionsRequest) ListServiceAc
 	return ListServiceActionsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListServiceActionsInput
+				var inCpy *types.ListServiceActionsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -154,14 +112,14 @@ type ListServiceActionsPaginator struct {
 	aws.Pager
 }
 
-func (p *ListServiceActionsPaginator) CurrentPage() *ListServiceActionsOutput {
-	return p.Pager.CurrentPage().(*ListServiceActionsOutput)
+func (p *ListServiceActionsPaginator) CurrentPage() *types.ListServiceActionsOutput {
+	return p.Pager.CurrentPage().(*types.ListServiceActionsOutput)
 }
 
 // ListServiceActionsResponse is the response type for the
 // ListServiceActions API operation.
 type ListServiceActionsResponse struct {
-	*ListServiceActionsOutput
+	*types.ListServiceActionsOutput
 
 	response *aws.Response
 }

@@ -6,57 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/gamelift/types"
 )
-
-type StartFleetActionsInput struct {
-	_ struct{} `type:"structure"`
-
-	// List of actions to restart on the fleet.
-	//
-	// Actions is a required field
-	Actions []FleetAction `min:"1" type:"list" required:"true"`
-
-	// Unique identifier for a fleet
-	//
-	// FleetId is a required field
-	FleetId *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s StartFleetActionsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *StartFleetActionsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "StartFleetActionsInput"}
-
-	if s.Actions == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Actions"))
-	}
-	if s.Actions != nil && len(s.Actions) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Actions", 1))
-	}
-
-	if s.FleetId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("FleetId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type StartFleetActionsOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s StartFleetActionsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opStartFleetActions = "StartFleetActions"
 
@@ -101,7 +52,7 @@ const opStartFleetActions = "StartFleetActions"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/StartFleetActions
-func (c *Client) StartFleetActionsRequest(input *StartFleetActionsInput) StartFleetActionsRequest {
+func (c *Client) StartFleetActionsRequest(input *types.StartFleetActionsInput) StartFleetActionsRequest {
 	op := &aws.Operation{
 		Name:       opStartFleetActions,
 		HTTPMethod: "POST",
@@ -109,10 +60,10 @@ func (c *Client) StartFleetActionsRequest(input *StartFleetActionsInput) StartFl
 	}
 
 	if input == nil {
-		input = &StartFleetActionsInput{}
+		input = &types.StartFleetActionsInput{}
 	}
 
-	req := c.newRequest(op, input, &StartFleetActionsOutput{})
+	req := c.newRequest(op, input, &types.StartFleetActionsOutput{})
 	return StartFleetActionsRequest{Request: req, Input: input, Copy: c.StartFleetActionsRequest}
 }
 
@@ -120,8 +71,8 @@ func (c *Client) StartFleetActionsRequest(input *StartFleetActionsInput) StartFl
 // StartFleetActions API operation.
 type StartFleetActionsRequest struct {
 	*aws.Request
-	Input *StartFleetActionsInput
-	Copy  func(*StartFleetActionsInput) StartFleetActionsRequest
+	Input *types.StartFleetActionsInput
+	Copy  func(*types.StartFleetActionsInput) StartFleetActionsRequest
 }
 
 // Send marshals and sends the StartFleetActions API request.
@@ -133,7 +84,7 @@ func (r StartFleetActionsRequest) Send(ctx context.Context) (*StartFleetActionsR
 	}
 
 	resp := &StartFleetActionsResponse{
-		StartFleetActionsOutput: r.Request.Data.(*StartFleetActionsOutput),
+		StartFleetActionsOutput: r.Request.Data.(*types.StartFleetActionsOutput),
 		response:                &aws.Response{Request: r.Request},
 	}
 
@@ -143,7 +94,7 @@ func (r StartFleetActionsRequest) Send(ctx context.Context) (*StartFleetActionsR
 // StartFleetActionsResponse is the response type for the
 // StartFleetActions API operation.
 type StartFleetActionsResponse struct {
-	*StartFleetActionsOutput
+	*types.StartFleetActionsOutput
 
 	response *aws.Response
 }

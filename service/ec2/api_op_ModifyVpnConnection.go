@@ -6,63 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-type ModifyVpnConnectionInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the customer gateway at your end of the VPN connection.
-	CustomerGatewayId *string `type:"string"`
-
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have
-	// the required permissions, the error response is DryRunOperation. Otherwise,
-	// it is UnauthorizedOperation.
-	DryRun *bool `type:"boolean"`
-
-	// The ID of the transit gateway.
-	TransitGatewayId *string `type:"string"`
-
-	// The ID of the VPN connection.
-	//
-	// VpnConnectionId is a required field
-	VpnConnectionId *string `type:"string" required:"true"`
-
-	// The ID of the virtual private gateway at the AWS side of the VPN connection.
-	VpnGatewayId *string `type:"string"`
-}
-
-// String returns the string representation
-func (s ModifyVpnConnectionInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ModifyVpnConnectionInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ModifyVpnConnectionInput"}
-
-	if s.VpnConnectionId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("VpnConnectionId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ModifyVpnConnectionOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Describes a VPN connection.
-	VpnConnection *VpnConnection `locationName:"vpnConnection" type:"structure"`
-}
-
-// String returns the string representation
-func (s ModifyVpnConnectionOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opModifyVpnConnection = "ModifyVpnConnection"
 
@@ -118,7 +63,7 @@ const opModifyVpnConnection = "ModifyVpnConnection"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyVpnConnection
-func (c *Client) ModifyVpnConnectionRequest(input *ModifyVpnConnectionInput) ModifyVpnConnectionRequest {
+func (c *Client) ModifyVpnConnectionRequest(input *types.ModifyVpnConnectionInput) ModifyVpnConnectionRequest {
 	op := &aws.Operation{
 		Name:       opModifyVpnConnection,
 		HTTPMethod: "POST",
@@ -126,10 +71,10 @@ func (c *Client) ModifyVpnConnectionRequest(input *ModifyVpnConnectionInput) Mod
 	}
 
 	if input == nil {
-		input = &ModifyVpnConnectionInput{}
+		input = &types.ModifyVpnConnectionInput{}
 	}
 
-	req := c.newRequest(op, input, &ModifyVpnConnectionOutput{})
+	req := c.newRequest(op, input, &types.ModifyVpnConnectionOutput{})
 	return ModifyVpnConnectionRequest{Request: req, Input: input, Copy: c.ModifyVpnConnectionRequest}
 }
 
@@ -137,8 +82,8 @@ func (c *Client) ModifyVpnConnectionRequest(input *ModifyVpnConnectionInput) Mod
 // ModifyVpnConnection API operation.
 type ModifyVpnConnectionRequest struct {
 	*aws.Request
-	Input *ModifyVpnConnectionInput
-	Copy  func(*ModifyVpnConnectionInput) ModifyVpnConnectionRequest
+	Input *types.ModifyVpnConnectionInput
+	Copy  func(*types.ModifyVpnConnectionInput) ModifyVpnConnectionRequest
 }
 
 // Send marshals and sends the ModifyVpnConnection API request.
@@ -150,7 +95,7 @@ func (r ModifyVpnConnectionRequest) Send(ctx context.Context) (*ModifyVpnConnect
 	}
 
 	resp := &ModifyVpnConnectionResponse{
-		ModifyVpnConnectionOutput: r.Request.Data.(*ModifyVpnConnectionOutput),
+		ModifyVpnConnectionOutput: r.Request.Data.(*types.ModifyVpnConnectionOutput),
 		response:                  &aws.Response{Request: r.Request},
 	}
 
@@ -160,7 +105,7 @@ func (r ModifyVpnConnectionRequest) Send(ctx context.Context) (*ModifyVpnConnect
 // ModifyVpnConnectionResponse is the response type for the
 // ModifyVpnConnection API operation.
 type ModifyVpnConnectionResponse struct {
-	*ModifyVpnConnectionOutput
+	*types.ModifyVpnConnectionOutput
 
 	response *aws.Response
 }

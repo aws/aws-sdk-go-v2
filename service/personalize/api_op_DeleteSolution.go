@@ -6,47 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
+	"github.com/aws/aws-sdk-go-v2/service/personalize/types"
 )
-
-type DeleteSolutionInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ARN of the solution to delete.
-	//
-	// SolutionArn is a required field
-	SolutionArn *string `locationName:"solutionArn" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteSolutionInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteSolutionInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteSolutionInput"}
-
-	if s.SolutionArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("SolutionArn"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteSolutionOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteSolutionOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteSolution = "DeleteSolution"
 
@@ -68,7 +31,7 @@ const opDeleteSolution = "DeleteSolution"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/DeleteSolution
-func (c *Client) DeleteSolutionRequest(input *DeleteSolutionInput) DeleteSolutionRequest {
+func (c *Client) DeleteSolutionRequest(input *types.DeleteSolutionInput) DeleteSolutionRequest {
 	op := &aws.Operation{
 		Name:       opDeleteSolution,
 		HTTPMethod: "POST",
@@ -76,10 +39,10 @@ func (c *Client) DeleteSolutionRequest(input *DeleteSolutionInput) DeleteSolutio
 	}
 
 	if input == nil {
-		input = &DeleteSolutionInput{}
+		input = &types.DeleteSolutionInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteSolutionOutput{})
+	req := c.newRequest(op, input, &types.DeleteSolutionOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return DeleteSolutionRequest{Request: req, Input: input, Copy: c.DeleteSolutionRequest}
@@ -89,8 +52,8 @@ func (c *Client) DeleteSolutionRequest(input *DeleteSolutionInput) DeleteSolutio
 // DeleteSolution API operation.
 type DeleteSolutionRequest struct {
 	*aws.Request
-	Input *DeleteSolutionInput
-	Copy  func(*DeleteSolutionInput) DeleteSolutionRequest
+	Input *types.DeleteSolutionInput
+	Copy  func(*types.DeleteSolutionInput) DeleteSolutionRequest
 }
 
 // Send marshals and sends the DeleteSolution API request.
@@ -102,7 +65,7 @@ func (r DeleteSolutionRequest) Send(ctx context.Context) (*DeleteSolutionRespons
 	}
 
 	resp := &DeleteSolutionResponse{
-		DeleteSolutionOutput: r.Request.Data.(*DeleteSolutionOutput),
+		DeleteSolutionOutput: r.Request.Data.(*types.DeleteSolutionOutput),
 		response:             &aws.Response{Request: r.Request},
 	}
 
@@ -112,7 +75,7 @@ func (r DeleteSolutionRequest) Send(ctx context.Context) (*DeleteSolutionRespons
 // DeleteSolutionResponse is the response type for the
 // DeleteSolution API operation.
 type DeleteSolutionResponse struct {
-	*DeleteSolutionOutput
+	*types.DeleteSolutionOutput
 
 	response *aws.Response
 }

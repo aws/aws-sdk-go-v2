@@ -6,106 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/codedeploy/types"
 )
-
-// Represents the input of a ListApplicationRevisions operation.
-type ListApplicationRevisionsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of an AWS CodeDeploy application associated with the IAM user or
-	// AWS account.
-	//
-	// ApplicationName is a required field
-	ApplicationName *string `locationName:"applicationName" min:"1" type:"string" required:"true"`
-
-	// Whether to list revisions based on whether the revision is the target revision
-	// of an deployment group:
-	//
-	//    * include: List revisions that are target revisions of a deployment group.
-	//
-	//    * exclude: Do not list revisions that are target revisions of a deployment
-	//    group.
-	//
-	//    * ignore: List all revisions.
-	Deployed ListStateFilterAction `locationName:"deployed" type:"string" enum:"true"`
-
-	// An identifier returned from the previous ListApplicationRevisions call. It
-	// can be used to return the next set of applications in the list.
-	NextToken *string `locationName:"nextToken" type:"string"`
-
-	// An Amazon S3 bucket name to limit the search for revisions.
-	//
-	// If set to null, all of the user's buckets are searched.
-	S3Bucket *string `locationName:"s3Bucket" type:"string"`
-
-	// A key prefix for the set of Amazon S3 objects to limit the search for revisions.
-	S3KeyPrefix *string `locationName:"s3KeyPrefix" type:"string"`
-
-	// The column name to use to sort the list results:
-	//
-	//    * registerTime: Sort by the time the revisions were registered with AWS
-	//    CodeDeploy.
-	//
-	//    * firstUsedTime: Sort by the time the revisions were first used in a deployment.
-	//
-	//    * lastUsedTime: Sort by the time the revisions were last used in a deployment.
-	//
-	// If not specified or set to null, the results are returned in an arbitrary
-	// order.
-	SortBy ApplicationRevisionSortBy `locationName:"sortBy" type:"string" enum:"true"`
-
-	// The order in which to sort the list results:
-	//
-	//    * ascending: ascending order.
-	//
-	//    * descending: descending order.
-	//
-	// If not specified, the results are sorted in ascending order.
-	//
-	// If set to null, the results are sorted in an arbitrary order.
-	SortOrder SortOrder `locationName:"sortOrder" type:"string" enum:"true"`
-}
-
-// String returns the string representation
-func (s ListApplicationRevisionsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListApplicationRevisionsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListApplicationRevisionsInput"}
-
-	if s.ApplicationName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ApplicationName"))
-	}
-	if s.ApplicationName != nil && len(*s.ApplicationName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ApplicationName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Represents the output of a ListApplicationRevisions operation.
-type ListApplicationRevisionsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// If a large amount of information is returned, an identifier is also returned.
-	// It can be used in a subsequent list application revisions call to return
-	// the next set of application revisions in the list.
-	NextToken *string `locationName:"nextToken" type:"string"`
-
-	// A list of locations that contain the matching revisions.
-	Revisions []RevisionLocation `locationName:"revisions" type:"list"`
-}
-
-// String returns the string representation
-func (s ListApplicationRevisionsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListApplicationRevisions = "ListApplicationRevisions"
 
@@ -122,7 +24,7 @@ const opListApplicationRevisions = "ListApplicationRevisions"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/ListApplicationRevisions
-func (c *Client) ListApplicationRevisionsRequest(input *ListApplicationRevisionsInput) ListApplicationRevisionsRequest {
+func (c *Client) ListApplicationRevisionsRequest(input *types.ListApplicationRevisionsInput) ListApplicationRevisionsRequest {
 	op := &aws.Operation{
 		Name:       opListApplicationRevisions,
 		HTTPMethod: "POST",
@@ -136,10 +38,10 @@ func (c *Client) ListApplicationRevisionsRequest(input *ListApplicationRevisions
 	}
 
 	if input == nil {
-		input = &ListApplicationRevisionsInput{}
+		input = &types.ListApplicationRevisionsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListApplicationRevisionsOutput{})
+	req := c.newRequest(op, input, &types.ListApplicationRevisionsOutput{})
 	return ListApplicationRevisionsRequest{Request: req, Input: input, Copy: c.ListApplicationRevisionsRequest}
 }
 
@@ -147,8 +49,8 @@ func (c *Client) ListApplicationRevisionsRequest(input *ListApplicationRevisions
 // ListApplicationRevisions API operation.
 type ListApplicationRevisionsRequest struct {
 	*aws.Request
-	Input *ListApplicationRevisionsInput
-	Copy  func(*ListApplicationRevisionsInput) ListApplicationRevisionsRequest
+	Input *types.ListApplicationRevisionsInput
+	Copy  func(*types.ListApplicationRevisionsInput) ListApplicationRevisionsRequest
 }
 
 // Send marshals and sends the ListApplicationRevisions API request.
@@ -160,7 +62,7 @@ func (r ListApplicationRevisionsRequest) Send(ctx context.Context) (*ListApplica
 	}
 
 	resp := &ListApplicationRevisionsResponse{
-		ListApplicationRevisionsOutput: r.Request.Data.(*ListApplicationRevisionsOutput),
+		ListApplicationRevisionsOutput: r.Request.Data.(*types.ListApplicationRevisionsOutput),
 		response:                       &aws.Response{Request: r.Request},
 	}
 
@@ -190,7 +92,7 @@ func NewListApplicationRevisionsPaginator(req ListApplicationRevisionsRequest) L
 	return ListApplicationRevisionsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListApplicationRevisionsInput
+				var inCpy *types.ListApplicationRevisionsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -210,14 +112,14 @@ type ListApplicationRevisionsPaginator struct {
 	aws.Pager
 }
 
-func (p *ListApplicationRevisionsPaginator) CurrentPage() *ListApplicationRevisionsOutput {
-	return p.Pager.CurrentPage().(*ListApplicationRevisionsOutput)
+func (p *ListApplicationRevisionsPaginator) CurrentPage() *types.ListApplicationRevisionsOutput {
+	return p.Pager.CurrentPage().(*types.ListApplicationRevisionsOutput)
 }
 
 // ListApplicationRevisionsResponse is the response type for the
 // ListApplicationRevisions API operation.
 type ListApplicationRevisionsResponse struct {
-	*ListApplicationRevisionsOutput
+	*types.ListApplicationRevisionsOutput
 
 	response *aws.Response
 }

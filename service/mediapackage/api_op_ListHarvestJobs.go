@@ -6,106 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/mediapackage/types"
 )
-
-type ListHarvestJobsInput struct {
-	_ struct{} `type:"structure"`
-
-	IncludeChannelId *string `location:"querystring" locationName:"includeChannelId" type:"string"`
-
-	IncludeStatus *string `location:"querystring" locationName:"includeStatus" type:"string"`
-
-	MaxResults *int64 `location:"querystring" locationName:"maxResults" min:"1" type:"integer"`
-
-	NextToken *string `location:"querystring" locationName:"nextToken" type:"string"`
-}
-
-// String returns the string representation
-func (s ListHarvestJobsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListHarvestJobsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListHarvestJobsInput"}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListHarvestJobsInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.IncludeChannelId != nil {
-		v := *s.IncludeChannelId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "includeChannelId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.IncludeStatus != nil {
-		v := *s.IncludeStatus
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "includeStatus", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.MaxResults != nil {
-		v := *s.MaxResults
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "maxResults", protocol.Int64Value(v), metadata)
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type ListHarvestJobsOutput struct {
-	_ struct{} `type:"structure"`
-
-	HarvestJobs []HarvestJob `locationName:"harvestJobs" type:"list"`
-
-	NextToken *string `locationName:"nextToken" type:"string"`
-}
-
-// String returns the string representation
-func (s ListHarvestJobsOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListHarvestJobsOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.HarvestJobs != nil {
-		v := s.HarvestJobs
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "harvestJobs", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opListHarvestJobs = "ListHarvestJobs"
 
@@ -122,7 +24,7 @@ const opListHarvestJobs = "ListHarvestJobs"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mediapackage-2017-10-12/ListHarvestJobs
-func (c *Client) ListHarvestJobsRequest(input *ListHarvestJobsInput) ListHarvestJobsRequest {
+func (c *Client) ListHarvestJobsRequest(input *types.ListHarvestJobsInput) ListHarvestJobsRequest {
 	op := &aws.Operation{
 		Name:       opListHarvestJobs,
 		HTTPMethod: "GET",
@@ -136,10 +38,10 @@ func (c *Client) ListHarvestJobsRequest(input *ListHarvestJobsInput) ListHarvest
 	}
 
 	if input == nil {
-		input = &ListHarvestJobsInput{}
+		input = &types.ListHarvestJobsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListHarvestJobsOutput{})
+	req := c.newRequest(op, input, &types.ListHarvestJobsOutput{})
 	return ListHarvestJobsRequest{Request: req, Input: input, Copy: c.ListHarvestJobsRequest}
 }
 
@@ -147,8 +49,8 @@ func (c *Client) ListHarvestJobsRequest(input *ListHarvestJobsInput) ListHarvest
 // ListHarvestJobs API operation.
 type ListHarvestJobsRequest struct {
 	*aws.Request
-	Input *ListHarvestJobsInput
-	Copy  func(*ListHarvestJobsInput) ListHarvestJobsRequest
+	Input *types.ListHarvestJobsInput
+	Copy  func(*types.ListHarvestJobsInput) ListHarvestJobsRequest
 }
 
 // Send marshals and sends the ListHarvestJobs API request.
@@ -160,7 +62,7 @@ func (r ListHarvestJobsRequest) Send(ctx context.Context) (*ListHarvestJobsRespo
 	}
 
 	resp := &ListHarvestJobsResponse{
-		ListHarvestJobsOutput: r.Request.Data.(*ListHarvestJobsOutput),
+		ListHarvestJobsOutput: r.Request.Data.(*types.ListHarvestJobsOutput),
 		response:              &aws.Response{Request: r.Request},
 	}
 
@@ -190,7 +92,7 @@ func NewListHarvestJobsPaginator(req ListHarvestJobsRequest) ListHarvestJobsPagi
 	return ListHarvestJobsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListHarvestJobsInput
+				var inCpy *types.ListHarvestJobsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -210,14 +112,14 @@ type ListHarvestJobsPaginator struct {
 	aws.Pager
 }
 
-func (p *ListHarvestJobsPaginator) CurrentPage() *ListHarvestJobsOutput {
-	return p.Pager.CurrentPage().(*ListHarvestJobsOutput)
+func (p *ListHarvestJobsPaginator) CurrentPage() *types.ListHarvestJobsOutput {
+	return p.Pager.CurrentPage().(*types.ListHarvestJobsOutput)
 }
 
 // ListHarvestJobsResponse is the response type for the
 // ListHarvestJobs API operation.
 type ListHarvestJobsResponse struct {
-	*ListHarvestJobsOutput
+	*types.ListHarvestJobsOutput
 
 	response *aws.Response
 }

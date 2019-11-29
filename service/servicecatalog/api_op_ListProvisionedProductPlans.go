@@ -6,68 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/types"
 )
-
-type ListProvisionedProductPlansInput struct {
-	_ struct{} `type:"structure"`
-
-	// The language code.
-	//
-	//    * en - English (default)
-	//
-	//    * jp - Japanese
-	//
-	//    * zh - Chinese
-	AcceptLanguage *string `type:"string"`
-
-	// The access level to use to obtain results. The default is User.
-	AccessLevelFilter *AccessLevelFilter `type:"structure"`
-
-	// The maximum number of items to return with this call.
-	PageSize *int64 `type:"integer"`
-
-	// The page token for the next set of results. To retrieve the first set of
-	// results, use null.
-	PageToken *string `type:"string"`
-
-	// The product identifier.
-	ProvisionProductId *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s ListProvisionedProductPlansInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListProvisionedProductPlansInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListProvisionedProductPlansInput"}
-	if s.ProvisionProductId != nil && len(*s.ProvisionProductId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ProvisionProductId", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ListProvisionedProductPlansOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The page token to use to retrieve the next set of results. If there are no
-	// additional results, this value is null.
-	NextPageToken *string `type:"string"`
-
-	// Information about the plans.
-	ProvisionedProductPlans []ProvisionedProductPlanSummary `type:"list"`
-}
-
-// String returns the string representation
-func (s ListProvisionedProductPlansOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListProvisionedProductPlans = "ListProvisionedProductPlans"
 
@@ -85,7 +25,7 @@ const opListProvisionedProductPlans = "ListProvisionedProductPlans"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ListProvisionedProductPlans
-func (c *Client) ListProvisionedProductPlansRequest(input *ListProvisionedProductPlansInput) ListProvisionedProductPlansRequest {
+func (c *Client) ListProvisionedProductPlansRequest(input *types.ListProvisionedProductPlansInput) ListProvisionedProductPlansRequest {
 	op := &aws.Operation{
 		Name:       opListProvisionedProductPlans,
 		HTTPMethod: "POST",
@@ -93,10 +33,10 @@ func (c *Client) ListProvisionedProductPlansRequest(input *ListProvisionedProduc
 	}
 
 	if input == nil {
-		input = &ListProvisionedProductPlansInput{}
+		input = &types.ListProvisionedProductPlansInput{}
 	}
 
-	req := c.newRequest(op, input, &ListProvisionedProductPlansOutput{})
+	req := c.newRequest(op, input, &types.ListProvisionedProductPlansOutput{})
 	return ListProvisionedProductPlansRequest{Request: req, Input: input, Copy: c.ListProvisionedProductPlansRequest}
 }
 
@@ -104,8 +44,8 @@ func (c *Client) ListProvisionedProductPlansRequest(input *ListProvisionedProduc
 // ListProvisionedProductPlans API operation.
 type ListProvisionedProductPlansRequest struct {
 	*aws.Request
-	Input *ListProvisionedProductPlansInput
-	Copy  func(*ListProvisionedProductPlansInput) ListProvisionedProductPlansRequest
+	Input *types.ListProvisionedProductPlansInput
+	Copy  func(*types.ListProvisionedProductPlansInput) ListProvisionedProductPlansRequest
 }
 
 // Send marshals and sends the ListProvisionedProductPlans API request.
@@ -117,7 +57,7 @@ func (r ListProvisionedProductPlansRequest) Send(ctx context.Context) (*ListProv
 	}
 
 	resp := &ListProvisionedProductPlansResponse{
-		ListProvisionedProductPlansOutput: r.Request.Data.(*ListProvisionedProductPlansOutput),
+		ListProvisionedProductPlansOutput: r.Request.Data.(*types.ListProvisionedProductPlansOutput),
 		response:                          &aws.Response{Request: r.Request},
 	}
 
@@ -127,7 +67,7 @@ func (r ListProvisionedProductPlansRequest) Send(ctx context.Context) (*ListProv
 // ListProvisionedProductPlansResponse is the response type for the
 // ListProvisionedProductPlans API operation.
 type ListProvisionedProductPlansResponse struct {
-	*ListProvisionedProductPlansOutput
+	*types.ListProvisionedProductPlansOutput
 
 	response *aws.Response
 }

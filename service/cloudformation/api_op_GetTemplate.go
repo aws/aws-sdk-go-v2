@@ -6,80 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/cloudformation/types"
 )
-
-// The input for a GetTemplate action.
-type GetTemplateInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name or Amazon Resource Name (ARN) of a change set for which AWS CloudFormation
-	// returns the associated template. If you specify a name, you must also specify
-	// the StackName.
-	ChangeSetName *string `min:"1" type:"string"`
-
-	// The name or the unique stack ID that is associated with the stack, which
-	// are not always interchangeable:
-	//
-	//    * Running stacks: You can specify either the stack's name or its unique
-	//    stack ID.
-	//
-	//    * Deleted stacks: You must specify the unique stack ID.
-	//
-	// Default: There is no default value.
-	StackName *string `type:"string"`
-
-	// For templates that include transforms, the stage of the template that AWS
-	// CloudFormation returns. To get the user-submitted template, specify Original.
-	// To get the template after AWS CloudFormation has processed all transforms,
-	// specify Processed.
-	//
-	// If the template doesn't include transforms, Original and Processed return
-	// the same template. By default, AWS CloudFormation specifies Original.
-	TemplateStage TemplateStage `type:"string" enum:"true"`
-}
-
-// String returns the string representation
-func (s GetTemplateInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetTemplateInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetTemplateInput"}
-	if s.ChangeSetName != nil && len(*s.ChangeSetName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ChangeSetName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// The output for GetTemplate action.
-type GetTemplateOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The stage of the template that you can retrieve. For stacks, the Original
-	// and Processed templates are always available. For change sets, the Original
-	// template is always available. After AWS CloudFormation finishes creating
-	// the change set, the Processed template becomes available.
-	StagesAvailable []TemplateStage `type:"list"`
-
-	// Structure containing the template body. (For more information, go to Template
-	// Anatomy (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-anatomy.html)
-	// in the AWS CloudFormation User Guide.)
-	//
-	// AWS CloudFormation returns the same template that was used when the stack
-	// was created.
-	TemplateBody *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s GetTemplateOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetTemplate = "GetTemplate"
 
@@ -102,7 +30,7 @@ const opGetTemplate = "GetTemplate"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/GetTemplate
-func (c *Client) GetTemplateRequest(input *GetTemplateInput) GetTemplateRequest {
+func (c *Client) GetTemplateRequest(input *types.GetTemplateInput) GetTemplateRequest {
 	op := &aws.Operation{
 		Name:       opGetTemplate,
 		HTTPMethod: "POST",
@@ -110,10 +38,10 @@ func (c *Client) GetTemplateRequest(input *GetTemplateInput) GetTemplateRequest 
 	}
 
 	if input == nil {
-		input = &GetTemplateInput{}
+		input = &types.GetTemplateInput{}
 	}
 
-	req := c.newRequest(op, input, &GetTemplateOutput{})
+	req := c.newRequest(op, input, &types.GetTemplateOutput{})
 	return GetTemplateRequest{Request: req, Input: input, Copy: c.GetTemplateRequest}
 }
 
@@ -121,8 +49,8 @@ func (c *Client) GetTemplateRequest(input *GetTemplateInput) GetTemplateRequest 
 // GetTemplate API operation.
 type GetTemplateRequest struct {
 	*aws.Request
-	Input *GetTemplateInput
-	Copy  func(*GetTemplateInput) GetTemplateRequest
+	Input *types.GetTemplateInput
+	Copy  func(*types.GetTemplateInput) GetTemplateRequest
 }
 
 // Send marshals and sends the GetTemplate API request.
@@ -134,7 +62,7 @@ func (r GetTemplateRequest) Send(ctx context.Context) (*GetTemplateResponse, err
 	}
 
 	resp := &GetTemplateResponse{
-		GetTemplateOutput: r.Request.Data.(*GetTemplateOutput),
+		GetTemplateOutput: r.Request.Data.(*types.GetTemplateOutput),
 		response:          &aws.Response{Request: r.Request},
 	}
 
@@ -144,7 +72,7 @@ func (r GetTemplateRequest) Send(ctx context.Context) (*GetTemplateResponse, err
 // GetTemplateResponse is the response type for the
 // GetTemplate API operation.
 type GetTemplateResponse struct {
-	*GetTemplateOutput
+	*types.GetTemplateOutput
 
 	response *aws.Response
 }

@@ -6,77 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/iot1clickdevicesservice/types"
 )
-
-type GetDeviceMethodsInput struct {
-	_ struct{} `type:"structure"`
-
-	// DeviceId is a required field
-	DeviceId *string `location:"uri" locationName:"deviceId" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetDeviceMethodsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetDeviceMethodsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetDeviceMethodsInput"}
-
-	if s.DeviceId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DeviceId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetDeviceMethodsInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.DeviceId != nil {
-		v := *s.DeviceId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "deviceId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type GetDeviceMethodsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// List of available device APIs.
-	DeviceMethods []DeviceMethod `locationName:"deviceMethods" type:"list"`
-}
-
-// String returns the string representation
-func (s GetDeviceMethodsOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetDeviceMethodsOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.DeviceMethods != nil {
-		v := s.DeviceMethods
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "deviceMethods", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	return nil
-}
 
 const opGetDeviceMethods = "GetDeviceMethods"
 
@@ -93,7 +24,7 @@ const opGetDeviceMethods = "GetDeviceMethods"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/devices-2018-05-14/GetDeviceMethods
-func (c *Client) GetDeviceMethodsRequest(input *GetDeviceMethodsInput) GetDeviceMethodsRequest {
+func (c *Client) GetDeviceMethodsRequest(input *types.GetDeviceMethodsInput) GetDeviceMethodsRequest {
 	op := &aws.Operation{
 		Name:       opGetDeviceMethods,
 		HTTPMethod: "GET",
@@ -101,10 +32,10 @@ func (c *Client) GetDeviceMethodsRequest(input *GetDeviceMethodsInput) GetDevice
 	}
 
 	if input == nil {
-		input = &GetDeviceMethodsInput{}
+		input = &types.GetDeviceMethodsInput{}
 	}
 
-	req := c.newRequest(op, input, &GetDeviceMethodsOutput{})
+	req := c.newRequest(op, input, &types.GetDeviceMethodsOutput{})
 	return GetDeviceMethodsRequest{Request: req, Input: input, Copy: c.GetDeviceMethodsRequest}
 }
 
@@ -112,8 +43,8 @@ func (c *Client) GetDeviceMethodsRequest(input *GetDeviceMethodsInput) GetDevice
 // GetDeviceMethods API operation.
 type GetDeviceMethodsRequest struct {
 	*aws.Request
-	Input *GetDeviceMethodsInput
-	Copy  func(*GetDeviceMethodsInput) GetDeviceMethodsRequest
+	Input *types.GetDeviceMethodsInput
+	Copy  func(*types.GetDeviceMethodsInput) GetDeviceMethodsRequest
 }
 
 // Send marshals and sends the GetDeviceMethods API request.
@@ -125,7 +56,7 @@ func (r GetDeviceMethodsRequest) Send(ctx context.Context) (*GetDeviceMethodsRes
 	}
 
 	resp := &GetDeviceMethodsResponse{
-		GetDeviceMethodsOutput: r.Request.Data.(*GetDeviceMethodsOutput),
+		GetDeviceMethodsOutput: r.Request.Data.(*types.GetDeviceMethodsOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -135,7 +66,7 @@ func (r GetDeviceMethodsRequest) Send(ctx context.Context) (*GetDeviceMethodsRes
 // GetDeviceMethodsResponse is the response type for the
 // GetDeviceMethods API operation.
 type GetDeviceMethodsResponse struct {
-	*GetDeviceMethodsOutput
+	*types.GetDeviceMethodsOutput
 
 	response *aws.Response
 }

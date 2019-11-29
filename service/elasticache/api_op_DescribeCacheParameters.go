@@ -6,76 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/elasticache/types"
 )
-
-// Represents the input of a DescribeCacheParameters operation.
-type DescribeCacheParametersInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of a specific cache parameter group to return details for.
-	//
-	// CacheParameterGroupName is a required field
-	CacheParameterGroupName *string `type:"string" required:"true"`
-
-	// An optional marker returned from a prior request. Use this marker for pagination
-	// of results from this operation. If this parameter is specified, the response
-	// includes only records beyond the marker, up to the value specified by MaxRecords.
-	Marker *string `type:"string"`
-
-	// The maximum number of records to include in the response. If more records
-	// exist than the specified MaxRecords value, a marker is included in the response
-	// so that the remaining results can be retrieved.
-	//
-	// Default: 100
-	//
-	// Constraints: minimum 20; maximum 100.
-	MaxRecords *int64 `type:"integer"`
-
-	// The parameter types to return.
-	//
-	// Valid values: user | system | engine-default
-	Source *string `type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeCacheParametersInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeCacheParametersInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeCacheParametersInput"}
-
-	if s.CacheParameterGroupName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("CacheParameterGroupName"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Represents the output of a DescribeCacheParameters operation.
-type DescribeCacheParametersOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A list of parameters specific to a particular cache node type. Each element
-	// in the list contains detailed information about one parameter.
-	CacheNodeTypeSpecificParameters []CacheNodeTypeSpecificParameter `locationNameList:"CacheNodeTypeSpecificParameter" type:"list"`
-
-	// Provides an identifier to allow retrieval of paginated results.
-	Marker *string `type:"string"`
-
-	// A list of Parameter instances.
-	Parameters []Parameter `locationNameList:"Parameter" type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeCacheParametersOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeCacheParameters = "DescribeCacheParameters"
 
@@ -92,7 +24,7 @@ const opDescribeCacheParameters = "DescribeCacheParameters"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DescribeCacheParameters
-func (c *Client) DescribeCacheParametersRequest(input *DescribeCacheParametersInput) DescribeCacheParametersRequest {
+func (c *Client) DescribeCacheParametersRequest(input *types.DescribeCacheParametersInput) DescribeCacheParametersRequest {
 	op := &aws.Operation{
 		Name:       opDescribeCacheParameters,
 		HTTPMethod: "POST",
@@ -106,10 +38,10 @@ func (c *Client) DescribeCacheParametersRequest(input *DescribeCacheParametersIn
 	}
 
 	if input == nil {
-		input = &DescribeCacheParametersInput{}
+		input = &types.DescribeCacheParametersInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeCacheParametersOutput{})
+	req := c.newRequest(op, input, &types.DescribeCacheParametersOutput{})
 	return DescribeCacheParametersRequest{Request: req, Input: input, Copy: c.DescribeCacheParametersRequest}
 }
 
@@ -117,8 +49,8 @@ func (c *Client) DescribeCacheParametersRequest(input *DescribeCacheParametersIn
 // DescribeCacheParameters API operation.
 type DescribeCacheParametersRequest struct {
 	*aws.Request
-	Input *DescribeCacheParametersInput
-	Copy  func(*DescribeCacheParametersInput) DescribeCacheParametersRequest
+	Input *types.DescribeCacheParametersInput
+	Copy  func(*types.DescribeCacheParametersInput) DescribeCacheParametersRequest
 }
 
 // Send marshals and sends the DescribeCacheParameters API request.
@@ -130,7 +62,7 @@ func (r DescribeCacheParametersRequest) Send(ctx context.Context) (*DescribeCach
 	}
 
 	resp := &DescribeCacheParametersResponse{
-		DescribeCacheParametersOutput: r.Request.Data.(*DescribeCacheParametersOutput),
+		DescribeCacheParametersOutput: r.Request.Data.(*types.DescribeCacheParametersOutput),
 		response:                      &aws.Response{Request: r.Request},
 	}
 
@@ -160,7 +92,7 @@ func NewDescribeCacheParametersPaginator(req DescribeCacheParametersRequest) Des
 	return DescribeCacheParametersPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *DescribeCacheParametersInput
+				var inCpy *types.DescribeCacheParametersInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -180,14 +112,14 @@ type DescribeCacheParametersPaginator struct {
 	aws.Pager
 }
 
-func (p *DescribeCacheParametersPaginator) CurrentPage() *DescribeCacheParametersOutput {
-	return p.Pager.CurrentPage().(*DescribeCacheParametersOutput)
+func (p *DescribeCacheParametersPaginator) CurrentPage() *types.DescribeCacheParametersOutput {
+	return p.Pager.CurrentPage().(*types.DescribeCacheParametersOutput)
 }
 
 // DescribeCacheParametersResponse is the response type for the
 // DescribeCacheParameters API operation.
 type DescribeCacheParametersResponse struct {
-	*DescribeCacheParametersOutput
+	*types.DescribeCacheParametersOutput
 
 	response *aws.Response
 }

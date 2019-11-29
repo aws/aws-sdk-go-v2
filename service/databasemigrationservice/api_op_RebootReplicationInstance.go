@@ -6,52 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/databasemigrationservice/types"
 )
-
-type RebootReplicationInstanceInput struct {
-	_ struct{} `type:"structure"`
-
-	// If this parameter is true, the reboot is conducted through a Multi-AZ failover.
-	// (If the instance isn't configured for Multi-AZ, then you can't specify true.)
-	ForceFailover *bool `type:"boolean"`
-
-	// The Amazon Resource Name (ARN) of the replication instance.
-	//
-	// ReplicationInstanceArn is a required field
-	ReplicationInstanceArn *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s RebootReplicationInstanceInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *RebootReplicationInstanceInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "RebootReplicationInstanceInput"}
-
-	if s.ReplicationInstanceArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ReplicationInstanceArn"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type RebootReplicationInstanceOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The replication instance that is being rebooted.
-	ReplicationInstance *ReplicationInstance `type:"structure"`
-}
-
-// String returns the string representation
-func (s RebootReplicationInstanceOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opRebootReplicationInstance = "RebootReplicationInstance"
 
@@ -69,7 +25,7 @@ const opRebootReplicationInstance = "RebootReplicationInstance"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/RebootReplicationInstance
-func (c *Client) RebootReplicationInstanceRequest(input *RebootReplicationInstanceInput) RebootReplicationInstanceRequest {
+func (c *Client) RebootReplicationInstanceRequest(input *types.RebootReplicationInstanceInput) RebootReplicationInstanceRequest {
 	op := &aws.Operation{
 		Name:       opRebootReplicationInstance,
 		HTTPMethod: "POST",
@@ -77,10 +33,10 @@ func (c *Client) RebootReplicationInstanceRequest(input *RebootReplicationInstan
 	}
 
 	if input == nil {
-		input = &RebootReplicationInstanceInput{}
+		input = &types.RebootReplicationInstanceInput{}
 	}
 
-	req := c.newRequest(op, input, &RebootReplicationInstanceOutput{})
+	req := c.newRequest(op, input, &types.RebootReplicationInstanceOutput{})
 	return RebootReplicationInstanceRequest{Request: req, Input: input, Copy: c.RebootReplicationInstanceRequest}
 }
 
@@ -88,8 +44,8 @@ func (c *Client) RebootReplicationInstanceRequest(input *RebootReplicationInstan
 // RebootReplicationInstance API operation.
 type RebootReplicationInstanceRequest struct {
 	*aws.Request
-	Input *RebootReplicationInstanceInput
-	Copy  func(*RebootReplicationInstanceInput) RebootReplicationInstanceRequest
+	Input *types.RebootReplicationInstanceInput
+	Copy  func(*types.RebootReplicationInstanceInput) RebootReplicationInstanceRequest
 }
 
 // Send marshals and sends the RebootReplicationInstance API request.
@@ -101,7 +57,7 @@ func (r RebootReplicationInstanceRequest) Send(ctx context.Context) (*RebootRepl
 	}
 
 	resp := &RebootReplicationInstanceResponse{
-		RebootReplicationInstanceOutput: r.Request.Data.(*RebootReplicationInstanceOutput),
+		RebootReplicationInstanceOutput: r.Request.Data.(*types.RebootReplicationInstanceOutput),
 		response:                        &aws.Response{Request: r.Request},
 	}
 
@@ -111,7 +67,7 @@ func (r RebootReplicationInstanceRequest) Send(ctx context.Context) (*RebootRepl
 // RebootReplicationInstanceResponse is the response type for the
 // RebootReplicationInstance API operation.
 type RebootReplicationInstanceResponse struct {
-	*RebootReplicationInstanceOutput
+	*types.RebootReplicationInstanceOutput
 
 	response *aws.Response
 }

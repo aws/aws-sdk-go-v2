@@ -6,69 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/workmail/types"
 )
-
-type CreateAliasInput struct {
-	_ struct{} `type:"structure"`
-
-	// The alias to add to the member set.
-	//
-	// Alias is a required field
-	Alias *string `min:"1" type:"string" required:"true"`
-
-	// The member (user or group) to which this alias is added.
-	//
-	// EntityId is a required field
-	EntityId *string `min:"12" type:"string" required:"true"`
-
-	// The organization under which the member (user or group) exists.
-	//
-	// OrganizationId is a required field
-	OrganizationId *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s CreateAliasInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateAliasInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateAliasInput"}
-
-	if s.Alias == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Alias"))
-	}
-	if s.Alias != nil && len(*s.Alias) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Alias", 1))
-	}
-
-	if s.EntityId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("EntityId"))
-	}
-	if s.EntityId != nil && len(*s.EntityId) < 12 {
-		invalidParams.Add(aws.NewErrParamMinLen("EntityId", 12))
-	}
-
-	if s.OrganizationId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("OrganizationId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type CreateAliasOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s CreateAliasOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCreateAlias = "CreateAlias"
 
@@ -85,7 +24,7 @@ const opCreateAlias = "CreateAlias"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/CreateAlias
-func (c *Client) CreateAliasRequest(input *CreateAliasInput) CreateAliasRequest {
+func (c *Client) CreateAliasRequest(input *types.CreateAliasInput) CreateAliasRequest {
 	op := &aws.Operation{
 		Name:       opCreateAlias,
 		HTTPMethod: "POST",
@@ -93,10 +32,10 @@ func (c *Client) CreateAliasRequest(input *CreateAliasInput) CreateAliasRequest 
 	}
 
 	if input == nil {
-		input = &CreateAliasInput{}
+		input = &types.CreateAliasInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateAliasOutput{})
+	req := c.newRequest(op, input, &types.CreateAliasOutput{})
 	return CreateAliasRequest{Request: req, Input: input, Copy: c.CreateAliasRequest}
 }
 
@@ -104,8 +43,8 @@ func (c *Client) CreateAliasRequest(input *CreateAliasInput) CreateAliasRequest 
 // CreateAlias API operation.
 type CreateAliasRequest struct {
 	*aws.Request
-	Input *CreateAliasInput
-	Copy  func(*CreateAliasInput) CreateAliasRequest
+	Input *types.CreateAliasInput
+	Copy  func(*types.CreateAliasInput) CreateAliasRequest
 }
 
 // Send marshals and sends the CreateAlias API request.
@@ -117,7 +56,7 @@ func (r CreateAliasRequest) Send(ctx context.Context) (*CreateAliasResponse, err
 	}
 
 	resp := &CreateAliasResponse{
-		CreateAliasOutput: r.Request.Data.(*CreateAliasOutput),
+		CreateAliasOutput: r.Request.Data.(*types.CreateAliasOutput),
 		response:          &aws.Response{Request: r.Request},
 	}
 
@@ -127,7 +66,7 @@ func (r CreateAliasRequest) Send(ctx context.Context) (*CreateAliasResponse, err
 // CreateAliasResponse is the response type for the
 // CreateAlias API operation.
 type CreateAliasResponse struct {
-	*CreateAliasOutput
+	*types.CreateAliasOutput
 
 	response *aws.Response
 }

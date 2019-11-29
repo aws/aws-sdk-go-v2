@@ -6,61 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/autoscaling/types"
 )
-
-type TerminateInstanceInAutoScalingGroupInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the instance.
-	//
-	// InstanceId is a required field
-	InstanceId *string `min:"1" type:"string" required:"true"`
-
-	// Indicates whether terminating the instance also decrements the size of the
-	// Auto Scaling group.
-	//
-	// ShouldDecrementDesiredCapacity is a required field
-	ShouldDecrementDesiredCapacity *bool `type:"boolean" required:"true"`
-}
-
-// String returns the string representation
-func (s TerminateInstanceInAutoScalingGroupInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *TerminateInstanceInAutoScalingGroupInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "TerminateInstanceInAutoScalingGroupInput"}
-
-	if s.InstanceId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("InstanceId"))
-	}
-	if s.InstanceId != nil && len(*s.InstanceId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("InstanceId", 1))
-	}
-
-	if s.ShouldDecrementDesiredCapacity == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ShouldDecrementDesiredCapacity"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type TerminateInstanceInAutoScalingGroupOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A scaling activity.
-	Activity *Activity `type:"structure"`
-}
-
-// String returns the string representation
-func (s TerminateInstanceInAutoScalingGroupOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opTerminateInstanceInAutoScalingGroup = "TerminateInstanceInAutoScalingGroup"
 
@@ -81,7 +28,7 @@ const opTerminateInstanceInAutoScalingGroup = "TerminateInstanceInAutoScalingGro
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/TerminateInstanceInAutoScalingGroup
-func (c *Client) TerminateInstanceInAutoScalingGroupRequest(input *TerminateInstanceInAutoScalingGroupInput) TerminateInstanceInAutoScalingGroupRequest {
+func (c *Client) TerminateInstanceInAutoScalingGroupRequest(input *types.TerminateInstanceInAutoScalingGroupInput) TerminateInstanceInAutoScalingGroupRequest {
 	op := &aws.Operation{
 		Name:       opTerminateInstanceInAutoScalingGroup,
 		HTTPMethod: "POST",
@@ -89,10 +36,10 @@ func (c *Client) TerminateInstanceInAutoScalingGroupRequest(input *TerminateInst
 	}
 
 	if input == nil {
-		input = &TerminateInstanceInAutoScalingGroupInput{}
+		input = &types.TerminateInstanceInAutoScalingGroupInput{}
 	}
 
-	req := c.newRequest(op, input, &TerminateInstanceInAutoScalingGroupOutput{})
+	req := c.newRequest(op, input, &types.TerminateInstanceInAutoScalingGroupOutput{})
 	return TerminateInstanceInAutoScalingGroupRequest{Request: req, Input: input, Copy: c.TerminateInstanceInAutoScalingGroupRequest}
 }
 
@@ -100,8 +47,8 @@ func (c *Client) TerminateInstanceInAutoScalingGroupRequest(input *TerminateInst
 // TerminateInstanceInAutoScalingGroup API operation.
 type TerminateInstanceInAutoScalingGroupRequest struct {
 	*aws.Request
-	Input *TerminateInstanceInAutoScalingGroupInput
-	Copy  func(*TerminateInstanceInAutoScalingGroupInput) TerminateInstanceInAutoScalingGroupRequest
+	Input *types.TerminateInstanceInAutoScalingGroupInput
+	Copy  func(*types.TerminateInstanceInAutoScalingGroupInput) TerminateInstanceInAutoScalingGroupRequest
 }
 
 // Send marshals and sends the TerminateInstanceInAutoScalingGroup API request.
@@ -113,7 +60,7 @@ func (r TerminateInstanceInAutoScalingGroupRequest) Send(ctx context.Context) (*
 	}
 
 	resp := &TerminateInstanceInAutoScalingGroupResponse{
-		TerminateInstanceInAutoScalingGroupOutput: r.Request.Data.(*TerminateInstanceInAutoScalingGroupOutput),
+		TerminateInstanceInAutoScalingGroupOutput: r.Request.Data.(*types.TerminateInstanceInAutoScalingGroupOutput),
 		response: &aws.Response{Request: r.Request},
 	}
 
@@ -123,7 +70,7 @@ func (r TerminateInstanceInAutoScalingGroupRequest) Send(ctx context.Context) (*
 // TerminateInstanceInAutoScalingGroupResponse is the response type for the
 // TerminateInstanceInAutoScalingGroup API operation.
 type TerminateInstanceInAutoScalingGroupResponse struct {
-	*TerminateInstanceInAutoScalingGroupOutput
+	*types.TerminateInstanceInAutoScalingGroupOutput
 
 	response *aws.Response
 }

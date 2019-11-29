@@ -6,48 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/directconnect/types"
 )
-
-type DeleteDirectConnectGatewayAssociationProposalInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the proposal.
-	//
-	// ProposalId is a required field
-	ProposalId *string `locationName:"proposalId" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteDirectConnectGatewayAssociationProposalInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteDirectConnectGatewayAssociationProposalInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteDirectConnectGatewayAssociationProposalInput"}
-
-	if s.ProposalId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ProposalId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteDirectConnectGatewayAssociationProposalOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the associated gateway.
-	DirectConnectGatewayAssociationProposal *DirectConnectGatewayAssociationProposal `locationName:"directConnectGatewayAssociationProposal" type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteDirectConnectGatewayAssociationProposalOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteDirectConnectGatewayAssociationProposal = "DeleteDirectConnectGatewayAssociationProposal"
 
@@ -65,7 +25,7 @@ const opDeleteDirectConnectGatewayAssociationProposal = "DeleteDirectConnectGate
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DeleteDirectConnectGatewayAssociationProposal
-func (c *Client) DeleteDirectConnectGatewayAssociationProposalRequest(input *DeleteDirectConnectGatewayAssociationProposalInput) DeleteDirectConnectGatewayAssociationProposalRequest {
+func (c *Client) DeleteDirectConnectGatewayAssociationProposalRequest(input *types.DeleteDirectConnectGatewayAssociationProposalInput) DeleteDirectConnectGatewayAssociationProposalRequest {
 	op := &aws.Operation{
 		Name:       opDeleteDirectConnectGatewayAssociationProposal,
 		HTTPMethod: "POST",
@@ -73,10 +33,10 @@ func (c *Client) DeleteDirectConnectGatewayAssociationProposalRequest(input *Del
 	}
 
 	if input == nil {
-		input = &DeleteDirectConnectGatewayAssociationProposalInput{}
+		input = &types.DeleteDirectConnectGatewayAssociationProposalInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteDirectConnectGatewayAssociationProposalOutput{})
+	req := c.newRequest(op, input, &types.DeleteDirectConnectGatewayAssociationProposalOutput{})
 	return DeleteDirectConnectGatewayAssociationProposalRequest{Request: req, Input: input, Copy: c.DeleteDirectConnectGatewayAssociationProposalRequest}
 }
 
@@ -84,8 +44,8 @@ func (c *Client) DeleteDirectConnectGatewayAssociationProposalRequest(input *Del
 // DeleteDirectConnectGatewayAssociationProposal API operation.
 type DeleteDirectConnectGatewayAssociationProposalRequest struct {
 	*aws.Request
-	Input *DeleteDirectConnectGatewayAssociationProposalInput
-	Copy  func(*DeleteDirectConnectGatewayAssociationProposalInput) DeleteDirectConnectGatewayAssociationProposalRequest
+	Input *types.DeleteDirectConnectGatewayAssociationProposalInput
+	Copy  func(*types.DeleteDirectConnectGatewayAssociationProposalInput) DeleteDirectConnectGatewayAssociationProposalRequest
 }
 
 // Send marshals and sends the DeleteDirectConnectGatewayAssociationProposal API request.
@@ -97,7 +57,7 @@ func (r DeleteDirectConnectGatewayAssociationProposalRequest) Send(ctx context.C
 	}
 
 	resp := &DeleteDirectConnectGatewayAssociationProposalResponse{
-		DeleteDirectConnectGatewayAssociationProposalOutput: r.Request.Data.(*DeleteDirectConnectGatewayAssociationProposalOutput),
+		DeleteDirectConnectGatewayAssociationProposalOutput: r.Request.Data.(*types.DeleteDirectConnectGatewayAssociationProposalOutput),
 		response: &aws.Response{Request: r.Request},
 	}
 
@@ -107,7 +67,7 @@ func (r DeleteDirectConnectGatewayAssociationProposalRequest) Send(ctx context.C
 // DeleteDirectConnectGatewayAssociationProposalResponse is the response type for the
 // DeleteDirectConnectGatewayAssociationProposal API operation.
 type DeleteDirectConnectGatewayAssociationProposalResponse struct {
-	*DeleteDirectConnectGatewayAssociationProposalOutput
+	*types.DeleteDirectConnectGatewayAssociationProposalOutput
 
 	response *aws.Response
 }

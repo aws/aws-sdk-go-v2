@@ -6,73 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/codebuild/types"
 )
-
-type ListBuildsForProjectInput struct {
-	_ struct{} `type:"structure"`
-
-	// During a previous call, if there are more than 100 items in the list, only
-	// the first 100 items are returned, along with a unique string called a next
-	// token. To get the next batch of items in the list, call this operation again,
-	// adding the next token to the call. To get all of the items in the list, keep
-	// calling this operation with each subsequent next token that is returned,
-	// until no more next tokens are returned.
-	NextToken *string `locationName:"nextToken" type:"string"`
-
-	// The name of the AWS CodeBuild project.
-	//
-	// ProjectName is a required field
-	ProjectName *string `locationName:"projectName" min:"1" type:"string" required:"true"`
-
-	// The order to list build IDs. Valid values include:
-	//
-	//    * ASCENDING: List the build IDs in ascending order by build ID.
-	//
-	//    * DESCENDING: List the build IDs in descending order by build ID.
-	SortOrder SortOrderType `locationName:"sortOrder" type:"string" enum:"true"`
-}
-
-// String returns the string representation
-func (s ListBuildsForProjectInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListBuildsForProjectInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListBuildsForProjectInput"}
-
-	if s.ProjectName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ProjectName"))
-	}
-	if s.ProjectName != nil && len(*s.ProjectName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ProjectName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ListBuildsForProjectOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A list of build IDs for the specified build project, with each build ID representing
-	// a single build.
-	Ids []string `locationName:"ids" min:"1" type:"list"`
-
-	// If there are more than 100 items in the list, only the first 100 items are
-	// returned, along with a unique string called a next token. To get the next
-	// batch of items in the list, call this operation again, adding the next token
-	// to the call.
-	NextToken *string `locationName:"nextToken" type:"string"`
-}
-
-// String returns the string representation
-func (s ListBuildsForProjectOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListBuildsForProject = "ListBuildsForProject"
 
@@ -90,7 +25,7 @@ const opListBuildsForProject = "ListBuildsForProject"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/ListBuildsForProject
-func (c *Client) ListBuildsForProjectRequest(input *ListBuildsForProjectInput) ListBuildsForProjectRequest {
+func (c *Client) ListBuildsForProjectRequest(input *types.ListBuildsForProjectInput) ListBuildsForProjectRequest {
 	op := &aws.Operation{
 		Name:       opListBuildsForProject,
 		HTTPMethod: "POST",
@@ -98,10 +33,10 @@ func (c *Client) ListBuildsForProjectRequest(input *ListBuildsForProjectInput) L
 	}
 
 	if input == nil {
-		input = &ListBuildsForProjectInput{}
+		input = &types.ListBuildsForProjectInput{}
 	}
 
-	req := c.newRequest(op, input, &ListBuildsForProjectOutput{})
+	req := c.newRequest(op, input, &types.ListBuildsForProjectOutput{})
 	return ListBuildsForProjectRequest{Request: req, Input: input, Copy: c.ListBuildsForProjectRequest}
 }
 
@@ -109,8 +44,8 @@ func (c *Client) ListBuildsForProjectRequest(input *ListBuildsForProjectInput) L
 // ListBuildsForProject API operation.
 type ListBuildsForProjectRequest struct {
 	*aws.Request
-	Input *ListBuildsForProjectInput
-	Copy  func(*ListBuildsForProjectInput) ListBuildsForProjectRequest
+	Input *types.ListBuildsForProjectInput
+	Copy  func(*types.ListBuildsForProjectInput) ListBuildsForProjectRequest
 }
 
 // Send marshals and sends the ListBuildsForProject API request.
@@ -122,7 +57,7 @@ func (r ListBuildsForProjectRequest) Send(ctx context.Context) (*ListBuildsForPr
 	}
 
 	resp := &ListBuildsForProjectResponse{
-		ListBuildsForProjectOutput: r.Request.Data.(*ListBuildsForProjectOutput),
+		ListBuildsForProjectOutput: r.Request.Data.(*types.ListBuildsForProjectOutput),
 		response:                   &aws.Response{Request: r.Request},
 	}
 
@@ -132,7 +67,7 @@ func (r ListBuildsForProjectRequest) Send(ctx context.Context) (*ListBuildsForPr
 // ListBuildsForProjectResponse is the response type for the
 // ListBuildsForProject API operation.
 type ListBuildsForProjectResponse struct {
-	*ListBuildsForProjectOutput
+	*types.ListBuildsForProjectOutput
 
 	response *aws.Response
 }

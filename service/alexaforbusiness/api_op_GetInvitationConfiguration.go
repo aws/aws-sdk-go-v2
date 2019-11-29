@@ -6,37 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/alexaforbusiness/types"
 )
-
-type GetInvitationConfigurationInput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s GetInvitationConfigurationInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type GetInvitationConfigurationOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The email ID of the organization or individual contact that the enrolled
-	// user can use.
-	ContactEmail *string `min:"1" type:"string"`
-
-	// The name of the organization sending the enrollment invite to a user.
-	OrganizationName *string `min:"1" type:"string"`
-
-	// The list of private skill IDs that you want to recommend to the user to enable
-	// in the invitation.
-	PrivateSkillIds []string `type:"list"`
-}
-
-// String returns the string representation
-func (s GetInvitationConfigurationOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetInvitationConfiguration = "GetInvitationConfiguration"
 
@@ -54,7 +25,7 @@ const opGetInvitationConfiguration = "GetInvitationConfiguration"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/GetInvitationConfiguration
-func (c *Client) GetInvitationConfigurationRequest(input *GetInvitationConfigurationInput) GetInvitationConfigurationRequest {
+func (c *Client) GetInvitationConfigurationRequest(input *types.GetInvitationConfigurationInput) GetInvitationConfigurationRequest {
 	op := &aws.Operation{
 		Name:       opGetInvitationConfiguration,
 		HTTPMethod: "POST",
@@ -62,10 +33,10 @@ func (c *Client) GetInvitationConfigurationRequest(input *GetInvitationConfigura
 	}
 
 	if input == nil {
-		input = &GetInvitationConfigurationInput{}
+		input = &types.GetInvitationConfigurationInput{}
 	}
 
-	req := c.newRequest(op, input, &GetInvitationConfigurationOutput{})
+	req := c.newRequest(op, input, &types.GetInvitationConfigurationOutput{})
 	return GetInvitationConfigurationRequest{Request: req, Input: input, Copy: c.GetInvitationConfigurationRequest}
 }
 
@@ -73,8 +44,8 @@ func (c *Client) GetInvitationConfigurationRequest(input *GetInvitationConfigura
 // GetInvitationConfiguration API operation.
 type GetInvitationConfigurationRequest struct {
 	*aws.Request
-	Input *GetInvitationConfigurationInput
-	Copy  func(*GetInvitationConfigurationInput) GetInvitationConfigurationRequest
+	Input *types.GetInvitationConfigurationInput
+	Copy  func(*types.GetInvitationConfigurationInput) GetInvitationConfigurationRequest
 }
 
 // Send marshals and sends the GetInvitationConfiguration API request.
@@ -86,7 +57,7 @@ func (r GetInvitationConfigurationRequest) Send(ctx context.Context) (*GetInvita
 	}
 
 	resp := &GetInvitationConfigurationResponse{
-		GetInvitationConfigurationOutput: r.Request.Data.(*GetInvitationConfigurationOutput),
+		GetInvitationConfigurationOutput: r.Request.Data.(*types.GetInvitationConfigurationOutput),
 		response:                         &aws.Response{Request: r.Request},
 	}
 
@@ -96,7 +67,7 @@ func (r GetInvitationConfigurationRequest) Send(ctx context.Context) (*GetInvita
 // GetInvitationConfigurationResponse is the response type for the
 // GetInvitationConfiguration API operation.
 type GetInvitationConfigurationResponse struct {
-	*GetInvitationConfigurationOutput
+	*types.GetInvitationConfigurationOutput
 
 	response *aws.Response
 }

@@ -6,51 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/devicefarm/types"
 )
-
-type GetInstanceProfileInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of your instance profile.
-	//
-	// Arn is a required field
-	Arn *string `locationName:"arn" min:"32" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetInstanceProfileInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetInstanceProfileInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetInstanceProfileInput"}
-
-	if s.Arn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Arn"))
-	}
-	if s.Arn != nil && len(*s.Arn) < 32 {
-		invalidParams.Add(aws.NewErrParamMinLen("Arn", 32))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type GetInstanceProfileOutput struct {
-	_ struct{} `type:"structure"`
-
-	// An object containing information about your instance profile.
-	InstanceProfile *InstanceProfile `locationName:"instanceProfile" type:"structure"`
-}
-
-// String returns the string representation
-func (s GetInstanceProfileOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetInstanceProfile = "GetInstanceProfile"
 
@@ -67,7 +24,7 @@ const opGetInstanceProfile = "GetInstanceProfile"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/GetInstanceProfile
-func (c *Client) GetInstanceProfileRequest(input *GetInstanceProfileInput) GetInstanceProfileRequest {
+func (c *Client) GetInstanceProfileRequest(input *types.GetInstanceProfileInput) GetInstanceProfileRequest {
 	op := &aws.Operation{
 		Name:       opGetInstanceProfile,
 		HTTPMethod: "POST",
@@ -75,10 +32,10 @@ func (c *Client) GetInstanceProfileRequest(input *GetInstanceProfileInput) GetIn
 	}
 
 	if input == nil {
-		input = &GetInstanceProfileInput{}
+		input = &types.GetInstanceProfileInput{}
 	}
 
-	req := c.newRequest(op, input, &GetInstanceProfileOutput{})
+	req := c.newRequest(op, input, &types.GetInstanceProfileOutput{})
 	return GetInstanceProfileRequest{Request: req, Input: input, Copy: c.GetInstanceProfileRequest}
 }
 
@@ -86,8 +43,8 @@ func (c *Client) GetInstanceProfileRequest(input *GetInstanceProfileInput) GetIn
 // GetInstanceProfile API operation.
 type GetInstanceProfileRequest struct {
 	*aws.Request
-	Input *GetInstanceProfileInput
-	Copy  func(*GetInstanceProfileInput) GetInstanceProfileRequest
+	Input *types.GetInstanceProfileInput
+	Copy  func(*types.GetInstanceProfileInput) GetInstanceProfileRequest
 }
 
 // Send marshals and sends the GetInstanceProfile API request.
@@ -99,7 +56,7 @@ func (r GetInstanceProfileRequest) Send(ctx context.Context) (*GetInstanceProfil
 	}
 
 	resp := &GetInstanceProfileResponse{
-		GetInstanceProfileOutput: r.Request.Data.(*GetInstanceProfileOutput),
+		GetInstanceProfileOutput: r.Request.Data.(*types.GetInstanceProfileOutput),
 		response:                 &aws.Response{Request: r.Request},
 	}
 
@@ -109,7 +66,7 @@ func (r GetInstanceProfileRequest) Send(ctx context.Context) (*GetInstanceProfil
 // GetInstanceProfileResponse is the response type for the
 // GetInstanceProfile API operation.
 type GetInstanceProfileResponse struct {
-	*GetInstanceProfileOutput
+	*types.GetInstanceProfileOutput
 
 	response *aws.Response
 }

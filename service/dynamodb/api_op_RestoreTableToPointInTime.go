@@ -4,73 +4,10 @@ package dynamodb
 
 import (
 	"context"
-	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/dynamodb/types"
 )
-
-type RestoreTableToPointInTimeInput struct {
-	_ struct{} `type:"structure"`
-
-	// Time in the past to restore the table to.
-	RestoreDateTime *time.Time `type:"timestamp"`
-
-	// Name of the source table that is being restored.
-	//
-	// SourceTableName is a required field
-	SourceTableName *string `min:"3" type:"string" required:"true"`
-
-	// The name of the new table to which it must be restored to.
-	//
-	// TargetTableName is a required field
-	TargetTableName *string `min:"3" type:"string" required:"true"`
-
-	// Restore the table to the latest possible time. LatestRestorableDateTime is
-	// typically 5 minutes before the current time.
-	UseLatestRestorableTime *bool `type:"boolean"`
-}
-
-// String returns the string representation
-func (s RestoreTableToPointInTimeInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *RestoreTableToPointInTimeInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "RestoreTableToPointInTimeInput"}
-
-	if s.SourceTableName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("SourceTableName"))
-	}
-	if s.SourceTableName != nil && len(*s.SourceTableName) < 3 {
-		invalidParams.Add(aws.NewErrParamMinLen("SourceTableName", 3))
-	}
-
-	if s.TargetTableName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("TargetTableName"))
-	}
-	if s.TargetTableName != nil && len(*s.TargetTableName) < 3 {
-		invalidParams.Add(aws.NewErrParamMinLen("TargetTableName", 3))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type RestoreTableToPointInTimeOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Represents the properties of a table.
-	TableDescription *TableDescription `type:"structure"`
-}
-
-// String returns the string representation
-func (s RestoreTableToPointInTimeOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opRestoreTableToPointInTime = "RestoreTableToPointInTime"
 
@@ -122,7 +59,7 @@ const opRestoreTableToPointInTime = "RestoreTableToPointInTime"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/RestoreTableToPointInTime
-func (c *Client) RestoreTableToPointInTimeRequest(input *RestoreTableToPointInTimeInput) RestoreTableToPointInTimeRequest {
+func (c *Client) RestoreTableToPointInTimeRequest(input *types.RestoreTableToPointInTimeInput) RestoreTableToPointInTimeRequest {
 	op := &aws.Operation{
 		Name:       opRestoreTableToPointInTime,
 		HTTPMethod: "POST",
@@ -130,10 +67,10 @@ func (c *Client) RestoreTableToPointInTimeRequest(input *RestoreTableToPointInTi
 	}
 
 	if input == nil {
-		input = &RestoreTableToPointInTimeInput{}
+		input = &types.RestoreTableToPointInTimeInput{}
 	}
 
-	req := c.newRequest(op, input, &RestoreTableToPointInTimeOutput{})
+	req := c.newRequest(op, input, &types.RestoreTableToPointInTimeOutput{})
 	return RestoreTableToPointInTimeRequest{Request: req, Input: input, Copy: c.RestoreTableToPointInTimeRequest}
 }
 
@@ -141,8 +78,8 @@ func (c *Client) RestoreTableToPointInTimeRequest(input *RestoreTableToPointInTi
 // RestoreTableToPointInTime API operation.
 type RestoreTableToPointInTimeRequest struct {
 	*aws.Request
-	Input *RestoreTableToPointInTimeInput
-	Copy  func(*RestoreTableToPointInTimeInput) RestoreTableToPointInTimeRequest
+	Input *types.RestoreTableToPointInTimeInput
+	Copy  func(*types.RestoreTableToPointInTimeInput) RestoreTableToPointInTimeRequest
 }
 
 // Send marshals and sends the RestoreTableToPointInTime API request.
@@ -154,7 +91,7 @@ func (r RestoreTableToPointInTimeRequest) Send(ctx context.Context) (*RestoreTab
 	}
 
 	resp := &RestoreTableToPointInTimeResponse{
-		RestoreTableToPointInTimeOutput: r.Request.Data.(*RestoreTableToPointInTimeOutput),
+		RestoreTableToPointInTimeOutput: r.Request.Data.(*types.RestoreTableToPointInTimeOutput),
 		response:                        &aws.Response{Request: r.Request},
 	}
 
@@ -164,7 +101,7 @@ func (r RestoreTableToPointInTimeRequest) Send(ctx context.Context) (*RestoreTab
 // RestoreTableToPointInTimeResponse is the response type for the
 // RestoreTableToPointInTime API operation.
 type RestoreTableToPointInTimeResponse struct {
-	*RestoreTableToPointInTimeOutput
+	*types.RestoreTableToPointInTimeOutput
 
 	response *aws.Response
 }

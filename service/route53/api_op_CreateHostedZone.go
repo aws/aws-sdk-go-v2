@@ -6,201 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/route53/types"
 )
-
-// A complex type that contains information about the request to create a public
-// or private hosted zone.
-type CreateHostedZoneInput struct {
-	_ struct{} `locationName:"CreateHostedZoneRequest" type:"structure" xmlURI:"https://route53.amazonaws.com/doc/2013-04-01/"`
-
-	// A unique string that identifies the request and that allows failed CreateHostedZone
-	// requests to be retried without the risk of executing the operation twice.
-	// You must use a unique CallerReference string every time you submit a CreateHostedZone
-	// request. CallerReference can be any unique string, for example, a date/time
-	// stamp.
-	//
-	// CallerReference is a required field
-	CallerReference *string `min:"1" type:"string" required:"true"`
-
-	// If you want to associate a reusable delegation set with this hosted zone,
-	// the ID that Amazon Route 53 assigned to the reusable delegation set when
-	// you created it. For more information about reusable delegation sets, see
-	// CreateReusableDelegationSet (https://docs.aws.amazon.com/Route53/latest/APIReference/API_CreateReusableDelegationSet.html).
-	DelegationSetId *string `type:"string"`
-
-	// (Optional) A complex type that contains the following optional values:
-	//
-	//    * For public and private hosted zones, an optional comment
-	//
-	//    * For private hosted zones, an optional PrivateZone element
-	//
-	// If you don't specify a comment or the PrivateZone element, omit HostedZoneConfig
-	// and the other elements.
-	HostedZoneConfig *HostedZoneConfig `type:"structure"`
-
-	// The name of the domain. Specify a fully qualified domain name, for example,
-	// www.example.com. The trailing dot is optional; Amazon Route 53 assumes that
-	// the domain name is fully qualified. This means that Route 53 treats www.example.com
-	// (without a trailing dot) and www.example.com. (with a trailing dot) as identical.
-	//
-	// If you're creating a public hosted zone, this is the name you have registered
-	// with your DNS registrar. If your domain name is registered with a registrar
-	// other than Route 53, change the name servers for your domain to the set of
-	// NameServers that CreateHostedZone returns in DelegationSet.
-	//
-	// Name is a required field
-	Name *string `type:"string" required:"true"`
-
-	// (Private hosted zones only) A complex type that contains information about
-	// the Amazon VPC that you're associating with this hosted zone.
-	//
-	// You can specify only one Amazon VPC when you create a private hosted zone.
-	// To associate additional Amazon VPCs with the hosted zone, use AssociateVPCWithHostedZone
-	// (https://docs.aws.amazon.com/Route53/latest/APIReference/API_AssociateVPCWithHostedZone.html)
-	// after you create a hosted zone.
-	VPC *VPC `type:"structure"`
-}
-
-// String returns the string representation
-func (s CreateHostedZoneInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateHostedZoneInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateHostedZoneInput"}
-
-	if s.CallerReference == nil {
-		invalidParams.Add(aws.NewErrParamRequired("CallerReference"))
-	}
-	if s.CallerReference != nil && len(*s.CallerReference) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("CallerReference", 1))
-	}
-
-	if s.Name == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Name"))
-	}
-	if s.VPC != nil {
-		if err := s.VPC.Validate(); err != nil {
-			invalidParams.AddNested("VPC", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s CreateHostedZoneInput) MarshalFields(e protocol.FieldEncoder) error {
-
-	e.SetFields(protocol.BodyTarget, "CreateHostedZoneRequest", protocol.FieldMarshalerFunc(func(e protocol.FieldEncoder) error {
-		if s.CallerReference != nil {
-			v := *s.CallerReference
-
-			metadata := protocol.Metadata{}
-			e.SetValue(protocol.BodyTarget, "CallerReference", protocol.StringValue(v), metadata)
-		}
-		if s.DelegationSetId != nil {
-			v := *s.DelegationSetId
-
-			metadata := protocol.Metadata{}
-			e.SetValue(protocol.BodyTarget, "DelegationSetId", protocol.StringValue(v), metadata)
-		}
-		if s.HostedZoneConfig != nil {
-			v := s.HostedZoneConfig
-
-			metadata := protocol.Metadata{}
-			e.SetFields(protocol.BodyTarget, "HostedZoneConfig", v, metadata)
-		}
-		if s.Name != nil {
-			v := *s.Name
-
-			metadata := protocol.Metadata{}
-			e.SetValue(protocol.BodyTarget, "Name", protocol.StringValue(v), metadata)
-		}
-		if s.VPC != nil {
-			v := s.VPC
-
-			metadata := protocol.Metadata{}
-			e.SetFields(protocol.BodyTarget, "VPC", v, metadata)
-		}
-		return nil
-	}), protocol.Metadata{XMLNamespaceURI: "https://route53.amazonaws.com/doc/2013-04-01/"})
-	return nil
-}
-
-// A complex type containing the response information for the hosted zone.
-type CreateHostedZoneOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A complex type that contains information about the CreateHostedZone request.
-	//
-	// ChangeInfo is a required field
-	ChangeInfo *ChangeInfo `type:"structure" required:"true"`
-
-	// A complex type that describes the name servers for this hosted zone.
-	//
-	// DelegationSet is a required field
-	DelegationSet *DelegationSet `type:"structure" required:"true"`
-
-	// A complex type that contains general information about the hosted zone.
-	//
-	// HostedZone is a required field
-	HostedZone *HostedZone `type:"structure" required:"true"`
-
-	// The unique URL representing the new hosted zone.
-	//
-	// Location is a required field
-	Location *string `location:"header" locationName:"Location" type:"string" required:"true"`
-
-	// A complex type that contains information about an Amazon VPC that you associated
-	// with this hosted zone.
-	VPC *VPC `type:"structure"`
-}
-
-// String returns the string representation
-func (s CreateHostedZoneOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s CreateHostedZoneOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.ChangeInfo != nil {
-		v := s.ChangeInfo
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "ChangeInfo", v, metadata)
-	}
-	if s.DelegationSet != nil {
-		v := s.DelegationSet
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "DelegationSet", v, metadata)
-	}
-	if s.HostedZone != nil {
-		v := s.HostedZone
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "HostedZone", v, metadata)
-	}
-	if s.VPC != nil {
-		v := s.VPC
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "VPC", v, metadata)
-	}
-	if s.Location != nil {
-		v := *s.Location
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "Location", protocol.StringValue(v), metadata)
-	}
-	return nil
-}
 
 const opCreateHostedZone = "CreateHostedZone"
 
@@ -254,7 +61,7 @@ const opCreateHostedZone = "CreateHostedZone"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/CreateHostedZone
-func (c *Client) CreateHostedZoneRequest(input *CreateHostedZoneInput) CreateHostedZoneRequest {
+func (c *Client) CreateHostedZoneRequest(input *types.CreateHostedZoneInput) CreateHostedZoneRequest {
 	op := &aws.Operation{
 		Name:       opCreateHostedZone,
 		HTTPMethod: "POST",
@@ -262,10 +69,10 @@ func (c *Client) CreateHostedZoneRequest(input *CreateHostedZoneInput) CreateHos
 	}
 
 	if input == nil {
-		input = &CreateHostedZoneInput{}
+		input = &types.CreateHostedZoneInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateHostedZoneOutput{})
+	req := c.newRequest(op, input, &types.CreateHostedZoneOutput{})
 	return CreateHostedZoneRequest{Request: req, Input: input, Copy: c.CreateHostedZoneRequest}
 }
 
@@ -273,8 +80,8 @@ func (c *Client) CreateHostedZoneRequest(input *CreateHostedZoneInput) CreateHos
 // CreateHostedZone API operation.
 type CreateHostedZoneRequest struct {
 	*aws.Request
-	Input *CreateHostedZoneInput
-	Copy  func(*CreateHostedZoneInput) CreateHostedZoneRequest
+	Input *types.CreateHostedZoneInput
+	Copy  func(*types.CreateHostedZoneInput) CreateHostedZoneRequest
 }
 
 // Send marshals and sends the CreateHostedZone API request.
@@ -286,7 +93,7 @@ func (r CreateHostedZoneRequest) Send(ctx context.Context) (*CreateHostedZoneRes
 	}
 
 	resp := &CreateHostedZoneResponse{
-		CreateHostedZoneOutput: r.Request.Data.(*CreateHostedZoneOutput),
+		CreateHostedZoneOutput: r.Request.Data.(*types.CreateHostedZoneOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -296,7 +103,7 @@ func (r CreateHostedZoneRequest) Send(ctx context.Context) (*CreateHostedZoneRes
 // CreateHostedZoneResponse is the response type for the
 // CreateHostedZone API operation.
 type CreateHostedZoneResponse struct {
-	*CreateHostedZoneOutput
+	*types.CreateHostedZoneOutput
 
 	response *aws.Response
 }

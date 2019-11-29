@@ -6,71 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ssm/types"
 )
-
-type GetParameterHistoryInput struct {
-	_ struct{} `type:"structure"`
-
-	// The maximum number of items to return for this call. The call also returns
-	// a token that you can specify in a subsequent call to get the next set of
-	// results.
-	MaxResults *int64 `min:"1" type:"integer"`
-
-	// The name of a parameter you want to query.
-	//
-	// Name is a required field
-	Name *string `min:"1" type:"string" required:"true"`
-
-	// The token for the next set of items to return. (You received this token from
-	// a previous call.)
-	NextToken *string `type:"string"`
-
-	// Return decrypted values for secure string parameters. This flag is ignored
-	// for String and StringList parameter types.
-	WithDecryption *bool `type:"boolean"`
-}
-
-// String returns the string representation
-func (s GetParameterHistoryInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetParameterHistoryInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetParameterHistoryInput"}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-
-	if s.Name == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Name"))
-	}
-	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type GetParameterHistoryOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The token to use when requesting the next set of items. If there are no additional
-	// items to return, the string is empty.
-	NextToken *string `type:"string"`
-
-	// A list of parameters returned by the request.
-	Parameters []ParameterHistory `type:"list"`
-}
-
-// String returns the string representation
-func (s GetParameterHistoryOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetParameterHistory = "GetParameterHistory"
 
@@ -87,7 +24,7 @@ const opGetParameterHistory = "GetParameterHistory"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetParameterHistory
-func (c *Client) GetParameterHistoryRequest(input *GetParameterHistoryInput) GetParameterHistoryRequest {
+func (c *Client) GetParameterHistoryRequest(input *types.GetParameterHistoryInput) GetParameterHistoryRequest {
 	op := &aws.Operation{
 		Name:       opGetParameterHistory,
 		HTTPMethod: "POST",
@@ -101,10 +38,10 @@ func (c *Client) GetParameterHistoryRequest(input *GetParameterHistoryInput) Get
 	}
 
 	if input == nil {
-		input = &GetParameterHistoryInput{}
+		input = &types.GetParameterHistoryInput{}
 	}
 
-	req := c.newRequest(op, input, &GetParameterHistoryOutput{})
+	req := c.newRequest(op, input, &types.GetParameterHistoryOutput{})
 	return GetParameterHistoryRequest{Request: req, Input: input, Copy: c.GetParameterHistoryRequest}
 }
 
@@ -112,8 +49,8 @@ func (c *Client) GetParameterHistoryRequest(input *GetParameterHistoryInput) Get
 // GetParameterHistory API operation.
 type GetParameterHistoryRequest struct {
 	*aws.Request
-	Input *GetParameterHistoryInput
-	Copy  func(*GetParameterHistoryInput) GetParameterHistoryRequest
+	Input *types.GetParameterHistoryInput
+	Copy  func(*types.GetParameterHistoryInput) GetParameterHistoryRequest
 }
 
 // Send marshals and sends the GetParameterHistory API request.
@@ -125,7 +62,7 @@ func (r GetParameterHistoryRequest) Send(ctx context.Context) (*GetParameterHist
 	}
 
 	resp := &GetParameterHistoryResponse{
-		GetParameterHistoryOutput: r.Request.Data.(*GetParameterHistoryOutput),
+		GetParameterHistoryOutput: r.Request.Data.(*types.GetParameterHistoryOutput),
 		response:                  &aws.Response{Request: r.Request},
 	}
 
@@ -155,7 +92,7 @@ func NewGetParameterHistoryPaginator(req GetParameterHistoryRequest) GetParamete
 	return GetParameterHistoryPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *GetParameterHistoryInput
+				var inCpy *types.GetParameterHistoryInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -175,14 +112,14 @@ type GetParameterHistoryPaginator struct {
 	aws.Pager
 }
 
-func (p *GetParameterHistoryPaginator) CurrentPage() *GetParameterHistoryOutput {
-	return p.Pager.CurrentPage().(*GetParameterHistoryOutput)
+func (p *GetParameterHistoryPaginator) CurrentPage() *types.GetParameterHistoryOutput {
+	return p.Pager.CurrentPage().(*types.GetParameterHistoryOutput)
 }
 
 // GetParameterHistoryResponse is the response type for the
 // GetParameterHistory API operation.
 type GetParameterHistoryResponse struct {
-	*GetParameterHistoryOutput
+	*types.GetParameterHistoryOutput
 
 	response *aws.Response
 }

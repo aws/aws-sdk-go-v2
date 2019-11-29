@@ -6,47 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
 )
-
-type DeleteEndpointConfigInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the endpoint configuration that you want to delete.
-	//
-	// EndpointConfigName is a required field
-	EndpointConfigName *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteEndpointConfigInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteEndpointConfigInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteEndpointConfigInput"}
-
-	if s.EndpointConfigName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("EndpointConfigName"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteEndpointConfigOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteEndpointConfigOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteEndpointConfig = "DeleteEndpointConfig"
 
@@ -65,7 +28,7 @@ const opDeleteEndpointConfig = "DeleteEndpointConfig"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DeleteEndpointConfig
-func (c *Client) DeleteEndpointConfigRequest(input *DeleteEndpointConfigInput) DeleteEndpointConfigRequest {
+func (c *Client) DeleteEndpointConfigRequest(input *types.DeleteEndpointConfigInput) DeleteEndpointConfigRequest {
 	op := &aws.Operation{
 		Name:       opDeleteEndpointConfig,
 		HTTPMethod: "POST",
@@ -73,10 +36,10 @@ func (c *Client) DeleteEndpointConfigRequest(input *DeleteEndpointConfigInput) D
 	}
 
 	if input == nil {
-		input = &DeleteEndpointConfigInput{}
+		input = &types.DeleteEndpointConfigInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteEndpointConfigOutput{})
+	req := c.newRequest(op, input, &types.DeleteEndpointConfigOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return DeleteEndpointConfigRequest{Request: req, Input: input, Copy: c.DeleteEndpointConfigRequest}
@@ -86,8 +49,8 @@ func (c *Client) DeleteEndpointConfigRequest(input *DeleteEndpointConfigInput) D
 // DeleteEndpointConfig API operation.
 type DeleteEndpointConfigRequest struct {
 	*aws.Request
-	Input *DeleteEndpointConfigInput
-	Copy  func(*DeleteEndpointConfigInput) DeleteEndpointConfigRequest
+	Input *types.DeleteEndpointConfigInput
+	Copy  func(*types.DeleteEndpointConfigInput) DeleteEndpointConfigRequest
 }
 
 // Send marshals and sends the DeleteEndpointConfig API request.
@@ -99,7 +62,7 @@ func (r DeleteEndpointConfigRequest) Send(ctx context.Context) (*DeleteEndpointC
 	}
 
 	resp := &DeleteEndpointConfigResponse{
-		DeleteEndpointConfigOutput: r.Request.Data.(*DeleteEndpointConfigOutput),
+		DeleteEndpointConfigOutput: r.Request.Data.(*types.DeleteEndpointConfigOutput),
 		response:                   &aws.Response{Request: r.Request},
 	}
 
@@ -109,7 +72,7 @@ func (r DeleteEndpointConfigRequest) Send(ctx context.Context) (*DeleteEndpointC
 // DeleteEndpointConfigResponse is the response type for the
 // DeleteEndpointConfig API operation.
 type DeleteEndpointConfigResponse struct {
-	*DeleteEndpointConfigOutput
+	*types.DeleteEndpointConfigOutput
 
 	response *aws.Response
 }

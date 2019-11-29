@@ -6,71 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ssm/types"
 )
-
-type UpdateAssociationStatusInput struct {
-	_ struct{} `type:"structure"`
-
-	// The association status.
-	//
-	// AssociationStatus is a required field
-	AssociationStatus *AssociationStatus `type:"structure" required:"true"`
-
-	// The ID of the instance.
-	//
-	// InstanceId is a required field
-	InstanceId *string `type:"string" required:"true"`
-
-	// The name of the Systems Manager document.
-	//
-	// Name is a required field
-	Name *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s UpdateAssociationStatusInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateAssociationStatusInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateAssociationStatusInput"}
-
-	if s.AssociationStatus == nil {
-		invalidParams.Add(aws.NewErrParamRequired("AssociationStatus"))
-	}
-
-	if s.InstanceId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("InstanceId"))
-	}
-
-	if s.Name == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Name"))
-	}
-	if s.AssociationStatus != nil {
-		if err := s.AssociationStatus.Validate(); err != nil {
-			invalidParams.AddNested("AssociationStatus", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type UpdateAssociationStatusOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Information about the association.
-	AssociationDescription *AssociationDescription `type:"structure"`
-}
-
-// String returns the string representation
-func (s UpdateAssociationStatusOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opUpdateAssociationStatus = "UpdateAssociationStatus"
 
@@ -88,7 +25,7 @@ const opUpdateAssociationStatus = "UpdateAssociationStatus"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/UpdateAssociationStatus
-func (c *Client) UpdateAssociationStatusRequest(input *UpdateAssociationStatusInput) UpdateAssociationStatusRequest {
+func (c *Client) UpdateAssociationStatusRequest(input *types.UpdateAssociationStatusInput) UpdateAssociationStatusRequest {
 	op := &aws.Operation{
 		Name:       opUpdateAssociationStatus,
 		HTTPMethod: "POST",
@@ -96,10 +33,10 @@ func (c *Client) UpdateAssociationStatusRequest(input *UpdateAssociationStatusIn
 	}
 
 	if input == nil {
-		input = &UpdateAssociationStatusInput{}
+		input = &types.UpdateAssociationStatusInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateAssociationStatusOutput{})
+	req := c.newRequest(op, input, &types.UpdateAssociationStatusOutput{})
 	return UpdateAssociationStatusRequest{Request: req, Input: input, Copy: c.UpdateAssociationStatusRequest}
 }
 
@@ -107,8 +44,8 @@ func (c *Client) UpdateAssociationStatusRequest(input *UpdateAssociationStatusIn
 // UpdateAssociationStatus API operation.
 type UpdateAssociationStatusRequest struct {
 	*aws.Request
-	Input *UpdateAssociationStatusInput
-	Copy  func(*UpdateAssociationStatusInput) UpdateAssociationStatusRequest
+	Input *types.UpdateAssociationStatusInput
+	Copy  func(*types.UpdateAssociationStatusInput) UpdateAssociationStatusRequest
 }
 
 // Send marshals and sends the UpdateAssociationStatus API request.
@@ -120,7 +57,7 @@ func (r UpdateAssociationStatusRequest) Send(ctx context.Context) (*UpdateAssoci
 	}
 
 	resp := &UpdateAssociationStatusResponse{
-		UpdateAssociationStatusOutput: r.Request.Data.(*UpdateAssociationStatusOutput),
+		UpdateAssociationStatusOutput: r.Request.Data.(*types.UpdateAssociationStatusOutput),
 		response:                      &aws.Response{Request: r.Request},
 	}
 
@@ -130,7 +67,7 @@ func (r UpdateAssociationStatusRequest) Send(ctx context.Context) (*UpdateAssoci
 // UpdateAssociationStatusResponse is the response type for the
 // UpdateAssociationStatus API operation.
 type UpdateAssociationStatusResponse struct {
-	*UpdateAssociationStatusOutput
+	*types.UpdateAssociationStatusOutput
 
 	response *aws.Response
 }

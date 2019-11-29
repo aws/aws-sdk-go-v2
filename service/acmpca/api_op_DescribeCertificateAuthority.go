@@ -6,55 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/acmpca/types"
 )
-
-type DescribeCertificateAuthorityInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) that was returned when you called CreateCertificateAuthority.
-	// This must be of the form:
-	//
-	// arn:aws:acm-pca:region:account:certificate-authority/12345678-1234-1234-1234-123456789012 .
-	//
-	// CertificateAuthorityArn is a required field
-	CertificateAuthorityArn *string `min:"5" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeCertificateAuthorityInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeCertificateAuthorityInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeCertificateAuthorityInput"}
-
-	if s.CertificateAuthorityArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("CertificateAuthorityArn"))
-	}
-	if s.CertificateAuthorityArn != nil && len(*s.CertificateAuthorityArn) < 5 {
-		invalidParams.Add(aws.NewErrParamMinLen("CertificateAuthorityArn", 5))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribeCertificateAuthorityOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A CertificateAuthority structure that contains information about your private
-	// CA.
-	CertificateAuthority *CertificateAuthority `type:"structure"`
-}
-
-// String returns the string representation
-func (s DescribeCertificateAuthorityOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeCertificateAuthority = "DescribeCertificateAuthority"
 
@@ -93,7 +46,7 @@ const opDescribeCertificateAuthority = "DescribeCertificateAuthority"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/acm-pca-2017-08-22/DescribeCertificateAuthority
-func (c *Client) DescribeCertificateAuthorityRequest(input *DescribeCertificateAuthorityInput) DescribeCertificateAuthorityRequest {
+func (c *Client) DescribeCertificateAuthorityRequest(input *types.DescribeCertificateAuthorityInput) DescribeCertificateAuthorityRequest {
 	op := &aws.Operation{
 		Name:       opDescribeCertificateAuthority,
 		HTTPMethod: "POST",
@@ -101,10 +54,10 @@ func (c *Client) DescribeCertificateAuthorityRequest(input *DescribeCertificateA
 	}
 
 	if input == nil {
-		input = &DescribeCertificateAuthorityInput{}
+		input = &types.DescribeCertificateAuthorityInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeCertificateAuthorityOutput{})
+	req := c.newRequest(op, input, &types.DescribeCertificateAuthorityOutput{})
 	return DescribeCertificateAuthorityRequest{Request: req, Input: input, Copy: c.DescribeCertificateAuthorityRequest}
 }
 
@@ -112,8 +65,8 @@ func (c *Client) DescribeCertificateAuthorityRequest(input *DescribeCertificateA
 // DescribeCertificateAuthority API operation.
 type DescribeCertificateAuthorityRequest struct {
 	*aws.Request
-	Input *DescribeCertificateAuthorityInput
-	Copy  func(*DescribeCertificateAuthorityInput) DescribeCertificateAuthorityRequest
+	Input *types.DescribeCertificateAuthorityInput
+	Copy  func(*types.DescribeCertificateAuthorityInput) DescribeCertificateAuthorityRequest
 }
 
 // Send marshals and sends the DescribeCertificateAuthority API request.
@@ -125,7 +78,7 @@ func (r DescribeCertificateAuthorityRequest) Send(ctx context.Context) (*Describ
 	}
 
 	resp := &DescribeCertificateAuthorityResponse{
-		DescribeCertificateAuthorityOutput: r.Request.Data.(*DescribeCertificateAuthorityOutput),
+		DescribeCertificateAuthorityOutput: r.Request.Data.(*types.DescribeCertificateAuthorityOutput),
 		response:                           &aws.Response{Request: r.Request},
 	}
 
@@ -135,7 +88,7 @@ func (r DescribeCertificateAuthorityRequest) Send(ctx context.Context) (*Describ
 // DescribeCertificateAuthorityResponse is the response type for the
 // DescribeCertificateAuthority API operation.
 type DescribeCertificateAuthorityResponse struct {
-	*DescribeCertificateAuthorityOutput
+	*types.DescribeCertificateAuthorityOutput
 
 	response *aws.Response
 }

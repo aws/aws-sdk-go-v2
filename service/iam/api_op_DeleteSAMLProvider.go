@@ -6,50 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/query"
+	"github.com/aws/aws-sdk-go-v2/service/iam/types"
 )
-
-type DeleteSAMLProviderInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the SAML provider to delete.
-	//
-	// SAMLProviderArn is a required field
-	SAMLProviderArn *string `min:"20" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteSAMLProviderInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteSAMLProviderInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteSAMLProviderInput"}
-
-	if s.SAMLProviderArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("SAMLProviderArn"))
-	}
-	if s.SAMLProviderArn != nil && len(*s.SAMLProviderArn) < 20 {
-		invalidParams.Add(aws.NewErrParamMinLen("SAMLProviderArn", 20))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteSAMLProviderOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteSAMLProviderOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteSAMLProvider = "DeleteSAMLProvider"
 
@@ -73,7 +33,7 @@ const opDeleteSAMLProvider = "DeleteSAMLProvider"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeleteSAMLProvider
-func (c *Client) DeleteSAMLProviderRequest(input *DeleteSAMLProviderInput) DeleteSAMLProviderRequest {
+func (c *Client) DeleteSAMLProviderRequest(input *types.DeleteSAMLProviderInput) DeleteSAMLProviderRequest {
 	op := &aws.Operation{
 		Name:       opDeleteSAMLProvider,
 		HTTPMethod: "POST",
@@ -81,10 +41,10 @@ func (c *Client) DeleteSAMLProviderRequest(input *DeleteSAMLProviderInput) Delet
 	}
 
 	if input == nil {
-		input = &DeleteSAMLProviderInput{}
+		input = &types.DeleteSAMLProviderInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteSAMLProviderOutput{})
+	req := c.newRequest(op, input, &types.DeleteSAMLProviderOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return DeleteSAMLProviderRequest{Request: req, Input: input, Copy: c.DeleteSAMLProviderRequest}
@@ -94,8 +54,8 @@ func (c *Client) DeleteSAMLProviderRequest(input *DeleteSAMLProviderInput) Delet
 // DeleteSAMLProvider API operation.
 type DeleteSAMLProviderRequest struct {
 	*aws.Request
-	Input *DeleteSAMLProviderInput
-	Copy  func(*DeleteSAMLProviderInput) DeleteSAMLProviderRequest
+	Input *types.DeleteSAMLProviderInput
+	Copy  func(*types.DeleteSAMLProviderInput) DeleteSAMLProviderRequest
 }
 
 // Send marshals and sends the DeleteSAMLProvider API request.
@@ -107,7 +67,7 @@ func (r DeleteSAMLProviderRequest) Send(ctx context.Context) (*DeleteSAMLProvide
 	}
 
 	resp := &DeleteSAMLProviderResponse{
-		DeleteSAMLProviderOutput: r.Request.Data.(*DeleteSAMLProviderOutput),
+		DeleteSAMLProviderOutput: r.Request.Data.(*types.DeleteSAMLProviderOutput),
 		response:                 &aws.Response{Request: r.Request},
 	}
 
@@ -117,7 +77,7 @@ func (r DeleteSAMLProviderRequest) Send(ctx context.Context) (*DeleteSAMLProvide
 // DeleteSAMLProviderResponse is the response type for the
 // DeleteSAMLProvider API operation.
 type DeleteSAMLProviderResponse struct {
-	*DeleteSAMLProviderOutput
+	*types.DeleteSAMLProviderOutput
 
 	response *aws.Response
 }

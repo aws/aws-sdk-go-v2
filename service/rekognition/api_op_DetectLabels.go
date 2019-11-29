@@ -6,88 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/rekognition/types"
 )
-
-type DetectLabelsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The input image as base64-encoded bytes or an S3 object. If you use the AWS
-	// CLI to call Amazon Rekognition operations, passing image bytes is not supported.
-	// Images stored in an S3 Bucket do not need to be base64-encoded.
-	//
-	// If you are using an AWS SDK to call Amazon Rekognition, you might not need
-	// to base64-encode image bytes passed using the Bytes field. For more information,
-	// see Images in the Amazon Rekognition developer guide.
-	//
-	// Image is a required field
-	Image *Image `type:"structure" required:"true"`
-
-	// Maximum number of labels you want the service to return in the response.
-	// The service returns the specified number of highest confidence labels.
-	MaxLabels *int64 `type:"integer"`
-
-	// Specifies the minimum confidence level for the labels to return. Amazon Rekognition
-	// doesn't return any labels with confidence lower than this specified value.
-	//
-	// If MinConfidence is not specified, the operation returns labels with a confidence
-	// values greater than or equal to 55 percent.
-	MinConfidence *float64 `type:"float"`
-}
-
-// String returns the string representation
-func (s DetectLabelsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DetectLabelsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DetectLabelsInput"}
-
-	if s.Image == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Image"))
-	}
-	if s.Image != nil {
-		if err := s.Image.Validate(); err != nil {
-			invalidParams.AddNested("Image", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DetectLabelsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Version number of the label detection model that was used to detect labels.
-	LabelModelVersion *string `type:"string"`
-
-	// An array of labels for the real-world objects detected.
-	Labels []Label `type:"list"`
-
-	// The value of OrientationCorrection is always null.
-	//
-	// If the input image is in .jpeg format, it might contain exchangeable image
-	// file format (Exif) metadata that includes the image's orientation. Amazon
-	// Rekognition uses this orientation information to perform image correction.
-	// The bounding box coordinates are translated to represent object locations
-	// after the orientation information in the Exif metadata is used to correct
-	// the image orientation. Images in .png format don't contain Exif metadata.
-	//
-	// Amazon Rekognition doesn’t perform image correction for images in .png
-	// format and .jpeg images without orientation information in the image Exif
-	// metadata. The bounding box coordinates aren't translated and represent the
-	// object locations before the image is rotated.
-	OrientationCorrection OrientationCorrection `type:"string" enum:"true"`
-}
-
-// String returns the string representation
-func (s DetectLabelsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDetectLabels = "DetectLabels"
 
@@ -170,7 +90,7 @@ const opDetectLabels = "DetectLabels"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) DetectLabelsRequest(input *DetectLabelsInput) DetectLabelsRequest {
+func (c *Client) DetectLabelsRequest(input *types.DetectLabelsInput) DetectLabelsRequest {
 	op := &aws.Operation{
 		Name:       opDetectLabels,
 		HTTPMethod: "POST",
@@ -178,10 +98,10 @@ func (c *Client) DetectLabelsRequest(input *DetectLabelsInput) DetectLabelsReque
 	}
 
 	if input == nil {
-		input = &DetectLabelsInput{}
+		input = &types.DetectLabelsInput{}
 	}
 
-	req := c.newRequest(op, input, &DetectLabelsOutput{})
+	req := c.newRequest(op, input, &types.DetectLabelsOutput{})
 	return DetectLabelsRequest{Request: req, Input: input, Copy: c.DetectLabelsRequest}
 }
 
@@ -189,8 +109,8 @@ func (c *Client) DetectLabelsRequest(input *DetectLabelsInput) DetectLabelsReque
 // DetectLabels API operation.
 type DetectLabelsRequest struct {
 	*aws.Request
-	Input *DetectLabelsInput
-	Copy  func(*DetectLabelsInput) DetectLabelsRequest
+	Input *types.DetectLabelsInput
+	Copy  func(*types.DetectLabelsInput) DetectLabelsRequest
 }
 
 // Send marshals and sends the DetectLabels API request.
@@ -202,7 +122,7 @@ func (r DetectLabelsRequest) Send(ctx context.Context) (*DetectLabelsResponse, e
 	}
 
 	resp := &DetectLabelsResponse{
-		DetectLabelsOutput: r.Request.Data.(*DetectLabelsOutput),
+		DetectLabelsOutput: r.Request.Data.(*types.DetectLabelsOutput),
 		response:           &aws.Response{Request: r.Request},
 	}
 
@@ -212,7 +132,7 @@ func (r DetectLabelsRequest) Send(ctx context.Context) (*DetectLabelsResponse, e
 // DetectLabelsResponse is the response type for the
 // DetectLabels API operation.
 type DetectLabelsResponse struct {
-	*DetectLabelsOutput
+	*types.DetectLabelsOutput
 
 	response *aws.Response
 }

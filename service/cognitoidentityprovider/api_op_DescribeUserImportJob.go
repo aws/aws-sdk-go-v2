@@ -6,66 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/types"
 )
-
-// Represents the request to describe the user import job.
-type DescribeUserImportJobInput struct {
-	_ struct{} `type:"structure"`
-
-	// The job ID for the user import job.
-	//
-	// JobId is a required field
-	JobId *string `min:"1" type:"string" required:"true"`
-
-	// The user pool ID for the user pool that the users are being imported into.
-	//
-	// UserPoolId is a required field
-	UserPoolId *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeUserImportJobInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeUserImportJobInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeUserImportJobInput"}
-
-	if s.JobId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("JobId"))
-	}
-	if s.JobId != nil && len(*s.JobId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("JobId", 1))
-	}
-
-	if s.UserPoolId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("UserPoolId"))
-	}
-	if s.UserPoolId != nil && len(*s.UserPoolId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("UserPoolId", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Represents the response from the server to the request to describe the user
-// import job.
-type DescribeUserImportJobOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The job object that represents the user import job.
-	UserImportJob *UserImportJobType `type:"structure"`
-}
-
-// String returns the string representation
-func (s DescribeUserImportJobOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeUserImportJob = "DescribeUserImportJob"
 
@@ -82,7 +24,7 @@ const opDescribeUserImportJob = "DescribeUserImportJob"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/DescribeUserImportJob
-func (c *Client) DescribeUserImportJobRequest(input *DescribeUserImportJobInput) DescribeUserImportJobRequest {
+func (c *Client) DescribeUserImportJobRequest(input *types.DescribeUserImportJobInput) DescribeUserImportJobRequest {
 	op := &aws.Operation{
 		Name:       opDescribeUserImportJob,
 		HTTPMethod: "POST",
@@ -90,10 +32,10 @@ func (c *Client) DescribeUserImportJobRequest(input *DescribeUserImportJobInput)
 	}
 
 	if input == nil {
-		input = &DescribeUserImportJobInput{}
+		input = &types.DescribeUserImportJobInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeUserImportJobOutput{})
+	req := c.newRequest(op, input, &types.DescribeUserImportJobOutput{})
 	return DescribeUserImportJobRequest{Request: req, Input: input, Copy: c.DescribeUserImportJobRequest}
 }
 
@@ -101,8 +43,8 @@ func (c *Client) DescribeUserImportJobRequest(input *DescribeUserImportJobInput)
 // DescribeUserImportJob API operation.
 type DescribeUserImportJobRequest struct {
 	*aws.Request
-	Input *DescribeUserImportJobInput
-	Copy  func(*DescribeUserImportJobInput) DescribeUserImportJobRequest
+	Input *types.DescribeUserImportJobInput
+	Copy  func(*types.DescribeUserImportJobInput) DescribeUserImportJobRequest
 }
 
 // Send marshals and sends the DescribeUserImportJob API request.
@@ -114,7 +56,7 @@ func (r DescribeUserImportJobRequest) Send(ctx context.Context) (*DescribeUserIm
 	}
 
 	resp := &DescribeUserImportJobResponse{
-		DescribeUserImportJobOutput: r.Request.Data.(*DescribeUserImportJobOutput),
+		DescribeUserImportJobOutput: r.Request.Data.(*types.DescribeUserImportJobOutput),
 		response:                    &aws.Response{Request: r.Request},
 	}
 
@@ -124,7 +66,7 @@ func (r DescribeUserImportJobRequest) Send(ctx context.Context) (*DescribeUserIm
 // DescribeUserImportJobResponse is the response type for the
 // DescribeUserImportJob API operation.
 type DescribeUserImportJobResponse struct {
-	*DescribeUserImportJobOutput
+	*types.DescribeUserImportJobOutput
 
 	response *aws.Response
 }

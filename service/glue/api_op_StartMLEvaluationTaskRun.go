@@ -6,51 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/glue/types"
 )
-
-type StartMLEvaluationTaskRunInput struct {
-	_ struct{} `type:"structure"`
-
-	// The unique identifier of the machine learning transform.
-	//
-	// TransformId is a required field
-	TransformId *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s StartMLEvaluationTaskRunInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *StartMLEvaluationTaskRunInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "StartMLEvaluationTaskRunInput"}
-
-	if s.TransformId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("TransformId"))
-	}
-	if s.TransformId != nil && len(*s.TransformId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("TransformId", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type StartMLEvaluationTaskRunOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The unique identifier associated with this run.
-	TaskRunId *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s StartMLEvaluationTaskRunOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opStartMLEvaluationTaskRun = "StartMLEvaluationTaskRun"
 
@@ -74,7 +31,7 @@ const opStartMLEvaluationTaskRun = "StartMLEvaluationTaskRun"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/StartMLEvaluationTaskRun
-func (c *Client) StartMLEvaluationTaskRunRequest(input *StartMLEvaluationTaskRunInput) StartMLEvaluationTaskRunRequest {
+func (c *Client) StartMLEvaluationTaskRunRequest(input *types.StartMLEvaluationTaskRunInput) StartMLEvaluationTaskRunRequest {
 	op := &aws.Operation{
 		Name:       opStartMLEvaluationTaskRun,
 		HTTPMethod: "POST",
@@ -82,10 +39,10 @@ func (c *Client) StartMLEvaluationTaskRunRequest(input *StartMLEvaluationTaskRun
 	}
 
 	if input == nil {
-		input = &StartMLEvaluationTaskRunInput{}
+		input = &types.StartMLEvaluationTaskRunInput{}
 	}
 
-	req := c.newRequest(op, input, &StartMLEvaluationTaskRunOutput{})
+	req := c.newRequest(op, input, &types.StartMLEvaluationTaskRunOutput{})
 	return StartMLEvaluationTaskRunRequest{Request: req, Input: input, Copy: c.StartMLEvaluationTaskRunRequest}
 }
 
@@ -93,8 +50,8 @@ func (c *Client) StartMLEvaluationTaskRunRequest(input *StartMLEvaluationTaskRun
 // StartMLEvaluationTaskRun API operation.
 type StartMLEvaluationTaskRunRequest struct {
 	*aws.Request
-	Input *StartMLEvaluationTaskRunInput
-	Copy  func(*StartMLEvaluationTaskRunInput) StartMLEvaluationTaskRunRequest
+	Input *types.StartMLEvaluationTaskRunInput
+	Copy  func(*types.StartMLEvaluationTaskRunInput) StartMLEvaluationTaskRunRequest
 }
 
 // Send marshals and sends the StartMLEvaluationTaskRun API request.
@@ -106,7 +63,7 @@ func (r StartMLEvaluationTaskRunRequest) Send(ctx context.Context) (*StartMLEval
 	}
 
 	resp := &StartMLEvaluationTaskRunResponse{
-		StartMLEvaluationTaskRunOutput: r.Request.Data.(*StartMLEvaluationTaskRunOutput),
+		StartMLEvaluationTaskRunOutput: r.Request.Data.(*types.StartMLEvaluationTaskRunOutput),
 		response:                       &aws.Response{Request: r.Request},
 	}
 
@@ -116,7 +73,7 @@ func (r StartMLEvaluationTaskRunRequest) Send(ctx context.Context) (*StartMLEval
 // StartMLEvaluationTaskRunResponse is the response type for the
 // StartMLEvaluationTaskRun API operation.
 type StartMLEvaluationTaskRunResponse struct {
-	*StartMLEvaluationTaskRunOutput
+	*types.StartMLEvaluationTaskRunOutput
 
 	response *aws.Response
 }

@@ -6,154 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/iot/types"
 )
-
-type StartAuditMitigationActionsTaskInput struct {
-	_ struct{} `type:"structure"`
-
-	// For an audit check, specifies which mitigation actions to apply. Those actions
-	// must be defined in your AWS account.
-	//
-	// AuditCheckToActionsMapping is a required field
-	AuditCheckToActionsMapping map[string][]string `locationName:"auditCheckToActionsMapping" type:"map" required:"true"`
-
-	// Each audit mitigation task must have a unique client request token. If you
-	// try to start a new task with the same token as a task that already exists,
-	// an exception occurs. If you omit this value, a unique client request token
-	// is generated automatically.
-	//
-	// ClientRequestToken is a required field
-	ClientRequestToken *string `locationName:"clientRequestToken" min:"1" type:"string" required:"true" idempotencyToken:"true"`
-
-	// Specifies the audit findings to which the mitigation actions are applied.
-	// You can apply them to a type of audit check, to all findings from an audit,
-	// or to a speecific set of findings.
-	//
-	// Target is a required field
-	Target *AuditMitigationActionsTaskTarget `locationName:"target" type:"structure" required:"true"`
-
-	// A unique identifier for the task. You can use this identifier to check the
-	// status of the task or to cancel it.
-	//
-	// TaskId is a required field
-	TaskId *string `location:"uri" locationName:"taskId" min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s StartAuditMitigationActionsTaskInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *StartAuditMitigationActionsTaskInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "StartAuditMitigationActionsTaskInput"}
-
-	if s.AuditCheckToActionsMapping == nil {
-		invalidParams.Add(aws.NewErrParamRequired("AuditCheckToActionsMapping"))
-	}
-
-	if s.ClientRequestToken == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ClientRequestToken"))
-	}
-	if s.ClientRequestToken != nil && len(*s.ClientRequestToken) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ClientRequestToken", 1))
-	}
-
-	if s.Target == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Target"))
-	}
-
-	if s.TaskId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("TaskId"))
-	}
-	if s.TaskId != nil && len(*s.TaskId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("TaskId", 1))
-	}
-	if s.Target != nil {
-		if err := s.Target.Validate(); err != nil {
-			invalidParams.AddNested("Target", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s StartAuditMitigationActionsTaskInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.AuditCheckToActionsMapping != nil {
-		v := s.AuditCheckToActionsMapping
-
-		metadata := protocol.Metadata{}
-		ms0 := e.Map(protocol.BodyTarget, "auditCheckToActionsMapping", metadata)
-		ms0.Start()
-		for k1, v1 := range v {
-			ls1 := ms0.List(k1)
-			ls1.Start()
-			for _, v2 := range v1 {
-				ls1.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v2)})
-			}
-			ls1.End()
-		}
-		ms0.End()
-
-	}
-	var ClientRequestToken string
-	if s.ClientRequestToken != nil {
-		ClientRequestToken = *s.ClientRequestToken
-	} else {
-		ClientRequestToken = protocol.GetIdempotencyToken()
-	}
-	{
-		v := ClientRequestToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "clientRequestToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Target != nil {
-		v := s.Target
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "target", v, metadata)
-	}
-	if s.TaskId != nil {
-		v := *s.TaskId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "taskId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type StartAuditMitigationActionsTaskOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The unique identifier for the audit mitigation task. This matches the taskId
-	// that you specified in the request.
-	TaskId *string `locationName:"taskId" min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s StartAuditMitigationActionsTaskOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s StartAuditMitigationActionsTaskOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.TaskId != nil {
-		v := *s.TaskId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "taskId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opStartAuditMitigationActionsTask = "StartAuditMitigationActionsTask"
 
@@ -168,7 +22,7 @@ const opStartAuditMitigationActionsTask = "StartAuditMitigationActionsTask"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) StartAuditMitigationActionsTaskRequest(input *StartAuditMitigationActionsTaskInput) StartAuditMitigationActionsTaskRequest {
+func (c *Client) StartAuditMitigationActionsTaskRequest(input *types.StartAuditMitigationActionsTaskInput) StartAuditMitigationActionsTaskRequest {
 	op := &aws.Operation{
 		Name:       opStartAuditMitigationActionsTask,
 		HTTPMethod: "POST",
@@ -176,10 +30,10 @@ func (c *Client) StartAuditMitigationActionsTaskRequest(input *StartAuditMitigat
 	}
 
 	if input == nil {
-		input = &StartAuditMitigationActionsTaskInput{}
+		input = &types.StartAuditMitigationActionsTaskInput{}
 	}
 
-	req := c.newRequest(op, input, &StartAuditMitigationActionsTaskOutput{})
+	req := c.newRequest(op, input, &types.StartAuditMitigationActionsTaskOutput{})
 	return StartAuditMitigationActionsTaskRequest{Request: req, Input: input, Copy: c.StartAuditMitigationActionsTaskRequest}
 }
 
@@ -187,8 +41,8 @@ func (c *Client) StartAuditMitigationActionsTaskRequest(input *StartAuditMitigat
 // StartAuditMitigationActionsTask API operation.
 type StartAuditMitigationActionsTaskRequest struct {
 	*aws.Request
-	Input *StartAuditMitigationActionsTaskInput
-	Copy  func(*StartAuditMitigationActionsTaskInput) StartAuditMitigationActionsTaskRequest
+	Input *types.StartAuditMitigationActionsTaskInput
+	Copy  func(*types.StartAuditMitigationActionsTaskInput) StartAuditMitigationActionsTaskRequest
 }
 
 // Send marshals and sends the StartAuditMitigationActionsTask API request.
@@ -200,7 +54,7 @@ func (r StartAuditMitigationActionsTaskRequest) Send(ctx context.Context) (*Star
 	}
 
 	resp := &StartAuditMitigationActionsTaskResponse{
-		StartAuditMitigationActionsTaskOutput: r.Request.Data.(*StartAuditMitigationActionsTaskOutput),
+		StartAuditMitigationActionsTaskOutput: r.Request.Data.(*types.StartAuditMitigationActionsTaskOutput),
 		response:                              &aws.Response{Request: r.Request},
 	}
 
@@ -210,7 +64,7 @@ func (r StartAuditMitigationActionsTaskRequest) Send(ctx context.Context) (*Star
 // StartAuditMitigationActionsTaskResponse is the response type for the
 // StartAuditMitigationActionsTask API operation.
 type StartAuditMitigationActionsTaskResponse struct {
-	*StartAuditMitigationActionsTaskOutput
+	*types.StartAuditMitigationActionsTaskOutput
 
 	response *aws.Response
 }

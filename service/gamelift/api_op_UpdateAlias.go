@@ -6,66 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/gamelift/types"
 )
-
-// Represents the input for a request action.
-type UpdateAliasInput struct {
-	_ struct{} `type:"structure"`
-
-	// Unique identifier for a fleet alias. Specify the alias you want to update.
-	//
-	// AliasId is a required field
-	AliasId *string `type:"string" required:"true"`
-
-	// Human-readable description of an alias.
-	Description *string `min:"1" type:"string"`
-
-	// Descriptive label that is associated with an alias. Alias names do not need
-	// to be unique.
-	Name *string `min:"1" type:"string"`
-
-	// Object that specifies the fleet and routing type to use for the alias.
-	RoutingStrategy *RoutingStrategy `type:"structure"`
-}
-
-// String returns the string representation
-func (s UpdateAliasInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateAliasInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateAliasInput"}
-
-	if s.AliasId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("AliasId"))
-	}
-	if s.Description != nil && len(*s.Description) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Description", 1))
-	}
-	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Represents the returned data in response to a request action.
-type UpdateAliasOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Object that contains the updated alias configuration.
-	Alias *Alias `type:"structure"`
-}
-
-// String returns the string representation
-func (s UpdateAliasOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opUpdateAlias = "UpdateAlias"
 
@@ -97,7 +39,7 @@ const opUpdateAlias = "UpdateAlias"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/UpdateAlias
-func (c *Client) UpdateAliasRequest(input *UpdateAliasInput) UpdateAliasRequest {
+func (c *Client) UpdateAliasRequest(input *types.UpdateAliasInput) UpdateAliasRequest {
 	op := &aws.Operation{
 		Name:       opUpdateAlias,
 		HTTPMethod: "POST",
@@ -105,10 +47,10 @@ func (c *Client) UpdateAliasRequest(input *UpdateAliasInput) UpdateAliasRequest 
 	}
 
 	if input == nil {
-		input = &UpdateAliasInput{}
+		input = &types.UpdateAliasInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateAliasOutput{})
+	req := c.newRequest(op, input, &types.UpdateAliasOutput{})
 	return UpdateAliasRequest{Request: req, Input: input, Copy: c.UpdateAliasRequest}
 }
 
@@ -116,8 +58,8 @@ func (c *Client) UpdateAliasRequest(input *UpdateAliasInput) UpdateAliasRequest 
 // UpdateAlias API operation.
 type UpdateAliasRequest struct {
 	*aws.Request
-	Input *UpdateAliasInput
-	Copy  func(*UpdateAliasInput) UpdateAliasRequest
+	Input *types.UpdateAliasInput
+	Copy  func(*types.UpdateAliasInput) UpdateAliasRequest
 }
 
 // Send marshals and sends the UpdateAlias API request.
@@ -129,7 +71,7 @@ func (r UpdateAliasRequest) Send(ctx context.Context) (*UpdateAliasResponse, err
 	}
 
 	resp := &UpdateAliasResponse{
-		UpdateAliasOutput: r.Request.Data.(*UpdateAliasOutput),
+		UpdateAliasOutput: r.Request.Data.(*types.UpdateAliasOutput),
 		response:          &aws.Response{Request: r.Request},
 	}
 
@@ -139,7 +81,7 @@ func (r UpdateAliasRequest) Send(ctx context.Context) (*UpdateAliasResponse, err
 // UpdateAliasResponse is the response type for the
 // UpdateAlias API operation.
 type UpdateAliasResponse struct {
-	*UpdateAliasOutput
+	*types.UpdateAliasOutput
 
 	response *aws.Response
 }

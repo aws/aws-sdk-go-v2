@@ -4,98 +4,10 @@ package waf
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/waf/types"
 )
-
-// A request to update a SqlInjectionMatchSet.
-type UpdateSqlInjectionMatchSetInput struct {
-	_ struct{} `type:"structure"`
-
-	// The value returned by the most recent call to GetChangeToken.
-	//
-	// ChangeToken is a required field
-	ChangeToken *string `min:"1" type:"string" required:"true"`
-
-	// The SqlInjectionMatchSetId of the SqlInjectionMatchSet that you want to update.
-	// SqlInjectionMatchSetId is returned by CreateSqlInjectionMatchSet and by ListSqlInjectionMatchSets.
-	//
-	// SqlInjectionMatchSetId is a required field
-	SqlInjectionMatchSetId *string `min:"1" type:"string" required:"true"`
-
-	// An array of SqlInjectionMatchSetUpdate objects that you want to insert into
-	// or delete from a SqlInjectionMatchSet. For more information, see the applicable
-	// data types:
-	//
-	//    * SqlInjectionMatchSetUpdate: Contains Action and SqlInjectionMatchTuple
-	//
-	//    * SqlInjectionMatchTuple: Contains FieldToMatch and TextTransformation
-	//
-	//    * FieldToMatch: Contains Data and Type
-	//
-	// Updates is a required field
-	Updates []SqlInjectionMatchSetUpdate `min:"1" type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s UpdateSqlInjectionMatchSetInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateSqlInjectionMatchSetInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateSqlInjectionMatchSetInput"}
-
-	if s.ChangeToken == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ChangeToken"))
-	}
-	if s.ChangeToken != nil && len(*s.ChangeToken) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ChangeToken", 1))
-	}
-
-	if s.SqlInjectionMatchSetId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("SqlInjectionMatchSetId"))
-	}
-	if s.SqlInjectionMatchSetId != nil && len(*s.SqlInjectionMatchSetId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("SqlInjectionMatchSetId", 1))
-	}
-
-	if s.Updates == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Updates"))
-	}
-	if s.Updates != nil && len(s.Updates) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Updates", 1))
-	}
-	if s.Updates != nil {
-		for i, v := range s.Updates {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Updates", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// The response to an UpdateSqlInjectionMatchSets request.
-type UpdateSqlInjectionMatchSetOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The ChangeToken that you used to submit the UpdateSqlInjectionMatchSet request.
-	// You can also use this value to query the status of the request. For more
-	// information, see GetChangeTokenStatus.
-	ChangeToken *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s UpdateSqlInjectionMatchSetOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opUpdateSqlInjectionMatchSet = "UpdateSqlInjectionMatchSet"
 
@@ -144,7 +56,7 @@ const opUpdateSqlInjectionMatchSet = "UpdateSqlInjectionMatchSet"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/UpdateSqlInjectionMatchSet
-func (c *Client) UpdateSqlInjectionMatchSetRequest(input *UpdateSqlInjectionMatchSetInput) UpdateSqlInjectionMatchSetRequest {
+func (c *Client) UpdateSqlInjectionMatchSetRequest(input *types.UpdateSqlInjectionMatchSetInput) UpdateSqlInjectionMatchSetRequest {
 	op := &aws.Operation{
 		Name:       opUpdateSqlInjectionMatchSet,
 		HTTPMethod: "POST",
@@ -152,10 +64,10 @@ func (c *Client) UpdateSqlInjectionMatchSetRequest(input *UpdateSqlInjectionMatc
 	}
 
 	if input == nil {
-		input = &UpdateSqlInjectionMatchSetInput{}
+		input = &types.UpdateSqlInjectionMatchSetInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateSqlInjectionMatchSetOutput{})
+	req := c.newRequest(op, input, &types.UpdateSqlInjectionMatchSetOutput{})
 	return UpdateSqlInjectionMatchSetRequest{Request: req, Input: input, Copy: c.UpdateSqlInjectionMatchSetRequest}
 }
 
@@ -163,8 +75,8 @@ func (c *Client) UpdateSqlInjectionMatchSetRequest(input *UpdateSqlInjectionMatc
 // UpdateSqlInjectionMatchSet API operation.
 type UpdateSqlInjectionMatchSetRequest struct {
 	*aws.Request
-	Input *UpdateSqlInjectionMatchSetInput
-	Copy  func(*UpdateSqlInjectionMatchSetInput) UpdateSqlInjectionMatchSetRequest
+	Input *types.UpdateSqlInjectionMatchSetInput
+	Copy  func(*types.UpdateSqlInjectionMatchSetInput) UpdateSqlInjectionMatchSetRequest
 }
 
 // Send marshals and sends the UpdateSqlInjectionMatchSet API request.
@@ -176,7 +88,7 @@ func (r UpdateSqlInjectionMatchSetRequest) Send(ctx context.Context) (*UpdateSql
 	}
 
 	resp := &UpdateSqlInjectionMatchSetResponse{
-		UpdateSqlInjectionMatchSetOutput: r.Request.Data.(*UpdateSqlInjectionMatchSetOutput),
+		UpdateSqlInjectionMatchSetOutput: r.Request.Data.(*types.UpdateSqlInjectionMatchSetOutput),
 		response:                         &aws.Response{Request: r.Request},
 	}
 
@@ -186,7 +98,7 @@ func (r UpdateSqlInjectionMatchSetRequest) Send(ctx context.Context) (*UpdateSql
 // UpdateSqlInjectionMatchSetResponse is the response type for the
 // UpdateSqlInjectionMatchSet API operation.
 type UpdateSqlInjectionMatchSetResponse struct {
-	*UpdateSqlInjectionMatchSetOutput
+	*types.UpdateSqlInjectionMatchSetOutput
 
 	response *aws.Response
 }

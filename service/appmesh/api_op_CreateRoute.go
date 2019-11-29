@@ -4,166 +4,10 @@ package appmesh
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/appmesh/types"
 )
-
-type CreateRouteInput struct {
-	_ struct{} `type:"structure"`
-
-	ClientToken *string `locationName:"clientToken" type:"string" idempotencyToken:"true"`
-
-	// MeshName is a required field
-	MeshName *string `location:"uri" locationName:"meshName" min:"1" type:"string" required:"true"`
-
-	// RouteName is a required field
-	RouteName *string `locationName:"routeName" min:"1" type:"string" required:"true"`
-
-	// An object representing the specification of a route.
-	//
-	// Spec is a required field
-	Spec *RouteSpec `locationName:"spec" type:"structure" required:"true"`
-
-	Tags []TagRef `locationName:"tags" type:"list"`
-
-	// VirtualRouterName is a required field
-	VirtualRouterName *string `location:"uri" locationName:"virtualRouterName" min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s CreateRouteInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateRouteInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateRouteInput"}
-
-	if s.MeshName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("MeshName"))
-	}
-	if s.MeshName != nil && len(*s.MeshName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("MeshName", 1))
-	}
-
-	if s.RouteName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("RouteName"))
-	}
-	if s.RouteName != nil && len(*s.RouteName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("RouteName", 1))
-	}
-
-	if s.Spec == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Spec"))
-	}
-
-	if s.VirtualRouterName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("VirtualRouterName"))
-	}
-	if s.VirtualRouterName != nil && len(*s.VirtualRouterName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("VirtualRouterName", 1))
-	}
-	if s.Spec != nil {
-		if err := s.Spec.Validate(); err != nil {
-			invalidParams.AddNested("Spec", err.(aws.ErrInvalidParams))
-		}
-	}
-	if s.Tags != nil {
-		for i, v := range s.Tags {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s CreateRouteInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	var ClientToken string
-	if s.ClientToken != nil {
-		ClientToken = *s.ClientToken
-	} else {
-		ClientToken = protocol.GetIdempotencyToken()
-	}
-	{
-		v := ClientToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "clientToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.RouteName != nil {
-		v := *s.RouteName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "routeName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Spec != nil {
-		v := s.Spec
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "spec", v, metadata)
-	}
-	if s.Tags != nil {
-		v := s.Tags
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "tags", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	if s.MeshName != nil {
-		v := *s.MeshName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "meshName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.VirtualRouterName != nil {
-		v := *s.VirtualRouterName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "virtualRouterName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type CreateRouteOutput struct {
-	_ struct{} `type:"structure" payload:"Route"`
-
-	// An object representing a route returned by a describe operation.
-	//
-	// Route is a required field
-	Route *RouteData `locationName:"route" type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s CreateRouteOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s CreateRouteOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.Route != nil {
-		v := s.Route
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.PayloadTarget, "route", v, metadata)
-	}
-	return nil
-}
 
 const opCreateRoute = "CreateRoute"
 
@@ -188,7 +32,7 @@ const opCreateRoute = "CreateRoute"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/CreateRoute
-func (c *Client) CreateRouteRequest(input *CreateRouteInput) CreateRouteRequest {
+func (c *Client) CreateRouteRequest(input *types.CreateRouteInput) CreateRouteRequest {
 	op := &aws.Operation{
 		Name:       opCreateRoute,
 		HTTPMethod: "PUT",
@@ -196,10 +40,10 @@ func (c *Client) CreateRouteRequest(input *CreateRouteInput) CreateRouteRequest 
 	}
 
 	if input == nil {
-		input = &CreateRouteInput{}
+		input = &types.CreateRouteInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateRouteOutput{})
+	req := c.newRequest(op, input, &types.CreateRouteOutput{})
 	return CreateRouteRequest{Request: req, Input: input, Copy: c.CreateRouteRequest}
 }
 
@@ -207,8 +51,8 @@ func (c *Client) CreateRouteRequest(input *CreateRouteInput) CreateRouteRequest 
 // CreateRoute API operation.
 type CreateRouteRequest struct {
 	*aws.Request
-	Input *CreateRouteInput
-	Copy  func(*CreateRouteInput) CreateRouteRequest
+	Input *types.CreateRouteInput
+	Copy  func(*types.CreateRouteInput) CreateRouteRequest
 }
 
 // Send marshals and sends the CreateRoute API request.
@@ -220,7 +64,7 @@ func (r CreateRouteRequest) Send(ctx context.Context) (*CreateRouteResponse, err
 	}
 
 	resp := &CreateRouteResponse{
-		CreateRouteOutput: r.Request.Data.(*CreateRouteOutput),
+		CreateRouteOutput: r.Request.Data.(*types.CreateRouteOutput),
 		response:          &aws.Response{Request: r.Request},
 	}
 
@@ -230,7 +74,7 @@ func (r CreateRouteRequest) Send(ctx context.Context) (*CreateRouteResponse, err
 // CreateRouteResponse is the response type for the
 // CreateRoute API operation.
 type CreateRouteResponse struct {
-	*CreateRouteOutput
+	*types.CreateRouteOutput
 
 	response *aws.Response
 }

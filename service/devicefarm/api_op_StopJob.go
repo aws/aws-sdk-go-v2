@@ -6,52 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/devicefarm/types"
 )
-
-type StopJobInput struct {
-	_ struct{} `type:"structure"`
-
-	// Represents the Amazon Resource Name (ARN) of the Device Farm job you wish
-	// to stop.
-	//
-	// Arn is a required field
-	Arn *string `locationName:"arn" min:"32" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s StopJobInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *StopJobInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "StopJobInput"}
-
-	if s.Arn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Arn"))
-	}
-	if s.Arn != nil && len(*s.Arn) < 32 {
-		invalidParams.Add(aws.NewErrParamMinLen("Arn", 32))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type StopJobOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The job that was stopped.
-	Job *Job `locationName:"job" type:"structure"`
-}
-
-// String returns the string representation
-func (s StopJobOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opStopJob = "StopJob"
 
@@ -73,7 +29,7 @@ const opStopJob = "StopJob"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/StopJob
-func (c *Client) StopJobRequest(input *StopJobInput) StopJobRequest {
+func (c *Client) StopJobRequest(input *types.StopJobInput) StopJobRequest {
 	op := &aws.Operation{
 		Name:       opStopJob,
 		HTTPMethod: "POST",
@@ -81,10 +37,10 @@ func (c *Client) StopJobRequest(input *StopJobInput) StopJobRequest {
 	}
 
 	if input == nil {
-		input = &StopJobInput{}
+		input = &types.StopJobInput{}
 	}
 
-	req := c.newRequest(op, input, &StopJobOutput{})
+	req := c.newRequest(op, input, &types.StopJobOutput{})
 	return StopJobRequest{Request: req, Input: input, Copy: c.StopJobRequest}
 }
 
@@ -92,8 +48,8 @@ func (c *Client) StopJobRequest(input *StopJobInput) StopJobRequest {
 // StopJob API operation.
 type StopJobRequest struct {
 	*aws.Request
-	Input *StopJobInput
-	Copy  func(*StopJobInput) StopJobRequest
+	Input *types.StopJobInput
+	Copy  func(*types.StopJobInput) StopJobRequest
 }
 
 // Send marshals and sends the StopJob API request.
@@ -105,7 +61,7 @@ func (r StopJobRequest) Send(ctx context.Context) (*StopJobResponse, error) {
 	}
 
 	resp := &StopJobResponse{
-		StopJobOutput: r.Request.Data.(*StopJobOutput),
+		StopJobOutput: r.Request.Data.(*types.StopJobOutput),
 		response:      &aws.Response{Request: r.Request},
 	}
 
@@ -115,7 +71,7 @@ func (r StopJobRequest) Send(ctx context.Context) (*StopJobResponse, error) {
 // StopJobResponse is the response type for the
 // StopJob API operation.
 type StopJobResponse struct {
-	*StopJobOutput
+	*types.StopJobOutput
 
 	response *aws.Response
 }

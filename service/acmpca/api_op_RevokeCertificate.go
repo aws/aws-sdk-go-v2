@@ -6,81 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
+	"github.com/aws/aws-sdk-go-v2/service/acmpca/types"
 )
-
-type RevokeCertificateInput struct {
-	_ struct{} `type:"structure"`
-
-	// Amazon Resource Name (ARN) of the private CA that issued the certificate
-	// to be revoked. This must be of the form:
-	//
-	// arn:aws:acm-pca:region:account:certificate-authority/12345678-1234-1234-1234-123456789012
-	//
-	// CertificateAuthorityArn is a required field
-	CertificateAuthorityArn *string `min:"5" type:"string" required:"true"`
-
-	// Serial number of the certificate to be revoked. This must be in hexadecimal
-	// format. You can retrieve the serial number by calling GetCertificate with
-	// the Amazon Resource Name (ARN) of the certificate you want and the ARN of
-	// your private CA. The GetCertificate action retrieves the certificate in the
-	// PEM format. You can use the following OpenSSL command to list the certificate
-	// in text format and copy the hexadecimal serial number.
-	//
-	// openssl x509 -in file_path -text -noout
-	//
-	// You can also copy the serial number from the console or use the DescribeCertificate
-	// (https://docs.aws.amazon.com/acm/latest/APIReference/API_DescribeCertificate.html)
-	// action in the AWS Certificate Manager API Reference.
-	//
-	// CertificateSerial is a required field
-	CertificateSerial *string `type:"string" required:"true"`
-
-	// Specifies why you revoked the certificate.
-	//
-	// RevocationReason is a required field
-	RevocationReason RevocationReason `type:"string" required:"true" enum:"true"`
-}
-
-// String returns the string representation
-func (s RevokeCertificateInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *RevokeCertificateInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "RevokeCertificateInput"}
-
-	if s.CertificateAuthorityArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("CertificateAuthorityArn"))
-	}
-	if s.CertificateAuthorityArn != nil && len(*s.CertificateAuthorityArn) < 5 {
-		invalidParams.Add(aws.NewErrParamMinLen("CertificateAuthorityArn", 5))
-	}
-
-	if s.CertificateSerial == nil {
-		invalidParams.Add(aws.NewErrParamRequired("CertificateSerial"))
-	}
-	if len(s.RevocationReason) == 0 {
-		invalidParams.Add(aws.NewErrParamRequired("RevocationReason"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type RevokeCertificateOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s RevokeCertificateOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opRevokeCertificate = "RevokeCertificate"
 
@@ -105,7 +34,7 @@ const opRevokeCertificate = "RevokeCertificate"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/acm-pca-2017-08-22/RevokeCertificate
-func (c *Client) RevokeCertificateRequest(input *RevokeCertificateInput) RevokeCertificateRequest {
+func (c *Client) RevokeCertificateRequest(input *types.RevokeCertificateInput) RevokeCertificateRequest {
 	op := &aws.Operation{
 		Name:       opRevokeCertificate,
 		HTTPMethod: "POST",
@@ -113,10 +42,10 @@ func (c *Client) RevokeCertificateRequest(input *RevokeCertificateInput) RevokeC
 	}
 
 	if input == nil {
-		input = &RevokeCertificateInput{}
+		input = &types.RevokeCertificateInput{}
 	}
 
-	req := c.newRequest(op, input, &RevokeCertificateOutput{})
+	req := c.newRequest(op, input, &types.RevokeCertificateOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return RevokeCertificateRequest{Request: req, Input: input, Copy: c.RevokeCertificateRequest}
@@ -126,8 +55,8 @@ func (c *Client) RevokeCertificateRequest(input *RevokeCertificateInput) RevokeC
 // RevokeCertificate API operation.
 type RevokeCertificateRequest struct {
 	*aws.Request
-	Input *RevokeCertificateInput
-	Copy  func(*RevokeCertificateInput) RevokeCertificateRequest
+	Input *types.RevokeCertificateInput
+	Copy  func(*types.RevokeCertificateInput) RevokeCertificateRequest
 }
 
 // Send marshals and sends the RevokeCertificate API request.
@@ -139,7 +68,7 @@ func (r RevokeCertificateRequest) Send(ctx context.Context) (*RevokeCertificateR
 	}
 
 	resp := &RevokeCertificateResponse{
-		RevokeCertificateOutput: r.Request.Data.(*RevokeCertificateOutput),
+		RevokeCertificateOutput: r.Request.Data.(*types.RevokeCertificateOutput),
 		response:                &aws.Response{Request: r.Request},
 	}
 
@@ -149,7 +78,7 @@ func (r RevokeCertificateRequest) Send(ctx context.Context) (*RevokeCertificateR
 // RevokeCertificateResponse is the response type for the
 // RevokeCertificate API operation.
 type RevokeCertificateResponse struct {
-	*RevokeCertificateOutput
+	*types.RevokeCertificateOutput
 
 	response *aws.Response
 }

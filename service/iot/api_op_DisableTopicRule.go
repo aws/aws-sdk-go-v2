@@ -6,69 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/restjson"
+	"github.com/aws/aws-sdk-go-v2/service/iot/types"
 )
-
-// The input for the DisableTopicRuleRequest operation.
-type DisableTopicRuleInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the rule to disable.
-	//
-	// RuleName is a required field
-	RuleName *string `location:"uri" locationName:"ruleName" min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DisableTopicRuleInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DisableTopicRuleInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DisableTopicRuleInput"}
-
-	if s.RuleName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("RuleName"))
-	}
-	if s.RuleName != nil && len(*s.RuleName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("RuleName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DisableTopicRuleInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.RuleName != nil {
-		v := *s.RuleName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "ruleName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type DisableTopicRuleOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DisableTopicRuleOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DisableTopicRuleOutput) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
 
 const opDisableTopicRule = "DisableTopicRule"
 
@@ -83,7 +24,7 @@ const opDisableTopicRule = "DisableTopicRule"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) DisableTopicRuleRequest(input *DisableTopicRuleInput) DisableTopicRuleRequest {
+func (c *Client) DisableTopicRuleRequest(input *types.DisableTopicRuleInput) DisableTopicRuleRequest {
 	op := &aws.Operation{
 		Name:       opDisableTopicRule,
 		HTTPMethod: "POST",
@@ -91,10 +32,10 @@ func (c *Client) DisableTopicRuleRequest(input *DisableTopicRuleInput) DisableTo
 	}
 
 	if input == nil {
-		input = &DisableTopicRuleInput{}
+		input = &types.DisableTopicRuleInput{}
 	}
 
-	req := c.newRequest(op, input, &DisableTopicRuleOutput{})
+	req := c.newRequest(op, input, &types.DisableTopicRuleOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return DisableTopicRuleRequest{Request: req, Input: input, Copy: c.DisableTopicRuleRequest}
@@ -104,8 +45,8 @@ func (c *Client) DisableTopicRuleRequest(input *DisableTopicRuleInput) DisableTo
 // DisableTopicRule API operation.
 type DisableTopicRuleRequest struct {
 	*aws.Request
-	Input *DisableTopicRuleInput
-	Copy  func(*DisableTopicRuleInput) DisableTopicRuleRequest
+	Input *types.DisableTopicRuleInput
+	Copy  func(*types.DisableTopicRuleInput) DisableTopicRuleRequest
 }
 
 // Send marshals and sends the DisableTopicRule API request.
@@ -117,7 +58,7 @@ func (r DisableTopicRuleRequest) Send(ctx context.Context) (*DisableTopicRuleRes
 	}
 
 	resp := &DisableTopicRuleResponse{
-		DisableTopicRuleOutput: r.Request.Data.(*DisableTopicRuleOutput),
+		DisableTopicRuleOutput: r.Request.Data.(*types.DisableTopicRuleOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -127,7 +68,7 @@ func (r DisableTopicRuleRequest) Send(ctx context.Context) (*DisableTopicRuleRes
 // DisableTopicRuleResponse is the response type for the
 // DisableTopicRule API operation.
 type DisableTopicRuleResponse struct {
-	*DisableTopicRuleOutput
+	*types.DisableTopicRuleOutput
 
 	response *aws.Response
 }

@@ -6,106 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/worklink/types"
 )
-
-type DescribeCompanyNetworkConfigurationInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ARN of the fleet.
-	//
-	// FleetArn is a required field
-	FleetArn *string `min:"20" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeCompanyNetworkConfigurationInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeCompanyNetworkConfigurationInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeCompanyNetworkConfigurationInput"}
-
-	if s.FleetArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("FleetArn"))
-	}
-	if s.FleetArn != nil && len(*s.FleetArn) < 20 {
-		invalidParams.Add(aws.NewErrParamMinLen("FleetArn", 20))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DescribeCompanyNetworkConfigurationInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.FleetArn != nil {
-		v := *s.FleetArn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "FleetArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type DescribeCompanyNetworkConfigurationOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The security groups associated with access to the provided subnets.
-	SecurityGroupIds []string `type:"list"`
-
-	// The subnets used for X-ENI connections from Amazon WorkLink rendering containers.
-	SubnetIds []string `type:"list"`
-
-	// The VPC with connectivity to associated websites.
-	VpcId *string `type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeCompanyNetworkConfigurationOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DescribeCompanyNetworkConfigurationOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.SecurityGroupIds != nil {
-		v := s.SecurityGroupIds
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "SecurityGroupIds", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
-		}
-		ls0.End()
-
-	}
-	if s.SubnetIds != nil {
-		v := s.SubnetIds
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "SubnetIds", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
-		}
-		ls0.End()
-
-	}
-	if s.VpcId != nil {
-		v := *s.VpcId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "VpcId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opDescribeCompanyNetworkConfiguration = "DescribeCompanyNetworkConfiguration"
 
@@ -123,7 +25,7 @@ const opDescribeCompanyNetworkConfiguration = "DescribeCompanyNetworkConfigurati
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/worklink-2018-09-25/DescribeCompanyNetworkConfiguration
-func (c *Client) DescribeCompanyNetworkConfigurationRequest(input *DescribeCompanyNetworkConfigurationInput) DescribeCompanyNetworkConfigurationRequest {
+func (c *Client) DescribeCompanyNetworkConfigurationRequest(input *types.DescribeCompanyNetworkConfigurationInput) DescribeCompanyNetworkConfigurationRequest {
 	op := &aws.Operation{
 		Name:       opDescribeCompanyNetworkConfiguration,
 		HTTPMethod: "POST",
@@ -131,10 +33,10 @@ func (c *Client) DescribeCompanyNetworkConfigurationRequest(input *DescribeCompa
 	}
 
 	if input == nil {
-		input = &DescribeCompanyNetworkConfigurationInput{}
+		input = &types.DescribeCompanyNetworkConfigurationInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeCompanyNetworkConfigurationOutput{})
+	req := c.newRequest(op, input, &types.DescribeCompanyNetworkConfigurationOutput{})
 	return DescribeCompanyNetworkConfigurationRequest{Request: req, Input: input, Copy: c.DescribeCompanyNetworkConfigurationRequest}
 }
 
@@ -142,8 +44,8 @@ func (c *Client) DescribeCompanyNetworkConfigurationRequest(input *DescribeCompa
 // DescribeCompanyNetworkConfiguration API operation.
 type DescribeCompanyNetworkConfigurationRequest struct {
 	*aws.Request
-	Input *DescribeCompanyNetworkConfigurationInput
-	Copy  func(*DescribeCompanyNetworkConfigurationInput) DescribeCompanyNetworkConfigurationRequest
+	Input *types.DescribeCompanyNetworkConfigurationInput
+	Copy  func(*types.DescribeCompanyNetworkConfigurationInput) DescribeCompanyNetworkConfigurationRequest
 }
 
 // Send marshals and sends the DescribeCompanyNetworkConfiguration API request.
@@ -155,7 +57,7 @@ func (r DescribeCompanyNetworkConfigurationRequest) Send(ctx context.Context) (*
 	}
 
 	resp := &DescribeCompanyNetworkConfigurationResponse{
-		DescribeCompanyNetworkConfigurationOutput: r.Request.Data.(*DescribeCompanyNetworkConfigurationOutput),
+		DescribeCompanyNetworkConfigurationOutput: r.Request.Data.(*types.DescribeCompanyNetworkConfigurationOutput),
 		response: &aws.Response{Request: r.Request},
 	}
 
@@ -165,7 +67,7 @@ func (r DescribeCompanyNetworkConfigurationRequest) Send(ctx context.Context) (*
 // DescribeCompanyNetworkConfigurationResponse is the response type for the
 // DescribeCompanyNetworkConfiguration API operation.
 type DescribeCompanyNetworkConfigurationResponse struct {
-	*DescribeCompanyNetworkConfigurationOutput
+	*types.DescribeCompanyNetworkConfigurationOutput
 
 	response *aws.Response
 }

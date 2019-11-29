@@ -6,71 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/pinpointemail/types"
 )
-
-// A request to delete an existing email identity. When you delete an identity,
-// you lose the ability to use Amazon Pinpoint to send email from that identity.
-// You can restore your ability to send email by completing the verification
-// process for the identity again.
-type DeleteEmailIdentityInput struct {
-	_ struct{} `type:"structure"`
-
-	// The identity (that is, the email address or domain) that you want to delete
-	// from your Amazon Pinpoint account.
-	//
-	// EmailIdentity is a required field
-	EmailIdentity *string `location:"uri" locationName:"EmailIdentity" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteEmailIdentityInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteEmailIdentityInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteEmailIdentityInput"}
-
-	if s.EmailIdentity == nil {
-		invalidParams.Add(aws.NewErrParamRequired("EmailIdentity"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteEmailIdentityInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.EmailIdentity != nil {
-		v := *s.EmailIdentity
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "EmailIdentity", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-// An HTTP 200 response if the request succeeds, or an error message if the
-// request fails.
-type DeleteEmailIdentityOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteEmailIdentityOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteEmailIdentityOutput) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
 
 const opDeleteEmailIdentity = "DeleteEmailIdentity"
 
@@ -88,7 +25,7 @@ const opDeleteEmailIdentity = "DeleteEmailIdentity"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/DeleteEmailIdentity
-func (c *Client) DeleteEmailIdentityRequest(input *DeleteEmailIdentityInput) DeleteEmailIdentityRequest {
+func (c *Client) DeleteEmailIdentityRequest(input *types.DeleteEmailIdentityInput) DeleteEmailIdentityRequest {
 	op := &aws.Operation{
 		Name:       opDeleteEmailIdentity,
 		HTTPMethod: "DELETE",
@@ -96,10 +33,10 @@ func (c *Client) DeleteEmailIdentityRequest(input *DeleteEmailIdentityInput) Del
 	}
 
 	if input == nil {
-		input = &DeleteEmailIdentityInput{}
+		input = &types.DeleteEmailIdentityInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteEmailIdentityOutput{})
+	req := c.newRequest(op, input, &types.DeleteEmailIdentityOutput{})
 	return DeleteEmailIdentityRequest{Request: req, Input: input, Copy: c.DeleteEmailIdentityRequest}
 }
 
@@ -107,8 +44,8 @@ func (c *Client) DeleteEmailIdentityRequest(input *DeleteEmailIdentityInput) Del
 // DeleteEmailIdentity API operation.
 type DeleteEmailIdentityRequest struct {
 	*aws.Request
-	Input *DeleteEmailIdentityInput
-	Copy  func(*DeleteEmailIdentityInput) DeleteEmailIdentityRequest
+	Input *types.DeleteEmailIdentityInput
+	Copy  func(*types.DeleteEmailIdentityInput) DeleteEmailIdentityRequest
 }
 
 // Send marshals and sends the DeleteEmailIdentity API request.
@@ -120,7 +57,7 @@ func (r DeleteEmailIdentityRequest) Send(ctx context.Context) (*DeleteEmailIdent
 	}
 
 	resp := &DeleteEmailIdentityResponse{
-		DeleteEmailIdentityOutput: r.Request.Data.(*DeleteEmailIdentityOutput),
+		DeleteEmailIdentityOutput: r.Request.Data.(*types.DeleteEmailIdentityOutput),
 		response:                  &aws.Response{Request: r.Request},
 	}
 
@@ -130,7 +67,7 @@ func (r DeleteEmailIdentityRequest) Send(ctx context.Context) (*DeleteEmailIdent
 // DeleteEmailIdentityResponse is the response type for the
 // DeleteEmailIdentity API operation.
 type DeleteEmailIdentityResponse struct {
-	*DeleteEmailIdentityOutput
+	*types.DeleteEmailIdentityOutput
 
 	response *aws.Response
 }

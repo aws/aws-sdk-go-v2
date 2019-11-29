@@ -6,77 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/greengrass/types"
 )
-
-type ListCoreDefinitionsInput struct {
-	_ struct{} `type:"structure"`
-
-	MaxResults *string `location:"querystring" locationName:"MaxResults" type:"string"`
-
-	NextToken *string `location:"querystring" locationName:"NextToken" type:"string"`
-}
-
-// String returns the string representation
-func (s ListCoreDefinitionsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListCoreDefinitionsInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.MaxResults != nil {
-		v := *s.MaxResults
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "MaxResults", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type ListCoreDefinitionsOutput struct {
-	_ struct{} `type:"structure"`
-
-	Definitions []DefinitionInformation `type:"list"`
-
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s ListCoreDefinitionsOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListCoreDefinitionsOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.Definitions != nil {
-		v := s.Definitions
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "Definitions", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opListCoreDefinitions = "ListCoreDefinitions"
 
@@ -93,7 +24,7 @@ const opListCoreDefinitions = "ListCoreDefinitions"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/ListCoreDefinitions
-func (c *Client) ListCoreDefinitionsRequest(input *ListCoreDefinitionsInput) ListCoreDefinitionsRequest {
+func (c *Client) ListCoreDefinitionsRequest(input *types.ListCoreDefinitionsInput) ListCoreDefinitionsRequest {
 	op := &aws.Operation{
 		Name:       opListCoreDefinitions,
 		HTTPMethod: "GET",
@@ -101,10 +32,10 @@ func (c *Client) ListCoreDefinitionsRequest(input *ListCoreDefinitionsInput) Lis
 	}
 
 	if input == nil {
-		input = &ListCoreDefinitionsInput{}
+		input = &types.ListCoreDefinitionsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListCoreDefinitionsOutput{})
+	req := c.newRequest(op, input, &types.ListCoreDefinitionsOutput{})
 	return ListCoreDefinitionsRequest{Request: req, Input: input, Copy: c.ListCoreDefinitionsRequest}
 }
 
@@ -112,8 +43,8 @@ func (c *Client) ListCoreDefinitionsRequest(input *ListCoreDefinitionsInput) Lis
 // ListCoreDefinitions API operation.
 type ListCoreDefinitionsRequest struct {
 	*aws.Request
-	Input *ListCoreDefinitionsInput
-	Copy  func(*ListCoreDefinitionsInput) ListCoreDefinitionsRequest
+	Input *types.ListCoreDefinitionsInput
+	Copy  func(*types.ListCoreDefinitionsInput) ListCoreDefinitionsRequest
 }
 
 // Send marshals and sends the ListCoreDefinitions API request.
@@ -125,7 +56,7 @@ func (r ListCoreDefinitionsRequest) Send(ctx context.Context) (*ListCoreDefiniti
 	}
 
 	resp := &ListCoreDefinitionsResponse{
-		ListCoreDefinitionsOutput: r.Request.Data.(*ListCoreDefinitionsOutput),
+		ListCoreDefinitionsOutput: r.Request.Data.(*types.ListCoreDefinitionsOutput),
 		response:                  &aws.Response{Request: r.Request},
 	}
 
@@ -135,7 +66,7 @@ func (r ListCoreDefinitionsRequest) Send(ctx context.Context) (*ListCoreDefiniti
 // ListCoreDefinitionsResponse is the response type for the
 // ListCoreDefinitions API operation.
 type ListCoreDefinitionsResponse struct {
-	*ListCoreDefinitionsOutput
+	*types.ListCoreDefinitionsOutput
 
 	response *aws.Response
 }

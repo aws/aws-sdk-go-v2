@@ -6,68 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/restjson"
+	"github.com/aws/aws-sdk-go-v2/service/lexmodelbuildingservice/types"
 )
-
-type DeleteIntentInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the intent. The name is case sensitive.
-	//
-	// Name is a required field
-	Name *string `location:"uri" locationName:"name" min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteIntentInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteIntentInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteIntentInput"}
-
-	if s.Name == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Name"))
-	}
-	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteIntentInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.Name != nil {
-		v := *s.Name
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type DeleteIntentOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteIntentOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteIntentOutput) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
 
 const opDeleteIntent = "DeleteIntent"
 
@@ -97,7 +39,7 @@ const opDeleteIntent = "DeleteIntent"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/DeleteIntent
-func (c *Client) DeleteIntentRequest(input *DeleteIntentInput) DeleteIntentRequest {
+func (c *Client) DeleteIntentRequest(input *types.DeleteIntentInput) DeleteIntentRequest {
 	op := &aws.Operation{
 		Name:       opDeleteIntent,
 		HTTPMethod: "DELETE",
@@ -105,10 +47,10 @@ func (c *Client) DeleteIntentRequest(input *DeleteIntentInput) DeleteIntentReque
 	}
 
 	if input == nil {
-		input = &DeleteIntentInput{}
+		input = &types.DeleteIntentInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteIntentOutput{})
+	req := c.newRequest(op, input, &types.DeleteIntentOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return DeleteIntentRequest{Request: req, Input: input, Copy: c.DeleteIntentRequest}
@@ -118,8 +60,8 @@ func (c *Client) DeleteIntentRequest(input *DeleteIntentInput) DeleteIntentReque
 // DeleteIntent API operation.
 type DeleteIntentRequest struct {
 	*aws.Request
-	Input *DeleteIntentInput
-	Copy  func(*DeleteIntentInput) DeleteIntentRequest
+	Input *types.DeleteIntentInput
+	Copy  func(*types.DeleteIntentInput) DeleteIntentRequest
 }
 
 // Send marshals and sends the DeleteIntent API request.
@@ -131,7 +73,7 @@ func (r DeleteIntentRequest) Send(ctx context.Context) (*DeleteIntentResponse, e
 	}
 
 	resp := &DeleteIntentResponse{
-		DeleteIntentOutput: r.Request.Data.(*DeleteIntentOutput),
+		DeleteIntentOutput: r.Request.Data.(*types.DeleteIntentOutput),
 		response:           &aws.Response{Request: r.Request},
 	}
 
@@ -141,7 +83,7 @@ func (r DeleteIntentRequest) Send(ctx context.Context) (*DeleteIntentResponse, e
 // DeleteIntentResponse is the response type for the
 // DeleteIntent API operation.
 type DeleteIntentResponse struct {
-	*DeleteIntentOutput
+	*types.DeleteIntentOutput
 
 	response *aws.Response
 }

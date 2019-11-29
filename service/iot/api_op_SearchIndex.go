@@ -6,150 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/iot/types"
 )
-
-type SearchIndexInput struct {
-	_ struct{} `type:"structure"`
-
-	// The search index name.
-	IndexName *string `locationName:"indexName" min:"1" type:"string"`
-
-	// The maximum number of results to return at one time.
-	MaxResults *int64 `locationName:"maxResults" min:"1" type:"integer"`
-
-	// The token used to get the next set of results, or null if there are no additional
-	// results.
-	NextToken *string `locationName:"nextToken" type:"string"`
-
-	// The search query string.
-	//
-	// QueryString is a required field
-	QueryString *string `locationName:"queryString" min:"1" type:"string" required:"true"`
-
-	// The query version.
-	QueryVersion *string `locationName:"queryVersion" type:"string"`
-}
-
-// String returns the string representation
-func (s SearchIndexInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *SearchIndexInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "SearchIndexInput"}
-	if s.IndexName != nil && len(*s.IndexName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("IndexName", 1))
-	}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-
-	if s.QueryString == nil {
-		invalidParams.Add(aws.NewErrParamRequired("QueryString"))
-	}
-	if s.QueryString != nil && len(*s.QueryString) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("QueryString", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s SearchIndexInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.IndexName != nil {
-		v := *s.IndexName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "indexName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.MaxResults != nil {
-		v := *s.MaxResults
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "maxResults", protocol.Int64Value(v), metadata)
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.QueryString != nil {
-		v := *s.QueryString
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "queryString", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.QueryVersion != nil {
-		v := *s.QueryVersion
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "queryVersion", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type SearchIndexOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The token used to get the next set of results, or null if there are no additional
-	// results.
-	NextToken *string `locationName:"nextToken" type:"string"`
-
-	// The thing groups that match the search query.
-	ThingGroups []ThingGroupDocument `locationName:"thingGroups" type:"list"`
-
-	// The things that match the search query.
-	Things []ThingDocument `locationName:"things" type:"list"`
-}
-
-// String returns the string representation
-func (s SearchIndexOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s SearchIndexOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.ThingGroups != nil {
-		v := s.ThingGroups
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "thingGroups", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	if s.Things != nil {
-		v := s.Things
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "things", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	return nil
-}
 
 const opSearchIndex = "SearchIndex"
 
@@ -164,7 +22,7 @@ const opSearchIndex = "SearchIndex"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) SearchIndexRequest(input *SearchIndexInput) SearchIndexRequest {
+func (c *Client) SearchIndexRequest(input *types.SearchIndexInput) SearchIndexRequest {
 	op := &aws.Operation{
 		Name:       opSearchIndex,
 		HTTPMethod: "POST",
@@ -172,10 +30,10 @@ func (c *Client) SearchIndexRequest(input *SearchIndexInput) SearchIndexRequest 
 	}
 
 	if input == nil {
-		input = &SearchIndexInput{}
+		input = &types.SearchIndexInput{}
 	}
 
-	req := c.newRequest(op, input, &SearchIndexOutput{})
+	req := c.newRequest(op, input, &types.SearchIndexOutput{})
 	return SearchIndexRequest{Request: req, Input: input, Copy: c.SearchIndexRequest}
 }
 
@@ -183,8 +41,8 @@ func (c *Client) SearchIndexRequest(input *SearchIndexInput) SearchIndexRequest 
 // SearchIndex API operation.
 type SearchIndexRequest struct {
 	*aws.Request
-	Input *SearchIndexInput
-	Copy  func(*SearchIndexInput) SearchIndexRequest
+	Input *types.SearchIndexInput
+	Copy  func(*types.SearchIndexInput) SearchIndexRequest
 }
 
 // Send marshals and sends the SearchIndex API request.
@@ -196,7 +54,7 @@ func (r SearchIndexRequest) Send(ctx context.Context) (*SearchIndexResponse, err
 	}
 
 	resp := &SearchIndexResponse{
-		SearchIndexOutput: r.Request.Data.(*SearchIndexOutput),
+		SearchIndexOutput: r.Request.Data.(*types.SearchIndexOutput),
 		response:          &aws.Response{Request: r.Request},
 	}
 
@@ -206,7 +64,7 @@ func (r SearchIndexRequest) Send(ctx context.Context) (*SearchIndexResponse, err
 // SearchIndexResponse is the response type for the
 // SearchIndex API operation.
 type SearchIndexResponse struct {
-	*SearchIndexOutput
+	*types.SearchIndexOutput
 
 	response *aws.Response
 }

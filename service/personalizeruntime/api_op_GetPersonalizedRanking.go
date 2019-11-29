@@ -6,117 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/personalizeruntime/types"
 )
-
-type GetPersonalizedRankingInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the campaign to use for generating the
-	// personalized ranking.
-	//
-	// CampaignArn is a required field
-	CampaignArn *string `locationName:"campaignArn" type:"string" required:"true"`
-
-	// A list of items (itemId's) to rank. If an item was not included in the training
-	// dataset, the item is appended to the end of the reranked list.
-	//
-	// InputList is a required field
-	InputList []string `locationName:"inputList" type:"list" required:"true"`
-
-	// The user for which you want the campaign to provide a personalized ranking.
-	//
-	// UserId is a required field
-	UserId *string `locationName:"userId" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetPersonalizedRankingInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetPersonalizedRankingInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetPersonalizedRankingInput"}
-
-	if s.CampaignArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("CampaignArn"))
-	}
-
-	if s.InputList == nil {
-		invalidParams.Add(aws.NewErrParamRequired("InputList"))
-	}
-
-	if s.UserId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("UserId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetPersonalizedRankingInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.CampaignArn != nil {
-		v := *s.CampaignArn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "campaignArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.InputList != nil {
-		v := s.InputList
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "inputList", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
-		}
-		ls0.End()
-
-	}
-	if s.UserId != nil {
-		v := *s.UserId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "userId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type GetPersonalizedRankingOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A list of items in order of most likely interest to the user.
-	PersonalizedRanking []PredictedItem `locationName:"personalizedRanking" type:"list"`
-}
-
-// String returns the string representation
-func (s GetPersonalizedRankingOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetPersonalizedRankingOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.PersonalizedRanking != nil {
-		v := s.PersonalizedRanking
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "personalizedRanking", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	return nil
-}
 
 const opGetPersonalizedRanking = "GetPersonalizedRanking"
 
@@ -137,7 +28,7 @@ const opGetPersonalizedRanking = "GetPersonalizedRanking"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/personalize-runtime-2018-05-22/GetPersonalizedRanking
-func (c *Client) GetPersonalizedRankingRequest(input *GetPersonalizedRankingInput) GetPersonalizedRankingRequest {
+func (c *Client) GetPersonalizedRankingRequest(input *types.GetPersonalizedRankingInput) GetPersonalizedRankingRequest {
 	op := &aws.Operation{
 		Name:       opGetPersonalizedRanking,
 		HTTPMethod: "POST",
@@ -145,10 +36,10 @@ func (c *Client) GetPersonalizedRankingRequest(input *GetPersonalizedRankingInpu
 	}
 
 	if input == nil {
-		input = &GetPersonalizedRankingInput{}
+		input = &types.GetPersonalizedRankingInput{}
 	}
 
-	req := c.newRequest(op, input, &GetPersonalizedRankingOutput{})
+	req := c.newRequest(op, input, &types.GetPersonalizedRankingOutput{})
 	return GetPersonalizedRankingRequest{Request: req, Input: input, Copy: c.GetPersonalizedRankingRequest}
 }
 
@@ -156,8 +47,8 @@ func (c *Client) GetPersonalizedRankingRequest(input *GetPersonalizedRankingInpu
 // GetPersonalizedRanking API operation.
 type GetPersonalizedRankingRequest struct {
 	*aws.Request
-	Input *GetPersonalizedRankingInput
-	Copy  func(*GetPersonalizedRankingInput) GetPersonalizedRankingRequest
+	Input *types.GetPersonalizedRankingInput
+	Copy  func(*types.GetPersonalizedRankingInput) GetPersonalizedRankingRequest
 }
 
 // Send marshals and sends the GetPersonalizedRanking API request.
@@ -169,7 +60,7 @@ func (r GetPersonalizedRankingRequest) Send(ctx context.Context) (*GetPersonaliz
 	}
 
 	resp := &GetPersonalizedRankingResponse{
-		GetPersonalizedRankingOutput: r.Request.Data.(*GetPersonalizedRankingOutput),
+		GetPersonalizedRankingOutput: r.Request.Data.(*types.GetPersonalizedRankingOutput),
 		response:                     &aws.Response{Request: r.Request},
 	}
 
@@ -179,7 +70,7 @@ func (r GetPersonalizedRankingRequest) Send(ctx context.Context) (*GetPersonaliz
 // GetPersonalizedRankingResponse is the response type for the
 // GetPersonalizedRanking API operation.
 type GetPersonalizedRankingResponse struct {
-	*GetPersonalizedRankingOutput
+	*types.GetPersonalizedRankingOutput
 
 	response *aws.Response
 }

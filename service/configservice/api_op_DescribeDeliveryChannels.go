@@ -6,34 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/configservice/types"
 )
-
-// The input for the DescribeDeliveryChannels action.
-type DescribeDeliveryChannelsInput struct {
-	_ struct{} `type:"structure"`
-
-	// A list of delivery channel names.
-	DeliveryChannelNames []string `type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeDeliveryChannelsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// The output for the DescribeDeliveryChannels action.
-type DescribeDeliveryChannelsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A list that contains the descriptions of the specified delivery channel.
-	DeliveryChannels []DeliveryChannel `type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeDeliveryChannelsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeDeliveryChannels = "DescribeDeliveryChannels"
 
@@ -54,7 +28,7 @@ const opDescribeDeliveryChannels = "DescribeDeliveryChannels"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DescribeDeliveryChannels
-func (c *Client) DescribeDeliveryChannelsRequest(input *DescribeDeliveryChannelsInput) DescribeDeliveryChannelsRequest {
+func (c *Client) DescribeDeliveryChannelsRequest(input *types.DescribeDeliveryChannelsInput) DescribeDeliveryChannelsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeDeliveryChannels,
 		HTTPMethod: "POST",
@@ -62,10 +36,10 @@ func (c *Client) DescribeDeliveryChannelsRequest(input *DescribeDeliveryChannels
 	}
 
 	if input == nil {
-		input = &DescribeDeliveryChannelsInput{}
+		input = &types.DescribeDeliveryChannelsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeDeliveryChannelsOutput{})
+	req := c.newRequest(op, input, &types.DescribeDeliveryChannelsOutput{})
 	return DescribeDeliveryChannelsRequest{Request: req, Input: input, Copy: c.DescribeDeliveryChannelsRequest}
 }
 
@@ -73,8 +47,8 @@ func (c *Client) DescribeDeliveryChannelsRequest(input *DescribeDeliveryChannels
 // DescribeDeliveryChannels API operation.
 type DescribeDeliveryChannelsRequest struct {
 	*aws.Request
-	Input *DescribeDeliveryChannelsInput
-	Copy  func(*DescribeDeliveryChannelsInput) DescribeDeliveryChannelsRequest
+	Input *types.DescribeDeliveryChannelsInput
+	Copy  func(*types.DescribeDeliveryChannelsInput) DescribeDeliveryChannelsRequest
 }
 
 // Send marshals and sends the DescribeDeliveryChannels API request.
@@ -86,7 +60,7 @@ func (r DescribeDeliveryChannelsRequest) Send(ctx context.Context) (*DescribeDel
 	}
 
 	resp := &DescribeDeliveryChannelsResponse{
-		DescribeDeliveryChannelsOutput: r.Request.Data.(*DescribeDeliveryChannelsOutput),
+		DescribeDeliveryChannelsOutput: r.Request.Data.(*types.DescribeDeliveryChannelsOutput),
 		response:                       &aws.Response{Request: r.Request},
 	}
 
@@ -96,7 +70,7 @@ func (r DescribeDeliveryChannelsRequest) Send(ctx context.Context) (*DescribeDel
 // DescribeDeliveryChannelsResponse is the response type for the
 // DescribeDeliveryChannels API operation.
 type DescribeDeliveryChannelsResponse struct {
-	*DescribeDeliveryChannelsOutput
+	*types.DescribeDeliveryChannelsOutput
 
 	response *aws.Response
 }

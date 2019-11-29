@@ -4,175 +4,10 @@ package pinpointemail
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/pinpointemail/types"
 )
-
-// A request to send an email message.
-type SendEmailInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the configuration set that you want to use when sending the email.
-	ConfigurationSetName *string `type:"string"`
-
-	// An object that contains the body of the message. You can send either a Simple
-	// message or a Raw message.
-	//
-	// Content is a required field
-	Content *EmailContent `type:"structure" required:"true"`
-
-	// An object that contains the recipients of the email message.
-	//
-	// Destination is a required field
-	Destination *Destination `type:"structure" required:"true"`
-
-	// A list of tags, in the form of name/value pairs, to apply to an email that
-	// you send using the SendEmail operation. Tags correspond to characteristics
-	// of the email that you define, so that you can publish email sending events.
-	EmailTags []MessageTag `type:"list"`
-
-	// The address that Amazon Pinpoint should send bounce and complaint notifications
-	// to.
-	FeedbackForwardingEmailAddress *string `type:"string"`
-
-	// The email address that you want to use as the "From" address for the email.
-	// The address that you specify has to be verified.
-	FromEmailAddress *string `type:"string"`
-
-	// The "Reply-to" email addresses for the message. When the recipient replies
-	// to the message, each Reply-to address receives the reply.
-	ReplyToAddresses []string `type:"list"`
-}
-
-// String returns the string representation
-func (s SendEmailInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *SendEmailInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "SendEmailInput"}
-
-	if s.Content == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Content"))
-	}
-
-	if s.Destination == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Destination"))
-	}
-	if s.Content != nil {
-		if err := s.Content.Validate(); err != nil {
-			invalidParams.AddNested("Content", err.(aws.ErrInvalidParams))
-		}
-	}
-	if s.EmailTags != nil {
-		for i, v := range s.EmailTags {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "EmailTags", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s SendEmailInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.ConfigurationSetName != nil {
-		v := *s.ConfigurationSetName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "ConfigurationSetName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Content != nil {
-		v := s.Content
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "Content", v, metadata)
-	}
-	if s.Destination != nil {
-		v := s.Destination
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "Destination", v, metadata)
-	}
-	if s.EmailTags != nil {
-		v := s.EmailTags
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "EmailTags", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	if s.FeedbackForwardingEmailAddress != nil {
-		v := *s.FeedbackForwardingEmailAddress
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "FeedbackForwardingEmailAddress", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.FromEmailAddress != nil {
-		v := *s.FromEmailAddress
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "FromEmailAddress", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.ReplyToAddresses != nil {
-		v := s.ReplyToAddresses
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "ReplyToAddresses", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
-		}
-		ls0.End()
-
-	}
-	return nil
-}
-
-// A unique message ID that you receive when Amazon Pinpoint accepts an email
-// for sending.
-type SendEmailOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A unique identifier for the message that is generated when Amazon Pinpoint
-	// accepts the message.
-	//
-	// It is possible for Amazon Pinpoint to accept a message without sending it.
-	// This can happen when the message you're trying to send has an attachment
-	// doesn't pass a virus check, or when you send a templated email that contains
-	// invalid personalization content, for example.
-	MessageId *string `type:"string"`
-}
-
-// String returns the string representation
-func (s SendEmailOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s SendEmailOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.MessageId != nil {
-		v := *s.MessageId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "MessageId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opSendEmail = "SendEmail"
 
@@ -199,7 +34,7 @@ const opSendEmail = "SendEmail"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/SendEmail
-func (c *Client) SendEmailRequest(input *SendEmailInput) SendEmailRequest {
+func (c *Client) SendEmailRequest(input *types.SendEmailInput) SendEmailRequest {
 	op := &aws.Operation{
 		Name:       opSendEmail,
 		HTTPMethod: "POST",
@@ -207,10 +42,10 @@ func (c *Client) SendEmailRequest(input *SendEmailInput) SendEmailRequest {
 	}
 
 	if input == nil {
-		input = &SendEmailInput{}
+		input = &types.SendEmailInput{}
 	}
 
-	req := c.newRequest(op, input, &SendEmailOutput{})
+	req := c.newRequest(op, input, &types.SendEmailOutput{})
 	return SendEmailRequest{Request: req, Input: input, Copy: c.SendEmailRequest}
 }
 
@@ -218,8 +53,8 @@ func (c *Client) SendEmailRequest(input *SendEmailInput) SendEmailRequest {
 // SendEmail API operation.
 type SendEmailRequest struct {
 	*aws.Request
-	Input *SendEmailInput
-	Copy  func(*SendEmailInput) SendEmailRequest
+	Input *types.SendEmailInput
+	Copy  func(*types.SendEmailInput) SendEmailRequest
 }
 
 // Send marshals and sends the SendEmail API request.
@@ -231,7 +66,7 @@ func (r SendEmailRequest) Send(ctx context.Context) (*SendEmailResponse, error) 
 	}
 
 	resp := &SendEmailResponse{
-		SendEmailOutput: r.Request.Data.(*SendEmailOutput),
+		SendEmailOutput: r.Request.Data.(*types.SendEmailOutput),
 		response:        &aws.Response{Request: r.Request},
 	}
 
@@ -241,7 +76,7 @@ func (r SendEmailRequest) Send(ctx context.Context) (*SendEmailResponse, error) 
 // SendEmailResponse is the response type for the
 // SendEmail API operation.
 type SendEmailResponse struct {
-	*SendEmailOutput
+	*types.SendEmailOutput
 
 	response *aws.Response
 }

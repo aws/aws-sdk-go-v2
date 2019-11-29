@@ -6,51 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/appstream/types"
 )
-
-type StopImageBuilderInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the image builder.
-	//
-	// Name is a required field
-	Name *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s StopImageBuilderInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *StopImageBuilderInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "StopImageBuilderInput"}
-
-	if s.Name == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Name"))
-	}
-	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type StopImageBuilderOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Information about the image builder.
-	ImageBuilder *ImageBuilder `type:"structure"`
-}
-
-// String returns the string representation
-func (s StopImageBuilderOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opStopImageBuilder = "StopImageBuilder"
 
@@ -67,7 +24,7 @@ const opStopImageBuilder = "StopImageBuilder"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/StopImageBuilder
-func (c *Client) StopImageBuilderRequest(input *StopImageBuilderInput) StopImageBuilderRequest {
+func (c *Client) StopImageBuilderRequest(input *types.StopImageBuilderInput) StopImageBuilderRequest {
 	op := &aws.Operation{
 		Name:       opStopImageBuilder,
 		HTTPMethod: "POST",
@@ -75,10 +32,10 @@ func (c *Client) StopImageBuilderRequest(input *StopImageBuilderInput) StopImage
 	}
 
 	if input == nil {
-		input = &StopImageBuilderInput{}
+		input = &types.StopImageBuilderInput{}
 	}
 
-	req := c.newRequest(op, input, &StopImageBuilderOutput{})
+	req := c.newRequest(op, input, &types.StopImageBuilderOutput{})
 	return StopImageBuilderRequest{Request: req, Input: input, Copy: c.StopImageBuilderRequest}
 }
 
@@ -86,8 +43,8 @@ func (c *Client) StopImageBuilderRequest(input *StopImageBuilderInput) StopImage
 // StopImageBuilder API operation.
 type StopImageBuilderRequest struct {
 	*aws.Request
-	Input *StopImageBuilderInput
-	Copy  func(*StopImageBuilderInput) StopImageBuilderRequest
+	Input *types.StopImageBuilderInput
+	Copy  func(*types.StopImageBuilderInput) StopImageBuilderRequest
 }
 
 // Send marshals and sends the StopImageBuilder API request.
@@ -99,7 +56,7 @@ func (r StopImageBuilderRequest) Send(ctx context.Context) (*StopImageBuilderRes
 	}
 
 	resp := &StopImageBuilderResponse{
-		StopImageBuilderOutput: r.Request.Data.(*StopImageBuilderOutput),
+		StopImageBuilderOutput: r.Request.Data.(*types.StopImageBuilderOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -109,7 +66,7 @@ func (r StopImageBuilderRequest) Send(ctx context.Context) (*StopImageBuilderRes
 // StopImageBuilderResponse is the response type for the
 // StopImageBuilder API operation.
 type StopImageBuilderResponse struct {
-	*StopImageBuilderOutput
+	*types.StopImageBuilderOutput
 
 	response *aws.Response
 }

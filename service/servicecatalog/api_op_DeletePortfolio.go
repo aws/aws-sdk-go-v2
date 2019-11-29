@@ -6,57 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/types"
 )
-
-type DeletePortfolioInput struct {
-	_ struct{} `type:"structure"`
-
-	// The language code.
-	//
-	//    * en - English (default)
-	//
-	//    * jp - Japanese
-	//
-	//    * zh - Chinese
-	AcceptLanguage *string `type:"string"`
-
-	// The portfolio identifier.
-	//
-	// Id is a required field
-	Id *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeletePortfolioInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeletePortfolioInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeletePortfolioInput"}
-
-	if s.Id == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Id"))
-	}
-	if s.Id != nil && len(*s.Id) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Id", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeletePortfolioOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeletePortfolioOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeletePortfolio = "DeletePortfolio"
 
@@ -76,7 +27,7 @@ const opDeletePortfolio = "DeletePortfolio"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DeletePortfolio
-func (c *Client) DeletePortfolioRequest(input *DeletePortfolioInput) DeletePortfolioRequest {
+func (c *Client) DeletePortfolioRequest(input *types.DeletePortfolioInput) DeletePortfolioRequest {
 	op := &aws.Operation{
 		Name:       opDeletePortfolio,
 		HTTPMethod: "POST",
@@ -84,10 +35,10 @@ func (c *Client) DeletePortfolioRequest(input *DeletePortfolioInput) DeletePortf
 	}
 
 	if input == nil {
-		input = &DeletePortfolioInput{}
+		input = &types.DeletePortfolioInput{}
 	}
 
-	req := c.newRequest(op, input, &DeletePortfolioOutput{})
+	req := c.newRequest(op, input, &types.DeletePortfolioOutput{})
 	return DeletePortfolioRequest{Request: req, Input: input, Copy: c.DeletePortfolioRequest}
 }
 
@@ -95,8 +46,8 @@ func (c *Client) DeletePortfolioRequest(input *DeletePortfolioInput) DeletePortf
 // DeletePortfolio API operation.
 type DeletePortfolioRequest struct {
 	*aws.Request
-	Input *DeletePortfolioInput
-	Copy  func(*DeletePortfolioInput) DeletePortfolioRequest
+	Input *types.DeletePortfolioInput
+	Copy  func(*types.DeletePortfolioInput) DeletePortfolioRequest
 }
 
 // Send marshals and sends the DeletePortfolio API request.
@@ -108,7 +59,7 @@ func (r DeletePortfolioRequest) Send(ctx context.Context) (*DeletePortfolioRespo
 	}
 
 	resp := &DeletePortfolioResponse{
-		DeletePortfolioOutput: r.Request.Data.(*DeletePortfolioOutput),
+		DeletePortfolioOutput: r.Request.Data.(*types.DeletePortfolioOutput),
 		response:              &aws.Response{Request: r.Request},
 	}
 
@@ -118,7 +69,7 @@ func (r DeletePortfolioRequest) Send(ctx context.Context) (*DeletePortfolioRespo
 // DeletePortfolioResponse is the response type for the
 // DeletePortfolio API operation.
 type DeletePortfolioResponse struct {
-	*DeletePortfolioOutput
+	*types.DeletePortfolioOutput
 
 	response *aws.Response
 }

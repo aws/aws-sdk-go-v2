@@ -6,63 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/alexaforbusiness/types"
 )
-
-type CreateSkillGroupInput struct {
-	_ struct{} `type:"structure"`
-
-	// A unique, user-specified identifier for this request that ensures idempotency.
-	ClientRequestToken *string `min:"10" type:"string" idempotencyToken:"true"`
-
-	// The description for the skill group.
-	Description *string `min:"1" type:"string"`
-
-	// The name for the skill group.
-	//
-	// SkillGroupName is a required field
-	SkillGroupName *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s CreateSkillGroupInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateSkillGroupInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateSkillGroupInput"}
-	if s.ClientRequestToken != nil && len(*s.ClientRequestToken) < 10 {
-		invalidParams.Add(aws.NewErrParamMinLen("ClientRequestToken", 10))
-	}
-	if s.Description != nil && len(*s.Description) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Description", 1))
-	}
-
-	if s.SkillGroupName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("SkillGroupName"))
-	}
-	if s.SkillGroupName != nil && len(*s.SkillGroupName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("SkillGroupName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type CreateSkillGroupOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The ARN of the newly created skill group in the response.
-	SkillGroupArn *string `type:"string"`
-}
-
-// String returns the string representation
-func (s CreateSkillGroupOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCreateSkillGroup = "CreateSkillGroup"
 
@@ -79,7 +24,7 @@ const opCreateSkillGroup = "CreateSkillGroup"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/CreateSkillGroup
-func (c *Client) CreateSkillGroupRequest(input *CreateSkillGroupInput) CreateSkillGroupRequest {
+func (c *Client) CreateSkillGroupRequest(input *types.CreateSkillGroupInput) CreateSkillGroupRequest {
 	op := &aws.Operation{
 		Name:       opCreateSkillGroup,
 		HTTPMethod: "POST",
@@ -87,10 +32,10 @@ func (c *Client) CreateSkillGroupRequest(input *CreateSkillGroupInput) CreateSki
 	}
 
 	if input == nil {
-		input = &CreateSkillGroupInput{}
+		input = &types.CreateSkillGroupInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateSkillGroupOutput{})
+	req := c.newRequest(op, input, &types.CreateSkillGroupOutput{})
 	return CreateSkillGroupRequest{Request: req, Input: input, Copy: c.CreateSkillGroupRequest}
 }
 
@@ -98,8 +43,8 @@ func (c *Client) CreateSkillGroupRequest(input *CreateSkillGroupInput) CreateSki
 // CreateSkillGroup API operation.
 type CreateSkillGroupRequest struct {
 	*aws.Request
-	Input *CreateSkillGroupInput
-	Copy  func(*CreateSkillGroupInput) CreateSkillGroupRequest
+	Input *types.CreateSkillGroupInput
+	Copy  func(*types.CreateSkillGroupInput) CreateSkillGroupRequest
 }
 
 // Send marshals and sends the CreateSkillGroup API request.
@@ -111,7 +56,7 @@ func (r CreateSkillGroupRequest) Send(ctx context.Context) (*CreateSkillGroupRes
 	}
 
 	resp := &CreateSkillGroupResponse{
-		CreateSkillGroupOutput: r.Request.Data.(*CreateSkillGroupOutput),
+		CreateSkillGroupOutput: r.Request.Data.(*types.CreateSkillGroupOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -121,7 +66,7 @@ func (r CreateSkillGroupRequest) Send(ctx context.Context) (*CreateSkillGroupRes
 // CreateSkillGroupResponse is the response type for the
 // CreateSkillGroup API operation.
 type CreateSkillGroupResponse struct {
-	*CreateSkillGroupOutput
+	*types.CreateSkillGroupOutput
 
 	response *aws.Response
 }

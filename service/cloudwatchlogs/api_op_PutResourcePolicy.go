@@ -6,58 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/cloudwatchlogs/types"
 )
-
-type PutResourcePolicyInput struct {
-	_ struct{} `type:"structure"`
-
-	// Details of the new policy, including the identity of the principal that is
-	// enabled to put logs to this account. This is formatted as a JSON string.
-	// This parameter is required.
-	//
-	// The following example creates a resource policy enabling the Route 53 service
-	// to put DNS query logs in to the specified log group. Replace "logArn" with
-	// the ARN of your CloudWatch Logs resource, such as a log group or log stream.
-	//
-	// { "Version": "2012-10-17", "Statement": [ { "Sid": "Route53LogsToCloudWatchLogs",
-	// "Effect": "Allow", "Principal": { "Service": [ "route53.amazonaws.com" ]
-	// }, "Action":"logs:PutLogEvents", "Resource": "logArn" } ] }
-	PolicyDocument *string `locationName:"policyDocument" min:"1" type:"string"`
-
-	// Name of the new policy. This parameter is required.
-	PolicyName *string `locationName:"policyName" type:"string"`
-}
-
-// String returns the string representation
-func (s PutResourcePolicyInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *PutResourcePolicyInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "PutResourcePolicyInput"}
-	if s.PolicyDocument != nil && len(*s.PolicyDocument) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("PolicyDocument", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type PutResourcePolicyOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The new policy.
-	ResourcePolicy *ResourcePolicy `locationName:"resourcePolicy" type:"structure"`
-}
-
-// String returns the string representation
-func (s PutResourcePolicyOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opPutResourcePolicy = "PutResourcePolicy"
 
@@ -76,7 +26,7 @@ const opPutResourcePolicy = "PutResourcePolicy"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/PutResourcePolicy
-func (c *Client) PutResourcePolicyRequest(input *PutResourcePolicyInput) PutResourcePolicyRequest {
+func (c *Client) PutResourcePolicyRequest(input *types.PutResourcePolicyInput) PutResourcePolicyRequest {
 	op := &aws.Operation{
 		Name:       opPutResourcePolicy,
 		HTTPMethod: "POST",
@@ -84,10 +34,10 @@ func (c *Client) PutResourcePolicyRequest(input *PutResourcePolicyInput) PutReso
 	}
 
 	if input == nil {
-		input = &PutResourcePolicyInput{}
+		input = &types.PutResourcePolicyInput{}
 	}
 
-	req := c.newRequest(op, input, &PutResourcePolicyOutput{})
+	req := c.newRequest(op, input, &types.PutResourcePolicyOutput{})
 	return PutResourcePolicyRequest{Request: req, Input: input, Copy: c.PutResourcePolicyRequest}
 }
 
@@ -95,8 +45,8 @@ func (c *Client) PutResourcePolicyRequest(input *PutResourcePolicyInput) PutReso
 // PutResourcePolicy API operation.
 type PutResourcePolicyRequest struct {
 	*aws.Request
-	Input *PutResourcePolicyInput
-	Copy  func(*PutResourcePolicyInput) PutResourcePolicyRequest
+	Input *types.PutResourcePolicyInput
+	Copy  func(*types.PutResourcePolicyInput) PutResourcePolicyRequest
 }
 
 // Send marshals and sends the PutResourcePolicy API request.
@@ -108,7 +58,7 @@ func (r PutResourcePolicyRequest) Send(ctx context.Context) (*PutResourcePolicyR
 	}
 
 	resp := &PutResourcePolicyResponse{
-		PutResourcePolicyOutput: r.Request.Data.(*PutResourcePolicyOutput),
+		PutResourcePolicyOutput: r.Request.Data.(*types.PutResourcePolicyOutput),
 		response:                &aws.Response{Request: r.Request},
 	}
 
@@ -118,7 +68,7 @@ func (r PutResourcePolicyRequest) Send(ctx context.Context) (*PutResourcePolicyR
 // PutResourcePolicyResponse is the response type for the
 // PutResourcePolicy API operation.
 type PutResourcePolicyResponse struct {
-	*PutResourcePolicyOutput
+	*types.PutResourcePolicyOutput
 
 	response *aws.Response
 }

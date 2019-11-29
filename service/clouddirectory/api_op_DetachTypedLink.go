@@ -6,86 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/restjson"
+	"github.com/aws/aws-sdk-go-v2/service/clouddirectory/types"
 )
-
-type DetachTypedLinkInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the directory where you want to detach
-	// the typed link.
-	//
-	// DirectoryArn is a required field
-	DirectoryArn *string `location:"header" locationName:"x-amz-data-partition" type:"string" required:"true"`
-
-	// Used to accept a typed link specifier as input.
-	//
-	// TypedLinkSpecifier is a required field
-	TypedLinkSpecifier *TypedLinkSpecifier `type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s DetachTypedLinkInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DetachTypedLinkInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DetachTypedLinkInput"}
-
-	if s.DirectoryArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DirectoryArn"))
-	}
-
-	if s.TypedLinkSpecifier == nil {
-		invalidParams.Add(aws.NewErrParamRequired("TypedLinkSpecifier"))
-	}
-	if s.TypedLinkSpecifier != nil {
-		if err := s.TypedLinkSpecifier.Validate(); err != nil {
-			invalidParams.AddNested("TypedLinkSpecifier", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DetachTypedLinkInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.TypedLinkSpecifier != nil {
-		v := s.TypedLinkSpecifier
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "TypedLinkSpecifier", v, metadata)
-	}
-	if s.DirectoryArn != nil {
-		v := *s.DirectoryArn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "x-amz-data-partition", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type DetachTypedLinkOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DetachTypedLinkOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DetachTypedLinkOutput) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
 
 const opDetachTypedLink = "DetachTypedLink"
 
@@ -103,7 +27,7 @@ const opDetachTypedLink = "DetachTypedLink"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/DetachTypedLink
-func (c *Client) DetachTypedLinkRequest(input *DetachTypedLinkInput) DetachTypedLinkRequest {
+func (c *Client) DetachTypedLinkRequest(input *types.DetachTypedLinkInput) DetachTypedLinkRequest {
 	op := &aws.Operation{
 		Name:       opDetachTypedLink,
 		HTTPMethod: "PUT",
@@ -111,10 +35,10 @@ func (c *Client) DetachTypedLinkRequest(input *DetachTypedLinkInput) DetachTyped
 	}
 
 	if input == nil {
-		input = &DetachTypedLinkInput{}
+		input = &types.DetachTypedLinkInput{}
 	}
 
-	req := c.newRequest(op, input, &DetachTypedLinkOutput{})
+	req := c.newRequest(op, input, &types.DetachTypedLinkOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return DetachTypedLinkRequest{Request: req, Input: input, Copy: c.DetachTypedLinkRequest}
@@ -124,8 +48,8 @@ func (c *Client) DetachTypedLinkRequest(input *DetachTypedLinkInput) DetachTyped
 // DetachTypedLink API operation.
 type DetachTypedLinkRequest struct {
 	*aws.Request
-	Input *DetachTypedLinkInput
-	Copy  func(*DetachTypedLinkInput) DetachTypedLinkRequest
+	Input *types.DetachTypedLinkInput
+	Copy  func(*types.DetachTypedLinkInput) DetachTypedLinkRequest
 }
 
 // Send marshals and sends the DetachTypedLink API request.
@@ -137,7 +61,7 @@ func (r DetachTypedLinkRequest) Send(ctx context.Context) (*DetachTypedLinkRespo
 	}
 
 	resp := &DetachTypedLinkResponse{
-		DetachTypedLinkOutput: r.Request.Data.(*DetachTypedLinkOutput),
+		DetachTypedLinkOutput: r.Request.Data.(*types.DetachTypedLinkOutput),
 		response:              &aws.Response{Request: r.Request},
 	}
 
@@ -147,7 +71,7 @@ func (r DetachTypedLinkRequest) Send(ctx context.Context) (*DetachTypedLinkRespo
 // DetachTypedLinkResponse is the response type for the
 // DetachTypedLink API operation.
 type DetachTypedLinkResponse struct {
-	*DetachTypedLinkOutput
+	*types.DetachTypedLinkOutput
 
 	response *aws.Response
 }

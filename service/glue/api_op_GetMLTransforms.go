@@ -6,69 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/glue/types"
 )
-
-type GetMLTransformsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The filter transformation criteria.
-	Filter *TransformFilterCriteria `type:"structure"`
-
-	// The maximum number of results to return.
-	MaxResults *int64 `min:"1" type:"integer"`
-
-	// A paginated token to offset the results.
-	NextToken *string `type:"string"`
-
-	// The sorting criteria.
-	Sort *TransformSortCriteria `type:"structure"`
-}
-
-// String returns the string representation
-func (s GetMLTransformsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetMLTransformsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetMLTransformsInput"}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-	if s.Filter != nil {
-		if err := s.Filter.Validate(); err != nil {
-			invalidParams.AddNested("Filter", err.(aws.ErrInvalidParams))
-		}
-	}
-	if s.Sort != nil {
-		if err := s.Sort.Validate(); err != nil {
-			invalidParams.AddNested("Sort", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type GetMLTransformsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A pagination token, if more results are available.
-	NextToken *string `type:"string"`
-
-	// A list of machine learning transforms.
-	//
-	// Transforms is a required field
-	Transforms []MLTransform `type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s GetMLTransformsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetMLTransforms = "GetMLTransforms"
 
@@ -89,7 +28,7 @@ const opGetMLTransforms = "GetMLTransforms"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetMLTransforms
-func (c *Client) GetMLTransformsRequest(input *GetMLTransformsInput) GetMLTransformsRequest {
+func (c *Client) GetMLTransformsRequest(input *types.GetMLTransformsInput) GetMLTransformsRequest {
 	op := &aws.Operation{
 		Name:       opGetMLTransforms,
 		HTTPMethod: "POST",
@@ -103,10 +42,10 @@ func (c *Client) GetMLTransformsRequest(input *GetMLTransformsInput) GetMLTransf
 	}
 
 	if input == nil {
-		input = &GetMLTransformsInput{}
+		input = &types.GetMLTransformsInput{}
 	}
 
-	req := c.newRequest(op, input, &GetMLTransformsOutput{})
+	req := c.newRequest(op, input, &types.GetMLTransformsOutput{})
 	return GetMLTransformsRequest{Request: req, Input: input, Copy: c.GetMLTransformsRequest}
 }
 
@@ -114,8 +53,8 @@ func (c *Client) GetMLTransformsRequest(input *GetMLTransformsInput) GetMLTransf
 // GetMLTransforms API operation.
 type GetMLTransformsRequest struct {
 	*aws.Request
-	Input *GetMLTransformsInput
-	Copy  func(*GetMLTransformsInput) GetMLTransformsRequest
+	Input *types.GetMLTransformsInput
+	Copy  func(*types.GetMLTransformsInput) GetMLTransformsRequest
 }
 
 // Send marshals and sends the GetMLTransforms API request.
@@ -127,7 +66,7 @@ func (r GetMLTransformsRequest) Send(ctx context.Context) (*GetMLTransformsRespo
 	}
 
 	resp := &GetMLTransformsResponse{
-		GetMLTransformsOutput: r.Request.Data.(*GetMLTransformsOutput),
+		GetMLTransformsOutput: r.Request.Data.(*types.GetMLTransformsOutput),
 		response:              &aws.Response{Request: r.Request},
 	}
 
@@ -157,7 +96,7 @@ func NewGetMLTransformsPaginator(req GetMLTransformsRequest) GetMLTransformsPagi
 	return GetMLTransformsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *GetMLTransformsInput
+				var inCpy *types.GetMLTransformsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -177,14 +116,14 @@ type GetMLTransformsPaginator struct {
 	aws.Pager
 }
 
-func (p *GetMLTransformsPaginator) CurrentPage() *GetMLTransformsOutput {
-	return p.Pager.CurrentPage().(*GetMLTransformsOutput)
+func (p *GetMLTransformsPaginator) CurrentPage() *types.GetMLTransformsOutput {
+	return p.Pager.CurrentPage().(*types.GetMLTransformsOutput)
 }
 
 // GetMLTransformsResponse is the response type for the
 // GetMLTransforms API operation.
 type GetMLTransformsResponse struct {
-	*GetMLTransformsOutput
+	*types.GetMLTransformsOutput
 
 	response *aws.Response
 }

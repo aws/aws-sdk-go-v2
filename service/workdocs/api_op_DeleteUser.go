@@ -6,81 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/restjson"
+	"github.com/aws/aws-sdk-go-v2/service/workdocs/types"
 )
-
-type DeleteUserInput struct {
-	_ struct{} `type:"structure"`
-
-	// Amazon WorkDocs authentication token. Do not set this field when using administrative
-	// API actions, as in accessing the API using AWS credentials.
-	AuthenticationToken *string `location:"header" locationName:"Authentication" min:"1" type:"string" sensitive:"true"`
-
-	// The ID of the user.
-	//
-	// UserId is a required field
-	UserId *string `location:"uri" locationName:"UserId" min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteUserInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteUserInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteUserInput"}
-	if s.AuthenticationToken != nil && len(*s.AuthenticationToken) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("AuthenticationToken", 1))
-	}
-
-	if s.UserId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("UserId"))
-	}
-	if s.UserId != nil && len(*s.UserId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("UserId", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteUserInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.AuthenticationToken != nil {
-		v := *s.AuthenticationToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "Authentication", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.UserId != nil {
-		v := *s.UserId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "UserId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type DeleteUserOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteUserOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteUserOutput) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
 
 const opDeleteUser = "DeleteUser"
 
@@ -97,7 +26,7 @@ const opDeleteUser = "DeleteUser"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/DeleteUser
-func (c *Client) DeleteUserRequest(input *DeleteUserInput) DeleteUserRequest {
+func (c *Client) DeleteUserRequest(input *types.DeleteUserInput) DeleteUserRequest {
 	op := &aws.Operation{
 		Name:       opDeleteUser,
 		HTTPMethod: "DELETE",
@@ -105,10 +34,10 @@ func (c *Client) DeleteUserRequest(input *DeleteUserInput) DeleteUserRequest {
 	}
 
 	if input == nil {
-		input = &DeleteUserInput{}
+		input = &types.DeleteUserInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteUserOutput{})
+	req := c.newRequest(op, input, &types.DeleteUserOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return DeleteUserRequest{Request: req, Input: input, Copy: c.DeleteUserRequest}
@@ -118,8 +47,8 @@ func (c *Client) DeleteUserRequest(input *DeleteUserInput) DeleteUserRequest {
 // DeleteUser API operation.
 type DeleteUserRequest struct {
 	*aws.Request
-	Input *DeleteUserInput
-	Copy  func(*DeleteUserInput) DeleteUserRequest
+	Input *types.DeleteUserInput
+	Copy  func(*types.DeleteUserInput) DeleteUserRequest
 }
 
 // Send marshals and sends the DeleteUser API request.
@@ -131,7 +60,7 @@ func (r DeleteUserRequest) Send(ctx context.Context) (*DeleteUserResponse, error
 	}
 
 	resp := &DeleteUserResponse{
-		DeleteUserOutput: r.Request.Data.(*DeleteUserOutput),
+		DeleteUserOutput: r.Request.Data.(*types.DeleteUserOutput),
 		response:         &aws.Response{Request: r.Request},
 	}
 
@@ -141,7 +70,7 @@ func (r DeleteUserRequest) Send(ctx context.Context) (*DeleteUserResponse, error
 // DeleteUserResponse is the response type for the
 // DeleteUser API operation.
 type DeleteUserResponse struct {
-	*DeleteUserOutput
+	*types.DeleteUserOutput
 
 	response *aws.Response
 }

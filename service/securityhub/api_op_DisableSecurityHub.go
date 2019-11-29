@@ -6,39 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/securityhub/types"
 )
-
-type DisableSecurityHubInput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DisableSecurityHubInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DisableSecurityHubInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	return nil
-}
-
-type DisableSecurityHubOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DisableSecurityHubOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DisableSecurityHubOutput) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
 
 const opDisableSecurityHub = "DisableSecurityHub"
 
@@ -64,7 +33,7 @@ const opDisableSecurityHub = "DisableSecurityHub"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/DisableSecurityHub
-func (c *Client) DisableSecurityHubRequest(input *DisableSecurityHubInput) DisableSecurityHubRequest {
+func (c *Client) DisableSecurityHubRequest(input *types.DisableSecurityHubInput) DisableSecurityHubRequest {
 	op := &aws.Operation{
 		Name:       opDisableSecurityHub,
 		HTTPMethod: "DELETE",
@@ -72,10 +41,10 @@ func (c *Client) DisableSecurityHubRequest(input *DisableSecurityHubInput) Disab
 	}
 
 	if input == nil {
-		input = &DisableSecurityHubInput{}
+		input = &types.DisableSecurityHubInput{}
 	}
 
-	req := c.newRequest(op, input, &DisableSecurityHubOutput{})
+	req := c.newRequest(op, input, &types.DisableSecurityHubOutput{})
 	return DisableSecurityHubRequest{Request: req, Input: input, Copy: c.DisableSecurityHubRequest}
 }
 
@@ -83,8 +52,8 @@ func (c *Client) DisableSecurityHubRequest(input *DisableSecurityHubInput) Disab
 // DisableSecurityHub API operation.
 type DisableSecurityHubRequest struct {
 	*aws.Request
-	Input *DisableSecurityHubInput
-	Copy  func(*DisableSecurityHubInput) DisableSecurityHubRequest
+	Input *types.DisableSecurityHubInput
+	Copy  func(*types.DisableSecurityHubInput) DisableSecurityHubRequest
 }
 
 // Send marshals and sends the DisableSecurityHub API request.
@@ -96,7 +65,7 @@ func (r DisableSecurityHubRequest) Send(ctx context.Context) (*DisableSecurityHu
 	}
 
 	resp := &DisableSecurityHubResponse{
-		DisableSecurityHubOutput: r.Request.Data.(*DisableSecurityHubOutput),
+		DisableSecurityHubOutput: r.Request.Data.(*types.DisableSecurityHubOutput),
 		response:                 &aws.Response{Request: r.Request},
 	}
 
@@ -106,7 +75,7 @@ func (r DisableSecurityHubRequest) Send(ctx context.Context) (*DisableSecurityHu
 // DisableSecurityHubResponse is the response type for the
 // DisableSecurityHub API operation.
 type DisableSecurityHubResponse struct {
-	*DisableSecurityHubOutput
+	*types.DisableSecurityHubOutput
 
 	response *aws.Response
 }

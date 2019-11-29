@@ -6,58 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/elasticloadbalancingv2/types"
 )
-
-type AddListenerCertificatesInput struct {
-	_ struct{} `type:"structure"`
-
-	// The certificate to add. You can specify one certificate per call. Set CertificateArn
-	// to the certificate ARN but do not set IsDefault.
-	//
-	// Certificates is a required field
-	Certificates []Certificate `type:"list" required:"true"`
-
-	// The Amazon Resource Name (ARN) of the listener.
-	//
-	// ListenerArn is a required field
-	ListenerArn *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s AddListenerCertificatesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *AddListenerCertificatesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "AddListenerCertificatesInput"}
-
-	if s.Certificates == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Certificates"))
-	}
-
-	if s.ListenerArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ListenerArn"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type AddListenerCertificatesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Information about the certificates in the certificate list.
-	Certificates []Certificate `type:"list"`
-}
-
-// String returns the string representation
-func (s AddListenerCertificatesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opAddListenerCertificates = "AddListenerCertificates"
 
@@ -85,7 +35,7 @@ const opAddListenerCertificates = "AddListenerCertificates"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/AddListenerCertificates
-func (c *Client) AddListenerCertificatesRequest(input *AddListenerCertificatesInput) AddListenerCertificatesRequest {
+func (c *Client) AddListenerCertificatesRequest(input *types.AddListenerCertificatesInput) AddListenerCertificatesRequest {
 	op := &aws.Operation{
 		Name:       opAddListenerCertificates,
 		HTTPMethod: "POST",
@@ -93,10 +43,10 @@ func (c *Client) AddListenerCertificatesRequest(input *AddListenerCertificatesIn
 	}
 
 	if input == nil {
-		input = &AddListenerCertificatesInput{}
+		input = &types.AddListenerCertificatesInput{}
 	}
 
-	req := c.newRequest(op, input, &AddListenerCertificatesOutput{})
+	req := c.newRequest(op, input, &types.AddListenerCertificatesOutput{})
 	return AddListenerCertificatesRequest{Request: req, Input: input, Copy: c.AddListenerCertificatesRequest}
 }
 
@@ -104,8 +54,8 @@ func (c *Client) AddListenerCertificatesRequest(input *AddListenerCertificatesIn
 // AddListenerCertificates API operation.
 type AddListenerCertificatesRequest struct {
 	*aws.Request
-	Input *AddListenerCertificatesInput
-	Copy  func(*AddListenerCertificatesInput) AddListenerCertificatesRequest
+	Input *types.AddListenerCertificatesInput
+	Copy  func(*types.AddListenerCertificatesInput) AddListenerCertificatesRequest
 }
 
 // Send marshals and sends the AddListenerCertificates API request.
@@ -117,7 +67,7 @@ func (r AddListenerCertificatesRequest) Send(ctx context.Context) (*AddListenerC
 	}
 
 	resp := &AddListenerCertificatesResponse{
-		AddListenerCertificatesOutput: r.Request.Data.(*AddListenerCertificatesOutput),
+		AddListenerCertificatesOutput: r.Request.Data.(*types.AddListenerCertificatesOutput),
 		response:                      &aws.Response{Request: r.Request},
 	}
 
@@ -127,7 +77,7 @@ func (r AddListenerCertificatesRequest) Send(ctx context.Context) (*AddListenerC
 // AddListenerCertificatesResponse is the response type for the
 // AddListenerCertificates API operation.
 type AddListenerCertificatesResponse struct {
-	*AddListenerCertificatesOutput
+	*types.AddListenerCertificatesOutput
 
 	response *aws.Response
 }

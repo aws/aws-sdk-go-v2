@@ -6,70 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/groundstation/types"
 )
-
-type DeleteDataflowEndpointGroupInput struct {
-	_ struct{} `type:"structure"`
-
-	// DataflowEndpointGroupId is a required field
-	DataflowEndpointGroupId *string `location:"uri" locationName:"dataflowEndpointGroupId" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteDataflowEndpointGroupInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteDataflowEndpointGroupInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteDataflowEndpointGroupInput"}
-
-	if s.DataflowEndpointGroupId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DataflowEndpointGroupId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteDataflowEndpointGroupInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.DataflowEndpointGroupId != nil {
-		v := *s.DataflowEndpointGroupId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "dataflowEndpointGroupId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type DeleteDataflowEndpointGroupOutput struct {
-	_ struct{} `type:"structure"`
-
-	DataflowEndpointGroupId *string `locationName:"dataflowEndpointGroupId" type:"string"`
-}
-
-// String returns the string representation
-func (s DeleteDataflowEndpointGroupOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteDataflowEndpointGroupOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.DataflowEndpointGroupId != nil {
-		v := *s.DataflowEndpointGroupId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "dataflowEndpointGroupId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opDeleteDataflowEndpointGroup = "DeleteDataflowEndpointGroup"
 
@@ -86,7 +24,7 @@ const opDeleteDataflowEndpointGroup = "DeleteDataflowEndpointGroup"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/groundstation-2019-05-23/DeleteDataflowEndpointGroup
-func (c *Client) DeleteDataflowEndpointGroupRequest(input *DeleteDataflowEndpointGroupInput) DeleteDataflowEndpointGroupRequest {
+func (c *Client) DeleteDataflowEndpointGroupRequest(input *types.DeleteDataflowEndpointGroupInput) DeleteDataflowEndpointGroupRequest {
 	op := &aws.Operation{
 		Name:       opDeleteDataflowEndpointGroup,
 		HTTPMethod: "DELETE",
@@ -94,10 +32,10 @@ func (c *Client) DeleteDataflowEndpointGroupRequest(input *DeleteDataflowEndpoin
 	}
 
 	if input == nil {
-		input = &DeleteDataflowEndpointGroupInput{}
+		input = &types.DeleteDataflowEndpointGroupInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteDataflowEndpointGroupOutput{})
+	req := c.newRequest(op, input, &types.DeleteDataflowEndpointGroupOutput{})
 	return DeleteDataflowEndpointGroupRequest{Request: req, Input: input, Copy: c.DeleteDataflowEndpointGroupRequest}
 }
 
@@ -105,8 +43,8 @@ func (c *Client) DeleteDataflowEndpointGroupRequest(input *DeleteDataflowEndpoin
 // DeleteDataflowEndpointGroup API operation.
 type DeleteDataflowEndpointGroupRequest struct {
 	*aws.Request
-	Input *DeleteDataflowEndpointGroupInput
-	Copy  func(*DeleteDataflowEndpointGroupInput) DeleteDataflowEndpointGroupRequest
+	Input *types.DeleteDataflowEndpointGroupInput
+	Copy  func(*types.DeleteDataflowEndpointGroupInput) DeleteDataflowEndpointGroupRequest
 }
 
 // Send marshals and sends the DeleteDataflowEndpointGroup API request.
@@ -118,7 +56,7 @@ func (r DeleteDataflowEndpointGroupRequest) Send(ctx context.Context) (*DeleteDa
 	}
 
 	resp := &DeleteDataflowEndpointGroupResponse{
-		DeleteDataflowEndpointGroupOutput: r.Request.Data.(*DeleteDataflowEndpointGroupOutput),
+		DeleteDataflowEndpointGroupOutput: r.Request.Data.(*types.DeleteDataflowEndpointGroupOutput),
 		response:                          &aws.Response{Request: r.Request},
 	}
 
@@ -128,7 +66,7 @@ func (r DeleteDataflowEndpointGroupRequest) Send(ctx context.Context) (*DeleteDa
 // DeleteDataflowEndpointGroupResponse is the response type for the
 // DeleteDataflowEndpointGroup API operation.
 type DeleteDataflowEndpointGroupResponse struct {
-	*DeleteDataflowEndpointGroupOutput
+	*types.DeleteDataflowEndpointGroupOutput
 
 	response *aws.Response
 }

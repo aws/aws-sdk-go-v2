@@ -6,93 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/support/types"
 )
-
-type CreateCaseInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of a set of one or more attachments for the case. Create the set by
-	// using AddAttachmentsToSet.
-	AttachmentSetId *string `locationName:"attachmentSetId" type:"string"`
-
-	// The category of problem for the AWS Support case.
-	CategoryCode *string `locationName:"categoryCode" type:"string"`
-
-	// A list of email addresses that AWS Support copies on case correspondence.
-	CcEmailAddresses []string `locationName:"ccEmailAddresses" type:"list"`
-
-	// The communication body text when you create an AWS Support case by calling
-	// CreateCase.
-	//
-	// CommunicationBody is a required field
-	CommunicationBody *string `locationName:"communicationBody" min:"1" type:"string" required:"true"`
-
-	// The type of issue for the case. You can specify either "customer-service"
-	// or "technical." If you do not indicate a value, the default is "technical."
-	IssueType *string `locationName:"issueType" type:"string"`
-
-	// The ISO 639-1 code for the language in which AWS provides support. AWS Support
-	// currently supports English ("en") and Japanese ("ja"). Language parameters
-	// must be passed explicitly for operations that take them.
-	Language *string `locationName:"language" type:"string"`
-
-	// The code for the AWS service returned by the call to DescribeServices.
-	ServiceCode *string `locationName:"serviceCode" type:"string"`
-
-	// The code for the severity level returned by the call to DescribeSeverityLevels.
-	//
-	// The availability of severity levels depends on each customer's support subscription.
-	// In other words, your subscription may not necessarily require the urgent
-	// level of response time.
-	SeverityCode *string `locationName:"severityCode" type:"string"`
-
-	// The title of the AWS Support case.
-	//
-	// Subject is a required field
-	Subject *string `locationName:"subject" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s CreateCaseInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateCaseInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateCaseInput"}
-
-	if s.CommunicationBody == nil {
-		invalidParams.Add(aws.NewErrParamRequired("CommunicationBody"))
-	}
-	if s.CommunicationBody != nil && len(*s.CommunicationBody) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("CommunicationBody", 1))
-	}
-
-	if s.Subject == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Subject"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// The AWS Support case ID returned by a successful completion of the CreateCase
-// operation.
-type CreateCaseOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The AWS Support case ID requested or returned in the call. The case ID is
-	// an alphanumeric string formatted as shown in this example: case-12345678910-2013-c4c1d2bf33c5cf47
-	CaseId *string `locationName:"caseId" type:"string"`
-}
-
-// String returns the string representation
-func (s CreateCaseOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCreateCase = "CreateCase"
 
@@ -105,17 +20,23 @@ const opCreateCase = "CreateCase"
 //
 //    * issueType. The type of issue for the case. You can specify either "customer-service"
 //    or "technical." If you do not indicate a value, the default is "technical."
+//    Service limit increases are not supported by the Support API; you must
+//    submit service limit increase requests in Support Center (https://console.aws.amazon.com/support).
+//    The caseId is not the displayId that appears in Support Center (https://console.aws.amazon.com/support).
+//    You can use the DescribeCases API to get the displayId.
 //
-//    * serviceCode. The code for an AWS service. You obtain the serviceCode
-//    by calling DescribeServices.
+//    * serviceCode. The code for an AWS service. You can get the possible serviceCode
+//    values by calling DescribeServices.
 //
 //    * categoryCode. The category for the service defined for the serviceCode
-//    value. You also obtain the category code for a service by calling DescribeServices.
+//    value. You also get the category code for a service by calling DescribeServices.
 //    Each AWS service defines its own set of category codes.
 //
 //    * severityCode. A value that indicates the urgency of the case, which
 //    in turn determines the response time according to your service level agreement
-//    with AWS Support. You obtain the SeverityCode by calling DescribeSeverityLevels.
+//    with AWS Support. You can get the possible severityCode values by calling
+//    DescribeSeverityLevels. For more information about the meaning of the
+//    codes, see SeverityLevel and Choosing a Severity (https://docs.aws.amazon.com/awssupport/latest/user/getting-started.html#choosing-severity).
 //
 //    * subject. The Subject field on the AWS Support Center Create Case (https://console.aws.amazon.com/support/home#/case/create)
 //    page.
@@ -150,7 +71,7 @@ const opCreateCase = "CreateCase"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/support-2013-04-15/CreateCase
-func (c *Client) CreateCaseRequest(input *CreateCaseInput) CreateCaseRequest {
+func (c *Client) CreateCaseRequest(input *types.CreateCaseInput) CreateCaseRequest {
 	op := &aws.Operation{
 		Name:       opCreateCase,
 		HTTPMethod: "POST",
@@ -158,10 +79,10 @@ func (c *Client) CreateCaseRequest(input *CreateCaseInput) CreateCaseRequest {
 	}
 
 	if input == nil {
-		input = &CreateCaseInput{}
+		input = &types.CreateCaseInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateCaseOutput{})
+	req := c.newRequest(op, input, &types.CreateCaseOutput{})
 	return CreateCaseRequest{Request: req, Input: input, Copy: c.CreateCaseRequest}
 }
 
@@ -169,8 +90,8 @@ func (c *Client) CreateCaseRequest(input *CreateCaseInput) CreateCaseRequest {
 // CreateCase API operation.
 type CreateCaseRequest struct {
 	*aws.Request
-	Input *CreateCaseInput
-	Copy  func(*CreateCaseInput) CreateCaseRequest
+	Input *types.CreateCaseInput
+	Copy  func(*types.CreateCaseInput) CreateCaseRequest
 }
 
 // Send marshals and sends the CreateCase API request.
@@ -182,7 +103,7 @@ func (r CreateCaseRequest) Send(ctx context.Context) (*CreateCaseResponse, error
 	}
 
 	resp := &CreateCaseResponse{
-		CreateCaseOutput: r.Request.Data.(*CreateCaseOutput),
+		CreateCaseOutput: r.Request.Data.(*types.CreateCaseOutput),
 		response:         &aws.Response{Request: r.Request},
 	}
 
@@ -192,7 +113,7 @@ func (r CreateCaseRequest) Send(ctx context.Context) (*CreateCaseResponse, error
 // CreateCaseResponse is the response type for the
 // CreateCase API operation.
 type CreateCaseResponse struct {
-	*CreateCaseOutput
+	*types.CreateCaseOutput
 
 	response *aws.Response
 }

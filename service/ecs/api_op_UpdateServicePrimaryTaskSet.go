@@ -6,72 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ecs/types"
 )
-
-type UpdateServicePrimaryTaskSetInput struct {
-	_ struct{} `type:"structure"`
-
-	// The short name or full Amazon Resource Name (ARN) of the cluster that hosts
-	// the service that the task set exists in.
-	//
-	// Cluster is a required field
-	Cluster *string `locationName:"cluster" type:"string" required:"true"`
-
-	// The short name or full Amazon Resource Name (ARN) of the task set to set
-	// as the primary task set in the deployment.
-	//
-	// PrimaryTaskSet is a required field
-	PrimaryTaskSet *string `locationName:"primaryTaskSet" type:"string" required:"true"`
-
-	// The short name or full Amazon Resource Name (ARN) of the service that the
-	// task set exists in.
-	//
-	// Service is a required field
-	Service *string `locationName:"service" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s UpdateServicePrimaryTaskSetInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateServicePrimaryTaskSetInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateServicePrimaryTaskSetInput"}
-
-	if s.Cluster == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Cluster"))
-	}
-
-	if s.PrimaryTaskSet == nil {
-		invalidParams.Add(aws.NewErrParamRequired("PrimaryTaskSet"))
-	}
-
-	if s.Service == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Service"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type UpdateServicePrimaryTaskSetOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Information about a set of Amazon ECS tasks in either an AWS CodeDeploy or
-	// an EXTERNAL deployment. An Amazon ECS task set includes details such as the
-	// desired number of tasks, how many tasks are running, and whether the task
-	// set serves production traffic.
-	TaskSet *TaskSet `locationName:"taskSet" type:"structure"`
-}
-
-// String returns the string representation
-func (s UpdateServicePrimaryTaskSetOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opUpdateServicePrimaryTaskSet = "UpdateServicePrimaryTaskSet"
 
@@ -92,7 +28,7 @@ const opUpdateServicePrimaryTaskSet = "UpdateServicePrimaryTaskSet"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/UpdateServicePrimaryTaskSet
-func (c *Client) UpdateServicePrimaryTaskSetRequest(input *UpdateServicePrimaryTaskSetInput) UpdateServicePrimaryTaskSetRequest {
+func (c *Client) UpdateServicePrimaryTaskSetRequest(input *types.UpdateServicePrimaryTaskSetInput) UpdateServicePrimaryTaskSetRequest {
 	op := &aws.Operation{
 		Name:       opUpdateServicePrimaryTaskSet,
 		HTTPMethod: "POST",
@@ -100,10 +36,10 @@ func (c *Client) UpdateServicePrimaryTaskSetRequest(input *UpdateServicePrimaryT
 	}
 
 	if input == nil {
-		input = &UpdateServicePrimaryTaskSetInput{}
+		input = &types.UpdateServicePrimaryTaskSetInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateServicePrimaryTaskSetOutput{})
+	req := c.newRequest(op, input, &types.UpdateServicePrimaryTaskSetOutput{})
 	return UpdateServicePrimaryTaskSetRequest{Request: req, Input: input, Copy: c.UpdateServicePrimaryTaskSetRequest}
 }
 
@@ -111,8 +47,8 @@ func (c *Client) UpdateServicePrimaryTaskSetRequest(input *UpdateServicePrimaryT
 // UpdateServicePrimaryTaskSet API operation.
 type UpdateServicePrimaryTaskSetRequest struct {
 	*aws.Request
-	Input *UpdateServicePrimaryTaskSetInput
-	Copy  func(*UpdateServicePrimaryTaskSetInput) UpdateServicePrimaryTaskSetRequest
+	Input *types.UpdateServicePrimaryTaskSetInput
+	Copy  func(*types.UpdateServicePrimaryTaskSetInput) UpdateServicePrimaryTaskSetRequest
 }
 
 // Send marshals and sends the UpdateServicePrimaryTaskSet API request.
@@ -124,7 +60,7 @@ func (r UpdateServicePrimaryTaskSetRequest) Send(ctx context.Context) (*UpdateSe
 	}
 
 	resp := &UpdateServicePrimaryTaskSetResponse{
-		UpdateServicePrimaryTaskSetOutput: r.Request.Data.(*UpdateServicePrimaryTaskSetOutput),
+		UpdateServicePrimaryTaskSetOutput: r.Request.Data.(*types.UpdateServicePrimaryTaskSetOutput),
 		response:                          &aws.Response{Request: r.Request},
 	}
 
@@ -134,7 +70,7 @@ func (r UpdateServicePrimaryTaskSetRequest) Send(ctx context.Context) (*UpdateSe
 // UpdateServicePrimaryTaskSetResponse is the response type for the
 // UpdateServicePrimaryTaskSet API operation.
 type UpdateServicePrimaryTaskSetResponse struct {
-	*UpdateServicePrimaryTaskSetOutput
+	*types.UpdateServicePrimaryTaskSetOutput
 
 	response *aws.Response
 }

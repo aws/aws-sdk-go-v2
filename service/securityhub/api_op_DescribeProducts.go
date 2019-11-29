@@ -6,96 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/securityhub/types"
 )
-
-type DescribeProductsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The maximum number of results to return.
-	MaxResults *int64 `location:"querystring" locationName:"MaxResults" min:"1" type:"integer"`
-
-	// The token that is required for pagination.
-	NextToken *string `location:"querystring" locationName:"NextToken" type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeProductsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeProductsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeProductsInput"}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DescribeProductsInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.MaxResults != nil {
-		v := *s.MaxResults
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "MaxResults", protocol.Int64Value(v), metadata)
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type DescribeProductsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The token that is required for pagination.
-	NextToken *string `type:"string"`
-
-	// A list of products, including details for each product.
-	//
-	// Products is a required field
-	Products []Product `type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeProductsOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DescribeProductsOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Products != nil {
-		v := s.Products
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "Products", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	return nil
-}
 
 const opDescribeProducts = "DescribeProducts"
 
@@ -113,7 +25,7 @@ const opDescribeProducts = "DescribeProducts"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/DescribeProducts
-func (c *Client) DescribeProductsRequest(input *DescribeProductsInput) DescribeProductsRequest {
+func (c *Client) DescribeProductsRequest(input *types.DescribeProductsInput) DescribeProductsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeProducts,
 		HTTPMethod: "GET",
@@ -127,10 +39,10 @@ func (c *Client) DescribeProductsRequest(input *DescribeProductsInput) DescribeP
 	}
 
 	if input == nil {
-		input = &DescribeProductsInput{}
+		input = &types.DescribeProductsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeProductsOutput{})
+	req := c.newRequest(op, input, &types.DescribeProductsOutput{})
 	return DescribeProductsRequest{Request: req, Input: input, Copy: c.DescribeProductsRequest}
 }
 
@@ -138,8 +50,8 @@ func (c *Client) DescribeProductsRequest(input *DescribeProductsInput) DescribeP
 // DescribeProducts API operation.
 type DescribeProductsRequest struct {
 	*aws.Request
-	Input *DescribeProductsInput
-	Copy  func(*DescribeProductsInput) DescribeProductsRequest
+	Input *types.DescribeProductsInput
+	Copy  func(*types.DescribeProductsInput) DescribeProductsRequest
 }
 
 // Send marshals and sends the DescribeProducts API request.
@@ -151,7 +63,7 @@ func (r DescribeProductsRequest) Send(ctx context.Context) (*DescribeProductsRes
 	}
 
 	resp := &DescribeProductsResponse{
-		DescribeProductsOutput: r.Request.Data.(*DescribeProductsOutput),
+		DescribeProductsOutput: r.Request.Data.(*types.DescribeProductsOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -181,7 +93,7 @@ func NewDescribeProductsPaginator(req DescribeProductsRequest) DescribeProductsP
 	return DescribeProductsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *DescribeProductsInput
+				var inCpy *types.DescribeProductsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -201,14 +113,14 @@ type DescribeProductsPaginator struct {
 	aws.Pager
 }
 
-func (p *DescribeProductsPaginator) CurrentPage() *DescribeProductsOutput {
-	return p.Pager.CurrentPage().(*DescribeProductsOutput)
+func (p *DescribeProductsPaginator) CurrentPage() *types.DescribeProductsOutput {
+	return p.Pager.CurrentPage().(*types.DescribeProductsOutput)
 }
 
 // DescribeProductsResponse is the response type for the
 // DescribeProducts API operation.
 type DescribeProductsResponse struct {
-	*DescribeProductsOutput
+	*types.DescribeProductsOutput
 
 	response *aws.Response
 }

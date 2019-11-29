@@ -6,70 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/elasticbeanstalk/types"
 )
-
-// Request to download logs retrieved with RequestEnvironmentInfo.
-type RetrieveEnvironmentInfoInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the data's environment.
-	//
-	// If no such environment is found, returns an InvalidParameterValue error.
-	//
-	// Condition: You must specify either this or an EnvironmentName, or both. If
-	// you do not specify either, AWS Elastic Beanstalk returns MissingRequiredParameter
-	// error.
-	EnvironmentId *string `type:"string"`
-
-	// The name of the data's environment.
-	//
-	// If no such environment is found, returns an InvalidParameterValue error.
-	//
-	// Condition: You must specify either this or an EnvironmentId, or both. If
-	// you do not specify either, AWS Elastic Beanstalk returns MissingRequiredParameter
-	// error.
-	EnvironmentName *string `min:"4" type:"string"`
-
-	// The type of information to retrieve.
-	//
-	// InfoType is a required field
-	InfoType EnvironmentInfoType `type:"string" required:"true" enum:"true"`
-}
-
-// String returns the string representation
-func (s RetrieveEnvironmentInfoInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *RetrieveEnvironmentInfoInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "RetrieveEnvironmentInfoInput"}
-	if s.EnvironmentName != nil && len(*s.EnvironmentName) < 4 {
-		invalidParams.Add(aws.NewErrParamMinLen("EnvironmentName", 4))
-	}
-	if len(s.InfoType) == 0 {
-		invalidParams.Add(aws.NewErrParamRequired("InfoType"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Result message containing a description of the requested environment info.
-type RetrieveEnvironmentInfoOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The EnvironmentInfoDescription of the environment.
-	EnvironmentInfo []EnvironmentInfoDescription `type:"list"`
-}
-
-// String returns the string representation
-func (s RetrieveEnvironmentInfoOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opRetrieveEnvironmentInfo = "RetrieveEnvironmentInfo"
 
@@ -90,7 +28,7 @@ const opRetrieveEnvironmentInfo = "RetrieveEnvironmentInfo"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/RetrieveEnvironmentInfo
-func (c *Client) RetrieveEnvironmentInfoRequest(input *RetrieveEnvironmentInfoInput) RetrieveEnvironmentInfoRequest {
+func (c *Client) RetrieveEnvironmentInfoRequest(input *types.RetrieveEnvironmentInfoInput) RetrieveEnvironmentInfoRequest {
 	op := &aws.Operation{
 		Name:       opRetrieveEnvironmentInfo,
 		HTTPMethod: "POST",
@@ -98,10 +36,10 @@ func (c *Client) RetrieveEnvironmentInfoRequest(input *RetrieveEnvironmentInfoIn
 	}
 
 	if input == nil {
-		input = &RetrieveEnvironmentInfoInput{}
+		input = &types.RetrieveEnvironmentInfoInput{}
 	}
 
-	req := c.newRequest(op, input, &RetrieveEnvironmentInfoOutput{})
+	req := c.newRequest(op, input, &types.RetrieveEnvironmentInfoOutput{})
 	return RetrieveEnvironmentInfoRequest{Request: req, Input: input, Copy: c.RetrieveEnvironmentInfoRequest}
 }
 
@@ -109,8 +47,8 @@ func (c *Client) RetrieveEnvironmentInfoRequest(input *RetrieveEnvironmentInfoIn
 // RetrieveEnvironmentInfo API operation.
 type RetrieveEnvironmentInfoRequest struct {
 	*aws.Request
-	Input *RetrieveEnvironmentInfoInput
-	Copy  func(*RetrieveEnvironmentInfoInput) RetrieveEnvironmentInfoRequest
+	Input *types.RetrieveEnvironmentInfoInput
+	Copy  func(*types.RetrieveEnvironmentInfoInput) RetrieveEnvironmentInfoRequest
 }
 
 // Send marshals and sends the RetrieveEnvironmentInfo API request.
@@ -122,7 +60,7 @@ func (r RetrieveEnvironmentInfoRequest) Send(ctx context.Context) (*RetrieveEnvi
 	}
 
 	resp := &RetrieveEnvironmentInfoResponse{
-		RetrieveEnvironmentInfoOutput: r.Request.Data.(*RetrieveEnvironmentInfoOutput),
+		RetrieveEnvironmentInfoOutput: r.Request.Data.(*types.RetrieveEnvironmentInfoOutput),
 		response:                      &aws.Response{Request: r.Request},
 	}
 
@@ -132,7 +70,7 @@ func (r RetrieveEnvironmentInfoRequest) Send(ctx context.Context) (*RetrieveEnvi
 // RetrieveEnvironmentInfoResponse is the response type for the
 // RetrieveEnvironmentInfo API operation.
 type RetrieveEnvironmentInfoResponse struct {
-	*RetrieveEnvironmentInfoOutput
+	*types.RetrieveEnvironmentInfoOutput
 
 	response *aws.Response
 }

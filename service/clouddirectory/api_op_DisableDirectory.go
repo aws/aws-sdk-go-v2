@@ -6,75 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/clouddirectory/types"
 )
-
-type DisableDirectoryInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ARN of the directory to disable.
-	//
-	// DirectoryArn is a required field
-	DirectoryArn *string `location:"header" locationName:"x-amz-data-partition" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DisableDirectoryInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DisableDirectoryInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DisableDirectoryInput"}
-
-	if s.DirectoryArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DirectoryArn"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DisableDirectoryInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.DirectoryArn != nil {
-		v := *s.DirectoryArn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "x-amz-data-partition", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type DisableDirectoryOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The ARN of the directory that has been disabled.
-	//
-	// DirectoryArn is a required field
-	DirectoryArn *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DisableDirectoryOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DisableDirectoryOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.DirectoryArn != nil {
-		v := *s.DirectoryArn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "DirectoryArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opDisableDirectory = "DisableDirectory"
 
@@ -93,7 +26,7 @@ const opDisableDirectory = "DisableDirectory"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/DisableDirectory
-func (c *Client) DisableDirectoryRequest(input *DisableDirectoryInput) DisableDirectoryRequest {
+func (c *Client) DisableDirectoryRequest(input *types.DisableDirectoryInput) DisableDirectoryRequest {
 	op := &aws.Operation{
 		Name:       opDisableDirectory,
 		HTTPMethod: "PUT",
@@ -101,10 +34,10 @@ func (c *Client) DisableDirectoryRequest(input *DisableDirectoryInput) DisableDi
 	}
 
 	if input == nil {
-		input = &DisableDirectoryInput{}
+		input = &types.DisableDirectoryInput{}
 	}
 
-	req := c.newRequest(op, input, &DisableDirectoryOutput{})
+	req := c.newRequest(op, input, &types.DisableDirectoryOutput{})
 	return DisableDirectoryRequest{Request: req, Input: input, Copy: c.DisableDirectoryRequest}
 }
 
@@ -112,8 +45,8 @@ func (c *Client) DisableDirectoryRequest(input *DisableDirectoryInput) DisableDi
 // DisableDirectory API operation.
 type DisableDirectoryRequest struct {
 	*aws.Request
-	Input *DisableDirectoryInput
-	Copy  func(*DisableDirectoryInput) DisableDirectoryRequest
+	Input *types.DisableDirectoryInput
+	Copy  func(*types.DisableDirectoryInput) DisableDirectoryRequest
 }
 
 // Send marshals and sends the DisableDirectory API request.
@@ -125,7 +58,7 @@ func (r DisableDirectoryRequest) Send(ctx context.Context) (*DisableDirectoryRes
 	}
 
 	resp := &DisableDirectoryResponse{
-		DisableDirectoryOutput: r.Request.Data.(*DisableDirectoryOutput),
+		DisableDirectoryOutput: r.Request.Data.(*types.DisableDirectoryOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -135,7 +68,7 @@ func (r DisableDirectoryRequest) Send(ctx context.Context) (*DisableDirectoryRes
 // DisableDirectoryResponse is the response type for the
 // DisableDirectory API operation.
 type DisableDirectoryResponse struct {
-	*DisableDirectoryOutput
+	*types.DisableDirectoryOutput
 
 	response *aws.Response
 }

@@ -6,170 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/rdsdata/types"
 )
-
-// The request parameters represent the input of a SQL statement over an array
-// of data.
-type BatchExecuteStatementInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the database.
-	Database *string `locationName:"database" type:"string"`
-
-	// The parameter set for the batch operation.
-	ParameterSets [][]SqlParameter `locationName:"parameterSets" type:"list"`
-
-	// The Amazon Resource Name (ARN) of the Aurora Serverless DB cluster.
-	//
-	// ResourceArn is a required field
-	ResourceArn *string `locationName:"resourceArn" min:"11" type:"string" required:"true"`
-
-	// The name of the database schema.
-	Schema *string `locationName:"schema" type:"string"`
-
-	// The name or ARN of the secret that enables access to the DB cluster.
-	//
-	// SecretArn is a required field
-	SecretArn *string `locationName:"secretArn" min:"11" type:"string" required:"true"`
-
-	// The SQL statement to run.
-	//
-	// Sql is a required field
-	Sql *string `locationName:"sql" type:"string" required:"true"`
-
-	// The identifier of a transaction that was started by using the BeginTransaction
-	// operation. Specify the transaction ID of the transaction that you want to
-	// include the SQL statement in.
-	//
-	// If the SQL statement is not part of a transaction, don't set this parameter.
-	TransactionId *string `locationName:"transactionId" type:"string"`
-}
-
-// String returns the string representation
-func (s BatchExecuteStatementInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *BatchExecuteStatementInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "BatchExecuteStatementInput"}
-
-	if s.ResourceArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ResourceArn"))
-	}
-	if s.ResourceArn != nil && len(*s.ResourceArn) < 11 {
-		invalidParams.Add(aws.NewErrParamMinLen("ResourceArn", 11))
-	}
-
-	if s.SecretArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("SecretArn"))
-	}
-	if s.SecretArn != nil && len(*s.SecretArn) < 11 {
-		invalidParams.Add(aws.NewErrParamMinLen("SecretArn", 11))
-	}
-
-	if s.Sql == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Sql"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s BatchExecuteStatementInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.Database != nil {
-		v := *s.Database
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "database", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.ParameterSets != nil {
-		v := s.ParameterSets
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "parameterSets", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls1 := ls0.List()
-			ls1.Start()
-			for _, v2 := range v1 {
-				ls1.ListAddFields(v2)
-			}
-			ls1.End()
-		}
-		ls0.End()
-
-	}
-	if s.ResourceArn != nil {
-		v := *s.ResourceArn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "resourceArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Schema != nil {
-		v := *s.Schema
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "schema", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.SecretArn != nil {
-		v := *s.SecretArn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "secretArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Sql != nil {
-		v := *s.Sql
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "sql", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.TransactionId != nil {
-		v := *s.TransactionId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "transactionId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-// The response elements represent the output of a SQL statement over an array
-// of data.
-type BatchExecuteStatementOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The execution results of each batch entry.
-	UpdateResults []UpdateResult `locationName:"updateResults" type:"list"`
-}
-
-// String returns the string representation
-func (s BatchExecuteStatementOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s BatchExecuteStatementOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.UpdateResults != nil {
-		v := s.UpdateResults
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "updateResults", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	return nil
-}
 
 const opBatchExecuteStatement = "BatchExecuteStatement"
 
@@ -193,7 +31,7 @@ const opBatchExecuteStatement = "BatchExecuteStatement"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-data-2018-08-01/BatchExecuteStatement
-func (c *Client) BatchExecuteStatementRequest(input *BatchExecuteStatementInput) BatchExecuteStatementRequest {
+func (c *Client) BatchExecuteStatementRequest(input *types.BatchExecuteStatementInput) BatchExecuteStatementRequest {
 	op := &aws.Operation{
 		Name:       opBatchExecuteStatement,
 		HTTPMethod: "POST",
@@ -201,10 +39,10 @@ func (c *Client) BatchExecuteStatementRequest(input *BatchExecuteStatementInput)
 	}
 
 	if input == nil {
-		input = &BatchExecuteStatementInput{}
+		input = &types.BatchExecuteStatementInput{}
 	}
 
-	req := c.newRequest(op, input, &BatchExecuteStatementOutput{})
+	req := c.newRequest(op, input, &types.BatchExecuteStatementOutput{})
 	return BatchExecuteStatementRequest{Request: req, Input: input, Copy: c.BatchExecuteStatementRequest}
 }
 
@@ -212,8 +50,8 @@ func (c *Client) BatchExecuteStatementRequest(input *BatchExecuteStatementInput)
 // BatchExecuteStatement API operation.
 type BatchExecuteStatementRequest struct {
 	*aws.Request
-	Input *BatchExecuteStatementInput
-	Copy  func(*BatchExecuteStatementInput) BatchExecuteStatementRequest
+	Input *types.BatchExecuteStatementInput
+	Copy  func(*types.BatchExecuteStatementInput) BatchExecuteStatementRequest
 }
 
 // Send marshals and sends the BatchExecuteStatement API request.
@@ -225,7 +63,7 @@ func (r BatchExecuteStatementRequest) Send(ctx context.Context) (*BatchExecuteSt
 	}
 
 	resp := &BatchExecuteStatementResponse{
-		BatchExecuteStatementOutput: r.Request.Data.(*BatchExecuteStatementOutput),
+		BatchExecuteStatementOutput: r.Request.Data.(*types.BatchExecuteStatementOutput),
 		response:                    &aws.Response{Request: r.Request},
 	}
 
@@ -235,7 +73,7 @@ func (r BatchExecuteStatementRequest) Send(ctx context.Context) (*BatchExecuteSt
 // BatchExecuteStatementResponse is the response type for the
 // BatchExecuteStatement API operation.
 type BatchExecuteStatementResponse struct {
-	*BatchExecuteStatementOutput
+	*types.BatchExecuteStatementOutput
 
 	response *aws.Response
 }

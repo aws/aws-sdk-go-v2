@@ -6,94 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/worklink/types"
 )
-
-type DescribeIdentityProviderConfigurationInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ARN of the fleet.
-	//
-	// FleetArn is a required field
-	FleetArn *string `min:"20" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeIdentityProviderConfigurationInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeIdentityProviderConfigurationInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeIdentityProviderConfigurationInput"}
-
-	if s.FleetArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("FleetArn"))
-	}
-	if s.FleetArn != nil && len(*s.FleetArn) < 20 {
-		invalidParams.Add(aws.NewErrParamMinLen("FleetArn", 20))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DescribeIdentityProviderConfigurationInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.FleetArn != nil {
-		v := *s.FleetArn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "FleetArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type DescribeIdentityProviderConfigurationOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The SAML metadata document provided by the user’s identity provider.
-	IdentityProviderSamlMetadata *string `min:"1" type:"string"`
-
-	// The type of identity provider.
-	IdentityProviderType IdentityProviderType `type:"string" enum:"true"`
-
-	// The SAML metadata document uploaded to the user’s identity provider.
-	ServiceProviderSamlMetadata *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeIdentityProviderConfigurationOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DescribeIdentityProviderConfigurationOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.IdentityProviderSamlMetadata != nil {
-		v := *s.IdentityProviderSamlMetadata
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "IdentityProviderSamlMetadata", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if len(s.IdentityProviderType) > 0 {
-		v := s.IdentityProviderType
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "IdentityProviderType", protocol.QuotedValue{ValueMarshaler: v}, metadata)
-	}
-	if s.ServiceProviderSamlMetadata != nil {
-		v := *s.ServiceProviderSamlMetadata
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "ServiceProviderSamlMetadata", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opDescribeIdentityProviderConfiguration = "DescribeIdentityProviderConfiguration"
 
@@ -110,7 +24,7 @@ const opDescribeIdentityProviderConfiguration = "DescribeIdentityProviderConfigu
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/worklink-2018-09-25/DescribeIdentityProviderConfiguration
-func (c *Client) DescribeIdentityProviderConfigurationRequest(input *DescribeIdentityProviderConfigurationInput) DescribeIdentityProviderConfigurationRequest {
+func (c *Client) DescribeIdentityProviderConfigurationRequest(input *types.DescribeIdentityProviderConfigurationInput) DescribeIdentityProviderConfigurationRequest {
 	op := &aws.Operation{
 		Name:       opDescribeIdentityProviderConfiguration,
 		HTTPMethod: "POST",
@@ -118,10 +32,10 @@ func (c *Client) DescribeIdentityProviderConfigurationRequest(input *DescribeIde
 	}
 
 	if input == nil {
-		input = &DescribeIdentityProviderConfigurationInput{}
+		input = &types.DescribeIdentityProviderConfigurationInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeIdentityProviderConfigurationOutput{})
+	req := c.newRequest(op, input, &types.DescribeIdentityProviderConfigurationOutput{})
 	return DescribeIdentityProviderConfigurationRequest{Request: req, Input: input, Copy: c.DescribeIdentityProviderConfigurationRequest}
 }
 
@@ -129,8 +43,8 @@ func (c *Client) DescribeIdentityProviderConfigurationRequest(input *DescribeIde
 // DescribeIdentityProviderConfiguration API operation.
 type DescribeIdentityProviderConfigurationRequest struct {
 	*aws.Request
-	Input *DescribeIdentityProviderConfigurationInput
-	Copy  func(*DescribeIdentityProviderConfigurationInput) DescribeIdentityProviderConfigurationRequest
+	Input *types.DescribeIdentityProviderConfigurationInput
+	Copy  func(*types.DescribeIdentityProviderConfigurationInput) DescribeIdentityProviderConfigurationRequest
 }
 
 // Send marshals and sends the DescribeIdentityProviderConfiguration API request.
@@ -142,7 +56,7 @@ func (r DescribeIdentityProviderConfigurationRequest) Send(ctx context.Context) 
 	}
 
 	resp := &DescribeIdentityProviderConfigurationResponse{
-		DescribeIdentityProviderConfigurationOutput: r.Request.Data.(*DescribeIdentityProviderConfigurationOutput),
+		DescribeIdentityProviderConfigurationOutput: r.Request.Data.(*types.DescribeIdentityProviderConfigurationOutput),
 		response: &aws.Response{Request: r.Request},
 	}
 
@@ -152,7 +66,7 @@ func (r DescribeIdentityProviderConfigurationRequest) Send(ctx context.Context) 
 // DescribeIdentityProviderConfigurationResponse is the response type for the
 // DescribeIdentityProviderConfiguration API operation.
 type DescribeIdentityProviderConfigurationResponse struct {
-	*DescribeIdentityProviderConfigurationOutput
+	*types.DescribeIdentityProviderConfigurationOutput
 
 	response *aws.Response
 }

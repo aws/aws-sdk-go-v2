@@ -6,163 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/clouddirectory/types"
 )
-
-type ListObjectParentsInput struct {
-	_ struct{} `type:"structure"`
-
-	// Represents the manner and timing in which the successful write or update
-	// of an object is reflected in a subsequent read operation of that same object.
-	ConsistencyLevel ConsistencyLevel `location:"header" locationName:"x-amz-consistency-level" type:"string" enum:"true"`
-
-	// The Amazon Resource Name (ARN) that is associated with the Directory where
-	// the object resides. For more information, see arns.
-	//
-	// DirectoryArn is a required field
-	DirectoryArn *string `location:"header" locationName:"x-amz-data-partition" type:"string" required:"true"`
-
-	// When set to True, returns all ListObjectParentsResponse$ParentLinks. There
-	// could be multiple links between a parent-child pair.
-	IncludeAllLinksToEachParent *bool `type:"boolean"`
-
-	// The maximum number of items to be retrieved in a single call. This is an
-	// approximate number.
-	MaxResults *int64 `min:"1" type:"integer"`
-
-	// The pagination token.
-	NextToken *string `type:"string"`
-
-	// The reference that identifies the object for which parent objects are being
-	// listed.
-	//
-	// ObjectReference is a required field
-	ObjectReference *ObjectReference `type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s ListObjectParentsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListObjectParentsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListObjectParentsInput"}
-
-	if s.DirectoryArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DirectoryArn"))
-	}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-
-	if s.ObjectReference == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ObjectReference"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListObjectParentsInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.IncludeAllLinksToEachParent != nil {
-		v := *s.IncludeAllLinksToEachParent
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "IncludeAllLinksToEachParent", protocol.BoolValue(v), metadata)
-	}
-	if s.MaxResults != nil {
-		v := *s.MaxResults
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "MaxResults", protocol.Int64Value(v), metadata)
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.ObjectReference != nil {
-		v := s.ObjectReference
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "ObjectReference", v, metadata)
-	}
-	if len(s.ConsistencyLevel) > 0 {
-		v := s.ConsistencyLevel
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "x-amz-consistency-level", protocol.QuotedValue{ValueMarshaler: v}, metadata)
-	}
-	if s.DirectoryArn != nil {
-		v := *s.DirectoryArn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "x-amz-data-partition", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type ListObjectParentsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The pagination token.
-	NextToken *string `type:"string"`
-
-	// Returns a list of parent reference and LinkName Tuples.
-	ParentLinks []ObjectIdentifierAndLinkNameTuple `type:"list"`
-
-	// The parent structure, which is a map with key as the ObjectIdentifier and
-	// LinkName as the value.
-	Parents map[string]string `type:"map"`
-}
-
-// String returns the string representation
-func (s ListObjectParentsOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListObjectParentsOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.ParentLinks != nil {
-		v := s.ParentLinks
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "ParentLinks", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	if s.Parents != nil {
-		v := s.Parents
-
-		metadata := protocol.Metadata{}
-		ms0 := e.Map(protocol.BodyTarget, "Parents", metadata)
-		ms0.Start()
-		for k1, v1 := range v {
-			ms0.MapSetValue(k1, protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
-		}
-		ms0.End()
-
-	}
-	return nil
-}
 
 const opListObjectParents = "ListObjectParents"
 
@@ -180,7 +25,7 @@ const opListObjectParents = "ListObjectParents"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/ListObjectParents
-func (c *Client) ListObjectParentsRequest(input *ListObjectParentsInput) ListObjectParentsRequest {
+func (c *Client) ListObjectParentsRequest(input *types.ListObjectParentsInput) ListObjectParentsRequest {
 	op := &aws.Operation{
 		Name:       opListObjectParents,
 		HTTPMethod: "POST",
@@ -194,10 +39,10 @@ func (c *Client) ListObjectParentsRequest(input *ListObjectParentsInput) ListObj
 	}
 
 	if input == nil {
-		input = &ListObjectParentsInput{}
+		input = &types.ListObjectParentsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListObjectParentsOutput{})
+	req := c.newRequest(op, input, &types.ListObjectParentsOutput{})
 	return ListObjectParentsRequest{Request: req, Input: input, Copy: c.ListObjectParentsRequest}
 }
 
@@ -205,8 +50,8 @@ func (c *Client) ListObjectParentsRequest(input *ListObjectParentsInput) ListObj
 // ListObjectParents API operation.
 type ListObjectParentsRequest struct {
 	*aws.Request
-	Input *ListObjectParentsInput
-	Copy  func(*ListObjectParentsInput) ListObjectParentsRequest
+	Input *types.ListObjectParentsInput
+	Copy  func(*types.ListObjectParentsInput) ListObjectParentsRequest
 }
 
 // Send marshals and sends the ListObjectParents API request.
@@ -218,7 +63,7 @@ func (r ListObjectParentsRequest) Send(ctx context.Context) (*ListObjectParentsR
 	}
 
 	resp := &ListObjectParentsResponse{
-		ListObjectParentsOutput: r.Request.Data.(*ListObjectParentsOutput),
+		ListObjectParentsOutput: r.Request.Data.(*types.ListObjectParentsOutput),
 		response:                &aws.Response{Request: r.Request},
 	}
 
@@ -248,7 +93,7 @@ func NewListObjectParentsPaginator(req ListObjectParentsRequest) ListObjectParen
 	return ListObjectParentsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListObjectParentsInput
+				var inCpy *types.ListObjectParentsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -268,14 +113,14 @@ type ListObjectParentsPaginator struct {
 	aws.Pager
 }
 
-func (p *ListObjectParentsPaginator) CurrentPage() *ListObjectParentsOutput {
-	return p.Pager.CurrentPage().(*ListObjectParentsOutput)
+func (p *ListObjectParentsPaginator) CurrentPage() *types.ListObjectParentsOutput {
+	return p.Pager.CurrentPage().(*types.ListObjectParentsOutput)
 }
 
 // ListObjectParentsResponse is the response type for the
 // ListObjectParents API operation.
 type ListObjectParentsResponse struct {
-	*ListObjectParentsOutput
+	*types.ListObjectParentsOutput
 
 	response *aws.Response
 }

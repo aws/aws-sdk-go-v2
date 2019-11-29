@@ -6,73 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/rds/types"
 )
-
-type AddSourceIdentifierToSubscriptionInput struct {
-	_ struct{} `type:"structure"`
-
-	// The identifier of the event source to be added.
-	//
-	// Constraints:
-	//
-	//    * If the source type is a DB instance, then a DBInstanceIdentifier must
-	//    be supplied.
-	//
-	//    * If the source type is a DB security group, a DBSecurityGroupName must
-	//    be supplied.
-	//
-	//    * If the source type is a DB parameter group, a DBParameterGroupName must
-	//    be supplied.
-	//
-	//    * If the source type is a DB snapshot, a DBSnapshotIdentifier must be
-	//    supplied.
-	//
-	// SourceIdentifier is a required field
-	SourceIdentifier *string `type:"string" required:"true"`
-
-	// The name of the RDS event notification subscription you want to add a source
-	// identifier to.
-	//
-	// SubscriptionName is a required field
-	SubscriptionName *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s AddSourceIdentifierToSubscriptionInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *AddSourceIdentifierToSubscriptionInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "AddSourceIdentifierToSubscriptionInput"}
-
-	if s.SourceIdentifier == nil {
-		invalidParams.Add(aws.NewErrParamRequired("SourceIdentifier"))
-	}
-
-	if s.SubscriptionName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("SubscriptionName"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type AddSourceIdentifierToSubscriptionOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Contains the results of a successful invocation of the DescribeEventSubscriptions
-	// action.
-	EventSubscription *EventSubscription `type:"structure"`
-}
-
-// String returns the string representation
-func (s AddSourceIdentifierToSubscriptionOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opAddSourceIdentifierToSubscription = "AddSourceIdentifierToSubscription"
 
@@ -89,7 +24,7 @@ const opAddSourceIdentifierToSubscription = "AddSourceIdentifierToSubscription"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/AddSourceIdentifierToSubscription
-func (c *Client) AddSourceIdentifierToSubscriptionRequest(input *AddSourceIdentifierToSubscriptionInput) AddSourceIdentifierToSubscriptionRequest {
+func (c *Client) AddSourceIdentifierToSubscriptionRequest(input *types.AddSourceIdentifierToSubscriptionInput) AddSourceIdentifierToSubscriptionRequest {
 	op := &aws.Operation{
 		Name:       opAddSourceIdentifierToSubscription,
 		HTTPMethod: "POST",
@@ -97,10 +32,10 @@ func (c *Client) AddSourceIdentifierToSubscriptionRequest(input *AddSourceIdenti
 	}
 
 	if input == nil {
-		input = &AddSourceIdentifierToSubscriptionInput{}
+		input = &types.AddSourceIdentifierToSubscriptionInput{}
 	}
 
-	req := c.newRequest(op, input, &AddSourceIdentifierToSubscriptionOutput{})
+	req := c.newRequest(op, input, &types.AddSourceIdentifierToSubscriptionOutput{})
 	return AddSourceIdentifierToSubscriptionRequest{Request: req, Input: input, Copy: c.AddSourceIdentifierToSubscriptionRequest}
 }
 
@@ -108,8 +43,8 @@ func (c *Client) AddSourceIdentifierToSubscriptionRequest(input *AddSourceIdenti
 // AddSourceIdentifierToSubscription API operation.
 type AddSourceIdentifierToSubscriptionRequest struct {
 	*aws.Request
-	Input *AddSourceIdentifierToSubscriptionInput
-	Copy  func(*AddSourceIdentifierToSubscriptionInput) AddSourceIdentifierToSubscriptionRequest
+	Input *types.AddSourceIdentifierToSubscriptionInput
+	Copy  func(*types.AddSourceIdentifierToSubscriptionInput) AddSourceIdentifierToSubscriptionRequest
 }
 
 // Send marshals and sends the AddSourceIdentifierToSubscription API request.
@@ -121,7 +56,7 @@ func (r AddSourceIdentifierToSubscriptionRequest) Send(ctx context.Context) (*Ad
 	}
 
 	resp := &AddSourceIdentifierToSubscriptionResponse{
-		AddSourceIdentifierToSubscriptionOutput: r.Request.Data.(*AddSourceIdentifierToSubscriptionOutput),
+		AddSourceIdentifierToSubscriptionOutput: r.Request.Data.(*types.AddSourceIdentifierToSubscriptionOutput),
 		response:                                &aws.Response{Request: r.Request},
 	}
 
@@ -131,7 +66,7 @@ func (r AddSourceIdentifierToSubscriptionRequest) Send(ctx context.Context) (*Ad
 // AddSourceIdentifierToSubscriptionResponse is the response type for the
 // AddSourceIdentifierToSubscription API operation.
 type AddSourceIdentifierToSubscriptionResponse struct {
-	*AddSourceIdentifierToSubscriptionOutput
+	*types.AddSourceIdentifierToSubscriptionOutput
 
 	response *aws.Response
 }

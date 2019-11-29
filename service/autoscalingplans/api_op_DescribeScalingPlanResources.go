@@ -6,71 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/autoscalingplans/types"
 )
-
-type DescribeScalingPlanResourcesInput struct {
-	_ struct{} `type:"structure"`
-
-	// The maximum number of scalable resources to return. The value must be between
-	// 1 and 50. The default value is 50.
-	MaxResults *int64 `type:"integer"`
-
-	// The token for the next set of results.
-	NextToken *string `type:"string"`
-
-	// The name of the scaling plan.
-	//
-	// ScalingPlanName is a required field
-	ScalingPlanName *string `min:"1" type:"string" required:"true"`
-
-	// The version number of the scaling plan.
-	//
-	// ScalingPlanVersion is a required field
-	ScalingPlanVersion *int64 `type:"long" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeScalingPlanResourcesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeScalingPlanResourcesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeScalingPlanResourcesInput"}
-
-	if s.ScalingPlanName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ScalingPlanName"))
-	}
-	if s.ScalingPlanName != nil && len(*s.ScalingPlanName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ScalingPlanName", 1))
-	}
-
-	if s.ScalingPlanVersion == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ScalingPlanVersion"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribeScalingPlanResourcesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The token required to get the next set of results. This value is null if
-	// there are no more results to return.
-	NextToken *string `type:"string"`
-
-	// Information about the scalable resources.
-	ScalingPlanResources []ScalingPlanResource `type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeScalingPlanResourcesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeScalingPlanResources = "DescribeScalingPlanResources"
 
@@ -87,7 +24,7 @@ const opDescribeScalingPlanResources = "DescribeScalingPlanResources"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-plans-2018-01-06/DescribeScalingPlanResources
-func (c *Client) DescribeScalingPlanResourcesRequest(input *DescribeScalingPlanResourcesInput) DescribeScalingPlanResourcesRequest {
+func (c *Client) DescribeScalingPlanResourcesRequest(input *types.DescribeScalingPlanResourcesInput) DescribeScalingPlanResourcesRequest {
 	op := &aws.Operation{
 		Name:       opDescribeScalingPlanResources,
 		HTTPMethod: "POST",
@@ -95,10 +32,10 @@ func (c *Client) DescribeScalingPlanResourcesRequest(input *DescribeScalingPlanR
 	}
 
 	if input == nil {
-		input = &DescribeScalingPlanResourcesInput{}
+		input = &types.DescribeScalingPlanResourcesInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeScalingPlanResourcesOutput{})
+	req := c.newRequest(op, input, &types.DescribeScalingPlanResourcesOutput{})
 	return DescribeScalingPlanResourcesRequest{Request: req, Input: input, Copy: c.DescribeScalingPlanResourcesRequest}
 }
 
@@ -106,8 +43,8 @@ func (c *Client) DescribeScalingPlanResourcesRequest(input *DescribeScalingPlanR
 // DescribeScalingPlanResources API operation.
 type DescribeScalingPlanResourcesRequest struct {
 	*aws.Request
-	Input *DescribeScalingPlanResourcesInput
-	Copy  func(*DescribeScalingPlanResourcesInput) DescribeScalingPlanResourcesRequest
+	Input *types.DescribeScalingPlanResourcesInput
+	Copy  func(*types.DescribeScalingPlanResourcesInput) DescribeScalingPlanResourcesRequest
 }
 
 // Send marshals and sends the DescribeScalingPlanResources API request.
@@ -119,7 +56,7 @@ func (r DescribeScalingPlanResourcesRequest) Send(ctx context.Context) (*Describ
 	}
 
 	resp := &DescribeScalingPlanResourcesResponse{
-		DescribeScalingPlanResourcesOutput: r.Request.Data.(*DescribeScalingPlanResourcesOutput),
+		DescribeScalingPlanResourcesOutput: r.Request.Data.(*types.DescribeScalingPlanResourcesOutput),
 		response:                           &aws.Response{Request: r.Request},
 	}
 
@@ -129,7 +66,7 @@ func (r DescribeScalingPlanResourcesRequest) Send(ctx context.Context) (*Describ
 // DescribeScalingPlanResourcesResponse is the response type for the
 // DescribeScalingPlanResources API operation.
 type DescribeScalingPlanResourcesResponse struct {
-	*DescribeScalingPlanResourcesOutput
+	*types.DescribeScalingPlanResourcesOutput
 
 	response *aws.Response
 }

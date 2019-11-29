@@ -10,6 +10,7 @@ package worklinkiface
 
 import (
 	"github.com/aws/aws-sdk-go-v2/service/worklink"
+	"github.com/aws/aws-sdk-go-v2/service/worklink/types"
 )
 
 // ClientAPI provides an interface to enable mocking the
@@ -43,7 +44,7 @@ import (
 //    type mockClientClient struct {
 //        worklinkiface.ClientPI
 //    }
-//    func (m *mockClientClient) AssociateDomain(input *worklink.AssociateDomainInput) (*worklink.AssociateDomainOutput, error) {
+//    func (m *mockClientClient) AssociateDomain(input *types.AssociateDomainInput) (*types.AssociateDomainOutput, error) {
 //        // mock response/functionality
 //    }
 //
@@ -61,65 +62,65 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type ClientAPI interface {
-	AssociateDomainRequest(*worklink.AssociateDomainInput) worklink.AssociateDomainRequest
+	AssociateDomainRequest(*types.AssociateDomainInput) worklink.AssociateDomainRequest
 
-	AssociateWebsiteAuthorizationProviderRequest(*worklink.AssociateWebsiteAuthorizationProviderInput) worklink.AssociateWebsiteAuthorizationProviderRequest
+	AssociateWebsiteAuthorizationProviderRequest(*types.AssociateWebsiteAuthorizationProviderInput) worklink.AssociateWebsiteAuthorizationProviderRequest
 
-	AssociateWebsiteCertificateAuthorityRequest(*worklink.AssociateWebsiteCertificateAuthorityInput) worklink.AssociateWebsiteCertificateAuthorityRequest
+	AssociateWebsiteCertificateAuthorityRequest(*types.AssociateWebsiteCertificateAuthorityInput) worklink.AssociateWebsiteCertificateAuthorityRequest
 
-	CreateFleetRequest(*worklink.CreateFleetInput) worklink.CreateFleetRequest
+	CreateFleetRequest(*types.CreateFleetInput) worklink.CreateFleetRequest
 
-	DeleteFleetRequest(*worklink.DeleteFleetInput) worklink.DeleteFleetRequest
+	DeleteFleetRequest(*types.DeleteFleetInput) worklink.DeleteFleetRequest
 
-	DescribeAuditStreamConfigurationRequest(*worklink.DescribeAuditStreamConfigurationInput) worklink.DescribeAuditStreamConfigurationRequest
+	DescribeAuditStreamConfigurationRequest(*types.DescribeAuditStreamConfigurationInput) worklink.DescribeAuditStreamConfigurationRequest
 
-	DescribeCompanyNetworkConfigurationRequest(*worklink.DescribeCompanyNetworkConfigurationInput) worklink.DescribeCompanyNetworkConfigurationRequest
+	DescribeCompanyNetworkConfigurationRequest(*types.DescribeCompanyNetworkConfigurationInput) worklink.DescribeCompanyNetworkConfigurationRequest
 
-	DescribeDeviceRequest(*worklink.DescribeDeviceInput) worklink.DescribeDeviceRequest
+	DescribeDeviceRequest(*types.DescribeDeviceInput) worklink.DescribeDeviceRequest
 
-	DescribeDevicePolicyConfigurationRequest(*worklink.DescribeDevicePolicyConfigurationInput) worklink.DescribeDevicePolicyConfigurationRequest
+	DescribeDevicePolicyConfigurationRequest(*types.DescribeDevicePolicyConfigurationInput) worklink.DescribeDevicePolicyConfigurationRequest
 
-	DescribeDomainRequest(*worklink.DescribeDomainInput) worklink.DescribeDomainRequest
+	DescribeDomainRequest(*types.DescribeDomainInput) worklink.DescribeDomainRequest
 
-	DescribeFleetMetadataRequest(*worklink.DescribeFleetMetadataInput) worklink.DescribeFleetMetadataRequest
+	DescribeFleetMetadataRequest(*types.DescribeFleetMetadataInput) worklink.DescribeFleetMetadataRequest
 
-	DescribeIdentityProviderConfigurationRequest(*worklink.DescribeIdentityProviderConfigurationInput) worklink.DescribeIdentityProviderConfigurationRequest
+	DescribeIdentityProviderConfigurationRequest(*types.DescribeIdentityProviderConfigurationInput) worklink.DescribeIdentityProviderConfigurationRequest
 
-	DescribeWebsiteCertificateAuthorityRequest(*worklink.DescribeWebsiteCertificateAuthorityInput) worklink.DescribeWebsiteCertificateAuthorityRequest
+	DescribeWebsiteCertificateAuthorityRequest(*types.DescribeWebsiteCertificateAuthorityInput) worklink.DescribeWebsiteCertificateAuthorityRequest
 
-	DisassociateDomainRequest(*worklink.DisassociateDomainInput) worklink.DisassociateDomainRequest
+	DisassociateDomainRequest(*types.DisassociateDomainInput) worklink.DisassociateDomainRequest
 
-	DisassociateWebsiteAuthorizationProviderRequest(*worklink.DisassociateWebsiteAuthorizationProviderInput) worklink.DisassociateWebsiteAuthorizationProviderRequest
+	DisassociateWebsiteAuthorizationProviderRequest(*types.DisassociateWebsiteAuthorizationProviderInput) worklink.DisassociateWebsiteAuthorizationProviderRequest
 
-	DisassociateWebsiteCertificateAuthorityRequest(*worklink.DisassociateWebsiteCertificateAuthorityInput) worklink.DisassociateWebsiteCertificateAuthorityRequest
+	DisassociateWebsiteCertificateAuthorityRequest(*types.DisassociateWebsiteCertificateAuthorityInput) worklink.DisassociateWebsiteCertificateAuthorityRequest
 
-	ListDevicesRequest(*worklink.ListDevicesInput) worklink.ListDevicesRequest
+	ListDevicesRequest(*types.ListDevicesInput) worklink.ListDevicesRequest
 
-	ListDomainsRequest(*worklink.ListDomainsInput) worklink.ListDomainsRequest
+	ListDomainsRequest(*types.ListDomainsInput) worklink.ListDomainsRequest
 
-	ListFleetsRequest(*worklink.ListFleetsInput) worklink.ListFleetsRequest
+	ListFleetsRequest(*types.ListFleetsInput) worklink.ListFleetsRequest
 
-	ListWebsiteAuthorizationProvidersRequest(*worklink.ListWebsiteAuthorizationProvidersInput) worklink.ListWebsiteAuthorizationProvidersRequest
+	ListWebsiteAuthorizationProvidersRequest(*types.ListWebsiteAuthorizationProvidersInput) worklink.ListWebsiteAuthorizationProvidersRequest
 
-	ListWebsiteCertificateAuthoritiesRequest(*worklink.ListWebsiteCertificateAuthoritiesInput) worklink.ListWebsiteCertificateAuthoritiesRequest
+	ListWebsiteCertificateAuthoritiesRequest(*types.ListWebsiteCertificateAuthoritiesInput) worklink.ListWebsiteCertificateAuthoritiesRequest
 
-	RestoreDomainAccessRequest(*worklink.RestoreDomainAccessInput) worklink.RestoreDomainAccessRequest
+	RestoreDomainAccessRequest(*types.RestoreDomainAccessInput) worklink.RestoreDomainAccessRequest
 
-	RevokeDomainAccessRequest(*worklink.RevokeDomainAccessInput) worklink.RevokeDomainAccessRequest
+	RevokeDomainAccessRequest(*types.RevokeDomainAccessInput) worklink.RevokeDomainAccessRequest
 
-	SignOutUserRequest(*worklink.SignOutUserInput) worklink.SignOutUserRequest
+	SignOutUserRequest(*types.SignOutUserInput) worklink.SignOutUserRequest
 
-	UpdateAuditStreamConfigurationRequest(*worklink.UpdateAuditStreamConfigurationInput) worklink.UpdateAuditStreamConfigurationRequest
+	UpdateAuditStreamConfigurationRequest(*types.UpdateAuditStreamConfigurationInput) worklink.UpdateAuditStreamConfigurationRequest
 
-	UpdateCompanyNetworkConfigurationRequest(*worklink.UpdateCompanyNetworkConfigurationInput) worklink.UpdateCompanyNetworkConfigurationRequest
+	UpdateCompanyNetworkConfigurationRequest(*types.UpdateCompanyNetworkConfigurationInput) worklink.UpdateCompanyNetworkConfigurationRequest
 
-	UpdateDevicePolicyConfigurationRequest(*worklink.UpdateDevicePolicyConfigurationInput) worklink.UpdateDevicePolicyConfigurationRequest
+	UpdateDevicePolicyConfigurationRequest(*types.UpdateDevicePolicyConfigurationInput) worklink.UpdateDevicePolicyConfigurationRequest
 
-	UpdateDomainMetadataRequest(*worklink.UpdateDomainMetadataInput) worklink.UpdateDomainMetadataRequest
+	UpdateDomainMetadataRequest(*types.UpdateDomainMetadataInput) worklink.UpdateDomainMetadataRequest
 
-	UpdateFleetMetadataRequest(*worklink.UpdateFleetMetadataInput) worklink.UpdateFleetMetadataRequest
+	UpdateFleetMetadataRequest(*types.UpdateFleetMetadataInput) worklink.UpdateFleetMetadataRequest
 
-	UpdateIdentityProviderConfigurationRequest(*worklink.UpdateIdentityProviderConfigurationInput) worklink.UpdateIdentityProviderConfigurationRequest
+	UpdateIdentityProviderConfigurationRequest(*types.UpdateIdentityProviderConfigurationInput) worklink.UpdateIdentityProviderConfigurationRequest
 }
 
 var _ ClientAPI = (*worklink.Client)(nil)

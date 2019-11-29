@@ -6,60 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/elasticloadbalancing/types"
 )
-
-// Contains the parameters for ApplySecurityGroupsToLoadBalancer.
-type ApplySecurityGroupsToLoadBalancerInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the load balancer.
-	//
-	// LoadBalancerName is a required field
-	LoadBalancerName *string `type:"string" required:"true"`
-
-	// The IDs of the security groups to associate with the load balancer. Note
-	// that you cannot specify the name of the security group.
-	//
-	// SecurityGroups is a required field
-	SecurityGroups []string `type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s ApplySecurityGroupsToLoadBalancerInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ApplySecurityGroupsToLoadBalancerInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ApplySecurityGroupsToLoadBalancerInput"}
-
-	if s.LoadBalancerName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("LoadBalancerName"))
-	}
-
-	if s.SecurityGroups == nil {
-		invalidParams.Add(aws.NewErrParamRequired("SecurityGroups"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Contains the output of ApplySecurityGroupsToLoadBalancer.
-type ApplySecurityGroupsToLoadBalancerOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The IDs of the security groups associated with the load balancer.
-	SecurityGroups []string `type:"list"`
-}
-
-// String returns the string representation
-func (s ApplySecurityGroupsToLoadBalancerOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opApplySecurityGroupsToLoadBalancer = "ApplySecurityGroupsToLoadBalancer"
 
@@ -81,7 +29,7 @@ const opApplySecurityGroupsToLoadBalancer = "ApplySecurityGroupsToLoadBalancer"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/ApplySecurityGroupsToLoadBalancer
-func (c *Client) ApplySecurityGroupsToLoadBalancerRequest(input *ApplySecurityGroupsToLoadBalancerInput) ApplySecurityGroupsToLoadBalancerRequest {
+func (c *Client) ApplySecurityGroupsToLoadBalancerRequest(input *types.ApplySecurityGroupsToLoadBalancerInput) ApplySecurityGroupsToLoadBalancerRequest {
 	op := &aws.Operation{
 		Name:       opApplySecurityGroupsToLoadBalancer,
 		HTTPMethod: "POST",
@@ -89,10 +37,10 @@ func (c *Client) ApplySecurityGroupsToLoadBalancerRequest(input *ApplySecurityGr
 	}
 
 	if input == nil {
-		input = &ApplySecurityGroupsToLoadBalancerInput{}
+		input = &types.ApplySecurityGroupsToLoadBalancerInput{}
 	}
 
-	req := c.newRequest(op, input, &ApplySecurityGroupsToLoadBalancerOutput{})
+	req := c.newRequest(op, input, &types.ApplySecurityGroupsToLoadBalancerOutput{})
 	return ApplySecurityGroupsToLoadBalancerRequest{Request: req, Input: input, Copy: c.ApplySecurityGroupsToLoadBalancerRequest}
 }
 
@@ -100,8 +48,8 @@ func (c *Client) ApplySecurityGroupsToLoadBalancerRequest(input *ApplySecurityGr
 // ApplySecurityGroupsToLoadBalancer API operation.
 type ApplySecurityGroupsToLoadBalancerRequest struct {
 	*aws.Request
-	Input *ApplySecurityGroupsToLoadBalancerInput
-	Copy  func(*ApplySecurityGroupsToLoadBalancerInput) ApplySecurityGroupsToLoadBalancerRequest
+	Input *types.ApplySecurityGroupsToLoadBalancerInput
+	Copy  func(*types.ApplySecurityGroupsToLoadBalancerInput) ApplySecurityGroupsToLoadBalancerRequest
 }
 
 // Send marshals and sends the ApplySecurityGroupsToLoadBalancer API request.
@@ -113,7 +61,7 @@ func (r ApplySecurityGroupsToLoadBalancerRequest) Send(ctx context.Context) (*Ap
 	}
 
 	resp := &ApplySecurityGroupsToLoadBalancerResponse{
-		ApplySecurityGroupsToLoadBalancerOutput: r.Request.Data.(*ApplySecurityGroupsToLoadBalancerOutput),
+		ApplySecurityGroupsToLoadBalancerOutput: r.Request.Data.(*types.ApplySecurityGroupsToLoadBalancerOutput),
 		response:                                &aws.Response{Request: r.Request},
 	}
 
@@ -123,7 +71,7 @@ func (r ApplySecurityGroupsToLoadBalancerRequest) Send(ctx context.Context) (*Ap
 // ApplySecurityGroupsToLoadBalancerResponse is the response type for the
 // ApplySecurityGroupsToLoadBalancer API operation.
 type ApplySecurityGroupsToLoadBalancerResponse struct {
-	*ApplySecurityGroupsToLoadBalancerOutput
+	*types.ApplySecurityGroupsToLoadBalancerOutput
 
 	response *aws.Response
 }

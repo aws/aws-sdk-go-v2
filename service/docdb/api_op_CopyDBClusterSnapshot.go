@@ -6,142 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/docdb/types"
 )
-
-// Represents the input to CopyDBClusterSnapshot.
-type CopyDBClusterSnapshotInput struct {
-	_ struct{} `type:"structure"`
-
-	// Set to true to copy all tags from the source DB cluster snapshot to the target
-	// DB cluster snapshot, and otherwise false. The default is false.
-	CopyTags *bool `type:"boolean"`
-
-	// The AWS KMS key ID for an encrypted DB cluster snapshot. The AWS KMS key
-	// ID is the Amazon Resource Name (ARN), AWS KMS key identifier, or the AWS
-	// KMS key alias for the AWS KMS encryption key.
-	//
-	// If you copy an encrypted DB cluster snapshot from your AWS account, you can
-	// specify a value for KmsKeyId to encrypt the copy with a new AWS KMS encryption
-	// key. If you don't specify a value for KmsKeyId, then the copy of the DB cluster
-	// snapshot is encrypted with the same AWS KMS key as the source DB cluster
-	// snapshot.
-	//
-	// If you copy an encrypted DB cluster snapshot that is shared from another
-	// AWS account, then you must specify a value for KmsKeyId.
-	//
-	// To copy an encrypted DB cluster snapshot to another AWS Region, set KmsKeyId
-	// to the AWS KMS key ID that you want to use to encrypt the copy of the DB
-	// cluster snapshot in the destination Region. AWS KMS encryption keys are specific
-	// to the AWS Region that they are created in, and you can't use encryption
-	// keys from one Region in another Region.
-	//
-	// If you copy an unencrypted DB cluster snapshot and specify a value for the
-	// KmsKeyId parameter, an error is returned.
-	KmsKeyId *string `type:"string"`
-
-	// The URL that contains a Signature Version 4 signed request for the CopyDBClusterSnapshot
-	// API action in the AWS Region that contains the source DB cluster snapshot
-	// to copy. You must use the PreSignedUrl parameter when copying an encrypted
-	// DB cluster snapshot from another AWS Region.
-	//
-	// The presigned URL must be a valid request for the CopyDBSClusterSnapshot
-	// API action that can be executed in the source AWS Region that contains the
-	// encrypted DB cluster snapshot to be copied. The presigned URL request must
-	// contain the following parameter values:
-	//
-	//    * KmsKeyId - The AWS KMS key identifier for the key to use to encrypt
-	//    the copy of the DB cluster snapshot in the destination AWS Region. This
-	//    is the same identifier for both the CopyDBClusterSnapshot action that
-	//    is called in the destination AWS Region, and the action contained in the
-	//    presigned URL.
-	//
-	//    * DestinationRegion - The name of the AWS Region that the DB cluster snapshot
-	//    will be created in.
-	//
-	//    * SourceDBClusterSnapshotIdentifier - The DB cluster snapshot identifier
-	//    for the encrypted DB cluster snapshot to be copied. This identifier must
-	//    be in the Amazon Resource Name (ARN) format for the source AWS Region.
-	//    For example, if you are copying an encrypted DB cluster snapshot from
-	//    the us-west-2 AWS Region, then your SourceDBClusterSnapshotIdentifier
-	//    looks like the following example: arn:aws:rds:us-west-2:123456789012:cluster-snapshot:my-cluster-snapshot-20161115.
-	PreSignedUrl *string `type:"string"`
-
-	// The identifier of the DB cluster snapshot to copy. This parameter is not
-	// case sensitive.
-	//
-	// You can't copy an encrypted, shared DB cluster snapshot from one AWS Region
-	// to another.
-	//
-	// Constraints:
-	//
-	//    * Must specify a valid system snapshot in the "available" state.
-	//
-	//    * If the source snapshot is in the same AWS Region as the copy, specify
-	//    a valid DB snapshot identifier.
-	//
-	//    * If the source snapshot is in a different AWS Region than the copy, specify
-	//    a valid DB cluster snapshot ARN.
-	//
-	// Example: my-cluster-snapshot1
-	//
-	// SourceDBClusterSnapshotIdentifier is a required field
-	SourceDBClusterSnapshotIdentifier *string `type:"string" required:"true"`
-
-	// The tags to be assigned to the DB cluster snapshot.
-	Tags []Tag `locationNameList:"Tag" type:"list"`
-
-	// The identifier of the new DB cluster snapshot to create from the source DB
-	// cluster snapshot. This parameter is not case sensitive.
-	//
-	// Constraints:
-	//
-	//    * Must contain from 1 to 63 letters, numbers, or hyphens.
-	//
-	//    * The first character must be a letter.
-	//
-	//    * Cannot end with a hyphen or contain two consecutive hyphens.
-	//
-	// Example: my-cluster-snapshot2
-	//
-	// TargetDBClusterSnapshotIdentifier is a required field
-	TargetDBClusterSnapshotIdentifier *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s CopyDBClusterSnapshotInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CopyDBClusterSnapshotInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CopyDBClusterSnapshotInput"}
-
-	if s.SourceDBClusterSnapshotIdentifier == nil {
-		invalidParams.Add(aws.NewErrParamRequired("SourceDBClusterSnapshotIdentifier"))
-	}
-
-	if s.TargetDBClusterSnapshotIdentifier == nil {
-		invalidParams.Add(aws.NewErrParamRequired("TargetDBClusterSnapshotIdentifier"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type CopyDBClusterSnapshotOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Detailed information about a DB cluster snapshot.
-	DBClusterSnapshot *DBClusterSnapshot `type:"structure"`
-}
-
-// String returns the string representation
-func (s CopyDBClusterSnapshotOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCopyDBClusterSnapshot = "CopyDBClusterSnapshot"
 
@@ -165,7 +31,7 @@ const opCopyDBClusterSnapshot = "CopyDBClusterSnapshot"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/CopyDBClusterSnapshot
-func (c *Client) CopyDBClusterSnapshotRequest(input *CopyDBClusterSnapshotInput) CopyDBClusterSnapshotRequest {
+func (c *Client) CopyDBClusterSnapshotRequest(input *types.CopyDBClusterSnapshotInput) CopyDBClusterSnapshotRequest {
 	op := &aws.Operation{
 		Name:       opCopyDBClusterSnapshot,
 		HTTPMethod: "POST",
@@ -173,10 +39,10 @@ func (c *Client) CopyDBClusterSnapshotRequest(input *CopyDBClusterSnapshotInput)
 	}
 
 	if input == nil {
-		input = &CopyDBClusterSnapshotInput{}
+		input = &types.CopyDBClusterSnapshotInput{}
 	}
 
-	req := c.newRequest(op, input, &CopyDBClusterSnapshotOutput{})
+	req := c.newRequest(op, input, &types.CopyDBClusterSnapshotOutput{})
 	return CopyDBClusterSnapshotRequest{Request: req, Input: input, Copy: c.CopyDBClusterSnapshotRequest}
 }
 
@@ -184,8 +50,8 @@ func (c *Client) CopyDBClusterSnapshotRequest(input *CopyDBClusterSnapshotInput)
 // CopyDBClusterSnapshot API operation.
 type CopyDBClusterSnapshotRequest struct {
 	*aws.Request
-	Input *CopyDBClusterSnapshotInput
-	Copy  func(*CopyDBClusterSnapshotInput) CopyDBClusterSnapshotRequest
+	Input *types.CopyDBClusterSnapshotInput
+	Copy  func(*types.CopyDBClusterSnapshotInput) CopyDBClusterSnapshotRequest
 }
 
 // Send marshals and sends the CopyDBClusterSnapshot API request.
@@ -197,7 +63,7 @@ func (r CopyDBClusterSnapshotRequest) Send(ctx context.Context) (*CopyDBClusterS
 	}
 
 	resp := &CopyDBClusterSnapshotResponse{
-		CopyDBClusterSnapshotOutput: r.Request.Data.(*CopyDBClusterSnapshotOutput),
+		CopyDBClusterSnapshotOutput: r.Request.Data.(*types.CopyDBClusterSnapshotOutput),
 		response:                    &aws.Response{Request: r.Request},
 	}
 
@@ -207,7 +73,7 @@ func (r CopyDBClusterSnapshotRequest) Send(ctx context.Context) (*CopyDBClusterS
 // CopyDBClusterSnapshotResponse is the response type for the
 // CopyDBClusterSnapshot API operation.
 type CopyDBClusterSnapshotResponse struct {
-	*CopyDBClusterSnapshotOutput
+	*types.CopyDBClusterSnapshotOutput
 
 	response *aws.Response
 }

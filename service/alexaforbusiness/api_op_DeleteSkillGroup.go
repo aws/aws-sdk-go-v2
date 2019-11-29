@@ -6,29 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/alexaforbusiness/types"
 )
-
-type DeleteSkillGroupInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ARN of the skill group to delete. Required.
-	SkillGroupArn *string `type:"string"`
-}
-
-// String returns the string representation
-func (s DeleteSkillGroupInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type DeleteSkillGroupOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteSkillGroupOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteSkillGroup = "DeleteSkillGroup"
 
@@ -45,7 +24,7 @@ const opDeleteSkillGroup = "DeleteSkillGroup"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/DeleteSkillGroup
-func (c *Client) DeleteSkillGroupRequest(input *DeleteSkillGroupInput) DeleteSkillGroupRequest {
+func (c *Client) DeleteSkillGroupRequest(input *types.DeleteSkillGroupInput) DeleteSkillGroupRequest {
 	op := &aws.Operation{
 		Name:       opDeleteSkillGroup,
 		HTTPMethod: "POST",
@@ -53,10 +32,10 @@ func (c *Client) DeleteSkillGroupRequest(input *DeleteSkillGroupInput) DeleteSki
 	}
 
 	if input == nil {
-		input = &DeleteSkillGroupInput{}
+		input = &types.DeleteSkillGroupInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteSkillGroupOutput{})
+	req := c.newRequest(op, input, &types.DeleteSkillGroupOutput{})
 	return DeleteSkillGroupRequest{Request: req, Input: input, Copy: c.DeleteSkillGroupRequest}
 }
 
@@ -64,8 +43,8 @@ func (c *Client) DeleteSkillGroupRequest(input *DeleteSkillGroupInput) DeleteSki
 // DeleteSkillGroup API operation.
 type DeleteSkillGroupRequest struct {
 	*aws.Request
-	Input *DeleteSkillGroupInput
-	Copy  func(*DeleteSkillGroupInput) DeleteSkillGroupRequest
+	Input *types.DeleteSkillGroupInput
+	Copy  func(*types.DeleteSkillGroupInput) DeleteSkillGroupRequest
 }
 
 // Send marshals and sends the DeleteSkillGroup API request.
@@ -77,7 +56,7 @@ func (r DeleteSkillGroupRequest) Send(ctx context.Context) (*DeleteSkillGroupRes
 	}
 
 	resp := &DeleteSkillGroupResponse{
-		DeleteSkillGroupOutput: r.Request.Data.(*DeleteSkillGroupOutput),
+		DeleteSkillGroupOutput: r.Request.Data.(*types.DeleteSkillGroupOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -87,7 +66,7 @@ func (r DeleteSkillGroupRequest) Send(ctx context.Context) (*DeleteSkillGroupRes
 // DeleteSkillGroupResponse is the response type for the
 // DeleteSkillGroup API operation.
 type DeleteSkillGroupResponse struct {
-	*DeleteSkillGroupOutput
+	*types.DeleteSkillGroupOutput
 
 	response *aws.Response
 }

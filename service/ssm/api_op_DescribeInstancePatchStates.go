@@ -6,62 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ssm/types"
 )
-
-type DescribeInstancePatchStatesInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the instance whose patch state information should be retrieved.
-	//
-	// InstanceIds is a required field
-	InstanceIds []string `type:"list" required:"true"`
-
-	// The maximum number of instances to return (per page).
-	MaxResults *int64 `min:"10" type:"integer"`
-
-	// The token for the next set of items to return. (You received this token from
-	// a previous call.)
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeInstancePatchStatesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeInstancePatchStatesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeInstancePatchStatesInput"}
-
-	if s.InstanceIds == nil {
-		invalidParams.Add(aws.NewErrParamRequired("InstanceIds"))
-	}
-	if s.MaxResults != nil && *s.MaxResults < 10 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 10))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribeInstancePatchStatesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The high-level patch state for the requested instances.
-	InstancePatchStates []InstancePatchState `type:"list"`
-
-	// The token to use when requesting the next set of items. If there are no additional
-	// items to return, the string is empty.
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeInstancePatchStatesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeInstancePatchStates = "DescribeInstancePatchStates"
 
@@ -78,7 +24,7 @@ const opDescribeInstancePatchStates = "DescribeInstancePatchStates"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeInstancePatchStates
-func (c *Client) DescribeInstancePatchStatesRequest(input *DescribeInstancePatchStatesInput) DescribeInstancePatchStatesRequest {
+func (c *Client) DescribeInstancePatchStatesRequest(input *types.DescribeInstancePatchStatesInput) DescribeInstancePatchStatesRequest {
 	op := &aws.Operation{
 		Name:       opDescribeInstancePatchStates,
 		HTTPMethod: "POST",
@@ -86,10 +32,10 @@ func (c *Client) DescribeInstancePatchStatesRequest(input *DescribeInstancePatch
 	}
 
 	if input == nil {
-		input = &DescribeInstancePatchStatesInput{}
+		input = &types.DescribeInstancePatchStatesInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeInstancePatchStatesOutput{})
+	req := c.newRequest(op, input, &types.DescribeInstancePatchStatesOutput{})
 	return DescribeInstancePatchStatesRequest{Request: req, Input: input, Copy: c.DescribeInstancePatchStatesRequest}
 }
 
@@ -97,8 +43,8 @@ func (c *Client) DescribeInstancePatchStatesRequest(input *DescribeInstancePatch
 // DescribeInstancePatchStates API operation.
 type DescribeInstancePatchStatesRequest struct {
 	*aws.Request
-	Input *DescribeInstancePatchStatesInput
-	Copy  func(*DescribeInstancePatchStatesInput) DescribeInstancePatchStatesRequest
+	Input *types.DescribeInstancePatchStatesInput
+	Copy  func(*types.DescribeInstancePatchStatesInput) DescribeInstancePatchStatesRequest
 }
 
 // Send marshals and sends the DescribeInstancePatchStates API request.
@@ -110,7 +56,7 @@ func (r DescribeInstancePatchStatesRequest) Send(ctx context.Context) (*Describe
 	}
 
 	resp := &DescribeInstancePatchStatesResponse{
-		DescribeInstancePatchStatesOutput: r.Request.Data.(*DescribeInstancePatchStatesOutput),
+		DescribeInstancePatchStatesOutput: r.Request.Data.(*types.DescribeInstancePatchStatesOutput),
 		response:                          &aws.Response{Request: r.Request},
 	}
 
@@ -120,7 +66,7 @@ func (r DescribeInstancePatchStatesRequest) Send(ctx context.Context) (*Describe
 // DescribeInstancePatchStatesResponse is the response type for the
 // DescribeInstancePatchStates API operation.
 type DescribeInstancePatchStatesResponse struct {
-	*DescribeInstancePatchStatesOutput
+	*types.DescribeInstancePatchStatesOutput
 
 	response *aws.Response
 }

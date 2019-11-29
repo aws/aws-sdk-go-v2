@@ -12,6 +12,8 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws/awserr"
 	"github.com/aws/aws-sdk-go-v2/aws/external"
 	"github.com/aws/aws-sdk-go-v2/service/applicationautoscaling"
+	"github.com/aws/aws-sdk-go-v2/service/applicationautoscaling/enums"
+	"github.com/aws/aws-sdk-go-v2/service/applicationautoscaling/types"
 )
 
 var _ time.Duration
@@ -37,11 +39,11 @@ func ExampleClient_DeleteScalingPolicyRequest_shared00() {
 	}
 
 	svc := applicationautoscaling.New(cfg)
-	input := &applicationautoscaling.DeleteScalingPolicyInput{
+	input := &types.DeleteScalingPolicyInput{
 		PolicyName:        aws.String("web-app-cpu-lt-25"),
 		ResourceId:        aws.String("service/default/web-app"),
-		ScalableDimension: applicationautoscaling.ScalableDimensionEcsServiceDesiredCount,
-		ServiceNamespace:  applicationautoscaling.ServiceNamespaceEcs,
+		ScalableDimension: enums.ScalableDimensionEcsServiceDesiredCount,
+		ServiceNamespace:  enums.ServiceNamespaceEcs,
 	}
 
 	req := svc.DeleteScalingPolicyRequest(input)
@@ -82,10 +84,10 @@ func ExampleClient_DeregisterScalableTargetRequest_shared00() {
 	}
 
 	svc := applicationautoscaling.New(cfg)
-	input := &applicationautoscaling.DeregisterScalableTargetInput{
+	input := &types.DeregisterScalableTargetInput{
 		ResourceId:        aws.String("service/default/web-app"),
-		ScalableDimension: applicationautoscaling.ScalableDimensionEcsServiceDesiredCount,
-		ServiceNamespace:  applicationautoscaling.ServiceNamespaceEcs,
+		ScalableDimension: enums.ScalableDimensionEcsServiceDesiredCount,
+		ServiceNamespace:  enums.ServiceNamespaceEcs,
 	}
 
 	req := svc.DeregisterScalableTargetRequest(input)
@@ -125,8 +127,8 @@ func ExampleClient_DescribeScalableTargetsRequest_shared00() {
 	}
 
 	svc := applicationautoscaling.New(cfg)
-	input := &applicationautoscaling.DescribeScalableTargetsInput{
-		ServiceNamespace: applicationautoscaling.ServiceNamespaceEcs,
+	input := &types.DescribeScalableTargetsInput{
+		ServiceNamespace: enums.ServiceNamespaceEcs,
 	}
 
 	req := svc.DescribeScalableTargetsRequest(input)
@@ -167,10 +169,10 @@ func ExampleClient_DescribeScalingActivitiesRequest_shared00() {
 	}
 
 	svc := applicationautoscaling.New(cfg)
-	input := &applicationautoscaling.DescribeScalingActivitiesInput{
+	input := &types.DescribeScalingActivitiesInput{
 		ResourceId:        aws.String("service/default/web-app"),
-		ScalableDimension: applicationautoscaling.ScalableDimensionEcsServiceDesiredCount,
-		ServiceNamespace:  applicationautoscaling.ServiceNamespaceEcs,
+		ScalableDimension: enums.ScalableDimensionEcsServiceDesiredCount,
+		ServiceNamespace:  enums.ServiceNamespaceEcs,
 	}
 
 	req := svc.DescribeScalingActivitiesRequest(input)
@@ -210,8 +212,8 @@ func ExampleClient_DescribeScalingPoliciesRequest_shared00() {
 	}
 
 	svc := applicationautoscaling.New(cfg)
-	input := &applicationautoscaling.DescribeScalingPoliciesInput{
-		ServiceNamespace: applicationautoscaling.ServiceNamespaceEcs,
+	input := &types.DescribeScalingPoliciesInput{
+		ServiceNamespace: enums.ServiceNamespaceEcs,
 	}
 
 	req := svc.DescribeScalingPoliciesRequest(input)
@@ -256,15 +258,15 @@ func ExampleClient_PutScalingPolicyRequest_shared00() {
 	}
 
 	svc := applicationautoscaling.New(cfg)
-	input := &applicationautoscaling.PutScalingPolicyInput{
+	input := &types.PutScalingPolicyInput{
 		PolicyName:        aws.String("cpu75-target-tracking-scaling-policy"),
-		PolicyType:        applicationautoscaling.PolicyTypeTargetTrackingScaling,
+		PolicyType:        enums.PolicyTypeTargetTrackingScaling,
 		ResourceId:        aws.String("service/default/web-app"),
-		ScalableDimension: applicationautoscaling.ScalableDimensionEcsServiceDesiredCount,
-		ServiceNamespace:  applicationautoscaling.ServiceNamespaceEcs,
-		TargetTrackingScalingPolicyConfiguration: &applicationautoscaling.TargetTrackingScalingPolicyConfiguration{
-			PredefinedMetricSpecification: &applicationautoscaling.PredefinedMetricSpecification{
-				PredefinedMetricType: applicationautoscaling.MetricTypeEcsserviceAverageCpuutilization,
+		ScalableDimension: enums.ScalableDimensionEcsServiceDesiredCount,
+		ServiceNamespace:  enums.ServiceNamespaceEcs,
+		TargetTrackingScalingPolicyConfiguration: &types.TargetTrackingScalingPolicyConfiguration{
+			PredefinedMetricSpecification: &types.PredefinedMetricSpecification{
+				PredefinedMetricType: enums.MetricTypeEcsserviceAverageCpuutilization,
 			},
 			ScaleInCooldown:  aws.Int64(60),
 			ScaleOutCooldown: aws.Int64(60),
@@ -316,15 +318,15 @@ func ExampleClient_PutScalingPolicyRequest_shared01() {
 	}
 
 	svc := applicationautoscaling.New(cfg)
-	input := &applicationautoscaling.PutScalingPolicyInput{
+	input := &types.PutScalingPolicyInput{
 		PolicyName:        aws.String("cms75-target-tracking-scaling-policy"),
-		PolicyType:        applicationautoscaling.PolicyTypeTargetTrackingScaling,
+		PolicyType:        enums.PolicyTypeTargetTrackingScaling,
 		ResourceId:        aws.String("service/default/web-app"),
-		ScalableDimension: applicationautoscaling.ScalableDimensionEcsServiceDesiredCount,
-		ServiceNamespace:  applicationautoscaling.ServiceNamespaceEcs,
-		TargetTrackingScalingPolicyConfiguration: &applicationautoscaling.TargetTrackingScalingPolicyConfiguration{
-			CustomizedMetricSpecification: &applicationautoscaling.CustomizedMetricSpecification{
-				Dimensions: []applicationautoscaling.MetricDimension{
+		ScalableDimension: enums.ScalableDimensionEcsServiceDesiredCount,
+		ServiceNamespace:  enums.ServiceNamespaceEcs,
+		TargetTrackingScalingPolicyConfiguration: &types.TargetTrackingScalingPolicyConfiguration{
+			CustomizedMetricSpecification: &types.CustomizedMetricSpecification{
+				Dimensions: []types.MetricDimension{
 					{
 						Name:  aws.String("MyOptionalMetricDimensionName"),
 						Value: aws.String("MyOptionalMetricDimensionValue"),
@@ -332,7 +334,7 @@ func ExampleClient_PutScalingPolicyRequest_shared01() {
 				},
 				MetricName: aws.String("MyUtilizationMetric"),
 				Namespace:  aws.String("MyNamespace"),
-				Statistic:  applicationautoscaling.MetricStatisticAverage,
+				Statistic:  enums.MetricStatisticAverage,
 				Unit:       aws.String("Percent"),
 			},
 			ScaleInCooldown:  aws.Int64(60),
@@ -385,16 +387,16 @@ func ExampleClient_PutScalingPolicyRequest_shared02() {
 	}
 
 	svc := applicationautoscaling.New(cfg)
-	input := &applicationautoscaling.PutScalingPolicyInput{
+	input := &types.PutScalingPolicyInput{
 		PolicyName:        aws.String("alb-scale-out-target-tracking-scaling-policy"),
-		PolicyType:        applicationautoscaling.PolicyTypeTargetTrackingScaling,
+		PolicyType:        enums.PolicyTypeTargetTrackingScaling,
 		ResourceId:        aws.String("service/default/web-app"),
-		ScalableDimension: applicationautoscaling.ScalableDimensionEcsServiceDesiredCount,
-		ServiceNamespace:  applicationautoscaling.ServiceNamespaceEcs,
-		TargetTrackingScalingPolicyConfiguration: &applicationautoscaling.TargetTrackingScalingPolicyConfiguration{
+		ScalableDimension: enums.ScalableDimensionEcsServiceDesiredCount,
+		ServiceNamespace:  enums.ServiceNamespaceEcs,
+		TargetTrackingScalingPolicyConfiguration: &types.TargetTrackingScalingPolicyConfiguration{
 			DisableScaleIn: aws.Bool(true),
-			PredefinedMetricSpecification: &applicationautoscaling.PredefinedMetricSpecification{
-				PredefinedMetricType: applicationautoscaling.MetricTypeAlbrequestCountPerTarget,
+			PredefinedMetricSpecification: &types.PredefinedMetricSpecification{
+				PredefinedMetricType: enums.MetricTypeAlbrequestCountPerTarget,
 				ResourceLabel:        aws.String("app/EC2Co-EcsEl-1TKLTMITMM0EO/f37c06a68c1748aa/targetgroup/EC2Co-Defau-LDNM7Q3ZH1ZN/6d4ea56ca2d6a18d"),
 			},
 			ScaleInCooldown:  aws.Int64(60),
@@ -446,16 +448,16 @@ func ExampleClient_PutScalingPolicyRequest_shared03() {
 	}
 
 	svc := applicationautoscaling.New(cfg)
-	input := &applicationautoscaling.PutScalingPolicyInput{
+	input := &types.PutScalingPolicyInput{
 		PolicyName:        aws.String("web-app-cpu-gt-75"),
-		PolicyType:        applicationautoscaling.PolicyTypeStepScaling,
+		PolicyType:        enums.PolicyTypeStepScaling,
 		ResourceId:        aws.String("service/default/web-app"),
-		ScalableDimension: applicationautoscaling.ScalableDimensionEcsServiceDesiredCount,
-		ServiceNamespace:  applicationautoscaling.ServiceNamespaceEcs,
-		StepScalingPolicyConfiguration: &applicationautoscaling.StepScalingPolicyConfiguration{
-			AdjustmentType: applicationautoscaling.AdjustmentTypePercentChangeInCapacity,
+		ScalableDimension: enums.ScalableDimensionEcsServiceDesiredCount,
+		ServiceNamespace:  enums.ServiceNamespaceEcs,
+		StepScalingPolicyConfiguration: &types.StepScalingPolicyConfiguration{
+			AdjustmentType: enums.AdjustmentTypePercentChangeInCapacity,
 			Cooldown:       aws.Int64(60),
-			StepAdjustments: []applicationautoscaling.StepAdjustment{
+			StepAdjustments: []types.StepAdjustment{
 				{
 					MetricIntervalLowerBound: aws.Float64(0.000000),
 					ScalingAdjustment:        aws.Int64(200),
@@ -507,16 +509,16 @@ func ExampleClient_PutScalingPolicyRequest_shared04() {
 	}
 
 	svc := applicationautoscaling.New(cfg)
-	input := &applicationautoscaling.PutScalingPolicyInput{
+	input := &types.PutScalingPolicyInput{
 		PolicyName:        aws.String("fleet-cpu-gt-75"),
-		PolicyType:        applicationautoscaling.PolicyTypeStepScaling,
+		PolicyType:        enums.PolicyTypeStepScaling,
 		ResourceId:        aws.String("spot-fleet-request/sfr-45e69d8a-be48-4539-bbf3-3464e99c50c3"),
-		ScalableDimension: applicationautoscaling.ScalableDimensionEc2SpotFleetRequestTargetCapacity,
-		ServiceNamespace:  applicationautoscaling.ServiceNamespaceEc2,
-		StepScalingPolicyConfiguration: &applicationautoscaling.StepScalingPolicyConfiguration{
-			AdjustmentType: applicationautoscaling.AdjustmentTypePercentChangeInCapacity,
+		ScalableDimension: enums.ScalableDimensionEc2SpotFleetRequestTargetCapacity,
+		ServiceNamespace:  enums.ServiceNamespaceEc2,
+		StepScalingPolicyConfiguration: &types.StepScalingPolicyConfiguration{
+			AdjustmentType: enums.AdjustmentTypePercentChangeInCapacity,
 			Cooldown:       aws.Int64(180),
-			StepAdjustments: []applicationautoscaling.StepAdjustment{
+			StepAdjustments: []types.StepAdjustment{
 				{
 					MetricIntervalLowerBound: aws.Float64(0.000000),
 					ScalingAdjustment:        aws.Int64(200),
@@ -568,12 +570,12 @@ func ExampleClient_RegisterScalableTargetRequest_shared00() {
 	}
 
 	svc := applicationautoscaling.New(cfg)
-	input := &applicationautoscaling.RegisterScalableTargetInput{
+	input := &types.RegisterScalableTargetInput{
 		MaxCapacity:       aws.Int64(10),
 		MinCapacity:       aws.Int64(1),
 		ResourceId:        aws.String("service/default/web-app"),
-		ScalableDimension: applicationautoscaling.ScalableDimensionEcsServiceDesiredCount,
-		ServiceNamespace:  applicationautoscaling.ServiceNamespaceEcs,
+		ScalableDimension: enums.ScalableDimensionEcsServiceDesiredCount,
+		ServiceNamespace:  enums.ServiceNamespaceEcs,
 	}
 
 	req := svc.RegisterScalableTargetRequest(input)
@@ -614,12 +616,12 @@ func ExampleClient_RegisterScalableTargetRequest_shared01() {
 	}
 
 	svc := applicationautoscaling.New(cfg)
-	input := &applicationautoscaling.RegisterScalableTargetInput{
+	input := &types.RegisterScalableTargetInput{
 		MaxCapacity:       aws.Int64(10),
 		MinCapacity:       aws.Int64(1),
 		ResourceId:        aws.String("spot-fleet-request/sfr-45e69d8a-be48-4539-bbf3-3464e99c50c3"),
-		ScalableDimension: applicationautoscaling.ScalableDimensionEc2SpotFleetRequestTargetCapacity,
-		ServiceNamespace:  applicationautoscaling.ServiceNamespaceEc2,
+		ScalableDimension: enums.ScalableDimensionEc2SpotFleetRequestTargetCapacity,
+		ServiceNamespace:  enums.ServiceNamespaceEc2,
 	}
 
 	req := svc.RegisterScalableTargetRequest(input)

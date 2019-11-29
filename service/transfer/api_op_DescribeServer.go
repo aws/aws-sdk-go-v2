@@ -6,50 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/transfer/types"
 )
-
-type DescribeServerInput struct {
-	_ struct{} `type:"structure"`
-
-	// A system-assigned unique identifier for an SFTP server.
-	//
-	// ServerId is a required field
-	ServerId *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeServerInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeServerInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeServerInput"}
-
-	if s.ServerId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ServerId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribeServerOutput struct {
-	_ struct{} `type:"structure"`
-
-	// An array containing the properties of the server with the ServerID you specified.
-	//
-	// Server is a required field
-	Server *DescribedServer `type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeServerOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeServer = "DescribeServer"
 
@@ -68,7 +26,7 @@ const opDescribeServer = "DescribeServer"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/DescribeServer
-func (c *Client) DescribeServerRequest(input *DescribeServerInput) DescribeServerRequest {
+func (c *Client) DescribeServerRequest(input *types.DescribeServerInput) DescribeServerRequest {
 	op := &aws.Operation{
 		Name:       opDescribeServer,
 		HTTPMethod: "POST",
@@ -76,10 +34,10 @@ func (c *Client) DescribeServerRequest(input *DescribeServerInput) DescribeServe
 	}
 
 	if input == nil {
-		input = &DescribeServerInput{}
+		input = &types.DescribeServerInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeServerOutput{})
+	req := c.newRequest(op, input, &types.DescribeServerOutput{})
 	return DescribeServerRequest{Request: req, Input: input, Copy: c.DescribeServerRequest}
 }
 
@@ -87,8 +45,8 @@ func (c *Client) DescribeServerRequest(input *DescribeServerInput) DescribeServe
 // DescribeServer API operation.
 type DescribeServerRequest struct {
 	*aws.Request
-	Input *DescribeServerInput
-	Copy  func(*DescribeServerInput) DescribeServerRequest
+	Input *types.DescribeServerInput
+	Copy  func(*types.DescribeServerInput) DescribeServerRequest
 }
 
 // Send marshals and sends the DescribeServer API request.
@@ -100,7 +58,7 @@ func (r DescribeServerRequest) Send(ctx context.Context) (*DescribeServerRespons
 	}
 
 	resp := &DescribeServerResponse{
-		DescribeServerOutput: r.Request.Data.(*DescribeServerOutput),
+		DescribeServerOutput: r.Request.Data.(*types.DescribeServerOutput),
 		response:             &aws.Response{Request: r.Request},
 	}
 
@@ -110,7 +68,7 @@ func (r DescribeServerRequest) Send(ctx context.Context) (*DescribeServerRespons
 // DescribeServerResponse is the response type for the
 // DescribeServer API operation.
 type DescribeServerResponse struct {
-	*DescribeServerOutput
+	*types.DescribeServerOutput
 
 	response *aws.Response
 }

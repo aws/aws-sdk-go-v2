@@ -6,75 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/devicefarm/types"
 )
-
-// Represents the result of a list device pools request.
-type ListDevicePoolsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The project ARN.
-	//
-	// Arn is a required field
-	Arn *string `locationName:"arn" min:"32" type:"string" required:"true"`
-
-	// An identifier that was returned from the previous call to this operation,
-	// which can be used to return the next set of items in the list.
-	NextToken *string `locationName:"nextToken" min:"4" type:"string"`
-
-	// The device pools' type.
-	//
-	// Allowed values include:
-	//
-	//    * CURATED: A device pool that is created and managed by AWS Device Farm.
-	//
-	//    * PRIVATE: A device pool that is created and managed by the device pool
-	//    developer.
-	Type DevicePoolType `locationName:"type" type:"string" enum:"true"`
-}
-
-// String returns the string representation
-func (s ListDevicePoolsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListDevicePoolsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListDevicePoolsInput"}
-
-	if s.Arn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Arn"))
-	}
-	if s.Arn != nil && len(*s.Arn) < 32 {
-		invalidParams.Add(aws.NewErrParamMinLen("Arn", 32))
-	}
-	if s.NextToken != nil && len(*s.NextToken) < 4 {
-		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 4))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Represents the result of a list device pools request.
-type ListDevicePoolsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Information about the device pools.
-	DevicePools []DevicePool `locationName:"devicePools" type:"list"`
-
-	// If the number of items that are returned is significantly large, this is
-	// an identifier that is also returned, which can be used in a subsequent call
-	// to this operation to return the next set of items in the list.
-	NextToken *string `locationName:"nextToken" min:"4" type:"string"`
-}
-
-// String returns the string representation
-func (s ListDevicePoolsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListDevicePools = "ListDevicePools"
 
@@ -91,7 +24,7 @@ const opListDevicePools = "ListDevicePools"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ListDevicePools
-func (c *Client) ListDevicePoolsRequest(input *ListDevicePoolsInput) ListDevicePoolsRequest {
+func (c *Client) ListDevicePoolsRequest(input *types.ListDevicePoolsInput) ListDevicePoolsRequest {
 	op := &aws.Operation{
 		Name:       opListDevicePools,
 		HTTPMethod: "POST",
@@ -105,10 +38,10 @@ func (c *Client) ListDevicePoolsRequest(input *ListDevicePoolsInput) ListDeviceP
 	}
 
 	if input == nil {
-		input = &ListDevicePoolsInput{}
+		input = &types.ListDevicePoolsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListDevicePoolsOutput{})
+	req := c.newRequest(op, input, &types.ListDevicePoolsOutput{})
 	return ListDevicePoolsRequest{Request: req, Input: input, Copy: c.ListDevicePoolsRequest}
 }
 
@@ -116,8 +49,8 @@ func (c *Client) ListDevicePoolsRequest(input *ListDevicePoolsInput) ListDeviceP
 // ListDevicePools API operation.
 type ListDevicePoolsRequest struct {
 	*aws.Request
-	Input *ListDevicePoolsInput
-	Copy  func(*ListDevicePoolsInput) ListDevicePoolsRequest
+	Input *types.ListDevicePoolsInput
+	Copy  func(*types.ListDevicePoolsInput) ListDevicePoolsRequest
 }
 
 // Send marshals and sends the ListDevicePools API request.
@@ -129,7 +62,7 @@ func (r ListDevicePoolsRequest) Send(ctx context.Context) (*ListDevicePoolsRespo
 	}
 
 	resp := &ListDevicePoolsResponse{
-		ListDevicePoolsOutput: r.Request.Data.(*ListDevicePoolsOutput),
+		ListDevicePoolsOutput: r.Request.Data.(*types.ListDevicePoolsOutput),
 		response:              &aws.Response{Request: r.Request},
 	}
 
@@ -159,7 +92,7 @@ func NewListDevicePoolsPaginator(req ListDevicePoolsRequest) ListDevicePoolsPagi
 	return ListDevicePoolsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListDevicePoolsInput
+				var inCpy *types.ListDevicePoolsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -179,14 +112,14 @@ type ListDevicePoolsPaginator struct {
 	aws.Pager
 }
 
-func (p *ListDevicePoolsPaginator) CurrentPage() *ListDevicePoolsOutput {
-	return p.Pager.CurrentPage().(*ListDevicePoolsOutput)
+func (p *ListDevicePoolsPaginator) CurrentPage() *types.ListDevicePoolsOutput {
+	return p.Pager.CurrentPage().(*types.ListDevicePoolsOutput)
 }
 
 // ListDevicePoolsResponse is the response type for the
 // ListDevicePools API operation.
 type ListDevicePoolsResponse struct {
-	*ListDevicePoolsOutput
+	*types.ListDevicePoolsOutput
 
 	response *aws.Response
 }

@@ -6,6 +6,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting/unit"
 	"github.com/aws/aws-sdk-go-v2/service/route53"
+	"github.com/aws/aws-sdk-go-v2/service/route53/types"
 )
 
 func TestBuildCorrectURI(t *testing.T) {
@@ -14,7 +15,7 @@ func TestBuildCorrectURI(t *testing.T) {
 	svc := route53.New(unit.Config())
 	svc.Handlers.Validate.Clear()
 
-	req := svc.GetHostedZoneRequest(&route53.GetHostedZoneInput{
+	req := svc.GetHostedZoneRequest(&types.GetHostedZoneInput{
 		Id: aws.String("/hostedzone/ABCDEFG"),
 	})
 

@@ -4,102 +4,10 @@ package iotthingsgraph
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/iotthingsgraph/types"
 )
-
-type CreateSystemInstanceInput struct {
-	_ struct{} `type:"structure"`
-
-	// A document that defines an entity.
-	//
-	// Definition is a required field
-	Definition *DefinitionDocument `locationName:"definition" type:"structure" required:"true"`
-
-	// The ARN of the IAM role that AWS IoT Things Graph will assume when it executes
-	// the flow. This role must have read and write access to AWS Lambda and AWS
-	// IoT and any other AWS services that the flow uses when it executes. This
-	// value is required if the value of the target parameter is CLOUD.
-	FlowActionsRoleArn *string `locationName:"flowActionsRoleArn" min:"20" type:"string"`
-
-	// The name of the Greengrass group where the system instance will be deployed.
-	// This value is required if the value of the target parameter is GREENGRASS.
-	GreengrassGroupName *string `locationName:"greengrassGroupName" type:"string"`
-
-	// An object that specifies whether cloud metrics are collected in a deployment
-	// and, if so, what role is used to collect metrics.
-	MetricsConfiguration *MetricsConfiguration `locationName:"metricsConfiguration" type:"structure"`
-
-	// The name of the Amazon Simple Storage Service bucket that will be used to
-	// store and deploy the system instance's resource file. This value is required
-	// if the value of the target parameter is GREENGRASS.
-	S3BucketName *string `locationName:"s3BucketName" type:"string"`
-
-	// Metadata, consisting of key-value pairs, that can be used to categorize your
-	// system instances.
-	Tags []Tag `locationName:"tags" type:"list"`
-
-	// The target type of the deployment. Valid values are GREENGRASS and CLOUD.
-	//
-	// Target is a required field
-	Target DeploymentTarget `locationName:"target" type:"string" required:"true" enum:"true"`
-}
-
-// String returns the string representation
-func (s CreateSystemInstanceInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateSystemInstanceInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateSystemInstanceInput"}
-
-	if s.Definition == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Definition"))
-	}
-	if s.FlowActionsRoleArn != nil && len(*s.FlowActionsRoleArn) < 20 {
-		invalidParams.Add(aws.NewErrParamMinLen("FlowActionsRoleArn", 20))
-	}
-	if len(s.Target) == 0 {
-		invalidParams.Add(aws.NewErrParamRequired("Target"))
-	}
-	if s.Definition != nil {
-		if err := s.Definition.Validate(); err != nil {
-			invalidParams.AddNested("Definition", err.(aws.ErrInvalidParams))
-		}
-	}
-	if s.MetricsConfiguration != nil {
-		if err := s.MetricsConfiguration.Validate(); err != nil {
-			invalidParams.AddNested("MetricsConfiguration", err.(aws.ErrInvalidParams))
-		}
-	}
-	if s.Tags != nil {
-		for i, v := range s.Tags {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type CreateSystemInstanceOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The summary object that describes the new system instance.
-	Summary *SystemInstanceSummary `locationName:"summary" type:"structure"`
-}
-
-// String returns the string representation
-func (s CreateSystemInstanceOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCreateSystemInstance = "CreateSystemInstance"
 
@@ -134,7 +42,7 @@ const opCreateSystemInstance = "CreateSystemInstance"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iotthingsgraph-2018-09-06/CreateSystemInstance
-func (c *Client) CreateSystemInstanceRequest(input *CreateSystemInstanceInput) CreateSystemInstanceRequest {
+func (c *Client) CreateSystemInstanceRequest(input *types.CreateSystemInstanceInput) CreateSystemInstanceRequest {
 	op := &aws.Operation{
 		Name:       opCreateSystemInstance,
 		HTTPMethod: "POST",
@@ -142,10 +50,10 @@ func (c *Client) CreateSystemInstanceRequest(input *CreateSystemInstanceInput) C
 	}
 
 	if input == nil {
-		input = &CreateSystemInstanceInput{}
+		input = &types.CreateSystemInstanceInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateSystemInstanceOutput{})
+	req := c.newRequest(op, input, &types.CreateSystemInstanceOutput{})
 	return CreateSystemInstanceRequest{Request: req, Input: input, Copy: c.CreateSystemInstanceRequest}
 }
 
@@ -153,8 +61,8 @@ func (c *Client) CreateSystemInstanceRequest(input *CreateSystemInstanceInput) C
 // CreateSystemInstance API operation.
 type CreateSystemInstanceRequest struct {
 	*aws.Request
-	Input *CreateSystemInstanceInput
-	Copy  func(*CreateSystemInstanceInput) CreateSystemInstanceRequest
+	Input *types.CreateSystemInstanceInput
+	Copy  func(*types.CreateSystemInstanceInput) CreateSystemInstanceRequest
 }
 
 // Send marshals and sends the CreateSystemInstance API request.
@@ -166,7 +74,7 @@ func (r CreateSystemInstanceRequest) Send(ctx context.Context) (*CreateSystemIns
 	}
 
 	resp := &CreateSystemInstanceResponse{
-		CreateSystemInstanceOutput: r.Request.Data.(*CreateSystemInstanceOutput),
+		CreateSystemInstanceOutput: r.Request.Data.(*types.CreateSystemInstanceOutput),
 		response:                   &aws.Response{Request: r.Request},
 	}
 
@@ -176,7 +84,7 @@ func (r CreateSystemInstanceRequest) Send(ctx context.Context) (*CreateSystemIns
 // CreateSystemInstanceResponse is the response type for the
 // CreateSystemInstance API operation.
 type CreateSystemInstanceResponse struct {
-	*CreateSystemInstanceOutput
+	*types.CreateSystemInstanceOutput
 
 	response *aws.Response
 }

@@ -6,68 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/query"
+	"github.com/aws/aws-sdk-go-v2/service/elasticbeanstalk/types"
 )
-
-// Request to delete an application version.
-type DeleteApplicationVersionInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the application to which the version belongs.
-	//
-	// ApplicationName is a required field
-	ApplicationName *string `min:"1" type:"string" required:"true"`
-
-	// Set to true to delete the source bundle from your storage bucket. Otherwise,
-	// the application version is deleted only from Elastic Beanstalk and the source
-	// bundle remains in Amazon S3.
-	DeleteSourceBundle *bool `type:"boolean"`
-
-	// The label of the version to delete.
-	//
-	// VersionLabel is a required field
-	VersionLabel *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteApplicationVersionInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteApplicationVersionInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteApplicationVersionInput"}
-
-	if s.ApplicationName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ApplicationName"))
-	}
-	if s.ApplicationName != nil && len(*s.ApplicationName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ApplicationName", 1))
-	}
-
-	if s.VersionLabel == nil {
-		invalidParams.Add(aws.NewErrParamRequired("VersionLabel"))
-	}
-	if s.VersionLabel != nil && len(*s.VersionLabel) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("VersionLabel", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteApplicationVersionOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteApplicationVersionOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteApplicationVersion = "DeleteApplicationVersion"
 
@@ -87,7 +29,7 @@ const opDeleteApplicationVersion = "DeleteApplicationVersion"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/DeleteApplicationVersion
-func (c *Client) DeleteApplicationVersionRequest(input *DeleteApplicationVersionInput) DeleteApplicationVersionRequest {
+func (c *Client) DeleteApplicationVersionRequest(input *types.DeleteApplicationVersionInput) DeleteApplicationVersionRequest {
 	op := &aws.Operation{
 		Name:       opDeleteApplicationVersion,
 		HTTPMethod: "POST",
@@ -95,10 +37,10 @@ func (c *Client) DeleteApplicationVersionRequest(input *DeleteApplicationVersion
 	}
 
 	if input == nil {
-		input = &DeleteApplicationVersionInput{}
+		input = &types.DeleteApplicationVersionInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteApplicationVersionOutput{})
+	req := c.newRequest(op, input, &types.DeleteApplicationVersionOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return DeleteApplicationVersionRequest{Request: req, Input: input, Copy: c.DeleteApplicationVersionRequest}
@@ -108,8 +50,8 @@ func (c *Client) DeleteApplicationVersionRequest(input *DeleteApplicationVersion
 // DeleteApplicationVersion API operation.
 type DeleteApplicationVersionRequest struct {
 	*aws.Request
-	Input *DeleteApplicationVersionInput
-	Copy  func(*DeleteApplicationVersionInput) DeleteApplicationVersionRequest
+	Input *types.DeleteApplicationVersionInput
+	Copy  func(*types.DeleteApplicationVersionInput) DeleteApplicationVersionRequest
 }
 
 // Send marshals and sends the DeleteApplicationVersion API request.
@@ -121,7 +63,7 @@ func (r DeleteApplicationVersionRequest) Send(ctx context.Context) (*DeleteAppli
 	}
 
 	resp := &DeleteApplicationVersionResponse{
-		DeleteApplicationVersionOutput: r.Request.Data.(*DeleteApplicationVersionOutput),
+		DeleteApplicationVersionOutput: r.Request.Data.(*types.DeleteApplicationVersionOutput),
 		response:                       &aws.Response{Request: r.Request},
 	}
 
@@ -131,7 +73,7 @@ func (r DeleteApplicationVersionRequest) Send(ctx context.Context) (*DeleteAppli
 // DeleteApplicationVersionResponse is the response type for the
 // DeleteApplicationVersion API operation.
 type DeleteApplicationVersionResponse struct {
-	*DeleteApplicationVersionOutput
+	*types.DeleteApplicationVersionOutput
 
 	response *aws.Response
 }

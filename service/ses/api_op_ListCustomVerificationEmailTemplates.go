@@ -6,64 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ses/types"
 )
-
-// Represents a request to list the existing custom verification email templates
-// for your account.
-//
-// For more information about custom verification email templates, see Using
-// Custom Verification Email Templates (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/custom-verification-emails.html)
-// in the Amazon SES Developer Guide.
-type ListCustomVerificationEmailTemplatesInput struct {
-	_ struct{} `type:"structure"`
-
-	// The maximum number of custom verification email templates to return. This
-	// value must be at least 1 and less than or equal to 50. If you do not specify
-	// a value, or if you specify a value less than 1 or greater than 50, the operation
-	// will return up to 50 results.
-	MaxResults *int64 `min:"1" type:"integer"`
-
-	// An array the contains the name and creation time stamp for each template
-	// in your Amazon SES account.
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s ListCustomVerificationEmailTemplatesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListCustomVerificationEmailTemplatesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListCustomVerificationEmailTemplatesInput"}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// A paginated list of custom verification email templates.
-type ListCustomVerificationEmailTemplatesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A list of the custom verification email templates that exist in your account.
-	CustomVerificationEmailTemplates []CustomVerificationEmailTemplate `type:"list"`
-
-	// A token indicating that there are additional custom verification email templates
-	// available to be listed. Pass this token to a subsequent call to ListTemplates
-	// to retrieve the next 50 custom verification email templates.
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s ListCustomVerificationEmailTemplatesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListCustomVerificationEmailTemplates = "ListCustomVerificationEmailTemplates"
 
@@ -87,7 +31,7 @@ const opListCustomVerificationEmailTemplates = "ListCustomVerificationEmailTempl
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/ListCustomVerificationEmailTemplates
-func (c *Client) ListCustomVerificationEmailTemplatesRequest(input *ListCustomVerificationEmailTemplatesInput) ListCustomVerificationEmailTemplatesRequest {
+func (c *Client) ListCustomVerificationEmailTemplatesRequest(input *types.ListCustomVerificationEmailTemplatesInput) ListCustomVerificationEmailTemplatesRequest {
 	op := &aws.Operation{
 		Name:       opListCustomVerificationEmailTemplates,
 		HTTPMethod: "POST",
@@ -101,10 +45,10 @@ func (c *Client) ListCustomVerificationEmailTemplatesRequest(input *ListCustomVe
 	}
 
 	if input == nil {
-		input = &ListCustomVerificationEmailTemplatesInput{}
+		input = &types.ListCustomVerificationEmailTemplatesInput{}
 	}
 
-	req := c.newRequest(op, input, &ListCustomVerificationEmailTemplatesOutput{})
+	req := c.newRequest(op, input, &types.ListCustomVerificationEmailTemplatesOutput{})
 	return ListCustomVerificationEmailTemplatesRequest{Request: req, Input: input, Copy: c.ListCustomVerificationEmailTemplatesRequest}
 }
 
@@ -112,8 +56,8 @@ func (c *Client) ListCustomVerificationEmailTemplatesRequest(input *ListCustomVe
 // ListCustomVerificationEmailTemplates API operation.
 type ListCustomVerificationEmailTemplatesRequest struct {
 	*aws.Request
-	Input *ListCustomVerificationEmailTemplatesInput
-	Copy  func(*ListCustomVerificationEmailTemplatesInput) ListCustomVerificationEmailTemplatesRequest
+	Input *types.ListCustomVerificationEmailTemplatesInput
+	Copy  func(*types.ListCustomVerificationEmailTemplatesInput) ListCustomVerificationEmailTemplatesRequest
 }
 
 // Send marshals and sends the ListCustomVerificationEmailTemplates API request.
@@ -125,7 +69,7 @@ func (r ListCustomVerificationEmailTemplatesRequest) Send(ctx context.Context) (
 	}
 
 	resp := &ListCustomVerificationEmailTemplatesResponse{
-		ListCustomVerificationEmailTemplatesOutput: r.Request.Data.(*ListCustomVerificationEmailTemplatesOutput),
+		ListCustomVerificationEmailTemplatesOutput: r.Request.Data.(*types.ListCustomVerificationEmailTemplatesOutput),
 		response: &aws.Response{Request: r.Request},
 	}
 
@@ -155,7 +99,7 @@ func NewListCustomVerificationEmailTemplatesPaginator(req ListCustomVerification
 	return ListCustomVerificationEmailTemplatesPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListCustomVerificationEmailTemplatesInput
+				var inCpy *types.ListCustomVerificationEmailTemplatesInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -175,14 +119,14 @@ type ListCustomVerificationEmailTemplatesPaginator struct {
 	aws.Pager
 }
 
-func (p *ListCustomVerificationEmailTemplatesPaginator) CurrentPage() *ListCustomVerificationEmailTemplatesOutput {
-	return p.Pager.CurrentPage().(*ListCustomVerificationEmailTemplatesOutput)
+func (p *ListCustomVerificationEmailTemplatesPaginator) CurrentPage() *types.ListCustomVerificationEmailTemplatesOutput {
+	return p.Pager.CurrentPage().(*types.ListCustomVerificationEmailTemplatesOutput)
 }
 
 // ListCustomVerificationEmailTemplatesResponse is the response type for the
 // ListCustomVerificationEmailTemplates API operation.
 type ListCustomVerificationEmailTemplatesResponse struct {
-	*ListCustomVerificationEmailTemplatesOutput
+	*types.ListCustomVerificationEmailTemplatesOutput
 
 	response *aws.Response
 }

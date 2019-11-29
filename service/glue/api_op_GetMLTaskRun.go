@@ -4,93 +4,10 @@ package glue
 
 import (
 	"context"
-	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/glue/types"
 )
-
-type GetMLTaskRunInput struct {
-	_ struct{} `type:"structure"`
-
-	// The unique identifier of the task run.
-	//
-	// TaskRunId is a required field
-	TaskRunId *string `min:"1" type:"string" required:"true"`
-
-	// The unique identifier of the machine learning transform.
-	//
-	// TransformId is a required field
-	TransformId *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetMLTaskRunInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetMLTaskRunInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetMLTaskRunInput"}
-
-	if s.TaskRunId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("TaskRunId"))
-	}
-	if s.TaskRunId != nil && len(*s.TaskRunId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("TaskRunId", 1))
-	}
-
-	if s.TransformId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("TransformId"))
-	}
-	if s.TransformId != nil && len(*s.TransformId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("TransformId", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type GetMLTaskRunOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The date and time when this task run was completed.
-	CompletedOn *time.Time `type:"timestamp"`
-
-	// The error strings that are associated with the task run.
-	ErrorString *string `type:"string"`
-
-	// The amount of time (in seconds) that the task run consumed resources.
-	ExecutionTime *int64 `type:"integer"`
-
-	// The date and time when this task run was last modified.
-	LastModifiedOn *time.Time `type:"timestamp"`
-
-	// The names of the log groups that are associated with the task run.
-	LogGroupName *string `type:"string"`
-
-	// The list of properties that are associated with the task run.
-	Properties *TaskRunProperties `type:"structure"`
-
-	// The date and time when this task run started.
-	StartedOn *time.Time `type:"timestamp"`
-
-	// The status for this task run.
-	Status TaskStatusType `type:"string" enum:"true"`
-
-	// The unique run identifier associated with this run.
-	TaskRunId *string `min:"1" type:"string"`
-
-	// The unique identifier of the task run.
-	TransformId *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s GetMLTaskRunOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetMLTaskRun = "GetMLTaskRun"
 
@@ -111,7 +28,7 @@ const opGetMLTaskRun = "GetMLTaskRun"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetMLTaskRun
-func (c *Client) GetMLTaskRunRequest(input *GetMLTaskRunInput) GetMLTaskRunRequest {
+func (c *Client) GetMLTaskRunRequest(input *types.GetMLTaskRunInput) GetMLTaskRunRequest {
 	op := &aws.Operation{
 		Name:       opGetMLTaskRun,
 		HTTPMethod: "POST",
@@ -119,10 +36,10 @@ func (c *Client) GetMLTaskRunRequest(input *GetMLTaskRunInput) GetMLTaskRunReque
 	}
 
 	if input == nil {
-		input = &GetMLTaskRunInput{}
+		input = &types.GetMLTaskRunInput{}
 	}
 
-	req := c.newRequest(op, input, &GetMLTaskRunOutput{})
+	req := c.newRequest(op, input, &types.GetMLTaskRunOutput{})
 	return GetMLTaskRunRequest{Request: req, Input: input, Copy: c.GetMLTaskRunRequest}
 }
 
@@ -130,8 +47,8 @@ func (c *Client) GetMLTaskRunRequest(input *GetMLTaskRunInput) GetMLTaskRunReque
 // GetMLTaskRun API operation.
 type GetMLTaskRunRequest struct {
 	*aws.Request
-	Input *GetMLTaskRunInput
-	Copy  func(*GetMLTaskRunInput) GetMLTaskRunRequest
+	Input *types.GetMLTaskRunInput
+	Copy  func(*types.GetMLTaskRunInput) GetMLTaskRunRequest
 }
 
 // Send marshals and sends the GetMLTaskRun API request.
@@ -143,7 +60,7 @@ func (r GetMLTaskRunRequest) Send(ctx context.Context) (*GetMLTaskRunResponse, e
 	}
 
 	resp := &GetMLTaskRunResponse{
-		GetMLTaskRunOutput: r.Request.Data.(*GetMLTaskRunOutput),
+		GetMLTaskRunOutput: r.Request.Data.(*types.GetMLTaskRunOutput),
 		response:           &aws.Response{Request: r.Request},
 	}
 
@@ -153,7 +70,7 @@ func (r GetMLTaskRunRequest) Send(ctx context.Context) (*GetMLTaskRunResponse, e
 // GetMLTaskRunResponse is the response type for the
 // GetMLTaskRun API operation.
 type GetMLTaskRunResponse struct {
-	*GetMLTaskRunOutput
+	*types.GetMLTaskRunOutput
 
 	response *aws.Response
 }

@@ -6,80 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/route53/types"
 )
-
-type GetQueryLoggingConfigInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the configuration for DNS query logging that you want to get information
-	// about.
-	//
-	// Id is a required field
-	Id *string `location:"uri" locationName:"Id" min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetQueryLoggingConfigInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetQueryLoggingConfigInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetQueryLoggingConfigInput"}
-
-	if s.Id == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Id"))
-	}
-	if s.Id != nil && len(*s.Id) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Id", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetQueryLoggingConfigInput) MarshalFields(e protocol.FieldEncoder) error {
-
-	if s.Id != nil {
-		v := *s.Id
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "Id", protocol.StringValue(v), metadata)
-	}
-	return nil
-}
-
-type GetQueryLoggingConfigOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A complex type that contains information about the query logging configuration
-	// that you specified in a GetQueryLoggingConfig (https://docs.aws.amazon.com/Route53/latest/APIReference/API_GetQueryLoggingConfig.html)
-	// request.
-	//
-	// QueryLoggingConfig is a required field
-	QueryLoggingConfig *QueryLoggingConfig `type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s GetQueryLoggingConfigOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetQueryLoggingConfigOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.QueryLoggingConfig != nil {
-		v := s.QueryLoggingConfig
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "QueryLoggingConfig", v, metadata)
-	}
-	return nil
-}
 
 const opGetQueryLoggingConfig = "GetQueryLoggingConfig"
 
@@ -99,7 +27,7 @@ const opGetQueryLoggingConfig = "GetQueryLoggingConfig"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/GetQueryLoggingConfig
-func (c *Client) GetQueryLoggingConfigRequest(input *GetQueryLoggingConfigInput) GetQueryLoggingConfigRequest {
+func (c *Client) GetQueryLoggingConfigRequest(input *types.GetQueryLoggingConfigInput) GetQueryLoggingConfigRequest {
 	op := &aws.Operation{
 		Name:       opGetQueryLoggingConfig,
 		HTTPMethod: "GET",
@@ -107,10 +35,10 @@ func (c *Client) GetQueryLoggingConfigRequest(input *GetQueryLoggingConfigInput)
 	}
 
 	if input == nil {
-		input = &GetQueryLoggingConfigInput{}
+		input = &types.GetQueryLoggingConfigInput{}
 	}
 
-	req := c.newRequest(op, input, &GetQueryLoggingConfigOutput{})
+	req := c.newRequest(op, input, &types.GetQueryLoggingConfigOutput{})
 	return GetQueryLoggingConfigRequest{Request: req, Input: input, Copy: c.GetQueryLoggingConfigRequest}
 }
 
@@ -118,8 +46,8 @@ func (c *Client) GetQueryLoggingConfigRequest(input *GetQueryLoggingConfigInput)
 // GetQueryLoggingConfig API operation.
 type GetQueryLoggingConfigRequest struct {
 	*aws.Request
-	Input *GetQueryLoggingConfigInput
-	Copy  func(*GetQueryLoggingConfigInput) GetQueryLoggingConfigRequest
+	Input *types.GetQueryLoggingConfigInput
+	Copy  func(*types.GetQueryLoggingConfigInput) GetQueryLoggingConfigRequest
 }
 
 // Send marshals and sends the GetQueryLoggingConfig API request.
@@ -131,7 +59,7 @@ func (r GetQueryLoggingConfigRequest) Send(ctx context.Context) (*GetQueryLoggin
 	}
 
 	resp := &GetQueryLoggingConfigResponse{
-		GetQueryLoggingConfigOutput: r.Request.Data.(*GetQueryLoggingConfigOutput),
+		GetQueryLoggingConfigOutput: r.Request.Data.(*types.GetQueryLoggingConfigOutput),
 		response:                    &aws.Response{Request: r.Request},
 	}
 
@@ -141,7 +69,7 @@ func (r GetQueryLoggingConfigRequest) Send(ctx context.Context) (*GetQueryLoggin
 // GetQueryLoggingConfigResponse is the response type for the
 // GetQueryLoggingConfig API operation.
 type GetQueryLoggingConfigResponse struct {
-	*GetQueryLoggingConfigOutput
+	*types.GetQueryLoggingConfigOutput
 
 	response *aws.Response
 }

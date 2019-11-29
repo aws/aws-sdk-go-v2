@@ -6,55 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ses/types"
 )
-
-// Represents a request to create a new IP address filter. You use IP address
-// filters when you receive email with Amazon SES. For more information, see
-// the Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-concepts.html).
-type CreateReceiptFilterInput struct {
-	_ struct{} `type:"structure"`
-
-	// A data structure that describes the IP address filter to create, which consists
-	// of a name, an IP address range, and whether to allow or block mail from it.
-	//
-	// Filter is a required field
-	Filter *ReceiptFilter `type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s CreateReceiptFilterInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateReceiptFilterInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateReceiptFilterInput"}
-
-	if s.Filter == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Filter"))
-	}
-	if s.Filter != nil {
-		if err := s.Filter.Validate(); err != nil {
-			invalidParams.AddNested("Filter", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// An empty element returned on a successful request.
-type CreateReceiptFilterOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s CreateReceiptFilterOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCreateReceiptFilter = "CreateReceiptFilter"
 
@@ -76,7 +29,7 @@ const opCreateReceiptFilter = "CreateReceiptFilter"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/CreateReceiptFilter
-func (c *Client) CreateReceiptFilterRequest(input *CreateReceiptFilterInput) CreateReceiptFilterRequest {
+func (c *Client) CreateReceiptFilterRequest(input *types.CreateReceiptFilterInput) CreateReceiptFilterRequest {
 	op := &aws.Operation{
 		Name:       opCreateReceiptFilter,
 		HTTPMethod: "POST",
@@ -84,10 +37,10 @@ func (c *Client) CreateReceiptFilterRequest(input *CreateReceiptFilterInput) Cre
 	}
 
 	if input == nil {
-		input = &CreateReceiptFilterInput{}
+		input = &types.CreateReceiptFilterInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateReceiptFilterOutput{})
+	req := c.newRequest(op, input, &types.CreateReceiptFilterOutput{})
 	return CreateReceiptFilterRequest{Request: req, Input: input, Copy: c.CreateReceiptFilterRequest}
 }
 
@@ -95,8 +48,8 @@ func (c *Client) CreateReceiptFilterRequest(input *CreateReceiptFilterInput) Cre
 // CreateReceiptFilter API operation.
 type CreateReceiptFilterRequest struct {
 	*aws.Request
-	Input *CreateReceiptFilterInput
-	Copy  func(*CreateReceiptFilterInput) CreateReceiptFilterRequest
+	Input *types.CreateReceiptFilterInput
+	Copy  func(*types.CreateReceiptFilterInput) CreateReceiptFilterRequest
 }
 
 // Send marshals and sends the CreateReceiptFilter API request.
@@ -108,7 +61,7 @@ func (r CreateReceiptFilterRequest) Send(ctx context.Context) (*CreateReceiptFil
 	}
 
 	resp := &CreateReceiptFilterResponse{
-		CreateReceiptFilterOutput: r.Request.Data.(*CreateReceiptFilterOutput),
+		CreateReceiptFilterOutput: r.Request.Data.(*types.CreateReceiptFilterOutput),
 		response:                  &aws.Response{Request: r.Request},
 	}
 
@@ -118,7 +71,7 @@ func (r CreateReceiptFilterRequest) Send(ctx context.Context) (*CreateReceiptFil
 // CreateReceiptFilterResponse is the response type for the
 // CreateReceiptFilter API operation.
 type CreateReceiptFilterResponse struct {
-	*CreateReceiptFilterOutput
+	*types.CreateReceiptFilterOutput
 
 	response *aws.Response
 }

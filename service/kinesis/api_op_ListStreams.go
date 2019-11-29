@@ -6,61 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/kinesis/types"
 )
-
-// Represents the input for ListStreams.
-type ListStreamsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the stream to start the list with.
-	ExclusiveStartStreamName *string `min:"1" type:"string"`
-
-	// The maximum number of streams to list.
-	Limit *int64 `min:"1" type:"integer"`
-}
-
-// String returns the string representation
-func (s ListStreamsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListStreamsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListStreamsInput"}
-	if s.ExclusiveStartStreamName != nil && len(*s.ExclusiveStartStreamName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ExclusiveStartStreamName", 1))
-	}
-	if s.Limit != nil && *s.Limit < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("Limit", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Represents the output for ListStreams.
-type ListStreamsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// If set to true, there are more streams available to list.
-	//
-	// HasMoreStreams is a required field
-	HasMoreStreams *bool `type:"boolean" required:"true"`
-
-	// The names of the streams that are associated with the AWS account making
-	// the ListStreams request.
-	//
-	// StreamNames is a required field
-	StreamNames []string `type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s ListStreamsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListStreams = "ListStreams"
 
@@ -92,7 +39,7 @@ const opListStreams = "ListStreams"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/ListStreams
-func (c *Client) ListStreamsRequest(input *ListStreamsInput) ListStreamsRequest {
+func (c *Client) ListStreamsRequest(input *types.ListStreamsInput) ListStreamsRequest {
 	op := &aws.Operation{
 		Name:       opListStreams,
 		HTTPMethod: "POST",
@@ -106,10 +53,10 @@ func (c *Client) ListStreamsRequest(input *ListStreamsInput) ListStreamsRequest 
 	}
 
 	if input == nil {
-		input = &ListStreamsInput{}
+		input = &types.ListStreamsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListStreamsOutput{})
+	req := c.newRequest(op, input, &types.ListStreamsOutput{})
 	return ListStreamsRequest{Request: req, Input: input, Copy: c.ListStreamsRequest}
 }
 
@@ -117,8 +64,8 @@ func (c *Client) ListStreamsRequest(input *ListStreamsInput) ListStreamsRequest 
 // ListStreams API operation.
 type ListStreamsRequest struct {
 	*aws.Request
-	Input *ListStreamsInput
-	Copy  func(*ListStreamsInput) ListStreamsRequest
+	Input *types.ListStreamsInput
+	Copy  func(*types.ListStreamsInput) ListStreamsRequest
 }
 
 // Send marshals and sends the ListStreams API request.
@@ -130,7 +77,7 @@ func (r ListStreamsRequest) Send(ctx context.Context) (*ListStreamsResponse, err
 	}
 
 	resp := &ListStreamsResponse{
-		ListStreamsOutput: r.Request.Data.(*ListStreamsOutput),
+		ListStreamsOutput: r.Request.Data.(*types.ListStreamsOutput),
 		response:          &aws.Response{Request: r.Request},
 	}
 
@@ -160,7 +107,7 @@ func NewListStreamsPaginator(req ListStreamsRequest) ListStreamsPaginator {
 	return ListStreamsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListStreamsInput
+				var inCpy *types.ListStreamsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -180,14 +127,14 @@ type ListStreamsPaginator struct {
 	aws.Pager
 }
 
-func (p *ListStreamsPaginator) CurrentPage() *ListStreamsOutput {
-	return p.Pager.CurrentPage().(*ListStreamsOutput)
+func (p *ListStreamsPaginator) CurrentPage() *types.ListStreamsOutput {
+	return p.Pager.CurrentPage().(*types.ListStreamsOutput)
 }
 
 // ListStreamsResponse is the response type for the
 // ListStreams API operation.
 type ListStreamsResponse struct {
-	*ListStreamsOutput
+	*types.ListStreamsOutput
 
 	response *aws.Response
 }

@@ -10,6 +10,7 @@ package wafiface
 
 import (
 	"github.com/aws/aws-sdk-go-v2/service/waf"
+	"github.com/aws/aws-sdk-go-v2/service/waf/types"
 )
 
 // ClientAPI provides an interface to enable mocking the
@@ -43,7 +44,7 @@ import (
 //    type mockClientClient struct {
 //        wafiface.ClientPI
 //    }
-//    func (m *mockClientClient) CreateByteMatchSet(input *waf.CreateByteMatchSetInput) (*waf.CreateByteMatchSetOutput, error) {
+//    func (m *mockClientClient) CreateByteMatchSet(input *types.CreateByteMatchSetInput) (*types.CreateByteMatchSetOutput, error) {
 //        // mock response/functionality
 //    }
 //
@@ -61,157 +62,157 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type ClientAPI interface {
-	CreateByteMatchSetRequest(*waf.CreateByteMatchSetInput) waf.CreateByteMatchSetRequest
+	CreateByteMatchSetRequest(*types.CreateByteMatchSetInput) waf.CreateByteMatchSetRequest
 
-	CreateGeoMatchSetRequest(*waf.CreateGeoMatchSetInput) waf.CreateGeoMatchSetRequest
+	CreateGeoMatchSetRequest(*types.CreateGeoMatchSetInput) waf.CreateGeoMatchSetRequest
 
-	CreateIPSetRequest(*waf.CreateIPSetInput) waf.CreateIPSetRequest
+	CreateIPSetRequest(*types.CreateIPSetInput) waf.CreateIPSetRequest
 
-	CreateRateBasedRuleRequest(*waf.CreateRateBasedRuleInput) waf.CreateRateBasedRuleRequest
+	CreateRateBasedRuleRequest(*types.CreateRateBasedRuleInput) waf.CreateRateBasedRuleRequest
 
-	CreateRegexMatchSetRequest(*waf.CreateRegexMatchSetInput) waf.CreateRegexMatchSetRequest
+	CreateRegexMatchSetRequest(*types.CreateRegexMatchSetInput) waf.CreateRegexMatchSetRequest
 
-	CreateRegexPatternSetRequest(*waf.CreateRegexPatternSetInput) waf.CreateRegexPatternSetRequest
+	CreateRegexPatternSetRequest(*types.CreateRegexPatternSetInput) waf.CreateRegexPatternSetRequest
 
-	CreateRuleRequest(*waf.CreateRuleInput) waf.CreateRuleRequest
+	CreateRuleRequest(*types.CreateRuleInput) waf.CreateRuleRequest
 
-	CreateRuleGroupRequest(*waf.CreateRuleGroupInput) waf.CreateRuleGroupRequest
+	CreateRuleGroupRequest(*types.CreateRuleGroupInput) waf.CreateRuleGroupRequest
 
-	CreateSizeConstraintSetRequest(*waf.CreateSizeConstraintSetInput) waf.CreateSizeConstraintSetRequest
+	CreateSizeConstraintSetRequest(*types.CreateSizeConstraintSetInput) waf.CreateSizeConstraintSetRequest
 
-	CreateSqlInjectionMatchSetRequest(*waf.CreateSqlInjectionMatchSetInput) waf.CreateSqlInjectionMatchSetRequest
+	CreateSqlInjectionMatchSetRequest(*types.CreateSqlInjectionMatchSetInput) waf.CreateSqlInjectionMatchSetRequest
 
-	CreateWebACLRequest(*waf.CreateWebACLInput) waf.CreateWebACLRequest
+	CreateWebACLRequest(*types.CreateWebACLInput) waf.CreateWebACLRequest
 
-	CreateXssMatchSetRequest(*waf.CreateXssMatchSetInput) waf.CreateXssMatchSetRequest
+	CreateXssMatchSetRequest(*types.CreateXssMatchSetInput) waf.CreateXssMatchSetRequest
 
-	DeleteByteMatchSetRequest(*waf.DeleteByteMatchSetInput) waf.DeleteByteMatchSetRequest
+	DeleteByteMatchSetRequest(*types.DeleteByteMatchSetInput) waf.DeleteByteMatchSetRequest
 
-	DeleteGeoMatchSetRequest(*waf.DeleteGeoMatchSetInput) waf.DeleteGeoMatchSetRequest
+	DeleteGeoMatchSetRequest(*types.DeleteGeoMatchSetInput) waf.DeleteGeoMatchSetRequest
 
-	DeleteIPSetRequest(*waf.DeleteIPSetInput) waf.DeleteIPSetRequest
+	DeleteIPSetRequest(*types.DeleteIPSetInput) waf.DeleteIPSetRequest
 
-	DeleteLoggingConfigurationRequest(*waf.DeleteLoggingConfigurationInput) waf.DeleteLoggingConfigurationRequest
+	DeleteLoggingConfigurationRequest(*types.DeleteLoggingConfigurationInput) waf.DeleteLoggingConfigurationRequest
 
-	DeletePermissionPolicyRequest(*waf.DeletePermissionPolicyInput) waf.DeletePermissionPolicyRequest
+	DeletePermissionPolicyRequest(*types.DeletePermissionPolicyInput) waf.DeletePermissionPolicyRequest
 
-	DeleteRateBasedRuleRequest(*waf.DeleteRateBasedRuleInput) waf.DeleteRateBasedRuleRequest
+	DeleteRateBasedRuleRequest(*types.DeleteRateBasedRuleInput) waf.DeleteRateBasedRuleRequest
 
-	DeleteRegexMatchSetRequest(*waf.DeleteRegexMatchSetInput) waf.DeleteRegexMatchSetRequest
+	DeleteRegexMatchSetRequest(*types.DeleteRegexMatchSetInput) waf.DeleteRegexMatchSetRequest
 
-	DeleteRegexPatternSetRequest(*waf.DeleteRegexPatternSetInput) waf.DeleteRegexPatternSetRequest
+	DeleteRegexPatternSetRequest(*types.DeleteRegexPatternSetInput) waf.DeleteRegexPatternSetRequest
 
-	DeleteRuleRequest(*waf.DeleteRuleInput) waf.DeleteRuleRequest
+	DeleteRuleRequest(*types.DeleteRuleInput) waf.DeleteRuleRequest
 
-	DeleteRuleGroupRequest(*waf.DeleteRuleGroupInput) waf.DeleteRuleGroupRequest
+	DeleteRuleGroupRequest(*types.DeleteRuleGroupInput) waf.DeleteRuleGroupRequest
 
-	DeleteSizeConstraintSetRequest(*waf.DeleteSizeConstraintSetInput) waf.DeleteSizeConstraintSetRequest
+	DeleteSizeConstraintSetRequest(*types.DeleteSizeConstraintSetInput) waf.DeleteSizeConstraintSetRequest
 
-	DeleteSqlInjectionMatchSetRequest(*waf.DeleteSqlInjectionMatchSetInput) waf.DeleteSqlInjectionMatchSetRequest
+	DeleteSqlInjectionMatchSetRequest(*types.DeleteSqlInjectionMatchSetInput) waf.DeleteSqlInjectionMatchSetRequest
 
-	DeleteWebACLRequest(*waf.DeleteWebACLInput) waf.DeleteWebACLRequest
+	DeleteWebACLRequest(*types.DeleteWebACLInput) waf.DeleteWebACLRequest
 
-	DeleteXssMatchSetRequest(*waf.DeleteXssMatchSetInput) waf.DeleteXssMatchSetRequest
+	DeleteXssMatchSetRequest(*types.DeleteXssMatchSetInput) waf.DeleteXssMatchSetRequest
 
-	GetByteMatchSetRequest(*waf.GetByteMatchSetInput) waf.GetByteMatchSetRequest
+	GetByteMatchSetRequest(*types.GetByteMatchSetInput) waf.GetByteMatchSetRequest
 
-	GetChangeTokenRequest(*waf.GetChangeTokenInput) waf.GetChangeTokenRequest
+	GetChangeTokenRequest(*types.GetChangeTokenInput) waf.GetChangeTokenRequest
 
-	GetChangeTokenStatusRequest(*waf.GetChangeTokenStatusInput) waf.GetChangeTokenStatusRequest
+	GetChangeTokenStatusRequest(*types.GetChangeTokenStatusInput) waf.GetChangeTokenStatusRequest
 
-	GetGeoMatchSetRequest(*waf.GetGeoMatchSetInput) waf.GetGeoMatchSetRequest
+	GetGeoMatchSetRequest(*types.GetGeoMatchSetInput) waf.GetGeoMatchSetRequest
 
-	GetIPSetRequest(*waf.GetIPSetInput) waf.GetIPSetRequest
+	GetIPSetRequest(*types.GetIPSetInput) waf.GetIPSetRequest
 
-	GetLoggingConfigurationRequest(*waf.GetLoggingConfigurationInput) waf.GetLoggingConfigurationRequest
+	GetLoggingConfigurationRequest(*types.GetLoggingConfigurationInput) waf.GetLoggingConfigurationRequest
 
-	GetPermissionPolicyRequest(*waf.GetPermissionPolicyInput) waf.GetPermissionPolicyRequest
+	GetPermissionPolicyRequest(*types.GetPermissionPolicyInput) waf.GetPermissionPolicyRequest
 
-	GetRateBasedRuleRequest(*waf.GetRateBasedRuleInput) waf.GetRateBasedRuleRequest
+	GetRateBasedRuleRequest(*types.GetRateBasedRuleInput) waf.GetRateBasedRuleRequest
 
-	GetRateBasedRuleManagedKeysRequest(*waf.GetRateBasedRuleManagedKeysInput) waf.GetRateBasedRuleManagedKeysRequest
+	GetRateBasedRuleManagedKeysRequest(*types.GetRateBasedRuleManagedKeysInput) waf.GetRateBasedRuleManagedKeysRequest
 
-	GetRegexMatchSetRequest(*waf.GetRegexMatchSetInput) waf.GetRegexMatchSetRequest
+	GetRegexMatchSetRequest(*types.GetRegexMatchSetInput) waf.GetRegexMatchSetRequest
 
-	GetRegexPatternSetRequest(*waf.GetRegexPatternSetInput) waf.GetRegexPatternSetRequest
+	GetRegexPatternSetRequest(*types.GetRegexPatternSetInput) waf.GetRegexPatternSetRequest
 
-	GetRuleRequest(*waf.GetRuleInput) waf.GetRuleRequest
+	GetRuleRequest(*types.GetRuleInput) waf.GetRuleRequest
 
-	GetRuleGroupRequest(*waf.GetRuleGroupInput) waf.GetRuleGroupRequest
+	GetRuleGroupRequest(*types.GetRuleGroupInput) waf.GetRuleGroupRequest
 
-	GetSampledRequestsRequest(*waf.GetSampledRequestsInput) waf.GetSampledRequestsRequest
+	GetSampledRequestsRequest(*types.GetSampledRequestsInput) waf.GetSampledRequestsRequest
 
-	GetSizeConstraintSetRequest(*waf.GetSizeConstraintSetInput) waf.GetSizeConstraintSetRequest
+	GetSizeConstraintSetRequest(*types.GetSizeConstraintSetInput) waf.GetSizeConstraintSetRequest
 
-	GetSqlInjectionMatchSetRequest(*waf.GetSqlInjectionMatchSetInput) waf.GetSqlInjectionMatchSetRequest
+	GetSqlInjectionMatchSetRequest(*types.GetSqlInjectionMatchSetInput) waf.GetSqlInjectionMatchSetRequest
 
-	GetWebACLRequest(*waf.GetWebACLInput) waf.GetWebACLRequest
+	GetWebACLRequest(*types.GetWebACLInput) waf.GetWebACLRequest
 
-	GetXssMatchSetRequest(*waf.GetXssMatchSetInput) waf.GetXssMatchSetRequest
+	GetXssMatchSetRequest(*types.GetXssMatchSetInput) waf.GetXssMatchSetRequest
 
-	ListActivatedRulesInRuleGroupRequest(*waf.ListActivatedRulesInRuleGroupInput) waf.ListActivatedRulesInRuleGroupRequest
+	ListActivatedRulesInRuleGroupRequest(*types.ListActivatedRulesInRuleGroupInput) waf.ListActivatedRulesInRuleGroupRequest
 
-	ListByteMatchSetsRequest(*waf.ListByteMatchSetsInput) waf.ListByteMatchSetsRequest
+	ListByteMatchSetsRequest(*types.ListByteMatchSetsInput) waf.ListByteMatchSetsRequest
 
-	ListGeoMatchSetsRequest(*waf.ListGeoMatchSetsInput) waf.ListGeoMatchSetsRequest
+	ListGeoMatchSetsRequest(*types.ListGeoMatchSetsInput) waf.ListGeoMatchSetsRequest
 
-	ListIPSetsRequest(*waf.ListIPSetsInput) waf.ListIPSetsRequest
+	ListIPSetsRequest(*types.ListIPSetsInput) waf.ListIPSetsRequest
 
-	ListLoggingConfigurationsRequest(*waf.ListLoggingConfigurationsInput) waf.ListLoggingConfigurationsRequest
+	ListLoggingConfigurationsRequest(*types.ListLoggingConfigurationsInput) waf.ListLoggingConfigurationsRequest
 
-	ListRateBasedRulesRequest(*waf.ListRateBasedRulesInput) waf.ListRateBasedRulesRequest
+	ListRateBasedRulesRequest(*types.ListRateBasedRulesInput) waf.ListRateBasedRulesRequest
 
-	ListRegexMatchSetsRequest(*waf.ListRegexMatchSetsInput) waf.ListRegexMatchSetsRequest
+	ListRegexMatchSetsRequest(*types.ListRegexMatchSetsInput) waf.ListRegexMatchSetsRequest
 
-	ListRegexPatternSetsRequest(*waf.ListRegexPatternSetsInput) waf.ListRegexPatternSetsRequest
+	ListRegexPatternSetsRequest(*types.ListRegexPatternSetsInput) waf.ListRegexPatternSetsRequest
 
-	ListRuleGroupsRequest(*waf.ListRuleGroupsInput) waf.ListRuleGroupsRequest
+	ListRuleGroupsRequest(*types.ListRuleGroupsInput) waf.ListRuleGroupsRequest
 
-	ListRulesRequest(*waf.ListRulesInput) waf.ListRulesRequest
+	ListRulesRequest(*types.ListRulesInput) waf.ListRulesRequest
 
-	ListSizeConstraintSetsRequest(*waf.ListSizeConstraintSetsInput) waf.ListSizeConstraintSetsRequest
+	ListSizeConstraintSetsRequest(*types.ListSizeConstraintSetsInput) waf.ListSizeConstraintSetsRequest
 
-	ListSqlInjectionMatchSetsRequest(*waf.ListSqlInjectionMatchSetsInput) waf.ListSqlInjectionMatchSetsRequest
+	ListSqlInjectionMatchSetsRequest(*types.ListSqlInjectionMatchSetsInput) waf.ListSqlInjectionMatchSetsRequest
 
-	ListSubscribedRuleGroupsRequest(*waf.ListSubscribedRuleGroupsInput) waf.ListSubscribedRuleGroupsRequest
+	ListSubscribedRuleGroupsRequest(*types.ListSubscribedRuleGroupsInput) waf.ListSubscribedRuleGroupsRequest
 
-	ListTagsForResourceRequest(*waf.ListTagsForResourceInput) waf.ListTagsForResourceRequest
+	ListTagsForResourceRequest(*types.ListTagsForResourceInput) waf.ListTagsForResourceRequest
 
-	ListWebACLsRequest(*waf.ListWebACLsInput) waf.ListWebACLsRequest
+	ListWebACLsRequest(*types.ListWebACLsInput) waf.ListWebACLsRequest
 
-	ListXssMatchSetsRequest(*waf.ListXssMatchSetsInput) waf.ListXssMatchSetsRequest
+	ListXssMatchSetsRequest(*types.ListXssMatchSetsInput) waf.ListXssMatchSetsRequest
 
-	PutLoggingConfigurationRequest(*waf.PutLoggingConfigurationInput) waf.PutLoggingConfigurationRequest
+	PutLoggingConfigurationRequest(*types.PutLoggingConfigurationInput) waf.PutLoggingConfigurationRequest
 
-	PutPermissionPolicyRequest(*waf.PutPermissionPolicyInput) waf.PutPermissionPolicyRequest
+	PutPermissionPolicyRequest(*types.PutPermissionPolicyInput) waf.PutPermissionPolicyRequest
 
-	TagResourceRequest(*waf.TagResourceInput) waf.TagResourceRequest
+	TagResourceRequest(*types.TagResourceInput) waf.TagResourceRequest
 
-	UntagResourceRequest(*waf.UntagResourceInput) waf.UntagResourceRequest
+	UntagResourceRequest(*types.UntagResourceInput) waf.UntagResourceRequest
 
-	UpdateByteMatchSetRequest(*waf.UpdateByteMatchSetInput) waf.UpdateByteMatchSetRequest
+	UpdateByteMatchSetRequest(*types.UpdateByteMatchSetInput) waf.UpdateByteMatchSetRequest
 
-	UpdateGeoMatchSetRequest(*waf.UpdateGeoMatchSetInput) waf.UpdateGeoMatchSetRequest
+	UpdateGeoMatchSetRequest(*types.UpdateGeoMatchSetInput) waf.UpdateGeoMatchSetRequest
 
-	UpdateIPSetRequest(*waf.UpdateIPSetInput) waf.UpdateIPSetRequest
+	UpdateIPSetRequest(*types.UpdateIPSetInput) waf.UpdateIPSetRequest
 
-	UpdateRateBasedRuleRequest(*waf.UpdateRateBasedRuleInput) waf.UpdateRateBasedRuleRequest
+	UpdateRateBasedRuleRequest(*types.UpdateRateBasedRuleInput) waf.UpdateRateBasedRuleRequest
 
-	UpdateRegexMatchSetRequest(*waf.UpdateRegexMatchSetInput) waf.UpdateRegexMatchSetRequest
+	UpdateRegexMatchSetRequest(*types.UpdateRegexMatchSetInput) waf.UpdateRegexMatchSetRequest
 
-	UpdateRegexPatternSetRequest(*waf.UpdateRegexPatternSetInput) waf.UpdateRegexPatternSetRequest
+	UpdateRegexPatternSetRequest(*types.UpdateRegexPatternSetInput) waf.UpdateRegexPatternSetRequest
 
-	UpdateRuleRequest(*waf.UpdateRuleInput) waf.UpdateRuleRequest
+	UpdateRuleRequest(*types.UpdateRuleInput) waf.UpdateRuleRequest
 
-	UpdateRuleGroupRequest(*waf.UpdateRuleGroupInput) waf.UpdateRuleGroupRequest
+	UpdateRuleGroupRequest(*types.UpdateRuleGroupInput) waf.UpdateRuleGroupRequest
 
-	UpdateSizeConstraintSetRequest(*waf.UpdateSizeConstraintSetInput) waf.UpdateSizeConstraintSetRequest
+	UpdateSizeConstraintSetRequest(*types.UpdateSizeConstraintSetInput) waf.UpdateSizeConstraintSetRequest
 
-	UpdateSqlInjectionMatchSetRequest(*waf.UpdateSqlInjectionMatchSetInput) waf.UpdateSqlInjectionMatchSetRequest
+	UpdateSqlInjectionMatchSetRequest(*types.UpdateSqlInjectionMatchSetInput) waf.UpdateSqlInjectionMatchSetRequest
 
-	UpdateWebACLRequest(*waf.UpdateWebACLInput) waf.UpdateWebACLRequest
+	UpdateWebACLRequest(*types.UpdateWebACLInput) waf.UpdateWebACLRequest
 
-	UpdateXssMatchSetRequest(*waf.UpdateXssMatchSetInput) waf.UpdateXssMatchSetRequest
+	UpdateXssMatchSetRequest(*types.UpdateXssMatchSetInput) waf.UpdateXssMatchSetRequest
 }
 
 var _ ClientAPI = (*waf.Client)(nil)

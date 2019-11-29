@@ -6,87 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/pinpoint/types"
 )
-
-type DeleteUserEndpointsInput struct {
-	_ struct{} `type:"structure"`
-
-	// ApplicationId is a required field
-	ApplicationId *string `location:"uri" locationName:"application-id" type:"string" required:"true"`
-
-	// UserId is a required field
-	UserId *string `location:"uri" locationName:"user-id" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteUserEndpointsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteUserEndpointsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteUserEndpointsInput"}
-
-	if s.ApplicationId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ApplicationId"))
-	}
-
-	if s.UserId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("UserId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteUserEndpointsInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.ApplicationId != nil {
-		v := *s.ApplicationId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "application-id", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.UserId != nil {
-		v := *s.UserId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "user-id", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type DeleteUserEndpointsOutput struct {
-	_ struct{} `type:"structure" payload:"EndpointsResponse"`
-
-	// Provides information about all the endpoints that are associated with a user
-	// ID.
-	//
-	// EndpointsResponse is a required field
-	EndpointsResponse *EndpointsResponse `type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteUserEndpointsOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteUserEndpointsOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.EndpointsResponse != nil {
-		v := s.EndpointsResponse
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.PayloadTarget, "EndpointsResponse", v, metadata)
-	}
-	return nil
-}
 
 const opDeleteUserEndpoints = "DeleteUserEndpoints"
 
@@ -103,7 +24,7 @@ const opDeleteUserEndpoints = "DeleteUserEndpoints"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/DeleteUserEndpoints
-func (c *Client) DeleteUserEndpointsRequest(input *DeleteUserEndpointsInput) DeleteUserEndpointsRequest {
+func (c *Client) DeleteUserEndpointsRequest(input *types.DeleteUserEndpointsInput) DeleteUserEndpointsRequest {
 	op := &aws.Operation{
 		Name:       opDeleteUserEndpoints,
 		HTTPMethod: "DELETE",
@@ -111,10 +32,10 @@ func (c *Client) DeleteUserEndpointsRequest(input *DeleteUserEndpointsInput) Del
 	}
 
 	if input == nil {
-		input = &DeleteUserEndpointsInput{}
+		input = &types.DeleteUserEndpointsInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteUserEndpointsOutput{})
+	req := c.newRequest(op, input, &types.DeleteUserEndpointsOutput{})
 	return DeleteUserEndpointsRequest{Request: req, Input: input, Copy: c.DeleteUserEndpointsRequest}
 }
 
@@ -122,8 +43,8 @@ func (c *Client) DeleteUserEndpointsRequest(input *DeleteUserEndpointsInput) Del
 // DeleteUserEndpoints API operation.
 type DeleteUserEndpointsRequest struct {
 	*aws.Request
-	Input *DeleteUserEndpointsInput
-	Copy  func(*DeleteUserEndpointsInput) DeleteUserEndpointsRequest
+	Input *types.DeleteUserEndpointsInput
+	Copy  func(*types.DeleteUserEndpointsInput) DeleteUserEndpointsRequest
 }
 
 // Send marshals and sends the DeleteUserEndpoints API request.
@@ -135,7 +56,7 @@ func (r DeleteUserEndpointsRequest) Send(ctx context.Context) (*DeleteUserEndpoi
 	}
 
 	resp := &DeleteUserEndpointsResponse{
-		DeleteUserEndpointsOutput: r.Request.Data.(*DeleteUserEndpointsOutput),
+		DeleteUserEndpointsOutput: r.Request.Data.(*types.DeleteUserEndpointsOutput),
 		response:                  &aws.Response{Request: r.Request},
 	}
 
@@ -145,7 +66,7 @@ func (r DeleteUserEndpointsRequest) Send(ctx context.Context) (*DeleteUserEndpoi
 // DeleteUserEndpointsResponse is the response type for the
 // DeleteUserEndpoints API operation.
 type DeleteUserEndpointsResponse struct {
-	*DeleteUserEndpointsOutput
+	*types.DeleteUserEndpointsOutput
 
 	response *aws.Response
 }

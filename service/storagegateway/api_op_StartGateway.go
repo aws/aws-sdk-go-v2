@@ -6,55 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/storagegateway/types"
 )
-
-// A JSON object containing the of the gateway to start.
-type StartGatewayInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation
-	// to return a list of gateways for your account and AWS Region.
-	//
-	// GatewayARN is a required field
-	GatewayARN *string `min:"50" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s StartGatewayInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *StartGatewayInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "StartGatewayInput"}
-
-	if s.GatewayARN == nil {
-		invalidParams.Add(aws.NewErrParamRequired("GatewayARN"))
-	}
-	if s.GatewayARN != nil && len(*s.GatewayARN) < 50 {
-		invalidParams.Add(aws.NewErrParamMinLen("GatewayARN", 50))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// A JSON object containing the of the gateway that was restarted.
-type StartGatewayOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation
-	// to return a list of gateways for your account and AWS Region.
-	GatewayARN *string `min:"50" type:"string"`
-}
-
-// String returns the string representation
-func (s StartGatewayOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opStartGateway = "StartGateway"
 
@@ -82,7 +35,7 @@ const opStartGateway = "StartGateway"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/StartGateway
-func (c *Client) StartGatewayRequest(input *StartGatewayInput) StartGatewayRequest {
+func (c *Client) StartGatewayRequest(input *types.StartGatewayInput) StartGatewayRequest {
 	op := &aws.Operation{
 		Name:       opStartGateway,
 		HTTPMethod: "POST",
@@ -90,10 +43,10 @@ func (c *Client) StartGatewayRequest(input *StartGatewayInput) StartGatewayReque
 	}
 
 	if input == nil {
-		input = &StartGatewayInput{}
+		input = &types.StartGatewayInput{}
 	}
 
-	req := c.newRequest(op, input, &StartGatewayOutput{})
+	req := c.newRequest(op, input, &types.StartGatewayOutput{})
 	return StartGatewayRequest{Request: req, Input: input, Copy: c.StartGatewayRequest}
 }
 
@@ -101,8 +54,8 @@ func (c *Client) StartGatewayRequest(input *StartGatewayInput) StartGatewayReque
 // StartGateway API operation.
 type StartGatewayRequest struct {
 	*aws.Request
-	Input *StartGatewayInput
-	Copy  func(*StartGatewayInput) StartGatewayRequest
+	Input *types.StartGatewayInput
+	Copy  func(*types.StartGatewayInput) StartGatewayRequest
 }
 
 // Send marshals and sends the StartGateway API request.
@@ -114,7 +67,7 @@ func (r StartGatewayRequest) Send(ctx context.Context) (*StartGatewayResponse, e
 	}
 
 	resp := &StartGatewayResponse{
-		StartGatewayOutput: r.Request.Data.(*StartGatewayOutput),
+		StartGatewayOutput: r.Request.Data.(*types.StartGatewayOutput),
 		response:           &aws.Response{Request: r.Request},
 	}
 
@@ -124,7 +77,7 @@ func (r StartGatewayRequest) Send(ctx context.Context) (*StartGatewayResponse, e
 // StartGatewayResponse is the response type for the
 // StartGateway API operation.
 type StartGatewayResponse struct {
-	*StartGatewayOutput
+	*types.StartGatewayOutput
 
 	response *aws.Response
 }

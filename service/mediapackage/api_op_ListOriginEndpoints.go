@@ -6,98 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/mediapackage/types"
 )
-
-type ListOriginEndpointsInput struct {
-	_ struct{} `type:"structure"`
-
-	ChannelId *string `location:"querystring" locationName:"channelId" type:"string"`
-
-	MaxResults *int64 `location:"querystring" locationName:"maxResults" min:"1" type:"integer"`
-
-	NextToken *string `location:"querystring" locationName:"nextToken" type:"string"`
-}
-
-// String returns the string representation
-func (s ListOriginEndpointsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListOriginEndpointsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListOriginEndpointsInput"}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListOriginEndpointsInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.ChannelId != nil {
-		v := *s.ChannelId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "channelId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.MaxResults != nil {
-		v := *s.MaxResults
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "maxResults", protocol.Int64Value(v), metadata)
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type ListOriginEndpointsOutput struct {
-	_ struct{} `type:"structure"`
-
-	NextToken *string `locationName:"nextToken" type:"string"`
-
-	OriginEndpoints []OriginEndpoint `locationName:"originEndpoints" type:"list"`
-}
-
-// String returns the string representation
-func (s ListOriginEndpointsOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListOriginEndpointsOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.OriginEndpoints != nil {
-		v := s.OriginEndpoints
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "originEndpoints", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	return nil
-}
 
 const opListOriginEndpoints = "ListOriginEndpoints"
 
@@ -114,7 +24,7 @@ const opListOriginEndpoints = "ListOriginEndpoints"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mediapackage-2017-10-12/ListOriginEndpoints
-func (c *Client) ListOriginEndpointsRequest(input *ListOriginEndpointsInput) ListOriginEndpointsRequest {
+func (c *Client) ListOriginEndpointsRequest(input *types.ListOriginEndpointsInput) ListOriginEndpointsRequest {
 	op := &aws.Operation{
 		Name:       opListOriginEndpoints,
 		HTTPMethod: "GET",
@@ -128,10 +38,10 @@ func (c *Client) ListOriginEndpointsRequest(input *ListOriginEndpointsInput) Lis
 	}
 
 	if input == nil {
-		input = &ListOriginEndpointsInput{}
+		input = &types.ListOriginEndpointsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListOriginEndpointsOutput{})
+	req := c.newRequest(op, input, &types.ListOriginEndpointsOutput{})
 	return ListOriginEndpointsRequest{Request: req, Input: input, Copy: c.ListOriginEndpointsRequest}
 }
 
@@ -139,8 +49,8 @@ func (c *Client) ListOriginEndpointsRequest(input *ListOriginEndpointsInput) Lis
 // ListOriginEndpoints API operation.
 type ListOriginEndpointsRequest struct {
 	*aws.Request
-	Input *ListOriginEndpointsInput
-	Copy  func(*ListOriginEndpointsInput) ListOriginEndpointsRequest
+	Input *types.ListOriginEndpointsInput
+	Copy  func(*types.ListOriginEndpointsInput) ListOriginEndpointsRequest
 }
 
 // Send marshals and sends the ListOriginEndpoints API request.
@@ -152,7 +62,7 @@ func (r ListOriginEndpointsRequest) Send(ctx context.Context) (*ListOriginEndpoi
 	}
 
 	resp := &ListOriginEndpointsResponse{
-		ListOriginEndpointsOutput: r.Request.Data.(*ListOriginEndpointsOutput),
+		ListOriginEndpointsOutput: r.Request.Data.(*types.ListOriginEndpointsOutput),
 		response:                  &aws.Response{Request: r.Request},
 	}
 
@@ -182,7 +92,7 @@ func NewListOriginEndpointsPaginator(req ListOriginEndpointsRequest) ListOriginE
 	return ListOriginEndpointsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListOriginEndpointsInput
+				var inCpy *types.ListOriginEndpointsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -202,14 +112,14 @@ type ListOriginEndpointsPaginator struct {
 	aws.Pager
 }
 
-func (p *ListOriginEndpointsPaginator) CurrentPage() *ListOriginEndpointsOutput {
-	return p.Pager.CurrentPage().(*ListOriginEndpointsOutput)
+func (p *ListOriginEndpointsPaginator) CurrentPage() *types.ListOriginEndpointsOutput {
+	return p.Pager.CurrentPage().(*types.ListOriginEndpointsOutput)
 }
 
 // ListOriginEndpointsResponse is the response type for the
 // ListOriginEndpoints API operation.
 type ListOriginEndpointsResponse struct {
-	*ListOriginEndpointsOutput
+	*types.ListOriginEndpointsOutput
 
 	response *aws.Response
 }

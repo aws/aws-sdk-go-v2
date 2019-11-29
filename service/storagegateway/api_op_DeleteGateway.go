@@ -6,55 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/storagegateway/types"
 )
-
-// A JSON object containing the ID of the gateway to delete.
-type DeleteGatewayInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation
-	// to return a list of gateways for your account and AWS Region.
-	//
-	// GatewayARN is a required field
-	GatewayARN *string `min:"50" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteGatewayInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteGatewayInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteGatewayInput"}
-
-	if s.GatewayARN == nil {
-		invalidParams.Add(aws.NewErrParamRequired("GatewayARN"))
-	}
-	if s.GatewayARN != nil && len(*s.GatewayARN) < 50 {
-		invalidParams.Add(aws.NewErrParamMinLen("GatewayARN", 50))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// A JSON object containing the ID of the deleted gateway.
-type DeleteGatewayOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation
-	// to return a list of gateways for your account and AWS Region.
-	GatewayARN *string `min:"50" type:"string"`
-}
-
-// String returns the string representation
-func (s DeleteGatewayOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteGateway = "DeleteGateway"
 
@@ -86,7 +39,7 @@ const opDeleteGateway = "DeleteGateway"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DeleteGateway
-func (c *Client) DeleteGatewayRequest(input *DeleteGatewayInput) DeleteGatewayRequest {
+func (c *Client) DeleteGatewayRequest(input *types.DeleteGatewayInput) DeleteGatewayRequest {
 	op := &aws.Operation{
 		Name:       opDeleteGateway,
 		HTTPMethod: "POST",
@@ -94,10 +47,10 @@ func (c *Client) DeleteGatewayRequest(input *DeleteGatewayInput) DeleteGatewayRe
 	}
 
 	if input == nil {
-		input = &DeleteGatewayInput{}
+		input = &types.DeleteGatewayInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteGatewayOutput{})
+	req := c.newRequest(op, input, &types.DeleteGatewayOutput{})
 	return DeleteGatewayRequest{Request: req, Input: input, Copy: c.DeleteGatewayRequest}
 }
 
@@ -105,8 +58,8 @@ func (c *Client) DeleteGatewayRequest(input *DeleteGatewayInput) DeleteGatewayRe
 // DeleteGateway API operation.
 type DeleteGatewayRequest struct {
 	*aws.Request
-	Input *DeleteGatewayInput
-	Copy  func(*DeleteGatewayInput) DeleteGatewayRequest
+	Input *types.DeleteGatewayInput
+	Copy  func(*types.DeleteGatewayInput) DeleteGatewayRequest
 }
 
 // Send marshals and sends the DeleteGateway API request.
@@ -118,7 +71,7 @@ func (r DeleteGatewayRequest) Send(ctx context.Context) (*DeleteGatewayResponse,
 	}
 
 	resp := &DeleteGatewayResponse{
-		DeleteGatewayOutput: r.Request.Data.(*DeleteGatewayOutput),
+		DeleteGatewayOutput: r.Request.Data.(*types.DeleteGatewayOutput),
 		response:            &aws.Response{Request: r.Request},
 	}
 
@@ -128,7 +81,7 @@ func (r DeleteGatewayRequest) Send(ctx context.Context) (*DeleteGatewayResponse,
 // DeleteGatewayResponse is the response type for the
 // DeleteGateway API operation.
 type DeleteGatewayResponse struct {
-	*DeleteGatewayOutput
+	*types.DeleteGatewayOutput
 
 	response *aws.Response
 }

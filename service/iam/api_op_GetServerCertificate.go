@@ -6,58 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/iam/types"
 )
-
-type GetServerCertificateInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the server certificate you want to retrieve information about.
-	//
-	// This parameter allows (through its regex pattern (http://wikipedia.org/wiki/regex))
-	// a string of characters consisting of upper and lowercase alphanumeric characters
-	// with no spaces. You can also include any of the following characters: _+=,.@-
-	//
-	// ServerCertificateName is a required field
-	ServerCertificateName *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetServerCertificateInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetServerCertificateInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetServerCertificateInput"}
-
-	if s.ServerCertificateName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ServerCertificateName"))
-	}
-	if s.ServerCertificateName != nil && len(*s.ServerCertificateName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ServerCertificateName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Contains the response to a successful GetServerCertificate request.
-type GetServerCertificateOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A structure containing details about the server certificate.
-	//
-	// ServerCertificate is a required field
-	ServerCertificate *ServerCertificate `type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s GetServerCertificateOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetServerCertificate = "GetServerCertificate"
 
@@ -79,7 +29,7 @@ const opGetServerCertificate = "GetServerCertificate"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetServerCertificate
-func (c *Client) GetServerCertificateRequest(input *GetServerCertificateInput) GetServerCertificateRequest {
+func (c *Client) GetServerCertificateRequest(input *types.GetServerCertificateInput) GetServerCertificateRequest {
 	op := &aws.Operation{
 		Name:       opGetServerCertificate,
 		HTTPMethod: "POST",
@@ -87,10 +37,10 @@ func (c *Client) GetServerCertificateRequest(input *GetServerCertificateInput) G
 	}
 
 	if input == nil {
-		input = &GetServerCertificateInput{}
+		input = &types.GetServerCertificateInput{}
 	}
 
-	req := c.newRequest(op, input, &GetServerCertificateOutput{})
+	req := c.newRequest(op, input, &types.GetServerCertificateOutput{})
 	return GetServerCertificateRequest{Request: req, Input: input, Copy: c.GetServerCertificateRequest}
 }
 
@@ -98,8 +48,8 @@ func (c *Client) GetServerCertificateRequest(input *GetServerCertificateInput) G
 // GetServerCertificate API operation.
 type GetServerCertificateRequest struct {
 	*aws.Request
-	Input *GetServerCertificateInput
-	Copy  func(*GetServerCertificateInput) GetServerCertificateRequest
+	Input *types.GetServerCertificateInput
+	Copy  func(*types.GetServerCertificateInput) GetServerCertificateRequest
 }
 
 // Send marshals and sends the GetServerCertificate API request.
@@ -111,7 +61,7 @@ func (r GetServerCertificateRequest) Send(ctx context.Context) (*GetServerCertif
 	}
 
 	resp := &GetServerCertificateResponse{
-		GetServerCertificateOutput: r.Request.Data.(*GetServerCertificateOutput),
+		GetServerCertificateOutput: r.Request.Data.(*types.GetServerCertificateOutput),
 		response:                   &aws.Response{Request: r.Request},
 	}
 
@@ -121,7 +71,7 @@ func (r GetServerCertificateRequest) Send(ctx context.Context) (*GetServerCertif
 // GetServerCertificateResponse is the response type for the
 // GetServerCertificate API operation.
 type GetServerCertificateResponse struct {
-	*GetServerCertificateOutput
+	*types.GetServerCertificateOutput
 
 	response *aws.Response
 }

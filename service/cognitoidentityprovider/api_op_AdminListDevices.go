@@ -6,77 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/types"
 )
-
-// Represents the request to list devices, as an administrator.
-type AdminListDevicesInput struct {
-	_ struct{} `type:"structure"`
-
-	// The limit of the devices request.
-	Limit *int64 `type:"integer"`
-
-	// The pagination token.
-	PaginationToken *string `min:"1" type:"string"`
-
-	// The user pool ID.
-	//
-	// UserPoolId is a required field
-	UserPoolId *string `min:"1" type:"string" required:"true"`
-
-	// The user name.
-	//
-	// Username is a required field
-	Username *string `min:"1" type:"string" required:"true" sensitive:"true"`
-}
-
-// String returns the string representation
-func (s AdminListDevicesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *AdminListDevicesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "AdminListDevicesInput"}
-	if s.PaginationToken != nil && len(*s.PaginationToken) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("PaginationToken", 1))
-	}
-
-	if s.UserPoolId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("UserPoolId"))
-	}
-	if s.UserPoolId != nil && len(*s.UserPoolId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("UserPoolId", 1))
-	}
-
-	if s.Username == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Username"))
-	}
-	if s.Username != nil && len(*s.Username) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Username", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Lists the device's response, as an administrator.
-type AdminListDevicesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The devices in the list of devices response.
-	Devices []DeviceType `type:"list"`
-
-	// The pagination token.
-	PaginationToken *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s AdminListDevicesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opAdminListDevices = "AdminListDevices"
 
@@ -95,7 +26,7 @@ const opAdminListDevices = "AdminListDevices"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AdminListDevices
-func (c *Client) AdminListDevicesRequest(input *AdminListDevicesInput) AdminListDevicesRequest {
+func (c *Client) AdminListDevicesRequest(input *types.AdminListDevicesInput) AdminListDevicesRequest {
 	op := &aws.Operation{
 		Name:       opAdminListDevices,
 		HTTPMethod: "POST",
@@ -103,10 +34,10 @@ func (c *Client) AdminListDevicesRequest(input *AdminListDevicesInput) AdminList
 	}
 
 	if input == nil {
-		input = &AdminListDevicesInput{}
+		input = &types.AdminListDevicesInput{}
 	}
 
-	req := c.newRequest(op, input, &AdminListDevicesOutput{})
+	req := c.newRequest(op, input, &types.AdminListDevicesOutput{})
 	return AdminListDevicesRequest{Request: req, Input: input, Copy: c.AdminListDevicesRequest}
 }
 
@@ -114,8 +45,8 @@ func (c *Client) AdminListDevicesRequest(input *AdminListDevicesInput) AdminList
 // AdminListDevices API operation.
 type AdminListDevicesRequest struct {
 	*aws.Request
-	Input *AdminListDevicesInput
-	Copy  func(*AdminListDevicesInput) AdminListDevicesRequest
+	Input *types.AdminListDevicesInput
+	Copy  func(*types.AdminListDevicesInput) AdminListDevicesRequest
 }
 
 // Send marshals and sends the AdminListDevices API request.
@@ -127,7 +58,7 @@ func (r AdminListDevicesRequest) Send(ctx context.Context) (*AdminListDevicesRes
 	}
 
 	resp := &AdminListDevicesResponse{
-		AdminListDevicesOutput: r.Request.Data.(*AdminListDevicesOutput),
+		AdminListDevicesOutput: r.Request.Data.(*types.AdminListDevicesOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -137,7 +68,7 @@ func (r AdminListDevicesRequest) Send(ctx context.Context) (*AdminListDevicesRes
 // AdminListDevicesResponse is the response type for the
 // AdminListDevices API operation.
 type AdminListDevicesResponse struct {
-	*AdminListDevicesOutput
+	*types.AdminListDevicesOutput
 
 	response *aws.Response
 }

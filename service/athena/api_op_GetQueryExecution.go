@@ -6,48 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/athena/types"
 )
-
-type GetQueryExecutionInput struct {
-	_ struct{} `type:"structure"`
-
-	// The unique ID of the query execution.
-	//
-	// QueryExecutionId is a required field
-	QueryExecutionId *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetQueryExecutionInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetQueryExecutionInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetQueryExecutionInput"}
-
-	if s.QueryExecutionId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("QueryExecutionId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type GetQueryExecutionOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Information about the query execution.
-	QueryExecution *QueryExecution `type:"structure"`
-}
-
-// String returns the string representation
-func (s GetQueryExecutionOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetQueryExecution = "GetQueryExecution"
 
@@ -66,7 +26,7 @@ const opGetQueryExecution = "GetQueryExecution"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/GetQueryExecution
-func (c *Client) GetQueryExecutionRequest(input *GetQueryExecutionInput) GetQueryExecutionRequest {
+func (c *Client) GetQueryExecutionRequest(input *types.GetQueryExecutionInput) GetQueryExecutionRequest {
 	op := &aws.Operation{
 		Name:       opGetQueryExecution,
 		HTTPMethod: "POST",
@@ -74,10 +34,10 @@ func (c *Client) GetQueryExecutionRequest(input *GetQueryExecutionInput) GetQuer
 	}
 
 	if input == nil {
-		input = &GetQueryExecutionInput{}
+		input = &types.GetQueryExecutionInput{}
 	}
 
-	req := c.newRequest(op, input, &GetQueryExecutionOutput{})
+	req := c.newRequest(op, input, &types.GetQueryExecutionOutput{})
 	return GetQueryExecutionRequest{Request: req, Input: input, Copy: c.GetQueryExecutionRequest}
 }
 
@@ -85,8 +45,8 @@ func (c *Client) GetQueryExecutionRequest(input *GetQueryExecutionInput) GetQuer
 // GetQueryExecution API operation.
 type GetQueryExecutionRequest struct {
 	*aws.Request
-	Input *GetQueryExecutionInput
-	Copy  func(*GetQueryExecutionInput) GetQueryExecutionRequest
+	Input *types.GetQueryExecutionInput
+	Copy  func(*types.GetQueryExecutionInput) GetQueryExecutionRequest
 }
 
 // Send marshals and sends the GetQueryExecution API request.
@@ -98,7 +58,7 @@ func (r GetQueryExecutionRequest) Send(ctx context.Context) (*GetQueryExecutionR
 	}
 
 	resp := &GetQueryExecutionResponse{
-		GetQueryExecutionOutput: r.Request.Data.(*GetQueryExecutionOutput),
+		GetQueryExecutionOutput: r.Request.Data.(*types.GetQueryExecutionOutput),
 		response:                &aws.Response{Request: r.Request},
 	}
 
@@ -108,7 +68,7 @@ func (r GetQueryExecutionRequest) Send(ctx context.Context) (*GetQueryExecutionR
 // GetQueryExecutionResponse is the response type for the
 // GetQueryExecution API operation.
 type GetQueryExecutionResponse struct {
-	*GetQueryExecutionOutput
+	*types.GetQueryExecutionOutput
 
 	response *aws.Response
 }

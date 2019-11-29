@@ -6,65 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/query"
+	"github.com/aws/aws-sdk-go-v2/service/iam/types"
 )
-
-type DeleteAccessKeyInput struct {
-	_ struct{} `type:"structure"`
-
-	// The access key ID for the access key ID and secret access key you want to
-	// delete.
-	//
-	// This parameter allows (through its regex pattern (http://wikipedia.org/wiki/regex))
-	// a string of characters that can consist of any upper or lowercased letter
-	// or digit.
-	//
-	// AccessKeyId is a required field
-	AccessKeyId *string `min:"16" type:"string" required:"true"`
-
-	// The name of the user whose access key pair you want to delete.
-	//
-	// This parameter allows (through its regex pattern (http://wikipedia.org/wiki/regex))
-	// a string of characters consisting of upper and lowercase alphanumeric characters
-	// with no spaces. You can also include any of the following characters: _+=,.@-
-	UserName *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s DeleteAccessKeyInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteAccessKeyInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteAccessKeyInput"}
-
-	if s.AccessKeyId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("AccessKeyId"))
-	}
-	if s.AccessKeyId != nil && len(*s.AccessKeyId) < 16 {
-		invalidParams.Add(aws.NewErrParamMinLen("AccessKeyId", 16))
-	}
-	if s.UserName != nil && len(*s.UserName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("UserName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteAccessKeyOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteAccessKeyOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteAccessKey = "DeleteAccessKey"
 
@@ -87,7 +32,7 @@ const opDeleteAccessKey = "DeleteAccessKey"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeleteAccessKey
-func (c *Client) DeleteAccessKeyRequest(input *DeleteAccessKeyInput) DeleteAccessKeyRequest {
+func (c *Client) DeleteAccessKeyRequest(input *types.DeleteAccessKeyInput) DeleteAccessKeyRequest {
 	op := &aws.Operation{
 		Name:       opDeleteAccessKey,
 		HTTPMethod: "POST",
@@ -95,10 +40,10 @@ func (c *Client) DeleteAccessKeyRequest(input *DeleteAccessKeyInput) DeleteAcces
 	}
 
 	if input == nil {
-		input = &DeleteAccessKeyInput{}
+		input = &types.DeleteAccessKeyInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteAccessKeyOutput{})
+	req := c.newRequest(op, input, &types.DeleteAccessKeyOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return DeleteAccessKeyRequest{Request: req, Input: input, Copy: c.DeleteAccessKeyRequest}
@@ -108,8 +53,8 @@ func (c *Client) DeleteAccessKeyRequest(input *DeleteAccessKeyInput) DeleteAcces
 // DeleteAccessKey API operation.
 type DeleteAccessKeyRequest struct {
 	*aws.Request
-	Input *DeleteAccessKeyInput
-	Copy  func(*DeleteAccessKeyInput) DeleteAccessKeyRequest
+	Input *types.DeleteAccessKeyInput
+	Copy  func(*types.DeleteAccessKeyInput) DeleteAccessKeyRequest
 }
 
 // Send marshals and sends the DeleteAccessKey API request.
@@ -121,7 +66,7 @@ func (r DeleteAccessKeyRequest) Send(ctx context.Context) (*DeleteAccessKeyRespo
 	}
 
 	resp := &DeleteAccessKeyResponse{
-		DeleteAccessKeyOutput: r.Request.Data.(*DeleteAccessKeyOutput),
+		DeleteAccessKeyOutput: r.Request.Data.(*types.DeleteAccessKeyOutput),
 		response:              &aws.Response{Request: r.Request},
 	}
 
@@ -131,7 +76,7 @@ func (r DeleteAccessKeyRequest) Send(ctx context.Context) (*DeleteAccessKeyRespo
 // DeleteAccessKeyResponse is the response type for the
 // DeleteAccessKey API operation.
 type DeleteAccessKeyResponse struct {
-	*DeleteAccessKeyOutput
+	*types.DeleteAccessKeyOutput
 
 	response *aws.Response
 }

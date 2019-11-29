@@ -6,63 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoice/types"
 )
-
-type DeleteConfigurationSetInput struct {
-	_ struct{} `type:"structure"`
-
-	// ConfigurationSetName is a required field
-	ConfigurationSetName *string `location:"uri" locationName:"ConfigurationSetName" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteConfigurationSetInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteConfigurationSetInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteConfigurationSetInput"}
-
-	if s.ConfigurationSetName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ConfigurationSetName"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteConfigurationSetInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.ConfigurationSetName != nil {
-		v := *s.ConfigurationSetName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "ConfigurationSetName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-// An empty object that indicates that the configuration set was deleted successfully.
-type DeleteConfigurationSetOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteConfigurationSetOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteConfigurationSetOutput) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
 
 const opDeleteConfigurationSet = "DeleteConfigurationSet"
 
@@ -79,7 +24,7 @@ const opDeleteConfigurationSet = "DeleteConfigurationSet"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-2018-09-05/DeleteConfigurationSet
-func (c *Client) DeleteConfigurationSetRequest(input *DeleteConfigurationSetInput) DeleteConfigurationSetRequest {
+func (c *Client) DeleteConfigurationSetRequest(input *types.DeleteConfigurationSetInput) DeleteConfigurationSetRequest {
 	op := &aws.Operation{
 		Name:       opDeleteConfigurationSet,
 		HTTPMethod: "DELETE",
@@ -87,10 +32,10 @@ func (c *Client) DeleteConfigurationSetRequest(input *DeleteConfigurationSetInpu
 	}
 
 	if input == nil {
-		input = &DeleteConfigurationSetInput{}
+		input = &types.DeleteConfigurationSetInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteConfigurationSetOutput{})
+	req := c.newRequest(op, input, &types.DeleteConfigurationSetOutput{})
 	return DeleteConfigurationSetRequest{Request: req, Input: input, Copy: c.DeleteConfigurationSetRequest}
 }
 
@@ -98,8 +43,8 @@ func (c *Client) DeleteConfigurationSetRequest(input *DeleteConfigurationSetInpu
 // DeleteConfigurationSet API operation.
 type DeleteConfigurationSetRequest struct {
 	*aws.Request
-	Input *DeleteConfigurationSetInput
-	Copy  func(*DeleteConfigurationSetInput) DeleteConfigurationSetRequest
+	Input *types.DeleteConfigurationSetInput
+	Copy  func(*types.DeleteConfigurationSetInput) DeleteConfigurationSetRequest
 }
 
 // Send marshals and sends the DeleteConfigurationSet API request.
@@ -111,7 +56,7 @@ func (r DeleteConfigurationSetRequest) Send(ctx context.Context) (*DeleteConfigu
 	}
 
 	resp := &DeleteConfigurationSetResponse{
-		DeleteConfigurationSetOutput: r.Request.Data.(*DeleteConfigurationSetOutput),
+		DeleteConfigurationSetOutput: r.Request.Data.(*types.DeleteConfigurationSetOutput),
 		response:                     &aws.Response{Request: r.Request},
 	}
 
@@ -121,7 +66,7 @@ func (r DeleteConfigurationSetRequest) Send(ctx context.Context) (*DeleteConfigu
 // DeleteConfigurationSetResponse is the response type for the
 // DeleteConfigurationSet API operation.
 type DeleteConfigurationSetResponse struct {
-	*DeleteConfigurationSetOutput
+	*types.DeleteConfigurationSetOutput
 
 	response *aws.Response
 }

@@ -6,89 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/pinpoint/types"
 )
-
-type UpdateEmailTemplateInput struct {
-	_ struct{} `type:"structure" payload:"EmailTemplateRequest"`
-
-	// Specifies the content and settings for a message template that can be used
-	// in messages that are sent through the email channel.
-	//
-	// EmailTemplateRequest is a required field
-	EmailTemplateRequest *EmailTemplateRequest `type:"structure" required:"true"`
-
-	// TemplateName is a required field
-	TemplateName *string `location:"uri" locationName:"template-name" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s UpdateEmailTemplateInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateEmailTemplateInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateEmailTemplateInput"}
-
-	if s.EmailTemplateRequest == nil {
-		invalidParams.Add(aws.NewErrParamRequired("EmailTemplateRequest"))
-	}
-
-	if s.TemplateName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("TemplateName"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s UpdateEmailTemplateInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.TemplateName != nil {
-		v := *s.TemplateName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "template-name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.EmailTemplateRequest != nil {
-		v := s.EmailTemplateRequest
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.PayloadTarget, "EmailTemplateRequest", v, metadata)
-	}
-	return nil
-}
-
-type UpdateEmailTemplateOutput struct {
-	_ struct{} `type:"structure" payload:"MessageBody"`
-
-	// Provides information about an API request or response.
-	//
-	// MessageBody is a required field
-	MessageBody *MessageBody `type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s UpdateEmailTemplateOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s UpdateEmailTemplateOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.MessageBody != nil {
-		v := s.MessageBody
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.PayloadTarget, "MessageBody", v, metadata)
-	}
-	return nil
-}
 
 const opUpdateEmailTemplate = "UpdateEmailTemplate"
 
@@ -106,7 +25,7 @@ const opUpdateEmailTemplate = "UpdateEmailTemplate"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/UpdateEmailTemplate
-func (c *Client) UpdateEmailTemplateRequest(input *UpdateEmailTemplateInput) UpdateEmailTemplateRequest {
+func (c *Client) UpdateEmailTemplateRequest(input *types.UpdateEmailTemplateInput) UpdateEmailTemplateRequest {
 	op := &aws.Operation{
 		Name:       opUpdateEmailTemplate,
 		HTTPMethod: "PUT",
@@ -114,10 +33,10 @@ func (c *Client) UpdateEmailTemplateRequest(input *UpdateEmailTemplateInput) Upd
 	}
 
 	if input == nil {
-		input = &UpdateEmailTemplateInput{}
+		input = &types.UpdateEmailTemplateInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateEmailTemplateOutput{})
+	req := c.newRequest(op, input, &types.UpdateEmailTemplateOutput{})
 	return UpdateEmailTemplateRequest{Request: req, Input: input, Copy: c.UpdateEmailTemplateRequest}
 }
 
@@ -125,8 +44,8 @@ func (c *Client) UpdateEmailTemplateRequest(input *UpdateEmailTemplateInput) Upd
 // UpdateEmailTemplate API operation.
 type UpdateEmailTemplateRequest struct {
 	*aws.Request
-	Input *UpdateEmailTemplateInput
-	Copy  func(*UpdateEmailTemplateInput) UpdateEmailTemplateRequest
+	Input *types.UpdateEmailTemplateInput
+	Copy  func(*types.UpdateEmailTemplateInput) UpdateEmailTemplateRequest
 }
 
 // Send marshals and sends the UpdateEmailTemplate API request.
@@ -138,7 +57,7 @@ func (r UpdateEmailTemplateRequest) Send(ctx context.Context) (*UpdateEmailTempl
 	}
 
 	resp := &UpdateEmailTemplateResponse{
-		UpdateEmailTemplateOutput: r.Request.Data.(*UpdateEmailTemplateOutput),
+		UpdateEmailTemplateOutput: r.Request.Data.(*types.UpdateEmailTemplateOutput),
 		response:                  &aws.Response{Request: r.Request},
 	}
 
@@ -148,7 +67,7 @@ func (r UpdateEmailTemplateRequest) Send(ctx context.Context) (*UpdateEmailTempl
 // UpdateEmailTemplateResponse is the response type for the
 // UpdateEmailTemplate API operation.
 type UpdateEmailTemplateResponse struct {
-	*UpdateEmailTemplateOutput
+	*types.UpdateEmailTemplateOutput
 
 	response *aws.Response
 }

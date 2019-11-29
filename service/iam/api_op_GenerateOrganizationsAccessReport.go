@@ -6,62 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/iam/types"
 )
-
-type GenerateOrganizationsAccessReportInput struct {
-	_ struct{} `type:"structure"`
-
-	// The path of the AWS Organizations entity (root, OU, or account). You can
-	// build an entity path using the known structure of your organization. For
-	// example, assume that your account ID is 123456789012 and its parent OU ID
-	// is ou-rge0-awsabcde. The organization root ID is r-f6g7h8i9j0example and
-	// your organization ID is o-a1b2c3d4e5. Your entity path is o-a1b2c3d4e5/r-f6g7h8i9j0example/ou-rge0-awsabcde/123456789012.
-	//
-	// EntityPath is a required field
-	EntityPath *string `min:"19" type:"string" required:"true"`
-
-	// The identifier of the AWS Organizations service control policy (SCP). This
-	// parameter is optional.
-	//
-	// This ID is used to generate information about when an account principal that
-	// is limited by the SCP attempted to access an AWS service.
-	OrganizationsPolicyId *string `type:"string"`
-}
-
-// String returns the string representation
-func (s GenerateOrganizationsAccessReportInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GenerateOrganizationsAccessReportInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GenerateOrganizationsAccessReportInput"}
-
-	if s.EntityPath == nil {
-		invalidParams.Add(aws.NewErrParamRequired("EntityPath"))
-	}
-	if s.EntityPath != nil && len(*s.EntityPath) < 19 {
-		invalidParams.Add(aws.NewErrParamMinLen("EntityPath", 19))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type GenerateOrganizationsAccessReportOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The job identifier that you can use in the GetOrganizationsAccessReport operation.
-	JobId *string `min:"36" type:"string"`
-}
-
-// String returns the string representation
-func (s GenerateOrganizationsAccessReportOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGenerateOrganizationsAccessReport = "GenerateOrganizationsAccessReport"
 
@@ -191,7 +137,7 @@ const opGenerateOrganizationsAccessReport = "GenerateOrganizationsAccessReport"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GenerateOrganizationsAccessReport
-func (c *Client) GenerateOrganizationsAccessReportRequest(input *GenerateOrganizationsAccessReportInput) GenerateOrganizationsAccessReportRequest {
+func (c *Client) GenerateOrganizationsAccessReportRequest(input *types.GenerateOrganizationsAccessReportInput) GenerateOrganizationsAccessReportRequest {
 	op := &aws.Operation{
 		Name:       opGenerateOrganizationsAccessReport,
 		HTTPMethod: "POST",
@@ -199,10 +145,10 @@ func (c *Client) GenerateOrganizationsAccessReportRequest(input *GenerateOrganiz
 	}
 
 	if input == nil {
-		input = &GenerateOrganizationsAccessReportInput{}
+		input = &types.GenerateOrganizationsAccessReportInput{}
 	}
 
-	req := c.newRequest(op, input, &GenerateOrganizationsAccessReportOutput{})
+	req := c.newRequest(op, input, &types.GenerateOrganizationsAccessReportOutput{})
 	return GenerateOrganizationsAccessReportRequest{Request: req, Input: input, Copy: c.GenerateOrganizationsAccessReportRequest}
 }
 
@@ -210,8 +156,8 @@ func (c *Client) GenerateOrganizationsAccessReportRequest(input *GenerateOrganiz
 // GenerateOrganizationsAccessReport API operation.
 type GenerateOrganizationsAccessReportRequest struct {
 	*aws.Request
-	Input *GenerateOrganizationsAccessReportInput
-	Copy  func(*GenerateOrganizationsAccessReportInput) GenerateOrganizationsAccessReportRequest
+	Input *types.GenerateOrganizationsAccessReportInput
+	Copy  func(*types.GenerateOrganizationsAccessReportInput) GenerateOrganizationsAccessReportRequest
 }
 
 // Send marshals and sends the GenerateOrganizationsAccessReport API request.
@@ -223,7 +169,7 @@ func (r GenerateOrganizationsAccessReportRequest) Send(ctx context.Context) (*Ge
 	}
 
 	resp := &GenerateOrganizationsAccessReportResponse{
-		GenerateOrganizationsAccessReportOutput: r.Request.Data.(*GenerateOrganizationsAccessReportOutput),
+		GenerateOrganizationsAccessReportOutput: r.Request.Data.(*types.GenerateOrganizationsAccessReportOutput),
 		response:                                &aws.Response{Request: r.Request},
 	}
 
@@ -233,7 +179,7 @@ func (r GenerateOrganizationsAccessReportRequest) Send(ctx context.Context) (*Ge
 // GenerateOrganizationsAccessReportResponse is the response type for the
 // GenerateOrganizationsAccessReport API operation.
 type GenerateOrganizationsAccessReportResponse struct {
-	*GenerateOrganizationsAccessReportOutput
+	*types.GenerateOrganizationsAccessReportOutput
 
 	response *aws.Response
 }

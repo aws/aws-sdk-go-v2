@@ -6,52 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/route53resolver/types"
 )
-
-type GetResolverEndpointInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the resolver endpoint that you want to get information about.
-	//
-	// ResolverEndpointId is a required field
-	ResolverEndpointId *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetResolverEndpointInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetResolverEndpointInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetResolverEndpointInput"}
-
-	if s.ResolverEndpointId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ResolverEndpointId"))
-	}
-	if s.ResolverEndpointId != nil && len(*s.ResolverEndpointId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ResolverEndpointId", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type GetResolverEndpointOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Information about the resolver endpoint that you specified in a GetResolverEndpoint
-	// request.
-	ResolverEndpoint *ResolverEndpoint `type:"structure"`
-}
-
-// String returns the string representation
-func (s GetResolverEndpointOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetResolverEndpoint = "GetResolverEndpoint"
 
@@ -70,7 +26,7 @@ const opGetResolverEndpoint = "GetResolverEndpoint"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/GetResolverEndpoint
-func (c *Client) GetResolverEndpointRequest(input *GetResolverEndpointInput) GetResolverEndpointRequest {
+func (c *Client) GetResolverEndpointRequest(input *types.GetResolverEndpointInput) GetResolverEndpointRequest {
 	op := &aws.Operation{
 		Name:       opGetResolverEndpoint,
 		HTTPMethod: "POST",
@@ -78,10 +34,10 @@ func (c *Client) GetResolverEndpointRequest(input *GetResolverEndpointInput) Get
 	}
 
 	if input == nil {
-		input = &GetResolverEndpointInput{}
+		input = &types.GetResolverEndpointInput{}
 	}
 
-	req := c.newRequest(op, input, &GetResolverEndpointOutput{})
+	req := c.newRequest(op, input, &types.GetResolverEndpointOutput{})
 	return GetResolverEndpointRequest{Request: req, Input: input, Copy: c.GetResolverEndpointRequest}
 }
 
@@ -89,8 +45,8 @@ func (c *Client) GetResolverEndpointRequest(input *GetResolverEndpointInput) Get
 // GetResolverEndpoint API operation.
 type GetResolverEndpointRequest struct {
 	*aws.Request
-	Input *GetResolverEndpointInput
-	Copy  func(*GetResolverEndpointInput) GetResolverEndpointRequest
+	Input *types.GetResolverEndpointInput
+	Copy  func(*types.GetResolverEndpointInput) GetResolverEndpointRequest
 }
 
 // Send marshals and sends the GetResolverEndpoint API request.
@@ -102,7 +58,7 @@ func (r GetResolverEndpointRequest) Send(ctx context.Context) (*GetResolverEndpo
 	}
 
 	resp := &GetResolverEndpointResponse{
-		GetResolverEndpointOutput: r.Request.Data.(*GetResolverEndpointOutput),
+		GetResolverEndpointOutput: r.Request.Data.(*types.GetResolverEndpointOutput),
 		response:                  &aws.Response{Request: r.Request},
 	}
 
@@ -112,7 +68,7 @@ func (r GetResolverEndpointRequest) Send(ctx context.Context) (*GetResolverEndpo
 // GetResolverEndpointResponse is the response type for the
 // GetResolverEndpoint API operation.
 type GetResolverEndpointResponse struct {
-	*GetResolverEndpointOutput
+	*types.GetResolverEndpointOutput
 
 	response *aws.Response
 }

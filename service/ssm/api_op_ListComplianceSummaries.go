@@ -4,70 +4,10 @@ package ssm
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ssm/types"
 )
-
-type ListComplianceSummariesInput struct {
-	_ struct{} `type:"structure"`
-
-	// One or more compliance or inventory filters. Use a filter to return a more
-	// specific list of results.
-	Filters []ComplianceStringFilter `type:"list"`
-
-	// The maximum number of items to return for this call. Currently, you can specify
-	// null or 50. The call also returns a token that you can specify in a subsequent
-	// call to get the next set of results.
-	MaxResults *int64 `min:"1" type:"integer"`
-
-	// A token to start the list. Use this token to get the next set of results.
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s ListComplianceSummariesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListComplianceSummariesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListComplianceSummariesInput"}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-	if s.Filters != nil {
-		for i, v := range s.Filters {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ListComplianceSummariesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A list of compliant and non-compliant summary counts based on compliance
-	// types. For example, this call returns State Manager associations, patches,
-	// or custom compliance types according to the filter criteria that you specified.
-	ComplianceSummaryItems []ComplianceSummaryItem `type:"list"`
-
-	// The token for the next set of items to return. Use this token to get the
-	// next set of results.
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s ListComplianceSummariesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListComplianceSummaries = "ListComplianceSummaries"
 
@@ -86,7 +26,7 @@ const opListComplianceSummaries = "ListComplianceSummaries"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ListComplianceSummaries
-func (c *Client) ListComplianceSummariesRequest(input *ListComplianceSummariesInput) ListComplianceSummariesRequest {
+func (c *Client) ListComplianceSummariesRequest(input *types.ListComplianceSummariesInput) ListComplianceSummariesRequest {
 	op := &aws.Operation{
 		Name:       opListComplianceSummaries,
 		HTTPMethod: "POST",
@@ -94,10 +34,10 @@ func (c *Client) ListComplianceSummariesRequest(input *ListComplianceSummariesIn
 	}
 
 	if input == nil {
-		input = &ListComplianceSummariesInput{}
+		input = &types.ListComplianceSummariesInput{}
 	}
 
-	req := c.newRequest(op, input, &ListComplianceSummariesOutput{})
+	req := c.newRequest(op, input, &types.ListComplianceSummariesOutput{})
 	return ListComplianceSummariesRequest{Request: req, Input: input, Copy: c.ListComplianceSummariesRequest}
 }
 
@@ -105,8 +45,8 @@ func (c *Client) ListComplianceSummariesRequest(input *ListComplianceSummariesIn
 // ListComplianceSummaries API operation.
 type ListComplianceSummariesRequest struct {
 	*aws.Request
-	Input *ListComplianceSummariesInput
-	Copy  func(*ListComplianceSummariesInput) ListComplianceSummariesRequest
+	Input *types.ListComplianceSummariesInput
+	Copy  func(*types.ListComplianceSummariesInput) ListComplianceSummariesRequest
 }
 
 // Send marshals and sends the ListComplianceSummaries API request.
@@ -118,7 +58,7 @@ func (r ListComplianceSummariesRequest) Send(ctx context.Context) (*ListComplian
 	}
 
 	resp := &ListComplianceSummariesResponse{
-		ListComplianceSummariesOutput: r.Request.Data.(*ListComplianceSummariesOutput),
+		ListComplianceSummariesOutput: r.Request.Data.(*types.ListComplianceSummariesOutput),
 		response:                      &aws.Response{Request: r.Request},
 	}
 
@@ -128,7 +68,7 @@ func (r ListComplianceSummariesRequest) Send(ctx context.Context) (*ListComplian
 // ListComplianceSummariesResponse is the response type for the
 // ListComplianceSummaries API operation.
 type ListComplianceSummariesResponse struct {
-	*ListComplianceSummariesOutput
+	*types.ListComplianceSummariesOutput
 
 	response *aws.Response
 }

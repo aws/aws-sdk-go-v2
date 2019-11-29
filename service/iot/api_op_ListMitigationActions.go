@@ -6,104 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/iot/types"
 )
-
-type ListMitigationActionsInput struct {
-	_ struct{} `type:"structure"`
-
-	// Specify a value to limit the result to mitigation actions with a specific
-	// action type.
-	ActionType MitigationActionType `location:"querystring" locationName:"actionType" type:"string" enum:"true"`
-
-	// The maximum number of results to return at one time. The default is 25.
-	MaxResults *int64 `location:"querystring" locationName:"maxResults" min:"1" type:"integer"`
-
-	// The token for the next set of results.
-	NextToken *string `location:"querystring" locationName:"nextToken" type:"string"`
-}
-
-// String returns the string representation
-func (s ListMitigationActionsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListMitigationActionsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListMitigationActionsInput"}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListMitigationActionsInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if len(s.ActionType) > 0 {
-		v := s.ActionType
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "actionType", protocol.QuotedValue{ValueMarshaler: v}, metadata)
-	}
-	if s.MaxResults != nil {
-		v := *s.MaxResults
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "maxResults", protocol.Int64Value(v), metadata)
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type ListMitigationActionsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A set of actions that matched the specified filter criteria.
-	ActionIdentifiers []MitigationActionIdentifier `locationName:"actionIdentifiers" type:"list"`
-
-	// The token for the next set of results.
-	NextToken *string `locationName:"nextToken" type:"string"`
-}
-
-// String returns the string representation
-func (s ListMitigationActionsOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListMitigationActionsOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.ActionIdentifiers != nil {
-		v := s.ActionIdentifiers
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "actionIdentifiers", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opListMitigationActions = "ListMitigationActions"
 
@@ -118,7 +22,7 @@ const opListMitigationActions = "ListMitigationActions"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) ListMitigationActionsRequest(input *ListMitigationActionsInput) ListMitigationActionsRequest {
+func (c *Client) ListMitigationActionsRequest(input *types.ListMitigationActionsInput) ListMitigationActionsRequest {
 	op := &aws.Operation{
 		Name:       opListMitigationActions,
 		HTTPMethod: "GET",
@@ -126,10 +30,10 @@ func (c *Client) ListMitigationActionsRequest(input *ListMitigationActionsInput)
 	}
 
 	if input == nil {
-		input = &ListMitigationActionsInput{}
+		input = &types.ListMitigationActionsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListMitigationActionsOutput{})
+	req := c.newRequest(op, input, &types.ListMitigationActionsOutput{})
 	return ListMitigationActionsRequest{Request: req, Input: input, Copy: c.ListMitigationActionsRequest}
 }
 
@@ -137,8 +41,8 @@ func (c *Client) ListMitigationActionsRequest(input *ListMitigationActionsInput)
 // ListMitigationActions API operation.
 type ListMitigationActionsRequest struct {
 	*aws.Request
-	Input *ListMitigationActionsInput
-	Copy  func(*ListMitigationActionsInput) ListMitigationActionsRequest
+	Input *types.ListMitigationActionsInput
+	Copy  func(*types.ListMitigationActionsInput) ListMitigationActionsRequest
 }
 
 // Send marshals and sends the ListMitigationActions API request.
@@ -150,7 +54,7 @@ func (r ListMitigationActionsRequest) Send(ctx context.Context) (*ListMitigation
 	}
 
 	resp := &ListMitigationActionsResponse{
-		ListMitigationActionsOutput: r.Request.Data.(*ListMitigationActionsOutput),
+		ListMitigationActionsOutput: r.Request.Data.(*types.ListMitigationActionsOutput),
 		response:                    &aws.Response{Request: r.Request},
 	}
 
@@ -160,7 +64,7 @@ func (r ListMitigationActionsRequest) Send(ctx context.Context) (*ListMitigation
 // ListMitigationActionsResponse is the response type for the
 // ListMitigationActions API operation.
 type ListMitigationActionsResponse struct {
-	*ListMitigationActionsOutput
+	*types.ListMitigationActionsOutput
 
 	response *aws.Response
 }

@@ -6,62 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-type DescribeFpgaImageAttributeInput struct {
-	_ struct{} `type:"structure"`
-
-	// The AFI attribute.
-	//
-	// Attribute is a required field
-	Attribute FpgaImageAttributeName `type:"string" required:"true" enum:"true"`
-
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have
-	// the required permissions, the error response is DryRunOperation. Otherwise,
-	// it is UnauthorizedOperation.
-	DryRun *bool `type:"boolean"`
-
-	// The ID of the AFI.
-	//
-	// FpgaImageId is a required field
-	FpgaImageId *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeFpgaImageAttributeInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeFpgaImageAttributeInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeFpgaImageAttributeInput"}
-	if len(s.Attribute) == 0 {
-		invalidParams.Add(aws.NewErrParamRequired("Attribute"))
-	}
-
-	if s.FpgaImageId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("FpgaImageId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribeFpgaImageAttributeOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Information about the attribute.
-	FpgaImageAttribute *FpgaImageAttribute `locationName:"fpgaImageAttribute" type:"structure"`
-}
-
-// String returns the string representation
-func (s DescribeFpgaImageAttributeOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeFpgaImageAttribute = "DescribeFpgaImageAttribute"
 
@@ -78,7 +24,7 @@ const opDescribeFpgaImageAttribute = "DescribeFpgaImageAttribute"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeFpgaImageAttribute
-func (c *Client) DescribeFpgaImageAttributeRequest(input *DescribeFpgaImageAttributeInput) DescribeFpgaImageAttributeRequest {
+func (c *Client) DescribeFpgaImageAttributeRequest(input *types.DescribeFpgaImageAttributeInput) DescribeFpgaImageAttributeRequest {
 	op := &aws.Operation{
 		Name:       opDescribeFpgaImageAttribute,
 		HTTPMethod: "POST",
@@ -86,10 +32,10 @@ func (c *Client) DescribeFpgaImageAttributeRequest(input *DescribeFpgaImageAttri
 	}
 
 	if input == nil {
-		input = &DescribeFpgaImageAttributeInput{}
+		input = &types.DescribeFpgaImageAttributeInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeFpgaImageAttributeOutput{})
+	req := c.newRequest(op, input, &types.DescribeFpgaImageAttributeOutput{})
 	return DescribeFpgaImageAttributeRequest{Request: req, Input: input, Copy: c.DescribeFpgaImageAttributeRequest}
 }
 
@@ -97,8 +43,8 @@ func (c *Client) DescribeFpgaImageAttributeRequest(input *DescribeFpgaImageAttri
 // DescribeFpgaImageAttribute API operation.
 type DescribeFpgaImageAttributeRequest struct {
 	*aws.Request
-	Input *DescribeFpgaImageAttributeInput
-	Copy  func(*DescribeFpgaImageAttributeInput) DescribeFpgaImageAttributeRequest
+	Input *types.DescribeFpgaImageAttributeInput
+	Copy  func(*types.DescribeFpgaImageAttributeInput) DescribeFpgaImageAttributeRequest
 }
 
 // Send marshals and sends the DescribeFpgaImageAttribute API request.
@@ -110,7 +56,7 @@ func (r DescribeFpgaImageAttributeRequest) Send(ctx context.Context) (*DescribeF
 	}
 
 	resp := &DescribeFpgaImageAttributeResponse{
-		DescribeFpgaImageAttributeOutput: r.Request.Data.(*DescribeFpgaImageAttributeOutput),
+		DescribeFpgaImageAttributeOutput: r.Request.Data.(*types.DescribeFpgaImageAttributeOutput),
 		response:                         &aws.Response{Request: r.Request},
 	}
 
@@ -120,7 +66,7 @@ func (r DescribeFpgaImageAttributeRequest) Send(ctx context.Context) (*DescribeF
 // DescribeFpgaImageAttributeResponse is the response type for the
 // DescribeFpgaImageAttribute API operation.
 type DescribeFpgaImageAttributeResponse struct {
-	*DescribeFpgaImageAttributeOutput
+	*types.DescribeFpgaImageAttributeOutput
 
 	response *aws.Response
 }

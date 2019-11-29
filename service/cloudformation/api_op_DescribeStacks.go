@@ -6,62 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/cloudformation/types"
 )
-
-// The input for DescribeStacks action.
-type DescribeStacksInput struct {
-	_ struct{} `type:"structure"`
-
-	// A string that identifies the next page of stacks that you want to retrieve.
-	NextToken *string `min:"1" type:"string"`
-
-	// The name or the unique stack ID that is associated with the stack, which
-	// are not always interchangeable:
-	//
-	//    * Running stacks: You can specify either the stack's name or its unique
-	//    stack ID.
-	//
-	//    * Deleted stacks: You must specify the unique stack ID.
-	//
-	// Default: There is no default value.
-	StackName *string `type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeStacksInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeStacksInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeStacksInput"}
-	if s.NextToken != nil && len(*s.NextToken) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// The output for a DescribeStacks action.
-type DescribeStacksOutput struct {
-	_ struct{} `type:"structure"`
-
-	// If the output exceeds 1 MB in size, a string that identifies the next page
-	// of stacks. If no additional page exists, this value is null.
-	NextToken *string `min:"1" type:"string"`
-
-	// A list of stack structures.
-	Stacks []Stack `type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeStacksOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeStacks = "DescribeStacks"
 
@@ -81,7 +27,7 @@ const opDescribeStacks = "DescribeStacks"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DescribeStacks
-func (c *Client) DescribeStacksRequest(input *DescribeStacksInput) DescribeStacksRequest {
+func (c *Client) DescribeStacksRequest(input *types.DescribeStacksInput) DescribeStacksRequest {
 	op := &aws.Operation{
 		Name:       opDescribeStacks,
 		HTTPMethod: "POST",
@@ -95,10 +41,10 @@ func (c *Client) DescribeStacksRequest(input *DescribeStacksInput) DescribeStack
 	}
 
 	if input == nil {
-		input = &DescribeStacksInput{}
+		input = &types.DescribeStacksInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeStacksOutput{})
+	req := c.newRequest(op, input, &types.DescribeStacksOutput{})
 	return DescribeStacksRequest{Request: req, Input: input, Copy: c.DescribeStacksRequest}
 }
 
@@ -106,8 +52,8 @@ func (c *Client) DescribeStacksRequest(input *DescribeStacksInput) DescribeStack
 // DescribeStacks API operation.
 type DescribeStacksRequest struct {
 	*aws.Request
-	Input *DescribeStacksInput
-	Copy  func(*DescribeStacksInput) DescribeStacksRequest
+	Input *types.DescribeStacksInput
+	Copy  func(*types.DescribeStacksInput) DescribeStacksRequest
 }
 
 // Send marshals and sends the DescribeStacks API request.
@@ -119,7 +65,7 @@ func (r DescribeStacksRequest) Send(ctx context.Context) (*DescribeStacksRespons
 	}
 
 	resp := &DescribeStacksResponse{
-		DescribeStacksOutput: r.Request.Data.(*DescribeStacksOutput),
+		DescribeStacksOutput: r.Request.Data.(*types.DescribeStacksOutput),
 		response:             &aws.Response{Request: r.Request},
 	}
 
@@ -149,7 +95,7 @@ func NewDescribeStacksPaginator(req DescribeStacksRequest) DescribeStacksPaginat
 	return DescribeStacksPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *DescribeStacksInput
+				var inCpy *types.DescribeStacksInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -169,14 +115,14 @@ type DescribeStacksPaginator struct {
 	aws.Pager
 }
 
-func (p *DescribeStacksPaginator) CurrentPage() *DescribeStacksOutput {
-	return p.Pager.CurrentPage().(*DescribeStacksOutput)
+func (p *DescribeStacksPaginator) CurrentPage() *types.DescribeStacksOutput {
+	return p.Pager.CurrentPage().(*types.DescribeStacksOutput)
 }
 
 // DescribeStacksResponse is the response type for the
 // DescribeStacks API operation.
 type DescribeStacksResponse struct {
-	*DescribeStacksOutput
+	*types.DescribeStacksOutput
 
 	response *aws.Response
 }

@@ -6,84 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/glue/types"
 )
-
-type GetTableVersionsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the Data Catalog where the tables reside. If none is provided,
-	// the AWS account ID is used by default.
-	CatalogId *string `min:"1" type:"string"`
-
-	// The database in the catalog in which the table resides. For Hive compatibility,
-	// this name is entirely lowercase.
-	//
-	// DatabaseName is a required field
-	DatabaseName *string `min:"1" type:"string" required:"true"`
-
-	// The maximum number of table versions to return in one response.
-	MaxResults *int64 `min:"1" type:"integer"`
-
-	// A continuation token, if this is not the first call.
-	NextToken *string `type:"string"`
-
-	// The name of the table. For Hive compatibility, this name is entirely lowercase.
-	//
-	// TableName is a required field
-	TableName *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetTableVersionsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetTableVersionsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetTableVersionsInput"}
-	if s.CatalogId != nil && len(*s.CatalogId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("CatalogId", 1))
-	}
-
-	if s.DatabaseName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DatabaseName"))
-	}
-	if s.DatabaseName != nil && len(*s.DatabaseName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("DatabaseName", 1))
-	}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-
-	if s.TableName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("TableName"))
-	}
-	if s.TableName != nil && len(*s.TableName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("TableName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type GetTableVersionsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A continuation token, if the list of available versions does not include
-	// the last one.
-	NextToken *string `type:"string"`
-
-	// A list of strings identifying available versions of the specified table.
-	TableVersions []TableVersion `type:"list"`
-}
-
-// String returns the string representation
-func (s GetTableVersionsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetTableVersions = "GetTableVersions"
 
@@ -101,7 +25,7 @@ const opGetTableVersions = "GetTableVersions"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetTableVersions
-func (c *Client) GetTableVersionsRequest(input *GetTableVersionsInput) GetTableVersionsRequest {
+func (c *Client) GetTableVersionsRequest(input *types.GetTableVersionsInput) GetTableVersionsRequest {
 	op := &aws.Operation{
 		Name:       opGetTableVersions,
 		HTTPMethod: "POST",
@@ -115,10 +39,10 @@ func (c *Client) GetTableVersionsRequest(input *GetTableVersionsInput) GetTableV
 	}
 
 	if input == nil {
-		input = &GetTableVersionsInput{}
+		input = &types.GetTableVersionsInput{}
 	}
 
-	req := c.newRequest(op, input, &GetTableVersionsOutput{})
+	req := c.newRequest(op, input, &types.GetTableVersionsOutput{})
 	return GetTableVersionsRequest{Request: req, Input: input, Copy: c.GetTableVersionsRequest}
 }
 
@@ -126,8 +50,8 @@ func (c *Client) GetTableVersionsRequest(input *GetTableVersionsInput) GetTableV
 // GetTableVersions API operation.
 type GetTableVersionsRequest struct {
 	*aws.Request
-	Input *GetTableVersionsInput
-	Copy  func(*GetTableVersionsInput) GetTableVersionsRequest
+	Input *types.GetTableVersionsInput
+	Copy  func(*types.GetTableVersionsInput) GetTableVersionsRequest
 }
 
 // Send marshals and sends the GetTableVersions API request.
@@ -139,7 +63,7 @@ func (r GetTableVersionsRequest) Send(ctx context.Context) (*GetTableVersionsRes
 	}
 
 	resp := &GetTableVersionsResponse{
-		GetTableVersionsOutput: r.Request.Data.(*GetTableVersionsOutput),
+		GetTableVersionsOutput: r.Request.Data.(*types.GetTableVersionsOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -169,7 +93,7 @@ func NewGetTableVersionsPaginator(req GetTableVersionsRequest) GetTableVersionsP
 	return GetTableVersionsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *GetTableVersionsInput
+				var inCpy *types.GetTableVersionsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -189,14 +113,14 @@ type GetTableVersionsPaginator struct {
 	aws.Pager
 }
 
-func (p *GetTableVersionsPaginator) CurrentPage() *GetTableVersionsOutput {
-	return p.Pager.CurrentPage().(*GetTableVersionsOutput)
+func (p *GetTableVersionsPaginator) CurrentPage() *types.GetTableVersionsOutput {
+	return p.Pager.CurrentPage().(*types.GetTableVersionsOutput)
 }
 
 // GetTableVersionsResponse is the response type for the
 // GetTableVersions API operation.
 type GetTableVersionsResponse struct {
-	*GetTableVersionsOutput
+	*types.GetTableVersionsOutput
 
 	response *aws.Response
 }

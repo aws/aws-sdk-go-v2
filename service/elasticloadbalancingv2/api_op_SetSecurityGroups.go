@@ -6,57 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/elasticloadbalancingv2/types"
 )
-
-type SetSecurityGroupsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the load balancer.
-	//
-	// LoadBalancerArn is a required field
-	LoadBalancerArn *string `type:"string" required:"true"`
-
-	// The IDs of the security groups.
-	//
-	// SecurityGroups is a required field
-	SecurityGroups []string `type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s SetSecurityGroupsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *SetSecurityGroupsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "SetSecurityGroupsInput"}
-
-	if s.LoadBalancerArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("LoadBalancerArn"))
-	}
-
-	if s.SecurityGroups == nil {
-		invalidParams.Add(aws.NewErrParamRequired("SecurityGroups"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type SetSecurityGroupsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The IDs of the security groups associated with the load balancer.
-	SecurityGroupIds []string `type:"list"`
-}
-
-// String returns the string representation
-func (s SetSecurityGroupsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opSetSecurityGroups = "SetSecurityGroups"
 
@@ -77,7 +28,7 @@ const opSetSecurityGroups = "SetSecurityGroups"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/SetSecurityGroups
-func (c *Client) SetSecurityGroupsRequest(input *SetSecurityGroupsInput) SetSecurityGroupsRequest {
+func (c *Client) SetSecurityGroupsRequest(input *types.SetSecurityGroupsInput) SetSecurityGroupsRequest {
 	op := &aws.Operation{
 		Name:       opSetSecurityGroups,
 		HTTPMethod: "POST",
@@ -85,10 +36,10 @@ func (c *Client) SetSecurityGroupsRequest(input *SetSecurityGroupsInput) SetSecu
 	}
 
 	if input == nil {
-		input = &SetSecurityGroupsInput{}
+		input = &types.SetSecurityGroupsInput{}
 	}
 
-	req := c.newRequest(op, input, &SetSecurityGroupsOutput{})
+	req := c.newRequest(op, input, &types.SetSecurityGroupsOutput{})
 	return SetSecurityGroupsRequest{Request: req, Input: input, Copy: c.SetSecurityGroupsRequest}
 }
 
@@ -96,8 +47,8 @@ func (c *Client) SetSecurityGroupsRequest(input *SetSecurityGroupsInput) SetSecu
 // SetSecurityGroups API operation.
 type SetSecurityGroupsRequest struct {
 	*aws.Request
-	Input *SetSecurityGroupsInput
-	Copy  func(*SetSecurityGroupsInput) SetSecurityGroupsRequest
+	Input *types.SetSecurityGroupsInput
+	Copy  func(*types.SetSecurityGroupsInput) SetSecurityGroupsRequest
 }
 
 // Send marshals and sends the SetSecurityGroups API request.
@@ -109,7 +60,7 @@ func (r SetSecurityGroupsRequest) Send(ctx context.Context) (*SetSecurityGroupsR
 	}
 
 	resp := &SetSecurityGroupsResponse{
-		SetSecurityGroupsOutput: r.Request.Data.(*SetSecurityGroupsOutput),
+		SetSecurityGroupsOutput: r.Request.Data.(*types.SetSecurityGroupsOutput),
 		response:                &aws.Response{Request: r.Request},
 	}
 
@@ -119,7 +70,7 @@ func (r SetSecurityGroupsRequest) Send(ctx context.Context) (*SetSecurityGroupsR
 // SetSecurityGroupsResponse is the response type for the
 // SetSecurityGroups API operation.
 type SetSecurityGroupsResponse struct {
-	*SetSecurityGroupsOutput
+	*types.SetSecurityGroupsOutput
 
 	response *aws.Response
 }

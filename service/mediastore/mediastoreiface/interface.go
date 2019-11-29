@@ -10,6 +10,7 @@ package mediastoreiface
 
 import (
 	"github.com/aws/aws-sdk-go-v2/service/mediastore"
+	"github.com/aws/aws-sdk-go-v2/service/mediastore/types"
 )
 
 // ClientAPI provides an interface to enable mocking the
@@ -43,7 +44,7 @@ import (
 //    type mockClientClient struct {
 //        mediastoreiface.ClientPI
 //    }
-//    func (m *mockClientClient) CreateContainer(input *mediastore.CreateContainerInput) (*mediastore.CreateContainerOutput, error) {
+//    func (m *mockClientClient) CreateContainer(input *types.CreateContainerInput) (*types.CreateContainerOutput, error) {
 //        // mock response/functionality
 //    }
 //
@@ -61,41 +62,41 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type ClientAPI interface {
-	CreateContainerRequest(*mediastore.CreateContainerInput) mediastore.CreateContainerRequest
+	CreateContainerRequest(*types.CreateContainerInput) mediastore.CreateContainerRequest
 
-	DeleteContainerRequest(*mediastore.DeleteContainerInput) mediastore.DeleteContainerRequest
+	DeleteContainerRequest(*types.DeleteContainerInput) mediastore.DeleteContainerRequest
 
-	DeleteContainerPolicyRequest(*mediastore.DeleteContainerPolicyInput) mediastore.DeleteContainerPolicyRequest
+	DeleteContainerPolicyRequest(*types.DeleteContainerPolicyInput) mediastore.DeleteContainerPolicyRequest
 
-	DeleteCorsPolicyRequest(*mediastore.DeleteCorsPolicyInput) mediastore.DeleteCorsPolicyRequest
+	DeleteCorsPolicyRequest(*types.DeleteCorsPolicyInput) mediastore.DeleteCorsPolicyRequest
 
-	DeleteLifecyclePolicyRequest(*mediastore.DeleteLifecyclePolicyInput) mediastore.DeleteLifecyclePolicyRequest
+	DeleteLifecyclePolicyRequest(*types.DeleteLifecyclePolicyInput) mediastore.DeleteLifecyclePolicyRequest
 
-	DescribeContainerRequest(*mediastore.DescribeContainerInput) mediastore.DescribeContainerRequest
+	DescribeContainerRequest(*types.DescribeContainerInput) mediastore.DescribeContainerRequest
 
-	GetContainerPolicyRequest(*mediastore.GetContainerPolicyInput) mediastore.GetContainerPolicyRequest
+	GetContainerPolicyRequest(*types.GetContainerPolicyInput) mediastore.GetContainerPolicyRequest
 
-	GetCorsPolicyRequest(*mediastore.GetCorsPolicyInput) mediastore.GetCorsPolicyRequest
+	GetCorsPolicyRequest(*types.GetCorsPolicyInput) mediastore.GetCorsPolicyRequest
 
-	GetLifecyclePolicyRequest(*mediastore.GetLifecyclePolicyInput) mediastore.GetLifecyclePolicyRequest
+	GetLifecyclePolicyRequest(*types.GetLifecyclePolicyInput) mediastore.GetLifecyclePolicyRequest
 
-	ListContainersRequest(*mediastore.ListContainersInput) mediastore.ListContainersRequest
+	ListContainersRequest(*types.ListContainersInput) mediastore.ListContainersRequest
 
-	ListTagsForResourceRequest(*mediastore.ListTagsForResourceInput) mediastore.ListTagsForResourceRequest
+	ListTagsForResourceRequest(*types.ListTagsForResourceInput) mediastore.ListTagsForResourceRequest
 
-	PutContainerPolicyRequest(*mediastore.PutContainerPolicyInput) mediastore.PutContainerPolicyRequest
+	PutContainerPolicyRequest(*types.PutContainerPolicyInput) mediastore.PutContainerPolicyRequest
 
-	PutCorsPolicyRequest(*mediastore.PutCorsPolicyInput) mediastore.PutCorsPolicyRequest
+	PutCorsPolicyRequest(*types.PutCorsPolicyInput) mediastore.PutCorsPolicyRequest
 
-	PutLifecyclePolicyRequest(*mediastore.PutLifecyclePolicyInput) mediastore.PutLifecyclePolicyRequest
+	PutLifecyclePolicyRequest(*types.PutLifecyclePolicyInput) mediastore.PutLifecyclePolicyRequest
 
-	StartAccessLoggingRequest(*mediastore.StartAccessLoggingInput) mediastore.StartAccessLoggingRequest
+	StartAccessLoggingRequest(*types.StartAccessLoggingInput) mediastore.StartAccessLoggingRequest
 
-	StopAccessLoggingRequest(*mediastore.StopAccessLoggingInput) mediastore.StopAccessLoggingRequest
+	StopAccessLoggingRequest(*types.StopAccessLoggingInput) mediastore.StopAccessLoggingRequest
 
-	TagResourceRequest(*mediastore.TagResourceInput) mediastore.TagResourceRequest
+	TagResourceRequest(*types.TagResourceInput) mediastore.TagResourceRequest
 
-	UntagResourceRequest(*mediastore.UntagResourceInput) mediastore.UntagResourceRequest
+	UntagResourceRequest(*types.UntagResourceInput) mediastore.UntagResourceRequest
 }
 
 var _ ClientAPI = (*mediastore.Client)(nil)

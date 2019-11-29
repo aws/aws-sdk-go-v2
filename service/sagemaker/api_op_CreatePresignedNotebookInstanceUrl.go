@@ -6,54 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
 )
-
-type CreatePresignedNotebookInstanceUrlInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the notebook instance.
-	//
-	// NotebookInstanceName is a required field
-	NotebookInstanceName *string `type:"string" required:"true"`
-
-	// The duration of the session, in seconds. The default is 12 hours.
-	SessionExpirationDurationInSeconds *int64 `min:"1800" type:"integer"`
-}
-
-// String returns the string representation
-func (s CreatePresignedNotebookInstanceUrlInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreatePresignedNotebookInstanceUrlInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreatePresignedNotebookInstanceUrlInput"}
-
-	if s.NotebookInstanceName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("NotebookInstanceName"))
-	}
-	if s.SessionExpirationDurationInSeconds != nil && *s.SessionExpirationDurationInSeconds < 1800 {
-		invalidParams.Add(aws.NewErrParamMinValue("SessionExpirationDurationInSeconds", 1800))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type CreatePresignedNotebookInstanceUrlOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A JSON object that contains the URL string.
-	AuthorizedUrl *string `type:"string"`
-}
-
-// String returns the string representation
-func (s CreatePresignedNotebookInstanceUrlOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCreatePresignedNotebookInstanceUrl = "CreatePresignedNotebookInstanceUrl"
 
@@ -86,7 +40,7 @@ const opCreatePresignedNotebookInstanceUrl = "CreatePresignedNotebookInstanceUrl
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreatePresignedNotebookInstanceUrl
-func (c *Client) CreatePresignedNotebookInstanceUrlRequest(input *CreatePresignedNotebookInstanceUrlInput) CreatePresignedNotebookInstanceUrlRequest {
+func (c *Client) CreatePresignedNotebookInstanceUrlRequest(input *types.CreatePresignedNotebookInstanceUrlInput) CreatePresignedNotebookInstanceUrlRequest {
 	op := &aws.Operation{
 		Name:       opCreatePresignedNotebookInstanceUrl,
 		HTTPMethod: "POST",
@@ -94,10 +48,10 @@ func (c *Client) CreatePresignedNotebookInstanceUrlRequest(input *CreatePresigne
 	}
 
 	if input == nil {
-		input = &CreatePresignedNotebookInstanceUrlInput{}
+		input = &types.CreatePresignedNotebookInstanceUrlInput{}
 	}
 
-	req := c.newRequest(op, input, &CreatePresignedNotebookInstanceUrlOutput{})
+	req := c.newRequest(op, input, &types.CreatePresignedNotebookInstanceUrlOutput{})
 	return CreatePresignedNotebookInstanceUrlRequest{Request: req, Input: input, Copy: c.CreatePresignedNotebookInstanceUrlRequest}
 }
 
@@ -105,8 +59,8 @@ func (c *Client) CreatePresignedNotebookInstanceUrlRequest(input *CreatePresigne
 // CreatePresignedNotebookInstanceUrl API operation.
 type CreatePresignedNotebookInstanceUrlRequest struct {
 	*aws.Request
-	Input *CreatePresignedNotebookInstanceUrlInput
-	Copy  func(*CreatePresignedNotebookInstanceUrlInput) CreatePresignedNotebookInstanceUrlRequest
+	Input *types.CreatePresignedNotebookInstanceUrlInput
+	Copy  func(*types.CreatePresignedNotebookInstanceUrlInput) CreatePresignedNotebookInstanceUrlRequest
 }
 
 // Send marshals and sends the CreatePresignedNotebookInstanceUrl API request.
@@ -118,7 +72,7 @@ func (r CreatePresignedNotebookInstanceUrlRequest) Send(ctx context.Context) (*C
 	}
 
 	resp := &CreatePresignedNotebookInstanceUrlResponse{
-		CreatePresignedNotebookInstanceUrlOutput: r.Request.Data.(*CreatePresignedNotebookInstanceUrlOutput),
+		CreatePresignedNotebookInstanceUrlOutput: r.Request.Data.(*types.CreatePresignedNotebookInstanceUrlOutput),
 		response:                                 &aws.Response{Request: r.Request},
 	}
 
@@ -128,7 +82,7 @@ func (r CreatePresignedNotebookInstanceUrlRequest) Send(ctx context.Context) (*C
 // CreatePresignedNotebookInstanceUrlResponse is the response type for the
 // CreatePresignedNotebookInstanceUrl API operation.
 type CreatePresignedNotebookInstanceUrlResponse struct {
-	*CreatePresignedNotebookInstanceUrlOutput
+	*types.CreatePresignedNotebookInstanceUrlOutput
 
 	response *aws.Response
 }

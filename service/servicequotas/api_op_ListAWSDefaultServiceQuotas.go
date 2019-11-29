@@ -6,80 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/servicequotas/types"
 )
-
-type ListAWSDefaultServiceQuotasInput struct {
-	_ struct{} `type:"structure"`
-
-	// (Optional) Limits the number of results that you want to include in the response.
-	// If you don't include this parameter, the response defaults to a value that's
-	// specific to the operation. If additional items exist beyond the specified
-	// maximum, the NextToken element is present and has a value (isn't null). Include
-	// that value as the NextToken request parameter in the call to the operation
-	// to get the next part of the results. You should check NextToken after every
-	// operation to ensure that you receive all of the results.
-	MaxResults *int64 `min:"1" type:"integer"`
-
-	// (Optional) Use this parameter in a request if you receive a NextToken response
-	// in a previous request that indicates that there's more output available.
-	// In a subsequent call, set it to the value of the previous call's NextToken
-	// response to indicate where the output should continue from. If additional
-	// items exist beyond the specified maximum, the NextToken element is present
-	// and has a value (isn't null). Include that value as the NextToken request
-	// parameter in the call to the operation to get the next part of the results.
-	// You should check NextToken after every operation to ensure that you receive
-	// all of the results.
-	NextToken *string `type:"string"`
-
-	// Specifies the service that you want to use.
-	//
-	// ServiceCode is a required field
-	ServiceCode *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s ListAWSDefaultServiceQuotasInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListAWSDefaultServiceQuotasInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListAWSDefaultServiceQuotasInput"}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-
-	if s.ServiceCode == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ServiceCode"))
-	}
-	if s.ServiceCode != nil && len(*s.ServiceCode) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ServiceCode", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ListAWSDefaultServiceQuotasOutput struct {
-	_ struct{} `type:"structure"`
-
-	// (Optional) Use this parameter in a request if you receive a NextToken response
-	// in a previous request that indicates that there's more output available.
-	// In a subsequent call, set it to the value of the previous call's NextToken
-	// response to indicate where the output should continue from.
-	NextToken *string `type:"string"`
-
-	// A list of the quotas in the account with the AWS default values.
-	Quotas []ServiceQuota `type:"list"`
-}
-
-// String returns the string representation
-func (s ListAWSDefaultServiceQuotasOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListAWSDefaultServiceQuotas = "ListAWSDefaultServiceQuotas"
 
@@ -107,7 +35,7 @@ const opListAWSDefaultServiceQuotas = "ListAWSDefaultServiceQuotas"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/service-quotas-2019-06-24/ListAWSDefaultServiceQuotas
-func (c *Client) ListAWSDefaultServiceQuotasRequest(input *ListAWSDefaultServiceQuotasInput) ListAWSDefaultServiceQuotasRequest {
+func (c *Client) ListAWSDefaultServiceQuotasRequest(input *types.ListAWSDefaultServiceQuotasInput) ListAWSDefaultServiceQuotasRequest {
 	op := &aws.Operation{
 		Name:       opListAWSDefaultServiceQuotas,
 		HTTPMethod: "POST",
@@ -121,10 +49,10 @@ func (c *Client) ListAWSDefaultServiceQuotasRequest(input *ListAWSDefaultService
 	}
 
 	if input == nil {
-		input = &ListAWSDefaultServiceQuotasInput{}
+		input = &types.ListAWSDefaultServiceQuotasInput{}
 	}
 
-	req := c.newRequest(op, input, &ListAWSDefaultServiceQuotasOutput{})
+	req := c.newRequest(op, input, &types.ListAWSDefaultServiceQuotasOutput{})
 	return ListAWSDefaultServiceQuotasRequest{Request: req, Input: input, Copy: c.ListAWSDefaultServiceQuotasRequest}
 }
 
@@ -132,8 +60,8 @@ func (c *Client) ListAWSDefaultServiceQuotasRequest(input *ListAWSDefaultService
 // ListAWSDefaultServiceQuotas API operation.
 type ListAWSDefaultServiceQuotasRequest struct {
 	*aws.Request
-	Input *ListAWSDefaultServiceQuotasInput
-	Copy  func(*ListAWSDefaultServiceQuotasInput) ListAWSDefaultServiceQuotasRequest
+	Input *types.ListAWSDefaultServiceQuotasInput
+	Copy  func(*types.ListAWSDefaultServiceQuotasInput) ListAWSDefaultServiceQuotasRequest
 }
 
 // Send marshals and sends the ListAWSDefaultServiceQuotas API request.
@@ -145,7 +73,7 @@ func (r ListAWSDefaultServiceQuotasRequest) Send(ctx context.Context) (*ListAWSD
 	}
 
 	resp := &ListAWSDefaultServiceQuotasResponse{
-		ListAWSDefaultServiceQuotasOutput: r.Request.Data.(*ListAWSDefaultServiceQuotasOutput),
+		ListAWSDefaultServiceQuotasOutput: r.Request.Data.(*types.ListAWSDefaultServiceQuotasOutput),
 		response:                          &aws.Response{Request: r.Request},
 	}
 
@@ -175,7 +103,7 @@ func NewListAWSDefaultServiceQuotasPaginator(req ListAWSDefaultServiceQuotasRequ
 	return ListAWSDefaultServiceQuotasPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListAWSDefaultServiceQuotasInput
+				var inCpy *types.ListAWSDefaultServiceQuotasInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -195,14 +123,14 @@ type ListAWSDefaultServiceQuotasPaginator struct {
 	aws.Pager
 }
 
-func (p *ListAWSDefaultServiceQuotasPaginator) CurrentPage() *ListAWSDefaultServiceQuotasOutput {
-	return p.Pager.CurrentPage().(*ListAWSDefaultServiceQuotasOutput)
+func (p *ListAWSDefaultServiceQuotasPaginator) CurrentPage() *types.ListAWSDefaultServiceQuotasOutput {
+	return p.Pager.CurrentPage().(*types.ListAWSDefaultServiceQuotasOutput)
 }
 
 // ListAWSDefaultServiceQuotasResponse is the response type for the
 // ListAWSDefaultServiceQuotas API operation.
 type ListAWSDefaultServiceQuotasResponse struct {
-	*ListAWSDefaultServiceQuotasOutput
+	*types.ListAWSDefaultServiceQuotasOutput
 
 	response *aws.Response
 }

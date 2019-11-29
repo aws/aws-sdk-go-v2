@@ -6,49 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/devicefarm/types"
 )
-
-type DeleteInstanceProfileInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the instance profile you are requesting
-	// to delete.
-	//
-	// Arn is a required field
-	Arn *string `locationName:"arn" min:"32" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteInstanceProfileInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteInstanceProfileInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteInstanceProfileInput"}
-
-	if s.Arn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Arn"))
-	}
-	if s.Arn != nil && len(*s.Arn) < 32 {
-		invalidParams.Add(aws.NewErrParamMinLen("Arn", 32))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteInstanceProfileOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteInstanceProfileOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteInstanceProfile = "DeleteInstanceProfile"
 
@@ -65,7 +24,7 @@ const opDeleteInstanceProfile = "DeleteInstanceProfile"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/DeleteInstanceProfile
-func (c *Client) DeleteInstanceProfileRequest(input *DeleteInstanceProfileInput) DeleteInstanceProfileRequest {
+func (c *Client) DeleteInstanceProfileRequest(input *types.DeleteInstanceProfileInput) DeleteInstanceProfileRequest {
 	op := &aws.Operation{
 		Name:       opDeleteInstanceProfile,
 		HTTPMethod: "POST",
@@ -73,10 +32,10 @@ func (c *Client) DeleteInstanceProfileRequest(input *DeleteInstanceProfileInput)
 	}
 
 	if input == nil {
-		input = &DeleteInstanceProfileInput{}
+		input = &types.DeleteInstanceProfileInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteInstanceProfileOutput{})
+	req := c.newRequest(op, input, &types.DeleteInstanceProfileOutput{})
 	return DeleteInstanceProfileRequest{Request: req, Input: input, Copy: c.DeleteInstanceProfileRequest}
 }
 
@@ -84,8 +43,8 @@ func (c *Client) DeleteInstanceProfileRequest(input *DeleteInstanceProfileInput)
 // DeleteInstanceProfile API operation.
 type DeleteInstanceProfileRequest struct {
 	*aws.Request
-	Input *DeleteInstanceProfileInput
-	Copy  func(*DeleteInstanceProfileInput) DeleteInstanceProfileRequest
+	Input *types.DeleteInstanceProfileInput
+	Copy  func(*types.DeleteInstanceProfileInput) DeleteInstanceProfileRequest
 }
 
 // Send marshals and sends the DeleteInstanceProfile API request.
@@ -97,7 +56,7 @@ func (r DeleteInstanceProfileRequest) Send(ctx context.Context) (*DeleteInstance
 	}
 
 	resp := &DeleteInstanceProfileResponse{
-		DeleteInstanceProfileOutput: r.Request.Data.(*DeleteInstanceProfileOutput),
+		DeleteInstanceProfileOutput: r.Request.Data.(*types.DeleteInstanceProfileOutput),
 		response:                    &aws.Response{Request: r.Request},
 	}
 
@@ -107,7 +66,7 @@ func (r DeleteInstanceProfileRequest) Send(ctx context.Context) (*DeleteInstance
 // DeleteInstanceProfileResponse is the response type for the
 // DeleteInstanceProfile API operation.
 type DeleteInstanceProfileResponse struct {
-	*DeleteInstanceProfileOutput
+	*types.DeleteInstanceProfileOutput
 
 	response *aws.Response
 }

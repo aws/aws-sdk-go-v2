@@ -6,26 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/servicequotas/types"
 )
-
-type AssociateServiceQuotaTemplateInput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s AssociateServiceQuotaTemplateInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type AssociateServiceQuotaTemplateOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s AssociateServiceQuotaTemplateOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opAssociateServiceQuotaTemplate = "AssociateServiceQuotaTemplate"
 
@@ -47,7 +29,7 @@ const opAssociateServiceQuotaTemplate = "AssociateServiceQuotaTemplate"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/service-quotas-2019-06-24/AssociateServiceQuotaTemplate
-func (c *Client) AssociateServiceQuotaTemplateRequest(input *AssociateServiceQuotaTemplateInput) AssociateServiceQuotaTemplateRequest {
+func (c *Client) AssociateServiceQuotaTemplateRequest(input *types.AssociateServiceQuotaTemplateInput) AssociateServiceQuotaTemplateRequest {
 	op := &aws.Operation{
 		Name:       opAssociateServiceQuotaTemplate,
 		HTTPMethod: "POST",
@@ -55,10 +37,10 @@ func (c *Client) AssociateServiceQuotaTemplateRequest(input *AssociateServiceQuo
 	}
 
 	if input == nil {
-		input = &AssociateServiceQuotaTemplateInput{}
+		input = &types.AssociateServiceQuotaTemplateInput{}
 	}
 
-	req := c.newRequest(op, input, &AssociateServiceQuotaTemplateOutput{})
+	req := c.newRequest(op, input, &types.AssociateServiceQuotaTemplateOutput{})
 	return AssociateServiceQuotaTemplateRequest{Request: req, Input: input, Copy: c.AssociateServiceQuotaTemplateRequest}
 }
 
@@ -66,8 +48,8 @@ func (c *Client) AssociateServiceQuotaTemplateRequest(input *AssociateServiceQuo
 // AssociateServiceQuotaTemplate API operation.
 type AssociateServiceQuotaTemplateRequest struct {
 	*aws.Request
-	Input *AssociateServiceQuotaTemplateInput
-	Copy  func(*AssociateServiceQuotaTemplateInput) AssociateServiceQuotaTemplateRequest
+	Input *types.AssociateServiceQuotaTemplateInput
+	Copy  func(*types.AssociateServiceQuotaTemplateInput) AssociateServiceQuotaTemplateRequest
 }
 
 // Send marshals and sends the AssociateServiceQuotaTemplate API request.
@@ -79,7 +61,7 @@ func (r AssociateServiceQuotaTemplateRequest) Send(ctx context.Context) (*Associ
 	}
 
 	resp := &AssociateServiceQuotaTemplateResponse{
-		AssociateServiceQuotaTemplateOutput: r.Request.Data.(*AssociateServiceQuotaTemplateOutput),
+		AssociateServiceQuotaTemplateOutput: r.Request.Data.(*types.AssociateServiceQuotaTemplateOutput),
 		response:                            &aws.Response{Request: r.Request},
 	}
 
@@ -89,7 +71,7 @@ func (r AssociateServiceQuotaTemplateRequest) Send(ctx context.Context) (*Associ
 // AssociateServiceQuotaTemplateResponse is the response type for the
 // AssociateServiceQuotaTemplate API operation.
 type AssociateServiceQuotaTemplateResponse struct {
-	*AssociateServiceQuotaTemplateOutput
+	*types.AssociateServiceQuotaTemplateOutput
 
 	response *aws.Response
 }

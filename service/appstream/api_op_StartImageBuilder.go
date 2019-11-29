@@ -6,58 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/appstream/types"
 )
-
-type StartImageBuilderInput struct {
-	_ struct{} `type:"structure"`
-
-	// The version of the AppStream 2.0 agent to use for this image builder. To
-	// use the latest version of the AppStream 2.0 agent, specify [LATEST].
-	AppstreamAgentVersion *string `min:"1" type:"string"`
-
-	// The name of the image builder.
-	//
-	// Name is a required field
-	Name *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s StartImageBuilderInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *StartImageBuilderInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "StartImageBuilderInput"}
-	if s.AppstreamAgentVersion != nil && len(*s.AppstreamAgentVersion) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("AppstreamAgentVersion", 1))
-	}
-
-	if s.Name == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Name"))
-	}
-	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type StartImageBuilderOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Information about the image builder.
-	ImageBuilder *ImageBuilder `type:"structure"`
-}
-
-// String returns the string representation
-func (s StartImageBuilderOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opStartImageBuilder = "StartImageBuilder"
 
@@ -74,7 +24,7 @@ const opStartImageBuilder = "StartImageBuilder"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/StartImageBuilder
-func (c *Client) StartImageBuilderRequest(input *StartImageBuilderInput) StartImageBuilderRequest {
+func (c *Client) StartImageBuilderRequest(input *types.StartImageBuilderInput) StartImageBuilderRequest {
 	op := &aws.Operation{
 		Name:       opStartImageBuilder,
 		HTTPMethod: "POST",
@@ -82,10 +32,10 @@ func (c *Client) StartImageBuilderRequest(input *StartImageBuilderInput) StartIm
 	}
 
 	if input == nil {
-		input = &StartImageBuilderInput{}
+		input = &types.StartImageBuilderInput{}
 	}
 
-	req := c.newRequest(op, input, &StartImageBuilderOutput{})
+	req := c.newRequest(op, input, &types.StartImageBuilderOutput{})
 	return StartImageBuilderRequest{Request: req, Input: input, Copy: c.StartImageBuilderRequest}
 }
 
@@ -93,8 +43,8 @@ func (c *Client) StartImageBuilderRequest(input *StartImageBuilderInput) StartIm
 // StartImageBuilder API operation.
 type StartImageBuilderRequest struct {
 	*aws.Request
-	Input *StartImageBuilderInput
-	Copy  func(*StartImageBuilderInput) StartImageBuilderRequest
+	Input *types.StartImageBuilderInput
+	Copy  func(*types.StartImageBuilderInput) StartImageBuilderRequest
 }
 
 // Send marshals and sends the StartImageBuilder API request.
@@ -106,7 +56,7 @@ func (r StartImageBuilderRequest) Send(ctx context.Context) (*StartImageBuilderR
 	}
 
 	resp := &StartImageBuilderResponse{
-		StartImageBuilderOutput: r.Request.Data.(*StartImageBuilderOutput),
+		StartImageBuilderOutput: r.Request.Data.(*types.StartImageBuilderOutput),
 		response:                &aws.Response{Request: r.Request},
 	}
 
@@ -116,7 +66,7 @@ func (r StartImageBuilderRequest) Send(ctx context.Context) (*StartImageBuilderR
 // StartImageBuilderResponse is the response type for the
 // StartImageBuilder API operation.
 type StartImageBuilderResponse struct {
-	*StartImageBuilderOutput
+	*types.StartImageBuilderOutput
 
 	response *aws.Response
 }

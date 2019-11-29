@@ -6,68 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/cloudtrail/types"
 )
-
-type GetEventSelectorsInput struct {
-	_ struct{} `type:"structure"`
-
-	// Specifies the name of the trail or trail ARN. If you specify a trail name,
-	// the string must meet the following requirements:
-	//
-	//    * Contain only ASCII letters (a-z, A-Z), numbers (0-9), periods (.), underscores
-	//    (_), or dashes (-)
-	//
-	//    * Start with a letter or number, and end with a letter or number
-	//
-	//    * Be between 3 and 128 characters
-	//
-	//    * Have no adjacent periods, underscores or dashes. Names like my-_namespace
-	//    and my--namespace are not valid.
-	//
-	//    * Not be in IP address format (for example, 192.168.5.4)
-	//
-	// If you specify a trail ARN, it must be in the format:
-	//
-	// arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail
-	//
-	// TrailName is a required field
-	TrailName *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetEventSelectorsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetEventSelectorsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetEventSelectorsInput"}
-
-	if s.TrailName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("TrailName"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type GetEventSelectorsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The event selectors that are configured for the trail.
-	EventSelectors []EventSelector `type:"list"`
-
-	// The specified trail ARN that has the event selectors.
-	TrailARN *string `type:"string"`
-}
-
-// String returns the string representation
-func (s GetEventSelectorsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetEventSelectors = "GetEventSelectors"
 
@@ -85,7 +25,7 @@ const opGetEventSelectors = "GetEventSelectors"
 //    * If your event selector includes data events, the Amazon S3 objects or
 //    AWS Lambda functions that you are logging for data events.
 //
-// For more information, see Logging Data and Management Events for Trails (http://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-management-and-data-events-with-cloudtrail.html)
+// For more information, see Logging Data and Management Events for Trails (https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-management-and-data-events-with-cloudtrail.html)
 // in the AWS CloudTrail User Guide.
 //
 //    // Example sending a request using GetEventSelectorsRequest.
@@ -96,7 +36,7 @@ const opGetEventSelectors = "GetEventSelectors"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/GetEventSelectors
-func (c *Client) GetEventSelectorsRequest(input *GetEventSelectorsInput) GetEventSelectorsRequest {
+func (c *Client) GetEventSelectorsRequest(input *types.GetEventSelectorsInput) GetEventSelectorsRequest {
 	op := &aws.Operation{
 		Name:       opGetEventSelectors,
 		HTTPMethod: "POST",
@@ -104,10 +44,10 @@ func (c *Client) GetEventSelectorsRequest(input *GetEventSelectorsInput) GetEven
 	}
 
 	if input == nil {
-		input = &GetEventSelectorsInput{}
+		input = &types.GetEventSelectorsInput{}
 	}
 
-	req := c.newRequest(op, input, &GetEventSelectorsOutput{})
+	req := c.newRequest(op, input, &types.GetEventSelectorsOutput{})
 	return GetEventSelectorsRequest{Request: req, Input: input, Copy: c.GetEventSelectorsRequest}
 }
 
@@ -115,8 +55,8 @@ func (c *Client) GetEventSelectorsRequest(input *GetEventSelectorsInput) GetEven
 // GetEventSelectors API operation.
 type GetEventSelectorsRequest struct {
 	*aws.Request
-	Input *GetEventSelectorsInput
-	Copy  func(*GetEventSelectorsInput) GetEventSelectorsRequest
+	Input *types.GetEventSelectorsInput
+	Copy  func(*types.GetEventSelectorsInput) GetEventSelectorsRequest
 }
 
 // Send marshals and sends the GetEventSelectors API request.
@@ -128,7 +68,7 @@ func (r GetEventSelectorsRequest) Send(ctx context.Context) (*GetEventSelectorsR
 	}
 
 	resp := &GetEventSelectorsResponse{
-		GetEventSelectorsOutput: r.Request.Data.(*GetEventSelectorsOutput),
+		GetEventSelectorsOutput: r.Request.Data.(*types.GetEventSelectorsOutput),
 		response:                &aws.Response{Request: r.Request},
 	}
 
@@ -138,7 +78,7 @@ func (r GetEventSelectorsRequest) Send(ctx context.Context) (*GetEventSelectorsR
 // GetEventSelectorsResponse is the response type for the
 // GetEventSelectors API operation.
 type GetEventSelectorsResponse struct {
-	*GetEventSelectorsOutput
+	*types.GetEventSelectorsOutput
 
 	response *aws.Response
 }

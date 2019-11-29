@@ -6,49 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/lightsail/types"
 )
-
-type GetStaticIpInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the static IP in Lightsail.
-	//
-	// StaticIpName is a required field
-	StaticIpName *string `locationName:"staticIpName" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetStaticIpInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetStaticIpInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetStaticIpInput"}
-
-	if s.StaticIpName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("StaticIpName"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type GetStaticIpOutput struct {
-	_ struct{} `type:"structure"`
-
-	// An array of key-value pairs containing information about the requested static
-	// IP.
-	StaticIp *StaticIp `locationName:"staticIp" type:"structure"`
-}
-
-// String returns the string representation
-func (s GetStaticIpOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetStaticIp = "GetStaticIp"
 
@@ -65,7 +24,7 @@ const opGetStaticIp = "GetStaticIp"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetStaticIp
-func (c *Client) GetStaticIpRequest(input *GetStaticIpInput) GetStaticIpRequest {
+func (c *Client) GetStaticIpRequest(input *types.GetStaticIpInput) GetStaticIpRequest {
 	op := &aws.Operation{
 		Name:       opGetStaticIp,
 		HTTPMethod: "POST",
@@ -73,10 +32,10 @@ func (c *Client) GetStaticIpRequest(input *GetStaticIpInput) GetStaticIpRequest 
 	}
 
 	if input == nil {
-		input = &GetStaticIpInput{}
+		input = &types.GetStaticIpInput{}
 	}
 
-	req := c.newRequest(op, input, &GetStaticIpOutput{})
+	req := c.newRequest(op, input, &types.GetStaticIpOutput{})
 	return GetStaticIpRequest{Request: req, Input: input, Copy: c.GetStaticIpRequest}
 }
 
@@ -84,8 +43,8 @@ func (c *Client) GetStaticIpRequest(input *GetStaticIpInput) GetStaticIpRequest 
 // GetStaticIp API operation.
 type GetStaticIpRequest struct {
 	*aws.Request
-	Input *GetStaticIpInput
-	Copy  func(*GetStaticIpInput) GetStaticIpRequest
+	Input *types.GetStaticIpInput
+	Copy  func(*types.GetStaticIpInput) GetStaticIpRequest
 }
 
 // Send marshals and sends the GetStaticIp API request.
@@ -97,7 +56,7 @@ func (r GetStaticIpRequest) Send(ctx context.Context) (*GetStaticIpResponse, err
 	}
 
 	resp := &GetStaticIpResponse{
-		GetStaticIpOutput: r.Request.Data.(*GetStaticIpOutput),
+		GetStaticIpOutput: r.Request.Data.(*types.GetStaticIpOutput),
 		response:          &aws.Response{Request: r.Request},
 	}
 
@@ -107,7 +66,7 @@ func (r GetStaticIpRequest) Send(ctx context.Context) (*GetStaticIpResponse, err
 // GetStaticIpResponse is the response type for the
 // GetStaticIp API operation.
 type GetStaticIpResponse struct {
-	*GetStaticIpOutput
+	*types.GetStaticIpOutput
 
 	response *aws.Response
 }

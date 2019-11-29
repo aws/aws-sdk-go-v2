@@ -6,61 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/types"
 )
-
-type DeleteProvisionedProductPlanInput struct {
-	_ struct{} `type:"structure"`
-
-	// The language code.
-	//
-	//    * en - English (default)
-	//
-	//    * jp - Japanese
-	//
-	//    * zh - Chinese
-	AcceptLanguage *string `type:"string"`
-
-	// If set to true, AWS Service Catalog stops managing the specified provisioned
-	// product even if it cannot delete the underlying resources.
-	IgnoreErrors *bool `type:"boolean"`
-
-	// The plan identifier.
-	//
-	// PlanId is a required field
-	PlanId *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteProvisionedProductPlanInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteProvisionedProductPlanInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteProvisionedProductPlanInput"}
-
-	if s.PlanId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("PlanId"))
-	}
-	if s.PlanId != nil && len(*s.PlanId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("PlanId", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteProvisionedProductPlanOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteProvisionedProductPlanOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteProvisionedProductPlan = "DeleteProvisionedProductPlan"
 
@@ -77,7 +24,7 @@ const opDeleteProvisionedProductPlan = "DeleteProvisionedProductPlan"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DeleteProvisionedProductPlan
-func (c *Client) DeleteProvisionedProductPlanRequest(input *DeleteProvisionedProductPlanInput) DeleteProvisionedProductPlanRequest {
+func (c *Client) DeleteProvisionedProductPlanRequest(input *types.DeleteProvisionedProductPlanInput) DeleteProvisionedProductPlanRequest {
 	op := &aws.Operation{
 		Name:       opDeleteProvisionedProductPlan,
 		HTTPMethod: "POST",
@@ -85,10 +32,10 @@ func (c *Client) DeleteProvisionedProductPlanRequest(input *DeleteProvisionedPro
 	}
 
 	if input == nil {
-		input = &DeleteProvisionedProductPlanInput{}
+		input = &types.DeleteProvisionedProductPlanInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteProvisionedProductPlanOutput{})
+	req := c.newRequest(op, input, &types.DeleteProvisionedProductPlanOutput{})
 	return DeleteProvisionedProductPlanRequest{Request: req, Input: input, Copy: c.DeleteProvisionedProductPlanRequest}
 }
 
@@ -96,8 +43,8 @@ func (c *Client) DeleteProvisionedProductPlanRequest(input *DeleteProvisionedPro
 // DeleteProvisionedProductPlan API operation.
 type DeleteProvisionedProductPlanRequest struct {
 	*aws.Request
-	Input *DeleteProvisionedProductPlanInput
-	Copy  func(*DeleteProvisionedProductPlanInput) DeleteProvisionedProductPlanRequest
+	Input *types.DeleteProvisionedProductPlanInput
+	Copy  func(*types.DeleteProvisionedProductPlanInput) DeleteProvisionedProductPlanRequest
 }
 
 // Send marshals and sends the DeleteProvisionedProductPlan API request.
@@ -109,7 +56,7 @@ func (r DeleteProvisionedProductPlanRequest) Send(ctx context.Context) (*DeleteP
 	}
 
 	resp := &DeleteProvisionedProductPlanResponse{
-		DeleteProvisionedProductPlanOutput: r.Request.Data.(*DeleteProvisionedProductPlanOutput),
+		DeleteProvisionedProductPlanOutput: r.Request.Data.(*types.DeleteProvisionedProductPlanOutput),
 		response:                           &aws.Response{Request: r.Request},
 	}
 
@@ -119,7 +66,7 @@ func (r DeleteProvisionedProductPlanRequest) Send(ctx context.Context) (*DeleteP
 // DeleteProvisionedProductPlanResponse is the response type for the
 // DeleteProvisionedProductPlan API operation.
 type DeleteProvisionedProductPlanResponse struct {
-	*DeleteProvisionedProductPlanOutput
+	*types.DeleteProvisionedProductPlanOutput
 
 	response *aws.Response
 }

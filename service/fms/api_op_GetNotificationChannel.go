@@ -6,32 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/fms/types"
 )
-
-type GetNotificationChannelInput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s GetNotificationChannelInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type GetNotificationChannelOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The IAM role that is used by AWS Firewall Manager to record activity to SNS.
-	SnsRoleName *string `min:"1" type:"string"`
-
-	// The SNS topic that records AWS Firewall Manager activity.
-	SnsTopicArn *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s GetNotificationChannelOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetNotificationChannel = "GetNotificationChannel"
 
@@ -49,7 +25,7 @@ const opGetNotificationChannel = "GetNotificationChannel"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/GetNotificationChannel
-func (c *Client) GetNotificationChannelRequest(input *GetNotificationChannelInput) GetNotificationChannelRequest {
+func (c *Client) GetNotificationChannelRequest(input *types.GetNotificationChannelInput) GetNotificationChannelRequest {
 	op := &aws.Operation{
 		Name:       opGetNotificationChannel,
 		HTTPMethod: "POST",
@@ -57,10 +33,10 @@ func (c *Client) GetNotificationChannelRequest(input *GetNotificationChannelInpu
 	}
 
 	if input == nil {
-		input = &GetNotificationChannelInput{}
+		input = &types.GetNotificationChannelInput{}
 	}
 
-	req := c.newRequest(op, input, &GetNotificationChannelOutput{})
+	req := c.newRequest(op, input, &types.GetNotificationChannelOutput{})
 	return GetNotificationChannelRequest{Request: req, Input: input, Copy: c.GetNotificationChannelRequest}
 }
 
@@ -68,8 +44,8 @@ func (c *Client) GetNotificationChannelRequest(input *GetNotificationChannelInpu
 // GetNotificationChannel API operation.
 type GetNotificationChannelRequest struct {
 	*aws.Request
-	Input *GetNotificationChannelInput
-	Copy  func(*GetNotificationChannelInput) GetNotificationChannelRequest
+	Input *types.GetNotificationChannelInput
+	Copy  func(*types.GetNotificationChannelInput) GetNotificationChannelRequest
 }
 
 // Send marshals and sends the GetNotificationChannel API request.
@@ -81,7 +57,7 @@ func (r GetNotificationChannelRequest) Send(ctx context.Context) (*GetNotificati
 	}
 
 	resp := &GetNotificationChannelResponse{
-		GetNotificationChannelOutput: r.Request.Data.(*GetNotificationChannelOutput),
+		GetNotificationChannelOutput: r.Request.Data.(*types.GetNotificationChannelOutput),
 		response:                     &aws.Response{Request: r.Request},
 	}
 
@@ -91,7 +67,7 @@ func (r GetNotificationChannelRequest) Send(ctx context.Context) (*GetNotificati
 // GetNotificationChannelResponse is the response type for the
 // GetNotificationChannel API operation.
 type GetNotificationChannelResponse struct {
-	*GetNotificationChannelOutput
+	*types.GetNotificationChannelOutput
 
 	response *aws.Response
 }

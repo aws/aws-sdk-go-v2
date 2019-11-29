@@ -10,6 +10,7 @@ package ec2instanceconnectiface
 
 import (
 	"github.com/aws/aws-sdk-go-v2/service/ec2instanceconnect"
+	"github.com/aws/aws-sdk-go-v2/service/ec2instanceconnect/types"
 )
 
 // ClientAPI provides an interface to enable mocking the
@@ -43,7 +44,7 @@ import (
 //    type mockClientClient struct {
 //        ec2instanceconnectiface.ClientPI
 //    }
-//    func (m *mockClientClient) SendSSHPublicKey(input *ec2instanceconnect.SendSSHPublicKeyInput) (*ec2instanceconnect.SendSSHPublicKeyOutput, error) {
+//    func (m *mockClientClient) SendSSHPublicKey(input *types.SendSSHPublicKeyInput) (*types.SendSSHPublicKeyOutput, error) {
 //        // mock response/functionality
 //    }
 //
@@ -61,7 +62,7 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type ClientAPI interface {
-	SendSSHPublicKeyRequest(*ec2instanceconnect.SendSSHPublicKeyInput) ec2instanceconnect.SendSSHPublicKeyRequest
+	SendSSHPublicKeyRequest(*types.SendSSHPublicKeyInput) ec2instanceconnect.SendSSHPublicKeyRequest
 }
 
 var _ ClientAPI = (*ec2instanceconnect.Client)(nil)

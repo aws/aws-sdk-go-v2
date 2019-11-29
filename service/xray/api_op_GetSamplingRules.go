@@ -6,72 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/xray/types"
 )
-
-type GetSamplingRulesInput struct {
-	_ struct{} `type:"structure"`
-
-	// Pagination token. Not used.
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s GetSamplingRulesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetSamplingRulesInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type GetSamplingRulesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Pagination token. Not used.
-	NextToken *string `type:"string"`
-
-	// Rule definitions and metadata.
-	SamplingRuleRecords []SamplingRuleRecord `type:"list"`
-}
-
-// String returns the string representation
-func (s GetSamplingRulesOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetSamplingRulesOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.SamplingRuleRecords != nil {
-		v := s.SamplingRuleRecords
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "SamplingRuleRecords", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	return nil
-}
 
 const opGetSamplingRules = "GetSamplingRules"
 
@@ -88,7 +24,7 @@ const opGetSamplingRules = "GetSamplingRules"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/GetSamplingRules
-func (c *Client) GetSamplingRulesRequest(input *GetSamplingRulesInput) GetSamplingRulesRequest {
+func (c *Client) GetSamplingRulesRequest(input *types.GetSamplingRulesInput) GetSamplingRulesRequest {
 	op := &aws.Operation{
 		Name:       opGetSamplingRules,
 		HTTPMethod: "POST",
@@ -102,10 +38,10 @@ func (c *Client) GetSamplingRulesRequest(input *GetSamplingRulesInput) GetSampli
 	}
 
 	if input == nil {
-		input = &GetSamplingRulesInput{}
+		input = &types.GetSamplingRulesInput{}
 	}
 
-	req := c.newRequest(op, input, &GetSamplingRulesOutput{})
+	req := c.newRequest(op, input, &types.GetSamplingRulesOutput{})
 	return GetSamplingRulesRequest{Request: req, Input: input, Copy: c.GetSamplingRulesRequest}
 }
 
@@ -113,8 +49,8 @@ func (c *Client) GetSamplingRulesRequest(input *GetSamplingRulesInput) GetSampli
 // GetSamplingRules API operation.
 type GetSamplingRulesRequest struct {
 	*aws.Request
-	Input *GetSamplingRulesInput
-	Copy  func(*GetSamplingRulesInput) GetSamplingRulesRequest
+	Input *types.GetSamplingRulesInput
+	Copy  func(*types.GetSamplingRulesInput) GetSamplingRulesRequest
 }
 
 // Send marshals and sends the GetSamplingRules API request.
@@ -126,7 +62,7 @@ func (r GetSamplingRulesRequest) Send(ctx context.Context) (*GetSamplingRulesRes
 	}
 
 	resp := &GetSamplingRulesResponse{
-		GetSamplingRulesOutput: r.Request.Data.(*GetSamplingRulesOutput),
+		GetSamplingRulesOutput: r.Request.Data.(*types.GetSamplingRulesOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -156,7 +92,7 @@ func NewGetSamplingRulesPaginator(req GetSamplingRulesRequest) GetSamplingRulesP
 	return GetSamplingRulesPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *GetSamplingRulesInput
+				var inCpy *types.GetSamplingRulesInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -176,14 +112,14 @@ type GetSamplingRulesPaginator struct {
 	aws.Pager
 }
 
-func (p *GetSamplingRulesPaginator) CurrentPage() *GetSamplingRulesOutput {
-	return p.Pager.CurrentPage().(*GetSamplingRulesOutput)
+func (p *GetSamplingRulesPaginator) CurrentPage() *types.GetSamplingRulesOutput {
+	return p.Pager.CurrentPage().(*types.GetSamplingRulesOutput)
 }
 
 // GetSamplingRulesResponse is the response type for the
 // GetSamplingRules API operation.
 type GetSamplingRulesResponse struct {
-	*GetSamplingRulesOutput
+	*types.GetSamplingRulesOutput
 
 	response *aws.Response
 }

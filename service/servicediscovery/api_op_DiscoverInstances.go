@@ -6,76 +6,9 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/servicediscovery/types"
 )
-
-type DiscoverInstancesInput struct {
-	_ struct{} `type:"structure"`
-
-	// The health status of the instances that you want to discover.
-	HealthStatus HealthStatusFilter `type:"string" enum:"true"`
-
-	// The maximum number of instances that you want Cloud Map to return in the
-	// response to a DiscoverInstances request. If you don't specify a value for
-	// MaxResults, Cloud Map returns up to 100 instances.
-	MaxResults *int64 `min:"1" type:"integer"`
-
-	// The name of the namespace that you specified when you registered the instance.
-	//
-	// NamespaceName is a required field
-	NamespaceName *string `type:"string" required:"true"`
-
-	// A string map that contains attributes with values that you can use to filter
-	// instances by any custom attribute that you specified when you registered
-	// the instance. Only instances that match all the specified key/value pairs
-	// will be returned.
-	QueryParameters map[string]string `type:"map"`
-
-	// The name of the service that you specified when you registered the instance.
-	//
-	// ServiceName is a required field
-	ServiceName *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DiscoverInstancesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DiscoverInstancesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DiscoverInstancesInput"}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-
-	if s.NamespaceName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("NamespaceName"))
-	}
-
-	if s.ServiceName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ServiceName"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DiscoverInstancesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A complex type that contains one HttpInstanceSummary for each registered
-	// instance.
-	Instances []HttpInstanceSummary `type:"list"`
-}
-
-// String returns the string representation
-func (s DiscoverInstancesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDiscoverInstances = "DiscoverInstances"
 
@@ -92,7 +25,7 @@ const opDiscoverInstances = "DiscoverInstances"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicediscovery-2017-03-14/DiscoverInstances
-func (c *Client) DiscoverInstancesRequest(input *DiscoverInstancesInput) DiscoverInstancesRequest {
+func (c *Client) DiscoverInstancesRequest(input *types.DiscoverInstancesInput) DiscoverInstancesRequest {
 	op := &aws.Operation{
 		Name:       opDiscoverInstances,
 		HTTPMethod: "POST",
@@ -100,10 +33,10 @@ func (c *Client) DiscoverInstancesRequest(input *DiscoverInstancesInput) Discove
 	}
 
 	if input == nil {
-		input = &DiscoverInstancesInput{}
+		input = &types.DiscoverInstancesInput{}
 	}
 
-	req := c.newRequest(op, input, &DiscoverInstancesOutput{})
+	req := c.newRequest(op, input, &types.DiscoverInstancesOutput{})
 	req.Handlers.Build.PushBackNamed(protocol.NewHostPrefixHandler("data-", nil))
 	req.Handlers.Build.PushBackNamed(protocol.ValidateEndpointHostHandler)
 	return DiscoverInstancesRequest{Request: req, Input: input, Copy: c.DiscoverInstancesRequest}
@@ -113,8 +46,8 @@ func (c *Client) DiscoverInstancesRequest(input *DiscoverInstancesInput) Discove
 // DiscoverInstances API operation.
 type DiscoverInstancesRequest struct {
 	*aws.Request
-	Input *DiscoverInstancesInput
-	Copy  func(*DiscoverInstancesInput) DiscoverInstancesRequest
+	Input *types.DiscoverInstancesInput
+	Copy  func(*types.DiscoverInstancesInput) DiscoverInstancesRequest
 }
 
 // Send marshals and sends the DiscoverInstances API request.
@@ -126,7 +59,7 @@ func (r DiscoverInstancesRequest) Send(ctx context.Context) (*DiscoverInstancesR
 	}
 
 	resp := &DiscoverInstancesResponse{
-		DiscoverInstancesOutput: r.Request.Data.(*DiscoverInstancesOutput),
+		DiscoverInstancesOutput: r.Request.Data.(*types.DiscoverInstancesOutput),
 		response:                &aws.Response{Request: r.Request},
 	}
 
@@ -136,7 +69,7 @@ func (r DiscoverInstancesRequest) Send(ctx context.Context) (*DiscoverInstancesR
 // DiscoverInstancesResponse is the response type for the
 // DiscoverInstances API operation.
 type DiscoverInstancesResponse struct {
-	*DiscoverInstancesOutput
+	*types.DiscoverInstancesOutput
 
 	response *aws.Response
 }

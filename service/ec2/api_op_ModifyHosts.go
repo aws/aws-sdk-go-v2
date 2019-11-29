@@ -6,60 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-type ModifyHostsInput struct {
-	_ struct{} `type:"structure"`
-
-	// Specify whether to enable or disable auto-placement.
-	AutoPlacement AutoPlacement `locationName:"autoPlacement" type:"string" enum:"true"`
-
-	// The IDs of the Dedicated Hosts to modify.
-	//
-	// HostIds is a required field
-	HostIds []string `locationName:"hostId" locationNameList:"item" type:"list" required:"true"`
-
-	// Indicates whether to enable or disable host recovery for the Dedicated Host.
-	// For more information, see Host Recovery (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/dedicated-hosts-recovery.html)
-	// in the Amazon Elastic Compute Cloud User Guide.
-	HostRecovery HostRecovery `type:"string" enum:"true"`
-}
-
-// String returns the string representation
-func (s ModifyHostsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ModifyHostsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ModifyHostsInput"}
-
-	if s.HostIds == nil {
-		invalidParams.Add(aws.NewErrParamRequired("HostIds"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ModifyHostsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The IDs of the Dedicated Hosts that were successfully modified.
-	Successful []string `locationName:"successful" locationNameList:"item" type:"list"`
-
-	// The IDs of the Dedicated Hosts that could not be modified. Check whether
-	// the setting you requested can be used.
-	Unsuccessful []UnsuccessfulItem `locationName:"unsuccessful" locationNameList:"item" type:"list"`
-}
-
-// String returns the string representation
-func (s ModifyHostsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opModifyHosts = "ModifyHosts"
 
@@ -82,7 +30,7 @@ const opModifyHosts = "ModifyHosts"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyHosts
-func (c *Client) ModifyHostsRequest(input *ModifyHostsInput) ModifyHostsRequest {
+func (c *Client) ModifyHostsRequest(input *types.ModifyHostsInput) ModifyHostsRequest {
 	op := &aws.Operation{
 		Name:       opModifyHosts,
 		HTTPMethod: "POST",
@@ -90,10 +38,10 @@ func (c *Client) ModifyHostsRequest(input *ModifyHostsInput) ModifyHostsRequest 
 	}
 
 	if input == nil {
-		input = &ModifyHostsInput{}
+		input = &types.ModifyHostsInput{}
 	}
 
-	req := c.newRequest(op, input, &ModifyHostsOutput{})
+	req := c.newRequest(op, input, &types.ModifyHostsOutput{})
 	return ModifyHostsRequest{Request: req, Input: input, Copy: c.ModifyHostsRequest}
 }
 
@@ -101,8 +49,8 @@ func (c *Client) ModifyHostsRequest(input *ModifyHostsInput) ModifyHostsRequest 
 // ModifyHosts API operation.
 type ModifyHostsRequest struct {
 	*aws.Request
-	Input *ModifyHostsInput
-	Copy  func(*ModifyHostsInput) ModifyHostsRequest
+	Input *types.ModifyHostsInput
+	Copy  func(*types.ModifyHostsInput) ModifyHostsRequest
 }
 
 // Send marshals and sends the ModifyHosts API request.
@@ -114,7 +62,7 @@ func (r ModifyHostsRequest) Send(ctx context.Context) (*ModifyHostsResponse, err
 	}
 
 	resp := &ModifyHostsResponse{
-		ModifyHostsOutput: r.Request.Data.(*ModifyHostsOutput),
+		ModifyHostsOutput: r.Request.Data.(*types.ModifyHostsOutput),
 		response:          &aws.Response{Request: r.Request},
 	}
 
@@ -124,7 +72,7 @@ func (r ModifyHostsRequest) Send(ctx context.Context) (*ModifyHostsResponse, err
 // ModifyHostsResponse is the response type for the
 // ModifyHosts API operation.
 type ModifyHostsResponse struct {
-	*ModifyHostsOutput
+	*types.ModifyHostsOutput
 
 	response *aws.Response
 }

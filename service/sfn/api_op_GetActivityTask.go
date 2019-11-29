@@ -6,65 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/sfn/types"
 )
-
-type GetActivityTaskInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the activity to retrieve tasks from (assigned
-	// when you create the task using CreateActivity.)
-	//
-	// ActivityArn is a required field
-	ActivityArn *string `locationName:"activityArn" min:"1" type:"string" required:"true"`
-
-	// You can provide an arbitrary name in order to identify the worker that the
-	// task is assigned to. This name is used when it is logged in the execution
-	// history.
-	WorkerName *string `locationName:"workerName" min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s GetActivityTaskInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetActivityTaskInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetActivityTaskInput"}
-
-	if s.ActivityArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ActivityArn"))
-	}
-	if s.ActivityArn != nil && len(*s.ActivityArn) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ActivityArn", 1))
-	}
-	if s.WorkerName != nil && len(*s.WorkerName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("WorkerName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type GetActivityTaskOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The string that contains the JSON input data for the task.
-	Input *string `locationName:"input" type:"string" sensitive:"true"`
-
-	// A token that identifies the scheduled task. This token must be copied and
-	// included in subsequent calls to SendTaskHeartbeat, SendTaskSuccess or SendTaskFailure
-	// in order to report the progress or completion of the task.
-	TaskToken *string `locationName:"taskToken" min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s GetActivityTaskOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetActivityTask = "GetActivityTask"
 
@@ -94,7 +37,7 @@ const opGetActivityTask = "GetActivityTask"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/GetActivityTask
-func (c *Client) GetActivityTaskRequest(input *GetActivityTaskInput) GetActivityTaskRequest {
+func (c *Client) GetActivityTaskRequest(input *types.GetActivityTaskInput) GetActivityTaskRequest {
 	op := &aws.Operation{
 		Name:       opGetActivityTask,
 		HTTPMethod: "POST",
@@ -102,10 +45,10 @@ func (c *Client) GetActivityTaskRequest(input *GetActivityTaskInput) GetActivity
 	}
 
 	if input == nil {
-		input = &GetActivityTaskInput{}
+		input = &types.GetActivityTaskInput{}
 	}
 
-	req := c.newRequest(op, input, &GetActivityTaskOutput{})
+	req := c.newRequest(op, input, &types.GetActivityTaskOutput{})
 	return GetActivityTaskRequest{Request: req, Input: input, Copy: c.GetActivityTaskRequest}
 }
 
@@ -113,8 +56,8 @@ func (c *Client) GetActivityTaskRequest(input *GetActivityTaskInput) GetActivity
 // GetActivityTask API operation.
 type GetActivityTaskRequest struct {
 	*aws.Request
-	Input *GetActivityTaskInput
-	Copy  func(*GetActivityTaskInput) GetActivityTaskRequest
+	Input *types.GetActivityTaskInput
+	Copy  func(*types.GetActivityTaskInput) GetActivityTaskRequest
 }
 
 // Send marshals and sends the GetActivityTask API request.
@@ -126,7 +69,7 @@ func (r GetActivityTaskRequest) Send(ctx context.Context) (*GetActivityTaskRespo
 	}
 
 	resp := &GetActivityTaskResponse{
-		GetActivityTaskOutput: r.Request.Data.(*GetActivityTaskOutput),
+		GetActivityTaskOutput: r.Request.Data.(*types.GetActivityTaskOutput),
 		response:              &aws.Response{Request: r.Request},
 	}
 
@@ -136,7 +79,7 @@ func (r GetActivityTaskRequest) Send(ctx context.Context) (*GetActivityTaskRespo
 // GetActivityTaskResponse is the response type for the
 // GetActivityTask API operation.
 type GetActivityTaskResponse struct {
-	*GetActivityTaskOutput
+	*types.GetActivityTaskOutput
 
 	response *aws.Response
 }

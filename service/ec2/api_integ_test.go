@@ -13,6 +13,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws/awserr"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting/integration"
 	"github.com/aws/aws-sdk-go-v2/service/ec2"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
 
 var _ aws.Config
@@ -24,7 +25,7 @@ func TestInteg_00_DescribeRegions(t *testing.T) {
 
 	cfg := integration.ConfigWithDefaultRegion("us-west-2")
 	svc := ec2.New(cfg)
-	params := &ec2.DescribeRegionsInput{}
+	params := &types.DescribeRegionsInput{}
 
 	req := svc.DescribeRegionsRequest(params)
 
@@ -39,7 +40,7 @@ func TestInteg_01_DescribeInstances(t *testing.T) {
 
 	cfg := integration.ConfigWithDefaultRegion("us-west-2")
 	svc := ec2.New(cfg)
-	params := &ec2.DescribeInstancesInput{
+	params := &types.DescribeInstancesInput{
 		InstanceIds: []string{
 			"i-12345678",
 		},

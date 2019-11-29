@@ -6,85 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/worklink/types"
 )
-
-type RevokeDomainAccessInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the domain.
-	//
-	// DomainName is a required field
-	DomainName *string `min:"1" type:"string" required:"true"`
-
-	// The ARN of the fleet.
-	//
-	// FleetArn is a required field
-	FleetArn *string `min:"20" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s RevokeDomainAccessInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *RevokeDomainAccessInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "RevokeDomainAccessInput"}
-
-	if s.DomainName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DomainName"))
-	}
-	if s.DomainName != nil && len(*s.DomainName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("DomainName", 1))
-	}
-
-	if s.FleetArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("FleetArn"))
-	}
-	if s.FleetArn != nil && len(*s.FleetArn) < 20 {
-		invalidParams.Add(aws.NewErrParamMinLen("FleetArn", 20))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s RevokeDomainAccessInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.DomainName != nil {
-		v := *s.DomainName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "DomainName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.FleetArn != nil {
-		v := *s.FleetArn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "FleetArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type RevokeDomainAccessOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s RevokeDomainAccessOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s RevokeDomainAccessOutput) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
 
 const opRevokeDomainAccess = "RevokeDomainAccess"
 
@@ -101,7 +24,7 @@ const opRevokeDomainAccess = "RevokeDomainAccess"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/worklink-2018-09-25/RevokeDomainAccess
-func (c *Client) RevokeDomainAccessRequest(input *RevokeDomainAccessInput) RevokeDomainAccessRequest {
+func (c *Client) RevokeDomainAccessRequest(input *types.RevokeDomainAccessInput) RevokeDomainAccessRequest {
 	op := &aws.Operation{
 		Name:       opRevokeDomainAccess,
 		HTTPMethod: "POST",
@@ -109,10 +32,10 @@ func (c *Client) RevokeDomainAccessRequest(input *RevokeDomainAccessInput) Revok
 	}
 
 	if input == nil {
-		input = &RevokeDomainAccessInput{}
+		input = &types.RevokeDomainAccessInput{}
 	}
 
-	req := c.newRequest(op, input, &RevokeDomainAccessOutput{})
+	req := c.newRequest(op, input, &types.RevokeDomainAccessOutput{})
 	return RevokeDomainAccessRequest{Request: req, Input: input, Copy: c.RevokeDomainAccessRequest}
 }
 
@@ -120,8 +43,8 @@ func (c *Client) RevokeDomainAccessRequest(input *RevokeDomainAccessInput) Revok
 // RevokeDomainAccess API operation.
 type RevokeDomainAccessRequest struct {
 	*aws.Request
-	Input *RevokeDomainAccessInput
-	Copy  func(*RevokeDomainAccessInput) RevokeDomainAccessRequest
+	Input *types.RevokeDomainAccessInput
+	Copy  func(*types.RevokeDomainAccessInput) RevokeDomainAccessRequest
 }
 
 // Send marshals and sends the RevokeDomainAccess API request.
@@ -133,7 +56,7 @@ func (r RevokeDomainAccessRequest) Send(ctx context.Context) (*RevokeDomainAcces
 	}
 
 	resp := &RevokeDomainAccessResponse{
-		RevokeDomainAccessOutput: r.Request.Data.(*RevokeDomainAccessOutput),
+		RevokeDomainAccessOutput: r.Request.Data.(*types.RevokeDomainAccessOutput),
 		response:                 &aws.Response{Request: r.Request},
 	}
 
@@ -143,7 +66,7 @@ func (r RevokeDomainAccessRequest) Send(ctx context.Context) (*RevokeDomainAcces
 // RevokeDomainAccessResponse is the response type for the
 // RevokeDomainAccess API operation.
 type RevokeDomainAccessResponse struct {
-	*RevokeDomainAccessOutput
+	*types.RevokeDomainAccessOutput
 
 	response *aws.Response
 }

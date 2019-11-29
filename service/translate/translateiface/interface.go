@@ -10,6 +10,7 @@ package translateiface
 
 import (
 	"github.com/aws/aws-sdk-go-v2/service/translate"
+	"github.com/aws/aws-sdk-go-v2/service/translate/types"
 )
 
 // ClientAPI provides an interface to enable mocking the
@@ -43,7 +44,7 @@ import (
 //    type mockClientClient struct {
 //        translateiface.ClientPI
 //    }
-//    func (m *mockClientClient) DeleteTerminology(input *translate.DeleteTerminologyInput) (*translate.DeleteTerminologyOutput, error) {
+//    func (m *mockClientClient) DeleteTerminology(input *types.DeleteTerminologyInput) (*types.DeleteTerminologyOutput, error) {
 //        // mock response/functionality
 //    }
 //
@@ -61,15 +62,15 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type ClientAPI interface {
-	DeleteTerminologyRequest(*translate.DeleteTerminologyInput) translate.DeleteTerminologyRequest
+	DeleteTerminologyRequest(*types.DeleteTerminologyInput) translate.DeleteTerminologyRequest
 
-	GetTerminologyRequest(*translate.GetTerminologyInput) translate.GetTerminologyRequest
+	GetTerminologyRequest(*types.GetTerminologyInput) translate.GetTerminologyRequest
 
-	ImportTerminologyRequest(*translate.ImportTerminologyInput) translate.ImportTerminologyRequest
+	ImportTerminologyRequest(*types.ImportTerminologyInput) translate.ImportTerminologyRequest
 
-	ListTerminologiesRequest(*translate.ListTerminologiesInput) translate.ListTerminologiesRequest
+	ListTerminologiesRequest(*types.ListTerminologiesInput) translate.ListTerminologiesRequest
 
-	TranslateTextRequest(*translate.TranslateTextInput) translate.TranslateTextRequest
+	TranslateTextRequest(*types.TranslateTextInput) translate.TranslateTextRequest
 }
 
 var _ ClientAPI = (*translate.Client)(nil)

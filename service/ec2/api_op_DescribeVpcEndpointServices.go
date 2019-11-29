@@ -6,73 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-// Contains the parameters for DescribeVpcEndpointServices.
-type DescribeVpcEndpointServicesInput struct {
-	_ struct{} `type:"structure"`
-
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have
-	// the required permissions, the error response is DryRunOperation. Otherwise,
-	// it is UnauthorizedOperation.
-	DryRun *bool `type:"boolean"`
-
-	// One or more filters.
-	//
-	//    * service-name: The name of the service.
-	//
-	//    * tag:<key> - The key/value combination of a tag assigned to the resource.
-	//    Use the tag key in the filter name and the tag value as the filter value.
-	//    For example, to find all resources that have a tag with the key Owner
-	//    and the value TeamA, specify tag:Owner for the filter name and TeamA for
-	//    the filter value.
-	//
-	//    * tag-key - The key of a tag assigned to the resource. Use this filter
-	//    to find all resources assigned a tag with a specific key, regardless of
-	//    the tag value.
-	Filters []Filter `locationName:"Filter" locationNameList:"Filter" type:"list"`
-
-	// The maximum number of items to return for this request. The request returns
-	// a token that you can specify in a subsequent call to get the next set of
-	// results.
-	//
-	// Constraint: If the value is greater than 1000, we return only 1000 items.
-	MaxResults *int64 `type:"integer"`
-
-	// The token for the next set of items to return. (You received this token from
-	// a prior call.)
-	NextToken *string `type:"string"`
-
-	// One or more service names.
-	ServiceNames []string `locationName:"ServiceName" locationNameList:"item" type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeVpcEndpointServicesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Contains the output of DescribeVpcEndpointServices.
-type DescribeVpcEndpointServicesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The token to use when requesting the next set of items. If there are no additional
-	// items to return, the string is empty.
-	NextToken *string `locationName:"nextToken" type:"string"`
-
-	// Information about the service.
-	ServiceDetails []ServiceDetail `locationName:"serviceDetailSet" locationNameList:"item" type:"list"`
-
-	// A list of supported services.
-	ServiceNames []string `locationName:"serviceNameSet" locationNameList:"item" type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeVpcEndpointServicesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeVpcEndpointServices = "DescribeVpcEndpointServices"
 
@@ -89,7 +24,7 @@ const opDescribeVpcEndpointServices = "DescribeVpcEndpointServices"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeVpcEndpointServices
-func (c *Client) DescribeVpcEndpointServicesRequest(input *DescribeVpcEndpointServicesInput) DescribeVpcEndpointServicesRequest {
+func (c *Client) DescribeVpcEndpointServicesRequest(input *types.DescribeVpcEndpointServicesInput) DescribeVpcEndpointServicesRequest {
 	op := &aws.Operation{
 		Name:       opDescribeVpcEndpointServices,
 		HTTPMethod: "POST",
@@ -97,10 +32,10 @@ func (c *Client) DescribeVpcEndpointServicesRequest(input *DescribeVpcEndpointSe
 	}
 
 	if input == nil {
-		input = &DescribeVpcEndpointServicesInput{}
+		input = &types.DescribeVpcEndpointServicesInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeVpcEndpointServicesOutput{})
+	req := c.newRequest(op, input, &types.DescribeVpcEndpointServicesOutput{})
 	return DescribeVpcEndpointServicesRequest{Request: req, Input: input, Copy: c.DescribeVpcEndpointServicesRequest}
 }
 
@@ -108,8 +43,8 @@ func (c *Client) DescribeVpcEndpointServicesRequest(input *DescribeVpcEndpointSe
 // DescribeVpcEndpointServices API operation.
 type DescribeVpcEndpointServicesRequest struct {
 	*aws.Request
-	Input *DescribeVpcEndpointServicesInput
-	Copy  func(*DescribeVpcEndpointServicesInput) DescribeVpcEndpointServicesRequest
+	Input *types.DescribeVpcEndpointServicesInput
+	Copy  func(*types.DescribeVpcEndpointServicesInput) DescribeVpcEndpointServicesRequest
 }
 
 // Send marshals and sends the DescribeVpcEndpointServices API request.
@@ -121,7 +56,7 @@ func (r DescribeVpcEndpointServicesRequest) Send(ctx context.Context) (*Describe
 	}
 
 	resp := &DescribeVpcEndpointServicesResponse{
-		DescribeVpcEndpointServicesOutput: r.Request.Data.(*DescribeVpcEndpointServicesOutput),
+		DescribeVpcEndpointServicesOutput: r.Request.Data.(*types.DescribeVpcEndpointServicesOutput),
 		response:                          &aws.Response{Request: r.Request},
 	}
 
@@ -131,7 +66,7 @@ func (r DescribeVpcEndpointServicesRequest) Send(ctx context.Context) (*Describe
 // DescribeVpcEndpointServicesResponse is the response type for the
 // DescribeVpcEndpointServices API operation.
 type DescribeVpcEndpointServicesResponse struct {
-	*DescribeVpcEndpointServicesOutput
+	*types.DescribeVpcEndpointServicesOutput
 
 	response *aws.Response
 }

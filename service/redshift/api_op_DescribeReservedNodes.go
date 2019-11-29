@@ -6,56 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/redshift/types"
 )
-
-type DescribeReservedNodesInput struct {
-	_ struct{} `type:"structure"`
-
-	// An optional parameter that specifies the starting point to return a set of
-	// response records. When the results of a DescribeReservedNodes request exceed
-	// the value specified in MaxRecords, AWS returns a value in the Marker field
-	// of the response. You can retrieve the next set of response records by providing
-	// the returned marker value in the Marker parameter and retrying the request.
-	Marker *string `type:"string"`
-
-	// The maximum number of response records to return in each call. If the number
-	// of remaining response records exceeds the specified MaxRecords value, a value
-	// is returned in a marker field of the response. You can retrieve the next
-	// set of records by retrying the command with the returned marker value.
-	//
-	// Default: 100
-	//
-	// Constraints: minimum 20, maximum 100.
-	MaxRecords *int64 `type:"integer"`
-
-	// Identifier for the node reservation.
-	ReservedNodeId *string `type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeReservedNodesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type DescribeReservedNodesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A value that indicates the starting point for the next set of response records
-	// in a subsequent request. If a value is returned in a response, you can retrieve
-	// the next set of records by providing this returned marker value in the Marker
-	// parameter and retrying the command. If the Marker field is empty, all response
-	// records have been retrieved for the request.
-	Marker *string `type:"string"`
-
-	// The list of ReservedNode objects.
-	ReservedNodes []ReservedNode `locationNameList:"ReservedNode" type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeReservedNodesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeReservedNodes = "DescribeReservedNodes"
 
@@ -72,7 +24,7 @@ const opDescribeReservedNodes = "DescribeReservedNodes"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeReservedNodes
-func (c *Client) DescribeReservedNodesRequest(input *DescribeReservedNodesInput) DescribeReservedNodesRequest {
+func (c *Client) DescribeReservedNodesRequest(input *types.DescribeReservedNodesInput) DescribeReservedNodesRequest {
 	op := &aws.Operation{
 		Name:       opDescribeReservedNodes,
 		HTTPMethod: "POST",
@@ -86,10 +38,10 @@ func (c *Client) DescribeReservedNodesRequest(input *DescribeReservedNodesInput)
 	}
 
 	if input == nil {
-		input = &DescribeReservedNodesInput{}
+		input = &types.DescribeReservedNodesInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeReservedNodesOutput{})
+	req := c.newRequest(op, input, &types.DescribeReservedNodesOutput{})
 	return DescribeReservedNodesRequest{Request: req, Input: input, Copy: c.DescribeReservedNodesRequest}
 }
 
@@ -97,8 +49,8 @@ func (c *Client) DescribeReservedNodesRequest(input *DescribeReservedNodesInput)
 // DescribeReservedNodes API operation.
 type DescribeReservedNodesRequest struct {
 	*aws.Request
-	Input *DescribeReservedNodesInput
-	Copy  func(*DescribeReservedNodesInput) DescribeReservedNodesRequest
+	Input *types.DescribeReservedNodesInput
+	Copy  func(*types.DescribeReservedNodesInput) DescribeReservedNodesRequest
 }
 
 // Send marshals and sends the DescribeReservedNodes API request.
@@ -110,7 +62,7 @@ func (r DescribeReservedNodesRequest) Send(ctx context.Context) (*DescribeReserv
 	}
 
 	resp := &DescribeReservedNodesResponse{
-		DescribeReservedNodesOutput: r.Request.Data.(*DescribeReservedNodesOutput),
+		DescribeReservedNodesOutput: r.Request.Data.(*types.DescribeReservedNodesOutput),
 		response:                    &aws.Response{Request: r.Request},
 	}
 
@@ -140,7 +92,7 @@ func NewDescribeReservedNodesPaginator(req DescribeReservedNodesRequest) Describ
 	return DescribeReservedNodesPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *DescribeReservedNodesInput
+				var inCpy *types.DescribeReservedNodesInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -160,14 +112,14 @@ type DescribeReservedNodesPaginator struct {
 	aws.Pager
 }
 
-func (p *DescribeReservedNodesPaginator) CurrentPage() *DescribeReservedNodesOutput {
-	return p.Pager.CurrentPage().(*DescribeReservedNodesOutput)
+func (p *DescribeReservedNodesPaginator) CurrentPage() *types.DescribeReservedNodesOutput {
+	return p.Pager.CurrentPage().(*types.DescribeReservedNodesOutput)
 }
 
 // DescribeReservedNodesResponse is the response type for the
 // DescribeReservedNodes API operation.
 type DescribeReservedNodesResponse struct {
-	*DescribeReservedNodesOutput
+	*types.DescribeReservedNodesOutput
 
 	response *aws.Response
 }

@@ -6,63 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
+	"github.com/aws/aws-sdk-go-v2/service/eventbridge/types"
 )
-
-type DeletePartnerEventSourceInput struct {
-	_ struct{} `type:"structure"`
-
-	// The AWS account ID of the AWS customer that the event source was created
-	// for.
-	//
-	// Account is a required field
-	Account *string `min:"12" type:"string" required:"true"`
-
-	// The name of the event source to delete.
-	//
-	// Name is a required field
-	Name *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeletePartnerEventSourceInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeletePartnerEventSourceInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeletePartnerEventSourceInput"}
-
-	if s.Account == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Account"))
-	}
-	if s.Account != nil && len(*s.Account) < 12 {
-		invalidParams.Add(aws.NewErrParamMinLen("Account", 12))
-	}
-
-	if s.Name == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Name"))
-	}
-	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeletePartnerEventSourceOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeletePartnerEventSourceOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeletePartnerEventSource = "DeletePartnerEventSource"
 
@@ -83,7 +30,7 @@ const opDeletePartnerEventSource = "DeletePartnerEventSource"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/DeletePartnerEventSource
-func (c *Client) DeletePartnerEventSourceRequest(input *DeletePartnerEventSourceInput) DeletePartnerEventSourceRequest {
+func (c *Client) DeletePartnerEventSourceRequest(input *types.DeletePartnerEventSourceInput) DeletePartnerEventSourceRequest {
 	op := &aws.Operation{
 		Name:       opDeletePartnerEventSource,
 		HTTPMethod: "POST",
@@ -91,10 +38,10 @@ func (c *Client) DeletePartnerEventSourceRequest(input *DeletePartnerEventSource
 	}
 
 	if input == nil {
-		input = &DeletePartnerEventSourceInput{}
+		input = &types.DeletePartnerEventSourceInput{}
 	}
 
-	req := c.newRequest(op, input, &DeletePartnerEventSourceOutput{})
+	req := c.newRequest(op, input, &types.DeletePartnerEventSourceOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return DeletePartnerEventSourceRequest{Request: req, Input: input, Copy: c.DeletePartnerEventSourceRequest}
@@ -104,8 +51,8 @@ func (c *Client) DeletePartnerEventSourceRequest(input *DeletePartnerEventSource
 // DeletePartnerEventSource API operation.
 type DeletePartnerEventSourceRequest struct {
 	*aws.Request
-	Input *DeletePartnerEventSourceInput
-	Copy  func(*DeletePartnerEventSourceInput) DeletePartnerEventSourceRequest
+	Input *types.DeletePartnerEventSourceInput
+	Copy  func(*types.DeletePartnerEventSourceInput) DeletePartnerEventSourceRequest
 }
 
 // Send marshals and sends the DeletePartnerEventSource API request.
@@ -117,7 +64,7 @@ func (r DeletePartnerEventSourceRequest) Send(ctx context.Context) (*DeletePartn
 	}
 
 	resp := &DeletePartnerEventSourceResponse{
-		DeletePartnerEventSourceOutput: r.Request.Data.(*DeletePartnerEventSourceOutput),
+		DeletePartnerEventSourceOutput: r.Request.Data.(*types.DeletePartnerEventSourceOutput),
 		response:                       &aws.Response{Request: r.Request},
 	}
 
@@ -127,7 +74,7 @@ func (r DeletePartnerEventSourceRequest) Send(ctx context.Context) (*DeletePartn
 // DeletePartnerEventSourceResponse is the response type for the
 // DeletePartnerEventSource API operation.
 type DeletePartnerEventSourceResponse struct {
-	*DeletePartnerEventSourceOutput
+	*types.DeletePartnerEventSourceOutput
 
 	response *aws.Response
 }

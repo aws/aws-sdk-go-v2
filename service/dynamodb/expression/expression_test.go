@@ -8,7 +8,7 @@ import (
 	"testing"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/service/dynamodb"
+	"github.com/aws/aws-sdk-go-v2/service/dynamodb/types"
 )
 
 type exprErrorMode string
@@ -48,7 +48,7 @@ func TestBuild(t *testing.T) {
 				namesMap: map[string]string{
 					"#0": "foo",
 				},
-				valuesMap: map[string]dynamodb.AttributeValue{
+				valuesMap: map[string]types.AttributeValue{
 					":0": {
 						N: aws.String("5"),
 					},
@@ -79,7 +79,7 @@ func TestBuild(t *testing.T) {
 				namesMap: map[string]string{
 					"#0": "foo",
 				},
-				valuesMap: map[string]dynamodb.AttributeValue{
+				valuesMap: map[string]types.AttributeValue{
 					":0": {
 						N: aws.String("5"),
 					},
@@ -96,7 +96,7 @@ func TestBuild(t *testing.T) {
 				namesMap: map[string]string{
 					"#0": "foo",
 				},
-				valuesMap: map[string]dynamodb.AttributeValue{
+				valuesMap: map[string]types.AttributeValue{
 					":0": {
 						N: aws.String("5"),
 					},
@@ -113,7 +113,7 @@ func TestBuild(t *testing.T) {
 				namesMap: map[string]string{
 					"#0": "foo",
 				},
-				valuesMap: map[string]dynamodb.AttributeValue{
+				valuesMap: map[string]types.AttributeValue{
 					":0": {
 						N: aws.String("5"),
 					},
@@ -141,7 +141,7 @@ func TestBuild(t *testing.T) {
 					"#1": "bar",
 					"#2": "baz",
 				},
-				valuesMap: map[string]dynamodb.AttributeValue{
+				valuesMap: map[string]types.AttributeValue{
 					":0": {
 						N: aws.String("5"),
 					},
@@ -593,7 +593,7 @@ func TestValues(t *testing.T) {
 	cases := []struct {
 		name     string
 		input    Builder
-		expected map[string]dynamodb.AttributeValue
+		expected map[string]types.AttributeValue
 		err      exprErrorMode
 	}{
 		{
@@ -603,7 +603,7 @@ func TestValues(t *testing.T) {
 					condition: Name("foo").Equal(Value(5)),
 				},
 			},
-			expected: map[string]dynamodb.AttributeValue{
+			expected: map[string]types.AttributeValue{
 				":0": {
 					N: aws.String("5"),
 				},
@@ -650,7 +650,7 @@ func TestValues(t *testing.T) {
 					},
 				},
 			},
-			expected: map[string]dynamodb.AttributeValue{
+			expected: map[string]types.AttributeValue{
 				":0": {
 					N: aws.String("5"),
 				},
@@ -740,7 +740,7 @@ func TestBuildChildTrees(t *testing.T) {
 			},
 			expectedaliasList: aliasList{
 				namesList: []string{"foo", "bar", "baz"},
-				valuesList: []dynamodb.AttributeValue{
+				valuesList: []types.AttributeValue{
 					{
 						N: aws.String("5"),
 					},
@@ -793,7 +793,7 @@ func TestBuildExpressionString(t *testing.T) {
 		name               string
 		input              exprNode
 		expectedNames      map[string]string
-		expectedValues     map[string]dynamodb.AttributeValue
+		expectedValues     map[string]types.AttributeValue
 		expectedExpression string
 		err                exprErrorMode
 	}{
@@ -804,7 +804,7 @@ func TestBuildExpressionString(t *testing.T) {
 				fmtExpr: "$n",
 			},
 
-			expectedValues: map[string]dynamodb.AttributeValue{},
+			expectedValues: map[string]types.AttributeValue{},
 			expectedNames: map[string]string{
 				"#0": "foo",
 			},
@@ -813,7 +813,7 @@ func TestBuildExpressionString(t *testing.T) {
 		{
 			name: "basic value",
 			input: exprNode{
-				values: []dynamodb.AttributeValue{
+				values: []types.AttributeValue{
 					{
 						N: aws.String("5"),
 					},
@@ -821,7 +821,7 @@ func TestBuildExpressionString(t *testing.T) {
 				fmtExpr: "$v",
 			},
 			expectedNames: map[string]string{},
-			expectedValues: map[string]dynamodb.AttributeValue{
+			expectedValues: map[string]types.AttributeValue{
 				":0": {
 					N: aws.String("5"),
 				},
@@ -835,7 +835,7 @@ func TestBuildExpressionString(t *testing.T) {
 				fmtExpr: "$n.$n",
 			},
 
-			expectedValues: map[string]dynamodb.AttributeValue{},
+			expectedValues: map[string]types.AttributeValue{},
 			expectedNames: map[string]string{
 				"#0": "foo",
 				"#1": "bar",
@@ -848,7 +848,7 @@ func TestBuildExpressionString(t *testing.T) {
 				names:   []string{"foo", "bar", "baz"},
 				fmtExpr: "$n.$n[0].$n",
 			},
-			expectedValues: map[string]dynamodb.AttributeValue{},
+			expectedValues: map[string]types.AttributeValue{},
 			expectedNames: map[string]string{
 				"#0": "foo",
 				"#1": "bar",
@@ -862,7 +862,7 @@ func TestBuildExpressionString(t *testing.T) {
 				names:   []string{"foo"},
 				fmtExpr: "size ($n)",
 			},
-			expectedValues: map[string]dynamodb.AttributeValue{},
+			expectedValues: map[string]types.AttributeValue{},
 			expectedNames: map[string]string{
 				"#0": "foo",
 			},
@@ -874,7 +874,7 @@ func TestBuildExpressionString(t *testing.T) {
 				names:   []string{"foo", "foo"},
 				fmtExpr: "$n.$n",
 			},
-			expectedValues: map[string]dynamodb.AttributeValue{},
+			expectedValues: map[string]types.AttributeValue{},
 			expectedNames: map[string]string{
 				"#0": "foo",
 			},
@@ -889,7 +889,7 @@ func TestBuildExpressionString(t *testing.T) {
 						fmtExpr: "$n",
 					},
 					{
-						values: []dynamodb.AttributeValue{
+						values: []types.AttributeValue{
 							{
 								N: aws.String("5"),
 							},
@@ -903,7 +903,7 @@ func TestBuildExpressionString(t *testing.T) {
 			expectedNames: map[string]string{
 				"#0": "foo",
 			},
-			expectedValues: map[string]dynamodb.AttributeValue{
+			expectedValues: map[string]types.AttributeValue{
 				":0": {
 					N: aws.String("5"),
 				},
@@ -993,7 +993,7 @@ func TestAliasValue(t *testing.T) {
 		{
 			name: "fifth item",
 			input: &aliasList{
-				valuesList: []dynamodb.AttributeValue{
+				valuesList: []types.AttributeValue{
 					{},
 					{},
 					{},
@@ -1006,7 +1006,7 @@ func TestAliasValue(t *testing.T) {
 
 	for _, c := range cases {
 		t.Run(c.name, func(t *testing.T) {
-			str, err := c.input.aliasValue(dynamodb.AttributeValue{})
+			str, err := c.input.aliasValue(types.AttributeValue{})
 
 			if c.err != noExpressionError {
 				if err == nil {

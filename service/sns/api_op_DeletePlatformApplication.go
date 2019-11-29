@@ -6,48 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/query"
+	"github.com/aws/aws-sdk-go-v2/service/sns/types"
 )
-
-// Input for DeletePlatformApplication action.
-type DeletePlatformApplicationInput struct {
-	_ struct{} `type:"structure"`
-
-	// PlatformApplicationArn of platform application object to delete.
-	//
-	// PlatformApplicationArn is a required field
-	PlatformApplicationArn *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeletePlatformApplicationInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeletePlatformApplicationInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeletePlatformApplicationInput"}
-
-	if s.PlatformApplicationArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("PlatformApplicationArn"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeletePlatformApplicationOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeletePlatformApplicationOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeletePlatformApplication = "DeletePlatformApplication"
 
@@ -66,7 +28,7 @@ const opDeletePlatformApplication = "DeletePlatformApplication"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/DeletePlatformApplication
-func (c *Client) DeletePlatformApplicationRequest(input *DeletePlatformApplicationInput) DeletePlatformApplicationRequest {
+func (c *Client) DeletePlatformApplicationRequest(input *types.DeletePlatformApplicationInput) DeletePlatformApplicationRequest {
 	op := &aws.Operation{
 		Name:       opDeletePlatformApplication,
 		HTTPMethod: "POST",
@@ -74,10 +36,10 @@ func (c *Client) DeletePlatformApplicationRequest(input *DeletePlatformApplicati
 	}
 
 	if input == nil {
-		input = &DeletePlatformApplicationInput{}
+		input = &types.DeletePlatformApplicationInput{}
 	}
 
-	req := c.newRequest(op, input, &DeletePlatformApplicationOutput{})
+	req := c.newRequest(op, input, &types.DeletePlatformApplicationOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return DeletePlatformApplicationRequest{Request: req, Input: input, Copy: c.DeletePlatformApplicationRequest}
@@ -87,8 +49,8 @@ func (c *Client) DeletePlatformApplicationRequest(input *DeletePlatformApplicati
 // DeletePlatformApplication API operation.
 type DeletePlatformApplicationRequest struct {
 	*aws.Request
-	Input *DeletePlatformApplicationInput
-	Copy  func(*DeletePlatformApplicationInput) DeletePlatformApplicationRequest
+	Input *types.DeletePlatformApplicationInput
+	Copy  func(*types.DeletePlatformApplicationInput) DeletePlatformApplicationRequest
 }
 
 // Send marshals and sends the DeletePlatformApplication API request.
@@ -100,7 +62,7 @@ func (r DeletePlatformApplicationRequest) Send(ctx context.Context) (*DeletePlat
 	}
 
 	resp := &DeletePlatformApplicationResponse{
-		DeletePlatformApplicationOutput: r.Request.Data.(*DeletePlatformApplicationOutput),
+		DeletePlatformApplicationOutput: r.Request.Data.(*types.DeletePlatformApplicationOutput),
 		response:                        &aws.Response{Request: r.Request},
 	}
 
@@ -110,7 +72,7 @@ func (r DeletePlatformApplicationRequest) Send(ctx context.Context) (*DeletePlat
 // DeletePlatformApplicationResponse is the response type for the
 // DeletePlatformApplication API operation.
 type DeletePlatformApplicationResponse struct {
-	*DeletePlatformApplicationOutput
+	*types.DeletePlatformApplicationOutput
 
 	response *aws.Response
 }

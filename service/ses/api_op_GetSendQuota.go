@@ -6,42 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ses/types"
 )
-
-type GetSendQuotaInput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s GetSendQuotaInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Represents your Amazon SES daily sending quota, maximum send rate, and the
-// number of emails you have sent in the last 24 hours.
-type GetSendQuotaOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The maximum number of emails the user is allowed to send in a 24-hour interval.
-	// A value of -1 signifies an unlimited quota.
-	Max24HourSend *float64 `type:"double"`
-
-	// The maximum number of emails that Amazon SES can accept from the user's account
-	// per second.
-	//
-	// The rate at which Amazon SES accepts the user's messages might be less than
-	// the maximum send rate.
-	MaxSendRate *float64 `type:"double"`
-
-	// The number of emails sent during the previous 24 hours.
-	SentLast24Hours *float64 `type:"double"`
-}
-
-// String returns the string representation
-func (s GetSendQuotaOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetSendQuota = "GetSendQuota"
 
@@ -60,7 +26,7 @@ const opGetSendQuota = "GetSendQuota"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/GetSendQuota
-func (c *Client) GetSendQuotaRequest(input *GetSendQuotaInput) GetSendQuotaRequest {
+func (c *Client) GetSendQuotaRequest(input *types.GetSendQuotaInput) GetSendQuotaRequest {
 	op := &aws.Operation{
 		Name:       opGetSendQuota,
 		HTTPMethod: "POST",
@@ -68,10 +34,10 @@ func (c *Client) GetSendQuotaRequest(input *GetSendQuotaInput) GetSendQuotaReque
 	}
 
 	if input == nil {
-		input = &GetSendQuotaInput{}
+		input = &types.GetSendQuotaInput{}
 	}
 
-	req := c.newRequest(op, input, &GetSendQuotaOutput{})
+	req := c.newRequest(op, input, &types.GetSendQuotaOutput{})
 	return GetSendQuotaRequest{Request: req, Input: input, Copy: c.GetSendQuotaRequest}
 }
 
@@ -79,8 +45,8 @@ func (c *Client) GetSendQuotaRequest(input *GetSendQuotaInput) GetSendQuotaReque
 // GetSendQuota API operation.
 type GetSendQuotaRequest struct {
 	*aws.Request
-	Input *GetSendQuotaInput
-	Copy  func(*GetSendQuotaInput) GetSendQuotaRequest
+	Input *types.GetSendQuotaInput
+	Copy  func(*types.GetSendQuotaInput) GetSendQuotaRequest
 }
 
 // Send marshals and sends the GetSendQuota API request.
@@ -92,7 +58,7 @@ func (r GetSendQuotaRequest) Send(ctx context.Context) (*GetSendQuotaResponse, e
 	}
 
 	resp := &GetSendQuotaResponse{
-		GetSendQuotaOutput: r.Request.Data.(*GetSendQuotaOutput),
+		GetSendQuotaOutput: r.Request.Data.(*types.GetSendQuotaOutput),
 		response:           &aws.Response{Request: r.Request},
 	}
 
@@ -102,7 +68,7 @@ func (r GetSendQuotaRequest) Send(ctx context.Context) (*GetSendQuotaResponse, e
 // GetSendQuotaResponse is the response type for the
 // GetSendQuota API operation.
 type GetSendQuotaResponse struct {
-	*GetSendQuotaOutput
+	*types.GetSendQuotaOutput
 
 	response *aws.Response
 }

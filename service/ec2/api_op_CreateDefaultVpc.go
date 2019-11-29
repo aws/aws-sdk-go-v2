@@ -6,35 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-type CreateDefaultVpcInput struct {
-	_ struct{} `type:"structure"`
-
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have
-	// the required permissions, the error response is DryRunOperation. Otherwise,
-	// it is UnauthorizedOperation.
-	DryRun *bool `type:"boolean"`
-}
-
-// String returns the string representation
-func (s CreateDefaultVpcInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type CreateDefaultVpcOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Information about the VPC.
-	Vpc *Vpc `locationName:"vpc" type:"structure"`
-}
-
-// String returns the string representation
-func (s CreateDefaultVpcOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCreateDefaultVpc = "CreateDefaultVpc"
 
@@ -63,7 +36,7 @@ const opCreateDefaultVpc = "CreateDefaultVpc"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateDefaultVpc
-func (c *Client) CreateDefaultVpcRequest(input *CreateDefaultVpcInput) CreateDefaultVpcRequest {
+func (c *Client) CreateDefaultVpcRequest(input *types.CreateDefaultVpcInput) CreateDefaultVpcRequest {
 	op := &aws.Operation{
 		Name:       opCreateDefaultVpc,
 		HTTPMethod: "POST",
@@ -71,10 +44,10 @@ func (c *Client) CreateDefaultVpcRequest(input *CreateDefaultVpcInput) CreateDef
 	}
 
 	if input == nil {
-		input = &CreateDefaultVpcInput{}
+		input = &types.CreateDefaultVpcInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateDefaultVpcOutput{})
+	req := c.newRequest(op, input, &types.CreateDefaultVpcOutput{})
 	return CreateDefaultVpcRequest{Request: req, Input: input, Copy: c.CreateDefaultVpcRequest}
 }
 
@@ -82,8 +55,8 @@ func (c *Client) CreateDefaultVpcRequest(input *CreateDefaultVpcInput) CreateDef
 // CreateDefaultVpc API operation.
 type CreateDefaultVpcRequest struct {
 	*aws.Request
-	Input *CreateDefaultVpcInput
-	Copy  func(*CreateDefaultVpcInput) CreateDefaultVpcRequest
+	Input *types.CreateDefaultVpcInput
+	Copy  func(*types.CreateDefaultVpcInput) CreateDefaultVpcRequest
 }
 
 // Send marshals and sends the CreateDefaultVpc API request.
@@ -95,7 +68,7 @@ func (r CreateDefaultVpcRequest) Send(ctx context.Context) (*CreateDefaultVpcRes
 	}
 
 	resp := &CreateDefaultVpcResponse{
-		CreateDefaultVpcOutput: r.Request.Data.(*CreateDefaultVpcOutput),
+		CreateDefaultVpcOutput: r.Request.Data.(*types.CreateDefaultVpcOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -105,7 +78,7 @@ func (r CreateDefaultVpcRequest) Send(ctx context.Context) (*CreateDefaultVpcRes
 // CreateDefaultVpcResponse is the response type for the
 // CreateDefaultVpc API operation.
 type CreateDefaultVpcResponse struct {
-	*CreateDefaultVpcOutput
+	*types.CreateDefaultVpcOutput
 
 	response *aws.Response
 }

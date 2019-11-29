@@ -4,124 +4,10 @@ package storagegateway
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/storagegateway/types"
 )
-
-// CreateTapeWithBarcodeInput
-type CreateTapeWithBarcodeInput struct {
-	_ struct{} `type:"structure"`
-
-	// The unique Amazon Resource Name (ARN) that represents the gateway to associate
-	// the virtual tape with. Use the ListGateways operation to return a list of
-	// gateways for your account and AWS Region.
-	//
-	// GatewayARN is a required field
-	GatewayARN *string `min:"50" type:"string" required:"true"`
-
-	// True to use Amazon S3 server side encryption with your own AWS KMS key, or
-	// false to use a key managed by Amazon S3. Optional.
-	KMSEncrypted *bool `type:"boolean"`
-
-	// The Amazon Resource Name (ARN) of the AWS KMS Key used for Amazon S3 server
-	// side encryption. This value can only be set when KMSEncrypted is true. Optional.
-	KMSKey *string `min:"7" type:"string"`
-
-	// The ID of the pool that you want to add your tape to for archiving. The tape
-	// in this pool is archived in the S3 storage class that is associated with
-	// the pool. When you use your backup application to eject the tape, the tape
-	// is archived directly into the storage class (Glacier or Deep Archive) that
-	// corresponds to the pool.
-	//
-	// Valid values: "GLACIER", "DEEP_ARCHIVE"
-	PoolId *string `min:"1" type:"string"`
-
-	// A list of up to 50 tags that can be assigned to a virtual tape that has a
-	// barcode. Each tag is a key-value pair.
-	//
-	// Valid characters for key and value are letters, spaces, and numbers representable
-	// in UTF-8 format, and the following special characters: + - = . _ : / @. The
-	// maximum length of a tag's key is 128 characters, and the maximum length for
-	// a tag's value is 256.
-	Tags []Tag `type:"list"`
-
-	// The barcode that you want to assign to the tape.
-	//
-	// Barcodes cannot be reused. This includes barcodes used for tapes that have
-	// been deleted.
-	//
-	// TapeBarcode is a required field
-	TapeBarcode *string `min:"7" type:"string" required:"true"`
-
-	// The size, in bytes, of the virtual tape that you want to create.
-	//
-	// The size must be aligned by gigabyte (1024*1024*1024 byte).
-	//
-	// TapeSizeInBytes is a required field
-	TapeSizeInBytes *int64 `type:"long" required:"true"`
-}
-
-// String returns the string representation
-func (s CreateTapeWithBarcodeInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateTapeWithBarcodeInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateTapeWithBarcodeInput"}
-
-	if s.GatewayARN == nil {
-		invalidParams.Add(aws.NewErrParamRequired("GatewayARN"))
-	}
-	if s.GatewayARN != nil && len(*s.GatewayARN) < 50 {
-		invalidParams.Add(aws.NewErrParamMinLen("GatewayARN", 50))
-	}
-	if s.KMSKey != nil && len(*s.KMSKey) < 7 {
-		invalidParams.Add(aws.NewErrParamMinLen("KMSKey", 7))
-	}
-	if s.PoolId != nil && len(*s.PoolId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("PoolId", 1))
-	}
-
-	if s.TapeBarcode == nil {
-		invalidParams.Add(aws.NewErrParamRequired("TapeBarcode"))
-	}
-	if s.TapeBarcode != nil && len(*s.TapeBarcode) < 7 {
-		invalidParams.Add(aws.NewErrParamMinLen("TapeBarcode", 7))
-	}
-
-	if s.TapeSizeInBytes == nil {
-		invalidParams.Add(aws.NewErrParamRequired("TapeSizeInBytes"))
-	}
-	if s.Tags != nil {
-		for i, v := range s.Tags {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// CreateTapeOutput
-type CreateTapeWithBarcodeOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A unique Amazon Resource Name (ARN) that represents the virtual tape that
-	// was created.
-	TapeARN *string `min:"50" type:"string"`
-}
-
-// String returns the string representation
-func (s CreateTapeWithBarcodeOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCreateTapeWithBarcode = "CreateTapeWithBarcode"
 
@@ -144,7 +30,7 @@ const opCreateTapeWithBarcode = "CreateTapeWithBarcode"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/CreateTapeWithBarcode
-func (c *Client) CreateTapeWithBarcodeRequest(input *CreateTapeWithBarcodeInput) CreateTapeWithBarcodeRequest {
+func (c *Client) CreateTapeWithBarcodeRequest(input *types.CreateTapeWithBarcodeInput) CreateTapeWithBarcodeRequest {
 	op := &aws.Operation{
 		Name:       opCreateTapeWithBarcode,
 		HTTPMethod: "POST",
@@ -152,10 +38,10 @@ func (c *Client) CreateTapeWithBarcodeRequest(input *CreateTapeWithBarcodeInput)
 	}
 
 	if input == nil {
-		input = &CreateTapeWithBarcodeInput{}
+		input = &types.CreateTapeWithBarcodeInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateTapeWithBarcodeOutput{})
+	req := c.newRequest(op, input, &types.CreateTapeWithBarcodeOutput{})
 	return CreateTapeWithBarcodeRequest{Request: req, Input: input, Copy: c.CreateTapeWithBarcodeRequest}
 }
 
@@ -163,8 +49,8 @@ func (c *Client) CreateTapeWithBarcodeRequest(input *CreateTapeWithBarcodeInput)
 // CreateTapeWithBarcode API operation.
 type CreateTapeWithBarcodeRequest struct {
 	*aws.Request
-	Input *CreateTapeWithBarcodeInput
-	Copy  func(*CreateTapeWithBarcodeInput) CreateTapeWithBarcodeRequest
+	Input *types.CreateTapeWithBarcodeInput
+	Copy  func(*types.CreateTapeWithBarcodeInput) CreateTapeWithBarcodeRequest
 }
 
 // Send marshals and sends the CreateTapeWithBarcode API request.
@@ -176,7 +62,7 @@ func (r CreateTapeWithBarcodeRequest) Send(ctx context.Context) (*CreateTapeWith
 	}
 
 	resp := &CreateTapeWithBarcodeResponse{
-		CreateTapeWithBarcodeOutput: r.Request.Data.(*CreateTapeWithBarcodeOutput),
+		CreateTapeWithBarcodeOutput: r.Request.Data.(*types.CreateTapeWithBarcodeOutput),
 		response:                    &aws.Response{Request: r.Request},
 	}
 
@@ -186,7 +72,7 @@ func (r CreateTapeWithBarcodeRequest) Send(ctx context.Context) (*CreateTapeWith
 // CreateTapeWithBarcodeResponse is the response type for the
 // CreateTapeWithBarcode API operation.
 type CreateTapeWithBarcodeResponse struct {
-	*CreateTapeWithBarcodeOutput
+	*types.CreateTapeWithBarcodeOutput
 
 	response *aws.Response
 }

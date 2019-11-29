@@ -6,29 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/lightsail/types"
 )
-
-type UnpeerVpcInput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s UnpeerVpcInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type UnpeerVpcOutput struct {
-	_ struct{} `type:"structure"`
-
-	// An array of key-value pairs containing information about the request operation.
-	Operation *Operation `locationName:"operation" type:"structure"`
-}
-
-// String returns the string representation
-func (s UnpeerVpcOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opUnpeerVpc = "UnpeerVpc"
 
@@ -45,7 +24,7 @@ const opUnpeerVpc = "UnpeerVpc"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/UnpeerVpc
-func (c *Client) UnpeerVpcRequest(input *UnpeerVpcInput) UnpeerVpcRequest {
+func (c *Client) UnpeerVpcRequest(input *types.UnpeerVpcInput) UnpeerVpcRequest {
 	op := &aws.Operation{
 		Name:       opUnpeerVpc,
 		HTTPMethod: "POST",
@@ -53,10 +32,10 @@ func (c *Client) UnpeerVpcRequest(input *UnpeerVpcInput) UnpeerVpcRequest {
 	}
 
 	if input == nil {
-		input = &UnpeerVpcInput{}
+		input = &types.UnpeerVpcInput{}
 	}
 
-	req := c.newRequest(op, input, &UnpeerVpcOutput{})
+	req := c.newRequest(op, input, &types.UnpeerVpcOutput{})
 	return UnpeerVpcRequest{Request: req, Input: input, Copy: c.UnpeerVpcRequest}
 }
 
@@ -64,8 +43,8 @@ func (c *Client) UnpeerVpcRequest(input *UnpeerVpcInput) UnpeerVpcRequest {
 // UnpeerVpc API operation.
 type UnpeerVpcRequest struct {
 	*aws.Request
-	Input *UnpeerVpcInput
-	Copy  func(*UnpeerVpcInput) UnpeerVpcRequest
+	Input *types.UnpeerVpcInput
+	Copy  func(*types.UnpeerVpcInput) UnpeerVpcRequest
 }
 
 // Send marshals and sends the UnpeerVpc API request.
@@ -77,7 +56,7 @@ func (r UnpeerVpcRequest) Send(ctx context.Context) (*UnpeerVpcResponse, error) 
 	}
 
 	resp := &UnpeerVpcResponse{
-		UnpeerVpcOutput: r.Request.Data.(*UnpeerVpcOutput),
+		UnpeerVpcOutput: r.Request.Data.(*types.UnpeerVpcOutput),
 		response:        &aws.Response{Request: r.Request},
 	}
 
@@ -87,7 +66,7 @@ func (r UnpeerVpcRequest) Send(ctx context.Context) (*UnpeerVpcResponse, error) 
 // UnpeerVpcResponse is the response type for the
 // UnpeerVpc API operation.
 type UnpeerVpcResponse struct {
-	*UnpeerVpcOutput
+	*types.UnpeerVpcOutput
 
 	response *aws.Response
 }

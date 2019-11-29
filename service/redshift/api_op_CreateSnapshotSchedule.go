@@ -4,70 +4,10 @@ package redshift
 
 import (
 	"context"
-	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/redshift/types"
 )
-
-type CreateSnapshotScheduleInput struct {
-	_ struct{} `type:"structure"`
-
-	DryRun *bool `type:"boolean"`
-
-	NextInvocations *int64 `type:"integer"`
-
-	// The definition of the snapshot schedule. The definition is made up of schedule
-	// expressions, for example "cron(30 12 *)" or "rate(12 hours)".
-	ScheduleDefinitions []string `locationNameList:"ScheduleDefinition" type:"list"`
-
-	// The description of the snapshot schedule.
-	ScheduleDescription *string `type:"string"`
-
-	// A unique identifier for a snapshot schedule. Only alphanumeric characters
-	// are allowed for the identifier.
-	ScheduleIdentifier *string `type:"string"`
-
-	// An optional set of tags you can use to search for the schedule.
-	Tags []Tag `locationNameList:"Tag" type:"list"`
-}
-
-// String returns the string representation
-func (s CreateSnapshotScheduleInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Describes a snapshot schedule. You can set a regular interval for creating
-// snapshots of a cluster. You can also schedule snapshots for specific dates.
-type CreateSnapshotScheduleOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The number of clusters associated with the schedule.
-	AssociatedClusterCount *int64 `type:"integer"`
-
-	// A list of clusters associated with the schedule. A maximum of 100 clusters
-	// is returned.
-	AssociatedClusters []ClusterAssociatedToSchedule `locationNameList:"ClusterAssociatedToSchedule" type:"list"`
-
-	NextInvocations []time.Time `locationNameList:"SnapshotTime" type:"list"`
-
-	// A list of ScheduleDefinitions.
-	ScheduleDefinitions []string `locationNameList:"ScheduleDefinition" type:"list"`
-
-	// The description of the schedule.
-	ScheduleDescription *string `type:"string"`
-
-	// A unique identifier for the schedule.
-	ScheduleIdentifier *string `type:"string"`
-
-	// An optional set of tags describing the schedule.
-	Tags []Tag `locationNameList:"Tag" type:"list"`
-}
-
-// String returns the string representation
-func (s CreateSnapshotScheduleOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCreateSnapshotSchedule = "CreateSnapshotSchedule"
 
@@ -84,7 +24,7 @@ const opCreateSnapshotSchedule = "CreateSnapshotSchedule"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/CreateSnapshotSchedule
-func (c *Client) CreateSnapshotScheduleRequest(input *CreateSnapshotScheduleInput) CreateSnapshotScheduleRequest {
+func (c *Client) CreateSnapshotScheduleRequest(input *types.CreateSnapshotScheduleInput) CreateSnapshotScheduleRequest {
 	op := &aws.Operation{
 		Name:       opCreateSnapshotSchedule,
 		HTTPMethod: "POST",
@@ -92,10 +32,10 @@ func (c *Client) CreateSnapshotScheduleRequest(input *CreateSnapshotScheduleInpu
 	}
 
 	if input == nil {
-		input = &CreateSnapshotScheduleInput{}
+		input = &types.CreateSnapshotScheduleInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateSnapshotScheduleOutput{})
+	req := c.newRequest(op, input, &types.CreateSnapshotScheduleOutput{})
 	return CreateSnapshotScheduleRequest{Request: req, Input: input, Copy: c.CreateSnapshotScheduleRequest}
 }
 
@@ -103,8 +43,8 @@ func (c *Client) CreateSnapshotScheduleRequest(input *CreateSnapshotScheduleInpu
 // CreateSnapshotSchedule API operation.
 type CreateSnapshotScheduleRequest struct {
 	*aws.Request
-	Input *CreateSnapshotScheduleInput
-	Copy  func(*CreateSnapshotScheduleInput) CreateSnapshotScheduleRequest
+	Input *types.CreateSnapshotScheduleInput
+	Copy  func(*types.CreateSnapshotScheduleInput) CreateSnapshotScheduleRequest
 }
 
 // Send marshals and sends the CreateSnapshotSchedule API request.
@@ -116,7 +56,7 @@ func (r CreateSnapshotScheduleRequest) Send(ctx context.Context) (*CreateSnapsho
 	}
 
 	resp := &CreateSnapshotScheduleResponse{
-		CreateSnapshotScheduleOutput: r.Request.Data.(*CreateSnapshotScheduleOutput),
+		CreateSnapshotScheduleOutput: r.Request.Data.(*types.CreateSnapshotScheduleOutput),
 		response:                     &aws.Response{Request: r.Request},
 	}
 
@@ -126,7 +66,7 @@ func (r CreateSnapshotScheduleRequest) Send(ctx context.Context) (*CreateSnapsho
 // CreateSnapshotScheduleResponse is the response type for the
 // CreateSnapshotSchedule API operation.
 type CreateSnapshotScheduleResponse struct {
-	*CreateSnapshotScheduleOutput
+	*types.CreateSnapshotScheduleOutput
 
 	response *aws.Response
 }

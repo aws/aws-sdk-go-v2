@@ -6,65 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
+	"github.com/aws/aws-sdk-go-v2/service/codedeploy/types"
 )
-
-// Represents the input of a RegisterApplicationRevision operation.
-type RegisterApplicationRevisionInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of an AWS CodeDeploy application associated with the IAM user or
-	// AWS account.
-	//
-	// ApplicationName is a required field
-	ApplicationName *string `locationName:"applicationName" min:"1" type:"string" required:"true"`
-
-	// A comment about the revision.
-	Description *string `locationName:"description" type:"string"`
-
-	// Information about the application revision to register, including type and
-	// location.
-	//
-	// Revision is a required field
-	Revision *RevisionLocation `locationName:"revision" type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s RegisterApplicationRevisionInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *RegisterApplicationRevisionInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "RegisterApplicationRevisionInput"}
-
-	if s.ApplicationName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ApplicationName"))
-	}
-	if s.ApplicationName != nil && len(*s.ApplicationName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ApplicationName", 1))
-	}
-
-	if s.Revision == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Revision"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type RegisterApplicationRevisionOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s RegisterApplicationRevisionOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opRegisterApplicationRevision = "RegisterApplicationRevision"
 
@@ -81,7 +26,7 @@ const opRegisterApplicationRevision = "RegisterApplicationRevision"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/RegisterApplicationRevision
-func (c *Client) RegisterApplicationRevisionRequest(input *RegisterApplicationRevisionInput) RegisterApplicationRevisionRequest {
+func (c *Client) RegisterApplicationRevisionRequest(input *types.RegisterApplicationRevisionInput) RegisterApplicationRevisionRequest {
 	op := &aws.Operation{
 		Name:       opRegisterApplicationRevision,
 		HTTPMethod: "POST",
@@ -89,10 +34,10 @@ func (c *Client) RegisterApplicationRevisionRequest(input *RegisterApplicationRe
 	}
 
 	if input == nil {
-		input = &RegisterApplicationRevisionInput{}
+		input = &types.RegisterApplicationRevisionInput{}
 	}
 
-	req := c.newRequest(op, input, &RegisterApplicationRevisionOutput{})
+	req := c.newRequest(op, input, &types.RegisterApplicationRevisionOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return RegisterApplicationRevisionRequest{Request: req, Input: input, Copy: c.RegisterApplicationRevisionRequest}
@@ -102,8 +47,8 @@ func (c *Client) RegisterApplicationRevisionRequest(input *RegisterApplicationRe
 // RegisterApplicationRevision API operation.
 type RegisterApplicationRevisionRequest struct {
 	*aws.Request
-	Input *RegisterApplicationRevisionInput
-	Copy  func(*RegisterApplicationRevisionInput) RegisterApplicationRevisionRequest
+	Input *types.RegisterApplicationRevisionInput
+	Copy  func(*types.RegisterApplicationRevisionInput) RegisterApplicationRevisionRequest
 }
 
 // Send marshals and sends the RegisterApplicationRevision API request.
@@ -115,7 +60,7 @@ func (r RegisterApplicationRevisionRequest) Send(ctx context.Context) (*Register
 	}
 
 	resp := &RegisterApplicationRevisionResponse{
-		RegisterApplicationRevisionOutput: r.Request.Data.(*RegisterApplicationRevisionOutput),
+		RegisterApplicationRevisionOutput: r.Request.Data.(*types.RegisterApplicationRevisionOutput),
 		response:                          &aws.Response{Request: r.Request},
 	}
 
@@ -125,7 +70,7 @@ func (r RegisterApplicationRevisionRequest) Send(ctx context.Context) (*Register
 // RegisterApplicationRevisionResponse is the response type for the
 // RegisterApplicationRevision API operation.
 type RegisterApplicationRevisionResponse struct {
-	*RegisterApplicationRevisionOutput
+	*types.RegisterApplicationRevisionOutput
 
 	response *aws.Response
 }

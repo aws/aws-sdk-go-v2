@@ -12,6 +12,8 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws/awserr"
 	"github.com/aws/aws-sdk-go-v2/aws/external"
 	"github.com/aws/aws-sdk-go-v2/service/ecs"
+	"github.com/aws/aws-sdk-go-v2/service/ecs/enums"
+	"github.com/aws/aws-sdk-go-v2/service/ecs/types"
 )
 
 var _ time.Duration
@@ -36,7 +38,7 @@ func ExampleClient_CreateClusterRequest_shared00() {
 	}
 
 	svc := ecs.New(cfg)
-	input := &ecs.CreateClusterInput{
+	input := &types.CreateClusterInput{
 		ClusterName: aws.String("my_cluster"),
 	}
 
@@ -77,7 +79,7 @@ func ExampleClient_CreateServiceRequest_shared00() {
 	}
 
 	svc := ecs.New(cfg)
-	input := &ecs.CreateServiceInput{
+	input := &types.CreateServiceInput{
 		DesiredCount:   aws.Int64(10),
 		ServiceName:    aws.String("ecs-simple-service"),
 		TaskDefinition: aws.String("hello_world"),
@@ -130,9 +132,9 @@ func ExampleClient_CreateServiceRequest_shared01() {
 	}
 
 	svc := ecs.New(cfg)
-	input := &ecs.CreateServiceInput{
+	input := &types.CreateServiceInput{
 		DesiredCount: aws.Int64(10),
-		LoadBalancers: []ecs.LoadBalancer{
+		LoadBalancers: []types.LoadBalancer{
 			{
 				ContainerName:    aws.String("simple-app"),
 				ContainerPort:    aws.Int64(80),
@@ -190,8 +192,8 @@ func ExampleClient_DeleteAccountSettingRequest_shared00() {
 	}
 
 	svc := ecs.New(cfg)
-	input := &ecs.DeleteAccountSettingInput{
-		Name: ecs.SettingNameServiceLongArnFormat,
+	input := &types.DeleteAccountSettingInput{
+		Name: enums.SettingNameServiceLongArnFormat,
 	}
 
 	req := svc.DeleteAccountSettingRequest(input)
@@ -231,8 +233,8 @@ func ExampleClient_DeleteAccountSettingRequest_shared01() {
 	}
 
 	svc := ecs.New(cfg)
-	input := &ecs.DeleteAccountSettingInput{
-		Name:         ecs.SettingNameContainerInstanceLongArnFormat,
+	input := &types.DeleteAccountSettingInput{
+		Name:         enums.SettingNameContainerInstanceLongArnFormat,
 		PrincipalArn: aws.String("arn:aws:iam::<aws_account_id>:user/principalName"),
 	}
 
@@ -271,7 +273,7 @@ func ExampleClient_DeleteClusterRequest_shared00() {
 	}
 
 	svc := ecs.New(cfg)
-	input := &ecs.DeleteClusterInput{
+	input := &types.DeleteClusterInput{
 		Cluster: aws.String("my_cluster"),
 	}
 
@@ -319,7 +321,7 @@ func ExampleClient_DeleteServiceRequest_shared00() {
 	}
 
 	svc := ecs.New(cfg)
-	input := &ecs.DeleteServiceInput{
+	input := &types.DeleteServiceInput{
 		Service: aws.String("my-http-service"),
 	}
 
@@ -364,7 +366,7 @@ func ExampleClient_DeregisterContainerInstanceRequest_shared00() {
 	}
 
 	svc := ecs.New(cfg)
-	input := &ecs.DeregisterContainerInstanceInput{
+	input := &types.DeregisterContainerInstanceInput{
 		Cluster:           aws.String("default"),
 		ContainerInstance: aws.String("container_instance_UUID"),
 		Force:             aws.Bool(true),
@@ -407,7 +409,7 @@ func ExampleClient_DescribeClustersRequest_shared00() {
 	}
 
 	svc := ecs.New(cfg)
-	input := &ecs.DescribeClustersInput{
+	input := &types.DescribeClustersInput{
 		Clusters: []string{
 			"default",
 		},
@@ -449,7 +451,7 @@ func ExampleClient_DescribeContainerInstancesRequest_shared00() {
 	}
 
 	svc := ecs.New(cfg)
-	input := &ecs.DescribeContainerInstancesInput{
+	input := &types.DescribeContainerInstancesInput{
 		Cluster: aws.String("default"),
 		ContainerInstances: []string{
 			"f2756532-8f13-4d53-87c9-aed50dc94cd7",
@@ -493,7 +495,7 @@ func ExampleClient_DescribeServicesRequest_shared00() {
 	}
 
 	svc := ecs.New(cfg)
-	input := &ecs.DescribeServicesInput{
+	input := &types.DescribeServicesInput{
 		Services: []string{
 			"ecs-simple-service",
 		},
@@ -536,7 +538,7 @@ func ExampleClient_DescribeTaskDefinitionRequest_shared00() {
 	}
 
 	svc := ecs.New(cfg)
-	input := &ecs.DescribeTaskDefinitionInput{
+	input := &types.DescribeTaskDefinitionInput{
 		TaskDefinition: aws.String("hello_world:8"),
 	}
 
@@ -576,7 +578,7 @@ func ExampleClient_DescribeTasksRequest_shared00() {
 	}
 
 	svc := ecs.New(cfg)
-	input := &ecs.DescribeTasksInput{
+	input := &types.DescribeTasksInput{
 		Tasks: []string{
 			"c5cba4eb-5dad-405e-96db-71ef8eefe6a8",
 		},
@@ -619,7 +621,7 @@ func ExampleClient_ListAccountSettingsRequest_shared00() {
 	}
 
 	svc := ecs.New(cfg)
-	input := &ecs.ListAccountSettingsInput{
+	input := &types.ListAccountSettingsInput{
 		EffectiveSettings: aws.Bool(true),
 	}
 
@@ -658,7 +660,7 @@ func ExampleClient_ListAccountSettingsRequest_shared01() {
 	}
 
 	svc := ecs.New(cfg)
-	input := &ecs.ListAccountSettingsInput{
+	input := &types.ListAccountSettingsInput{
 		EffectiveSettings: aws.Bool(true),
 		PrincipalArn:      aws.String("arn:aws:iam::<aws_account_id>:user/principalName"),
 	}
@@ -698,7 +700,7 @@ func ExampleClient_ListClustersRequest_shared00() {
 	}
 
 	svc := ecs.New(cfg)
-	input := &ecs.ListClustersInput{}
+	input := &types.ListClustersInput{}
 
 	req := svc.ListClustersRequest(input)
 	result, err := req.Send(context.Background())
@@ -736,7 +738,7 @@ func ExampleClient_ListContainerInstancesRequest_shared00() {
 	}
 
 	svc := ecs.New(cfg)
-	input := &ecs.ListContainerInstancesInput{
+	input := &types.ListContainerInstancesInput{
 		Cluster: aws.String("default"),
 	}
 
@@ -777,7 +779,7 @@ func ExampleClient_ListServicesRequest_shared00() {
 	}
 
 	svc := ecs.New(cfg)
-	input := &ecs.ListServicesInput{}
+	input := &types.ListServicesInput{}
 
 	req := svc.ListServicesRequest(input)
 	result, err := req.Send(context.Background())
@@ -816,7 +818,7 @@ func ExampleClient_ListTagsForResourceRequest_shared00() {
 	}
 
 	svc := ecs.New(cfg)
-	input := &ecs.ListTagsForResourceInput{
+	input := &types.ListTagsForResourceInput{
 		ResourceArn: aws.String("arn:aws:ecs:region:aws_account_id:cluster/dev"),
 	}
 
@@ -857,7 +859,7 @@ func ExampleClient_ListTaskDefinitionFamiliesRequest_shared00() {
 	}
 
 	svc := ecs.New(cfg)
-	input := &ecs.ListTaskDefinitionFamiliesInput{}
+	input := &types.ListTaskDefinitionFamiliesInput{}
 
 	req := svc.ListTaskDefinitionFamiliesRequest(input)
 	result, err := req.Send(context.Background())
@@ -894,7 +896,7 @@ func ExampleClient_ListTaskDefinitionFamiliesRequest_shared01() {
 	}
 
 	svc := ecs.New(cfg)
-	input := &ecs.ListTaskDefinitionFamiliesInput{
+	input := &types.ListTaskDefinitionFamiliesInput{
 		FamilyPrefix: aws.String("hpcc"),
 	}
 
@@ -933,7 +935,7 @@ func ExampleClient_ListTaskDefinitionsRequest_shared00() {
 	}
 
 	svc := ecs.New(cfg)
-	input := &ecs.ListTaskDefinitionsInput{}
+	input := &types.ListTaskDefinitionsInput{}
 
 	req := svc.ListTaskDefinitionsRequest(input)
 	result, err := req.Send(context.Background())
@@ -970,7 +972,7 @@ func ExampleClient_ListTaskDefinitionsRequest_shared01() {
 	}
 
 	svc := ecs.New(cfg)
-	input := &ecs.ListTaskDefinitionsInput{
+	input := &types.ListTaskDefinitionsInput{
 		FamilyPrefix: aws.String("wordpress"),
 	}
 
@@ -1009,7 +1011,7 @@ func ExampleClient_ListTasksRequest_shared00() {
 	}
 
 	svc := ecs.New(cfg)
-	input := &ecs.ListTasksInput{
+	input := &types.ListTasksInput{
 		Cluster: aws.String("default"),
 	}
 
@@ -1053,7 +1055,7 @@ func ExampleClient_ListTasksRequest_shared01() {
 	}
 
 	svc := ecs.New(cfg)
-	input := &ecs.ListTasksInput{
+	input := &types.ListTasksInput{
 		Cluster:           aws.String("default"),
 		ContainerInstance: aws.String("f6bbb147-5370-4ace-8c73-c7181ded911f"),
 	}
@@ -1100,8 +1102,8 @@ func ExampleClient_PutAccountSettingRequest_shared00() {
 	}
 
 	svc := ecs.New(cfg)
-	input := &ecs.PutAccountSettingInput{
-		Name:  ecs.SettingNameServiceLongArnFormat,
+	input := &types.PutAccountSettingInput{
+		Name:  enums.SettingNameServiceLongArnFormat,
 		Value: aws.String("enabled"),
 	}
 
@@ -1143,8 +1145,8 @@ func ExampleClient_PutAccountSettingRequest_shared01() {
 	}
 
 	svc := ecs.New(cfg)
-	input := &ecs.PutAccountSettingInput{
-		Name:         ecs.SettingNameContainerInstanceLongArnFormat,
+	input := &types.PutAccountSettingInput{
+		Name:         enums.SettingNameContainerInstanceLongArnFormat,
 		PrincipalArn: aws.String("arn:aws:iam::<aws_account_id>:user/principalName"),
 		Value:        aws.String("enabled"),
 	}
@@ -1186,8 +1188,8 @@ func ExampleClient_PutAccountSettingDefaultRequest_shared00() {
 	}
 
 	svc := ecs.New(cfg)
-	input := &ecs.PutAccountSettingDefaultInput{
-		Name:  ecs.SettingNameServiceLongArnFormat,
+	input := &types.PutAccountSettingDefaultInput{
+		Name:  enums.SettingNameServiceLongArnFormat,
 		Value: aws.String("enabled"),
 	}
 
@@ -1226,8 +1228,8 @@ func ExampleClient_RegisterTaskDefinitionRequest_shared00() {
 	}
 
 	svc := ecs.New(cfg)
-	input := &ecs.RegisterTaskDefinitionInput{
-		ContainerDefinitions: []ecs.ContainerDefinition{
+	input := &types.RegisterTaskDefinitionInput{
+		ContainerDefinitions: []types.ContainerDefinition{
 			{
 				Command: []string{
 					"sleep",
@@ -1279,7 +1281,7 @@ func ExampleClient_RunTaskRequest_shared00() {
 	}
 
 	svc := ecs.New(cfg)
-	input := &ecs.RunTaskInput{
+	input := &types.RunTaskInput{
 		Cluster:        aws.String("default"),
 		TaskDefinition: aws.String("sleep360:1"),
 	}
@@ -1331,9 +1333,9 @@ func ExampleClient_TagResourceRequest_shared00() {
 	}
 
 	svc := ecs.New(cfg)
-	input := &ecs.TagResourceInput{
+	input := &types.TagResourceInput{
 		ResourceArn: aws.String("arn:aws:ecs:region:aws_account_id:cluster/dev"),
-		Tags: []ecs.Tag{
+		Tags: []types.Tag{
 			{
 				Key:   aws.String("team"),
 				Value: aws.String("dev"),
@@ -1380,7 +1382,7 @@ func ExampleClient_UntagResourceRequest_shared00() {
 	}
 
 	svc := ecs.New(cfg)
-	input := &ecs.UntagResourceInput{
+	input := &types.UntagResourceInput{
 		ResourceArn: aws.String("arn:aws:ecs:region:aws_account_id:cluster/dev"),
 		TagKeys: []string{
 			"team",
@@ -1427,7 +1429,7 @@ func ExampleClient_UpdateServiceRequest_shared00() {
 	}
 
 	svc := ecs.New(cfg)
-	input := &ecs.UpdateServiceInput{
+	input := &types.UpdateServiceInput{
 		Service:        aws.String("my-http-service"),
 		TaskDefinition: aws.String("amazon-ecs-sample"),
 	}
@@ -1479,7 +1481,7 @@ func ExampleClient_UpdateServiceRequest_shared01() {
 	}
 
 	svc := ecs.New(cfg)
-	input := &ecs.UpdateServiceInput{
+	input := &types.UpdateServiceInput{
 		DesiredCount: aws.Int64(10),
 		Service:      aws.String("my-http-service"),
 	}

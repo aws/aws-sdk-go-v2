@@ -10,6 +10,7 @@ package fmsiface
 
 import (
 	"github.com/aws/aws-sdk-go-v2/service/fms"
+	"github.com/aws/aws-sdk-go-v2/service/fms/types"
 )
 
 // ClientAPI provides an interface to enable mocking the
@@ -43,7 +44,7 @@ import (
 //    type mockClientClient struct {
 //        fmsiface.ClientPI
 //    }
-//    func (m *mockClientClient) AssociateAdminAccount(input *fms.AssociateAdminAccountInput) (*fms.AssociateAdminAccountOutput, error) {
+//    func (m *mockClientClient) AssociateAdminAccount(input *types.AssociateAdminAccountInput) (*types.AssociateAdminAccountOutput, error) {
 //        // mock response/functionality
 //    }
 //
@@ -61,33 +62,33 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type ClientAPI interface {
-	AssociateAdminAccountRequest(*fms.AssociateAdminAccountInput) fms.AssociateAdminAccountRequest
+	AssociateAdminAccountRequest(*types.AssociateAdminAccountInput) fms.AssociateAdminAccountRequest
 
-	DeleteNotificationChannelRequest(*fms.DeleteNotificationChannelInput) fms.DeleteNotificationChannelRequest
+	DeleteNotificationChannelRequest(*types.DeleteNotificationChannelInput) fms.DeleteNotificationChannelRequest
 
-	DeletePolicyRequest(*fms.DeletePolicyInput) fms.DeletePolicyRequest
+	DeletePolicyRequest(*types.DeletePolicyInput) fms.DeletePolicyRequest
 
-	DisassociateAdminAccountRequest(*fms.DisassociateAdminAccountInput) fms.DisassociateAdminAccountRequest
+	DisassociateAdminAccountRequest(*types.DisassociateAdminAccountInput) fms.DisassociateAdminAccountRequest
 
-	GetAdminAccountRequest(*fms.GetAdminAccountInput) fms.GetAdminAccountRequest
+	GetAdminAccountRequest(*types.GetAdminAccountInput) fms.GetAdminAccountRequest
 
-	GetComplianceDetailRequest(*fms.GetComplianceDetailInput) fms.GetComplianceDetailRequest
+	GetComplianceDetailRequest(*types.GetComplianceDetailInput) fms.GetComplianceDetailRequest
 
-	GetNotificationChannelRequest(*fms.GetNotificationChannelInput) fms.GetNotificationChannelRequest
+	GetNotificationChannelRequest(*types.GetNotificationChannelInput) fms.GetNotificationChannelRequest
 
-	GetPolicyRequest(*fms.GetPolicyInput) fms.GetPolicyRequest
+	GetPolicyRequest(*types.GetPolicyInput) fms.GetPolicyRequest
 
-	GetProtectionStatusRequest(*fms.GetProtectionStatusInput) fms.GetProtectionStatusRequest
+	GetProtectionStatusRequest(*types.GetProtectionStatusInput) fms.GetProtectionStatusRequest
 
-	ListComplianceStatusRequest(*fms.ListComplianceStatusInput) fms.ListComplianceStatusRequest
+	ListComplianceStatusRequest(*types.ListComplianceStatusInput) fms.ListComplianceStatusRequest
 
-	ListMemberAccountsRequest(*fms.ListMemberAccountsInput) fms.ListMemberAccountsRequest
+	ListMemberAccountsRequest(*types.ListMemberAccountsInput) fms.ListMemberAccountsRequest
 
-	ListPoliciesRequest(*fms.ListPoliciesInput) fms.ListPoliciesRequest
+	ListPoliciesRequest(*types.ListPoliciesInput) fms.ListPoliciesRequest
 
-	PutNotificationChannelRequest(*fms.PutNotificationChannelInput) fms.PutNotificationChannelRequest
+	PutNotificationChannelRequest(*types.PutNotificationChannelInput) fms.PutNotificationChannelRequest
 
-	PutPolicyRequest(*fms.PutPolicyInput) fms.PutPolicyRequest
+	PutPolicyRequest(*types.PutPolicyInput) fms.PutPolicyRequest
 }
 
 var _ ClientAPI = (*fms.Client)(nil)

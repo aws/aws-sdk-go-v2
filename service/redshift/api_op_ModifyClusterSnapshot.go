@@ -6,61 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/redshift/types"
 )
-
-type ModifyClusterSnapshotInput struct {
-	_ struct{} `type:"structure"`
-
-	// A Boolean option to override an exception if the retention period has already
-	// passed.
-	Force *bool `type:"boolean"`
-
-	// The number of days that a manual snapshot is retained. If the value is -1,
-	// the manual snapshot is retained indefinitely.
-	//
-	// If the manual snapshot falls outside of the new retention period, you can
-	// specify the force option to immediately delete the snapshot.
-	//
-	// The value must be either -1 or an integer between 1 and 3,653.
-	ManualSnapshotRetentionPeriod *int64 `type:"integer"`
-
-	// The identifier of the snapshot whose setting you want to modify.
-	//
-	// SnapshotIdentifier is a required field
-	SnapshotIdentifier *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s ModifyClusterSnapshotInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ModifyClusterSnapshotInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ModifyClusterSnapshotInput"}
-
-	if s.SnapshotIdentifier == nil {
-		invalidParams.Add(aws.NewErrParamRequired("SnapshotIdentifier"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ModifyClusterSnapshotOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Describes a snapshot.
-	Snapshot *Snapshot `type:"structure"`
-}
-
-// String returns the string representation
-func (s ModifyClusterSnapshotOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opModifyClusterSnapshot = "ModifyClusterSnapshot"
 
@@ -77,7 +24,7 @@ const opModifyClusterSnapshot = "ModifyClusterSnapshot"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ModifyClusterSnapshot
-func (c *Client) ModifyClusterSnapshotRequest(input *ModifyClusterSnapshotInput) ModifyClusterSnapshotRequest {
+func (c *Client) ModifyClusterSnapshotRequest(input *types.ModifyClusterSnapshotInput) ModifyClusterSnapshotRequest {
 	op := &aws.Operation{
 		Name:       opModifyClusterSnapshot,
 		HTTPMethod: "POST",
@@ -85,10 +32,10 @@ func (c *Client) ModifyClusterSnapshotRequest(input *ModifyClusterSnapshotInput)
 	}
 
 	if input == nil {
-		input = &ModifyClusterSnapshotInput{}
+		input = &types.ModifyClusterSnapshotInput{}
 	}
 
-	req := c.newRequest(op, input, &ModifyClusterSnapshotOutput{})
+	req := c.newRequest(op, input, &types.ModifyClusterSnapshotOutput{})
 	return ModifyClusterSnapshotRequest{Request: req, Input: input, Copy: c.ModifyClusterSnapshotRequest}
 }
 
@@ -96,8 +43,8 @@ func (c *Client) ModifyClusterSnapshotRequest(input *ModifyClusterSnapshotInput)
 // ModifyClusterSnapshot API operation.
 type ModifyClusterSnapshotRequest struct {
 	*aws.Request
-	Input *ModifyClusterSnapshotInput
-	Copy  func(*ModifyClusterSnapshotInput) ModifyClusterSnapshotRequest
+	Input *types.ModifyClusterSnapshotInput
+	Copy  func(*types.ModifyClusterSnapshotInput) ModifyClusterSnapshotRequest
 }
 
 // Send marshals and sends the ModifyClusterSnapshot API request.
@@ -109,7 +56,7 @@ func (r ModifyClusterSnapshotRequest) Send(ctx context.Context) (*ModifyClusterS
 	}
 
 	resp := &ModifyClusterSnapshotResponse{
-		ModifyClusterSnapshotOutput: r.Request.Data.(*ModifyClusterSnapshotOutput),
+		ModifyClusterSnapshotOutput: r.Request.Data.(*types.ModifyClusterSnapshotOutput),
 		response:                    &aws.Response{Request: r.Request},
 	}
 
@@ -119,7 +66,7 @@ func (r ModifyClusterSnapshotRequest) Send(ctx context.Context) (*ModifyClusterS
 // ModifyClusterSnapshotResponse is the response type for the
 // ModifyClusterSnapshot API operation.
 type ModifyClusterSnapshotResponse struct {
-	*ModifyClusterSnapshotOutput
+	*types.ModifyClusterSnapshotOutput
 
 	response *aws.Response
 }

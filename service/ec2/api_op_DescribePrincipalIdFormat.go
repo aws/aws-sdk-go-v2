@@ -6,68 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-type DescribePrincipalIdFormatInput struct {
-	_ struct{} `type:"structure"`
-
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have
-	// the required permissions, the error response is DryRunOperation. Otherwise,
-	// it is UnauthorizedOperation.
-	DryRun *bool `type:"boolean"`
-
-	// The maximum number of results to return in a single call. To retrieve the
-	// remaining results, make another call with the returned NextToken value.
-	MaxResults *int64 `min:"1" type:"integer"`
-
-	// The token to request the next page of results.
-	NextToken *string `type:"string"`
-
-	// The type of resource: bundle | conversion-task | customer-gateway | dhcp-options
-	// | elastic-ip-allocation | elastic-ip-association | export-task | flow-log
-	// | image | import-task | instance | internet-gateway | network-acl | network-acl-association
-	// | network-interface | network-interface-attachment | prefix-list | reservation
-	// | route-table | route-table-association | security-group | snapshot | subnet
-	// | subnet-cidr-block-association | volume | vpc | vpc-cidr-block-association
-	// | vpc-endpoint | vpc-peering-connection | vpn-connection | vpn-gateway
-	Resources []string `locationName:"Resource" locationNameList:"item" type:"list"`
-}
-
-// String returns the string representation
-func (s DescribePrincipalIdFormatInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribePrincipalIdFormatInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribePrincipalIdFormatInput"}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribePrincipalIdFormatOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The token to use to retrieve the next page of results. This value is null
-	// when there are no more results to return.
-	NextToken *string `locationName:"nextToken" type:"string"`
-
-	// Information about the ID format settings for the ARN.
-	Principals []PrincipalIdFormat `locationName:"principalSet" locationNameList:"item" type:"list"`
-}
-
-// String returns the string representation
-func (s DescribePrincipalIdFormatOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribePrincipalIdFormat = "DescribePrincipalIdFormat"
 
@@ -98,7 +38,7 @@ const opDescribePrincipalIdFormat = "DescribePrincipalIdFormat"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribePrincipalIdFormat
-func (c *Client) DescribePrincipalIdFormatRequest(input *DescribePrincipalIdFormatInput) DescribePrincipalIdFormatRequest {
+func (c *Client) DescribePrincipalIdFormatRequest(input *types.DescribePrincipalIdFormatInput) DescribePrincipalIdFormatRequest {
 	op := &aws.Operation{
 		Name:       opDescribePrincipalIdFormat,
 		HTTPMethod: "POST",
@@ -112,10 +52,10 @@ func (c *Client) DescribePrincipalIdFormatRequest(input *DescribePrincipalIdForm
 	}
 
 	if input == nil {
-		input = &DescribePrincipalIdFormatInput{}
+		input = &types.DescribePrincipalIdFormatInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribePrincipalIdFormatOutput{})
+	req := c.newRequest(op, input, &types.DescribePrincipalIdFormatOutput{})
 	return DescribePrincipalIdFormatRequest{Request: req, Input: input, Copy: c.DescribePrincipalIdFormatRequest}
 }
 
@@ -123,8 +63,8 @@ func (c *Client) DescribePrincipalIdFormatRequest(input *DescribePrincipalIdForm
 // DescribePrincipalIdFormat API operation.
 type DescribePrincipalIdFormatRequest struct {
 	*aws.Request
-	Input *DescribePrincipalIdFormatInput
-	Copy  func(*DescribePrincipalIdFormatInput) DescribePrincipalIdFormatRequest
+	Input *types.DescribePrincipalIdFormatInput
+	Copy  func(*types.DescribePrincipalIdFormatInput) DescribePrincipalIdFormatRequest
 }
 
 // Send marshals and sends the DescribePrincipalIdFormat API request.
@@ -136,7 +76,7 @@ func (r DescribePrincipalIdFormatRequest) Send(ctx context.Context) (*DescribePr
 	}
 
 	resp := &DescribePrincipalIdFormatResponse{
-		DescribePrincipalIdFormatOutput: r.Request.Data.(*DescribePrincipalIdFormatOutput),
+		DescribePrincipalIdFormatOutput: r.Request.Data.(*types.DescribePrincipalIdFormatOutput),
 		response:                        &aws.Response{Request: r.Request},
 	}
 
@@ -166,7 +106,7 @@ func NewDescribePrincipalIdFormatPaginator(req DescribePrincipalIdFormatRequest)
 	return DescribePrincipalIdFormatPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *DescribePrincipalIdFormatInput
+				var inCpy *types.DescribePrincipalIdFormatInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -186,14 +126,14 @@ type DescribePrincipalIdFormatPaginator struct {
 	aws.Pager
 }
 
-func (p *DescribePrincipalIdFormatPaginator) CurrentPage() *DescribePrincipalIdFormatOutput {
-	return p.Pager.CurrentPage().(*DescribePrincipalIdFormatOutput)
+func (p *DescribePrincipalIdFormatPaginator) CurrentPage() *types.DescribePrincipalIdFormatOutput {
+	return p.Pager.CurrentPage().(*types.DescribePrincipalIdFormatOutput)
 }
 
 // DescribePrincipalIdFormatResponse is the response type for the
 // DescribePrincipalIdFormat API operation.
 type DescribePrincipalIdFormatResponse struct {
-	*DescribePrincipalIdFormatOutput
+	*types.DescribePrincipalIdFormatOutput
 
 	response *aws.Response
 }

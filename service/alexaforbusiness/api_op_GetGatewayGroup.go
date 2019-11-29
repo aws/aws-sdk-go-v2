@@ -6,48 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/alexaforbusiness/types"
 )
-
-type GetGatewayGroupInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ARN of the gateway group to get.
-	//
-	// GatewayGroupArn is a required field
-	GatewayGroupArn *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetGatewayGroupInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetGatewayGroupInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetGatewayGroupInput"}
-
-	if s.GatewayGroupArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("GatewayGroupArn"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type GetGatewayGroupOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The details of the gateway group.
-	GatewayGroup *GatewayGroup `type:"structure"`
-}
-
-// String returns the string representation
-func (s GetGatewayGroupOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetGatewayGroup = "GetGatewayGroup"
 
@@ -64,7 +24,7 @@ const opGetGatewayGroup = "GetGatewayGroup"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/GetGatewayGroup
-func (c *Client) GetGatewayGroupRequest(input *GetGatewayGroupInput) GetGatewayGroupRequest {
+func (c *Client) GetGatewayGroupRequest(input *types.GetGatewayGroupInput) GetGatewayGroupRequest {
 	op := &aws.Operation{
 		Name:       opGetGatewayGroup,
 		HTTPMethod: "POST",
@@ -72,10 +32,10 @@ func (c *Client) GetGatewayGroupRequest(input *GetGatewayGroupInput) GetGatewayG
 	}
 
 	if input == nil {
-		input = &GetGatewayGroupInput{}
+		input = &types.GetGatewayGroupInput{}
 	}
 
-	req := c.newRequest(op, input, &GetGatewayGroupOutput{})
+	req := c.newRequest(op, input, &types.GetGatewayGroupOutput{})
 	return GetGatewayGroupRequest{Request: req, Input: input, Copy: c.GetGatewayGroupRequest}
 }
 
@@ -83,8 +43,8 @@ func (c *Client) GetGatewayGroupRequest(input *GetGatewayGroupInput) GetGatewayG
 // GetGatewayGroup API operation.
 type GetGatewayGroupRequest struct {
 	*aws.Request
-	Input *GetGatewayGroupInput
-	Copy  func(*GetGatewayGroupInput) GetGatewayGroupRequest
+	Input *types.GetGatewayGroupInput
+	Copy  func(*types.GetGatewayGroupInput) GetGatewayGroupRequest
 }
 
 // Send marshals and sends the GetGatewayGroup API request.
@@ -96,7 +56,7 @@ func (r GetGatewayGroupRequest) Send(ctx context.Context) (*GetGatewayGroupRespo
 	}
 
 	resp := &GetGatewayGroupResponse{
-		GetGatewayGroupOutput: r.Request.Data.(*GetGatewayGroupOutput),
+		GetGatewayGroupOutput: r.Request.Data.(*types.GetGatewayGroupOutput),
 		response:              &aws.Response{Request: r.Request},
 	}
 
@@ -106,7 +66,7 @@ func (r GetGatewayGroupRequest) Send(ctx context.Context) (*GetGatewayGroupRespo
 // GetGatewayGroupResponse is the response type for the
 // GetGatewayGroup API operation.
 type GetGatewayGroupResponse struct {
-	*GetGatewayGroupOutput
+	*types.GetGatewayGroupOutput
 
 	response *aws.Response
 }

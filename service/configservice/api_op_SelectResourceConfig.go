@@ -6,65 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/configservice/types"
 )
-
-type SelectResourceConfigInput struct {
-	_ struct{} `type:"structure"`
-
-	// The SQL query SELECT command.
-	//
-	// Expression is a required field
-	Expression *string `min:"1" type:"string" required:"true"`
-
-	// The maximum number of query results returned on each page.
-	Limit *int64 `type:"integer"`
-
-	// The nextToken string returned in a previous request that you use to request
-	// the next page of results in a paginated response.
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s SelectResourceConfigInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *SelectResourceConfigInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "SelectResourceConfigInput"}
-
-	if s.Expression == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Expression"))
-	}
-	if s.Expression != nil && len(*s.Expression) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Expression", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type SelectResourceConfigOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The nextToken string returned in a previous request that you use to request
-	// the next page of results in a paginated response.
-	NextToken *string `type:"string"`
-
-	// Returns the QueryInfo object.
-	QueryInfo *QueryInfo `type:"structure"`
-
-	// Returns the results for the SQL query.
-	Results []string `type:"list"`
-}
-
-// String returns the string representation
-func (s SelectResourceConfigOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opSelectResourceConfig = "SelectResourceConfig"
 
@@ -85,7 +28,7 @@ const opSelectResourceConfig = "SelectResourceConfig"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/SelectResourceConfig
-func (c *Client) SelectResourceConfigRequest(input *SelectResourceConfigInput) SelectResourceConfigRequest {
+func (c *Client) SelectResourceConfigRequest(input *types.SelectResourceConfigInput) SelectResourceConfigRequest {
 	op := &aws.Operation{
 		Name:       opSelectResourceConfig,
 		HTTPMethod: "POST",
@@ -93,10 +36,10 @@ func (c *Client) SelectResourceConfigRequest(input *SelectResourceConfigInput) S
 	}
 
 	if input == nil {
-		input = &SelectResourceConfigInput{}
+		input = &types.SelectResourceConfigInput{}
 	}
 
-	req := c.newRequest(op, input, &SelectResourceConfigOutput{})
+	req := c.newRequest(op, input, &types.SelectResourceConfigOutput{})
 	return SelectResourceConfigRequest{Request: req, Input: input, Copy: c.SelectResourceConfigRequest}
 }
 
@@ -104,8 +47,8 @@ func (c *Client) SelectResourceConfigRequest(input *SelectResourceConfigInput) S
 // SelectResourceConfig API operation.
 type SelectResourceConfigRequest struct {
 	*aws.Request
-	Input *SelectResourceConfigInput
-	Copy  func(*SelectResourceConfigInput) SelectResourceConfigRequest
+	Input *types.SelectResourceConfigInput
+	Copy  func(*types.SelectResourceConfigInput) SelectResourceConfigRequest
 }
 
 // Send marshals and sends the SelectResourceConfig API request.
@@ -117,7 +60,7 @@ func (r SelectResourceConfigRequest) Send(ctx context.Context) (*SelectResourceC
 	}
 
 	resp := &SelectResourceConfigResponse{
-		SelectResourceConfigOutput: r.Request.Data.(*SelectResourceConfigOutput),
+		SelectResourceConfigOutput: r.Request.Data.(*types.SelectResourceConfigOutput),
 		response:                   &aws.Response{Request: r.Request},
 	}
 
@@ -127,7 +70,7 @@ func (r SelectResourceConfigRequest) Send(ctx context.Context) (*SelectResourceC
 // SelectResourceConfigResponse is the response type for the
 // SelectResourceConfig API operation.
 type SelectResourceConfigResponse struct {
-	*SelectResourceConfigOutput
+	*types.SelectResourceConfigOutput
 
 	response *aws.Response
 }

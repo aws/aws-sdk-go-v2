@@ -6,57 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ssm/types"
 )
-
-type DescribeActivationsInput struct {
-	_ struct{} `type:"structure"`
-
-	// A filter to view information about your activations.
-	Filters []DescribeActivationsFilter `type:"list"`
-
-	// The maximum number of items to return for this call. The call also returns
-	// a token that you can specify in a subsequent call to get the next set of
-	// results.
-	MaxResults *int64 `min:"1" type:"integer"`
-
-	// A token to start the list. Use this token to get the next set of results.
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeActivationsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeActivationsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeActivationsInput"}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribeActivationsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A list of activations for your AWS account.
-	ActivationList []Activation `type:"list"`
-
-	// The token for the next set of items to return. Use this token to get the
-	// next set of results.
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeActivationsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeActivations = "DescribeActivations"
 
@@ -75,7 +26,7 @@ const opDescribeActivations = "DescribeActivations"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeActivations
-func (c *Client) DescribeActivationsRequest(input *DescribeActivationsInput) DescribeActivationsRequest {
+func (c *Client) DescribeActivationsRequest(input *types.DescribeActivationsInput) DescribeActivationsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeActivations,
 		HTTPMethod: "POST",
@@ -89,10 +40,10 @@ func (c *Client) DescribeActivationsRequest(input *DescribeActivationsInput) Des
 	}
 
 	if input == nil {
-		input = &DescribeActivationsInput{}
+		input = &types.DescribeActivationsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeActivationsOutput{})
+	req := c.newRequest(op, input, &types.DescribeActivationsOutput{})
 	return DescribeActivationsRequest{Request: req, Input: input, Copy: c.DescribeActivationsRequest}
 }
 
@@ -100,8 +51,8 @@ func (c *Client) DescribeActivationsRequest(input *DescribeActivationsInput) Des
 // DescribeActivations API operation.
 type DescribeActivationsRequest struct {
 	*aws.Request
-	Input *DescribeActivationsInput
-	Copy  func(*DescribeActivationsInput) DescribeActivationsRequest
+	Input *types.DescribeActivationsInput
+	Copy  func(*types.DescribeActivationsInput) DescribeActivationsRequest
 }
 
 // Send marshals and sends the DescribeActivations API request.
@@ -113,7 +64,7 @@ func (r DescribeActivationsRequest) Send(ctx context.Context) (*DescribeActivati
 	}
 
 	resp := &DescribeActivationsResponse{
-		DescribeActivationsOutput: r.Request.Data.(*DescribeActivationsOutput),
+		DescribeActivationsOutput: r.Request.Data.(*types.DescribeActivationsOutput),
 		response:                  &aws.Response{Request: r.Request},
 	}
 
@@ -143,7 +94,7 @@ func NewDescribeActivationsPaginator(req DescribeActivationsRequest) DescribeAct
 	return DescribeActivationsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *DescribeActivationsInput
+				var inCpy *types.DescribeActivationsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -163,14 +114,14 @@ type DescribeActivationsPaginator struct {
 	aws.Pager
 }
 
-func (p *DescribeActivationsPaginator) CurrentPage() *DescribeActivationsOutput {
-	return p.Pager.CurrentPage().(*DescribeActivationsOutput)
+func (p *DescribeActivationsPaginator) CurrentPage() *types.DescribeActivationsOutput {
+	return p.Pager.CurrentPage().(*types.DescribeActivationsOutput)
 }
 
 // DescribeActivationsResponse is the response type for the
 // DescribeActivations API operation.
 type DescribeActivationsResponse struct {
-	*DescribeActivationsOutput
+	*types.DescribeActivationsOutput
 
 	response *aws.Response
 }

@@ -6,82 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/clouddirectory/types"
 )
-
-type GetSchemaAsJsonInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ARN of the schema to retrieve.
-	//
-	// SchemaArn is a required field
-	SchemaArn *string `location:"header" locationName:"x-amz-data-partition" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetSchemaAsJsonInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetSchemaAsJsonInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetSchemaAsJsonInput"}
-
-	if s.SchemaArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("SchemaArn"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetSchemaAsJsonInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.SchemaArn != nil {
-		v := *s.SchemaArn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "x-amz-data-partition", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type GetSchemaAsJsonOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The JSON representation of the schema document.
-	Document *string `type:"string"`
-
-	// The name of the retrieved schema.
-	Name *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s GetSchemaAsJsonOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetSchemaAsJsonOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.Document != nil {
-		v := *s.Document
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "Document", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Name != nil {
-		v := *s.Name
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "Name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opGetSchemaAsJson = "GetSchemaAsJson"
 
@@ -99,7 +25,7 @@ const opGetSchemaAsJson = "GetSchemaAsJson"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/GetSchemaAsJson
-func (c *Client) GetSchemaAsJsonRequest(input *GetSchemaAsJsonInput) GetSchemaAsJsonRequest {
+func (c *Client) GetSchemaAsJsonRequest(input *types.GetSchemaAsJsonInput) GetSchemaAsJsonRequest {
 	op := &aws.Operation{
 		Name:       opGetSchemaAsJson,
 		HTTPMethod: "POST",
@@ -107,10 +33,10 @@ func (c *Client) GetSchemaAsJsonRequest(input *GetSchemaAsJsonInput) GetSchemaAs
 	}
 
 	if input == nil {
-		input = &GetSchemaAsJsonInput{}
+		input = &types.GetSchemaAsJsonInput{}
 	}
 
-	req := c.newRequest(op, input, &GetSchemaAsJsonOutput{})
+	req := c.newRequest(op, input, &types.GetSchemaAsJsonOutput{})
 	return GetSchemaAsJsonRequest{Request: req, Input: input, Copy: c.GetSchemaAsJsonRequest}
 }
 
@@ -118,8 +44,8 @@ func (c *Client) GetSchemaAsJsonRequest(input *GetSchemaAsJsonInput) GetSchemaAs
 // GetSchemaAsJson API operation.
 type GetSchemaAsJsonRequest struct {
 	*aws.Request
-	Input *GetSchemaAsJsonInput
-	Copy  func(*GetSchemaAsJsonInput) GetSchemaAsJsonRequest
+	Input *types.GetSchemaAsJsonInput
+	Copy  func(*types.GetSchemaAsJsonInput) GetSchemaAsJsonRequest
 }
 
 // Send marshals and sends the GetSchemaAsJson API request.
@@ -131,7 +57,7 @@ func (r GetSchemaAsJsonRequest) Send(ctx context.Context) (*GetSchemaAsJsonRespo
 	}
 
 	resp := &GetSchemaAsJsonResponse{
-		GetSchemaAsJsonOutput: r.Request.Data.(*GetSchemaAsJsonOutput),
+		GetSchemaAsJsonOutput: r.Request.Data.(*types.GetSchemaAsJsonOutput),
 		response:              &aws.Response{Request: r.Request},
 	}
 
@@ -141,7 +67,7 @@ func (r GetSchemaAsJsonRequest) Send(ctx context.Context) (*GetSchemaAsJsonRespo
 // GetSchemaAsJsonResponse is the response type for the
 // GetSchemaAsJson API operation.
 type GetSchemaAsJsonResponse struct {
-	*GetSchemaAsJsonOutput
+	*types.GetSchemaAsJsonOutput
 
 	response *aws.Response
 }

@@ -6,86 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/query"
+	"github.com/aws/aws-sdk-go-v2/service/cloudformation/types"
 )
-
-// The input for the SignalResource action.
-type SignalResourceInput struct {
-	_ struct{} `type:"structure"`
-
-	// The logical ID of the resource that you want to signal. The logical ID is
-	// the name of the resource that given in the template.
-	//
-	// LogicalResourceId is a required field
-	LogicalResourceId *string `type:"string" required:"true"`
-
-	// The stack name or unique stack ID that includes the resource that you want
-	// to signal.
-	//
-	// StackName is a required field
-	StackName *string `min:"1" type:"string" required:"true"`
-
-	// The status of the signal, which is either success or failure. A failure signal
-	// causes AWS CloudFormation to immediately fail the stack creation or update.
-	//
-	// Status is a required field
-	Status ResourceSignalStatus `type:"string" required:"true" enum:"true"`
-
-	// A unique ID of the signal. When you signal Amazon EC2 instances or Auto Scaling
-	// groups, specify the instance ID that you are signaling as the unique ID.
-	// If you send multiple signals to a single resource (such as signaling a wait
-	// condition), each signal requires a different unique ID.
-	//
-	// UniqueId is a required field
-	UniqueId *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s SignalResourceInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *SignalResourceInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "SignalResourceInput"}
-
-	if s.LogicalResourceId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("LogicalResourceId"))
-	}
-
-	if s.StackName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("StackName"))
-	}
-	if s.StackName != nil && len(*s.StackName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("StackName", 1))
-	}
-	if len(s.Status) == 0 {
-		invalidParams.Add(aws.NewErrParamRequired("Status"))
-	}
-
-	if s.UniqueId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("UniqueId"))
-	}
-	if s.UniqueId != nil && len(*s.UniqueId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("UniqueId", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type SignalResourceOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s SignalResourceOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opSignalResource = "SignalResource"
 
@@ -107,7 +31,7 @@ const opSignalResource = "SignalResource"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/SignalResource
-func (c *Client) SignalResourceRequest(input *SignalResourceInput) SignalResourceRequest {
+func (c *Client) SignalResourceRequest(input *types.SignalResourceInput) SignalResourceRequest {
 	op := &aws.Operation{
 		Name:       opSignalResource,
 		HTTPMethod: "POST",
@@ -115,10 +39,10 @@ func (c *Client) SignalResourceRequest(input *SignalResourceInput) SignalResourc
 	}
 
 	if input == nil {
-		input = &SignalResourceInput{}
+		input = &types.SignalResourceInput{}
 	}
 
-	req := c.newRequest(op, input, &SignalResourceOutput{})
+	req := c.newRequest(op, input, &types.SignalResourceOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return SignalResourceRequest{Request: req, Input: input, Copy: c.SignalResourceRequest}
@@ -128,8 +52,8 @@ func (c *Client) SignalResourceRequest(input *SignalResourceInput) SignalResourc
 // SignalResource API operation.
 type SignalResourceRequest struct {
 	*aws.Request
-	Input *SignalResourceInput
-	Copy  func(*SignalResourceInput) SignalResourceRequest
+	Input *types.SignalResourceInput
+	Copy  func(*types.SignalResourceInput) SignalResourceRequest
 }
 
 // Send marshals and sends the SignalResource API request.
@@ -141,7 +65,7 @@ func (r SignalResourceRequest) Send(ctx context.Context) (*SignalResourceRespons
 	}
 
 	resp := &SignalResourceResponse{
-		SignalResourceOutput: r.Request.Data.(*SignalResourceOutput),
+		SignalResourceOutput: r.Request.Data.(*types.SignalResourceOutput),
 		response:             &aws.Response{Request: r.Request},
 	}
 
@@ -151,7 +75,7 @@ func (r SignalResourceRequest) Send(ctx context.Context) (*SignalResourceRespons
 // SignalResourceResponse is the response type for the
 // SignalResource API operation.
 type SignalResourceResponse struct {
-	*SignalResourceOutput
+	*types.SignalResourceOutput
 
 	response *aws.Response
 }

@@ -6,77 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/storagegateway/types"
 )
-
-// A JSON object that contains one or more of the following fields:
-//
-//    * ListTapesInput$Limit
-//
-//    * ListTapesInput$Marker
-//
-//    * ListTapesInput$TapeARNs
-type ListTapesInput struct {
-	_ struct{} `type:"structure"`
-
-	// An optional number limit for the tapes in the list returned by this call.
-	Limit *int64 `min:"1" type:"integer"`
-
-	// A string that indicates the position at which to begin the returned list
-	// of tapes.
-	Marker *string `min:"1" type:"string"`
-
-	// The Amazon Resource Name (ARN) of each of the tapes you want to list. If
-	// you don't specify a tape ARN, the response lists all tapes in both your VTL
-	// and VTS.
-	TapeARNs []string `type:"list"`
-}
-
-// String returns the string representation
-func (s ListTapesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListTapesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListTapesInput"}
-	if s.Limit != nil && *s.Limit < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("Limit", 1))
-	}
-	if s.Marker != nil && len(*s.Marker) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Marker", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// A JSON object containing the following fields:
-//
-//    * ListTapesOutput$Marker
-//
-//    * ListTapesOutput$VolumeInfos
-type ListTapesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A string that indicates the position at which to begin returning the next
-	// list of tapes. Use the marker in your next request to continue pagination
-	// of tapes. If there are no more tapes to list, this element does not appear
-	// in the response body.
-	Marker *string `min:"1" type:"string"`
-
-	// An array of TapeInfo objects, where each object describes an a single tape.
-	// If there not tapes in the tape library or VTS, then the TapeInfos is an empty
-	// array.
-	TapeInfos []TapeInfo `type:"list"`
-}
-
-// String returns the string representation
-func (s ListTapesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListTapes = "ListTapes"
 
@@ -103,7 +34,7 @@ const opListTapes = "ListTapes"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/ListTapes
-func (c *Client) ListTapesRequest(input *ListTapesInput) ListTapesRequest {
+func (c *Client) ListTapesRequest(input *types.ListTapesInput) ListTapesRequest {
 	op := &aws.Operation{
 		Name:       opListTapes,
 		HTTPMethod: "POST",
@@ -117,10 +48,10 @@ func (c *Client) ListTapesRequest(input *ListTapesInput) ListTapesRequest {
 	}
 
 	if input == nil {
-		input = &ListTapesInput{}
+		input = &types.ListTapesInput{}
 	}
 
-	req := c.newRequest(op, input, &ListTapesOutput{})
+	req := c.newRequest(op, input, &types.ListTapesOutput{})
 	return ListTapesRequest{Request: req, Input: input, Copy: c.ListTapesRequest}
 }
 
@@ -128,8 +59,8 @@ func (c *Client) ListTapesRequest(input *ListTapesInput) ListTapesRequest {
 // ListTapes API operation.
 type ListTapesRequest struct {
 	*aws.Request
-	Input *ListTapesInput
-	Copy  func(*ListTapesInput) ListTapesRequest
+	Input *types.ListTapesInput
+	Copy  func(*types.ListTapesInput) ListTapesRequest
 }
 
 // Send marshals and sends the ListTapes API request.
@@ -141,7 +72,7 @@ func (r ListTapesRequest) Send(ctx context.Context) (*ListTapesResponse, error) 
 	}
 
 	resp := &ListTapesResponse{
-		ListTapesOutput: r.Request.Data.(*ListTapesOutput),
+		ListTapesOutput: r.Request.Data.(*types.ListTapesOutput),
 		response:        &aws.Response{Request: r.Request},
 	}
 
@@ -171,7 +102,7 @@ func NewListTapesPaginator(req ListTapesRequest) ListTapesPaginator {
 	return ListTapesPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListTapesInput
+				var inCpy *types.ListTapesInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -191,14 +122,14 @@ type ListTapesPaginator struct {
 	aws.Pager
 }
 
-func (p *ListTapesPaginator) CurrentPage() *ListTapesOutput {
-	return p.Pager.CurrentPage().(*ListTapesOutput)
+func (p *ListTapesPaginator) CurrentPage() *types.ListTapesOutput {
+	return p.Pager.CurrentPage().(*types.ListTapesOutput)
 }
 
 // ListTapesResponse is the response type for the
 // ListTapes API operation.
 type ListTapesResponse struct {
-	*ListTapesOutput
+	*types.ListTapesOutput
 
 	response *aws.Response
 }

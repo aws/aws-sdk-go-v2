@@ -6,73 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/cloudsearch/types"
 )
-
-// Container for the parameters to the DeleteIndexField operation. Specifies
-// the name of the domain you want to update and the name of the index field
-// you want to delete.
-type DeleteIndexFieldInput struct {
-	_ struct{} `type:"structure"`
-
-	// A string that represents the name of a domain. Domain names are unique across
-	// the domains owned by an account within an AWS region. Domain names start
-	// with a letter or number and can contain the following characters: a-z (lowercase),
-	// 0-9, and - (hyphen).
-	//
-	// DomainName is a required field
-	DomainName *string `min:"3" type:"string" required:"true"`
-
-	// The name of the index field your want to remove from the domain's indexing
-	// options.
-	//
-	// IndexFieldName is a required field
-	IndexFieldName *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteIndexFieldInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteIndexFieldInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteIndexFieldInput"}
-
-	if s.DomainName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DomainName"))
-	}
-	if s.DomainName != nil && len(*s.DomainName) < 3 {
-		invalidParams.Add(aws.NewErrParamMinLen("DomainName", 3))
-	}
-
-	if s.IndexFieldName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("IndexFieldName"))
-	}
-	if s.IndexFieldName != nil && len(*s.IndexFieldName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("IndexFieldName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// The result of a DeleteIndexField request.
-type DeleteIndexFieldOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The status of the index field being deleted.
-	//
-	// IndexField is a required field
-	IndexField *IndexFieldStatus `type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteIndexFieldOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteIndexField = "DeleteIndexField"
 
@@ -89,7 +24,7 @@ const opDeleteIndexField = "DeleteIndexField"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) DeleteIndexFieldRequest(input *DeleteIndexFieldInput) DeleteIndexFieldRequest {
+func (c *Client) DeleteIndexFieldRequest(input *types.DeleteIndexFieldInput) DeleteIndexFieldRequest {
 	op := &aws.Operation{
 		Name:       opDeleteIndexField,
 		HTTPMethod: "POST",
@@ -97,10 +32,10 @@ func (c *Client) DeleteIndexFieldRequest(input *DeleteIndexFieldInput) DeleteInd
 	}
 
 	if input == nil {
-		input = &DeleteIndexFieldInput{}
+		input = &types.DeleteIndexFieldInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteIndexFieldOutput{})
+	req := c.newRequest(op, input, &types.DeleteIndexFieldOutput{})
 	return DeleteIndexFieldRequest{Request: req, Input: input, Copy: c.DeleteIndexFieldRequest}
 }
 
@@ -108,8 +43,8 @@ func (c *Client) DeleteIndexFieldRequest(input *DeleteIndexFieldInput) DeleteInd
 // DeleteIndexField API operation.
 type DeleteIndexFieldRequest struct {
 	*aws.Request
-	Input *DeleteIndexFieldInput
-	Copy  func(*DeleteIndexFieldInput) DeleteIndexFieldRequest
+	Input *types.DeleteIndexFieldInput
+	Copy  func(*types.DeleteIndexFieldInput) DeleteIndexFieldRequest
 }
 
 // Send marshals and sends the DeleteIndexField API request.
@@ -121,7 +56,7 @@ func (r DeleteIndexFieldRequest) Send(ctx context.Context) (*DeleteIndexFieldRes
 	}
 
 	resp := &DeleteIndexFieldResponse{
-		DeleteIndexFieldOutput: r.Request.Data.(*DeleteIndexFieldOutput),
+		DeleteIndexFieldOutput: r.Request.Data.(*types.DeleteIndexFieldOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -131,7 +66,7 @@ func (r DeleteIndexFieldRequest) Send(ctx context.Context) (*DeleteIndexFieldRes
 // DeleteIndexFieldResponse is the response type for the
 // DeleteIndexField API operation.
 type DeleteIndexFieldResponse struct {
-	*DeleteIndexFieldOutput
+	*types.DeleteIndexFieldOutput
 
 	response *aws.Response
 }

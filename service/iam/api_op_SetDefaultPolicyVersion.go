@@ -6,68 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/query"
+	"github.com/aws/aws-sdk-go-v2/service/iam/types"
 )
-
-type SetDefaultPolicyVersionInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the IAM policy whose default version you
-	// want to set.
-	//
-	// For more information about ARNs, see Amazon Resource Names (ARNs) and AWS
-	// Service Namespaces (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
-	// in the AWS General Reference.
-	//
-	// PolicyArn is a required field
-	PolicyArn *string `min:"20" type:"string" required:"true"`
-
-	// The version of the policy to set as the default (operative) version.
-	//
-	// For more information about managed policy versions, see Versioning for Managed
-	// Policies (https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-versions.html)
-	// in the IAM User Guide.
-	//
-	// VersionId is a required field
-	VersionId *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s SetDefaultPolicyVersionInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *SetDefaultPolicyVersionInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "SetDefaultPolicyVersionInput"}
-
-	if s.PolicyArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("PolicyArn"))
-	}
-	if s.PolicyArn != nil && len(*s.PolicyArn) < 20 {
-		invalidParams.Add(aws.NewErrParamMinLen("PolicyArn", 20))
-	}
-
-	if s.VersionId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("VersionId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type SetDefaultPolicyVersionOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s SetDefaultPolicyVersionOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opSetDefaultPolicyVersion = "SetDefaultPolicyVersion"
 
@@ -93,7 +35,7 @@ const opSetDefaultPolicyVersion = "SetDefaultPolicyVersion"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/SetDefaultPolicyVersion
-func (c *Client) SetDefaultPolicyVersionRequest(input *SetDefaultPolicyVersionInput) SetDefaultPolicyVersionRequest {
+func (c *Client) SetDefaultPolicyVersionRequest(input *types.SetDefaultPolicyVersionInput) SetDefaultPolicyVersionRequest {
 	op := &aws.Operation{
 		Name:       opSetDefaultPolicyVersion,
 		HTTPMethod: "POST",
@@ -101,10 +43,10 @@ func (c *Client) SetDefaultPolicyVersionRequest(input *SetDefaultPolicyVersionIn
 	}
 
 	if input == nil {
-		input = &SetDefaultPolicyVersionInput{}
+		input = &types.SetDefaultPolicyVersionInput{}
 	}
 
-	req := c.newRequest(op, input, &SetDefaultPolicyVersionOutput{})
+	req := c.newRequest(op, input, &types.SetDefaultPolicyVersionOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return SetDefaultPolicyVersionRequest{Request: req, Input: input, Copy: c.SetDefaultPolicyVersionRequest}
@@ -114,8 +56,8 @@ func (c *Client) SetDefaultPolicyVersionRequest(input *SetDefaultPolicyVersionIn
 // SetDefaultPolicyVersion API operation.
 type SetDefaultPolicyVersionRequest struct {
 	*aws.Request
-	Input *SetDefaultPolicyVersionInput
-	Copy  func(*SetDefaultPolicyVersionInput) SetDefaultPolicyVersionRequest
+	Input *types.SetDefaultPolicyVersionInput
+	Copy  func(*types.SetDefaultPolicyVersionInput) SetDefaultPolicyVersionRequest
 }
 
 // Send marshals and sends the SetDefaultPolicyVersion API request.
@@ -127,7 +69,7 @@ func (r SetDefaultPolicyVersionRequest) Send(ctx context.Context) (*SetDefaultPo
 	}
 
 	resp := &SetDefaultPolicyVersionResponse{
-		SetDefaultPolicyVersionOutput: r.Request.Data.(*SetDefaultPolicyVersionOutput),
+		SetDefaultPolicyVersionOutput: r.Request.Data.(*types.SetDefaultPolicyVersionOutput),
 		response:                      &aws.Response{Request: r.Request},
 	}
 
@@ -137,7 +79,7 @@ func (r SetDefaultPolicyVersionRequest) Send(ctx context.Context) (*SetDefaultPo
 // SetDefaultPolicyVersionResponse is the response type for the
 // SetDefaultPolicyVersion API operation.
 type SetDefaultPolicyVersionResponse struct {
-	*SetDefaultPolicyVersionOutput
+	*types.SetDefaultPolicyVersionOutput
 
 	response *aws.Response
 }

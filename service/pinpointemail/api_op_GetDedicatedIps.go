@@ -6,100 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/pinpointemail/types"
 )
-
-// A request to obtain more information about dedicated IP pools.
-type GetDedicatedIpsInput struct {
-	_ struct{} `type:"structure"`
-
-	// A token returned from a previous call to GetDedicatedIps to indicate the
-	// position of the dedicated IP pool in the list of IP pools.
-	NextToken *string `location:"querystring" locationName:"NextToken" type:"string"`
-
-	// The number of results to show in a single call to GetDedicatedIpsRequest.
-	// If the number of results is larger than the number you specified in this
-	// parameter, then the response includes a NextToken element, which you can
-	// use to obtain additional results.
-	PageSize *int64 `location:"querystring" locationName:"PageSize" type:"integer"`
-
-	// The name of the IP pool that the dedicated IP address is associated with.
-	PoolName *string `location:"querystring" locationName:"PoolName" type:"string"`
-}
-
-// String returns the string representation
-func (s GetDedicatedIpsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetDedicatedIpsInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.PageSize != nil {
-		v := *s.PageSize
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "PageSize", protocol.Int64Value(v), metadata)
-	}
-	if s.PoolName != nil {
-		v := *s.PoolName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "PoolName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-// Information about the dedicated IP addresses that are associated with your
-// Amazon Pinpoint account.
-type GetDedicatedIpsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A list of dedicated IP addresses that are reserved for use by your Amazon
-	// Pinpoint account.
-	DedicatedIps []DedicatedIp `type:"list"`
-
-	// A token that indicates that there are additional dedicated IP addresses to
-	// list. To view additional addresses, issue another request to GetDedicatedIps,
-	// passing this token in the NextToken parameter.
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s GetDedicatedIpsOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetDedicatedIpsOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.DedicatedIps != nil {
-		v := s.DedicatedIps
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "DedicatedIps", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opGetDedicatedIps = "GetDedicatedIps"
 
@@ -117,7 +25,7 @@ const opGetDedicatedIps = "GetDedicatedIps"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/GetDedicatedIps
-func (c *Client) GetDedicatedIpsRequest(input *GetDedicatedIpsInput) GetDedicatedIpsRequest {
+func (c *Client) GetDedicatedIpsRequest(input *types.GetDedicatedIpsInput) GetDedicatedIpsRequest {
 	op := &aws.Operation{
 		Name:       opGetDedicatedIps,
 		HTTPMethod: "GET",
@@ -131,10 +39,10 @@ func (c *Client) GetDedicatedIpsRequest(input *GetDedicatedIpsInput) GetDedicate
 	}
 
 	if input == nil {
-		input = &GetDedicatedIpsInput{}
+		input = &types.GetDedicatedIpsInput{}
 	}
 
-	req := c.newRequest(op, input, &GetDedicatedIpsOutput{})
+	req := c.newRequest(op, input, &types.GetDedicatedIpsOutput{})
 	return GetDedicatedIpsRequest{Request: req, Input: input, Copy: c.GetDedicatedIpsRequest}
 }
 
@@ -142,8 +50,8 @@ func (c *Client) GetDedicatedIpsRequest(input *GetDedicatedIpsInput) GetDedicate
 // GetDedicatedIps API operation.
 type GetDedicatedIpsRequest struct {
 	*aws.Request
-	Input *GetDedicatedIpsInput
-	Copy  func(*GetDedicatedIpsInput) GetDedicatedIpsRequest
+	Input *types.GetDedicatedIpsInput
+	Copy  func(*types.GetDedicatedIpsInput) GetDedicatedIpsRequest
 }
 
 // Send marshals and sends the GetDedicatedIps API request.
@@ -155,7 +63,7 @@ func (r GetDedicatedIpsRequest) Send(ctx context.Context) (*GetDedicatedIpsRespo
 	}
 
 	resp := &GetDedicatedIpsResponse{
-		GetDedicatedIpsOutput: r.Request.Data.(*GetDedicatedIpsOutput),
+		GetDedicatedIpsOutput: r.Request.Data.(*types.GetDedicatedIpsOutput),
 		response:              &aws.Response{Request: r.Request},
 	}
 
@@ -185,7 +93,7 @@ func NewGetDedicatedIpsPaginator(req GetDedicatedIpsRequest) GetDedicatedIpsPagi
 	return GetDedicatedIpsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *GetDedicatedIpsInput
+				var inCpy *types.GetDedicatedIpsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -205,14 +113,14 @@ type GetDedicatedIpsPaginator struct {
 	aws.Pager
 }
 
-func (p *GetDedicatedIpsPaginator) CurrentPage() *GetDedicatedIpsOutput {
-	return p.Pager.CurrentPage().(*GetDedicatedIpsOutput)
+func (p *GetDedicatedIpsPaginator) CurrentPage() *types.GetDedicatedIpsOutput {
+	return p.Pager.CurrentPage().(*types.GetDedicatedIpsOutput)
 }
 
 // GetDedicatedIpsResponse is the response type for the
 // GetDedicatedIps API operation.
 type GetDedicatedIpsResponse struct {
-	*GetDedicatedIpsOutput
+	*types.GetDedicatedIpsOutput
 
 	response *aws.Response
 }

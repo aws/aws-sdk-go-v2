@@ -4,55 +4,12 @@ package emr
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
+	"github.com/aws/aws-sdk-go-v2/service/emr/types"
 )
-
-// Change the size of some instance groups.
-type ModifyInstanceGroupsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the cluster to which the instance group belongs.
-	ClusterId *string `type:"string"`
-
-	// Instance groups to change.
-	InstanceGroups []InstanceGroupModifyConfig `type:"list"`
-}
-
-// String returns the string representation
-func (s ModifyInstanceGroupsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ModifyInstanceGroupsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ModifyInstanceGroupsInput"}
-	if s.InstanceGroups != nil {
-		for i, v := range s.InstanceGroups {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "InstanceGroups", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ModifyInstanceGroupsOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s ModifyInstanceGroupsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opModifyInstanceGroups = "ModifyInstanceGroups"
 
@@ -72,7 +29,7 @@ const opModifyInstanceGroups = "ModifyInstanceGroups"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/ModifyInstanceGroups
-func (c *Client) ModifyInstanceGroupsRequest(input *ModifyInstanceGroupsInput) ModifyInstanceGroupsRequest {
+func (c *Client) ModifyInstanceGroupsRequest(input *types.ModifyInstanceGroupsInput) ModifyInstanceGroupsRequest {
 	op := &aws.Operation{
 		Name:       opModifyInstanceGroups,
 		HTTPMethod: "POST",
@@ -80,10 +37,10 @@ func (c *Client) ModifyInstanceGroupsRequest(input *ModifyInstanceGroupsInput) M
 	}
 
 	if input == nil {
-		input = &ModifyInstanceGroupsInput{}
+		input = &types.ModifyInstanceGroupsInput{}
 	}
 
-	req := c.newRequest(op, input, &ModifyInstanceGroupsOutput{})
+	req := c.newRequest(op, input, &types.ModifyInstanceGroupsOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return ModifyInstanceGroupsRequest{Request: req, Input: input, Copy: c.ModifyInstanceGroupsRequest}
@@ -93,8 +50,8 @@ func (c *Client) ModifyInstanceGroupsRequest(input *ModifyInstanceGroupsInput) M
 // ModifyInstanceGroups API operation.
 type ModifyInstanceGroupsRequest struct {
 	*aws.Request
-	Input *ModifyInstanceGroupsInput
-	Copy  func(*ModifyInstanceGroupsInput) ModifyInstanceGroupsRequest
+	Input *types.ModifyInstanceGroupsInput
+	Copy  func(*types.ModifyInstanceGroupsInput) ModifyInstanceGroupsRequest
 }
 
 // Send marshals and sends the ModifyInstanceGroups API request.
@@ -106,7 +63,7 @@ func (r ModifyInstanceGroupsRequest) Send(ctx context.Context) (*ModifyInstanceG
 	}
 
 	resp := &ModifyInstanceGroupsResponse{
-		ModifyInstanceGroupsOutput: r.Request.Data.(*ModifyInstanceGroupsOutput),
+		ModifyInstanceGroupsOutput: r.Request.Data.(*types.ModifyInstanceGroupsOutput),
 		response:                   &aws.Response{Request: r.Request},
 	}
 
@@ -116,7 +73,7 @@ func (r ModifyInstanceGroupsRequest) Send(ctx context.Context) (*ModifyInstanceG
 // ModifyInstanceGroupsResponse is the response type for the
 // ModifyInstanceGroups API operation.
 type ModifyInstanceGroupsResponse struct {
-	*ModifyInstanceGroupsOutput
+	*types.ModifyInstanceGroupsOutput
 
 	response *aws.Response
 }

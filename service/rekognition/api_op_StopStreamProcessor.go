@@ -6,48 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/rekognition/types"
 )
-
-type StopStreamProcessorInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of a stream processor created by CreateStreamProcessor.
-	//
-	// Name is a required field
-	Name *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s StopStreamProcessorInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *StopStreamProcessorInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "StopStreamProcessorInput"}
-
-	if s.Name == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Name"))
-	}
-	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type StopStreamProcessorOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s StopStreamProcessorOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opStopStreamProcessor = "StopStreamProcessor"
 
@@ -62,7 +22,7 @@ const opStopStreamProcessor = "StopStreamProcessor"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) StopStreamProcessorRequest(input *StopStreamProcessorInput) StopStreamProcessorRequest {
+func (c *Client) StopStreamProcessorRequest(input *types.StopStreamProcessorInput) StopStreamProcessorRequest {
 	op := &aws.Operation{
 		Name:       opStopStreamProcessor,
 		HTTPMethod: "POST",
@@ -70,10 +30,10 @@ func (c *Client) StopStreamProcessorRequest(input *StopStreamProcessorInput) Sto
 	}
 
 	if input == nil {
-		input = &StopStreamProcessorInput{}
+		input = &types.StopStreamProcessorInput{}
 	}
 
-	req := c.newRequest(op, input, &StopStreamProcessorOutput{})
+	req := c.newRequest(op, input, &types.StopStreamProcessorOutput{})
 	return StopStreamProcessorRequest{Request: req, Input: input, Copy: c.StopStreamProcessorRequest}
 }
 
@@ -81,8 +41,8 @@ func (c *Client) StopStreamProcessorRequest(input *StopStreamProcessorInput) Sto
 // StopStreamProcessor API operation.
 type StopStreamProcessorRequest struct {
 	*aws.Request
-	Input *StopStreamProcessorInput
-	Copy  func(*StopStreamProcessorInput) StopStreamProcessorRequest
+	Input *types.StopStreamProcessorInput
+	Copy  func(*types.StopStreamProcessorInput) StopStreamProcessorRequest
 }
 
 // Send marshals and sends the StopStreamProcessor API request.
@@ -94,7 +54,7 @@ func (r StopStreamProcessorRequest) Send(ctx context.Context) (*StopStreamProces
 	}
 
 	resp := &StopStreamProcessorResponse{
-		StopStreamProcessorOutput: r.Request.Data.(*StopStreamProcessorOutput),
+		StopStreamProcessorOutput: r.Request.Data.(*types.StopStreamProcessorOutput),
 		response:                  &aws.Response{Request: r.Request},
 	}
 
@@ -104,7 +64,7 @@ func (r StopStreamProcessorRequest) Send(ctx context.Context) (*StopStreamProces
 // StopStreamProcessorResponse is the response type for the
 // StopStreamProcessor API operation.
 type StopStreamProcessorResponse struct {
-	*StopStreamProcessorOutput
+	*types.StopStreamProcessorOutput
 
 	response *aws.Response
 }

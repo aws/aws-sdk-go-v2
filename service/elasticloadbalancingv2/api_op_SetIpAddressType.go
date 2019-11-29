@@ -6,58 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/elasticloadbalancingv2/types"
 )
-
-type SetIpAddressTypeInput struct {
-	_ struct{} `type:"structure"`
-
-	// The IP address type. The possible values are ipv4 (for IPv4 addresses) and
-	// dualstack (for IPv4 and IPv6 addresses). Internal load balancers must use
-	// ipv4. Network Load Balancers must use ipv4.
-	//
-	// IpAddressType is a required field
-	IpAddressType IpAddressType `type:"string" required:"true" enum:"true"`
-
-	// The Amazon Resource Name (ARN) of the load balancer.
-	//
-	// LoadBalancerArn is a required field
-	LoadBalancerArn *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s SetIpAddressTypeInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *SetIpAddressTypeInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "SetIpAddressTypeInput"}
-	if len(s.IpAddressType) == 0 {
-		invalidParams.Add(aws.NewErrParamRequired("IpAddressType"))
-	}
-
-	if s.LoadBalancerArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("LoadBalancerArn"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type SetIpAddressTypeOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The IP address type.
-	IpAddressType IpAddressType `type:"string" enum:"true"`
-}
-
-// String returns the string representation
-func (s SetIpAddressTypeOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opSetIpAddressType = "SetIpAddressType"
 
@@ -75,7 +25,7 @@ const opSetIpAddressType = "SetIpAddressType"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/SetIpAddressType
-func (c *Client) SetIpAddressTypeRequest(input *SetIpAddressTypeInput) SetIpAddressTypeRequest {
+func (c *Client) SetIpAddressTypeRequest(input *types.SetIpAddressTypeInput) SetIpAddressTypeRequest {
 	op := &aws.Operation{
 		Name:       opSetIpAddressType,
 		HTTPMethod: "POST",
@@ -83,10 +33,10 @@ func (c *Client) SetIpAddressTypeRequest(input *SetIpAddressTypeInput) SetIpAddr
 	}
 
 	if input == nil {
-		input = &SetIpAddressTypeInput{}
+		input = &types.SetIpAddressTypeInput{}
 	}
 
-	req := c.newRequest(op, input, &SetIpAddressTypeOutput{})
+	req := c.newRequest(op, input, &types.SetIpAddressTypeOutput{})
 	return SetIpAddressTypeRequest{Request: req, Input: input, Copy: c.SetIpAddressTypeRequest}
 }
 
@@ -94,8 +44,8 @@ func (c *Client) SetIpAddressTypeRequest(input *SetIpAddressTypeInput) SetIpAddr
 // SetIpAddressType API operation.
 type SetIpAddressTypeRequest struct {
 	*aws.Request
-	Input *SetIpAddressTypeInput
-	Copy  func(*SetIpAddressTypeInput) SetIpAddressTypeRequest
+	Input *types.SetIpAddressTypeInput
+	Copy  func(*types.SetIpAddressTypeInput) SetIpAddressTypeRequest
 }
 
 // Send marshals and sends the SetIpAddressType API request.
@@ -107,7 +57,7 @@ func (r SetIpAddressTypeRequest) Send(ctx context.Context) (*SetIpAddressTypeRes
 	}
 
 	resp := &SetIpAddressTypeResponse{
-		SetIpAddressTypeOutput: r.Request.Data.(*SetIpAddressTypeOutput),
+		SetIpAddressTypeOutput: r.Request.Data.(*types.SetIpAddressTypeOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -117,7 +67,7 @@ func (r SetIpAddressTypeRequest) Send(ctx context.Context) (*SetIpAddressTypeRes
 // SetIpAddressTypeResponse is the response type for the
 // SetIpAddressType API operation.
 type SetIpAddressTypeResponse struct {
-	*SetIpAddressTypeOutput
+	*types.SetIpAddressTypeOutput
 
 	response *aws.Response
 }

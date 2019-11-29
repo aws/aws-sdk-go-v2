@@ -4,85 +4,10 @@ package rekognition
 
 import (
 	"context"
-	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/rekognition/types"
 )
-
-type DescribeStreamProcessorInput struct {
-	_ struct{} `type:"structure"`
-
-	// Name of the stream processor for which you want information.
-	//
-	// Name is a required field
-	Name *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeStreamProcessorInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeStreamProcessorInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeStreamProcessorInput"}
-
-	if s.Name == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Name"))
-	}
-	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribeStreamProcessorOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Date and time the stream processor was created
-	CreationTimestamp *time.Time `type:"timestamp"`
-
-	// Kinesis video stream that provides the source streaming video.
-	Input *StreamProcessorInput `type:"structure"`
-
-	// The time, in Unix format, the stream processor was last updated. For example,
-	// when the stream processor moves from a running state to a failed state, or
-	// when the user starts or stops the stream processor.
-	LastUpdateTimestamp *time.Time `type:"timestamp"`
-
-	// Name of the stream processor.
-	Name *string `min:"1" type:"string"`
-
-	// Kinesis data stream to which Amazon Rekognition Video puts the analysis results.
-	Output *StreamProcessorOutput `type:"structure"`
-
-	// ARN of the IAM role that allows access to the stream processor.
-	RoleArn *string `type:"string"`
-
-	// Face recognition input parameters that are being used by the stream processor.
-	// Includes the collection to use for face recognition and the face attributes
-	// to detect.
-	Settings *StreamProcessorSettings `type:"structure"`
-
-	// Current status of the stream processor.
-	Status StreamProcessorStatus `type:"string" enum:"true"`
-
-	// Detailed status message about the stream processor.
-	StatusMessage *string `type:"string"`
-
-	// ARN of the stream processor.
-	StreamProcessorArn *string `type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeStreamProcessorOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeStreamProcessor = "DescribeStreamProcessor"
 
@@ -100,7 +25,7 @@ const opDescribeStreamProcessor = "DescribeStreamProcessor"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) DescribeStreamProcessorRequest(input *DescribeStreamProcessorInput) DescribeStreamProcessorRequest {
+func (c *Client) DescribeStreamProcessorRequest(input *types.DescribeStreamProcessorInput) DescribeStreamProcessorRequest {
 	op := &aws.Operation{
 		Name:       opDescribeStreamProcessor,
 		HTTPMethod: "POST",
@@ -108,10 +33,10 @@ func (c *Client) DescribeStreamProcessorRequest(input *DescribeStreamProcessorIn
 	}
 
 	if input == nil {
-		input = &DescribeStreamProcessorInput{}
+		input = &types.DescribeStreamProcessorInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeStreamProcessorOutput{})
+	req := c.newRequest(op, input, &types.DescribeStreamProcessorOutput{})
 	return DescribeStreamProcessorRequest{Request: req, Input: input, Copy: c.DescribeStreamProcessorRequest}
 }
 
@@ -119,8 +44,8 @@ func (c *Client) DescribeStreamProcessorRequest(input *DescribeStreamProcessorIn
 // DescribeStreamProcessor API operation.
 type DescribeStreamProcessorRequest struct {
 	*aws.Request
-	Input *DescribeStreamProcessorInput
-	Copy  func(*DescribeStreamProcessorInput) DescribeStreamProcessorRequest
+	Input *types.DescribeStreamProcessorInput
+	Copy  func(*types.DescribeStreamProcessorInput) DescribeStreamProcessorRequest
 }
 
 // Send marshals and sends the DescribeStreamProcessor API request.
@@ -132,7 +57,7 @@ func (r DescribeStreamProcessorRequest) Send(ctx context.Context) (*DescribeStre
 	}
 
 	resp := &DescribeStreamProcessorResponse{
-		DescribeStreamProcessorOutput: r.Request.Data.(*DescribeStreamProcessorOutput),
+		DescribeStreamProcessorOutput: r.Request.Data.(*types.DescribeStreamProcessorOutput),
 		response:                      &aws.Response{Request: r.Request},
 	}
 
@@ -142,7 +67,7 @@ func (r DescribeStreamProcessorRequest) Send(ctx context.Context) (*DescribeStre
 // DescribeStreamProcessorResponse is the response type for the
 // DescribeStreamProcessor API operation.
 type DescribeStreamProcessorResponse struct {
-	*DescribeStreamProcessorOutput
+	*types.DescribeStreamProcessorOutput
 
 	response *aws.Response
 }

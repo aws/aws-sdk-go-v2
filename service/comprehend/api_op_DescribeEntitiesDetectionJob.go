@@ -6,53 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/comprehend/types"
 )
-
-type DescribeEntitiesDetectionJobInput struct {
-	_ struct{} `type:"structure"`
-
-	// The identifier that Amazon Comprehend generated for the job. The operation
-	// returns this identifier in its response.
-	//
-	// JobId is a required field
-	JobId *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeEntitiesDetectionJobInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeEntitiesDetectionJobInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeEntitiesDetectionJobInput"}
-
-	if s.JobId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("JobId"))
-	}
-	if s.JobId != nil && len(*s.JobId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("JobId", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribeEntitiesDetectionJobOutput struct {
-	_ struct{} `type:"structure"`
-
-	// An object that contains the properties associated with an entities detection
-	// job.
-	EntitiesDetectionJobProperties *EntitiesDetectionJobProperties `type:"structure"`
-}
-
-// String returns the string representation
-func (s DescribeEntitiesDetectionJobOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeEntitiesDetectionJob = "DescribeEntitiesDetectionJob"
 
@@ -70,7 +25,7 @@ const opDescribeEntitiesDetectionJob = "DescribeEntitiesDetectionJob"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/DescribeEntitiesDetectionJob
-func (c *Client) DescribeEntitiesDetectionJobRequest(input *DescribeEntitiesDetectionJobInput) DescribeEntitiesDetectionJobRequest {
+func (c *Client) DescribeEntitiesDetectionJobRequest(input *types.DescribeEntitiesDetectionJobInput) DescribeEntitiesDetectionJobRequest {
 	op := &aws.Operation{
 		Name:       opDescribeEntitiesDetectionJob,
 		HTTPMethod: "POST",
@@ -78,10 +33,10 @@ func (c *Client) DescribeEntitiesDetectionJobRequest(input *DescribeEntitiesDete
 	}
 
 	if input == nil {
-		input = &DescribeEntitiesDetectionJobInput{}
+		input = &types.DescribeEntitiesDetectionJobInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeEntitiesDetectionJobOutput{})
+	req := c.newRequest(op, input, &types.DescribeEntitiesDetectionJobOutput{})
 	return DescribeEntitiesDetectionJobRequest{Request: req, Input: input, Copy: c.DescribeEntitiesDetectionJobRequest}
 }
 
@@ -89,8 +44,8 @@ func (c *Client) DescribeEntitiesDetectionJobRequest(input *DescribeEntitiesDete
 // DescribeEntitiesDetectionJob API operation.
 type DescribeEntitiesDetectionJobRequest struct {
 	*aws.Request
-	Input *DescribeEntitiesDetectionJobInput
-	Copy  func(*DescribeEntitiesDetectionJobInput) DescribeEntitiesDetectionJobRequest
+	Input *types.DescribeEntitiesDetectionJobInput
+	Copy  func(*types.DescribeEntitiesDetectionJobInput) DescribeEntitiesDetectionJobRequest
 }
 
 // Send marshals and sends the DescribeEntitiesDetectionJob API request.
@@ -102,7 +57,7 @@ func (r DescribeEntitiesDetectionJobRequest) Send(ctx context.Context) (*Describ
 	}
 
 	resp := &DescribeEntitiesDetectionJobResponse{
-		DescribeEntitiesDetectionJobOutput: r.Request.Data.(*DescribeEntitiesDetectionJobOutput),
+		DescribeEntitiesDetectionJobOutput: r.Request.Data.(*types.DescribeEntitiesDetectionJobOutput),
 		response:                           &aws.Response{Request: r.Request},
 	}
 
@@ -112,7 +67,7 @@ func (r DescribeEntitiesDetectionJobRequest) Send(ctx context.Context) (*Describ
 // DescribeEntitiesDetectionJobResponse is the response type for the
 // DescribeEntitiesDetectionJob API operation.
 type DescribeEntitiesDetectionJobResponse struct {
-	*DescribeEntitiesDetectionJobOutput
+	*types.DescribeEntitiesDetectionJobOutput
 
 	response *aws.Response
 }

@@ -6,84 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/iot/types"
 )
-
-// The input for the ListPolicyVersions operation.
-type ListPolicyVersionsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The policy name.
-	//
-	// PolicyName is a required field
-	PolicyName *string `location:"uri" locationName:"policyName" min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s ListPolicyVersionsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListPolicyVersionsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListPolicyVersionsInput"}
-
-	if s.PolicyName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("PolicyName"))
-	}
-	if s.PolicyName != nil && len(*s.PolicyName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("PolicyName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListPolicyVersionsInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.PolicyName != nil {
-		v := *s.PolicyName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "policyName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-// The output from the ListPolicyVersions operation.
-type ListPolicyVersionsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The policy versions.
-	PolicyVersions []PolicyVersion `locationName:"policyVersions" type:"list"`
-}
-
-// String returns the string representation
-func (s ListPolicyVersionsOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListPolicyVersionsOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.PolicyVersions != nil {
-		v := s.PolicyVersions
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "policyVersions", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	return nil
-}
 
 const opListPolicyVersions = "ListPolicyVersions"
 
@@ -98,7 +22,7 @@ const opListPolicyVersions = "ListPolicyVersions"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) ListPolicyVersionsRequest(input *ListPolicyVersionsInput) ListPolicyVersionsRequest {
+func (c *Client) ListPolicyVersionsRequest(input *types.ListPolicyVersionsInput) ListPolicyVersionsRequest {
 	op := &aws.Operation{
 		Name:       opListPolicyVersions,
 		HTTPMethod: "GET",
@@ -106,10 +30,10 @@ func (c *Client) ListPolicyVersionsRequest(input *ListPolicyVersionsInput) ListP
 	}
 
 	if input == nil {
-		input = &ListPolicyVersionsInput{}
+		input = &types.ListPolicyVersionsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListPolicyVersionsOutput{})
+	req := c.newRequest(op, input, &types.ListPolicyVersionsOutput{})
 	return ListPolicyVersionsRequest{Request: req, Input: input, Copy: c.ListPolicyVersionsRequest}
 }
 
@@ -117,8 +41,8 @@ func (c *Client) ListPolicyVersionsRequest(input *ListPolicyVersionsInput) ListP
 // ListPolicyVersions API operation.
 type ListPolicyVersionsRequest struct {
 	*aws.Request
-	Input *ListPolicyVersionsInput
-	Copy  func(*ListPolicyVersionsInput) ListPolicyVersionsRequest
+	Input *types.ListPolicyVersionsInput
+	Copy  func(*types.ListPolicyVersionsInput) ListPolicyVersionsRequest
 }
 
 // Send marshals and sends the ListPolicyVersions API request.
@@ -130,7 +54,7 @@ func (r ListPolicyVersionsRequest) Send(ctx context.Context) (*ListPolicyVersion
 	}
 
 	resp := &ListPolicyVersionsResponse{
-		ListPolicyVersionsOutput: r.Request.Data.(*ListPolicyVersionsOutput),
+		ListPolicyVersionsOutput: r.Request.Data.(*types.ListPolicyVersionsOutput),
 		response:                 &aws.Response{Request: r.Request},
 	}
 
@@ -140,7 +64,7 @@ func (r ListPolicyVersionsRequest) Send(ctx context.Context) (*ListPolicyVersion
 // ListPolicyVersionsResponse is the response type for the
 // ListPolicyVersions API operation.
 type ListPolicyVersionsResponse struct {
-	*ListPolicyVersionsOutput
+	*types.ListPolicyVersionsOutput
 
 	response *aws.Response
 }

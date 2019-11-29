@@ -6,44 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ssm/types"
 )
-
-type DescribeAssociationInput struct {
-	_ struct{} `type:"structure"`
-
-	// The association ID for which you want information.
-	AssociationId *string `type:"string"`
-
-	// Specify the association version to retrieve. To view the latest version,
-	// either specify $LATEST for this parameter, or omit this parameter. To view
-	// a list of all associations for an instance, use ListAssociations. To get
-	// a list of versions for a specific association, use ListAssociationVersions.
-	AssociationVersion *string `type:"string"`
-
-	// The instance ID.
-	InstanceId *string `type:"string"`
-
-	// The name of the Systems Manager document.
-	Name *string `type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeAssociationInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type DescribeAssociationOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Information about the association.
-	AssociationDescription *AssociationDescription `type:"structure"`
-}
-
-// String returns the string representation
-func (s DescribeAssociationOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeAssociation = "DescribeAssociation"
 
@@ -64,7 +28,7 @@ const opDescribeAssociation = "DescribeAssociation"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeAssociation
-func (c *Client) DescribeAssociationRequest(input *DescribeAssociationInput) DescribeAssociationRequest {
+func (c *Client) DescribeAssociationRequest(input *types.DescribeAssociationInput) DescribeAssociationRequest {
 	op := &aws.Operation{
 		Name:       opDescribeAssociation,
 		HTTPMethod: "POST",
@@ -72,10 +36,10 @@ func (c *Client) DescribeAssociationRequest(input *DescribeAssociationInput) Des
 	}
 
 	if input == nil {
-		input = &DescribeAssociationInput{}
+		input = &types.DescribeAssociationInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeAssociationOutput{})
+	req := c.newRequest(op, input, &types.DescribeAssociationOutput{})
 	return DescribeAssociationRequest{Request: req, Input: input, Copy: c.DescribeAssociationRequest}
 }
 
@@ -83,8 +47,8 @@ func (c *Client) DescribeAssociationRequest(input *DescribeAssociationInput) Des
 // DescribeAssociation API operation.
 type DescribeAssociationRequest struct {
 	*aws.Request
-	Input *DescribeAssociationInput
-	Copy  func(*DescribeAssociationInput) DescribeAssociationRequest
+	Input *types.DescribeAssociationInput
+	Copy  func(*types.DescribeAssociationInput) DescribeAssociationRequest
 }
 
 // Send marshals and sends the DescribeAssociation API request.
@@ -96,7 +60,7 @@ func (r DescribeAssociationRequest) Send(ctx context.Context) (*DescribeAssociat
 	}
 
 	resp := &DescribeAssociationResponse{
-		DescribeAssociationOutput: r.Request.Data.(*DescribeAssociationOutput),
+		DescribeAssociationOutput: r.Request.Data.(*types.DescribeAssociationOutput),
 		response:                  &aws.Response{Request: r.Request},
 	}
 
@@ -106,7 +70,7 @@ func (r DescribeAssociationRequest) Send(ctx context.Context) (*DescribeAssociat
 // DescribeAssociationResponse is the response type for the
 // DescribeAssociation API operation.
 type DescribeAssociationResponse struct {
-	*DescribeAssociationOutput
+	*types.DescribeAssociationOutput
 
 	response *aws.Response
 }

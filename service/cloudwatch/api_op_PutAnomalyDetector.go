@@ -4,96 +4,10 @@ package cloudwatch
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/cloudwatch/types"
 )
-
-type PutAnomalyDetectorInput struct {
-	_ struct{} `type:"structure"`
-
-	// The configuration specifies details about how the anomaly detection model
-	// is to be trained, including time ranges to exclude when training and updating
-	// the model. You can specify as many as 10 time ranges.
-	//
-	// The configuration can also include the time zone to use for the metric.
-	//
-	// You can in
-	Configuration *AnomalyDetectorConfiguration `type:"structure"`
-
-	// The metric dimensions to create the anomaly detection model for.
-	Dimensions []Dimension `type:"list"`
-
-	// The name of the metric to create the anomaly detection model for.
-	//
-	// MetricName is a required field
-	MetricName *string `min:"1" type:"string" required:"true"`
-
-	// The namespace of the metric to create the anomaly detection model for.
-	//
-	// Namespace is a required field
-	Namespace *string `min:"1" type:"string" required:"true"`
-
-	// The statistic to use for the metric and the anomaly detection model.
-	//
-	// Stat is a required field
-	Stat *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s PutAnomalyDetectorInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *PutAnomalyDetectorInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "PutAnomalyDetectorInput"}
-
-	if s.MetricName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("MetricName"))
-	}
-	if s.MetricName != nil && len(*s.MetricName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("MetricName", 1))
-	}
-
-	if s.Namespace == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Namespace"))
-	}
-	if s.Namespace != nil && len(*s.Namespace) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Namespace", 1))
-	}
-
-	if s.Stat == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Stat"))
-	}
-	if s.Configuration != nil {
-		if err := s.Configuration.Validate(); err != nil {
-			invalidParams.AddNested("Configuration", err.(aws.ErrInvalidParams))
-		}
-	}
-	if s.Dimensions != nil {
-		for i, v := range s.Dimensions {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Dimensions", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type PutAnomalyDetectorOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s PutAnomalyDetectorOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opPutAnomalyDetector = "PutAnomalyDetector"
 
@@ -113,7 +27,7 @@ const opPutAnomalyDetector = "PutAnomalyDetector"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/PutAnomalyDetector
-func (c *Client) PutAnomalyDetectorRequest(input *PutAnomalyDetectorInput) PutAnomalyDetectorRequest {
+func (c *Client) PutAnomalyDetectorRequest(input *types.PutAnomalyDetectorInput) PutAnomalyDetectorRequest {
 	op := &aws.Operation{
 		Name:       opPutAnomalyDetector,
 		HTTPMethod: "POST",
@@ -121,10 +35,10 @@ func (c *Client) PutAnomalyDetectorRequest(input *PutAnomalyDetectorInput) PutAn
 	}
 
 	if input == nil {
-		input = &PutAnomalyDetectorInput{}
+		input = &types.PutAnomalyDetectorInput{}
 	}
 
-	req := c.newRequest(op, input, &PutAnomalyDetectorOutput{})
+	req := c.newRequest(op, input, &types.PutAnomalyDetectorOutput{})
 	return PutAnomalyDetectorRequest{Request: req, Input: input, Copy: c.PutAnomalyDetectorRequest}
 }
 
@@ -132,8 +46,8 @@ func (c *Client) PutAnomalyDetectorRequest(input *PutAnomalyDetectorInput) PutAn
 // PutAnomalyDetector API operation.
 type PutAnomalyDetectorRequest struct {
 	*aws.Request
-	Input *PutAnomalyDetectorInput
-	Copy  func(*PutAnomalyDetectorInput) PutAnomalyDetectorRequest
+	Input *types.PutAnomalyDetectorInput
+	Copy  func(*types.PutAnomalyDetectorInput) PutAnomalyDetectorRequest
 }
 
 // Send marshals and sends the PutAnomalyDetector API request.
@@ -145,7 +59,7 @@ func (r PutAnomalyDetectorRequest) Send(ctx context.Context) (*PutAnomalyDetecto
 	}
 
 	resp := &PutAnomalyDetectorResponse{
-		PutAnomalyDetectorOutput: r.Request.Data.(*PutAnomalyDetectorOutput),
+		PutAnomalyDetectorOutput: r.Request.Data.(*types.PutAnomalyDetectorOutput),
 		response:                 &aws.Response{Request: r.Request},
 	}
 
@@ -155,7 +69,7 @@ func (r PutAnomalyDetectorRequest) Send(ctx context.Context) (*PutAnomalyDetecto
 // PutAnomalyDetectorResponse is the response type for the
 // PutAnomalyDetector API operation.
 type PutAnomalyDetectorResponse struct {
-	*PutAnomalyDetectorOutput
+	*types.PutAnomalyDetectorOutput
 
 	response *aws.Response
 }

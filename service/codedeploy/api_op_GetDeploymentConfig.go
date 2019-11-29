@@ -6,54 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/codedeploy/types"
 )
-
-// Represents the input of a GetDeploymentConfig operation.
-type GetDeploymentConfigInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of a deployment configuration associated with the IAM user or AWS
-	// account.
-	//
-	// DeploymentConfigName is a required field
-	DeploymentConfigName *string `locationName:"deploymentConfigName" min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetDeploymentConfigInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetDeploymentConfigInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetDeploymentConfigInput"}
-
-	if s.DeploymentConfigName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DeploymentConfigName"))
-	}
-	if s.DeploymentConfigName != nil && len(*s.DeploymentConfigName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("DeploymentConfigName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Represents the output of a GetDeploymentConfig operation.
-type GetDeploymentConfigOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Information about the deployment configuration.
-	DeploymentConfigInfo *DeploymentConfigInfo `locationName:"deploymentConfigInfo" type:"structure"`
-}
-
-// String returns the string representation
-func (s GetDeploymentConfigOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetDeploymentConfig = "GetDeploymentConfig"
 
@@ -70,7 +24,7 @@ const opGetDeploymentConfig = "GetDeploymentConfig"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/GetDeploymentConfig
-func (c *Client) GetDeploymentConfigRequest(input *GetDeploymentConfigInput) GetDeploymentConfigRequest {
+func (c *Client) GetDeploymentConfigRequest(input *types.GetDeploymentConfigInput) GetDeploymentConfigRequest {
 	op := &aws.Operation{
 		Name:       opGetDeploymentConfig,
 		HTTPMethod: "POST",
@@ -78,10 +32,10 @@ func (c *Client) GetDeploymentConfigRequest(input *GetDeploymentConfigInput) Get
 	}
 
 	if input == nil {
-		input = &GetDeploymentConfigInput{}
+		input = &types.GetDeploymentConfigInput{}
 	}
 
-	req := c.newRequest(op, input, &GetDeploymentConfigOutput{})
+	req := c.newRequest(op, input, &types.GetDeploymentConfigOutput{})
 	return GetDeploymentConfigRequest{Request: req, Input: input, Copy: c.GetDeploymentConfigRequest}
 }
 
@@ -89,8 +43,8 @@ func (c *Client) GetDeploymentConfigRequest(input *GetDeploymentConfigInput) Get
 // GetDeploymentConfig API operation.
 type GetDeploymentConfigRequest struct {
 	*aws.Request
-	Input *GetDeploymentConfigInput
-	Copy  func(*GetDeploymentConfigInput) GetDeploymentConfigRequest
+	Input *types.GetDeploymentConfigInput
+	Copy  func(*types.GetDeploymentConfigInput) GetDeploymentConfigRequest
 }
 
 // Send marshals and sends the GetDeploymentConfig API request.
@@ -102,7 +56,7 @@ func (r GetDeploymentConfigRequest) Send(ctx context.Context) (*GetDeploymentCon
 	}
 
 	resp := &GetDeploymentConfigResponse{
-		GetDeploymentConfigOutput: r.Request.Data.(*GetDeploymentConfigOutput),
+		GetDeploymentConfigOutput: r.Request.Data.(*types.GetDeploymentConfigOutput),
 		response:                  &aws.Response{Request: r.Request},
 	}
 
@@ -112,7 +66,7 @@ func (r GetDeploymentConfigRequest) Send(ctx context.Context) (*GetDeploymentCon
 // GetDeploymentConfigResponse is the response type for the
 // GetDeploymentConfig API operation.
 type GetDeploymentConfigResponse struct {
-	*GetDeploymentConfigOutput
+	*types.GetDeploymentConfigOutput
 
 	response *aws.Response
 }

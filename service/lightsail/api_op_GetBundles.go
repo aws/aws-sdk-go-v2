@@ -6,42 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/lightsail/types"
 )
-
-type GetBundlesInput struct {
-	_ struct{} `type:"structure"`
-
-	// A Boolean value that indicates whether to include inactive bundle results
-	// in your request.
-	IncludeInactive *bool `locationName:"includeInactive" type:"boolean"`
-
-	// A token used for advancing to the next page of results from your get bundles
-	// request.
-	PageToken *string `locationName:"pageToken" type:"string"`
-}
-
-// String returns the string representation
-func (s GetBundlesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type GetBundlesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// An array of key-value pairs that contains information about the available
-	// bundles.
-	Bundles []Bundle `locationName:"bundles" type:"list"`
-
-	// A token used for advancing to the next page of results from your get active
-	// names request.
-	NextPageToken *string `locationName:"nextPageToken" type:"string"`
-}
-
-// String returns the string representation
-func (s GetBundlesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetBundles = "GetBundles"
 
@@ -59,7 +25,7 @@ const opGetBundles = "GetBundles"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetBundles
-func (c *Client) GetBundlesRequest(input *GetBundlesInput) GetBundlesRequest {
+func (c *Client) GetBundlesRequest(input *types.GetBundlesInput) GetBundlesRequest {
 	op := &aws.Operation{
 		Name:       opGetBundles,
 		HTTPMethod: "POST",
@@ -67,10 +33,10 @@ func (c *Client) GetBundlesRequest(input *GetBundlesInput) GetBundlesRequest {
 	}
 
 	if input == nil {
-		input = &GetBundlesInput{}
+		input = &types.GetBundlesInput{}
 	}
 
-	req := c.newRequest(op, input, &GetBundlesOutput{})
+	req := c.newRequest(op, input, &types.GetBundlesOutput{})
 	return GetBundlesRequest{Request: req, Input: input, Copy: c.GetBundlesRequest}
 }
 
@@ -78,8 +44,8 @@ func (c *Client) GetBundlesRequest(input *GetBundlesInput) GetBundlesRequest {
 // GetBundles API operation.
 type GetBundlesRequest struct {
 	*aws.Request
-	Input *GetBundlesInput
-	Copy  func(*GetBundlesInput) GetBundlesRequest
+	Input *types.GetBundlesInput
+	Copy  func(*types.GetBundlesInput) GetBundlesRequest
 }
 
 // Send marshals and sends the GetBundles API request.
@@ -91,7 +57,7 @@ func (r GetBundlesRequest) Send(ctx context.Context) (*GetBundlesResponse, error
 	}
 
 	resp := &GetBundlesResponse{
-		GetBundlesOutput: r.Request.Data.(*GetBundlesOutput),
+		GetBundlesOutput: r.Request.Data.(*types.GetBundlesOutput),
 		response:         &aws.Response{Request: r.Request},
 	}
 
@@ -101,7 +67,7 @@ func (r GetBundlesRequest) Send(ctx context.Context) (*GetBundlesResponse, error
 // GetBundlesResponse is the response type for the
 // GetBundles API operation.
 type GetBundlesResponse struct {
-	*GetBundlesOutput
+	*types.GetBundlesOutput
 
 	response *aws.Response
 }

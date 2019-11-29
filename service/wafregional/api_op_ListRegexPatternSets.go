@@ -6,64 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/service/waf"
+	"github.com/aws/aws-sdk-go-v2/service/wafregional/types"
 )
-
-type ListRegexPatternSetsInput struct {
-	_ struct{} `type:"structure"`
-
-	// Specifies the number of RegexPatternSet objects that you want AWS WAF to
-	// return for this request. If you have more RegexPatternSet objects than the
-	// number you specify for Limit, the response includes a NextMarker value that
-	// you can use to get another batch of RegexPatternSet objects.
-	Limit *int64 `type:"integer"`
-
-	// If you specify a value for Limit and you have more RegexPatternSet objects
-	// than the value of Limit, AWS WAF returns a NextMarker value in the response
-	// that allows you to list another group of RegexPatternSet objects. For the
-	// second and subsequent ListRegexPatternSets requests, specify the value of
-	// NextMarker from the previous response to get information about another batch
-	// of RegexPatternSet objects.
-	NextMarker *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s ListRegexPatternSetsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListRegexPatternSetsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListRegexPatternSetsInput"}
-	if s.NextMarker != nil && len(*s.NextMarker) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("NextMarker", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ListRegexPatternSetsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// If you have more RegexPatternSet objects than the number that you specified
-	// for Limit in the request, the response includes a NextMarker value. To list
-	// more RegexPatternSet objects, submit another ListRegexPatternSets request,
-	// and specify the NextMarker value from the response in the NextMarker value
-	// in the next request.
-	NextMarker *string `min:"1" type:"string"`
-
-	// An array of RegexPatternSetSummary objects.
-	RegexPatternSets []waf.RegexPatternSetSummary `type:"list"`
-}
-
-// String returns the string representation
-func (s ListRegexPatternSetsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListRegexPatternSets = "ListRegexPatternSets"
 
@@ -80,7 +24,7 @@ const opListRegexPatternSets = "ListRegexPatternSets"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/ListRegexPatternSets
-func (c *Client) ListRegexPatternSetsRequest(input *ListRegexPatternSetsInput) ListRegexPatternSetsRequest {
+func (c *Client) ListRegexPatternSetsRequest(input *types.ListRegexPatternSetsInput) ListRegexPatternSetsRequest {
 	op := &aws.Operation{
 		Name:       opListRegexPatternSets,
 		HTTPMethod: "POST",
@@ -88,10 +32,10 @@ func (c *Client) ListRegexPatternSetsRequest(input *ListRegexPatternSetsInput) L
 	}
 
 	if input == nil {
-		input = &ListRegexPatternSetsInput{}
+		input = &types.ListRegexPatternSetsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListRegexPatternSetsOutput{})
+	req := c.newRequest(op, input, &types.ListRegexPatternSetsOutput{})
 	return ListRegexPatternSetsRequest{Request: req, Input: input, Copy: c.ListRegexPatternSetsRequest}
 }
 
@@ -99,8 +43,8 @@ func (c *Client) ListRegexPatternSetsRequest(input *ListRegexPatternSetsInput) L
 // ListRegexPatternSets API operation.
 type ListRegexPatternSetsRequest struct {
 	*aws.Request
-	Input *ListRegexPatternSetsInput
-	Copy  func(*ListRegexPatternSetsInput) ListRegexPatternSetsRequest
+	Input *types.ListRegexPatternSetsInput
+	Copy  func(*types.ListRegexPatternSetsInput) ListRegexPatternSetsRequest
 }
 
 // Send marshals and sends the ListRegexPatternSets API request.
@@ -112,7 +56,7 @@ func (r ListRegexPatternSetsRequest) Send(ctx context.Context) (*ListRegexPatter
 	}
 
 	resp := &ListRegexPatternSetsResponse{
-		ListRegexPatternSetsOutput: r.Request.Data.(*ListRegexPatternSetsOutput),
+		ListRegexPatternSetsOutput: r.Request.Data.(*types.ListRegexPatternSetsOutput),
 		response:                   &aws.Response{Request: r.Request},
 	}
 
@@ -122,7 +66,7 @@ func (r ListRegexPatternSetsRequest) Send(ctx context.Context) (*ListRegexPatter
 // ListRegexPatternSetsResponse is the response type for the
 // ListRegexPatternSets API operation.
 type ListRegexPatternSetsResponse struct {
-	*ListRegexPatternSetsOutput
+	*types.ListRegexPatternSetsOutput
 
 	response *aws.Response
 }

@@ -6,54 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/ec2query"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-// Contains the parameters for DeregisterImage.
-type DeregisterImageInput struct {
-	_ struct{} `type:"structure"`
-
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have
-	// the required permissions, the error response is DryRunOperation. Otherwise,
-	// it is UnauthorizedOperation.
-	DryRun *bool `locationName:"dryRun" type:"boolean"`
-
-	// The ID of the AMI.
-	//
-	// ImageId is a required field
-	ImageId *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeregisterImageInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeregisterImageInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeregisterImageInput"}
-
-	if s.ImageId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ImageId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeregisterImageOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeregisterImageOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeregisterImage = "DeregisterImage"
 
@@ -78,7 +34,7 @@ const opDeregisterImage = "DeregisterImage"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeregisterImage
-func (c *Client) DeregisterImageRequest(input *DeregisterImageInput) DeregisterImageRequest {
+func (c *Client) DeregisterImageRequest(input *types.DeregisterImageInput) DeregisterImageRequest {
 	op := &aws.Operation{
 		Name:       opDeregisterImage,
 		HTTPMethod: "POST",
@@ -86,10 +42,10 @@ func (c *Client) DeregisterImageRequest(input *DeregisterImageInput) DeregisterI
 	}
 
 	if input == nil {
-		input = &DeregisterImageInput{}
+		input = &types.DeregisterImageInput{}
 	}
 
-	req := c.newRequest(op, input, &DeregisterImageOutput{})
+	req := c.newRequest(op, input, &types.DeregisterImageOutput{})
 	req.Handlers.Unmarshal.Remove(ec2query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return DeregisterImageRequest{Request: req, Input: input, Copy: c.DeregisterImageRequest}
@@ -99,8 +55,8 @@ func (c *Client) DeregisterImageRequest(input *DeregisterImageInput) DeregisterI
 // DeregisterImage API operation.
 type DeregisterImageRequest struct {
 	*aws.Request
-	Input *DeregisterImageInput
-	Copy  func(*DeregisterImageInput) DeregisterImageRequest
+	Input *types.DeregisterImageInput
+	Copy  func(*types.DeregisterImageInput) DeregisterImageRequest
 }
 
 // Send marshals and sends the DeregisterImage API request.
@@ -112,7 +68,7 @@ func (r DeregisterImageRequest) Send(ctx context.Context) (*DeregisterImageRespo
 	}
 
 	resp := &DeregisterImageResponse{
-		DeregisterImageOutput: r.Request.Data.(*DeregisterImageOutput),
+		DeregisterImageOutput: r.Request.Data.(*types.DeregisterImageOutput),
 		response:              &aws.Response{Request: r.Request},
 	}
 
@@ -122,7 +78,7 @@ func (r DeregisterImageRequest) Send(ctx context.Context) (*DeregisterImageRespo
 // DeregisterImageResponse is the response type for the
 // DeregisterImage API operation.
 type DeregisterImageResponse struct {
-	*DeregisterImageOutput
+	*types.DeregisterImageOutput
 
 	response *aws.Response
 }

@@ -12,6 +12,8 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws/awserr"
 	"github.com/aws/aws-sdk-go-v2/aws/external"
 	"github.com/aws/aws-sdk-go-v2/service/waf"
+	"github.com/aws/aws-sdk-go-v2/service/waf/enums"
+	"github.com/aws/aws-sdk-go-v2/service/waf/types"
 )
 
 var _ time.Duration
@@ -36,7 +38,7 @@ func ExampleClient_CreateIPSetRequest_shared00() {
 	}
 
 	svc := waf.New(cfg)
-	input := &waf.CreateIPSetInput{
+	input := &types.CreateIPSetInput{
 		ChangeToken: aws.String("abcd12f2-46da-4fdb-b8d5-fbd4c466928f"),
 		Name:        aws.String("MyIPSetFriendlyName"),
 	}
@@ -82,7 +84,7 @@ func ExampleClient_CreateRuleRequest_shared00() {
 	}
 
 	svc := waf.New(cfg)
-	input := &waf.CreateRuleInput{
+	input := &types.CreateRuleInput{
 		ChangeToken: aws.String("abcd12f2-46da-4fdb-b8d5-fbd4c466928f"),
 		MetricName:  aws.String("WAFByteHeaderRule"),
 		Name:        aws.String("WAFByteHeaderRule"),
@@ -133,7 +135,7 @@ func ExampleClient_CreateSizeConstraintSetRequest_shared00() {
 	}
 
 	svc := waf.New(cfg)
-	input := &waf.CreateSizeConstraintSetInput{
+	input := &types.CreateSizeConstraintSetInput{
 		ChangeToken: aws.String("abcd12f2-46da-4fdb-b8d5-fbd4c466928f"),
 		Name:        aws.String("MySampleSizeConstraintSet"),
 	}
@@ -179,7 +181,7 @@ func ExampleClient_CreateSqlInjectionMatchSetRequest_shared00() {
 	}
 
 	svc := waf.New(cfg)
-	input := &waf.CreateSqlInjectionMatchSetInput{
+	input := &types.CreateSqlInjectionMatchSetInput{
 		ChangeToken: aws.String("abcd12f2-46da-4fdb-b8d5-fbd4c466928f"),
 		Name:        aws.String("MySQLInjectionMatchSet"),
 	}
@@ -225,10 +227,10 @@ func ExampleClient_CreateWebACLRequest_shared00() {
 	}
 
 	svc := waf.New(cfg)
-	input := &waf.CreateWebACLInput{
+	input := &types.CreateWebACLInput{
 		ChangeToken: aws.String("abcd12f2-46da-4fdb-b8d5-fbd4c466928f"),
-		DefaultAction: &waf.WafAction{
-			Type: waf.WafActionTypeAllow,
+		DefaultAction: &types.WafAction{
+			Type: enums.WafActionTypeAllow,
 		},
 		MetricName: aws.String("CreateExample"),
 		Name:       aws.String("CreateExample"),
@@ -281,7 +283,7 @@ func ExampleClient_CreateXssMatchSetRequest_shared00() {
 	}
 
 	svc := waf.New(cfg)
-	input := &waf.CreateXssMatchSetInput{
+	input := &types.CreateXssMatchSetInput{
 		ChangeToken: aws.String("abcd12f2-46da-4fdb-b8d5-fbd4c466928f"),
 		Name:        aws.String("MySampleXssMatchSet"),
 	}
@@ -327,7 +329,7 @@ func ExampleClient_DeleteByteMatchSetRequest_shared00() {
 	}
 
 	svc := waf.New(cfg)
-	input := &waf.DeleteByteMatchSetInput{
+	input := &types.DeleteByteMatchSetInput{
 		ByteMatchSetId: aws.String("exampleIDs3t-46da-4fdb-b8d5-abc321j569j5"),
 		ChangeToken:    aws.String("abcd12f2-46da-4fdb-b8d5-fbd4c466928f"),
 	}
@@ -373,7 +375,7 @@ func ExampleClient_DeleteIPSetRequest_shared00() {
 	}
 
 	svc := waf.New(cfg)
-	input := &waf.DeleteIPSetInput{
+	input := &types.DeleteIPSetInput{
 		ChangeToken: aws.String("abcd12f2-46da-4fdb-b8d5-fbd4c466928f"),
 		IPSetId:     aws.String("example1ds3t-46da-4fdb-b8d5-abc321j569j5"),
 	}
@@ -419,7 +421,7 @@ func ExampleClient_DeleteRuleRequest_shared00() {
 	}
 
 	svc := waf.New(cfg)
-	input := &waf.DeleteRuleInput{
+	input := &types.DeleteRuleInput{
 		ChangeToken: aws.String("abcd12f2-46da-4fdb-b8d5-fbd4c466928f"),
 		RuleId:      aws.String("WAFRule-1-Example"),
 	}
@@ -469,7 +471,7 @@ func ExampleClient_DeleteSizeConstraintSetRequest_shared00() {
 	}
 
 	svc := waf.New(cfg)
-	input := &waf.DeleteSizeConstraintSetInput{
+	input := &types.DeleteSizeConstraintSetInput{
 		ChangeToken:         aws.String("abcd12f2-46da-4fdb-b8d5-fbd4c466928f"),
 		SizeConstraintSetId: aws.String("example1ds3t-46da-4fdb-b8d5-abc321j569j5"),
 	}
@@ -515,7 +517,7 @@ func ExampleClient_DeleteSqlInjectionMatchSetRequest_shared00() {
 	}
 
 	svc := waf.New(cfg)
-	input := &waf.DeleteSqlInjectionMatchSetInput{
+	input := &types.DeleteSqlInjectionMatchSetInput{
 		ChangeToken:            aws.String("abcd12f2-46da-4fdb-b8d5-fbd4c466928f"),
 		SqlInjectionMatchSetId: aws.String("example1ds3t-46da-4fdb-b8d5-abc321j569j5"),
 	}
@@ -561,7 +563,7 @@ func ExampleClient_DeleteWebACLRequest_shared00() {
 	}
 
 	svc := waf.New(cfg)
-	input := &waf.DeleteWebACLInput{
+	input := &types.DeleteWebACLInput{
 		ChangeToken: aws.String("abcd12f2-46da-4fdb-b8d5-fbd4c466928f"),
 		WebACLId:    aws.String("example-46da-4444-5555-example"),
 	}
@@ -611,7 +613,7 @@ func ExampleClient_DeleteXssMatchSetRequest_shared00() {
 	}
 
 	svc := waf.New(cfg)
-	input := &waf.DeleteXssMatchSetInput{
+	input := &types.DeleteXssMatchSetInput{
 		ChangeToken:   aws.String("abcd12f2-46da-4fdb-b8d5-fbd4c466928f"),
 		XssMatchSetId: aws.String("example1ds3t-46da-4fdb-b8d5-abc321j569j5"),
 	}
@@ -657,7 +659,7 @@ func ExampleClient_GetByteMatchSetRequest_shared00() {
 	}
 
 	svc := waf.New(cfg)
-	input := &waf.GetByteMatchSetInput{
+	input := &types.GetByteMatchSetInput{
 		ByteMatchSetId: aws.String("exampleIDs3t-46da-4fdb-b8d5-abc321j569j5"),
 	}
 
@@ -697,7 +699,7 @@ func ExampleClient_GetChangeTokenRequest_shared00() {
 	}
 
 	svc := waf.New(cfg)
-	input := &waf.GetChangeTokenInput{}
+	input := &types.GetChangeTokenInput{}
 
 	req := svc.GetChangeTokenRequest(input)
 	result, err := req.Send(context.Background())
@@ -730,7 +732,7 @@ func ExampleClient_GetChangeTokenStatusRequest_shared00() {
 	}
 
 	svc := waf.New(cfg)
-	input := &waf.GetChangeTokenStatusInput{
+	input := &types.GetChangeTokenStatusInput{
 		ChangeToken: aws.String("abcd12f2-46da-4fdb-b8d5-fbd4c466928f"),
 	}
 
@@ -767,7 +769,7 @@ func ExampleClient_GetIPSetRequest_shared00() {
 	}
 
 	svc := waf.New(cfg)
-	input := &waf.GetIPSetInput{
+	input := &types.GetIPSetInput{
 		IPSetId: aws.String("example1ds3t-46da-4fdb-b8d5-abc321j569j5"),
 	}
 
@@ -806,7 +808,7 @@ func ExampleClient_GetRuleRequest_shared00() {
 	}
 
 	svc := waf.New(cfg)
-	input := &waf.GetRuleInput{
+	input := &types.GetRuleInput{
 		RuleId: aws.String("example1ds3t-46da-4fdb-b8d5-abc321j569j5"),
 	}
 
@@ -847,10 +849,10 @@ func ExampleClient_GetSampledRequestsRequest_shared00() {
 	}
 
 	svc := waf.New(cfg)
-	input := &waf.GetSampledRequestsInput{
+	input := &types.GetSampledRequestsInput{
 		MaxItems: aws.Int64(100),
 		RuleId:   aws.String("WAFRule-1-Example"),
-		TimeWindow: &waf.TimeWindow{
+		TimeWindow: &types.TimeWindow{
 			EndTime:   parseTime("2006-01-02T15:04:05Z", "2016-09-27T15:50Z"),
 			StartTime: parseTime("2006-01-02T15:04:05Z", "2016-09-27T15:50Z"),
 		},
@@ -891,7 +893,7 @@ func ExampleClient_GetSizeConstraintSetRequest_shared00() {
 	}
 
 	svc := waf.New(cfg)
-	input := &waf.GetSizeConstraintSetInput{
+	input := &types.GetSizeConstraintSetInput{
 		SizeConstraintSetId: aws.String("example1ds3t-46da-4fdb-b8d5-abc321j569j5"),
 	}
 
@@ -931,7 +933,7 @@ func ExampleClient_GetSqlInjectionMatchSetRequest_shared00() {
 	}
 
 	svc := waf.New(cfg)
-	input := &waf.GetSqlInjectionMatchSetInput{
+	input := &types.GetSqlInjectionMatchSetInput{
 		SqlInjectionMatchSetId: aws.String("example1ds3t-46da-4fdb-b8d5-abc321j569j5"),
 	}
 
@@ -970,7 +972,7 @@ func ExampleClient_GetWebACLRequest_shared00() {
 	}
 
 	svc := waf.New(cfg)
-	input := &waf.GetWebACLInput{
+	input := &types.GetWebACLInput{
 		WebACLId: aws.String("createwebacl-1472061481310"),
 	}
 
@@ -1009,7 +1011,7 @@ func ExampleClient_GetXssMatchSetRequest_shared00() {
 	}
 
 	svc := waf.New(cfg)
-	input := &waf.GetXssMatchSetInput{
+	input := &types.GetXssMatchSetInput{
 		XssMatchSetId: aws.String("example1ds3t-46da-4fdb-b8d5-abc321j569j5"),
 	}
 
@@ -1048,7 +1050,7 @@ func ExampleClient_ListIPSetsRequest_shared00() {
 	}
 
 	svc := waf.New(cfg)
-	input := &waf.ListIPSetsInput{
+	input := &types.ListIPSetsInput{
 		Limit: aws.Int64(100),
 	}
 
@@ -1085,7 +1087,7 @@ func ExampleClient_ListRulesRequest_shared00() {
 	}
 
 	svc := waf.New(cfg)
-	input := &waf.ListRulesInput{
+	input := &types.ListRulesInput{
 		Limit: aws.Int64(100),
 	}
 
@@ -1122,7 +1124,7 @@ func ExampleClient_ListSizeConstraintSetsRequest_shared00() {
 	}
 
 	svc := waf.New(cfg)
-	input := &waf.ListSizeConstraintSetsInput{
+	input := &types.ListSizeConstraintSetsInput{
 		Limit: aws.Int64(100),
 	}
 
@@ -1159,7 +1161,7 @@ func ExampleClient_ListSqlInjectionMatchSetsRequest_shared00() {
 	}
 
 	svc := waf.New(cfg)
-	input := &waf.ListSqlInjectionMatchSetsInput{
+	input := &types.ListSqlInjectionMatchSetsInput{
 		Limit: aws.Int64(100),
 	}
 
@@ -1196,7 +1198,7 @@ func ExampleClient_ListWebACLsRequest_shared00() {
 	}
 
 	svc := waf.New(cfg)
-	input := &waf.ListWebACLsInput{
+	input := &types.ListWebACLsInput{
 		Limit: aws.Int64(100),
 	}
 
@@ -1233,7 +1235,7 @@ func ExampleClient_ListXssMatchSetsRequest_shared00() {
 	}
 
 	svc := waf.New(cfg)
-	input := &waf.ListXssMatchSetsInput{
+	input := &types.ListXssMatchSetsInput{
 		Limit: aws.Int64(100),
 	}
 
@@ -1271,12 +1273,12 @@ func ExampleClient_UpdateByteMatchSetRequest_shared00() {
 	}
 
 	svc := waf.New(cfg)
-	input := &waf.UpdateByteMatchSetInput{
+	input := &types.UpdateByteMatchSetInput{
 		ByteMatchSetId: aws.String("exampleIDs3t-46da-4fdb-b8d5-abc321j569j5"),
 		ChangeToken:    aws.String("abcd12f2-46da-4fdb-b8d5-fbd4c466928f"),
-		Updates: []waf.ByteMatchSetUpdate{
+		Updates: []types.ByteMatchSetUpdate{
 			{
-				Action: waf.ChangeActionDelete,
+				Action: enums.ChangeActionDelete,
 			},
 		},
 	}
@@ -1327,12 +1329,12 @@ func ExampleClient_UpdateIPSetRequest_shared00() {
 	}
 
 	svc := waf.New(cfg)
-	input := &waf.UpdateIPSetInput{
+	input := &types.UpdateIPSetInput{
 		ChangeToken: aws.String("abcd12f2-46da-4fdb-b8d5-fbd4c466928f"),
 		IPSetId:     aws.String("example1ds3t-46da-4fdb-b8d5-abc321j569j5"),
-		Updates: []waf.IPSetUpdate{
+		Updates: []types.IPSetUpdate{
 			{
-				Action: waf.ChangeActionDelete,
+				Action: enums.ChangeActionDelete,
 			},
 		},
 	}
@@ -1384,12 +1386,12 @@ func ExampleClient_UpdateRuleRequest_shared00() {
 	}
 
 	svc := waf.New(cfg)
-	input := &waf.UpdateRuleInput{
+	input := &types.UpdateRuleInput{
 		ChangeToken: aws.String("abcd12f2-46da-4fdb-b8d5-fbd4c466928f"),
 		RuleId:      aws.String("example1ds3t-46da-4fdb-b8d5-abc321j569j5"),
-		Updates: []waf.RuleUpdate{
+		Updates: []types.RuleUpdate{
 			{
-				Action: waf.ChangeActionDelete,
+				Action: enums.ChangeActionDelete,
 			},
 		},
 	}
@@ -1442,12 +1444,12 @@ func ExampleClient_UpdateSizeConstraintSetRequest_shared00() {
 	}
 
 	svc := waf.New(cfg)
-	input := &waf.UpdateSizeConstraintSetInput{
+	input := &types.UpdateSizeConstraintSetInput{
 		ChangeToken:         aws.String("abcd12f2-46da-4fdb-b8d5-fbd4c466928f"),
 		SizeConstraintSetId: aws.String("example1ds3t-46da-4fdb-b8d5-abc321j569j5"),
-		Updates: []waf.SizeConstraintSetUpdate{
+		Updates: []types.SizeConstraintSetUpdate{
 			{
-				Action: waf.ChangeActionDelete,
+				Action: enums.ChangeActionDelete,
 			},
 		},
 	}
@@ -1500,12 +1502,12 @@ func ExampleClient_UpdateSqlInjectionMatchSetRequest_shared00() {
 	}
 
 	svc := waf.New(cfg)
-	input := &waf.UpdateSqlInjectionMatchSetInput{
+	input := &types.UpdateSqlInjectionMatchSetInput{
 		ChangeToken:            aws.String("abcd12f2-46da-4fdb-b8d5-fbd4c466928f"),
 		SqlInjectionMatchSetId: aws.String("example1ds3t-46da-4fdb-b8d5-abc321j569j5"),
-		Updates: []waf.SqlInjectionMatchSetUpdate{
+		Updates: []types.SqlInjectionMatchSetUpdate{
 			{
-				Action: waf.ChangeActionDelete,
+				Action: enums.ChangeActionDelete,
 			},
 		},
 	}
@@ -1555,14 +1557,14 @@ func ExampleClient_UpdateWebACLRequest_shared00() {
 	}
 
 	svc := waf.New(cfg)
-	input := &waf.UpdateWebACLInput{
+	input := &types.UpdateWebACLInput{
 		ChangeToken: aws.String("abcd12f2-46da-4fdb-b8d5-fbd4c466928f"),
-		DefaultAction: &waf.WafAction{
-			Type: waf.WafActionTypeAllow,
+		DefaultAction: &types.WafAction{
+			Type: enums.WafActionTypeAllow,
 		},
-		Updates: []waf.WebACLUpdate{
+		Updates: []types.WebACLUpdate{
 			{
-				Action: waf.ChangeActionDelete,
+				Action: enums.ChangeActionDelete,
 			},
 		},
 		WebACLId: aws.String("webacl-1472061481310"),
@@ -1618,11 +1620,11 @@ func ExampleClient_UpdateXssMatchSetRequest_shared00() {
 	}
 
 	svc := waf.New(cfg)
-	input := &waf.UpdateXssMatchSetInput{
+	input := &types.UpdateXssMatchSetInput{
 		ChangeToken: aws.String("abcd12f2-46da-4fdb-b8d5-fbd4c466928f"),
-		Updates: []waf.XssMatchSetUpdate{
+		Updates: []types.XssMatchSetUpdate{
 			{
-				Action: waf.ChangeActionDelete,
+				Action: enums.ChangeActionDelete,
 			},
 		},
 		XssMatchSetId: aws.String("example1ds3t-46da-4fdb-b8d5-abc321j569j5"),

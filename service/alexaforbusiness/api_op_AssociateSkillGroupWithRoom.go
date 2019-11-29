@@ -6,32 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/alexaforbusiness/types"
 )
-
-type AssociateSkillGroupWithRoomInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ARN of the room with which to associate the skill group. Required.
-	RoomArn *string `type:"string"`
-
-	// The ARN of the skill group to associate with a room. Required.
-	SkillGroupArn *string `type:"string"`
-}
-
-// String returns the string representation
-func (s AssociateSkillGroupWithRoomInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type AssociateSkillGroupWithRoomOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s AssociateSkillGroupWithRoomOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opAssociateSkillGroupWithRoom = "AssociateSkillGroupWithRoom"
 
@@ -49,7 +25,7 @@ const opAssociateSkillGroupWithRoom = "AssociateSkillGroupWithRoom"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/AssociateSkillGroupWithRoom
-func (c *Client) AssociateSkillGroupWithRoomRequest(input *AssociateSkillGroupWithRoomInput) AssociateSkillGroupWithRoomRequest {
+func (c *Client) AssociateSkillGroupWithRoomRequest(input *types.AssociateSkillGroupWithRoomInput) AssociateSkillGroupWithRoomRequest {
 	op := &aws.Operation{
 		Name:       opAssociateSkillGroupWithRoom,
 		HTTPMethod: "POST",
@@ -57,10 +33,10 @@ func (c *Client) AssociateSkillGroupWithRoomRequest(input *AssociateSkillGroupWi
 	}
 
 	if input == nil {
-		input = &AssociateSkillGroupWithRoomInput{}
+		input = &types.AssociateSkillGroupWithRoomInput{}
 	}
 
-	req := c.newRequest(op, input, &AssociateSkillGroupWithRoomOutput{})
+	req := c.newRequest(op, input, &types.AssociateSkillGroupWithRoomOutput{})
 	return AssociateSkillGroupWithRoomRequest{Request: req, Input: input, Copy: c.AssociateSkillGroupWithRoomRequest}
 }
 
@@ -68,8 +44,8 @@ func (c *Client) AssociateSkillGroupWithRoomRequest(input *AssociateSkillGroupWi
 // AssociateSkillGroupWithRoom API operation.
 type AssociateSkillGroupWithRoomRequest struct {
 	*aws.Request
-	Input *AssociateSkillGroupWithRoomInput
-	Copy  func(*AssociateSkillGroupWithRoomInput) AssociateSkillGroupWithRoomRequest
+	Input *types.AssociateSkillGroupWithRoomInput
+	Copy  func(*types.AssociateSkillGroupWithRoomInput) AssociateSkillGroupWithRoomRequest
 }
 
 // Send marshals and sends the AssociateSkillGroupWithRoom API request.
@@ -81,7 +57,7 @@ func (r AssociateSkillGroupWithRoomRequest) Send(ctx context.Context) (*Associat
 	}
 
 	resp := &AssociateSkillGroupWithRoomResponse{
-		AssociateSkillGroupWithRoomOutput: r.Request.Data.(*AssociateSkillGroupWithRoomOutput),
+		AssociateSkillGroupWithRoomOutput: r.Request.Data.(*types.AssociateSkillGroupWithRoomOutput),
 		response:                          &aws.Response{Request: r.Request},
 	}
 
@@ -91,7 +67,7 @@ func (r AssociateSkillGroupWithRoomRequest) Send(ctx context.Context) (*Associat
 // AssociateSkillGroupWithRoomResponse is the response type for the
 // AssociateSkillGroupWithRoom API operation.
 type AssociateSkillGroupWithRoomResponse struct {
-	*AssociateSkillGroupWithRoomOutput
+	*types.AssociateSkillGroupWithRoomOutput
 
 	response *aws.Response
 }

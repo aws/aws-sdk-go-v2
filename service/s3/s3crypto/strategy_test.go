@@ -5,8 +5,8 @@ import (
 	"testing"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/service/s3"
 	"github.com/aws/aws-sdk-go-v2/service/s3/s3crypto"
+	"github.com/aws/aws-sdk-go-v2/service/s3/types"
 )
 
 func TestHeaderV2SaveStrategy(t *testing.T) {
@@ -59,7 +59,7 @@ func TestHeaderV2SaveStrategy(t *testing.T) {
 	}
 
 	for _, c := range cases {
-		params := &s3.PutObjectInput{}
+		params := &types.PutObjectInput{}
 		req := &aws.Request{
 			Params: params,
 		}

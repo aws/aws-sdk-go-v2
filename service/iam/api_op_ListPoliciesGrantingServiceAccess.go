@@ -6,95 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/iam/types"
 )
-
-type ListPoliciesGrantingServiceAccessInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ARN of the IAM identity (user, group, or role) whose policies you want
-	// to list.
-	//
-	// Arn is a required field
-	Arn *string `min:"20" type:"string" required:"true"`
-
-	// Use this parameter only when paginating results and only after you receive
-	// a response indicating that the results are truncated. Set it to the value
-	// of the Marker element in the response that you received to indicate where
-	// the next call should start.
-	Marker *string `min:"1" type:"string"`
-
-	// The service namespace for the AWS services whose policies you want to list.
-	//
-	// To learn the service namespace for a service, go to Actions, Resources, and
-	// Condition Keys for AWS Services (https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_actions-resources-contextkeys.html)
-	// in the IAM User Guide. Choose the name of the service to view details for
-	// that service. In the first paragraph, find the service prefix. For example,
-	// (service prefix: a4b). For more information about service namespaces, see
-	// AWS Service Namespaces (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#genref-aws-service-namespaces)
-	// in the AWS General Reference.
-	//
-	// ServiceNamespaces is a required field
-	ServiceNamespaces []string `min:"1" type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s ListPoliciesGrantingServiceAccessInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListPoliciesGrantingServiceAccessInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListPoliciesGrantingServiceAccessInput"}
-
-	if s.Arn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Arn"))
-	}
-	if s.Arn != nil && len(*s.Arn) < 20 {
-		invalidParams.Add(aws.NewErrParamMinLen("Arn", 20))
-	}
-	if s.Marker != nil && len(*s.Marker) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Marker", 1))
-	}
-
-	if s.ServiceNamespaces == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ServiceNamespaces"))
-	}
-	if s.ServiceNamespaces != nil && len(s.ServiceNamespaces) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ServiceNamespaces", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ListPoliciesGrantingServiceAccessOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A flag that indicates whether there are more items to return. If your results
-	// were truncated, you can make a subsequent pagination request using the Marker
-	// request parameter to retrieve more items. We recommend that you check IsTruncated
-	// after every call to ensure that you receive all your results.
-	IsTruncated *bool `type:"boolean"`
-
-	// When IsTruncated is true, this element is present and contains the value
-	// to use for the Marker parameter in a subsequent pagination request.
-	Marker *string `type:"string"`
-
-	// A ListPoliciesGrantingServiceAccess object that contains details about the
-	// permissions policies attached to the specified identity (user, group, or
-	// role).
-	//
-	// PoliciesGrantingServiceAccess is a required field
-	PoliciesGrantingServiceAccess []ListPoliciesGrantingServiceAccessEntry `type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s ListPoliciesGrantingServiceAccessOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListPoliciesGrantingServiceAccess = "ListPoliciesGrantingServiceAccess"
 
@@ -145,7 +58,7 @@ const opListPoliciesGrantingServiceAccess = "ListPoliciesGrantingServiceAccess"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListPoliciesGrantingServiceAccess
-func (c *Client) ListPoliciesGrantingServiceAccessRequest(input *ListPoliciesGrantingServiceAccessInput) ListPoliciesGrantingServiceAccessRequest {
+func (c *Client) ListPoliciesGrantingServiceAccessRequest(input *types.ListPoliciesGrantingServiceAccessInput) ListPoliciesGrantingServiceAccessRequest {
 	op := &aws.Operation{
 		Name:       opListPoliciesGrantingServiceAccess,
 		HTTPMethod: "POST",
@@ -153,10 +66,10 @@ func (c *Client) ListPoliciesGrantingServiceAccessRequest(input *ListPoliciesGra
 	}
 
 	if input == nil {
-		input = &ListPoliciesGrantingServiceAccessInput{}
+		input = &types.ListPoliciesGrantingServiceAccessInput{}
 	}
 
-	req := c.newRequest(op, input, &ListPoliciesGrantingServiceAccessOutput{})
+	req := c.newRequest(op, input, &types.ListPoliciesGrantingServiceAccessOutput{})
 	return ListPoliciesGrantingServiceAccessRequest{Request: req, Input: input, Copy: c.ListPoliciesGrantingServiceAccessRequest}
 }
 
@@ -164,8 +77,8 @@ func (c *Client) ListPoliciesGrantingServiceAccessRequest(input *ListPoliciesGra
 // ListPoliciesGrantingServiceAccess API operation.
 type ListPoliciesGrantingServiceAccessRequest struct {
 	*aws.Request
-	Input *ListPoliciesGrantingServiceAccessInput
-	Copy  func(*ListPoliciesGrantingServiceAccessInput) ListPoliciesGrantingServiceAccessRequest
+	Input *types.ListPoliciesGrantingServiceAccessInput
+	Copy  func(*types.ListPoliciesGrantingServiceAccessInput) ListPoliciesGrantingServiceAccessRequest
 }
 
 // Send marshals and sends the ListPoliciesGrantingServiceAccess API request.
@@ -177,7 +90,7 @@ func (r ListPoliciesGrantingServiceAccessRequest) Send(ctx context.Context) (*Li
 	}
 
 	resp := &ListPoliciesGrantingServiceAccessResponse{
-		ListPoliciesGrantingServiceAccessOutput: r.Request.Data.(*ListPoliciesGrantingServiceAccessOutput),
+		ListPoliciesGrantingServiceAccessOutput: r.Request.Data.(*types.ListPoliciesGrantingServiceAccessOutput),
 		response:                                &aws.Response{Request: r.Request},
 	}
 
@@ -187,7 +100,7 @@ func (r ListPoliciesGrantingServiceAccessRequest) Send(ctx context.Context) (*Li
 // ListPoliciesGrantingServiceAccessResponse is the response type for the
 // ListPoliciesGrantingServiceAccess API operation.
 type ListPoliciesGrantingServiceAccessResponse struct {
-	*ListPoliciesGrantingServiceAccessOutput
+	*types.ListPoliciesGrantingServiceAccessOutput
 
 	response *aws.Response
 }

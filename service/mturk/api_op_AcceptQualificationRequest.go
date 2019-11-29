@@ -6,50 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/mturk/types"
 )
-
-type AcceptQualificationRequestInput struct {
-	_ struct{} `type:"structure"`
-
-	// The value of the Qualification. You can omit this value if you are using
-	// the presence or absence of the Qualification as the basis for a HIT requirement.
-	IntegerValue *int64 `type:"integer"`
-
-	// The ID of the Qualification request, as returned by the GetQualificationRequests
-	// operation.
-	//
-	// QualificationRequestId is a required field
-	QualificationRequestId *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s AcceptQualificationRequestInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *AcceptQualificationRequestInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "AcceptQualificationRequestInput"}
-
-	if s.QualificationRequestId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("QualificationRequestId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type AcceptQualificationRequestOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s AcceptQualificationRequestOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opAcceptQualificationRequest = "AcceptQualificationRequest"
 
@@ -73,7 +31,7 @@ const opAcceptQualificationRequest = "AcceptQualificationRequest"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/AcceptQualificationRequest
-func (c *Client) AcceptQualificationRequestRequest(input *AcceptQualificationRequestInput) AcceptQualificationRequestRequest {
+func (c *Client) AcceptQualificationRequestRequest(input *types.AcceptQualificationRequestInput) AcceptQualificationRequestRequest {
 	op := &aws.Operation{
 		Name:       opAcceptQualificationRequest,
 		HTTPMethod: "POST",
@@ -81,10 +39,10 @@ func (c *Client) AcceptQualificationRequestRequest(input *AcceptQualificationReq
 	}
 
 	if input == nil {
-		input = &AcceptQualificationRequestInput{}
+		input = &types.AcceptQualificationRequestInput{}
 	}
 
-	req := c.newRequest(op, input, &AcceptQualificationRequestOutput{})
+	req := c.newRequest(op, input, &types.AcceptQualificationRequestOutput{})
 	return AcceptQualificationRequestRequest{Request: req, Input: input, Copy: c.AcceptQualificationRequestRequest}
 }
 
@@ -92,8 +50,8 @@ func (c *Client) AcceptQualificationRequestRequest(input *AcceptQualificationReq
 // AcceptQualificationRequest API operation.
 type AcceptQualificationRequestRequest struct {
 	*aws.Request
-	Input *AcceptQualificationRequestInput
-	Copy  func(*AcceptQualificationRequestInput) AcceptQualificationRequestRequest
+	Input *types.AcceptQualificationRequestInput
+	Copy  func(*types.AcceptQualificationRequestInput) AcceptQualificationRequestRequest
 }
 
 // Send marshals and sends the AcceptQualificationRequest API request.
@@ -105,7 +63,7 @@ func (r AcceptQualificationRequestRequest) Send(ctx context.Context) (*AcceptQua
 	}
 
 	resp := &AcceptQualificationRequestResponse{
-		AcceptQualificationRequestOutput: r.Request.Data.(*AcceptQualificationRequestOutput),
+		AcceptQualificationRequestOutput: r.Request.Data.(*types.AcceptQualificationRequestOutput),
 		response:                         &aws.Response{Request: r.Request},
 	}
 
@@ -115,7 +73,7 @@ func (r AcceptQualificationRequestRequest) Send(ctx context.Context) (*AcceptQua
 // AcceptQualificationRequestResponse is the response type for the
 // AcceptQualificationRequest API operation.
 type AcceptQualificationRequestResponse struct {
-	*AcceptQualificationRequestOutput
+	*types.AcceptQualificationRequestOutput
 
 	response *aws.Response
 }

@@ -6,61 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
+	"github.com/aws/aws-sdk-go-v2/service/emr/types"
 )
-
-type ModifyInstanceFleetInput struct {
-	_ struct{} `type:"structure"`
-
-	// The unique identifier of the cluster.
-	//
-	// ClusterId is a required field
-	ClusterId *string `type:"string" required:"true"`
-
-	// The unique identifier of the instance fleet.
-	//
-	// InstanceFleet is a required field
-	InstanceFleet *InstanceFleetModifyConfig `type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s ModifyInstanceFleetInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ModifyInstanceFleetInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ModifyInstanceFleetInput"}
-
-	if s.ClusterId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ClusterId"))
-	}
-
-	if s.InstanceFleet == nil {
-		invalidParams.Add(aws.NewErrParamRequired("InstanceFleet"))
-	}
-	if s.InstanceFleet != nil {
-		if err := s.InstanceFleet.Validate(); err != nil {
-			invalidParams.AddNested("InstanceFleet", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ModifyInstanceFleetOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s ModifyInstanceFleetOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opModifyInstanceFleet = "ModifyInstanceFleet"
 
@@ -82,7 +31,7 @@ const opModifyInstanceFleet = "ModifyInstanceFleet"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/ModifyInstanceFleet
-func (c *Client) ModifyInstanceFleetRequest(input *ModifyInstanceFleetInput) ModifyInstanceFleetRequest {
+func (c *Client) ModifyInstanceFleetRequest(input *types.ModifyInstanceFleetInput) ModifyInstanceFleetRequest {
 	op := &aws.Operation{
 		Name:       opModifyInstanceFleet,
 		HTTPMethod: "POST",
@@ -90,10 +39,10 @@ func (c *Client) ModifyInstanceFleetRequest(input *ModifyInstanceFleetInput) Mod
 	}
 
 	if input == nil {
-		input = &ModifyInstanceFleetInput{}
+		input = &types.ModifyInstanceFleetInput{}
 	}
 
-	req := c.newRequest(op, input, &ModifyInstanceFleetOutput{})
+	req := c.newRequest(op, input, &types.ModifyInstanceFleetOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return ModifyInstanceFleetRequest{Request: req, Input: input, Copy: c.ModifyInstanceFleetRequest}
@@ -103,8 +52,8 @@ func (c *Client) ModifyInstanceFleetRequest(input *ModifyInstanceFleetInput) Mod
 // ModifyInstanceFleet API operation.
 type ModifyInstanceFleetRequest struct {
 	*aws.Request
-	Input *ModifyInstanceFleetInput
-	Copy  func(*ModifyInstanceFleetInput) ModifyInstanceFleetRequest
+	Input *types.ModifyInstanceFleetInput
+	Copy  func(*types.ModifyInstanceFleetInput) ModifyInstanceFleetRequest
 }
 
 // Send marshals and sends the ModifyInstanceFleet API request.
@@ -116,7 +65,7 @@ func (r ModifyInstanceFleetRequest) Send(ctx context.Context) (*ModifyInstanceFl
 	}
 
 	resp := &ModifyInstanceFleetResponse{
-		ModifyInstanceFleetOutput: r.Request.Data.(*ModifyInstanceFleetOutput),
+		ModifyInstanceFleetOutput: r.Request.Data.(*types.ModifyInstanceFleetOutput),
 		response:                  &aws.Response{Request: r.Request},
 	}
 
@@ -126,7 +75,7 @@ func (r ModifyInstanceFleetRequest) Send(ctx context.Context) (*ModifyInstanceFl
 // ModifyInstanceFleetResponse is the response type for the
 // ModifyInstanceFleet API operation.
 type ModifyInstanceFleetResponse struct {
-	*ModifyInstanceFleetOutput
+	*types.ModifyInstanceFleetOutput
 
 	response *aws.Response
 }

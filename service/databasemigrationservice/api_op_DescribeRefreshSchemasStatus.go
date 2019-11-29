@@ -6,48 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/databasemigrationservice/types"
 )
-
-type DescribeRefreshSchemasStatusInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) string that uniquely identifies the endpoint.
-	//
-	// EndpointArn is a required field
-	EndpointArn *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeRefreshSchemasStatusInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeRefreshSchemasStatusInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeRefreshSchemasStatusInput"}
-
-	if s.EndpointArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("EndpointArn"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribeRefreshSchemasStatusOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The status of the schema.
-	RefreshSchemasStatus *RefreshSchemasStatus `type:"structure"`
-}
-
-// String returns the string representation
-func (s DescribeRefreshSchemasStatusOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeRefreshSchemasStatus = "DescribeRefreshSchemasStatus"
 
@@ -64,7 +24,7 @@ const opDescribeRefreshSchemasStatus = "DescribeRefreshSchemasStatus"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeRefreshSchemasStatus
-func (c *Client) DescribeRefreshSchemasStatusRequest(input *DescribeRefreshSchemasStatusInput) DescribeRefreshSchemasStatusRequest {
+func (c *Client) DescribeRefreshSchemasStatusRequest(input *types.DescribeRefreshSchemasStatusInput) DescribeRefreshSchemasStatusRequest {
 	op := &aws.Operation{
 		Name:       opDescribeRefreshSchemasStatus,
 		HTTPMethod: "POST",
@@ -72,10 +32,10 @@ func (c *Client) DescribeRefreshSchemasStatusRequest(input *DescribeRefreshSchem
 	}
 
 	if input == nil {
-		input = &DescribeRefreshSchemasStatusInput{}
+		input = &types.DescribeRefreshSchemasStatusInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeRefreshSchemasStatusOutput{})
+	req := c.newRequest(op, input, &types.DescribeRefreshSchemasStatusOutput{})
 	return DescribeRefreshSchemasStatusRequest{Request: req, Input: input, Copy: c.DescribeRefreshSchemasStatusRequest}
 }
 
@@ -83,8 +43,8 @@ func (c *Client) DescribeRefreshSchemasStatusRequest(input *DescribeRefreshSchem
 // DescribeRefreshSchemasStatus API operation.
 type DescribeRefreshSchemasStatusRequest struct {
 	*aws.Request
-	Input *DescribeRefreshSchemasStatusInput
-	Copy  func(*DescribeRefreshSchemasStatusInput) DescribeRefreshSchemasStatusRequest
+	Input *types.DescribeRefreshSchemasStatusInput
+	Copy  func(*types.DescribeRefreshSchemasStatusInput) DescribeRefreshSchemasStatusRequest
 }
 
 // Send marshals and sends the DescribeRefreshSchemasStatus API request.
@@ -96,7 +56,7 @@ func (r DescribeRefreshSchemasStatusRequest) Send(ctx context.Context) (*Describ
 	}
 
 	resp := &DescribeRefreshSchemasStatusResponse{
-		DescribeRefreshSchemasStatusOutput: r.Request.Data.(*DescribeRefreshSchemasStatusOutput),
+		DescribeRefreshSchemasStatusOutput: r.Request.Data.(*types.DescribeRefreshSchemasStatusOutput),
 		response:                           &aws.Response{Request: r.Request},
 	}
 
@@ -106,7 +66,7 @@ func (r DescribeRefreshSchemasStatusRequest) Send(ctx context.Context) (*Describ
 // DescribeRefreshSchemasStatusResponse is the response type for the
 // DescribeRefreshSchemasStatus API operation.
 type DescribeRefreshSchemasStatusResponse struct {
-	*DescribeRefreshSchemasStatusOutput
+	*types.DescribeRefreshSchemasStatusOutput
 
 	response *aws.Response
 }

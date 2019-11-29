@@ -6,135 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/lambda/types"
 )
-
-type ListEventSourceMappingsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the event source.
-	//
-	//    * Amazon Kinesis - The ARN of the data stream or a stream consumer.
-	//
-	//    * Amazon DynamoDB Streams - The ARN of the stream.
-	//
-	//    * Amazon Simple Queue Service - The ARN of the queue.
-	EventSourceArn *string `location:"querystring" locationName:"EventSourceArn" type:"string"`
-
-	// The name of the Lambda function.
-	//
-	// Name formats
-	//
-	//    * Function name - MyFunction.
-	//
-	//    * Function ARN - arn:aws:lambda:us-west-2:123456789012:function:MyFunction.
-	//
-	//    * Version or Alias ARN - arn:aws:lambda:us-west-2:123456789012:function:MyFunction:PROD.
-	//
-	//    * Partial ARN - 123456789012:function:MyFunction.
-	//
-	// The length constraint applies only to the full ARN. If you specify only the
-	// function name, it's limited to 64 characters in length.
-	FunctionName *string `location:"querystring" locationName:"FunctionName" min:"1" type:"string"`
-
-	// A pagination token returned by a previous call.
-	Marker *string `location:"querystring" locationName:"Marker" type:"string"`
-
-	// The maximum number of event source mappings to return.
-	MaxItems *int64 `location:"querystring" locationName:"MaxItems" min:"1" type:"integer"`
-}
-
-// String returns the string representation
-func (s ListEventSourceMappingsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListEventSourceMappingsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListEventSourceMappingsInput"}
-	if s.FunctionName != nil && len(*s.FunctionName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("FunctionName", 1))
-	}
-	if s.MaxItems != nil && *s.MaxItems < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxItems", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListEventSourceMappingsInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.EventSourceArn != nil {
-		v := *s.EventSourceArn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "EventSourceArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.FunctionName != nil {
-		v := *s.FunctionName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "FunctionName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Marker != nil {
-		v := *s.Marker
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "Marker", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.MaxItems != nil {
-		v := *s.MaxItems
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "MaxItems", protocol.Int64Value(v), metadata)
-	}
-	return nil
-}
-
-type ListEventSourceMappingsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A list of event source mappings.
-	EventSourceMappings []EventSourceMappingConfiguration `type:"list"`
-
-	// A pagination token that's returned when the response doesn't contain all
-	// event source mappings.
-	NextMarker *string `type:"string"`
-}
-
-// String returns the string representation
-func (s ListEventSourceMappingsOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListEventSourceMappingsOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.EventSourceMappings != nil {
-		v := s.EventSourceMappings
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "EventSourceMappings", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	if s.NextMarker != nil {
-		v := *s.NextMarker
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "NextMarker", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opListEventSourceMappings = "ListEventSourceMappings"
 
@@ -152,7 +25,7 @@ const opListEventSourceMappings = "ListEventSourceMappings"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/ListEventSourceMappings
-func (c *Client) ListEventSourceMappingsRequest(input *ListEventSourceMappingsInput) ListEventSourceMappingsRequest {
+func (c *Client) ListEventSourceMappingsRequest(input *types.ListEventSourceMappingsInput) ListEventSourceMappingsRequest {
 	op := &aws.Operation{
 		Name:       opListEventSourceMappings,
 		HTTPMethod: "GET",
@@ -166,10 +39,10 @@ func (c *Client) ListEventSourceMappingsRequest(input *ListEventSourceMappingsIn
 	}
 
 	if input == nil {
-		input = &ListEventSourceMappingsInput{}
+		input = &types.ListEventSourceMappingsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListEventSourceMappingsOutput{})
+	req := c.newRequest(op, input, &types.ListEventSourceMappingsOutput{})
 	return ListEventSourceMappingsRequest{Request: req, Input: input, Copy: c.ListEventSourceMappingsRequest}
 }
 
@@ -177,8 +50,8 @@ func (c *Client) ListEventSourceMappingsRequest(input *ListEventSourceMappingsIn
 // ListEventSourceMappings API operation.
 type ListEventSourceMappingsRequest struct {
 	*aws.Request
-	Input *ListEventSourceMappingsInput
-	Copy  func(*ListEventSourceMappingsInput) ListEventSourceMappingsRequest
+	Input *types.ListEventSourceMappingsInput
+	Copy  func(*types.ListEventSourceMappingsInput) ListEventSourceMappingsRequest
 }
 
 // Send marshals and sends the ListEventSourceMappings API request.
@@ -190,7 +63,7 @@ func (r ListEventSourceMappingsRequest) Send(ctx context.Context) (*ListEventSou
 	}
 
 	resp := &ListEventSourceMappingsResponse{
-		ListEventSourceMappingsOutput: r.Request.Data.(*ListEventSourceMappingsOutput),
+		ListEventSourceMappingsOutput: r.Request.Data.(*types.ListEventSourceMappingsOutput),
 		response:                      &aws.Response{Request: r.Request},
 	}
 
@@ -220,7 +93,7 @@ func NewListEventSourceMappingsPaginator(req ListEventSourceMappingsRequest) Lis
 	return ListEventSourceMappingsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListEventSourceMappingsInput
+				var inCpy *types.ListEventSourceMappingsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -240,14 +113,14 @@ type ListEventSourceMappingsPaginator struct {
 	aws.Pager
 }
 
-func (p *ListEventSourceMappingsPaginator) CurrentPage() *ListEventSourceMappingsOutput {
-	return p.Pager.CurrentPage().(*ListEventSourceMappingsOutput)
+func (p *ListEventSourceMappingsPaginator) CurrentPage() *types.ListEventSourceMappingsOutput {
+	return p.Pager.CurrentPage().(*types.ListEventSourceMappingsOutput)
 }
 
 // ListEventSourceMappingsResponse is the response type for the
 // ListEventSourceMappings API operation.
 type ListEventSourceMappingsResponse struct {
-	*ListEventSourceMappingsOutput
+	*types.ListEventSourceMappingsOutput
 
 	response *aws.Response
 }

@@ -6,68 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/waf/types"
 )
-
-type ListActivatedRulesInRuleGroupInput struct {
-	_ struct{} `type:"structure"`
-
-	// Specifies the number of ActivatedRules that you want AWS WAF to return for
-	// this request. If you have more ActivatedRules than the number that you specify
-	// for Limit, the response includes a NextMarker value that you can use to get
-	// another batch of ActivatedRules.
-	Limit *int64 `type:"integer"`
-
-	// If you specify a value for Limit and you have more ActivatedRules than the
-	// value of Limit, AWS WAF returns a NextMarker value in the response that allows
-	// you to list another group of ActivatedRules. For the second and subsequent
-	// ListActivatedRulesInRuleGroup requests, specify the value of NextMarker from
-	// the previous response to get information about another batch of ActivatedRules.
-	NextMarker *string `min:"1" type:"string"`
-
-	// The RuleGroupId of the RuleGroup for which you want to get a list of ActivatedRule
-	// objects.
-	RuleGroupId *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s ListActivatedRulesInRuleGroupInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListActivatedRulesInRuleGroupInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListActivatedRulesInRuleGroupInput"}
-	if s.NextMarker != nil && len(*s.NextMarker) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("NextMarker", 1))
-	}
-	if s.RuleGroupId != nil && len(*s.RuleGroupId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("RuleGroupId", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ListActivatedRulesInRuleGroupOutput struct {
-	_ struct{} `type:"structure"`
-
-	// An array of ActivatedRules objects.
-	ActivatedRules []ActivatedRule `type:"list"`
-
-	// If you have more ActivatedRules than the number that you specified for Limit
-	// in the request, the response includes a NextMarker value. To list more ActivatedRules,
-	// submit another ListActivatedRulesInRuleGroup request, and specify the NextMarker
-	// value from the response in the NextMarker value in the next request.
-	NextMarker *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s ListActivatedRulesInRuleGroupOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListActivatedRulesInRuleGroup = "ListActivatedRulesInRuleGroup"
 
@@ -84,7 +24,7 @@ const opListActivatedRulesInRuleGroup = "ListActivatedRulesInRuleGroup"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/ListActivatedRulesInRuleGroup
-func (c *Client) ListActivatedRulesInRuleGroupRequest(input *ListActivatedRulesInRuleGroupInput) ListActivatedRulesInRuleGroupRequest {
+func (c *Client) ListActivatedRulesInRuleGroupRequest(input *types.ListActivatedRulesInRuleGroupInput) ListActivatedRulesInRuleGroupRequest {
 	op := &aws.Operation{
 		Name:       opListActivatedRulesInRuleGroup,
 		HTTPMethod: "POST",
@@ -92,10 +32,10 @@ func (c *Client) ListActivatedRulesInRuleGroupRequest(input *ListActivatedRulesI
 	}
 
 	if input == nil {
-		input = &ListActivatedRulesInRuleGroupInput{}
+		input = &types.ListActivatedRulesInRuleGroupInput{}
 	}
 
-	req := c.newRequest(op, input, &ListActivatedRulesInRuleGroupOutput{})
+	req := c.newRequest(op, input, &types.ListActivatedRulesInRuleGroupOutput{})
 	return ListActivatedRulesInRuleGroupRequest{Request: req, Input: input, Copy: c.ListActivatedRulesInRuleGroupRequest}
 }
 
@@ -103,8 +43,8 @@ func (c *Client) ListActivatedRulesInRuleGroupRequest(input *ListActivatedRulesI
 // ListActivatedRulesInRuleGroup API operation.
 type ListActivatedRulesInRuleGroupRequest struct {
 	*aws.Request
-	Input *ListActivatedRulesInRuleGroupInput
-	Copy  func(*ListActivatedRulesInRuleGroupInput) ListActivatedRulesInRuleGroupRequest
+	Input *types.ListActivatedRulesInRuleGroupInput
+	Copy  func(*types.ListActivatedRulesInRuleGroupInput) ListActivatedRulesInRuleGroupRequest
 }
 
 // Send marshals and sends the ListActivatedRulesInRuleGroup API request.
@@ -116,7 +56,7 @@ func (r ListActivatedRulesInRuleGroupRequest) Send(ctx context.Context) (*ListAc
 	}
 
 	resp := &ListActivatedRulesInRuleGroupResponse{
-		ListActivatedRulesInRuleGroupOutput: r.Request.Data.(*ListActivatedRulesInRuleGroupOutput),
+		ListActivatedRulesInRuleGroupOutput: r.Request.Data.(*types.ListActivatedRulesInRuleGroupOutput),
 		response:                            &aws.Response{Request: r.Request},
 	}
 
@@ -126,7 +66,7 @@ func (r ListActivatedRulesInRuleGroupRequest) Send(ctx context.Context) (*ListAc
 // ListActivatedRulesInRuleGroupResponse is the response type for the
 // ListActivatedRulesInRuleGroup API operation.
 type ListActivatedRulesInRuleGroupResponse struct {
-	*ListActivatedRulesInRuleGroupOutput
+	*types.ListActivatedRulesInRuleGroupOutput
 
 	response *aws.Response
 }

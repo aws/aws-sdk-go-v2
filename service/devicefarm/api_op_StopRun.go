@@ -6,54 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/devicefarm/types"
 )
-
-// Represents the request to stop a specific run.
-type StopRunInput struct {
-	_ struct{} `type:"structure"`
-
-	// Represents the Amazon Resource Name (ARN) of the Device Farm run you wish
-	// to stop.
-	//
-	// Arn is a required field
-	Arn *string `locationName:"arn" min:"32" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s StopRunInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *StopRunInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "StopRunInput"}
-
-	if s.Arn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Arn"))
-	}
-	if s.Arn != nil && len(*s.Arn) < 32 {
-		invalidParams.Add(aws.NewErrParamMinLen("Arn", 32))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Represents the results of your stop run attempt.
-type StopRunOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The run that was stopped.
-	Run *Run `locationName:"run" type:"structure"`
-}
-
-// String returns the string representation
-func (s StopRunOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opStopRun = "StopRun"
 
@@ -75,7 +29,7 @@ const opStopRun = "StopRun"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/StopRun
-func (c *Client) StopRunRequest(input *StopRunInput) StopRunRequest {
+func (c *Client) StopRunRequest(input *types.StopRunInput) StopRunRequest {
 	op := &aws.Operation{
 		Name:       opStopRun,
 		HTTPMethod: "POST",
@@ -83,10 +37,10 @@ func (c *Client) StopRunRequest(input *StopRunInput) StopRunRequest {
 	}
 
 	if input == nil {
-		input = &StopRunInput{}
+		input = &types.StopRunInput{}
 	}
 
-	req := c.newRequest(op, input, &StopRunOutput{})
+	req := c.newRequest(op, input, &types.StopRunOutput{})
 	return StopRunRequest{Request: req, Input: input, Copy: c.StopRunRequest}
 }
 
@@ -94,8 +48,8 @@ func (c *Client) StopRunRequest(input *StopRunInput) StopRunRequest {
 // StopRun API operation.
 type StopRunRequest struct {
 	*aws.Request
-	Input *StopRunInput
-	Copy  func(*StopRunInput) StopRunRequest
+	Input *types.StopRunInput
+	Copy  func(*types.StopRunInput) StopRunRequest
 }
 
 // Send marshals and sends the StopRun API request.
@@ -107,7 +61,7 @@ func (r StopRunRequest) Send(ctx context.Context) (*StopRunResponse, error) {
 	}
 
 	resp := &StopRunResponse{
-		StopRunOutput: r.Request.Data.(*StopRunOutput),
+		StopRunOutput: r.Request.Data.(*types.StopRunOutput),
 		response:      &aws.Response{Request: r.Request},
 	}
 
@@ -117,7 +71,7 @@ func (r StopRunRequest) Send(ctx context.Context) (*StopRunResponse, error) {
 // StopRunResponse is the response type for the
 // StopRun API operation.
 type StopRunResponse struct {
-	*StopRunOutput
+	*types.StopRunOutput
 
 	response *aws.Response
 }

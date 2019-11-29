@@ -6,64 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/globalaccelerator/types"
 )
-
-type ListListenersInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the accelerator for which you want to list
-	// listener objects.
-	//
-	// AcceleratorArn is a required field
-	AcceleratorArn *string `type:"string" required:"true"`
-
-	// The number of listener objects that you want to return with this call. The
-	// default value is 10.
-	MaxResults *int64 `min:"1" type:"integer"`
-
-	// The token for the next set of results. You receive this token from a previous
-	// call.
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s ListListenersInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListListenersInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListListenersInput"}
-
-	if s.AcceleratorArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("AcceleratorArn"))
-	}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ListListenersOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The list of listeners for an accelerator.
-	Listeners []Listener `type:"list"`
-
-	// The token for the next set of results. You receive this token from a previous
-	// call.
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s ListListenersOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListListeners = "ListListeners"
 
@@ -80,7 +24,7 @@ const opListListeners = "ListListeners"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/ListListeners
-func (c *Client) ListListenersRequest(input *ListListenersInput) ListListenersRequest {
+func (c *Client) ListListenersRequest(input *types.ListListenersInput) ListListenersRequest {
 	op := &aws.Operation{
 		Name:       opListListeners,
 		HTTPMethod: "POST",
@@ -88,10 +32,10 @@ func (c *Client) ListListenersRequest(input *ListListenersInput) ListListenersRe
 	}
 
 	if input == nil {
-		input = &ListListenersInput{}
+		input = &types.ListListenersInput{}
 	}
 
-	req := c.newRequest(op, input, &ListListenersOutput{})
+	req := c.newRequest(op, input, &types.ListListenersOutput{})
 	return ListListenersRequest{Request: req, Input: input, Copy: c.ListListenersRequest}
 }
 
@@ -99,8 +43,8 @@ func (c *Client) ListListenersRequest(input *ListListenersInput) ListListenersRe
 // ListListeners API operation.
 type ListListenersRequest struct {
 	*aws.Request
-	Input *ListListenersInput
-	Copy  func(*ListListenersInput) ListListenersRequest
+	Input *types.ListListenersInput
+	Copy  func(*types.ListListenersInput) ListListenersRequest
 }
 
 // Send marshals and sends the ListListeners API request.
@@ -112,7 +56,7 @@ func (r ListListenersRequest) Send(ctx context.Context) (*ListListenersResponse,
 	}
 
 	resp := &ListListenersResponse{
-		ListListenersOutput: r.Request.Data.(*ListListenersOutput),
+		ListListenersOutput: r.Request.Data.(*types.ListListenersOutput),
 		response:            &aws.Response{Request: r.Request},
 	}
 
@@ -122,7 +66,7 @@ func (r ListListenersRequest) Send(ctx context.Context) (*ListListenersResponse,
 // ListListenersResponse is the response type for the
 // ListListeners API operation.
 type ListListenersResponse struct {
-	*ListListenersOutput
+	*types.ListListenersOutput
 
 	response *aws.Response
 }

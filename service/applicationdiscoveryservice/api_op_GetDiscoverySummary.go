@@ -6,44 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/applicationdiscoveryservice/types"
 )
-
-type GetDiscoverySummaryInput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s GetDiscoverySummaryInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type GetDiscoverySummaryOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Details about discovered agents, including agent status and health.
-	AgentSummary *CustomerAgentInfo `locationName:"agentSummary" type:"structure"`
-
-	// The number of applications discovered.
-	Applications *int64 `locationName:"applications" type:"long"`
-
-	// Details about discovered connectors, including connector status and health.
-	ConnectorSummary *CustomerConnectorInfo `locationName:"connectorSummary" type:"structure"`
-
-	// The number of servers discovered.
-	Servers *int64 `locationName:"servers" type:"long"`
-
-	// The number of servers mapped to applications.
-	ServersMappedToApplications *int64 `locationName:"serversMappedToApplications" type:"long"`
-
-	// The number of servers mapped to tags.
-	ServersMappedtoTags *int64 `locationName:"serversMappedtoTags" type:"long"`
-}
-
-// String returns the string representation
-func (s GetDiscoverySummaryOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetDiscoverySummary = "GetDiscoverySummary"
 
@@ -63,7 +27,7 @@ const opGetDiscoverySummary = "GetDiscoverySummary"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/discovery-2015-11-01/GetDiscoverySummary
-func (c *Client) GetDiscoverySummaryRequest(input *GetDiscoverySummaryInput) GetDiscoverySummaryRequest {
+func (c *Client) GetDiscoverySummaryRequest(input *types.GetDiscoverySummaryInput) GetDiscoverySummaryRequest {
 	op := &aws.Operation{
 		Name:       opGetDiscoverySummary,
 		HTTPMethod: "POST",
@@ -71,10 +35,10 @@ func (c *Client) GetDiscoverySummaryRequest(input *GetDiscoverySummaryInput) Get
 	}
 
 	if input == nil {
-		input = &GetDiscoverySummaryInput{}
+		input = &types.GetDiscoverySummaryInput{}
 	}
 
-	req := c.newRequest(op, input, &GetDiscoverySummaryOutput{})
+	req := c.newRequest(op, input, &types.GetDiscoverySummaryOutput{})
 	return GetDiscoverySummaryRequest{Request: req, Input: input, Copy: c.GetDiscoverySummaryRequest}
 }
 
@@ -82,8 +46,8 @@ func (c *Client) GetDiscoverySummaryRequest(input *GetDiscoverySummaryInput) Get
 // GetDiscoverySummary API operation.
 type GetDiscoverySummaryRequest struct {
 	*aws.Request
-	Input *GetDiscoverySummaryInput
-	Copy  func(*GetDiscoverySummaryInput) GetDiscoverySummaryRequest
+	Input *types.GetDiscoverySummaryInput
+	Copy  func(*types.GetDiscoverySummaryInput) GetDiscoverySummaryRequest
 }
 
 // Send marshals and sends the GetDiscoverySummary API request.
@@ -95,7 +59,7 @@ func (r GetDiscoverySummaryRequest) Send(ctx context.Context) (*GetDiscoverySumm
 	}
 
 	resp := &GetDiscoverySummaryResponse{
-		GetDiscoverySummaryOutput: r.Request.Data.(*GetDiscoverySummaryOutput),
+		GetDiscoverySummaryOutput: r.Request.Data.(*types.GetDiscoverySummaryOutput),
 		response:                  &aws.Response{Request: r.Request},
 	}
 
@@ -105,7 +69,7 @@ func (r GetDiscoverySummaryRequest) Send(ctx context.Context) (*GetDiscoverySumm
 // GetDiscoverySummaryResponse is the response type for the
 // GetDiscoverySummary API operation.
 type GetDiscoverySummaryResponse struct {
-	*GetDiscoverySummaryOutput
+	*types.GetDiscoverySummaryOutput
 
 	response *aws.Response
 }

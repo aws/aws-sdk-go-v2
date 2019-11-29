@@ -6,58 +6,16 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/workspaces/types"
 )
-
-type DescribeAccountModificationsInput struct {
-	_ struct{} `type:"structure"`
-
-	// If you received a NextToken from a previous call that was paginated, provide
-	// this token to receive the next set of results.
-	NextToken *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeAccountModificationsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeAccountModificationsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeAccountModificationsInput"}
-	if s.NextToken != nil && len(*s.NextToken) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribeAccountModificationsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The list of modifications to the configuration of BYOL.
-	AccountModifications []AccountModification `type:"list"`
-
-	// The token to use to retrieve the next set of results, or null if no more
-	// results are available.
-	NextToken *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeAccountModificationsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeAccountModifications = "DescribeAccountModifications"
 
 // DescribeAccountModificationsRequest returns a request value for making API operation for
 // Amazon WorkSpaces.
 //
-// Retrieves a list that describes modifications to the configuration of bring
-// your own license (BYOL) for the specified account.
+// Retrieves a list that describes modifications to the configuration of Bring
+// Your Own License (BYOL) for the specified account.
 //
 //    // Example sending a request using DescribeAccountModificationsRequest.
 //    req := client.DescribeAccountModificationsRequest(params)
@@ -67,7 +25,7 @@ const opDescribeAccountModifications = "DescribeAccountModifications"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DescribeAccountModifications
-func (c *Client) DescribeAccountModificationsRequest(input *DescribeAccountModificationsInput) DescribeAccountModificationsRequest {
+func (c *Client) DescribeAccountModificationsRequest(input *types.DescribeAccountModificationsInput) DescribeAccountModificationsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeAccountModifications,
 		HTTPMethod: "POST",
@@ -75,10 +33,10 @@ func (c *Client) DescribeAccountModificationsRequest(input *DescribeAccountModif
 	}
 
 	if input == nil {
-		input = &DescribeAccountModificationsInput{}
+		input = &types.DescribeAccountModificationsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeAccountModificationsOutput{})
+	req := c.newRequest(op, input, &types.DescribeAccountModificationsOutput{})
 	return DescribeAccountModificationsRequest{Request: req, Input: input, Copy: c.DescribeAccountModificationsRequest}
 }
 
@@ -86,8 +44,8 @@ func (c *Client) DescribeAccountModificationsRequest(input *DescribeAccountModif
 // DescribeAccountModifications API operation.
 type DescribeAccountModificationsRequest struct {
 	*aws.Request
-	Input *DescribeAccountModificationsInput
-	Copy  func(*DescribeAccountModificationsInput) DescribeAccountModificationsRequest
+	Input *types.DescribeAccountModificationsInput
+	Copy  func(*types.DescribeAccountModificationsInput) DescribeAccountModificationsRequest
 }
 
 // Send marshals and sends the DescribeAccountModifications API request.
@@ -99,7 +57,7 @@ func (r DescribeAccountModificationsRequest) Send(ctx context.Context) (*Describ
 	}
 
 	resp := &DescribeAccountModificationsResponse{
-		DescribeAccountModificationsOutput: r.Request.Data.(*DescribeAccountModificationsOutput),
+		DescribeAccountModificationsOutput: r.Request.Data.(*types.DescribeAccountModificationsOutput),
 		response:                           &aws.Response{Request: r.Request},
 	}
 
@@ -109,7 +67,7 @@ func (r DescribeAccountModificationsRequest) Send(ctx context.Context) (*Describ
 // DescribeAccountModificationsResponse is the response type for the
 // DescribeAccountModifications API operation.
 type DescribeAccountModificationsResponse struct {
-	*DescribeAccountModificationsOutput
+	*types.DescribeAccountModificationsOutput
 
 	response *aws.Response
 }

@@ -6,56 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/fms/types"
 )
-
-type PutPolicyInput struct {
-	_ struct{} `type:"structure"`
-
-	// The details of the AWS Firewall Manager policy to be created.
-	//
-	// Policy is a required field
-	Policy *Policy `type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s PutPolicyInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *PutPolicyInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "PutPolicyInput"}
-
-	if s.Policy == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Policy"))
-	}
-	if s.Policy != nil {
-		if err := s.Policy.Validate(); err != nil {
-			invalidParams.AddNested("Policy", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type PutPolicyOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The details of the AWS Firewall Manager policy that was created.
-	Policy *Policy `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the policy that was created.
-	PolicyArn *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s PutPolicyOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opPutPolicy = "PutPolicy"
 
@@ -91,7 +43,7 @@ const opPutPolicy = "PutPolicy"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/PutPolicy
-func (c *Client) PutPolicyRequest(input *PutPolicyInput) PutPolicyRequest {
+func (c *Client) PutPolicyRequest(input *types.PutPolicyInput) PutPolicyRequest {
 	op := &aws.Operation{
 		Name:       opPutPolicy,
 		HTTPMethod: "POST",
@@ -99,10 +51,10 @@ func (c *Client) PutPolicyRequest(input *PutPolicyInput) PutPolicyRequest {
 	}
 
 	if input == nil {
-		input = &PutPolicyInput{}
+		input = &types.PutPolicyInput{}
 	}
 
-	req := c.newRequest(op, input, &PutPolicyOutput{})
+	req := c.newRequest(op, input, &types.PutPolicyOutput{})
 	return PutPolicyRequest{Request: req, Input: input, Copy: c.PutPolicyRequest}
 }
 
@@ -110,8 +62,8 @@ func (c *Client) PutPolicyRequest(input *PutPolicyInput) PutPolicyRequest {
 // PutPolicy API operation.
 type PutPolicyRequest struct {
 	*aws.Request
-	Input *PutPolicyInput
-	Copy  func(*PutPolicyInput) PutPolicyRequest
+	Input *types.PutPolicyInput
+	Copy  func(*types.PutPolicyInput) PutPolicyRequest
 }
 
 // Send marshals and sends the PutPolicy API request.
@@ -123,7 +75,7 @@ func (r PutPolicyRequest) Send(ctx context.Context) (*PutPolicyResponse, error) 
 	}
 
 	resp := &PutPolicyResponse{
-		PutPolicyOutput: r.Request.Data.(*PutPolicyOutput),
+		PutPolicyOutput: r.Request.Data.(*types.PutPolicyOutput),
 		response:        &aws.Response{Request: r.Request},
 	}
 
@@ -133,7 +85,7 @@ func (r PutPolicyRequest) Send(ctx context.Context) (*PutPolicyResponse, error) 
 // PutPolicyResponse is the response type for the
 // PutPolicy API operation.
 type PutPolicyResponse struct {
-	*PutPolicyOutput
+	*types.PutPolicyOutput
 
 	response *aws.Response
 }

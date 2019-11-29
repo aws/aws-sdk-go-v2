@@ -6,48 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/lightsail/types"
 )
-
-type GetRelationalDatabaseSnapshotInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the database snapshot for which to get information.
-	//
-	// RelationalDatabaseSnapshotName is a required field
-	RelationalDatabaseSnapshotName *string `locationName:"relationalDatabaseSnapshotName" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetRelationalDatabaseSnapshotInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetRelationalDatabaseSnapshotInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetRelationalDatabaseSnapshotInput"}
-
-	if s.RelationalDatabaseSnapshotName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("RelationalDatabaseSnapshotName"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type GetRelationalDatabaseSnapshotOutput struct {
-	_ struct{} `type:"structure"`
-
-	// An object describing the specified database snapshot.
-	RelationalDatabaseSnapshot *RelationalDatabaseSnapshot `locationName:"relationalDatabaseSnapshot" type:"structure"`
-}
-
-// String returns the string representation
-func (s GetRelationalDatabaseSnapshotOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetRelationalDatabaseSnapshot = "GetRelationalDatabaseSnapshot"
 
@@ -64,7 +24,7 @@ const opGetRelationalDatabaseSnapshot = "GetRelationalDatabaseSnapshot"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetRelationalDatabaseSnapshot
-func (c *Client) GetRelationalDatabaseSnapshotRequest(input *GetRelationalDatabaseSnapshotInput) GetRelationalDatabaseSnapshotRequest {
+func (c *Client) GetRelationalDatabaseSnapshotRequest(input *types.GetRelationalDatabaseSnapshotInput) GetRelationalDatabaseSnapshotRequest {
 	op := &aws.Operation{
 		Name:       opGetRelationalDatabaseSnapshot,
 		HTTPMethod: "POST",
@@ -72,10 +32,10 @@ func (c *Client) GetRelationalDatabaseSnapshotRequest(input *GetRelationalDataba
 	}
 
 	if input == nil {
-		input = &GetRelationalDatabaseSnapshotInput{}
+		input = &types.GetRelationalDatabaseSnapshotInput{}
 	}
 
-	req := c.newRequest(op, input, &GetRelationalDatabaseSnapshotOutput{})
+	req := c.newRequest(op, input, &types.GetRelationalDatabaseSnapshotOutput{})
 	return GetRelationalDatabaseSnapshotRequest{Request: req, Input: input, Copy: c.GetRelationalDatabaseSnapshotRequest}
 }
 
@@ -83,8 +43,8 @@ func (c *Client) GetRelationalDatabaseSnapshotRequest(input *GetRelationalDataba
 // GetRelationalDatabaseSnapshot API operation.
 type GetRelationalDatabaseSnapshotRequest struct {
 	*aws.Request
-	Input *GetRelationalDatabaseSnapshotInput
-	Copy  func(*GetRelationalDatabaseSnapshotInput) GetRelationalDatabaseSnapshotRequest
+	Input *types.GetRelationalDatabaseSnapshotInput
+	Copy  func(*types.GetRelationalDatabaseSnapshotInput) GetRelationalDatabaseSnapshotRequest
 }
 
 // Send marshals and sends the GetRelationalDatabaseSnapshot API request.
@@ -96,7 +56,7 @@ func (r GetRelationalDatabaseSnapshotRequest) Send(ctx context.Context) (*GetRel
 	}
 
 	resp := &GetRelationalDatabaseSnapshotResponse{
-		GetRelationalDatabaseSnapshotOutput: r.Request.Data.(*GetRelationalDatabaseSnapshotOutput),
+		GetRelationalDatabaseSnapshotOutput: r.Request.Data.(*types.GetRelationalDatabaseSnapshotOutput),
 		response:                            &aws.Response{Request: r.Request},
 	}
 
@@ -106,7 +66,7 @@ func (r GetRelationalDatabaseSnapshotRequest) Send(ctx context.Context) (*GetRel
 // GetRelationalDatabaseSnapshotResponse is the response type for the
 // GetRelationalDatabaseSnapshot API operation.
 type GetRelationalDatabaseSnapshotResponse struct {
-	*GetRelationalDatabaseSnapshotOutput
+	*types.GetRelationalDatabaseSnapshotOutput
 
 	response *aws.Response
 }

@@ -6,66 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/elasticloadbalancing/types"
 )
-
-// Contains the parameters for SetLoadBalancerPoliciesForBackendServer.
-type SetLoadBalancerPoliciesForBackendServerInput struct {
-	_ struct{} `type:"structure"`
-
-	// The port number associated with the EC2 instance.
-	//
-	// InstancePort is a required field
-	InstancePort *int64 `type:"integer" required:"true"`
-
-	// The name of the load balancer.
-	//
-	// LoadBalancerName is a required field
-	LoadBalancerName *string `type:"string" required:"true"`
-
-	// The names of the policies. If the list is empty, then all current polices
-	// are removed from the EC2 instance.
-	//
-	// PolicyNames is a required field
-	PolicyNames []string `type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s SetLoadBalancerPoliciesForBackendServerInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *SetLoadBalancerPoliciesForBackendServerInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "SetLoadBalancerPoliciesForBackendServerInput"}
-
-	if s.InstancePort == nil {
-		invalidParams.Add(aws.NewErrParamRequired("InstancePort"))
-	}
-
-	if s.LoadBalancerName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("LoadBalancerName"))
-	}
-
-	if s.PolicyNames == nil {
-		invalidParams.Add(aws.NewErrParamRequired("PolicyNames"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Contains the output of SetLoadBalancerPoliciesForBackendServer.
-type SetLoadBalancerPoliciesForBackendServerOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s SetLoadBalancerPoliciesForBackendServerOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opSetLoadBalancerPoliciesForBackendServer = "SetLoadBalancerPoliciesForBackendServer"
 
@@ -97,7 +39,7 @@ const opSetLoadBalancerPoliciesForBackendServer = "SetLoadBalancerPoliciesForBac
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/SetLoadBalancerPoliciesForBackendServer
-func (c *Client) SetLoadBalancerPoliciesForBackendServerRequest(input *SetLoadBalancerPoliciesForBackendServerInput) SetLoadBalancerPoliciesForBackendServerRequest {
+func (c *Client) SetLoadBalancerPoliciesForBackendServerRequest(input *types.SetLoadBalancerPoliciesForBackendServerInput) SetLoadBalancerPoliciesForBackendServerRequest {
 	op := &aws.Operation{
 		Name:       opSetLoadBalancerPoliciesForBackendServer,
 		HTTPMethod: "POST",
@@ -105,10 +47,10 @@ func (c *Client) SetLoadBalancerPoliciesForBackendServerRequest(input *SetLoadBa
 	}
 
 	if input == nil {
-		input = &SetLoadBalancerPoliciesForBackendServerInput{}
+		input = &types.SetLoadBalancerPoliciesForBackendServerInput{}
 	}
 
-	req := c.newRequest(op, input, &SetLoadBalancerPoliciesForBackendServerOutput{})
+	req := c.newRequest(op, input, &types.SetLoadBalancerPoliciesForBackendServerOutput{})
 	return SetLoadBalancerPoliciesForBackendServerRequest{Request: req, Input: input, Copy: c.SetLoadBalancerPoliciesForBackendServerRequest}
 }
 
@@ -116,8 +58,8 @@ func (c *Client) SetLoadBalancerPoliciesForBackendServerRequest(input *SetLoadBa
 // SetLoadBalancerPoliciesForBackendServer API operation.
 type SetLoadBalancerPoliciesForBackendServerRequest struct {
 	*aws.Request
-	Input *SetLoadBalancerPoliciesForBackendServerInput
-	Copy  func(*SetLoadBalancerPoliciesForBackendServerInput) SetLoadBalancerPoliciesForBackendServerRequest
+	Input *types.SetLoadBalancerPoliciesForBackendServerInput
+	Copy  func(*types.SetLoadBalancerPoliciesForBackendServerInput) SetLoadBalancerPoliciesForBackendServerRequest
 }
 
 // Send marshals and sends the SetLoadBalancerPoliciesForBackendServer API request.
@@ -129,7 +71,7 @@ func (r SetLoadBalancerPoliciesForBackendServerRequest) Send(ctx context.Context
 	}
 
 	resp := &SetLoadBalancerPoliciesForBackendServerResponse{
-		SetLoadBalancerPoliciesForBackendServerOutput: r.Request.Data.(*SetLoadBalancerPoliciesForBackendServerOutput),
+		SetLoadBalancerPoliciesForBackendServerOutput: r.Request.Data.(*types.SetLoadBalancerPoliciesForBackendServerOutput),
 		response: &aws.Response{Request: r.Request},
 	}
 
@@ -139,7 +81,7 @@ func (r SetLoadBalancerPoliciesForBackendServerRequest) Send(ctx context.Context
 // SetLoadBalancerPoliciesForBackendServerResponse is the response type for the
 // SetLoadBalancerPoliciesForBackendServer API operation.
 type SetLoadBalancerPoliciesForBackendServerResponse struct {
-	*SetLoadBalancerPoliciesForBackendServerOutput
+	*types.SetLoadBalancerPoliciesForBackendServerOutput
 
 	response *aws.Response
 }

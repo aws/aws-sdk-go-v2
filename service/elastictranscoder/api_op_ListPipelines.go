@@ -6,88 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/elastictranscoder/types"
 )
-
-// The ListPipelineRequest structure.
-type ListPipelinesInput struct {
-	_ struct{} `type:"structure"`
-
-	// To list pipelines in chronological order by the date and time that they were
-	// created, enter true. To list pipelines in reverse chronological order, enter
-	// false.
-	Ascending *string `location:"querystring" locationName:"Ascending" type:"string"`
-
-	// When Elastic Transcoder returns more than one page of results, use pageToken
-	// in subsequent GET requests to get each successive page of results.
-	PageToken *string `location:"querystring" locationName:"PageToken" type:"string"`
-}
-
-// String returns the string representation
-func (s ListPipelinesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListPipelinesInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.Ascending != nil {
-		v := *s.Ascending
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "Ascending", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.PageToken != nil {
-		v := *s.PageToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "PageToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-// A list of the pipelines associated with the current AWS account.
-type ListPipelinesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A value that you use to access the second and subsequent pages of results,
-	// if any. When the pipelines fit on one page or when you've reached the last
-	// page of results, the value of NextPageToken is null.
-	NextPageToken *string `type:"string"`
-
-	// An array of Pipeline objects.
-	Pipelines []Pipeline `type:"list"`
-}
-
-// String returns the string representation
-func (s ListPipelinesOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListPipelinesOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.NextPageToken != nil {
-		v := *s.NextPageToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "NextPageToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Pipelines != nil {
-		v := s.Pipelines
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "Pipelines", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	return nil
-}
 
 const opListPipelines = "ListPipelines"
 
@@ -103,7 +23,7 @@ const opListPipelines = "ListPipelines"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) ListPipelinesRequest(input *ListPipelinesInput) ListPipelinesRequest {
+func (c *Client) ListPipelinesRequest(input *types.ListPipelinesInput) ListPipelinesRequest {
 	op := &aws.Operation{
 		Name:       opListPipelines,
 		HTTPMethod: "GET",
@@ -117,10 +37,10 @@ func (c *Client) ListPipelinesRequest(input *ListPipelinesInput) ListPipelinesRe
 	}
 
 	if input == nil {
-		input = &ListPipelinesInput{}
+		input = &types.ListPipelinesInput{}
 	}
 
-	req := c.newRequest(op, input, &ListPipelinesOutput{})
+	req := c.newRequest(op, input, &types.ListPipelinesOutput{})
 	return ListPipelinesRequest{Request: req, Input: input, Copy: c.ListPipelinesRequest}
 }
 
@@ -128,8 +48,8 @@ func (c *Client) ListPipelinesRequest(input *ListPipelinesInput) ListPipelinesRe
 // ListPipelines API operation.
 type ListPipelinesRequest struct {
 	*aws.Request
-	Input *ListPipelinesInput
-	Copy  func(*ListPipelinesInput) ListPipelinesRequest
+	Input *types.ListPipelinesInput
+	Copy  func(*types.ListPipelinesInput) ListPipelinesRequest
 }
 
 // Send marshals and sends the ListPipelines API request.
@@ -141,7 +61,7 @@ func (r ListPipelinesRequest) Send(ctx context.Context) (*ListPipelinesResponse,
 	}
 
 	resp := &ListPipelinesResponse{
-		ListPipelinesOutput: r.Request.Data.(*ListPipelinesOutput),
+		ListPipelinesOutput: r.Request.Data.(*types.ListPipelinesOutput),
 		response:            &aws.Response{Request: r.Request},
 	}
 
@@ -171,7 +91,7 @@ func NewListPipelinesPaginator(req ListPipelinesRequest) ListPipelinesPaginator 
 	return ListPipelinesPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListPipelinesInput
+				var inCpy *types.ListPipelinesInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -191,14 +111,14 @@ type ListPipelinesPaginator struct {
 	aws.Pager
 }
 
-func (p *ListPipelinesPaginator) CurrentPage() *ListPipelinesOutput {
-	return p.Pager.CurrentPage().(*ListPipelinesOutput)
+func (p *ListPipelinesPaginator) CurrentPage() *types.ListPipelinesOutput {
+	return p.Pager.CurrentPage().(*types.ListPipelinesOutput)
 }
 
 // ListPipelinesResponse is the response type for the
 // ListPipelines API operation.
 type ListPipelinesResponse struct {
-	*ListPipelinesOutput
+	*types.ListPipelinesOutput
 
 	response *aws.Response
 }

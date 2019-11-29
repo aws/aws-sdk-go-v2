@@ -6,94 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/worklink/types"
 )
-
-type UpdateIdentityProviderConfigurationInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ARN of the fleet.
-	//
-	// FleetArn is a required field
-	FleetArn *string `min:"20" type:"string" required:"true"`
-
-	// The SAML metadata document provided by the customer’s identity provider.
-	// The existing IdentityProviderSamlMetadata is unset if null is passed.
-	IdentityProviderSamlMetadata *string `min:"1" type:"string"`
-
-	// The type of identity provider.
-	//
-	// IdentityProviderType is a required field
-	IdentityProviderType IdentityProviderType `type:"string" required:"true" enum:"true"`
-}
-
-// String returns the string representation
-func (s UpdateIdentityProviderConfigurationInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateIdentityProviderConfigurationInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateIdentityProviderConfigurationInput"}
-
-	if s.FleetArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("FleetArn"))
-	}
-	if s.FleetArn != nil && len(*s.FleetArn) < 20 {
-		invalidParams.Add(aws.NewErrParamMinLen("FleetArn", 20))
-	}
-	if s.IdentityProviderSamlMetadata != nil && len(*s.IdentityProviderSamlMetadata) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("IdentityProviderSamlMetadata", 1))
-	}
-	if len(s.IdentityProviderType) == 0 {
-		invalidParams.Add(aws.NewErrParamRequired("IdentityProviderType"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s UpdateIdentityProviderConfigurationInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.FleetArn != nil {
-		v := *s.FleetArn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "FleetArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.IdentityProviderSamlMetadata != nil {
-		v := *s.IdentityProviderSamlMetadata
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "IdentityProviderSamlMetadata", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if len(s.IdentityProviderType) > 0 {
-		v := s.IdentityProviderType
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "IdentityProviderType", protocol.QuotedValue{ValueMarshaler: v}, metadata)
-	}
-	return nil
-}
-
-type UpdateIdentityProviderConfigurationOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s UpdateIdentityProviderConfigurationOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s UpdateIdentityProviderConfigurationOutput) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
 
 const opUpdateIdentityProviderConfiguration = "UpdateIdentityProviderConfiguration"
 
@@ -110,7 +24,7 @@ const opUpdateIdentityProviderConfiguration = "UpdateIdentityProviderConfigurati
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/worklink-2018-09-25/UpdateIdentityProviderConfiguration
-func (c *Client) UpdateIdentityProviderConfigurationRequest(input *UpdateIdentityProviderConfigurationInput) UpdateIdentityProviderConfigurationRequest {
+func (c *Client) UpdateIdentityProviderConfigurationRequest(input *types.UpdateIdentityProviderConfigurationInput) UpdateIdentityProviderConfigurationRequest {
 	op := &aws.Operation{
 		Name:       opUpdateIdentityProviderConfiguration,
 		HTTPMethod: "POST",
@@ -118,10 +32,10 @@ func (c *Client) UpdateIdentityProviderConfigurationRequest(input *UpdateIdentit
 	}
 
 	if input == nil {
-		input = &UpdateIdentityProviderConfigurationInput{}
+		input = &types.UpdateIdentityProviderConfigurationInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateIdentityProviderConfigurationOutput{})
+	req := c.newRequest(op, input, &types.UpdateIdentityProviderConfigurationOutput{})
 	return UpdateIdentityProviderConfigurationRequest{Request: req, Input: input, Copy: c.UpdateIdentityProviderConfigurationRequest}
 }
 
@@ -129,8 +43,8 @@ func (c *Client) UpdateIdentityProviderConfigurationRequest(input *UpdateIdentit
 // UpdateIdentityProviderConfiguration API operation.
 type UpdateIdentityProviderConfigurationRequest struct {
 	*aws.Request
-	Input *UpdateIdentityProviderConfigurationInput
-	Copy  func(*UpdateIdentityProviderConfigurationInput) UpdateIdentityProviderConfigurationRequest
+	Input *types.UpdateIdentityProviderConfigurationInput
+	Copy  func(*types.UpdateIdentityProviderConfigurationInput) UpdateIdentityProviderConfigurationRequest
 }
 
 // Send marshals and sends the UpdateIdentityProviderConfiguration API request.
@@ -142,7 +56,7 @@ func (r UpdateIdentityProviderConfigurationRequest) Send(ctx context.Context) (*
 	}
 
 	resp := &UpdateIdentityProviderConfigurationResponse{
-		UpdateIdentityProviderConfigurationOutput: r.Request.Data.(*UpdateIdentityProviderConfigurationOutput),
+		UpdateIdentityProviderConfigurationOutput: r.Request.Data.(*types.UpdateIdentityProviderConfigurationOutput),
 		response: &aws.Response{Request: r.Request},
 	}
 
@@ -152,7 +66,7 @@ func (r UpdateIdentityProviderConfigurationRequest) Send(ctx context.Context) (*
 // UpdateIdentityProviderConfigurationResponse is the response type for the
 // UpdateIdentityProviderConfiguration API operation.
 type UpdateIdentityProviderConfigurationResponse struct {
-	*UpdateIdentityProviderConfigurationOutput
+	*types.UpdateIdentityProviderConfigurationOutput
 
 	response *aws.Response
 }

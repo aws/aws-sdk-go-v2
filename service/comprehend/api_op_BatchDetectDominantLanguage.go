@@ -6,63 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/comprehend/types"
 )
-
-type BatchDetectDominantLanguageInput struct {
-	_ struct{} `type:"structure"`
-
-	// A list containing the text of the input documents. The list can contain a
-	// maximum of 25 documents. Each document should contain at least 20 characters
-	// and must contain fewer than 5,000 bytes of UTF-8 encoded characters.
-	//
-	// TextList is a required field
-	TextList []string `type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s BatchDetectDominantLanguageInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *BatchDetectDominantLanguageInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "BatchDetectDominantLanguageInput"}
-
-	if s.TextList == nil {
-		invalidParams.Add(aws.NewErrParamRequired("TextList"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type BatchDetectDominantLanguageOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A list containing one object for each document that contained an error. The
-	// results are sorted in ascending order by the Index field and match the order
-	// of the documents in the input list. If there are no errors in the batch,
-	// the ErrorList is empty.
-	//
-	// ErrorList is a required field
-	ErrorList []BatchItemError `type:"list" required:"true"`
-
-	// A list of objects containing the results of the operation. The results are
-	// sorted in ascending order by the Index field and match the order of the documents
-	// in the input list. If all of the documents contain an error, the ResultList
-	// is empty.
-	//
-	// ResultList is a required field
-	ResultList []BatchDetectDominantLanguageItemResult `type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s BatchDetectDominantLanguageOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opBatchDetectDominantLanguage = "BatchDetectDominantLanguage"
 
@@ -81,7 +26,7 @@ const opBatchDetectDominantLanguage = "BatchDetectDominantLanguage"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/BatchDetectDominantLanguage
-func (c *Client) BatchDetectDominantLanguageRequest(input *BatchDetectDominantLanguageInput) BatchDetectDominantLanguageRequest {
+func (c *Client) BatchDetectDominantLanguageRequest(input *types.BatchDetectDominantLanguageInput) BatchDetectDominantLanguageRequest {
 	op := &aws.Operation{
 		Name:       opBatchDetectDominantLanguage,
 		HTTPMethod: "POST",
@@ -89,10 +34,10 @@ func (c *Client) BatchDetectDominantLanguageRequest(input *BatchDetectDominantLa
 	}
 
 	if input == nil {
-		input = &BatchDetectDominantLanguageInput{}
+		input = &types.BatchDetectDominantLanguageInput{}
 	}
 
-	req := c.newRequest(op, input, &BatchDetectDominantLanguageOutput{})
+	req := c.newRequest(op, input, &types.BatchDetectDominantLanguageOutput{})
 	return BatchDetectDominantLanguageRequest{Request: req, Input: input, Copy: c.BatchDetectDominantLanguageRequest}
 }
 
@@ -100,8 +45,8 @@ func (c *Client) BatchDetectDominantLanguageRequest(input *BatchDetectDominantLa
 // BatchDetectDominantLanguage API operation.
 type BatchDetectDominantLanguageRequest struct {
 	*aws.Request
-	Input *BatchDetectDominantLanguageInput
-	Copy  func(*BatchDetectDominantLanguageInput) BatchDetectDominantLanguageRequest
+	Input *types.BatchDetectDominantLanguageInput
+	Copy  func(*types.BatchDetectDominantLanguageInput) BatchDetectDominantLanguageRequest
 }
 
 // Send marshals and sends the BatchDetectDominantLanguage API request.
@@ -113,7 +58,7 @@ func (r BatchDetectDominantLanguageRequest) Send(ctx context.Context) (*BatchDet
 	}
 
 	resp := &BatchDetectDominantLanguageResponse{
-		BatchDetectDominantLanguageOutput: r.Request.Data.(*BatchDetectDominantLanguageOutput),
+		BatchDetectDominantLanguageOutput: r.Request.Data.(*types.BatchDetectDominantLanguageOutput),
 		response:                          &aws.Response{Request: r.Request},
 	}
 
@@ -123,7 +68,7 @@ func (r BatchDetectDominantLanguageRequest) Send(ctx context.Context) (*BatchDet
 // BatchDetectDominantLanguageResponse is the response type for the
 // BatchDetectDominantLanguage API operation.
 type BatchDetectDominantLanguageResponse struct {
-	*BatchDetectDominantLanguageOutput
+	*types.BatchDetectDominantLanguageOutput
 
 	response *aws.Response
 }

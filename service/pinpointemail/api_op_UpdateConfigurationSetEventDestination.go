@@ -6,104 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/pinpointemail/types"
 )
-
-// A request to change the settings for an event destination for a configuration
-// set.
-type UpdateConfigurationSetEventDestinationInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the configuration set that contains the event destination that
-	// you want to modify.
-	//
-	// ConfigurationSetName is a required field
-	ConfigurationSetName *string `location:"uri" locationName:"ConfigurationSetName" type:"string" required:"true"`
-
-	// An object that defines the event destination.
-	//
-	// EventDestination is a required field
-	EventDestination *EventDestinationDefinition `type:"structure" required:"true"`
-
-	// The name of the event destination that you want to modify.
-	//
-	// EventDestinationName is a required field
-	EventDestinationName *string `location:"uri" locationName:"EventDestinationName" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s UpdateConfigurationSetEventDestinationInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateConfigurationSetEventDestinationInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateConfigurationSetEventDestinationInput"}
-
-	if s.ConfigurationSetName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ConfigurationSetName"))
-	}
-
-	if s.EventDestination == nil {
-		invalidParams.Add(aws.NewErrParamRequired("EventDestination"))
-	}
-
-	if s.EventDestinationName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("EventDestinationName"))
-	}
-	if s.EventDestination != nil {
-		if err := s.EventDestination.Validate(); err != nil {
-			invalidParams.AddNested("EventDestination", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s UpdateConfigurationSetEventDestinationInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.EventDestination != nil {
-		v := s.EventDestination
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "EventDestination", v, metadata)
-	}
-	if s.ConfigurationSetName != nil {
-		v := *s.ConfigurationSetName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "ConfigurationSetName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.EventDestinationName != nil {
-		v := *s.EventDestinationName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "EventDestinationName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-// An HTTP 200 response if the request succeeds, or an error message if the
-// request fails.
-type UpdateConfigurationSetEventDestinationOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s UpdateConfigurationSetEventDestinationOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s UpdateConfigurationSetEventDestinationOutput) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
 
 const opUpdateConfigurationSetEventDestination = "UpdateConfigurationSetEventDestination"
 
@@ -127,7 +31,7 @@ const opUpdateConfigurationSetEventDestination = "UpdateConfigurationSetEventDes
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/UpdateConfigurationSetEventDestination
-func (c *Client) UpdateConfigurationSetEventDestinationRequest(input *UpdateConfigurationSetEventDestinationInput) UpdateConfigurationSetEventDestinationRequest {
+func (c *Client) UpdateConfigurationSetEventDestinationRequest(input *types.UpdateConfigurationSetEventDestinationInput) UpdateConfigurationSetEventDestinationRequest {
 	op := &aws.Operation{
 		Name:       opUpdateConfigurationSetEventDestination,
 		HTTPMethod: "PUT",
@@ -135,10 +39,10 @@ func (c *Client) UpdateConfigurationSetEventDestinationRequest(input *UpdateConf
 	}
 
 	if input == nil {
-		input = &UpdateConfigurationSetEventDestinationInput{}
+		input = &types.UpdateConfigurationSetEventDestinationInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateConfigurationSetEventDestinationOutput{})
+	req := c.newRequest(op, input, &types.UpdateConfigurationSetEventDestinationOutput{})
 	return UpdateConfigurationSetEventDestinationRequest{Request: req, Input: input, Copy: c.UpdateConfigurationSetEventDestinationRequest}
 }
 
@@ -146,8 +50,8 @@ func (c *Client) UpdateConfigurationSetEventDestinationRequest(input *UpdateConf
 // UpdateConfigurationSetEventDestination API operation.
 type UpdateConfigurationSetEventDestinationRequest struct {
 	*aws.Request
-	Input *UpdateConfigurationSetEventDestinationInput
-	Copy  func(*UpdateConfigurationSetEventDestinationInput) UpdateConfigurationSetEventDestinationRequest
+	Input *types.UpdateConfigurationSetEventDestinationInput
+	Copy  func(*types.UpdateConfigurationSetEventDestinationInput) UpdateConfigurationSetEventDestinationRequest
 }
 
 // Send marshals and sends the UpdateConfigurationSetEventDestination API request.
@@ -159,7 +63,7 @@ func (r UpdateConfigurationSetEventDestinationRequest) Send(ctx context.Context)
 	}
 
 	resp := &UpdateConfigurationSetEventDestinationResponse{
-		UpdateConfigurationSetEventDestinationOutput: r.Request.Data.(*UpdateConfigurationSetEventDestinationOutput),
+		UpdateConfigurationSetEventDestinationOutput: r.Request.Data.(*types.UpdateConfigurationSetEventDestinationOutput),
 		response: &aws.Response{Request: r.Request},
 	}
 
@@ -169,7 +73,7 @@ func (r UpdateConfigurationSetEventDestinationRequest) Send(ctx context.Context)
 // UpdateConfigurationSetEventDestinationResponse is the response type for the
 // UpdateConfigurationSetEventDestination API operation.
 type UpdateConfigurationSetEventDestinationResponse struct {
-	*UpdateConfigurationSetEventDestinationOutput
+	*types.UpdateConfigurationSetEventDestinationOutput
 
 	response *aws.Response
 }

@@ -6,63 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/ec2query"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-type AssociateDhcpOptionsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the DHCP options set, or default to associate no DHCP options with
-	// the VPC.
-	//
-	// DhcpOptionsId is a required field
-	DhcpOptionsId *string `type:"string" required:"true"`
-
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have
-	// the required permissions, the error response is DryRunOperation. Otherwise,
-	// it is UnauthorizedOperation.
-	DryRun *bool `locationName:"dryRun" type:"boolean"`
-
-	// The ID of the VPC.
-	//
-	// VpcId is a required field
-	VpcId *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s AssociateDhcpOptionsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *AssociateDhcpOptionsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "AssociateDhcpOptionsInput"}
-
-	if s.DhcpOptionsId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DhcpOptionsId"))
-	}
-
-	if s.VpcId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("VpcId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type AssociateDhcpOptionsOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s AssociateDhcpOptionsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opAssociateDhcpOptions = "AssociateDhcpOptions"
 
@@ -90,7 +37,7 @@ const opAssociateDhcpOptions = "AssociateDhcpOptions"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AssociateDhcpOptions
-func (c *Client) AssociateDhcpOptionsRequest(input *AssociateDhcpOptionsInput) AssociateDhcpOptionsRequest {
+func (c *Client) AssociateDhcpOptionsRequest(input *types.AssociateDhcpOptionsInput) AssociateDhcpOptionsRequest {
 	op := &aws.Operation{
 		Name:       opAssociateDhcpOptions,
 		HTTPMethod: "POST",
@@ -98,10 +45,10 @@ func (c *Client) AssociateDhcpOptionsRequest(input *AssociateDhcpOptionsInput) A
 	}
 
 	if input == nil {
-		input = &AssociateDhcpOptionsInput{}
+		input = &types.AssociateDhcpOptionsInput{}
 	}
 
-	req := c.newRequest(op, input, &AssociateDhcpOptionsOutput{})
+	req := c.newRequest(op, input, &types.AssociateDhcpOptionsOutput{})
 	req.Handlers.Unmarshal.Remove(ec2query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return AssociateDhcpOptionsRequest{Request: req, Input: input, Copy: c.AssociateDhcpOptionsRequest}
@@ -111,8 +58,8 @@ func (c *Client) AssociateDhcpOptionsRequest(input *AssociateDhcpOptionsInput) A
 // AssociateDhcpOptions API operation.
 type AssociateDhcpOptionsRequest struct {
 	*aws.Request
-	Input *AssociateDhcpOptionsInput
-	Copy  func(*AssociateDhcpOptionsInput) AssociateDhcpOptionsRequest
+	Input *types.AssociateDhcpOptionsInput
+	Copy  func(*types.AssociateDhcpOptionsInput) AssociateDhcpOptionsRequest
 }
 
 // Send marshals and sends the AssociateDhcpOptions API request.
@@ -124,7 +71,7 @@ func (r AssociateDhcpOptionsRequest) Send(ctx context.Context) (*AssociateDhcpOp
 	}
 
 	resp := &AssociateDhcpOptionsResponse{
-		AssociateDhcpOptionsOutput: r.Request.Data.(*AssociateDhcpOptionsOutput),
+		AssociateDhcpOptionsOutput: r.Request.Data.(*types.AssociateDhcpOptionsOutput),
 		response:                   &aws.Response{Request: r.Request},
 	}
 
@@ -134,7 +81,7 @@ func (r AssociateDhcpOptionsRequest) Send(ctx context.Context) (*AssociateDhcpOp
 // AssociateDhcpOptionsResponse is the response type for the
 // AssociateDhcpOptions API operation.
 type AssociateDhcpOptionsResponse struct {
-	*AssociateDhcpOptionsOutput
+	*types.AssociateDhcpOptionsOutput
 
 	response *aws.Response
 }

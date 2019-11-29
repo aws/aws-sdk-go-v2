@@ -6,77 +6,24 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/firehose/types"
 )
-
-type DescribeDeliveryStreamInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the delivery stream.
-	//
-	// DeliveryStreamName is a required field
-	DeliveryStreamName *string `min:"1" type:"string" required:"true"`
-
-	// The ID of the destination to start returning the destination information.
-	// Kinesis Data Firehose supports one destination per delivery stream.
-	ExclusiveStartDestinationId *string `min:"1" type:"string"`
-
-	// The limit on the number of destinations to return. You can have one destination
-	// per delivery stream.
-	Limit *int64 `min:"1" type:"integer"`
-}
-
-// String returns the string representation
-func (s DescribeDeliveryStreamInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeDeliveryStreamInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeDeliveryStreamInput"}
-
-	if s.DeliveryStreamName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DeliveryStreamName"))
-	}
-	if s.DeliveryStreamName != nil && len(*s.DeliveryStreamName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("DeliveryStreamName", 1))
-	}
-	if s.ExclusiveStartDestinationId != nil && len(*s.ExclusiveStartDestinationId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ExclusiveStartDestinationId", 1))
-	}
-	if s.Limit != nil && *s.Limit < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("Limit", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribeDeliveryStreamOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Information about the delivery stream.
-	//
-	// DeliveryStreamDescription is a required field
-	DeliveryStreamDescription *DeliveryStreamDescription `type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeDeliveryStreamOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeDeliveryStream = "DescribeDeliveryStream"
 
 // DescribeDeliveryStreamRequest returns a request value for making API operation for
 // Amazon Kinesis Firehose.
 //
-// Describes the specified delivery stream and gets the status. For example,
-// after your delivery stream is created, call DescribeDeliveryStream to see
-// whether the delivery stream is ACTIVE and therefore ready for data to be
-// sent to it.
+// Describes the specified delivery stream and its status. For example, after
+// your delivery stream is created, call DescribeDeliveryStream to see whether
+// the delivery stream is ACTIVE and therefore ready for data to be sent to
+// it.
+//
+// If the status of a delivery stream is CREATING_FAILED, this status doesn't
+// change, and you can't invoke CreateDeliveryStream again on it. However, you
+// can invoke the DeleteDeliveryStream operation to delete it. If the status
+// is DELETING_FAILED, you can force deletion by invoking DeleteDeliveryStream
+// again but with DeleteDeliveryStreamInput$AllowForceDelete set to true.
 //
 //    // Example sending a request using DescribeDeliveryStreamRequest.
 //    req := client.DescribeDeliveryStreamRequest(params)
@@ -86,7 +33,7 @@ const opDescribeDeliveryStream = "DescribeDeliveryStream"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/DescribeDeliveryStream
-func (c *Client) DescribeDeliveryStreamRequest(input *DescribeDeliveryStreamInput) DescribeDeliveryStreamRequest {
+func (c *Client) DescribeDeliveryStreamRequest(input *types.DescribeDeliveryStreamInput) DescribeDeliveryStreamRequest {
 	op := &aws.Operation{
 		Name:       opDescribeDeliveryStream,
 		HTTPMethod: "POST",
@@ -94,10 +41,10 @@ func (c *Client) DescribeDeliveryStreamRequest(input *DescribeDeliveryStreamInpu
 	}
 
 	if input == nil {
-		input = &DescribeDeliveryStreamInput{}
+		input = &types.DescribeDeliveryStreamInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeDeliveryStreamOutput{})
+	req := c.newRequest(op, input, &types.DescribeDeliveryStreamOutput{})
 	return DescribeDeliveryStreamRequest{Request: req, Input: input, Copy: c.DescribeDeliveryStreamRequest}
 }
 
@@ -105,8 +52,8 @@ func (c *Client) DescribeDeliveryStreamRequest(input *DescribeDeliveryStreamInpu
 // DescribeDeliveryStream API operation.
 type DescribeDeliveryStreamRequest struct {
 	*aws.Request
-	Input *DescribeDeliveryStreamInput
-	Copy  func(*DescribeDeliveryStreamInput) DescribeDeliveryStreamRequest
+	Input *types.DescribeDeliveryStreamInput
+	Copy  func(*types.DescribeDeliveryStreamInput) DescribeDeliveryStreamRequest
 }
 
 // Send marshals and sends the DescribeDeliveryStream API request.
@@ -118,7 +65,7 @@ func (r DescribeDeliveryStreamRequest) Send(ctx context.Context) (*DescribeDeliv
 	}
 
 	resp := &DescribeDeliveryStreamResponse{
-		DescribeDeliveryStreamOutput: r.Request.Data.(*DescribeDeliveryStreamOutput),
+		DescribeDeliveryStreamOutput: r.Request.Data.(*types.DescribeDeliveryStreamOutput),
 		response:                     &aws.Response{Request: r.Request},
 	}
 
@@ -128,7 +75,7 @@ func (r DescribeDeliveryStreamRequest) Send(ctx context.Context) (*DescribeDeliv
 // DescribeDeliveryStreamResponse is the response type for the
 // DescribeDeliveryStream API operation.
 type DescribeDeliveryStreamResponse struct {
-	*DescribeDeliveryStreamOutput
+	*types.DescribeDeliveryStreamOutput
 
 	response *aws.Response
 }

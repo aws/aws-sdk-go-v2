@@ -6,76 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/organizations/types"
 )
-
-type ListAccountsForParentInput struct {
-	_ struct{} `type:"structure"`
-
-	// (Optional) Use this to limit the number of results you want included per
-	// page in the response. If you do not include this parameter, it defaults to
-	// a value that is specific to the operation. If additional items exist beyond
-	// the maximum you specify, the NextToken response element is present and has
-	// a value (is not null). Include that value as the NextToken request parameter
-	// in the next call to the operation to get the next part of the results. Note
-	// that Organizations might return fewer results than the maximum even when
-	// there are more results available. You should check NextToken after every
-	// operation to ensure that you receive all of the results.
-	MaxResults *int64 `min:"1" type:"integer"`
-
-	// Use this parameter if you receive a NextToken response in a previous request
-	// that indicates that there is more output available. Set it to the value of
-	// the previous call's NextToken response to indicate where the output should
-	// continue from.
-	NextToken *string `type:"string"`
-
-	// The unique identifier (ID) for the parent root or organization unit (OU)
-	// whose accounts you want to list.
-	//
-	// ParentId is a required field
-	ParentId *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s ListAccountsForParentInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListAccountsForParentInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListAccountsForParentInput"}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-
-	if s.ParentId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ParentId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ListAccountsForParentOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A list of the accounts in the specified root or OU.
-	Accounts []Account `type:"list"`
-
-	// If present, this value indicates that there is more output available than
-	// is included in the current response. Use this value in the NextToken request
-	// parameter in a subsequent call to the operation to get the next part of the
-	// output. You should repeat this until the NextToken response element comes
-	// back as null.
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s ListAccountsForParentOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListAccountsForParent = "ListAccountsForParent"
 
@@ -103,7 +35,7 @@ const opListAccountsForParent = "ListAccountsForParent"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListAccountsForParent
-func (c *Client) ListAccountsForParentRequest(input *ListAccountsForParentInput) ListAccountsForParentRequest {
+func (c *Client) ListAccountsForParentRequest(input *types.ListAccountsForParentInput) ListAccountsForParentRequest {
 	op := &aws.Operation{
 		Name:       opListAccountsForParent,
 		HTTPMethod: "POST",
@@ -117,10 +49,10 @@ func (c *Client) ListAccountsForParentRequest(input *ListAccountsForParentInput)
 	}
 
 	if input == nil {
-		input = &ListAccountsForParentInput{}
+		input = &types.ListAccountsForParentInput{}
 	}
 
-	req := c.newRequest(op, input, &ListAccountsForParentOutput{})
+	req := c.newRequest(op, input, &types.ListAccountsForParentOutput{})
 	return ListAccountsForParentRequest{Request: req, Input: input, Copy: c.ListAccountsForParentRequest}
 }
 
@@ -128,8 +60,8 @@ func (c *Client) ListAccountsForParentRequest(input *ListAccountsForParentInput)
 // ListAccountsForParent API operation.
 type ListAccountsForParentRequest struct {
 	*aws.Request
-	Input *ListAccountsForParentInput
-	Copy  func(*ListAccountsForParentInput) ListAccountsForParentRequest
+	Input *types.ListAccountsForParentInput
+	Copy  func(*types.ListAccountsForParentInput) ListAccountsForParentRequest
 }
 
 // Send marshals and sends the ListAccountsForParent API request.
@@ -141,7 +73,7 @@ func (r ListAccountsForParentRequest) Send(ctx context.Context) (*ListAccountsFo
 	}
 
 	resp := &ListAccountsForParentResponse{
-		ListAccountsForParentOutput: r.Request.Data.(*ListAccountsForParentOutput),
+		ListAccountsForParentOutput: r.Request.Data.(*types.ListAccountsForParentOutput),
 		response:                    &aws.Response{Request: r.Request},
 	}
 
@@ -171,7 +103,7 @@ func NewListAccountsForParentPaginator(req ListAccountsForParentRequest) ListAcc
 	return ListAccountsForParentPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListAccountsForParentInput
+				var inCpy *types.ListAccountsForParentInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -191,14 +123,14 @@ type ListAccountsForParentPaginator struct {
 	aws.Pager
 }
 
-func (p *ListAccountsForParentPaginator) CurrentPage() *ListAccountsForParentOutput {
-	return p.Pager.CurrentPage().(*ListAccountsForParentOutput)
+func (p *ListAccountsForParentPaginator) CurrentPage() *types.ListAccountsForParentOutput {
+	return p.Pager.CurrentPage().(*types.ListAccountsForParentOutput)
 }
 
 // ListAccountsForParentResponse is the response type for the
 // ListAccountsForParent API operation.
 type ListAccountsForParentResponse struct {
-	*ListAccountsForParentOutput
+	*types.ListAccountsForParentOutput
 
 	response *aws.Response
 }

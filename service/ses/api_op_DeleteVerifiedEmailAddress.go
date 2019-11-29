@@ -6,49 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/query"
+	"github.com/aws/aws-sdk-go-v2/service/ses/types"
 )
-
-// Represents a request to delete an email address from the list of email addresses
-// you have attempted to verify under your AWS account.
-type DeleteVerifiedEmailAddressInput struct {
-	_ struct{} `type:"structure"`
-
-	// An email address to be removed from the list of verified addresses.
-	//
-	// EmailAddress is a required field
-	EmailAddress *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteVerifiedEmailAddressInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteVerifiedEmailAddressInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteVerifiedEmailAddressInput"}
-
-	if s.EmailAddress == nil {
-		invalidParams.Add(aws.NewErrParamRequired("EmailAddress"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteVerifiedEmailAddressOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteVerifiedEmailAddressOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteVerifiedEmailAddress = "DeleteVerifiedEmailAddress"
 
@@ -66,7 +27,7 @@ const opDeleteVerifiedEmailAddress = "DeleteVerifiedEmailAddress"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/DeleteVerifiedEmailAddress
-func (c *Client) DeleteVerifiedEmailAddressRequest(input *DeleteVerifiedEmailAddressInput) DeleteVerifiedEmailAddressRequest {
+func (c *Client) DeleteVerifiedEmailAddressRequest(input *types.DeleteVerifiedEmailAddressInput) DeleteVerifiedEmailAddressRequest {
 	op := &aws.Operation{
 		Name:       opDeleteVerifiedEmailAddress,
 		HTTPMethod: "POST",
@@ -74,10 +35,10 @@ func (c *Client) DeleteVerifiedEmailAddressRequest(input *DeleteVerifiedEmailAdd
 	}
 
 	if input == nil {
-		input = &DeleteVerifiedEmailAddressInput{}
+		input = &types.DeleteVerifiedEmailAddressInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteVerifiedEmailAddressOutput{})
+	req := c.newRequest(op, input, &types.DeleteVerifiedEmailAddressOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return DeleteVerifiedEmailAddressRequest{Request: req, Input: input, Copy: c.DeleteVerifiedEmailAddressRequest}
@@ -87,8 +48,8 @@ func (c *Client) DeleteVerifiedEmailAddressRequest(input *DeleteVerifiedEmailAdd
 // DeleteVerifiedEmailAddress API operation.
 type DeleteVerifiedEmailAddressRequest struct {
 	*aws.Request
-	Input *DeleteVerifiedEmailAddressInput
-	Copy  func(*DeleteVerifiedEmailAddressInput) DeleteVerifiedEmailAddressRequest
+	Input *types.DeleteVerifiedEmailAddressInput
+	Copy  func(*types.DeleteVerifiedEmailAddressInput) DeleteVerifiedEmailAddressRequest
 }
 
 // Send marshals and sends the DeleteVerifiedEmailAddress API request.
@@ -100,7 +61,7 @@ func (r DeleteVerifiedEmailAddressRequest) Send(ctx context.Context) (*DeleteVer
 	}
 
 	resp := &DeleteVerifiedEmailAddressResponse{
-		DeleteVerifiedEmailAddressOutput: r.Request.Data.(*DeleteVerifiedEmailAddressOutput),
+		DeleteVerifiedEmailAddressOutput: r.Request.Data.(*types.DeleteVerifiedEmailAddressOutput),
 		response:                         &aws.Response{Request: r.Request},
 	}
 
@@ -110,7 +71,7 @@ func (r DeleteVerifiedEmailAddressRequest) Send(ctx context.Context) (*DeleteVer
 // DeleteVerifiedEmailAddressResponse is the response type for the
 // DeleteVerifiedEmailAddress API operation.
 type DeleteVerifiedEmailAddressResponse struct {
-	*DeleteVerifiedEmailAddressOutput
+	*types.DeleteVerifiedEmailAddressOutput
 
 	response *aws.Response
 }

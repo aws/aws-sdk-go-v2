@@ -4,295 +4,10 @@ package mq
 
 import (
 	"context"
-	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/mq/types"
 )
-
-type DescribeBrokerInput struct {
-	_ struct{} `type:"structure"`
-
-	// BrokerId is a required field
-	BrokerId *string `location:"uri" locationName:"broker-id" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeBrokerInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeBrokerInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeBrokerInput"}
-
-	if s.BrokerId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("BrokerId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DescribeBrokerInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.BrokerId != nil {
-		v := *s.BrokerId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "broker-id", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type DescribeBrokerOutput struct {
-	_ struct{} `type:"structure"`
-
-	AutoMinorVersionUpgrade *bool `locationName:"autoMinorVersionUpgrade" type:"boolean"`
-
-	BrokerArn *string `locationName:"brokerArn" type:"string"`
-
-	BrokerId *string `locationName:"brokerId" type:"string"`
-
-	BrokerInstances []BrokerInstance `locationName:"brokerInstances" type:"list"`
-
-	BrokerName *string `locationName:"brokerName" type:"string"`
-
-	// The status of the broker.
-	BrokerState BrokerState `locationName:"brokerState" type:"string" enum:"true"`
-
-	// Broker configuration information
-	Configurations *Configurations `locationName:"configurations" type:"structure"`
-
-	Created *time.Time `locationName:"created" type:"timestamp" timestampFormat:"iso8601"`
-
-	// The deployment mode of the broker.
-	DeploymentMode DeploymentMode `locationName:"deploymentMode" type:"string" enum:"true"`
-
-	// Encryption options for the broker.
-	EncryptionOptions *EncryptionOptions `locationName:"encryptionOptions" type:"structure"`
-
-	// The type of broker engine. Note: Currently, Amazon MQ supports only ActiveMQ.
-	EngineType EngineType `locationName:"engineType" type:"string" enum:"true"`
-
-	EngineVersion *string `locationName:"engineVersion" type:"string"`
-
-	HostInstanceType *string `locationName:"hostInstanceType" type:"string"`
-
-	// The list of information about logs currently enabled and pending to be deployed
-	// for the specified broker.
-	Logs *LogsSummary `locationName:"logs" type:"structure"`
-
-	// The scheduled time period relative to UTC during which Amazon MQ begins to
-	// apply pending updates or patches to the broker.
-	MaintenanceWindowStartTime *WeeklyStartTime `locationName:"maintenanceWindowStartTime" type:"structure"`
-
-	PendingEngineVersion *string `locationName:"pendingEngineVersion" type:"string"`
-
-	PendingHostInstanceType *string `locationName:"pendingHostInstanceType" type:"string"`
-
-	PendingSecurityGroups []string `locationName:"pendingSecurityGroups" type:"list"`
-
-	PubliclyAccessible *bool `locationName:"publiclyAccessible" type:"boolean"`
-
-	SecurityGroups []string `locationName:"securityGroups" type:"list"`
-
-	SubnetIds []string `locationName:"subnetIds" type:"list"`
-
-	Tags map[string]string `locationName:"tags" type:"map"`
-
-	Users []UserSummary `locationName:"users" type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeBrokerOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DescribeBrokerOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.AutoMinorVersionUpgrade != nil {
-		v := *s.AutoMinorVersionUpgrade
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "autoMinorVersionUpgrade", protocol.BoolValue(v), metadata)
-	}
-	if s.BrokerArn != nil {
-		v := *s.BrokerArn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "brokerArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.BrokerId != nil {
-		v := *s.BrokerId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "brokerId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.BrokerInstances != nil {
-		v := s.BrokerInstances
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "brokerInstances", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	if s.BrokerName != nil {
-		v := *s.BrokerName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "brokerName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if len(s.BrokerState) > 0 {
-		v := s.BrokerState
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "brokerState", protocol.QuotedValue{ValueMarshaler: v}, metadata)
-	}
-	if s.Configurations != nil {
-		v := s.Configurations
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "configurations", v, metadata)
-	}
-	if s.Created != nil {
-		v := *s.Created
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "created",
-			protocol.TimeValue{V: v, Format: "iso8601", QuotedFormatTime: true}, metadata)
-	}
-	if len(s.DeploymentMode) > 0 {
-		v := s.DeploymentMode
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "deploymentMode", protocol.QuotedValue{ValueMarshaler: v}, metadata)
-	}
-	if s.EncryptionOptions != nil {
-		v := s.EncryptionOptions
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "encryptionOptions", v, metadata)
-	}
-	if len(s.EngineType) > 0 {
-		v := s.EngineType
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "engineType", protocol.QuotedValue{ValueMarshaler: v}, metadata)
-	}
-	if s.EngineVersion != nil {
-		v := *s.EngineVersion
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "engineVersion", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.HostInstanceType != nil {
-		v := *s.HostInstanceType
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "hostInstanceType", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Logs != nil {
-		v := s.Logs
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "logs", v, metadata)
-	}
-	if s.MaintenanceWindowStartTime != nil {
-		v := s.MaintenanceWindowStartTime
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "maintenanceWindowStartTime", v, metadata)
-	}
-	if s.PendingEngineVersion != nil {
-		v := *s.PendingEngineVersion
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "pendingEngineVersion", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.PendingHostInstanceType != nil {
-		v := *s.PendingHostInstanceType
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "pendingHostInstanceType", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.PendingSecurityGroups != nil {
-		v := s.PendingSecurityGroups
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "pendingSecurityGroups", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
-		}
-		ls0.End()
-
-	}
-	if s.PubliclyAccessible != nil {
-		v := *s.PubliclyAccessible
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "publiclyAccessible", protocol.BoolValue(v), metadata)
-	}
-	if s.SecurityGroups != nil {
-		v := s.SecurityGroups
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "securityGroups", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
-		}
-		ls0.End()
-
-	}
-	if s.SubnetIds != nil {
-		v := s.SubnetIds
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "subnetIds", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
-		}
-		ls0.End()
-
-	}
-	if s.Tags != nil {
-		v := s.Tags
-
-		metadata := protocol.Metadata{}
-		ms0 := e.Map(protocol.BodyTarget, "tags", metadata)
-		ms0.Start()
-		for k1, v1 := range v {
-			ms0.MapSetValue(k1, protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
-		}
-		ms0.End()
-
-	}
-	if s.Users != nil {
-		v := s.Users
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "users", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	return nil
-}
 
 const opDescribeBroker = "DescribeBroker"
 
@@ -309,7 +24,7 @@ const opDescribeBroker = "DescribeBroker"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/DescribeBroker
-func (c *Client) DescribeBrokerRequest(input *DescribeBrokerInput) DescribeBrokerRequest {
+func (c *Client) DescribeBrokerRequest(input *types.DescribeBrokerInput) DescribeBrokerRequest {
 	op := &aws.Operation{
 		Name:       opDescribeBroker,
 		HTTPMethod: "GET",
@@ -317,10 +32,10 @@ func (c *Client) DescribeBrokerRequest(input *DescribeBrokerInput) DescribeBroke
 	}
 
 	if input == nil {
-		input = &DescribeBrokerInput{}
+		input = &types.DescribeBrokerInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeBrokerOutput{})
+	req := c.newRequest(op, input, &types.DescribeBrokerOutput{})
 	return DescribeBrokerRequest{Request: req, Input: input, Copy: c.DescribeBrokerRequest}
 }
 
@@ -328,8 +43,8 @@ func (c *Client) DescribeBrokerRequest(input *DescribeBrokerInput) DescribeBroke
 // DescribeBroker API operation.
 type DescribeBrokerRequest struct {
 	*aws.Request
-	Input *DescribeBrokerInput
-	Copy  func(*DescribeBrokerInput) DescribeBrokerRequest
+	Input *types.DescribeBrokerInput
+	Copy  func(*types.DescribeBrokerInput) DescribeBrokerRequest
 }
 
 // Send marshals and sends the DescribeBroker API request.
@@ -341,7 +56,7 @@ func (r DescribeBrokerRequest) Send(ctx context.Context) (*DescribeBrokerRespons
 	}
 
 	resp := &DescribeBrokerResponse{
-		DescribeBrokerOutput: r.Request.Data.(*DescribeBrokerOutput),
+		DescribeBrokerOutput: r.Request.Data.(*types.DescribeBrokerOutput),
 		response:             &aws.Response{Request: r.Request},
 	}
 
@@ -351,7 +66,7 @@ func (r DescribeBrokerRequest) Send(ctx context.Context) (*DescribeBrokerRespons
 // DescribeBrokerResponse is the response type for the
 // DescribeBroker API operation.
 type DescribeBrokerResponse struct {
-	*DescribeBrokerOutput
+	*types.DescribeBrokerOutput
 
 	response *aws.Response
 }

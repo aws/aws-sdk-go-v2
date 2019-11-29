@@ -6,68 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/codedeploy/types"
 )
-
-// Represents the input of a GetApplicationRevision operation.
-type GetApplicationRevisionInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the application that corresponds to the revision.
-	//
-	// ApplicationName is a required field
-	ApplicationName *string `locationName:"applicationName" min:"1" type:"string" required:"true"`
-
-	// Information about the application revision to get, including type and location.
-	//
-	// Revision is a required field
-	Revision *RevisionLocation `locationName:"revision" type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s GetApplicationRevisionInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetApplicationRevisionInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetApplicationRevisionInput"}
-
-	if s.ApplicationName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ApplicationName"))
-	}
-	if s.ApplicationName != nil && len(*s.ApplicationName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ApplicationName", 1))
-	}
-
-	if s.Revision == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Revision"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Represents the output of a GetApplicationRevision operation.
-type GetApplicationRevisionOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the application that corresponds to the revision.
-	ApplicationName *string `locationName:"applicationName" min:"1" type:"string"`
-
-	// Additional information about the revision, including type and location.
-	Revision *RevisionLocation `locationName:"revision" type:"structure"`
-
-	// General information about the revision.
-	RevisionInfo *GenericRevisionInfo `locationName:"revisionInfo" type:"structure"`
-}
-
-// String returns the string representation
-func (s GetApplicationRevisionOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetApplicationRevision = "GetApplicationRevision"
 
@@ -84,7 +24,7 @@ const opGetApplicationRevision = "GetApplicationRevision"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/GetApplicationRevision
-func (c *Client) GetApplicationRevisionRequest(input *GetApplicationRevisionInput) GetApplicationRevisionRequest {
+func (c *Client) GetApplicationRevisionRequest(input *types.GetApplicationRevisionInput) GetApplicationRevisionRequest {
 	op := &aws.Operation{
 		Name:       opGetApplicationRevision,
 		HTTPMethod: "POST",
@@ -92,10 +32,10 @@ func (c *Client) GetApplicationRevisionRequest(input *GetApplicationRevisionInpu
 	}
 
 	if input == nil {
-		input = &GetApplicationRevisionInput{}
+		input = &types.GetApplicationRevisionInput{}
 	}
 
-	req := c.newRequest(op, input, &GetApplicationRevisionOutput{})
+	req := c.newRequest(op, input, &types.GetApplicationRevisionOutput{})
 	return GetApplicationRevisionRequest{Request: req, Input: input, Copy: c.GetApplicationRevisionRequest}
 }
 
@@ -103,8 +43,8 @@ func (c *Client) GetApplicationRevisionRequest(input *GetApplicationRevisionInpu
 // GetApplicationRevision API operation.
 type GetApplicationRevisionRequest struct {
 	*aws.Request
-	Input *GetApplicationRevisionInput
-	Copy  func(*GetApplicationRevisionInput) GetApplicationRevisionRequest
+	Input *types.GetApplicationRevisionInput
+	Copy  func(*types.GetApplicationRevisionInput) GetApplicationRevisionRequest
 }
 
 // Send marshals and sends the GetApplicationRevision API request.
@@ -116,7 +56,7 @@ func (r GetApplicationRevisionRequest) Send(ctx context.Context) (*GetApplicatio
 	}
 
 	resp := &GetApplicationRevisionResponse{
-		GetApplicationRevisionOutput: r.Request.Data.(*GetApplicationRevisionOutput),
+		GetApplicationRevisionOutput: r.Request.Data.(*types.GetApplicationRevisionOutput),
 		response:                     &aws.Response{Request: r.Request},
 	}
 
@@ -126,7 +66,7 @@ func (r GetApplicationRevisionRequest) Send(ctx context.Context) (*GetApplicatio
 // GetApplicationRevisionResponse is the response type for the
 // GetApplicationRevision API operation.
 type GetApplicationRevisionResponse struct {
-	*GetApplicationRevisionOutput
+	*types.GetApplicationRevisionOutput
 
 	response *aws.Response
 }

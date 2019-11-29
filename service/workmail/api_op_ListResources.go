@@ -6,66 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/workmail/types"
 )
-
-type ListResourcesInput struct {
-	_ struct{} `type:"structure"`
-
-	// The maximum number of results to return in a single call.
-	MaxResults *int64 `min:"1" type:"integer"`
-
-	// The token to use to retrieve the next page of results. The first call does
-	// not contain any tokens.
-	NextToken *string `min:"1" type:"string"`
-
-	// The identifier for the organization under which the resources exist.
-	//
-	// OrganizationId is a required field
-	OrganizationId *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s ListResourcesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListResourcesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListResourcesInput"}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-	if s.NextToken != nil && len(*s.NextToken) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
-	}
-
-	if s.OrganizationId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("OrganizationId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ListResourcesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The token used to paginate through all the organization's resources. While
-	// results are still available, it has an associated value. When the last page
-	// is reached, the token is empty.
-	NextToken *string `min:"1" type:"string"`
-
-	// One page of the organization's resource representation.
-	Resources []Resource `type:"list"`
-}
-
-// String returns the string representation
-func (s ListResourcesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListResources = "ListResources"
 
@@ -82,7 +24,7 @@ const opListResources = "ListResources"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/ListResources
-func (c *Client) ListResourcesRequest(input *ListResourcesInput) ListResourcesRequest {
+func (c *Client) ListResourcesRequest(input *types.ListResourcesInput) ListResourcesRequest {
 	op := &aws.Operation{
 		Name:       opListResources,
 		HTTPMethod: "POST",
@@ -96,10 +38,10 @@ func (c *Client) ListResourcesRequest(input *ListResourcesInput) ListResourcesRe
 	}
 
 	if input == nil {
-		input = &ListResourcesInput{}
+		input = &types.ListResourcesInput{}
 	}
 
-	req := c.newRequest(op, input, &ListResourcesOutput{})
+	req := c.newRequest(op, input, &types.ListResourcesOutput{})
 	return ListResourcesRequest{Request: req, Input: input, Copy: c.ListResourcesRequest}
 }
 
@@ -107,8 +49,8 @@ func (c *Client) ListResourcesRequest(input *ListResourcesInput) ListResourcesRe
 // ListResources API operation.
 type ListResourcesRequest struct {
 	*aws.Request
-	Input *ListResourcesInput
-	Copy  func(*ListResourcesInput) ListResourcesRequest
+	Input *types.ListResourcesInput
+	Copy  func(*types.ListResourcesInput) ListResourcesRequest
 }
 
 // Send marshals and sends the ListResources API request.
@@ -120,7 +62,7 @@ func (r ListResourcesRequest) Send(ctx context.Context) (*ListResourcesResponse,
 	}
 
 	resp := &ListResourcesResponse{
-		ListResourcesOutput: r.Request.Data.(*ListResourcesOutput),
+		ListResourcesOutput: r.Request.Data.(*types.ListResourcesOutput),
 		response:            &aws.Response{Request: r.Request},
 	}
 
@@ -150,7 +92,7 @@ func NewListResourcesPaginator(req ListResourcesRequest) ListResourcesPaginator 
 	return ListResourcesPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListResourcesInput
+				var inCpy *types.ListResourcesInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -170,14 +112,14 @@ type ListResourcesPaginator struct {
 	aws.Pager
 }
 
-func (p *ListResourcesPaginator) CurrentPage() *ListResourcesOutput {
-	return p.Pager.CurrentPage().(*ListResourcesOutput)
+func (p *ListResourcesPaginator) CurrentPage() *types.ListResourcesOutput {
+	return p.Pager.CurrentPage().(*types.ListResourcesOutput)
 }
 
 // ListResourcesResponse is the response type for the
 // ListResources API operation.
 type ListResourcesResponse struct {
-	*ListResourcesOutput
+	*types.ListResourcesOutput
 
 	response *aws.Response
 }

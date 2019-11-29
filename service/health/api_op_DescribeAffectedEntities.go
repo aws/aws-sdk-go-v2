@@ -6,80 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/health/types"
 )
-
-type DescribeAffectedEntitiesInput struct {
-	_ struct{} `type:"structure"`
-
-	// Values to narrow the results returned. At least one event ARN is required.
-	//
-	// Filter is a required field
-	Filter *EntityFilter `locationName:"filter" type:"structure" required:"true"`
-
-	// The locale (language) to return information in. English (en) is the default
-	// and the only supported value at this time.
-	Locale *string `locationName:"locale" min:"2" type:"string"`
-
-	// The maximum number of items to return in one batch, between 10 and 100, inclusive.
-	MaxResults *int64 `locationName:"maxResults" min:"10" type:"integer"`
-
-	// If the results of a search are large, only a portion of the results are returned,
-	// and a nextToken pagination token is returned in the response. To retrieve
-	// the next batch of results, reissue the search request and include the returned
-	// token. When all results have been returned, the response does not contain
-	// a pagination token value.
-	NextToken *string `locationName:"nextToken" type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeAffectedEntitiesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeAffectedEntitiesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeAffectedEntitiesInput"}
-
-	if s.Filter == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Filter"))
-	}
-	if s.Locale != nil && len(*s.Locale) < 2 {
-		invalidParams.Add(aws.NewErrParamMinLen("Locale", 2))
-	}
-	if s.MaxResults != nil && *s.MaxResults < 10 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 10))
-	}
-	if s.Filter != nil {
-		if err := s.Filter.Validate(); err != nil {
-			invalidParams.AddNested("Filter", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribeAffectedEntitiesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The entities that match the filter criteria.
-	Entities []AffectedEntity `locationName:"entities" type:"list"`
-
-	// If the results of a search are large, only a portion of the results are returned,
-	// and a nextToken pagination token is returned in the response. To retrieve
-	// the next batch of results, reissue the search request and include the returned
-	// token. When all results have been returned, the response does not contain
-	// a pagination token value.
-	NextToken *string `locationName:"nextToken" type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeAffectedEntitiesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeAffectedEntities = "DescribeAffectedEntities"
 
@@ -104,7 +32,7 @@ const opDescribeAffectedEntities = "DescribeAffectedEntities"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/health-2016-08-04/DescribeAffectedEntities
-func (c *Client) DescribeAffectedEntitiesRequest(input *DescribeAffectedEntitiesInput) DescribeAffectedEntitiesRequest {
+func (c *Client) DescribeAffectedEntitiesRequest(input *types.DescribeAffectedEntitiesInput) DescribeAffectedEntitiesRequest {
 	op := &aws.Operation{
 		Name:       opDescribeAffectedEntities,
 		HTTPMethod: "POST",
@@ -118,10 +46,10 @@ func (c *Client) DescribeAffectedEntitiesRequest(input *DescribeAffectedEntities
 	}
 
 	if input == nil {
-		input = &DescribeAffectedEntitiesInput{}
+		input = &types.DescribeAffectedEntitiesInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeAffectedEntitiesOutput{})
+	req := c.newRequest(op, input, &types.DescribeAffectedEntitiesOutput{})
 	return DescribeAffectedEntitiesRequest{Request: req, Input: input, Copy: c.DescribeAffectedEntitiesRequest}
 }
 
@@ -129,8 +57,8 @@ func (c *Client) DescribeAffectedEntitiesRequest(input *DescribeAffectedEntities
 // DescribeAffectedEntities API operation.
 type DescribeAffectedEntitiesRequest struct {
 	*aws.Request
-	Input *DescribeAffectedEntitiesInput
-	Copy  func(*DescribeAffectedEntitiesInput) DescribeAffectedEntitiesRequest
+	Input *types.DescribeAffectedEntitiesInput
+	Copy  func(*types.DescribeAffectedEntitiesInput) DescribeAffectedEntitiesRequest
 }
 
 // Send marshals and sends the DescribeAffectedEntities API request.
@@ -142,7 +70,7 @@ func (r DescribeAffectedEntitiesRequest) Send(ctx context.Context) (*DescribeAff
 	}
 
 	resp := &DescribeAffectedEntitiesResponse{
-		DescribeAffectedEntitiesOutput: r.Request.Data.(*DescribeAffectedEntitiesOutput),
+		DescribeAffectedEntitiesOutput: r.Request.Data.(*types.DescribeAffectedEntitiesOutput),
 		response:                       &aws.Response{Request: r.Request},
 	}
 
@@ -172,7 +100,7 @@ func NewDescribeAffectedEntitiesPaginator(req DescribeAffectedEntitiesRequest) D
 	return DescribeAffectedEntitiesPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *DescribeAffectedEntitiesInput
+				var inCpy *types.DescribeAffectedEntitiesInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -192,14 +120,14 @@ type DescribeAffectedEntitiesPaginator struct {
 	aws.Pager
 }
 
-func (p *DescribeAffectedEntitiesPaginator) CurrentPage() *DescribeAffectedEntitiesOutput {
-	return p.Pager.CurrentPage().(*DescribeAffectedEntitiesOutput)
+func (p *DescribeAffectedEntitiesPaginator) CurrentPage() *types.DescribeAffectedEntitiesOutput {
+	return p.Pager.CurrentPage().(*types.DescribeAffectedEntitiesOutput)
 }
 
 // DescribeAffectedEntitiesResponse is the response type for the
 // DescribeAffectedEntities API operation.
 type DescribeAffectedEntitiesResponse struct {
-	*DescribeAffectedEntitiesOutput
+	*types.DescribeAffectedEntitiesOutput
 
 	response *aws.Response
 }

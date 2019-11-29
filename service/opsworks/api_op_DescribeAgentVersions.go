@@ -6,38 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/opsworks/types"
 )
-
-type DescribeAgentVersionsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The configuration manager.
-	ConfigurationManager *StackConfigurationManager `type:"structure"`
-
-	// The stack ID.
-	StackId *string `type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeAgentVersionsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Contains the response to a DescribeAgentVersions request.
-type DescribeAgentVersionsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The agent versions for the specified stack or configuration manager. Note
-	// that this value is the complete version number, not the abbreviated number
-	// used by the console.
-	AgentVersions []AgentVersion `type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeAgentVersionsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeAgentVersions = "DescribeAgentVersions"
 
@@ -56,7 +26,7 @@ const opDescribeAgentVersions = "DescribeAgentVersions"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DescribeAgentVersions
-func (c *Client) DescribeAgentVersionsRequest(input *DescribeAgentVersionsInput) DescribeAgentVersionsRequest {
+func (c *Client) DescribeAgentVersionsRequest(input *types.DescribeAgentVersionsInput) DescribeAgentVersionsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeAgentVersions,
 		HTTPMethod: "POST",
@@ -64,10 +34,10 @@ func (c *Client) DescribeAgentVersionsRequest(input *DescribeAgentVersionsInput)
 	}
 
 	if input == nil {
-		input = &DescribeAgentVersionsInput{}
+		input = &types.DescribeAgentVersionsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeAgentVersionsOutput{})
+	req := c.newRequest(op, input, &types.DescribeAgentVersionsOutput{})
 	return DescribeAgentVersionsRequest{Request: req, Input: input, Copy: c.DescribeAgentVersionsRequest}
 }
 
@@ -75,8 +45,8 @@ func (c *Client) DescribeAgentVersionsRequest(input *DescribeAgentVersionsInput)
 // DescribeAgentVersions API operation.
 type DescribeAgentVersionsRequest struct {
 	*aws.Request
-	Input *DescribeAgentVersionsInput
-	Copy  func(*DescribeAgentVersionsInput) DescribeAgentVersionsRequest
+	Input *types.DescribeAgentVersionsInput
+	Copy  func(*types.DescribeAgentVersionsInput) DescribeAgentVersionsRequest
 }
 
 // Send marshals and sends the DescribeAgentVersions API request.
@@ -88,7 +58,7 @@ func (r DescribeAgentVersionsRequest) Send(ctx context.Context) (*DescribeAgentV
 	}
 
 	resp := &DescribeAgentVersionsResponse{
-		DescribeAgentVersionsOutput: r.Request.Data.(*DescribeAgentVersionsOutput),
+		DescribeAgentVersionsOutput: r.Request.Data.(*types.DescribeAgentVersionsOutput),
 		response:                    &aws.Response{Request: r.Request},
 	}
 
@@ -98,7 +68,7 @@ func (r DescribeAgentVersionsRequest) Send(ctx context.Context) (*DescribeAgentV
 // DescribeAgentVersionsResponse is the response type for the
 // DescribeAgentVersions API operation.
 type DescribeAgentVersionsResponse struct {
-	*DescribeAgentVersionsOutput
+	*types.DescribeAgentVersionsOutput
 
 	response *aws.Response
 }

@@ -6,163 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/secretsmanager/types"
 )
-
-type PutSecretValueInput struct {
-	_ struct{} `type:"structure"`
-
-	// (Optional) Specifies a unique identifier for the new version of the secret.
-	//
-	// If you use the AWS CLI or one of the AWS SDK to call this operation, then
-	// you can leave this parameter empty. The CLI or SDK generates a random UUID
-	// for you and includes that in the request. If you don't use the SDK and instead
-	// generate a raw HTTP request to the Secrets Manager service endpoint, then
-	// you must generate a ClientRequestToken yourself for new versions and include
-	// that value in the request.
-	//
-	// This value helps ensure idempotency. Secrets Manager uses this value to prevent
-	// the accidental creation of duplicate versions if there are failures and retries
-	// during the Lambda rotation function's processing. We recommend that you generate
-	// a UUID-type (https://wikipedia.org/wiki/Universally_unique_identifier) value
-	// to ensure uniqueness within the specified secret.
-	//
-	//    * If the ClientRequestToken value isn't already associated with a version
-	//    of the secret then a new version of the secret is created.
-	//
-	//    * If a version with this value already exists and that version's SecretString
-	//    or SecretBinary values are the same as those in the request then the request
-	//    is ignored (the operation is idempotent).
-	//
-	//    * If a version with this value already exists and that version's SecretString
-	//    and SecretBinary values are different from those in the request then the
-	//    request fails because you cannot modify an existing secret version. You
-	//    can only create new versions to store new secret values.
-	//
-	// This value becomes the VersionId of the new version.
-	ClientRequestToken *string `min:"32" type:"string" idempotencyToken:"true"`
-
-	// (Optional) Specifies binary data that you want to encrypt and store in the
-	// new version of the secret. To use this parameter in the command-line tools,
-	// we recommend that you store your binary data in a file and then use the appropriate
-	// technique for your tool to pass the contents of the file as a parameter.
-	// Either SecretBinary or SecretString must have a value, but not both. They
-	// cannot both be empty.
-	//
-	// This parameter is not accessible if the secret using the Secrets Manager
-	// console.
-	//
-	// SecretBinary is automatically base64 encoded/decoded by the SDK.
-	SecretBinary []byte `type:"blob" sensitive:"true"`
-
-	// Specifies the secret to which you want to add a new version. You can specify
-	// either the Amazon Resource Name (ARN) or the friendly name of the secret.
-	// The secret must already exist.
-	//
-	// If you specify an ARN, we generally recommend that you specify a complete
-	// ARN. You can specify a partial ARN too—for example, if you don’t include
-	// the final hyphen and six random characters that Secrets Manager adds at the
-	// end of the ARN when you created the secret. A partial ARN match can work
-	// as long as it uniquely matches only one secret. However, if your secret has
-	// a name that ends in a hyphen followed by six characters (before Secrets Manager
-	// adds the hyphen and six characters to the ARN) and you try to use that as
-	// a partial ARN, then those characters cause Secrets Manager to assume that
-	// you’re specifying a complete ARN. This confusion can cause unexpected results.
-	// To avoid this situation, we recommend that you don’t create secret names
-	// that end with a hyphen followed by six characters.
-	//
-	// SecretId is a required field
-	SecretId *string `min:"1" type:"string" required:"true"`
-
-	// (Optional) Specifies text data that you want to encrypt and store in this
-	// new version of the secret. Either SecretString or SecretBinary must have
-	// a value, but not both. They cannot both be empty.
-	//
-	// If you create this secret by using the Secrets Manager console then Secrets
-	// Manager puts the protected secret text in only the SecretString parameter.
-	// The Secrets Manager console stores the information as a JSON structure of
-	// key/value pairs that the default Lambda rotation function knows how to parse.
-	//
-	// For storing multiple values, we recommend that you use a JSON text string
-	// argument and specify key/value pairs. For information on how to format a
-	// JSON parameter for the various command line tool environments, see Using
-	// JSON for Parameters (https://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#cli-using-param-json)
-	// in the AWS CLI User Guide.
-	//
-	// For example:
-	//
-	// [{"username":"bob"},{"password":"abc123xyz456"}]
-	//
-	// If your command-line tool or SDK requires quotation marks around the parameter,
-	// you should use single quotes to avoid confusion with the double quotes required
-	// in the JSON text.
-	SecretString *string `type:"string" sensitive:"true"`
-
-	// (Optional) Specifies a list of staging labels that are attached to this version
-	// of the secret. These staging labels are used to track the versions through
-	// the rotation process by the Lambda rotation function.
-	//
-	// A staging label must be unique to a single version of the secret. If you
-	// specify a staging label that's already associated with a different version
-	// of the same secret then that staging label is automatically removed from
-	// the other version and attached to this version.
-	//
-	// If you do not specify a value for VersionStages then Secrets Manager automatically
-	// moves the staging label AWSCURRENT to this new version.
-	VersionStages []string `min:"1" type:"list"`
-}
-
-// String returns the string representation
-func (s PutSecretValueInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *PutSecretValueInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "PutSecretValueInput"}
-	if s.ClientRequestToken != nil && len(*s.ClientRequestToken) < 32 {
-		invalidParams.Add(aws.NewErrParamMinLen("ClientRequestToken", 32))
-	}
-
-	if s.SecretId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("SecretId"))
-	}
-	if s.SecretId != nil && len(*s.SecretId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("SecretId", 1))
-	}
-	if s.VersionStages != nil && len(s.VersionStages) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("VersionStages", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type PutSecretValueOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) for the secret for which you just created
-	// a version.
-	ARN *string `min:"20" type:"string"`
-
-	// The friendly name of the secret for which you just created or updated a version.
-	Name *string `min:"1" type:"string"`
-
-	// The unique identifier of the version of the secret you just created or updated.
-	VersionId *string `min:"32" type:"string"`
-
-	// The list of staging labels that are currently attached to this version of
-	// the secret. Staging labels are used to track a version as it progresses through
-	// the secret rotation process.
-	VersionStages []string `min:"1" type:"list"`
-}
-
-// String returns the string representation
-func (s PutSecretValueOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opPutSecretValue = "PutSecretValue"
 
@@ -248,7 +93,7 @@ const opPutSecretValue = "PutSecretValue"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/secretsmanager-2017-10-17/PutSecretValue
-func (c *Client) PutSecretValueRequest(input *PutSecretValueInput) PutSecretValueRequest {
+func (c *Client) PutSecretValueRequest(input *types.PutSecretValueInput) PutSecretValueRequest {
 	op := &aws.Operation{
 		Name:       opPutSecretValue,
 		HTTPMethod: "POST",
@@ -256,10 +101,10 @@ func (c *Client) PutSecretValueRequest(input *PutSecretValueInput) PutSecretValu
 	}
 
 	if input == nil {
-		input = &PutSecretValueInput{}
+		input = &types.PutSecretValueInput{}
 	}
 
-	req := c.newRequest(op, input, &PutSecretValueOutput{})
+	req := c.newRequest(op, input, &types.PutSecretValueOutput{})
 	return PutSecretValueRequest{Request: req, Input: input, Copy: c.PutSecretValueRequest}
 }
 
@@ -267,8 +112,8 @@ func (c *Client) PutSecretValueRequest(input *PutSecretValueInput) PutSecretValu
 // PutSecretValue API operation.
 type PutSecretValueRequest struct {
 	*aws.Request
-	Input *PutSecretValueInput
-	Copy  func(*PutSecretValueInput) PutSecretValueRequest
+	Input *types.PutSecretValueInput
+	Copy  func(*types.PutSecretValueInput) PutSecretValueRequest
 }
 
 // Send marshals and sends the PutSecretValue API request.
@@ -280,7 +125,7 @@ func (r PutSecretValueRequest) Send(ctx context.Context) (*PutSecretValueRespons
 	}
 
 	resp := &PutSecretValueResponse{
-		PutSecretValueOutput: r.Request.Data.(*PutSecretValueOutput),
+		PutSecretValueOutput: r.Request.Data.(*types.PutSecretValueOutput),
 		response:             &aws.Response{Request: r.Request},
 	}
 
@@ -290,7 +135,7 @@ func (r PutSecretValueRequest) Send(ctx context.Context) (*PutSecretValueRespons
 // PutSecretValueResponse is the response type for the
 // PutSecretValue API operation.
 type PutSecretValueResponse struct {
-	*PutSecretValueOutput
+	*types.PutSecretValueOutput
 
 	response *aws.Response
 }

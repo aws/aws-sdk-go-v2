@@ -6,54 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/workspaces/types"
 )
-
-type DisassociateIpGroupsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The identifier of the directory.
-	//
-	// DirectoryId is a required field
-	DirectoryId *string `type:"string" required:"true"`
-
-	// The identifiers of one or more IP access control groups.
-	//
-	// GroupIds is a required field
-	GroupIds []string `type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s DisassociateIpGroupsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DisassociateIpGroupsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DisassociateIpGroupsInput"}
-
-	if s.DirectoryId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DirectoryId"))
-	}
-
-	if s.GroupIds == nil {
-		invalidParams.Add(aws.NewErrParamRequired("GroupIds"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DisassociateIpGroupsOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DisassociateIpGroupsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDisassociateIpGroups = "DisassociateIpGroups"
 
@@ -70,7 +24,7 @@ const opDisassociateIpGroups = "DisassociateIpGroups"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DisassociateIpGroups
-func (c *Client) DisassociateIpGroupsRequest(input *DisassociateIpGroupsInput) DisassociateIpGroupsRequest {
+func (c *Client) DisassociateIpGroupsRequest(input *types.DisassociateIpGroupsInput) DisassociateIpGroupsRequest {
 	op := &aws.Operation{
 		Name:       opDisassociateIpGroups,
 		HTTPMethod: "POST",
@@ -78,10 +32,10 @@ func (c *Client) DisassociateIpGroupsRequest(input *DisassociateIpGroupsInput) D
 	}
 
 	if input == nil {
-		input = &DisassociateIpGroupsInput{}
+		input = &types.DisassociateIpGroupsInput{}
 	}
 
-	req := c.newRequest(op, input, &DisassociateIpGroupsOutput{})
+	req := c.newRequest(op, input, &types.DisassociateIpGroupsOutput{})
 	return DisassociateIpGroupsRequest{Request: req, Input: input, Copy: c.DisassociateIpGroupsRequest}
 }
 
@@ -89,8 +43,8 @@ func (c *Client) DisassociateIpGroupsRequest(input *DisassociateIpGroupsInput) D
 // DisassociateIpGroups API operation.
 type DisassociateIpGroupsRequest struct {
 	*aws.Request
-	Input *DisassociateIpGroupsInput
-	Copy  func(*DisassociateIpGroupsInput) DisassociateIpGroupsRequest
+	Input *types.DisassociateIpGroupsInput
+	Copy  func(*types.DisassociateIpGroupsInput) DisassociateIpGroupsRequest
 }
 
 // Send marshals and sends the DisassociateIpGroups API request.
@@ -102,7 +56,7 @@ func (r DisassociateIpGroupsRequest) Send(ctx context.Context) (*DisassociateIpG
 	}
 
 	resp := &DisassociateIpGroupsResponse{
-		DisassociateIpGroupsOutput: r.Request.Data.(*DisassociateIpGroupsOutput),
+		DisassociateIpGroupsOutput: r.Request.Data.(*types.DisassociateIpGroupsOutput),
 		response:                   &aws.Response{Request: r.Request},
 	}
 
@@ -112,7 +66,7 @@ func (r DisassociateIpGroupsRequest) Send(ctx context.Context) (*DisassociateIpG
 // DisassociateIpGroupsResponse is the response type for the
 // DisassociateIpGroups API operation.
 type DisassociateIpGroupsResponse struct {
-	*DisassociateIpGroupsOutput
+	*types.DisassociateIpGroupsOutput
 
 	response *aws.Response
 }

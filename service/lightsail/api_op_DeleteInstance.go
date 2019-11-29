@@ -6,53 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/lightsail/types"
 )
-
-type DeleteInstanceInput struct {
-	_ struct{} `type:"structure"`
-
-	// A Boolean value to indicate whether to delete the enabled add-ons for the
-	// disk.
-	ForceDeleteAddOns *bool `locationName:"forceDeleteAddOns" type:"boolean"`
-
-	// The name of the instance to delete.
-	//
-	// InstanceName is a required field
-	InstanceName *string `locationName:"instanceName" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteInstanceInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteInstanceInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteInstanceInput"}
-
-	if s.InstanceName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("InstanceName"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteInstanceOutput struct {
-	_ struct{} `type:"structure"`
-
-	// An array of key-value pairs containing information about the results of your
-	// delete instance request.
-	Operations []Operation `locationName:"operations" type:"list"`
-}
-
-// String returns the string representation
-func (s DeleteInstanceOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteInstance = "DeleteInstance"
 
@@ -73,7 +28,7 @@ const opDeleteInstance = "DeleteInstance"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/DeleteInstance
-func (c *Client) DeleteInstanceRequest(input *DeleteInstanceInput) DeleteInstanceRequest {
+func (c *Client) DeleteInstanceRequest(input *types.DeleteInstanceInput) DeleteInstanceRequest {
 	op := &aws.Operation{
 		Name:       opDeleteInstance,
 		HTTPMethod: "POST",
@@ -81,10 +36,10 @@ func (c *Client) DeleteInstanceRequest(input *DeleteInstanceInput) DeleteInstanc
 	}
 
 	if input == nil {
-		input = &DeleteInstanceInput{}
+		input = &types.DeleteInstanceInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteInstanceOutput{})
+	req := c.newRequest(op, input, &types.DeleteInstanceOutput{})
 	return DeleteInstanceRequest{Request: req, Input: input, Copy: c.DeleteInstanceRequest}
 }
 
@@ -92,8 +47,8 @@ func (c *Client) DeleteInstanceRequest(input *DeleteInstanceInput) DeleteInstanc
 // DeleteInstance API operation.
 type DeleteInstanceRequest struct {
 	*aws.Request
-	Input *DeleteInstanceInput
-	Copy  func(*DeleteInstanceInput) DeleteInstanceRequest
+	Input *types.DeleteInstanceInput
+	Copy  func(*types.DeleteInstanceInput) DeleteInstanceRequest
 }
 
 // Send marshals and sends the DeleteInstance API request.
@@ -105,7 +60,7 @@ func (r DeleteInstanceRequest) Send(ctx context.Context) (*DeleteInstanceRespons
 	}
 
 	resp := &DeleteInstanceResponse{
-		DeleteInstanceOutput: r.Request.Data.(*DeleteInstanceOutput),
+		DeleteInstanceOutput: r.Request.Data.(*types.DeleteInstanceOutput),
 		response:             &aws.Response{Request: r.Request},
 	}
 
@@ -115,7 +70,7 @@ func (r DeleteInstanceRequest) Send(ctx context.Context) (*DeleteInstanceRespons
 // DeleteInstanceResponse is the response type for the
 // DeleteInstance API operation.
 type DeleteInstanceResponse struct {
-	*DeleteInstanceOutput
+	*types.DeleteInstanceOutput
 
 	response *aws.Response
 }

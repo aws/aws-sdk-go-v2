@@ -6,58 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/types"
 )
-
-// Represents the request to get the device.
-type GetDeviceInput struct {
-	_ struct{} `type:"structure"`
-
-	// The access token.
-	AccessToken *string `type:"string" sensitive:"true"`
-
-	// The device key.
-	//
-	// DeviceKey is a required field
-	DeviceKey *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetDeviceInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetDeviceInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetDeviceInput"}
-
-	if s.DeviceKey == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DeviceKey"))
-	}
-	if s.DeviceKey != nil && len(*s.DeviceKey) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("DeviceKey", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Gets the device response.
-type GetDeviceOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The device.
-	//
-	// Device is a required field
-	Device *DeviceType `type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s GetDeviceOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetDevice = "GetDevice"
 
@@ -74,7 +24,7 @@ const opGetDevice = "GetDevice"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/GetDevice
-func (c *Client) GetDeviceRequest(input *GetDeviceInput) GetDeviceRequest {
+func (c *Client) GetDeviceRequest(input *types.GetDeviceInput) GetDeviceRequest {
 	op := &aws.Operation{
 		Name:       opGetDevice,
 		HTTPMethod: "POST",
@@ -82,10 +32,10 @@ func (c *Client) GetDeviceRequest(input *GetDeviceInput) GetDeviceRequest {
 	}
 
 	if input == nil {
-		input = &GetDeviceInput{}
+		input = &types.GetDeviceInput{}
 	}
 
-	req := c.newRequest(op, input, &GetDeviceOutput{})
+	req := c.newRequest(op, input, &types.GetDeviceOutput{})
 	return GetDeviceRequest{Request: req, Input: input, Copy: c.GetDeviceRequest}
 }
 
@@ -93,8 +43,8 @@ func (c *Client) GetDeviceRequest(input *GetDeviceInput) GetDeviceRequest {
 // GetDevice API operation.
 type GetDeviceRequest struct {
 	*aws.Request
-	Input *GetDeviceInput
-	Copy  func(*GetDeviceInput) GetDeviceRequest
+	Input *types.GetDeviceInput
+	Copy  func(*types.GetDeviceInput) GetDeviceRequest
 }
 
 // Send marshals and sends the GetDevice API request.
@@ -106,7 +56,7 @@ func (r GetDeviceRequest) Send(ctx context.Context) (*GetDeviceResponse, error) 
 	}
 
 	resp := &GetDeviceResponse{
-		GetDeviceOutput: r.Request.Data.(*GetDeviceOutput),
+		GetDeviceOutput: r.Request.Data.(*types.GetDeviceOutput),
 		response:        &aws.Response{Request: r.Request},
 	}
 
@@ -116,7 +66,7 @@ func (r GetDeviceRequest) Send(ctx context.Context) (*GetDeviceResponse, error) 
 // GetDeviceResponse is the response type for the
 // GetDevice API operation.
 type GetDeviceResponse struct {
-	*GetDeviceOutput
+	*types.GetDeviceOutput
 
 	response *aws.Response
 }

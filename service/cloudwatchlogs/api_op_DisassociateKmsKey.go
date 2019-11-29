@@ -6,50 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
+	"github.com/aws/aws-sdk-go-v2/service/cloudwatchlogs/types"
 )
-
-type DisassociateKmsKeyInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the log group.
-	//
-	// LogGroupName is a required field
-	LogGroupName *string `locationName:"logGroupName" min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DisassociateKmsKeyInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DisassociateKmsKeyInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DisassociateKmsKeyInput"}
-
-	if s.LogGroupName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("LogGroupName"))
-	}
-	if s.LogGroupName != nil && len(*s.LogGroupName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("LogGroupName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DisassociateKmsKeyOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DisassociateKmsKeyOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDisassociateKmsKey = "DisassociateKmsKey"
 
@@ -74,7 +34,7 @@ const opDisassociateKmsKey = "DisassociateKmsKey"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/DisassociateKmsKey
-func (c *Client) DisassociateKmsKeyRequest(input *DisassociateKmsKeyInput) DisassociateKmsKeyRequest {
+func (c *Client) DisassociateKmsKeyRequest(input *types.DisassociateKmsKeyInput) DisassociateKmsKeyRequest {
 	op := &aws.Operation{
 		Name:       opDisassociateKmsKey,
 		HTTPMethod: "POST",
@@ -82,10 +42,10 @@ func (c *Client) DisassociateKmsKeyRequest(input *DisassociateKmsKeyInput) Disas
 	}
 
 	if input == nil {
-		input = &DisassociateKmsKeyInput{}
+		input = &types.DisassociateKmsKeyInput{}
 	}
 
-	req := c.newRequest(op, input, &DisassociateKmsKeyOutput{})
+	req := c.newRequest(op, input, &types.DisassociateKmsKeyOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return DisassociateKmsKeyRequest{Request: req, Input: input, Copy: c.DisassociateKmsKeyRequest}
@@ -95,8 +55,8 @@ func (c *Client) DisassociateKmsKeyRequest(input *DisassociateKmsKeyInput) Disas
 // DisassociateKmsKey API operation.
 type DisassociateKmsKeyRequest struct {
 	*aws.Request
-	Input *DisassociateKmsKeyInput
-	Copy  func(*DisassociateKmsKeyInput) DisassociateKmsKeyRequest
+	Input *types.DisassociateKmsKeyInput
+	Copy  func(*types.DisassociateKmsKeyInput) DisassociateKmsKeyRequest
 }
 
 // Send marshals and sends the DisassociateKmsKey API request.
@@ -108,7 +68,7 @@ func (r DisassociateKmsKeyRequest) Send(ctx context.Context) (*DisassociateKmsKe
 	}
 
 	resp := &DisassociateKmsKeyResponse{
-		DisassociateKmsKeyOutput: r.Request.Data.(*DisassociateKmsKeyOutput),
+		DisassociateKmsKeyOutput: r.Request.Data.(*types.DisassociateKmsKeyOutput),
 		response:                 &aws.Response{Request: r.Request},
 	}
 
@@ -118,7 +78,7 @@ func (r DisassociateKmsKeyRequest) Send(ctx context.Context) (*DisassociateKmsKe
 // DisassociateKmsKeyResponse is the response type for the
 // DisassociateKmsKey API operation.
 type DisassociateKmsKeyResponse struct {
-	*DisassociateKmsKeyOutput
+	*types.DisassociateKmsKeyOutput
 
 	response *aws.Response
 }

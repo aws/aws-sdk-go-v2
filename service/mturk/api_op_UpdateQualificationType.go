@@ -6,96 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/mturk/types"
 )
-
-type UpdateQualificationTypeInput struct {
-	_ struct{} `type:"structure"`
-
-	// The answers to the Qualification test specified in the Test parameter, in
-	// the form of an AnswerKey data structure.
-	AnswerKey *string `type:"string"`
-
-	// Specifies whether requests for the Qualification type are granted immediately,
-	// without prompting the Worker with a Qualification test.
-	//
-	// Constraints: If the Test parameter is specified, this parameter cannot be
-	// true.
-	AutoGranted *bool `type:"boolean"`
-
-	// The Qualification value to use for automatically granted Qualifications.
-	// This parameter is used only if the AutoGranted parameter is true.
-	AutoGrantedValue *int64 `type:"integer"`
-
-	// The new description of the Qualification type.
-	Description *string `type:"string"`
-
-	// The ID of the Qualification type to update.
-	//
-	// QualificationTypeId is a required field
-	QualificationTypeId *string `min:"1" type:"string" required:"true"`
-
-	// The new status of the Qualification type - Active | Inactive
-	QualificationTypeStatus QualificationTypeStatus `type:"string" enum:"true"`
-
-	// The amount of time, in seconds, that Workers must wait after requesting a
-	// Qualification of the specified Qualification type before they can retry the
-	// Qualification request. It is not possible to disable retries for a Qualification
-	// type after it has been created with retries enabled. If you want to disable
-	// retries, you must dispose of the existing retry-enabled Qualification type
-	// using DisposeQualificationType and then create a new Qualification type with
-	// retries disabled using CreateQualificationType.
-	RetryDelayInSeconds *int64 `type:"long"`
-
-	// The questions for the Qualification test a Worker must answer correctly to
-	// obtain a Qualification of this type. If this parameter is specified, TestDurationInSeconds
-	// must also be specified.
-	//
-	// Constraints: Must not be longer than 65535 bytes. Must be a QuestionForm
-	// data structure. This parameter cannot be specified if AutoGranted is true.
-	//
-	// Constraints: None. If not specified, the Worker may request the Qualification
-	// without answering any questions.
-	Test *string `type:"string"`
-
-	// The number of seconds the Worker has to complete the Qualification test,
-	// starting from the time the Worker requests the Qualification.
-	TestDurationInSeconds *int64 `type:"long"`
-}
-
-// String returns the string representation
-func (s UpdateQualificationTypeInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateQualificationTypeInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateQualificationTypeInput"}
-
-	if s.QualificationTypeId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("QualificationTypeId"))
-	}
-	if s.QualificationTypeId != nil && len(*s.QualificationTypeId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("QualificationTypeId", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type UpdateQualificationTypeOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Contains a QualificationType data structure.
-	QualificationType *QualificationType `type:"structure"`
-}
-
-// String returns the string representation
-func (s UpdateQualificationTypeOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opUpdateQualificationType = "UpdateQualificationType"
 
@@ -142,7 +54,7 @@ const opUpdateQualificationType = "UpdateQualificationType"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/UpdateQualificationType
-func (c *Client) UpdateQualificationTypeRequest(input *UpdateQualificationTypeInput) UpdateQualificationTypeRequest {
+func (c *Client) UpdateQualificationTypeRequest(input *types.UpdateQualificationTypeInput) UpdateQualificationTypeRequest {
 	op := &aws.Operation{
 		Name:       opUpdateQualificationType,
 		HTTPMethod: "POST",
@@ -150,10 +62,10 @@ func (c *Client) UpdateQualificationTypeRequest(input *UpdateQualificationTypeIn
 	}
 
 	if input == nil {
-		input = &UpdateQualificationTypeInput{}
+		input = &types.UpdateQualificationTypeInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateQualificationTypeOutput{})
+	req := c.newRequest(op, input, &types.UpdateQualificationTypeOutput{})
 	return UpdateQualificationTypeRequest{Request: req, Input: input, Copy: c.UpdateQualificationTypeRequest}
 }
 
@@ -161,8 +73,8 @@ func (c *Client) UpdateQualificationTypeRequest(input *UpdateQualificationTypeIn
 // UpdateQualificationType API operation.
 type UpdateQualificationTypeRequest struct {
 	*aws.Request
-	Input *UpdateQualificationTypeInput
-	Copy  func(*UpdateQualificationTypeInput) UpdateQualificationTypeRequest
+	Input *types.UpdateQualificationTypeInput
+	Copy  func(*types.UpdateQualificationTypeInput) UpdateQualificationTypeRequest
 }
 
 // Send marshals and sends the UpdateQualificationType API request.
@@ -174,7 +86,7 @@ func (r UpdateQualificationTypeRequest) Send(ctx context.Context) (*UpdateQualif
 	}
 
 	resp := &UpdateQualificationTypeResponse{
-		UpdateQualificationTypeOutput: r.Request.Data.(*UpdateQualificationTypeOutput),
+		UpdateQualificationTypeOutput: r.Request.Data.(*types.UpdateQualificationTypeOutput),
 		response:                      &aws.Response{Request: r.Request},
 	}
 
@@ -184,7 +96,7 @@ func (r UpdateQualificationTypeRequest) Send(ctx context.Context) (*UpdateQualif
 // UpdateQualificationTypeResponse is the response type for the
 // UpdateQualificationType API operation.
 type UpdateQualificationTypeResponse struct {
-	*UpdateQualificationTypeOutput
+	*types.UpdateQualificationTypeOutput
 
 	response *aws.Response
 }

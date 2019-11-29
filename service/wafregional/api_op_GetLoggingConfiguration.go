@@ -6,53 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/service/waf"
+	"github.com/aws/aws-sdk-go-v2/service/wafregional/types"
 )
-
-type GetLoggingConfigurationInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the web ACL for which you want to get the
-	// LoggingConfiguration.
-	//
-	// ResourceArn is a required field
-	ResourceArn *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetLoggingConfigurationInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetLoggingConfigurationInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetLoggingConfigurationInput"}
-
-	if s.ResourceArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ResourceArn"))
-	}
-	if s.ResourceArn != nil && len(*s.ResourceArn) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ResourceArn", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type GetLoggingConfigurationOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The LoggingConfiguration for the specified web ACL.
-	LoggingConfiguration *waf.LoggingConfiguration `type:"structure"`
-}
-
-// String returns the string representation
-func (s GetLoggingConfigurationOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetLoggingConfiguration = "GetLoggingConfiguration"
 
@@ -69,7 +24,7 @@ const opGetLoggingConfiguration = "GetLoggingConfiguration"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/GetLoggingConfiguration
-func (c *Client) GetLoggingConfigurationRequest(input *GetLoggingConfigurationInput) GetLoggingConfigurationRequest {
+func (c *Client) GetLoggingConfigurationRequest(input *types.GetLoggingConfigurationInput) GetLoggingConfigurationRequest {
 	op := &aws.Operation{
 		Name:       opGetLoggingConfiguration,
 		HTTPMethod: "POST",
@@ -77,10 +32,10 @@ func (c *Client) GetLoggingConfigurationRequest(input *GetLoggingConfigurationIn
 	}
 
 	if input == nil {
-		input = &GetLoggingConfigurationInput{}
+		input = &types.GetLoggingConfigurationInput{}
 	}
 
-	req := c.newRequest(op, input, &GetLoggingConfigurationOutput{})
+	req := c.newRequest(op, input, &types.GetLoggingConfigurationOutput{})
 	return GetLoggingConfigurationRequest{Request: req, Input: input, Copy: c.GetLoggingConfigurationRequest}
 }
 
@@ -88,8 +43,8 @@ func (c *Client) GetLoggingConfigurationRequest(input *GetLoggingConfigurationIn
 // GetLoggingConfiguration API operation.
 type GetLoggingConfigurationRequest struct {
 	*aws.Request
-	Input *GetLoggingConfigurationInput
-	Copy  func(*GetLoggingConfigurationInput) GetLoggingConfigurationRequest
+	Input *types.GetLoggingConfigurationInput
+	Copy  func(*types.GetLoggingConfigurationInput) GetLoggingConfigurationRequest
 }
 
 // Send marshals and sends the GetLoggingConfiguration API request.
@@ -101,7 +56,7 @@ func (r GetLoggingConfigurationRequest) Send(ctx context.Context) (*GetLoggingCo
 	}
 
 	resp := &GetLoggingConfigurationResponse{
-		GetLoggingConfigurationOutput: r.Request.Data.(*GetLoggingConfigurationOutput),
+		GetLoggingConfigurationOutput: r.Request.Data.(*types.GetLoggingConfigurationOutput),
 		response:                      &aws.Response{Request: r.Request},
 	}
 
@@ -111,7 +66,7 @@ func (r GetLoggingConfigurationRequest) Send(ctx context.Context) (*GetLoggingCo
 // GetLoggingConfigurationResponse is the response type for the
 // GetLoggingConfiguration API operation.
 type GetLoggingConfigurationResponse struct {
-	*GetLoggingConfigurationOutput
+	*types.GetLoggingConfigurationOutput
 
 	response *aws.Response
 }

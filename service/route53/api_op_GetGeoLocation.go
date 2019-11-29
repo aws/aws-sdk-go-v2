@@ -6,118 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/route53/types"
 )
-
-// A request for information about whether a specified geographic location is
-// supported for Amazon Route 53 geolocation resource record sets.
-type GetGeoLocationInput struct {
-	_ struct{} `type:"structure"`
-
-	// Amazon Route 53 supports the following continent codes:
-	//
-	//    * AF: Africa
-	//
-	//    * AN: Antarctica
-	//
-	//    * AS: Asia
-	//
-	//    * EU: Europe
-	//
-	//    * OC: Oceania
-	//
-	//    * NA: North America
-	//
-	//    * SA: South America
-	ContinentCode *string `location:"querystring" locationName:"continentcode" min:"2" type:"string"`
-
-	// Amazon Route 53 uses the two-letter country codes that are specified in ISO
-	// standard 3166-1 alpha-2 (https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2).
-	CountryCode *string `location:"querystring" locationName:"countrycode" min:"1" type:"string"`
-
-	// Amazon Route 53 uses the one- to three-letter subdivision codes that are
-	// specified in ISO standard 3166-1 alpha-2 (https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2).
-	// Route 53 doesn't support subdivision codes for all countries. If you specify
-	// subdivisioncode, you must also specify countrycode.
-	SubdivisionCode *string `location:"querystring" locationName:"subdivisioncode" min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s GetGeoLocationInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetGeoLocationInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetGeoLocationInput"}
-	if s.ContinentCode != nil && len(*s.ContinentCode) < 2 {
-		invalidParams.Add(aws.NewErrParamMinLen("ContinentCode", 2))
-	}
-	if s.CountryCode != nil && len(*s.CountryCode) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("CountryCode", 1))
-	}
-	if s.SubdivisionCode != nil && len(*s.SubdivisionCode) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("SubdivisionCode", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetGeoLocationInput) MarshalFields(e protocol.FieldEncoder) error {
-
-	if s.ContinentCode != nil {
-		v := *s.ContinentCode
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "continentcode", protocol.StringValue(v), metadata)
-	}
-	if s.CountryCode != nil {
-		v := *s.CountryCode
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "countrycode", protocol.StringValue(v), metadata)
-	}
-	if s.SubdivisionCode != nil {
-		v := *s.SubdivisionCode
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "subdivisioncode", protocol.StringValue(v), metadata)
-	}
-	return nil
-}
-
-// A complex type that contains the response information for the specified geolocation
-// code.
-type GetGeoLocationOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A complex type that contains the codes and full continent, country, and subdivision
-	// names for the specified geolocation code.
-	//
-	// GeoLocationDetails is a required field
-	GeoLocationDetails *GeoLocationDetails `type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s GetGeoLocationOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetGeoLocationOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.GeoLocationDetails != nil {
-		v := s.GeoLocationDetails
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "GeoLocationDetails", v, metadata)
-	}
-	return nil
-}
 
 const opGetGeoLocation = "GetGeoLocation"
 
@@ -151,7 +41,7 @@ const opGetGeoLocation = "GetGeoLocation"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/GetGeoLocation
-func (c *Client) GetGeoLocationRequest(input *GetGeoLocationInput) GetGeoLocationRequest {
+func (c *Client) GetGeoLocationRequest(input *types.GetGeoLocationInput) GetGeoLocationRequest {
 	op := &aws.Operation{
 		Name:       opGetGeoLocation,
 		HTTPMethod: "GET",
@@ -159,10 +49,10 @@ func (c *Client) GetGeoLocationRequest(input *GetGeoLocationInput) GetGeoLocatio
 	}
 
 	if input == nil {
-		input = &GetGeoLocationInput{}
+		input = &types.GetGeoLocationInput{}
 	}
 
-	req := c.newRequest(op, input, &GetGeoLocationOutput{})
+	req := c.newRequest(op, input, &types.GetGeoLocationOutput{})
 	return GetGeoLocationRequest{Request: req, Input: input, Copy: c.GetGeoLocationRequest}
 }
 
@@ -170,8 +60,8 @@ func (c *Client) GetGeoLocationRequest(input *GetGeoLocationInput) GetGeoLocatio
 // GetGeoLocation API operation.
 type GetGeoLocationRequest struct {
 	*aws.Request
-	Input *GetGeoLocationInput
-	Copy  func(*GetGeoLocationInput) GetGeoLocationRequest
+	Input *types.GetGeoLocationInput
+	Copy  func(*types.GetGeoLocationInput) GetGeoLocationRequest
 }
 
 // Send marshals and sends the GetGeoLocation API request.
@@ -183,7 +73,7 @@ func (r GetGeoLocationRequest) Send(ctx context.Context) (*GetGeoLocationRespons
 	}
 
 	resp := &GetGeoLocationResponse{
-		GetGeoLocationOutput: r.Request.Data.(*GetGeoLocationOutput),
+		GetGeoLocationOutput: r.Request.Data.(*types.GetGeoLocationOutput),
 		response:             &aws.Response{Request: r.Request},
 	}
 
@@ -193,7 +83,7 @@ func (r GetGeoLocationRequest) Send(ctx context.Context) (*GetGeoLocationRespons
 // GetGeoLocationResponse is the response type for the
 // GetGeoLocation API operation.
 type GetGeoLocationResponse struct {
-	*GetGeoLocationOutput
+	*types.GetGeoLocationOutput
 
 	response *aws.Response
 }

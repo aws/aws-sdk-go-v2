@@ -6,87 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/restjson"
+	"github.com/aws/aws-sdk-go-v2/service/lexmodelbuildingservice/types"
 )
-
-type DeleteSlotTypeVersionInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the slot type.
-	//
-	// Name is a required field
-	Name *string `location:"uri" locationName:"name" min:"1" type:"string" required:"true"`
-
-	// The version of the slot type to delete. You cannot delete the $LATEST version
-	// of the slot type. To delete the $LATEST version, use the DeleteSlotType operation.
-	//
-	// Version is a required field
-	Version *string `location:"uri" locationName:"version" min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteSlotTypeVersionInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteSlotTypeVersionInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteSlotTypeVersionInput"}
-
-	if s.Name == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Name"))
-	}
-	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
-	}
-
-	if s.Version == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Version"))
-	}
-	if s.Version != nil && len(*s.Version) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Version", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteSlotTypeVersionInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.Name != nil {
-		v := *s.Name
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Version != nil {
-		v := *s.Version
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "version", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type DeleteSlotTypeVersionOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteSlotTypeVersionOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteSlotTypeVersionOutput) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
 
 const opDeleteSlotTypeVersion = "DeleteSlotTypeVersion"
 
@@ -106,7 +29,7 @@ const opDeleteSlotTypeVersion = "DeleteSlotTypeVersion"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/DeleteSlotTypeVersion
-func (c *Client) DeleteSlotTypeVersionRequest(input *DeleteSlotTypeVersionInput) DeleteSlotTypeVersionRequest {
+func (c *Client) DeleteSlotTypeVersionRequest(input *types.DeleteSlotTypeVersionInput) DeleteSlotTypeVersionRequest {
 	op := &aws.Operation{
 		Name:       opDeleteSlotTypeVersion,
 		HTTPMethod: "DELETE",
@@ -114,10 +37,10 @@ func (c *Client) DeleteSlotTypeVersionRequest(input *DeleteSlotTypeVersionInput)
 	}
 
 	if input == nil {
-		input = &DeleteSlotTypeVersionInput{}
+		input = &types.DeleteSlotTypeVersionInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteSlotTypeVersionOutput{})
+	req := c.newRequest(op, input, &types.DeleteSlotTypeVersionOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return DeleteSlotTypeVersionRequest{Request: req, Input: input, Copy: c.DeleteSlotTypeVersionRequest}
@@ -127,8 +50,8 @@ func (c *Client) DeleteSlotTypeVersionRequest(input *DeleteSlotTypeVersionInput)
 // DeleteSlotTypeVersion API operation.
 type DeleteSlotTypeVersionRequest struct {
 	*aws.Request
-	Input *DeleteSlotTypeVersionInput
-	Copy  func(*DeleteSlotTypeVersionInput) DeleteSlotTypeVersionRequest
+	Input *types.DeleteSlotTypeVersionInput
+	Copy  func(*types.DeleteSlotTypeVersionInput) DeleteSlotTypeVersionRequest
 }
 
 // Send marshals and sends the DeleteSlotTypeVersion API request.
@@ -140,7 +63,7 @@ func (r DeleteSlotTypeVersionRequest) Send(ctx context.Context) (*DeleteSlotType
 	}
 
 	resp := &DeleteSlotTypeVersionResponse{
-		DeleteSlotTypeVersionOutput: r.Request.Data.(*DeleteSlotTypeVersionOutput),
+		DeleteSlotTypeVersionOutput: r.Request.Data.(*types.DeleteSlotTypeVersionOutput),
 		response:                    &aws.Response{Request: r.Request},
 	}
 
@@ -150,7 +73,7 @@ func (r DeleteSlotTypeVersionRequest) Send(ctx context.Context) (*DeleteSlotType
 // DeleteSlotTypeVersionResponse is the response type for the
 // DeleteSlotTypeVersion API operation.
 type DeleteSlotTypeVersionResponse struct {
-	*DeleteSlotTypeVersionOutput
+	*types.DeleteSlotTypeVersionOutput
 
 	response *aws.Response
 }

@@ -6,62 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/textract/types"
 )
-
-type DetectDocumentTextInput struct {
-	_ struct{} `type:"structure"`
-
-	// The input document as base64-encoded bytes or an Amazon S3 object. If you
-	// use the AWS CLI to call Amazon Textract operations, you can't pass image
-	// bytes. The document must be an image in JPG or PNG format.
-	//
-	// If you are using an AWS SDK to call Amazon Textract, you might not need to
-	// base64-encode image bytes passed using the Bytes field.
-	//
-	// Document is a required field
-	Document *Document `type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s DetectDocumentTextInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DetectDocumentTextInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DetectDocumentTextInput"}
-
-	if s.Document == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Document"))
-	}
-	if s.Document != nil {
-		if err := s.Document.Validate(); err != nil {
-			invalidParams.AddNested("Document", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DetectDocumentTextOutput struct {
-	_ struct{} `type:"structure"`
-
-	// An array of Block objects containing the text detected in the document.
-	Blocks []Block `type:"list"`
-
-	// Metadata about the document. Contains the number of pages that are detected
-	// in the document.
-	DocumentMetadata *DocumentMetadata `type:"structure"`
-}
-
-// String returns the string representation
-func (s DetectDocumentTextOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDetectDocumentText = "DetectDocumentText"
 
@@ -91,7 +37,7 @@ const opDetectDocumentText = "DetectDocumentText"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/textract-2018-06-27/DetectDocumentText
-func (c *Client) DetectDocumentTextRequest(input *DetectDocumentTextInput) DetectDocumentTextRequest {
+func (c *Client) DetectDocumentTextRequest(input *types.DetectDocumentTextInput) DetectDocumentTextRequest {
 	op := &aws.Operation{
 		Name:       opDetectDocumentText,
 		HTTPMethod: "POST",
@@ -99,10 +45,10 @@ func (c *Client) DetectDocumentTextRequest(input *DetectDocumentTextInput) Detec
 	}
 
 	if input == nil {
-		input = &DetectDocumentTextInput{}
+		input = &types.DetectDocumentTextInput{}
 	}
 
-	req := c.newRequest(op, input, &DetectDocumentTextOutput{})
+	req := c.newRequest(op, input, &types.DetectDocumentTextOutput{})
 	return DetectDocumentTextRequest{Request: req, Input: input, Copy: c.DetectDocumentTextRequest}
 }
 
@@ -110,8 +56,8 @@ func (c *Client) DetectDocumentTextRequest(input *DetectDocumentTextInput) Detec
 // DetectDocumentText API operation.
 type DetectDocumentTextRequest struct {
 	*aws.Request
-	Input *DetectDocumentTextInput
-	Copy  func(*DetectDocumentTextInput) DetectDocumentTextRequest
+	Input *types.DetectDocumentTextInput
+	Copy  func(*types.DetectDocumentTextInput) DetectDocumentTextRequest
 }
 
 // Send marshals and sends the DetectDocumentText API request.
@@ -123,7 +69,7 @@ func (r DetectDocumentTextRequest) Send(ctx context.Context) (*DetectDocumentTex
 	}
 
 	resp := &DetectDocumentTextResponse{
-		DetectDocumentTextOutput: r.Request.Data.(*DetectDocumentTextOutput),
+		DetectDocumentTextOutput: r.Request.Data.(*types.DetectDocumentTextOutput),
 		response:                 &aws.Response{Request: r.Request},
 	}
 
@@ -133,7 +79,7 @@ func (r DetectDocumentTextRequest) Send(ctx context.Context) (*DetectDocumentTex
 // DetectDocumentTextResponse is the response type for the
 // DetectDocumentText API operation.
 type DetectDocumentTextResponse struct {
-	*DetectDocumentTextOutput
+	*types.DetectDocumentTextOutput
 
 	response *aws.Response
 }

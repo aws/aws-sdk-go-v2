@@ -6,52 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ssm/types"
 )
-
-type StopAutomationExecutionInput struct {
-	_ struct{} `type:"structure"`
-
-	// The execution ID of the Automation to stop.
-	//
-	// AutomationExecutionId is a required field
-	AutomationExecutionId *string `min:"36" type:"string" required:"true"`
-
-	// The stop request type. Valid types include the following: Cancel and Complete.
-	// The default type is Cancel.
-	Type StopType `type:"string" enum:"true"`
-}
-
-// String returns the string representation
-func (s StopAutomationExecutionInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *StopAutomationExecutionInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "StopAutomationExecutionInput"}
-
-	if s.AutomationExecutionId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("AutomationExecutionId"))
-	}
-	if s.AutomationExecutionId != nil && len(*s.AutomationExecutionId) < 36 {
-		invalidParams.Add(aws.NewErrParamMinLen("AutomationExecutionId", 36))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type StopAutomationExecutionOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s StopAutomationExecutionOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opStopAutomationExecution = "StopAutomationExecution"
 
@@ -68,7 +24,7 @@ const opStopAutomationExecution = "StopAutomationExecution"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/StopAutomationExecution
-func (c *Client) StopAutomationExecutionRequest(input *StopAutomationExecutionInput) StopAutomationExecutionRequest {
+func (c *Client) StopAutomationExecutionRequest(input *types.StopAutomationExecutionInput) StopAutomationExecutionRequest {
 	op := &aws.Operation{
 		Name:       opStopAutomationExecution,
 		HTTPMethod: "POST",
@@ -76,10 +32,10 @@ func (c *Client) StopAutomationExecutionRequest(input *StopAutomationExecutionIn
 	}
 
 	if input == nil {
-		input = &StopAutomationExecutionInput{}
+		input = &types.StopAutomationExecutionInput{}
 	}
 
-	req := c.newRequest(op, input, &StopAutomationExecutionOutput{})
+	req := c.newRequest(op, input, &types.StopAutomationExecutionOutput{})
 	return StopAutomationExecutionRequest{Request: req, Input: input, Copy: c.StopAutomationExecutionRequest}
 }
 
@@ -87,8 +43,8 @@ func (c *Client) StopAutomationExecutionRequest(input *StopAutomationExecutionIn
 // StopAutomationExecution API operation.
 type StopAutomationExecutionRequest struct {
 	*aws.Request
-	Input *StopAutomationExecutionInput
-	Copy  func(*StopAutomationExecutionInput) StopAutomationExecutionRequest
+	Input *types.StopAutomationExecutionInput
+	Copy  func(*types.StopAutomationExecutionInput) StopAutomationExecutionRequest
 }
 
 // Send marshals and sends the StopAutomationExecution API request.
@@ -100,7 +56,7 @@ func (r StopAutomationExecutionRequest) Send(ctx context.Context) (*StopAutomati
 	}
 
 	resp := &StopAutomationExecutionResponse{
-		StopAutomationExecutionOutput: r.Request.Data.(*StopAutomationExecutionOutput),
+		StopAutomationExecutionOutput: r.Request.Data.(*types.StopAutomationExecutionOutput),
 		response:                      &aws.Response{Request: r.Request},
 	}
 
@@ -110,7 +66,7 @@ func (r StopAutomationExecutionRequest) Send(ctx context.Context) (*StopAutomati
 // StopAutomationExecutionResponse is the response type for the
 // StopAutomationExecution API operation.
 type StopAutomationExecutionResponse struct {
-	*StopAutomationExecutionOutput
+	*types.StopAutomationExecutionOutput
 
 	response *aws.Response
 }

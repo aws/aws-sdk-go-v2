@@ -6,72 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/opsworkscm/types"
 )
-
-type DescribeNodeAssociationStatusInput struct {
-	_ struct{} `type:"structure"`
-
-	// The token returned in either the AssociateNodeResponse or the DisassociateNodeResponse.
-	//
-	// NodeAssociationStatusToken is a required field
-	NodeAssociationStatusToken *string `type:"string" required:"true"`
-
-	// The name of the server from which to disassociate the node.
-	//
-	// ServerName is a required field
-	ServerName *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeNodeAssociationStatusInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeNodeAssociationStatusInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeNodeAssociationStatusInput"}
-
-	if s.NodeAssociationStatusToken == nil {
-		invalidParams.Add(aws.NewErrParamRequired("NodeAssociationStatusToken"))
-	}
-
-	if s.ServerName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ServerName"))
-	}
-	if s.ServerName != nil && len(*s.ServerName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ServerName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribeNodeAssociationStatusOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Attributes specific to the node association. In Puppet, the attibute PUPPET_NODE_CERT
-	// contains the signed certificate (the result of the CSR).
-	EngineAttributes []EngineAttribute `type:"list"`
-
-	// The status of the association or disassociation request.
-	//
-	// Possible values:
-	//
-	//    * SUCCESS: The association or disassociation succeeded.
-	//
-	//    * FAILED: The association or disassociation failed.
-	//
-	//    * IN_PROGRESS: The association or disassociation is still in progress.
-	NodeAssociationStatus NodeAssociationStatus `type:"string" enum:"true"`
-}
-
-// String returns the string representation
-func (s DescribeNodeAssociationStatusOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeNodeAssociationStatus = "DescribeNodeAssociationStatus"
 
@@ -92,7 +28,7 @@ const opDescribeNodeAssociationStatus = "DescribeNodeAssociationStatus"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/DescribeNodeAssociationStatus
-func (c *Client) DescribeNodeAssociationStatusRequest(input *DescribeNodeAssociationStatusInput) DescribeNodeAssociationStatusRequest {
+func (c *Client) DescribeNodeAssociationStatusRequest(input *types.DescribeNodeAssociationStatusInput) DescribeNodeAssociationStatusRequest {
 	op := &aws.Operation{
 		Name:       opDescribeNodeAssociationStatus,
 		HTTPMethod: "POST",
@@ -100,10 +36,10 @@ func (c *Client) DescribeNodeAssociationStatusRequest(input *DescribeNodeAssocia
 	}
 
 	if input == nil {
-		input = &DescribeNodeAssociationStatusInput{}
+		input = &types.DescribeNodeAssociationStatusInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeNodeAssociationStatusOutput{})
+	req := c.newRequest(op, input, &types.DescribeNodeAssociationStatusOutput{})
 	return DescribeNodeAssociationStatusRequest{Request: req, Input: input, Copy: c.DescribeNodeAssociationStatusRequest}
 }
 
@@ -111,8 +47,8 @@ func (c *Client) DescribeNodeAssociationStatusRequest(input *DescribeNodeAssocia
 // DescribeNodeAssociationStatus API operation.
 type DescribeNodeAssociationStatusRequest struct {
 	*aws.Request
-	Input *DescribeNodeAssociationStatusInput
-	Copy  func(*DescribeNodeAssociationStatusInput) DescribeNodeAssociationStatusRequest
+	Input *types.DescribeNodeAssociationStatusInput
+	Copy  func(*types.DescribeNodeAssociationStatusInput) DescribeNodeAssociationStatusRequest
 }
 
 // Send marshals and sends the DescribeNodeAssociationStatus API request.
@@ -124,7 +60,7 @@ func (r DescribeNodeAssociationStatusRequest) Send(ctx context.Context) (*Descri
 	}
 
 	resp := &DescribeNodeAssociationStatusResponse{
-		DescribeNodeAssociationStatusOutput: r.Request.Data.(*DescribeNodeAssociationStatusOutput),
+		DescribeNodeAssociationStatusOutput: r.Request.Data.(*types.DescribeNodeAssociationStatusOutput),
 		response:                            &aws.Response{Request: r.Request},
 	}
 
@@ -134,7 +70,7 @@ func (r DescribeNodeAssociationStatusRequest) Send(ctx context.Context) (*Descri
 // DescribeNodeAssociationStatusResponse is the response type for the
 // DescribeNodeAssociationStatus API operation.
 type DescribeNodeAssociationStatusResponse struct {
-	*DescribeNodeAssociationStatusOutput
+	*types.DescribeNodeAssociationStatusOutput
 
 	response *aws.Response
 }

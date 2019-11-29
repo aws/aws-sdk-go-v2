@@ -10,6 +10,7 @@ package costandusagereportserviceiface
 
 import (
 	"github.com/aws/aws-sdk-go-v2/service/costandusagereportservice"
+	"github.com/aws/aws-sdk-go-v2/service/costandusagereportservice/types"
 )
 
 // ClientAPI provides an interface to enable mocking the
@@ -43,7 +44,7 @@ import (
 //    type mockClientClient struct {
 //        costandusagereportserviceiface.ClientPI
 //    }
-//    func (m *mockClientClient) DeleteReportDefinition(input *costandusagereportservice.DeleteReportDefinitionInput) (*costandusagereportservice.DeleteReportDefinitionOutput, error) {
+//    func (m *mockClientClient) DeleteReportDefinition(input *types.DeleteReportDefinitionInput) (*types.DeleteReportDefinitionOutput, error) {
 //        // mock response/functionality
 //    }
 //
@@ -61,13 +62,13 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type ClientAPI interface {
-	DeleteReportDefinitionRequest(*costandusagereportservice.DeleteReportDefinitionInput) costandusagereportservice.DeleteReportDefinitionRequest
+	DeleteReportDefinitionRequest(*types.DeleteReportDefinitionInput) costandusagereportservice.DeleteReportDefinitionRequest
 
-	DescribeReportDefinitionsRequest(*costandusagereportservice.DescribeReportDefinitionsInput) costandusagereportservice.DescribeReportDefinitionsRequest
+	DescribeReportDefinitionsRequest(*types.DescribeReportDefinitionsInput) costandusagereportservice.DescribeReportDefinitionsRequest
 
-	ModifyReportDefinitionRequest(*costandusagereportservice.ModifyReportDefinitionInput) costandusagereportservice.ModifyReportDefinitionRequest
+	ModifyReportDefinitionRequest(*types.ModifyReportDefinitionInput) costandusagereportservice.ModifyReportDefinitionRequest
 
-	PutReportDefinitionRequest(*costandusagereportservice.PutReportDefinitionInput) costandusagereportservice.PutReportDefinitionRequest
+	PutReportDefinitionRequest(*types.PutReportDefinitionInput) costandusagereportservice.PutReportDefinitionRequest
 }
 
 var _ ClientAPI = (*costandusagereportservice.Client)(nil)

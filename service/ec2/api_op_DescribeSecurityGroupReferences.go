@@ -6,54 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-type DescribeSecurityGroupReferencesInput struct {
-	_ struct{} `type:"structure"`
-
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have
-	// the required permissions, the error response is DryRunOperation. Otherwise,
-	// it is UnauthorizedOperation.
-	DryRun *bool `type:"boolean"`
-
-	// The IDs of the security groups in your account.
-	//
-	// GroupId is a required field
-	GroupId []string `locationNameList:"item" type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeSecurityGroupReferencesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeSecurityGroupReferencesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeSecurityGroupReferencesInput"}
-
-	if s.GroupId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("GroupId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribeSecurityGroupReferencesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Information about the VPCs with the referencing security groups.
-	SecurityGroupReferenceSet []SecurityGroupReference `locationName:"securityGroupReferenceSet" locationNameList:"item" type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeSecurityGroupReferencesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeSecurityGroupReferences = "DescribeSecurityGroupReferences"
 
@@ -71,7 +25,7 @@ const opDescribeSecurityGroupReferences = "DescribeSecurityGroupReferences"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeSecurityGroupReferences
-func (c *Client) DescribeSecurityGroupReferencesRequest(input *DescribeSecurityGroupReferencesInput) DescribeSecurityGroupReferencesRequest {
+func (c *Client) DescribeSecurityGroupReferencesRequest(input *types.DescribeSecurityGroupReferencesInput) DescribeSecurityGroupReferencesRequest {
 	op := &aws.Operation{
 		Name:       opDescribeSecurityGroupReferences,
 		HTTPMethod: "POST",
@@ -79,10 +33,10 @@ func (c *Client) DescribeSecurityGroupReferencesRequest(input *DescribeSecurityG
 	}
 
 	if input == nil {
-		input = &DescribeSecurityGroupReferencesInput{}
+		input = &types.DescribeSecurityGroupReferencesInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeSecurityGroupReferencesOutput{})
+	req := c.newRequest(op, input, &types.DescribeSecurityGroupReferencesOutput{})
 	return DescribeSecurityGroupReferencesRequest{Request: req, Input: input, Copy: c.DescribeSecurityGroupReferencesRequest}
 }
 
@@ -90,8 +44,8 @@ func (c *Client) DescribeSecurityGroupReferencesRequest(input *DescribeSecurityG
 // DescribeSecurityGroupReferences API operation.
 type DescribeSecurityGroupReferencesRequest struct {
 	*aws.Request
-	Input *DescribeSecurityGroupReferencesInput
-	Copy  func(*DescribeSecurityGroupReferencesInput) DescribeSecurityGroupReferencesRequest
+	Input *types.DescribeSecurityGroupReferencesInput
+	Copy  func(*types.DescribeSecurityGroupReferencesInput) DescribeSecurityGroupReferencesRequest
 }
 
 // Send marshals and sends the DescribeSecurityGroupReferences API request.
@@ -103,7 +57,7 @@ func (r DescribeSecurityGroupReferencesRequest) Send(ctx context.Context) (*Desc
 	}
 
 	resp := &DescribeSecurityGroupReferencesResponse{
-		DescribeSecurityGroupReferencesOutput: r.Request.Data.(*DescribeSecurityGroupReferencesOutput),
+		DescribeSecurityGroupReferencesOutput: r.Request.Data.(*types.DescribeSecurityGroupReferencesOutput),
 		response:                              &aws.Response{Request: r.Request},
 	}
 
@@ -113,7 +67,7 @@ func (r DescribeSecurityGroupReferencesRequest) Send(ctx context.Context) (*Desc
 // DescribeSecurityGroupReferencesResponse is the response type for the
 // DescribeSecurityGroupReferences API operation.
 type DescribeSecurityGroupReferencesResponse struct {
-	*DescribeSecurityGroupReferencesOutput
+	*types.DescribeSecurityGroupReferencesOutput
 
 	response *aws.Response
 }

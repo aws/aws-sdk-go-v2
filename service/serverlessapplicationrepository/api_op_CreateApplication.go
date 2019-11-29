@@ -6,285 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/serverlessapplicationrepository/types"
 )
-
-type CreateApplicationInput struct {
-	_ struct{} `type:"structure"`
-
-	// Author is a required field
-	Author *string `locationName:"author" type:"string" required:"true"`
-
-	// Description is a required field
-	Description *string `locationName:"description" type:"string" required:"true"`
-
-	HomePageUrl *string `locationName:"homePageUrl" type:"string"`
-
-	Labels []string `locationName:"labels" type:"list"`
-
-	LicenseBody *string `locationName:"licenseBody" type:"string"`
-
-	LicenseUrl *string `locationName:"licenseUrl" type:"string"`
-
-	// Name is a required field
-	Name *string `locationName:"name" type:"string" required:"true"`
-
-	ReadmeBody *string `locationName:"readmeBody" type:"string"`
-
-	ReadmeUrl *string `locationName:"readmeUrl" type:"string"`
-
-	SemanticVersion *string `locationName:"semanticVersion" type:"string"`
-
-	SourceCodeArchiveUrl *string `locationName:"sourceCodeArchiveUrl" type:"string"`
-
-	SourceCodeUrl *string `locationName:"sourceCodeUrl" type:"string"`
-
-	SpdxLicenseId *string `locationName:"spdxLicenseId" type:"string"`
-
-	TemplateBody *string `locationName:"templateBody" type:"string"`
-
-	TemplateUrl *string `locationName:"templateUrl" type:"string"`
-}
-
-// String returns the string representation
-func (s CreateApplicationInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateApplicationInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateApplicationInput"}
-
-	if s.Author == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Author"))
-	}
-
-	if s.Description == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Description"))
-	}
-
-	if s.Name == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Name"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s CreateApplicationInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.Author != nil {
-		v := *s.Author
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "author", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Description != nil {
-		v := *s.Description
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "description", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.HomePageUrl != nil {
-		v := *s.HomePageUrl
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "homePageUrl", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Labels != nil {
-		v := s.Labels
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "labels", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
-		}
-		ls0.End()
-
-	}
-	if s.LicenseBody != nil {
-		v := *s.LicenseBody
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "licenseBody", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.LicenseUrl != nil {
-		v := *s.LicenseUrl
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "licenseUrl", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Name != nil {
-		v := *s.Name
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.ReadmeBody != nil {
-		v := *s.ReadmeBody
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "readmeBody", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.ReadmeUrl != nil {
-		v := *s.ReadmeUrl
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "readmeUrl", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.SemanticVersion != nil {
-		v := *s.SemanticVersion
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "semanticVersion", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.SourceCodeArchiveUrl != nil {
-		v := *s.SourceCodeArchiveUrl
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "sourceCodeArchiveUrl", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.SourceCodeUrl != nil {
-		v := *s.SourceCodeUrl
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "sourceCodeUrl", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.SpdxLicenseId != nil {
-		v := *s.SpdxLicenseId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "spdxLicenseId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.TemplateBody != nil {
-		v := *s.TemplateBody
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "templateBody", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.TemplateUrl != nil {
-		v := *s.TemplateUrl
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "templateUrl", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type CreateApplicationOutput struct {
-	_ struct{} `type:"structure"`
-
-	ApplicationId *string `locationName:"applicationId" type:"string"`
-
-	Author *string `locationName:"author" type:"string"`
-
-	CreationTime *string `locationName:"creationTime" type:"string"`
-
-	Description *string `locationName:"description" type:"string"`
-
-	HomePageUrl *string `locationName:"homePageUrl" type:"string"`
-
-	Labels []string `locationName:"labels" type:"list"`
-
-	LicenseUrl *string `locationName:"licenseUrl" type:"string"`
-
-	Name *string `locationName:"name" type:"string"`
-
-	ReadmeUrl *string `locationName:"readmeUrl" type:"string"`
-
-	SpdxLicenseId *string `locationName:"spdxLicenseId" type:"string"`
-
-	// Application version details.
-	Version *Version `locationName:"version" type:"structure"`
-}
-
-// String returns the string representation
-func (s CreateApplicationOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s CreateApplicationOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.ApplicationId != nil {
-		v := *s.ApplicationId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "applicationId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Author != nil {
-		v := *s.Author
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "author", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.CreationTime != nil {
-		v := *s.CreationTime
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "creationTime", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Description != nil {
-		v := *s.Description
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "description", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.HomePageUrl != nil {
-		v := *s.HomePageUrl
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "homePageUrl", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Labels != nil {
-		v := s.Labels
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "labels", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
-		}
-		ls0.End()
-
-	}
-	if s.LicenseUrl != nil {
-		v := *s.LicenseUrl
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "licenseUrl", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Name != nil {
-		v := *s.Name
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.ReadmeUrl != nil {
-		v := *s.ReadmeUrl
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "readmeUrl", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.SpdxLicenseId != nil {
-		v := *s.SpdxLicenseId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "spdxLicenseId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Version != nil {
-		v := s.Version
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "version", v, metadata)
-	}
-	return nil
-}
 
 const opCreateApplication = "CreateApplication"
 
@@ -302,7 +25,7 @@ const opCreateApplication = "CreateApplication"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/serverlessrepo-2017-09-08/CreateApplication
-func (c *Client) CreateApplicationRequest(input *CreateApplicationInput) CreateApplicationRequest {
+func (c *Client) CreateApplicationRequest(input *types.CreateApplicationInput) CreateApplicationRequest {
 	op := &aws.Operation{
 		Name:       opCreateApplication,
 		HTTPMethod: "POST",
@@ -310,10 +33,10 @@ func (c *Client) CreateApplicationRequest(input *CreateApplicationInput) CreateA
 	}
 
 	if input == nil {
-		input = &CreateApplicationInput{}
+		input = &types.CreateApplicationInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateApplicationOutput{})
+	req := c.newRequest(op, input, &types.CreateApplicationOutput{})
 	return CreateApplicationRequest{Request: req, Input: input, Copy: c.CreateApplicationRequest}
 }
 
@@ -321,8 +44,8 @@ func (c *Client) CreateApplicationRequest(input *CreateApplicationInput) CreateA
 // CreateApplication API operation.
 type CreateApplicationRequest struct {
 	*aws.Request
-	Input *CreateApplicationInput
-	Copy  func(*CreateApplicationInput) CreateApplicationRequest
+	Input *types.CreateApplicationInput
+	Copy  func(*types.CreateApplicationInput) CreateApplicationRequest
 }
 
 // Send marshals and sends the CreateApplication API request.
@@ -334,7 +57,7 @@ func (r CreateApplicationRequest) Send(ctx context.Context) (*CreateApplicationR
 	}
 
 	resp := &CreateApplicationResponse{
-		CreateApplicationOutput: r.Request.Data.(*CreateApplicationOutput),
+		CreateApplicationOutput: r.Request.Data.(*types.CreateApplicationOutput),
 		response:                &aws.Response{Request: r.Request},
 	}
 
@@ -344,7 +67,7 @@ func (r CreateApplicationRequest) Send(ctx context.Context) (*CreateApplicationR
 // CreateApplicationResponse is the response type for the
 // CreateApplication API operation.
 type CreateApplicationResponse struct {
-	*CreateApplicationOutput
+	*types.CreateApplicationOutput
 
 	response *aws.Response
 }

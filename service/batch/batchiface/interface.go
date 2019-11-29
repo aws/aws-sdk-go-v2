@@ -10,6 +10,7 @@ package batchiface
 
 import (
 	"github.com/aws/aws-sdk-go-v2/service/batch"
+	"github.com/aws/aws-sdk-go-v2/service/batch/types"
 )
 
 // ClientAPI provides an interface to enable mocking the
@@ -43,7 +44,7 @@ import (
 //    type mockClientClient struct {
 //        batchiface.ClientPI
 //    }
-//    func (m *mockClientClient) CancelJob(input *batch.CancelJobInput) (*batch.CancelJobOutput, error) {
+//    func (m *mockClientClient) CancelJob(input *types.CancelJobInput) (*types.CancelJobOutput, error) {
 //        // mock response/functionality
 //    }
 //
@@ -61,37 +62,37 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type ClientAPI interface {
-	CancelJobRequest(*batch.CancelJobInput) batch.CancelJobRequest
+	CancelJobRequest(*types.CancelJobInput) batch.CancelJobRequest
 
-	CreateComputeEnvironmentRequest(*batch.CreateComputeEnvironmentInput) batch.CreateComputeEnvironmentRequest
+	CreateComputeEnvironmentRequest(*types.CreateComputeEnvironmentInput) batch.CreateComputeEnvironmentRequest
 
-	CreateJobQueueRequest(*batch.CreateJobQueueInput) batch.CreateJobQueueRequest
+	CreateJobQueueRequest(*types.CreateJobQueueInput) batch.CreateJobQueueRequest
 
-	DeleteComputeEnvironmentRequest(*batch.DeleteComputeEnvironmentInput) batch.DeleteComputeEnvironmentRequest
+	DeleteComputeEnvironmentRequest(*types.DeleteComputeEnvironmentInput) batch.DeleteComputeEnvironmentRequest
 
-	DeleteJobQueueRequest(*batch.DeleteJobQueueInput) batch.DeleteJobQueueRequest
+	DeleteJobQueueRequest(*types.DeleteJobQueueInput) batch.DeleteJobQueueRequest
 
-	DeregisterJobDefinitionRequest(*batch.DeregisterJobDefinitionInput) batch.DeregisterJobDefinitionRequest
+	DeregisterJobDefinitionRequest(*types.DeregisterJobDefinitionInput) batch.DeregisterJobDefinitionRequest
 
-	DescribeComputeEnvironmentsRequest(*batch.DescribeComputeEnvironmentsInput) batch.DescribeComputeEnvironmentsRequest
+	DescribeComputeEnvironmentsRequest(*types.DescribeComputeEnvironmentsInput) batch.DescribeComputeEnvironmentsRequest
 
-	DescribeJobDefinitionsRequest(*batch.DescribeJobDefinitionsInput) batch.DescribeJobDefinitionsRequest
+	DescribeJobDefinitionsRequest(*types.DescribeJobDefinitionsInput) batch.DescribeJobDefinitionsRequest
 
-	DescribeJobQueuesRequest(*batch.DescribeJobQueuesInput) batch.DescribeJobQueuesRequest
+	DescribeJobQueuesRequest(*types.DescribeJobQueuesInput) batch.DescribeJobQueuesRequest
 
-	DescribeJobsRequest(*batch.DescribeJobsInput) batch.DescribeJobsRequest
+	DescribeJobsRequest(*types.DescribeJobsInput) batch.DescribeJobsRequest
 
-	ListJobsRequest(*batch.ListJobsInput) batch.ListJobsRequest
+	ListJobsRequest(*types.ListJobsInput) batch.ListJobsRequest
 
-	RegisterJobDefinitionRequest(*batch.RegisterJobDefinitionInput) batch.RegisterJobDefinitionRequest
+	RegisterJobDefinitionRequest(*types.RegisterJobDefinitionInput) batch.RegisterJobDefinitionRequest
 
-	SubmitJobRequest(*batch.SubmitJobInput) batch.SubmitJobRequest
+	SubmitJobRequest(*types.SubmitJobInput) batch.SubmitJobRequest
 
-	TerminateJobRequest(*batch.TerminateJobInput) batch.TerminateJobRequest
+	TerminateJobRequest(*types.TerminateJobInput) batch.TerminateJobRequest
 
-	UpdateComputeEnvironmentRequest(*batch.UpdateComputeEnvironmentInput) batch.UpdateComputeEnvironmentRequest
+	UpdateComputeEnvironmentRequest(*types.UpdateComputeEnvironmentInput) batch.UpdateComputeEnvironmentRequest
 
-	UpdateJobQueueRequest(*batch.UpdateJobQueueInput) batch.UpdateJobQueueRequest
+	UpdateJobQueueRequest(*types.UpdateJobQueueInput) batch.UpdateJobQueueRequest
 }
 
 var _ ClientAPI = (*batch.Client)(nil)

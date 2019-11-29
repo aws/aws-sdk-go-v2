@@ -6,91 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/budgets/types"
 )
-
-// Request of DeleteSubscriber
-type DeleteSubscriberInput struct {
-	_ struct{} `type:"structure"`
-
-	// The accountId that is associated with the budget whose subscriber you want
-	// to delete.
-	//
-	// AccountId is a required field
-	AccountId *string `min:"12" type:"string" required:"true"`
-
-	// The name of the budget whose subscriber you want to delete.
-	//
-	// BudgetName is a required field
-	BudgetName *string `min:"1" type:"string" required:"true"`
-
-	// The notification whose subscriber you want to delete.
-	//
-	// Notification is a required field
-	Notification *Notification `type:"structure" required:"true"`
-
-	// The subscriber that you want to delete.
-	//
-	// Subscriber is a required field
-	Subscriber *Subscriber `type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteSubscriberInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteSubscriberInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteSubscriberInput"}
-
-	if s.AccountId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("AccountId"))
-	}
-	if s.AccountId != nil && len(*s.AccountId) < 12 {
-		invalidParams.Add(aws.NewErrParamMinLen("AccountId", 12))
-	}
-
-	if s.BudgetName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("BudgetName"))
-	}
-	if s.BudgetName != nil && len(*s.BudgetName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("BudgetName", 1))
-	}
-
-	if s.Notification == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Notification"))
-	}
-
-	if s.Subscriber == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Subscriber"))
-	}
-	if s.Notification != nil {
-		if err := s.Notification.Validate(); err != nil {
-			invalidParams.AddNested("Notification", err.(aws.ErrInvalidParams))
-		}
-	}
-	if s.Subscriber != nil {
-		if err := s.Subscriber.Validate(); err != nil {
-			invalidParams.AddNested("Subscriber", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Response of DeleteSubscriber
-type DeleteSubscriberOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteSubscriberOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteSubscriber = "DeleteSubscriber"
 
@@ -107,7 +24,7 @@ const opDeleteSubscriber = "DeleteSubscriber"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) DeleteSubscriberRequest(input *DeleteSubscriberInput) DeleteSubscriberRequest {
+func (c *Client) DeleteSubscriberRequest(input *types.DeleteSubscriberInput) DeleteSubscriberRequest {
 	op := &aws.Operation{
 		Name:       opDeleteSubscriber,
 		HTTPMethod: "POST",
@@ -115,10 +32,10 @@ func (c *Client) DeleteSubscriberRequest(input *DeleteSubscriberInput) DeleteSub
 	}
 
 	if input == nil {
-		input = &DeleteSubscriberInput{}
+		input = &types.DeleteSubscriberInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteSubscriberOutput{})
+	req := c.newRequest(op, input, &types.DeleteSubscriberOutput{})
 	return DeleteSubscriberRequest{Request: req, Input: input, Copy: c.DeleteSubscriberRequest}
 }
 
@@ -126,8 +43,8 @@ func (c *Client) DeleteSubscriberRequest(input *DeleteSubscriberInput) DeleteSub
 // DeleteSubscriber API operation.
 type DeleteSubscriberRequest struct {
 	*aws.Request
-	Input *DeleteSubscriberInput
-	Copy  func(*DeleteSubscriberInput) DeleteSubscriberRequest
+	Input *types.DeleteSubscriberInput
+	Copy  func(*types.DeleteSubscriberInput) DeleteSubscriberRequest
 }
 
 // Send marshals and sends the DeleteSubscriber API request.
@@ -139,7 +56,7 @@ func (r DeleteSubscriberRequest) Send(ctx context.Context) (*DeleteSubscriberRes
 	}
 
 	resp := &DeleteSubscriberResponse{
-		DeleteSubscriberOutput: r.Request.Data.(*DeleteSubscriberOutput),
+		DeleteSubscriberOutput: r.Request.Data.(*types.DeleteSubscriberOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -149,7 +66,7 @@ func (r DeleteSubscriberRequest) Send(ctx context.Context) (*DeleteSubscriberRes
 // DeleteSubscriberResponse is the response type for the
 // DeleteSubscriber API operation.
 type DeleteSubscriberResponse struct {
-	*DeleteSubscriberOutput
+	*types.DeleteSubscriberOutput
 
 	response *aws.Response
 }

@@ -6,70 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/cloudfront/types"
 )
-
-type ListPublicKeysInput struct {
-	_ struct{} `type:"structure"`
-
-	// Use this when paginating results to indicate where to begin in your list
-	// of public keys. The results include public keys in the list that occur after
-	// the marker. To get the next page of results, set the Marker to the value
-	// of the NextMarker from the current page's response (which is also the ID
-	// of the last public key on that page).
-	Marker *string `location:"querystring" locationName:"Marker" type:"string"`
-
-	// The maximum number of public keys you want in the response body.
-	MaxItems *int64 `location:"querystring" locationName:"MaxItems" type:"integer"`
-}
-
-// String returns the string representation
-func (s ListPublicKeysInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListPublicKeysInput) MarshalFields(e protocol.FieldEncoder) error {
-
-	if s.Marker != nil {
-		v := *s.Marker
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "Marker", protocol.StringValue(v), metadata)
-	}
-	if s.MaxItems != nil {
-		v := *s.MaxItems
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "MaxItems", protocol.Int64Value(v), metadata)
-	}
-	return nil
-}
-
-type ListPublicKeysOutput struct {
-	_ struct{} `type:"structure" payload:"PublicKeyList"`
-
-	// Returns a list of all public keys that have been added to CloudFront for
-	// this account.
-	PublicKeyList *PublicKeyList `type:"structure"`
-}
-
-// String returns the string representation
-func (s ListPublicKeysOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListPublicKeysOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.PublicKeyList != nil {
-		v := s.PublicKeyList
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.PayloadTarget, "PublicKeyList", v, metadata)
-	}
-	return nil
-}
 
 const opListPublicKeys = "ListPublicKeys2019_03_26"
 
@@ -86,7 +24,7 @@ const opListPublicKeys = "ListPublicKeys2019_03_26"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/ListPublicKeys
-func (c *Client) ListPublicKeysRequest(input *ListPublicKeysInput) ListPublicKeysRequest {
+func (c *Client) ListPublicKeysRequest(input *types.ListPublicKeysInput) ListPublicKeysRequest {
 	op := &aws.Operation{
 		Name:       opListPublicKeys,
 		HTTPMethod: "GET",
@@ -94,10 +32,10 @@ func (c *Client) ListPublicKeysRequest(input *ListPublicKeysInput) ListPublicKey
 	}
 
 	if input == nil {
-		input = &ListPublicKeysInput{}
+		input = &types.ListPublicKeysInput{}
 	}
 
-	req := c.newRequest(op, input, &ListPublicKeysOutput{})
+	req := c.newRequest(op, input, &types.ListPublicKeysOutput{})
 	return ListPublicKeysRequest{Request: req, Input: input, Copy: c.ListPublicKeysRequest}
 }
 
@@ -105,8 +43,8 @@ func (c *Client) ListPublicKeysRequest(input *ListPublicKeysInput) ListPublicKey
 // ListPublicKeys API operation.
 type ListPublicKeysRequest struct {
 	*aws.Request
-	Input *ListPublicKeysInput
-	Copy  func(*ListPublicKeysInput) ListPublicKeysRequest
+	Input *types.ListPublicKeysInput
+	Copy  func(*types.ListPublicKeysInput) ListPublicKeysRequest
 }
 
 // Send marshals and sends the ListPublicKeys API request.
@@ -118,7 +56,7 @@ func (r ListPublicKeysRequest) Send(ctx context.Context) (*ListPublicKeysRespons
 	}
 
 	resp := &ListPublicKeysResponse{
-		ListPublicKeysOutput: r.Request.Data.(*ListPublicKeysOutput),
+		ListPublicKeysOutput: r.Request.Data.(*types.ListPublicKeysOutput),
 		response:             &aws.Response{Request: r.Request},
 	}
 
@@ -128,7 +66,7 @@ func (r ListPublicKeysRequest) Send(ctx context.Context) (*ListPublicKeysRespons
 // ListPublicKeysResponse is the response type for the
 // ListPublicKeys API operation.
 type ListPublicKeysResponse struct {
-	*ListPublicKeysOutput
+	*types.ListPublicKeysOutput
 
 	response *aws.Response
 }

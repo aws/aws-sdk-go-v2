@@ -13,6 +13,7 @@ import (
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/autoscaling"
+	"github.com/aws/aws-sdk-go-v2/service/autoscaling/types"
 )
 
 // ClientAPI provides an interface to enable mocking the
@@ -46,7 +47,7 @@ import (
 //    type mockClientClient struct {
 //        autoscalingiface.ClientPI
 //    }
-//    func (m *mockClientClient) AttachInstances(input *autoscaling.AttachInstancesInput) (*autoscaling.AttachInstancesOutput, error) {
+//    func (m *mockClientClient) AttachInstances(input *types.AttachInstancesInput) (*types.AttachInstancesOutput, error) {
 //        // mock response/functionality
 //    }
 //
@@ -64,119 +65,119 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type ClientAPI interface {
-	AttachInstancesRequest(*autoscaling.AttachInstancesInput) autoscaling.AttachInstancesRequest
+	AttachInstancesRequest(*types.AttachInstancesInput) autoscaling.AttachInstancesRequest
 
-	AttachLoadBalancerTargetGroupsRequest(*autoscaling.AttachLoadBalancerTargetGroupsInput) autoscaling.AttachLoadBalancerTargetGroupsRequest
+	AttachLoadBalancerTargetGroupsRequest(*types.AttachLoadBalancerTargetGroupsInput) autoscaling.AttachLoadBalancerTargetGroupsRequest
 
-	AttachLoadBalancersRequest(*autoscaling.AttachLoadBalancersInput) autoscaling.AttachLoadBalancersRequest
+	AttachLoadBalancersRequest(*types.AttachLoadBalancersInput) autoscaling.AttachLoadBalancersRequest
 
-	BatchDeleteScheduledActionRequest(*autoscaling.BatchDeleteScheduledActionInput) autoscaling.BatchDeleteScheduledActionRequest
+	BatchDeleteScheduledActionRequest(*types.BatchDeleteScheduledActionInput) autoscaling.BatchDeleteScheduledActionRequest
 
-	BatchPutScheduledUpdateGroupActionRequest(*autoscaling.BatchPutScheduledUpdateGroupActionInput) autoscaling.BatchPutScheduledUpdateGroupActionRequest
+	BatchPutScheduledUpdateGroupActionRequest(*types.BatchPutScheduledUpdateGroupActionInput) autoscaling.BatchPutScheduledUpdateGroupActionRequest
 
-	CompleteLifecycleActionRequest(*autoscaling.CompleteLifecycleActionInput) autoscaling.CompleteLifecycleActionRequest
+	CompleteLifecycleActionRequest(*types.CompleteLifecycleActionInput) autoscaling.CompleteLifecycleActionRequest
 
-	CreateAutoScalingGroupRequest(*autoscaling.CreateAutoScalingGroupInput) autoscaling.CreateAutoScalingGroupRequest
+	CreateAutoScalingGroupRequest(*types.CreateAutoScalingGroupInput) autoscaling.CreateAutoScalingGroupRequest
 
-	CreateLaunchConfigurationRequest(*autoscaling.CreateLaunchConfigurationInput) autoscaling.CreateLaunchConfigurationRequest
+	CreateLaunchConfigurationRequest(*types.CreateLaunchConfigurationInput) autoscaling.CreateLaunchConfigurationRequest
 
-	CreateOrUpdateTagsRequest(*autoscaling.CreateOrUpdateTagsInput) autoscaling.CreateOrUpdateTagsRequest
+	CreateOrUpdateTagsRequest(*types.CreateOrUpdateTagsInput) autoscaling.CreateOrUpdateTagsRequest
 
-	DeleteAutoScalingGroupRequest(*autoscaling.DeleteAutoScalingGroupInput) autoscaling.DeleteAutoScalingGroupRequest
+	DeleteAutoScalingGroupRequest(*types.DeleteAutoScalingGroupInput) autoscaling.DeleteAutoScalingGroupRequest
 
-	DeleteLaunchConfigurationRequest(*autoscaling.DeleteLaunchConfigurationInput) autoscaling.DeleteLaunchConfigurationRequest
+	DeleteLaunchConfigurationRequest(*types.DeleteLaunchConfigurationInput) autoscaling.DeleteLaunchConfigurationRequest
 
-	DeleteLifecycleHookRequest(*autoscaling.DeleteLifecycleHookInput) autoscaling.DeleteLifecycleHookRequest
+	DeleteLifecycleHookRequest(*types.DeleteLifecycleHookInput) autoscaling.DeleteLifecycleHookRequest
 
-	DeleteNotificationConfigurationRequest(*autoscaling.DeleteNotificationConfigurationInput) autoscaling.DeleteNotificationConfigurationRequest
+	DeleteNotificationConfigurationRequest(*types.DeleteNotificationConfigurationInput) autoscaling.DeleteNotificationConfigurationRequest
 
-	DeletePolicyRequest(*autoscaling.DeletePolicyInput) autoscaling.DeletePolicyRequest
+	DeletePolicyRequest(*types.DeletePolicyInput) autoscaling.DeletePolicyRequest
 
-	DeleteScheduledActionRequest(*autoscaling.DeleteScheduledActionInput) autoscaling.DeleteScheduledActionRequest
+	DeleteScheduledActionRequest(*types.DeleteScheduledActionInput) autoscaling.DeleteScheduledActionRequest
 
-	DeleteTagsRequest(*autoscaling.DeleteTagsInput) autoscaling.DeleteTagsRequest
+	DeleteTagsRequest(*types.DeleteTagsInput) autoscaling.DeleteTagsRequest
 
-	DescribeAccountLimitsRequest(*autoscaling.DescribeAccountLimitsInput) autoscaling.DescribeAccountLimitsRequest
+	DescribeAccountLimitsRequest(*types.DescribeAccountLimitsInput) autoscaling.DescribeAccountLimitsRequest
 
-	DescribeAdjustmentTypesRequest(*autoscaling.DescribeAdjustmentTypesInput) autoscaling.DescribeAdjustmentTypesRequest
+	DescribeAdjustmentTypesRequest(*types.DescribeAdjustmentTypesInput) autoscaling.DescribeAdjustmentTypesRequest
 
-	DescribeAutoScalingGroupsRequest(*autoscaling.DescribeAutoScalingGroupsInput) autoscaling.DescribeAutoScalingGroupsRequest
+	DescribeAutoScalingGroupsRequest(*types.DescribeAutoScalingGroupsInput) autoscaling.DescribeAutoScalingGroupsRequest
 
-	DescribeAutoScalingInstancesRequest(*autoscaling.DescribeAutoScalingInstancesInput) autoscaling.DescribeAutoScalingInstancesRequest
+	DescribeAutoScalingInstancesRequest(*types.DescribeAutoScalingInstancesInput) autoscaling.DescribeAutoScalingInstancesRequest
 
-	DescribeAutoScalingNotificationTypesRequest(*autoscaling.DescribeAutoScalingNotificationTypesInput) autoscaling.DescribeAutoScalingNotificationTypesRequest
+	DescribeAutoScalingNotificationTypesRequest(*types.DescribeAutoScalingNotificationTypesInput) autoscaling.DescribeAutoScalingNotificationTypesRequest
 
-	DescribeLaunchConfigurationsRequest(*autoscaling.DescribeLaunchConfigurationsInput) autoscaling.DescribeLaunchConfigurationsRequest
+	DescribeLaunchConfigurationsRequest(*types.DescribeLaunchConfigurationsInput) autoscaling.DescribeLaunchConfigurationsRequest
 
-	DescribeLifecycleHookTypesRequest(*autoscaling.DescribeLifecycleHookTypesInput) autoscaling.DescribeLifecycleHookTypesRequest
+	DescribeLifecycleHookTypesRequest(*types.DescribeLifecycleHookTypesInput) autoscaling.DescribeLifecycleHookTypesRequest
 
-	DescribeLifecycleHooksRequest(*autoscaling.DescribeLifecycleHooksInput) autoscaling.DescribeLifecycleHooksRequest
+	DescribeLifecycleHooksRequest(*types.DescribeLifecycleHooksInput) autoscaling.DescribeLifecycleHooksRequest
 
-	DescribeLoadBalancerTargetGroupsRequest(*autoscaling.DescribeLoadBalancerTargetGroupsInput) autoscaling.DescribeLoadBalancerTargetGroupsRequest
+	DescribeLoadBalancerTargetGroupsRequest(*types.DescribeLoadBalancerTargetGroupsInput) autoscaling.DescribeLoadBalancerTargetGroupsRequest
 
-	DescribeLoadBalancersRequest(*autoscaling.DescribeLoadBalancersInput) autoscaling.DescribeLoadBalancersRequest
+	DescribeLoadBalancersRequest(*types.DescribeLoadBalancersInput) autoscaling.DescribeLoadBalancersRequest
 
-	DescribeMetricCollectionTypesRequest(*autoscaling.DescribeMetricCollectionTypesInput) autoscaling.DescribeMetricCollectionTypesRequest
+	DescribeMetricCollectionTypesRequest(*types.DescribeMetricCollectionTypesInput) autoscaling.DescribeMetricCollectionTypesRequest
 
-	DescribeNotificationConfigurationsRequest(*autoscaling.DescribeNotificationConfigurationsInput) autoscaling.DescribeNotificationConfigurationsRequest
+	DescribeNotificationConfigurationsRequest(*types.DescribeNotificationConfigurationsInput) autoscaling.DescribeNotificationConfigurationsRequest
 
-	DescribePoliciesRequest(*autoscaling.DescribePoliciesInput) autoscaling.DescribePoliciesRequest
+	DescribePoliciesRequest(*types.DescribePoliciesInput) autoscaling.DescribePoliciesRequest
 
-	DescribeScalingActivitiesRequest(*autoscaling.DescribeScalingActivitiesInput) autoscaling.DescribeScalingActivitiesRequest
+	DescribeScalingActivitiesRequest(*types.DescribeScalingActivitiesInput) autoscaling.DescribeScalingActivitiesRequest
 
-	DescribeScalingProcessTypesRequest(*autoscaling.DescribeScalingProcessTypesInput) autoscaling.DescribeScalingProcessTypesRequest
+	DescribeScalingProcessTypesRequest(*types.DescribeScalingProcessTypesInput) autoscaling.DescribeScalingProcessTypesRequest
 
-	DescribeScheduledActionsRequest(*autoscaling.DescribeScheduledActionsInput) autoscaling.DescribeScheduledActionsRequest
+	DescribeScheduledActionsRequest(*types.DescribeScheduledActionsInput) autoscaling.DescribeScheduledActionsRequest
 
-	DescribeTagsRequest(*autoscaling.DescribeTagsInput) autoscaling.DescribeTagsRequest
+	DescribeTagsRequest(*types.DescribeTagsInput) autoscaling.DescribeTagsRequest
 
-	DescribeTerminationPolicyTypesRequest(*autoscaling.DescribeTerminationPolicyTypesInput) autoscaling.DescribeTerminationPolicyTypesRequest
+	DescribeTerminationPolicyTypesRequest(*types.DescribeTerminationPolicyTypesInput) autoscaling.DescribeTerminationPolicyTypesRequest
 
-	DetachInstancesRequest(*autoscaling.DetachInstancesInput) autoscaling.DetachInstancesRequest
+	DetachInstancesRequest(*types.DetachInstancesInput) autoscaling.DetachInstancesRequest
 
-	DetachLoadBalancerTargetGroupsRequest(*autoscaling.DetachLoadBalancerTargetGroupsInput) autoscaling.DetachLoadBalancerTargetGroupsRequest
+	DetachLoadBalancerTargetGroupsRequest(*types.DetachLoadBalancerTargetGroupsInput) autoscaling.DetachLoadBalancerTargetGroupsRequest
 
-	DetachLoadBalancersRequest(*autoscaling.DetachLoadBalancersInput) autoscaling.DetachLoadBalancersRequest
+	DetachLoadBalancersRequest(*types.DetachLoadBalancersInput) autoscaling.DetachLoadBalancersRequest
 
-	DisableMetricsCollectionRequest(*autoscaling.DisableMetricsCollectionInput) autoscaling.DisableMetricsCollectionRequest
+	DisableMetricsCollectionRequest(*types.DisableMetricsCollectionInput) autoscaling.DisableMetricsCollectionRequest
 
-	EnableMetricsCollectionRequest(*autoscaling.EnableMetricsCollectionInput) autoscaling.EnableMetricsCollectionRequest
+	EnableMetricsCollectionRequest(*types.EnableMetricsCollectionInput) autoscaling.EnableMetricsCollectionRequest
 
-	EnterStandbyRequest(*autoscaling.EnterStandbyInput) autoscaling.EnterStandbyRequest
+	EnterStandbyRequest(*types.EnterStandbyInput) autoscaling.EnterStandbyRequest
 
-	ExecutePolicyRequest(*autoscaling.ExecutePolicyInput) autoscaling.ExecutePolicyRequest
+	ExecutePolicyRequest(*types.ExecutePolicyInput) autoscaling.ExecutePolicyRequest
 
-	ExitStandbyRequest(*autoscaling.ExitStandbyInput) autoscaling.ExitStandbyRequest
+	ExitStandbyRequest(*types.ExitStandbyInput) autoscaling.ExitStandbyRequest
 
-	PutLifecycleHookRequest(*autoscaling.PutLifecycleHookInput) autoscaling.PutLifecycleHookRequest
+	PutLifecycleHookRequest(*types.PutLifecycleHookInput) autoscaling.PutLifecycleHookRequest
 
-	PutNotificationConfigurationRequest(*autoscaling.PutNotificationConfigurationInput) autoscaling.PutNotificationConfigurationRequest
+	PutNotificationConfigurationRequest(*types.PutNotificationConfigurationInput) autoscaling.PutNotificationConfigurationRequest
 
-	PutScalingPolicyRequest(*autoscaling.PutScalingPolicyInput) autoscaling.PutScalingPolicyRequest
+	PutScalingPolicyRequest(*types.PutScalingPolicyInput) autoscaling.PutScalingPolicyRequest
 
-	PutScheduledUpdateGroupActionRequest(*autoscaling.PutScheduledUpdateGroupActionInput) autoscaling.PutScheduledUpdateGroupActionRequest
+	PutScheduledUpdateGroupActionRequest(*types.PutScheduledUpdateGroupActionInput) autoscaling.PutScheduledUpdateGroupActionRequest
 
-	RecordLifecycleActionHeartbeatRequest(*autoscaling.RecordLifecycleActionHeartbeatInput) autoscaling.RecordLifecycleActionHeartbeatRequest
+	RecordLifecycleActionHeartbeatRequest(*types.RecordLifecycleActionHeartbeatInput) autoscaling.RecordLifecycleActionHeartbeatRequest
 
-	ResumeProcessesRequest(*autoscaling.ResumeProcessesInput) autoscaling.ResumeProcessesRequest
+	ResumeProcessesRequest(*types.ResumeProcessesInput) autoscaling.ResumeProcessesRequest
 
-	SetDesiredCapacityRequest(*autoscaling.SetDesiredCapacityInput) autoscaling.SetDesiredCapacityRequest
+	SetDesiredCapacityRequest(*types.SetDesiredCapacityInput) autoscaling.SetDesiredCapacityRequest
 
-	SetInstanceHealthRequest(*autoscaling.SetInstanceHealthInput) autoscaling.SetInstanceHealthRequest
+	SetInstanceHealthRequest(*types.SetInstanceHealthInput) autoscaling.SetInstanceHealthRequest
 
-	SetInstanceProtectionRequest(*autoscaling.SetInstanceProtectionInput) autoscaling.SetInstanceProtectionRequest
+	SetInstanceProtectionRequest(*types.SetInstanceProtectionInput) autoscaling.SetInstanceProtectionRequest
 
-	SuspendProcessesRequest(*autoscaling.SuspendProcessesInput) autoscaling.SuspendProcessesRequest
+	SuspendProcessesRequest(*types.SuspendProcessesInput) autoscaling.SuspendProcessesRequest
 
-	TerminateInstanceInAutoScalingGroupRequest(*autoscaling.TerminateInstanceInAutoScalingGroupInput) autoscaling.TerminateInstanceInAutoScalingGroupRequest
+	TerminateInstanceInAutoScalingGroupRequest(*types.TerminateInstanceInAutoScalingGroupInput) autoscaling.TerminateInstanceInAutoScalingGroupRequest
 
-	UpdateAutoScalingGroupRequest(*autoscaling.UpdateAutoScalingGroupInput) autoscaling.UpdateAutoScalingGroupRequest
+	UpdateAutoScalingGroupRequest(*types.UpdateAutoScalingGroupInput) autoscaling.UpdateAutoScalingGroupRequest
 
-	WaitUntilGroupExists(context.Context, *autoscaling.DescribeAutoScalingGroupsInput, ...aws.WaiterOption) error
+	WaitUntilGroupExists(context.Context, *types.DescribeAutoScalingGroupsInput, ...aws.WaiterOption) error
 
-	WaitUntilGroupInService(context.Context, *autoscaling.DescribeAutoScalingGroupsInput, ...aws.WaiterOption) error
+	WaitUntilGroupInService(context.Context, *types.DescribeAutoScalingGroupsInput, ...aws.WaiterOption) error
 
-	WaitUntilGroupNotExists(context.Context, *autoscaling.DescribeAutoScalingGroupsInput, ...aws.WaiterOption) error
+	WaitUntilGroupNotExists(context.Context, *types.DescribeAutoScalingGroupsInput, ...aws.WaiterOption) error
 }
 
 var _ ClientAPI = (*autoscaling.Client)(nil)

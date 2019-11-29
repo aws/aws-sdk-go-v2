@@ -6,72 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/types"
 )
-
-// Represents the request to verify user attributes.
-type VerifyUserAttributeInput struct {
-	_ struct{} `type:"structure"`
-
-	// Represents the access token of the request to verify user attributes.
-	//
-	// AccessToken is a required field
-	AccessToken *string `type:"string" required:"true" sensitive:"true"`
-
-	// The attribute name in the request to verify user attributes.
-	//
-	// AttributeName is a required field
-	AttributeName *string `min:"1" type:"string" required:"true"`
-
-	// The verification code in the request to verify user attributes.
-	//
-	// Code is a required field
-	Code *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s VerifyUserAttributeInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *VerifyUserAttributeInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "VerifyUserAttributeInput"}
-
-	if s.AccessToken == nil {
-		invalidParams.Add(aws.NewErrParamRequired("AccessToken"))
-	}
-
-	if s.AttributeName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("AttributeName"))
-	}
-	if s.AttributeName != nil && len(*s.AttributeName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("AttributeName", 1))
-	}
-
-	if s.Code == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Code"))
-	}
-	if s.Code != nil && len(*s.Code) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Code", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// A container representing the response from the server from the request to
-// verify user attributes.
-type VerifyUserAttributeOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s VerifyUserAttributeOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opVerifyUserAttribute = "VerifyUserAttribute"
 
@@ -88,7 +24,7 @@ const opVerifyUserAttribute = "VerifyUserAttribute"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/VerifyUserAttribute
-func (c *Client) VerifyUserAttributeRequest(input *VerifyUserAttributeInput) VerifyUserAttributeRequest {
+func (c *Client) VerifyUserAttributeRequest(input *types.VerifyUserAttributeInput) VerifyUserAttributeRequest {
 	op := &aws.Operation{
 		Name:       opVerifyUserAttribute,
 		HTTPMethod: "POST",
@@ -96,10 +32,10 @@ func (c *Client) VerifyUserAttributeRequest(input *VerifyUserAttributeInput) Ver
 	}
 
 	if input == nil {
-		input = &VerifyUserAttributeInput{}
+		input = &types.VerifyUserAttributeInput{}
 	}
 
-	req := c.newRequest(op, input, &VerifyUserAttributeOutput{})
+	req := c.newRequest(op, input, &types.VerifyUserAttributeOutput{})
 	req.Config.Credentials = aws.AnonymousCredentials
 	return VerifyUserAttributeRequest{Request: req, Input: input, Copy: c.VerifyUserAttributeRequest}
 }
@@ -108,8 +44,8 @@ func (c *Client) VerifyUserAttributeRequest(input *VerifyUserAttributeInput) Ver
 // VerifyUserAttribute API operation.
 type VerifyUserAttributeRequest struct {
 	*aws.Request
-	Input *VerifyUserAttributeInput
-	Copy  func(*VerifyUserAttributeInput) VerifyUserAttributeRequest
+	Input *types.VerifyUserAttributeInput
+	Copy  func(*types.VerifyUserAttributeInput) VerifyUserAttributeRequest
 }
 
 // Send marshals and sends the VerifyUserAttribute API request.
@@ -121,7 +57,7 @@ func (r VerifyUserAttributeRequest) Send(ctx context.Context) (*VerifyUserAttrib
 	}
 
 	resp := &VerifyUserAttributeResponse{
-		VerifyUserAttributeOutput: r.Request.Data.(*VerifyUserAttributeOutput),
+		VerifyUserAttributeOutput: r.Request.Data.(*types.VerifyUserAttributeOutput),
 		response:                  &aws.Response{Request: r.Request},
 	}
 
@@ -131,7 +67,7 @@ func (r VerifyUserAttributeRequest) Send(ctx context.Context) (*VerifyUserAttrib
 // VerifyUserAttributeResponse is the response type for the
 // VerifyUserAttribute API operation.
 type VerifyUserAttributeResponse struct {
-	*VerifyUserAttributeOutput
+	*types.VerifyUserAttributeOutput
 
 	response *aws.Response
 }

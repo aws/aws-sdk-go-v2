@@ -6,55 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/devicefarm/types"
 )
-
-// Represents a request to the create project operation.
-type CreateProjectInput struct {
-	_ struct{} `type:"structure"`
-
-	// Sets the execution timeout value (in minutes) for a project. All test runs
-	// in this project will use the specified execution timeout value unless overridden
-	// when scheduling a run.
-	DefaultJobTimeoutMinutes *int64 `locationName:"defaultJobTimeoutMinutes" type:"integer"`
-
-	// The project's name.
-	//
-	// Name is a required field
-	Name *string `locationName:"name" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s CreateProjectInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateProjectInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateProjectInput"}
-
-	if s.Name == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Name"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Represents the result of a create project request.
-type CreateProjectOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The newly created project.
-	Project *Project `locationName:"project" type:"structure"`
-}
-
-// String returns the string representation
-func (s CreateProjectOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCreateProject = "CreateProject"
 
@@ -71,7 +24,7 @@ const opCreateProject = "CreateProject"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/CreateProject
-func (c *Client) CreateProjectRequest(input *CreateProjectInput) CreateProjectRequest {
+func (c *Client) CreateProjectRequest(input *types.CreateProjectInput) CreateProjectRequest {
 	op := &aws.Operation{
 		Name:       opCreateProject,
 		HTTPMethod: "POST",
@@ -79,10 +32,10 @@ func (c *Client) CreateProjectRequest(input *CreateProjectInput) CreateProjectRe
 	}
 
 	if input == nil {
-		input = &CreateProjectInput{}
+		input = &types.CreateProjectInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateProjectOutput{})
+	req := c.newRequest(op, input, &types.CreateProjectOutput{})
 	return CreateProjectRequest{Request: req, Input: input, Copy: c.CreateProjectRequest}
 }
 
@@ -90,8 +43,8 @@ func (c *Client) CreateProjectRequest(input *CreateProjectInput) CreateProjectRe
 // CreateProject API operation.
 type CreateProjectRequest struct {
 	*aws.Request
-	Input *CreateProjectInput
-	Copy  func(*CreateProjectInput) CreateProjectRequest
+	Input *types.CreateProjectInput
+	Copy  func(*types.CreateProjectInput) CreateProjectRequest
 }
 
 // Send marshals and sends the CreateProject API request.
@@ -103,7 +56,7 @@ func (r CreateProjectRequest) Send(ctx context.Context) (*CreateProjectResponse,
 	}
 
 	resp := &CreateProjectResponse{
-		CreateProjectOutput: r.Request.Data.(*CreateProjectOutput),
+		CreateProjectOutput: r.Request.Data.(*types.CreateProjectOutput),
 		response:            &aws.Response{Request: r.Request},
 	}
 
@@ -113,7 +66,7 @@ func (r CreateProjectRequest) Send(ctx context.Context) (*CreateProjectResponse,
 // CreateProjectResponse is the response type for the
 // CreateProject API operation.
 type CreateProjectResponse struct {
-	*CreateProjectOutput
+	*types.CreateProjectOutput
 
 	response *aws.Response
 }

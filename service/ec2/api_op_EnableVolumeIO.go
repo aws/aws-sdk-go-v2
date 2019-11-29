@@ -6,54 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/ec2query"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-// Contains the parameters for EnableVolumeIO.
-type EnableVolumeIOInput struct {
-	_ struct{} `type:"structure"`
-
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have
-	// the required permissions, the error response is DryRunOperation. Otherwise,
-	// it is UnauthorizedOperation.
-	DryRun *bool `locationName:"dryRun" type:"boolean"`
-
-	// The ID of the volume.
-	//
-	// VolumeId is a required field
-	VolumeId *string `locationName:"volumeId" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s EnableVolumeIOInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *EnableVolumeIOInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "EnableVolumeIOInput"}
-
-	if s.VolumeId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("VolumeId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type EnableVolumeIOOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s EnableVolumeIOOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opEnableVolumeIO = "EnableVolumeIO"
 
@@ -71,7 +27,7 @@ const opEnableVolumeIO = "EnableVolumeIO"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/EnableVolumeIO
-func (c *Client) EnableVolumeIORequest(input *EnableVolumeIOInput) EnableVolumeIORequest {
+func (c *Client) EnableVolumeIORequest(input *types.EnableVolumeIOInput) EnableVolumeIORequest {
 	op := &aws.Operation{
 		Name:       opEnableVolumeIO,
 		HTTPMethod: "POST",
@@ -79,10 +35,10 @@ func (c *Client) EnableVolumeIORequest(input *EnableVolumeIOInput) EnableVolumeI
 	}
 
 	if input == nil {
-		input = &EnableVolumeIOInput{}
+		input = &types.EnableVolumeIOInput{}
 	}
 
-	req := c.newRequest(op, input, &EnableVolumeIOOutput{})
+	req := c.newRequest(op, input, &types.EnableVolumeIOOutput{})
 	req.Handlers.Unmarshal.Remove(ec2query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return EnableVolumeIORequest{Request: req, Input: input, Copy: c.EnableVolumeIORequest}
@@ -92,8 +48,8 @@ func (c *Client) EnableVolumeIORequest(input *EnableVolumeIOInput) EnableVolumeI
 // EnableVolumeIO API operation.
 type EnableVolumeIORequest struct {
 	*aws.Request
-	Input *EnableVolumeIOInput
-	Copy  func(*EnableVolumeIOInput) EnableVolumeIORequest
+	Input *types.EnableVolumeIOInput
+	Copy  func(*types.EnableVolumeIOInput) EnableVolumeIORequest
 }
 
 // Send marshals and sends the EnableVolumeIO API request.
@@ -105,7 +61,7 @@ func (r EnableVolumeIORequest) Send(ctx context.Context) (*EnableVolumeIORespons
 	}
 
 	resp := &EnableVolumeIOResponse{
-		EnableVolumeIOOutput: r.Request.Data.(*EnableVolumeIOOutput),
+		EnableVolumeIOOutput: r.Request.Data.(*types.EnableVolumeIOOutput),
 		response:             &aws.Response{Request: r.Request},
 	}
 
@@ -115,7 +71,7 @@ func (r EnableVolumeIORequest) Send(ctx context.Context) (*EnableVolumeIORespons
 // EnableVolumeIOResponse is the response type for the
 // EnableVolumeIO API operation.
 type EnableVolumeIOResponse struct {
-	*EnableVolumeIOOutput
+	*types.EnableVolumeIOOutput
 
 	response *aws.Response
 }

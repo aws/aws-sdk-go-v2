@@ -10,6 +10,7 @@ package mediaconnectiface
 
 import (
 	"github.com/aws/aws-sdk-go-v2/service/mediaconnect"
+	"github.com/aws/aws-sdk-go-v2/service/mediaconnect/types"
 )
 
 // ClientAPI provides an interface to enable mocking the
@@ -43,7 +44,7 @@ import (
 //    type mockClientClient struct {
 //        mediaconnectiface.ClientPI
 //    }
-//    func (m *mockClientClient) AddFlowOutputs(input *mediaconnect.AddFlowOutputsInput) (*mediaconnect.AddFlowOutputsOutput, error) {
+//    func (m *mockClientClient) AddFlowOutputs(input *types.AddFlowOutputsInput) (*types.AddFlowOutputsOutput, error) {
 //        // mock response/functionality
 //    }
 //
@@ -61,39 +62,39 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type ClientAPI interface {
-	AddFlowOutputsRequest(*mediaconnect.AddFlowOutputsInput) mediaconnect.AddFlowOutputsRequest
+	AddFlowOutputsRequest(*types.AddFlowOutputsInput) mediaconnect.AddFlowOutputsRequest
 
-	CreateFlowRequest(*mediaconnect.CreateFlowInput) mediaconnect.CreateFlowRequest
+	CreateFlowRequest(*types.CreateFlowInput) mediaconnect.CreateFlowRequest
 
-	DeleteFlowRequest(*mediaconnect.DeleteFlowInput) mediaconnect.DeleteFlowRequest
+	DeleteFlowRequest(*types.DeleteFlowInput) mediaconnect.DeleteFlowRequest
 
-	DescribeFlowRequest(*mediaconnect.DescribeFlowInput) mediaconnect.DescribeFlowRequest
+	DescribeFlowRequest(*types.DescribeFlowInput) mediaconnect.DescribeFlowRequest
 
-	GrantFlowEntitlementsRequest(*mediaconnect.GrantFlowEntitlementsInput) mediaconnect.GrantFlowEntitlementsRequest
+	GrantFlowEntitlementsRequest(*types.GrantFlowEntitlementsInput) mediaconnect.GrantFlowEntitlementsRequest
 
-	ListEntitlementsRequest(*mediaconnect.ListEntitlementsInput) mediaconnect.ListEntitlementsRequest
+	ListEntitlementsRequest(*types.ListEntitlementsInput) mediaconnect.ListEntitlementsRequest
 
-	ListFlowsRequest(*mediaconnect.ListFlowsInput) mediaconnect.ListFlowsRequest
+	ListFlowsRequest(*types.ListFlowsInput) mediaconnect.ListFlowsRequest
 
-	ListTagsForResourceRequest(*mediaconnect.ListTagsForResourceInput) mediaconnect.ListTagsForResourceRequest
+	ListTagsForResourceRequest(*types.ListTagsForResourceInput) mediaconnect.ListTagsForResourceRequest
 
-	RemoveFlowOutputRequest(*mediaconnect.RemoveFlowOutputInput) mediaconnect.RemoveFlowOutputRequest
+	RemoveFlowOutputRequest(*types.RemoveFlowOutputInput) mediaconnect.RemoveFlowOutputRequest
 
-	RevokeFlowEntitlementRequest(*mediaconnect.RevokeFlowEntitlementInput) mediaconnect.RevokeFlowEntitlementRequest
+	RevokeFlowEntitlementRequest(*types.RevokeFlowEntitlementInput) mediaconnect.RevokeFlowEntitlementRequest
 
-	StartFlowRequest(*mediaconnect.StartFlowInput) mediaconnect.StartFlowRequest
+	StartFlowRequest(*types.StartFlowInput) mediaconnect.StartFlowRequest
 
-	StopFlowRequest(*mediaconnect.StopFlowInput) mediaconnect.StopFlowRequest
+	StopFlowRequest(*types.StopFlowInput) mediaconnect.StopFlowRequest
 
-	TagResourceRequest(*mediaconnect.TagResourceInput) mediaconnect.TagResourceRequest
+	TagResourceRequest(*types.TagResourceInput) mediaconnect.TagResourceRequest
 
-	UntagResourceRequest(*mediaconnect.UntagResourceInput) mediaconnect.UntagResourceRequest
+	UntagResourceRequest(*types.UntagResourceInput) mediaconnect.UntagResourceRequest
 
-	UpdateFlowEntitlementRequest(*mediaconnect.UpdateFlowEntitlementInput) mediaconnect.UpdateFlowEntitlementRequest
+	UpdateFlowEntitlementRequest(*types.UpdateFlowEntitlementInput) mediaconnect.UpdateFlowEntitlementRequest
 
-	UpdateFlowOutputRequest(*mediaconnect.UpdateFlowOutputInput) mediaconnect.UpdateFlowOutputRequest
+	UpdateFlowOutputRequest(*types.UpdateFlowOutputInput) mediaconnect.UpdateFlowOutputRequest
 
-	UpdateFlowSourceRequest(*mediaconnect.UpdateFlowSourceInput) mediaconnect.UpdateFlowSourceRequest
+	UpdateFlowSourceRequest(*types.UpdateFlowSourceInput) mediaconnect.UpdateFlowSourceRequest
 }
 
 var _ ClientAPI = (*mediaconnect.Client)(nil)

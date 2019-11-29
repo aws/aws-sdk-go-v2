@@ -4,67 +4,10 @@ package applicationdiscoveryservice
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/applicationdiscoveryservice/types"
 )
-
-type CreateTagsInput struct {
-	_ struct{} `type:"structure"`
-
-	// A list of configuration items that you want to tag.
-	//
-	// ConfigurationIds is a required field
-	ConfigurationIds []string `locationName:"configurationIds" type:"list" required:"true"`
-
-	// Tags that you want to associate with one or more configuration items. Specify
-	// the tags that you want to create in a key-value format. For example:
-	//
-	// {"key": "serverType", "value": "webServer"}
-	//
-	// Tags is a required field
-	Tags []Tag `locationName:"tags" type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s CreateTagsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateTagsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateTagsInput"}
-
-	if s.ConfigurationIds == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ConfigurationIds"))
-	}
-
-	if s.Tags == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Tags"))
-	}
-	if s.Tags != nil {
-		for i, v := range s.Tags {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type CreateTagsOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s CreateTagsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCreateTags = "CreateTags"
 
@@ -83,7 +26,7 @@ const opCreateTags = "CreateTags"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/discovery-2015-11-01/CreateTags
-func (c *Client) CreateTagsRequest(input *CreateTagsInput) CreateTagsRequest {
+func (c *Client) CreateTagsRequest(input *types.CreateTagsInput) CreateTagsRequest {
 	op := &aws.Operation{
 		Name:       opCreateTags,
 		HTTPMethod: "POST",
@@ -91,10 +34,10 @@ func (c *Client) CreateTagsRequest(input *CreateTagsInput) CreateTagsRequest {
 	}
 
 	if input == nil {
-		input = &CreateTagsInput{}
+		input = &types.CreateTagsInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateTagsOutput{})
+	req := c.newRequest(op, input, &types.CreateTagsOutput{})
 	return CreateTagsRequest{Request: req, Input: input, Copy: c.CreateTagsRequest}
 }
 
@@ -102,8 +45,8 @@ func (c *Client) CreateTagsRequest(input *CreateTagsInput) CreateTagsRequest {
 // CreateTags API operation.
 type CreateTagsRequest struct {
 	*aws.Request
-	Input *CreateTagsInput
-	Copy  func(*CreateTagsInput) CreateTagsRequest
+	Input *types.CreateTagsInput
+	Copy  func(*types.CreateTagsInput) CreateTagsRequest
 }
 
 // Send marshals and sends the CreateTags API request.
@@ -115,7 +58,7 @@ func (r CreateTagsRequest) Send(ctx context.Context) (*CreateTagsResponse, error
 	}
 
 	resp := &CreateTagsResponse{
-		CreateTagsOutput: r.Request.Data.(*CreateTagsOutput),
+		CreateTagsOutput: r.Request.Data.(*types.CreateTagsOutput),
 		response:         &aws.Response{Request: r.Request},
 	}
 
@@ -125,7 +68,7 @@ func (r CreateTagsRequest) Send(ctx context.Context) (*CreateTagsResponse, error
 // CreateTagsResponse is the response type for the
 // CreateTags API operation.
 type CreateTagsResponse struct {
-	*CreateTagsOutput
+	*types.CreateTagsOutput
 
 	response *aws.Response
 }

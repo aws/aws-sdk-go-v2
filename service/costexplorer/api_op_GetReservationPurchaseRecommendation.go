@@ -6,88 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/costexplorer/types"
 )
-
-type GetReservationPurchaseRecommendationInput struct {
-	_ struct{} `type:"structure"`
-
-	// The account ID that is associated with the recommendation.
-	AccountId *string `type:"string"`
-
-	// The account scope that you want recommendations for. PAYER means that AWS
-	// includes the master account and any member accounts when it calculates its
-	// recommendations. LINKED means that AWS includes only member accounts when
-	// it calculates its recommendations.
-	//
-	// Valid values are PAYER and LINKED.
-	AccountScope AccountScope `type:"string" enum:"true"`
-
-	// The number of previous days that you want AWS to consider when it calculates
-	// your recommendations.
-	LookbackPeriodInDays LookbackPeriodInDays `type:"string" enum:"true"`
-
-	// The pagination token that indicates the next set of results that you want
-	// to retrieve.
-	NextPageToken *string `type:"string"`
-
-	// The number of recommendations that you want returned in a single response
-	// object.
-	PageSize *int64 `type:"integer"`
-
-	// The reservation purchase option that you want recommendations for.
-	PaymentOption PaymentOption `type:"string" enum:"true"`
-
-	// The specific service that you want recommendations for.
-	//
-	// Service is a required field
-	Service *string `type:"string" required:"true"`
-
-	// The hardware specifications for the service instances that you want recommendations
-	// for, such as standard or convertible Amazon EC2 instances.
-	ServiceSpecification *ServiceSpecification `type:"structure"`
-
-	// The reservation term that you want recommendations for.
-	TermInYears TermInYears `type:"string" enum:"true"`
-}
-
-// String returns the string representation
-func (s GetReservationPurchaseRecommendationInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetReservationPurchaseRecommendationInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetReservationPurchaseRecommendationInput"}
-
-	if s.Service == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Service"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type GetReservationPurchaseRecommendationOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Information about this specific recommendation call, such as the time stamp
-	// for when Cost Explorer generated this recommendation.
-	Metadata *ReservationPurchaseRecommendationMetadata `type:"structure"`
-
-	// The pagination token for the next set of retrievable results.
-	NextPageToken *string `type:"string"`
-
-	// Recommendations for reservations to purchase.
-	Recommendations []ReservationPurchaseRecommendation `type:"list"`
-}
-
-// String returns the string representation
-func (s GetReservationPurchaseRecommendationOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetReservationPurchaseRecommendation = "GetReservationPurchaseRecommendation"
 
@@ -121,7 +41,7 @@ const opGetReservationPurchaseRecommendation = "GetReservationPurchaseRecommenda
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/GetReservationPurchaseRecommendation
-func (c *Client) GetReservationPurchaseRecommendationRequest(input *GetReservationPurchaseRecommendationInput) GetReservationPurchaseRecommendationRequest {
+func (c *Client) GetReservationPurchaseRecommendationRequest(input *types.GetReservationPurchaseRecommendationInput) GetReservationPurchaseRecommendationRequest {
 	op := &aws.Operation{
 		Name:       opGetReservationPurchaseRecommendation,
 		HTTPMethod: "POST",
@@ -129,10 +49,10 @@ func (c *Client) GetReservationPurchaseRecommendationRequest(input *GetReservati
 	}
 
 	if input == nil {
-		input = &GetReservationPurchaseRecommendationInput{}
+		input = &types.GetReservationPurchaseRecommendationInput{}
 	}
 
-	req := c.newRequest(op, input, &GetReservationPurchaseRecommendationOutput{})
+	req := c.newRequest(op, input, &types.GetReservationPurchaseRecommendationOutput{})
 	return GetReservationPurchaseRecommendationRequest{Request: req, Input: input, Copy: c.GetReservationPurchaseRecommendationRequest}
 }
 
@@ -140,8 +60,8 @@ func (c *Client) GetReservationPurchaseRecommendationRequest(input *GetReservati
 // GetReservationPurchaseRecommendation API operation.
 type GetReservationPurchaseRecommendationRequest struct {
 	*aws.Request
-	Input *GetReservationPurchaseRecommendationInput
-	Copy  func(*GetReservationPurchaseRecommendationInput) GetReservationPurchaseRecommendationRequest
+	Input *types.GetReservationPurchaseRecommendationInput
+	Copy  func(*types.GetReservationPurchaseRecommendationInput) GetReservationPurchaseRecommendationRequest
 }
 
 // Send marshals and sends the GetReservationPurchaseRecommendation API request.
@@ -153,7 +73,7 @@ func (r GetReservationPurchaseRecommendationRequest) Send(ctx context.Context) (
 	}
 
 	resp := &GetReservationPurchaseRecommendationResponse{
-		GetReservationPurchaseRecommendationOutput: r.Request.Data.(*GetReservationPurchaseRecommendationOutput),
+		GetReservationPurchaseRecommendationOutput: r.Request.Data.(*types.GetReservationPurchaseRecommendationOutput),
 		response: &aws.Response{Request: r.Request},
 	}
 
@@ -163,7 +83,7 @@ func (r GetReservationPurchaseRecommendationRequest) Send(ctx context.Context) (
 // GetReservationPurchaseRecommendationResponse is the response type for the
 // GetReservationPurchaseRecommendation API operation.
 type GetReservationPurchaseRecommendationResponse struct {
-	*GetReservationPurchaseRecommendationOutput
+	*types.GetReservationPurchaseRecommendationOutput
 
 	response *aws.Response
 }

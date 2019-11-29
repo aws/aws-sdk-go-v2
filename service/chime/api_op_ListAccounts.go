@@ -6,115 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/chime/types"
 )
-
-type ListAccountsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The maximum number of results to return in a single call. Defaults to 100.
-	MaxResults *int64 `location:"querystring" locationName:"max-results" min:"1" type:"integer"`
-
-	// Amazon Chime account name prefix with which to filter results.
-	Name *string `location:"querystring" locationName:"name" min:"1" type:"string"`
-
-	// The token to use to retrieve the next page of results.
-	NextToken *string `location:"querystring" locationName:"next-token" type:"string"`
-
-	// User email address with which to filter results.
-	UserEmail *string `location:"querystring" locationName:"user-email" type:"string" sensitive:"true"`
-}
-
-// String returns the string representation
-func (s ListAccountsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListAccountsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListAccountsInput"}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListAccountsInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.MaxResults != nil {
-		v := *s.MaxResults
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "max-results", protocol.Int64Value(v), metadata)
-	}
-	if s.Name != nil {
-		v := *s.Name
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "next-token", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.UserEmail != nil {
-		v := *s.UserEmail
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "user-email", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type ListAccountsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// List of Amazon Chime accounts and account details.
-	Accounts []Account `type:"list"`
-
-	// The token to use to retrieve the next page of results.
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s ListAccountsOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListAccountsOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.Accounts != nil {
-		v := s.Accounts
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "Accounts", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opListAccounts = "ListAccounts"
 
@@ -134,7 +27,7 @@ const opListAccounts = "ListAccounts"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/ListAccounts
-func (c *Client) ListAccountsRequest(input *ListAccountsInput) ListAccountsRequest {
+func (c *Client) ListAccountsRequest(input *types.ListAccountsInput) ListAccountsRequest {
 	op := &aws.Operation{
 		Name:       opListAccounts,
 		HTTPMethod: "GET",
@@ -148,10 +41,10 @@ func (c *Client) ListAccountsRequest(input *ListAccountsInput) ListAccountsReque
 	}
 
 	if input == nil {
-		input = &ListAccountsInput{}
+		input = &types.ListAccountsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListAccountsOutput{})
+	req := c.newRequest(op, input, &types.ListAccountsOutput{})
 	return ListAccountsRequest{Request: req, Input: input, Copy: c.ListAccountsRequest}
 }
 
@@ -159,8 +52,8 @@ func (c *Client) ListAccountsRequest(input *ListAccountsInput) ListAccountsReque
 // ListAccounts API operation.
 type ListAccountsRequest struct {
 	*aws.Request
-	Input *ListAccountsInput
-	Copy  func(*ListAccountsInput) ListAccountsRequest
+	Input *types.ListAccountsInput
+	Copy  func(*types.ListAccountsInput) ListAccountsRequest
 }
 
 // Send marshals and sends the ListAccounts API request.
@@ -172,7 +65,7 @@ func (r ListAccountsRequest) Send(ctx context.Context) (*ListAccountsResponse, e
 	}
 
 	resp := &ListAccountsResponse{
-		ListAccountsOutput: r.Request.Data.(*ListAccountsOutput),
+		ListAccountsOutput: r.Request.Data.(*types.ListAccountsOutput),
 		response:           &aws.Response{Request: r.Request},
 	}
 
@@ -202,7 +95,7 @@ func NewListAccountsPaginator(req ListAccountsRequest) ListAccountsPaginator {
 	return ListAccountsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListAccountsInput
+				var inCpy *types.ListAccountsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -222,14 +115,14 @@ type ListAccountsPaginator struct {
 	aws.Pager
 }
 
-func (p *ListAccountsPaginator) CurrentPage() *ListAccountsOutput {
-	return p.Pager.CurrentPage().(*ListAccountsOutput)
+func (p *ListAccountsPaginator) CurrentPage() *types.ListAccountsOutput {
+	return p.Pager.CurrentPage().(*types.ListAccountsOutput)
 }
 
 // ListAccountsResponse is the response type for the
 // ListAccounts API operation.
 type ListAccountsResponse struct {
-	*ListAccountsOutput
+	*types.ListAccountsOutput
 
 	response *aws.Response
 }

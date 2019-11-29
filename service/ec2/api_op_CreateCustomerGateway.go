@@ -6,73 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-// Contains the parameters for CreateCustomerGateway.
-type CreateCustomerGatewayInput struct {
-	_ struct{} `type:"structure"`
-
-	// For devices that support BGP, the customer gateway's BGP ASN.
-	//
-	// Default: 65000
-	//
-	// BgpAsn is a required field
-	BgpAsn *int64 `type:"integer" required:"true"`
-
-	// The Amazon Resource Name (ARN) for the customer gateway certificate.
-	CertificateArn *string `type:"string"`
-
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have
-	// the required permissions, the error response is DryRunOperation. Otherwise,
-	// it is UnauthorizedOperation.
-	DryRun *bool `locationName:"dryRun" type:"boolean"`
-
-	// The Internet-routable IP address for the customer gateway's outside interface.
-	// The address must be static.
-	PublicIp *string `locationName:"IpAddress" type:"string"`
-
-	// The type of VPN connection that this customer gateway supports (ipsec.1).
-	//
-	// Type is a required field
-	Type GatewayType `type:"string" required:"true" enum:"true"`
-}
-
-// String returns the string representation
-func (s CreateCustomerGatewayInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateCustomerGatewayInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateCustomerGatewayInput"}
-
-	if s.BgpAsn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("BgpAsn"))
-	}
-	if len(s.Type) == 0 {
-		invalidParams.Add(aws.NewErrParamRequired("Type"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Contains the output of CreateCustomerGateway.
-type CreateCustomerGatewayOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Information about the customer gateway.
-	CustomerGateway *CustomerGateway `locationName:"customerGateway" type:"structure"`
-}
-
-// String returns the string representation
-func (s CreateCustomerGatewayOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCreateCustomerGateway = "CreateCustomerGateway"
 
@@ -98,11 +33,10 @@ const opCreateCustomerGateway = "CreateCustomerGateway"
 // For more information, see AWS Site-to-Site VPN (https://docs.aws.amazon.com/vpn/latest/s2svpn/VPC_VPN.html)
 // in the AWS Site-to-Site VPN User Guide.
 //
-// You cannot create more than one customer gateway with the same VPN type,
-// IP address, and BGP ASN parameter values. If you run an identical request
-// more than one time, the first request creates the customer gateway, and subsequent
-// requests return information about the existing customer gateway. The subsequent
-// requests do not create new customer gateway resources.
+// To create more than one customer gateway with the same VPN type, IP address,
+// and BGP ASN, specify a unique device name for each customer gateway. Identical
+// requests return information about the existing customer gateway and do not
+// create new customer gateways.
 //
 //    // Example sending a request using CreateCustomerGatewayRequest.
 //    req := client.CreateCustomerGatewayRequest(params)
@@ -112,7 +46,7 @@ const opCreateCustomerGateway = "CreateCustomerGateway"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateCustomerGateway
-func (c *Client) CreateCustomerGatewayRequest(input *CreateCustomerGatewayInput) CreateCustomerGatewayRequest {
+func (c *Client) CreateCustomerGatewayRequest(input *types.CreateCustomerGatewayInput) CreateCustomerGatewayRequest {
 	op := &aws.Operation{
 		Name:       opCreateCustomerGateway,
 		HTTPMethod: "POST",
@@ -120,10 +54,10 @@ func (c *Client) CreateCustomerGatewayRequest(input *CreateCustomerGatewayInput)
 	}
 
 	if input == nil {
-		input = &CreateCustomerGatewayInput{}
+		input = &types.CreateCustomerGatewayInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateCustomerGatewayOutput{})
+	req := c.newRequest(op, input, &types.CreateCustomerGatewayOutput{})
 	return CreateCustomerGatewayRequest{Request: req, Input: input, Copy: c.CreateCustomerGatewayRequest}
 }
 
@@ -131,8 +65,8 @@ func (c *Client) CreateCustomerGatewayRequest(input *CreateCustomerGatewayInput)
 // CreateCustomerGateway API operation.
 type CreateCustomerGatewayRequest struct {
 	*aws.Request
-	Input *CreateCustomerGatewayInput
-	Copy  func(*CreateCustomerGatewayInput) CreateCustomerGatewayRequest
+	Input *types.CreateCustomerGatewayInput
+	Copy  func(*types.CreateCustomerGatewayInput) CreateCustomerGatewayRequest
 }
 
 // Send marshals and sends the CreateCustomerGateway API request.
@@ -144,7 +78,7 @@ func (r CreateCustomerGatewayRequest) Send(ctx context.Context) (*CreateCustomer
 	}
 
 	resp := &CreateCustomerGatewayResponse{
-		CreateCustomerGatewayOutput: r.Request.Data.(*CreateCustomerGatewayOutput),
+		CreateCustomerGatewayOutput: r.Request.Data.(*types.CreateCustomerGatewayOutput),
 		response:                    &aws.Response{Request: r.Request},
 	}
 
@@ -154,7 +88,7 @@ func (r CreateCustomerGatewayRequest) Send(ctx context.Context) (*CreateCustomer
 // CreateCustomerGatewayResponse is the response type for the
 // CreateCustomerGateway API operation.
 type CreateCustomerGatewayResponse struct {
-	*CreateCustomerGatewayOutput
+	*types.CreateCustomerGatewayOutput
 
 	response *aws.Response
 }

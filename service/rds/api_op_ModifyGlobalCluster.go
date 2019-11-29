@@ -6,56 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/rds/types"
 )
-
-type ModifyGlobalClusterInput struct {
-	_ struct{} `type:"structure"`
-
-	// Indicates if the global database cluster has deletion protection enabled.
-	// The global database cluster can't be deleted when deletion protection is
-	// enabled.
-	DeletionProtection *bool `type:"boolean"`
-
-	// The DB cluster identifier for the global cluster being modified. This parameter
-	// is not case-sensitive.
-	//
-	// Constraints:
-	//
-	//    * Must match the identifier of an existing global database cluster.
-	GlobalClusterIdentifier *string `type:"string"`
-
-	// The new cluster identifier for the global database cluster when modifying
-	// a global database cluster. This value is stored as a lowercase string.
-	//
-	// Constraints:
-	//
-	//    * Must contain from 1 to 63 letters, numbers, or hyphens
-	//
-	//    * The first character must be a letter
-	//
-	//    * Can't end with a hyphen or contain two consecutive hyphens
-	//
-	// Example: my-cluster2
-	NewGlobalClusterIdentifier *string `type:"string"`
-}
-
-// String returns the string representation
-func (s ModifyGlobalClusterInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type ModifyGlobalClusterOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A data type representing an Aurora global database.
-	GlobalCluster *GlobalCluster `type:"structure"`
-}
-
-// String returns the string representation
-func (s ModifyGlobalClusterOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opModifyGlobalCluster = "ModifyGlobalCluster"
 
@@ -78,7 +30,7 @@ const opModifyGlobalCluster = "ModifyGlobalCluster"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyGlobalCluster
-func (c *Client) ModifyGlobalClusterRequest(input *ModifyGlobalClusterInput) ModifyGlobalClusterRequest {
+func (c *Client) ModifyGlobalClusterRequest(input *types.ModifyGlobalClusterInput) ModifyGlobalClusterRequest {
 	op := &aws.Operation{
 		Name:       opModifyGlobalCluster,
 		HTTPMethod: "POST",
@@ -86,10 +38,10 @@ func (c *Client) ModifyGlobalClusterRequest(input *ModifyGlobalClusterInput) Mod
 	}
 
 	if input == nil {
-		input = &ModifyGlobalClusterInput{}
+		input = &types.ModifyGlobalClusterInput{}
 	}
 
-	req := c.newRequest(op, input, &ModifyGlobalClusterOutput{})
+	req := c.newRequest(op, input, &types.ModifyGlobalClusterOutput{})
 	return ModifyGlobalClusterRequest{Request: req, Input: input, Copy: c.ModifyGlobalClusterRequest}
 }
 
@@ -97,8 +49,8 @@ func (c *Client) ModifyGlobalClusterRequest(input *ModifyGlobalClusterInput) Mod
 // ModifyGlobalCluster API operation.
 type ModifyGlobalClusterRequest struct {
 	*aws.Request
-	Input *ModifyGlobalClusterInput
-	Copy  func(*ModifyGlobalClusterInput) ModifyGlobalClusterRequest
+	Input *types.ModifyGlobalClusterInput
+	Copy  func(*types.ModifyGlobalClusterInput) ModifyGlobalClusterRequest
 }
 
 // Send marshals and sends the ModifyGlobalCluster API request.
@@ -110,7 +62,7 @@ func (r ModifyGlobalClusterRequest) Send(ctx context.Context) (*ModifyGlobalClus
 	}
 
 	resp := &ModifyGlobalClusterResponse{
-		ModifyGlobalClusterOutput: r.Request.Data.(*ModifyGlobalClusterOutput),
+		ModifyGlobalClusterOutput: r.Request.Data.(*types.ModifyGlobalClusterOutput),
 		response:                  &aws.Response{Request: r.Request},
 	}
 
@@ -120,7 +72,7 @@ func (r ModifyGlobalClusterRequest) Send(ctx context.Context) (*ModifyGlobalClus
 // ModifyGlobalClusterResponse is the response type for the
 // ModifyGlobalCluster API operation.
 type ModifyGlobalClusterResponse struct {
-	*ModifyGlobalClusterOutput
+	*types.ModifyGlobalClusterOutput
 
 	response *aws.Response
 }

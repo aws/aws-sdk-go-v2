@@ -6,47 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
+	"github.com/aws/aws-sdk-go-v2/service/gamelift/types"
 )
-
-type DeleteScriptInput struct {
-	_ struct{} `type:"structure"`
-
-	// Unique identifier for a Realtime script to delete.
-	//
-	// ScriptId is a required field
-	ScriptId *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteScriptInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteScriptInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteScriptInput"}
-
-	if s.ScriptId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ScriptId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteScriptOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteScriptOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteScript = "DeleteScript"
 
@@ -87,7 +50,7 @@ const opDeleteScript = "DeleteScript"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DeleteScript
-func (c *Client) DeleteScriptRequest(input *DeleteScriptInput) DeleteScriptRequest {
+func (c *Client) DeleteScriptRequest(input *types.DeleteScriptInput) DeleteScriptRequest {
 	op := &aws.Operation{
 		Name:       opDeleteScript,
 		HTTPMethod: "POST",
@@ -95,10 +58,10 @@ func (c *Client) DeleteScriptRequest(input *DeleteScriptInput) DeleteScriptReque
 	}
 
 	if input == nil {
-		input = &DeleteScriptInput{}
+		input = &types.DeleteScriptInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteScriptOutput{})
+	req := c.newRequest(op, input, &types.DeleteScriptOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return DeleteScriptRequest{Request: req, Input: input, Copy: c.DeleteScriptRequest}
@@ -108,8 +71,8 @@ func (c *Client) DeleteScriptRequest(input *DeleteScriptInput) DeleteScriptReque
 // DeleteScript API operation.
 type DeleteScriptRequest struct {
 	*aws.Request
-	Input *DeleteScriptInput
-	Copy  func(*DeleteScriptInput) DeleteScriptRequest
+	Input *types.DeleteScriptInput
+	Copy  func(*types.DeleteScriptInput) DeleteScriptRequest
 }
 
 // Send marshals and sends the DeleteScript API request.
@@ -121,7 +84,7 @@ func (r DeleteScriptRequest) Send(ctx context.Context) (*DeleteScriptResponse, e
 	}
 
 	resp := &DeleteScriptResponse{
-		DeleteScriptOutput: r.Request.Data.(*DeleteScriptOutput),
+		DeleteScriptOutput: r.Request.Data.(*types.DeleteScriptOutput),
 		response:           &aws.Response{Request: r.Request},
 	}
 
@@ -131,7 +94,7 @@ func (r DeleteScriptRequest) Send(ctx context.Context) (*DeleteScriptResponse, e
 // DeleteScriptResponse is the response type for the
 // DeleteScript API operation.
 type DeleteScriptResponse struct {
-	*DeleteScriptOutput
+	*types.DeleteScriptOutput
 
 	response *aws.Response
 }

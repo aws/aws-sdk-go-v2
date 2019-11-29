@@ -4,90 +4,10 @@ package cloudwatchevents
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/cloudwatchevents/types"
 )
-
-type PutRuleInput struct {
-	_ struct{} `type:"structure"`
-
-	// A description of the rule.
-	Description *string `type:"string"`
-
-	// The event bus to associate with this rule. If you omit this, the default
-	// event bus is used.
-	EventBusName *string `min:"1" type:"string"`
-
-	// The event pattern. For more information, see Event Patterns (https://docs.aws.amazon.com/eventbridge/latest/userguide/eventbridge-and-event-patterns.html)
-	// in the Amazon EventBridge User Guide.
-	EventPattern *string `type:"string"`
-
-	// The name of the rule that you're creating or updating.
-	//
-	// Name is a required field
-	Name *string `min:"1" type:"string" required:"true"`
-
-	// The Amazon Resource Name (ARN) of the IAM role associated with the rule.
-	RoleArn *string `min:"1" type:"string"`
-
-	// The scheduling expression: for example, "cron(0 20 * * ? *)" or "rate(5 minutes)".
-	ScheduleExpression *string `type:"string"`
-
-	// Indicates whether the rule is enabled or disabled.
-	State RuleState `type:"string" enum:"true"`
-
-	// The list of key-value pairs to associate with the rule.
-	Tags []Tag `type:"list"`
-}
-
-// String returns the string representation
-func (s PutRuleInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *PutRuleInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "PutRuleInput"}
-	if s.EventBusName != nil && len(*s.EventBusName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("EventBusName", 1))
-	}
-
-	if s.Name == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Name"))
-	}
-	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
-	}
-	if s.RoleArn != nil && len(*s.RoleArn) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("RoleArn", 1))
-	}
-	if s.Tags != nil {
-		for i, v := range s.Tags {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type PutRuleOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the rule.
-	RuleArn *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s PutRuleOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opPutRule = "PutRule"
 
@@ -157,7 +77,7 @@ const opPutRule = "PutRule"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/PutRule
-func (c *Client) PutRuleRequest(input *PutRuleInput) PutRuleRequest {
+func (c *Client) PutRuleRequest(input *types.PutRuleInput) PutRuleRequest {
 	op := &aws.Operation{
 		Name:       opPutRule,
 		HTTPMethod: "POST",
@@ -165,10 +85,10 @@ func (c *Client) PutRuleRequest(input *PutRuleInput) PutRuleRequest {
 	}
 
 	if input == nil {
-		input = &PutRuleInput{}
+		input = &types.PutRuleInput{}
 	}
 
-	req := c.newRequest(op, input, &PutRuleOutput{})
+	req := c.newRequest(op, input, &types.PutRuleOutput{})
 	return PutRuleRequest{Request: req, Input: input, Copy: c.PutRuleRequest}
 }
 
@@ -176,8 +96,8 @@ func (c *Client) PutRuleRequest(input *PutRuleInput) PutRuleRequest {
 // PutRule API operation.
 type PutRuleRequest struct {
 	*aws.Request
-	Input *PutRuleInput
-	Copy  func(*PutRuleInput) PutRuleRequest
+	Input *types.PutRuleInput
+	Copy  func(*types.PutRuleInput) PutRuleRequest
 }
 
 // Send marshals and sends the PutRule API request.
@@ -189,7 +109,7 @@ func (r PutRuleRequest) Send(ctx context.Context) (*PutRuleResponse, error) {
 	}
 
 	resp := &PutRuleResponse{
-		PutRuleOutput: r.Request.Data.(*PutRuleOutput),
+		PutRuleOutput: r.Request.Data.(*types.PutRuleOutput),
 		response:      &aws.Response{Request: r.Request},
 	}
 
@@ -199,7 +119,7 @@ func (r PutRuleRequest) Send(ctx context.Context) (*PutRuleResponse, error) {
 // PutRuleResponse is the response type for the
 // PutRule API operation.
 type PutRuleResponse struct {
-	*PutRuleOutput
+	*types.PutRuleOutput
 
 	response *aws.Response
 }

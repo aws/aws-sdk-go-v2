@@ -6,59 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ses/types"
 )
-
-// Represents a request to return a list of sending authorization policies that
-// are attached to an identity. Sending authorization is an Amazon SES feature
-// that enables you to authorize other senders to use your identities. For information,
-// see the Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html).
-type ListIdentityPoliciesInput struct {
-	_ struct{} `type:"structure"`
-
-	// The identity that is associated with the policy for which the policies will
-	// be listed. You can specify an identity by using its name or by using its
-	// Amazon Resource Name (ARN). Examples: user@example.com, example.com, arn:aws:ses:us-east-1:123456789012:identity/example.com.
-	//
-	// To successfully call this API, you must own the identity.
-	//
-	// Identity is a required field
-	Identity *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s ListIdentityPoliciesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListIdentityPoliciesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListIdentityPoliciesInput"}
-
-	if s.Identity == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Identity"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// A list of names of sending authorization policies that apply to an identity.
-type ListIdentityPoliciesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A list of names of policies that apply to the specified identity.
-	//
-	// PolicyNames is a required field
-	PolicyNames []string `type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s ListIdentityPoliciesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListIdentityPolicies = "ListIdentityPolicies"
 
@@ -86,7 +35,7 @@ const opListIdentityPolicies = "ListIdentityPolicies"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/ListIdentityPolicies
-func (c *Client) ListIdentityPoliciesRequest(input *ListIdentityPoliciesInput) ListIdentityPoliciesRequest {
+func (c *Client) ListIdentityPoliciesRequest(input *types.ListIdentityPoliciesInput) ListIdentityPoliciesRequest {
 	op := &aws.Operation{
 		Name:       opListIdentityPolicies,
 		HTTPMethod: "POST",
@@ -94,10 +43,10 @@ func (c *Client) ListIdentityPoliciesRequest(input *ListIdentityPoliciesInput) L
 	}
 
 	if input == nil {
-		input = &ListIdentityPoliciesInput{}
+		input = &types.ListIdentityPoliciesInput{}
 	}
 
-	req := c.newRequest(op, input, &ListIdentityPoliciesOutput{})
+	req := c.newRequest(op, input, &types.ListIdentityPoliciesOutput{})
 	return ListIdentityPoliciesRequest{Request: req, Input: input, Copy: c.ListIdentityPoliciesRequest}
 }
 
@@ -105,8 +54,8 @@ func (c *Client) ListIdentityPoliciesRequest(input *ListIdentityPoliciesInput) L
 // ListIdentityPolicies API operation.
 type ListIdentityPoliciesRequest struct {
 	*aws.Request
-	Input *ListIdentityPoliciesInput
-	Copy  func(*ListIdentityPoliciesInput) ListIdentityPoliciesRequest
+	Input *types.ListIdentityPoliciesInput
+	Copy  func(*types.ListIdentityPoliciesInput) ListIdentityPoliciesRequest
 }
 
 // Send marshals and sends the ListIdentityPolicies API request.
@@ -118,7 +67,7 @@ func (r ListIdentityPoliciesRequest) Send(ctx context.Context) (*ListIdentityPol
 	}
 
 	resp := &ListIdentityPoliciesResponse{
-		ListIdentityPoliciesOutput: r.Request.Data.(*ListIdentityPoliciesOutput),
+		ListIdentityPoliciesOutput: r.Request.Data.(*types.ListIdentityPoliciesOutput),
 		response:                   &aws.Response{Request: r.Request},
 	}
 
@@ -128,7 +77,7 @@ func (r ListIdentityPoliciesRequest) Send(ctx context.Context) (*ListIdentityPol
 // ListIdentityPoliciesResponse is the response type for the
 // ListIdentityPolicies API operation.
 type ListIdentityPoliciesResponse struct {
-	*ListIdentityPoliciesOutput
+	*types.ListIdentityPoliciesOutput
 
 	response *aws.Response
 }

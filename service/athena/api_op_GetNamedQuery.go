@@ -6,48 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/athena/types"
 )
-
-type GetNamedQueryInput struct {
-	_ struct{} `type:"structure"`
-
-	// The unique ID of the query. Use ListNamedQueries to get query IDs.
-	//
-	// NamedQueryId is a required field
-	NamedQueryId *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetNamedQueryInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetNamedQueryInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetNamedQueryInput"}
-
-	if s.NamedQueryId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("NamedQueryId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type GetNamedQueryOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Information about the query.
-	NamedQuery *NamedQuery `type:"structure"`
-}
-
-// String returns the string representation
-func (s GetNamedQueryOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetNamedQuery = "GetNamedQuery"
 
@@ -65,7 +25,7 @@ const opGetNamedQuery = "GetNamedQuery"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/GetNamedQuery
-func (c *Client) GetNamedQueryRequest(input *GetNamedQueryInput) GetNamedQueryRequest {
+func (c *Client) GetNamedQueryRequest(input *types.GetNamedQueryInput) GetNamedQueryRequest {
 	op := &aws.Operation{
 		Name:       opGetNamedQuery,
 		HTTPMethod: "POST",
@@ -73,10 +33,10 @@ func (c *Client) GetNamedQueryRequest(input *GetNamedQueryInput) GetNamedQueryRe
 	}
 
 	if input == nil {
-		input = &GetNamedQueryInput{}
+		input = &types.GetNamedQueryInput{}
 	}
 
-	req := c.newRequest(op, input, &GetNamedQueryOutput{})
+	req := c.newRequest(op, input, &types.GetNamedQueryOutput{})
 	return GetNamedQueryRequest{Request: req, Input: input, Copy: c.GetNamedQueryRequest}
 }
 
@@ -84,8 +44,8 @@ func (c *Client) GetNamedQueryRequest(input *GetNamedQueryInput) GetNamedQueryRe
 // GetNamedQuery API operation.
 type GetNamedQueryRequest struct {
 	*aws.Request
-	Input *GetNamedQueryInput
-	Copy  func(*GetNamedQueryInput) GetNamedQueryRequest
+	Input *types.GetNamedQueryInput
+	Copy  func(*types.GetNamedQueryInput) GetNamedQueryRequest
 }
 
 // Send marshals and sends the GetNamedQuery API request.
@@ -97,7 +57,7 @@ func (r GetNamedQueryRequest) Send(ctx context.Context) (*GetNamedQueryResponse,
 	}
 
 	resp := &GetNamedQueryResponse{
-		GetNamedQueryOutput: r.Request.Data.(*GetNamedQueryOutput),
+		GetNamedQueryOutput: r.Request.Data.(*types.GetNamedQueryOutput),
 		response:            &aws.Response{Request: r.Request},
 	}
 
@@ -107,7 +67,7 @@ func (r GetNamedQueryRequest) Send(ctx context.Context) (*GetNamedQueryResponse,
 // GetNamedQueryResponse is the response type for the
 // GetNamedQuery API operation.
 type GetNamedQueryResponse struct {
-	*GetNamedQueryOutput
+	*types.GetNamedQueryOutput
 
 	response *aws.Response
 }

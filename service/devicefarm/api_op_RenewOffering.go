@@ -6,50 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/devicefarm/types"
 )
-
-// A request representing an offering renewal.
-type RenewOfferingInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of a request to renew an offering.
-	OfferingId *string `locationName:"offeringId" min:"32" type:"string"`
-
-	// The quantity requested in an offering renewal.
-	Quantity *int64 `locationName:"quantity" type:"integer"`
-}
-
-// String returns the string representation
-func (s RenewOfferingInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *RenewOfferingInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "RenewOfferingInput"}
-	if s.OfferingId != nil && len(*s.OfferingId) < 32 {
-		invalidParams.Add(aws.NewErrParamMinLen("OfferingId", 32))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// The result of a renewal offering.
-type RenewOfferingOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Represents the status of the offering transaction for the renewal.
-	OfferingTransaction *OfferingTransaction `locationName:"offeringTransaction" type:"structure"`
-}
-
-// String returns the string representation
-func (s RenewOfferingOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opRenewOffering = "RenewOffering"
 
@@ -70,7 +28,7 @@ const opRenewOffering = "RenewOffering"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/RenewOffering
-func (c *Client) RenewOfferingRequest(input *RenewOfferingInput) RenewOfferingRequest {
+func (c *Client) RenewOfferingRequest(input *types.RenewOfferingInput) RenewOfferingRequest {
 	op := &aws.Operation{
 		Name:       opRenewOffering,
 		HTTPMethod: "POST",
@@ -78,10 +36,10 @@ func (c *Client) RenewOfferingRequest(input *RenewOfferingInput) RenewOfferingRe
 	}
 
 	if input == nil {
-		input = &RenewOfferingInput{}
+		input = &types.RenewOfferingInput{}
 	}
 
-	req := c.newRequest(op, input, &RenewOfferingOutput{})
+	req := c.newRequest(op, input, &types.RenewOfferingOutput{})
 	return RenewOfferingRequest{Request: req, Input: input, Copy: c.RenewOfferingRequest}
 }
 
@@ -89,8 +47,8 @@ func (c *Client) RenewOfferingRequest(input *RenewOfferingInput) RenewOfferingRe
 // RenewOffering API operation.
 type RenewOfferingRequest struct {
 	*aws.Request
-	Input *RenewOfferingInput
-	Copy  func(*RenewOfferingInput) RenewOfferingRequest
+	Input *types.RenewOfferingInput
+	Copy  func(*types.RenewOfferingInput) RenewOfferingRequest
 }
 
 // Send marshals and sends the RenewOffering API request.
@@ -102,7 +60,7 @@ func (r RenewOfferingRequest) Send(ctx context.Context) (*RenewOfferingResponse,
 	}
 
 	resp := &RenewOfferingResponse{
-		RenewOfferingOutput: r.Request.Data.(*RenewOfferingOutput),
+		RenewOfferingOutput: r.Request.Data.(*types.RenewOfferingOutput),
 		response:            &aws.Response{Request: r.Request},
 	}
 
@@ -112,7 +70,7 @@ func (r RenewOfferingRequest) Send(ctx context.Context) (*RenewOfferingResponse,
 // RenewOfferingResponse is the response type for the
 // RenewOffering API operation.
 type RenewOfferingResponse struct {
-	*RenewOfferingOutput
+	*types.RenewOfferingOutput
 
 	response *aws.Response
 }

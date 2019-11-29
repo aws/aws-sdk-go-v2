@@ -6,60 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/dax/types"
 )
-
-type CreateSubnetGroupInput struct {
-	_ struct{} `type:"structure"`
-
-	// A description for the subnet group
-	Description *string `type:"string"`
-
-	// A name for the subnet group. This value is stored as a lowercase string.
-	//
-	// SubnetGroupName is a required field
-	SubnetGroupName *string `type:"string" required:"true"`
-
-	// A list of VPC subnet IDs for the subnet group.
-	//
-	// SubnetIds is a required field
-	SubnetIds []string `type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s CreateSubnetGroupInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateSubnetGroupInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateSubnetGroupInput"}
-
-	if s.SubnetGroupName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("SubnetGroupName"))
-	}
-
-	if s.SubnetIds == nil {
-		invalidParams.Add(aws.NewErrParamRequired("SubnetIds"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type CreateSubnetGroupOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Represents the output of a CreateSubnetGroup operation.
-	SubnetGroup *SubnetGroup `type:"structure"`
-}
-
-// String returns the string representation
-func (s CreateSubnetGroupOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCreateSubnetGroup = "CreateSubnetGroup"
 
@@ -76,7 +24,7 @@ const opCreateSubnetGroup = "CreateSubnetGroup"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dax-2017-04-19/CreateSubnetGroup
-func (c *Client) CreateSubnetGroupRequest(input *CreateSubnetGroupInput) CreateSubnetGroupRequest {
+func (c *Client) CreateSubnetGroupRequest(input *types.CreateSubnetGroupInput) CreateSubnetGroupRequest {
 	op := &aws.Operation{
 		Name:       opCreateSubnetGroup,
 		HTTPMethod: "POST",
@@ -84,10 +32,10 @@ func (c *Client) CreateSubnetGroupRequest(input *CreateSubnetGroupInput) CreateS
 	}
 
 	if input == nil {
-		input = &CreateSubnetGroupInput{}
+		input = &types.CreateSubnetGroupInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateSubnetGroupOutput{})
+	req := c.newRequest(op, input, &types.CreateSubnetGroupOutput{})
 	return CreateSubnetGroupRequest{Request: req, Input: input, Copy: c.CreateSubnetGroupRequest}
 }
 
@@ -95,8 +43,8 @@ func (c *Client) CreateSubnetGroupRequest(input *CreateSubnetGroupInput) CreateS
 // CreateSubnetGroup API operation.
 type CreateSubnetGroupRequest struct {
 	*aws.Request
-	Input *CreateSubnetGroupInput
-	Copy  func(*CreateSubnetGroupInput) CreateSubnetGroupRequest
+	Input *types.CreateSubnetGroupInput
+	Copy  func(*types.CreateSubnetGroupInput) CreateSubnetGroupRequest
 }
 
 // Send marshals and sends the CreateSubnetGroup API request.
@@ -108,7 +56,7 @@ func (r CreateSubnetGroupRequest) Send(ctx context.Context) (*CreateSubnetGroupR
 	}
 
 	resp := &CreateSubnetGroupResponse{
-		CreateSubnetGroupOutput: r.Request.Data.(*CreateSubnetGroupOutput),
+		CreateSubnetGroupOutput: r.Request.Data.(*types.CreateSubnetGroupOutput),
 		response:                &aws.Response{Request: r.Request},
 	}
 
@@ -118,7 +66,7 @@ func (r CreateSubnetGroupRequest) Send(ctx context.Context) (*CreateSubnetGroupR
 // CreateSubnetGroupResponse is the response type for the
 // CreateSubnetGroup API operation.
 type CreateSubnetGroupResponse struct {
-	*CreateSubnetGroupOutput
+	*types.CreateSubnetGroupOutput
 
 	response *aws.Response
 }

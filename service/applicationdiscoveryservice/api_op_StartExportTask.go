@@ -4,71 +4,10 @@ package applicationdiscoveryservice
 
 import (
 	"context"
-	"fmt"
-	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/applicationdiscoveryservice/types"
 )
-
-type StartExportTaskInput struct {
-	_ struct{} `type:"structure"`
-
-	// The end timestamp for exported data from the single Application Discovery
-	// Agent selected in the filters. If no value is specified, exported data includes
-	// the most recent data collected by the agent.
-	EndTime *time.Time `locationName:"endTime" type:"timestamp"`
-
-	// The file format for the returned export data. Default value is CSV. Note:
-	// The GRAPHML option has been deprecated.
-	ExportDataFormat []ExportDataFormat `locationName:"exportDataFormat" type:"list"`
-
-	// If a filter is present, it selects the single agentId of the Application
-	// Discovery Agent for which data is exported. The agentId can be found in the
-	// results of the DescribeAgents API or CLI. If no filter is present, startTime
-	// and endTime are ignored and exported data includes both Agentless Discovery
-	// Connector data and summary data from Application Discovery agents.
-	Filters []ExportFilter `locationName:"filters" type:"list"`
-
-	// The start timestamp for exported data from the single Application Discovery
-	// Agent selected in the filters. If no value is specified, data is exported
-	// starting from the first data collected by the agent.
-	StartTime *time.Time `locationName:"startTime" type:"timestamp"`
-}
-
-// String returns the string representation
-func (s StartExportTaskInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *StartExportTaskInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "StartExportTaskInput"}
-	if s.Filters != nil {
-		for i, v := range s.Filters {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type StartExportTaskOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A unique identifier used to query the status of an export request.
-	ExportId *string `locationName:"exportId" type:"string"`
-}
-
-// String returns the string representation
-func (s StartExportTaskOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opStartExportTask = "StartExportTask"
 
@@ -95,7 +34,7 @@ const opStartExportTask = "StartExportTask"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/discovery-2015-11-01/StartExportTask
-func (c *Client) StartExportTaskRequest(input *StartExportTaskInput) StartExportTaskRequest {
+func (c *Client) StartExportTaskRequest(input *types.StartExportTaskInput) StartExportTaskRequest {
 	op := &aws.Operation{
 		Name:       opStartExportTask,
 		HTTPMethod: "POST",
@@ -103,10 +42,10 @@ func (c *Client) StartExportTaskRequest(input *StartExportTaskInput) StartExport
 	}
 
 	if input == nil {
-		input = &StartExportTaskInput{}
+		input = &types.StartExportTaskInput{}
 	}
 
-	req := c.newRequest(op, input, &StartExportTaskOutput{})
+	req := c.newRequest(op, input, &types.StartExportTaskOutput{})
 	return StartExportTaskRequest{Request: req, Input: input, Copy: c.StartExportTaskRequest}
 }
 
@@ -114,8 +53,8 @@ func (c *Client) StartExportTaskRequest(input *StartExportTaskInput) StartExport
 // StartExportTask API operation.
 type StartExportTaskRequest struct {
 	*aws.Request
-	Input *StartExportTaskInput
-	Copy  func(*StartExportTaskInput) StartExportTaskRequest
+	Input *types.StartExportTaskInput
+	Copy  func(*types.StartExportTaskInput) StartExportTaskRequest
 }
 
 // Send marshals and sends the StartExportTask API request.
@@ -127,7 +66,7 @@ func (r StartExportTaskRequest) Send(ctx context.Context) (*StartExportTaskRespo
 	}
 
 	resp := &StartExportTaskResponse{
-		StartExportTaskOutput: r.Request.Data.(*StartExportTaskOutput),
+		StartExportTaskOutput: r.Request.Data.(*types.StartExportTaskOutput),
 		response:              &aws.Response{Request: r.Request},
 	}
 
@@ -137,7 +76,7 @@ func (r StartExportTaskRequest) Send(ctx context.Context) (*StartExportTaskRespo
 // StartExportTaskResponse is the response type for the
 // StartExportTask API operation.
 type StartExportTaskResponse struct {
-	*StartExportTaskOutput
+	*types.StartExportTaskOutput
 
 	response *aws.Response
 }

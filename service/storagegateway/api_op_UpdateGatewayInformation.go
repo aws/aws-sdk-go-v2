@@ -6,75 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/storagegateway/types"
 )
-
-type UpdateGatewayInformationInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the Amazon CloudWatch log group that you
-	// want to use to monitor and log events in the gateway.
-	//
-	// For more information, see What Is Amazon CloudWatch Logs? (https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/WhatIsCloudWatchLogs.html).
-	CloudWatchLogGroupARN *string `type:"string"`
-
-	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation
-	// to return a list of gateways for your account and AWS Region.
-	//
-	// GatewayARN is a required field
-	GatewayARN *string `min:"50" type:"string" required:"true"`
-
-	// The name you configured for your gateway.
-	GatewayName *string `min:"2" type:"string"`
-
-	// A value that indicates the time zone of the gateway.
-	GatewayTimezone *string `min:"3" type:"string"`
-}
-
-// String returns the string representation
-func (s UpdateGatewayInformationInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateGatewayInformationInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateGatewayInformationInput"}
-
-	if s.GatewayARN == nil {
-		invalidParams.Add(aws.NewErrParamRequired("GatewayARN"))
-	}
-	if s.GatewayARN != nil && len(*s.GatewayARN) < 50 {
-		invalidParams.Add(aws.NewErrParamMinLen("GatewayARN", 50))
-	}
-	if s.GatewayName != nil && len(*s.GatewayName) < 2 {
-		invalidParams.Add(aws.NewErrParamMinLen("GatewayName", 2))
-	}
-	if s.GatewayTimezone != nil && len(*s.GatewayTimezone) < 3 {
-		invalidParams.Add(aws.NewErrParamMinLen("GatewayTimezone", 3))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// A JSON object containing the ARN of the gateway that was updated.
-type UpdateGatewayInformationOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation
-	// to return a list of gateways for your account and AWS Region.
-	GatewayARN *string `min:"50" type:"string"`
-
-	// The name you configured for your gateway.
-	GatewayName *string `type:"string"`
-}
-
-// String returns the string representation
-func (s UpdateGatewayInformationOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opUpdateGatewayInformation = "UpdateGatewayInformation"
 
@@ -97,7 +30,7 @@ const opUpdateGatewayInformation = "UpdateGatewayInformation"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/UpdateGatewayInformation
-func (c *Client) UpdateGatewayInformationRequest(input *UpdateGatewayInformationInput) UpdateGatewayInformationRequest {
+func (c *Client) UpdateGatewayInformationRequest(input *types.UpdateGatewayInformationInput) UpdateGatewayInformationRequest {
 	op := &aws.Operation{
 		Name:       opUpdateGatewayInformation,
 		HTTPMethod: "POST",
@@ -105,10 +38,10 @@ func (c *Client) UpdateGatewayInformationRequest(input *UpdateGatewayInformation
 	}
 
 	if input == nil {
-		input = &UpdateGatewayInformationInput{}
+		input = &types.UpdateGatewayInformationInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateGatewayInformationOutput{})
+	req := c.newRequest(op, input, &types.UpdateGatewayInformationOutput{})
 	return UpdateGatewayInformationRequest{Request: req, Input: input, Copy: c.UpdateGatewayInformationRequest}
 }
 
@@ -116,8 +49,8 @@ func (c *Client) UpdateGatewayInformationRequest(input *UpdateGatewayInformation
 // UpdateGatewayInformation API operation.
 type UpdateGatewayInformationRequest struct {
 	*aws.Request
-	Input *UpdateGatewayInformationInput
-	Copy  func(*UpdateGatewayInformationInput) UpdateGatewayInformationRequest
+	Input *types.UpdateGatewayInformationInput
+	Copy  func(*types.UpdateGatewayInformationInput) UpdateGatewayInformationRequest
 }
 
 // Send marshals and sends the UpdateGatewayInformation API request.
@@ -129,7 +62,7 @@ func (r UpdateGatewayInformationRequest) Send(ctx context.Context) (*UpdateGatew
 	}
 
 	resp := &UpdateGatewayInformationResponse{
-		UpdateGatewayInformationOutput: r.Request.Data.(*UpdateGatewayInformationOutput),
+		UpdateGatewayInformationOutput: r.Request.Data.(*types.UpdateGatewayInformationOutput),
 		response:                       &aws.Response{Request: r.Request},
 	}
 
@@ -139,7 +72,7 @@ func (r UpdateGatewayInformationRequest) Send(ctx context.Context) (*UpdateGatew
 // UpdateGatewayInformationResponse is the response type for the
 // UpdateGatewayInformation API operation.
 type UpdateGatewayInformationResponse struct {
-	*UpdateGatewayInformationOutput
+	*types.UpdateGatewayInformationOutput
 
 	response *aws.Response
 }

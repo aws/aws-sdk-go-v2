@@ -6,65 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/workspaces/types"
 )
-
-type DescribeWorkspaceBundlesInput struct {
-	_ struct{} `type:"structure"`
-
-	// The identifiers of the bundles. You cannot combine this parameter with any
-	// other filter.
-	BundleIds []string `min:"1" type:"list"`
-
-	// The token for the next set of results. (You received this token from a previous
-	// call.)
-	NextToken *string `min:"1" type:"string"`
-
-	// The owner of the bundles. You cannot combine this parameter with any other
-	// filter.
-	//
-	// Specify AMAZON to describe the bundles provided by AWS or null to describe
-	// the bundles that belong to your account.
-	Owner *string `type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeWorkspaceBundlesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeWorkspaceBundlesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeWorkspaceBundlesInput"}
-	if s.BundleIds != nil && len(s.BundleIds) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("BundleIds", 1))
-	}
-	if s.NextToken != nil && len(*s.NextToken) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribeWorkspaceBundlesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Information about the bundles.
-	Bundles []WorkspaceBundle `type:"list"`
-
-	// The token to use to retrieve the next set of results, or null if there are
-	// no more results available. This token is valid for one day and must be used
-	// within that time frame.
-	NextToken *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeWorkspaceBundlesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeWorkspaceBundles = "DescribeWorkspaceBundles"
 
@@ -83,7 +26,7 @@ const opDescribeWorkspaceBundles = "DescribeWorkspaceBundles"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DescribeWorkspaceBundles
-func (c *Client) DescribeWorkspaceBundlesRequest(input *DescribeWorkspaceBundlesInput) DescribeWorkspaceBundlesRequest {
+func (c *Client) DescribeWorkspaceBundlesRequest(input *types.DescribeWorkspaceBundlesInput) DescribeWorkspaceBundlesRequest {
 	op := &aws.Operation{
 		Name:       opDescribeWorkspaceBundles,
 		HTTPMethod: "POST",
@@ -97,10 +40,10 @@ func (c *Client) DescribeWorkspaceBundlesRequest(input *DescribeWorkspaceBundles
 	}
 
 	if input == nil {
-		input = &DescribeWorkspaceBundlesInput{}
+		input = &types.DescribeWorkspaceBundlesInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeWorkspaceBundlesOutput{})
+	req := c.newRequest(op, input, &types.DescribeWorkspaceBundlesOutput{})
 	return DescribeWorkspaceBundlesRequest{Request: req, Input: input, Copy: c.DescribeWorkspaceBundlesRequest}
 }
 
@@ -108,8 +51,8 @@ func (c *Client) DescribeWorkspaceBundlesRequest(input *DescribeWorkspaceBundles
 // DescribeWorkspaceBundles API operation.
 type DescribeWorkspaceBundlesRequest struct {
 	*aws.Request
-	Input *DescribeWorkspaceBundlesInput
-	Copy  func(*DescribeWorkspaceBundlesInput) DescribeWorkspaceBundlesRequest
+	Input *types.DescribeWorkspaceBundlesInput
+	Copy  func(*types.DescribeWorkspaceBundlesInput) DescribeWorkspaceBundlesRequest
 }
 
 // Send marshals and sends the DescribeWorkspaceBundles API request.
@@ -121,7 +64,7 @@ func (r DescribeWorkspaceBundlesRequest) Send(ctx context.Context) (*DescribeWor
 	}
 
 	resp := &DescribeWorkspaceBundlesResponse{
-		DescribeWorkspaceBundlesOutput: r.Request.Data.(*DescribeWorkspaceBundlesOutput),
+		DescribeWorkspaceBundlesOutput: r.Request.Data.(*types.DescribeWorkspaceBundlesOutput),
 		response:                       &aws.Response{Request: r.Request},
 	}
 
@@ -151,7 +94,7 @@ func NewDescribeWorkspaceBundlesPaginator(req DescribeWorkspaceBundlesRequest) D
 	return DescribeWorkspaceBundlesPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *DescribeWorkspaceBundlesInput
+				var inCpy *types.DescribeWorkspaceBundlesInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -171,14 +114,14 @@ type DescribeWorkspaceBundlesPaginator struct {
 	aws.Pager
 }
 
-func (p *DescribeWorkspaceBundlesPaginator) CurrentPage() *DescribeWorkspaceBundlesOutput {
-	return p.Pager.CurrentPage().(*DescribeWorkspaceBundlesOutput)
+func (p *DescribeWorkspaceBundlesPaginator) CurrentPage() *types.DescribeWorkspaceBundlesOutput {
+	return p.Pager.CurrentPage().(*types.DescribeWorkspaceBundlesOutput)
 }
 
 // DescribeWorkspaceBundlesResponse is the response type for the
 // DescribeWorkspaceBundles API operation.
 type DescribeWorkspaceBundlesResponse struct {
-	*DescribeWorkspaceBundlesOutput
+	*types.DescribeWorkspaceBundlesOutput
 
 	response *aws.Response
 }

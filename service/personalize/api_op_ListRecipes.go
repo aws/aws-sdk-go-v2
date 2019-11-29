@@ -6,55 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/personalize/types"
 )
-
-type ListRecipesInput struct {
-	_ struct{} `type:"structure"`
-
-	// The maximum number of recipes to return.
-	MaxResults *int64 `locationName:"maxResults" min:"1" type:"integer"`
-
-	// A token returned from the previous call to ListRecipes for getting the next
-	// set of recipes (if they exist).
-	NextToken *string `locationName:"nextToken" type:"string"`
-
-	// The default is SERVICE.
-	RecipeProvider RecipeProvider `locationName:"recipeProvider" type:"string" enum:"true"`
-}
-
-// String returns the string representation
-func (s ListRecipesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListRecipesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListRecipesInput"}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ListRecipesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A token for getting the next set of recipes.
-	NextToken *string `locationName:"nextToken" type:"string"`
-
-	// The list of available recipes.
-	Recipes []RecipeSummary `locationName:"recipes" type:"list"`
-}
-
-// String returns the string representation
-func (s ListRecipesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListRecipes = "ListRecipes"
 
@@ -72,7 +25,7 @@ const opListRecipes = "ListRecipes"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/ListRecipes
-func (c *Client) ListRecipesRequest(input *ListRecipesInput) ListRecipesRequest {
+func (c *Client) ListRecipesRequest(input *types.ListRecipesInput) ListRecipesRequest {
 	op := &aws.Operation{
 		Name:       opListRecipes,
 		HTTPMethod: "POST",
@@ -86,10 +39,10 @@ func (c *Client) ListRecipesRequest(input *ListRecipesInput) ListRecipesRequest 
 	}
 
 	if input == nil {
-		input = &ListRecipesInput{}
+		input = &types.ListRecipesInput{}
 	}
 
-	req := c.newRequest(op, input, &ListRecipesOutput{})
+	req := c.newRequest(op, input, &types.ListRecipesOutput{})
 	return ListRecipesRequest{Request: req, Input: input, Copy: c.ListRecipesRequest}
 }
 
@@ -97,8 +50,8 @@ func (c *Client) ListRecipesRequest(input *ListRecipesInput) ListRecipesRequest 
 // ListRecipes API operation.
 type ListRecipesRequest struct {
 	*aws.Request
-	Input *ListRecipesInput
-	Copy  func(*ListRecipesInput) ListRecipesRequest
+	Input *types.ListRecipesInput
+	Copy  func(*types.ListRecipesInput) ListRecipesRequest
 }
 
 // Send marshals and sends the ListRecipes API request.
@@ -110,7 +63,7 @@ func (r ListRecipesRequest) Send(ctx context.Context) (*ListRecipesResponse, err
 	}
 
 	resp := &ListRecipesResponse{
-		ListRecipesOutput: r.Request.Data.(*ListRecipesOutput),
+		ListRecipesOutput: r.Request.Data.(*types.ListRecipesOutput),
 		response:          &aws.Response{Request: r.Request},
 	}
 
@@ -140,7 +93,7 @@ func NewListRecipesPaginator(req ListRecipesRequest) ListRecipesPaginator {
 	return ListRecipesPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListRecipesInput
+				var inCpy *types.ListRecipesInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -160,14 +113,14 @@ type ListRecipesPaginator struct {
 	aws.Pager
 }
 
-func (p *ListRecipesPaginator) CurrentPage() *ListRecipesOutput {
-	return p.Pager.CurrentPage().(*ListRecipesOutput)
+func (p *ListRecipesPaginator) CurrentPage() *types.ListRecipesOutput {
+	return p.Pager.CurrentPage().(*types.ListRecipesOutput)
 }
 
 // ListRecipesResponse is the response type for the
 // ListRecipes API operation.
 type ListRecipesResponse struct {
-	*ListRecipesOutput
+	*types.ListRecipesOutput
 
 	response *aws.Response
 }

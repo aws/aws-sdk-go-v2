@@ -10,6 +10,7 @@ package forecastiface
 
 import (
 	"github.com/aws/aws-sdk-go-v2/service/forecast"
+	"github.com/aws/aws-sdk-go-v2/service/forecast/types"
 )
 
 // ClientAPI provides an interface to enable mocking the
@@ -43,7 +44,7 @@ import (
 //    type mockClientClient struct {
 //        forecastiface.ClientPI
 //    }
-//    func (m *mockClientClient) CreateDataset(input *forecast.CreateDatasetInput) (*forecast.CreateDatasetOutput, error) {
+//    func (m *mockClientClient) CreateDataset(input *types.CreateDatasetInput) (*types.CreateDatasetOutput, error) {
 //        // mock response/functionality
 //    }
 //
@@ -61,57 +62,57 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type ClientAPI interface {
-	CreateDatasetRequest(*forecast.CreateDatasetInput) forecast.CreateDatasetRequest
+	CreateDatasetRequest(*types.CreateDatasetInput) forecast.CreateDatasetRequest
 
-	CreateDatasetGroupRequest(*forecast.CreateDatasetGroupInput) forecast.CreateDatasetGroupRequest
+	CreateDatasetGroupRequest(*types.CreateDatasetGroupInput) forecast.CreateDatasetGroupRequest
 
-	CreateDatasetImportJobRequest(*forecast.CreateDatasetImportJobInput) forecast.CreateDatasetImportJobRequest
+	CreateDatasetImportJobRequest(*types.CreateDatasetImportJobInput) forecast.CreateDatasetImportJobRequest
 
-	CreateForecastRequest(*forecast.CreateForecastInput) forecast.CreateForecastRequest
+	CreateForecastRequest(*types.CreateForecastInput) forecast.CreateForecastRequest
 
-	CreateForecastExportJobRequest(*forecast.CreateForecastExportJobInput) forecast.CreateForecastExportJobRequest
+	CreateForecastExportJobRequest(*types.CreateForecastExportJobInput) forecast.CreateForecastExportJobRequest
 
-	CreatePredictorRequest(*forecast.CreatePredictorInput) forecast.CreatePredictorRequest
+	CreatePredictorRequest(*types.CreatePredictorInput) forecast.CreatePredictorRequest
 
-	DeleteDatasetRequest(*forecast.DeleteDatasetInput) forecast.DeleteDatasetRequest
+	DeleteDatasetRequest(*types.DeleteDatasetInput) forecast.DeleteDatasetRequest
 
-	DeleteDatasetGroupRequest(*forecast.DeleteDatasetGroupInput) forecast.DeleteDatasetGroupRequest
+	DeleteDatasetGroupRequest(*types.DeleteDatasetGroupInput) forecast.DeleteDatasetGroupRequest
 
-	DeleteDatasetImportJobRequest(*forecast.DeleteDatasetImportJobInput) forecast.DeleteDatasetImportJobRequest
+	DeleteDatasetImportJobRequest(*types.DeleteDatasetImportJobInput) forecast.DeleteDatasetImportJobRequest
 
-	DeleteForecastRequest(*forecast.DeleteForecastInput) forecast.DeleteForecastRequest
+	DeleteForecastRequest(*types.DeleteForecastInput) forecast.DeleteForecastRequest
 
-	DeleteForecastExportJobRequest(*forecast.DeleteForecastExportJobInput) forecast.DeleteForecastExportJobRequest
+	DeleteForecastExportJobRequest(*types.DeleteForecastExportJobInput) forecast.DeleteForecastExportJobRequest
 
-	DeletePredictorRequest(*forecast.DeletePredictorInput) forecast.DeletePredictorRequest
+	DeletePredictorRequest(*types.DeletePredictorInput) forecast.DeletePredictorRequest
 
-	DescribeDatasetRequest(*forecast.DescribeDatasetInput) forecast.DescribeDatasetRequest
+	DescribeDatasetRequest(*types.DescribeDatasetInput) forecast.DescribeDatasetRequest
 
-	DescribeDatasetGroupRequest(*forecast.DescribeDatasetGroupInput) forecast.DescribeDatasetGroupRequest
+	DescribeDatasetGroupRequest(*types.DescribeDatasetGroupInput) forecast.DescribeDatasetGroupRequest
 
-	DescribeDatasetImportJobRequest(*forecast.DescribeDatasetImportJobInput) forecast.DescribeDatasetImportJobRequest
+	DescribeDatasetImportJobRequest(*types.DescribeDatasetImportJobInput) forecast.DescribeDatasetImportJobRequest
 
-	DescribeForecastRequest(*forecast.DescribeForecastInput) forecast.DescribeForecastRequest
+	DescribeForecastRequest(*types.DescribeForecastInput) forecast.DescribeForecastRequest
 
-	DescribeForecastExportJobRequest(*forecast.DescribeForecastExportJobInput) forecast.DescribeForecastExportJobRequest
+	DescribeForecastExportJobRequest(*types.DescribeForecastExportJobInput) forecast.DescribeForecastExportJobRequest
 
-	DescribePredictorRequest(*forecast.DescribePredictorInput) forecast.DescribePredictorRequest
+	DescribePredictorRequest(*types.DescribePredictorInput) forecast.DescribePredictorRequest
 
-	GetAccuracyMetricsRequest(*forecast.GetAccuracyMetricsInput) forecast.GetAccuracyMetricsRequest
+	GetAccuracyMetricsRequest(*types.GetAccuracyMetricsInput) forecast.GetAccuracyMetricsRequest
 
-	ListDatasetGroupsRequest(*forecast.ListDatasetGroupsInput) forecast.ListDatasetGroupsRequest
+	ListDatasetGroupsRequest(*types.ListDatasetGroupsInput) forecast.ListDatasetGroupsRequest
 
-	ListDatasetImportJobsRequest(*forecast.ListDatasetImportJobsInput) forecast.ListDatasetImportJobsRequest
+	ListDatasetImportJobsRequest(*types.ListDatasetImportJobsInput) forecast.ListDatasetImportJobsRequest
 
-	ListDatasetsRequest(*forecast.ListDatasetsInput) forecast.ListDatasetsRequest
+	ListDatasetsRequest(*types.ListDatasetsInput) forecast.ListDatasetsRequest
 
-	ListForecastExportJobsRequest(*forecast.ListForecastExportJobsInput) forecast.ListForecastExportJobsRequest
+	ListForecastExportJobsRequest(*types.ListForecastExportJobsInput) forecast.ListForecastExportJobsRequest
 
-	ListForecastsRequest(*forecast.ListForecastsInput) forecast.ListForecastsRequest
+	ListForecastsRequest(*types.ListForecastsInput) forecast.ListForecastsRequest
 
-	ListPredictorsRequest(*forecast.ListPredictorsInput) forecast.ListPredictorsRequest
+	ListPredictorsRequest(*types.ListPredictorsInput) forecast.ListPredictorsRequest
 
-	UpdateDatasetGroupRequest(*forecast.UpdateDatasetGroupInput) forecast.UpdateDatasetGroupRequest
+	UpdateDatasetGroupRequest(*types.UpdateDatasetGroupInput) forecast.UpdateDatasetGroupRequest
 }
 
 var _ ClientAPI = (*forecast.Client)(nil)

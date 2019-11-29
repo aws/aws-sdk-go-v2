@@ -6,58 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/lightsail/types"
 )
-
-type DetachInstancesFromLoadBalancerInput struct {
-	_ struct{} `type:"structure"`
-
-	// An array of strings containing the names of the instances you want to detach
-	// from the load balancer.
-	//
-	// InstanceNames is a required field
-	InstanceNames []string `locationName:"instanceNames" type:"list" required:"true"`
-
-	// The name of the Lightsail load balancer.
-	//
-	// LoadBalancerName is a required field
-	LoadBalancerName *string `locationName:"loadBalancerName" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DetachInstancesFromLoadBalancerInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DetachInstancesFromLoadBalancerInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DetachInstancesFromLoadBalancerInput"}
-
-	if s.InstanceNames == nil {
-		invalidParams.Add(aws.NewErrParamRequired("InstanceNames"))
-	}
-
-	if s.LoadBalancerName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("LoadBalancerName"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DetachInstancesFromLoadBalancerOutput struct {
-	_ struct{} `type:"structure"`
-
-	// An object describing the API operations.
-	Operations []Operation `locationName:"operations" type:"list"`
-}
-
-// String returns the string representation
-func (s DetachInstancesFromLoadBalancerOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDetachInstancesFromLoadBalancer = "DetachInstancesFromLoadBalancer"
 
@@ -81,7 +31,7 @@ const opDetachInstancesFromLoadBalancer = "DetachInstancesFromLoadBalancer"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/DetachInstancesFromLoadBalancer
-func (c *Client) DetachInstancesFromLoadBalancerRequest(input *DetachInstancesFromLoadBalancerInput) DetachInstancesFromLoadBalancerRequest {
+func (c *Client) DetachInstancesFromLoadBalancerRequest(input *types.DetachInstancesFromLoadBalancerInput) DetachInstancesFromLoadBalancerRequest {
 	op := &aws.Operation{
 		Name:       opDetachInstancesFromLoadBalancer,
 		HTTPMethod: "POST",
@@ -89,10 +39,10 @@ func (c *Client) DetachInstancesFromLoadBalancerRequest(input *DetachInstancesFr
 	}
 
 	if input == nil {
-		input = &DetachInstancesFromLoadBalancerInput{}
+		input = &types.DetachInstancesFromLoadBalancerInput{}
 	}
 
-	req := c.newRequest(op, input, &DetachInstancesFromLoadBalancerOutput{})
+	req := c.newRequest(op, input, &types.DetachInstancesFromLoadBalancerOutput{})
 	return DetachInstancesFromLoadBalancerRequest{Request: req, Input: input, Copy: c.DetachInstancesFromLoadBalancerRequest}
 }
 
@@ -100,8 +50,8 @@ func (c *Client) DetachInstancesFromLoadBalancerRequest(input *DetachInstancesFr
 // DetachInstancesFromLoadBalancer API operation.
 type DetachInstancesFromLoadBalancerRequest struct {
 	*aws.Request
-	Input *DetachInstancesFromLoadBalancerInput
-	Copy  func(*DetachInstancesFromLoadBalancerInput) DetachInstancesFromLoadBalancerRequest
+	Input *types.DetachInstancesFromLoadBalancerInput
+	Copy  func(*types.DetachInstancesFromLoadBalancerInput) DetachInstancesFromLoadBalancerRequest
 }
 
 // Send marshals and sends the DetachInstancesFromLoadBalancer API request.
@@ -113,7 +63,7 @@ func (r DetachInstancesFromLoadBalancerRequest) Send(ctx context.Context) (*Deta
 	}
 
 	resp := &DetachInstancesFromLoadBalancerResponse{
-		DetachInstancesFromLoadBalancerOutput: r.Request.Data.(*DetachInstancesFromLoadBalancerOutput),
+		DetachInstancesFromLoadBalancerOutput: r.Request.Data.(*types.DetachInstancesFromLoadBalancerOutput),
 		response:                              &aws.Response{Request: r.Request},
 	}
 
@@ -123,7 +73,7 @@ func (r DetachInstancesFromLoadBalancerRequest) Send(ctx context.Context) (*Deta
 // DetachInstancesFromLoadBalancerResponse is the response type for the
 // DetachInstancesFromLoadBalancer API operation.
 type DetachInstancesFromLoadBalancerResponse struct {
-	*DetachInstancesFromLoadBalancerOutput
+	*types.DetachInstancesFromLoadBalancerOutput
 
 	response *aws.Response
 }

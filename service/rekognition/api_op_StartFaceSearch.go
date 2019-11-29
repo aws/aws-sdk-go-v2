@@ -6,98 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/rekognition/types"
 )
-
-type StartFaceSearchInput struct {
-	_ struct{} `type:"structure"`
-
-	// Idempotent token used to identify the start request. If you use the same
-	// token with multiple StartFaceSearch requests, the same JobId is returned.
-	// Use ClientRequestToken to prevent the same job from being accidently started
-	// more than once.
-	ClientRequestToken *string `min:"1" type:"string"`
-
-	// ID of the collection that contains the faces you want to search for.
-	//
-	// CollectionId is a required field
-	CollectionId *string `min:"1" type:"string" required:"true"`
-
-	// The minimum confidence in the person match to return. For example, don't
-	// return any matches where confidence in matches is less than 70%. The default
-	// value is 80%.
-	FaceMatchThreshold *float64 `type:"float"`
-
-	// An identifier you specify that's returned in the completion notification
-	// that's published to your Amazon Simple Notification Service topic. For example,
-	// you can use JobTag to group related jobs and identify them in the completion
-	// notification.
-	JobTag *string `min:"1" type:"string"`
-
-	// The ARN of the Amazon SNS topic to which you want Amazon Rekognition Video
-	// to publish the completion status of the search.
-	NotificationChannel *NotificationChannel `type:"structure"`
-
-	// The video you want to search. The video must be stored in an Amazon S3 bucket.
-	//
-	// Video is a required field
-	Video *Video `type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s StartFaceSearchInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *StartFaceSearchInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "StartFaceSearchInput"}
-	if s.ClientRequestToken != nil && len(*s.ClientRequestToken) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ClientRequestToken", 1))
-	}
-
-	if s.CollectionId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("CollectionId"))
-	}
-	if s.CollectionId != nil && len(*s.CollectionId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("CollectionId", 1))
-	}
-	if s.JobTag != nil && len(*s.JobTag) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("JobTag", 1))
-	}
-
-	if s.Video == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Video"))
-	}
-	if s.NotificationChannel != nil {
-		if err := s.NotificationChannel.Validate(); err != nil {
-			invalidParams.AddNested("NotificationChannel", err.(aws.ErrInvalidParams))
-		}
-	}
-	if s.Video != nil {
-		if err := s.Video.Validate(); err != nil {
-			invalidParams.AddNested("Video", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type StartFaceSearchOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The identifier for the search job. Use JobId to identify the job in a subsequent
-	// call to GetFaceSearch.
-	JobId *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s StartFaceSearchOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opStartFaceSearch = "StartFaceSearch"
 
@@ -123,7 +33,7 @@ const opStartFaceSearch = "StartFaceSearch"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) StartFaceSearchRequest(input *StartFaceSearchInput) StartFaceSearchRequest {
+func (c *Client) StartFaceSearchRequest(input *types.StartFaceSearchInput) StartFaceSearchRequest {
 	op := &aws.Operation{
 		Name:       opStartFaceSearch,
 		HTTPMethod: "POST",
@@ -131,10 +41,10 @@ func (c *Client) StartFaceSearchRequest(input *StartFaceSearchInput) StartFaceSe
 	}
 
 	if input == nil {
-		input = &StartFaceSearchInput{}
+		input = &types.StartFaceSearchInput{}
 	}
 
-	req := c.newRequest(op, input, &StartFaceSearchOutput{})
+	req := c.newRequest(op, input, &types.StartFaceSearchOutput{})
 	return StartFaceSearchRequest{Request: req, Input: input, Copy: c.StartFaceSearchRequest}
 }
 
@@ -142,8 +52,8 @@ func (c *Client) StartFaceSearchRequest(input *StartFaceSearchInput) StartFaceSe
 // StartFaceSearch API operation.
 type StartFaceSearchRequest struct {
 	*aws.Request
-	Input *StartFaceSearchInput
-	Copy  func(*StartFaceSearchInput) StartFaceSearchRequest
+	Input *types.StartFaceSearchInput
+	Copy  func(*types.StartFaceSearchInput) StartFaceSearchRequest
 }
 
 // Send marshals and sends the StartFaceSearch API request.
@@ -155,7 +65,7 @@ func (r StartFaceSearchRequest) Send(ctx context.Context) (*StartFaceSearchRespo
 	}
 
 	resp := &StartFaceSearchResponse{
-		StartFaceSearchOutput: r.Request.Data.(*StartFaceSearchOutput),
+		StartFaceSearchOutput: r.Request.Data.(*types.StartFaceSearchOutput),
 		response:              &aws.Response{Request: r.Request},
 	}
 
@@ -165,7 +75,7 @@ func (r StartFaceSearchRequest) Send(ctx context.Context) (*StartFaceSearchRespo
 // StartFaceSearchResponse is the response type for the
 // StartFaceSearch API operation.
 type StartFaceSearchResponse struct {
-	*StartFaceSearchOutput
+	*types.StartFaceSearchOutput
 
 	response *aws.Response
 }

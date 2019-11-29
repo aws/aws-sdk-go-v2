@@ -6,50 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/codedeploy/types"
 )
-
-type ListDeploymentTargetsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The unique ID of a deployment.
-	DeploymentId *string `locationName:"deploymentId" type:"string"`
-
-	// A token identifier returned from the previous ListDeploymentTargets call.
-	// It can be used to return the next set of deployment targets in the list.
-	NextToken *string `locationName:"nextToken" type:"string"`
-
-	// A key used to filter the returned targets. The two valid values are:
-	//
-	//    * TargetStatus - A TargetStatus filter string can be Failed, InProgress,
-	//    Pending, Ready, Skipped, Succeeded, or Unknown.
-	//
-	//    * ServerInstanceLabel - A ServerInstanceLabel filter string can be Blue
-	//    or Green.
-	TargetFilters map[string][]string `locationName:"targetFilters" type:"map"`
-}
-
-// String returns the string representation
-func (s ListDeploymentTargetsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type ListDeploymentTargetsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// If a large amount of information is returned, a token identifier is also
-	// returned. It can be used in a subsequent ListDeploymentTargets call to return
-	// the next set of deployment targets in the list.
-	NextToken *string `locationName:"nextToken" type:"string"`
-
-	// The unique IDs of deployment targets.
-	TargetIds []string `locationName:"targetIds" type:"list"`
-}
-
-// String returns the string representation
-func (s ListDeploymentTargetsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListDeploymentTargets = "ListDeploymentTargets"
 
@@ -66,7 +24,7 @@ const opListDeploymentTargets = "ListDeploymentTargets"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/ListDeploymentTargets
-func (c *Client) ListDeploymentTargetsRequest(input *ListDeploymentTargetsInput) ListDeploymentTargetsRequest {
+func (c *Client) ListDeploymentTargetsRequest(input *types.ListDeploymentTargetsInput) ListDeploymentTargetsRequest {
 	op := &aws.Operation{
 		Name:       opListDeploymentTargets,
 		HTTPMethod: "POST",
@@ -74,10 +32,10 @@ func (c *Client) ListDeploymentTargetsRequest(input *ListDeploymentTargetsInput)
 	}
 
 	if input == nil {
-		input = &ListDeploymentTargetsInput{}
+		input = &types.ListDeploymentTargetsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListDeploymentTargetsOutput{})
+	req := c.newRequest(op, input, &types.ListDeploymentTargetsOutput{})
 	return ListDeploymentTargetsRequest{Request: req, Input: input, Copy: c.ListDeploymentTargetsRequest}
 }
 
@@ -85,8 +43,8 @@ func (c *Client) ListDeploymentTargetsRequest(input *ListDeploymentTargetsInput)
 // ListDeploymentTargets API operation.
 type ListDeploymentTargetsRequest struct {
 	*aws.Request
-	Input *ListDeploymentTargetsInput
-	Copy  func(*ListDeploymentTargetsInput) ListDeploymentTargetsRequest
+	Input *types.ListDeploymentTargetsInput
+	Copy  func(*types.ListDeploymentTargetsInput) ListDeploymentTargetsRequest
 }
 
 // Send marshals and sends the ListDeploymentTargets API request.
@@ -98,7 +56,7 @@ func (r ListDeploymentTargetsRequest) Send(ctx context.Context) (*ListDeployment
 	}
 
 	resp := &ListDeploymentTargetsResponse{
-		ListDeploymentTargetsOutput: r.Request.Data.(*ListDeploymentTargetsOutput),
+		ListDeploymentTargetsOutput: r.Request.Data.(*types.ListDeploymentTargetsOutput),
 		response:                    &aws.Response{Request: r.Request},
 	}
 
@@ -108,7 +66,7 @@ func (r ListDeploymentTargetsRequest) Send(ctx context.Context) (*ListDeployment
 // ListDeploymentTargetsResponse is the response type for the
 // ListDeploymentTargets API operation.
 type ListDeploymentTargetsResponse struct {
-	*ListDeploymentTargetsOutput
+	*types.ListDeploymentTargetsOutput
 
 	response *aws.Response
 }

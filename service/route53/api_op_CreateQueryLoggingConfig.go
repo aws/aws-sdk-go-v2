@@ -6,114 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/route53/types"
 )
-
-type CreateQueryLoggingConfigInput struct {
-	_ struct{} `locationName:"CreateQueryLoggingConfigRequest" type:"structure" xmlURI:"https://route53.amazonaws.com/doc/2013-04-01/"`
-
-	// The Amazon Resource Name (ARN) for the log group that you want to Amazon
-	// Route 53 to send query logs to. This is the format of the ARN:
-	//
-	// arn:aws:logs:region:account-id:log-group:log_group_name
-	//
-	// To get the ARN for a log group, you can use the CloudWatch console, the DescribeLogGroups
-	// (https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_DescribeLogGroups.html)
-	// API action, the describe-log-groups (https://docs.aws.amazon.com/cli/latest/reference/logs/describe-log-groups.html)
-	// command, or the applicable command in one of the AWS SDKs.
-	//
-	// CloudWatchLogsLogGroupArn is a required field
-	CloudWatchLogsLogGroupArn *string `type:"string" required:"true"`
-
-	// The ID of the hosted zone that you want to log queries for. You can log queries
-	// only for public hosted zones.
-	//
-	// HostedZoneId is a required field
-	HostedZoneId *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s CreateQueryLoggingConfigInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateQueryLoggingConfigInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateQueryLoggingConfigInput"}
-
-	if s.CloudWatchLogsLogGroupArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("CloudWatchLogsLogGroupArn"))
-	}
-
-	if s.HostedZoneId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("HostedZoneId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s CreateQueryLoggingConfigInput) MarshalFields(e protocol.FieldEncoder) error {
-
-	e.SetFields(protocol.BodyTarget, "CreateQueryLoggingConfigRequest", protocol.FieldMarshalerFunc(func(e protocol.FieldEncoder) error {
-		if s.CloudWatchLogsLogGroupArn != nil {
-			v := *s.CloudWatchLogsLogGroupArn
-
-			metadata := protocol.Metadata{}
-			e.SetValue(protocol.BodyTarget, "CloudWatchLogsLogGroupArn", protocol.StringValue(v), metadata)
-		}
-		if s.HostedZoneId != nil {
-			v := *s.HostedZoneId
-
-			metadata := protocol.Metadata{}
-			e.SetValue(protocol.BodyTarget, "HostedZoneId", protocol.StringValue(v), metadata)
-		}
-		return nil
-	}), protocol.Metadata{XMLNamespaceURI: "https://route53.amazonaws.com/doc/2013-04-01/"})
-	return nil
-}
-
-type CreateQueryLoggingConfigOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The unique URL representing the new query logging configuration.
-	//
-	// Location is a required field
-	Location *string `location:"header" locationName:"Location" type:"string" required:"true"`
-
-	// A complex type that contains the ID for a query logging configuration, the
-	// ID of the hosted zone that you want to log queries for, and the ARN for the
-	// log group that you want Amazon Route 53 to send query logs to.
-	//
-	// QueryLoggingConfig is a required field
-	QueryLoggingConfig *QueryLoggingConfig `type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s CreateQueryLoggingConfigOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s CreateQueryLoggingConfigOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.QueryLoggingConfig != nil {
-		v := s.QueryLoggingConfig
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "QueryLoggingConfig", v, metadata)
-	}
-	if s.Location != nil {
-		v := *s.Location
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "Location", protocol.StringValue(v), metadata)
-	}
-	return nil
-}
 
 const opCreateQueryLoggingConfig = "CreateQueryLoggingConfig"
 
@@ -233,7 +127,7 @@ const opCreateQueryLoggingConfig = "CreateQueryLoggingConfig"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/CreateQueryLoggingConfig
-func (c *Client) CreateQueryLoggingConfigRequest(input *CreateQueryLoggingConfigInput) CreateQueryLoggingConfigRequest {
+func (c *Client) CreateQueryLoggingConfigRequest(input *types.CreateQueryLoggingConfigInput) CreateQueryLoggingConfigRequest {
 	op := &aws.Operation{
 		Name:       opCreateQueryLoggingConfig,
 		HTTPMethod: "POST",
@@ -241,10 +135,10 @@ func (c *Client) CreateQueryLoggingConfigRequest(input *CreateQueryLoggingConfig
 	}
 
 	if input == nil {
-		input = &CreateQueryLoggingConfigInput{}
+		input = &types.CreateQueryLoggingConfigInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateQueryLoggingConfigOutput{})
+	req := c.newRequest(op, input, &types.CreateQueryLoggingConfigOutput{})
 	return CreateQueryLoggingConfigRequest{Request: req, Input: input, Copy: c.CreateQueryLoggingConfigRequest}
 }
 
@@ -252,8 +146,8 @@ func (c *Client) CreateQueryLoggingConfigRequest(input *CreateQueryLoggingConfig
 // CreateQueryLoggingConfig API operation.
 type CreateQueryLoggingConfigRequest struct {
 	*aws.Request
-	Input *CreateQueryLoggingConfigInput
-	Copy  func(*CreateQueryLoggingConfigInput) CreateQueryLoggingConfigRequest
+	Input *types.CreateQueryLoggingConfigInput
+	Copy  func(*types.CreateQueryLoggingConfigInput) CreateQueryLoggingConfigRequest
 }
 
 // Send marshals and sends the CreateQueryLoggingConfig API request.
@@ -265,7 +159,7 @@ func (r CreateQueryLoggingConfigRequest) Send(ctx context.Context) (*CreateQuery
 	}
 
 	resp := &CreateQueryLoggingConfigResponse{
-		CreateQueryLoggingConfigOutput: r.Request.Data.(*CreateQueryLoggingConfigOutput),
+		CreateQueryLoggingConfigOutput: r.Request.Data.(*types.CreateQueryLoggingConfigOutput),
 		response:                       &aws.Response{Request: r.Request},
 	}
 
@@ -275,7 +169,7 @@ func (r CreateQueryLoggingConfigRequest) Send(ctx context.Context) (*CreateQuery
 // CreateQueryLoggingConfigResponse is the response type for the
 // CreateQueryLoggingConfig API operation.
 type CreateQueryLoggingConfigResponse struct {
-	*CreateQueryLoggingConfigOutput
+	*types.CreateQueryLoggingConfigOutput
 
 	response *aws.Response
 }

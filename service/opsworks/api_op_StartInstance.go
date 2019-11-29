@@ -6,47 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
+	"github.com/aws/aws-sdk-go-v2/service/opsworks/types"
 )
-
-type StartInstanceInput struct {
-	_ struct{} `type:"structure"`
-
-	// The instance ID.
-	//
-	// InstanceId is a required field
-	InstanceId *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s StartInstanceInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *StartInstanceInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "StartInstanceInput"}
-
-	if s.InstanceId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("InstanceId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type StartInstanceOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s StartInstanceOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opStartInstance = "StartInstance"
 
@@ -69,7 +32,7 @@ const opStartInstance = "StartInstance"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/StartInstance
-func (c *Client) StartInstanceRequest(input *StartInstanceInput) StartInstanceRequest {
+func (c *Client) StartInstanceRequest(input *types.StartInstanceInput) StartInstanceRequest {
 	op := &aws.Operation{
 		Name:       opStartInstance,
 		HTTPMethod: "POST",
@@ -77,10 +40,10 @@ func (c *Client) StartInstanceRequest(input *StartInstanceInput) StartInstanceRe
 	}
 
 	if input == nil {
-		input = &StartInstanceInput{}
+		input = &types.StartInstanceInput{}
 	}
 
-	req := c.newRequest(op, input, &StartInstanceOutput{})
+	req := c.newRequest(op, input, &types.StartInstanceOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return StartInstanceRequest{Request: req, Input: input, Copy: c.StartInstanceRequest}
@@ -90,8 +53,8 @@ func (c *Client) StartInstanceRequest(input *StartInstanceInput) StartInstanceRe
 // StartInstance API operation.
 type StartInstanceRequest struct {
 	*aws.Request
-	Input *StartInstanceInput
-	Copy  func(*StartInstanceInput) StartInstanceRequest
+	Input *types.StartInstanceInput
+	Copy  func(*types.StartInstanceInput) StartInstanceRequest
 }
 
 // Send marshals and sends the StartInstance API request.
@@ -103,7 +66,7 @@ func (r StartInstanceRequest) Send(ctx context.Context) (*StartInstanceResponse,
 	}
 
 	resp := &StartInstanceResponse{
-		StartInstanceOutput: r.Request.Data.(*StartInstanceOutput),
+		StartInstanceOutput: r.Request.Data.(*types.StartInstanceOutput),
 		response:            &aws.Response{Request: r.Request},
 	}
 
@@ -113,7 +76,7 @@ func (r StartInstanceRequest) Send(ctx context.Context) (*StartInstanceResponse,
 // StartInstanceResponse is the response type for the
 // StartInstance API operation.
 type StartInstanceResponse struct {
-	*StartInstanceOutput
+	*types.StartInstanceOutput
 
 	response *aws.Response
 }

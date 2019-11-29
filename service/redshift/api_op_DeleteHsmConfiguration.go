@@ -6,47 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/query"
+	"github.com/aws/aws-sdk-go-v2/service/redshift/types"
 )
-
-type DeleteHsmConfigurationInput struct {
-	_ struct{} `type:"structure"`
-
-	// The identifier of the Amazon Redshift HSM configuration to be deleted.
-	//
-	// HsmConfigurationIdentifier is a required field
-	HsmConfigurationIdentifier *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteHsmConfigurationInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteHsmConfigurationInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteHsmConfigurationInput"}
-
-	if s.HsmConfigurationIdentifier == nil {
-		invalidParams.Add(aws.NewErrParamRequired("HsmConfigurationIdentifier"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteHsmConfigurationOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteHsmConfigurationOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteHsmConfiguration = "DeleteHsmConfiguration"
 
@@ -63,7 +26,7 @@ const opDeleteHsmConfiguration = "DeleteHsmConfiguration"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DeleteHsmConfiguration
-func (c *Client) DeleteHsmConfigurationRequest(input *DeleteHsmConfigurationInput) DeleteHsmConfigurationRequest {
+func (c *Client) DeleteHsmConfigurationRequest(input *types.DeleteHsmConfigurationInput) DeleteHsmConfigurationRequest {
 	op := &aws.Operation{
 		Name:       opDeleteHsmConfiguration,
 		HTTPMethod: "POST",
@@ -71,10 +34,10 @@ func (c *Client) DeleteHsmConfigurationRequest(input *DeleteHsmConfigurationInpu
 	}
 
 	if input == nil {
-		input = &DeleteHsmConfigurationInput{}
+		input = &types.DeleteHsmConfigurationInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteHsmConfigurationOutput{})
+	req := c.newRequest(op, input, &types.DeleteHsmConfigurationOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return DeleteHsmConfigurationRequest{Request: req, Input: input, Copy: c.DeleteHsmConfigurationRequest}
@@ -84,8 +47,8 @@ func (c *Client) DeleteHsmConfigurationRequest(input *DeleteHsmConfigurationInpu
 // DeleteHsmConfiguration API operation.
 type DeleteHsmConfigurationRequest struct {
 	*aws.Request
-	Input *DeleteHsmConfigurationInput
-	Copy  func(*DeleteHsmConfigurationInput) DeleteHsmConfigurationRequest
+	Input *types.DeleteHsmConfigurationInput
+	Copy  func(*types.DeleteHsmConfigurationInput) DeleteHsmConfigurationRequest
 }
 
 // Send marshals and sends the DeleteHsmConfiguration API request.
@@ -97,7 +60,7 @@ func (r DeleteHsmConfigurationRequest) Send(ctx context.Context) (*DeleteHsmConf
 	}
 
 	resp := &DeleteHsmConfigurationResponse{
-		DeleteHsmConfigurationOutput: r.Request.Data.(*DeleteHsmConfigurationOutput),
+		DeleteHsmConfigurationOutput: r.Request.Data.(*types.DeleteHsmConfigurationOutput),
 		response:                     &aws.Response{Request: r.Request},
 	}
 
@@ -107,7 +70,7 @@ func (r DeleteHsmConfigurationRequest) Send(ctx context.Context) (*DeleteHsmConf
 // DeleteHsmConfigurationResponse is the response type for the
 // DeleteHsmConfiguration API operation.
 type DeleteHsmConfigurationResponse struct {
-	*DeleteHsmConfigurationOutput
+	*types.DeleteHsmConfigurationOutput
 
 	response *aws.Response
 }

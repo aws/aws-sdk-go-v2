@@ -6,51 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/directoryservice/types"
 )
-
-// Contains the inputs for the GetSnapshotLimits operation.
-type GetSnapshotLimitsInput struct {
-	_ struct{} `type:"structure"`
-
-	// Contains the identifier of the directory to obtain the limits for.
-	//
-	// DirectoryId is a required field
-	DirectoryId *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetSnapshotLimitsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetSnapshotLimitsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetSnapshotLimitsInput"}
-
-	if s.DirectoryId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DirectoryId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Contains the results of the GetSnapshotLimits operation.
-type GetSnapshotLimitsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A SnapshotLimits object that contains the manual snapshot limits for the
-	// specified directory.
-	SnapshotLimits *SnapshotLimits `type:"structure"`
-}
-
-// String returns the string representation
-func (s GetSnapshotLimitsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetSnapshotLimits = "GetSnapshotLimits"
 
@@ -67,7 +24,7 @@ const opGetSnapshotLimits = "GetSnapshotLimits"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/GetSnapshotLimits
-func (c *Client) GetSnapshotLimitsRequest(input *GetSnapshotLimitsInput) GetSnapshotLimitsRequest {
+func (c *Client) GetSnapshotLimitsRequest(input *types.GetSnapshotLimitsInput) GetSnapshotLimitsRequest {
 	op := &aws.Operation{
 		Name:       opGetSnapshotLimits,
 		HTTPMethod: "POST",
@@ -75,10 +32,10 @@ func (c *Client) GetSnapshotLimitsRequest(input *GetSnapshotLimitsInput) GetSnap
 	}
 
 	if input == nil {
-		input = &GetSnapshotLimitsInput{}
+		input = &types.GetSnapshotLimitsInput{}
 	}
 
-	req := c.newRequest(op, input, &GetSnapshotLimitsOutput{})
+	req := c.newRequest(op, input, &types.GetSnapshotLimitsOutput{})
 	return GetSnapshotLimitsRequest{Request: req, Input: input, Copy: c.GetSnapshotLimitsRequest}
 }
 
@@ -86,8 +43,8 @@ func (c *Client) GetSnapshotLimitsRequest(input *GetSnapshotLimitsInput) GetSnap
 // GetSnapshotLimits API operation.
 type GetSnapshotLimitsRequest struct {
 	*aws.Request
-	Input *GetSnapshotLimitsInput
-	Copy  func(*GetSnapshotLimitsInput) GetSnapshotLimitsRequest
+	Input *types.GetSnapshotLimitsInput
+	Copy  func(*types.GetSnapshotLimitsInput) GetSnapshotLimitsRequest
 }
 
 // Send marshals and sends the GetSnapshotLimits API request.
@@ -99,7 +56,7 @@ func (r GetSnapshotLimitsRequest) Send(ctx context.Context) (*GetSnapshotLimitsR
 	}
 
 	resp := &GetSnapshotLimitsResponse{
-		GetSnapshotLimitsOutput: r.Request.Data.(*GetSnapshotLimitsOutput),
+		GetSnapshotLimitsOutput: r.Request.Data.(*types.GetSnapshotLimitsOutput),
 		response:                &aws.Response{Request: r.Request},
 	}
 
@@ -109,7 +66,7 @@ func (r GetSnapshotLimitsRequest) Send(ctx context.Context) (*GetSnapshotLimitsR
 // GetSnapshotLimitsResponse is the response type for the
 // GetSnapshotLimits API operation.
 type GetSnapshotLimitsResponse struct {
-	*GetSnapshotLimitsOutput
+	*types.GetSnapshotLimitsOutput
 
 	response *aws.Response
 }

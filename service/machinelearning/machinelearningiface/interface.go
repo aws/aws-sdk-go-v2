@@ -13,6 +13,7 @@ import (
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/machinelearning"
+	"github.com/aws/aws-sdk-go-v2/service/machinelearning/types"
 )
 
 // ClientAPI provides an interface to enable mocking the
@@ -46,7 +47,7 @@ import (
 //    type mockClientClient struct {
 //        machinelearningiface.ClientPI
 //    }
-//    func (m *mockClientClient) AddTags(input *machinelearning.AddTagsInput) (*machinelearning.AddTagsOutput, error) {
+//    func (m *mockClientClient) AddTags(input *types.AddTagsInput) (*types.AddTagsOutput, error) {
 //        // mock response/functionality
 //    }
 //
@@ -64,69 +65,69 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type ClientAPI interface {
-	AddTagsRequest(*machinelearning.AddTagsInput) machinelearning.AddTagsRequest
+	AddTagsRequest(*types.AddTagsInput) machinelearning.AddTagsRequest
 
-	CreateBatchPredictionRequest(*machinelearning.CreateBatchPredictionInput) machinelearning.CreateBatchPredictionRequest
+	CreateBatchPredictionRequest(*types.CreateBatchPredictionInput) machinelearning.CreateBatchPredictionRequest
 
-	CreateDataSourceFromRDSRequest(*machinelearning.CreateDataSourceFromRDSInput) machinelearning.CreateDataSourceFromRDSRequest
+	CreateDataSourceFromRDSRequest(*types.CreateDataSourceFromRDSInput) machinelearning.CreateDataSourceFromRDSRequest
 
-	CreateDataSourceFromRedshiftRequest(*machinelearning.CreateDataSourceFromRedshiftInput) machinelearning.CreateDataSourceFromRedshiftRequest
+	CreateDataSourceFromRedshiftRequest(*types.CreateDataSourceFromRedshiftInput) machinelearning.CreateDataSourceFromRedshiftRequest
 
-	CreateDataSourceFromS3Request(*machinelearning.CreateDataSourceFromS3Input) machinelearning.CreateDataSourceFromS3Request
+	CreateDataSourceFromS3Request(*types.CreateDataSourceFromS3Input) machinelearning.CreateDataSourceFromS3Request
 
-	CreateEvaluationRequest(*machinelearning.CreateEvaluationInput) machinelearning.CreateEvaluationRequest
+	CreateEvaluationRequest(*types.CreateEvaluationInput) machinelearning.CreateEvaluationRequest
 
-	CreateMLModelRequest(*machinelearning.CreateMLModelInput) machinelearning.CreateMLModelRequest
+	CreateMLModelRequest(*types.CreateMLModelInput) machinelearning.CreateMLModelRequest
 
-	CreateRealtimeEndpointRequest(*machinelearning.CreateRealtimeEndpointInput) machinelearning.CreateRealtimeEndpointRequest
+	CreateRealtimeEndpointRequest(*types.CreateRealtimeEndpointInput) machinelearning.CreateRealtimeEndpointRequest
 
-	DeleteBatchPredictionRequest(*machinelearning.DeleteBatchPredictionInput) machinelearning.DeleteBatchPredictionRequest
+	DeleteBatchPredictionRequest(*types.DeleteBatchPredictionInput) machinelearning.DeleteBatchPredictionRequest
 
-	DeleteDataSourceRequest(*machinelearning.DeleteDataSourceInput) machinelearning.DeleteDataSourceRequest
+	DeleteDataSourceRequest(*types.DeleteDataSourceInput) machinelearning.DeleteDataSourceRequest
 
-	DeleteEvaluationRequest(*machinelearning.DeleteEvaluationInput) machinelearning.DeleteEvaluationRequest
+	DeleteEvaluationRequest(*types.DeleteEvaluationInput) machinelearning.DeleteEvaluationRequest
 
-	DeleteMLModelRequest(*machinelearning.DeleteMLModelInput) machinelearning.DeleteMLModelRequest
+	DeleteMLModelRequest(*types.DeleteMLModelInput) machinelearning.DeleteMLModelRequest
 
-	DeleteRealtimeEndpointRequest(*machinelearning.DeleteRealtimeEndpointInput) machinelearning.DeleteRealtimeEndpointRequest
+	DeleteRealtimeEndpointRequest(*types.DeleteRealtimeEndpointInput) machinelearning.DeleteRealtimeEndpointRequest
 
-	DeleteTagsRequest(*machinelearning.DeleteTagsInput) machinelearning.DeleteTagsRequest
+	DeleteTagsRequest(*types.DeleteTagsInput) machinelearning.DeleteTagsRequest
 
-	DescribeBatchPredictionsRequest(*machinelearning.DescribeBatchPredictionsInput) machinelearning.DescribeBatchPredictionsRequest
+	DescribeBatchPredictionsRequest(*types.DescribeBatchPredictionsInput) machinelearning.DescribeBatchPredictionsRequest
 
-	DescribeDataSourcesRequest(*machinelearning.DescribeDataSourcesInput) machinelearning.DescribeDataSourcesRequest
+	DescribeDataSourcesRequest(*types.DescribeDataSourcesInput) machinelearning.DescribeDataSourcesRequest
 
-	DescribeEvaluationsRequest(*machinelearning.DescribeEvaluationsInput) machinelearning.DescribeEvaluationsRequest
+	DescribeEvaluationsRequest(*types.DescribeEvaluationsInput) machinelearning.DescribeEvaluationsRequest
 
-	DescribeMLModelsRequest(*machinelearning.DescribeMLModelsInput) machinelearning.DescribeMLModelsRequest
+	DescribeMLModelsRequest(*types.DescribeMLModelsInput) machinelearning.DescribeMLModelsRequest
 
-	DescribeTagsRequest(*machinelearning.DescribeTagsInput) machinelearning.DescribeTagsRequest
+	DescribeTagsRequest(*types.DescribeTagsInput) machinelearning.DescribeTagsRequest
 
-	GetBatchPredictionRequest(*machinelearning.GetBatchPredictionInput) machinelearning.GetBatchPredictionRequest
+	GetBatchPredictionRequest(*types.GetBatchPredictionInput) machinelearning.GetBatchPredictionRequest
 
-	GetDataSourceRequest(*machinelearning.GetDataSourceInput) machinelearning.GetDataSourceRequest
+	GetDataSourceRequest(*types.GetDataSourceInput) machinelearning.GetDataSourceRequest
 
-	GetEvaluationRequest(*machinelearning.GetEvaluationInput) machinelearning.GetEvaluationRequest
+	GetEvaluationRequest(*types.GetEvaluationInput) machinelearning.GetEvaluationRequest
 
-	GetMLModelRequest(*machinelearning.GetMLModelInput) machinelearning.GetMLModelRequest
+	GetMLModelRequest(*types.GetMLModelInput) machinelearning.GetMLModelRequest
 
-	PredictRequest(*machinelearning.PredictInput) machinelearning.PredictRequest
+	PredictRequest(*types.PredictInput) machinelearning.PredictRequest
 
-	UpdateBatchPredictionRequest(*machinelearning.UpdateBatchPredictionInput) machinelearning.UpdateBatchPredictionRequest
+	UpdateBatchPredictionRequest(*types.UpdateBatchPredictionInput) machinelearning.UpdateBatchPredictionRequest
 
-	UpdateDataSourceRequest(*machinelearning.UpdateDataSourceInput) machinelearning.UpdateDataSourceRequest
+	UpdateDataSourceRequest(*types.UpdateDataSourceInput) machinelearning.UpdateDataSourceRequest
 
-	UpdateEvaluationRequest(*machinelearning.UpdateEvaluationInput) machinelearning.UpdateEvaluationRequest
+	UpdateEvaluationRequest(*types.UpdateEvaluationInput) machinelearning.UpdateEvaluationRequest
 
-	UpdateMLModelRequest(*machinelearning.UpdateMLModelInput) machinelearning.UpdateMLModelRequest
+	UpdateMLModelRequest(*types.UpdateMLModelInput) machinelearning.UpdateMLModelRequest
 
-	WaitUntilBatchPredictionAvailable(context.Context, *machinelearning.DescribeBatchPredictionsInput, ...aws.WaiterOption) error
+	WaitUntilBatchPredictionAvailable(context.Context, *types.DescribeBatchPredictionsInput, ...aws.WaiterOption) error
 
-	WaitUntilDataSourceAvailable(context.Context, *machinelearning.DescribeDataSourcesInput, ...aws.WaiterOption) error
+	WaitUntilDataSourceAvailable(context.Context, *types.DescribeDataSourcesInput, ...aws.WaiterOption) error
 
-	WaitUntilEvaluationAvailable(context.Context, *machinelearning.DescribeEvaluationsInput, ...aws.WaiterOption) error
+	WaitUntilEvaluationAvailable(context.Context, *types.DescribeEvaluationsInput, ...aws.WaiterOption) error
 
-	WaitUntilMLModelAvailable(context.Context, *machinelearning.DescribeMLModelsInput, ...aws.WaiterOption) error
+	WaitUntilMLModelAvailable(context.Context, *types.DescribeMLModelsInput, ...aws.WaiterOption) error
 }
 
 var _ ClientAPI = (*machinelearning.Client)(nil)

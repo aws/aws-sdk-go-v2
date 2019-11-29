@@ -6,57 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/cloudwatchlogs/types"
 )
-
-type DescribeResourcePoliciesInput struct {
-	_ struct{} `type:"structure"`
-
-	// The maximum number of resource policies to be displayed with one call of
-	// this API.
-	Limit *int64 `locationName:"limit" min:"1" type:"integer"`
-
-	// The token for the next set of items to return. The token expires after 24
-	// hours.
-	NextToken *string `locationName:"nextToken" min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeResourcePoliciesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeResourcePoliciesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeResourcePoliciesInput"}
-	if s.Limit != nil && *s.Limit < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("Limit", 1))
-	}
-	if s.NextToken != nil && len(*s.NextToken) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribeResourcePoliciesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The token for the next set of items to return. The token expires after 24
-	// hours.
-	NextToken *string `locationName:"nextToken" min:"1" type:"string"`
-
-	// The resource policies that exist in this account.
-	ResourcePolicies []ResourcePolicy `locationName:"resourcePolicies" type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeResourcePoliciesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeResourcePolicies = "DescribeResourcePolicies"
 
@@ -73,7 +24,7 @@ const opDescribeResourcePolicies = "DescribeResourcePolicies"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/DescribeResourcePolicies
-func (c *Client) DescribeResourcePoliciesRequest(input *DescribeResourcePoliciesInput) DescribeResourcePoliciesRequest {
+func (c *Client) DescribeResourcePoliciesRequest(input *types.DescribeResourcePoliciesInput) DescribeResourcePoliciesRequest {
 	op := &aws.Operation{
 		Name:       opDescribeResourcePolicies,
 		HTTPMethod: "POST",
@@ -81,10 +32,10 @@ func (c *Client) DescribeResourcePoliciesRequest(input *DescribeResourcePolicies
 	}
 
 	if input == nil {
-		input = &DescribeResourcePoliciesInput{}
+		input = &types.DescribeResourcePoliciesInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeResourcePoliciesOutput{})
+	req := c.newRequest(op, input, &types.DescribeResourcePoliciesOutput{})
 	return DescribeResourcePoliciesRequest{Request: req, Input: input, Copy: c.DescribeResourcePoliciesRequest}
 }
 
@@ -92,8 +43,8 @@ func (c *Client) DescribeResourcePoliciesRequest(input *DescribeResourcePolicies
 // DescribeResourcePolicies API operation.
 type DescribeResourcePoliciesRequest struct {
 	*aws.Request
-	Input *DescribeResourcePoliciesInput
-	Copy  func(*DescribeResourcePoliciesInput) DescribeResourcePoliciesRequest
+	Input *types.DescribeResourcePoliciesInput
+	Copy  func(*types.DescribeResourcePoliciesInput) DescribeResourcePoliciesRequest
 }
 
 // Send marshals and sends the DescribeResourcePolicies API request.
@@ -105,7 +56,7 @@ func (r DescribeResourcePoliciesRequest) Send(ctx context.Context) (*DescribeRes
 	}
 
 	resp := &DescribeResourcePoliciesResponse{
-		DescribeResourcePoliciesOutput: r.Request.Data.(*DescribeResourcePoliciesOutput),
+		DescribeResourcePoliciesOutput: r.Request.Data.(*types.DescribeResourcePoliciesOutput),
 		response:                       &aws.Response{Request: r.Request},
 	}
 
@@ -115,7 +66,7 @@ func (r DescribeResourcePoliciesRequest) Send(ctx context.Context) (*DescribeRes
 // DescribeResourcePoliciesResponse is the response type for the
 // DescribeResourcePolicies API operation.
 type DescribeResourcePoliciesResponse struct {
-	*DescribeResourcePoliciesOutput
+	*types.DescribeResourcePoliciesOutput
 
 	response *aws.Response
 }

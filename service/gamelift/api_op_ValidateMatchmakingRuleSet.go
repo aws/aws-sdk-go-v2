@@ -6,53 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/gamelift/types"
 )
-
-// Represents the input for a request action.
-type ValidateMatchmakingRuleSetInput struct {
-	_ struct{} `type:"structure"`
-
-	// Collection of matchmaking rules to validate, formatted as a JSON string.
-	//
-	// RuleSetBody is a required field
-	RuleSetBody *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s ValidateMatchmakingRuleSetInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ValidateMatchmakingRuleSetInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ValidateMatchmakingRuleSetInput"}
-
-	if s.RuleSetBody == nil {
-		invalidParams.Add(aws.NewErrParamRequired("RuleSetBody"))
-	}
-	if s.RuleSetBody != nil && len(*s.RuleSetBody) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("RuleSetBody", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Represents the returned data in response to a request action.
-type ValidateMatchmakingRuleSetOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Response indicating whether the rule set is valid.
-	Valid *bool `type:"boolean"`
-}
-
-// String returns the string representation
-func (s ValidateMatchmakingRuleSetOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opValidateMatchmakingRuleSet = "ValidateMatchmakingRuleSet"
 
@@ -94,7 +49,7 @@ const opValidateMatchmakingRuleSet = "ValidateMatchmakingRuleSet"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/ValidateMatchmakingRuleSet
-func (c *Client) ValidateMatchmakingRuleSetRequest(input *ValidateMatchmakingRuleSetInput) ValidateMatchmakingRuleSetRequest {
+func (c *Client) ValidateMatchmakingRuleSetRequest(input *types.ValidateMatchmakingRuleSetInput) ValidateMatchmakingRuleSetRequest {
 	op := &aws.Operation{
 		Name:       opValidateMatchmakingRuleSet,
 		HTTPMethod: "POST",
@@ -102,10 +57,10 @@ func (c *Client) ValidateMatchmakingRuleSetRequest(input *ValidateMatchmakingRul
 	}
 
 	if input == nil {
-		input = &ValidateMatchmakingRuleSetInput{}
+		input = &types.ValidateMatchmakingRuleSetInput{}
 	}
 
-	req := c.newRequest(op, input, &ValidateMatchmakingRuleSetOutput{})
+	req := c.newRequest(op, input, &types.ValidateMatchmakingRuleSetOutput{})
 	return ValidateMatchmakingRuleSetRequest{Request: req, Input: input, Copy: c.ValidateMatchmakingRuleSetRequest}
 }
 
@@ -113,8 +68,8 @@ func (c *Client) ValidateMatchmakingRuleSetRequest(input *ValidateMatchmakingRul
 // ValidateMatchmakingRuleSet API operation.
 type ValidateMatchmakingRuleSetRequest struct {
 	*aws.Request
-	Input *ValidateMatchmakingRuleSetInput
-	Copy  func(*ValidateMatchmakingRuleSetInput) ValidateMatchmakingRuleSetRequest
+	Input *types.ValidateMatchmakingRuleSetInput
+	Copy  func(*types.ValidateMatchmakingRuleSetInput) ValidateMatchmakingRuleSetRequest
 }
 
 // Send marshals and sends the ValidateMatchmakingRuleSet API request.
@@ -126,7 +81,7 @@ func (r ValidateMatchmakingRuleSetRequest) Send(ctx context.Context) (*ValidateM
 	}
 
 	resp := &ValidateMatchmakingRuleSetResponse{
-		ValidateMatchmakingRuleSetOutput: r.Request.Data.(*ValidateMatchmakingRuleSetOutput),
+		ValidateMatchmakingRuleSetOutput: r.Request.Data.(*types.ValidateMatchmakingRuleSetOutput),
 		response:                         &aws.Response{Request: r.Request},
 	}
 
@@ -136,7 +91,7 @@ func (r ValidateMatchmakingRuleSetRequest) Send(ctx context.Context) (*ValidateM
 // ValidateMatchmakingRuleSetResponse is the response type for the
 // ValidateMatchmakingRuleSet API operation.
 type ValidateMatchmakingRuleSetResponse struct {
-	*ValidateMatchmakingRuleSetOutput
+	*types.ValidateMatchmakingRuleSetOutput
 
 	response *aws.Response
 }

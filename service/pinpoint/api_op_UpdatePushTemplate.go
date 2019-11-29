@@ -6,89 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/pinpoint/types"
 )
-
-type UpdatePushTemplateInput struct {
-	_ struct{} `type:"structure" payload:"PushNotificationTemplateRequest"`
-
-	// Specifies the content and settings for a message template that can be used
-	// in messages that are sent through a push notification channel.
-	//
-	// PushNotificationTemplateRequest is a required field
-	PushNotificationTemplateRequest *PushNotificationTemplateRequest `type:"structure" required:"true"`
-
-	// TemplateName is a required field
-	TemplateName *string `location:"uri" locationName:"template-name" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s UpdatePushTemplateInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdatePushTemplateInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdatePushTemplateInput"}
-
-	if s.PushNotificationTemplateRequest == nil {
-		invalidParams.Add(aws.NewErrParamRequired("PushNotificationTemplateRequest"))
-	}
-
-	if s.TemplateName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("TemplateName"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s UpdatePushTemplateInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.TemplateName != nil {
-		v := *s.TemplateName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "template-name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.PushNotificationTemplateRequest != nil {
-		v := s.PushNotificationTemplateRequest
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.PayloadTarget, "PushNotificationTemplateRequest", v, metadata)
-	}
-	return nil
-}
-
-type UpdatePushTemplateOutput struct {
-	_ struct{} `type:"structure" payload:"MessageBody"`
-
-	// Provides information about an API request or response.
-	//
-	// MessageBody is a required field
-	MessageBody *MessageBody `type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s UpdatePushTemplateOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s UpdatePushTemplateOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.MessageBody != nil {
-		v := s.MessageBody
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.PayloadTarget, "MessageBody", v, metadata)
-	}
-	return nil
-}
 
 const opUpdatePushTemplate = "UpdatePushTemplate"
 
@@ -106,7 +25,7 @@ const opUpdatePushTemplate = "UpdatePushTemplate"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/UpdatePushTemplate
-func (c *Client) UpdatePushTemplateRequest(input *UpdatePushTemplateInput) UpdatePushTemplateRequest {
+func (c *Client) UpdatePushTemplateRequest(input *types.UpdatePushTemplateInput) UpdatePushTemplateRequest {
 	op := &aws.Operation{
 		Name:       opUpdatePushTemplate,
 		HTTPMethod: "PUT",
@@ -114,10 +33,10 @@ func (c *Client) UpdatePushTemplateRequest(input *UpdatePushTemplateInput) Updat
 	}
 
 	if input == nil {
-		input = &UpdatePushTemplateInput{}
+		input = &types.UpdatePushTemplateInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdatePushTemplateOutput{})
+	req := c.newRequest(op, input, &types.UpdatePushTemplateOutput{})
 	return UpdatePushTemplateRequest{Request: req, Input: input, Copy: c.UpdatePushTemplateRequest}
 }
 
@@ -125,8 +44,8 @@ func (c *Client) UpdatePushTemplateRequest(input *UpdatePushTemplateInput) Updat
 // UpdatePushTemplate API operation.
 type UpdatePushTemplateRequest struct {
 	*aws.Request
-	Input *UpdatePushTemplateInput
-	Copy  func(*UpdatePushTemplateInput) UpdatePushTemplateRequest
+	Input *types.UpdatePushTemplateInput
+	Copy  func(*types.UpdatePushTemplateInput) UpdatePushTemplateRequest
 }
 
 // Send marshals and sends the UpdatePushTemplate API request.
@@ -138,7 +57,7 @@ func (r UpdatePushTemplateRequest) Send(ctx context.Context) (*UpdatePushTemplat
 	}
 
 	resp := &UpdatePushTemplateResponse{
-		UpdatePushTemplateOutput: r.Request.Data.(*UpdatePushTemplateOutput),
+		UpdatePushTemplateOutput: r.Request.Data.(*types.UpdatePushTemplateOutput),
 		response:                 &aws.Response{Request: r.Request},
 	}
 
@@ -148,7 +67,7 @@ func (r UpdatePushTemplateRequest) Send(ctx context.Context) (*UpdatePushTemplat
 // UpdatePushTemplateResponse is the response type for the
 // UpdatePushTemplate API operation.
 type UpdatePushTemplateResponse struct {
-	*UpdatePushTemplateOutput
+	*types.UpdatePushTemplateOutput
 
 	response *aws.Response
 }

@@ -6,96 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/restjson"
+	"github.com/aws/aws-sdk-go-v2/service/apigateway/types"
 )
-
-// Request to delete an existing Method resource.
-type DeleteMethodInput struct {
-	_ struct{} `type:"structure"`
-
-	// [Required] The HTTP verb of the Method resource.
-	//
-	// HttpMethod is a required field
-	HttpMethod *string `location:"uri" locationName:"http_method" type:"string" required:"true"`
-
-	// [Required] The Resource identifier for the Method resource.
-	//
-	// ResourceId is a required field
-	ResourceId *string `location:"uri" locationName:"resource_id" type:"string" required:"true"`
-
-	// [Required] The string identifier of the associated RestApi.
-	//
-	// RestApiId is a required field
-	RestApiId *string `location:"uri" locationName:"restapi_id" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteMethodInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteMethodInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteMethodInput"}
-
-	if s.HttpMethod == nil {
-		invalidParams.Add(aws.NewErrParamRequired("HttpMethod"))
-	}
-
-	if s.ResourceId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ResourceId"))
-	}
-
-	if s.RestApiId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("RestApiId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteMethodInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.HttpMethod != nil {
-		v := *s.HttpMethod
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "http_method", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.ResourceId != nil {
-		v := *s.ResourceId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "resource_id", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.RestApiId != nil {
-		v := *s.RestApiId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "restapi_id", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type DeleteMethodOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteMethodOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteMethodOutput) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
 
 const opDeleteMethod = "DeleteMethod"
 
@@ -110,7 +24,7 @@ const opDeleteMethod = "DeleteMethod"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) DeleteMethodRequest(input *DeleteMethodInput) DeleteMethodRequest {
+func (c *Client) DeleteMethodRequest(input *types.DeleteMethodInput) DeleteMethodRequest {
 	op := &aws.Operation{
 		Name:       opDeleteMethod,
 		HTTPMethod: "DELETE",
@@ -118,10 +32,10 @@ func (c *Client) DeleteMethodRequest(input *DeleteMethodInput) DeleteMethodReque
 	}
 
 	if input == nil {
-		input = &DeleteMethodInput{}
+		input = &types.DeleteMethodInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteMethodOutput{})
+	req := c.newRequest(op, input, &types.DeleteMethodOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return DeleteMethodRequest{Request: req, Input: input, Copy: c.DeleteMethodRequest}
@@ -131,8 +45,8 @@ func (c *Client) DeleteMethodRequest(input *DeleteMethodInput) DeleteMethodReque
 // DeleteMethod API operation.
 type DeleteMethodRequest struct {
 	*aws.Request
-	Input *DeleteMethodInput
-	Copy  func(*DeleteMethodInput) DeleteMethodRequest
+	Input *types.DeleteMethodInput
+	Copy  func(*types.DeleteMethodInput) DeleteMethodRequest
 }
 
 // Send marshals and sends the DeleteMethod API request.
@@ -144,7 +58,7 @@ func (r DeleteMethodRequest) Send(ctx context.Context) (*DeleteMethodResponse, e
 	}
 
 	resp := &DeleteMethodResponse{
-		DeleteMethodOutput: r.Request.Data.(*DeleteMethodOutput),
+		DeleteMethodOutput: r.Request.Data.(*types.DeleteMethodOutput),
 		response:           &aws.Response{Request: r.Request},
 	}
 
@@ -154,7 +68,7 @@ func (r DeleteMethodRequest) Send(ctx context.Context) (*DeleteMethodResponse, e
 // DeleteMethodResponse is the response type for the
 // DeleteMethod API operation.
 type DeleteMethodResponse struct {
-	*DeleteMethodOutput
+	*types.DeleteMethodOutput
 
 	response *aws.Response
 }

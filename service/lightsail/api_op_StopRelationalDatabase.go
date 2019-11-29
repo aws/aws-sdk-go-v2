@@ -6,52 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/lightsail/types"
 )
-
-type StopRelationalDatabaseInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of your database to stop.
-	//
-	// RelationalDatabaseName is a required field
-	RelationalDatabaseName *string `locationName:"relationalDatabaseName" type:"string" required:"true"`
-
-	// The name of your new database snapshot to be created before stopping your
-	// database.
-	RelationalDatabaseSnapshotName *string `locationName:"relationalDatabaseSnapshotName" type:"string"`
-}
-
-// String returns the string representation
-func (s StopRelationalDatabaseInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *StopRelationalDatabaseInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "StopRelationalDatabaseInput"}
-
-	if s.RelationalDatabaseName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("RelationalDatabaseName"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type StopRelationalDatabaseOutput struct {
-	_ struct{} `type:"structure"`
-
-	// An object describing the result of your stop relational database request.
-	Operations []Operation `locationName:"operations" type:"list"`
-}
-
-// String returns the string representation
-func (s StopRelationalDatabaseOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opStopRelationalDatabase = "StopRelationalDatabase"
 
@@ -72,7 +28,7 @@ const opStopRelationalDatabase = "StopRelationalDatabase"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/StopRelationalDatabase
-func (c *Client) StopRelationalDatabaseRequest(input *StopRelationalDatabaseInput) StopRelationalDatabaseRequest {
+func (c *Client) StopRelationalDatabaseRequest(input *types.StopRelationalDatabaseInput) StopRelationalDatabaseRequest {
 	op := &aws.Operation{
 		Name:       opStopRelationalDatabase,
 		HTTPMethod: "POST",
@@ -80,10 +36,10 @@ func (c *Client) StopRelationalDatabaseRequest(input *StopRelationalDatabaseInpu
 	}
 
 	if input == nil {
-		input = &StopRelationalDatabaseInput{}
+		input = &types.StopRelationalDatabaseInput{}
 	}
 
-	req := c.newRequest(op, input, &StopRelationalDatabaseOutput{})
+	req := c.newRequest(op, input, &types.StopRelationalDatabaseOutput{})
 	return StopRelationalDatabaseRequest{Request: req, Input: input, Copy: c.StopRelationalDatabaseRequest}
 }
 
@@ -91,8 +47,8 @@ func (c *Client) StopRelationalDatabaseRequest(input *StopRelationalDatabaseInpu
 // StopRelationalDatabase API operation.
 type StopRelationalDatabaseRequest struct {
 	*aws.Request
-	Input *StopRelationalDatabaseInput
-	Copy  func(*StopRelationalDatabaseInput) StopRelationalDatabaseRequest
+	Input *types.StopRelationalDatabaseInput
+	Copy  func(*types.StopRelationalDatabaseInput) StopRelationalDatabaseRequest
 }
 
 // Send marshals and sends the StopRelationalDatabase API request.
@@ -104,7 +60,7 @@ func (r StopRelationalDatabaseRequest) Send(ctx context.Context) (*StopRelationa
 	}
 
 	resp := &StopRelationalDatabaseResponse{
-		StopRelationalDatabaseOutput: r.Request.Data.(*StopRelationalDatabaseOutput),
+		StopRelationalDatabaseOutput: r.Request.Data.(*types.StopRelationalDatabaseOutput),
 		response:                     &aws.Response{Request: r.Request},
 	}
 
@@ -114,7 +70,7 @@ func (r StopRelationalDatabaseRequest) Send(ctx context.Context) (*StopRelationa
 // StopRelationalDatabaseResponse is the response type for the
 // StopRelationalDatabase API operation.
 type StopRelationalDatabaseResponse struct {
-	*StopRelationalDatabaseOutput
+	*types.StopRelationalDatabaseOutput
 
 	response *aws.Response
 }

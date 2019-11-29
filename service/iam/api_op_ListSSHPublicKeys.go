@@ -6,87 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/iam/types"
 )
-
-type ListSSHPublicKeysInput struct {
-	_ struct{} `type:"structure"`
-
-	// Use this parameter only when paginating results and only after you receive
-	// a response indicating that the results are truncated. Set it to the value
-	// of the Marker element in the response that you received to indicate where
-	// the next call should start.
-	Marker *string `min:"1" type:"string"`
-
-	// Use this only when paginating results to indicate the maximum number of items
-	// you want in the response. If additional items exist beyond the maximum you
-	// specify, the IsTruncated response element is true.
-	//
-	// If you do not include this parameter, the number of items defaults to 100.
-	// Note that IAM might return fewer results, even when there are more results
-	// available. In that case, the IsTruncated response element returns true, and
-	// Marker contains a value to include in the subsequent call that tells the
-	// service where to continue from.
-	MaxItems *int64 `min:"1" type:"integer"`
-
-	// The name of the IAM user to list SSH public keys for. If none is specified,
-	// the UserName field is determined implicitly based on the AWS access key used
-	// to sign the request.
-	//
-	// This parameter allows (through its regex pattern (http://wikipedia.org/wiki/regex))
-	// a string of characters consisting of upper and lowercase alphanumeric characters
-	// with no spaces. You can also include any of the following characters: _+=,.@-
-	UserName *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s ListSSHPublicKeysInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListSSHPublicKeysInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListSSHPublicKeysInput"}
-	if s.Marker != nil && len(*s.Marker) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Marker", 1))
-	}
-	if s.MaxItems != nil && *s.MaxItems < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxItems", 1))
-	}
-	if s.UserName != nil && len(*s.UserName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("UserName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Contains the response to a successful ListSSHPublicKeys request.
-type ListSSHPublicKeysOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A flag that indicates whether there are more items to return. If your results
-	// were truncated, you can make a subsequent pagination request using the Marker
-	// request parameter to retrieve more items. Note that IAM might return fewer
-	// than the MaxItems number of results even when there are more results available.
-	// We recommend that you check IsTruncated after every call to ensure that you
-	// receive all your results.
-	IsTruncated *bool `type:"boolean"`
-
-	// When IsTruncated is true, this element is present and contains the value
-	// to use for the Marker parameter in a subsequent pagination request.
-	Marker *string `type:"string"`
-
-	// A list of the SSH public keys assigned to IAM user.
-	SSHPublicKeys []SSHPublicKeyMetadata `type:"list"`
-}
-
-// String returns the string representation
-func (s ListSSHPublicKeysOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListSSHPublicKeys = "ListSSHPublicKeys"
 
@@ -113,7 +34,7 @@ const opListSSHPublicKeys = "ListSSHPublicKeys"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListSSHPublicKeys
-func (c *Client) ListSSHPublicKeysRequest(input *ListSSHPublicKeysInput) ListSSHPublicKeysRequest {
+func (c *Client) ListSSHPublicKeysRequest(input *types.ListSSHPublicKeysInput) ListSSHPublicKeysRequest {
 	op := &aws.Operation{
 		Name:       opListSSHPublicKeys,
 		HTTPMethod: "POST",
@@ -127,10 +48,10 @@ func (c *Client) ListSSHPublicKeysRequest(input *ListSSHPublicKeysInput) ListSSH
 	}
 
 	if input == nil {
-		input = &ListSSHPublicKeysInput{}
+		input = &types.ListSSHPublicKeysInput{}
 	}
 
-	req := c.newRequest(op, input, &ListSSHPublicKeysOutput{})
+	req := c.newRequest(op, input, &types.ListSSHPublicKeysOutput{})
 	return ListSSHPublicKeysRequest{Request: req, Input: input, Copy: c.ListSSHPublicKeysRequest}
 }
 
@@ -138,8 +59,8 @@ func (c *Client) ListSSHPublicKeysRequest(input *ListSSHPublicKeysInput) ListSSH
 // ListSSHPublicKeys API operation.
 type ListSSHPublicKeysRequest struct {
 	*aws.Request
-	Input *ListSSHPublicKeysInput
-	Copy  func(*ListSSHPublicKeysInput) ListSSHPublicKeysRequest
+	Input *types.ListSSHPublicKeysInput
+	Copy  func(*types.ListSSHPublicKeysInput) ListSSHPublicKeysRequest
 }
 
 // Send marshals and sends the ListSSHPublicKeys API request.
@@ -151,7 +72,7 @@ func (r ListSSHPublicKeysRequest) Send(ctx context.Context) (*ListSSHPublicKeysR
 	}
 
 	resp := &ListSSHPublicKeysResponse{
-		ListSSHPublicKeysOutput: r.Request.Data.(*ListSSHPublicKeysOutput),
+		ListSSHPublicKeysOutput: r.Request.Data.(*types.ListSSHPublicKeysOutput),
 		response:                &aws.Response{Request: r.Request},
 	}
 
@@ -181,7 +102,7 @@ func NewListSSHPublicKeysPaginator(req ListSSHPublicKeysRequest) ListSSHPublicKe
 	return ListSSHPublicKeysPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListSSHPublicKeysInput
+				var inCpy *types.ListSSHPublicKeysInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -201,14 +122,14 @@ type ListSSHPublicKeysPaginator struct {
 	aws.Pager
 }
 
-func (p *ListSSHPublicKeysPaginator) CurrentPage() *ListSSHPublicKeysOutput {
-	return p.Pager.CurrentPage().(*ListSSHPublicKeysOutput)
+func (p *ListSSHPublicKeysPaginator) CurrentPage() *types.ListSSHPublicKeysOutput {
+	return p.Pager.CurrentPage().(*types.ListSSHPublicKeysOutput)
 }
 
 // ListSSHPublicKeysResponse is the response type for the
 // ListSSHPublicKeys API operation.
 type ListSSHPublicKeysResponse struct {
-	*ListSSHPublicKeysOutput
+	*types.ListSSHPublicKeysOutput
 
 	response *aws.Response
 }

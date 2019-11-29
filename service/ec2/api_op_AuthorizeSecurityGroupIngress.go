@@ -6,98 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/ec2query"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-type AuthorizeSecurityGroupIngressInput struct {
-	_ struct{} `type:"structure"`
-
-	// The IPv4 address range, in CIDR format. You can't specify this parameter
-	// when specifying a source security group. To specify an IPv6 address range,
-	// use a set of IP permissions.
-	//
-	// Alternatively, use a set of IP permissions to specify multiple rules and
-	// a description for the rule.
-	CidrIp *string `type:"string"`
-
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have
-	// the required permissions, the error response is DryRunOperation. Otherwise,
-	// it is UnauthorizedOperation.
-	DryRun *bool `locationName:"dryRun" type:"boolean"`
-
-	// The start of port range for the TCP and UDP protocols, or an ICMP type number.
-	// For the ICMP type number, use -1 to specify all types. If you specify all
-	// ICMP types, you must specify all codes.
-	//
-	// Alternatively, use a set of IP permissions to specify multiple rules and
-	// a description for the rule.
-	FromPort *int64 `type:"integer"`
-
-	// The ID of the security group. You must specify either the security group
-	// ID or the security group name in the request. For security groups in a nondefault
-	// VPC, you must specify the security group ID.
-	GroupId *string `type:"string"`
-
-	// [EC2-Classic, default VPC] The name of the security group. You must specify
-	// either the security group ID or the security group name in the request.
-	GroupName *string `type:"string"`
-
-	// The sets of IP permissions.
-	IpPermissions []IpPermission `locationNameList:"item" type:"list"`
-
-	// The IP protocol name (tcp, udp, icmp) or number (see Protocol Numbers (http://www.iana.org/assignments/protocol-numbers/protocol-numbers.xhtml)).
-	// To specify icmpv6, use a set of IP permissions.
-	//
-	// [VPC only] Use -1 to specify all protocols. If you specify -1 or a protocol
-	// other than tcp, udp, or icmp, traffic on all ports is allowed, regardless
-	// of any ports you specify.
-	//
-	// Alternatively, use a set of IP permissions to specify multiple rules and
-	// a description for the rule.
-	IpProtocol *string `type:"string"`
-
-	// [EC2-Classic, default VPC] The name of the source security group. You can't
-	// specify this parameter in combination with the following parameters: the
-	// CIDR IP address range, the start of the port range, the IP protocol, and
-	// the end of the port range. Creates rules that grant full ICMP, UDP, and TCP
-	// access. To create a rule with a specific IP protocol and port range, use
-	// a set of IP permissions instead. For EC2-VPC, the source security group must
-	// be in the same VPC.
-	SourceSecurityGroupName *string `type:"string"`
-
-	// [nondefault VPC] The AWS account ID for the source security group, if the
-	// source security group is in a different account. You can't specify this parameter
-	// in combination with the following parameters: the CIDR IP address range,
-	// the IP protocol, the start of the port range, and the end of the port range.
-	// Creates rules that grant full ICMP, UDP, and TCP access. To create a rule
-	// with a specific IP protocol and port range, use a set of IP permissions instead.
-	SourceSecurityGroupOwnerId *string `type:"string"`
-
-	// The end of port range for the TCP and UDP protocols, or an ICMP code number.
-	// For the ICMP code number, use -1 to specify all codes. If you specify all
-	// ICMP types, you must specify all codes.
-	//
-	// Alternatively, use a set of IP permissions to specify multiple rules and
-	// a description for the rule.
-	ToPort *int64 `type:"integer"`
-}
-
-// String returns the string representation
-func (s AuthorizeSecurityGroupIngressInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type AuthorizeSecurityGroupIngressOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s AuthorizeSecurityGroupIngressOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opAuthorizeSecurityGroupIngress = "AuthorizeSecurityGroupIngress"
 
@@ -129,7 +41,7 @@ const opAuthorizeSecurityGroupIngress = "AuthorizeSecurityGroupIngress"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AuthorizeSecurityGroupIngress
-func (c *Client) AuthorizeSecurityGroupIngressRequest(input *AuthorizeSecurityGroupIngressInput) AuthorizeSecurityGroupIngressRequest {
+func (c *Client) AuthorizeSecurityGroupIngressRequest(input *types.AuthorizeSecurityGroupIngressInput) AuthorizeSecurityGroupIngressRequest {
 	op := &aws.Operation{
 		Name:       opAuthorizeSecurityGroupIngress,
 		HTTPMethod: "POST",
@@ -137,10 +49,10 @@ func (c *Client) AuthorizeSecurityGroupIngressRequest(input *AuthorizeSecurityGr
 	}
 
 	if input == nil {
-		input = &AuthorizeSecurityGroupIngressInput{}
+		input = &types.AuthorizeSecurityGroupIngressInput{}
 	}
 
-	req := c.newRequest(op, input, &AuthorizeSecurityGroupIngressOutput{})
+	req := c.newRequest(op, input, &types.AuthorizeSecurityGroupIngressOutput{})
 	req.Handlers.Unmarshal.Remove(ec2query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return AuthorizeSecurityGroupIngressRequest{Request: req, Input: input, Copy: c.AuthorizeSecurityGroupIngressRequest}
@@ -150,8 +62,8 @@ func (c *Client) AuthorizeSecurityGroupIngressRequest(input *AuthorizeSecurityGr
 // AuthorizeSecurityGroupIngress API operation.
 type AuthorizeSecurityGroupIngressRequest struct {
 	*aws.Request
-	Input *AuthorizeSecurityGroupIngressInput
-	Copy  func(*AuthorizeSecurityGroupIngressInput) AuthorizeSecurityGroupIngressRequest
+	Input *types.AuthorizeSecurityGroupIngressInput
+	Copy  func(*types.AuthorizeSecurityGroupIngressInput) AuthorizeSecurityGroupIngressRequest
 }
 
 // Send marshals and sends the AuthorizeSecurityGroupIngress API request.
@@ -163,7 +75,7 @@ func (r AuthorizeSecurityGroupIngressRequest) Send(ctx context.Context) (*Author
 	}
 
 	resp := &AuthorizeSecurityGroupIngressResponse{
-		AuthorizeSecurityGroupIngressOutput: r.Request.Data.(*AuthorizeSecurityGroupIngressOutput),
+		AuthorizeSecurityGroupIngressOutput: r.Request.Data.(*types.AuthorizeSecurityGroupIngressOutput),
 		response:                            &aws.Response{Request: r.Request},
 	}
 
@@ -173,7 +85,7 @@ func (r AuthorizeSecurityGroupIngressRequest) Send(ctx context.Context) (*Author
 // AuthorizeSecurityGroupIngressResponse is the response type for the
 // AuthorizeSecurityGroupIngress API operation.
 type AuthorizeSecurityGroupIngressResponse struct {
-	*AuthorizeSecurityGroupIngressOutput
+	*types.AuthorizeSecurityGroupIngressOutput
 
 	response *aws.Response
 }

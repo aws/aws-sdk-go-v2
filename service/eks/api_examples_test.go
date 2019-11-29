@@ -12,6 +12,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws/awserr"
 	"github.com/aws/aws-sdk-go-v2/aws/external"
 	"github.com/aws/aws-sdk-go-v2/service/eks"
+	"github.com/aws/aws-sdk-go-v2/service/eks/types"
 )
 
 var _ time.Duration
@@ -36,10 +37,10 @@ func ExampleClient_CreateClusterRequest_shared00() {
 	}
 
 	svc := eks.New(cfg)
-	input := &eks.CreateClusterInput{
+	input := &types.CreateClusterInput{
 		ClientRequestToken: aws.String("1d2129a1-3d38-460a-9756-e5b91fddb951"),
 		Name:               aws.String("prod"),
-		ResourcesVpcConfig: &eks.VpcConfigRequest{
+		ResourcesVpcConfig: &types.VpcConfigRequest{
 			SecurityGroupIds: []string{
 				"sg-6979fe18",
 			},
@@ -95,7 +96,7 @@ func ExampleClient_DeleteClusterRequest_shared00() {
 	}
 
 	svc := eks.New(cfg)
-	input := &eks.DeleteClusterInput{
+	input := &types.DeleteClusterInput{
 		Name: aws.String("devel"),
 	}
 
@@ -139,7 +140,7 @@ func ExampleClient_DescribeClusterRequest_shared00() {
 	}
 
 	svc := eks.New(cfg)
-	input := &eks.DescribeClusterInput{
+	input := &types.DescribeClusterInput{
 		Name: aws.String("devel"),
 	}
 
@@ -180,7 +181,7 @@ func ExampleClient_ListClustersRequest_shared00() {
 	}
 
 	svc := eks.New(cfg)
-	input := &eks.ListClustersInput{}
+	input := &types.ListClustersInput{}
 
 	req := svc.ListClustersRequest(input)
 	result, err := req.Send(context.Background())
@@ -195,6 +196,43 @@ func ExampleClient_ListClustersRequest_shared00() {
 				fmt.Println(eks.ErrCodeServerException, aerr.Error())
 			case eks.ErrCodeServiceUnavailableException:
 				fmt.Println(eks.ErrCodeServiceUnavailableException, aerr.Error())
+			default:
+				fmt.Println(aerr.Error())
+			}
+		} else {
+			// Print the error, cast err to awserr.Error to get the Code and
+			// Message from an error.
+			fmt.Println(err.Error())
+		}
+		return
+	}
+
+	fmt.Println(result)
+}
+
+// To list tags for a cluster
+//
+// This example lists all of the tags for the `beta` cluster.
+func ExampleClient_ListTagsForResourceRequest_shared00() {
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := eks.New(cfg)
+	input := &types.ListTagsForResourceInput{
+		ResourceArn: aws.String("arn:aws:eks:us-west-2:012345678910:cluster/beta"),
+	}
+
+	req := svc.ListTagsForResourceRequest(input)
+	result, err := req.Send(context.Background())
+	if err != nil {
+		if aerr, ok := err.(awserr.Error); ok {
+			switch aerr.Code() {
+			case eks.ErrCodeBadRequestException:
+				fmt.Println(eks.ErrCodeBadRequestException, aerr.Error())
+			case eks.ErrCodeNotFoundException:
+				fmt.Println(eks.ErrCodeNotFoundException, aerr.Error())
 			default:
 				fmt.Println(aerr.Error())
 			}

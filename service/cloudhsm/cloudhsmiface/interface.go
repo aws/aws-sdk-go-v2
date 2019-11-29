@@ -10,6 +10,7 @@ package cloudhsmiface
 
 import (
 	"github.com/aws/aws-sdk-go-v2/service/cloudhsm"
+	"github.com/aws/aws-sdk-go-v2/service/cloudhsm/types"
 )
 
 // ClientAPI provides an interface to enable mocking the
@@ -43,7 +44,7 @@ import (
 //    type mockClientClient struct {
 //        cloudhsmiface.ClientPI
 //    }
-//    func (m *mockClientClient) AddTagsToResource(input *cloudhsm.AddTagsToResourceInput) (*cloudhsm.AddTagsToResourceOutput, error) {
+//    func (m *mockClientClient) AddTagsToResource(input *types.AddTagsToResourceInput) (*types.AddTagsToResourceOutput, error) {
 //        // mock response/functionality
 //    }
 //
@@ -61,45 +62,45 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type ClientAPI interface {
-	AddTagsToResourceRequest(*cloudhsm.AddTagsToResourceInput) cloudhsm.AddTagsToResourceRequest
+	AddTagsToResourceRequest(*types.AddTagsToResourceInput) cloudhsm.AddTagsToResourceRequest
 
-	CreateHapgRequest(*cloudhsm.CreateHapgInput) cloudhsm.CreateHapgRequest
+	CreateHapgRequest(*types.CreateHapgInput) cloudhsm.CreateHapgRequest
 
-	CreateHsmRequest(*cloudhsm.CreateHsmInput) cloudhsm.CreateHsmRequest
+	CreateHsmRequest(*types.CreateHsmInput) cloudhsm.CreateHsmRequest
 
-	CreateLunaClientRequest(*cloudhsm.CreateLunaClientInput) cloudhsm.CreateLunaClientRequest
+	CreateLunaClientRequest(*types.CreateLunaClientInput) cloudhsm.CreateLunaClientRequest
 
-	DeleteHapgRequest(*cloudhsm.DeleteHapgInput) cloudhsm.DeleteHapgRequest
+	DeleteHapgRequest(*types.DeleteHapgInput) cloudhsm.DeleteHapgRequest
 
-	DeleteHsmRequest(*cloudhsm.DeleteHsmInput) cloudhsm.DeleteHsmRequest
+	DeleteHsmRequest(*types.DeleteHsmInput) cloudhsm.DeleteHsmRequest
 
-	DeleteLunaClientRequest(*cloudhsm.DeleteLunaClientInput) cloudhsm.DeleteLunaClientRequest
+	DeleteLunaClientRequest(*types.DeleteLunaClientInput) cloudhsm.DeleteLunaClientRequest
 
-	DescribeHapgRequest(*cloudhsm.DescribeHapgInput) cloudhsm.DescribeHapgRequest
+	DescribeHapgRequest(*types.DescribeHapgInput) cloudhsm.DescribeHapgRequest
 
-	DescribeHsmRequest(*cloudhsm.DescribeHsmInput) cloudhsm.DescribeHsmRequest
+	DescribeHsmRequest(*types.DescribeHsmInput) cloudhsm.DescribeHsmRequest
 
-	DescribeLunaClientRequest(*cloudhsm.DescribeLunaClientInput) cloudhsm.DescribeLunaClientRequest
+	DescribeLunaClientRequest(*types.DescribeLunaClientInput) cloudhsm.DescribeLunaClientRequest
 
-	GetConfigRequest(*cloudhsm.GetConfigInput) cloudhsm.GetConfigRequest
+	GetConfigRequest(*types.GetConfigInput) cloudhsm.GetConfigRequest
 
-	ListAvailableZonesRequest(*cloudhsm.ListAvailableZonesInput) cloudhsm.ListAvailableZonesRequest
+	ListAvailableZonesRequest(*types.ListAvailableZonesInput) cloudhsm.ListAvailableZonesRequest
 
-	ListHapgsRequest(*cloudhsm.ListHapgsInput) cloudhsm.ListHapgsRequest
+	ListHapgsRequest(*types.ListHapgsInput) cloudhsm.ListHapgsRequest
 
-	ListHsmsRequest(*cloudhsm.ListHsmsInput) cloudhsm.ListHsmsRequest
+	ListHsmsRequest(*types.ListHsmsInput) cloudhsm.ListHsmsRequest
 
-	ListLunaClientsRequest(*cloudhsm.ListLunaClientsInput) cloudhsm.ListLunaClientsRequest
+	ListLunaClientsRequest(*types.ListLunaClientsInput) cloudhsm.ListLunaClientsRequest
 
-	ListTagsForResourceRequest(*cloudhsm.ListTagsForResourceInput) cloudhsm.ListTagsForResourceRequest
+	ListTagsForResourceRequest(*types.ListTagsForResourceInput) cloudhsm.ListTagsForResourceRequest
 
-	ModifyHapgRequest(*cloudhsm.ModifyHapgInput) cloudhsm.ModifyHapgRequest
+	ModifyHapgRequest(*types.ModifyHapgInput) cloudhsm.ModifyHapgRequest
 
-	ModifyHsmRequest(*cloudhsm.ModifyHsmInput) cloudhsm.ModifyHsmRequest
+	ModifyHsmRequest(*types.ModifyHsmInput) cloudhsm.ModifyHsmRequest
 
-	ModifyLunaClientRequest(*cloudhsm.ModifyLunaClientInput) cloudhsm.ModifyLunaClientRequest
+	ModifyLunaClientRequest(*types.ModifyLunaClientInput) cloudhsm.ModifyLunaClientRequest
 
-	RemoveTagsFromResourceRequest(*cloudhsm.RemoveTagsFromResourceInput) cloudhsm.RemoveTagsFromResourceRequest
+	RemoveTagsFromResourceRequest(*types.RemoveTagsFromResourceInput) cloudhsm.RemoveTagsFromResourceRequest
 }
 
 var _ ClientAPI = (*cloudhsm.Client)(nil)

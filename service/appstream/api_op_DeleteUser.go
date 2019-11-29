@@ -6,58 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/appstream/types"
 )
-
-type DeleteUserInput struct {
-	_ struct{} `type:"structure"`
-
-	// The authentication type for the user. You must specify USERPOOL.
-	//
-	// AuthenticationType is a required field
-	AuthenticationType AuthenticationType `type:"string" required:"true" enum:"true"`
-
-	// The email address of the user.
-	//
-	// Users' email addresses are case-sensitive.
-	//
-	// UserName is a required field
-	UserName *string `min:"1" type:"string" required:"true" sensitive:"true"`
-}
-
-// String returns the string representation
-func (s DeleteUserInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteUserInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteUserInput"}
-	if len(s.AuthenticationType) == 0 {
-		invalidParams.Add(aws.NewErrParamRequired("AuthenticationType"))
-	}
-
-	if s.UserName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("UserName"))
-	}
-	if s.UserName != nil && len(*s.UserName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("UserName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteUserOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteUserOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteUser = "DeleteUser"
 
@@ -74,7 +24,7 @@ const opDeleteUser = "DeleteUser"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DeleteUser
-func (c *Client) DeleteUserRequest(input *DeleteUserInput) DeleteUserRequest {
+func (c *Client) DeleteUserRequest(input *types.DeleteUserInput) DeleteUserRequest {
 	op := &aws.Operation{
 		Name:       opDeleteUser,
 		HTTPMethod: "POST",
@@ -82,10 +32,10 @@ func (c *Client) DeleteUserRequest(input *DeleteUserInput) DeleteUserRequest {
 	}
 
 	if input == nil {
-		input = &DeleteUserInput{}
+		input = &types.DeleteUserInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteUserOutput{})
+	req := c.newRequest(op, input, &types.DeleteUserOutput{})
 	return DeleteUserRequest{Request: req, Input: input, Copy: c.DeleteUserRequest}
 }
 
@@ -93,8 +43,8 @@ func (c *Client) DeleteUserRequest(input *DeleteUserInput) DeleteUserRequest {
 // DeleteUser API operation.
 type DeleteUserRequest struct {
 	*aws.Request
-	Input *DeleteUserInput
-	Copy  func(*DeleteUserInput) DeleteUserRequest
+	Input *types.DeleteUserInput
+	Copy  func(*types.DeleteUserInput) DeleteUserRequest
 }
 
 // Send marshals and sends the DeleteUser API request.
@@ -106,7 +56,7 @@ func (r DeleteUserRequest) Send(ctx context.Context) (*DeleteUserResponse, error
 	}
 
 	resp := &DeleteUserResponse{
-		DeleteUserOutput: r.Request.Data.(*DeleteUserOutput),
+		DeleteUserOutput: r.Request.Data.(*types.DeleteUserOutput),
 		response:         &aws.Response{Request: r.Request},
 	}
 
@@ -116,7 +66,7 @@ func (r DeleteUserRequest) Send(ctx context.Context) (*DeleteUserResponse, error
 // DeleteUserResponse is the response type for the
 // DeleteUser API operation.
 type DeleteUserResponse struct {
-	*DeleteUserOutput
+	*types.DeleteUserOutput
 
 	response *aws.Response
 }

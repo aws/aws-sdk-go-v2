@@ -6,74 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-// Contains the parameters for DescribeVpnGateways.
-type DescribeVpnGatewaysInput struct {
-	_ struct{} `type:"structure"`
-
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have
-	// the required permissions, the error response is DryRunOperation. Otherwise,
-	// it is UnauthorizedOperation.
-	DryRun *bool `locationName:"dryRun" type:"boolean"`
-
-	// One or more filters.
-	//
-	//    * amazon-side-asn - The Autonomous System Number (ASN) for the Amazon
-	//    side of the gateway.
-	//
-	//    * attachment.state - The current state of the attachment between the gateway
-	//    and the VPC (attaching | attached | detaching | detached).
-	//
-	//    * attachment.vpc-id - The ID of an attached VPC.
-	//
-	//    * availability-zone - The Availability Zone for the virtual private gateway
-	//    (if applicable).
-	//
-	//    * state - The state of the virtual private gateway (pending | available
-	//    | deleting | deleted).
-	//
-	//    * tag:<key> - The key/value combination of a tag assigned to the resource.
-	//    Use the tag key in the filter name and the tag value as the filter value.
-	//    For example, to find all resources that have a tag with the key Owner
-	//    and the value TeamA, specify tag:Owner for the filter name and TeamA for
-	//    the filter value.
-	//
-	//    * tag-key - The key of a tag assigned to the resource. Use this filter
-	//    to find all resources assigned a tag with a specific key, regardless of
-	//    the tag value.
-	//
-	//    * type - The type of virtual private gateway. Currently the only supported
-	//    type is ipsec.1.
-	//
-	//    * vpn-gateway-id - The ID of the virtual private gateway.
-	Filters []Filter `locationName:"Filter" locationNameList:"Filter" type:"list"`
-
-	// One or more virtual private gateway IDs.
-	//
-	// Default: Describes all your virtual private gateways.
-	VpnGatewayIds []string `locationName:"VpnGatewayId" locationNameList:"VpnGatewayId" type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeVpnGatewaysInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Contains the output of DescribeVpnGateways.
-type DescribeVpnGatewaysOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Information about one or more virtual private gateways.
-	VpnGateways []VpnGateway `locationName:"vpnGatewaySet" locationNameList:"item" type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeVpnGatewaysOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeVpnGateways = "DescribeVpnGateways"
 
@@ -93,7 +27,7 @@ const opDescribeVpnGateways = "DescribeVpnGateways"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeVpnGateways
-func (c *Client) DescribeVpnGatewaysRequest(input *DescribeVpnGatewaysInput) DescribeVpnGatewaysRequest {
+func (c *Client) DescribeVpnGatewaysRequest(input *types.DescribeVpnGatewaysInput) DescribeVpnGatewaysRequest {
 	op := &aws.Operation{
 		Name:       opDescribeVpnGateways,
 		HTTPMethod: "POST",
@@ -101,10 +35,10 @@ func (c *Client) DescribeVpnGatewaysRequest(input *DescribeVpnGatewaysInput) Des
 	}
 
 	if input == nil {
-		input = &DescribeVpnGatewaysInput{}
+		input = &types.DescribeVpnGatewaysInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeVpnGatewaysOutput{})
+	req := c.newRequest(op, input, &types.DescribeVpnGatewaysOutput{})
 	return DescribeVpnGatewaysRequest{Request: req, Input: input, Copy: c.DescribeVpnGatewaysRequest}
 }
 
@@ -112,8 +46,8 @@ func (c *Client) DescribeVpnGatewaysRequest(input *DescribeVpnGatewaysInput) Des
 // DescribeVpnGateways API operation.
 type DescribeVpnGatewaysRequest struct {
 	*aws.Request
-	Input *DescribeVpnGatewaysInput
-	Copy  func(*DescribeVpnGatewaysInput) DescribeVpnGatewaysRequest
+	Input *types.DescribeVpnGatewaysInput
+	Copy  func(*types.DescribeVpnGatewaysInput) DescribeVpnGatewaysRequest
 }
 
 // Send marshals and sends the DescribeVpnGateways API request.
@@ -125,7 +59,7 @@ func (r DescribeVpnGatewaysRequest) Send(ctx context.Context) (*DescribeVpnGatew
 	}
 
 	resp := &DescribeVpnGatewaysResponse{
-		DescribeVpnGatewaysOutput: r.Request.Data.(*DescribeVpnGatewaysOutput),
+		DescribeVpnGatewaysOutput: r.Request.Data.(*types.DescribeVpnGatewaysOutput),
 		response:                  &aws.Response{Request: r.Request},
 	}
 
@@ -135,7 +69,7 @@ func (r DescribeVpnGatewaysRequest) Send(ctx context.Context) (*DescribeVpnGatew
 // DescribeVpnGatewaysResponse is the response type for the
 // DescribeVpnGateways API operation.
 type DescribeVpnGatewaysResponse struct {
-	*DescribeVpnGatewaysOutput
+	*types.DescribeVpnGatewaysOutput
 
 	response *aws.Response
 }

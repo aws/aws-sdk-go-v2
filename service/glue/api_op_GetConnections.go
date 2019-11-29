@@ -6,69 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/glue/types"
 )
-
-type GetConnectionsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the Data Catalog in which the connections reside. If none is provided,
-	// the AWS account ID is used by default.
-	CatalogId *string `min:"1" type:"string"`
-
-	// A filter that controls which connections are returned.
-	Filter *GetConnectionsFilter `type:"structure"`
-
-	// Allows you to retrieve the connection metadata without returning the password.
-	// For instance, the AWS Glue console uses this flag to retrieve the connection,
-	// and does not display the password. Set this parameter when the caller might
-	// not have permission to use the AWS KMS key to decrypt the password, but it
-	// does have permission to access the rest of the connection properties.
-	HidePassword *bool `type:"boolean"`
-
-	// The maximum number of connections to return in one response.
-	MaxResults *int64 `min:"1" type:"integer"`
-
-	// A continuation token, if this is a continuation call.
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s GetConnectionsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetConnectionsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetConnectionsInput"}
-	if s.CatalogId != nil && len(*s.CatalogId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("CatalogId", 1))
-	}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type GetConnectionsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A list of requested connection definitions.
-	ConnectionList []Connection `type:"list"`
-
-	// A continuation token, if the list of connections returned does not include
-	// the last of the filtered connections.
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s GetConnectionsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetConnections = "GetConnections"
 
@@ -85,7 +24,7 @@ const opGetConnections = "GetConnections"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetConnections
-func (c *Client) GetConnectionsRequest(input *GetConnectionsInput) GetConnectionsRequest {
+func (c *Client) GetConnectionsRequest(input *types.GetConnectionsInput) GetConnectionsRequest {
 	op := &aws.Operation{
 		Name:       opGetConnections,
 		HTTPMethod: "POST",
@@ -99,10 +38,10 @@ func (c *Client) GetConnectionsRequest(input *GetConnectionsInput) GetConnection
 	}
 
 	if input == nil {
-		input = &GetConnectionsInput{}
+		input = &types.GetConnectionsInput{}
 	}
 
-	req := c.newRequest(op, input, &GetConnectionsOutput{})
+	req := c.newRequest(op, input, &types.GetConnectionsOutput{})
 	return GetConnectionsRequest{Request: req, Input: input, Copy: c.GetConnectionsRequest}
 }
 
@@ -110,8 +49,8 @@ func (c *Client) GetConnectionsRequest(input *GetConnectionsInput) GetConnection
 // GetConnections API operation.
 type GetConnectionsRequest struct {
 	*aws.Request
-	Input *GetConnectionsInput
-	Copy  func(*GetConnectionsInput) GetConnectionsRequest
+	Input *types.GetConnectionsInput
+	Copy  func(*types.GetConnectionsInput) GetConnectionsRequest
 }
 
 // Send marshals and sends the GetConnections API request.
@@ -123,7 +62,7 @@ func (r GetConnectionsRequest) Send(ctx context.Context) (*GetConnectionsRespons
 	}
 
 	resp := &GetConnectionsResponse{
-		GetConnectionsOutput: r.Request.Data.(*GetConnectionsOutput),
+		GetConnectionsOutput: r.Request.Data.(*types.GetConnectionsOutput),
 		response:             &aws.Response{Request: r.Request},
 	}
 
@@ -153,7 +92,7 @@ func NewGetConnectionsPaginator(req GetConnectionsRequest) GetConnectionsPaginat
 	return GetConnectionsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *GetConnectionsInput
+				var inCpy *types.GetConnectionsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -173,14 +112,14 @@ type GetConnectionsPaginator struct {
 	aws.Pager
 }
 
-func (p *GetConnectionsPaginator) CurrentPage() *GetConnectionsOutput {
-	return p.Pager.CurrentPage().(*GetConnectionsOutput)
+func (p *GetConnectionsPaginator) CurrentPage() *types.GetConnectionsOutput {
+	return p.Pager.CurrentPage().(*types.GetConnectionsOutput)
 }
 
 // GetConnectionsResponse is the response type for the
 // GetConnections API operation.
 type GetConnectionsResponse struct {
-	*GetConnectionsOutput
+	*types.GetConnectionsOutput
 
 	response *aws.Response
 }

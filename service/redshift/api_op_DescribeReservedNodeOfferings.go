@@ -6,57 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/redshift/types"
 )
-
-type DescribeReservedNodeOfferingsInput struct {
-	_ struct{} `type:"structure"`
-
-	// An optional parameter that specifies the starting point to return a set of
-	// response records. When the results of a DescribeReservedNodeOfferings request
-	// exceed the value specified in MaxRecords, AWS returns a value in the Marker
-	// field of the response. You can retrieve the next set of response records
-	// by providing the returned marker value in the Marker parameter and retrying
-	// the request.
-	Marker *string `type:"string"`
-
-	// The maximum number of response records to return in each call. If the number
-	// of remaining response records exceeds the specified MaxRecords value, a value
-	// is returned in a marker field of the response. You can retrieve the next
-	// set of records by retrying the command with the returned marker value.
-	//
-	// Default: 100
-	//
-	// Constraints: minimum 20, maximum 100.
-	MaxRecords *int64 `type:"integer"`
-
-	// The unique identifier for the offering.
-	ReservedNodeOfferingId *string `type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeReservedNodeOfferingsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type DescribeReservedNodeOfferingsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A value that indicates the starting point for the next set of response records
-	// in a subsequent request. If a value is returned in a response, you can retrieve
-	// the next set of records by providing this returned marker value in the Marker
-	// parameter and retrying the command. If the Marker field is empty, all response
-	// records have been retrieved for the request.
-	Marker *string `type:"string"`
-
-	// A list of ReservedNodeOffering objects.
-	ReservedNodeOfferings []ReservedNodeOffering `locationNameList:"ReservedNodeOffering" type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeReservedNodeOfferingsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeReservedNodeOfferings = "DescribeReservedNodeOfferings"
 
@@ -82,7 +33,7 @@ const opDescribeReservedNodeOfferings = "DescribeReservedNodeOfferings"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeReservedNodeOfferings
-func (c *Client) DescribeReservedNodeOfferingsRequest(input *DescribeReservedNodeOfferingsInput) DescribeReservedNodeOfferingsRequest {
+func (c *Client) DescribeReservedNodeOfferingsRequest(input *types.DescribeReservedNodeOfferingsInput) DescribeReservedNodeOfferingsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeReservedNodeOfferings,
 		HTTPMethod: "POST",
@@ -96,10 +47,10 @@ func (c *Client) DescribeReservedNodeOfferingsRequest(input *DescribeReservedNod
 	}
 
 	if input == nil {
-		input = &DescribeReservedNodeOfferingsInput{}
+		input = &types.DescribeReservedNodeOfferingsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeReservedNodeOfferingsOutput{})
+	req := c.newRequest(op, input, &types.DescribeReservedNodeOfferingsOutput{})
 	return DescribeReservedNodeOfferingsRequest{Request: req, Input: input, Copy: c.DescribeReservedNodeOfferingsRequest}
 }
 
@@ -107,8 +58,8 @@ func (c *Client) DescribeReservedNodeOfferingsRequest(input *DescribeReservedNod
 // DescribeReservedNodeOfferings API operation.
 type DescribeReservedNodeOfferingsRequest struct {
 	*aws.Request
-	Input *DescribeReservedNodeOfferingsInput
-	Copy  func(*DescribeReservedNodeOfferingsInput) DescribeReservedNodeOfferingsRequest
+	Input *types.DescribeReservedNodeOfferingsInput
+	Copy  func(*types.DescribeReservedNodeOfferingsInput) DescribeReservedNodeOfferingsRequest
 }
 
 // Send marshals and sends the DescribeReservedNodeOfferings API request.
@@ -120,7 +71,7 @@ func (r DescribeReservedNodeOfferingsRequest) Send(ctx context.Context) (*Descri
 	}
 
 	resp := &DescribeReservedNodeOfferingsResponse{
-		DescribeReservedNodeOfferingsOutput: r.Request.Data.(*DescribeReservedNodeOfferingsOutput),
+		DescribeReservedNodeOfferingsOutput: r.Request.Data.(*types.DescribeReservedNodeOfferingsOutput),
 		response:                            &aws.Response{Request: r.Request},
 	}
 
@@ -150,7 +101,7 @@ func NewDescribeReservedNodeOfferingsPaginator(req DescribeReservedNodeOfferings
 	return DescribeReservedNodeOfferingsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *DescribeReservedNodeOfferingsInput
+				var inCpy *types.DescribeReservedNodeOfferingsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -170,14 +121,14 @@ type DescribeReservedNodeOfferingsPaginator struct {
 	aws.Pager
 }
 
-func (p *DescribeReservedNodeOfferingsPaginator) CurrentPage() *DescribeReservedNodeOfferingsOutput {
-	return p.Pager.CurrentPage().(*DescribeReservedNodeOfferingsOutput)
+func (p *DescribeReservedNodeOfferingsPaginator) CurrentPage() *types.DescribeReservedNodeOfferingsOutput {
+	return p.Pager.CurrentPage().(*types.DescribeReservedNodeOfferingsOutput)
 }
 
 // DescribeReservedNodeOfferingsResponse is the response type for the
 // DescribeReservedNodeOfferings API operation.
 type DescribeReservedNodeOfferingsResponse struct {
-	*DescribeReservedNodeOfferingsOutput
+	*types.DescribeReservedNodeOfferingsOutput
 
 	response *aws.Response
 }

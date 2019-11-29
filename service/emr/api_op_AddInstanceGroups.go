@@ -4,72 +4,10 @@ package emr
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/emr/types"
 )
-
-// Input to an AddInstanceGroups call.
-type AddInstanceGroupsInput struct {
-	_ struct{} `type:"structure"`
-
-	// Instance groups to add.
-	//
-	// InstanceGroups is a required field
-	InstanceGroups []InstanceGroupConfig `type:"list" required:"true"`
-
-	// Job flow in which to add the instance groups.
-	//
-	// JobFlowId is a required field
-	JobFlowId *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s AddInstanceGroupsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *AddInstanceGroupsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "AddInstanceGroupsInput"}
-
-	if s.InstanceGroups == nil {
-		invalidParams.Add(aws.NewErrParamRequired("InstanceGroups"))
-	}
-
-	if s.JobFlowId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("JobFlowId"))
-	}
-	if s.InstanceGroups != nil {
-		for i, v := range s.InstanceGroups {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "InstanceGroups", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Output from an AddInstanceGroups call.
-type AddInstanceGroupsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Instance group IDs of the newly created instance groups.
-	InstanceGroupIds []string `type:"list"`
-
-	// The job flow ID in which the instance groups are added.
-	JobFlowId *string `type:"string"`
-}
-
-// String returns the string representation
-func (s AddInstanceGroupsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opAddInstanceGroups = "AddInstanceGroups"
 
@@ -86,7 +24,7 @@ const opAddInstanceGroups = "AddInstanceGroups"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/AddInstanceGroups
-func (c *Client) AddInstanceGroupsRequest(input *AddInstanceGroupsInput) AddInstanceGroupsRequest {
+func (c *Client) AddInstanceGroupsRequest(input *types.AddInstanceGroupsInput) AddInstanceGroupsRequest {
 	op := &aws.Operation{
 		Name:       opAddInstanceGroups,
 		HTTPMethod: "POST",
@@ -94,10 +32,10 @@ func (c *Client) AddInstanceGroupsRequest(input *AddInstanceGroupsInput) AddInst
 	}
 
 	if input == nil {
-		input = &AddInstanceGroupsInput{}
+		input = &types.AddInstanceGroupsInput{}
 	}
 
-	req := c.newRequest(op, input, &AddInstanceGroupsOutput{})
+	req := c.newRequest(op, input, &types.AddInstanceGroupsOutput{})
 	return AddInstanceGroupsRequest{Request: req, Input: input, Copy: c.AddInstanceGroupsRequest}
 }
 
@@ -105,8 +43,8 @@ func (c *Client) AddInstanceGroupsRequest(input *AddInstanceGroupsInput) AddInst
 // AddInstanceGroups API operation.
 type AddInstanceGroupsRequest struct {
 	*aws.Request
-	Input *AddInstanceGroupsInput
-	Copy  func(*AddInstanceGroupsInput) AddInstanceGroupsRequest
+	Input *types.AddInstanceGroupsInput
+	Copy  func(*types.AddInstanceGroupsInput) AddInstanceGroupsRequest
 }
 
 // Send marshals and sends the AddInstanceGroups API request.
@@ -118,7 +56,7 @@ func (r AddInstanceGroupsRequest) Send(ctx context.Context) (*AddInstanceGroupsR
 	}
 
 	resp := &AddInstanceGroupsResponse{
-		AddInstanceGroupsOutput: r.Request.Data.(*AddInstanceGroupsOutput),
+		AddInstanceGroupsOutput: r.Request.Data.(*types.AddInstanceGroupsOutput),
 		response:                &aws.Response{Request: r.Request},
 	}
 
@@ -128,7 +66,7 @@ func (r AddInstanceGroupsRequest) Send(ctx context.Context) (*AddInstanceGroupsR
 // AddInstanceGroupsResponse is the response type for the
 // AddInstanceGroups API operation.
 type AddInstanceGroupsResponse struct {
-	*AddInstanceGroupsOutput
+	*types.AddInstanceGroupsOutput
 
 	response *aws.Response
 }

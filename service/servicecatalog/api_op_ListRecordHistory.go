@@ -6,55 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/types"
 )
-
-type ListRecordHistoryInput struct {
-	_ struct{} `type:"structure"`
-
-	// The language code.
-	//
-	//    * en - English (default)
-	//
-	//    * jp - Japanese
-	//
-	//    * zh - Chinese
-	AcceptLanguage *string `type:"string"`
-
-	// The access level to use to obtain results. The default is User.
-	AccessLevelFilter *AccessLevelFilter `type:"structure"`
-
-	// The maximum number of items to return with this call.
-	PageSize *int64 `type:"integer"`
-
-	// The page token for the next set of results. To retrieve the first set of
-	// results, use null.
-	PageToken *string `type:"string"`
-
-	// The search filter to scope the results.
-	SearchFilter *ListRecordHistorySearchFilter `type:"structure"`
-}
-
-// String returns the string representation
-func (s ListRecordHistoryInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type ListRecordHistoryOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The page token to use to retrieve the next set of results. If there are no
-	// additional results, this value is null.
-	NextPageToken *string `type:"string"`
-
-	// The records, in reverse chronological order.
-	RecordDetails []RecordDetail `type:"list"`
-}
-
-// String returns the string representation
-func (s ListRecordHistoryOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListRecordHistory = "ListRecordHistory"
 
@@ -71,7 +24,7 @@ const opListRecordHistory = "ListRecordHistory"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ListRecordHistory
-func (c *Client) ListRecordHistoryRequest(input *ListRecordHistoryInput) ListRecordHistoryRequest {
+func (c *Client) ListRecordHistoryRequest(input *types.ListRecordHistoryInput) ListRecordHistoryRequest {
 	op := &aws.Operation{
 		Name:       opListRecordHistory,
 		HTTPMethod: "POST",
@@ -79,10 +32,10 @@ func (c *Client) ListRecordHistoryRequest(input *ListRecordHistoryInput) ListRec
 	}
 
 	if input == nil {
-		input = &ListRecordHistoryInput{}
+		input = &types.ListRecordHistoryInput{}
 	}
 
-	req := c.newRequest(op, input, &ListRecordHistoryOutput{})
+	req := c.newRequest(op, input, &types.ListRecordHistoryOutput{})
 	return ListRecordHistoryRequest{Request: req, Input: input, Copy: c.ListRecordHistoryRequest}
 }
 
@@ -90,8 +43,8 @@ func (c *Client) ListRecordHistoryRequest(input *ListRecordHistoryInput) ListRec
 // ListRecordHistory API operation.
 type ListRecordHistoryRequest struct {
 	*aws.Request
-	Input *ListRecordHistoryInput
-	Copy  func(*ListRecordHistoryInput) ListRecordHistoryRequest
+	Input *types.ListRecordHistoryInput
+	Copy  func(*types.ListRecordHistoryInput) ListRecordHistoryRequest
 }
 
 // Send marshals and sends the ListRecordHistory API request.
@@ -103,7 +56,7 @@ func (r ListRecordHistoryRequest) Send(ctx context.Context) (*ListRecordHistoryR
 	}
 
 	resp := &ListRecordHistoryResponse{
-		ListRecordHistoryOutput: r.Request.Data.(*ListRecordHistoryOutput),
+		ListRecordHistoryOutput: r.Request.Data.(*types.ListRecordHistoryOutput),
 		response:                &aws.Response{Request: r.Request},
 	}
 
@@ -113,7 +66,7 @@ func (r ListRecordHistoryRequest) Send(ctx context.Context) (*ListRecordHistoryR
 // ListRecordHistoryResponse is the response type for the
 // ListRecordHistory API operation.
 type ListRecordHistoryResponse struct {
-	*ListRecordHistoryOutput
+	*types.ListRecordHistoryOutput
 
 	response *aws.Response
 }

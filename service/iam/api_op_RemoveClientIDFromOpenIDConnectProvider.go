@@ -6,69 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/query"
+	"github.com/aws/aws-sdk-go-v2/service/iam/types"
 )
-
-type RemoveClientIDFromOpenIDConnectProviderInput struct {
-	_ struct{} `type:"structure"`
-
-	// The client ID (also known as audience) to remove from the IAM OIDC provider
-	// resource. For more information about client IDs, see CreateOpenIDConnectProvider.
-	//
-	// ClientID is a required field
-	ClientID *string `min:"1" type:"string" required:"true"`
-
-	// The Amazon Resource Name (ARN) of the IAM OIDC provider resource to remove
-	// the client ID from. You can get a list of OIDC provider ARNs by using the
-	// ListOpenIDConnectProviders operation.
-	//
-	// For more information about ARNs, see Amazon Resource Names (ARNs) and AWS
-	// Service Namespaces (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
-	// in the AWS General Reference.
-	//
-	// OpenIDConnectProviderArn is a required field
-	OpenIDConnectProviderArn *string `min:"20" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s RemoveClientIDFromOpenIDConnectProviderInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *RemoveClientIDFromOpenIDConnectProviderInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "RemoveClientIDFromOpenIDConnectProviderInput"}
-
-	if s.ClientID == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ClientID"))
-	}
-	if s.ClientID != nil && len(*s.ClientID) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ClientID", 1))
-	}
-
-	if s.OpenIDConnectProviderArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("OpenIDConnectProviderArn"))
-	}
-	if s.OpenIDConnectProviderArn != nil && len(*s.OpenIDConnectProviderArn) < 20 {
-		invalidParams.Add(aws.NewErrParamMinLen("OpenIDConnectProviderArn", 20))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type RemoveClientIDFromOpenIDConnectProviderOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s RemoveClientIDFromOpenIDConnectProviderOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opRemoveClientIDFromOpenIDConnectProvider = "RemoveClientIDFromOpenIDConnectProvider"
 
@@ -90,7 +31,7 @@ const opRemoveClientIDFromOpenIDConnectProvider = "RemoveClientIDFromOpenIDConne
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/RemoveClientIDFromOpenIDConnectProvider
-func (c *Client) RemoveClientIDFromOpenIDConnectProviderRequest(input *RemoveClientIDFromOpenIDConnectProviderInput) RemoveClientIDFromOpenIDConnectProviderRequest {
+func (c *Client) RemoveClientIDFromOpenIDConnectProviderRequest(input *types.RemoveClientIDFromOpenIDConnectProviderInput) RemoveClientIDFromOpenIDConnectProviderRequest {
 	op := &aws.Operation{
 		Name:       opRemoveClientIDFromOpenIDConnectProvider,
 		HTTPMethod: "POST",
@@ -98,10 +39,10 @@ func (c *Client) RemoveClientIDFromOpenIDConnectProviderRequest(input *RemoveCli
 	}
 
 	if input == nil {
-		input = &RemoveClientIDFromOpenIDConnectProviderInput{}
+		input = &types.RemoveClientIDFromOpenIDConnectProviderInput{}
 	}
 
-	req := c.newRequest(op, input, &RemoveClientIDFromOpenIDConnectProviderOutput{})
+	req := c.newRequest(op, input, &types.RemoveClientIDFromOpenIDConnectProviderOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return RemoveClientIDFromOpenIDConnectProviderRequest{Request: req, Input: input, Copy: c.RemoveClientIDFromOpenIDConnectProviderRequest}
@@ -111,8 +52,8 @@ func (c *Client) RemoveClientIDFromOpenIDConnectProviderRequest(input *RemoveCli
 // RemoveClientIDFromOpenIDConnectProvider API operation.
 type RemoveClientIDFromOpenIDConnectProviderRequest struct {
 	*aws.Request
-	Input *RemoveClientIDFromOpenIDConnectProviderInput
-	Copy  func(*RemoveClientIDFromOpenIDConnectProviderInput) RemoveClientIDFromOpenIDConnectProviderRequest
+	Input *types.RemoveClientIDFromOpenIDConnectProviderInput
+	Copy  func(*types.RemoveClientIDFromOpenIDConnectProviderInput) RemoveClientIDFromOpenIDConnectProviderRequest
 }
 
 // Send marshals and sends the RemoveClientIDFromOpenIDConnectProvider API request.
@@ -124,7 +65,7 @@ func (r RemoveClientIDFromOpenIDConnectProviderRequest) Send(ctx context.Context
 	}
 
 	resp := &RemoveClientIDFromOpenIDConnectProviderResponse{
-		RemoveClientIDFromOpenIDConnectProviderOutput: r.Request.Data.(*RemoveClientIDFromOpenIDConnectProviderOutput),
+		RemoveClientIDFromOpenIDConnectProviderOutput: r.Request.Data.(*types.RemoveClientIDFromOpenIDConnectProviderOutput),
 		response: &aws.Response{Request: r.Request},
 	}
 
@@ -134,7 +75,7 @@ func (r RemoveClientIDFromOpenIDConnectProviderRequest) Send(ctx context.Context
 // RemoveClientIDFromOpenIDConnectProviderResponse is the response type for the
 // RemoveClientIDFromOpenIDConnectProvider API operation.
 type RemoveClientIDFromOpenIDConnectProviderResponse struct {
-	*RemoveClientIDFromOpenIDConnectProviderOutput
+	*types.RemoveClientIDFromOpenIDConnectProviderOutput
 
 	response *aws.Response
 }

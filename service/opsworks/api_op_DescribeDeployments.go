@@ -6,43 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/opsworks/types"
 )
-
-type DescribeDeploymentsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The app ID. If you include this parameter, the command returns a description
-	// of the commands associated with the specified app.
-	AppId *string `type:"string"`
-
-	// An array of deployment IDs to be described. If you include this parameter,
-	// the command returns a description of the specified deployments. Otherwise,
-	// it returns a description of every deployment.
-	DeploymentIds []string `type:"list"`
-
-	// The stack ID. If you include this parameter, the command returns a description
-	// of the commands associated with the specified stack.
-	StackId *string `type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeDeploymentsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Contains the response to a DescribeDeployments request.
-type DescribeDeploymentsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// An array of Deployment objects that describe the deployments.
-	Deployments []Deployment `type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeDeploymentsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeDeployments = "DescribeDeployments"
 
@@ -66,7 +31,7 @@ const opDescribeDeployments = "DescribeDeployments"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DescribeDeployments
-func (c *Client) DescribeDeploymentsRequest(input *DescribeDeploymentsInput) DescribeDeploymentsRequest {
+func (c *Client) DescribeDeploymentsRequest(input *types.DescribeDeploymentsInput) DescribeDeploymentsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeDeployments,
 		HTTPMethod: "POST",
@@ -74,10 +39,10 @@ func (c *Client) DescribeDeploymentsRequest(input *DescribeDeploymentsInput) Des
 	}
 
 	if input == nil {
-		input = &DescribeDeploymentsInput{}
+		input = &types.DescribeDeploymentsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeDeploymentsOutput{})
+	req := c.newRequest(op, input, &types.DescribeDeploymentsOutput{})
 	return DescribeDeploymentsRequest{Request: req, Input: input, Copy: c.DescribeDeploymentsRequest}
 }
 
@@ -85,8 +50,8 @@ func (c *Client) DescribeDeploymentsRequest(input *DescribeDeploymentsInput) Des
 // DescribeDeployments API operation.
 type DescribeDeploymentsRequest struct {
 	*aws.Request
-	Input *DescribeDeploymentsInput
-	Copy  func(*DescribeDeploymentsInput) DescribeDeploymentsRequest
+	Input *types.DescribeDeploymentsInput
+	Copy  func(*types.DescribeDeploymentsInput) DescribeDeploymentsRequest
 }
 
 // Send marshals and sends the DescribeDeployments API request.
@@ -98,7 +63,7 @@ func (r DescribeDeploymentsRequest) Send(ctx context.Context) (*DescribeDeployme
 	}
 
 	resp := &DescribeDeploymentsResponse{
-		DescribeDeploymentsOutput: r.Request.Data.(*DescribeDeploymentsOutput),
+		DescribeDeploymentsOutput: r.Request.Data.(*types.DescribeDeploymentsOutput),
 		response:                  &aws.Response{Request: r.Request},
 	}
 
@@ -108,7 +73,7 @@ func (r DescribeDeploymentsRequest) Send(ctx context.Context) (*DescribeDeployme
 // DescribeDeploymentsResponse is the response type for the
 // DescribeDeployments API operation.
 type DescribeDeploymentsResponse struct {
-	*DescribeDeploymentsOutput
+	*types.DescribeDeploymentsOutput
 
 	response *aws.Response
 }

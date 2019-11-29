@@ -6,55 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/shield/types"
 )
-
-type DescribeProtectionInput struct {
-	_ struct{} `type:"structure"`
-
-	// The unique identifier (ID) for the Protection object that is described. When
-	// submitting the DescribeProtection request you must provide either the ResourceArn
-	// or the ProtectionID, but not both.
-	ProtectionId *string `min:"1" type:"string"`
-
-	// The ARN (Amazon Resource Name) of the AWS resource for the Protection object
-	// that is described. When submitting the DescribeProtection request you must
-	// provide either the ResourceArn or the ProtectionID, but not both.
-	ResourceArn *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeProtectionInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeProtectionInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeProtectionInput"}
-	if s.ProtectionId != nil && len(*s.ProtectionId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ProtectionId", 1))
-	}
-	if s.ResourceArn != nil && len(*s.ResourceArn) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ResourceArn", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribeProtectionOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The Protection object that is described.
-	Protection *Protection `type:"structure"`
-}
-
-// String returns the string representation
-func (s DescribeProtectionOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeProtection = "DescribeProtection"
 
@@ -71,7 +24,7 @@ const opDescribeProtection = "DescribeProtection"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/DescribeProtection
-func (c *Client) DescribeProtectionRequest(input *DescribeProtectionInput) DescribeProtectionRequest {
+func (c *Client) DescribeProtectionRequest(input *types.DescribeProtectionInput) DescribeProtectionRequest {
 	op := &aws.Operation{
 		Name:       opDescribeProtection,
 		HTTPMethod: "POST",
@@ -79,10 +32,10 @@ func (c *Client) DescribeProtectionRequest(input *DescribeProtectionInput) Descr
 	}
 
 	if input == nil {
-		input = &DescribeProtectionInput{}
+		input = &types.DescribeProtectionInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeProtectionOutput{})
+	req := c.newRequest(op, input, &types.DescribeProtectionOutput{})
 	return DescribeProtectionRequest{Request: req, Input: input, Copy: c.DescribeProtectionRequest}
 }
 
@@ -90,8 +43,8 @@ func (c *Client) DescribeProtectionRequest(input *DescribeProtectionInput) Descr
 // DescribeProtection API operation.
 type DescribeProtectionRequest struct {
 	*aws.Request
-	Input *DescribeProtectionInput
-	Copy  func(*DescribeProtectionInput) DescribeProtectionRequest
+	Input *types.DescribeProtectionInput
+	Copy  func(*types.DescribeProtectionInput) DescribeProtectionRequest
 }
 
 // Send marshals and sends the DescribeProtection API request.
@@ -103,7 +56,7 @@ func (r DescribeProtectionRequest) Send(ctx context.Context) (*DescribeProtectio
 	}
 
 	resp := &DescribeProtectionResponse{
-		DescribeProtectionOutput: r.Request.Data.(*DescribeProtectionOutput),
+		DescribeProtectionOutput: r.Request.Data.(*types.DescribeProtectionOutput),
 		response:                 &aws.Response{Request: r.Request},
 	}
 
@@ -113,7 +66,7 @@ func (r DescribeProtectionRequest) Send(ctx context.Context) (*DescribeProtectio
 // DescribeProtectionResponse is the response type for the
 // DescribeProtection API operation.
 type DescribeProtectionResponse struct {
-	*DescribeProtectionOutput
+	*types.DescribeProtectionOutput
 
 	response *aws.Response
 }

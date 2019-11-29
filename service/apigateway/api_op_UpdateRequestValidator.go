@@ -6,143 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/apigateway/types"
 )
-
-// Updates a RequestValidator of a given RestApi.
-type UpdateRequestValidatorInput struct {
-	_ struct{} `type:"structure"`
-
-	// A list of update operations to be applied to the specified resource and in
-	// the order specified in this list.
-	PatchOperations []PatchOperation `locationName:"patchOperations" type:"list"`
-
-	// [Required] The identifier of RequestValidator to be updated.
-	//
-	// RequestValidatorId is a required field
-	RequestValidatorId *string `location:"uri" locationName:"requestvalidator_id" type:"string" required:"true"`
-
-	// [Required] The string identifier of the associated RestApi.
-	//
-	// RestApiId is a required field
-	RestApiId *string `location:"uri" locationName:"restapi_id" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s UpdateRequestValidatorInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateRequestValidatorInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateRequestValidatorInput"}
-
-	if s.RequestValidatorId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("RequestValidatorId"))
-	}
-
-	if s.RestApiId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("RestApiId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s UpdateRequestValidatorInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.PatchOperations != nil {
-		v := s.PatchOperations
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "patchOperations", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	if s.RequestValidatorId != nil {
-		v := *s.RequestValidatorId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "requestvalidator_id", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.RestApiId != nil {
-		v := *s.RestApiId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "restapi_id", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-// A set of validation rules for incoming Method requests.
-//
-// In OpenAPI, a RequestValidator of an API is defined by the x-amazon-apigateway-request-validators.requestValidator
-// (https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-swagger-extensions.html#api-gateway-swagger-extensions-request-validators.requestValidator.html)
-// object. It the referenced using the x-amazon-apigateway-request-validator
-// (https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-swagger-extensions.html#api-gateway-swagger-extensions-request-validator)
-// property.
-//
-// Enable Basic Request Validation in API Gateway (https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-method-request-validation.html)
-type UpdateRequestValidatorOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The identifier of this RequestValidator.
-	Id *string `locationName:"id" type:"string"`
-
-	// The name of this RequestValidator
-	Name *string `locationName:"name" type:"string"`
-
-	// A Boolean flag to indicate whether to validate a request body according to
-	// the configured Model schema.
-	ValidateRequestBody *bool `locationName:"validateRequestBody" type:"boolean"`
-
-	// A Boolean flag to indicate whether to validate request parameters (true)
-	// or not (false).
-	ValidateRequestParameters *bool `locationName:"validateRequestParameters" type:"boolean"`
-}
-
-// String returns the string representation
-func (s UpdateRequestValidatorOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s UpdateRequestValidatorOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.Id != nil {
-		v := *s.Id
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "id", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Name != nil {
-		v := *s.Name
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.ValidateRequestBody != nil {
-		v := *s.ValidateRequestBody
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "validateRequestBody", protocol.BoolValue(v), metadata)
-	}
-	if s.ValidateRequestParameters != nil {
-		v := *s.ValidateRequestParameters
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "validateRequestParameters", protocol.BoolValue(v), metadata)
-	}
-	return nil
-}
 
 const opUpdateRequestValidator = "UpdateRequestValidator"
 
@@ -157,7 +22,7 @@ const opUpdateRequestValidator = "UpdateRequestValidator"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) UpdateRequestValidatorRequest(input *UpdateRequestValidatorInput) UpdateRequestValidatorRequest {
+func (c *Client) UpdateRequestValidatorRequest(input *types.UpdateRequestValidatorInput) UpdateRequestValidatorRequest {
 	op := &aws.Operation{
 		Name:       opUpdateRequestValidator,
 		HTTPMethod: "PATCH",
@@ -165,10 +30,10 @@ func (c *Client) UpdateRequestValidatorRequest(input *UpdateRequestValidatorInpu
 	}
 
 	if input == nil {
-		input = &UpdateRequestValidatorInput{}
+		input = &types.UpdateRequestValidatorInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateRequestValidatorOutput{})
+	req := c.newRequest(op, input, &types.UpdateRequestValidatorOutput{})
 	return UpdateRequestValidatorRequest{Request: req, Input: input, Copy: c.UpdateRequestValidatorRequest}
 }
 
@@ -176,8 +41,8 @@ func (c *Client) UpdateRequestValidatorRequest(input *UpdateRequestValidatorInpu
 // UpdateRequestValidator API operation.
 type UpdateRequestValidatorRequest struct {
 	*aws.Request
-	Input *UpdateRequestValidatorInput
-	Copy  func(*UpdateRequestValidatorInput) UpdateRequestValidatorRequest
+	Input *types.UpdateRequestValidatorInput
+	Copy  func(*types.UpdateRequestValidatorInput) UpdateRequestValidatorRequest
 }
 
 // Send marshals and sends the UpdateRequestValidator API request.
@@ -189,7 +54,7 @@ func (r UpdateRequestValidatorRequest) Send(ctx context.Context) (*UpdateRequest
 	}
 
 	resp := &UpdateRequestValidatorResponse{
-		UpdateRequestValidatorOutput: r.Request.Data.(*UpdateRequestValidatorOutput),
+		UpdateRequestValidatorOutput: r.Request.Data.(*types.UpdateRequestValidatorOutput),
 		response:                     &aws.Response{Request: r.Request},
 	}
 
@@ -199,7 +64,7 @@ func (r UpdateRequestValidatorRequest) Send(ctx context.Context) (*UpdateRequest
 // UpdateRequestValidatorResponse is the response type for the
 // UpdateRequestValidator API operation.
 type UpdateRequestValidatorResponse struct {
-	*UpdateRequestValidatorOutput
+	*types.UpdateRequestValidatorOutput
 
 	response *aws.Response
 }

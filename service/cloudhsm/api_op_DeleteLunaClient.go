@@ -6,50 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/cloudhsm/types"
 )
-
-type DeleteLunaClientInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ARN of the client to delete.
-	//
-	// ClientArn is a required field
-	ClientArn *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteLunaClientInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteLunaClientInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteLunaClientInput"}
-
-	if s.ClientArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ClientArn"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteLunaClientOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The status of the action.
-	//
-	// Status is a required field
-	Status *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteLunaClientOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteLunaClient = "DeleteLunaClient"
 
@@ -75,7 +33,7 @@ const opDeleteLunaClient = "DeleteLunaClient"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/DeleteLunaClient
-func (c *Client) DeleteLunaClientRequest(input *DeleteLunaClientInput) DeleteLunaClientRequest {
+func (c *Client) DeleteLunaClientRequest(input *types.DeleteLunaClientInput) DeleteLunaClientRequest {
 	op := &aws.Operation{
 		Name:       opDeleteLunaClient,
 		HTTPMethod: "POST",
@@ -83,10 +41,10 @@ func (c *Client) DeleteLunaClientRequest(input *DeleteLunaClientInput) DeleteLun
 	}
 
 	if input == nil {
-		input = &DeleteLunaClientInput{}
+		input = &types.DeleteLunaClientInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteLunaClientOutput{})
+	req := c.newRequest(op, input, &types.DeleteLunaClientOutput{})
 	return DeleteLunaClientRequest{Request: req, Input: input, Copy: c.DeleteLunaClientRequest}
 }
 
@@ -94,8 +52,8 @@ func (c *Client) DeleteLunaClientRequest(input *DeleteLunaClientInput) DeleteLun
 // DeleteLunaClient API operation.
 type DeleteLunaClientRequest struct {
 	*aws.Request
-	Input *DeleteLunaClientInput
-	Copy  func(*DeleteLunaClientInput) DeleteLunaClientRequest
+	Input *types.DeleteLunaClientInput
+	Copy  func(*types.DeleteLunaClientInput) DeleteLunaClientRequest
 }
 
 // Send marshals and sends the DeleteLunaClient API request.
@@ -107,7 +65,7 @@ func (r DeleteLunaClientRequest) Send(ctx context.Context) (*DeleteLunaClientRes
 	}
 
 	resp := &DeleteLunaClientResponse{
-		DeleteLunaClientOutput: r.Request.Data.(*DeleteLunaClientOutput),
+		DeleteLunaClientOutput: r.Request.Data.(*types.DeleteLunaClientOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -117,7 +75,7 @@ func (r DeleteLunaClientRequest) Send(ctx context.Context) (*DeleteLunaClientRes
 // DeleteLunaClientResponse is the response type for the
 // DeleteLunaClient API operation.
 type DeleteLunaClientResponse struct {
-	*DeleteLunaClientOutput
+	*types.DeleteLunaClientOutput
 
 	response *aws.Response
 }

@@ -6,54 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/rds/types"
 )
-
-type StopDBInstanceInput struct {
-	_ struct{} `type:"structure"`
-
-	// The user-supplied instance identifier.
-	//
-	// DBInstanceIdentifier is a required field
-	DBInstanceIdentifier *string `type:"string" required:"true"`
-
-	// The user-supplied instance identifier of the DB Snapshot created immediately
-	// before the DB instance is stopped.
-	DBSnapshotIdentifier *string `type:"string"`
-}
-
-// String returns the string representation
-func (s StopDBInstanceInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *StopDBInstanceInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "StopDBInstanceInput"}
-
-	if s.DBInstanceIdentifier == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DBInstanceIdentifier"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type StopDBInstanceOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Contains the details of an Amazon RDS DB instance.
-	//
-	// This data type is used as a response element in the DescribeDBInstances action.
-	DBInstance *DBInstance `type:"structure"`
-}
-
-// String returns the string representation
-func (s StopDBInstanceOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opStopDBInstance = "StopDBInstance"
 
@@ -80,7 +34,7 @@ const opStopDBInstance = "StopDBInstance"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/StopDBInstance
-func (c *Client) StopDBInstanceRequest(input *StopDBInstanceInput) StopDBInstanceRequest {
+func (c *Client) StopDBInstanceRequest(input *types.StopDBInstanceInput) StopDBInstanceRequest {
 	op := &aws.Operation{
 		Name:       opStopDBInstance,
 		HTTPMethod: "POST",
@@ -88,10 +42,10 @@ func (c *Client) StopDBInstanceRequest(input *StopDBInstanceInput) StopDBInstanc
 	}
 
 	if input == nil {
-		input = &StopDBInstanceInput{}
+		input = &types.StopDBInstanceInput{}
 	}
 
-	req := c.newRequest(op, input, &StopDBInstanceOutput{})
+	req := c.newRequest(op, input, &types.StopDBInstanceOutput{})
 	return StopDBInstanceRequest{Request: req, Input: input, Copy: c.StopDBInstanceRequest}
 }
 
@@ -99,8 +53,8 @@ func (c *Client) StopDBInstanceRequest(input *StopDBInstanceInput) StopDBInstanc
 // StopDBInstance API operation.
 type StopDBInstanceRequest struct {
 	*aws.Request
-	Input *StopDBInstanceInput
-	Copy  func(*StopDBInstanceInput) StopDBInstanceRequest
+	Input *types.StopDBInstanceInput
+	Copy  func(*types.StopDBInstanceInput) StopDBInstanceRequest
 }
 
 // Send marshals and sends the StopDBInstance API request.
@@ -112,7 +66,7 @@ func (r StopDBInstanceRequest) Send(ctx context.Context) (*StopDBInstanceRespons
 	}
 
 	resp := &StopDBInstanceResponse{
-		StopDBInstanceOutput: r.Request.Data.(*StopDBInstanceOutput),
+		StopDBInstanceOutput: r.Request.Data.(*types.StopDBInstanceOutput),
 		response:             &aws.Response{Request: r.Request},
 	}
 
@@ -122,7 +76,7 @@ func (r StopDBInstanceRequest) Send(ctx context.Context) (*StopDBInstanceRespons
 // StopDBInstanceResponse is the response type for the
 // StopDBInstance API operation.
 type StopDBInstanceResponse struct {
-	*StopDBInstanceOutput
+	*types.StopDBInstanceOutput
 
 	response *aws.Response
 }

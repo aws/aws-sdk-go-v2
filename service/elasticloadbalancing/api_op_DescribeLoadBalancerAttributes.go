@@ -6,50 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/elasticloadbalancing/types"
 )
-
-// Contains the parameters for DescribeLoadBalancerAttributes.
-type DescribeLoadBalancerAttributesInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the load balancer.
-	//
-	// LoadBalancerName is a required field
-	LoadBalancerName *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeLoadBalancerAttributesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeLoadBalancerAttributesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeLoadBalancerAttributesInput"}
-
-	if s.LoadBalancerName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("LoadBalancerName"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Contains the output of DescribeLoadBalancerAttributes.
-type DescribeLoadBalancerAttributesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Information about the load balancer attributes.
-	LoadBalancerAttributes *LoadBalancerAttributes `type:"structure"`
-}
-
-// String returns the string representation
-func (s DescribeLoadBalancerAttributesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeLoadBalancerAttributes = "DescribeLoadBalancerAttributes"
 
@@ -66,7 +24,7 @@ const opDescribeLoadBalancerAttributes = "DescribeLoadBalancerAttributes"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/DescribeLoadBalancerAttributes
-func (c *Client) DescribeLoadBalancerAttributesRequest(input *DescribeLoadBalancerAttributesInput) DescribeLoadBalancerAttributesRequest {
+func (c *Client) DescribeLoadBalancerAttributesRequest(input *types.DescribeLoadBalancerAttributesInput) DescribeLoadBalancerAttributesRequest {
 	op := &aws.Operation{
 		Name:       opDescribeLoadBalancerAttributes,
 		HTTPMethod: "POST",
@@ -74,10 +32,10 @@ func (c *Client) DescribeLoadBalancerAttributesRequest(input *DescribeLoadBalanc
 	}
 
 	if input == nil {
-		input = &DescribeLoadBalancerAttributesInput{}
+		input = &types.DescribeLoadBalancerAttributesInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeLoadBalancerAttributesOutput{})
+	req := c.newRequest(op, input, &types.DescribeLoadBalancerAttributesOutput{})
 	return DescribeLoadBalancerAttributesRequest{Request: req, Input: input, Copy: c.DescribeLoadBalancerAttributesRequest}
 }
 
@@ -85,8 +43,8 @@ func (c *Client) DescribeLoadBalancerAttributesRequest(input *DescribeLoadBalanc
 // DescribeLoadBalancerAttributes API operation.
 type DescribeLoadBalancerAttributesRequest struct {
 	*aws.Request
-	Input *DescribeLoadBalancerAttributesInput
-	Copy  func(*DescribeLoadBalancerAttributesInput) DescribeLoadBalancerAttributesRequest
+	Input *types.DescribeLoadBalancerAttributesInput
+	Copy  func(*types.DescribeLoadBalancerAttributesInput) DescribeLoadBalancerAttributesRequest
 }
 
 // Send marshals and sends the DescribeLoadBalancerAttributes API request.
@@ -98,7 +56,7 @@ func (r DescribeLoadBalancerAttributesRequest) Send(ctx context.Context) (*Descr
 	}
 
 	resp := &DescribeLoadBalancerAttributesResponse{
-		DescribeLoadBalancerAttributesOutput: r.Request.Data.(*DescribeLoadBalancerAttributesOutput),
+		DescribeLoadBalancerAttributesOutput: r.Request.Data.(*types.DescribeLoadBalancerAttributesOutput),
 		response:                             &aws.Response{Request: r.Request},
 	}
 
@@ -108,7 +66,7 @@ func (r DescribeLoadBalancerAttributesRequest) Send(ctx context.Context) (*Descr
 // DescribeLoadBalancerAttributesResponse is the response type for the
 // DescribeLoadBalancerAttributes API operation.
 type DescribeLoadBalancerAttributesResponse struct {
-	*DescribeLoadBalancerAttributesOutput
+	*types.DescribeLoadBalancerAttributesOutput
 
 	response *aws.Response
 }

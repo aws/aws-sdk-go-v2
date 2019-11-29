@@ -6,67 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/iot/types"
 )
-
-type CancelAuditMitigationActionsTaskInput struct {
-	_ struct{} `type:"structure"`
-
-	// The unique identifier for the task that you want to cancel.
-	//
-	// TaskId is a required field
-	TaskId *string `location:"uri" locationName:"taskId" min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s CancelAuditMitigationActionsTaskInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CancelAuditMitigationActionsTaskInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CancelAuditMitigationActionsTaskInput"}
-
-	if s.TaskId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("TaskId"))
-	}
-	if s.TaskId != nil && len(*s.TaskId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("TaskId", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s CancelAuditMitigationActionsTaskInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.TaskId != nil {
-		v := *s.TaskId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "taskId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type CancelAuditMitigationActionsTaskOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s CancelAuditMitigationActionsTaskOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s CancelAuditMitigationActionsTaskOutput) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
 
 const opCancelAuditMitigationActionsTask = "CancelAuditMitigationActionsTask"
 
@@ -82,7 +23,7 @@ const opCancelAuditMitigationActionsTask = "CancelAuditMitigationActionsTask"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) CancelAuditMitigationActionsTaskRequest(input *CancelAuditMitigationActionsTaskInput) CancelAuditMitigationActionsTaskRequest {
+func (c *Client) CancelAuditMitigationActionsTaskRequest(input *types.CancelAuditMitigationActionsTaskInput) CancelAuditMitigationActionsTaskRequest {
 	op := &aws.Operation{
 		Name:       opCancelAuditMitigationActionsTask,
 		HTTPMethod: "PUT",
@@ -90,10 +31,10 @@ func (c *Client) CancelAuditMitigationActionsTaskRequest(input *CancelAuditMitig
 	}
 
 	if input == nil {
-		input = &CancelAuditMitigationActionsTaskInput{}
+		input = &types.CancelAuditMitigationActionsTaskInput{}
 	}
 
-	req := c.newRequest(op, input, &CancelAuditMitigationActionsTaskOutput{})
+	req := c.newRequest(op, input, &types.CancelAuditMitigationActionsTaskOutput{})
 	return CancelAuditMitigationActionsTaskRequest{Request: req, Input: input, Copy: c.CancelAuditMitigationActionsTaskRequest}
 }
 
@@ -101,8 +42,8 @@ func (c *Client) CancelAuditMitigationActionsTaskRequest(input *CancelAuditMitig
 // CancelAuditMitigationActionsTask API operation.
 type CancelAuditMitigationActionsTaskRequest struct {
 	*aws.Request
-	Input *CancelAuditMitigationActionsTaskInput
-	Copy  func(*CancelAuditMitigationActionsTaskInput) CancelAuditMitigationActionsTaskRequest
+	Input *types.CancelAuditMitigationActionsTaskInput
+	Copy  func(*types.CancelAuditMitigationActionsTaskInput) CancelAuditMitigationActionsTaskRequest
 }
 
 // Send marshals and sends the CancelAuditMitigationActionsTask API request.
@@ -114,7 +55,7 @@ func (r CancelAuditMitigationActionsTaskRequest) Send(ctx context.Context) (*Can
 	}
 
 	resp := &CancelAuditMitigationActionsTaskResponse{
-		CancelAuditMitigationActionsTaskOutput: r.Request.Data.(*CancelAuditMitigationActionsTaskOutput),
+		CancelAuditMitigationActionsTaskOutput: r.Request.Data.(*types.CancelAuditMitigationActionsTaskOutput),
 		response:                               &aws.Response{Request: r.Request},
 	}
 
@@ -124,7 +65,7 @@ func (r CancelAuditMitigationActionsTaskRequest) Send(ctx context.Context) (*Can
 // CancelAuditMitigationActionsTaskResponse is the response type for the
 // CancelAuditMitigationActionsTask API operation.
 type CancelAuditMitigationActionsTaskResponse struct {
-	*CancelAuditMitigationActionsTaskOutput
+	*types.CancelAuditMitigationActionsTaskOutput
 
 	response *aws.Response
 }

@@ -6,73 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/appstream/types"
 )
-
-type DescribeImagePermissionsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The maximum size of each page of results.
-	MaxResults *int64 `type:"integer"`
-
-	// The name of the private image for which to describe permissions. The image
-	// must be one that you own.
-	//
-	// Name is a required field
-	Name *string `type:"string" required:"true"`
-
-	// The pagination token to use to retrieve the next page of results for this
-	// operation. If this value is null, it retrieves the first page.
-	NextToken *string `min:"1" type:"string"`
-
-	// The 12-digit identifier of one or more AWS accounts with which the image
-	// is shared.
-	SharedAwsAccountIds []string `min:"1" type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeImagePermissionsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeImagePermissionsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeImagePermissionsInput"}
-
-	if s.Name == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Name"))
-	}
-	if s.NextToken != nil && len(*s.NextToken) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
-	}
-	if s.SharedAwsAccountIds != nil && len(s.SharedAwsAccountIds) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("SharedAwsAccountIds", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribeImagePermissionsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the private image.
-	Name *string `type:"string"`
-
-	// The pagination token to use to retrieve the next page of results for this
-	// operation. If there are no more pages, this value is null.
-	NextToken *string `min:"1" type:"string"`
-
-	// The permissions for a private image that you own.
-	SharedImagePermissionsList []SharedImagePermissions `type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeImagePermissionsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeImagePermissions = "DescribeImagePermissions"
 
@@ -90,7 +25,7 @@ const opDescribeImagePermissions = "DescribeImagePermissions"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DescribeImagePermissions
-func (c *Client) DescribeImagePermissionsRequest(input *DescribeImagePermissionsInput) DescribeImagePermissionsRequest {
+func (c *Client) DescribeImagePermissionsRequest(input *types.DescribeImagePermissionsInput) DescribeImagePermissionsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeImagePermissions,
 		HTTPMethod: "POST",
@@ -104,10 +39,10 @@ func (c *Client) DescribeImagePermissionsRequest(input *DescribeImagePermissions
 	}
 
 	if input == nil {
-		input = &DescribeImagePermissionsInput{}
+		input = &types.DescribeImagePermissionsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeImagePermissionsOutput{})
+	req := c.newRequest(op, input, &types.DescribeImagePermissionsOutput{})
 	return DescribeImagePermissionsRequest{Request: req, Input: input, Copy: c.DescribeImagePermissionsRequest}
 }
 
@@ -115,8 +50,8 @@ func (c *Client) DescribeImagePermissionsRequest(input *DescribeImagePermissions
 // DescribeImagePermissions API operation.
 type DescribeImagePermissionsRequest struct {
 	*aws.Request
-	Input *DescribeImagePermissionsInput
-	Copy  func(*DescribeImagePermissionsInput) DescribeImagePermissionsRequest
+	Input *types.DescribeImagePermissionsInput
+	Copy  func(*types.DescribeImagePermissionsInput) DescribeImagePermissionsRequest
 }
 
 // Send marshals and sends the DescribeImagePermissions API request.
@@ -128,7 +63,7 @@ func (r DescribeImagePermissionsRequest) Send(ctx context.Context) (*DescribeIma
 	}
 
 	resp := &DescribeImagePermissionsResponse{
-		DescribeImagePermissionsOutput: r.Request.Data.(*DescribeImagePermissionsOutput),
+		DescribeImagePermissionsOutput: r.Request.Data.(*types.DescribeImagePermissionsOutput),
 		response:                       &aws.Response{Request: r.Request},
 	}
 
@@ -158,7 +93,7 @@ func NewDescribeImagePermissionsPaginator(req DescribeImagePermissionsRequest) D
 	return DescribeImagePermissionsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *DescribeImagePermissionsInput
+				var inCpy *types.DescribeImagePermissionsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -178,14 +113,14 @@ type DescribeImagePermissionsPaginator struct {
 	aws.Pager
 }
 
-func (p *DescribeImagePermissionsPaginator) CurrentPage() *DescribeImagePermissionsOutput {
-	return p.Pager.CurrentPage().(*DescribeImagePermissionsOutput)
+func (p *DescribeImagePermissionsPaginator) CurrentPage() *types.DescribeImagePermissionsOutput {
+	return p.Pager.CurrentPage().(*types.DescribeImagePermissionsOutput)
 }
 
 // DescribeImagePermissionsResponse is the response type for the
 // DescribeImagePermissions API operation.
 type DescribeImagePermissionsResponse struct {
-	*DescribeImagePermissionsOutput
+	*types.DescribeImagePermissionsOutput
 
 	response *aws.Response
 }

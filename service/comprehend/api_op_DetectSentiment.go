@@ -6,67 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/comprehend/types"
 )
-
-type DetectSentimentInput struct {
-	_ struct{} `type:"structure"`
-
-	// The language of the input documents. You can specify any of the primary languages
-	// supported by Amazon Comprehend: German ("de"), English ("en"), Spanish ("es"),
-	// French ("fr"), Italian ("it"), or Portuguese ("pt"). All documents must be
-	// in the same language.
-	//
-	// LanguageCode is a required field
-	LanguageCode LanguageCode `type:"string" required:"true" enum:"true"`
-
-	// A UTF-8 text string. Each string must contain fewer that 5,000 bytes of UTF-8
-	// encoded characters.
-	//
-	// Text is a required field
-	Text *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DetectSentimentInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DetectSentimentInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DetectSentimentInput"}
-	if len(s.LanguageCode) == 0 {
-		invalidParams.Add(aws.NewErrParamRequired("LanguageCode"))
-	}
-
-	if s.Text == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Text"))
-	}
-	if s.Text != nil && len(*s.Text) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Text", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DetectSentimentOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The inferred sentiment that Amazon Comprehend has the highest level of confidence
-	// in.
-	Sentiment SentimentType `type:"string" enum:"true"`
-
-	// An object that lists the sentiments, and their corresponding confidence levels.
-	SentimentScore *SentimentScore `type:"structure"`
-}
-
-// String returns the string representation
-func (s DetectSentimentOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDetectSentiment = "DetectSentiment"
 
@@ -84,7 +25,7 @@ const opDetectSentiment = "DetectSentiment"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/DetectSentiment
-func (c *Client) DetectSentimentRequest(input *DetectSentimentInput) DetectSentimentRequest {
+func (c *Client) DetectSentimentRequest(input *types.DetectSentimentInput) DetectSentimentRequest {
 	op := &aws.Operation{
 		Name:       opDetectSentiment,
 		HTTPMethod: "POST",
@@ -92,10 +33,10 @@ func (c *Client) DetectSentimentRequest(input *DetectSentimentInput) DetectSenti
 	}
 
 	if input == nil {
-		input = &DetectSentimentInput{}
+		input = &types.DetectSentimentInput{}
 	}
 
-	req := c.newRequest(op, input, &DetectSentimentOutput{})
+	req := c.newRequest(op, input, &types.DetectSentimentOutput{})
 	return DetectSentimentRequest{Request: req, Input: input, Copy: c.DetectSentimentRequest}
 }
 
@@ -103,8 +44,8 @@ func (c *Client) DetectSentimentRequest(input *DetectSentimentInput) DetectSenti
 // DetectSentiment API operation.
 type DetectSentimentRequest struct {
 	*aws.Request
-	Input *DetectSentimentInput
-	Copy  func(*DetectSentimentInput) DetectSentimentRequest
+	Input *types.DetectSentimentInput
+	Copy  func(*types.DetectSentimentInput) DetectSentimentRequest
 }
 
 // Send marshals and sends the DetectSentiment API request.
@@ -116,7 +57,7 @@ func (r DetectSentimentRequest) Send(ctx context.Context) (*DetectSentimentRespo
 	}
 
 	resp := &DetectSentimentResponse{
-		DetectSentimentOutput: r.Request.Data.(*DetectSentimentOutput),
+		DetectSentimentOutput: r.Request.Data.(*types.DetectSentimentOutput),
 		response:              &aws.Response{Request: r.Request},
 	}
 
@@ -126,7 +67,7 @@ func (r DetectSentimentRequest) Send(ctx context.Context) (*DetectSentimentRespo
 // DetectSentimentResponse is the response type for the
 // DetectSentiment API operation.
 type DetectSentimentResponse struct {
-	*DetectSentimentOutput
+	*types.DetectSentimentOutput
 
 	response *aws.Response
 }

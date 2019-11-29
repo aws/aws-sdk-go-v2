@@ -4,61 +4,10 @@ package appstream
 
 import (
 	"context"
-	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/appstream/types"
 )
-
-type CreateImageBuilderStreamingURLInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the image builder.
-	//
-	// Name is a required field
-	Name *string `min:"1" type:"string" required:"true"`
-
-	// The time that the streaming URL will be valid, in seconds. Specify a value
-	// between 1 and 604800 seconds. The default is 3600 seconds.
-	Validity *int64 `type:"long"`
-}
-
-// String returns the string representation
-func (s CreateImageBuilderStreamingURLInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateImageBuilderStreamingURLInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateImageBuilderStreamingURLInput"}
-
-	if s.Name == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Name"))
-	}
-	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type CreateImageBuilderStreamingURLOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The elapsed time, in seconds after the Unix epoch, when this URL expires.
-	Expires *time.Time `type:"timestamp"`
-
-	// The URL to start the AppStream 2.0 streaming session.
-	StreamingURL *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s CreateImageBuilderStreamingURLOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCreateImageBuilderStreamingURL = "CreateImageBuilderStreamingURL"
 
@@ -75,7 +24,7 @@ const opCreateImageBuilderStreamingURL = "CreateImageBuilderStreamingURL"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/CreateImageBuilderStreamingURL
-func (c *Client) CreateImageBuilderStreamingURLRequest(input *CreateImageBuilderStreamingURLInput) CreateImageBuilderStreamingURLRequest {
+func (c *Client) CreateImageBuilderStreamingURLRequest(input *types.CreateImageBuilderStreamingURLInput) CreateImageBuilderStreamingURLRequest {
 	op := &aws.Operation{
 		Name:       opCreateImageBuilderStreamingURL,
 		HTTPMethod: "POST",
@@ -83,10 +32,10 @@ func (c *Client) CreateImageBuilderStreamingURLRequest(input *CreateImageBuilder
 	}
 
 	if input == nil {
-		input = &CreateImageBuilderStreamingURLInput{}
+		input = &types.CreateImageBuilderStreamingURLInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateImageBuilderStreamingURLOutput{})
+	req := c.newRequest(op, input, &types.CreateImageBuilderStreamingURLOutput{})
 	return CreateImageBuilderStreamingURLRequest{Request: req, Input: input, Copy: c.CreateImageBuilderStreamingURLRequest}
 }
 
@@ -94,8 +43,8 @@ func (c *Client) CreateImageBuilderStreamingURLRequest(input *CreateImageBuilder
 // CreateImageBuilderStreamingURL API operation.
 type CreateImageBuilderStreamingURLRequest struct {
 	*aws.Request
-	Input *CreateImageBuilderStreamingURLInput
-	Copy  func(*CreateImageBuilderStreamingURLInput) CreateImageBuilderStreamingURLRequest
+	Input *types.CreateImageBuilderStreamingURLInput
+	Copy  func(*types.CreateImageBuilderStreamingURLInput) CreateImageBuilderStreamingURLRequest
 }
 
 // Send marshals and sends the CreateImageBuilderStreamingURL API request.
@@ -107,7 +56,7 @@ func (r CreateImageBuilderStreamingURLRequest) Send(ctx context.Context) (*Creat
 	}
 
 	resp := &CreateImageBuilderStreamingURLResponse{
-		CreateImageBuilderStreamingURLOutput: r.Request.Data.(*CreateImageBuilderStreamingURLOutput),
+		CreateImageBuilderStreamingURLOutput: r.Request.Data.(*types.CreateImageBuilderStreamingURLOutput),
 		response:                             &aws.Response{Request: r.Request},
 	}
 
@@ -117,7 +66,7 @@ func (r CreateImageBuilderStreamingURLRequest) Send(ctx context.Context) (*Creat
 // CreateImageBuilderStreamingURLResponse is the response type for the
 // CreateImageBuilderStreamingURL API operation.
 type CreateImageBuilderStreamingURLResponse struct {
-	*CreateImageBuilderStreamingURLOutput
+	*types.CreateImageBuilderStreamingURLOutput
 
 	response *aws.Response
 }

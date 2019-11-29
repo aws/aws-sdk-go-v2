@@ -6,59 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/sns/types"
 )
-
-// Input for ListEndpointsByPlatformApplication action.
-type ListEndpointsByPlatformApplicationInput struct {
-	_ struct{} `type:"structure"`
-
-	// NextToken string is used when calling ListEndpointsByPlatformApplication
-	// action to retrieve additional records that are available after the first
-	// page results.
-	NextToken *string `type:"string"`
-
-	// PlatformApplicationArn for ListEndpointsByPlatformApplicationInput action.
-	//
-	// PlatformApplicationArn is a required field
-	PlatformApplicationArn *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s ListEndpointsByPlatformApplicationInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListEndpointsByPlatformApplicationInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListEndpointsByPlatformApplicationInput"}
-
-	if s.PlatformApplicationArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("PlatformApplicationArn"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Response for ListEndpointsByPlatformApplication action.
-type ListEndpointsByPlatformApplicationOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Endpoints returned for ListEndpointsByPlatformApplication action.
-	Endpoints []Endpoint `type:"list"`
-
-	// NextToken string is returned when calling ListEndpointsByPlatformApplication
-	// action if additional records are available after the first page results.
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s ListEndpointsByPlatformApplicationOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListEndpointsByPlatformApplication = "ListEndpointsByPlatformApplication"
 
@@ -84,7 +33,7 @@ const opListEndpointsByPlatformApplication = "ListEndpointsByPlatformApplication
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/ListEndpointsByPlatformApplication
-func (c *Client) ListEndpointsByPlatformApplicationRequest(input *ListEndpointsByPlatformApplicationInput) ListEndpointsByPlatformApplicationRequest {
+func (c *Client) ListEndpointsByPlatformApplicationRequest(input *types.ListEndpointsByPlatformApplicationInput) ListEndpointsByPlatformApplicationRequest {
 	op := &aws.Operation{
 		Name:       opListEndpointsByPlatformApplication,
 		HTTPMethod: "POST",
@@ -98,10 +47,10 @@ func (c *Client) ListEndpointsByPlatformApplicationRequest(input *ListEndpointsB
 	}
 
 	if input == nil {
-		input = &ListEndpointsByPlatformApplicationInput{}
+		input = &types.ListEndpointsByPlatformApplicationInput{}
 	}
 
-	req := c.newRequest(op, input, &ListEndpointsByPlatformApplicationOutput{})
+	req := c.newRequest(op, input, &types.ListEndpointsByPlatformApplicationOutput{})
 	return ListEndpointsByPlatformApplicationRequest{Request: req, Input: input, Copy: c.ListEndpointsByPlatformApplicationRequest}
 }
 
@@ -109,8 +58,8 @@ func (c *Client) ListEndpointsByPlatformApplicationRequest(input *ListEndpointsB
 // ListEndpointsByPlatformApplication API operation.
 type ListEndpointsByPlatformApplicationRequest struct {
 	*aws.Request
-	Input *ListEndpointsByPlatformApplicationInput
-	Copy  func(*ListEndpointsByPlatformApplicationInput) ListEndpointsByPlatformApplicationRequest
+	Input *types.ListEndpointsByPlatformApplicationInput
+	Copy  func(*types.ListEndpointsByPlatformApplicationInput) ListEndpointsByPlatformApplicationRequest
 }
 
 // Send marshals and sends the ListEndpointsByPlatformApplication API request.
@@ -122,7 +71,7 @@ func (r ListEndpointsByPlatformApplicationRequest) Send(ctx context.Context) (*L
 	}
 
 	resp := &ListEndpointsByPlatformApplicationResponse{
-		ListEndpointsByPlatformApplicationOutput: r.Request.Data.(*ListEndpointsByPlatformApplicationOutput),
+		ListEndpointsByPlatformApplicationOutput: r.Request.Data.(*types.ListEndpointsByPlatformApplicationOutput),
 		response:                                 &aws.Response{Request: r.Request},
 	}
 
@@ -152,7 +101,7 @@ func NewListEndpointsByPlatformApplicationPaginator(req ListEndpointsByPlatformA
 	return ListEndpointsByPlatformApplicationPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListEndpointsByPlatformApplicationInput
+				var inCpy *types.ListEndpointsByPlatformApplicationInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -172,14 +121,14 @@ type ListEndpointsByPlatformApplicationPaginator struct {
 	aws.Pager
 }
 
-func (p *ListEndpointsByPlatformApplicationPaginator) CurrentPage() *ListEndpointsByPlatformApplicationOutput {
-	return p.Pager.CurrentPage().(*ListEndpointsByPlatformApplicationOutput)
+func (p *ListEndpointsByPlatformApplicationPaginator) CurrentPage() *types.ListEndpointsByPlatformApplicationOutput {
+	return p.Pager.CurrentPage().(*types.ListEndpointsByPlatformApplicationOutput)
 }
 
 // ListEndpointsByPlatformApplicationResponse is the response type for the
 // ListEndpointsByPlatformApplication API operation.
 type ListEndpointsByPlatformApplicationResponse struct {
-	*ListEndpointsByPlatformApplicationOutput
+	*types.ListEndpointsByPlatformApplicationOutput
 
 	response *aws.Response
 }

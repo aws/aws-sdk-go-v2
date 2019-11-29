@@ -6,71 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/query"
+	"github.com/aws/aws-sdk-go-v2/service/cloudwatch/types"
 )
-
-type SetAlarmStateInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name for the alarm. This name must be unique within the AWS account.
-	// The maximum length is 255 characters.
-	//
-	// AlarmName is a required field
-	AlarmName *string `min:"1" type:"string" required:"true"`
-
-	// The reason that this alarm is set to this specific state, in text format.
-	//
-	// StateReason is a required field
-	StateReason *string `type:"string" required:"true"`
-
-	// The reason that this alarm is set to this specific state, in JSON format.
-	StateReasonData *string `type:"string"`
-
-	// The value of the state.
-	//
-	// StateValue is a required field
-	StateValue StateValue `type:"string" required:"true" enum:"true"`
-}
-
-// String returns the string representation
-func (s SetAlarmStateInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *SetAlarmStateInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "SetAlarmStateInput"}
-
-	if s.AlarmName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("AlarmName"))
-	}
-	if s.AlarmName != nil && len(*s.AlarmName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("AlarmName", 1))
-	}
-
-	if s.StateReason == nil {
-		invalidParams.Add(aws.NewErrParamRequired("StateReason"))
-	}
-	if len(s.StateValue) == 0 {
-		invalidParams.Add(aws.NewErrParamRequired("StateValue"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type SetAlarmStateOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s SetAlarmStateOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opSetAlarmState = "SetAlarmState"
 
@@ -94,7 +33,7 @@ const opSetAlarmState = "SetAlarmState"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/SetAlarmState
-func (c *Client) SetAlarmStateRequest(input *SetAlarmStateInput) SetAlarmStateRequest {
+func (c *Client) SetAlarmStateRequest(input *types.SetAlarmStateInput) SetAlarmStateRequest {
 	op := &aws.Operation{
 		Name:       opSetAlarmState,
 		HTTPMethod: "POST",
@@ -102,10 +41,10 @@ func (c *Client) SetAlarmStateRequest(input *SetAlarmStateInput) SetAlarmStateRe
 	}
 
 	if input == nil {
-		input = &SetAlarmStateInput{}
+		input = &types.SetAlarmStateInput{}
 	}
 
-	req := c.newRequest(op, input, &SetAlarmStateOutput{})
+	req := c.newRequest(op, input, &types.SetAlarmStateOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return SetAlarmStateRequest{Request: req, Input: input, Copy: c.SetAlarmStateRequest}
@@ -115,8 +54,8 @@ func (c *Client) SetAlarmStateRequest(input *SetAlarmStateInput) SetAlarmStateRe
 // SetAlarmState API operation.
 type SetAlarmStateRequest struct {
 	*aws.Request
-	Input *SetAlarmStateInput
-	Copy  func(*SetAlarmStateInput) SetAlarmStateRequest
+	Input *types.SetAlarmStateInput
+	Copy  func(*types.SetAlarmStateInput) SetAlarmStateRequest
 }
 
 // Send marshals and sends the SetAlarmState API request.
@@ -128,7 +67,7 @@ func (r SetAlarmStateRequest) Send(ctx context.Context) (*SetAlarmStateResponse,
 	}
 
 	resp := &SetAlarmStateResponse{
-		SetAlarmStateOutput: r.Request.Data.(*SetAlarmStateOutput),
+		SetAlarmStateOutput: r.Request.Data.(*types.SetAlarmStateOutput),
 		response:            &aws.Response{Request: r.Request},
 	}
 
@@ -138,7 +77,7 @@ func (r SetAlarmStateRequest) Send(ctx context.Context) (*SetAlarmStateResponse,
 // SetAlarmStateResponse is the response type for the
 // SetAlarmState API operation.
 type SetAlarmStateResponse struct {
-	*SetAlarmStateOutput
+	*types.SetAlarmStateOutput
 
 	response *aws.Response
 }

@@ -13,6 +13,7 @@ import (
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/lambda"
+	"github.com/aws/aws-sdk-go-v2/service/lambda/types"
 )
 
 // ClientAPI provides an interface to enable mocking the
@@ -46,7 +47,7 @@ import (
 //    type mockClientClient struct {
 //        lambdaiface.ClientPI
 //    }
-//    func (m *mockClientClient) AddLayerVersionPermission(input *lambda.AddLayerVersionPermissionInput) (*lambda.AddLayerVersionPermissionOutput, error) {
+//    func (m *mockClientClient) AddLayerVersionPermission(input *types.AddLayerVersionPermissionInput) (*types.AddLayerVersionPermissionOutput, error) {
 //        // mock response/functionality
 //    }
 //
@@ -64,85 +65,85 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type ClientAPI interface {
-	AddLayerVersionPermissionRequest(*lambda.AddLayerVersionPermissionInput) lambda.AddLayerVersionPermissionRequest
+	AddLayerVersionPermissionRequest(*types.AddLayerVersionPermissionInput) lambda.AddLayerVersionPermissionRequest
 
-	AddPermissionRequest(*lambda.AddPermissionInput) lambda.AddPermissionRequest
+	AddPermissionRequest(*types.AddPermissionInput) lambda.AddPermissionRequest
 
-	CreateAliasRequest(*lambda.CreateAliasInput) lambda.CreateAliasRequest
+	CreateAliasRequest(*types.CreateAliasInput) lambda.CreateAliasRequest
 
-	CreateEventSourceMappingRequest(*lambda.CreateEventSourceMappingInput) lambda.CreateEventSourceMappingRequest
+	CreateEventSourceMappingRequest(*types.CreateEventSourceMappingInput) lambda.CreateEventSourceMappingRequest
 
-	CreateFunctionRequest(*lambda.CreateFunctionInput) lambda.CreateFunctionRequest
+	CreateFunctionRequest(*types.CreateFunctionInput) lambda.CreateFunctionRequest
 
-	DeleteAliasRequest(*lambda.DeleteAliasInput) lambda.DeleteAliasRequest
+	DeleteAliasRequest(*types.DeleteAliasInput) lambda.DeleteAliasRequest
 
-	DeleteEventSourceMappingRequest(*lambda.DeleteEventSourceMappingInput) lambda.DeleteEventSourceMappingRequest
+	DeleteEventSourceMappingRequest(*types.DeleteEventSourceMappingInput) lambda.DeleteEventSourceMappingRequest
 
-	DeleteFunctionRequest(*lambda.DeleteFunctionInput) lambda.DeleteFunctionRequest
+	DeleteFunctionRequest(*types.DeleteFunctionInput) lambda.DeleteFunctionRequest
 
-	DeleteFunctionConcurrencyRequest(*lambda.DeleteFunctionConcurrencyInput) lambda.DeleteFunctionConcurrencyRequest
+	DeleteFunctionConcurrencyRequest(*types.DeleteFunctionConcurrencyInput) lambda.DeleteFunctionConcurrencyRequest
 
-	DeleteLayerVersionRequest(*lambda.DeleteLayerVersionInput) lambda.DeleteLayerVersionRequest
+	DeleteLayerVersionRequest(*types.DeleteLayerVersionInput) lambda.DeleteLayerVersionRequest
 
-	GetAccountSettingsRequest(*lambda.GetAccountSettingsInput) lambda.GetAccountSettingsRequest
+	GetAccountSettingsRequest(*types.GetAccountSettingsInput) lambda.GetAccountSettingsRequest
 
-	GetAliasRequest(*lambda.GetAliasInput) lambda.GetAliasRequest
+	GetAliasRequest(*types.GetAliasInput) lambda.GetAliasRequest
 
-	GetEventSourceMappingRequest(*lambda.GetEventSourceMappingInput) lambda.GetEventSourceMappingRequest
+	GetEventSourceMappingRequest(*types.GetEventSourceMappingInput) lambda.GetEventSourceMappingRequest
 
-	GetFunctionRequest(*lambda.GetFunctionInput) lambda.GetFunctionRequest
+	GetFunctionRequest(*types.GetFunctionInput) lambda.GetFunctionRequest
 
-	GetFunctionConfigurationRequest(*lambda.GetFunctionConfigurationInput) lambda.GetFunctionConfigurationRequest
+	GetFunctionConfigurationRequest(*types.GetFunctionConfigurationInput) lambda.GetFunctionConfigurationRequest
 
-	GetLayerVersionRequest(*lambda.GetLayerVersionInput) lambda.GetLayerVersionRequest
+	GetLayerVersionRequest(*types.GetLayerVersionInput) lambda.GetLayerVersionRequest
 
-	GetLayerVersionByArnRequest(*lambda.GetLayerVersionByArnInput) lambda.GetLayerVersionByArnRequest
+	GetLayerVersionByArnRequest(*types.GetLayerVersionByArnInput) lambda.GetLayerVersionByArnRequest
 
-	GetLayerVersionPolicyRequest(*lambda.GetLayerVersionPolicyInput) lambda.GetLayerVersionPolicyRequest
+	GetLayerVersionPolicyRequest(*types.GetLayerVersionPolicyInput) lambda.GetLayerVersionPolicyRequest
 
-	GetPolicyRequest(*lambda.GetPolicyInput) lambda.GetPolicyRequest
+	GetPolicyRequest(*types.GetPolicyInput) lambda.GetPolicyRequest
 
-	InvokeRequest(*lambda.InvokeInput) lambda.InvokeRequest
+	InvokeRequest(*types.InvokeInput) lambda.InvokeRequest
 
-	InvokeAsyncRequest(*lambda.InvokeAsyncInput) lambda.InvokeAsyncRequest
+	InvokeAsyncRequest(*types.InvokeAsyncInput) lambda.InvokeAsyncRequest
 
-	ListAliasesRequest(*lambda.ListAliasesInput) lambda.ListAliasesRequest
+	ListAliasesRequest(*types.ListAliasesInput) lambda.ListAliasesRequest
 
-	ListEventSourceMappingsRequest(*lambda.ListEventSourceMappingsInput) lambda.ListEventSourceMappingsRequest
+	ListEventSourceMappingsRequest(*types.ListEventSourceMappingsInput) lambda.ListEventSourceMappingsRequest
 
-	ListFunctionsRequest(*lambda.ListFunctionsInput) lambda.ListFunctionsRequest
+	ListFunctionsRequest(*types.ListFunctionsInput) lambda.ListFunctionsRequest
 
-	ListLayerVersionsRequest(*lambda.ListLayerVersionsInput) lambda.ListLayerVersionsRequest
+	ListLayerVersionsRequest(*types.ListLayerVersionsInput) lambda.ListLayerVersionsRequest
 
-	ListLayersRequest(*lambda.ListLayersInput) lambda.ListLayersRequest
+	ListLayersRequest(*types.ListLayersInput) lambda.ListLayersRequest
 
-	ListTagsRequest(*lambda.ListTagsInput) lambda.ListTagsRequest
+	ListTagsRequest(*types.ListTagsInput) lambda.ListTagsRequest
 
-	ListVersionsByFunctionRequest(*lambda.ListVersionsByFunctionInput) lambda.ListVersionsByFunctionRequest
+	ListVersionsByFunctionRequest(*types.ListVersionsByFunctionInput) lambda.ListVersionsByFunctionRequest
 
-	PublishLayerVersionRequest(*lambda.PublishLayerVersionInput) lambda.PublishLayerVersionRequest
+	PublishLayerVersionRequest(*types.PublishLayerVersionInput) lambda.PublishLayerVersionRequest
 
-	PublishVersionRequest(*lambda.PublishVersionInput) lambda.PublishVersionRequest
+	PublishVersionRequest(*types.PublishVersionInput) lambda.PublishVersionRequest
 
-	PutFunctionConcurrencyRequest(*lambda.PutFunctionConcurrencyInput) lambda.PutFunctionConcurrencyRequest
+	PutFunctionConcurrencyRequest(*types.PutFunctionConcurrencyInput) lambda.PutFunctionConcurrencyRequest
 
-	RemoveLayerVersionPermissionRequest(*lambda.RemoveLayerVersionPermissionInput) lambda.RemoveLayerVersionPermissionRequest
+	RemoveLayerVersionPermissionRequest(*types.RemoveLayerVersionPermissionInput) lambda.RemoveLayerVersionPermissionRequest
 
-	RemovePermissionRequest(*lambda.RemovePermissionInput) lambda.RemovePermissionRequest
+	RemovePermissionRequest(*types.RemovePermissionInput) lambda.RemovePermissionRequest
 
-	TagResourceRequest(*lambda.TagResourceInput) lambda.TagResourceRequest
+	TagResourceRequest(*types.TagResourceInput) lambda.TagResourceRequest
 
-	UntagResourceRequest(*lambda.UntagResourceInput) lambda.UntagResourceRequest
+	UntagResourceRequest(*types.UntagResourceInput) lambda.UntagResourceRequest
 
-	UpdateAliasRequest(*lambda.UpdateAliasInput) lambda.UpdateAliasRequest
+	UpdateAliasRequest(*types.UpdateAliasInput) lambda.UpdateAliasRequest
 
-	UpdateEventSourceMappingRequest(*lambda.UpdateEventSourceMappingInput) lambda.UpdateEventSourceMappingRequest
+	UpdateEventSourceMappingRequest(*types.UpdateEventSourceMappingInput) lambda.UpdateEventSourceMappingRequest
 
-	UpdateFunctionCodeRequest(*lambda.UpdateFunctionCodeInput) lambda.UpdateFunctionCodeRequest
+	UpdateFunctionCodeRequest(*types.UpdateFunctionCodeInput) lambda.UpdateFunctionCodeRequest
 
-	UpdateFunctionConfigurationRequest(*lambda.UpdateFunctionConfigurationInput) lambda.UpdateFunctionConfigurationRequest
+	UpdateFunctionConfigurationRequest(*types.UpdateFunctionConfigurationInput) lambda.UpdateFunctionConfigurationRequest
 
-	WaitUntilFunctionExists(context.Context, *lambda.GetFunctionInput, ...aws.WaiterOption) error
+	WaitUntilFunctionExists(context.Context, *types.GetFunctionInput, ...aws.WaiterOption) error
 }
 
 var _ ClientAPI = (*lambda.Client)(nil)

@@ -6,47 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
+	"github.com/aws/aws-sdk-go-v2/service/personalize/types"
 )
-
-type DeleteSchemaInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the schema to delete.
-	//
-	// SchemaArn is a required field
-	SchemaArn *string `locationName:"schemaArn" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteSchemaInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteSchemaInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteSchemaInput"}
-
-	if s.SchemaArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("SchemaArn"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteSchemaOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteSchemaOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteSchema = "DeleteSchema"
 
@@ -64,7 +27,7 @@ const opDeleteSchema = "DeleteSchema"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/DeleteSchema
-func (c *Client) DeleteSchemaRequest(input *DeleteSchemaInput) DeleteSchemaRequest {
+func (c *Client) DeleteSchemaRequest(input *types.DeleteSchemaInput) DeleteSchemaRequest {
 	op := &aws.Operation{
 		Name:       opDeleteSchema,
 		HTTPMethod: "POST",
@@ -72,10 +35,10 @@ func (c *Client) DeleteSchemaRequest(input *DeleteSchemaInput) DeleteSchemaReque
 	}
 
 	if input == nil {
-		input = &DeleteSchemaInput{}
+		input = &types.DeleteSchemaInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteSchemaOutput{})
+	req := c.newRequest(op, input, &types.DeleteSchemaOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return DeleteSchemaRequest{Request: req, Input: input, Copy: c.DeleteSchemaRequest}
@@ -85,8 +48,8 @@ func (c *Client) DeleteSchemaRequest(input *DeleteSchemaInput) DeleteSchemaReque
 // DeleteSchema API operation.
 type DeleteSchemaRequest struct {
 	*aws.Request
-	Input *DeleteSchemaInput
-	Copy  func(*DeleteSchemaInput) DeleteSchemaRequest
+	Input *types.DeleteSchemaInput
+	Copy  func(*types.DeleteSchemaInput) DeleteSchemaRequest
 }
 
 // Send marshals and sends the DeleteSchema API request.
@@ -98,7 +61,7 @@ func (r DeleteSchemaRequest) Send(ctx context.Context) (*DeleteSchemaResponse, e
 	}
 
 	resp := &DeleteSchemaResponse{
-		DeleteSchemaOutput: r.Request.Data.(*DeleteSchemaOutput),
+		DeleteSchemaOutput: r.Request.Data.(*types.DeleteSchemaOutput),
 		response:           &aws.Response{Request: r.Request},
 	}
 
@@ -108,7 +71,7 @@ func (r DeleteSchemaRequest) Send(ctx context.Context) (*DeleteSchemaResponse, e
 // DeleteSchemaResponse is the response type for the
 // DeleteSchema API operation.
 type DeleteSchemaResponse struct {
-	*DeleteSchemaOutput
+	*types.DeleteSchemaOutput
 
 	response *aws.Response
 }

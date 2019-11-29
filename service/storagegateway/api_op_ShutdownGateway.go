@@ -6,55 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/storagegateway/types"
 )
-
-// A JSON object containing the of the gateway to shut down.
-type ShutdownGatewayInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation
-	// to return a list of gateways for your account and AWS Region.
-	//
-	// GatewayARN is a required field
-	GatewayARN *string `min:"50" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s ShutdownGatewayInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ShutdownGatewayInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ShutdownGatewayInput"}
-
-	if s.GatewayARN == nil {
-		invalidParams.Add(aws.NewErrParamRequired("GatewayARN"))
-	}
-	if s.GatewayARN != nil && len(*s.GatewayARN) < 50 {
-		invalidParams.Add(aws.NewErrParamMinLen("GatewayARN", 50))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// A JSON object containing the of the gateway that was shut down.
-type ShutdownGatewayOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation
-	// to return a list of gateways for your account and AWS Region.
-	GatewayARN *string `min:"50" type:"string"`
-}
-
-// String returns the string representation
-func (s ShutdownGatewayOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opShutdownGateway = "ShutdownGateway"
 
@@ -91,7 +44,7 @@ const opShutdownGateway = "ShutdownGateway"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/ShutdownGateway
-func (c *Client) ShutdownGatewayRequest(input *ShutdownGatewayInput) ShutdownGatewayRequest {
+func (c *Client) ShutdownGatewayRequest(input *types.ShutdownGatewayInput) ShutdownGatewayRequest {
 	op := &aws.Operation{
 		Name:       opShutdownGateway,
 		HTTPMethod: "POST",
@@ -99,10 +52,10 @@ func (c *Client) ShutdownGatewayRequest(input *ShutdownGatewayInput) ShutdownGat
 	}
 
 	if input == nil {
-		input = &ShutdownGatewayInput{}
+		input = &types.ShutdownGatewayInput{}
 	}
 
-	req := c.newRequest(op, input, &ShutdownGatewayOutput{})
+	req := c.newRequest(op, input, &types.ShutdownGatewayOutput{})
 	return ShutdownGatewayRequest{Request: req, Input: input, Copy: c.ShutdownGatewayRequest}
 }
 
@@ -110,8 +63,8 @@ func (c *Client) ShutdownGatewayRequest(input *ShutdownGatewayInput) ShutdownGat
 // ShutdownGateway API operation.
 type ShutdownGatewayRequest struct {
 	*aws.Request
-	Input *ShutdownGatewayInput
-	Copy  func(*ShutdownGatewayInput) ShutdownGatewayRequest
+	Input *types.ShutdownGatewayInput
+	Copy  func(*types.ShutdownGatewayInput) ShutdownGatewayRequest
 }
 
 // Send marshals and sends the ShutdownGateway API request.
@@ -123,7 +76,7 @@ func (r ShutdownGatewayRequest) Send(ctx context.Context) (*ShutdownGatewayRespo
 	}
 
 	resp := &ShutdownGatewayResponse{
-		ShutdownGatewayOutput: r.Request.Data.(*ShutdownGatewayOutput),
+		ShutdownGatewayOutput: r.Request.Data.(*types.ShutdownGatewayOutput),
 		response:              &aws.Response{Request: r.Request},
 	}
 
@@ -133,7 +86,7 @@ func (r ShutdownGatewayRequest) Send(ctx context.Context) (*ShutdownGatewayRespo
 // ShutdownGatewayResponse is the response type for the
 // ShutdownGateway API operation.
 type ShutdownGatewayResponse struct {
-	*ShutdownGatewayOutput
+	*types.ShutdownGatewayOutput
 
 	response *aws.Response
 }

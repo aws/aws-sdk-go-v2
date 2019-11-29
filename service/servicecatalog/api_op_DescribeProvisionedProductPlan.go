@@ -6,74 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/types"
 )
-
-type DescribeProvisionedProductPlanInput struct {
-	_ struct{} `type:"structure"`
-
-	// The language code.
-	//
-	//    * en - English (default)
-	//
-	//    * jp - Japanese
-	//
-	//    * zh - Chinese
-	AcceptLanguage *string `type:"string"`
-
-	// The maximum number of items to return with this call.
-	PageSize *int64 `type:"integer"`
-
-	// The page token for the next set of results. To retrieve the first set of
-	// results, use null.
-	PageToken *string `type:"string"`
-
-	// The plan identifier.
-	//
-	// PlanId is a required field
-	PlanId *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeProvisionedProductPlanInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeProvisionedProductPlanInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeProvisionedProductPlanInput"}
-
-	if s.PlanId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("PlanId"))
-	}
-	if s.PlanId != nil && len(*s.PlanId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("PlanId", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribeProvisionedProductPlanOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The page token to use to retrieve the next set of results. If there are no
-	// additional results, this value is null.
-	NextPageToken *string `type:"string"`
-
-	// Information about the plan.
-	ProvisionedProductPlanDetails *ProvisionedProductPlanDetails `type:"structure"`
-
-	// Information about the resource changes that will occur when the plan is executed.
-	ResourceChanges []ResourceChange `type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeProvisionedProductPlanOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeProvisionedProductPlan = "DescribeProvisionedProductPlan"
 
@@ -90,7 +24,7 @@ const opDescribeProvisionedProductPlan = "DescribeProvisionedProductPlan"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DescribeProvisionedProductPlan
-func (c *Client) DescribeProvisionedProductPlanRequest(input *DescribeProvisionedProductPlanInput) DescribeProvisionedProductPlanRequest {
+func (c *Client) DescribeProvisionedProductPlanRequest(input *types.DescribeProvisionedProductPlanInput) DescribeProvisionedProductPlanRequest {
 	op := &aws.Operation{
 		Name:       opDescribeProvisionedProductPlan,
 		HTTPMethod: "POST",
@@ -98,10 +32,10 @@ func (c *Client) DescribeProvisionedProductPlanRequest(input *DescribeProvisione
 	}
 
 	if input == nil {
-		input = &DescribeProvisionedProductPlanInput{}
+		input = &types.DescribeProvisionedProductPlanInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeProvisionedProductPlanOutput{})
+	req := c.newRequest(op, input, &types.DescribeProvisionedProductPlanOutput{})
 	return DescribeProvisionedProductPlanRequest{Request: req, Input: input, Copy: c.DescribeProvisionedProductPlanRequest}
 }
 
@@ -109,8 +43,8 @@ func (c *Client) DescribeProvisionedProductPlanRequest(input *DescribeProvisione
 // DescribeProvisionedProductPlan API operation.
 type DescribeProvisionedProductPlanRequest struct {
 	*aws.Request
-	Input *DescribeProvisionedProductPlanInput
-	Copy  func(*DescribeProvisionedProductPlanInput) DescribeProvisionedProductPlanRequest
+	Input *types.DescribeProvisionedProductPlanInput
+	Copy  func(*types.DescribeProvisionedProductPlanInput) DescribeProvisionedProductPlanRequest
 }
 
 // Send marshals and sends the DescribeProvisionedProductPlan API request.
@@ -122,7 +56,7 @@ func (r DescribeProvisionedProductPlanRequest) Send(ctx context.Context) (*Descr
 	}
 
 	resp := &DescribeProvisionedProductPlanResponse{
-		DescribeProvisionedProductPlanOutput: r.Request.Data.(*DescribeProvisionedProductPlanOutput),
+		DescribeProvisionedProductPlanOutput: r.Request.Data.(*types.DescribeProvisionedProductPlanOutput),
 		response:                             &aws.Response{Request: r.Request},
 	}
 
@@ -132,7 +66,7 @@ func (r DescribeProvisionedProductPlanRequest) Send(ctx context.Context) (*Descr
 // DescribeProvisionedProductPlanResponse is the response type for the
 // DescribeProvisionedProductPlan API operation.
 type DescribeProvisionedProductPlanResponse struct {
-	*DescribeProvisionedProductPlanOutput
+	*types.DescribeProvisionedProductPlanOutput
 
 	response *aws.Response
 }

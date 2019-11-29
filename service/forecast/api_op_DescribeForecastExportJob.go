@@ -4,81 +4,10 @@ package forecast
 
 import (
 	"context"
-	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/forecast/types"
 )
-
-type DescribeForecastExportJobInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the forecast export job.
-	//
-	// ForecastExportJobArn is a required field
-	ForecastExportJobArn *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeForecastExportJobInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeForecastExportJobInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeForecastExportJobInput"}
-
-	if s.ForecastExportJobArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ForecastExportJobArn"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribeForecastExportJobOutput struct {
-	_ struct{} `type:"structure"`
-
-	// When the forecast export job was created.
-	CreationTime *time.Time `type:"timestamp"`
-
-	// The path to the AWS S3 bucket where the forecast is exported.
-	Destination *DataDestination `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the exported forecast.
-	ForecastArn *string `type:"string"`
-
-	// The ARN of the forecast export job.
-	ForecastExportJobArn *string `type:"string"`
-
-	// The name of the forecast export job.
-	ForecastExportJobName *string `min:"1" type:"string"`
-
-	// When the last successful export job finished.
-	LastModificationTime *time.Time `type:"timestamp"`
-
-	// If an error occurred, an informational message about the error.
-	Message *string `type:"string"`
-
-	// The status of the forecast export job. One of the following states:
-	//
-	//    * ACTIVE
-	//
-	//    * CREATE_PENDING, CREATE_IN_PROGRESS, CREATE_FAILED
-	//
-	//    * DELETE_PENDING, DELETE_IN_PROGRESS, DELETE_FAILED
-	//
-	// The Status of the forecast export job must be ACTIVE before you can access
-	// the forecast in your Amazon S3 bucket.
-	Status *string `type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeForecastExportJobOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeForecastExportJob = "DescribeForecastExportJob"
 
@@ -107,7 +36,7 @@ const opDescribeForecastExportJob = "DescribeForecastExportJob"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/DescribeForecastExportJob
-func (c *Client) DescribeForecastExportJobRequest(input *DescribeForecastExportJobInput) DescribeForecastExportJobRequest {
+func (c *Client) DescribeForecastExportJobRequest(input *types.DescribeForecastExportJobInput) DescribeForecastExportJobRequest {
 	op := &aws.Operation{
 		Name:       opDescribeForecastExportJob,
 		HTTPMethod: "POST",
@@ -115,10 +44,10 @@ func (c *Client) DescribeForecastExportJobRequest(input *DescribeForecastExportJ
 	}
 
 	if input == nil {
-		input = &DescribeForecastExportJobInput{}
+		input = &types.DescribeForecastExportJobInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeForecastExportJobOutput{})
+	req := c.newRequest(op, input, &types.DescribeForecastExportJobOutput{})
 	return DescribeForecastExportJobRequest{Request: req, Input: input, Copy: c.DescribeForecastExportJobRequest}
 }
 
@@ -126,8 +55,8 @@ func (c *Client) DescribeForecastExportJobRequest(input *DescribeForecastExportJ
 // DescribeForecastExportJob API operation.
 type DescribeForecastExportJobRequest struct {
 	*aws.Request
-	Input *DescribeForecastExportJobInput
-	Copy  func(*DescribeForecastExportJobInput) DescribeForecastExportJobRequest
+	Input *types.DescribeForecastExportJobInput
+	Copy  func(*types.DescribeForecastExportJobInput) DescribeForecastExportJobRequest
 }
 
 // Send marshals and sends the DescribeForecastExportJob API request.
@@ -139,7 +68,7 @@ func (r DescribeForecastExportJobRequest) Send(ctx context.Context) (*DescribeFo
 	}
 
 	resp := &DescribeForecastExportJobResponse{
-		DescribeForecastExportJobOutput: r.Request.Data.(*DescribeForecastExportJobOutput),
+		DescribeForecastExportJobOutput: r.Request.Data.(*types.DescribeForecastExportJobOutput),
 		response:                        &aws.Response{Request: r.Request},
 	}
 
@@ -149,7 +78,7 @@ func (r DescribeForecastExportJobRequest) Send(ctx context.Context) (*DescribeFo
 // DescribeForecastExportJobResponse is the response type for the
 // DescribeForecastExportJob API operation.
 type DescribeForecastExportJobResponse struct {
-	*DescribeForecastExportJobOutput
+	*types.DescribeForecastExportJobOutput
 
 	response *aws.Response
 }

@@ -6,70 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/codestar/types"
 )
-
-type ListTeamMembersInput struct {
-	_ struct{} `type:"structure"`
-
-	// The maximum number of team members you want returned in a response.
-	MaxResults *int64 `locationName:"maxResults" min:"1" type:"integer"`
-
-	// The continuation token for the next set of results, if the results cannot
-	// be returned in one response.
-	NextToken *string `locationName:"nextToken" min:"1" type:"string"`
-
-	// The ID of the project for which you want to list team members.
-	//
-	// ProjectId is a required field
-	ProjectId *string `locationName:"projectId" min:"2" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s ListTeamMembersInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListTeamMembersInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListTeamMembersInput"}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-	if s.NextToken != nil && len(*s.NextToken) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
-	}
-
-	if s.ProjectId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ProjectId"))
-	}
-	if s.ProjectId != nil && len(*s.ProjectId) < 2 {
-		invalidParams.Add(aws.NewErrParamMinLen("ProjectId", 2))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ListTeamMembersOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The continuation token to use when requesting the next set of results, if
-	// there are more results to be returned.
-	NextToken *string `locationName:"nextToken" min:"1" type:"string"`
-
-	// A list of team member objects for the project.
-	//
-	// TeamMembers is a required field
-	TeamMembers []TeamMember `locationName:"teamMembers" type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s ListTeamMembersOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListTeamMembers = "ListTeamMembers"
 
@@ -86,7 +24,7 @@ const opListTeamMembers = "ListTeamMembers"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codestar-2017-04-19/ListTeamMembers
-func (c *Client) ListTeamMembersRequest(input *ListTeamMembersInput) ListTeamMembersRequest {
+func (c *Client) ListTeamMembersRequest(input *types.ListTeamMembersInput) ListTeamMembersRequest {
 	op := &aws.Operation{
 		Name:       opListTeamMembers,
 		HTTPMethod: "POST",
@@ -94,10 +32,10 @@ func (c *Client) ListTeamMembersRequest(input *ListTeamMembersInput) ListTeamMem
 	}
 
 	if input == nil {
-		input = &ListTeamMembersInput{}
+		input = &types.ListTeamMembersInput{}
 	}
 
-	req := c.newRequest(op, input, &ListTeamMembersOutput{})
+	req := c.newRequest(op, input, &types.ListTeamMembersOutput{})
 	return ListTeamMembersRequest{Request: req, Input: input, Copy: c.ListTeamMembersRequest}
 }
 
@@ -105,8 +43,8 @@ func (c *Client) ListTeamMembersRequest(input *ListTeamMembersInput) ListTeamMem
 // ListTeamMembers API operation.
 type ListTeamMembersRequest struct {
 	*aws.Request
-	Input *ListTeamMembersInput
-	Copy  func(*ListTeamMembersInput) ListTeamMembersRequest
+	Input *types.ListTeamMembersInput
+	Copy  func(*types.ListTeamMembersInput) ListTeamMembersRequest
 }
 
 // Send marshals and sends the ListTeamMembers API request.
@@ -118,7 +56,7 @@ func (r ListTeamMembersRequest) Send(ctx context.Context) (*ListTeamMembersRespo
 	}
 
 	resp := &ListTeamMembersResponse{
-		ListTeamMembersOutput: r.Request.Data.(*ListTeamMembersOutput),
+		ListTeamMembersOutput: r.Request.Data.(*types.ListTeamMembersOutput),
 		response:              &aws.Response{Request: r.Request},
 	}
 
@@ -128,7 +66,7 @@ func (r ListTeamMembersRequest) Send(ctx context.Context) (*ListTeamMembersRespo
 // ListTeamMembersResponse is the response type for the
 // ListTeamMembers API operation.
 type ListTeamMembersResponse struct {
-	*ListTeamMembersOutput
+	*types.ListTeamMembersOutput
 
 	response *aws.Response
 }

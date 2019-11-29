@@ -4,94 +4,10 @@ package alexaforbusiness
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/alexaforbusiness/types"
 )
-
-type SendAnnouncementInput struct {
-	_ struct{} `type:"structure"`
-
-	// The unique, user-specified identifier for the request that ensures idempotency.
-	//
-	// ClientRequestToken is a required field
-	ClientRequestToken *string `min:"10" type:"string" required:"true" idempotencyToken:"true"`
-
-	// The announcement content. This can contain only one of the three possible
-	// announcement types (text, SSML or audio).
-	//
-	// Content is a required field
-	Content *Content `type:"structure" required:"true"`
-
-	// The filters to use to send an announcement to a specified list of rooms.
-	// The supported filter keys are RoomName, ProfileName, RoomArn, and ProfileArn.
-	// To send to all rooms, specify an empty RoomFilters list.
-	//
-	// RoomFilters is a required field
-	RoomFilters []Filter `type:"list" required:"true"`
-
-	// The time to live for an announcement. Default is 300. If delivery doesn't
-	// occur within this time, the announcement is not delivered.
-	TimeToLiveInSeconds *int64 `min:"1" type:"integer"`
-}
-
-// String returns the string representation
-func (s SendAnnouncementInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *SendAnnouncementInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "SendAnnouncementInput"}
-
-	if s.ClientRequestToken == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ClientRequestToken"))
-	}
-	if s.ClientRequestToken != nil && len(*s.ClientRequestToken) < 10 {
-		invalidParams.Add(aws.NewErrParamMinLen("ClientRequestToken", 10))
-	}
-
-	if s.Content == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Content"))
-	}
-
-	if s.RoomFilters == nil {
-		invalidParams.Add(aws.NewErrParamRequired("RoomFilters"))
-	}
-	if s.TimeToLiveInSeconds != nil && *s.TimeToLiveInSeconds < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("TimeToLiveInSeconds", 1))
-	}
-	if s.Content != nil {
-		if err := s.Content.Validate(); err != nil {
-			invalidParams.AddNested("Content", err.(aws.ErrInvalidParams))
-		}
-	}
-	if s.RoomFilters != nil {
-		for i, v := range s.RoomFilters {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "RoomFilters", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type SendAnnouncementOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The identifier of the announcement.
-	AnnouncementArn *string `type:"string"`
-}
-
-// String returns the string representation
-func (s SendAnnouncementOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opSendAnnouncement = "SendAnnouncement"
 
@@ -109,7 +25,7 @@ const opSendAnnouncement = "SendAnnouncement"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/SendAnnouncement
-func (c *Client) SendAnnouncementRequest(input *SendAnnouncementInput) SendAnnouncementRequest {
+func (c *Client) SendAnnouncementRequest(input *types.SendAnnouncementInput) SendAnnouncementRequest {
 	op := &aws.Operation{
 		Name:       opSendAnnouncement,
 		HTTPMethod: "POST",
@@ -117,10 +33,10 @@ func (c *Client) SendAnnouncementRequest(input *SendAnnouncementInput) SendAnnou
 	}
 
 	if input == nil {
-		input = &SendAnnouncementInput{}
+		input = &types.SendAnnouncementInput{}
 	}
 
-	req := c.newRequest(op, input, &SendAnnouncementOutput{})
+	req := c.newRequest(op, input, &types.SendAnnouncementOutput{})
 	return SendAnnouncementRequest{Request: req, Input: input, Copy: c.SendAnnouncementRequest}
 }
 
@@ -128,8 +44,8 @@ func (c *Client) SendAnnouncementRequest(input *SendAnnouncementInput) SendAnnou
 // SendAnnouncement API operation.
 type SendAnnouncementRequest struct {
 	*aws.Request
-	Input *SendAnnouncementInput
-	Copy  func(*SendAnnouncementInput) SendAnnouncementRequest
+	Input *types.SendAnnouncementInput
+	Copy  func(*types.SendAnnouncementInput) SendAnnouncementRequest
 }
 
 // Send marshals and sends the SendAnnouncement API request.
@@ -141,7 +57,7 @@ func (r SendAnnouncementRequest) Send(ctx context.Context) (*SendAnnouncementRes
 	}
 
 	resp := &SendAnnouncementResponse{
-		SendAnnouncementOutput: r.Request.Data.(*SendAnnouncementOutput),
+		SendAnnouncementOutput: r.Request.Data.(*types.SendAnnouncementOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -151,7 +67,7 @@ func (r SendAnnouncementRequest) Send(ctx context.Context) (*SendAnnouncementRes
 // SendAnnouncementResponse is the response type for the
 // SendAnnouncement API operation.
 type SendAnnouncementResponse struct {
-	*SendAnnouncementOutput
+	*types.SendAnnouncementOutput
 
 	response *aws.Response
 }

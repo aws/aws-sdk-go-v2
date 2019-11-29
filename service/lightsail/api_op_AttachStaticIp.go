@@ -6,57 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/lightsail/types"
 )
-
-type AttachStaticIpInput struct {
-	_ struct{} `type:"structure"`
-
-	// The instance name to which you want to attach the static IP address.
-	//
-	// InstanceName is a required field
-	InstanceName *string `locationName:"instanceName" type:"string" required:"true"`
-
-	// The name of the static IP.
-	//
-	// StaticIpName is a required field
-	StaticIpName *string `locationName:"staticIpName" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s AttachStaticIpInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *AttachStaticIpInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "AttachStaticIpInput"}
-
-	if s.InstanceName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("InstanceName"))
-	}
-
-	if s.StaticIpName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("StaticIpName"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type AttachStaticIpOutput struct {
-	_ struct{} `type:"structure"`
-
-	// An array of key-value pairs containing information about your API operations.
-	Operations []Operation `locationName:"operations" type:"list"`
-}
-
-// String returns the string representation
-func (s AttachStaticIpOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opAttachStaticIp = "AttachStaticIp"
 
@@ -73,7 +24,7 @@ const opAttachStaticIp = "AttachStaticIp"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/AttachStaticIp
-func (c *Client) AttachStaticIpRequest(input *AttachStaticIpInput) AttachStaticIpRequest {
+func (c *Client) AttachStaticIpRequest(input *types.AttachStaticIpInput) AttachStaticIpRequest {
 	op := &aws.Operation{
 		Name:       opAttachStaticIp,
 		HTTPMethod: "POST",
@@ -81,10 +32,10 @@ func (c *Client) AttachStaticIpRequest(input *AttachStaticIpInput) AttachStaticI
 	}
 
 	if input == nil {
-		input = &AttachStaticIpInput{}
+		input = &types.AttachStaticIpInput{}
 	}
 
-	req := c.newRequest(op, input, &AttachStaticIpOutput{})
+	req := c.newRequest(op, input, &types.AttachStaticIpOutput{})
 	return AttachStaticIpRequest{Request: req, Input: input, Copy: c.AttachStaticIpRequest}
 }
 
@@ -92,8 +43,8 @@ func (c *Client) AttachStaticIpRequest(input *AttachStaticIpInput) AttachStaticI
 // AttachStaticIp API operation.
 type AttachStaticIpRequest struct {
 	*aws.Request
-	Input *AttachStaticIpInput
-	Copy  func(*AttachStaticIpInput) AttachStaticIpRequest
+	Input *types.AttachStaticIpInput
+	Copy  func(*types.AttachStaticIpInput) AttachStaticIpRequest
 }
 
 // Send marshals and sends the AttachStaticIp API request.
@@ -105,7 +56,7 @@ func (r AttachStaticIpRequest) Send(ctx context.Context) (*AttachStaticIpRespons
 	}
 
 	resp := &AttachStaticIpResponse{
-		AttachStaticIpOutput: r.Request.Data.(*AttachStaticIpOutput),
+		AttachStaticIpOutput: r.Request.Data.(*types.AttachStaticIpOutput),
 		response:             &aws.Response{Request: r.Request},
 	}
 
@@ -115,7 +66,7 @@ func (r AttachStaticIpRequest) Send(ctx context.Context) (*AttachStaticIpRespons
 // AttachStaticIpResponse is the response type for the
 // AttachStaticIp API operation.
 type AttachStaticIpResponse struct {
-	*AttachStaticIpOutput
+	*types.AttachStaticIpOutput
 
 	response *aws.Response
 }

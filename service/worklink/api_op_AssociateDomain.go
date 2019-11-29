@@ -6,109 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/worklink/types"
 )
-
-type AssociateDomainInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ARN of an issued ACM certificate that is valid for the domain being associated.
-	//
-	// AcmCertificateArn is a required field
-	AcmCertificateArn *string `type:"string" required:"true"`
-
-	// The name to display.
-	DisplayName *string `type:"string"`
-
-	// The fully qualified domain name (FQDN).
-	//
-	// DomainName is a required field
-	DomainName *string `min:"1" type:"string" required:"true"`
-
-	// The Amazon Resource Name (ARN) of the fleet.
-	//
-	// FleetArn is a required field
-	FleetArn *string `min:"20" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s AssociateDomainInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *AssociateDomainInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "AssociateDomainInput"}
-
-	if s.AcmCertificateArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("AcmCertificateArn"))
-	}
-
-	if s.DomainName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DomainName"))
-	}
-	if s.DomainName != nil && len(*s.DomainName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("DomainName", 1))
-	}
-
-	if s.FleetArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("FleetArn"))
-	}
-	if s.FleetArn != nil && len(*s.FleetArn) < 20 {
-		invalidParams.Add(aws.NewErrParamMinLen("FleetArn", 20))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s AssociateDomainInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.AcmCertificateArn != nil {
-		v := *s.AcmCertificateArn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "AcmCertificateArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.DisplayName != nil {
-		v := *s.DisplayName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "DisplayName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.DomainName != nil {
-		v := *s.DomainName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "DomainName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.FleetArn != nil {
-		v := *s.FleetArn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "FleetArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type AssociateDomainOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s AssociateDomainOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s AssociateDomainOutput) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
 
 const opAssociateDomain = "AssociateDomain"
 
@@ -125,7 +24,7 @@ const opAssociateDomain = "AssociateDomain"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/worklink-2018-09-25/AssociateDomain
-func (c *Client) AssociateDomainRequest(input *AssociateDomainInput) AssociateDomainRequest {
+func (c *Client) AssociateDomainRequest(input *types.AssociateDomainInput) AssociateDomainRequest {
 	op := &aws.Operation{
 		Name:       opAssociateDomain,
 		HTTPMethod: "POST",
@@ -133,10 +32,10 @@ func (c *Client) AssociateDomainRequest(input *AssociateDomainInput) AssociateDo
 	}
 
 	if input == nil {
-		input = &AssociateDomainInput{}
+		input = &types.AssociateDomainInput{}
 	}
 
-	req := c.newRequest(op, input, &AssociateDomainOutput{})
+	req := c.newRequest(op, input, &types.AssociateDomainOutput{})
 	return AssociateDomainRequest{Request: req, Input: input, Copy: c.AssociateDomainRequest}
 }
 
@@ -144,8 +43,8 @@ func (c *Client) AssociateDomainRequest(input *AssociateDomainInput) AssociateDo
 // AssociateDomain API operation.
 type AssociateDomainRequest struct {
 	*aws.Request
-	Input *AssociateDomainInput
-	Copy  func(*AssociateDomainInput) AssociateDomainRequest
+	Input *types.AssociateDomainInput
+	Copy  func(*types.AssociateDomainInput) AssociateDomainRequest
 }
 
 // Send marshals and sends the AssociateDomain API request.
@@ -157,7 +56,7 @@ func (r AssociateDomainRequest) Send(ctx context.Context) (*AssociateDomainRespo
 	}
 
 	resp := &AssociateDomainResponse{
-		AssociateDomainOutput: r.Request.Data.(*AssociateDomainOutput),
+		AssociateDomainOutput: r.Request.Data.(*types.AssociateDomainOutput),
 		response:              &aws.Response{Request: r.Request},
 	}
 
@@ -167,7 +66,7 @@ func (r AssociateDomainRequest) Send(ctx context.Context) (*AssociateDomainRespo
 // AssociateDomainResponse is the response type for the
 // AssociateDomain API operation.
 type AssociateDomainResponse struct {
-	*AssociateDomainOutput
+	*types.AssociateDomainOutput
 
 	response *aws.Response
 }

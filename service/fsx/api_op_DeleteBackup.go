@@ -6,64 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/fsx/types"
 )
-
-// The request object for DeleteBackup operation.
-type DeleteBackupInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the backup you want to delete.
-	//
-	// BackupId is a required field
-	BackupId *string `min:"12" type:"string" required:"true"`
-
-	// (Optional) A string of up to 64 ASCII characters that Amazon FSx uses to
-	// ensure idempotent deletion. This is automatically filled on your behalf when
-	// using the AWS CLI or SDK.
-	ClientRequestToken *string `min:"1" type:"string" idempotencyToken:"true"`
-}
-
-// String returns the string representation
-func (s DeleteBackupInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteBackupInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteBackupInput"}
-
-	if s.BackupId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("BackupId"))
-	}
-	if s.BackupId != nil && len(*s.BackupId) < 12 {
-		invalidParams.Add(aws.NewErrParamMinLen("BackupId", 12))
-	}
-	if s.ClientRequestToken != nil && len(*s.ClientRequestToken) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ClientRequestToken", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// The response object for DeleteBackup operation.
-type DeleteBackupOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the backup deleted.
-	BackupId *string `min:"12" type:"string"`
-
-	// The lifecycle of the backup. Should be DELETED.
-	Lifecycle BackupLifecycle `type:"string" enum:"true"`
-}
-
-// String returns the string representation
-func (s DeleteBackupOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteBackup = "DeleteBackup"
 
@@ -87,7 +31,7 @@ const opDeleteBackup = "DeleteBackup"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/DeleteBackup
-func (c *Client) DeleteBackupRequest(input *DeleteBackupInput) DeleteBackupRequest {
+func (c *Client) DeleteBackupRequest(input *types.DeleteBackupInput) DeleteBackupRequest {
 	op := &aws.Operation{
 		Name:       opDeleteBackup,
 		HTTPMethod: "POST",
@@ -95,10 +39,10 @@ func (c *Client) DeleteBackupRequest(input *DeleteBackupInput) DeleteBackupReque
 	}
 
 	if input == nil {
-		input = &DeleteBackupInput{}
+		input = &types.DeleteBackupInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteBackupOutput{})
+	req := c.newRequest(op, input, &types.DeleteBackupOutput{})
 	return DeleteBackupRequest{Request: req, Input: input, Copy: c.DeleteBackupRequest}
 }
 
@@ -106,8 +50,8 @@ func (c *Client) DeleteBackupRequest(input *DeleteBackupInput) DeleteBackupReque
 // DeleteBackup API operation.
 type DeleteBackupRequest struct {
 	*aws.Request
-	Input *DeleteBackupInput
-	Copy  func(*DeleteBackupInput) DeleteBackupRequest
+	Input *types.DeleteBackupInput
+	Copy  func(*types.DeleteBackupInput) DeleteBackupRequest
 }
 
 // Send marshals and sends the DeleteBackup API request.
@@ -119,7 +63,7 @@ func (r DeleteBackupRequest) Send(ctx context.Context) (*DeleteBackupResponse, e
 	}
 
 	resp := &DeleteBackupResponse{
-		DeleteBackupOutput: r.Request.Data.(*DeleteBackupOutput),
+		DeleteBackupOutput: r.Request.Data.(*types.DeleteBackupOutput),
 		response:           &aws.Response{Request: r.Request},
 	}
 
@@ -129,7 +73,7 @@ func (r DeleteBackupRequest) Send(ctx context.Context) (*DeleteBackupResponse, e
 // DeleteBackupResponse is the response type for the
 // DeleteBackup API operation.
 type DeleteBackupResponse struct {
-	*DeleteBackupOutput
+	*types.DeleteBackupOutput
 
 	response *aws.Response
 }

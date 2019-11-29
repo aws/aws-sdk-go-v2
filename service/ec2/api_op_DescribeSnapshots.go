@@ -6,107 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-type DescribeSnapshotsInput struct {
-	_ struct{} `type:"structure"`
-
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have
-	// the required permissions, the error response is DryRunOperation. Otherwise,
-	// it is UnauthorizedOperation.
-	DryRun *bool `locationName:"dryRun" type:"boolean"`
-
-	// The filters.
-	//
-	//    * description - A description of the snapshot.
-	//
-	//    * encrypted - Indicates whether the snapshot is encrypted (true | false)
-	//
-	//    * owner-alias - Value from an Amazon-maintained list (amazon | self |
-	//    all | aws-marketplace | microsoft) of snapshot owners. Not to be confused
-	//    with the user-configured AWS account alias, which is set from the IAM
-	//    console.
-	//
-	//    * owner-id - The ID of the AWS account that owns the snapshot.
-	//
-	//    * progress - The progress of the snapshot, as a percentage (for example,
-	//    80%).
-	//
-	//    * snapshot-id - The snapshot ID.
-	//
-	//    * start-time - The time stamp when the snapshot was initiated.
-	//
-	//    * status - The status of the snapshot (pending | completed | error).
-	//
-	//    * tag:<key> - The key/value combination of a tag assigned to the resource.
-	//    Use the tag key in the filter name and the tag value as the filter value.
-	//    For example, to find all resources that have a tag with the key Owner
-	//    and the value TeamA, specify tag:Owner for the filter name and TeamA for
-	//    the filter value.
-	//
-	//    * tag-key - The key of a tag assigned to the resource. Use this filter
-	//    to find all resources assigned a tag with a specific key, regardless of
-	//    the tag value.
-	//
-	//    * volume-id - The ID of the volume the snapshot is for.
-	//
-	//    * volume-size - The size of the volume, in GiB.
-	Filters []Filter `locationName:"Filter" locationNameList:"Filter" type:"list"`
-
-	// The maximum number of snapshot results returned by DescribeSnapshots in paginated
-	// output. When this parameter is used, DescribeSnapshots only returns MaxResults
-	// results in a single page along with a NextToken response element. The remaining
-	// results of the initial request can be seen by sending another DescribeSnapshots
-	// request with the returned NextToken value. This value can be between 5 and
-	// 1000; if MaxResults is given a value larger than 1000, only 1000 results
-	// are returned. If this parameter is not used, then DescribeSnapshots returns
-	// all results. You cannot specify this parameter and the snapshot IDs parameter
-	// in the same request.
-	MaxResults *int64 `type:"integer"`
-
-	// The NextToken value returned from a previous paginated DescribeSnapshots
-	// request where MaxResults was used and the results exceeded the value of that
-	// parameter. Pagination continues from the end of the previous results that
-	// returned the NextToken value. This value is null when there are no more results
-	// to return.
-	NextToken *string `type:"string"`
-
-	// Describes the snapshots owned by these owners.
-	OwnerIds []string `locationName:"Owner" locationNameList:"Owner" type:"list"`
-
-	// The IDs of the AWS accounts that can create volumes from the snapshot.
-	RestorableByUserIds []string `locationName:"RestorableBy" type:"list"`
-
-	// The snapshot IDs.
-	//
-	// Default: Describes the snapshots for which you have create volume permissions.
-	SnapshotIds []string `locationName:"SnapshotId" locationNameList:"SnapshotId" type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeSnapshotsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type DescribeSnapshotsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The NextToken value to include in a future DescribeSnapshots request. When
-	// the results of a DescribeSnapshots request exceed MaxResults, this value
-	// can be used to retrieve the next page of results. This value is null when
-	// there are no more results to return.
-	NextToken *string `locationName:"nextToken" type:"string"`
-
-	// Information about the snapshots.
-	Snapshots []Snapshot `locationName:"snapshotSet" locationNameList:"item" type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeSnapshotsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeSnapshots = "DescribeSnapshots"
 
@@ -170,7 +71,7 @@ const opDescribeSnapshots = "DescribeSnapshots"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeSnapshots
-func (c *Client) DescribeSnapshotsRequest(input *DescribeSnapshotsInput) DescribeSnapshotsRequest {
+func (c *Client) DescribeSnapshotsRequest(input *types.DescribeSnapshotsInput) DescribeSnapshotsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeSnapshots,
 		HTTPMethod: "POST",
@@ -184,10 +85,10 @@ func (c *Client) DescribeSnapshotsRequest(input *DescribeSnapshotsInput) Describ
 	}
 
 	if input == nil {
-		input = &DescribeSnapshotsInput{}
+		input = &types.DescribeSnapshotsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeSnapshotsOutput{})
+	req := c.newRequest(op, input, &types.DescribeSnapshotsOutput{})
 	return DescribeSnapshotsRequest{Request: req, Input: input, Copy: c.DescribeSnapshotsRequest}
 }
 
@@ -195,8 +96,8 @@ func (c *Client) DescribeSnapshotsRequest(input *DescribeSnapshotsInput) Describ
 // DescribeSnapshots API operation.
 type DescribeSnapshotsRequest struct {
 	*aws.Request
-	Input *DescribeSnapshotsInput
-	Copy  func(*DescribeSnapshotsInput) DescribeSnapshotsRequest
+	Input *types.DescribeSnapshotsInput
+	Copy  func(*types.DescribeSnapshotsInput) DescribeSnapshotsRequest
 }
 
 // Send marshals and sends the DescribeSnapshots API request.
@@ -208,7 +109,7 @@ func (r DescribeSnapshotsRequest) Send(ctx context.Context) (*DescribeSnapshotsR
 	}
 
 	resp := &DescribeSnapshotsResponse{
-		DescribeSnapshotsOutput: r.Request.Data.(*DescribeSnapshotsOutput),
+		DescribeSnapshotsOutput: r.Request.Data.(*types.DescribeSnapshotsOutput),
 		response:                &aws.Response{Request: r.Request},
 	}
 
@@ -238,7 +139,7 @@ func NewDescribeSnapshotsPaginator(req DescribeSnapshotsRequest) DescribeSnapsho
 	return DescribeSnapshotsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *DescribeSnapshotsInput
+				var inCpy *types.DescribeSnapshotsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -258,14 +159,14 @@ type DescribeSnapshotsPaginator struct {
 	aws.Pager
 }
 
-func (p *DescribeSnapshotsPaginator) CurrentPage() *DescribeSnapshotsOutput {
-	return p.Pager.CurrentPage().(*DescribeSnapshotsOutput)
+func (p *DescribeSnapshotsPaginator) CurrentPage() *types.DescribeSnapshotsOutput {
+	return p.Pager.CurrentPage().(*types.DescribeSnapshotsOutput)
 }
 
 // DescribeSnapshotsResponse is the response type for the
 // DescribeSnapshots API operation.
 type DescribeSnapshotsResponse struct {
-	*DescribeSnapshotsOutput
+	*types.DescribeSnapshotsOutput
 
 	response *aws.Response
 }

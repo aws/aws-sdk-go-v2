@@ -10,6 +10,7 @@ package codebuildiface
 
 import (
 	"github.com/aws/aws-sdk-go-v2/service/codebuild"
+	"github.com/aws/aws-sdk-go-v2/service/codebuild/types"
 )
 
 // ClientAPI provides an interface to enable mocking the
@@ -43,7 +44,7 @@ import (
 //    type mockClientClient struct {
 //        codebuildiface.ClientPI
 //    }
-//    func (m *mockClientClient) BatchDeleteBuilds(input *codebuild.BatchDeleteBuildsInput) (*codebuild.BatchDeleteBuildsOutput, error) {
+//    func (m *mockClientClient) BatchDeleteBuilds(input *types.BatchDeleteBuildsInput) (*types.BatchDeleteBuildsOutput, error) {
 //        // mock response/functionality
 //    }
 //
@@ -61,43 +62,43 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type ClientAPI interface {
-	BatchDeleteBuildsRequest(*codebuild.BatchDeleteBuildsInput) codebuild.BatchDeleteBuildsRequest
+	BatchDeleteBuildsRequest(*types.BatchDeleteBuildsInput) codebuild.BatchDeleteBuildsRequest
 
-	BatchGetBuildsRequest(*codebuild.BatchGetBuildsInput) codebuild.BatchGetBuildsRequest
+	BatchGetBuildsRequest(*types.BatchGetBuildsInput) codebuild.BatchGetBuildsRequest
 
-	BatchGetProjectsRequest(*codebuild.BatchGetProjectsInput) codebuild.BatchGetProjectsRequest
+	BatchGetProjectsRequest(*types.BatchGetProjectsInput) codebuild.BatchGetProjectsRequest
 
-	CreateProjectRequest(*codebuild.CreateProjectInput) codebuild.CreateProjectRequest
+	CreateProjectRequest(*types.CreateProjectInput) codebuild.CreateProjectRequest
 
-	CreateWebhookRequest(*codebuild.CreateWebhookInput) codebuild.CreateWebhookRequest
+	CreateWebhookRequest(*types.CreateWebhookInput) codebuild.CreateWebhookRequest
 
-	DeleteProjectRequest(*codebuild.DeleteProjectInput) codebuild.DeleteProjectRequest
+	DeleteProjectRequest(*types.DeleteProjectInput) codebuild.DeleteProjectRequest
 
-	DeleteSourceCredentialsRequest(*codebuild.DeleteSourceCredentialsInput) codebuild.DeleteSourceCredentialsRequest
+	DeleteSourceCredentialsRequest(*types.DeleteSourceCredentialsInput) codebuild.DeleteSourceCredentialsRequest
 
-	DeleteWebhookRequest(*codebuild.DeleteWebhookInput) codebuild.DeleteWebhookRequest
+	DeleteWebhookRequest(*types.DeleteWebhookInput) codebuild.DeleteWebhookRequest
 
-	ImportSourceCredentialsRequest(*codebuild.ImportSourceCredentialsInput) codebuild.ImportSourceCredentialsRequest
+	ImportSourceCredentialsRequest(*types.ImportSourceCredentialsInput) codebuild.ImportSourceCredentialsRequest
 
-	InvalidateProjectCacheRequest(*codebuild.InvalidateProjectCacheInput) codebuild.InvalidateProjectCacheRequest
+	InvalidateProjectCacheRequest(*types.InvalidateProjectCacheInput) codebuild.InvalidateProjectCacheRequest
 
-	ListBuildsRequest(*codebuild.ListBuildsInput) codebuild.ListBuildsRequest
+	ListBuildsRequest(*types.ListBuildsInput) codebuild.ListBuildsRequest
 
-	ListBuildsForProjectRequest(*codebuild.ListBuildsForProjectInput) codebuild.ListBuildsForProjectRequest
+	ListBuildsForProjectRequest(*types.ListBuildsForProjectInput) codebuild.ListBuildsForProjectRequest
 
-	ListCuratedEnvironmentImagesRequest(*codebuild.ListCuratedEnvironmentImagesInput) codebuild.ListCuratedEnvironmentImagesRequest
+	ListCuratedEnvironmentImagesRequest(*types.ListCuratedEnvironmentImagesInput) codebuild.ListCuratedEnvironmentImagesRequest
 
-	ListProjectsRequest(*codebuild.ListProjectsInput) codebuild.ListProjectsRequest
+	ListProjectsRequest(*types.ListProjectsInput) codebuild.ListProjectsRequest
 
-	ListSourceCredentialsRequest(*codebuild.ListSourceCredentialsInput) codebuild.ListSourceCredentialsRequest
+	ListSourceCredentialsRequest(*types.ListSourceCredentialsInput) codebuild.ListSourceCredentialsRequest
 
-	StartBuildRequest(*codebuild.StartBuildInput) codebuild.StartBuildRequest
+	StartBuildRequest(*types.StartBuildInput) codebuild.StartBuildRequest
 
-	StopBuildRequest(*codebuild.StopBuildInput) codebuild.StopBuildRequest
+	StopBuildRequest(*types.StopBuildInput) codebuild.StopBuildRequest
 
-	UpdateProjectRequest(*codebuild.UpdateProjectInput) codebuild.UpdateProjectRequest
+	UpdateProjectRequest(*types.UpdateProjectInput) codebuild.UpdateProjectRequest
 
-	UpdateWebhookRequest(*codebuild.UpdateWebhookInput) codebuild.UpdateWebhookRequest
+	UpdateWebhookRequest(*types.UpdateWebhookInput) codebuild.UpdateWebhookRequest
 }
 
 var _ ClientAPI = (*codebuild.Client)(nil)

@@ -6,60 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/alexaforbusiness/types"
 )
-
-type DeleteRoomSkillParameterInput struct {
-	_ struct{} `type:"structure"`
-
-	// The room skill parameter key for which to remove details.
-	//
-	// ParameterKey is a required field
-	ParameterKey *string `min:"1" type:"string" required:"true"`
-
-	// The ARN of the room from which to remove the room skill parameter details.
-	RoomArn *string `type:"string"`
-
-	// The ID of the skill from which to remove the room skill parameter details.
-	//
-	// SkillId is a required field
-	SkillId *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteRoomSkillParameterInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteRoomSkillParameterInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteRoomSkillParameterInput"}
-
-	if s.ParameterKey == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ParameterKey"))
-	}
-	if s.ParameterKey != nil && len(*s.ParameterKey) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ParameterKey", 1))
-	}
-
-	if s.SkillId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("SkillId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteRoomSkillParameterOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteRoomSkillParameterOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteRoomSkillParameter = "DeleteRoomSkillParameter"
 
@@ -76,7 +24,7 @@ const opDeleteRoomSkillParameter = "DeleteRoomSkillParameter"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/DeleteRoomSkillParameter
-func (c *Client) DeleteRoomSkillParameterRequest(input *DeleteRoomSkillParameterInput) DeleteRoomSkillParameterRequest {
+func (c *Client) DeleteRoomSkillParameterRequest(input *types.DeleteRoomSkillParameterInput) DeleteRoomSkillParameterRequest {
 	op := &aws.Operation{
 		Name:       opDeleteRoomSkillParameter,
 		HTTPMethod: "POST",
@@ -84,10 +32,10 @@ func (c *Client) DeleteRoomSkillParameterRequest(input *DeleteRoomSkillParameter
 	}
 
 	if input == nil {
-		input = &DeleteRoomSkillParameterInput{}
+		input = &types.DeleteRoomSkillParameterInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteRoomSkillParameterOutput{})
+	req := c.newRequest(op, input, &types.DeleteRoomSkillParameterOutput{})
 	return DeleteRoomSkillParameterRequest{Request: req, Input: input, Copy: c.DeleteRoomSkillParameterRequest}
 }
 
@@ -95,8 +43,8 @@ func (c *Client) DeleteRoomSkillParameterRequest(input *DeleteRoomSkillParameter
 // DeleteRoomSkillParameter API operation.
 type DeleteRoomSkillParameterRequest struct {
 	*aws.Request
-	Input *DeleteRoomSkillParameterInput
-	Copy  func(*DeleteRoomSkillParameterInput) DeleteRoomSkillParameterRequest
+	Input *types.DeleteRoomSkillParameterInput
+	Copy  func(*types.DeleteRoomSkillParameterInput) DeleteRoomSkillParameterRequest
 }
 
 // Send marshals and sends the DeleteRoomSkillParameter API request.
@@ -108,7 +56,7 @@ func (r DeleteRoomSkillParameterRequest) Send(ctx context.Context) (*DeleteRoomS
 	}
 
 	resp := &DeleteRoomSkillParameterResponse{
-		DeleteRoomSkillParameterOutput: r.Request.Data.(*DeleteRoomSkillParameterOutput),
+		DeleteRoomSkillParameterOutput: r.Request.Data.(*types.DeleteRoomSkillParameterOutput),
 		response:                       &aws.Response{Request: r.Request},
 	}
 
@@ -118,7 +66,7 @@ func (r DeleteRoomSkillParameterRequest) Send(ctx context.Context) (*DeleteRoomS
 // DeleteRoomSkillParameterResponse is the response type for the
 // DeleteRoomSkillParameter API operation.
 type DeleteRoomSkillParameterResponse struct {
-	*DeleteRoomSkillParameterOutput
+	*types.DeleteRoomSkillParameterOutput
 
 	response *aws.Response
 }

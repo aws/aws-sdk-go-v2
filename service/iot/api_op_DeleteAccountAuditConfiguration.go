@@ -6,48 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/iot/types"
 )
-
-type DeleteAccountAuditConfigurationInput struct {
-	_ struct{} `type:"structure"`
-
-	// If true, all scheduled audits are deleted.
-	DeleteScheduledAudits *bool `location:"querystring" locationName:"deleteScheduledAudits" type:"boolean"`
-}
-
-// String returns the string representation
-func (s DeleteAccountAuditConfigurationInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteAccountAuditConfigurationInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.DeleteScheduledAudits != nil {
-		v := *s.DeleteScheduledAudits
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "deleteScheduledAudits", protocol.BoolValue(v), metadata)
-	}
-	return nil
-}
-
-type DeleteAccountAuditConfigurationOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteAccountAuditConfigurationOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteAccountAuditConfigurationOutput) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
 
 const opDeleteAccountAuditConfiguration = "DeleteAccountAuditConfiguration"
 
@@ -64,7 +24,7 @@ const opDeleteAccountAuditConfiguration = "DeleteAccountAuditConfiguration"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) DeleteAccountAuditConfigurationRequest(input *DeleteAccountAuditConfigurationInput) DeleteAccountAuditConfigurationRequest {
+func (c *Client) DeleteAccountAuditConfigurationRequest(input *types.DeleteAccountAuditConfigurationInput) DeleteAccountAuditConfigurationRequest {
 	op := &aws.Operation{
 		Name:       opDeleteAccountAuditConfiguration,
 		HTTPMethod: "DELETE",
@@ -72,10 +32,10 @@ func (c *Client) DeleteAccountAuditConfigurationRequest(input *DeleteAccountAudi
 	}
 
 	if input == nil {
-		input = &DeleteAccountAuditConfigurationInput{}
+		input = &types.DeleteAccountAuditConfigurationInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteAccountAuditConfigurationOutput{})
+	req := c.newRequest(op, input, &types.DeleteAccountAuditConfigurationOutput{})
 	return DeleteAccountAuditConfigurationRequest{Request: req, Input: input, Copy: c.DeleteAccountAuditConfigurationRequest}
 }
 
@@ -83,8 +43,8 @@ func (c *Client) DeleteAccountAuditConfigurationRequest(input *DeleteAccountAudi
 // DeleteAccountAuditConfiguration API operation.
 type DeleteAccountAuditConfigurationRequest struct {
 	*aws.Request
-	Input *DeleteAccountAuditConfigurationInput
-	Copy  func(*DeleteAccountAuditConfigurationInput) DeleteAccountAuditConfigurationRequest
+	Input *types.DeleteAccountAuditConfigurationInput
+	Copy  func(*types.DeleteAccountAuditConfigurationInput) DeleteAccountAuditConfigurationRequest
 }
 
 // Send marshals and sends the DeleteAccountAuditConfiguration API request.
@@ -96,7 +56,7 @@ func (r DeleteAccountAuditConfigurationRequest) Send(ctx context.Context) (*Dele
 	}
 
 	resp := &DeleteAccountAuditConfigurationResponse{
-		DeleteAccountAuditConfigurationOutput: r.Request.Data.(*DeleteAccountAuditConfigurationOutput),
+		DeleteAccountAuditConfigurationOutput: r.Request.Data.(*types.DeleteAccountAuditConfigurationOutput),
 		response:                              &aws.Response{Request: r.Request},
 	}
 
@@ -106,7 +66,7 @@ func (r DeleteAccountAuditConfigurationRequest) Send(ctx context.Context) (*Dele
 // DeleteAccountAuditConfigurationResponse is the response type for the
 // DeleteAccountAuditConfiguration API operation.
 type DeleteAccountAuditConfigurationResponse struct {
-	*DeleteAccountAuditConfigurationOutput
+	*types.DeleteAccountAuditConfigurationOutput
 
 	response *aws.Response
 }

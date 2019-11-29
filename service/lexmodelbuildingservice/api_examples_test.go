@@ -12,6 +12,8 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws/awserr"
 	"github.com/aws/aws-sdk-go-v2/aws/external"
 	"github.com/aws/aws-sdk-go-v2/service/lexmodelbuildingservice"
+	"github.com/aws/aws-sdk-go-v2/service/lexmodelbuildingservice/enums"
+	"github.com/aws/aws-sdk-go-v2/service/lexmodelbuildingservice/types"
 )
 
 var _ time.Duration
@@ -36,7 +38,7 @@ func ExampleClient_GetBotRequest_shared00() {
 	}
 
 	svc := lexmodelbuildingservice.New(cfg)
-	input := &lexmodelbuildingservice.GetBotInput{
+	input := &types.GetBotInput{
 		Name:           aws.String("DocOrderPizza"),
 		VersionOrAlias: aws.String("$LATEST"),
 	}
@@ -78,7 +80,7 @@ func ExampleClient_GetBotsRequest_shared00() {
 	}
 
 	svc := lexmodelbuildingservice.New(cfg)
-	input := &lexmodelbuildingservice.GetBotsInput{
+	input := &types.GetBotsInput{
 		MaxResults: aws.Int64(5),
 		NextToken:  aws.String(""),
 	}
@@ -120,7 +122,7 @@ func ExampleClient_GetIntentRequest_shared00() {
 	}
 
 	svc := lexmodelbuildingservice.New(cfg)
-	input := &lexmodelbuildingservice.GetIntentInput{
+	input := &types.GetIntentInput{
 		Name:    aws.String("DocOrderPizza"),
 		Version: aws.String("$LATEST"),
 	}
@@ -162,7 +164,7 @@ func ExampleClient_GetIntentsRequest_shared00() {
 	}
 
 	svc := lexmodelbuildingservice.New(cfg)
-	input := &lexmodelbuildingservice.GetIntentsInput{
+	input := &types.GetIntentsInput{
 		MaxResults: aws.Int64(10),
 		NextToken:  aws.String(""),
 	}
@@ -204,7 +206,7 @@ func ExampleClient_GetSlotTypeRequest_shared00() {
 	}
 
 	svc := lexmodelbuildingservice.New(cfg)
-	input := &lexmodelbuildingservice.GetSlotTypeInput{
+	input := &types.GetSlotTypeInput{
 		Name:    aws.String("DocPizzaCrustType"),
 		Version: aws.String("$LATEST"),
 	}
@@ -246,7 +248,7 @@ func ExampleClient_GetSlotTypesRequest_shared00() {
 	}
 
 	svc := lexmodelbuildingservice.New(cfg)
-	input := &lexmodelbuildingservice.GetSlotTypesInput{
+	input := &types.GetSlotTypesInput{
 		MaxResults: aws.Int64(10),
 		NextToken:  aws.String(""),
 	}
@@ -288,44 +290,44 @@ func ExampleClient_PutBotRequest_shared00() {
 	}
 
 	svc := lexmodelbuildingservice.New(cfg)
-	input := &lexmodelbuildingservice.PutBotInput{
-		AbortStatement: &lexmodelbuildingservice.Statement{
-			Messages: []lexmodelbuildingservice.Message{
+	input := &types.PutBotInput{
+		AbortStatement: &types.Statement{
+			Messages: []types.Message{
 				{
 					Content:     aws.String("I don't understand. Can you try again?"),
-					ContentType: lexmodelbuildingservice.ContentTypePlainText,
+					ContentType: enums.ContentTypePlainText,
 				},
 				{
 					Content:     aws.String("I'm sorry, I don't understand."),
-					ContentType: lexmodelbuildingservice.ContentTypePlainText,
+					ContentType: enums.ContentTypePlainText,
 				},
 			},
 		},
 		ChildDirected: aws.Bool(true),
-		ClarificationPrompt: &lexmodelbuildingservice.Prompt{
+		ClarificationPrompt: &types.Prompt{
 			MaxAttempts: aws.Int64(1),
-			Messages: []lexmodelbuildingservice.Message{
+			Messages: []types.Message{
 				{
 					Content:     aws.String("I'm sorry, I didn't hear that. Can you repeate what you just said?"),
-					ContentType: lexmodelbuildingservice.ContentTypePlainText,
+					ContentType: enums.ContentTypePlainText,
 				},
 				{
 					Content:     aws.String("Can you say that again?"),
-					ContentType: lexmodelbuildingservice.ContentTypePlainText,
+					ContentType: enums.ContentTypePlainText,
 				},
 			},
 		},
 		Description:             aws.String("Orders a pizza from a local pizzeria."),
 		IdleSessionTTLInSeconds: aws.Int64(300),
-		Intents: []lexmodelbuildingservice.Intent{
+		Intents: []types.Intent{
 			{
 				IntentName:    aws.String("DocOrderPizza"),
 				IntentVersion: aws.String("$LATEST"),
 			},
 		},
-		Locale:          lexmodelbuildingservice.LocaleEnUs,
+		Locale:          enums.LocaleEnUs,
 		Name:            aws.String("DocOrderPizzaBot"),
-		ProcessBehavior: lexmodelbuildingservice.ProcessBehaviorSave,
+		ProcessBehavior: enums.ProcessBehaviorSave,
 	}
 
 	req := svc.PutBotRequest(input)
@@ -367,43 +369,43 @@ func ExampleClient_PutIntentRequest_shared00() {
 	}
 
 	svc := lexmodelbuildingservice.New(cfg)
-	input := &lexmodelbuildingservice.PutIntentInput{
-		ConclusionStatement: &lexmodelbuildingservice.Statement{
-			Messages: []lexmodelbuildingservice.Message{
+	input := &types.PutIntentInput{
+		ConclusionStatement: &types.Statement{
+			Messages: []types.Message{
 				{
 					Content:     aws.String("All right, I ordered  you a {Crust} crust {Type} pizza with {Sauce} sauce."),
-					ContentType: lexmodelbuildingservice.ContentTypePlainText,
+					ContentType: enums.ContentTypePlainText,
 				},
 				{
 					Content:     aws.String("OK, your {Crust} crust {Type} pizza with {Sauce} sauce is on the way."),
-					ContentType: lexmodelbuildingservice.ContentTypePlainText,
+					ContentType: enums.ContentTypePlainText,
 				},
 			},
 			ResponseCard: aws.String("foo"),
 		},
-		ConfirmationPrompt: &lexmodelbuildingservice.Prompt{
+		ConfirmationPrompt: &types.Prompt{
 			MaxAttempts: aws.Int64(1),
-			Messages: []lexmodelbuildingservice.Message{
+			Messages: []types.Message{
 				{
 					Content:     aws.String("Should I order  your {Crust} crust {Type} pizza with {Sauce} sauce?"),
-					ContentType: lexmodelbuildingservice.ContentTypePlainText,
+					ContentType: enums.ContentTypePlainText,
 				},
 			},
 		},
 		Description: aws.String("Order a pizza from a local pizzeria."),
-		FulfillmentActivity: &lexmodelbuildingservice.FulfillmentActivity{
-			Type: lexmodelbuildingservice.FulfillmentActivityTypeReturnIntent,
+		FulfillmentActivity: &types.FulfillmentActivity{
+			Type: enums.FulfillmentActivityTypeReturnIntent,
 		},
 		Name: aws.String("DocOrderPizza"),
-		RejectionStatement: &lexmodelbuildingservice.Statement{
-			Messages: []lexmodelbuildingservice.Message{
+		RejectionStatement: &types.Statement{
+			Messages: []types.Message{
 				{
 					Content:     aws.String("Ok, I'll cancel your order."),
-					ContentType: lexmodelbuildingservice.ContentTypePlainText,
+					ContentType: enums.ContentTypePlainText,
 				},
 				{
 					Content:     aws.String("I cancelled your order."),
-					ContentType: lexmodelbuildingservice.ContentTypePlainText,
+					ContentType: enums.ContentTypePlainText,
 				},
 			},
 		},
@@ -413,7 +415,7 @@ func ExampleClient_PutIntentRequest_shared00() {
 			"I want a {Crust} crust {Type} pizza",
 			"I want a {Crust} crust {Type} pizza with {Sauce} sauce.",
 		},
-		Slots: []lexmodelbuildingservice.Slot{
+		Slots: []types.Slot{
 			{
 				Description: aws.String("The type of pizza to order."),
 				Name:        aws.String("Type"),
@@ -423,7 +425,7 @@ func ExampleClient_PutIntentRequest_shared00() {
 					"A {Type} pizza please.",
 					"I'd like a {Type} pizza.",
 				},
-				SlotConstraint:  lexmodelbuildingservice.SlotConstraintRequired,
+				SlotConstraint:  enums.SlotConstraintRequired,
 				SlotType:        aws.String("DocPizzaType"),
 				SlotTypeVersion: aws.String("$LATEST"),
 			},
@@ -435,7 +437,7 @@ func ExampleClient_PutIntentRequest_shared00() {
 					"Make it a {Crust} crust.",
 					"I'd like a {Crust} crust.",
 				},
-				SlotConstraint:  lexmodelbuildingservice.SlotConstraintRequired,
+				SlotConstraint:  enums.SlotConstraintRequired,
 				SlotType:        aws.String("DocPizzaCrustType"),
 				SlotTypeVersion: aws.String("$LATEST"),
 			},
@@ -447,7 +449,7 @@ func ExampleClient_PutIntentRequest_shared00() {
 					"Make it {Sauce} sauce.",
 					"I'd like {Sauce} sauce.",
 				},
-				SlotConstraint:  lexmodelbuildingservice.SlotConstraintRequired,
+				SlotConstraint:  enums.SlotConstraintRequired,
 				SlotType:        aws.String("DocPizzaSauceType"),
 				SlotTypeVersion: aws.String("$LATEST"),
 			},
@@ -493,9 +495,9 @@ func ExampleClient_PutSlotTypeRequest_shared00() {
 	}
 
 	svc := lexmodelbuildingservice.New(cfg)
-	input := &lexmodelbuildingservice.PutSlotTypeInput{
+	input := &types.PutSlotTypeInput{
 		Description: aws.String("Available pizza sauces"),
-		EnumerationValues: []lexmodelbuildingservice.EnumerationValue{
+		EnumerationValues: []types.EnumerationValue{
 			{
 				Value: aws.String("red"),
 			},

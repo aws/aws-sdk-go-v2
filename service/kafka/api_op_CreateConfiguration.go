@@ -4,153 +4,10 @@ package kafka
 
 import (
 	"context"
-	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/kafka/types"
 )
-
-// Request body for CreateConfiguration.
-type CreateConfigurationInput struct {
-	_ struct{} `type:"structure"`
-
-	// The description of the configuration.
-	Description *string `locationName:"description" type:"string"`
-
-	// The versions of Apache Kafka with which you can use this MSK configuration.
-	//
-	// KafkaVersions is a required field
-	KafkaVersions []string `locationName:"kafkaVersions" type:"list" required:"true"`
-
-	// The name of the configuration. Configuration names are strings that match
-	// the regex "^[0-9A-Za-z-]+$".
-	//
-	// Name is a required field
-	Name *string `locationName:"name" type:"string" required:"true"`
-
-	// ServerProperties is automatically base64 encoded/decoded by the SDK.
-	//
-	// ServerProperties is a required field
-	ServerProperties []byte `locationName:"serverProperties" type:"blob" required:"true"`
-}
-
-// String returns the string representation
-func (s CreateConfigurationInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateConfigurationInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateConfigurationInput"}
-
-	if s.KafkaVersions == nil {
-		invalidParams.Add(aws.NewErrParamRequired("KafkaVersions"))
-	}
-
-	if s.Name == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Name"))
-	}
-
-	if s.ServerProperties == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ServerProperties"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s CreateConfigurationInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.Description != nil {
-		v := *s.Description
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "description", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.KafkaVersions != nil {
-		v := s.KafkaVersions
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "kafkaVersions", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
-		}
-		ls0.End()
-
-	}
-	if s.Name != nil {
-		v := *s.Name
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.ServerProperties != nil {
-		v := s.ServerProperties
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "serverProperties", protocol.QuotedValue{ValueMarshaler: protocol.BytesValue(v)}, metadata)
-	}
-	return nil
-}
-
-// Response body for CreateConfiguration
-type CreateConfigurationOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the configuration.
-	Arn *string `locationName:"arn" type:"string"`
-
-	// The time when the configuration was created.
-	CreationTime *time.Time `locationName:"creationTime" type:"timestamp" timestampFormat:"iso8601"`
-
-	// Latest revision of the configuration.
-	LatestRevision *ConfigurationRevision `locationName:"latestRevision" type:"structure"`
-
-	// The name of the configuration. Configuration names are strings that match
-	// the regex "^[0-9A-Za-z-]+$".
-	Name *string `locationName:"name" type:"string"`
-}
-
-// String returns the string representation
-func (s CreateConfigurationOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s CreateConfigurationOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.Arn != nil {
-		v := *s.Arn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "arn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.CreationTime != nil {
-		v := *s.CreationTime
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "creationTime",
-			protocol.TimeValue{V: v, Format: "iso8601", QuotedFormatTime: true}, metadata)
-	}
-	if s.LatestRevision != nil {
-		v := s.LatestRevision
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "latestRevision", v, metadata)
-	}
-	if s.Name != nil {
-		v := *s.Name
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opCreateConfiguration = "CreateConfiguration"
 
@@ -167,7 +24,7 @@ const opCreateConfiguration = "CreateConfiguration"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/CreateConfiguration
-func (c *Client) CreateConfigurationRequest(input *CreateConfigurationInput) CreateConfigurationRequest {
+func (c *Client) CreateConfigurationRequest(input *types.CreateConfigurationInput) CreateConfigurationRequest {
 	op := &aws.Operation{
 		Name:       opCreateConfiguration,
 		HTTPMethod: "POST",
@@ -175,10 +32,10 @@ func (c *Client) CreateConfigurationRequest(input *CreateConfigurationInput) Cre
 	}
 
 	if input == nil {
-		input = &CreateConfigurationInput{}
+		input = &types.CreateConfigurationInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateConfigurationOutput{})
+	req := c.newRequest(op, input, &types.CreateConfigurationOutput{})
 	return CreateConfigurationRequest{Request: req, Input: input, Copy: c.CreateConfigurationRequest}
 }
 
@@ -186,8 +43,8 @@ func (c *Client) CreateConfigurationRequest(input *CreateConfigurationInput) Cre
 // CreateConfiguration API operation.
 type CreateConfigurationRequest struct {
 	*aws.Request
-	Input *CreateConfigurationInput
-	Copy  func(*CreateConfigurationInput) CreateConfigurationRequest
+	Input *types.CreateConfigurationInput
+	Copy  func(*types.CreateConfigurationInput) CreateConfigurationRequest
 }
 
 // Send marshals and sends the CreateConfiguration API request.
@@ -199,7 +56,7 @@ func (r CreateConfigurationRequest) Send(ctx context.Context) (*CreateConfigurat
 	}
 
 	resp := &CreateConfigurationResponse{
-		CreateConfigurationOutput: r.Request.Data.(*CreateConfigurationOutput),
+		CreateConfigurationOutput: r.Request.Data.(*types.CreateConfigurationOutput),
 		response:                  &aws.Response{Request: r.Request},
 	}
 
@@ -209,7 +66,7 @@ func (r CreateConfigurationRequest) Send(ctx context.Context) (*CreateConfigurat
 // CreateConfigurationResponse is the response type for the
 // CreateConfiguration API operation.
 type CreateConfigurationResponse struct {
-	*CreateConfigurationOutput
+	*types.CreateConfigurationOutput
 
 	response *aws.Response
 }

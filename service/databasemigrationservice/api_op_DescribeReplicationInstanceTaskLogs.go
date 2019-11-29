@@ -6,71 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/databasemigrationservice/types"
 )
-
-type DescribeReplicationInstanceTaskLogsInput struct {
-	_ struct{} `type:"structure"`
-
-	// An optional pagination token provided by a previous request. If this parameter
-	// is specified, the response includes only records beyond the marker, up to
-	// the value specified by MaxRecords.
-	Marker *string `type:"string"`
-
-	// The maximum number of records to include in the response. If more records
-	// exist than the specified MaxRecords value, a pagination token called a marker
-	// is included in the response so that the remaining results can be retrieved.
-	//
-	// Default: 100
-	//
-	// Constraints: Minimum 20, maximum 100.
-	MaxRecords *int64 `type:"integer"`
-
-	// The Amazon Resource Name (ARN) of the replication instance.
-	//
-	// ReplicationInstanceArn is a required field
-	ReplicationInstanceArn *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeReplicationInstanceTaskLogsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeReplicationInstanceTaskLogsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeReplicationInstanceTaskLogsInput"}
-
-	if s.ReplicationInstanceArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ReplicationInstanceArn"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribeReplicationInstanceTaskLogsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// An optional pagination token provided by a previous request. If this parameter
-	// is specified, the response includes only records beyond the marker, up to
-	// the value specified by MaxRecords.
-	Marker *string `type:"string"`
-
-	// The Amazon Resource Name (ARN) of the replication instance.
-	ReplicationInstanceArn *string `type:"string"`
-
-	// An array of replication task log metadata. Each member of the array contains
-	// the replication task name, ARN, and task log size (in bytes).
-	ReplicationInstanceTaskLogs []ReplicationInstanceTaskLog `type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeReplicationInstanceTaskLogsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeReplicationInstanceTaskLogs = "DescribeReplicationInstanceTaskLogs"
 
@@ -87,7 +24,7 @@ const opDescribeReplicationInstanceTaskLogs = "DescribeReplicationInstanceTaskLo
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeReplicationInstanceTaskLogs
-func (c *Client) DescribeReplicationInstanceTaskLogsRequest(input *DescribeReplicationInstanceTaskLogsInput) DescribeReplicationInstanceTaskLogsRequest {
+func (c *Client) DescribeReplicationInstanceTaskLogsRequest(input *types.DescribeReplicationInstanceTaskLogsInput) DescribeReplicationInstanceTaskLogsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeReplicationInstanceTaskLogs,
 		HTTPMethod: "POST",
@@ -101,10 +38,10 @@ func (c *Client) DescribeReplicationInstanceTaskLogsRequest(input *DescribeRepli
 	}
 
 	if input == nil {
-		input = &DescribeReplicationInstanceTaskLogsInput{}
+		input = &types.DescribeReplicationInstanceTaskLogsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeReplicationInstanceTaskLogsOutput{})
+	req := c.newRequest(op, input, &types.DescribeReplicationInstanceTaskLogsOutput{})
 	return DescribeReplicationInstanceTaskLogsRequest{Request: req, Input: input, Copy: c.DescribeReplicationInstanceTaskLogsRequest}
 }
 
@@ -112,8 +49,8 @@ func (c *Client) DescribeReplicationInstanceTaskLogsRequest(input *DescribeRepli
 // DescribeReplicationInstanceTaskLogs API operation.
 type DescribeReplicationInstanceTaskLogsRequest struct {
 	*aws.Request
-	Input *DescribeReplicationInstanceTaskLogsInput
-	Copy  func(*DescribeReplicationInstanceTaskLogsInput) DescribeReplicationInstanceTaskLogsRequest
+	Input *types.DescribeReplicationInstanceTaskLogsInput
+	Copy  func(*types.DescribeReplicationInstanceTaskLogsInput) DescribeReplicationInstanceTaskLogsRequest
 }
 
 // Send marshals and sends the DescribeReplicationInstanceTaskLogs API request.
@@ -125,7 +62,7 @@ func (r DescribeReplicationInstanceTaskLogsRequest) Send(ctx context.Context) (*
 	}
 
 	resp := &DescribeReplicationInstanceTaskLogsResponse{
-		DescribeReplicationInstanceTaskLogsOutput: r.Request.Data.(*DescribeReplicationInstanceTaskLogsOutput),
+		DescribeReplicationInstanceTaskLogsOutput: r.Request.Data.(*types.DescribeReplicationInstanceTaskLogsOutput),
 		response: &aws.Response{Request: r.Request},
 	}
 
@@ -155,7 +92,7 @@ func NewDescribeReplicationInstanceTaskLogsPaginator(req DescribeReplicationInst
 	return DescribeReplicationInstanceTaskLogsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *DescribeReplicationInstanceTaskLogsInput
+				var inCpy *types.DescribeReplicationInstanceTaskLogsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -175,14 +112,14 @@ type DescribeReplicationInstanceTaskLogsPaginator struct {
 	aws.Pager
 }
 
-func (p *DescribeReplicationInstanceTaskLogsPaginator) CurrentPage() *DescribeReplicationInstanceTaskLogsOutput {
-	return p.Pager.CurrentPage().(*DescribeReplicationInstanceTaskLogsOutput)
+func (p *DescribeReplicationInstanceTaskLogsPaginator) CurrentPage() *types.DescribeReplicationInstanceTaskLogsOutput {
+	return p.Pager.CurrentPage().(*types.DescribeReplicationInstanceTaskLogsOutput)
 }
 
 // DescribeReplicationInstanceTaskLogsResponse is the response type for the
 // DescribeReplicationInstanceTaskLogs API operation.
 type DescribeReplicationInstanceTaskLogsResponse struct {
-	*DescribeReplicationInstanceTaskLogsOutput
+	*types.DescribeReplicationInstanceTaskLogsOutput
 
 	response *aws.Response
 }

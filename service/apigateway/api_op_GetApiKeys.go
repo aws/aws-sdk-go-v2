@@ -6,130 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/apigateway/types"
 )
-
-// A request to get information about the current ApiKeys resource.
-type GetApiKeysInput struct {
-	_ struct{} `type:"structure"`
-
-	// The identifier of a customer in AWS Marketplace or an external system, such
-	// as a developer portal.
-	CustomerId *string `location:"querystring" locationName:"customerId" type:"string"`
-
-	// A boolean flag to specify whether (true) or not (false) the result contains
-	// key values.
-	IncludeValues *bool `location:"querystring" locationName:"includeValues" type:"boolean"`
-
-	// The maximum number of returned results per page. The default value is 25
-	// and the maximum value is 500.
-	Limit *int64 `location:"querystring" locationName:"limit" type:"integer"`
-
-	// The name of queried API keys.
-	NameQuery *string `location:"querystring" locationName:"name" type:"string"`
-
-	// The current pagination position in the paged result set.
-	Position *string `location:"querystring" locationName:"position" type:"string"`
-}
-
-// String returns the string representation
-func (s GetApiKeysInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetApiKeysInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.CustomerId != nil {
-		v := *s.CustomerId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "customerId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.IncludeValues != nil {
-		v := *s.IncludeValues
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "includeValues", protocol.BoolValue(v), metadata)
-	}
-	if s.Limit != nil {
-		v := *s.Limit
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "limit", protocol.Int64Value(v), metadata)
-	}
-	if s.NameQuery != nil {
-		v := *s.NameQuery
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Position != nil {
-		v := *s.Position
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "position", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-// Represents a collection of API keys as represented by an ApiKeys resource.
-//
-// Use API Keys (https://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-api-keys.html)
-type GetApiKeysOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The current page of elements from this collection.
-	Items []ApiKey `locationName:"item" type:"list"`
-
-	Position *string `locationName:"position" type:"string"`
-
-	// A list of warning messages logged during the import of API keys when the
-	// failOnWarnings option is set to true.
-	Warnings []string `locationName:"warnings" type:"list"`
-}
-
-// String returns the string representation
-func (s GetApiKeysOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetApiKeysOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.Items != nil {
-		v := s.Items
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "item", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	if s.Position != nil {
-		v := *s.Position
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "position", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Warnings != nil {
-		v := s.Warnings
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "warnings", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
-		}
-		ls0.End()
-
-	}
-	return nil
-}
 
 const opGetApiKeys = "GetApiKeys"
 
@@ -144,7 +22,7 @@ const opGetApiKeys = "GetApiKeys"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) GetApiKeysRequest(input *GetApiKeysInput) GetApiKeysRequest {
+func (c *Client) GetApiKeysRequest(input *types.GetApiKeysInput) GetApiKeysRequest {
 	op := &aws.Operation{
 		Name:       opGetApiKeys,
 		HTTPMethod: "GET",
@@ -158,10 +36,10 @@ func (c *Client) GetApiKeysRequest(input *GetApiKeysInput) GetApiKeysRequest {
 	}
 
 	if input == nil {
-		input = &GetApiKeysInput{}
+		input = &types.GetApiKeysInput{}
 	}
 
-	req := c.newRequest(op, input, &GetApiKeysOutput{})
+	req := c.newRequest(op, input, &types.GetApiKeysOutput{})
 	return GetApiKeysRequest{Request: req, Input: input, Copy: c.GetApiKeysRequest}
 }
 
@@ -169,8 +47,8 @@ func (c *Client) GetApiKeysRequest(input *GetApiKeysInput) GetApiKeysRequest {
 // GetApiKeys API operation.
 type GetApiKeysRequest struct {
 	*aws.Request
-	Input *GetApiKeysInput
-	Copy  func(*GetApiKeysInput) GetApiKeysRequest
+	Input *types.GetApiKeysInput
+	Copy  func(*types.GetApiKeysInput) GetApiKeysRequest
 }
 
 // Send marshals and sends the GetApiKeys API request.
@@ -182,7 +60,7 @@ func (r GetApiKeysRequest) Send(ctx context.Context) (*GetApiKeysResponse, error
 	}
 
 	resp := &GetApiKeysResponse{
-		GetApiKeysOutput: r.Request.Data.(*GetApiKeysOutput),
+		GetApiKeysOutput: r.Request.Data.(*types.GetApiKeysOutput),
 		response:         &aws.Response{Request: r.Request},
 	}
 
@@ -212,7 +90,7 @@ func NewGetApiKeysPaginator(req GetApiKeysRequest) GetApiKeysPaginator {
 	return GetApiKeysPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *GetApiKeysInput
+				var inCpy *types.GetApiKeysInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -232,14 +110,14 @@ type GetApiKeysPaginator struct {
 	aws.Pager
 }
 
-func (p *GetApiKeysPaginator) CurrentPage() *GetApiKeysOutput {
-	return p.Pager.CurrentPage().(*GetApiKeysOutput)
+func (p *GetApiKeysPaginator) CurrentPage() *types.GetApiKeysOutput {
+	return p.Pager.CurrentPage().(*types.GetApiKeysOutput)
 }
 
 // GetApiKeysResponse is the response type for the
 // GetApiKeys API operation.
 type GetApiKeysResponse struct {
-	*GetApiKeysOutput
+	*types.GetApiKeysOutput
 
 	response *aws.Response
 }

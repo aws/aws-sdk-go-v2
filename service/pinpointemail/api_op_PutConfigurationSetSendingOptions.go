@@ -6,79 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/pinpointemail/types"
 )
-
-// A request to enable or disable the ability of Amazon Pinpoint to send emails
-// that use a specific configuration set.
-type PutConfigurationSetSendingOptionsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the configuration set that you want to enable or disable email
-	// sending for.
-	//
-	// ConfigurationSetName is a required field
-	ConfigurationSetName *string `location:"uri" locationName:"ConfigurationSetName" type:"string" required:"true"`
-
-	// If true, email sending is enabled for the configuration set. If false, email
-	// sending is disabled for the configuration set.
-	SendingEnabled *bool `type:"boolean"`
-}
-
-// String returns the string representation
-func (s PutConfigurationSetSendingOptionsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *PutConfigurationSetSendingOptionsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "PutConfigurationSetSendingOptionsInput"}
-
-	if s.ConfigurationSetName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ConfigurationSetName"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s PutConfigurationSetSendingOptionsInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.SendingEnabled != nil {
-		v := *s.SendingEnabled
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "SendingEnabled", protocol.BoolValue(v), metadata)
-	}
-	if s.ConfigurationSetName != nil {
-		v := *s.ConfigurationSetName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "ConfigurationSetName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-// An HTTP 200 response if the request succeeds, or an error message if the
-// request fails.
-type PutConfigurationSetSendingOptionsOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s PutConfigurationSetSendingOptionsOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s PutConfigurationSetSendingOptionsOutput) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
 
 const opPutConfigurationSetSendingOptions = "PutConfigurationSetSendingOptions"
 
@@ -96,7 +25,7 @@ const opPutConfigurationSetSendingOptions = "PutConfigurationSetSendingOptions"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/PutConfigurationSetSendingOptions
-func (c *Client) PutConfigurationSetSendingOptionsRequest(input *PutConfigurationSetSendingOptionsInput) PutConfigurationSetSendingOptionsRequest {
+func (c *Client) PutConfigurationSetSendingOptionsRequest(input *types.PutConfigurationSetSendingOptionsInput) PutConfigurationSetSendingOptionsRequest {
 	op := &aws.Operation{
 		Name:       opPutConfigurationSetSendingOptions,
 		HTTPMethod: "PUT",
@@ -104,10 +33,10 @@ func (c *Client) PutConfigurationSetSendingOptionsRequest(input *PutConfiguratio
 	}
 
 	if input == nil {
-		input = &PutConfigurationSetSendingOptionsInput{}
+		input = &types.PutConfigurationSetSendingOptionsInput{}
 	}
 
-	req := c.newRequest(op, input, &PutConfigurationSetSendingOptionsOutput{})
+	req := c.newRequest(op, input, &types.PutConfigurationSetSendingOptionsOutput{})
 	return PutConfigurationSetSendingOptionsRequest{Request: req, Input: input, Copy: c.PutConfigurationSetSendingOptionsRequest}
 }
 
@@ -115,8 +44,8 @@ func (c *Client) PutConfigurationSetSendingOptionsRequest(input *PutConfiguratio
 // PutConfigurationSetSendingOptions API operation.
 type PutConfigurationSetSendingOptionsRequest struct {
 	*aws.Request
-	Input *PutConfigurationSetSendingOptionsInput
-	Copy  func(*PutConfigurationSetSendingOptionsInput) PutConfigurationSetSendingOptionsRequest
+	Input *types.PutConfigurationSetSendingOptionsInput
+	Copy  func(*types.PutConfigurationSetSendingOptionsInput) PutConfigurationSetSendingOptionsRequest
 }
 
 // Send marshals and sends the PutConfigurationSetSendingOptions API request.
@@ -128,7 +57,7 @@ func (r PutConfigurationSetSendingOptionsRequest) Send(ctx context.Context) (*Pu
 	}
 
 	resp := &PutConfigurationSetSendingOptionsResponse{
-		PutConfigurationSetSendingOptionsOutput: r.Request.Data.(*PutConfigurationSetSendingOptionsOutput),
+		PutConfigurationSetSendingOptionsOutput: r.Request.Data.(*types.PutConfigurationSetSendingOptionsOutput),
 		response:                                &aws.Response{Request: r.Request},
 	}
 
@@ -138,7 +67,7 @@ func (r PutConfigurationSetSendingOptionsRequest) Send(ctx context.Context) (*Pu
 // PutConfigurationSetSendingOptionsResponse is the response type for the
 // PutConfigurationSetSendingOptions API operation.
 type PutConfigurationSetSendingOptionsResponse struct {
-	*PutConfigurationSetSendingOptionsOutput
+	*types.PutConfigurationSetSendingOptionsOutput
 
 	response *aws.Response
 }

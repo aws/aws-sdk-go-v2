@@ -4,69 +4,10 @@ package redshift
 
 import (
 	"context"
-	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/redshift/types"
 )
-
-type ModifyClusterMaintenanceInput struct {
-	_ struct{} `type:"structure"`
-
-	// A unique identifier for the cluster.
-	//
-	// ClusterIdentifier is a required field
-	ClusterIdentifier *string `type:"string" required:"true"`
-
-	// A boolean indicating whether to enable the deferred maintenance window.
-	DeferMaintenance *bool `type:"boolean"`
-
-	// An integer indicating the duration of the maintenance window in days. If
-	// you specify a duration, you can't specify an end time. The duration must
-	// be 45 days or less.
-	DeferMaintenanceDuration *int64 `type:"integer"`
-
-	// A timestamp indicating end time for the deferred maintenance window. If you
-	// specify an end time, you can't specify a duration.
-	DeferMaintenanceEndTime *time.Time `type:"timestamp"`
-
-	// A unique identifier for the deferred maintenance window.
-	DeferMaintenanceIdentifier *string `type:"string"`
-
-	// A timestamp indicating the start time for the deferred maintenance window.
-	DeferMaintenanceStartTime *time.Time `type:"timestamp"`
-}
-
-// String returns the string representation
-func (s ModifyClusterMaintenanceInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ModifyClusterMaintenanceInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ModifyClusterMaintenanceInput"}
-
-	if s.ClusterIdentifier == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ClusterIdentifier"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ModifyClusterMaintenanceOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Describes a cluster.
-	Cluster *Cluster `type:"structure"`
-}
-
-// String returns the string representation
-func (s ModifyClusterMaintenanceOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opModifyClusterMaintenance = "ModifyClusterMaintenance"
 
@@ -84,7 +25,7 @@ const opModifyClusterMaintenance = "ModifyClusterMaintenance"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ModifyClusterMaintenance
-func (c *Client) ModifyClusterMaintenanceRequest(input *ModifyClusterMaintenanceInput) ModifyClusterMaintenanceRequest {
+func (c *Client) ModifyClusterMaintenanceRequest(input *types.ModifyClusterMaintenanceInput) ModifyClusterMaintenanceRequest {
 	op := &aws.Operation{
 		Name:       opModifyClusterMaintenance,
 		HTTPMethod: "POST",
@@ -92,10 +33,10 @@ func (c *Client) ModifyClusterMaintenanceRequest(input *ModifyClusterMaintenance
 	}
 
 	if input == nil {
-		input = &ModifyClusterMaintenanceInput{}
+		input = &types.ModifyClusterMaintenanceInput{}
 	}
 
-	req := c.newRequest(op, input, &ModifyClusterMaintenanceOutput{})
+	req := c.newRequest(op, input, &types.ModifyClusterMaintenanceOutput{})
 	return ModifyClusterMaintenanceRequest{Request: req, Input: input, Copy: c.ModifyClusterMaintenanceRequest}
 }
 
@@ -103,8 +44,8 @@ func (c *Client) ModifyClusterMaintenanceRequest(input *ModifyClusterMaintenance
 // ModifyClusterMaintenance API operation.
 type ModifyClusterMaintenanceRequest struct {
 	*aws.Request
-	Input *ModifyClusterMaintenanceInput
-	Copy  func(*ModifyClusterMaintenanceInput) ModifyClusterMaintenanceRequest
+	Input *types.ModifyClusterMaintenanceInput
+	Copy  func(*types.ModifyClusterMaintenanceInput) ModifyClusterMaintenanceRequest
 }
 
 // Send marshals and sends the ModifyClusterMaintenance API request.
@@ -116,7 +57,7 @@ func (r ModifyClusterMaintenanceRequest) Send(ctx context.Context) (*ModifyClust
 	}
 
 	resp := &ModifyClusterMaintenanceResponse{
-		ModifyClusterMaintenanceOutput: r.Request.Data.(*ModifyClusterMaintenanceOutput),
+		ModifyClusterMaintenanceOutput: r.Request.Data.(*types.ModifyClusterMaintenanceOutput),
 		response:                       &aws.Response{Request: r.Request},
 	}
 
@@ -126,7 +67,7 @@ func (r ModifyClusterMaintenanceRequest) Send(ctx context.Context) (*ModifyClust
 // ModifyClusterMaintenanceResponse is the response type for the
 // ModifyClusterMaintenance API operation.
 type ModifyClusterMaintenanceResponse struct {
-	*ModifyClusterMaintenanceOutput
+	*types.ModifyClusterMaintenanceOutput
 
 	response *aws.Response
 }

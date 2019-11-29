@@ -6,88 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
 )
-
-type SearchInput struct {
-	_ struct{} `type:"structure"`
-
-	// The maximum number of results to return in a SearchResponse.
-	MaxResults *int64 `min:"1" type:"integer"`
-
-	// If more than MaxResults resource objects match the specified SearchExpression,
-	// the SearchResponse includes a NextToken. The NextToken can be passed to the
-	// next SearchRequest to continue retrieving results for the specified SearchExpression
-	// and Sort parameters.
-	NextToken *string `type:"string"`
-
-	// The name of the Amazon SageMaker resource to search for. Currently, the only
-	// valid Resource value is TrainingJob.
-	//
-	// Resource is a required field
-	Resource ResourceType `type:"string" required:"true" enum:"true"`
-
-	// A Boolean conditional statement. Resource objects must satisfy this condition
-	// to be included in search results. You must provide at least one subexpression,
-	// filter, or nested filter. The maximum number of recursive SubExpressions,
-	// NestedFilters, and Filters that can be included in a SearchExpression object
-	// is 50.
-	SearchExpression *SearchExpression `type:"structure"`
-
-	// The name of the resource property used to sort the SearchResults. The default
-	// is LastModifiedTime.
-	SortBy *string `min:"1" type:"string"`
-
-	// How SearchResults are ordered. Valid values are Ascending or Descending.
-	// The default is Descending.
-	SortOrder SearchSortOrder `type:"string" enum:"true"`
-}
-
-// String returns the string representation
-func (s SearchInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *SearchInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "SearchInput"}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-	if len(s.Resource) == 0 {
-		invalidParams.Add(aws.NewErrParamRequired("Resource"))
-	}
-	if s.SortBy != nil && len(*s.SortBy) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("SortBy", 1))
-	}
-	if s.SearchExpression != nil {
-		if err := s.SearchExpression.Validate(); err != nil {
-			invalidParams.AddNested("SearchExpression", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type SearchOutput struct {
-	_ struct{} `type:"structure"`
-
-	// If the result of the previous Search request was truncated, the response
-	// includes a NextToken. To retrieve the next set of results, use the token
-	// in the next request.
-	NextToken *string `type:"string"`
-
-	// A list of SearchResult objects.
-	Results []SearchRecord `type:"list"`
-}
-
-// String returns the string representation
-func (s SearchOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opSearch = "Search"
 
@@ -110,7 +30,7 @@ const opSearch = "Search"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/Search
-func (c *Client) SearchRequest(input *SearchInput) SearchRequest {
+func (c *Client) SearchRequest(input *types.SearchInput) SearchRequest {
 	op := &aws.Operation{
 		Name:       opSearch,
 		HTTPMethod: "POST",
@@ -124,10 +44,10 @@ func (c *Client) SearchRequest(input *SearchInput) SearchRequest {
 	}
 
 	if input == nil {
-		input = &SearchInput{}
+		input = &types.SearchInput{}
 	}
 
-	req := c.newRequest(op, input, &SearchOutput{})
+	req := c.newRequest(op, input, &types.SearchOutput{})
 	return SearchRequest{Request: req, Input: input, Copy: c.SearchRequest}
 }
 
@@ -135,8 +55,8 @@ func (c *Client) SearchRequest(input *SearchInput) SearchRequest {
 // Search API operation.
 type SearchRequest struct {
 	*aws.Request
-	Input *SearchInput
-	Copy  func(*SearchInput) SearchRequest
+	Input *types.SearchInput
+	Copy  func(*types.SearchInput) SearchRequest
 }
 
 // Send marshals and sends the Search API request.
@@ -148,7 +68,7 @@ func (r SearchRequest) Send(ctx context.Context) (*SearchResponse, error) {
 	}
 
 	resp := &SearchResponse{
-		SearchOutput: r.Request.Data.(*SearchOutput),
+		SearchOutput: r.Request.Data.(*types.SearchOutput),
 		response:     &aws.Response{Request: r.Request},
 	}
 
@@ -178,7 +98,7 @@ func NewSearchPaginator(req SearchRequest) SearchPaginator {
 	return SearchPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *SearchInput
+				var inCpy *types.SearchInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -198,14 +118,14 @@ type SearchPaginator struct {
 	aws.Pager
 }
 
-func (p *SearchPaginator) CurrentPage() *SearchOutput {
-	return p.Pager.CurrentPage().(*SearchOutput)
+func (p *SearchPaginator) CurrentPage() *types.SearchOutput {
+	return p.Pager.CurrentPage().(*types.SearchOutput)
 }
 
 // SearchResponse is the response type for the
 // Search API operation.
 type SearchResponse struct {
-	*SearchOutput
+	*types.SearchOutput
 
 	response *aws.Response
 }

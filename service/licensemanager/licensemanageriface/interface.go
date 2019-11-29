@@ -10,6 +10,7 @@ package licensemanageriface
 
 import (
 	"github.com/aws/aws-sdk-go-v2/service/licensemanager"
+	"github.com/aws/aws-sdk-go-v2/service/licensemanager/types"
 )
 
 // ClientAPI provides an interface to enable mocking the
@@ -43,7 +44,7 @@ import (
 //    type mockClientClient struct {
 //        licensemanageriface.ClientPI
 //    }
-//    func (m *mockClientClient) CreateLicenseConfiguration(input *licensemanager.CreateLicenseConfigurationInput) (*licensemanager.CreateLicenseConfigurationOutput, error) {
+//    func (m *mockClientClient) CreateLicenseConfiguration(input *types.CreateLicenseConfigurationInput) (*types.CreateLicenseConfigurationOutput, error) {
 //        // mock response/functionality
 //    }
 //
@@ -61,35 +62,35 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type ClientAPI interface {
-	CreateLicenseConfigurationRequest(*licensemanager.CreateLicenseConfigurationInput) licensemanager.CreateLicenseConfigurationRequest
+	CreateLicenseConfigurationRequest(*types.CreateLicenseConfigurationInput) licensemanager.CreateLicenseConfigurationRequest
 
-	DeleteLicenseConfigurationRequest(*licensemanager.DeleteLicenseConfigurationInput) licensemanager.DeleteLicenseConfigurationRequest
+	DeleteLicenseConfigurationRequest(*types.DeleteLicenseConfigurationInput) licensemanager.DeleteLicenseConfigurationRequest
 
-	GetLicenseConfigurationRequest(*licensemanager.GetLicenseConfigurationInput) licensemanager.GetLicenseConfigurationRequest
+	GetLicenseConfigurationRequest(*types.GetLicenseConfigurationInput) licensemanager.GetLicenseConfigurationRequest
 
-	GetServiceSettingsRequest(*licensemanager.GetServiceSettingsInput) licensemanager.GetServiceSettingsRequest
+	GetServiceSettingsRequest(*types.GetServiceSettingsInput) licensemanager.GetServiceSettingsRequest
 
-	ListAssociationsForLicenseConfigurationRequest(*licensemanager.ListAssociationsForLicenseConfigurationInput) licensemanager.ListAssociationsForLicenseConfigurationRequest
+	ListAssociationsForLicenseConfigurationRequest(*types.ListAssociationsForLicenseConfigurationInput) licensemanager.ListAssociationsForLicenseConfigurationRequest
 
-	ListLicenseConfigurationsRequest(*licensemanager.ListLicenseConfigurationsInput) licensemanager.ListLicenseConfigurationsRequest
+	ListLicenseConfigurationsRequest(*types.ListLicenseConfigurationsInput) licensemanager.ListLicenseConfigurationsRequest
 
-	ListLicenseSpecificationsForResourceRequest(*licensemanager.ListLicenseSpecificationsForResourceInput) licensemanager.ListLicenseSpecificationsForResourceRequest
+	ListLicenseSpecificationsForResourceRequest(*types.ListLicenseSpecificationsForResourceInput) licensemanager.ListLicenseSpecificationsForResourceRequest
 
-	ListResourceInventoryRequest(*licensemanager.ListResourceInventoryInput) licensemanager.ListResourceInventoryRequest
+	ListResourceInventoryRequest(*types.ListResourceInventoryInput) licensemanager.ListResourceInventoryRequest
 
-	ListTagsForResourceRequest(*licensemanager.ListTagsForResourceInput) licensemanager.ListTagsForResourceRequest
+	ListTagsForResourceRequest(*types.ListTagsForResourceInput) licensemanager.ListTagsForResourceRequest
 
-	ListUsageForLicenseConfigurationRequest(*licensemanager.ListUsageForLicenseConfigurationInput) licensemanager.ListUsageForLicenseConfigurationRequest
+	ListUsageForLicenseConfigurationRequest(*types.ListUsageForLicenseConfigurationInput) licensemanager.ListUsageForLicenseConfigurationRequest
 
-	TagResourceRequest(*licensemanager.TagResourceInput) licensemanager.TagResourceRequest
+	TagResourceRequest(*types.TagResourceInput) licensemanager.TagResourceRequest
 
-	UntagResourceRequest(*licensemanager.UntagResourceInput) licensemanager.UntagResourceRequest
+	UntagResourceRequest(*types.UntagResourceInput) licensemanager.UntagResourceRequest
 
-	UpdateLicenseConfigurationRequest(*licensemanager.UpdateLicenseConfigurationInput) licensemanager.UpdateLicenseConfigurationRequest
+	UpdateLicenseConfigurationRequest(*types.UpdateLicenseConfigurationInput) licensemanager.UpdateLicenseConfigurationRequest
 
-	UpdateLicenseSpecificationsForResourceRequest(*licensemanager.UpdateLicenseSpecificationsForResourceInput) licensemanager.UpdateLicenseSpecificationsForResourceRequest
+	UpdateLicenseSpecificationsForResourceRequest(*types.UpdateLicenseSpecificationsForResourceInput) licensemanager.UpdateLicenseSpecificationsForResourceRequest
 
-	UpdateServiceSettingsRequest(*licensemanager.UpdateServiceSettingsInput) licensemanager.UpdateServiceSettingsRequest
+	UpdateServiceSettingsRequest(*types.UpdateServiceSettingsInput) licensemanager.UpdateServiceSettingsRequest
 }
 
 var _ ClientAPI = (*licensemanager.Client)(nil)

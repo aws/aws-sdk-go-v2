@@ -4,78 +4,10 @@ package fsx
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/fsx/types"
 )
-
-// The request object for the CreateBackup operation.
-type CreateBackupInput struct {
-	_ struct{} `type:"structure"`
-
-	// (Optional) A string of up to 64 ASCII characters that Amazon FSx uses to
-	// ensure idempotent creation. This string is automatically filled on your behalf
-	// when you use the AWS Command Line Interface (AWS CLI) or an AWS SDK.
-	ClientRequestToken *string `min:"1" type:"string" idempotencyToken:"true"`
-
-	// The ID of the file system to back up.
-	//
-	// FileSystemId is a required field
-	FileSystemId *string `min:"11" type:"string" required:"true"`
-
-	// The tags to apply to the backup at backup creation. The key value of the
-	// Name tag appears in the console as the backup name.
-	Tags []Tag `min:"1" type:"list"`
-}
-
-// String returns the string representation
-func (s CreateBackupInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateBackupInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateBackupInput"}
-	if s.ClientRequestToken != nil && len(*s.ClientRequestToken) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ClientRequestToken", 1))
-	}
-
-	if s.FileSystemId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("FileSystemId"))
-	}
-	if s.FileSystemId != nil && len(*s.FileSystemId) < 11 {
-		invalidParams.Add(aws.NewErrParamMinLen("FileSystemId", 11))
-	}
-	if s.Tags != nil && len(s.Tags) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Tags", 1))
-	}
-	if s.Tags != nil {
-		for i, v := range s.Tags {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// The response object for the CreateBackup operation.
-type CreateBackupOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A description of the backup.
-	Backup *Backup `type:"structure"`
-}
-
-// String returns the string representation
-func (s CreateBackupOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCreateBackup = "CreateBackup"
 
@@ -118,7 +50,7 @@ const opCreateBackup = "CreateBackup"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/CreateBackup
-func (c *Client) CreateBackupRequest(input *CreateBackupInput) CreateBackupRequest {
+func (c *Client) CreateBackupRequest(input *types.CreateBackupInput) CreateBackupRequest {
 	op := &aws.Operation{
 		Name:       opCreateBackup,
 		HTTPMethod: "POST",
@@ -126,10 +58,10 @@ func (c *Client) CreateBackupRequest(input *CreateBackupInput) CreateBackupReque
 	}
 
 	if input == nil {
-		input = &CreateBackupInput{}
+		input = &types.CreateBackupInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateBackupOutput{})
+	req := c.newRequest(op, input, &types.CreateBackupOutput{})
 	return CreateBackupRequest{Request: req, Input: input, Copy: c.CreateBackupRequest}
 }
 
@@ -137,8 +69,8 @@ func (c *Client) CreateBackupRequest(input *CreateBackupInput) CreateBackupReque
 // CreateBackup API operation.
 type CreateBackupRequest struct {
 	*aws.Request
-	Input *CreateBackupInput
-	Copy  func(*CreateBackupInput) CreateBackupRequest
+	Input *types.CreateBackupInput
+	Copy  func(*types.CreateBackupInput) CreateBackupRequest
 }
 
 // Send marshals and sends the CreateBackup API request.
@@ -150,7 +82,7 @@ func (r CreateBackupRequest) Send(ctx context.Context) (*CreateBackupResponse, e
 	}
 
 	resp := &CreateBackupResponse{
-		CreateBackupOutput: r.Request.Data.(*CreateBackupOutput),
+		CreateBackupOutput: r.Request.Data.(*types.CreateBackupOutput),
 		response:           &aws.Response{Request: r.Request},
 	}
 
@@ -160,7 +92,7 @@ func (r CreateBackupRequest) Send(ctx context.Context) (*CreateBackupResponse, e
 // CreateBackupResponse is the response type for the
 // CreateBackup API operation.
 type CreateBackupResponse struct {
-	*CreateBackupOutput
+	*types.CreateBackupOutput
 
 	response *aws.Response
 }

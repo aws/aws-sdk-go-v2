@@ -6,105 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/restjson"
+	"github.com/aws/aws-sdk-go-v2/service/lexmodelbuildingservice/types"
 )
-
-type DeleteBotChannelAssociationInput struct {
-	_ struct{} `type:"structure"`
-
-	// An alias that points to the specific version of the Amazon Lex bot to which
-	// this association is being made.
-	//
-	// BotAlias is a required field
-	BotAlias *string `location:"uri" locationName:"aliasName" min:"1" type:"string" required:"true"`
-
-	// The name of the Amazon Lex bot.
-	//
-	// BotName is a required field
-	BotName *string `location:"uri" locationName:"botName" min:"2" type:"string" required:"true"`
-
-	// The name of the association. The name is case sensitive.
-	//
-	// Name is a required field
-	Name *string `location:"uri" locationName:"name" min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteBotChannelAssociationInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteBotChannelAssociationInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteBotChannelAssociationInput"}
-
-	if s.BotAlias == nil {
-		invalidParams.Add(aws.NewErrParamRequired("BotAlias"))
-	}
-	if s.BotAlias != nil && len(*s.BotAlias) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("BotAlias", 1))
-	}
-
-	if s.BotName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("BotName"))
-	}
-	if s.BotName != nil && len(*s.BotName) < 2 {
-		invalidParams.Add(aws.NewErrParamMinLen("BotName", 2))
-	}
-
-	if s.Name == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Name"))
-	}
-	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteBotChannelAssociationInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.BotAlias != nil {
-		v := *s.BotAlias
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "aliasName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.BotName != nil {
-		v := *s.BotName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "botName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Name != nil {
-		v := *s.Name
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type DeleteBotChannelAssociationOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteBotChannelAssociationOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteBotChannelAssociationOutput) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
 
 const opDeleteBotChannelAssociation = "DeleteBotChannelAssociation"
 
@@ -124,7 +29,7 @@ const opDeleteBotChannelAssociation = "DeleteBotChannelAssociation"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/DeleteBotChannelAssociation
-func (c *Client) DeleteBotChannelAssociationRequest(input *DeleteBotChannelAssociationInput) DeleteBotChannelAssociationRequest {
+func (c *Client) DeleteBotChannelAssociationRequest(input *types.DeleteBotChannelAssociationInput) DeleteBotChannelAssociationRequest {
 	op := &aws.Operation{
 		Name:       opDeleteBotChannelAssociation,
 		HTTPMethod: "DELETE",
@@ -132,10 +37,10 @@ func (c *Client) DeleteBotChannelAssociationRequest(input *DeleteBotChannelAssoc
 	}
 
 	if input == nil {
-		input = &DeleteBotChannelAssociationInput{}
+		input = &types.DeleteBotChannelAssociationInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteBotChannelAssociationOutput{})
+	req := c.newRequest(op, input, &types.DeleteBotChannelAssociationOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return DeleteBotChannelAssociationRequest{Request: req, Input: input, Copy: c.DeleteBotChannelAssociationRequest}
@@ -145,8 +50,8 @@ func (c *Client) DeleteBotChannelAssociationRequest(input *DeleteBotChannelAssoc
 // DeleteBotChannelAssociation API operation.
 type DeleteBotChannelAssociationRequest struct {
 	*aws.Request
-	Input *DeleteBotChannelAssociationInput
-	Copy  func(*DeleteBotChannelAssociationInput) DeleteBotChannelAssociationRequest
+	Input *types.DeleteBotChannelAssociationInput
+	Copy  func(*types.DeleteBotChannelAssociationInput) DeleteBotChannelAssociationRequest
 }
 
 // Send marshals and sends the DeleteBotChannelAssociation API request.
@@ -158,7 +63,7 @@ func (r DeleteBotChannelAssociationRequest) Send(ctx context.Context) (*DeleteBo
 	}
 
 	resp := &DeleteBotChannelAssociationResponse{
-		DeleteBotChannelAssociationOutput: r.Request.Data.(*DeleteBotChannelAssociationOutput),
+		DeleteBotChannelAssociationOutput: r.Request.Data.(*types.DeleteBotChannelAssociationOutput),
 		response:                          &aws.Response{Request: r.Request},
 	}
 
@@ -168,7 +73,7 @@ func (r DeleteBotChannelAssociationRequest) Send(ctx context.Context) (*DeleteBo
 // DeleteBotChannelAssociationResponse is the response type for the
 // DeleteBotChannelAssociation API operation.
 type DeleteBotChannelAssociationResponse struct {
-	*DeleteBotChannelAssociationOutput
+	*types.DeleteBotChannelAssociationOutput
 
 	response *aws.Response
 }

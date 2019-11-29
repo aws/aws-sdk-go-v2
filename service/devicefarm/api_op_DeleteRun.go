@@ -6,50 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/devicefarm/types"
 )
-
-// Represents a request to the delete run operation.
-type DeleteRunInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) for the run you wish to delete.
-	//
-	// Arn is a required field
-	Arn *string `locationName:"arn" min:"32" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteRunInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteRunInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteRunInput"}
-
-	if s.Arn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Arn"))
-	}
-	if s.Arn != nil && len(*s.Arn) < 32 {
-		invalidParams.Add(aws.NewErrParamMinLen("Arn", 32))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Represents the result of a delete run request.
-type DeleteRunOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteRunOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteRun = "DeleteRun"
 
@@ -68,7 +26,7 @@ const opDeleteRun = "DeleteRun"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/DeleteRun
-func (c *Client) DeleteRunRequest(input *DeleteRunInput) DeleteRunRequest {
+func (c *Client) DeleteRunRequest(input *types.DeleteRunInput) DeleteRunRequest {
 	op := &aws.Operation{
 		Name:       opDeleteRun,
 		HTTPMethod: "POST",
@@ -76,10 +34,10 @@ func (c *Client) DeleteRunRequest(input *DeleteRunInput) DeleteRunRequest {
 	}
 
 	if input == nil {
-		input = &DeleteRunInput{}
+		input = &types.DeleteRunInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteRunOutput{})
+	req := c.newRequest(op, input, &types.DeleteRunOutput{})
 	return DeleteRunRequest{Request: req, Input: input, Copy: c.DeleteRunRequest}
 }
 
@@ -87,8 +45,8 @@ func (c *Client) DeleteRunRequest(input *DeleteRunInput) DeleteRunRequest {
 // DeleteRun API operation.
 type DeleteRunRequest struct {
 	*aws.Request
-	Input *DeleteRunInput
-	Copy  func(*DeleteRunInput) DeleteRunRequest
+	Input *types.DeleteRunInput
+	Copy  func(*types.DeleteRunInput) DeleteRunRequest
 }
 
 // Send marshals and sends the DeleteRun API request.
@@ -100,7 +58,7 @@ func (r DeleteRunRequest) Send(ctx context.Context) (*DeleteRunResponse, error) 
 	}
 
 	resp := &DeleteRunResponse{
-		DeleteRunOutput: r.Request.Data.(*DeleteRunOutput),
+		DeleteRunOutput: r.Request.Data.(*types.DeleteRunOutput),
 		response:        &aws.Response{Request: r.Request},
 	}
 
@@ -110,7 +68,7 @@ func (r DeleteRunRequest) Send(ctx context.Context) (*DeleteRunResponse, error) 
 // DeleteRunResponse is the response type for the
 // DeleteRun API operation.
 type DeleteRunResponse struct {
-	*DeleteRunOutput
+	*types.DeleteRunOutput
 
 	response *aws.Response
 }

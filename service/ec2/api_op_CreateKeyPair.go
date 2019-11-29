@@ -6,63 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-type CreateKeyPairInput struct {
-	_ struct{} `type:"structure"`
-
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have
-	// the required permissions, the error response is DryRunOperation. Otherwise,
-	// it is UnauthorizedOperation.
-	DryRun *bool `locationName:"dryRun" type:"boolean"`
-
-	// A unique name for the key pair.
-	//
-	// Constraints: Up to 255 ASCII characters
-	//
-	// KeyName is a required field
-	KeyName *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s CreateKeyPairInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateKeyPairInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateKeyPairInput"}
-
-	if s.KeyName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("KeyName"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Describes a key pair.
-type CreateKeyPairOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The SHA-1 digest of the DER encoded private key.
-	KeyFingerprint *string `locationName:"keyFingerprint" type:"string"`
-
-	// An unencrypted PEM encoded RSA private key.
-	KeyMaterial *string `locationName:"keyMaterial" type:"string"`
-
-	// The name of the key pair.
-	KeyName *string `locationName:"keyName" type:"string"`
-}
-
-// String returns the string representation
-func (s CreateKeyPairOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCreateKeyPair = "CreateKeyPair"
 
@@ -91,7 +36,7 @@ const opCreateKeyPair = "CreateKeyPair"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateKeyPair
-func (c *Client) CreateKeyPairRequest(input *CreateKeyPairInput) CreateKeyPairRequest {
+func (c *Client) CreateKeyPairRequest(input *types.CreateKeyPairInput) CreateKeyPairRequest {
 	op := &aws.Operation{
 		Name:       opCreateKeyPair,
 		HTTPMethod: "POST",
@@ -99,10 +44,10 @@ func (c *Client) CreateKeyPairRequest(input *CreateKeyPairInput) CreateKeyPairRe
 	}
 
 	if input == nil {
-		input = &CreateKeyPairInput{}
+		input = &types.CreateKeyPairInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateKeyPairOutput{})
+	req := c.newRequest(op, input, &types.CreateKeyPairOutput{})
 	return CreateKeyPairRequest{Request: req, Input: input, Copy: c.CreateKeyPairRequest}
 }
 
@@ -110,8 +55,8 @@ func (c *Client) CreateKeyPairRequest(input *CreateKeyPairInput) CreateKeyPairRe
 // CreateKeyPair API operation.
 type CreateKeyPairRequest struct {
 	*aws.Request
-	Input *CreateKeyPairInput
-	Copy  func(*CreateKeyPairInput) CreateKeyPairRequest
+	Input *types.CreateKeyPairInput
+	Copy  func(*types.CreateKeyPairInput) CreateKeyPairRequest
 }
 
 // Send marshals and sends the CreateKeyPair API request.
@@ -123,7 +68,7 @@ func (r CreateKeyPairRequest) Send(ctx context.Context) (*CreateKeyPairResponse,
 	}
 
 	resp := &CreateKeyPairResponse{
-		CreateKeyPairOutput: r.Request.Data.(*CreateKeyPairOutput),
+		CreateKeyPairOutput: r.Request.Data.(*types.CreateKeyPairOutput),
 		response:            &aws.Response{Request: r.Request},
 	}
 
@@ -133,7 +78,7 @@ func (r CreateKeyPairRequest) Send(ctx context.Context) (*CreateKeyPairResponse,
 // CreateKeyPairResponse is the response type for the
 // CreateKeyPair API operation.
 type CreateKeyPairResponse struct {
-	*CreateKeyPairOutput
+	*types.CreateKeyPairOutput
 
 	response *aws.Response
 }

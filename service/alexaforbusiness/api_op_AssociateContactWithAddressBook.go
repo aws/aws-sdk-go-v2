@@ -6,54 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/alexaforbusiness/types"
 )
-
-type AssociateContactWithAddressBookInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ARN of the address book with which to associate the contact.
-	//
-	// AddressBookArn is a required field
-	AddressBookArn *string `type:"string" required:"true"`
-
-	// The ARN of the contact to associate with an address book.
-	//
-	// ContactArn is a required field
-	ContactArn *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s AssociateContactWithAddressBookInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *AssociateContactWithAddressBookInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "AssociateContactWithAddressBookInput"}
-
-	if s.AddressBookArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("AddressBookArn"))
-	}
-
-	if s.ContactArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ContactArn"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type AssociateContactWithAddressBookOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s AssociateContactWithAddressBookOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opAssociateContactWithAddressBook = "AssociateContactWithAddressBook"
 
@@ -70,7 +24,7 @@ const opAssociateContactWithAddressBook = "AssociateContactWithAddressBook"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/AssociateContactWithAddressBook
-func (c *Client) AssociateContactWithAddressBookRequest(input *AssociateContactWithAddressBookInput) AssociateContactWithAddressBookRequest {
+func (c *Client) AssociateContactWithAddressBookRequest(input *types.AssociateContactWithAddressBookInput) AssociateContactWithAddressBookRequest {
 	op := &aws.Operation{
 		Name:       opAssociateContactWithAddressBook,
 		HTTPMethod: "POST",
@@ -78,10 +32,10 @@ func (c *Client) AssociateContactWithAddressBookRequest(input *AssociateContactW
 	}
 
 	if input == nil {
-		input = &AssociateContactWithAddressBookInput{}
+		input = &types.AssociateContactWithAddressBookInput{}
 	}
 
-	req := c.newRequest(op, input, &AssociateContactWithAddressBookOutput{})
+	req := c.newRequest(op, input, &types.AssociateContactWithAddressBookOutput{})
 	return AssociateContactWithAddressBookRequest{Request: req, Input: input, Copy: c.AssociateContactWithAddressBookRequest}
 }
 
@@ -89,8 +43,8 @@ func (c *Client) AssociateContactWithAddressBookRequest(input *AssociateContactW
 // AssociateContactWithAddressBook API operation.
 type AssociateContactWithAddressBookRequest struct {
 	*aws.Request
-	Input *AssociateContactWithAddressBookInput
-	Copy  func(*AssociateContactWithAddressBookInput) AssociateContactWithAddressBookRequest
+	Input *types.AssociateContactWithAddressBookInput
+	Copy  func(*types.AssociateContactWithAddressBookInput) AssociateContactWithAddressBookRequest
 }
 
 // Send marshals and sends the AssociateContactWithAddressBook API request.
@@ -102,7 +56,7 @@ func (r AssociateContactWithAddressBookRequest) Send(ctx context.Context) (*Asso
 	}
 
 	resp := &AssociateContactWithAddressBookResponse{
-		AssociateContactWithAddressBookOutput: r.Request.Data.(*AssociateContactWithAddressBookOutput),
+		AssociateContactWithAddressBookOutput: r.Request.Data.(*types.AssociateContactWithAddressBookOutput),
 		response:                              &aws.Response{Request: r.Request},
 	}
 
@@ -112,7 +66,7 @@ func (r AssociateContactWithAddressBookRequest) Send(ctx context.Context) (*Asso
 // AssociateContactWithAddressBookResponse is the response type for the
 // AssociateContactWithAddressBook API operation.
 type AssociateContactWithAddressBookResponse struct {
-	*AssociateContactWithAddressBookOutput
+	*types.AssociateContactWithAddressBookOutput
 
 	response *aws.Response
 }

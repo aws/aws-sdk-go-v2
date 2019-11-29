@@ -6,64 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/codecommit/types"
 )
-
-type PostCommentReplyInput struct {
-	_ struct{} `type:"structure"`
-
-	// A unique, client-generated idempotency token that when provided in a request,
-	// ensures the request cannot be repeated with a changed parameter. If a request
-	// is received with the same parameters and a token is included, the request
-	// will return information about the initial request that used that token.
-	ClientRequestToken *string `locationName:"clientRequestToken" type:"string" idempotencyToken:"true"`
-
-	// The contents of your reply to a comment.
-	//
-	// Content is a required field
-	Content *string `locationName:"content" type:"string" required:"true"`
-
-	// The system-generated ID of the comment to which you want to reply. To get
-	// this ID, use GetCommentsForComparedCommit or GetCommentsForPullRequest.
-	//
-	// InReplyTo is a required field
-	InReplyTo *string `locationName:"inReplyTo" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s PostCommentReplyInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *PostCommentReplyInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "PostCommentReplyInput"}
-
-	if s.Content == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Content"))
-	}
-
-	if s.InReplyTo == nil {
-		invalidParams.Add(aws.NewErrParamRequired("InReplyTo"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type PostCommentReplyOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Information about the reply to a comment.
-	Comment *Comment `locationName:"comment" type:"structure"`
-}
-
-// String returns the string representation
-func (s PostCommentReplyOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opPostCommentReply = "PostCommentReply"
 
@@ -81,7 +25,7 @@ const opPostCommentReply = "PostCommentReply"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/PostCommentReply
-func (c *Client) PostCommentReplyRequest(input *PostCommentReplyInput) PostCommentReplyRequest {
+func (c *Client) PostCommentReplyRequest(input *types.PostCommentReplyInput) PostCommentReplyRequest {
 	op := &aws.Operation{
 		Name:       opPostCommentReply,
 		HTTPMethod: "POST",
@@ -89,10 +33,10 @@ func (c *Client) PostCommentReplyRequest(input *PostCommentReplyInput) PostComme
 	}
 
 	if input == nil {
-		input = &PostCommentReplyInput{}
+		input = &types.PostCommentReplyInput{}
 	}
 
-	req := c.newRequest(op, input, &PostCommentReplyOutput{})
+	req := c.newRequest(op, input, &types.PostCommentReplyOutput{})
 	return PostCommentReplyRequest{Request: req, Input: input, Copy: c.PostCommentReplyRequest}
 }
 
@@ -100,8 +44,8 @@ func (c *Client) PostCommentReplyRequest(input *PostCommentReplyInput) PostComme
 // PostCommentReply API operation.
 type PostCommentReplyRequest struct {
 	*aws.Request
-	Input *PostCommentReplyInput
-	Copy  func(*PostCommentReplyInput) PostCommentReplyRequest
+	Input *types.PostCommentReplyInput
+	Copy  func(*types.PostCommentReplyInput) PostCommentReplyRequest
 }
 
 // Send marshals and sends the PostCommentReply API request.
@@ -113,7 +57,7 @@ func (r PostCommentReplyRequest) Send(ctx context.Context) (*PostCommentReplyRes
 	}
 
 	resp := &PostCommentReplyResponse{
-		PostCommentReplyOutput: r.Request.Data.(*PostCommentReplyOutput),
+		PostCommentReplyOutput: r.Request.Data.(*types.PostCommentReplyOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -123,7 +67,7 @@ func (r PostCommentReplyRequest) Send(ctx context.Context) (*PostCommentReplyRes
 // PostCommentReplyResponse is the response type for the
 // PostCommentReply API operation.
 type PostCommentReplyResponse struct {
-	*PostCommentReplyOutput
+	*types.PostCommentReplyOutput
 
 	response *aws.Response
 }

@@ -6,26 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/servicequotas/types"
 )
-
-type DisassociateServiceQuotaTemplateInput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DisassociateServiceQuotaTemplateInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type DisassociateServiceQuotaTemplateOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DisassociateServiceQuotaTemplateOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDisassociateServiceQuotaTemplate = "DisassociateServiceQuotaTemplate"
 
@@ -50,7 +32,7 @@ const opDisassociateServiceQuotaTemplate = "DisassociateServiceQuotaTemplate"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/service-quotas-2019-06-24/DisassociateServiceQuotaTemplate
-func (c *Client) DisassociateServiceQuotaTemplateRequest(input *DisassociateServiceQuotaTemplateInput) DisassociateServiceQuotaTemplateRequest {
+func (c *Client) DisassociateServiceQuotaTemplateRequest(input *types.DisassociateServiceQuotaTemplateInput) DisassociateServiceQuotaTemplateRequest {
 	op := &aws.Operation{
 		Name:       opDisassociateServiceQuotaTemplate,
 		HTTPMethod: "POST",
@@ -58,10 +40,10 @@ func (c *Client) DisassociateServiceQuotaTemplateRequest(input *DisassociateServ
 	}
 
 	if input == nil {
-		input = &DisassociateServiceQuotaTemplateInput{}
+		input = &types.DisassociateServiceQuotaTemplateInput{}
 	}
 
-	req := c.newRequest(op, input, &DisassociateServiceQuotaTemplateOutput{})
+	req := c.newRequest(op, input, &types.DisassociateServiceQuotaTemplateOutput{})
 	return DisassociateServiceQuotaTemplateRequest{Request: req, Input: input, Copy: c.DisassociateServiceQuotaTemplateRequest}
 }
 
@@ -69,8 +51,8 @@ func (c *Client) DisassociateServiceQuotaTemplateRequest(input *DisassociateServ
 // DisassociateServiceQuotaTemplate API operation.
 type DisassociateServiceQuotaTemplateRequest struct {
 	*aws.Request
-	Input *DisassociateServiceQuotaTemplateInput
-	Copy  func(*DisassociateServiceQuotaTemplateInput) DisassociateServiceQuotaTemplateRequest
+	Input *types.DisassociateServiceQuotaTemplateInput
+	Copy  func(*types.DisassociateServiceQuotaTemplateInput) DisassociateServiceQuotaTemplateRequest
 }
 
 // Send marshals and sends the DisassociateServiceQuotaTemplate API request.
@@ -82,7 +64,7 @@ func (r DisassociateServiceQuotaTemplateRequest) Send(ctx context.Context) (*Dis
 	}
 
 	resp := &DisassociateServiceQuotaTemplateResponse{
-		DisassociateServiceQuotaTemplateOutput: r.Request.Data.(*DisassociateServiceQuotaTemplateOutput),
+		DisassociateServiceQuotaTemplateOutput: r.Request.Data.(*types.DisassociateServiceQuotaTemplateOutput),
 		response:                               &aws.Response{Request: r.Request},
 	}
 
@@ -92,7 +74,7 @@ func (r DisassociateServiceQuotaTemplateRequest) Send(ctx context.Context) (*Dis
 // DisassociateServiceQuotaTemplateResponse is the response type for the
 // DisassociateServiceQuotaTemplate API operation.
 type DisassociateServiceQuotaTemplateResponse struct {
-	*DisassociateServiceQuotaTemplateOutput
+	*types.DisassociateServiceQuotaTemplateOutput
 
 	response *aws.Response
 }

@@ -6,70 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/restjson"
+	"github.com/aws/aws-sdk-go-v2/service/iot/types"
 )
-
-// The input for the CancelCertificateTransfer operation.
-type CancelCertificateTransferInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the certificate. (The last part of the certificate ARN contains
-	// the certificate ID.)
-	//
-	// CertificateId is a required field
-	CertificateId *string `location:"uri" locationName:"certificateId" min:"64" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s CancelCertificateTransferInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CancelCertificateTransferInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CancelCertificateTransferInput"}
-
-	if s.CertificateId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("CertificateId"))
-	}
-	if s.CertificateId != nil && len(*s.CertificateId) < 64 {
-		invalidParams.Add(aws.NewErrParamMinLen("CertificateId", 64))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s CancelCertificateTransferInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.CertificateId != nil {
-		v := *s.CertificateId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "certificateId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type CancelCertificateTransferOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s CancelCertificateTransferOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s CancelCertificateTransferOutput) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
 
 const opCancelCertificateTransfer = "CancelCertificateTransfer"
 
@@ -93,7 +33,7 @@ const opCancelCertificateTransfer = "CancelCertificateTransfer"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) CancelCertificateTransferRequest(input *CancelCertificateTransferInput) CancelCertificateTransferRequest {
+func (c *Client) CancelCertificateTransferRequest(input *types.CancelCertificateTransferInput) CancelCertificateTransferRequest {
 	op := &aws.Operation{
 		Name:       opCancelCertificateTransfer,
 		HTTPMethod: "PATCH",
@@ -101,10 +41,10 @@ func (c *Client) CancelCertificateTransferRequest(input *CancelCertificateTransf
 	}
 
 	if input == nil {
-		input = &CancelCertificateTransferInput{}
+		input = &types.CancelCertificateTransferInput{}
 	}
 
-	req := c.newRequest(op, input, &CancelCertificateTransferOutput{})
+	req := c.newRequest(op, input, &types.CancelCertificateTransferOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return CancelCertificateTransferRequest{Request: req, Input: input, Copy: c.CancelCertificateTransferRequest}
@@ -114,8 +54,8 @@ func (c *Client) CancelCertificateTransferRequest(input *CancelCertificateTransf
 // CancelCertificateTransfer API operation.
 type CancelCertificateTransferRequest struct {
 	*aws.Request
-	Input *CancelCertificateTransferInput
-	Copy  func(*CancelCertificateTransferInput) CancelCertificateTransferRequest
+	Input *types.CancelCertificateTransferInput
+	Copy  func(*types.CancelCertificateTransferInput) CancelCertificateTransferRequest
 }
 
 // Send marshals and sends the CancelCertificateTransfer API request.
@@ -127,7 +67,7 @@ func (r CancelCertificateTransferRequest) Send(ctx context.Context) (*CancelCert
 	}
 
 	resp := &CancelCertificateTransferResponse{
-		CancelCertificateTransferOutput: r.Request.Data.(*CancelCertificateTransferOutput),
+		CancelCertificateTransferOutput: r.Request.Data.(*types.CancelCertificateTransferOutput),
 		response:                        &aws.Response{Request: r.Request},
 	}
 
@@ -137,7 +77,7 @@ func (r CancelCertificateTransferRequest) Send(ctx context.Context) (*CancelCert
 // CancelCertificateTransferResponse is the response type for the
 // CancelCertificateTransfer API operation.
 type CancelCertificateTransferResponse struct {
-	*CancelCertificateTransferOutput
+	*types.CancelCertificateTransferOutput
 
 	response *aws.Response
 }

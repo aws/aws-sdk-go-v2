@@ -4,86 +4,10 @@ package alexaforbusiness
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/alexaforbusiness/types"
 )
-
-type SearchProfilesInput struct {
-	_ struct{} `type:"structure"`
-
-	// The filters to use to list a specified set of room profiles. Supported filter
-	// keys are ProfileName and Address. Required.
-	Filters []Filter `type:"list"`
-
-	// The maximum number of results to include in the response. If more results
-	// exist than the specified MaxResults value, a token is included in the response
-	// so that the remaining results can be retrieved.
-	MaxResults *int64 `min:"1" type:"integer"`
-
-	// An optional token returned from a prior request. Use this token for pagination
-	// of results from this action. If this parameter is specified, the response
-	// includes only results beyond the token, up to the value specified by MaxResults.
-	NextToken *string `min:"1" type:"string"`
-
-	// The sort order to use in listing the specified set of room profiles. Supported
-	// sort keys are ProfileName and Address.
-	SortCriteria []Sort `type:"list"`
-}
-
-// String returns the string representation
-func (s SearchProfilesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *SearchProfilesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "SearchProfilesInput"}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-	if s.NextToken != nil && len(*s.NextToken) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
-	}
-	if s.Filters != nil {
-		for i, v := range s.Filters {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-	if s.SortCriteria != nil {
-		for i, v := range s.SortCriteria {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "SortCriteria", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type SearchProfilesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The token returned to indicate that there is more data available.
-	NextToken *string `min:"1" type:"string"`
-
-	// The profiles that meet the specified set of filter criteria, in sort order.
-	Profiles []ProfileData `type:"list"`
-
-	// The total number of room profiles returned.
-	TotalCount *int64 `type:"integer"`
-}
-
-// String returns the string representation
-func (s SearchProfilesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opSearchProfiles = "SearchProfiles"
 
@@ -100,7 +24,7 @@ const opSearchProfiles = "SearchProfiles"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/SearchProfiles
-func (c *Client) SearchProfilesRequest(input *SearchProfilesInput) SearchProfilesRequest {
+func (c *Client) SearchProfilesRequest(input *types.SearchProfilesInput) SearchProfilesRequest {
 	op := &aws.Operation{
 		Name:       opSearchProfiles,
 		HTTPMethod: "POST",
@@ -114,10 +38,10 @@ func (c *Client) SearchProfilesRequest(input *SearchProfilesInput) SearchProfile
 	}
 
 	if input == nil {
-		input = &SearchProfilesInput{}
+		input = &types.SearchProfilesInput{}
 	}
 
-	req := c.newRequest(op, input, &SearchProfilesOutput{})
+	req := c.newRequest(op, input, &types.SearchProfilesOutput{})
 	return SearchProfilesRequest{Request: req, Input: input, Copy: c.SearchProfilesRequest}
 }
 
@@ -125,8 +49,8 @@ func (c *Client) SearchProfilesRequest(input *SearchProfilesInput) SearchProfile
 // SearchProfiles API operation.
 type SearchProfilesRequest struct {
 	*aws.Request
-	Input *SearchProfilesInput
-	Copy  func(*SearchProfilesInput) SearchProfilesRequest
+	Input *types.SearchProfilesInput
+	Copy  func(*types.SearchProfilesInput) SearchProfilesRequest
 }
 
 // Send marshals and sends the SearchProfiles API request.
@@ -138,7 +62,7 @@ func (r SearchProfilesRequest) Send(ctx context.Context) (*SearchProfilesRespons
 	}
 
 	resp := &SearchProfilesResponse{
-		SearchProfilesOutput: r.Request.Data.(*SearchProfilesOutput),
+		SearchProfilesOutput: r.Request.Data.(*types.SearchProfilesOutput),
 		response:             &aws.Response{Request: r.Request},
 	}
 
@@ -168,7 +92,7 @@ func NewSearchProfilesPaginator(req SearchProfilesRequest) SearchProfilesPaginat
 	return SearchProfilesPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *SearchProfilesInput
+				var inCpy *types.SearchProfilesInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -188,14 +112,14 @@ type SearchProfilesPaginator struct {
 	aws.Pager
 }
 
-func (p *SearchProfilesPaginator) CurrentPage() *SearchProfilesOutput {
-	return p.Pager.CurrentPage().(*SearchProfilesOutput)
+func (p *SearchProfilesPaginator) CurrentPage() *types.SearchProfilesOutput {
+	return p.Pager.CurrentPage().(*types.SearchProfilesOutput)
 }
 
 // SearchProfilesResponse is the response type for the
 // SearchProfiles API operation.
 type SearchProfilesResponse struct {
-	*SearchProfilesOutput
+	*types.SearchProfilesOutput
 
 	response *aws.Response
 }

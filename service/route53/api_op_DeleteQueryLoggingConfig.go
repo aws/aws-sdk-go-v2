@@ -6,66 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/route53/types"
 )
-
-type DeleteQueryLoggingConfigInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the configuration that you want to delete.
-	//
-	// Id is a required field
-	Id *string `location:"uri" locationName:"Id" min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteQueryLoggingConfigInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteQueryLoggingConfigInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteQueryLoggingConfigInput"}
-
-	if s.Id == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Id"))
-	}
-	if s.Id != nil && len(*s.Id) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Id", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteQueryLoggingConfigInput) MarshalFields(e protocol.FieldEncoder) error {
-
-	if s.Id != nil {
-		v := *s.Id
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "Id", protocol.StringValue(v), metadata)
-	}
-	return nil
-}
-
-type DeleteQueryLoggingConfigOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteQueryLoggingConfigOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteQueryLoggingConfigOutput) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
 
 const opDeleteQueryLoggingConfig = "DeleteQueryLoggingConfig"
 
@@ -86,7 +28,7 @@ const opDeleteQueryLoggingConfig = "DeleteQueryLoggingConfig"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/DeleteQueryLoggingConfig
-func (c *Client) DeleteQueryLoggingConfigRequest(input *DeleteQueryLoggingConfigInput) DeleteQueryLoggingConfigRequest {
+func (c *Client) DeleteQueryLoggingConfigRequest(input *types.DeleteQueryLoggingConfigInput) DeleteQueryLoggingConfigRequest {
 	op := &aws.Operation{
 		Name:       opDeleteQueryLoggingConfig,
 		HTTPMethod: "DELETE",
@@ -94,10 +36,10 @@ func (c *Client) DeleteQueryLoggingConfigRequest(input *DeleteQueryLoggingConfig
 	}
 
 	if input == nil {
-		input = &DeleteQueryLoggingConfigInput{}
+		input = &types.DeleteQueryLoggingConfigInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteQueryLoggingConfigOutput{})
+	req := c.newRequest(op, input, &types.DeleteQueryLoggingConfigOutput{})
 	return DeleteQueryLoggingConfigRequest{Request: req, Input: input, Copy: c.DeleteQueryLoggingConfigRequest}
 }
 
@@ -105,8 +47,8 @@ func (c *Client) DeleteQueryLoggingConfigRequest(input *DeleteQueryLoggingConfig
 // DeleteQueryLoggingConfig API operation.
 type DeleteQueryLoggingConfigRequest struct {
 	*aws.Request
-	Input *DeleteQueryLoggingConfigInput
-	Copy  func(*DeleteQueryLoggingConfigInput) DeleteQueryLoggingConfigRequest
+	Input *types.DeleteQueryLoggingConfigInput
+	Copy  func(*types.DeleteQueryLoggingConfigInput) DeleteQueryLoggingConfigRequest
 }
 
 // Send marshals and sends the DeleteQueryLoggingConfig API request.
@@ -118,7 +60,7 @@ func (r DeleteQueryLoggingConfigRequest) Send(ctx context.Context) (*DeleteQuery
 	}
 
 	resp := &DeleteQueryLoggingConfigResponse{
-		DeleteQueryLoggingConfigOutput: r.Request.Data.(*DeleteQueryLoggingConfigOutput),
+		DeleteQueryLoggingConfigOutput: r.Request.Data.(*types.DeleteQueryLoggingConfigOutput),
 		response:                       &aws.Response{Request: r.Request},
 	}
 
@@ -128,7 +70,7 @@ func (r DeleteQueryLoggingConfigRequest) Send(ctx context.Context) (*DeleteQuery
 // DeleteQueryLoggingConfigResponse is the response type for the
 // DeleteQueryLoggingConfig API operation.
 type DeleteQueryLoggingConfigResponse struct {
-	*DeleteQueryLoggingConfigOutput
+	*types.DeleteQueryLoggingConfigOutput
 
 	response *aws.Response
 }

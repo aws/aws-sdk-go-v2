@@ -6,77 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/iot/types"
 )
-
-type UpdateIndexingConfigurationInput struct {
-	_ struct{} `type:"structure"`
-
-	// Thing group indexing configuration.
-	ThingGroupIndexingConfiguration *ThingGroupIndexingConfiguration `locationName:"thingGroupIndexingConfiguration" type:"structure"`
-
-	// Thing indexing configuration.
-	ThingIndexingConfiguration *ThingIndexingConfiguration `locationName:"thingIndexingConfiguration" type:"structure"`
-}
-
-// String returns the string representation
-func (s UpdateIndexingConfigurationInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateIndexingConfigurationInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateIndexingConfigurationInput"}
-	if s.ThingGroupIndexingConfiguration != nil {
-		if err := s.ThingGroupIndexingConfiguration.Validate(); err != nil {
-			invalidParams.AddNested("ThingGroupIndexingConfiguration", err.(aws.ErrInvalidParams))
-		}
-	}
-	if s.ThingIndexingConfiguration != nil {
-		if err := s.ThingIndexingConfiguration.Validate(); err != nil {
-			invalidParams.AddNested("ThingIndexingConfiguration", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s UpdateIndexingConfigurationInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.ThingGroupIndexingConfiguration != nil {
-		v := s.ThingGroupIndexingConfiguration
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "thingGroupIndexingConfiguration", v, metadata)
-	}
-	if s.ThingIndexingConfiguration != nil {
-		v := s.ThingIndexingConfiguration
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "thingIndexingConfiguration", v, metadata)
-	}
-	return nil
-}
-
-type UpdateIndexingConfigurationOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s UpdateIndexingConfigurationOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s UpdateIndexingConfigurationOutput) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
 
 const opUpdateIndexingConfiguration = "UpdateIndexingConfiguration"
 
@@ -91,7 +22,7 @@ const opUpdateIndexingConfiguration = "UpdateIndexingConfiguration"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) UpdateIndexingConfigurationRequest(input *UpdateIndexingConfigurationInput) UpdateIndexingConfigurationRequest {
+func (c *Client) UpdateIndexingConfigurationRequest(input *types.UpdateIndexingConfigurationInput) UpdateIndexingConfigurationRequest {
 	op := &aws.Operation{
 		Name:       opUpdateIndexingConfiguration,
 		HTTPMethod: "POST",
@@ -99,10 +30,10 @@ func (c *Client) UpdateIndexingConfigurationRequest(input *UpdateIndexingConfigu
 	}
 
 	if input == nil {
-		input = &UpdateIndexingConfigurationInput{}
+		input = &types.UpdateIndexingConfigurationInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateIndexingConfigurationOutput{})
+	req := c.newRequest(op, input, &types.UpdateIndexingConfigurationOutput{})
 	return UpdateIndexingConfigurationRequest{Request: req, Input: input, Copy: c.UpdateIndexingConfigurationRequest}
 }
 
@@ -110,8 +41,8 @@ func (c *Client) UpdateIndexingConfigurationRequest(input *UpdateIndexingConfigu
 // UpdateIndexingConfiguration API operation.
 type UpdateIndexingConfigurationRequest struct {
 	*aws.Request
-	Input *UpdateIndexingConfigurationInput
-	Copy  func(*UpdateIndexingConfigurationInput) UpdateIndexingConfigurationRequest
+	Input *types.UpdateIndexingConfigurationInput
+	Copy  func(*types.UpdateIndexingConfigurationInput) UpdateIndexingConfigurationRequest
 }
 
 // Send marshals and sends the UpdateIndexingConfiguration API request.
@@ -123,7 +54,7 @@ func (r UpdateIndexingConfigurationRequest) Send(ctx context.Context) (*UpdateIn
 	}
 
 	resp := &UpdateIndexingConfigurationResponse{
-		UpdateIndexingConfigurationOutput: r.Request.Data.(*UpdateIndexingConfigurationOutput),
+		UpdateIndexingConfigurationOutput: r.Request.Data.(*types.UpdateIndexingConfigurationOutput),
 		response:                          &aws.Response{Request: r.Request},
 	}
 
@@ -133,7 +64,7 @@ func (r UpdateIndexingConfigurationRequest) Send(ctx context.Context) (*UpdateIn
 // UpdateIndexingConfigurationResponse is the response type for the
 // UpdateIndexingConfiguration API operation.
 type UpdateIndexingConfigurationResponse struct {
-	*UpdateIndexingConfigurationOutput
+	*types.UpdateIndexingConfigurationOutput
 
 	response *aws.Response
 }

@@ -6,54 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/alexaforbusiness/types"
 )
-
-type DisassociateContactFromAddressBookInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ARN of the address from which to disassociate the contact.
-	//
-	// AddressBookArn is a required field
-	AddressBookArn *string `type:"string" required:"true"`
-
-	// The ARN of the contact to disassociate from an address book.
-	//
-	// ContactArn is a required field
-	ContactArn *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DisassociateContactFromAddressBookInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DisassociateContactFromAddressBookInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DisassociateContactFromAddressBookInput"}
-
-	if s.AddressBookArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("AddressBookArn"))
-	}
-
-	if s.ContactArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ContactArn"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DisassociateContactFromAddressBookOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DisassociateContactFromAddressBookOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDisassociateContactFromAddressBook = "DisassociateContactFromAddressBook"
 
@@ -70,7 +24,7 @@ const opDisassociateContactFromAddressBook = "DisassociateContactFromAddressBook
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/DisassociateContactFromAddressBook
-func (c *Client) DisassociateContactFromAddressBookRequest(input *DisassociateContactFromAddressBookInput) DisassociateContactFromAddressBookRequest {
+func (c *Client) DisassociateContactFromAddressBookRequest(input *types.DisassociateContactFromAddressBookInput) DisassociateContactFromAddressBookRequest {
 	op := &aws.Operation{
 		Name:       opDisassociateContactFromAddressBook,
 		HTTPMethod: "POST",
@@ -78,10 +32,10 @@ func (c *Client) DisassociateContactFromAddressBookRequest(input *DisassociateCo
 	}
 
 	if input == nil {
-		input = &DisassociateContactFromAddressBookInput{}
+		input = &types.DisassociateContactFromAddressBookInput{}
 	}
 
-	req := c.newRequest(op, input, &DisassociateContactFromAddressBookOutput{})
+	req := c.newRequest(op, input, &types.DisassociateContactFromAddressBookOutput{})
 	return DisassociateContactFromAddressBookRequest{Request: req, Input: input, Copy: c.DisassociateContactFromAddressBookRequest}
 }
 
@@ -89,8 +43,8 @@ func (c *Client) DisassociateContactFromAddressBookRequest(input *DisassociateCo
 // DisassociateContactFromAddressBook API operation.
 type DisassociateContactFromAddressBookRequest struct {
 	*aws.Request
-	Input *DisassociateContactFromAddressBookInput
-	Copy  func(*DisassociateContactFromAddressBookInput) DisassociateContactFromAddressBookRequest
+	Input *types.DisassociateContactFromAddressBookInput
+	Copy  func(*types.DisassociateContactFromAddressBookInput) DisassociateContactFromAddressBookRequest
 }
 
 // Send marshals and sends the DisassociateContactFromAddressBook API request.
@@ -102,7 +56,7 @@ func (r DisassociateContactFromAddressBookRequest) Send(ctx context.Context) (*D
 	}
 
 	resp := &DisassociateContactFromAddressBookResponse{
-		DisassociateContactFromAddressBookOutput: r.Request.Data.(*DisassociateContactFromAddressBookOutput),
+		DisassociateContactFromAddressBookOutput: r.Request.Data.(*types.DisassociateContactFromAddressBookOutput),
 		response:                                 &aws.Response{Request: r.Request},
 	}
 
@@ -112,7 +66,7 @@ func (r DisassociateContactFromAddressBookRequest) Send(ctx context.Context) (*D
 // DisassociateContactFromAddressBookResponse is the response type for the
 // DisassociateContactFromAddressBook API operation.
 type DisassociateContactFromAddressBookResponse struct {
-	*DisassociateContactFromAddressBookOutput
+	*types.DisassociateContactFromAddressBookOutput
 
 	response *aws.Response
 }

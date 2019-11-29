@@ -6,158 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/ram/types"
 )
-
-type GetResourceSharesInput struct {
-	_ struct{} `type:"structure"`
-
-	// The maximum number of results to return with a single call. To retrieve the
-	// remaining results, make another call with the returned nextToken value.
-	MaxResults *int64 `locationName:"maxResults" min:"1" type:"integer"`
-
-	// The name of the resource share.
-	Name *string `locationName:"name" type:"string"`
-
-	// The token for the next page of results.
-	NextToken *string `locationName:"nextToken" type:"string"`
-
-	// The type of owner.
-	//
-	// ResourceOwner is a required field
-	ResourceOwner ResourceOwner `locationName:"resourceOwner" type:"string" required:"true" enum:"true"`
-
-	// The Amazon Resource Names (ARN) of the resource shares.
-	ResourceShareArns []string `locationName:"resourceShareArns" type:"list"`
-
-	// The status of the resource share.
-	ResourceShareStatus ResourceShareStatus `locationName:"resourceShareStatus" type:"string" enum:"true"`
-
-	// One or more tag filters.
-	TagFilters []TagFilter `locationName:"tagFilters" type:"list"`
-}
-
-// String returns the string representation
-func (s GetResourceSharesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetResourceSharesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetResourceSharesInput"}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-	if len(s.ResourceOwner) == 0 {
-		invalidParams.Add(aws.NewErrParamRequired("ResourceOwner"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetResourceSharesInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.MaxResults != nil {
-		v := *s.MaxResults
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "maxResults", protocol.Int64Value(v), metadata)
-	}
-	if s.Name != nil {
-		v := *s.Name
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if len(s.ResourceOwner) > 0 {
-		v := s.ResourceOwner
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "resourceOwner", protocol.QuotedValue{ValueMarshaler: v}, metadata)
-	}
-	if s.ResourceShareArns != nil {
-		v := s.ResourceShareArns
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "resourceShareArns", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
-		}
-		ls0.End()
-
-	}
-	if len(s.ResourceShareStatus) > 0 {
-		v := s.ResourceShareStatus
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "resourceShareStatus", protocol.QuotedValue{ValueMarshaler: v}, metadata)
-	}
-	if s.TagFilters != nil {
-		v := s.TagFilters
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "tagFilters", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	return nil
-}
-
-type GetResourceSharesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The token to use to retrieve the next page of results. This value is null
-	// when there are no more results to return.
-	NextToken *string `locationName:"nextToken" type:"string"`
-
-	// Information about the resource shares.
-	ResourceShares []ResourceShare `locationName:"resourceShares" type:"list"`
-}
-
-// String returns the string representation
-func (s GetResourceSharesOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetResourceSharesOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.ResourceShares != nil {
-		v := s.ResourceShares
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "resourceShares", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	return nil
-}
 
 const opGetResourceShares = "GetResourceShares"
 
@@ -175,7 +25,7 @@ const opGetResourceShares = "GetResourceShares"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/GetResourceShares
-func (c *Client) GetResourceSharesRequest(input *GetResourceSharesInput) GetResourceSharesRequest {
+func (c *Client) GetResourceSharesRequest(input *types.GetResourceSharesInput) GetResourceSharesRequest {
 	op := &aws.Operation{
 		Name:       opGetResourceShares,
 		HTTPMethod: "POST",
@@ -189,10 +39,10 @@ func (c *Client) GetResourceSharesRequest(input *GetResourceSharesInput) GetReso
 	}
 
 	if input == nil {
-		input = &GetResourceSharesInput{}
+		input = &types.GetResourceSharesInput{}
 	}
 
-	req := c.newRequest(op, input, &GetResourceSharesOutput{})
+	req := c.newRequest(op, input, &types.GetResourceSharesOutput{})
 	return GetResourceSharesRequest{Request: req, Input: input, Copy: c.GetResourceSharesRequest}
 }
 
@@ -200,8 +50,8 @@ func (c *Client) GetResourceSharesRequest(input *GetResourceSharesInput) GetReso
 // GetResourceShares API operation.
 type GetResourceSharesRequest struct {
 	*aws.Request
-	Input *GetResourceSharesInput
-	Copy  func(*GetResourceSharesInput) GetResourceSharesRequest
+	Input *types.GetResourceSharesInput
+	Copy  func(*types.GetResourceSharesInput) GetResourceSharesRequest
 }
 
 // Send marshals and sends the GetResourceShares API request.
@@ -213,7 +63,7 @@ func (r GetResourceSharesRequest) Send(ctx context.Context) (*GetResourceSharesR
 	}
 
 	resp := &GetResourceSharesResponse{
-		GetResourceSharesOutput: r.Request.Data.(*GetResourceSharesOutput),
+		GetResourceSharesOutput: r.Request.Data.(*types.GetResourceSharesOutput),
 		response:                &aws.Response{Request: r.Request},
 	}
 
@@ -243,7 +93,7 @@ func NewGetResourceSharesPaginator(req GetResourceSharesRequest) GetResourceShar
 	return GetResourceSharesPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *GetResourceSharesInput
+				var inCpy *types.GetResourceSharesInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -263,14 +113,14 @@ type GetResourceSharesPaginator struct {
 	aws.Pager
 }
 
-func (p *GetResourceSharesPaginator) CurrentPage() *GetResourceSharesOutput {
-	return p.Pager.CurrentPage().(*GetResourceSharesOutput)
+func (p *GetResourceSharesPaginator) CurrentPage() *types.GetResourceSharesOutput {
+	return p.Pager.CurrentPage().(*types.GetResourceSharesOutput)
 }
 
 // GetResourceSharesResponse is the response type for the
 // GetResourceShares API operation.
 type GetResourceSharesResponse struct {
-	*GetResourceSharesOutput
+	*types.GetResourceSharesOutput
 
 	response *aws.Response
 }

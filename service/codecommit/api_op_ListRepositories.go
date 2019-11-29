@@ -6,49 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/codecommit/types"
 )
-
-// Represents the input of a list repositories operation.
-type ListRepositoriesInput struct {
-	_ struct{} `type:"structure"`
-
-	// An enumeration token that allows the operation to batch the results of the
-	// operation. Batch sizes are 1,000 for list repository operations. When the
-	// client sends the token back to AWS CodeCommit, another page of 1,000 records
-	// is retrieved.
-	NextToken *string `locationName:"nextToken" type:"string"`
-
-	// The order in which to sort the results of a list repositories operation.
-	Order OrderEnum `locationName:"order" type:"string" enum:"true"`
-
-	// The criteria used to sort the results of a list repositories operation.
-	SortBy SortByEnum `locationName:"sortBy" type:"string" enum:"true"`
-}
-
-// String returns the string representation
-func (s ListRepositoriesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Represents the output of a list repositories operation.
-type ListRepositoriesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// An enumeration token that allows the operation to batch the results of the
-	// operation. Batch sizes are 1,000 for list repository operations. When the
-	// client sends the token back to AWS CodeCommit, another page of 1,000 records
-	// is retrieved.
-	NextToken *string `locationName:"nextToken" type:"string"`
-
-	// Lists the repositories called by the list repositories operation.
-	Repositories []RepositoryNameIdPair `locationName:"repositories" type:"list"`
-}
-
-// String returns the string representation
-func (s ListRepositoriesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListRepositories = "ListRepositories"
 
@@ -65,7 +24,7 @@ const opListRepositories = "ListRepositories"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/ListRepositories
-func (c *Client) ListRepositoriesRequest(input *ListRepositoriesInput) ListRepositoriesRequest {
+func (c *Client) ListRepositoriesRequest(input *types.ListRepositoriesInput) ListRepositoriesRequest {
 	op := &aws.Operation{
 		Name:       opListRepositories,
 		HTTPMethod: "POST",
@@ -79,10 +38,10 @@ func (c *Client) ListRepositoriesRequest(input *ListRepositoriesInput) ListRepos
 	}
 
 	if input == nil {
-		input = &ListRepositoriesInput{}
+		input = &types.ListRepositoriesInput{}
 	}
 
-	req := c.newRequest(op, input, &ListRepositoriesOutput{})
+	req := c.newRequest(op, input, &types.ListRepositoriesOutput{})
 	return ListRepositoriesRequest{Request: req, Input: input, Copy: c.ListRepositoriesRequest}
 }
 
@@ -90,8 +49,8 @@ func (c *Client) ListRepositoriesRequest(input *ListRepositoriesInput) ListRepos
 // ListRepositories API operation.
 type ListRepositoriesRequest struct {
 	*aws.Request
-	Input *ListRepositoriesInput
-	Copy  func(*ListRepositoriesInput) ListRepositoriesRequest
+	Input *types.ListRepositoriesInput
+	Copy  func(*types.ListRepositoriesInput) ListRepositoriesRequest
 }
 
 // Send marshals and sends the ListRepositories API request.
@@ -103,7 +62,7 @@ func (r ListRepositoriesRequest) Send(ctx context.Context) (*ListRepositoriesRes
 	}
 
 	resp := &ListRepositoriesResponse{
-		ListRepositoriesOutput: r.Request.Data.(*ListRepositoriesOutput),
+		ListRepositoriesOutput: r.Request.Data.(*types.ListRepositoriesOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -133,7 +92,7 @@ func NewListRepositoriesPaginator(req ListRepositoriesRequest) ListRepositoriesP
 	return ListRepositoriesPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListRepositoriesInput
+				var inCpy *types.ListRepositoriesInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -153,14 +112,14 @@ type ListRepositoriesPaginator struct {
 	aws.Pager
 }
 
-func (p *ListRepositoriesPaginator) CurrentPage() *ListRepositoriesOutput {
-	return p.Pager.CurrentPage().(*ListRepositoriesOutput)
+func (p *ListRepositoriesPaginator) CurrentPage() *types.ListRepositoriesOutput {
+	return p.Pager.CurrentPage().(*types.ListRepositoriesOutput)
 }
 
 // ListRepositoriesResponse is the response type for the
 // ListRepositories API operation.
 type ListRepositoriesResponse struct {
-	*ListRepositoriesOutput
+	*types.ListRepositoriesOutput
 
 	response *aws.Response
 }

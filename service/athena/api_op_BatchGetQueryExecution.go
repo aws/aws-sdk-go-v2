@@ -6,54 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/athena/types"
 )
-
-type BatchGetQueryExecutionInput struct {
-	_ struct{} `type:"structure"`
-
-	// An array of query execution IDs.
-	//
-	// QueryExecutionIds is a required field
-	QueryExecutionIds []string `min:"1" type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s BatchGetQueryExecutionInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *BatchGetQueryExecutionInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "BatchGetQueryExecutionInput"}
-
-	if s.QueryExecutionIds == nil {
-		invalidParams.Add(aws.NewErrParamRequired("QueryExecutionIds"))
-	}
-	if s.QueryExecutionIds != nil && len(s.QueryExecutionIds) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("QueryExecutionIds", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type BatchGetQueryExecutionOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Information about a query execution.
-	QueryExecutions []QueryExecution `type:"list"`
-
-	// Information about the query executions that failed to run.
-	UnprocessedQueryExecutionIds []UnprocessedQueryExecutionId `type:"list"`
-}
-
-// String returns the string representation
-func (s BatchGetQueryExecutionOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opBatchGetQueryExecution = "BatchGetQueryExecution"
 
@@ -75,7 +29,7 @@ const opBatchGetQueryExecution = "BatchGetQueryExecution"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/BatchGetQueryExecution
-func (c *Client) BatchGetQueryExecutionRequest(input *BatchGetQueryExecutionInput) BatchGetQueryExecutionRequest {
+func (c *Client) BatchGetQueryExecutionRequest(input *types.BatchGetQueryExecutionInput) BatchGetQueryExecutionRequest {
 	op := &aws.Operation{
 		Name:       opBatchGetQueryExecution,
 		HTTPMethod: "POST",
@@ -83,10 +37,10 @@ func (c *Client) BatchGetQueryExecutionRequest(input *BatchGetQueryExecutionInpu
 	}
 
 	if input == nil {
-		input = &BatchGetQueryExecutionInput{}
+		input = &types.BatchGetQueryExecutionInput{}
 	}
 
-	req := c.newRequest(op, input, &BatchGetQueryExecutionOutput{})
+	req := c.newRequest(op, input, &types.BatchGetQueryExecutionOutput{})
 	return BatchGetQueryExecutionRequest{Request: req, Input: input, Copy: c.BatchGetQueryExecutionRequest}
 }
 
@@ -94,8 +48,8 @@ func (c *Client) BatchGetQueryExecutionRequest(input *BatchGetQueryExecutionInpu
 // BatchGetQueryExecution API operation.
 type BatchGetQueryExecutionRequest struct {
 	*aws.Request
-	Input *BatchGetQueryExecutionInput
-	Copy  func(*BatchGetQueryExecutionInput) BatchGetQueryExecutionRequest
+	Input *types.BatchGetQueryExecutionInput
+	Copy  func(*types.BatchGetQueryExecutionInput) BatchGetQueryExecutionRequest
 }
 
 // Send marshals and sends the BatchGetQueryExecution API request.
@@ -107,7 +61,7 @@ func (r BatchGetQueryExecutionRequest) Send(ctx context.Context) (*BatchGetQuery
 	}
 
 	resp := &BatchGetQueryExecutionResponse{
-		BatchGetQueryExecutionOutput: r.Request.Data.(*BatchGetQueryExecutionOutput),
+		BatchGetQueryExecutionOutput: r.Request.Data.(*types.BatchGetQueryExecutionOutput),
 		response:                     &aws.Response{Request: r.Request},
 	}
 
@@ -117,7 +71,7 @@ func (r BatchGetQueryExecutionRequest) Send(ctx context.Context) (*BatchGetQuery
 // BatchGetQueryExecutionResponse is the response type for the
 // BatchGetQueryExecution API operation.
 type BatchGetQueryExecutionResponse struct {
-	*BatchGetQueryExecutionOutput
+	*types.BatchGetQueryExecutionOutput
 
 	response *aws.Response
 }

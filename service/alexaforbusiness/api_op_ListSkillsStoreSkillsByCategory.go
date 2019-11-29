@@ -6,66 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/alexaforbusiness/types"
 )
-
-type ListSkillsStoreSkillsByCategoryInput struct {
-	_ struct{} `type:"structure"`
-
-	// The category ID for which the skills are being retrieved from the skill store.
-	//
-	// CategoryId is a required field
-	CategoryId *int64 `min:"1" type:"long" required:"true"`
-
-	// The maximum number of skills returned per paginated calls.
-	MaxResults *int64 `min:"1" type:"integer"`
-
-	// The tokens used for pagination.
-	NextToken *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s ListSkillsStoreSkillsByCategoryInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListSkillsStoreSkillsByCategoryInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListSkillsStoreSkillsByCategoryInput"}
-
-	if s.CategoryId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("CategoryId"))
-	}
-	if s.CategoryId != nil && *s.CategoryId < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("CategoryId", 1))
-	}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-	if s.NextToken != nil && len(*s.NextToken) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ListSkillsStoreSkillsByCategoryOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The tokens used for pagination.
-	NextToken *string `min:"1" type:"string"`
-
-	// The skill store skills.
-	SkillsStoreSkills []SkillsStoreSkill `type:"list"`
-}
-
-// String returns the string representation
-func (s ListSkillsStoreSkillsByCategoryOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListSkillsStoreSkillsByCategory = "ListSkillsStoreSkillsByCategory"
 
@@ -82,7 +24,7 @@ const opListSkillsStoreSkillsByCategory = "ListSkillsStoreSkillsByCategory"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/ListSkillsStoreSkillsByCategory
-func (c *Client) ListSkillsStoreSkillsByCategoryRequest(input *ListSkillsStoreSkillsByCategoryInput) ListSkillsStoreSkillsByCategoryRequest {
+func (c *Client) ListSkillsStoreSkillsByCategoryRequest(input *types.ListSkillsStoreSkillsByCategoryInput) ListSkillsStoreSkillsByCategoryRequest {
 	op := &aws.Operation{
 		Name:       opListSkillsStoreSkillsByCategory,
 		HTTPMethod: "POST",
@@ -96,10 +38,10 @@ func (c *Client) ListSkillsStoreSkillsByCategoryRequest(input *ListSkillsStoreSk
 	}
 
 	if input == nil {
-		input = &ListSkillsStoreSkillsByCategoryInput{}
+		input = &types.ListSkillsStoreSkillsByCategoryInput{}
 	}
 
-	req := c.newRequest(op, input, &ListSkillsStoreSkillsByCategoryOutput{})
+	req := c.newRequest(op, input, &types.ListSkillsStoreSkillsByCategoryOutput{})
 	return ListSkillsStoreSkillsByCategoryRequest{Request: req, Input: input, Copy: c.ListSkillsStoreSkillsByCategoryRequest}
 }
 
@@ -107,8 +49,8 @@ func (c *Client) ListSkillsStoreSkillsByCategoryRequest(input *ListSkillsStoreSk
 // ListSkillsStoreSkillsByCategory API operation.
 type ListSkillsStoreSkillsByCategoryRequest struct {
 	*aws.Request
-	Input *ListSkillsStoreSkillsByCategoryInput
-	Copy  func(*ListSkillsStoreSkillsByCategoryInput) ListSkillsStoreSkillsByCategoryRequest
+	Input *types.ListSkillsStoreSkillsByCategoryInput
+	Copy  func(*types.ListSkillsStoreSkillsByCategoryInput) ListSkillsStoreSkillsByCategoryRequest
 }
 
 // Send marshals and sends the ListSkillsStoreSkillsByCategory API request.
@@ -120,7 +62,7 @@ func (r ListSkillsStoreSkillsByCategoryRequest) Send(ctx context.Context) (*List
 	}
 
 	resp := &ListSkillsStoreSkillsByCategoryResponse{
-		ListSkillsStoreSkillsByCategoryOutput: r.Request.Data.(*ListSkillsStoreSkillsByCategoryOutput),
+		ListSkillsStoreSkillsByCategoryOutput: r.Request.Data.(*types.ListSkillsStoreSkillsByCategoryOutput),
 		response:                              &aws.Response{Request: r.Request},
 	}
 
@@ -150,7 +92,7 @@ func NewListSkillsStoreSkillsByCategoryPaginator(req ListSkillsStoreSkillsByCate
 	return ListSkillsStoreSkillsByCategoryPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListSkillsStoreSkillsByCategoryInput
+				var inCpy *types.ListSkillsStoreSkillsByCategoryInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -170,14 +112,14 @@ type ListSkillsStoreSkillsByCategoryPaginator struct {
 	aws.Pager
 }
 
-func (p *ListSkillsStoreSkillsByCategoryPaginator) CurrentPage() *ListSkillsStoreSkillsByCategoryOutput {
-	return p.Pager.CurrentPage().(*ListSkillsStoreSkillsByCategoryOutput)
+func (p *ListSkillsStoreSkillsByCategoryPaginator) CurrentPage() *types.ListSkillsStoreSkillsByCategoryOutput {
+	return p.Pager.CurrentPage().(*types.ListSkillsStoreSkillsByCategoryOutput)
 }
 
 // ListSkillsStoreSkillsByCategoryResponse is the response type for the
 // ListSkillsStoreSkillsByCategory API operation.
 type ListSkillsStoreSkillsByCategoryResponse struct {
-	*ListSkillsStoreSkillsByCategoryOutput
+	*types.ListSkillsStoreSkillsByCategoryOutput
 
 	response *aws.Response
 }

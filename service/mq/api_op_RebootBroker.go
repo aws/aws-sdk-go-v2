@@ -6,62 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/mq/types"
 )
-
-type RebootBrokerInput struct {
-	_ struct{} `type:"structure"`
-
-	// BrokerId is a required field
-	BrokerId *string `location:"uri" locationName:"broker-id" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s RebootBrokerInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *RebootBrokerInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "RebootBrokerInput"}
-
-	if s.BrokerId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("BrokerId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s RebootBrokerInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.BrokerId != nil {
-		v := *s.BrokerId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "broker-id", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type RebootBrokerOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s RebootBrokerOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s RebootBrokerOutput) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
 
 const opRebootBroker = "RebootBroker"
 
@@ -78,7 +24,7 @@ const opRebootBroker = "RebootBroker"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/RebootBroker
-func (c *Client) RebootBrokerRequest(input *RebootBrokerInput) RebootBrokerRequest {
+func (c *Client) RebootBrokerRequest(input *types.RebootBrokerInput) RebootBrokerRequest {
 	op := &aws.Operation{
 		Name:       opRebootBroker,
 		HTTPMethod: "POST",
@@ -86,10 +32,10 @@ func (c *Client) RebootBrokerRequest(input *RebootBrokerInput) RebootBrokerReque
 	}
 
 	if input == nil {
-		input = &RebootBrokerInput{}
+		input = &types.RebootBrokerInput{}
 	}
 
-	req := c.newRequest(op, input, &RebootBrokerOutput{})
+	req := c.newRequest(op, input, &types.RebootBrokerOutput{})
 	return RebootBrokerRequest{Request: req, Input: input, Copy: c.RebootBrokerRequest}
 }
 
@@ -97,8 +43,8 @@ func (c *Client) RebootBrokerRequest(input *RebootBrokerInput) RebootBrokerReque
 // RebootBroker API operation.
 type RebootBrokerRequest struct {
 	*aws.Request
-	Input *RebootBrokerInput
-	Copy  func(*RebootBrokerInput) RebootBrokerRequest
+	Input *types.RebootBrokerInput
+	Copy  func(*types.RebootBrokerInput) RebootBrokerRequest
 }
 
 // Send marshals and sends the RebootBroker API request.
@@ -110,7 +56,7 @@ func (r RebootBrokerRequest) Send(ctx context.Context) (*RebootBrokerResponse, e
 	}
 
 	resp := &RebootBrokerResponse{
-		RebootBrokerOutput: r.Request.Data.(*RebootBrokerOutput),
+		RebootBrokerOutput: r.Request.Data.(*types.RebootBrokerOutput),
 		response:           &aws.Response{Request: r.Request},
 	}
 
@@ -120,7 +66,7 @@ func (r RebootBrokerRequest) Send(ctx context.Context) (*RebootBrokerResponse, e
 // RebootBrokerResponse is the response type for the
 // RebootBroker API operation.
 type RebootBrokerResponse struct {
-	*RebootBrokerOutput
+	*types.RebootBrokerOutput
 
 	response *aws.Response
 }

@@ -6,60 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/iotthingsgraph/types"
 )
-
-type SearchSystemInstancesInput struct {
-	_ struct{} `type:"structure"`
-
-	// Optional filter to apply to the search. Valid filters are SYSTEM_TEMPLATE_ID,
-	// STATUS, and GREENGRASS_GROUP_NAME.
-	//
-	// Multiple filters function as OR criteria in the query. Multiple values passed
-	// inside the filter function as AND criteria.
-	Filters []SystemInstanceFilter `locationName:"filters" type:"list"`
-
-	// The maximum number of results to return in the response.
-	MaxResults *int64 `locationName:"maxResults" min:"1" type:"integer"`
-
-	// The string that specifies the next page of results. Use this when you're
-	// paginating results.
-	NextToken *string `locationName:"nextToken" type:"string"`
-}
-
-// String returns the string representation
-func (s SearchSystemInstancesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *SearchSystemInstancesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "SearchSystemInstancesInput"}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type SearchSystemInstancesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The string to specify as nextToken when you request the next page of results.
-	NextToken *string `locationName:"nextToken" type:"string"`
-
-	// An array of objects that contain summary data abour the system instances
-	// in the result set.
-	Summaries []SystemInstanceSummary `locationName:"summaries" type:"list"`
-}
-
-// String returns the string representation
-func (s SearchSystemInstancesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opSearchSystemInstances = "SearchSystemInstances"
 
@@ -76,7 +24,7 @@ const opSearchSystemInstances = "SearchSystemInstances"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iotthingsgraph-2018-09-06/SearchSystemInstances
-func (c *Client) SearchSystemInstancesRequest(input *SearchSystemInstancesInput) SearchSystemInstancesRequest {
+func (c *Client) SearchSystemInstancesRequest(input *types.SearchSystemInstancesInput) SearchSystemInstancesRequest {
 	op := &aws.Operation{
 		Name:       opSearchSystemInstances,
 		HTTPMethod: "POST",
@@ -90,10 +38,10 @@ func (c *Client) SearchSystemInstancesRequest(input *SearchSystemInstancesInput)
 	}
 
 	if input == nil {
-		input = &SearchSystemInstancesInput{}
+		input = &types.SearchSystemInstancesInput{}
 	}
 
-	req := c.newRequest(op, input, &SearchSystemInstancesOutput{})
+	req := c.newRequest(op, input, &types.SearchSystemInstancesOutput{})
 	return SearchSystemInstancesRequest{Request: req, Input: input, Copy: c.SearchSystemInstancesRequest}
 }
 
@@ -101,8 +49,8 @@ func (c *Client) SearchSystemInstancesRequest(input *SearchSystemInstancesInput)
 // SearchSystemInstances API operation.
 type SearchSystemInstancesRequest struct {
 	*aws.Request
-	Input *SearchSystemInstancesInput
-	Copy  func(*SearchSystemInstancesInput) SearchSystemInstancesRequest
+	Input *types.SearchSystemInstancesInput
+	Copy  func(*types.SearchSystemInstancesInput) SearchSystemInstancesRequest
 }
 
 // Send marshals and sends the SearchSystemInstances API request.
@@ -114,7 +62,7 @@ func (r SearchSystemInstancesRequest) Send(ctx context.Context) (*SearchSystemIn
 	}
 
 	resp := &SearchSystemInstancesResponse{
-		SearchSystemInstancesOutput: r.Request.Data.(*SearchSystemInstancesOutput),
+		SearchSystemInstancesOutput: r.Request.Data.(*types.SearchSystemInstancesOutput),
 		response:                    &aws.Response{Request: r.Request},
 	}
 
@@ -144,7 +92,7 @@ func NewSearchSystemInstancesPaginator(req SearchSystemInstancesRequest) SearchS
 	return SearchSystemInstancesPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *SearchSystemInstancesInput
+				var inCpy *types.SearchSystemInstancesInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -164,14 +112,14 @@ type SearchSystemInstancesPaginator struct {
 	aws.Pager
 }
 
-func (p *SearchSystemInstancesPaginator) CurrentPage() *SearchSystemInstancesOutput {
-	return p.Pager.CurrentPage().(*SearchSystemInstancesOutput)
+func (p *SearchSystemInstancesPaginator) CurrentPage() *types.SearchSystemInstancesOutput {
+	return p.Pager.CurrentPage().(*types.SearchSystemInstancesOutput)
 }
 
 // SearchSystemInstancesResponse is the response type for the
 // SearchSystemInstances API operation.
 type SearchSystemInstancesResponse struct {
-	*SearchSystemInstancesOutput
+	*types.SearchSystemInstancesOutput
 
 	response *aws.Response
 }

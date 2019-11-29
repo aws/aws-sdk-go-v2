@@ -4,79 +4,10 @@ package databasemigrationservice
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/databasemigrationservice/types"
 )
-
-type DescribeReplicationTasksInput struct {
-	_ struct{} `type:"structure"`
-
-	// Filters applied to the describe action.
-	//
-	// Valid filter names: replication-task-arn | replication-task-id | migration-type
-	// | endpoint-arn | replication-instance-arn
-	Filters []Filter `type:"list"`
-
-	// An optional pagination token provided by a previous request. If this parameter
-	// is specified, the response includes only records beyond the marker, up to
-	// the value specified by MaxRecords.
-	Marker *string `type:"string"`
-
-	// The maximum number of records to include in the response. If more records
-	// exist than the specified MaxRecords value, a pagination token called a marker
-	// is included in the response so that the remaining results can be retrieved.
-	//
-	// Default: 100
-	//
-	// Constraints: Minimum 20, maximum 100.
-	MaxRecords *int64 `type:"integer"`
-
-	// An option to set to avoid returning information about settings. Use this
-	// to reduce overhead when setting information is too large. To use this option,
-	// choose true; otherwise, choose false (the default).
-	WithoutSettings *bool `type:"boolean"`
-}
-
-// String returns the string representation
-func (s DescribeReplicationTasksInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeReplicationTasksInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeReplicationTasksInput"}
-	if s.Filters != nil {
-		for i, v := range s.Filters {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribeReplicationTasksOutput struct {
-	_ struct{} `type:"structure"`
-
-	// An optional pagination token provided by a previous request. If this parameter
-	// is specified, the response includes only records beyond the marker, up to
-	// the value specified by MaxRecords.
-	Marker *string `type:"string"`
-
-	// A description of the replication tasks.
-	ReplicationTasks []ReplicationTask `type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeReplicationTasksOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeReplicationTasks = "DescribeReplicationTasks"
 
@@ -94,7 +25,7 @@ const opDescribeReplicationTasks = "DescribeReplicationTasks"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeReplicationTasks
-func (c *Client) DescribeReplicationTasksRequest(input *DescribeReplicationTasksInput) DescribeReplicationTasksRequest {
+func (c *Client) DescribeReplicationTasksRequest(input *types.DescribeReplicationTasksInput) DescribeReplicationTasksRequest {
 	op := &aws.Operation{
 		Name:       opDescribeReplicationTasks,
 		HTTPMethod: "POST",
@@ -108,10 +39,10 @@ func (c *Client) DescribeReplicationTasksRequest(input *DescribeReplicationTasks
 	}
 
 	if input == nil {
-		input = &DescribeReplicationTasksInput{}
+		input = &types.DescribeReplicationTasksInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeReplicationTasksOutput{})
+	req := c.newRequest(op, input, &types.DescribeReplicationTasksOutput{})
 	return DescribeReplicationTasksRequest{Request: req, Input: input, Copy: c.DescribeReplicationTasksRequest}
 }
 
@@ -119,8 +50,8 @@ func (c *Client) DescribeReplicationTasksRequest(input *DescribeReplicationTasks
 // DescribeReplicationTasks API operation.
 type DescribeReplicationTasksRequest struct {
 	*aws.Request
-	Input *DescribeReplicationTasksInput
-	Copy  func(*DescribeReplicationTasksInput) DescribeReplicationTasksRequest
+	Input *types.DescribeReplicationTasksInput
+	Copy  func(*types.DescribeReplicationTasksInput) DescribeReplicationTasksRequest
 }
 
 // Send marshals and sends the DescribeReplicationTasks API request.
@@ -132,7 +63,7 @@ func (r DescribeReplicationTasksRequest) Send(ctx context.Context) (*DescribeRep
 	}
 
 	resp := &DescribeReplicationTasksResponse{
-		DescribeReplicationTasksOutput: r.Request.Data.(*DescribeReplicationTasksOutput),
+		DescribeReplicationTasksOutput: r.Request.Data.(*types.DescribeReplicationTasksOutput),
 		response:                       &aws.Response{Request: r.Request},
 	}
 
@@ -162,7 +93,7 @@ func NewDescribeReplicationTasksPaginator(req DescribeReplicationTasksRequest) D
 	return DescribeReplicationTasksPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *DescribeReplicationTasksInput
+				var inCpy *types.DescribeReplicationTasksInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -182,14 +113,14 @@ type DescribeReplicationTasksPaginator struct {
 	aws.Pager
 }
 
-func (p *DescribeReplicationTasksPaginator) CurrentPage() *DescribeReplicationTasksOutput {
-	return p.Pager.CurrentPage().(*DescribeReplicationTasksOutput)
+func (p *DescribeReplicationTasksPaginator) CurrentPage() *types.DescribeReplicationTasksOutput {
+	return p.Pager.CurrentPage().(*types.DescribeReplicationTasksOutput)
 }
 
 // DescribeReplicationTasksResponse is the response type for the
 // DescribeReplicationTasks API operation.
 type DescribeReplicationTasksResponse struct {
-	*DescribeReplicationTasksOutput
+	*types.DescribeReplicationTasksOutput
 
 	response *aws.Response
 }

@@ -6,81 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/redshift/types"
 )
-
-type CreateClusterSnapshotInput struct {
-	_ struct{} `type:"structure"`
-
-	// The cluster identifier for which you want a snapshot.
-	//
-	// ClusterIdentifier is a required field
-	ClusterIdentifier *string `type:"string" required:"true"`
-
-	// The number of days that a manual snapshot is retained. If the value is -1,
-	// the manual snapshot is retained indefinitely.
-	//
-	// The value must be either -1 or an integer between 1 and 3,653.
-	//
-	// The default value is -1.
-	ManualSnapshotRetentionPeriod *int64 `type:"integer"`
-
-	// A unique identifier for the snapshot that you are requesting. This identifier
-	// must be unique for all snapshots within the AWS account.
-	//
-	// Constraints:
-	//
-	//    * Cannot be null, empty, or blank
-	//
-	//    * Must contain from 1 to 255 alphanumeric characters or hyphens
-	//
-	//    * First character must be a letter
-	//
-	//    * Cannot end with a hyphen or contain two consecutive hyphens
-	//
-	// Example: my-snapshot-id
-	//
-	// SnapshotIdentifier is a required field
-	SnapshotIdentifier *string `type:"string" required:"true"`
-
-	// A list of tag instances.
-	Tags []Tag `locationNameList:"Tag" type:"list"`
-}
-
-// String returns the string representation
-func (s CreateClusterSnapshotInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateClusterSnapshotInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateClusterSnapshotInput"}
-
-	if s.ClusterIdentifier == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ClusterIdentifier"))
-	}
-
-	if s.SnapshotIdentifier == nil {
-		invalidParams.Add(aws.NewErrParamRequired("SnapshotIdentifier"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type CreateClusterSnapshotOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Describes a snapshot.
-	Snapshot *Snapshot `type:"structure"`
-}
-
-// String returns the string representation
-func (s CreateClusterSnapshotOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCreateClusterSnapshot = "CreateClusterSnapshot"
 
@@ -102,7 +29,7 @@ const opCreateClusterSnapshot = "CreateClusterSnapshot"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/CreateClusterSnapshot
-func (c *Client) CreateClusterSnapshotRequest(input *CreateClusterSnapshotInput) CreateClusterSnapshotRequest {
+func (c *Client) CreateClusterSnapshotRequest(input *types.CreateClusterSnapshotInput) CreateClusterSnapshotRequest {
 	op := &aws.Operation{
 		Name:       opCreateClusterSnapshot,
 		HTTPMethod: "POST",
@@ -110,10 +37,10 @@ func (c *Client) CreateClusterSnapshotRequest(input *CreateClusterSnapshotInput)
 	}
 
 	if input == nil {
-		input = &CreateClusterSnapshotInput{}
+		input = &types.CreateClusterSnapshotInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateClusterSnapshotOutput{})
+	req := c.newRequest(op, input, &types.CreateClusterSnapshotOutput{})
 	return CreateClusterSnapshotRequest{Request: req, Input: input, Copy: c.CreateClusterSnapshotRequest}
 }
 
@@ -121,8 +48,8 @@ func (c *Client) CreateClusterSnapshotRequest(input *CreateClusterSnapshotInput)
 // CreateClusterSnapshot API operation.
 type CreateClusterSnapshotRequest struct {
 	*aws.Request
-	Input *CreateClusterSnapshotInput
-	Copy  func(*CreateClusterSnapshotInput) CreateClusterSnapshotRequest
+	Input *types.CreateClusterSnapshotInput
+	Copy  func(*types.CreateClusterSnapshotInput) CreateClusterSnapshotRequest
 }
 
 // Send marshals and sends the CreateClusterSnapshot API request.
@@ -134,7 +61,7 @@ func (r CreateClusterSnapshotRequest) Send(ctx context.Context) (*CreateClusterS
 	}
 
 	resp := &CreateClusterSnapshotResponse{
-		CreateClusterSnapshotOutput: r.Request.Data.(*CreateClusterSnapshotOutput),
+		CreateClusterSnapshotOutput: r.Request.Data.(*types.CreateClusterSnapshotOutput),
 		response:                    &aws.Response{Request: r.Request},
 	}
 
@@ -144,7 +71,7 @@ func (r CreateClusterSnapshotRequest) Send(ctx context.Context) (*CreateClusterS
 // CreateClusterSnapshotResponse is the response type for the
 // CreateClusterSnapshot API operation.
 type CreateClusterSnapshotResponse struct {
-	*CreateClusterSnapshotOutput
+	*types.CreateClusterSnapshotOutput
 
 	response *aws.Response
 }

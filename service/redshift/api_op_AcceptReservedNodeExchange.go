@@ -6,60 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/redshift/types"
 )
-
-type AcceptReservedNodeExchangeInput struct {
-	_ struct{} `type:"structure"`
-
-	// A string representing the node identifier of the DC1 Reserved Node to be
-	// exchanged.
-	//
-	// ReservedNodeId is a required field
-	ReservedNodeId *string `type:"string" required:"true"`
-
-	// The unique identifier of the DC2 Reserved Node offering to be used for the
-	// exchange. You can obtain the value for the parameter by calling GetReservedNodeExchangeOfferings
-	//
-	// TargetReservedNodeOfferingId is a required field
-	TargetReservedNodeOfferingId *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s AcceptReservedNodeExchangeInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *AcceptReservedNodeExchangeInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "AcceptReservedNodeExchangeInput"}
-
-	if s.ReservedNodeId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ReservedNodeId"))
-	}
-
-	if s.TargetReservedNodeOfferingId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("TargetReservedNodeOfferingId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type AcceptReservedNodeExchangeOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Describes a reserved node. You can call the DescribeReservedNodeOfferings
-	// API to obtain the available reserved node offerings.
-	ExchangedReservedNode *ReservedNode `type:"structure"`
-}
-
-// String returns the string representation
-func (s AcceptReservedNodeExchangeOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opAcceptReservedNodeExchange = "AcceptReservedNodeExchange"
 
@@ -78,7 +26,7 @@ const opAcceptReservedNodeExchange = "AcceptReservedNodeExchange"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/AcceptReservedNodeExchange
-func (c *Client) AcceptReservedNodeExchangeRequest(input *AcceptReservedNodeExchangeInput) AcceptReservedNodeExchangeRequest {
+func (c *Client) AcceptReservedNodeExchangeRequest(input *types.AcceptReservedNodeExchangeInput) AcceptReservedNodeExchangeRequest {
 	op := &aws.Operation{
 		Name:       opAcceptReservedNodeExchange,
 		HTTPMethod: "POST",
@@ -86,10 +34,10 @@ func (c *Client) AcceptReservedNodeExchangeRequest(input *AcceptReservedNodeExch
 	}
 
 	if input == nil {
-		input = &AcceptReservedNodeExchangeInput{}
+		input = &types.AcceptReservedNodeExchangeInput{}
 	}
 
-	req := c.newRequest(op, input, &AcceptReservedNodeExchangeOutput{})
+	req := c.newRequest(op, input, &types.AcceptReservedNodeExchangeOutput{})
 	return AcceptReservedNodeExchangeRequest{Request: req, Input: input, Copy: c.AcceptReservedNodeExchangeRequest}
 }
 
@@ -97,8 +45,8 @@ func (c *Client) AcceptReservedNodeExchangeRequest(input *AcceptReservedNodeExch
 // AcceptReservedNodeExchange API operation.
 type AcceptReservedNodeExchangeRequest struct {
 	*aws.Request
-	Input *AcceptReservedNodeExchangeInput
-	Copy  func(*AcceptReservedNodeExchangeInput) AcceptReservedNodeExchangeRequest
+	Input *types.AcceptReservedNodeExchangeInput
+	Copy  func(*types.AcceptReservedNodeExchangeInput) AcceptReservedNodeExchangeRequest
 }
 
 // Send marshals and sends the AcceptReservedNodeExchange API request.
@@ -110,7 +58,7 @@ func (r AcceptReservedNodeExchangeRequest) Send(ctx context.Context) (*AcceptRes
 	}
 
 	resp := &AcceptReservedNodeExchangeResponse{
-		AcceptReservedNodeExchangeOutput: r.Request.Data.(*AcceptReservedNodeExchangeOutput),
+		AcceptReservedNodeExchangeOutput: r.Request.Data.(*types.AcceptReservedNodeExchangeOutput),
 		response:                         &aws.Response{Request: r.Request},
 	}
 
@@ -120,7 +68,7 @@ func (r AcceptReservedNodeExchangeRequest) Send(ctx context.Context) (*AcceptRes
 // AcceptReservedNodeExchangeResponse is the response type for the
 // AcceptReservedNodeExchange API operation.
 type AcceptReservedNodeExchangeResponse struct {
-	*AcceptReservedNodeExchangeOutput
+	*types.AcceptReservedNodeExchangeOutput
 
 	response *aws.Response
 }

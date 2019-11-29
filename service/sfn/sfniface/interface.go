@@ -10,6 +10,7 @@ package sfniface
 
 import (
 	"github.com/aws/aws-sdk-go-v2/service/sfn"
+	"github.com/aws/aws-sdk-go-v2/service/sfn/types"
 )
 
 // ClientAPI provides an interface to enable mocking the
@@ -43,7 +44,7 @@ import (
 //    type mockClientClient struct {
 //        sfniface.ClientPI
 //    }
-//    func (m *mockClientClient) CreateActivity(input *sfn.CreateActivityInput) (*sfn.CreateActivityOutput, error) {
+//    func (m *mockClientClient) CreateActivity(input *types.CreateActivityInput) (*types.CreateActivityOutput, error) {
 //        // mock response/functionality
 //    }
 //
@@ -61,49 +62,49 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type ClientAPI interface {
-	CreateActivityRequest(*sfn.CreateActivityInput) sfn.CreateActivityRequest
+	CreateActivityRequest(*types.CreateActivityInput) sfn.CreateActivityRequest
 
-	CreateStateMachineRequest(*sfn.CreateStateMachineInput) sfn.CreateStateMachineRequest
+	CreateStateMachineRequest(*types.CreateStateMachineInput) sfn.CreateStateMachineRequest
 
-	DeleteActivityRequest(*sfn.DeleteActivityInput) sfn.DeleteActivityRequest
+	DeleteActivityRequest(*types.DeleteActivityInput) sfn.DeleteActivityRequest
 
-	DeleteStateMachineRequest(*sfn.DeleteStateMachineInput) sfn.DeleteStateMachineRequest
+	DeleteStateMachineRequest(*types.DeleteStateMachineInput) sfn.DeleteStateMachineRequest
 
-	DescribeActivityRequest(*sfn.DescribeActivityInput) sfn.DescribeActivityRequest
+	DescribeActivityRequest(*types.DescribeActivityInput) sfn.DescribeActivityRequest
 
-	DescribeExecutionRequest(*sfn.DescribeExecutionInput) sfn.DescribeExecutionRequest
+	DescribeExecutionRequest(*types.DescribeExecutionInput) sfn.DescribeExecutionRequest
 
-	DescribeStateMachineRequest(*sfn.DescribeStateMachineInput) sfn.DescribeStateMachineRequest
+	DescribeStateMachineRequest(*types.DescribeStateMachineInput) sfn.DescribeStateMachineRequest
 
-	DescribeStateMachineForExecutionRequest(*sfn.DescribeStateMachineForExecutionInput) sfn.DescribeStateMachineForExecutionRequest
+	DescribeStateMachineForExecutionRequest(*types.DescribeStateMachineForExecutionInput) sfn.DescribeStateMachineForExecutionRequest
 
-	GetActivityTaskRequest(*sfn.GetActivityTaskInput) sfn.GetActivityTaskRequest
+	GetActivityTaskRequest(*types.GetActivityTaskInput) sfn.GetActivityTaskRequest
 
-	GetExecutionHistoryRequest(*sfn.GetExecutionHistoryInput) sfn.GetExecutionHistoryRequest
+	GetExecutionHistoryRequest(*types.GetExecutionHistoryInput) sfn.GetExecutionHistoryRequest
 
-	ListActivitiesRequest(*sfn.ListActivitiesInput) sfn.ListActivitiesRequest
+	ListActivitiesRequest(*types.ListActivitiesInput) sfn.ListActivitiesRequest
 
-	ListExecutionsRequest(*sfn.ListExecutionsInput) sfn.ListExecutionsRequest
+	ListExecutionsRequest(*types.ListExecutionsInput) sfn.ListExecutionsRequest
 
-	ListStateMachinesRequest(*sfn.ListStateMachinesInput) sfn.ListStateMachinesRequest
+	ListStateMachinesRequest(*types.ListStateMachinesInput) sfn.ListStateMachinesRequest
 
-	ListTagsForResourceRequest(*sfn.ListTagsForResourceInput) sfn.ListTagsForResourceRequest
+	ListTagsForResourceRequest(*types.ListTagsForResourceInput) sfn.ListTagsForResourceRequest
 
-	SendTaskFailureRequest(*sfn.SendTaskFailureInput) sfn.SendTaskFailureRequest
+	SendTaskFailureRequest(*types.SendTaskFailureInput) sfn.SendTaskFailureRequest
 
-	SendTaskHeartbeatRequest(*sfn.SendTaskHeartbeatInput) sfn.SendTaskHeartbeatRequest
+	SendTaskHeartbeatRequest(*types.SendTaskHeartbeatInput) sfn.SendTaskHeartbeatRequest
 
-	SendTaskSuccessRequest(*sfn.SendTaskSuccessInput) sfn.SendTaskSuccessRequest
+	SendTaskSuccessRequest(*types.SendTaskSuccessInput) sfn.SendTaskSuccessRequest
 
-	StartExecutionRequest(*sfn.StartExecutionInput) sfn.StartExecutionRequest
+	StartExecutionRequest(*types.StartExecutionInput) sfn.StartExecutionRequest
 
-	StopExecutionRequest(*sfn.StopExecutionInput) sfn.StopExecutionRequest
+	StopExecutionRequest(*types.StopExecutionInput) sfn.StopExecutionRequest
 
-	TagResourceRequest(*sfn.TagResourceInput) sfn.TagResourceRequest
+	TagResourceRequest(*types.TagResourceInput) sfn.TagResourceRequest
 
-	UntagResourceRequest(*sfn.UntagResourceInput) sfn.UntagResourceRequest
+	UntagResourceRequest(*types.UntagResourceInput) sfn.UntagResourceRequest
 
-	UpdateStateMachineRequest(*sfn.UpdateStateMachineInput) sfn.UpdateStateMachineRequest
+	UpdateStateMachineRequest(*types.UpdateStateMachineInput) sfn.UpdateStateMachineRequest
 }
 
 var _ ClientAPI = (*sfn.Client)(nil)

@@ -6,57 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/codestar/types"
 )
-
-type UpdateProjectInput struct {
-	_ struct{} `type:"structure"`
-
-	// The description of the project, if any.
-	Description *string `locationName:"description" type:"string" sensitive:"true"`
-
-	// The ID of the project you want to update.
-	//
-	// Id is a required field
-	Id *string `locationName:"id" min:"2" type:"string" required:"true"`
-
-	// The name of the project you want to update.
-	Name *string `locationName:"name" min:"1" type:"string" sensitive:"true"`
-}
-
-// String returns the string representation
-func (s UpdateProjectInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateProjectInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateProjectInput"}
-
-	if s.Id == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Id"))
-	}
-	if s.Id != nil && len(*s.Id) < 2 {
-		invalidParams.Add(aws.NewErrParamMinLen("Id", 2))
-	}
-	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type UpdateProjectOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s UpdateProjectOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opUpdateProject = "UpdateProject"
 
@@ -73,7 +24,7 @@ const opUpdateProject = "UpdateProject"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codestar-2017-04-19/UpdateProject
-func (c *Client) UpdateProjectRequest(input *UpdateProjectInput) UpdateProjectRequest {
+func (c *Client) UpdateProjectRequest(input *types.UpdateProjectInput) UpdateProjectRequest {
 	op := &aws.Operation{
 		Name:       opUpdateProject,
 		HTTPMethod: "POST",
@@ -81,10 +32,10 @@ func (c *Client) UpdateProjectRequest(input *UpdateProjectInput) UpdateProjectRe
 	}
 
 	if input == nil {
-		input = &UpdateProjectInput{}
+		input = &types.UpdateProjectInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateProjectOutput{})
+	req := c.newRequest(op, input, &types.UpdateProjectOutput{})
 	return UpdateProjectRequest{Request: req, Input: input, Copy: c.UpdateProjectRequest}
 }
 
@@ -92,8 +43,8 @@ func (c *Client) UpdateProjectRequest(input *UpdateProjectInput) UpdateProjectRe
 // UpdateProject API operation.
 type UpdateProjectRequest struct {
 	*aws.Request
-	Input *UpdateProjectInput
-	Copy  func(*UpdateProjectInput) UpdateProjectRequest
+	Input *types.UpdateProjectInput
+	Copy  func(*types.UpdateProjectInput) UpdateProjectRequest
 }
 
 // Send marshals and sends the UpdateProject API request.
@@ -105,7 +56,7 @@ func (r UpdateProjectRequest) Send(ctx context.Context) (*UpdateProjectResponse,
 	}
 
 	resp := &UpdateProjectResponse{
-		UpdateProjectOutput: r.Request.Data.(*UpdateProjectOutput),
+		UpdateProjectOutput: r.Request.Data.(*types.UpdateProjectOutput),
 		response:            &aws.Response{Request: r.Request},
 	}
 
@@ -115,7 +66,7 @@ func (r UpdateProjectRequest) Send(ctx context.Context) (*UpdateProjectResponse,
 // UpdateProjectResponse is the response type for the
 // UpdateProject API operation.
 type UpdateProjectResponse struct {
-	*UpdateProjectOutput
+	*types.UpdateProjectOutput
 
 	response *aws.Response
 }

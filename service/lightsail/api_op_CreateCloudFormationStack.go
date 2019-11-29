@@ -4,61 +4,10 @@ package lightsail
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/lightsail/types"
 )
-
-type CreateCloudFormationStackInput struct {
-	_ struct{} `type:"structure"`
-
-	// An array of parameters that will be used to create the new Amazon EC2 instance.
-	// You can only pass one instance entry at a time in this array. You will get
-	// an invalid parameter error if you pass more than one instance entry in this
-	// array.
-	//
-	// Instances is a required field
-	Instances []InstanceEntry `locationName:"instances" type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s CreateCloudFormationStackInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateCloudFormationStackInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateCloudFormationStackInput"}
-
-	if s.Instances == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Instances"))
-	}
-	if s.Instances != nil {
-		for i, v := range s.Instances {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Instances", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type CreateCloudFormationStackOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A list of objects describing the API operation.
-	Operations []Operation `locationName:"operations" type:"list"`
-}
-
-// String returns the string representation
-func (s CreateCloudFormationStackOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCreateCloudFormationStack = "CreateCloudFormationStack"
 
@@ -83,7 +32,7 @@ const opCreateCloudFormationStack = "CreateCloudFormationStack"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/CreateCloudFormationStack
-func (c *Client) CreateCloudFormationStackRequest(input *CreateCloudFormationStackInput) CreateCloudFormationStackRequest {
+func (c *Client) CreateCloudFormationStackRequest(input *types.CreateCloudFormationStackInput) CreateCloudFormationStackRequest {
 	op := &aws.Operation{
 		Name:       opCreateCloudFormationStack,
 		HTTPMethod: "POST",
@@ -91,10 +40,10 @@ func (c *Client) CreateCloudFormationStackRequest(input *CreateCloudFormationSta
 	}
 
 	if input == nil {
-		input = &CreateCloudFormationStackInput{}
+		input = &types.CreateCloudFormationStackInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateCloudFormationStackOutput{})
+	req := c.newRequest(op, input, &types.CreateCloudFormationStackOutput{})
 	return CreateCloudFormationStackRequest{Request: req, Input: input, Copy: c.CreateCloudFormationStackRequest}
 }
 
@@ -102,8 +51,8 @@ func (c *Client) CreateCloudFormationStackRequest(input *CreateCloudFormationSta
 // CreateCloudFormationStack API operation.
 type CreateCloudFormationStackRequest struct {
 	*aws.Request
-	Input *CreateCloudFormationStackInput
-	Copy  func(*CreateCloudFormationStackInput) CreateCloudFormationStackRequest
+	Input *types.CreateCloudFormationStackInput
+	Copy  func(*types.CreateCloudFormationStackInput) CreateCloudFormationStackRequest
 }
 
 // Send marshals and sends the CreateCloudFormationStack API request.
@@ -115,7 +64,7 @@ func (r CreateCloudFormationStackRequest) Send(ctx context.Context) (*CreateClou
 	}
 
 	resp := &CreateCloudFormationStackResponse{
-		CreateCloudFormationStackOutput: r.Request.Data.(*CreateCloudFormationStackOutput),
+		CreateCloudFormationStackOutput: r.Request.Data.(*types.CreateCloudFormationStackOutput),
 		response:                        &aws.Response{Request: r.Request},
 	}
 
@@ -125,7 +74,7 @@ func (r CreateCloudFormationStackRequest) Send(ctx context.Context) (*CreateClou
 // CreateCloudFormationStackResponse is the response type for the
 // CreateCloudFormationStack API operation.
 type CreateCloudFormationStackResponse struct {
-	*CreateCloudFormationStackOutput
+	*types.CreateCloudFormationStackOutput
 
 	response *aws.Response
 }

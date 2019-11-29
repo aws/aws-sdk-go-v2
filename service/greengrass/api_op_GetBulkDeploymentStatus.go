@@ -6,129 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/greengrass/types"
 )
-
-type GetBulkDeploymentStatusInput struct {
-	_ struct{} `type:"structure"`
-
-	// BulkDeploymentId is a required field
-	BulkDeploymentId *string `location:"uri" locationName:"BulkDeploymentId" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetBulkDeploymentStatusInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetBulkDeploymentStatusInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetBulkDeploymentStatusInput"}
-
-	if s.BulkDeploymentId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("BulkDeploymentId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetBulkDeploymentStatusInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.BulkDeploymentId != nil {
-		v := *s.BulkDeploymentId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "BulkDeploymentId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-// Information about the status of a bulk deployment at the time of the request.
-type GetBulkDeploymentStatusOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Relevant metrics on input records processed during bulk deployment.
-	BulkDeploymentMetrics *BulkDeploymentMetrics `type:"structure"`
-
-	// The status of the bulk deployment.
-	BulkDeploymentStatus BulkDeploymentStatus `type:"string" enum:"true"`
-
-	// The time, in ISO format, when the deployment was created.
-	CreatedAt *string `type:"string"`
-
-	// Error details
-	ErrorDetails []ErrorDetail `type:"list"`
-
-	// Error message
-	ErrorMessage *string `type:"string"`
-
-	// The key-value pair for the resource tag.
-	Tags map[string]string `locationName:"tags" type:"map"`
-}
-
-// String returns the string representation
-func (s GetBulkDeploymentStatusOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetBulkDeploymentStatusOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.BulkDeploymentMetrics != nil {
-		v := s.BulkDeploymentMetrics
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "BulkDeploymentMetrics", v, metadata)
-	}
-	if len(s.BulkDeploymentStatus) > 0 {
-		v := s.BulkDeploymentStatus
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "BulkDeploymentStatus", protocol.QuotedValue{ValueMarshaler: v}, metadata)
-	}
-	if s.CreatedAt != nil {
-		v := *s.CreatedAt
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "CreatedAt", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.ErrorDetails != nil {
-		v := s.ErrorDetails
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "ErrorDetails", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	if s.ErrorMessage != nil {
-		v := *s.ErrorMessage
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "ErrorMessage", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Tags != nil {
-		v := s.Tags
-
-		metadata := protocol.Metadata{}
-		ms0 := e.Map(protocol.BodyTarget, "tags", metadata)
-		ms0.Start()
-		for k1, v1 := range v {
-			ms0.MapSetValue(k1, protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
-		}
-		ms0.End()
-
-	}
-	return nil
-}
 
 const opGetBulkDeploymentStatus = "GetBulkDeploymentStatus"
 
@@ -145,7 +24,7 @@ const opGetBulkDeploymentStatus = "GetBulkDeploymentStatus"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GetBulkDeploymentStatus
-func (c *Client) GetBulkDeploymentStatusRequest(input *GetBulkDeploymentStatusInput) GetBulkDeploymentStatusRequest {
+func (c *Client) GetBulkDeploymentStatusRequest(input *types.GetBulkDeploymentStatusInput) GetBulkDeploymentStatusRequest {
 	op := &aws.Operation{
 		Name:       opGetBulkDeploymentStatus,
 		HTTPMethod: "GET",
@@ -153,10 +32,10 @@ func (c *Client) GetBulkDeploymentStatusRequest(input *GetBulkDeploymentStatusIn
 	}
 
 	if input == nil {
-		input = &GetBulkDeploymentStatusInput{}
+		input = &types.GetBulkDeploymentStatusInput{}
 	}
 
-	req := c.newRequest(op, input, &GetBulkDeploymentStatusOutput{})
+	req := c.newRequest(op, input, &types.GetBulkDeploymentStatusOutput{})
 	return GetBulkDeploymentStatusRequest{Request: req, Input: input, Copy: c.GetBulkDeploymentStatusRequest}
 }
 
@@ -164,8 +43,8 @@ func (c *Client) GetBulkDeploymentStatusRequest(input *GetBulkDeploymentStatusIn
 // GetBulkDeploymentStatus API operation.
 type GetBulkDeploymentStatusRequest struct {
 	*aws.Request
-	Input *GetBulkDeploymentStatusInput
-	Copy  func(*GetBulkDeploymentStatusInput) GetBulkDeploymentStatusRequest
+	Input *types.GetBulkDeploymentStatusInput
+	Copy  func(*types.GetBulkDeploymentStatusInput) GetBulkDeploymentStatusRequest
 }
 
 // Send marshals and sends the GetBulkDeploymentStatus API request.
@@ -177,7 +56,7 @@ func (r GetBulkDeploymentStatusRequest) Send(ctx context.Context) (*GetBulkDeplo
 	}
 
 	resp := &GetBulkDeploymentStatusResponse{
-		GetBulkDeploymentStatusOutput: r.Request.Data.(*GetBulkDeploymentStatusOutput),
+		GetBulkDeploymentStatusOutput: r.Request.Data.(*types.GetBulkDeploymentStatusOutput),
 		response:                      &aws.Response{Request: r.Request},
 	}
 
@@ -187,7 +66,7 @@ func (r GetBulkDeploymentStatusRequest) Send(ctx context.Context) (*GetBulkDeplo
 // GetBulkDeploymentStatusResponse is the response type for the
 // GetBulkDeploymentStatus API operation.
 type GetBulkDeploymentStatusResponse struct {
-	*GetBulkDeploymentStatusOutput
+	*types.GetBulkDeploymentStatusOutput
 
 	response *aws.Response
 }

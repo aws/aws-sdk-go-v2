@@ -6,57 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/workmail/types"
 )
-
-type DeleteUserInput struct {
-	_ struct{} `type:"structure"`
-
-	// The organization that contains the user to be deleted.
-	//
-	// OrganizationId is a required field
-	OrganizationId *string `type:"string" required:"true"`
-
-	// The identifier of the user to be deleted.
-	//
-	// UserId is a required field
-	UserId *string `min:"12" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteUserInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteUserInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteUserInput"}
-
-	if s.OrganizationId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("OrganizationId"))
-	}
-
-	if s.UserId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("UserId"))
-	}
-	if s.UserId != nil && len(*s.UserId) < 12 {
-		invalidParams.Add(aws.NewErrParamMinLen("UserId", 12))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteUserOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteUserOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteUser = "DeleteUser"
 
@@ -78,7 +29,7 @@ const opDeleteUser = "DeleteUser"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/DeleteUser
-func (c *Client) DeleteUserRequest(input *DeleteUserInput) DeleteUserRequest {
+func (c *Client) DeleteUserRequest(input *types.DeleteUserInput) DeleteUserRequest {
 	op := &aws.Operation{
 		Name:       opDeleteUser,
 		HTTPMethod: "POST",
@@ -86,10 +37,10 @@ func (c *Client) DeleteUserRequest(input *DeleteUserInput) DeleteUserRequest {
 	}
 
 	if input == nil {
-		input = &DeleteUserInput{}
+		input = &types.DeleteUserInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteUserOutput{})
+	req := c.newRequest(op, input, &types.DeleteUserOutput{})
 	return DeleteUserRequest{Request: req, Input: input, Copy: c.DeleteUserRequest}
 }
 
@@ -97,8 +48,8 @@ func (c *Client) DeleteUserRequest(input *DeleteUserInput) DeleteUserRequest {
 // DeleteUser API operation.
 type DeleteUserRequest struct {
 	*aws.Request
-	Input *DeleteUserInput
-	Copy  func(*DeleteUserInput) DeleteUserRequest
+	Input *types.DeleteUserInput
+	Copy  func(*types.DeleteUserInput) DeleteUserRequest
 }
 
 // Send marshals and sends the DeleteUser API request.
@@ -110,7 +61,7 @@ func (r DeleteUserRequest) Send(ctx context.Context) (*DeleteUserResponse, error
 	}
 
 	resp := &DeleteUserResponse{
-		DeleteUserOutput: r.Request.Data.(*DeleteUserOutput),
+		DeleteUserOutput: r.Request.Data.(*types.DeleteUserOutput),
 		response:         &aws.Response{Request: r.Request},
 	}
 
@@ -120,7 +71,7 @@ func (r DeleteUserRequest) Send(ctx context.Context) (*DeleteUserResponse, error
 // DeleteUserResponse is the response type for the
 // DeleteUser API operation.
 type DeleteUserResponse struct {
-	*DeleteUserOutput
+	*types.DeleteUserOutput
 
 	response *aws.Response
 }

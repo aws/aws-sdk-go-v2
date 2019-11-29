@@ -6,50 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/neptune/types"
 )
-
-type DescribeValidDBInstanceModificationsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The customer identifier or the ARN of your DB instance.
-	//
-	// DBInstanceIdentifier is a required field
-	DBInstanceIdentifier *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeValidDBInstanceModificationsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeValidDBInstanceModificationsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeValidDBInstanceModificationsInput"}
-
-	if s.DBInstanceIdentifier == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DBInstanceIdentifier"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribeValidDBInstanceModificationsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Information about valid modifications that you can make to your DB instance.
-	// Contains the result of a successful call to the DescribeValidDBInstanceModifications
-	// action. You can use this information when you call ModifyDBInstance.
-	ValidDBInstanceModificationsMessage *ValidDBInstanceModificationsMessage `type:"structure"`
-}
-
-// String returns the string representation
-func (s DescribeValidDBInstanceModificationsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeValidDBInstanceModifications = "DescribeValidDBInstanceModifications"
 
@@ -68,7 +26,7 @@ const opDescribeValidDBInstanceModifications = "DescribeValidDBInstanceModificat
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/DescribeValidDBInstanceModifications
-func (c *Client) DescribeValidDBInstanceModificationsRequest(input *DescribeValidDBInstanceModificationsInput) DescribeValidDBInstanceModificationsRequest {
+func (c *Client) DescribeValidDBInstanceModificationsRequest(input *types.DescribeValidDBInstanceModificationsInput) DescribeValidDBInstanceModificationsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeValidDBInstanceModifications,
 		HTTPMethod: "POST",
@@ -76,10 +34,10 @@ func (c *Client) DescribeValidDBInstanceModificationsRequest(input *DescribeVali
 	}
 
 	if input == nil {
-		input = &DescribeValidDBInstanceModificationsInput{}
+		input = &types.DescribeValidDBInstanceModificationsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeValidDBInstanceModificationsOutput{})
+	req := c.newRequest(op, input, &types.DescribeValidDBInstanceModificationsOutput{})
 	return DescribeValidDBInstanceModificationsRequest{Request: req, Input: input, Copy: c.DescribeValidDBInstanceModificationsRequest}
 }
 
@@ -87,8 +45,8 @@ func (c *Client) DescribeValidDBInstanceModificationsRequest(input *DescribeVali
 // DescribeValidDBInstanceModifications API operation.
 type DescribeValidDBInstanceModificationsRequest struct {
 	*aws.Request
-	Input *DescribeValidDBInstanceModificationsInput
-	Copy  func(*DescribeValidDBInstanceModificationsInput) DescribeValidDBInstanceModificationsRequest
+	Input *types.DescribeValidDBInstanceModificationsInput
+	Copy  func(*types.DescribeValidDBInstanceModificationsInput) DescribeValidDBInstanceModificationsRequest
 }
 
 // Send marshals and sends the DescribeValidDBInstanceModifications API request.
@@ -100,7 +58,7 @@ func (r DescribeValidDBInstanceModificationsRequest) Send(ctx context.Context) (
 	}
 
 	resp := &DescribeValidDBInstanceModificationsResponse{
-		DescribeValidDBInstanceModificationsOutput: r.Request.Data.(*DescribeValidDBInstanceModificationsOutput),
+		DescribeValidDBInstanceModificationsOutput: r.Request.Data.(*types.DescribeValidDBInstanceModificationsOutput),
 		response: &aws.Response{Request: r.Request},
 	}
 
@@ -110,7 +68,7 @@ func (r DescribeValidDBInstanceModificationsRequest) Send(ctx context.Context) (
 // DescribeValidDBInstanceModificationsResponse is the response type for the
 // DescribeValidDBInstanceModifications API operation.
 type DescribeValidDBInstanceModificationsResponse struct {
-	*DescribeValidDBInstanceModificationsOutput
+	*types.DescribeValidDBInstanceModificationsOutput
 
 	response *aws.Response
 }

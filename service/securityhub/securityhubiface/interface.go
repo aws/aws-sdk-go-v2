@@ -10,6 +10,7 @@ package securityhubiface
 
 import (
 	"github.com/aws/aws-sdk-go-v2/service/securityhub"
+	"github.com/aws/aws-sdk-go-v2/service/securityhub/types"
 )
 
 // ClientAPI provides an interface to enable mocking the
@@ -43,7 +44,7 @@ import (
 //    type mockClientClient struct {
 //        securityhubiface.ClientPI
 //    }
-//    func (m *mockClientClient) AcceptInvitation(input *securityhub.AcceptInvitationInput) (*securityhub.AcceptInvitationOutput, error) {
+//    func (m *mockClientClient) AcceptInvitation(input *types.AcceptInvitationInput) (*types.AcceptInvitationOutput, error) {
 //        // mock response/functionality
 //    }
 //
@@ -61,81 +62,81 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type ClientAPI interface {
-	AcceptInvitationRequest(*securityhub.AcceptInvitationInput) securityhub.AcceptInvitationRequest
+	AcceptInvitationRequest(*types.AcceptInvitationInput) securityhub.AcceptInvitationRequest
 
-	BatchDisableStandardsRequest(*securityhub.BatchDisableStandardsInput) securityhub.BatchDisableStandardsRequest
+	BatchDisableStandardsRequest(*types.BatchDisableStandardsInput) securityhub.BatchDisableStandardsRequest
 
-	BatchEnableStandardsRequest(*securityhub.BatchEnableStandardsInput) securityhub.BatchEnableStandardsRequest
+	BatchEnableStandardsRequest(*types.BatchEnableStandardsInput) securityhub.BatchEnableStandardsRequest
 
-	BatchImportFindingsRequest(*securityhub.BatchImportFindingsInput) securityhub.BatchImportFindingsRequest
+	BatchImportFindingsRequest(*types.BatchImportFindingsInput) securityhub.BatchImportFindingsRequest
 
-	CreateActionTargetRequest(*securityhub.CreateActionTargetInput) securityhub.CreateActionTargetRequest
+	CreateActionTargetRequest(*types.CreateActionTargetInput) securityhub.CreateActionTargetRequest
 
-	CreateInsightRequest(*securityhub.CreateInsightInput) securityhub.CreateInsightRequest
+	CreateInsightRequest(*types.CreateInsightInput) securityhub.CreateInsightRequest
 
-	CreateMembersRequest(*securityhub.CreateMembersInput) securityhub.CreateMembersRequest
+	CreateMembersRequest(*types.CreateMembersInput) securityhub.CreateMembersRequest
 
-	DeclineInvitationsRequest(*securityhub.DeclineInvitationsInput) securityhub.DeclineInvitationsRequest
+	DeclineInvitationsRequest(*types.DeclineInvitationsInput) securityhub.DeclineInvitationsRequest
 
-	DeleteActionTargetRequest(*securityhub.DeleteActionTargetInput) securityhub.DeleteActionTargetRequest
+	DeleteActionTargetRequest(*types.DeleteActionTargetInput) securityhub.DeleteActionTargetRequest
 
-	DeleteInsightRequest(*securityhub.DeleteInsightInput) securityhub.DeleteInsightRequest
+	DeleteInsightRequest(*types.DeleteInsightInput) securityhub.DeleteInsightRequest
 
-	DeleteInvitationsRequest(*securityhub.DeleteInvitationsInput) securityhub.DeleteInvitationsRequest
+	DeleteInvitationsRequest(*types.DeleteInvitationsInput) securityhub.DeleteInvitationsRequest
 
-	DeleteMembersRequest(*securityhub.DeleteMembersInput) securityhub.DeleteMembersRequest
+	DeleteMembersRequest(*types.DeleteMembersInput) securityhub.DeleteMembersRequest
 
-	DescribeActionTargetsRequest(*securityhub.DescribeActionTargetsInput) securityhub.DescribeActionTargetsRequest
+	DescribeActionTargetsRequest(*types.DescribeActionTargetsInput) securityhub.DescribeActionTargetsRequest
 
-	DescribeHubRequest(*securityhub.DescribeHubInput) securityhub.DescribeHubRequest
+	DescribeHubRequest(*types.DescribeHubInput) securityhub.DescribeHubRequest
 
-	DescribeProductsRequest(*securityhub.DescribeProductsInput) securityhub.DescribeProductsRequest
+	DescribeProductsRequest(*types.DescribeProductsInput) securityhub.DescribeProductsRequest
 
-	DisableImportFindingsForProductRequest(*securityhub.DisableImportFindingsForProductInput) securityhub.DisableImportFindingsForProductRequest
+	DisableImportFindingsForProductRequest(*types.DisableImportFindingsForProductInput) securityhub.DisableImportFindingsForProductRequest
 
-	DisableSecurityHubRequest(*securityhub.DisableSecurityHubInput) securityhub.DisableSecurityHubRequest
+	DisableSecurityHubRequest(*types.DisableSecurityHubInput) securityhub.DisableSecurityHubRequest
 
-	DisassociateFromMasterAccountRequest(*securityhub.DisassociateFromMasterAccountInput) securityhub.DisassociateFromMasterAccountRequest
+	DisassociateFromMasterAccountRequest(*types.DisassociateFromMasterAccountInput) securityhub.DisassociateFromMasterAccountRequest
 
-	DisassociateMembersRequest(*securityhub.DisassociateMembersInput) securityhub.DisassociateMembersRequest
+	DisassociateMembersRequest(*types.DisassociateMembersInput) securityhub.DisassociateMembersRequest
 
-	EnableImportFindingsForProductRequest(*securityhub.EnableImportFindingsForProductInput) securityhub.EnableImportFindingsForProductRequest
+	EnableImportFindingsForProductRequest(*types.EnableImportFindingsForProductInput) securityhub.EnableImportFindingsForProductRequest
 
-	EnableSecurityHubRequest(*securityhub.EnableSecurityHubInput) securityhub.EnableSecurityHubRequest
+	EnableSecurityHubRequest(*types.EnableSecurityHubInput) securityhub.EnableSecurityHubRequest
 
-	GetEnabledStandardsRequest(*securityhub.GetEnabledStandardsInput) securityhub.GetEnabledStandardsRequest
+	GetEnabledStandardsRequest(*types.GetEnabledStandardsInput) securityhub.GetEnabledStandardsRequest
 
-	GetFindingsRequest(*securityhub.GetFindingsInput) securityhub.GetFindingsRequest
+	GetFindingsRequest(*types.GetFindingsInput) securityhub.GetFindingsRequest
 
-	GetInsightResultsRequest(*securityhub.GetInsightResultsInput) securityhub.GetInsightResultsRequest
+	GetInsightResultsRequest(*types.GetInsightResultsInput) securityhub.GetInsightResultsRequest
 
-	GetInsightsRequest(*securityhub.GetInsightsInput) securityhub.GetInsightsRequest
+	GetInsightsRequest(*types.GetInsightsInput) securityhub.GetInsightsRequest
 
-	GetInvitationsCountRequest(*securityhub.GetInvitationsCountInput) securityhub.GetInvitationsCountRequest
+	GetInvitationsCountRequest(*types.GetInvitationsCountInput) securityhub.GetInvitationsCountRequest
 
-	GetMasterAccountRequest(*securityhub.GetMasterAccountInput) securityhub.GetMasterAccountRequest
+	GetMasterAccountRequest(*types.GetMasterAccountInput) securityhub.GetMasterAccountRequest
 
-	GetMembersRequest(*securityhub.GetMembersInput) securityhub.GetMembersRequest
+	GetMembersRequest(*types.GetMembersInput) securityhub.GetMembersRequest
 
-	InviteMembersRequest(*securityhub.InviteMembersInput) securityhub.InviteMembersRequest
+	InviteMembersRequest(*types.InviteMembersInput) securityhub.InviteMembersRequest
 
-	ListEnabledProductsForImportRequest(*securityhub.ListEnabledProductsForImportInput) securityhub.ListEnabledProductsForImportRequest
+	ListEnabledProductsForImportRequest(*types.ListEnabledProductsForImportInput) securityhub.ListEnabledProductsForImportRequest
 
-	ListInvitationsRequest(*securityhub.ListInvitationsInput) securityhub.ListInvitationsRequest
+	ListInvitationsRequest(*types.ListInvitationsInput) securityhub.ListInvitationsRequest
 
-	ListMembersRequest(*securityhub.ListMembersInput) securityhub.ListMembersRequest
+	ListMembersRequest(*types.ListMembersInput) securityhub.ListMembersRequest
 
-	ListTagsForResourceRequest(*securityhub.ListTagsForResourceInput) securityhub.ListTagsForResourceRequest
+	ListTagsForResourceRequest(*types.ListTagsForResourceInput) securityhub.ListTagsForResourceRequest
 
-	TagResourceRequest(*securityhub.TagResourceInput) securityhub.TagResourceRequest
+	TagResourceRequest(*types.TagResourceInput) securityhub.TagResourceRequest
 
-	UntagResourceRequest(*securityhub.UntagResourceInput) securityhub.UntagResourceRequest
+	UntagResourceRequest(*types.UntagResourceInput) securityhub.UntagResourceRequest
 
-	UpdateActionTargetRequest(*securityhub.UpdateActionTargetInput) securityhub.UpdateActionTargetRequest
+	UpdateActionTargetRequest(*types.UpdateActionTargetInput) securityhub.UpdateActionTargetRequest
 
-	UpdateFindingsRequest(*securityhub.UpdateFindingsInput) securityhub.UpdateFindingsRequest
+	UpdateFindingsRequest(*types.UpdateFindingsInput) securityhub.UpdateFindingsRequest
 
-	UpdateInsightRequest(*securityhub.UpdateInsightInput) securityhub.UpdateInsightRequest
+	UpdateInsightRequest(*types.UpdateInsightInput) securityhub.UpdateInsightRequest
 }
 
 var _ ClientAPI = (*securityhub.Client)(nil)

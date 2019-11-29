@@ -6,56 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/codecommit/types"
 )
-
-// Represents the input of a get repository triggers operation.
-type GetRepositoryTriggersInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the repository for which the trigger is configured.
-	//
-	// RepositoryName is a required field
-	RepositoryName *string `locationName:"repositoryName" min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetRepositoryTriggersInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetRepositoryTriggersInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetRepositoryTriggersInput"}
-
-	if s.RepositoryName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("RepositoryName"))
-	}
-	if s.RepositoryName != nil && len(*s.RepositoryName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("RepositoryName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Represents the output of a get repository triggers operation.
-type GetRepositoryTriggersOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The system-generated unique ID for the trigger.
-	ConfigurationId *string `locationName:"configurationId" type:"string"`
-
-	// The JSON block of configuration information for each trigger.
-	Triggers []RepositoryTrigger `locationName:"triggers" type:"list"`
-}
-
-// String returns the string representation
-func (s GetRepositoryTriggersOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetRepositoryTriggers = "GetRepositoryTriggers"
 
@@ -72,7 +24,7 @@ const opGetRepositoryTriggers = "GetRepositoryTriggers"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/GetRepositoryTriggers
-func (c *Client) GetRepositoryTriggersRequest(input *GetRepositoryTriggersInput) GetRepositoryTriggersRequest {
+func (c *Client) GetRepositoryTriggersRequest(input *types.GetRepositoryTriggersInput) GetRepositoryTriggersRequest {
 	op := &aws.Operation{
 		Name:       opGetRepositoryTriggers,
 		HTTPMethod: "POST",
@@ -80,10 +32,10 @@ func (c *Client) GetRepositoryTriggersRequest(input *GetRepositoryTriggersInput)
 	}
 
 	if input == nil {
-		input = &GetRepositoryTriggersInput{}
+		input = &types.GetRepositoryTriggersInput{}
 	}
 
-	req := c.newRequest(op, input, &GetRepositoryTriggersOutput{})
+	req := c.newRequest(op, input, &types.GetRepositoryTriggersOutput{})
 	return GetRepositoryTriggersRequest{Request: req, Input: input, Copy: c.GetRepositoryTriggersRequest}
 }
 
@@ -91,8 +43,8 @@ func (c *Client) GetRepositoryTriggersRequest(input *GetRepositoryTriggersInput)
 // GetRepositoryTriggers API operation.
 type GetRepositoryTriggersRequest struct {
 	*aws.Request
-	Input *GetRepositoryTriggersInput
-	Copy  func(*GetRepositoryTriggersInput) GetRepositoryTriggersRequest
+	Input *types.GetRepositoryTriggersInput
+	Copy  func(*types.GetRepositoryTriggersInput) GetRepositoryTriggersRequest
 }
 
 // Send marshals and sends the GetRepositoryTriggers API request.
@@ -104,7 +56,7 @@ func (r GetRepositoryTriggersRequest) Send(ctx context.Context) (*GetRepositoryT
 	}
 
 	resp := &GetRepositoryTriggersResponse{
-		GetRepositoryTriggersOutput: r.Request.Data.(*GetRepositoryTriggersOutput),
+		GetRepositoryTriggersOutput: r.Request.Data.(*types.GetRepositoryTriggersOutput),
 		response:                    &aws.Response{Request: r.Request},
 	}
 
@@ -114,7 +66,7 @@ func (r GetRepositoryTriggersRequest) Send(ctx context.Context) (*GetRepositoryT
 // GetRepositoryTriggersResponse is the response type for the
 // GetRepositoryTriggers API operation.
 type GetRepositoryTriggersResponse struct {
-	*GetRepositoryTriggersOutput
+	*types.GetRepositoryTriggersOutput
 
 	response *aws.Response
 }

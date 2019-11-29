@@ -6,138 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/applicationautoscaling/types"
 )
-
-type DescribeScalableTargetsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The maximum number of scalable targets. This value can be between 1 and 50.
-	// The default value is 50.
-	//
-	// If this parameter is used, the operation returns up to MaxResults results
-	// at a time, along with a NextToken value. To get the next set of results,
-	// include the NextToken value in a subsequent call. If this parameter is not
-	// used, the operation returns up to 50 results and a NextToken value, if applicable.
-	MaxResults *int64 `type:"integer"`
-
-	// The token for the next set of results.
-	NextToken *string `type:"string"`
-
-	// The identifier of the resource associated with the scalable target. This
-	// string consists of the resource type and unique identifier. If you specify
-	// a scalable dimension, you must also specify a resource ID.
-	//
-	//    * ECS service - The resource type is service and the unique identifier
-	//    is the cluster name and service name. Example: service/default/sample-webapp.
-	//
-	//    * Spot Fleet request - The resource type is spot-fleet-request and the
-	//    unique identifier is the Spot Fleet request ID. Example: spot-fleet-request/sfr-73fbd2ce-aa30-494c-8788-1cee4EXAMPLE.
-	//
-	//    * EMR cluster - The resource type is instancegroup and the unique identifier
-	//    is the cluster ID and instance group ID. Example: instancegroup/j-2EEZNYKUA1NTV/ig-1791Y4E1L8YI0.
-	//
-	//    * AppStream 2.0 fleet - The resource type is fleet and the unique identifier
-	//    is the fleet name. Example: fleet/sample-fleet.
-	//
-	//    * DynamoDB table - The resource type is table and the unique identifier
-	//    is the resource ID. Example: table/my-table.
-	//
-	//    * DynamoDB global secondary index - The resource type is index and the
-	//    unique identifier is the resource ID. Example: table/my-table/index/my-table-index.
-	//
-	//    * Aurora DB cluster - The resource type is cluster and the unique identifier
-	//    is the cluster name. Example: cluster:my-db-cluster.
-	//
-	//    * Amazon SageMaker endpoint variants - The resource type is variant and
-	//    the unique identifier is the resource ID. Example: endpoint/my-end-point/variant/KMeansClustering.
-	//
-	//    * Custom resources are not supported with a resource type. This parameter
-	//    must specify the OutputValue from the CloudFormation template stack used
-	//    to access the resources. The unique identifier is defined by the service
-	//    provider. More information is available in our GitHub repository (https://github.com/aws/aws-auto-scaling-custom-resource).
-	ResourceIds []string `type:"list"`
-
-	// The scalable dimension associated with the scalable target. This string consists
-	// of the service namespace, resource type, and scaling property. If you specify
-	// a scalable dimension, you must also specify a resource ID.
-	//
-	//    * ecs:service:DesiredCount - The desired task count of an ECS service.
-	//
-	//    * ec2:spot-fleet-request:TargetCapacity - The target capacity of a Spot
-	//    Fleet request.
-	//
-	//    * elasticmapreduce:instancegroup:InstanceCount - The instance count of
-	//    an EMR Instance Group.
-	//
-	//    * appstream:fleet:DesiredCapacity - The desired capacity of an AppStream
-	//    2.0 fleet.
-	//
-	//    * dynamodb:table:ReadCapacityUnits - The provisioned read capacity for
-	//    a DynamoDB table.
-	//
-	//    * dynamodb:table:WriteCapacityUnits - The provisioned write capacity for
-	//    a DynamoDB table.
-	//
-	//    * dynamodb:index:ReadCapacityUnits - The provisioned read capacity for
-	//    a DynamoDB global secondary index.
-	//
-	//    * dynamodb:index:WriteCapacityUnits - The provisioned write capacity for
-	//    a DynamoDB global secondary index.
-	//
-	//    * rds:cluster:ReadReplicaCount - The count of Aurora Replicas in an Aurora
-	//    DB cluster. Available for Aurora MySQL-compatible edition and Aurora PostgreSQL-compatible
-	//    edition.
-	//
-	//    * sagemaker:variant:DesiredInstanceCount - The number of EC2 instances
-	//    for an Amazon SageMaker model endpoint variant.
-	//
-	//    * custom-resource:ResourceType:Property - The scalable dimension for a
-	//    custom resource provided by your own application or service.
-	ScalableDimension ScalableDimension `type:"string" enum:"true"`
-
-	// The namespace of the AWS service that provides the resource or custom-resource
-	// for a resource provided by your own application or service. For more information,
-	// see AWS Service Namespaces (http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#genref-aws-service-namespaces)
-	// in the Amazon Web Services General Reference.
-	//
-	// ServiceNamespace is a required field
-	ServiceNamespace ServiceNamespace `type:"string" required:"true" enum:"true"`
-}
-
-// String returns the string representation
-func (s DescribeScalableTargetsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeScalableTargetsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeScalableTargetsInput"}
-	if len(s.ServiceNamespace) == 0 {
-		invalidParams.Add(aws.NewErrParamRequired("ServiceNamespace"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribeScalableTargetsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The token required to get the next set of results. This value is null if
-	// there are no more results to return.
-	NextToken *string `type:"string"`
-
-	// The scalable targets that match the request parameters.
-	ScalableTargets []ScalableTarget `type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeScalableTargetsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeScalableTargets = "DescribeScalableTargets"
 
@@ -160,7 +30,7 @@ const opDescribeScalableTargets = "DescribeScalableTargets"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/application-autoscaling-2016-02-06/DescribeScalableTargets
-func (c *Client) DescribeScalableTargetsRequest(input *DescribeScalableTargetsInput) DescribeScalableTargetsRequest {
+func (c *Client) DescribeScalableTargetsRequest(input *types.DescribeScalableTargetsInput) DescribeScalableTargetsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeScalableTargets,
 		HTTPMethod: "POST",
@@ -174,10 +44,10 @@ func (c *Client) DescribeScalableTargetsRequest(input *DescribeScalableTargetsIn
 	}
 
 	if input == nil {
-		input = &DescribeScalableTargetsInput{}
+		input = &types.DescribeScalableTargetsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeScalableTargetsOutput{})
+	req := c.newRequest(op, input, &types.DescribeScalableTargetsOutput{})
 	return DescribeScalableTargetsRequest{Request: req, Input: input, Copy: c.DescribeScalableTargetsRequest}
 }
 
@@ -185,8 +55,8 @@ func (c *Client) DescribeScalableTargetsRequest(input *DescribeScalableTargetsIn
 // DescribeScalableTargets API operation.
 type DescribeScalableTargetsRequest struct {
 	*aws.Request
-	Input *DescribeScalableTargetsInput
-	Copy  func(*DescribeScalableTargetsInput) DescribeScalableTargetsRequest
+	Input *types.DescribeScalableTargetsInput
+	Copy  func(*types.DescribeScalableTargetsInput) DescribeScalableTargetsRequest
 }
 
 // Send marshals and sends the DescribeScalableTargets API request.
@@ -198,7 +68,7 @@ func (r DescribeScalableTargetsRequest) Send(ctx context.Context) (*DescribeScal
 	}
 
 	resp := &DescribeScalableTargetsResponse{
-		DescribeScalableTargetsOutput: r.Request.Data.(*DescribeScalableTargetsOutput),
+		DescribeScalableTargetsOutput: r.Request.Data.(*types.DescribeScalableTargetsOutput),
 		response:                      &aws.Response{Request: r.Request},
 	}
 
@@ -228,7 +98,7 @@ func NewDescribeScalableTargetsPaginator(req DescribeScalableTargetsRequest) Des
 	return DescribeScalableTargetsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *DescribeScalableTargetsInput
+				var inCpy *types.DescribeScalableTargetsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -248,14 +118,14 @@ type DescribeScalableTargetsPaginator struct {
 	aws.Pager
 }
 
-func (p *DescribeScalableTargetsPaginator) CurrentPage() *DescribeScalableTargetsOutput {
-	return p.Pager.CurrentPage().(*DescribeScalableTargetsOutput)
+func (p *DescribeScalableTargetsPaginator) CurrentPage() *types.DescribeScalableTargetsOutput {
+	return p.Pager.CurrentPage().(*types.DescribeScalableTargetsOutput)
 }
 
 // DescribeScalableTargetsResponse is the response type for the
 // DescribeScalableTargets API operation.
 type DescribeScalableTargetsResponse struct {
-	*DescribeScalableTargetsOutput
+	*types.DescribeScalableTargetsOutput
 
 	response *aws.Response
 }

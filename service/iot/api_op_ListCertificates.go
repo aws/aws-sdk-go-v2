@@ -6,107 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/iot/types"
 )
-
-// The input for the ListCertificates operation.
-type ListCertificatesInput struct {
-	_ struct{} `type:"structure"`
-
-	// Specifies the order for results. If True, the results are returned in ascending
-	// order, based on the creation date.
-	AscendingOrder *bool `location:"querystring" locationName:"isAscendingOrder" type:"boolean"`
-
-	// The marker for the next set of results.
-	Marker *string `location:"querystring" locationName:"marker" type:"string"`
-
-	// The result page size.
-	PageSize *int64 `location:"querystring" locationName:"pageSize" min:"1" type:"integer"`
-}
-
-// String returns the string representation
-func (s ListCertificatesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListCertificatesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListCertificatesInput"}
-	if s.PageSize != nil && *s.PageSize < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("PageSize", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListCertificatesInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.AscendingOrder != nil {
-		v := *s.AscendingOrder
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "isAscendingOrder", protocol.BoolValue(v), metadata)
-	}
-	if s.Marker != nil {
-		v := *s.Marker
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "marker", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.PageSize != nil {
-		v := *s.PageSize
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "pageSize", protocol.Int64Value(v), metadata)
-	}
-	return nil
-}
-
-// The output of the ListCertificates operation.
-type ListCertificatesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The descriptions of the certificates.
-	Certificates []Certificate `locationName:"certificates" type:"list"`
-
-	// The marker for the next set of results, or null if there are no additional
-	// results.
-	NextMarker *string `locationName:"nextMarker" type:"string"`
-}
-
-// String returns the string representation
-func (s ListCertificatesOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListCertificatesOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.Certificates != nil {
-		v := s.Certificates
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "certificates", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	if s.NextMarker != nil {
-		v := *s.NextMarker
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "nextMarker", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opListCertificates = "ListCertificates"
 
@@ -124,7 +25,7 @@ const opListCertificates = "ListCertificates"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) ListCertificatesRequest(input *ListCertificatesInput) ListCertificatesRequest {
+func (c *Client) ListCertificatesRequest(input *types.ListCertificatesInput) ListCertificatesRequest {
 	op := &aws.Operation{
 		Name:       opListCertificates,
 		HTTPMethod: "GET",
@@ -132,10 +33,10 @@ func (c *Client) ListCertificatesRequest(input *ListCertificatesInput) ListCerti
 	}
 
 	if input == nil {
-		input = &ListCertificatesInput{}
+		input = &types.ListCertificatesInput{}
 	}
 
-	req := c.newRequest(op, input, &ListCertificatesOutput{})
+	req := c.newRequest(op, input, &types.ListCertificatesOutput{})
 	return ListCertificatesRequest{Request: req, Input: input, Copy: c.ListCertificatesRequest}
 }
 
@@ -143,8 +44,8 @@ func (c *Client) ListCertificatesRequest(input *ListCertificatesInput) ListCerti
 // ListCertificates API operation.
 type ListCertificatesRequest struct {
 	*aws.Request
-	Input *ListCertificatesInput
-	Copy  func(*ListCertificatesInput) ListCertificatesRequest
+	Input *types.ListCertificatesInput
+	Copy  func(*types.ListCertificatesInput) ListCertificatesRequest
 }
 
 // Send marshals and sends the ListCertificates API request.
@@ -156,7 +57,7 @@ func (r ListCertificatesRequest) Send(ctx context.Context) (*ListCertificatesRes
 	}
 
 	resp := &ListCertificatesResponse{
-		ListCertificatesOutput: r.Request.Data.(*ListCertificatesOutput),
+		ListCertificatesOutput: r.Request.Data.(*types.ListCertificatesOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -166,7 +67,7 @@ func (r ListCertificatesRequest) Send(ctx context.Context) (*ListCertificatesRes
 // ListCertificatesResponse is the response type for the
 // ListCertificates API operation.
 type ListCertificatesResponse struct {
-	*ListCertificatesOutput
+	*types.ListCertificatesOutput
 
 	response *aws.Response
 }

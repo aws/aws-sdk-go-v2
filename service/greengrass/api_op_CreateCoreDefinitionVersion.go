@@ -4,126 +4,10 @@ package greengrass
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/greengrass/types"
 )
-
-type CreateCoreDefinitionVersionInput struct {
-	_ struct{} `type:"structure"`
-
-	AmznClientToken *string `location:"header" locationName:"X-Amzn-Client-Token" type:"string"`
-
-	// CoreDefinitionId is a required field
-	CoreDefinitionId *string `location:"uri" locationName:"CoreDefinitionId" type:"string" required:"true"`
-
-	Cores []Core `type:"list"`
-}
-
-// String returns the string representation
-func (s CreateCoreDefinitionVersionInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateCoreDefinitionVersionInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateCoreDefinitionVersionInput"}
-
-	if s.CoreDefinitionId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("CoreDefinitionId"))
-	}
-	if s.Cores != nil {
-		for i, v := range s.Cores {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Cores", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s CreateCoreDefinitionVersionInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.Cores != nil {
-		v := s.Cores
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "Cores", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	if s.AmznClientToken != nil {
-		v := *s.AmznClientToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "X-Amzn-Client-Token", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.CoreDefinitionId != nil {
-		v := *s.CoreDefinitionId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "CoreDefinitionId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type CreateCoreDefinitionVersionOutput struct {
-	_ struct{} `type:"structure"`
-
-	Arn *string `type:"string"`
-
-	CreationTimestamp *string `type:"string"`
-
-	Id *string `type:"string"`
-
-	Version *string `type:"string"`
-}
-
-// String returns the string representation
-func (s CreateCoreDefinitionVersionOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s CreateCoreDefinitionVersionOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.Arn != nil {
-		v := *s.Arn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "Arn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.CreationTimestamp != nil {
-		v := *s.CreationTimestamp
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "CreationTimestamp", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Id != nil {
-		v := *s.Id
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "Id", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Version != nil {
-		v := *s.Version
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "Version", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opCreateCoreDefinitionVersion = "CreateCoreDefinitionVersion"
 
@@ -141,7 +25,7 @@ const opCreateCoreDefinitionVersion = "CreateCoreDefinitionVersion"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/CreateCoreDefinitionVersion
-func (c *Client) CreateCoreDefinitionVersionRequest(input *CreateCoreDefinitionVersionInput) CreateCoreDefinitionVersionRequest {
+func (c *Client) CreateCoreDefinitionVersionRequest(input *types.CreateCoreDefinitionVersionInput) CreateCoreDefinitionVersionRequest {
 	op := &aws.Operation{
 		Name:       opCreateCoreDefinitionVersion,
 		HTTPMethod: "POST",
@@ -149,10 +33,10 @@ func (c *Client) CreateCoreDefinitionVersionRequest(input *CreateCoreDefinitionV
 	}
 
 	if input == nil {
-		input = &CreateCoreDefinitionVersionInput{}
+		input = &types.CreateCoreDefinitionVersionInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateCoreDefinitionVersionOutput{})
+	req := c.newRequest(op, input, &types.CreateCoreDefinitionVersionOutput{})
 	return CreateCoreDefinitionVersionRequest{Request: req, Input: input, Copy: c.CreateCoreDefinitionVersionRequest}
 }
 
@@ -160,8 +44,8 @@ func (c *Client) CreateCoreDefinitionVersionRequest(input *CreateCoreDefinitionV
 // CreateCoreDefinitionVersion API operation.
 type CreateCoreDefinitionVersionRequest struct {
 	*aws.Request
-	Input *CreateCoreDefinitionVersionInput
-	Copy  func(*CreateCoreDefinitionVersionInput) CreateCoreDefinitionVersionRequest
+	Input *types.CreateCoreDefinitionVersionInput
+	Copy  func(*types.CreateCoreDefinitionVersionInput) CreateCoreDefinitionVersionRequest
 }
 
 // Send marshals and sends the CreateCoreDefinitionVersion API request.
@@ -173,7 +57,7 @@ func (r CreateCoreDefinitionVersionRequest) Send(ctx context.Context) (*CreateCo
 	}
 
 	resp := &CreateCoreDefinitionVersionResponse{
-		CreateCoreDefinitionVersionOutput: r.Request.Data.(*CreateCoreDefinitionVersionOutput),
+		CreateCoreDefinitionVersionOutput: r.Request.Data.(*types.CreateCoreDefinitionVersionOutput),
 		response:                          &aws.Response{Request: r.Request},
 	}
 
@@ -183,7 +67,7 @@ func (r CreateCoreDefinitionVersionRequest) Send(ctx context.Context) (*CreateCo
 // CreateCoreDefinitionVersionResponse is the response type for the
 // CreateCoreDefinitionVersion API operation.
 type CreateCoreDefinitionVersionResponse struct {
-	*CreateCoreDefinitionVersionOutput
+	*types.CreateCoreDefinitionVersionOutput
 
 	response *aws.Response
 }

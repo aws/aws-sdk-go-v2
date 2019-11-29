@@ -10,6 +10,7 @@ package kinesisvideoarchivedmediaiface
 
 import (
 	"github.com/aws/aws-sdk-go-v2/service/kinesisvideoarchivedmedia"
+	"github.com/aws/aws-sdk-go-v2/service/kinesisvideoarchivedmedia/types"
 )
 
 // ClientAPI provides an interface to enable mocking the
@@ -43,7 +44,7 @@ import (
 //    type mockClientClient struct {
 //        kinesisvideoarchivedmediaiface.ClientPI
 //    }
-//    func (m *mockClientClient) GetDASHStreamingSessionURL(input *kinesisvideoarchivedmedia.GetDASHStreamingSessionURLInput) (*kinesisvideoarchivedmedia.GetDASHStreamingSessionURLOutput, error) {
+//    func (m *mockClientClient) GetDASHStreamingSessionURL(input *types.GetDASHStreamingSessionURLInput) (*types.GetDASHStreamingSessionURLOutput, error) {
 //        // mock response/functionality
 //    }
 //
@@ -61,13 +62,13 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type ClientAPI interface {
-	GetDASHStreamingSessionURLRequest(*kinesisvideoarchivedmedia.GetDASHStreamingSessionURLInput) kinesisvideoarchivedmedia.GetDASHStreamingSessionURLRequest
+	GetDASHStreamingSessionURLRequest(*types.GetDASHStreamingSessionURLInput) kinesisvideoarchivedmedia.GetDASHStreamingSessionURLRequest
 
-	GetHLSStreamingSessionURLRequest(*kinesisvideoarchivedmedia.GetHLSStreamingSessionURLInput) kinesisvideoarchivedmedia.GetHLSStreamingSessionURLRequest
+	GetHLSStreamingSessionURLRequest(*types.GetHLSStreamingSessionURLInput) kinesisvideoarchivedmedia.GetHLSStreamingSessionURLRequest
 
-	GetMediaForFragmentListRequest(*kinesisvideoarchivedmedia.GetMediaForFragmentListInput) kinesisvideoarchivedmedia.GetMediaForFragmentListRequest
+	GetMediaForFragmentListRequest(*types.GetMediaForFragmentListInput) kinesisvideoarchivedmedia.GetMediaForFragmentListRequest
 
-	ListFragmentsRequest(*kinesisvideoarchivedmedia.ListFragmentsInput) kinesisvideoarchivedmedia.ListFragmentsRequest
+	ListFragmentsRequest(*types.ListFragmentsInput) kinesisvideoarchivedmedia.ListFragmentsRequest
 }
 
 var _ ClientAPI = (*kinesisvideoarchivedmedia.Client)(nil)

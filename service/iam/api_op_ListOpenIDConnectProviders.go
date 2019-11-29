@@ -6,30 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/iam/types"
 )
-
-type ListOpenIDConnectProvidersInput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s ListOpenIDConnectProvidersInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Contains the response to a successful ListOpenIDConnectProviders request.
-type ListOpenIDConnectProvidersOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The list of IAM OIDC provider resource objects defined in the AWS account.
-	OpenIDConnectProviderList []OpenIDConnectProviderListEntry `type:"list"`
-}
-
-// String returns the string representation
-func (s ListOpenIDConnectProvidersOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListOpenIDConnectProviders = "ListOpenIDConnectProviders"
 
@@ -47,7 +25,7 @@ const opListOpenIDConnectProviders = "ListOpenIDConnectProviders"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListOpenIDConnectProviders
-func (c *Client) ListOpenIDConnectProvidersRequest(input *ListOpenIDConnectProvidersInput) ListOpenIDConnectProvidersRequest {
+func (c *Client) ListOpenIDConnectProvidersRequest(input *types.ListOpenIDConnectProvidersInput) ListOpenIDConnectProvidersRequest {
 	op := &aws.Operation{
 		Name:       opListOpenIDConnectProviders,
 		HTTPMethod: "POST",
@@ -55,10 +33,10 @@ func (c *Client) ListOpenIDConnectProvidersRequest(input *ListOpenIDConnectProvi
 	}
 
 	if input == nil {
-		input = &ListOpenIDConnectProvidersInput{}
+		input = &types.ListOpenIDConnectProvidersInput{}
 	}
 
-	req := c.newRequest(op, input, &ListOpenIDConnectProvidersOutput{})
+	req := c.newRequest(op, input, &types.ListOpenIDConnectProvidersOutput{})
 	return ListOpenIDConnectProvidersRequest{Request: req, Input: input, Copy: c.ListOpenIDConnectProvidersRequest}
 }
 
@@ -66,8 +44,8 @@ func (c *Client) ListOpenIDConnectProvidersRequest(input *ListOpenIDConnectProvi
 // ListOpenIDConnectProviders API operation.
 type ListOpenIDConnectProvidersRequest struct {
 	*aws.Request
-	Input *ListOpenIDConnectProvidersInput
-	Copy  func(*ListOpenIDConnectProvidersInput) ListOpenIDConnectProvidersRequest
+	Input *types.ListOpenIDConnectProvidersInput
+	Copy  func(*types.ListOpenIDConnectProvidersInput) ListOpenIDConnectProvidersRequest
 }
 
 // Send marshals and sends the ListOpenIDConnectProviders API request.
@@ -79,7 +57,7 @@ func (r ListOpenIDConnectProvidersRequest) Send(ctx context.Context) (*ListOpenI
 	}
 
 	resp := &ListOpenIDConnectProvidersResponse{
-		ListOpenIDConnectProvidersOutput: r.Request.Data.(*ListOpenIDConnectProvidersOutput),
+		ListOpenIDConnectProvidersOutput: r.Request.Data.(*types.ListOpenIDConnectProvidersOutput),
 		response:                         &aws.Response{Request: r.Request},
 	}
 
@@ -89,7 +67,7 @@ func (r ListOpenIDConnectProvidersRequest) Send(ctx context.Context) (*ListOpenI
 // ListOpenIDConnectProvidersResponse is the response type for the
 // ListOpenIDConnectProviders API operation.
 type ListOpenIDConnectProvidersResponse struct {
-	*ListOpenIDConnectProvidersOutput
+	*types.ListOpenIDConnectProvidersOutput
 
 	response *aws.Response
 }

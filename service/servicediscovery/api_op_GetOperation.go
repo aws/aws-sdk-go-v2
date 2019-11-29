@@ -6,48 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/servicediscovery/types"
 )
-
-type GetOperationInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the operation that you want to get more information about.
-	//
-	// OperationId is a required field
-	OperationId *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetOperationInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetOperationInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetOperationInput"}
-
-	if s.OperationId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("OperationId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type GetOperationOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A complex type that contains information about the operation.
-	Operation *Operation `type:"structure"`
-}
-
-// String returns the string representation
-func (s GetOperationOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetOperation = "GetOperation"
 
@@ -67,7 +27,7 @@ const opGetOperation = "GetOperation"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicediscovery-2017-03-14/GetOperation
-func (c *Client) GetOperationRequest(input *GetOperationInput) GetOperationRequest {
+func (c *Client) GetOperationRequest(input *types.GetOperationInput) GetOperationRequest {
 	op := &aws.Operation{
 		Name:       opGetOperation,
 		HTTPMethod: "POST",
@@ -75,10 +35,10 @@ func (c *Client) GetOperationRequest(input *GetOperationInput) GetOperationReque
 	}
 
 	if input == nil {
-		input = &GetOperationInput{}
+		input = &types.GetOperationInput{}
 	}
 
-	req := c.newRequest(op, input, &GetOperationOutput{})
+	req := c.newRequest(op, input, &types.GetOperationOutput{})
 	return GetOperationRequest{Request: req, Input: input, Copy: c.GetOperationRequest}
 }
 
@@ -86,8 +46,8 @@ func (c *Client) GetOperationRequest(input *GetOperationInput) GetOperationReque
 // GetOperation API operation.
 type GetOperationRequest struct {
 	*aws.Request
-	Input *GetOperationInput
-	Copy  func(*GetOperationInput) GetOperationRequest
+	Input *types.GetOperationInput
+	Copy  func(*types.GetOperationInput) GetOperationRequest
 }
 
 // Send marshals and sends the GetOperation API request.
@@ -99,7 +59,7 @@ func (r GetOperationRequest) Send(ctx context.Context) (*GetOperationResponse, e
 	}
 
 	resp := &GetOperationResponse{
-		GetOperationOutput: r.Request.Data.(*GetOperationOutput),
+		GetOperationOutput: r.Request.Data.(*types.GetOperationOutput),
 		response:           &aws.Response{Request: r.Request},
 	}
 
@@ -109,7 +69,7 @@ func (r GetOperationRequest) Send(ctx context.Context) (*GetOperationResponse, e
 // GetOperationResponse is the response type for the
 // GetOperation API operation.
 type GetOperationResponse struct {
-	*GetOperationOutput
+	*types.GetOperationOutput
 
 	response *aws.Response
 }

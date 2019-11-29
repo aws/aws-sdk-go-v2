@@ -6,59 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/types"
 )
-
-type DescribeRiskConfigurationInput struct {
-	_ struct{} `type:"structure"`
-
-	// The app client ID.
-	ClientId *string `min:"1" type:"string" sensitive:"true"`
-
-	// The user pool ID.
-	//
-	// UserPoolId is a required field
-	UserPoolId *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeRiskConfigurationInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeRiskConfigurationInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeRiskConfigurationInput"}
-	if s.ClientId != nil && len(*s.ClientId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ClientId", 1))
-	}
-
-	if s.UserPoolId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("UserPoolId"))
-	}
-	if s.UserPoolId != nil && len(*s.UserPoolId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("UserPoolId", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribeRiskConfigurationOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The risk configuration.
-	//
-	// RiskConfiguration is a required field
-	RiskConfiguration *RiskConfigurationType `type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeRiskConfigurationOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeRiskConfiguration = "DescribeRiskConfiguration"
 
@@ -75,7 +24,7 @@ const opDescribeRiskConfiguration = "DescribeRiskConfiguration"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/DescribeRiskConfiguration
-func (c *Client) DescribeRiskConfigurationRequest(input *DescribeRiskConfigurationInput) DescribeRiskConfigurationRequest {
+func (c *Client) DescribeRiskConfigurationRequest(input *types.DescribeRiskConfigurationInput) DescribeRiskConfigurationRequest {
 	op := &aws.Operation{
 		Name:       opDescribeRiskConfiguration,
 		HTTPMethod: "POST",
@@ -83,10 +32,10 @@ func (c *Client) DescribeRiskConfigurationRequest(input *DescribeRiskConfigurati
 	}
 
 	if input == nil {
-		input = &DescribeRiskConfigurationInput{}
+		input = &types.DescribeRiskConfigurationInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeRiskConfigurationOutput{})
+	req := c.newRequest(op, input, &types.DescribeRiskConfigurationOutput{})
 	return DescribeRiskConfigurationRequest{Request: req, Input: input, Copy: c.DescribeRiskConfigurationRequest}
 }
 
@@ -94,8 +43,8 @@ func (c *Client) DescribeRiskConfigurationRequest(input *DescribeRiskConfigurati
 // DescribeRiskConfiguration API operation.
 type DescribeRiskConfigurationRequest struct {
 	*aws.Request
-	Input *DescribeRiskConfigurationInput
-	Copy  func(*DescribeRiskConfigurationInput) DescribeRiskConfigurationRequest
+	Input *types.DescribeRiskConfigurationInput
+	Copy  func(*types.DescribeRiskConfigurationInput) DescribeRiskConfigurationRequest
 }
 
 // Send marshals and sends the DescribeRiskConfiguration API request.
@@ -107,7 +56,7 @@ func (r DescribeRiskConfigurationRequest) Send(ctx context.Context) (*DescribeRi
 	}
 
 	resp := &DescribeRiskConfigurationResponse{
-		DescribeRiskConfigurationOutput: r.Request.Data.(*DescribeRiskConfigurationOutput),
+		DescribeRiskConfigurationOutput: r.Request.Data.(*types.DescribeRiskConfigurationOutput),
 		response:                        &aws.Response{Request: r.Request},
 	}
 
@@ -117,7 +66,7 @@ func (r DescribeRiskConfigurationRequest) Send(ctx context.Context) (*DescribeRi
 // DescribeRiskConfigurationResponse is the response type for the
 // DescribeRiskConfiguration API operation.
 type DescribeRiskConfigurationResponse struct {
-	*DescribeRiskConfigurationOutput
+	*types.DescribeRiskConfigurationOutput
 
 	response *aws.Response
 }

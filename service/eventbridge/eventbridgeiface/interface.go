@@ -10,6 +10,7 @@ package eventbridgeiface
 
 import (
 	"github.com/aws/aws-sdk-go-v2/service/eventbridge"
+	"github.com/aws/aws-sdk-go-v2/service/eventbridge/types"
 )
 
 // ClientAPI provides an interface to enable mocking the
@@ -43,7 +44,7 @@ import (
 //    type mockClientClient struct {
 //        eventbridgeiface.ClientPI
 //    }
-//    func (m *mockClientClient) ActivateEventSource(input *eventbridge.ActivateEventSourceInput) (*eventbridge.ActivateEventSourceOutput, error) {
+//    func (m *mockClientClient) ActivateEventSource(input *types.ActivateEventSourceInput) (*types.ActivateEventSourceOutput, error) {
 //        // mock response/functionality
 //    }
 //
@@ -61,67 +62,67 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type ClientAPI interface {
-	ActivateEventSourceRequest(*eventbridge.ActivateEventSourceInput) eventbridge.ActivateEventSourceRequest
+	ActivateEventSourceRequest(*types.ActivateEventSourceInput) eventbridge.ActivateEventSourceRequest
 
-	CreateEventBusRequest(*eventbridge.CreateEventBusInput) eventbridge.CreateEventBusRequest
+	CreateEventBusRequest(*types.CreateEventBusInput) eventbridge.CreateEventBusRequest
 
-	CreatePartnerEventSourceRequest(*eventbridge.CreatePartnerEventSourceInput) eventbridge.CreatePartnerEventSourceRequest
+	CreatePartnerEventSourceRequest(*types.CreatePartnerEventSourceInput) eventbridge.CreatePartnerEventSourceRequest
 
-	DeactivateEventSourceRequest(*eventbridge.DeactivateEventSourceInput) eventbridge.DeactivateEventSourceRequest
+	DeactivateEventSourceRequest(*types.DeactivateEventSourceInput) eventbridge.DeactivateEventSourceRequest
 
-	DeleteEventBusRequest(*eventbridge.DeleteEventBusInput) eventbridge.DeleteEventBusRequest
+	DeleteEventBusRequest(*types.DeleteEventBusInput) eventbridge.DeleteEventBusRequest
 
-	DeletePartnerEventSourceRequest(*eventbridge.DeletePartnerEventSourceInput) eventbridge.DeletePartnerEventSourceRequest
+	DeletePartnerEventSourceRequest(*types.DeletePartnerEventSourceInput) eventbridge.DeletePartnerEventSourceRequest
 
-	DeleteRuleRequest(*eventbridge.DeleteRuleInput) eventbridge.DeleteRuleRequest
+	DeleteRuleRequest(*types.DeleteRuleInput) eventbridge.DeleteRuleRequest
 
-	DescribeEventBusRequest(*eventbridge.DescribeEventBusInput) eventbridge.DescribeEventBusRequest
+	DescribeEventBusRequest(*types.DescribeEventBusInput) eventbridge.DescribeEventBusRequest
 
-	DescribeEventSourceRequest(*eventbridge.DescribeEventSourceInput) eventbridge.DescribeEventSourceRequest
+	DescribeEventSourceRequest(*types.DescribeEventSourceInput) eventbridge.DescribeEventSourceRequest
 
-	DescribePartnerEventSourceRequest(*eventbridge.DescribePartnerEventSourceInput) eventbridge.DescribePartnerEventSourceRequest
+	DescribePartnerEventSourceRequest(*types.DescribePartnerEventSourceInput) eventbridge.DescribePartnerEventSourceRequest
 
-	DescribeRuleRequest(*eventbridge.DescribeRuleInput) eventbridge.DescribeRuleRequest
+	DescribeRuleRequest(*types.DescribeRuleInput) eventbridge.DescribeRuleRequest
 
-	DisableRuleRequest(*eventbridge.DisableRuleInput) eventbridge.DisableRuleRequest
+	DisableRuleRequest(*types.DisableRuleInput) eventbridge.DisableRuleRequest
 
-	EnableRuleRequest(*eventbridge.EnableRuleInput) eventbridge.EnableRuleRequest
+	EnableRuleRequest(*types.EnableRuleInput) eventbridge.EnableRuleRequest
 
-	ListEventBusesRequest(*eventbridge.ListEventBusesInput) eventbridge.ListEventBusesRequest
+	ListEventBusesRequest(*types.ListEventBusesInput) eventbridge.ListEventBusesRequest
 
-	ListEventSourcesRequest(*eventbridge.ListEventSourcesInput) eventbridge.ListEventSourcesRequest
+	ListEventSourcesRequest(*types.ListEventSourcesInput) eventbridge.ListEventSourcesRequest
 
-	ListPartnerEventSourceAccountsRequest(*eventbridge.ListPartnerEventSourceAccountsInput) eventbridge.ListPartnerEventSourceAccountsRequest
+	ListPartnerEventSourceAccountsRequest(*types.ListPartnerEventSourceAccountsInput) eventbridge.ListPartnerEventSourceAccountsRequest
 
-	ListPartnerEventSourcesRequest(*eventbridge.ListPartnerEventSourcesInput) eventbridge.ListPartnerEventSourcesRequest
+	ListPartnerEventSourcesRequest(*types.ListPartnerEventSourcesInput) eventbridge.ListPartnerEventSourcesRequest
 
-	ListRuleNamesByTargetRequest(*eventbridge.ListRuleNamesByTargetInput) eventbridge.ListRuleNamesByTargetRequest
+	ListRuleNamesByTargetRequest(*types.ListRuleNamesByTargetInput) eventbridge.ListRuleNamesByTargetRequest
 
-	ListRulesRequest(*eventbridge.ListRulesInput) eventbridge.ListRulesRequest
+	ListRulesRequest(*types.ListRulesInput) eventbridge.ListRulesRequest
 
-	ListTagsForResourceRequest(*eventbridge.ListTagsForResourceInput) eventbridge.ListTagsForResourceRequest
+	ListTagsForResourceRequest(*types.ListTagsForResourceInput) eventbridge.ListTagsForResourceRequest
 
-	ListTargetsByRuleRequest(*eventbridge.ListTargetsByRuleInput) eventbridge.ListTargetsByRuleRequest
+	ListTargetsByRuleRequest(*types.ListTargetsByRuleInput) eventbridge.ListTargetsByRuleRequest
 
-	PutEventsRequest(*eventbridge.PutEventsInput) eventbridge.PutEventsRequest
+	PutEventsRequest(*types.PutEventsInput) eventbridge.PutEventsRequest
 
-	PutPartnerEventsRequest(*eventbridge.PutPartnerEventsInput) eventbridge.PutPartnerEventsRequest
+	PutPartnerEventsRequest(*types.PutPartnerEventsInput) eventbridge.PutPartnerEventsRequest
 
-	PutPermissionRequest(*eventbridge.PutPermissionInput) eventbridge.PutPermissionRequest
+	PutPermissionRequest(*types.PutPermissionInput) eventbridge.PutPermissionRequest
 
-	PutRuleRequest(*eventbridge.PutRuleInput) eventbridge.PutRuleRequest
+	PutRuleRequest(*types.PutRuleInput) eventbridge.PutRuleRequest
 
-	PutTargetsRequest(*eventbridge.PutTargetsInput) eventbridge.PutTargetsRequest
+	PutTargetsRequest(*types.PutTargetsInput) eventbridge.PutTargetsRequest
 
-	RemovePermissionRequest(*eventbridge.RemovePermissionInput) eventbridge.RemovePermissionRequest
+	RemovePermissionRequest(*types.RemovePermissionInput) eventbridge.RemovePermissionRequest
 
-	RemoveTargetsRequest(*eventbridge.RemoveTargetsInput) eventbridge.RemoveTargetsRequest
+	RemoveTargetsRequest(*types.RemoveTargetsInput) eventbridge.RemoveTargetsRequest
 
-	TagResourceRequest(*eventbridge.TagResourceInput) eventbridge.TagResourceRequest
+	TagResourceRequest(*types.TagResourceInput) eventbridge.TagResourceRequest
 
-	TestEventPatternRequest(*eventbridge.TestEventPatternInput) eventbridge.TestEventPatternRequest
+	TestEventPatternRequest(*types.TestEventPatternInput) eventbridge.TestEventPatternRequest
 
-	UntagResourceRequest(*eventbridge.UntagResourceInput) eventbridge.UntagResourceRequest
+	UntagResourceRequest(*types.UntagResourceInput) eventbridge.UntagResourceRequest
 }
 
 var _ ClientAPI = (*eventbridge.Client)(nil)

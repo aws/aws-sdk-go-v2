@@ -6,63 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/inspector/types"
 )
-
-type RemoveAttributesFromFindingsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The array of attribute keys that you want to remove from specified findings.
-	//
-	// AttributeKeys is a required field
-	AttributeKeys []string `locationName:"attributeKeys" type:"list" required:"true"`
-
-	// The ARNs that specify the findings that you want to remove attributes from.
-	//
-	// FindingArns is a required field
-	FindingArns []string `locationName:"findingArns" min:"1" type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s RemoveAttributesFromFindingsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *RemoveAttributesFromFindingsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "RemoveAttributesFromFindingsInput"}
-
-	if s.AttributeKeys == nil {
-		invalidParams.Add(aws.NewErrParamRequired("AttributeKeys"))
-	}
-
-	if s.FindingArns == nil {
-		invalidParams.Add(aws.NewErrParamRequired("FindingArns"))
-	}
-	if s.FindingArns != nil && len(s.FindingArns) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("FindingArns", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type RemoveAttributesFromFindingsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Attributes details that cannot be described. An error code is provided for
-	// each failed item.
-	//
-	// FailedItems is a required field
-	FailedItems map[string]FailedItemDetails `locationName:"failedItems" type:"map" required:"true"`
-}
-
-// String returns the string representation
-func (s RemoveAttributesFromFindingsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opRemoveAttributesFromFindings = "RemoveAttributesFromFindings"
 
@@ -81,7 +26,7 @@ const opRemoveAttributesFromFindings = "RemoveAttributesFromFindings"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/RemoveAttributesFromFindings
-func (c *Client) RemoveAttributesFromFindingsRequest(input *RemoveAttributesFromFindingsInput) RemoveAttributesFromFindingsRequest {
+func (c *Client) RemoveAttributesFromFindingsRequest(input *types.RemoveAttributesFromFindingsInput) RemoveAttributesFromFindingsRequest {
 	op := &aws.Operation{
 		Name:       opRemoveAttributesFromFindings,
 		HTTPMethod: "POST",
@@ -89,10 +34,10 @@ func (c *Client) RemoveAttributesFromFindingsRequest(input *RemoveAttributesFrom
 	}
 
 	if input == nil {
-		input = &RemoveAttributesFromFindingsInput{}
+		input = &types.RemoveAttributesFromFindingsInput{}
 	}
 
-	req := c.newRequest(op, input, &RemoveAttributesFromFindingsOutput{})
+	req := c.newRequest(op, input, &types.RemoveAttributesFromFindingsOutput{})
 	return RemoveAttributesFromFindingsRequest{Request: req, Input: input, Copy: c.RemoveAttributesFromFindingsRequest}
 }
 
@@ -100,8 +45,8 @@ func (c *Client) RemoveAttributesFromFindingsRequest(input *RemoveAttributesFrom
 // RemoveAttributesFromFindings API operation.
 type RemoveAttributesFromFindingsRequest struct {
 	*aws.Request
-	Input *RemoveAttributesFromFindingsInput
-	Copy  func(*RemoveAttributesFromFindingsInput) RemoveAttributesFromFindingsRequest
+	Input *types.RemoveAttributesFromFindingsInput
+	Copy  func(*types.RemoveAttributesFromFindingsInput) RemoveAttributesFromFindingsRequest
 }
 
 // Send marshals and sends the RemoveAttributesFromFindings API request.
@@ -113,7 +58,7 @@ func (r RemoveAttributesFromFindingsRequest) Send(ctx context.Context) (*RemoveA
 	}
 
 	resp := &RemoveAttributesFromFindingsResponse{
-		RemoveAttributesFromFindingsOutput: r.Request.Data.(*RemoveAttributesFromFindingsOutput),
+		RemoveAttributesFromFindingsOutput: r.Request.Data.(*types.RemoveAttributesFromFindingsOutput),
 		response:                           &aws.Response{Request: r.Request},
 	}
 
@@ -123,7 +68,7 @@ func (r RemoveAttributesFromFindingsRequest) Send(ctx context.Context) (*RemoveA
 // RemoveAttributesFromFindingsResponse is the response type for the
 // RemoveAttributesFromFindings API operation.
 type RemoveAttributesFromFindingsResponse struct {
-	*RemoveAttributesFromFindingsOutput
+	*types.RemoveAttributesFromFindingsOutput
 
 	response *aws.Response
 }

@@ -6,65 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/emr/types"
 )
-
-type AddInstanceFleetInput struct {
-	_ struct{} `type:"structure"`
-
-	// The unique identifier of the cluster.
-	//
-	// ClusterId is a required field
-	ClusterId *string `type:"string" required:"true"`
-
-	// Specifies the configuration of the instance fleet.
-	//
-	// InstanceFleet is a required field
-	InstanceFleet *InstanceFleetConfig `type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s AddInstanceFleetInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *AddInstanceFleetInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "AddInstanceFleetInput"}
-
-	if s.ClusterId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ClusterId"))
-	}
-
-	if s.InstanceFleet == nil {
-		invalidParams.Add(aws.NewErrParamRequired("InstanceFleet"))
-	}
-	if s.InstanceFleet != nil {
-		if err := s.InstanceFleet.Validate(); err != nil {
-			invalidParams.AddNested("InstanceFleet", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type AddInstanceFleetOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The unique identifier of the cluster.
-	ClusterId *string `type:"string"`
-
-	// The unique identifier of the instance fleet.
-	InstanceFleetId *string `type:"string"`
-}
-
-// String returns the string representation
-func (s AddInstanceFleetOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opAddInstanceFleet = "AddInstanceFleet"
 
@@ -84,7 +27,7 @@ const opAddInstanceFleet = "AddInstanceFleet"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/AddInstanceFleet
-func (c *Client) AddInstanceFleetRequest(input *AddInstanceFleetInput) AddInstanceFleetRequest {
+func (c *Client) AddInstanceFleetRequest(input *types.AddInstanceFleetInput) AddInstanceFleetRequest {
 	op := &aws.Operation{
 		Name:       opAddInstanceFleet,
 		HTTPMethod: "POST",
@@ -92,10 +35,10 @@ func (c *Client) AddInstanceFleetRequest(input *AddInstanceFleetInput) AddInstan
 	}
 
 	if input == nil {
-		input = &AddInstanceFleetInput{}
+		input = &types.AddInstanceFleetInput{}
 	}
 
-	req := c.newRequest(op, input, &AddInstanceFleetOutput{})
+	req := c.newRequest(op, input, &types.AddInstanceFleetOutput{})
 	return AddInstanceFleetRequest{Request: req, Input: input, Copy: c.AddInstanceFleetRequest}
 }
 
@@ -103,8 +46,8 @@ func (c *Client) AddInstanceFleetRequest(input *AddInstanceFleetInput) AddInstan
 // AddInstanceFleet API operation.
 type AddInstanceFleetRequest struct {
 	*aws.Request
-	Input *AddInstanceFleetInput
-	Copy  func(*AddInstanceFleetInput) AddInstanceFleetRequest
+	Input *types.AddInstanceFleetInput
+	Copy  func(*types.AddInstanceFleetInput) AddInstanceFleetRequest
 }
 
 // Send marshals and sends the AddInstanceFleet API request.
@@ -116,7 +59,7 @@ func (r AddInstanceFleetRequest) Send(ctx context.Context) (*AddInstanceFleetRes
 	}
 
 	resp := &AddInstanceFleetResponse{
-		AddInstanceFleetOutput: r.Request.Data.(*AddInstanceFleetOutput),
+		AddInstanceFleetOutput: r.Request.Data.(*types.AddInstanceFleetOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -126,7 +69,7 @@ func (r AddInstanceFleetRequest) Send(ctx context.Context) (*AddInstanceFleetRes
 // AddInstanceFleetResponse is the response type for the
 // AddInstanceFleet API operation.
 type AddInstanceFleetResponse struct {
-	*AddInstanceFleetOutput
+	*types.AddInstanceFleetOutput
 
 	response *aws.Response
 }

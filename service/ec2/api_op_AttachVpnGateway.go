@@ -6,65 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-// Contains the parameters for AttachVpnGateway.
-type AttachVpnGatewayInput struct {
-	_ struct{} `type:"structure"`
-
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have
-	// the required permissions, the error response is DryRunOperation. Otherwise,
-	// it is UnauthorizedOperation.
-	DryRun *bool `locationName:"dryRun" type:"boolean"`
-
-	// The ID of the VPC.
-	//
-	// VpcId is a required field
-	VpcId *string `type:"string" required:"true"`
-
-	// The ID of the virtual private gateway.
-	//
-	// VpnGatewayId is a required field
-	VpnGatewayId *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s AttachVpnGatewayInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *AttachVpnGatewayInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "AttachVpnGatewayInput"}
-
-	if s.VpcId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("VpcId"))
-	}
-
-	if s.VpnGatewayId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("VpnGatewayId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Contains the output of AttachVpnGateway.
-type AttachVpnGatewayOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Information about the attachment.
-	VpcAttachment *VpcAttachment `locationName:"attachment" type:"structure"`
-}
-
-// String returns the string representation
-func (s AttachVpnGatewayOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opAttachVpnGateway = "AttachVpnGateway"
 
@@ -85,7 +28,7 @@ const opAttachVpnGateway = "AttachVpnGateway"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AttachVpnGateway
-func (c *Client) AttachVpnGatewayRequest(input *AttachVpnGatewayInput) AttachVpnGatewayRequest {
+func (c *Client) AttachVpnGatewayRequest(input *types.AttachVpnGatewayInput) AttachVpnGatewayRequest {
 	op := &aws.Operation{
 		Name:       opAttachVpnGateway,
 		HTTPMethod: "POST",
@@ -93,10 +36,10 @@ func (c *Client) AttachVpnGatewayRequest(input *AttachVpnGatewayInput) AttachVpn
 	}
 
 	if input == nil {
-		input = &AttachVpnGatewayInput{}
+		input = &types.AttachVpnGatewayInput{}
 	}
 
-	req := c.newRequest(op, input, &AttachVpnGatewayOutput{})
+	req := c.newRequest(op, input, &types.AttachVpnGatewayOutput{})
 	return AttachVpnGatewayRequest{Request: req, Input: input, Copy: c.AttachVpnGatewayRequest}
 }
 
@@ -104,8 +47,8 @@ func (c *Client) AttachVpnGatewayRequest(input *AttachVpnGatewayInput) AttachVpn
 // AttachVpnGateway API operation.
 type AttachVpnGatewayRequest struct {
 	*aws.Request
-	Input *AttachVpnGatewayInput
-	Copy  func(*AttachVpnGatewayInput) AttachVpnGatewayRequest
+	Input *types.AttachVpnGatewayInput
+	Copy  func(*types.AttachVpnGatewayInput) AttachVpnGatewayRequest
 }
 
 // Send marshals and sends the AttachVpnGateway API request.
@@ -117,7 +60,7 @@ func (r AttachVpnGatewayRequest) Send(ctx context.Context) (*AttachVpnGatewayRes
 	}
 
 	resp := &AttachVpnGatewayResponse{
-		AttachVpnGatewayOutput: r.Request.Data.(*AttachVpnGatewayOutput),
+		AttachVpnGatewayOutput: r.Request.Data.(*types.AttachVpnGatewayOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -127,7 +70,7 @@ func (r AttachVpnGatewayRequest) Send(ctx context.Context) (*AttachVpnGatewayRes
 // AttachVpnGatewayResponse is the response type for the
 // AttachVpnGateway API operation.
 type AttachVpnGatewayResponse struct {
-	*AttachVpnGatewayOutput
+	*types.AttachVpnGatewayOutput
 
 	response *aws.Response
 }

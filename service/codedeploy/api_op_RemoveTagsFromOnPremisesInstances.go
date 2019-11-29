@@ -6,57 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
+	"github.com/aws/aws-sdk-go-v2/service/codedeploy/types"
 )
-
-// Represents the input of a RemoveTagsFromOnPremisesInstances operation.
-type RemoveTagsFromOnPremisesInstancesInput struct {
-	_ struct{} `type:"structure"`
-
-	// The names of the on-premises instances from which to remove tags.
-	//
-	// InstanceNames is a required field
-	InstanceNames []string `locationName:"instanceNames" type:"list" required:"true"`
-
-	// The tag key-value pairs to remove from the on-premises instances.
-	//
-	// Tags is a required field
-	Tags []Tag `locationName:"tags" type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s RemoveTagsFromOnPremisesInstancesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *RemoveTagsFromOnPremisesInstancesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "RemoveTagsFromOnPremisesInstancesInput"}
-
-	if s.InstanceNames == nil {
-		invalidParams.Add(aws.NewErrParamRequired("InstanceNames"))
-	}
-
-	if s.Tags == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Tags"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type RemoveTagsFromOnPremisesInstancesOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s RemoveTagsFromOnPremisesInstancesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opRemoveTagsFromOnPremisesInstances = "RemoveTagsFromOnPremisesInstances"
 
@@ -73,7 +26,7 @@ const opRemoveTagsFromOnPremisesInstances = "RemoveTagsFromOnPremisesInstances"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/RemoveTagsFromOnPremisesInstances
-func (c *Client) RemoveTagsFromOnPremisesInstancesRequest(input *RemoveTagsFromOnPremisesInstancesInput) RemoveTagsFromOnPremisesInstancesRequest {
+func (c *Client) RemoveTagsFromOnPremisesInstancesRequest(input *types.RemoveTagsFromOnPremisesInstancesInput) RemoveTagsFromOnPremisesInstancesRequest {
 	op := &aws.Operation{
 		Name:       opRemoveTagsFromOnPremisesInstances,
 		HTTPMethod: "POST",
@@ -81,10 +34,10 @@ func (c *Client) RemoveTagsFromOnPremisesInstancesRequest(input *RemoveTagsFromO
 	}
 
 	if input == nil {
-		input = &RemoveTagsFromOnPremisesInstancesInput{}
+		input = &types.RemoveTagsFromOnPremisesInstancesInput{}
 	}
 
-	req := c.newRequest(op, input, &RemoveTagsFromOnPremisesInstancesOutput{})
+	req := c.newRequest(op, input, &types.RemoveTagsFromOnPremisesInstancesOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return RemoveTagsFromOnPremisesInstancesRequest{Request: req, Input: input, Copy: c.RemoveTagsFromOnPremisesInstancesRequest}
@@ -94,8 +47,8 @@ func (c *Client) RemoveTagsFromOnPremisesInstancesRequest(input *RemoveTagsFromO
 // RemoveTagsFromOnPremisesInstances API operation.
 type RemoveTagsFromOnPremisesInstancesRequest struct {
 	*aws.Request
-	Input *RemoveTagsFromOnPremisesInstancesInput
-	Copy  func(*RemoveTagsFromOnPremisesInstancesInput) RemoveTagsFromOnPremisesInstancesRequest
+	Input *types.RemoveTagsFromOnPremisesInstancesInput
+	Copy  func(*types.RemoveTagsFromOnPremisesInstancesInput) RemoveTagsFromOnPremisesInstancesRequest
 }
 
 // Send marshals and sends the RemoveTagsFromOnPremisesInstances API request.
@@ -107,7 +60,7 @@ func (r RemoveTagsFromOnPremisesInstancesRequest) Send(ctx context.Context) (*Re
 	}
 
 	resp := &RemoveTagsFromOnPremisesInstancesResponse{
-		RemoveTagsFromOnPremisesInstancesOutput: r.Request.Data.(*RemoveTagsFromOnPremisesInstancesOutput),
+		RemoveTagsFromOnPremisesInstancesOutput: r.Request.Data.(*types.RemoveTagsFromOnPremisesInstancesOutput),
 		response:                                &aws.Response{Request: r.Request},
 	}
 
@@ -117,7 +70,7 @@ func (r RemoveTagsFromOnPremisesInstancesRequest) Send(ctx context.Context) (*Re
 // RemoveTagsFromOnPremisesInstancesResponse is the response type for the
 // RemoveTagsFromOnPremisesInstances API operation.
 type RemoveTagsFromOnPremisesInstancesResponse struct {
-	*RemoveTagsFromOnPremisesInstancesOutput
+	*types.RemoveTagsFromOnPremisesInstancesOutput
 
 	response *aws.Response
 }

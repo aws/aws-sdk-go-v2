@@ -6,45 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/configservice/types"
 )
-
-type DescribeComplianceByConfigRuleInput struct {
-	_ struct{} `type:"structure"`
-
-	// Filters the results by compliance.
-	//
-	// The allowed values are COMPLIANT and NON_COMPLIANT.
-	ComplianceTypes []ComplianceType `type:"list"`
-
-	// Specify one or more AWS Config rule names to filter the results by rule.
-	ConfigRuleNames []string `type:"list"`
-
-	// The nextToken string returned on a previous page that you use to get the
-	// next page of results in a paginated response.
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeComplianceByConfigRuleInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type DescribeComplianceByConfigRuleOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Indicates whether each of the specified AWS Config rules is compliant.
-	ComplianceByConfigRules []ComplianceByConfigRule `type:"list"`
-
-	// The string that you use in a subsequent request to get the next page of results
-	// in a paginated response.
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeComplianceByConfigRuleOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeComplianceByConfigRule = "DescribeComplianceByConfigRule"
 
@@ -83,7 +46,7 @@ const opDescribeComplianceByConfigRule = "DescribeComplianceByConfigRule"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DescribeComplianceByConfigRule
-func (c *Client) DescribeComplianceByConfigRuleRequest(input *DescribeComplianceByConfigRuleInput) DescribeComplianceByConfigRuleRequest {
+func (c *Client) DescribeComplianceByConfigRuleRequest(input *types.DescribeComplianceByConfigRuleInput) DescribeComplianceByConfigRuleRequest {
 	op := &aws.Operation{
 		Name:       opDescribeComplianceByConfigRule,
 		HTTPMethod: "POST",
@@ -91,10 +54,10 @@ func (c *Client) DescribeComplianceByConfigRuleRequest(input *DescribeCompliance
 	}
 
 	if input == nil {
-		input = &DescribeComplianceByConfigRuleInput{}
+		input = &types.DescribeComplianceByConfigRuleInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeComplianceByConfigRuleOutput{})
+	req := c.newRequest(op, input, &types.DescribeComplianceByConfigRuleOutput{})
 	return DescribeComplianceByConfigRuleRequest{Request: req, Input: input, Copy: c.DescribeComplianceByConfigRuleRequest}
 }
 
@@ -102,8 +65,8 @@ func (c *Client) DescribeComplianceByConfigRuleRequest(input *DescribeCompliance
 // DescribeComplianceByConfigRule API operation.
 type DescribeComplianceByConfigRuleRequest struct {
 	*aws.Request
-	Input *DescribeComplianceByConfigRuleInput
-	Copy  func(*DescribeComplianceByConfigRuleInput) DescribeComplianceByConfigRuleRequest
+	Input *types.DescribeComplianceByConfigRuleInput
+	Copy  func(*types.DescribeComplianceByConfigRuleInput) DescribeComplianceByConfigRuleRequest
 }
 
 // Send marshals and sends the DescribeComplianceByConfigRule API request.
@@ -115,7 +78,7 @@ func (r DescribeComplianceByConfigRuleRequest) Send(ctx context.Context) (*Descr
 	}
 
 	resp := &DescribeComplianceByConfigRuleResponse{
-		DescribeComplianceByConfigRuleOutput: r.Request.Data.(*DescribeComplianceByConfigRuleOutput),
+		DescribeComplianceByConfigRuleOutput: r.Request.Data.(*types.DescribeComplianceByConfigRuleOutput),
 		response:                             &aws.Response{Request: r.Request},
 	}
 
@@ -125,7 +88,7 @@ func (r DescribeComplianceByConfigRuleRequest) Send(ctx context.Context) (*Descr
 // DescribeComplianceByConfigRuleResponse is the response type for the
 // DescribeComplianceByConfigRule API operation.
 type DescribeComplianceByConfigRuleResponse struct {
-	*DescribeComplianceByConfigRuleOutput
+	*types.DescribeComplianceByConfigRuleOutput
 
 	response *aws.Response
 }

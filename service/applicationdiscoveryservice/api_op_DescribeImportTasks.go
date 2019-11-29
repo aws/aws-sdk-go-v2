@@ -4,68 +4,10 @@ package applicationdiscoveryservice
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/applicationdiscoveryservice/types"
 )
-
-type DescribeImportTasksInput struct {
-	_ struct{} `type:"structure"`
-
-	// An array of name-value pairs that you provide to filter the results for the
-	// DescribeImportTask request to a specific subset of results. Currently, wildcard
-	// values aren't supported for filters.
-	Filters []ImportTaskFilter `locationName:"filters" type:"list"`
-
-	// The maximum number of results that you want this request to return, up to
-	// 100.
-	MaxResults *int64 `locationName:"maxResults" min:"1" type:"integer"`
-
-	// The token to request a specific page of results.
-	NextToken *string `locationName:"nextToken" type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeImportTasksInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeImportTasksInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeImportTasksInput"}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-	if s.Filters != nil {
-		for i, v := range s.Filters {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribeImportTasksOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The token to request the next page of results.
-	NextToken *string `locationName:"nextToken" type:"string"`
-
-	// A returned array of import tasks that match any applied filters, up to the
-	// specified number of maximum results.
-	Tasks []ImportTask `locationName:"tasks" type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeImportTasksOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeImportTasks = "DescribeImportTasks"
 
@@ -83,7 +25,7 @@ const opDescribeImportTasks = "DescribeImportTasks"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/discovery-2015-11-01/DescribeImportTasks
-func (c *Client) DescribeImportTasksRequest(input *DescribeImportTasksInput) DescribeImportTasksRequest {
+func (c *Client) DescribeImportTasksRequest(input *types.DescribeImportTasksInput) DescribeImportTasksRequest {
 	op := &aws.Operation{
 		Name:       opDescribeImportTasks,
 		HTTPMethod: "POST",
@@ -97,10 +39,10 @@ func (c *Client) DescribeImportTasksRequest(input *DescribeImportTasksInput) Des
 	}
 
 	if input == nil {
-		input = &DescribeImportTasksInput{}
+		input = &types.DescribeImportTasksInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeImportTasksOutput{})
+	req := c.newRequest(op, input, &types.DescribeImportTasksOutput{})
 	return DescribeImportTasksRequest{Request: req, Input: input, Copy: c.DescribeImportTasksRequest}
 }
 
@@ -108,8 +50,8 @@ func (c *Client) DescribeImportTasksRequest(input *DescribeImportTasksInput) Des
 // DescribeImportTasks API operation.
 type DescribeImportTasksRequest struct {
 	*aws.Request
-	Input *DescribeImportTasksInput
-	Copy  func(*DescribeImportTasksInput) DescribeImportTasksRequest
+	Input *types.DescribeImportTasksInput
+	Copy  func(*types.DescribeImportTasksInput) DescribeImportTasksRequest
 }
 
 // Send marshals and sends the DescribeImportTasks API request.
@@ -121,7 +63,7 @@ func (r DescribeImportTasksRequest) Send(ctx context.Context) (*DescribeImportTa
 	}
 
 	resp := &DescribeImportTasksResponse{
-		DescribeImportTasksOutput: r.Request.Data.(*DescribeImportTasksOutput),
+		DescribeImportTasksOutput: r.Request.Data.(*types.DescribeImportTasksOutput),
 		response:                  &aws.Response{Request: r.Request},
 	}
 
@@ -151,7 +93,7 @@ func NewDescribeImportTasksPaginator(req DescribeImportTasksRequest) DescribeImp
 	return DescribeImportTasksPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *DescribeImportTasksInput
+				var inCpy *types.DescribeImportTasksInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -171,14 +113,14 @@ type DescribeImportTasksPaginator struct {
 	aws.Pager
 }
 
-func (p *DescribeImportTasksPaginator) CurrentPage() *DescribeImportTasksOutput {
-	return p.Pager.CurrentPage().(*DescribeImportTasksOutput)
+func (p *DescribeImportTasksPaginator) CurrentPage() *types.DescribeImportTasksOutput {
+	return p.Pager.CurrentPage().(*types.DescribeImportTasksOutput)
 }
 
 // DescribeImportTasksResponse is the response type for the
 // DescribeImportTasks API operation.
 type DescribeImportTasksResponse struct {
-	*DescribeImportTasksOutput
+	*types.DescribeImportTasksOutput
 
 	response *aws.Response
 }

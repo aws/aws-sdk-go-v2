@@ -6,116 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/route53/types"
 )
-
-type ListQueryLoggingConfigsInput struct {
-	_ struct{} `type:"structure"`
-
-	// (Optional) If you want to list the query logging configuration that is associated
-	// with a hosted zone, specify the ID in HostedZoneId.
-	//
-	// If you don't specify a hosted zone ID, ListQueryLoggingConfigs returns all
-	// of the configurations that are associated with the current AWS account.
-	HostedZoneId *string `location:"querystring" locationName:"hostedzoneid" type:"string"`
-
-	// (Optional) The maximum number of query logging configurations that you want
-	// Amazon Route 53 to return in response to the current request. If the current
-	// AWS account has more than MaxResults configurations, use the value of NextToken
-	// (https://docs.aws.amazon.com/Route53/latest/APIReference/API_ListQueryLoggingConfigs.html#API_ListQueryLoggingConfigs_RequestSyntax)
-	// in the response to get the next page of results.
-	//
-	// If you don't specify a value for MaxResults, Route 53 returns up to 100 configurations.
-	MaxResults *string `location:"querystring" locationName:"maxresults" type:"string"`
-
-	// (Optional) If the current AWS account has more than MaxResults query logging
-	// configurations, use NextToken to get the second and subsequent pages of results.
-	//
-	// For the first ListQueryLoggingConfigs request, omit this value.
-	//
-	// For the second and subsequent requests, get the value of NextToken from the
-	// previous response and specify that value for NextToken in the request.
-	NextToken *string `location:"querystring" locationName:"nexttoken" type:"string"`
-}
-
-// String returns the string representation
-func (s ListQueryLoggingConfigsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListQueryLoggingConfigsInput) MarshalFields(e protocol.FieldEncoder) error {
-
-	if s.HostedZoneId != nil {
-		v := *s.HostedZoneId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "hostedzoneid", protocol.StringValue(v), metadata)
-	}
-	if s.MaxResults != nil {
-		v := *s.MaxResults
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "maxresults", protocol.StringValue(v), metadata)
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "nexttoken", protocol.StringValue(v), metadata)
-	}
-	return nil
-}
-
-type ListQueryLoggingConfigsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// If a response includes the last of the query logging configurations that
-	// are associated with the current AWS account, NextToken doesn't appear in
-	// the response.
-	//
-	// If a response doesn't include the last of the configurations, you can get
-	// more configurations by submitting another ListQueryLoggingConfigs (https://docs.aws.amazon.com/Route53/latest/APIReference/API_ListQueryLoggingConfigs.html)
-	// request. Get the value of NextToken that Amazon Route 53 returned in the
-	// previous response and include it in NextToken in the next request.
-	NextToken *string `type:"string"`
-
-	// An array that contains one QueryLoggingConfig (https://docs.aws.amazon.com/Route53/latest/APIReference/API_QueryLoggingConfig.html)
-	// element for each configuration for DNS query logging that is associated with
-	// the current AWS account.
-	//
-	// QueryLoggingConfigs is a required field
-	QueryLoggingConfigs []QueryLoggingConfig `locationNameList:"QueryLoggingConfig" type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s ListQueryLoggingConfigsOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListQueryLoggingConfigsOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "NextToken", protocol.StringValue(v), metadata)
-	}
-	if s.QueryLoggingConfigs != nil {
-		v := s.QueryLoggingConfigs
-
-		metadata := protocol.Metadata{ListLocationName: "QueryLoggingConfig"}
-		ls0 := e.List(protocol.BodyTarget, "QueryLoggingConfigs", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	return nil
-}
 
 const opListQueryLoggingConfigs = "ListQueryLoggingConfigs"
 
@@ -139,7 +31,7 @@ const opListQueryLoggingConfigs = "ListQueryLoggingConfigs"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/ListQueryLoggingConfigs
-func (c *Client) ListQueryLoggingConfigsRequest(input *ListQueryLoggingConfigsInput) ListQueryLoggingConfigsRequest {
+func (c *Client) ListQueryLoggingConfigsRequest(input *types.ListQueryLoggingConfigsInput) ListQueryLoggingConfigsRequest {
 	op := &aws.Operation{
 		Name:       opListQueryLoggingConfigs,
 		HTTPMethod: "GET",
@@ -147,10 +39,10 @@ func (c *Client) ListQueryLoggingConfigsRequest(input *ListQueryLoggingConfigsIn
 	}
 
 	if input == nil {
-		input = &ListQueryLoggingConfigsInput{}
+		input = &types.ListQueryLoggingConfigsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListQueryLoggingConfigsOutput{})
+	req := c.newRequest(op, input, &types.ListQueryLoggingConfigsOutput{})
 	return ListQueryLoggingConfigsRequest{Request: req, Input: input, Copy: c.ListQueryLoggingConfigsRequest}
 }
 
@@ -158,8 +50,8 @@ func (c *Client) ListQueryLoggingConfigsRequest(input *ListQueryLoggingConfigsIn
 // ListQueryLoggingConfigs API operation.
 type ListQueryLoggingConfigsRequest struct {
 	*aws.Request
-	Input *ListQueryLoggingConfigsInput
-	Copy  func(*ListQueryLoggingConfigsInput) ListQueryLoggingConfigsRequest
+	Input *types.ListQueryLoggingConfigsInput
+	Copy  func(*types.ListQueryLoggingConfigsInput) ListQueryLoggingConfigsRequest
 }
 
 // Send marshals and sends the ListQueryLoggingConfigs API request.
@@ -171,7 +63,7 @@ func (r ListQueryLoggingConfigsRequest) Send(ctx context.Context) (*ListQueryLog
 	}
 
 	resp := &ListQueryLoggingConfigsResponse{
-		ListQueryLoggingConfigsOutput: r.Request.Data.(*ListQueryLoggingConfigsOutput),
+		ListQueryLoggingConfigsOutput: r.Request.Data.(*types.ListQueryLoggingConfigsOutput),
 		response:                      &aws.Response{Request: r.Request},
 	}
 
@@ -181,7 +73,7 @@ func (r ListQueryLoggingConfigsRequest) Send(ctx context.Context) (*ListQueryLog
 // ListQueryLoggingConfigsResponse is the response type for the
 // ListQueryLoggingConfigs API operation.
 type ListQueryLoggingConfigsResponse struct {
-	*ListQueryLoggingConfigsOutput
+	*types.ListQueryLoggingConfigsOutput
 
 	response *aws.Response
 }

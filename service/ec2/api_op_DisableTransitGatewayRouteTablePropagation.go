@@ -6,63 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-type DisableTransitGatewayRouteTablePropagationInput struct {
-	_ struct{} `type:"structure"`
-
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have
-	// the required permissions, the error response is DryRunOperation. Otherwise,
-	// it is UnauthorizedOperation.
-	DryRun *bool `type:"boolean"`
-
-	// The ID of the attachment.
-	//
-	// TransitGatewayAttachmentId is a required field
-	TransitGatewayAttachmentId *string `type:"string" required:"true"`
-
-	// The ID of the propagation route table.
-	//
-	// TransitGatewayRouteTableId is a required field
-	TransitGatewayRouteTableId *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DisableTransitGatewayRouteTablePropagationInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DisableTransitGatewayRouteTablePropagationInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DisableTransitGatewayRouteTablePropagationInput"}
-
-	if s.TransitGatewayAttachmentId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("TransitGatewayAttachmentId"))
-	}
-
-	if s.TransitGatewayRouteTableId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("TransitGatewayRouteTableId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DisableTransitGatewayRouteTablePropagationOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Information about route propagation.
-	Propagation *TransitGatewayPropagation `locationName:"propagation" type:"structure"`
-}
-
-// String returns the string representation
-func (s DisableTransitGatewayRouteTablePropagationOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDisableTransitGatewayRouteTablePropagation = "DisableTransitGatewayRouteTablePropagation"
 
@@ -80,7 +25,7 @@ const opDisableTransitGatewayRouteTablePropagation = "DisableTransitGatewayRoute
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DisableTransitGatewayRouteTablePropagation
-func (c *Client) DisableTransitGatewayRouteTablePropagationRequest(input *DisableTransitGatewayRouteTablePropagationInput) DisableTransitGatewayRouteTablePropagationRequest {
+func (c *Client) DisableTransitGatewayRouteTablePropagationRequest(input *types.DisableTransitGatewayRouteTablePropagationInput) DisableTransitGatewayRouteTablePropagationRequest {
 	op := &aws.Operation{
 		Name:       opDisableTransitGatewayRouteTablePropagation,
 		HTTPMethod: "POST",
@@ -88,10 +33,10 @@ func (c *Client) DisableTransitGatewayRouteTablePropagationRequest(input *Disabl
 	}
 
 	if input == nil {
-		input = &DisableTransitGatewayRouteTablePropagationInput{}
+		input = &types.DisableTransitGatewayRouteTablePropagationInput{}
 	}
 
-	req := c.newRequest(op, input, &DisableTransitGatewayRouteTablePropagationOutput{})
+	req := c.newRequest(op, input, &types.DisableTransitGatewayRouteTablePropagationOutput{})
 	return DisableTransitGatewayRouteTablePropagationRequest{Request: req, Input: input, Copy: c.DisableTransitGatewayRouteTablePropagationRequest}
 }
 
@@ -99,8 +44,8 @@ func (c *Client) DisableTransitGatewayRouteTablePropagationRequest(input *Disabl
 // DisableTransitGatewayRouteTablePropagation API operation.
 type DisableTransitGatewayRouteTablePropagationRequest struct {
 	*aws.Request
-	Input *DisableTransitGatewayRouteTablePropagationInput
-	Copy  func(*DisableTransitGatewayRouteTablePropagationInput) DisableTransitGatewayRouteTablePropagationRequest
+	Input *types.DisableTransitGatewayRouteTablePropagationInput
+	Copy  func(*types.DisableTransitGatewayRouteTablePropagationInput) DisableTransitGatewayRouteTablePropagationRequest
 }
 
 // Send marshals and sends the DisableTransitGatewayRouteTablePropagation API request.
@@ -112,7 +57,7 @@ func (r DisableTransitGatewayRouteTablePropagationRequest) Send(ctx context.Cont
 	}
 
 	resp := &DisableTransitGatewayRouteTablePropagationResponse{
-		DisableTransitGatewayRouteTablePropagationOutput: r.Request.Data.(*DisableTransitGatewayRouteTablePropagationOutput),
+		DisableTransitGatewayRouteTablePropagationOutput: r.Request.Data.(*types.DisableTransitGatewayRouteTablePropagationOutput),
 		response: &aws.Response{Request: r.Request},
 	}
 
@@ -122,7 +67,7 @@ func (r DisableTransitGatewayRouteTablePropagationRequest) Send(ctx context.Cont
 // DisableTransitGatewayRouteTablePropagationResponse is the response type for the
 // DisableTransitGatewayRouteTablePropagation API operation.
 type DisableTransitGatewayRouteTablePropagationResponse struct {
-	*DisableTransitGatewayRouteTablePropagationOutput
+	*types.DisableTransitGatewayRouteTablePropagationOutput
 
 	response *aws.Response
 }

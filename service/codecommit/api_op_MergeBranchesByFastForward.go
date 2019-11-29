@@ -6,80 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/codecommit/types"
 )
-
-type MergeBranchesByFastForwardInput struct {
-	_ struct{} `type:"structure"`
-
-	// The branch, tag, HEAD, or other fully qualified reference used to identify
-	// a commit. For example, a branch name or a full commit ID.
-	//
-	// DestinationCommitSpecifier is a required field
-	DestinationCommitSpecifier *string `locationName:"destinationCommitSpecifier" type:"string" required:"true"`
-
-	// The name of the repository where you want to merge two branches.
-	//
-	// RepositoryName is a required field
-	RepositoryName *string `locationName:"repositoryName" min:"1" type:"string" required:"true"`
-
-	// The branch, tag, HEAD, or other fully qualified reference used to identify
-	// a commit. For example, a branch name or a full commit ID.
-	//
-	// SourceCommitSpecifier is a required field
-	SourceCommitSpecifier *string `locationName:"sourceCommitSpecifier" type:"string" required:"true"`
-
-	// The branch where the merge will be applied.
-	TargetBranch *string `locationName:"targetBranch" min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s MergeBranchesByFastForwardInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *MergeBranchesByFastForwardInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "MergeBranchesByFastForwardInput"}
-
-	if s.DestinationCommitSpecifier == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DestinationCommitSpecifier"))
-	}
-
-	if s.RepositoryName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("RepositoryName"))
-	}
-	if s.RepositoryName != nil && len(*s.RepositoryName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("RepositoryName", 1))
-	}
-
-	if s.SourceCommitSpecifier == nil {
-		invalidParams.Add(aws.NewErrParamRequired("SourceCommitSpecifier"))
-	}
-	if s.TargetBranch != nil && len(*s.TargetBranch) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("TargetBranch", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type MergeBranchesByFastForwardOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The commit ID of the merge in the destination or target branch.
-	CommitId *string `locationName:"commitId" type:"string"`
-
-	// The tree ID of the merge in the destination or target branch.
-	TreeId *string `locationName:"treeId" type:"string"`
-}
-
-// String returns the string representation
-func (s MergeBranchesByFastForwardOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opMergeBranchesByFastForward = "MergeBranchesByFastForward"
 
@@ -96,7 +24,7 @@ const opMergeBranchesByFastForward = "MergeBranchesByFastForward"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/MergeBranchesByFastForward
-func (c *Client) MergeBranchesByFastForwardRequest(input *MergeBranchesByFastForwardInput) MergeBranchesByFastForwardRequest {
+func (c *Client) MergeBranchesByFastForwardRequest(input *types.MergeBranchesByFastForwardInput) MergeBranchesByFastForwardRequest {
 	op := &aws.Operation{
 		Name:       opMergeBranchesByFastForward,
 		HTTPMethod: "POST",
@@ -104,10 +32,10 @@ func (c *Client) MergeBranchesByFastForwardRequest(input *MergeBranchesByFastFor
 	}
 
 	if input == nil {
-		input = &MergeBranchesByFastForwardInput{}
+		input = &types.MergeBranchesByFastForwardInput{}
 	}
 
-	req := c.newRequest(op, input, &MergeBranchesByFastForwardOutput{})
+	req := c.newRequest(op, input, &types.MergeBranchesByFastForwardOutput{})
 	return MergeBranchesByFastForwardRequest{Request: req, Input: input, Copy: c.MergeBranchesByFastForwardRequest}
 }
 
@@ -115,8 +43,8 @@ func (c *Client) MergeBranchesByFastForwardRequest(input *MergeBranchesByFastFor
 // MergeBranchesByFastForward API operation.
 type MergeBranchesByFastForwardRequest struct {
 	*aws.Request
-	Input *MergeBranchesByFastForwardInput
-	Copy  func(*MergeBranchesByFastForwardInput) MergeBranchesByFastForwardRequest
+	Input *types.MergeBranchesByFastForwardInput
+	Copy  func(*types.MergeBranchesByFastForwardInput) MergeBranchesByFastForwardRequest
 }
 
 // Send marshals and sends the MergeBranchesByFastForward API request.
@@ -128,7 +56,7 @@ func (r MergeBranchesByFastForwardRequest) Send(ctx context.Context) (*MergeBran
 	}
 
 	resp := &MergeBranchesByFastForwardResponse{
-		MergeBranchesByFastForwardOutput: r.Request.Data.(*MergeBranchesByFastForwardOutput),
+		MergeBranchesByFastForwardOutput: r.Request.Data.(*types.MergeBranchesByFastForwardOutput),
 		response:                         &aws.Response{Request: r.Request},
 	}
 
@@ -138,7 +66,7 @@ func (r MergeBranchesByFastForwardRequest) Send(ctx context.Context) (*MergeBran
 // MergeBranchesByFastForwardResponse is the response type for the
 // MergeBranchesByFastForward API operation.
 type MergeBranchesByFastForwardResponse struct {
-	*MergeBranchesByFastForwardOutput
+	*types.MergeBranchesByFastForwardOutput
 
 	response *aws.Response
 }

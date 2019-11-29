@@ -4,80 +4,10 @@ package elasticache
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/elasticache/types"
 )
-
-type IncreaseReplicaCountInput struct {
-	_ struct{} `type:"structure"`
-
-	// If True, the number of replica nodes is increased immediately. ApplyImmediately=False
-	// is not currently supported.
-	//
-	// ApplyImmediately is a required field
-	ApplyImmediately *bool `type:"boolean" required:"true"`
-
-	// The number of read replica nodes you want at the completion of this operation.
-	// For Redis (cluster mode disabled) replication groups, this is the number
-	// of replica nodes in the replication group. For Redis (cluster mode enabled)
-	// replication groups, this is the number of replica nodes in each of the replication
-	// group's node groups.
-	NewReplicaCount *int64 `type:"integer"`
-
-	// A list of ConfigureShard objects that can be used to configure each shard
-	// in a Redis (cluster mode enabled) replication group. The ConfigureShard has
-	// three members: NewReplicaCount, NodeGroupId, and PreferredAvailabilityZones.
-	ReplicaConfiguration []ConfigureShard `locationNameList:"ConfigureShard" type:"list"`
-
-	// The id of the replication group to which you want to add replica nodes.
-	//
-	// ReplicationGroupId is a required field
-	ReplicationGroupId *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s IncreaseReplicaCountInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *IncreaseReplicaCountInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "IncreaseReplicaCountInput"}
-
-	if s.ApplyImmediately == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ApplyImmediately"))
-	}
-
-	if s.ReplicationGroupId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ReplicationGroupId"))
-	}
-	if s.ReplicaConfiguration != nil {
-		for i, v := range s.ReplicaConfiguration {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "ReplicaConfiguration", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type IncreaseReplicaCountOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Contains all of the attributes of a specific Redis replication group.
-	ReplicationGroup *ReplicationGroup `type:"structure"`
-}
-
-// String returns the string representation
-func (s IncreaseReplicaCountOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opIncreaseReplicaCount = "IncreaseReplicaCount"
 
@@ -97,7 +27,7 @@ const opIncreaseReplicaCount = "IncreaseReplicaCount"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/IncreaseReplicaCount
-func (c *Client) IncreaseReplicaCountRequest(input *IncreaseReplicaCountInput) IncreaseReplicaCountRequest {
+func (c *Client) IncreaseReplicaCountRequest(input *types.IncreaseReplicaCountInput) IncreaseReplicaCountRequest {
 	op := &aws.Operation{
 		Name:       opIncreaseReplicaCount,
 		HTTPMethod: "POST",
@@ -105,10 +35,10 @@ func (c *Client) IncreaseReplicaCountRequest(input *IncreaseReplicaCountInput) I
 	}
 
 	if input == nil {
-		input = &IncreaseReplicaCountInput{}
+		input = &types.IncreaseReplicaCountInput{}
 	}
 
-	req := c.newRequest(op, input, &IncreaseReplicaCountOutput{})
+	req := c.newRequest(op, input, &types.IncreaseReplicaCountOutput{})
 	return IncreaseReplicaCountRequest{Request: req, Input: input, Copy: c.IncreaseReplicaCountRequest}
 }
 
@@ -116,8 +46,8 @@ func (c *Client) IncreaseReplicaCountRequest(input *IncreaseReplicaCountInput) I
 // IncreaseReplicaCount API operation.
 type IncreaseReplicaCountRequest struct {
 	*aws.Request
-	Input *IncreaseReplicaCountInput
-	Copy  func(*IncreaseReplicaCountInput) IncreaseReplicaCountRequest
+	Input *types.IncreaseReplicaCountInput
+	Copy  func(*types.IncreaseReplicaCountInput) IncreaseReplicaCountRequest
 }
 
 // Send marshals and sends the IncreaseReplicaCount API request.
@@ -129,7 +59,7 @@ func (r IncreaseReplicaCountRequest) Send(ctx context.Context) (*IncreaseReplica
 	}
 
 	resp := &IncreaseReplicaCountResponse{
-		IncreaseReplicaCountOutput: r.Request.Data.(*IncreaseReplicaCountOutput),
+		IncreaseReplicaCountOutput: r.Request.Data.(*types.IncreaseReplicaCountOutput),
 		response:                   &aws.Response{Request: r.Request},
 	}
 
@@ -139,7 +69,7 @@ func (r IncreaseReplicaCountRequest) Send(ctx context.Context) (*IncreaseReplica
 // IncreaseReplicaCountResponse is the response type for the
 // IncreaseReplicaCount API operation.
 type IncreaseReplicaCountResponse struct {
-	*IncreaseReplicaCountOutput
+	*types.IncreaseReplicaCountOutput
 
 	response *aws.Response
 }

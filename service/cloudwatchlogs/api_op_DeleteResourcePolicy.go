@@ -6,31 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
+	"github.com/aws/aws-sdk-go-v2/service/cloudwatchlogs/types"
 )
-
-type DeleteResourcePolicyInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the policy to be revoked. This parameter is required.
-	PolicyName *string `locationName:"policyName" type:"string"`
-}
-
-// String returns the string representation
-func (s DeleteResourcePolicyInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type DeleteResourcePolicyOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteResourcePolicyOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteResourcePolicy = "DeleteResourcePolicy"
 
@@ -48,7 +27,7 @@ const opDeleteResourcePolicy = "DeleteResourcePolicy"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/DeleteResourcePolicy
-func (c *Client) DeleteResourcePolicyRequest(input *DeleteResourcePolicyInput) DeleteResourcePolicyRequest {
+func (c *Client) DeleteResourcePolicyRequest(input *types.DeleteResourcePolicyInput) DeleteResourcePolicyRequest {
 	op := &aws.Operation{
 		Name:       opDeleteResourcePolicy,
 		HTTPMethod: "POST",
@@ -56,10 +35,10 @@ func (c *Client) DeleteResourcePolicyRequest(input *DeleteResourcePolicyInput) D
 	}
 
 	if input == nil {
-		input = &DeleteResourcePolicyInput{}
+		input = &types.DeleteResourcePolicyInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteResourcePolicyOutput{})
+	req := c.newRequest(op, input, &types.DeleteResourcePolicyOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return DeleteResourcePolicyRequest{Request: req, Input: input, Copy: c.DeleteResourcePolicyRequest}
@@ -69,8 +48,8 @@ func (c *Client) DeleteResourcePolicyRequest(input *DeleteResourcePolicyInput) D
 // DeleteResourcePolicy API operation.
 type DeleteResourcePolicyRequest struct {
 	*aws.Request
-	Input *DeleteResourcePolicyInput
-	Copy  func(*DeleteResourcePolicyInput) DeleteResourcePolicyRequest
+	Input *types.DeleteResourcePolicyInput
+	Copy  func(*types.DeleteResourcePolicyInput) DeleteResourcePolicyRequest
 }
 
 // Send marshals and sends the DeleteResourcePolicy API request.
@@ -82,7 +61,7 @@ func (r DeleteResourcePolicyRequest) Send(ctx context.Context) (*DeleteResourceP
 	}
 
 	resp := &DeleteResourcePolicyResponse{
-		DeleteResourcePolicyOutput: r.Request.Data.(*DeleteResourcePolicyOutput),
+		DeleteResourcePolicyOutput: r.Request.Data.(*types.DeleteResourcePolicyOutput),
 		response:                   &aws.Response{Request: r.Request},
 	}
 
@@ -92,7 +71,7 @@ func (r DeleteResourcePolicyRequest) Send(ctx context.Context) (*DeleteResourceP
 // DeleteResourcePolicyResponse is the response type for the
 // DeleteResourcePolicy API operation.
 type DeleteResourcePolicyResponse struct {
-	*DeleteResourcePolicyOutput
+	*types.DeleteResourcePolicyOutput
 
 	response *aws.Response
 }

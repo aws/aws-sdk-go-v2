@@ -6,71 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/iot1clickdevicesservice/types"
 )
-
-type DescribeDeviceInput struct {
-	_ struct{} `type:"structure"`
-
-	// DeviceId is a required field
-	DeviceId *string `location:"uri" locationName:"deviceId" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeDeviceInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeDeviceInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeDeviceInput"}
-
-	if s.DeviceId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DeviceId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DescribeDeviceInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.DeviceId != nil {
-		v := *s.DeviceId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "deviceId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type DescribeDeviceOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Device details.
-	DeviceDescription *DeviceDescription `locationName:"deviceDescription" type:"structure"`
-}
-
-// String returns the string representation
-func (s DescribeDeviceOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DescribeDeviceOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.DeviceDescription != nil {
-		v := s.DeviceDescription
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "deviceDescription", v, metadata)
-	}
-	return nil
-}
 
 const opDescribeDevice = "DescribeDevice"
 
@@ -88,7 +25,7 @@ const opDescribeDevice = "DescribeDevice"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/devices-2018-05-14/DescribeDevice
-func (c *Client) DescribeDeviceRequest(input *DescribeDeviceInput) DescribeDeviceRequest {
+func (c *Client) DescribeDeviceRequest(input *types.DescribeDeviceInput) DescribeDeviceRequest {
 	op := &aws.Operation{
 		Name:       opDescribeDevice,
 		HTTPMethod: "GET",
@@ -96,10 +33,10 @@ func (c *Client) DescribeDeviceRequest(input *DescribeDeviceInput) DescribeDevic
 	}
 
 	if input == nil {
-		input = &DescribeDeviceInput{}
+		input = &types.DescribeDeviceInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeDeviceOutput{})
+	req := c.newRequest(op, input, &types.DescribeDeviceOutput{})
 	return DescribeDeviceRequest{Request: req, Input: input, Copy: c.DescribeDeviceRequest}
 }
 
@@ -107,8 +44,8 @@ func (c *Client) DescribeDeviceRequest(input *DescribeDeviceInput) DescribeDevic
 // DescribeDevice API operation.
 type DescribeDeviceRequest struct {
 	*aws.Request
-	Input *DescribeDeviceInput
-	Copy  func(*DescribeDeviceInput) DescribeDeviceRequest
+	Input *types.DescribeDeviceInput
+	Copy  func(*types.DescribeDeviceInput) DescribeDeviceRequest
 }
 
 // Send marshals and sends the DescribeDevice API request.
@@ -120,7 +57,7 @@ func (r DescribeDeviceRequest) Send(ctx context.Context) (*DescribeDeviceRespons
 	}
 
 	resp := &DescribeDeviceResponse{
-		DescribeDeviceOutput: r.Request.Data.(*DescribeDeviceOutput),
+		DescribeDeviceOutput: r.Request.Data.(*types.DescribeDeviceOutput),
 		response:             &aws.Response{Request: r.Request},
 	}
 
@@ -130,7 +67,7 @@ func (r DescribeDeviceRequest) Send(ctx context.Context) (*DescribeDeviceRespons
 // DescribeDeviceResponse is the response type for the
 // DescribeDevice API operation.
 type DescribeDeviceResponse struct {
-	*DescribeDeviceOutput
+	*types.DescribeDeviceOutput
 
 	response *aws.Response
 }

@@ -4,128 +4,10 @@ package pinpointemail
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/pinpointemail/types"
 )
-
-// A request to begin the verification process for an email identity (an email
-// address or domain).
-type CreateEmailIdentityInput struct {
-	_ struct{} `type:"structure"`
-
-	// The email address or domain that you want to verify.
-	//
-	// EmailIdentity is a required field
-	EmailIdentity *string `type:"string" required:"true"`
-
-	// An array of objects that define the tags (keys and values) that you want
-	// to associate with the email identity.
-	Tags []Tag `type:"list"`
-}
-
-// String returns the string representation
-func (s CreateEmailIdentityInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateEmailIdentityInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateEmailIdentityInput"}
-
-	if s.EmailIdentity == nil {
-		invalidParams.Add(aws.NewErrParamRequired("EmailIdentity"))
-	}
-	if s.Tags != nil {
-		for i, v := range s.Tags {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s CreateEmailIdentityInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.EmailIdentity != nil {
-		v := *s.EmailIdentity
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "EmailIdentity", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Tags != nil {
-		v := s.Tags
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "Tags", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	return nil
-}
-
-// If the email identity is a domain, this object contains tokens that you can
-// use to create a set of CNAME records. To sucessfully verify your domain,
-// you have to add these records to the DNS configuration for your domain.
-//
-// If the email identity is an email address, this object is empty.
-type CreateEmailIdentityOutput struct {
-	_ struct{} `type:"structure"`
-
-	// An object that contains information about the DKIM attributes for the identity.
-	// This object includes the tokens that you use to create the CNAME records
-	// that are required to complete the DKIM verification process.
-	DkimAttributes *DkimAttributes `type:"structure"`
-
-	// The email identity type.
-	IdentityType IdentityType `type:"string" enum:"true"`
-
-	// Specifies whether or not the identity is verified. In Amazon Pinpoint, you
-	// can only send email from verified email addresses or domains. For more information
-	// about verifying identities, see the Amazon Pinpoint User Guide (https://docs.aws.amazon.com/pinpoint/latest/userguide/channels-email-manage-verify.html).
-	VerifiedForSendingStatus *bool `type:"boolean"`
-}
-
-// String returns the string representation
-func (s CreateEmailIdentityOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s CreateEmailIdentityOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.DkimAttributes != nil {
-		v := s.DkimAttributes
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "DkimAttributes", v, metadata)
-	}
-	if len(s.IdentityType) > 0 {
-		v := s.IdentityType
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "IdentityType", protocol.QuotedValue{ValueMarshaler: v}, metadata)
-	}
-	if s.VerifiedForSendingStatus != nil {
-		v := *s.VerifiedForSendingStatus
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "VerifiedForSendingStatus", protocol.BoolValue(v), metadata)
-	}
-	return nil
-}
 
 const opCreateEmailIdentity = "CreateEmailIdentity"
 
@@ -157,7 +39,7 @@ const opCreateEmailIdentity = "CreateEmailIdentity"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/CreateEmailIdentity
-func (c *Client) CreateEmailIdentityRequest(input *CreateEmailIdentityInput) CreateEmailIdentityRequest {
+func (c *Client) CreateEmailIdentityRequest(input *types.CreateEmailIdentityInput) CreateEmailIdentityRequest {
 	op := &aws.Operation{
 		Name:       opCreateEmailIdentity,
 		HTTPMethod: "POST",
@@ -165,10 +47,10 @@ func (c *Client) CreateEmailIdentityRequest(input *CreateEmailIdentityInput) Cre
 	}
 
 	if input == nil {
-		input = &CreateEmailIdentityInput{}
+		input = &types.CreateEmailIdentityInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateEmailIdentityOutput{})
+	req := c.newRequest(op, input, &types.CreateEmailIdentityOutput{})
 	return CreateEmailIdentityRequest{Request: req, Input: input, Copy: c.CreateEmailIdentityRequest}
 }
 
@@ -176,8 +58,8 @@ func (c *Client) CreateEmailIdentityRequest(input *CreateEmailIdentityInput) Cre
 // CreateEmailIdentity API operation.
 type CreateEmailIdentityRequest struct {
 	*aws.Request
-	Input *CreateEmailIdentityInput
-	Copy  func(*CreateEmailIdentityInput) CreateEmailIdentityRequest
+	Input *types.CreateEmailIdentityInput
+	Copy  func(*types.CreateEmailIdentityInput) CreateEmailIdentityRequest
 }
 
 // Send marshals and sends the CreateEmailIdentity API request.
@@ -189,7 +71,7 @@ func (r CreateEmailIdentityRequest) Send(ctx context.Context) (*CreateEmailIdent
 	}
 
 	resp := &CreateEmailIdentityResponse{
-		CreateEmailIdentityOutput: r.Request.Data.(*CreateEmailIdentityOutput),
+		CreateEmailIdentityOutput: r.Request.Data.(*types.CreateEmailIdentityOutput),
 		response:                  &aws.Response{Request: r.Request},
 	}
 
@@ -199,7 +81,7 @@ func (r CreateEmailIdentityRequest) Send(ctx context.Context) (*CreateEmailIdent
 // CreateEmailIdentityResponse is the response type for the
 // CreateEmailIdentity API operation.
 type CreateEmailIdentityResponse struct {
-	*CreateEmailIdentityOutput
+	*types.CreateEmailIdentityOutput
 
 	response *aws.Response
 }

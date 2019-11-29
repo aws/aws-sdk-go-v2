@@ -6,36 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/support/types"
 )
-
-type DescribeSeverityLevelsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ISO 639-1 code for the language in which AWS provides support. AWS Support
-	// currently supports English ("en") and Japanese ("ja"). Language parameters
-	// must be passed explicitly for operations that take them.
-	Language *string `locationName:"language" type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeSeverityLevelsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// The list of severity levels returned by the DescribeSeverityLevels operation.
-type DescribeSeverityLevelsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The available severity levels for the support case. Available severity levels
-	// are defined by your service level agreement with AWS.
-	SeverityLevels []SeverityLevel `locationName:"severityLevels" type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeSeverityLevelsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeSeverityLevels = "DescribeSeverityLevels"
 
@@ -54,7 +26,7 @@ const opDescribeSeverityLevels = "DescribeSeverityLevels"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/support-2013-04-15/DescribeSeverityLevels
-func (c *Client) DescribeSeverityLevelsRequest(input *DescribeSeverityLevelsInput) DescribeSeverityLevelsRequest {
+func (c *Client) DescribeSeverityLevelsRequest(input *types.DescribeSeverityLevelsInput) DescribeSeverityLevelsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeSeverityLevels,
 		HTTPMethod: "POST",
@@ -62,10 +34,10 @@ func (c *Client) DescribeSeverityLevelsRequest(input *DescribeSeverityLevelsInpu
 	}
 
 	if input == nil {
-		input = &DescribeSeverityLevelsInput{}
+		input = &types.DescribeSeverityLevelsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeSeverityLevelsOutput{})
+	req := c.newRequest(op, input, &types.DescribeSeverityLevelsOutput{})
 	return DescribeSeverityLevelsRequest{Request: req, Input: input, Copy: c.DescribeSeverityLevelsRequest}
 }
 
@@ -73,8 +45,8 @@ func (c *Client) DescribeSeverityLevelsRequest(input *DescribeSeverityLevelsInpu
 // DescribeSeverityLevels API operation.
 type DescribeSeverityLevelsRequest struct {
 	*aws.Request
-	Input *DescribeSeverityLevelsInput
-	Copy  func(*DescribeSeverityLevelsInput) DescribeSeverityLevelsRequest
+	Input *types.DescribeSeverityLevelsInput
+	Copy  func(*types.DescribeSeverityLevelsInput) DescribeSeverityLevelsRequest
 }
 
 // Send marshals and sends the DescribeSeverityLevels API request.
@@ -86,7 +58,7 @@ func (r DescribeSeverityLevelsRequest) Send(ctx context.Context) (*DescribeSever
 	}
 
 	resp := &DescribeSeverityLevelsResponse{
-		DescribeSeverityLevelsOutput: r.Request.Data.(*DescribeSeverityLevelsOutput),
+		DescribeSeverityLevelsOutput: r.Request.Data.(*types.DescribeSeverityLevelsOutput),
 		response:                     &aws.Response{Request: r.Request},
 	}
 
@@ -96,7 +68,7 @@ func (r DescribeSeverityLevelsRequest) Send(ctx context.Context) (*DescribeSever
 // DescribeSeverityLevelsResponse is the response type for the
 // DescribeSeverityLevels API operation.
 type DescribeSeverityLevelsResponse struct {
-	*DescribeSeverityLevelsOutput
+	*types.DescribeSeverityLevelsOutput
 
 	response *aws.Response
 }

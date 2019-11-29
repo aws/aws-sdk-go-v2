@@ -4,70 +4,10 @@ package firehose
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/firehose/types"
 )
-
-type TagDeliveryStreamInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the delivery stream to which you want to add the tags.
-	//
-	// DeliveryStreamName is a required field
-	DeliveryStreamName *string `min:"1" type:"string" required:"true"`
-
-	// A set of key-value pairs to use to create the tags.
-	//
-	// Tags is a required field
-	Tags []Tag `min:"1" type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s TagDeliveryStreamInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *TagDeliveryStreamInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "TagDeliveryStreamInput"}
-
-	if s.DeliveryStreamName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DeliveryStreamName"))
-	}
-	if s.DeliveryStreamName != nil && len(*s.DeliveryStreamName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("DeliveryStreamName", 1))
-	}
-
-	if s.Tags == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Tags"))
-	}
-	if s.Tags != nil && len(s.Tags) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Tags", 1))
-	}
-	if s.Tags != nil {
-		for i, v := range s.Tags {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type TagDeliveryStreamOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s TagDeliveryStreamOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opTagDeliveryStream = "TagDeliveryStream"
 
@@ -95,7 +35,7 @@ const opTagDeliveryStream = "TagDeliveryStream"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/TagDeliveryStream
-func (c *Client) TagDeliveryStreamRequest(input *TagDeliveryStreamInput) TagDeliveryStreamRequest {
+func (c *Client) TagDeliveryStreamRequest(input *types.TagDeliveryStreamInput) TagDeliveryStreamRequest {
 	op := &aws.Operation{
 		Name:       opTagDeliveryStream,
 		HTTPMethod: "POST",
@@ -103,10 +43,10 @@ func (c *Client) TagDeliveryStreamRequest(input *TagDeliveryStreamInput) TagDeli
 	}
 
 	if input == nil {
-		input = &TagDeliveryStreamInput{}
+		input = &types.TagDeliveryStreamInput{}
 	}
 
-	req := c.newRequest(op, input, &TagDeliveryStreamOutput{})
+	req := c.newRequest(op, input, &types.TagDeliveryStreamOutput{})
 	return TagDeliveryStreamRequest{Request: req, Input: input, Copy: c.TagDeliveryStreamRequest}
 }
 
@@ -114,8 +54,8 @@ func (c *Client) TagDeliveryStreamRequest(input *TagDeliveryStreamInput) TagDeli
 // TagDeliveryStream API operation.
 type TagDeliveryStreamRequest struct {
 	*aws.Request
-	Input *TagDeliveryStreamInput
-	Copy  func(*TagDeliveryStreamInput) TagDeliveryStreamRequest
+	Input *types.TagDeliveryStreamInput
+	Copy  func(*types.TagDeliveryStreamInput) TagDeliveryStreamRequest
 }
 
 // Send marshals and sends the TagDeliveryStream API request.
@@ -127,7 +67,7 @@ func (r TagDeliveryStreamRequest) Send(ctx context.Context) (*TagDeliveryStreamR
 	}
 
 	resp := &TagDeliveryStreamResponse{
-		TagDeliveryStreamOutput: r.Request.Data.(*TagDeliveryStreamOutput),
+		TagDeliveryStreamOutput: r.Request.Data.(*types.TagDeliveryStreamOutput),
 		response:                &aws.Response{Request: r.Request},
 	}
 
@@ -137,7 +77,7 @@ func (r TagDeliveryStreamRequest) Send(ctx context.Context) (*TagDeliveryStreamR
 // TagDeliveryStreamResponse is the response type for the
 // TagDeliveryStream API operation.
 type TagDeliveryStreamResponse struct {
-	*TagDeliveryStreamOutput
+	*types.TagDeliveryStreamOutput
 
 	response *aws.Response
 }

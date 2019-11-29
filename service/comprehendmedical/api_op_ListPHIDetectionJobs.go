@@ -6,64 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/comprehendmedical/types"
 )
-
-type ListPHIDetectionJobsInput struct {
-	_ struct{} `type:"structure"`
-
-	// Filters the jobs that are returned. You can filter jobs based on their names,
-	// status, or the date and time that they were submitted. You can only set one
-	// filter at a time.
-	Filter *ComprehendMedicalAsyncJobFilter `type:"structure"`
-
-	// The maximum number of results to return in each page. The default is 100.
-	MaxResults *int64 `min:"1" type:"integer"`
-
-	// Identifies the next page of results to return.
-	NextToken *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s ListPHIDetectionJobsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListPHIDetectionJobsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListPHIDetectionJobsInput"}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-	if s.NextToken != nil && len(*s.NextToken) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
-	}
-	if s.Filter != nil {
-		if err := s.Filter.Validate(); err != nil {
-			invalidParams.AddNested("Filter", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ListPHIDetectionJobsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A list containing the properties of each job returned.
-	ComprehendMedicalAsyncJobPropertiesList []ComprehendMedicalAsyncJobProperties `type:"list"`
-
-	// Identifies the next page of results to return.
-	NextToken *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s ListPHIDetectionJobsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListPHIDetectionJobs = "ListPHIDetectionJobs"
 
@@ -81,7 +25,7 @@ const opListPHIDetectionJobs = "ListPHIDetectionJobs"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/comprehendmedical-2018-10-30/ListPHIDetectionJobs
-func (c *Client) ListPHIDetectionJobsRequest(input *ListPHIDetectionJobsInput) ListPHIDetectionJobsRequest {
+func (c *Client) ListPHIDetectionJobsRequest(input *types.ListPHIDetectionJobsInput) ListPHIDetectionJobsRequest {
 	op := &aws.Operation{
 		Name:       opListPHIDetectionJobs,
 		HTTPMethod: "POST",
@@ -89,10 +33,10 @@ func (c *Client) ListPHIDetectionJobsRequest(input *ListPHIDetectionJobsInput) L
 	}
 
 	if input == nil {
-		input = &ListPHIDetectionJobsInput{}
+		input = &types.ListPHIDetectionJobsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListPHIDetectionJobsOutput{})
+	req := c.newRequest(op, input, &types.ListPHIDetectionJobsOutput{})
 	return ListPHIDetectionJobsRequest{Request: req, Input: input, Copy: c.ListPHIDetectionJobsRequest}
 }
 
@@ -100,8 +44,8 @@ func (c *Client) ListPHIDetectionJobsRequest(input *ListPHIDetectionJobsInput) L
 // ListPHIDetectionJobs API operation.
 type ListPHIDetectionJobsRequest struct {
 	*aws.Request
-	Input *ListPHIDetectionJobsInput
-	Copy  func(*ListPHIDetectionJobsInput) ListPHIDetectionJobsRequest
+	Input *types.ListPHIDetectionJobsInput
+	Copy  func(*types.ListPHIDetectionJobsInput) ListPHIDetectionJobsRequest
 }
 
 // Send marshals and sends the ListPHIDetectionJobs API request.
@@ -113,7 +57,7 @@ func (r ListPHIDetectionJobsRequest) Send(ctx context.Context) (*ListPHIDetectio
 	}
 
 	resp := &ListPHIDetectionJobsResponse{
-		ListPHIDetectionJobsOutput: r.Request.Data.(*ListPHIDetectionJobsOutput),
+		ListPHIDetectionJobsOutput: r.Request.Data.(*types.ListPHIDetectionJobsOutput),
 		response:                   &aws.Response{Request: r.Request},
 	}
 
@@ -123,7 +67,7 @@ func (r ListPHIDetectionJobsRequest) Send(ctx context.Context) (*ListPHIDetectio
 // ListPHIDetectionJobsResponse is the response type for the
 // ListPHIDetectionJobs API operation.
 type ListPHIDetectionJobsResponse struct {
-	*ListPHIDetectionJobsOutput
+	*types.ListPHIDetectionJobsOutput
 
 	response *aws.Response
 }

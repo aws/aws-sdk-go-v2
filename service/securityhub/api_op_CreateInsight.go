@@ -6,107 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/securityhub/types"
 )
-
-type CreateInsightInput struct {
-	_ struct{} `type:"structure"`
-
-	// One or more attributes used to filter the findings included in the insight.
-	// Only findings that match the criteria defined in the filters are included
-	// in the insight.
-	//
-	// Filters is a required field
-	Filters *AwsSecurityFindingFilters `type:"structure" required:"true"`
-
-	// The attribute used as the aggregator to group related findings for the insight.
-	//
-	// GroupByAttribute is a required field
-	GroupByAttribute *string `type:"string" required:"true"`
-
-	// The name of the custom insight to create.
-	//
-	// Name is a required field
-	Name *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s CreateInsightInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateInsightInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateInsightInput"}
-
-	if s.Filters == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Filters"))
-	}
-
-	if s.GroupByAttribute == nil {
-		invalidParams.Add(aws.NewErrParamRequired("GroupByAttribute"))
-	}
-
-	if s.Name == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Name"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s CreateInsightInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.Filters != nil {
-		v := s.Filters
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "Filters", v, metadata)
-	}
-	if s.GroupByAttribute != nil {
-		v := *s.GroupByAttribute
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "GroupByAttribute", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Name != nil {
-		v := *s.Name
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "Name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type CreateInsightOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The ARN of the insight created.
-	//
-	// InsightArn is a required field
-	InsightArn *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s CreateInsightOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s CreateInsightOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.InsightArn != nil {
-		v := *s.InsightArn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "InsightArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opCreateInsight = "CreateInsight"
 
@@ -125,7 +26,7 @@ const opCreateInsight = "CreateInsight"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/CreateInsight
-func (c *Client) CreateInsightRequest(input *CreateInsightInput) CreateInsightRequest {
+func (c *Client) CreateInsightRequest(input *types.CreateInsightInput) CreateInsightRequest {
 	op := &aws.Operation{
 		Name:       opCreateInsight,
 		HTTPMethod: "POST",
@@ -133,10 +34,10 @@ func (c *Client) CreateInsightRequest(input *CreateInsightInput) CreateInsightRe
 	}
 
 	if input == nil {
-		input = &CreateInsightInput{}
+		input = &types.CreateInsightInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateInsightOutput{})
+	req := c.newRequest(op, input, &types.CreateInsightOutput{})
 	return CreateInsightRequest{Request: req, Input: input, Copy: c.CreateInsightRequest}
 }
 
@@ -144,8 +45,8 @@ func (c *Client) CreateInsightRequest(input *CreateInsightInput) CreateInsightRe
 // CreateInsight API operation.
 type CreateInsightRequest struct {
 	*aws.Request
-	Input *CreateInsightInput
-	Copy  func(*CreateInsightInput) CreateInsightRequest
+	Input *types.CreateInsightInput
+	Copy  func(*types.CreateInsightInput) CreateInsightRequest
 }
 
 // Send marshals and sends the CreateInsight API request.
@@ -157,7 +58,7 @@ func (r CreateInsightRequest) Send(ctx context.Context) (*CreateInsightResponse,
 	}
 
 	resp := &CreateInsightResponse{
-		CreateInsightOutput: r.Request.Data.(*CreateInsightOutput),
+		CreateInsightOutput: r.Request.Data.(*types.CreateInsightOutput),
 		response:            &aws.Response{Request: r.Request},
 	}
 
@@ -167,7 +68,7 @@ func (r CreateInsightRequest) Send(ctx context.Context) (*CreateInsightResponse,
 // CreateInsightResponse is the response type for the
 // CreateInsight API operation.
 type CreateInsightResponse struct {
-	*CreateInsightOutput
+	*types.CreateInsightOutput
 
 	response *aws.Response
 }

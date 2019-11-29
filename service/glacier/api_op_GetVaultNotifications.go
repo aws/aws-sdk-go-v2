@@ -6,95 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/glacier/types"
 )
-
-// Provides options for retrieving the notification configuration set on an
-// Amazon Glacier vault.
-type GetVaultNotificationsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The AccountId value is the AWS account ID of the account that owns the vault.
-	// You can either specify an AWS account ID or optionally a single '-' (hyphen),
-	// in which case Amazon S3 Glacier uses the AWS account ID associated with the
-	// credentials used to sign the request. If you use an account ID, do not include
-	// any hyphens ('-') in the ID.
-	//
-	// AccountId is a required field
-	AccountId *string `location:"uri" locationName:"accountId" type:"string" required:"true"`
-
-	// The name of the vault.
-	//
-	// VaultName is a required field
-	VaultName *string `location:"uri" locationName:"vaultName" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetVaultNotificationsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetVaultNotificationsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetVaultNotificationsInput"}
-
-	if s.AccountId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("AccountId"))
-	}
-
-	if s.VaultName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("VaultName"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetVaultNotificationsInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.AccountId != nil {
-		v := *s.AccountId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "accountId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.VaultName != nil {
-		v := *s.VaultName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "vaultName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-// Contains the Amazon S3 Glacier response to your request.
-type GetVaultNotificationsOutput struct {
-	_ struct{} `type:"structure" payload:"VaultNotificationConfig"`
-
-	// Returns the notification configuration set on the vault.
-	VaultNotificationConfig *VaultNotificationConfig `locationName:"vaultNotificationConfig" type:"structure"`
-}
-
-// String returns the string representation
-func (s GetVaultNotificationsOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetVaultNotificationsOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.VaultNotificationConfig != nil {
-		v := s.VaultNotificationConfig
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.PayloadTarget, "vaultNotificationConfig", v, metadata)
-	}
-	return nil
-}
 
 const opGetVaultNotifications = "GetVaultNotifications"
 
@@ -127,7 +40,7 @@ const opGetVaultNotifications = "GetVaultNotifications"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) GetVaultNotificationsRequest(input *GetVaultNotificationsInput) GetVaultNotificationsRequest {
+func (c *Client) GetVaultNotificationsRequest(input *types.GetVaultNotificationsInput) GetVaultNotificationsRequest {
 	op := &aws.Operation{
 		Name:       opGetVaultNotifications,
 		HTTPMethod: "GET",
@@ -135,10 +48,10 @@ func (c *Client) GetVaultNotificationsRequest(input *GetVaultNotificationsInput)
 	}
 
 	if input == nil {
-		input = &GetVaultNotificationsInput{}
+		input = &types.GetVaultNotificationsInput{}
 	}
 
-	req := c.newRequest(op, input, &GetVaultNotificationsOutput{})
+	req := c.newRequest(op, input, &types.GetVaultNotificationsOutput{})
 	return GetVaultNotificationsRequest{Request: req, Input: input, Copy: c.GetVaultNotificationsRequest}
 }
 
@@ -146,8 +59,8 @@ func (c *Client) GetVaultNotificationsRequest(input *GetVaultNotificationsInput)
 // GetVaultNotifications API operation.
 type GetVaultNotificationsRequest struct {
 	*aws.Request
-	Input *GetVaultNotificationsInput
-	Copy  func(*GetVaultNotificationsInput) GetVaultNotificationsRequest
+	Input *types.GetVaultNotificationsInput
+	Copy  func(*types.GetVaultNotificationsInput) GetVaultNotificationsRequest
 }
 
 // Send marshals and sends the GetVaultNotifications API request.
@@ -159,7 +72,7 @@ func (r GetVaultNotificationsRequest) Send(ctx context.Context) (*GetVaultNotifi
 	}
 
 	resp := &GetVaultNotificationsResponse{
-		GetVaultNotificationsOutput: r.Request.Data.(*GetVaultNotificationsOutput),
+		GetVaultNotificationsOutput: r.Request.Data.(*types.GetVaultNotificationsOutput),
 		response:                    &aws.Response{Request: r.Request},
 	}
 
@@ -169,7 +82,7 @@ func (r GetVaultNotificationsRequest) Send(ctx context.Context) (*GetVaultNotifi
 // GetVaultNotificationsResponse is the response type for the
 // GetVaultNotifications API operation.
 type GetVaultNotificationsResponse struct {
-	*GetVaultNotificationsOutput
+	*types.GetVaultNotificationsOutput
 
 	response *aws.Response
 }

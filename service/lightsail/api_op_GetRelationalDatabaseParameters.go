@@ -6,57 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/lightsail/types"
 )
-
-type GetRelationalDatabaseParametersInput struct {
-	_ struct{} `type:"structure"`
-
-	// A token used for advancing to a specific page of results for your get relational
-	// database parameters request.
-	PageToken *string `locationName:"pageToken" type:"string"`
-
-	// The name of your database for which to get parameters.
-	//
-	// RelationalDatabaseName is a required field
-	RelationalDatabaseName *string `locationName:"relationalDatabaseName" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetRelationalDatabaseParametersInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetRelationalDatabaseParametersInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetRelationalDatabaseParametersInput"}
-
-	if s.RelationalDatabaseName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("RelationalDatabaseName"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type GetRelationalDatabaseParametersOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A token used for advancing to the next page of results from your get static
-	// IPs request.
-	NextPageToken *string `locationName:"nextPageToken" type:"string"`
-
-	// An object describing the result of your get relational database parameters
-	// request.
-	Parameters []RelationalDatabaseParameter `locationName:"parameters" type:"list"`
-}
-
-// String returns the string representation
-func (s GetRelationalDatabaseParametersOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetRelationalDatabaseParameters = "GetRelationalDatabaseParameters"
 
@@ -79,7 +30,7 @@ const opGetRelationalDatabaseParameters = "GetRelationalDatabaseParameters"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetRelationalDatabaseParameters
-func (c *Client) GetRelationalDatabaseParametersRequest(input *GetRelationalDatabaseParametersInput) GetRelationalDatabaseParametersRequest {
+func (c *Client) GetRelationalDatabaseParametersRequest(input *types.GetRelationalDatabaseParametersInput) GetRelationalDatabaseParametersRequest {
 	op := &aws.Operation{
 		Name:       opGetRelationalDatabaseParameters,
 		HTTPMethod: "POST",
@@ -87,10 +38,10 @@ func (c *Client) GetRelationalDatabaseParametersRequest(input *GetRelationalData
 	}
 
 	if input == nil {
-		input = &GetRelationalDatabaseParametersInput{}
+		input = &types.GetRelationalDatabaseParametersInput{}
 	}
 
-	req := c.newRequest(op, input, &GetRelationalDatabaseParametersOutput{})
+	req := c.newRequest(op, input, &types.GetRelationalDatabaseParametersOutput{})
 	return GetRelationalDatabaseParametersRequest{Request: req, Input: input, Copy: c.GetRelationalDatabaseParametersRequest}
 }
 
@@ -98,8 +49,8 @@ func (c *Client) GetRelationalDatabaseParametersRequest(input *GetRelationalData
 // GetRelationalDatabaseParameters API operation.
 type GetRelationalDatabaseParametersRequest struct {
 	*aws.Request
-	Input *GetRelationalDatabaseParametersInput
-	Copy  func(*GetRelationalDatabaseParametersInput) GetRelationalDatabaseParametersRequest
+	Input *types.GetRelationalDatabaseParametersInput
+	Copy  func(*types.GetRelationalDatabaseParametersInput) GetRelationalDatabaseParametersRequest
 }
 
 // Send marshals and sends the GetRelationalDatabaseParameters API request.
@@ -111,7 +62,7 @@ func (r GetRelationalDatabaseParametersRequest) Send(ctx context.Context) (*GetR
 	}
 
 	resp := &GetRelationalDatabaseParametersResponse{
-		GetRelationalDatabaseParametersOutput: r.Request.Data.(*GetRelationalDatabaseParametersOutput),
+		GetRelationalDatabaseParametersOutput: r.Request.Data.(*types.GetRelationalDatabaseParametersOutput),
 		response:                              &aws.Response{Request: r.Request},
 	}
 
@@ -121,7 +72,7 @@ func (r GetRelationalDatabaseParametersRequest) Send(ctx context.Context) (*GetR
 // GetRelationalDatabaseParametersResponse is the response type for the
 // GetRelationalDatabaseParameters API operation.
 type GetRelationalDatabaseParametersResponse struct {
-	*GetRelationalDatabaseParametersOutput
+	*types.GetRelationalDatabaseParametersOutput
 
 	response *aws.Response
 }

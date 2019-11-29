@@ -6,56 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/glue/types"
 )
-
-type ListDevEndpointsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The maximum size of a list to return.
-	MaxResults *int64 `min:"1" type:"integer"`
-
-	// A continuation token, if this is a continuation request.
-	NextToken *string `type:"string"`
-
-	// Specifies to return only these tagged resources.
-	Tags map[string]string `type:"map"`
-}
-
-// String returns the string representation
-func (s ListDevEndpointsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListDevEndpointsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListDevEndpointsInput"}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ListDevEndpointsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The names of all the DevEndpoints in the account, or the DevEndpoints with
-	// the specified tags.
-	DevEndpointNames []string `type:"list"`
-
-	// A continuation token, if the returned list does not contain the last metric
-	// available.
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s ListDevEndpointsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListDevEndpoints = "ListDevEndpoints"
 
@@ -78,7 +30,7 @@ const opListDevEndpoints = "ListDevEndpoints"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ListDevEndpoints
-func (c *Client) ListDevEndpointsRequest(input *ListDevEndpointsInput) ListDevEndpointsRequest {
+func (c *Client) ListDevEndpointsRequest(input *types.ListDevEndpointsInput) ListDevEndpointsRequest {
 	op := &aws.Operation{
 		Name:       opListDevEndpoints,
 		HTTPMethod: "POST",
@@ -92,10 +44,10 @@ func (c *Client) ListDevEndpointsRequest(input *ListDevEndpointsInput) ListDevEn
 	}
 
 	if input == nil {
-		input = &ListDevEndpointsInput{}
+		input = &types.ListDevEndpointsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListDevEndpointsOutput{})
+	req := c.newRequest(op, input, &types.ListDevEndpointsOutput{})
 	return ListDevEndpointsRequest{Request: req, Input: input, Copy: c.ListDevEndpointsRequest}
 }
 
@@ -103,8 +55,8 @@ func (c *Client) ListDevEndpointsRequest(input *ListDevEndpointsInput) ListDevEn
 // ListDevEndpoints API operation.
 type ListDevEndpointsRequest struct {
 	*aws.Request
-	Input *ListDevEndpointsInput
-	Copy  func(*ListDevEndpointsInput) ListDevEndpointsRequest
+	Input *types.ListDevEndpointsInput
+	Copy  func(*types.ListDevEndpointsInput) ListDevEndpointsRequest
 }
 
 // Send marshals and sends the ListDevEndpoints API request.
@@ -116,7 +68,7 @@ func (r ListDevEndpointsRequest) Send(ctx context.Context) (*ListDevEndpointsRes
 	}
 
 	resp := &ListDevEndpointsResponse{
-		ListDevEndpointsOutput: r.Request.Data.(*ListDevEndpointsOutput),
+		ListDevEndpointsOutput: r.Request.Data.(*types.ListDevEndpointsOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -146,7 +98,7 @@ func NewListDevEndpointsPaginator(req ListDevEndpointsRequest) ListDevEndpointsP
 	return ListDevEndpointsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListDevEndpointsInput
+				var inCpy *types.ListDevEndpointsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -166,14 +118,14 @@ type ListDevEndpointsPaginator struct {
 	aws.Pager
 }
 
-func (p *ListDevEndpointsPaginator) CurrentPage() *ListDevEndpointsOutput {
-	return p.Pager.CurrentPage().(*ListDevEndpointsOutput)
+func (p *ListDevEndpointsPaginator) CurrentPage() *types.ListDevEndpointsOutput {
+	return p.Pager.CurrentPage().(*types.ListDevEndpointsOutput)
 }
 
 // ListDevEndpointsResponse is the response type for the
 // ListDevEndpoints API operation.
 type ListDevEndpointsResponse struct {
-	*ListDevEndpointsOutput
+	*types.ListDevEndpointsOutput
 
 	response *aws.Response
 }

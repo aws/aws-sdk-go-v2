@@ -4,78 +4,10 @@ package autoscalingplans
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/autoscalingplans/types"
 )
-
-type UpdateScalingPlanInput struct {
-	_ struct{} `type:"structure"`
-
-	// A CloudFormation stack or set of tags.
-	ApplicationSource *ApplicationSource `type:"structure"`
-
-	// The scaling instructions.
-	ScalingInstructions []ScalingInstruction `type:"list"`
-
-	// The name of the scaling plan.
-	//
-	// ScalingPlanName is a required field
-	ScalingPlanName *string `min:"1" type:"string" required:"true"`
-
-	// The version number of the scaling plan.
-	//
-	// ScalingPlanVersion is a required field
-	ScalingPlanVersion *int64 `type:"long" required:"true"`
-}
-
-// String returns the string representation
-func (s UpdateScalingPlanInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateScalingPlanInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateScalingPlanInput"}
-
-	if s.ScalingPlanName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ScalingPlanName"))
-	}
-	if s.ScalingPlanName != nil && len(*s.ScalingPlanName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ScalingPlanName", 1))
-	}
-
-	if s.ScalingPlanVersion == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ScalingPlanVersion"))
-	}
-	if s.ApplicationSource != nil {
-		if err := s.ApplicationSource.Validate(); err != nil {
-			invalidParams.AddNested("ApplicationSource", err.(aws.ErrInvalidParams))
-		}
-	}
-	if s.ScalingInstructions != nil {
-		for i, v := range s.ScalingInstructions {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "ScalingInstructions", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type UpdateScalingPlanOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s UpdateScalingPlanOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opUpdateScalingPlan = "UpdateScalingPlan"
 
@@ -95,7 +27,7 @@ const opUpdateScalingPlan = "UpdateScalingPlan"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-plans-2018-01-06/UpdateScalingPlan
-func (c *Client) UpdateScalingPlanRequest(input *UpdateScalingPlanInput) UpdateScalingPlanRequest {
+func (c *Client) UpdateScalingPlanRequest(input *types.UpdateScalingPlanInput) UpdateScalingPlanRequest {
 	op := &aws.Operation{
 		Name:       opUpdateScalingPlan,
 		HTTPMethod: "POST",
@@ -103,10 +35,10 @@ func (c *Client) UpdateScalingPlanRequest(input *UpdateScalingPlanInput) UpdateS
 	}
 
 	if input == nil {
-		input = &UpdateScalingPlanInput{}
+		input = &types.UpdateScalingPlanInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateScalingPlanOutput{})
+	req := c.newRequest(op, input, &types.UpdateScalingPlanOutput{})
 	return UpdateScalingPlanRequest{Request: req, Input: input, Copy: c.UpdateScalingPlanRequest}
 }
 
@@ -114,8 +46,8 @@ func (c *Client) UpdateScalingPlanRequest(input *UpdateScalingPlanInput) UpdateS
 // UpdateScalingPlan API operation.
 type UpdateScalingPlanRequest struct {
 	*aws.Request
-	Input *UpdateScalingPlanInput
-	Copy  func(*UpdateScalingPlanInput) UpdateScalingPlanRequest
+	Input *types.UpdateScalingPlanInput
+	Copy  func(*types.UpdateScalingPlanInput) UpdateScalingPlanRequest
 }
 
 // Send marshals and sends the UpdateScalingPlan API request.
@@ -127,7 +59,7 @@ func (r UpdateScalingPlanRequest) Send(ctx context.Context) (*UpdateScalingPlanR
 	}
 
 	resp := &UpdateScalingPlanResponse{
-		UpdateScalingPlanOutput: r.Request.Data.(*UpdateScalingPlanOutput),
+		UpdateScalingPlanOutput: r.Request.Data.(*types.UpdateScalingPlanOutput),
 		response:                &aws.Response{Request: r.Request},
 	}
 
@@ -137,7 +69,7 @@ func (r UpdateScalingPlanRequest) Send(ctx context.Context) (*UpdateScalingPlanR
 // UpdateScalingPlanResponse is the response type for the
 // UpdateScalingPlan API operation.
 type UpdateScalingPlanResponse struct {
-	*UpdateScalingPlanOutput
+	*types.UpdateScalingPlanOutput
 
 	response *aws.Response
 }

@@ -4,61 +4,10 @@ package workspaces
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/workspaces/types"
 )
-
-type TerminateWorkspacesInput struct {
-	_ struct{} `type:"structure"`
-
-	// The WorkSpaces to terminate. You can specify up to 25 WorkSpaces.
-	//
-	// TerminateWorkspaceRequests is a required field
-	TerminateWorkspaceRequests []TerminateRequest `min:"1" type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s TerminateWorkspacesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *TerminateWorkspacesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "TerminateWorkspacesInput"}
-
-	if s.TerminateWorkspaceRequests == nil {
-		invalidParams.Add(aws.NewErrParamRequired("TerminateWorkspaceRequests"))
-	}
-	if s.TerminateWorkspaceRequests != nil && len(s.TerminateWorkspaceRequests) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("TerminateWorkspaceRequests", 1))
-	}
-	if s.TerminateWorkspaceRequests != nil {
-		for i, v := range s.TerminateWorkspaceRequests {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "TerminateWorkspaceRequests", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type TerminateWorkspacesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Information about the WorkSpaces that could not be terminated.
-	FailedRequests []FailedWorkspaceChangeRequest `type:"list"`
-}
-
-// String returns the string representation
-func (s TerminateWorkspacesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opTerminateWorkspaces = "TerminateWorkspaces"
 
@@ -84,7 +33,7 @@ const opTerminateWorkspaces = "TerminateWorkspaces"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/TerminateWorkspaces
-func (c *Client) TerminateWorkspacesRequest(input *TerminateWorkspacesInput) TerminateWorkspacesRequest {
+func (c *Client) TerminateWorkspacesRequest(input *types.TerminateWorkspacesInput) TerminateWorkspacesRequest {
 	op := &aws.Operation{
 		Name:       opTerminateWorkspaces,
 		HTTPMethod: "POST",
@@ -92,10 +41,10 @@ func (c *Client) TerminateWorkspacesRequest(input *TerminateWorkspacesInput) Ter
 	}
 
 	if input == nil {
-		input = &TerminateWorkspacesInput{}
+		input = &types.TerminateWorkspacesInput{}
 	}
 
-	req := c.newRequest(op, input, &TerminateWorkspacesOutput{})
+	req := c.newRequest(op, input, &types.TerminateWorkspacesOutput{})
 	return TerminateWorkspacesRequest{Request: req, Input: input, Copy: c.TerminateWorkspacesRequest}
 }
 
@@ -103,8 +52,8 @@ func (c *Client) TerminateWorkspacesRequest(input *TerminateWorkspacesInput) Ter
 // TerminateWorkspaces API operation.
 type TerminateWorkspacesRequest struct {
 	*aws.Request
-	Input *TerminateWorkspacesInput
-	Copy  func(*TerminateWorkspacesInput) TerminateWorkspacesRequest
+	Input *types.TerminateWorkspacesInput
+	Copy  func(*types.TerminateWorkspacesInput) TerminateWorkspacesRequest
 }
 
 // Send marshals and sends the TerminateWorkspaces API request.
@@ -116,7 +65,7 @@ func (r TerminateWorkspacesRequest) Send(ctx context.Context) (*TerminateWorkspa
 	}
 
 	resp := &TerminateWorkspacesResponse{
-		TerminateWorkspacesOutput: r.Request.Data.(*TerminateWorkspacesOutput),
+		TerminateWorkspacesOutput: r.Request.Data.(*types.TerminateWorkspacesOutput),
 		response:                  &aws.Response{Request: r.Request},
 	}
 
@@ -126,7 +75,7 @@ func (r TerminateWorkspacesRequest) Send(ctx context.Context) (*TerminateWorkspa
 // TerminateWorkspacesResponse is the response type for the
 // TerminateWorkspaces API operation.
 type TerminateWorkspacesResponse struct {
-	*TerminateWorkspacesOutput
+	*types.TerminateWorkspacesOutput
 
 	response *aws.Response
 }

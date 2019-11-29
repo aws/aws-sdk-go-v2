@@ -6,63 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/alexaforbusiness/types"
 )
-
-type ListSmartHomeAppliancesInput struct {
-	_ struct{} `type:"structure"`
-
-	// The maximum number of appliances to be returned, per paginated calls.
-	MaxResults *int64 `min:"1" type:"integer"`
-
-	// The tokens used for pagination.
-	NextToken *string `min:"1" type:"string"`
-
-	// The room that the appliances are associated with.
-	//
-	// RoomArn is a required field
-	RoomArn *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s ListSmartHomeAppliancesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListSmartHomeAppliancesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListSmartHomeAppliancesInput"}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-	if s.NextToken != nil && len(*s.NextToken) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
-	}
-
-	if s.RoomArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("RoomArn"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ListSmartHomeAppliancesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The tokens used for pagination.
-	NextToken *string `min:"1" type:"string"`
-
-	// The smart home appliances.
-	SmartHomeAppliances []SmartHomeAppliance `type:"list"`
-}
-
-// String returns the string representation
-func (s ListSmartHomeAppliancesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListSmartHomeAppliances = "ListSmartHomeAppliances"
 
@@ -79,7 +24,7 @@ const opListSmartHomeAppliances = "ListSmartHomeAppliances"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/ListSmartHomeAppliances
-func (c *Client) ListSmartHomeAppliancesRequest(input *ListSmartHomeAppliancesInput) ListSmartHomeAppliancesRequest {
+func (c *Client) ListSmartHomeAppliancesRequest(input *types.ListSmartHomeAppliancesInput) ListSmartHomeAppliancesRequest {
 	op := &aws.Operation{
 		Name:       opListSmartHomeAppliances,
 		HTTPMethod: "POST",
@@ -93,10 +38,10 @@ func (c *Client) ListSmartHomeAppliancesRequest(input *ListSmartHomeAppliancesIn
 	}
 
 	if input == nil {
-		input = &ListSmartHomeAppliancesInput{}
+		input = &types.ListSmartHomeAppliancesInput{}
 	}
 
-	req := c.newRequest(op, input, &ListSmartHomeAppliancesOutput{})
+	req := c.newRequest(op, input, &types.ListSmartHomeAppliancesOutput{})
 	return ListSmartHomeAppliancesRequest{Request: req, Input: input, Copy: c.ListSmartHomeAppliancesRequest}
 }
 
@@ -104,8 +49,8 @@ func (c *Client) ListSmartHomeAppliancesRequest(input *ListSmartHomeAppliancesIn
 // ListSmartHomeAppliances API operation.
 type ListSmartHomeAppliancesRequest struct {
 	*aws.Request
-	Input *ListSmartHomeAppliancesInput
-	Copy  func(*ListSmartHomeAppliancesInput) ListSmartHomeAppliancesRequest
+	Input *types.ListSmartHomeAppliancesInput
+	Copy  func(*types.ListSmartHomeAppliancesInput) ListSmartHomeAppliancesRequest
 }
 
 // Send marshals and sends the ListSmartHomeAppliances API request.
@@ -117,7 +62,7 @@ func (r ListSmartHomeAppliancesRequest) Send(ctx context.Context) (*ListSmartHom
 	}
 
 	resp := &ListSmartHomeAppliancesResponse{
-		ListSmartHomeAppliancesOutput: r.Request.Data.(*ListSmartHomeAppliancesOutput),
+		ListSmartHomeAppliancesOutput: r.Request.Data.(*types.ListSmartHomeAppliancesOutput),
 		response:                      &aws.Response{Request: r.Request},
 	}
 
@@ -147,7 +92,7 @@ func NewListSmartHomeAppliancesPaginator(req ListSmartHomeAppliancesRequest) Lis
 	return ListSmartHomeAppliancesPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListSmartHomeAppliancesInput
+				var inCpy *types.ListSmartHomeAppliancesInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -167,14 +112,14 @@ type ListSmartHomeAppliancesPaginator struct {
 	aws.Pager
 }
 
-func (p *ListSmartHomeAppliancesPaginator) CurrentPage() *ListSmartHomeAppliancesOutput {
-	return p.Pager.CurrentPage().(*ListSmartHomeAppliancesOutput)
+func (p *ListSmartHomeAppliancesPaginator) CurrentPage() *types.ListSmartHomeAppliancesOutput {
+	return p.Pager.CurrentPage().(*types.ListSmartHomeAppliancesOutput)
 }
 
 // ListSmartHomeAppliancesResponse is the response type for the
 // ListSmartHomeAppliances API operation.
 type ListSmartHomeAppliancesResponse struct {
-	*ListSmartHomeAppliancesOutput
+	*types.ListSmartHomeAppliancesOutput
 
 	response *aws.Response
 }

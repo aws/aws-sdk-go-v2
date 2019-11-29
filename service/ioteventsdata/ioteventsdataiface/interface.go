@@ -10,6 +10,7 @@ package ioteventsdataiface
 
 import (
 	"github.com/aws/aws-sdk-go-v2/service/ioteventsdata"
+	"github.com/aws/aws-sdk-go-v2/service/ioteventsdata/types"
 )
 
 // ClientAPI provides an interface to enable mocking the
@@ -43,7 +44,7 @@ import (
 //    type mockClientClient struct {
 //        ioteventsdataiface.ClientPI
 //    }
-//    func (m *mockClientClient) BatchPutMessage(input *ioteventsdata.BatchPutMessageInput) (*ioteventsdata.BatchPutMessageOutput, error) {
+//    func (m *mockClientClient) BatchPutMessage(input *types.BatchPutMessageInput) (*types.BatchPutMessageOutput, error) {
 //        // mock response/functionality
 //    }
 //
@@ -61,13 +62,13 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type ClientAPI interface {
-	BatchPutMessageRequest(*ioteventsdata.BatchPutMessageInput) ioteventsdata.BatchPutMessageRequest
+	BatchPutMessageRequest(*types.BatchPutMessageInput) ioteventsdata.BatchPutMessageRequest
 
-	BatchUpdateDetectorRequest(*ioteventsdata.BatchUpdateDetectorInput) ioteventsdata.BatchUpdateDetectorRequest
+	BatchUpdateDetectorRequest(*types.BatchUpdateDetectorInput) ioteventsdata.BatchUpdateDetectorRequest
 
-	DescribeDetectorRequest(*ioteventsdata.DescribeDetectorInput) ioteventsdata.DescribeDetectorRequest
+	DescribeDetectorRequest(*types.DescribeDetectorInput) ioteventsdata.DescribeDetectorRequest
 
-	ListDetectorsRequest(*ioteventsdata.ListDetectorsInput) ioteventsdata.ListDetectorsRequest
+	ListDetectorsRequest(*types.ListDetectorsInput) ioteventsdata.ListDetectorsRequest
 }
 
 var _ ClientAPI = (*ioteventsdata.Client)(nil)

@@ -6,53 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/opsworks/types"
 )
-
-type DescribeRdsDbInstancesInput struct {
-	_ struct{} `type:"structure"`
-
-	// An array containing the ARNs of the instances to be described.
-	RdsDbInstanceArns []string `type:"list"`
-
-	// The ID of the stack with which the instances are registered. The operation
-	// returns descriptions of all registered Amazon RDS instances.
-	//
-	// StackId is a required field
-	StackId *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeRdsDbInstancesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeRdsDbInstancesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeRdsDbInstancesInput"}
-
-	if s.StackId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("StackId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Contains the response to a DescribeRdsDbInstances request.
-type DescribeRdsDbInstancesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// An a array of RdsDbInstance objects that describe the instances.
-	RdsDbInstances []RdsDbInstance `type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeRdsDbInstancesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeRdsDbInstances = "DescribeRdsDbInstances"
 
@@ -76,7 +31,7 @@ const opDescribeRdsDbInstances = "DescribeRdsDbInstances"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DescribeRdsDbInstances
-func (c *Client) DescribeRdsDbInstancesRequest(input *DescribeRdsDbInstancesInput) DescribeRdsDbInstancesRequest {
+func (c *Client) DescribeRdsDbInstancesRequest(input *types.DescribeRdsDbInstancesInput) DescribeRdsDbInstancesRequest {
 	op := &aws.Operation{
 		Name:       opDescribeRdsDbInstances,
 		HTTPMethod: "POST",
@@ -84,10 +39,10 @@ func (c *Client) DescribeRdsDbInstancesRequest(input *DescribeRdsDbInstancesInpu
 	}
 
 	if input == nil {
-		input = &DescribeRdsDbInstancesInput{}
+		input = &types.DescribeRdsDbInstancesInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeRdsDbInstancesOutput{})
+	req := c.newRequest(op, input, &types.DescribeRdsDbInstancesOutput{})
 	return DescribeRdsDbInstancesRequest{Request: req, Input: input, Copy: c.DescribeRdsDbInstancesRequest}
 }
 
@@ -95,8 +50,8 @@ func (c *Client) DescribeRdsDbInstancesRequest(input *DescribeRdsDbInstancesInpu
 // DescribeRdsDbInstances API operation.
 type DescribeRdsDbInstancesRequest struct {
 	*aws.Request
-	Input *DescribeRdsDbInstancesInput
-	Copy  func(*DescribeRdsDbInstancesInput) DescribeRdsDbInstancesRequest
+	Input *types.DescribeRdsDbInstancesInput
+	Copy  func(*types.DescribeRdsDbInstancesInput) DescribeRdsDbInstancesRequest
 }
 
 // Send marshals and sends the DescribeRdsDbInstances API request.
@@ -108,7 +63,7 @@ func (r DescribeRdsDbInstancesRequest) Send(ctx context.Context) (*DescribeRdsDb
 	}
 
 	resp := &DescribeRdsDbInstancesResponse{
-		DescribeRdsDbInstancesOutput: r.Request.Data.(*DescribeRdsDbInstancesOutput),
+		DescribeRdsDbInstancesOutput: r.Request.Data.(*types.DescribeRdsDbInstancesOutput),
 		response:                     &aws.Response{Request: r.Request},
 	}
 
@@ -118,7 +73,7 @@ func (r DescribeRdsDbInstancesRequest) Send(ctx context.Context) (*DescribeRdsDb
 // DescribeRdsDbInstancesResponse is the response type for the
 // DescribeRdsDbInstances API operation.
 type DescribeRdsDbInstancesResponse struct {
-	*DescribeRdsDbInstancesOutput
+	*types.DescribeRdsDbInstancesOutput
 
 	response *aws.Response
 }

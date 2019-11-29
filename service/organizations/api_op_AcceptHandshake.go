@@ -6,51 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/organizations/types"
 )
-
-type AcceptHandshakeInput struct {
-	_ struct{} `type:"structure"`
-
-	// The unique identifier (ID) of the handshake that you want to accept.
-	//
-	// The regex pattern (http://wikipedia.org/wiki/regex) for handshake ID string
-	// requires "h-" followed by from 8 to 32 lower-case letters or digits.
-	//
-	// HandshakeId is a required field
-	HandshakeId *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s AcceptHandshakeInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *AcceptHandshakeInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "AcceptHandshakeInput"}
-
-	if s.HandshakeId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("HandshakeId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type AcceptHandshakeOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A structure that contains details about the accepted handshake.
-	Handshake *Handshake `type:"structure"`
-}
-
-// String returns the string representation
-func (s AcceptHandshakeOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opAcceptHandshake = "AcceptHandshake"
 
@@ -91,7 +48,7 @@ const opAcceptHandshake = "AcceptHandshake"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/AcceptHandshake
-func (c *Client) AcceptHandshakeRequest(input *AcceptHandshakeInput) AcceptHandshakeRequest {
+func (c *Client) AcceptHandshakeRequest(input *types.AcceptHandshakeInput) AcceptHandshakeRequest {
 	op := &aws.Operation{
 		Name:       opAcceptHandshake,
 		HTTPMethod: "POST",
@@ -99,10 +56,10 @@ func (c *Client) AcceptHandshakeRequest(input *AcceptHandshakeInput) AcceptHands
 	}
 
 	if input == nil {
-		input = &AcceptHandshakeInput{}
+		input = &types.AcceptHandshakeInput{}
 	}
 
-	req := c.newRequest(op, input, &AcceptHandshakeOutput{})
+	req := c.newRequest(op, input, &types.AcceptHandshakeOutput{})
 	return AcceptHandshakeRequest{Request: req, Input: input, Copy: c.AcceptHandshakeRequest}
 }
 
@@ -110,8 +67,8 @@ func (c *Client) AcceptHandshakeRequest(input *AcceptHandshakeInput) AcceptHands
 // AcceptHandshake API operation.
 type AcceptHandshakeRequest struct {
 	*aws.Request
-	Input *AcceptHandshakeInput
-	Copy  func(*AcceptHandshakeInput) AcceptHandshakeRequest
+	Input *types.AcceptHandshakeInput
+	Copy  func(*types.AcceptHandshakeInput) AcceptHandshakeRequest
 }
 
 // Send marshals and sends the AcceptHandshake API request.
@@ -123,7 +80,7 @@ func (r AcceptHandshakeRequest) Send(ctx context.Context) (*AcceptHandshakeRespo
 	}
 
 	resp := &AcceptHandshakeResponse{
-		AcceptHandshakeOutput: r.Request.Data.(*AcceptHandshakeOutput),
+		AcceptHandshakeOutput: r.Request.Data.(*types.AcceptHandshakeOutput),
 		response:              &aws.Response{Request: r.Request},
 	}
 
@@ -133,7 +90,7 @@ func (r AcceptHandshakeRequest) Send(ctx context.Context) (*AcceptHandshakeRespo
 // AcceptHandshakeResponse is the response type for the
 // AcceptHandshake API operation.
 type AcceptHandshakeResponse struct {
-	*AcceptHandshakeOutput
+	*types.AcceptHandshakeOutput
 
 	response *aws.Response
 }

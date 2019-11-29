@@ -10,6 +10,7 @@ package migrationhubiface
 
 import (
 	"github.com/aws/aws-sdk-go-v2/service/migrationhub"
+	"github.com/aws/aws-sdk-go-v2/service/migrationhub/types"
 )
 
 // ClientAPI provides an interface to enable mocking the
@@ -43,7 +44,7 @@ import (
 //    type mockClientClient struct {
 //        migrationhubiface.ClientPI
 //    }
-//    func (m *mockClientClient) AssociateCreatedArtifact(input *migrationhub.AssociateCreatedArtifactInput) (*migrationhub.AssociateCreatedArtifactOutput, error) {
+//    func (m *mockClientClient) AssociateCreatedArtifact(input *types.AssociateCreatedArtifactInput) (*types.AssociateCreatedArtifactOutput, error) {
 //        // mock response/functionality
 //    }
 //
@@ -61,37 +62,37 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type ClientAPI interface {
-	AssociateCreatedArtifactRequest(*migrationhub.AssociateCreatedArtifactInput) migrationhub.AssociateCreatedArtifactRequest
+	AssociateCreatedArtifactRequest(*types.AssociateCreatedArtifactInput) migrationhub.AssociateCreatedArtifactRequest
 
-	AssociateDiscoveredResourceRequest(*migrationhub.AssociateDiscoveredResourceInput) migrationhub.AssociateDiscoveredResourceRequest
+	AssociateDiscoveredResourceRequest(*types.AssociateDiscoveredResourceInput) migrationhub.AssociateDiscoveredResourceRequest
 
-	CreateProgressUpdateStreamRequest(*migrationhub.CreateProgressUpdateStreamInput) migrationhub.CreateProgressUpdateStreamRequest
+	CreateProgressUpdateStreamRequest(*types.CreateProgressUpdateStreamInput) migrationhub.CreateProgressUpdateStreamRequest
 
-	DeleteProgressUpdateStreamRequest(*migrationhub.DeleteProgressUpdateStreamInput) migrationhub.DeleteProgressUpdateStreamRequest
+	DeleteProgressUpdateStreamRequest(*types.DeleteProgressUpdateStreamInput) migrationhub.DeleteProgressUpdateStreamRequest
 
-	DescribeApplicationStateRequest(*migrationhub.DescribeApplicationStateInput) migrationhub.DescribeApplicationStateRequest
+	DescribeApplicationStateRequest(*types.DescribeApplicationStateInput) migrationhub.DescribeApplicationStateRequest
 
-	DescribeMigrationTaskRequest(*migrationhub.DescribeMigrationTaskInput) migrationhub.DescribeMigrationTaskRequest
+	DescribeMigrationTaskRequest(*types.DescribeMigrationTaskInput) migrationhub.DescribeMigrationTaskRequest
 
-	DisassociateCreatedArtifactRequest(*migrationhub.DisassociateCreatedArtifactInput) migrationhub.DisassociateCreatedArtifactRequest
+	DisassociateCreatedArtifactRequest(*types.DisassociateCreatedArtifactInput) migrationhub.DisassociateCreatedArtifactRequest
 
-	DisassociateDiscoveredResourceRequest(*migrationhub.DisassociateDiscoveredResourceInput) migrationhub.DisassociateDiscoveredResourceRequest
+	DisassociateDiscoveredResourceRequest(*types.DisassociateDiscoveredResourceInput) migrationhub.DisassociateDiscoveredResourceRequest
 
-	ImportMigrationTaskRequest(*migrationhub.ImportMigrationTaskInput) migrationhub.ImportMigrationTaskRequest
+	ImportMigrationTaskRequest(*types.ImportMigrationTaskInput) migrationhub.ImportMigrationTaskRequest
 
-	ListCreatedArtifactsRequest(*migrationhub.ListCreatedArtifactsInput) migrationhub.ListCreatedArtifactsRequest
+	ListCreatedArtifactsRequest(*types.ListCreatedArtifactsInput) migrationhub.ListCreatedArtifactsRequest
 
-	ListDiscoveredResourcesRequest(*migrationhub.ListDiscoveredResourcesInput) migrationhub.ListDiscoveredResourcesRequest
+	ListDiscoveredResourcesRequest(*types.ListDiscoveredResourcesInput) migrationhub.ListDiscoveredResourcesRequest
 
-	ListMigrationTasksRequest(*migrationhub.ListMigrationTasksInput) migrationhub.ListMigrationTasksRequest
+	ListMigrationTasksRequest(*types.ListMigrationTasksInput) migrationhub.ListMigrationTasksRequest
 
-	ListProgressUpdateStreamsRequest(*migrationhub.ListProgressUpdateStreamsInput) migrationhub.ListProgressUpdateStreamsRequest
+	ListProgressUpdateStreamsRequest(*types.ListProgressUpdateStreamsInput) migrationhub.ListProgressUpdateStreamsRequest
 
-	NotifyApplicationStateRequest(*migrationhub.NotifyApplicationStateInput) migrationhub.NotifyApplicationStateRequest
+	NotifyApplicationStateRequest(*types.NotifyApplicationStateInput) migrationhub.NotifyApplicationStateRequest
 
-	NotifyMigrationTaskStateRequest(*migrationhub.NotifyMigrationTaskStateInput) migrationhub.NotifyMigrationTaskStateRequest
+	NotifyMigrationTaskStateRequest(*types.NotifyMigrationTaskStateInput) migrationhub.NotifyMigrationTaskStateRequest
 
-	PutResourceAttributesRequest(*migrationhub.PutResourceAttributesInput) migrationhub.PutResourceAttributesRequest
+	PutResourceAttributesRequest(*types.PutResourceAttributesInput) migrationhub.PutResourceAttributesRequest
 }
 
 var _ ClientAPI = (*migrationhub.Client)(nil)

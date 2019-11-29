@@ -6,65 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/devicefarm/types"
 )
-
-// Represents a request to the list jobs operation.
-type ListJobsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The run's Amazon Resource Name (ARN).
-	//
-	// Arn is a required field
-	Arn *string `locationName:"arn" min:"32" type:"string" required:"true"`
-
-	// An identifier that was returned from the previous call to this operation,
-	// which can be used to return the next set of items in the list.
-	NextToken *string `locationName:"nextToken" min:"4" type:"string"`
-}
-
-// String returns the string representation
-func (s ListJobsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListJobsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListJobsInput"}
-
-	if s.Arn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Arn"))
-	}
-	if s.Arn != nil && len(*s.Arn) < 32 {
-		invalidParams.Add(aws.NewErrParamMinLen("Arn", 32))
-	}
-	if s.NextToken != nil && len(*s.NextToken) < 4 {
-		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 4))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Represents the result of a list jobs request.
-type ListJobsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Information about the jobs.
-	Jobs []Job `locationName:"jobs" type:"list"`
-
-	// If the number of items that are returned is significantly large, this is
-	// an identifier that is also returned, which can be used in a subsequent call
-	// to this operation to return the next set of items in the list.
-	NextToken *string `locationName:"nextToken" min:"4" type:"string"`
-}
-
-// String returns the string representation
-func (s ListJobsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListJobs = "ListJobs"
 
@@ -81,7 +24,7 @@ const opListJobs = "ListJobs"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ListJobs
-func (c *Client) ListJobsRequest(input *ListJobsInput) ListJobsRequest {
+func (c *Client) ListJobsRequest(input *types.ListJobsInput) ListJobsRequest {
 	op := &aws.Operation{
 		Name:       opListJobs,
 		HTTPMethod: "POST",
@@ -95,10 +38,10 @@ func (c *Client) ListJobsRequest(input *ListJobsInput) ListJobsRequest {
 	}
 
 	if input == nil {
-		input = &ListJobsInput{}
+		input = &types.ListJobsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListJobsOutput{})
+	req := c.newRequest(op, input, &types.ListJobsOutput{})
 	return ListJobsRequest{Request: req, Input: input, Copy: c.ListJobsRequest}
 }
 
@@ -106,8 +49,8 @@ func (c *Client) ListJobsRequest(input *ListJobsInput) ListJobsRequest {
 // ListJobs API operation.
 type ListJobsRequest struct {
 	*aws.Request
-	Input *ListJobsInput
-	Copy  func(*ListJobsInput) ListJobsRequest
+	Input *types.ListJobsInput
+	Copy  func(*types.ListJobsInput) ListJobsRequest
 }
 
 // Send marshals and sends the ListJobs API request.
@@ -119,7 +62,7 @@ func (r ListJobsRequest) Send(ctx context.Context) (*ListJobsResponse, error) {
 	}
 
 	resp := &ListJobsResponse{
-		ListJobsOutput: r.Request.Data.(*ListJobsOutput),
+		ListJobsOutput: r.Request.Data.(*types.ListJobsOutput),
 		response:       &aws.Response{Request: r.Request},
 	}
 
@@ -149,7 +92,7 @@ func NewListJobsPaginator(req ListJobsRequest) ListJobsPaginator {
 	return ListJobsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListJobsInput
+				var inCpy *types.ListJobsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -169,14 +112,14 @@ type ListJobsPaginator struct {
 	aws.Pager
 }
 
-func (p *ListJobsPaginator) CurrentPage() *ListJobsOutput {
-	return p.Pager.CurrentPage().(*ListJobsOutput)
+func (p *ListJobsPaginator) CurrentPage() *types.ListJobsOutput {
+	return p.Pager.CurrentPage().(*types.ListJobsOutput)
 }
 
 // ListJobsResponse is the response type for the
 // ListJobs API operation.
 type ListJobsResponse struct {
-	*ListJobsOutput
+	*types.ListJobsOutput
 
 	response *aws.Response
 }

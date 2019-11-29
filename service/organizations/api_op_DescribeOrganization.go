@@ -6,29 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/organizations/types"
 )
-
-type DescribeOrganizationInput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DescribeOrganizationInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type DescribeOrganizationOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A structure that contains information about the organization.
-	Organization *Organization `type:"structure"`
-}
-
-// String returns the string representation
-func (s DescribeOrganizationOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeOrganization = "DescribeOrganization"
 
@@ -52,7 +31,7 @@ const opDescribeOrganization = "DescribeOrganization"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/DescribeOrganization
-func (c *Client) DescribeOrganizationRequest(input *DescribeOrganizationInput) DescribeOrganizationRequest {
+func (c *Client) DescribeOrganizationRequest(input *types.DescribeOrganizationInput) DescribeOrganizationRequest {
 	op := &aws.Operation{
 		Name:       opDescribeOrganization,
 		HTTPMethod: "POST",
@@ -60,10 +39,10 @@ func (c *Client) DescribeOrganizationRequest(input *DescribeOrganizationInput) D
 	}
 
 	if input == nil {
-		input = &DescribeOrganizationInput{}
+		input = &types.DescribeOrganizationInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeOrganizationOutput{})
+	req := c.newRequest(op, input, &types.DescribeOrganizationOutput{})
 	return DescribeOrganizationRequest{Request: req, Input: input, Copy: c.DescribeOrganizationRequest}
 }
 
@@ -71,8 +50,8 @@ func (c *Client) DescribeOrganizationRequest(input *DescribeOrganizationInput) D
 // DescribeOrganization API operation.
 type DescribeOrganizationRequest struct {
 	*aws.Request
-	Input *DescribeOrganizationInput
-	Copy  func(*DescribeOrganizationInput) DescribeOrganizationRequest
+	Input *types.DescribeOrganizationInput
+	Copy  func(*types.DescribeOrganizationInput) DescribeOrganizationRequest
 }
 
 // Send marshals and sends the DescribeOrganization API request.
@@ -84,7 +63,7 @@ func (r DescribeOrganizationRequest) Send(ctx context.Context) (*DescribeOrganiz
 	}
 
 	resp := &DescribeOrganizationResponse{
-		DescribeOrganizationOutput: r.Request.Data.(*DescribeOrganizationOutput),
+		DescribeOrganizationOutput: r.Request.Data.(*types.DescribeOrganizationOutput),
 		response:                   &aws.Response{Request: r.Request},
 	}
 
@@ -94,7 +73,7 @@ func (r DescribeOrganizationRequest) Send(ctx context.Context) (*DescribeOrganiz
 // DescribeOrganizationResponse is the response type for the
 // DescribeOrganization API operation.
 type DescribeOrganizationResponse struct {
-	*DescribeOrganizationOutput
+	*types.DescribeOrganizationOutput
 
 	response *aws.Response
 }

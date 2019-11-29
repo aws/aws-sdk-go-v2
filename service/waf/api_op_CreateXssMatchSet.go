@@ -6,71 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/waf/types"
 )
-
-// A request to create an XssMatchSet.
-type CreateXssMatchSetInput struct {
-	_ struct{} `type:"structure"`
-
-	// The value returned by the most recent call to GetChangeToken.
-	//
-	// ChangeToken is a required field
-	ChangeToken *string `min:"1" type:"string" required:"true"`
-
-	// A friendly name or description for the XssMatchSet that you're creating.
-	// You can't change Name after you create the XssMatchSet.
-	//
-	// Name is a required field
-	Name *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s CreateXssMatchSetInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateXssMatchSetInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateXssMatchSetInput"}
-
-	if s.ChangeToken == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ChangeToken"))
-	}
-	if s.ChangeToken != nil && len(*s.ChangeToken) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ChangeToken", 1))
-	}
-
-	if s.Name == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Name"))
-	}
-	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// The response to a CreateXssMatchSet request.
-type CreateXssMatchSetOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The ChangeToken that you used to submit the CreateXssMatchSet request. You
-	// can also use this value to query the status of the request. For more information,
-	// see GetChangeTokenStatus.
-	ChangeToken *string `min:"1" type:"string"`
-
-	// An XssMatchSet.
-	XssMatchSet *XssMatchSet `type:"structure"`
-}
-
-// String returns the string representation
-func (s CreateXssMatchSetOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCreateXssMatchSet = "CreateXssMatchSet"
 
@@ -106,7 +43,7 @@ const opCreateXssMatchSet = "CreateXssMatchSet"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/CreateXssMatchSet
-func (c *Client) CreateXssMatchSetRequest(input *CreateXssMatchSetInput) CreateXssMatchSetRequest {
+func (c *Client) CreateXssMatchSetRequest(input *types.CreateXssMatchSetInput) CreateXssMatchSetRequest {
 	op := &aws.Operation{
 		Name:       opCreateXssMatchSet,
 		HTTPMethod: "POST",
@@ -114,10 +51,10 @@ func (c *Client) CreateXssMatchSetRequest(input *CreateXssMatchSetInput) CreateX
 	}
 
 	if input == nil {
-		input = &CreateXssMatchSetInput{}
+		input = &types.CreateXssMatchSetInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateXssMatchSetOutput{})
+	req := c.newRequest(op, input, &types.CreateXssMatchSetOutput{})
 	return CreateXssMatchSetRequest{Request: req, Input: input, Copy: c.CreateXssMatchSetRequest}
 }
 
@@ -125,8 +62,8 @@ func (c *Client) CreateXssMatchSetRequest(input *CreateXssMatchSetInput) CreateX
 // CreateXssMatchSet API operation.
 type CreateXssMatchSetRequest struct {
 	*aws.Request
-	Input *CreateXssMatchSetInput
-	Copy  func(*CreateXssMatchSetInput) CreateXssMatchSetRequest
+	Input *types.CreateXssMatchSetInput
+	Copy  func(*types.CreateXssMatchSetInput) CreateXssMatchSetRequest
 }
 
 // Send marshals and sends the CreateXssMatchSet API request.
@@ -138,7 +75,7 @@ func (r CreateXssMatchSetRequest) Send(ctx context.Context) (*CreateXssMatchSetR
 	}
 
 	resp := &CreateXssMatchSetResponse{
-		CreateXssMatchSetOutput: r.Request.Data.(*CreateXssMatchSetOutput),
+		CreateXssMatchSetOutput: r.Request.Data.(*types.CreateXssMatchSetOutput),
 		response:                &aws.Response{Request: r.Request},
 	}
 
@@ -148,7 +85,7 @@ func (r CreateXssMatchSetRequest) Send(ctx context.Context) (*CreateXssMatchSetR
 // CreateXssMatchSetResponse is the response type for the
 // CreateXssMatchSet API operation.
 type CreateXssMatchSetResponse struct {
-	*CreateXssMatchSetOutput
+	*types.CreateXssMatchSetOutput
 
 	response *aws.Response
 }

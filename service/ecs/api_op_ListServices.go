@@ -6,65 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ecs/types"
 )
-
-type ListServicesInput struct {
-	_ struct{} `type:"structure"`
-
-	// The short name or full Amazon Resource Name (ARN) of the cluster that hosts
-	// the services to list. If you do not specify a cluster, the default cluster
-	// is assumed.
-	Cluster *string `locationName:"cluster" type:"string"`
-
-	// The launch type for the services to list.
-	LaunchType LaunchType `locationName:"launchType" type:"string" enum:"true"`
-
-	// The maximum number of service results returned by ListServices in paginated
-	// output. When this parameter is used, ListServices only returns maxResults
-	// results in a single page along with a nextToken response element. The remaining
-	// results of the initial request can be seen by sending another ListServices
-	// request with the returned nextToken value. This value can be between 1 and
-	// 100. If this parameter is not used, then ListServices returns up to 10 results
-	// and a nextToken value if applicable.
-	MaxResults *int64 `locationName:"maxResults" type:"integer"`
-
-	// The nextToken value returned from a previous paginated ListServices request
-	// where maxResults was used and the results exceeded the value of that parameter.
-	// Pagination continues from the end of the previous results that returned the
-	// nextToken value.
-	//
-	// This token should be treated as an opaque identifier that is only used to
-	// retrieve the next items in a list and not for other programmatic purposes.
-	NextToken *string `locationName:"nextToken" type:"string"`
-
-	// The scheduling strategy for services to list.
-	SchedulingStrategy SchedulingStrategy `locationName:"schedulingStrategy" type:"string" enum:"true"`
-}
-
-// String returns the string representation
-func (s ListServicesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type ListServicesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The nextToken value to include in a future ListServices request. When the
-	// results of a ListServices request exceed maxResults, this value can be used
-	// to retrieve the next page of results. This value is null when there are no
-	// more results to return.
-	NextToken *string `locationName:"nextToken" type:"string"`
-
-	// The list of full ARN entries for each service associated with the specified
-	// cluster.
-	ServiceArns []string `locationName:"serviceArns" type:"list"`
-}
-
-// String returns the string representation
-func (s ListServicesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListServices = "ListServices"
 
@@ -81,7 +24,7 @@ const opListServices = "ListServices"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ListServices
-func (c *Client) ListServicesRequest(input *ListServicesInput) ListServicesRequest {
+func (c *Client) ListServicesRequest(input *types.ListServicesInput) ListServicesRequest {
 	op := &aws.Operation{
 		Name:       opListServices,
 		HTTPMethod: "POST",
@@ -95,10 +38,10 @@ func (c *Client) ListServicesRequest(input *ListServicesInput) ListServicesReque
 	}
 
 	if input == nil {
-		input = &ListServicesInput{}
+		input = &types.ListServicesInput{}
 	}
 
-	req := c.newRequest(op, input, &ListServicesOutput{})
+	req := c.newRequest(op, input, &types.ListServicesOutput{})
 	return ListServicesRequest{Request: req, Input: input, Copy: c.ListServicesRequest}
 }
 
@@ -106,8 +49,8 @@ func (c *Client) ListServicesRequest(input *ListServicesInput) ListServicesReque
 // ListServices API operation.
 type ListServicesRequest struct {
 	*aws.Request
-	Input *ListServicesInput
-	Copy  func(*ListServicesInput) ListServicesRequest
+	Input *types.ListServicesInput
+	Copy  func(*types.ListServicesInput) ListServicesRequest
 }
 
 // Send marshals and sends the ListServices API request.
@@ -119,7 +62,7 @@ func (r ListServicesRequest) Send(ctx context.Context) (*ListServicesResponse, e
 	}
 
 	resp := &ListServicesResponse{
-		ListServicesOutput: r.Request.Data.(*ListServicesOutput),
+		ListServicesOutput: r.Request.Data.(*types.ListServicesOutput),
 		response:           &aws.Response{Request: r.Request},
 	}
 
@@ -149,7 +92,7 @@ func NewListServicesPaginator(req ListServicesRequest) ListServicesPaginator {
 	return ListServicesPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListServicesInput
+				var inCpy *types.ListServicesInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -169,14 +112,14 @@ type ListServicesPaginator struct {
 	aws.Pager
 }
 
-func (p *ListServicesPaginator) CurrentPage() *ListServicesOutput {
-	return p.Pager.CurrentPage().(*ListServicesOutput)
+func (p *ListServicesPaginator) CurrentPage() *types.ListServicesOutput {
+	return p.Pager.CurrentPage().(*types.ListServicesOutput)
 }
 
 // ListServicesResponse is the response type for the
 // ListServices API operation.
 type ListServicesResponse struct {
-	*ListServicesOutput
+	*types.ListServicesOutput
 
 	response *aws.Response
 }

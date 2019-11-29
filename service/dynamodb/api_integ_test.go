@@ -13,6 +13,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws/awserr"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting/integration"
 	"github.com/aws/aws-sdk-go-v2/service/dynamodb"
+	"github.com/aws/aws-sdk-go-v2/service/dynamodb/types"
 )
 
 var _ aws.Config
@@ -24,7 +25,7 @@ func TestInteg_00_ListTables(t *testing.T) {
 
 	cfg := integration.ConfigWithDefaultRegion("us-west-2")
 	svc := dynamodb.New(cfg)
-	params := &dynamodb.ListTablesInput{
+	params := &types.ListTablesInput{
 		Limit: aws.Int64(1),
 	}
 
@@ -41,7 +42,7 @@ func TestInteg_01_DescribeTable(t *testing.T) {
 
 	cfg := integration.ConfigWithDefaultRegion("us-west-2")
 	svc := dynamodb.New(cfg)
-	params := &dynamodb.DescribeTableInput{
+	params := &types.DescribeTableInput{
 		TableName: aws.String("fake-table"),
 	}
 

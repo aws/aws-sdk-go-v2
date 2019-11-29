@@ -6,63 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/waf/types"
 )
-
-type GetWebACLInput struct {
-	_ struct{} `type:"structure"`
-
-	// The WebACLId of the WebACL that you want to get. WebACLId is returned by
-	// CreateWebACL and by ListWebACLs.
-	//
-	// WebACLId is a required field
-	WebACLId *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetWebACLInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetWebACLInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetWebACLInput"}
-
-	if s.WebACLId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("WebACLId"))
-	}
-	if s.WebACLId != nil && len(*s.WebACLId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("WebACLId", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type GetWebACLOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Information about the WebACL that you specified in the GetWebACL request.
-	// For more information, see the following topics:
-	//
-	//    * WebACL: Contains DefaultAction, MetricName, Name, an array of Rule objects,
-	//    and WebACLId
-	//
-	//    * DefaultAction (Data type is WafAction): Contains Type
-	//
-	//    * Rules: Contains an array of ActivatedRule objects, which contain Action,
-	//    Priority, and RuleId
-	//
-	//    * Action: Contains Type
-	WebACL *WebACL `type:"structure"`
-}
-
-// String returns the string representation
-func (s GetWebACLOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetWebACL = "GetWebACL"
 
@@ -79,7 +24,7 @@ const opGetWebACL = "GetWebACL"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/GetWebACL
-func (c *Client) GetWebACLRequest(input *GetWebACLInput) GetWebACLRequest {
+func (c *Client) GetWebACLRequest(input *types.GetWebACLInput) GetWebACLRequest {
 	op := &aws.Operation{
 		Name:       opGetWebACL,
 		HTTPMethod: "POST",
@@ -87,10 +32,10 @@ func (c *Client) GetWebACLRequest(input *GetWebACLInput) GetWebACLRequest {
 	}
 
 	if input == nil {
-		input = &GetWebACLInput{}
+		input = &types.GetWebACLInput{}
 	}
 
-	req := c.newRequest(op, input, &GetWebACLOutput{})
+	req := c.newRequest(op, input, &types.GetWebACLOutput{})
 	return GetWebACLRequest{Request: req, Input: input, Copy: c.GetWebACLRequest}
 }
 
@@ -98,8 +43,8 @@ func (c *Client) GetWebACLRequest(input *GetWebACLInput) GetWebACLRequest {
 // GetWebACL API operation.
 type GetWebACLRequest struct {
 	*aws.Request
-	Input *GetWebACLInput
-	Copy  func(*GetWebACLInput) GetWebACLRequest
+	Input *types.GetWebACLInput
+	Copy  func(*types.GetWebACLInput) GetWebACLRequest
 }
 
 // Send marshals and sends the GetWebACL API request.
@@ -111,7 +56,7 @@ func (r GetWebACLRequest) Send(ctx context.Context) (*GetWebACLResponse, error) 
 	}
 
 	resp := &GetWebACLResponse{
-		GetWebACLOutput: r.Request.Data.(*GetWebACLOutput),
+		GetWebACLOutput: r.Request.Data.(*types.GetWebACLOutput),
 		response:        &aws.Response{Request: r.Request},
 	}
 
@@ -121,7 +66,7 @@ func (r GetWebACLRequest) Send(ctx context.Context) (*GetWebACLResponse, error) 
 // GetWebACLResponse is the response type for the
 // GetWebACL API operation.
 type GetWebACLResponse struct {
-	*GetWebACLOutput
+	*types.GetWebACLOutput
 
 	response *aws.Response
 }

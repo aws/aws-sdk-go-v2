@@ -6,88 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/datapipeline/types"
 )
-
-// Contains the parameters for QueryObjects.
-type QueryObjectsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The maximum number of object names that QueryObjects will return in a single
-	// call. The default value is 100.
-	Limit *int64 `locationName:"limit" type:"integer"`
-
-	// The starting point for the results to be returned. For the first call, this
-	// value should be empty. As long as there are more results, continue to call
-	// QueryObjects with the marker value from the previous call to retrieve the
-	// next set of results.
-	Marker *string `locationName:"marker" type:"string"`
-
-	// The ID of the pipeline.
-	//
-	// PipelineId is a required field
-	PipelineId *string `locationName:"pipelineId" min:"1" type:"string" required:"true"`
-
-	// The query that defines the objects to be returned. The Query object can contain
-	// a maximum of ten selectors. The conditions in the query are limited to top-level
-	// String fields in the object. These filters can be applied to components,
-	// instances, and attempts.
-	Query *Query `locationName:"query" type:"structure"`
-
-	// Indicates whether the query applies to components or instances. The possible
-	// values are: COMPONENT, INSTANCE, and ATTEMPT.
-	//
-	// Sphere is a required field
-	Sphere *string `locationName:"sphere" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s QueryObjectsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *QueryObjectsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "QueryObjectsInput"}
-
-	if s.PipelineId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("PipelineId"))
-	}
-	if s.PipelineId != nil && len(*s.PipelineId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("PipelineId", 1))
-	}
-
-	if s.Sphere == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Sphere"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Contains the output of QueryObjects.
-type QueryObjectsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Indicates whether there are more results that can be obtained by a subsequent
-	// call.
-	HasMoreResults *bool `locationName:"hasMoreResults" type:"boolean"`
-
-	// The identifiers that match the query selectors.
-	Ids []string `locationName:"ids" type:"list"`
-
-	// The starting point for the next page of results. To view the next page of
-	// results, call QueryObjects again with this marker value. If the value is
-	// null, there are no more results.
-	Marker *string `locationName:"marker" type:"string"`
-}
-
-// String returns the string representation
-func (s QueryObjectsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opQueryObjects = "QueryObjects"
 
@@ -105,7 +25,7 @@ const opQueryObjects = "QueryObjects"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/datapipeline-2012-10-29/QueryObjects
-func (c *Client) QueryObjectsRequest(input *QueryObjectsInput) QueryObjectsRequest {
+func (c *Client) QueryObjectsRequest(input *types.QueryObjectsInput) QueryObjectsRequest {
 	op := &aws.Operation{
 		Name:       opQueryObjects,
 		HTTPMethod: "POST",
@@ -119,10 +39,10 @@ func (c *Client) QueryObjectsRequest(input *QueryObjectsInput) QueryObjectsReque
 	}
 
 	if input == nil {
-		input = &QueryObjectsInput{}
+		input = &types.QueryObjectsInput{}
 	}
 
-	req := c.newRequest(op, input, &QueryObjectsOutput{})
+	req := c.newRequest(op, input, &types.QueryObjectsOutput{})
 	return QueryObjectsRequest{Request: req, Input: input, Copy: c.QueryObjectsRequest}
 }
 
@@ -130,8 +50,8 @@ func (c *Client) QueryObjectsRequest(input *QueryObjectsInput) QueryObjectsReque
 // QueryObjects API operation.
 type QueryObjectsRequest struct {
 	*aws.Request
-	Input *QueryObjectsInput
-	Copy  func(*QueryObjectsInput) QueryObjectsRequest
+	Input *types.QueryObjectsInput
+	Copy  func(*types.QueryObjectsInput) QueryObjectsRequest
 }
 
 // Send marshals and sends the QueryObjects API request.
@@ -143,7 +63,7 @@ func (r QueryObjectsRequest) Send(ctx context.Context) (*QueryObjectsResponse, e
 	}
 
 	resp := &QueryObjectsResponse{
-		QueryObjectsOutput: r.Request.Data.(*QueryObjectsOutput),
+		QueryObjectsOutput: r.Request.Data.(*types.QueryObjectsOutput),
 		response:           &aws.Response{Request: r.Request},
 	}
 
@@ -173,7 +93,7 @@ func NewQueryObjectsPaginator(req QueryObjectsRequest) QueryObjectsPaginator {
 	return QueryObjectsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *QueryObjectsInput
+				var inCpy *types.QueryObjectsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -193,14 +113,14 @@ type QueryObjectsPaginator struct {
 	aws.Pager
 }
 
-func (p *QueryObjectsPaginator) CurrentPage() *QueryObjectsOutput {
-	return p.Pager.CurrentPage().(*QueryObjectsOutput)
+func (p *QueryObjectsPaginator) CurrentPage() *types.QueryObjectsOutput {
+	return p.Pager.CurrentPage().(*types.QueryObjectsOutput)
 }
 
 // QueryObjectsResponse is the response type for the
 // QueryObjects API operation.
 type QueryObjectsResponse struct {
-	*QueryObjectsOutput
+	*types.QueryObjectsOutput
 
 	response *aws.Response
 }

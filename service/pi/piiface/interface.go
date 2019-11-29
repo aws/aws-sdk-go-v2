@@ -10,6 +10,7 @@ package piiface
 
 import (
 	"github.com/aws/aws-sdk-go-v2/service/pi"
+	"github.com/aws/aws-sdk-go-v2/service/pi/types"
 )
 
 // ClientAPI provides an interface to enable mocking the
@@ -43,7 +44,7 @@ import (
 //    type mockClientClient struct {
 //        piiface.ClientPI
 //    }
-//    func (m *mockClientClient) DescribeDimensionKeys(input *pi.DescribeDimensionKeysInput) (*pi.DescribeDimensionKeysOutput, error) {
+//    func (m *mockClientClient) DescribeDimensionKeys(input *types.DescribeDimensionKeysInput) (*types.DescribeDimensionKeysOutput, error) {
 //        // mock response/functionality
 //    }
 //
@@ -61,9 +62,9 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type ClientAPI interface {
-	DescribeDimensionKeysRequest(*pi.DescribeDimensionKeysInput) pi.DescribeDimensionKeysRequest
+	DescribeDimensionKeysRequest(*types.DescribeDimensionKeysInput) pi.DescribeDimensionKeysRequest
 
-	GetResourceMetricsRequest(*pi.GetResourceMetricsInput) pi.GetResourceMetricsRequest
+	GetResourceMetricsRequest(*types.GetResourceMetricsInput) pi.GetResourceMetricsRequest
 }
 
 var _ ClientAPI = (*pi.Client)(nil)

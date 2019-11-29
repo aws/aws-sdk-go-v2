@@ -6,57 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-type ReplaceIamInstanceProfileAssociationInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the existing IAM instance profile association.
-	//
-	// AssociationId is a required field
-	AssociationId *string `type:"string" required:"true"`
-
-	// The IAM instance profile.
-	//
-	// IamInstanceProfile is a required field
-	IamInstanceProfile *IamInstanceProfileSpecification `type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s ReplaceIamInstanceProfileAssociationInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ReplaceIamInstanceProfileAssociationInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ReplaceIamInstanceProfileAssociationInput"}
-
-	if s.AssociationId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("AssociationId"))
-	}
-
-	if s.IamInstanceProfile == nil {
-		invalidParams.Add(aws.NewErrParamRequired("IamInstanceProfile"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ReplaceIamInstanceProfileAssociationOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Information about the IAM instance profile association.
-	IamInstanceProfileAssociation *IamInstanceProfileAssociation `locationName:"iamInstanceProfileAssociation" type:"structure"`
-}
-
-// String returns the string representation
-func (s ReplaceIamInstanceProfileAssociationOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opReplaceIamInstanceProfileAssociation = "ReplaceIamInstanceProfileAssociation"
 
@@ -78,7 +29,7 @@ const opReplaceIamInstanceProfileAssociation = "ReplaceIamInstanceProfileAssocia
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ReplaceIamInstanceProfileAssociation
-func (c *Client) ReplaceIamInstanceProfileAssociationRequest(input *ReplaceIamInstanceProfileAssociationInput) ReplaceIamInstanceProfileAssociationRequest {
+func (c *Client) ReplaceIamInstanceProfileAssociationRequest(input *types.ReplaceIamInstanceProfileAssociationInput) ReplaceIamInstanceProfileAssociationRequest {
 	op := &aws.Operation{
 		Name:       opReplaceIamInstanceProfileAssociation,
 		HTTPMethod: "POST",
@@ -86,10 +37,10 @@ func (c *Client) ReplaceIamInstanceProfileAssociationRequest(input *ReplaceIamIn
 	}
 
 	if input == nil {
-		input = &ReplaceIamInstanceProfileAssociationInput{}
+		input = &types.ReplaceIamInstanceProfileAssociationInput{}
 	}
 
-	req := c.newRequest(op, input, &ReplaceIamInstanceProfileAssociationOutput{})
+	req := c.newRequest(op, input, &types.ReplaceIamInstanceProfileAssociationOutput{})
 	return ReplaceIamInstanceProfileAssociationRequest{Request: req, Input: input, Copy: c.ReplaceIamInstanceProfileAssociationRequest}
 }
 
@@ -97,8 +48,8 @@ func (c *Client) ReplaceIamInstanceProfileAssociationRequest(input *ReplaceIamIn
 // ReplaceIamInstanceProfileAssociation API operation.
 type ReplaceIamInstanceProfileAssociationRequest struct {
 	*aws.Request
-	Input *ReplaceIamInstanceProfileAssociationInput
-	Copy  func(*ReplaceIamInstanceProfileAssociationInput) ReplaceIamInstanceProfileAssociationRequest
+	Input *types.ReplaceIamInstanceProfileAssociationInput
+	Copy  func(*types.ReplaceIamInstanceProfileAssociationInput) ReplaceIamInstanceProfileAssociationRequest
 }
 
 // Send marshals and sends the ReplaceIamInstanceProfileAssociation API request.
@@ -110,7 +61,7 @@ func (r ReplaceIamInstanceProfileAssociationRequest) Send(ctx context.Context) (
 	}
 
 	resp := &ReplaceIamInstanceProfileAssociationResponse{
-		ReplaceIamInstanceProfileAssociationOutput: r.Request.Data.(*ReplaceIamInstanceProfileAssociationOutput),
+		ReplaceIamInstanceProfileAssociationOutput: r.Request.Data.(*types.ReplaceIamInstanceProfileAssociationOutput),
 		response: &aws.Response{Request: r.Request},
 	}
 
@@ -120,7 +71,7 @@ func (r ReplaceIamInstanceProfileAssociationRequest) Send(ctx context.Context) (
 // ReplaceIamInstanceProfileAssociationResponse is the response type for the
 // ReplaceIamInstanceProfileAssociation API operation.
 type ReplaceIamInstanceProfileAssociationResponse struct {
-	*ReplaceIamInstanceProfileAssociationOutput
+	*types.ReplaceIamInstanceProfileAssociationOutput
 
 	response *aws.Response
 }

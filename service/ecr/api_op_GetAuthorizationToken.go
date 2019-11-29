@@ -6,48 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ecr/types"
 )
-
-type GetAuthorizationTokenInput struct {
-	_ struct{} `type:"structure"`
-
-	// A list of AWS account IDs that are associated with the registries for which
-	// to get authorization tokens. If you do not specify a registry, the default
-	// registry is assumed.
-	RegistryIds []string `locationName:"registryIds" min:"1" type:"list"`
-}
-
-// String returns the string representation
-func (s GetAuthorizationTokenInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetAuthorizationTokenInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetAuthorizationTokenInput"}
-	if s.RegistryIds != nil && len(s.RegistryIds) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("RegistryIds", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type GetAuthorizationTokenOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A list of authorization token data objects that correspond to the registryIds
-	// values in the request.
-	AuthorizationData []AuthorizationData `locationName:"authorizationData" type:"list"`
-}
-
-// String returns the string representation
-func (s GetAuthorizationTokenOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetAuthorizationToken = "GetAuthorizationToken"
 
@@ -71,7 +31,7 @@ const opGetAuthorizationToken = "GetAuthorizationToken"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/GetAuthorizationToken
-func (c *Client) GetAuthorizationTokenRequest(input *GetAuthorizationTokenInput) GetAuthorizationTokenRequest {
+func (c *Client) GetAuthorizationTokenRequest(input *types.GetAuthorizationTokenInput) GetAuthorizationTokenRequest {
 	op := &aws.Operation{
 		Name:       opGetAuthorizationToken,
 		HTTPMethod: "POST",
@@ -79,10 +39,10 @@ func (c *Client) GetAuthorizationTokenRequest(input *GetAuthorizationTokenInput)
 	}
 
 	if input == nil {
-		input = &GetAuthorizationTokenInput{}
+		input = &types.GetAuthorizationTokenInput{}
 	}
 
-	req := c.newRequest(op, input, &GetAuthorizationTokenOutput{})
+	req := c.newRequest(op, input, &types.GetAuthorizationTokenOutput{})
 	return GetAuthorizationTokenRequest{Request: req, Input: input, Copy: c.GetAuthorizationTokenRequest}
 }
 
@@ -90,8 +50,8 @@ func (c *Client) GetAuthorizationTokenRequest(input *GetAuthorizationTokenInput)
 // GetAuthorizationToken API operation.
 type GetAuthorizationTokenRequest struct {
 	*aws.Request
-	Input *GetAuthorizationTokenInput
-	Copy  func(*GetAuthorizationTokenInput) GetAuthorizationTokenRequest
+	Input *types.GetAuthorizationTokenInput
+	Copy  func(*types.GetAuthorizationTokenInput) GetAuthorizationTokenRequest
 }
 
 // Send marshals and sends the GetAuthorizationToken API request.
@@ -103,7 +63,7 @@ func (r GetAuthorizationTokenRequest) Send(ctx context.Context) (*GetAuthorizati
 	}
 
 	resp := &GetAuthorizationTokenResponse{
-		GetAuthorizationTokenOutput: r.Request.Data.(*GetAuthorizationTokenOutput),
+		GetAuthorizationTokenOutput: r.Request.Data.(*types.GetAuthorizationTokenOutput),
 		response:                    &aws.Response{Request: r.Request},
 	}
 
@@ -113,7 +73,7 @@ func (r GetAuthorizationTokenRequest) Send(ctx context.Context) (*GetAuthorizati
 // GetAuthorizationTokenResponse is the response type for the
 // GetAuthorizationToken API operation.
 type GetAuthorizationTokenResponse struct {
-	*GetAuthorizationTokenOutput
+	*types.GetAuthorizationTokenOutput
 
 	response *aws.Response
 }

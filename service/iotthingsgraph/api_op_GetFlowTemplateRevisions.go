@@ -6,65 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/iotthingsgraph/types"
 )
-
-type GetFlowTemplateRevisionsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the workflow.
-	//
-	// The ID should be in the following format.
-	//
-	// urn:tdm:REGION/ACCOUNT ID/default:workflow:WORKFLOWNAME
-	//
-	// Id is a required field
-	Id *string `locationName:"id" type:"string" required:"true"`
-
-	// The maximum number of results to return in the response.
-	MaxResults *int64 `locationName:"maxResults" min:"1" type:"integer"`
-
-	// The string that specifies the next page of results. Use this when you're
-	// paginating results.
-	NextToken *string `locationName:"nextToken" type:"string"`
-}
-
-// String returns the string representation
-func (s GetFlowTemplateRevisionsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetFlowTemplateRevisionsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetFlowTemplateRevisionsInput"}
-
-	if s.Id == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Id"))
-	}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type GetFlowTemplateRevisionsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The string to specify as nextToken when you request the next page of results.
-	NextToken *string `locationName:"nextToken" type:"string"`
-
-	// An array of objects that provide summary data about each revision.
-	Summaries []FlowTemplateSummary `locationName:"summaries" type:"list"`
-}
-
-// String returns the string representation
-func (s GetFlowTemplateRevisionsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetFlowTemplateRevisions = "GetFlowTemplateRevisions"
 
@@ -84,7 +27,7 @@ const opGetFlowTemplateRevisions = "GetFlowTemplateRevisions"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iotthingsgraph-2018-09-06/GetFlowTemplateRevisions
-func (c *Client) GetFlowTemplateRevisionsRequest(input *GetFlowTemplateRevisionsInput) GetFlowTemplateRevisionsRequest {
+func (c *Client) GetFlowTemplateRevisionsRequest(input *types.GetFlowTemplateRevisionsInput) GetFlowTemplateRevisionsRequest {
 	op := &aws.Operation{
 		Name:       opGetFlowTemplateRevisions,
 		HTTPMethod: "POST",
@@ -98,10 +41,10 @@ func (c *Client) GetFlowTemplateRevisionsRequest(input *GetFlowTemplateRevisions
 	}
 
 	if input == nil {
-		input = &GetFlowTemplateRevisionsInput{}
+		input = &types.GetFlowTemplateRevisionsInput{}
 	}
 
-	req := c.newRequest(op, input, &GetFlowTemplateRevisionsOutput{})
+	req := c.newRequest(op, input, &types.GetFlowTemplateRevisionsOutput{})
 	return GetFlowTemplateRevisionsRequest{Request: req, Input: input, Copy: c.GetFlowTemplateRevisionsRequest}
 }
 
@@ -109,8 +52,8 @@ func (c *Client) GetFlowTemplateRevisionsRequest(input *GetFlowTemplateRevisions
 // GetFlowTemplateRevisions API operation.
 type GetFlowTemplateRevisionsRequest struct {
 	*aws.Request
-	Input *GetFlowTemplateRevisionsInput
-	Copy  func(*GetFlowTemplateRevisionsInput) GetFlowTemplateRevisionsRequest
+	Input *types.GetFlowTemplateRevisionsInput
+	Copy  func(*types.GetFlowTemplateRevisionsInput) GetFlowTemplateRevisionsRequest
 }
 
 // Send marshals and sends the GetFlowTemplateRevisions API request.
@@ -122,7 +65,7 @@ func (r GetFlowTemplateRevisionsRequest) Send(ctx context.Context) (*GetFlowTemp
 	}
 
 	resp := &GetFlowTemplateRevisionsResponse{
-		GetFlowTemplateRevisionsOutput: r.Request.Data.(*GetFlowTemplateRevisionsOutput),
+		GetFlowTemplateRevisionsOutput: r.Request.Data.(*types.GetFlowTemplateRevisionsOutput),
 		response:                       &aws.Response{Request: r.Request},
 	}
 
@@ -152,7 +95,7 @@ func NewGetFlowTemplateRevisionsPaginator(req GetFlowTemplateRevisionsRequest) G
 	return GetFlowTemplateRevisionsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *GetFlowTemplateRevisionsInput
+				var inCpy *types.GetFlowTemplateRevisionsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -172,14 +115,14 @@ type GetFlowTemplateRevisionsPaginator struct {
 	aws.Pager
 }
 
-func (p *GetFlowTemplateRevisionsPaginator) CurrentPage() *GetFlowTemplateRevisionsOutput {
-	return p.Pager.CurrentPage().(*GetFlowTemplateRevisionsOutput)
+func (p *GetFlowTemplateRevisionsPaginator) CurrentPage() *types.GetFlowTemplateRevisionsOutput {
+	return p.Pager.CurrentPage().(*types.GetFlowTemplateRevisionsOutput)
 }
 
 // GetFlowTemplateRevisionsResponse is the response type for the
 // GetFlowTemplateRevisions API operation.
 type GetFlowTemplateRevisionsResponse struct {
-	*GetFlowTemplateRevisionsOutput
+	*types.GetFlowTemplateRevisionsOutput
 
 	response *aws.Response
 }

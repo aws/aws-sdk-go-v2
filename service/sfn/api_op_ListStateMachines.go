@@ -6,64 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/sfn/types"
 )
-
-type ListStateMachinesInput struct {
-	_ struct{} `type:"structure"`
-
-	// The maximum number of results that are returned per call. You can use nextToken
-	// to obtain further pages of results. The default is 100 and the maximum allowed
-	// page size is 1000. A value of 0 uses the default.
-	//
-	// This is only an upper limit. The actual number of results returned per call
-	// might be fewer than the specified maximum.
-	MaxResults *int64 `locationName:"maxResults" type:"integer"`
-
-	// If nextToken is returned, there are more results available. The value of
-	// nextToken is a unique pagination token for each page. Make the call again
-	// using the returned token to retrieve the next page. Keep all other arguments
-	// unchanged. Each pagination token expires after 24 hours. Using an expired
-	// pagination token will return an HTTP 400 InvalidToken error.
-	NextToken *string `locationName:"nextToken" min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s ListStateMachinesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListStateMachinesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListStateMachinesInput"}
-	if s.NextToken != nil && len(*s.NextToken) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ListStateMachinesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// If nextToken is returned, there are more results available. The value of
-	// nextToken is a unique pagination token for each page. Make the call again
-	// using the returned token to retrieve the next page. Keep all other arguments
-	// unchanged. Each pagination token expires after 24 hours. Using an expired
-	// pagination token will return an HTTP 400 InvalidToken error.
-	NextToken *string `locationName:"nextToken" min:"1" type:"string"`
-
-	// StateMachines is a required field
-	StateMachines []StateMachineListItem `locationName:"stateMachines" type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s ListStateMachinesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListStateMachines = "ListStateMachines"
 
@@ -89,7 +33,7 @@ const opListStateMachines = "ListStateMachines"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/ListStateMachines
-func (c *Client) ListStateMachinesRequest(input *ListStateMachinesInput) ListStateMachinesRequest {
+func (c *Client) ListStateMachinesRequest(input *types.ListStateMachinesInput) ListStateMachinesRequest {
 	op := &aws.Operation{
 		Name:       opListStateMachines,
 		HTTPMethod: "POST",
@@ -103,10 +47,10 @@ func (c *Client) ListStateMachinesRequest(input *ListStateMachinesInput) ListSta
 	}
 
 	if input == nil {
-		input = &ListStateMachinesInput{}
+		input = &types.ListStateMachinesInput{}
 	}
 
-	req := c.newRequest(op, input, &ListStateMachinesOutput{})
+	req := c.newRequest(op, input, &types.ListStateMachinesOutput{})
 	return ListStateMachinesRequest{Request: req, Input: input, Copy: c.ListStateMachinesRequest}
 }
 
@@ -114,8 +58,8 @@ func (c *Client) ListStateMachinesRequest(input *ListStateMachinesInput) ListSta
 // ListStateMachines API operation.
 type ListStateMachinesRequest struct {
 	*aws.Request
-	Input *ListStateMachinesInput
-	Copy  func(*ListStateMachinesInput) ListStateMachinesRequest
+	Input *types.ListStateMachinesInput
+	Copy  func(*types.ListStateMachinesInput) ListStateMachinesRequest
 }
 
 // Send marshals and sends the ListStateMachines API request.
@@ -127,7 +71,7 @@ func (r ListStateMachinesRequest) Send(ctx context.Context) (*ListStateMachinesR
 	}
 
 	resp := &ListStateMachinesResponse{
-		ListStateMachinesOutput: r.Request.Data.(*ListStateMachinesOutput),
+		ListStateMachinesOutput: r.Request.Data.(*types.ListStateMachinesOutput),
 		response:                &aws.Response{Request: r.Request},
 	}
 
@@ -157,7 +101,7 @@ func NewListStateMachinesPaginator(req ListStateMachinesRequest) ListStateMachin
 	return ListStateMachinesPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListStateMachinesInput
+				var inCpy *types.ListStateMachinesInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -177,14 +121,14 @@ type ListStateMachinesPaginator struct {
 	aws.Pager
 }
 
-func (p *ListStateMachinesPaginator) CurrentPage() *ListStateMachinesOutput {
-	return p.Pager.CurrentPage().(*ListStateMachinesOutput)
+func (p *ListStateMachinesPaginator) CurrentPage() *types.ListStateMachinesOutput {
+	return p.Pager.CurrentPage().(*types.ListStateMachinesOutput)
 }
 
 // ListStateMachinesResponse is the response type for the
 // ListStateMachines API operation.
 type ListStateMachinesResponse struct {
-	*ListStateMachinesOutput
+	*types.ListStateMachinesOutput
 
 	response *aws.Response
 }

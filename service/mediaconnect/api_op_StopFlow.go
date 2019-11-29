@@ -6,81 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/mediaconnect/types"
 )
-
-type StopFlowInput struct {
-	_ struct{} `type:"structure"`
-
-	// FlowArn is a required field
-	FlowArn *string `location:"uri" locationName:"flowArn" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s StopFlowInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *StopFlowInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "StopFlowInput"}
-
-	if s.FlowArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("FlowArn"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s StopFlowInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.FlowArn != nil {
-		v := *s.FlowArn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "flowArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-// The result of a successful StopFlow request.
-type StopFlowOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The ARN of the flow that you stopped.
-	FlowArn *string `locationName:"flowArn" type:"string"`
-
-	// The status of the flow when the StopFlow process begins.
-	Status Status `locationName:"status" type:"string" enum:"true"`
-}
-
-// String returns the string representation
-func (s StopFlowOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s StopFlowOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.FlowArn != nil {
-		v := *s.FlowArn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "flowArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if len(s.Status) > 0 {
-		v := s.Status
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "status", protocol.QuotedValue{ValueMarshaler: v}, metadata)
-	}
-	return nil
-}
 
 const opStopFlow = "StopFlow"
 
@@ -97,7 +24,7 @@ const opStopFlow = "StopFlow"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/StopFlow
-func (c *Client) StopFlowRequest(input *StopFlowInput) StopFlowRequest {
+func (c *Client) StopFlowRequest(input *types.StopFlowInput) StopFlowRequest {
 	op := &aws.Operation{
 		Name:       opStopFlow,
 		HTTPMethod: "POST",
@@ -105,10 +32,10 @@ func (c *Client) StopFlowRequest(input *StopFlowInput) StopFlowRequest {
 	}
 
 	if input == nil {
-		input = &StopFlowInput{}
+		input = &types.StopFlowInput{}
 	}
 
-	req := c.newRequest(op, input, &StopFlowOutput{})
+	req := c.newRequest(op, input, &types.StopFlowOutput{})
 	return StopFlowRequest{Request: req, Input: input, Copy: c.StopFlowRequest}
 }
 
@@ -116,8 +43,8 @@ func (c *Client) StopFlowRequest(input *StopFlowInput) StopFlowRequest {
 // StopFlow API operation.
 type StopFlowRequest struct {
 	*aws.Request
-	Input *StopFlowInput
-	Copy  func(*StopFlowInput) StopFlowRequest
+	Input *types.StopFlowInput
+	Copy  func(*types.StopFlowInput) StopFlowRequest
 }
 
 // Send marshals and sends the StopFlow API request.
@@ -129,7 +56,7 @@ func (r StopFlowRequest) Send(ctx context.Context) (*StopFlowResponse, error) {
 	}
 
 	resp := &StopFlowResponse{
-		StopFlowOutput: r.Request.Data.(*StopFlowOutput),
+		StopFlowOutput: r.Request.Data.(*types.StopFlowOutput),
 		response:       &aws.Response{Request: r.Request},
 	}
 
@@ -139,7 +66,7 @@ func (r StopFlowRequest) Send(ctx context.Context) (*StopFlowResponse, error) {
 // StopFlowResponse is the response type for the
 // StopFlow API operation.
 type StopFlowResponse struct {
-	*StopFlowOutput
+	*types.StopFlowOutput
 
 	response *aws.Response
 }

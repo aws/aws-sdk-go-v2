@@ -6,58 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-type CreateInstanceExportTaskInput struct {
-	_ struct{} `type:"structure"`
-
-	// A description for the conversion task or the resource being exported. The
-	// maximum length is 255 bytes.
-	Description *string `locationName:"description" type:"string"`
-
-	// The format and location for an instance export task.
-	ExportToS3Task *ExportToS3TaskSpecification `locationName:"exportToS3" type:"structure"`
-
-	// The ID of the instance.
-	//
-	// InstanceId is a required field
-	InstanceId *string `locationName:"instanceId" type:"string" required:"true"`
-
-	// The target virtualization environment.
-	TargetEnvironment ExportEnvironment `locationName:"targetEnvironment" type:"string" enum:"true"`
-}
-
-// String returns the string representation
-func (s CreateInstanceExportTaskInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateInstanceExportTaskInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateInstanceExportTaskInput"}
-
-	if s.InstanceId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("InstanceId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type CreateInstanceExportTaskOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Information about the instance export task.
-	ExportTask *ExportTask `locationName:"exportTask" type:"structure"`
-}
-
-// String returns the string representation
-func (s CreateInstanceExportTaskOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCreateInstanceExportTask = "CreateInstanceExportTask"
 
@@ -79,7 +29,7 @@ const opCreateInstanceExportTask = "CreateInstanceExportTask"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateInstanceExportTask
-func (c *Client) CreateInstanceExportTaskRequest(input *CreateInstanceExportTaskInput) CreateInstanceExportTaskRequest {
+func (c *Client) CreateInstanceExportTaskRequest(input *types.CreateInstanceExportTaskInput) CreateInstanceExportTaskRequest {
 	op := &aws.Operation{
 		Name:       opCreateInstanceExportTask,
 		HTTPMethod: "POST",
@@ -87,10 +37,10 @@ func (c *Client) CreateInstanceExportTaskRequest(input *CreateInstanceExportTask
 	}
 
 	if input == nil {
-		input = &CreateInstanceExportTaskInput{}
+		input = &types.CreateInstanceExportTaskInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateInstanceExportTaskOutput{})
+	req := c.newRequest(op, input, &types.CreateInstanceExportTaskOutput{})
 	return CreateInstanceExportTaskRequest{Request: req, Input: input, Copy: c.CreateInstanceExportTaskRequest}
 }
 
@@ -98,8 +48,8 @@ func (c *Client) CreateInstanceExportTaskRequest(input *CreateInstanceExportTask
 // CreateInstanceExportTask API operation.
 type CreateInstanceExportTaskRequest struct {
 	*aws.Request
-	Input *CreateInstanceExportTaskInput
-	Copy  func(*CreateInstanceExportTaskInput) CreateInstanceExportTaskRequest
+	Input *types.CreateInstanceExportTaskInput
+	Copy  func(*types.CreateInstanceExportTaskInput) CreateInstanceExportTaskRequest
 }
 
 // Send marshals and sends the CreateInstanceExportTask API request.
@@ -111,7 +61,7 @@ func (r CreateInstanceExportTaskRequest) Send(ctx context.Context) (*CreateInsta
 	}
 
 	resp := &CreateInstanceExportTaskResponse{
-		CreateInstanceExportTaskOutput: r.Request.Data.(*CreateInstanceExportTaskOutput),
+		CreateInstanceExportTaskOutput: r.Request.Data.(*types.CreateInstanceExportTaskOutput),
 		response:                       &aws.Response{Request: r.Request},
 	}
 
@@ -121,7 +71,7 @@ func (r CreateInstanceExportTaskRequest) Send(ctx context.Context) (*CreateInsta
 // CreateInstanceExportTaskResponse is the response type for the
 // CreateInstanceExportTask API operation.
 type CreateInstanceExportTaskResponse struct {
-	*CreateInstanceExportTaskOutput
+	*types.CreateInstanceExportTaskOutput
 
 	response *aws.Response
 }

@@ -6,86 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/directconnect/types"
 )
-
-type ConfirmTransitVirtualInterfaceInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the Direct Connect gateway.
-	//
-	// DirectConnectGatewayId is a required field
-	DirectConnectGatewayId *string `locationName:"directConnectGatewayId" type:"string" required:"true"`
-
-	// The ID of the virtual interface.
-	//
-	// VirtualInterfaceId is a required field
-	VirtualInterfaceId *string `locationName:"virtualInterfaceId" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s ConfirmTransitVirtualInterfaceInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ConfirmTransitVirtualInterfaceInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ConfirmTransitVirtualInterfaceInput"}
-
-	if s.DirectConnectGatewayId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DirectConnectGatewayId"))
-	}
-
-	if s.VirtualInterfaceId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("VirtualInterfaceId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ConfirmTransitVirtualInterfaceOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The state of the virtual interface. The following are the possible values:
-	//
-	//    * confirming: The creation of the virtual interface is pending confirmation
-	//    from the virtual interface owner. If the owner of the virtual interface
-	//    is different from the owner of the connection on which it is provisioned,
-	//    then the virtual interface will remain in this state until it is confirmed
-	//    by the virtual interface owner.
-	//
-	//    * verifying: This state only applies to public virtual interfaces. Each
-	//    public virtual interface needs validation before the virtual interface
-	//    can be created.
-	//
-	//    * pending: A virtual interface is in this state from the time that it
-	//    is created until the virtual interface is ready to forward traffic.
-	//
-	//    * available: A virtual interface that is able to forward traffic.
-	//
-	//    * down: A virtual interface that is BGP down.
-	//
-	//    * deleting: A virtual interface is in this state immediately after calling
-	//    DeleteVirtualInterface until it can no longer forward traffic.
-	//
-	//    * deleted: A virtual interface that cannot forward traffic.
-	//
-	//    * rejected: The virtual interface owner has declined creation of the virtual
-	//    interface. If a virtual interface in the Confirming state is deleted by
-	//    the virtual interface owner, the virtual interface enters the Rejected
-	//    state.
-	//
-	//    * unknown: The state of the virtual interface is not available.
-	VirtualInterfaceState VirtualInterfaceState `locationName:"virtualInterfaceState" type:"string" enum:"true"`
-}
-
-// String returns the string representation
-func (s ConfirmTransitVirtualInterfaceOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opConfirmTransitVirtualInterface = "ConfirmTransitVirtualInterface"
 
@@ -105,7 +27,7 @@ const opConfirmTransitVirtualInterface = "ConfirmTransitVirtualInterface"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/ConfirmTransitVirtualInterface
-func (c *Client) ConfirmTransitVirtualInterfaceRequest(input *ConfirmTransitVirtualInterfaceInput) ConfirmTransitVirtualInterfaceRequest {
+func (c *Client) ConfirmTransitVirtualInterfaceRequest(input *types.ConfirmTransitVirtualInterfaceInput) ConfirmTransitVirtualInterfaceRequest {
 	op := &aws.Operation{
 		Name:       opConfirmTransitVirtualInterface,
 		HTTPMethod: "POST",
@@ -113,10 +35,10 @@ func (c *Client) ConfirmTransitVirtualInterfaceRequest(input *ConfirmTransitVirt
 	}
 
 	if input == nil {
-		input = &ConfirmTransitVirtualInterfaceInput{}
+		input = &types.ConfirmTransitVirtualInterfaceInput{}
 	}
 
-	req := c.newRequest(op, input, &ConfirmTransitVirtualInterfaceOutput{})
+	req := c.newRequest(op, input, &types.ConfirmTransitVirtualInterfaceOutput{})
 	return ConfirmTransitVirtualInterfaceRequest{Request: req, Input: input, Copy: c.ConfirmTransitVirtualInterfaceRequest}
 }
 
@@ -124,8 +46,8 @@ func (c *Client) ConfirmTransitVirtualInterfaceRequest(input *ConfirmTransitVirt
 // ConfirmTransitVirtualInterface API operation.
 type ConfirmTransitVirtualInterfaceRequest struct {
 	*aws.Request
-	Input *ConfirmTransitVirtualInterfaceInput
-	Copy  func(*ConfirmTransitVirtualInterfaceInput) ConfirmTransitVirtualInterfaceRequest
+	Input *types.ConfirmTransitVirtualInterfaceInput
+	Copy  func(*types.ConfirmTransitVirtualInterfaceInput) ConfirmTransitVirtualInterfaceRequest
 }
 
 // Send marshals and sends the ConfirmTransitVirtualInterface API request.
@@ -137,7 +59,7 @@ func (r ConfirmTransitVirtualInterfaceRequest) Send(ctx context.Context) (*Confi
 	}
 
 	resp := &ConfirmTransitVirtualInterfaceResponse{
-		ConfirmTransitVirtualInterfaceOutput: r.Request.Data.(*ConfirmTransitVirtualInterfaceOutput),
+		ConfirmTransitVirtualInterfaceOutput: r.Request.Data.(*types.ConfirmTransitVirtualInterfaceOutput),
 		response:                             &aws.Response{Request: r.Request},
 	}
 
@@ -147,7 +69,7 @@ func (r ConfirmTransitVirtualInterfaceRequest) Send(ctx context.Context) (*Confi
 // ConfirmTransitVirtualInterfaceResponse is the response type for the
 // ConfirmTransitVirtualInterface API operation.
 type ConfirmTransitVirtualInterfaceResponse struct {
-	*ConfirmTransitVirtualInterfaceOutput
+	*types.ConfirmTransitVirtualInterfaceOutput
 
 	response *aws.Response
 }

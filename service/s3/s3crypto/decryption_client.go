@@ -9,6 +9,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/kms"
 	"github.com/aws/aws-sdk-go-v2/service/s3"
 	"github.com/aws/aws-sdk-go-v2/service/s3/s3iface"
+	"github.com/aws/aws-sdk-go-v2/service/s3/types"
 )
 
 // WrapEntry is builder that return a proper key decrypter and error
@@ -84,9 +85,9 @@ func NewDecryptionClient(cfg aws.Config, options ...func(*DecryptionClient)) *De
 //	  Bucket: aws.String("testBucket"),
 //	})
 //	err := req.Send()
-func (c *DecryptionClient) GetObjectRequest(input *s3.GetObjectInput) s3.GetObjectRequest {
+func (c *DecryptionClient) GetObjectRequest(input *types.GetObjectInput) s3.GetObjectRequest {
 	req := c.S3Client.GetObjectRequest(input)
-	out := req.Data.(*s3.GetObjectOutput)
+	out := req.Data.(*types.GetObjectOutput)
 
 	req.Handlers.Unmarshal.PushBack(func(r *request.Request) {
 		env, err := c.LoadStrategy.Load(r)
@@ -117,7 +118,7 @@ func (c *DecryptionClient) GetObjectRequest(input *s3.GetObjectInput) s3.GetObje
 }
 
 // GetObject is a wrapper for GetObjectRequest
-func (c *DecryptionClient) GetObject(input *s3.GetObjectInput) (*s3.GetObjectOutput, error) {
+func (c *DecryptionClient) GetObject(input *types.GetObjectInput) (*types.GetObjectOutput, error) {
 	req := c.GetObjectRequest(input)
 	resp, err := req.Send(context.Background())
 	if err != nil {
@@ -133,7 +134,7 @@ func (c *DecryptionClient) GetObject(input *s3.GetObjectInput) (*s3.GetObjectOut
 // Context input parameters. The Context must not be nil. A nil Context will
 // cause a panic. Use the Context to add deadlining, timeouts, ect. In the future
 // this may create sub-contexts for individual underlying requests.
-func (c *DecryptionClient) GetObjectWithContext(ctx context.Context, input *s3.GetObjectInput, opts ...request.Option) (*s3.GetObjectOutput, error) {
+func (c *DecryptionClient) GetObjectWithContext(ctx context.Context, input *types.GetObjectInput, opts ...request.Option) (*types.GetObjectOutput, error) {
 	req := c.GetObjectRequest(input)
 	req.ApplyOptions(opts...)
 	resp, err := req.Send(ctx)

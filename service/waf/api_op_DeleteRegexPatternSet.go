@@ -6,66 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/waf/types"
 )
-
-type DeleteRegexPatternSetInput struct {
-	_ struct{} `type:"structure"`
-
-	// The value returned by the most recent call to GetChangeToken.
-	//
-	// ChangeToken is a required field
-	ChangeToken *string `min:"1" type:"string" required:"true"`
-
-	// The RegexPatternSetId of the RegexPatternSet that you want to delete. RegexPatternSetId
-	// is returned by CreateRegexPatternSet and by ListRegexPatternSets.
-	//
-	// RegexPatternSetId is a required field
-	RegexPatternSetId *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteRegexPatternSetInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteRegexPatternSetInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteRegexPatternSetInput"}
-
-	if s.ChangeToken == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ChangeToken"))
-	}
-	if s.ChangeToken != nil && len(*s.ChangeToken) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ChangeToken", 1))
-	}
-
-	if s.RegexPatternSetId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("RegexPatternSetId"))
-	}
-	if s.RegexPatternSetId != nil && len(*s.RegexPatternSetId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("RegexPatternSetId", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteRegexPatternSetOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The ChangeToken that you used to submit the DeleteRegexPatternSet request.
-	// You can also use this value to query the status of the request. For more
-	// information, see GetChangeTokenStatus.
-	ChangeToken *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s DeleteRegexPatternSetOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteRegexPatternSet = "DeleteRegexPatternSet"
 
@@ -84,7 +26,7 @@ const opDeleteRegexPatternSet = "DeleteRegexPatternSet"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/DeleteRegexPatternSet
-func (c *Client) DeleteRegexPatternSetRequest(input *DeleteRegexPatternSetInput) DeleteRegexPatternSetRequest {
+func (c *Client) DeleteRegexPatternSetRequest(input *types.DeleteRegexPatternSetInput) DeleteRegexPatternSetRequest {
 	op := &aws.Operation{
 		Name:       opDeleteRegexPatternSet,
 		HTTPMethod: "POST",
@@ -92,10 +34,10 @@ func (c *Client) DeleteRegexPatternSetRequest(input *DeleteRegexPatternSetInput)
 	}
 
 	if input == nil {
-		input = &DeleteRegexPatternSetInput{}
+		input = &types.DeleteRegexPatternSetInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteRegexPatternSetOutput{})
+	req := c.newRequest(op, input, &types.DeleteRegexPatternSetOutput{})
 	return DeleteRegexPatternSetRequest{Request: req, Input: input, Copy: c.DeleteRegexPatternSetRequest}
 }
 
@@ -103,8 +45,8 @@ func (c *Client) DeleteRegexPatternSetRequest(input *DeleteRegexPatternSetInput)
 // DeleteRegexPatternSet API operation.
 type DeleteRegexPatternSetRequest struct {
 	*aws.Request
-	Input *DeleteRegexPatternSetInput
-	Copy  func(*DeleteRegexPatternSetInput) DeleteRegexPatternSetRequest
+	Input *types.DeleteRegexPatternSetInput
+	Copy  func(*types.DeleteRegexPatternSetInput) DeleteRegexPatternSetRequest
 }
 
 // Send marshals and sends the DeleteRegexPatternSet API request.
@@ -116,7 +58,7 @@ func (r DeleteRegexPatternSetRequest) Send(ctx context.Context) (*DeleteRegexPat
 	}
 
 	resp := &DeleteRegexPatternSetResponse{
-		DeleteRegexPatternSetOutput: r.Request.Data.(*DeleteRegexPatternSetOutput),
+		DeleteRegexPatternSetOutput: r.Request.Data.(*types.DeleteRegexPatternSetOutput),
 		response:                    &aws.Response{Request: r.Request},
 	}
 
@@ -126,7 +68,7 @@ func (r DeleteRegexPatternSetRequest) Send(ctx context.Context) (*DeleteRegexPat
 // DeleteRegexPatternSetResponse is the response type for the
 // DeleteRegexPatternSet API operation.
 type DeleteRegexPatternSetResponse struct {
-	*DeleteRegexPatternSetOutput
+	*types.DeleteRegexPatternSetOutput
 
 	response *aws.Response
 }

@@ -6,73 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/pinpoint/types"
 )
-
-type DeleteSmsTemplateInput struct {
-	_ struct{} `type:"structure"`
-
-	// TemplateName is a required field
-	TemplateName *string `location:"uri" locationName:"template-name" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteSmsTemplateInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteSmsTemplateInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteSmsTemplateInput"}
-
-	if s.TemplateName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("TemplateName"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteSmsTemplateInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.TemplateName != nil {
-		v := *s.TemplateName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "template-name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type DeleteSmsTemplateOutput struct {
-	_ struct{} `type:"structure" payload:"MessageBody"`
-
-	// Provides information about an API request or response.
-	//
-	// MessageBody is a required field
-	MessageBody *MessageBody `type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteSmsTemplateOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteSmsTemplateOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.MessageBody != nil {
-		v := s.MessageBody
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.PayloadTarget, "MessageBody", v, metadata)
-	}
-	return nil
-}
 
 const opDeleteSmsTemplate = "DeleteSmsTemplate"
 
@@ -90,7 +25,7 @@ const opDeleteSmsTemplate = "DeleteSmsTemplate"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/DeleteSmsTemplate
-func (c *Client) DeleteSmsTemplateRequest(input *DeleteSmsTemplateInput) DeleteSmsTemplateRequest {
+func (c *Client) DeleteSmsTemplateRequest(input *types.DeleteSmsTemplateInput) DeleteSmsTemplateRequest {
 	op := &aws.Operation{
 		Name:       opDeleteSmsTemplate,
 		HTTPMethod: "DELETE",
@@ -98,10 +33,10 @@ func (c *Client) DeleteSmsTemplateRequest(input *DeleteSmsTemplateInput) DeleteS
 	}
 
 	if input == nil {
-		input = &DeleteSmsTemplateInput{}
+		input = &types.DeleteSmsTemplateInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteSmsTemplateOutput{})
+	req := c.newRequest(op, input, &types.DeleteSmsTemplateOutput{})
 	return DeleteSmsTemplateRequest{Request: req, Input: input, Copy: c.DeleteSmsTemplateRequest}
 }
 
@@ -109,8 +44,8 @@ func (c *Client) DeleteSmsTemplateRequest(input *DeleteSmsTemplateInput) DeleteS
 // DeleteSmsTemplate API operation.
 type DeleteSmsTemplateRequest struct {
 	*aws.Request
-	Input *DeleteSmsTemplateInput
-	Copy  func(*DeleteSmsTemplateInput) DeleteSmsTemplateRequest
+	Input *types.DeleteSmsTemplateInput
+	Copy  func(*types.DeleteSmsTemplateInput) DeleteSmsTemplateRequest
 }
 
 // Send marshals and sends the DeleteSmsTemplate API request.
@@ -122,7 +57,7 @@ func (r DeleteSmsTemplateRequest) Send(ctx context.Context) (*DeleteSmsTemplateR
 	}
 
 	resp := &DeleteSmsTemplateResponse{
-		DeleteSmsTemplateOutput: r.Request.Data.(*DeleteSmsTemplateOutput),
+		DeleteSmsTemplateOutput: r.Request.Data.(*types.DeleteSmsTemplateOutput),
 		response:                &aws.Response{Request: r.Request},
 	}
 
@@ -132,7 +67,7 @@ func (r DeleteSmsTemplateRequest) Send(ctx context.Context) (*DeleteSmsTemplateR
 // DeleteSmsTemplateResponse is the response type for the
 // DeleteSmsTemplate API operation.
 type DeleteSmsTemplateResponse struct {
-	*DeleteSmsTemplateOutput
+	*types.DeleteSmsTemplateOutput
 
 	response *aws.Response
 }

@@ -10,6 +10,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting/unit"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/service/glacier"
+	"github.com/aws/aws-sdk-go-v2/service/glacier/types"
 )
 
 var (
@@ -25,7 +26,7 @@ var (
 )
 
 func TestCustomizations(t *testing.T) {
-	req := svc.UploadArchiveRequest(&glacier.UploadArchiveInput{
+	req := svc.UploadArchiveRequest(&types.UploadArchiveInput{
 		VaultName: aws.String("vault"),
 		Body:      payloadBuf,
 	})
@@ -57,7 +58,7 @@ func TestCustomizations(t *testing.T) {
 }
 
 func TestShortcircuitTreehash(t *testing.T) {
-	req := svc.UploadArchiveRequest(&glacier.UploadArchiveInput{
+	req := svc.UploadArchiveRequest(&types.UploadArchiveInput{
 		VaultName: aws.String("vault"),
 		Body:      payloadBuf,
 		Checksum:  aws.String("000"),
@@ -97,7 +98,7 @@ func TestFillAccountIDWithNilStruct(t *testing.T) {
 }
 
 func TestHashOnce(t *testing.T) {
-	req := svc.UploadArchiveRequest(&glacier.UploadArchiveInput{
+	req := svc.UploadArchiveRequest(&types.UploadArchiveInput{
 		VaultName: aws.String("vault"),
 		Body:      payloadBuf,
 	})

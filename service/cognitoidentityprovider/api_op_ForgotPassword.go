@@ -6,115 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/types"
 )
-
-// Represents the request to reset a user's password.
-type ForgotPasswordInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Pinpoint analytics metadata for collecting metrics for ForgotPassword
-	// calls.
-	AnalyticsMetadata *AnalyticsMetadataType `type:"structure"`
-
-	// The ID of the client associated with the user pool.
-	//
-	// ClientId is a required field
-	ClientId *string `min:"1" type:"string" required:"true" sensitive:"true"`
-
-	// A map of custom key-value pairs that you can provide as input for any custom
-	// workflows that this action triggers.
-	//
-	// You create custom workflows by assigning AWS Lambda functions to user pool
-	// triggers. When you use the ForgotPassword API action, Amazon Cognito invokes
-	// any functions that are assigned to the following triggers: pre sign-up, custom
-	// message, and user migration. When Amazon Cognito invokes any of these functions,
-	// it passes a JSON payload, which the function receives as input. This payload
-	// contains a clientMetadata attribute, which provides the data that you assigned
-	// to the ClientMetadata parameter in your ForgotPassword request. In your function
-	// code in AWS Lambda, you can process the clientMetadata value to enhance your
-	// workflow for your specific needs.
-	//
-	// For more information, see Customizing User Pool Workflows with Lambda Triggers
-	// (https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools-working-with-aws-lambda-triggers.html)
-	// in the Amazon Cognito Developer Guide.
-	//
-	// Take the following limitations into consideration when you use the ClientMetadata
-	// parameter:
-	//
-	//    * Amazon Cognito does not store the ClientMetadata value. This data is
-	//    available only to AWS Lambda triggers that are assigned to a user pool
-	//    to support custom workflows. If your user pool configuration does not
-	//    include triggers, the ClientMetadata parameter serves no purpose.
-	//
-	//    * Amazon Cognito does not validate the ClientMetadata value.
-	//
-	//    * Amazon Cognito does not encrypt the the ClientMetadata value, so don't
-	//    use it to provide sensitive information.
-	ClientMetadata map[string]string `type:"map"`
-
-	// A keyed-hash message authentication code (HMAC) calculated using the secret
-	// key of a user pool client and username plus the client ID in the message.
-	SecretHash *string `min:"1" type:"string" sensitive:"true"`
-
-	// Contextual data such as the user's device fingerprint, IP address, or location
-	// used for evaluating the risk of an unexpected event by Amazon Cognito advanced
-	// security.
-	UserContextData *UserContextDataType `type:"structure"`
-
-	// The user name of the user for whom you want to enter a code to reset a forgotten
-	// password.
-	//
-	// Username is a required field
-	Username *string `min:"1" type:"string" required:"true" sensitive:"true"`
-}
-
-// String returns the string representation
-func (s ForgotPasswordInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ForgotPasswordInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ForgotPasswordInput"}
-
-	if s.ClientId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ClientId"))
-	}
-	if s.ClientId != nil && len(*s.ClientId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ClientId", 1))
-	}
-	if s.SecretHash != nil && len(*s.SecretHash) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("SecretHash", 1))
-	}
-
-	if s.Username == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Username"))
-	}
-	if s.Username != nil && len(*s.Username) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Username", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Respresents the response from the server regarding the request to reset a
-// password.
-type ForgotPasswordOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The code delivery details returned by the server in response to the request
-	// to reset a password.
-	CodeDeliveryDetails *CodeDeliveryDetailsType `type:"structure"`
-}
-
-// String returns the string representation
-func (s ForgotPasswordOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opForgotPassword = "ForgotPassword"
 
@@ -137,7 +30,7 @@ const opForgotPassword = "ForgotPassword"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/ForgotPassword
-func (c *Client) ForgotPasswordRequest(input *ForgotPasswordInput) ForgotPasswordRequest {
+func (c *Client) ForgotPasswordRequest(input *types.ForgotPasswordInput) ForgotPasswordRequest {
 	op := &aws.Operation{
 		Name:       opForgotPassword,
 		HTTPMethod: "POST",
@@ -145,10 +38,10 @@ func (c *Client) ForgotPasswordRequest(input *ForgotPasswordInput) ForgotPasswor
 	}
 
 	if input == nil {
-		input = &ForgotPasswordInput{}
+		input = &types.ForgotPasswordInput{}
 	}
 
-	req := c.newRequest(op, input, &ForgotPasswordOutput{})
+	req := c.newRequest(op, input, &types.ForgotPasswordOutput{})
 	req.Config.Credentials = aws.AnonymousCredentials
 	return ForgotPasswordRequest{Request: req, Input: input, Copy: c.ForgotPasswordRequest}
 }
@@ -157,8 +50,8 @@ func (c *Client) ForgotPasswordRequest(input *ForgotPasswordInput) ForgotPasswor
 // ForgotPassword API operation.
 type ForgotPasswordRequest struct {
 	*aws.Request
-	Input *ForgotPasswordInput
-	Copy  func(*ForgotPasswordInput) ForgotPasswordRequest
+	Input *types.ForgotPasswordInput
+	Copy  func(*types.ForgotPasswordInput) ForgotPasswordRequest
 }
 
 // Send marshals and sends the ForgotPassword API request.
@@ -170,7 +63,7 @@ func (r ForgotPasswordRequest) Send(ctx context.Context) (*ForgotPasswordRespons
 	}
 
 	resp := &ForgotPasswordResponse{
-		ForgotPasswordOutput: r.Request.Data.(*ForgotPasswordOutput),
+		ForgotPasswordOutput: r.Request.Data.(*types.ForgotPasswordOutput),
 		response:             &aws.Response{Request: r.Request},
 	}
 
@@ -180,7 +73,7 @@ func (r ForgotPasswordRequest) Send(ctx context.Context) (*ForgotPasswordRespons
 // ForgotPasswordResponse is the response type for the
 // ForgotPassword API operation.
 type ForgotPasswordResponse struct {
-	*ForgotPasswordOutput
+	*types.ForgotPasswordOutput
 
 	response *aws.Response
 }

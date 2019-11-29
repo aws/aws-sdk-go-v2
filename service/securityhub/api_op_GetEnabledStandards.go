@@ -6,116 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/securityhub/types"
 )
-
-type GetEnabledStandardsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The maximum number of results to return in the response.
-	MaxResults *int64 `min:"1" type:"integer"`
-
-	// Paginates results. On your first call to the GetEnabledStandards operation,
-	// set the value of this parameter to NULL. For subsequent calls to the operation,
-	// fill nextToken in the request with the value of nextToken from the previous
-	// response to continue listing data.
-	NextToken *string `type:"string"`
-
-	// A list of the standards subscription ARNs for the standards to retrieve.
-	StandardsSubscriptionArns []string `min:"1" type:"list"`
-}
-
-// String returns the string representation
-func (s GetEnabledStandardsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetEnabledStandardsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetEnabledStandardsInput"}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-	if s.StandardsSubscriptionArns != nil && len(s.StandardsSubscriptionArns) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("StandardsSubscriptionArns", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetEnabledStandardsInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.MaxResults != nil {
-		v := *s.MaxResults
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "MaxResults", protocol.Int64Value(v), metadata)
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.StandardsSubscriptionArns != nil {
-		v := s.StandardsSubscriptionArns
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "StandardsSubscriptionArns", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
-		}
-		ls0.End()
-
-	}
-	return nil
-}
-
-type GetEnabledStandardsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The token that is required for pagination.
-	NextToken *string `type:"string"`
-
-	// A list of StandardsSubscriptions objects that include information about the
-	// enabled standards.
-	StandardsSubscriptions []StandardsSubscription `type:"list"`
-}
-
-// String returns the string representation
-func (s GetEnabledStandardsOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetEnabledStandardsOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.StandardsSubscriptions != nil {
-		v := s.StandardsSubscriptions
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "StandardsSubscriptions", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	return nil
-}
 
 const opGetEnabledStandards = "GetEnabledStandards"
 
@@ -132,7 +24,7 @@ const opGetEnabledStandards = "GetEnabledStandards"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/GetEnabledStandards
-func (c *Client) GetEnabledStandardsRequest(input *GetEnabledStandardsInput) GetEnabledStandardsRequest {
+func (c *Client) GetEnabledStandardsRequest(input *types.GetEnabledStandardsInput) GetEnabledStandardsRequest {
 	op := &aws.Operation{
 		Name:       opGetEnabledStandards,
 		HTTPMethod: "POST",
@@ -140,10 +32,10 @@ func (c *Client) GetEnabledStandardsRequest(input *GetEnabledStandardsInput) Get
 	}
 
 	if input == nil {
-		input = &GetEnabledStandardsInput{}
+		input = &types.GetEnabledStandardsInput{}
 	}
 
-	req := c.newRequest(op, input, &GetEnabledStandardsOutput{})
+	req := c.newRequest(op, input, &types.GetEnabledStandardsOutput{})
 	return GetEnabledStandardsRequest{Request: req, Input: input, Copy: c.GetEnabledStandardsRequest}
 }
 
@@ -151,8 +43,8 @@ func (c *Client) GetEnabledStandardsRequest(input *GetEnabledStandardsInput) Get
 // GetEnabledStandards API operation.
 type GetEnabledStandardsRequest struct {
 	*aws.Request
-	Input *GetEnabledStandardsInput
-	Copy  func(*GetEnabledStandardsInput) GetEnabledStandardsRequest
+	Input *types.GetEnabledStandardsInput
+	Copy  func(*types.GetEnabledStandardsInput) GetEnabledStandardsRequest
 }
 
 // Send marshals and sends the GetEnabledStandards API request.
@@ -164,7 +56,7 @@ func (r GetEnabledStandardsRequest) Send(ctx context.Context) (*GetEnabledStanda
 	}
 
 	resp := &GetEnabledStandardsResponse{
-		GetEnabledStandardsOutput: r.Request.Data.(*GetEnabledStandardsOutput),
+		GetEnabledStandardsOutput: r.Request.Data.(*types.GetEnabledStandardsOutput),
 		response:                  &aws.Response{Request: r.Request},
 	}
 
@@ -174,7 +66,7 @@ func (r GetEnabledStandardsRequest) Send(ctx context.Context) (*GetEnabledStanda
 // GetEnabledStandardsResponse is the response type for the
 // GetEnabledStandards API operation.
 type GetEnabledStandardsResponse struct {
-	*GetEnabledStandardsOutput
+	*types.GetEnabledStandardsOutput
 
 	response *aws.Response
 }

@@ -6,62 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/mturk/types"
 )
-
-type UpdateNotificationSettingsInput struct {
-	_ struct{} `type:"structure"`
-
-	// Specifies whether notifications are sent for HITs of this HIT type, according
-	// to the notification specification. You must specify either the Notification
-	// parameter or the Active parameter for the call to UpdateNotificationSettings
-	// to succeed.
-	Active *bool `type:"boolean"`
-
-	// The ID of the HIT type whose notification specification is being updated.
-	//
-	// HITTypeId is a required field
-	HITTypeId *string `min:"1" type:"string" required:"true"`
-
-	// The notification specification for the HIT type.
-	Notification *NotificationSpecification `type:"structure"`
-}
-
-// String returns the string representation
-func (s UpdateNotificationSettingsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateNotificationSettingsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateNotificationSettingsInput"}
-
-	if s.HITTypeId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("HITTypeId"))
-	}
-	if s.HITTypeId != nil && len(*s.HITTypeId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("HITTypeId", 1))
-	}
-	if s.Notification != nil {
-		if err := s.Notification.Validate(); err != nil {
-			invalidParams.AddNested("Notification", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type UpdateNotificationSettingsOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s UpdateNotificationSettingsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opUpdateNotificationSettings = "UpdateNotificationSettings"
 
@@ -87,7 +33,7 @@ const opUpdateNotificationSettings = "UpdateNotificationSettings"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/UpdateNotificationSettings
-func (c *Client) UpdateNotificationSettingsRequest(input *UpdateNotificationSettingsInput) UpdateNotificationSettingsRequest {
+func (c *Client) UpdateNotificationSettingsRequest(input *types.UpdateNotificationSettingsInput) UpdateNotificationSettingsRequest {
 	op := &aws.Operation{
 		Name:       opUpdateNotificationSettings,
 		HTTPMethod: "POST",
@@ -95,10 +41,10 @@ func (c *Client) UpdateNotificationSettingsRequest(input *UpdateNotificationSett
 	}
 
 	if input == nil {
-		input = &UpdateNotificationSettingsInput{}
+		input = &types.UpdateNotificationSettingsInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateNotificationSettingsOutput{})
+	req := c.newRequest(op, input, &types.UpdateNotificationSettingsOutput{})
 	return UpdateNotificationSettingsRequest{Request: req, Input: input, Copy: c.UpdateNotificationSettingsRequest}
 }
 
@@ -106,8 +52,8 @@ func (c *Client) UpdateNotificationSettingsRequest(input *UpdateNotificationSett
 // UpdateNotificationSettings API operation.
 type UpdateNotificationSettingsRequest struct {
 	*aws.Request
-	Input *UpdateNotificationSettingsInput
-	Copy  func(*UpdateNotificationSettingsInput) UpdateNotificationSettingsRequest
+	Input *types.UpdateNotificationSettingsInput
+	Copy  func(*types.UpdateNotificationSettingsInput) UpdateNotificationSettingsRequest
 }
 
 // Send marshals and sends the UpdateNotificationSettings API request.
@@ -119,7 +65,7 @@ func (r UpdateNotificationSettingsRequest) Send(ctx context.Context) (*UpdateNot
 	}
 
 	resp := &UpdateNotificationSettingsResponse{
-		UpdateNotificationSettingsOutput: r.Request.Data.(*UpdateNotificationSettingsOutput),
+		UpdateNotificationSettingsOutput: r.Request.Data.(*types.UpdateNotificationSettingsOutput),
 		response:                         &aws.Response{Request: r.Request},
 	}
 
@@ -129,7 +75,7 @@ func (r UpdateNotificationSettingsRequest) Send(ctx context.Context) (*UpdateNot
 // UpdateNotificationSettingsResponse is the response type for the
 // UpdateNotificationSettings API operation.
 type UpdateNotificationSettingsResponse struct {
-	*UpdateNotificationSettingsOutput
+	*types.UpdateNotificationSettingsOutput
 
 	response *aws.Response
 }

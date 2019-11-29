@@ -6,48 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/mediastore/types"
 )
-
-type StopAccessLoggingInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the container that you want to stop access logging on.
-	//
-	// ContainerName is a required field
-	ContainerName *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s StopAccessLoggingInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *StopAccessLoggingInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "StopAccessLoggingInput"}
-
-	if s.ContainerName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ContainerName"))
-	}
-	if s.ContainerName != nil && len(*s.ContainerName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ContainerName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type StopAccessLoggingOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s StopAccessLoggingOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opStopAccessLogging = "StopAccessLogging"
 
@@ -66,7 +26,7 @@ const opStopAccessLogging = "StopAccessLogging"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mediastore-2017-09-01/StopAccessLogging
-func (c *Client) StopAccessLoggingRequest(input *StopAccessLoggingInput) StopAccessLoggingRequest {
+func (c *Client) StopAccessLoggingRequest(input *types.StopAccessLoggingInput) StopAccessLoggingRequest {
 	op := &aws.Operation{
 		Name:       opStopAccessLogging,
 		HTTPMethod: "POST",
@@ -74,10 +34,10 @@ func (c *Client) StopAccessLoggingRequest(input *StopAccessLoggingInput) StopAcc
 	}
 
 	if input == nil {
-		input = &StopAccessLoggingInput{}
+		input = &types.StopAccessLoggingInput{}
 	}
 
-	req := c.newRequest(op, input, &StopAccessLoggingOutput{})
+	req := c.newRequest(op, input, &types.StopAccessLoggingOutput{})
 	return StopAccessLoggingRequest{Request: req, Input: input, Copy: c.StopAccessLoggingRequest}
 }
 
@@ -85,8 +45,8 @@ func (c *Client) StopAccessLoggingRequest(input *StopAccessLoggingInput) StopAcc
 // StopAccessLogging API operation.
 type StopAccessLoggingRequest struct {
 	*aws.Request
-	Input *StopAccessLoggingInput
-	Copy  func(*StopAccessLoggingInput) StopAccessLoggingRequest
+	Input *types.StopAccessLoggingInput
+	Copy  func(*types.StopAccessLoggingInput) StopAccessLoggingRequest
 }
 
 // Send marshals and sends the StopAccessLogging API request.
@@ -98,7 +58,7 @@ func (r StopAccessLoggingRequest) Send(ctx context.Context) (*StopAccessLoggingR
 	}
 
 	resp := &StopAccessLoggingResponse{
-		StopAccessLoggingOutput: r.Request.Data.(*StopAccessLoggingOutput),
+		StopAccessLoggingOutput: r.Request.Data.(*types.StopAccessLoggingOutput),
 		response:                &aws.Response{Request: r.Request},
 	}
 
@@ -108,7 +68,7 @@ func (r StopAccessLoggingRequest) Send(ctx context.Context) (*StopAccessLoggingR
 // StopAccessLoggingResponse is the response type for the
 // StopAccessLogging API operation.
 type StopAccessLoggingResponse struct {
-	*StopAccessLoggingOutput
+	*types.StopAccessLoggingOutput
 
 	response *aws.Response
 }

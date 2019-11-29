@@ -6,49 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/cloudhsmv2/types"
 )
-
-type RestoreBackupInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the backup to be restored. To find the ID of a backup, use the
-	// DescribeBackups operation.
-	//
-	// BackupId is a required field
-	BackupId *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s RestoreBackupInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *RestoreBackupInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "RestoreBackupInput"}
-
-	if s.BackupId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("BackupId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type RestoreBackupOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Information on the Backup object created.
-	Backup *Backup `type:"structure"`
-}
-
-// String returns the string representation
-func (s RestoreBackupOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opRestoreBackup = "RestoreBackup"
 
@@ -66,7 +25,7 @@ const opRestoreBackup = "RestoreBackup"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudhsmv2-2017-04-28/RestoreBackup
-func (c *Client) RestoreBackupRequest(input *RestoreBackupInput) RestoreBackupRequest {
+func (c *Client) RestoreBackupRequest(input *types.RestoreBackupInput) RestoreBackupRequest {
 	op := &aws.Operation{
 		Name:       opRestoreBackup,
 		HTTPMethod: "POST",
@@ -74,10 +33,10 @@ func (c *Client) RestoreBackupRequest(input *RestoreBackupInput) RestoreBackupRe
 	}
 
 	if input == nil {
-		input = &RestoreBackupInput{}
+		input = &types.RestoreBackupInput{}
 	}
 
-	req := c.newRequest(op, input, &RestoreBackupOutput{})
+	req := c.newRequest(op, input, &types.RestoreBackupOutput{})
 	return RestoreBackupRequest{Request: req, Input: input, Copy: c.RestoreBackupRequest}
 }
 
@@ -85,8 +44,8 @@ func (c *Client) RestoreBackupRequest(input *RestoreBackupInput) RestoreBackupRe
 // RestoreBackup API operation.
 type RestoreBackupRequest struct {
 	*aws.Request
-	Input *RestoreBackupInput
-	Copy  func(*RestoreBackupInput) RestoreBackupRequest
+	Input *types.RestoreBackupInput
+	Copy  func(*types.RestoreBackupInput) RestoreBackupRequest
 }
 
 // Send marshals and sends the RestoreBackup API request.
@@ -98,7 +57,7 @@ func (r RestoreBackupRequest) Send(ctx context.Context) (*RestoreBackupResponse,
 	}
 
 	resp := &RestoreBackupResponse{
-		RestoreBackupOutput: r.Request.Data.(*RestoreBackupOutput),
+		RestoreBackupOutput: r.Request.Data.(*types.RestoreBackupOutput),
 		response:            &aws.Response{Request: r.Request},
 	}
 
@@ -108,7 +67,7 @@ func (r RestoreBackupRequest) Send(ctx context.Context) (*RestoreBackupResponse,
 // RestoreBackupResponse is the response type for the
 // RestoreBackup API operation.
 type RestoreBackupResponse struct {
-	*RestoreBackupOutput
+	*types.RestoreBackupOutput
 
 	response *aws.Response
 }

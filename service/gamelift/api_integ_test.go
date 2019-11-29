@@ -13,6 +13,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws/awserr"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting/integration"
 	"github.com/aws/aws-sdk-go-v2/service/gamelift"
+	"github.com/aws/aws-sdk-go-v2/service/gamelift/types"
 )
 
 var _ aws.Config
@@ -24,7 +25,7 @@ func TestInteg_00_ListBuilds(t *testing.T) {
 
 	cfg := integration.ConfigWithDefaultRegion("us-west-2")
 	svc := gamelift.New(cfg)
-	params := &gamelift.ListBuildsInput{}
+	params := &types.ListBuildsInput{}
 
 	req := svc.ListBuildsRequest(params)
 
@@ -39,7 +40,7 @@ func TestInteg_01_DescribePlayerSessions(t *testing.T) {
 
 	cfg := integration.ConfigWithDefaultRegion("us-west-2")
 	svc := gamelift.New(cfg)
-	params := &gamelift.DescribePlayerSessionsInput{
+	params := &types.DescribePlayerSessionsInput{
 		PlayerSessionId: aws.String("psess-fakeSessionId"),
 	}
 

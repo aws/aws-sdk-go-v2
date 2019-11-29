@@ -6,69 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/storagegateway/types"
 )
-
-// A JSON object containing the of the gateway.
-type DescribeWorkingStorageInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation
-	// to return a list of gateways for your account and AWS Region.
-	//
-	// GatewayARN is a required field
-	GatewayARN *string `min:"50" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeWorkingStorageInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeWorkingStorageInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeWorkingStorageInput"}
-
-	if s.GatewayARN == nil {
-		invalidParams.Add(aws.NewErrParamRequired("GatewayARN"))
-	}
-	if s.GatewayARN != nil && len(*s.GatewayARN) < 50 {
-		invalidParams.Add(aws.NewErrParamMinLen("GatewayARN", 50))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// A JSON object containing the following fields:
-type DescribeWorkingStorageOutput struct {
-	_ struct{} `type:"structure"`
-
-	// An array of the gateway's local disk IDs that are configured as working storage.
-	// Each local disk ID is specified as a string (minimum length of 1 and maximum
-	// length of 300). If no local disks are configured as working storage, then
-	// the DiskIds array is empty.
-	DiskIds []string `type:"list"`
-
-	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation
-	// to return a list of gateways for your account and AWS Region.
-	GatewayARN *string `min:"50" type:"string"`
-
-	// The total working storage in bytes allocated for the gateway. If no working
-	// storage is configured for the gateway, this field returns 0.
-	WorkingStorageAllocatedInBytes *int64 `type:"long"`
-
-	// The total working storage in bytes in use by the gateway. If no working storage
-	// is configured for the gateway, this field returns 0.
-	WorkingStorageUsedInBytes *int64 `type:"long"`
-}
-
-// String returns the string representation
-func (s DescribeWorkingStorageOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeWorkingStorage = "DescribeWorkingStorage"
 
@@ -93,7 +32,7 @@ const opDescribeWorkingStorage = "DescribeWorkingStorage"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DescribeWorkingStorage
-func (c *Client) DescribeWorkingStorageRequest(input *DescribeWorkingStorageInput) DescribeWorkingStorageRequest {
+func (c *Client) DescribeWorkingStorageRequest(input *types.DescribeWorkingStorageInput) DescribeWorkingStorageRequest {
 	op := &aws.Operation{
 		Name:       opDescribeWorkingStorage,
 		HTTPMethod: "POST",
@@ -101,10 +40,10 @@ func (c *Client) DescribeWorkingStorageRequest(input *DescribeWorkingStorageInpu
 	}
 
 	if input == nil {
-		input = &DescribeWorkingStorageInput{}
+		input = &types.DescribeWorkingStorageInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeWorkingStorageOutput{})
+	req := c.newRequest(op, input, &types.DescribeWorkingStorageOutput{})
 	return DescribeWorkingStorageRequest{Request: req, Input: input, Copy: c.DescribeWorkingStorageRequest}
 }
 
@@ -112,8 +51,8 @@ func (c *Client) DescribeWorkingStorageRequest(input *DescribeWorkingStorageInpu
 // DescribeWorkingStorage API operation.
 type DescribeWorkingStorageRequest struct {
 	*aws.Request
-	Input *DescribeWorkingStorageInput
-	Copy  func(*DescribeWorkingStorageInput) DescribeWorkingStorageRequest
+	Input *types.DescribeWorkingStorageInput
+	Copy  func(*types.DescribeWorkingStorageInput) DescribeWorkingStorageRequest
 }
 
 // Send marshals and sends the DescribeWorkingStorage API request.
@@ -125,7 +64,7 @@ func (r DescribeWorkingStorageRequest) Send(ctx context.Context) (*DescribeWorki
 	}
 
 	resp := &DescribeWorkingStorageResponse{
-		DescribeWorkingStorageOutput: r.Request.Data.(*DescribeWorkingStorageOutput),
+		DescribeWorkingStorageOutput: r.Request.Data.(*types.DescribeWorkingStorageOutput),
 		response:                     &aws.Response{Request: r.Request},
 	}
 
@@ -135,7 +74,7 @@ func (r DescribeWorkingStorageRequest) Send(ctx context.Context) (*DescribeWorki
 // DescribeWorkingStorageResponse is the response type for the
 // DescribeWorkingStorage API operation.
 type DescribeWorkingStorageResponse struct {
-	*DescribeWorkingStorageOutput
+	*types.DescribeWorkingStorageOutput
 
 	response *aws.Response
 }

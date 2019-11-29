@@ -6,67 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/storagegateway/types"
 )
-
-// DeleteTapeInput
-type DeleteTapeInput struct {
-	_ struct{} `type:"structure"`
-
-	// The unique Amazon Resource Name (ARN) of the gateway that the virtual tape
-	// to delete is associated with. Use the ListGateways operation to return a
-	// list of gateways for your account and AWS Region.
-	//
-	// GatewayARN is a required field
-	GatewayARN *string `min:"50" type:"string" required:"true"`
-
-	// The Amazon Resource Name (ARN) of the virtual tape to delete.
-	//
-	// TapeARN is a required field
-	TapeARN *string `min:"50" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteTapeInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteTapeInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteTapeInput"}
-
-	if s.GatewayARN == nil {
-		invalidParams.Add(aws.NewErrParamRequired("GatewayARN"))
-	}
-	if s.GatewayARN != nil && len(*s.GatewayARN) < 50 {
-		invalidParams.Add(aws.NewErrParamMinLen("GatewayARN", 50))
-	}
-
-	if s.TapeARN == nil {
-		invalidParams.Add(aws.NewErrParamRequired("TapeARN"))
-	}
-	if s.TapeARN != nil && len(*s.TapeARN) < 50 {
-		invalidParams.Add(aws.NewErrParamMinLen("TapeARN", 50))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// DeleteTapeOutput
-type DeleteTapeOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the deleted virtual tape.
-	TapeARN *string `min:"50" type:"string"`
-}
-
-// String returns the string representation
-func (s DeleteTapeOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteTape = "DeleteTape"
 
@@ -84,7 +25,7 @@ const opDeleteTape = "DeleteTape"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DeleteTape
-func (c *Client) DeleteTapeRequest(input *DeleteTapeInput) DeleteTapeRequest {
+func (c *Client) DeleteTapeRequest(input *types.DeleteTapeInput) DeleteTapeRequest {
 	op := &aws.Operation{
 		Name:       opDeleteTape,
 		HTTPMethod: "POST",
@@ -92,10 +33,10 @@ func (c *Client) DeleteTapeRequest(input *DeleteTapeInput) DeleteTapeRequest {
 	}
 
 	if input == nil {
-		input = &DeleteTapeInput{}
+		input = &types.DeleteTapeInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteTapeOutput{})
+	req := c.newRequest(op, input, &types.DeleteTapeOutput{})
 	return DeleteTapeRequest{Request: req, Input: input, Copy: c.DeleteTapeRequest}
 }
 
@@ -103,8 +44,8 @@ func (c *Client) DeleteTapeRequest(input *DeleteTapeInput) DeleteTapeRequest {
 // DeleteTape API operation.
 type DeleteTapeRequest struct {
 	*aws.Request
-	Input *DeleteTapeInput
-	Copy  func(*DeleteTapeInput) DeleteTapeRequest
+	Input *types.DeleteTapeInput
+	Copy  func(*types.DeleteTapeInput) DeleteTapeRequest
 }
 
 // Send marshals and sends the DeleteTape API request.
@@ -116,7 +57,7 @@ func (r DeleteTapeRequest) Send(ctx context.Context) (*DeleteTapeResponse, error
 	}
 
 	resp := &DeleteTapeResponse{
-		DeleteTapeOutput: r.Request.Data.(*DeleteTapeOutput),
+		DeleteTapeOutput: r.Request.Data.(*types.DeleteTapeOutput),
 		response:         &aws.Response{Request: r.Request},
 	}
 
@@ -126,7 +67,7 @@ func (r DeleteTapeRequest) Send(ctx context.Context) (*DeleteTapeResponse, error
 // DeleteTapeResponse is the response type for the
 // DeleteTape API operation.
 type DeleteTapeResponse struct {
-	*DeleteTapeOutput
+	*types.DeleteTapeOutput
 
 	response *aws.Response
 }

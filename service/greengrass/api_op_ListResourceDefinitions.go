@@ -6,77 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/greengrass/types"
 )
-
-type ListResourceDefinitionsInput struct {
-	_ struct{} `type:"structure"`
-
-	MaxResults *string `location:"querystring" locationName:"MaxResults" type:"string"`
-
-	NextToken *string `location:"querystring" locationName:"NextToken" type:"string"`
-}
-
-// String returns the string representation
-func (s ListResourceDefinitionsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListResourceDefinitionsInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.MaxResults != nil {
-		v := *s.MaxResults
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "MaxResults", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type ListResourceDefinitionsOutput struct {
-	_ struct{} `type:"structure"`
-
-	Definitions []DefinitionInformation `type:"list"`
-
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s ListResourceDefinitionsOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListResourceDefinitionsOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.Definitions != nil {
-		v := s.Definitions
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "Definitions", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opListResourceDefinitions = "ListResourceDefinitions"
 
@@ -93,7 +24,7 @@ const opListResourceDefinitions = "ListResourceDefinitions"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/ListResourceDefinitions
-func (c *Client) ListResourceDefinitionsRequest(input *ListResourceDefinitionsInput) ListResourceDefinitionsRequest {
+func (c *Client) ListResourceDefinitionsRequest(input *types.ListResourceDefinitionsInput) ListResourceDefinitionsRequest {
 	op := &aws.Operation{
 		Name:       opListResourceDefinitions,
 		HTTPMethod: "GET",
@@ -101,10 +32,10 @@ func (c *Client) ListResourceDefinitionsRequest(input *ListResourceDefinitionsIn
 	}
 
 	if input == nil {
-		input = &ListResourceDefinitionsInput{}
+		input = &types.ListResourceDefinitionsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListResourceDefinitionsOutput{})
+	req := c.newRequest(op, input, &types.ListResourceDefinitionsOutput{})
 	return ListResourceDefinitionsRequest{Request: req, Input: input, Copy: c.ListResourceDefinitionsRequest}
 }
 
@@ -112,8 +43,8 @@ func (c *Client) ListResourceDefinitionsRequest(input *ListResourceDefinitionsIn
 // ListResourceDefinitions API operation.
 type ListResourceDefinitionsRequest struct {
 	*aws.Request
-	Input *ListResourceDefinitionsInput
-	Copy  func(*ListResourceDefinitionsInput) ListResourceDefinitionsRequest
+	Input *types.ListResourceDefinitionsInput
+	Copy  func(*types.ListResourceDefinitionsInput) ListResourceDefinitionsRequest
 }
 
 // Send marshals and sends the ListResourceDefinitions API request.
@@ -125,7 +56,7 @@ func (r ListResourceDefinitionsRequest) Send(ctx context.Context) (*ListResource
 	}
 
 	resp := &ListResourceDefinitionsResponse{
-		ListResourceDefinitionsOutput: r.Request.Data.(*ListResourceDefinitionsOutput),
+		ListResourceDefinitionsOutput: r.Request.Data.(*types.ListResourceDefinitionsOutput),
 		response:                      &aws.Response{Request: r.Request},
 	}
 
@@ -135,7 +66,7 @@ func (r ListResourceDefinitionsRequest) Send(ctx context.Context) (*ListResource
 // ListResourceDefinitionsResponse is the response type for the
 // ListResourceDefinitions API operation.
 type ListResourceDefinitionsResponse struct {
-	*ListResourceDefinitionsOutput
+	*types.ListResourceDefinitionsOutput
 
 	response *aws.Response
 }

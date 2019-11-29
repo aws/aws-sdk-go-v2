@@ -6,67 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/lightsail/types"
 )
-
-type AttachDiskInput struct {
-	_ struct{} `type:"structure"`
-
-	// The unique Lightsail disk name (e.g., my-disk).
-	//
-	// DiskName is a required field
-	DiskName *string `locationName:"diskName" type:"string" required:"true"`
-
-	// The disk path to expose to the instance (e.g., /dev/xvdf).
-	//
-	// DiskPath is a required field
-	DiskPath *string `locationName:"diskPath" type:"string" required:"true"`
-
-	// The name of the Lightsail instance where you want to utilize the storage
-	// disk.
-	//
-	// InstanceName is a required field
-	InstanceName *string `locationName:"instanceName" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s AttachDiskInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *AttachDiskInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "AttachDiskInput"}
-
-	if s.DiskName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DiskName"))
-	}
-
-	if s.DiskPath == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DiskPath"))
-	}
-
-	if s.InstanceName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("InstanceName"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type AttachDiskOutput struct {
-	_ struct{} `type:"structure"`
-
-	// An object describing the API operations.
-	Operations []Operation `locationName:"operations" type:"list"`
-}
-
-// String returns the string representation
-func (s AttachDiskOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opAttachDisk = "AttachDisk"
 
@@ -88,7 +29,7 @@ const opAttachDisk = "AttachDisk"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/AttachDisk
-func (c *Client) AttachDiskRequest(input *AttachDiskInput) AttachDiskRequest {
+func (c *Client) AttachDiskRequest(input *types.AttachDiskInput) AttachDiskRequest {
 	op := &aws.Operation{
 		Name:       opAttachDisk,
 		HTTPMethod: "POST",
@@ -96,10 +37,10 @@ func (c *Client) AttachDiskRequest(input *AttachDiskInput) AttachDiskRequest {
 	}
 
 	if input == nil {
-		input = &AttachDiskInput{}
+		input = &types.AttachDiskInput{}
 	}
 
-	req := c.newRequest(op, input, &AttachDiskOutput{})
+	req := c.newRequest(op, input, &types.AttachDiskOutput{})
 	return AttachDiskRequest{Request: req, Input: input, Copy: c.AttachDiskRequest}
 }
 
@@ -107,8 +48,8 @@ func (c *Client) AttachDiskRequest(input *AttachDiskInput) AttachDiskRequest {
 // AttachDisk API operation.
 type AttachDiskRequest struct {
 	*aws.Request
-	Input *AttachDiskInput
-	Copy  func(*AttachDiskInput) AttachDiskRequest
+	Input *types.AttachDiskInput
+	Copy  func(*types.AttachDiskInput) AttachDiskRequest
 }
 
 // Send marshals and sends the AttachDisk API request.
@@ -120,7 +61,7 @@ func (r AttachDiskRequest) Send(ctx context.Context) (*AttachDiskResponse, error
 	}
 
 	resp := &AttachDiskResponse{
-		AttachDiskOutput: r.Request.Data.(*AttachDiskOutput),
+		AttachDiskOutput: r.Request.Data.(*types.AttachDiskOutput),
 		response:         &aws.Response{Request: r.Request},
 	}
 
@@ -130,7 +71,7 @@ func (r AttachDiskRequest) Send(ctx context.Context) (*AttachDiskResponse, error
 // AttachDiskResponse is the response type for the
 // AttachDisk API operation.
 type AttachDiskResponse struct {
-	*AttachDiskOutput
+	*types.AttachDiskOutput
 
 	response *aws.Response
 }

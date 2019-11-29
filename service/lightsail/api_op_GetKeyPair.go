@@ -6,48 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/lightsail/types"
 )
-
-type GetKeyPairInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the key pair for which you are requesting information.
-	//
-	// KeyPairName is a required field
-	KeyPairName *string `locationName:"keyPairName" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetKeyPairInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetKeyPairInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetKeyPairInput"}
-
-	if s.KeyPairName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("KeyPairName"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type GetKeyPairOutput struct {
-	_ struct{} `type:"structure"`
-
-	// An array of key-value pairs containing information about the key pair.
-	KeyPair *KeyPair `locationName:"keyPair" type:"structure"`
-}
-
-// String returns the string representation
-func (s GetKeyPairOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetKeyPair = "GetKeyPair"
 
@@ -64,7 +24,7 @@ const opGetKeyPair = "GetKeyPair"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetKeyPair
-func (c *Client) GetKeyPairRequest(input *GetKeyPairInput) GetKeyPairRequest {
+func (c *Client) GetKeyPairRequest(input *types.GetKeyPairInput) GetKeyPairRequest {
 	op := &aws.Operation{
 		Name:       opGetKeyPair,
 		HTTPMethod: "POST",
@@ -72,10 +32,10 @@ func (c *Client) GetKeyPairRequest(input *GetKeyPairInput) GetKeyPairRequest {
 	}
 
 	if input == nil {
-		input = &GetKeyPairInput{}
+		input = &types.GetKeyPairInput{}
 	}
 
-	req := c.newRequest(op, input, &GetKeyPairOutput{})
+	req := c.newRequest(op, input, &types.GetKeyPairOutput{})
 	return GetKeyPairRequest{Request: req, Input: input, Copy: c.GetKeyPairRequest}
 }
 
@@ -83,8 +43,8 @@ func (c *Client) GetKeyPairRequest(input *GetKeyPairInput) GetKeyPairRequest {
 // GetKeyPair API operation.
 type GetKeyPairRequest struct {
 	*aws.Request
-	Input *GetKeyPairInput
-	Copy  func(*GetKeyPairInput) GetKeyPairRequest
+	Input *types.GetKeyPairInput
+	Copy  func(*types.GetKeyPairInput) GetKeyPairRequest
 }
 
 // Send marshals and sends the GetKeyPair API request.
@@ -96,7 +56,7 @@ func (r GetKeyPairRequest) Send(ctx context.Context) (*GetKeyPairResponse, error
 	}
 
 	resp := &GetKeyPairResponse{
-		GetKeyPairOutput: r.Request.Data.(*GetKeyPairOutput),
+		GetKeyPairOutput: r.Request.Data.(*types.GetKeyPairOutput),
 		response:         &aws.Response{Request: r.Request},
 	}
 
@@ -106,7 +66,7 @@ func (r GetKeyPairRequest) Send(ctx context.Context) (*GetKeyPairResponse, error
 // GetKeyPairResponse is the response type for the
 // GetKeyPair API operation.
 type GetKeyPairResponse struct {
-	*GetKeyPairOutput
+	*types.GetKeyPairOutput
 
 	response *aws.Response
 }

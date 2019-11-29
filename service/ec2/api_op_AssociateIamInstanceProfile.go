@@ -6,57 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-type AssociateIamInstanceProfileInput struct {
-	_ struct{} `type:"structure"`
-
-	// The IAM instance profile.
-	//
-	// IamInstanceProfile is a required field
-	IamInstanceProfile *IamInstanceProfileSpecification `type:"structure" required:"true"`
-
-	// The ID of the instance.
-	//
-	// InstanceId is a required field
-	InstanceId *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s AssociateIamInstanceProfileInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *AssociateIamInstanceProfileInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "AssociateIamInstanceProfileInput"}
-
-	if s.IamInstanceProfile == nil {
-		invalidParams.Add(aws.NewErrParamRequired("IamInstanceProfile"))
-	}
-
-	if s.InstanceId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("InstanceId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type AssociateIamInstanceProfileOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Information about the IAM instance profile association.
-	IamInstanceProfileAssociation *IamInstanceProfileAssociation `locationName:"iamInstanceProfileAssociation" type:"structure"`
-}
-
-// String returns the string representation
-func (s AssociateIamInstanceProfileOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opAssociateIamInstanceProfile = "AssociateIamInstanceProfile"
 
@@ -74,7 +25,7 @@ const opAssociateIamInstanceProfile = "AssociateIamInstanceProfile"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AssociateIamInstanceProfile
-func (c *Client) AssociateIamInstanceProfileRequest(input *AssociateIamInstanceProfileInput) AssociateIamInstanceProfileRequest {
+func (c *Client) AssociateIamInstanceProfileRequest(input *types.AssociateIamInstanceProfileInput) AssociateIamInstanceProfileRequest {
 	op := &aws.Operation{
 		Name:       opAssociateIamInstanceProfile,
 		HTTPMethod: "POST",
@@ -82,10 +33,10 @@ func (c *Client) AssociateIamInstanceProfileRequest(input *AssociateIamInstanceP
 	}
 
 	if input == nil {
-		input = &AssociateIamInstanceProfileInput{}
+		input = &types.AssociateIamInstanceProfileInput{}
 	}
 
-	req := c.newRequest(op, input, &AssociateIamInstanceProfileOutput{})
+	req := c.newRequest(op, input, &types.AssociateIamInstanceProfileOutput{})
 	return AssociateIamInstanceProfileRequest{Request: req, Input: input, Copy: c.AssociateIamInstanceProfileRequest}
 }
 
@@ -93,8 +44,8 @@ func (c *Client) AssociateIamInstanceProfileRequest(input *AssociateIamInstanceP
 // AssociateIamInstanceProfile API operation.
 type AssociateIamInstanceProfileRequest struct {
 	*aws.Request
-	Input *AssociateIamInstanceProfileInput
-	Copy  func(*AssociateIamInstanceProfileInput) AssociateIamInstanceProfileRequest
+	Input *types.AssociateIamInstanceProfileInput
+	Copy  func(*types.AssociateIamInstanceProfileInput) AssociateIamInstanceProfileRequest
 }
 
 // Send marshals and sends the AssociateIamInstanceProfile API request.
@@ -106,7 +57,7 @@ func (r AssociateIamInstanceProfileRequest) Send(ctx context.Context) (*Associat
 	}
 
 	resp := &AssociateIamInstanceProfileResponse{
-		AssociateIamInstanceProfileOutput: r.Request.Data.(*AssociateIamInstanceProfileOutput),
+		AssociateIamInstanceProfileOutput: r.Request.Data.(*types.AssociateIamInstanceProfileOutput),
 		response:                          &aws.Response{Request: r.Request},
 	}
 
@@ -116,7 +67,7 @@ func (r AssociateIamInstanceProfileRequest) Send(ctx context.Context) (*Associat
 // AssociateIamInstanceProfileResponse is the response type for the
 // AssociateIamInstanceProfile API operation.
 type AssociateIamInstanceProfileResponse struct {
-	*AssociateIamInstanceProfileOutput
+	*types.AssociateIamInstanceProfileOutput
 
 	response *aws.Response
 }

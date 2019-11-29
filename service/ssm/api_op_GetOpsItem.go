@@ -6,48 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ssm/types"
 )
-
-type GetOpsItemInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the OpsItem that you want to get.
-	//
-	// OpsItemId is a required field
-	OpsItemId *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetOpsItemInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetOpsItemInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetOpsItemInput"}
-
-	if s.OpsItemId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("OpsItemId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type GetOpsItemOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The OpsItem.
-	OpsItem *OpsItem `type:"structure"`
-}
-
-// String returns the string representation
-func (s GetOpsItemOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetOpsItem = "GetOpsItem"
 
@@ -73,7 +33,7 @@ const opGetOpsItem = "GetOpsItem"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetOpsItem
-func (c *Client) GetOpsItemRequest(input *GetOpsItemInput) GetOpsItemRequest {
+func (c *Client) GetOpsItemRequest(input *types.GetOpsItemInput) GetOpsItemRequest {
 	op := &aws.Operation{
 		Name:       opGetOpsItem,
 		HTTPMethod: "POST",
@@ -81,10 +41,10 @@ func (c *Client) GetOpsItemRequest(input *GetOpsItemInput) GetOpsItemRequest {
 	}
 
 	if input == nil {
-		input = &GetOpsItemInput{}
+		input = &types.GetOpsItemInput{}
 	}
 
-	req := c.newRequest(op, input, &GetOpsItemOutput{})
+	req := c.newRequest(op, input, &types.GetOpsItemOutput{})
 	return GetOpsItemRequest{Request: req, Input: input, Copy: c.GetOpsItemRequest}
 }
 
@@ -92,8 +52,8 @@ func (c *Client) GetOpsItemRequest(input *GetOpsItemInput) GetOpsItemRequest {
 // GetOpsItem API operation.
 type GetOpsItemRequest struct {
 	*aws.Request
-	Input *GetOpsItemInput
-	Copy  func(*GetOpsItemInput) GetOpsItemRequest
+	Input *types.GetOpsItemInput
+	Copy  func(*types.GetOpsItemInput) GetOpsItemRequest
 }
 
 // Send marshals and sends the GetOpsItem API request.
@@ -105,7 +65,7 @@ func (r GetOpsItemRequest) Send(ctx context.Context) (*GetOpsItemResponse, error
 	}
 
 	resp := &GetOpsItemResponse{
-		GetOpsItemOutput: r.Request.Data.(*GetOpsItemOutput),
+		GetOpsItemOutput: r.Request.Data.(*types.GetOpsItemOutput),
 		response:         &aws.Response{Request: r.Request},
 	}
 
@@ -115,7 +75,7 @@ func (r GetOpsItemRequest) Send(ctx context.Context) (*GetOpsItemResponse, error
 // GetOpsItemResponse is the response type for the
 // GetOpsItem API operation.
 type GetOpsItemResponse struct {
-	*GetOpsItemOutput
+	*types.GetOpsItemOutput
 
 	response *aws.Response
 }

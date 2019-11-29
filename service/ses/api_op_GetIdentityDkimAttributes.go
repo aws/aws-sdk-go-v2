@@ -6,60 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ses/types"
 )
-
-// Represents a request for the status of Amazon SES Easy DKIM signing for an
-// identity. For domain identities, this request also returns the DKIM tokens
-// that are required for Easy DKIM signing, and whether Amazon SES successfully
-// verified that these tokens were published. For more information about Easy
-// DKIM, see the Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/easy-dkim.html).
-type GetIdentityDkimAttributesInput struct {
-	_ struct{} `type:"structure"`
-
-	// A list of one or more verified identities - email addresses, domains, or
-	// both.
-	//
-	// Identities is a required field
-	Identities []string `type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s GetIdentityDkimAttributesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetIdentityDkimAttributesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetIdentityDkimAttributesInput"}
-
-	if s.Identities == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Identities"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Represents the status of Amazon SES Easy DKIM signing for an identity. For
-// domain identities, this response also contains the DKIM tokens that are required
-// for Easy DKIM signing, and whether Amazon SES successfully verified that
-// these tokens were published.
-type GetIdentityDkimAttributesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The DKIM attributes for an email address or a domain.
-	//
-	// DkimAttributes is a required field
-	DkimAttributes map[string]IdentityDkimAttributes `type:"map" required:"true"`
-}
-
-// String returns the string representation
-func (s GetIdentityDkimAttributesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetIdentityDkimAttributes = "GetIdentityDkimAttributes"
 
@@ -97,7 +45,7 @@ const opGetIdentityDkimAttributes = "GetIdentityDkimAttributes"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/GetIdentityDkimAttributes
-func (c *Client) GetIdentityDkimAttributesRequest(input *GetIdentityDkimAttributesInput) GetIdentityDkimAttributesRequest {
+func (c *Client) GetIdentityDkimAttributesRequest(input *types.GetIdentityDkimAttributesInput) GetIdentityDkimAttributesRequest {
 	op := &aws.Operation{
 		Name:       opGetIdentityDkimAttributes,
 		HTTPMethod: "POST",
@@ -105,10 +53,10 @@ func (c *Client) GetIdentityDkimAttributesRequest(input *GetIdentityDkimAttribut
 	}
 
 	if input == nil {
-		input = &GetIdentityDkimAttributesInput{}
+		input = &types.GetIdentityDkimAttributesInput{}
 	}
 
-	req := c.newRequest(op, input, &GetIdentityDkimAttributesOutput{})
+	req := c.newRequest(op, input, &types.GetIdentityDkimAttributesOutput{})
 	return GetIdentityDkimAttributesRequest{Request: req, Input: input, Copy: c.GetIdentityDkimAttributesRequest}
 }
 
@@ -116,8 +64,8 @@ func (c *Client) GetIdentityDkimAttributesRequest(input *GetIdentityDkimAttribut
 // GetIdentityDkimAttributes API operation.
 type GetIdentityDkimAttributesRequest struct {
 	*aws.Request
-	Input *GetIdentityDkimAttributesInput
-	Copy  func(*GetIdentityDkimAttributesInput) GetIdentityDkimAttributesRequest
+	Input *types.GetIdentityDkimAttributesInput
+	Copy  func(*types.GetIdentityDkimAttributesInput) GetIdentityDkimAttributesRequest
 }
 
 // Send marshals and sends the GetIdentityDkimAttributes API request.
@@ -129,7 +77,7 @@ func (r GetIdentityDkimAttributesRequest) Send(ctx context.Context) (*GetIdentit
 	}
 
 	resp := &GetIdentityDkimAttributesResponse{
-		GetIdentityDkimAttributesOutput: r.Request.Data.(*GetIdentityDkimAttributesOutput),
+		GetIdentityDkimAttributesOutput: r.Request.Data.(*types.GetIdentityDkimAttributesOutput),
 		response:                        &aws.Response{Request: r.Request},
 	}
 
@@ -139,7 +87,7 @@ func (r GetIdentityDkimAttributesRequest) Send(ctx context.Context) (*GetIdentit
 // GetIdentityDkimAttributesResponse is the response type for the
 // GetIdentityDkimAttributes API operation.
 type GetIdentityDkimAttributesResponse struct {
-	*GetIdentityDkimAttributesOutput
+	*types.GetIdentityDkimAttributesOutput
 
 	response *aws.Response
 }

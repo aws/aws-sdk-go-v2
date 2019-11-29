@@ -6,87 +6,29 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/s3/types"
 )
-
-type GetBucketEncryptionInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the bucket from which the server-side encryption configuration
-	// is retrieved.
-	//
-	// Bucket is a required field
-	Bucket *string `location:"uri" locationName:"Bucket" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetBucketEncryptionInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetBucketEncryptionInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetBucketEncryptionInput"}
-
-	if s.Bucket == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Bucket"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-func (s *GetBucketEncryptionInput) getBucket() (v string) {
-	if s.Bucket == nil {
-		return v
-	}
-	return *s.Bucket
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetBucketEncryptionInput) MarshalFields(e protocol.FieldEncoder) error {
-
-	if s.Bucket != nil {
-		v := *s.Bucket
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "Bucket", protocol.StringValue(v), metadata)
-	}
-	return nil
-}
-
-type GetBucketEncryptionOutput struct {
-	_ struct{} `type:"structure" payload:"ServerSideEncryptionConfiguration"`
-
-	// Specifies the default server-side-encryption configuration.
-	ServerSideEncryptionConfiguration *ServerSideEncryptionConfiguration `type:"structure"`
-}
-
-// String returns the string representation
-func (s GetBucketEncryptionOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetBucketEncryptionOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.ServerSideEncryptionConfiguration != nil {
-		v := s.ServerSideEncryptionConfiguration
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.PayloadTarget, "ServerSideEncryptionConfiguration", v, metadata)
-	}
-	return nil
-}
 
 const opGetBucketEncryption = "GetBucketEncryption"
 
 // GetBucketEncryptionRequest returns a request value for making API operation for
 // Amazon Simple Storage Service.
 //
-// Returns the server-side encryption configuration of a bucket.
+// Returns the default encryption configuration for an Amazon S3 bucket. For
+// information about the Amazon S3 default encryption feature, see Amazon S3
+// Default Bucket Encryption (https://docs.aws.amazon.com/AmazonS3/latest/dev/bucket-encryption.html).
+//
+// To use this operation, you must have permission to perform the s3:GetEncryptionConfiguration
+// action. The bucket owner has this permission by default. The bucket owner
+// can grant this permission to others. For more information about permissions,
+// see Permissions Related to Bucket Subresource Operations (https://docs.aws.amazon.com/AmazonS3/latest/dev/using-with-s3-actions.html#using-with-s3-actions-related-to-bucket-subresources)
+// and Managing Access Permissions to Your Amazon S3 Resources (https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-access-control.html).
+//
+// The following operations are related to GetBucketEncryption:
+//
+//    * PutBucketEncryption
+//
+//    * DeleteBucketEncryption
 //
 //    // Example sending a request using GetBucketEncryptionRequest.
 //    req := client.GetBucketEncryptionRequest(params)
@@ -96,7 +38,7 @@ const opGetBucketEncryption = "GetBucketEncryption"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetBucketEncryption
-func (c *Client) GetBucketEncryptionRequest(input *GetBucketEncryptionInput) GetBucketEncryptionRequest {
+func (c *Client) GetBucketEncryptionRequest(input *types.GetBucketEncryptionInput) GetBucketEncryptionRequest {
 	op := &aws.Operation{
 		Name:       opGetBucketEncryption,
 		HTTPMethod: "GET",
@@ -104,10 +46,10 @@ func (c *Client) GetBucketEncryptionRequest(input *GetBucketEncryptionInput) Get
 	}
 
 	if input == nil {
-		input = &GetBucketEncryptionInput{}
+		input = &types.GetBucketEncryptionInput{}
 	}
 
-	req := c.newRequest(op, input, &GetBucketEncryptionOutput{})
+	req := c.newRequest(op, input, &types.GetBucketEncryptionOutput{})
 	return GetBucketEncryptionRequest{Request: req, Input: input, Copy: c.GetBucketEncryptionRequest}
 }
 
@@ -115,8 +57,8 @@ func (c *Client) GetBucketEncryptionRequest(input *GetBucketEncryptionInput) Get
 // GetBucketEncryption API operation.
 type GetBucketEncryptionRequest struct {
 	*aws.Request
-	Input *GetBucketEncryptionInput
-	Copy  func(*GetBucketEncryptionInput) GetBucketEncryptionRequest
+	Input *types.GetBucketEncryptionInput
+	Copy  func(*types.GetBucketEncryptionInput) GetBucketEncryptionRequest
 }
 
 // Send marshals and sends the GetBucketEncryption API request.
@@ -128,7 +70,7 @@ func (r GetBucketEncryptionRequest) Send(ctx context.Context) (*GetBucketEncrypt
 	}
 
 	resp := &GetBucketEncryptionResponse{
-		GetBucketEncryptionOutput: r.Request.Data.(*GetBucketEncryptionOutput),
+		GetBucketEncryptionOutput: r.Request.Data.(*types.GetBucketEncryptionOutput),
 		response:                  &aws.Response{Request: r.Request},
 	}
 
@@ -138,7 +80,7 @@ func (r GetBucketEncryptionRequest) Send(ctx context.Context) (*GetBucketEncrypt
 // GetBucketEncryptionResponse is the response type for the
 // GetBucketEncryption API operation.
 type GetBucketEncryptionResponse struct {
-	*GetBucketEncryptionOutput
+	*types.GetBucketEncryptionOutput
 
 	response *aws.Response
 }

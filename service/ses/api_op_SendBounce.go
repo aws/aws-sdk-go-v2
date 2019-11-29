@@ -4,102 +4,10 @@ package ses
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ses/types"
 )
-
-// Represents a request to send a bounce message to the sender of an email you
-// received through Amazon SES.
-type SendBounceInput struct {
-	_ struct{} `type:"structure"`
-
-	// The address to use in the "From" header of the bounce message. This must
-	// be an identity that you have verified with Amazon SES.
-	//
-	// BounceSender is a required field
-	BounceSender *string `type:"string" required:"true"`
-
-	// This parameter is used only for sending authorization. It is the ARN of the
-	// identity that is associated with the sending authorization policy that permits
-	// you to use the address in the "From" header of the bounce. For more information
-	// about sending authorization, see the Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html).
-	BounceSenderArn *string `type:"string"`
-
-	// A list of recipients of the bounced message, including the information required
-	// to create the Delivery Status Notifications (DSNs) for the recipients. You
-	// must specify at least one BouncedRecipientInfo in the list.
-	//
-	// BouncedRecipientInfoList is a required field
-	BouncedRecipientInfoList []BouncedRecipientInfo `type:"list" required:"true"`
-
-	// Human-readable text for the bounce message to explain the failure. If not
-	// specified, the text will be auto-generated based on the bounced recipient
-	// information.
-	Explanation *string `type:"string"`
-
-	// Message-related DSN fields. If not specified, Amazon SES will choose the
-	// values.
-	MessageDsn *MessageDsn `type:"structure"`
-
-	// The message ID of the message to be bounced.
-	//
-	// OriginalMessageId is a required field
-	OriginalMessageId *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s SendBounceInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *SendBounceInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "SendBounceInput"}
-
-	if s.BounceSender == nil {
-		invalidParams.Add(aws.NewErrParamRequired("BounceSender"))
-	}
-
-	if s.BouncedRecipientInfoList == nil {
-		invalidParams.Add(aws.NewErrParamRequired("BouncedRecipientInfoList"))
-	}
-
-	if s.OriginalMessageId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("OriginalMessageId"))
-	}
-	if s.BouncedRecipientInfoList != nil {
-		for i, v := range s.BouncedRecipientInfoList {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "BouncedRecipientInfoList", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-	if s.MessageDsn != nil {
-		if err := s.MessageDsn.Validate(); err != nil {
-			invalidParams.AddNested("MessageDsn", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Represents a unique message ID.
-type SendBounceOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The message ID of the bounce message.
-	MessageId *string `type:"string"`
-}
-
-// String returns the string representation
-func (s SendBounceOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opSendBounce = "SendBounce"
 
@@ -126,7 +34,7 @@ const opSendBounce = "SendBounce"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/SendBounce
-func (c *Client) SendBounceRequest(input *SendBounceInput) SendBounceRequest {
+func (c *Client) SendBounceRequest(input *types.SendBounceInput) SendBounceRequest {
 	op := &aws.Operation{
 		Name:       opSendBounce,
 		HTTPMethod: "POST",
@@ -134,10 +42,10 @@ func (c *Client) SendBounceRequest(input *SendBounceInput) SendBounceRequest {
 	}
 
 	if input == nil {
-		input = &SendBounceInput{}
+		input = &types.SendBounceInput{}
 	}
 
-	req := c.newRequest(op, input, &SendBounceOutput{})
+	req := c.newRequest(op, input, &types.SendBounceOutput{})
 	return SendBounceRequest{Request: req, Input: input, Copy: c.SendBounceRequest}
 }
 
@@ -145,8 +53,8 @@ func (c *Client) SendBounceRequest(input *SendBounceInput) SendBounceRequest {
 // SendBounce API operation.
 type SendBounceRequest struct {
 	*aws.Request
-	Input *SendBounceInput
-	Copy  func(*SendBounceInput) SendBounceRequest
+	Input *types.SendBounceInput
+	Copy  func(*types.SendBounceInput) SendBounceRequest
 }
 
 // Send marshals and sends the SendBounce API request.
@@ -158,7 +66,7 @@ func (r SendBounceRequest) Send(ctx context.Context) (*SendBounceResponse, error
 	}
 
 	resp := &SendBounceResponse{
-		SendBounceOutput: r.Request.Data.(*SendBounceOutput),
+		SendBounceOutput: r.Request.Data.(*types.SendBounceOutput),
 		response:         &aws.Response{Request: r.Request},
 	}
 
@@ -168,7 +76,7 @@ func (r SendBounceRequest) Send(ctx context.Context) (*SendBounceResponse, error
 // SendBounceResponse is the response type for the
 // SendBounce API operation.
 type SendBounceResponse struct {
-	*SendBounceOutput
+	*types.SendBounceOutput
 
 	response *aws.Response
 }

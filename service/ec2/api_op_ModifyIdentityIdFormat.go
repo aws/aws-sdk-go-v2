@@ -6,76 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/ec2query"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-type ModifyIdentityIdFormatInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ARN of the principal, which can be an IAM user, IAM role, or the root
-	// user. Specify all to modify the ID format for all IAM users, IAM roles, and
-	// the root user of the account.
-	//
-	// PrincipalArn is a required field
-	PrincipalArn *string `locationName:"principalArn" type:"string" required:"true"`
-
-	// The type of resource: bundle | conversion-task | customer-gateway | dhcp-options
-	// | elastic-ip-allocation | elastic-ip-association | export-task | flow-log
-	// | image | import-task | internet-gateway | network-acl | network-acl-association
-	// | network-interface | network-interface-attachment | prefix-list | route-table
-	// | route-table-association | security-group | subnet | subnet-cidr-block-association
-	// | vpc | vpc-cidr-block-association | vpc-endpoint | vpc-peering-connection
-	// | vpn-connection | vpn-gateway.
-	//
-	// Alternatively, use the all-current option to include all resource types that
-	// are currently within their opt-in period for longer IDs.
-	//
-	// Resource is a required field
-	Resource *string `locationName:"resource" type:"string" required:"true"`
-
-	// Indicates whether the resource should use longer IDs (17-character IDs)
-	//
-	// UseLongIds is a required field
-	UseLongIds *bool `locationName:"useLongIds" type:"boolean" required:"true"`
-}
-
-// String returns the string representation
-func (s ModifyIdentityIdFormatInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ModifyIdentityIdFormatInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ModifyIdentityIdFormatInput"}
-
-	if s.PrincipalArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("PrincipalArn"))
-	}
-
-	if s.Resource == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Resource"))
-	}
-
-	if s.UseLongIds == nil {
-		invalidParams.Add(aws.NewErrParamRequired("UseLongIds"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ModifyIdentityIdFormatOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s ModifyIdentityIdFormatOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opModifyIdentityIdFormat = "ModifyIdentityIdFormat"
 
@@ -114,7 +48,7 @@ const opModifyIdentityIdFormat = "ModifyIdentityIdFormat"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyIdentityIdFormat
-func (c *Client) ModifyIdentityIdFormatRequest(input *ModifyIdentityIdFormatInput) ModifyIdentityIdFormatRequest {
+func (c *Client) ModifyIdentityIdFormatRequest(input *types.ModifyIdentityIdFormatInput) ModifyIdentityIdFormatRequest {
 	op := &aws.Operation{
 		Name:       opModifyIdentityIdFormat,
 		HTTPMethod: "POST",
@@ -122,10 +56,10 @@ func (c *Client) ModifyIdentityIdFormatRequest(input *ModifyIdentityIdFormatInpu
 	}
 
 	if input == nil {
-		input = &ModifyIdentityIdFormatInput{}
+		input = &types.ModifyIdentityIdFormatInput{}
 	}
 
-	req := c.newRequest(op, input, &ModifyIdentityIdFormatOutput{})
+	req := c.newRequest(op, input, &types.ModifyIdentityIdFormatOutput{})
 	req.Handlers.Unmarshal.Remove(ec2query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return ModifyIdentityIdFormatRequest{Request: req, Input: input, Copy: c.ModifyIdentityIdFormatRequest}
@@ -135,8 +69,8 @@ func (c *Client) ModifyIdentityIdFormatRequest(input *ModifyIdentityIdFormatInpu
 // ModifyIdentityIdFormat API operation.
 type ModifyIdentityIdFormatRequest struct {
 	*aws.Request
-	Input *ModifyIdentityIdFormatInput
-	Copy  func(*ModifyIdentityIdFormatInput) ModifyIdentityIdFormatRequest
+	Input *types.ModifyIdentityIdFormatInput
+	Copy  func(*types.ModifyIdentityIdFormatInput) ModifyIdentityIdFormatRequest
 }
 
 // Send marshals and sends the ModifyIdentityIdFormat API request.
@@ -148,7 +82,7 @@ func (r ModifyIdentityIdFormatRequest) Send(ctx context.Context) (*ModifyIdentit
 	}
 
 	resp := &ModifyIdentityIdFormatResponse{
-		ModifyIdentityIdFormatOutput: r.Request.Data.(*ModifyIdentityIdFormatOutput),
+		ModifyIdentityIdFormatOutput: r.Request.Data.(*types.ModifyIdentityIdFormatOutput),
 		response:                     &aws.Response{Request: r.Request},
 	}
 
@@ -158,7 +92,7 @@ func (r ModifyIdentityIdFormatRequest) Send(ctx context.Context) (*ModifyIdentit
 // ModifyIdentityIdFormatResponse is the response type for the
 // ModifyIdentityIdFormat API operation.
 type ModifyIdentityIdFormatResponse struct {
-	*ModifyIdentityIdFormatOutput
+	*types.ModifyIdentityIdFormatOutput
 
 	response *aws.Response
 }

@@ -6,32 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/redshift/types"
 )
-
-type DescribeAccountAttributesInput struct {
-	_ struct{} `type:"structure"`
-
-	// A list of attribute names.
-	AttributeNames []string `locationNameList:"AttributeName" type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeAccountAttributesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type DescribeAccountAttributesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A list of attributes assigned to an account.
-	AccountAttributes []AccountAttribute `locationNameList:"AccountAttribute" type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeAccountAttributesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeAccountAttributes = "DescribeAccountAttributes"
 
@@ -48,7 +24,7 @@ const opDescribeAccountAttributes = "DescribeAccountAttributes"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeAccountAttributes
-func (c *Client) DescribeAccountAttributesRequest(input *DescribeAccountAttributesInput) DescribeAccountAttributesRequest {
+func (c *Client) DescribeAccountAttributesRequest(input *types.DescribeAccountAttributesInput) DescribeAccountAttributesRequest {
 	op := &aws.Operation{
 		Name:       opDescribeAccountAttributes,
 		HTTPMethod: "POST",
@@ -56,10 +32,10 @@ func (c *Client) DescribeAccountAttributesRequest(input *DescribeAccountAttribut
 	}
 
 	if input == nil {
-		input = &DescribeAccountAttributesInput{}
+		input = &types.DescribeAccountAttributesInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeAccountAttributesOutput{})
+	req := c.newRequest(op, input, &types.DescribeAccountAttributesOutput{})
 	return DescribeAccountAttributesRequest{Request: req, Input: input, Copy: c.DescribeAccountAttributesRequest}
 }
 
@@ -67,8 +43,8 @@ func (c *Client) DescribeAccountAttributesRequest(input *DescribeAccountAttribut
 // DescribeAccountAttributes API operation.
 type DescribeAccountAttributesRequest struct {
 	*aws.Request
-	Input *DescribeAccountAttributesInput
-	Copy  func(*DescribeAccountAttributesInput) DescribeAccountAttributesRequest
+	Input *types.DescribeAccountAttributesInput
+	Copy  func(*types.DescribeAccountAttributesInput) DescribeAccountAttributesRequest
 }
 
 // Send marshals and sends the DescribeAccountAttributes API request.
@@ -80,7 +56,7 @@ func (r DescribeAccountAttributesRequest) Send(ctx context.Context) (*DescribeAc
 	}
 
 	resp := &DescribeAccountAttributesResponse{
-		DescribeAccountAttributesOutput: r.Request.Data.(*DescribeAccountAttributesOutput),
+		DescribeAccountAttributesOutput: r.Request.Data.(*types.DescribeAccountAttributesOutput),
 		response:                        &aws.Response{Request: r.Request},
 	}
 
@@ -90,7 +66,7 @@ func (r DescribeAccountAttributesRequest) Send(ctx context.Context) (*DescribeAc
 // DescribeAccountAttributesResponse is the response type for the
 // DescribeAccountAttributes API operation.
 type DescribeAccountAttributesResponse struct {
-	*DescribeAccountAttributesOutput
+	*types.DescribeAccountAttributesOutput
 
 	response *aws.Response
 }

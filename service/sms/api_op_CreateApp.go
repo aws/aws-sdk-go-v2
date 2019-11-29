@@ -6,54 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/sms/types"
 )
-
-type CreateAppInput struct {
-	_ struct{} `type:"structure"`
-
-	// A unique, case-sensitive identifier you provide to ensure idempotency of
-	// application creation.
-	ClientToken *string `locationName:"clientToken" type:"string"`
-
-	// Description of the new application
-	Description *string `locationName:"description" type:"string"`
-
-	// Name of the new application.
-	Name *string `locationName:"name" type:"string"`
-
-	// Name of service role in customer's account to be used by AWS SMS.
-	RoleName *string `locationName:"roleName" type:"string"`
-
-	// List of server groups to include in the application.
-	ServerGroups []ServerGroup `locationName:"serverGroups" type:"list"`
-
-	// List of tags to be associated with the application.
-	Tags []Tag `locationName:"tags" type:"list"`
-}
-
-// String returns the string representation
-func (s CreateAppInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type CreateAppOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Summary description of the application.
-	AppSummary *AppSummary `locationName:"appSummary" type:"structure"`
-
-	// List of server groups included in the application.
-	ServerGroups []ServerGroup `locationName:"serverGroups" type:"list"`
-
-	// List of taags associated with the application.
-	Tags []Tag `locationName:"tags" type:"list"`
-}
-
-// String returns the string representation
-func (s CreateAppOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCreateApp = "CreateApp"
 
@@ -71,7 +25,7 @@ const opCreateApp = "CreateApp"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sms-2016-10-24/CreateApp
-func (c *Client) CreateAppRequest(input *CreateAppInput) CreateAppRequest {
+func (c *Client) CreateAppRequest(input *types.CreateAppInput) CreateAppRequest {
 	op := &aws.Operation{
 		Name:       opCreateApp,
 		HTTPMethod: "POST",
@@ -79,10 +33,10 @@ func (c *Client) CreateAppRequest(input *CreateAppInput) CreateAppRequest {
 	}
 
 	if input == nil {
-		input = &CreateAppInput{}
+		input = &types.CreateAppInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateAppOutput{})
+	req := c.newRequest(op, input, &types.CreateAppOutput{})
 	return CreateAppRequest{Request: req, Input: input, Copy: c.CreateAppRequest}
 }
 
@@ -90,8 +44,8 @@ func (c *Client) CreateAppRequest(input *CreateAppInput) CreateAppRequest {
 // CreateApp API operation.
 type CreateAppRequest struct {
 	*aws.Request
-	Input *CreateAppInput
-	Copy  func(*CreateAppInput) CreateAppRequest
+	Input *types.CreateAppInput
+	Copy  func(*types.CreateAppInput) CreateAppRequest
 }
 
 // Send marshals and sends the CreateApp API request.
@@ -103,7 +57,7 @@ func (r CreateAppRequest) Send(ctx context.Context) (*CreateAppResponse, error) 
 	}
 
 	resp := &CreateAppResponse{
-		CreateAppOutput: r.Request.Data.(*CreateAppOutput),
+		CreateAppOutput: r.Request.Data.(*types.CreateAppOutput),
 		response:        &aws.Response{Request: r.Request},
 	}
 
@@ -113,7 +67,7 @@ func (r CreateAppRequest) Send(ctx context.Context) (*CreateAppResponse, error) 
 // CreateAppResponse is the response type for the
 // CreateApp API operation.
 type CreateAppResponse struct {
-	*CreateAppOutput
+	*types.CreateAppOutput
 
 	response *aws.Response
 }

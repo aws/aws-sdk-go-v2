@@ -6,108 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/kafka/types"
 )
-
-type ListNodesInput struct {
-	_ struct{} `type:"structure"`
-
-	// ClusterArn is a required field
-	ClusterArn *string `location:"uri" locationName:"clusterArn" type:"string" required:"true"`
-
-	MaxResults *int64 `location:"querystring" locationName:"maxResults" min:"1" type:"integer"`
-
-	NextToken *string `location:"querystring" locationName:"nextToken" type:"string"`
-}
-
-// String returns the string representation
-func (s ListNodesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListNodesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListNodesInput"}
-
-	if s.ClusterArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ClusterArn"))
-	}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListNodesInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.ClusterArn != nil {
-		v := *s.ClusterArn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "clusterArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.MaxResults != nil {
-		v := *s.MaxResults
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "maxResults", protocol.Int64Value(v), metadata)
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-// Information about nodes in the cluster.
-type ListNodesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The paginated results marker. When the result of a ListNodes operation is
-	// truncated, the call returns NextToken in the response. To get another batch
-	// of nodes, provide this token in your next request.
-	NextToken *string `locationName:"nextToken" type:"string"`
-
-	// List containing a NodeInfo object.
-	NodeInfoList []NodeInfo `locationName:"nodeInfoList" type:"list"`
-}
-
-// String returns the string representation
-func (s ListNodesOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListNodesOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.NodeInfoList != nil {
-		v := s.NodeInfoList
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "nodeInfoList", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	return nil
-}
 
 const opListNodes = "ListNodes"
 
@@ -124,7 +24,7 @@ const opListNodes = "ListNodes"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/ListNodes
-func (c *Client) ListNodesRequest(input *ListNodesInput) ListNodesRequest {
+func (c *Client) ListNodesRequest(input *types.ListNodesInput) ListNodesRequest {
 	op := &aws.Operation{
 		Name:       opListNodes,
 		HTTPMethod: "GET",
@@ -138,10 +38,10 @@ func (c *Client) ListNodesRequest(input *ListNodesInput) ListNodesRequest {
 	}
 
 	if input == nil {
-		input = &ListNodesInput{}
+		input = &types.ListNodesInput{}
 	}
 
-	req := c.newRequest(op, input, &ListNodesOutput{})
+	req := c.newRequest(op, input, &types.ListNodesOutput{})
 	return ListNodesRequest{Request: req, Input: input, Copy: c.ListNodesRequest}
 }
 
@@ -149,8 +49,8 @@ func (c *Client) ListNodesRequest(input *ListNodesInput) ListNodesRequest {
 // ListNodes API operation.
 type ListNodesRequest struct {
 	*aws.Request
-	Input *ListNodesInput
-	Copy  func(*ListNodesInput) ListNodesRequest
+	Input *types.ListNodesInput
+	Copy  func(*types.ListNodesInput) ListNodesRequest
 }
 
 // Send marshals and sends the ListNodes API request.
@@ -162,7 +62,7 @@ func (r ListNodesRequest) Send(ctx context.Context) (*ListNodesResponse, error) 
 	}
 
 	resp := &ListNodesResponse{
-		ListNodesOutput: r.Request.Data.(*ListNodesOutput),
+		ListNodesOutput: r.Request.Data.(*types.ListNodesOutput),
 		response:        &aws.Response{Request: r.Request},
 	}
 
@@ -192,7 +92,7 @@ func NewListNodesPaginator(req ListNodesRequest) ListNodesPaginator {
 	return ListNodesPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListNodesInput
+				var inCpy *types.ListNodesInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -212,14 +112,14 @@ type ListNodesPaginator struct {
 	aws.Pager
 }
 
-func (p *ListNodesPaginator) CurrentPage() *ListNodesOutput {
-	return p.Pager.CurrentPage().(*ListNodesOutput)
+func (p *ListNodesPaginator) CurrentPage() *types.ListNodesOutput {
+	return p.Pager.CurrentPage().(*types.ListNodesOutput)
 }
 
 // ListNodesResponse is the response type for the
 // ListNodes API operation.
 type ListNodesResponse struct {
-	*ListNodesOutput
+	*types.ListNodesOutput
 
 	response *aws.Response
 }

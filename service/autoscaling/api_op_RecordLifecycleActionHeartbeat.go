@@ -6,74 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/autoscaling/types"
 )
-
-type RecordLifecycleActionHeartbeatInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the Auto Scaling group.
-	//
-	// AutoScalingGroupName is a required field
-	AutoScalingGroupName *string `min:"1" type:"string" required:"true"`
-
-	// The ID of the instance.
-	InstanceId *string `min:"1" type:"string"`
-
-	// A token that uniquely identifies a specific lifecycle action associated with
-	// an instance. Amazon EC2 Auto Scaling sends this token to the notification
-	// target that you specified when you created the lifecycle hook.
-	LifecycleActionToken *string `min:"36" type:"string"`
-
-	// The name of the lifecycle hook.
-	//
-	// LifecycleHookName is a required field
-	LifecycleHookName *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s RecordLifecycleActionHeartbeatInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *RecordLifecycleActionHeartbeatInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "RecordLifecycleActionHeartbeatInput"}
-
-	if s.AutoScalingGroupName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("AutoScalingGroupName"))
-	}
-	if s.AutoScalingGroupName != nil && len(*s.AutoScalingGroupName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("AutoScalingGroupName", 1))
-	}
-	if s.InstanceId != nil && len(*s.InstanceId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("InstanceId", 1))
-	}
-	if s.LifecycleActionToken != nil && len(*s.LifecycleActionToken) < 36 {
-		invalidParams.Add(aws.NewErrParamMinLen("LifecycleActionToken", 36))
-	}
-
-	if s.LifecycleHookName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("LifecycleHookName"))
-	}
-	if s.LifecycleHookName != nil && len(*s.LifecycleHookName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("LifecycleHookName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type RecordLifecycleActionHeartbeatOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s RecordLifecycleActionHeartbeatOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opRecordLifecycleActionHeartbeat = "RecordLifecycleActionHeartbeat"
 
@@ -114,7 +48,7 @@ const opRecordLifecycleActionHeartbeat = "RecordLifecycleActionHeartbeat"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/RecordLifecycleActionHeartbeat
-func (c *Client) RecordLifecycleActionHeartbeatRequest(input *RecordLifecycleActionHeartbeatInput) RecordLifecycleActionHeartbeatRequest {
+func (c *Client) RecordLifecycleActionHeartbeatRequest(input *types.RecordLifecycleActionHeartbeatInput) RecordLifecycleActionHeartbeatRequest {
 	op := &aws.Operation{
 		Name:       opRecordLifecycleActionHeartbeat,
 		HTTPMethod: "POST",
@@ -122,10 +56,10 @@ func (c *Client) RecordLifecycleActionHeartbeatRequest(input *RecordLifecycleAct
 	}
 
 	if input == nil {
-		input = &RecordLifecycleActionHeartbeatInput{}
+		input = &types.RecordLifecycleActionHeartbeatInput{}
 	}
 
-	req := c.newRequest(op, input, &RecordLifecycleActionHeartbeatOutput{})
+	req := c.newRequest(op, input, &types.RecordLifecycleActionHeartbeatOutput{})
 	return RecordLifecycleActionHeartbeatRequest{Request: req, Input: input, Copy: c.RecordLifecycleActionHeartbeatRequest}
 }
 
@@ -133,8 +67,8 @@ func (c *Client) RecordLifecycleActionHeartbeatRequest(input *RecordLifecycleAct
 // RecordLifecycleActionHeartbeat API operation.
 type RecordLifecycleActionHeartbeatRequest struct {
 	*aws.Request
-	Input *RecordLifecycleActionHeartbeatInput
-	Copy  func(*RecordLifecycleActionHeartbeatInput) RecordLifecycleActionHeartbeatRequest
+	Input *types.RecordLifecycleActionHeartbeatInput
+	Copy  func(*types.RecordLifecycleActionHeartbeatInput) RecordLifecycleActionHeartbeatRequest
 }
 
 // Send marshals and sends the RecordLifecycleActionHeartbeat API request.
@@ -146,7 +80,7 @@ func (r RecordLifecycleActionHeartbeatRequest) Send(ctx context.Context) (*Recor
 	}
 
 	resp := &RecordLifecycleActionHeartbeatResponse{
-		RecordLifecycleActionHeartbeatOutput: r.Request.Data.(*RecordLifecycleActionHeartbeatOutput),
+		RecordLifecycleActionHeartbeatOutput: r.Request.Data.(*types.RecordLifecycleActionHeartbeatOutput),
 		response:                             &aws.Response{Request: r.Request},
 	}
 
@@ -156,7 +90,7 @@ func (r RecordLifecycleActionHeartbeatRequest) Send(ctx context.Context) (*Recor
 // RecordLifecycleActionHeartbeatResponse is the response type for the
 // RecordLifecycleActionHeartbeat API operation.
 type RecordLifecycleActionHeartbeatResponse struct {
-	*RecordLifecycleActionHeartbeatOutput
+	*types.RecordLifecycleActionHeartbeatOutput
 
 	response *aws.Response
 }

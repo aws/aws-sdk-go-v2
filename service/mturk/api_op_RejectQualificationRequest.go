@@ -6,50 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/mturk/types"
 )
-
-type RejectQualificationRequestInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the Qualification request, as returned by the ListQualificationRequests
-	// operation.
-	//
-	// QualificationRequestId is a required field
-	QualificationRequestId *string `type:"string" required:"true"`
-
-	// A text message explaining why the request was rejected, to be shown to the
-	// Worker who made the request.
-	Reason *string `type:"string"`
-}
-
-// String returns the string representation
-func (s RejectQualificationRequestInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *RejectQualificationRequestInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "RejectQualificationRequestInput"}
-
-	if s.QualificationRequestId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("QualificationRequestId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type RejectQualificationRequestOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s RejectQualificationRequestOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opRejectQualificationRequest = "RejectQualificationRequest"
 
@@ -69,7 +27,7 @@ const opRejectQualificationRequest = "RejectQualificationRequest"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/RejectQualificationRequest
-func (c *Client) RejectQualificationRequestRequest(input *RejectQualificationRequestInput) RejectQualificationRequestRequest {
+func (c *Client) RejectQualificationRequestRequest(input *types.RejectQualificationRequestInput) RejectQualificationRequestRequest {
 	op := &aws.Operation{
 		Name:       opRejectQualificationRequest,
 		HTTPMethod: "POST",
@@ -77,10 +35,10 @@ func (c *Client) RejectQualificationRequestRequest(input *RejectQualificationReq
 	}
 
 	if input == nil {
-		input = &RejectQualificationRequestInput{}
+		input = &types.RejectQualificationRequestInput{}
 	}
 
-	req := c.newRequest(op, input, &RejectQualificationRequestOutput{})
+	req := c.newRequest(op, input, &types.RejectQualificationRequestOutput{})
 	return RejectQualificationRequestRequest{Request: req, Input: input, Copy: c.RejectQualificationRequestRequest}
 }
 
@@ -88,8 +46,8 @@ func (c *Client) RejectQualificationRequestRequest(input *RejectQualificationReq
 // RejectQualificationRequest API operation.
 type RejectQualificationRequestRequest struct {
 	*aws.Request
-	Input *RejectQualificationRequestInput
-	Copy  func(*RejectQualificationRequestInput) RejectQualificationRequestRequest
+	Input *types.RejectQualificationRequestInput
+	Copy  func(*types.RejectQualificationRequestInput) RejectQualificationRequestRequest
 }
 
 // Send marshals and sends the RejectQualificationRequest API request.
@@ -101,7 +59,7 @@ func (r RejectQualificationRequestRequest) Send(ctx context.Context) (*RejectQua
 	}
 
 	resp := &RejectQualificationRequestResponse{
-		RejectQualificationRequestOutput: r.Request.Data.(*RejectQualificationRequestOutput),
+		RejectQualificationRequestOutput: r.Request.Data.(*types.RejectQualificationRequestOutput),
 		response:                         &aws.Response{Request: r.Request},
 	}
 
@@ -111,7 +69,7 @@ func (r RejectQualificationRequestRequest) Send(ctx context.Context) (*RejectQua
 // RejectQualificationRequestResponse is the response type for the
 // RejectQualificationRequest API operation.
 type RejectQualificationRequestResponse struct {
-	*RejectQualificationRequestOutput
+	*types.RejectQualificationRequestOutput
 
 	response *aws.Response
 }

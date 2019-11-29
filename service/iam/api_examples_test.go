@@ -12,6 +12,8 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws/awserr"
 	"github.com/aws/aws-sdk-go-v2/aws/external"
 	"github.com/aws/aws-sdk-go-v2/service/iam"
+	"github.com/aws/aws-sdk-go-v2/service/iam/enums"
+	"github.com/aws/aws-sdk-go-v2/service/iam/types"
 )
 
 var _ time.Duration
@@ -37,7 +39,7 @@ func ExampleClient_AddClientIDToOpenIDConnectProviderRequest_shared00() {
 	}
 
 	svc := iam.New(cfg)
-	input := &iam.AddClientIDToOpenIDConnectProviderInput{
+	input := &types.AddClientIDToOpenIDConnectProviderInput{
 		ClientID:                 aws.String("my-application-ID"),
 		OpenIDConnectProviderArn: aws.String("arn:aws:iam::123456789012:oidc-provider/server.example.com"),
 	}
@@ -80,7 +82,7 @@ func ExampleClient_AddRoleToInstanceProfileRequest_shared00() {
 	}
 
 	svc := iam.New(cfg)
-	input := &iam.AddRoleToInstanceProfileInput{
+	input := &types.AddRoleToInstanceProfileInput{
 		InstanceProfileName: aws.String("Webserver"),
 		RoleName:            aws.String("S3Access"),
 	}
@@ -124,7 +126,7 @@ func ExampleClient_AddUserToGroupRequest_shared00() {
 	}
 
 	svc := iam.New(cfg)
-	input := &iam.AddUserToGroupInput{
+	input := &types.AddUserToGroupInput{
 		GroupName: aws.String("Admins"),
 		UserName:  aws.String("Bob"),
 	}
@@ -165,7 +167,7 @@ func ExampleClient_AttachGroupPolicyRequest_shared00() {
 	}
 
 	svc := iam.New(cfg)
-	input := &iam.AttachGroupPolicyInput{
+	input := &types.AttachGroupPolicyInput{
 		GroupName: aws.String("Finance"),
 		PolicyArn: aws.String("arn:aws:iam::aws:policy/ReadOnlyAccess"),
 	}
@@ -210,7 +212,7 @@ func ExampleClient_AttachRolePolicyRequest_shared00() {
 	}
 
 	svc := iam.New(cfg)
-	input := &iam.AttachRolePolicyInput{
+	input := &types.AttachRolePolicyInput{
 		PolicyArn: aws.String("arn:aws:iam::aws:policy/ReadOnlyAccess"),
 		RoleName:  aws.String("ReadOnlyRole"),
 	}
@@ -257,7 +259,7 @@ func ExampleClient_AttachUserPolicyRequest_shared00() {
 	}
 
 	svc := iam.New(cfg)
-	input := &iam.AttachUserPolicyInput{
+	input := &types.AttachUserPolicyInput{
 		PolicyArn: aws.String("arn:aws:iam::aws:policy/AdministratorAccess"),
 		UserName:  aws.String("Alice"),
 	}
@@ -301,7 +303,7 @@ func ExampleClient_ChangePasswordRequest_shared00() {
 	}
 
 	svc := iam.New(cfg)
-	input := &iam.ChangePasswordInput{
+	input := &types.ChangePasswordInput{
 		NewPassword: aws.String("]35d/{pB9Fo9wJ"),
 		OldPassword: aws.String("3s0K_;xh4~8XXI"),
 	}
@@ -348,7 +350,7 @@ func ExampleClient_CreateAccessKeyRequest_shared00() {
 	}
 
 	svc := iam.New(cfg)
-	input := &iam.CreateAccessKeyInput{
+	input := &types.CreateAccessKeyInput{
 		UserName: aws.String("Bob"),
 	}
 
@@ -387,7 +389,7 @@ func ExampleClient_CreateAccountAliasRequest_shared00() {
 	}
 
 	svc := iam.New(cfg)
-	input := &iam.CreateAccountAliasInput{
+	input := &types.CreateAccountAliasInput{
 		AccountAlias: aws.String("examplecorp"),
 	}
 
@@ -426,7 +428,7 @@ func ExampleClient_CreateGroupRequest_shared00() {
 	}
 
 	svc := iam.New(cfg)
-	input := &iam.CreateGroupInput{
+	input := &types.CreateGroupInput{
 		GroupName: aws.String("Admins"),
 	}
 
@@ -468,7 +470,7 @@ func ExampleClient_CreateInstanceProfileRequest_shared00() {
 	}
 
 	svc := iam.New(cfg)
-	input := &iam.CreateInstanceProfileInput{
+	input := &types.CreateInstanceProfileInput{
 		InstanceProfileName: aws.String("Webserver"),
 	}
 
@@ -508,7 +510,7 @@ func ExampleClient_CreateLoginProfileRequest_shared00() {
 	}
 
 	svc := iam.New(cfg)
-	input := &iam.CreateLoginProfileInput{
+	input := &types.CreateLoginProfileInput{
 		Password:              aws.String("h]6EszR}vJ*m"),
 		PasswordResetRequired: aws.Bool(true),
 		UserName:              aws.String("Bob"),
@@ -554,7 +556,7 @@ func ExampleClient_CreateOpenIDConnectProviderRequest_shared00() {
 	}
 
 	svc := iam.New(cfg)
-	input := &iam.CreateOpenIDConnectProviderInput{
+	input := &types.CreateOpenIDConnectProviderInput{
 		ClientIDList: []string{
 			"my-application-id",
 		},
@@ -603,7 +605,7 @@ func ExampleClient_CreateRoleRequest_shared00() {
 	}
 
 	svc := iam.New(cfg)
-	input := &iam.CreateRoleInput{
+	input := &types.CreateRoleInput{
 		AssumeRolePolicyDocument: aws.String("<Stringified-JSON>"),
 		Path:                     aws.String("/"),
 		RoleName:                 aws.String("Test-Role"),
@@ -650,7 +652,7 @@ func ExampleClient_CreateUserRequest_shared00() {
 	}
 
 	svc := iam.New(cfg)
-	input := &iam.CreateUserInput{
+	input := &types.CreateUserInput{
 		UserName: aws.String("Bob"),
 	}
 
@@ -696,7 +698,7 @@ func ExampleClient_DeleteAccessKeyRequest_shared00() {
 	}
 
 	svc := iam.New(cfg)
-	input := &iam.DeleteAccessKeyInput{
+	input := &types.DeleteAccessKeyInput{
 		AccessKeyId: aws.String("AKIDPMS9RO4H3FEXAMPLE"),
 		UserName:    aws.String("Bob"),
 	}
@@ -736,7 +738,7 @@ func ExampleClient_DeleteAccountAliasRequest_shared00() {
 	}
 
 	svc := iam.New(cfg)
-	input := &iam.DeleteAccountAliasInput{
+	input := &types.DeleteAccountAliasInput{
 		AccountAlias: aws.String("mycompany"),
 	}
 
@@ -775,7 +777,7 @@ func ExampleClient_DeleteAccountPasswordPolicyRequest_shared00() {
 	}
 
 	svc := iam.New(cfg)
-	input := &iam.DeleteAccountPasswordPolicyInput{}
+	input := &types.DeleteAccountPasswordPolicyInput{}
 
 	req := svc.DeleteAccountPasswordPolicyRequest(input)
 	result, err := req.Send(context.Background())
@@ -813,7 +815,7 @@ func ExampleClient_DeleteGroupPolicyRequest_shared00() {
 	}
 
 	svc := iam.New(cfg)
-	input := &iam.DeleteGroupPolicyInput{
+	input := &types.DeleteGroupPolicyInput{
 		GroupName:  aws.String("Admins"),
 		PolicyName: aws.String("ExamplePolicy"),
 	}
@@ -853,7 +855,7 @@ func ExampleClient_DeleteInstanceProfileRequest_shared00() {
 	}
 
 	svc := iam.New(cfg)
-	input := &iam.DeleteInstanceProfileInput{
+	input := &types.DeleteInstanceProfileInput{
 		InstanceProfileName: aws.String("ExampleInstanceProfile"),
 	}
 
@@ -894,7 +896,7 @@ func ExampleClient_DeleteLoginProfileRequest_shared00() {
 	}
 
 	svc := iam.New(cfg)
-	input := &iam.DeleteLoginProfileInput{
+	input := &types.DeleteLoginProfileInput{
 		UserName: aws.String("Bob"),
 	}
 
@@ -935,7 +937,7 @@ func ExampleClient_DeleteRoleRequest_shared00() {
 	}
 
 	svc := iam.New(cfg)
-	input := &iam.DeleteRoleInput{
+	input := &types.DeleteRoleInput{
 		RoleName: aws.String("Test-Role"),
 	}
 
@@ -981,7 +983,7 @@ func ExampleClient_DeleteRolePolicyRequest_shared00() {
 	}
 
 	svc := iam.New(cfg)
-	input := &iam.DeleteRolePolicyInput{
+	input := &types.DeleteRolePolicyInput{
 		PolicyName: aws.String("ExamplePolicy"),
 		RoleName:   aws.String("Test-Role"),
 	}
@@ -1024,7 +1026,7 @@ func ExampleClient_DeleteSigningCertificateRequest_shared00() {
 	}
 
 	svc := iam.New(cfg)
-	input := &iam.DeleteSigningCertificateInput{
+	input := &types.DeleteSigningCertificateInput{
 		CertificateId: aws.String("TA7SMP42TDN5Z26OBPJE7EXAMPLE"),
 		UserName:      aws.String("Anika"),
 	}
@@ -1064,7 +1066,7 @@ func ExampleClient_DeleteUserRequest_shared00() {
 	}
 
 	svc := iam.New(cfg)
-	input := &iam.DeleteUserInput{
+	input := &types.DeleteUserInput{
 		UserName: aws.String("Bob"),
 	}
 
@@ -1108,7 +1110,7 @@ func ExampleClient_DeleteUserPolicyRequest_shared00() {
 	}
 
 	svc := iam.New(cfg)
-	input := &iam.DeleteUserPolicyInput{
+	input := &types.DeleteUserPolicyInput{
 		PolicyName: aws.String("ExamplePolicy"),
 		UserName:   aws.String("Juan"),
 	}
@@ -1149,7 +1151,7 @@ func ExampleClient_DeleteVirtualMFADeviceRequest_shared00() {
 	}
 
 	svc := iam.New(cfg)
-	input := &iam.DeleteVirtualMFADeviceInput{
+	input := &types.DeleteVirtualMFADeviceInput{
 		SerialNumber: aws.String("arn:aws:iam::123456789012:mfa/ExampleName"),
 	}
 
@@ -1190,7 +1192,7 @@ func ExampleClient_GenerateOrganizationsAccessReportRequest_shared00() {
 	}
 
 	svc := iam.New(cfg)
-	input := &iam.GenerateOrganizationsAccessReportInput{
+	input := &types.GenerateOrganizationsAccessReportInput{
 		EntityPath: aws.String("o-a1b2c3d4e5/r-f6g7h8i9j0example/ou-1a2b3c-k9l8m7n6o5example"),
 	}
 
@@ -1225,7 +1227,7 @@ func ExampleClient_GenerateServiceLastAccessedDetailsRequest_shared00() {
 	}
 
 	svc := iam.New(cfg)
-	input := &iam.GenerateServiceLastAccessedDetailsInput{
+	input := &types.GenerateServiceLastAccessedDetailsInput{
 		Arn: aws.String("arn:aws:iam::123456789012:policy/ExamplePolicy1"),
 	}
 
@@ -1263,7 +1265,7 @@ func ExampleClient_GetAccountPasswordPolicyRequest_shared00() {
 	}
 
 	svc := iam.New(cfg)
-	input := &iam.GetAccountPasswordPolicyInput{}
+	input := &types.GetAccountPasswordPolicyInput{}
 
 	req := svc.GetAccountPasswordPolicyRequest(input)
 	result, err := req.Send(context.Background())
@@ -1299,7 +1301,7 @@ func ExampleClient_GetAccountSummaryRequest_shared00() {
 	}
 
 	svc := iam.New(cfg)
-	input := &iam.GetAccountSummaryInput{}
+	input := &types.GetAccountSummaryInput{}
 
 	req := svc.GetAccountSummaryRequest(input)
 	result, err := req.Send(context.Background())
@@ -1332,7 +1334,7 @@ func ExampleClient_GetInstanceProfileRequest_shared00() {
 	}
 
 	svc := iam.New(cfg)
-	input := &iam.GetInstanceProfileInput{
+	input := &types.GetInstanceProfileInput{
 		InstanceProfileName: aws.String("ExampleInstanceProfile"),
 	}
 
@@ -1370,7 +1372,7 @@ func ExampleClient_GetLoginProfileRequest_shared00() {
 	}
 
 	svc := iam.New(cfg)
-	input := &iam.GetLoginProfileInput{
+	input := &types.GetLoginProfileInput{
 		UserName: aws.String("Anika"),
 	}
 
@@ -1407,7 +1409,7 @@ func ExampleClient_GetOrganizationsAccessReportRequest_shared00() {
 	}
 
 	svc := iam.New(cfg)
-	input := &iam.GetOrganizationsAccessReportInput{
+	input := &types.GetOrganizationsAccessReportInput{
 		JobId: aws.String("examplea-1234-b567-cde8-90fg123abcd4"),
 	}
 
@@ -1442,7 +1444,7 @@ func ExampleClient_GetRoleRequest_shared00() {
 	}
 
 	svc := iam.New(cfg)
-	input := &iam.GetRoleInput{
+	input := &types.GetRoleInput{
 		RoleName: aws.String("Test-Role"),
 	}
 
@@ -1479,7 +1481,7 @@ func ExampleClient_GetServiceLastAccessedDetailsRequest_shared00() {
 	}
 
 	svc := iam.New(cfg)
-	input := &iam.GetServiceLastAccessedDetailsInput{
+	input := &types.GetServiceLastAccessedDetailsInput{
 		JobId: aws.String("examplef-1305-c245-eba4-71fe298bcda7"),
 	}
 
@@ -1517,7 +1519,7 @@ func ExampleClient_GetServiceLastAccessedDetailsWithEntitiesRequest_shared00() {
 	}
 
 	svc := iam.New(cfg)
-	input := &iam.GetServiceLastAccessedDetailsWithEntitiesInput{
+	input := &types.GetServiceLastAccessedDetailsWithEntitiesInput{
 		JobId:            aws.String("examplef-1305-c245-eba4-71fe298bcda7"),
 		ServiceNamespace: aws.String("iam"),
 	}
@@ -1555,7 +1557,7 @@ func ExampleClient_GetUserRequest_shared00() {
 	}
 
 	svc := iam.New(cfg)
-	input := &iam.GetUserInput{
+	input := &types.GetUserInput{
 		UserName: aws.String("Bob"),
 	}
 
@@ -1592,7 +1594,7 @@ func ExampleClient_ListAccessKeysRequest_shared00() {
 	}
 
 	svc := iam.New(cfg)
-	input := &iam.ListAccessKeysInput{
+	input := &types.ListAccessKeysInput{
 		UserName: aws.String("Alice"),
 	}
 
@@ -1629,7 +1631,7 @@ func ExampleClient_ListAccountAliasesRequest_shared00() {
 	}
 
 	svc := iam.New(cfg)
-	input := &iam.ListAccountAliasesInput{}
+	input := &types.ListAccountAliasesInput{}
 
 	req := svc.ListAccountAliasesRequest(input)
 	result, err := req.Send(context.Background())
@@ -1663,7 +1665,7 @@ func ExampleClient_ListGroupPoliciesRequest_shared00() {
 	}
 
 	svc := iam.New(cfg)
-	input := &iam.ListGroupPoliciesInput{
+	input := &types.ListGroupPoliciesInput{
 		GroupName: aws.String("Admins"),
 	}
 
@@ -1700,7 +1702,7 @@ func ExampleClient_ListGroupsRequest_shared00() {
 	}
 
 	svc := iam.New(cfg)
-	input := &iam.ListGroupsInput{}
+	input := &types.ListGroupsInput{}
 
 	req := svc.ListGroupsRequest(input)
 	result, err := req.Send(context.Background())
@@ -1733,7 +1735,7 @@ func ExampleClient_ListGroupsForUserRequest_shared00() {
 	}
 
 	svc := iam.New(cfg)
-	input := &iam.ListGroupsForUserInput{
+	input := &types.ListGroupsForUserInput{
 		UserName: aws.String("Bob"),
 	}
 
@@ -1771,7 +1773,7 @@ func ExampleClient_ListPoliciesGrantingServiceAccessRequest_shared00() {
 	}
 
 	svc := iam.New(cfg)
-	input := &iam.ListPoliciesGrantingServiceAccessInput{
+	input := &types.ListPoliciesGrantingServiceAccessInput{
 		Arn: aws.String("arn:aws:iam::123456789012:user/ExampleUser01"),
 		ServiceNamespaces: []string{
 			"iam",
@@ -1812,7 +1814,7 @@ func ExampleClient_ListRoleTagsRequest_shared00() {
 	}
 
 	svc := iam.New(cfg)
-	input := &iam.ListRoleTagsInput{
+	input := &types.ListRoleTagsInput{
 		RoleName: aws.String("taggedrole1"),
 	}
 
@@ -1849,7 +1851,7 @@ func ExampleClient_ListSigningCertificatesRequest_shared00() {
 	}
 
 	svc := iam.New(cfg)
-	input := &iam.ListSigningCertificatesInput{
+	input := &types.ListSigningCertificatesInput{
 		UserName: aws.String("Bob"),
 	}
 
@@ -1886,7 +1888,7 @@ func ExampleClient_ListUserTagsRequest_shared00() {
 	}
 
 	svc := iam.New(cfg)
-	input := &iam.ListUserTagsInput{
+	input := &types.ListUserTagsInput{
 		UserName: aws.String("anika"),
 	}
 
@@ -1923,7 +1925,7 @@ func ExampleClient_ListUsersRequest_shared00() {
 	}
 
 	svc := iam.New(cfg)
-	input := &iam.ListUsersInput{}
+	input := &types.ListUsersInput{}
 
 	req := svc.ListUsersRequest(input)
 	result, err := req.Send(context.Background())
@@ -1957,7 +1959,7 @@ func ExampleClient_ListVirtualMFADevicesRequest_shared00() {
 	}
 
 	svc := iam.New(cfg)
-	input := &iam.ListVirtualMFADevicesInput{}
+	input := &types.ListVirtualMFADevicesInput{}
 
 	req := svc.ListVirtualMFADevicesRequest(input)
 	result, err := req.Send(context.Background())
@@ -1988,7 +1990,7 @@ func ExampleClient_PutGroupPolicyRequest_shared00() {
 	}
 
 	svc := iam.New(cfg)
-	input := &iam.PutGroupPolicyInput{
+	input := &types.PutGroupPolicyInput{
 		GroupName:      aws.String("Admins"),
 		PolicyDocument: aws.String("{\"Version\":\"2012-10-17\",\"Statement\":{\"Effect\":\"Allow\",\"Action\":\"*\",\"Resource\":\"*\"}}"),
 		PolicyName:     aws.String("AllPerms"),
@@ -2031,7 +2033,7 @@ func ExampleClient_PutRolePolicyRequest_shared00() {
 	}
 
 	svc := iam.New(cfg)
-	input := &iam.PutRolePolicyInput{
+	input := &types.PutRolePolicyInput{
 		PolicyDocument: aws.String("{\"Version\":\"2012-10-17\",\"Statement\":{\"Effect\":\"Allow\",\"Action\":\"s3:*\",\"Resource\":\"*\"}}"),
 		PolicyName:     aws.String("S3AccessPolicy"),
 		RoleName:       aws.String("S3Access"),
@@ -2076,7 +2078,7 @@ func ExampleClient_PutUserPolicyRequest_shared00() {
 	}
 
 	svc := iam.New(cfg)
-	input := &iam.PutUserPolicyInput{
+	input := &types.PutUserPolicyInput{
 		PolicyDocument: aws.String("{\"Version\":\"2012-10-17\",\"Statement\":{\"Effect\":\"Allow\",\"Action\":\"*\",\"Resource\":\"*\"}}"),
 		PolicyName:     aws.String("AllAccessPolicy"),
 		UserName:       aws.String("Bob"),
@@ -2120,7 +2122,7 @@ func ExampleClient_RemoveRoleFromInstanceProfileRequest_shared00() {
 	}
 
 	svc := iam.New(cfg)
-	input := &iam.RemoveRoleFromInstanceProfileInput{
+	input := &types.RemoveRoleFromInstanceProfileInput{
 		InstanceProfileName: aws.String("ExampleInstanceProfile"),
 		RoleName:            aws.String("Test-Role"),
 	}
@@ -2162,7 +2164,7 @@ func ExampleClient_RemoveUserFromGroupRequest_shared00() {
 	}
 
 	svc := iam.New(cfg)
-	input := &iam.RemoveUserFromGroupInput{
+	input := &types.RemoveUserFromGroupInput{
 		GroupName: aws.String("Admins"),
 		UserName:  aws.String("Bob"),
 	}
@@ -2203,8 +2205,8 @@ func ExampleClient_SetSecurityTokenServicePreferencesRequest_shared00() {
 	}
 
 	svc := iam.New(cfg)
-	input := &iam.SetSecurityTokenServicePreferencesInput{
-		GlobalEndpointTokenVersion: iam.GlobalEndpointTokenVersionV2token,
+	input := &types.SetSecurityTokenServicePreferencesInput{
+		GlobalEndpointTokenVersion: enums.GlobalEndpointTokenVersionV2token,
 	}
 
 	req := svc.SetSecurityTokenServicePreferencesRequest(input)
@@ -2238,9 +2240,9 @@ func ExampleClient_TagRoleRequest_shared00() {
 	}
 
 	svc := iam.New(cfg)
-	input := &iam.TagRoleInput{
+	input := &types.TagRoleInput{
 		RoleName: aws.String("taggedrole"),
-		Tags: []iam.Tag{
+		Tags: []types.Tag{
 			{
 				Key:   aws.String("Dept"),
 				Value: aws.String("Accounting"),
@@ -2291,8 +2293,8 @@ func ExampleClient_TagUserRequest_shared00() {
 	}
 
 	svc := iam.New(cfg)
-	input := &iam.TagUserInput{
-		Tags: []iam.Tag{
+	input := &types.TagUserInput{
+		Tags: []types.Tag{
 			{
 				Key:   aws.String("Dept"),
 				Value: aws.String("Accounting"),
@@ -2345,7 +2347,7 @@ func ExampleClient_UntagRoleRequest_shared00() {
 	}
 
 	svc := iam.New(cfg)
-	input := &iam.UntagRoleInput{
+	input := &types.UntagRoleInput{
 		RoleName: aws.String("taggedrole"),
 		TagKeys: []string{
 			"Dept",
@@ -2388,7 +2390,7 @@ func ExampleClient_UntagUserRequest_shared00() {
 	}
 
 	svc := iam.New(cfg)
-	input := &iam.UntagUserInput{
+	input := &types.UntagUserInput{
 		TagKeys: []string{
 			"Dept",
 		},
@@ -2431,9 +2433,9 @@ func ExampleClient_UpdateAccessKeyRequest_shared00() {
 	}
 
 	svc := iam.New(cfg)
-	input := &iam.UpdateAccessKeyInput{
+	input := &types.UpdateAccessKeyInput{
 		AccessKeyId: aws.String("AKIAIOSFODNN7EXAMPLE"),
-		Status:      iam.StatusTypeInactive,
+		Status:      enums.StatusTypeInactive,
 		UserName:    aws.String("Bob"),
 	}
 
@@ -2473,7 +2475,7 @@ func ExampleClient_UpdateAccountPasswordPolicyRequest_shared00() {
 	}
 
 	svc := iam.New(cfg)
-	input := &iam.UpdateAccountPasswordPolicyInput{
+	input := &types.UpdateAccountPasswordPolicyInput{
 		MinimumPasswordLength: aws.Int64(8),
 		RequireNumbers:        aws.Bool(true),
 	}
@@ -2515,7 +2517,7 @@ func ExampleClient_UpdateAssumeRolePolicyRequest_shared00() {
 	}
 
 	svc := iam.New(cfg)
-	input := &iam.UpdateAssumeRolePolicyInput{
+	input := &types.UpdateAssumeRolePolicyInput{
 		PolicyDocument: aws.String("{\"Version\":\"2012-10-17\",\"Statement\":[{\"Effect\":\"Allow\",\"Principal\":{\"Service\":[\"ec2.amazonaws.com\"]},\"Action\":[\"sts:AssumeRole\"]}]}"),
 		RoleName:       aws.String("S3AccessForEC2Instances"),
 	}
@@ -2559,7 +2561,7 @@ func ExampleClient_UpdateGroupRequest_shared00() {
 	}
 
 	svc := iam.New(cfg)
-	input := &iam.UpdateGroupInput{
+	input := &types.UpdateGroupInput{
 		GroupName:    aws.String("Test"),
 		NewGroupName: aws.String("Test-1"),
 	}
@@ -2601,7 +2603,7 @@ func ExampleClient_UpdateLoginProfileRequest_shared00() {
 	}
 
 	svc := iam.New(cfg)
-	input := &iam.UpdateLoginProfileInput{
+	input := &types.UpdateLoginProfileInput{
 		Password: aws.String("SomeKindOfPassword123!@#"),
 		UserName: aws.String("Bob"),
 	}
@@ -2646,9 +2648,9 @@ func ExampleClient_UpdateSigningCertificateRequest_shared00() {
 	}
 
 	svc := iam.New(cfg)
-	input := &iam.UpdateSigningCertificateInput{
+	input := &types.UpdateSigningCertificateInput{
 		CertificateId: aws.String("TA7SMP42TDN5Z26OBPJE7EXAMPLE"),
-		Status:        iam.StatusTypeInactive,
+		Status:        enums.StatusTypeInactive,
 		UserName:      aws.String("Bob"),
 	}
 
@@ -2688,7 +2690,7 @@ func ExampleClient_UpdateUserRequest_shared00() {
 	}
 
 	svc := iam.New(cfg)
-	input := &iam.UpdateUserInput{
+	input := &types.UpdateUserInput{
 		NewUserName: aws.String("Robert"),
 		UserName:    aws.String("Bob"),
 	}
@@ -2735,7 +2737,7 @@ func ExampleClient_UploadServerCertificateRequest_shared00() {
 	}
 
 	svc := iam.New(cfg)
-	input := &iam.UploadServerCertificateInput{
+	input := &types.UploadServerCertificateInput{
 		CertificateBody:       aws.String("-----BEGIN CERTIFICATE-----<a very long certificate text string>-----END CERTIFICATE-----"),
 		Path:                  aws.String("/company/servercerts/"),
 		PrivateKey:            aws.String("-----BEGIN DSA PRIVATE KEY-----<a very long private key string>-----END DSA PRIVATE KEY-----"),
@@ -2781,7 +2783,7 @@ func ExampleClient_UploadSigningCertificateRequest_shared00() {
 	}
 
 	svc := iam.New(cfg)
-	input := &iam.UploadSigningCertificateInput{
+	input := &types.UploadSigningCertificateInput{
 		CertificateBody: aws.String("-----BEGIN CERTIFICATE-----<certificate-body>-----END CERTIFICATE-----"),
 		UserName:        aws.String("Bob"),
 	}

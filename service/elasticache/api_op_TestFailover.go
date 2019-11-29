@@ -6,63 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/elasticache/types"
 )
-
-type TestFailoverInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the node group (called shard in the console) in this replication
-	// group on which automatic failover is to be tested. You may test automatic
-	// failover on up to 5 node groups in any rolling 24-hour period.
-	//
-	// NodeGroupId is a required field
-	NodeGroupId *string `min:"1" type:"string" required:"true"`
-
-	// The name of the replication group (console: cluster) whose automatic failover
-	// is being tested by this operation.
-	//
-	// ReplicationGroupId is a required field
-	ReplicationGroupId *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s TestFailoverInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *TestFailoverInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "TestFailoverInput"}
-
-	if s.NodeGroupId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("NodeGroupId"))
-	}
-	if s.NodeGroupId != nil && len(*s.NodeGroupId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("NodeGroupId", 1))
-	}
-
-	if s.ReplicationGroupId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ReplicationGroupId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type TestFailoverOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Contains all of the attributes of a specific Redis replication group.
-	ReplicationGroup *ReplicationGroup `type:"structure"`
-}
-
-// String returns the string representation
-func (s TestFailoverOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opTestFailover = "TestFailover"
 
@@ -110,7 +55,7 @@ const opTestFailover = "TestFailover"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/TestFailover
-func (c *Client) TestFailoverRequest(input *TestFailoverInput) TestFailoverRequest {
+func (c *Client) TestFailoverRequest(input *types.TestFailoverInput) TestFailoverRequest {
 	op := &aws.Operation{
 		Name:       opTestFailover,
 		HTTPMethod: "POST",
@@ -118,10 +63,10 @@ func (c *Client) TestFailoverRequest(input *TestFailoverInput) TestFailoverReque
 	}
 
 	if input == nil {
-		input = &TestFailoverInput{}
+		input = &types.TestFailoverInput{}
 	}
 
-	req := c.newRequest(op, input, &TestFailoverOutput{})
+	req := c.newRequest(op, input, &types.TestFailoverOutput{})
 	return TestFailoverRequest{Request: req, Input: input, Copy: c.TestFailoverRequest}
 }
 
@@ -129,8 +74,8 @@ func (c *Client) TestFailoverRequest(input *TestFailoverInput) TestFailoverReque
 // TestFailover API operation.
 type TestFailoverRequest struct {
 	*aws.Request
-	Input *TestFailoverInput
-	Copy  func(*TestFailoverInput) TestFailoverRequest
+	Input *types.TestFailoverInput
+	Copy  func(*types.TestFailoverInput) TestFailoverRequest
 }
 
 // Send marshals and sends the TestFailover API request.
@@ -142,7 +87,7 @@ func (r TestFailoverRequest) Send(ctx context.Context) (*TestFailoverResponse, e
 	}
 
 	resp := &TestFailoverResponse{
-		TestFailoverOutput: r.Request.Data.(*TestFailoverOutput),
+		TestFailoverOutput: r.Request.Data.(*types.TestFailoverOutput),
 		response:           &aws.Response{Request: r.Request},
 	}
 
@@ -152,7 +97,7 @@ func (r TestFailoverRequest) Send(ctx context.Context) (*TestFailoverResponse, e
 // TestFailoverResponse is the response type for the
 // TestFailover API operation.
 type TestFailoverResponse struct {
-	*TestFailoverOutput
+	*types.TestFailoverOutput
 
 	response *aws.Response
 }

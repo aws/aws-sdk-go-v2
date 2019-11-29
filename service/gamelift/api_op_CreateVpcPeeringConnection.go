@@ -6,77 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/gamelift/types"
 )
-
-// Represents the input for a request action.
-type CreateVpcPeeringConnectionInput struct {
-	_ struct{} `type:"structure"`
-
-	// Unique identifier for a fleet. This tells Amazon GameLift which GameLift
-	// VPC to peer with.
-	//
-	// FleetId is a required field
-	FleetId *string `type:"string" required:"true"`
-
-	// Unique identifier for the AWS account with the VPC that you want to peer
-	// your Amazon GameLift fleet with. You can find your Account ID in the AWS
-	// Management Console under account settings.
-	//
-	// PeerVpcAwsAccountId is a required field
-	PeerVpcAwsAccountId *string `min:"1" type:"string" required:"true"`
-
-	// Unique identifier for a VPC with resources to be accessed by your Amazon
-	// GameLift fleet. The VPC must be in the same region where your fleet is deployed.
-	// Look up a VPC ID using the VPC Dashboard (https://console.aws.amazon.com/vpc/)
-	// in the AWS Management Console. Learn more about VPC peering in VPC Peering
-	// with Amazon GameLift Fleets (https://docs.aws.amazon.com/gamelift/latest/developerguide/vpc-peering.html).
-	//
-	// PeerVpcId is a required field
-	PeerVpcId *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s CreateVpcPeeringConnectionInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateVpcPeeringConnectionInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateVpcPeeringConnectionInput"}
-
-	if s.FleetId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("FleetId"))
-	}
-
-	if s.PeerVpcAwsAccountId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("PeerVpcAwsAccountId"))
-	}
-	if s.PeerVpcAwsAccountId != nil && len(*s.PeerVpcAwsAccountId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("PeerVpcAwsAccountId", 1))
-	}
-
-	if s.PeerVpcId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("PeerVpcId"))
-	}
-	if s.PeerVpcId != nil && len(*s.PeerVpcId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("PeerVpcId", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type CreateVpcPeeringConnectionOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s CreateVpcPeeringConnectionOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCreateVpcPeeringConnection = "CreateVpcPeeringConnection"
 
@@ -127,7 +58,7 @@ const opCreateVpcPeeringConnection = "CreateVpcPeeringConnection"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/CreateVpcPeeringConnection
-func (c *Client) CreateVpcPeeringConnectionRequest(input *CreateVpcPeeringConnectionInput) CreateVpcPeeringConnectionRequest {
+func (c *Client) CreateVpcPeeringConnectionRequest(input *types.CreateVpcPeeringConnectionInput) CreateVpcPeeringConnectionRequest {
 	op := &aws.Operation{
 		Name:       opCreateVpcPeeringConnection,
 		HTTPMethod: "POST",
@@ -135,10 +66,10 @@ func (c *Client) CreateVpcPeeringConnectionRequest(input *CreateVpcPeeringConnec
 	}
 
 	if input == nil {
-		input = &CreateVpcPeeringConnectionInput{}
+		input = &types.CreateVpcPeeringConnectionInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateVpcPeeringConnectionOutput{})
+	req := c.newRequest(op, input, &types.CreateVpcPeeringConnectionOutput{})
 	return CreateVpcPeeringConnectionRequest{Request: req, Input: input, Copy: c.CreateVpcPeeringConnectionRequest}
 }
 
@@ -146,8 +77,8 @@ func (c *Client) CreateVpcPeeringConnectionRequest(input *CreateVpcPeeringConnec
 // CreateVpcPeeringConnection API operation.
 type CreateVpcPeeringConnectionRequest struct {
 	*aws.Request
-	Input *CreateVpcPeeringConnectionInput
-	Copy  func(*CreateVpcPeeringConnectionInput) CreateVpcPeeringConnectionRequest
+	Input *types.CreateVpcPeeringConnectionInput
+	Copy  func(*types.CreateVpcPeeringConnectionInput) CreateVpcPeeringConnectionRequest
 }
 
 // Send marshals and sends the CreateVpcPeeringConnection API request.
@@ -159,7 +90,7 @@ func (r CreateVpcPeeringConnectionRequest) Send(ctx context.Context) (*CreateVpc
 	}
 
 	resp := &CreateVpcPeeringConnectionResponse{
-		CreateVpcPeeringConnectionOutput: r.Request.Data.(*CreateVpcPeeringConnectionOutput),
+		CreateVpcPeeringConnectionOutput: r.Request.Data.(*types.CreateVpcPeeringConnectionOutput),
 		response:                         &aws.Response{Request: r.Request},
 	}
 
@@ -169,7 +100,7 @@ func (r CreateVpcPeeringConnectionRequest) Send(ctx context.Context) (*CreateVpc
 // CreateVpcPeeringConnectionResponse is the response type for the
 // CreateVpcPeeringConnection API operation.
 type CreateVpcPeeringConnectionResponse struct {
-	*CreateVpcPeeringConnectionOutput
+	*types.CreateVpcPeeringConnectionOutput
 
 	response *aws.Response
 }

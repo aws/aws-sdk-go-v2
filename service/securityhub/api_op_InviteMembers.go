@@ -6,71 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/securityhub/types"
 )
-
-type InviteMembersInput struct {
-	_ struct{} `type:"structure"`
-
-	// A list of IDs of the AWS accounts that you want to invite to Security Hub
-	// as members.
-	AccountIds []string `type:"list"`
-}
-
-// String returns the string representation
-func (s InviteMembersInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s InviteMembersInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.AccountIds != nil {
-		v := s.AccountIds
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "AccountIds", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
-		}
-		ls0.End()
-
-	}
-	return nil
-}
-
-type InviteMembersOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A list of account ID and email address pairs of the AWS accounts that couldn't
-	// be processed.
-	UnprocessedAccounts []Result `type:"list"`
-}
-
-// String returns the string representation
-func (s InviteMembersOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s InviteMembersOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.UnprocessedAccounts != nil {
-		v := s.UnprocessedAccounts
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "UnprocessedAccounts", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	return nil
-}
 
 const opInviteMembers = "InviteMembers"
 
@@ -92,7 +29,7 @@ const opInviteMembers = "InviteMembers"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/InviteMembers
-func (c *Client) InviteMembersRequest(input *InviteMembersInput) InviteMembersRequest {
+func (c *Client) InviteMembersRequest(input *types.InviteMembersInput) InviteMembersRequest {
 	op := &aws.Operation{
 		Name:       opInviteMembers,
 		HTTPMethod: "POST",
@@ -100,10 +37,10 @@ func (c *Client) InviteMembersRequest(input *InviteMembersInput) InviteMembersRe
 	}
 
 	if input == nil {
-		input = &InviteMembersInput{}
+		input = &types.InviteMembersInput{}
 	}
 
-	req := c.newRequest(op, input, &InviteMembersOutput{})
+	req := c.newRequest(op, input, &types.InviteMembersOutput{})
 	return InviteMembersRequest{Request: req, Input: input, Copy: c.InviteMembersRequest}
 }
 
@@ -111,8 +48,8 @@ func (c *Client) InviteMembersRequest(input *InviteMembersInput) InviteMembersRe
 // InviteMembers API operation.
 type InviteMembersRequest struct {
 	*aws.Request
-	Input *InviteMembersInput
-	Copy  func(*InviteMembersInput) InviteMembersRequest
+	Input *types.InviteMembersInput
+	Copy  func(*types.InviteMembersInput) InviteMembersRequest
 }
 
 // Send marshals and sends the InviteMembers API request.
@@ -124,7 +61,7 @@ func (r InviteMembersRequest) Send(ctx context.Context) (*InviteMembersResponse,
 	}
 
 	resp := &InviteMembersResponse{
-		InviteMembersOutput: r.Request.Data.(*InviteMembersOutput),
+		InviteMembersOutput: r.Request.Data.(*types.InviteMembersOutput),
 		response:            &aws.Response{Request: r.Request},
 	}
 
@@ -134,7 +71,7 @@ func (r InviteMembersRequest) Send(ctx context.Context) (*InviteMembersResponse,
 // InviteMembersResponse is the response type for the
 // InviteMembers API operation.
 type InviteMembersResponse struct {
-	*InviteMembersOutput
+	*types.InviteMembersOutput
 
 	response *aws.Response
 }

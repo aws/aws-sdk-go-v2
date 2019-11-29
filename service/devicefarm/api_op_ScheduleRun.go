@@ -6,105 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/devicefarm/types"
 )
-
-// Represents a request to the schedule run operation.
-type ScheduleRunInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ARN of the app to schedule a run.
-	AppArn *string `locationName:"appArn" min:"32" type:"string"`
-
-	// Information about the settings for the run to be scheduled.
-	Configuration *ScheduleRunConfiguration `locationName:"configuration" type:"structure"`
-
-	// The ARN of the device pool for the run to be scheduled.
-	DevicePoolArn *string `locationName:"devicePoolArn" min:"32" type:"string"`
-
-	// The filter criteria used to dynamically select a set of devices for a test
-	// run, as well as the maximum number of devices to be included in the run.
-	//
-	// Either devicePoolArn or deviceSelectionConfiguration is required in a request.
-	DeviceSelectionConfiguration *DeviceSelectionConfiguration `locationName:"deviceSelectionConfiguration" type:"structure"`
-
-	// Specifies configuration information about a test run, such as the execution
-	// timeout (in minutes).
-	ExecutionConfiguration *ExecutionConfiguration `locationName:"executionConfiguration" type:"structure"`
-
-	// The name for the run to be scheduled.
-	Name *string `locationName:"name" type:"string"`
-
-	// The ARN of the project for the run to be scheduled.
-	//
-	// ProjectArn is a required field
-	ProjectArn *string `locationName:"projectArn" min:"32" type:"string" required:"true"`
-
-	// Information about the test for the run to be scheduled.
-	//
-	// Test is a required field
-	Test *ScheduleRunTest `locationName:"test" type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s ScheduleRunInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ScheduleRunInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ScheduleRunInput"}
-	if s.AppArn != nil && len(*s.AppArn) < 32 {
-		invalidParams.Add(aws.NewErrParamMinLen("AppArn", 32))
-	}
-	if s.DevicePoolArn != nil && len(*s.DevicePoolArn) < 32 {
-		invalidParams.Add(aws.NewErrParamMinLen("DevicePoolArn", 32))
-	}
-
-	if s.ProjectArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ProjectArn"))
-	}
-	if s.ProjectArn != nil && len(*s.ProjectArn) < 32 {
-		invalidParams.Add(aws.NewErrParamMinLen("ProjectArn", 32))
-	}
-
-	if s.Test == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Test"))
-	}
-	if s.Configuration != nil {
-		if err := s.Configuration.Validate(); err != nil {
-			invalidParams.AddNested("Configuration", err.(aws.ErrInvalidParams))
-		}
-	}
-	if s.DeviceSelectionConfiguration != nil {
-		if err := s.DeviceSelectionConfiguration.Validate(); err != nil {
-			invalidParams.AddNested("DeviceSelectionConfiguration", err.(aws.ErrInvalidParams))
-		}
-	}
-	if s.Test != nil {
-		if err := s.Test.Validate(); err != nil {
-			invalidParams.AddNested("Test", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Represents the result of a schedule run request.
-type ScheduleRunOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Information about the scheduled run.
-	Run *Run `locationName:"run" type:"structure"`
-}
-
-// String returns the string representation
-func (s ScheduleRunOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opScheduleRun = "ScheduleRun"
 
@@ -121,7 +24,7 @@ const opScheduleRun = "ScheduleRun"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ScheduleRun
-func (c *Client) ScheduleRunRequest(input *ScheduleRunInput) ScheduleRunRequest {
+func (c *Client) ScheduleRunRequest(input *types.ScheduleRunInput) ScheduleRunRequest {
 	op := &aws.Operation{
 		Name:       opScheduleRun,
 		HTTPMethod: "POST",
@@ -129,10 +32,10 @@ func (c *Client) ScheduleRunRequest(input *ScheduleRunInput) ScheduleRunRequest 
 	}
 
 	if input == nil {
-		input = &ScheduleRunInput{}
+		input = &types.ScheduleRunInput{}
 	}
 
-	req := c.newRequest(op, input, &ScheduleRunOutput{})
+	req := c.newRequest(op, input, &types.ScheduleRunOutput{})
 	return ScheduleRunRequest{Request: req, Input: input, Copy: c.ScheduleRunRequest}
 }
 
@@ -140,8 +43,8 @@ func (c *Client) ScheduleRunRequest(input *ScheduleRunInput) ScheduleRunRequest 
 // ScheduleRun API operation.
 type ScheduleRunRequest struct {
 	*aws.Request
-	Input *ScheduleRunInput
-	Copy  func(*ScheduleRunInput) ScheduleRunRequest
+	Input *types.ScheduleRunInput
+	Copy  func(*types.ScheduleRunInput) ScheduleRunRequest
 }
 
 // Send marshals and sends the ScheduleRun API request.
@@ -153,7 +56,7 @@ func (r ScheduleRunRequest) Send(ctx context.Context) (*ScheduleRunResponse, err
 	}
 
 	resp := &ScheduleRunResponse{
-		ScheduleRunOutput: r.Request.Data.(*ScheduleRunOutput),
+		ScheduleRunOutput: r.Request.Data.(*types.ScheduleRunOutput),
 		response:          &aws.Response{Request: r.Request},
 	}
 
@@ -163,7 +66,7 @@ func (r ScheduleRunRequest) Send(ctx context.Context) (*ScheduleRunResponse, err
 // ScheduleRunResponse is the response type for the
 // ScheduleRun API operation.
 type ScheduleRunResponse struct {
-	*ScheduleRunOutput
+	*types.ScheduleRunOutput
 
 	response *aws.Response
 }

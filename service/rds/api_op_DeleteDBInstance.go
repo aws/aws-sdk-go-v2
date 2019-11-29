@@ -6,93 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/rds/types"
 )
-
-type DeleteDBInstanceInput struct {
-	_ struct{} `type:"structure"`
-
-	// The DB instance identifier for the DB instance to be deleted. This parameter
-	// isn't case-sensitive.
-	//
-	// Constraints:
-	//
-	//    * Must match the name of an existing DB instance.
-	//
-	// DBInstanceIdentifier is a required field
-	DBInstanceIdentifier *string `type:"string" required:"true"`
-
-	// A value that indicates whether to remove automated backups immediately after
-	// the DB instance is deleted. This parameter isn't case-sensitive. The default
-	// is to remove automated backups immediately after the DB instance is deleted.
-	DeleteAutomatedBackups *bool `type:"boolean"`
-
-	// The DBSnapshotIdentifier of the new DBSnapshot created when the SkipFinalSnapshot
-	// parameter is disabled.
-	//
-	// Specifying this parameter and also specifying to skip final DB snapshot creation
-	// in SkipFinalShapshot results in an error.
-	//
-	// Constraints:
-	//
-	//    * Must be 1 to 255 letters or numbers.
-	//
-	//    * First character must be a letter.
-	//
-	//    * Can't end with a hyphen or contain two consecutive hyphens.
-	//
-	//    * Can't be specified when deleting a Read Replica.
-	FinalDBSnapshotIdentifier *string `type:"string"`
-
-	// A value that indicates whether to skip the creation of a final DB snapshot
-	// before the DB instance is deleted. If skip is specified, no DB snapshot is
-	// created. If skip is not specified, a DB snapshot is created before the DB
-	// instance is deleted. By default, skip is not specified, and the DB snapshot
-	// is created.
-	//
-	// Note that when a DB instance is in a failure state and has a status of 'failed',
-	// 'incompatible-restore', or 'incompatible-network', it can only be deleted
-	// when skip is specified.
-	//
-	// Specify skip when deleting a Read Replica.
-	//
-	// The FinalDBSnapshotIdentifier parameter must be specified if skip is not
-	// specified.
-	SkipFinalSnapshot *bool `type:"boolean"`
-}
-
-// String returns the string representation
-func (s DeleteDBInstanceInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteDBInstanceInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteDBInstanceInput"}
-
-	if s.DBInstanceIdentifier == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DBInstanceIdentifier"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteDBInstanceOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Contains the details of an Amazon RDS DB instance.
-	//
-	// This data type is used as a response element in the DescribeDBInstances action.
-	DBInstance *DBInstance `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteDBInstanceOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteDBInstance = "DeleteDBInstance"
 
@@ -133,7 +48,7 @@ const opDeleteDBInstance = "DeleteDBInstance"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteDBInstance
-func (c *Client) DeleteDBInstanceRequest(input *DeleteDBInstanceInput) DeleteDBInstanceRequest {
+func (c *Client) DeleteDBInstanceRequest(input *types.DeleteDBInstanceInput) DeleteDBInstanceRequest {
 	op := &aws.Operation{
 		Name:       opDeleteDBInstance,
 		HTTPMethod: "POST",
@@ -141,10 +56,10 @@ func (c *Client) DeleteDBInstanceRequest(input *DeleteDBInstanceInput) DeleteDBI
 	}
 
 	if input == nil {
-		input = &DeleteDBInstanceInput{}
+		input = &types.DeleteDBInstanceInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteDBInstanceOutput{})
+	req := c.newRequest(op, input, &types.DeleteDBInstanceOutput{})
 	return DeleteDBInstanceRequest{Request: req, Input: input, Copy: c.DeleteDBInstanceRequest}
 }
 
@@ -152,8 +67,8 @@ func (c *Client) DeleteDBInstanceRequest(input *DeleteDBInstanceInput) DeleteDBI
 // DeleteDBInstance API operation.
 type DeleteDBInstanceRequest struct {
 	*aws.Request
-	Input *DeleteDBInstanceInput
-	Copy  func(*DeleteDBInstanceInput) DeleteDBInstanceRequest
+	Input *types.DeleteDBInstanceInput
+	Copy  func(*types.DeleteDBInstanceInput) DeleteDBInstanceRequest
 }
 
 // Send marshals and sends the DeleteDBInstance API request.
@@ -165,7 +80,7 @@ func (r DeleteDBInstanceRequest) Send(ctx context.Context) (*DeleteDBInstanceRes
 	}
 
 	resp := &DeleteDBInstanceResponse{
-		DeleteDBInstanceOutput: r.Request.Data.(*DeleteDBInstanceOutput),
+		DeleteDBInstanceOutput: r.Request.Data.(*types.DeleteDBInstanceOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -175,7 +90,7 @@ func (r DeleteDBInstanceRequest) Send(ctx context.Context) (*DeleteDBInstanceRes
 // DeleteDBInstanceResponse is the response type for the
 // DeleteDBInstance API operation.
 type DeleteDBInstanceResponse struct {
-	*DeleteDBInstanceOutput
+	*types.DeleteDBInstanceOutput
 
 	response *aws.Response
 }

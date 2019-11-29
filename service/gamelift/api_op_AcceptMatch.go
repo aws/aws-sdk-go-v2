@@ -6,65 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/gamelift/types"
 )
-
-// Represents the input for a request action.
-type AcceptMatchInput struct {
-	_ struct{} `type:"structure"`
-
-	// Player response to the proposed match.
-	//
-	// AcceptanceType is a required field
-	AcceptanceType AcceptanceType `type:"string" required:"true" enum:"true"`
-
-	// Unique identifier for a player delivering the response. This parameter can
-	// include one or multiple player IDs.
-	//
-	// PlayerIds is a required field
-	PlayerIds []string `type:"list" required:"true"`
-
-	// Unique identifier for a matchmaking ticket. The ticket must be in status
-	// REQUIRES_ACCEPTANCE; otherwise this request will fail.
-	//
-	// TicketId is a required field
-	TicketId *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s AcceptMatchInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *AcceptMatchInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "AcceptMatchInput"}
-	if len(s.AcceptanceType) == 0 {
-		invalidParams.Add(aws.NewErrParamRequired("AcceptanceType"))
-	}
-
-	if s.PlayerIds == nil {
-		invalidParams.Add(aws.NewErrParamRequired("PlayerIds"))
-	}
-
-	if s.TicketId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("TicketId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type AcceptMatchOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s AcceptMatchOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opAcceptMatch = "AcceptMatch"
 
@@ -120,7 +63,7 @@ const opAcceptMatch = "AcceptMatch"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/AcceptMatch
-func (c *Client) AcceptMatchRequest(input *AcceptMatchInput) AcceptMatchRequest {
+func (c *Client) AcceptMatchRequest(input *types.AcceptMatchInput) AcceptMatchRequest {
 	op := &aws.Operation{
 		Name:       opAcceptMatch,
 		HTTPMethod: "POST",
@@ -128,10 +71,10 @@ func (c *Client) AcceptMatchRequest(input *AcceptMatchInput) AcceptMatchRequest 
 	}
 
 	if input == nil {
-		input = &AcceptMatchInput{}
+		input = &types.AcceptMatchInput{}
 	}
 
-	req := c.newRequest(op, input, &AcceptMatchOutput{})
+	req := c.newRequest(op, input, &types.AcceptMatchOutput{})
 	return AcceptMatchRequest{Request: req, Input: input, Copy: c.AcceptMatchRequest}
 }
 
@@ -139,8 +82,8 @@ func (c *Client) AcceptMatchRequest(input *AcceptMatchInput) AcceptMatchRequest 
 // AcceptMatch API operation.
 type AcceptMatchRequest struct {
 	*aws.Request
-	Input *AcceptMatchInput
-	Copy  func(*AcceptMatchInput) AcceptMatchRequest
+	Input *types.AcceptMatchInput
+	Copy  func(*types.AcceptMatchInput) AcceptMatchRequest
 }
 
 // Send marshals and sends the AcceptMatch API request.
@@ -152,7 +95,7 @@ func (r AcceptMatchRequest) Send(ctx context.Context) (*AcceptMatchResponse, err
 	}
 
 	resp := &AcceptMatchResponse{
-		AcceptMatchOutput: r.Request.Data.(*AcceptMatchOutput),
+		AcceptMatchOutput: r.Request.Data.(*types.AcceptMatchOutput),
 		response:          &aws.Response{Request: r.Request},
 	}
 
@@ -162,7 +105,7 @@ func (r AcceptMatchRequest) Send(ctx context.Context) (*AcceptMatchResponse, err
 // AcceptMatchResponse is the response type for the
 // AcceptMatch API operation.
 type AcceptMatchResponse struct {
-	*AcceptMatchOutput
+	*types.AcceptMatchOutput
 
 	response *aws.Response
 }

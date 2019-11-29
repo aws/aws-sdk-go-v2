@@ -10,6 +10,7 @@ package personalizeruntimeiface
 
 import (
 	"github.com/aws/aws-sdk-go-v2/service/personalizeruntime"
+	"github.com/aws/aws-sdk-go-v2/service/personalizeruntime/types"
 )
 
 // ClientAPI provides an interface to enable mocking the
@@ -43,7 +44,7 @@ import (
 //    type mockClientClient struct {
 //        personalizeruntimeiface.ClientPI
 //    }
-//    func (m *mockClientClient) GetPersonalizedRanking(input *personalizeruntime.GetPersonalizedRankingInput) (*personalizeruntime.GetPersonalizedRankingOutput, error) {
+//    func (m *mockClientClient) GetPersonalizedRanking(input *types.GetPersonalizedRankingInput) (*types.GetPersonalizedRankingOutput, error) {
 //        // mock response/functionality
 //    }
 //
@@ -61,9 +62,9 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type ClientAPI interface {
-	GetPersonalizedRankingRequest(*personalizeruntime.GetPersonalizedRankingInput) personalizeruntime.GetPersonalizedRankingRequest
+	GetPersonalizedRankingRequest(*types.GetPersonalizedRankingInput) personalizeruntime.GetPersonalizedRankingRequest
 
-	GetRecommendationsRequest(*personalizeruntime.GetRecommendationsInput) personalizeruntime.GetRecommendationsRequest
+	GetRecommendationsRequest(*types.GetRecommendationsInput) personalizeruntime.GetRecommendationsRequest
 }
 
 var _ ClientAPI = (*personalizeruntime.Client)(nil)

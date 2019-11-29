@@ -6,119 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/mediaconvert/types"
 )
-
-// Modify a queue by sending a request with the queue name and any changes to
-// the queue.
-type UpdateQueueInput struct {
-	_ struct{} `type:"structure"`
-
-	// The new description for the queue, if you are changing it.
-	Description *string `locationName:"description" type:"string"`
-
-	// The name of the queue that you are modifying.
-	//
-	// Name is a required field
-	Name *string `location:"uri" locationName:"name" type:"string" required:"true"`
-
-	// The new details of your pricing plan for your reserved queue. When you set
-	// up a new pricing plan to replace an expired one, you enter into another 12-month
-	// commitment. When you add capacity to your queue by increasing the number
-	// of RTS, you extend the term of your commitment to 12 months from when you
-	// add capacity. After you make these commitments, you can't cancel them.
-	ReservationPlanSettings *ReservationPlanSettings `locationName:"reservationPlanSettings" type:"structure"`
-
-	// Pause or activate a queue by changing its status between ACTIVE and PAUSED.
-	// If you pause a queue, jobs in that queue won't begin. Jobs that are running
-	// when you pause the queue continue to run until they finish or result in an
-	// error.
-	Status QueueStatus `locationName:"status" type:"string" enum:"true"`
-}
-
-// String returns the string representation
-func (s UpdateQueueInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateQueueInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateQueueInput"}
-
-	if s.Name == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Name"))
-	}
-	if s.ReservationPlanSettings != nil {
-		if err := s.ReservationPlanSettings.Validate(); err != nil {
-			invalidParams.AddNested("ReservationPlanSettings", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s UpdateQueueInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.Description != nil {
-		v := *s.Description
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "description", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.ReservationPlanSettings != nil {
-		v := s.ReservationPlanSettings
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "reservationPlanSettings", v, metadata)
-	}
-	if len(s.Status) > 0 {
-		v := s.Status
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "status", protocol.QuotedValue{ValueMarshaler: v}, metadata)
-	}
-	if s.Name != nil {
-		v := *s.Name
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-// Successful update queue requests return the new queue information in JSON
-// format.
-type UpdateQueueOutput struct {
-	_ struct{} `type:"structure"`
-
-	// You can use queues to manage the resources that are available to your AWS
-	// account for running multiple transcoding jobs at the same time. If you don't
-	// specify a queue, the service sends all jobs through the default queue. For
-	// more information, see https://docs.aws.amazon.com/mediaconvert/latest/ug/working-with-queues.html.
-	Queue *Queue `locationName:"queue" type:"structure"`
-}
-
-// String returns the string representation
-func (s UpdateQueueOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s UpdateQueueOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.Queue != nil {
-		v := s.Queue
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "queue", v, metadata)
-	}
-	return nil
-}
 
 const opUpdateQueue = "UpdateQueue"
 
@@ -135,7 +24,7 @@ const opUpdateQueue = "UpdateQueue"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/UpdateQueue
-func (c *Client) UpdateQueueRequest(input *UpdateQueueInput) UpdateQueueRequest {
+func (c *Client) UpdateQueueRequest(input *types.UpdateQueueInput) UpdateQueueRequest {
 	op := &aws.Operation{
 		Name:       opUpdateQueue,
 		HTTPMethod: "PUT",
@@ -143,10 +32,10 @@ func (c *Client) UpdateQueueRequest(input *UpdateQueueInput) UpdateQueueRequest 
 	}
 
 	if input == nil {
-		input = &UpdateQueueInput{}
+		input = &types.UpdateQueueInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateQueueOutput{})
+	req := c.newRequest(op, input, &types.UpdateQueueOutput{})
 	return UpdateQueueRequest{Request: req, Input: input, Copy: c.UpdateQueueRequest}
 }
 
@@ -154,8 +43,8 @@ func (c *Client) UpdateQueueRequest(input *UpdateQueueInput) UpdateQueueRequest 
 // UpdateQueue API operation.
 type UpdateQueueRequest struct {
 	*aws.Request
-	Input *UpdateQueueInput
-	Copy  func(*UpdateQueueInput) UpdateQueueRequest
+	Input *types.UpdateQueueInput
+	Copy  func(*types.UpdateQueueInput) UpdateQueueRequest
 }
 
 // Send marshals and sends the UpdateQueue API request.
@@ -167,7 +56,7 @@ func (r UpdateQueueRequest) Send(ctx context.Context) (*UpdateQueueResponse, err
 	}
 
 	resp := &UpdateQueueResponse{
-		UpdateQueueOutput: r.Request.Data.(*UpdateQueueOutput),
+		UpdateQueueOutput: r.Request.Data.(*types.UpdateQueueOutput),
 		response:          &aws.Response{Request: r.Request},
 	}
 
@@ -177,7 +66,7 @@ func (r UpdateQueueRequest) Send(ctx context.Context) (*UpdateQueueResponse, err
 // UpdateQueueResponse is the response type for the
 // UpdateQueue API operation.
 type UpdateQueueResponse struct {
-	*UpdateQueueOutput
+	*types.UpdateQueueOutput
 
 	response *aws.Response
 }

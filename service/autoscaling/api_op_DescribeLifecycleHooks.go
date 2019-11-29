@@ -6,55 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/autoscaling/types"
 )
-
-type DescribeLifecycleHooksInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the Auto Scaling group.
-	//
-	// AutoScalingGroupName is a required field
-	AutoScalingGroupName *string `min:"1" type:"string" required:"true"`
-
-	// The names of one or more lifecycle hooks. If you omit this parameter, all
-	// lifecycle hooks are described.
-	LifecycleHookNames []string `type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeLifecycleHooksInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeLifecycleHooksInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeLifecycleHooksInput"}
-
-	if s.AutoScalingGroupName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("AutoScalingGroupName"))
-	}
-	if s.AutoScalingGroupName != nil && len(*s.AutoScalingGroupName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("AutoScalingGroupName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribeLifecycleHooksOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The lifecycle hooks for the specified group.
-	LifecycleHooks []LifecycleHook `type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeLifecycleHooksOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeLifecycleHooks = "DescribeLifecycleHooks"
 
@@ -71,7 +24,7 @@ const opDescribeLifecycleHooks = "DescribeLifecycleHooks"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DescribeLifecycleHooks
-func (c *Client) DescribeLifecycleHooksRequest(input *DescribeLifecycleHooksInput) DescribeLifecycleHooksRequest {
+func (c *Client) DescribeLifecycleHooksRequest(input *types.DescribeLifecycleHooksInput) DescribeLifecycleHooksRequest {
 	op := &aws.Operation{
 		Name:       opDescribeLifecycleHooks,
 		HTTPMethod: "POST",
@@ -79,10 +32,10 @@ func (c *Client) DescribeLifecycleHooksRequest(input *DescribeLifecycleHooksInpu
 	}
 
 	if input == nil {
-		input = &DescribeLifecycleHooksInput{}
+		input = &types.DescribeLifecycleHooksInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeLifecycleHooksOutput{})
+	req := c.newRequest(op, input, &types.DescribeLifecycleHooksOutput{})
 	return DescribeLifecycleHooksRequest{Request: req, Input: input, Copy: c.DescribeLifecycleHooksRequest}
 }
 
@@ -90,8 +43,8 @@ func (c *Client) DescribeLifecycleHooksRequest(input *DescribeLifecycleHooksInpu
 // DescribeLifecycleHooks API operation.
 type DescribeLifecycleHooksRequest struct {
 	*aws.Request
-	Input *DescribeLifecycleHooksInput
-	Copy  func(*DescribeLifecycleHooksInput) DescribeLifecycleHooksRequest
+	Input *types.DescribeLifecycleHooksInput
+	Copy  func(*types.DescribeLifecycleHooksInput) DescribeLifecycleHooksRequest
 }
 
 // Send marshals and sends the DescribeLifecycleHooks API request.
@@ -103,7 +56,7 @@ func (r DescribeLifecycleHooksRequest) Send(ctx context.Context) (*DescribeLifec
 	}
 
 	resp := &DescribeLifecycleHooksResponse{
-		DescribeLifecycleHooksOutput: r.Request.Data.(*DescribeLifecycleHooksOutput),
+		DescribeLifecycleHooksOutput: r.Request.Data.(*types.DescribeLifecycleHooksOutput),
 		response:                     &aws.Response{Request: r.Request},
 	}
 
@@ -113,7 +66,7 @@ func (r DescribeLifecycleHooksRequest) Send(ctx context.Context) (*DescribeLifec
 // DescribeLifecycleHooksResponse is the response type for the
 // DescribeLifecycleHooks API operation.
 type DescribeLifecycleHooksResponse struct {
-	*DescribeLifecycleHooksOutput
+	*types.DescribeLifecycleHooksOutput
 
 	response *aws.Response
 }

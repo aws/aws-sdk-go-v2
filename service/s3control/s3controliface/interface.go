@@ -10,6 +10,7 @@ package s3controliface
 
 import (
 	"github.com/aws/aws-sdk-go-v2/service/s3control"
+	"github.com/aws/aws-sdk-go-v2/service/s3control/types"
 )
 
 // ClientAPI provides an interface to enable mocking the
@@ -43,7 +44,7 @@ import (
 //    type mockClientClient struct {
 //        s3controliface.ClientPI
 //    }
-//    func (m *mockClientClient) CreateJob(input *s3control.CreateJobInput) (*s3control.CreateJobOutput, error) {
+//    func (m *mockClientClient) CreateJob(input *types.CreateJobInput) (*types.CreateJobOutput, error) {
 //        // mock response/functionality
 //    }
 //
@@ -61,21 +62,21 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type ClientAPI interface {
-	CreateJobRequest(*s3control.CreateJobInput) s3control.CreateJobRequest
+	CreateJobRequest(*types.CreateJobInput) s3control.CreateJobRequest
 
-	DeletePublicAccessBlockRequest(*s3control.DeletePublicAccessBlockInput) s3control.DeletePublicAccessBlockRequest
+	DeletePublicAccessBlockRequest(*types.DeletePublicAccessBlockInput) s3control.DeletePublicAccessBlockRequest
 
-	DescribeJobRequest(*s3control.DescribeJobInput) s3control.DescribeJobRequest
+	DescribeJobRequest(*types.DescribeJobInput) s3control.DescribeJobRequest
 
-	GetPublicAccessBlockRequest(*s3control.GetPublicAccessBlockInput) s3control.GetPublicAccessBlockRequest
+	GetPublicAccessBlockRequest(*types.GetPublicAccessBlockInput) s3control.GetPublicAccessBlockRequest
 
-	ListJobsRequest(*s3control.ListJobsInput) s3control.ListJobsRequest
+	ListJobsRequest(*types.ListJobsInput) s3control.ListJobsRequest
 
-	PutPublicAccessBlockRequest(*s3control.PutPublicAccessBlockInput) s3control.PutPublicAccessBlockRequest
+	PutPublicAccessBlockRequest(*types.PutPublicAccessBlockInput) s3control.PutPublicAccessBlockRequest
 
-	UpdateJobPriorityRequest(*s3control.UpdateJobPriorityInput) s3control.UpdateJobPriorityRequest
+	UpdateJobPriorityRequest(*types.UpdateJobPriorityInput) s3control.UpdateJobPriorityRequest
 
-	UpdateJobStatusRequest(*s3control.UpdateJobStatusInput) s3control.UpdateJobStatusRequest
+	UpdateJobStatusRequest(*types.UpdateJobStatusInput) s3control.UpdateJobStatusRequest
 }
 
 var _ ClientAPI = (*s3control.Client)(nil)

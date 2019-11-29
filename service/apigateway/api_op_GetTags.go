@@ -6,102 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/apigateway/types"
 )
-
-// Gets the Tags collection for a given resource.
-type GetTagsInput struct {
-	_ struct{} `type:"structure"`
-
-	// (Not currently supported) The maximum number of returned results per page.
-	// The default value is 25 and the maximum value is 500.
-	Limit *int64 `location:"querystring" locationName:"limit" type:"integer"`
-
-	// (Not currently supported) The current pagination position in the paged result
-	// set.
-	Position *string `location:"querystring" locationName:"position" type:"string"`
-
-	// [Required] The ARN of a resource that can be tagged. The resource ARN must
-	// be URL-encoded.
-	//
-	// ResourceArn is a required field
-	ResourceArn *string `location:"uri" locationName:"resource_arn" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetTagsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetTagsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetTagsInput"}
-
-	if s.ResourceArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ResourceArn"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetTagsInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.ResourceArn != nil {
-		v := *s.ResourceArn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "resource_arn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Limit != nil {
-		v := *s.Limit
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "limit", protocol.Int64Value(v), metadata)
-	}
-	if s.Position != nil {
-		v := *s.Position
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "position", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-// The collection of tags. Each tag element is associated with a given resource.
-type GetTagsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The collection of tags. Each tag element is associated with a given resource.
-	Tags map[string]string `locationName:"tags" type:"map"`
-}
-
-// String returns the string representation
-func (s GetTagsOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetTagsOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.Tags != nil {
-		v := s.Tags
-
-		metadata := protocol.Metadata{}
-		ms0 := e.Map(protocol.BodyTarget, "tags", metadata)
-		ms0.Start()
-		for k1, v1 := range v {
-			ms0.MapSetValue(k1, protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
-		}
-		ms0.End()
-
-	}
-	return nil
-}
 
 const opGetTags = "GetTags"
 
@@ -116,7 +22,7 @@ const opGetTags = "GetTags"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) GetTagsRequest(input *GetTagsInput) GetTagsRequest {
+func (c *Client) GetTagsRequest(input *types.GetTagsInput) GetTagsRequest {
 	op := &aws.Operation{
 		Name:       opGetTags,
 		HTTPMethod: "GET",
@@ -124,10 +30,10 @@ func (c *Client) GetTagsRequest(input *GetTagsInput) GetTagsRequest {
 	}
 
 	if input == nil {
-		input = &GetTagsInput{}
+		input = &types.GetTagsInput{}
 	}
 
-	req := c.newRequest(op, input, &GetTagsOutput{})
+	req := c.newRequest(op, input, &types.GetTagsOutput{})
 	return GetTagsRequest{Request: req, Input: input, Copy: c.GetTagsRequest}
 }
 
@@ -135,8 +41,8 @@ func (c *Client) GetTagsRequest(input *GetTagsInput) GetTagsRequest {
 // GetTags API operation.
 type GetTagsRequest struct {
 	*aws.Request
-	Input *GetTagsInput
-	Copy  func(*GetTagsInput) GetTagsRequest
+	Input *types.GetTagsInput
+	Copy  func(*types.GetTagsInput) GetTagsRequest
 }
 
 // Send marshals and sends the GetTags API request.
@@ -148,7 +54,7 @@ func (r GetTagsRequest) Send(ctx context.Context) (*GetTagsResponse, error) {
 	}
 
 	resp := &GetTagsResponse{
-		GetTagsOutput: r.Request.Data.(*GetTagsOutput),
+		GetTagsOutput: r.Request.Data.(*types.GetTagsOutput),
 		response:      &aws.Response{Request: r.Request},
 	}
 
@@ -158,7 +64,7 @@ func (r GetTagsRequest) Send(ctx context.Context) (*GetTagsResponse, error) {
 // GetTagsResponse is the response type for the
 // GetTags API operation.
 type GetTagsResponse struct {
-	*GetTagsOutput
+	*types.GetTagsOutput
 
 	response *aws.Response
 }

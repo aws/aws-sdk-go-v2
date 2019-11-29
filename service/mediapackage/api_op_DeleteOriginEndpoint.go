@@ -6,62 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/mediapackage/types"
 )
-
-type DeleteOriginEndpointInput struct {
-	_ struct{} `type:"structure"`
-
-	// Id is a required field
-	Id *string `location:"uri" locationName:"id" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteOriginEndpointInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteOriginEndpointInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteOriginEndpointInput"}
-
-	if s.Id == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Id"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteOriginEndpointInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.Id != nil {
-		v := *s.Id
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "id", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type DeleteOriginEndpointOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteOriginEndpointOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteOriginEndpointOutput) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
 
 const opDeleteOriginEndpoint = "DeleteOriginEndpoint"
 
@@ -78,7 +24,7 @@ const opDeleteOriginEndpoint = "DeleteOriginEndpoint"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mediapackage-2017-10-12/DeleteOriginEndpoint
-func (c *Client) DeleteOriginEndpointRequest(input *DeleteOriginEndpointInput) DeleteOriginEndpointRequest {
+func (c *Client) DeleteOriginEndpointRequest(input *types.DeleteOriginEndpointInput) DeleteOriginEndpointRequest {
 	op := &aws.Operation{
 		Name:       opDeleteOriginEndpoint,
 		HTTPMethod: "DELETE",
@@ -86,10 +32,10 @@ func (c *Client) DeleteOriginEndpointRequest(input *DeleteOriginEndpointInput) D
 	}
 
 	if input == nil {
-		input = &DeleteOriginEndpointInput{}
+		input = &types.DeleteOriginEndpointInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteOriginEndpointOutput{})
+	req := c.newRequest(op, input, &types.DeleteOriginEndpointOutput{})
 	return DeleteOriginEndpointRequest{Request: req, Input: input, Copy: c.DeleteOriginEndpointRequest}
 }
 
@@ -97,8 +43,8 @@ func (c *Client) DeleteOriginEndpointRequest(input *DeleteOriginEndpointInput) D
 // DeleteOriginEndpoint API operation.
 type DeleteOriginEndpointRequest struct {
 	*aws.Request
-	Input *DeleteOriginEndpointInput
-	Copy  func(*DeleteOriginEndpointInput) DeleteOriginEndpointRequest
+	Input *types.DeleteOriginEndpointInput
+	Copy  func(*types.DeleteOriginEndpointInput) DeleteOriginEndpointRequest
 }
 
 // Send marshals and sends the DeleteOriginEndpoint API request.
@@ -110,7 +56,7 @@ func (r DeleteOriginEndpointRequest) Send(ctx context.Context) (*DeleteOriginEnd
 	}
 
 	resp := &DeleteOriginEndpointResponse{
-		DeleteOriginEndpointOutput: r.Request.Data.(*DeleteOriginEndpointOutput),
+		DeleteOriginEndpointOutput: r.Request.Data.(*types.DeleteOriginEndpointOutput),
 		response:                   &aws.Response{Request: r.Request},
 	}
 
@@ -120,7 +66,7 @@ func (r DeleteOriginEndpointRequest) Send(ctx context.Context) (*DeleteOriginEnd
 // DeleteOriginEndpointResponse is the response type for the
 // DeleteOriginEndpoint API operation.
 type DeleteOriginEndpointResponse struct {
-	*DeleteOriginEndpointOutput
+	*types.DeleteOriginEndpointOutput
 
 	response *aws.Response
 }

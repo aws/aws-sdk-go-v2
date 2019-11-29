@@ -6,82 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/iot/types"
 )
-
-type StartOnDemandAuditTaskInput struct {
-	_ struct{} `type:"structure"`
-
-	// Which checks are performed during the audit. The checks you specify must
-	// be enabled for your account or an exception occurs. Use DescribeAccountAuditConfiguration
-	// to see the list of all checks, including those that are enabled or UpdateAccountAuditConfiguration
-	// to select which checks are enabled.
-	//
-	// TargetCheckNames is a required field
-	TargetCheckNames []string `locationName:"targetCheckNames" type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s StartOnDemandAuditTaskInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *StartOnDemandAuditTaskInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "StartOnDemandAuditTaskInput"}
-
-	if s.TargetCheckNames == nil {
-		invalidParams.Add(aws.NewErrParamRequired("TargetCheckNames"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s StartOnDemandAuditTaskInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.TargetCheckNames != nil {
-		v := s.TargetCheckNames
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "targetCheckNames", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
-		}
-		ls0.End()
-
-	}
-	return nil
-}
-
-type StartOnDemandAuditTaskOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the on-demand audit you started.
-	TaskId *string `locationName:"taskId" min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s StartOnDemandAuditTaskOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s StartOnDemandAuditTaskOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.TaskId != nil {
-		v := *s.TaskId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "taskId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opStartOnDemandAuditTask = "StartOnDemandAuditTask"
 
@@ -96,7 +22,7 @@ const opStartOnDemandAuditTask = "StartOnDemandAuditTask"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) StartOnDemandAuditTaskRequest(input *StartOnDemandAuditTaskInput) StartOnDemandAuditTaskRequest {
+func (c *Client) StartOnDemandAuditTaskRequest(input *types.StartOnDemandAuditTaskInput) StartOnDemandAuditTaskRequest {
 	op := &aws.Operation{
 		Name:       opStartOnDemandAuditTask,
 		HTTPMethod: "POST",
@@ -104,10 +30,10 @@ func (c *Client) StartOnDemandAuditTaskRequest(input *StartOnDemandAuditTaskInpu
 	}
 
 	if input == nil {
-		input = &StartOnDemandAuditTaskInput{}
+		input = &types.StartOnDemandAuditTaskInput{}
 	}
 
-	req := c.newRequest(op, input, &StartOnDemandAuditTaskOutput{})
+	req := c.newRequest(op, input, &types.StartOnDemandAuditTaskOutput{})
 	return StartOnDemandAuditTaskRequest{Request: req, Input: input, Copy: c.StartOnDemandAuditTaskRequest}
 }
 
@@ -115,8 +41,8 @@ func (c *Client) StartOnDemandAuditTaskRequest(input *StartOnDemandAuditTaskInpu
 // StartOnDemandAuditTask API operation.
 type StartOnDemandAuditTaskRequest struct {
 	*aws.Request
-	Input *StartOnDemandAuditTaskInput
-	Copy  func(*StartOnDemandAuditTaskInput) StartOnDemandAuditTaskRequest
+	Input *types.StartOnDemandAuditTaskInput
+	Copy  func(*types.StartOnDemandAuditTaskInput) StartOnDemandAuditTaskRequest
 }
 
 // Send marshals and sends the StartOnDemandAuditTask API request.
@@ -128,7 +54,7 @@ func (r StartOnDemandAuditTaskRequest) Send(ctx context.Context) (*StartOnDemand
 	}
 
 	resp := &StartOnDemandAuditTaskResponse{
-		StartOnDemandAuditTaskOutput: r.Request.Data.(*StartOnDemandAuditTaskOutput),
+		StartOnDemandAuditTaskOutput: r.Request.Data.(*types.StartOnDemandAuditTaskOutput),
 		response:                     &aws.Response{Request: r.Request},
 	}
 
@@ -138,7 +64,7 @@ func (r StartOnDemandAuditTaskRequest) Send(ctx context.Context) (*StartOnDemand
 // StartOnDemandAuditTaskResponse is the response type for the
 // StartOnDemandAuditTask API operation.
 type StartOnDemandAuditTaskResponse struct {
-	*StartOnDemandAuditTaskOutput
+	*types.StartOnDemandAuditTaskOutput
 
 	response *aws.Response
 }

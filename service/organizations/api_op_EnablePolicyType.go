@@ -6,60 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/organizations/types"
 )
-
-type EnablePolicyTypeInput struct {
-	_ struct{} `type:"structure"`
-
-	// The policy type that you want to enable.
-	//
-	// PolicyType is a required field
-	PolicyType PolicyType `type:"string" required:"true" enum:"true"`
-
-	// The unique identifier (ID) of the root in which you want to enable a policy
-	// type. You can get the ID from the ListRoots operation.
-	//
-	// The regex pattern (http://wikipedia.org/wiki/regex) for a root ID string
-	// requires "r-" followed by from 4 to 32 lower-case letters or digits.
-	//
-	// RootId is a required field
-	RootId *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s EnablePolicyTypeInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *EnablePolicyTypeInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "EnablePolicyTypeInput"}
-	if len(s.PolicyType) == 0 {
-		invalidParams.Add(aws.NewErrParamRequired("PolicyType"))
-	}
-
-	if s.RootId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("RootId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type EnablePolicyTypeOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A structure that shows the root with the updated list of enabled policy types.
-	Root *Root `type:"structure"`
-}
-
-// String returns the string representation
-func (s EnablePolicyTypeOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opEnablePolicyType = "EnablePolicyType"
 
@@ -89,7 +37,7 @@ const opEnablePolicyType = "EnablePolicyType"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/EnablePolicyType
-func (c *Client) EnablePolicyTypeRequest(input *EnablePolicyTypeInput) EnablePolicyTypeRequest {
+func (c *Client) EnablePolicyTypeRequest(input *types.EnablePolicyTypeInput) EnablePolicyTypeRequest {
 	op := &aws.Operation{
 		Name:       opEnablePolicyType,
 		HTTPMethod: "POST",
@@ -97,10 +45,10 @@ func (c *Client) EnablePolicyTypeRequest(input *EnablePolicyTypeInput) EnablePol
 	}
 
 	if input == nil {
-		input = &EnablePolicyTypeInput{}
+		input = &types.EnablePolicyTypeInput{}
 	}
 
-	req := c.newRequest(op, input, &EnablePolicyTypeOutput{})
+	req := c.newRequest(op, input, &types.EnablePolicyTypeOutput{})
 	return EnablePolicyTypeRequest{Request: req, Input: input, Copy: c.EnablePolicyTypeRequest}
 }
 
@@ -108,8 +56,8 @@ func (c *Client) EnablePolicyTypeRequest(input *EnablePolicyTypeInput) EnablePol
 // EnablePolicyType API operation.
 type EnablePolicyTypeRequest struct {
 	*aws.Request
-	Input *EnablePolicyTypeInput
-	Copy  func(*EnablePolicyTypeInput) EnablePolicyTypeRequest
+	Input *types.EnablePolicyTypeInput
+	Copy  func(*types.EnablePolicyTypeInput) EnablePolicyTypeRequest
 }
 
 // Send marshals and sends the EnablePolicyType API request.
@@ -121,7 +69,7 @@ func (r EnablePolicyTypeRequest) Send(ctx context.Context) (*EnablePolicyTypeRes
 	}
 
 	resp := &EnablePolicyTypeResponse{
-		EnablePolicyTypeOutput: r.Request.Data.(*EnablePolicyTypeOutput),
+		EnablePolicyTypeOutput: r.Request.Data.(*types.EnablePolicyTypeOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -131,7 +79,7 @@ func (r EnablePolicyTypeRequest) Send(ctx context.Context) (*EnablePolicyTypeRes
 // EnablePolicyTypeResponse is the response type for the
 // EnablePolicyType API operation.
 type EnablePolicyTypeResponse struct {
-	*EnablePolicyTypeOutput
+	*types.EnablePolicyTypeOutput
 
 	response *aws.Response
 }

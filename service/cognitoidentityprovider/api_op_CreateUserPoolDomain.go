@@ -6,80 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/types"
 )
-
-type CreateUserPoolDomainInput struct {
-	_ struct{} `type:"structure"`
-
-	// The configuration for a custom domain that hosts the sign-up and sign-in
-	// webpages for your application.
-	//
-	// Provide this parameter only if you want to use a custom domain for your user
-	// pool. Otherwise, you can exclude this parameter and use the Amazon Cognito
-	// hosted domain instead.
-	//
-	// For more information about the hosted domain and custom domains, see Configuring
-	// a User Pool Domain (https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-assign-domain.html).
-	CustomDomainConfig *CustomDomainConfigType `type:"structure"`
-
-	// The domain string.
-	//
-	// Domain is a required field
-	Domain *string `min:"1" type:"string" required:"true"`
-
-	// The user pool ID.
-	//
-	// UserPoolId is a required field
-	UserPoolId *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s CreateUserPoolDomainInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateUserPoolDomainInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateUserPoolDomainInput"}
-
-	if s.Domain == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Domain"))
-	}
-	if s.Domain != nil && len(*s.Domain) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Domain", 1))
-	}
-
-	if s.UserPoolId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("UserPoolId"))
-	}
-	if s.UserPoolId != nil && len(*s.UserPoolId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("UserPoolId", 1))
-	}
-	if s.CustomDomainConfig != nil {
-		if err := s.CustomDomainConfig.Validate(); err != nil {
-			invalidParams.AddNested("CustomDomainConfig", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type CreateUserPoolDomainOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon CloudFront endpoint that you use as the target of the alias that
-	// you set up with your Domain Name Service (DNS) provider.
-	CloudFrontDomain *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s CreateUserPoolDomainOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCreateUserPoolDomain = "CreateUserPoolDomain"
 
@@ -96,7 +24,7 @@ const opCreateUserPoolDomain = "CreateUserPoolDomain"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/CreateUserPoolDomain
-func (c *Client) CreateUserPoolDomainRequest(input *CreateUserPoolDomainInput) CreateUserPoolDomainRequest {
+func (c *Client) CreateUserPoolDomainRequest(input *types.CreateUserPoolDomainInput) CreateUserPoolDomainRequest {
 	op := &aws.Operation{
 		Name:       opCreateUserPoolDomain,
 		HTTPMethod: "POST",
@@ -104,10 +32,10 @@ func (c *Client) CreateUserPoolDomainRequest(input *CreateUserPoolDomainInput) C
 	}
 
 	if input == nil {
-		input = &CreateUserPoolDomainInput{}
+		input = &types.CreateUserPoolDomainInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateUserPoolDomainOutput{})
+	req := c.newRequest(op, input, &types.CreateUserPoolDomainOutput{})
 	return CreateUserPoolDomainRequest{Request: req, Input: input, Copy: c.CreateUserPoolDomainRequest}
 }
 
@@ -115,8 +43,8 @@ func (c *Client) CreateUserPoolDomainRequest(input *CreateUserPoolDomainInput) C
 // CreateUserPoolDomain API operation.
 type CreateUserPoolDomainRequest struct {
 	*aws.Request
-	Input *CreateUserPoolDomainInput
-	Copy  func(*CreateUserPoolDomainInput) CreateUserPoolDomainRequest
+	Input *types.CreateUserPoolDomainInput
+	Copy  func(*types.CreateUserPoolDomainInput) CreateUserPoolDomainRequest
 }
 
 // Send marshals and sends the CreateUserPoolDomain API request.
@@ -128,7 +56,7 @@ func (r CreateUserPoolDomainRequest) Send(ctx context.Context) (*CreateUserPoolD
 	}
 
 	resp := &CreateUserPoolDomainResponse{
-		CreateUserPoolDomainOutput: r.Request.Data.(*CreateUserPoolDomainOutput),
+		CreateUserPoolDomainOutput: r.Request.Data.(*types.CreateUserPoolDomainOutput),
 		response:                   &aws.Response{Request: r.Request},
 	}
 
@@ -138,7 +66,7 @@ func (r CreateUserPoolDomainRequest) Send(ctx context.Context) (*CreateUserPoolD
 // CreateUserPoolDomainResponse is the response type for the
 // CreateUserPoolDomain API operation.
 type CreateUserPoolDomainResponse struct {
-	*CreateUserPoolDomainOutput
+	*types.CreateUserPoolDomainOutput
 
 	response *aws.Response
 }

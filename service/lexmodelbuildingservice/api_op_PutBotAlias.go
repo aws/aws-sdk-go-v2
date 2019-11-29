@@ -4,198 +4,10 @@ package lexmodelbuildingservice
 
 import (
 	"context"
-	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/lexmodelbuildingservice/types"
 )
-
-type PutBotAliasInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the bot.
-	//
-	// BotName is a required field
-	BotName *string `location:"uri" locationName:"botName" min:"2" type:"string" required:"true"`
-
-	// The version of the bot.
-	//
-	// BotVersion is a required field
-	BotVersion *string `locationName:"botVersion" min:"1" type:"string" required:"true"`
-
-	// Identifies a specific revision of the $LATEST version.
-	//
-	// When you create a new bot alias, leave the checksum field blank. If you specify
-	// a checksum you get a BadRequestException exception.
-	//
-	// When you want to update a bot alias, set the checksum field to the checksum
-	// of the most recent revision of the $LATEST version. If you don't specify
-	// the checksum field, or if the checksum does not match the $LATEST version,
-	// you get a PreconditionFailedException exception.
-	Checksum *string `locationName:"checksum" type:"string"`
-
-	// A description of the alias.
-	Description *string `locationName:"description" type:"string"`
-
-	// The name of the alias. The name is not case sensitive.
-	//
-	// Name is a required field
-	Name *string `location:"uri" locationName:"name" min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s PutBotAliasInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *PutBotAliasInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "PutBotAliasInput"}
-
-	if s.BotName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("BotName"))
-	}
-	if s.BotName != nil && len(*s.BotName) < 2 {
-		invalidParams.Add(aws.NewErrParamMinLen("BotName", 2))
-	}
-
-	if s.BotVersion == nil {
-		invalidParams.Add(aws.NewErrParamRequired("BotVersion"))
-	}
-	if s.BotVersion != nil && len(*s.BotVersion) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("BotVersion", 1))
-	}
-
-	if s.Name == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Name"))
-	}
-	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s PutBotAliasInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.BotVersion != nil {
-		v := *s.BotVersion
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "botVersion", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Checksum != nil {
-		v := *s.Checksum
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "checksum", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Description != nil {
-		v := *s.Description
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "description", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.BotName != nil {
-		v := *s.BotName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "botName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Name != nil {
-		v := *s.Name
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type PutBotAliasOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the bot that the alias points to.
-	BotName *string `locationName:"botName" min:"2" type:"string"`
-
-	// The version of the bot that the alias points to.
-	BotVersion *string `locationName:"botVersion" min:"1" type:"string"`
-
-	// The checksum for the current version of the alias.
-	Checksum *string `locationName:"checksum" type:"string"`
-
-	// The date that the bot alias was created.
-	CreatedDate *time.Time `locationName:"createdDate" type:"timestamp"`
-
-	// A description of the alias.
-	Description *string `locationName:"description" type:"string"`
-
-	// The date that the bot alias was updated. When you create a resource, the
-	// creation date and the last updated date are the same.
-	LastUpdatedDate *time.Time `locationName:"lastUpdatedDate" type:"timestamp"`
-
-	// The name of the alias.
-	Name *string `locationName:"name" min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s PutBotAliasOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s PutBotAliasOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.BotName != nil {
-		v := *s.BotName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "botName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.BotVersion != nil {
-		v := *s.BotVersion
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "botVersion", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Checksum != nil {
-		v := *s.Checksum
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "checksum", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.CreatedDate != nil {
-		v := *s.CreatedDate
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "createdDate",
-			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
-	}
-	if s.Description != nil {
-		v := *s.Description
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "description", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.LastUpdatedDate != nil {
-		v := *s.LastUpdatedDate
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "lastUpdatedDate",
-			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
-	}
-	if s.Name != nil {
-		v := *s.Name
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opPutBotAlias = "PutBotAlias"
 
@@ -216,7 +28,7 @@ const opPutBotAlias = "PutBotAlias"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/PutBotAlias
-func (c *Client) PutBotAliasRequest(input *PutBotAliasInput) PutBotAliasRequest {
+func (c *Client) PutBotAliasRequest(input *types.PutBotAliasInput) PutBotAliasRequest {
 	op := &aws.Operation{
 		Name:       opPutBotAlias,
 		HTTPMethod: "PUT",
@@ -224,10 +36,10 @@ func (c *Client) PutBotAliasRequest(input *PutBotAliasInput) PutBotAliasRequest 
 	}
 
 	if input == nil {
-		input = &PutBotAliasInput{}
+		input = &types.PutBotAliasInput{}
 	}
 
-	req := c.newRequest(op, input, &PutBotAliasOutput{})
+	req := c.newRequest(op, input, &types.PutBotAliasOutput{})
 	return PutBotAliasRequest{Request: req, Input: input, Copy: c.PutBotAliasRequest}
 }
 
@@ -235,8 +47,8 @@ func (c *Client) PutBotAliasRequest(input *PutBotAliasInput) PutBotAliasRequest 
 // PutBotAlias API operation.
 type PutBotAliasRequest struct {
 	*aws.Request
-	Input *PutBotAliasInput
-	Copy  func(*PutBotAliasInput) PutBotAliasRequest
+	Input *types.PutBotAliasInput
+	Copy  func(*types.PutBotAliasInput) PutBotAliasRequest
 }
 
 // Send marshals and sends the PutBotAlias API request.
@@ -248,7 +60,7 @@ func (r PutBotAliasRequest) Send(ctx context.Context) (*PutBotAliasResponse, err
 	}
 
 	resp := &PutBotAliasResponse{
-		PutBotAliasOutput: r.Request.Data.(*PutBotAliasOutput),
+		PutBotAliasOutput: r.Request.Data.(*types.PutBotAliasOutput),
 		response:          &aws.Response{Request: r.Request},
 	}
 
@@ -258,7 +70,7 @@ func (r PutBotAliasRequest) Send(ctx context.Context) (*PutBotAliasResponse, err
 // PutBotAliasResponse is the response type for the
 // PutBotAlias API operation.
 type PutBotAliasResponse struct {
-	*PutBotAliasOutput
+	*types.PutBotAliasOutput
 
 	response *aws.Response
 }

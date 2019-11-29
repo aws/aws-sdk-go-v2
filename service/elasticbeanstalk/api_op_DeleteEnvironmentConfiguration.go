@@ -6,63 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/query"
+	"github.com/aws/aws-sdk-go-v2/service/elasticbeanstalk/types"
 )
-
-// Request to delete a draft environment configuration.
-type DeleteEnvironmentConfigurationInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the application the environment is associated with.
-	//
-	// ApplicationName is a required field
-	ApplicationName *string `min:"1" type:"string" required:"true"`
-
-	// The name of the environment to delete the draft configuration from.
-	//
-	// EnvironmentName is a required field
-	EnvironmentName *string `min:"4" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteEnvironmentConfigurationInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteEnvironmentConfigurationInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteEnvironmentConfigurationInput"}
-
-	if s.ApplicationName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ApplicationName"))
-	}
-	if s.ApplicationName != nil && len(*s.ApplicationName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ApplicationName", 1))
-	}
-
-	if s.EnvironmentName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("EnvironmentName"))
-	}
-	if s.EnvironmentName != nil && len(*s.EnvironmentName) < 4 {
-		invalidParams.Add(aws.NewErrParamMinLen("EnvironmentName", 4))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteEnvironmentConfigurationOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteEnvironmentConfigurationOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteEnvironmentConfiguration = "DeleteEnvironmentConfiguration"
 
@@ -86,7 +33,7 @@ const opDeleteEnvironmentConfiguration = "DeleteEnvironmentConfiguration"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/DeleteEnvironmentConfiguration
-func (c *Client) DeleteEnvironmentConfigurationRequest(input *DeleteEnvironmentConfigurationInput) DeleteEnvironmentConfigurationRequest {
+func (c *Client) DeleteEnvironmentConfigurationRequest(input *types.DeleteEnvironmentConfigurationInput) DeleteEnvironmentConfigurationRequest {
 	op := &aws.Operation{
 		Name:       opDeleteEnvironmentConfiguration,
 		HTTPMethod: "POST",
@@ -94,10 +41,10 @@ func (c *Client) DeleteEnvironmentConfigurationRequest(input *DeleteEnvironmentC
 	}
 
 	if input == nil {
-		input = &DeleteEnvironmentConfigurationInput{}
+		input = &types.DeleteEnvironmentConfigurationInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteEnvironmentConfigurationOutput{})
+	req := c.newRequest(op, input, &types.DeleteEnvironmentConfigurationOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return DeleteEnvironmentConfigurationRequest{Request: req, Input: input, Copy: c.DeleteEnvironmentConfigurationRequest}
@@ -107,8 +54,8 @@ func (c *Client) DeleteEnvironmentConfigurationRequest(input *DeleteEnvironmentC
 // DeleteEnvironmentConfiguration API operation.
 type DeleteEnvironmentConfigurationRequest struct {
 	*aws.Request
-	Input *DeleteEnvironmentConfigurationInput
-	Copy  func(*DeleteEnvironmentConfigurationInput) DeleteEnvironmentConfigurationRequest
+	Input *types.DeleteEnvironmentConfigurationInput
+	Copy  func(*types.DeleteEnvironmentConfigurationInput) DeleteEnvironmentConfigurationRequest
 }
 
 // Send marshals and sends the DeleteEnvironmentConfiguration API request.
@@ -120,7 +67,7 @@ func (r DeleteEnvironmentConfigurationRequest) Send(ctx context.Context) (*Delet
 	}
 
 	resp := &DeleteEnvironmentConfigurationResponse{
-		DeleteEnvironmentConfigurationOutput: r.Request.Data.(*DeleteEnvironmentConfigurationOutput),
+		DeleteEnvironmentConfigurationOutput: r.Request.Data.(*types.DeleteEnvironmentConfigurationOutput),
 		response:                             &aws.Response{Request: r.Request},
 	}
 
@@ -130,7 +77,7 @@ func (r DeleteEnvironmentConfigurationRequest) Send(ctx context.Context) (*Delet
 // DeleteEnvironmentConfigurationResponse is the response type for the
 // DeleteEnvironmentConfiguration API operation.
 type DeleteEnvironmentConfigurationResponse struct {
-	*DeleteEnvironmentConfigurationOutput
+	*types.DeleteEnvironmentConfigurationOutput
 
 	response *aws.Response
 }

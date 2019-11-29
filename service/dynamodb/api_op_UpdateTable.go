@@ -4,120 +4,10 @@ package dynamodb
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/dynamodb/types"
 )
-
-// Represents the input of an UpdateTable operation.
-type UpdateTableInput struct {
-	_ struct{} `type:"structure"`
-
-	// An array of attributes that describe the key schema for the table and indexes.
-	// If you are adding a new global secondary index to the table, AttributeDefinitions
-	// must include the key element(s) of the new index.
-	AttributeDefinitions []AttributeDefinition `type:"list"`
-
-	// Controls how you are charged for read and write throughput and how you manage
-	// capacity. When switching from pay-per-request to provisioned capacity, initial
-	// provisioned capacity values must be set. The initial provisioned capacity
-	// values are estimated based on the consumed read and write capacity of your
-	// table and global secondary indexes over the past 30 minutes.
-	//
-	//    * PROVISIONED - Sets the billing mode to PROVISIONED. We recommend using
-	//    PROVISIONED for predictable workloads.
-	//
-	//    * PAY_PER_REQUEST - Sets the billing mode to PAY_PER_REQUEST. We recommend
-	//    using PAY_PER_REQUEST for unpredictable workloads.
-	BillingMode BillingMode `type:"string" enum:"true"`
-
-	// An array of one or more global secondary indexes for the table. For each
-	// index in the array, you can request one action:
-	//
-	//    * Create - add a new global secondary index to the table.
-	//
-	//    * Update - modify the provisioned throughput settings of an existing global
-	//    secondary index.
-	//
-	//    * Delete - remove a global secondary index from the table.
-	//
-	// For more information, see Managing Global Secondary Indexes (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/GSI.OnlineOps.html)
-	// in the Amazon DynamoDB Developer Guide.
-	GlobalSecondaryIndexUpdates []GlobalSecondaryIndexUpdate `type:"list"`
-
-	// The new provisioned throughput settings for the specified table or index.
-	ProvisionedThroughput *ProvisionedThroughput `type:"structure"`
-
-	// The new server-side encryption settings for the specified table.
-	SSESpecification *SSESpecification `type:"structure"`
-
-	// Represents the DynamoDB Streams configuration for the table.
-	//
-	// You receive a ResourceInUseException if you try to enable a stream on a table
-	// that already has a stream, or if you try to disable a stream on a table that
-	// doesn't have a stream.
-	StreamSpecification *StreamSpecification `type:"structure"`
-
-	// The name of the table to be updated.
-	//
-	// TableName is a required field
-	TableName *string `min:"3" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s UpdateTableInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateTableInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateTableInput"}
-
-	if s.TableName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("TableName"))
-	}
-	if s.TableName != nil && len(*s.TableName) < 3 {
-		invalidParams.Add(aws.NewErrParamMinLen("TableName", 3))
-	}
-	if s.AttributeDefinitions != nil {
-		for i, v := range s.AttributeDefinitions {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "AttributeDefinitions", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-	if s.GlobalSecondaryIndexUpdates != nil {
-		for i, v := range s.GlobalSecondaryIndexUpdates {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "GlobalSecondaryIndexUpdates", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-	if s.ProvisionedThroughput != nil {
-		if err := s.ProvisionedThroughput.Validate(); err != nil {
-			invalidParams.AddNested("ProvisionedThroughput", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Represents the output of an UpdateTable operation.
-type UpdateTableOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Represents the properties of the table.
-	TableDescription *TableDescription `type:"structure"`
-}
-
-// String returns the string representation
-func (s UpdateTableOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opUpdateTable = "UpdateTable"
 
@@ -151,7 +41,7 @@ const opUpdateTable = "UpdateTable"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/UpdateTable
-func (c *Client) UpdateTableRequest(input *UpdateTableInput) UpdateTableRequest {
+func (c *Client) UpdateTableRequest(input *types.UpdateTableInput) UpdateTableRequest {
 	op := &aws.Operation{
 		Name:       opUpdateTable,
 		HTTPMethod: "POST",
@@ -159,10 +49,10 @@ func (c *Client) UpdateTableRequest(input *UpdateTableInput) UpdateTableRequest 
 	}
 
 	if input == nil {
-		input = &UpdateTableInput{}
+		input = &types.UpdateTableInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateTableOutput{})
+	req := c.newRequest(op, input, &types.UpdateTableOutput{})
 	return UpdateTableRequest{Request: req, Input: input, Copy: c.UpdateTableRequest}
 }
 
@@ -170,8 +60,8 @@ func (c *Client) UpdateTableRequest(input *UpdateTableInput) UpdateTableRequest 
 // UpdateTable API operation.
 type UpdateTableRequest struct {
 	*aws.Request
-	Input *UpdateTableInput
-	Copy  func(*UpdateTableInput) UpdateTableRequest
+	Input *types.UpdateTableInput
+	Copy  func(*types.UpdateTableInput) UpdateTableRequest
 }
 
 // Send marshals and sends the UpdateTable API request.
@@ -183,7 +73,7 @@ func (r UpdateTableRequest) Send(ctx context.Context) (*UpdateTableResponse, err
 	}
 
 	resp := &UpdateTableResponse{
-		UpdateTableOutput: r.Request.Data.(*UpdateTableOutput),
+		UpdateTableOutput: r.Request.Data.(*types.UpdateTableOutput),
 		response:          &aws.Response{Request: r.Request},
 	}
 
@@ -193,7 +83,7 @@ func (r UpdateTableRequest) Send(ctx context.Context) (*UpdateTableResponse, err
 // UpdateTableResponse is the response type for the
 // UpdateTable API operation.
 type UpdateTableResponse struct {
-	*UpdateTableOutput
+	*types.UpdateTableOutput
 
 	response *aws.Response
 }

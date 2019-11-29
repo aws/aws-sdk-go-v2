@@ -6,247 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/rdsdata/types"
 )
-
-// The request parameters represent the input of a request to run a SQL statement
-// against a database.
-type ExecuteStatementInput struct {
-	_ struct{} `type:"structure"`
-
-	// A value that indicates whether to continue running the statement after the
-	// call times out. By default, the statement stops running when the call times
-	// out.
-	//
-	// For DDL statements, we recommend continuing to run the statement after the
-	// call times out. When a DDL statement terminates before it is finished running,
-	// it can result in errors and possibly corrupted data structures.
-	ContinueAfterTimeout *bool `locationName:"continueAfterTimeout" type:"boolean"`
-
-	// The name of the database.
-	Database *string `locationName:"database" type:"string"`
-
-	// A value that indicates whether to include metadata in the results.
-	IncludeResultMetadata *bool `locationName:"includeResultMetadata" type:"boolean"`
-
-	// The parameters for the SQL statement.
-	Parameters []SqlParameter `locationName:"parameters" type:"list"`
-
-	// The Amazon Resource Name (ARN) of the Aurora Serverless DB cluster.
-	//
-	// ResourceArn is a required field
-	ResourceArn *string `locationName:"resourceArn" min:"11" type:"string" required:"true"`
-
-	// Options that control how the result set is returned.
-	ResultSetOptions *ResultSetOptions `locationName:"resultSetOptions" type:"structure"`
-
-	// The name of the database schema.
-	Schema *string `locationName:"schema" type:"string"`
-
-	// The name or ARN of the secret that enables access to the DB cluster.
-	//
-	// SecretArn is a required field
-	SecretArn *string `locationName:"secretArn" min:"11" type:"string" required:"true"`
-
-	// The SQL statement to run.
-	//
-	// Sql is a required field
-	Sql *string `locationName:"sql" type:"string" required:"true"`
-
-	// The identifier of a transaction that was started by using the BeginTransaction
-	// operation. Specify the transaction ID of the transaction that you want to
-	// include the SQL statement in.
-	//
-	// If the SQL statement is not part of a transaction, don't set this parameter.
-	TransactionId *string `locationName:"transactionId" type:"string"`
-}
-
-// String returns the string representation
-func (s ExecuteStatementInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ExecuteStatementInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ExecuteStatementInput"}
-
-	if s.ResourceArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ResourceArn"))
-	}
-	if s.ResourceArn != nil && len(*s.ResourceArn) < 11 {
-		invalidParams.Add(aws.NewErrParamMinLen("ResourceArn", 11))
-	}
-
-	if s.SecretArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("SecretArn"))
-	}
-	if s.SecretArn != nil && len(*s.SecretArn) < 11 {
-		invalidParams.Add(aws.NewErrParamMinLen("SecretArn", 11))
-	}
-
-	if s.Sql == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Sql"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ExecuteStatementInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.ContinueAfterTimeout != nil {
-		v := *s.ContinueAfterTimeout
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "continueAfterTimeout", protocol.BoolValue(v), metadata)
-	}
-	if s.Database != nil {
-		v := *s.Database
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "database", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.IncludeResultMetadata != nil {
-		v := *s.IncludeResultMetadata
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "includeResultMetadata", protocol.BoolValue(v), metadata)
-	}
-	if s.Parameters != nil {
-		v := s.Parameters
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "parameters", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	if s.ResourceArn != nil {
-		v := *s.ResourceArn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "resourceArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.ResultSetOptions != nil {
-		v := s.ResultSetOptions
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "resultSetOptions", v, metadata)
-	}
-	if s.Schema != nil {
-		v := *s.Schema
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "schema", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.SecretArn != nil {
-		v := *s.SecretArn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "secretArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Sql != nil {
-		v := *s.Sql
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "sql", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.TransactionId != nil {
-		v := *s.TransactionId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "transactionId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-// The response elements represent the output of a request to run a SQL statement
-// against a database.
-type ExecuteStatementOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Metadata for the columns included in the results.
-	ColumnMetadata []ColumnMetadata `locationName:"columnMetadata" type:"list"`
-
-	// Values for fields generated during the request.
-	//
-	//    <note> <p>The <code>generatedFields</code> data isn't supported by Aurora
-	//    PostgreSQL. To get the values of generated fields, use the <code>RETURNING</code>
-	//    clause. For more information, see <a href="https://www.postgresql.org/docs/10/dml-returning.html">Returning
-	//    Data From Modified Rows</a> in the PostgreSQL documentation.</p> </note>
-	GeneratedFields []Field `locationName:"generatedFields" type:"list"`
-
-	// The number of records updated by the request.
-	NumberOfRecordsUpdated *int64 `locationName:"numberOfRecordsUpdated" type:"long"`
-
-	// The records returned by the SQL statement.
-	Records [][]Field `locationName:"records" type:"list"`
-}
-
-// String returns the string representation
-func (s ExecuteStatementOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ExecuteStatementOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.ColumnMetadata != nil {
-		v := s.ColumnMetadata
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "columnMetadata", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	if s.GeneratedFields != nil {
-		v := s.GeneratedFields
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "generatedFields", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	if s.NumberOfRecordsUpdated != nil {
-		v := *s.NumberOfRecordsUpdated
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "numberOfRecordsUpdated", protocol.Int64Value(v), metadata)
-	}
-	if s.Records != nil {
-		v := s.Records
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "records", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls1 := ls0.List()
-			ls1.Start()
-			for _, v2 := range v1 {
-				ls1.ListAddFields(v2)
-			}
-			ls1.End()
-		}
-		ls0.End()
-
-	}
-	return nil
-}
 
 const opExecuteStatement = "ExecuteStatement"
 
@@ -269,7 +30,7 @@ const opExecuteStatement = "ExecuteStatement"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-data-2018-08-01/ExecuteStatement
-func (c *Client) ExecuteStatementRequest(input *ExecuteStatementInput) ExecuteStatementRequest {
+func (c *Client) ExecuteStatementRequest(input *types.ExecuteStatementInput) ExecuteStatementRequest {
 	op := &aws.Operation{
 		Name:       opExecuteStatement,
 		HTTPMethod: "POST",
@@ -277,10 +38,10 @@ func (c *Client) ExecuteStatementRequest(input *ExecuteStatementInput) ExecuteSt
 	}
 
 	if input == nil {
-		input = &ExecuteStatementInput{}
+		input = &types.ExecuteStatementInput{}
 	}
 
-	req := c.newRequest(op, input, &ExecuteStatementOutput{})
+	req := c.newRequest(op, input, &types.ExecuteStatementOutput{})
 	return ExecuteStatementRequest{Request: req, Input: input, Copy: c.ExecuteStatementRequest}
 }
 
@@ -288,8 +49,8 @@ func (c *Client) ExecuteStatementRequest(input *ExecuteStatementInput) ExecuteSt
 // ExecuteStatement API operation.
 type ExecuteStatementRequest struct {
 	*aws.Request
-	Input *ExecuteStatementInput
-	Copy  func(*ExecuteStatementInput) ExecuteStatementRequest
+	Input *types.ExecuteStatementInput
+	Copy  func(*types.ExecuteStatementInput) ExecuteStatementRequest
 }
 
 // Send marshals and sends the ExecuteStatement API request.
@@ -301,7 +62,7 @@ func (r ExecuteStatementRequest) Send(ctx context.Context) (*ExecuteStatementRes
 	}
 
 	resp := &ExecuteStatementResponse{
-		ExecuteStatementOutput: r.Request.Data.(*ExecuteStatementOutput),
+		ExecuteStatementOutput: r.Request.Data.(*types.ExecuteStatementOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -311,7 +72,7 @@ func (r ExecuteStatementRequest) Send(ctx context.Context) (*ExecuteStatementRes
 // ExecuteStatementResponse is the response type for the
 // ExecuteStatement API operation.
 type ExecuteStatementResponse struct {
-	*ExecuteStatementOutput
+	*types.ExecuteStatementOutput
 
 	response *aws.Response
 }

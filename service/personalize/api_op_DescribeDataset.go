@@ -6,48 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/personalize/types"
 )
-
-type DescribeDatasetInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the dataset to describe.
-	//
-	// DatasetArn is a required field
-	DatasetArn *string `locationName:"datasetArn" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeDatasetInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeDatasetInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeDatasetInput"}
-
-	if s.DatasetArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DatasetArn"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribeDatasetOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A listing of the dataset's properties.
-	Dataset *Dataset `locationName:"dataset" type:"structure"`
-}
-
-// String returns the string representation
-func (s DescribeDatasetOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeDataset = "DescribeDataset"
 
@@ -64,7 +24,7 @@ const opDescribeDataset = "DescribeDataset"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/DescribeDataset
-func (c *Client) DescribeDatasetRequest(input *DescribeDatasetInput) DescribeDatasetRequest {
+func (c *Client) DescribeDatasetRequest(input *types.DescribeDatasetInput) DescribeDatasetRequest {
 	op := &aws.Operation{
 		Name:       opDescribeDataset,
 		HTTPMethod: "POST",
@@ -72,10 +32,10 @@ func (c *Client) DescribeDatasetRequest(input *DescribeDatasetInput) DescribeDat
 	}
 
 	if input == nil {
-		input = &DescribeDatasetInput{}
+		input = &types.DescribeDatasetInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeDatasetOutput{})
+	req := c.newRequest(op, input, &types.DescribeDatasetOutput{})
 	return DescribeDatasetRequest{Request: req, Input: input, Copy: c.DescribeDatasetRequest}
 }
 
@@ -83,8 +43,8 @@ func (c *Client) DescribeDatasetRequest(input *DescribeDatasetInput) DescribeDat
 // DescribeDataset API operation.
 type DescribeDatasetRequest struct {
 	*aws.Request
-	Input *DescribeDatasetInput
-	Copy  func(*DescribeDatasetInput) DescribeDatasetRequest
+	Input *types.DescribeDatasetInput
+	Copy  func(*types.DescribeDatasetInput) DescribeDatasetRequest
 }
 
 // Send marshals and sends the DescribeDataset API request.
@@ -96,7 +56,7 @@ func (r DescribeDatasetRequest) Send(ctx context.Context) (*DescribeDatasetRespo
 	}
 
 	resp := &DescribeDatasetResponse{
-		DescribeDatasetOutput: r.Request.Data.(*DescribeDatasetOutput),
+		DescribeDatasetOutput: r.Request.Data.(*types.DescribeDatasetOutput),
 		response:              &aws.Response{Request: r.Request},
 	}
 
@@ -106,7 +66,7 @@ func (r DescribeDatasetRequest) Send(ctx context.Context) (*DescribeDatasetRespo
 // DescribeDatasetResponse is the response type for the
 // DescribeDataset API operation.
 type DescribeDatasetResponse struct {
-	*DescribeDatasetOutput
+	*types.DescribeDatasetOutput
 
 	response *aws.Response
 }

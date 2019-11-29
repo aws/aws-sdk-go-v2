@@ -6,73 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/query"
+	"github.com/aws/aws-sdk-go-v2/service/elasticbeanstalk/types"
 )
-
-// Swaps the CNAMEs of two environments.
-type SwapEnvironmentCNAMEsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the destination environment.
-	//
-	// Condition: You must specify at least the DestinationEnvironmentID or the
-	// DestinationEnvironmentName. You may also specify both. You must specify the
-	// SourceEnvironmentId with the DestinationEnvironmentId.
-	DestinationEnvironmentId *string `type:"string"`
-
-	// The name of the destination environment.
-	//
-	// Condition: You must specify at least the DestinationEnvironmentID or the
-	// DestinationEnvironmentName. You may also specify both. You must specify the
-	// SourceEnvironmentName with the DestinationEnvironmentName.
-	DestinationEnvironmentName *string `min:"4" type:"string"`
-
-	// The ID of the source environment.
-	//
-	// Condition: You must specify at least the SourceEnvironmentID or the SourceEnvironmentName.
-	// You may also specify both. If you specify the SourceEnvironmentId, you must
-	// specify the DestinationEnvironmentId.
-	SourceEnvironmentId *string `type:"string"`
-
-	// The name of the source environment.
-	//
-	// Condition: You must specify at least the SourceEnvironmentID or the SourceEnvironmentName.
-	// You may also specify both. If you specify the SourceEnvironmentName, you
-	// must specify the DestinationEnvironmentName.
-	SourceEnvironmentName *string `min:"4" type:"string"`
-}
-
-// String returns the string representation
-func (s SwapEnvironmentCNAMEsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *SwapEnvironmentCNAMEsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "SwapEnvironmentCNAMEsInput"}
-	if s.DestinationEnvironmentName != nil && len(*s.DestinationEnvironmentName) < 4 {
-		invalidParams.Add(aws.NewErrParamMinLen("DestinationEnvironmentName", 4))
-	}
-	if s.SourceEnvironmentName != nil && len(*s.SourceEnvironmentName) < 4 {
-		invalidParams.Add(aws.NewErrParamMinLen("SourceEnvironmentName", 4))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type SwapEnvironmentCNAMEsOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s SwapEnvironmentCNAMEsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opSwapEnvironmentCNAMEs = "SwapEnvironmentCNAMEs"
 
@@ -89,7 +26,7 @@ const opSwapEnvironmentCNAMEs = "SwapEnvironmentCNAMEs"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/SwapEnvironmentCNAMEs
-func (c *Client) SwapEnvironmentCNAMEsRequest(input *SwapEnvironmentCNAMEsInput) SwapEnvironmentCNAMEsRequest {
+func (c *Client) SwapEnvironmentCNAMEsRequest(input *types.SwapEnvironmentCNAMEsInput) SwapEnvironmentCNAMEsRequest {
 	op := &aws.Operation{
 		Name:       opSwapEnvironmentCNAMEs,
 		HTTPMethod: "POST",
@@ -97,10 +34,10 @@ func (c *Client) SwapEnvironmentCNAMEsRequest(input *SwapEnvironmentCNAMEsInput)
 	}
 
 	if input == nil {
-		input = &SwapEnvironmentCNAMEsInput{}
+		input = &types.SwapEnvironmentCNAMEsInput{}
 	}
 
-	req := c.newRequest(op, input, &SwapEnvironmentCNAMEsOutput{})
+	req := c.newRequest(op, input, &types.SwapEnvironmentCNAMEsOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return SwapEnvironmentCNAMEsRequest{Request: req, Input: input, Copy: c.SwapEnvironmentCNAMEsRequest}
@@ -110,8 +47,8 @@ func (c *Client) SwapEnvironmentCNAMEsRequest(input *SwapEnvironmentCNAMEsInput)
 // SwapEnvironmentCNAMEs API operation.
 type SwapEnvironmentCNAMEsRequest struct {
 	*aws.Request
-	Input *SwapEnvironmentCNAMEsInput
-	Copy  func(*SwapEnvironmentCNAMEsInput) SwapEnvironmentCNAMEsRequest
+	Input *types.SwapEnvironmentCNAMEsInput
+	Copy  func(*types.SwapEnvironmentCNAMEsInput) SwapEnvironmentCNAMEsRequest
 }
 
 // Send marshals and sends the SwapEnvironmentCNAMEs API request.
@@ -123,7 +60,7 @@ func (r SwapEnvironmentCNAMEsRequest) Send(ctx context.Context) (*SwapEnvironmen
 	}
 
 	resp := &SwapEnvironmentCNAMEsResponse{
-		SwapEnvironmentCNAMEsOutput: r.Request.Data.(*SwapEnvironmentCNAMEsOutput),
+		SwapEnvironmentCNAMEsOutput: r.Request.Data.(*types.SwapEnvironmentCNAMEsOutput),
 		response:                    &aws.Response{Request: r.Request},
 	}
 
@@ -133,7 +70,7 @@ func (r SwapEnvironmentCNAMEsRequest) Send(ctx context.Context) (*SwapEnvironmen
 // SwapEnvironmentCNAMEsResponse is the response type for the
 // SwapEnvironmentCNAMEs API operation.
 type SwapEnvironmentCNAMEsResponse struct {
-	*SwapEnvironmentCNAMEsOutput
+	*types.SwapEnvironmentCNAMEsOutput
 
 	response *aws.Response
 }

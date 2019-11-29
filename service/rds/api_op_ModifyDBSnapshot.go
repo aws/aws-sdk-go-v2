@@ -6,77 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/rds/types"
 )
-
-type ModifyDBSnapshotInput struct {
-	_ struct{} `type:"structure"`
-
-	// The identifier of the DB snapshot to modify.
-	//
-	// DBSnapshotIdentifier is a required field
-	DBSnapshotIdentifier *string `type:"string" required:"true"`
-
-	// The engine version to upgrade the DB snapshot to.
-	//
-	// The following are the database engines and engine versions that are available
-	// when you upgrade a DB snapshot.
-	//
-	// MySQL
-	//
-	//    * 5.5.46 (supported for 5.1 DB snapshots)
-	//
-	// Oracle
-	//
-	//    * 12.1.0.2.v8 (supported for 12.1.0.1 DB snapshots)
-	//
-	//    * 11.2.0.4.v12 (supported for 11.2.0.2 DB snapshots)
-	//
-	//    * 11.2.0.4.v11 (supported for 11.2.0.3 DB snapshots)
-	EngineVersion *string `type:"string"`
-
-	// The option group to identify with the upgraded DB snapshot.
-	//
-	// You can specify this parameter when you upgrade an Oracle DB snapshot. The
-	// same option group considerations apply when upgrading a DB snapshot as when
-	// upgrading a DB instance. For more information, see Option Group Considerations
-	// (http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_UpgradeDBInstance.Oracle.html#USER_UpgradeDBInstance.Oracle.OGPG.OG)
-	// in the Amazon RDS User Guide.
-	OptionGroupName *string `type:"string"`
-}
-
-// String returns the string representation
-func (s ModifyDBSnapshotInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ModifyDBSnapshotInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ModifyDBSnapshotInput"}
-
-	if s.DBSnapshotIdentifier == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DBSnapshotIdentifier"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ModifyDBSnapshotOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Contains the details of an Amazon RDS DB snapshot.
-	//
-	// This data type is used as a response element in the DescribeDBSnapshots action.
-	DBSnapshot *DBSnapshot `type:"structure"`
-}
-
-// String returns the string representation
-func (s ModifyDBSnapshotOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opModifyDBSnapshot = "ModifyDBSnapshot"
 
@@ -86,7 +17,7 @@ const opModifyDBSnapshot = "ModifyDBSnapshot"
 // Updates a manual DB snapshot, which can be encrypted or not encrypted, with
 // a new engine version.
 //
-// Amazon RDS supports upgrading DB snapshots for MySQL and Oracle.
+// Amazon RDS supports upgrading DB snapshots for MySQL, Oracle, and PostgreSQL.
 //
 //    // Example sending a request using ModifyDBSnapshotRequest.
 //    req := client.ModifyDBSnapshotRequest(params)
@@ -96,7 +27,7 @@ const opModifyDBSnapshot = "ModifyDBSnapshot"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyDBSnapshot
-func (c *Client) ModifyDBSnapshotRequest(input *ModifyDBSnapshotInput) ModifyDBSnapshotRequest {
+func (c *Client) ModifyDBSnapshotRequest(input *types.ModifyDBSnapshotInput) ModifyDBSnapshotRequest {
 	op := &aws.Operation{
 		Name:       opModifyDBSnapshot,
 		HTTPMethod: "POST",
@@ -104,10 +35,10 @@ func (c *Client) ModifyDBSnapshotRequest(input *ModifyDBSnapshotInput) ModifyDBS
 	}
 
 	if input == nil {
-		input = &ModifyDBSnapshotInput{}
+		input = &types.ModifyDBSnapshotInput{}
 	}
 
-	req := c.newRequest(op, input, &ModifyDBSnapshotOutput{})
+	req := c.newRequest(op, input, &types.ModifyDBSnapshotOutput{})
 	return ModifyDBSnapshotRequest{Request: req, Input: input, Copy: c.ModifyDBSnapshotRequest}
 }
 
@@ -115,8 +46,8 @@ func (c *Client) ModifyDBSnapshotRequest(input *ModifyDBSnapshotInput) ModifyDBS
 // ModifyDBSnapshot API operation.
 type ModifyDBSnapshotRequest struct {
 	*aws.Request
-	Input *ModifyDBSnapshotInput
-	Copy  func(*ModifyDBSnapshotInput) ModifyDBSnapshotRequest
+	Input *types.ModifyDBSnapshotInput
+	Copy  func(*types.ModifyDBSnapshotInput) ModifyDBSnapshotRequest
 }
 
 // Send marshals and sends the ModifyDBSnapshot API request.
@@ -128,7 +59,7 @@ func (r ModifyDBSnapshotRequest) Send(ctx context.Context) (*ModifyDBSnapshotRes
 	}
 
 	resp := &ModifyDBSnapshotResponse{
-		ModifyDBSnapshotOutput: r.Request.Data.(*ModifyDBSnapshotOutput),
+		ModifyDBSnapshotOutput: r.Request.Data.(*types.ModifyDBSnapshotOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -138,7 +69,7 @@ func (r ModifyDBSnapshotRequest) Send(ctx context.Context) (*ModifyDBSnapshotRes
 // ModifyDBSnapshotResponse is the response type for the
 // ModifyDBSnapshot API operation.
 type ModifyDBSnapshotResponse struct {
-	*ModifyDBSnapshotOutput
+	*types.ModifyDBSnapshotOutput
 
 	response *aws.Response
 }

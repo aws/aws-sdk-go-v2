@@ -6,87 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/greengrass/types"
 )
-
-type GetConnectivityInfoInput struct {
-	_ struct{} `type:"structure"`
-
-	// ThingName is a required field
-	ThingName *string `location:"uri" locationName:"ThingName" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetConnectivityInfoInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetConnectivityInfoInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetConnectivityInfoInput"}
-
-	if s.ThingName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ThingName"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetConnectivityInfoInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.ThingName != nil {
-		v := *s.ThingName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "ThingName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-// Information about a Greengrass core's connectivity.
-type GetConnectivityInfoOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Connectivity info list.
-	ConnectivityInfo []ConnectivityInfo `type:"list"`
-
-	// A message about the connectivity info request.
-	Message *string `locationName:"message" type:"string"`
-}
-
-// String returns the string representation
-func (s GetConnectivityInfoOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetConnectivityInfoOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.ConnectivityInfo != nil {
-		v := s.ConnectivityInfo
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "ConnectivityInfo", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	if s.Message != nil {
-		v := *s.Message
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "message", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opGetConnectivityInfo = "GetConnectivityInfo"
 
@@ -103,7 +24,7 @@ const opGetConnectivityInfo = "GetConnectivityInfo"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GetConnectivityInfo
-func (c *Client) GetConnectivityInfoRequest(input *GetConnectivityInfoInput) GetConnectivityInfoRequest {
+func (c *Client) GetConnectivityInfoRequest(input *types.GetConnectivityInfoInput) GetConnectivityInfoRequest {
 	op := &aws.Operation{
 		Name:       opGetConnectivityInfo,
 		HTTPMethod: "GET",
@@ -111,10 +32,10 @@ func (c *Client) GetConnectivityInfoRequest(input *GetConnectivityInfoInput) Get
 	}
 
 	if input == nil {
-		input = &GetConnectivityInfoInput{}
+		input = &types.GetConnectivityInfoInput{}
 	}
 
-	req := c.newRequest(op, input, &GetConnectivityInfoOutput{})
+	req := c.newRequest(op, input, &types.GetConnectivityInfoOutput{})
 	return GetConnectivityInfoRequest{Request: req, Input: input, Copy: c.GetConnectivityInfoRequest}
 }
 
@@ -122,8 +43,8 @@ func (c *Client) GetConnectivityInfoRequest(input *GetConnectivityInfoInput) Get
 // GetConnectivityInfo API operation.
 type GetConnectivityInfoRequest struct {
 	*aws.Request
-	Input *GetConnectivityInfoInput
-	Copy  func(*GetConnectivityInfoInput) GetConnectivityInfoRequest
+	Input *types.GetConnectivityInfoInput
+	Copy  func(*types.GetConnectivityInfoInput) GetConnectivityInfoRequest
 }
 
 // Send marshals and sends the GetConnectivityInfo API request.
@@ -135,7 +56,7 @@ func (r GetConnectivityInfoRequest) Send(ctx context.Context) (*GetConnectivityI
 	}
 
 	resp := &GetConnectivityInfoResponse{
-		GetConnectivityInfoOutput: r.Request.Data.(*GetConnectivityInfoOutput),
+		GetConnectivityInfoOutput: r.Request.Data.(*types.GetConnectivityInfoOutput),
 		response:                  &aws.Response{Request: r.Request},
 	}
 
@@ -145,7 +66,7 @@ func (r GetConnectivityInfoRequest) Send(ctx context.Context) (*GetConnectivityI
 // GetConnectivityInfoResponse is the response type for the
 // GetConnectivityInfo API operation.
 type GetConnectivityInfoResponse struct {
-	*GetConnectivityInfoOutput
+	*types.GetConnectivityInfoOutput
 
 	response *aws.Response
 }

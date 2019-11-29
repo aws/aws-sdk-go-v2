@@ -6,83 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoice/types"
 )
-
-type ListConfigurationSetsInput struct {
-	_ struct{} `type:"structure"`
-
-	NextToken *string `location:"querystring" locationName:"NextToken" type:"string"`
-
-	PageSize *string `location:"querystring" locationName:"PageSize" type:"string"`
-}
-
-// String returns the string representation
-func (s ListConfigurationSetsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListConfigurationSetsInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.PageSize != nil {
-		v := *s.PageSize
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "PageSize", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-// An object that contains information about the configuration sets for your
-// account in the current region.
-type ListConfigurationSetsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// An object that contains a list of configuration sets for your account in
-	// the current region.
-	ConfigurationSets []string `type:"list"`
-
-	// A token returned from a previous call to ListConfigurationSets to indicate
-	// the position in the list of configuration sets.
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s ListConfigurationSetsOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListConfigurationSetsOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.ConfigurationSets != nil {
-		v := s.ConfigurationSets
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "ConfigurationSets", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
-		}
-		ls0.End()
-
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opListConfigurationSets = "ListConfigurationSets"
 
@@ -100,7 +25,7 @@ const opListConfigurationSets = "ListConfigurationSets"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-2018-09-05/ListConfigurationSets
-func (c *Client) ListConfigurationSetsRequest(input *ListConfigurationSetsInput) ListConfigurationSetsRequest {
+func (c *Client) ListConfigurationSetsRequest(input *types.ListConfigurationSetsInput) ListConfigurationSetsRequest {
 	op := &aws.Operation{
 		Name:       opListConfigurationSets,
 		HTTPMethod: "GET",
@@ -108,10 +33,10 @@ func (c *Client) ListConfigurationSetsRequest(input *ListConfigurationSetsInput)
 	}
 
 	if input == nil {
-		input = &ListConfigurationSetsInput{}
+		input = &types.ListConfigurationSetsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListConfigurationSetsOutput{})
+	req := c.newRequest(op, input, &types.ListConfigurationSetsOutput{})
 	return ListConfigurationSetsRequest{Request: req, Input: input, Copy: c.ListConfigurationSetsRequest}
 }
 
@@ -119,8 +44,8 @@ func (c *Client) ListConfigurationSetsRequest(input *ListConfigurationSetsInput)
 // ListConfigurationSets API operation.
 type ListConfigurationSetsRequest struct {
 	*aws.Request
-	Input *ListConfigurationSetsInput
-	Copy  func(*ListConfigurationSetsInput) ListConfigurationSetsRequest
+	Input *types.ListConfigurationSetsInput
+	Copy  func(*types.ListConfigurationSetsInput) ListConfigurationSetsRequest
 }
 
 // Send marshals and sends the ListConfigurationSets API request.
@@ -132,7 +57,7 @@ func (r ListConfigurationSetsRequest) Send(ctx context.Context) (*ListConfigurat
 	}
 
 	resp := &ListConfigurationSetsResponse{
-		ListConfigurationSetsOutput: r.Request.Data.(*ListConfigurationSetsOutput),
+		ListConfigurationSetsOutput: r.Request.Data.(*types.ListConfigurationSetsOutput),
 		response:                    &aws.Response{Request: r.Request},
 	}
 
@@ -142,7 +67,7 @@ func (r ListConfigurationSetsRequest) Send(ctx context.Context) (*ListConfigurat
 // ListConfigurationSetsResponse is the response type for the
 // ListConfigurationSets API operation.
 type ListConfigurationSetsResponse struct {
-	*ListConfigurationSetsOutput
+	*types.ListConfigurationSetsOutput
 
 	response *aws.Response
 }

@@ -6,68 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/cloudformation/types"
 )
-
-// The input for the ExecuteChangeSet action.
-type ExecuteChangeSetInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name or ARN of the change set that you want use to update the specified
-	// stack.
-	//
-	// ChangeSetName is a required field
-	ChangeSetName *string `min:"1" type:"string" required:"true"`
-
-	// A unique identifier for this ExecuteChangeSet request. Specify this token
-	// if you plan to retry requests so that AWS CloudFormation knows that you're
-	// not attempting to execute a change set to update a stack with the same name.
-	// You might retry ExecuteChangeSet requests to ensure that AWS CloudFormation
-	// successfully received them.
-	ClientRequestToken *string `min:"1" type:"string"`
-
-	// If you specified the name of a change set, specify the stack name or ID (ARN)
-	// that is associated with the change set you want to execute.
-	StackName *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s ExecuteChangeSetInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ExecuteChangeSetInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ExecuteChangeSetInput"}
-
-	if s.ChangeSetName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ChangeSetName"))
-	}
-	if s.ChangeSetName != nil && len(*s.ChangeSetName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ChangeSetName", 1))
-	}
-	if s.ClientRequestToken != nil && len(*s.ClientRequestToken) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ClientRequestToken", 1))
-	}
-	if s.StackName != nil && len(*s.StackName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("StackName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// The output for the ExecuteChangeSet action.
-type ExecuteChangeSetOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s ExecuteChangeSetOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opExecuteChangeSet = "ExecuteChangeSet"
 
@@ -95,7 +35,7 @@ const opExecuteChangeSet = "ExecuteChangeSet"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ExecuteChangeSet
-func (c *Client) ExecuteChangeSetRequest(input *ExecuteChangeSetInput) ExecuteChangeSetRequest {
+func (c *Client) ExecuteChangeSetRequest(input *types.ExecuteChangeSetInput) ExecuteChangeSetRequest {
 	op := &aws.Operation{
 		Name:       opExecuteChangeSet,
 		HTTPMethod: "POST",
@@ -103,10 +43,10 @@ func (c *Client) ExecuteChangeSetRequest(input *ExecuteChangeSetInput) ExecuteCh
 	}
 
 	if input == nil {
-		input = &ExecuteChangeSetInput{}
+		input = &types.ExecuteChangeSetInput{}
 	}
 
-	req := c.newRequest(op, input, &ExecuteChangeSetOutput{})
+	req := c.newRequest(op, input, &types.ExecuteChangeSetOutput{})
 	return ExecuteChangeSetRequest{Request: req, Input: input, Copy: c.ExecuteChangeSetRequest}
 }
 
@@ -114,8 +54,8 @@ func (c *Client) ExecuteChangeSetRequest(input *ExecuteChangeSetInput) ExecuteCh
 // ExecuteChangeSet API operation.
 type ExecuteChangeSetRequest struct {
 	*aws.Request
-	Input *ExecuteChangeSetInput
-	Copy  func(*ExecuteChangeSetInput) ExecuteChangeSetRequest
+	Input *types.ExecuteChangeSetInput
+	Copy  func(*types.ExecuteChangeSetInput) ExecuteChangeSetRequest
 }
 
 // Send marshals and sends the ExecuteChangeSet API request.
@@ -127,7 +67,7 @@ func (r ExecuteChangeSetRequest) Send(ctx context.Context) (*ExecuteChangeSetRes
 	}
 
 	resp := &ExecuteChangeSetResponse{
-		ExecuteChangeSetOutput: r.Request.Data.(*ExecuteChangeSetOutput),
+		ExecuteChangeSetOutput: r.Request.Data.(*types.ExecuteChangeSetOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -137,7 +77,7 @@ func (r ExecuteChangeSetRequest) Send(ctx context.Context) (*ExecuteChangeSetRes
 // ExecuteChangeSetResponse is the response type for the
 // ExecuteChangeSet API operation.
 type ExecuteChangeSetResponse struct {
-	*ExecuteChangeSetOutput
+	*types.ExecuteChangeSetOutput
 
 	response *aws.Response
 }

@@ -6,132 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/docdb/types"
 )
-
-// Represents the input to CreateDBInstance.
-type CreateDBInstanceInput struct {
-	_ struct{} `type:"structure"`
-
-	// Indicates that minor engine upgrades are applied automatically to the DB
-	// instance during the maintenance window.
-	//
-	// Default: true
-	AutoMinorVersionUpgrade *bool `type:"boolean"`
-
-	// The Amazon EC2 Availability Zone that the DB instance is created in.
-	//
-	// Default: A random, system-chosen Availability Zone in the endpoint's AWS
-	// Region.
-	//
-	// Example: us-east-1d
-	//
-	// Constraint: The AvailabilityZone parameter can't be specified if the MultiAZ
-	// parameter is set to true. The specified Availability Zone must be in the
-	// same AWS Region as the current endpoint.
-	AvailabilityZone *string `type:"string"`
-
-	// The identifier of the DB cluster that the instance will belong to.
-	//
-	// DBClusterIdentifier is a required field
-	DBClusterIdentifier *string `type:"string" required:"true"`
-
-	// The compute and memory capacity of the DB instance; for example, db.r5.large.
-	//
-	// DBInstanceClass is a required field
-	DBInstanceClass *string `type:"string" required:"true"`
-
-	// The DB instance identifier. This parameter is stored as a lowercase string.
-	//
-	// Constraints:
-	//
-	//    * Must contain from 1 to 63 letters, numbers, or hyphens.
-	//
-	//    * The first character must be a letter.
-	//
-	//    * Cannot end with a hyphen or contain two consecutive hyphens.
-	//
-	// Example: mydbinstance
-	//
-	// DBInstanceIdentifier is a required field
-	DBInstanceIdentifier *string `type:"string" required:"true"`
-
-	// The name of the database engine to be used for this instance.
-	//
-	// Valid value: docdb
-	//
-	// Engine is a required field
-	Engine *string `type:"string" required:"true"`
-
-	// The time range each week during which system maintenance can occur, in Universal
-	// Coordinated Time (UTC).
-	//
-	// Format: ddd:hh24:mi-ddd:hh24:mi
-	//
-	// The default is a 30-minute window selected at random from an 8-hour block
-	// of time for each AWS Region, occurring on a random day of the week.
-	//
-	// Valid days: Mon, Tue, Wed, Thu, Fri, Sat, Sun
-	//
-	// Constraints: Minimum 30-minute window.
-	PreferredMaintenanceWindow *string `type:"string"`
-
-	// A value that specifies the order in which an Amazon DocumentDB replica is
-	// promoted to the primary instance after a failure of the existing primary
-	// instance.
-	//
-	// Default: 1
-	//
-	// Valid values: 0-15
-	PromotionTier *int64 `type:"integer"`
-
-	// The tags to be assigned to the DB instance. You can assign up to 10 tags
-	// to an instance.
-	Tags []Tag `locationNameList:"Tag" type:"list"`
-}
-
-// String returns the string representation
-func (s CreateDBInstanceInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateDBInstanceInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateDBInstanceInput"}
-
-	if s.DBClusterIdentifier == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DBClusterIdentifier"))
-	}
-
-	if s.DBInstanceClass == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DBInstanceClass"))
-	}
-
-	if s.DBInstanceIdentifier == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DBInstanceIdentifier"))
-	}
-
-	if s.Engine == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Engine"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type CreateDBInstanceOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Detailed information about a DB instance.
-	DBInstance *DBInstance `type:"structure"`
-}
-
-// String returns the string representation
-func (s CreateDBInstanceOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCreateDBInstance = "CreateDBInstance"
 
@@ -148,7 +24,7 @@ const opCreateDBInstance = "CreateDBInstance"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/CreateDBInstance
-func (c *Client) CreateDBInstanceRequest(input *CreateDBInstanceInput) CreateDBInstanceRequest {
+func (c *Client) CreateDBInstanceRequest(input *types.CreateDBInstanceInput) CreateDBInstanceRequest {
 	op := &aws.Operation{
 		Name:       opCreateDBInstance,
 		HTTPMethod: "POST",
@@ -156,10 +32,10 @@ func (c *Client) CreateDBInstanceRequest(input *CreateDBInstanceInput) CreateDBI
 	}
 
 	if input == nil {
-		input = &CreateDBInstanceInput{}
+		input = &types.CreateDBInstanceInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateDBInstanceOutput{})
+	req := c.newRequest(op, input, &types.CreateDBInstanceOutput{})
 	return CreateDBInstanceRequest{Request: req, Input: input, Copy: c.CreateDBInstanceRequest}
 }
 
@@ -167,8 +43,8 @@ func (c *Client) CreateDBInstanceRequest(input *CreateDBInstanceInput) CreateDBI
 // CreateDBInstance API operation.
 type CreateDBInstanceRequest struct {
 	*aws.Request
-	Input *CreateDBInstanceInput
-	Copy  func(*CreateDBInstanceInput) CreateDBInstanceRequest
+	Input *types.CreateDBInstanceInput
+	Copy  func(*types.CreateDBInstanceInput) CreateDBInstanceRequest
 }
 
 // Send marshals and sends the CreateDBInstance API request.
@@ -180,7 +56,7 @@ func (r CreateDBInstanceRequest) Send(ctx context.Context) (*CreateDBInstanceRes
 	}
 
 	resp := &CreateDBInstanceResponse{
-		CreateDBInstanceOutput: r.Request.Data.(*CreateDBInstanceOutput),
+		CreateDBInstanceOutput: r.Request.Data.(*types.CreateDBInstanceOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -190,7 +66,7 @@ func (r CreateDBInstanceRequest) Send(ctx context.Context) (*CreateDBInstanceRes
 // CreateDBInstanceResponse is the response type for the
 // CreateDBInstance API operation.
 type CreateDBInstanceResponse struct {
-	*CreateDBInstanceOutput
+	*types.CreateDBInstanceOutput
 
 	response *aws.Response
 }

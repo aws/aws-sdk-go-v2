@@ -6,48 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/glue/types"
 )
-
-type StopCrawlerInput struct {
-	_ struct{} `type:"structure"`
-
-	// Name of the crawler to stop.
-	//
-	// Name is a required field
-	Name *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s StopCrawlerInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *StopCrawlerInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "StopCrawlerInput"}
-
-	if s.Name == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Name"))
-	}
-	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type StopCrawlerOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s StopCrawlerOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opStopCrawler = "StopCrawler"
 
@@ -64,7 +24,7 @@ const opStopCrawler = "StopCrawler"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/StopCrawler
-func (c *Client) StopCrawlerRequest(input *StopCrawlerInput) StopCrawlerRequest {
+func (c *Client) StopCrawlerRequest(input *types.StopCrawlerInput) StopCrawlerRequest {
 	op := &aws.Operation{
 		Name:       opStopCrawler,
 		HTTPMethod: "POST",
@@ -72,10 +32,10 @@ func (c *Client) StopCrawlerRequest(input *StopCrawlerInput) StopCrawlerRequest 
 	}
 
 	if input == nil {
-		input = &StopCrawlerInput{}
+		input = &types.StopCrawlerInput{}
 	}
 
-	req := c.newRequest(op, input, &StopCrawlerOutput{})
+	req := c.newRequest(op, input, &types.StopCrawlerOutput{})
 	return StopCrawlerRequest{Request: req, Input: input, Copy: c.StopCrawlerRequest}
 }
 
@@ -83,8 +43,8 @@ func (c *Client) StopCrawlerRequest(input *StopCrawlerInput) StopCrawlerRequest 
 // StopCrawler API operation.
 type StopCrawlerRequest struct {
 	*aws.Request
-	Input *StopCrawlerInput
-	Copy  func(*StopCrawlerInput) StopCrawlerRequest
+	Input *types.StopCrawlerInput
+	Copy  func(*types.StopCrawlerInput) StopCrawlerRequest
 }
 
 // Send marshals and sends the StopCrawler API request.
@@ -96,7 +56,7 @@ func (r StopCrawlerRequest) Send(ctx context.Context) (*StopCrawlerResponse, err
 	}
 
 	resp := &StopCrawlerResponse{
-		StopCrawlerOutput: r.Request.Data.(*StopCrawlerOutput),
+		StopCrawlerOutput: r.Request.Data.(*types.StopCrawlerOutput),
 		response:          &aws.Response{Request: r.Request},
 	}
 
@@ -106,7 +66,7 @@ func (r StopCrawlerRequest) Send(ctx context.Context) (*StopCrawlerResponse, err
 // StopCrawlerResponse is the response type for the
 // StopCrawler API operation.
 type StopCrawlerResponse struct {
-	*StopCrawlerOutput
+	*types.StopCrawlerOutput
 
 	response *aws.Response
 }

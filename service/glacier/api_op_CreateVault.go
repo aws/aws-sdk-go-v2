@@ -6,95 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/glacier/types"
 )
-
-// Provides options to create a vault.
-type CreateVaultInput struct {
-	_ struct{} `type:"structure"`
-
-	// The AccountId value is the AWS account ID. This value must match the AWS
-	// account ID associated with the credentials used to sign the request. You
-	// can either specify an AWS account ID or optionally a single '-' (hyphen),
-	// in which case Amazon S3 Glacier uses the AWS account ID associated with the
-	// credentials used to sign the request. If you specify your account ID, do
-	// not include any hyphens ('-') in the ID.
-	//
-	// AccountId is a required field
-	AccountId *string `location:"uri" locationName:"accountId" type:"string" required:"true"`
-
-	// The name of the vault.
-	//
-	// VaultName is a required field
-	VaultName *string `location:"uri" locationName:"vaultName" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s CreateVaultInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateVaultInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateVaultInput"}
-
-	if s.AccountId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("AccountId"))
-	}
-
-	if s.VaultName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("VaultName"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s CreateVaultInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.AccountId != nil {
-		v := *s.AccountId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "accountId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.VaultName != nil {
-		v := *s.VaultName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "vaultName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-// Contains the Amazon S3 Glacier response to your request.
-type CreateVaultOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The URI of the vault that was created.
-	Location *string `location:"header" locationName:"Location" type:"string"`
-}
-
-// String returns the string representation
-func (s CreateVaultOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s CreateVaultOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.Location != nil {
-		v := *s.Location
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "Location", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opCreateVault = "CreateVault"
 
@@ -132,7 +45,7 @@ const opCreateVault = "CreateVault"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) CreateVaultRequest(input *CreateVaultInput) CreateVaultRequest {
+func (c *Client) CreateVaultRequest(input *types.CreateVaultInput) CreateVaultRequest {
 	op := &aws.Operation{
 		Name:       opCreateVault,
 		HTTPMethod: "PUT",
@@ -140,10 +53,10 @@ func (c *Client) CreateVaultRequest(input *CreateVaultInput) CreateVaultRequest 
 	}
 
 	if input == nil {
-		input = &CreateVaultInput{}
+		input = &types.CreateVaultInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateVaultOutput{})
+	req := c.newRequest(op, input, &types.CreateVaultOutput{})
 	return CreateVaultRequest{Request: req, Input: input, Copy: c.CreateVaultRequest}
 }
 
@@ -151,8 +64,8 @@ func (c *Client) CreateVaultRequest(input *CreateVaultInput) CreateVaultRequest 
 // CreateVault API operation.
 type CreateVaultRequest struct {
 	*aws.Request
-	Input *CreateVaultInput
-	Copy  func(*CreateVaultInput) CreateVaultRequest
+	Input *types.CreateVaultInput
+	Copy  func(*types.CreateVaultInput) CreateVaultRequest
 }
 
 // Send marshals and sends the CreateVault API request.
@@ -164,7 +77,7 @@ func (r CreateVaultRequest) Send(ctx context.Context) (*CreateVaultResponse, err
 	}
 
 	resp := &CreateVaultResponse{
-		CreateVaultOutput: r.Request.Data.(*CreateVaultOutput),
+		CreateVaultOutput: r.Request.Data.(*types.CreateVaultOutput),
 		response:          &aws.Response{Request: r.Request},
 	}
 
@@ -174,7 +87,7 @@ func (r CreateVaultRequest) Send(ctx context.Context) (*CreateVaultResponse, err
 // CreateVaultResponse is the response type for the
 // CreateVault API operation.
 type CreateVaultResponse struct {
-	*CreateVaultOutput
+	*types.CreateVaultOutput
 
 	response *aws.Response
 }

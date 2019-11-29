@@ -6,29 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/alexaforbusiness/types"
 )
-
-type DeleteProfileInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ARN of the room profile to delete. Required.
-	ProfileArn *string `type:"string"`
-}
-
-// String returns the string representation
-func (s DeleteProfileInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type DeleteProfileOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteProfileOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteProfile = "DeleteProfile"
 
@@ -45,7 +24,7 @@ const opDeleteProfile = "DeleteProfile"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/DeleteProfile
-func (c *Client) DeleteProfileRequest(input *DeleteProfileInput) DeleteProfileRequest {
+func (c *Client) DeleteProfileRequest(input *types.DeleteProfileInput) DeleteProfileRequest {
 	op := &aws.Operation{
 		Name:       opDeleteProfile,
 		HTTPMethod: "POST",
@@ -53,10 +32,10 @@ func (c *Client) DeleteProfileRequest(input *DeleteProfileInput) DeleteProfileRe
 	}
 
 	if input == nil {
-		input = &DeleteProfileInput{}
+		input = &types.DeleteProfileInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteProfileOutput{})
+	req := c.newRequest(op, input, &types.DeleteProfileOutput{})
 	return DeleteProfileRequest{Request: req, Input: input, Copy: c.DeleteProfileRequest}
 }
 
@@ -64,8 +43,8 @@ func (c *Client) DeleteProfileRequest(input *DeleteProfileInput) DeleteProfileRe
 // DeleteProfile API operation.
 type DeleteProfileRequest struct {
 	*aws.Request
-	Input *DeleteProfileInput
-	Copy  func(*DeleteProfileInput) DeleteProfileRequest
+	Input *types.DeleteProfileInput
+	Copy  func(*types.DeleteProfileInput) DeleteProfileRequest
 }
 
 // Send marshals and sends the DeleteProfile API request.
@@ -77,7 +56,7 @@ func (r DeleteProfileRequest) Send(ctx context.Context) (*DeleteProfileResponse,
 	}
 
 	resp := &DeleteProfileResponse{
-		DeleteProfileOutput: r.Request.Data.(*DeleteProfileOutput),
+		DeleteProfileOutput: r.Request.Data.(*types.DeleteProfileOutput),
 		response:            &aws.Response{Request: r.Request},
 	}
 
@@ -87,7 +66,7 @@ func (r DeleteProfileRequest) Send(ctx context.Context) (*DeleteProfileResponse,
 // DeleteProfileResponse is the response type for the
 // DeleteProfile API operation.
 type DeleteProfileResponse struct {
-	*DeleteProfileOutput
+	*types.DeleteProfileOutput
 
 	response *aws.Response
 }

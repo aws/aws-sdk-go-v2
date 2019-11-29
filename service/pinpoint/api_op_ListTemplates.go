@@ -6,83 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/pinpoint/types"
 )
-
-type ListTemplatesInput struct {
-	_ struct{} `type:"structure"`
-
-	NextToken *string `location:"querystring" locationName:"next-token" type:"string"`
-
-	PageSize *string `location:"querystring" locationName:"page-size" type:"string"`
-
-	Prefix *string `location:"querystring" locationName:"prefix" type:"string"`
-
-	TemplateType *string `location:"querystring" locationName:"template-type" type:"string"`
-}
-
-// String returns the string representation
-func (s ListTemplatesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListTemplatesInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "next-token", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.PageSize != nil {
-		v := *s.PageSize
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "page-size", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Prefix != nil {
-		v := *s.Prefix
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "prefix", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.TemplateType != nil {
-		v := *s.TemplateType
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "template-type", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type ListTemplatesOutput struct {
-	_ struct{} `type:"structure" payload:"TemplatesResponse"`
-
-	// Provides information about all the message templates that are associated
-	// with your Amazon Pinpoint account.
-	//
-	// TemplatesResponse is a required field
-	TemplatesResponse *TemplatesResponse `type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s ListTemplatesOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListTemplatesOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.TemplatesResponse != nil {
-		v := s.TemplatesResponse
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.PayloadTarget, "TemplatesResponse", v, metadata)
-	}
-	return nil
-}
 
 const opListTemplates = "ListTemplates"
 
@@ -100,7 +25,7 @@ const opListTemplates = "ListTemplates"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/ListTemplates
-func (c *Client) ListTemplatesRequest(input *ListTemplatesInput) ListTemplatesRequest {
+func (c *Client) ListTemplatesRequest(input *types.ListTemplatesInput) ListTemplatesRequest {
 	op := &aws.Operation{
 		Name:       opListTemplates,
 		HTTPMethod: "GET",
@@ -108,10 +33,10 @@ func (c *Client) ListTemplatesRequest(input *ListTemplatesInput) ListTemplatesRe
 	}
 
 	if input == nil {
-		input = &ListTemplatesInput{}
+		input = &types.ListTemplatesInput{}
 	}
 
-	req := c.newRequest(op, input, &ListTemplatesOutput{})
+	req := c.newRequest(op, input, &types.ListTemplatesOutput{})
 	return ListTemplatesRequest{Request: req, Input: input, Copy: c.ListTemplatesRequest}
 }
 
@@ -119,8 +44,8 @@ func (c *Client) ListTemplatesRequest(input *ListTemplatesInput) ListTemplatesRe
 // ListTemplates API operation.
 type ListTemplatesRequest struct {
 	*aws.Request
-	Input *ListTemplatesInput
-	Copy  func(*ListTemplatesInput) ListTemplatesRequest
+	Input *types.ListTemplatesInput
+	Copy  func(*types.ListTemplatesInput) ListTemplatesRequest
 }
 
 // Send marshals and sends the ListTemplates API request.
@@ -132,7 +57,7 @@ func (r ListTemplatesRequest) Send(ctx context.Context) (*ListTemplatesResponse,
 	}
 
 	resp := &ListTemplatesResponse{
-		ListTemplatesOutput: r.Request.Data.(*ListTemplatesOutput),
+		ListTemplatesOutput: r.Request.Data.(*types.ListTemplatesOutput),
 		response:            &aws.Response{Request: r.Request},
 	}
 
@@ -142,7 +67,7 @@ func (r ListTemplatesRequest) Send(ctx context.Context) (*ListTemplatesResponse,
 // ListTemplatesResponse is the response type for the
 // ListTemplates API operation.
 type ListTemplatesResponse struct {
-	*ListTemplatesOutput
+	*types.ListTemplatesOutput
 
 	response *aws.Response
 }

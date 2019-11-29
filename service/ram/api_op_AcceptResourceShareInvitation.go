@@ -6,93 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/ram/types"
 )
-
-type AcceptResourceShareInvitationInput struct {
-	_ struct{} `type:"structure"`
-
-	// A unique, case-sensitive identifier that you provide to ensure the idempotency
-	// of the request.
-	ClientToken *string `locationName:"clientToken" type:"string"`
-
-	// The Amazon Resource Name (ARN) of the invitation.
-	//
-	// ResourceShareInvitationArn is a required field
-	ResourceShareInvitationArn *string `locationName:"resourceShareInvitationArn" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s AcceptResourceShareInvitationInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *AcceptResourceShareInvitationInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "AcceptResourceShareInvitationInput"}
-
-	if s.ResourceShareInvitationArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ResourceShareInvitationArn"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s AcceptResourceShareInvitationInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.ClientToken != nil {
-		v := *s.ClientToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "clientToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.ResourceShareInvitationArn != nil {
-		v := *s.ResourceShareInvitationArn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "resourceShareInvitationArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type AcceptResourceShareInvitationOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A unique, case-sensitive identifier that you provide to ensure the idempotency
-	// of the request.
-	ClientToken *string `locationName:"clientToken" type:"string"`
-
-	// Information about the invitation.
-	ResourceShareInvitation *ResourceShareInvitation `locationName:"resourceShareInvitation" type:"structure"`
-}
-
-// String returns the string representation
-func (s AcceptResourceShareInvitationOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s AcceptResourceShareInvitationOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.ClientToken != nil {
-		v := *s.ClientToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "clientToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.ResourceShareInvitation != nil {
-		v := s.ResourceShareInvitation
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "resourceShareInvitation", v, metadata)
-	}
-	return nil
-}
 
 const opAcceptResourceShareInvitation = "AcceptResourceShareInvitation"
 
@@ -109,7 +24,7 @@ const opAcceptResourceShareInvitation = "AcceptResourceShareInvitation"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/AcceptResourceShareInvitation
-func (c *Client) AcceptResourceShareInvitationRequest(input *AcceptResourceShareInvitationInput) AcceptResourceShareInvitationRequest {
+func (c *Client) AcceptResourceShareInvitationRequest(input *types.AcceptResourceShareInvitationInput) AcceptResourceShareInvitationRequest {
 	op := &aws.Operation{
 		Name:       opAcceptResourceShareInvitation,
 		HTTPMethod: "POST",
@@ -117,10 +32,10 @@ func (c *Client) AcceptResourceShareInvitationRequest(input *AcceptResourceShare
 	}
 
 	if input == nil {
-		input = &AcceptResourceShareInvitationInput{}
+		input = &types.AcceptResourceShareInvitationInput{}
 	}
 
-	req := c.newRequest(op, input, &AcceptResourceShareInvitationOutput{})
+	req := c.newRequest(op, input, &types.AcceptResourceShareInvitationOutput{})
 	return AcceptResourceShareInvitationRequest{Request: req, Input: input, Copy: c.AcceptResourceShareInvitationRequest}
 }
 
@@ -128,8 +43,8 @@ func (c *Client) AcceptResourceShareInvitationRequest(input *AcceptResourceShare
 // AcceptResourceShareInvitation API operation.
 type AcceptResourceShareInvitationRequest struct {
 	*aws.Request
-	Input *AcceptResourceShareInvitationInput
-	Copy  func(*AcceptResourceShareInvitationInput) AcceptResourceShareInvitationRequest
+	Input *types.AcceptResourceShareInvitationInput
+	Copy  func(*types.AcceptResourceShareInvitationInput) AcceptResourceShareInvitationRequest
 }
 
 // Send marshals and sends the AcceptResourceShareInvitation API request.
@@ -141,7 +56,7 @@ func (r AcceptResourceShareInvitationRequest) Send(ctx context.Context) (*Accept
 	}
 
 	resp := &AcceptResourceShareInvitationResponse{
-		AcceptResourceShareInvitationOutput: r.Request.Data.(*AcceptResourceShareInvitationOutput),
+		AcceptResourceShareInvitationOutput: r.Request.Data.(*types.AcceptResourceShareInvitationOutput),
 		response:                            &aws.Response{Request: r.Request},
 	}
 
@@ -151,7 +66,7 @@ func (r AcceptResourceShareInvitationRequest) Send(ctx context.Context) (*Accept
 // AcceptResourceShareInvitationResponse is the response type for the
 // AcceptResourceShareInvitation API operation.
 type AcceptResourceShareInvitationResponse struct {
-	*AcceptResourceShareInvitationOutput
+	*types.AcceptResourceShareInvitationOutput
 
 	response *aws.Response
 }

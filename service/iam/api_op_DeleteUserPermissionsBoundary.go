@@ -6,51 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/query"
+	"github.com/aws/aws-sdk-go-v2/service/iam/types"
 )
-
-type DeleteUserPermissionsBoundaryInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name (friendly name, not ARN) of the IAM user from which you want to
-	// remove the permissions boundary.
-	//
-	// UserName is a required field
-	UserName *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteUserPermissionsBoundaryInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteUserPermissionsBoundaryInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteUserPermissionsBoundaryInput"}
-
-	if s.UserName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("UserName"))
-	}
-	if s.UserName != nil && len(*s.UserName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("UserName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteUserPermissionsBoundaryOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteUserPermissionsBoundaryOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteUserPermissionsBoundary = "DeleteUserPermissionsBoundary"
 
@@ -71,7 +30,7 @@ const opDeleteUserPermissionsBoundary = "DeleteUserPermissionsBoundary"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeleteUserPermissionsBoundary
-func (c *Client) DeleteUserPermissionsBoundaryRequest(input *DeleteUserPermissionsBoundaryInput) DeleteUserPermissionsBoundaryRequest {
+func (c *Client) DeleteUserPermissionsBoundaryRequest(input *types.DeleteUserPermissionsBoundaryInput) DeleteUserPermissionsBoundaryRequest {
 	op := &aws.Operation{
 		Name:       opDeleteUserPermissionsBoundary,
 		HTTPMethod: "POST",
@@ -79,10 +38,10 @@ func (c *Client) DeleteUserPermissionsBoundaryRequest(input *DeleteUserPermissio
 	}
 
 	if input == nil {
-		input = &DeleteUserPermissionsBoundaryInput{}
+		input = &types.DeleteUserPermissionsBoundaryInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteUserPermissionsBoundaryOutput{})
+	req := c.newRequest(op, input, &types.DeleteUserPermissionsBoundaryOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return DeleteUserPermissionsBoundaryRequest{Request: req, Input: input, Copy: c.DeleteUserPermissionsBoundaryRequest}
@@ -92,8 +51,8 @@ func (c *Client) DeleteUserPermissionsBoundaryRequest(input *DeleteUserPermissio
 // DeleteUserPermissionsBoundary API operation.
 type DeleteUserPermissionsBoundaryRequest struct {
 	*aws.Request
-	Input *DeleteUserPermissionsBoundaryInput
-	Copy  func(*DeleteUserPermissionsBoundaryInput) DeleteUserPermissionsBoundaryRequest
+	Input *types.DeleteUserPermissionsBoundaryInput
+	Copy  func(*types.DeleteUserPermissionsBoundaryInput) DeleteUserPermissionsBoundaryRequest
 }
 
 // Send marshals and sends the DeleteUserPermissionsBoundary API request.
@@ -105,7 +64,7 @@ func (r DeleteUserPermissionsBoundaryRequest) Send(ctx context.Context) (*Delete
 	}
 
 	resp := &DeleteUserPermissionsBoundaryResponse{
-		DeleteUserPermissionsBoundaryOutput: r.Request.Data.(*DeleteUserPermissionsBoundaryOutput),
+		DeleteUserPermissionsBoundaryOutput: r.Request.Data.(*types.DeleteUserPermissionsBoundaryOutput),
 		response:                            &aws.Response{Request: r.Request},
 	}
 
@@ -115,7 +74,7 @@ func (r DeleteUserPermissionsBoundaryRequest) Send(ctx context.Context) (*Delete
 // DeleteUserPermissionsBoundaryResponse is the response type for the
 // DeleteUserPermissionsBoundary API operation.
 type DeleteUserPermissionsBoundaryResponse struct {
-	*DeleteUserPermissionsBoundaryOutput
+	*types.DeleteUserPermissionsBoundaryOutput
 
 	response *aws.Response
 }

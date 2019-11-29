@@ -6,103 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/lambda/types"
 )
-
-type ListLayersInput struct {
-	_ struct{} `type:"structure"`
-
-	// A runtime identifier. For example, go1.x.
-	CompatibleRuntime Runtime `location:"querystring" locationName:"CompatibleRuntime" type:"string" enum:"true"`
-
-	// A pagination token returned by a previous call.
-	Marker *string `location:"querystring" locationName:"Marker" type:"string"`
-
-	// The maximum number of layers to return.
-	MaxItems *int64 `location:"querystring" locationName:"MaxItems" min:"1" type:"integer"`
-}
-
-// String returns the string representation
-func (s ListLayersInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListLayersInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListLayersInput"}
-	if s.MaxItems != nil && *s.MaxItems < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxItems", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListLayersInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if len(s.CompatibleRuntime) > 0 {
-		v := s.CompatibleRuntime
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "CompatibleRuntime", protocol.QuotedValue{ValueMarshaler: v}, metadata)
-	}
-	if s.Marker != nil {
-		v := *s.Marker
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "Marker", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.MaxItems != nil {
-		v := *s.MaxItems
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "MaxItems", protocol.Int64Value(v), metadata)
-	}
-	return nil
-}
-
-type ListLayersOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A list of function layers.
-	Layers []LayersListItem `type:"list"`
-
-	// A pagination token returned when the response doesn't contain all layers.
-	NextMarker *string `type:"string"`
-}
-
-// String returns the string representation
-func (s ListLayersOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListLayersOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.Layers != nil {
-		v := s.Layers
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "Layers", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	if s.NextMarker != nil {
-		v := *s.NextMarker
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "NextMarker", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opListLayers = "ListLayers"
 
@@ -122,7 +27,7 @@ const opListLayers = "ListLayers"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/ListLayers
-func (c *Client) ListLayersRequest(input *ListLayersInput) ListLayersRequest {
+func (c *Client) ListLayersRequest(input *types.ListLayersInput) ListLayersRequest {
 	op := &aws.Operation{
 		Name:       opListLayers,
 		HTTPMethod: "GET",
@@ -136,10 +41,10 @@ func (c *Client) ListLayersRequest(input *ListLayersInput) ListLayersRequest {
 	}
 
 	if input == nil {
-		input = &ListLayersInput{}
+		input = &types.ListLayersInput{}
 	}
 
-	req := c.newRequest(op, input, &ListLayersOutput{})
+	req := c.newRequest(op, input, &types.ListLayersOutput{})
 	return ListLayersRequest{Request: req, Input: input, Copy: c.ListLayersRequest}
 }
 
@@ -147,8 +52,8 @@ func (c *Client) ListLayersRequest(input *ListLayersInput) ListLayersRequest {
 // ListLayers API operation.
 type ListLayersRequest struct {
 	*aws.Request
-	Input *ListLayersInput
-	Copy  func(*ListLayersInput) ListLayersRequest
+	Input *types.ListLayersInput
+	Copy  func(*types.ListLayersInput) ListLayersRequest
 }
 
 // Send marshals and sends the ListLayers API request.
@@ -160,7 +65,7 @@ func (r ListLayersRequest) Send(ctx context.Context) (*ListLayersResponse, error
 	}
 
 	resp := &ListLayersResponse{
-		ListLayersOutput: r.Request.Data.(*ListLayersOutput),
+		ListLayersOutput: r.Request.Data.(*types.ListLayersOutput),
 		response:         &aws.Response{Request: r.Request},
 	}
 
@@ -190,7 +95,7 @@ func NewListLayersPaginator(req ListLayersRequest) ListLayersPaginator {
 	return ListLayersPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListLayersInput
+				var inCpy *types.ListLayersInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -210,14 +115,14 @@ type ListLayersPaginator struct {
 	aws.Pager
 }
 
-func (p *ListLayersPaginator) CurrentPage() *ListLayersOutput {
-	return p.Pager.CurrentPage().(*ListLayersOutput)
+func (p *ListLayersPaginator) CurrentPage() *types.ListLayersOutput {
+	return p.Pager.CurrentPage().(*types.ListLayersOutput)
 }
 
 // ListLayersResponse is the response type for the
 // ListLayers API operation.
 type ListLayersResponse struct {
-	*ListLayersOutput
+	*types.ListLayersOutput
 
 	response *aws.Response
 }

@@ -6,132 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/mediaconvert/types"
 )
-
-// You can send list presets requests with an empty body. Optionally, you can
-// filter the response by category by specifying it in your request body. You
-// can also optionally specify the maximum number, up to twenty, of queues to
-// be returned.
-type ListPresetsInput struct {
-	_ struct{} `type:"structure"`
-
-	// Optionally, specify a preset category to limit responses to only presets
-	// from that category.
-	Category *string `location:"querystring" locationName:"category" type:"string"`
-
-	// Optional. When you request a list of presets, you can choose to list them
-	// alphabetically by NAME or chronologically by CREATION_DATE. If you don't
-	// specify, the service will list them by name.
-	ListBy PresetListBy `location:"querystring" locationName:"listBy" type:"string" enum:"true"`
-
-	// Optional. Number of presets, up to twenty, that will be returned at one time
-	MaxResults *int64 `location:"querystring" locationName:"maxResults" min:"1" type:"integer"`
-
-	// Use this string, provided with the response to a previous request, to request
-	// the next batch of presets.
-	NextToken *string `location:"querystring" locationName:"nextToken" type:"string"`
-
-	// When you request lists of resources, you can optionally specify whether they
-	// are sorted in ASCENDING or DESCENDING order. Default varies by resource.
-	Order Order `location:"querystring" locationName:"order" type:"string" enum:"true"`
-}
-
-// String returns the string representation
-func (s ListPresetsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListPresetsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListPresetsInput"}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListPresetsInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.Category != nil {
-		v := *s.Category
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "category", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if len(s.ListBy) > 0 {
-		v := s.ListBy
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "listBy", protocol.QuotedValue{ValueMarshaler: v}, metadata)
-	}
-	if s.MaxResults != nil {
-		v := *s.MaxResults
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "maxResults", protocol.Int64Value(v), metadata)
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if len(s.Order) > 0 {
-		v := s.Order
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "order", protocol.QuotedValue{ValueMarshaler: v}, metadata)
-	}
-	return nil
-}
-
-// Successful list presets requests return a JSON array of presets. If you don't
-// specify how they are ordered, you will receive them alphabetically by name.
-type ListPresetsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Use this string to request the next batch of presets.
-	NextToken *string `locationName:"nextToken" type:"string"`
-
-	// List of presets
-	Presets []Preset `locationName:"presets" type:"list"`
-}
-
-// String returns the string representation
-func (s ListPresetsOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListPresetsOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Presets != nil {
-		v := s.Presets
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "presets", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	return nil
-}
 
 const opListPresets = "ListPresets"
 
@@ -150,7 +26,7 @@ const opListPresets = "ListPresets"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/ListPresets
-func (c *Client) ListPresetsRequest(input *ListPresetsInput) ListPresetsRequest {
+func (c *Client) ListPresetsRequest(input *types.ListPresetsInput) ListPresetsRequest {
 	op := &aws.Operation{
 		Name:       opListPresets,
 		HTTPMethod: "GET",
@@ -164,10 +40,10 @@ func (c *Client) ListPresetsRequest(input *ListPresetsInput) ListPresetsRequest 
 	}
 
 	if input == nil {
-		input = &ListPresetsInput{}
+		input = &types.ListPresetsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListPresetsOutput{})
+	req := c.newRequest(op, input, &types.ListPresetsOutput{})
 	return ListPresetsRequest{Request: req, Input: input, Copy: c.ListPresetsRequest}
 }
 
@@ -175,8 +51,8 @@ func (c *Client) ListPresetsRequest(input *ListPresetsInput) ListPresetsRequest 
 // ListPresets API operation.
 type ListPresetsRequest struct {
 	*aws.Request
-	Input *ListPresetsInput
-	Copy  func(*ListPresetsInput) ListPresetsRequest
+	Input *types.ListPresetsInput
+	Copy  func(*types.ListPresetsInput) ListPresetsRequest
 }
 
 // Send marshals and sends the ListPresets API request.
@@ -188,7 +64,7 @@ func (r ListPresetsRequest) Send(ctx context.Context) (*ListPresetsResponse, err
 	}
 
 	resp := &ListPresetsResponse{
-		ListPresetsOutput: r.Request.Data.(*ListPresetsOutput),
+		ListPresetsOutput: r.Request.Data.(*types.ListPresetsOutput),
 		response:          &aws.Response{Request: r.Request},
 	}
 
@@ -218,7 +94,7 @@ func NewListPresetsPaginator(req ListPresetsRequest) ListPresetsPaginator {
 	return ListPresetsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListPresetsInput
+				var inCpy *types.ListPresetsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -238,14 +114,14 @@ type ListPresetsPaginator struct {
 	aws.Pager
 }
 
-func (p *ListPresetsPaginator) CurrentPage() *ListPresetsOutput {
-	return p.Pager.CurrentPage().(*ListPresetsOutput)
+func (p *ListPresetsPaginator) CurrentPage() *types.ListPresetsOutput {
+	return p.Pager.CurrentPage().(*types.ListPresetsOutput)
 }
 
 // ListPresetsResponse is the response type for the
 // ListPresets API operation.
 type ListPresetsResponse struct {
-	*ListPresetsOutput
+	*types.ListPresetsOutput
 
 	response *aws.Response
 }

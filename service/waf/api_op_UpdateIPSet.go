@@ -4,95 +4,10 @@ package waf
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/waf/types"
 )
-
-type UpdateIPSetInput struct {
-	_ struct{} `type:"structure"`
-
-	// The value returned by the most recent call to GetChangeToken.
-	//
-	// ChangeToken is a required field
-	ChangeToken *string `min:"1" type:"string" required:"true"`
-
-	// The IPSetId of the IPSet that you want to update. IPSetId is returned by
-	// CreateIPSet and by ListIPSets.
-	//
-	// IPSetId is a required field
-	IPSetId *string `min:"1" type:"string" required:"true"`
-
-	// An array of IPSetUpdate objects that you want to insert into or delete from
-	// an IPSet. For more information, see the applicable data types:
-	//
-	//    * IPSetUpdate: Contains Action and IPSetDescriptor
-	//
-	//    * IPSetDescriptor: Contains Type and Value
-	//
-	// You can insert a maximum of 1000 addresses in a single request.
-	//
-	// Updates is a required field
-	Updates []IPSetUpdate `min:"1" type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s UpdateIPSetInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateIPSetInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateIPSetInput"}
-
-	if s.ChangeToken == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ChangeToken"))
-	}
-	if s.ChangeToken != nil && len(*s.ChangeToken) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ChangeToken", 1))
-	}
-
-	if s.IPSetId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("IPSetId"))
-	}
-	if s.IPSetId != nil && len(*s.IPSetId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("IPSetId", 1))
-	}
-
-	if s.Updates == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Updates"))
-	}
-	if s.Updates != nil && len(s.Updates) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Updates", 1))
-	}
-	if s.Updates != nil {
-		for i, v := range s.Updates {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Updates", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type UpdateIPSetOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The ChangeToken that you used to submit the UpdateIPSet request. You can
-	// also use this value to query the status of the request. For more information,
-	// see GetChangeTokenStatus.
-	ChangeToken *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s UpdateIPSetOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opUpdateIPSet = "UpdateIPSet"
 
@@ -160,7 +75,7 @@ const opUpdateIPSet = "UpdateIPSet"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/UpdateIPSet
-func (c *Client) UpdateIPSetRequest(input *UpdateIPSetInput) UpdateIPSetRequest {
+func (c *Client) UpdateIPSetRequest(input *types.UpdateIPSetInput) UpdateIPSetRequest {
 	op := &aws.Operation{
 		Name:       opUpdateIPSet,
 		HTTPMethod: "POST",
@@ -168,10 +83,10 @@ func (c *Client) UpdateIPSetRequest(input *UpdateIPSetInput) UpdateIPSetRequest 
 	}
 
 	if input == nil {
-		input = &UpdateIPSetInput{}
+		input = &types.UpdateIPSetInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateIPSetOutput{})
+	req := c.newRequest(op, input, &types.UpdateIPSetOutput{})
 	return UpdateIPSetRequest{Request: req, Input: input, Copy: c.UpdateIPSetRequest}
 }
 
@@ -179,8 +94,8 @@ func (c *Client) UpdateIPSetRequest(input *UpdateIPSetInput) UpdateIPSetRequest 
 // UpdateIPSet API operation.
 type UpdateIPSetRequest struct {
 	*aws.Request
-	Input *UpdateIPSetInput
-	Copy  func(*UpdateIPSetInput) UpdateIPSetRequest
+	Input *types.UpdateIPSetInput
+	Copy  func(*types.UpdateIPSetInput) UpdateIPSetRequest
 }
 
 // Send marshals and sends the UpdateIPSet API request.
@@ -192,7 +107,7 @@ func (r UpdateIPSetRequest) Send(ctx context.Context) (*UpdateIPSetResponse, err
 	}
 
 	resp := &UpdateIPSetResponse{
-		UpdateIPSetOutput: r.Request.Data.(*UpdateIPSetOutput),
+		UpdateIPSetOutput: r.Request.Data.(*types.UpdateIPSetOutput),
 		response:          &aws.Response{Request: r.Request},
 	}
 
@@ -202,7 +117,7 @@ func (r UpdateIPSetRequest) Send(ctx context.Context) (*UpdateIPSetResponse, err
 // UpdateIPSetResponse is the response type for the
 // UpdateIPSet API operation.
 type UpdateIPSetResponse struct {
-	*UpdateIPSetOutput
+	*types.UpdateIPSetOutput
 
 	response *aws.Response
 }

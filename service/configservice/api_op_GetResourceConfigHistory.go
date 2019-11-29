@@ -4,90 +4,10 @@ package configservice
 
 import (
 	"context"
-	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/configservice/types"
 )
-
-// The input for the GetResourceConfigHistory action.
-type GetResourceConfigHistoryInput struct {
-	_ struct{} `type:"structure"`
-
-	// The chronological order for configuration items listed. By default, the results
-	// are listed in reverse chronological order.
-	ChronologicalOrder ChronologicalOrder `locationName:"chronologicalOrder" type:"string" enum:"true"`
-
-	// The time stamp that indicates an earlier time. If not specified, the action
-	// returns paginated results that contain configuration items that start when
-	// the first configuration item was recorded.
-	EarlierTime *time.Time `locationName:"earlierTime" type:"timestamp"`
-
-	// The time stamp that indicates a later time. If not specified, current time
-	// is taken.
-	LaterTime *time.Time `locationName:"laterTime" type:"timestamp"`
-
-	// The maximum number of configuration items returned on each page. The default
-	// is 10. You cannot specify a number greater than 100. If you specify 0, AWS
-	// Config uses the default.
-	Limit *int64 `locationName:"limit" type:"integer"`
-
-	// The nextToken string returned on a previous page that you use to get the
-	// next page of results in a paginated response.
-	NextToken *string `locationName:"nextToken" type:"string"`
-
-	// The ID of the resource (for example., sg-xxxxxx).
-	//
-	// ResourceId is a required field
-	ResourceId *string `locationName:"resourceId" min:"1" type:"string" required:"true"`
-
-	// The resource type.
-	//
-	// ResourceType is a required field
-	ResourceType ResourceType `locationName:"resourceType" type:"string" required:"true" enum:"true"`
-}
-
-// String returns the string representation
-func (s GetResourceConfigHistoryInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetResourceConfigHistoryInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetResourceConfigHistoryInput"}
-
-	if s.ResourceId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ResourceId"))
-	}
-	if s.ResourceId != nil && len(*s.ResourceId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ResourceId", 1))
-	}
-	if len(s.ResourceType) == 0 {
-		invalidParams.Add(aws.NewErrParamRequired("ResourceType"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// The output for the GetResourceConfigHistory action.
-type GetResourceConfigHistoryOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A list that contains the configuration history of one or more resources.
-	ConfigurationItems []ConfigurationItem `locationName:"configurationItems" type:"list"`
-
-	// The string that you use in a subsequent request to get the next page of results
-	// in a paginated response.
-	NextToken *string `locationName:"nextToken" type:"string"`
-}
-
-// String returns the string representation
-func (s GetResourceConfigHistoryOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetResourceConfigHistory = "GetResourceConfigHistory"
 
@@ -117,7 +37,7 @@ const opGetResourceConfigHistory = "GetResourceConfigHistory"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/GetResourceConfigHistory
-func (c *Client) GetResourceConfigHistoryRequest(input *GetResourceConfigHistoryInput) GetResourceConfigHistoryRequest {
+func (c *Client) GetResourceConfigHistoryRequest(input *types.GetResourceConfigHistoryInput) GetResourceConfigHistoryRequest {
 	op := &aws.Operation{
 		Name:       opGetResourceConfigHistory,
 		HTTPMethod: "POST",
@@ -131,10 +51,10 @@ func (c *Client) GetResourceConfigHistoryRequest(input *GetResourceConfigHistory
 	}
 
 	if input == nil {
-		input = &GetResourceConfigHistoryInput{}
+		input = &types.GetResourceConfigHistoryInput{}
 	}
 
-	req := c.newRequest(op, input, &GetResourceConfigHistoryOutput{})
+	req := c.newRequest(op, input, &types.GetResourceConfigHistoryOutput{})
 	return GetResourceConfigHistoryRequest{Request: req, Input: input, Copy: c.GetResourceConfigHistoryRequest}
 }
 
@@ -142,8 +62,8 @@ func (c *Client) GetResourceConfigHistoryRequest(input *GetResourceConfigHistory
 // GetResourceConfigHistory API operation.
 type GetResourceConfigHistoryRequest struct {
 	*aws.Request
-	Input *GetResourceConfigHistoryInput
-	Copy  func(*GetResourceConfigHistoryInput) GetResourceConfigHistoryRequest
+	Input *types.GetResourceConfigHistoryInput
+	Copy  func(*types.GetResourceConfigHistoryInput) GetResourceConfigHistoryRequest
 }
 
 // Send marshals and sends the GetResourceConfigHistory API request.
@@ -155,7 +75,7 @@ func (r GetResourceConfigHistoryRequest) Send(ctx context.Context) (*GetResource
 	}
 
 	resp := &GetResourceConfigHistoryResponse{
-		GetResourceConfigHistoryOutput: r.Request.Data.(*GetResourceConfigHistoryOutput),
+		GetResourceConfigHistoryOutput: r.Request.Data.(*types.GetResourceConfigHistoryOutput),
 		response:                       &aws.Response{Request: r.Request},
 	}
 
@@ -185,7 +105,7 @@ func NewGetResourceConfigHistoryPaginator(req GetResourceConfigHistoryRequest) G
 	return GetResourceConfigHistoryPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *GetResourceConfigHistoryInput
+				var inCpy *types.GetResourceConfigHistoryInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -205,14 +125,14 @@ type GetResourceConfigHistoryPaginator struct {
 	aws.Pager
 }
 
-func (p *GetResourceConfigHistoryPaginator) CurrentPage() *GetResourceConfigHistoryOutput {
-	return p.Pager.CurrentPage().(*GetResourceConfigHistoryOutput)
+func (p *GetResourceConfigHistoryPaginator) CurrentPage() *types.GetResourceConfigHistoryOutput {
+	return p.Pager.CurrentPage().(*types.GetResourceConfigHistoryOutput)
 }
 
 // GetResourceConfigHistoryResponse is the response type for the
 // GetResourceConfigHistory API operation.
 type GetResourceConfigHistoryResponse struct {
-	*GetResourceConfigHistoryOutput
+	*types.GetResourceConfigHistoryOutput
 
 	response *aws.Response
 }

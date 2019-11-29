@@ -6,50 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/codedeploy/types"
 )
-
-// Represents the input of a GetDeployment operation.
-type GetDeploymentInput struct {
-	_ struct{} `type:"structure"`
-
-	// The unique ID of a deployment associated with the IAM user or AWS account.
-	//
-	// DeploymentId is a required field
-	DeploymentId *string `locationName:"deploymentId" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetDeploymentInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetDeploymentInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetDeploymentInput"}
-
-	if s.DeploymentId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DeploymentId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Represents the output of a GetDeployment operation.
-type GetDeploymentOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Information about the deployment.
-	DeploymentInfo *DeploymentInfo `locationName:"deploymentInfo" type:"structure"`
-}
-
-// String returns the string representation
-func (s GetDeploymentOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetDeployment = "GetDeployment"
 
@@ -71,7 +29,7 @@ const opGetDeployment = "GetDeployment"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/GetDeployment
-func (c *Client) GetDeploymentRequest(input *GetDeploymentInput) GetDeploymentRequest {
+func (c *Client) GetDeploymentRequest(input *types.GetDeploymentInput) GetDeploymentRequest {
 	op := &aws.Operation{
 		Name:       opGetDeployment,
 		HTTPMethod: "POST",
@@ -79,10 +37,10 @@ func (c *Client) GetDeploymentRequest(input *GetDeploymentInput) GetDeploymentRe
 	}
 
 	if input == nil {
-		input = &GetDeploymentInput{}
+		input = &types.GetDeploymentInput{}
 	}
 
-	req := c.newRequest(op, input, &GetDeploymentOutput{})
+	req := c.newRequest(op, input, &types.GetDeploymentOutput{})
 	return GetDeploymentRequest{Request: req, Input: input, Copy: c.GetDeploymentRequest}
 }
 
@@ -90,8 +48,8 @@ func (c *Client) GetDeploymentRequest(input *GetDeploymentInput) GetDeploymentRe
 // GetDeployment API operation.
 type GetDeploymentRequest struct {
 	*aws.Request
-	Input *GetDeploymentInput
-	Copy  func(*GetDeploymentInput) GetDeploymentRequest
+	Input *types.GetDeploymentInput
+	Copy  func(*types.GetDeploymentInput) GetDeploymentRequest
 }
 
 // Send marshals and sends the GetDeployment API request.
@@ -103,7 +61,7 @@ func (r GetDeploymentRequest) Send(ctx context.Context) (*GetDeploymentResponse,
 	}
 
 	resp := &GetDeploymentResponse{
-		GetDeploymentOutput: r.Request.Data.(*GetDeploymentOutput),
+		GetDeploymentOutput: r.Request.Data.(*types.GetDeploymentOutput),
 		response:            &aws.Response{Request: r.Request},
 	}
 
@@ -113,7 +71,7 @@ func (r GetDeploymentRequest) Send(ctx context.Context) (*GetDeploymentResponse,
 // GetDeploymentResponse is the response type for the
 // GetDeployment API operation.
 type GetDeploymentResponse struct {
-	*GetDeploymentOutput
+	*types.GetDeploymentOutput
 
 	response *aws.Response
 }

@@ -6,67 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/robomaker/types"
 )
-
-type DeleteRobotInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the robot.
-	//
-	// Robot is a required field
-	Robot *string `locationName:"robot" min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteRobotInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteRobotInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteRobotInput"}
-
-	if s.Robot == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Robot"))
-	}
-	if s.Robot != nil && len(*s.Robot) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Robot", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteRobotInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.Robot != nil {
-		v := *s.Robot
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "robot", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type DeleteRobotOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteRobotOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteRobotOutput) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
 
 const opDeleteRobot = "DeleteRobot"
 
@@ -83,7 +24,7 @@ const opDeleteRobot = "DeleteRobot"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/DeleteRobot
-func (c *Client) DeleteRobotRequest(input *DeleteRobotInput) DeleteRobotRequest {
+func (c *Client) DeleteRobotRequest(input *types.DeleteRobotInput) DeleteRobotRequest {
 	op := &aws.Operation{
 		Name:       opDeleteRobot,
 		HTTPMethod: "POST",
@@ -91,10 +32,10 @@ func (c *Client) DeleteRobotRequest(input *DeleteRobotInput) DeleteRobotRequest 
 	}
 
 	if input == nil {
-		input = &DeleteRobotInput{}
+		input = &types.DeleteRobotInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteRobotOutput{})
+	req := c.newRequest(op, input, &types.DeleteRobotOutput{})
 	return DeleteRobotRequest{Request: req, Input: input, Copy: c.DeleteRobotRequest}
 }
 
@@ -102,8 +43,8 @@ func (c *Client) DeleteRobotRequest(input *DeleteRobotInput) DeleteRobotRequest 
 // DeleteRobot API operation.
 type DeleteRobotRequest struct {
 	*aws.Request
-	Input *DeleteRobotInput
-	Copy  func(*DeleteRobotInput) DeleteRobotRequest
+	Input *types.DeleteRobotInput
+	Copy  func(*types.DeleteRobotInput) DeleteRobotRequest
 }
 
 // Send marshals and sends the DeleteRobot API request.
@@ -115,7 +56,7 @@ func (r DeleteRobotRequest) Send(ctx context.Context) (*DeleteRobotResponse, err
 	}
 
 	resp := &DeleteRobotResponse{
-		DeleteRobotOutput: r.Request.Data.(*DeleteRobotOutput),
+		DeleteRobotOutput: r.Request.Data.(*types.DeleteRobotOutput),
 		response:          &aws.Response{Request: r.Request},
 	}
 
@@ -125,7 +66,7 @@ func (r DeleteRobotRequest) Send(ctx context.Context) (*DeleteRobotResponse, err
 // DeleteRobotResponse is the response type for the
 // DeleteRobot API operation.
 type DeleteRobotResponse struct {
-	*DeleteRobotOutput
+	*types.DeleteRobotOutput
 
 	response *aws.Response
 }

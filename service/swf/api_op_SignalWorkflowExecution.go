@@ -6,81 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
+	"github.com/aws/aws-sdk-go-v2/service/swf/types"
 )
-
-type SignalWorkflowExecutionInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the domain containing the workflow execution to signal.
-	//
-	// Domain is a required field
-	Domain *string `locationName:"domain" min:"1" type:"string" required:"true"`
-
-	// Data to attach to the WorkflowExecutionSignaled event in the target workflow
-	// execution's history.
-	Input *string `locationName:"input" type:"string"`
-
-	// The runId of the workflow execution to signal.
-	RunId *string `locationName:"runId" type:"string"`
-
-	// The name of the signal. This name must be meaningful to the target workflow.
-	//
-	// SignalName is a required field
-	SignalName *string `locationName:"signalName" min:"1" type:"string" required:"true"`
-
-	// The workflowId of the workflow execution to signal.
-	//
-	// WorkflowId is a required field
-	WorkflowId *string `locationName:"workflowId" min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s SignalWorkflowExecutionInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *SignalWorkflowExecutionInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "SignalWorkflowExecutionInput"}
-
-	if s.Domain == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Domain"))
-	}
-	if s.Domain != nil && len(*s.Domain) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Domain", 1))
-	}
-
-	if s.SignalName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("SignalName"))
-	}
-	if s.SignalName != nil && len(*s.SignalName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("SignalName", 1))
-	}
-
-	if s.WorkflowId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("WorkflowId"))
-	}
-	if s.WorkflowId != nil && len(*s.WorkflowId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("WorkflowId", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type SignalWorkflowExecutionOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s SignalWorkflowExecutionOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opSignalWorkflowExecution = "SignalWorkflowExecution"
 
@@ -123,7 +52,7 @@ const opSignalWorkflowExecution = "SignalWorkflowExecution"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) SignalWorkflowExecutionRequest(input *SignalWorkflowExecutionInput) SignalWorkflowExecutionRequest {
+func (c *Client) SignalWorkflowExecutionRequest(input *types.SignalWorkflowExecutionInput) SignalWorkflowExecutionRequest {
 	op := &aws.Operation{
 		Name:       opSignalWorkflowExecution,
 		HTTPMethod: "POST",
@@ -131,10 +60,10 @@ func (c *Client) SignalWorkflowExecutionRequest(input *SignalWorkflowExecutionIn
 	}
 
 	if input == nil {
-		input = &SignalWorkflowExecutionInput{}
+		input = &types.SignalWorkflowExecutionInput{}
 	}
 
-	req := c.newRequest(op, input, &SignalWorkflowExecutionOutput{})
+	req := c.newRequest(op, input, &types.SignalWorkflowExecutionOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return SignalWorkflowExecutionRequest{Request: req, Input: input, Copy: c.SignalWorkflowExecutionRequest}
@@ -144,8 +73,8 @@ func (c *Client) SignalWorkflowExecutionRequest(input *SignalWorkflowExecutionIn
 // SignalWorkflowExecution API operation.
 type SignalWorkflowExecutionRequest struct {
 	*aws.Request
-	Input *SignalWorkflowExecutionInput
-	Copy  func(*SignalWorkflowExecutionInput) SignalWorkflowExecutionRequest
+	Input *types.SignalWorkflowExecutionInput
+	Copy  func(*types.SignalWorkflowExecutionInput) SignalWorkflowExecutionRequest
 }
 
 // Send marshals and sends the SignalWorkflowExecution API request.
@@ -157,7 +86,7 @@ func (r SignalWorkflowExecutionRequest) Send(ctx context.Context) (*SignalWorkfl
 	}
 
 	resp := &SignalWorkflowExecutionResponse{
-		SignalWorkflowExecutionOutput: r.Request.Data.(*SignalWorkflowExecutionOutput),
+		SignalWorkflowExecutionOutput: r.Request.Data.(*types.SignalWorkflowExecutionOutput),
 		response:                      &aws.Response{Request: r.Request},
 	}
 
@@ -167,7 +96,7 @@ func (r SignalWorkflowExecutionRequest) Send(ctx context.Context) (*SignalWorkfl
 // SignalWorkflowExecutionResponse is the response type for the
 // SignalWorkflowExecution API operation.
 type SignalWorkflowExecutionResponse struct {
-	*SignalWorkflowExecutionOutput
+	*types.SignalWorkflowExecutionOutput
 
 	response *aws.Response
 }

@@ -6,47 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-type CancelImportTaskInput struct {
-	_ struct{} `type:"structure"`
-
-	// The reason for canceling the task.
-	CancelReason *string `type:"string"`
-
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have
-	// the required permissions, the error response is DryRunOperation. Otherwise,
-	// it is UnauthorizedOperation.
-	DryRun *bool `type:"boolean"`
-
-	// The ID of the import image or import snapshot task to be canceled.
-	ImportTaskId *string `type:"string"`
-}
-
-// String returns the string representation
-func (s CancelImportTaskInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type CancelImportTaskOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the task being canceled.
-	ImportTaskId *string `locationName:"importTaskId" type:"string"`
-
-	// The current state of the task being canceled.
-	PreviousState *string `locationName:"previousState" type:"string"`
-
-	// The current state of the task being canceled.
-	State *string `locationName:"state" type:"string"`
-}
-
-// String returns the string representation
-func (s CancelImportTaskOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCancelImportTask = "CancelImportTask"
 
@@ -63,7 +24,7 @@ const opCancelImportTask = "CancelImportTask"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CancelImportTask
-func (c *Client) CancelImportTaskRequest(input *CancelImportTaskInput) CancelImportTaskRequest {
+func (c *Client) CancelImportTaskRequest(input *types.CancelImportTaskInput) CancelImportTaskRequest {
 	op := &aws.Operation{
 		Name:       opCancelImportTask,
 		HTTPMethod: "POST",
@@ -71,10 +32,10 @@ func (c *Client) CancelImportTaskRequest(input *CancelImportTaskInput) CancelImp
 	}
 
 	if input == nil {
-		input = &CancelImportTaskInput{}
+		input = &types.CancelImportTaskInput{}
 	}
 
-	req := c.newRequest(op, input, &CancelImportTaskOutput{})
+	req := c.newRequest(op, input, &types.CancelImportTaskOutput{})
 	return CancelImportTaskRequest{Request: req, Input: input, Copy: c.CancelImportTaskRequest}
 }
 
@@ -82,8 +43,8 @@ func (c *Client) CancelImportTaskRequest(input *CancelImportTaskInput) CancelImp
 // CancelImportTask API operation.
 type CancelImportTaskRequest struct {
 	*aws.Request
-	Input *CancelImportTaskInput
-	Copy  func(*CancelImportTaskInput) CancelImportTaskRequest
+	Input *types.CancelImportTaskInput
+	Copy  func(*types.CancelImportTaskInput) CancelImportTaskRequest
 }
 
 // Send marshals and sends the CancelImportTask API request.
@@ -95,7 +56,7 @@ func (r CancelImportTaskRequest) Send(ctx context.Context) (*CancelImportTaskRes
 	}
 
 	resp := &CancelImportTaskResponse{
-		CancelImportTaskOutput: r.Request.Data.(*CancelImportTaskOutput),
+		CancelImportTaskOutput: r.Request.Data.(*types.CancelImportTaskOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -105,7 +66,7 @@ func (r CancelImportTaskRequest) Send(ctx context.Context) (*CancelImportTaskRes
 // CancelImportTaskResponse is the response type for the
 // CancelImportTask API operation.
 type CancelImportTaskResponse struct {
-	*CancelImportTaskOutput
+	*types.CancelImportTaskOutput
 
 	response *aws.Response
 }

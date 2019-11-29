@@ -6,78 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/xray/types"
 )
-
-type UpdateSamplingRuleInput struct {
-	_ struct{} `type:"structure"`
-
-	// The rule and fields to change.
-	//
-	// SamplingRuleUpdate is a required field
-	SamplingRuleUpdate *SamplingRuleUpdate `type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s UpdateSamplingRuleInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateSamplingRuleInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateSamplingRuleInput"}
-
-	if s.SamplingRuleUpdate == nil {
-		invalidParams.Add(aws.NewErrParamRequired("SamplingRuleUpdate"))
-	}
-	if s.SamplingRuleUpdate != nil {
-		if err := s.SamplingRuleUpdate.Validate(); err != nil {
-			invalidParams.AddNested("SamplingRuleUpdate", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s UpdateSamplingRuleInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.SamplingRuleUpdate != nil {
-		v := s.SamplingRuleUpdate
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "SamplingRuleUpdate", v, metadata)
-	}
-	return nil
-}
-
-type UpdateSamplingRuleOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The updated rule definition and metadata.
-	SamplingRuleRecord *SamplingRuleRecord `type:"structure"`
-}
-
-// String returns the string representation
-func (s UpdateSamplingRuleOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s UpdateSamplingRuleOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.SamplingRuleRecord != nil {
-		v := s.SamplingRuleRecord
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "SamplingRuleRecord", v, metadata)
-	}
-	return nil
-}
 
 const opUpdateSamplingRule = "UpdateSamplingRule"
 
@@ -94,7 +24,7 @@ const opUpdateSamplingRule = "UpdateSamplingRule"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/UpdateSamplingRule
-func (c *Client) UpdateSamplingRuleRequest(input *UpdateSamplingRuleInput) UpdateSamplingRuleRequest {
+func (c *Client) UpdateSamplingRuleRequest(input *types.UpdateSamplingRuleInput) UpdateSamplingRuleRequest {
 	op := &aws.Operation{
 		Name:       opUpdateSamplingRule,
 		HTTPMethod: "POST",
@@ -102,10 +32,10 @@ func (c *Client) UpdateSamplingRuleRequest(input *UpdateSamplingRuleInput) Updat
 	}
 
 	if input == nil {
-		input = &UpdateSamplingRuleInput{}
+		input = &types.UpdateSamplingRuleInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateSamplingRuleOutput{})
+	req := c.newRequest(op, input, &types.UpdateSamplingRuleOutput{})
 	return UpdateSamplingRuleRequest{Request: req, Input: input, Copy: c.UpdateSamplingRuleRequest}
 }
 
@@ -113,8 +43,8 @@ func (c *Client) UpdateSamplingRuleRequest(input *UpdateSamplingRuleInput) Updat
 // UpdateSamplingRule API operation.
 type UpdateSamplingRuleRequest struct {
 	*aws.Request
-	Input *UpdateSamplingRuleInput
-	Copy  func(*UpdateSamplingRuleInput) UpdateSamplingRuleRequest
+	Input *types.UpdateSamplingRuleInput
+	Copy  func(*types.UpdateSamplingRuleInput) UpdateSamplingRuleRequest
 }
 
 // Send marshals and sends the UpdateSamplingRule API request.
@@ -126,7 +56,7 @@ func (r UpdateSamplingRuleRequest) Send(ctx context.Context) (*UpdateSamplingRul
 	}
 
 	resp := &UpdateSamplingRuleResponse{
-		UpdateSamplingRuleOutput: r.Request.Data.(*UpdateSamplingRuleOutput),
+		UpdateSamplingRuleOutput: r.Request.Data.(*types.UpdateSamplingRuleOutput),
 		response:                 &aws.Response{Request: r.Request},
 	}
 
@@ -136,7 +66,7 @@ func (r UpdateSamplingRuleRequest) Send(ctx context.Context) (*UpdateSamplingRul
 // UpdateSamplingRuleResponse is the response type for the
 // UpdateSamplingRule API operation.
 type UpdateSamplingRuleResponse struct {
-	*UpdateSamplingRuleOutput
+	*types.UpdateSamplingRuleOutput
 
 	response *aws.Response
 }

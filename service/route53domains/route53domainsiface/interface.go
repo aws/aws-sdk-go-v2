@@ -10,6 +10,7 @@ package route53domainsiface
 
 import (
 	"github.com/aws/aws-sdk-go-v2/service/route53domains"
+	"github.com/aws/aws-sdk-go-v2/service/route53domains/types"
 )
 
 // ClientAPI provides an interface to enable mocking the
@@ -43,7 +44,7 @@ import (
 //    type mockClientClient struct {
 //        route53domainsiface.ClientPI
 //    }
-//    func (m *mockClientClient) CheckDomainAvailability(input *route53domains.CheckDomainAvailabilityInput) (*route53domains.CheckDomainAvailabilityOutput, error) {
+//    func (m *mockClientClient) CheckDomainAvailability(input *types.CheckDomainAvailabilityInput) (*types.CheckDomainAvailabilityOutput, error) {
 //        // mock response/functionality
 //    }
 //
@@ -61,53 +62,53 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type ClientAPI interface {
-	CheckDomainAvailabilityRequest(*route53domains.CheckDomainAvailabilityInput) route53domains.CheckDomainAvailabilityRequest
+	CheckDomainAvailabilityRequest(*types.CheckDomainAvailabilityInput) route53domains.CheckDomainAvailabilityRequest
 
-	CheckDomainTransferabilityRequest(*route53domains.CheckDomainTransferabilityInput) route53domains.CheckDomainTransferabilityRequest
+	CheckDomainTransferabilityRequest(*types.CheckDomainTransferabilityInput) route53domains.CheckDomainTransferabilityRequest
 
-	DeleteTagsForDomainRequest(*route53domains.DeleteTagsForDomainInput) route53domains.DeleteTagsForDomainRequest
+	DeleteTagsForDomainRequest(*types.DeleteTagsForDomainInput) route53domains.DeleteTagsForDomainRequest
 
-	DisableDomainAutoRenewRequest(*route53domains.DisableDomainAutoRenewInput) route53domains.DisableDomainAutoRenewRequest
+	DisableDomainAutoRenewRequest(*types.DisableDomainAutoRenewInput) route53domains.DisableDomainAutoRenewRequest
 
-	DisableDomainTransferLockRequest(*route53domains.DisableDomainTransferLockInput) route53domains.DisableDomainTransferLockRequest
+	DisableDomainTransferLockRequest(*types.DisableDomainTransferLockInput) route53domains.DisableDomainTransferLockRequest
 
-	EnableDomainAutoRenewRequest(*route53domains.EnableDomainAutoRenewInput) route53domains.EnableDomainAutoRenewRequest
+	EnableDomainAutoRenewRequest(*types.EnableDomainAutoRenewInput) route53domains.EnableDomainAutoRenewRequest
 
-	EnableDomainTransferLockRequest(*route53domains.EnableDomainTransferLockInput) route53domains.EnableDomainTransferLockRequest
+	EnableDomainTransferLockRequest(*types.EnableDomainTransferLockInput) route53domains.EnableDomainTransferLockRequest
 
-	GetContactReachabilityStatusRequest(*route53domains.GetContactReachabilityStatusInput) route53domains.GetContactReachabilityStatusRequest
+	GetContactReachabilityStatusRequest(*types.GetContactReachabilityStatusInput) route53domains.GetContactReachabilityStatusRequest
 
-	GetDomainDetailRequest(*route53domains.GetDomainDetailInput) route53domains.GetDomainDetailRequest
+	GetDomainDetailRequest(*types.GetDomainDetailInput) route53domains.GetDomainDetailRequest
 
-	GetDomainSuggestionsRequest(*route53domains.GetDomainSuggestionsInput) route53domains.GetDomainSuggestionsRequest
+	GetDomainSuggestionsRequest(*types.GetDomainSuggestionsInput) route53domains.GetDomainSuggestionsRequest
 
-	GetOperationDetailRequest(*route53domains.GetOperationDetailInput) route53domains.GetOperationDetailRequest
+	GetOperationDetailRequest(*types.GetOperationDetailInput) route53domains.GetOperationDetailRequest
 
-	ListDomainsRequest(*route53domains.ListDomainsInput) route53domains.ListDomainsRequest
+	ListDomainsRequest(*types.ListDomainsInput) route53domains.ListDomainsRequest
 
-	ListOperationsRequest(*route53domains.ListOperationsInput) route53domains.ListOperationsRequest
+	ListOperationsRequest(*types.ListOperationsInput) route53domains.ListOperationsRequest
 
-	ListTagsForDomainRequest(*route53domains.ListTagsForDomainInput) route53domains.ListTagsForDomainRequest
+	ListTagsForDomainRequest(*types.ListTagsForDomainInput) route53domains.ListTagsForDomainRequest
 
-	RegisterDomainRequest(*route53domains.RegisterDomainInput) route53domains.RegisterDomainRequest
+	RegisterDomainRequest(*types.RegisterDomainInput) route53domains.RegisterDomainRequest
 
-	RenewDomainRequest(*route53domains.RenewDomainInput) route53domains.RenewDomainRequest
+	RenewDomainRequest(*types.RenewDomainInput) route53domains.RenewDomainRequest
 
-	ResendContactReachabilityEmailRequest(*route53domains.ResendContactReachabilityEmailInput) route53domains.ResendContactReachabilityEmailRequest
+	ResendContactReachabilityEmailRequest(*types.ResendContactReachabilityEmailInput) route53domains.ResendContactReachabilityEmailRequest
 
-	RetrieveDomainAuthCodeRequest(*route53domains.RetrieveDomainAuthCodeInput) route53domains.RetrieveDomainAuthCodeRequest
+	RetrieveDomainAuthCodeRequest(*types.RetrieveDomainAuthCodeInput) route53domains.RetrieveDomainAuthCodeRequest
 
-	TransferDomainRequest(*route53domains.TransferDomainInput) route53domains.TransferDomainRequest
+	TransferDomainRequest(*types.TransferDomainInput) route53domains.TransferDomainRequest
 
-	UpdateDomainContactRequest(*route53domains.UpdateDomainContactInput) route53domains.UpdateDomainContactRequest
+	UpdateDomainContactRequest(*types.UpdateDomainContactInput) route53domains.UpdateDomainContactRequest
 
-	UpdateDomainContactPrivacyRequest(*route53domains.UpdateDomainContactPrivacyInput) route53domains.UpdateDomainContactPrivacyRequest
+	UpdateDomainContactPrivacyRequest(*types.UpdateDomainContactPrivacyInput) route53domains.UpdateDomainContactPrivacyRequest
 
-	UpdateDomainNameserversRequest(*route53domains.UpdateDomainNameserversInput) route53domains.UpdateDomainNameserversRequest
+	UpdateDomainNameserversRequest(*types.UpdateDomainNameserversInput) route53domains.UpdateDomainNameserversRequest
 
-	UpdateTagsForDomainRequest(*route53domains.UpdateTagsForDomainInput) route53domains.UpdateTagsForDomainRequest
+	UpdateTagsForDomainRequest(*types.UpdateTagsForDomainInput) route53domains.UpdateTagsForDomainRequest
 
-	ViewBillingRequest(*route53domains.ViewBillingInput) route53domains.ViewBillingRequest
+	ViewBillingRequest(*types.ViewBillingInput) route53domains.ViewBillingRequest
 }
 
 var _ ClientAPI = (*route53domains.Client)(nil)

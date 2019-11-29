@@ -6,55 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/gamelift/types"
 )
-
-// Represents the input for a request action.
-type RequestUploadCredentialsInput struct {
-	_ struct{} `type:"structure"`
-
-	// Unique identifier for a build to get credentials for.
-	//
-	// BuildId is a required field
-	BuildId *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s RequestUploadCredentialsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *RequestUploadCredentialsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "RequestUploadCredentialsInput"}
-
-	if s.BuildId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("BuildId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Represents the returned data in response to a request action.
-type RequestUploadCredentialsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Amazon S3 path and key, identifying where the game build files are stored.
-	StorageLocation *S3Location `type:"structure"`
-
-	// AWS credentials required when uploading a game build to the storage location.
-	// These credentials have a limited lifespan and are valid only for the build
-	// they were issued for.
-	UploadCredentials *AwsCredentials `type:"structure" sensitive:"true"`
-}
-
-// String returns the string representation
-func (s RequestUploadCredentialsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opRequestUploadCredentials = "RequestUploadCredentials"
 
@@ -93,7 +46,7 @@ const opRequestUploadCredentials = "RequestUploadCredentials"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/RequestUploadCredentials
-func (c *Client) RequestUploadCredentialsRequest(input *RequestUploadCredentialsInput) RequestUploadCredentialsRequest {
+func (c *Client) RequestUploadCredentialsRequest(input *types.RequestUploadCredentialsInput) RequestUploadCredentialsRequest {
 	op := &aws.Operation{
 		Name:       opRequestUploadCredentials,
 		HTTPMethod: "POST",
@@ -101,10 +54,10 @@ func (c *Client) RequestUploadCredentialsRequest(input *RequestUploadCredentials
 	}
 
 	if input == nil {
-		input = &RequestUploadCredentialsInput{}
+		input = &types.RequestUploadCredentialsInput{}
 	}
 
-	req := c.newRequest(op, input, &RequestUploadCredentialsOutput{})
+	req := c.newRequest(op, input, &types.RequestUploadCredentialsOutput{})
 	return RequestUploadCredentialsRequest{Request: req, Input: input, Copy: c.RequestUploadCredentialsRequest}
 }
 
@@ -112,8 +65,8 @@ func (c *Client) RequestUploadCredentialsRequest(input *RequestUploadCredentials
 // RequestUploadCredentials API operation.
 type RequestUploadCredentialsRequest struct {
 	*aws.Request
-	Input *RequestUploadCredentialsInput
-	Copy  func(*RequestUploadCredentialsInput) RequestUploadCredentialsRequest
+	Input *types.RequestUploadCredentialsInput
+	Copy  func(*types.RequestUploadCredentialsInput) RequestUploadCredentialsRequest
 }
 
 // Send marshals and sends the RequestUploadCredentials API request.
@@ -125,7 +78,7 @@ func (r RequestUploadCredentialsRequest) Send(ctx context.Context) (*RequestUplo
 	}
 
 	resp := &RequestUploadCredentialsResponse{
-		RequestUploadCredentialsOutput: r.Request.Data.(*RequestUploadCredentialsOutput),
+		RequestUploadCredentialsOutput: r.Request.Data.(*types.RequestUploadCredentialsOutput),
 		response:                       &aws.Response{Request: r.Request},
 	}
 
@@ -135,7 +88,7 @@ func (r RequestUploadCredentialsRequest) Send(ctx context.Context) (*RequestUplo
 // RequestUploadCredentialsResponse is the response type for the
 // RequestUploadCredentials API operation.
 type RequestUploadCredentialsResponse struct {
-	*RequestUploadCredentialsOutput
+	*types.RequestUploadCredentialsOutput
 
 	response *aws.Response
 }

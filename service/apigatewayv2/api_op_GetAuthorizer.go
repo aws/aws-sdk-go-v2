@@ -6,181 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/apigatewayv2/types"
 )
-
-type GetAuthorizerInput struct {
-	_ struct{} `type:"structure"`
-
-	// ApiId is a required field
-	ApiId *string `location:"uri" locationName:"apiId" type:"string" required:"true"`
-
-	// AuthorizerId is a required field
-	AuthorizerId *string `location:"uri" locationName:"authorizerId" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetAuthorizerInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetAuthorizerInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetAuthorizerInput"}
-
-	if s.ApiId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ApiId"))
-	}
-
-	if s.AuthorizerId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("AuthorizerId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetAuthorizerInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.ApiId != nil {
-		v := *s.ApiId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "apiId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.AuthorizerId != nil {
-		v := *s.AuthorizerId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "authorizerId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type GetAuthorizerOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Represents an Amazon Resource Name (ARN).
-	AuthorizerCredentialsArn *string `locationName:"authorizerCredentialsArn" type:"string"`
-
-	// The identifier.
-	AuthorizerId *string `locationName:"authorizerId" type:"string"`
-
-	// An integer with a value between [0-3600].
-	AuthorizerResultTtlInSeconds *int64 `locationName:"authorizerResultTtlInSeconds" type:"integer"`
-
-	// The authorizer type. Currently the only valid value is REQUEST, for a Lambda
-	// function using incoming request parameters.
-	AuthorizerType AuthorizerType `locationName:"authorizerType" type:"string" enum:"true"`
-
-	// A string representation of a URI with a length between [1-2048].
-	AuthorizerUri *string `locationName:"authorizerUri" type:"string"`
-
-	// The identity source for which authorization is requested. For the REQUEST
-	// authorizer, this is required when authorization caching is enabled. The value
-	// is a comma-separated string of one or more mapping expressions of the specified
-	// request parameters. For example, if an Auth header, a Name query string parameter
-	// are defined as identity sources, this value is $method.request.header.Auth,
-	// $method.request.querystring.Name. These parameters will be used to derive
-	// the authorization caching key and to perform runtime validation of the REQUEST
-	// authorizer by verifying all of the identity-related request parameters are
-	// present, not null and non-empty. Only when this is true does the authorizer
-	// invoke the authorizer Lambda function, otherwise, it returns a 401 Unauthorized
-	// response without calling the Lambda function. The valid value is a string
-	// of comma-separated mapping expressions of the specified request parameters.
-	// When the authorization caching is not enabled, this property is optional.
-	IdentitySource []string `locationName:"identitySource" type:"list"`
-
-	// A string with a length between [0-1024].
-	IdentityValidationExpression *string `locationName:"identityValidationExpression" type:"string"`
-
-	// A string with a length between [1-128].
-	Name *string `locationName:"name" type:"string"`
-
-	// For REQUEST authorizer, this is not defined.
-	ProviderArns []string `locationName:"providerArns" type:"list"`
-}
-
-// String returns the string representation
-func (s GetAuthorizerOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetAuthorizerOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.AuthorizerCredentialsArn != nil {
-		v := *s.AuthorizerCredentialsArn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "authorizerCredentialsArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.AuthorizerId != nil {
-		v := *s.AuthorizerId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "authorizerId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.AuthorizerResultTtlInSeconds != nil {
-		v := *s.AuthorizerResultTtlInSeconds
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "authorizerResultTtlInSeconds", protocol.Int64Value(v), metadata)
-	}
-	if len(s.AuthorizerType) > 0 {
-		v := s.AuthorizerType
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "authorizerType", protocol.QuotedValue{ValueMarshaler: v}, metadata)
-	}
-	if s.AuthorizerUri != nil {
-		v := *s.AuthorizerUri
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "authorizerUri", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.IdentitySource != nil {
-		v := s.IdentitySource
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "identitySource", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
-		}
-		ls0.End()
-
-	}
-	if s.IdentityValidationExpression != nil {
-		v := *s.IdentityValidationExpression
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "identityValidationExpression", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Name != nil {
-		v := *s.Name
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.ProviderArns != nil {
-		v := s.ProviderArns
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "providerArns", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
-		}
-		ls0.End()
-
-	}
-	return nil
-}
 
 const opGetAuthorizer = "GetAuthorizer"
 
@@ -197,7 +24,7 @@ const opGetAuthorizer = "GetAuthorizer"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/apigatewayv2-2018-11-29/GetAuthorizer
-func (c *Client) GetAuthorizerRequest(input *GetAuthorizerInput) GetAuthorizerRequest {
+func (c *Client) GetAuthorizerRequest(input *types.GetAuthorizerInput) GetAuthorizerRequest {
 	op := &aws.Operation{
 		Name:       opGetAuthorizer,
 		HTTPMethod: "GET",
@@ -205,10 +32,10 @@ func (c *Client) GetAuthorizerRequest(input *GetAuthorizerInput) GetAuthorizerRe
 	}
 
 	if input == nil {
-		input = &GetAuthorizerInput{}
+		input = &types.GetAuthorizerInput{}
 	}
 
-	req := c.newRequest(op, input, &GetAuthorizerOutput{})
+	req := c.newRequest(op, input, &types.GetAuthorizerOutput{})
 	return GetAuthorizerRequest{Request: req, Input: input, Copy: c.GetAuthorizerRequest}
 }
 
@@ -216,8 +43,8 @@ func (c *Client) GetAuthorizerRequest(input *GetAuthorizerInput) GetAuthorizerRe
 // GetAuthorizer API operation.
 type GetAuthorizerRequest struct {
 	*aws.Request
-	Input *GetAuthorizerInput
-	Copy  func(*GetAuthorizerInput) GetAuthorizerRequest
+	Input *types.GetAuthorizerInput
+	Copy  func(*types.GetAuthorizerInput) GetAuthorizerRequest
 }
 
 // Send marshals and sends the GetAuthorizer API request.
@@ -229,7 +56,7 @@ func (r GetAuthorizerRequest) Send(ctx context.Context) (*GetAuthorizerResponse,
 	}
 
 	resp := &GetAuthorizerResponse{
-		GetAuthorizerOutput: r.Request.Data.(*GetAuthorizerOutput),
+		GetAuthorizerOutput: r.Request.Data.(*types.GetAuthorizerOutput),
 		response:            &aws.Response{Request: r.Request},
 	}
 
@@ -239,7 +66,7 @@ func (r GetAuthorizerRequest) Send(ctx context.Context) (*GetAuthorizerResponse,
 // GetAuthorizerResponse is the response type for the
 // GetAuthorizer API operation.
 type GetAuthorizerResponse struct {
-	*GetAuthorizerOutput
+	*types.GetAuthorizerOutput
 
 	response *aws.Response
 }

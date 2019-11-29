@@ -6,77 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/workmail/types"
 )
-
-type ListAliasesInput struct {
-	_ struct{} `type:"structure"`
-
-	// The identifier for the entity for which to list the aliases.
-	//
-	// EntityId is a required field
-	EntityId *string `min:"12" type:"string" required:"true"`
-
-	// The maximum number of results to return in a single call.
-	MaxResults *int64 `min:"1" type:"integer"`
-
-	// The token to use to retrieve the next page of results. The first call does
-	// not contain any tokens.
-	NextToken *string `min:"1" type:"string"`
-
-	// The identifier for the organization under which the entity exists.
-	//
-	// OrganizationId is a required field
-	OrganizationId *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s ListAliasesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListAliasesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListAliasesInput"}
-
-	if s.EntityId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("EntityId"))
-	}
-	if s.EntityId != nil && len(*s.EntityId) < 12 {
-		invalidParams.Add(aws.NewErrParamMinLen("EntityId", 12))
-	}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-	if s.NextToken != nil && len(*s.NextToken) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
-	}
-
-	if s.OrganizationId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("OrganizationId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ListAliasesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The entity's paginated aliases.
-	Aliases []string `type:"list"`
-
-	// The token to use to retrieve the next page of results. The value is "null"
-	// when there are no more results to return.
-	NextToken *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s ListAliasesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListAliases = "ListAliases"
 
@@ -93,7 +24,7 @@ const opListAliases = "ListAliases"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/ListAliases
-func (c *Client) ListAliasesRequest(input *ListAliasesInput) ListAliasesRequest {
+func (c *Client) ListAliasesRequest(input *types.ListAliasesInput) ListAliasesRequest {
 	op := &aws.Operation{
 		Name:       opListAliases,
 		HTTPMethod: "POST",
@@ -107,10 +38,10 @@ func (c *Client) ListAliasesRequest(input *ListAliasesInput) ListAliasesRequest 
 	}
 
 	if input == nil {
-		input = &ListAliasesInput{}
+		input = &types.ListAliasesInput{}
 	}
 
-	req := c.newRequest(op, input, &ListAliasesOutput{})
+	req := c.newRequest(op, input, &types.ListAliasesOutput{})
 	return ListAliasesRequest{Request: req, Input: input, Copy: c.ListAliasesRequest}
 }
 
@@ -118,8 +49,8 @@ func (c *Client) ListAliasesRequest(input *ListAliasesInput) ListAliasesRequest 
 // ListAliases API operation.
 type ListAliasesRequest struct {
 	*aws.Request
-	Input *ListAliasesInput
-	Copy  func(*ListAliasesInput) ListAliasesRequest
+	Input *types.ListAliasesInput
+	Copy  func(*types.ListAliasesInput) ListAliasesRequest
 }
 
 // Send marshals and sends the ListAliases API request.
@@ -131,7 +62,7 @@ func (r ListAliasesRequest) Send(ctx context.Context) (*ListAliasesResponse, err
 	}
 
 	resp := &ListAliasesResponse{
-		ListAliasesOutput: r.Request.Data.(*ListAliasesOutput),
+		ListAliasesOutput: r.Request.Data.(*types.ListAliasesOutput),
 		response:          &aws.Response{Request: r.Request},
 	}
 
@@ -161,7 +92,7 @@ func NewListAliasesPaginator(req ListAliasesRequest) ListAliasesPaginator {
 	return ListAliasesPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListAliasesInput
+				var inCpy *types.ListAliasesInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -181,14 +112,14 @@ type ListAliasesPaginator struct {
 	aws.Pager
 }
 
-func (p *ListAliasesPaginator) CurrentPage() *ListAliasesOutput {
-	return p.Pager.CurrentPage().(*ListAliasesOutput)
+func (p *ListAliasesPaginator) CurrentPage() *types.ListAliasesOutput {
+	return p.Pager.CurrentPage().(*types.ListAliasesOutput)
 }
 
 // ListAliasesResponse is the response type for the
 // ListAliases API operation.
 type ListAliasesResponse struct {
-	*ListAliasesOutput
+	*types.ListAliasesOutput
 
 	response *aws.Response
 }

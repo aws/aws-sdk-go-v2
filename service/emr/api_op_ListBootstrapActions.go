@@ -6,56 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/emr/types"
 )
-
-// This input determines which bootstrap actions to retrieve.
-type ListBootstrapActionsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The cluster identifier for the bootstrap actions to list.
-	//
-	// ClusterId is a required field
-	ClusterId *string `type:"string" required:"true"`
-
-	// The pagination token that indicates the next set of results to retrieve.
-	Marker *string `type:"string"`
-}
-
-// String returns the string representation
-func (s ListBootstrapActionsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListBootstrapActionsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListBootstrapActionsInput"}
-
-	if s.ClusterId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ClusterId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// This output contains the bootstrap actions detail.
-type ListBootstrapActionsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The bootstrap actions associated with the cluster.
-	BootstrapActions []Command `type:"list"`
-
-	// The pagination token that indicates the next set of results to retrieve.
-	Marker *string `type:"string"`
-}
-
-// String returns the string representation
-func (s ListBootstrapActionsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListBootstrapActions = "ListBootstrapActions"
 
@@ -72,7 +24,7 @@ const opListBootstrapActions = "ListBootstrapActions"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/ListBootstrapActions
-func (c *Client) ListBootstrapActionsRequest(input *ListBootstrapActionsInput) ListBootstrapActionsRequest {
+func (c *Client) ListBootstrapActionsRequest(input *types.ListBootstrapActionsInput) ListBootstrapActionsRequest {
 	op := &aws.Operation{
 		Name:       opListBootstrapActions,
 		HTTPMethod: "POST",
@@ -86,10 +38,10 @@ func (c *Client) ListBootstrapActionsRequest(input *ListBootstrapActionsInput) L
 	}
 
 	if input == nil {
-		input = &ListBootstrapActionsInput{}
+		input = &types.ListBootstrapActionsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListBootstrapActionsOutput{})
+	req := c.newRequest(op, input, &types.ListBootstrapActionsOutput{})
 	return ListBootstrapActionsRequest{Request: req, Input: input, Copy: c.ListBootstrapActionsRequest}
 }
 
@@ -97,8 +49,8 @@ func (c *Client) ListBootstrapActionsRequest(input *ListBootstrapActionsInput) L
 // ListBootstrapActions API operation.
 type ListBootstrapActionsRequest struct {
 	*aws.Request
-	Input *ListBootstrapActionsInput
-	Copy  func(*ListBootstrapActionsInput) ListBootstrapActionsRequest
+	Input *types.ListBootstrapActionsInput
+	Copy  func(*types.ListBootstrapActionsInput) ListBootstrapActionsRequest
 }
 
 // Send marshals and sends the ListBootstrapActions API request.
@@ -110,7 +62,7 @@ func (r ListBootstrapActionsRequest) Send(ctx context.Context) (*ListBootstrapAc
 	}
 
 	resp := &ListBootstrapActionsResponse{
-		ListBootstrapActionsOutput: r.Request.Data.(*ListBootstrapActionsOutput),
+		ListBootstrapActionsOutput: r.Request.Data.(*types.ListBootstrapActionsOutput),
 		response:                   &aws.Response{Request: r.Request},
 	}
 
@@ -140,7 +92,7 @@ func NewListBootstrapActionsPaginator(req ListBootstrapActionsRequest) ListBoots
 	return ListBootstrapActionsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListBootstrapActionsInput
+				var inCpy *types.ListBootstrapActionsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -160,14 +112,14 @@ type ListBootstrapActionsPaginator struct {
 	aws.Pager
 }
 
-func (p *ListBootstrapActionsPaginator) CurrentPage() *ListBootstrapActionsOutput {
-	return p.Pager.CurrentPage().(*ListBootstrapActionsOutput)
+func (p *ListBootstrapActionsPaginator) CurrentPage() *types.ListBootstrapActionsOutput {
+	return p.Pager.CurrentPage().(*types.ListBootstrapActionsOutput)
 }
 
 // ListBootstrapActionsResponse is the response type for the
 // ListBootstrapActions API operation.
 type ListBootstrapActionsResponse struct {
-	*ListBootstrapActionsOutput
+	*types.ListBootstrapActionsOutput
 
 	response *aws.Response
 }

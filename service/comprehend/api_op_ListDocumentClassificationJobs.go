@@ -6,64 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/comprehend/types"
 )
-
-type ListDocumentClassificationJobsInput struct {
-	_ struct{} `type:"structure"`
-
-	// Filters the jobs that are returned. You can filter jobs on their names, status,
-	// or the date and time that they were submitted. You can only set one filter
-	// at a time.
-	Filter *DocumentClassificationJobFilter `type:"structure"`
-
-	// The maximum number of results to return in each page. The default is 100.
-	MaxResults *int64 `min:"1" type:"integer"`
-
-	// Identifies the next page of results to return.
-	NextToken *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s ListDocumentClassificationJobsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListDocumentClassificationJobsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListDocumentClassificationJobsInput"}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-	if s.NextToken != nil && len(*s.NextToken) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
-	}
-	if s.Filter != nil {
-		if err := s.Filter.Validate(); err != nil {
-			invalidParams.AddNested("Filter", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ListDocumentClassificationJobsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A list containing the properties of each job returned.
-	DocumentClassificationJobPropertiesList []DocumentClassificationJobProperties `type:"list"`
-
-	// Identifies the next page of results to return.
-	NextToken *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s ListDocumentClassificationJobsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListDocumentClassificationJobs = "ListDocumentClassificationJobs"
 
@@ -80,7 +24,7 @@ const opListDocumentClassificationJobs = "ListDocumentClassificationJobs"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/ListDocumentClassificationJobs
-func (c *Client) ListDocumentClassificationJobsRequest(input *ListDocumentClassificationJobsInput) ListDocumentClassificationJobsRequest {
+func (c *Client) ListDocumentClassificationJobsRequest(input *types.ListDocumentClassificationJobsInput) ListDocumentClassificationJobsRequest {
 	op := &aws.Operation{
 		Name:       opListDocumentClassificationJobs,
 		HTTPMethod: "POST",
@@ -94,10 +38,10 @@ func (c *Client) ListDocumentClassificationJobsRequest(input *ListDocumentClassi
 	}
 
 	if input == nil {
-		input = &ListDocumentClassificationJobsInput{}
+		input = &types.ListDocumentClassificationJobsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListDocumentClassificationJobsOutput{})
+	req := c.newRequest(op, input, &types.ListDocumentClassificationJobsOutput{})
 	return ListDocumentClassificationJobsRequest{Request: req, Input: input, Copy: c.ListDocumentClassificationJobsRequest}
 }
 
@@ -105,8 +49,8 @@ func (c *Client) ListDocumentClassificationJobsRequest(input *ListDocumentClassi
 // ListDocumentClassificationJobs API operation.
 type ListDocumentClassificationJobsRequest struct {
 	*aws.Request
-	Input *ListDocumentClassificationJobsInput
-	Copy  func(*ListDocumentClassificationJobsInput) ListDocumentClassificationJobsRequest
+	Input *types.ListDocumentClassificationJobsInput
+	Copy  func(*types.ListDocumentClassificationJobsInput) ListDocumentClassificationJobsRequest
 }
 
 // Send marshals and sends the ListDocumentClassificationJobs API request.
@@ -118,7 +62,7 @@ func (r ListDocumentClassificationJobsRequest) Send(ctx context.Context) (*ListD
 	}
 
 	resp := &ListDocumentClassificationJobsResponse{
-		ListDocumentClassificationJobsOutput: r.Request.Data.(*ListDocumentClassificationJobsOutput),
+		ListDocumentClassificationJobsOutput: r.Request.Data.(*types.ListDocumentClassificationJobsOutput),
 		response:                             &aws.Response{Request: r.Request},
 	}
 
@@ -148,7 +92,7 @@ func NewListDocumentClassificationJobsPaginator(req ListDocumentClassificationJo
 	return ListDocumentClassificationJobsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListDocumentClassificationJobsInput
+				var inCpy *types.ListDocumentClassificationJobsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -168,14 +112,14 @@ type ListDocumentClassificationJobsPaginator struct {
 	aws.Pager
 }
 
-func (p *ListDocumentClassificationJobsPaginator) CurrentPage() *ListDocumentClassificationJobsOutput {
-	return p.Pager.CurrentPage().(*ListDocumentClassificationJobsOutput)
+func (p *ListDocumentClassificationJobsPaginator) CurrentPage() *types.ListDocumentClassificationJobsOutput {
+	return p.Pager.CurrentPage().(*types.ListDocumentClassificationJobsOutput)
 }
 
 // ListDocumentClassificationJobsResponse is the response type for the
 // ListDocumentClassificationJobs API operation.
 type ListDocumentClassificationJobsResponse struct {
-	*ListDocumentClassificationJobsOutput
+	*types.ListDocumentClassificationJobsOutput
 
 	response *aws.Response
 }

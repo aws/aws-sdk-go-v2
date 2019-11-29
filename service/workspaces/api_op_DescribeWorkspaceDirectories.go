@@ -6,65 +6,15 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/workspaces/types"
 )
-
-type DescribeWorkspaceDirectoriesInput struct {
-	_ struct{} `type:"structure"`
-
-	// The identifiers of the directories. If the value is null, all directories
-	// are retrieved.
-	DirectoryIds []string `min:"1" type:"list"`
-
-	// If you received a NextToken from a previous call that was paginated, provide
-	// this token to receive the next set of results.
-	NextToken *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeWorkspaceDirectoriesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeWorkspaceDirectoriesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeWorkspaceDirectoriesInput"}
-	if s.DirectoryIds != nil && len(s.DirectoryIds) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("DirectoryIds", 1))
-	}
-	if s.NextToken != nil && len(*s.NextToken) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribeWorkspaceDirectoriesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Information about the directories.
-	Directories []WorkspaceDirectory `type:"list"`
-
-	// The token to use to retrieve the next set of results, or null if no more
-	// results are available.
-	NextToken *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeWorkspaceDirectoriesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeWorkspaceDirectories = "DescribeWorkspaceDirectories"
 
 // DescribeWorkspaceDirectoriesRequest returns a request value for making API operation for
 // Amazon WorkSpaces.
 //
-// Describes the available AWS Directory Service directories that are registered
-// with Amazon WorkSpaces.
+// Describes the available directories that are registered with Amazon WorkSpaces.
 //
 //    // Example sending a request using DescribeWorkspaceDirectoriesRequest.
 //    req := client.DescribeWorkspaceDirectoriesRequest(params)
@@ -74,7 +24,7 @@ const opDescribeWorkspaceDirectories = "DescribeWorkspaceDirectories"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DescribeWorkspaceDirectories
-func (c *Client) DescribeWorkspaceDirectoriesRequest(input *DescribeWorkspaceDirectoriesInput) DescribeWorkspaceDirectoriesRequest {
+func (c *Client) DescribeWorkspaceDirectoriesRequest(input *types.DescribeWorkspaceDirectoriesInput) DescribeWorkspaceDirectoriesRequest {
 	op := &aws.Operation{
 		Name:       opDescribeWorkspaceDirectories,
 		HTTPMethod: "POST",
@@ -88,10 +38,10 @@ func (c *Client) DescribeWorkspaceDirectoriesRequest(input *DescribeWorkspaceDir
 	}
 
 	if input == nil {
-		input = &DescribeWorkspaceDirectoriesInput{}
+		input = &types.DescribeWorkspaceDirectoriesInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeWorkspaceDirectoriesOutput{})
+	req := c.newRequest(op, input, &types.DescribeWorkspaceDirectoriesOutput{})
 	return DescribeWorkspaceDirectoriesRequest{Request: req, Input: input, Copy: c.DescribeWorkspaceDirectoriesRequest}
 }
 
@@ -99,8 +49,8 @@ func (c *Client) DescribeWorkspaceDirectoriesRequest(input *DescribeWorkspaceDir
 // DescribeWorkspaceDirectories API operation.
 type DescribeWorkspaceDirectoriesRequest struct {
 	*aws.Request
-	Input *DescribeWorkspaceDirectoriesInput
-	Copy  func(*DescribeWorkspaceDirectoriesInput) DescribeWorkspaceDirectoriesRequest
+	Input *types.DescribeWorkspaceDirectoriesInput
+	Copy  func(*types.DescribeWorkspaceDirectoriesInput) DescribeWorkspaceDirectoriesRequest
 }
 
 // Send marshals and sends the DescribeWorkspaceDirectories API request.
@@ -112,7 +62,7 @@ func (r DescribeWorkspaceDirectoriesRequest) Send(ctx context.Context) (*Describ
 	}
 
 	resp := &DescribeWorkspaceDirectoriesResponse{
-		DescribeWorkspaceDirectoriesOutput: r.Request.Data.(*DescribeWorkspaceDirectoriesOutput),
+		DescribeWorkspaceDirectoriesOutput: r.Request.Data.(*types.DescribeWorkspaceDirectoriesOutput),
 		response:                           &aws.Response{Request: r.Request},
 	}
 
@@ -142,7 +92,7 @@ func NewDescribeWorkspaceDirectoriesPaginator(req DescribeWorkspaceDirectoriesRe
 	return DescribeWorkspaceDirectoriesPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *DescribeWorkspaceDirectoriesInput
+				var inCpy *types.DescribeWorkspaceDirectoriesInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -162,14 +112,14 @@ type DescribeWorkspaceDirectoriesPaginator struct {
 	aws.Pager
 }
 
-func (p *DescribeWorkspaceDirectoriesPaginator) CurrentPage() *DescribeWorkspaceDirectoriesOutput {
-	return p.Pager.CurrentPage().(*DescribeWorkspaceDirectoriesOutput)
+func (p *DescribeWorkspaceDirectoriesPaginator) CurrentPage() *types.DescribeWorkspaceDirectoriesOutput {
+	return p.Pager.CurrentPage().(*types.DescribeWorkspaceDirectoriesOutput)
 }
 
 // DescribeWorkspaceDirectoriesResponse is the response type for the
 // DescribeWorkspaceDirectories API operation.
 type DescribeWorkspaceDirectoriesResponse struct {
-	*DescribeWorkspaceDirectoriesOutput
+	*types.DescribeWorkspaceDirectoriesOutput
 
 	response *aws.Response
 }

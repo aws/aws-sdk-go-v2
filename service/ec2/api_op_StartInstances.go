@@ -6,57 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-type StartInstancesInput struct {
-	_ struct{} `type:"structure"`
-
-	// Reserved.
-	AdditionalInfo *string `locationName:"additionalInfo" type:"string"`
-
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have
-	// the required permissions, the error response is DryRunOperation. Otherwise,
-	// it is UnauthorizedOperation.
-	DryRun *bool `locationName:"dryRun" type:"boolean"`
-
-	// The IDs of the instances.
-	//
-	// InstanceIds is a required field
-	InstanceIds []string `locationName:"InstanceId" locationNameList:"InstanceId" type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s StartInstancesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *StartInstancesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "StartInstancesInput"}
-
-	if s.InstanceIds == nil {
-		invalidParams.Add(aws.NewErrParamRequired("InstanceIds"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type StartInstancesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Information about the started instances.
-	StartingInstances []InstanceStateChange `locationName:"instancesSet" locationNameList:"item" type:"list"`
-}
-
-// String returns the string representation
-func (s StartInstancesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opStartInstances = "StartInstances"
 
@@ -95,7 +46,7 @@ const opStartInstances = "StartInstances"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/StartInstances
-func (c *Client) StartInstancesRequest(input *StartInstancesInput) StartInstancesRequest {
+func (c *Client) StartInstancesRequest(input *types.StartInstancesInput) StartInstancesRequest {
 	op := &aws.Operation{
 		Name:       opStartInstances,
 		HTTPMethod: "POST",
@@ -103,10 +54,10 @@ func (c *Client) StartInstancesRequest(input *StartInstancesInput) StartInstance
 	}
 
 	if input == nil {
-		input = &StartInstancesInput{}
+		input = &types.StartInstancesInput{}
 	}
 
-	req := c.newRequest(op, input, &StartInstancesOutput{})
+	req := c.newRequest(op, input, &types.StartInstancesOutput{})
 	return StartInstancesRequest{Request: req, Input: input, Copy: c.StartInstancesRequest}
 }
 
@@ -114,8 +65,8 @@ func (c *Client) StartInstancesRequest(input *StartInstancesInput) StartInstance
 // StartInstances API operation.
 type StartInstancesRequest struct {
 	*aws.Request
-	Input *StartInstancesInput
-	Copy  func(*StartInstancesInput) StartInstancesRequest
+	Input *types.StartInstancesInput
+	Copy  func(*types.StartInstancesInput) StartInstancesRequest
 }
 
 // Send marshals and sends the StartInstances API request.
@@ -127,7 +78,7 @@ func (r StartInstancesRequest) Send(ctx context.Context) (*StartInstancesRespons
 	}
 
 	resp := &StartInstancesResponse{
-		StartInstancesOutput: r.Request.Data.(*StartInstancesOutput),
+		StartInstancesOutput: r.Request.Data.(*types.StartInstancesOutput),
 		response:             &aws.Response{Request: r.Request},
 	}
 
@@ -137,7 +88,7 @@ func (r StartInstancesRequest) Send(ctx context.Context) (*StartInstancesRespons
 // StartInstancesResponse is the response type for the
 // StartInstances API operation.
 type StartInstancesResponse struct {
-	*StartInstancesOutput
+	*types.StartInstancesOutput
 
 	response *aws.Response
 }

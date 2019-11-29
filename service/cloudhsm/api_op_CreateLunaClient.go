@@ -6,57 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/cloudhsm/types"
 )
-
-// Contains the inputs for the CreateLunaClient action.
-type CreateLunaClientInput struct {
-	_ struct{} `type:"structure"`
-
-	// The contents of a Base64-Encoded X.509 v3 certificate to be installed on
-	// the HSMs used by this client.
-	//
-	// Certificate is a required field
-	Certificate *string `min:"600" type:"string" required:"true"`
-
-	// The label for the client.
-	Label *string `type:"string"`
-}
-
-// String returns the string representation
-func (s CreateLunaClientInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateLunaClientInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateLunaClientInput"}
-
-	if s.Certificate == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Certificate"))
-	}
-	if s.Certificate != nil && len(*s.Certificate) < 600 {
-		invalidParams.Add(aws.NewErrParamMinLen("Certificate", 600))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Contains the output of the CreateLunaClient action.
-type CreateLunaClientOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The ARN of the client.
-	ClientArn *string `type:"string"`
-}
-
-// String returns the string representation
-func (s CreateLunaClientOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCreateLunaClient = "CreateLunaClient"
 
@@ -82,7 +33,7 @@ const opCreateLunaClient = "CreateLunaClient"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/CreateLunaClient
-func (c *Client) CreateLunaClientRequest(input *CreateLunaClientInput) CreateLunaClientRequest {
+func (c *Client) CreateLunaClientRequest(input *types.CreateLunaClientInput) CreateLunaClientRequest {
 	op := &aws.Operation{
 		Name:       opCreateLunaClient,
 		HTTPMethod: "POST",
@@ -90,10 +41,10 @@ func (c *Client) CreateLunaClientRequest(input *CreateLunaClientInput) CreateLun
 	}
 
 	if input == nil {
-		input = &CreateLunaClientInput{}
+		input = &types.CreateLunaClientInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateLunaClientOutput{})
+	req := c.newRequest(op, input, &types.CreateLunaClientOutput{})
 	return CreateLunaClientRequest{Request: req, Input: input, Copy: c.CreateLunaClientRequest}
 }
 
@@ -101,8 +52,8 @@ func (c *Client) CreateLunaClientRequest(input *CreateLunaClientInput) CreateLun
 // CreateLunaClient API operation.
 type CreateLunaClientRequest struct {
 	*aws.Request
-	Input *CreateLunaClientInput
-	Copy  func(*CreateLunaClientInput) CreateLunaClientRequest
+	Input *types.CreateLunaClientInput
+	Copy  func(*types.CreateLunaClientInput) CreateLunaClientRequest
 }
 
 // Send marshals and sends the CreateLunaClient API request.
@@ -114,7 +65,7 @@ func (r CreateLunaClientRequest) Send(ctx context.Context) (*CreateLunaClientRes
 	}
 
 	resp := &CreateLunaClientResponse{
-		CreateLunaClientOutput: r.Request.Data.(*CreateLunaClientOutput),
+		CreateLunaClientOutput: r.Request.Data.(*types.CreateLunaClientOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -124,7 +75,7 @@ func (r CreateLunaClientRequest) Send(ctx context.Context) (*CreateLunaClientRes
 // CreateLunaClientResponse is the response type for the
 // CreateLunaClient API operation.
 type CreateLunaClientResponse struct {
-	*CreateLunaClientOutput
+	*types.CreateLunaClientOutput
 
 	response *aws.Response
 }

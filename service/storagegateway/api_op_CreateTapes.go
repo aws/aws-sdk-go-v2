@@ -4,152 +4,10 @@ package storagegateway
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/storagegateway/types"
 )
-
-// CreateTapesInput
-type CreateTapesInput struct {
-	_ struct{} `type:"structure"`
-
-	// A unique identifier that you use to retry a request. If you retry a request,
-	// use the same ClientToken you specified in the initial request.
-	//
-	// Using the same ClientToken prevents creating the tape multiple times.
-	//
-	// ClientToken is a required field
-	ClientToken *string `min:"5" type:"string" required:"true"`
-
-	// The unique Amazon Resource Name (ARN) that represents the gateway to associate
-	// the virtual tapes with. Use the ListGateways operation to return a list of
-	// gateways for your account and AWS Region.
-	//
-	// GatewayARN is a required field
-	GatewayARN *string `min:"50" type:"string" required:"true"`
-
-	// True to use Amazon S3 server side encryption with your own AWS KMS key, or
-	// false to use a key managed by Amazon S3. Optional.
-	KMSEncrypted *bool `type:"boolean"`
-
-	// The Amazon Resource Name (ARN) of the AWS KMS key used for Amazon S3 server
-	// side encryption. This value can only be set when KMSEncrypted is true. Optional.
-	KMSKey *string `min:"7" type:"string"`
-
-	// The number of virtual tapes that you want to create.
-	//
-	// NumTapesToCreate is a required field
-	NumTapesToCreate *int64 `min:"1" type:"integer" required:"true"`
-
-	// The ID of the pool that you want to add your tape to for archiving. The tape
-	// in this pool is archived in the S3 storage class that is associated with
-	// the pool. When you use your backup application to eject the tape, the tape
-	// is archived directly into the storage class (Glacier or Deep Archive) that
-	// corresponds to the pool.
-	//
-	// Valid values: "GLACIER", "DEEP_ARCHIVE"
-	PoolId *string `min:"1" type:"string"`
-
-	// A list of up to 50 tags that can be assigned to a virtual tape. Each tag
-	// is a key-value pair.
-	//
-	// Valid characters for key and value are letters, spaces, and numbers representable
-	// in UTF-8 format, and the following special characters: + - = . _ : / @. The
-	// maximum length of a tag's key is 128 characters, and the maximum length for
-	// a tag's value is 256.
-	Tags []Tag `type:"list"`
-
-	// A prefix that you append to the barcode of the virtual tape you are creating.
-	// This prefix makes the barcode unique.
-	//
-	// The prefix must be 1 to 4 characters in length and must be one of the uppercase
-	// letters from A to Z.
-	//
-	// TapeBarcodePrefix is a required field
-	TapeBarcodePrefix *string `min:"1" type:"string" required:"true"`
-
-	// The size, in bytes, of the virtual tapes that you want to create.
-	//
-	// The size must be aligned by gigabyte (1024*1024*1024 byte).
-	//
-	// TapeSizeInBytes is a required field
-	TapeSizeInBytes *int64 `type:"long" required:"true"`
-}
-
-// String returns the string representation
-func (s CreateTapesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateTapesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateTapesInput"}
-
-	if s.ClientToken == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ClientToken"))
-	}
-	if s.ClientToken != nil && len(*s.ClientToken) < 5 {
-		invalidParams.Add(aws.NewErrParamMinLen("ClientToken", 5))
-	}
-
-	if s.GatewayARN == nil {
-		invalidParams.Add(aws.NewErrParamRequired("GatewayARN"))
-	}
-	if s.GatewayARN != nil && len(*s.GatewayARN) < 50 {
-		invalidParams.Add(aws.NewErrParamMinLen("GatewayARN", 50))
-	}
-	if s.KMSKey != nil && len(*s.KMSKey) < 7 {
-		invalidParams.Add(aws.NewErrParamMinLen("KMSKey", 7))
-	}
-
-	if s.NumTapesToCreate == nil {
-		invalidParams.Add(aws.NewErrParamRequired("NumTapesToCreate"))
-	}
-	if s.NumTapesToCreate != nil && *s.NumTapesToCreate < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("NumTapesToCreate", 1))
-	}
-	if s.PoolId != nil && len(*s.PoolId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("PoolId", 1))
-	}
-
-	if s.TapeBarcodePrefix == nil {
-		invalidParams.Add(aws.NewErrParamRequired("TapeBarcodePrefix"))
-	}
-	if s.TapeBarcodePrefix != nil && len(*s.TapeBarcodePrefix) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("TapeBarcodePrefix", 1))
-	}
-
-	if s.TapeSizeInBytes == nil {
-		invalidParams.Add(aws.NewErrParamRequired("TapeSizeInBytes"))
-	}
-	if s.Tags != nil {
-		for i, v := range s.Tags {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// CreateTapeOutput
-type CreateTapesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A list of unique Amazon Resource Names (ARNs) that represents the virtual
-	// tapes that were created.
-	TapeARNs []string `type:"list"`
-}
-
-// String returns the string representation
-func (s CreateTapesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCreateTapes = "CreateTapes"
 
@@ -171,7 +29,7 @@ const opCreateTapes = "CreateTapes"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/CreateTapes
-func (c *Client) CreateTapesRequest(input *CreateTapesInput) CreateTapesRequest {
+func (c *Client) CreateTapesRequest(input *types.CreateTapesInput) CreateTapesRequest {
 	op := &aws.Operation{
 		Name:       opCreateTapes,
 		HTTPMethod: "POST",
@@ -179,10 +37,10 @@ func (c *Client) CreateTapesRequest(input *CreateTapesInput) CreateTapesRequest 
 	}
 
 	if input == nil {
-		input = &CreateTapesInput{}
+		input = &types.CreateTapesInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateTapesOutput{})
+	req := c.newRequest(op, input, &types.CreateTapesOutput{})
 	return CreateTapesRequest{Request: req, Input: input, Copy: c.CreateTapesRequest}
 }
 
@@ -190,8 +48,8 @@ func (c *Client) CreateTapesRequest(input *CreateTapesInput) CreateTapesRequest 
 // CreateTapes API operation.
 type CreateTapesRequest struct {
 	*aws.Request
-	Input *CreateTapesInput
-	Copy  func(*CreateTapesInput) CreateTapesRequest
+	Input *types.CreateTapesInput
+	Copy  func(*types.CreateTapesInput) CreateTapesRequest
 }
 
 // Send marshals and sends the CreateTapes API request.
@@ -203,7 +61,7 @@ func (r CreateTapesRequest) Send(ctx context.Context) (*CreateTapesResponse, err
 	}
 
 	resp := &CreateTapesResponse{
-		CreateTapesOutput: r.Request.Data.(*CreateTapesOutput),
+		CreateTapesOutput: r.Request.Data.(*types.CreateTapesOutput),
 		response:          &aws.Response{Request: r.Request},
 	}
 
@@ -213,7 +71,7 @@ func (r CreateTapesRequest) Send(ctx context.Context) (*CreateTapesResponse, err
 // CreateTapesResponse is the response type for the
 // CreateTapes API operation.
 type CreateTapesResponse struct {
-	*CreateTapesOutput
+	*types.CreateTapesOutput
 
 	response *aws.Response
 }

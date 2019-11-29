@@ -6,82 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/restjson"
+	"github.com/aws/aws-sdk-go-v2/service/mediatailor/types"
 )
-
-type TagResourceInput struct {
-	_ struct{} `type:"structure"`
-
-	// ResourceArn is a required field
-	ResourceArn *string `location:"uri" locationName:"ResourceArn" type:"string" required:"true"`
-
-	// Tags is a required field
-	Tags map[string]string `locationName:"tags" type:"map" required:"true"`
-}
-
-// String returns the string representation
-func (s TagResourceInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *TagResourceInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "TagResourceInput"}
-
-	if s.ResourceArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ResourceArn"))
-	}
-
-	if s.Tags == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Tags"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s TagResourceInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.Tags != nil {
-		v := s.Tags
-
-		metadata := protocol.Metadata{}
-		ms0 := e.Map(protocol.BodyTarget, "tags", metadata)
-		ms0.Start()
-		for k1, v1 := range v {
-			ms0.MapSetValue(k1, protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
-		}
-		ms0.End()
-
-	}
-	if s.ResourceArn != nil {
-		v := *s.ResourceArn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "ResourceArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type TagResourceOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s TagResourceOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s TagResourceOutput) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
 
 const opTagResource = "TagResource"
 
@@ -99,7 +27,7 @@ const opTagResource = "TagResource"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/TagResource
-func (c *Client) TagResourceRequest(input *TagResourceInput) TagResourceRequest {
+func (c *Client) TagResourceRequest(input *types.TagResourceInput) TagResourceRequest {
 	op := &aws.Operation{
 		Name:       opTagResource,
 		HTTPMethod: "POST",
@@ -107,10 +35,10 @@ func (c *Client) TagResourceRequest(input *TagResourceInput) TagResourceRequest 
 	}
 
 	if input == nil {
-		input = &TagResourceInput{}
+		input = &types.TagResourceInput{}
 	}
 
-	req := c.newRequest(op, input, &TagResourceOutput{})
+	req := c.newRequest(op, input, &types.TagResourceOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return TagResourceRequest{Request: req, Input: input, Copy: c.TagResourceRequest}
@@ -120,8 +48,8 @@ func (c *Client) TagResourceRequest(input *TagResourceInput) TagResourceRequest 
 // TagResource API operation.
 type TagResourceRequest struct {
 	*aws.Request
-	Input *TagResourceInput
-	Copy  func(*TagResourceInput) TagResourceRequest
+	Input *types.TagResourceInput
+	Copy  func(*types.TagResourceInput) TagResourceRequest
 }
 
 // Send marshals and sends the TagResource API request.
@@ -133,7 +61,7 @@ func (r TagResourceRequest) Send(ctx context.Context) (*TagResourceResponse, err
 	}
 
 	resp := &TagResourceResponse{
-		TagResourceOutput: r.Request.Data.(*TagResourceOutput),
+		TagResourceOutput: r.Request.Data.(*types.TagResourceOutput),
 		response:          &aws.Response{Request: r.Request},
 	}
 
@@ -143,7 +71,7 @@ func (r TagResourceRequest) Send(ctx context.Context) (*TagResourceResponse, err
 // TagResourceResponse is the response type for the
 // TagResource API operation.
 type TagResourceResponse struct {
-	*TagResourceOutput
+	*types.TagResourceOutput
 
 	response *aws.Response
 }

@@ -6,64 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/comprehend/types"
 )
-
-type ListKeyPhrasesDetectionJobsInput struct {
-	_ struct{} `type:"structure"`
-
-	// Filters the jobs that are returned. You can filter jobs on their name, status,
-	// or the date and time that they were submitted. You can only set one filter
-	// at a time.
-	Filter *KeyPhrasesDetectionJobFilter `type:"structure"`
-
-	// The maximum number of results to return in each page. The default is 100.
-	MaxResults *int64 `min:"1" type:"integer"`
-
-	// Identifies the next page of results to return.
-	NextToken *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s ListKeyPhrasesDetectionJobsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListKeyPhrasesDetectionJobsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListKeyPhrasesDetectionJobsInput"}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-	if s.NextToken != nil && len(*s.NextToken) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
-	}
-	if s.Filter != nil {
-		if err := s.Filter.Validate(); err != nil {
-			invalidParams.AddNested("Filter", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ListKeyPhrasesDetectionJobsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A list containing the properties of each job that is returned.
-	KeyPhrasesDetectionJobPropertiesList []KeyPhrasesDetectionJobProperties `type:"list"`
-
-	// Identifies the next page of results to return.
-	NextToken *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s ListKeyPhrasesDetectionJobsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListKeyPhrasesDetectionJobs = "ListKeyPhrasesDetectionJobs"
 
@@ -80,7 +24,7 @@ const opListKeyPhrasesDetectionJobs = "ListKeyPhrasesDetectionJobs"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/ListKeyPhrasesDetectionJobs
-func (c *Client) ListKeyPhrasesDetectionJobsRequest(input *ListKeyPhrasesDetectionJobsInput) ListKeyPhrasesDetectionJobsRequest {
+func (c *Client) ListKeyPhrasesDetectionJobsRequest(input *types.ListKeyPhrasesDetectionJobsInput) ListKeyPhrasesDetectionJobsRequest {
 	op := &aws.Operation{
 		Name:       opListKeyPhrasesDetectionJobs,
 		HTTPMethod: "POST",
@@ -94,10 +38,10 @@ func (c *Client) ListKeyPhrasesDetectionJobsRequest(input *ListKeyPhrasesDetecti
 	}
 
 	if input == nil {
-		input = &ListKeyPhrasesDetectionJobsInput{}
+		input = &types.ListKeyPhrasesDetectionJobsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListKeyPhrasesDetectionJobsOutput{})
+	req := c.newRequest(op, input, &types.ListKeyPhrasesDetectionJobsOutput{})
 	return ListKeyPhrasesDetectionJobsRequest{Request: req, Input: input, Copy: c.ListKeyPhrasesDetectionJobsRequest}
 }
 
@@ -105,8 +49,8 @@ func (c *Client) ListKeyPhrasesDetectionJobsRequest(input *ListKeyPhrasesDetecti
 // ListKeyPhrasesDetectionJobs API operation.
 type ListKeyPhrasesDetectionJobsRequest struct {
 	*aws.Request
-	Input *ListKeyPhrasesDetectionJobsInput
-	Copy  func(*ListKeyPhrasesDetectionJobsInput) ListKeyPhrasesDetectionJobsRequest
+	Input *types.ListKeyPhrasesDetectionJobsInput
+	Copy  func(*types.ListKeyPhrasesDetectionJobsInput) ListKeyPhrasesDetectionJobsRequest
 }
 
 // Send marshals and sends the ListKeyPhrasesDetectionJobs API request.
@@ -118,7 +62,7 @@ func (r ListKeyPhrasesDetectionJobsRequest) Send(ctx context.Context) (*ListKeyP
 	}
 
 	resp := &ListKeyPhrasesDetectionJobsResponse{
-		ListKeyPhrasesDetectionJobsOutput: r.Request.Data.(*ListKeyPhrasesDetectionJobsOutput),
+		ListKeyPhrasesDetectionJobsOutput: r.Request.Data.(*types.ListKeyPhrasesDetectionJobsOutput),
 		response:                          &aws.Response{Request: r.Request},
 	}
 
@@ -148,7 +92,7 @@ func NewListKeyPhrasesDetectionJobsPaginator(req ListKeyPhrasesDetectionJobsRequ
 	return ListKeyPhrasesDetectionJobsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListKeyPhrasesDetectionJobsInput
+				var inCpy *types.ListKeyPhrasesDetectionJobsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -168,14 +112,14 @@ type ListKeyPhrasesDetectionJobsPaginator struct {
 	aws.Pager
 }
 
-func (p *ListKeyPhrasesDetectionJobsPaginator) CurrentPage() *ListKeyPhrasesDetectionJobsOutput {
-	return p.Pager.CurrentPage().(*ListKeyPhrasesDetectionJobsOutput)
+func (p *ListKeyPhrasesDetectionJobsPaginator) CurrentPage() *types.ListKeyPhrasesDetectionJobsOutput {
+	return p.Pager.CurrentPage().(*types.ListKeyPhrasesDetectionJobsOutput)
 }
 
 // ListKeyPhrasesDetectionJobsResponse is the response type for the
 // ListKeyPhrasesDetectionJobs API operation.
 type ListKeyPhrasesDetectionJobsResponse struct {
-	*ListKeyPhrasesDetectionJobsOutput
+	*types.ListKeyPhrasesDetectionJobsOutput
 
 	response *aws.Response
 }

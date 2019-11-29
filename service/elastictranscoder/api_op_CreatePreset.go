@@ -6,150 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/elastictranscoder/types"
 )
-
-// The CreatePresetRequest structure.
-type CreatePresetInput struct {
-	_ struct{} `type:"structure"`
-
-	// A section of the request body that specifies the audio parameters.
-	Audio *AudioParameters `type:"structure"`
-
-	// The container type for the output file. Valid values include flac, flv, fmp4,
-	// gif, mp3, mp4, mpg, mxf, oga, ogg, ts, and webm.
-	//
-	// Container is a required field
-	Container *string `type:"string" required:"true"`
-
-	// A description of the preset.
-	Description *string `type:"string"`
-
-	// The name of the preset. We recommend that the name be unique within the AWS
-	// account, but uniqueness is not enforced.
-	//
-	// Name is a required field
-	Name *string `min:"1" type:"string" required:"true"`
-
-	// A section of the request body that specifies the thumbnail parameters, if
-	// any.
-	Thumbnails *Thumbnails `type:"structure"`
-
-	// A section of the request body that specifies the video parameters.
-	Video *VideoParameters `type:"structure"`
-}
-
-// String returns the string representation
-func (s CreatePresetInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreatePresetInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreatePresetInput"}
-
-	if s.Container == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Container"))
-	}
-
-	if s.Name == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Name"))
-	}
-	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
-	}
-	if s.Video != nil {
-		if err := s.Video.Validate(); err != nil {
-			invalidParams.AddNested("Video", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s CreatePresetInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.Audio != nil {
-		v := s.Audio
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "Audio", v, metadata)
-	}
-	if s.Container != nil {
-		v := *s.Container
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "Container", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Description != nil {
-		v := *s.Description
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "Description", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Name != nil {
-		v := *s.Name
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "Name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Thumbnails != nil {
-		v := s.Thumbnails
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "Thumbnails", v, metadata)
-	}
-	if s.Video != nil {
-		v := s.Video
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "Video", v, metadata)
-	}
-	return nil
-}
-
-// The CreatePresetResponse structure.
-type CreatePresetOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A section of the response body that provides information about the preset
-	// that is created.
-	Preset *Preset `type:"structure"`
-
-	// If the preset settings don't comply with the standards for the video codec
-	// but Elastic Transcoder created the preset, this message explains the reason
-	// the preset settings don't meet the standard. Elastic Transcoder created the
-	// preset because the settings might produce acceptable output.
-	Warning *string `type:"string"`
-}
-
-// String returns the string representation
-func (s CreatePresetOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s CreatePresetOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.Preset != nil {
-		v := s.Preset
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "Preset", v, metadata)
-	}
-	if s.Warning != nil {
-		v := *s.Warning
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "Warning", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opCreatePreset = "CreatePreset"
 
@@ -178,7 +36,7 @@ const opCreatePreset = "CreatePreset"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) CreatePresetRequest(input *CreatePresetInput) CreatePresetRequest {
+func (c *Client) CreatePresetRequest(input *types.CreatePresetInput) CreatePresetRequest {
 	op := &aws.Operation{
 		Name:       opCreatePreset,
 		HTTPMethod: "POST",
@@ -186,10 +44,10 @@ func (c *Client) CreatePresetRequest(input *CreatePresetInput) CreatePresetReque
 	}
 
 	if input == nil {
-		input = &CreatePresetInput{}
+		input = &types.CreatePresetInput{}
 	}
 
-	req := c.newRequest(op, input, &CreatePresetOutput{})
+	req := c.newRequest(op, input, &types.CreatePresetOutput{})
 	return CreatePresetRequest{Request: req, Input: input, Copy: c.CreatePresetRequest}
 }
 
@@ -197,8 +55,8 @@ func (c *Client) CreatePresetRequest(input *CreatePresetInput) CreatePresetReque
 // CreatePreset API operation.
 type CreatePresetRequest struct {
 	*aws.Request
-	Input *CreatePresetInput
-	Copy  func(*CreatePresetInput) CreatePresetRequest
+	Input *types.CreatePresetInput
+	Copy  func(*types.CreatePresetInput) CreatePresetRequest
 }
 
 // Send marshals and sends the CreatePreset API request.
@@ -210,7 +68,7 @@ func (r CreatePresetRequest) Send(ctx context.Context) (*CreatePresetResponse, e
 	}
 
 	resp := &CreatePresetResponse{
-		CreatePresetOutput: r.Request.Data.(*CreatePresetOutput),
+		CreatePresetOutput: r.Request.Data.(*types.CreatePresetOutput),
 		response:           &aws.Response{Request: r.Request},
 	}
 
@@ -220,7 +78,7 @@ func (r CreatePresetRequest) Send(ctx context.Context) (*CreatePresetResponse, e
 // CreatePresetResponse is the response type for the
 // CreatePreset API operation.
 type CreatePresetResponse struct {
-	*CreatePresetOutput
+	*types.CreatePresetOutput
 
 	response *aws.Response
 }

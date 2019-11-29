@@ -6,61 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/lightsail/types"
 )
-
-type AttachLoadBalancerTlsCertificateInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of your SSL/TLS certificate.
-	//
-	// CertificateName is a required field
-	CertificateName *string `locationName:"certificateName" type:"string" required:"true"`
-
-	// The name of the load balancer to which you want to associate the SSL/TLS
-	// certificate.
-	//
-	// LoadBalancerName is a required field
-	LoadBalancerName *string `locationName:"loadBalancerName" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s AttachLoadBalancerTlsCertificateInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *AttachLoadBalancerTlsCertificateInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "AttachLoadBalancerTlsCertificateInput"}
-
-	if s.CertificateName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("CertificateName"))
-	}
-
-	if s.LoadBalancerName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("LoadBalancerName"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type AttachLoadBalancerTlsCertificateOutput struct {
-	_ struct{} `type:"structure"`
-
-	// An object representing the API operations.
-	//
-	// These SSL/TLS certificates are only usable by Lightsail load balancers. You
-	// can't get the certificate and use it for another purpose.
-	Operations []Operation `locationName:"operations" type:"list"`
-}
-
-// String returns the string representation
-func (s AttachLoadBalancerTlsCertificateOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opAttachLoadBalancerTlsCertificate = "AttachLoadBalancerTlsCertificate"
 
@@ -88,7 +35,7 @@ const opAttachLoadBalancerTlsCertificate = "AttachLoadBalancerTlsCertificate"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/AttachLoadBalancerTlsCertificate
-func (c *Client) AttachLoadBalancerTlsCertificateRequest(input *AttachLoadBalancerTlsCertificateInput) AttachLoadBalancerTlsCertificateRequest {
+func (c *Client) AttachLoadBalancerTlsCertificateRequest(input *types.AttachLoadBalancerTlsCertificateInput) AttachLoadBalancerTlsCertificateRequest {
 	op := &aws.Operation{
 		Name:       opAttachLoadBalancerTlsCertificate,
 		HTTPMethod: "POST",
@@ -96,10 +43,10 @@ func (c *Client) AttachLoadBalancerTlsCertificateRequest(input *AttachLoadBalanc
 	}
 
 	if input == nil {
-		input = &AttachLoadBalancerTlsCertificateInput{}
+		input = &types.AttachLoadBalancerTlsCertificateInput{}
 	}
 
-	req := c.newRequest(op, input, &AttachLoadBalancerTlsCertificateOutput{})
+	req := c.newRequest(op, input, &types.AttachLoadBalancerTlsCertificateOutput{})
 	return AttachLoadBalancerTlsCertificateRequest{Request: req, Input: input, Copy: c.AttachLoadBalancerTlsCertificateRequest}
 }
 
@@ -107,8 +54,8 @@ func (c *Client) AttachLoadBalancerTlsCertificateRequest(input *AttachLoadBalanc
 // AttachLoadBalancerTlsCertificate API operation.
 type AttachLoadBalancerTlsCertificateRequest struct {
 	*aws.Request
-	Input *AttachLoadBalancerTlsCertificateInput
-	Copy  func(*AttachLoadBalancerTlsCertificateInput) AttachLoadBalancerTlsCertificateRequest
+	Input *types.AttachLoadBalancerTlsCertificateInput
+	Copy  func(*types.AttachLoadBalancerTlsCertificateInput) AttachLoadBalancerTlsCertificateRequest
 }
 
 // Send marshals and sends the AttachLoadBalancerTlsCertificate API request.
@@ -120,7 +67,7 @@ func (r AttachLoadBalancerTlsCertificateRequest) Send(ctx context.Context) (*Att
 	}
 
 	resp := &AttachLoadBalancerTlsCertificateResponse{
-		AttachLoadBalancerTlsCertificateOutput: r.Request.Data.(*AttachLoadBalancerTlsCertificateOutput),
+		AttachLoadBalancerTlsCertificateOutput: r.Request.Data.(*types.AttachLoadBalancerTlsCertificateOutput),
 		response:                               &aws.Response{Request: r.Request},
 	}
 
@@ -130,7 +77,7 @@ func (r AttachLoadBalancerTlsCertificateRequest) Send(ctx context.Context) (*Att
 // AttachLoadBalancerTlsCertificateResponse is the response type for the
 // AttachLoadBalancerTlsCertificate API operation.
 type AttachLoadBalancerTlsCertificateResponse struct {
-	*AttachLoadBalancerTlsCertificateOutput
+	*types.AttachLoadBalancerTlsCertificateOutput
 
 	response *aws.Response
 }

@@ -6,235 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/mq/types"
 )
-
-type CreateBrokerInput struct {
-	_ struct{} `type:"structure"`
-
-	AutoMinorVersionUpgrade *bool `locationName:"autoMinorVersionUpgrade" type:"boolean"`
-
-	BrokerName *string `locationName:"brokerName" type:"string"`
-
-	// A list of information about the configuration.
-	Configuration *ConfigurationId `locationName:"configuration" type:"structure"`
-
-	CreatorRequestId *string `locationName:"creatorRequestId" type:"string" idempotencyToken:"true"`
-
-	// The deployment mode of the broker.
-	DeploymentMode DeploymentMode `locationName:"deploymentMode" type:"string" enum:"true"`
-
-	// Encryption options for the broker.
-	EncryptionOptions *EncryptionOptions `locationName:"encryptionOptions" type:"structure"`
-
-	// The type of broker engine. Note: Currently, Amazon MQ supports only ActiveMQ.
-	EngineType EngineType `locationName:"engineType" type:"string" enum:"true"`
-
-	EngineVersion *string `locationName:"engineVersion" type:"string"`
-
-	HostInstanceType *string `locationName:"hostInstanceType" type:"string"`
-
-	// The list of information about logs to be enabled for the specified broker.
-	Logs *Logs `locationName:"logs" type:"structure"`
-
-	// The scheduled time period relative to UTC during which Amazon MQ begins to
-	// apply pending updates or patches to the broker.
-	MaintenanceWindowStartTime *WeeklyStartTime `locationName:"maintenanceWindowStartTime" type:"structure"`
-
-	PubliclyAccessible *bool `locationName:"publiclyAccessible" type:"boolean"`
-
-	SecurityGroups []string `locationName:"securityGroups" type:"list"`
-
-	SubnetIds []string `locationName:"subnetIds" type:"list"`
-
-	Tags map[string]string `locationName:"tags" type:"map"`
-
-	Users []User `locationName:"users" type:"list"`
-}
-
-// String returns the string representation
-func (s CreateBrokerInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateBrokerInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateBrokerInput"}
-	if s.EncryptionOptions != nil {
-		if err := s.EncryptionOptions.Validate(); err != nil {
-			invalidParams.AddNested("EncryptionOptions", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s CreateBrokerInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.AutoMinorVersionUpgrade != nil {
-		v := *s.AutoMinorVersionUpgrade
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "autoMinorVersionUpgrade", protocol.BoolValue(v), metadata)
-	}
-	if s.BrokerName != nil {
-		v := *s.BrokerName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "brokerName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Configuration != nil {
-		v := s.Configuration
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "configuration", v, metadata)
-	}
-	var CreatorRequestId string
-	if s.CreatorRequestId != nil {
-		CreatorRequestId = *s.CreatorRequestId
-	} else {
-		CreatorRequestId = protocol.GetIdempotencyToken()
-	}
-	{
-		v := CreatorRequestId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "creatorRequestId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if len(s.DeploymentMode) > 0 {
-		v := s.DeploymentMode
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "deploymentMode", protocol.QuotedValue{ValueMarshaler: v}, metadata)
-	}
-	if s.EncryptionOptions != nil {
-		v := s.EncryptionOptions
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "encryptionOptions", v, metadata)
-	}
-	if len(s.EngineType) > 0 {
-		v := s.EngineType
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "engineType", protocol.QuotedValue{ValueMarshaler: v}, metadata)
-	}
-	if s.EngineVersion != nil {
-		v := *s.EngineVersion
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "engineVersion", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.HostInstanceType != nil {
-		v := *s.HostInstanceType
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "hostInstanceType", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Logs != nil {
-		v := s.Logs
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "logs", v, metadata)
-	}
-	if s.MaintenanceWindowStartTime != nil {
-		v := s.MaintenanceWindowStartTime
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "maintenanceWindowStartTime", v, metadata)
-	}
-	if s.PubliclyAccessible != nil {
-		v := *s.PubliclyAccessible
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "publiclyAccessible", protocol.BoolValue(v), metadata)
-	}
-	if s.SecurityGroups != nil {
-		v := s.SecurityGroups
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "securityGroups", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
-		}
-		ls0.End()
-
-	}
-	if s.SubnetIds != nil {
-		v := s.SubnetIds
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "subnetIds", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
-		}
-		ls0.End()
-
-	}
-	if s.Tags != nil {
-		v := s.Tags
-
-		metadata := protocol.Metadata{}
-		ms0 := e.Map(protocol.BodyTarget, "tags", metadata)
-		ms0.Start()
-		for k1, v1 := range v {
-			ms0.MapSetValue(k1, protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
-		}
-		ms0.End()
-
-	}
-	if s.Users != nil {
-		v := s.Users
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "users", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	return nil
-}
-
-type CreateBrokerOutput struct {
-	_ struct{} `type:"structure"`
-
-	BrokerArn *string `locationName:"brokerArn" type:"string"`
-
-	BrokerId *string `locationName:"brokerId" type:"string"`
-}
-
-// String returns the string representation
-func (s CreateBrokerOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s CreateBrokerOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.BrokerArn != nil {
-		v := *s.BrokerArn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "brokerArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.BrokerId != nil {
-		v := *s.BrokerId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "brokerId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opCreateBroker = "CreateBroker"
 
@@ -251,7 +24,7 @@ const opCreateBroker = "CreateBroker"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/CreateBroker
-func (c *Client) CreateBrokerRequest(input *CreateBrokerInput) CreateBrokerRequest {
+func (c *Client) CreateBrokerRequest(input *types.CreateBrokerInput) CreateBrokerRequest {
 	op := &aws.Operation{
 		Name:       opCreateBroker,
 		HTTPMethod: "POST",
@@ -259,10 +32,10 @@ func (c *Client) CreateBrokerRequest(input *CreateBrokerInput) CreateBrokerReque
 	}
 
 	if input == nil {
-		input = &CreateBrokerInput{}
+		input = &types.CreateBrokerInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateBrokerOutput{})
+	req := c.newRequest(op, input, &types.CreateBrokerOutput{})
 	return CreateBrokerRequest{Request: req, Input: input, Copy: c.CreateBrokerRequest}
 }
 
@@ -270,8 +43,8 @@ func (c *Client) CreateBrokerRequest(input *CreateBrokerInput) CreateBrokerReque
 // CreateBroker API operation.
 type CreateBrokerRequest struct {
 	*aws.Request
-	Input *CreateBrokerInput
-	Copy  func(*CreateBrokerInput) CreateBrokerRequest
+	Input *types.CreateBrokerInput
+	Copy  func(*types.CreateBrokerInput) CreateBrokerRequest
 }
 
 // Send marshals and sends the CreateBroker API request.
@@ -283,7 +56,7 @@ func (r CreateBrokerRequest) Send(ctx context.Context) (*CreateBrokerResponse, e
 	}
 
 	resp := &CreateBrokerResponse{
-		CreateBrokerOutput: r.Request.Data.(*CreateBrokerOutput),
+		CreateBrokerOutput: r.Request.Data.(*types.CreateBrokerOutput),
 		response:           &aws.Response{Request: r.Request},
 	}
 
@@ -293,7 +66,7 @@ func (r CreateBrokerRequest) Send(ctx context.Context) (*CreateBrokerResponse, e
 // CreateBrokerResponse is the response type for the
 // CreateBroker API operation.
 type CreateBrokerResponse struct {
-	*CreateBrokerOutput
+	*types.CreateBrokerOutput
 
 	response *aws.Response
 }

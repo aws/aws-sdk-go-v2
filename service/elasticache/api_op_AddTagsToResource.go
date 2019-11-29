@@ -6,67 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/elasticache/types"
 )
-
-// Represents the input of an AddTagsToResource operation.
-type AddTagsToResourceInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the resource to which the tags are to be
-	// added, for example arn:aws:elasticache:us-west-2:0123456789:cluster:myCluster
-	// or arn:aws:elasticache:us-west-2:0123456789:snapshot:mySnapshot. ElastiCache
-	// resources are cluster and snapshot.
-	//
-	// For more information about ARNs, see Amazon Resource Names (ARNs) and AWS
-	// Service Namespaces (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html).
-	//
-	// ResourceName is a required field
-	ResourceName *string `type:"string" required:"true"`
-
-	// A list of cost allocation tags to be added to this resource. A tag is a key-value
-	// pair. A tag key must be accompanied by a tag value.
-	//
-	// Tags is a required field
-	Tags []Tag `locationNameList:"Tag" type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s AddTagsToResourceInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *AddTagsToResourceInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "AddTagsToResourceInput"}
-
-	if s.ResourceName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ResourceName"))
-	}
-
-	if s.Tags == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Tags"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Represents the output from the AddTagsToResource, ListTagsForResource, and
-// RemoveTagsFromResource operations.
-type AddTagsToResourceOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A list of cost allocation tags as key-value pairs.
-	TagList []Tag `locationNameList:"Tag" type:"list"`
-}
-
-// String returns the string representation
-func (s AddTagsToResourceOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opAddTagsToResource = "AddTagsToResource"
 
@@ -93,7 +34,7 @@ const opAddTagsToResource = "AddTagsToResource"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/AddTagsToResource
-func (c *Client) AddTagsToResourceRequest(input *AddTagsToResourceInput) AddTagsToResourceRequest {
+func (c *Client) AddTagsToResourceRequest(input *types.AddTagsToResourceInput) AddTagsToResourceRequest {
 	op := &aws.Operation{
 		Name:       opAddTagsToResource,
 		HTTPMethod: "POST",
@@ -101,10 +42,10 @@ func (c *Client) AddTagsToResourceRequest(input *AddTagsToResourceInput) AddTags
 	}
 
 	if input == nil {
-		input = &AddTagsToResourceInput{}
+		input = &types.AddTagsToResourceInput{}
 	}
 
-	req := c.newRequest(op, input, &AddTagsToResourceOutput{})
+	req := c.newRequest(op, input, &types.AddTagsToResourceOutput{})
 	return AddTagsToResourceRequest{Request: req, Input: input, Copy: c.AddTagsToResourceRequest}
 }
 
@@ -112,8 +53,8 @@ func (c *Client) AddTagsToResourceRequest(input *AddTagsToResourceInput) AddTags
 // AddTagsToResource API operation.
 type AddTagsToResourceRequest struct {
 	*aws.Request
-	Input *AddTagsToResourceInput
-	Copy  func(*AddTagsToResourceInput) AddTagsToResourceRequest
+	Input *types.AddTagsToResourceInput
+	Copy  func(*types.AddTagsToResourceInput) AddTagsToResourceRequest
 }
 
 // Send marshals and sends the AddTagsToResource API request.
@@ -125,7 +66,7 @@ func (r AddTagsToResourceRequest) Send(ctx context.Context) (*AddTagsToResourceR
 	}
 
 	resp := &AddTagsToResourceResponse{
-		AddTagsToResourceOutput: r.Request.Data.(*AddTagsToResourceOutput),
+		AddTagsToResourceOutput: r.Request.Data.(*types.AddTagsToResourceOutput),
 		response:                &aws.Response{Request: r.Request},
 	}
 
@@ -135,7 +76,7 @@ func (r AddTagsToResourceRequest) Send(ctx context.Context) (*AddTagsToResourceR
 // AddTagsToResourceResponse is the response type for the
 // AddTagsToResource API operation.
 type AddTagsToResourceResponse struct {
-	*AddTagsToResourceOutput
+	*types.AddTagsToResourceOutput
 
 	response *aws.Response
 }

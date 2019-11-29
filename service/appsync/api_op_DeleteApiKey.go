@@ -6,79 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/appsync/types"
 )
-
-type DeleteApiKeyInput struct {
-	_ struct{} `type:"structure"`
-
-	// The API ID.
-	//
-	// ApiId is a required field
-	ApiId *string `location:"uri" locationName:"apiId" type:"string" required:"true"`
-
-	// The ID for the API key.
-	//
-	// Id is a required field
-	Id *string `location:"uri" locationName:"id" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteApiKeyInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteApiKeyInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteApiKeyInput"}
-
-	if s.ApiId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ApiId"))
-	}
-
-	if s.Id == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Id"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteApiKeyInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.ApiId != nil {
-		v := *s.ApiId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "apiId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Id != nil {
-		v := *s.Id
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "id", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type DeleteApiKeyOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteApiKeyOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteApiKeyOutput) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
 
 const opDeleteApiKey = "DeleteApiKey"
 
@@ -95,7 +24,7 @@ const opDeleteApiKey = "DeleteApiKey"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/DeleteApiKey
-func (c *Client) DeleteApiKeyRequest(input *DeleteApiKeyInput) DeleteApiKeyRequest {
+func (c *Client) DeleteApiKeyRequest(input *types.DeleteApiKeyInput) DeleteApiKeyRequest {
 	op := &aws.Operation{
 		Name:       opDeleteApiKey,
 		HTTPMethod: "DELETE",
@@ -103,10 +32,10 @@ func (c *Client) DeleteApiKeyRequest(input *DeleteApiKeyInput) DeleteApiKeyReque
 	}
 
 	if input == nil {
-		input = &DeleteApiKeyInput{}
+		input = &types.DeleteApiKeyInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteApiKeyOutput{})
+	req := c.newRequest(op, input, &types.DeleteApiKeyOutput{})
 	return DeleteApiKeyRequest{Request: req, Input: input, Copy: c.DeleteApiKeyRequest}
 }
 
@@ -114,8 +43,8 @@ func (c *Client) DeleteApiKeyRequest(input *DeleteApiKeyInput) DeleteApiKeyReque
 // DeleteApiKey API operation.
 type DeleteApiKeyRequest struct {
 	*aws.Request
-	Input *DeleteApiKeyInput
-	Copy  func(*DeleteApiKeyInput) DeleteApiKeyRequest
+	Input *types.DeleteApiKeyInput
+	Copy  func(*types.DeleteApiKeyInput) DeleteApiKeyRequest
 }
 
 // Send marshals and sends the DeleteApiKey API request.
@@ -127,7 +56,7 @@ func (r DeleteApiKeyRequest) Send(ctx context.Context) (*DeleteApiKeyResponse, e
 	}
 
 	resp := &DeleteApiKeyResponse{
-		DeleteApiKeyOutput: r.Request.Data.(*DeleteApiKeyOutput),
+		DeleteApiKeyOutput: r.Request.Data.(*types.DeleteApiKeyOutput),
 		response:           &aws.Response{Request: r.Request},
 	}
 
@@ -137,7 +66,7 @@ func (r DeleteApiKeyRequest) Send(ctx context.Context) (*DeleteApiKeyResponse, e
 // DeleteApiKeyResponse is the response type for the
 // DeleteApiKey API operation.
 type DeleteApiKeyResponse struct {
-	*DeleteApiKeyOutput
+	*types.DeleteApiKeyOutput
 
 	response *aws.Response
 }

@@ -6,45 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/workspaces/types"
 )
-
-type DeleteWorkspaceImageInput struct {
-	_ struct{} `type:"structure"`
-
-	// The identifier of the image.
-	//
-	// ImageId is a required field
-	ImageId *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteWorkspaceImageInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteWorkspaceImageInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteWorkspaceImageInput"}
-
-	if s.ImageId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ImageId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteWorkspaceImageOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteWorkspaceImageOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteWorkspaceImage = "DeleteWorkspaceImage"
 
@@ -63,7 +26,7 @@ const opDeleteWorkspaceImage = "DeleteWorkspaceImage"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DeleteWorkspaceImage
-func (c *Client) DeleteWorkspaceImageRequest(input *DeleteWorkspaceImageInput) DeleteWorkspaceImageRequest {
+func (c *Client) DeleteWorkspaceImageRequest(input *types.DeleteWorkspaceImageInput) DeleteWorkspaceImageRequest {
 	op := &aws.Operation{
 		Name:       opDeleteWorkspaceImage,
 		HTTPMethod: "POST",
@@ -71,10 +34,10 @@ func (c *Client) DeleteWorkspaceImageRequest(input *DeleteWorkspaceImageInput) D
 	}
 
 	if input == nil {
-		input = &DeleteWorkspaceImageInput{}
+		input = &types.DeleteWorkspaceImageInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteWorkspaceImageOutput{})
+	req := c.newRequest(op, input, &types.DeleteWorkspaceImageOutput{})
 	return DeleteWorkspaceImageRequest{Request: req, Input: input, Copy: c.DeleteWorkspaceImageRequest}
 }
 
@@ -82,8 +45,8 @@ func (c *Client) DeleteWorkspaceImageRequest(input *DeleteWorkspaceImageInput) D
 // DeleteWorkspaceImage API operation.
 type DeleteWorkspaceImageRequest struct {
 	*aws.Request
-	Input *DeleteWorkspaceImageInput
-	Copy  func(*DeleteWorkspaceImageInput) DeleteWorkspaceImageRequest
+	Input *types.DeleteWorkspaceImageInput
+	Copy  func(*types.DeleteWorkspaceImageInput) DeleteWorkspaceImageRequest
 }
 
 // Send marshals and sends the DeleteWorkspaceImage API request.
@@ -95,7 +58,7 @@ func (r DeleteWorkspaceImageRequest) Send(ctx context.Context) (*DeleteWorkspace
 	}
 
 	resp := &DeleteWorkspaceImageResponse{
-		DeleteWorkspaceImageOutput: r.Request.Data.(*DeleteWorkspaceImageOutput),
+		DeleteWorkspaceImageOutput: r.Request.Data.(*types.DeleteWorkspaceImageOutput),
 		response:                   &aws.Response{Request: r.Request},
 	}
 
@@ -105,7 +68,7 @@ func (r DeleteWorkspaceImageRequest) Send(ctx context.Context) (*DeleteWorkspace
 // DeleteWorkspaceImageResponse is the response type for the
 // DeleteWorkspaceImage API operation.
 type DeleteWorkspaceImageResponse struct {
-	*DeleteWorkspaceImageOutput
+	*types.DeleteWorkspaceImageOutput
 
 	response *aws.Response
 }

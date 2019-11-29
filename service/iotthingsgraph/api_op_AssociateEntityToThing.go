@@ -6,65 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/iotthingsgraph/types"
 )
-
-type AssociateEntityToThingInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the device to be associated with the thing.
-	//
-	// The ID should be in the following format.
-	//
-	// urn:tdm:REGION/ACCOUNT ID/default:device:DEVICENAME
-	//
-	// EntityId is a required field
-	EntityId *string `locationName:"entityId" type:"string" required:"true"`
-
-	// The version of the user's namespace. Defaults to the latest version of the
-	// user's namespace.
-	NamespaceVersion *int64 `locationName:"namespaceVersion" type:"long"`
-
-	// The name of the thing to which the entity is to be associated.
-	//
-	// ThingName is a required field
-	ThingName *string `locationName:"thingName" min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s AssociateEntityToThingInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *AssociateEntityToThingInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "AssociateEntityToThingInput"}
-
-	if s.EntityId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("EntityId"))
-	}
-
-	if s.ThingName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ThingName"))
-	}
-	if s.ThingName != nil && len(*s.ThingName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ThingName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type AssociateEntityToThingOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s AssociateEntityToThingOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opAssociateEntityToThing = "AssociateEntityToThing"
 
@@ -84,7 +27,7 @@ const opAssociateEntityToThing = "AssociateEntityToThing"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iotthingsgraph-2018-09-06/AssociateEntityToThing
-func (c *Client) AssociateEntityToThingRequest(input *AssociateEntityToThingInput) AssociateEntityToThingRequest {
+func (c *Client) AssociateEntityToThingRequest(input *types.AssociateEntityToThingInput) AssociateEntityToThingRequest {
 	op := &aws.Operation{
 		Name:       opAssociateEntityToThing,
 		HTTPMethod: "POST",
@@ -92,10 +35,10 @@ func (c *Client) AssociateEntityToThingRequest(input *AssociateEntityToThingInpu
 	}
 
 	if input == nil {
-		input = &AssociateEntityToThingInput{}
+		input = &types.AssociateEntityToThingInput{}
 	}
 
-	req := c.newRequest(op, input, &AssociateEntityToThingOutput{})
+	req := c.newRequest(op, input, &types.AssociateEntityToThingOutput{})
 	return AssociateEntityToThingRequest{Request: req, Input: input, Copy: c.AssociateEntityToThingRequest}
 }
 
@@ -103,8 +46,8 @@ func (c *Client) AssociateEntityToThingRequest(input *AssociateEntityToThingInpu
 // AssociateEntityToThing API operation.
 type AssociateEntityToThingRequest struct {
 	*aws.Request
-	Input *AssociateEntityToThingInput
-	Copy  func(*AssociateEntityToThingInput) AssociateEntityToThingRequest
+	Input *types.AssociateEntityToThingInput
+	Copy  func(*types.AssociateEntityToThingInput) AssociateEntityToThingRequest
 }
 
 // Send marshals and sends the AssociateEntityToThing API request.
@@ -116,7 +59,7 @@ func (r AssociateEntityToThingRequest) Send(ctx context.Context) (*AssociateEnti
 	}
 
 	resp := &AssociateEntityToThingResponse{
-		AssociateEntityToThingOutput: r.Request.Data.(*AssociateEntityToThingOutput),
+		AssociateEntityToThingOutput: r.Request.Data.(*types.AssociateEntityToThingOutput),
 		response:                     &aws.Response{Request: r.Request},
 	}
 
@@ -126,7 +69,7 @@ func (r AssociateEntityToThingRequest) Send(ctx context.Context) (*AssociateEnti
 // AssociateEntityToThingResponse is the response type for the
 // AssociateEntityToThing API operation.
 type AssociateEntityToThingResponse struct {
-	*AssociateEntityToThingOutput
+	*types.AssociateEntityToThingOutput
 
 	response *aws.Response
 }

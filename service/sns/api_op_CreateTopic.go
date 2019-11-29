@@ -4,88 +4,10 @@ package sns
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/sns/types"
 )
-
-// Input for CreateTopic action.
-type CreateTopicInput struct {
-	_ struct{} `type:"structure"`
-
-	// A map of attributes with their corresponding values.
-	//
-	// The following lists the names, descriptions, and values of the special request
-	// parameters that the CreateTopic action uses:
-	//
-	//    * DeliveryPolicy – The policy that defines how Amazon SNS retries failed
-	//    deliveries to HTTP/S endpoints.
-	//
-	//    * DisplayName – The display name to use for a topic with SMS subscriptions.
-	//
-	//    * Policy – The policy that defines who can access your topic. By default,
-	//    only the topic owner can publish or subscribe to the topic.
-	//
-	// The following attribute applies only to server-side-encryption (https://docs.aws.amazon.com/sns/latest/dg/sns-server-side-encryption.html):
-	//
-	//    * KmsMasterKeyId - The ID of an AWS-managed customer master key (CMK)
-	//    for Amazon SNS or a custom CMK. For more information, see Key Terms (https://docs.aws.amazon.com/sns/latest/dg/sns-server-side-encryption.html#sse-key-terms).
-	//    For more examples, see KeyId (https://docs.aws.amazon.com/kms/latest/APIReference/API_DescribeKey.html#API_DescribeKey_RequestParameters)
-	//    in the AWS Key Management Service API Reference.
-	Attributes map[string]string `type:"map"`
-
-	// The name of the topic you want to create.
-	//
-	// Constraints: Topic names must be made up of only uppercase and lowercase
-	// ASCII letters, numbers, underscores, and hyphens, and must be between 1 and
-	// 256 characters long.
-	//
-	// Name is a required field
-	Name *string `type:"string" required:"true"`
-
-	// The list of tags to add to a new topic.
-	Tags []Tag `type:"list"`
-}
-
-// String returns the string representation
-func (s CreateTopicInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateTopicInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateTopicInput"}
-
-	if s.Name == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Name"))
-	}
-	if s.Tags != nil {
-		for i, v := range s.Tags {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Response from CreateTopic action.
-type CreateTopicOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) assigned to the created topic.
-	TopicArn *string `type:"string"`
-}
-
-// String returns the string representation
-func (s CreateTopicOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCreateTopic = "CreateTopic"
 
@@ -106,7 +28,7 @@ const opCreateTopic = "CreateTopic"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/CreateTopic
-func (c *Client) CreateTopicRequest(input *CreateTopicInput) CreateTopicRequest {
+func (c *Client) CreateTopicRequest(input *types.CreateTopicInput) CreateTopicRequest {
 	op := &aws.Operation{
 		Name:       opCreateTopic,
 		HTTPMethod: "POST",
@@ -114,10 +36,10 @@ func (c *Client) CreateTopicRequest(input *CreateTopicInput) CreateTopicRequest 
 	}
 
 	if input == nil {
-		input = &CreateTopicInput{}
+		input = &types.CreateTopicInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateTopicOutput{})
+	req := c.newRequest(op, input, &types.CreateTopicOutput{})
 	return CreateTopicRequest{Request: req, Input: input, Copy: c.CreateTopicRequest}
 }
 
@@ -125,8 +47,8 @@ func (c *Client) CreateTopicRequest(input *CreateTopicInput) CreateTopicRequest 
 // CreateTopic API operation.
 type CreateTopicRequest struct {
 	*aws.Request
-	Input *CreateTopicInput
-	Copy  func(*CreateTopicInput) CreateTopicRequest
+	Input *types.CreateTopicInput
+	Copy  func(*types.CreateTopicInput) CreateTopicRequest
 }
 
 // Send marshals and sends the CreateTopic API request.
@@ -138,7 +60,7 @@ func (r CreateTopicRequest) Send(ctx context.Context) (*CreateTopicResponse, err
 	}
 
 	resp := &CreateTopicResponse{
-		CreateTopicOutput: r.Request.Data.(*CreateTopicOutput),
+		CreateTopicOutput: r.Request.Data.(*types.CreateTopicOutput),
 		response:          &aws.Response{Request: r.Request},
 	}
 
@@ -148,7 +70,7 @@ func (r CreateTopicRequest) Send(ctx context.Context) (*CreateTopicResponse, err
 // CreateTopicResponse is the response type for the
 // CreateTopic API operation.
 type CreateTopicResponse struct {
-	*CreateTopicOutput
+	*types.CreateTopicOutput
 
 	response *aws.Response
 }

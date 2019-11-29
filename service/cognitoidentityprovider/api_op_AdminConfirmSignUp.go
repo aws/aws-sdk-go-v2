@@ -6,92 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/types"
 )
-
-// Represents the request to confirm user registration.
-type AdminConfirmSignUpInput struct {
-	_ struct{} `type:"structure"`
-
-	// A map of custom key-value pairs that you can provide as input for any custom
-	// workflows that this action triggers.
-	//
-	// If your user pool configuration includes triggers, the AdminConfirmSignUp
-	// API action invokes the AWS Lambda function that is specified for the post
-	// confirmation trigger. When Amazon Cognito invokes this function, it passes
-	// a JSON payload, which the function receives as input. In this payload, the
-	// clientMetadata attribute provides the data that you assigned to the ClientMetadata
-	// parameter in your AdminConfirmSignUp request. In your function code in AWS
-	// Lambda, you can process the ClientMetadata value to enhance your workflow
-	// for your specific needs.
-	//
-	// For more information, see Customizing User Pool Workflows with Lambda Triggers
-	// (https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools-working-with-aws-lambda-triggers.html)
-	// in the Amazon Cognito Developer Guide.
-	//
-	// Take the following limitations into consideration when you use the ClientMetadata
-	// parameter:
-	//
-	//    * Amazon Cognito does not store the ClientMetadata value. This data is
-	//    available only to AWS Lambda triggers that are assigned to a user pool
-	//    to support custom workflows. If your user pool configuration does not
-	//    include triggers, the ClientMetadata parameter serves no purpose.
-	//
-	//    * Amazon Cognito does not validate the ClientMetadata value.
-	//
-	//    * Amazon Cognito does not encrypt the the ClientMetadata value, so don't
-	//    use it to provide sensitive information.
-	ClientMetadata map[string]string `type:"map"`
-
-	// The user pool ID for which you want to confirm user registration.
-	//
-	// UserPoolId is a required field
-	UserPoolId *string `min:"1" type:"string" required:"true"`
-
-	// The user name for which you want to confirm user registration.
-	//
-	// Username is a required field
-	Username *string `min:"1" type:"string" required:"true" sensitive:"true"`
-}
-
-// String returns the string representation
-func (s AdminConfirmSignUpInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *AdminConfirmSignUpInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "AdminConfirmSignUpInput"}
-
-	if s.UserPoolId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("UserPoolId"))
-	}
-	if s.UserPoolId != nil && len(*s.UserPoolId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("UserPoolId", 1))
-	}
-
-	if s.Username == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Username"))
-	}
-	if s.Username != nil && len(*s.Username) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Username", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Represents the response from the server for the request to confirm registration.
-type AdminConfirmSignUpOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s AdminConfirmSignUpOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opAdminConfirmSignUp = "AdminConfirmSignUp"
 
@@ -111,7 +27,7 @@ const opAdminConfirmSignUp = "AdminConfirmSignUp"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AdminConfirmSignUp
-func (c *Client) AdminConfirmSignUpRequest(input *AdminConfirmSignUpInput) AdminConfirmSignUpRequest {
+func (c *Client) AdminConfirmSignUpRequest(input *types.AdminConfirmSignUpInput) AdminConfirmSignUpRequest {
 	op := &aws.Operation{
 		Name:       opAdminConfirmSignUp,
 		HTTPMethod: "POST",
@@ -119,10 +35,10 @@ func (c *Client) AdminConfirmSignUpRequest(input *AdminConfirmSignUpInput) Admin
 	}
 
 	if input == nil {
-		input = &AdminConfirmSignUpInput{}
+		input = &types.AdminConfirmSignUpInput{}
 	}
 
-	req := c.newRequest(op, input, &AdminConfirmSignUpOutput{})
+	req := c.newRequest(op, input, &types.AdminConfirmSignUpOutput{})
 	return AdminConfirmSignUpRequest{Request: req, Input: input, Copy: c.AdminConfirmSignUpRequest}
 }
 
@@ -130,8 +46,8 @@ func (c *Client) AdminConfirmSignUpRequest(input *AdminConfirmSignUpInput) Admin
 // AdminConfirmSignUp API operation.
 type AdminConfirmSignUpRequest struct {
 	*aws.Request
-	Input *AdminConfirmSignUpInput
-	Copy  func(*AdminConfirmSignUpInput) AdminConfirmSignUpRequest
+	Input *types.AdminConfirmSignUpInput
+	Copy  func(*types.AdminConfirmSignUpInput) AdminConfirmSignUpRequest
 }
 
 // Send marshals and sends the AdminConfirmSignUp API request.
@@ -143,7 +59,7 @@ func (r AdminConfirmSignUpRequest) Send(ctx context.Context) (*AdminConfirmSignU
 	}
 
 	resp := &AdminConfirmSignUpResponse{
-		AdminConfirmSignUpOutput: r.Request.Data.(*AdminConfirmSignUpOutput),
+		AdminConfirmSignUpOutput: r.Request.Data.(*types.AdminConfirmSignUpOutput),
 		response:                 &aws.Response{Request: r.Request},
 	}
 
@@ -153,7 +69,7 @@ func (r AdminConfirmSignUpRequest) Send(ctx context.Context) (*AdminConfirmSignU
 // AdminConfirmSignUpResponse is the response type for the
 // AdminConfirmSignUp API operation.
 type AdminConfirmSignUpResponse struct {
-	*AdminConfirmSignUpOutput
+	*types.AdminConfirmSignUpOutput
 
 	response *aws.Response
 }

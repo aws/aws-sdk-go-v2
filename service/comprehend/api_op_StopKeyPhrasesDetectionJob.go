@@ -6,55 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/comprehend/types"
 )
-
-type StopKeyPhrasesDetectionJobInput struct {
-	_ struct{} `type:"structure"`
-
-	// The identifier of the key phrases detection job to stop.
-	//
-	// JobId is a required field
-	JobId *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s StopKeyPhrasesDetectionJobInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *StopKeyPhrasesDetectionJobInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "StopKeyPhrasesDetectionJobInput"}
-
-	if s.JobId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("JobId"))
-	}
-	if s.JobId != nil && len(*s.JobId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("JobId", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type StopKeyPhrasesDetectionJobOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The identifier of the key phrases detection job to stop.
-	JobId *string `min:"1" type:"string"`
-
-	// Either STOP_REQUESTED if the job is currently running, or STOPPED if the
-	// job was previously stopped with the StopKeyPhrasesDetectionJob operation.
-	JobStatus JobStatus `type:"string" enum:"true"`
-}
-
-// String returns the string representation
-func (s StopKeyPhrasesDetectionJobOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opStopKeyPhrasesDetectionJob = "StopKeyPhrasesDetectionJob"
 
@@ -82,7 +35,7 @@ const opStopKeyPhrasesDetectionJob = "StopKeyPhrasesDetectionJob"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/StopKeyPhrasesDetectionJob
-func (c *Client) StopKeyPhrasesDetectionJobRequest(input *StopKeyPhrasesDetectionJobInput) StopKeyPhrasesDetectionJobRequest {
+func (c *Client) StopKeyPhrasesDetectionJobRequest(input *types.StopKeyPhrasesDetectionJobInput) StopKeyPhrasesDetectionJobRequest {
 	op := &aws.Operation{
 		Name:       opStopKeyPhrasesDetectionJob,
 		HTTPMethod: "POST",
@@ -90,10 +43,10 @@ func (c *Client) StopKeyPhrasesDetectionJobRequest(input *StopKeyPhrasesDetectio
 	}
 
 	if input == nil {
-		input = &StopKeyPhrasesDetectionJobInput{}
+		input = &types.StopKeyPhrasesDetectionJobInput{}
 	}
 
-	req := c.newRequest(op, input, &StopKeyPhrasesDetectionJobOutput{})
+	req := c.newRequest(op, input, &types.StopKeyPhrasesDetectionJobOutput{})
 	return StopKeyPhrasesDetectionJobRequest{Request: req, Input: input, Copy: c.StopKeyPhrasesDetectionJobRequest}
 }
 
@@ -101,8 +54,8 @@ func (c *Client) StopKeyPhrasesDetectionJobRequest(input *StopKeyPhrasesDetectio
 // StopKeyPhrasesDetectionJob API operation.
 type StopKeyPhrasesDetectionJobRequest struct {
 	*aws.Request
-	Input *StopKeyPhrasesDetectionJobInput
-	Copy  func(*StopKeyPhrasesDetectionJobInput) StopKeyPhrasesDetectionJobRequest
+	Input *types.StopKeyPhrasesDetectionJobInput
+	Copy  func(*types.StopKeyPhrasesDetectionJobInput) StopKeyPhrasesDetectionJobRequest
 }
 
 // Send marshals and sends the StopKeyPhrasesDetectionJob API request.
@@ -114,7 +67,7 @@ func (r StopKeyPhrasesDetectionJobRequest) Send(ctx context.Context) (*StopKeyPh
 	}
 
 	resp := &StopKeyPhrasesDetectionJobResponse{
-		StopKeyPhrasesDetectionJobOutput: r.Request.Data.(*StopKeyPhrasesDetectionJobOutput),
+		StopKeyPhrasesDetectionJobOutput: r.Request.Data.(*types.StopKeyPhrasesDetectionJobOutput),
 		response:                         &aws.Response{Request: r.Request},
 	}
 
@@ -124,7 +77,7 @@ func (r StopKeyPhrasesDetectionJobRequest) Send(ctx context.Context) (*StopKeyPh
 // StopKeyPhrasesDetectionJobResponse is the response type for the
 // StopKeyPhrasesDetectionJob API operation.
 type StopKeyPhrasesDetectionJobResponse struct {
-	*StopKeyPhrasesDetectionJobOutput
+	*types.StopKeyPhrasesDetectionJobOutput
 
 	response *aws.Response
 }

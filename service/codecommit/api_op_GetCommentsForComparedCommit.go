@@ -6,77 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/codecommit/types"
 )
-
-type GetCommentsForComparedCommitInput struct {
-	_ struct{} `type:"structure"`
-
-	// To establish the directionality of the comparison, the full commit ID of
-	// the 'after' commit.
-	//
-	// AfterCommitId is a required field
-	AfterCommitId *string `locationName:"afterCommitId" type:"string" required:"true"`
-
-	// To establish the directionality of the comparison, the full commit ID of
-	// the 'before' commit.
-	BeforeCommitId *string `locationName:"beforeCommitId" type:"string"`
-
-	// A non-negative integer used to limit the number of returned results. The
-	// default is 100 comments, and is configurable up to 500.
-	MaxResults *int64 `locationName:"maxResults" type:"integer"`
-
-	// An enumeration token that when provided in a request, returns the next batch
-	// of the results.
-	NextToken *string `locationName:"nextToken" type:"string"`
-
-	// The name of the repository where you want to compare commits.
-	//
-	// RepositoryName is a required field
-	RepositoryName *string `locationName:"repositoryName" min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetCommentsForComparedCommitInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetCommentsForComparedCommitInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetCommentsForComparedCommitInput"}
-
-	if s.AfterCommitId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("AfterCommitId"))
-	}
-
-	if s.RepositoryName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("RepositoryName"))
-	}
-	if s.RepositoryName != nil && len(*s.RepositoryName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("RepositoryName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type GetCommentsForComparedCommitOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A list of comment objects on the compared commit.
-	CommentsForComparedCommitData []CommentsForComparedCommit `locationName:"commentsForComparedCommitData" type:"list"`
-
-	// An enumeration token that can be used in a request to return the next batch
-	// of the results.
-	NextToken *string `locationName:"nextToken" type:"string"`
-}
-
-// String returns the string representation
-func (s GetCommentsForComparedCommitOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetCommentsForComparedCommit = "GetCommentsForComparedCommit"
 
@@ -93,7 +24,7 @@ const opGetCommentsForComparedCommit = "GetCommentsForComparedCommit"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/GetCommentsForComparedCommit
-func (c *Client) GetCommentsForComparedCommitRequest(input *GetCommentsForComparedCommitInput) GetCommentsForComparedCommitRequest {
+func (c *Client) GetCommentsForComparedCommitRequest(input *types.GetCommentsForComparedCommitInput) GetCommentsForComparedCommitRequest {
 	op := &aws.Operation{
 		Name:       opGetCommentsForComparedCommit,
 		HTTPMethod: "POST",
@@ -107,10 +38,10 @@ func (c *Client) GetCommentsForComparedCommitRequest(input *GetCommentsForCompar
 	}
 
 	if input == nil {
-		input = &GetCommentsForComparedCommitInput{}
+		input = &types.GetCommentsForComparedCommitInput{}
 	}
 
-	req := c.newRequest(op, input, &GetCommentsForComparedCommitOutput{})
+	req := c.newRequest(op, input, &types.GetCommentsForComparedCommitOutput{})
 	return GetCommentsForComparedCommitRequest{Request: req, Input: input, Copy: c.GetCommentsForComparedCommitRequest}
 }
 
@@ -118,8 +49,8 @@ func (c *Client) GetCommentsForComparedCommitRequest(input *GetCommentsForCompar
 // GetCommentsForComparedCommit API operation.
 type GetCommentsForComparedCommitRequest struct {
 	*aws.Request
-	Input *GetCommentsForComparedCommitInput
-	Copy  func(*GetCommentsForComparedCommitInput) GetCommentsForComparedCommitRequest
+	Input *types.GetCommentsForComparedCommitInput
+	Copy  func(*types.GetCommentsForComparedCommitInput) GetCommentsForComparedCommitRequest
 }
 
 // Send marshals and sends the GetCommentsForComparedCommit API request.
@@ -131,7 +62,7 @@ func (r GetCommentsForComparedCommitRequest) Send(ctx context.Context) (*GetComm
 	}
 
 	resp := &GetCommentsForComparedCommitResponse{
-		GetCommentsForComparedCommitOutput: r.Request.Data.(*GetCommentsForComparedCommitOutput),
+		GetCommentsForComparedCommitOutput: r.Request.Data.(*types.GetCommentsForComparedCommitOutput),
 		response:                           &aws.Response{Request: r.Request},
 	}
 
@@ -161,7 +92,7 @@ func NewGetCommentsForComparedCommitPaginator(req GetCommentsForComparedCommitRe
 	return GetCommentsForComparedCommitPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *GetCommentsForComparedCommitInput
+				var inCpy *types.GetCommentsForComparedCommitInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -181,14 +112,14 @@ type GetCommentsForComparedCommitPaginator struct {
 	aws.Pager
 }
 
-func (p *GetCommentsForComparedCommitPaginator) CurrentPage() *GetCommentsForComparedCommitOutput {
-	return p.Pager.CurrentPage().(*GetCommentsForComparedCommitOutput)
+func (p *GetCommentsForComparedCommitPaginator) CurrentPage() *types.GetCommentsForComparedCommitOutput {
+	return p.Pager.CurrentPage().(*types.GetCommentsForComparedCommitOutput)
 }
 
 // GetCommentsForComparedCommitResponse is the response type for the
 // GetCommentsForComparedCommit API operation.
 type GetCommentsForComparedCommitResponse struct {
-	*GetCommentsForComparedCommitOutput
+	*types.GetCommentsForComparedCommitOutput
 
 	response *aws.Response
 }

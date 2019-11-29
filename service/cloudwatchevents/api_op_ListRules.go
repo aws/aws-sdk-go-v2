@@ -6,68 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/cloudwatchevents/types"
 )
-
-type ListRulesInput struct {
-	_ struct{} `type:"structure"`
-
-	// Limits the results to show only the rules associated with the specified event
-	// bus.
-	EventBusName *string `min:"1" type:"string"`
-
-	// The maximum number of results to return.
-	Limit *int64 `min:"1" type:"integer"`
-
-	// The prefix matching the rule name.
-	NamePrefix *string `min:"1" type:"string"`
-
-	// The token returned by a previous call to retrieve the next set of results.
-	NextToken *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s ListRulesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListRulesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListRulesInput"}
-	if s.EventBusName != nil && len(*s.EventBusName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("EventBusName", 1))
-	}
-	if s.Limit != nil && *s.Limit < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("Limit", 1))
-	}
-	if s.NamePrefix != nil && len(*s.NamePrefix) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("NamePrefix", 1))
-	}
-	if s.NextToken != nil && len(*s.NextToken) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ListRulesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Indicates whether there are additional results to retrieve. If there are
-	// no more results, the value is null.
-	NextToken *string `min:"1" type:"string"`
-
-	// The rules that match the specified criteria.
-	Rules []Rule `type:"list"`
-}
-
-// String returns the string representation
-func (s ListRulesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListRules = "ListRules"
 
@@ -88,7 +28,7 @@ const opListRules = "ListRules"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/ListRules
-func (c *Client) ListRulesRequest(input *ListRulesInput) ListRulesRequest {
+func (c *Client) ListRulesRequest(input *types.ListRulesInput) ListRulesRequest {
 	op := &aws.Operation{
 		Name:       opListRules,
 		HTTPMethod: "POST",
@@ -96,10 +36,10 @@ func (c *Client) ListRulesRequest(input *ListRulesInput) ListRulesRequest {
 	}
 
 	if input == nil {
-		input = &ListRulesInput{}
+		input = &types.ListRulesInput{}
 	}
 
-	req := c.newRequest(op, input, &ListRulesOutput{})
+	req := c.newRequest(op, input, &types.ListRulesOutput{})
 	return ListRulesRequest{Request: req, Input: input, Copy: c.ListRulesRequest}
 }
 
@@ -107,8 +47,8 @@ func (c *Client) ListRulesRequest(input *ListRulesInput) ListRulesRequest {
 // ListRules API operation.
 type ListRulesRequest struct {
 	*aws.Request
-	Input *ListRulesInput
-	Copy  func(*ListRulesInput) ListRulesRequest
+	Input *types.ListRulesInput
+	Copy  func(*types.ListRulesInput) ListRulesRequest
 }
 
 // Send marshals and sends the ListRules API request.
@@ -120,7 +60,7 @@ func (r ListRulesRequest) Send(ctx context.Context) (*ListRulesResponse, error) 
 	}
 
 	resp := &ListRulesResponse{
-		ListRulesOutput: r.Request.Data.(*ListRulesOutput),
+		ListRulesOutput: r.Request.Data.(*types.ListRulesOutput),
 		response:        &aws.Response{Request: r.Request},
 	}
 
@@ -130,7 +70,7 @@ func (r ListRulesRequest) Send(ctx context.Context) (*ListRulesResponse, error) 
 // ListRulesResponse is the response type for the
 // ListRules API operation.
 type ListRulesResponse struct {
-	*ListRulesOutput
+	*types.ListRulesOutput
 
 	response *aws.Response
 }

@@ -6,54 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/securityhub/types"
 )
-
-type DisassociateMembersInput struct {
-	_ struct{} `type:"structure"`
-
-	// The account IDs of the member accounts to disassociate from the master account.
-	AccountIds []string `type:"list"`
-}
-
-// String returns the string representation
-func (s DisassociateMembersInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DisassociateMembersInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.AccountIds != nil {
-		v := s.AccountIds
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "AccountIds", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
-		}
-		ls0.End()
-
-	}
-	return nil
-}
-
-type DisassociateMembersOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DisassociateMembersOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DisassociateMembersOutput) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
 
 const opDisassociateMembers = "DisassociateMembers"
 
@@ -70,7 +24,7 @@ const opDisassociateMembers = "DisassociateMembers"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/DisassociateMembers
-func (c *Client) DisassociateMembersRequest(input *DisassociateMembersInput) DisassociateMembersRequest {
+func (c *Client) DisassociateMembersRequest(input *types.DisassociateMembersInput) DisassociateMembersRequest {
 	op := &aws.Operation{
 		Name:       opDisassociateMembers,
 		HTTPMethod: "POST",
@@ -78,10 +32,10 @@ func (c *Client) DisassociateMembersRequest(input *DisassociateMembersInput) Dis
 	}
 
 	if input == nil {
-		input = &DisassociateMembersInput{}
+		input = &types.DisassociateMembersInput{}
 	}
 
-	req := c.newRequest(op, input, &DisassociateMembersOutput{})
+	req := c.newRequest(op, input, &types.DisassociateMembersOutput{})
 	return DisassociateMembersRequest{Request: req, Input: input, Copy: c.DisassociateMembersRequest}
 }
 
@@ -89,8 +43,8 @@ func (c *Client) DisassociateMembersRequest(input *DisassociateMembersInput) Dis
 // DisassociateMembers API operation.
 type DisassociateMembersRequest struct {
 	*aws.Request
-	Input *DisassociateMembersInput
-	Copy  func(*DisassociateMembersInput) DisassociateMembersRequest
+	Input *types.DisassociateMembersInput
+	Copy  func(*types.DisassociateMembersInput) DisassociateMembersRequest
 }
 
 // Send marshals and sends the DisassociateMembers API request.
@@ -102,7 +56,7 @@ func (r DisassociateMembersRequest) Send(ctx context.Context) (*DisassociateMemb
 	}
 
 	resp := &DisassociateMembersResponse{
-		DisassociateMembersOutput: r.Request.Data.(*DisassociateMembersOutput),
+		DisassociateMembersOutput: r.Request.Data.(*types.DisassociateMembersOutput),
 		response:                  &aws.Response{Request: r.Request},
 	}
 
@@ -112,7 +66,7 @@ func (r DisassociateMembersRequest) Send(ctx context.Context) (*DisassociateMemb
 // DisassociateMembersResponse is the response type for the
 // DisassociateMembers API operation.
 type DisassociateMembersResponse struct {
-	*DisassociateMembersOutput
+	*types.DisassociateMembersOutput
 
 	response *aws.Response
 }

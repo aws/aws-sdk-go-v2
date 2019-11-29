@@ -6,66 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/glue/types"
 )
-
-type GetWorkflowRunInput struct {
-	_ struct{} `type:"structure"`
-
-	// Specifies whether to include the workflow graph in response or not.
-	IncludeGraph *bool `type:"boolean"`
-
-	// Name of the workflow being run.
-	//
-	// Name is a required field
-	Name *string `min:"1" type:"string" required:"true"`
-
-	// The ID of the workflow run.
-	//
-	// RunId is a required field
-	RunId *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetWorkflowRunInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetWorkflowRunInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetWorkflowRunInput"}
-
-	if s.Name == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Name"))
-	}
-	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
-	}
-
-	if s.RunId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("RunId"))
-	}
-	if s.RunId != nil && len(*s.RunId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("RunId", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type GetWorkflowRunOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The requested workflow run metadata.
-	Run *WorkflowRun `type:"structure"`
-}
-
-// String returns the string representation
-func (s GetWorkflowRunOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetWorkflowRun = "GetWorkflowRun"
 
@@ -82,7 +24,7 @@ const opGetWorkflowRun = "GetWorkflowRun"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetWorkflowRun
-func (c *Client) GetWorkflowRunRequest(input *GetWorkflowRunInput) GetWorkflowRunRequest {
+func (c *Client) GetWorkflowRunRequest(input *types.GetWorkflowRunInput) GetWorkflowRunRequest {
 	op := &aws.Operation{
 		Name:       opGetWorkflowRun,
 		HTTPMethod: "POST",
@@ -90,10 +32,10 @@ func (c *Client) GetWorkflowRunRequest(input *GetWorkflowRunInput) GetWorkflowRu
 	}
 
 	if input == nil {
-		input = &GetWorkflowRunInput{}
+		input = &types.GetWorkflowRunInput{}
 	}
 
-	req := c.newRequest(op, input, &GetWorkflowRunOutput{})
+	req := c.newRequest(op, input, &types.GetWorkflowRunOutput{})
 	return GetWorkflowRunRequest{Request: req, Input: input, Copy: c.GetWorkflowRunRequest}
 }
 
@@ -101,8 +43,8 @@ func (c *Client) GetWorkflowRunRequest(input *GetWorkflowRunInput) GetWorkflowRu
 // GetWorkflowRun API operation.
 type GetWorkflowRunRequest struct {
 	*aws.Request
-	Input *GetWorkflowRunInput
-	Copy  func(*GetWorkflowRunInput) GetWorkflowRunRequest
+	Input *types.GetWorkflowRunInput
+	Copy  func(*types.GetWorkflowRunInput) GetWorkflowRunRequest
 }
 
 // Send marshals and sends the GetWorkflowRun API request.
@@ -114,7 +56,7 @@ func (r GetWorkflowRunRequest) Send(ctx context.Context) (*GetWorkflowRunRespons
 	}
 
 	resp := &GetWorkflowRunResponse{
-		GetWorkflowRunOutput: r.Request.Data.(*GetWorkflowRunOutput),
+		GetWorkflowRunOutput: r.Request.Data.(*types.GetWorkflowRunOutput),
 		response:             &aws.Response{Request: r.Request},
 	}
 
@@ -124,7 +66,7 @@ func (r GetWorkflowRunRequest) Send(ctx context.Context) (*GetWorkflowRunRespons
 // GetWorkflowRunResponse is the response type for the
 // GetWorkflowRun API operation.
 type GetWorkflowRunResponse struct {
-	*GetWorkflowRunOutput
+	*types.GetWorkflowRunOutput
 
 	response *aws.Response
 }

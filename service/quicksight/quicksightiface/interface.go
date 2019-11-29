@@ -10,6 +10,7 @@ package quicksightiface
 
 import (
 	"github.com/aws/aws-sdk-go-v2/service/quicksight"
+	"github.com/aws/aws-sdk-go-v2/service/quicksight/types"
 )
 
 // ClientAPI provides an interface to enable mocking the
@@ -23,7 +24,7 @@ import (
 //    // myFunc uses an SDK service client to make a request to
 //    // Amazon QuickSight.
 //    func myFunc(svc quicksightiface.ClientAPI) bool {
-//        // Make svc.CreateGroup request
+//        // Make svc.CancelIngestion request
 //    }
 //
 //    func main() {
@@ -43,7 +44,7 @@ import (
 //    type mockClientClient struct {
 //        quicksightiface.ClientPI
 //    }
-//    func (m *mockClientClient) CreateGroup(input *quicksight.CreateGroupInput) (*quicksight.CreateGroupOutput, error) {
+//    func (m *mockClientClient) CancelIngestion(input *types.CancelIngestionInput) (*types.CancelIngestionOutput, error) {
 //        // mock response/functionality
 //    }
 //
@@ -61,37 +62,135 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type ClientAPI interface {
-	CreateGroupRequest(*quicksight.CreateGroupInput) quicksight.CreateGroupRequest
+	CancelIngestionRequest(*types.CancelIngestionInput) quicksight.CancelIngestionRequest
 
-	CreateGroupMembershipRequest(*quicksight.CreateGroupMembershipInput) quicksight.CreateGroupMembershipRequest
+	CreateDashboardRequest(*types.CreateDashboardInput) quicksight.CreateDashboardRequest
 
-	DeleteGroupRequest(*quicksight.DeleteGroupInput) quicksight.DeleteGroupRequest
+	CreateDataSetRequest(*types.CreateDataSetInput) quicksight.CreateDataSetRequest
 
-	DeleteGroupMembershipRequest(*quicksight.DeleteGroupMembershipInput) quicksight.DeleteGroupMembershipRequest
+	CreateDataSourceRequest(*types.CreateDataSourceInput) quicksight.CreateDataSourceRequest
 
-	DeleteUserRequest(*quicksight.DeleteUserInput) quicksight.DeleteUserRequest
+	CreateGroupRequest(*types.CreateGroupInput) quicksight.CreateGroupRequest
 
-	DeleteUserByPrincipalIdRequest(*quicksight.DeleteUserByPrincipalIdInput) quicksight.DeleteUserByPrincipalIdRequest
+	CreateGroupMembershipRequest(*types.CreateGroupMembershipInput) quicksight.CreateGroupMembershipRequest
 
-	DescribeGroupRequest(*quicksight.DescribeGroupInput) quicksight.DescribeGroupRequest
+	CreateIAMPolicyAssignmentRequest(*types.CreateIAMPolicyAssignmentInput) quicksight.CreateIAMPolicyAssignmentRequest
 
-	DescribeUserRequest(*quicksight.DescribeUserInput) quicksight.DescribeUserRequest
+	CreateIngestionRequest(*types.CreateIngestionInput) quicksight.CreateIngestionRequest
 
-	GetDashboardEmbedUrlRequest(*quicksight.GetDashboardEmbedUrlInput) quicksight.GetDashboardEmbedUrlRequest
+	CreateTemplateRequest(*types.CreateTemplateInput) quicksight.CreateTemplateRequest
 
-	ListGroupMembershipsRequest(*quicksight.ListGroupMembershipsInput) quicksight.ListGroupMembershipsRequest
+	CreateTemplateAliasRequest(*types.CreateTemplateAliasInput) quicksight.CreateTemplateAliasRequest
 
-	ListGroupsRequest(*quicksight.ListGroupsInput) quicksight.ListGroupsRequest
+	DeleteDashboardRequest(*types.DeleteDashboardInput) quicksight.DeleteDashboardRequest
 
-	ListUserGroupsRequest(*quicksight.ListUserGroupsInput) quicksight.ListUserGroupsRequest
+	DeleteDataSetRequest(*types.DeleteDataSetInput) quicksight.DeleteDataSetRequest
 
-	ListUsersRequest(*quicksight.ListUsersInput) quicksight.ListUsersRequest
+	DeleteDataSourceRequest(*types.DeleteDataSourceInput) quicksight.DeleteDataSourceRequest
 
-	RegisterUserRequest(*quicksight.RegisterUserInput) quicksight.RegisterUserRequest
+	DeleteGroupRequest(*types.DeleteGroupInput) quicksight.DeleteGroupRequest
 
-	UpdateGroupRequest(*quicksight.UpdateGroupInput) quicksight.UpdateGroupRequest
+	DeleteGroupMembershipRequest(*types.DeleteGroupMembershipInput) quicksight.DeleteGroupMembershipRequest
 
-	UpdateUserRequest(*quicksight.UpdateUserInput) quicksight.UpdateUserRequest
+	DeleteIAMPolicyAssignmentRequest(*types.DeleteIAMPolicyAssignmentInput) quicksight.DeleteIAMPolicyAssignmentRequest
+
+	DeleteTemplateRequest(*types.DeleteTemplateInput) quicksight.DeleteTemplateRequest
+
+	DeleteTemplateAliasRequest(*types.DeleteTemplateAliasInput) quicksight.DeleteTemplateAliasRequest
+
+	DeleteUserRequest(*types.DeleteUserInput) quicksight.DeleteUserRequest
+
+	DeleteUserByPrincipalIdRequest(*types.DeleteUserByPrincipalIdInput) quicksight.DeleteUserByPrincipalIdRequest
+
+	DescribeDashboardRequest(*types.DescribeDashboardInput) quicksight.DescribeDashboardRequest
+
+	DescribeDashboardPermissionsRequest(*types.DescribeDashboardPermissionsInput) quicksight.DescribeDashboardPermissionsRequest
+
+	DescribeDataSetRequest(*types.DescribeDataSetInput) quicksight.DescribeDataSetRequest
+
+	DescribeDataSetPermissionsRequest(*types.DescribeDataSetPermissionsInput) quicksight.DescribeDataSetPermissionsRequest
+
+	DescribeDataSourceRequest(*types.DescribeDataSourceInput) quicksight.DescribeDataSourceRequest
+
+	DescribeDataSourcePermissionsRequest(*types.DescribeDataSourcePermissionsInput) quicksight.DescribeDataSourcePermissionsRequest
+
+	DescribeGroupRequest(*types.DescribeGroupInput) quicksight.DescribeGroupRequest
+
+	DescribeIAMPolicyAssignmentRequest(*types.DescribeIAMPolicyAssignmentInput) quicksight.DescribeIAMPolicyAssignmentRequest
+
+	DescribeIngestionRequest(*types.DescribeIngestionInput) quicksight.DescribeIngestionRequest
+
+	DescribeTemplateRequest(*types.DescribeTemplateInput) quicksight.DescribeTemplateRequest
+
+	DescribeTemplateAliasRequest(*types.DescribeTemplateAliasInput) quicksight.DescribeTemplateAliasRequest
+
+	DescribeTemplatePermissionsRequest(*types.DescribeTemplatePermissionsInput) quicksight.DescribeTemplatePermissionsRequest
+
+	DescribeUserRequest(*types.DescribeUserInput) quicksight.DescribeUserRequest
+
+	GetDashboardEmbedUrlRequest(*types.GetDashboardEmbedUrlInput) quicksight.GetDashboardEmbedUrlRequest
+
+	ListDashboardVersionsRequest(*types.ListDashboardVersionsInput) quicksight.ListDashboardVersionsRequest
+
+	ListDashboardsRequest(*types.ListDashboardsInput) quicksight.ListDashboardsRequest
+
+	ListDataSetsRequest(*types.ListDataSetsInput) quicksight.ListDataSetsRequest
+
+	ListDataSourcesRequest(*types.ListDataSourcesInput) quicksight.ListDataSourcesRequest
+
+	ListGroupMembershipsRequest(*types.ListGroupMembershipsInput) quicksight.ListGroupMembershipsRequest
+
+	ListGroupsRequest(*types.ListGroupsInput) quicksight.ListGroupsRequest
+
+	ListIAMPolicyAssignmentsRequest(*types.ListIAMPolicyAssignmentsInput) quicksight.ListIAMPolicyAssignmentsRequest
+
+	ListIAMPolicyAssignmentsForUserRequest(*types.ListIAMPolicyAssignmentsForUserInput) quicksight.ListIAMPolicyAssignmentsForUserRequest
+
+	ListIngestionsRequest(*types.ListIngestionsInput) quicksight.ListIngestionsRequest
+
+	ListTagsForResourceRequest(*types.ListTagsForResourceInput) quicksight.ListTagsForResourceRequest
+
+	ListTemplateAliasesRequest(*types.ListTemplateAliasesInput) quicksight.ListTemplateAliasesRequest
+
+	ListTemplateVersionsRequest(*types.ListTemplateVersionsInput) quicksight.ListTemplateVersionsRequest
+
+	ListTemplatesRequest(*types.ListTemplatesInput) quicksight.ListTemplatesRequest
+
+	ListUserGroupsRequest(*types.ListUserGroupsInput) quicksight.ListUserGroupsRequest
+
+	ListUsersRequest(*types.ListUsersInput) quicksight.ListUsersRequest
+
+	RegisterUserRequest(*types.RegisterUserInput) quicksight.RegisterUserRequest
+
+	TagResourceRequest(*types.TagResourceInput) quicksight.TagResourceRequest
+
+	UntagResourceRequest(*types.UntagResourceInput) quicksight.UntagResourceRequest
+
+	UpdateDashboardRequest(*types.UpdateDashboardInput) quicksight.UpdateDashboardRequest
+
+	UpdateDashboardPermissionsRequest(*types.UpdateDashboardPermissionsInput) quicksight.UpdateDashboardPermissionsRequest
+
+	UpdateDashboardPublishedVersionRequest(*types.UpdateDashboardPublishedVersionInput) quicksight.UpdateDashboardPublishedVersionRequest
+
+	UpdateDataSetRequest(*types.UpdateDataSetInput) quicksight.UpdateDataSetRequest
+
+	UpdateDataSetPermissionsRequest(*types.UpdateDataSetPermissionsInput) quicksight.UpdateDataSetPermissionsRequest
+
+	UpdateDataSourceRequest(*types.UpdateDataSourceInput) quicksight.UpdateDataSourceRequest
+
+	UpdateDataSourcePermissionsRequest(*types.UpdateDataSourcePermissionsInput) quicksight.UpdateDataSourcePermissionsRequest
+
+	UpdateGroupRequest(*types.UpdateGroupInput) quicksight.UpdateGroupRequest
+
+	UpdateIAMPolicyAssignmentRequest(*types.UpdateIAMPolicyAssignmentInput) quicksight.UpdateIAMPolicyAssignmentRequest
+
+	UpdateTemplateRequest(*types.UpdateTemplateInput) quicksight.UpdateTemplateRequest
+
+	UpdateTemplateAliasRequest(*types.UpdateTemplateAliasInput) quicksight.UpdateTemplateAliasRequest
+
+	UpdateTemplatePermissionsRequest(*types.UpdateTemplatePermissionsInput) quicksight.UpdateTemplatePermissionsRequest
+
+	UpdateUserRequest(*types.UpdateUserInput) quicksight.UpdateUserRequest
 }
 
 var _ ClientAPI = (*quicksight.Client)(nil)

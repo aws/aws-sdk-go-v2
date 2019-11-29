@@ -6,82 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/cognitoidentity/types"
 )
-
-// Input to the ListIdentities action.
-type ListIdentitiesInput struct {
-	_ struct{} `type:"structure"`
-
-	// An optional boolean parameter that allows you to hide disabled identities.
-	// If omitted, the ListIdentities API will include disabled identities in the
-	// response.
-	HideDisabled *bool `type:"boolean"`
-
-	// An identity pool ID in the format REGION:GUID.
-	//
-	// IdentityPoolId is a required field
-	IdentityPoolId *string `min:"1" type:"string" required:"true"`
-
-	// The maximum number of identities to return.
-	//
-	// MaxResults is a required field
-	MaxResults *int64 `min:"1" type:"integer" required:"true"`
-
-	// A pagination token.
-	NextToken *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s ListIdentitiesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListIdentitiesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListIdentitiesInput"}
-
-	if s.IdentityPoolId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("IdentityPoolId"))
-	}
-	if s.IdentityPoolId != nil && len(*s.IdentityPoolId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("IdentityPoolId", 1))
-	}
-
-	if s.MaxResults == nil {
-		invalidParams.Add(aws.NewErrParamRequired("MaxResults"))
-	}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-	if s.NextToken != nil && len(*s.NextToken) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// The response to a ListIdentities request.
-type ListIdentitiesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// An object containing a set of identities and associated mappings.
-	Identities []IdentityDescription `type:"list"`
-
-	// An identity pool ID in the format REGION:GUID.
-	IdentityPoolId *string `min:"1" type:"string"`
-
-	// A pagination token.
-	NextToken *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s ListIdentitiesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListIdentities = "ListIdentities"
 
@@ -100,7 +26,7 @@ const opListIdentities = "ListIdentities"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-identity-2014-06-30/ListIdentities
-func (c *Client) ListIdentitiesRequest(input *ListIdentitiesInput) ListIdentitiesRequest {
+func (c *Client) ListIdentitiesRequest(input *types.ListIdentitiesInput) ListIdentitiesRequest {
 	op := &aws.Operation{
 		Name:       opListIdentities,
 		HTTPMethod: "POST",
@@ -108,10 +34,10 @@ func (c *Client) ListIdentitiesRequest(input *ListIdentitiesInput) ListIdentitie
 	}
 
 	if input == nil {
-		input = &ListIdentitiesInput{}
+		input = &types.ListIdentitiesInput{}
 	}
 
-	req := c.newRequest(op, input, &ListIdentitiesOutput{})
+	req := c.newRequest(op, input, &types.ListIdentitiesOutput{})
 	return ListIdentitiesRequest{Request: req, Input: input, Copy: c.ListIdentitiesRequest}
 }
 
@@ -119,8 +45,8 @@ func (c *Client) ListIdentitiesRequest(input *ListIdentitiesInput) ListIdentitie
 // ListIdentities API operation.
 type ListIdentitiesRequest struct {
 	*aws.Request
-	Input *ListIdentitiesInput
-	Copy  func(*ListIdentitiesInput) ListIdentitiesRequest
+	Input *types.ListIdentitiesInput
+	Copy  func(*types.ListIdentitiesInput) ListIdentitiesRequest
 }
 
 // Send marshals and sends the ListIdentities API request.
@@ -132,7 +58,7 @@ func (r ListIdentitiesRequest) Send(ctx context.Context) (*ListIdentitiesRespons
 	}
 
 	resp := &ListIdentitiesResponse{
-		ListIdentitiesOutput: r.Request.Data.(*ListIdentitiesOutput),
+		ListIdentitiesOutput: r.Request.Data.(*types.ListIdentitiesOutput),
 		response:             &aws.Response{Request: r.Request},
 	}
 
@@ -142,7 +68,7 @@ func (r ListIdentitiesRequest) Send(ctx context.Context) (*ListIdentitiesRespons
 // ListIdentitiesResponse is the response type for the
 // ListIdentities API operation.
 type ListIdentitiesResponse struct {
-	*ListIdentitiesOutput
+	*types.ListIdentitiesOutput
 
 	response *aws.Response
 }

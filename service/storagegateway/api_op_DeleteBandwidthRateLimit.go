@@ -6,73 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/storagegateway/types"
 )
-
-// A JSON object containing the following fields:
-//
-//    * DeleteBandwidthRateLimitInput$BandwidthType
-type DeleteBandwidthRateLimitInput struct {
-	_ struct{} `type:"structure"`
-
-	// One of the BandwidthType values that indicates the gateway bandwidth rate
-	// limit to delete.
-	//
-	// Valid Values: Upload, Download, All.
-	//
-	// BandwidthType is a required field
-	BandwidthType *string `min:"3" type:"string" required:"true"`
-
-	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation
-	// to return a list of gateways for your account and AWS Region.
-	//
-	// GatewayARN is a required field
-	GatewayARN *string `min:"50" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteBandwidthRateLimitInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteBandwidthRateLimitInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteBandwidthRateLimitInput"}
-
-	if s.BandwidthType == nil {
-		invalidParams.Add(aws.NewErrParamRequired("BandwidthType"))
-	}
-	if s.BandwidthType != nil && len(*s.BandwidthType) < 3 {
-		invalidParams.Add(aws.NewErrParamMinLen("BandwidthType", 3))
-	}
-
-	if s.GatewayARN == nil {
-		invalidParams.Add(aws.NewErrParamRequired("GatewayARN"))
-	}
-	if s.GatewayARN != nil && len(*s.GatewayARN) < 50 {
-		invalidParams.Add(aws.NewErrParamMinLen("GatewayARN", 50))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// A JSON object containing the of the gateway whose bandwidth rate information
-// was deleted.
-type DeleteBandwidthRateLimitOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation
-	// to return a list of gateways for your account and AWS Region.
-	GatewayARN *string `min:"50" type:"string"`
-}
-
-// String returns the string representation
-func (s DeleteBandwidthRateLimitOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteBandwidthRateLimit = "DeleteBandwidthRateLimit"
 
@@ -83,7 +18,8 @@ const opDeleteBandwidthRateLimit = "DeleteBandwidthRateLimit"
 // upload and download bandwidth rate limit, or you can delete both. If you
 // delete only one of the limits, the other limit remains unchanged. To specify
 // which gateway to work with, use the Amazon Resource Name (ARN) of the gateway
-// in your request.
+// in your request. This operation is supported for the stored volume, cached
+// volume and tape gateway types.
 //
 //    // Example sending a request using DeleteBandwidthRateLimitRequest.
 //    req := client.DeleteBandwidthRateLimitRequest(params)
@@ -93,7 +29,7 @@ const opDeleteBandwidthRateLimit = "DeleteBandwidthRateLimit"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DeleteBandwidthRateLimit
-func (c *Client) DeleteBandwidthRateLimitRequest(input *DeleteBandwidthRateLimitInput) DeleteBandwidthRateLimitRequest {
+func (c *Client) DeleteBandwidthRateLimitRequest(input *types.DeleteBandwidthRateLimitInput) DeleteBandwidthRateLimitRequest {
 	op := &aws.Operation{
 		Name:       opDeleteBandwidthRateLimit,
 		HTTPMethod: "POST",
@@ -101,10 +37,10 @@ func (c *Client) DeleteBandwidthRateLimitRequest(input *DeleteBandwidthRateLimit
 	}
 
 	if input == nil {
-		input = &DeleteBandwidthRateLimitInput{}
+		input = &types.DeleteBandwidthRateLimitInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteBandwidthRateLimitOutput{})
+	req := c.newRequest(op, input, &types.DeleteBandwidthRateLimitOutput{})
 	return DeleteBandwidthRateLimitRequest{Request: req, Input: input, Copy: c.DeleteBandwidthRateLimitRequest}
 }
 
@@ -112,8 +48,8 @@ func (c *Client) DeleteBandwidthRateLimitRequest(input *DeleteBandwidthRateLimit
 // DeleteBandwidthRateLimit API operation.
 type DeleteBandwidthRateLimitRequest struct {
 	*aws.Request
-	Input *DeleteBandwidthRateLimitInput
-	Copy  func(*DeleteBandwidthRateLimitInput) DeleteBandwidthRateLimitRequest
+	Input *types.DeleteBandwidthRateLimitInput
+	Copy  func(*types.DeleteBandwidthRateLimitInput) DeleteBandwidthRateLimitRequest
 }
 
 // Send marshals and sends the DeleteBandwidthRateLimit API request.
@@ -125,7 +61,7 @@ func (r DeleteBandwidthRateLimitRequest) Send(ctx context.Context) (*DeleteBandw
 	}
 
 	resp := &DeleteBandwidthRateLimitResponse{
-		DeleteBandwidthRateLimitOutput: r.Request.Data.(*DeleteBandwidthRateLimitOutput),
+		DeleteBandwidthRateLimitOutput: r.Request.Data.(*types.DeleteBandwidthRateLimitOutput),
 		response:                       &aws.Response{Request: r.Request},
 	}
 
@@ -135,7 +71,7 @@ func (r DeleteBandwidthRateLimitRequest) Send(ctx context.Context) (*DeleteBandw
 // DeleteBandwidthRateLimitResponse is the response type for the
 // DeleteBandwidthRateLimit API operation.
 type DeleteBandwidthRateLimitResponse struct {
-	*DeleteBandwidthRateLimitOutput
+	*types.DeleteBandwidthRateLimitOutput
 
 	response *aws.Response
 }

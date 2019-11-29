@@ -6,52 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/snowball/types"
 )
-
-type DescribeClusterInput struct {
-	_ struct{} `type:"structure"`
-
-	// The automatically generated ID for a cluster.
-	//
-	// ClusterId is a required field
-	ClusterId *string `min:"39" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeClusterInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeClusterInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeClusterInput"}
-
-	if s.ClusterId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ClusterId"))
-	}
-	if s.ClusterId != nil && len(*s.ClusterId) < 39 {
-		invalidParams.Add(aws.NewErrParamMinLen("ClusterId", 39))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribeClusterOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Information about a specific cluster, including shipping information, cluster
-	// status, and other important metadata.
-	ClusterMetadata *ClusterMetadata `type:"structure"`
-}
-
-// String returns the string representation
-func (s DescribeClusterOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeCluster = "DescribeCluster"
 
@@ -69,7 +25,7 @@ const opDescribeCluster = "DescribeCluster"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/DescribeCluster
-func (c *Client) DescribeClusterRequest(input *DescribeClusterInput) DescribeClusterRequest {
+func (c *Client) DescribeClusterRequest(input *types.DescribeClusterInput) DescribeClusterRequest {
 	op := &aws.Operation{
 		Name:       opDescribeCluster,
 		HTTPMethod: "POST",
@@ -77,10 +33,10 @@ func (c *Client) DescribeClusterRequest(input *DescribeClusterInput) DescribeClu
 	}
 
 	if input == nil {
-		input = &DescribeClusterInput{}
+		input = &types.DescribeClusterInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeClusterOutput{})
+	req := c.newRequest(op, input, &types.DescribeClusterOutput{})
 	return DescribeClusterRequest{Request: req, Input: input, Copy: c.DescribeClusterRequest}
 }
 
@@ -88,8 +44,8 @@ func (c *Client) DescribeClusterRequest(input *DescribeClusterInput) DescribeClu
 // DescribeCluster API operation.
 type DescribeClusterRequest struct {
 	*aws.Request
-	Input *DescribeClusterInput
-	Copy  func(*DescribeClusterInput) DescribeClusterRequest
+	Input *types.DescribeClusterInput
+	Copy  func(*types.DescribeClusterInput) DescribeClusterRequest
 }
 
 // Send marshals and sends the DescribeCluster API request.
@@ -101,7 +57,7 @@ func (r DescribeClusterRequest) Send(ctx context.Context) (*DescribeClusterRespo
 	}
 
 	resp := &DescribeClusterResponse{
-		DescribeClusterOutput: r.Request.Data.(*DescribeClusterOutput),
+		DescribeClusterOutput: r.Request.Data.(*types.DescribeClusterOutput),
 		response:              &aws.Response{Request: r.Request},
 	}
 
@@ -111,7 +67,7 @@ func (r DescribeClusterRequest) Send(ctx context.Context) (*DescribeClusterRespo
 // DescribeClusterResponse is the response type for the
 // DescribeCluster API operation.
 type DescribeClusterResponse struct {
-	*DescribeClusterOutput
+	*types.DescribeClusterOutput
 
 	response *aws.Response
 }

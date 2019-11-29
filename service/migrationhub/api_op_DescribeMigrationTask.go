@@ -6,63 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/migrationhub/types"
 )
-
-type DescribeMigrationTaskInput struct {
-	_ struct{} `type:"structure"`
-
-	// The identifier given to the MigrationTask.
-	//
-	// MigrationTaskName is a required field
-	MigrationTaskName *string `min:"1" type:"string" required:"true"`
-
-	// The name of the ProgressUpdateStream.
-	//
-	// ProgressUpdateStream is a required field
-	ProgressUpdateStream *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeMigrationTaskInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeMigrationTaskInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeMigrationTaskInput"}
-
-	if s.MigrationTaskName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("MigrationTaskName"))
-	}
-	if s.MigrationTaskName != nil && len(*s.MigrationTaskName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("MigrationTaskName", 1))
-	}
-
-	if s.ProgressUpdateStream == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ProgressUpdateStream"))
-	}
-	if s.ProgressUpdateStream != nil && len(*s.ProgressUpdateStream) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ProgressUpdateStream", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribeMigrationTaskOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Object encapsulating information about the migration task.
-	MigrationTask *MigrationTask `type:"structure"`
-}
-
-// String returns the string representation
-func (s DescribeMigrationTaskOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeMigrationTask = "DescribeMigrationTask"
 
@@ -79,7 +24,7 @@ const opDescribeMigrationTask = "DescribeMigrationTask"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/DescribeMigrationTask
-func (c *Client) DescribeMigrationTaskRequest(input *DescribeMigrationTaskInput) DescribeMigrationTaskRequest {
+func (c *Client) DescribeMigrationTaskRequest(input *types.DescribeMigrationTaskInput) DescribeMigrationTaskRequest {
 	op := &aws.Operation{
 		Name:       opDescribeMigrationTask,
 		HTTPMethod: "POST",
@@ -87,10 +32,10 @@ func (c *Client) DescribeMigrationTaskRequest(input *DescribeMigrationTaskInput)
 	}
 
 	if input == nil {
-		input = &DescribeMigrationTaskInput{}
+		input = &types.DescribeMigrationTaskInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeMigrationTaskOutput{})
+	req := c.newRequest(op, input, &types.DescribeMigrationTaskOutput{})
 	return DescribeMigrationTaskRequest{Request: req, Input: input, Copy: c.DescribeMigrationTaskRequest}
 }
 
@@ -98,8 +43,8 @@ func (c *Client) DescribeMigrationTaskRequest(input *DescribeMigrationTaskInput)
 // DescribeMigrationTask API operation.
 type DescribeMigrationTaskRequest struct {
 	*aws.Request
-	Input *DescribeMigrationTaskInput
-	Copy  func(*DescribeMigrationTaskInput) DescribeMigrationTaskRequest
+	Input *types.DescribeMigrationTaskInput
+	Copy  func(*types.DescribeMigrationTaskInput) DescribeMigrationTaskRequest
 }
 
 // Send marshals and sends the DescribeMigrationTask API request.
@@ -111,7 +56,7 @@ func (r DescribeMigrationTaskRequest) Send(ctx context.Context) (*DescribeMigrat
 	}
 
 	resp := &DescribeMigrationTaskResponse{
-		DescribeMigrationTaskOutput: r.Request.Data.(*DescribeMigrationTaskOutput),
+		DescribeMigrationTaskOutput: r.Request.Data.(*types.DescribeMigrationTaskOutput),
 		response:                    &aws.Response{Request: r.Request},
 	}
 
@@ -121,7 +66,7 @@ func (r DescribeMigrationTaskRequest) Send(ctx context.Context) (*DescribeMigrat
 // DescribeMigrationTaskResponse is the response type for the
 // DescribeMigrationTask API operation.
 type DescribeMigrationTaskResponse struct {
-	*DescribeMigrationTaskOutput
+	*types.DescribeMigrationTaskOutput
 
 	response *aws.Response
 }

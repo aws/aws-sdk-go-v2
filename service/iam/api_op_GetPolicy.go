@@ -6,57 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/iam/types"
 )
-
-type GetPolicyInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the managed policy that you want information
-	// about.
-	//
-	// For more information about ARNs, see Amazon Resource Names (ARNs) and AWS
-	// Service Namespaces (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
-	// in the AWS General Reference.
-	//
-	// PolicyArn is a required field
-	PolicyArn *string `min:"20" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetPolicyInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetPolicyInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetPolicyInput"}
-
-	if s.PolicyArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("PolicyArn"))
-	}
-	if s.PolicyArn != nil && len(*s.PolicyArn) < 20 {
-		invalidParams.Add(aws.NewErrParamMinLen("PolicyArn", 20))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Contains the response to a successful GetPolicy request.
-type GetPolicyOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A structure containing details about the policy.
-	Policy *Policy `type:"structure"`
-}
-
-// String returns the string representation
-func (s GetPolicyOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetPolicy = "GetPolicy"
 
@@ -86,7 +37,7 @@ const opGetPolicy = "GetPolicy"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetPolicy
-func (c *Client) GetPolicyRequest(input *GetPolicyInput) GetPolicyRequest {
+func (c *Client) GetPolicyRequest(input *types.GetPolicyInput) GetPolicyRequest {
 	op := &aws.Operation{
 		Name:       opGetPolicy,
 		HTTPMethod: "POST",
@@ -94,10 +45,10 @@ func (c *Client) GetPolicyRequest(input *GetPolicyInput) GetPolicyRequest {
 	}
 
 	if input == nil {
-		input = &GetPolicyInput{}
+		input = &types.GetPolicyInput{}
 	}
 
-	req := c.newRequest(op, input, &GetPolicyOutput{})
+	req := c.newRequest(op, input, &types.GetPolicyOutput{})
 	return GetPolicyRequest{Request: req, Input: input, Copy: c.GetPolicyRequest}
 }
 
@@ -105,8 +56,8 @@ func (c *Client) GetPolicyRequest(input *GetPolicyInput) GetPolicyRequest {
 // GetPolicy API operation.
 type GetPolicyRequest struct {
 	*aws.Request
-	Input *GetPolicyInput
-	Copy  func(*GetPolicyInput) GetPolicyRequest
+	Input *types.GetPolicyInput
+	Copy  func(*types.GetPolicyInput) GetPolicyRequest
 }
 
 // Send marshals and sends the GetPolicy API request.
@@ -118,7 +69,7 @@ func (r GetPolicyRequest) Send(ctx context.Context) (*GetPolicyResponse, error) 
 	}
 
 	resp := &GetPolicyResponse{
-		GetPolicyOutput: r.Request.Data.(*GetPolicyOutput),
+		GetPolicyOutput: r.Request.Data.(*types.GetPolicyOutput),
 		response:        &aws.Response{Request: r.Request},
 	}
 
@@ -128,7 +79,7 @@ func (r GetPolicyRequest) Send(ctx context.Context) (*GetPolicyResponse, error) 
 // GetPolicyResponse is the response type for the
 // GetPolicy API operation.
 type GetPolicyResponse struct {
-	*GetPolicyOutput
+	*types.GetPolicyOutput
 
 	response *aws.Response
 }

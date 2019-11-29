@@ -6,57 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/acm/types"
 )
-
-type DescribeCertificateInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the ACM certificate. The ARN must have
-	// the following form:
-	//
-	// arn:aws:acm:region:123456789012:certificate/12345678-1234-1234-1234-123456789012
-	//
-	// For more information about ARNs, see Amazon Resource Names (ARNs) and AWS
-	// Service Namespaces (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html).
-	//
-	// CertificateArn is a required field
-	CertificateArn *string `min:"20" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeCertificateInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeCertificateInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeCertificateInput"}
-
-	if s.CertificateArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("CertificateArn"))
-	}
-	if s.CertificateArn != nil && len(*s.CertificateArn) < 20 {
-		invalidParams.Add(aws.NewErrParamMinLen("CertificateArn", 20))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribeCertificateOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Metadata about an ACM certificate.
-	Certificate *CertificateDetail `type:"structure"`
-}
-
-// String returns the string representation
-func (s DescribeCertificateOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeCertificate = "DescribeCertificate"
 
@@ -73,7 +24,7 @@ const opDescribeCertificate = "DescribeCertificate"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/DescribeCertificate
-func (c *Client) DescribeCertificateRequest(input *DescribeCertificateInput) DescribeCertificateRequest {
+func (c *Client) DescribeCertificateRequest(input *types.DescribeCertificateInput) DescribeCertificateRequest {
 	op := &aws.Operation{
 		Name:       opDescribeCertificate,
 		HTTPMethod: "POST",
@@ -81,10 +32,10 @@ func (c *Client) DescribeCertificateRequest(input *DescribeCertificateInput) Des
 	}
 
 	if input == nil {
-		input = &DescribeCertificateInput{}
+		input = &types.DescribeCertificateInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeCertificateOutput{})
+	req := c.newRequest(op, input, &types.DescribeCertificateOutput{})
 	return DescribeCertificateRequest{Request: req, Input: input, Copy: c.DescribeCertificateRequest}
 }
 
@@ -92,8 +43,8 @@ func (c *Client) DescribeCertificateRequest(input *DescribeCertificateInput) Des
 // DescribeCertificate API operation.
 type DescribeCertificateRequest struct {
 	*aws.Request
-	Input *DescribeCertificateInput
-	Copy  func(*DescribeCertificateInput) DescribeCertificateRequest
+	Input *types.DescribeCertificateInput
+	Copy  func(*types.DescribeCertificateInput) DescribeCertificateRequest
 }
 
 // Send marshals and sends the DescribeCertificate API request.
@@ -105,7 +56,7 @@ func (r DescribeCertificateRequest) Send(ctx context.Context) (*DescribeCertific
 	}
 
 	resp := &DescribeCertificateResponse{
-		DescribeCertificateOutput: r.Request.Data.(*DescribeCertificateOutput),
+		DescribeCertificateOutput: r.Request.Data.(*types.DescribeCertificateOutput),
 		response:                  &aws.Response{Request: r.Request},
 	}
 
@@ -115,7 +66,7 @@ func (r DescribeCertificateRequest) Send(ctx context.Context) (*DescribeCertific
 // DescribeCertificateResponse is the response type for the
 // DescribeCertificate API operation.
 type DescribeCertificateResponse struct {
-	*DescribeCertificateOutput
+	*types.DescribeCertificateOutput
 
 	response *aws.Response
 }

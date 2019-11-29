@@ -4,94 +4,10 @@ package servicecatalog
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/types"
 )
-
-type UpdatePortfolioInput struct {
-	_ struct{} `type:"structure"`
-
-	// The language code.
-	//
-	//    * en - English (default)
-	//
-	//    * jp - Japanese
-	//
-	//    * zh - Chinese
-	AcceptLanguage *string `type:"string"`
-
-	// The tags to add.
-	AddTags []Tag `type:"list"`
-
-	// The updated description of the portfolio.
-	Description *string `type:"string"`
-
-	// The name to use for display purposes.
-	DisplayName *string `min:"1" type:"string"`
-
-	// The portfolio identifier.
-	//
-	// Id is a required field
-	Id *string `min:"1" type:"string" required:"true"`
-
-	// The updated name of the portfolio provider.
-	ProviderName *string `min:"1" type:"string"`
-
-	// The tags to remove.
-	RemoveTags []string `type:"list"`
-}
-
-// String returns the string representation
-func (s UpdatePortfolioInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdatePortfolioInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdatePortfolioInput"}
-	if s.DisplayName != nil && len(*s.DisplayName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("DisplayName", 1))
-	}
-
-	if s.Id == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Id"))
-	}
-	if s.Id != nil && len(*s.Id) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Id", 1))
-	}
-	if s.ProviderName != nil && len(*s.ProviderName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ProviderName", 1))
-	}
-	if s.AddTags != nil {
-		for i, v := range s.AddTags {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "AddTags", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type UpdatePortfolioOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Information about the portfolio.
-	PortfolioDetail *PortfolioDetail `type:"structure"`
-
-	// Information about the tags associated with the portfolio.
-	Tags []Tag `type:"list"`
-}
-
-// String returns the string representation
-func (s UpdatePortfolioOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opUpdatePortfolio = "UpdatePortfolio"
 
@@ -110,7 +26,7 @@ const opUpdatePortfolio = "UpdatePortfolio"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/UpdatePortfolio
-func (c *Client) UpdatePortfolioRequest(input *UpdatePortfolioInput) UpdatePortfolioRequest {
+func (c *Client) UpdatePortfolioRequest(input *types.UpdatePortfolioInput) UpdatePortfolioRequest {
 	op := &aws.Operation{
 		Name:       opUpdatePortfolio,
 		HTTPMethod: "POST",
@@ -118,10 +34,10 @@ func (c *Client) UpdatePortfolioRequest(input *UpdatePortfolioInput) UpdatePortf
 	}
 
 	if input == nil {
-		input = &UpdatePortfolioInput{}
+		input = &types.UpdatePortfolioInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdatePortfolioOutput{})
+	req := c.newRequest(op, input, &types.UpdatePortfolioOutput{})
 	return UpdatePortfolioRequest{Request: req, Input: input, Copy: c.UpdatePortfolioRequest}
 }
 
@@ -129,8 +45,8 @@ func (c *Client) UpdatePortfolioRequest(input *UpdatePortfolioInput) UpdatePortf
 // UpdatePortfolio API operation.
 type UpdatePortfolioRequest struct {
 	*aws.Request
-	Input *UpdatePortfolioInput
-	Copy  func(*UpdatePortfolioInput) UpdatePortfolioRequest
+	Input *types.UpdatePortfolioInput
+	Copy  func(*types.UpdatePortfolioInput) UpdatePortfolioRequest
 }
 
 // Send marshals and sends the UpdatePortfolio API request.
@@ -142,7 +58,7 @@ func (r UpdatePortfolioRequest) Send(ctx context.Context) (*UpdatePortfolioRespo
 	}
 
 	resp := &UpdatePortfolioResponse{
-		UpdatePortfolioOutput: r.Request.Data.(*UpdatePortfolioOutput),
+		UpdatePortfolioOutput: r.Request.Data.(*types.UpdatePortfolioOutput),
 		response:              &aws.Response{Request: r.Request},
 	}
 
@@ -152,7 +68,7 @@ func (r UpdatePortfolioRequest) Send(ctx context.Context) (*UpdatePortfolioRespo
 // UpdatePortfolioResponse is the response type for the
 // UpdatePortfolio API operation.
 type UpdatePortfolioResponse struct {
-	*UpdatePortfolioOutput
+	*types.UpdatePortfolioOutput
 
 	response *aws.Response
 }

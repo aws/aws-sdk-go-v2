@@ -6,47 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/directoryservice/types"
 )
-
-// Contains the inputs for the DisableRadius operation.
-type DisableRadiusInput struct {
-	_ struct{} `type:"structure"`
-
-	// The identifier of the directory for which to disable MFA.
-	//
-	// DirectoryId is a required field
-	DirectoryId *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DisableRadiusInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DisableRadiusInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DisableRadiusInput"}
-
-	if s.DirectoryId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DirectoryId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Contains the results of the DisableRadius operation.
-type DisableRadiusOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DisableRadiusOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDisableRadius = "DisableRadius"
 
@@ -65,7 +26,7 @@ const opDisableRadius = "DisableRadius"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DisableRadius
-func (c *Client) DisableRadiusRequest(input *DisableRadiusInput) DisableRadiusRequest {
+func (c *Client) DisableRadiusRequest(input *types.DisableRadiusInput) DisableRadiusRequest {
 	op := &aws.Operation{
 		Name:       opDisableRadius,
 		HTTPMethod: "POST",
@@ -73,10 +34,10 @@ func (c *Client) DisableRadiusRequest(input *DisableRadiusInput) DisableRadiusRe
 	}
 
 	if input == nil {
-		input = &DisableRadiusInput{}
+		input = &types.DisableRadiusInput{}
 	}
 
-	req := c.newRequest(op, input, &DisableRadiusOutput{})
+	req := c.newRequest(op, input, &types.DisableRadiusOutput{})
 	return DisableRadiusRequest{Request: req, Input: input, Copy: c.DisableRadiusRequest}
 }
 
@@ -84,8 +45,8 @@ func (c *Client) DisableRadiusRequest(input *DisableRadiusInput) DisableRadiusRe
 // DisableRadius API operation.
 type DisableRadiusRequest struct {
 	*aws.Request
-	Input *DisableRadiusInput
-	Copy  func(*DisableRadiusInput) DisableRadiusRequest
+	Input *types.DisableRadiusInput
+	Copy  func(*types.DisableRadiusInput) DisableRadiusRequest
 }
 
 // Send marshals and sends the DisableRadius API request.
@@ -97,7 +58,7 @@ func (r DisableRadiusRequest) Send(ctx context.Context) (*DisableRadiusResponse,
 	}
 
 	resp := &DisableRadiusResponse{
-		DisableRadiusOutput: r.Request.Data.(*DisableRadiusOutput),
+		DisableRadiusOutput: r.Request.Data.(*types.DisableRadiusOutput),
 		response:            &aws.Response{Request: r.Request},
 	}
 
@@ -107,7 +68,7 @@ func (r DisableRadiusRequest) Send(ctx context.Context) (*DisableRadiusResponse,
 // DisableRadiusResponse is the response type for the
 // DisableRadius API operation.
 type DisableRadiusResponse struct {
-	*DisableRadiusOutput
+	*types.DisableRadiusOutput
 
 	response *aws.Response
 }

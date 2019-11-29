@@ -6,95 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/costexplorer/types"
 )
-
-type GetRightsizingRecommendationInput struct {
-	_ struct{} `type:"structure"`
-
-	// Use Expression to filter by cost or by usage. There are two patterns:
-	//
-	//    * Simple dimension values - You can set the dimension name and values
-	//    for the filters that you plan to use. For example, you can filter for
-	//    REGION==us-east-1 OR REGION==us-west-1. The Expression for that looks
-	//    like this: { "Dimensions": { "Key": "REGION", "Values": [ "us-east-1",
-	//    “us-west-1” ] } } The list of dimension values are OR'd together to
-	//    retrieve cost or usage data. You can create Expression and DimensionValues
-	//    objects using either with* methods or set* methods in multiple lines.
-	//
-	//    * Compound dimension values with logical operations - You can use multiple
-	//    Expression types and the logical operators AND/OR/NOT to create a list
-	//    of one or more Expression objects. This allows you to filter on more advanced
-	//    options. For example, you can filter on ((REGION == us-east-1 OR REGION
-	//    == us-west-1) OR (TAG.Type == Type1)) AND (USAGE_TYPE != DataTransfer).
-	//    The Expression for that looks like this: { "And": [ {"Or": [ {"Dimensions":
-	//    { "Key": "REGION", "Values": [ "us-east-1", "us-west-1" ] }}, {"Tags":
-	//    { "Key": "TagName", "Values": ["Value1"] } } ]}, {"Not": {"Dimensions":
-	//    { "Key": "USAGE_TYPE", "Values": ["DataTransfer"] }}} ] } Because each
-	//    Expression can have only one operator, the service returns an error if
-	//    more than one is specified. The following example shows an Expression
-	//    object that creates an error. { "And": [ ... ], "DimensionValues": { "Dimension":
-	//    "USAGE_TYPE", "Values": [ "DataTransfer" ] } }
-	//
-	// For GetRightsizingRecommendation action, a combination of OR and NOT is not
-	// supported. OR is not supported between different dimensions, or dimensions
-	// and tags. NOT operators aren't supported. Dimentions are also limited to
-	// LINKED_ACCOUNT, REGION, or RIGHTSIZING_TYPE.
-	Filter *Expression `type:"structure"`
-
-	// The pagination token that indicates the next set of results that you want
-	// to retrieve.
-	NextPageToken *string `type:"string"`
-
-	// The number of recommendations that you want returned in a single response
-	// object.
-	PageSize *int64 `type:"integer"`
-
-	// The specific service that you want recommendations for.
-	//
-	// Service is a required field
-	Service *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetRightsizingRecommendationInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetRightsizingRecommendationInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetRightsizingRecommendationInput"}
-
-	if s.Service == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Service"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type GetRightsizingRecommendationOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Information regarding this specific recommendation set.
-	Metadata *RightsizingRecommendationMetadata `type:"structure"`
-
-	// The token to retrieve the next set of results.
-	NextPageToken *string `type:"string"`
-
-	// Recommendations to rightsize resources.
-	RightsizingRecommendations []RightsizingRecommendation `type:"list"`
-
-	// Summary of this recommendation set.
-	Summary *RightsizingRecommendationSummary `type:"structure"`
-}
-
-// String returns the string representation
-func (s GetRightsizingRecommendationOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetRightsizingRecommendation = "GetRightsizingRecommendation"
 
@@ -116,7 +29,7 @@ const opGetRightsizingRecommendation = "GetRightsizingRecommendation"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/GetRightsizingRecommendation
-func (c *Client) GetRightsizingRecommendationRequest(input *GetRightsizingRecommendationInput) GetRightsizingRecommendationRequest {
+func (c *Client) GetRightsizingRecommendationRequest(input *types.GetRightsizingRecommendationInput) GetRightsizingRecommendationRequest {
 	op := &aws.Operation{
 		Name:       opGetRightsizingRecommendation,
 		HTTPMethod: "POST",
@@ -124,10 +37,10 @@ func (c *Client) GetRightsizingRecommendationRequest(input *GetRightsizingRecomm
 	}
 
 	if input == nil {
-		input = &GetRightsizingRecommendationInput{}
+		input = &types.GetRightsizingRecommendationInput{}
 	}
 
-	req := c.newRequest(op, input, &GetRightsizingRecommendationOutput{})
+	req := c.newRequest(op, input, &types.GetRightsizingRecommendationOutput{})
 	return GetRightsizingRecommendationRequest{Request: req, Input: input, Copy: c.GetRightsizingRecommendationRequest}
 }
 
@@ -135,8 +48,8 @@ func (c *Client) GetRightsizingRecommendationRequest(input *GetRightsizingRecomm
 // GetRightsizingRecommendation API operation.
 type GetRightsizingRecommendationRequest struct {
 	*aws.Request
-	Input *GetRightsizingRecommendationInput
-	Copy  func(*GetRightsizingRecommendationInput) GetRightsizingRecommendationRequest
+	Input *types.GetRightsizingRecommendationInput
+	Copy  func(*types.GetRightsizingRecommendationInput) GetRightsizingRecommendationRequest
 }
 
 // Send marshals and sends the GetRightsizingRecommendation API request.
@@ -148,7 +61,7 @@ func (r GetRightsizingRecommendationRequest) Send(ctx context.Context) (*GetRigh
 	}
 
 	resp := &GetRightsizingRecommendationResponse{
-		GetRightsizingRecommendationOutput: r.Request.Data.(*GetRightsizingRecommendationOutput),
+		GetRightsizingRecommendationOutput: r.Request.Data.(*types.GetRightsizingRecommendationOutput),
 		response:                           &aws.Response{Request: r.Request},
 	}
 
@@ -158,7 +71,7 @@ func (r GetRightsizingRecommendationRequest) Send(ctx context.Context) (*GetRigh
 // GetRightsizingRecommendationResponse is the response type for the
 // GetRightsizingRecommendation API operation.
 type GetRightsizingRecommendationResponse struct {
-	*GetRightsizingRecommendationOutput
+	*types.GetRightsizingRecommendationOutput
 
 	response *aws.Response
 }

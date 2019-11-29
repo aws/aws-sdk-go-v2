@@ -10,6 +10,7 @@ package macieiface
 
 import (
 	"github.com/aws/aws-sdk-go-v2/service/macie"
+	"github.com/aws/aws-sdk-go-v2/service/macie/types"
 )
 
 // ClientAPI provides an interface to enable mocking the
@@ -43,7 +44,7 @@ import (
 //    type mockClientClient struct {
 //        macieiface.ClientPI
 //    }
-//    func (m *mockClientClient) AssociateMemberAccount(input *macie.AssociateMemberAccountInput) (*macie.AssociateMemberAccountOutput, error) {
+//    func (m *mockClientClient) AssociateMemberAccount(input *types.AssociateMemberAccountInput) (*types.AssociateMemberAccountOutput, error) {
 //        // mock response/functionality
 //    }
 //
@@ -61,19 +62,19 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type ClientAPI interface {
-	AssociateMemberAccountRequest(*macie.AssociateMemberAccountInput) macie.AssociateMemberAccountRequest
+	AssociateMemberAccountRequest(*types.AssociateMemberAccountInput) macie.AssociateMemberAccountRequest
 
-	AssociateS3ResourcesRequest(*macie.AssociateS3ResourcesInput) macie.AssociateS3ResourcesRequest
+	AssociateS3ResourcesRequest(*types.AssociateS3ResourcesInput) macie.AssociateS3ResourcesRequest
 
-	DisassociateMemberAccountRequest(*macie.DisassociateMemberAccountInput) macie.DisassociateMemberAccountRequest
+	DisassociateMemberAccountRequest(*types.DisassociateMemberAccountInput) macie.DisassociateMemberAccountRequest
 
-	DisassociateS3ResourcesRequest(*macie.DisassociateS3ResourcesInput) macie.DisassociateS3ResourcesRequest
+	DisassociateS3ResourcesRequest(*types.DisassociateS3ResourcesInput) macie.DisassociateS3ResourcesRequest
 
-	ListMemberAccountsRequest(*macie.ListMemberAccountsInput) macie.ListMemberAccountsRequest
+	ListMemberAccountsRequest(*types.ListMemberAccountsInput) macie.ListMemberAccountsRequest
 
-	ListS3ResourcesRequest(*macie.ListS3ResourcesInput) macie.ListS3ResourcesRequest
+	ListS3ResourcesRequest(*types.ListS3ResourcesInput) macie.ListS3ResourcesRequest
 
-	UpdateS3ResourcesRequest(*macie.UpdateS3ResourcesInput) macie.UpdateS3ResourcesRequest
+	UpdateS3ResourcesRequest(*types.UpdateS3ResourcesInput) macie.UpdateS3ResourcesRequest
 }
 
 var _ ClientAPI = (*macie.Client)(nil)

@@ -6,77 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/health/types"
 )
-
-type DescribeEventTypesInput struct {
-	_ struct{} `type:"structure"`
-
-	// Values to narrow the results returned.
-	Filter *EventTypeFilter `locationName:"filter" type:"structure"`
-
-	// The locale (language) to return information in. English (en) is the default
-	// and the only supported value at this time.
-	Locale *string `locationName:"locale" min:"2" type:"string"`
-
-	// The maximum number of items to return in one batch, between 10 and 100, inclusive.
-	MaxResults *int64 `locationName:"maxResults" min:"10" type:"integer"`
-
-	// If the results of a search are large, only a portion of the results are returned,
-	// and a nextToken pagination token is returned in the response. To retrieve
-	// the next batch of results, reissue the search request and include the returned
-	// token. When all results have been returned, the response does not contain
-	// a pagination token value.
-	NextToken *string `locationName:"nextToken" type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeEventTypesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeEventTypesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeEventTypesInput"}
-	if s.Locale != nil && len(*s.Locale) < 2 {
-		invalidParams.Add(aws.NewErrParamMinLen("Locale", 2))
-	}
-	if s.MaxResults != nil && *s.MaxResults < 10 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 10))
-	}
-	if s.Filter != nil {
-		if err := s.Filter.Validate(); err != nil {
-			invalidParams.AddNested("Filter", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribeEventTypesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A list of event types that match the filter criteria. Event types have a
-	// category (issue, accountNotification, or scheduledChange), a service (for
-	// example, EC2, RDS, DATAPIPELINE, BILLING), and a code (in the format AWS_SERVICE_DESCRIPTION
-	// ; for example, AWS_EC2_SYSTEM_MAINTENANCE_EVENT).
-	EventTypes []EventType `locationName:"eventTypes" type:"list"`
-
-	// If the results of a search are large, only a portion of the results are returned,
-	// and a nextToken pagination token is returned in the response. To retrieve
-	// the next batch of results, reissue the search request and include the returned
-	// token. When all results have been returned, the response does not contain
-	// a pagination token value.
-	NextToken *string `locationName:"nextToken" type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeEventTypesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeEventTypes = "DescribeEventTypes"
 
@@ -94,7 +25,7 @@ const opDescribeEventTypes = "DescribeEventTypes"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/health-2016-08-04/DescribeEventTypes
-func (c *Client) DescribeEventTypesRequest(input *DescribeEventTypesInput) DescribeEventTypesRequest {
+func (c *Client) DescribeEventTypesRequest(input *types.DescribeEventTypesInput) DescribeEventTypesRequest {
 	op := &aws.Operation{
 		Name:       opDescribeEventTypes,
 		HTTPMethod: "POST",
@@ -108,10 +39,10 @@ func (c *Client) DescribeEventTypesRequest(input *DescribeEventTypesInput) Descr
 	}
 
 	if input == nil {
-		input = &DescribeEventTypesInput{}
+		input = &types.DescribeEventTypesInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeEventTypesOutput{})
+	req := c.newRequest(op, input, &types.DescribeEventTypesOutput{})
 	return DescribeEventTypesRequest{Request: req, Input: input, Copy: c.DescribeEventTypesRequest}
 }
 
@@ -119,8 +50,8 @@ func (c *Client) DescribeEventTypesRequest(input *DescribeEventTypesInput) Descr
 // DescribeEventTypes API operation.
 type DescribeEventTypesRequest struct {
 	*aws.Request
-	Input *DescribeEventTypesInput
-	Copy  func(*DescribeEventTypesInput) DescribeEventTypesRequest
+	Input *types.DescribeEventTypesInput
+	Copy  func(*types.DescribeEventTypesInput) DescribeEventTypesRequest
 }
 
 // Send marshals and sends the DescribeEventTypes API request.
@@ -132,7 +63,7 @@ func (r DescribeEventTypesRequest) Send(ctx context.Context) (*DescribeEventType
 	}
 
 	resp := &DescribeEventTypesResponse{
-		DescribeEventTypesOutput: r.Request.Data.(*DescribeEventTypesOutput),
+		DescribeEventTypesOutput: r.Request.Data.(*types.DescribeEventTypesOutput),
 		response:                 &aws.Response{Request: r.Request},
 	}
 
@@ -162,7 +93,7 @@ func NewDescribeEventTypesPaginator(req DescribeEventTypesRequest) DescribeEvent
 	return DescribeEventTypesPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *DescribeEventTypesInput
+				var inCpy *types.DescribeEventTypesInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -182,14 +113,14 @@ type DescribeEventTypesPaginator struct {
 	aws.Pager
 }
 
-func (p *DescribeEventTypesPaginator) CurrentPage() *DescribeEventTypesOutput {
-	return p.Pager.CurrentPage().(*DescribeEventTypesOutput)
+func (p *DescribeEventTypesPaginator) CurrentPage() *types.DescribeEventTypesOutput {
+	return p.Pager.CurrentPage().(*types.DescribeEventTypesOutput)
 }
 
 // DescribeEventTypesResponse is the response type for the
 // DescribeEventTypes API operation.
 type DescribeEventTypesResponse struct {
-	*DescribeEventTypesOutput
+	*types.DescribeEventTypesOutput
 
 	response *aws.Response
 }

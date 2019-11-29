@@ -6,48 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/alexaforbusiness/types"
 )
-
-type GetGatewayInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ARN of the gateway to get.
-	//
-	// GatewayArn is a required field
-	GatewayArn *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetGatewayInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetGatewayInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetGatewayInput"}
-
-	if s.GatewayArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("GatewayArn"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type GetGatewayOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The details of the gateway.
-	Gateway *Gateway `type:"structure"`
-}
-
-// String returns the string representation
-func (s GetGatewayOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetGateway = "GetGateway"
 
@@ -64,7 +24,7 @@ const opGetGateway = "GetGateway"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/GetGateway
-func (c *Client) GetGatewayRequest(input *GetGatewayInput) GetGatewayRequest {
+func (c *Client) GetGatewayRequest(input *types.GetGatewayInput) GetGatewayRequest {
 	op := &aws.Operation{
 		Name:       opGetGateway,
 		HTTPMethod: "POST",
@@ -72,10 +32,10 @@ func (c *Client) GetGatewayRequest(input *GetGatewayInput) GetGatewayRequest {
 	}
 
 	if input == nil {
-		input = &GetGatewayInput{}
+		input = &types.GetGatewayInput{}
 	}
 
-	req := c.newRequest(op, input, &GetGatewayOutput{})
+	req := c.newRequest(op, input, &types.GetGatewayOutput{})
 	return GetGatewayRequest{Request: req, Input: input, Copy: c.GetGatewayRequest}
 }
 
@@ -83,8 +43,8 @@ func (c *Client) GetGatewayRequest(input *GetGatewayInput) GetGatewayRequest {
 // GetGateway API operation.
 type GetGatewayRequest struct {
 	*aws.Request
-	Input *GetGatewayInput
-	Copy  func(*GetGatewayInput) GetGatewayRequest
+	Input *types.GetGatewayInput
+	Copy  func(*types.GetGatewayInput) GetGatewayRequest
 }
 
 // Send marshals and sends the GetGateway API request.
@@ -96,7 +56,7 @@ func (r GetGatewayRequest) Send(ctx context.Context) (*GetGatewayResponse, error
 	}
 
 	resp := &GetGatewayResponse{
-		GetGatewayOutput: r.Request.Data.(*GetGatewayOutput),
+		GetGatewayOutput: r.Request.Data.(*types.GetGatewayOutput),
 		response:         &aws.Response{Request: r.Request},
 	}
 
@@ -106,7 +66,7 @@ func (r GetGatewayRequest) Send(ctx context.Context) (*GetGatewayResponse, error
 // GetGatewayResponse is the response type for the
 // GetGateway API operation.
 type GetGatewayResponse struct {
-	*GetGatewayOutput
+	*types.GetGatewayOutput
 
 	response *aws.Response
 }

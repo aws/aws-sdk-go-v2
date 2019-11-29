@@ -13,6 +13,7 @@ import (
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/appstream"
+	"github.com/aws/aws-sdk-go-v2/service/appstream/types"
 )
 
 // ClientAPI provides an interface to enable mocking the
@@ -46,7 +47,7 @@ import (
 //    type mockClientClient struct {
 //        appstreamiface.ClientPI
 //    }
-//    func (m *mockClientClient) AssociateFleet(input *appstream.AssociateFleetInput) (*appstream.AssociateFleetOutput, error) {
+//    func (m *mockClientClient) AssociateFleet(input *types.AssociateFleetInput) (*types.AssociateFleetOutput, error) {
 //        // mock response/functionality
 //    }
 //
@@ -64,103 +65,103 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type ClientAPI interface {
-	AssociateFleetRequest(*appstream.AssociateFleetInput) appstream.AssociateFleetRequest
+	AssociateFleetRequest(*types.AssociateFleetInput) appstream.AssociateFleetRequest
 
-	BatchAssociateUserStackRequest(*appstream.BatchAssociateUserStackInput) appstream.BatchAssociateUserStackRequest
+	BatchAssociateUserStackRequest(*types.BatchAssociateUserStackInput) appstream.BatchAssociateUserStackRequest
 
-	BatchDisassociateUserStackRequest(*appstream.BatchDisassociateUserStackInput) appstream.BatchDisassociateUserStackRequest
+	BatchDisassociateUserStackRequest(*types.BatchDisassociateUserStackInput) appstream.BatchDisassociateUserStackRequest
 
-	CopyImageRequest(*appstream.CopyImageInput) appstream.CopyImageRequest
+	CopyImageRequest(*types.CopyImageInput) appstream.CopyImageRequest
 
-	CreateDirectoryConfigRequest(*appstream.CreateDirectoryConfigInput) appstream.CreateDirectoryConfigRequest
+	CreateDirectoryConfigRequest(*types.CreateDirectoryConfigInput) appstream.CreateDirectoryConfigRequest
 
-	CreateFleetRequest(*appstream.CreateFleetInput) appstream.CreateFleetRequest
+	CreateFleetRequest(*types.CreateFleetInput) appstream.CreateFleetRequest
 
-	CreateImageBuilderRequest(*appstream.CreateImageBuilderInput) appstream.CreateImageBuilderRequest
+	CreateImageBuilderRequest(*types.CreateImageBuilderInput) appstream.CreateImageBuilderRequest
 
-	CreateImageBuilderStreamingURLRequest(*appstream.CreateImageBuilderStreamingURLInput) appstream.CreateImageBuilderStreamingURLRequest
+	CreateImageBuilderStreamingURLRequest(*types.CreateImageBuilderStreamingURLInput) appstream.CreateImageBuilderStreamingURLRequest
 
-	CreateStackRequest(*appstream.CreateStackInput) appstream.CreateStackRequest
+	CreateStackRequest(*types.CreateStackInput) appstream.CreateStackRequest
 
-	CreateStreamingURLRequest(*appstream.CreateStreamingURLInput) appstream.CreateStreamingURLRequest
+	CreateStreamingURLRequest(*types.CreateStreamingURLInput) appstream.CreateStreamingURLRequest
 
-	CreateUsageReportSubscriptionRequest(*appstream.CreateUsageReportSubscriptionInput) appstream.CreateUsageReportSubscriptionRequest
+	CreateUsageReportSubscriptionRequest(*types.CreateUsageReportSubscriptionInput) appstream.CreateUsageReportSubscriptionRequest
 
-	CreateUserRequest(*appstream.CreateUserInput) appstream.CreateUserRequest
+	CreateUserRequest(*types.CreateUserInput) appstream.CreateUserRequest
 
-	DeleteDirectoryConfigRequest(*appstream.DeleteDirectoryConfigInput) appstream.DeleteDirectoryConfigRequest
+	DeleteDirectoryConfigRequest(*types.DeleteDirectoryConfigInput) appstream.DeleteDirectoryConfigRequest
 
-	DeleteFleetRequest(*appstream.DeleteFleetInput) appstream.DeleteFleetRequest
+	DeleteFleetRequest(*types.DeleteFleetInput) appstream.DeleteFleetRequest
 
-	DeleteImageRequest(*appstream.DeleteImageInput) appstream.DeleteImageRequest
+	DeleteImageRequest(*types.DeleteImageInput) appstream.DeleteImageRequest
 
-	DeleteImageBuilderRequest(*appstream.DeleteImageBuilderInput) appstream.DeleteImageBuilderRequest
+	DeleteImageBuilderRequest(*types.DeleteImageBuilderInput) appstream.DeleteImageBuilderRequest
 
-	DeleteImagePermissionsRequest(*appstream.DeleteImagePermissionsInput) appstream.DeleteImagePermissionsRequest
+	DeleteImagePermissionsRequest(*types.DeleteImagePermissionsInput) appstream.DeleteImagePermissionsRequest
 
-	DeleteStackRequest(*appstream.DeleteStackInput) appstream.DeleteStackRequest
+	DeleteStackRequest(*types.DeleteStackInput) appstream.DeleteStackRequest
 
-	DeleteUsageReportSubscriptionRequest(*appstream.DeleteUsageReportSubscriptionInput) appstream.DeleteUsageReportSubscriptionRequest
+	DeleteUsageReportSubscriptionRequest(*types.DeleteUsageReportSubscriptionInput) appstream.DeleteUsageReportSubscriptionRequest
 
-	DeleteUserRequest(*appstream.DeleteUserInput) appstream.DeleteUserRequest
+	DeleteUserRequest(*types.DeleteUserInput) appstream.DeleteUserRequest
 
-	DescribeDirectoryConfigsRequest(*appstream.DescribeDirectoryConfigsInput) appstream.DescribeDirectoryConfigsRequest
+	DescribeDirectoryConfigsRequest(*types.DescribeDirectoryConfigsInput) appstream.DescribeDirectoryConfigsRequest
 
-	DescribeFleetsRequest(*appstream.DescribeFleetsInput) appstream.DescribeFleetsRequest
+	DescribeFleetsRequest(*types.DescribeFleetsInput) appstream.DescribeFleetsRequest
 
-	DescribeImageBuildersRequest(*appstream.DescribeImageBuildersInput) appstream.DescribeImageBuildersRequest
+	DescribeImageBuildersRequest(*types.DescribeImageBuildersInput) appstream.DescribeImageBuildersRequest
 
-	DescribeImagePermissionsRequest(*appstream.DescribeImagePermissionsInput) appstream.DescribeImagePermissionsRequest
+	DescribeImagePermissionsRequest(*types.DescribeImagePermissionsInput) appstream.DescribeImagePermissionsRequest
 
-	DescribeImagesRequest(*appstream.DescribeImagesInput) appstream.DescribeImagesRequest
+	DescribeImagesRequest(*types.DescribeImagesInput) appstream.DescribeImagesRequest
 
-	DescribeSessionsRequest(*appstream.DescribeSessionsInput) appstream.DescribeSessionsRequest
+	DescribeSessionsRequest(*types.DescribeSessionsInput) appstream.DescribeSessionsRequest
 
-	DescribeStacksRequest(*appstream.DescribeStacksInput) appstream.DescribeStacksRequest
+	DescribeStacksRequest(*types.DescribeStacksInput) appstream.DescribeStacksRequest
 
-	DescribeUsageReportSubscriptionsRequest(*appstream.DescribeUsageReportSubscriptionsInput) appstream.DescribeUsageReportSubscriptionsRequest
+	DescribeUsageReportSubscriptionsRequest(*types.DescribeUsageReportSubscriptionsInput) appstream.DescribeUsageReportSubscriptionsRequest
 
-	DescribeUserStackAssociationsRequest(*appstream.DescribeUserStackAssociationsInput) appstream.DescribeUserStackAssociationsRequest
+	DescribeUserStackAssociationsRequest(*types.DescribeUserStackAssociationsInput) appstream.DescribeUserStackAssociationsRequest
 
-	DescribeUsersRequest(*appstream.DescribeUsersInput) appstream.DescribeUsersRequest
+	DescribeUsersRequest(*types.DescribeUsersInput) appstream.DescribeUsersRequest
 
-	DisableUserRequest(*appstream.DisableUserInput) appstream.DisableUserRequest
+	DisableUserRequest(*types.DisableUserInput) appstream.DisableUserRequest
 
-	DisassociateFleetRequest(*appstream.DisassociateFleetInput) appstream.DisassociateFleetRequest
+	DisassociateFleetRequest(*types.DisassociateFleetInput) appstream.DisassociateFleetRequest
 
-	EnableUserRequest(*appstream.EnableUserInput) appstream.EnableUserRequest
+	EnableUserRequest(*types.EnableUserInput) appstream.EnableUserRequest
 
-	ExpireSessionRequest(*appstream.ExpireSessionInput) appstream.ExpireSessionRequest
+	ExpireSessionRequest(*types.ExpireSessionInput) appstream.ExpireSessionRequest
 
-	ListAssociatedFleetsRequest(*appstream.ListAssociatedFleetsInput) appstream.ListAssociatedFleetsRequest
+	ListAssociatedFleetsRequest(*types.ListAssociatedFleetsInput) appstream.ListAssociatedFleetsRequest
 
-	ListAssociatedStacksRequest(*appstream.ListAssociatedStacksInput) appstream.ListAssociatedStacksRequest
+	ListAssociatedStacksRequest(*types.ListAssociatedStacksInput) appstream.ListAssociatedStacksRequest
 
-	ListTagsForResourceRequest(*appstream.ListTagsForResourceInput) appstream.ListTagsForResourceRequest
+	ListTagsForResourceRequest(*types.ListTagsForResourceInput) appstream.ListTagsForResourceRequest
 
-	StartFleetRequest(*appstream.StartFleetInput) appstream.StartFleetRequest
+	StartFleetRequest(*types.StartFleetInput) appstream.StartFleetRequest
 
-	StartImageBuilderRequest(*appstream.StartImageBuilderInput) appstream.StartImageBuilderRequest
+	StartImageBuilderRequest(*types.StartImageBuilderInput) appstream.StartImageBuilderRequest
 
-	StopFleetRequest(*appstream.StopFleetInput) appstream.StopFleetRequest
+	StopFleetRequest(*types.StopFleetInput) appstream.StopFleetRequest
 
-	StopImageBuilderRequest(*appstream.StopImageBuilderInput) appstream.StopImageBuilderRequest
+	StopImageBuilderRequest(*types.StopImageBuilderInput) appstream.StopImageBuilderRequest
 
-	TagResourceRequest(*appstream.TagResourceInput) appstream.TagResourceRequest
+	TagResourceRequest(*types.TagResourceInput) appstream.TagResourceRequest
 
-	UntagResourceRequest(*appstream.UntagResourceInput) appstream.UntagResourceRequest
+	UntagResourceRequest(*types.UntagResourceInput) appstream.UntagResourceRequest
 
-	UpdateDirectoryConfigRequest(*appstream.UpdateDirectoryConfigInput) appstream.UpdateDirectoryConfigRequest
+	UpdateDirectoryConfigRequest(*types.UpdateDirectoryConfigInput) appstream.UpdateDirectoryConfigRequest
 
-	UpdateFleetRequest(*appstream.UpdateFleetInput) appstream.UpdateFleetRequest
+	UpdateFleetRequest(*types.UpdateFleetInput) appstream.UpdateFleetRequest
 
-	UpdateImagePermissionsRequest(*appstream.UpdateImagePermissionsInput) appstream.UpdateImagePermissionsRequest
+	UpdateImagePermissionsRequest(*types.UpdateImagePermissionsInput) appstream.UpdateImagePermissionsRequest
 
-	UpdateStackRequest(*appstream.UpdateStackInput) appstream.UpdateStackRequest
+	UpdateStackRequest(*types.UpdateStackInput) appstream.UpdateStackRequest
 
-	WaitUntilFleetStarted(context.Context, *appstream.DescribeFleetsInput, ...aws.WaiterOption) error
+	WaitUntilFleetStarted(context.Context, *types.DescribeFleetsInput, ...aws.WaiterOption) error
 
-	WaitUntilFleetStopped(context.Context, *appstream.DescribeFleetsInput, ...aws.WaiterOption) error
+	WaitUntilFleetStopped(context.Context, *types.DescribeFleetsInput, ...aws.WaiterOption) error
 }
 
 var _ ClientAPI = (*appstream.Client)(nil)

@@ -6,53 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/licensemanager/types"
 )
-
-type UpdateServiceSettingsInput struct {
-	_ struct{} `type:"structure"`
-
-	// Activates cross-account discovery.
-	EnableCrossAccountsDiscovery *bool `type:"boolean"`
-
-	// Integrates AWS Organizations with License Manager for cross-account discovery.
-	OrganizationConfiguration *OrganizationConfiguration `type:"structure"`
-
-	// ARN of the Amazon S3 bucket where License Manager information is stored.
-	S3BucketArn *string `type:"string"`
-
-	// ARN of the Amazon SNS topic used for License Manager alerts.
-	SnsTopicArn *string `type:"string"`
-}
-
-// String returns the string representation
-func (s UpdateServiceSettingsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateServiceSettingsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateServiceSettingsInput"}
-	if s.OrganizationConfiguration != nil {
-		if err := s.OrganizationConfiguration.Validate(); err != nil {
-			invalidParams.AddNested("OrganizationConfiguration", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type UpdateServiceSettingsOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s UpdateServiceSettingsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opUpdateServiceSettings = "UpdateServiceSettings"
 
@@ -69,7 +24,7 @@ const opUpdateServiceSettings = "UpdateServiceSettings"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/license-manager-2018-08-01/UpdateServiceSettings
-func (c *Client) UpdateServiceSettingsRequest(input *UpdateServiceSettingsInput) UpdateServiceSettingsRequest {
+func (c *Client) UpdateServiceSettingsRequest(input *types.UpdateServiceSettingsInput) UpdateServiceSettingsRequest {
 	op := &aws.Operation{
 		Name:       opUpdateServiceSettings,
 		HTTPMethod: "POST",
@@ -77,10 +32,10 @@ func (c *Client) UpdateServiceSettingsRequest(input *UpdateServiceSettingsInput)
 	}
 
 	if input == nil {
-		input = &UpdateServiceSettingsInput{}
+		input = &types.UpdateServiceSettingsInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateServiceSettingsOutput{})
+	req := c.newRequest(op, input, &types.UpdateServiceSettingsOutput{})
 	return UpdateServiceSettingsRequest{Request: req, Input: input, Copy: c.UpdateServiceSettingsRequest}
 }
 
@@ -88,8 +43,8 @@ func (c *Client) UpdateServiceSettingsRequest(input *UpdateServiceSettingsInput)
 // UpdateServiceSettings API operation.
 type UpdateServiceSettingsRequest struct {
 	*aws.Request
-	Input *UpdateServiceSettingsInput
-	Copy  func(*UpdateServiceSettingsInput) UpdateServiceSettingsRequest
+	Input *types.UpdateServiceSettingsInput
+	Copy  func(*types.UpdateServiceSettingsInput) UpdateServiceSettingsRequest
 }
 
 // Send marshals and sends the UpdateServiceSettings API request.
@@ -101,7 +56,7 @@ func (r UpdateServiceSettingsRequest) Send(ctx context.Context) (*UpdateServiceS
 	}
 
 	resp := &UpdateServiceSettingsResponse{
-		UpdateServiceSettingsOutput: r.Request.Data.(*UpdateServiceSettingsOutput),
+		UpdateServiceSettingsOutput: r.Request.Data.(*types.UpdateServiceSettingsOutput),
 		response:                    &aws.Response{Request: r.Request},
 	}
 
@@ -111,7 +66,7 @@ func (r UpdateServiceSettingsRequest) Send(ctx context.Context) (*UpdateServiceS
 // UpdateServiceSettingsResponse is the response type for the
 // UpdateServiceSettings API operation.
 type UpdateServiceSettingsResponse struct {
-	*UpdateServiceSettingsOutput
+	*types.UpdateServiceSettingsOutput
 
 	response *aws.Response
 }

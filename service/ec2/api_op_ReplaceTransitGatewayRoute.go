@@ -6,70 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-type ReplaceTransitGatewayRouteInput struct {
-	_ struct{} `type:"structure"`
-
-	// Indicates whether traffic matching this route is to be dropped.
-	Blackhole *bool `type:"boolean"`
-
-	// The CIDR range used for the destination match. Routing decisions are based
-	// on the most specific match.
-	//
-	// DestinationCidrBlock is a required field
-	DestinationCidrBlock *string `type:"string" required:"true"`
-
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have
-	// the required permissions, the error response is DryRunOperation. Otherwise,
-	// it is UnauthorizedOperation.
-	DryRun *bool `type:"boolean"`
-
-	// The ID of the attachment.
-	TransitGatewayAttachmentId *string `type:"string"`
-
-	// The ID of the route table.
-	//
-	// TransitGatewayRouteTableId is a required field
-	TransitGatewayRouteTableId *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s ReplaceTransitGatewayRouteInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ReplaceTransitGatewayRouteInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ReplaceTransitGatewayRouteInput"}
-
-	if s.DestinationCidrBlock == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DestinationCidrBlock"))
-	}
-
-	if s.TransitGatewayRouteTableId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("TransitGatewayRouteTableId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ReplaceTransitGatewayRouteOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Information about the modified route.
-	Route *TransitGatewayRoute `locationName:"route" type:"structure"`
-}
-
-// String returns the string representation
-func (s ReplaceTransitGatewayRouteOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opReplaceTransitGatewayRoute = "ReplaceTransitGatewayRoute"
 
@@ -86,7 +24,7 @@ const opReplaceTransitGatewayRoute = "ReplaceTransitGatewayRoute"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ReplaceTransitGatewayRoute
-func (c *Client) ReplaceTransitGatewayRouteRequest(input *ReplaceTransitGatewayRouteInput) ReplaceTransitGatewayRouteRequest {
+func (c *Client) ReplaceTransitGatewayRouteRequest(input *types.ReplaceTransitGatewayRouteInput) ReplaceTransitGatewayRouteRequest {
 	op := &aws.Operation{
 		Name:       opReplaceTransitGatewayRoute,
 		HTTPMethod: "POST",
@@ -94,10 +32,10 @@ func (c *Client) ReplaceTransitGatewayRouteRequest(input *ReplaceTransitGatewayR
 	}
 
 	if input == nil {
-		input = &ReplaceTransitGatewayRouteInput{}
+		input = &types.ReplaceTransitGatewayRouteInput{}
 	}
 
-	req := c.newRequest(op, input, &ReplaceTransitGatewayRouteOutput{})
+	req := c.newRequest(op, input, &types.ReplaceTransitGatewayRouteOutput{})
 	return ReplaceTransitGatewayRouteRequest{Request: req, Input: input, Copy: c.ReplaceTransitGatewayRouteRequest}
 }
 
@@ -105,8 +43,8 @@ func (c *Client) ReplaceTransitGatewayRouteRequest(input *ReplaceTransitGatewayR
 // ReplaceTransitGatewayRoute API operation.
 type ReplaceTransitGatewayRouteRequest struct {
 	*aws.Request
-	Input *ReplaceTransitGatewayRouteInput
-	Copy  func(*ReplaceTransitGatewayRouteInput) ReplaceTransitGatewayRouteRequest
+	Input *types.ReplaceTransitGatewayRouteInput
+	Copy  func(*types.ReplaceTransitGatewayRouteInput) ReplaceTransitGatewayRouteRequest
 }
 
 // Send marshals and sends the ReplaceTransitGatewayRoute API request.
@@ -118,7 +56,7 @@ func (r ReplaceTransitGatewayRouteRequest) Send(ctx context.Context) (*ReplaceTr
 	}
 
 	resp := &ReplaceTransitGatewayRouteResponse{
-		ReplaceTransitGatewayRouteOutput: r.Request.Data.(*ReplaceTransitGatewayRouteOutput),
+		ReplaceTransitGatewayRouteOutput: r.Request.Data.(*types.ReplaceTransitGatewayRouteOutput),
 		response:                         &aws.Response{Request: r.Request},
 	}
 
@@ -128,7 +66,7 @@ func (r ReplaceTransitGatewayRouteRequest) Send(ctx context.Context) (*ReplaceTr
 // ReplaceTransitGatewayRouteResponse is the response type for the
 // ReplaceTransitGatewayRoute API operation.
 type ReplaceTransitGatewayRouteResponse struct {
-	*ReplaceTransitGatewayRouteOutput
+	*types.ReplaceTransitGatewayRouteOutput
 
 	response *aws.Response
 }

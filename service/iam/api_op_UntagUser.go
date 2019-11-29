@@ -6,64 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/query"
+	"github.com/aws/aws-sdk-go-v2/service/iam/types"
 )
-
-type UntagUserInput struct {
-	_ struct{} `type:"structure"`
-
-	// A list of key names as a simple array of strings. The tags with matching
-	// keys are removed from the specified user.
-	//
-	// TagKeys is a required field
-	TagKeys []string `type:"list" required:"true"`
-
-	// The name of the IAM user from which you want to remove tags.
-	//
-	// This parameter accepts (through its regex pattern (http://wikipedia.org/wiki/regex))
-	// a string of characters that consist of upper and lowercase alphanumeric characters
-	// with no spaces. You can also include any of the following characters: =,.@-
-	//
-	// UserName is a required field
-	UserName *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s UntagUserInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UntagUserInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UntagUserInput"}
-
-	if s.TagKeys == nil {
-		invalidParams.Add(aws.NewErrParamRequired("TagKeys"))
-	}
-
-	if s.UserName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("UserName"))
-	}
-	if s.UserName != nil && len(*s.UserName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("UserName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type UntagUserOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s UntagUserOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opUntagUser = "UntagUser"
 
@@ -82,7 +28,7 @@ const opUntagUser = "UntagUser"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/UntagUser
-func (c *Client) UntagUserRequest(input *UntagUserInput) UntagUserRequest {
+func (c *Client) UntagUserRequest(input *types.UntagUserInput) UntagUserRequest {
 	op := &aws.Operation{
 		Name:       opUntagUser,
 		HTTPMethod: "POST",
@@ -90,10 +36,10 @@ func (c *Client) UntagUserRequest(input *UntagUserInput) UntagUserRequest {
 	}
 
 	if input == nil {
-		input = &UntagUserInput{}
+		input = &types.UntagUserInput{}
 	}
 
-	req := c.newRequest(op, input, &UntagUserOutput{})
+	req := c.newRequest(op, input, &types.UntagUserOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return UntagUserRequest{Request: req, Input: input, Copy: c.UntagUserRequest}
@@ -103,8 +49,8 @@ func (c *Client) UntagUserRequest(input *UntagUserInput) UntagUserRequest {
 // UntagUser API operation.
 type UntagUserRequest struct {
 	*aws.Request
-	Input *UntagUserInput
-	Copy  func(*UntagUserInput) UntagUserRequest
+	Input *types.UntagUserInput
+	Copy  func(*types.UntagUserInput) UntagUserRequest
 }
 
 // Send marshals and sends the UntagUser API request.
@@ -116,7 +62,7 @@ func (r UntagUserRequest) Send(ctx context.Context) (*UntagUserResponse, error) 
 	}
 
 	resp := &UntagUserResponse{
-		UntagUserOutput: r.Request.Data.(*UntagUserOutput),
+		UntagUserOutput: r.Request.Data.(*types.UntagUserOutput),
 		response:        &aws.Response{Request: r.Request},
 	}
 
@@ -126,7 +72,7 @@ func (r UntagUserRequest) Send(ctx context.Context) (*UntagUserResponse, error) 
 // UntagUserResponse is the response type for the
 // UntagUser API operation.
 type UntagUserResponse struct {
-	*UntagUserOutput
+	*types.UntagUserOutput
 
 	response *aws.Response
 }

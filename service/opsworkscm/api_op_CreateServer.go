@@ -6,206 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/opsworkscm/types"
 )
-
-type CreateServerInput struct {
-	_ struct{} `type:"structure"`
-
-	// Associate a public IP address with a server that you are launching. Valid
-	// values are true or false. The default value is true.
-	AssociatePublicIpAddress *bool `type:"boolean"`
-
-	// If you specify this field, AWS OpsWorks CM creates the server by using the
-	// backup represented by BackupId.
-	BackupId *string `type:"string"`
-
-	// The number of automated backups that you want to keep. Whenever a new backup
-	// is created, AWS OpsWorks CM deletes the oldest backups if this number is
-	// exceeded. The default value is 1.
-	BackupRetentionCount *int64 `min:"1" type:"integer"`
-
-	// Enable or disable scheduled backups. Valid values are true or false. The
-	// default value is true.
-	DisableAutomatedBackup *bool `type:"boolean"`
-
-	// The configuration management engine to use. Valid values include ChefAutomate
-	// and Puppet.
-	Engine *string `type:"string"`
-
-	// Optional engine attributes on a specified server.
-	//
-	// Attributes accepted in a Chef createServer request:
-	//
-	//    * CHEF_AUTOMATE_PIVOTAL_KEY: A base64-encoded RSA public key. The corresponding
-	//    private key is required to access the Chef API. When no CHEF_AUTOMATE_PIVOTAL_KEY
-	//    is set, a private key is generated and returned in the response.
-	//
-	//    * CHEF_AUTOMATE_ADMIN_PASSWORD: The password for the administrative user
-	//    in the Chef Automate web-based dashboard. The password length is a minimum
-	//    of eight characters, and a maximum of 32. The password can contain letters,
-	//    numbers, and special characters (!/@#$%^&+=_). The password must contain
-	//    at least one lower case letter, one upper case letter, one number, and
-	//    one special character. When no CHEF_AUTOMATE_ADMIN_PASSWORD is set, one
-	//    is generated and returned in the response.
-	//
-	// Attributes accepted in a Puppet createServer request:
-	//
-	//    * PUPPET_ADMIN_PASSWORD: To work with the Puppet Enterprise console, a
-	//    password must use ASCII characters.
-	//
-	//    * PUPPET_R10K_REMOTE: The r10k remote is the URL of your control repository
-	//    (for example, ssh://git@your.git-repo.com:user/control-repo.git). Specifying
-	//    an r10k remote opens TCP port 8170.
-	//
-	//    * PUPPET_R10K_PRIVATE_KEY: If you are using a private Git repository,
-	//    add PUPPET_R10K_PRIVATE_KEY to specify a PEM-encoded private SSH key.
-	EngineAttributes []EngineAttribute `type:"list"`
-
-	// The engine model of the server. Valid values in this release include Monolithic
-	// for Puppet and Single for Chef.
-	EngineModel *string `type:"string"`
-
-	// The major release version of the engine that you want to use. For a Chef
-	// server, the valid value for EngineVersion is currently 12. For a Puppet server,
-	// the valid value is 2017.
-	EngineVersion *string `type:"string"`
-
-	// The ARN of the instance profile that your Amazon EC2 instances use. Although
-	// the AWS OpsWorks console typically creates the instance profile for you,
-	// if you are using API commands instead, run the service-role-creation.yaml
-	// AWS CloudFormation template, located at https://s3.amazonaws.com/opsworks-cm-us-east-1-prod-default-assets/misc/opsworks-cm-roles.yaml.
-	// This template creates a CloudFormation stack that includes the instance profile
-	// you need.
-	//
-	// InstanceProfileArn is a required field
-	InstanceProfileArn *string `type:"string" required:"true"`
-
-	// The Amazon EC2 instance type to use. For example, m5.large.
-	//
-	// InstanceType is a required field
-	InstanceType *string `type:"string" required:"true"`
-
-	// The Amazon EC2 key pair to set for the instance. This parameter is optional;
-	// if desired, you may specify this parameter to connect to your instances by
-	// using SSH.
-	KeyPair *string `type:"string"`
-
-	// The start time for a one-hour period during which AWS OpsWorks CM backs up
-	// application-level data on your server if automated backups are enabled. Valid
-	// values must be specified in one of the following formats:
-	//
-	//    * HH:MM for daily backups
-	//
-	//    * DDD:HH:MM for weekly backups
-	//
-	// The specified time is in coordinated universal time (UTC). The default value
-	// is a random, daily start time.
-	//
-	// Example: 08:00, which represents a daily start time of 08:00 UTC.
-	//
-	// Example: Mon:08:00, which represents a start time of every Monday at 08:00
-	// UTC. (8:00 a.m.)
-	PreferredBackupWindow *string `type:"string"`
-
-	// The start time for a one-hour period each week during which AWS OpsWorks
-	// CM performs maintenance on the instance. Valid values must be specified in
-	// the following format: DDD:HH:MM. The specified time is in coordinated universal
-	// time (UTC). The default value is a random one-hour period on Tuesday, Wednesday,
-	// or Friday. See TimeWindowDefinition for more information.
-	//
-	// Example: Mon:08:00, which represents a start time of every Monday at 08:00
-	// UTC. (8:00 a.m.)
-	PreferredMaintenanceWindow *string `type:"string"`
-
-	// A list of security group IDs to attach to the Amazon EC2 instance. If you
-	// add this parameter, the specified security groups must be within the VPC
-	// that is specified by SubnetIds.
-	//
-	// If you do not specify this parameter, AWS OpsWorks CM creates one new security
-	// group that uses TCP ports 22 and 443, open to 0.0.0.0/0 (everyone).
-	SecurityGroupIds []string `type:"list"`
-
-	// The name of the server. The server name must be unique within your AWS account,
-	// within each region. Server names must start with a letter; then letters,
-	// numbers, or hyphens (-) are allowed, up to a maximum of 40 characters.
-	//
-	// ServerName is a required field
-	ServerName *string `min:"1" type:"string" required:"true"`
-
-	// The service role that the AWS OpsWorks CM service backend uses to work with
-	// your account. Although the AWS OpsWorks management console typically creates
-	// the service role for you, if you are using the AWS CLI or API commands, run
-	// the service-role-creation.yaml AWS CloudFormation template, located at https://s3.amazonaws.com/opsworks-cm-us-east-1-prod-default-assets/misc/opsworks-cm-roles.yaml.
-	// This template creates a CloudFormation stack that includes the service role
-	// and instance profile that you need.
-	//
-	// ServiceRoleArn is a required field
-	ServiceRoleArn *string `type:"string" required:"true"`
-
-	// The IDs of subnets in which to launch the server EC2 instance.
-	//
-	// Amazon EC2-Classic customers: This field is required. All servers must run
-	// within a VPC. The VPC must have "Auto Assign Public IP" enabled.
-	//
-	// EC2-VPC customers: This field is optional. If you do not specify subnet IDs,
-	// your EC2 instances are created in a default subnet that is selected by Amazon
-	// EC2. If you specify subnet IDs, the VPC must have "Auto Assign Public IP"
-	// enabled.
-	//
-	// For more information about supported Amazon EC2 platforms, see Supported
-	// Platforms (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-supported-platforms.html).
-	SubnetIds []string `type:"list"`
-}
-
-// String returns the string representation
-func (s CreateServerInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateServerInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateServerInput"}
-	if s.BackupRetentionCount != nil && *s.BackupRetentionCount < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("BackupRetentionCount", 1))
-	}
-
-	if s.InstanceProfileArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("InstanceProfileArn"))
-	}
-
-	if s.InstanceType == nil {
-		invalidParams.Add(aws.NewErrParamRequired("InstanceType"))
-	}
-
-	if s.ServerName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ServerName"))
-	}
-	if s.ServerName != nil && len(*s.ServerName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ServerName", 1))
-	}
-
-	if s.ServiceRoleArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ServiceRoleArn"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type CreateServerOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The server that is created by the request.
-	Server *Server `type:"structure"`
-}
-
-// String returns the string representation
-func (s CreateServerOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCreateServer = "CreateServer"
 
@@ -240,6 +42,10 @@ const opCreateServer = "CreateServer"
 // and address ranges only. To edit security group rules, open Security Groups
 // in the navigation pane of the EC2 management console.
 //
+// To specify your own domain for a server, and provide your own self-signed
+// or CA-signed certificate and private key, specify values for CustomDomain,
+// CustomCertificate, and CustomPrivateKey.
+//
 //    // Example sending a request using CreateServerRequest.
 //    req := client.CreateServerRequest(params)
 //    resp, err := req.Send(context.TODO())
@@ -248,7 +54,7 @@ const opCreateServer = "CreateServer"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/CreateServer
-func (c *Client) CreateServerRequest(input *CreateServerInput) CreateServerRequest {
+func (c *Client) CreateServerRequest(input *types.CreateServerInput) CreateServerRequest {
 	op := &aws.Operation{
 		Name:       opCreateServer,
 		HTTPMethod: "POST",
@@ -256,10 +62,10 @@ func (c *Client) CreateServerRequest(input *CreateServerInput) CreateServerReque
 	}
 
 	if input == nil {
-		input = &CreateServerInput{}
+		input = &types.CreateServerInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateServerOutput{})
+	req := c.newRequest(op, input, &types.CreateServerOutput{})
 	return CreateServerRequest{Request: req, Input: input, Copy: c.CreateServerRequest}
 }
 
@@ -267,8 +73,8 @@ func (c *Client) CreateServerRequest(input *CreateServerInput) CreateServerReque
 // CreateServer API operation.
 type CreateServerRequest struct {
 	*aws.Request
-	Input *CreateServerInput
-	Copy  func(*CreateServerInput) CreateServerRequest
+	Input *types.CreateServerInput
+	Copy  func(*types.CreateServerInput) CreateServerRequest
 }
 
 // Send marshals and sends the CreateServer API request.
@@ -280,7 +86,7 @@ func (r CreateServerRequest) Send(ctx context.Context) (*CreateServerResponse, e
 	}
 
 	resp := &CreateServerResponse{
-		CreateServerOutput: r.Request.Data.(*CreateServerOutput),
+		CreateServerOutput: r.Request.Data.(*types.CreateServerOutput),
 		response:           &aws.Response{Request: r.Request},
 	}
 
@@ -290,7 +96,7 @@ func (r CreateServerRequest) Send(ctx context.Context) (*CreateServerResponse, e
 // CreateServerResponse is the response type for the
 // CreateServer API operation.
 type CreateServerResponse struct {
-	*CreateServerOutput
+	*types.CreateServerOutput
 
 	response *aws.Response
 }

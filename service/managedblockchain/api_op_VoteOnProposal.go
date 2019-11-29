@@ -6,117 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/managedblockchain/types"
 )
-
-type VoteOnProposalInput struct {
-	_ struct{} `type:"structure"`
-
-	// The unique identifier of the network.
-	//
-	// NetworkId is a required field
-	NetworkId *string `location:"uri" locationName:"networkId" min:"1" type:"string" required:"true"`
-
-	// The unique identifier of the proposal.
-	//
-	// ProposalId is a required field
-	ProposalId *string `location:"uri" locationName:"proposalId" min:"1" type:"string" required:"true"`
-
-	// The value of the vote.
-	//
-	// Vote is a required field
-	Vote VoteValue `type:"string" required:"true" enum:"true"`
-
-	// The unique identifier of the member casting the vote.
-	//
-	// VoterMemberId is a required field
-	VoterMemberId *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s VoteOnProposalInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *VoteOnProposalInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "VoteOnProposalInput"}
-
-	if s.NetworkId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("NetworkId"))
-	}
-	if s.NetworkId != nil && len(*s.NetworkId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("NetworkId", 1))
-	}
-
-	if s.ProposalId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ProposalId"))
-	}
-	if s.ProposalId != nil && len(*s.ProposalId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ProposalId", 1))
-	}
-	if len(s.Vote) == 0 {
-		invalidParams.Add(aws.NewErrParamRequired("Vote"))
-	}
-
-	if s.VoterMemberId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("VoterMemberId"))
-	}
-	if s.VoterMemberId != nil && len(*s.VoterMemberId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("VoterMemberId", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s VoteOnProposalInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if len(s.Vote) > 0 {
-		v := s.Vote
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "Vote", protocol.QuotedValue{ValueMarshaler: v}, metadata)
-	}
-	if s.VoterMemberId != nil {
-		v := *s.VoterMemberId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "VoterMemberId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.NetworkId != nil {
-		v := *s.NetworkId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "networkId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.ProposalId != nil {
-		v := *s.ProposalId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "proposalId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type VoteOnProposalOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s VoteOnProposalOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s VoteOnProposalOutput) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
 
 const opVoteOnProposal = "VoteOnProposal"
 
@@ -135,7 +26,7 @@ const opVoteOnProposal = "VoteOnProposal"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/managedblockchain-2018-09-24/VoteOnProposal
-func (c *Client) VoteOnProposalRequest(input *VoteOnProposalInput) VoteOnProposalRequest {
+func (c *Client) VoteOnProposalRequest(input *types.VoteOnProposalInput) VoteOnProposalRequest {
 	op := &aws.Operation{
 		Name:       opVoteOnProposal,
 		HTTPMethod: "POST",
@@ -143,10 +34,10 @@ func (c *Client) VoteOnProposalRequest(input *VoteOnProposalInput) VoteOnProposa
 	}
 
 	if input == nil {
-		input = &VoteOnProposalInput{}
+		input = &types.VoteOnProposalInput{}
 	}
 
-	req := c.newRequest(op, input, &VoteOnProposalOutput{})
+	req := c.newRequest(op, input, &types.VoteOnProposalOutput{})
 	return VoteOnProposalRequest{Request: req, Input: input, Copy: c.VoteOnProposalRequest}
 }
 
@@ -154,8 +45,8 @@ func (c *Client) VoteOnProposalRequest(input *VoteOnProposalInput) VoteOnProposa
 // VoteOnProposal API operation.
 type VoteOnProposalRequest struct {
 	*aws.Request
-	Input *VoteOnProposalInput
-	Copy  func(*VoteOnProposalInput) VoteOnProposalRequest
+	Input *types.VoteOnProposalInput
+	Copy  func(*types.VoteOnProposalInput) VoteOnProposalRequest
 }
 
 // Send marshals and sends the VoteOnProposal API request.
@@ -167,7 +58,7 @@ func (r VoteOnProposalRequest) Send(ctx context.Context) (*VoteOnProposalRespons
 	}
 
 	resp := &VoteOnProposalResponse{
-		VoteOnProposalOutput: r.Request.Data.(*VoteOnProposalOutput),
+		VoteOnProposalOutput: r.Request.Data.(*types.VoteOnProposalOutput),
 		response:             &aws.Response{Request: r.Request},
 	}
 
@@ -177,7 +68,7 @@ func (r VoteOnProposalRequest) Send(ctx context.Context) (*VoteOnProposalRespons
 // VoteOnProposalResponse is the response type for the
 // VoteOnProposal API operation.
 type VoteOnProposalResponse struct {
-	*VoteOnProposalOutput
+	*types.VoteOnProposalOutput
 
 	response *aws.Response
 }

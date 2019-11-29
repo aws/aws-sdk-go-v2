@@ -6,101 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/machinelearning/types"
 )
-
-type CreateBatchPredictionInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the DataSource that points to the group of observations to predict.
-	//
-	// BatchPredictionDataSourceId is a required field
-	BatchPredictionDataSourceId *string `min:"1" type:"string" required:"true"`
-
-	// A user-supplied ID that uniquely identifies the BatchPrediction.
-	//
-	// BatchPredictionId is a required field
-	BatchPredictionId *string `min:"1" type:"string" required:"true"`
-
-	// A user-supplied name or description of the BatchPrediction. BatchPredictionName
-	// can only use the UTF-8 character set.
-	BatchPredictionName *string `type:"string"`
-
-	// The ID of the MLModel that will generate predictions for the group of observations.
-	//
-	// MLModelId is a required field
-	MLModelId *string `min:"1" type:"string" required:"true"`
-
-	// The location of an Amazon Simple Storage Service (Amazon S3) bucket or directory
-	// to store the batch prediction results. The following substrings are not allowed
-	// in the s3 key portion of the outputURI field: ':', '//', '/./', '/../'.
-	//
-	// Amazon ML needs permissions to store and retrieve the logs on your behalf.
-	// For information about how to set permissions, see the Amazon Machine Learning
-	// Developer Guide (http://docs.aws.amazon.com/machine-learning/latest/dg).
-	//
-	// OutputUri is a required field
-	OutputUri *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s CreateBatchPredictionInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateBatchPredictionInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateBatchPredictionInput"}
-
-	if s.BatchPredictionDataSourceId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("BatchPredictionDataSourceId"))
-	}
-	if s.BatchPredictionDataSourceId != nil && len(*s.BatchPredictionDataSourceId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("BatchPredictionDataSourceId", 1))
-	}
-
-	if s.BatchPredictionId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("BatchPredictionId"))
-	}
-	if s.BatchPredictionId != nil && len(*s.BatchPredictionId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("BatchPredictionId", 1))
-	}
-
-	if s.MLModelId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("MLModelId"))
-	}
-	if s.MLModelId != nil && len(*s.MLModelId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("MLModelId", 1))
-	}
-
-	if s.OutputUri == nil {
-		invalidParams.Add(aws.NewErrParamRequired("OutputUri"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Represents the output of a CreateBatchPrediction operation, and is an acknowledgement
-// that Amazon ML received the request.
-//
-// The CreateBatchPrediction operation is asynchronous. You can poll for status
-// updates by using the >GetBatchPrediction operation and checking the Status
-// parameter of the result.
-type CreateBatchPredictionOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A user-supplied ID that uniquely identifies the BatchPrediction. This value
-	// is identical to the value of the BatchPredictionId in the request.
-	BatchPredictionId *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s CreateBatchPredictionOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCreateBatchPrediction = "CreateBatchPrediction"
 
@@ -128,7 +35,7 @@ const opCreateBatchPrediction = "CreateBatchPrediction"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) CreateBatchPredictionRequest(input *CreateBatchPredictionInput) CreateBatchPredictionRequest {
+func (c *Client) CreateBatchPredictionRequest(input *types.CreateBatchPredictionInput) CreateBatchPredictionRequest {
 	op := &aws.Operation{
 		Name:       opCreateBatchPrediction,
 		HTTPMethod: "POST",
@@ -136,10 +43,10 @@ func (c *Client) CreateBatchPredictionRequest(input *CreateBatchPredictionInput)
 	}
 
 	if input == nil {
-		input = &CreateBatchPredictionInput{}
+		input = &types.CreateBatchPredictionInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateBatchPredictionOutput{})
+	req := c.newRequest(op, input, &types.CreateBatchPredictionOutput{})
 	return CreateBatchPredictionRequest{Request: req, Input: input, Copy: c.CreateBatchPredictionRequest}
 }
 
@@ -147,8 +54,8 @@ func (c *Client) CreateBatchPredictionRequest(input *CreateBatchPredictionInput)
 // CreateBatchPrediction API operation.
 type CreateBatchPredictionRequest struct {
 	*aws.Request
-	Input *CreateBatchPredictionInput
-	Copy  func(*CreateBatchPredictionInput) CreateBatchPredictionRequest
+	Input *types.CreateBatchPredictionInput
+	Copy  func(*types.CreateBatchPredictionInput) CreateBatchPredictionRequest
 }
 
 // Send marshals and sends the CreateBatchPrediction API request.
@@ -160,7 +67,7 @@ func (r CreateBatchPredictionRequest) Send(ctx context.Context) (*CreateBatchPre
 	}
 
 	resp := &CreateBatchPredictionResponse{
-		CreateBatchPredictionOutput: r.Request.Data.(*CreateBatchPredictionOutput),
+		CreateBatchPredictionOutput: r.Request.Data.(*types.CreateBatchPredictionOutput),
 		response:                    &aws.Response{Request: r.Request},
 	}
 
@@ -170,7 +77,7 @@ func (r CreateBatchPredictionRequest) Send(ctx context.Context) (*CreateBatchPre
 // CreateBatchPredictionResponse is the response type for the
 // CreateBatchPrediction API operation.
 type CreateBatchPredictionResponse struct {
-	*CreateBatchPredictionOutput
+	*types.CreateBatchPredictionOutput
 
 	response *aws.Response
 }

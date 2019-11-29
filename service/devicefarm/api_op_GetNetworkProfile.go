@@ -6,52 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/devicefarm/types"
 )
-
-type GetNetworkProfileInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the network profile you want to return
-	// information about.
-	//
-	// Arn is a required field
-	Arn *string `locationName:"arn" min:"32" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetNetworkProfileInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetNetworkProfileInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetNetworkProfileInput"}
-
-	if s.Arn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Arn"))
-	}
-	if s.Arn != nil && len(*s.Arn) < 32 {
-		invalidParams.Add(aws.NewErrParamMinLen("Arn", 32))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type GetNetworkProfileOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The network profile.
-	NetworkProfile *NetworkProfile `locationName:"networkProfile" type:"structure"`
-}
-
-// String returns the string representation
-func (s GetNetworkProfileOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetNetworkProfile = "GetNetworkProfile"
 
@@ -68,7 +24,7 @@ const opGetNetworkProfile = "GetNetworkProfile"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/GetNetworkProfile
-func (c *Client) GetNetworkProfileRequest(input *GetNetworkProfileInput) GetNetworkProfileRequest {
+func (c *Client) GetNetworkProfileRequest(input *types.GetNetworkProfileInput) GetNetworkProfileRequest {
 	op := &aws.Operation{
 		Name:       opGetNetworkProfile,
 		HTTPMethod: "POST",
@@ -76,10 +32,10 @@ func (c *Client) GetNetworkProfileRequest(input *GetNetworkProfileInput) GetNetw
 	}
 
 	if input == nil {
-		input = &GetNetworkProfileInput{}
+		input = &types.GetNetworkProfileInput{}
 	}
 
-	req := c.newRequest(op, input, &GetNetworkProfileOutput{})
+	req := c.newRequest(op, input, &types.GetNetworkProfileOutput{})
 	return GetNetworkProfileRequest{Request: req, Input: input, Copy: c.GetNetworkProfileRequest}
 }
 
@@ -87,8 +43,8 @@ func (c *Client) GetNetworkProfileRequest(input *GetNetworkProfileInput) GetNetw
 // GetNetworkProfile API operation.
 type GetNetworkProfileRequest struct {
 	*aws.Request
-	Input *GetNetworkProfileInput
-	Copy  func(*GetNetworkProfileInput) GetNetworkProfileRequest
+	Input *types.GetNetworkProfileInput
+	Copy  func(*types.GetNetworkProfileInput) GetNetworkProfileRequest
 }
 
 // Send marshals and sends the GetNetworkProfile API request.
@@ -100,7 +56,7 @@ func (r GetNetworkProfileRequest) Send(ctx context.Context) (*GetNetworkProfileR
 	}
 
 	resp := &GetNetworkProfileResponse{
-		GetNetworkProfileOutput: r.Request.Data.(*GetNetworkProfileOutput),
+		GetNetworkProfileOutput: r.Request.Data.(*types.GetNetworkProfileOutput),
 		response:                &aws.Response{Request: r.Request},
 	}
 
@@ -110,7 +66,7 @@ func (r GetNetworkProfileRequest) Send(ctx context.Context) (*GetNetworkProfileR
 // GetNetworkProfileResponse is the response type for the
 // GetNetworkProfile API operation.
 type GetNetworkProfileResponse struct {
-	*GetNetworkProfileOutput
+	*types.GetNetworkProfileOutput
 
 	response *aws.Response
 }

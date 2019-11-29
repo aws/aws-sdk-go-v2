@@ -6,59 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/elasticloadbalancing/types"
 )
-
-// Contains the parameters for DetachLoadBalancerFromSubnets.
-type DetachLoadBalancerFromSubnetsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the load balancer.
-	//
-	// LoadBalancerName is a required field
-	LoadBalancerName *string `type:"string" required:"true"`
-
-	// The IDs of the subnets.
-	//
-	// Subnets is a required field
-	Subnets []string `type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s DetachLoadBalancerFromSubnetsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DetachLoadBalancerFromSubnetsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DetachLoadBalancerFromSubnetsInput"}
-
-	if s.LoadBalancerName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("LoadBalancerName"))
-	}
-
-	if s.Subnets == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Subnets"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Contains the output of DetachLoadBalancerFromSubnets.
-type DetachLoadBalancerFromSubnetsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The IDs of the remaining subnets for the load balancer.
-	Subnets []string `type:"list"`
-}
-
-// String returns the string representation
-func (s DetachLoadBalancerFromSubnetsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDetachLoadBalancerFromSubnets = "DetachLoadBalancerFromSubnets"
 
@@ -80,7 +29,7 @@ const opDetachLoadBalancerFromSubnets = "DetachLoadBalancerFromSubnets"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/DetachLoadBalancerFromSubnets
-func (c *Client) DetachLoadBalancerFromSubnetsRequest(input *DetachLoadBalancerFromSubnetsInput) DetachLoadBalancerFromSubnetsRequest {
+func (c *Client) DetachLoadBalancerFromSubnetsRequest(input *types.DetachLoadBalancerFromSubnetsInput) DetachLoadBalancerFromSubnetsRequest {
 	op := &aws.Operation{
 		Name:       opDetachLoadBalancerFromSubnets,
 		HTTPMethod: "POST",
@@ -88,10 +37,10 @@ func (c *Client) DetachLoadBalancerFromSubnetsRequest(input *DetachLoadBalancerF
 	}
 
 	if input == nil {
-		input = &DetachLoadBalancerFromSubnetsInput{}
+		input = &types.DetachLoadBalancerFromSubnetsInput{}
 	}
 
-	req := c.newRequest(op, input, &DetachLoadBalancerFromSubnetsOutput{})
+	req := c.newRequest(op, input, &types.DetachLoadBalancerFromSubnetsOutput{})
 	return DetachLoadBalancerFromSubnetsRequest{Request: req, Input: input, Copy: c.DetachLoadBalancerFromSubnetsRequest}
 }
 
@@ -99,8 +48,8 @@ func (c *Client) DetachLoadBalancerFromSubnetsRequest(input *DetachLoadBalancerF
 // DetachLoadBalancerFromSubnets API operation.
 type DetachLoadBalancerFromSubnetsRequest struct {
 	*aws.Request
-	Input *DetachLoadBalancerFromSubnetsInput
-	Copy  func(*DetachLoadBalancerFromSubnetsInput) DetachLoadBalancerFromSubnetsRequest
+	Input *types.DetachLoadBalancerFromSubnetsInput
+	Copy  func(*types.DetachLoadBalancerFromSubnetsInput) DetachLoadBalancerFromSubnetsRequest
 }
 
 // Send marshals and sends the DetachLoadBalancerFromSubnets API request.
@@ -112,7 +61,7 @@ func (r DetachLoadBalancerFromSubnetsRequest) Send(ctx context.Context) (*Detach
 	}
 
 	resp := &DetachLoadBalancerFromSubnetsResponse{
-		DetachLoadBalancerFromSubnetsOutput: r.Request.Data.(*DetachLoadBalancerFromSubnetsOutput),
+		DetachLoadBalancerFromSubnetsOutput: r.Request.Data.(*types.DetachLoadBalancerFromSubnetsOutput),
 		response:                            &aws.Response{Request: r.Request},
 	}
 
@@ -122,7 +71,7 @@ func (r DetachLoadBalancerFromSubnetsRequest) Send(ctx context.Context) (*Detach
 // DetachLoadBalancerFromSubnetsResponse is the response type for the
 // DetachLoadBalancerFromSubnets API operation.
 type DetachLoadBalancerFromSubnetsResponse struct {
-	*DetachLoadBalancerFromSubnetsOutput
+	*types.DetachLoadBalancerFromSubnetsOutput
 
 	response *aws.Response
 }

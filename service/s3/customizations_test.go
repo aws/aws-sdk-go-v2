@@ -14,6 +14,8 @@ import (
 	request "github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting/unit"
 	"github.com/aws/aws-sdk-go-v2/service/s3"
+	"github.com/aws/aws-sdk-go-v2/service/s3/enums"
+	"github.com/aws/aws-sdk-go-v2/service/s3/types"
 )
 
 func assertMD5(t *testing.T, req *request.Request) {
@@ -34,10 +36,10 @@ func assertMD5(t *testing.T, req *request.Request) {
 
 func TestMD5InPutBucketCors(t *testing.T) {
 	svc := s3.New(unit.Config())
-	req := svc.PutBucketCorsRequest(&s3.PutBucketCorsInput{
+	req := svc.PutBucketCorsRequest(&types.PutBucketCorsInput{
 		Bucket: aws.String("bucketname"),
-		CORSConfiguration: &s3.CORSConfiguration{
-			CORSRules: []s3.CORSRule{
+		CORSConfiguration: &types.CORSConfiguration{
+			CORSRules: []types.CORSRule{
 				{
 					AllowedMethods: []string{"GET"},
 					AllowedOrigins: []string{"*"},
@@ -50,14 +52,14 @@ func TestMD5InPutBucketCors(t *testing.T) {
 
 func TestMD5InPutBucketLifecycle(t *testing.T) {
 	svc := s3.New(unit.Config())
-	req := svc.PutBucketLifecycleRequest(&s3.PutBucketLifecycleInput{
+	req := svc.PutBucketLifecycleRequest(&types.PutBucketLifecycleInput{
 		Bucket: aws.String("bucketname"),
-		LifecycleConfiguration: &s3.LifecycleConfiguration{
-			Rules: []s3.Rule{
+		LifecycleConfiguration: &types.LifecycleConfiguration{
+			Rules: []types.Rule{
 				{
 					ID:     aws.String("ID"),
 					Prefix: aws.String("Prefix"),
-					Status: s3.ExpirationStatusEnabled,
+					Status: enums.ExpirationStatusEnabled,
 				},
 			},
 		},
@@ -67,7 +69,7 @@ func TestMD5InPutBucketLifecycle(t *testing.T) {
 
 func TestMD5InPutBucketPolicy(t *testing.T) {
 	svc := s3.New(unit.Config())
-	req := svc.PutBucketPolicyRequest(&s3.PutBucketPolicyInput{
+	req := svc.PutBucketPolicyRequest(&types.PutBucketPolicyInput{
 		Bucket: aws.String("bucketname"),
 		Policy: aws.String("{}"),
 	})
@@ -76,10 +78,10 @@ func TestMD5InPutBucketPolicy(t *testing.T) {
 
 func TestMD5InPutBucketTagging(t *testing.T) {
 	svc := s3.New(unit.Config())
-	req := svc.PutBucketTaggingRequest(&s3.PutBucketTaggingInput{
+	req := svc.PutBucketTaggingRequest(&types.PutBucketTaggingInput{
 		Bucket: aws.String("bucketname"),
-		Tagging: &s3.Tagging{
-			TagSet: []s3.Tag{
+		Tagging: &types.Tagging{
+			TagSet: []types.Tag{
 				{Key: aws.String("KEY"), Value: aws.String("VALUE")},
 			},
 		},
@@ -89,10 +91,10 @@ func TestMD5InPutBucketTagging(t *testing.T) {
 
 func TestMD5InDeleteObjects(t *testing.T) {
 	svc := s3.New(unit.Config())
-	req := svc.DeleteObjectsRequest(&s3.DeleteObjectsInput{
+	req := svc.DeleteObjectsRequest(&types.DeleteObjectsInput{
 		Bucket: aws.String("bucketname"),
-		Delete: &s3.Delete{
-			Objects: []s3.ObjectIdentifier{
+		Delete: &types.Delete{
+			Objects: []types.ObjectIdentifier{
 				{Key: aws.String("key")},
 			},
 		},
@@ -102,11 +104,11 @@ func TestMD5InDeleteObjects(t *testing.T) {
 
 func TestMD5InPutBucketLifecycleConfiguration(t *testing.T) {
 	svc := s3.New(unit.Config())
-	req := svc.PutBucketLifecycleConfigurationRequest(&s3.PutBucketLifecycleConfigurationInput{
+	req := svc.PutBucketLifecycleConfigurationRequest(&types.PutBucketLifecycleConfigurationInput{
 		Bucket: aws.String("bucketname"),
-		LifecycleConfiguration: &s3.BucketLifecycleConfiguration{
-			Rules: []s3.LifecycleRule{
-				{Prefix: aws.String("prefix"), Status: s3.ExpirationStatusEnabled},
+		LifecycleConfiguration: &types.BucketLifecycleConfiguration{
+			Rules: []types.LifecycleRule{
+				{Prefix: aws.String("prefix"), Status: enums.ExpirationStatusEnabled},
 			},
 		},
 	})
@@ -131,7 +133,7 @@ func TestPutObjectMetadataWithUnicode(t *testing.T) {
 
 	svc := s3.New(cfg)
 
-	req := svc.PutObjectRequest(&s3.PutObjectInput{
+	req := svc.PutObjectRequest(&types.PutObjectInput{
 		Bucket: aws.String("my_bucket"),
 		Key:    aws.String("my_key"),
 		Body:   strings.NewReader(""),
@@ -157,7 +159,7 @@ func TestGetObjectMetadataWithUnicode(t *testing.T) {
 
 	svc := s3.New(cfg)
 
-	req := svc.GetObjectRequest(&s3.GetObjectInput{
+	req := svc.GetObjectRequest(&types.GetObjectInput{
 		Bucket: aws.String("my_bucket"),
 		Key:    aws.String("my_key"),
 	})

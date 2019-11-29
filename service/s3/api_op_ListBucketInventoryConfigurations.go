@@ -6,135 +6,41 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/s3/types"
 )
-
-type ListBucketInventoryConfigurationsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the bucket containing the inventory configurations to retrieve.
-	//
-	// Bucket is a required field
-	Bucket *string `location:"uri" locationName:"Bucket" type:"string" required:"true"`
-
-	// The marker used to continue an inventory configuration listing that has been
-	// truncated. Use the NextContinuationToken from a previously truncated list
-	// response to continue the listing. The continuation token is an opaque value
-	// that Amazon S3 understands.
-	ContinuationToken *string `location:"querystring" locationName:"continuation-token" type:"string"`
-}
-
-// String returns the string representation
-func (s ListBucketInventoryConfigurationsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListBucketInventoryConfigurationsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListBucketInventoryConfigurationsInput"}
-
-	if s.Bucket == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Bucket"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-func (s *ListBucketInventoryConfigurationsInput) getBucket() (v string) {
-	if s.Bucket == nil {
-		return v
-	}
-	return *s.Bucket
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListBucketInventoryConfigurationsInput) MarshalFields(e protocol.FieldEncoder) error {
-
-	if s.Bucket != nil {
-		v := *s.Bucket
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "Bucket", protocol.StringValue(v), metadata)
-	}
-	if s.ContinuationToken != nil {
-		v := *s.ContinuationToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "continuation-token", protocol.StringValue(v), metadata)
-	}
-	return nil
-}
-
-type ListBucketInventoryConfigurationsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// If sent in the request, the marker that is used as a starting point for this
-	// inventory configuration list response.
-	ContinuationToken *string `type:"string"`
-
-	// The list of inventory configurations for a bucket.
-	InventoryConfigurationList []InventoryConfiguration `locationName:"InventoryConfiguration" type:"list" flattened:"true"`
-
-	// Indicates whether the returned list of inventory configurations is truncated
-	// in this response. A value of true indicates that the list is truncated.
-	IsTruncated *bool `type:"boolean"`
-
-	// The marker used to continue this inventory configuration listing. Use the
-	// NextContinuationToken from this response to continue the listing in a subsequent
-	// request. The continuation token is an opaque value that Amazon S3 understands.
-	NextContinuationToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s ListBucketInventoryConfigurationsOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListBucketInventoryConfigurationsOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.ContinuationToken != nil {
-		v := *s.ContinuationToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "ContinuationToken", protocol.StringValue(v), metadata)
-	}
-	if s.InventoryConfigurationList != nil {
-		v := s.InventoryConfigurationList
-
-		metadata := protocol.Metadata{Flatten: true}
-		ls0 := e.List(protocol.BodyTarget, "InventoryConfiguration", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	if s.IsTruncated != nil {
-		v := *s.IsTruncated
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "IsTruncated", protocol.BoolValue(v), metadata)
-	}
-	if s.NextContinuationToken != nil {
-		v := *s.NextContinuationToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "NextContinuationToken", protocol.StringValue(v), metadata)
-	}
-	return nil
-}
 
 const opListBucketInventoryConfigurations = "ListBucketInventoryConfigurations"
 
 // ListBucketInventoryConfigurationsRequest returns a request value for making API operation for
 // Amazon Simple Storage Service.
 //
-// Returns a list of inventory configurations for the bucket.
+// Returns a list of inventory configurations for the bucket. You can have up
+// to 1,000 analytics configurations per bucket.
+//
+// This operation supports list pagination and does not return more than 100
+// configurations at a time. Always check the IsTruncated element in the response.
+// If there are no more configurations to list, IsTruncated is set to false.
+// If there are more configurations to list, IsTruncated is set to true, and
+// there is a value in NextContinuationToken. You use the NextContinuationToken
+// value to continue the pagination of the list by passing the value in continuation-token
+// in the request to GET the next page.
+//
+// To use this operation, you must have permissions to perform the s3:GetInventoryConfiguration
+// action. The bucket owner has this permission by default. The bucket owner
+// can grant this permission to others. For more information about permissions,
+// see Permissions Related to Bucket Subresource Operations (https://docs.aws.amazon.com/AmazonS3/latest/dev/using-with-s3-actions.html#using-with-s3-actions-related-to-bucket-subresources)
+// and Managing Access Permissions to Your Amazon S3 Resources (https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-access-control.html).
+//
+// For information about the Amazon S3 inventory feature, see Amazon S3 Inventory
+// (https://docs.aws.amazon.com/AmazonS3/latest/dev/storage-inventory.html)
+//
+// The following operations are related to ListBucketInventoryConfigurations:
+//
+//    * GetBucketInventoryConfiguration
+//
+//    * DeleteBucketInventoryConfiguration
+//
+//    * PutBucketInventoryConfiguration
 //
 //    // Example sending a request using ListBucketInventoryConfigurationsRequest.
 //    req := client.ListBucketInventoryConfigurationsRequest(params)
@@ -144,7 +50,7 @@ const opListBucketInventoryConfigurations = "ListBucketInventoryConfigurations"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/ListBucketInventoryConfigurations
-func (c *Client) ListBucketInventoryConfigurationsRequest(input *ListBucketInventoryConfigurationsInput) ListBucketInventoryConfigurationsRequest {
+func (c *Client) ListBucketInventoryConfigurationsRequest(input *types.ListBucketInventoryConfigurationsInput) ListBucketInventoryConfigurationsRequest {
 	op := &aws.Operation{
 		Name:       opListBucketInventoryConfigurations,
 		HTTPMethod: "GET",
@@ -152,10 +58,10 @@ func (c *Client) ListBucketInventoryConfigurationsRequest(input *ListBucketInven
 	}
 
 	if input == nil {
-		input = &ListBucketInventoryConfigurationsInput{}
+		input = &types.ListBucketInventoryConfigurationsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListBucketInventoryConfigurationsOutput{})
+	req := c.newRequest(op, input, &types.ListBucketInventoryConfigurationsOutput{})
 	return ListBucketInventoryConfigurationsRequest{Request: req, Input: input, Copy: c.ListBucketInventoryConfigurationsRequest}
 }
 
@@ -163,8 +69,8 @@ func (c *Client) ListBucketInventoryConfigurationsRequest(input *ListBucketInven
 // ListBucketInventoryConfigurations API operation.
 type ListBucketInventoryConfigurationsRequest struct {
 	*aws.Request
-	Input *ListBucketInventoryConfigurationsInput
-	Copy  func(*ListBucketInventoryConfigurationsInput) ListBucketInventoryConfigurationsRequest
+	Input *types.ListBucketInventoryConfigurationsInput
+	Copy  func(*types.ListBucketInventoryConfigurationsInput) ListBucketInventoryConfigurationsRequest
 }
 
 // Send marshals and sends the ListBucketInventoryConfigurations API request.
@@ -176,7 +82,7 @@ func (r ListBucketInventoryConfigurationsRequest) Send(ctx context.Context) (*Li
 	}
 
 	resp := &ListBucketInventoryConfigurationsResponse{
-		ListBucketInventoryConfigurationsOutput: r.Request.Data.(*ListBucketInventoryConfigurationsOutput),
+		ListBucketInventoryConfigurationsOutput: r.Request.Data.(*types.ListBucketInventoryConfigurationsOutput),
 		response:                                &aws.Response{Request: r.Request},
 	}
 
@@ -186,7 +92,7 @@ func (r ListBucketInventoryConfigurationsRequest) Send(ctx context.Context) (*Li
 // ListBucketInventoryConfigurationsResponse is the response type for the
 // ListBucketInventoryConfigurations API operation.
 type ListBucketInventoryConfigurationsResponse struct {
-	*ListBucketInventoryConfigurationsOutput
+	*types.ListBucketInventoryConfigurationsOutput
 
 	response *aws.Response
 }

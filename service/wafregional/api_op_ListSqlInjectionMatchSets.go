@@ -6,66 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/service/waf"
+	"github.com/aws/aws-sdk-go-v2/service/wafregional/types"
 )
-
-// A request to list the SqlInjectionMatchSet objects created by the current
-// AWS account.
-type ListSqlInjectionMatchSetsInput struct {
-	_ struct{} `type:"structure"`
-
-	// Specifies the number of SqlInjectionMatchSet objects that you want AWS WAF
-	// to return for this request. If you have more SqlInjectionMatchSet objects
-	// than the number you specify for Limit, the response includes a NextMarker
-	// value that you can use to get another batch of Rules.
-	Limit *int64 `type:"integer"`
-
-	// If you specify a value for Limit and you have more SqlInjectionMatchSet objects
-	// than the value of Limit, AWS WAF returns a NextMarker value in the response
-	// that allows you to list another group of SqlInjectionMatchSets. For the second
-	// and subsequent ListSqlInjectionMatchSets requests, specify the value of NextMarker
-	// from the previous response to get information about another batch of SqlInjectionMatchSets.
-	NextMarker *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s ListSqlInjectionMatchSetsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListSqlInjectionMatchSetsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListSqlInjectionMatchSetsInput"}
-	if s.NextMarker != nil && len(*s.NextMarker) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("NextMarker", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// The response to a ListSqlInjectionMatchSets request.
-type ListSqlInjectionMatchSetsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// If you have more SqlInjectionMatchSet objects than the number that you specified
-	// for Limit in the request, the response includes a NextMarker value. To list
-	// more SqlInjectionMatchSet objects, submit another ListSqlInjectionMatchSets
-	// request, and specify the NextMarker value from the response in the NextMarker
-	// value in the next request.
-	NextMarker *string `min:"1" type:"string"`
-
-	// An array of SqlInjectionMatchSetSummary objects.
-	SqlInjectionMatchSets []waf.SqlInjectionMatchSetSummary `type:"list"`
-}
-
-// String returns the string representation
-func (s ListSqlInjectionMatchSetsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListSqlInjectionMatchSets = "ListSqlInjectionMatchSets"
 
@@ -82,7 +24,7 @@ const opListSqlInjectionMatchSets = "ListSqlInjectionMatchSets"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/ListSqlInjectionMatchSets
-func (c *Client) ListSqlInjectionMatchSetsRequest(input *ListSqlInjectionMatchSetsInput) ListSqlInjectionMatchSetsRequest {
+func (c *Client) ListSqlInjectionMatchSetsRequest(input *types.ListSqlInjectionMatchSetsInput) ListSqlInjectionMatchSetsRequest {
 	op := &aws.Operation{
 		Name:       opListSqlInjectionMatchSets,
 		HTTPMethod: "POST",
@@ -90,10 +32,10 @@ func (c *Client) ListSqlInjectionMatchSetsRequest(input *ListSqlInjectionMatchSe
 	}
 
 	if input == nil {
-		input = &ListSqlInjectionMatchSetsInput{}
+		input = &types.ListSqlInjectionMatchSetsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListSqlInjectionMatchSetsOutput{})
+	req := c.newRequest(op, input, &types.ListSqlInjectionMatchSetsOutput{})
 	return ListSqlInjectionMatchSetsRequest{Request: req, Input: input, Copy: c.ListSqlInjectionMatchSetsRequest}
 }
 
@@ -101,8 +43,8 @@ func (c *Client) ListSqlInjectionMatchSetsRequest(input *ListSqlInjectionMatchSe
 // ListSqlInjectionMatchSets API operation.
 type ListSqlInjectionMatchSetsRequest struct {
 	*aws.Request
-	Input *ListSqlInjectionMatchSetsInput
-	Copy  func(*ListSqlInjectionMatchSetsInput) ListSqlInjectionMatchSetsRequest
+	Input *types.ListSqlInjectionMatchSetsInput
+	Copy  func(*types.ListSqlInjectionMatchSetsInput) ListSqlInjectionMatchSetsRequest
 }
 
 // Send marshals and sends the ListSqlInjectionMatchSets API request.
@@ -114,7 +56,7 @@ func (r ListSqlInjectionMatchSetsRequest) Send(ctx context.Context) (*ListSqlInj
 	}
 
 	resp := &ListSqlInjectionMatchSetsResponse{
-		ListSqlInjectionMatchSetsOutput: r.Request.Data.(*ListSqlInjectionMatchSetsOutput),
+		ListSqlInjectionMatchSetsOutput: r.Request.Data.(*types.ListSqlInjectionMatchSetsOutput),
 		response:                        &aws.Response{Request: r.Request},
 	}
 
@@ -124,7 +66,7 @@ func (r ListSqlInjectionMatchSetsRequest) Send(ctx context.Context) (*ListSqlInj
 // ListSqlInjectionMatchSetsResponse is the response type for the
 // ListSqlInjectionMatchSets API operation.
 type ListSqlInjectionMatchSetsResponse struct {
-	*ListSqlInjectionMatchSetsOutput
+	*types.ListSqlInjectionMatchSetsOutput
 
 	response *aws.Response
 }

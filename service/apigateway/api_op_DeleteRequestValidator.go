@@ -6,81 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/restjson"
+	"github.com/aws/aws-sdk-go-v2/service/apigateway/types"
 )
-
-// Deletes a specified RequestValidator of a given RestApi.
-type DeleteRequestValidatorInput struct {
-	_ struct{} `type:"structure"`
-
-	// [Required] The identifier of the RequestValidator to be deleted.
-	//
-	// RequestValidatorId is a required field
-	RequestValidatorId *string `location:"uri" locationName:"requestvalidator_id" type:"string" required:"true"`
-
-	// [Required] The string identifier of the associated RestApi.
-	//
-	// RestApiId is a required field
-	RestApiId *string `location:"uri" locationName:"restapi_id" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteRequestValidatorInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteRequestValidatorInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteRequestValidatorInput"}
-
-	if s.RequestValidatorId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("RequestValidatorId"))
-	}
-
-	if s.RestApiId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("RestApiId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteRequestValidatorInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.RequestValidatorId != nil {
-		v := *s.RequestValidatorId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "requestvalidator_id", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.RestApiId != nil {
-		v := *s.RestApiId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "restapi_id", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type DeleteRequestValidatorOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteRequestValidatorOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteRequestValidatorOutput) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
 
 const opDeleteRequestValidator = "DeleteRequestValidator"
 
@@ -95,7 +24,7 @@ const opDeleteRequestValidator = "DeleteRequestValidator"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) DeleteRequestValidatorRequest(input *DeleteRequestValidatorInput) DeleteRequestValidatorRequest {
+func (c *Client) DeleteRequestValidatorRequest(input *types.DeleteRequestValidatorInput) DeleteRequestValidatorRequest {
 	op := &aws.Operation{
 		Name:       opDeleteRequestValidator,
 		HTTPMethod: "DELETE",
@@ -103,10 +32,10 @@ func (c *Client) DeleteRequestValidatorRequest(input *DeleteRequestValidatorInpu
 	}
 
 	if input == nil {
-		input = &DeleteRequestValidatorInput{}
+		input = &types.DeleteRequestValidatorInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteRequestValidatorOutput{})
+	req := c.newRequest(op, input, &types.DeleteRequestValidatorOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return DeleteRequestValidatorRequest{Request: req, Input: input, Copy: c.DeleteRequestValidatorRequest}
@@ -116,8 +45,8 @@ func (c *Client) DeleteRequestValidatorRequest(input *DeleteRequestValidatorInpu
 // DeleteRequestValidator API operation.
 type DeleteRequestValidatorRequest struct {
 	*aws.Request
-	Input *DeleteRequestValidatorInput
-	Copy  func(*DeleteRequestValidatorInput) DeleteRequestValidatorRequest
+	Input *types.DeleteRequestValidatorInput
+	Copy  func(*types.DeleteRequestValidatorInput) DeleteRequestValidatorRequest
 }
 
 // Send marshals and sends the DeleteRequestValidator API request.
@@ -129,7 +58,7 @@ func (r DeleteRequestValidatorRequest) Send(ctx context.Context) (*DeleteRequest
 	}
 
 	resp := &DeleteRequestValidatorResponse{
-		DeleteRequestValidatorOutput: r.Request.Data.(*DeleteRequestValidatorOutput),
+		DeleteRequestValidatorOutput: r.Request.Data.(*types.DeleteRequestValidatorOutput),
 		response:                     &aws.Response{Request: r.Request},
 	}
 
@@ -139,7 +68,7 @@ func (r DeleteRequestValidatorRequest) Send(ctx context.Context) (*DeleteRequest
 // DeleteRequestValidatorResponse is the response type for the
 // DeleteRequestValidator API operation.
 type DeleteRequestValidatorResponse struct {
-	*DeleteRequestValidatorOutput
+	*types.DeleteRequestValidatorOutput
 
 	response *aws.Response
 }

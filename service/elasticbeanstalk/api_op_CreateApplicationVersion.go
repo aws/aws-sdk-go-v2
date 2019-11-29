@@ -4,133 +4,10 @@ package elasticbeanstalk
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/elasticbeanstalk/types"
 )
-
-type CreateApplicationVersionInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the application. If no application is found with this name, and
-	// AutoCreateApplication is false, returns an InvalidParameterValue error.
-	//
-	// ApplicationName is a required field
-	ApplicationName *string `min:"1" type:"string" required:"true"`
-
-	// Set to true to create an application with the specified name if it doesn't
-	// already exist.
-	AutoCreateApplication *bool `type:"boolean"`
-
-	// Settings for an AWS CodeBuild build.
-	BuildConfiguration *BuildConfiguration `type:"structure"`
-
-	// Describes this version.
-	Description *string `type:"string"`
-
-	// Pre-processes and validates the environment manifest (env.yaml) and configuration
-	// files (*.config files in the .ebextensions folder) in the source bundle.
-	// Validating configuration files can identify issues prior to deploying the
-	// application version to an environment.
-	//
-	// You must turn processing on for application versions that you create using
-	// AWS CodeBuild or AWS CodeCommit. For application versions built from a source
-	// bundle in Amazon S3, processing is optional.
-	//
-	// The Process option validates Elastic Beanstalk configuration files. It doesn't
-	// validate your application's configuration files, like proxy server or Docker
-	// configuration.
-	Process *bool `type:"boolean"`
-
-	// Specify a commit in an AWS CodeCommit Git repository to use as the source
-	// code for the application version.
-	SourceBuildInformation *SourceBuildInformation `type:"structure"`
-
-	// The Amazon S3 bucket and key that identify the location of the source bundle
-	// for this version.
-	//
-	// The Amazon S3 bucket must be in the same region as the environment.
-	//
-	// Specify a source bundle in S3 or a commit in an AWS CodeCommit repository
-	// (with SourceBuildInformation), but not both. If neither SourceBundle nor
-	// SourceBuildInformation are provided, Elastic Beanstalk uses a sample application.
-	SourceBundle *S3Location `type:"structure"`
-
-	// Specifies the tags applied to the application version.
-	//
-	// Elastic Beanstalk applies these tags only to the application version. Environments
-	// that use the application version don't inherit the tags.
-	Tags []Tag `type:"list"`
-
-	// A label identifying this version.
-	//
-	// Constraint: Must be unique per application. If an application version already
-	// exists with this label for the specified application, AWS Elastic Beanstalk
-	// returns an InvalidParameterValue error.
-	//
-	// VersionLabel is a required field
-	VersionLabel *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s CreateApplicationVersionInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateApplicationVersionInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateApplicationVersionInput"}
-
-	if s.ApplicationName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ApplicationName"))
-	}
-	if s.ApplicationName != nil && len(*s.ApplicationName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ApplicationName", 1))
-	}
-
-	if s.VersionLabel == nil {
-		invalidParams.Add(aws.NewErrParamRequired("VersionLabel"))
-	}
-	if s.VersionLabel != nil && len(*s.VersionLabel) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("VersionLabel", 1))
-	}
-	if s.BuildConfiguration != nil {
-		if err := s.BuildConfiguration.Validate(); err != nil {
-			invalidParams.AddNested("BuildConfiguration", err.(aws.ErrInvalidParams))
-		}
-	}
-	if s.SourceBuildInformation != nil {
-		if err := s.SourceBuildInformation.Validate(); err != nil {
-			invalidParams.AddNested("SourceBuildInformation", err.(aws.ErrInvalidParams))
-		}
-	}
-	if s.Tags != nil {
-		for i, v := range s.Tags {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Result message wrapping a single description of an application version.
-type CreateApplicationVersionOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The ApplicationVersionDescription of the application version.
-	ApplicationVersion *ApplicationVersionDescription `type:"structure"`
-}
-
-// String returns the string representation
-func (s CreateApplicationVersionOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCreateApplicationVersion = "CreateApplicationVersion"
 
@@ -163,7 +40,7 @@ const opCreateApplicationVersion = "CreateApplicationVersion"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/CreateApplicationVersion
-func (c *Client) CreateApplicationVersionRequest(input *CreateApplicationVersionInput) CreateApplicationVersionRequest {
+func (c *Client) CreateApplicationVersionRequest(input *types.CreateApplicationVersionInput) CreateApplicationVersionRequest {
 	op := &aws.Operation{
 		Name:       opCreateApplicationVersion,
 		HTTPMethod: "POST",
@@ -171,10 +48,10 @@ func (c *Client) CreateApplicationVersionRequest(input *CreateApplicationVersion
 	}
 
 	if input == nil {
-		input = &CreateApplicationVersionInput{}
+		input = &types.CreateApplicationVersionInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateApplicationVersionOutput{})
+	req := c.newRequest(op, input, &types.CreateApplicationVersionOutput{})
 	return CreateApplicationVersionRequest{Request: req, Input: input, Copy: c.CreateApplicationVersionRequest}
 }
 
@@ -182,8 +59,8 @@ func (c *Client) CreateApplicationVersionRequest(input *CreateApplicationVersion
 // CreateApplicationVersion API operation.
 type CreateApplicationVersionRequest struct {
 	*aws.Request
-	Input *CreateApplicationVersionInput
-	Copy  func(*CreateApplicationVersionInput) CreateApplicationVersionRequest
+	Input *types.CreateApplicationVersionInput
+	Copy  func(*types.CreateApplicationVersionInput) CreateApplicationVersionRequest
 }
 
 // Send marshals and sends the CreateApplicationVersion API request.
@@ -195,7 +72,7 @@ func (r CreateApplicationVersionRequest) Send(ctx context.Context) (*CreateAppli
 	}
 
 	resp := &CreateApplicationVersionResponse{
-		CreateApplicationVersionOutput: r.Request.Data.(*CreateApplicationVersionOutput),
+		CreateApplicationVersionOutput: r.Request.Data.(*types.CreateApplicationVersionOutput),
 		response:                       &aws.Response{Request: r.Request},
 	}
 
@@ -205,7 +82,7 @@ func (r CreateApplicationVersionRequest) Send(ctx context.Context) (*CreateAppli
 // CreateApplicationVersionResponse is the response type for the
 // CreateApplicationVersion API operation.
 type CreateApplicationVersionResponse struct {
-	*CreateApplicationVersionOutput
+	*types.CreateApplicationVersionOutput
 
 	response *aws.Response
 }

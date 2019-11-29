@@ -6,103 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/pinpoint/types"
 )
-
-type RemoveAttributesInput struct {
-	_ struct{} `type:"structure" payload:"UpdateAttributesRequest"`
-
-	// ApplicationId is a required field
-	ApplicationId *string `location:"uri" locationName:"application-id" type:"string" required:"true"`
-
-	// AttributeType is a required field
-	AttributeType *string `location:"uri" locationName:"attribute-type" type:"string" required:"true"`
-
-	// Specifies one or more attributes to remove from all the endpoints that are
-	// associated with an application.
-	//
-	// UpdateAttributesRequest is a required field
-	UpdateAttributesRequest *UpdateAttributesRequest `type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s RemoveAttributesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *RemoveAttributesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "RemoveAttributesInput"}
-
-	if s.ApplicationId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ApplicationId"))
-	}
-
-	if s.AttributeType == nil {
-		invalidParams.Add(aws.NewErrParamRequired("AttributeType"))
-	}
-
-	if s.UpdateAttributesRequest == nil {
-		invalidParams.Add(aws.NewErrParamRequired("UpdateAttributesRequest"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s RemoveAttributesInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.ApplicationId != nil {
-		v := *s.ApplicationId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "application-id", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.AttributeType != nil {
-		v := *s.AttributeType
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "attribute-type", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.UpdateAttributesRequest != nil {
-		v := s.UpdateAttributesRequest
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.PayloadTarget, "UpdateAttributesRequest", v, metadata)
-	}
-	return nil
-}
-
-type RemoveAttributesOutput struct {
-	_ struct{} `type:"structure" payload:"AttributesResource"`
-
-	// Provides information about the type and the names of attributes that were
-	// removed from all the endpoints that are associated with an application.
-	//
-	// AttributesResource is a required field
-	AttributesResource *AttributesResource `type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s RemoveAttributesOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s RemoveAttributesOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.AttributesResource != nil {
-		v := s.AttributesResource
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.PayloadTarget, "AttributesResource", v, metadata)
-	}
-	return nil
-}
 
 const opRemoveAttributes = "RemoveAttributes"
 
@@ -120,7 +25,7 @@ const opRemoveAttributes = "RemoveAttributes"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/RemoveAttributes
-func (c *Client) RemoveAttributesRequest(input *RemoveAttributesInput) RemoveAttributesRequest {
+func (c *Client) RemoveAttributesRequest(input *types.RemoveAttributesInput) RemoveAttributesRequest {
 	op := &aws.Operation{
 		Name:       opRemoveAttributes,
 		HTTPMethod: "PUT",
@@ -128,10 +33,10 @@ func (c *Client) RemoveAttributesRequest(input *RemoveAttributesInput) RemoveAtt
 	}
 
 	if input == nil {
-		input = &RemoveAttributesInput{}
+		input = &types.RemoveAttributesInput{}
 	}
 
-	req := c.newRequest(op, input, &RemoveAttributesOutput{})
+	req := c.newRequest(op, input, &types.RemoveAttributesOutput{})
 	return RemoveAttributesRequest{Request: req, Input: input, Copy: c.RemoveAttributesRequest}
 }
 
@@ -139,8 +44,8 @@ func (c *Client) RemoveAttributesRequest(input *RemoveAttributesInput) RemoveAtt
 // RemoveAttributes API operation.
 type RemoveAttributesRequest struct {
 	*aws.Request
-	Input *RemoveAttributesInput
-	Copy  func(*RemoveAttributesInput) RemoveAttributesRequest
+	Input *types.RemoveAttributesInput
+	Copy  func(*types.RemoveAttributesInput) RemoveAttributesRequest
 }
 
 // Send marshals and sends the RemoveAttributes API request.
@@ -152,7 +57,7 @@ func (r RemoveAttributesRequest) Send(ctx context.Context) (*RemoveAttributesRes
 	}
 
 	resp := &RemoveAttributesResponse{
-		RemoveAttributesOutput: r.Request.Data.(*RemoveAttributesOutput),
+		RemoveAttributesOutput: r.Request.Data.(*types.RemoveAttributesOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -162,7 +67,7 @@ func (r RemoveAttributesRequest) Send(ctx context.Context) (*RemoveAttributesRes
 // RemoveAttributesResponse is the response type for the
 // RemoveAttributes API operation.
 type RemoveAttributesResponse struct {
-	*RemoveAttributesOutput
+	*types.RemoveAttributesOutput
 
 	response *aws.Response
 }

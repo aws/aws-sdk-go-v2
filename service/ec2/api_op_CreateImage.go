@@ -6,81 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-type CreateImageInput struct {
-	_ struct{} `type:"structure"`
-
-	// The block device mappings. This parameter cannot be used to modify the encryption
-	// status of existing volumes or snapshots. To create an AMI with encrypted
-	// snapshots, use the CopyImage action.
-	BlockDeviceMappings []BlockDeviceMapping `locationName:"blockDeviceMapping" locationNameList:"BlockDeviceMapping" type:"list"`
-
-	// A description for the new image.
-	Description *string `locationName:"description" type:"string"`
-
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have
-	// the required permissions, the error response is DryRunOperation. Otherwise,
-	// it is UnauthorizedOperation.
-	DryRun *bool `locationName:"dryRun" type:"boolean"`
-
-	// The ID of the instance.
-	//
-	// InstanceId is a required field
-	InstanceId *string `locationName:"instanceId" type:"string" required:"true"`
-
-	// A name for the new image.
-	//
-	// Constraints: 3-128 alphanumeric characters, parentheses (()), square brackets
-	// ([]), spaces ( ), periods (.), slashes (/), dashes (-), single quotes ('),
-	// at-signs (@), or underscores(_)
-	//
-	// Name is a required field
-	Name *string `locationName:"name" type:"string" required:"true"`
-
-	// By default, Amazon EC2 attempts to shut down and reboot the instance before
-	// creating the image. If the 'No Reboot' option is set, Amazon EC2 doesn't
-	// shut down the instance before creating the image. When this option is used,
-	// file system integrity on the created image can't be guaranteed.
-	NoReboot *bool `locationName:"noReboot" type:"boolean"`
-}
-
-// String returns the string representation
-func (s CreateImageInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateImageInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateImageInput"}
-
-	if s.InstanceId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("InstanceId"))
-	}
-
-	if s.Name == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Name"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type CreateImageOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the new AMI.
-	ImageId *string `locationName:"imageId" type:"string"`
-}
-
-// String returns the string representation
-func (s CreateImageOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCreateImage = "CreateImage"
 
@@ -106,7 +33,7 @@ const opCreateImage = "CreateImage"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateImage
-func (c *Client) CreateImageRequest(input *CreateImageInput) CreateImageRequest {
+func (c *Client) CreateImageRequest(input *types.CreateImageInput) CreateImageRequest {
 	op := &aws.Operation{
 		Name:       opCreateImage,
 		HTTPMethod: "POST",
@@ -114,10 +41,10 @@ func (c *Client) CreateImageRequest(input *CreateImageInput) CreateImageRequest 
 	}
 
 	if input == nil {
-		input = &CreateImageInput{}
+		input = &types.CreateImageInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateImageOutput{})
+	req := c.newRequest(op, input, &types.CreateImageOutput{})
 	return CreateImageRequest{Request: req, Input: input, Copy: c.CreateImageRequest}
 }
 
@@ -125,8 +52,8 @@ func (c *Client) CreateImageRequest(input *CreateImageInput) CreateImageRequest 
 // CreateImage API operation.
 type CreateImageRequest struct {
 	*aws.Request
-	Input *CreateImageInput
-	Copy  func(*CreateImageInput) CreateImageRequest
+	Input *types.CreateImageInput
+	Copy  func(*types.CreateImageInput) CreateImageRequest
 }
 
 // Send marshals and sends the CreateImage API request.
@@ -138,7 +65,7 @@ func (r CreateImageRequest) Send(ctx context.Context) (*CreateImageResponse, err
 	}
 
 	resp := &CreateImageResponse{
-		CreateImageOutput: r.Request.Data.(*CreateImageOutput),
+		CreateImageOutput: r.Request.Data.(*types.CreateImageOutput),
 		response:          &aws.Response{Request: r.Request},
 	}
 
@@ -148,7 +75,7 @@ func (r CreateImageRequest) Send(ctx context.Context) (*CreateImageResponse, err
 // CreateImageResponse is the response type for the
 // CreateImage API operation.
 type CreateImageResponse struct {
-	*CreateImageOutput
+	*types.CreateImageOutput
 
 	response *aws.Response
 }

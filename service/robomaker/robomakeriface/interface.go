@@ -10,6 +10,7 @@ package robomakeriface
 
 import (
 	"github.com/aws/aws-sdk-go-v2/service/robomaker"
+	"github.com/aws/aws-sdk-go-v2/service/robomaker/types"
 )
 
 // ClientAPI provides an interface to enable mocking the
@@ -43,7 +44,7 @@ import (
 //    type mockClientClient struct {
 //        robomakeriface.ClientPI
 //    }
-//    func (m *mockClientClient) BatchDescribeSimulationJob(input *robomaker.BatchDescribeSimulationJobInput) (*robomaker.BatchDescribeSimulationJobOutput, error) {
+//    func (m *mockClientClient) BatchDescribeSimulationJob(input *types.BatchDescribeSimulationJobInput) (*types.BatchDescribeSimulationJobOutput, error) {
 //        // mock response/functionality
 //    }
 //
@@ -61,77 +62,77 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type ClientAPI interface {
-	BatchDescribeSimulationJobRequest(*robomaker.BatchDescribeSimulationJobInput) robomaker.BatchDescribeSimulationJobRequest
+	BatchDescribeSimulationJobRequest(*types.BatchDescribeSimulationJobInput) robomaker.BatchDescribeSimulationJobRequest
 
-	CancelDeploymentJobRequest(*robomaker.CancelDeploymentJobInput) robomaker.CancelDeploymentJobRequest
+	CancelDeploymentJobRequest(*types.CancelDeploymentJobInput) robomaker.CancelDeploymentJobRequest
 
-	CancelSimulationJobRequest(*robomaker.CancelSimulationJobInput) robomaker.CancelSimulationJobRequest
+	CancelSimulationJobRequest(*types.CancelSimulationJobInput) robomaker.CancelSimulationJobRequest
 
-	CreateDeploymentJobRequest(*robomaker.CreateDeploymentJobInput) robomaker.CreateDeploymentJobRequest
+	CreateDeploymentJobRequest(*types.CreateDeploymentJobInput) robomaker.CreateDeploymentJobRequest
 
-	CreateFleetRequest(*robomaker.CreateFleetInput) robomaker.CreateFleetRequest
+	CreateFleetRequest(*types.CreateFleetInput) robomaker.CreateFleetRequest
 
-	CreateRobotRequest(*robomaker.CreateRobotInput) robomaker.CreateRobotRequest
+	CreateRobotRequest(*types.CreateRobotInput) robomaker.CreateRobotRequest
 
-	CreateRobotApplicationRequest(*robomaker.CreateRobotApplicationInput) robomaker.CreateRobotApplicationRequest
+	CreateRobotApplicationRequest(*types.CreateRobotApplicationInput) robomaker.CreateRobotApplicationRequest
 
-	CreateRobotApplicationVersionRequest(*robomaker.CreateRobotApplicationVersionInput) robomaker.CreateRobotApplicationVersionRequest
+	CreateRobotApplicationVersionRequest(*types.CreateRobotApplicationVersionInput) robomaker.CreateRobotApplicationVersionRequest
 
-	CreateSimulationApplicationRequest(*robomaker.CreateSimulationApplicationInput) robomaker.CreateSimulationApplicationRequest
+	CreateSimulationApplicationRequest(*types.CreateSimulationApplicationInput) robomaker.CreateSimulationApplicationRequest
 
-	CreateSimulationApplicationVersionRequest(*robomaker.CreateSimulationApplicationVersionInput) robomaker.CreateSimulationApplicationVersionRequest
+	CreateSimulationApplicationVersionRequest(*types.CreateSimulationApplicationVersionInput) robomaker.CreateSimulationApplicationVersionRequest
 
-	CreateSimulationJobRequest(*robomaker.CreateSimulationJobInput) robomaker.CreateSimulationJobRequest
+	CreateSimulationJobRequest(*types.CreateSimulationJobInput) robomaker.CreateSimulationJobRequest
 
-	DeleteFleetRequest(*robomaker.DeleteFleetInput) robomaker.DeleteFleetRequest
+	DeleteFleetRequest(*types.DeleteFleetInput) robomaker.DeleteFleetRequest
 
-	DeleteRobotRequest(*robomaker.DeleteRobotInput) robomaker.DeleteRobotRequest
+	DeleteRobotRequest(*types.DeleteRobotInput) robomaker.DeleteRobotRequest
 
-	DeleteRobotApplicationRequest(*robomaker.DeleteRobotApplicationInput) robomaker.DeleteRobotApplicationRequest
+	DeleteRobotApplicationRequest(*types.DeleteRobotApplicationInput) robomaker.DeleteRobotApplicationRequest
 
-	DeleteSimulationApplicationRequest(*robomaker.DeleteSimulationApplicationInput) robomaker.DeleteSimulationApplicationRequest
+	DeleteSimulationApplicationRequest(*types.DeleteSimulationApplicationInput) robomaker.DeleteSimulationApplicationRequest
 
-	DeregisterRobotRequest(*robomaker.DeregisterRobotInput) robomaker.DeregisterRobotRequest
+	DeregisterRobotRequest(*types.DeregisterRobotInput) robomaker.DeregisterRobotRequest
 
-	DescribeDeploymentJobRequest(*robomaker.DescribeDeploymentJobInput) robomaker.DescribeDeploymentJobRequest
+	DescribeDeploymentJobRequest(*types.DescribeDeploymentJobInput) robomaker.DescribeDeploymentJobRequest
 
-	DescribeFleetRequest(*robomaker.DescribeFleetInput) robomaker.DescribeFleetRequest
+	DescribeFleetRequest(*types.DescribeFleetInput) robomaker.DescribeFleetRequest
 
-	DescribeRobotRequest(*robomaker.DescribeRobotInput) robomaker.DescribeRobotRequest
+	DescribeRobotRequest(*types.DescribeRobotInput) robomaker.DescribeRobotRequest
 
-	DescribeRobotApplicationRequest(*robomaker.DescribeRobotApplicationInput) robomaker.DescribeRobotApplicationRequest
+	DescribeRobotApplicationRequest(*types.DescribeRobotApplicationInput) robomaker.DescribeRobotApplicationRequest
 
-	DescribeSimulationApplicationRequest(*robomaker.DescribeSimulationApplicationInput) robomaker.DescribeSimulationApplicationRequest
+	DescribeSimulationApplicationRequest(*types.DescribeSimulationApplicationInput) robomaker.DescribeSimulationApplicationRequest
 
-	DescribeSimulationJobRequest(*robomaker.DescribeSimulationJobInput) robomaker.DescribeSimulationJobRequest
+	DescribeSimulationJobRequest(*types.DescribeSimulationJobInput) robomaker.DescribeSimulationJobRequest
 
-	ListDeploymentJobsRequest(*robomaker.ListDeploymentJobsInput) robomaker.ListDeploymentJobsRequest
+	ListDeploymentJobsRequest(*types.ListDeploymentJobsInput) robomaker.ListDeploymentJobsRequest
 
-	ListFleetsRequest(*robomaker.ListFleetsInput) robomaker.ListFleetsRequest
+	ListFleetsRequest(*types.ListFleetsInput) robomaker.ListFleetsRequest
 
-	ListRobotApplicationsRequest(*robomaker.ListRobotApplicationsInput) robomaker.ListRobotApplicationsRequest
+	ListRobotApplicationsRequest(*types.ListRobotApplicationsInput) robomaker.ListRobotApplicationsRequest
 
-	ListRobotsRequest(*robomaker.ListRobotsInput) robomaker.ListRobotsRequest
+	ListRobotsRequest(*types.ListRobotsInput) robomaker.ListRobotsRequest
 
-	ListSimulationApplicationsRequest(*robomaker.ListSimulationApplicationsInput) robomaker.ListSimulationApplicationsRequest
+	ListSimulationApplicationsRequest(*types.ListSimulationApplicationsInput) robomaker.ListSimulationApplicationsRequest
 
-	ListSimulationJobsRequest(*robomaker.ListSimulationJobsInput) robomaker.ListSimulationJobsRequest
+	ListSimulationJobsRequest(*types.ListSimulationJobsInput) robomaker.ListSimulationJobsRequest
 
-	ListTagsForResourceRequest(*robomaker.ListTagsForResourceInput) robomaker.ListTagsForResourceRequest
+	ListTagsForResourceRequest(*types.ListTagsForResourceInput) robomaker.ListTagsForResourceRequest
 
-	RegisterRobotRequest(*robomaker.RegisterRobotInput) robomaker.RegisterRobotRequest
+	RegisterRobotRequest(*types.RegisterRobotInput) robomaker.RegisterRobotRequest
 
-	RestartSimulationJobRequest(*robomaker.RestartSimulationJobInput) robomaker.RestartSimulationJobRequest
+	RestartSimulationJobRequest(*types.RestartSimulationJobInput) robomaker.RestartSimulationJobRequest
 
-	SyncDeploymentJobRequest(*robomaker.SyncDeploymentJobInput) robomaker.SyncDeploymentJobRequest
+	SyncDeploymentJobRequest(*types.SyncDeploymentJobInput) robomaker.SyncDeploymentJobRequest
 
-	TagResourceRequest(*robomaker.TagResourceInput) robomaker.TagResourceRequest
+	TagResourceRequest(*types.TagResourceInput) robomaker.TagResourceRequest
 
-	UntagResourceRequest(*robomaker.UntagResourceInput) robomaker.UntagResourceRequest
+	UntagResourceRequest(*types.UntagResourceInput) robomaker.UntagResourceRequest
 
-	UpdateRobotApplicationRequest(*robomaker.UpdateRobotApplicationInput) robomaker.UpdateRobotApplicationRequest
+	UpdateRobotApplicationRequest(*types.UpdateRobotApplicationInput) robomaker.UpdateRobotApplicationRequest
 
-	UpdateSimulationApplicationRequest(*robomaker.UpdateSimulationApplicationInput) robomaker.UpdateSimulationApplicationRequest
+	UpdateSimulationApplicationRequest(*types.UpdateSimulationApplicationInput) robomaker.UpdateSimulationApplicationRequest
 }
 
 var _ ClientAPI = (*robomaker.Client)(nil)

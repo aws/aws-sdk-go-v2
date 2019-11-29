@@ -6,57 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/greengrass/types"
 )
-
-type GetServiceRoleForAccountInput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s GetServiceRoleForAccountInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetServiceRoleForAccountInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	return nil
-}
-
-type GetServiceRoleForAccountOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The time when the service role was associated with the account.
-	AssociatedAt *string `type:"string"`
-
-	// The ARN of the role which is associated with the account.
-	RoleArn *string `type:"string"`
-}
-
-// String returns the string representation
-func (s GetServiceRoleForAccountOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetServiceRoleForAccountOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.AssociatedAt != nil {
-		v := *s.AssociatedAt
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "AssociatedAt", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.RoleArn != nil {
-		v := *s.RoleArn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "RoleArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opGetServiceRoleForAccount = "GetServiceRoleForAccount"
 
@@ -73,7 +24,7 @@ const opGetServiceRoleForAccount = "GetServiceRoleForAccount"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GetServiceRoleForAccount
-func (c *Client) GetServiceRoleForAccountRequest(input *GetServiceRoleForAccountInput) GetServiceRoleForAccountRequest {
+func (c *Client) GetServiceRoleForAccountRequest(input *types.GetServiceRoleForAccountInput) GetServiceRoleForAccountRequest {
 	op := &aws.Operation{
 		Name:       opGetServiceRoleForAccount,
 		HTTPMethod: "GET",
@@ -81,10 +32,10 @@ func (c *Client) GetServiceRoleForAccountRequest(input *GetServiceRoleForAccount
 	}
 
 	if input == nil {
-		input = &GetServiceRoleForAccountInput{}
+		input = &types.GetServiceRoleForAccountInput{}
 	}
 
-	req := c.newRequest(op, input, &GetServiceRoleForAccountOutput{})
+	req := c.newRequest(op, input, &types.GetServiceRoleForAccountOutput{})
 	return GetServiceRoleForAccountRequest{Request: req, Input: input, Copy: c.GetServiceRoleForAccountRequest}
 }
 
@@ -92,8 +43,8 @@ func (c *Client) GetServiceRoleForAccountRequest(input *GetServiceRoleForAccount
 // GetServiceRoleForAccount API operation.
 type GetServiceRoleForAccountRequest struct {
 	*aws.Request
-	Input *GetServiceRoleForAccountInput
-	Copy  func(*GetServiceRoleForAccountInput) GetServiceRoleForAccountRequest
+	Input *types.GetServiceRoleForAccountInput
+	Copy  func(*types.GetServiceRoleForAccountInput) GetServiceRoleForAccountRequest
 }
 
 // Send marshals and sends the GetServiceRoleForAccount API request.
@@ -105,7 +56,7 @@ func (r GetServiceRoleForAccountRequest) Send(ctx context.Context) (*GetServiceR
 	}
 
 	resp := &GetServiceRoleForAccountResponse{
-		GetServiceRoleForAccountOutput: r.Request.Data.(*GetServiceRoleForAccountOutput),
+		GetServiceRoleForAccountOutput: r.Request.Data.(*types.GetServiceRoleForAccountOutput),
 		response:                       &aws.Response{Request: r.Request},
 	}
 
@@ -115,7 +66,7 @@ func (r GetServiceRoleForAccountRequest) Send(ctx context.Context) (*GetServiceR
 // GetServiceRoleForAccountResponse is the response type for the
 // GetServiceRoleForAccount API operation.
 type GetServiceRoleForAccountResponse struct {
-	*GetServiceRoleForAccountOutput
+	*types.GetServiceRoleForAccountOutput
 
 	response *aws.Response
 }

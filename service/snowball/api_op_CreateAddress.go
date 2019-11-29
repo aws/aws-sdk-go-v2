@@ -6,55 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/snowball/types"
 )
-
-type CreateAddressInput struct {
-	_ struct{} `type:"structure"`
-
-	// The address that you want the Snowball shipped to.
-	//
-	// Address is a required field
-	Address *Address `type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s CreateAddressInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateAddressInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateAddressInput"}
-
-	if s.Address == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Address"))
-	}
-	if s.Address != nil {
-		if err := s.Address.Validate(); err != nil {
-			invalidParams.AddNested("Address", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type CreateAddressOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The automatically generated ID for a specific address. You'll use this ID
-	// when you create a job to specify which address you want the Snowball for
-	// that job shipped to.
-	AddressId *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s CreateAddressOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCreateAddress = "CreateAddress"
 
@@ -74,7 +27,7 @@ const opCreateAddress = "CreateAddress"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/CreateAddress
-func (c *Client) CreateAddressRequest(input *CreateAddressInput) CreateAddressRequest {
+func (c *Client) CreateAddressRequest(input *types.CreateAddressInput) CreateAddressRequest {
 	op := &aws.Operation{
 		Name:       opCreateAddress,
 		HTTPMethod: "POST",
@@ -82,10 +35,10 @@ func (c *Client) CreateAddressRequest(input *CreateAddressInput) CreateAddressRe
 	}
 
 	if input == nil {
-		input = &CreateAddressInput{}
+		input = &types.CreateAddressInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateAddressOutput{})
+	req := c.newRequest(op, input, &types.CreateAddressOutput{})
 	return CreateAddressRequest{Request: req, Input: input, Copy: c.CreateAddressRequest}
 }
 
@@ -93,8 +46,8 @@ func (c *Client) CreateAddressRequest(input *CreateAddressInput) CreateAddressRe
 // CreateAddress API operation.
 type CreateAddressRequest struct {
 	*aws.Request
-	Input *CreateAddressInput
-	Copy  func(*CreateAddressInput) CreateAddressRequest
+	Input *types.CreateAddressInput
+	Copy  func(*types.CreateAddressInput) CreateAddressRequest
 }
 
 // Send marshals and sends the CreateAddress API request.
@@ -106,7 +59,7 @@ func (r CreateAddressRequest) Send(ctx context.Context) (*CreateAddressResponse,
 	}
 
 	resp := &CreateAddressResponse{
-		CreateAddressOutput: r.Request.Data.(*CreateAddressOutput),
+		CreateAddressOutput: r.Request.Data.(*types.CreateAddressOutput),
 		response:            &aws.Response{Request: r.Request},
 	}
 
@@ -116,7 +69,7 @@ func (r CreateAddressRequest) Send(ctx context.Context) (*CreateAddressResponse,
 // CreateAddressResponse is the response type for the
 // CreateAddress API operation.
 type CreateAddressResponse struct {
-	*CreateAddressOutput
+	*types.CreateAddressOutput
 
 	response *aws.Response
 }

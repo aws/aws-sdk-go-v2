@@ -6,67 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/managedblockchain/types"
 )
-
-type RejectInvitationInput struct {
-	_ struct{} `type:"structure"`
-
-	// The unique identifier of the invitation to reject.
-	//
-	// InvitationId is a required field
-	InvitationId *string `location:"uri" locationName:"invitationId" min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s RejectInvitationInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *RejectInvitationInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "RejectInvitationInput"}
-
-	if s.InvitationId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("InvitationId"))
-	}
-	if s.InvitationId != nil && len(*s.InvitationId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("InvitationId", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s RejectInvitationInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.InvitationId != nil {
-		v := *s.InvitationId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "invitationId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type RejectInvitationOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s RejectInvitationOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s RejectInvitationOutput) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
 
 const opRejectInvitation = "RejectInvitation"
 
@@ -85,7 +26,7 @@ const opRejectInvitation = "RejectInvitation"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/managedblockchain-2018-09-24/RejectInvitation
-func (c *Client) RejectInvitationRequest(input *RejectInvitationInput) RejectInvitationRequest {
+func (c *Client) RejectInvitationRequest(input *types.RejectInvitationInput) RejectInvitationRequest {
 	op := &aws.Operation{
 		Name:       opRejectInvitation,
 		HTTPMethod: "DELETE",
@@ -93,10 +34,10 @@ func (c *Client) RejectInvitationRequest(input *RejectInvitationInput) RejectInv
 	}
 
 	if input == nil {
-		input = &RejectInvitationInput{}
+		input = &types.RejectInvitationInput{}
 	}
 
-	req := c.newRequest(op, input, &RejectInvitationOutput{})
+	req := c.newRequest(op, input, &types.RejectInvitationOutput{})
 	return RejectInvitationRequest{Request: req, Input: input, Copy: c.RejectInvitationRequest}
 }
 
@@ -104,8 +45,8 @@ func (c *Client) RejectInvitationRequest(input *RejectInvitationInput) RejectInv
 // RejectInvitation API operation.
 type RejectInvitationRequest struct {
 	*aws.Request
-	Input *RejectInvitationInput
-	Copy  func(*RejectInvitationInput) RejectInvitationRequest
+	Input *types.RejectInvitationInput
+	Copy  func(*types.RejectInvitationInput) RejectInvitationRequest
 }
 
 // Send marshals and sends the RejectInvitation API request.
@@ -117,7 +58,7 @@ func (r RejectInvitationRequest) Send(ctx context.Context) (*RejectInvitationRes
 	}
 
 	resp := &RejectInvitationResponse{
-		RejectInvitationOutput: r.Request.Data.(*RejectInvitationOutput),
+		RejectInvitationOutput: r.Request.Data.(*types.RejectInvitationOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -127,7 +68,7 @@ func (r RejectInvitationRequest) Send(ctx context.Context) (*RejectInvitationRes
 // RejectInvitationResponse is the response type for the
 // RejectInvitation API operation.
 type RejectInvitationResponse struct {
-	*RejectInvitationOutput
+	*types.RejectInvitationOutput
 
 	response *aws.Response
 }

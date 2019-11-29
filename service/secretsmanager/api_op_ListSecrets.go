@@ -6,71 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/secretsmanager/types"
 )
-
-type ListSecretsInput struct {
-	_ struct{} `type:"structure"`
-
-	// (Optional) Limits the number of results that you want to include in the response.
-	// If you don't include this parameter, it defaults to a value that's specific
-	// to the operation. If additional items exist beyond the maximum you specify,
-	// the NextToken response element is present and has a value (isn't null). Include
-	// that value as the NextToken request parameter in the next call to the operation
-	// to get the next part of the results. Note that Secrets Manager might return
-	// fewer results than the maximum even when there are more results available.
-	// You should check NextToken after every operation to ensure that you receive
-	// all of the results.
-	MaxResults *int64 `min:"1" type:"integer"`
-
-	// (Optional) Use this parameter in a request if you receive a NextToken response
-	// in a previous request that indicates that there's more output available.
-	// In a subsequent call, set it to the value of the previous call's NextToken
-	// response to indicate where the output should continue from.
-	NextToken *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s ListSecretsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListSecretsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListSecretsInput"}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-	if s.NextToken != nil && len(*s.NextToken) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ListSecretsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// If present in the response, this value indicates that there's more output
-	// available than what's included in the current response. This can occur even
-	// when the response includes no values at all, such as when you ask for a filtered
-	// view of a very long list. Use this value in the NextToken request parameter
-	// in a subsequent call to the operation to continue processing and get the
-	// next part of the output. You should repeat this until the NextToken response
-	// element comes back empty (as null).
-	NextToken *string `min:"1" type:"string"`
-
-	// A list of the secrets in the account.
-	SecretList []SecretListEntry `type:"list"`
-}
-
-// String returns the string representation
-func (s ListSecretsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListSecrets = "ListSecrets"
 
@@ -106,7 +43,7 @@ const opListSecrets = "ListSecrets"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/secretsmanager-2017-10-17/ListSecrets
-func (c *Client) ListSecretsRequest(input *ListSecretsInput) ListSecretsRequest {
+func (c *Client) ListSecretsRequest(input *types.ListSecretsInput) ListSecretsRequest {
 	op := &aws.Operation{
 		Name:       opListSecrets,
 		HTTPMethod: "POST",
@@ -120,10 +57,10 @@ func (c *Client) ListSecretsRequest(input *ListSecretsInput) ListSecretsRequest 
 	}
 
 	if input == nil {
-		input = &ListSecretsInput{}
+		input = &types.ListSecretsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListSecretsOutput{})
+	req := c.newRequest(op, input, &types.ListSecretsOutput{})
 	return ListSecretsRequest{Request: req, Input: input, Copy: c.ListSecretsRequest}
 }
 
@@ -131,8 +68,8 @@ func (c *Client) ListSecretsRequest(input *ListSecretsInput) ListSecretsRequest 
 // ListSecrets API operation.
 type ListSecretsRequest struct {
 	*aws.Request
-	Input *ListSecretsInput
-	Copy  func(*ListSecretsInput) ListSecretsRequest
+	Input *types.ListSecretsInput
+	Copy  func(*types.ListSecretsInput) ListSecretsRequest
 }
 
 // Send marshals and sends the ListSecrets API request.
@@ -144,7 +81,7 @@ func (r ListSecretsRequest) Send(ctx context.Context) (*ListSecretsResponse, err
 	}
 
 	resp := &ListSecretsResponse{
-		ListSecretsOutput: r.Request.Data.(*ListSecretsOutput),
+		ListSecretsOutput: r.Request.Data.(*types.ListSecretsOutput),
 		response:          &aws.Response{Request: r.Request},
 	}
 
@@ -174,7 +111,7 @@ func NewListSecretsPaginator(req ListSecretsRequest) ListSecretsPaginator {
 	return ListSecretsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListSecretsInput
+				var inCpy *types.ListSecretsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -194,14 +131,14 @@ type ListSecretsPaginator struct {
 	aws.Pager
 }
 
-func (p *ListSecretsPaginator) CurrentPage() *ListSecretsOutput {
-	return p.Pager.CurrentPage().(*ListSecretsOutput)
+func (p *ListSecretsPaginator) CurrentPage() *types.ListSecretsOutput {
+	return p.Pager.CurrentPage().(*types.ListSecretsOutput)
 }
 
 // ListSecretsResponse is the response type for the
 // ListSecrets API operation.
 type ListSecretsResponse struct {
-	*ListSecretsOutput
+	*types.ListSecretsOutput
 
 	response *aws.Response
 }

@@ -6,94 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/chime/types"
 )
-
-type ListVoiceConnectorsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The maximum number of results to return in a single call.
-	MaxResults *int64 `location:"querystring" locationName:"max-results" min:"1" type:"integer"`
-
-	// The token to use to retrieve the next page of results.
-	NextToken *string `location:"querystring" locationName:"next-token" type:"string"`
-}
-
-// String returns the string representation
-func (s ListVoiceConnectorsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListVoiceConnectorsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListVoiceConnectorsInput"}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListVoiceConnectorsInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.MaxResults != nil {
-		v := *s.MaxResults
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "max-results", protocol.Int64Value(v), metadata)
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "next-token", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type ListVoiceConnectorsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The token to use to retrieve the next page of results.
-	NextToken *string `type:"string"`
-
-	// The details of the Amazon Chime Voice Connectors.
-	VoiceConnectors []VoiceConnector `type:"list"`
-}
-
-// String returns the string representation
-func (s ListVoiceConnectorsOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListVoiceConnectorsOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.VoiceConnectors != nil {
-		v := s.VoiceConnectors
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "VoiceConnectors", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	return nil
-}
 
 const opListVoiceConnectors = "ListVoiceConnectors"
 
@@ -110,7 +24,7 @@ const opListVoiceConnectors = "ListVoiceConnectors"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/ListVoiceConnectors
-func (c *Client) ListVoiceConnectorsRequest(input *ListVoiceConnectorsInput) ListVoiceConnectorsRequest {
+func (c *Client) ListVoiceConnectorsRequest(input *types.ListVoiceConnectorsInput) ListVoiceConnectorsRequest {
 	op := &aws.Operation{
 		Name:       opListVoiceConnectors,
 		HTTPMethod: "GET",
@@ -124,10 +38,10 @@ func (c *Client) ListVoiceConnectorsRequest(input *ListVoiceConnectorsInput) Lis
 	}
 
 	if input == nil {
-		input = &ListVoiceConnectorsInput{}
+		input = &types.ListVoiceConnectorsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListVoiceConnectorsOutput{})
+	req := c.newRequest(op, input, &types.ListVoiceConnectorsOutput{})
 	return ListVoiceConnectorsRequest{Request: req, Input: input, Copy: c.ListVoiceConnectorsRequest}
 }
 
@@ -135,8 +49,8 @@ func (c *Client) ListVoiceConnectorsRequest(input *ListVoiceConnectorsInput) Lis
 // ListVoiceConnectors API operation.
 type ListVoiceConnectorsRequest struct {
 	*aws.Request
-	Input *ListVoiceConnectorsInput
-	Copy  func(*ListVoiceConnectorsInput) ListVoiceConnectorsRequest
+	Input *types.ListVoiceConnectorsInput
+	Copy  func(*types.ListVoiceConnectorsInput) ListVoiceConnectorsRequest
 }
 
 // Send marshals and sends the ListVoiceConnectors API request.
@@ -148,7 +62,7 @@ func (r ListVoiceConnectorsRequest) Send(ctx context.Context) (*ListVoiceConnect
 	}
 
 	resp := &ListVoiceConnectorsResponse{
-		ListVoiceConnectorsOutput: r.Request.Data.(*ListVoiceConnectorsOutput),
+		ListVoiceConnectorsOutput: r.Request.Data.(*types.ListVoiceConnectorsOutput),
 		response:                  &aws.Response{Request: r.Request},
 	}
 
@@ -178,7 +92,7 @@ func NewListVoiceConnectorsPaginator(req ListVoiceConnectorsRequest) ListVoiceCo
 	return ListVoiceConnectorsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListVoiceConnectorsInput
+				var inCpy *types.ListVoiceConnectorsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -198,14 +112,14 @@ type ListVoiceConnectorsPaginator struct {
 	aws.Pager
 }
 
-func (p *ListVoiceConnectorsPaginator) CurrentPage() *ListVoiceConnectorsOutput {
-	return p.Pager.CurrentPage().(*ListVoiceConnectorsOutput)
+func (p *ListVoiceConnectorsPaginator) CurrentPage() *types.ListVoiceConnectorsOutput {
+	return p.Pager.CurrentPage().(*types.ListVoiceConnectorsOutput)
 }
 
 // ListVoiceConnectorsResponse is the response type for the
 // ListVoiceConnectors API operation.
 type ListVoiceConnectorsResponse struct {
-	*ListVoiceConnectorsOutput
+	*types.ListVoiceConnectorsOutput
 
 	response *aws.Response
 }

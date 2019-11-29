@@ -6,70 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/groundstation/types"
 )
-
-type CancelContactInput struct {
-	_ struct{} `type:"structure"`
-
-	// ContactId is a required field
-	ContactId *string `location:"uri" locationName:"contactId" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s CancelContactInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CancelContactInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CancelContactInput"}
-
-	if s.ContactId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ContactId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s CancelContactInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.ContactId != nil {
-		v := *s.ContactId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "contactId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type CancelContactOutput struct {
-	_ struct{} `type:"structure"`
-
-	ContactId *string `locationName:"contactId" type:"string"`
-}
-
-// String returns the string representation
-func (s CancelContactOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s CancelContactOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.ContactId != nil {
-		v := *s.ContactId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "contactId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opCancelContact = "CancelContact"
 
@@ -86,7 +24,7 @@ const opCancelContact = "CancelContact"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/groundstation-2019-05-23/CancelContact
-func (c *Client) CancelContactRequest(input *CancelContactInput) CancelContactRequest {
+func (c *Client) CancelContactRequest(input *types.CancelContactInput) CancelContactRequest {
 	op := &aws.Operation{
 		Name:       opCancelContact,
 		HTTPMethod: "DELETE",
@@ -94,10 +32,10 @@ func (c *Client) CancelContactRequest(input *CancelContactInput) CancelContactRe
 	}
 
 	if input == nil {
-		input = &CancelContactInput{}
+		input = &types.CancelContactInput{}
 	}
 
-	req := c.newRequest(op, input, &CancelContactOutput{})
+	req := c.newRequest(op, input, &types.CancelContactOutput{})
 	return CancelContactRequest{Request: req, Input: input, Copy: c.CancelContactRequest}
 }
 
@@ -105,8 +43,8 @@ func (c *Client) CancelContactRequest(input *CancelContactInput) CancelContactRe
 // CancelContact API operation.
 type CancelContactRequest struct {
 	*aws.Request
-	Input *CancelContactInput
-	Copy  func(*CancelContactInput) CancelContactRequest
+	Input *types.CancelContactInput
+	Copy  func(*types.CancelContactInput) CancelContactRequest
 }
 
 // Send marshals and sends the CancelContact API request.
@@ -118,7 +56,7 @@ func (r CancelContactRequest) Send(ctx context.Context) (*CancelContactResponse,
 	}
 
 	resp := &CancelContactResponse{
-		CancelContactOutput: r.Request.Data.(*CancelContactOutput),
+		CancelContactOutput: r.Request.Data.(*types.CancelContactOutput),
 		response:            &aws.Response{Request: r.Request},
 	}
 
@@ -128,7 +66,7 @@ func (r CancelContactRequest) Send(ctx context.Context) (*CancelContactResponse,
 // CancelContactResponse is the response type for the
 // CancelContact API operation.
 type CancelContactResponse struct {
-	*CancelContactOutput
+	*types.CancelContactOutput
 
 	response *aws.Response
 }

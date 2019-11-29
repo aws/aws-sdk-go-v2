@@ -13,6 +13,7 @@ import (
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/route53"
+	"github.com/aws/aws-sdk-go-v2/service/route53/types"
 )
 
 // ClientAPI provides an interface to enable mocking the
@@ -46,7 +47,7 @@ import (
 //    type mockClientClient struct {
 //        route53iface.ClientPI
 //    }
-//    func (m *mockClientClient) AssociateVPCWithHostedZone(input *route53.AssociateVPCWithHostedZoneInput) (*route53.AssociateVPCWithHostedZoneOutput, error) {
+//    func (m *mockClientClient) AssociateVPCWithHostedZone(input *types.AssociateVPCWithHostedZoneInput) (*types.AssociateVPCWithHostedZoneOutput, error) {
 //        // mock response/functionality
 //    }
 //
@@ -64,119 +65,119 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type ClientAPI interface {
-	AssociateVPCWithHostedZoneRequest(*route53.AssociateVPCWithHostedZoneInput) route53.AssociateVPCWithHostedZoneRequest
+	AssociateVPCWithHostedZoneRequest(*types.AssociateVPCWithHostedZoneInput) route53.AssociateVPCWithHostedZoneRequest
 
-	ChangeResourceRecordSetsRequest(*route53.ChangeResourceRecordSetsInput) route53.ChangeResourceRecordSetsRequest
+	ChangeResourceRecordSetsRequest(*types.ChangeResourceRecordSetsInput) route53.ChangeResourceRecordSetsRequest
 
-	ChangeTagsForResourceRequest(*route53.ChangeTagsForResourceInput) route53.ChangeTagsForResourceRequest
+	ChangeTagsForResourceRequest(*types.ChangeTagsForResourceInput) route53.ChangeTagsForResourceRequest
 
-	CreateHealthCheckRequest(*route53.CreateHealthCheckInput) route53.CreateHealthCheckRequest
+	CreateHealthCheckRequest(*types.CreateHealthCheckInput) route53.CreateHealthCheckRequest
 
-	CreateHostedZoneRequest(*route53.CreateHostedZoneInput) route53.CreateHostedZoneRequest
+	CreateHostedZoneRequest(*types.CreateHostedZoneInput) route53.CreateHostedZoneRequest
 
-	CreateQueryLoggingConfigRequest(*route53.CreateQueryLoggingConfigInput) route53.CreateQueryLoggingConfigRequest
+	CreateQueryLoggingConfigRequest(*types.CreateQueryLoggingConfigInput) route53.CreateQueryLoggingConfigRequest
 
-	CreateReusableDelegationSetRequest(*route53.CreateReusableDelegationSetInput) route53.CreateReusableDelegationSetRequest
+	CreateReusableDelegationSetRequest(*types.CreateReusableDelegationSetInput) route53.CreateReusableDelegationSetRequest
 
-	CreateTrafficPolicyRequest(*route53.CreateTrafficPolicyInput) route53.CreateTrafficPolicyRequest
+	CreateTrafficPolicyRequest(*types.CreateTrafficPolicyInput) route53.CreateTrafficPolicyRequest
 
-	CreateTrafficPolicyInstanceRequest(*route53.CreateTrafficPolicyInstanceInput) route53.CreateTrafficPolicyInstanceRequest
+	CreateTrafficPolicyInstanceRequest(*types.CreateTrafficPolicyInstanceInput) route53.CreateTrafficPolicyInstanceRequest
 
-	CreateTrafficPolicyVersionRequest(*route53.CreateTrafficPolicyVersionInput) route53.CreateTrafficPolicyVersionRequest
+	CreateTrafficPolicyVersionRequest(*types.CreateTrafficPolicyVersionInput) route53.CreateTrafficPolicyVersionRequest
 
-	CreateVPCAssociationAuthorizationRequest(*route53.CreateVPCAssociationAuthorizationInput) route53.CreateVPCAssociationAuthorizationRequest
+	CreateVPCAssociationAuthorizationRequest(*types.CreateVPCAssociationAuthorizationInput) route53.CreateVPCAssociationAuthorizationRequest
 
-	DeleteHealthCheckRequest(*route53.DeleteHealthCheckInput) route53.DeleteHealthCheckRequest
+	DeleteHealthCheckRequest(*types.DeleteHealthCheckInput) route53.DeleteHealthCheckRequest
 
-	DeleteHostedZoneRequest(*route53.DeleteHostedZoneInput) route53.DeleteHostedZoneRequest
+	DeleteHostedZoneRequest(*types.DeleteHostedZoneInput) route53.DeleteHostedZoneRequest
 
-	DeleteQueryLoggingConfigRequest(*route53.DeleteQueryLoggingConfigInput) route53.DeleteQueryLoggingConfigRequest
+	DeleteQueryLoggingConfigRequest(*types.DeleteQueryLoggingConfigInput) route53.DeleteQueryLoggingConfigRequest
 
-	DeleteReusableDelegationSetRequest(*route53.DeleteReusableDelegationSetInput) route53.DeleteReusableDelegationSetRequest
+	DeleteReusableDelegationSetRequest(*types.DeleteReusableDelegationSetInput) route53.DeleteReusableDelegationSetRequest
 
-	DeleteTrafficPolicyRequest(*route53.DeleteTrafficPolicyInput) route53.DeleteTrafficPolicyRequest
+	DeleteTrafficPolicyRequest(*types.DeleteTrafficPolicyInput) route53.DeleteTrafficPolicyRequest
 
-	DeleteTrafficPolicyInstanceRequest(*route53.DeleteTrafficPolicyInstanceInput) route53.DeleteTrafficPolicyInstanceRequest
+	DeleteTrafficPolicyInstanceRequest(*types.DeleteTrafficPolicyInstanceInput) route53.DeleteTrafficPolicyInstanceRequest
 
-	DeleteVPCAssociationAuthorizationRequest(*route53.DeleteVPCAssociationAuthorizationInput) route53.DeleteVPCAssociationAuthorizationRequest
+	DeleteVPCAssociationAuthorizationRequest(*types.DeleteVPCAssociationAuthorizationInput) route53.DeleteVPCAssociationAuthorizationRequest
 
-	DisassociateVPCFromHostedZoneRequest(*route53.DisassociateVPCFromHostedZoneInput) route53.DisassociateVPCFromHostedZoneRequest
+	DisassociateVPCFromHostedZoneRequest(*types.DisassociateVPCFromHostedZoneInput) route53.DisassociateVPCFromHostedZoneRequest
 
-	GetAccountLimitRequest(*route53.GetAccountLimitInput) route53.GetAccountLimitRequest
+	GetAccountLimitRequest(*types.GetAccountLimitInput) route53.GetAccountLimitRequest
 
-	GetChangeRequest(*route53.GetChangeInput) route53.GetChangeRequest
+	GetChangeRequest(*types.GetChangeInput) route53.GetChangeRequest
 
-	GetCheckerIpRangesRequest(*route53.GetCheckerIpRangesInput) route53.GetCheckerIpRangesRequest
+	GetCheckerIpRangesRequest(*types.GetCheckerIpRangesInput) route53.GetCheckerIpRangesRequest
 
-	GetGeoLocationRequest(*route53.GetGeoLocationInput) route53.GetGeoLocationRequest
+	GetGeoLocationRequest(*types.GetGeoLocationInput) route53.GetGeoLocationRequest
 
-	GetHealthCheckRequest(*route53.GetHealthCheckInput) route53.GetHealthCheckRequest
+	GetHealthCheckRequest(*types.GetHealthCheckInput) route53.GetHealthCheckRequest
 
-	GetHealthCheckCountRequest(*route53.GetHealthCheckCountInput) route53.GetHealthCheckCountRequest
+	GetHealthCheckCountRequest(*types.GetHealthCheckCountInput) route53.GetHealthCheckCountRequest
 
-	GetHealthCheckLastFailureReasonRequest(*route53.GetHealthCheckLastFailureReasonInput) route53.GetHealthCheckLastFailureReasonRequest
+	GetHealthCheckLastFailureReasonRequest(*types.GetHealthCheckLastFailureReasonInput) route53.GetHealthCheckLastFailureReasonRequest
 
-	GetHealthCheckStatusRequest(*route53.GetHealthCheckStatusInput) route53.GetHealthCheckStatusRequest
+	GetHealthCheckStatusRequest(*types.GetHealthCheckStatusInput) route53.GetHealthCheckStatusRequest
 
-	GetHostedZoneRequest(*route53.GetHostedZoneInput) route53.GetHostedZoneRequest
+	GetHostedZoneRequest(*types.GetHostedZoneInput) route53.GetHostedZoneRequest
 
-	GetHostedZoneCountRequest(*route53.GetHostedZoneCountInput) route53.GetHostedZoneCountRequest
+	GetHostedZoneCountRequest(*types.GetHostedZoneCountInput) route53.GetHostedZoneCountRequest
 
-	GetHostedZoneLimitRequest(*route53.GetHostedZoneLimitInput) route53.GetHostedZoneLimitRequest
+	GetHostedZoneLimitRequest(*types.GetHostedZoneLimitInput) route53.GetHostedZoneLimitRequest
 
-	GetQueryLoggingConfigRequest(*route53.GetQueryLoggingConfigInput) route53.GetQueryLoggingConfigRequest
+	GetQueryLoggingConfigRequest(*types.GetQueryLoggingConfigInput) route53.GetQueryLoggingConfigRequest
 
-	GetReusableDelegationSetRequest(*route53.GetReusableDelegationSetInput) route53.GetReusableDelegationSetRequest
+	GetReusableDelegationSetRequest(*types.GetReusableDelegationSetInput) route53.GetReusableDelegationSetRequest
 
-	GetReusableDelegationSetLimitRequest(*route53.GetReusableDelegationSetLimitInput) route53.GetReusableDelegationSetLimitRequest
+	GetReusableDelegationSetLimitRequest(*types.GetReusableDelegationSetLimitInput) route53.GetReusableDelegationSetLimitRequest
 
-	GetTrafficPolicyRequest(*route53.GetTrafficPolicyInput) route53.GetTrafficPolicyRequest
+	GetTrafficPolicyRequest(*types.GetTrafficPolicyInput) route53.GetTrafficPolicyRequest
 
-	GetTrafficPolicyInstanceRequest(*route53.GetTrafficPolicyInstanceInput) route53.GetTrafficPolicyInstanceRequest
+	GetTrafficPolicyInstanceRequest(*types.GetTrafficPolicyInstanceInput) route53.GetTrafficPolicyInstanceRequest
 
-	GetTrafficPolicyInstanceCountRequest(*route53.GetTrafficPolicyInstanceCountInput) route53.GetTrafficPolicyInstanceCountRequest
+	GetTrafficPolicyInstanceCountRequest(*types.GetTrafficPolicyInstanceCountInput) route53.GetTrafficPolicyInstanceCountRequest
 
-	ListGeoLocationsRequest(*route53.ListGeoLocationsInput) route53.ListGeoLocationsRequest
+	ListGeoLocationsRequest(*types.ListGeoLocationsInput) route53.ListGeoLocationsRequest
 
-	ListHealthChecksRequest(*route53.ListHealthChecksInput) route53.ListHealthChecksRequest
+	ListHealthChecksRequest(*types.ListHealthChecksInput) route53.ListHealthChecksRequest
 
-	ListHostedZonesRequest(*route53.ListHostedZonesInput) route53.ListHostedZonesRequest
+	ListHostedZonesRequest(*types.ListHostedZonesInput) route53.ListHostedZonesRequest
 
-	ListHostedZonesByNameRequest(*route53.ListHostedZonesByNameInput) route53.ListHostedZonesByNameRequest
+	ListHostedZonesByNameRequest(*types.ListHostedZonesByNameInput) route53.ListHostedZonesByNameRequest
 
-	ListQueryLoggingConfigsRequest(*route53.ListQueryLoggingConfigsInput) route53.ListQueryLoggingConfigsRequest
+	ListQueryLoggingConfigsRequest(*types.ListQueryLoggingConfigsInput) route53.ListQueryLoggingConfigsRequest
 
-	ListResourceRecordSetsRequest(*route53.ListResourceRecordSetsInput) route53.ListResourceRecordSetsRequest
+	ListResourceRecordSetsRequest(*types.ListResourceRecordSetsInput) route53.ListResourceRecordSetsRequest
 
-	ListReusableDelegationSetsRequest(*route53.ListReusableDelegationSetsInput) route53.ListReusableDelegationSetsRequest
+	ListReusableDelegationSetsRequest(*types.ListReusableDelegationSetsInput) route53.ListReusableDelegationSetsRequest
 
-	ListTagsForResourceRequest(*route53.ListTagsForResourceInput) route53.ListTagsForResourceRequest
+	ListTagsForResourceRequest(*types.ListTagsForResourceInput) route53.ListTagsForResourceRequest
 
-	ListTagsForResourcesRequest(*route53.ListTagsForResourcesInput) route53.ListTagsForResourcesRequest
+	ListTagsForResourcesRequest(*types.ListTagsForResourcesInput) route53.ListTagsForResourcesRequest
 
-	ListTrafficPoliciesRequest(*route53.ListTrafficPoliciesInput) route53.ListTrafficPoliciesRequest
+	ListTrafficPoliciesRequest(*types.ListTrafficPoliciesInput) route53.ListTrafficPoliciesRequest
 
-	ListTrafficPolicyInstancesRequest(*route53.ListTrafficPolicyInstancesInput) route53.ListTrafficPolicyInstancesRequest
+	ListTrafficPolicyInstancesRequest(*types.ListTrafficPolicyInstancesInput) route53.ListTrafficPolicyInstancesRequest
 
-	ListTrafficPolicyInstancesByHostedZoneRequest(*route53.ListTrafficPolicyInstancesByHostedZoneInput) route53.ListTrafficPolicyInstancesByHostedZoneRequest
+	ListTrafficPolicyInstancesByHostedZoneRequest(*types.ListTrafficPolicyInstancesByHostedZoneInput) route53.ListTrafficPolicyInstancesByHostedZoneRequest
 
-	ListTrafficPolicyInstancesByPolicyRequest(*route53.ListTrafficPolicyInstancesByPolicyInput) route53.ListTrafficPolicyInstancesByPolicyRequest
+	ListTrafficPolicyInstancesByPolicyRequest(*types.ListTrafficPolicyInstancesByPolicyInput) route53.ListTrafficPolicyInstancesByPolicyRequest
 
-	ListTrafficPolicyVersionsRequest(*route53.ListTrafficPolicyVersionsInput) route53.ListTrafficPolicyVersionsRequest
+	ListTrafficPolicyVersionsRequest(*types.ListTrafficPolicyVersionsInput) route53.ListTrafficPolicyVersionsRequest
 
-	ListVPCAssociationAuthorizationsRequest(*route53.ListVPCAssociationAuthorizationsInput) route53.ListVPCAssociationAuthorizationsRequest
+	ListVPCAssociationAuthorizationsRequest(*types.ListVPCAssociationAuthorizationsInput) route53.ListVPCAssociationAuthorizationsRequest
 
-	TestDNSAnswerRequest(*route53.TestDNSAnswerInput) route53.TestDNSAnswerRequest
+	TestDNSAnswerRequest(*types.TestDNSAnswerInput) route53.TestDNSAnswerRequest
 
-	UpdateHealthCheckRequest(*route53.UpdateHealthCheckInput) route53.UpdateHealthCheckRequest
+	UpdateHealthCheckRequest(*types.UpdateHealthCheckInput) route53.UpdateHealthCheckRequest
 
-	UpdateHostedZoneCommentRequest(*route53.UpdateHostedZoneCommentInput) route53.UpdateHostedZoneCommentRequest
+	UpdateHostedZoneCommentRequest(*types.UpdateHostedZoneCommentInput) route53.UpdateHostedZoneCommentRequest
 
-	UpdateTrafficPolicyCommentRequest(*route53.UpdateTrafficPolicyCommentInput) route53.UpdateTrafficPolicyCommentRequest
+	UpdateTrafficPolicyCommentRequest(*types.UpdateTrafficPolicyCommentInput) route53.UpdateTrafficPolicyCommentRequest
 
-	UpdateTrafficPolicyInstanceRequest(*route53.UpdateTrafficPolicyInstanceInput) route53.UpdateTrafficPolicyInstanceRequest
+	UpdateTrafficPolicyInstanceRequest(*types.UpdateTrafficPolicyInstanceInput) route53.UpdateTrafficPolicyInstanceRequest
 
-	WaitUntilResourceRecordSetsChanged(context.Context, *route53.GetChangeInput, ...aws.WaiterOption) error
+	WaitUntilResourceRecordSetsChanged(context.Context, *types.GetChangeInput, ...aws.WaiterOption) error
 }
 
 var _ ClientAPI = (*route53.Client)(nil)

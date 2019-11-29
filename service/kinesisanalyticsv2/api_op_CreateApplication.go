@@ -4,117 +4,10 @@ package kinesisanalyticsv2
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/kinesisanalyticsv2/types"
 )
-
-type CreateApplicationInput struct {
-	_ struct{} `type:"structure"`
-
-	// Use this parameter to configure the application.
-	ApplicationConfiguration *ApplicationConfiguration `type:"structure"`
-
-	// A summary description of the application.
-	ApplicationDescription *string `type:"string"`
-
-	// The name of your application (for example, sample-app).
-	//
-	// ApplicationName is a required field
-	ApplicationName *string `min:"1" type:"string" required:"true"`
-
-	// Use this parameter to configure an Amazon CloudWatch log stream to monitor
-	// application configuration errors.
-	CloudWatchLoggingOptions []CloudWatchLoggingOption `type:"list"`
-
-	// The runtime environment for the application (SQL-1.0 or FLINK-1_6).
-	//
-	// RuntimeEnvironment is a required field
-	RuntimeEnvironment RuntimeEnvironment `type:"string" required:"true" enum:"true"`
-
-	// The IAM role used by the application to access Kinesis data streams, Kinesis
-	// Data Firehose delivery streams, Amazon S3 objects, and other external resources.
-	//
-	// ServiceExecutionRole is a required field
-	ServiceExecutionRole *string `min:"1" type:"string" required:"true"`
-
-	// A list of one or more tags to assign to the application. A tag is a key-value
-	// pair that identifies an application. Note that the maximum number of application
-	// tags includes system tags. The maximum number of user-defined application
-	// tags is 50. For more information, see Using Cost Allocation Tags (https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html)
-	// in the AWS Billing and Cost Management Guide.
-	Tags []Tag `min:"1" type:"list"`
-}
-
-// String returns the string representation
-func (s CreateApplicationInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateApplicationInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateApplicationInput"}
-
-	if s.ApplicationName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ApplicationName"))
-	}
-	if s.ApplicationName != nil && len(*s.ApplicationName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ApplicationName", 1))
-	}
-	if len(s.RuntimeEnvironment) == 0 {
-		invalidParams.Add(aws.NewErrParamRequired("RuntimeEnvironment"))
-	}
-
-	if s.ServiceExecutionRole == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ServiceExecutionRole"))
-	}
-	if s.ServiceExecutionRole != nil && len(*s.ServiceExecutionRole) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ServiceExecutionRole", 1))
-	}
-	if s.Tags != nil && len(s.Tags) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Tags", 1))
-	}
-	if s.ApplicationConfiguration != nil {
-		if err := s.ApplicationConfiguration.Validate(); err != nil {
-			invalidParams.AddNested("ApplicationConfiguration", err.(aws.ErrInvalidParams))
-		}
-	}
-	if s.CloudWatchLoggingOptions != nil {
-		for i, v := range s.CloudWatchLoggingOptions {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "CloudWatchLoggingOptions", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-	if s.Tags != nil {
-		for i, v := range s.Tags {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type CreateApplicationOutput struct {
-	_ struct{} `type:"structure"`
-
-	// In response to your CreateApplication request, Kinesis Data Analytics returns
-	// a response with details of the application it created.
-	//
-	// ApplicationDetail is a required field
-	ApplicationDetail *ApplicationDetail `type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s CreateApplicationOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCreateApplication = "CreateApplication"
 
@@ -133,7 +26,7 @@ const opCreateApplication = "CreateApplication"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/CreateApplication
-func (c *Client) CreateApplicationRequest(input *CreateApplicationInput) CreateApplicationRequest {
+func (c *Client) CreateApplicationRequest(input *types.CreateApplicationInput) CreateApplicationRequest {
 	op := &aws.Operation{
 		Name:       opCreateApplication,
 		HTTPMethod: "POST",
@@ -141,10 +34,10 @@ func (c *Client) CreateApplicationRequest(input *CreateApplicationInput) CreateA
 	}
 
 	if input == nil {
-		input = &CreateApplicationInput{}
+		input = &types.CreateApplicationInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateApplicationOutput{})
+	req := c.newRequest(op, input, &types.CreateApplicationOutput{})
 	return CreateApplicationRequest{Request: req, Input: input, Copy: c.CreateApplicationRequest}
 }
 
@@ -152,8 +45,8 @@ func (c *Client) CreateApplicationRequest(input *CreateApplicationInput) CreateA
 // CreateApplication API operation.
 type CreateApplicationRequest struct {
 	*aws.Request
-	Input *CreateApplicationInput
-	Copy  func(*CreateApplicationInput) CreateApplicationRequest
+	Input *types.CreateApplicationInput
+	Copy  func(*types.CreateApplicationInput) CreateApplicationRequest
 }
 
 // Send marshals and sends the CreateApplication API request.
@@ -165,7 +58,7 @@ func (r CreateApplicationRequest) Send(ctx context.Context) (*CreateApplicationR
 	}
 
 	resp := &CreateApplicationResponse{
-		CreateApplicationOutput: r.Request.Data.(*CreateApplicationOutput),
+		CreateApplicationOutput: r.Request.Data.(*types.CreateApplicationOutput),
 		response:                &aws.Response{Request: r.Request},
 	}
 
@@ -175,7 +68,7 @@ func (r CreateApplicationRequest) Send(ctx context.Context) (*CreateApplicationR
 // CreateApplicationResponse is the response type for the
 // CreateApplication API operation.
 type CreateApplicationResponse struct {
-	*CreateApplicationOutput
+	*types.CreateApplicationOutput
 
 	response *aws.Response
 }

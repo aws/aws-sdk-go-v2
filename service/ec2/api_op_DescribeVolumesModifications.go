@@ -6,53 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-type DescribeVolumesModificationsInput struct {
-	_ struct{} `type:"structure"`
-
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have
-	// the required permissions, the error response is DryRunOperation. Otherwise,
-	// it is UnauthorizedOperation.
-	DryRun *bool `type:"boolean"`
-
-	// The filters. Supported filters: volume-id, modification-state, target-size,
-	// target-iops, target-volume-type, original-size, original-iops, original-volume-type,
-	// start-time.
-	Filters []Filter `locationName:"Filter" locationNameList:"Filter" type:"list"`
-
-	// The maximum number of results (up to a limit of 500) to be returned in a
-	// paginated request.
-	MaxResults *int64 `type:"integer"`
-
-	// The nextToken value returned by a previous paginated request.
-	NextToken *string `type:"string"`
-
-	// The IDs of the volumes for which in-progress modifications will be described.
-	VolumeIds []string `locationName:"VolumeId" locationNameList:"VolumeId" type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeVolumesModificationsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type DescribeVolumesModificationsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Token for pagination, null if there are no more results
-	NextToken *string `locationName:"nextToken" type:"string"`
-
-	// Information about the volume modifications.
-	VolumesModifications []VolumeModification `locationName:"volumeModificationSet" locationNameList:"item" type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeVolumesModificationsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeVolumesModifications = "DescribeVolumesModifications"
 
@@ -82,7 +37,7 @@ const opDescribeVolumesModifications = "DescribeVolumesModifications"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeVolumesModifications
-func (c *Client) DescribeVolumesModificationsRequest(input *DescribeVolumesModificationsInput) DescribeVolumesModificationsRequest {
+func (c *Client) DescribeVolumesModificationsRequest(input *types.DescribeVolumesModificationsInput) DescribeVolumesModificationsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeVolumesModifications,
 		HTTPMethod: "POST",
@@ -96,10 +51,10 @@ func (c *Client) DescribeVolumesModificationsRequest(input *DescribeVolumesModif
 	}
 
 	if input == nil {
-		input = &DescribeVolumesModificationsInput{}
+		input = &types.DescribeVolumesModificationsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeVolumesModificationsOutput{})
+	req := c.newRequest(op, input, &types.DescribeVolumesModificationsOutput{})
 	return DescribeVolumesModificationsRequest{Request: req, Input: input, Copy: c.DescribeVolumesModificationsRequest}
 }
 
@@ -107,8 +62,8 @@ func (c *Client) DescribeVolumesModificationsRequest(input *DescribeVolumesModif
 // DescribeVolumesModifications API operation.
 type DescribeVolumesModificationsRequest struct {
 	*aws.Request
-	Input *DescribeVolumesModificationsInput
-	Copy  func(*DescribeVolumesModificationsInput) DescribeVolumesModificationsRequest
+	Input *types.DescribeVolumesModificationsInput
+	Copy  func(*types.DescribeVolumesModificationsInput) DescribeVolumesModificationsRequest
 }
 
 // Send marshals and sends the DescribeVolumesModifications API request.
@@ -120,7 +75,7 @@ func (r DescribeVolumesModificationsRequest) Send(ctx context.Context) (*Describ
 	}
 
 	resp := &DescribeVolumesModificationsResponse{
-		DescribeVolumesModificationsOutput: r.Request.Data.(*DescribeVolumesModificationsOutput),
+		DescribeVolumesModificationsOutput: r.Request.Data.(*types.DescribeVolumesModificationsOutput),
 		response:                           &aws.Response{Request: r.Request},
 	}
 
@@ -150,7 +105,7 @@ func NewDescribeVolumesModificationsPaginator(req DescribeVolumesModificationsRe
 	return DescribeVolumesModificationsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *DescribeVolumesModificationsInput
+				var inCpy *types.DescribeVolumesModificationsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -170,14 +125,14 @@ type DescribeVolumesModificationsPaginator struct {
 	aws.Pager
 }
 
-func (p *DescribeVolumesModificationsPaginator) CurrentPage() *DescribeVolumesModificationsOutput {
-	return p.Pager.CurrentPage().(*DescribeVolumesModificationsOutput)
+func (p *DescribeVolumesModificationsPaginator) CurrentPage() *types.DescribeVolumesModificationsOutput {
+	return p.Pager.CurrentPage().(*types.DescribeVolumesModificationsOutput)
 }
 
 // DescribeVolumesModificationsResponse is the response type for the
 // DescribeVolumesModifications API operation.
 type DescribeVolumesModificationsResponse struct {
-	*DescribeVolumesModificationsOutput
+	*types.DescribeVolumesModificationsOutput
 
 	response *aws.Response
 }

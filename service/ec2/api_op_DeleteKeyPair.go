@@ -6,53 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/ec2query"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-type DeleteKeyPairInput struct {
-	_ struct{} `type:"structure"`
-
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have
-	// the required permissions, the error response is DryRunOperation. Otherwise,
-	// it is UnauthorizedOperation.
-	DryRun *bool `locationName:"dryRun" type:"boolean"`
-
-	// The name of the key pair.
-	//
-	// KeyName is a required field
-	KeyName *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteKeyPairInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteKeyPairInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteKeyPairInput"}
-
-	if s.KeyName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("KeyName"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteKeyPairOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteKeyPairOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteKeyPair = "DeleteKeyPair"
 
@@ -69,7 +26,7 @@ const opDeleteKeyPair = "DeleteKeyPair"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteKeyPair
-func (c *Client) DeleteKeyPairRequest(input *DeleteKeyPairInput) DeleteKeyPairRequest {
+func (c *Client) DeleteKeyPairRequest(input *types.DeleteKeyPairInput) DeleteKeyPairRequest {
 	op := &aws.Operation{
 		Name:       opDeleteKeyPair,
 		HTTPMethod: "POST",
@@ -77,10 +34,10 @@ func (c *Client) DeleteKeyPairRequest(input *DeleteKeyPairInput) DeleteKeyPairRe
 	}
 
 	if input == nil {
-		input = &DeleteKeyPairInput{}
+		input = &types.DeleteKeyPairInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteKeyPairOutput{})
+	req := c.newRequest(op, input, &types.DeleteKeyPairOutput{})
 	req.Handlers.Unmarshal.Remove(ec2query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return DeleteKeyPairRequest{Request: req, Input: input, Copy: c.DeleteKeyPairRequest}
@@ -90,8 +47,8 @@ func (c *Client) DeleteKeyPairRequest(input *DeleteKeyPairInput) DeleteKeyPairRe
 // DeleteKeyPair API operation.
 type DeleteKeyPairRequest struct {
 	*aws.Request
-	Input *DeleteKeyPairInput
-	Copy  func(*DeleteKeyPairInput) DeleteKeyPairRequest
+	Input *types.DeleteKeyPairInput
+	Copy  func(*types.DeleteKeyPairInput) DeleteKeyPairRequest
 }
 
 // Send marshals and sends the DeleteKeyPair API request.
@@ -103,7 +60,7 @@ func (r DeleteKeyPairRequest) Send(ctx context.Context) (*DeleteKeyPairResponse,
 	}
 
 	resp := &DeleteKeyPairResponse{
-		DeleteKeyPairOutput: r.Request.Data.(*DeleteKeyPairOutput),
+		DeleteKeyPairOutput: r.Request.Data.(*types.DeleteKeyPairOutput),
 		response:            &aws.Response{Request: r.Request},
 	}
 
@@ -113,7 +70,7 @@ func (r DeleteKeyPairRequest) Send(ctx context.Context) (*DeleteKeyPairResponse,
 // DeleteKeyPairResponse is the response type for the
 // DeleteKeyPair API operation.
 type DeleteKeyPairResponse struct {
-	*DeleteKeyPairOutput
+	*types.DeleteKeyPairOutput
 
 	response *aws.Response
 }

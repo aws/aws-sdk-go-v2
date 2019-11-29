@@ -4,68 +4,10 @@ package workspaces
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/workspaces/types"
 )
-
-type CreateWorkspacesInput struct {
-	_ struct{} `type:"structure"`
-
-	// The WorkSpaces to create. You can specify up to 25 WorkSpaces.
-	//
-	// Workspaces is a required field
-	Workspaces []WorkspaceRequest `min:"1" type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s CreateWorkspacesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateWorkspacesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateWorkspacesInput"}
-
-	if s.Workspaces == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Workspaces"))
-	}
-	if s.Workspaces != nil && len(s.Workspaces) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Workspaces", 1))
-	}
-	if s.Workspaces != nil {
-		for i, v := range s.Workspaces {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Workspaces", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type CreateWorkspacesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Information about the WorkSpaces that could not be created.
-	FailedRequests []FailedCreateWorkspaceRequest `type:"list"`
-
-	// Information about the WorkSpaces that were created.
-	//
-	// Because this operation is asynchronous, the identifier returned is not immediately
-	// available for use with other operations. For example, if you call DescribeWorkspaces
-	// before the WorkSpace is created, the information returned can be incomplete.
-	PendingRequests []Workspace `type:"list"`
-}
-
-// String returns the string representation
-func (s CreateWorkspacesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCreateWorkspaces = "CreateWorkspaces"
 
@@ -84,7 +26,7 @@ const opCreateWorkspaces = "CreateWorkspaces"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/CreateWorkspaces
-func (c *Client) CreateWorkspacesRequest(input *CreateWorkspacesInput) CreateWorkspacesRequest {
+func (c *Client) CreateWorkspacesRequest(input *types.CreateWorkspacesInput) CreateWorkspacesRequest {
 	op := &aws.Operation{
 		Name:       opCreateWorkspaces,
 		HTTPMethod: "POST",
@@ -92,10 +34,10 @@ func (c *Client) CreateWorkspacesRequest(input *CreateWorkspacesInput) CreateWor
 	}
 
 	if input == nil {
-		input = &CreateWorkspacesInput{}
+		input = &types.CreateWorkspacesInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateWorkspacesOutput{})
+	req := c.newRequest(op, input, &types.CreateWorkspacesOutput{})
 	return CreateWorkspacesRequest{Request: req, Input: input, Copy: c.CreateWorkspacesRequest}
 }
 
@@ -103,8 +45,8 @@ func (c *Client) CreateWorkspacesRequest(input *CreateWorkspacesInput) CreateWor
 // CreateWorkspaces API operation.
 type CreateWorkspacesRequest struct {
 	*aws.Request
-	Input *CreateWorkspacesInput
-	Copy  func(*CreateWorkspacesInput) CreateWorkspacesRequest
+	Input *types.CreateWorkspacesInput
+	Copy  func(*types.CreateWorkspacesInput) CreateWorkspacesRequest
 }
 
 // Send marshals and sends the CreateWorkspaces API request.
@@ -116,7 +58,7 @@ func (r CreateWorkspacesRequest) Send(ctx context.Context) (*CreateWorkspacesRes
 	}
 
 	resp := &CreateWorkspacesResponse{
-		CreateWorkspacesOutput: r.Request.Data.(*CreateWorkspacesOutput),
+		CreateWorkspacesOutput: r.Request.Data.(*types.CreateWorkspacesOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -126,7 +68,7 @@ func (r CreateWorkspacesRequest) Send(ctx context.Context) (*CreateWorkspacesRes
 // CreateWorkspacesResponse is the response type for the
 // CreateWorkspaces API operation.
 type CreateWorkspacesResponse struct {
-	*CreateWorkspacesOutput
+	*types.CreateWorkspacesOutput
 
 	response *aws.Response
 }

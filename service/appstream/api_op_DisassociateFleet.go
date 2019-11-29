@@ -6,60 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/appstream/types"
 )
-
-type DisassociateFleetInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the fleet.
-	//
-	// FleetName is a required field
-	FleetName *string `min:"1" type:"string" required:"true"`
-
-	// The name of the stack.
-	//
-	// StackName is a required field
-	StackName *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DisassociateFleetInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DisassociateFleetInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DisassociateFleetInput"}
-
-	if s.FleetName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("FleetName"))
-	}
-	if s.FleetName != nil && len(*s.FleetName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("FleetName", 1))
-	}
-
-	if s.StackName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("StackName"))
-	}
-	if s.StackName != nil && len(*s.StackName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("StackName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DisassociateFleetOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DisassociateFleetOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDisassociateFleet = "DisassociateFleet"
 
@@ -76,7 +24,7 @@ const opDisassociateFleet = "DisassociateFleet"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DisassociateFleet
-func (c *Client) DisassociateFleetRequest(input *DisassociateFleetInput) DisassociateFleetRequest {
+func (c *Client) DisassociateFleetRequest(input *types.DisassociateFleetInput) DisassociateFleetRequest {
 	op := &aws.Operation{
 		Name:       opDisassociateFleet,
 		HTTPMethod: "POST",
@@ -84,10 +32,10 @@ func (c *Client) DisassociateFleetRequest(input *DisassociateFleetInput) Disasso
 	}
 
 	if input == nil {
-		input = &DisassociateFleetInput{}
+		input = &types.DisassociateFleetInput{}
 	}
 
-	req := c.newRequest(op, input, &DisassociateFleetOutput{})
+	req := c.newRequest(op, input, &types.DisassociateFleetOutput{})
 	return DisassociateFleetRequest{Request: req, Input: input, Copy: c.DisassociateFleetRequest}
 }
 
@@ -95,8 +43,8 @@ func (c *Client) DisassociateFleetRequest(input *DisassociateFleetInput) Disasso
 // DisassociateFleet API operation.
 type DisassociateFleetRequest struct {
 	*aws.Request
-	Input *DisassociateFleetInput
-	Copy  func(*DisassociateFleetInput) DisassociateFleetRequest
+	Input *types.DisassociateFleetInput
+	Copy  func(*types.DisassociateFleetInput) DisassociateFleetRequest
 }
 
 // Send marshals and sends the DisassociateFleet API request.
@@ -108,7 +56,7 @@ func (r DisassociateFleetRequest) Send(ctx context.Context) (*DisassociateFleetR
 	}
 
 	resp := &DisassociateFleetResponse{
-		DisassociateFleetOutput: r.Request.Data.(*DisassociateFleetOutput),
+		DisassociateFleetOutput: r.Request.Data.(*types.DisassociateFleetOutput),
 		response:                &aws.Response{Request: r.Request},
 	}
 
@@ -118,7 +66,7 @@ func (r DisassociateFleetRequest) Send(ctx context.Context) (*DisassociateFleetR
 // DisassociateFleetResponse is the response type for the
 // DisassociateFleet API operation.
 type DisassociateFleetResponse struct {
-	*DisassociateFleetOutput
+	*types.DisassociateFleetOutput
 
 	response *aws.Response
 }

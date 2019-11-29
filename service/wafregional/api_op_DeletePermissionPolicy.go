@@ -6,51 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/wafregional/types"
 )
-
-type DeletePermissionPolicyInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the RuleGroup from which you want to delete
-	// the policy.
-	//
-	// The user making the request must be the owner of the RuleGroup.
-	//
-	// ResourceArn is a required field
-	ResourceArn *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeletePermissionPolicyInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeletePermissionPolicyInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeletePermissionPolicyInput"}
-
-	if s.ResourceArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ResourceArn"))
-	}
-	if s.ResourceArn != nil && len(*s.ResourceArn) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ResourceArn", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeletePermissionPolicyOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeletePermissionPolicyOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeletePermissionPolicy = "DeletePermissionPolicy"
 
@@ -69,7 +26,7 @@ const opDeletePermissionPolicy = "DeletePermissionPolicy"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/DeletePermissionPolicy
-func (c *Client) DeletePermissionPolicyRequest(input *DeletePermissionPolicyInput) DeletePermissionPolicyRequest {
+func (c *Client) DeletePermissionPolicyRequest(input *types.DeletePermissionPolicyInput) DeletePermissionPolicyRequest {
 	op := &aws.Operation{
 		Name:       opDeletePermissionPolicy,
 		HTTPMethod: "POST",
@@ -77,10 +34,10 @@ func (c *Client) DeletePermissionPolicyRequest(input *DeletePermissionPolicyInpu
 	}
 
 	if input == nil {
-		input = &DeletePermissionPolicyInput{}
+		input = &types.DeletePermissionPolicyInput{}
 	}
 
-	req := c.newRequest(op, input, &DeletePermissionPolicyOutput{})
+	req := c.newRequest(op, input, &types.DeletePermissionPolicyOutput{})
 	return DeletePermissionPolicyRequest{Request: req, Input: input, Copy: c.DeletePermissionPolicyRequest}
 }
 
@@ -88,8 +45,8 @@ func (c *Client) DeletePermissionPolicyRequest(input *DeletePermissionPolicyInpu
 // DeletePermissionPolicy API operation.
 type DeletePermissionPolicyRequest struct {
 	*aws.Request
-	Input *DeletePermissionPolicyInput
-	Copy  func(*DeletePermissionPolicyInput) DeletePermissionPolicyRequest
+	Input *types.DeletePermissionPolicyInput
+	Copy  func(*types.DeletePermissionPolicyInput) DeletePermissionPolicyRequest
 }
 
 // Send marshals and sends the DeletePermissionPolicy API request.
@@ -101,7 +58,7 @@ func (r DeletePermissionPolicyRequest) Send(ctx context.Context) (*DeletePermiss
 	}
 
 	resp := &DeletePermissionPolicyResponse{
-		DeletePermissionPolicyOutput: r.Request.Data.(*DeletePermissionPolicyOutput),
+		DeletePermissionPolicyOutput: r.Request.Data.(*types.DeletePermissionPolicyOutput),
 		response:                     &aws.Response{Request: r.Request},
 	}
 
@@ -111,7 +68,7 @@ func (r DeletePermissionPolicyRequest) Send(ctx context.Context) (*DeletePermiss
 // DeletePermissionPolicyResponse is the response type for the
 // DeletePermissionPolicy API operation.
 type DeletePermissionPolicyResponse struct {
-	*DeletePermissionPolicyOutput
+	*types.DeletePermissionPolicyOutput
 
 	response *aws.Response
 }

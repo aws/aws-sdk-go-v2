@@ -6,136 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/kinesisvideoarchivedmedia/types"
 )
-
-type ListFragmentsInput struct {
-	_ struct{} `type:"structure"`
-
-	// Describes the timestamp range and timestamp origin for the range of fragments
-	// to return.
-	FragmentSelector *FragmentSelector `type:"structure"`
-
-	// The total number of fragments to return. If the total number of fragments
-	// available is more than the value specified in max-results, then a ListFragmentsOutput$NextToken
-	// is provided in the output that you can use to resume pagination.
-	MaxResults *int64 `min:"1" type:"long"`
-
-	// A token to specify where to start paginating. This is the ListFragmentsOutput$NextToken
-	// from a previously truncated response.
-	NextToken *string `min:"1" type:"string"`
-
-	// The name of the stream from which to retrieve a fragment list.
-	//
-	// StreamName is a required field
-	StreamName *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s ListFragmentsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListFragmentsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListFragmentsInput"}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-	if s.NextToken != nil && len(*s.NextToken) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
-	}
-
-	if s.StreamName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("StreamName"))
-	}
-	if s.StreamName != nil && len(*s.StreamName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("StreamName", 1))
-	}
-	if s.FragmentSelector != nil {
-		if err := s.FragmentSelector.Validate(); err != nil {
-			invalidParams.AddNested("FragmentSelector", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListFragmentsInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.FragmentSelector != nil {
-		v := s.FragmentSelector
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "FragmentSelector", v, metadata)
-	}
-	if s.MaxResults != nil {
-		v := *s.MaxResults
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "MaxResults", protocol.Int64Value(v), metadata)
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.StreamName != nil {
-		v := *s.StreamName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "StreamName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type ListFragmentsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A list of archived Fragment objects from the stream that meet the selector
-	// criteria. Results are in no specific order, even across pages.
-	Fragments []Fragment `type:"list"`
-
-	// If the returned list is truncated, the operation returns this token to use
-	// to retrieve the next page of results. This value is null when there are no
-	// more results to return.
-	NextToken *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s ListFragmentsOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListFragmentsOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.Fragments != nil {
-		v := s.Fragments
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "Fragments", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opListFragments = "ListFragments"
 
@@ -181,7 +53,7 @@ const opListFragments = "ListFragments"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesis-video-archived-media-2017-09-30/ListFragments
-func (c *Client) ListFragmentsRequest(input *ListFragmentsInput) ListFragmentsRequest {
+func (c *Client) ListFragmentsRequest(input *types.ListFragmentsInput) ListFragmentsRequest {
 	op := &aws.Operation{
 		Name:       opListFragments,
 		HTTPMethod: "POST",
@@ -195,10 +67,10 @@ func (c *Client) ListFragmentsRequest(input *ListFragmentsInput) ListFragmentsRe
 	}
 
 	if input == nil {
-		input = &ListFragmentsInput{}
+		input = &types.ListFragmentsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListFragmentsOutput{})
+	req := c.newRequest(op, input, &types.ListFragmentsOutput{})
 	return ListFragmentsRequest{Request: req, Input: input, Copy: c.ListFragmentsRequest}
 }
 
@@ -206,8 +78,8 @@ func (c *Client) ListFragmentsRequest(input *ListFragmentsInput) ListFragmentsRe
 // ListFragments API operation.
 type ListFragmentsRequest struct {
 	*aws.Request
-	Input *ListFragmentsInput
-	Copy  func(*ListFragmentsInput) ListFragmentsRequest
+	Input *types.ListFragmentsInput
+	Copy  func(*types.ListFragmentsInput) ListFragmentsRequest
 }
 
 // Send marshals and sends the ListFragments API request.
@@ -219,7 +91,7 @@ func (r ListFragmentsRequest) Send(ctx context.Context) (*ListFragmentsResponse,
 	}
 
 	resp := &ListFragmentsResponse{
-		ListFragmentsOutput: r.Request.Data.(*ListFragmentsOutput),
+		ListFragmentsOutput: r.Request.Data.(*types.ListFragmentsOutput),
 		response:            &aws.Response{Request: r.Request},
 	}
 
@@ -249,7 +121,7 @@ func NewListFragmentsPaginator(req ListFragmentsRequest) ListFragmentsPaginator 
 	return ListFragmentsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListFragmentsInput
+				var inCpy *types.ListFragmentsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -269,14 +141,14 @@ type ListFragmentsPaginator struct {
 	aws.Pager
 }
 
-func (p *ListFragmentsPaginator) CurrentPage() *ListFragmentsOutput {
-	return p.Pager.CurrentPage().(*ListFragmentsOutput)
+func (p *ListFragmentsPaginator) CurrentPage() *types.ListFragmentsOutput {
+	return p.Pager.CurrentPage().(*types.ListFragmentsOutput)
 }
 
 // ListFragmentsResponse is the response type for the
 // ListFragments API operation.
 type ListFragmentsResponse struct {
-	*ListFragmentsOutput
+	*types.ListFragmentsOutput
 
 	response *aws.Response
 }

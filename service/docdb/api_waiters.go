@@ -7,6 +7,7 @@ import (
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
+	"github.com/aws/aws-sdk-go-v2/service/docdb/types"
 )
 
 // WaitUntilDBInstanceAvailable uses the Amazon DocDB API operation
@@ -18,7 +19,7 @@ import (
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Client) WaitUntilDBInstanceAvailable(ctx context.Context, input *DescribeDBInstancesInput, opts ...aws.WaiterOption) error {
+func (c *Client) WaitUntilDBInstanceAvailable(ctx context.Context, input *types.DescribeDBInstancesInput, opts ...aws.WaiterOption) error {
 	w := aws.Waiter{
 		Name:        "WaitUntilDBInstanceAvailable",
 		MaxAttempts: 60,
@@ -57,7 +58,7 @@ func (c *Client) WaitUntilDBInstanceAvailable(ctx context.Context, input *Descri
 		},
 		Logger: c.Config.Logger,
 		NewRequest: func(opts []aws.Option) (*aws.Request, error) {
-			var inCpy *DescribeDBInstancesInput
+			var inCpy *types.DescribeDBInstancesInput
 			if input != nil {
 				tmp := *input
 				inCpy = &tmp
@@ -82,7 +83,7 @@ func (c *Client) WaitUntilDBInstanceAvailable(ctx context.Context, input *Descri
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Client) WaitUntilDBInstanceDeleted(ctx context.Context, input *DescribeDBInstancesInput, opts ...aws.WaiterOption) error {
+func (c *Client) WaitUntilDBInstanceDeleted(ctx context.Context, input *types.DescribeDBInstancesInput, opts ...aws.WaiterOption) error {
 	w := aws.Waiter{
 		Name:        "WaitUntilDBInstanceDeleted",
 		MaxAttempts: 60,
@@ -121,7 +122,7 @@ func (c *Client) WaitUntilDBInstanceDeleted(ctx context.Context, input *Describe
 		},
 		Logger: c.Config.Logger,
 		NewRequest: func(opts []aws.Option) (*aws.Request, error) {
-			var inCpy *DescribeDBInstancesInput
+			var inCpy *types.DescribeDBInstancesInput
 			if input != nil {
 				tmp := *input
 				inCpy = &tmp

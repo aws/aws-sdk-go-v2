@@ -6,109 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/iot/types"
 )
-
-type UpdateRoleAliasInput struct {
-	_ struct{} `type:"structure"`
-
-	// The number of seconds the credential will be valid.
-	CredentialDurationSeconds *int64 `locationName:"credentialDurationSeconds" min:"900" type:"integer"`
-
-	// The role alias to update.
-	//
-	// RoleAlias is a required field
-	RoleAlias *string `location:"uri" locationName:"roleAlias" min:"1" type:"string" required:"true"`
-
-	// The role ARN.
-	RoleArn *string `locationName:"roleArn" min:"20" type:"string"`
-}
-
-// String returns the string representation
-func (s UpdateRoleAliasInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateRoleAliasInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateRoleAliasInput"}
-	if s.CredentialDurationSeconds != nil && *s.CredentialDurationSeconds < 900 {
-		invalidParams.Add(aws.NewErrParamMinValue("CredentialDurationSeconds", 900))
-	}
-
-	if s.RoleAlias == nil {
-		invalidParams.Add(aws.NewErrParamRequired("RoleAlias"))
-	}
-	if s.RoleAlias != nil && len(*s.RoleAlias) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("RoleAlias", 1))
-	}
-	if s.RoleArn != nil && len(*s.RoleArn) < 20 {
-		invalidParams.Add(aws.NewErrParamMinLen("RoleArn", 20))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s UpdateRoleAliasInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.CredentialDurationSeconds != nil {
-		v := *s.CredentialDurationSeconds
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "credentialDurationSeconds", protocol.Int64Value(v), metadata)
-	}
-	if s.RoleArn != nil {
-		v := *s.RoleArn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "roleArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.RoleAlias != nil {
-		v := *s.RoleAlias
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "roleAlias", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type UpdateRoleAliasOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The role alias.
-	RoleAlias *string `locationName:"roleAlias" min:"1" type:"string"`
-
-	// The role alias ARN.
-	RoleAliasArn *string `locationName:"roleAliasArn" type:"string"`
-}
-
-// String returns the string representation
-func (s UpdateRoleAliasOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s UpdateRoleAliasOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.RoleAlias != nil {
-		v := *s.RoleAlias
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "roleAlias", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.RoleAliasArn != nil {
-		v := *s.RoleAliasArn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "roleAliasArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opUpdateRoleAlias = "UpdateRoleAlias"
 
@@ -123,7 +22,7 @@ const opUpdateRoleAlias = "UpdateRoleAlias"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) UpdateRoleAliasRequest(input *UpdateRoleAliasInput) UpdateRoleAliasRequest {
+func (c *Client) UpdateRoleAliasRequest(input *types.UpdateRoleAliasInput) UpdateRoleAliasRequest {
 	op := &aws.Operation{
 		Name:       opUpdateRoleAlias,
 		HTTPMethod: "PUT",
@@ -131,10 +30,10 @@ func (c *Client) UpdateRoleAliasRequest(input *UpdateRoleAliasInput) UpdateRoleA
 	}
 
 	if input == nil {
-		input = &UpdateRoleAliasInput{}
+		input = &types.UpdateRoleAliasInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateRoleAliasOutput{})
+	req := c.newRequest(op, input, &types.UpdateRoleAliasOutput{})
 	return UpdateRoleAliasRequest{Request: req, Input: input, Copy: c.UpdateRoleAliasRequest}
 }
 
@@ -142,8 +41,8 @@ func (c *Client) UpdateRoleAliasRequest(input *UpdateRoleAliasInput) UpdateRoleA
 // UpdateRoleAlias API operation.
 type UpdateRoleAliasRequest struct {
 	*aws.Request
-	Input *UpdateRoleAliasInput
-	Copy  func(*UpdateRoleAliasInput) UpdateRoleAliasRequest
+	Input *types.UpdateRoleAliasInput
+	Copy  func(*types.UpdateRoleAliasInput) UpdateRoleAliasRequest
 }
 
 // Send marshals and sends the UpdateRoleAlias API request.
@@ -155,7 +54,7 @@ func (r UpdateRoleAliasRequest) Send(ctx context.Context) (*UpdateRoleAliasRespo
 	}
 
 	resp := &UpdateRoleAliasResponse{
-		UpdateRoleAliasOutput: r.Request.Data.(*UpdateRoleAliasOutput),
+		UpdateRoleAliasOutput: r.Request.Data.(*types.UpdateRoleAliasOutput),
 		response:              &aws.Response{Request: r.Request},
 	}
 
@@ -165,7 +64,7 @@ func (r UpdateRoleAliasRequest) Send(ctx context.Context) (*UpdateRoleAliasRespo
 // UpdateRoleAliasResponse is the response type for the
 // UpdateRoleAlias API operation.
 type UpdateRoleAliasResponse struct {
-	*UpdateRoleAliasOutput
+	*types.UpdateRoleAliasOutput
 
 	response *aws.Response
 }

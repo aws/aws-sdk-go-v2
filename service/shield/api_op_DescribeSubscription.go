@@ -6,29 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/shield/types"
 )
-
-type DescribeSubscriptionInput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DescribeSubscriptionInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type DescribeSubscriptionOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The AWS Shield Advanced subscription details for an account.
-	Subscription *Subscription `type:"structure"`
-}
-
-// String returns the string representation
-func (s DescribeSubscriptionOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeSubscription = "DescribeSubscription"
 
@@ -45,7 +24,7 @@ const opDescribeSubscription = "DescribeSubscription"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/DescribeSubscription
-func (c *Client) DescribeSubscriptionRequest(input *DescribeSubscriptionInput) DescribeSubscriptionRequest {
+func (c *Client) DescribeSubscriptionRequest(input *types.DescribeSubscriptionInput) DescribeSubscriptionRequest {
 	op := &aws.Operation{
 		Name:       opDescribeSubscription,
 		HTTPMethod: "POST",
@@ -53,10 +32,10 @@ func (c *Client) DescribeSubscriptionRequest(input *DescribeSubscriptionInput) D
 	}
 
 	if input == nil {
-		input = &DescribeSubscriptionInput{}
+		input = &types.DescribeSubscriptionInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeSubscriptionOutput{})
+	req := c.newRequest(op, input, &types.DescribeSubscriptionOutput{})
 	return DescribeSubscriptionRequest{Request: req, Input: input, Copy: c.DescribeSubscriptionRequest}
 }
 
@@ -64,8 +43,8 @@ func (c *Client) DescribeSubscriptionRequest(input *DescribeSubscriptionInput) D
 // DescribeSubscription API operation.
 type DescribeSubscriptionRequest struct {
 	*aws.Request
-	Input *DescribeSubscriptionInput
-	Copy  func(*DescribeSubscriptionInput) DescribeSubscriptionRequest
+	Input *types.DescribeSubscriptionInput
+	Copy  func(*types.DescribeSubscriptionInput) DescribeSubscriptionRequest
 }
 
 // Send marshals and sends the DescribeSubscription API request.
@@ -77,7 +56,7 @@ func (r DescribeSubscriptionRequest) Send(ctx context.Context) (*DescribeSubscri
 	}
 
 	resp := &DescribeSubscriptionResponse{
-		DescribeSubscriptionOutput: r.Request.Data.(*DescribeSubscriptionOutput),
+		DescribeSubscriptionOutput: r.Request.Data.(*types.DescribeSubscriptionOutput),
 		response:                   &aws.Response{Request: r.Request},
 	}
 
@@ -87,7 +66,7 @@ func (r DescribeSubscriptionRequest) Send(ctx context.Context) (*DescribeSubscri
 // DescribeSubscriptionResponse is the response type for the
 // DescribeSubscription API operation.
 type DescribeSubscriptionResponse struct {
-	*DescribeSubscriptionOutput
+	*types.DescribeSubscriptionOutput
 
 	response *aws.Response
 }

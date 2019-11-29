@@ -6,52 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/route53resolver/types"
 )
-
-type DeleteResolverRuleInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the resolver rule that you want to delete.
-	//
-	// ResolverRuleId is a required field
-	ResolverRuleId *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteResolverRuleInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteResolverRuleInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteResolverRuleInput"}
-
-	if s.ResolverRuleId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ResolverRuleId"))
-	}
-	if s.ResolverRuleId != nil && len(*s.ResolverRuleId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ResolverRuleId", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteResolverRuleOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Information about the DeleteResolverRule request, including the status of
-	// the request.
-	ResolverRule *ResolverRule `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteResolverRuleOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteResolverRule = "DeleteResolverRule"
 
@@ -70,7 +26,7 @@ const opDeleteResolverRule = "DeleteResolverRule"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/DeleteResolverRule
-func (c *Client) DeleteResolverRuleRequest(input *DeleteResolverRuleInput) DeleteResolverRuleRequest {
+func (c *Client) DeleteResolverRuleRequest(input *types.DeleteResolverRuleInput) DeleteResolverRuleRequest {
 	op := &aws.Operation{
 		Name:       opDeleteResolverRule,
 		HTTPMethod: "POST",
@@ -78,10 +34,10 @@ func (c *Client) DeleteResolverRuleRequest(input *DeleteResolverRuleInput) Delet
 	}
 
 	if input == nil {
-		input = &DeleteResolverRuleInput{}
+		input = &types.DeleteResolverRuleInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteResolverRuleOutput{})
+	req := c.newRequest(op, input, &types.DeleteResolverRuleOutput{})
 	return DeleteResolverRuleRequest{Request: req, Input: input, Copy: c.DeleteResolverRuleRequest}
 }
 
@@ -89,8 +45,8 @@ func (c *Client) DeleteResolverRuleRequest(input *DeleteResolverRuleInput) Delet
 // DeleteResolverRule API operation.
 type DeleteResolverRuleRequest struct {
 	*aws.Request
-	Input *DeleteResolverRuleInput
-	Copy  func(*DeleteResolverRuleInput) DeleteResolverRuleRequest
+	Input *types.DeleteResolverRuleInput
+	Copy  func(*types.DeleteResolverRuleInput) DeleteResolverRuleRequest
 }
 
 // Send marshals and sends the DeleteResolverRule API request.
@@ -102,7 +58,7 @@ func (r DeleteResolverRuleRequest) Send(ctx context.Context) (*DeleteResolverRul
 	}
 
 	resp := &DeleteResolverRuleResponse{
-		DeleteResolverRuleOutput: r.Request.Data.(*DeleteResolverRuleOutput),
+		DeleteResolverRuleOutput: r.Request.Data.(*types.DeleteResolverRuleOutput),
 		response:                 &aws.Response{Request: r.Request},
 	}
 
@@ -112,7 +68,7 @@ func (r DeleteResolverRuleRequest) Send(ctx context.Context) (*DeleteResolverRul
 // DeleteResolverRuleResponse is the response type for the
 // DeleteResolverRule API operation.
 type DeleteResolverRuleResponse struct {
-	*DeleteResolverRuleOutput
+	*types.DeleteResolverRuleOutput
 
 	response *aws.Response
 }

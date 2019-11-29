@@ -4,76 +4,12 @@ package simpledb
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/query"
+	"github.com/aws/aws-sdk-go-v2/service/simpledb/types"
 )
-
-type DeleteAttributesInput struct {
-	_ struct{} `type:"structure"`
-
-	// A list of Attributes. Similar to columns on a spreadsheet, attributes represent
-	// categories of data that can be assigned to items.
-	Attributes []DeletableAttribute `locationNameList:"Attribute" type:"list" flattened:"true"`
-
-	// The name of the domain in which to perform the operation.
-	//
-	// DomainName is a required field
-	DomainName *string `type:"string" required:"true"`
-
-	// The update condition which, if specified, determines whether the specified
-	// attributes will be deleted or not. The update condition must be satisfied
-	// in order for this request to be processed and the attributes to be deleted.
-	Expected *UpdateCondition `type:"structure"`
-
-	// The name of the item. Similar to rows on a spreadsheet, items represent individual
-	// objects that contain one or more value-attribute pairs.
-	//
-	// ItemName is a required field
-	ItemName *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteAttributesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteAttributesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteAttributesInput"}
-
-	if s.DomainName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DomainName"))
-	}
-
-	if s.ItemName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ItemName"))
-	}
-	if s.Attributes != nil {
-		for i, v := range s.Attributes {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Attributes", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteAttributesOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteAttributesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteAttributes = "DeleteAttributes"
 
@@ -100,7 +36,7 @@ const opDeleteAttributes = "DeleteAttributes"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) DeleteAttributesRequest(input *DeleteAttributesInput) DeleteAttributesRequest {
+func (c *Client) DeleteAttributesRequest(input *types.DeleteAttributesInput) DeleteAttributesRequest {
 	op := &aws.Operation{
 		Name:       opDeleteAttributes,
 		HTTPMethod: "POST",
@@ -108,10 +44,10 @@ func (c *Client) DeleteAttributesRequest(input *DeleteAttributesInput) DeleteAtt
 	}
 
 	if input == nil {
-		input = &DeleteAttributesInput{}
+		input = &types.DeleteAttributesInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteAttributesOutput{})
+	req := c.newRequest(op, input, &types.DeleteAttributesOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return DeleteAttributesRequest{Request: req, Input: input, Copy: c.DeleteAttributesRequest}
@@ -121,8 +57,8 @@ func (c *Client) DeleteAttributesRequest(input *DeleteAttributesInput) DeleteAtt
 // DeleteAttributes API operation.
 type DeleteAttributesRequest struct {
 	*aws.Request
-	Input *DeleteAttributesInput
-	Copy  func(*DeleteAttributesInput) DeleteAttributesRequest
+	Input *types.DeleteAttributesInput
+	Copy  func(*types.DeleteAttributesInput) DeleteAttributesRequest
 }
 
 // Send marshals and sends the DeleteAttributes API request.
@@ -134,7 +70,7 @@ func (r DeleteAttributesRequest) Send(ctx context.Context) (*DeleteAttributesRes
 	}
 
 	resp := &DeleteAttributesResponse{
-		DeleteAttributesOutput: r.Request.Data.(*DeleteAttributesOutput),
+		DeleteAttributesOutput: r.Request.Data.(*types.DeleteAttributesOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -144,7 +80,7 @@ func (r DeleteAttributesRequest) Send(ctx context.Context) (*DeleteAttributesRes
 // DeleteAttributesResponse is the response type for the
 // DeleteAttributes API operation.
 type DeleteAttributesResponse struct {
-	*DeleteAttributesOutput
+	*types.DeleteAttributesOutput
 
 	response *aws.Response
 }

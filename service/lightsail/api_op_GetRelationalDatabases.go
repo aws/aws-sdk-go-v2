@@ -6,37 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/lightsail/types"
 )
-
-type GetRelationalDatabasesInput struct {
-	_ struct{} `type:"structure"`
-
-	// A token used for advancing to a specific page of results for your get relational
-	// database request.
-	PageToken *string `locationName:"pageToken" type:"string"`
-}
-
-// String returns the string representation
-func (s GetRelationalDatabasesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type GetRelationalDatabasesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A token used for advancing to the next page of results from your get relational
-	// databases request.
-	NextPageToken *string `locationName:"nextPageToken" type:"string"`
-
-	// An object describing the result of your get relational databases request.
-	RelationalDatabases []RelationalDatabase `locationName:"relationalDatabases" type:"list"`
-}
-
-// String returns the string representation
-func (s GetRelationalDatabasesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetRelationalDatabases = "GetRelationalDatabases"
 
@@ -53,7 +24,7 @@ const opGetRelationalDatabases = "GetRelationalDatabases"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetRelationalDatabases
-func (c *Client) GetRelationalDatabasesRequest(input *GetRelationalDatabasesInput) GetRelationalDatabasesRequest {
+func (c *Client) GetRelationalDatabasesRequest(input *types.GetRelationalDatabasesInput) GetRelationalDatabasesRequest {
 	op := &aws.Operation{
 		Name:       opGetRelationalDatabases,
 		HTTPMethod: "POST",
@@ -61,10 +32,10 @@ func (c *Client) GetRelationalDatabasesRequest(input *GetRelationalDatabasesInpu
 	}
 
 	if input == nil {
-		input = &GetRelationalDatabasesInput{}
+		input = &types.GetRelationalDatabasesInput{}
 	}
 
-	req := c.newRequest(op, input, &GetRelationalDatabasesOutput{})
+	req := c.newRequest(op, input, &types.GetRelationalDatabasesOutput{})
 	return GetRelationalDatabasesRequest{Request: req, Input: input, Copy: c.GetRelationalDatabasesRequest}
 }
 
@@ -72,8 +43,8 @@ func (c *Client) GetRelationalDatabasesRequest(input *GetRelationalDatabasesInpu
 // GetRelationalDatabases API operation.
 type GetRelationalDatabasesRequest struct {
 	*aws.Request
-	Input *GetRelationalDatabasesInput
-	Copy  func(*GetRelationalDatabasesInput) GetRelationalDatabasesRequest
+	Input *types.GetRelationalDatabasesInput
+	Copy  func(*types.GetRelationalDatabasesInput) GetRelationalDatabasesRequest
 }
 
 // Send marshals and sends the GetRelationalDatabases API request.
@@ -85,7 +56,7 @@ func (r GetRelationalDatabasesRequest) Send(ctx context.Context) (*GetRelational
 	}
 
 	resp := &GetRelationalDatabasesResponse{
-		GetRelationalDatabasesOutput: r.Request.Data.(*GetRelationalDatabasesOutput),
+		GetRelationalDatabasesOutput: r.Request.Data.(*types.GetRelationalDatabasesOutput),
 		response:                     &aws.Response{Request: r.Request},
 	}
 
@@ -95,7 +66,7 @@ func (r GetRelationalDatabasesRequest) Send(ctx context.Context) (*GetRelational
 // GetRelationalDatabasesResponse is the response type for the
 // GetRelationalDatabases API operation.
 type GetRelationalDatabasesResponse struct {
-	*GetRelationalDatabasesOutput
+	*types.GetRelationalDatabasesOutput
 
 	response *aws.Response
 }

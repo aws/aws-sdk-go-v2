@@ -6,113 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/rdsdata/types"
 )
-
-// The request parameters represent the input of a request to perform a rollback
-// of a transaction.
-type RollbackTransactionInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the Aurora Serverless DB cluster.
-	//
-	// ResourceArn is a required field
-	ResourceArn *string `locationName:"resourceArn" min:"11" type:"string" required:"true"`
-
-	// The name or ARN of the secret that enables access to the DB cluster.
-	//
-	// SecretArn is a required field
-	SecretArn *string `locationName:"secretArn" min:"11" type:"string" required:"true"`
-
-	// The identifier of the transaction to roll back.
-	//
-	// TransactionId is a required field
-	TransactionId *string `locationName:"transactionId" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s RollbackTransactionInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *RollbackTransactionInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "RollbackTransactionInput"}
-
-	if s.ResourceArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ResourceArn"))
-	}
-	if s.ResourceArn != nil && len(*s.ResourceArn) < 11 {
-		invalidParams.Add(aws.NewErrParamMinLen("ResourceArn", 11))
-	}
-
-	if s.SecretArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("SecretArn"))
-	}
-	if s.SecretArn != nil && len(*s.SecretArn) < 11 {
-		invalidParams.Add(aws.NewErrParamMinLen("SecretArn", 11))
-	}
-
-	if s.TransactionId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("TransactionId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s RollbackTransactionInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.ResourceArn != nil {
-		v := *s.ResourceArn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "resourceArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.SecretArn != nil {
-		v := *s.SecretArn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "secretArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.TransactionId != nil {
-		v := *s.TransactionId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "transactionId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-// The response elements represent the output of a request to perform a rollback
-// of a transaction.
-type RollbackTransactionOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The status of the rollback operation.
-	TransactionStatus *string `locationName:"transactionStatus" type:"string"`
-}
-
-// String returns the string representation
-func (s RollbackTransactionOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s RollbackTransactionOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.TransactionStatus != nil {
-		v := *s.TransactionStatus
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "transactionStatus", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opRollbackTransaction = "RollbackTransaction"
 
@@ -130,7 +25,7 @@ const opRollbackTransaction = "RollbackTransaction"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-data-2018-08-01/RollbackTransaction
-func (c *Client) RollbackTransactionRequest(input *RollbackTransactionInput) RollbackTransactionRequest {
+func (c *Client) RollbackTransactionRequest(input *types.RollbackTransactionInput) RollbackTransactionRequest {
 	op := &aws.Operation{
 		Name:       opRollbackTransaction,
 		HTTPMethod: "POST",
@@ -138,10 +33,10 @@ func (c *Client) RollbackTransactionRequest(input *RollbackTransactionInput) Rol
 	}
 
 	if input == nil {
-		input = &RollbackTransactionInput{}
+		input = &types.RollbackTransactionInput{}
 	}
 
-	req := c.newRequest(op, input, &RollbackTransactionOutput{})
+	req := c.newRequest(op, input, &types.RollbackTransactionOutput{})
 	return RollbackTransactionRequest{Request: req, Input: input, Copy: c.RollbackTransactionRequest}
 }
 
@@ -149,8 +44,8 @@ func (c *Client) RollbackTransactionRequest(input *RollbackTransactionInput) Rol
 // RollbackTransaction API operation.
 type RollbackTransactionRequest struct {
 	*aws.Request
-	Input *RollbackTransactionInput
-	Copy  func(*RollbackTransactionInput) RollbackTransactionRequest
+	Input *types.RollbackTransactionInput
+	Copy  func(*types.RollbackTransactionInput) RollbackTransactionRequest
 }
 
 // Send marshals and sends the RollbackTransaction API request.
@@ -162,7 +57,7 @@ func (r RollbackTransactionRequest) Send(ctx context.Context) (*RollbackTransact
 	}
 
 	resp := &RollbackTransactionResponse{
-		RollbackTransactionOutput: r.Request.Data.(*RollbackTransactionOutput),
+		RollbackTransactionOutput: r.Request.Data.(*types.RollbackTransactionOutput),
 		response:                  &aws.Response{Request: r.Request},
 	}
 
@@ -172,7 +67,7 @@ func (r RollbackTransactionRequest) Send(ctx context.Context) (*RollbackTransact
 // RollbackTransactionResponse is the response type for the
 // RollbackTransaction API operation.
 type RollbackTransactionResponse struct {
-	*RollbackTransactionOutput
+	*types.RollbackTransactionOutput
 
 	response *aws.Response
 }

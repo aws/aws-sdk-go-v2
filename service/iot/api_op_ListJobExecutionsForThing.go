@@ -6,123 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/iot/types"
 )
-
-type ListJobExecutionsForThingInput struct {
-	_ struct{} `type:"structure"`
-
-	// The maximum number of results to be returned per request.
-	MaxResults *int64 `location:"querystring" locationName:"maxResults" min:"1" type:"integer"`
-
-	// The token to retrieve the next set of results.
-	NextToken *string `location:"querystring" locationName:"nextToken" type:"string"`
-
-	// An optional filter that lets you search for jobs that have the specified
-	// status.
-	Status JobExecutionStatus `location:"querystring" locationName:"status" type:"string" enum:"true"`
-
-	// The thing name.
-	//
-	// ThingName is a required field
-	ThingName *string `location:"uri" locationName:"thingName" min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s ListJobExecutionsForThingInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListJobExecutionsForThingInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListJobExecutionsForThingInput"}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-
-	if s.ThingName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ThingName"))
-	}
-	if s.ThingName != nil && len(*s.ThingName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ThingName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListJobExecutionsForThingInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.ThingName != nil {
-		v := *s.ThingName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "thingName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.MaxResults != nil {
-		v := *s.MaxResults
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "maxResults", protocol.Int64Value(v), metadata)
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if len(s.Status) > 0 {
-		v := s.Status
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "status", protocol.QuotedValue{ValueMarshaler: v}, metadata)
-	}
-	return nil
-}
-
-type ListJobExecutionsForThingOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A list of job execution summaries.
-	ExecutionSummaries []JobExecutionSummaryForThing `locationName:"executionSummaries" type:"list"`
-
-	// The token for the next set of results, or null if there are no additional
-	// results.
-	NextToken *string `locationName:"nextToken" type:"string"`
-}
-
-// String returns the string representation
-func (s ListJobExecutionsForThingOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListJobExecutionsForThingOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.ExecutionSummaries != nil {
-		v := s.ExecutionSummaries
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "executionSummaries", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opListJobExecutionsForThing = "ListJobExecutionsForThing"
 
@@ -137,7 +22,7 @@ const opListJobExecutionsForThing = "ListJobExecutionsForThing"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) ListJobExecutionsForThingRequest(input *ListJobExecutionsForThingInput) ListJobExecutionsForThingRequest {
+func (c *Client) ListJobExecutionsForThingRequest(input *types.ListJobExecutionsForThingInput) ListJobExecutionsForThingRequest {
 	op := &aws.Operation{
 		Name:       opListJobExecutionsForThing,
 		HTTPMethod: "GET",
@@ -145,10 +30,10 @@ func (c *Client) ListJobExecutionsForThingRequest(input *ListJobExecutionsForThi
 	}
 
 	if input == nil {
-		input = &ListJobExecutionsForThingInput{}
+		input = &types.ListJobExecutionsForThingInput{}
 	}
 
-	req := c.newRequest(op, input, &ListJobExecutionsForThingOutput{})
+	req := c.newRequest(op, input, &types.ListJobExecutionsForThingOutput{})
 	return ListJobExecutionsForThingRequest{Request: req, Input: input, Copy: c.ListJobExecutionsForThingRequest}
 }
 
@@ -156,8 +41,8 @@ func (c *Client) ListJobExecutionsForThingRequest(input *ListJobExecutionsForThi
 // ListJobExecutionsForThing API operation.
 type ListJobExecutionsForThingRequest struct {
 	*aws.Request
-	Input *ListJobExecutionsForThingInput
-	Copy  func(*ListJobExecutionsForThingInput) ListJobExecutionsForThingRequest
+	Input *types.ListJobExecutionsForThingInput
+	Copy  func(*types.ListJobExecutionsForThingInput) ListJobExecutionsForThingRequest
 }
 
 // Send marshals and sends the ListJobExecutionsForThing API request.
@@ -169,7 +54,7 @@ func (r ListJobExecutionsForThingRequest) Send(ctx context.Context) (*ListJobExe
 	}
 
 	resp := &ListJobExecutionsForThingResponse{
-		ListJobExecutionsForThingOutput: r.Request.Data.(*ListJobExecutionsForThingOutput),
+		ListJobExecutionsForThingOutput: r.Request.Data.(*types.ListJobExecutionsForThingOutput),
 		response:                        &aws.Response{Request: r.Request},
 	}
 
@@ -179,7 +64,7 @@ func (r ListJobExecutionsForThingRequest) Send(ctx context.Context) (*ListJobExe
 // ListJobExecutionsForThingResponse is the response type for the
 // ListJobExecutionsForThing API operation.
 type ListJobExecutionsForThingResponse struct {
-	*ListJobExecutionsForThingOutput
+	*types.ListJobExecutionsForThingOutput
 
 	response *aws.Response
 }

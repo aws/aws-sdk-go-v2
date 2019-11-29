@@ -6,51 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/configservice/types"
 )
-
-type DeleteEvaluationResultsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the AWS Config rule for which you want to delete the evaluation
-	// results.
-	//
-	// ConfigRuleName is a required field
-	ConfigRuleName *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteEvaluationResultsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteEvaluationResultsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteEvaluationResultsInput"}
-
-	if s.ConfigRuleName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ConfigRuleName"))
-	}
-	if s.ConfigRuleName != nil && len(*s.ConfigRuleName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ConfigRuleName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// The output when you delete the evaluation results for the specified AWS Config
-// rule.
-type DeleteEvaluationResultsOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteEvaluationResultsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteEvaluationResults = "DeleteEvaluationResults"
 
@@ -70,7 +27,7 @@ const opDeleteEvaluationResults = "DeleteEvaluationResults"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DeleteEvaluationResults
-func (c *Client) DeleteEvaluationResultsRequest(input *DeleteEvaluationResultsInput) DeleteEvaluationResultsRequest {
+func (c *Client) DeleteEvaluationResultsRequest(input *types.DeleteEvaluationResultsInput) DeleteEvaluationResultsRequest {
 	op := &aws.Operation{
 		Name:       opDeleteEvaluationResults,
 		HTTPMethod: "POST",
@@ -78,10 +35,10 @@ func (c *Client) DeleteEvaluationResultsRequest(input *DeleteEvaluationResultsIn
 	}
 
 	if input == nil {
-		input = &DeleteEvaluationResultsInput{}
+		input = &types.DeleteEvaluationResultsInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteEvaluationResultsOutput{})
+	req := c.newRequest(op, input, &types.DeleteEvaluationResultsOutput{})
 	return DeleteEvaluationResultsRequest{Request: req, Input: input, Copy: c.DeleteEvaluationResultsRequest}
 }
 
@@ -89,8 +46,8 @@ func (c *Client) DeleteEvaluationResultsRequest(input *DeleteEvaluationResultsIn
 // DeleteEvaluationResults API operation.
 type DeleteEvaluationResultsRequest struct {
 	*aws.Request
-	Input *DeleteEvaluationResultsInput
-	Copy  func(*DeleteEvaluationResultsInput) DeleteEvaluationResultsRequest
+	Input *types.DeleteEvaluationResultsInput
+	Copy  func(*types.DeleteEvaluationResultsInput) DeleteEvaluationResultsRequest
 }
 
 // Send marshals and sends the DeleteEvaluationResults API request.
@@ -102,7 +59,7 @@ func (r DeleteEvaluationResultsRequest) Send(ctx context.Context) (*DeleteEvalua
 	}
 
 	resp := &DeleteEvaluationResultsResponse{
-		DeleteEvaluationResultsOutput: r.Request.Data.(*DeleteEvaluationResultsOutput),
+		DeleteEvaluationResultsOutput: r.Request.Data.(*types.DeleteEvaluationResultsOutput),
 		response:                      &aws.Response{Request: r.Request},
 	}
 
@@ -112,7 +69,7 @@ func (r DeleteEvaluationResultsRequest) Send(ctx context.Context) (*DeleteEvalua
 // DeleteEvaluationResultsResponse is the response type for the
 // DeleteEvaluationResults API operation.
 type DeleteEvaluationResultsResponse struct {
-	*DeleteEvaluationResultsOutput
+	*types.DeleteEvaluationResultsOutput
 
 	response *aws.Response
 }

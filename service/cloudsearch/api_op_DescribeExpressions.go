@@ -6,68 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/cloudsearch/types"
 )
-
-// Container for the parameters to the DescribeDomains operation. Specifies
-// the name of the domain you want to describe. To restrict the response to
-// particular expressions, specify the names of the expressions you want to
-// describe. To show the active configuration and exclude any pending changes,
-// set the Deployed option to true.
-type DescribeExpressionsInput struct {
-	_ struct{} `type:"structure"`
-
-	// Whether to display the deployed configuration (true) or include any pending
-	// changes (false). Defaults to false.
-	Deployed *bool `type:"boolean"`
-
-	// The name of the domain you want to describe.
-	//
-	// DomainName is a required field
-	DomainName *string `min:"3" type:"string" required:"true"`
-
-	// Limits the DescribeExpressions response to the specified expressions. If
-	// not specified, all expressions are shown.
-	ExpressionNames []string `type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeExpressionsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeExpressionsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeExpressionsInput"}
-
-	if s.DomainName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DomainName"))
-	}
-	if s.DomainName != nil && len(*s.DomainName) < 3 {
-		invalidParams.Add(aws.NewErrParamMinLen("DomainName", 3))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// The result of a DescribeExpressions request. Contains the expressions configured
-// for the domain specified in the request.
-type DescribeExpressionsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The expressions configured for the domain.
-	//
-	// Expressions is a required field
-	Expressions []ExpressionStatus `type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeExpressionsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeExpressions = "DescribeExpressions"
 
@@ -87,7 +27,7 @@ const opDescribeExpressions = "DescribeExpressions"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) DescribeExpressionsRequest(input *DescribeExpressionsInput) DescribeExpressionsRequest {
+func (c *Client) DescribeExpressionsRequest(input *types.DescribeExpressionsInput) DescribeExpressionsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeExpressions,
 		HTTPMethod: "POST",
@@ -95,10 +35,10 @@ func (c *Client) DescribeExpressionsRequest(input *DescribeExpressionsInput) Des
 	}
 
 	if input == nil {
-		input = &DescribeExpressionsInput{}
+		input = &types.DescribeExpressionsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeExpressionsOutput{})
+	req := c.newRequest(op, input, &types.DescribeExpressionsOutput{})
 	return DescribeExpressionsRequest{Request: req, Input: input, Copy: c.DescribeExpressionsRequest}
 }
 
@@ -106,8 +46,8 @@ func (c *Client) DescribeExpressionsRequest(input *DescribeExpressionsInput) Des
 // DescribeExpressions API operation.
 type DescribeExpressionsRequest struct {
 	*aws.Request
-	Input *DescribeExpressionsInput
-	Copy  func(*DescribeExpressionsInput) DescribeExpressionsRequest
+	Input *types.DescribeExpressionsInput
+	Copy  func(*types.DescribeExpressionsInput) DescribeExpressionsRequest
 }
 
 // Send marshals and sends the DescribeExpressions API request.
@@ -119,7 +59,7 @@ func (r DescribeExpressionsRequest) Send(ctx context.Context) (*DescribeExpressi
 	}
 
 	resp := &DescribeExpressionsResponse{
-		DescribeExpressionsOutput: r.Request.Data.(*DescribeExpressionsOutput),
+		DescribeExpressionsOutput: r.Request.Data.(*types.DescribeExpressionsOutput),
 		response:                  &aws.Response{Request: r.Request},
 	}
 
@@ -129,7 +69,7 @@ func (r DescribeExpressionsRequest) Send(ctx context.Context) (*DescribeExpressi
 // DescribeExpressionsResponse is the response type for the
 // DescribeExpressions API operation.
 type DescribeExpressionsResponse struct {
-	*DescribeExpressionsOutput
+	*types.DescribeExpressionsOutput
 
 	response *aws.Response
 }

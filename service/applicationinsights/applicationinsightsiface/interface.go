@@ -10,6 +10,7 @@ package applicationinsightsiface
 
 import (
 	"github.com/aws/aws-sdk-go-v2/service/applicationinsights"
+	"github.com/aws/aws-sdk-go-v2/service/applicationinsights/types"
 )
 
 // ClientAPI provides an interface to enable mocking the
@@ -43,7 +44,7 @@ import (
 //    type mockClientClient struct {
 //        applicationinsightsiface.ClientPI
 //    }
-//    func (m *mockClientClient) CreateApplication(input *applicationinsights.CreateApplicationInput) (*applicationinsights.CreateApplicationOutput, error) {
+//    func (m *mockClientClient) CreateApplication(input *types.CreateApplicationInput) (*types.CreateApplicationOutput, error) {
 //        // mock response/functionality
 //    }
 //
@@ -61,39 +62,39 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type ClientAPI interface {
-	CreateApplicationRequest(*applicationinsights.CreateApplicationInput) applicationinsights.CreateApplicationRequest
+	CreateApplicationRequest(*types.CreateApplicationInput) applicationinsights.CreateApplicationRequest
 
-	CreateComponentRequest(*applicationinsights.CreateComponentInput) applicationinsights.CreateComponentRequest
+	CreateComponentRequest(*types.CreateComponentInput) applicationinsights.CreateComponentRequest
 
-	DeleteApplicationRequest(*applicationinsights.DeleteApplicationInput) applicationinsights.DeleteApplicationRequest
+	DeleteApplicationRequest(*types.DeleteApplicationInput) applicationinsights.DeleteApplicationRequest
 
-	DeleteComponentRequest(*applicationinsights.DeleteComponentInput) applicationinsights.DeleteComponentRequest
+	DeleteComponentRequest(*types.DeleteComponentInput) applicationinsights.DeleteComponentRequest
 
-	DescribeApplicationRequest(*applicationinsights.DescribeApplicationInput) applicationinsights.DescribeApplicationRequest
+	DescribeApplicationRequest(*types.DescribeApplicationInput) applicationinsights.DescribeApplicationRequest
 
-	DescribeComponentRequest(*applicationinsights.DescribeComponentInput) applicationinsights.DescribeComponentRequest
+	DescribeComponentRequest(*types.DescribeComponentInput) applicationinsights.DescribeComponentRequest
 
-	DescribeComponentConfigurationRequest(*applicationinsights.DescribeComponentConfigurationInput) applicationinsights.DescribeComponentConfigurationRequest
+	DescribeComponentConfigurationRequest(*types.DescribeComponentConfigurationInput) applicationinsights.DescribeComponentConfigurationRequest
 
-	DescribeComponentConfigurationRecommendationRequest(*applicationinsights.DescribeComponentConfigurationRecommendationInput) applicationinsights.DescribeComponentConfigurationRecommendationRequest
+	DescribeComponentConfigurationRecommendationRequest(*types.DescribeComponentConfigurationRecommendationInput) applicationinsights.DescribeComponentConfigurationRecommendationRequest
 
-	DescribeObservationRequest(*applicationinsights.DescribeObservationInput) applicationinsights.DescribeObservationRequest
+	DescribeObservationRequest(*types.DescribeObservationInput) applicationinsights.DescribeObservationRequest
 
-	DescribeProblemRequest(*applicationinsights.DescribeProblemInput) applicationinsights.DescribeProblemRequest
+	DescribeProblemRequest(*types.DescribeProblemInput) applicationinsights.DescribeProblemRequest
 
-	DescribeProblemObservationsRequest(*applicationinsights.DescribeProblemObservationsInput) applicationinsights.DescribeProblemObservationsRequest
+	DescribeProblemObservationsRequest(*types.DescribeProblemObservationsInput) applicationinsights.DescribeProblemObservationsRequest
 
-	ListApplicationsRequest(*applicationinsights.ListApplicationsInput) applicationinsights.ListApplicationsRequest
+	ListApplicationsRequest(*types.ListApplicationsInput) applicationinsights.ListApplicationsRequest
 
-	ListComponentsRequest(*applicationinsights.ListComponentsInput) applicationinsights.ListComponentsRequest
+	ListComponentsRequest(*types.ListComponentsInput) applicationinsights.ListComponentsRequest
 
-	ListProblemsRequest(*applicationinsights.ListProblemsInput) applicationinsights.ListProblemsRequest
+	ListProblemsRequest(*types.ListProblemsInput) applicationinsights.ListProblemsRequest
 
-	UpdateApplicationRequest(*applicationinsights.UpdateApplicationInput) applicationinsights.UpdateApplicationRequest
+	UpdateApplicationRequest(*types.UpdateApplicationInput) applicationinsights.UpdateApplicationRequest
 
-	UpdateComponentRequest(*applicationinsights.UpdateComponentInput) applicationinsights.UpdateComponentRequest
+	UpdateComponentRequest(*types.UpdateComponentInput) applicationinsights.UpdateComponentRequest
 
-	UpdateComponentConfigurationRequest(*applicationinsights.UpdateComponentConfigurationInput) applicationinsights.UpdateComponentConfigurationRequest
+	UpdateComponentConfigurationRequest(*types.UpdateComponentConfigurationInput) applicationinsights.UpdateComponentConfigurationRequest
 }
 
 var _ ClientAPI = (*applicationinsights.Client)(nil)

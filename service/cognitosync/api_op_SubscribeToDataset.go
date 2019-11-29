@@ -6,124 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/cognitosync/types"
 )
-
-// A request to SubscribeToDatasetRequest.
-type SubscribeToDatasetInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the dataset to subcribe to.
-	//
-	// DatasetName is a required field
-	DatasetName *string `location:"uri" locationName:"DatasetName" min:"1" type:"string" required:"true"`
-
-	// The unique ID generated for this device by Cognito.
-	//
-	// DeviceId is a required field
-	DeviceId *string `location:"uri" locationName:"DeviceId" min:"1" type:"string" required:"true"`
-
-	// Unique ID for this identity.
-	//
-	// IdentityId is a required field
-	IdentityId *string `location:"uri" locationName:"IdentityId" min:"1" type:"string" required:"true"`
-
-	// A name-spaced GUID (for example, us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE)
-	// created by Amazon Cognito. The ID of the pool to which the identity belongs.
-	//
-	// IdentityPoolId is a required field
-	IdentityPoolId *string `location:"uri" locationName:"IdentityPoolId" min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s SubscribeToDatasetInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *SubscribeToDatasetInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "SubscribeToDatasetInput"}
-
-	if s.DatasetName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DatasetName"))
-	}
-	if s.DatasetName != nil && len(*s.DatasetName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("DatasetName", 1))
-	}
-
-	if s.DeviceId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DeviceId"))
-	}
-	if s.DeviceId != nil && len(*s.DeviceId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("DeviceId", 1))
-	}
-
-	if s.IdentityId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("IdentityId"))
-	}
-	if s.IdentityId != nil && len(*s.IdentityId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("IdentityId", 1))
-	}
-
-	if s.IdentityPoolId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("IdentityPoolId"))
-	}
-	if s.IdentityPoolId != nil && len(*s.IdentityPoolId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("IdentityPoolId", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s SubscribeToDatasetInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.DatasetName != nil {
-		v := *s.DatasetName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "DatasetName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.DeviceId != nil {
-		v := *s.DeviceId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "DeviceId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.IdentityId != nil {
-		v := *s.IdentityId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "IdentityId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.IdentityPoolId != nil {
-		v := *s.IdentityPoolId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "IdentityPoolId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-// Response to a SubscribeToDataset request.
-type SubscribeToDatasetOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s SubscribeToDatasetOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s SubscribeToDatasetOutput) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
 
 const opSubscribeToDataset = "SubscribeToDataset"
 
@@ -144,7 +28,7 @@ const opSubscribeToDataset = "SubscribeToDataset"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-sync-2014-06-30/SubscribeToDataset
-func (c *Client) SubscribeToDatasetRequest(input *SubscribeToDatasetInput) SubscribeToDatasetRequest {
+func (c *Client) SubscribeToDatasetRequest(input *types.SubscribeToDatasetInput) SubscribeToDatasetRequest {
 	op := &aws.Operation{
 		Name:       opSubscribeToDataset,
 		HTTPMethod: "POST",
@@ -152,10 +36,10 @@ func (c *Client) SubscribeToDatasetRequest(input *SubscribeToDatasetInput) Subsc
 	}
 
 	if input == nil {
-		input = &SubscribeToDatasetInput{}
+		input = &types.SubscribeToDatasetInput{}
 	}
 
-	req := c.newRequest(op, input, &SubscribeToDatasetOutput{})
+	req := c.newRequest(op, input, &types.SubscribeToDatasetOutput{})
 	return SubscribeToDatasetRequest{Request: req, Input: input, Copy: c.SubscribeToDatasetRequest}
 }
 
@@ -163,8 +47,8 @@ func (c *Client) SubscribeToDatasetRequest(input *SubscribeToDatasetInput) Subsc
 // SubscribeToDataset API operation.
 type SubscribeToDatasetRequest struct {
 	*aws.Request
-	Input *SubscribeToDatasetInput
-	Copy  func(*SubscribeToDatasetInput) SubscribeToDatasetRequest
+	Input *types.SubscribeToDatasetInput
+	Copy  func(*types.SubscribeToDatasetInput) SubscribeToDatasetRequest
 }
 
 // Send marshals and sends the SubscribeToDataset API request.
@@ -176,7 +60,7 @@ func (r SubscribeToDatasetRequest) Send(ctx context.Context) (*SubscribeToDatase
 	}
 
 	resp := &SubscribeToDatasetResponse{
-		SubscribeToDatasetOutput: r.Request.Data.(*SubscribeToDatasetOutput),
+		SubscribeToDatasetOutput: r.Request.Data.(*types.SubscribeToDatasetOutput),
 		response:                 &aws.Response{Request: r.Request},
 	}
 
@@ -186,7 +70,7 @@ func (r SubscribeToDatasetRequest) Send(ctx context.Context) (*SubscribeToDatase
 // SubscribeToDatasetResponse is the response type for the
 // SubscribeToDataset API operation.
 type SubscribeToDatasetResponse struct {
-	*SubscribeToDatasetOutput
+	*types.SubscribeToDatasetOutput
 
 	response *aws.Response
 }

@@ -6,98 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/route53/types"
 )
-
-// Gets information about a specific traffic policy version.
-type GetTrafficPolicyInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the traffic policy that you want to get information about.
-	//
-	// Id is a required field
-	Id *string `location:"uri" locationName:"Id" min:"1" type:"string" required:"true"`
-
-	// The version number of the traffic policy that you want to get information
-	// about.
-	//
-	// Version is a required field
-	Version *int64 `location:"uri" locationName:"Version" min:"1" type:"integer" required:"true"`
-}
-
-// String returns the string representation
-func (s GetTrafficPolicyInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetTrafficPolicyInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetTrafficPolicyInput"}
-
-	if s.Id == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Id"))
-	}
-	if s.Id != nil && len(*s.Id) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Id", 1))
-	}
-
-	if s.Version == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Version"))
-	}
-	if s.Version != nil && *s.Version < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("Version", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetTrafficPolicyInput) MarshalFields(e protocol.FieldEncoder) error {
-
-	if s.Id != nil {
-		v := *s.Id
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "Id", protocol.StringValue(v), metadata)
-	}
-	if s.Version != nil {
-		v := *s.Version
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "Version", protocol.Int64Value(v), metadata)
-	}
-	return nil
-}
-
-// A complex type that contains the response information for the request.
-type GetTrafficPolicyOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A complex type that contains settings for the specified traffic policy.
-	//
-	// TrafficPolicy is a required field
-	TrafficPolicy *TrafficPolicy `type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s GetTrafficPolicyOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetTrafficPolicyOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.TrafficPolicy != nil {
-		v := s.TrafficPolicy
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "TrafficPolicy", v, metadata)
-	}
-	return nil
-}
 
 const opGetTrafficPolicy = "GetTrafficPolicy"
 
@@ -114,7 +24,7 @@ const opGetTrafficPolicy = "GetTrafficPolicy"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/GetTrafficPolicy
-func (c *Client) GetTrafficPolicyRequest(input *GetTrafficPolicyInput) GetTrafficPolicyRequest {
+func (c *Client) GetTrafficPolicyRequest(input *types.GetTrafficPolicyInput) GetTrafficPolicyRequest {
 	op := &aws.Operation{
 		Name:       opGetTrafficPolicy,
 		HTTPMethod: "GET",
@@ -122,10 +32,10 @@ func (c *Client) GetTrafficPolicyRequest(input *GetTrafficPolicyInput) GetTraffi
 	}
 
 	if input == nil {
-		input = &GetTrafficPolicyInput{}
+		input = &types.GetTrafficPolicyInput{}
 	}
 
-	req := c.newRequest(op, input, &GetTrafficPolicyOutput{})
+	req := c.newRequest(op, input, &types.GetTrafficPolicyOutput{})
 	return GetTrafficPolicyRequest{Request: req, Input: input, Copy: c.GetTrafficPolicyRequest}
 }
 
@@ -133,8 +43,8 @@ func (c *Client) GetTrafficPolicyRequest(input *GetTrafficPolicyInput) GetTraffi
 // GetTrafficPolicy API operation.
 type GetTrafficPolicyRequest struct {
 	*aws.Request
-	Input *GetTrafficPolicyInput
-	Copy  func(*GetTrafficPolicyInput) GetTrafficPolicyRequest
+	Input *types.GetTrafficPolicyInput
+	Copy  func(*types.GetTrafficPolicyInput) GetTrafficPolicyRequest
 }
 
 // Send marshals and sends the GetTrafficPolicy API request.
@@ -146,7 +56,7 @@ func (r GetTrafficPolicyRequest) Send(ctx context.Context) (*GetTrafficPolicyRes
 	}
 
 	resp := &GetTrafficPolicyResponse{
-		GetTrafficPolicyOutput: r.Request.Data.(*GetTrafficPolicyOutput),
+		GetTrafficPolicyOutput: r.Request.Data.(*types.GetTrafficPolicyOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -156,7 +66,7 @@ func (r GetTrafficPolicyRequest) Send(ctx context.Context) (*GetTrafficPolicyRes
 // GetTrafficPolicyResponse is the response type for the
 // GetTrafficPolicy API operation.
 type GetTrafficPolicyResponse struct {
-	*GetTrafficPolicyOutput
+	*types.GetTrafficPolicyOutput
 
 	response *aws.Response
 }

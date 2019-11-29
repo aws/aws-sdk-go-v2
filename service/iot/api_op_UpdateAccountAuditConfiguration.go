@@ -4,116 +4,10 @@ package iot
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/iot/types"
 )
-
-type UpdateAccountAuditConfigurationInput struct {
-	_ struct{} `type:"structure"`
-
-	// Specifies which audit checks are enabled and disabled for this account. Use
-	// DescribeAccountAuditConfiguration to see the list of all checks, including
-	// those that are currently enabled.
-	//
-	// Some data collection might start immediately when certain checks are enabled.
-	// When a check is disabled, any data collected so far in relation to the check
-	// is deleted.
-	//
-	// You cannot disable a check if it is used by any scheduled audit. You must
-	// first delete the check from the scheduled audit or delete the scheduled audit
-	// itself.
-	//
-	// On the first call to UpdateAccountAuditConfiguration, this parameter is required
-	// and must specify at least one enabled check.
-	AuditCheckConfigurations map[string]AuditCheckConfiguration `locationName:"auditCheckConfigurations" type:"map"`
-
-	// Information about the targets to which audit notifications are sent.
-	AuditNotificationTargetConfigurations map[string]AuditNotificationTarget `locationName:"auditNotificationTargetConfigurations" type:"map"`
-
-	// The ARN of the role that grants permission to AWS IoT to access information
-	// about your devices, policies, certificates and other items as required when
-	// performing an audit.
-	RoleArn *string `locationName:"roleArn" min:"20" type:"string"`
-}
-
-// String returns the string representation
-func (s UpdateAccountAuditConfigurationInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateAccountAuditConfigurationInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateAccountAuditConfigurationInput"}
-	if s.RoleArn != nil && len(*s.RoleArn) < 20 {
-		invalidParams.Add(aws.NewErrParamMinLen("RoleArn", 20))
-	}
-	if s.AuditNotificationTargetConfigurations != nil {
-		for i, v := range s.AuditNotificationTargetConfigurations {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "AuditNotificationTargetConfigurations", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s UpdateAccountAuditConfigurationInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.AuditCheckConfigurations != nil {
-		v := s.AuditCheckConfigurations
-
-		metadata := protocol.Metadata{}
-		ms0 := e.Map(protocol.BodyTarget, "auditCheckConfigurations", metadata)
-		ms0.Start()
-		for k1, v1 := range v {
-			ms0.MapSetFields(k1, v1)
-		}
-		ms0.End()
-
-	}
-	if s.AuditNotificationTargetConfigurations != nil {
-		v := s.AuditNotificationTargetConfigurations
-
-		metadata := protocol.Metadata{}
-		ms0 := e.Map(protocol.BodyTarget, "auditNotificationTargetConfigurations", metadata)
-		ms0.Start()
-		for k1, v1 := range v {
-			ms0.MapSetFields(k1, v1)
-		}
-		ms0.End()
-
-	}
-	if s.RoleArn != nil {
-		v := *s.RoleArn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "roleArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type UpdateAccountAuditConfigurationOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s UpdateAccountAuditConfigurationOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s UpdateAccountAuditConfigurationOutput) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
 
 const opUpdateAccountAuditConfiguration = "UpdateAccountAuditConfiguration"
 
@@ -130,7 +24,7 @@ const opUpdateAccountAuditConfiguration = "UpdateAccountAuditConfiguration"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) UpdateAccountAuditConfigurationRequest(input *UpdateAccountAuditConfigurationInput) UpdateAccountAuditConfigurationRequest {
+func (c *Client) UpdateAccountAuditConfigurationRequest(input *types.UpdateAccountAuditConfigurationInput) UpdateAccountAuditConfigurationRequest {
 	op := &aws.Operation{
 		Name:       opUpdateAccountAuditConfiguration,
 		HTTPMethod: "PATCH",
@@ -138,10 +32,10 @@ func (c *Client) UpdateAccountAuditConfigurationRequest(input *UpdateAccountAudi
 	}
 
 	if input == nil {
-		input = &UpdateAccountAuditConfigurationInput{}
+		input = &types.UpdateAccountAuditConfigurationInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateAccountAuditConfigurationOutput{})
+	req := c.newRequest(op, input, &types.UpdateAccountAuditConfigurationOutput{})
 	return UpdateAccountAuditConfigurationRequest{Request: req, Input: input, Copy: c.UpdateAccountAuditConfigurationRequest}
 }
 
@@ -149,8 +43,8 @@ func (c *Client) UpdateAccountAuditConfigurationRequest(input *UpdateAccountAudi
 // UpdateAccountAuditConfiguration API operation.
 type UpdateAccountAuditConfigurationRequest struct {
 	*aws.Request
-	Input *UpdateAccountAuditConfigurationInput
-	Copy  func(*UpdateAccountAuditConfigurationInput) UpdateAccountAuditConfigurationRequest
+	Input *types.UpdateAccountAuditConfigurationInput
+	Copy  func(*types.UpdateAccountAuditConfigurationInput) UpdateAccountAuditConfigurationRequest
 }
 
 // Send marshals and sends the UpdateAccountAuditConfiguration API request.
@@ -162,7 +56,7 @@ func (r UpdateAccountAuditConfigurationRequest) Send(ctx context.Context) (*Upda
 	}
 
 	resp := &UpdateAccountAuditConfigurationResponse{
-		UpdateAccountAuditConfigurationOutput: r.Request.Data.(*UpdateAccountAuditConfigurationOutput),
+		UpdateAccountAuditConfigurationOutput: r.Request.Data.(*types.UpdateAccountAuditConfigurationOutput),
 		response:                              &aws.Response{Request: r.Request},
 	}
 
@@ -172,7 +66,7 @@ func (r UpdateAccountAuditConfigurationRequest) Send(ctx context.Context) (*Upda
 // UpdateAccountAuditConfigurationResponse is the response type for the
 // UpdateAccountAuditConfiguration API operation.
 type UpdateAccountAuditConfigurationResponse struct {
-	*UpdateAccountAuditConfigurationOutput
+	*types.UpdateAccountAuditConfigurationOutput
 
 	response *aws.Response
 }

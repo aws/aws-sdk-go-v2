@@ -6,58 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/iotthingsgraph/types"
 )
-
-type CreateSystemTemplateInput struct {
-	_ struct{} `type:"structure"`
-
-	// The namespace version in which the system is to be created.
-	//
-	// If no value is specified, the latest version is used by default.
-	CompatibleNamespaceVersion *int64 `locationName:"compatibleNamespaceVersion" type:"long"`
-
-	// The DefinitionDocument used to create the system.
-	//
-	// Definition is a required field
-	Definition *DefinitionDocument `locationName:"definition" type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s CreateSystemTemplateInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateSystemTemplateInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateSystemTemplateInput"}
-
-	if s.Definition == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Definition"))
-	}
-	if s.Definition != nil {
-		if err := s.Definition.Validate(); err != nil {
-			invalidParams.AddNested("Definition", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type CreateSystemTemplateOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The summary object that describes the created system.
-	Summary *SystemTemplateSummary `locationName:"summary" type:"structure"`
-}
-
-// String returns the string representation
-func (s CreateSystemTemplateOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCreateSystemTemplate = "CreateSystemTemplate"
 
@@ -76,7 +26,7 @@ const opCreateSystemTemplate = "CreateSystemTemplate"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iotthingsgraph-2018-09-06/CreateSystemTemplate
-func (c *Client) CreateSystemTemplateRequest(input *CreateSystemTemplateInput) CreateSystemTemplateRequest {
+func (c *Client) CreateSystemTemplateRequest(input *types.CreateSystemTemplateInput) CreateSystemTemplateRequest {
 	op := &aws.Operation{
 		Name:       opCreateSystemTemplate,
 		HTTPMethod: "POST",
@@ -84,10 +34,10 @@ func (c *Client) CreateSystemTemplateRequest(input *CreateSystemTemplateInput) C
 	}
 
 	if input == nil {
-		input = &CreateSystemTemplateInput{}
+		input = &types.CreateSystemTemplateInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateSystemTemplateOutput{})
+	req := c.newRequest(op, input, &types.CreateSystemTemplateOutput{})
 	return CreateSystemTemplateRequest{Request: req, Input: input, Copy: c.CreateSystemTemplateRequest}
 }
 
@@ -95,8 +45,8 @@ func (c *Client) CreateSystemTemplateRequest(input *CreateSystemTemplateInput) C
 // CreateSystemTemplate API operation.
 type CreateSystemTemplateRequest struct {
 	*aws.Request
-	Input *CreateSystemTemplateInput
-	Copy  func(*CreateSystemTemplateInput) CreateSystemTemplateRequest
+	Input *types.CreateSystemTemplateInput
+	Copy  func(*types.CreateSystemTemplateInput) CreateSystemTemplateRequest
 }
 
 // Send marshals and sends the CreateSystemTemplate API request.
@@ -108,7 +58,7 @@ func (r CreateSystemTemplateRequest) Send(ctx context.Context) (*CreateSystemTem
 	}
 
 	resp := &CreateSystemTemplateResponse{
-		CreateSystemTemplateOutput: r.Request.Data.(*CreateSystemTemplateOutput),
+		CreateSystemTemplateOutput: r.Request.Data.(*types.CreateSystemTemplateOutput),
 		response:                   &aws.Response{Request: r.Request},
 	}
 
@@ -118,7 +68,7 @@ func (r CreateSystemTemplateRequest) Send(ctx context.Context) (*CreateSystemTem
 // CreateSystemTemplateResponse is the response type for the
 // CreateSystemTemplate API operation.
 type CreateSystemTemplateResponse struct {
-	*CreateSystemTemplateOutput
+	*types.CreateSystemTemplateOutput
 
 	response *aws.Response
 }

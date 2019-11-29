@@ -6,52 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/servicequotas/types"
 )
-
-type GetRequestedServiceQuotaChangeInput struct {
-	_ struct{} `type:"structure"`
-
-	// Identifies the quota increase request.
-	//
-	// RequestId is a required field
-	RequestId *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetRequestedServiceQuotaChangeInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetRequestedServiceQuotaChangeInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetRequestedServiceQuotaChangeInput"}
-
-	if s.RequestId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("RequestId"))
-	}
-	if s.RequestId != nil && len(*s.RequestId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("RequestId", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type GetRequestedServiceQuotaChangeOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Returns the RequestedServiceQuotaChange object for the specific increase
-	// request.
-	RequestedQuota *RequestedServiceQuotaChange `type:"structure"`
-}
-
-// String returns the string representation
-func (s GetRequestedServiceQuotaChangeOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetRequestedServiceQuotaChange = "GetRequestedServiceQuotaChange"
 
@@ -68,7 +24,7 @@ const opGetRequestedServiceQuotaChange = "GetRequestedServiceQuotaChange"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/service-quotas-2019-06-24/GetRequestedServiceQuotaChange
-func (c *Client) GetRequestedServiceQuotaChangeRequest(input *GetRequestedServiceQuotaChangeInput) GetRequestedServiceQuotaChangeRequest {
+func (c *Client) GetRequestedServiceQuotaChangeRequest(input *types.GetRequestedServiceQuotaChangeInput) GetRequestedServiceQuotaChangeRequest {
 	op := &aws.Operation{
 		Name:       opGetRequestedServiceQuotaChange,
 		HTTPMethod: "POST",
@@ -76,10 +32,10 @@ func (c *Client) GetRequestedServiceQuotaChangeRequest(input *GetRequestedServic
 	}
 
 	if input == nil {
-		input = &GetRequestedServiceQuotaChangeInput{}
+		input = &types.GetRequestedServiceQuotaChangeInput{}
 	}
 
-	req := c.newRequest(op, input, &GetRequestedServiceQuotaChangeOutput{})
+	req := c.newRequest(op, input, &types.GetRequestedServiceQuotaChangeOutput{})
 	return GetRequestedServiceQuotaChangeRequest{Request: req, Input: input, Copy: c.GetRequestedServiceQuotaChangeRequest}
 }
 
@@ -87,8 +43,8 @@ func (c *Client) GetRequestedServiceQuotaChangeRequest(input *GetRequestedServic
 // GetRequestedServiceQuotaChange API operation.
 type GetRequestedServiceQuotaChangeRequest struct {
 	*aws.Request
-	Input *GetRequestedServiceQuotaChangeInput
-	Copy  func(*GetRequestedServiceQuotaChangeInput) GetRequestedServiceQuotaChangeRequest
+	Input *types.GetRequestedServiceQuotaChangeInput
+	Copy  func(*types.GetRequestedServiceQuotaChangeInput) GetRequestedServiceQuotaChangeRequest
 }
 
 // Send marshals and sends the GetRequestedServiceQuotaChange API request.
@@ -100,7 +56,7 @@ func (r GetRequestedServiceQuotaChangeRequest) Send(ctx context.Context) (*GetRe
 	}
 
 	resp := &GetRequestedServiceQuotaChangeResponse{
-		GetRequestedServiceQuotaChangeOutput: r.Request.Data.(*GetRequestedServiceQuotaChangeOutput),
+		GetRequestedServiceQuotaChangeOutput: r.Request.Data.(*types.GetRequestedServiceQuotaChangeOutput),
 		response:                             &aws.Response{Request: r.Request},
 	}
 
@@ -110,7 +66,7 @@ func (r GetRequestedServiceQuotaChangeRequest) Send(ctx context.Context) (*GetRe
 // GetRequestedServiceQuotaChangeResponse is the response type for the
 // GetRequestedServiceQuotaChange API operation.
 type GetRequestedServiceQuotaChangeResponse struct {
-	*GetRequestedServiceQuotaChangeOutput
+	*types.GetRequestedServiceQuotaChangeOutput
 
 	response *aws.Response
 }

@@ -6,64 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ses/types"
 )
-
-// Represents a request to enable or disable whether Amazon SES forwards you
-// bounce and complaint notifications through email. For information about email
-// feedback forwarding, see the Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/notifications-via-email.html).
-type SetIdentityFeedbackForwardingEnabledInput struct {
-	_ struct{} `type:"structure"`
-
-	// Sets whether Amazon SES will forward bounce and complaint notifications as
-	// email. true specifies that Amazon SES will forward bounce and complaint notifications
-	// as email, in addition to any Amazon SNS topic publishing otherwise specified.
-	// false specifies that Amazon SES will publish bounce and complaint notifications
-	// only through Amazon SNS. This value can only be set to false when Amazon
-	// SNS topics are set for both Bounce and Complaint notification types.
-	//
-	// ForwardingEnabled is a required field
-	ForwardingEnabled *bool `type:"boolean" required:"true"`
-
-	// The identity for which to set bounce and complaint notification forwarding.
-	// Examples: user@example.com, example.com.
-	//
-	// Identity is a required field
-	Identity *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s SetIdentityFeedbackForwardingEnabledInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *SetIdentityFeedbackForwardingEnabledInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "SetIdentityFeedbackForwardingEnabledInput"}
-
-	if s.ForwardingEnabled == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ForwardingEnabled"))
-	}
-
-	if s.Identity == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Identity"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// An empty element returned on a successful request.
-type SetIdentityFeedbackForwardingEnabledOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s SetIdentityFeedbackForwardingEnabledOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opSetIdentityFeedbackForwardingEnabled = "SetIdentityFeedbackForwardingEnabled"
 
@@ -91,7 +35,7 @@ const opSetIdentityFeedbackForwardingEnabled = "SetIdentityFeedbackForwardingEna
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/SetIdentityFeedbackForwardingEnabled
-func (c *Client) SetIdentityFeedbackForwardingEnabledRequest(input *SetIdentityFeedbackForwardingEnabledInput) SetIdentityFeedbackForwardingEnabledRequest {
+func (c *Client) SetIdentityFeedbackForwardingEnabledRequest(input *types.SetIdentityFeedbackForwardingEnabledInput) SetIdentityFeedbackForwardingEnabledRequest {
 	op := &aws.Operation{
 		Name:       opSetIdentityFeedbackForwardingEnabled,
 		HTTPMethod: "POST",
@@ -99,10 +43,10 @@ func (c *Client) SetIdentityFeedbackForwardingEnabledRequest(input *SetIdentityF
 	}
 
 	if input == nil {
-		input = &SetIdentityFeedbackForwardingEnabledInput{}
+		input = &types.SetIdentityFeedbackForwardingEnabledInput{}
 	}
 
-	req := c.newRequest(op, input, &SetIdentityFeedbackForwardingEnabledOutput{})
+	req := c.newRequest(op, input, &types.SetIdentityFeedbackForwardingEnabledOutput{})
 	return SetIdentityFeedbackForwardingEnabledRequest{Request: req, Input: input, Copy: c.SetIdentityFeedbackForwardingEnabledRequest}
 }
 
@@ -110,8 +54,8 @@ func (c *Client) SetIdentityFeedbackForwardingEnabledRequest(input *SetIdentityF
 // SetIdentityFeedbackForwardingEnabled API operation.
 type SetIdentityFeedbackForwardingEnabledRequest struct {
 	*aws.Request
-	Input *SetIdentityFeedbackForwardingEnabledInput
-	Copy  func(*SetIdentityFeedbackForwardingEnabledInput) SetIdentityFeedbackForwardingEnabledRequest
+	Input *types.SetIdentityFeedbackForwardingEnabledInput
+	Copy  func(*types.SetIdentityFeedbackForwardingEnabledInput) SetIdentityFeedbackForwardingEnabledRequest
 }
 
 // Send marshals and sends the SetIdentityFeedbackForwardingEnabled API request.
@@ -123,7 +67,7 @@ func (r SetIdentityFeedbackForwardingEnabledRequest) Send(ctx context.Context) (
 	}
 
 	resp := &SetIdentityFeedbackForwardingEnabledResponse{
-		SetIdentityFeedbackForwardingEnabledOutput: r.Request.Data.(*SetIdentityFeedbackForwardingEnabledOutput),
+		SetIdentityFeedbackForwardingEnabledOutput: r.Request.Data.(*types.SetIdentityFeedbackForwardingEnabledOutput),
 		response: &aws.Response{Request: r.Request},
 	}
 
@@ -133,7 +77,7 @@ func (r SetIdentityFeedbackForwardingEnabledRequest) Send(ctx context.Context) (
 // SetIdentityFeedbackForwardingEnabledResponse is the response type for the
 // SetIdentityFeedbackForwardingEnabled API operation.
 type SetIdentityFeedbackForwardingEnabledResponse struct {
-	*SetIdentityFeedbackForwardingEnabledOutput
+	*types.SetIdentityFeedbackForwardingEnabledOutput
 
 	response *aws.Response
 }

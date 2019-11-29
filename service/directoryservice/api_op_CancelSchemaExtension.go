@@ -6,54 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/directoryservice/types"
 )
-
-type CancelSchemaExtensionInput struct {
-	_ struct{} `type:"structure"`
-
-	// The identifier of the directory whose schema extension will be canceled.
-	//
-	// DirectoryId is a required field
-	DirectoryId *string `type:"string" required:"true"`
-
-	// The identifier of the schema extension that will be canceled.
-	//
-	// SchemaExtensionId is a required field
-	SchemaExtensionId *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s CancelSchemaExtensionInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CancelSchemaExtensionInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CancelSchemaExtensionInput"}
-
-	if s.DirectoryId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DirectoryId"))
-	}
-
-	if s.SchemaExtensionId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("SchemaExtensionId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type CancelSchemaExtensionOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s CancelSchemaExtensionOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCancelSchemaExtension = "CancelSchemaExtension"
 
@@ -73,7 +27,7 @@ const opCancelSchemaExtension = "CancelSchemaExtension"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/CancelSchemaExtension
-func (c *Client) CancelSchemaExtensionRequest(input *CancelSchemaExtensionInput) CancelSchemaExtensionRequest {
+func (c *Client) CancelSchemaExtensionRequest(input *types.CancelSchemaExtensionInput) CancelSchemaExtensionRequest {
 	op := &aws.Operation{
 		Name:       opCancelSchemaExtension,
 		HTTPMethod: "POST",
@@ -81,10 +35,10 @@ func (c *Client) CancelSchemaExtensionRequest(input *CancelSchemaExtensionInput)
 	}
 
 	if input == nil {
-		input = &CancelSchemaExtensionInput{}
+		input = &types.CancelSchemaExtensionInput{}
 	}
 
-	req := c.newRequest(op, input, &CancelSchemaExtensionOutput{})
+	req := c.newRequest(op, input, &types.CancelSchemaExtensionOutput{})
 	return CancelSchemaExtensionRequest{Request: req, Input: input, Copy: c.CancelSchemaExtensionRequest}
 }
 
@@ -92,8 +46,8 @@ func (c *Client) CancelSchemaExtensionRequest(input *CancelSchemaExtensionInput)
 // CancelSchemaExtension API operation.
 type CancelSchemaExtensionRequest struct {
 	*aws.Request
-	Input *CancelSchemaExtensionInput
-	Copy  func(*CancelSchemaExtensionInput) CancelSchemaExtensionRequest
+	Input *types.CancelSchemaExtensionInput
+	Copy  func(*types.CancelSchemaExtensionInput) CancelSchemaExtensionRequest
 }
 
 // Send marshals and sends the CancelSchemaExtension API request.
@@ -105,7 +59,7 @@ func (r CancelSchemaExtensionRequest) Send(ctx context.Context) (*CancelSchemaEx
 	}
 
 	resp := &CancelSchemaExtensionResponse{
-		CancelSchemaExtensionOutput: r.Request.Data.(*CancelSchemaExtensionOutput),
+		CancelSchemaExtensionOutput: r.Request.Data.(*types.CancelSchemaExtensionOutput),
 		response:                    &aws.Response{Request: r.Request},
 	}
 
@@ -115,7 +69,7 @@ func (r CancelSchemaExtensionRequest) Send(ctx context.Context) (*CancelSchemaEx
 // CancelSchemaExtensionResponse is the response type for the
 // CancelSchemaExtension API operation.
 type CancelSchemaExtensionResponse struct {
-	*CancelSchemaExtensionOutput
+	*types.CancelSchemaExtensionOutput
 
 	response *aws.Response
 }

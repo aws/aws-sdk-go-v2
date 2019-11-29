@@ -6,49 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ses/types"
 )
-
-// Represents a request to delete an IP address filter. You use IP address filters
-// when you receive email with Amazon SES. For more information, see the Amazon
-// SES Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-concepts.html).
-type DeleteReceiptFilterInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the IP address filter to delete.
-	//
-	// FilterName is a required field
-	FilterName *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteReceiptFilterInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteReceiptFilterInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteReceiptFilterInput"}
-
-	if s.FilterName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("FilterName"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// An empty element returned on a successful request.
-type DeleteReceiptFilterOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteReceiptFilterOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteReceiptFilter = "DeleteReceiptFilter"
 
@@ -70,7 +29,7 @@ const opDeleteReceiptFilter = "DeleteReceiptFilter"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/DeleteReceiptFilter
-func (c *Client) DeleteReceiptFilterRequest(input *DeleteReceiptFilterInput) DeleteReceiptFilterRequest {
+func (c *Client) DeleteReceiptFilterRequest(input *types.DeleteReceiptFilterInput) DeleteReceiptFilterRequest {
 	op := &aws.Operation{
 		Name:       opDeleteReceiptFilter,
 		HTTPMethod: "POST",
@@ -78,10 +37,10 @@ func (c *Client) DeleteReceiptFilterRequest(input *DeleteReceiptFilterInput) Del
 	}
 
 	if input == nil {
-		input = &DeleteReceiptFilterInput{}
+		input = &types.DeleteReceiptFilterInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteReceiptFilterOutput{})
+	req := c.newRequest(op, input, &types.DeleteReceiptFilterOutput{})
 	return DeleteReceiptFilterRequest{Request: req, Input: input, Copy: c.DeleteReceiptFilterRequest}
 }
 
@@ -89,8 +48,8 @@ func (c *Client) DeleteReceiptFilterRequest(input *DeleteReceiptFilterInput) Del
 // DeleteReceiptFilter API operation.
 type DeleteReceiptFilterRequest struct {
 	*aws.Request
-	Input *DeleteReceiptFilterInput
-	Copy  func(*DeleteReceiptFilterInput) DeleteReceiptFilterRequest
+	Input *types.DeleteReceiptFilterInput
+	Copy  func(*types.DeleteReceiptFilterInput) DeleteReceiptFilterRequest
 }
 
 // Send marshals and sends the DeleteReceiptFilter API request.
@@ -102,7 +61,7 @@ func (r DeleteReceiptFilterRequest) Send(ctx context.Context) (*DeleteReceiptFil
 	}
 
 	resp := &DeleteReceiptFilterResponse{
-		DeleteReceiptFilterOutput: r.Request.Data.(*DeleteReceiptFilterOutput),
+		DeleteReceiptFilterOutput: r.Request.Data.(*types.DeleteReceiptFilterOutput),
 		response:                  &aws.Response{Request: r.Request},
 	}
 
@@ -112,7 +71,7 @@ func (r DeleteReceiptFilterRequest) Send(ctx context.Context) (*DeleteReceiptFil
 // DeleteReceiptFilterResponse is the response type for the
 // DeleteReceiptFilter API operation.
 type DeleteReceiptFilterResponse struct {
-	*DeleteReceiptFilterOutput
+	*types.DeleteReceiptFilterOutput
 
 	response *aws.Response
 }

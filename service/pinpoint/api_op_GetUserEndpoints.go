@@ -6,87 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/pinpoint/types"
 )
-
-type GetUserEndpointsInput struct {
-	_ struct{} `type:"structure"`
-
-	// ApplicationId is a required field
-	ApplicationId *string `location:"uri" locationName:"application-id" type:"string" required:"true"`
-
-	// UserId is a required field
-	UserId *string `location:"uri" locationName:"user-id" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetUserEndpointsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetUserEndpointsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetUserEndpointsInput"}
-
-	if s.ApplicationId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ApplicationId"))
-	}
-
-	if s.UserId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("UserId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetUserEndpointsInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.ApplicationId != nil {
-		v := *s.ApplicationId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "application-id", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.UserId != nil {
-		v := *s.UserId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "user-id", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type GetUserEndpointsOutput struct {
-	_ struct{} `type:"structure" payload:"EndpointsResponse"`
-
-	// Provides information about all the endpoints that are associated with a user
-	// ID.
-	//
-	// EndpointsResponse is a required field
-	EndpointsResponse *EndpointsResponse `type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s GetUserEndpointsOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetUserEndpointsOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.EndpointsResponse != nil {
-		v := s.EndpointsResponse
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.PayloadTarget, "EndpointsResponse", v, metadata)
-	}
-	return nil
-}
 
 const opGetUserEndpoints = "GetUserEndpoints"
 
@@ -104,7 +25,7 @@ const opGetUserEndpoints = "GetUserEndpoints"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetUserEndpoints
-func (c *Client) GetUserEndpointsRequest(input *GetUserEndpointsInput) GetUserEndpointsRequest {
+func (c *Client) GetUserEndpointsRequest(input *types.GetUserEndpointsInput) GetUserEndpointsRequest {
 	op := &aws.Operation{
 		Name:       opGetUserEndpoints,
 		HTTPMethod: "GET",
@@ -112,10 +33,10 @@ func (c *Client) GetUserEndpointsRequest(input *GetUserEndpointsInput) GetUserEn
 	}
 
 	if input == nil {
-		input = &GetUserEndpointsInput{}
+		input = &types.GetUserEndpointsInput{}
 	}
 
-	req := c.newRequest(op, input, &GetUserEndpointsOutput{})
+	req := c.newRequest(op, input, &types.GetUserEndpointsOutput{})
 	return GetUserEndpointsRequest{Request: req, Input: input, Copy: c.GetUserEndpointsRequest}
 }
 
@@ -123,8 +44,8 @@ func (c *Client) GetUserEndpointsRequest(input *GetUserEndpointsInput) GetUserEn
 // GetUserEndpoints API operation.
 type GetUserEndpointsRequest struct {
 	*aws.Request
-	Input *GetUserEndpointsInput
-	Copy  func(*GetUserEndpointsInput) GetUserEndpointsRequest
+	Input *types.GetUserEndpointsInput
+	Copy  func(*types.GetUserEndpointsInput) GetUserEndpointsRequest
 }
 
 // Send marshals and sends the GetUserEndpoints API request.
@@ -136,7 +57,7 @@ func (r GetUserEndpointsRequest) Send(ctx context.Context) (*GetUserEndpointsRes
 	}
 
 	resp := &GetUserEndpointsResponse{
-		GetUserEndpointsOutput: r.Request.Data.(*GetUserEndpointsOutput),
+		GetUserEndpointsOutput: r.Request.Data.(*types.GetUserEndpointsOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -146,7 +67,7 @@ func (r GetUserEndpointsRequest) Send(ctx context.Context) (*GetUserEndpointsRes
 // GetUserEndpointsResponse is the response type for the
 // GetUserEndpoints API operation.
 type GetUserEndpointsResponse struct {
-	*GetUserEndpointsOutput
+	*types.GetUserEndpointsOutput
 
 	response *aws.Response
 }

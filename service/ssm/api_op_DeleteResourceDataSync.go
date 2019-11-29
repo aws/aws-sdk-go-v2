@@ -6,48 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ssm/types"
 )
-
-type DeleteResourceDataSyncInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the configuration to delete.
-	//
-	// SyncName is a required field
-	SyncName *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteResourceDataSyncInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteResourceDataSyncInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteResourceDataSyncInput"}
-
-	if s.SyncName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("SyncName"))
-	}
-	if s.SyncName != nil && len(*s.SyncName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("SyncName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteResourceDataSyncOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteResourceDataSyncOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteResourceDataSync = "DeleteResourceDataSync"
 
@@ -55,9 +15,8 @@ const opDeleteResourceDataSync = "DeleteResourceDataSync"
 // Amazon Simple Systems Manager (SSM).
 //
 // Deletes a Resource Data Sync configuration. After the configuration is deleted,
-// changes to inventory data on managed instances are no longer synced with
-// the target Amazon S3 bucket. Deleting a sync configuration does not delete
-// data in the target Amazon S3 bucket.
+// changes to data on managed instances are no longer synced to or from the
+// target. Deleting a sync configuration does not delete data.
 //
 //    // Example sending a request using DeleteResourceDataSyncRequest.
 //    req := client.DeleteResourceDataSyncRequest(params)
@@ -67,7 +26,7 @@ const opDeleteResourceDataSync = "DeleteResourceDataSync"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DeleteResourceDataSync
-func (c *Client) DeleteResourceDataSyncRequest(input *DeleteResourceDataSyncInput) DeleteResourceDataSyncRequest {
+func (c *Client) DeleteResourceDataSyncRequest(input *types.DeleteResourceDataSyncInput) DeleteResourceDataSyncRequest {
 	op := &aws.Operation{
 		Name:       opDeleteResourceDataSync,
 		HTTPMethod: "POST",
@@ -75,10 +34,10 @@ func (c *Client) DeleteResourceDataSyncRequest(input *DeleteResourceDataSyncInpu
 	}
 
 	if input == nil {
-		input = &DeleteResourceDataSyncInput{}
+		input = &types.DeleteResourceDataSyncInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteResourceDataSyncOutput{})
+	req := c.newRequest(op, input, &types.DeleteResourceDataSyncOutput{})
 	return DeleteResourceDataSyncRequest{Request: req, Input: input, Copy: c.DeleteResourceDataSyncRequest}
 }
 
@@ -86,8 +45,8 @@ func (c *Client) DeleteResourceDataSyncRequest(input *DeleteResourceDataSyncInpu
 // DeleteResourceDataSync API operation.
 type DeleteResourceDataSyncRequest struct {
 	*aws.Request
-	Input *DeleteResourceDataSyncInput
-	Copy  func(*DeleteResourceDataSyncInput) DeleteResourceDataSyncRequest
+	Input *types.DeleteResourceDataSyncInput
+	Copy  func(*types.DeleteResourceDataSyncInput) DeleteResourceDataSyncRequest
 }
 
 // Send marshals and sends the DeleteResourceDataSync API request.
@@ -99,7 +58,7 @@ func (r DeleteResourceDataSyncRequest) Send(ctx context.Context) (*DeleteResourc
 	}
 
 	resp := &DeleteResourceDataSyncResponse{
-		DeleteResourceDataSyncOutput: r.Request.Data.(*DeleteResourceDataSyncOutput),
+		DeleteResourceDataSyncOutput: r.Request.Data.(*types.DeleteResourceDataSyncOutput),
 		response:                     &aws.Response{Request: r.Request},
 	}
 
@@ -109,7 +68,7 @@ func (r DeleteResourceDataSyncRequest) Send(ctx context.Context) (*DeleteResourc
 // DeleteResourceDataSyncResponse is the response type for the
 // DeleteResourceDataSync API operation.
 type DeleteResourceDataSyncResponse struct {
-	*DeleteResourceDataSyncOutput
+	*types.DeleteResourceDataSyncOutput
 
 	response *aws.Response
 }

@@ -4,85 +4,10 @@ package codecommit
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/codecommit/types"
 )
-
-type CreatePullRequestInput struct {
-	_ struct{} `type:"structure"`
-
-	// A unique, client-generated idempotency token that when provided in a request,
-	// ensures the request cannot be repeated with a changed parameter. If a request
-	// is received with the same parameters and a token is included, the request
-	// will return information about the initial request that used that token.
-	//
-	// The AWS SDKs prepopulate client request tokens. If using an AWS SDK, you
-	// do not have to generate an idempotency token, as this will be done for you.
-	ClientRequestToken *string `locationName:"clientRequestToken" type:"string" idempotencyToken:"true"`
-
-	// A description of the pull request.
-	Description *string `locationName:"description" type:"string"`
-
-	// The targets for the pull request, including the source of the code to be
-	// reviewed (the source branch), and the destination where the creator of the
-	// pull request intends the code to be merged after the pull request is closed
-	// (the destination branch).
-	//
-	// Targets is a required field
-	Targets []Target `locationName:"targets" type:"list" required:"true"`
-
-	// The title of the pull request. This title will be used to identify the pull
-	// request to other users in the repository.
-	//
-	// Title is a required field
-	Title *string `locationName:"title" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s CreatePullRequestInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreatePullRequestInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreatePullRequestInput"}
-
-	if s.Targets == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Targets"))
-	}
-
-	if s.Title == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Title"))
-	}
-	if s.Targets != nil {
-		for i, v := range s.Targets {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Targets", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type CreatePullRequestOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Information about the newly created pull request.
-	//
-	// PullRequest is a required field
-	PullRequest *PullRequest `locationName:"pullRequest" type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s CreatePullRequestOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCreatePullRequest = "CreatePullRequest"
 
@@ -99,7 +24,7 @@ const opCreatePullRequest = "CreatePullRequest"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/CreatePullRequest
-func (c *Client) CreatePullRequestRequest(input *CreatePullRequestInput) CreatePullRequestRequest {
+func (c *Client) CreatePullRequestRequest(input *types.CreatePullRequestInput) CreatePullRequestRequest {
 	op := &aws.Operation{
 		Name:       opCreatePullRequest,
 		HTTPMethod: "POST",
@@ -107,10 +32,10 @@ func (c *Client) CreatePullRequestRequest(input *CreatePullRequestInput) CreateP
 	}
 
 	if input == nil {
-		input = &CreatePullRequestInput{}
+		input = &types.CreatePullRequestInput{}
 	}
 
-	req := c.newRequest(op, input, &CreatePullRequestOutput{})
+	req := c.newRequest(op, input, &types.CreatePullRequestOutput{})
 	return CreatePullRequestRequest{Request: req, Input: input, Copy: c.CreatePullRequestRequest}
 }
 
@@ -118,8 +43,8 @@ func (c *Client) CreatePullRequestRequest(input *CreatePullRequestInput) CreateP
 // CreatePullRequest API operation.
 type CreatePullRequestRequest struct {
 	*aws.Request
-	Input *CreatePullRequestInput
-	Copy  func(*CreatePullRequestInput) CreatePullRequestRequest
+	Input *types.CreatePullRequestInput
+	Copy  func(*types.CreatePullRequestInput) CreatePullRequestRequest
 }
 
 // Send marshals and sends the CreatePullRequest API request.
@@ -131,7 +56,7 @@ func (r CreatePullRequestRequest) Send(ctx context.Context) (*CreatePullRequestR
 	}
 
 	resp := &CreatePullRequestResponse{
-		CreatePullRequestOutput: r.Request.Data.(*CreatePullRequestOutput),
+		CreatePullRequestOutput: r.Request.Data.(*types.CreatePullRequestOutput),
 		response:                &aws.Response{Request: r.Request},
 	}
 
@@ -141,7 +66,7 @@ func (r CreatePullRequestRequest) Send(ctx context.Context) (*CreatePullRequestR
 // CreatePullRequestResponse is the response type for the
 // CreatePullRequest API operation.
 type CreatePullRequestResponse struct {
-	*CreatePullRequestOutput
+	*types.CreatePullRequestOutput
 
 	response *aws.Response
 }

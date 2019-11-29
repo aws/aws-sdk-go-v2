@@ -6,29 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/sms/types"
 )
-
-type DeleteAppReplicationConfigurationInput struct {
-	_ struct{} `type:"structure"`
-
-	// ID of the application associated with the replication configuration.
-	AppId *string `locationName:"appId" type:"string"`
-}
-
-// String returns the string representation
-func (s DeleteAppReplicationConfigurationInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type DeleteAppReplicationConfigurationOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteAppReplicationConfigurationOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteAppReplicationConfiguration = "DeleteAppReplicationConfiguration"
 
@@ -45,7 +24,7 @@ const opDeleteAppReplicationConfiguration = "DeleteAppReplicationConfiguration"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sms-2016-10-24/DeleteAppReplicationConfiguration
-func (c *Client) DeleteAppReplicationConfigurationRequest(input *DeleteAppReplicationConfigurationInput) DeleteAppReplicationConfigurationRequest {
+func (c *Client) DeleteAppReplicationConfigurationRequest(input *types.DeleteAppReplicationConfigurationInput) DeleteAppReplicationConfigurationRequest {
 	op := &aws.Operation{
 		Name:       opDeleteAppReplicationConfiguration,
 		HTTPMethod: "POST",
@@ -53,10 +32,10 @@ func (c *Client) DeleteAppReplicationConfigurationRequest(input *DeleteAppReplic
 	}
 
 	if input == nil {
-		input = &DeleteAppReplicationConfigurationInput{}
+		input = &types.DeleteAppReplicationConfigurationInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteAppReplicationConfigurationOutput{})
+	req := c.newRequest(op, input, &types.DeleteAppReplicationConfigurationOutput{})
 	return DeleteAppReplicationConfigurationRequest{Request: req, Input: input, Copy: c.DeleteAppReplicationConfigurationRequest}
 }
 
@@ -64,8 +43,8 @@ func (c *Client) DeleteAppReplicationConfigurationRequest(input *DeleteAppReplic
 // DeleteAppReplicationConfiguration API operation.
 type DeleteAppReplicationConfigurationRequest struct {
 	*aws.Request
-	Input *DeleteAppReplicationConfigurationInput
-	Copy  func(*DeleteAppReplicationConfigurationInput) DeleteAppReplicationConfigurationRequest
+	Input *types.DeleteAppReplicationConfigurationInput
+	Copy  func(*types.DeleteAppReplicationConfigurationInput) DeleteAppReplicationConfigurationRequest
 }
 
 // Send marshals and sends the DeleteAppReplicationConfiguration API request.
@@ -77,7 +56,7 @@ func (r DeleteAppReplicationConfigurationRequest) Send(ctx context.Context) (*De
 	}
 
 	resp := &DeleteAppReplicationConfigurationResponse{
-		DeleteAppReplicationConfigurationOutput: r.Request.Data.(*DeleteAppReplicationConfigurationOutput),
+		DeleteAppReplicationConfigurationOutput: r.Request.Data.(*types.DeleteAppReplicationConfigurationOutput),
 		response:                                &aws.Response{Request: r.Request},
 	}
 
@@ -87,7 +66,7 @@ func (r DeleteAppReplicationConfigurationRequest) Send(ctx context.Context) (*De
 // DeleteAppReplicationConfigurationResponse is the response type for the
 // DeleteAppReplicationConfiguration API operation.
 type DeleteAppReplicationConfigurationResponse struct {
-	*DeleteAppReplicationConfigurationOutput
+	*types.DeleteAppReplicationConfigurationOutput
 
 	response *aws.Response
 }

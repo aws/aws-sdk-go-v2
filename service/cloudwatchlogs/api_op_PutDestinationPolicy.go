@@ -6,63 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
+	"github.com/aws/aws-sdk-go-v2/service/cloudwatchlogs/types"
 )
-
-type PutDestinationPolicyInput struct {
-	_ struct{} `type:"structure"`
-
-	// An IAM policy document that authorizes cross-account users to deliver their
-	// log events to the associated destination.
-	//
-	// AccessPolicy is a required field
-	AccessPolicy *string `locationName:"accessPolicy" min:"1" type:"string" required:"true"`
-
-	// A name for an existing destination.
-	//
-	// DestinationName is a required field
-	DestinationName *string `locationName:"destinationName" min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s PutDestinationPolicyInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *PutDestinationPolicyInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "PutDestinationPolicyInput"}
-
-	if s.AccessPolicy == nil {
-		invalidParams.Add(aws.NewErrParamRequired("AccessPolicy"))
-	}
-	if s.AccessPolicy != nil && len(*s.AccessPolicy) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("AccessPolicy", 1))
-	}
-
-	if s.DestinationName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DestinationName"))
-	}
-	if s.DestinationName != nil && len(*s.DestinationName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("DestinationName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type PutDestinationPolicyOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s PutDestinationPolicyOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opPutDestinationPolicy = "PutDestinationPolicy"
 
@@ -82,7 +29,7 @@ const opPutDestinationPolicy = "PutDestinationPolicy"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/PutDestinationPolicy
-func (c *Client) PutDestinationPolicyRequest(input *PutDestinationPolicyInput) PutDestinationPolicyRequest {
+func (c *Client) PutDestinationPolicyRequest(input *types.PutDestinationPolicyInput) PutDestinationPolicyRequest {
 	op := &aws.Operation{
 		Name:       opPutDestinationPolicy,
 		HTTPMethod: "POST",
@@ -90,10 +37,10 @@ func (c *Client) PutDestinationPolicyRequest(input *PutDestinationPolicyInput) P
 	}
 
 	if input == nil {
-		input = &PutDestinationPolicyInput{}
+		input = &types.PutDestinationPolicyInput{}
 	}
 
-	req := c.newRequest(op, input, &PutDestinationPolicyOutput{})
+	req := c.newRequest(op, input, &types.PutDestinationPolicyOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return PutDestinationPolicyRequest{Request: req, Input: input, Copy: c.PutDestinationPolicyRequest}
@@ -103,8 +50,8 @@ func (c *Client) PutDestinationPolicyRequest(input *PutDestinationPolicyInput) P
 // PutDestinationPolicy API operation.
 type PutDestinationPolicyRequest struct {
 	*aws.Request
-	Input *PutDestinationPolicyInput
-	Copy  func(*PutDestinationPolicyInput) PutDestinationPolicyRequest
+	Input *types.PutDestinationPolicyInput
+	Copy  func(*types.PutDestinationPolicyInput) PutDestinationPolicyRequest
 }
 
 // Send marshals and sends the PutDestinationPolicy API request.
@@ -116,7 +63,7 @@ func (r PutDestinationPolicyRequest) Send(ctx context.Context) (*PutDestinationP
 	}
 
 	resp := &PutDestinationPolicyResponse{
-		PutDestinationPolicyOutput: r.Request.Data.(*PutDestinationPolicyOutput),
+		PutDestinationPolicyOutput: r.Request.Data.(*types.PutDestinationPolicyOutput),
 		response:                   &aws.Response{Request: r.Request},
 	}
 
@@ -126,7 +73,7 @@ func (r PutDestinationPolicyRequest) Send(ctx context.Context) (*PutDestinationP
 // PutDestinationPolicyResponse is the response type for the
 // PutDestinationPolicy API operation.
 type PutDestinationPolicyResponse struct {
-	*PutDestinationPolicyOutput
+	*types.PutDestinationPolicyOutput
 
 	response *aws.Response
 }

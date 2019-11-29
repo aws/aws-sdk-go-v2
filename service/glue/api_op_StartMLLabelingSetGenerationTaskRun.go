@@ -6,61 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/glue/types"
 )
-
-type StartMLLabelingSetGenerationTaskRunInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Simple Storage Service (Amazon S3) path where you generate the
-	// labeling set.
-	//
-	// OutputS3Path is a required field
-	OutputS3Path *string `type:"string" required:"true"`
-
-	// The unique identifier of the machine learning transform.
-	//
-	// TransformId is a required field
-	TransformId *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s StartMLLabelingSetGenerationTaskRunInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *StartMLLabelingSetGenerationTaskRunInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "StartMLLabelingSetGenerationTaskRunInput"}
-
-	if s.OutputS3Path == nil {
-		invalidParams.Add(aws.NewErrParamRequired("OutputS3Path"))
-	}
-
-	if s.TransformId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("TransformId"))
-	}
-	if s.TransformId != nil && len(*s.TransformId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("TransformId", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type StartMLLabelingSetGenerationTaskRunOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The unique run identifier that is associated with this task run.
-	TaskRunId *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s StartMLLabelingSetGenerationTaskRunOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opStartMLLabelingSetGenerationTaskRun = "StartMLLabelingSetGenerationTaskRun"
 
@@ -90,7 +37,7 @@ const opStartMLLabelingSetGenerationTaskRun = "StartMLLabelingSetGenerationTaskR
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/StartMLLabelingSetGenerationTaskRun
-func (c *Client) StartMLLabelingSetGenerationTaskRunRequest(input *StartMLLabelingSetGenerationTaskRunInput) StartMLLabelingSetGenerationTaskRunRequest {
+func (c *Client) StartMLLabelingSetGenerationTaskRunRequest(input *types.StartMLLabelingSetGenerationTaskRunInput) StartMLLabelingSetGenerationTaskRunRequest {
 	op := &aws.Operation{
 		Name:       opStartMLLabelingSetGenerationTaskRun,
 		HTTPMethod: "POST",
@@ -98,10 +45,10 @@ func (c *Client) StartMLLabelingSetGenerationTaskRunRequest(input *StartMLLabeli
 	}
 
 	if input == nil {
-		input = &StartMLLabelingSetGenerationTaskRunInput{}
+		input = &types.StartMLLabelingSetGenerationTaskRunInput{}
 	}
 
-	req := c.newRequest(op, input, &StartMLLabelingSetGenerationTaskRunOutput{})
+	req := c.newRequest(op, input, &types.StartMLLabelingSetGenerationTaskRunOutput{})
 	return StartMLLabelingSetGenerationTaskRunRequest{Request: req, Input: input, Copy: c.StartMLLabelingSetGenerationTaskRunRequest}
 }
 
@@ -109,8 +56,8 @@ func (c *Client) StartMLLabelingSetGenerationTaskRunRequest(input *StartMLLabeli
 // StartMLLabelingSetGenerationTaskRun API operation.
 type StartMLLabelingSetGenerationTaskRunRequest struct {
 	*aws.Request
-	Input *StartMLLabelingSetGenerationTaskRunInput
-	Copy  func(*StartMLLabelingSetGenerationTaskRunInput) StartMLLabelingSetGenerationTaskRunRequest
+	Input *types.StartMLLabelingSetGenerationTaskRunInput
+	Copy  func(*types.StartMLLabelingSetGenerationTaskRunInput) StartMLLabelingSetGenerationTaskRunRequest
 }
 
 // Send marshals and sends the StartMLLabelingSetGenerationTaskRun API request.
@@ -122,7 +69,7 @@ func (r StartMLLabelingSetGenerationTaskRunRequest) Send(ctx context.Context) (*
 	}
 
 	resp := &StartMLLabelingSetGenerationTaskRunResponse{
-		StartMLLabelingSetGenerationTaskRunOutput: r.Request.Data.(*StartMLLabelingSetGenerationTaskRunOutput),
+		StartMLLabelingSetGenerationTaskRunOutput: r.Request.Data.(*types.StartMLLabelingSetGenerationTaskRunOutput),
 		response: &aws.Response{Request: r.Request},
 	}
 
@@ -132,7 +79,7 @@ func (r StartMLLabelingSetGenerationTaskRunRequest) Send(ctx context.Context) (*
 // StartMLLabelingSetGenerationTaskRunResponse is the response type for the
 // StartMLLabelingSetGenerationTaskRun API operation.
 type StartMLLabelingSetGenerationTaskRunResponse struct {
-	*StartMLLabelingSetGenerationTaskRunOutput
+	*types.StartMLLabelingSetGenerationTaskRunOutput
 
 	response *aws.Response
 }

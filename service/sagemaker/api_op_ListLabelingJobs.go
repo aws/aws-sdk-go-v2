@@ -4,86 +4,10 @@ package sagemaker
 
 import (
 	"context"
-	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
 )
-
-type ListLabelingJobsInput struct {
-	_ struct{} `type:"structure"`
-
-	// A filter that returns only labeling jobs created after the specified time
-	// (timestamp).
-	CreationTimeAfter *time.Time `type:"timestamp"`
-
-	// A filter that returns only labeling jobs created before the specified time
-	// (timestamp).
-	CreationTimeBefore *time.Time `type:"timestamp"`
-
-	// A filter that returns only labeling jobs modified after the specified time
-	// (timestamp).
-	LastModifiedTimeAfter *time.Time `type:"timestamp"`
-
-	// A filter that returns only labeling jobs modified before the specified time
-	// (timestamp).
-	LastModifiedTimeBefore *time.Time `type:"timestamp"`
-
-	// The maximum number of labeling jobs to return in each page of the response.
-	MaxResults *int64 `min:"1" type:"integer"`
-
-	// A string in the labeling job name. This filter returns only labeling jobs
-	// whose name contains the specified string.
-	NameContains *string `type:"string"`
-
-	// If the result of the previous ListLabelingJobs request was truncated, the
-	// response includes a NextToken. To retrieve the next set of labeling jobs,
-	// use the token in the next request.
-	NextToken *string `type:"string"`
-
-	// The field to sort results by. The default is CreationTime.
-	SortBy SortBy `type:"string" enum:"true"`
-
-	// The sort order for results. The default is Ascending.
-	SortOrder SortOrder `type:"string" enum:"true"`
-
-	// A filter that retrieves only labeling jobs with a specific status.
-	StatusEquals LabelingJobStatus `type:"string" enum:"true"`
-}
-
-// String returns the string representation
-func (s ListLabelingJobsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListLabelingJobsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListLabelingJobsInput"}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ListLabelingJobsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// An array of LabelingJobSummary objects, each describing a labeling job.
-	LabelingJobSummaryList []LabelingJobSummary `type:"list"`
-
-	// If the response is truncated, Amazon SageMaker returns this token. To retrieve
-	// the next set of labeling jobs, use it in the subsequent request.
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s ListLabelingJobsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListLabelingJobs = "ListLabelingJobs"
 
@@ -100,7 +24,7 @@ const opListLabelingJobs = "ListLabelingJobs"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListLabelingJobs
-func (c *Client) ListLabelingJobsRequest(input *ListLabelingJobsInput) ListLabelingJobsRequest {
+func (c *Client) ListLabelingJobsRequest(input *types.ListLabelingJobsInput) ListLabelingJobsRequest {
 	op := &aws.Operation{
 		Name:       opListLabelingJobs,
 		HTTPMethod: "POST",
@@ -114,10 +38,10 @@ func (c *Client) ListLabelingJobsRequest(input *ListLabelingJobsInput) ListLabel
 	}
 
 	if input == nil {
-		input = &ListLabelingJobsInput{}
+		input = &types.ListLabelingJobsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListLabelingJobsOutput{})
+	req := c.newRequest(op, input, &types.ListLabelingJobsOutput{})
 	return ListLabelingJobsRequest{Request: req, Input: input, Copy: c.ListLabelingJobsRequest}
 }
 
@@ -125,8 +49,8 @@ func (c *Client) ListLabelingJobsRequest(input *ListLabelingJobsInput) ListLabel
 // ListLabelingJobs API operation.
 type ListLabelingJobsRequest struct {
 	*aws.Request
-	Input *ListLabelingJobsInput
-	Copy  func(*ListLabelingJobsInput) ListLabelingJobsRequest
+	Input *types.ListLabelingJobsInput
+	Copy  func(*types.ListLabelingJobsInput) ListLabelingJobsRequest
 }
 
 // Send marshals and sends the ListLabelingJobs API request.
@@ -138,7 +62,7 @@ func (r ListLabelingJobsRequest) Send(ctx context.Context) (*ListLabelingJobsRes
 	}
 
 	resp := &ListLabelingJobsResponse{
-		ListLabelingJobsOutput: r.Request.Data.(*ListLabelingJobsOutput),
+		ListLabelingJobsOutput: r.Request.Data.(*types.ListLabelingJobsOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -168,7 +92,7 @@ func NewListLabelingJobsPaginator(req ListLabelingJobsRequest) ListLabelingJobsP
 	return ListLabelingJobsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListLabelingJobsInput
+				var inCpy *types.ListLabelingJobsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -188,14 +112,14 @@ type ListLabelingJobsPaginator struct {
 	aws.Pager
 }
 
-func (p *ListLabelingJobsPaginator) CurrentPage() *ListLabelingJobsOutput {
-	return p.Pager.CurrentPage().(*ListLabelingJobsOutput)
+func (p *ListLabelingJobsPaginator) CurrentPage() *types.ListLabelingJobsOutput {
+	return p.Pager.CurrentPage().(*types.ListLabelingJobsOutput)
 }
 
 // ListLabelingJobsResponse is the response type for the
 // ListLabelingJobs API operation.
 type ListLabelingJobsResponse struct {
-	*ListLabelingJobsOutput
+	*types.ListLabelingJobsOutput
 
 	response *aws.Response
 }

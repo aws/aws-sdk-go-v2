@@ -6,53 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
+	"github.com/aws/aws-sdk-go-v2/service/configservice/types"
 )
-
-// The request object for the DeleteConfigurationRecorder action.
-type DeleteConfigurationRecorderInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the configuration recorder to be deleted. You can retrieve the
-	// name of your configuration recorder by using the DescribeConfigurationRecorders
-	// action.
-	//
-	// ConfigurationRecorderName is a required field
-	ConfigurationRecorderName *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteConfigurationRecorderInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteConfigurationRecorderInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteConfigurationRecorderInput"}
-
-	if s.ConfigurationRecorderName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ConfigurationRecorderName"))
-	}
-	if s.ConfigurationRecorderName != nil && len(*s.ConfigurationRecorderName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ConfigurationRecorderName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteConfigurationRecorderOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteConfigurationRecorderOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteConfigurationRecorder = "DeleteConfigurationRecorder"
 
@@ -78,7 +35,7 @@ const opDeleteConfigurationRecorder = "DeleteConfigurationRecorder"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DeleteConfigurationRecorder
-func (c *Client) DeleteConfigurationRecorderRequest(input *DeleteConfigurationRecorderInput) DeleteConfigurationRecorderRequest {
+func (c *Client) DeleteConfigurationRecorderRequest(input *types.DeleteConfigurationRecorderInput) DeleteConfigurationRecorderRequest {
 	op := &aws.Operation{
 		Name:       opDeleteConfigurationRecorder,
 		HTTPMethod: "POST",
@@ -86,10 +43,10 @@ func (c *Client) DeleteConfigurationRecorderRequest(input *DeleteConfigurationRe
 	}
 
 	if input == nil {
-		input = &DeleteConfigurationRecorderInput{}
+		input = &types.DeleteConfigurationRecorderInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteConfigurationRecorderOutput{})
+	req := c.newRequest(op, input, &types.DeleteConfigurationRecorderOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return DeleteConfigurationRecorderRequest{Request: req, Input: input, Copy: c.DeleteConfigurationRecorderRequest}
@@ -99,8 +56,8 @@ func (c *Client) DeleteConfigurationRecorderRequest(input *DeleteConfigurationRe
 // DeleteConfigurationRecorder API operation.
 type DeleteConfigurationRecorderRequest struct {
 	*aws.Request
-	Input *DeleteConfigurationRecorderInput
-	Copy  func(*DeleteConfigurationRecorderInput) DeleteConfigurationRecorderRequest
+	Input *types.DeleteConfigurationRecorderInput
+	Copy  func(*types.DeleteConfigurationRecorderInput) DeleteConfigurationRecorderRequest
 }
 
 // Send marshals and sends the DeleteConfigurationRecorder API request.
@@ -112,7 +69,7 @@ func (r DeleteConfigurationRecorderRequest) Send(ctx context.Context) (*DeleteCo
 	}
 
 	resp := &DeleteConfigurationRecorderResponse{
-		DeleteConfigurationRecorderOutput: r.Request.Data.(*DeleteConfigurationRecorderOutput),
+		DeleteConfigurationRecorderOutput: r.Request.Data.(*types.DeleteConfigurationRecorderOutput),
 		response:                          &aws.Response{Request: r.Request},
 	}
 
@@ -122,7 +79,7 @@ func (r DeleteConfigurationRecorderRequest) Send(ctx context.Context) (*DeleteCo
 // DeleteConfigurationRecorderResponse is the response type for the
 // DeleteConfigurationRecorder API operation.
 type DeleteConfigurationRecorderResponse struct {
-	*DeleteConfigurationRecorderOutput
+	*types.DeleteConfigurationRecorderOutput
 
 	response *aws.Response
 }

@@ -6,74 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/gamelift/types"
 )
-
-// Represents the input for a request action.
-type DescribeInstancesInput struct {
-	_ struct{} `type:"structure"`
-
-	// Unique identifier for a fleet to retrieve instance information for.
-	//
-	// FleetId is a required field
-	FleetId *string `type:"string" required:"true"`
-
-	// Unique identifier for an instance to retrieve. Specify an instance ID or
-	// leave blank to retrieve all instances in the fleet.
-	InstanceId *string `type:"string"`
-
-	// Maximum number of results to return. Use this parameter with NextToken to
-	// get results as a set of sequential pages.
-	Limit *int64 `min:"1" type:"integer"`
-
-	// Token that indicates the start of the next sequential page of results. Use
-	// the token that is returned with a previous call to this action. To start
-	// at the beginning of the result set, do not specify a value.
-	NextToken *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeInstancesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeInstancesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeInstancesInput"}
-
-	if s.FleetId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("FleetId"))
-	}
-	if s.Limit != nil && *s.Limit < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("Limit", 1))
-	}
-	if s.NextToken != nil && len(*s.NextToken) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Represents the returned data in response to a request action.
-type DescribeInstancesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Collection of objects containing properties for each instance returned.
-	Instances []Instance `type:"list"`
-
-	// Token that indicates where to resume retrieving results on the next call
-	// to this action. If no token is returned, these results represent the end
-	// of the list.
-	NextToken *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeInstancesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeInstances = "DescribeInstances"
 
@@ -97,7 +31,7 @@ const opDescribeInstances = "DescribeInstances"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DescribeInstances
-func (c *Client) DescribeInstancesRequest(input *DescribeInstancesInput) DescribeInstancesRequest {
+func (c *Client) DescribeInstancesRequest(input *types.DescribeInstancesInput) DescribeInstancesRequest {
 	op := &aws.Operation{
 		Name:       opDescribeInstances,
 		HTTPMethod: "POST",
@@ -105,10 +39,10 @@ func (c *Client) DescribeInstancesRequest(input *DescribeInstancesInput) Describ
 	}
 
 	if input == nil {
-		input = &DescribeInstancesInput{}
+		input = &types.DescribeInstancesInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeInstancesOutput{})
+	req := c.newRequest(op, input, &types.DescribeInstancesOutput{})
 	return DescribeInstancesRequest{Request: req, Input: input, Copy: c.DescribeInstancesRequest}
 }
 
@@ -116,8 +50,8 @@ func (c *Client) DescribeInstancesRequest(input *DescribeInstancesInput) Describ
 // DescribeInstances API operation.
 type DescribeInstancesRequest struct {
 	*aws.Request
-	Input *DescribeInstancesInput
-	Copy  func(*DescribeInstancesInput) DescribeInstancesRequest
+	Input *types.DescribeInstancesInput
+	Copy  func(*types.DescribeInstancesInput) DescribeInstancesRequest
 }
 
 // Send marshals and sends the DescribeInstances API request.
@@ -129,7 +63,7 @@ func (r DescribeInstancesRequest) Send(ctx context.Context) (*DescribeInstancesR
 	}
 
 	resp := &DescribeInstancesResponse{
-		DescribeInstancesOutput: r.Request.Data.(*DescribeInstancesOutput),
+		DescribeInstancesOutput: r.Request.Data.(*types.DescribeInstancesOutput),
 		response:                &aws.Response{Request: r.Request},
 	}
 
@@ -139,7 +73,7 @@ func (r DescribeInstancesRequest) Send(ctx context.Context) (*DescribeInstancesR
 // DescribeInstancesResponse is the response type for the
 // DescribeInstances API operation.
 type DescribeInstancesResponse struct {
-	*DescribeInstancesOutput
+	*types.DescribeInstancesOutput
 
 	response *aws.Response
 }

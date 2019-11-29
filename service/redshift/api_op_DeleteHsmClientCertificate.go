@@ -6,47 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/query"
+	"github.com/aws/aws-sdk-go-v2/service/redshift/types"
 )
-
-type DeleteHsmClientCertificateInput struct {
-	_ struct{} `type:"structure"`
-
-	// The identifier of the HSM client certificate to be deleted.
-	//
-	// HsmClientCertificateIdentifier is a required field
-	HsmClientCertificateIdentifier *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteHsmClientCertificateInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteHsmClientCertificateInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteHsmClientCertificateInput"}
-
-	if s.HsmClientCertificateIdentifier == nil {
-		invalidParams.Add(aws.NewErrParamRequired("HsmClientCertificateIdentifier"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteHsmClientCertificateOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteHsmClientCertificateOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteHsmClientCertificate = "DeleteHsmClientCertificate"
 
@@ -63,7 +26,7 @@ const opDeleteHsmClientCertificate = "DeleteHsmClientCertificate"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DeleteHsmClientCertificate
-func (c *Client) DeleteHsmClientCertificateRequest(input *DeleteHsmClientCertificateInput) DeleteHsmClientCertificateRequest {
+func (c *Client) DeleteHsmClientCertificateRequest(input *types.DeleteHsmClientCertificateInput) DeleteHsmClientCertificateRequest {
 	op := &aws.Operation{
 		Name:       opDeleteHsmClientCertificate,
 		HTTPMethod: "POST",
@@ -71,10 +34,10 @@ func (c *Client) DeleteHsmClientCertificateRequest(input *DeleteHsmClientCertifi
 	}
 
 	if input == nil {
-		input = &DeleteHsmClientCertificateInput{}
+		input = &types.DeleteHsmClientCertificateInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteHsmClientCertificateOutput{})
+	req := c.newRequest(op, input, &types.DeleteHsmClientCertificateOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return DeleteHsmClientCertificateRequest{Request: req, Input: input, Copy: c.DeleteHsmClientCertificateRequest}
@@ -84,8 +47,8 @@ func (c *Client) DeleteHsmClientCertificateRequest(input *DeleteHsmClientCertifi
 // DeleteHsmClientCertificate API operation.
 type DeleteHsmClientCertificateRequest struct {
 	*aws.Request
-	Input *DeleteHsmClientCertificateInput
-	Copy  func(*DeleteHsmClientCertificateInput) DeleteHsmClientCertificateRequest
+	Input *types.DeleteHsmClientCertificateInput
+	Copy  func(*types.DeleteHsmClientCertificateInput) DeleteHsmClientCertificateRequest
 }
 
 // Send marshals and sends the DeleteHsmClientCertificate API request.
@@ -97,7 +60,7 @@ func (r DeleteHsmClientCertificateRequest) Send(ctx context.Context) (*DeleteHsm
 	}
 
 	resp := &DeleteHsmClientCertificateResponse{
-		DeleteHsmClientCertificateOutput: r.Request.Data.(*DeleteHsmClientCertificateOutput),
+		DeleteHsmClientCertificateOutput: r.Request.Data.(*types.DeleteHsmClientCertificateOutput),
 		response:                         &aws.Response{Request: r.Request},
 	}
 
@@ -107,7 +70,7 @@ func (r DeleteHsmClientCertificateRequest) Send(ctx context.Context) (*DeleteHsm
 // DeleteHsmClientCertificateResponse is the response type for the
 // DeleteHsmClientCertificate API operation.
 type DeleteHsmClientCertificateResponse struct {
-	*DeleteHsmClientCertificateOutput
+	*types.DeleteHsmClientCertificateOutput
 
 	response *aws.Response
 }

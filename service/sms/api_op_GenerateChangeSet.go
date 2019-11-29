@@ -6,35 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/sms/types"
 )
-
-type GenerateChangeSetInput struct {
-	_ struct{} `type:"structure"`
-
-	// ID of the application associated with the change set.
-	AppId *string `locationName:"appId" type:"string"`
-
-	// Format for the change set.
-	ChangesetFormat OutputFormat `locationName:"changesetFormat" type:"string" enum:"true"`
-}
-
-// String returns the string representation
-func (s GenerateChangeSetInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type GenerateChangeSetOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Location of the Amazon S3 object.
-	S3Location *S3Location `locationName:"s3Location" type:"structure"`
-}
-
-// String returns the string representation
-func (s GenerateChangeSetOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGenerateChangeSet = "GenerateChangeSet"
 
@@ -52,7 +25,7 @@ const opGenerateChangeSet = "GenerateChangeSet"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sms-2016-10-24/GenerateChangeSet
-func (c *Client) GenerateChangeSetRequest(input *GenerateChangeSetInput) GenerateChangeSetRequest {
+func (c *Client) GenerateChangeSetRequest(input *types.GenerateChangeSetInput) GenerateChangeSetRequest {
 	op := &aws.Operation{
 		Name:       opGenerateChangeSet,
 		HTTPMethod: "POST",
@@ -60,10 +33,10 @@ func (c *Client) GenerateChangeSetRequest(input *GenerateChangeSetInput) Generat
 	}
 
 	if input == nil {
-		input = &GenerateChangeSetInput{}
+		input = &types.GenerateChangeSetInput{}
 	}
 
-	req := c.newRequest(op, input, &GenerateChangeSetOutput{})
+	req := c.newRequest(op, input, &types.GenerateChangeSetOutput{})
 	return GenerateChangeSetRequest{Request: req, Input: input, Copy: c.GenerateChangeSetRequest}
 }
 
@@ -71,8 +44,8 @@ func (c *Client) GenerateChangeSetRequest(input *GenerateChangeSetInput) Generat
 // GenerateChangeSet API operation.
 type GenerateChangeSetRequest struct {
 	*aws.Request
-	Input *GenerateChangeSetInput
-	Copy  func(*GenerateChangeSetInput) GenerateChangeSetRequest
+	Input *types.GenerateChangeSetInput
+	Copy  func(*types.GenerateChangeSetInput) GenerateChangeSetRequest
 }
 
 // Send marshals and sends the GenerateChangeSet API request.
@@ -84,7 +57,7 @@ func (r GenerateChangeSetRequest) Send(ctx context.Context) (*GenerateChangeSetR
 	}
 
 	resp := &GenerateChangeSetResponse{
-		GenerateChangeSetOutput: r.Request.Data.(*GenerateChangeSetOutput),
+		GenerateChangeSetOutput: r.Request.Data.(*types.GenerateChangeSetOutput),
 		response:                &aws.Response{Request: r.Request},
 	}
 
@@ -94,7 +67,7 @@ func (r GenerateChangeSetRequest) Send(ctx context.Context) (*GenerateChangeSetR
 // GenerateChangeSetResponse is the response type for the
 // GenerateChangeSet API operation.
 type GenerateChangeSetResponse struct {
-	*GenerateChangeSetOutput
+	*types.GenerateChangeSetOutput
 
 	response *aws.Response
 }

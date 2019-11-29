@@ -6,55 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/query"
+	"github.com/aws/aws-sdk-go-v2/service/elasticbeanstalk/types"
 )
-
-type RestartAppServerInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the environment to restart the server for.
-	//
-	// Condition: You must specify either this or an EnvironmentName, or both. If
-	// you do not specify either, AWS Elastic Beanstalk returns MissingRequiredParameter
-	// error.
-	EnvironmentId *string `type:"string"`
-
-	// The name of the environment to restart the server for.
-	//
-	// Condition: You must specify either this or an EnvironmentId, or both. If
-	// you do not specify either, AWS Elastic Beanstalk returns MissingRequiredParameter
-	// error.
-	EnvironmentName *string `min:"4" type:"string"`
-}
-
-// String returns the string representation
-func (s RestartAppServerInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *RestartAppServerInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "RestartAppServerInput"}
-	if s.EnvironmentName != nil && len(*s.EnvironmentName) < 4 {
-		invalidParams.Add(aws.NewErrParamMinLen("EnvironmentName", 4))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type RestartAppServerOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s RestartAppServerOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opRestartAppServer = "RestartAppServer"
 
@@ -72,7 +27,7 @@ const opRestartAppServer = "RestartAppServer"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/RestartAppServer
-func (c *Client) RestartAppServerRequest(input *RestartAppServerInput) RestartAppServerRequest {
+func (c *Client) RestartAppServerRequest(input *types.RestartAppServerInput) RestartAppServerRequest {
 	op := &aws.Operation{
 		Name:       opRestartAppServer,
 		HTTPMethod: "POST",
@@ -80,10 +35,10 @@ func (c *Client) RestartAppServerRequest(input *RestartAppServerInput) RestartAp
 	}
 
 	if input == nil {
-		input = &RestartAppServerInput{}
+		input = &types.RestartAppServerInput{}
 	}
 
-	req := c.newRequest(op, input, &RestartAppServerOutput{})
+	req := c.newRequest(op, input, &types.RestartAppServerOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return RestartAppServerRequest{Request: req, Input: input, Copy: c.RestartAppServerRequest}
@@ -93,8 +48,8 @@ func (c *Client) RestartAppServerRequest(input *RestartAppServerInput) RestartAp
 // RestartAppServer API operation.
 type RestartAppServerRequest struct {
 	*aws.Request
-	Input *RestartAppServerInput
-	Copy  func(*RestartAppServerInput) RestartAppServerRequest
+	Input *types.RestartAppServerInput
+	Copy  func(*types.RestartAppServerInput) RestartAppServerRequest
 }
 
 // Send marshals and sends the RestartAppServer API request.
@@ -106,7 +61,7 @@ func (r RestartAppServerRequest) Send(ctx context.Context) (*RestartAppServerRes
 	}
 
 	resp := &RestartAppServerResponse{
-		RestartAppServerOutput: r.Request.Data.(*RestartAppServerOutput),
+		RestartAppServerOutput: r.Request.Data.(*types.RestartAppServerOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -116,7 +71,7 @@ func (r RestartAppServerRequest) Send(ctx context.Context) (*RestartAppServerRes
 // RestartAppServerResponse is the response type for the
 // RestartAppServer API operation.
 type RestartAppServerResponse struct {
-	*RestartAppServerOutput
+	*types.RestartAppServerOutput
 
 	response *aws.Response
 }

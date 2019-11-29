@@ -6,64 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/comprehend/types"
 )
-
-type ListSentimentDetectionJobsInput struct {
-	_ struct{} `type:"structure"`
-
-	// Filters the jobs that are returned. You can filter jobs on their name, status,
-	// or the date and time that they were submitted. You can only set one filter
-	// at a time.
-	Filter *SentimentDetectionJobFilter `type:"structure"`
-
-	// The maximum number of results to return in each page. The default is 100.
-	MaxResults *int64 `min:"1" type:"integer"`
-
-	// Identifies the next page of results to return.
-	NextToken *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s ListSentimentDetectionJobsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListSentimentDetectionJobsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListSentimentDetectionJobsInput"}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-	if s.NextToken != nil && len(*s.NextToken) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
-	}
-	if s.Filter != nil {
-		if err := s.Filter.Validate(); err != nil {
-			invalidParams.AddNested("Filter", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ListSentimentDetectionJobsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Identifies the next page of results to return.
-	NextToken *string `min:"1" type:"string"`
-
-	// A list containing the properties of each job that is returned.
-	SentimentDetectionJobPropertiesList []SentimentDetectionJobProperties `type:"list"`
-}
-
-// String returns the string representation
-func (s ListSentimentDetectionJobsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListSentimentDetectionJobs = "ListSentimentDetectionJobs"
 
@@ -80,7 +24,7 @@ const opListSentimentDetectionJobs = "ListSentimentDetectionJobs"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/ListSentimentDetectionJobs
-func (c *Client) ListSentimentDetectionJobsRequest(input *ListSentimentDetectionJobsInput) ListSentimentDetectionJobsRequest {
+func (c *Client) ListSentimentDetectionJobsRequest(input *types.ListSentimentDetectionJobsInput) ListSentimentDetectionJobsRequest {
 	op := &aws.Operation{
 		Name:       opListSentimentDetectionJobs,
 		HTTPMethod: "POST",
@@ -94,10 +38,10 @@ func (c *Client) ListSentimentDetectionJobsRequest(input *ListSentimentDetection
 	}
 
 	if input == nil {
-		input = &ListSentimentDetectionJobsInput{}
+		input = &types.ListSentimentDetectionJobsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListSentimentDetectionJobsOutput{})
+	req := c.newRequest(op, input, &types.ListSentimentDetectionJobsOutput{})
 	return ListSentimentDetectionJobsRequest{Request: req, Input: input, Copy: c.ListSentimentDetectionJobsRequest}
 }
 
@@ -105,8 +49,8 @@ func (c *Client) ListSentimentDetectionJobsRequest(input *ListSentimentDetection
 // ListSentimentDetectionJobs API operation.
 type ListSentimentDetectionJobsRequest struct {
 	*aws.Request
-	Input *ListSentimentDetectionJobsInput
-	Copy  func(*ListSentimentDetectionJobsInput) ListSentimentDetectionJobsRequest
+	Input *types.ListSentimentDetectionJobsInput
+	Copy  func(*types.ListSentimentDetectionJobsInput) ListSentimentDetectionJobsRequest
 }
 
 // Send marshals and sends the ListSentimentDetectionJobs API request.
@@ -118,7 +62,7 @@ func (r ListSentimentDetectionJobsRequest) Send(ctx context.Context) (*ListSenti
 	}
 
 	resp := &ListSentimentDetectionJobsResponse{
-		ListSentimentDetectionJobsOutput: r.Request.Data.(*ListSentimentDetectionJobsOutput),
+		ListSentimentDetectionJobsOutput: r.Request.Data.(*types.ListSentimentDetectionJobsOutput),
 		response:                         &aws.Response{Request: r.Request},
 	}
 
@@ -148,7 +92,7 @@ func NewListSentimentDetectionJobsPaginator(req ListSentimentDetectionJobsReques
 	return ListSentimentDetectionJobsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListSentimentDetectionJobsInput
+				var inCpy *types.ListSentimentDetectionJobsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -168,14 +112,14 @@ type ListSentimentDetectionJobsPaginator struct {
 	aws.Pager
 }
 
-func (p *ListSentimentDetectionJobsPaginator) CurrentPage() *ListSentimentDetectionJobsOutput {
-	return p.Pager.CurrentPage().(*ListSentimentDetectionJobsOutput)
+func (p *ListSentimentDetectionJobsPaginator) CurrentPage() *types.ListSentimentDetectionJobsOutput {
+	return p.Pager.CurrentPage().(*types.ListSentimentDetectionJobsOutput)
 }
 
 // ListSentimentDetectionJobsResponse is the response type for the
 // ListSentimentDetectionJobs API operation.
 type ListSentimentDetectionJobsResponse struct {
-	*ListSentimentDetectionJobsOutput
+	*types.ListSentimentDetectionJobsOutput
 
 	response *aws.Response
 }

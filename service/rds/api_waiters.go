@@ -7,6 +7,7 @@ import (
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
+	"github.com/aws/aws-sdk-go-v2/service/rds/types"
 )
 
 // WaitUntilDBClusterSnapshotAvailable uses the Amazon RDS API operation
@@ -18,7 +19,7 @@ import (
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Client) WaitUntilDBClusterSnapshotAvailable(ctx context.Context, input *DescribeDBClusterSnapshotsInput, opts ...aws.WaiterOption) error {
+func (c *Client) WaitUntilDBClusterSnapshotAvailable(ctx context.Context, input *types.DescribeDBClusterSnapshotsInput, opts ...aws.WaiterOption) error {
 	w := aws.Waiter{
 		Name:        "WaitUntilDBClusterSnapshotAvailable",
 		MaxAttempts: 60,
@@ -57,7 +58,7 @@ func (c *Client) WaitUntilDBClusterSnapshotAvailable(ctx context.Context, input 
 		},
 		Logger: c.Config.Logger,
 		NewRequest: func(opts []aws.Option) (*aws.Request, error) {
-			var inCpy *DescribeDBClusterSnapshotsInput
+			var inCpy *types.DescribeDBClusterSnapshotsInput
 			if input != nil {
 				tmp := *input
 				inCpy = &tmp
@@ -82,7 +83,7 @@ func (c *Client) WaitUntilDBClusterSnapshotAvailable(ctx context.Context, input 
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Client) WaitUntilDBClusterSnapshotDeleted(ctx context.Context, input *DescribeDBClusterSnapshotsInput, opts ...aws.WaiterOption) error {
+func (c *Client) WaitUntilDBClusterSnapshotDeleted(ctx context.Context, input *types.DescribeDBClusterSnapshotsInput, opts ...aws.WaiterOption) error {
 	w := aws.Waiter{
 		Name:        "WaitUntilDBClusterSnapshotDeleted",
 		MaxAttempts: 60,
@@ -121,7 +122,7 @@ func (c *Client) WaitUntilDBClusterSnapshotDeleted(ctx context.Context, input *D
 		},
 		Logger: c.Config.Logger,
 		NewRequest: func(opts []aws.Option) (*aws.Request, error) {
-			var inCpy *DescribeDBClusterSnapshotsInput
+			var inCpy *types.DescribeDBClusterSnapshotsInput
 			if input != nil {
 				tmp := *input
 				inCpy = &tmp
@@ -146,7 +147,7 @@ func (c *Client) WaitUntilDBClusterSnapshotDeleted(ctx context.Context, input *D
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Client) WaitUntilDBInstanceAvailable(ctx context.Context, input *DescribeDBInstancesInput, opts ...aws.WaiterOption) error {
+func (c *Client) WaitUntilDBInstanceAvailable(ctx context.Context, input *types.DescribeDBInstancesInput, opts ...aws.WaiterOption) error {
 	w := aws.Waiter{
 		Name:        "WaitUntilDBInstanceAvailable",
 		MaxAttempts: 60,
@@ -185,7 +186,7 @@ func (c *Client) WaitUntilDBInstanceAvailable(ctx context.Context, input *Descri
 		},
 		Logger: c.Config.Logger,
 		NewRequest: func(opts []aws.Option) (*aws.Request, error) {
-			var inCpy *DescribeDBInstancesInput
+			var inCpy *types.DescribeDBInstancesInput
 			if input != nil {
 				tmp := *input
 				inCpy = &tmp
@@ -210,7 +211,7 @@ func (c *Client) WaitUntilDBInstanceAvailable(ctx context.Context, input *Descri
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Client) WaitUntilDBInstanceDeleted(ctx context.Context, input *DescribeDBInstancesInput, opts ...aws.WaiterOption) error {
+func (c *Client) WaitUntilDBInstanceDeleted(ctx context.Context, input *types.DescribeDBInstancesInput, opts ...aws.WaiterOption) error {
 	w := aws.Waiter{
 		Name:        "WaitUntilDBInstanceDeleted",
 		MaxAttempts: 60,
@@ -249,7 +250,7 @@ func (c *Client) WaitUntilDBInstanceDeleted(ctx context.Context, input *Describe
 		},
 		Logger: c.Config.Logger,
 		NewRequest: func(opts []aws.Option) (*aws.Request, error) {
-			var inCpy *DescribeDBInstancesInput
+			var inCpy *types.DescribeDBInstancesInput
 			if input != nil {
 				tmp := *input
 				inCpy = &tmp
@@ -274,7 +275,7 @@ func (c *Client) WaitUntilDBInstanceDeleted(ctx context.Context, input *Describe
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Client) WaitUntilDBSnapshotAvailable(ctx context.Context, input *DescribeDBSnapshotsInput, opts ...aws.WaiterOption) error {
+func (c *Client) WaitUntilDBSnapshotAvailable(ctx context.Context, input *types.DescribeDBSnapshotsInput, opts ...aws.WaiterOption) error {
 	w := aws.Waiter{
 		Name:        "WaitUntilDBSnapshotAvailable",
 		MaxAttempts: 60,
@@ -313,7 +314,7 @@ func (c *Client) WaitUntilDBSnapshotAvailable(ctx context.Context, input *Descri
 		},
 		Logger: c.Config.Logger,
 		NewRequest: func(opts []aws.Option) (*aws.Request, error) {
-			var inCpy *DescribeDBSnapshotsInput
+			var inCpy *types.DescribeDBSnapshotsInput
 			if input != nil {
 				tmp := *input
 				inCpy = &tmp
@@ -338,7 +339,7 @@ func (c *Client) WaitUntilDBSnapshotAvailable(ctx context.Context, input *Descri
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Client) WaitUntilDBSnapshotDeleted(ctx context.Context, input *DescribeDBSnapshotsInput, opts ...aws.WaiterOption) error {
+func (c *Client) WaitUntilDBSnapshotDeleted(ctx context.Context, input *types.DescribeDBSnapshotsInput, opts ...aws.WaiterOption) error {
 	w := aws.Waiter{
 		Name:        "WaitUntilDBSnapshotDeleted",
 		MaxAttempts: 60,
@@ -377,7 +378,7 @@ func (c *Client) WaitUntilDBSnapshotDeleted(ctx context.Context, input *Describe
 		},
 		Logger: c.Config.Logger,
 		NewRequest: func(opts []aws.Option) (*aws.Request, error) {
-			var inCpy *DescribeDBSnapshotsInput
+			var inCpy *types.DescribeDBSnapshotsInput
 			if input != nil {
 				tmp := *input
 				inCpy = &tmp

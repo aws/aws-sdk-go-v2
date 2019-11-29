@@ -6,91 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/iot/types"
 )
-
-type RemoveThingFromBillingGroupInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ARN of the billing group.
-	BillingGroupArn *string `locationName:"billingGroupArn" type:"string"`
-
-	// The name of the billing group.
-	BillingGroupName *string `locationName:"billingGroupName" min:"1" type:"string"`
-
-	// The ARN of the thing to be removed from the billing group.
-	ThingArn *string `locationName:"thingArn" type:"string"`
-
-	// The name of the thing to be removed from the billing group.
-	ThingName *string `locationName:"thingName" min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s RemoveThingFromBillingGroupInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *RemoveThingFromBillingGroupInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "RemoveThingFromBillingGroupInput"}
-	if s.BillingGroupName != nil && len(*s.BillingGroupName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("BillingGroupName", 1))
-	}
-	if s.ThingName != nil && len(*s.ThingName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ThingName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s RemoveThingFromBillingGroupInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.BillingGroupArn != nil {
-		v := *s.BillingGroupArn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "billingGroupArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.BillingGroupName != nil {
-		v := *s.BillingGroupName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "billingGroupName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.ThingArn != nil {
-		v := *s.ThingArn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "thingArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.ThingName != nil {
-		v := *s.ThingName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "thingName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type RemoveThingFromBillingGroupOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s RemoveThingFromBillingGroupOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s RemoveThingFromBillingGroupOutput) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
 
 const opRemoveThingFromBillingGroup = "RemoveThingFromBillingGroup"
 
@@ -105,7 +22,7 @@ const opRemoveThingFromBillingGroup = "RemoveThingFromBillingGroup"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) RemoveThingFromBillingGroupRequest(input *RemoveThingFromBillingGroupInput) RemoveThingFromBillingGroupRequest {
+func (c *Client) RemoveThingFromBillingGroupRequest(input *types.RemoveThingFromBillingGroupInput) RemoveThingFromBillingGroupRequest {
 	op := &aws.Operation{
 		Name:       opRemoveThingFromBillingGroup,
 		HTTPMethod: "PUT",
@@ -113,10 +30,10 @@ func (c *Client) RemoveThingFromBillingGroupRequest(input *RemoveThingFromBillin
 	}
 
 	if input == nil {
-		input = &RemoveThingFromBillingGroupInput{}
+		input = &types.RemoveThingFromBillingGroupInput{}
 	}
 
-	req := c.newRequest(op, input, &RemoveThingFromBillingGroupOutput{})
+	req := c.newRequest(op, input, &types.RemoveThingFromBillingGroupOutput{})
 	return RemoveThingFromBillingGroupRequest{Request: req, Input: input, Copy: c.RemoveThingFromBillingGroupRequest}
 }
 
@@ -124,8 +41,8 @@ func (c *Client) RemoveThingFromBillingGroupRequest(input *RemoveThingFromBillin
 // RemoveThingFromBillingGroup API operation.
 type RemoveThingFromBillingGroupRequest struct {
 	*aws.Request
-	Input *RemoveThingFromBillingGroupInput
-	Copy  func(*RemoveThingFromBillingGroupInput) RemoveThingFromBillingGroupRequest
+	Input *types.RemoveThingFromBillingGroupInput
+	Copy  func(*types.RemoveThingFromBillingGroupInput) RemoveThingFromBillingGroupRequest
 }
 
 // Send marshals and sends the RemoveThingFromBillingGroup API request.
@@ -137,7 +54,7 @@ func (r RemoveThingFromBillingGroupRequest) Send(ctx context.Context) (*RemoveTh
 	}
 
 	resp := &RemoveThingFromBillingGroupResponse{
-		RemoveThingFromBillingGroupOutput: r.Request.Data.(*RemoveThingFromBillingGroupOutput),
+		RemoveThingFromBillingGroupOutput: r.Request.Data.(*types.RemoveThingFromBillingGroupOutput),
 		response:                          &aws.Response{Request: r.Request},
 	}
 
@@ -147,7 +64,7 @@ func (r RemoveThingFromBillingGroupRequest) Send(ctx context.Context) (*RemoveTh
 // RemoveThingFromBillingGroupResponse is the response type for the
 // RemoveThingFromBillingGroup API operation.
 type RemoveThingFromBillingGroupResponse struct {
-	*RemoveThingFromBillingGroupOutput
+	*types.RemoveThingFromBillingGroupOutput
 
 	response *aws.Response
 }

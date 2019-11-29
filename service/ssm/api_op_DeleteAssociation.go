@@ -6,35 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ssm/types"
 )
-
-type DeleteAssociationInput struct {
-	_ struct{} `type:"structure"`
-
-	// The association ID that you want to delete.
-	AssociationId *string `type:"string"`
-
-	// The ID of the instance.
-	InstanceId *string `type:"string"`
-
-	// The name of the Systems Manager document.
-	Name *string `type:"string"`
-}
-
-// String returns the string representation
-func (s DeleteAssociationInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type DeleteAssociationOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteAssociationOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteAssociation = "DeleteAssociation"
 
@@ -56,7 +29,7 @@ const opDeleteAssociation = "DeleteAssociation"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DeleteAssociation
-func (c *Client) DeleteAssociationRequest(input *DeleteAssociationInput) DeleteAssociationRequest {
+func (c *Client) DeleteAssociationRequest(input *types.DeleteAssociationInput) DeleteAssociationRequest {
 	op := &aws.Operation{
 		Name:       opDeleteAssociation,
 		HTTPMethod: "POST",
@@ -64,10 +37,10 @@ func (c *Client) DeleteAssociationRequest(input *DeleteAssociationInput) DeleteA
 	}
 
 	if input == nil {
-		input = &DeleteAssociationInput{}
+		input = &types.DeleteAssociationInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteAssociationOutput{})
+	req := c.newRequest(op, input, &types.DeleteAssociationOutput{})
 	return DeleteAssociationRequest{Request: req, Input: input, Copy: c.DeleteAssociationRequest}
 }
 
@@ -75,8 +48,8 @@ func (c *Client) DeleteAssociationRequest(input *DeleteAssociationInput) DeleteA
 // DeleteAssociation API operation.
 type DeleteAssociationRequest struct {
 	*aws.Request
-	Input *DeleteAssociationInput
-	Copy  func(*DeleteAssociationInput) DeleteAssociationRequest
+	Input *types.DeleteAssociationInput
+	Copy  func(*types.DeleteAssociationInput) DeleteAssociationRequest
 }
 
 // Send marshals and sends the DeleteAssociation API request.
@@ -88,7 +61,7 @@ func (r DeleteAssociationRequest) Send(ctx context.Context) (*DeleteAssociationR
 	}
 
 	resp := &DeleteAssociationResponse{
-		DeleteAssociationOutput: r.Request.Data.(*DeleteAssociationOutput),
+		DeleteAssociationOutput: r.Request.Data.(*types.DeleteAssociationOutput),
 		response:                &aws.Response{Request: r.Request},
 	}
 
@@ -98,7 +71,7 @@ func (r DeleteAssociationRequest) Send(ctx context.Context) (*DeleteAssociationR
 // DeleteAssociationResponse is the response type for the
 // DeleteAssociation API operation.
 type DeleteAssociationResponse struct {
-	*DeleteAssociationOutput
+	*types.DeleteAssociationOutput
 
 	response *aws.Response
 }

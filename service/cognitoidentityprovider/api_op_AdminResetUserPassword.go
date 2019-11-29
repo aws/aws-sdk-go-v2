@@ -6,93 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/types"
 )
-
-// Represents the request to reset a user's password as an administrator.
-type AdminResetUserPasswordInput struct {
-	_ struct{} `type:"structure"`
-
-	// A map of custom key-value pairs that you can provide as input for any custom
-	// workflows that this action triggers.
-	//
-	// You create custom workflows by assigning AWS Lambda functions to user pool
-	// triggers. When you use the AdminResetUserPassword API action, Amazon Cognito
-	// invokes the function that is assigned to the custom message trigger. When
-	// Amazon Cognito invokes this function, it passes a JSON payload, which the
-	// function receives as input. This payload contains a clientMetadata attribute,
-	// which provides the data that you assigned to the ClientMetadata parameter
-	// in your AdminResetUserPassword request. In your function code in AWS Lambda,
-	// you can process the clientMetadata value to enhance your workflow for your
-	// specific needs.
-	//
-	// For more information, see Customizing User Pool Workflows with Lambda Triggers
-	// (https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools-working-with-aws-lambda-triggers.html)
-	// in the Amazon Cognito Developer Guide.
-	//
-	// Take the following limitations into consideration when you use the ClientMetadata
-	// parameter:
-	//
-	//    * Amazon Cognito does not store the ClientMetadata value. This data is
-	//    available only to AWS Lambda triggers that are assigned to a user pool
-	//    to support custom workflows. If your user pool configuration does not
-	//    include triggers, the ClientMetadata parameter serves no purpose.
-	//
-	//    * Amazon Cognito does not validate the ClientMetadata value.
-	//
-	//    * Amazon Cognito does not encrypt the the ClientMetadata value, so don't
-	//    use it to provide sensitive information.
-	ClientMetadata map[string]string `type:"map"`
-
-	// The user pool ID for the user pool where you want to reset the user's password.
-	//
-	// UserPoolId is a required field
-	UserPoolId *string `min:"1" type:"string" required:"true"`
-
-	// The user name of the user whose password you wish to reset.
-	//
-	// Username is a required field
-	Username *string `min:"1" type:"string" required:"true" sensitive:"true"`
-}
-
-// String returns the string representation
-func (s AdminResetUserPasswordInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *AdminResetUserPasswordInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "AdminResetUserPasswordInput"}
-
-	if s.UserPoolId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("UserPoolId"))
-	}
-	if s.UserPoolId != nil && len(*s.UserPoolId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("UserPoolId", 1))
-	}
-
-	if s.Username == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Username"))
-	}
-	if s.Username != nil && len(*s.Username) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Username", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Represents the response from the server to reset a user password as an administrator.
-type AdminResetUserPasswordOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s AdminResetUserPasswordOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opAdminResetUserPassword = "AdminResetUserPassword"
 
@@ -122,7 +37,7 @@ const opAdminResetUserPassword = "AdminResetUserPassword"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AdminResetUserPassword
-func (c *Client) AdminResetUserPasswordRequest(input *AdminResetUserPasswordInput) AdminResetUserPasswordRequest {
+func (c *Client) AdminResetUserPasswordRequest(input *types.AdminResetUserPasswordInput) AdminResetUserPasswordRequest {
 	op := &aws.Operation{
 		Name:       opAdminResetUserPassword,
 		HTTPMethod: "POST",
@@ -130,10 +45,10 @@ func (c *Client) AdminResetUserPasswordRequest(input *AdminResetUserPasswordInpu
 	}
 
 	if input == nil {
-		input = &AdminResetUserPasswordInput{}
+		input = &types.AdminResetUserPasswordInput{}
 	}
 
-	req := c.newRequest(op, input, &AdminResetUserPasswordOutput{})
+	req := c.newRequest(op, input, &types.AdminResetUserPasswordOutput{})
 	return AdminResetUserPasswordRequest{Request: req, Input: input, Copy: c.AdminResetUserPasswordRequest}
 }
 
@@ -141,8 +56,8 @@ func (c *Client) AdminResetUserPasswordRequest(input *AdminResetUserPasswordInpu
 // AdminResetUserPassword API operation.
 type AdminResetUserPasswordRequest struct {
 	*aws.Request
-	Input *AdminResetUserPasswordInput
-	Copy  func(*AdminResetUserPasswordInput) AdminResetUserPasswordRequest
+	Input *types.AdminResetUserPasswordInput
+	Copy  func(*types.AdminResetUserPasswordInput) AdminResetUserPasswordRequest
 }
 
 // Send marshals and sends the AdminResetUserPassword API request.
@@ -154,7 +69,7 @@ func (r AdminResetUserPasswordRequest) Send(ctx context.Context) (*AdminResetUse
 	}
 
 	resp := &AdminResetUserPasswordResponse{
-		AdminResetUserPasswordOutput: r.Request.Data.(*AdminResetUserPasswordOutput),
+		AdminResetUserPasswordOutput: r.Request.Data.(*types.AdminResetUserPasswordOutput),
 		response:                     &aws.Response{Request: r.Request},
 	}
 
@@ -164,7 +79,7 @@ func (r AdminResetUserPasswordRequest) Send(ctx context.Context) (*AdminResetUse
 // AdminResetUserPasswordResponse is the response type for the
 // AdminResetUserPassword API operation.
 type AdminResetUserPasswordResponse struct {
-	*AdminResetUserPasswordOutput
+	*types.AdminResetUserPasswordOutput
 
 	response *aws.Response
 }

@@ -6,121 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/lexmodelbuildingservice/types"
 )
-
-type GetBuiltinIntentsInput struct {
-	_ struct{} `type:"structure"`
-
-	// A list of locales that the intent supports.
-	Locale Locale `location:"querystring" locationName:"locale" type:"string" enum:"true"`
-
-	// The maximum number of intents to return in the response. The default is 10.
-	MaxResults *int64 `location:"querystring" locationName:"maxResults" min:"1" type:"integer"`
-
-	// A pagination token that fetches the next page of intents. If this API call
-	// is truncated, Amazon Lex returns a pagination token in the response. To fetch
-	// the next page of intents, use the pagination token in the next request.
-	NextToken *string `location:"querystring" locationName:"nextToken" type:"string"`
-
-	// Substring to match in built-in intent signatures. An intent will be returned
-	// if any part of its signature matches the substring. For example, "xyz" matches
-	// both "xyzabc" and "abcxyz." To find the signature for an intent, see Standard
-	// Built-in Intents (https://developer.amazon.com/public/solutions/alexa/alexa-skills-kit/docs/built-in-intent-ref/standard-intents)
-	// in the Alexa Skills Kit.
-	SignatureContains *string `location:"querystring" locationName:"signatureContains" type:"string"`
-}
-
-// String returns the string representation
-func (s GetBuiltinIntentsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetBuiltinIntentsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetBuiltinIntentsInput"}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetBuiltinIntentsInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if len(s.Locale) > 0 {
-		v := s.Locale
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "locale", protocol.QuotedValue{ValueMarshaler: v}, metadata)
-	}
-	if s.MaxResults != nil {
-		v := *s.MaxResults
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "maxResults", protocol.Int64Value(v), metadata)
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.SignatureContains != nil {
-		v := *s.SignatureContains
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "signatureContains", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type GetBuiltinIntentsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// An array of builtinIntentMetadata objects, one for each intent in the response.
-	Intents []BuiltinIntentMetadata `locationName:"intents" type:"list"`
-
-	// A pagination token that fetches the next page of intents. If the response
-	// to this API call is truncated, Amazon Lex returns a pagination token in the
-	// response. To fetch the next page of intents, specify the pagination token
-	// in the next request.
-	NextToken *string `locationName:"nextToken" type:"string"`
-}
-
-// String returns the string representation
-func (s GetBuiltinIntentsOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetBuiltinIntentsOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.Intents != nil {
-		v := s.Intents
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "intents", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opGetBuiltinIntents = "GetBuiltinIntents"
 
@@ -139,7 +26,7 @@ const opGetBuiltinIntents = "GetBuiltinIntents"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/GetBuiltinIntents
-func (c *Client) GetBuiltinIntentsRequest(input *GetBuiltinIntentsInput) GetBuiltinIntentsRequest {
+func (c *Client) GetBuiltinIntentsRequest(input *types.GetBuiltinIntentsInput) GetBuiltinIntentsRequest {
 	op := &aws.Operation{
 		Name:       opGetBuiltinIntents,
 		HTTPMethod: "GET",
@@ -153,10 +40,10 @@ func (c *Client) GetBuiltinIntentsRequest(input *GetBuiltinIntentsInput) GetBuil
 	}
 
 	if input == nil {
-		input = &GetBuiltinIntentsInput{}
+		input = &types.GetBuiltinIntentsInput{}
 	}
 
-	req := c.newRequest(op, input, &GetBuiltinIntentsOutput{})
+	req := c.newRequest(op, input, &types.GetBuiltinIntentsOutput{})
 	return GetBuiltinIntentsRequest{Request: req, Input: input, Copy: c.GetBuiltinIntentsRequest}
 }
 
@@ -164,8 +51,8 @@ func (c *Client) GetBuiltinIntentsRequest(input *GetBuiltinIntentsInput) GetBuil
 // GetBuiltinIntents API operation.
 type GetBuiltinIntentsRequest struct {
 	*aws.Request
-	Input *GetBuiltinIntentsInput
-	Copy  func(*GetBuiltinIntentsInput) GetBuiltinIntentsRequest
+	Input *types.GetBuiltinIntentsInput
+	Copy  func(*types.GetBuiltinIntentsInput) GetBuiltinIntentsRequest
 }
 
 // Send marshals and sends the GetBuiltinIntents API request.
@@ -177,7 +64,7 @@ func (r GetBuiltinIntentsRequest) Send(ctx context.Context) (*GetBuiltinIntentsR
 	}
 
 	resp := &GetBuiltinIntentsResponse{
-		GetBuiltinIntentsOutput: r.Request.Data.(*GetBuiltinIntentsOutput),
+		GetBuiltinIntentsOutput: r.Request.Data.(*types.GetBuiltinIntentsOutput),
 		response:                &aws.Response{Request: r.Request},
 	}
 
@@ -207,7 +94,7 @@ func NewGetBuiltinIntentsPaginator(req GetBuiltinIntentsRequest) GetBuiltinInten
 	return GetBuiltinIntentsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *GetBuiltinIntentsInput
+				var inCpy *types.GetBuiltinIntentsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -227,14 +114,14 @@ type GetBuiltinIntentsPaginator struct {
 	aws.Pager
 }
 
-func (p *GetBuiltinIntentsPaginator) CurrentPage() *GetBuiltinIntentsOutput {
-	return p.Pager.CurrentPage().(*GetBuiltinIntentsOutput)
+func (p *GetBuiltinIntentsPaginator) CurrentPage() *types.GetBuiltinIntentsOutput {
+	return p.Pager.CurrentPage().(*types.GetBuiltinIntentsOutput)
 }
 
 // GetBuiltinIntentsResponse is the response type for the
 // GetBuiltinIntents API operation.
 type GetBuiltinIntentsResponse struct {
-	*GetBuiltinIntentsOutput
+	*types.GetBuiltinIntentsOutput
 
 	response *aws.Response
 }

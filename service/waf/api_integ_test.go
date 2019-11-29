@@ -13,6 +13,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws/awserr"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting/integration"
 	"github.com/aws/aws-sdk-go-v2/service/waf"
+	"github.com/aws/aws-sdk-go-v2/service/waf/types"
 )
 
 var _ aws.Config
@@ -24,7 +25,7 @@ func TestInteg_00_ListRules(t *testing.T) {
 
 	cfg := integration.ConfigWithDefaultRegion("us-east-1")
 	svc := waf.New(cfg)
-	params := &waf.ListRulesInput{
+	params := &types.ListRulesInput{
 		Limit: aws.Int64(20),
 	}
 
@@ -41,7 +42,7 @@ func TestInteg_01_CreateSqlInjectionMatchSet(t *testing.T) {
 
 	cfg := integration.ConfigWithDefaultRegion("us-east-1")
 	svc := waf.New(cfg)
-	params := &waf.CreateSqlInjectionMatchSetInput{
+	params := &types.CreateSqlInjectionMatchSetInput{
 		ChangeToken: aws.String("fake_token"),
 		Name:        aws.String("fake_name"),
 	}

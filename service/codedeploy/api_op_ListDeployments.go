@@ -6,87 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/codedeploy/types"
 )
-
-// Represents the input of a ListDeployments operation.
-type ListDeploymentsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of an AWS CodeDeploy application associated with the IAM user or
-	// AWS account.
-	//
-	// If applicationName is specified, then deploymentGroupName must be specified.
-	// If it is not specified, then deploymentGroupName must not be specified.
-	ApplicationName *string `locationName:"applicationName" min:"1" type:"string"`
-
-	// A time range (start and end) for returning a subset of the list of deployments.
-	CreateTimeRange *TimeRange `locationName:"createTimeRange" type:"structure"`
-
-	// The name of a deployment group for the specified application.
-	//
-	// If deploymentGroupName is specified, then applicationName must be specified.
-	// If it is not specified, then applicationName must not be specified.
-	DeploymentGroupName *string `locationName:"deploymentGroupName" min:"1" type:"string"`
-
-	// A subset of deployments to list by status:
-	//
-	//    * Created: Include created deployments in the resulting list.
-	//
-	//    * Queued: Include queued deployments in the resulting list.
-	//
-	//    * In Progress: Include in-progress deployments in the resulting list.
-	//
-	//    * Succeeded: Include successful deployments in the resulting list.
-	//
-	//    * Failed: Include failed deployments in the resulting list.
-	//
-	//    * Stopped: Include stopped deployments in the resulting list.
-	IncludeOnlyStatuses []DeploymentStatus `locationName:"includeOnlyStatuses" type:"list"`
-
-	// An identifier returned from the previous list deployments call. It can be
-	// used to return the next set of deployments in the list.
-	NextToken *string `locationName:"nextToken" type:"string"`
-}
-
-// String returns the string representation
-func (s ListDeploymentsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListDeploymentsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListDeploymentsInput"}
-	if s.ApplicationName != nil && len(*s.ApplicationName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ApplicationName", 1))
-	}
-	if s.DeploymentGroupName != nil && len(*s.DeploymentGroupName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("DeploymentGroupName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Represents the output of a ListDeployments operation.
-type ListDeploymentsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A list of deployment IDs.
-	Deployments []string `locationName:"deployments" type:"list"`
-
-	// If a large amount of information is returned, an identifier is also returned.
-	// It can be used in a subsequent list deployments call to return the next set
-	// of deployments in the list.
-	NextToken *string `locationName:"nextToken" type:"string"`
-}
-
-// String returns the string representation
-func (s ListDeploymentsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListDeployments = "ListDeployments"
 
@@ -104,7 +25,7 @@ const opListDeployments = "ListDeployments"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/ListDeployments
-func (c *Client) ListDeploymentsRequest(input *ListDeploymentsInput) ListDeploymentsRequest {
+func (c *Client) ListDeploymentsRequest(input *types.ListDeploymentsInput) ListDeploymentsRequest {
 	op := &aws.Operation{
 		Name:       opListDeployments,
 		HTTPMethod: "POST",
@@ -118,10 +39,10 @@ func (c *Client) ListDeploymentsRequest(input *ListDeploymentsInput) ListDeploym
 	}
 
 	if input == nil {
-		input = &ListDeploymentsInput{}
+		input = &types.ListDeploymentsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListDeploymentsOutput{})
+	req := c.newRequest(op, input, &types.ListDeploymentsOutput{})
 	return ListDeploymentsRequest{Request: req, Input: input, Copy: c.ListDeploymentsRequest}
 }
 
@@ -129,8 +50,8 @@ func (c *Client) ListDeploymentsRequest(input *ListDeploymentsInput) ListDeploym
 // ListDeployments API operation.
 type ListDeploymentsRequest struct {
 	*aws.Request
-	Input *ListDeploymentsInput
-	Copy  func(*ListDeploymentsInput) ListDeploymentsRequest
+	Input *types.ListDeploymentsInput
+	Copy  func(*types.ListDeploymentsInput) ListDeploymentsRequest
 }
 
 // Send marshals and sends the ListDeployments API request.
@@ -142,7 +63,7 @@ func (r ListDeploymentsRequest) Send(ctx context.Context) (*ListDeploymentsRespo
 	}
 
 	resp := &ListDeploymentsResponse{
-		ListDeploymentsOutput: r.Request.Data.(*ListDeploymentsOutput),
+		ListDeploymentsOutput: r.Request.Data.(*types.ListDeploymentsOutput),
 		response:              &aws.Response{Request: r.Request},
 	}
 
@@ -172,7 +93,7 @@ func NewListDeploymentsPaginator(req ListDeploymentsRequest) ListDeploymentsPagi
 	return ListDeploymentsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListDeploymentsInput
+				var inCpy *types.ListDeploymentsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -192,14 +113,14 @@ type ListDeploymentsPaginator struct {
 	aws.Pager
 }
 
-func (p *ListDeploymentsPaginator) CurrentPage() *ListDeploymentsOutput {
-	return p.Pager.CurrentPage().(*ListDeploymentsOutput)
+func (p *ListDeploymentsPaginator) CurrentPage() *types.ListDeploymentsOutput {
+	return p.Pager.CurrentPage().(*types.ListDeploymentsOutput)
 }
 
 // ListDeploymentsResponse is the response type for the
 // ListDeployments API operation.
 type ListDeploymentsResponse struct {
-	*ListDeploymentsOutput
+	*types.ListDeploymentsOutput
 
 	response *aws.Response
 }

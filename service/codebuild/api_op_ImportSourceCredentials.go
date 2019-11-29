@@ -6,82 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/codebuild/types"
 )
-
-type ImportSourceCredentialsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The type of authentication used to connect to a GitHub, GitHub Enterprise,
-	// or Bitbucket repository. An OAUTH connection is not supported by the API
-	// and must be created using the AWS CodeBuild console.
-	//
-	// AuthType is a required field
-	AuthType AuthType `locationName:"authType" type:"string" required:"true" enum:"true"`
-
-	// The source provider used for this project.
-	//
-	// ServerType is a required field
-	ServerType ServerType `locationName:"serverType" type:"string" required:"true" enum:"true"`
-
-	// Set to false to prevent overwriting the repository source credentials. Set
-	// to true to overwrite the repository source credentials. The default value
-	// is true.
-	ShouldOverwrite *bool `locationName:"shouldOverwrite" type:"boolean"`
-
-	// For GitHub or GitHub Enterprise, this is the personal access token. For Bitbucket,
-	// this is the app password.
-	//
-	// Token is a required field
-	Token *string `locationName:"token" min:"1" type:"string" required:"true" sensitive:"true"`
-
-	// The Bitbucket username when the authType is BASIC_AUTH. This parameter is
-	// not valid for other types of source providers or connections.
-	Username *string `locationName:"username" min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s ImportSourceCredentialsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ImportSourceCredentialsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ImportSourceCredentialsInput"}
-	if len(s.AuthType) == 0 {
-		invalidParams.Add(aws.NewErrParamRequired("AuthType"))
-	}
-	if len(s.ServerType) == 0 {
-		invalidParams.Add(aws.NewErrParamRequired("ServerType"))
-	}
-
-	if s.Token == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Token"))
-	}
-	if s.Token != nil && len(*s.Token) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Token", 1))
-	}
-	if s.Username != nil && len(*s.Username) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Username", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ImportSourceCredentialsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the token.
-	Arn *string `locationName:"arn" min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s ImportSourceCredentialsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opImportSourceCredentials = "ImportSourceCredentials"
 
@@ -99,7 +25,7 @@ const opImportSourceCredentials = "ImportSourceCredentials"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/ImportSourceCredentials
-func (c *Client) ImportSourceCredentialsRequest(input *ImportSourceCredentialsInput) ImportSourceCredentialsRequest {
+func (c *Client) ImportSourceCredentialsRequest(input *types.ImportSourceCredentialsInput) ImportSourceCredentialsRequest {
 	op := &aws.Operation{
 		Name:       opImportSourceCredentials,
 		HTTPMethod: "POST",
@@ -107,10 +33,10 @@ func (c *Client) ImportSourceCredentialsRequest(input *ImportSourceCredentialsIn
 	}
 
 	if input == nil {
-		input = &ImportSourceCredentialsInput{}
+		input = &types.ImportSourceCredentialsInput{}
 	}
 
-	req := c.newRequest(op, input, &ImportSourceCredentialsOutput{})
+	req := c.newRequest(op, input, &types.ImportSourceCredentialsOutput{})
 	return ImportSourceCredentialsRequest{Request: req, Input: input, Copy: c.ImportSourceCredentialsRequest}
 }
 
@@ -118,8 +44,8 @@ func (c *Client) ImportSourceCredentialsRequest(input *ImportSourceCredentialsIn
 // ImportSourceCredentials API operation.
 type ImportSourceCredentialsRequest struct {
 	*aws.Request
-	Input *ImportSourceCredentialsInput
-	Copy  func(*ImportSourceCredentialsInput) ImportSourceCredentialsRequest
+	Input *types.ImportSourceCredentialsInput
+	Copy  func(*types.ImportSourceCredentialsInput) ImportSourceCredentialsRequest
 }
 
 // Send marshals and sends the ImportSourceCredentials API request.
@@ -131,7 +57,7 @@ func (r ImportSourceCredentialsRequest) Send(ctx context.Context) (*ImportSource
 	}
 
 	resp := &ImportSourceCredentialsResponse{
-		ImportSourceCredentialsOutput: r.Request.Data.(*ImportSourceCredentialsOutput),
+		ImportSourceCredentialsOutput: r.Request.Data.(*types.ImportSourceCredentialsOutput),
 		response:                      &aws.Response{Request: r.Request},
 	}
 
@@ -141,7 +67,7 @@ func (r ImportSourceCredentialsRequest) Send(ctx context.Context) (*ImportSource
 // ImportSourceCredentialsResponse is the response type for the
 // ImportSourceCredentials API operation.
 type ImportSourceCredentialsResponse struct {
-	*ImportSourceCredentialsOutput
+	*types.ImportSourceCredentialsOutput
 
 	response *aws.Response
 }

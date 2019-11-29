@@ -4,153 +4,10 @@ package lightsail
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/lightsail/types"
 )
-
-type CreateInstancesFromSnapshotInput struct {
-	_ struct{} `type:"structure"`
-
-	// An array of objects representing the add-ons to enable for the new instance.
-	AddOns []AddOnRequest `locationName:"addOns" type:"list"`
-
-	// An object containing information about one or more disk mappings.
-	AttachedDiskMapping map[string][]DiskMap `locationName:"attachedDiskMapping" type:"map"`
-
-	// The Availability Zone where you want to create your instances. Use the following
-	// formatting: us-east-2a (case sensitive). You can get a list of Availability
-	// Zones by using the get regions (http://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/API_GetRegions.html)
-	// operation. Be sure to add the include Availability Zones parameter to your
-	// request.
-	//
-	// AvailabilityZone is a required field
-	AvailabilityZone *string `locationName:"availabilityZone" type:"string" required:"true"`
-
-	// The bundle of specification information for your virtual private server (or
-	// instance), including the pricing plan (e.g., micro_1_0).
-	//
-	// BundleId is a required field
-	BundleId *string `locationName:"bundleId" type:"string" required:"true"`
-
-	// The names for your new instances.
-	//
-	// InstanceNames is a required field
-	InstanceNames []string `locationName:"instanceNames" type:"list" required:"true"`
-
-	// The name of the instance snapshot on which you are basing your new instances.
-	// Use the get instance snapshots operation to return information about your
-	// existing snapshots.
-	//
-	// This parameter cannot be defined together with the source instance name parameter.
-	// The instance snapshot name and source instance name parameters are mutually
-	// exclusive.
-	InstanceSnapshotName *string `locationName:"instanceSnapshotName" type:"string"`
-
-	// The name for your key pair.
-	KeyPairName *string `locationName:"keyPairName" type:"string"`
-
-	// The date of the automatic snapshot to use for the new instance.
-	//
-	// Use the get auto snapshots operation to identify the dates of the available
-	// automatic snapshots.
-	//
-	// Constraints:
-	//
-	//    * Must be specified in YYYY-MM-DD format.
-	//
-	//    * This parameter cannot be defined together with the use latest restorable
-	//    auto snapshot parameter. The restore date and use latest restorable auto
-	//    snapshot parameters are mutually exclusive.
-	//
-	// Define this parameter only when creating a new instance from an automatic
-	// snapshot. For more information, see the Lightsail Dev Guide (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-configuring-automatic-snapshots).
-	RestoreDate *string `locationName:"restoreDate" type:"string"`
-
-	// The name of the source instance from which the source automatic snapshot
-	// was created.
-	//
-	// This parameter cannot be defined together with the instance snapshot name
-	// parameter. The source instance name and instance snapshot name parameters
-	// are mutually exclusive.
-	//
-	// Define this parameter only when creating a new instance from an automatic
-	// snapshot. For more information, see the Lightsail Dev Guide (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-configuring-automatic-snapshots).
-	SourceInstanceName *string `locationName:"sourceInstanceName" type:"string"`
-
-	// The tag keys and optional values to add to the resource during create.
-	//
-	// To tag a resource after it has been created, see the tag resource operation.
-	Tags []Tag `locationName:"tags" type:"list"`
-
-	// A Boolean value to indicate whether to use the latest available automatic
-	// snapshot.
-	//
-	// This parameter cannot be defined together with the restore date parameter.
-	// The use latest restorable auto snapshot and restore date parameters are mutually
-	// exclusive.
-	//
-	// Define this parameter only when creating a new instance from an automatic
-	// snapshot. For more information, see the Lightsail Dev Guide (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-configuring-automatic-snapshots).
-	UseLatestRestorableAutoSnapshot *bool `locationName:"useLatestRestorableAutoSnapshot" type:"boolean"`
-
-	// You can create a launch script that configures a server with additional user
-	// data. For example, apt-get -y update.
-	//
-	// Depending on the machine image you choose, the command to get software on
-	// your instance varies. Amazon Linux and CentOS use yum, Debian and Ubuntu
-	// use apt-get, and FreeBSD uses pkg. For a complete list, see the Dev Guide
-	// (https://lightsail.aws.amazon.com/ls/docs/getting-started/article/compare-options-choose-lightsail-instance-image).
-	UserData *string `locationName:"userData" type:"string"`
-}
-
-// String returns the string representation
-func (s CreateInstancesFromSnapshotInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateInstancesFromSnapshotInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateInstancesFromSnapshotInput"}
-
-	if s.AvailabilityZone == nil {
-		invalidParams.Add(aws.NewErrParamRequired("AvailabilityZone"))
-	}
-
-	if s.BundleId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("BundleId"))
-	}
-
-	if s.InstanceNames == nil {
-		invalidParams.Add(aws.NewErrParamRequired("InstanceNames"))
-	}
-	if s.AddOns != nil {
-		for i, v := range s.AddOns {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "AddOns", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type CreateInstancesFromSnapshotOutput struct {
-	_ struct{} `type:"structure"`
-
-	// An array of key-value pairs containing information about the results of your
-	// create instances from snapshot request.
-	Operations []Operation `locationName:"operations" type:"list"`
-}
-
-// String returns the string representation
-func (s CreateInstancesFromSnapshotOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCreateInstancesFromSnapshot = "CreateInstancesFromSnapshot"
 
@@ -173,7 +30,7 @@ const opCreateInstancesFromSnapshot = "CreateInstancesFromSnapshot"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/CreateInstancesFromSnapshot
-func (c *Client) CreateInstancesFromSnapshotRequest(input *CreateInstancesFromSnapshotInput) CreateInstancesFromSnapshotRequest {
+func (c *Client) CreateInstancesFromSnapshotRequest(input *types.CreateInstancesFromSnapshotInput) CreateInstancesFromSnapshotRequest {
 	op := &aws.Operation{
 		Name:       opCreateInstancesFromSnapshot,
 		HTTPMethod: "POST",
@@ -181,10 +38,10 @@ func (c *Client) CreateInstancesFromSnapshotRequest(input *CreateInstancesFromSn
 	}
 
 	if input == nil {
-		input = &CreateInstancesFromSnapshotInput{}
+		input = &types.CreateInstancesFromSnapshotInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateInstancesFromSnapshotOutput{})
+	req := c.newRequest(op, input, &types.CreateInstancesFromSnapshotOutput{})
 	return CreateInstancesFromSnapshotRequest{Request: req, Input: input, Copy: c.CreateInstancesFromSnapshotRequest}
 }
 
@@ -192,8 +49,8 @@ func (c *Client) CreateInstancesFromSnapshotRequest(input *CreateInstancesFromSn
 // CreateInstancesFromSnapshot API operation.
 type CreateInstancesFromSnapshotRequest struct {
 	*aws.Request
-	Input *CreateInstancesFromSnapshotInput
-	Copy  func(*CreateInstancesFromSnapshotInput) CreateInstancesFromSnapshotRequest
+	Input *types.CreateInstancesFromSnapshotInput
+	Copy  func(*types.CreateInstancesFromSnapshotInput) CreateInstancesFromSnapshotRequest
 }
 
 // Send marshals and sends the CreateInstancesFromSnapshot API request.
@@ -205,7 +62,7 @@ func (r CreateInstancesFromSnapshotRequest) Send(ctx context.Context) (*CreateIn
 	}
 
 	resp := &CreateInstancesFromSnapshotResponse{
-		CreateInstancesFromSnapshotOutput: r.Request.Data.(*CreateInstancesFromSnapshotOutput),
+		CreateInstancesFromSnapshotOutput: r.Request.Data.(*types.CreateInstancesFromSnapshotOutput),
 		response:                          &aws.Response{Request: r.Request},
 	}
 
@@ -215,7 +72,7 @@ func (r CreateInstancesFromSnapshotRequest) Send(ctx context.Context) (*CreateIn
 // CreateInstancesFromSnapshotResponse is the response type for the
 // CreateInstancesFromSnapshot API operation.
 type CreateInstancesFromSnapshotResponse struct {
-	*CreateInstancesFromSnapshotOutput
+	*types.CreateInstancesFromSnapshotOutput
 
 	response *aws.Response
 }

@@ -6,65 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/storagegateway/types"
 )
-
-type DescribeUploadBufferInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation
-	// to return a list of gateways for your account and AWS Region.
-	//
-	// GatewayARN is a required field
-	GatewayARN *string `min:"50" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeUploadBufferInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeUploadBufferInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeUploadBufferInput"}
-
-	if s.GatewayARN == nil {
-		invalidParams.Add(aws.NewErrParamRequired("GatewayARN"))
-	}
-	if s.GatewayARN != nil && len(*s.GatewayARN) < 50 {
-		invalidParams.Add(aws.NewErrParamMinLen("GatewayARN", 50))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribeUploadBufferOutput struct {
-	_ struct{} `type:"structure"`
-
-	// An array of the gateway's local disk IDs that are configured as working storage.
-	// Each local disk ID is specified as a string (minimum length of 1 and maximum
-	// length of 300). If no local disks are configured as working storage, then
-	// the DiskIds array is empty.
-	DiskIds []string `type:"list"`
-
-	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation
-	// to return a list of gateways for your account and AWS Region.
-	GatewayARN *string `min:"50" type:"string"`
-
-	// The total number of bytes allocated in the gateway's as upload buffer.
-	UploadBufferAllocatedInBytes *int64 `type:"long"`
-
-	// The total number of bytes being used in the gateway's upload buffer.
-	UploadBufferUsedInBytes *int64 `type:"long"`
-}
-
-// String returns the string representation
-func (s DescribeUploadBufferOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeUploadBuffer = "DescribeUploadBuffer"
 
@@ -85,7 +28,7 @@ const opDescribeUploadBuffer = "DescribeUploadBuffer"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DescribeUploadBuffer
-func (c *Client) DescribeUploadBufferRequest(input *DescribeUploadBufferInput) DescribeUploadBufferRequest {
+func (c *Client) DescribeUploadBufferRequest(input *types.DescribeUploadBufferInput) DescribeUploadBufferRequest {
 	op := &aws.Operation{
 		Name:       opDescribeUploadBuffer,
 		HTTPMethod: "POST",
@@ -93,10 +36,10 @@ func (c *Client) DescribeUploadBufferRequest(input *DescribeUploadBufferInput) D
 	}
 
 	if input == nil {
-		input = &DescribeUploadBufferInput{}
+		input = &types.DescribeUploadBufferInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeUploadBufferOutput{})
+	req := c.newRequest(op, input, &types.DescribeUploadBufferOutput{})
 	return DescribeUploadBufferRequest{Request: req, Input: input, Copy: c.DescribeUploadBufferRequest}
 }
 
@@ -104,8 +47,8 @@ func (c *Client) DescribeUploadBufferRequest(input *DescribeUploadBufferInput) D
 // DescribeUploadBuffer API operation.
 type DescribeUploadBufferRequest struct {
 	*aws.Request
-	Input *DescribeUploadBufferInput
-	Copy  func(*DescribeUploadBufferInput) DescribeUploadBufferRequest
+	Input *types.DescribeUploadBufferInput
+	Copy  func(*types.DescribeUploadBufferInput) DescribeUploadBufferRequest
 }
 
 // Send marshals and sends the DescribeUploadBuffer API request.
@@ -117,7 +60,7 @@ func (r DescribeUploadBufferRequest) Send(ctx context.Context) (*DescribeUploadB
 	}
 
 	resp := &DescribeUploadBufferResponse{
-		DescribeUploadBufferOutput: r.Request.Data.(*DescribeUploadBufferOutput),
+		DescribeUploadBufferOutput: r.Request.Data.(*types.DescribeUploadBufferOutput),
 		response:                   &aws.Response{Request: r.Request},
 	}
 
@@ -127,7 +70,7 @@ func (r DescribeUploadBufferRequest) Send(ctx context.Context) (*DescribeUploadB
 // DescribeUploadBufferResponse is the response type for the
 // DescribeUploadBuffer API operation.
 type DescribeUploadBufferResponse struct {
-	*DescribeUploadBufferOutput
+	*types.DescribeUploadBufferOutput
 
 	response *aws.Response
 }

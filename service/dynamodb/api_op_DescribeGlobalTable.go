@@ -6,51 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/dynamodb/types"
 )
-
-type DescribeGlobalTableInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the global table.
-	//
-	// GlobalTableName is a required field
-	GlobalTableName *string `min:"3" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeGlobalTableInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeGlobalTableInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeGlobalTableInput"}
-
-	if s.GlobalTableName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("GlobalTableName"))
-	}
-	if s.GlobalTableName != nil && len(*s.GlobalTableName) < 3 {
-		invalidParams.Add(aws.NewErrParamMinLen("GlobalTableName", 3))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribeGlobalTableOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Contains the details of the global table.
-	GlobalTableDescription *GlobalTableDescription `type:"structure"`
-}
-
-// String returns the string representation
-func (s DescribeGlobalTableOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeGlobalTable = "DescribeGlobalTable"
 
@@ -67,7 +24,7 @@ const opDescribeGlobalTable = "DescribeGlobalTable"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/DescribeGlobalTable
-func (c *Client) DescribeGlobalTableRequest(input *DescribeGlobalTableInput) DescribeGlobalTableRequest {
+func (c *Client) DescribeGlobalTableRequest(input *types.DescribeGlobalTableInput) DescribeGlobalTableRequest {
 	op := &aws.Operation{
 		Name:       opDescribeGlobalTable,
 		HTTPMethod: "POST",
@@ -75,10 +32,10 @@ func (c *Client) DescribeGlobalTableRequest(input *DescribeGlobalTableInput) Des
 	}
 
 	if input == nil {
-		input = &DescribeGlobalTableInput{}
+		input = &types.DescribeGlobalTableInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeGlobalTableOutput{})
+	req := c.newRequest(op, input, &types.DescribeGlobalTableOutput{})
 	return DescribeGlobalTableRequest{Request: req, Input: input, Copy: c.DescribeGlobalTableRequest}
 }
 
@@ -86,8 +43,8 @@ func (c *Client) DescribeGlobalTableRequest(input *DescribeGlobalTableInput) Des
 // DescribeGlobalTable API operation.
 type DescribeGlobalTableRequest struct {
 	*aws.Request
-	Input *DescribeGlobalTableInput
-	Copy  func(*DescribeGlobalTableInput) DescribeGlobalTableRequest
+	Input *types.DescribeGlobalTableInput
+	Copy  func(*types.DescribeGlobalTableInput) DescribeGlobalTableRequest
 }
 
 // Send marshals and sends the DescribeGlobalTable API request.
@@ -99,7 +56,7 @@ func (r DescribeGlobalTableRequest) Send(ctx context.Context) (*DescribeGlobalTa
 	}
 
 	resp := &DescribeGlobalTableResponse{
-		DescribeGlobalTableOutput: r.Request.Data.(*DescribeGlobalTableOutput),
+		DescribeGlobalTableOutput: r.Request.Data.(*types.DescribeGlobalTableOutput),
 		response:                  &aws.Response{Request: r.Request},
 	}
 
@@ -109,7 +66,7 @@ func (r DescribeGlobalTableRequest) Send(ctx context.Context) (*DescribeGlobalTa
 // DescribeGlobalTableResponse is the response type for the
 // DescribeGlobalTable API operation.
 type DescribeGlobalTableResponse struct {
-	*DescribeGlobalTableOutput
+	*types.DescribeGlobalTableOutput
 
 	response *aws.Response
 }

@@ -6,41 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/cloudwatch/types"
 )
-
-type ListDashboardsInput struct {
-	_ struct{} `type:"structure"`
-
-	// If you specify this parameter, only the dashboards with names starting with
-	// the specified string are listed. The maximum length is 255, and valid characters
-	// are A-Z, a-z, 0-9, ".", "-", and "_".
-	DashboardNamePrefix *string `type:"string"`
-
-	// The token returned by a previous call to indicate that there is more data
-	// available.
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s ListDashboardsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type ListDashboardsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The list of matching dashboards.
-	DashboardEntries []DashboardEntry `type:"list"`
-
-	// The token that marks the start of the next batch of returned results.
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s ListDashboardsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListDashboards = "ListDashboards"
 
@@ -63,7 +30,7 @@ const opListDashboards = "ListDashboards"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/ListDashboards
-func (c *Client) ListDashboardsRequest(input *ListDashboardsInput) ListDashboardsRequest {
+func (c *Client) ListDashboardsRequest(input *types.ListDashboardsInput) ListDashboardsRequest {
 	op := &aws.Operation{
 		Name:       opListDashboards,
 		HTTPMethod: "POST",
@@ -77,10 +44,10 @@ func (c *Client) ListDashboardsRequest(input *ListDashboardsInput) ListDashboard
 	}
 
 	if input == nil {
-		input = &ListDashboardsInput{}
+		input = &types.ListDashboardsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListDashboardsOutput{})
+	req := c.newRequest(op, input, &types.ListDashboardsOutput{})
 	return ListDashboardsRequest{Request: req, Input: input, Copy: c.ListDashboardsRequest}
 }
 
@@ -88,8 +55,8 @@ func (c *Client) ListDashboardsRequest(input *ListDashboardsInput) ListDashboard
 // ListDashboards API operation.
 type ListDashboardsRequest struct {
 	*aws.Request
-	Input *ListDashboardsInput
-	Copy  func(*ListDashboardsInput) ListDashboardsRequest
+	Input *types.ListDashboardsInput
+	Copy  func(*types.ListDashboardsInput) ListDashboardsRequest
 }
 
 // Send marshals and sends the ListDashboards API request.
@@ -101,7 +68,7 @@ func (r ListDashboardsRequest) Send(ctx context.Context) (*ListDashboardsRespons
 	}
 
 	resp := &ListDashboardsResponse{
-		ListDashboardsOutput: r.Request.Data.(*ListDashboardsOutput),
+		ListDashboardsOutput: r.Request.Data.(*types.ListDashboardsOutput),
 		response:             &aws.Response{Request: r.Request},
 	}
 
@@ -131,7 +98,7 @@ func NewListDashboardsPaginator(req ListDashboardsRequest) ListDashboardsPaginat
 	return ListDashboardsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListDashboardsInput
+				var inCpy *types.ListDashboardsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -151,14 +118,14 @@ type ListDashboardsPaginator struct {
 	aws.Pager
 }
 
-func (p *ListDashboardsPaginator) CurrentPage() *ListDashboardsOutput {
-	return p.Pager.CurrentPage().(*ListDashboardsOutput)
+func (p *ListDashboardsPaginator) CurrentPage() *types.ListDashboardsOutput {
+	return p.Pager.CurrentPage().(*types.ListDashboardsOutput)
 }
 
 // ListDashboardsResponse is the response type for the
 // ListDashboards API operation.
 type ListDashboardsResponse struct {
-	*ListDashboardsOutput
+	*types.ListDashboardsOutput
 
 	response *aws.Response
 }

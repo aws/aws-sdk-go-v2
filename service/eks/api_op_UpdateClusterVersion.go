@@ -6,104 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/eks/types"
 )
-
-type UpdateClusterVersionInput struct {
-	_ struct{} `type:"structure"`
-
-	// Unique, case-sensitive identifier that you provide to ensure the idempotency
-	// of the request.
-	ClientRequestToken *string `locationName:"clientRequestToken" type:"string" idempotencyToken:"true"`
-
-	// The name of the Amazon EKS cluster to update.
-	//
-	// Name is a required field
-	Name *string `location:"uri" locationName:"name" type:"string" required:"true"`
-
-	// The desired Kubernetes version following a successful update.
-	//
-	// Version is a required field
-	Version *string `locationName:"version" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s UpdateClusterVersionInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateClusterVersionInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateClusterVersionInput"}
-
-	if s.Name == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Name"))
-	}
-
-	if s.Version == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Version"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s UpdateClusterVersionInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	var ClientRequestToken string
-	if s.ClientRequestToken != nil {
-		ClientRequestToken = *s.ClientRequestToken
-	} else {
-		ClientRequestToken = protocol.GetIdempotencyToken()
-	}
-	{
-		v := ClientRequestToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "clientRequestToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Version != nil {
-		v := *s.Version
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "version", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Name != nil {
-		v := *s.Name
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type UpdateClusterVersionOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The full description of the specified update
-	Update *Update `locationName:"update" type:"structure"`
-}
-
-// String returns the string representation
-func (s UpdateClusterVersionOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s UpdateClusterVersionOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.Update != nil {
-		v := s.Update
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "update", v, metadata)
-	}
-	return nil
-}
 
 const opUpdateClusterVersion = "UpdateClusterVersion"
 
@@ -120,6 +24,10 @@ const opUpdateClusterVersion = "UpdateClusterVersion"
 // is eventually consistent). When the update is complete (either Failed or
 // Successful), the cluster status moves to Active.
 //
+// If your cluster has managed node groups attached to it, all of your node
+// groups’ Kubernetes versions must match the cluster’s Kubernetes version
+// in order to update the cluster to a new Kubernetes version.
+//
 //    // Example sending a request using UpdateClusterVersionRequest.
 //    req := client.UpdateClusterVersionRequest(params)
 //    resp, err := req.Send(context.TODO())
@@ -128,7 +36,7 @@ const opUpdateClusterVersion = "UpdateClusterVersion"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/UpdateClusterVersion
-func (c *Client) UpdateClusterVersionRequest(input *UpdateClusterVersionInput) UpdateClusterVersionRequest {
+func (c *Client) UpdateClusterVersionRequest(input *types.UpdateClusterVersionInput) UpdateClusterVersionRequest {
 	op := &aws.Operation{
 		Name:       opUpdateClusterVersion,
 		HTTPMethod: "POST",
@@ -136,10 +44,10 @@ func (c *Client) UpdateClusterVersionRequest(input *UpdateClusterVersionInput) U
 	}
 
 	if input == nil {
-		input = &UpdateClusterVersionInput{}
+		input = &types.UpdateClusterVersionInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateClusterVersionOutput{})
+	req := c.newRequest(op, input, &types.UpdateClusterVersionOutput{})
 	return UpdateClusterVersionRequest{Request: req, Input: input, Copy: c.UpdateClusterVersionRequest}
 }
 
@@ -147,8 +55,8 @@ func (c *Client) UpdateClusterVersionRequest(input *UpdateClusterVersionInput) U
 // UpdateClusterVersion API operation.
 type UpdateClusterVersionRequest struct {
 	*aws.Request
-	Input *UpdateClusterVersionInput
-	Copy  func(*UpdateClusterVersionInput) UpdateClusterVersionRequest
+	Input *types.UpdateClusterVersionInput
+	Copy  func(*types.UpdateClusterVersionInput) UpdateClusterVersionRequest
 }
 
 // Send marshals and sends the UpdateClusterVersion API request.
@@ -160,7 +68,7 @@ func (r UpdateClusterVersionRequest) Send(ctx context.Context) (*UpdateClusterVe
 	}
 
 	resp := &UpdateClusterVersionResponse{
-		UpdateClusterVersionOutput: r.Request.Data.(*UpdateClusterVersionOutput),
+		UpdateClusterVersionOutput: r.Request.Data.(*types.UpdateClusterVersionOutput),
 		response:                   &aws.Response{Request: r.Request},
 	}
 
@@ -170,7 +78,7 @@ func (r UpdateClusterVersionRequest) Send(ctx context.Context) (*UpdateClusterVe
 // UpdateClusterVersionResponse is the response type for the
 // UpdateClusterVersion API operation.
 type UpdateClusterVersionResponse struct {
-	*UpdateClusterVersionOutput
+	*types.UpdateClusterVersionOutput
 
 	response *aws.Response
 }

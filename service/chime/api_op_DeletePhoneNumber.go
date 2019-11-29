@@ -6,65 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/restjson"
+	"github.com/aws/aws-sdk-go-v2/service/chime/types"
 )
-
-type DeletePhoneNumberInput struct {
-	_ struct{} `type:"structure"`
-
-	// The phone number ID.
-	//
-	// PhoneNumberId is a required field
-	PhoneNumberId *string `location:"uri" locationName:"phoneNumberId" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeletePhoneNumberInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeletePhoneNumberInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeletePhoneNumberInput"}
-
-	if s.PhoneNumberId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("PhoneNumberId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeletePhoneNumberInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.PhoneNumberId != nil {
-		v := *s.PhoneNumberId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "phoneNumberId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type DeletePhoneNumberOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeletePhoneNumberOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeletePhoneNumberOutput) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
 
 const opDeletePhoneNumber = "DeletePhoneNumber"
 
@@ -86,7 +31,7 @@ const opDeletePhoneNumber = "DeletePhoneNumber"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/DeletePhoneNumber
-func (c *Client) DeletePhoneNumberRequest(input *DeletePhoneNumberInput) DeletePhoneNumberRequest {
+func (c *Client) DeletePhoneNumberRequest(input *types.DeletePhoneNumberInput) DeletePhoneNumberRequest {
 	op := &aws.Operation{
 		Name:       opDeletePhoneNumber,
 		HTTPMethod: "DELETE",
@@ -94,10 +39,10 @@ func (c *Client) DeletePhoneNumberRequest(input *DeletePhoneNumberInput) DeleteP
 	}
 
 	if input == nil {
-		input = &DeletePhoneNumberInput{}
+		input = &types.DeletePhoneNumberInput{}
 	}
 
-	req := c.newRequest(op, input, &DeletePhoneNumberOutput{})
+	req := c.newRequest(op, input, &types.DeletePhoneNumberOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return DeletePhoneNumberRequest{Request: req, Input: input, Copy: c.DeletePhoneNumberRequest}
@@ -107,8 +52,8 @@ func (c *Client) DeletePhoneNumberRequest(input *DeletePhoneNumberInput) DeleteP
 // DeletePhoneNumber API operation.
 type DeletePhoneNumberRequest struct {
 	*aws.Request
-	Input *DeletePhoneNumberInput
-	Copy  func(*DeletePhoneNumberInput) DeletePhoneNumberRequest
+	Input *types.DeletePhoneNumberInput
+	Copy  func(*types.DeletePhoneNumberInput) DeletePhoneNumberRequest
 }
 
 // Send marshals and sends the DeletePhoneNumber API request.
@@ -120,7 +65,7 @@ func (r DeletePhoneNumberRequest) Send(ctx context.Context) (*DeletePhoneNumberR
 	}
 
 	resp := &DeletePhoneNumberResponse{
-		DeletePhoneNumberOutput: r.Request.Data.(*DeletePhoneNumberOutput),
+		DeletePhoneNumberOutput: r.Request.Data.(*types.DeletePhoneNumberOutput),
 		response:                &aws.Response{Request: r.Request},
 	}
 
@@ -130,7 +75,7 @@ func (r DeletePhoneNumberRequest) Send(ctx context.Context) (*DeletePhoneNumberR
 // DeletePhoneNumberResponse is the response type for the
 // DeletePhoneNumber API operation.
 type DeletePhoneNumberResponse struct {
-	*DeletePhoneNumberOutput
+	*types.DeletePhoneNumberOutput
 
 	response *aws.Response
 }

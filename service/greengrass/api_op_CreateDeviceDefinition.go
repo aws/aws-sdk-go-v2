@@ -6,150 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/greengrass/types"
 )
-
-type CreateDeviceDefinitionInput struct {
-	_ struct{} `type:"structure"`
-
-	AmznClientToken *string `location:"header" locationName:"X-Amzn-Client-Token" type:"string"`
-
-	// Information about a device definition version.
-	InitialVersion *DeviceDefinitionVersion `type:"structure"`
-
-	Name *string `type:"string"`
-
-	// The key-value pair for the resource tag.
-	Tags map[string]string `locationName:"tags" type:"map"`
-}
-
-// String returns the string representation
-func (s CreateDeviceDefinitionInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateDeviceDefinitionInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateDeviceDefinitionInput"}
-	if s.InitialVersion != nil {
-		if err := s.InitialVersion.Validate(); err != nil {
-			invalidParams.AddNested("InitialVersion", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s CreateDeviceDefinitionInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.InitialVersion != nil {
-		v := s.InitialVersion
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "InitialVersion", v, metadata)
-	}
-	if s.Name != nil {
-		v := *s.Name
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "Name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Tags != nil {
-		v := s.Tags
-
-		metadata := protocol.Metadata{}
-		ms0 := e.Map(protocol.BodyTarget, "tags", metadata)
-		ms0.Start()
-		for k1, v1 := range v {
-			ms0.MapSetValue(k1, protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
-		}
-		ms0.End()
-
-	}
-	if s.AmznClientToken != nil {
-		v := *s.AmznClientToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "X-Amzn-Client-Token", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type CreateDeviceDefinitionOutput struct {
-	_ struct{} `type:"structure"`
-
-	Arn *string `type:"string"`
-
-	CreationTimestamp *string `type:"string"`
-
-	Id *string `type:"string"`
-
-	LastUpdatedTimestamp *string `type:"string"`
-
-	LatestVersion *string `type:"string"`
-
-	LatestVersionArn *string `type:"string"`
-
-	Name *string `type:"string"`
-}
-
-// String returns the string representation
-func (s CreateDeviceDefinitionOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s CreateDeviceDefinitionOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.Arn != nil {
-		v := *s.Arn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "Arn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.CreationTimestamp != nil {
-		v := *s.CreationTimestamp
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "CreationTimestamp", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Id != nil {
-		v := *s.Id
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "Id", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.LastUpdatedTimestamp != nil {
-		v := *s.LastUpdatedTimestamp
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "LastUpdatedTimestamp", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.LatestVersion != nil {
-		v := *s.LatestVersion
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "LatestVersion", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.LatestVersionArn != nil {
-		v := *s.LatestVersionArn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "LatestVersionArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Name != nil {
-		v := *s.Name
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "Name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opCreateDeviceDefinition = "CreateDeviceDefinition"
 
@@ -167,7 +25,7 @@ const opCreateDeviceDefinition = "CreateDeviceDefinition"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/CreateDeviceDefinition
-func (c *Client) CreateDeviceDefinitionRequest(input *CreateDeviceDefinitionInput) CreateDeviceDefinitionRequest {
+func (c *Client) CreateDeviceDefinitionRequest(input *types.CreateDeviceDefinitionInput) CreateDeviceDefinitionRequest {
 	op := &aws.Operation{
 		Name:       opCreateDeviceDefinition,
 		HTTPMethod: "POST",
@@ -175,10 +33,10 @@ func (c *Client) CreateDeviceDefinitionRequest(input *CreateDeviceDefinitionInpu
 	}
 
 	if input == nil {
-		input = &CreateDeviceDefinitionInput{}
+		input = &types.CreateDeviceDefinitionInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateDeviceDefinitionOutput{})
+	req := c.newRequest(op, input, &types.CreateDeviceDefinitionOutput{})
 	return CreateDeviceDefinitionRequest{Request: req, Input: input, Copy: c.CreateDeviceDefinitionRequest}
 }
 
@@ -186,8 +44,8 @@ func (c *Client) CreateDeviceDefinitionRequest(input *CreateDeviceDefinitionInpu
 // CreateDeviceDefinition API operation.
 type CreateDeviceDefinitionRequest struct {
 	*aws.Request
-	Input *CreateDeviceDefinitionInput
-	Copy  func(*CreateDeviceDefinitionInput) CreateDeviceDefinitionRequest
+	Input *types.CreateDeviceDefinitionInput
+	Copy  func(*types.CreateDeviceDefinitionInput) CreateDeviceDefinitionRequest
 }
 
 // Send marshals and sends the CreateDeviceDefinition API request.
@@ -199,7 +57,7 @@ func (r CreateDeviceDefinitionRequest) Send(ctx context.Context) (*CreateDeviceD
 	}
 
 	resp := &CreateDeviceDefinitionResponse{
-		CreateDeviceDefinitionOutput: r.Request.Data.(*CreateDeviceDefinitionOutput),
+		CreateDeviceDefinitionOutput: r.Request.Data.(*types.CreateDeviceDefinitionOutput),
 		response:                     &aws.Response{Request: r.Request},
 	}
 
@@ -209,7 +67,7 @@ func (r CreateDeviceDefinitionRequest) Send(ctx context.Context) (*CreateDeviceD
 // CreateDeviceDefinitionResponse is the response type for the
 // CreateDeviceDefinition API operation.
 type CreateDeviceDefinitionResponse struct {
-	*CreateDeviceDefinitionOutput
+	*types.CreateDeviceDefinitionOutput
 
 	response *aws.Response
 }

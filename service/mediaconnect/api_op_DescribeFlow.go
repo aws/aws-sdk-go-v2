@@ -6,81 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/mediaconnect/types"
 )
-
-type DescribeFlowInput struct {
-	_ struct{} `type:"structure"`
-
-	// FlowArn is a required field
-	FlowArn *string `location:"uri" locationName:"flowArn" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeFlowInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeFlowInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeFlowInput"}
-
-	if s.FlowArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("FlowArn"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DescribeFlowInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.FlowArn != nil {
-		v := *s.FlowArn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "flowArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-// The result of a successful DescribeFlow request.
-type DescribeFlowOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The settings for a flow, including its source, outputs, and entitlements.
-	Flow *Flow `locationName:"flow" type:"structure"`
-
-	// Messages that provide the state of the flow.
-	Messages *Messages `locationName:"messages" type:"structure"`
-}
-
-// String returns the string representation
-func (s DescribeFlowOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DescribeFlowOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.Flow != nil {
-		v := s.Flow
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "flow", v, metadata)
-	}
-	if s.Messages != nil {
-		v := s.Messages
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "messages", v, metadata)
-	}
-	return nil
-}
 
 const opDescribeFlow = "DescribeFlow"
 
@@ -99,7 +26,7 @@ const opDescribeFlow = "DescribeFlow"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/DescribeFlow
-func (c *Client) DescribeFlowRequest(input *DescribeFlowInput) DescribeFlowRequest {
+func (c *Client) DescribeFlowRequest(input *types.DescribeFlowInput) DescribeFlowRequest {
 	op := &aws.Operation{
 		Name:       opDescribeFlow,
 		HTTPMethod: "GET",
@@ -107,10 +34,10 @@ func (c *Client) DescribeFlowRequest(input *DescribeFlowInput) DescribeFlowReque
 	}
 
 	if input == nil {
-		input = &DescribeFlowInput{}
+		input = &types.DescribeFlowInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeFlowOutput{})
+	req := c.newRequest(op, input, &types.DescribeFlowOutput{})
 	return DescribeFlowRequest{Request: req, Input: input, Copy: c.DescribeFlowRequest}
 }
 
@@ -118,8 +45,8 @@ func (c *Client) DescribeFlowRequest(input *DescribeFlowInput) DescribeFlowReque
 // DescribeFlow API operation.
 type DescribeFlowRequest struct {
 	*aws.Request
-	Input *DescribeFlowInput
-	Copy  func(*DescribeFlowInput) DescribeFlowRequest
+	Input *types.DescribeFlowInput
+	Copy  func(*types.DescribeFlowInput) DescribeFlowRequest
 }
 
 // Send marshals and sends the DescribeFlow API request.
@@ -131,7 +58,7 @@ func (r DescribeFlowRequest) Send(ctx context.Context) (*DescribeFlowResponse, e
 	}
 
 	resp := &DescribeFlowResponse{
-		DescribeFlowOutput: r.Request.Data.(*DescribeFlowOutput),
+		DescribeFlowOutput: r.Request.Data.(*types.DescribeFlowOutput),
 		response:           &aws.Response{Request: r.Request},
 	}
 
@@ -141,7 +68,7 @@ func (r DescribeFlowRequest) Send(ctx context.Context) (*DescribeFlowResponse, e
 // DescribeFlowResponse is the response type for the
 // DescribeFlow API operation.
 type DescribeFlowResponse struct {
-	*DescribeFlowOutput
+	*types.DescribeFlowOutput
 
 	response *aws.Response
 }

@@ -6,58 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/rekognition/types"
 )
-
-type DetectTextInput struct {
-	_ struct{} `type:"structure"`
-
-	// The input image as base64-encoded bytes or an Amazon S3 object. If you use
-	// the AWS CLI to call Amazon Rekognition operations, you can't pass image bytes.
-	//
-	// If you are using an AWS SDK to call Amazon Rekognition, you might not need
-	// to base64-encode image bytes passed using the Bytes field. For more information,
-	// see Images in the Amazon Rekognition developer guide.
-	//
-	// Image is a required field
-	Image *Image `type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s DetectTextInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DetectTextInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DetectTextInput"}
-
-	if s.Image == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Image"))
-	}
-	if s.Image != nil {
-		if err := s.Image.Validate(); err != nil {
-			invalidParams.AddNested("Image", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DetectTextOutput struct {
-	_ struct{} `type:"structure"`
-
-	// An array of text that was detected in the input image.
-	TextDetections []TextDetection `type:"list"`
-}
-
-// String returns the string representation
-func (s DetectTextOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDetectText = "DetectText"
 
@@ -103,7 +53,7 @@ const opDetectText = "DetectText"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) DetectTextRequest(input *DetectTextInput) DetectTextRequest {
+func (c *Client) DetectTextRequest(input *types.DetectTextInput) DetectTextRequest {
 	op := &aws.Operation{
 		Name:       opDetectText,
 		HTTPMethod: "POST",
@@ -111,10 +61,10 @@ func (c *Client) DetectTextRequest(input *DetectTextInput) DetectTextRequest {
 	}
 
 	if input == nil {
-		input = &DetectTextInput{}
+		input = &types.DetectTextInput{}
 	}
 
-	req := c.newRequest(op, input, &DetectTextOutput{})
+	req := c.newRequest(op, input, &types.DetectTextOutput{})
 	return DetectTextRequest{Request: req, Input: input, Copy: c.DetectTextRequest}
 }
 
@@ -122,8 +72,8 @@ func (c *Client) DetectTextRequest(input *DetectTextInput) DetectTextRequest {
 // DetectText API operation.
 type DetectTextRequest struct {
 	*aws.Request
-	Input *DetectTextInput
-	Copy  func(*DetectTextInput) DetectTextRequest
+	Input *types.DetectTextInput
+	Copy  func(*types.DetectTextInput) DetectTextRequest
 }
 
 // Send marshals and sends the DetectText API request.
@@ -135,7 +85,7 @@ func (r DetectTextRequest) Send(ctx context.Context) (*DetectTextResponse, error
 	}
 
 	resp := &DetectTextResponse{
-		DetectTextOutput: r.Request.Data.(*DetectTextOutput),
+		DetectTextOutput: r.Request.Data.(*types.DetectTextOutput),
 		response:         &aws.Response{Request: r.Request},
 	}
 
@@ -145,7 +95,7 @@ func (r DetectTextRequest) Send(ctx context.Context) (*DetectTextResponse, error
 // DetectTextResponse is the response type for the
 // DetectText API operation.
 type DetectTextResponse struct {
-	*DetectTextOutput
+	*types.DetectTextOutput
 
 	response *aws.Response
 }

@@ -6,124 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/batch/types"
 )
-
-type UpdateComputeEnvironmentInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name or full Amazon Resource Name (ARN) of the compute environment to
-	// update.
-	//
-	// ComputeEnvironment is a required field
-	ComputeEnvironment *string `locationName:"computeEnvironment" type:"string" required:"true"`
-
-	// Details of the compute resources managed by the compute environment. Required
-	// for a managed compute environment.
-	ComputeResources *ComputeResourceUpdate `locationName:"computeResources" type:"structure"`
-
-	// The full Amazon Resource Name (ARN) of the IAM role that allows AWS Batch
-	// to make calls to other AWS services on your behalf.
-	//
-	// If your specified role has a path other than /, then you must either specify
-	// the full role ARN (this is recommended) or prefix the role name with the
-	// path.
-	//
-	// Depending on how you created your AWS Batch service role, its ARN may contain
-	// the service-role path prefix. When you only specify the name of the service
-	// role, AWS Batch assumes that your ARN does not use the service-role path
-	// prefix. Because of this, we recommend that you specify the full ARN of your
-	// service role when you create compute environments.
-	ServiceRole *string `locationName:"serviceRole" type:"string"`
-
-	// The state of the compute environment. Compute environments in the ENABLED
-	// state can accept jobs from a queue and scale in or out automatically based
-	// on the workload demand of its associated queues.
-	State CEState `locationName:"state" type:"string" enum:"true"`
-}
-
-// String returns the string representation
-func (s UpdateComputeEnvironmentInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateComputeEnvironmentInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateComputeEnvironmentInput"}
-
-	if s.ComputeEnvironment == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ComputeEnvironment"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s UpdateComputeEnvironmentInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.ComputeEnvironment != nil {
-		v := *s.ComputeEnvironment
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "computeEnvironment", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.ComputeResources != nil {
-		v := s.ComputeResources
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "computeResources", v, metadata)
-	}
-	if s.ServiceRole != nil {
-		v := *s.ServiceRole
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "serviceRole", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if len(s.State) > 0 {
-		v := s.State
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "state", protocol.QuotedValue{ValueMarshaler: v}, metadata)
-	}
-	return nil
-}
-
-type UpdateComputeEnvironmentOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the compute environment.
-	ComputeEnvironmentArn *string `locationName:"computeEnvironmentArn" type:"string"`
-
-	// The name of the compute environment.
-	ComputeEnvironmentName *string `locationName:"computeEnvironmentName" type:"string"`
-}
-
-// String returns the string representation
-func (s UpdateComputeEnvironmentOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s UpdateComputeEnvironmentOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.ComputeEnvironmentArn != nil {
-		v := *s.ComputeEnvironmentArn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "computeEnvironmentArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.ComputeEnvironmentName != nil {
-		v := *s.ComputeEnvironmentName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "computeEnvironmentName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opUpdateComputeEnvironment = "UpdateComputeEnvironment"
 
@@ -140,7 +24,7 @@ const opUpdateComputeEnvironment = "UpdateComputeEnvironment"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/UpdateComputeEnvironment
-func (c *Client) UpdateComputeEnvironmentRequest(input *UpdateComputeEnvironmentInput) UpdateComputeEnvironmentRequest {
+func (c *Client) UpdateComputeEnvironmentRequest(input *types.UpdateComputeEnvironmentInput) UpdateComputeEnvironmentRequest {
 	op := &aws.Operation{
 		Name:       opUpdateComputeEnvironment,
 		HTTPMethod: "POST",
@@ -148,10 +32,10 @@ func (c *Client) UpdateComputeEnvironmentRequest(input *UpdateComputeEnvironment
 	}
 
 	if input == nil {
-		input = &UpdateComputeEnvironmentInput{}
+		input = &types.UpdateComputeEnvironmentInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateComputeEnvironmentOutput{})
+	req := c.newRequest(op, input, &types.UpdateComputeEnvironmentOutput{})
 	return UpdateComputeEnvironmentRequest{Request: req, Input: input, Copy: c.UpdateComputeEnvironmentRequest}
 }
 
@@ -159,8 +43,8 @@ func (c *Client) UpdateComputeEnvironmentRequest(input *UpdateComputeEnvironment
 // UpdateComputeEnvironment API operation.
 type UpdateComputeEnvironmentRequest struct {
 	*aws.Request
-	Input *UpdateComputeEnvironmentInput
-	Copy  func(*UpdateComputeEnvironmentInput) UpdateComputeEnvironmentRequest
+	Input *types.UpdateComputeEnvironmentInput
+	Copy  func(*types.UpdateComputeEnvironmentInput) UpdateComputeEnvironmentRequest
 }
 
 // Send marshals and sends the UpdateComputeEnvironment API request.
@@ -172,7 +56,7 @@ func (r UpdateComputeEnvironmentRequest) Send(ctx context.Context) (*UpdateCompu
 	}
 
 	resp := &UpdateComputeEnvironmentResponse{
-		UpdateComputeEnvironmentOutput: r.Request.Data.(*UpdateComputeEnvironmentOutput),
+		UpdateComputeEnvironmentOutput: r.Request.Data.(*types.UpdateComputeEnvironmentOutput),
 		response:                       &aws.Response{Request: r.Request},
 	}
 
@@ -182,7 +66,7 @@ func (r UpdateComputeEnvironmentRequest) Send(ctx context.Context) (*UpdateCompu
 // UpdateComputeEnvironmentResponse is the response type for the
 // UpdateComputeEnvironment API operation.
 type UpdateComputeEnvironmentResponse struct {
-	*UpdateComputeEnvironmentOutput
+	*types.UpdateComputeEnvironmentOutput
 
 	response *aws.Response
 }

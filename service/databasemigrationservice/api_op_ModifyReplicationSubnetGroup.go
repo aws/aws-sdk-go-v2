@@ -6,60 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/databasemigrationservice/types"
 )
-
-type ModifyReplicationSubnetGroupInput struct {
-	_ struct{} `type:"structure"`
-
-	// A description for the replication instance subnet group.
-	ReplicationSubnetGroupDescription *string `type:"string"`
-
-	// The name of the replication instance subnet group.
-	//
-	// ReplicationSubnetGroupIdentifier is a required field
-	ReplicationSubnetGroupIdentifier *string `type:"string" required:"true"`
-
-	// A list of subnet IDs.
-	//
-	// SubnetIds is a required field
-	SubnetIds []string `type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s ModifyReplicationSubnetGroupInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ModifyReplicationSubnetGroupInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ModifyReplicationSubnetGroupInput"}
-
-	if s.ReplicationSubnetGroupIdentifier == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ReplicationSubnetGroupIdentifier"))
-	}
-
-	if s.SubnetIds == nil {
-		invalidParams.Add(aws.NewErrParamRequired("SubnetIds"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ModifyReplicationSubnetGroupOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The modified replication subnet group.
-	ReplicationSubnetGroup *ReplicationSubnetGroup `type:"structure"`
-}
-
-// String returns the string representation
-func (s ModifyReplicationSubnetGroupOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opModifyReplicationSubnetGroup = "ModifyReplicationSubnetGroup"
 
@@ -76,7 +24,7 @@ const opModifyReplicationSubnetGroup = "ModifyReplicationSubnetGroup"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/ModifyReplicationSubnetGroup
-func (c *Client) ModifyReplicationSubnetGroupRequest(input *ModifyReplicationSubnetGroupInput) ModifyReplicationSubnetGroupRequest {
+func (c *Client) ModifyReplicationSubnetGroupRequest(input *types.ModifyReplicationSubnetGroupInput) ModifyReplicationSubnetGroupRequest {
 	op := &aws.Operation{
 		Name:       opModifyReplicationSubnetGroup,
 		HTTPMethod: "POST",
@@ -84,10 +32,10 @@ func (c *Client) ModifyReplicationSubnetGroupRequest(input *ModifyReplicationSub
 	}
 
 	if input == nil {
-		input = &ModifyReplicationSubnetGroupInput{}
+		input = &types.ModifyReplicationSubnetGroupInput{}
 	}
 
-	req := c.newRequest(op, input, &ModifyReplicationSubnetGroupOutput{})
+	req := c.newRequest(op, input, &types.ModifyReplicationSubnetGroupOutput{})
 	return ModifyReplicationSubnetGroupRequest{Request: req, Input: input, Copy: c.ModifyReplicationSubnetGroupRequest}
 }
 
@@ -95,8 +43,8 @@ func (c *Client) ModifyReplicationSubnetGroupRequest(input *ModifyReplicationSub
 // ModifyReplicationSubnetGroup API operation.
 type ModifyReplicationSubnetGroupRequest struct {
 	*aws.Request
-	Input *ModifyReplicationSubnetGroupInput
-	Copy  func(*ModifyReplicationSubnetGroupInput) ModifyReplicationSubnetGroupRequest
+	Input *types.ModifyReplicationSubnetGroupInput
+	Copy  func(*types.ModifyReplicationSubnetGroupInput) ModifyReplicationSubnetGroupRequest
 }
 
 // Send marshals and sends the ModifyReplicationSubnetGroup API request.
@@ -108,7 +56,7 @@ func (r ModifyReplicationSubnetGroupRequest) Send(ctx context.Context) (*ModifyR
 	}
 
 	resp := &ModifyReplicationSubnetGroupResponse{
-		ModifyReplicationSubnetGroupOutput: r.Request.Data.(*ModifyReplicationSubnetGroupOutput),
+		ModifyReplicationSubnetGroupOutput: r.Request.Data.(*types.ModifyReplicationSubnetGroupOutput),
 		response:                           &aws.Response{Request: r.Request},
 	}
 
@@ -118,7 +66,7 @@ func (r ModifyReplicationSubnetGroupRequest) Send(ctx context.Context) (*ModifyR
 // ModifyReplicationSubnetGroupResponse is the response type for the
 // ModifyReplicationSubnetGroup API operation.
 type ModifyReplicationSubnetGroupResponse struct {
-	*ModifyReplicationSubnetGroupOutput
+	*types.ModifyReplicationSubnetGroupOutput
 
 	response *aws.Response
 }

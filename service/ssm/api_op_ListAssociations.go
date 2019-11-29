@@ -4,71 +4,10 @@ package ssm
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ssm/types"
 )
-
-type ListAssociationsInput struct {
-	_ struct{} `type:"structure"`
-
-	// One or more filters. Use a filter to return a more specific list of results.
-	AssociationFilterList []AssociationFilter `min:"1" type:"list"`
-
-	// The maximum number of items to return for this call. The call also returns
-	// a token that you can specify in a subsequent call to get the next set of
-	// results.
-	MaxResults *int64 `min:"1" type:"integer"`
-
-	// The token for the next set of items to return. (You received this token from
-	// a previous call.)
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s ListAssociationsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListAssociationsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListAssociationsInput"}
-	if s.AssociationFilterList != nil && len(s.AssociationFilterList) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("AssociationFilterList", 1))
-	}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-	if s.AssociationFilterList != nil {
-		for i, v := range s.AssociationFilterList {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "AssociationFilterList", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ListAssociationsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The associations.
-	Associations []Association `type:"list"`
-
-	// The token to use when requesting the next set of items. If there are no additional
-	// items to return, the string is empty.
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s ListAssociationsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListAssociations = "ListAssociations"
 
@@ -85,7 +24,7 @@ const opListAssociations = "ListAssociations"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ListAssociations
-func (c *Client) ListAssociationsRequest(input *ListAssociationsInput) ListAssociationsRequest {
+func (c *Client) ListAssociationsRequest(input *types.ListAssociationsInput) ListAssociationsRequest {
 	op := &aws.Operation{
 		Name:       opListAssociations,
 		HTTPMethod: "POST",
@@ -99,10 +38,10 @@ func (c *Client) ListAssociationsRequest(input *ListAssociationsInput) ListAssoc
 	}
 
 	if input == nil {
-		input = &ListAssociationsInput{}
+		input = &types.ListAssociationsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListAssociationsOutput{})
+	req := c.newRequest(op, input, &types.ListAssociationsOutput{})
 	return ListAssociationsRequest{Request: req, Input: input, Copy: c.ListAssociationsRequest}
 }
 
@@ -110,8 +49,8 @@ func (c *Client) ListAssociationsRequest(input *ListAssociationsInput) ListAssoc
 // ListAssociations API operation.
 type ListAssociationsRequest struct {
 	*aws.Request
-	Input *ListAssociationsInput
-	Copy  func(*ListAssociationsInput) ListAssociationsRequest
+	Input *types.ListAssociationsInput
+	Copy  func(*types.ListAssociationsInput) ListAssociationsRequest
 }
 
 // Send marshals and sends the ListAssociations API request.
@@ -123,7 +62,7 @@ func (r ListAssociationsRequest) Send(ctx context.Context) (*ListAssociationsRes
 	}
 
 	resp := &ListAssociationsResponse{
-		ListAssociationsOutput: r.Request.Data.(*ListAssociationsOutput),
+		ListAssociationsOutput: r.Request.Data.(*types.ListAssociationsOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -153,7 +92,7 @@ func NewListAssociationsPaginator(req ListAssociationsRequest) ListAssociationsP
 	return ListAssociationsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListAssociationsInput
+				var inCpy *types.ListAssociationsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -173,14 +112,14 @@ type ListAssociationsPaginator struct {
 	aws.Pager
 }
 
-func (p *ListAssociationsPaginator) CurrentPage() *ListAssociationsOutput {
-	return p.Pager.CurrentPage().(*ListAssociationsOutput)
+func (p *ListAssociationsPaginator) CurrentPage() *types.ListAssociationsOutput {
+	return p.Pager.CurrentPage().(*types.ListAssociationsOutput)
 }
 
 // ListAssociationsResponse is the response type for the
 // ListAssociations API operation.
 type ListAssociationsResponse struct {
-	*ListAssociationsOutput
+	*types.ListAssociationsOutput
 
 	response *aws.Response
 }

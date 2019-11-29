@@ -6,84 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/acm/types"
 )
-
-type ImportCertificateInput struct {
-	_ struct{} `type:"structure"`
-
-	// The certificate to import.
-	//
-	// Certificate is automatically base64 encoded/decoded by the SDK.
-	//
-	// Certificate is a required field
-	Certificate []byte `min:"1" type:"blob" required:"true"`
-
-	// The Amazon Resource Name (ARN) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
-	// of an imported certificate to replace. To import a new certificate, omit
-	// this field.
-	CertificateArn *string `min:"20" type:"string"`
-
-	// The PEM encoded certificate chain.
-	//
-	// CertificateChain is automatically base64 encoded/decoded by the SDK.
-	CertificateChain []byte `min:"1" type:"blob"`
-
-	// The private key that matches the public key in the certificate.
-	//
-	// PrivateKey is automatically base64 encoded/decoded by the SDK.
-	//
-	// PrivateKey is a required field
-	PrivateKey []byte `min:"1" type:"blob" required:"true" sensitive:"true"`
-}
-
-// String returns the string representation
-func (s ImportCertificateInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ImportCertificateInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ImportCertificateInput"}
-
-	if s.Certificate == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Certificate"))
-	}
-	if s.Certificate != nil && len(s.Certificate) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Certificate", 1))
-	}
-	if s.CertificateArn != nil && len(*s.CertificateArn) < 20 {
-		invalidParams.Add(aws.NewErrParamMinLen("CertificateArn", 20))
-	}
-	if s.CertificateChain != nil && len(s.CertificateChain) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("CertificateChain", 1))
-	}
-
-	if s.PrivateKey == nil {
-		invalidParams.Add(aws.NewErrParamRequired("PrivateKey"))
-	}
-	if s.PrivateKey != nil && len(s.PrivateKey) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("PrivateKey", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ImportCertificateOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
-	// of the imported certificate.
-	CertificateArn *string `min:"20" type:"string"`
-}
-
-// String returns the string representation
-func (s ImportCertificateOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opImportCertificate = "ImportCertificate"
 
@@ -150,7 +74,7 @@ const opImportCertificate = "ImportCertificate"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/ImportCertificate
-func (c *Client) ImportCertificateRequest(input *ImportCertificateInput) ImportCertificateRequest {
+func (c *Client) ImportCertificateRequest(input *types.ImportCertificateInput) ImportCertificateRequest {
 	op := &aws.Operation{
 		Name:       opImportCertificate,
 		HTTPMethod: "POST",
@@ -158,10 +82,10 @@ func (c *Client) ImportCertificateRequest(input *ImportCertificateInput) ImportC
 	}
 
 	if input == nil {
-		input = &ImportCertificateInput{}
+		input = &types.ImportCertificateInput{}
 	}
 
-	req := c.newRequest(op, input, &ImportCertificateOutput{})
+	req := c.newRequest(op, input, &types.ImportCertificateOutput{})
 	return ImportCertificateRequest{Request: req, Input: input, Copy: c.ImportCertificateRequest}
 }
 
@@ -169,8 +93,8 @@ func (c *Client) ImportCertificateRequest(input *ImportCertificateInput) ImportC
 // ImportCertificate API operation.
 type ImportCertificateRequest struct {
 	*aws.Request
-	Input *ImportCertificateInput
-	Copy  func(*ImportCertificateInput) ImportCertificateRequest
+	Input *types.ImportCertificateInput
+	Copy  func(*types.ImportCertificateInput) ImportCertificateRequest
 }
 
 // Send marshals and sends the ImportCertificate API request.
@@ -182,7 +106,7 @@ func (r ImportCertificateRequest) Send(ctx context.Context) (*ImportCertificateR
 	}
 
 	resp := &ImportCertificateResponse{
-		ImportCertificateOutput: r.Request.Data.(*ImportCertificateOutput),
+		ImportCertificateOutput: r.Request.Data.(*types.ImportCertificateOutput),
 		response:                &aws.Response{Request: r.Request},
 	}
 
@@ -192,7 +116,7 @@ func (r ImportCertificateRequest) Send(ctx context.Context) (*ImportCertificateR
 // ImportCertificateResponse is the response type for the
 // ImportCertificate API operation.
 type ImportCertificateResponse struct {
-	*ImportCertificateOutput
+	*types.ImportCertificateOutput
 
 	response *aws.Response
 }

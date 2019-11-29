@@ -6,67 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/robomaker/types"
 )
-
-type RestartSimulationJobInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the simulation job.
-	//
-	// Job is a required field
-	Job *string `locationName:"job" min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s RestartSimulationJobInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *RestartSimulationJobInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "RestartSimulationJobInput"}
-
-	if s.Job == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Job"))
-	}
-	if s.Job != nil && len(*s.Job) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Job", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s RestartSimulationJobInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.Job != nil {
-		v := *s.Job
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "job", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type RestartSimulationJobOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s RestartSimulationJobOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s RestartSimulationJobOutput) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
 
 const opRestartSimulationJob = "RestartSimulationJob"
 
@@ -83,7 +24,7 @@ const opRestartSimulationJob = "RestartSimulationJob"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/RestartSimulationJob
-func (c *Client) RestartSimulationJobRequest(input *RestartSimulationJobInput) RestartSimulationJobRequest {
+func (c *Client) RestartSimulationJobRequest(input *types.RestartSimulationJobInput) RestartSimulationJobRequest {
 	op := &aws.Operation{
 		Name:       opRestartSimulationJob,
 		HTTPMethod: "POST",
@@ -91,10 +32,10 @@ func (c *Client) RestartSimulationJobRequest(input *RestartSimulationJobInput) R
 	}
 
 	if input == nil {
-		input = &RestartSimulationJobInput{}
+		input = &types.RestartSimulationJobInput{}
 	}
 
-	req := c.newRequest(op, input, &RestartSimulationJobOutput{})
+	req := c.newRequest(op, input, &types.RestartSimulationJobOutput{})
 	return RestartSimulationJobRequest{Request: req, Input: input, Copy: c.RestartSimulationJobRequest}
 }
 
@@ -102,8 +43,8 @@ func (c *Client) RestartSimulationJobRequest(input *RestartSimulationJobInput) R
 // RestartSimulationJob API operation.
 type RestartSimulationJobRequest struct {
 	*aws.Request
-	Input *RestartSimulationJobInput
-	Copy  func(*RestartSimulationJobInput) RestartSimulationJobRequest
+	Input *types.RestartSimulationJobInput
+	Copy  func(*types.RestartSimulationJobInput) RestartSimulationJobRequest
 }
 
 // Send marshals and sends the RestartSimulationJob API request.
@@ -115,7 +56,7 @@ func (r RestartSimulationJobRequest) Send(ctx context.Context) (*RestartSimulati
 	}
 
 	resp := &RestartSimulationJobResponse{
-		RestartSimulationJobOutput: r.Request.Data.(*RestartSimulationJobOutput),
+		RestartSimulationJobOutput: r.Request.Data.(*types.RestartSimulationJobOutput),
 		response:                   &aws.Response{Request: r.Request},
 	}
 
@@ -125,7 +66,7 @@ func (r RestartSimulationJobRequest) Send(ctx context.Context) (*RestartSimulati
 // RestartSimulationJobResponse is the response type for the
 // RestartSimulationJob API operation.
 type RestartSimulationJobResponse struct {
-	*RestartSimulationJobOutput
+	*types.RestartSimulationJobOutput
 
 	response *aws.Response
 }

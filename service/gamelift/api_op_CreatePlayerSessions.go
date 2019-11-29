@@ -6,71 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/gamelift/types"
 )
-
-// Represents the input for a request action.
-type CreatePlayerSessionsInput struct {
-	_ struct{} `type:"structure"`
-
-	// Unique identifier for the game session to add players to.
-	//
-	// GameSessionId is a required field
-	GameSessionId *string `min:"1" type:"string" required:"true"`
-
-	// Map of string pairs, each specifying a player ID and a set of developer-defined
-	// information related to the player. Amazon GameLift does not use this data,
-	// so it can be formatted as needed for use in the game. Player data strings
-	// for player IDs not included in the PlayerIds parameter are ignored.
-	PlayerDataMap map[string]string `type:"map"`
-
-	// List of unique identifiers for the players to be added.
-	//
-	// PlayerIds is a required field
-	PlayerIds []string `min:"1" type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s CreatePlayerSessionsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreatePlayerSessionsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreatePlayerSessionsInput"}
-
-	if s.GameSessionId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("GameSessionId"))
-	}
-	if s.GameSessionId != nil && len(*s.GameSessionId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("GameSessionId", 1))
-	}
-
-	if s.PlayerIds == nil {
-		invalidParams.Add(aws.NewErrParamRequired("PlayerIds"))
-	}
-	if s.PlayerIds != nil && len(s.PlayerIds) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("PlayerIds", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Represents the returned data in response to a request action.
-type CreatePlayerSessionsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Collection of player session objects created for the added players.
-	PlayerSessions []PlayerSession `type:"list"`
-}
-
-// String returns the string representation
-func (s CreatePlayerSessionsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCreatePlayerSessions = "CreatePlayerSessions"
 
@@ -109,7 +46,7 @@ const opCreatePlayerSessions = "CreatePlayerSessions"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/CreatePlayerSessions
-func (c *Client) CreatePlayerSessionsRequest(input *CreatePlayerSessionsInput) CreatePlayerSessionsRequest {
+func (c *Client) CreatePlayerSessionsRequest(input *types.CreatePlayerSessionsInput) CreatePlayerSessionsRequest {
 	op := &aws.Operation{
 		Name:       opCreatePlayerSessions,
 		HTTPMethod: "POST",
@@ -117,10 +54,10 @@ func (c *Client) CreatePlayerSessionsRequest(input *CreatePlayerSessionsInput) C
 	}
 
 	if input == nil {
-		input = &CreatePlayerSessionsInput{}
+		input = &types.CreatePlayerSessionsInput{}
 	}
 
-	req := c.newRequest(op, input, &CreatePlayerSessionsOutput{})
+	req := c.newRequest(op, input, &types.CreatePlayerSessionsOutput{})
 	return CreatePlayerSessionsRequest{Request: req, Input: input, Copy: c.CreatePlayerSessionsRequest}
 }
 
@@ -128,8 +65,8 @@ func (c *Client) CreatePlayerSessionsRequest(input *CreatePlayerSessionsInput) C
 // CreatePlayerSessions API operation.
 type CreatePlayerSessionsRequest struct {
 	*aws.Request
-	Input *CreatePlayerSessionsInput
-	Copy  func(*CreatePlayerSessionsInput) CreatePlayerSessionsRequest
+	Input *types.CreatePlayerSessionsInput
+	Copy  func(*types.CreatePlayerSessionsInput) CreatePlayerSessionsRequest
 }
 
 // Send marshals and sends the CreatePlayerSessions API request.
@@ -141,7 +78,7 @@ func (r CreatePlayerSessionsRequest) Send(ctx context.Context) (*CreatePlayerSes
 	}
 
 	resp := &CreatePlayerSessionsResponse{
-		CreatePlayerSessionsOutput: r.Request.Data.(*CreatePlayerSessionsOutput),
+		CreatePlayerSessionsOutput: r.Request.Data.(*types.CreatePlayerSessionsOutput),
 		response:                   &aws.Response{Request: r.Request},
 	}
 
@@ -151,7 +88,7 @@ func (r CreatePlayerSessionsRequest) Send(ctx context.Context) (*CreatePlayerSes
 // CreatePlayerSessionsResponse is the response type for the
 // CreatePlayerSessions API operation.
 type CreatePlayerSessionsResponse struct {
-	*CreatePlayerSessionsOutput
+	*types.CreatePlayerSessionsOutput
 
 	response *aws.Response
 }

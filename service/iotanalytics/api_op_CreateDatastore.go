@@ -4,153 +4,10 @@ package iotanalytics
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/iotanalytics/types"
 )
-
-type CreateDatastoreInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the data store.
-	//
-	// DatastoreName is a required field
-	DatastoreName *string `locationName:"datastoreName" min:"1" type:"string" required:"true"`
-
-	// Where data store data is stored. You may choose one of "serviceManagedS3"
-	// or "customerManagedS3" storage. If not specified, the default is "serviceManagedS3".
-	// This cannot be changed after the data store is created.
-	DatastoreStorage *DatastoreStorage `locationName:"datastoreStorage" type:"structure"`
-
-	// How long, in days, message data is kept for the data store. When "customerManagedS3"
-	// storage is selected, this parameter is ignored.
-	RetentionPeriod *RetentionPeriod `locationName:"retentionPeriod" type:"structure"`
-
-	// Metadata which can be used to manage the data store.
-	Tags []Tag `locationName:"tags" min:"1" type:"list"`
-}
-
-// String returns the string representation
-func (s CreateDatastoreInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateDatastoreInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateDatastoreInput"}
-
-	if s.DatastoreName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DatastoreName"))
-	}
-	if s.DatastoreName != nil && len(*s.DatastoreName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("DatastoreName", 1))
-	}
-	if s.Tags != nil && len(s.Tags) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Tags", 1))
-	}
-	if s.DatastoreStorage != nil {
-		if err := s.DatastoreStorage.Validate(); err != nil {
-			invalidParams.AddNested("DatastoreStorage", err.(aws.ErrInvalidParams))
-		}
-	}
-	if s.RetentionPeriod != nil {
-		if err := s.RetentionPeriod.Validate(); err != nil {
-			invalidParams.AddNested("RetentionPeriod", err.(aws.ErrInvalidParams))
-		}
-	}
-	if s.Tags != nil {
-		for i, v := range s.Tags {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s CreateDatastoreInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.DatastoreName != nil {
-		v := *s.DatastoreName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "datastoreName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.DatastoreStorage != nil {
-		v := s.DatastoreStorage
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "datastoreStorage", v, metadata)
-	}
-	if s.RetentionPeriod != nil {
-		v := s.RetentionPeriod
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "retentionPeriod", v, metadata)
-	}
-	if s.Tags != nil {
-		v := s.Tags
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "tags", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	return nil
-}
-
-type CreateDatastoreOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The ARN of the data store.
-	DatastoreArn *string `locationName:"datastoreArn" type:"string"`
-
-	// The name of the data store.
-	DatastoreName *string `locationName:"datastoreName" min:"1" type:"string"`
-
-	// How long, in days, message data is kept for the data store.
-	RetentionPeriod *RetentionPeriod `locationName:"retentionPeriod" type:"structure"`
-}
-
-// String returns the string representation
-func (s CreateDatastoreOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s CreateDatastoreOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.DatastoreArn != nil {
-		v := *s.DatastoreArn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "datastoreArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.DatastoreName != nil {
-		v := *s.DatastoreName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "datastoreName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.RetentionPeriod != nil {
-		v := s.RetentionPeriod
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "retentionPeriod", v, metadata)
-	}
-	return nil
-}
 
 const opCreateDatastore = "CreateDatastore"
 
@@ -167,7 +24,7 @@ const opCreateDatastore = "CreateDatastore"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iotanalytics-2017-11-27/CreateDatastore
-func (c *Client) CreateDatastoreRequest(input *CreateDatastoreInput) CreateDatastoreRequest {
+func (c *Client) CreateDatastoreRequest(input *types.CreateDatastoreInput) CreateDatastoreRequest {
 	op := &aws.Operation{
 		Name:       opCreateDatastore,
 		HTTPMethod: "POST",
@@ -175,10 +32,10 @@ func (c *Client) CreateDatastoreRequest(input *CreateDatastoreInput) CreateDatas
 	}
 
 	if input == nil {
-		input = &CreateDatastoreInput{}
+		input = &types.CreateDatastoreInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateDatastoreOutput{})
+	req := c.newRequest(op, input, &types.CreateDatastoreOutput{})
 	return CreateDatastoreRequest{Request: req, Input: input, Copy: c.CreateDatastoreRequest}
 }
 
@@ -186,8 +43,8 @@ func (c *Client) CreateDatastoreRequest(input *CreateDatastoreInput) CreateDatas
 // CreateDatastore API operation.
 type CreateDatastoreRequest struct {
 	*aws.Request
-	Input *CreateDatastoreInput
-	Copy  func(*CreateDatastoreInput) CreateDatastoreRequest
+	Input *types.CreateDatastoreInput
+	Copy  func(*types.CreateDatastoreInput) CreateDatastoreRequest
 }
 
 // Send marshals and sends the CreateDatastore API request.
@@ -199,7 +56,7 @@ func (r CreateDatastoreRequest) Send(ctx context.Context) (*CreateDatastoreRespo
 	}
 
 	resp := &CreateDatastoreResponse{
-		CreateDatastoreOutput: r.Request.Data.(*CreateDatastoreOutput),
+		CreateDatastoreOutput: r.Request.Data.(*types.CreateDatastoreOutput),
 		response:              &aws.Response{Request: r.Request},
 	}
 
@@ -209,7 +66,7 @@ func (r CreateDatastoreRequest) Send(ctx context.Context) (*CreateDatastoreRespo
 // CreateDatastoreResponse is the response type for the
 // CreateDatastore API operation.
 type CreateDatastoreResponse struct {
-	*CreateDatastoreOutput
+	*types.CreateDatastoreOutput
 
 	response *aws.Response
 }

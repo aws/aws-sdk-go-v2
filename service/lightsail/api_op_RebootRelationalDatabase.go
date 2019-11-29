@@ -6,48 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/lightsail/types"
 )
-
-type RebootRelationalDatabaseInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of your database to reboot.
-	//
-	// RelationalDatabaseName is a required field
-	RelationalDatabaseName *string `locationName:"relationalDatabaseName" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s RebootRelationalDatabaseInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *RebootRelationalDatabaseInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "RebootRelationalDatabaseInput"}
-
-	if s.RelationalDatabaseName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("RelationalDatabaseName"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type RebootRelationalDatabaseOutput struct {
-	_ struct{} `type:"structure"`
-
-	// An object describing the result of your reboot relational database request.
-	Operations []Operation `locationName:"operations" type:"list"`
-}
-
-// String returns the string representation
-func (s RebootRelationalDatabaseOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opRebootRelationalDatabase = "RebootRelationalDatabase"
 
@@ -68,7 +28,7 @@ const opRebootRelationalDatabase = "RebootRelationalDatabase"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/RebootRelationalDatabase
-func (c *Client) RebootRelationalDatabaseRequest(input *RebootRelationalDatabaseInput) RebootRelationalDatabaseRequest {
+func (c *Client) RebootRelationalDatabaseRequest(input *types.RebootRelationalDatabaseInput) RebootRelationalDatabaseRequest {
 	op := &aws.Operation{
 		Name:       opRebootRelationalDatabase,
 		HTTPMethod: "POST",
@@ -76,10 +36,10 @@ func (c *Client) RebootRelationalDatabaseRequest(input *RebootRelationalDatabase
 	}
 
 	if input == nil {
-		input = &RebootRelationalDatabaseInput{}
+		input = &types.RebootRelationalDatabaseInput{}
 	}
 
-	req := c.newRequest(op, input, &RebootRelationalDatabaseOutput{})
+	req := c.newRequest(op, input, &types.RebootRelationalDatabaseOutput{})
 	return RebootRelationalDatabaseRequest{Request: req, Input: input, Copy: c.RebootRelationalDatabaseRequest}
 }
 
@@ -87,8 +47,8 @@ func (c *Client) RebootRelationalDatabaseRequest(input *RebootRelationalDatabase
 // RebootRelationalDatabase API operation.
 type RebootRelationalDatabaseRequest struct {
 	*aws.Request
-	Input *RebootRelationalDatabaseInput
-	Copy  func(*RebootRelationalDatabaseInput) RebootRelationalDatabaseRequest
+	Input *types.RebootRelationalDatabaseInput
+	Copy  func(*types.RebootRelationalDatabaseInput) RebootRelationalDatabaseRequest
 }
 
 // Send marshals and sends the RebootRelationalDatabase API request.
@@ -100,7 +60,7 @@ func (r RebootRelationalDatabaseRequest) Send(ctx context.Context) (*RebootRelat
 	}
 
 	resp := &RebootRelationalDatabaseResponse{
-		RebootRelationalDatabaseOutput: r.Request.Data.(*RebootRelationalDatabaseOutput),
+		RebootRelationalDatabaseOutput: r.Request.Data.(*types.RebootRelationalDatabaseOutput),
 		response:                       &aws.Response{Request: r.Request},
 	}
 
@@ -110,7 +70,7 @@ func (r RebootRelationalDatabaseRequest) Send(ctx context.Context) (*RebootRelat
 // RebootRelationalDatabaseResponse is the response type for the
 // RebootRelationalDatabase API operation.
 type RebootRelationalDatabaseResponse struct {
-	*RebootRelationalDatabaseOutput
+	*types.RebootRelationalDatabaseOutput
 
 	response *aws.Response
 }

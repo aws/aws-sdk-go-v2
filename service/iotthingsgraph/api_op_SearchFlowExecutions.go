@@ -4,74 +4,10 @@ package iotthingsgraph
 
 import (
 	"context"
-	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/iotthingsgraph/types"
 )
-
-type SearchFlowExecutionsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The date and time of the latest flow execution to return.
-	EndTime *time.Time `locationName:"endTime" type:"timestamp"`
-
-	// The ID of a flow execution.
-	FlowExecutionId *string `locationName:"flowExecutionId" type:"string"`
-
-	// The maximum number of results to return in the response.
-	MaxResults *int64 `locationName:"maxResults" min:"1" type:"integer"`
-
-	// The string that specifies the next page of results. Use this when you're
-	// paginating results.
-	NextToken *string `locationName:"nextToken" type:"string"`
-
-	// The date and time of the earliest flow execution to return.
-	StartTime *time.Time `locationName:"startTime" type:"timestamp"`
-
-	// The ID of the system instance that contains the flow.
-	//
-	// SystemInstanceId is a required field
-	SystemInstanceId *string `locationName:"systemInstanceId" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s SearchFlowExecutionsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *SearchFlowExecutionsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "SearchFlowExecutionsInput"}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-
-	if s.SystemInstanceId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("SystemInstanceId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type SearchFlowExecutionsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The string to specify as nextToken when you request the next page of results.
-	NextToken *string `locationName:"nextToken" type:"string"`
-
-	// An array of objects that contain summary information about each workflow
-	// execution in the result set.
-	Summaries []FlowExecutionSummary `locationName:"summaries" type:"list"`
-}
-
-// String returns the string representation
-func (s SearchFlowExecutionsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opSearchFlowExecutions = "SearchFlowExecutions"
 
@@ -88,7 +24,7 @@ const opSearchFlowExecutions = "SearchFlowExecutions"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iotthingsgraph-2018-09-06/SearchFlowExecutions
-func (c *Client) SearchFlowExecutionsRequest(input *SearchFlowExecutionsInput) SearchFlowExecutionsRequest {
+func (c *Client) SearchFlowExecutionsRequest(input *types.SearchFlowExecutionsInput) SearchFlowExecutionsRequest {
 	op := &aws.Operation{
 		Name:       opSearchFlowExecutions,
 		HTTPMethod: "POST",
@@ -102,10 +38,10 @@ func (c *Client) SearchFlowExecutionsRequest(input *SearchFlowExecutionsInput) S
 	}
 
 	if input == nil {
-		input = &SearchFlowExecutionsInput{}
+		input = &types.SearchFlowExecutionsInput{}
 	}
 
-	req := c.newRequest(op, input, &SearchFlowExecutionsOutput{})
+	req := c.newRequest(op, input, &types.SearchFlowExecutionsOutput{})
 	return SearchFlowExecutionsRequest{Request: req, Input: input, Copy: c.SearchFlowExecutionsRequest}
 }
 
@@ -113,8 +49,8 @@ func (c *Client) SearchFlowExecutionsRequest(input *SearchFlowExecutionsInput) S
 // SearchFlowExecutions API operation.
 type SearchFlowExecutionsRequest struct {
 	*aws.Request
-	Input *SearchFlowExecutionsInput
-	Copy  func(*SearchFlowExecutionsInput) SearchFlowExecutionsRequest
+	Input *types.SearchFlowExecutionsInput
+	Copy  func(*types.SearchFlowExecutionsInput) SearchFlowExecutionsRequest
 }
 
 // Send marshals and sends the SearchFlowExecutions API request.
@@ -126,7 +62,7 @@ func (r SearchFlowExecutionsRequest) Send(ctx context.Context) (*SearchFlowExecu
 	}
 
 	resp := &SearchFlowExecutionsResponse{
-		SearchFlowExecutionsOutput: r.Request.Data.(*SearchFlowExecutionsOutput),
+		SearchFlowExecutionsOutput: r.Request.Data.(*types.SearchFlowExecutionsOutput),
 		response:                   &aws.Response{Request: r.Request},
 	}
 
@@ -156,7 +92,7 @@ func NewSearchFlowExecutionsPaginator(req SearchFlowExecutionsRequest) SearchFlo
 	return SearchFlowExecutionsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *SearchFlowExecutionsInput
+				var inCpy *types.SearchFlowExecutionsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -176,14 +112,14 @@ type SearchFlowExecutionsPaginator struct {
 	aws.Pager
 }
 
-func (p *SearchFlowExecutionsPaginator) CurrentPage() *SearchFlowExecutionsOutput {
-	return p.Pager.CurrentPage().(*SearchFlowExecutionsOutput)
+func (p *SearchFlowExecutionsPaginator) CurrentPage() *types.SearchFlowExecutionsOutput {
+	return p.Pager.CurrentPage().(*types.SearchFlowExecutionsOutput)
 }
 
 // SearchFlowExecutionsResponse is the response type for the
 // SearchFlowExecutions API operation.
 type SearchFlowExecutionsResponse struct {
-	*SearchFlowExecutionsOutput
+	*types.SearchFlowExecutionsOutput
 
 	response *aws.Response
 }

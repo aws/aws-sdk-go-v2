@@ -6,35 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-type ResetEbsDefaultKmsKeyIdInput struct {
-	_ struct{} `type:"structure"`
-
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have
-	// the required permissions, the error response is DryRunOperation. Otherwise,
-	// it is UnauthorizedOperation.
-	DryRun *bool `type:"boolean"`
-}
-
-// String returns the string representation
-func (s ResetEbsDefaultKmsKeyIdInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type ResetEbsDefaultKmsKeyIdOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the default CMK for EBS encryption by default.
-	KmsKeyId *string `locationName:"kmsKeyId" type:"string"`
-}
-
-// String returns the string representation
-func (s ResetEbsDefaultKmsKeyIdOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opResetEbsDefaultKmsKeyId = "ResetEbsDefaultKmsKeyId"
 
@@ -57,7 +30,7 @@ const opResetEbsDefaultKmsKeyId = "ResetEbsDefaultKmsKeyId"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ResetEbsDefaultKmsKeyId
-func (c *Client) ResetEbsDefaultKmsKeyIdRequest(input *ResetEbsDefaultKmsKeyIdInput) ResetEbsDefaultKmsKeyIdRequest {
+func (c *Client) ResetEbsDefaultKmsKeyIdRequest(input *types.ResetEbsDefaultKmsKeyIdInput) ResetEbsDefaultKmsKeyIdRequest {
 	op := &aws.Operation{
 		Name:       opResetEbsDefaultKmsKeyId,
 		HTTPMethod: "POST",
@@ -65,10 +38,10 @@ func (c *Client) ResetEbsDefaultKmsKeyIdRequest(input *ResetEbsDefaultKmsKeyIdIn
 	}
 
 	if input == nil {
-		input = &ResetEbsDefaultKmsKeyIdInput{}
+		input = &types.ResetEbsDefaultKmsKeyIdInput{}
 	}
 
-	req := c.newRequest(op, input, &ResetEbsDefaultKmsKeyIdOutput{})
+	req := c.newRequest(op, input, &types.ResetEbsDefaultKmsKeyIdOutput{})
 	return ResetEbsDefaultKmsKeyIdRequest{Request: req, Input: input, Copy: c.ResetEbsDefaultKmsKeyIdRequest}
 }
 
@@ -76,8 +49,8 @@ func (c *Client) ResetEbsDefaultKmsKeyIdRequest(input *ResetEbsDefaultKmsKeyIdIn
 // ResetEbsDefaultKmsKeyId API operation.
 type ResetEbsDefaultKmsKeyIdRequest struct {
 	*aws.Request
-	Input *ResetEbsDefaultKmsKeyIdInput
-	Copy  func(*ResetEbsDefaultKmsKeyIdInput) ResetEbsDefaultKmsKeyIdRequest
+	Input *types.ResetEbsDefaultKmsKeyIdInput
+	Copy  func(*types.ResetEbsDefaultKmsKeyIdInput) ResetEbsDefaultKmsKeyIdRequest
 }
 
 // Send marshals and sends the ResetEbsDefaultKmsKeyId API request.
@@ -89,7 +62,7 @@ func (r ResetEbsDefaultKmsKeyIdRequest) Send(ctx context.Context) (*ResetEbsDefa
 	}
 
 	resp := &ResetEbsDefaultKmsKeyIdResponse{
-		ResetEbsDefaultKmsKeyIdOutput: r.Request.Data.(*ResetEbsDefaultKmsKeyIdOutput),
+		ResetEbsDefaultKmsKeyIdOutput: r.Request.Data.(*types.ResetEbsDefaultKmsKeyIdOutput),
 		response:                      &aws.Response{Request: r.Request},
 	}
 
@@ -99,7 +72,7 @@ func (r ResetEbsDefaultKmsKeyIdRequest) Send(ctx context.Context) (*ResetEbsDefa
 // ResetEbsDefaultKmsKeyIdResponse is the response type for the
 // ResetEbsDefaultKmsKeyId API operation.
 type ResetEbsDefaultKmsKeyIdResponse struct {
-	*ResetEbsDefaultKmsKeyIdOutput
+	*types.ResetEbsDefaultKmsKeyIdOutput
 
 	response *aws.Response
 }

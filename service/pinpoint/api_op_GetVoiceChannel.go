@@ -6,74 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/pinpoint/types"
 )
-
-type GetVoiceChannelInput struct {
-	_ struct{} `type:"structure"`
-
-	// ApplicationId is a required field
-	ApplicationId *string `location:"uri" locationName:"application-id" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetVoiceChannelInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetVoiceChannelInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetVoiceChannelInput"}
-
-	if s.ApplicationId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ApplicationId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetVoiceChannelInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.ApplicationId != nil {
-		v := *s.ApplicationId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "application-id", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type GetVoiceChannelOutput struct {
-	_ struct{} `type:"structure" payload:"VoiceChannelResponse"`
-
-	// Provides information about the status and settings of the voice channel for
-	// an application.
-	//
-	// VoiceChannelResponse is a required field
-	VoiceChannelResponse *VoiceChannelResponse `type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s GetVoiceChannelOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetVoiceChannelOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.VoiceChannelResponse != nil {
-		v := s.VoiceChannelResponse
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.PayloadTarget, "VoiceChannelResponse", v, metadata)
-	}
-	return nil
-}
 
 const opGetVoiceChannel = "GetVoiceChannel"
 
@@ -91,7 +25,7 @@ const opGetVoiceChannel = "GetVoiceChannel"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetVoiceChannel
-func (c *Client) GetVoiceChannelRequest(input *GetVoiceChannelInput) GetVoiceChannelRequest {
+func (c *Client) GetVoiceChannelRequest(input *types.GetVoiceChannelInput) GetVoiceChannelRequest {
 	op := &aws.Operation{
 		Name:       opGetVoiceChannel,
 		HTTPMethod: "GET",
@@ -99,10 +33,10 @@ func (c *Client) GetVoiceChannelRequest(input *GetVoiceChannelInput) GetVoiceCha
 	}
 
 	if input == nil {
-		input = &GetVoiceChannelInput{}
+		input = &types.GetVoiceChannelInput{}
 	}
 
-	req := c.newRequest(op, input, &GetVoiceChannelOutput{})
+	req := c.newRequest(op, input, &types.GetVoiceChannelOutput{})
 	return GetVoiceChannelRequest{Request: req, Input: input, Copy: c.GetVoiceChannelRequest}
 }
 
@@ -110,8 +44,8 @@ func (c *Client) GetVoiceChannelRequest(input *GetVoiceChannelInput) GetVoiceCha
 // GetVoiceChannel API operation.
 type GetVoiceChannelRequest struct {
 	*aws.Request
-	Input *GetVoiceChannelInput
-	Copy  func(*GetVoiceChannelInput) GetVoiceChannelRequest
+	Input *types.GetVoiceChannelInput
+	Copy  func(*types.GetVoiceChannelInput) GetVoiceChannelRequest
 }
 
 // Send marshals and sends the GetVoiceChannel API request.
@@ -123,7 +57,7 @@ func (r GetVoiceChannelRequest) Send(ctx context.Context) (*GetVoiceChannelRespo
 	}
 
 	resp := &GetVoiceChannelResponse{
-		GetVoiceChannelOutput: r.Request.Data.(*GetVoiceChannelOutput),
+		GetVoiceChannelOutput: r.Request.Data.(*types.GetVoiceChannelOutput),
 		response:              &aws.Response{Request: r.Request},
 	}
 
@@ -133,7 +67,7 @@ func (r GetVoiceChannelRequest) Send(ctx context.Context) (*GetVoiceChannelRespo
 // GetVoiceChannelResponse is the response type for the
 // GetVoiceChannel API operation.
 type GetVoiceChannelResponse struct {
-	*GetVoiceChannelOutput
+	*types.GetVoiceChannelOutput
 
 	response *aws.Response
 }

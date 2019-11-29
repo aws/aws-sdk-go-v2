@@ -6,68 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/mediastoredata/types"
 )
-
-type DeleteObjectInput struct {
-	_ struct{} `type:"structure"`
-
-	// The path (including the file name) where the object is stored in the container.
-	// Format: <folder name>/<folder name>/<file name>
-	//
-	// Path is a required field
-	Path *string `location:"uri" locationName:"Path" min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteObjectInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteObjectInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteObjectInput"}
-
-	if s.Path == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Path"))
-	}
-	if s.Path != nil && len(*s.Path) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Path", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteObjectInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.Path != nil {
-		v := *s.Path
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "Path", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type DeleteObjectOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteObjectOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteObjectOutput) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
 
 const opDeleteObject = "DeleteObject"
 
@@ -84,7 +24,7 @@ const opDeleteObject = "DeleteObject"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mediastore-data-2017-09-01/DeleteObject
-func (c *Client) DeleteObjectRequest(input *DeleteObjectInput) DeleteObjectRequest {
+func (c *Client) DeleteObjectRequest(input *types.DeleteObjectInput) DeleteObjectRequest {
 	op := &aws.Operation{
 		Name:       opDeleteObject,
 		HTTPMethod: "DELETE",
@@ -92,10 +32,10 @@ func (c *Client) DeleteObjectRequest(input *DeleteObjectInput) DeleteObjectReque
 	}
 
 	if input == nil {
-		input = &DeleteObjectInput{}
+		input = &types.DeleteObjectInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteObjectOutput{})
+	req := c.newRequest(op, input, &types.DeleteObjectOutput{})
 	return DeleteObjectRequest{Request: req, Input: input, Copy: c.DeleteObjectRequest}
 }
 
@@ -103,8 +43,8 @@ func (c *Client) DeleteObjectRequest(input *DeleteObjectInput) DeleteObjectReque
 // DeleteObject API operation.
 type DeleteObjectRequest struct {
 	*aws.Request
-	Input *DeleteObjectInput
-	Copy  func(*DeleteObjectInput) DeleteObjectRequest
+	Input *types.DeleteObjectInput
+	Copy  func(*types.DeleteObjectInput) DeleteObjectRequest
 }
 
 // Send marshals and sends the DeleteObject API request.
@@ -116,7 +56,7 @@ func (r DeleteObjectRequest) Send(ctx context.Context) (*DeleteObjectResponse, e
 	}
 
 	resp := &DeleteObjectResponse{
-		DeleteObjectOutput: r.Request.Data.(*DeleteObjectOutput),
+		DeleteObjectOutput: r.Request.Data.(*types.DeleteObjectOutput),
 		response:           &aws.Response{Request: r.Request},
 	}
 
@@ -126,7 +66,7 @@ func (r DeleteObjectRequest) Send(ctx context.Context) (*DeleteObjectResponse, e
 // DeleteObjectResponse is the response type for the
 // DeleteObject API operation.
 type DeleteObjectResponse struct {
-	*DeleteObjectOutput
+	*types.DeleteObjectOutput
 
 	response *aws.Response
 }

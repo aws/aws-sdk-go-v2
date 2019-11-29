@@ -6,116 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/backup/types"
 )
-
-type ListBackupSelectionsInput struct {
-	_ struct{} `type:"structure"`
-
-	// Uniquely identifies a backup plan.
-	//
-	// BackupPlanId is a required field
-	BackupPlanId *string `location:"uri" locationName:"backupPlanId" type:"string" required:"true"`
-
-	// The maximum number of items to be returned.
-	MaxResults *int64 `location:"querystring" locationName:"maxResults" min:"1" type:"integer"`
-
-	// The next item following a partial list of returned items. For example, if
-	// a request is made to return maxResults number of items, NextToken allows
-	// you to return more items in your list starting at the location pointed to
-	// by the next token.
-	NextToken *string `location:"querystring" locationName:"nextToken" type:"string"`
-}
-
-// String returns the string representation
-func (s ListBackupSelectionsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListBackupSelectionsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListBackupSelectionsInput"}
-
-	if s.BackupPlanId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("BackupPlanId"))
-	}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListBackupSelectionsInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.BackupPlanId != nil {
-		v := *s.BackupPlanId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "backupPlanId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.MaxResults != nil {
-		v := *s.MaxResults
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "maxResults", protocol.Int64Value(v), metadata)
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type ListBackupSelectionsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// An array of backup selection list items containing metadata about each resource
-	// in the list.
-	BackupSelectionsList []BackupSelectionsListMember `type:"list"`
-
-	// The next item following a partial list of returned items. For example, if
-	// a request is made to return maxResults number of items, NextToken allows
-	// you to return more items in your list starting at the location pointed to
-	// by the next token.
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s ListBackupSelectionsOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListBackupSelectionsOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.BackupSelectionsList != nil {
-		v := s.BackupSelectionsList
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "BackupSelectionsList", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opListBackupSelections = "ListBackupSelections"
 
@@ -133,7 +25,7 @@ const opListBackupSelections = "ListBackupSelections"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/ListBackupSelections
-func (c *Client) ListBackupSelectionsRequest(input *ListBackupSelectionsInput) ListBackupSelectionsRequest {
+func (c *Client) ListBackupSelectionsRequest(input *types.ListBackupSelectionsInput) ListBackupSelectionsRequest {
 	op := &aws.Operation{
 		Name:       opListBackupSelections,
 		HTTPMethod: "GET",
@@ -147,10 +39,10 @@ func (c *Client) ListBackupSelectionsRequest(input *ListBackupSelectionsInput) L
 	}
 
 	if input == nil {
-		input = &ListBackupSelectionsInput{}
+		input = &types.ListBackupSelectionsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListBackupSelectionsOutput{})
+	req := c.newRequest(op, input, &types.ListBackupSelectionsOutput{})
 	return ListBackupSelectionsRequest{Request: req, Input: input, Copy: c.ListBackupSelectionsRequest}
 }
 
@@ -158,8 +50,8 @@ func (c *Client) ListBackupSelectionsRequest(input *ListBackupSelectionsInput) L
 // ListBackupSelections API operation.
 type ListBackupSelectionsRequest struct {
 	*aws.Request
-	Input *ListBackupSelectionsInput
-	Copy  func(*ListBackupSelectionsInput) ListBackupSelectionsRequest
+	Input *types.ListBackupSelectionsInput
+	Copy  func(*types.ListBackupSelectionsInput) ListBackupSelectionsRequest
 }
 
 // Send marshals and sends the ListBackupSelections API request.
@@ -171,7 +63,7 @@ func (r ListBackupSelectionsRequest) Send(ctx context.Context) (*ListBackupSelec
 	}
 
 	resp := &ListBackupSelectionsResponse{
-		ListBackupSelectionsOutput: r.Request.Data.(*ListBackupSelectionsOutput),
+		ListBackupSelectionsOutput: r.Request.Data.(*types.ListBackupSelectionsOutput),
 		response:                   &aws.Response{Request: r.Request},
 	}
 
@@ -201,7 +93,7 @@ func NewListBackupSelectionsPaginator(req ListBackupSelectionsRequest) ListBacku
 	return ListBackupSelectionsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListBackupSelectionsInput
+				var inCpy *types.ListBackupSelectionsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -221,14 +113,14 @@ type ListBackupSelectionsPaginator struct {
 	aws.Pager
 }
 
-func (p *ListBackupSelectionsPaginator) CurrentPage() *ListBackupSelectionsOutput {
-	return p.Pager.CurrentPage().(*ListBackupSelectionsOutput)
+func (p *ListBackupSelectionsPaginator) CurrentPage() *types.ListBackupSelectionsOutput {
+	return p.Pager.CurrentPage().(*types.ListBackupSelectionsOutput)
 }
 
 // ListBackupSelectionsResponse is the response type for the
 // ListBackupSelections API operation.
 type ListBackupSelectionsResponse struct {
-	*ListBackupSelectionsOutput
+	*types.ListBackupSelectionsOutput
 
 	response *aws.Response
 }

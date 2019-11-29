@@ -6,61 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/machinelearning/types"
 )
-
-type CreateRealtimeEndpointInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID assigned to the MLModel during creation.
-	//
-	// MLModelId is a required field
-	MLModelId *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s CreateRealtimeEndpointInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateRealtimeEndpointInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateRealtimeEndpointInput"}
-
-	if s.MLModelId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("MLModelId"))
-	}
-	if s.MLModelId != nil && len(*s.MLModelId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("MLModelId", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Represents the output of an CreateRealtimeEndpoint operation.
-//
-// The result contains the MLModelId and the endpoint information for the MLModel.
-//
-// The endpoint information includes the URI of the MLModel; that is, the location
-// to send online prediction requests for the specified MLModel.
-type CreateRealtimeEndpointOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A user-supplied ID that uniquely identifies the MLModel. This value should
-	// be identical to the value of the MLModelId in the request.
-	MLModelId *string `min:"1" type:"string"`
-
-	// The endpoint information of the MLModel
-	RealtimeEndpointInfo *RealtimeEndpointInfo `type:"structure"`
-}
-
-// String returns the string representation
-func (s CreateRealtimeEndpointOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCreateRealtimeEndpoint = "CreateRealtimeEndpoint"
 
@@ -77,7 +24,7 @@ const opCreateRealtimeEndpoint = "CreateRealtimeEndpoint"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) CreateRealtimeEndpointRequest(input *CreateRealtimeEndpointInput) CreateRealtimeEndpointRequest {
+func (c *Client) CreateRealtimeEndpointRequest(input *types.CreateRealtimeEndpointInput) CreateRealtimeEndpointRequest {
 	op := &aws.Operation{
 		Name:       opCreateRealtimeEndpoint,
 		HTTPMethod: "POST",
@@ -85,10 +32,10 @@ func (c *Client) CreateRealtimeEndpointRequest(input *CreateRealtimeEndpointInpu
 	}
 
 	if input == nil {
-		input = &CreateRealtimeEndpointInput{}
+		input = &types.CreateRealtimeEndpointInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateRealtimeEndpointOutput{})
+	req := c.newRequest(op, input, &types.CreateRealtimeEndpointOutput{})
 	return CreateRealtimeEndpointRequest{Request: req, Input: input, Copy: c.CreateRealtimeEndpointRequest}
 }
 
@@ -96,8 +43,8 @@ func (c *Client) CreateRealtimeEndpointRequest(input *CreateRealtimeEndpointInpu
 // CreateRealtimeEndpoint API operation.
 type CreateRealtimeEndpointRequest struct {
 	*aws.Request
-	Input *CreateRealtimeEndpointInput
-	Copy  func(*CreateRealtimeEndpointInput) CreateRealtimeEndpointRequest
+	Input *types.CreateRealtimeEndpointInput
+	Copy  func(*types.CreateRealtimeEndpointInput) CreateRealtimeEndpointRequest
 }
 
 // Send marshals and sends the CreateRealtimeEndpoint API request.
@@ -109,7 +56,7 @@ func (r CreateRealtimeEndpointRequest) Send(ctx context.Context) (*CreateRealtim
 	}
 
 	resp := &CreateRealtimeEndpointResponse{
-		CreateRealtimeEndpointOutput: r.Request.Data.(*CreateRealtimeEndpointOutput),
+		CreateRealtimeEndpointOutput: r.Request.Data.(*types.CreateRealtimeEndpointOutput),
 		response:                     &aws.Response{Request: r.Request},
 	}
 
@@ -119,7 +66,7 @@ func (r CreateRealtimeEndpointRequest) Send(ctx context.Context) (*CreateRealtim
 // CreateRealtimeEndpointResponse is the response type for the
 // CreateRealtimeEndpoint API operation.
 type CreateRealtimeEndpointResponse struct {
-	*CreateRealtimeEndpointOutput
+	*types.CreateRealtimeEndpointOutput
 
 	response *aws.Response
 }

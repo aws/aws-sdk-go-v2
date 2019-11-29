@@ -6,79 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/kms/types"
 )
-
-type ListAliasesInput struct {
-	_ struct{} `type:"structure"`
-
-	// Lists only aliases that refer to the specified CMK. The value of this parameter
-	// can be the ID or Amazon Resource Name (ARN) of a CMK in the caller's account
-	// and region. You cannot use an alias name or alias ARN in this value.
-	//
-	// This parameter is optional. If you omit it, ListAliases returns all aliases
-	// in the account and region.
-	KeyId *string `min:"1" type:"string"`
-
-	// Use this parameter to specify the maximum number of items to return. When
-	// this value is present, AWS KMS does not return more than the specified number
-	// of items, but it might return fewer.
-	//
-	// This value is optional. If you include a value, it must be between 1 and
-	// 100, inclusive. If you do not include a value, it defaults to 50.
-	Limit *int64 `min:"1" type:"integer"`
-
-	// Use this parameter in a subsequent request after you receive a response with
-	// truncated results. Set it to the value of NextMarker from the truncated response
-	// you just received.
-	Marker *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s ListAliasesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListAliasesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListAliasesInput"}
-	if s.KeyId != nil && len(*s.KeyId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("KeyId", 1))
-	}
-	if s.Limit != nil && *s.Limit < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("Limit", 1))
-	}
-	if s.Marker != nil && len(*s.Marker) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Marker", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ListAliasesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A list of aliases.
-	Aliases []AliasListEntry `type:"list"`
-
-	// When Truncated is true, this element is present and contains the value to
-	// use for the Marker parameter in a subsequent request.
-	NextMarker *string `min:"1" type:"string"`
-
-	// A flag that indicates whether there are more items in the list. When this
-	// value is true, the list in this response is truncated. To get more items,
-	// pass the value of the NextMarker element in thisresponse to the Marker parameter
-	// in a subsequent request.
-	Truncated *bool `type:"boolean"`
-}
-
-// String returns the string representation
-func (s ListAliasesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListAliases = "ListAliases"
 
@@ -110,7 +39,7 @@ const opListAliases = "ListAliases"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/ListAliases
-func (c *Client) ListAliasesRequest(input *ListAliasesInput) ListAliasesRequest {
+func (c *Client) ListAliasesRequest(input *types.ListAliasesInput) ListAliasesRequest {
 	op := &aws.Operation{
 		Name:       opListAliases,
 		HTTPMethod: "POST",
@@ -124,10 +53,10 @@ func (c *Client) ListAliasesRequest(input *ListAliasesInput) ListAliasesRequest 
 	}
 
 	if input == nil {
-		input = &ListAliasesInput{}
+		input = &types.ListAliasesInput{}
 	}
 
-	req := c.newRequest(op, input, &ListAliasesOutput{})
+	req := c.newRequest(op, input, &types.ListAliasesOutput{})
 	return ListAliasesRequest{Request: req, Input: input, Copy: c.ListAliasesRequest}
 }
 
@@ -135,8 +64,8 @@ func (c *Client) ListAliasesRequest(input *ListAliasesInput) ListAliasesRequest 
 // ListAliases API operation.
 type ListAliasesRequest struct {
 	*aws.Request
-	Input *ListAliasesInput
-	Copy  func(*ListAliasesInput) ListAliasesRequest
+	Input *types.ListAliasesInput
+	Copy  func(*types.ListAliasesInput) ListAliasesRequest
 }
 
 // Send marshals and sends the ListAliases API request.
@@ -148,7 +77,7 @@ func (r ListAliasesRequest) Send(ctx context.Context) (*ListAliasesResponse, err
 	}
 
 	resp := &ListAliasesResponse{
-		ListAliasesOutput: r.Request.Data.(*ListAliasesOutput),
+		ListAliasesOutput: r.Request.Data.(*types.ListAliasesOutput),
 		response:          &aws.Response{Request: r.Request},
 	}
 
@@ -178,7 +107,7 @@ func NewListAliasesPaginator(req ListAliasesRequest) ListAliasesPaginator {
 	return ListAliasesPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListAliasesInput
+				var inCpy *types.ListAliasesInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -198,14 +127,14 @@ type ListAliasesPaginator struct {
 	aws.Pager
 }
 
-func (p *ListAliasesPaginator) CurrentPage() *ListAliasesOutput {
-	return p.Pager.CurrentPage().(*ListAliasesOutput)
+func (p *ListAliasesPaginator) CurrentPage() *types.ListAliasesOutput {
+	return p.Pager.CurrentPage().(*types.ListAliasesOutput)
 }
 
 // ListAliasesResponse is the response type for the
 // ListAliases API operation.
 type ListAliasesResponse struct {
-	*ListAliasesOutput
+	*types.ListAliasesOutput
 
 	response *aws.Response
 }

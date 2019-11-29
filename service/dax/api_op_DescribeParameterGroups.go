@@ -6,48 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/dax/types"
 )
-
-type DescribeParameterGroupsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The maximum number of results to include in the response. If more results
-	// exist than the specified MaxResults value, a token is included in the response
-	// so that the remaining results can be retrieved.
-	//
-	// The value for MaxResults must be between 20 and 100.
-	MaxResults *int64 `type:"integer"`
-
-	// An optional token returned from a prior request. Use this token for pagination
-	// of results from this action. If this parameter is specified, the response
-	// includes only results beyond the token, up to the value specified by MaxResults.
-	NextToken *string `type:"string"`
-
-	// The names of the parameter groups.
-	ParameterGroupNames []string `type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeParameterGroupsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type DescribeParameterGroupsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Provides an identifier to allow retrieval of paginated results.
-	NextToken *string `type:"string"`
-
-	// An array of parameter groups. Each element in the array represents one parameter
-	// group.
-	ParameterGroups []ParameterGroup `type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeParameterGroupsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeParameterGroups = "DescribeParameterGroups"
 
@@ -65,7 +25,7 @@ const opDescribeParameterGroups = "DescribeParameterGroups"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dax-2017-04-19/DescribeParameterGroups
-func (c *Client) DescribeParameterGroupsRequest(input *DescribeParameterGroupsInput) DescribeParameterGroupsRequest {
+func (c *Client) DescribeParameterGroupsRequest(input *types.DescribeParameterGroupsInput) DescribeParameterGroupsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeParameterGroups,
 		HTTPMethod: "POST",
@@ -73,10 +33,10 @@ func (c *Client) DescribeParameterGroupsRequest(input *DescribeParameterGroupsIn
 	}
 
 	if input == nil {
-		input = &DescribeParameterGroupsInput{}
+		input = &types.DescribeParameterGroupsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeParameterGroupsOutput{})
+	req := c.newRequest(op, input, &types.DescribeParameterGroupsOutput{})
 	return DescribeParameterGroupsRequest{Request: req, Input: input, Copy: c.DescribeParameterGroupsRequest}
 }
 
@@ -84,8 +44,8 @@ func (c *Client) DescribeParameterGroupsRequest(input *DescribeParameterGroupsIn
 // DescribeParameterGroups API operation.
 type DescribeParameterGroupsRequest struct {
 	*aws.Request
-	Input *DescribeParameterGroupsInput
-	Copy  func(*DescribeParameterGroupsInput) DescribeParameterGroupsRequest
+	Input *types.DescribeParameterGroupsInput
+	Copy  func(*types.DescribeParameterGroupsInput) DescribeParameterGroupsRequest
 }
 
 // Send marshals and sends the DescribeParameterGroups API request.
@@ -97,7 +57,7 @@ func (r DescribeParameterGroupsRequest) Send(ctx context.Context) (*DescribePara
 	}
 
 	resp := &DescribeParameterGroupsResponse{
-		DescribeParameterGroupsOutput: r.Request.Data.(*DescribeParameterGroupsOutput),
+		DescribeParameterGroupsOutput: r.Request.Data.(*types.DescribeParameterGroupsOutput),
 		response:                      &aws.Response{Request: r.Request},
 	}
 
@@ -107,7 +67,7 @@ func (r DescribeParameterGroupsRequest) Send(ctx context.Context) (*DescribePara
 // DescribeParameterGroupsResponse is the response type for the
 // DescribeParameterGroups API operation.
 type DescribeParameterGroupsResponse struct {
-	*DescribeParameterGroupsOutput
+	*types.DescribeParameterGroupsOutput
 
 	response *aws.Response
 }

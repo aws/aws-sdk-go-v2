@@ -6,105 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/efs/types"
 )
-
-type PutLifecycleConfigurationInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the file system for which you are creating the LifecycleConfiguration
-	// object (String).
-	//
-	// FileSystemId is a required field
-	FileSystemId *string `location:"uri" locationName:"FileSystemId" type:"string" required:"true"`
-
-	// An array of LifecyclePolicy objects that define the file system's LifecycleConfiguration
-	// object. A LifecycleConfiguration object tells lifecycle management when to
-	// transition files from the Standard storage class to the Infrequent Access
-	// storage class.
-	//
-	// LifecyclePolicies is a required field
-	LifecyclePolicies []LifecyclePolicy `type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s PutLifecycleConfigurationInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *PutLifecycleConfigurationInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "PutLifecycleConfigurationInput"}
-
-	if s.FileSystemId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("FileSystemId"))
-	}
-
-	if s.LifecyclePolicies == nil {
-		invalidParams.Add(aws.NewErrParamRequired("LifecyclePolicies"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s PutLifecycleConfigurationInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.LifecyclePolicies != nil {
-		v := s.LifecyclePolicies
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "LifecyclePolicies", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	if s.FileSystemId != nil {
-		v := *s.FileSystemId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "FileSystemId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type PutLifecycleConfigurationOutput struct {
-	_ struct{} `type:"structure"`
-
-	// An array of lifecycle management policies. Currently, EFS supports a maximum
-	// of one policy per file system.
-	LifecyclePolicies []LifecyclePolicy `type:"list"`
-}
-
-// String returns the string representation
-func (s PutLifecycleConfigurationOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s PutLifecycleConfigurationOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.LifecyclePolicies != nil {
-		v := s.LifecyclePolicies
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "LifecyclePolicies", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	return nil
-}
 
 const opPutLifecycleConfiguration = "PutLifecycleConfiguration"
 
@@ -148,7 +51,7 @@ const opPutLifecycleConfiguration = "PutLifecycleConfiguration"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/PutLifecycleConfiguration
-func (c *Client) PutLifecycleConfigurationRequest(input *PutLifecycleConfigurationInput) PutLifecycleConfigurationRequest {
+func (c *Client) PutLifecycleConfigurationRequest(input *types.PutLifecycleConfigurationInput) PutLifecycleConfigurationRequest {
 	op := &aws.Operation{
 		Name:       opPutLifecycleConfiguration,
 		HTTPMethod: "PUT",
@@ -156,10 +59,10 @@ func (c *Client) PutLifecycleConfigurationRequest(input *PutLifecycleConfigurati
 	}
 
 	if input == nil {
-		input = &PutLifecycleConfigurationInput{}
+		input = &types.PutLifecycleConfigurationInput{}
 	}
 
-	req := c.newRequest(op, input, &PutLifecycleConfigurationOutput{})
+	req := c.newRequest(op, input, &types.PutLifecycleConfigurationOutput{})
 	return PutLifecycleConfigurationRequest{Request: req, Input: input, Copy: c.PutLifecycleConfigurationRequest}
 }
 
@@ -167,8 +70,8 @@ func (c *Client) PutLifecycleConfigurationRequest(input *PutLifecycleConfigurati
 // PutLifecycleConfiguration API operation.
 type PutLifecycleConfigurationRequest struct {
 	*aws.Request
-	Input *PutLifecycleConfigurationInput
-	Copy  func(*PutLifecycleConfigurationInput) PutLifecycleConfigurationRequest
+	Input *types.PutLifecycleConfigurationInput
+	Copy  func(*types.PutLifecycleConfigurationInput) PutLifecycleConfigurationRequest
 }
 
 // Send marshals and sends the PutLifecycleConfiguration API request.
@@ -180,7 +83,7 @@ func (r PutLifecycleConfigurationRequest) Send(ctx context.Context) (*PutLifecyc
 	}
 
 	resp := &PutLifecycleConfigurationResponse{
-		PutLifecycleConfigurationOutput: r.Request.Data.(*PutLifecycleConfigurationOutput),
+		PutLifecycleConfigurationOutput: r.Request.Data.(*types.PutLifecycleConfigurationOutput),
 		response:                        &aws.Response{Request: r.Request},
 	}
 
@@ -190,7 +93,7 @@ func (r PutLifecycleConfigurationRequest) Send(ctx context.Context) (*PutLifecyc
 // PutLifecycleConfigurationResponse is the response type for the
 // PutLifecycleConfiguration API operation.
 type PutLifecycleConfigurationResponse struct {
-	*PutLifecycleConfigurationOutput
+	*types.PutLifecycleConfigurationOutput
 
 	response *aws.Response
 }

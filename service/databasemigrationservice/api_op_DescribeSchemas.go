@@ -6,67 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/databasemigrationservice/types"
 )
-
-type DescribeSchemasInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) string that uniquely identifies the endpoint.
-	//
-	// EndpointArn is a required field
-	EndpointArn *string `type:"string" required:"true"`
-
-	// An optional pagination token provided by a previous request. If this parameter
-	// is specified, the response includes only records beyond the marker, up to
-	// the value specified by MaxRecords.
-	Marker *string `type:"string"`
-
-	// The maximum number of records to include in the response. If more records
-	// exist than the specified MaxRecords value, a pagination token called a marker
-	// is included in the response so that the remaining results can be retrieved.
-	//
-	// Default: 100
-	//
-	// Constraints: Minimum 20, maximum 100.
-	MaxRecords *int64 `type:"integer"`
-}
-
-// String returns the string representation
-func (s DescribeSchemasInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeSchemasInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeSchemasInput"}
-
-	if s.EndpointArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("EndpointArn"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribeSchemasOutput struct {
-	_ struct{} `type:"structure"`
-
-	// An optional pagination token provided by a previous request. If this parameter
-	// is specified, the response includes only records beyond the marker, up to
-	// the value specified by MaxRecords.
-	Marker *string `type:"string"`
-
-	// The described schema.
-	Schemas []string `type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeSchemasOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeSchemas = "DescribeSchemas"
 
@@ -83,7 +24,7 @@ const opDescribeSchemas = "DescribeSchemas"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeSchemas
-func (c *Client) DescribeSchemasRequest(input *DescribeSchemasInput) DescribeSchemasRequest {
+func (c *Client) DescribeSchemasRequest(input *types.DescribeSchemasInput) DescribeSchemasRequest {
 	op := &aws.Operation{
 		Name:       opDescribeSchemas,
 		HTTPMethod: "POST",
@@ -97,10 +38,10 @@ func (c *Client) DescribeSchemasRequest(input *DescribeSchemasInput) DescribeSch
 	}
 
 	if input == nil {
-		input = &DescribeSchemasInput{}
+		input = &types.DescribeSchemasInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeSchemasOutput{})
+	req := c.newRequest(op, input, &types.DescribeSchemasOutput{})
 	return DescribeSchemasRequest{Request: req, Input: input, Copy: c.DescribeSchemasRequest}
 }
 
@@ -108,8 +49,8 @@ func (c *Client) DescribeSchemasRequest(input *DescribeSchemasInput) DescribeSch
 // DescribeSchemas API operation.
 type DescribeSchemasRequest struct {
 	*aws.Request
-	Input *DescribeSchemasInput
-	Copy  func(*DescribeSchemasInput) DescribeSchemasRequest
+	Input *types.DescribeSchemasInput
+	Copy  func(*types.DescribeSchemasInput) DescribeSchemasRequest
 }
 
 // Send marshals and sends the DescribeSchemas API request.
@@ -121,7 +62,7 @@ func (r DescribeSchemasRequest) Send(ctx context.Context) (*DescribeSchemasRespo
 	}
 
 	resp := &DescribeSchemasResponse{
-		DescribeSchemasOutput: r.Request.Data.(*DescribeSchemasOutput),
+		DescribeSchemasOutput: r.Request.Data.(*types.DescribeSchemasOutput),
 		response:              &aws.Response{Request: r.Request},
 	}
 
@@ -151,7 +92,7 @@ func NewDescribeSchemasPaginator(req DescribeSchemasRequest) DescribeSchemasPagi
 	return DescribeSchemasPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *DescribeSchemasInput
+				var inCpy *types.DescribeSchemasInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -171,14 +112,14 @@ type DescribeSchemasPaginator struct {
 	aws.Pager
 }
 
-func (p *DescribeSchemasPaginator) CurrentPage() *DescribeSchemasOutput {
-	return p.Pager.CurrentPage().(*DescribeSchemasOutput)
+func (p *DescribeSchemasPaginator) CurrentPage() *types.DescribeSchemasOutput {
+	return p.Pager.CurrentPage().(*types.DescribeSchemasOutput)
 }
 
 // DescribeSchemasResponse is the response type for the
 // DescribeSchemas API operation.
 type DescribeSchemasResponse struct {
-	*DescribeSchemasOutput
+	*types.DescribeSchemasOutput
 
 	response *aws.Response
 }

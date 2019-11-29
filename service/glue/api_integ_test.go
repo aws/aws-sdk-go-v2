@@ -13,6 +13,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws/awserr"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting/integration"
 	"github.com/aws/aws-sdk-go-v2/service/glue"
+	"github.com/aws/aws-sdk-go-v2/service/glue/types"
 )
 
 var _ aws.Config
@@ -24,7 +25,7 @@ func TestInteg_00_GetCatalogImportStatus(t *testing.T) {
 
 	cfg := integration.ConfigWithDefaultRegion("us-west-2")
 	svc := glue.New(cfg)
-	params := &glue.GetCatalogImportStatusInput{}
+	params := &types.GetCatalogImportStatusInput{}
 
 	req := svc.GetCatalogImportStatusRequest(params)
 

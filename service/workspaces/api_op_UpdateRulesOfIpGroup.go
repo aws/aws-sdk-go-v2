@@ -6,54 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/workspaces/types"
 )
-
-type UpdateRulesOfIpGroupInput struct {
-	_ struct{} `type:"structure"`
-
-	// The identifier of the group.
-	//
-	// GroupId is a required field
-	GroupId *string `type:"string" required:"true"`
-
-	// One or more rules.
-	//
-	// UserRules is a required field
-	UserRules []IpRuleItem `type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s UpdateRulesOfIpGroupInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateRulesOfIpGroupInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateRulesOfIpGroupInput"}
-
-	if s.GroupId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("GroupId"))
-	}
-
-	if s.UserRules == nil {
-		invalidParams.Add(aws.NewErrParamRequired("UserRules"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type UpdateRulesOfIpGroupOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s UpdateRulesOfIpGroupOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opUpdateRulesOfIpGroup = "UpdateRulesOfIpGroup"
 
@@ -71,7 +25,7 @@ const opUpdateRulesOfIpGroup = "UpdateRulesOfIpGroup"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/UpdateRulesOfIpGroup
-func (c *Client) UpdateRulesOfIpGroupRequest(input *UpdateRulesOfIpGroupInput) UpdateRulesOfIpGroupRequest {
+func (c *Client) UpdateRulesOfIpGroupRequest(input *types.UpdateRulesOfIpGroupInput) UpdateRulesOfIpGroupRequest {
 	op := &aws.Operation{
 		Name:       opUpdateRulesOfIpGroup,
 		HTTPMethod: "POST",
@@ -79,10 +33,10 @@ func (c *Client) UpdateRulesOfIpGroupRequest(input *UpdateRulesOfIpGroupInput) U
 	}
 
 	if input == nil {
-		input = &UpdateRulesOfIpGroupInput{}
+		input = &types.UpdateRulesOfIpGroupInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateRulesOfIpGroupOutput{})
+	req := c.newRequest(op, input, &types.UpdateRulesOfIpGroupOutput{})
 	return UpdateRulesOfIpGroupRequest{Request: req, Input: input, Copy: c.UpdateRulesOfIpGroupRequest}
 }
 
@@ -90,8 +44,8 @@ func (c *Client) UpdateRulesOfIpGroupRequest(input *UpdateRulesOfIpGroupInput) U
 // UpdateRulesOfIpGroup API operation.
 type UpdateRulesOfIpGroupRequest struct {
 	*aws.Request
-	Input *UpdateRulesOfIpGroupInput
-	Copy  func(*UpdateRulesOfIpGroupInput) UpdateRulesOfIpGroupRequest
+	Input *types.UpdateRulesOfIpGroupInput
+	Copy  func(*types.UpdateRulesOfIpGroupInput) UpdateRulesOfIpGroupRequest
 }
 
 // Send marshals and sends the UpdateRulesOfIpGroup API request.
@@ -103,7 +57,7 @@ func (r UpdateRulesOfIpGroupRequest) Send(ctx context.Context) (*UpdateRulesOfIp
 	}
 
 	resp := &UpdateRulesOfIpGroupResponse{
-		UpdateRulesOfIpGroupOutput: r.Request.Data.(*UpdateRulesOfIpGroupOutput),
+		UpdateRulesOfIpGroupOutput: r.Request.Data.(*types.UpdateRulesOfIpGroupOutput),
 		response:                   &aws.Response{Request: r.Request},
 	}
 
@@ -113,7 +67,7 @@ func (r UpdateRulesOfIpGroupRequest) Send(ctx context.Context) (*UpdateRulesOfIp
 // UpdateRulesOfIpGroupResponse is the response type for the
 // UpdateRulesOfIpGroup API operation.
 type UpdateRulesOfIpGroupResponse struct {
-	*UpdateRulesOfIpGroupOutput
+	*types.UpdateRulesOfIpGroupOutput
 
 	response *aws.Response
 }

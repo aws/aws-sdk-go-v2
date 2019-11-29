@@ -6,103 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/pinpointemail/types"
 )
-
-// A request to add an event destination to a configuration set.
-type CreateConfigurationSetEventDestinationInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the configuration set that you want to add an event destination
-	// to.
-	//
-	// ConfigurationSetName is a required field
-	ConfigurationSetName *string `location:"uri" locationName:"ConfigurationSetName" type:"string" required:"true"`
-
-	// An object that defines the event destination.
-	//
-	// EventDestination is a required field
-	EventDestination *EventDestinationDefinition `type:"structure" required:"true"`
-
-	// A name that identifies the event destination within the configuration set.
-	//
-	// EventDestinationName is a required field
-	EventDestinationName *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s CreateConfigurationSetEventDestinationInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateConfigurationSetEventDestinationInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateConfigurationSetEventDestinationInput"}
-
-	if s.ConfigurationSetName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ConfigurationSetName"))
-	}
-
-	if s.EventDestination == nil {
-		invalidParams.Add(aws.NewErrParamRequired("EventDestination"))
-	}
-
-	if s.EventDestinationName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("EventDestinationName"))
-	}
-	if s.EventDestination != nil {
-		if err := s.EventDestination.Validate(); err != nil {
-			invalidParams.AddNested("EventDestination", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s CreateConfigurationSetEventDestinationInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.EventDestination != nil {
-		v := s.EventDestination
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "EventDestination", v, metadata)
-	}
-	if s.EventDestinationName != nil {
-		v := *s.EventDestinationName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "EventDestinationName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.ConfigurationSetName != nil {
-		v := *s.ConfigurationSetName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "ConfigurationSetName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-// An HTTP 200 response if the request succeeds, or an error message if the
-// request fails.
-type CreateConfigurationSetEventDestinationOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s CreateConfigurationSetEventDestinationOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s CreateConfigurationSetEventDestinationOutput) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
 
 const opCreateConfigurationSetEventDestination = "CreateConfigurationSetEventDestination"
 
@@ -126,7 +31,7 @@ const opCreateConfigurationSetEventDestination = "CreateConfigurationSetEventDes
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/CreateConfigurationSetEventDestination
-func (c *Client) CreateConfigurationSetEventDestinationRequest(input *CreateConfigurationSetEventDestinationInput) CreateConfigurationSetEventDestinationRequest {
+func (c *Client) CreateConfigurationSetEventDestinationRequest(input *types.CreateConfigurationSetEventDestinationInput) CreateConfigurationSetEventDestinationRequest {
 	op := &aws.Operation{
 		Name:       opCreateConfigurationSetEventDestination,
 		HTTPMethod: "POST",
@@ -134,10 +39,10 @@ func (c *Client) CreateConfigurationSetEventDestinationRequest(input *CreateConf
 	}
 
 	if input == nil {
-		input = &CreateConfigurationSetEventDestinationInput{}
+		input = &types.CreateConfigurationSetEventDestinationInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateConfigurationSetEventDestinationOutput{})
+	req := c.newRequest(op, input, &types.CreateConfigurationSetEventDestinationOutput{})
 	return CreateConfigurationSetEventDestinationRequest{Request: req, Input: input, Copy: c.CreateConfigurationSetEventDestinationRequest}
 }
 
@@ -145,8 +50,8 @@ func (c *Client) CreateConfigurationSetEventDestinationRequest(input *CreateConf
 // CreateConfigurationSetEventDestination API operation.
 type CreateConfigurationSetEventDestinationRequest struct {
 	*aws.Request
-	Input *CreateConfigurationSetEventDestinationInput
-	Copy  func(*CreateConfigurationSetEventDestinationInput) CreateConfigurationSetEventDestinationRequest
+	Input *types.CreateConfigurationSetEventDestinationInput
+	Copy  func(*types.CreateConfigurationSetEventDestinationInput) CreateConfigurationSetEventDestinationRequest
 }
 
 // Send marshals and sends the CreateConfigurationSetEventDestination API request.
@@ -158,7 +63,7 @@ func (r CreateConfigurationSetEventDestinationRequest) Send(ctx context.Context)
 	}
 
 	resp := &CreateConfigurationSetEventDestinationResponse{
-		CreateConfigurationSetEventDestinationOutput: r.Request.Data.(*CreateConfigurationSetEventDestinationOutput),
+		CreateConfigurationSetEventDestinationOutput: r.Request.Data.(*types.CreateConfigurationSetEventDestinationOutput),
 		response: &aws.Response{Request: r.Request},
 	}
 
@@ -168,7 +73,7 @@ func (r CreateConfigurationSetEventDestinationRequest) Send(ctx context.Context)
 // CreateConfigurationSetEventDestinationResponse is the response type for the
 // CreateConfigurationSetEventDestination API operation.
 type CreateConfigurationSetEventDestinationResponse struct {
-	*CreateConfigurationSetEventDestinationOutput
+	*types.CreateConfigurationSetEventDestinationOutput
 
 	response *aws.Response
 }

@@ -6,95 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/elastictranscoder/types"
 )
-
-// The UpdatePipelineStatusRequest structure.
-type UpdatePipelineStatusInput struct {
-	_ struct{} `type:"structure"`
-
-	// The identifier of the pipeline to update.
-	//
-	// Id is a required field
-	Id *string `location:"uri" locationName:"Id" type:"string" required:"true"`
-
-	// The desired status of the pipeline:
-	//
-	//    * Active: The pipeline is processing jobs.
-	//
-	//    * Paused: The pipeline is not currently processing jobs.
-	//
-	// Status is a required field
-	Status *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s UpdatePipelineStatusInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdatePipelineStatusInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdatePipelineStatusInput"}
-
-	if s.Id == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Id"))
-	}
-
-	if s.Status == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Status"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s UpdatePipelineStatusInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.Status != nil {
-		v := *s.Status
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "Status", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Id != nil {
-		v := *s.Id
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "Id", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-// When you update status for a pipeline, Elastic Transcoder returns the values
-// that you specified in the request.
-type UpdatePipelineStatusOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A section of the response body that provides information about the pipeline.
-	Pipeline *Pipeline `type:"structure"`
-}
-
-// String returns the string representation
-func (s UpdatePipelineStatusOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s UpdatePipelineStatusOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.Pipeline != nil {
-		v := s.Pipeline
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "Pipeline", v, metadata)
-	}
-	return nil
-}
 
 const opUpdatePipelineStatus = "UpdatePipelineStatus"
 
@@ -116,7 +29,7 @@ const opUpdatePipelineStatus = "UpdatePipelineStatus"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) UpdatePipelineStatusRequest(input *UpdatePipelineStatusInput) UpdatePipelineStatusRequest {
+func (c *Client) UpdatePipelineStatusRequest(input *types.UpdatePipelineStatusInput) UpdatePipelineStatusRequest {
 	op := &aws.Operation{
 		Name:       opUpdatePipelineStatus,
 		HTTPMethod: "POST",
@@ -124,10 +37,10 @@ func (c *Client) UpdatePipelineStatusRequest(input *UpdatePipelineStatusInput) U
 	}
 
 	if input == nil {
-		input = &UpdatePipelineStatusInput{}
+		input = &types.UpdatePipelineStatusInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdatePipelineStatusOutput{})
+	req := c.newRequest(op, input, &types.UpdatePipelineStatusOutput{})
 	return UpdatePipelineStatusRequest{Request: req, Input: input, Copy: c.UpdatePipelineStatusRequest}
 }
 
@@ -135,8 +48,8 @@ func (c *Client) UpdatePipelineStatusRequest(input *UpdatePipelineStatusInput) U
 // UpdatePipelineStatus API operation.
 type UpdatePipelineStatusRequest struct {
 	*aws.Request
-	Input *UpdatePipelineStatusInput
-	Copy  func(*UpdatePipelineStatusInput) UpdatePipelineStatusRequest
+	Input *types.UpdatePipelineStatusInput
+	Copy  func(*types.UpdatePipelineStatusInput) UpdatePipelineStatusRequest
 }
 
 // Send marshals and sends the UpdatePipelineStatus API request.
@@ -148,7 +61,7 @@ func (r UpdatePipelineStatusRequest) Send(ctx context.Context) (*UpdatePipelineS
 	}
 
 	resp := &UpdatePipelineStatusResponse{
-		UpdatePipelineStatusOutput: r.Request.Data.(*UpdatePipelineStatusOutput),
+		UpdatePipelineStatusOutput: r.Request.Data.(*types.UpdatePipelineStatusOutput),
 		response:                   &aws.Response{Request: r.Request},
 	}
 
@@ -158,7 +71,7 @@ func (r UpdatePipelineStatusRequest) Send(ctx context.Context) (*UpdatePipelineS
 // UpdatePipelineStatusResponse is the response type for the
 // UpdatePipelineStatus API operation.
 type UpdatePipelineStatusResponse struct {
-	*UpdatePipelineStatusOutput
+	*types.UpdatePipelineStatusOutput
 
 	response *aws.Response
 }

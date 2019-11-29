@@ -6,60 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/elasticloadbalancingv2/types"
 )
-
-type DescribeLoadBalancersInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Names (ARN) of the load balancers. You can specify up
-	// to 20 load balancers in a single call.
-	LoadBalancerArns []string `type:"list"`
-
-	// The marker for the next set of results. (You received this marker from a
-	// previous call.)
-	Marker *string `type:"string"`
-
-	// The names of the load balancers.
-	Names []string `type:"list"`
-
-	// The maximum number of results to return with this call.
-	PageSize *int64 `min:"1" type:"integer"`
-}
-
-// String returns the string representation
-func (s DescribeLoadBalancersInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeLoadBalancersInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeLoadBalancersInput"}
-	if s.PageSize != nil && *s.PageSize < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("PageSize", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribeLoadBalancersOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Information about the load balancers.
-	LoadBalancers []LoadBalancer `type:"list"`
-
-	// If there are additional results, this is the marker for the next set of results.
-	// Otherwise, this is null.
-	NextMarker *string `type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeLoadBalancersOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeLoadBalancers = "DescribeLoadBalancers"
 
@@ -79,7 +27,7 @@ const opDescribeLoadBalancers = "DescribeLoadBalancers"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/DescribeLoadBalancers
-func (c *Client) DescribeLoadBalancersRequest(input *DescribeLoadBalancersInput) DescribeLoadBalancersRequest {
+func (c *Client) DescribeLoadBalancersRequest(input *types.DescribeLoadBalancersInput) DescribeLoadBalancersRequest {
 	op := &aws.Operation{
 		Name:       opDescribeLoadBalancers,
 		HTTPMethod: "POST",
@@ -93,10 +41,10 @@ func (c *Client) DescribeLoadBalancersRequest(input *DescribeLoadBalancersInput)
 	}
 
 	if input == nil {
-		input = &DescribeLoadBalancersInput{}
+		input = &types.DescribeLoadBalancersInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeLoadBalancersOutput{})
+	req := c.newRequest(op, input, &types.DescribeLoadBalancersOutput{})
 	return DescribeLoadBalancersRequest{Request: req, Input: input, Copy: c.DescribeLoadBalancersRequest}
 }
 
@@ -104,8 +52,8 @@ func (c *Client) DescribeLoadBalancersRequest(input *DescribeLoadBalancersInput)
 // DescribeLoadBalancers API operation.
 type DescribeLoadBalancersRequest struct {
 	*aws.Request
-	Input *DescribeLoadBalancersInput
-	Copy  func(*DescribeLoadBalancersInput) DescribeLoadBalancersRequest
+	Input *types.DescribeLoadBalancersInput
+	Copy  func(*types.DescribeLoadBalancersInput) DescribeLoadBalancersRequest
 }
 
 // Send marshals and sends the DescribeLoadBalancers API request.
@@ -117,7 +65,7 @@ func (r DescribeLoadBalancersRequest) Send(ctx context.Context) (*DescribeLoadBa
 	}
 
 	resp := &DescribeLoadBalancersResponse{
-		DescribeLoadBalancersOutput: r.Request.Data.(*DescribeLoadBalancersOutput),
+		DescribeLoadBalancersOutput: r.Request.Data.(*types.DescribeLoadBalancersOutput),
 		response:                    &aws.Response{Request: r.Request},
 	}
 
@@ -147,7 +95,7 @@ func NewDescribeLoadBalancersPaginator(req DescribeLoadBalancersRequest) Describ
 	return DescribeLoadBalancersPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *DescribeLoadBalancersInput
+				var inCpy *types.DescribeLoadBalancersInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -167,14 +115,14 @@ type DescribeLoadBalancersPaginator struct {
 	aws.Pager
 }
 
-func (p *DescribeLoadBalancersPaginator) CurrentPage() *DescribeLoadBalancersOutput {
-	return p.Pager.CurrentPage().(*DescribeLoadBalancersOutput)
+func (p *DescribeLoadBalancersPaginator) CurrentPage() *types.DescribeLoadBalancersOutput {
+	return p.Pager.CurrentPage().(*types.DescribeLoadBalancersOutput)
 }
 
 // DescribeLoadBalancersResponse is the response type for the
 // DescribeLoadBalancers API operation.
 type DescribeLoadBalancersResponse struct {
-	*DescribeLoadBalancersOutput
+	*types.DescribeLoadBalancersOutput
 
 	response *aws.Response
 }

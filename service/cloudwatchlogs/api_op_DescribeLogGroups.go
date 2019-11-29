@@ -6,63 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/cloudwatchlogs/types"
 )
-
-type DescribeLogGroupsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The maximum number of items returned. If you don't specify a value, the default
-	// is up to 50 items.
-	Limit *int64 `locationName:"limit" min:"1" type:"integer"`
-
-	// The prefix to match.
-	LogGroupNamePrefix *string `locationName:"logGroupNamePrefix" min:"1" type:"string"`
-
-	// The token for the next set of items to return. (You received this token from
-	// a previous call.)
-	NextToken *string `locationName:"nextToken" min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeLogGroupsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeLogGroupsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeLogGroupsInput"}
-	if s.Limit != nil && *s.Limit < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("Limit", 1))
-	}
-	if s.LogGroupNamePrefix != nil && len(*s.LogGroupNamePrefix) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("LogGroupNamePrefix", 1))
-	}
-	if s.NextToken != nil && len(*s.NextToken) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribeLogGroupsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The log groups.
-	LogGroups []LogGroup `locationName:"logGroups" type:"list"`
-
-	// The token for the next set of items to return. The token expires after 24
-	// hours.
-	NextToken *string `locationName:"nextToken" min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeLogGroupsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeLogGroups = "DescribeLogGroups"
 
@@ -80,7 +25,7 @@ const opDescribeLogGroups = "DescribeLogGroups"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/DescribeLogGroups
-func (c *Client) DescribeLogGroupsRequest(input *DescribeLogGroupsInput) DescribeLogGroupsRequest {
+func (c *Client) DescribeLogGroupsRequest(input *types.DescribeLogGroupsInput) DescribeLogGroupsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeLogGroups,
 		HTTPMethod: "POST",
@@ -94,10 +39,10 @@ func (c *Client) DescribeLogGroupsRequest(input *DescribeLogGroupsInput) Describ
 	}
 
 	if input == nil {
-		input = &DescribeLogGroupsInput{}
+		input = &types.DescribeLogGroupsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeLogGroupsOutput{})
+	req := c.newRequest(op, input, &types.DescribeLogGroupsOutput{})
 	return DescribeLogGroupsRequest{Request: req, Input: input, Copy: c.DescribeLogGroupsRequest}
 }
 
@@ -105,8 +50,8 @@ func (c *Client) DescribeLogGroupsRequest(input *DescribeLogGroupsInput) Describ
 // DescribeLogGroups API operation.
 type DescribeLogGroupsRequest struct {
 	*aws.Request
-	Input *DescribeLogGroupsInput
-	Copy  func(*DescribeLogGroupsInput) DescribeLogGroupsRequest
+	Input *types.DescribeLogGroupsInput
+	Copy  func(*types.DescribeLogGroupsInput) DescribeLogGroupsRequest
 }
 
 // Send marshals and sends the DescribeLogGroups API request.
@@ -118,7 +63,7 @@ func (r DescribeLogGroupsRequest) Send(ctx context.Context) (*DescribeLogGroupsR
 	}
 
 	resp := &DescribeLogGroupsResponse{
-		DescribeLogGroupsOutput: r.Request.Data.(*DescribeLogGroupsOutput),
+		DescribeLogGroupsOutput: r.Request.Data.(*types.DescribeLogGroupsOutput),
 		response:                &aws.Response{Request: r.Request},
 	}
 
@@ -148,7 +93,7 @@ func NewDescribeLogGroupsPaginator(req DescribeLogGroupsRequest) DescribeLogGrou
 	return DescribeLogGroupsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *DescribeLogGroupsInput
+				var inCpy *types.DescribeLogGroupsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -168,14 +113,14 @@ type DescribeLogGroupsPaginator struct {
 	aws.Pager
 }
 
-func (p *DescribeLogGroupsPaginator) CurrentPage() *DescribeLogGroupsOutput {
-	return p.Pager.CurrentPage().(*DescribeLogGroupsOutput)
+func (p *DescribeLogGroupsPaginator) CurrentPage() *types.DescribeLogGroupsOutput {
+	return p.Pager.CurrentPage().(*types.DescribeLogGroupsOutput)
 }
 
 // DescribeLogGroupsResponse is the response type for the
 // DescribeLogGroups API operation.
 type DescribeLogGroupsResponse struct {
-	*DescribeLogGroupsOutput
+	*types.DescribeLogGroupsOutput
 
 	response *aws.Response
 }

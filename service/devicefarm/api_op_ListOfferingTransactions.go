@@ -6,53 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/devicefarm/types"
 )
-
-// Represents the request to list the offering transaction history.
-type ListOfferingTransactionsInput struct {
-	_ struct{} `type:"structure"`
-
-	// An identifier that was returned from the previous call to this operation,
-	// which can be used to return the next set of items in the list.
-	NextToken *string `locationName:"nextToken" min:"4" type:"string"`
-}
-
-// String returns the string representation
-func (s ListOfferingTransactionsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListOfferingTransactionsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListOfferingTransactionsInput"}
-	if s.NextToken != nil && len(*s.NextToken) < 4 {
-		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 4))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Returns the transaction log of the specified offerings.
-type ListOfferingTransactionsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// An identifier that was returned from the previous call to this operation,
-	// which can be used to return the next set of items in the list.
-	NextToken *string `locationName:"nextToken" min:"4" type:"string"`
-
-	// The audit log of subscriptions you have purchased and modified through AWS
-	// Device Farm.
-	OfferingTransactions []OfferingTransaction `locationName:"offeringTransactions" type:"list"`
-}
-
-// String returns the string representation
-func (s ListOfferingTransactionsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListOfferingTransactions = "ListOfferingTransactions"
 
@@ -74,7 +29,7 @@ const opListOfferingTransactions = "ListOfferingTransactions"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ListOfferingTransactions
-func (c *Client) ListOfferingTransactionsRequest(input *ListOfferingTransactionsInput) ListOfferingTransactionsRequest {
+func (c *Client) ListOfferingTransactionsRequest(input *types.ListOfferingTransactionsInput) ListOfferingTransactionsRequest {
 	op := &aws.Operation{
 		Name:       opListOfferingTransactions,
 		HTTPMethod: "POST",
@@ -88,10 +43,10 @@ func (c *Client) ListOfferingTransactionsRequest(input *ListOfferingTransactions
 	}
 
 	if input == nil {
-		input = &ListOfferingTransactionsInput{}
+		input = &types.ListOfferingTransactionsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListOfferingTransactionsOutput{})
+	req := c.newRequest(op, input, &types.ListOfferingTransactionsOutput{})
 	return ListOfferingTransactionsRequest{Request: req, Input: input, Copy: c.ListOfferingTransactionsRequest}
 }
 
@@ -99,8 +54,8 @@ func (c *Client) ListOfferingTransactionsRequest(input *ListOfferingTransactions
 // ListOfferingTransactions API operation.
 type ListOfferingTransactionsRequest struct {
 	*aws.Request
-	Input *ListOfferingTransactionsInput
-	Copy  func(*ListOfferingTransactionsInput) ListOfferingTransactionsRequest
+	Input *types.ListOfferingTransactionsInput
+	Copy  func(*types.ListOfferingTransactionsInput) ListOfferingTransactionsRequest
 }
 
 // Send marshals and sends the ListOfferingTransactions API request.
@@ -112,7 +67,7 @@ func (r ListOfferingTransactionsRequest) Send(ctx context.Context) (*ListOfferin
 	}
 
 	resp := &ListOfferingTransactionsResponse{
-		ListOfferingTransactionsOutput: r.Request.Data.(*ListOfferingTransactionsOutput),
+		ListOfferingTransactionsOutput: r.Request.Data.(*types.ListOfferingTransactionsOutput),
 		response:                       &aws.Response{Request: r.Request},
 	}
 
@@ -142,7 +97,7 @@ func NewListOfferingTransactionsPaginator(req ListOfferingTransactionsRequest) L
 	return ListOfferingTransactionsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListOfferingTransactionsInput
+				var inCpy *types.ListOfferingTransactionsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -162,14 +117,14 @@ type ListOfferingTransactionsPaginator struct {
 	aws.Pager
 }
 
-func (p *ListOfferingTransactionsPaginator) CurrentPage() *ListOfferingTransactionsOutput {
-	return p.Pager.CurrentPage().(*ListOfferingTransactionsOutput)
+func (p *ListOfferingTransactionsPaginator) CurrentPage() *types.ListOfferingTransactionsOutput {
+	return p.Pager.CurrentPage().(*types.ListOfferingTransactionsOutput)
 }
 
 // ListOfferingTransactionsResponse is the response type for the
 // ListOfferingTransactions API operation.
 type ListOfferingTransactionsResponse struct {
-	*ListOfferingTransactionsOutput
+	*types.ListOfferingTransactionsOutput
 
 	response *aws.Response
 }

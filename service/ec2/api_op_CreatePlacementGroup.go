@@ -6,46 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/ec2query"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-type CreatePlacementGroupInput struct {
-	_ struct{} `type:"structure"`
-
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have
-	// the required permissions, the error response is DryRunOperation. Otherwise,
-	// it is UnauthorizedOperation.
-	DryRun *bool `locationName:"dryRun" type:"boolean"`
-
-	// A name for the placement group. Must be unique within the scope of your account
-	// for the Region.
-	//
-	// Constraints: Up to 255 ASCII characters
-	GroupName *string `locationName:"groupName" type:"string"`
-
-	// The number of partitions. Valid only when Strategy is set to partition.
-	PartitionCount *int64 `type:"integer"`
-
-	// The placement strategy.
-	Strategy PlacementStrategy `locationName:"strategy" type:"string" enum:"true"`
-}
-
-// String returns the string representation
-func (s CreatePlacementGroupInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type CreatePlacementGroupOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s CreatePlacementGroupOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCreatePlacementGroup = "CreatePlacementGroup"
 
@@ -73,7 +37,7 @@ const opCreatePlacementGroup = "CreatePlacementGroup"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreatePlacementGroup
-func (c *Client) CreatePlacementGroupRequest(input *CreatePlacementGroupInput) CreatePlacementGroupRequest {
+func (c *Client) CreatePlacementGroupRequest(input *types.CreatePlacementGroupInput) CreatePlacementGroupRequest {
 	op := &aws.Operation{
 		Name:       opCreatePlacementGroup,
 		HTTPMethod: "POST",
@@ -81,10 +45,10 @@ func (c *Client) CreatePlacementGroupRequest(input *CreatePlacementGroupInput) C
 	}
 
 	if input == nil {
-		input = &CreatePlacementGroupInput{}
+		input = &types.CreatePlacementGroupInput{}
 	}
 
-	req := c.newRequest(op, input, &CreatePlacementGroupOutput{})
+	req := c.newRequest(op, input, &types.CreatePlacementGroupOutput{})
 	req.Handlers.Unmarshal.Remove(ec2query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return CreatePlacementGroupRequest{Request: req, Input: input, Copy: c.CreatePlacementGroupRequest}
@@ -94,8 +58,8 @@ func (c *Client) CreatePlacementGroupRequest(input *CreatePlacementGroupInput) C
 // CreatePlacementGroup API operation.
 type CreatePlacementGroupRequest struct {
 	*aws.Request
-	Input *CreatePlacementGroupInput
-	Copy  func(*CreatePlacementGroupInput) CreatePlacementGroupRequest
+	Input *types.CreatePlacementGroupInput
+	Copy  func(*types.CreatePlacementGroupInput) CreatePlacementGroupRequest
 }
 
 // Send marshals and sends the CreatePlacementGroup API request.
@@ -107,7 +71,7 @@ func (r CreatePlacementGroupRequest) Send(ctx context.Context) (*CreatePlacement
 	}
 
 	resp := &CreatePlacementGroupResponse{
-		CreatePlacementGroupOutput: r.Request.Data.(*CreatePlacementGroupOutput),
+		CreatePlacementGroupOutput: r.Request.Data.(*types.CreatePlacementGroupOutput),
 		response:                   &aws.Response{Request: r.Request},
 	}
 
@@ -117,7 +81,7 @@ func (r CreatePlacementGroupRequest) Send(ctx context.Context) (*CreatePlacement
 // CreatePlacementGroupResponse is the response type for the
 // CreatePlacementGroup API operation.
 type CreatePlacementGroupResponse struct {
-	*CreatePlacementGroupOutput
+	*types.CreatePlacementGroupOutput
 
 	response *aws.Response
 }

@@ -6,29 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/directconnect/types"
 )
-
-type DescribeVirtualGatewaysInput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DescribeVirtualGatewaysInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type DescribeVirtualGatewaysOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The virtual private gateways.
-	VirtualGateways []VirtualGateway `locationName:"virtualGateways" type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeVirtualGatewaysOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeVirtualGateways = "DescribeVirtualGateways"
 
@@ -48,7 +27,7 @@ const opDescribeVirtualGateways = "DescribeVirtualGateways"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DescribeVirtualGateways
-func (c *Client) DescribeVirtualGatewaysRequest(input *DescribeVirtualGatewaysInput) DescribeVirtualGatewaysRequest {
+func (c *Client) DescribeVirtualGatewaysRequest(input *types.DescribeVirtualGatewaysInput) DescribeVirtualGatewaysRequest {
 	op := &aws.Operation{
 		Name:       opDescribeVirtualGateways,
 		HTTPMethod: "POST",
@@ -56,10 +35,10 @@ func (c *Client) DescribeVirtualGatewaysRequest(input *DescribeVirtualGatewaysIn
 	}
 
 	if input == nil {
-		input = &DescribeVirtualGatewaysInput{}
+		input = &types.DescribeVirtualGatewaysInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeVirtualGatewaysOutput{})
+	req := c.newRequest(op, input, &types.DescribeVirtualGatewaysOutput{})
 	return DescribeVirtualGatewaysRequest{Request: req, Input: input, Copy: c.DescribeVirtualGatewaysRequest}
 }
 
@@ -67,8 +46,8 @@ func (c *Client) DescribeVirtualGatewaysRequest(input *DescribeVirtualGatewaysIn
 // DescribeVirtualGateways API operation.
 type DescribeVirtualGatewaysRequest struct {
 	*aws.Request
-	Input *DescribeVirtualGatewaysInput
-	Copy  func(*DescribeVirtualGatewaysInput) DescribeVirtualGatewaysRequest
+	Input *types.DescribeVirtualGatewaysInput
+	Copy  func(*types.DescribeVirtualGatewaysInput) DescribeVirtualGatewaysRequest
 }
 
 // Send marshals and sends the DescribeVirtualGateways API request.
@@ -80,7 +59,7 @@ func (r DescribeVirtualGatewaysRequest) Send(ctx context.Context) (*DescribeVirt
 	}
 
 	resp := &DescribeVirtualGatewaysResponse{
-		DescribeVirtualGatewaysOutput: r.Request.Data.(*DescribeVirtualGatewaysOutput),
+		DescribeVirtualGatewaysOutput: r.Request.Data.(*types.DescribeVirtualGatewaysOutput),
 		response:                      &aws.Response{Request: r.Request},
 	}
 
@@ -90,7 +69,7 @@ func (r DescribeVirtualGatewaysRequest) Send(ctx context.Context) (*DescribeVirt
 // DescribeVirtualGatewaysResponse is the response type for the
 // DescribeVirtualGateways API operation.
 type DescribeVirtualGatewaysResponse struct {
-	*DescribeVirtualGatewaysOutput
+	*types.DescribeVirtualGatewaysOutput
 
 	response *aws.Response
 }

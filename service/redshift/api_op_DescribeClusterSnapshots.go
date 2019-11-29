@@ -4,144 +4,10 @@ package redshift
 
 import (
 	"context"
-	"fmt"
-	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/redshift/types"
 )
-
-type DescribeClusterSnapshotsInput struct {
-	_ struct{} `type:"structure"`
-
-	// A value that indicates whether to return snapshots only for an existing cluster.
-	// You can perform table-level restore only by using a snapshot of an existing
-	// cluster, that is, a cluster that has not been deleted. Values for this parameter
-	// work as follows:
-	//
-	//    * If ClusterExists is set to true, ClusterIdentifier is required.
-	//
-	//    * If ClusterExists is set to false and ClusterIdentifier isn't specified,
-	//    all snapshots associated with deleted clusters (orphaned snapshots) are
-	//    returned.
-	//
-	//    * If ClusterExists is set to false and ClusterIdentifier is specified
-	//    for a deleted cluster, snapshots associated with that cluster are returned.
-	//
-	//    * If ClusterExists is set to false and ClusterIdentifier is specified
-	//    for an existing cluster, no snapshots are returned.
-	ClusterExists *bool `type:"boolean"`
-
-	// The identifier of the cluster which generated the requested snapshots.
-	ClusterIdentifier *string `type:"string"`
-
-	// A time value that requests only snapshots created at or before the specified
-	// time. The time value is specified in ISO 8601 format. For more information
-	// about ISO 8601, go to the ISO8601 Wikipedia page. (http://en.wikipedia.org/wiki/ISO_8601)
-	//
-	// Example: 2012-07-16T18:00:00Z
-	EndTime *time.Time `type:"timestamp"`
-
-	// An optional parameter that specifies the starting point to return a set of
-	// response records. When the results of a DescribeClusterSnapshots request
-	// exceed the value specified in MaxRecords, AWS returns a value in the Marker
-	// field of the response. You can retrieve the next set of response records
-	// by providing the returned marker value in the Marker parameter and retrying
-	// the request.
-	Marker *string `type:"string"`
-
-	// The maximum number of response records to return in each call. If the number
-	// of remaining response records exceeds the specified MaxRecords value, a value
-	// is returned in a marker field of the response. You can retrieve the next
-	// set of records by retrying the command with the returned marker value.
-	//
-	// Default: 100
-	//
-	// Constraints: minimum 20, maximum 100.
-	MaxRecords *int64 `type:"integer"`
-
-	// The AWS customer account used to create or copy the snapshot. Use this field
-	// to filter the results to snapshots owned by a particular account. To describe
-	// snapshots you own, either specify your AWS customer account, or do not specify
-	// the parameter.
-	OwnerAccount *string `type:"string"`
-
-	// The snapshot identifier of the snapshot about which to return information.
-	SnapshotIdentifier *string `type:"string"`
-
-	// The type of snapshots for which you are requesting information. By default,
-	// snapshots of all types are returned.
-	//
-	// Valid Values: automated | manual
-	SnapshotType *string `type:"string"`
-
-	SortingEntities []SnapshotSortingEntity `locationNameList:"SnapshotSortingEntity" type:"list"`
-
-	// A value that requests only snapshots created at or after the specified time.
-	// The time value is specified in ISO 8601 format. For more information about
-	// ISO 8601, go to the ISO8601 Wikipedia page. (http://en.wikipedia.org/wiki/ISO_8601)
-	//
-	// Example: 2012-07-16T18:00:00Z
-	StartTime *time.Time `type:"timestamp"`
-
-	// A tag key or keys for which you want to return all matching cluster snapshots
-	// that are associated with the specified key or keys. For example, suppose
-	// that you have snapshots that are tagged with keys called owner and environment.
-	// If you specify both of these tag keys in the request, Amazon Redshift returns
-	// a response with the snapshots that have either or both of these tag keys
-	// associated with them.
-	TagKeys []string `locationNameList:"TagKey" type:"list"`
-
-	// A tag value or values for which you want to return all matching cluster snapshots
-	// that are associated with the specified tag value or values. For example,
-	// suppose that you have snapshots that are tagged with values called admin
-	// and test. If you specify both of these tag values in the request, Amazon
-	// Redshift returns a response with the snapshots that have either or both of
-	// these tag values associated with them.
-	TagValues []string `locationNameList:"TagValue" type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeClusterSnapshotsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeClusterSnapshotsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeClusterSnapshotsInput"}
-	if s.SortingEntities != nil {
-		for i, v := range s.SortingEntities {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "SortingEntities", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Contains the output from the DescribeClusterSnapshots action.
-type DescribeClusterSnapshotsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A value that indicates the starting point for the next set of response records
-	// in a subsequent request. If a value is returned in a response, you can retrieve
-	// the next set of records by providing this returned marker value in the Marker
-	// parameter and retrying the command. If the Marker field is empty, all response
-	// records have been retrieved for the request.
-	Marker *string `type:"string"`
-
-	// A list of Snapshot instances.
-	Snapshots []Snapshot `locationNameList:"Snapshot" type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeClusterSnapshotsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeClusterSnapshots = "DescribeClusterSnapshots"
 
@@ -172,7 +38,7 @@ const opDescribeClusterSnapshots = "DescribeClusterSnapshots"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeClusterSnapshots
-func (c *Client) DescribeClusterSnapshotsRequest(input *DescribeClusterSnapshotsInput) DescribeClusterSnapshotsRequest {
+func (c *Client) DescribeClusterSnapshotsRequest(input *types.DescribeClusterSnapshotsInput) DescribeClusterSnapshotsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeClusterSnapshots,
 		HTTPMethod: "POST",
@@ -186,10 +52,10 @@ func (c *Client) DescribeClusterSnapshotsRequest(input *DescribeClusterSnapshots
 	}
 
 	if input == nil {
-		input = &DescribeClusterSnapshotsInput{}
+		input = &types.DescribeClusterSnapshotsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeClusterSnapshotsOutput{})
+	req := c.newRequest(op, input, &types.DescribeClusterSnapshotsOutput{})
 	return DescribeClusterSnapshotsRequest{Request: req, Input: input, Copy: c.DescribeClusterSnapshotsRequest}
 }
 
@@ -197,8 +63,8 @@ func (c *Client) DescribeClusterSnapshotsRequest(input *DescribeClusterSnapshots
 // DescribeClusterSnapshots API operation.
 type DescribeClusterSnapshotsRequest struct {
 	*aws.Request
-	Input *DescribeClusterSnapshotsInput
-	Copy  func(*DescribeClusterSnapshotsInput) DescribeClusterSnapshotsRequest
+	Input *types.DescribeClusterSnapshotsInput
+	Copy  func(*types.DescribeClusterSnapshotsInput) DescribeClusterSnapshotsRequest
 }
 
 // Send marshals and sends the DescribeClusterSnapshots API request.
@@ -210,7 +76,7 @@ func (r DescribeClusterSnapshotsRequest) Send(ctx context.Context) (*DescribeClu
 	}
 
 	resp := &DescribeClusterSnapshotsResponse{
-		DescribeClusterSnapshotsOutput: r.Request.Data.(*DescribeClusterSnapshotsOutput),
+		DescribeClusterSnapshotsOutput: r.Request.Data.(*types.DescribeClusterSnapshotsOutput),
 		response:                       &aws.Response{Request: r.Request},
 	}
 
@@ -240,7 +106,7 @@ func NewDescribeClusterSnapshotsPaginator(req DescribeClusterSnapshotsRequest) D
 	return DescribeClusterSnapshotsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *DescribeClusterSnapshotsInput
+				var inCpy *types.DescribeClusterSnapshotsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -260,14 +126,14 @@ type DescribeClusterSnapshotsPaginator struct {
 	aws.Pager
 }
 
-func (p *DescribeClusterSnapshotsPaginator) CurrentPage() *DescribeClusterSnapshotsOutput {
-	return p.Pager.CurrentPage().(*DescribeClusterSnapshotsOutput)
+func (p *DescribeClusterSnapshotsPaginator) CurrentPage() *types.DescribeClusterSnapshotsOutput {
+	return p.Pager.CurrentPage().(*types.DescribeClusterSnapshotsOutput)
 }
 
 // DescribeClusterSnapshotsResponse is the response type for the
 // DescribeClusterSnapshots API operation.
 type DescribeClusterSnapshotsResponse struct {
-	*DescribeClusterSnapshotsOutput
+	*types.DescribeClusterSnapshotsOutput
 
 	response *aws.Response
 }

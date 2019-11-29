@@ -13,6 +13,7 @@ import (
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/glacier"
+	"github.com/aws/aws-sdk-go-v2/service/glacier/types"
 )
 
 // ClientAPI provides an interface to enable mocking the
@@ -46,7 +47,7 @@ import (
 //    type mockClientClient struct {
 //        glacieriface.ClientPI
 //    }
-//    func (m *mockClientClient) AbortMultipartUpload(input *glacier.AbortMultipartUploadInput) (*glacier.AbortMultipartUploadOutput, error) {
+//    func (m *mockClientClient) AbortMultipartUpload(input *types.AbortMultipartUploadInput) (*types.AbortMultipartUploadOutput, error) {
 //        // mock response/functionality
 //    }
 //
@@ -64,75 +65,75 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type ClientAPI interface {
-	AbortMultipartUploadRequest(*glacier.AbortMultipartUploadInput) glacier.AbortMultipartUploadRequest
+	AbortMultipartUploadRequest(*types.AbortMultipartUploadInput) glacier.AbortMultipartUploadRequest
 
-	AbortVaultLockRequest(*glacier.AbortVaultLockInput) glacier.AbortVaultLockRequest
+	AbortVaultLockRequest(*types.AbortVaultLockInput) glacier.AbortVaultLockRequest
 
-	AddTagsToVaultRequest(*glacier.AddTagsToVaultInput) glacier.AddTagsToVaultRequest
+	AddTagsToVaultRequest(*types.AddTagsToVaultInput) glacier.AddTagsToVaultRequest
 
-	CompleteMultipartUploadRequest(*glacier.CompleteMultipartUploadInput) glacier.CompleteMultipartUploadRequest
+	CompleteMultipartUploadRequest(*types.CompleteMultipartUploadInput) glacier.CompleteMultipartUploadRequest
 
-	CompleteVaultLockRequest(*glacier.CompleteVaultLockInput) glacier.CompleteVaultLockRequest
+	CompleteVaultLockRequest(*types.CompleteVaultLockInput) glacier.CompleteVaultLockRequest
 
-	CreateVaultRequest(*glacier.CreateVaultInput) glacier.CreateVaultRequest
+	CreateVaultRequest(*types.CreateVaultInput) glacier.CreateVaultRequest
 
-	DeleteArchiveRequest(*glacier.DeleteArchiveInput) glacier.DeleteArchiveRequest
+	DeleteArchiveRequest(*types.DeleteArchiveInput) glacier.DeleteArchiveRequest
 
-	DeleteVaultRequest(*glacier.DeleteVaultInput) glacier.DeleteVaultRequest
+	DeleteVaultRequest(*types.DeleteVaultInput) glacier.DeleteVaultRequest
 
-	DeleteVaultAccessPolicyRequest(*glacier.DeleteVaultAccessPolicyInput) glacier.DeleteVaultAccessPolicyRequest
+	DeleteVaultAccessPolicyRequest(*types.DeleteVaultAccessPolicyInput) glacier.DeleteVaultAccessPolicyRequest
 
-	DeleteVaultNotificationsRequest(*glacier.DeleteVaultNotificationsInput) glacier.DeleteVaultNotificationsRequest
+	DeleteVaultNotificationsRequest(*types.DeleteVaultNotificationsInput) glacier.DeleteVaultNotificationsRequest
 
-	DescribeJobRequest(*glacier.DescribeJobInput) glacier.DescribeJobRequest
+	DescribeJobRequest(*types.DescribeJobInput) glacier.DescribeJobRequest
 
-	DescribeVaultRequest(*glacier.DescribeVaultInput) glacier.DescribeVaultRequest
+	DescribeVaultRequest(*types.DescribeVaultInput) glacier.DescribeVaultRequest
 
-	GetDataRetrievalPolicyRequest(*glacier.GetDataRetrievalPolicyInput) glacier.GetDataRetrievalPolicyRequest
+	GetDataRetrievalPolicyRequest(*types.GetDataRetrievalPolicyInput) glacier.GetDataRetrievalPolicyRequest
 
-	GetJobOutputRequest(*glacier.GetJobOutputInput) glacier.GetJobOutputRequest
+	GetJobOutputRequest(*types.GetJobOutputInput) glacier.GetJobOutputRequest
 
-	GetVaultAccessPolicyRequest(*glacier.GetVaultAccessPolicyInput) glacier.GetVaultAccessPolicyRequest
+	GetVaultAccessPolicyRequest(*types.GetVaultAccessPolicyInput) glacier.GetVaultAccessPolicyRequest
 
-	GetVaultLockRequest(*glacier.GetVaultLockInput) glacier.GetVaultLockRequest
+	GetVaultLockRequest(*types.GetVaultLockInput) glacier.GetVaultLockRequest
 
-	GetVaultNotificationsRequest(*glacier.GetVaultNotificationsInput) glacier.GetVaultNotificationsRequest
+	GetVaultNotificationsRequest(*types.GetVaultNotificationsInput) glacier.GetVaultNotificationsRequest
 
-	InitiateJobRequest(*glacier.InitiateJobInput) glacier.InitiateJobRequest
+	InitiateJobRequest(*types.InitiateJobInput) glacier.InitiateJobRequest
 
-	InitiateMultipartUploadRequest(*glacier.InitiateMultipartUploadInput) glacier.InitiateMultipartUploadRequest
+	InitiateMultipartUploadRequest(*types.InitiateMultipartUploadInput) glacier.InitiateMultipartUploadRequest
 
-	InitiateVaultLockRequest(*glacier.InitiateVaultLockInput) glacier.InitiateVaultLockRequest
+	InitiateVaultLockRequest(*types.InitiateVaultLockInput) glacier.InitiateVaultLockRequest
 
-	ListJobsRequest(*glacier.ListJobsInput) glacier.ListJobsRequest
+	ListJobsRequest(*types.ListJobsInput) glacier.ListJobsRequest
 
-	ListMultipartUploadsRequest(*glacier.ListMultipartUploadsInput) glacier.ListMultipartUploadsRequest
+	ListMultipartUploadsRequest(*types.ListMultipartUploadsInput) glacier.ListMultipartUploadsRequest
 
-	ListPartsRequest(*glacier.ListPartsInput) glacier.ListPartsRequest
+	ListPartsRequest(*types.ListPartsInput) glacier.ListPartsRequest
 
-	ListProvisionedCapacityRequest(*glacier.ListProvisionedCapacityInput) glacier.ListProvisionedCapacityRequest
+	ListProvisionedCapacityRequest(*types.ListProvisionedCapacityInput) glacier.ListProvisionedCapacityRequest
 
-	ListTagsForVaultRequest(*glacier.ListTagsForVaultInput) glacier.ListTagsForVaultRequest
+	ListTagsForVaultRequest(*types.ListTagsForVaultInput) glacier.ListTagsForVaultRequest
 
-	ListVaultsRequest(*glacier.ListVaultsInput) glacier.ListVaultsRequest
+	ListVaultsRequest(*types.ListVaultsInput) glacier.ListVaultsRequest
 
-	PurchaseProvisionedCapacityRequest(*glacier.PurchaseProvisionedCapacityInput) glacier.PurchaseProvisionedCapacityRequest
+	PurchaseProvisionedCapacityRequest(*types.PurchaseProvisionedCapacityInput) glacier.PurchaseProvisionedCapacityRequest
 
-	RemoveTagsFromVaultRequest(*glacier.RemoveTagsFromVaultInput) glacier.RemoveTagsFromVaultRequest
+	RemoveTagsFromVaultRequest(*types.RemoveTagsFromVaultInput) glacier.RemoveTagsFromVaultRequest
 
-	SetDataRetrievalPolicyRequest(*glacier.SetDataRetrievalPolicyInput) glacier.SetDataRetrievalPolicyRequest
+	SetDataRetrievalPolicyRequest(*types.SetDataRetrievalPolicyInput) glacier.SetDataRetrievalPolicyRequest
 
-	SetVaultAccessPolicyRequest(*glacier.SetVaultAccessPolicyInput) glacier.SetVaultAccessPolicyRequest
+	SetVaultAccessPolicyRequest(*types.SetVaultAccessPolicyInput) glacier.SetVaultAccessPolicyRequest
 
-	SetVaultNotificationsRequest(*glacier.SetVaultNotificationsInput) glacier.SetVaultNotificationsRequest
+	SetVaultNotificationsRequest(*types.SetVaultNotificationsInput) glacier.SetVaultNotificationsRequest
 
-	UploadArchiveRequest(*glacier.UploadArchiveInput) glacier.UploadArchiveRequest
+	UploadArchiveRequest(*types.UploadArchiveInput) glacier.UploadArchiveRequest
 
-	UploadMultipartPartRequest(*glacier.UploadMultipartPartInput) glacier.UploadMultipartPartRequest
+	UploadMultipartPartRequest(*types.UploadMultipartPartInput) glacier.UploadMultipartPartRequest
 
-	WaitUntilVaultExists(context.Context, *glacier.DescribeVaultInput, ...aws.WaiterOption) error
+	WaitUntilVaultExists(context.Context, *types.DescribeVaultInput, ...aws.WaiterOption) error
 
-	WaitUntilVaultNotExists(context.Context, *glacier.DescribeVaultInput, ...aws.WaiterOption) error
+	WaitUntilVaultNotExists(context.Context, *types.DescribeVaultInput, ...aws.WaiterOption) error
 }
 
 var _ ClientAPI = (*glacier.Client)(nil)

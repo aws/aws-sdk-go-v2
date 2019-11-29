@@ -6,90 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/medialive/types"
 )
-
-type ListInputSecurityGroupsInput struct {
-	_ struct{} `type:"structure"`
-
-	MaxResults *int64 `location:"querystring" locationName:"maxResults" min:"1" type:"integer"`
-
-	NextToken *string `location:"querystring" locationName:"nextToken" type:"string"`
-}
-
-// String returns the string representation
-func (s ListInputSecurityGroupsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListInputSecurityGroupsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListInputSecurityGroupsInput"}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListInputSecurityGroupsInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.MaxResults != nil {
-		v := *s.MaxResults
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "maxResults", protocol.Int64Value(v), metadata)
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type ListInputSecurityGroupsOutput struct {
-	_ struct{} `type:"structure"`
-
-	InputSecurityGroups []InputSecurityGroup `locationName:"inputSecurityGroups" type:"list"`
-
-	NextToken *string `locationName:"nextToken" type:"string"`
-}
-
-// String returns the string representation
-func (s ListInputSecurityGroupsOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListInputSecurityGroupsOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.InputSecurityGroups != nil {
-		v := s.InputSecurityGroups
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "inputSecurityGroups", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opListInputSecurityGroups = "ListInputSecurityGroups"
 
@@ -106,7 +24,7 @@ const opListInputSecurityGroups = "ListInputSecurityGroups"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/ListInputSecurityGroups
-func (c *Client) ListInputSecurityGroupsRequest(input *ListInputSecurityGroupsInput) ListInputSecurityGroupsRequest {
+func (c *Client) ListInputSecurityGroupsRequest(input *types.ListInputSecurityGroupsInput) ListInputSecurityGroupsRequest {
 	op := &aws.Operation{
 		Name:       opListInputSecurityGroups,
 		HTTPMethod: "GET",
@@ -120,10 +38,10 @@ func (c *Client) ListInputSecurityGroupsRequest(input *ListInputSecurityGroupsIn
 	}
 
 	if input == nil {
-		input = &ListInputSecurityGroupsInput{}
+		input = &types.ListInputSecurityGroupsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListInputSecurityGroupsOutput{})
+	req := c.newRequest(op, input, &types.ListInputSecurityGroupsOutput{})
 	return ListInputSecurityGroupsRequest{Request: req, Input: input, Copy: c.ListInputSecurityGroupsRequest}
 }
 
@@ -131,8 +49,8 @@ func (c *Client) ListInputSecurityGroupsRequest(input *ListInputSecurityGroupsIn
 // ListInputSecurityGroups API operation.
 type ListInputSecurityGroupsRequest struct {
 	*aws.Request
-	Input *ListInputSecurityGroupsInput
-	Copy  func(*ListInputSecurityGroupsInput) ListInputSecurityGroupsRequest
+	Input *types.ListInputSecurityGroupsInput
+	Copy  func(*types.ListInputSecurityGroupsInput) ListInputSecurityGroupsRequest
 }
 
 // Send marshals and sends the ListInputSecurityGroups API request.
@@ -144,7 +62,7 @@ func (r ListInputSecurityGroupsRequest) Send(ctx context.Context) (*ListInputSec
 	}
 
 	resp := &ListInputSecurityGroupsResponse{
-		ListInputSecurityGroupsOutput: r.Request.Data.(*ListInputSecurityGroupsOutput),
+		ListInputSecurityGroupsOutput: r.Request.Data.(*types.ListInputSecurityGroupsOutput),
 		response:                      &aws.Response{Request: r.Request},
 	}
 
@@ -174,7 +92,7 @@ func NewListInputSecurityGroupsPaginator(req ListInputSecurityGroupsRequest) Lis
 	return ListInputSecurityGroupsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListInputSecurityGroupsInput
+				var inCpy *types.ListInputSecurityGroupsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -194,14 +112,14 @@ type ListInputSecurityGroupsPaginator struct {
 	aws.Pager
 }
 
-func (p *ListInputSecurityGroupsPaginator) CurrentPage() *ListInputSecurityGroupsOutput {
-	return p.Pager.CurrentPage().(*ListInputSecurityGroupsOutput)
+func (p *ListInputSecurityGroupsPaginator) CurrentPage() *types.ListInputSecurityGroupsOutput {
+	return p.Pager.CurrentPage().(*types.ListInputSecurityGroupsOutput)
 }
 
 // ListInputSecurityGroupsResponse is the response type for the
 // ListInputSecurityGroups API operation.
 type ListInputSecurityGroupsResponse struct {
-	*ListInputSecurityGroupsOutput
+	*types.ListInputSecurityGroupsOutput
 
 	response *aws.Response
 }

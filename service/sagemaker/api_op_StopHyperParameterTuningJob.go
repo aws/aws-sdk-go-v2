@@ -6,50 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
 )
-
-type StopHyperParameterTuningJobInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the tuning job to stop.
-	//
-	// HyperParameterTuningJobName is a required field
-	HyperParameterTuningJobName *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s StopHyperParameterTuningJobInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *StopHyperParameterTuningJobInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "StopHyperParameterTuningJobInput"}
-
-	if s.HyperParameterTuningJobName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("HyperParameterTuningJobName"))
-	}
-	if s.HyperParameterTuningJobName != nil && len(*s.HyperParameterTuningJobName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("HyperParameterTuningJobName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type StopHyperParameterTuningJobOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s StopHyperParameterTuningJobOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opStopHyperParameterTuningJob = "StopHyperParameterTuningJob"
 
@@ -72,7 +32,7 @@ const opStopHyperParameterTuningJob = "StopHyperParameterTuningJob"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/StopHyperParameterTuningJob
-func (c *Client) StopHyperParameterTuningJobRequest(input *StopHyperParameterTuningJobInput) StopHyperParameterTuningJobRequest {
+func (c *Client) StopHyperParameterTuningJobRequest(input *types.StopHyperParameterTuningJobInput) StopHyperParameterTuningJobRequest {
 	op := &aws.Operation{
 		Name:       opStopHyperParameterTuningJob,
 		HTTPMethod: "POST",
@@ -80,10 +40,10 @@ func (c *Client) StopHyperParameterTuningJobRequest(input *StopHyperParameterTun
 	}
 
 	if input == nil {
-		input = &StopHyperParameterTuningJobInput{}
+		input = &types.StopHyperParameterTuningJobInput{}
 	}
 
-	req := c.newRequest(op, input, &StopHyperParameterTuningJobOutput{})
+	req := c.newRequest(op, input, &types.StopHyperParameterTuningJobOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return StopHyperParameterTuningJobRequest{Request: req, Input: input, Copy: c.StopHyperParameterTuningJobRequest}
@@ -93,8 +53,8 @@ func (c *Client) StopHyperParameterTuningJobRequest(input *StopHyperParameterTun
 // StopHyperParameterTuningJob API operation.
 type StopHyperParameterTuningJobRequest struct {
 	*aws.Request
-	Input *StopHyperParameterTuningJobInput
-	Copy  func(*StopHyperParameterTuningJobInput) StopHyperParameterTuningJobRequest
+	Input *types.StopHyperParameterTuningJobInput
+	Copy  func(*types.StopHyperParameterTuningJobInput) StopHyperParameterTuningJobRequest
 }
 
 // Send marshals and sends the StopHyperParameterTuningJob API request.
@@ -106,7 +66,7 @@ func (r StopHyperParameterTuningJobRequest) Send(ctx context.Context) (*StopHype
 	}
 
 	resp := &StopHyperParameterTuningJobResponse{
-		StopHyperParameterTuningJobOutput: r.Request.Data.(*StopHyperParameterTuningJobOutput),
+		StopHyperParameterTuningJobOutput: r.Request.Data.(*types.StopHyperParameterTuningJobOutput),
 		response:                          &aws.Response{Request: r.Request},
 	}
 
@@ -116,7 +76,7 @@ func (r StopHyperParameterTuningJobRequest) Send(ctx context.Context) (*StopHype
 // StopHyperParameterTuningJobResponse is the response type for the
 // StopHyperParameterTuningJob API operation.
 type StopHyperParameterTuningJobResponse struct {
-	*StopHyperParameterTuningJobOutput
+	*types.StopHyperParameterTuningJobOutput
 
 	response *aws.Response
 }

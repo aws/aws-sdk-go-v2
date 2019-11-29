@@ -6,71 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
+	"github.com/aws/aws-sdk-go-v2/service/datapipeline/types"
 )
-
-// Contains the parameters for SetStatus.
-type SetStatusInput struct {
-	_ struct{} `type:"structure"`
-
-	// The IDs of the objects. The corresponding objects can be either physical
-	// or components, but not a mix of both types.
-	//
-	// ObjectIds is a required field
-	ObjectIds []string `locationName:"objectIds" type:"list" required:"true"`
-
-	// The ID of the pipeline that contains the objects.
-	//
-	// PipelineId is a required field
-	PipelineId *string `locationName:"pipelineId" min:"1" type:"string" required:"true"`
-
-	// The status to be set on all the objects specified in objectIds. For components,
-	// use PAUSE or RESUME. For instances, use TRY_CANCEL, RERUN, or MARK_FINISHED.
-	//
-	// Status is a required field
-	Status *string `locationName:"status" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s SetStatusInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *SetStatusInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "SetStatusInput"}
-
-	if s.ObjectIds == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ObjectIds"))
-	}
-
-	if s.PipelineId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("PipelineId"))
-	}
-	if s.PipelineId != nil && len(*s.PipelineId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("PipelineId", 1))
-	}
-
-	if s.Status == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Status"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type SetStatusOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s SetStatusOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opSetStatus = "SetStatus"
 
@@ -91,7 +30,7 @@ const opSetStatus = "SetStatus"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/datapipeline-2012-10-29/SetStatus
-func (c *Client) SetStatusRequest(input *SetStatusInput) SetStatusRequest {
+func (c *Client) SetStatusRequest(input *types.SetStatusInput) SetStatusRequest {
 	op := &aws.Operation{
 		Name:       opSetStatus,
 		HTTPMethod: "POST",
@@ -99,10 +38,10 @@ func (c *Client) SetStatusRequest(input *SetStatusInput) SetStatusRequest {
 	}
 
 	if input == nil {
-		input = &SetStatusInput{}
+		input = &types.SetStatusInput{}
 	}
 
-	req := c.newRequest(op, input, &SetStatusOutput{})
+	req := c.newRequest(op, input, &types.SetStatusOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return SetStatusRequest{Request: req, Input: input, Copy: c.SetStatusRequest}
@@ -112,8 +51,8 @@ func (c *Client) SetStatusRequest(input *SetStatusInput) SetStatusRequest {
 // SetStatus API operation.
 type SetStatusRequest struct {
 	*aws.Request
-	Input *SetStatusInput
-	Copy  func(*SetStatusInput) SetStatusRequest
+	Input *types.SetStatusInput
+	Copy  func(*types.SetStatusInput) SetStatusRequest
 }
 
 // Send marshals and sends the SetStatus API request.
@@ -125,7 +64,7 @@ func (r SetStatusRequest) Send(ctx context.Context) (*SetStatusResponse, error) 
 	}
 
 	resp := &SetStatusResponse{
-		SetStatusOutput: r.Request.Data.(*SetStatusOutput),
+		SetStatusOutput: r.Request.Data.(*types.SetStatusOutput),
 		response:        &aws.Response{Request: r.Request},
 	}
 
@@ -135,7 +74,7 @@ func (r SetStatusRequest) Send(ctx context.Context) (*SetStatusResponse, error) 
 // SetStatusResponse is the response type for the
 // SetStatus API operation.
 type SetStatusResponse struct {
-	*SetStatusOutput
+	*types.SetStatusOutput
 
 	response *aws.Response
 }

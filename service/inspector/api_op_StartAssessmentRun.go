@@ -6,61 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/inspector/types"
 )
-
-type StartAssessmentRunInput struct {
-	_ struct{} `type:"structure"`
-
-	// You can specify the name for the assessment run. The name must be unique
-	// for the assessment template whose ARN is used to start the assessment run.
-	AssessmentRunName *string `locationName:"assessmentRunName" min:"1" type:"string"`
-
-	// The ARN of the assessment template of the assessment run that you want to
-	// start.
-	//
-	// AssessmentTemplateArn is a required field
-	AssessmentTemplateArn *string `locationName:"assessmentTemplateArn" min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s StartAssessmentRunInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *StartAssessmentRunInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "StartAssessmentRunInput"}
-	if s.AssessmentRunName != nil && len(*s.AssessmentRunName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("AssessmentRunName", 1))
-	}
-
-	if s.AssessmentTemplateArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("AssessmentTemplateArn"))
-	}
-	if s.AssessmentTemplateArn != nil && len(*s.AssessmentTemplateArn) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("AssessmentTemplateArn", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type StartAssessmentRunOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The ARN of the assessment run that has been started.
-	//
-	// AssessmentRunArn is a required field
-	AssessmentRunArn *string `locationName:"assessmentRunArn" min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s StartAssessmentRunOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opStartAssessmentRun = "StartAssessmentRun"
 
@@ -79,7 +26,7 @@ const opStartAssessmentRun = "StartAssessmentRun"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/StartAssessmentRun
-func (c *Client) StartAssessmentRunRequest(input *StartAssessmentRunInput) StartAssessmentRunRequest {
+func (c *Client) StartAssessmentRunRequest(input *types.StartAssessmentRunInput) StartAssessmentRunRequest {
 	op := &aws.Operation{
 		Name:       opStartAssessmentRun,
 		HTTPMethod: "POST",
@@ -87,10 +34,10 @@ func (c *Client) StartAssessmentRunRequest(input *StartAssessmentRunInput) Start
 	}
 
 	if input == nil {
-		input = &StartAssessmentRunInput{}
+		input = &types.StartAssessmentRunInput{}
 	}
 
-	req := c.newRequest(op, input, &StartAssessmentRunOutput{})
+	req := c.newRequest(op, input, &types.StartAssessmentRunOutput{})
 	return StartAssessmentRunRequest{Request: req, Input: input, Copy: c.StartAssessmentRunRequest}
 }
 
@@ -98,8 +45,8 @@ func (c *Client) StartAssessmentRunRequest(input *StartAssessmentRunInput) Start
 // StartAssessmentRun API operation.
 type StartAssessmentRunRequest struct {
 	*aws.Request
-	Input *StartAssessmentRunInput
-	Copy  func(*StartAssessmentRunInput) StartAssessmentRunRequest
+	Input *types.StartAssessmentRunInput
+	Copy  func(*types.StartAssessmentRunInput) StartAssessmentRunRequest
 }
 
 // Send marshals and sends the StartAssessmentRun API request.
@@ -111,7 +58,7 @@ func (r StartAssessmentRunRequest) Send(ctx context.Context) (*StartAssessmentRu
 	}
 
 	resp := &StartAssessmentRunResponse{
-		StartAssessmentRunOutput: r.Request.Data.(*StartAssessmentRunOutput),
+		StartAssessmentRunOutput: r.Request.Data.(*types.StartAssessmentRunOutput),
 		response:                 &aws.Response{Request: r.Request},
 	}
 
@@ -121,7 +68,7 @@ func (r StartAssessmentRunRequest) Send(ctx context.Context) (*StartAssessmentRu
 // StartAssessmentRunResponse is the response type for the
 // StartAssessmentRun API operation.
 type StartAssessmentRunResponse struct {
-	*StartAssessmentRunOutput
+	*types.StartAssessmentRunOutput
 
 	response *aws.Response
 }

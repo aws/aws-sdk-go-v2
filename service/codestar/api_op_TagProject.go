@@ -6,60 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/codestar/types"
 )
-
-type TagProjectInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the project you want to add a tag to.
-	//
-	// Id is a required field
-	Id *string `locationName:"id" min:"2" type:"string" required:"true"`
-
-	// The tags you want to add to the project.
-	//
-	// Tags is a required field
-	Tags map[string]string `locationName:"tags" type:"map" required:"true"`
-}
-
-// String returns the string representation
-func (s TagProjectInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *TagProjectInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "TagProjectInput"}
-
-	if s.Id == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Id"))
-	}
-	if s.Id != nil && len(*s.Id) < 2 {
-		invalidParams.Add(aws.NewErrParamMinLen("Id", 2))
-	}
-
-	if s.Tags == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Tags"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type TagProjectOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The tags for the project.
-	Tags map[string]string `locationName:"tags" type:"map"`
-}
-
-// String returns the string representation
-func (s TagProjectOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opTagProject = "TagProject"
 
@@ -76,7 +24,7 @@ const opTagProject = "TagProject"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codestar-2017-04-19/TagProject
-func (c *Client) TagProjectRequest(input *TagProjectInput) TagProjectRequest {
+func (c *Client) TagProjectRequest(input *types.TagProjectInput) TagProjectRequest {
 	op := &aws.Operation{
 		Name:       opTagProject,
 		HTTPMethod: "POST",
@@ -84,10 +32,10 @@ func (c *Client) TagProjectRequest(input *TagProjectInput) TagProjectRequest {
 	}
 
 	if input == nil {
-		input = &TagProjectInput{}
+		input = &types.TagProjectInput{}
 	}
 
-	req := c.newRequest(op, input, &TagProjectOutput{})
+	req := c.newRequest(op, input, &types.TagProjectOutput{})
 	return TagProjectRequest{Request: req, Input: input, Copy: c.TagProjectRequest}
 }
 
@@ -95,8 +43,8 @@ func (c *Client) TagProjectRequest(input *TagProjectInput) TagProjectRequest {
 // TagProject API operation.
 type TagProjectRequest struct {
 	*aws.Request
-	Input *TagProjectInput
-	Copy  func(*TagProjectInput) TagProjectRequest
+	Input *types.TagProjectInput
+	Copy  func(*types.TagProjectInput) TagProjectRequest
 }
 
 // Send marshals and sends the TagProject API request.
@@ -108,7 +56,7 @@ func (r TagProjectRequest) Send(ctx context.Context) (*TagProjectResponse, error
 	}
 
 	resp := &TagProjectResponse{
-		TagProjectOutput: r.Request.Data.(*TagProjectOutput),
+		TagProjectOutput: r.Request.Data.(*types.TagProjectOutput),
 		response:         &aws.Response{Request: r.Request},
 	}
 
@@ -118,7 +66,7 @@ func (r TagProjectRequest) Send(ctx context.Context) (*TagProjectResponse, error
 // TagProjectResponse is the response type for the
 // TagProject API operation.
 type TagProjectResponse struct {
-	*TagProjectOutput
+	*types.TagProjectOutput
 
 	response *aws.Response
 }

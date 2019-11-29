@@ -6,59 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/alexaforbusiness/types"
 )
-
-type PutInvitationConfigurationInput struct {
-	_ struct{} `type:"structure"`
-
-	// The email ID of the organization or individual contact that the enrolled
-	// user can use.
-	ContactEmail *string `min:"1" type:"string"`
-
-	// The name of the organization sending the enrollment invite to a user.
-	//
-	// OrganizationName is a required field
-	OrganizationName *string `min:"1" type:"string" required:"true"`
-
-	// The list of private skill IDs that you want to recommend to the user to enable
-	// in the invitation.
-	PrivateSkillIds []string `type:"list"`
-}
-
-// String returns the string representation
-func (s PutInvitationConfigurationInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *PutInvitationConfigurationInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "PutInvitationConfigurationInput"}
-	if s.ContactEmail != nil && len(*s.ContactEmail) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ContactEmail", 1))
-	}
-
-	if s.OrganizationName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("OrganizationName"))
-	}
-	if s.OrganizationName != nil && len(*s.OrganizationName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("OrganizationName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type PutInvitationConfigurationOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s PutInvitationConfigurationOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opPutInvitationConfiguration = "PutInvitationConfiguration"
 
@@ -76,7 +25,7 @@ const opPutInvitationConfiguration = "PutInvitationConfiguration"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/PutInvitationConfiguration
-func (c *Client) PutInvitationConfigurationRequest(input *PutInvitationConfigurationInput) PutInvitationConfigurationRequest {
+func (c *Client) PutInvitationConfigurationRequest(input *types.PutInvitationConfigurationInput) PutInvitationConfigurationRequest {
 	op := &aws.Operation{
 		Name:       opPutInvitationConfiguration,
 		HTTPMethod: "POST",
@@ -84,10 +33,10 @@ func (c *Client) PutInvitationConfigurationRequest(input *PutInvitationConfigura
 	}
 
 	if input == nil {
-		input = &PutInvitationConfigurationInput{}
+		input = &types.PutInvitationConfigurationInput{}
 	}
 
-	req := c.newRequest(op, input, &PutInvitationConfigurationOutput{})
+	req := c.newRequest(op, input, &types.PutInvitationConfigurationOutput{})
 	return PutInvitationConfigurationRequest{Request: req, Input: input, Copy: c.PutInvitationConfigurationRequest}
 }
 
@@ -95,8 +44,8 @@ func (c *Client) PutInvitationConfigurationRequest(input *PutInvitationConfigura
 // PutInvitationConfiguration API operation.
 type PutInvitationConfigurationRequest struct {
 	*aws.Request
-	Input *PutInvitationConfigurationInput
-	Copy  func(*PutInvitationConfigurationInput) PutInvitationConfigurationRequest
+	Input *types.PutInvitationConfigurationInput
+	Copy  func(*types.PutInvitationConfigurationInput) PutInvitationConfigurationRequest
 }
 
 // Send marshals and sends the PutInvitationConfiguration API request.
@@ -108,7 +57,7 @@ func (r PutInvitationConfigurationRequest) Send(ctx context.Context) (*PutInvita
 	}
 
 	resp := &PutInvitationConfigurationResponse{
-		PutInvitationConfigurationOutput: r.Request.Data.(*PutInvitationConfigurationOutput),
+		PutInvitationConfigurationOutput: r.Request.Data.(*types.PutInvitationConfigurationOutput),
 		response:                         &aws.Response{Request: r.Request},
 	}
 
@@ -118,7 +67,7 @@ func (r PutInvitationConfigurationRequest) Send(ctx context.Context) (*PutInvita
 // PutInvitationConfigurationResponse is the response type for the
 // PutInvitationConfiguration API operation.
 type PutInvitationConfigurationResponse struct {
-	*PutInvitationConfigurationOutput
+	*types.PutInvitationConfigurationOutput
 
 	response *aws.Response
 }

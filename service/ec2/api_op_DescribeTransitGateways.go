@@ -6,99 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-type DescribeTransitGatewaysInput struct {
-	_ struct{} `type:"structure"`
-
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have
-	// the required permissions, the error response is DryRunOperation. Otherwise,
-	// it is UnauthorizedOperation.
-	DryRun *bool `type:"boolean"`
-
-	// One or more filters. The possible values are:
-	//
-	//    * options.propagation-default-route-table-id - The ID of the default propagation
-	//    route table.
-	//
-	//    * options.amazon-side-asn - The private ASN for the Amazon side of a BGP
-	//    session.
-	//
-	//    * options.association-default-route-table-id - The ID of the default association
-	//    route table.
-	//
-	//    * options.auto-accept-shared-attachments - Indicates whether there is
-	//    automatic acceptance of attachment requests (enable | disable).
-	//
-	//    * options.default-route-table-association - Indicates whether resource
-	//    attachments are automatically associated with the default association
-	//    route table (enable | disable).
-	//
-	//    * options.default-route-table-propagation - Indicates whether resource
-	//    attachments automatically propagate routes to the default propagation
-	//    route table (enable | disable).
-	//
-	//    * options.dns-support - Indicates whether DNS support is enabled (enable
-	//    | disable).
-	//
-	//    * options.vpn-ecmp-support - Indicates whether Equal Cost Multipath Protocol
-	//    support is enabled (enable | disable).
-	//
-	//    * owner-id - The ID of the AWS account that owns the transit gateway.
-	//
-	//    * state - The state of the attachment (available | deleted | deleting
-	//    | failed | modifying | pendingAcceptance | pending | rollingBack | rejected
-	//    | rejecting).
-	//
-	//    * transit-gateway-id - The ID of the transit gateway.
-	Filters []Filter `locationName:"Filter" locationNameList:"Filter" type:"list"`
-
-	// The maximum number of results to return with a single call. To retrieve the
-	// remaining results, make another call with the returned nextToken value.
-	MaxResults *int64 `min:"5" type:"integer"`
-
-	// The token for the next page of results.
-	NextToken *string `type:"string"`
-
-	// The IDs of the transit gateways.
-	TransitGatewayIds []string `locationNameList:"item" type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeTransitGatewaysInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeTransitGatewaysInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeTransitGatewaysInput"}
-	if s.MaxResults != nil && *s.MaxResults < 5 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 5))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribeTransitGatewaysOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The token to use to retrieve the next page of results. This value is null
-	// when there are no more results to return.
-	NextToken *string `locationName:"nextToken" type:"string"`
-
-	// Information about the transit gateways.
-	TransitGateways []TransitGateway `locationName:"transitGatewaySet" locationNameList:"item" type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeTransitGatewaysOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeTransitGateways = "DescribeTransitGateways"
 
@@ -116,7 +25,7 @@ const opDescribeTransitGateways = "DescribeTransitGateways"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeTransitGateways
-func (c *Client) DescribeTransitGatewaysRequest(input *DescribeTransitGatewaysInput) DescribeTransitGatewaysRequest {
+func (c *Client) DescribeTransitGatewaysRequest(input *types.DescribeTransitGatewaysInput) DescribeTransitGatewaysRequest {
 	op := &aws.Operation{
 		Name:       opDescribeTransitGateways,
 		HTTPMethod: "POST",
@@ -130,10 +39,10 @@ func (c *Client) DescribeTransitGatewaysRequest(input *DescribeTransitGatewaysIn
 	}
 
 	if input == nil {
-		input = &DescribeTransitGatewaysInput{}
+		input = &types.DescribeTransitGatewaysInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeTransitGatewaysOutput{})
+	req := c.newRequest(op, input, &types.DescribeTransitGatewaysOutput{})
 	return DescribeTransitGatewaysRequest{Request: req, Input: input, Copy: c.DescribeTransitGatewaysRequest}
 }
 
@@ -141,8 +50,8 @@ func (c *Client) DescribeTransitGatewaysRequest(input *DescribeTransitGatewaysIn
 // DescribeTransitGateways API operation.
 type DescribeTransitGatewaysRequest struct {
 	*aws.Request
-	Input *DescribeTransitGatewaysInput
-	Copy  func(*DescribeTransitGatewaysInput) DescribeTransitGatewaysRequest
+	Input *types.DescribeTransitGatewaysInput
+	Copy  func(*types.DescribeTransitGatewaysInput) DescribeTransitGatewaysRequest
 }
 
 // Send marshals and sends the DescribeTransitGateways API request.
@@ -154,7 +63,7 @@ func (r DescribeTransitGatewaysRequest) Send(ctx context.Context) (*DescribeTran
 	}
 
 	resp := &DescribeTransitGatewaysResponse{
-		DescribeTransitGatewaysOutput: r.Request.Data.(*DescribeTransitGatewaysOutput),
+		DescribeTransitGatewaysOutput: r.Request.Data.(*types.DescribeTransitGatewaysOutput),
 		response:                      &aws.Response{Request: r.Request},
 	}
 
@@ -184,7 +93,7 @@ func NewDescribeTransitGatewaysPaginator(req DescribeTransitGatewaysRequest) Des
 	return DescribeTransitGatewaysPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *DescribeTransitGatewaysInput
+				var inCpy *types.DescribeTransitGatewaysInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -204,14 +113,14 @@ type DescribeTransitGatewaysPaginator struct {
 	aws.Pager
 }
 
-func (p *DescribeTransitGatewaysPaginator) CurrentPage() *DescribeTransitGatewaysOutput {
-	return p.Pager.CurrentPage().(*DescribeTransitGatewaysOutput)
+func (p *DescribeTransitGatewaysPaginator) CurrentPage() *types.DescribeTransitGatewaysOutput {
+	return p.Pager.CurrentPage().(*types.DescribeTransitGatewaysOutput)
 }
 
 // DescribeTransitGatewaysResponse is the response type for the
 // DescribeTransitGateways API operation.
 type DescribeTransitGatewaysResponse struct {
-	*DescribeTransitGatewaysOutput
+	*types.DescribeTransitGatewaysOutput
 
 	response *aws.Response
 }

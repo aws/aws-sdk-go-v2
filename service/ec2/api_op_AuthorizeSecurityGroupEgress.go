@@ -6,78 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/ec2query"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-type AuthorizeSecurityGroupEgressInput struct {
-	_ struct{} `type:"structure"`
-
-	// Not supported. Use a set of IP permissions to specify the CIDR.
-	CidrIp *string `locationName:"cidrIp" type:"string"`
-
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have
-	// the required permissions, the error response is DryRunOperation. Otherwise,
-	// it is UnauthorizedOperation.
-	DryRun *bool `locationName:"dryRun" type:"boolean"`
-
-	// Not supported. Use a set of IP permissions to specify the port.
-	FromPort *int64 `locationName:"fromPort" type:"integer"`
-
-	// The ID of the security group.
-	//
-	// GroupId is a required field
-	GroupId *string `locationName:"groupId" type:"string" required:"true"`
-
-	// The sets of IP permissions. You can't specify a destination security group
-	// and a CIDR IP address range in the same set of permissions.
-	IpPermissions []IpPermission `locationName:"ipPermissions" locationNameList:"item" type:"list"`
-
-	// Not supported. Use a set of IP permissions to specify the protocol name or
-	// number.
-	IpProtocol *string `locationName:"ipProtocol" type:"string"`
-
-	// Not supported. Use a set of IP permissions to specify a destination security
-	// group.
-	SourceSecurityGroupName *string `locationName:"sourceSecurityGroupName" type:"string"`
-
-	// Not supported. Use a set of IP permissions to specify a destination security
-	// group.
-	SourceSecurityGroupOwnerId *string `locationName:"sourceSecurityGroupOwnerId" type:"string"`
-
-	// Not supported. Use a set of IP permissions to specify the port.
-	ToPort *int64 `locationName:"toPort" type:"integer"`
-}
-
-// String returns the string representation
-func (s AuthorizeSecurityGroupEgressInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *AuthorizeSecurityGroupEgressInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "AuthorizeSecurityGroupEgressInput"}
-
-	if s.GroupId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("GroupId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type AuthorizeSecurityGroupEgressOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s AuthorizeSecurityGroupEgressOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opAuthorizeSecurityGroupEgress = "AuthorizeSecurityGroupEgress"
 
@@ -110,7 +42,7 @@ const opAuthorizeSecurityGroupEgress = "AuthorizeSecurityGroupEgress"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AuthorizeSecurityGroupEgress
-func (c *Client) AuthorizeSecurityGroupEgressRequest(input *AuthorizeSecurityGroupEgressInput) AuthorizeSecurityGroupEgressRequest {
+func (c *Client) AuthorizeSecurityGroupEgressRequest(input *types.AuthorizeSecurityGroupEgressInput) AuthorizeSecurityGroupEgressRequest {
 	op := &aws.Operation{
 		Name:       opAuthorizeSecurityGroupEgress,
 		HTTPMethod: "POST",
@@ -118,10 +50,10 @@ func (c *Client) AuthorizeSecurityGroupEgressRequest(input *AuthorizeSecurityGro
 	}
 
 	if input == nil {
-		input = &AuthorizeSecurityGroupEgressInput{}
+		input = &types.AuthorizeSecurityGroupEgressInput{}
 	}
 
-	req := c.newRequest(op, input, &AuthorizeSecurityGroupEgressOutput{})
+	req := c.newRequest(op, input, &types.AuthorizeSecurityGroupEgressOutput{})
 	req.Handlers.Unmarshal.Remove(ec2query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return AuthorizeSecurityGroupEgressRequest{Request: req, Input: input, Copy: c.AuthorizeSecurityGroupEgressRequest}
@@ -131,8 +63,8 @@ func (c *Client) AuthorizeSecurityGroupEgressRequest(input *AuthorizeSecurityGro
 // AuthorizeSecurityGroupEgress API operation.
 type AuthorizeSecurityGroupEgressRequest struct {
 	*aws.Request
-	Input *AuthorizeSecurityGroupEgressInput
-	Copy  func(*AuthorizeSecurityGroupEgressInput) AuthorizeSecurityGroupEgressRequest
+	Input *types.AuthorizeSecurityGroupEgressInput
+	Copy  func(*types.AuthorizeSecurityGroupEgressInput) AuthorizeSecurityGroupEgressRequest
 }
 
 // Send marshals and sends the AuthorizeSecurityGroupEgress API request.
@@ -144,7 +76,7 @@ func (r AuthorizeSecurityGroupEgressRequest) Send(ctx context.Context) (*Authori
 	}
 
 	resp := &AuthorizeSecurityGroupEgressResponse{
-		AuthorizeSecurityGroupEgressOutput: r.Request.Data.(*AuthorizeSecurityGroupEgressOutput),
+		AuthorizeSecurityGroupEgressOutput: r.Request.Data.(*types.AuthorizeSecurityGroupEgressOutput),
 		response:                           &aws.Response{Request: r.Request},
 	}
 
@@ -154,7 +86,7 @@ func (r AuthorizeSecurityGroupEgressRequest) Send(ctx context.Context) (*Authori
 // AuthorizeSecurityGroupEgressResponse is the response type for the
 // AuthorizeSecurityGroupEgress API operation.
 type AuthorizeSecurityGroupEgressResponse struct {
-	*AuthorizeSecurityGroupEgressOutput
+	*types.AuthorizeSecurityGroupEgressOutput
 
 	response *aws.Response
 }

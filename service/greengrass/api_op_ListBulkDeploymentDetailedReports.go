@@ -6,103 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/greengrass/types"
 )
-
-type ListBulkDeploymentDetailedReportsInput struct {
-	_ struct{} `type:"structure"`
-
-	// BulkDeploymentId is a required field
-	BulkDeploymentId *string `location:"uri" locationName:"BulkDeploymentId" type:"string" required:"true"`
-
-	MaxResults *string `location:"querystring" locationName:"MaxResults" type:"string"`
-
-	NextToken *string `location:"querystring" locationName:"NextToken" type:"string"`
-}
-
-// String returns the string representation
-func (s ListBulkDeploymentDetailedReportsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListBulkDeploymentDetailedReportsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListBulkDeploymentDetailedReportsInput"}
-
-	if s.BulkDeploymentId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("BulkDeploymentId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListBulkDeploymentDetailedReportsInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.BulkDeploymentId != nil {
-		v := *s.BulkDeploymentId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "BulkDeploymentId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.MaxResults != nil {
-		v := *s.MaxResults
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "MaxResults", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type ListBulkDeploymentDetailedReportsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A list of the individual group deployments in the bulk deployment operation.
-	Deployments []BulkDeploymentResult `type:"list"`
-
-	// The token for the next set of results, or ''null'' if there are no additional
-	// results.
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s ListBulkDeploymentDetailedReportsOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListBulkDeploymentDetailedReportsOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.Deployments != nil {
-		v := s.Deployments
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "Deployments", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opListBulkDeploymentDetailedReports = "ListBulkDeploymentDetailedReports"
 
@@ -120,7 +25,7 @@ const opListBulkDeploymentDetailedReports = "ListBulkDeploymentDetailedReports"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/ListBulkDeploymentDetailedReports
-func (c *Client) ListBulkDeploymentDetailedReportsRequest(input *ListBulkDeploymentDetailedReportsInput) ListBulkDeploymentDetailedReportsRequest {
+func (c *Client) ListBulkDeploymentDetailedReportsRequest(input *types.ListBulkDeploymentDetailedReportsInput) ListBulkDeploymentDetailedReportsRequest {
 	op := &aws.Operation{
 		Name:       opListBulkDeploymentDetailedReports,
 		HTTPMethod: "GET",
@@ -128,10 +33,10 @@ func (c *Client) ListBulkDeploymentDetailedReportsRequest(input *ListBulkDeploym
 	}
 
 	if input == nil {
-		input = &ListBulkDeploymentDetailedReportsInput{}
+		input = &types.ListBulkDeploymentDetailedReportsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListBulkDeploymentDetailedReportsOutput{})
+	req := c.newRequest(op, input, &types.ListBulkDeploymentDetailedReportsOutput{})
 	return ListBulkDeploymentDetailedReportsRequest{Request: req, Input: input, Copy: c.ListBulkDeploymentDetailedReportsRequest}
 }
 
@@ -139,8 +44,8 @@ func (c *Client) ListBulkDeploymentDetailedReportsRequest(input *ListBulkDeploym
 // ListBulkDeploymentDetailedReports API operation.
 type ListBulkDeploymentDetailedReportsRequest struct {
 	*aws.Request
-	Input *ListBulkDeploymentDetailedReportsInput
-	Copy  func(*ListBulkDeploymentDetailedReportsInput) ListBulkDeploymentDetailedReportsRequest
+	Input *types.ListBulkDeploymentDetailedReportsInput
+	Copy  func(*types.ListBulkDeploymentDetailedReportsInput) ListBulkDeploymentDetailedReportsRequest
 }
 
 // Send marshals and sends the ListBulkDeploymentDetailedReports API request.
@@ -152,7 +57,7 @@ func (r ListBulkDeploymentDetailedReportsRequest) Send(ctx context.Context) (*Li
 	}
 
 	resp := &ListBulkDeploymentDetailedReportsResponse{
-		ListBulkDeploymentDetailedReportsOutput: r.Request.Data.(*ListBulkDeploymentDetailedReportsOutput),
+		ListBulkDeploymentDetailedReportsOutput: r.Request.Data.(*types.ListBulkDeploymentDetailedReportsOutput),
 		response:                                &aws.Response{Request: r.Request},
 	}
 
@@ -162,7 +67,7 @@ func (r ListBulkDeploymentDetailedReportsRequest) Send(ctx context.Context) (*Li
 // ListBulkDeploymentDetailedReportsResponse is the response type for the
 // ListBulkDeploymentDetailedReports API operation.
 type ListBulkDeploymentDetailedReportsResponse struct {
-	*ListBulkDeploymentDetailedReportsOutput
+	*types.ListBulkDeploymentDetailedReportsOutput
 
 	response *aws.Response
 }

@@ -6,68 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/restjson"
+	"github.com/aws/aws-sdk-go-v2/service/iotanalytics/types"
 )
-
-type DeleteDatastoreInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the data store to delete.
-	//
-	// DatastoreName is a required field
-	DatastoreName *string `location:"uri" locationName:"datastoreName" min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteDatastoreInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteDatastoreInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteDatastoreInput"}
-
-	if s.DatastoreName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DatastoreName"))
-	}
-	if s.DatastoreName != nil && len(*s.DatastoreName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("DatastoreName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteDatastoreInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.DatastoreName != nil {
-		v := *s.DatastoreName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "datastoreName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type DeleteDatastoreOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteDatastoreOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteDatastoreOutput) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
 
 const opDeleteDatastore = "DeleteDatastore"
 
@@ -84,7 +26,7 @@ const opDeleteDatastore = "DeleteDatastore"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iotanalytics-2017-11-27/DeleteDatastore
-func (c *Client) DeleteDatastoreRequest(input *DeleteDatastoreInput) DeleteDatastoreRequest {
+func (c *Client) DeleteDatastoreRequest(input *types.DeleteDatastoreInput) DeleteDatastoreRequest {
 	op := &aws.Operation{
 		Name:       opDeleteDatastore,
 		HTTPMethod: "DELETE",
@@ -92,10 +34,10 @@ func (c *Client) DeleteDatastoreRequest(input *DeleteDatastoreInput) DeleteDatas
 	}
 
 	if input == nil {
-		input = &DeleteDatastoreInput{}
+		input = &types.DeleteDatastoreInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteDatastoreOutput{})
+	req := c.newRequest(op, input, &types.DeleteDatastoreOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return DeleteDatastoreRequest{Request: req, Input: input, Copy: c.DeleteDatastoreRequest}
@@ -105,8 +47,8 @@ func (c *Client) DeleteDatastoreRequest(input *DeleteDatastoreInput) DeleteDatas
 // DeleteDatastore API operation.
 type DeleteDatastoreRequest struct {
 	*aws.Request
-	Input *DeleteDatastoreInput
-	Copy  func(*DeleteDatastoreInput) DeleteDatastoreRequest
+	Input *types.DeleteDatastoreInput
+	Copy  func(*types.DeleteDatastoreInput) DeleteDatastoreRequest
 }
 
 // Send marshals and sends the DeleteDatastore API request.
@@ -118,7 +60,7 @@ func (r DeleteDatastoreRequest) Send(ctx context.Context) (*DeleteDatastoreRespo
 	}
 
 	resp := &DeleteDatastoreResponse{
-		DeleteDatastoreOutput: r.Request.Data.(*DeleteDatastoreOutput),
+		DeleteDatastoreOutput: r.Request.Data.(*types.DeleteDatastoreOutput),
 		response:              &aws.Response{Request: r.Request},
 	}
 
@@ -128,7 +70,7 @@ func (r DeleteDatastoreRequest) Send(ctx context.Context) (*DeleteDatastoreRespo
 // DeleteDatastoreResponse is the response type for the
 // DeleteDatastore API operation.
 type DeleteDatastoreResponse struct {
-	*DeleteDatastoreOutput
+	*types.DeleteDatastoreOutput
 
 	response *aws.Response
 }

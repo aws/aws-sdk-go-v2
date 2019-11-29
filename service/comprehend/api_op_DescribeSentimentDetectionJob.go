@@ -6,53 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/comprehend/types"
 )
-
-type DescribeSentimentDetectionJobInput struct {
-	_ struct{} `type:"structure"`
-
-	// The identifier that Amazon Comprehend generated for the job. The operation
-	// returns this identifier in its response.
-	//
-	// JobId is a required field
-	JobId *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeSentimentDetectionJobInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeSentimentDetectionJobInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeSentimentDetectionJobInput"}
-
-	if s.JobId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("JobId"))
-	}
-	if s.JobId != nil && len(*s.JobId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("JobId", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribeSentimentDetectionJobOutput struct {
-	_ struct{} `type:"structure"`
-
-	// An object that contains the properties associated with a sentiment detection
-	// job.
-	SentimentDetectionJobProperties *SentimentDetectionJobProperties `type:"structure"`
-}
-
-// String returns the string representation
-func (s DescribeSentimentDetectionJobOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeSentimentDetectionJob = "DescribeSentimentDetectionJob"
 
@@ -70,7 +25,7 @@ const opDescribeSentimentDetectionJob = "DescribeSentimentDetectionJob"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/DescribeSentimentDetectionJob
-func (c *Client) DescribeSentimentDetectionJobRequest(input *DescribeSentimentDetectionJobInput) DescribeSentimentDetectionJobRequest {
+func (c *Client) DescribeSentimentDetectionJobRequest(input *types.DescribeSentimentDetectionJobInput) DescribeSentimentDetectionJobRequest {
 	op := &aws.Operation{
 		Name:       opDescribeSentimentDetectionJob,
 		HTTPMethod: "POST",
@@ -78,10 +33,10 @@ func (c *Client) DescribeSentimentDetectionJobRequest(input *DescribeSentimentDe
 	}
 
 	if input == nil {
-		input = &DescribeSentimentDetectionJobInput{}
+		input = &types.DescribeSentimentDetectionJobInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeSentimentDetectionJobOutput{})
+	req := c.newRequest(op, input, &types.DescribeSentimentDetectionJobOutput{})
 	return DescribeSentimentDetectionJobRequest{Request: req, Input: input, Copy: c.DescribeSentimentDetectionJobRequest}
 }
 
@@ -89,8 +44,8 @@ func (c *Client) DescribeSentimentDetectionJobRequest(input *DescribeSentimentDe
 // DescribeSentimentDetectionJob API operation.
 type DescribeSentimentDetectionJobRequest struct {
 	*aws.Request
-	Input *DescribeSentimentDetectionJobInput
-	Copy  func(*DescribeSentimentDetectionJobInput) DescribeSentimentDetectionJobRequest
+	Input *types.DescribeSentimentDetectionJobInput
+	Copy  func(*types.DescribeSentimentDetectionJobInput) DescribeSentimentDetectionJobRequest
 }
 
 // Send marshals and sends the DescribeSentimentDetectionJob API request.
@@ -102,7 +57,7 @@ func (r DescribeSentimentDetectionJobRequest) Send(ctx context.Context) (*Descri
 	}
 
 	resp := &DescribeSentimentDetectionJobResponse{
-		DescribeSentimentDetectionJobOutput: r.Request.Data.(*DescribeSentimentDetectionJobOutput),
+		DescribeSentimentDetectionJobOutput: r.Request.Data.(*types.DescribeSentimentDetectionJobOutput),
 		response:                            &aws.Response{Request: r.Request},
 	}
 
@@ -112,7 +67,7 @@ func (r DescribeSentimentDetectionJobRequest) Send(ctx context.Context) (*Descri
 // DescribeSentimentDetectionJobResponse is the response type for the
 // DescribeSentimentDetectionJob API operation.
 type DescribeSentimentDetectionJobResponse struct {
-	*DescribeSentimentDetectionJobOutput
+	*types.DescribeSentimentDetectionJobOutput
 
 	response *aws.Response
 }

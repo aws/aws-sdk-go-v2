@@ -6,37 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/lightsail/types"
 )
-
-type GetDiskSnapshotsInput struct {
-	_ struct{} `type:"structure"`
-
-	// A token used for advancing to the next page of results from your GetDiskSnapshots
-	// request.
-	PageToken *string `locationName:"pageToken" type:"string"`
-}
-
-// String returns the string representation
-func (s GetDiskSnapshotsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type GetDiskSnapshotsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// An array of objects containing information about all block storage disk snapshots.
-	DiskSnapshots []DiskSnapshot `locationName:"diskSnapshots" type:"list"`
-
-	// A token used for advancing to the next page of results from your GetDiskSnapshots
-	// request.
-	NextPageToken *string `locationName:"nextPageToken" type:"string"`
-}
-
-// String returns the string representation
-func (s GetDiskSnapshotsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetDiskSnapshots = "GetDiskSnapshots"
 
@@ -58,7 +29,7 @@ const opGetDiskSnapshots = "GetDiskSnapshots"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetDiskSnapshots
-func (c *Client) GetDiskSnapshotsRequest(input *GetDiskSnapshotsInput) GetDiskSnapshotsRequest {
+func (c *Client) GetDiskSnapshotsRequest(input *types.GetDiskSnapshotsInput) GetDiskSnapshotsRequest {
 	op := &aws.Operation{
 		Name:       opGetDiskSnapshots,
 		HTTPMethod: "POST",
@@ -66,10 +37,10 @@ func (c *Client) GetDiskSnapshotsRequest(input *GetDiskSnapshotsInput) GetDiskSn
 	}
 
 	if input == nil {
-		input = &GetDiskSnapshotsInput{}
+		input = &types.GetDiskSnapshotsInput{}
 	}
 
-	req := c.newRequest(op, input, &GetDiskSnapshotsOutput{})
+	req := c.newRequest(op, input, &types.GetDiskSnapshotsOutput{})
 	return GetDiskSnapshotsRequest{Request: req, Input: input, Copy: c.GetDiskSnapshotsRequest}
 }
 
@@ -77,8 +48,8 @@ func (c *Client) GetDiskSnapshotsRequest(input *GetDiskSnapshotsInput) GetDiskSn
 // GetDiskSnapshots API operation.
 type GetDiskSnapshotsRequest struct {
 	*aws.Request
-	Input *GetDiskSnapshotsInput
-	Copy  func(*GetDiskSnapshotsInput) GetDiskSnapshotsRequest
+	Input *types.GetDiskSnapshotsInput
+	Copy  func(*types.GetDiskSnapshotsInput) GetDiskSnapshotsRequest
 }
 
 // Send marshals and sends the GetDiskSnapshots API request.
@@ -90,7 +61,7 @@ func (r GetDiskSnapshotsRequest) Send(ctx context.Context) (*GetDiskSnapshotsRes
 	}
 
 	resp := &GetDiskSnapshotsResponse{
-		GetDiskSnapshotsOutput: r.Request.Data.(*GetDiskSnapshotsOutput),
+		GetDiskSnapshotsOutput: r.Request.Data.(*types.GetDiskSnapshotsOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -100,7 +71,7 @@ func (r GetDiskSnapshotsRequest) Send(ctx context.Context) (*GetDiskSnapshotsRes
 // GetDiskSnapshotsResponse is the response type for the
 // GetDiskSnapshots API operation.
 type GetDiskSnapshotsResponse struct {
-	*GetDiskSnapshotsOutput
+	*types.GetDiskSnapshotsOutput
 
 	response *aws.Response
 }

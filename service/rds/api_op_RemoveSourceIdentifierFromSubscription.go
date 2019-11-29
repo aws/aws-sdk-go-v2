@@ -6,60 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/rds/types"
 )
-
-type RemoveSourceIdentifierFromSubscriptionInput struct {
-	_ struct{} `type:"structure"`
-
-	// The source identifier to be removed from the subscription, such as the DB
-	// instance identifier for a DB instance or the name of a security group.
-	//
-	// SourceIdentifier is a required field
-	SourceIdentifier *string `type:"string" required:"true"`
-
-	// The name of the RDS event notification subscription you want to remove a
-	// source identifier from.
-	//
-	// SubscriptionName is a required field
-	SubscriptionName *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s RemoveSourceIdentifierFromSubscriptionInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *RemoveSourceIdentifierFromSubscriptionInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "RemoveSourceIdentifierFromSubscriptionInput"}
-
-	if s.SourceIdentifier == nil {
-		invalidParams.Add(aws.NewErrParamRequired("SourceIdentifier"))
-	}
-
-	if s.SubscriptionName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("SubscriptionName"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type RemoveSourceIdentifierFromSubscriptionOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Contains the results of a successful invocation of the DescribeEventSubscriptions
-	// action.
-	EventSubscription *EventSubscription `type:"structure"`
-}
-
-// String returns the string representation
-func (s RemoveSourceIdentifierFromSubscriptionOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opRemoveSourceIdentifierFromSubscription = "RemoveSourceIdentifierFromSubscription"
 
@@ -76,7 +24,7 @@ const opRemoveSourceIdentifierFromSubscription = "RemoveSourceIdentifierFromSubs
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RemoveSourceIdentifierFromSubscription
-func (c *Client) RemoveSourceIdentifierFromSubscriptionRequest(input *RemoveSourceIdentifierFromSubscriptionInput) RemoveSourceIdentifierFromSubscriptionRequest {
+func (c *Client) RemoveSourceIdentifierFromSubscriptionRequest(input *types.RemoveSourceIdentifierFromSubscriptionInput) RemoveSourceIdentifierFromSubscriptionRequest {
 	op := &aws.Operation{
 		Name:       opRemoveSourceIdentifierFromSubscription,
 		HTTPMethod: "POST",
@@ -84,10 +32,10 @@ func (c *Client) RemoveSourceIdentifierFromSubscriptionRequest(input *RemoveSour
 	}
 
 	if input == nil {
-		input = &RemoveSourceIdentifierFromSubscriptionInput{}
+		input = &types.RemoveSourceIdentifierFromSubscriptionInput{}
 	}
 
-	req := c.newRequest(op, input, &RemoveSourceIdentifierFromSubscriptionOutput{})
+	req := c.newRequest(op, input, &types.RemoveSourceIdentifierFromSubscriptionOutput{})
 	return RemoveSourceIdentifierFromSubscriptionRequest{Request: req, Input: input, Copy: c.RemoveSourceIdentifierFromSubscriptionRequest}
 }
 
@@ -95,8 +43,8 @@ func (c *Client) RemoveSourceIdentifierFromSubscriptionRequest(input *RemoveSour
 // RemoveSourceIdentifierFromSubscription API operation.
 type RemoveSourceIdentifierFromSubscriptionRequest struct {
 	*aws.Request
-	Input *RemoveSourceIdentifierFromSubscriptionInput
-	Copy  func(*RemoveSourceIdentifierFromSubscriptionInput) RemoveSourceIdentifierFromSubscriptionRequest
+	Input *types.RemoveSourceIdentifierFromSubscriptionInput
+	Copy  func(*types.RemoveSourceIdentifierFromSubscriptionInput) RemoveSourceIdentifierFromSubscriptionRequest
 }
 
 // Send marshals and sends the RemoveSourceIdentifierFromSubscription API request.
@@ -108,7 +56,7 @@ func (r RemoveSourceIdentifierFromSubscriptionRequest) Send(ctx context.Context)
 	}
 
 	resp := &RemoveSourceIdentifierFromSubscriptionResponse{
-		RemoveSourceIdentifierFromSubscriptionOutput: r.Request.Data.(*RemoveSourceIdentifierFromSubscriptionOutput),
+		RemoveSourceIdentifierFromSubscriptionOutput: r.Request.Data.(*types.RemoveSourceIdentifierFromSubscriptionOutput),
 		response: &aws.Response{Request: r.Request},
 	}
 
@@ -118,7 +66,7 @@ func (r RemoveSourceIdentifierFromSubscriptionRequest) Send(ctx context.Context)
 // RemoveSourceIdentifierFromSubscriptionResponse is the response type for the
 // RemoveSourceIdentifierFromSubscription API operation.
 type RemoveSourceIdentifierFromSubscriptionResponse struct {
-	*RemoveSourceIdentifierFromSubscriptionOutput
+	*types.RemoveSourceIdentifierFromSubscriptionOutput
 
 	response *aws.Response
 }

@@ -6,66 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ssm/types"
 )
-
-type GetInventorySchemaInput struct {
-	_ struct{} `type:"structure"`
-
-	// Returns inventory schemas that support aggregation. For example, this call
-	// returns the AWS:InstanceInformation type, because it supports aggregation
-	// based on the PlatformName, PlatformType, and PlatformVersion attributes.
-	Aggregator *bool `type:"boolean"`
-
-	// The maximum number of items to return for this call. The call also returns
-	// a token that you can specify in a subsequent call to get the next set of
-	// results.
-	MaxResults *int64 `min:"50" type:"integer"`
-
-	// The token for the next set of items to return. (You received this token from
-	// a previous call.)
-	NextToken *string `type:"string"`
-
-	// Returns the sub-type schema for a specified inventory type.
-	SubType *bool `type:"boolean"`
-
-	// The type of inventory item to return.
-	TypeName *string `type:"string"`
-}
-
-// String returns the string representation
-func (s GetInventorySchemaInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetInventorySchemaInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetInventorySchemaInput"}
-	if s.MaxResults != nil && *s.MaxResults < 50 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 50))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type GetInventorySchemaOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The token to use when requesting the next set of items. If there are no additional
-	// items to return, the string is empty.
-	NextToken *string `type:"string"`
-
-	// Inventory schemas returned by the request.
-	Schemas []InventoryItemSchema `type:"list"`
-}
-
-// String returns the string representation
-func (s GetInventorySchemaOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetInventorySchema = "GetInventorySchema"
 
@@ -83,7 +25,7 @@ const opGetInventorySchema = "GetInventorySchema"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetInventorySchema
-func (c *Client) GetInventorySchemaRequest(input *GetInventorySchemaInput) GetInventorySchemaRequest {
+func (c *Client) GetInventorySchemaRequest(input *types.GetInventorySchemaInput) GetInventorySchemaRequest {
 	op := &aws.Operation{
 		Name:       opGetInventorySchema,
 		HTTPMethod: "POST",
@@ -91,10 +33,10 @@ func (c *Client) GetInventorySchemaRequest(input *GetInventorySchemaInput) GetIn
 	}
 
 	if input == nil {
-		input = &GetInventorySchemaInput{}
+		input = &types.GetInventorySchemaInput{}
 	}
 
-	req := c.newRequest(op, input, &GetInventorySchemaOutput{})
+	req := c.newRequest(op, input, &types.GetInventorySchemaOutput{})
 	return GetInventorySchemaRequest{Request: req, Input: input, Copy: c.GetInventorySchemaRequest}
 }
 
@@ -102,8 +44,8 @@ func (c *Client) GetInventorySchemaRequest(input *GetInventorySchemaInput) GetIn
 // GetInventorySchema API operation.
 type GetInventorySchemaRequest struct {
 	*aws.Request
-	Input *GetInventorySchemaInput
-	Copy  func(*GetInventorySchemaInput) GetInventorySchemaRequest
+	Input *types.GetInventorySchemaInput
+	Copy  func(*types.GetInventorySchemaInput) GetInventorySchemaRequest
 }
 
 // Send marshals and sends the GetInventorySchema API request.
@@ -115,7 +57,7 @@ func (r GetInventorySchemaRequest) Send(ctx context.Context) (*GetInventorySchem
 	}
 
 	resp := &GetInventorySchemaResponse{
-		GetInventorySchemaOutput: r.Request.Data.(*GetInventorySchemaOutput),
+		GetInventorySchemaOutput: r.Request.Data.(*types.GetInventorySchemaOutput),
 		response:                 &aws.Response{Request: r.Request},
 	}
 
@@ -125,7 +67,7 @@ func (r GetInventorySchemaRequest) Send(ctx context.Context) (*GetInventorySchem
 // GetInventorySchemaResponse is the response type for the
 // GetInventorySchema API operation.
 type GetInventorySchemaResponse struct {
-	*GetInventorySchemaOutput
+	*types.GetInventorySchemaOutput
 
 	response *aws.Response
 }

@@ -6,106 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/mq/types"
 )
-
-type DescribeBrokerEngineTypesInput struct {
-	_ struct{} `type:"structure"`
-
-	EngineType *string `location:"querystring" locationName:"engineType" type:"string"`
-
-	MaxResults *int64 `location:"querystring" locationName:"maxResults" min:"1" type:"integer"`
-
-	NextToken *string `location:"querystring" locationName:"nextToken" type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeBrokerEngineTypesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeBrokerEngineTypesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeBrokerEngineTypesInput"}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DescribeBrokerEngineTypesInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.EngineType != nil {
-		v := *s.EngineType
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "engineType", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.MaxResults != nil {
-		v := *s.MaxResults
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "maxResults", protocol.Int64Value(v), metadata)
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type DescribeBrokerEngineTypesOutput struct {
-	_ struct{} `type:"structure"`
-
-	BrokerEngineTypes []BrokerEngineType `locationName:"brokerEngineTypes" type:"list"`
-
-	MaxResults *int64 `locationName:"maxResults" min:"5" type:"integer"`
-
-	NextToken *string `locationName:"nextToken" type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeBrokerEngineTypesOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DescribeBrokerEngineTypesOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.BrokerEngineTypes != nil {
-		v := s.BrokerEngineTypes
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "brokerEngineTypes", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	if s.MaxResults != nil {
-		v := *s.MaxResults
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "maxResults", protocol.Int64Value(v), metadata)
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opDescribeBrokerEngineTypes = "DescribeBrokerEngineTypes"
 
@@ -122,7 +24,7 @@ const opDescribeBrokerEngineTypes = "DescribeBrokerEngineTypes"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/DescribeBrokerEngineTypes
-func (c *Client) DescribeBrokerEngineTypesRequest(input *DescribeBrokerEngineTypesInput) DescribeBrokerEngineTypesRequest {
+func (c *Client) DescribeBrokerEngineTypesRequest(input *types.DescribeBrokerEngineTypesInput) DescribeBrokerEngineTypesRequest {
 	op := &aws.Operation{
 		Name:       opDescribeBrokerEngineTypes,
 		HTTPMethod: "GET",
@@ -130,10 +32,10 @@ func (c *Client) DescribeBrokerEngineTypesRequest(input *DescribeBrokerEngineTyp
 	}
 
 	if input == nil {
-		input = &DescribeBrokerEngineTypesInput{}
+		input = &types.DescribeBrokerEngineTypesInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeBrokerEngineTypesOutput{})
+	req := c.newRequest(op, input, &types.DescribeBrokerEngineTypesOutput{})
 	return DescribeBrokerEngineTypesRequest{Request: req, Input: input, Copy: c.DescribeBrokerEngineTypesRequest}
 }
 
@@ -141,8 +43,8 @@ func (c *Client) DescribeBrokerEngineTypesRequest(input *DescribeBrokerEngineTyp
 // DescribeBrokerEngineTypes API operation.
 type DescribeBrokerEngineTypesRequest struct {
 	*aws.Request
-	Input *DescribeBrokerEngineTypesInput
-	Copy  func(*DescribeBrokerEngineTypesInput) DescribeBrokerEngineTypesRequest
+	Input *types.DescribeBrokerEngineTypesInput
+	Copy  func(*types.DescribeBrokerEngineTypesInput) DescribeBrokerEngineTypesRequest
 }
 
 // Send marshals and sends the DescribeBrokerEngineTypes API request.
@@ -154,7 +56,7 @@ func (r DescribeBrokerEngineTypesRequest) Send(ctx context.Context) (*DescribeBr
 	}
 
 	resp := &DescribeBrokerEngineTypesResponse{
-		DescribeBrokerEngineTypesOutput: r.Request.Data.(*DescribeBrokerEngineTypesOutput),
+		DescribeBrokerEngineTypesOutput: r.Request.Data.(*types.DescribeBrokerEngineTypesOutput),
 		response:                        &aws.Response{Request: r.Request},
 	}
 
@@ -164,7 +66,7 @@ func (r DescribeBrokerEngineTypesRequest) Send(ctx context.Context) (*DescribeBr
 // DescribeBrokerEngineTypesResponse is the response type for the
 // DescribeBrokerEngineTypes API operation.
 type DescribeBrokerEngineTypesResponse struct {
-	*DescribeBrokerEngineTypesOutput
+	*types.DescribeBrokerEngineTypesOutput
 
 	response *aws.Response
 }

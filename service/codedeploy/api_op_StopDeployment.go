@@ -6,62 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/codedeploy/types"
 )
-
-// Represents the input of a StopDeployment operation.
-type StopDeploymentInput struct {
-	_ struct{} `type:"structure"`
-
-	// Indicates, when a deployment is stopped, whether instances that have been
-	// updated should be rolled back to the previous version of the application
-	// revision.
-	AutoRollbackEnabled *bool `locationName:"autoRollbackEnabled" type:"boolean"`
-
-	// The unique ID of a deployment.
-	//
-	// DeploymentId is a required field
-	DeploymentId *string `locationName:"deploymentId" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s StopDeploymentInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *StopDeploymentInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "StopDeploymentInput"}
-
-	if s.DeploymentId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DeploymentId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Represents the output of a StopDeployment operation.
-type StopDeploymentOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The status of the stop deployment operation:
-	//
-	//    * Pending: The stop operation is pending.
-	//
-	//    * Succeeded: The stop operation was successful.
-	Status StopStatus `locationName:"status" type:"string" enum:"true"`
-
-	// An accompanying status message.
-	StatusMessage *string `locationName:"statusMessage" type:"string"`
-}
-
-// String returns the string representation
-func (s StopDeploymentOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opStopDeployment = "StopDeployment"
 
@@ -78,7 +24,7 @@ const opStopDeployment = "StopDeployment"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/StopDeployment
-func (c *Client) StopDeploymentRequest(input *StopDeploymentInput) StopDeploymentRequest {
+func (c *Client) StopDeploymentRequest(input *types.StopDeploymentInput) StopDeploymentRequest {
 	op := &aws.Operation{
 		Name:       opStopDeployment,
 		HTTPMethod: "POST",
@@ -86,10 +32,10 @@ func (c *Client) StopDeploymentRequest(input *StopDeploymentInput) StopDeploymen
 	}
 
 	if input == nil {
-		input = &StopDeploymentInput{}
+		input = &types.StopDeploymentInput{}
 	}
 
-	req := c.newRequest(op, input, &StopDeploymentOutput{})
+	req := c.newRequest(op, input, &types.StopDeploymentOutput{})
 	return StopDeploymentRequest{Request: req, Input: input, Copy: c.StopDeploymentRequest}
 }
 
@@ -97,8 +43,8 @@ func (c *Client) StopDeploymentRequest(input *StopDeploymentInput) StopDeploymen
 // StopDeployment API operation.
 type StopDeploymentRequest struct {
 	*aws.Request
-	Input *StopDeploymentInput
-	Copy  func(*StopDeploymentInput) StopDeploymentRequest
+	Input *types.StopDeploymentInput
+	Copy  func(*types.StopDeploymentInput) StopDeploymentRequest
 }
 
 // Send marshals and sends the StopDeployment API request.
@@ -110,7 +56,7 @@ func (r StopDeploymentRequest) Send(ctx context.Context) (*StopDeploymentRespons
 	}
 
 	resp := &StopDeploymentResponse{
-		StopDeploymentOutput: r.Request.Data.(*StopDeploymentOutput),
+		StopDeploymentOutput: r.Request.Data.(*types.StopDeploymentOutput),
 		response:             &aws.Response{Request: r.Request},
 	}
 
@@ -120,7 +66,7 @@ func (r StopDeploymentRequest) Send(ctx context.Context) (*StopDeploymentRespons
 // StopDeploymentResponse is the response type for the
 // StopDeployment API operation.
 type StopDeploymentResponse struct {
-	*StopDeploymentOutput
+	*types.StopDeploymentOutput
 
 	response *aws.Response
 }

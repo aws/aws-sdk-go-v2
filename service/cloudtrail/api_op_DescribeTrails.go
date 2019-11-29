@@ -6,69 +6,16 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/cloudtrail/types"
 )
-
-// Returns information about the trail.
-type DescribeTrailsInput struct {
-	_ struct{} `type:"structure"`
-
-	// Specifies whether to include shadow trails in the response. A shadow trail
-	// is the replication in a region of a trail that was created in a different
-	// region, or in the case of an organization trail, the replication of an organization
-	// trail in member accounts. If you do not include shadow trails, organization
-	// trails in a member account and region replication trails will not be returned.
-	// The default is true.
-	IncludeShadowTrails *bool `locationName:"includeShadowTrails" type:"boolean"`
-
-	// Specifies a list of trail names, trail ARNs, or both, of the trails to describe.
-	// The format of a trail ARN is:
-	//
-	// arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail
-	//
-	// If an empty list is specified, information for the trail in the current region
-	// is returned.
-	//
-	//    * If an empty list is specified and IncludeShadowTrails is false, then
-	//    information for all trails in the current region is returned.
-	//
-	//    * If an empty list is specified and IncludeShadowTrails is null or true,
-	//    then information for all trails in the current region and any associated
-	//    shadow trails in other regions is returned.
-	//
-	// If one or more trail names are specified, information is returned only if
-	// the names match the names of trails belonging only to the current region.
-	// To return information about a trail in another region, you must specify its
-	// trail ARN.
-	TrailNameList []string `locationName:"trailNameList" type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeTrailsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Returns the objects or data listed below if successful. Otherwise, returns
-// an error.
-type DescribeTrailsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The list of trail objects.
-	TrailList []Trail `locationName:"trailList" type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeTrailsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeTrails = "DescribeTrails"
 
 // DescribeTrailsRequest returns a request value for making API operation for
 // AWS CloudTrail.
 //
-// Retrieves settings for the trail associated with the current region for your
-// account.
+// Retrieves settings for one or more trails associated with the current region
+// for your account.
 //
 //    // Example sending a request using DescribeTrailsRequest.
 //    req := client.DescribeTrailsRequest(params)
@@ -78,7 +25,7 @@ const opDescribeTrails = "DescribeTrails"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/DescribeTrails
-func (c *Client) DescribeTrailsRequest(input *DescribeTrailsInput) DescribeTrailsRequest {
+func (c *Client) DescribeTrailsRequest(input *types.DescribeTrailsInput) DescribeTrailsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeTrails,
 		HTTPMethod: "POST",
@@ -86,10 +33,10 @@ func (c *Client) DescribeTrailsRequest(input *DescribeTrailsInput) DescribeTrail
 	}
 
 	if input == nil {
-		input = &DescribeTrailsInput{}
+		input = &types.DescribeTrailsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeTrailsOutput{})
+	req := c.newRequest(op, input, &types.DescribeTrailsOutput{})
 	return DescribeTrailsRequest{Request: req, Input: input, Copy: c.DescribeTrailsRequest}
 }
 
@@ -97,8 +44,8 @@ func (c *Client) DescribeTrailsRequest(input *DescribeTrailsInput) DescribeTrail
 // DescribeTrails API operation.
 type DescribeTrailsRequest struct {
 	*aws.Request
-	Input *DescribeTrailsInput
-	Copy  func(*DescribeTrailsInput) DescribeTrailsRequest
+	Input *types.DescribeTrailsInput
+	Copy  func(*types.DescribeTrailsInput) DescribeTrailsRequest
 }
 
 // Send marshals and sends the DescribeTrails API request.
@@ -110,7 +57,7 @@ func (r DescribeTrailsRequest) Send(ctx context.Context) (*DescribeTrailsRespons
 	}
 
 	resp := &DescribeTrailsResponse{
-		DescribeTrailsOutput: r.Request.Data.(*DescribeTrailsOutput),
+		DescribeTrailsOutput: r.Request.Data.(*types.DescribeTrailsOutput),
 		response:             &aws.Response{Request: r.Request},
 	}
 
@@ -120,7 +67,7 @@ func (r DescribeTrailsRequest) Send(ctx context.Context) (*DescribeTrailsRespons
 // DescribeTrailsResponse is the response type for the
 // DescribeTrails API operation.
 type DescribeTrailsResponse struct {
-	*DescribeTrailsOutput
+	*types.DescribeTrailsOutput
 
 	response *aws.Response
 }

@@ -6,71 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ssm/types"
 )
-
-type DeregisterTargetFromMaintenanceWindowInput struct {
-	_ struct{} `type:"structure"`
-
-	// The system checks if the target is being referenced by a task. If the target
-	// is being referenced, the system returns an error and does not deregister
-	// the target from the maintenance window.
-	Safe *bool `type:"boolean"`
-
-	// The ID of the maintenance window the target should be removed from.
-	//
-	// WindowId is a required field
-	WindowId *string `min:"20" type:"string" required:"true"`
-
-	// The ID of the target definition to remove.
-	//
-	// WindowTargetId is a required field
-	WindowTargetId *string `min:"36" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeregisterTargetFromMaintenanceWindowInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeregisterTargetFromMaintenanceWindowInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeregisterTargetFromMaintenanceWindowInput"}
-
-	if s.WindowId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("WindowId"))
-	}
-	if s.WindowId != nil && len(*s.WindowId) < 20 {
-		invalidParams.Add(aws.NewErrParamMinLen("WindowId", 20))
-	}
-
-	if s.WindowTargetId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("WindowTargetId"))
-	}
-	if s.WindowTargetId != nil && len(*s.WindowTargetId) < 36 {
-		invalidParams.Add(aws.NewErrParamMinLen("WindowTargetId", 36))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeregisterTargetFromMaintenanceWindowOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the maintenance window the target was removed from.
-	WindowId *string `min:"20" type:"string"`
-
-	// The ID of the removed target definition.
-	WindowTargetId *string `min:"36" type:"string"`
-}
-
-// String returns the string representation
-func (s DeregisterTargetFromMaintenanceWindowOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeregisterTargetFromMaintenanceWindow = "DeregisterTargetFromMaintenanceWindow"
 
@@ -87,7 +24,7 @@ const opDeregisterTargetFromMaintenanceWindow = "DeregisterTargetFromMaintenance
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DeregisterTargetFromMaintenanceWindow
-func (c *Client) DeregisterTargetFromMaintenanceWindowRequest(input *DeregisterTargetFromMaintenanceWindowInput) DeregisterTargetFromMaintenanceWindowRequest {
+func (c *Client) DeregisterTargetFromMaintenanceWindowRequest(input *types.DeregisterTargetFromMaintenanceWindowInput) DeregisterTargetFromMaintenanceWindowRequest {
 	op := &aws.Operation{
 		Name:       opDeregisterTargetFromMaintenanceWindow,
 		HTTPMethod: "POST",
@@ -95,10 +32,10 @@ func (c *Client) DeregisterTargetFromMaintenanceWindowRequest(input *DeregisterT
 	}
 
 	if input == nil {
-		input = &DeregisterTargetFromMaintenanceWindowInput{}
+		input = &types.DeregisterTargetFromMaintenanceWindowInput{}
 	}
 
-	req := c.newRequest(op, input, &DeregisterTargetFromMaintenanceWindowOutput{})
+	req := c.newRequest(op, input, &types.DeregisterTargetFromMaintenanceWindowOutput{})
 	return DeregisterTargetFromMaintenanceWindowRequest{Request: req, Input: input, Copy: c.DeregisterTargetFromMaintenanceWindowRequest}
 }
 
@@ -106,8 +43,8 @@ func (c *Client) DeregisterTargetFromMaintenanceWindowRequest(input *DeregisterT
 // DeregisterTargetFromMaintenanceWindow API operation.
 type DeregisterTargetFromMaintenanceWindowRequest struct {
 	*aws.Request
-	Input *DeregisterTargetFromMaintenanceWindowInput
-	Copy  func(*DeregisterTargetFromMaintenanceWindowInput) DeregisterTargetFromMaintenanceWindowRequest
+	Input *types.DeregisterTargetFromMaintenanceWindowInput
+	Copy  func(*types.DeregisterTargetFromMaintenanceWindowInput) DeregisterTargetFromMaintenanceWindowRequest
 }
 
 // Send marshals and sends the DeregisterTargetFromMaintenanceWindow API request.
@@ -119,7 +56,7 @@ func (r DeregisterTargetFromMaintenanceWindowRequest) Send(ctx context.Context) 
 	}
 
 	resp := &DeregisterTargetFromMaintenanceWindowResponse{
-		DeregisterTargetFromMaintenanceWindowOutput: r.Request.Data.(*DeregisterTargetFromMaintenanceWindowOutput),
+		DeregisterTargetFromMaintenanceWindowOutput: r.Request.Data.(*types.DeregisterTargetFromMaintenanceWindowOutput),
 		response: &aws.Response{Request: r.Request},
 	}
 
@@ -129,7 +66,7 @@ func (r DeregisterTargetFromMaintenanceWindowRequest) Send(ctx context.Context) 
 // DeregisterTargetFromMaintenanceWindowResponse is the response type for the
 // DeregisterTargetFromMaintenanceWindow API operation.
 type DeregisterTargetFromMaintenanceWindowResponse struct {
-	*DeregisterTargetFromMaintenanceWindowOutput
+	*types.DeregisterTargetFromMaintenanceWindowOutput
 
 	response *aws.Response
 }

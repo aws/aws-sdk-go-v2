@@ -10,6 +10,7 @@ package pinpointsmsvoiceiface
 
 import (
 	"github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoice"
+	"github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoice/types"
 )
 
 // ClientAPI provides an interface to enable mocking the
@@ -43,7 +44,7 @@ import (
 //    type mockClientClient struct {
 //        pinpointsmsvoiceiface.ClientPI
 //    }
-//    func (m *mockClientClient) CreateConfigurationSet(input *pinpointsmsvoice.CreateConfigurationSetInput) (*pinpointsmsvoice.CreateConfigurationSetOutput, error) {
+//    func (m *mockClientClient) CreateConfigurationSet(input *types.CreateConfigurationSetInput) (*types.CreateConfigurationSetOutput, error) {
 //        // mock response/functionality
 //    }
 //
@@ -61,21 +62,21 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type ClientAPI interface {
-	CreateConfigurationSetRequest(*pinpointsmsvoice.CreateConfigurationSetInput) pinpointsmsvoice.CreateConfigurationSetRequest
+	CreateConfigurationSetRequest(*types.CreateConfigurationSetInput) pinpointsmsvoice.CreateConfigurationSetRequest
 
-	CreateConfigurationSetEventDestinationRequest(*pinpointsmsvoice.CreateConfigurationSetEventDestinationInput) pinpointsmsvoice.CreateConfigurationSetEventDestinationRequest
+	CreateConfigurationSetEventDestinationRequest(*types.CreateConfigurationSetEventDestinationInput) pinpointsmsvoice.CreateConfigurationSetEventDestinationRequest
 
-	DeleteConfigurationSetRequest(*pinpointsmsvoice.DeleteConfigurationSetInput) pinpointsmsvoice.DeleteConfigurationSetRequest
+	DeleteConfigurationSetRequest(*types.DeleteConfigurationSetInput) pinpointsmsvoice.DeleteConfigurationSetRequest
 
-	DeleteConfigurationSetEventDestinationRequest(*pinpointsmsvoice.DeleteConfigurationSetEventDestinationInput) pinpointsmsvoice.DeleteConfigurationSetEventDestinationRequest
+	DeleteConfigurationSetEventDestinationRequest(*types.DeleteConfigurationSetEventDestinationInput) pinpointsmsvoice.DeleteConfigurationSetEventDestinationRequest
 
-	GetConfigurationSetEventDestinationsRequest(*pinpointsmsvoice.GetConfigurationSetEventDestinationsInput) pinpointsmsvoice.GetConfigurationSetEventDestinationsRequest
+	GetConfigurationSetEventDestinationsRequest(*types.GetConfigurationSetEventDestinationsInput) pinpointsmsvoice.GetConfigurationSetEventDestinationsRequest
 
-	ListConfigurationSetsRequest(*pinpointsmsvoice.ListConfigurationSetsInput) pinpointsmsvoice.ListConfigurationSetsRequest
+	ListConfigurationSetsRequest(*types.ListConfigurationSetsInput) pinpointsmsvoice.ListConfigurationSetsRequest
 
-	SendVoiceMessageRequest(*pinpointsmsvoice.SendVoiceMessageInput) pinpointsmsvoice.SendVoiceMessageRequest
+	SendVoiceMessageRequest(*types.SendVoiceMessageInput) pinpointsmsvoice.SendVoiceMessageRequest
 
-	UpdateConfigurationSetEventDestinationRequest(*pinpointsmsvoice.UpdateConfigurationSetEventDestinationInput) pinpointsmsvoice.UpdateConfigurationSetEventDestinationRequest
+	UpdateConfigurationSetEventDestinationRequest(*types.UpdateConfigurationSetEventDestinationInput) pinpointsmsvoice.UpdateConfigurationSetEventDestinationRequest
 }
 
 var _ ClientAPI = (*pinpointsmsvoice.Client)(nil)

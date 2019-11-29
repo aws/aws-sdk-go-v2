@@ -6,58 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/cloudsearch/types"
 )
-
-// Container for the parameters to the BuildSuggester operation. Specifies the
-// name of the domain you want to update.
-type BuildSuggestersInput struct {
-	_ struct{} `type:"structure"`
-
-	// A string that represents the name of a domain. Domain names are unique across
-	// the domains owned by an account within an AWS region. Domain names start
-	// with a letter or number and can contain the following characters: a-z (lowercase),
-	// 0-9, and - (hyphen).
-	//
-	// DomainName is a required field
-	DomainName *string `min:"3" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s BuildSuggestersInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *BuildSuggestersInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "BuildSuggestersInput"}
-
-	if s.DomainName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DomainName"))
-	}
-	if s.DomainName != nil && len(*s.DomainName) < 3 {
-		invalidParams.Add(aws.NewErrParamMinLen("DomainName", 3))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// The result of a BuildSuggester request. Contains a list of the fields used
-// for suggestions.
-type BuildSuggestersOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A list of field names.
-	FieldNames []string `type:"list"`
-}
-
-// String returns the string representation
-func (s BuildSuggestersOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opBuildSuggesters = "BuildSuggesters"
 
@@ -74,7 +24,7 @@ const opBuildSuggesters = "BuildSuggesters"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) BuildSuggestersRequest(input *BuildSuggestersInput) BuildSuggestersRequest {
+func (c *Client) BuildSuggestersRequest(input *types.BuildSuggestersInput) BuildSuggestersRequest {
 	op := &aws.Operation{
 		Name:       opBuildSuggesters,
 		HTTPMethod: "POST",
@@ -82,10 +32,10 @@ func (c *Client) BuildSuggestersRequest(input *BuildSuggestersInput) BuildSugges
 	}
 
 	if input == nil {
-		input = &BuildSuggestersInput{}
+		input = &types.BuildSuggestersInput{}
 	}
 
-	req := c.newRequest(op, input, &BuildSuggestersOutput{})
+	req := c.newRequest(op, input, &types.BuildSuggestersOutput{})
 	return BuildSuggestersRequest{Request: req, Input: input, Copy: c.BuildSuggestersRequest}
 }
 
@@ -93,8 +43,8 @@ func (c *Client) BuildSuggestersRequest(input *BuildSuggestersInput) BuildSugges
 // BuildSuggesters API operation.
 type BuildSuggestersRequest struct {
 	*aws.Request
-	Input *BuildSuggestersInput
-	Copy  func(*BuildSuggestersInput) BuildSuggestersRequest
+	Input *types.BuildSuggestersInput
+	Copy  func(*types.BuildSuggestersInput) BuildSuggestersRequest
 }
 
 // Send marshals and sends the BuildSuggesters API request.
@@ -106,7 +56,7 @@ func (r BuildSuggestersRequest) Send(ctx context.Context) (*BuildSuggestersRespo
 	}
 
 	resp := &BuildSuggestersResponse{
-		BuildSuggestersOutput: r.Request.Data.(*BuildSuggestersOutput),
+		BuildSuggestersOutput: r.Request.Data.(*types.BuildSuggestersOutput),
 		response:              &aws.Response{Request: r.Request},
 	}
 
@@ -116,7 +66,7 @@ func (r BuildSuggestersRequest) Send(ctx context.Context) (*BuildSuggestersRespo
 // BuildSuggestersResponse is the response type for the
 // BuildSuggesters API operation.
 type BuildSuggestersResponse struct {
-	*BuildSuggestersOutput
+	*types.BuildSuggestersOutput
 
 	response *aws.Response
 }

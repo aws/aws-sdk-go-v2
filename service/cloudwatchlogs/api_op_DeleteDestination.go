@@ -6,50 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
+	"github.com/aws/aws-sdk-go-v2/service/cloudwatchlogs/types"
 )
-
-type DeleteDestinationInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the destination.
-	//
-	// DestinationName is a required field
-	DestinationName *string `locationName:"destinationName" min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteDestinationInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteDestinationInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteDestinationInput"}
-
-	if s.DestinationName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DestinationName"))
-	}
-	if s.DestinationName != nil && len(*s.DestinationName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("DestinationName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteDestinationOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteDestinationOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteDestination = "DeleteDestination"
 
@@ -68,7 +28,7 @@ const opDeleteDestination = "DeleteDestination"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/DeleteDestination
-func (c *Client) DeleteDestinationRequest(input *DeleteDestinationInput) DeleteDestinationRequest {
+func (c *Client) DeleteDestinationRequest(input *types.DeleteDestinationInput) DeleteDestinationRequest {
 	op := &aws.Operation{
 		Name:       opDeleteDestination,
 		HTTPMethod: "POST",
@@ -76,10 +36,10 @@ func (c *Client) DeleteDestinationRequest(input *DeleteDestinationInput) DeleteD
 	}
 
 	if input == nil {
-		input = &DeleteDestinationInput{}
+		input = &types.DeleteDestinationInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteDestinationOutput{})
+	req := c.newRequest(op, input, &types.DeleteDestinationOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return DeleteDestinationRequest{Request: req, Input: input, Copy: c.DeleteDestinationRequest}
@@ -89,8 +49,8 @@ func (c *Client) DeleteDestinationRequest(input *DeleteDestinationInput) DeleteD
 // DeleteDestination API operation.
 type DeleteDestinationRequest struct {
 	*aws.Request
-	Input *DeleteDestinationInput
-	Copy  func(*DeleteDestinationInput) DeleteDestinationRequest
+	Input *types.DeleteDestinationInput
+	Copy  func(*types.DeleteDestinationInput) DeleteDestinationRequest
 }
 
 // Send marshals and sends the DeleteDestination API request.
@@ -102,7 +62,7 @@ func (r DeleteDestinationRequest) Send(ctx context.Context) (*DeleteDestinationR
 	}
 
 	resp := &DeleteDestinationResponse{
-		DeleteDestinationOutput: r.Request.Data.(*DeleteDestinationOutput),
+		DeleteDestinationOutput: r.Request.Data.(*types.DeleteDestinationOutput),
 		response:                &aws.Response{Request: r.Request},
 	}
 
@@ -112,7 +72,7 @@ func (r DeleteDestinationRequest) Send(ctx context.Context) (*DeleteDestinationR
 // DeleteDestinationResponse is the response type for the
 // DeleteDestination API operation.
 type DeleteDestinationResponse struct {
-	*DeleteDestinationOutput
+	*types.DeleteDestinationOutput
 
 	response *aws.Response
 }

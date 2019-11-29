@@ -6,62 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/devicefarm/types"
 )
-
-type UpdateUploadInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the uploaded test spec.
-	//
-	// Arn is a required field
-	Arn *string `locationName:"arn" min:"32" type:"string" required:"true"`
-
-	// The upload's content type (for example, "application/x-yaml").
-	ContentType *string `locationName:"contentType" type:"string"`
-
-	// Set to true if the YAML file has changed and needs to be updated; otherwise,
-	// set to false.
-	EditContent *bool `locationName:"editContent" type:"boolean"`
-
-	// The upload's test spec file name. The name should not contain the '/' character.
-	// The test spec file name must end with the .yaml or .yml file extension.
-	Name *string `locationName:"name" type:"string"`
-}
-
-// String returns the string representation
-func (s UpdateUploadInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateUploadInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateUploadInput"}
-
-	if s.Arn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Arn"))
-	}
-	if s.Arn != nil && len(*s.Arn) < 32 {
-		invalidParams.Add(aws.NewErrParamMinLen("Arn", 32))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type UpdateUploadOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A test spec uploaded to Device Farm.
-	Upload *Upload `locationName:"upload" type:"structure"`
-}
-
-// String returns the string representation
-func (s UpdateUploadOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opUpdateUpload = "UpdateUpload"
 
@@ -78,7 +24,7 @@ const opUpdateUpload = "UpdateUpload"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/UpdateUpload
-func (c *Client) UpdateUploadRequest(input *UpdateUploadInput) UpdateUploadRequest {
+func (c *Client) UpdateUploadRequest(input *types.UpdateUploadInput) UpdateUploadRequest {
 	op := &aws.Operation{
 		Name:       opUpdateUpload,
 		HTTPMethod: "POST",
@@ -86,10 +32,10 @@ func (c *Client) UpdateUploadRequest(input *UpdateUploadInput) UpdateUploadReque
 	}
 
 	if input == nil {
-		input = &UpdateUploadInput{}
+		input = &types.UpdateUploadInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateUploadOutput{})
+	req := c.newRequest(op, input, &types.UpdateUploadOutput{})
 	return UpdateUploadRequest{Request: req, Input: input, Copy: c.UpdateUploadRequest}
 }
 
@@ -97,8 +43,8 @@ func (c *Client) UpdateUploadRequest(input *UpdateUploadInput) UpdateUploadReque
 // UpdateUpload API operation.
 type UpdateUploadRequest struct {
 	*aws.Request
-	Input *UpdateUploadInput
-	Copy  func(*UpdateUploadInput) UpdateUploadRequest
+	Input *types.UpdateUploadInput
+	Copy  func(*types.UpdateUploadInput) UpdateUploadRequest
 }
 
 // Send marshals and sends the UpdateUpload API request.
@@ -110,7 +56,7 @@ func (r UpdateUploadRequest) Send(ctx context.Context) (*UpdateUploadResponse, e
 	}
 
 	resp := &UpdateUploadResponse{
-		UpdateUploadOutput: r.Request.Data.(*UpdateUploadOutput),
+		UpdateUploadOutput: r.Request.Data.(*types.UpdateUploadOutput),
 		response:           &aws.Response{Request: r.Request},
 	}
 
@@ -120,7 +66,7 @@ func (r UpdateUploadRequest) Send(ctx context.Context) (*UpdateUploadResponse, e
 // UpdateUploadResponse is the response type for the
 // UpdateUpload API operation.
 type UpdateUploadResponse struct {
-	*UpdateUploadOutput
+	*types.UpdateUploadOutput
 
 	response *aws.Response
 }

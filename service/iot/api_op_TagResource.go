@@ -6,85 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/iot/types"
 )
-
-type TagResourceInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ARN of the resource.
-	//
-	// ResourceArn is a required field
-	ResourceArn *string `locationName:"resourceArn" type:"string" required:"true"`
-
-	// The new or modified tags for the resource.
-	//
-	// Tags is a required field
-	Tags []Tag `locationName:"tags" type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s TagResourceInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *TagResourceInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "TagResourceInput"}
-
-	if s.ResourceArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ResourceArn"))
-	}
-
-	if s.Tags == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Tags"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s TagResourceInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.ResourceArn != nil {
-		v := *s.ResourceArn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "resourceArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Tags != nil {
-		v := s.Tags
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "tags", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	return nil
-}
-
-type TagResourceOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s TagResourceOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s TagResourceOutput) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
 
 const opTagResource = "TagResource"
 
@@ -100,7 +23,7 @@ const opTagResource = "TagResource"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) TagResourceRequest(input *TagResourceInput) TagResourceRequest {
+func (c *Client) TagResourceRequest(input *types.TagResourceInput) TagResourceRequest {
 	op := &aws.Operation{
 		Name:       opTagResource,
 		HTTPMethod: "POST",
@@ -108,10 +31,10 @@ func (c *Client) TagResourceRequest(input *TagResourceInput) TagResourceRequest 
 	}
 
 	if input == nil {
-		input = &TagResourceInput{}
+		input = &types.TagResourceInput{}
 	}
 
-	req := c.newRequest(op, input, &TagResourceOutput{})
+	req := c.newRequest(op, input, &types.TagResourceOutput{})
 	return TagResourceRequest{Request: req, Input: input, Copy: c.TagResourceRequest}
 }
 
@@ -119,8 +42,8 @@ func (c *Client) TagResourceRequest(input *TagResourceInput) TagResourceRequest 
 // TagResource API operation.
 type TagResourceRequest struct {
 	*aws.Request
-	Input *TagResourceInput
-	Copy  func(*TagResourceInput) TagResourceRequest
+	Input *types.TagResourceInput
+	Copy  func(*types.TagResourceInput) TagResourceRequest
 }
 
 // Send marshals and sends the TagResource API request.
@@ -132,7 +55,7 @@ func (r TagResourceRequest) Send(ctx context.Context) (*TagResourceResponse, err
 	}
 
 	resp := &TagResourceResponse{
-		TagResourceOutput: r.Request.Data.(*TagResourceOutput),
+		TagResourceOutput: r.Request.Data.(*types.TagResourceOutput),
 		response:          &aws.Response{Request: r.Request},
 	}
 
@@ -142,7 +65,7 @@ func (r TagResourceRequest) Send(ctx context.Context) (*TagResourceResponse, err
 // TagResourceResponse is the response type for the
 // TagResource API operation.
 type TagResourceResponse struct {
-	*TagResourceOutput
+	*types.TagResourceOutput
 
 	response *aws.Response
 }

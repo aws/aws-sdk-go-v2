@@ -6,83 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/datapipeline/types"
 )
-
-// Contains the parameters for DescribeObjects.
-type DescribeObjectsInput struct {
-	_ struct{} `type:"structure"`
-
-	// Indicates whether any expressions in the object should be evaluated when
-	// the object descriptions are returned.
-	EvaluateExpressions *bool `locationName:"evaluateExpressions" type:"boolean"`
-
-	// The starting point for the results to be returned. For the first call, this
-	// value should be empty. As long as there are more results, continue to call
-	// DescribeObjects with the marker value from the previous call to retrieve
-	// the next set of results.
-	Marker *string `locationName:"marker" type:"string"`
-
-	// The IDs of the pipeline objects that contain the definitions to be described.
-	// You can pass as many as 25 identifiers in a single call to DescribeObjects.
-	//
-	// ObjectIds is a required field
-	ObjectIds []string `locationName:"objectIds" type:"list" required:"true"`
-
-	// The ID of the pipeline that contains the object definitions.
-	//
-	// PipelineId is a required field
-	PipelineId *string `locationName:"pipelineId" min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeObjectsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeObjectsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeObjectsInput"}
-
-	if s.ObjectIds == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ObjectIds"))
-	}
-
-	if s.PipelineId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("PipelineId"))
-	}
-	if s.PipelineId != nil && len(*s.PipelineId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("PipelineId", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Contains the output of DescribeObjects.
-type DescribeObjectsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Indicates whether there are more results to return.
-	HasMoreResults *bool `locationName:"hasMoreResults" type:"boolean"`
-
-	// The starting point for the next page of results. To view the next page of
-	// results, call DescribeObjects again with this marker value. If the value
-	// is null, there are no more results.
-	Marker *string `locationName:"marker" type:"string"`
-
-	// An array of object definitions.
-	//
-	// PipelineObjects is a required field
-	PipelineObjects []PipelineObject `locationName:"pipelineObjects" type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeObjectsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeObjects = "DescribeObjects"
 
@@ -101,7 +26,7 @@ const opDescribeObjects = "DescribeObjects"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/datapipeline-2012-10-29/DescribeObjects
-func (c *Client) DescribeObjectsRequest(input *DescribeObjectsInput) DescribeObjectsRequest {
+func (c *Client) DescribeObjectsRequest(input *types.DescribeObjectsInput) DescribeObjectsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeObjects,
 		HTTPMethod: "POST",
@@ -115,10 +40,10 @@ func (c *Client) DescribeObjectsRequest(input *DescribeObjectsInput) DescribeObj
 	}
 
 	if input == nil {
-		input = &DescribeObjectsInput{}
+		input = &types.DescribeObjectsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeObjectsOutput{})
+	req := c.newRequest(op, input, &types.DescribeObjectsOutput{})
 	return DescribeObjectsRequest{Request: req, Input: input, Copy: c.DescribeObjectsRequest}
 }
 
@@ -126,8 +51,8 @@ func (c *Client) DescribeObjectsRequest(input *DescribeObjectsInput) DescribeObj
 // DescribeObjects API operation.
 type DescribeObjectsRequest struct {
 	*aws.Request
-	Input *DescribeObjectsInput
-	Copy  func(*DescribeObjectsInput) DescribeObjectsRequest
+	Input *types.DescribeObjectsInput
+	Copy  func(*types.DescribeObjectsInput) DescribeObjectsRequest
 }
 
 // Send marshals and sends the DescribeObjects API request.
@@ -139,7 +64,7 @@ func (r DescribeObjectsRequest) Send(ctx context.Context) (*DescribeObjectsRespo
 	}
 
 	resp := &DescribeObjectsResponse{
-		DescribeObjectsOutput: r.Request.Data.(*DescribeObjectsOutput),
+		DescribeObjectsOutput: r.Request.Data.(*types.DescribeObjectsOutput),
 		response:              &aws.Response{Request: r.Request},
 	}
 
@@ -169,7 +94,7 @@ func NewDescribeObjectsPaginator(req DescribeObjectsRequest) DescribeObjectsPagi
 	return DescribeObjectsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *DescribeObjectsInput
+				var inCpy *types.DescribeObjectsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -189,14 +114,14 @@ type DescribeObjectsPaginator struct {
 	aws.Pager
 }
 
-func (p *DescribeObjectsPaginator) CurrentPage() *DescribeObjectsOutput {
-	return p.Pager.CurrentPage().(*DescribeObjectsOutput)
+func (p *DescribeObjectsPaginator) CurrentPage() *types.DescribeObjectsOutput {
+	return p.Pager.CurrentPage().(*types.DescribeObjectsOutput)
 }
 
 // DescribeObjectsResponse is the response type for the
 // DescribeObjects API operation.
 type DescribeObjectsResponse struct {
-	*DescribeObjectsOutput
+	*types.DescribeObjectsOutput
 
 	response *aws.Response
 }

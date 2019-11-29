@@ -6,54 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/appstream/types"
 )
-
-type DeleteImagePermissionsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the private image.
-	//
-	// Name is a required field
-	Name *string `type:"string" required:"true"`
-
-	// The 12-digit identifier of the AWS account for which to delete image permissions.
-	//
-	// SharedAccountId is a required field
-	SharedAccountId *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteImagePermissionsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteImagePermissionsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteImagePermissionsInput"}
-
-	if s.Name == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Name"))
-	}
-
-	if s.SharedAccountId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("SharedAccountId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteImagePermissionsOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteImagePermissionsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteImagePermissions = "DeleteImagePermissions"
 
@@ -72,7 +26,7 @@ const opDeleteImagePermissions = "DeleteImagePermissions"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DeleteImagePermissions
-func (c *Client) DeleteImagePermissionsRequest(input *DeleteImagePermissionsInput) DeleteImagePermissionsRequest {
+func (c *Client) DeleteImagePermissionsRequest(input *types.DeleteImagePermissionsInput) DeleteImagePermissionsRequest {
 	op := &aws.Operation{
 		Name:       opDeleteImagePermissions,
 		HTTPMethod: "POST",
@@ -80,10 +34,10 @@ func (c *Client) DeleteImagePermissionsRequest(input *DeleteImagePermissionsInpu
 	}
 
 	if input == nil {
-		input = &DeleteImagePermissionsInput{}
+		input = &types.DeleteImagePermissionsInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteImagePermissionsOutput{})
+	req := c.newRequest(op, input, &types.DeleteImagePermissionsOutput{})
 	return DeleteImagePermissionsRequest{Request: req, Input: input, Copy: c.DeleteImagePermissionsRequest}
 }
 
@@ -91,8 +45,8 @@ func (c *Client) DeleteImagePermissionsRequest(input *DeleteImagePermissionsInpu
 // DeleteImagePermissions API operation.
 type DeleteImagePermissionsRequest struct {
 	*aws.Request
-	Input *DeleteImagePermissionsInput
-	Copy  func(*DeleteImagePermissionsInput) DeleteImagePermissionsRequest
+	Input *types.DeleteImagePermissionsInput
+	Copy  func(*types.DeleteImagePermissionsInput) DeleteImagePermissionsRequest
 }
 
 // Send marshals and sends the DeleteImagePermissions API request.
@@ -104,7 +58,7 @@ func (r DeleteImagePermissionsRequest) Send(ctx context.Context) (*DeleteImagePe
 	}
 
 	resp := &DeleteImagePermissionsResponse{
-		DeleteImagePermissionsOutput: r.Request.Data.(*DeleteImagePermissionsOutput),
+		DeleteImagePermissionsOutput: r.Request.Data.(*types.DeleteImagePermissionsOutput),
 		response:                     &aws.Response{Request: r.Request},
 	}
 
@@ -114,7 +68,7 @@ func (r DeleteImagePermissionsRequest) Send(ctx context.Context) (*DeleteImagePe
 // DeleteImagePermissionsResponse is the response type for the
 // DeleteImagePermissions API operation.
 type DeleteImagePermissionsResponse struct {
-	*DeleteImagePermissionsOutput
+	*types.DeleteImagePermissionsOutput
 
 	response *aws.Response
 }

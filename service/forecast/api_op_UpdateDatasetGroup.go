@@ -6,55 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/forecast/types"
 )
-
-type UpdateDatasetGroupInput struct {
-	_ struct{} `type:"structure"`
-
-	// An array of Amazon Resource Names (ARNs) of the datasets to add to the dataset
-	// group.
-	//
-	// DatasetArns is a required field
-	DatasetArns []string `type:"list" required:"true"`
-
-	// The ARN of the dataset group.
-	//
-	// DatasetGroupArn is a required field
-	DatasetGroupArn *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s UpdateDatasetGroupInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateDatasetGroupInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateDatasetGroupInput"}
-
-	if s.DatasetArns == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DatasetArns"))
-	}
-
-	if s.DatasetGroupArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DatasetGroupArn"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type UpdateDatasetGroupOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s UpdateDatasetGroupOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opUpdateDatasetGroup = "UpdateDatasetGroup"
 
@@ -75,7 +28,7 @@ const opUpdateDatasetGroup = "UpdateDatasetGroup"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/UpdateDatasetGroup
-func (c *Client) UpdateDatasetGroupRequest(input *UpdateDatasetGroupInput) UpdateDatasetGroupRequest {
+func (c *Client) UpdateDatasetGroupRequest(input *types.UpdateDatasetGroupInput) UpdateDatasetGroupRequest {
 	op := &aws.Operation{
 		Name:       opUpdateDatasetGroup,
 		HTTPMethod: "POST",
@@ -83,10 +36,10 @@ func (c *Client) UpdateDatasetGroupRequest(input *UpdateDatasetGroupInput) Updat
 	}
 
 	if input == nil {
-		input = &UpdateDatasetGroupInput{}
+		input = &types.UpdateDatasetGroupInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateDatasetGroupOutput{})
+	req := c.newRequest(op, input, &types.UpdateDatasetGroupOutput{})
 	return UpdateDatasetGroupRequest{Request: req, Input: input, Copy: c.UpdateDatasetGroupRequest}
 }
 
@@ -94,8 +47,8 @@ func (c *Client) UpdateDatasetGroupRequest(input *UpdateDatasetGroupInput) Updat
 // UpdateDatasetGroup API operation.
 type UpdateDatasetGroupRequest struct {
 	*aws.Request
-	Input *UpdateDatasetGroupInput
-	Copy  func(*UpdateDatasetGroupInput) UpdateDatasetGroupRequest
+	Input *types.UpdateDatasetGroupInput
+	Copy  func(*types.UpdateDatasetGroupInput) UpdateDatasetGroupRequest
 }
 
 // Send marshals and sends the UpdateDatasetGroup API request.
@@ -107,7 +60,7 @@ func (r UpdateDatasetGroupRequest) Send(ctx context.Context) (*UpdateDatasetGrou
 	}
 
 	resp := &UpdateDatasetGroupResponse{
-		UpdateDatasetGroupOutput: r.Request.Data.(*UpdateDatasetGroupOutput),
+		UpdateDatasetGroupOutput: r.Request.Data.(*types.UpdateDatasetGroupOutput),
 		response:                 &aws.Response{Request: r.Request},
 	}
 
@@ -117,7 +70,7 @@ func (r UpdateDatasetGroupRequest) Send(ctx context.Context) (*UpdateDatasetGrou
 // UpdateDatasetGroupResponse is the response type for the
 // UpdateDatasetGroup API operation.
 type UpdateDatasetGroupResponse struct {
-	*UpdateDatasetGroupOutput
+	*types.UpdateDatasetGroupOutput
 
 	response *aws.Response
 }

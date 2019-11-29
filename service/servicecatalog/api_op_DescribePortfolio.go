@@ -6,69 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/types"
 )
-
-type DescribePortfolioInput struct {
-	_ struct{} `type:"structure"`
-
-	// The language code.
-	//
-	//    * en - English (default)
-	//
-	//    * jp - Japanese
-	//
-	//    * zh - Chinese
-	AcceptLanguage *string `type:"string"`
-
-	// The portfolio identifier.
-	//
-	// Id is a required field
-	Id *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribePortfolioInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribePortfolioInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribePortfolioInput"}
-
-	if s.Id == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Id"))
-	}
-	if s.Id != nil && len(*s.Id) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Id", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribePortfolioOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Information about the associated budgets.
-	Budgets []BudgetDetail `type:"list"`
-
-	// Information about the portfolio.
-	PortfolioDetail *PortfolioDetail `type:"structure"`
-
-	// Information about the TagOptions associated with the portfolio.
-	TagOptions []TagOptionDetail `type:"list"`
-
-	// Information about the tags associated with the portfolio.
-	Tags []Tag `type:"list"`
-}
-
-// String returns the string representation
-func (s DescribePortfolioOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribePortfolio = "DescribePortfolio"
 
@@ -85,7 +24,7 @@ const opDescribePortfolio = "DescribePortfolio"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DescribePortfolio
-func (c *Client) DescribePortfolioRequest(input *DescribePortfolioInput) DescribePortfolioRequest {
+func (c *Client) DescribePortfolioRequest(input *types.DescribePortfolioInput) DescribePortfolioRequest {
 	op := &aws.Operation{
 		Name:       opDescribePortfolio,
 		HTTPMethod: "POST",
@@ -93,10 +32,10 @@ func (c *Client) DescribePortfolioRequest(input *DescribePortfolioInput) Describ
 	}
 
 	if input == nil {
-		input = &DescribePortfolioInput{}
+		input = &types.DescribePortfolioInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribePortfolioOutput{})
+	req := c.newRequest(op, input, &types.DescribePortfolioOutput{})
 	return DescribePortfolioRequest{Request: req, Input: input, Copy: c.DescribePortfolioRequest}
 }
 
@@ -104,8 +43,8 @@ func (c *Client) DescribePortfolioRequest(input *DescribePortfolioInput) Describ
 // DescribePortfolio API operation.
 type DescribePortfolioRequest struct {
 	*aws.Request
-	Input *DescribePortfolioInput
-	Copy  func(*DescribePortfolioInput) DescribePortfolioRequest
+	Input *types.DescribePortfolioInput
+	Copy  func(*types.DescribePortfolioInput) DescribePortfolioRequest
 }
 
 // Send marshals and sends the DescribePortfolio API request.
@@ -117,7 +56,7 @@ func (r DescribePortfolioRequest) Send(ctx context.Context) (*DescribePortfolioR
 	}
 
 	resp := &DescribePortfolioResponse{
-		DescribePortfolioOutput: r.Request.Data.(*DescribePortfolioOutput),
+		DescribePortfolioOutput: r.Request.Data.(*types.DescribePortfolioOutput),
 		response:                &aws.Response{Request: r.Request},
 	}
 
@@ -127,7 +66,7 @@ func (r DescribePortfolioRequest) Send(ctx context.Context) (*DescribePortfolioR
 // DescribePortfolioResponse is the response type for the
 // DescribePortfolio API operation.
 type DescribePortfolioResponse struct {
-	*DescribePortfolioOutput
+	*types.DescribePortfolioOutput
 
 	response *aws.Response
 }

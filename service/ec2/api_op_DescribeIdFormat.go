@@ -6,38 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-type DescribeIdFormatInput struct {
-	_ struct{} `type:"structure"`
-
-	// The type of resource: bundle | conversion-task | customer-gateway | dhcp-options
-	// | elastic-ip-allocation | elastic-ip-association | export-task | flow-log
-	// | image | import-task | instance | internet-gateway | network-acl | network-acl-association
-	// | network-interface | network-interface-attachment | prefix-list | reservation
-	// | route-table | route-table-association | security-group | snapshot | subnet
-	// | subnet-cidr-block-association | volume | vpc | vpc-cidr-block-association
-	// | vpc-endpoint | vpc-peering-connection | vpn-connection | vpn-gateway
-	Resource *string `type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeIdFormatInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type DescribeIdFormatOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Information about the ID format for the resource.
-	Statuses []IdFormat `locationName:"statusSet" locationNameList:"item" type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeIdFormatOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeIdFormat = "DescribeIdFormat"
 
@@ -72,7 +42,7 @@ const opDescribeIdFormat = "DescribeIdFormat"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeIdFormat
-func (c *Client) DescribeIdFormatRequest(input *DescribeIdFormatInput) DescribeIdFormatRequest {
+func (c *Client) DescribeIdFormatRequest(input *types.DescribeIdFormatInput) DescribeIdFormatRequest {
 	op := &aws.Operation{
 		Name:       opDescribeIdFormat,
 		HTTPMethod: "POST",
@@ -80,10 +50,10 @@ func (c *Client) DescribeIdFormatRequest(input *DescribeIdFormatInput) DescribeI
 	}
 
 	if input == nil {
-		input = &DescribeIdFormatInput{}
+		input = &types.DescribeIdFormatInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeIdFormatOutput{})
+	req := c.newRequest(op, input, &types.DescribeIdFormatOutput{})
 	return DescribeIdFormatRequest{Request: req, Input: input, Copy: c.DescribeIdFormatRequest}
 }
 
@@ -91,8 +61,8 @@ func (c *Client) DescribeIdFormatRequest(input *DescribeIdFormatInput) DescribeI
 // DescribeIdFormat API operation.
 type DescribeIdFormatRequest struct {
 	*aws.Request
-	Input *DescribeIdFormatInput
-	Copy  func(*DescribeIdFormatInput) DescribeIdFormatRequest
+	Input *types.DescribeIdFormatInput
+	Copy  func(*types.DescribeIdFormatInput) DescribeIdFormatRequest
 }
 
 // Send marshals and sends the DescribeIdFormat API request.
@@ -104,7 +74,7 @@ func (r DescribeIdFormatRequest) Send(ctx context.Context) (*DescribeIdFormatRes
 	}
 
 	resp := &DescribeIdFormatResponse{
-		DescribeIdFormatOutput: r.Request.Data.(*DescribeIdFormatOutput),
+		DescribeIdFormatOutput: r.Request.Data.(*types.DescribeIdFormatOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -114,7 +84,7 @@ func (r DescribeIdFormatRequest) Send(ctx context.Context) (*DescribeIdFormatRes
 // DescribeIdFormatResponse is the response type for the
 // DescribeIdFormat API operation.
 type DescribeIdFormatResponse struct {
-	*DescribeIdFormatOutput
+	*types.DescribeIdFormatOutput
 
 	response *aws.Response
 }

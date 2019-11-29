@@ -6,54 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/service/waf"
+	"github.com/aws/aws-sdk-go-v2/service/wafregional/types"
 )
-
-type GetRateBasedRuleInput struct {
-	_ struct{} `type:"structure"`
-
-	// The RuleId of the RateBasedRule that you want to get. RuleId is returned
-	// by CreateRateBasedRule and by ListRateBasedRules.
-	//
-	// RuleId is a required field
-	RuleId *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetRateBasedRuleInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetRateBasedRuleInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetRateBasedRuleInput"}
-
-	if s.RuleId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("RuleId"))
-	}
-	if s.RuleId != nil && len(*s.RuleId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("RuleId", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type GetRateBasedRuleOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Information about the RateBasedRule that you specified in the GetRateBasedRule
-	// request.
-	Rule *waf.RateBasedRule `type:"structure"`
-}
-
-// String returns the string representation
-func (s GetRateBasedRuleOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetRateBasedRule = "GetRateBasedRule"
 
@@ -71,7 +25,7 @@ const opGetRateBasedRule = "GetRateBasedRule"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/GetRateBasedRule
-func (c *Client) GetRateBasedRuleRequest(input *GetRateBasedRuleInput) GetRateBasedRuleRequest {
+func (c *Client) GetRateBasedRuleRequest(input *types.GetRateBasedRuleInput) GetRateBasedRuleRequest {
 	op := &aws.Operation{
 		Name:       opGetRateBasedRule,
 		HTTPMethod: "POST",
@@ -79,10 +33,10 @@ func (c *Client) GetRateBasedRuleRequest(input *GetRateBasedRuleInput) GetRateBa
 	}
 
 	if input == nil {
-		input = &GetRateBasedRuleInput{}
+		input = &types.GetRateBasedRuleInput{}
 	}
 
-	req := c.newRequest(op, input, &GetRateBasedRuleOutput{})
+	req := c.newRequest(op, input, &types.GetRateBasedRuleOutput{})
 	return GetRateBasedRuleRequest{Request: req, Input: input, Copy: c.GetRateBasedRuleRequest}
 }
 
@@ -90,8 +44,8 @@ func (c *Client) GetRateBasedRuleRequest(input *GetRateBasedRuleInput) GetRateBa
 // GetRateBasedRule API operation.
 type GetRateBasedRuleRequest struct {
 	*aws.Request
-	Input *GetRateBasedRuleInput
-	Copy  func(*GetRateBasedRuleInput) GetRateBasedRuleRequest
+	Input *types.GetRateBasedRuleInput
+	Copy  func(*types.GetRateBasedRuleInput) GetRateBasedRuleRequest
 }
 
 // Send marshals and sends the GetRateBasedRule API request.
@@ -103,7 +57,7 @@ func (r GetRateBasedRuleRequest) Send(ctx context.Context) (*GetRateBasedRuleRes
 	}
 
 	resp := &GetRateBasedRuleResponse{
-		GetRateBasedRuleOutput: r.Request.Data.(*GetRateBasedRuleOutput),
+		GetRateBasedRuleOutput: r.Request.Data.(*types.GetRateBasedRuleOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -113,7 +67,7 @@ func (r GetRateBasedRuleRequest) Send(ctx context.Context) (*GetRateBasedRuleRes
 // GetRateBasedRuleResponse is the response type for the
 // GetRateBasedRule API operation.
 type GetRateBasedRuleResponse struct {
-	*GetRateBasedRuleOutput
+	*types.GetRateBasedRuleOutput
 
 	response *aws.Response
 }

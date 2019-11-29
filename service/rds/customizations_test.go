@@ -13,6 +13,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws/endpoints"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting/unit"
+	"github.com/aws/aws-sdk-go-v2/service/rds/types"
 )
 
 func TestCopyDBSnapshotNoPanic(t *testing.T) {
@@ -49,7 +50,7 @@ func TestPresignCrossRegionRequest(t *testing.T) {
 	}{
 		opCopyDBSnapshot: {
 			Req: func() *request.Request {
-				req := svc.CopyDBSnapshotRequest(&CopyDBSnapshotInput{
+				req := svc.CopyDBSnapshotRequest(&types.CopyDBSnapshotInput{
 					SourceRegion:               aws.String("us-west-1"),
 					SourceDBSnapshotIdentifier: aws.String("foo"),
 					TargetDBSnapshotIdentifier: aws.String("bar"),
@@ -63,7 +64,7 @@ func TestPresignCrossRegionRequest(t *testing.T) {
 		opCreateDBInstanceReadReplica: {
 			Req: func() *request.Request {
 				req := svc.CreateDBInstanceReadReplicaRequest(
-					&CreateDBInstanceReadReplicaInput{
+					&types.CreateDBInstanceReadReplicaInput{
 						SourceRegion:               aws.String("us-west-1"),
 						SourceDBInstanceIdentifier: aws.String("foo"),
 						DBInstanceIdentifier:       aws.String("bar"),
@@ -76,7 +77,7 @@ func TestPresignCrossRegionRequest(t *testing.T) {
 		opCopyDBClusterSnapshot: {
 			Req: func() *request.Request {
 				req := svc.CopyDBClusterSnapshotRequest(
-					&CopyDBClusterSnapshotInput{
+					&types.CopyDBClusterSnapshotInput{
 						SourceRegion:                      aws.String("us-west-1"),
 						SourceDBClusterSnapshotIdentifier: aws.String("foo"),
 						TargetDBClusterSnapshotIdentifier: aws.String("bar"),
@@ -89,7 +90,7 @@ func TestPresignCrossRegionRequest(t *testing.T) {
 		opCreateDBCluster: {
 			Req: func() *request.Request {
 				req := svc.CreateDBClusterRequest(
-					&CreateDBClusterInput{
+					&types.CreateDBClusterInput{
 						SourceRegion:        aws.String("us-west-1"),
 						DBClusterIdentifier: aws.String("foo"),
 						Engine:              aws.String("bar"),
@@ -101,7 +102,7 @@ func TestPresignCrossRegionRequest(t *testing.T) {
 		},
 		opCopyDBSnapshot + " same region": {
 			Req: func() *request.Request {
-				req := svc.CopyDBSnapshotRequest(&CopyDBSnapshotInput{
+				req := svc.CopyDBSnapshotRequest(&types.CopyDBSnapshotInput{
 					SourceRegion:               aws.String("us-west-2"),
 					SourceDBSnapshotIdentifier: aws.String("foo"),
 					TargetDBSnapshotIdentifier: aws.String("bar"),
@@ -112,7 +113,7 @@ func TestPresignCrossRegionRequest(t *testing.T) {
 		},
 		opCreateDBInstanceReadReplica + " same region": {
 			Req: func() *request.Request {
-				req := svc.CreateDBInstanceReadReplicaRequest(&CreateDBInstanceReadReplicaInput{
+				req := svc.CreateDBInstanceReadReplicaRequest(&types.CreateDBInstanceReadReplicaInput{
 					SourceRegion:               aws.String("us-west-2"),
 					SourceDBInstanceIdentifier: aws.String("foo"),
 					DBInstanceIdentifier:       aws.String("bar"),
@@ -124,7 +125,7 @@ func TestPresignCrossRegionRequest(t *testing.T) {
 		opCopyDBClusterSnapshot + " same region": {
 			Req: func() *request.Request {
 				req := svc.CopyDBClusterSnapshotRequest(
-					&CopyDBClusterSnapshotInput{
+					&types.CopyDBClusterSnapshotInput{
 						SourceRegion:                      aws.String("us-west-2"),
 						SourceDBClusterSnapshotIdentifier: aws.String("foo"),
 						TargetDBClusterSnapshotIdentifier: aws.String("bar"),
@@ -136,7 +137,7 @@ func TestPresignCrossRegionRequest(t *testing.T) {
 		opCreateDBCluster + " same region": {
 			Req: func() *request.Request {
 				req := svc.CreateDBClusterRequest(
-					&CreateDBClusterInput{
+					&types.CreateDBClusterInput{
 						SourceRegion:        aws.String("us-west-2"),
 						DBClusterIdentifier: aws.String("foo"),
 						Engine:              aws.String("bar"),
@@ -147,7 +148,7 @@ func TestPresignCrossRegionRequest(t *testing.T) {
 		},
 		opCopyDBSnapshot + " presignURL set": {
 			Req: func() *request.Request {
-				req := svc.CopyDBSnapshotRequest(&CopyDBSnapshotInput{
+				req := svc.CopyDBSnapshotRequest(&types.CopyDBSnapshotInput{
 					SourceRegion:               aws.String("us-west-1"),
 					SourceDBSnapshotIdentifier: aws.String("foo"),
 					TargetDBSnapshotIdentifier: aws.String("bar"),
@@ -159,7 +160,7 @@ func TestPresignCrossRegionRequest(t *testing.T) {
 		},
 		opCreateDBInstanceReadReplica + " presignURL set": {
 			Req: func() *request.Request {
-				req := svc.CreateDBInstanceReadReplicaRequest(&CreateDBInstanceReadReplicaInput{
+				req := svc.CreateDBInstanceReadReplicaRequest(&types.CreateDBInstanceReadReplicaInput{
 					SourceRegion:               aws.String("us-west-1"),
 					SourceDBInstanceIdentifier: aws.String("foo"),
 					DBInstanceIdentifier:       aws.String("bar"),
@@ -172,7 +173,7 @@ func TestPresignCrossRegionRequest(t *testing.T) {
 		opCopyDBClusterSnapshot + " presignURL set": {
 			Req: func() *request.Request {
 				req := svc.CopyDBClusterSnapshotRequest(
-					&CopyDBClusterSnapshotInput{
+					&types.CopyDBClusterSnapshotInput{
 						SourceRegion:                      aws.String("us-west-1"),
 						SourceDBClusterSnapshotIdentifier: aws.String("foo"),
 						TargetDBClusterSnapshotIdentifier: aws.String("bar"),
@@ -185,7 +186,7 @@ func TestPresignCrossRegionRequest(t *testing.T) {
 		opCreateDBCluster + " presignURL set": {
 			Req: func() *request.Request {
 				req := svc.CreateDBClusterRequest(
-					&CreateDBClusterInput{
+					&types.CreateDBClusterInput{
 						SourceRegion:        aws.String("us-west-1"),
 						DBClusterIdentifier: aws.String("foo"),
 						Engine:              aws.String("bar"),
@@ -221,7 +222,7 @@ func TestPresignWithSourceNotSet(t *testing.T) {
 
 	svc := New(cfg)
 
-	reqs[opCopyDBSnapshot] = svc.CopyDBSnapshotRequest(&CopyDBSnapshotInput{
+	reqs[opCopyDBSnapshot] = svc.CopyDBSnapshotRequest(&types.CopyDBSnapshotInput{
 		SourceDBSnapshotIdentifier: aws.String("foo"),
 		TargetDBSnapshotIdentifier: aws.String("bar"),
 	}).Request

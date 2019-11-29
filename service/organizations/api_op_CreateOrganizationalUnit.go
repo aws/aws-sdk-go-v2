@@ -6,72 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/organizations/types"
 )
-
-type CreateOrganizationalUnitInput struct {
-	_ struct{} `type:"structure"`
-
-	// The friendly name to assign to the new OU.
-	//
-	// Name is a required field
-	Name *string `min:"1" type:"string" required:"true"`
-
-	// The unique identifier (ID) of the parent root or OU that you want to create
-	// the new OU in.
-	//
-	// The regex pattern (http://wikipedia.org/wiki/regex) for a parent ID string
-	// requires one of the following:
-	//
-	//    * Root - A string that begins with "r-" followed by from 4 to 32 lower-case
-	//    letters or digits.
-	//
-	//    * Organizational unit (OU) - A string that begins with "ou-" followed
-	//    by from 4 to 32 lower-case letters or digits (the ID of the root that
-	//    the OU is in) followed by a second "-" dash and from 8 to 32 additional
-	//    lower-case letters or digits.
-	//
-	// ParentId is a required field
-	ParentId *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s CreateOrganizationalUnitInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateOrganizationalUnitInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateOrganizationalUnitInput"}
-
-	if s.Name == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Name"))
-	}
-	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
-	}
-
-	if s.ParentId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ParentId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type CreateOrganizationalUnitOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A structure that contains details about the newly created OU.
-	OrganizationalUnit *OrganizationalUnit `type:"structure"`
-}
-
-// String returns the string representation
-func (s CreateOrganizationalUnitOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCreateOrganizationalUnit = "CreateOrganizationalUnit"
 
@@ -97,7 +33,7 @@ const opCreateOrganizationalUnit = "CreateOrganizationalUnit"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/CreateOrganizationalUnit
-func (c *Client) CreateOrganizationalUnitRequest(input *CreateOrganizationalUnitInput) CreateOrganizationalUnitRequest {
+func (c *Client) CreateOrganizationalUnitRequest(input *types.CreateOrganizationalUnitInput) CreateOrganizationalUnitRequest {
 	op := &aws.Operation{
 		Name:       opCreateOrganizationalUnit,
 		HTTPMethod: "POST",
@@ -105,10 +41,10 @@ func (c *Client) CreateOrganizationalUnitRequest(input *CreateOrganizationalUnit
 	}
 
 	if input == nil {
-		input = &CreateOrganizationalUnitInput{}
+		input = &types.CreateOrganizationalUnitInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateOrganizationalUnitOutput{})
+	req := c.newRequest(op, input, &types.CreateOrganizationalUnitOutput{})
 	return CreateOrganizationalUnitRequest{Request: req, Input: input, Copy: c.CreateOrganizationalUnitRequest}
 }
 
@@ -116,8 +52,8 @@ func (c *Client) CreateOrganizationalUnitRequest(input *CreateOrganizationalUnit
 // CreateOrganizationalUnit API operation.
 type CreateOrganizationalUnitRequest struct {
 	*aws.Request
-	Input *CreateOrganizationalUnitInput
-	Copy  func(*CreateOrganizationalUnitInput) CreateOrganizationalUnitRequest
+	Input *types.CreateOrganizationalUnitInput
+	Copy  func(*types.CreateOrganizationalUnitInput) CreateOrganizationalUnitRequest
 }
 
 // Send marshals and sends the CreateOrganizationalUnit API request.
@@ -129,7 +65,7 @@ func (r CreateOrganizationalUnitRequest) Send(ctx context.Context) (*CreateOrgan
 	}
 
 	resp := &CreateOrganizationalUnitResponse{
-		CreateOrganizationalUnitOutput: r.Request.Data.(*CreateOrganizationalUnitOutput),
+		CreateOrganizationalUnitOutput: r.Request.Data.(*types.CreateOrganizationalUnitOutput),
 		response:                       &aws.Response{Request: r.Request},
 	}
 
@@ -139,7 +75,7 @@ func (r CreateOrganizationalUnitRequest) Send(ctx context.Context) (*CreateOrgan
 // CreateOrganizationalUnitResponse is the response type for the
 // CreateOrganizationalUnit API operation.
 type CreateOrganizationalUnitResponse struct {
-	*CreateOrganizationalUnitOutput
+	*types.CreateOrganizationalUnitOutput
 
 	response *aws.Response
 }

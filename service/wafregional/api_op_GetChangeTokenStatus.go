@@ -6,52 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/wafregional/types"
 )
-
-type GetChangeTokenStatusInput struct {
-	_ struct{} `type:"structure"`
-
-	// The change token for which you want to get the status. This change token
-	// was previously returned in the GetChangeToken response.
-	//
-	// ChangeToken is a required field
-	ChangeToken *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetChangeTokenStatusInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetChangeTokenStatusInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetChangeTokenStatusInput"}
-
-	if s.ChangeToken == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ChangeToken"))
-	}
-	if s.ChangeToken != nil && len(*s.ChangeToken) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ChangeToken", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type GetChangeTokenStatusOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The status of the change token.
-	ChangeTokenStatus ChangeTokenStatus `type:"string" enum:"true"`
-}
-
-// String returns the string representation
-func (s GetChangeTokenStatusOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetChangeTokenStatus = "GetChangeTokenStatus"
 
@@ -78,7 +34,7 @@ const opGetChangeTokenStatus = "GetChangeTokenStatus"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/GetChangeTokenStatus
-func (c *Client) GetChangeTokenStatusRequest(input *GetChangeTokenStatusInput) GetChangeTokenStatusRequest {
+func (c *Client) GetChangeTokenStatusRequest(input *types.GetChangeTokenStatusInput) GetChangeTokenStatusRequest {
 	op := &aws.Operation{
 		Name:       opGetChangeTokenStatus,
 		HTTPMethod: "POST",
@@ -86,10 +42,10 @@ func (c *Client) GetChangeTokenStatusRequest(input *GetChangeTokenStatusInput) G
 	}
 
 	if input == nil {
-		input = &GetChangeTokenStatusInput{}
+		input = &types.GetChangeTokenStatusInput{}
 	}
 
-	req := c.newRequest(op, input, &GetChangeTokenStatusOutput{})
+	req := c.newRequest(op, input, &types.GetChangeTokenStatusOutput{})
 	return GetChangeTokenStatusRequest{Request: req, Input: input, Copy: c.GetChangeTokenStatusRequest}
 }
 
@@ -97,8 +53,8 @@ func (c *Client) GetChangeTokenStatusRequest(input *GetChangeTokenStatusInput) G
 // GetChangeTokenStatus API operation.
 type GetChangeTokenStatusRequest struct {
 	*aws.Request
-	Input *GetChangeTokenStatusInput
-	Copy  func(*GetChangeTokenStatusInput) GetChangeTokenStatusRequest
+	Input *types.GetChangeTokenStatusInput
+	Copy  func(*types.GetChangeTokenStatusInput) GetChangeTokenStatusRequest
 }
 
 // Send marshals and sends the GetChangeTokenStatus API request.
@@ -110,7 +66,7 @@ func (r GetChangeTokenStatusRequest) Send(ctx context.Context) (*GetChangeTokenS
 	}
 
 	resp := &GetChangeTokenStatusResponse{
-		GetChangeTokenStatusOutput: r.Request.Data.(*GetChangeTokenStatusOutput),
+		GetChangeTokenStatusOutput: r.Request.Data.(*types.GetChangeTokenStatusOutput),
 		response:                   &aws.Response{Request: r.Request},
 	}
 
@@ -120,7 +76,7 @@ func (r GetChangeTokenStatusRequest) Send(ctx context.Context) (*GetChangeTokenS
 // GetChangeTokenStatusResponse is the response type for the
 // GetChangeTokenStatus API operation.
 type GetChangeTokenStatusResponse struct {
-	*GetChangeTokenStatusOutput
+	*types.GetChangeTokenStatusOutput
 
 	response *aws.Response
 }

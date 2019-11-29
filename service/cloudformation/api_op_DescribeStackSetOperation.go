@@ -6,60 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/cloudformation/types"
 )
-
-type DescribeStackSetOperationInput struct {
-	_ struct{} `type:"structure"`
-
-	// The unique ID of the stack set operation.
-	//
-	// OperationId is a required field
-	OperationId *string `min:"1" type:"string" required:"true"`
-
-	// The name or the unique stack ID of the stack set for the stack operation.
-	//
-	// StackSetName is a required field
-	StackSetName *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeStackSetOperationInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeStackSetOperationInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeStackSetOperationInput"}
-
-	if s.OperationId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("OperationId"))
-	}
-	if s.OperationId != nil && len(*s.OperationId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("OperationId", 1))
-	}
-
-	if s.StackSetName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("StackSetName"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribeStackSetOperationOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The specified stack set operation.
-	StackSetOperation *StackSetOperation `type:"structure"`
-}
-
-// String returns the string representation
-func (s DescribeStackSetOperationOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeStackSetOperation = "DescribeStackSetOperation"
 
@@ -76,7 +24,7 @@ const opDescribeStackSetOperation = "DescribeStackSetOperation"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DescribeStackSetOperation
-func (c *Client) DescribeStackSetOperationRequest(input *DescribeStackSetOperationInput) DescribeStackSetOperationRequest {
+func (c *Client) DescribeStackSetOperationRequest(input *types.DescribeStackSetOperationInput) DescribeStackSetOperationRequest {
 	op := &aws.Operation{
 		Name:       opDescribeStackSetOperation,
 		HTTPMethod: "POST",
@@ -84,10 +32,10 @@ func (c *Client) DescribeStackSetOperationRequest(input *DescribeStackSetOperati
 	}
 
 	if input == nil {
-		input = &DescribeStackSetOperationInput{}
+		input = &types.DescribeStackSetOperationInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeStackSetOperationOutput{})
+	req := c.newRequest(op, input, &types.DescribeStackSetOperationOutput{})
 	return DescribeStackSetOperationRequest{Request: req, Input: input, Copy: c.DescribeStackSetOperationRequest}
 }
 
@@ -95,8 +43,8 @@ func (c *Client) DescribeStackSetOperationRequest(input *DescribeStackSetOperati
 // DescribeStackSetOperation API operation.
 type DescribeStackSetOperationRequest struct {
 	*aws.Request
-	Input *DescribeStackSetOperationInput
-	Copy  func(*DescribeStackSetOperationInput) DescribeStackSetOperationRequest
+	Input *types.DescribeStackSetOperationInput
+	Copy  func(*types.DescribeStackSetOperationInput) DescribeStackSetOperationRequest
 }
 
 // Send marshals and sends the DescribeStackSetOperation API request.
@@ -108,7 +56,7 @@ func (r DescribeStackSetOperationRequest) Send(ctx context.Context) (*DescribeSt
 	}
 
 	resp := &DescribeStackSetOperationResponse{
-		DescribeStackSetOperationOutput: r.Request.Data.(*DescribeStackSetOperationOutput),
+		DescribeStackSetOperationOutput: r.Request.Data.(*types.DescribeStackSetOperationOutput),
 		response:                        &aws.Response{Request: r.Request},
 	}
 
@@ -118,7 +66,7 @@ func (r DescribeStackSetOperationRequest) Send(ctx context.Context) (*DescribeSt
 // DescribeStackSetOperationResponse is the response type for the
 // DescribeStackSetOperation API operation.
 type DescribeStackSetOperationResponse struct {
-	*DescribeStackSetOperationOutput
+	*types.DescribeStackSetOperationOutput
 
 	response *aws.Response
 }

@@ -6,76 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/restjson"
+	"github.com/aws/aws-sdk-go-v2/service/apigatewayv2/types"
 )
-
-type DeleteApiMappingInput struct {
-	_ struct{} `type:"structure"`
-
-	// ApiMappingId is a required field
-	ApiMappingId *string `location:"uri" locationName:"apiMappingId" type:"string" required:"true"`
-
-	// DomainName is a required field
-	DomainName *string `location:"uri" locationName:"domainName" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteApiMappingInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteApiMappingInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteApiMappingInput"}
-
-	if s.ApiMappingId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ApiMappingId"))
-	}
-
-	if s.DomainName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DomainName"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteApiMappingInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.ApiMappingId != nil {
-		v := *s.ApiMappingId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "apiMappingId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.DomainName != nil {
-		v := *s.DomainName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "domainName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type DeleteApiMappingOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteApiMappingOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteApiMappingOutput) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
 
 const opDeleteApiMapping = "DeleteApiMapping"
 
@@ -92,7 +26,7 @@ const opDeleteApiMapping = "DeleteApiMapping"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/apigatewayv2-2018-11-29/DeleteApiMapping
-func (c *Client) DeleteApiMappingRequest(input *DeleteApiMappingInput) DeleteApiMappingRequest {
+func (c *Client) DeleteApiMappingRequest(input *types.DeleteApiMappingInput) DeleteApiMappingRequest {
 	op := &aws.Operation{
 		Name:       opDeleteApiMapping,
 		HTTPMethod: "DELETE",
@@ -100,10 +34,10 @@ func (c *Client) DeleteApiMappingRequest(input *DeleteApiMappingInput) DeleteApi
 	}
 
 	if input == nil {
-		input = &DeleteApiMappingInput{}
+		input = &types.DeleteApiMappingInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteApiMappingOutput{})
+	req := c.newRequest(op, input, &types.DeleteApiMappingOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return DeleteApiMappingRequest{Request: req, Input: input, Copy: c.DeleteApiMappingRequest}
@@ -113,8 +47,8 @@ func (c *Client) DeleteApiMappingRequest(input *DeleteApiMappingInput) DeleteApi
 // DeleteApiMapping API operation.
 type DeleteApiMappingRequest struct {
 	*aws.Request
-	Input *DeleteApiMappingInput
-	Copy  func(*DeleteApiMappingInput) DeleteApiMappingRequest
+	Input *types.DeleteApiMappingInput
+	Copy  func(*types.DeleteApiMappingInput) DeleteApiMappingRequest
 }
 
 // Send marshals and sends the DeleteApiMapping API request.
@@ -126,7 +60,7 @@ func (r DeleteApiMappingRequest) Send(ctx context.Context) (*DeleteApiMappingRes
 	}
 
 	resp := &DeleteApiMappingResponse{
-		DeleteApiMappingOutput: r.Request.Data.(*DeleteApiMappingOutput),
+		DeleteApiMappingOutput: r.Request.Data.(*types.DeleteApiMappingOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -136,7 +70,7 @@ func (r DeleteApiMappingRequest) Send(ctx context.Context) (*DeleteApiMappingRes
 // DeleteApiMappingResponse is the response type for the
 // DeleteApiMapping API operation.
 type DeleteApiMappingResponse struct {
-	*DeleteApiMappingOutput
+	*types.DeleteApiMappingOutput
 
 	response *aws.Response
 }

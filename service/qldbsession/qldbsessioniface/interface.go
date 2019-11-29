@@ -10,6 +10,7 @@ package qldbsessioniface
 
 import (
 	"github.com/aws/aws-sdk-go-v2/service/qldbsession"
+	"github.com/aws/aws-sdk-go-v2/service/qldbsession/types"
 )
 
 // ClientAPI provides an interface to enable mocking the
@@ -43,7 +44,7 @@ import (
 //    type mockClientClient struct {
 //        qldbsessioniface.ClientPI
 //    }
-//    func (m *mockClientClient) SendCommand(input *qldbsession.SendCommandInput) (*qldbsession.SendCommandOutput, error) {
+//    func (m *mockClientClient) SendCommand(input *types.SendCommandInput) (*types.SendCommandOutput, error) {
 //        // mock response/functionality
 //    }
 //
@@ -61,7 +62,7 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type ClientAPI interface {
-	SendCommandRequest(*qldbsession.SendCommandInput) qldbsession.SendCommandRequest
+	SendCommandRequest(*types.SendCommandInput) qldbsession.SendCommandRequest
 }
 
 var _ ClientAPI = (*qldbsession.Client)(nil)

@@ -6,48 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/lightsail/types"
 )
-
-type GetDiskInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the disk (e.g., my-disk).
-	//
-	// DiskName is a required field
-	DiskName *string `locationName:"diskName" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetDiskInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetDiskInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetDiskInput"}
-
-	if s.DiskName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DiskName"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type GetDiskOutput struct {
-	_ struct{} `type:"structure"`
-
-	// An object containing information about the disk.
-	Disk *Disk `locationName:"disk" type:"structure"`
-}
-
-// String returns the string representation
-func (s GetDiskOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetDisk = "GetDisk"
 
@@ -64,7 +24,7 @@ const opGetDisk = "GetDisk"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetDisk
-func (c *Client) GetDiskRequest(input *GetDiskInput) GetDiskRequest {
+func (c *Client) GetDiskRequest(input *types.GetDiskInput) GetDiskRequest {
 	op := &aws.Operation{
 		Name:       opGetDisk,
 		HTTPMethod: "POST",
@@ -72,10 +32,10 @@ func (c *Client) GetDiskRequest(input *GetDiskInput) GetDiskRequest {
 	}
 
 	if input == nil {
-		input = &GetDiskInput{}
+		input = &types.GetDiskInput{}
 	}
 
-	req := c.newRequest(op, input, &GetDiskOutput{})
+	req := c.newRequest(op, input, &types.GetDiskOutput{})
 	return GetDiskRequest{Request: req, Input: input, Copy: c.GetDiskRequest}
 }
 
@@ -83,8 +43,8 @@ func (c *Client) GetDiskRequest(input *GetDiskInput) GetDiskRequest {
 // GetDisk API operation.
 type GetDiskRequest struct {
 	*aws.Request
-	Input *GetDiskInput
-	Copy  func(*GetDiskInput) GetDiskRequest
+	Input *types.GetDiskInput
+	Copy  func(*types.GetDiskInput) GetDiskRequest
 }
 
 // Send marshals and sends the GetDisk API request.
@@ -96,7 +56,7 @@ func (r GetDiskRequest) Send(ctx context.Context) (*GetDiskResponse, error) {
 	}
 
 	resp := &GetDiskResponse{
-		GetDiskOutput: r.Request.Data.(*GetDiskOutput),
+		GetDiskOutput: r.Request.Data.(*types.GetDiskOutput),
 		response:      &aws.Response{Request: r.Request},
 	}
 
@@ -106,7 +66,7 @@ func (r GetDiskRequest) Send(ctx context.Context) (*GetDiskResponse, error) {
 // GetDiskResponse is the response type for the
 // GetDisk API operation.
 type GetDiskResponse struct {
-	*GetDiskOutput
+	*types.GetDiskOutput
 
 	response *aws.Response
 }

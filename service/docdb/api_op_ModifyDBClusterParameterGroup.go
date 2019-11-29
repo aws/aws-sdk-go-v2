@@ -6,69 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/docdb/types"
 )
-
-// Represents the input to ModifyDBClusterParameterGroup.
-type ModifyDBClusterParameterGroupInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the DB cluster parameter group to modify.
-	//
-	// DBClusterParameterGroupName is a required field
-	DBClusterParameterGroupName *string `type:"string" required:"true"`
-
-	// A list of parameters in the DB cluster parameter group to modify.
-	//
-	// Parameters is a required field
-	Parameters []Parameter `locationNameList:"Parameter" type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s ModifyDBClusterParameterGroupInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ModifyDBClusterParameterGroupInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ModifyDBClusterParameterGroupInput"}
-
-	if s.DBClusterParameterGroupName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DBClusterParameterGroupName"))
-	}
-
-	if s.Parameters == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Parameters"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Contains the name of a DB cluster parameter group.
-type ModifyDBClusterParameterGroupOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of a DB cluster parameter group.
-	//
-	// Constraints:
-	//
-	//    * Must be from 1 to 255 letters or numbers.
-	//
-	//    * The first character must be a letter.
-	//
-	//    * Cannot end with a hyphen or contain two consecutive hyphens.
-	//
-	// This value is stored as a lowercase string.
-	DBClusterParameterGroupName *string `type:"string"`
-}
-
-// String returns the string representation
-func (s ModifyDBClusterParameterGroupOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opModifyDBClusterParameterGroup = "ModifyDBClusterParameterGroup"
 
@@ -100,7 +39,7 @@ const opModifyDBClusterParameterGroup = "ModifyDBClusterParameterGroup"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/ModifyDBClusterParameterGroup
-func (c *Client) ModifyDBClusterParameterGroupRequest(input *ModifyDBClusterParameterGroupInput) ModifyDBClusterParameterGroupRequest {
+func (c *Client) ModifyDBClusterParameterGroupRequest(input *types.ModifyDBClusterParameterGroupInput) ModifyDBClusterParameterGroupRequest {
 	op := &aws.Operation{
 		Name:       opModifyDBClusterParameterGroup,
 		HTTPMethod: "POST",
@@ -108,10 +47,10 @@ func (c *Client) ModifyDBClusterParameterGroupRequest(input *ModifyDBClusterPara
 	}
 
 	if input == nil {
-		input = &ModifyDBClusterParameterGroupInput{}
+		input = &types.ModifyDBClusterParameterGroupInput{}
 	}
 
-	req := c.newRequest(op, input, &ModifyDBClusterParameterGroupOutput{})
+	req := c.newRequest(op, input, &types.ModifyDBClusterParameterGroupOutput{})
 	return ModifyDBClusterParameterGroupRequest{Request: req, Input: input, Copy: c.ModifyDBClusterParameterGroupRequest}
 }
 
@@ -119,8 +58,8 @@ func (c *Client) ModifyDBClusterParameterGroupRequest(input *ModifyDBClusterPara
 // ModifyDBClusterParameterGroup API operation.
 type ModifyDBClusterParameterGroupRequest struct {
 	*aws.Request
-	Input *ModifyDBClusterParameterGroupInput
-	Copy  func(*ModifyDBClusterParameterGroupInput) ModifyDBClusterParameterGroupRequest
+	Input *types.ModifyDBClusterParameterGroupInput
+	Copy  func(*types.ModifyDBClusterParameterGroupInput) ModifyDBClusterParameterGroupRequest
 }
 
 // Send marshals and sends the ModifyDBClusterParameterGroup API request.
@@ -132,7 +71,7 @@ func (r ModifyDBClusterParameterGroupRequest) Send(ctx context.Context) (*Modify
 	}
 
 	resp := &ModifyDBClusterParameterGroupResponse{
-		ModifyDBClusterParameterGroupOutput: r.Request.Data.(*ModifyDBClusterParameterGroupOutput),
+		ModifyDBClusterParameterGroupOutput: r.Request.Data.(*types.ModifyDBClusterParameterGroupOutput),
 		response:                            &aws.Response{Request: r.Request},
 	}
 
@@ -142,7 +81,7 @@ func (r ModifyDBClusterParameterGroupRequest) Send(ctx context.Context) (*Modify
 // ModifyDBClusterParameterGroupResponse is the response type for the
 // ModifyDBClusterParameterGroup API operation.
 type ModifyDBClusterParameterGroupResponse struct {
-	*ModifyDBClusterParameterGroupOutput
+	*types.ModifyDBClusterParameterGroupOutput
 
 	response *aws.Response
 }

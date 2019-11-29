@@ -6,89 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/kafka/types"
 )
-
-type DeleteClusterInput struct {
-	_ struct{} `type:"structure"`
-
-	// ClusterArn is a required field
-	ClusterArn *string `location:"uri" locationName:"clusterArn" type:"string" required:"true"`
-
-	CurrentVersion *string `location:"querystring" locationName:"currentVersion" type:"string"`
-}
-
-// String returns the string representation
-func (s DeleteClusterInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteClusterInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteClusterInput"}
-
-	if s.ClusterArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ClusterArn"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteClusterInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.ClusterArn != nil {
-		v := *s.ClusterArn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "clusterArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.CurrentVersion != nil {
-		v := *s.CurrentVersion
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "currentVersion", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-// Returns information about the deleted cluster.
-type DeleteClusterOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the cluster.
-	ClusterArn *string `locationName:"clusterArn" type:"string"`
-
-	// The state of the cluster. The possible states are CREATING, ACTIVE, and FAILED.
-	State ClusterState `locationName:"state" type:"string" enum:"true"`
-}
-
-// String returns the string representation
-func (s DeleteClusterOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteClusterOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.ClusterArn != nil {
-		v := *s.ClusterArn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "clusterArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if len(s.State) > 0 {
-		v := s.State
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "state", protocol.QuotedValue{ValueMarshaler: v}, metadata)
-	}
-	return nil
-}
 
 const opDeleteCluster = "DeleteCluster"
 
@@ -106,7 +25,7 @@ const opDeleteCluster = "DeleteCluster"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/DeleteCluster
-func (c *Client) DeleteClusterRequest(input *DeleteClusterInput) DeleteClusterRequest {
+func (c *Client) DeleteClusterRequest(input *types.DeleteClusterInput) DeleteClusterRequest {
 	op := &aws.Operation{
 		Name:       opDeleteCluster,
 		HTTPMethod: "DELETE",
@@ -114,10 +33,10 @@ func (c *Client) DeleteClusterRequest(input *DeleteClusterInput) DeleteClusterRe
 	}
 
 	if input == nil {
-		input = &DeleteClusterInput{}
+		input = &types.DeleteClusterInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteClusterOutput{})
+	req := c.newRequest(op, input, &types.DeleteClusterOutput{})
 	return DeleteClusterRequest{Request: req, Input: input, Copy: c.DeleteClusterRequest}
 }
 
@@ -125,8 +44,8 @@ func (c *Client) DeleteClusterRequest(input *DeleteClusterInput) DeleteClusterRe
 // DeleteCluster API operation.
 type DeleteClusterRequest struct {
 	*aws.Request
-	Input *DeleteClusterInput
-	Copy  func(*DeleteClusterInput) DeleteClusterRequest
+	Input *types.DeleteClusterInput
+	Copy  func(*types.DeleteClusterInput) DeleteClusterRequest
 }
 
 // Send marshals and sends the DeleteCluster API request.
@@ -138,7 +57,7 @@ func (r DeleteClusterRequest) Send(ctx context.Context) (*DeleteClusterResponse,
 	}
 
 	resp := &DeleteClusterResponse{
-		DeleteClusterOutput: r.Request.Data.(*DeleteClusterOutput),
+		DeleteClusterOutput: r.Request.Data.(*types.DeleteClusterOutput),
 		response:            &aws.Response{Request: r.Request},
 	}
 
@@ -148,7 +67,7 @@ func (r DeleteClusterRequest) Send(ctx context.Context) (*DeleteClusterResponse,
 // DeleteClusterResponse is the response type for the
 // DeleteCluster API operation.
 type DeleteClusterResponse struct {
-	*DeleteClusterOutput
+	*types.DeleteClusterOutput
 
 	response *aws.Response
 }

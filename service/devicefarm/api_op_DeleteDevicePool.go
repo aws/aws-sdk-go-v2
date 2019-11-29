@@ -6,51 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/devicefarm/types"
 )
-
-// Represents a request to the delete device pool operation.
-type DeleteDevicePoolInput struct {
-	_ struct{} `type:"structure"`
-
-	// Represents the Amazon Resource Name (ARN) of the Device Farm device pool
-	// you wish to delete.
-	//
-	// Arn is a required field
-	Arn *string `locationName:"arn" min:"32" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteDevicePoolInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteDevicePoolInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteDevicePoolInput"}
-
-	if s.Arn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Arn"))
-	}
-	if s.Arn != nil && len(*s.Arn) < 32 {
-		invalidParams.Add(aws.NewErrParamMinLen("Arn", 32))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Represents the result of a delete device pool request.
-type DeleteDevicePoolOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteDevicePoolOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteDevicePool = "DeleteDevicePool"
 
@@ -68,7 +25,7 @@ const opDeleteDevicePool = "DeleteDevicePool"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/DeleteDevicePool
-func (c *Client) DeleteDevicePoolRequest(input *DeleteDevicePoolInput) DeleteDevicePoolRequest {
+func (c *Client) DeleteDevicePoolRequest(input *types.DeleteDevicePoolInput) DeleteDevicePoolRequest {
 	op := &aws.Operation{
 		Name:       opDeleteDevicePool,
 		HTTPMethod: "POST",
@@ -76,10 +33,10 @@ func (c *Client) DeleteDevicePoolRequest(input *DeleteDevicePoolInput) DeleteDev
 	}
 
 	if input == nil {
-		input = &DeleteDevicePoolInput{}
+		input = &types.DeleteDevicePoolInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteDevicePoolOutput{})
+	req := c.newRequest(op, input, &types.DeleteDevicePoolOutput{})
 	return DeleteDevicePoolRequest{Request: req, Input: input, Copy: c.DeleteDevicePoolRequest}
 }
 
@@ -87,8 +44,8 @@ func (c *Client) DeleteDevicePoolRequest(input *DeleteDevicePoolInput) DeleteDev
 // DeleteDevicePool API operation.
 type DeleteDevicePoolRequest struct {
 	*aws.Request
-	Input *DeleteDevicePoolInput
-	Copy  func(*DeleteDevicePoolInput) DeleteDevicePoolRequest
+	Input *types.DeleteDevicePoolInput
+	Copy  func(*types.DeleteDevicePoolInput) DeleteDevicePoolRequest
 }
 
 // Send marshals and sends the DeleteDevicePool API request.
@@ -100,7 +57,7 @@ func (r DeleteDevicePoolRequest) Send(ctx context.Context) (*DeleteDevicePoolRes
 	}
 
 	resp := &DeleteDevicePoolResponse{
-		DeleteDevicePoolOutput: r.Request.Data.(*DeleteDevicePoolOutput),
+		DeleteDevicePoolOutput: r.Request.Data.(*types.DeleteDevicePoolOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -110,7 +67,7 @@ func (r DeleteDevicePoolRequest) Send(ctx context.Context) (*DeleteDevicePoolRes
 // DeleteDevicePoolResponse is the response type for the
 // DeleteDevicePool API operation.
 type DeleteDevicePoolResponse struct {
-	*DeleteDevicePoolOutput
+	*types.DeleteDevicePoolOutput
 
 	response *aws.Response
 }

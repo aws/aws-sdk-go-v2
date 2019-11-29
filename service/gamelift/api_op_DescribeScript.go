@@ -6,48 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/gamelift/types"
 )
-
-type DescribeScriptInput struct {
-	_ struct{} `type:"structure"`
-
-	// Unique identifier for a Realtime script to retrieve properties for.
-	//
-	// ScriptId is a required field
-	ScriptId *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeScriptInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeScriptInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeScriptInput"}
-
-	if s.ScriptId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ScriptId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribeScriptOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Set of properties describing the requested script.
-	Script *Script `type:"structure"`
-}
-
-// String returns the string representation
-func (s DescribeScriptOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeScript = "DescribeScript"
 
@@ -83,7 +43,7 @@ const opDescribeScript = "DescribeScript"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DescribeScript
-func (c *Client) DescribeScriptRequest(input *DescribeScriptInput) DescribeScriptRequest {
+func (c *Client) DescribeScriptRequest(input *types.DescribeScriptInput) DescribeScriptRequest {
 	op := &aws.Operation{
 		Name:       opDescribeScript,
 		HTTPMethod: "POST",
@@ -91,10 +51,10 @@ func (c *Client) DescribeScriptRequest(input *DescribeScriptInput) DescribeScrip
 	}
 
 	if input == nil {
-		input = &DescribeScriptInput{}
+		input = &types.DescribeScriptInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeScriptOutput{})
+	req := c.newRequest(op, input, &types.DescribeScriptOutput{})
 	return DescribeScriptRequest{Request: req, Input: input, Copy: c.DescribeScriptRequest}
 }
 
@@ -102,8 +62,8 @@ func (c *Client) DescribeScriptRequest(input *DescribeScriptInput) DescribeScrip
 // DescribeScript API operation.
 type DescribeScriptRequest struct {
 	*aws.Request
-	Input *DescribeScriptInput
-	Copy  func(*DescribeScriptInput) DescribeScriptRequest
+	Input *types.DescribeScriptInput
+	Copy  func(*types.DescribeScriptInput) DescribeScriptRequest
 }
 
 // Send marshals and sends the DescribeScript API request.
@@ -115,7 +75,7 @@ func (r DescribeScriptRequest) Send(ctx context.Context) (*DescribeScriptRespons
 	}
 
 	resp := &DescribeScriptResponse{
-		DescribeScriptOutput: r.Request.Data.(*DescribeScriptOutput),
+		DescribeScriptOutput: r.Request.Data.(*types.DescribeScriptOutput),
 		response:             &aws.Response{Request: r.Request},
 	}
 
@@ -125,7 +85,7 @@ func (r DescribeScriptRequest) Send(ctx context.Context) (*DescribeScriptRespons
 // DescribeScriptResponse is the response type for the
 // DescribeScript API operation.
 type DescribeScriptResponse struct {
-	*DescribeScriptOutput
+	*types.DescribeScriptOutput
 
 	response *aws.Response
 }

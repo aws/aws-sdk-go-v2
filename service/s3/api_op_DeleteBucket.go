@@ -6,69 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/restxml"
+	"github.com/aws/aws-sdk-go-v2/service/s3/types"
 )
-
-type DeleteBucketInput struct {
-	_ struct{} `type:"structure"`
-
-	// Bucket is a required field
-	Bucket *string `location:"uri" locationName:"Bucket" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteBucketInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteBucketInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteBucketInput"}
-
-	if s.Bucket == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Bucket"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-func (s *DeleteBucketInput) getBucket() (v string) {
-	if s.Bucket == nil {
-		return v
-	}
-	return *s.Bucket
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteBucketInput) MarshalFields(e protocol.FieldEncoder) error {
-
-	if s.Bucket != nil {
-		v := *s.Bucket
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "Bucket", protocol.StringValue(v), metadata)
-	}
-	return nil
-}
-
-type DeleteBucketOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteBucketOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteBucketOutput) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
 
 const opDeleteBucket = "DeleteBucket"
 
@@ -78,6 +19,12 @@ const opDeleteBucket = "DeleteBucket"
 // Deletes the bucket. All objects (including all object versions and Delete
 // Markers) in the bucket must be deleted before the bucket itself can be deleted.
 //
+// Related Resources
+//
+//    *
+//
+//    *
+//
 //    // Example sending a request using DeleteBucketRequest.
 //    req := client.DeleteBucketRequest(params)
 //    resp, err := req.Send(context.TODO())
@@ -86,7 +33,7 @@ const opDeleteBucket = "DeleteBucket"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/DeleteBucket
-func (c *Client) DeleteBucketRequest(input *DeleteBucketInput) DeleteBucketRequest {
+func (c *Client) DeleteBucketRequest(input *types.DeleteBucketInput) DeleteBucketRequest {
 	op := &aws.Operation{
 		Name:       opDeleteBucket,
 		HTTPMethod: "DELETE",
@@ -94,10 +41,10 @@ func (c *Client) DeleteBucketRequest(input *DeleteBucketInput) DeleteBucketReque
 	}
 
 	if input == nil {
-		input = &DeleteBucketInput{}
+		input = &types.DeleteBucketInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteBucketOutput{})
+	req := c.newRequest(op, input, &types.DeleteBucketOutput{})
 	req.Handlers.Unmarshal.Remove(restxml.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return DeleteBucketRequest{Request: req, Input: input, Copy: c.DeleteBucketRequest}
@@ -107,8 +54,8 @@ func (c *Client) DeleteBucketRequest(input *DeleteBucketInput) DeleteBucketReque
 // DeleteBucket API operation.
 type DeleteBucketRequest struct {
 	*aws.Request
-	Input *DeleteBucketInput
-	Copy  func(*DeleteBucketInput) DeleteBucketRequest
+	Input *types.DeleteBucketInput
+	Copy  func(*types.DeleteBucketInput) DeleteBucketRequest
 }
 
 // Send marshals and sends the DeleteBucket API request.
@@ -120,7 +67,7 @@ func (r DeleteBucketRequest) Send(ctx context.Context) (*DeleteBucketResponse, e
 	}
 
 	resp := &DeleteBucketResponse{
-		DeleteBucketOutput: r.Request.Data.(*DeleteBucketOutput),
+		DeleteBucketOutput: r.Request.Data.(*types.DeleteBucketOutput),
 		response:           &aws.Response{Request: r.Request},
 	}
 
@@ -130,7 +77,7 @@ func (r DeleteBucketRequest) Send(ctx context.Context) (*DeleteBucketResponse, e
 // DeleteBucketResponse is the response type for the
 // DeleteBucket API operation.
 type DeleteBucketResponse struct {
-	*DeleteBucketOutput
+	*types.DeleteBucketOutput
 
 	response *aws.Response
 }

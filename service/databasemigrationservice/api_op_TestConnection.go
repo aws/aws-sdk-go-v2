@@ -6,57 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/databasemigrationservice/types"
 )
-
-type TestConnectionInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) string that uniquely identifies the endpoint.
-	//
-	// EndpointArn is a required field
-	EndpointArn *string `type:"string" required:"true"`
-
-	// The Amazon Resource Name (ARN) of the replication instance.
-	//
-	// ReplicationInstanceArn is a required field
-	ReplicationInstanceArn *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s TestConnectionInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *TestConnectionInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "TestConnectionInput"}
-
-	if s.EndpointArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("EndpointArn"))
-	}
-
-	if s.ReplicationInstanceArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ReplicationInstanceArn"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type TestConnectionOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The connection tested.
-	Connection *Connection `type:"structure"`
-}
-
-// String returns the string representation
-func (s TestConnectionOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opTestConnection = "TestConnection"
 
@@ -73,7 +24,7 @@ const opTestConnection = "TestConnection"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/TestConnection
-func (c *Client) TestConnectionRequest(input *TestConnectionInput) TestConnectionRequest {
+func (c *Client) TestConnectionRequest(input *types.TestConnectionInput) TestConnectionRequest {
 	op := &aws.Operation{
 		Name:       opTestConnection,
 		HTTPMethod: "POST",
@@ -81,10 +32,10 @@ func (c *Client) TestConnectionRequest(input *TestConnectionInput) TestConnectio
 	}
 
 	if input == nil {
-		input = &TestConnectionInput{}
+		input = &types.TestConnectionInput{}
 	}
 
-	req := c.newRequest(op, input, &TestConnectionOutput{})
+	req := c.newRequest(op, input, &types.TestConnectionOutput{})
 	return TestConnectionRequest{Request: req, Input: input, Copy: c.TestConnectionRequest}
 }
 
@@ -92,8 +43,8 @@ func (c *Client) TestConnectionRequest(input *TestConnectionInput) TestConnectio
 // TestConnection API operation.
 type TestConnectionRequest struct {
 	*aws.Request
-	Input *TestConnectionInput
-	Copy  func(*TestConnectionInput) TestConnectionRequest
+	Input *types.TestConnectionInput
+	Copy  func(*types.TestConnectionInput) TestConnectionRequest
 }
 
 // Send marshals and sends the TestConnection API request.
@@ -105,7 +56,7 @@ func (r TestConnectionRequest) Send(ctx context.Context) (*TestConnectionRespons
 	}
 
 	resp := &TestConnectionResponse{
-		TestConnectionOutput: r.Request.Data.(*TestConnectionOutput),
+		TestConnectionOutput: r.Request.Data.(*types.TestConnectionOutput),
 		response:             &aws.Response{Request: r.Request},
 	}
 
@@ -115,7 +66,7 @@ func (r TestConnectionRequest) Send(ctx context.Context) (*TestConnectionRespons
 // TestConnectionResponse is the response type for the
 // TestConnection API operation.
 type TestConnectionResponse struct {
-	*TestConnectionOutput
+	*types.TestConnectionOutput
 
 	response *aws.Response
 }

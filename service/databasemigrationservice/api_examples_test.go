@@ -12,6 +12,8 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws/awserr"
 	"github.com/aws/aws-sdk-go-v2/aws/external"
 	"github.com/aws/aws-sdk-go-v2/service/databasemigrationservice"
+	"github.com/aws/aws-sdk-go-v2/service/databasemigrationservice/enums"
+	"github.com/aws/aws-sdk-go-v2/service/databasemigrationservice/types"
 )
 
 var _ time.Duration
@@ -39,9 +41,9 @@ func ExampleClient_AddTagsToResourceRequest_shared00() {
 	}
 
 	svc := databasemigrationservice.New(cfg)
-	input := &databasemigrationservice.AddTagsToResourceInput{
+	input := &types.AddTagsToResourceInput{
 		ResourceArn: aws.String("arn:aws:dms:us-east-1:123456789012:endpoint:ASXWXJZLNWNT5HTWCGV2BUJQ7E"),
-		Tags: []databasemigrationservice.Tag{
+		Tags: []types.Tag{
 			{
 				Key:   aws.String("Acount"),
 				Value: aws.String("1633456"),
@@ -80,19 +82,19 @@ func ExampleClient_CreateEndpointRequest_shared00() {
 	}
 
 	svc := databasemigrationservice.New(cfg)
-	input := &databasemigrationservice.CreateEndpointInput{
+	input := &types.CreateEndpointInput{
 		CertificateArn:            aws.String(""),
 		DatabaseName:              aws.String("testdb"),
 		EndpointIdentifier:        aws.String("test-endpoint-1"),
-		EndpointType:              databasemigrationservice.ReplicationEndpointTypeValueSource,
+		EndpointType:              enums.ReplicationEndpointTypeValueSource,
 		EngineName:                aws.String("mysql"),
 		ExtraConnectionAttributes: aws.String(""),
 		KmsKeyId:                  aws.String("arn:aws:kms:us-east-1:123456789012:key/4c1731d6-5435-ed4d-be13-d53411a7cfbd"),
 		Password:                  aws.String("pasword"),
 		Port:                      aws.Int64(3306),
 		ServerName:                aws.String("mydb.cx1llnox7iyx.us-west-2.rds.amazonaws.com"),
-		SslMode:                   databasemigrationservice.DmsSslModeValueRequire,
-		Tags: []databasemigrationservice.Tag{
+		SslMode:                   enums.DmsSslModeValueRequire,
+		Tags: []types.Tag{
 			{
 				Key:   aws.String("Acount"),
 				Value: aws.String("143327655"),
@@ -142,7 +144,7 @@ func ExampleClient_CreateReplicationInstanceRequest_shared00() {
 	}
 
 	svc := databasemigrationservice.New(cfg)
-	input := &databasemigrationservice.CreateReplicationInstanceInput{
+	input := &types.CreateReplicationInstanceInput{
 		AllocatedStorage:                 aws.Int64(123),
 		AutoMinorVersionUpgrade:          aws.Bool(true),
 		AvailabilityZone:                 aws.String(""),
@@ -154,7 +156,7 @@ func ExampleClient_CreateReplicationInstanceRequest_shared00() {
 		ReplicationInstanceClass:         aws.String(""),
 		ReplicationInstanceIdentifier:    aws.String(""),
 		ReplicationSubnetGroupIdentifier: aws.String(""),
-		Tags: []databasemigrationservice.Tag{
+		Tags: []types.Tag{
 			{
 				Key:   aws.String("string"),
 				Value: aws.String("string"),
@@ -211,14 +213,14 @@ func ExampleClient_CreateReplicationSubnetGroupRequest_shared00() {
 	}
 
 	svc := databasemigrationservice.New(cfg)
-	input := &databasemigrationservice.CreateReplicationSubnetGroupInput{
+	input := &types.CreateReplicationSubnetGroupInput{
 		ReplicationSubnetGroupDescription: aws.String("US West subnet group"),
 		ReplicationSubnetGroupIdentifier:  aws.String("us-west-2ab-vpc-215ds366"),
 		SubnetIds: []string{
 			"subnet-e145356n",
 			"subnet-58f79200",
 		},
-		Tags: []databasemigrationservice.Tag{
+		Tags: []types.Tag{
 			{
 				Key:   aws.String("Acount"),
 				Value: aws.String("145235"),
@@ -267,15 +269,15 @@ func ExampleClient_CreateReplicationTaskRequest_shared00() {
 	}
 
 	svc := databasemigrationservice.New(cfg)
-	input := &databasemigrationservice.CreateReplicationTaskInput{
+	input := &types.CreateReplicationTaskInput{
 		CdcStartTime:              parseTime("2006-01-02T15:04:05Z", "2016-12-14T18:25:43Z"),
-		MigrationType:             databasemigrationservice.MigrationTypeValueFullLoad,
+		MigrationType:             enums.MigrationTypeValueFullLoad,
 		ReplicationInstanceArn:    aws.String("arn:aws:dms:us-east-1:123456789012:rep:6UTDJGBOUS3VI3SUWA66XFJCJQ"),
 		ReplicationTaskIdentifier: aws.String("task1"),
 		ReplicationTaskSettings:   aws.String(""),
 		SourceEndpointArn:         aws.String("arn:aws:dms:us-east-1:123456789012:endpoint:ZW5UAN6P4E77EC7YWHK4RZZ3BE"),
 		TableMappings:             aws.String("file://mappingfile.json"),
-		Tags: []databasemigrationservice.Tag{
+		Tags: []types.Tag{
 			{
 				Key:   aws.String("Acount"),
 				Value: aws.String("24352226"),
@@ -325,7 +327,7 @@ func ExampleClient_DeleteCertificateRequest_shared00() {
 	}
 
 	svc := databasemigrationservice.New(cfg)
-	input := &databasemigrationservice.DeleteCertificateInput{
+	input := &types.DeleteCertificateInput{
 		CertificateArn: aws.String("arn:aws:dms:us-east-1:123456789012:rep:6UTDJGBOUSM457DE6XFJCJQ"),
 	}
 
@@ -362,7 +364,7 @@ func ExampleClient_DeleteConnectionRequest_shared00() {
 	}
 
 	svc := databasemigrationservice.New(cfg)
-	input := &databasemigrationservice.DeleteConnectionInput{
+	input := &types.DeleteConnectionInput{
 		EndpointArn:            aws.String("arn:aws:dms:us-east-1:123456789012:endpoint:RAAR3R22XSH46S3PWLC3NJAWKM"),
 		ReplicationInstanceArn: aws.String("arn:aws:dms:us-east-1:123456789012:rep:6UTDJGBOUS3VI3SUWA66XFJCJQ"),
 	}
@@ -403,7 +405,7 @@ func ExampleClient_DeleteEndpointRequest_shared00() {
 	}
 
 	svc := databasemigrationservice.New(cfg)
-	input := &databasemigrationservice.DeleteEndpointInput{
+	input := &types.DeleteEndpointInput{
 		EndpointArn: aws.String("arn:aws:dms:us-east-1:123456789012:endpoint:RAAR3R22XSH46S3PWLC3NJAWKM"),
 	}
 
@@ -441,7 +443,7 @@ func ExampleClient_DeleteReplicationInstanceRequest_shared00() {
 	}
 
 	svc := databasemigrationservice.New(cfg)
-	input := &databasemigrationservice.DeleteReplicationInstanceInput{
+	input := &types.DeleteReplicationInstanceInput{
 		ReplicationInstanceArn: aws.String("arn:aws:dms:us-east-1:123456789012:rep:6UTDJGBOUS3VI3SUWA66XFJCJQ"),
 	}
 
@@ -478,7 +480,7 @@ func ExampleClient_DeleteReplicationSubnetGroupRequest_shared00() {
 	}
 
 	svc := databasemigrationservice.New(cfg)
-	input := &databasemigrationservice.DeleteReplicationSubnetGroupInput{
+	input := &types.DeleteReplicationSubnetGroupInput{
 		ReplicationSubnetGroupIdentifier: aws.String("us-west-2ab-vpc-215ds366"),
 	}
 
@@ -515,7 +517,7 @@ func ExampleClient_DeleteReplicationTaskRequest_shared00() {
 	}
 
 	svc := databasemigrationservice.New(cfg)
-	input := &databasemigrationservice.DeleteReplicationTaskInput{
+	input := &types.DeleteReplicationTaskInput{
 		ReplicationTaskArn: aws.String("arn:aws:dms:us-east-1:123456789012:rep:6UTDJGBOUS3VI3SUWA66XFJCJQ"),
 	}
 
@@ -555,7 +557,7 @@ func ExampleClient_DescribeAccountAttributesRequest_shared00() {
 	}
 
 	svc := databasemigrationservice.New(cfg)
-	input := &databasemigrationservice.DescribeAccountAttributesInput{}
+	input := &types.DescribeAccountAttributesInput{}
 
 	req := svc.DescribeAccountAttributesRequest(input)
 	result, err := req.Send(context.Background())
@@ -586,8 +588,8 @@ func ExampleClient_DescribeCertificatesRequest_shared00() {
 	}
 
 	svc := databasemigrationservice.New(cfg)
-	input := &databasemigrationservice.DescribeCertificatesInput{
-		Filters: []databasemigrationservice.Filter{
+	input := &types.DescribeCertificatesInput{
+		Filters: []types.Filter{
 			{
 				Name: aws.String("string"),
 				Values: []string{
@@ -632,8 +634,8 @@ func ExampleClient_DescribeConnectionsRequest_shared00() {
 	}
 
 	svc := databasemigrationservice.New(cfg)
-	input := &databasemigrationservice.DescribeConnectionsInput{
-		Filters: []databasemigrationservice.Filter{
+	input := &types.DescribeConnectionsInput{
+		Filters: []types.Filter{
 			{
 				Name: aws.String("string"),
 				Values: []string{
@@ -677,8 +679,8 @@ func ExampleClient_DescribeEndpointTypesRequest_shared00() {
 	}
 
 	svc := databasemigrationservice.New(cfg)
-	input := &databasemigrationservice.DescribeEndpointTypesInput{
-		Filters: []databasemigrationservice.Filter{
+	input := &types.DescribeEndpointTypesInput{
+		Filters: []types.Filter{
 			{
 				Name: aws.String("string"),
 				Values: []string{
@@ -720,8 +722,8 @@ func ExampleClient_DescribeEndpointsRequest_shared00() {
 	}
 
 	svc := databasemigrationservice.New(cfg)
-	input := &databasemigrationservice.DescribeEndpointsInput{
-		Filters: []databasemigrationservice.Filter{
+	input := &types.DescribeEndpointsInput{
+		Filters: []types.Filter{
 			{
 				Name: aws.String("string"),
 				Values: []string{
@@ -766,7 +768,7 @@ func ExampleClient_DescribeOrderableReplicationInstancesRequest_shared00() {
 	}
 
 	svc := databasemigrationservice.New(cfg)
-	input := &databasemigrationservice.DescribeOrderableReplicationInstancesInput{
+	input := &types.DescribeOrderableReplicationInstancesInput{
 		Marker:     aws.String(""),
 		MaxRecords: aws.Int64(123),
 	}
@@ -800,7 +802,7 @@ func ExampleClient_DescribeRefreshSchemasStatusRequest_shared00() {
 	}
 
 	svc := databasemigrationservice.New(cfg)
-	input := &databasemigrationservice.DescribeRefreshSchemasStatusInput{
+	input := &types.DescribeRefreshSchemasStatusInput{
 		EndpointArn: aws.String(""),
 	}
 
@@ -837,8 +839,8 @@ func ExampleClient_DescribeReplicationInstancesRequest_shared00() {
 	}
 
 	svc := databasemigrationservice.New(cfg)
-	input := &databasemigrationservice.DescribeReplicationInstancesInput{
-		Filters: []databasemigrationservice.Filter{
+	input := &types.DescribeReplicationInstancesInput{
+		Filters: []types.Filter{
 			{
 				Name: aws.String("string"),
 				Values: []string{
@@ -882,8 +884,8 @@ func ExampleClient_DescribeReplicationSubnetGroupsRequest_shared00() {
 	}
 
 	svc := databasemigrationservice.New(cfg)
-	input := &databasemigrationservice.DescribeReplicationSubnetGroupsInput{
-		Filters: []databasemigrationservice.Filter{
+	input := &types.DescribeReplicationSubnetGroupsInput{
+		Filters: []types.Filter{
 			{
 				Name: aws.String("string"),
 				Values: []string{
@@ -927,8 +929,8 @@ func ExampleClient_DescribeReplicationTasksRequest_shared00() {
 	}
 
 	svc := databasemigrationservice.New(cfg)
-	input := &databasemigrationservice.DescribeReplicationTasksInput{
-		Filters: []databasemigrationservice.Filter{
+	input := &types.DescribeReplicationTasksInput{
+		Filters: []types.Filter{
 			{
 				Name: aws.String("string"),
 				Values: []string{
@@ -972,7 +974,7 @@ func ExampleClient_DescribeSchemasRequest_shared00() {
 	}
 
 	svc := databasemigrationservice.New(cfg)
-	input := &databasemigrationservice.DescribeSchemasInput{
+	input := &types.DescribeSchemasInput{
 		EndpointArn: aws.String(""),
 		Marker:      aws.String(""),
 		MaxRecords:  aws.Int64(123),
@@ -1012,7 +1014,7 @@ func ExampleClient_DescribeTableStatisticsRequest_shared00() {
 	}
 
 	svc := databasemigrationservice.New(cfg)
-	input := &databasemigrationservice.DescribeTableStatisticsInput{
+	input := &types.DescribeTableStatisticsInput{
 		Marker:             aws.String(""),
 		MaxRecords:         aws.Int64(123),
 		ReplicationTaskArn: aws.String(""),
@@ -1051,7 +1053,7 @@ func ExampleClient_ImportCertificateRequest_shared00() {
 	}
 
 	svc := databasemigrationservice.New(cfg)
-	input := &databasemigrationservice.ImportCertificateInput{
+	input := &types.ImportCertificateInput{
 		CertificateIdentifier: aws.String(""),
 		CertificatePem:        aws.String(""),
 	}
@@ -1091,7 +1093,7 @@ func ExampleClient_ListTagsForResourceRequest_shared00() {
 	}
 
 	svc := databasemigrationservice.New(cfg)
-	input := &databasemigrationservice.ListTagsForResourceInput{
+	input := &types.ListTagsForResourceInput{
 		ResourceArn: aws.String(""),
 	}
 
@@ -1126,18 +1128,18 @@ func ExampleClient_ModifyEndpointRequest_shared00() {
 	}
 
 	svc := databasemigrationservice.New(cfg)
-	input := &databasemigrationservice.ModifyEndpointInput{
+	input := &types.ModifyEndpointInput{
 		CertificateArn:            aws.String(""),
 		DatabaseName:              aws.String(""),
 		EndpointArn:               aws.String(""),
 		EndpointIdentifier:        aws.String(""),
-		EndpointType:              databasemigrationservice.ReplicationEndpointTypeValueSource,
+		EndpointType:              enums.ReplicationEndpointTypeValueSource,
 		EngineName:                aws.String(""),
 		ExtraConnectionAttributes: aws.String(""),
 		Password:                  aws.String(""),
 		Port:                      aws.Int64(123),
 		ServerName:                aws.String(""),
-		SslMode:                   databasemigrationservice.DmsSslModeValueRequire,
+		SslMode:                   enums.DmsSslModeValueRequire,
 		Username:                  aws.String(""),
 	}
 
@@ -1182,7 +1184,7 @@ func ExampleClient_ModifyReplicationInstanceRequest_shared00() {
 	}
 
 	svc := databasemigrationservice.New(cfg)
-	input := &databasemigrationservice.ModifyReplicationInstanceInput{
+	input := &types.ModifyReplicationInstanceInput{
 		AllocatedStorage:              aws.Int64(123),
 		AllowMajorVersionUpgrade:      aws.Bool(true),
 		ApplyImmediately:              aws.Bool(true),
@@ -1238,7 +1240,7 @@ func ExampleClient_ModifyReplicationSubnetGroupRequest_shared00() {
 	}
 
 	svc := databasemigrationservice.New(cfg)
-	input := &databasemigrationservice.ModifyReplicationSubnetGroupInput{
+	input := &types.ModifyReplicationSubnetGroupInput{
 		ReplicationSubnetGroupDescription: aws.String(""),
 		ReplicationSubnetGroupIdentifier:  aws.String(""),
 	}
@@ -1286,7 +1288,7 @@ func ExampleClient_RefreshSchemasRequest_shared00() {
 	}
 
 	svc := databasemigrationservice.New(cfg)
-	input := &databasemigrationservice.RefreshSchemasInput{
+	input := &types.RefreshSchemasInput{
 		EndpointArn:            aws.String(""),
 		ReplicationInstanceArn: aws.String(""),
 	}
@@ -1328,7 +1330,7 @@ func ExampleClient_RemoveTagsFromResourceRequest_shared00() {
 	}
 
 	svc := databasemigrationservice.New(cfg)
-	input := &databasemigrationservice.RemoveTagsFromResourceInput{
+	input := &types.RemoveTagsFromResourceInput{
 		ResourceArn: aws.String("arn:aws:dms:us-east-1:123456789012:endpoint:ASXWXJZLNWNT5HTWCGV2BUJQ7E"),
 	}
 
@@ -1363,10 +1365,10 @@ func ExampleClient_StartReplicationTaskRequest_shared00() {
 	}
 
 	svc := databasemigrationservice.New(cfg)
-	input := &databasemigrationservice.StartReplicationTaskInput{
+	input := &types.StartReplicationTaskInput{
 		CdcStartTime:             parseTime("2006-01-02T15:04:05Z", "2016-12-14T13:33:20Z"),
 		ReplicationTaskArn:       aws.String("arn:aws:dms:us-east-1:123456789012:rep:6UTDJGBOUS3VI3SUWA66XFJCJQ"),
-		StartReplicationTaskType: databasemigrationservice.StartReplicationTaskTypeValueStartReplication,
+		StartReplicationTaskType: enums.StartReplicationTaskTypeValueStartReplication,
 	}
 
 	req := svc.StartReplicationTaskRequest(input)
@@ -1404,7 +1406,7 @@ func ExampleClient_StopReplicationTaskRequest_shared00() {
 	}
 
 	svc := databasemigrationservice.New(cfg)
-	input := &databasemigrationservice.StopReplicationTaskInput{
+	input := &types.StopReplicationTaskInput{
 		ReplicationTaskArn: aws.String("arn:aws:dms:us-east-1:123456789012:endpoint:ASXWXJZLNWNT5HTWCGV2BUJQ7E"),
 	}
 
@@ -1441,7 +1443,7 @@ func ExampleClient_TestConnectionRequest_shared00() {
 	}
 
 	svc := databasemigrationservice.New(cfg)
-	input := &databasemigrationservice.TestConnectionInput{
+	input := &types.TestConnectionInput{
 		EndpointArn:            aws.String("arn:aws:dms:us-east-1:123456789012:endpoint:RAAR3R22XSH46S3PWLC3NJAWKM"),
 		ReplicationInstanceArn: aws.String("arn:aws:dms:us-east-1:123456789012:rep:6UTDJGBOUS3VI3SUWA66XFJCJQ"),
 	}

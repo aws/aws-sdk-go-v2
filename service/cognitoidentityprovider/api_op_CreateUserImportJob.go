@@ -6,78 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/types"
 )
-
-// Represents the request to create the user import job.
-type CreateUserImportJobInput struct {
-	_ struct{} `type:"structure"`
-
-	// The role ARN for the Amazon CloudWatch Logging role for the user import job.
-	//
-	// CloudWatchLogsRoleArn is a required field
-	CloudWatchLogsRoleArn *string `min:"20" type:"string" required:"true"`
-
-	// The job name for the user import job.
-	//
-	// JobName is a required field
-	JobName *string `min:"1" type:"string" required:"true"`
-
-	// The user pool ID for the user pool that the users are being imported into.
-	//
-	// UserPoolId is a required field
-	UserPoolId *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s CreateUserImportJobInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateUserImportJobInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateUserImportJobInput"}
-
-	if s.CloudWatchLogsRoleArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("CloudWatchLogsRoleArn"))
-	}
-	if s.CloudWatchLogsRoleArn != nil && len(*s.CloudWatchLogsRoleArn) < 20 {
-		invalidParams.Add(aws.NewErrParamMinLen("CloudWatchLogsRoleArn", 20))
-	}
-
-	if s.JobName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("JobName"))
-	}
-	if s.JobName != nil && len(*s.JobName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("JobName", 1))
-	}
-
-	if s.UserPoolId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("UserPoolId"))
-	}
-	if s.UserPoolId != nil && len(*s.UserPoolId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("UserPoolId", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Represents the response from the server to the request to create the user
-// import job.
-type CreateUserImportJobOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The job object that represents the user import job.
-	UserImportJob *UserImportJobType `type:"structure"`
-}
-
-// String returns the string representation
-func (s CreateUserImportJobOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCreateUserImportJob = "CreateUserImportJob"
 
@@ -94,7 +24,7 @@ const opCreateUserImportJob = "CreateUserImportJob"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/CreateUserImportJob
-func (c *Client) CreateUserImportJobRequest(input *CreateUserImportJobInput) CreateUserImportJobRequest {
+func (c *Client) CreateUserImportJobRequest(input *types.CreateUserImportJobInput) CreateUserImportJobRequest {
 	op := &aws.Operation{
 		Name:       opCreateUserImportJob,
 		HTTPMethod: "POST",
@@ -102,10 +32,10 @@ func (c *Client) CreateUserImportJobRequest(input *CreateUserImportJobInput) Cre
 	}
 
 	if input == nil {
-		input = &CreateUserImportJobInput{}
+		input = &types.CreateUserImportJobInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateUserImportJobOutput{})
+	req := c.newRequest(op, input, &types.CreateUserImportJobOutput{})
 	return CreateUserImportJobRequest{Request: req, Input: input, Copy: c.CreateUserImportJobRequest}
 }
 
@@ -113,8 +43,8 @@ func (c *Client) CreateUserImportJobRequest(input *CreateUserImportJobInput) Cre
 // CreateUserImportJob API operation.
 type CreateUserImportJobRequest struct {
 	*aws.Request
-	Input *CreateUserImportJobInput
-	Copy  func(*CreateUserImportJobInput) CreateUserImportJobRequest
+	Input *types.CreateUserImportJobInput
+	Copy  func(*types.CreateUserImportJobInput) CreateUserImportJobRequest
 }
 
 // Send marshals and sends the CreateUserImportJob API request.
@@ -126,7 +56,7 @@ func (r CreateUserImportJobRequest) Send(ctx context.Context) (*CreateUserImport
 	}
 
 	resp := &CreateUserImportJobResponse{
-		CreateUserImportJobOutput: r.Request.Data.(*CreateUserImportJobOutput),
+		CreateUserImportJobOutput: r.Request.Data.(*types.CreateUserImportJobOutput),
 		response:                  &aws.Response{Request: r.Request},
 	}
 
@@ -136,7 +66,7 @@ func (r CreateUserImportJobRequest) Send(ctx context.Context) (*CreateUserImport
 // CreateUserImportJobResponse is the response type for the
 // CreateUserImportJob API operation.
 type CreateUserImportJobResponse struct {
-	*CreateUserImportJobOutput
+	*types.CreateUserImportJobOutput
 
 	response *aws.Response
 }

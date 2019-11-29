@@ -6,54 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-type CreateDhcpOptionsInput struct {
-	_ struct{} `type:"structure"`
-
-	// A DHCP configuration option.
-	//
-	// DhcpConfigurations is a required field
-	DhcpConfigurations []NewDhcpConfiguration `locationName:"dhcpConfiguration" locationNameList:"item" type:"list" required:"true"`
-
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have
-	// the required permissions, the error response is DryRunOperation. Otherwise,
-	// it is UnauthorizedOperation.
-	DryRun *bool `locationName:"dryRun" type:"boolean"`
-}
-
-// String returns the string representation
-func (s CreateDhcpOptionsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateDhcpOptionsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateDhcpOptionsInput"}
-
-	if s.DhcpConfigurations == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DhcpConfigurations"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type CreateDhcpOptionsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A set of DHCP options.
-	DhcpOptions *DhcpOptions `locationName:"dhcpOptions" type:"structure"`
-}
-
-// String returns the string representation
-func (s CreateDhcpOptionsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCreateDhcpOptions = "CreateDhcpOptions"
 
@@ -108,7 +62,7 @@ const opCreateDhcpOptions = "CreateDhcpOptions"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateDhcpOptions
-func (c *Client) CreateDhcpOptionsRequest(input *CreateDhcpOptionsInput) CreateDhcpOptionsRequest {
+func (c *Client) CreateDhcpOptionsRequest(input *types.CreateDhcpOptionsInput) CreateDhcpOptionsRequest {
 	op := &aws.Operation{
 		Name:       opCreateDhcpOptions,
 		HTTPMethod: "POST",
@@ -116,10 +70,10 @@ func (c *Client) CreateDhcpOptionsRequest(input *CreateDhcpOptionsInput) CreateD
 	}
 
 	if input == nil {
-		input = &CreateDhcpOptionsInput{}
+		input = &types.CreateDhcpOptionsInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateDhcpOptionsOutput{})
+	req := c.newRequest(op, input, &types.CreateDhcpOptionsOutput{})
 	return CreateDhcpOptionsRequest{Request: req, Input: input, Copy: c.CreateDhcpOptionsRequest}
 }
 
@@ -127,8 +81,8 @@ func (c *Client) CreateDhcpOptionsRequest(input *CreateDhcpOptionsInput) CreateD
 // CreateDhcpOptions API operation.
 type CreateDhcpOptionsRequest struct {
 	*aws.Request
-	Input *CreateDhcpOptionsInput
-	Copy  func(*CreateDhcpOptionsInput) CreateDhcpOptionsRequest
+	Input *types.CreateDhcpOptionsInput
+	Copy  func(*types.CreateDhcpOptionsInput) CreateDhcpOptionsRequest
 }
 
 // Send marshals and sends the CreateDhcpOptions API request.
@@ -140,7 +94,7 @@ func (r CreateDhcpOptionsRequest) Send(ctx context.Context) (*CreateDhcpOptionsR
 	}
 
 	resp := &CreateDhcpOptionsResponse{
-		CreateDhcpOptionsOutput: r.Request.Data.(*CreateDhcpOptionsOutput),
+		CreateDhcpOptionsOutput: r.Request.Data.(*types.CreateDhcpOptionsOutput),
 		response:                &aws.Response{Request: r.Request},
 	}
 
@@ -150,7 +104,7 @@ func (r CreateDhcpOptionsRequest) Send(ctx context.Context) (*CreateDhcpOptionsR
 // CreateDhcpOptionsResponse is the response type for the
 // CreateDhcpOptions API operation.
 type CreateDhcpOptionsResponse struct {
-	*CreateDhcpOptionsOutput
+	*types.CreateDhcpOptionsOutput
 
 	response *aws.Response
 }

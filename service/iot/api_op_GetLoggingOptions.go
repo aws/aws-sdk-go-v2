@@ -6,59 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/iot/types"
 )
-
-// The input for the GetLoggingOptions operation.
-type GetLoggingOptionsInput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s GetLoggingOptionsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetLoggingOptionsInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	return nil
-}
-
-// The output from the GetLoggingOptions operation.
-type GetLoggingOptionsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The logging level.
-	LogLevel LogLevel `locationName:"logLevel" type:"string" enum:"true"`
-
-	// The ARN of the IAM role that grants access.
-	RoleArn *string `locationName:"roleArn" type:"string"`
-}
-
-// String returns the string representation
-func (s GetLoggingOptionsOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetLoggingOptionsOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.LogLevel) > 0 {
-		v := s.LogLevel
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "logLevel", protocol.QuotedValue{ValueMarshaler: v}, metadata)
-	}
-	if s.RoleArn != nil {
-		v := *s.RoleArn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "roleArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opGetLoggingOptions = "GetLoggingOptions"
 
@@ -75,7 +24,7 @@ const opGetLoggingOptions = "GetLoggingOptions"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) GetLoggingOptionsRequest(input *GetLoggingOptionsInput) GetLoggingOptionsRequest {
+func (c *Client) GetLoggingOptionsRequest(input *types.GetLoggingOptionsInput) GetLoggingOptionsRequest {
 	op := &aws.Operation{
 		Name:       opGetLoggingOptions,
 		HTTPMethod: "GET",
@@ -83,10 +32,10 @@ func (c *Client) GetLoggingOptionsRequest(input *GetLoggingOptionsInput) GetLogg
 	}
 
 	if input == nil {
-		input = &GetLoggingOptionsInput{}
+		input = &types.GetLoggingOptionsInput{}
 	}
 
-	req := c.newRequest(op, input, &GetLoggingOptionsOutput{})
+	req := c.newRequest(op, input, &types.GetLoggingOptionsOutput{})
 	return GetLoggingOptionsRequest{Request: req, Input: input, Copy: c.GetLoggingOptionsRequest}
 }
 
@@ -94,8 +43,8 @@ func (c *Client) GetLoggingOptionsRequest(input *GetLoggingOptionsInput) GetLogg
 // GetLoggingOptions API operation.
 type GetLoggingOptionsRequest struct {
 	*aws.Request
-	Input *GetLoggingOptionsInput
-	Copy  func(*GetLoggingOptionsInput) GetLoggingOptionsRequest
+	Input *types.GetLoggingOptionsInput
+	Copy  func(*types.GetLoggingOptionsInput) GetLoggingOptionsRequest
 }
 
 // Send marshals and sends the GetLoggingOptions API request.
@@ -107,7 +56,7 @@ func (r GetLoggingOptionsRequest) Send(ctx context.Context) (*GetLoggingOptionsR
 	}
 
 	resp := &GetLoggingOptionsResponse{
-		GetLoggingOptionsOutput: r.Request.Data.(*GetLoggingOptionsOutput),
+		GetLoggingOptionsOutput: r.Request.Data.(*types.GetLoggingOptionsOutput),
 		response:                &aws.Response{Request: r.Request},
 	}
 
@@ -117,7 +66,7 @@ func (r GetLoggingOptionsRequest) Send(ctx context.Context) (*GetLoggingOptionsR
 // GetLoggingOptionsResponse is the response type for the
 // GetLoggingOptions API operation.
 type GetLoggingOptionsResponse struct {
-	*GetLoggingOptionsOutput
+	*types.GetLoggingOptionsOutput
 
 	response *aws.Response
 }

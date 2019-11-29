@@ -6,99 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/cloudfront/types"
 )
-
-// The request to list invalidations.
-type ListInvalidationsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The distribution's ID.
-	//
-	// DistributionId is a required field
-	DistributionId *string `location:"uri" locationName:"DistributionId" type:"string" required:"true"`
-
-	// Use this parameter when paginating results to indicate where to begin in
-	// your list of invalidation batches. Because the results are returned in decreasing
-	// order from most recent to oldest, the most recent results are on the first
-	// page, the second page will contain earlier results, and so on. To get the
-	// next page of results, set Marker to the value of the NextMarker from the
-	// current page's response. This value is the same as the ID of the last invalidation
-	// batch on that page.
-	Marker *string `location:"querystring" locationName:"Marker" type:"string"`
-
-	// The maximum number of invalidation batches that you want in the response
-	// body.
-	MaxItems *int64 `location:"querystring" locationName:"MaxItems" type:"integer"`
-}
-
-// String returns the string representation
-func (s ListInvalidationsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListInvalidationsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListInvalidationsInput"}
-
-	if s.DistributionId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DistributionId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListInvalidationsInput) MarshalFields(e protocol.FieldEncoder) error {
-
-	if s.DistributionId != nil {
-		v := *s.DistributionId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "DistributionId", protocol.StringValue(v), metadata)
-	}
-	if s.Marker != nil {
-		v := *s.Marker
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "Marker", protocol.StringValue(v), metadata)
-	}
-	if s.MaxItems != nil {
-		v := *s.MaxItems
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "MaxItems", protocol.Int64Value(v), metadata)
-	}
-	return nil
-}
-
-// The returned result of the corresponding request.
-type ListInvalidationsOutput struct {
-	_ struct{} `type:"structure" payload:"InvalidationList"`
-
-	// Information about invalidation batches.
-	InvalidationList *InvalidationList `type:"structure"`
-}
-
-// String returns the string representation
-func (s ListInvalidationsOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListInvalidationsOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.InvalidationList != nil {
-		v := s.InvalidationList
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.PayloadTarget, "InvalidationList", v, metadata)
-	}
-	return nil
-}
 
 const opListInvalidations = "ListInvalidations2019_03_26"
 
@@ -115,7 +24,7 @@ const opListInvalidations = "ListInvalidations2019_03_26"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/ListInvalidations
-func (c *Client) ListInvalidationsRequest(input *ListInvalidationsInput) ListInvalidationsRequest {
+func (c *Client) ListInvalidationsRequest(input *types.ListInvalidationsInput) ListInvalidationsRequest {
 	op := &aws.Operation{
 		Name:       opListInvalidations,
 		HTTPMethod: "GET",
@@ -129,10 +38,10 @@ func (c *Client) ListInvalidationsRequest(input *ListInvalidationsInput) ListInv
 	}
 
 	if input == nil {
-		input = &ListInvalidationsInput{}
+		input = &types.ListInvalidationsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListInvalidationsOutput{})
+	req := c.newRequest(op, input, &types.ListInvalidationsOutput{})
 	return ListInvalidationsRequest{Request: req, Input: input, Copy: c.ListInvalidationsRequest}
 }
 
@@ -140,8 +49,8 @@ func (c *Client) ListInvalidationsRequest(input *ListInvalidationsInput) ListInv
 // ListInvalidations API operation.
 type ListInvalidationsRequest struct {
 	*aws.Request
-	Input *ListInvalidationsInput
-	Copy  func(*ListInvalidationsInput) ListInvalidationsRequest
+	Input *types.ListInvalidationsInput
+	Copy  func(*types.ListInvalidationsInput) ListInvalidationsRequest
 }
 
 // Send marshals and sends the ListInvalidations API request.
@@ -153,7 +62,7 @@ func (r ListInvalidationsRequest) Send(ctx context.Context) (*ListInvalidationsR
 	}
 
 	resp := &ListInvalidationsResponse{
-		ListInvalidationsOutput: r.Request.Data.(*ListInvalidationsOutput),
+		ListInvalidationsOutput: r.Request.Data.(*types.ListInvalidationsOutput),
 		response:                &aws.Response{Request: r.Request},
 	}
 
@@ -183,7 +92,7 @@ func NewListInvalidationsPaginator(req ListInvalidationsRequest) ListInvalidatio
 	return ListInvalidationsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListInvalidationsInput
+				var inCpy *types.ListInvalidationsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -203,14 +112,14 @@ type ListInvalidationsPaginator struct {
 	aws.Pager
 }
 
-func (p *ListInvalidationsPaginator) CurrentPage() *ListInvalidationsOutput {
-	return p.Pager.CurrentPage().(*ListInvalidationsOutput)
+func (p *ListInvalidationsPaginator) CurrentPage() *types.ListInvalidationsOutput {
+	return p.Pager.CurrentPage().(*types.ListInvalidationsOutput)
 }
 
 // ListInvalidationsResponse is the response type for the
 // ListInvalidations API operation.
 type ListInvalidationsResponse struct {
-	*ListInvalidationsOutput
+	*types.ListInvalidationsOutput
 
 	response *aws.Response
 }

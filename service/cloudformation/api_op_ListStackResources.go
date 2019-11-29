@@ -6,69 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/cloudformation/types"
 )
-
-// The input for the ListStackResource action.
-type ListStackResourcesInput struct {
-	_ struct{} `type:"structure"`
-
-	// A string that identifies the next page of stack resources that you want to
-	// retrieve.
-	NextToken *string `min:"1" type:"string"`
-
-	// The name or the unique stack ID that is associated with the stack, which
-	// are not always interchangeable:
-	//
-	//    * Running stacks: You can specify either the stack's name or its unique
-	//    stack ID.
-	//
-	//    * Deleted stacks: You must specify the unique stack ID.
-	//
-	// Default: There is no default value.
-	//
-	// StackName is a required field
-	StackName *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s ListStackResourcesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListStackResourcesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListStackResourcesInput"}
-	if s.NextToken != nil && len(*s.NextToken) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
-	}
-
-	if s.StackName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("StackName"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// The output for a ListStackResources action.
-type ListStackResourcesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// If the output exceeds 1 MB, a string that identifies the next page of stack
-	// resources. If no additional page exists, this value is null.
-	NextToken *string `min:"1" type:"string"`
-
-	// A list of StackResourceSummary structures.
-	StackResourceSummaries []StackResourceSummary `type:"list"`
-}
-
-// String returns the string representation
-func (s ListStackResourcesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListStackResources = "ListStackResources"
 
@@ -88,7 +27,7 @@ const opListStackResources = "ListStackResources"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ListStackResources
-func (c *Client) ListStackResourcesRequest(input *ListStackResourcesInput) ListStackResourcesRequest {
+func (c *Client) ListStackResourcesRequest(input *types.ListStackResourcesInput) ListStackResourcesRequest {
 	op := &aws.Operation{
 		Name:       opListStackResources,
 		HTTPMethod: "POST",
@@ -102,10 +41,10 @@ func (c *Client) ListStackResourcesRequest(input *ListStackResourcesInput) ListS
 	}
 
 	if input == nil {
-		input = &ListStackResourcesInput{}
+		input = &types.ListStackResourcesInput{}
 	}
 
-	req := c.newRequest(op, input, &ListStackResourcesOutput{})
+	req := c.newRequest(op, input, &types.ListStackResourcesOutput{})
 	return ListStackResourcesRequest{Request: req, Input: input, Copy: c.ListStackResourcesRequest}
 }
 
@@ -113,8 +52,8 @@ func (c *Client) ListStackResourcesRequest(input *ListStackResourcesInput) ListS
 // ListStackResources API operation.
 type ListStackResourcesRequest struct {
 	*aws.Request
-	Input *ListStackResourcesInput
-	Copy  func(*ListStackResourcesInput) ListStackResourcesRequest
+	Input *types.ListStackResourcesInput
+	Copy  func(*types.ListStackResourcesInput) ListStackResourcesRequest
 }
 
 // Send marshals and sends the ListStackResources API request.
@@ -126,7 +65,7 @@ func (r ListStackResourcesRequest) Send(ctx context.Context) (*ListStackResource
 	}
 
 	resp := &ListStackResourcesResponse{
-		ListStackResourcesOutput: r.Request.Data.(*ListStackResourcesOutput),
+		ListStackResourcesOutput: r.Request.Data.(*types.ListStackResourcesOutput),
 		response:                 &aws.Response{Request: r.Request},
 	}
 
@@ -156,7 +95,7 @@ func NewListStackResourcesPaginator(req ListStackResourcesRequest) ListStackReso
 	return ListStackResourcesPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListStackResourcesInput
+				var inCpy *types.ListStackResourcesInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -176,14 +115,14 @@ type ListStackResourcesPaginator struct {
 	aws.Pager
 }
 
-func (p *ListStackResourcesPaginator) CurrentPage() *ListStackResourcesOutput {
-	return p.Pager.CurrentPage().(*ListStackResourcesOutput)
+func (p *ListStackResourcesPaginator) CurrentPage() *types.ListStackResourcesOutput {
+	return p.Pager.CurrentPage().(*types.ListStackResourcesOutput)
 }
 
 // ListStackResourcesResponse is the response type for the
 // ListStackResources API operation.
 type ListStackResourcesResponse struct {
-	*ListStackResourcesOutput
+	*types.ListStackResourcesOutput
 
 	response *aws.Response
 }

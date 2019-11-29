@@ -4,74 +4,10 @@ package databasemigrationservice
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/databasemigrationservice/types"
 )
-
-type DescribeReplicationInstancesInput struct {
-	_ struct{} `type:"structure"`
-
-	// Filters applied to the describe action.
-	//
-	// Valid filter names: replication-instance-arn | replication-instance-id |
-	// replication-instance-class | engine-version
-	Filters []Filter `type:"list"`
-
-	// An optional pagination token provided by a previous request. If this parameter
-	// is specified, the response includes only records beyond the marker, up to
-	// the value specified by MaxRecords.
-	Marker *string `type:"string"`
-
-	// The maximum number of records to include in the response. If more records
-	// exist than the specified MaxRecords value, a pagination token called a marker
-	// is included in the response so that the remaining results can be retrieved.
-	//
-	// Default: 100
-	//
-	// Constraints: Minimum 20, maximum 100.
-	MaxRecords *int64 `type:"integer"`
-}
-
-// String returns the string representation
-func (s DescribeReplicationInstancesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeReplicationInstancesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeReplicationInstancesInput"}
-	if s.Filters != nil {
-		for i, v := range s.Filters {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribeReplicationInstancesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// An optional pagination token provided by a previous request. If this parameter
-	// is specified, the response includes only records beyond the marker, up to
-	// the value specified by MaxRecords.
-	Marker *string `type:"string"`
-
-	// The replication instances described.
-	ReplicationInstances []ReplicationInstance `type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeReplicationInstancesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeReplicationInstances = "DescribeReplicationInstances"
 
@@ -89,7 +25,7 @@ const opDescribeReplicationInstances = "DescribeReplicationInstances"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeReplicationInstances
-func (c *Client) DescribeReplicationInstancesRequest(input *DescribeReplicationInstancesInput) DescribeReplicationInstancesRequest {
+func (c *Client) DescribeReplicationInstancesRequest(input *types.DescribeReplicationInstancesInput) DescribeReplicationInstancesRequest {
 	op := &aws.Operation{
 		Name:       opDescribeReplicationInstances,
 		HTTPMethod: "POST",
@@ -103,10 +39,10 @@ func (c *Client) DescribeReplicationInstancesRequest(input *DescribeReplicationI
 	}
 
 	if input == nil {
-		input = &DescribeReplicationInstancesInput{}
+		input = &types.DescribeReplicationInstancesInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeReplicationInstancesOutput{})
+	req := c.newRequest(op, input, &types.DescribeReplicationInstancesOutput{})
 	return DescribeReplicationInstancesRequest{Request: req, Input: input, Copy: c.DescribeReplicationInstancesRequest}
 }
 
@@ -114,8 +50,8 @@ func (c *Client) DescribeReplicationInstancesRequest(input *DescribeReplicationI
 // DescribeReplicationInstances API operation.
 type DescribeReplicationInstancesRequest struct {
 	*aws.Request
-	Input *DescribeReplicationInstancesInput
-	Copy  func(*DescribeReplicationInstancesInput) DescribeReplicationInstancesRequest
+	Input *types.DescribeReplicationInstancesInput
+	Copy  func(*types.DescribeReplicationInstancesInput) DescribeReplicationInstancesRequest
 }
 
 // Send marshals and sends the DescribeReplicationInstances API request.
@@ -127,7 +63,7 @@ func (r DescribeReplicationInstancesRequest) Send(ctx context.Context) (*Describ
 	}
 
 	resp := &DescribeReplicationInstancesResponse{
-		DescribeReplicationInstancesOutput: r.Request.Data.(*DescribeReplicationInstancesOutput),
+		DescribeReplicationInstancesOutput: r.Request.Data.(*types.DescribeReplicationInstancesOutput),
 		response:                           &aws.Response{Request: r.Request},
 	}
 
@@ -157,7 +93,7 @@ func NewDescribeReplicationInstancesPaginator(req DescribeReplicationInstancesRe
 	return DescribeReplicationInstancesPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *DescribeReplicationInstancesInput
+				var inCpy *types.DescribeReplicationInstancesInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -177,14 +113,14 @@ type DescribeReplicationInstancesPaginator struct {
 	aws.Pager
 }
 
-func (p *DescribeReplicationInstancesPaginator) CurrentPage() *DescribeReplicationInstancesOutput {
-	return p.Pager.CurrentPage().(*DescribeReplicationInstancesOutput)
+func (p *DescribeReplicationInstancesPaginator) CurrentPage() *types.DescribeReplicationInstancesOutput {
+	return p.Pager.CurrentPage().(*types.DescribeReplicationInstancesOutput)
 }
 
 // DescribeReplicationInstancesResponse is the response type for the
 // DescribeReplicationInstances API operation.
 type DescribeReplicationInstancesResponse struct {
-	*DescribeReplicationInstancesOutput
+	*types.DescribeReplicationInstancesOutput
 
 	response *aws.Response
 }

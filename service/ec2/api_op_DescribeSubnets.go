@@ -6,112 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-type DescribeSubnetsInput struct {
-	_ struct{} `type:"structure"`
-
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have
-	// the required permissions, the error response is DryRunOperation. Otherwise,
-	// it is UnauthorizedOperation.
-	DryRun *bool `locationName:"dryRun" type:"boolean"`
-
-	// One or more filters.
-	//
-	//    * availability-zone - The Availability Zone for the subnet. You can also
-	//    use availabilityZone as the filter name.
-	//
-	//    * availability-zone-id - The ID of the Availability Zone for the subnet.
-	//    You can also use availabilityZoneId as the filter name.
-	//
-	//    * available-ip-address-count - The number of IPv4 addresses in the subnet
-	//    that are available.
-	//
-	//    * cidr-block - The IPv4 CIDR block of the subnet. The CIDR block you specify
-	//    must exactly match the subnet's CIDR block for information to be returned
-	//    for the subnet. You can also use cidr or cidrBlock as the filter names.
-	//
-	//    * default-for-az - Indicates whether this is the default subnet for the
-	//    Availability Zone. You can also use defaultForAz as the filter name.
-	//
-	//    * ipv6-cidr-block-association.ipv6-cidr-block - An IPv6 CIDR block associated
-	//    with the subnet.
-	//
-	//    * ipv6-cidr-block-association.association-id - An association ID for an
-	//    IPv6 CIDR block associated with the subnet.
-	//
-	//    * ipv6-cidr-block-association.state - The state of an IPv6 CIDR block
-	//    associated with the subnet.
-	//
-	//    * owner-id - The ID of the AWS account that owns the subnet.
-	//
-	//    * state - The state of the subnet (pending | available).
-	//
-	//    * subnet-arn - The Amazon Resource Name (ARN) of the subnet.
-	//
-	//    * subnet-id - The ID of the subnet.
-	//
-	//    * tag:<key> - The key/value combination of a tag assigned to the resource.
-	//    Use the tag key in the filter name and the tag value as the filter value.
-	//    For example, to find all resources that have a tag with the key Owner
-	//    and the value TeamA, specify tag:Owner for the filter name and TeamA for
-	//    the filter value.
-	//
-	//    * tag-key - The key of a tag assigned to the resource. Use this filter
-	//    to find all resources assigned a tag with a specific key, regardless of
-	//    the tag value.
-	//
-	//    * vpc-id - The ID of the VPC for the subnet.
-	Filters []Filter `locationName:"Filter" locationNameList:"Filter" type:"list"`
-
-	// The maximum number of results to return with a single call. To retrieve the
-	// remaining results, make another call with the returned nextToken value.
-	MaxResults *int64 `min:"5" type:"integer"`
-
-	// The token for the next page of results.
-	NextToken *string `type:"string"`
-
-	// One or more subnet IDs.
-	//
-	// Default: Describes all your subnets.
-	SubnetIds []string `locationName:"SubnetId" locationNameList:"SubnetId" type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeSubnetsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeSubnetsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeSubnetsInput"}
-	if s.MaxResults != nil && *s.MaxResults < 5 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 5))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribeSubnetsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The token to use to retrieve the next page of results. This value is null
-	// when there are no more results to return.
-	NextToken *string `locationName:"nextToken" type:"string"`
-
-	// Information about one or more subnets.
-	Subnets []Subnet `locationName:"subnetSet" locationNameList:"item" type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeSubnetsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeSubnets = "DescribeSubnets"
 
@@ -131,7 +27,7 @@ const opDescribeSubnets = "DescribeSubnets"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeSubnets
-func (c *Client) DescribeSubnetsRequest(input *DescribeSubnetsInput) DescribeSubnetsRequest {
+func (c *Client) DescribeSubnetsRequest(input *types.DescribeSubnetsInput) DescribeSubnetsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeSubnets,
 		HTTPMethod: "POST",
@@ -145,10 +41,10 @@ func (c *Client) DescribeSubnetsRequest(input *DescribeSubnetsInput) DescribeSub
 	}
 
 	if input == nil {
-		input = &DescribeSubnetsInput{}
+		input = &types.DescribeSubnetsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeSubnetsOutput{})
+	req := c.newRequest(op, input, &types.DescribeSubnetsOutput{})
 	return DescribeSubnetsRequest{Request: req, Input: input, Copy: c.DescribeSubnetsRequest}
 }
 
@@ -156,8 +52,8 @@ func (c *Client) DescribeSubnetsRequest(input *DescribeSubnetsInput) DescribeSub
 // DescribeSubnets API operation.
 type DescribeSubnetsRequest struct {
 	*aws.Request
-	Input *DescribeSubnetsInput
-	Copy  func(*DescribeSubnetsInput) DescribeSubnetsRequest
+	Input *types.DescribeSubnetsInput
+	Copy  func(*types.DescribeSubnetsInput) DescribeSubnetsRequest
 }
 
 // Send marshals and sends the DescribeSubnets API request.
@@ -169,7 +65,7 @@ func (r DescribeSubnetsRequest) Send(ctx context.Context) (*DescribeSubnetsRespo
 	}
 
 	resp := &DescribeSubnetsResponse{
-		DescribeSubnetsOutput: r.Request.Data.(*DescribeSubnetsOutput),
+		DescribeSubnetsOutput: r.Request.Data.(*types.DescribeSubnetsOutput),
 		response:              &aws.Response{Request: r.Request},
 	}
 
@@ -199,7 +95,7 @@ func NewDescribeSubnetsPaginator(req DescribeSubnetsRequest) DescribeSubnetsPagi
 	return DescribeSubnetsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *DescribeSubnetsInput
+				var inCpy *types.DescribeSubnetsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -219,14 +115,14 @@ type DescribeSubnetsPaginator struct {
 	aws.Pager
 }
 
-func (p *DescribeSubnetsPaginator) CurrentPage() *DescribeSubnetsOutput {
-	return p.Pager.CurrentPage().(*DescribeSubnetsOutput)
+func (p *DescribeSubnetsPaginator) CurrentPage() *types.DescribeSubnetsOutput {
+	return p.Pager.CurrentPage().(*types.DescribeSubnetsOutput)
 }
 
 // DescribeSubnetsResponse is the response type for the
 // DescribeSubnets API operation.
 type DescribeSubnetsResponse struct {
-	*DescribeSubnetsOutput
+	*types.DescribeSubnetsOutput
 
 	response *aws.Response
 }

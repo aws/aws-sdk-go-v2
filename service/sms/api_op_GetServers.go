@@ -4,53 +4,10 @@ package sms
 
 import (
 	"context"
-	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/sms/types"
 )
-
-type GetServersInput struct {
-	_ struct{} `type:"structure"`
-
-	// The maximum number of results to return in a single call. The default value
-	// is 50. To retrieve the remaining results, make another call with the returned
-	// NextToken value.
-	MaxResults *int64 `locationName:"maxResults" type:"integer"`
-
-	// The token for the next set of results.
-	NextToken *string `locationName:"nextToken" type:"string"`
-
-	// List of VmServerAddress objects
-	VmServerAddressList []VmServerAddress `locationName:"vmServerAddressList" type:"list"`
-}
-
-// String returns the string representation
-func (s GetServersInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type GetServersOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The time when the server was last modified.
-	LastModifiedOn *time.Time `locationName:"lastModifiedOn" type:"timestamp"`
-
-	// The token required to retrieve the next set of results. This value is null
-	// when there are no more results to return.
-	NextToken *string `locationName:"nextToken" type:"string"`
-
-	// The status of the server catalog.
-	ServerCatalogStatus ServerCatalogStatus `locationName:"serverCatalogStatus" type:"string" enum:"true"`
-
-	// Information about the servers.
-	ServerList []Server `locationName:"serverList" type:"list"`
-}
-
-// String returns the string representation
-func (s GetServersOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetServers = "GetServers"
 
@@ -69,7 +26,7 @@ const opGetServers = "GetServers"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sms-2016-10-24/GetServers
-func (c *Client) GetServersRequest(input *GetServersInput) GetServersRequest {
+func (c *Client) GetServersRequest(input *types.GetServersInput) GetServersRequest {
 	op := &aws.Operation{
 		Name:       opGetServers,
 		HTTPMethod: "POST",
@@ -83,10 +40,10 @@ func (c *Client) GetServersRequest(input *GetServersInput) GetServersRequest {
 	}
 
 	if input == nil {
-		input = &GetServersInput{}
+		input = &types.GetServersInput{}
 	}
 
-	req := c.newRequest(op, input, &GetServersOutput{})
+	req := c.newRequest(op, input, &types.GetServersOutput{})
 	return GetServersRequest{Request: req, Input: input, Copy: c.GetServersRequest}
 }
 
@@ -94,8 +51,8 @@ func (c *Client) GetServersRequest(input *GetServersInput) GetServersRequest {
 // GetServers API operation.
 type GetServersRequest struct {
 	*aws.Request
-	Input *GetServersInput
-	Copy  func(*GetServersInput) GetServersRequest
+	Input *types.GetServersInput
+	Copy  func(*types.GetServersInput) GetServersRequest
 }
 
 // Send marshals and sends the GetServers API request.
@@ -107,7 +64,7 @@ func (r GetServersRequest) Send(ctx context.Context) (*GetServersResponse, error
 	}
 
 	resp := &GetServersResponse{
-		GetServersOutput: r.Request.Data.(*GetServersOutput),
+		GetServersOutput: r.Request.Data.(*types.GetServersOutput),
 		response:         &aws.Response{Request: r.Request},
 	}
 
@@ -137,7 +94,7 @@ func NewGetServersPaginator(req GetServersRequest) GetServersPaginator {
 	return GetServersPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *GetServersInput
+				var inCpy *types.GetServersInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -157,14 +114,14 @@ type GetServersPaginator struct {
 	aws.Pager
 }
 
-func (p *GetServersPaginator) CurrentPage() *GetServersOutput {
-	return p.Pager.CurrentPage().(*GetServersOutput)
+func (p *GetServersPaginator) CurrentPage() *types.GetServersOutput {
+	return p.Pager.CurrentPage().(*types.GetServersOutput)
 }
 
 // GetServersResponse is the response type for the
 // GetServers API operation.
 type GetServersResponse struct {
-	*GetServersOutput
+	*types.GetServersOutput
 
 	response *aws.Response
 }

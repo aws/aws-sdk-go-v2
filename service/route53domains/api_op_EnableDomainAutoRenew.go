@@ -6,45 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/route53domains/types"
 )
-
-type EnableDomainAutoRenewInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the domain that you want to enable automatic renewal for.
-	//
-	// DomainName is a required field
-	DomainName *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s EnableDomainAutoRenewInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *EnableDomainAutoRenewInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "EnableDomainAutoRenewInput"}
-
-	if s.DomainName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DomainName"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type EnableDomainAutoRenewOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s EnableDomainAutoRenewOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opEnableDomainAutoRenew = "EnableDomainAutoRenew"
 
@@ -70,7 +33,7 @@ const opEnableDomainAutoRenew = "EnableDomainAutoRenew"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/EnableDomainAutoRenew
-func (c *Client) EnableDomainAutoRenewRequest(input *EnableDomainAutoRenewInput) EnableDomainAutoRenewRequest {
+func (c *Client) EnableDomainAutoRenewRequest(input *types.EnableDomainAutoRenewInput) EnableDomainAutoRenewRequest {
 	op := &aws.Operation{
 		Name:       opEnableDomainAutoRenew,
 		HTTPMethod: "POST",
@@ -78,10 +41,10 @@ func (c *Client) EnableDomainAutoRenewRequest(input *EnableDomainAutoRenewInput)
 	}
 
 	if input == nil {
-		input = &EnableDomainAutoRenewInput{}
+		input = &types.EnableDomainAutoRenewInput{}
 	}
 
-	req := c.newRequest(op, input, &EnableDomainAutoRenewOutput{})
+	req := c.newRequest(op, input, &types.EnableDomainAutoRenewOutput{})
 	return EnableDomainAutoRenewRequest{Request: req, Input: input, Copy: c.EnableDomainAutoRenewRequest}
 }
 
@@ -89,8 +52,8 @@ func (c *Client) EnableDomainAutoRenewRequest(input *EnableDomainAutoRenewInput)
 // EnableDomainAutoRenew API operation.
 type EnableDomainAutoRenewRequest struct {
 	*aws.Request
-	Input *EnableDomainAutoRenewInput
-	Copy  func(*EnableDomainAutoRenewInput) EnableDomainAutoRenewRequest
+	Input *types.EnableDomainAutoRenewInput
+	Copy  func(*types.EnableDomainAutoRenewInput) EnableDomainAutoRenewRequest
 }
 
 // Send marshals and sends the EnableDomainAutoRenew API request.
@@ -102,7 +65,7 @@ func (r EnableDomainAutoRenewRequest) Send(ctx context.Context) (*EnableDomainAu
 	}
 
 	resp := &EnableDomainAutoRenewResponse{
-		EnableDomainAutoRenewOutput: r.Request.Data.(*EnableDomainAutoRenewOutput),
+		EnableDomainAutoRenewOutput: r.Request.Data.(*types.EnableDomainAutoRenewOutput),
 		response:                    &aws.Response{Request: r.Request},
 	}
 
@@ -112,7 +75,7 @@ func (r EnableDomainAutoRenewRequest) Send(ctx context.Context) (*EnableDomainAu
 // EnableDomainAutoRenewResponse is the response type for the
 // EnableDomainAutoRenew API operation.
 type EnableDomainAutoRenewResponse struct {
-	*EnableDomainAutoRenewOutput
+	*types.EnableDomainAutoRenewOutput
 
 	response *aws.Response
 }

@@ -6,97 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/swf/types"
 )
-
-type GetWorkflowExecutionHistoryInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the domain containing the workflow execution.
-	//
-	// Domain is a required field
-	Domain *string `locationName:"domain" min:"1" type:"string" required:"true"`
-
-	// Specifies the workflow execution for which to return the history.
-	//
-	// Execution is a required field
-	Execution *WorkflowExecution `locationName:"execution" type:"structure" required:"true"`
-
-	// The maximum number of results that are returned per call. Use nextPageToken
-	// to obtain further pages of results.
-	MaximumPageSize *int64 `locationName:"maximumPageSize" type:"integer"`
-
-	// If NextPageToken is returned there are more results available. The value
-	// of NextPageToken is a unique pagination token for each page. Make the call
-	// again using the returned token to retrieve the next page. Keep all other
-	// arguments unchanged. Each pagination token expires after 60 seconds. Using
-	// an expired pagination token will return a 400 error: "Specified token has
-	// exceeded its maximum lifetime".
-	//
-	// The configured maximumPageSize determines how many results can be returned
-	// in a single call.
-	NextPageToken *string `locationName:"nextPageToken" type:"string"`
-
-	// When set to true, returns the events in reverse order. By default the results
-	// are returned in ascending order of the eventTimeStamp of the events.
-	ReverseOrder *bool `locationName:"reverseOrder" type:"boolean"`
-}
-
-// String returns the string representation
-func (s GetWorkflowExecutionHistoryInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetWorkflowExecutionHistoryInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetWorkflowExecutionHistoryInput"}
-
-	if s.Domain == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Domain"))
-	}
-	if s.Domain != nil && len(*s.Domain) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Domain", 1))
-	}
-
-	if s.Execution == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Execution"))
-	}
-	if s.Execution != nil {
-		if err := s.Execution.Validate(); err != nil {
-			invalidParams.AddNested("Execution", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Paginated representation of a workflow history for a workflow execution.
-// This is the up to date, complete and authoritative record of the events related
-// to all tasks and events in the life of the workflow execution.
-type GetWorkflowExecutionHistoryOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The list of history events.
-	//
-	// Events is a required field
-	Events []HistoryEvent `locationName:"events" type:"list" required:"true"`
-
-	// If a NextPageToken was returned by a previous call, there are more results
-	// available. To retrieve the next page of results, make the call again using
-	// the returned token in nextPageToken. Keep all other arguments unchanged.
-	//
-	// The configured maximumPageSize determines how many results can be returned
-	// in a single call.
-	NextPageToken *string `locationName:"nextPageToken" type:"string"`
-}
-
-// String returns the string representation
-func (s GetWorkflowExecutionHistoryOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetWorkflowExecutionHistory = "GetWorkflowExecutionHistory"
 
@@ -135,7 +46,7 @@ const opGetWorkflowExecutionHistory = "GetWorkflowExecutionHistory"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) GetWorkflowExecutionHistoryRequest(input *GetWorkflowExecutionHistoryInput) GetWorkflowExecutionHistoryRequest {
+func (c *Client) GetWorkflowExecutionHistoryRequest(input *types.GetWorkflowExecutionHistoryInput) GetWorkflowExecutionHistoryRequest {
 	op := &aws.Operation{
 		Name:       opGetWorkflowExecutionHistory,
 		HTTPMethod: "POST",
@@ -149,10 +60,10 @@ func (c *Client) GetWorkflowExecutionHistoryRequest(input *GetWorkflowExecutionH
 	}
 
 	if input == nil {
-		input = &GetWorkflowExecutionHistoryInput{}
+		input = &types.GetWorkflowExecutionHistoryInput{}
 	}
 
-	req := c.newRequest(op, input, &GetWorkflowExecutionHistoryOutput{})
+	req := c.newRequest(op, input, &types.GetWorkflowExecutionHistoryOutput{})
 	return GetWorkflowExecutionHistoryRequest{Request: req, Input: input, Copy: c.GetWorkflowExecutionHistoryRequest}
 }
 
@@ -160,8 +71,8 @@ func (c *Client) GetWorkflowExecutionHistoryRequest(input *GetWorkflowExecutionH
 // GetWorkflowExecutionHistory API operation.
 type GetWorkflowExecutionHistoryRequest struct {
 	*aws.Request
-	Input *GetWorkflowExecutionHistoryInput
-	Copy  func(*GetWorkflowExecutionHistoryInput) GetWorkflowExecutionHistoryRequest
+	Input *types.GetWorkflowExecutionHistoryInput
+	Copy  func(*types.GetWorkflowExecutionHistoryInput) GetWorkflowExecutionHistoryRequest
 }
 
 // Send marshals and sends the GetWorkflowExecutionHistory API request.
@@ -173,7 +84,7 @@ func (r GetWorkflowExecutionHistoryRequest) Send(ctx context.Context) (*GetWorkf
 	}
 
 	resp := &GetWorkflowExecutionHistoryResponse{
-		GetWorkflowExecutionHistoryOutput: r.Request.Data.(*GetWorkflowExecutionHistoryOutput),
+		GetWorkflowExecutionHistoryOutput: r.Request.Data.(*types.GetWorkflowExecutionHistoryOutput),
 		response:                          &aws.Response{Request: r.Request},
 	}
 
@@ -203,7 +114,7 @@ func NewGetWorkflowExecutionHistoryPaginator(req GetWorkflowExecutionHistoryRequ
 	return GetWorkflowExecutionHistoryPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *GetWorkflowExecutionHistoryInput
+				var inCpy *types.GetWorkflowExecutionHistoryInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -223,14 +134,14 @@ type GetWorkflowExecutionHistoryPaginator struct {
 	aws.Pager
 }
 
-func (p *GetWorkflowExecutionHistoryPaginator) CurrentPage() *GetWorkflowExecutionHistoryOutput {
-	return p.Pager.CurrentPage().(*GetWorkflowExecutionHistoryOutput)
+func (p *GetWorkflowExecutionHistoryPaginator) CurrentPage() *types.GetWorkflowExecutionHistoryOutput {
+	return p.Pager.CurrentPage().(*types.GetWorkflowExecutionHistoryOutput)
 }
 
 // GetWorkflowExecutionHistoryResponse is the response type for the
 // GetWorkflowExecutionHistory API operation.
 type GetWorkflowExecutionHistoryResponse struct {
-	*GetWorkflowExecutionHistoryOutput
+	*types.GetWorkflowExecutionHistoryOutput
 
 	response *aws.Response
 }

@@ -6,91 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/iot/types"
 )
-
-type AddThingToBillingGroupInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ARN of the billing group.
-	BillingGroupArn *string `locationName:"billingGroupArn" type:"string"`
-
-	// The name of the billing group.
-	BillingGroupName *string `locationName:"billingGroupName" min:"1" type:"string"`
-
-	// The ARN of the thing to be added to the billing group.
-	ThingArn *string `locationName:"thingArn" type:"string"`
-
-	// The name of the thing to be added to the billing group.
-	ThingName *string `locationName:"thingName" min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s AddThingToBillingGroupInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *AddThingToBillingGroupInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "AddThingToBillingGroupInput"}
-	if s.BillingGroupName != nil && len(*s.BillingGroupName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("BillingGroupName", 1))
-	}
-	if s.ThingName != nil && len(*s.ThingName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ThingName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s AddThingToBillingGroupInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.BillingGroupArn != nil {
-		v := *s.BillingGroupArn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "billingGroupArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.BillingGroupName != nil {
-		v := *s.BillingGroupName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "billingGroupName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.ThingArn != nil {
-		v := *s.ThingArn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "thingArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.ThingName != nil {
-		v := *s.ThingName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "thingName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type AddThingToBillingGroupOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s AddThingToBillingGroupOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s AddThingToBillingGroupOutput) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
 
 const opAddThingToBillingGroup = "AddThingToBillingGroup"
 
@@ -105,7 +22,7 @@ const opAddThingToBillingGroup = "AddThingToBillingGroup"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) AddThingToBillingGroupRequest(input *AddThingToBillingGroupInput) AddThingToBillingGroupRequest {
+func (c *Client) AddThingToBillingGroupRequest(input *types.AddThingToBillingGroupInput) AddThingToBillingGroupRequest {
 	op := &aws.Operation{
 		Name:       opAddThingToBillingGroup,
 		HTTPMethod: "PUT",
@@ -113,10 +30,10 @@ func (c *Client) AddThingToBillingGroupRequest(input *AddThingToBillingGroupInpu
 	}
 
 	if input == nil {
-		input = &AddThingToBillingGroupInput{}
+		input = &types.AddThingToBillingGroupInput{}
 	}
 
-	req := c.newRequest(op, input, &AddThingToBillingGroupOutput{})
+	req := c.newRequest(op, input, &types.AddThingToBillingGroupOutput{})
 	return AddThingToBillingGroupRequest{Request: req, Input: input, Copy: c.AddThingToBillingGroupRequest}
 }
 
@@ -124,8 +41,8 @@ func (c *Client) AddThingToBillingGroupRequest(input *AddThingToBillingGroupInpu
 // AddThingToBillingGroup API operation.
 type AddThingToBillingGroupRequest struct {
 	*aws.Request
-	Input *AddThingToBillingGroupInput
-	Copy  func(*AddThingToBillingGroupInput) AddThingToBillingGroupRequest
+	Input *types.AddThingToBillingGroupInput
+	Copy  func(*types.AddThingToBillingGroupInput) AddThingToBillingGroupRequest
 }
 
 // Send marshals and sends the AddThingToBillingGroup API request.
@@ -137,7 +54,7 @@ func (r AddThingToBillingGroupRequest) Send(ctx context.Context) (*AddThingToBil
 	}
 
 	resp := &AddThingToBillingGroupResponse{
-		AddThingToBillingGroupOutput: r.Request.Data.(*AddThingToBillingGroupOutput),
+		AddThingToBillingGroupOutput: r.Request.Data.(*types.AddThingToBillingGroupOutput),
 		response:                     &aws.Response{Request: r.Request},
 	}
 
@@ -147,7 +64,7 @@ func (r AddThingToBillingGroupRequest) Send(ctx context.Context) (*AddThingToBil
 // AddThingToBillingGroupResponse is the response type for the
 // AddThingToBillingGroup API operation.
 type AddThingToBillingGroupResponse struct {
-	*AddThingToBillingGroupOutput
+	*types.AddThingToBillingGroupOutput
 
 	response *aws.Response
 }

@@ -6,90 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/mediapackagevod/types"
 )
-
-type ListPackagingGroupsInput struct {
-	_ struct{} `type:"structure"`
-
-	MaxResults *int64 `location:"querystring" locationName:"maxResults" min:"1" type:"integer"`
-
-	NextToken *string `location:"querystring" locationName:"nextToken" type:"string"`
-}
-
-// String returns the string representation
-func (s ListPackagingGroupsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListPackagingGroupsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListPackagingGroupsInput"}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListPackagingGroupsInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.MaxResults != nil {
-		v := *s.MaxResults
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "maxResults", protocol.Int64Value(v), metadata)
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type ListPackagingGroupsOutput struct {
-	_ struct{} `type:"structure"`
-
-	NextToken *string `locationName:"nextToken" type:"string"`
-
-	PackagingGroups []PackagingGroup `locationName:"packagingGroups" type:"list"`
-}
-
-// String returns the string representation
-func (s ListPackagingGroupsOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListPackagingGroupsOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.PackagingGroups != nil {
-		v := s.PackagingGroups
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "packagingGroups", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	return nil
-}
 
 const opListPackagingGroups = "ListPackagingGroups"
 
@@ -106,7 +24,7 @@ const opListPackagingGroups = "ListPackagingGroups"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mediapackage-vod-2018-11-07/ListPackagingGroups
-func (c *Client) ListPackagingGroupsRequest(input *ListPackagingGroupsInput) ListPackagingGroupsRequest {
+func (c *Client) ListPackagingGroupsRequest(input *types.ListPackagingGroupsInput) ListPackagingGroupsRequest {
 	op := &aws.Operation{
 		Name:       opListPackagingGroups,
 		HTTPMethod: "GET",
@@ -120,10 +38,10 @@ func (c *Client) ListPackagingGroupsRequest(input *ListPackagingGroupsInput) Lis
 	}
 
 	if input == nil {
-		input = &ListPackagingGroupsInput{}
+		input = &types.ListPackagingGroupsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListPackagingGroupsOutput{})
+	req := c.newRequest(op, input, &types.ListPackagingGroupsOutput{})
 	return ListPackagingGroupsRequest{Request: req, Input: input, Copy: c.ListPackagingGroupsRequest}
 }
 
@@ -131,8 +49,8 @@ func (c *Client) ListPackagingGroupsRequest(input *ListPackagingGroupsInput) Lis
 // ListPackagingGroups API operation.
 type ListPackagingGroupsRequest struct {
 	*aws.Request
-	Input *ListPackagingGroupsInput
-	Copy  func(*ListPackagingGroupsInput) ListPackagingGroupsRequest
+	Input *types.ListPackagingGroupsInput
+	Copy  func(*types.ListPackagingGroupsInput) ListPackagingGroupsRequest
 }
 
 // Send marshals and sends the ListPackagingGroups API request.
@@ -144,7 +62,7 @@ func (r ListPackagingGroupsRequest) Send(ctx context.Context) (*ListPackagingGro
 	}
 
 	resp := &ListPackagingGroupsResponse{
-		ListPackagingGroupsOutput: r.Request.Data.(*ListPackagingGroupsOutput),
+		ListPackagingGroupsOutput: r.Request.Data.(*types.ListPackagingGroupsOutput),
 		response:                  &aws.Response{Request: r.Request},
 	}
 
@@ -174,7 +92,7 @@ func NewListPackagingGroupsPaginator(req ListPackagingGroupsRequest) ListPackagi
 	return ListPackagingGroupsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListPackagingGroupsInput
+				var inCpy *types.ListPackagingGroupsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -194,14 +112,14 @@ type ListPackagingGroupsPaginator struct {
 	aws.Pager
 }
 
-func (p *ListPackagingGroupsPaginator) CurrentPage() *ListPackagingGroupsOutput {
-	return p.Pager.CurrentPage().(*ListPackagingGroupsOutput)
+func (p *ListPackagingGroupsPaginator) CurrentPage() *types.ListPackagingGroupsOutput {
+	return p.Pager.CurrentPage().(*types.ListPackagingGroupsOutput)
 }
 
 // ListPackagingGroupsResponse is the response type for the
 // ListPackagingGroups API operation.
 type ListPackagingGroupsResponse struct {
-	*ListPackagingGroupsOutput
+	*types.ListPackagingGroupsOutput
 
 	response *aws.Response
 }

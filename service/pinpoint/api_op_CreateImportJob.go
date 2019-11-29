@@ -6,97 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/pinpoint/types"
 )
-
-type CreateImportJobInput struct {
-	_ struct{} `type:"structure" payload:"ImportJobRequest"`
-
-	// ApplicationId is a required field
-	ApplicationId *string `location:"uri" locationName:"application-id" type:"string" required:"true"`
-
-	// Specifies the settings for a job that imports endpoint definitions from an
-	// Amazon Simple Storage Service (Amazon S3) bucket.
-	//
-	// ImportJobRequest is a required field
-	ImportJobRequest *ImportJobRequest `type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s CreateImportJobInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateImportJobInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateImportJobInput"}
-
-	if s.ApplicationId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ApplicationId"))
-	}
-
-	if s.ImportJobRequest == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ImportJobRequest"))
-	}
-	if s.ImportJobRequest != nil {
-		if err := s.ImportJobRequest.Validate(); err != nil {
-			invalidParams.AddNested("ImportJobRequest", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s CreateImportJobInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.ApplicationId != nil {
-		v := *s.ApplicationId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "application-id", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.ImportJobRequest != nil {
-		v := s.ImportJobRequest
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.PayloadTarget, "ImportJobRequest", v, metadata)
-	}
-	return nil
-}
-
-type CreateImportJobOutput struct {
-	_ struct{} `type:"structure" payload:"ImportJobResponse"`
-
-	// Provides information about the status and settings of a job that imports
-	// endpoint definitions from one or more files. The files can be stored in an
-	// Amazon Simple Storage Service (Amazon S3) bucket or uploaded directly from
-	// a computer by using the Amazon Pinpoint console.
-	//
-	// ImportJobResponse is a required field
-	ImportJobResponse *ImportJobResponse `type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s CreateImportJobOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s CreateImportJobOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.ImportJobResponse != nil {
-		v := s.ImportJobResponse
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.PayloadTarget, "ImportJobResponse", v, metadata)
-	}
-	return nil
-}
 
 const opCreateImportJob = "CreateImportJob"
 
@@ -113,7 +24,7 @@ const opCreateImportJob = "CreateImportJob"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/CreateImportJob
-func (c *Client) CreateImportJobRequest(input *CreateImportJobInput) CreateImportJobRequest {
+func (c *Client) CreateImportJobRequest(input *types.CreateImportJobInput) CreateImportJobRequest {
 	op := &aws.Operation{
 		Name:       opCreateImportJob,
 		HTTPMethod: "POST",
@@ -121,10 +32,10 @@ func (c *Client) CreateImportJobRequest(input *CreateImportJobInput) CreateImpor
 	}
 
 	if input == nil {
-		input = &CreateImportJobInput{}
+		input = &types.CreateImportJobInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateImportJobOutput{})
+	req := c.newRequest(op, input, &types.CreateImportJobOutput{})
 	return CreateImportJobRequest{Request: req, Input: input, Copy: c.CreateImportJobRequest}
 }
 
@@ -132,8 +43,8 @@ func (c *Client) CreateImportJobRequest(input *CreateImportJobInput) CreateImpor
 // CreateImportJob API operation.
 type CreateImportJobRequest struct {
 	*aws.Request
-	Input *CreateImportJobInput
-	Copy  func(*CreateImportJobInput) CreateImportJobRequest
+	Input *types.CreateImportJobInput
+	Copy  func(*types.CreateImportJobInput) CreateImportJobRequest
 }
 
 // Send marshals and sends the CreateImportJob API request.
@@ -145,7 +56,7 @@ func (r CreateImportJobRequest) Send(ctx context.Context) (*CreateImportJobRespo
 	}
 
 	resp := &CreateImportJobResponse{
-		CreateImportJobOutput: r.Request.Data.(*CreateImportJobOutput),
+		CreateImportJobOutput: r.Request.Data.(*types.CreateImportJobOutput),
 		response:              &aws.Response{Request: r.Request},
 	}
 
@@ -155,7 +66,7 @@ func (r CreateImportJobRequest) Send(ctx context.Context) (*CreateImportJobRespo
 // CreateImportJobResponse is the response type for the
 // CreateImportJob API operation.
 type CreateImportJobResponse struct {
-	*CreateImportJobOutput
+	*types.CreateImportJobOutput
 
 	response *aws.Response
 }

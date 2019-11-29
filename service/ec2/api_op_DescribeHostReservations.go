@@ -6,65 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-type DescribeHostReservationsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The filters.
-	//
-	//    * instance-family - The instance family (for example, m4).
-	//
-	//    * payment-option - The payment option (NoUpfront | PartialUpfront | AllUpfront).
-	//
-	//    * state - The state of the reservation (payment-pending | payment-failed
-	//    | active | retired).
-	//
-	//    * tag:<key> - The key/value combination of a tag assigned to the resource.
-	//    Use the tag key in the filter name and the tag value as the filter value.
-	//    For example, to find all resources that have a tag with the key Owner
-	//    and the value TeamA, specify tag:Owner for the filter name and TeamA for
-	//    the filter value.
-	//
-	//    * tag-key - The key of a tag assigned to the resource. Use this filter
-	//    to find all resources assigned a tag with a specific key, regardless of
-	//    the tag value.
-	Filter []Filter `locationNameList:"Filter" type:"list"`
-
-	// The host reservation IDs.
-	HostReservationIdSet []string `locationNameList:"item" type:"list"`
-
-	// The maximum number of results to return for the request in a single page.
-	// The remaining results can be seen by sending another request with the returned
-	// nextToken value. This value can be between 5 and 500. If maxResults is given
-	// a larger value than 500, you receive an error.
-	MaxResults *int64 `type:"integer"`
-
-	// The token to use to retrieve the next page of results.
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeHostReservationsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type DescribeHostReservationsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Details about the reservation's configuration.
-	HostReservationSet []HostReservation `locationName:"hostReservationSet" locationNameList:"item" type:"list"`
-
-	// The token to use to retrieve the next page of results. This value is null
-	// when there are no more results to return.
-	NextToken *string `locationName:"nextToken" type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeHostReservationsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeHostReservations = "DescribeHostReservations"
 
@@ -81,7 +24,7 @@ const opDescribeHostReservations = "DescribeHostReservations"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeHostReservations
-func (c *Client) DescribeHostReservationsRequest(input *DescribeHostReservationsInput) DescribeHostReservationsRequest {
+func (c *Client) DescribeHostReservationsRequest(input *types.DescribeHostReservationsInput) DescribeHostReservationsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeHostReservations,
 		HTTPMethod: "POST",
@@ -95,10 +38,10 @@ func (c *Client) DescribeHostReservationsRequest(input *DescribeHostReservations
 	}
 
 	if input == nil {
-		input = &DescribeHostReservationsInput{}
+		input = &types.DescribeHostReservationsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeHostReservationsOutput{})
+	req := c.newRequest(op, input, &types.DescribeHostReservationsOutput{})
 	return DescribeHostReservationsRequest{Request: req, Input: input, Copy: c.DescribeHostReservationsRequest}
 }
 
@@ -106,8 +49,8 @@ func (c *Client) DescribeHostReservationsRequest(input *DescribeHostReservations
 // DescribeHostReservations API operation.
 type DescribeHostReservationsRequest struct {
 	*aws.Request
-	Input *DescribeHostReservationsInput
-	Copy  func(*DescribeHostReservationsInput) DescribeHostReservationsRequest
+	Input *types.DescribeHostReservationsInput
+	Copy  func(*types.DescribeHostReservationsInput) DescribeHostReservationsRequest
 }
 
 // Send marshals and sends the DescribeHostReservations API request.
@@ -119,7 +62,7 @@ func (r DescribeHostReservationsRequest) Send(ctx context.Context) (*DescribeHos
 	}
 
 	resp := &DescribeHostReservationsResponse{
-		DescribeHostReservationsOutput: r.Request.Data.(*DescribeHostReservationsOutput),
+		DescribeHostReservationsOutput: r.Request.Data.(*types.DescribeHostReservationsOutput),
 		response:                       &aws.Response{Request: r.Request},
 	}
 
@@ -149,7 +92,7 @@ func NewDescribeHostReservationsPaginator(req DescribeHostReservationsRequest) D
 	return DescribeHostReservationsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *DescribeHostReservationsInput
+				var inCpy *types.DescribeHostReservationsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -169,14 +112,14 @@ type DescribeHostReservationsPaginator struct {
 	aws.Pager
 }
 
-func (p *DescribeHostReservationsPaginator) CurrentPage() *DescribeHostReservationsOutput {
-	return p.Pager.CurrentPage().(*DescribeHostReservationsOutput)
+func (p *DescribeHostReservationsPaginator) CurrentPage() *types.DescribeHostReservationsOutput {
+	return p.Pager.CurrentPage().(*types.DescribeHostReservationsOutput)
 }
 
 // DescribeHostReservationsResponse is the response type for the
 // DescribeHostReservations API operation.
 type DescribeHostReservationsResponse struct {
-	*DescribeHostReservationsOutput
+	*types.DescribeHostReservationsOutput
 
 	response *aws.Response
 }

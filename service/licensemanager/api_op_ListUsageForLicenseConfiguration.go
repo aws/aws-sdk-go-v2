@@ -6,61 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/licensemanager/types"
 )
-
-type ListUsageForLicenseConfigurationInput struct {
-	_ struct{} `type:"structure"`
-
-	// List of filters to apply.
-	Filters []Filter `type:"list"`
-
-	// ARN of the targeted LicenseConfiguration object.
-	//
-	// LicenseConfigurationArn is a required field
-	LicenseConfigurationArn *string `type:"string" required:"true"`
-
-	// Maximum number of results to return in a single call. To retrieve the remaining
-	// results, make another call with the returned NextToken value.
-	MaxResults *int64 `type:"integer"`
-
-	// Token for the next set of results.
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s ListUsageForLicenseConfigurationInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListUsageForLicenseConfigurationInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListUsageForLicenseConfigurationInput"}
-
-	if s.LicenseConfigurationArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("LicenseConfigurationArn"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ListUsageForLicenseConfigurationOutput struct {
-	_ struct{} `type:"structure"`
-
-	// An array of LicenseConfigurationUsage objects.
-	LicenseConfigurationUsageList []LicenseConfigurationUsage `type:"list"`
-
-	// Token for the next set of results.
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s ListUsageForLicenseConfigurationOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListUsageForLicenseConfiguration = "ListUsageForLicenseConfiguration"
 
@@ -79,7 +26,7 @@ const opListUsageForLicenseConfiguration = "ListUsageForLicenseConfiguration"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/license-manager-2018-08-01/ListUsageForLicenseConfiguration
-func (c *Client) ListUsageForLicenseConfigurationRequest(input *ListUsageForLicenseConfigurationInput) ListUsageForLicenseConfigurationRequest {
+func (c *Client) ListUsageForLicenseConfigurationRequest(input *types.ListUsageForLicenseConfigurationInput) ListUsageForLicenseConfigurationRequest {
 	op := &aws.Operation{
 		Name:       opListUsageForLicenseConfiguration,
 		HTTPMethod: "POST",
@@ -87,10 +34,10 @@ func (c *Client) ListUsageForLicenseConfigurationRequest(input *ListUsageForLice
 	}
 
 	if input == nil {
-		input = &ListUsageForLicenseConfigurationInput{}
+		input = &types.ListUsageForLicenseConfigurationInput{}
 	}
 
-	req := c.newRequest(op, input, &ListUsageForLicenseConfigurationOutput{})
+	req := c.newRequest(op, input, &types.ListUsageForLicenseConfigurationOutput{})
 	return ListUsageForLicenseConfigurationRequest{Request: req, Input: input, Copy: c.ListUsageForLicenseConfigurationRequest}
 }
 
@@ -98,8 +45,8 @@ func (c *Client) ListUsageForLicenseConfigurationRequest(input *ListUsageForLice
 // ListUsageForLicenseConfiguration API operation.
 type ListUsageForLicenseConfigurationRequest struct {
 	*aws.Request
-	Input *ListUsageForLicenseConfigurationInput
-	Copy  func(*ListUsageForLicenseConfigurationInput) ListUsageForLicenseConfigurationRequest
+	Input *types.ListUsageForLicenseConfigurationInput
+	Copy  func(*types.ListUsageForLicenseConfigurationInput) ListUsageForLicenseConfigurationRequest
 }
 
 // Send marshals and sends the ListUsageForLicenseConfiguration API request.
@@ -111,7 +58,7 @@ func (r ListUsageForLicenseConfigurationRequest) Send(ctx context.Context) (*Lis
 	}
 
 	resp := &ListUsageForLicenseConfigurationResponse{
-		ListUsageForLicenseConfigurationOutput: r.Request.Data.(*ListUsageForLicenseConfigurationOutput),
+		ListUsageForLicenseConfigurationOutput: r.Request.Data.(*types.ListUsageForLicenseConfigurationOutput),
 		response:                               &aws.Response{Request: r.Request},
 	}
 
@@ -121,7 +68,7 @@ func (r ListUsageForLicenseConfigurationRequest) Send(ctx context.Context) (*Lis
 // ListUsageForLicenseConfigurationResponse is the response type for the
 // ListUsageForLicenseConfiguration API operation.
 type ListUsageForLicenseConfigurationResponse struct {
-	*ListUsageForLicenseConfigurationOutput
+	*types.ListUsageForLicenseConfigurationOutput
 
 	response *aws.Response
 }

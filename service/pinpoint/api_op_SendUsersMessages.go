@@ -6,94 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/pinpoint/types"
 )
-
-type SendUsersMessagesInput struct {
-	_ struct{} `type:"structure" payload:"SendUsersMessageRequest"`
-
-	// ApplicationId is a required field
-	ApplicationId *string `location:"uri" locationName:"application-id" type:"string" required:"true"`
-
-	// Specifies the configuration and other settings for a message to send to all
-	// the endpoints that are associated with a list of users.
-	//
-	// SendUsersMessageRequest is a required field
-	SendUsersMessageRequest *SendUsersMessageRequest `type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s SendUsersMessagesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *SendUsersMessagesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "SendUsersMessagesInput"}
-
-	if s.ApplicationId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ApplicationId"))
-	}
-
-	if s.SendUsersMessageRequest == nil {
-		invalidParams.Add(aws.NewErrParamRequired("SendUsersMessageRequest"))
-	}
-	if s.SendUsersMessageRequest != nil {
-		if err := s.SendUsersMessageRequest.Validate(); err != nil {
-			invalidParams.AddNested("SendUsersMessageRequest", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s SendUsersMessagesInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.ApplicationId != nil {
-		v := *s.ApplicationId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "application-id", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.SendUsersMessageRequest != nil {
-		v := s.SendUsersMessageRequest
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.PayloadTarget, "SendUsersMessageRequest", v, metadata)
-	}
-	return nil
-}
-
-type SendUsersMessagesOutput struct {
-	_ struct{} `type:"structure" payload:"SendUsersMessageResponse"`
-
-	// Provides information about which users and endpoints a message was sent to.
-	//
-	// SendUsersMessageResponse is a required field
-	SendUsersMessageResponse *SendUsersMessageResponse `type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s SendUsersMessagesOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s SendUsersMessagesOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.SendUsersMessageResponse != nil {
-		v := s.SendUsersMessageResponse
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.PayloadTarget, "SendUsersMessageResponse", v, metadata)
-	}
-	return nil
-}
 
 const opSendUsersMessages = "SendUsersMessages"
 
@@ -110,7 +24,7 @@ const opSendUsersMessages = "SendUsersMessages"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/SendUsersMessages
-func (c *Client) SendUsersMessagesRequest(input *SendUsersMessagesInput) SendUsersMessagesRequest {
+func (c *Client) SendUsersMessagesRequest(input *types.SendUsersMessagesInput) SendUsersMessagesRequest {
 	op := &aws.Operation{
 		Name:       opSendUsersMessages,
 		HTTPMethod: "POST",
@@ -118,10 +32,10 @@ func (c *Client) SendUsersMessagesRequest(input *SendUsersMessagesInput) SendUse
 	}
 
 	if input == nil {
-		input = &SendUsersMessagesInput{}
+		input = &types.SendUsersMessagesInput{}
 	}
 
-	req := c.newRequest(op, input, &SendUsersMessagesOutput{})
+	req := c.newRequest(op, input, &types.SendUsersMessagesOutput{})
 	return SendUsersMessagesRequest{Request: req, Input: input, Copy: c.SendUsersMessagesRequest}
 }
 
@@ -129,8 +43,8 @@ func (c *Client) SendUsersMessagesRequest(input *SendUsersMessagesInput) SendUse
 // SendUsersMessages API operation.
 type SendUsersMessagesRequest struct {
 	*aws.Request
-	Input *SendUsersMessagesInput
-	Copy  func(*SendUsersMessagesInput) SendUsersMessagesRequest
+	Input *types.SendUsersMessagesInput
+	Copy  func(*types.SendUsersMessagesInput) SendUsersMessagesRequest
 }
 
 // Send marshals and sends the SendUsersMessages API request.
@@ -142,7 +56,7 @@ func (r SendUsersMessagesRequest) Send(ctx context.Context) (*SendUsersMessagesR
 	}
 
 	resp := &SendUsersMessagesResponse{
-		SendUsersMessagesOutput: r.Request.Data.(*SendUsersMessagesOutput),
+		SendUsersMessagesOutput: r.Request.Data.(*types.SendUsersMessagesOutput),
 		response:                &aws.Response{Request: r.Request},
 	}
 
@@ -152,7 +66,7 @@ func (r SendUsersMessagesRequest) Send(ctx context.Context) (*SendUsersMessagesR
 // SendUsersMessagesResponse is the response type for the
 // SendUsersMessages API operation.
 type SendUsersMessagesResponse struct {
-	*SendUsersMessagesOutput
+	*types.SendUsersMessagesOutput
 
 	response *aws.Response
 }

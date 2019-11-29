@@ -6,60 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/swf/types"
 )
-
-type DescribeDomainInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the domain to describe.
-	//
-	// Name is a required field
-	Name *string `locationName:"name" min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeDomainInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeDomainInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeDomainInput"}
-
-	if s.Name == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Name"))
-	}
-	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Contains details of a domain.
-type DescribeDomainOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The domain configuration. Currently, this includes only the domain's retention
-	// period.
-	//
-	// Configuration is a required field
-	Configuration *DomainConfiguration `locationName:"configuration" type:"structure" required:"true"`
-
-	// The basic information about a domain, such as its name, status, and description.
-	//
-	// DomainInfo is a required field
-	DomainInfo *DomainInfo `locationName:"domainInfo" type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeDomainOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeDomain = "DescribeDomain"
 
@@ -94,7 +42,7 @@ const opDescribeDomain = "DescribeDomain"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) DescribeDomainRequest(input *DescribeDomainInput) DescribeDomainRequest {
+func (c *Client) DescribeDomainRequest(input *types.DescribeDomainInput) DescribeDomainRequest {
 	op := &aws.Operation{
 		Name:       opDescribeDomain,
 		HTTPMethod: "POST",
@@ -102,10 +50,10 @@ func (c *Client) DescribeDomainRequest(input *DescribeDomainInput) DescribeDomai
 	}
 
 	if input == nil {
-		input = &DescribeDomainInput{}
+		input = &types.DescribeDomainInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeDomainOutput{})
+	req := c.newRequest(op, input, &types.DescribeDomainOutput{})
 	return DescribeDomainRequest{Request: req, Input: input, Copy: c.DescribeDomainRequest}
 }
 
@@ -113,8 +61,8 @@ func (c *Client) DescribeDomainRequest(input *DescribeDomainInput) DescribeDomai
 // DescribeDomain API operation.
 type DescribeDomainRequest struct {
 	*aws.Request
-	Input *DescribeDomainInput
-	Copy  func(*DescribeDomainInput) DescribeDomainRequest
+	Input *types.DescribeDomainInput
+	Copy  func(*types.DescribeDomainInput) DescribeDomainRequest
 }
 
 // Send marshals and sends the DescribeDomain API request.
@@ -126,7 +74,7 @@ func (r DescribeDomainRequest) Send(ctx context.Context) (*DescribeDomainRespons
 	}
 
 	resp := &DescribeDomainResponse{
-		DescribeDomainOutput: r.Request.Data.(*DescribeDomainOutput),
+		DescribeDomainOutput: r.Request.Data.(*types.DescribeDomainOutput),
 		response:             &aws.Response{Request: r.Request},
 	}
 
@@ -136,7 +84,7 @@ func (r DescribeDomainRequest) Send(ctx context.Context) (*DescribeDomainRespons
 // DescribeDomainResponse is the response type for the
 // DescribeDomain API operation.
 type DescribeDomainResponse struct {
-	*DescribeDomainOutput
+	*types.DescribeDomainOutput
 
 	response *aws.Response
 }

@@ -6,97 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/iotjobsdataplane/types"
 )
-
-type GetPendingJobExecutionsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the thing that is executing the job.
-	//
-	// ThingName is a required field
-	ThingName *string `location:"uri" locationName:"thingName" min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetPendingJobExecutionsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetPendingJobExecutionsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetPendingJobExecutionsInput"}
-
-	if s.ThingName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ThingName"))
-	}
-	if s.ThingName != nil && len(*s.ThingName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ThingName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetPendingJobExecutionsInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.ThingName != nil {
-		v := *s.ThingName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "thingName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type GetPendingJobExecutionsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A list of JobExecutionSummary objects with status IN_PROGRESS.
-	InProgressJobs []JobExecutionSummary `locationName:"inProgressJobs" type:"list"`
-
-	// A list of JobExecutionSummary objects with status QUEUED.
-	QueuedJobs []JobExecutionSummary `locationName:"queuedJobs" type:"list"`
-}
-
-// String returns the string representation
-func (s GetPendingJobExecutionsOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetPendingJobExecutionsOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.InProgressJobs != nil {
-		v := s.InProgressJobs
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "inProgressJobs", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	if s.QueuedJobs != nil {
-		v := s.QueuedJobs
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "queuedJobs", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	return nil
-}
 
 const opGetPendingJobExecutions = "GetPendingJobExecutions"
 
@@ -113,7 +24,7 @@ const opGetPendingJobExecutions = "GetPendingJobExecutions"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iot-jobs-data-2017-09-29/GetPendingJobExecutions
-func (c *Client) GetPendingJobExecutionsRequest(input *GetPendingJobExecutionsInput) GetPendingJobExecutionsRequest {
+func (c *Client) GetPendingJobExecutionsRequest(input *types.GetPendingJobExecutionsInput) GetPendingJobExecutionsRequest {
 	op := &aws.Operation{
 		Name:       opGetPendingJobExecutions,
 		HTTPMethod: "GET",
@@ -121,10 +32,10 @@ func (c *Client) GetPendingJobExecutionsRequest(input *GetPendingJobExecutionsIn
 	}
 
 	if input == nil {
-		input = &GetPendingJobExecutionsInput{}
+		input = &types.GetPendingJobExecutionsInput{}
 	}
 
-	req := c.newRequest(op, input, &GetPendingJobExecutionsOutput{})
+	req := c.newRequest(op, input, &types.GetPendingJobExecutionsOutput{})
 	return GetPendingJobExecutionsRequest{Request: req, Input: input, Copy: c.GetPendingJobExecutionsRequest}
 }
 
@@ -132,8 +43,8 @@ func (c *Client) GetPendingJobExecutionsRequest(input *GetPendingJobExecutionsIn
 // GetPendingJobExecutions API operation.
 type GetPendingJobExecutionsRequest struct {
 	*aws.Request
-	Input *GetPendingJobExecutionsInput
-	Copy  func(*GetPendingJobExecutionsInput) GetPendingJobExecutionsRequest
+	Input *types.GetPendingJobExecutionsInput
+	Copy  func(*types.GetPendingJobExecutionsInput) GetPendingJobExecutionsRequest
 }
 
 // Send marshals and sends the GetPendingJobExecutions API request.
@@ -145,7 +56,7 @@ func (r GetPendingJobExecutionsRequest) Send(ctx context.Context) (*GetPendingJo
 	}
 
 	resp := &GetPendingJobExecutionsResponse{
-		GetPendingJobExecutionsOutput: r.Request.Data.(*GetPendingJobExecutionsOutput),
+		GetPendingJobExecutionsOutput: r.Request.Data.(*types.GetPendingJobExecutionsOutput),
 		response:                      &aws.Response{Request: r.Request},
 	}
 
@@ -155,7 +66,7 @@ func (r GetPendingJobExecutionsRequest) Send(ctx context.Context) (*GetPendingJo
 // GetPendingJobExecutionsResponse is the response type for the
 // GetPendingJobExecutions API operation.
 type GetPendingJobExecutionsResponse struct {
-	*GetPendingJobExecutionsOutput
+	*types.GetPendingJobExecutionsOutput
 
 	response *aws.Response
 }

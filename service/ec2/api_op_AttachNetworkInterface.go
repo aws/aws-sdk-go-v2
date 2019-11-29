@@ -6,74 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-// Contains the parameters for AttachNetworkInterface.
-type AttachNetworkInterfaceInput struct {
-	_ struct{} `type:"structure"`
-
-	// The index of the device for the network interface attachment.
-	//
-	// DeviceIndex is a required field
-	DeviceIndex *int64 `locationName:"deviceIndex" type:"integer" required:"true"`
-
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have
-	// the required permissions, the error response is DryRunOperation. Otherwise,
-	// it is UnauthorizedOperation.
-	DryRun *bool `locationName:"dryRun" type:"boolean"`
-
-	// The ID of the instance.
-	//
-	// InstanceId is a required field
-	InstanceId *string `locationName:"instanceId" type:"string" required:"true"`
-
-	// The ID of the network interface.
-	//
-	// NetworkInterfaceId is a required field
-	NetworkInterfaceId *string `locationName:"networkInterfaceId" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s AttachNetworkInterfaceInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *AttachNetworkInterfaceInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "AttachNetworkInterfaceInput"}
-
-	if s.DeviceIndex == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DeviceIndex"))
-	}
-
-	if s.InstanceId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("InstanceId"))
-	}
-
-	if s.NetworkInterfaceId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("NetworkInterfaceId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Contains the output of AttachNetworkInterface.
-type AttachNetworkInterfaceOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the network interface attachment.
-	AttachmentId *string `locationName:"attachmentId" type:"string"`
-}
-
-// String returns the string representation
-func (s AttachNetworkInterfaceOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opAttachNetworkInterface = "AttachNetworkInterface"
 
@@ -90,7 +24,7 @@ const opAttachNetworkInterface = "AttachNetworkInterface"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AttachNetworkInterface
-func (c *Client) AttachNetworkInterfaceRequest(input *AttachNetworkInterfaceInput) AttachNetworkInterfaceRequest {
+func (c *Client) AttachNetworkInterfaceRequest(input *types.AttachNetworkInterfaceInput) AttachNetworkInterfaceRequest {
 	op := &aws.Operation{
 		Name:       opAttachNetworkInterface,
 		HTTPMethod: "POST",
@@ -98,10 +32,10 @@ func (c *Client) AttachNetworkInterfaceRequest(input *AttachNetworkInterfaceInpu
 	}
 
 	if input == nil {
-		input = &AttachNetworkInterfaceInput{}
+		input = &types.AttachNetworkInterfaceInput{}
 	}
 
-	req := c.newRequest(op, input, &AttachNetworkInterfaceOutput{})
+	req := c.newRequest(op, input, &types.AttachNetworkInterfaceOutput{})
 	return AttachNetworkInterfaceRequest{Request: req, Input: input, Copy: c.AttachNetworkInterfaceRequest}
 }
 
@@ -109,8 +43,8 @@ func (c *Client) AttachNetworkInterfaceRequest(input *AttachNetworkInterfaceInpu
 // AttachNetworkInterface API operation.
 type AttachNetworkInterfaceRequest struct {
 	*aws.Request
-	Input *AttachNetworkInterfaceInput
-	Copy  func(*AttachNetworkInterfaceInput) AttachNetworkInterfaceRequest
+	Input *types.AttachNetworkInterfaceInput
+	Copy  func(*types.AttachNetworkInterfaceInput) AttachNetworkInterfaceRequest
 }
 
 // Send marshals and sends the AttachNetworkInterface API request.
@@ -122,7 +56,7 @@ func (r AttachNetworkInterfaceRequest) Send(ctx context.Context) (*AttachNetwork
 	}
 
 	resp := &AttachNetworkInterfaceResponse{
-		AttachNetworkInterfaceOutput: r.Request.Data.(*AttachNetworkInterfaceOutput),
+		AttachNetworkInterfaceOutput: r.Request.Data.(*types.AttachNetworkInterfaceOutput),
 		response:                     &aws.Response{Request: r.Request},
 	}
 
@@ -132,7 +66,7 @@ func (r AttachNetworkInterfaceRequest) Send(ctx context.Context) (*AttachNetwork
 // AttachNetworkInterfaceResponse is the response type for the
 // AttachNetworkInterface API operation.
 type AttachNetworkInterfaceResponse struct {
-	*AttachNetworkInterfaceOutput
+	*types.AttachNetworkInterfaceOutput
 
 	response *aws.Response
 }

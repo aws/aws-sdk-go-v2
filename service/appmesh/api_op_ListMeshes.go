@@ -6,91 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/appmesh/types"
 )
-
-type ListMeshesInput struct {
-	_ struct{} `type:"structure"`
-
-	Limit *int64 `location:"querystring" locationName:"limit" min:"1" type:"integer"`
-
-	NextToken *string `location:"querystring" locationName:"nextToken" type:"string"`
-}
-
-// String returns the string representation
-func (s ListMeshesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListMeshesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListMeshesInput"}
-	if s.Limit != nil && *s.Limit < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("Limit", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListMeshesInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.Limit != nil {
-		v := *s.Limit
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "limit", protocol.Int64Value(v), metadata)
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type ListMeshesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Meshes is a required field
-	Meshes []MeshRef `locationName:"meshes" type:"list" required:"true"`
-
-	NextToken *string `locationName:"nextToken" type:"string"`
-}
-
-// String returns the string representation
-func (s ListMeshesOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListMeshesOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.Meshes != nil {
-		v := s.Meshes
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "meshes", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opListMeshes = "ListMeshes"
 
@@ -107,7 +24,7 @@ const opListMeshes = "ListMeshes"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/ListMeshes
-func (c *Client) ListMeshesRequest(input *ListMeshesInput) ListMeshesRequest {
+func (c *Client) ListMeshesRequest(input *types.ListMeshesInput) ListMeshesRequest {
 	op := &aws.Operation{
 		Name:       opListMeshes,
 		HTTPMethod: "GET",
@@ -121,10 +38,10 @@ func (c *Client) ListMeshesRequest(input *ListMeshesInput) ListMeshesRequest {
 	}
 
 	if input == nil {
-		input = &ListMeshesInput{}
+		input = &types.ListMeshesInput{}
 	}
 
-	req := c.newRequest(op, input, &ListMeshesOutput{})
+	req := c.newRequest(op, input, &types.ListMeshesOutput{})
 	return ListMeshesRequest{Request: req, Input: input, Copy: c.ListMeshesRequest}
 }
 
@@ -132,8 +49,8 @@ func (c *Client) ListMeshesRequest(input *ListMeshesInput) ListMeshesRequest {
 // ListMeshes API operation.
 type ListMeshesRequest struct {
 	*aws.Request
-	Input *ListMeshesInput
-	Copy  func(*ListMeshesInput) ListMeshesRequest
+	Input *types.ListMeshesInput
+	Copy  func(*types.ListMeshesInput) ListMeshesRequest
 }
 
 // Send marshals and sends the ListMeshes API request.
@@ -145,7 +62,7 @@ func (r ListMeshesRequest) Send(ctx context.Context) (*ListMeshesResponse, error
 	}
 
 	resp := &ListMeshesResponse{
-		ListMeshesOutput: r.Request.Data.(*ListMeshesOutput),
+		ListMeshesOutput: r.Request.Data.(*types.ListMeshesOutput),
 		response:         &aws.Response{Request: r.Request},
 	}
 
@@ -175,7 +92,7 @@ func NewListMeshesPaginator(req ListMeshesRequest) ListMeshesPaginator {
 	return ListMeshesPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListMeshesInput
+				var inCpy *types.ListMeshesInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -195,14 +112,14 @@ type ListMeshesPaginator struct {
 	aws.Pager
 }
 
-func (p *ListMeshesPaginator) CurrentPage() *ListMeshesOutput {
-	return p.Pager.CurrentPage().(*ListMeshesOutput)
+func (p *ListMeshesPaginator) CurrentPage() *types.ListMeshesOutput {
+	return p.Pager.CurrentPage().(*types.ListMeshesOutput)
 }
 
 // ListMeshesResponse is the response type for the
 // ListMeshes API operation.
 type ListMeshesResponse struct {
-	*ListMeshesOutput
+	*types.ListMeshesOutput
 
 	response *aws.Response
 }

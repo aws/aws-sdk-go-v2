@@ -6,52 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/types"
 )
-
-type ScanProvisionedProductsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The language code.
-	//
-	//    * en - English (default)
-	//
-	//    * jp - Japanese
-	//
-	//    * zh - Chinese
-	AcceptLanguage *string `type:"string"`
-
-	// The access level to use to obtain results. The default is User.
-	AccessLevelFilter *AccessLevelFilter `type:"structure"`
-
-	// The maximum number of items to return with this call.
-	PageSize *int64 `type:"integer"`
-
-	// The page token for the next set of results. To retrieve the first set of
-	// results, use null.
-	PageToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s ScanProvisionedProductsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type ScanProvisionedProductsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The page token to use to retrieve the next set of results. If there are no
-	// additional results, this value is null.
-	NextPageToken *string `type:"string"`
-
-	// Information about the provisioned products.
-	ProvisionedProducts []ProvisionedProductDetail `type:"list"`
-}
-
-// String returns the string representation
-func (s ScanProvisionedProductsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opScanProvisionedProducts = "ScanProvisionedProducts"
 
@@ -70,7 +26,7 @@ const opScanProvisionedProducts = "ScanProvisionedProducts"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ScanProvisionedProducts
-func (c *Client) ScanProvisionedProductsRequest(input *ScanProvisionedProductsInput) ScanProvisionedProductsRequest {
+func (c *Client) ScanProvisionedProductsRequest(input *types.ScanProvisionedProductsInput) ScanProvisionedProductsRequest {
 	op := &aws.Operation{
 		Name:       opScanProvisionedProducts,
 		HTTPMethod: "POST",
@@ -78,10 +34,10 @@ func (c *Client) ScanProvisionedProductsRequest(input *ScanProvisionedProductsIn
 	}
 
 	if input == nil {
-		input = &ScanProvisionedProductsInput{}
+		input = &types.ScanProvisionedProductsInput{}
 	}
 
-	req := c.newRequest(op, input, &ScanProvisionedProductsOutput{})
+	req := c.newRequest(op, input, &types.ScanProvisionedProductsOutput{})
 	return ScanProvisionedProductsRequest{Request: req, Input: input, Copy: c.ScanProvisionedProductsRequest}
 }
 
@@ -89,8 +45,8 @@ func (c *Client) ScanProvisionedProductsRequest(input *ScanProvisionedProductsIn
 // ScanProvisionedProducts API operation.
 type ScanProvisionedProductsRequest struct {
 	*aws.Request
-	Input *ScanProvisionedProductsInput
-	Copy  func(*ScanProvisionedProductsInput) ScanProvisionedProductsRequest
+	Input *types.ScanProvisionedProductsInput
+	Copy  func(*types.ScanProvisionedProductsInput) ScanProvisionedProductsRequest
 }
 
 // Send marshals and sends the ScanProvisionedProducts API request.
@@ -102,7 +58,7 @@ func (r ScanProvisionedProductsRequest) Send(ctx context.Context) (*ScanProvisio
 	}
 
 	resp := &ScanProvisionedProductsResponse{
-		ScanProvisionedProductsOutput: r.Request.Data.(*ScanProvisionedProductsOutput),
+		ScanProvisionedProductsOutput: r.Request.Data.(*types.ScanProvisionedProductsOutput),
 		response:                      &aws.Response{Request: r.Request},
 	}
 
@@ -112,7 +68,7 @@ func (r ScanProvisionedProductsRequest) Send(ctx context.Context) (*ScanProvisio
 // ScanProvisionedProductsResponse is the response type for the
 // ScanProvisionedProducts API operation.
 type ScanProvisionedProductsResponse struct {
-	*ScanProvisionedProductsOutput
+	*types.ScanProvisionedProductsOutput
 
 	response *aws.Response
 }

@@ -6,56 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/glue/types"
 )
-
-type ListCrawlersInput struct {
-	_ struct{} `type:"structure"`
-
-	// The maximum size of a list to return.
-	MaxResults *int64 `min:"1" type:"integer"`
-
-	// A continuation token, if this is a continuation request.
-	NextToken *string `type:"string"`
-
-	// Specifies to return only these tagged resources.
-	Tags map[string]string `type:"map"`
-}
-
-// String returns the string representation
-func (s ListCrawlersInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListCrawlersInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListCrawlersInput"}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ListCrawlersOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The names of all crawlers in the account, or the crawlers with the specified
-	// tags.
-	CrawlerNames []string `type:"list"`
-
-	// A continuation token, if the returned list does not contain the last metric
-	// available.
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s ListCrawlersOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListCrawlers = "ListCrawlers"
 
@@ -78,7 +30,7 @@ const opListCrawlers = "ListCrawlers"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ListCrawlers
-func (c *Client) ListCrawlersRequest(input *ListCrawlersInput) ListCrawlersRequest {
+func (c *Client) ListCrawlersRequest(input *types.ListCrawlersInput) ListCrawlersRequest {
 	op := &aws.Operation{
 		Name:       opListCrawlers,
 		HTTPMethod: "POST",
@@ -92,10 +44,10 @@ func (c *Client) ListCrawlersRequest(input *ListCrawlersInput) ListCrawlersReque
 	}
 
 	if input == nil {
-		input = &ListCrawlersInput{}
+		input = &types.ListCrawlersInput{}
 	}
 
-	req := c.newRequest(op, input, &ListCrawlersOutput{})
+	req := c.newRequest(op, input, &types.ListCrawlersOutput{})
 	return ListCrawlersRequest{Request: req, Input: input, Copy: c.ListCrawlersRequest}
 }
 
@@ -103,8 +55,8 @@ func (c *Client) ListCrawlersRequest(input *ListCrawlersInput) ListCrawlersReque
 // ListCrawlers API operation.
 type ListCrawlersRequest struct {
 	*aws.Request
-	Input *ListCrawlersInput
-	Copy  func(*ListCrawlersInput) ListCrawlersRequest
+	Input *types.ListCrawlersInput
+	Copy  func(*types.ListCrawlersInput) ListCrawlersRequest
 }
 
 // Send marshals and sends the ListCrawlers API request.
@@ -116,7 +68,7 @@ func (r ListCrawlersRequest) Send(ctx context.Context) (*ListCrawlersResponse, e
 	}
 
 	resp := &ListCrawlersResponse{
-		ListCrawlersOutput: r.Request.Data.(*ListCrawlersOutput),
+		ListCrawlersOutput: r.Request.Data.(*types.ListCrawlersOutput),
 		response:           &aws.Response{Request: r.Request},
 	}
 
@@ -146,7 +98,7 @@ func NewListCrawlersPaginator(req ListCrawlersRequest) ListCrawlersPaginator {
 	return ListCrawlersPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListCrawlersInput
+				var inCpy *types.ListCrawlersInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -166,14 +118,14 @@ type ListCrawlersPaginator struct {
 	aws.Pager
 }
 
-func (p *ListCrawlersPaginator) CurrentPage() *ListCrawlersOutput {
-	return p.Pager.CurrentPage().(*ListCrawlersOutput)
+func (p *ListCrawlersPaginator) CurrentPage() *types.ListCrawlersOutput {
+	return p.Pager.CurrentPage().(*types.ListCrawlersOutput)
 }
 
 // ListCrawlersResponse is the response type for the
 // ListCrawlers API operation.
 type ListCrawlersResponse struct {
-	*ListCrawlersOutput
+	*types.ListCrawlersOutput
 
 	response *aws.Response
 }

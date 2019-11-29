@@ -4,74 +4,12 @@ package iam
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/query"
+	"github.com/aws/aws-sdk-go-v2/service/iam/types"
 )
-
-type TagUserInput struct {
-	_ struct{} `type:"structure"`
-
-	// The list of tags that you want to attach to the user. Each tag consists of
-	// a key name and an associated value.
-	//
-	// Tags is a required field
-	Tags []Tag `type:"list" required:"true"`
-
-	// The name of the user that you want to add tags to.
-	//
-	// This parameter accepts (through its regex pattern (http://wikipedia.org/wiki/regex))
-	// a string of characters that consist of upper and lowercase alphanumeric characters
-	// with no spaces. You can also include any of the following characters: =,.@-
-	//
-	// UserName is a required field
-	UserName *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s TagUserInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *TagUserInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "TagUserInput"}
-
-	if s.Tags == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Tags"))
-	}
-
-	if s.UserName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("UserName"))
-	}
-	if s.UserName != nil && len(*s.UserName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("UserName", 1))
-	}
-	if s.Tags != nil {
-		for i, v := range s.Tags {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type TagUserOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s TagUserOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opTagUser = "TagUser"
 
@@ -120,7 +58,7 @@ const opTagUser = "TagUser"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/TagUser
-func (c *Client) TagUserRequest(input *TagUserInput) TagUserRequest {
+func (c *Client) TagUserRequest(input *types.TagUserInput) TagUserRequest {
 	op := &aws.Operation{
 		Name:       opTagUser,
 		HTTPMethod: "POST",
@@ -128,10 +66,10 @@ func (c *Client) TagUserRequest(input *TagUserInput) TagUserRequest {
 	}
 
 	if input == nil {
-		input = &TagUserInput{}
+		input = &types.TagUserInput{}
 	}
 
-	req := c.newRequest(op, input, &TagUserOutput{})
+	req := c.newRequest(op, input, &types.TagUserOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return TagUserRequest{Request: req, Input: input, Copy: c.TagUserRequest}
@@ -141,8 +79,8 @@ func (c *Client) TagUserRequest(input *TagUserInput) TagUserRequest {
 // TagUser API operation.
 type TagUserRequest struct {
 	*aws.Request
-	Input *TagUserInput
-	Copy  func(*TagUserInput) TagUserRequest
+	Input *types.TagUserInput
+	Copy  func(*types.TagUserInput) TagUserRequest
 }
 
 // Send marshals and sends the TagUser API request.
@@ -154,7 +92,7 @@ func (r TagUserRequest) Send(ctx context.Context) (*TagUserResponse, error) {
 	}
 
 	resp := &TagUserResponse{
-		TagUserOutput: r.Request.Data.(*TagUserOutput),
+		TagUserOutput: r.Request.Data.(*types.TagUserOutput),
 		response:      &aws.Response{Request: r.Request},
 	}
 
@@ -164,7 +102,7 @@ func (r TagUserRequest) Send(ctx context.Context) (*TagUserResponse, error) {
 // TagUserResponse is the response type for the
 // TagUser API operation.
 type TagUserResponse struct {
-	*TagUserOutput
+	*types.TagUserOutput
 
 	response *aws.Response
 }

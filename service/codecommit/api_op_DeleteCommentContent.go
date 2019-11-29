@@ -6,49 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/codecommit/types"
 )
-
-type DeleteCommentContentInput struct {
-	_ struct{} `type:"structure"`
-
-	// The unique, system-generated ID of the comment. To get this ID, use GetCommentsForComparedCommit
-	// or GetCommentsForPullRequest.
-	//
-	// CommentId is a required field
-	CommentId *string `locationName:"commentId" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteCommentContentInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteCommentContentInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteCommentContentInput"}
-
-	if s.CommentId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("CommentId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteCommentContentOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Information about the comment you just deleted.
-	Comment *Comment `locationName:"comment" type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteCommentContentOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteCommentContent = "DeleteCommentContent"
 
@@ -65,7 +24,7 @@ const opDeleteCommentContent = "DeleteCommentContent"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/DeleteCommentContent
-func (c *Client) DeleteCommentContentRequest(input *DeleteCommentContentInput) DeleteCommentContentRequest {
+func (c *Client) DeleteCommentContentRequest(input *types.DeleteCommentContentInput) DeleteCommentContentRequest {
 	op := &aws.Operation{
 		Name:       opDeleteCommentContent,
 		HTTPMethod: "POST",
@@ -73,10 +32,10 @@ func (c *Client) DeleteCommentContentRequest(input *DeleteCommentContentInput) D
 	}
 
 	if input == nil {
-		input = &DeleteCommentContentInput{}
+		input = &types.DeleteCommentContentInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteCommentContentOutput{})
+	req := c.newRequest(op, input, &types.DeleteCommentContentOutput{})
 	return DeleteCommentContentRequest{Request: req, Input: input, Copy: c.DeleteCommentContentRequest}
 }
 
@@ -84,8 +43,8 @@ func (c *Client) DeleteCommentContentRequest(input *DeleteCommentContentInput) D
 // DeleteCommentContent API operation.
 type DeleteCommentContentRequest struct {
 	*aws.Request
-	Input *DeleteCommentContentInput
-	Copy  func(*DeleteCommentContentInput) DeleteCommentContentRequest
+	Input *types.DeleteCommentContentInput
+	Copy  func(*types.DeleteCommentContentInput) DeleteCommentContentRequest
 }
 
 // Send marshals and sends the DeleteCommentContent API request.
@@ -97,7 +56,7 @@ func (r DeleteCommentContentRequest) Send(ctx context.Context) (*DeleteCommentCo
 	}
 
 	resp := &DeleteCommentContentResponse{
-		DeleteCommentContentOutput: r.Request.Data.(*DeleteCommentContentOutput),
+		DeleteCommentContentOutput: r.Request.Data.(*types.DeleteCommentContentOutput),
 		response:                   &aws.Response{Request: r.Request},
 	}
 
@@ -107,7 +66,7 @@ func (r DeleteCommentContentRequest) Send(ctx context.Context) (*DeleteCommentCo
 // DeleteCommentContentResponse is the response type for the
 // DeleteCommentContent API operation.
 type DeleteCommentContentResponse struct {
-	*DeleteCommentContentOutput
+	*types.DeleteCommentContentOutput
 
 	response *aws.Response
 }

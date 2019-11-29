@@ -6,67 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/iot1clickprojects/types"
 )
-
-type DeleteProjectInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the empty project to delete.
-	//
-	// ProjectName is a required field
-	ProjectName *string `location:"uri" locationName:"projectName" min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteProjectInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteProjectInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteProjectInput"}
-
-	if s.ProjectName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ProjectName"))
-	}
-	if s.ProjectName != nil && len(*s.ProjectName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ProjectName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteProjectInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.ProjectName != nil {
-		v := *s.ProjectName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "projectName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type DeleteProjectOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteProjectOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteProjectOutput) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
 
 const opDeleteProject = "DeleteProject"
 
@@ -86,7 +27,7 @@ const opDeleteProject = "DeleteProject"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iot1click-projects-2018-05-14/DeleteProject
-func (c *Client) DeleteProjectRequest(input *DeleteProjectInput) DeleteProjectRequest {
+func (c *Client) DeleteProjectRequest(input *types.DeleteProjectInput) DeleteProjectRequest {
 	op := &aws.Operation{
 		Name:       opDeleteProject,
 		HTTPMethod: "DELETE",
@@ -94,10 +35,10 @@ func (c *Client) DeleteProjectRequest(input *DeleteProjectInput) DeleteProjectRe
 	}
 
 	if input == nil {
-		input = &DeleteProjectInput{}
+		input = &types.DeleteProjectInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteProjectOutput{})
+	req := c.newRequest(op, input, &types.DeleteProjectOutput{})
 	return DeleteProjectRequest{Request: req, Input: input, Copy: c.DeleteProjectRequest}
 }
 
@@ -105,8 +46,8 @@ func (c *Client) DeleteProjectRequest(input *DeleteProjectInput) DeleteProjectRe
 // DeleteProject API operation.
 type DeleteProjectRequest struct {
 	*aws.Request
-	Input *DeleteProjectInput
-	Copy  func(*DeleteProjectInput) DeleteProjectRequest
+	Input *types.DeleteProjectInput
+	Copy  func(*types.DeleteProjectInput) DeleteProjectRequest
 }
 
 // Send marshals and sends the DeleteProject API request.
@@ -118,7 +59,7 @@ func (r DeleteProjectRequest) Send(ctx context.Context) (*DeleteProjectResponse,
 	}
 
 	resp := &DeleteProjectResponse{
-		DeleteProjectOutput: r.Request.Data.(*DeleteProjectOutput),
+		DeleteProjectOutput: r.Request.Data.(*types.DeleteProjectOutput),
 		response:            &aws.Response{Request: r.Request},
 	}
 
@@ -128,7 +69,7 @@ func (r DeleteProjectRequest) Send(ctx context.Context) (*DeleteProjectResponse,
 // DeleteProjectResponse is the response type for the
 // DeleteProject API operation.
 type DeleteProjectResponse struct {
-	*DeleteProjectOutput
+	*types.DeleteProjectOutput
 
 	response *aws.Response
 }

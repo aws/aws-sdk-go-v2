@@ -6,68 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/applicationinsights/types"
 )
-
-type DescribeComponentConfigurationRecommendationInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the component.
-	//
-	// ComponentName is a required field
-	ComponentName *string `type:"string" required:"true"`
-
-	// The name of the resource group.
-	//
-	// ResourceGroupName is a required field
-	ResourceGroupName *string `type:"string" required:"true"`
-
-	// The tier of the application component. Supported tiers include DOT_NET_WORKER,
-	// DOT_NET_WEB, SQL_SERVER, and DEFAULT.
-	//
-	// Tier is a required field
-	Tier *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeComponentConfigurationRecommendationInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeComponentConfigurationRecommendationInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeComponentConfigurationRecommendationInput"}
-
-	if s.ComponentName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ComponentName"))
-	}
-
-	if s.ResourceGroupName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ResourceGroupName"))
-	}
-
-	if s.Tier == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Tier"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribeComponentConfigurationRecommendationOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The recommended configuration settings of the component. The value is the
-	// escaped JSON of the configuration.
-	ComponentConfiguration *string `type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeComponentConfigurationRecommendationOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeComponentConfigurationRecommendation = "DescribeComponentConfigurationRecommendation"
 
@@ -84,7 +24,7 @@ const opDescribeComponentConfigurationRecommendation = "DescribeComponentConfigu
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/application-insights-2018-11-25/DescribeComponentConfigurationRecommendation
-func (c *Client) DescribeComponentConfigurationRecommendationRequest(input *DescribeComponentConfigurationRecommendationInput) DescribeComponentConfigurationRecommendationRequest {
+func (c *Client) DescribeComponentConfigurationRecommendationRequest(input *types.DescribeComponentConfigurationRecommendationInput) DescribeComponentConfigurationRecommendationRequest {
 	op := &aws.Operation{
 		Name:       opDescribeComponentConfigurationRecommendation,
 		HTTPMethod: "POST",
@@ -92,10 +32,10 @@ func (c *Client) DescribeComponentConfigurationRecommendationRequest(input *Desc
 	}
 
 	if input == nil {
-		input = &DescribeComponentConfigurationRecommendationInput{}
+		input = &types.DescribeComponentConfigurationRecommendationInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeComponentConfigurationRecommendationOutput{})
+	req := c.newRequest(op, input, &types.DescribeComponentConfigurationRecommendationOutput{})
 	return DescribeComponentConfigurationRecommendationRequest{Request: req, Input: input, Copy: c.DescribeComponentConfigurationRecommendationRequest}
 }
 
@@ -103,8 +43,8 @@ func (c *Client) DescribeComponentConfigurationRecommendationRequest(input *Desc
 // DescribeComponentConfigurationRecommendation API operation.
 type DescribeComponentConfigurationRecommendationRequest struct {
 	*aws.Request
-	Input *DescribeComponentConfigurationRecommendationInput
-	Copy  func(*DescribeComponentConfigurationRecommendationInput) DescribeComponentConfigurationRecommendationRequest
+	Input *types.DescribeComponentConfigurationRecommendationInput
+	Copy  func(*types.DescribeComponentConfigurationRecommendationInput) DescribeComponentConfigurationRecommendationRequest
 }
 
 // Send marshals and sends the DescribeComponentConfigurationRecommendation API request.
@@ -116,7 +56,7 @@ func (r DescribeComponentConfigurationRecommendationRequest) Send(ctx context.Co
 	}
 
 	resp := &DescribeComponentConfigurationRecommendationResponse{
-		DescribeComponentConfigurationRecommendationOutput: r.Request.Data.(*DescribeComponentConfigurationRecommendationOutput),
+		DescribeComponentConfigurationRecommendationOutput: r.Request.Data.(*types.DescribeComponentConfigurationRecommendationOutput),
 		response: &aws.Response{Request: r.Request},
 	}
 
@@ -126,7 +66,7 @@ func (r DescribeComponentConfigurationRecommendationRequest) Send(ctx context.Co
 // DescribeComponentConfigurationRecommendationResponse is the response type for the
 // DescribeComponentConfigurationRecommendation API operation.
 type DescribeComponentConfigurationRecommendationResponse struct {
-	*DescribeComponentConfigurationRecommendationOutput
+	*types.DescribeComponentConfigurationRecommendationOutput
 
 	response *aws.Response
 }

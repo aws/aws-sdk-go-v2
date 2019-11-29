@@ -6,71 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/sns/types"
 )
-
-// Input for CreatePlatformApplication action.
-type CreatePlatformApplicationInput struct {
-	_ struct{} `type:"structure"`
-
-	// For a list of attributes, see SetPlatformApplicationAttributes (https://docs.aws.amazon.com/sns/latest/api/API_SetPlatformApplicationAttributes.html)
-	//
-	// Attributes is a required field
-	Attributes map[string]string `type:"map" required:"true"`
-
-	// Application names must be made up of only uppercase and lowercase ASCII letters,
-	// numbers, underscores, hyphens, and periods, and must be between 1 and 256
-	// characters long.
-	//
-	// Name is a required field
-	Name *string `type:"string" required:"true"`
-
-	// The following platforms are supported: ADM (Amazon Device Messaging), APNS
-	// (Apple Push Notification Service), APNS_SANDBOX, and GCM (Google Cloud Messaging).
-	//
-	// Platform is a required field
-	Platform *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s CreatePlatformApplicationInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreatePlatformApplicationInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreatePlatformApplicationInput"}
-
-	if s.Attributes == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Attributes"))
-	}
-
-	if s.Name == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Name"))
-	}
-
-	if s.Platform == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Platform"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Response from CreatePlatformApplication action.
-type CreatePlatformApplicationOutput struct {
-	_ struct{} `type:"structure"`
-
-	// PlatformApplicationArn is returned.
-	PlatformApplicationArn *string `type:"string"`
-}
-
-// String returns the string representation
-func (s CreatePlatformApplicationOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCreatePlatformApplication = "CreatePlatformApplication"
 
@@ -112,7 +49,7 @@ const opCreatePlatformApplication = "CreatePlatformApplication"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/CreatePlatformApplication
-func (c *Client) CreatePlatformApplicationRequest(input *CreatePlatformApplicationInput) CreatePlatformApplicationRequest {
+func (c *Client) CreatePlatformApplicationRequest(input *types.CreatePlatformApplicationInput) CreatePlatformApplicationRequest {
 	op := &aws.Operation{
 		Name:       opCreatePlatformApplication,
 		HTTPMethod: "POST",
@@ -120,10 +57,10 @@ func (c *Client) CreatePlatformApplicationRequest(input *CreatePlatformApplicati
 	}
 
 	if input == nil {
-		input = &CreatePlatformApplicationInput{}
+		input = &types.CreatePlatformApplicationInput{}
 	}
 
-	req := c.newRequest(op, input, &CreatePlatformApplicationOutput{})
+	req := c.newRequest(op, input, &types.CreatePlatformApplicationOutput{})
 	return CreatePlatformApplicationRequest{Request: req, Input: input, Copy: c.CreatePlatformApplicationRequest}
 }
 
@@ -131,8 +68,8 @@ func (c *Client) CreatePlatformApplicationRequest(input *CreatePlatformApplicati
 // CreatePlatformApplication API operation.
 type CreatePlatformApplicationRequest struct {
 	*aws.Request
-	Input *CreatePlatformApplicationInput
-	Copy  func(*CreatePlatformApplicationInput) CreatePlatformApplicationRequest
+	Input *types.CreatePlatformApplicationInput
+	Copy  func(*types.CreatePlatformApplicationInput) CreatePlatformApplicationRequest
 }
 
 // Send marshals and sends the CreatePlatformApplication API request.
@@ -144,7 +81,7 @@ func (r CreatePlatformApplicationRequest) Send(ctx context.Context) (*CreatePlat
 	}
 
 	resp := &CreatePlatformApplicationResponse{
-		CreatePlatformApplicationOutput: r.Request.Data.(*CreatePlatformApplicationOutput),
+		CreatePlatformApplicationOutput: r.Request.Data.(*types.CreatePlatformApplicationOutput),
 		response:                        &aws.Response{Request: r.Request},
 	}
 
@@ -154,7 +91,7 @@ func (r CreatePlatformApplicationRequest) Send(ctx context.Context) (*CreatePlat
 // CreatePlatformApplicationResponse is the response type for the
 // CreatePlatformApplication API operation.
 type CreatePlatformApplicationResponse struct {
-	*CreatePlatformApplicationOutput
+	*types.CreatePlatformApplicationOutput
 
 	response *aws.Response
 }

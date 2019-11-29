@@ -4,65 +4,10 @@ package lightsail
 
 import (
 	"context"
-	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/lightsail/types"
 )
-
-type GetRelationalDatabaseMasterUserPasswordInput struct {
-	_ struct{} `type:"structure"`
-
-	// The password version to return.
-	//
-	// Specifying CURRENT or PREVIOUS returns the current or previous passwords
-	// respectively. Specifying PENDING returns the newest version of the password
-	// that will rotate to CURRENT. After the PENDING password rotates to CURRENT,
-	// the PENDING password is no longer available.
-	//
-	// Default: CURRENT
-	PasswordVersion RelationalDatabasePasswordVersion `locationName:"passwordVersion" type:"string" enum:"true"`
-
-	// The name of your database for which to get the master user password.
-	//
-	// RelationalDatabaseName is a required field
-	RelationalDatabaseName *string `locationName:"relationalDatabaseName" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetRelationalDatabaseMasterUserPasswordInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetRelationalDatabaseMasterUserPasswordInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetRelationalDatabaseMasterUserPasswordInput"}
-
-	if s.RelationalDatabaseName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("RelationalDatabaseName"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type GetRelationalDatabaseMasterUserPasswordOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The timestamp when the specified version of the master user password was
-	// created.
-	CreatedAt *time.Time `locationName:"createdAt" type:"timestamp"`
-
-	// The master user password for the password version specified.
-	MasterUserPassword *string `locationName:"masterUserPassword" type:"string" sensitive:"true"`
-}
-
-// String returns the string representation
-func (s GetRelationalDatabaseMasterUserPasswordOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetRelationalDatabaseMasterUserPassword = "GetRelationalDatabaseMasterUserPassword"
 
@@ -83,7 +28,7 @@ const opGetRelationalDatabaseMasterUserPassword = "GetRelationalDatabaseMasterUs
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetRelationalDatabaseMasterUserPassword
-func (c *Client) GetRelationalDatabaseMasterUserPasswordRequest(input *GetRelationalDatabaseMasterUserPasswordInput) GetRelationalDatabaseMasterUserPasswordRequest {
+func (c *Client) GetRelationalDatabaseMasterUserPasswordRequest(input *types.GetRelationalDatabaseMasterUserPasswordInput) GetRelationalDatabaseMasterUserPasswordRequest {
 	op := &aws.Operation{
 		Name:       opGetRelationalDatabaseMasterUserPassword,
 		HTTPMethod: "POST",
@@ -91,10 +36,10 @@ func (c *Client) GetRelationalDatabaseMasterUserPasswordRequest(input *GetRelati
 	}
 
 	if input == nil {
-		input = &GetRelationalDatabaseMasterUserPasswordInput{}
+		input = &types.GetRelationalDatabaseMasterUserPasswordInput{}
 	}
 
-	req := c.newRequest(op, input, &GetRelationalDatabaseMasterUserPasswordOutput{})
+	req := c.newRequest(op, input, &types.GetRelationalDatabaseMasterUserPasswordOutput{})
 	return GetRelationalDatabaseMasterUserPasswordRequest{Request: req, Input: input, Copy: c.GetRelationalDatabaseMasterUserPasswordRequest}
 }
 
@@ -102,8 +47,8 @@ func (c *Client) GetRelationalDatabaseMasterUserPasswordRequest(input *GetRelati
 // GetRelationalDatabaseMasterUserPassword API operation.
 type GetRelationalDatabaseMasterUserPasswordRequest struct {
 	*aws.Request
-	Input *GetRelationalDatabaseMasterUserPasswordInput
-	Copy  func(*GetRelationalDatabaseMasterUserPasswordInput) GetRelationalDatabaseMasterUserPasswordRequest
+	Input *types.GetRelationalDatabaseMasterUserPasswordInput
+	Copy  func(*types.GetRelationalDatabaseMasterUserPasswordInput) GetRelationalDatabaseMasterUserPasswordRequest
 }
 
 // Send marshals and sends the GetRelationalDatabaseMasterUserPassword API request.
@@ -115,7 +60,7 @@ func (r GetRelationalDatabaseMasterUserPasswordRequest) Send(ctx context.Context
 	}
 
 	resp := &GetRelationalDatabaseMasterUserPasswordResponse{
-		GetRelationalDatabaseMasterUserPasswordOutput: r.Request.Data.(*GetRelationalDatabaseMasterUserPasswordOutput),
+		GetRelationalDatabaseMasterUserPasswordOutput: r.Request.Data.(*types.GetRelationalDatabaseMasterUserPasswordOutput),
 		response: &aws.Response{Request: r.Request},
 	}
 
@@ -125,7 +70,7 @@ func (r GetRelationalDatabaseMasterUserPasswordRequest) Send(ctx context.Context
 // GetRelationalDatabaseMasterUserPasswordResponse is the response type for the
 // GetRelationalDatabaseMasterUserPassword API operation.
 type GetRelationalDatabaseMasterUserPasswordResponse struct {
-	*GetRelationalDatabaseMasterUserPasswordOutput
+	*types.GetRelationalDatabaseMasterUserPasswordOutput
 
 	response *aws.Response
 }

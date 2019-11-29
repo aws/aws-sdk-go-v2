@@ -6,51 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/glue/types"
 )
-
-type DeleteWorkflowInput struct {
-	_ struct{} `type:"structure"`
-
-	// Name of the workflow to be deleted.
-	//
-	// Name is a required field
-	Name *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteWorkflowInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteWorkflowInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteWorkflowInput"}
-
-	if s.Name == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Name"))
-	}
-	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteWorkflowOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Name of the workflow specified in input.
-	Name *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s DeleteWorkflowOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteWorkflow = "DeleteWorkflow"
 
@@ -67,7 +24,7 @@ const opDeleteWorkflow = "DeleteWorkflow"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DeleteWorkflow
-func (c *Client) DeleteWorkflowRequest(input *DeleteWorkflowInput) DeleteWorkflowRequest {
+func (c *Client) DeleteWorkflowRequest(input *types.DeleteWorkflowInput) DeleteWorkflowRequest {
 	op := &aws.Operation{
 		Name:       opDeleteWorkflow,
 		HTTPMethod: "POST",
@@ -75,10 +32,10 @@ func (c *Client) DeleteWorkflowRequest(input *DeleteWorkflowInput) DeleteWorkflo
 	}
 
 	if input == nil {
-		input = &DeleteWorkflowInput{}
+		input = &types.DeleteWorkflowInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteWorkflowOutput{})
+	req := c.newRequest(op, input, &types.DeleteWorkflowOutput{})
 	return DeleteWorkflowRequest{Request: req, Input: input, Copy: c.DeleteWorkflowRequest}
 }
 
@@ -86,8 +43,8 @@ func (c *Client) DeleteWorkflowRequest(input *DeleteWorkflowInput) DeleteWorkflo
 // DeleteWorkflow API operation.
 type DeleteWorkflowRequest struct {
 	*aws.Request
-	Input *DeleteWorkflowInput
-	Copy  func(*DeleteWorkflowInput) DeleteWorkflowRequest
+	Input *types.DeleteWorkflowInput
+	Copy  func(*types.DeleteWorkflowInput) DeleteWorkflowRequest
 }
 
 // Send marshals and sends the DeleteWorkflow API request.
@@ -99,7 +56,7 @@ func (r DeleteWorkflowRequest) Send(ctx context.Context) (*DeleteWorkflowRespons
 	}
 
 	resp := &DeleteWorkflowResponse{
-		DeleteWorkflowOutput: r.Request.Data.(*DeleteWorkflowOutput),
+		DeleteWorkflowOutput: r.Request.Data.(*types.DeleteWorkflowOutput),
 		response:             &aws.Response{Request: r.Request},
 	}
 
@@ -109,7 +66,7 @@ func (r DeleteWorkflowRequest) Send(ctx context.Context) (*DeleteWorkflowRespons
 // DeleteWorkflowResponse is the response type for the
 // DeleteWorkflow API operation.
 type DeleteWorkflowResponse struct {
-	*DeleteWorkflowOutput
+	*types.DeleteWorkflowOutput
 
 	response *aws.Response
 }

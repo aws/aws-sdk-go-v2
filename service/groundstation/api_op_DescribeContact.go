@@ -4,172 +4,10 @@ package groundstation
 
 import (
 	"context"
-	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/groundstation/types"
 )
-
-type DescribeContactInput struct {
-	_ struct{} `type:"structure"`
-
-	// ContactId is a required field
-	ContactId *string `location:"uri" locationName:"contactId" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeContactInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeContactInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeContactInput"}
-
-	if s.ContactId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ContactId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DescribeContactInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.ContactId != nil {
-		v := *s.ContactId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "contactId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type DescribeContactOutput struct {
-	_ struct{} `type:"structure"`
-
-	ContactId *string `locationName:"contactId" type:"string"`
-
-	ContactStatus ContactStatus `locationName:"contactStatus" type:"string" enum:"true"`
-
-	EndTime *time.Time `locationName:"endTime" type:"timestamp"`
-
-	ErrorMessage *string `locationName:"errorMessage" type:"string"`
-
-	GroundStation *string `locationName:"groundStation" type:"string"`
-
-	// Elevation angle of the satellite in the sky during a contact.
-	MaximumElevation *Elevation `locationName:"maximumElevation" type:"structure"`
-
-	MissionProfileArn *string `locationName:"missionProfileArn" type:"string"`
-
-	PostPassEndTime *time.Time `locationName:"postPassEndTime" type:"timestamp"`
-
-	PrePassStartTime *time.Time `locationName:"prePassStartTime" type:"timestamp"`
-
-	SatelliteArn *string `locationName:"satelliteArn" type:"string"`
-
-	StartTime *time.Time `locationName:"startTime" type:"timestamp"`
-
-	Tags map[string]string `locationName:"tags" type:"map"`
-}
-
-// String returns the string representation
-func (s DescribeContactOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DescribeContactOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.ContactId != nil {
-		v := *s.ContactId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "contactId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if len(s.ContactStatus) > 0 {
-		v := s.ContactStatus
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "contactStatus", protocol.QuotedValue{ValueMarshaler: v}, metadata)
-	}
-	if s.EndTime != nil {
-		v := *s.EndTime
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "endTime",
-			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
-	}
-	if s.ErrorMessage != nil {
-		v := *s.ErrorMessage
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "errorMessage", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.GroundStation != nil {
-		v := *s.GroundStation
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "groundStation", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.MaximumElevation != nil {
-		v := s.MaximumElevation
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "maximumElevation", v, metadata)
-	}
-	if s.MissionProfileArn != nil {
-		v := *s.MissionProfileArn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "missionProfileArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.PostPassEndTime != nil {
-		v := *s.PostPassEndTime
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "postPassEndTime",
-			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
-	}
-	if s.PrePassStartTime != nil {
-		v := *s.PrePassStartTime
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "prePassStartTime",
-			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
-	}
-	if s.SatelliteArn != nil {
-		v := *s.SatelliteArn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "satelliteArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.StartTime != nil {
-		v := *s.StartTime
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "startTime",
-			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
-	}
-	if s.Tags != nil {
-		v := s.Tags
-
-		metadata := protocol.Metadata{}
-		ms0 := e.Map(protocol.BodyTarget, "tags", metadata)
-		ms0.Start()
-		for k1, v1 := range v {
-			ms0.MapSetValue(k1, protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
-		}
-		ms0.End()
-
-	}
-	return nil
-}
 
 const opDescribeContact = "DescribeContact"
 
@@ -186,7 +24,7 @@ const opDescribeContact = "DescribeContact"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/groundstation-2019-05-23/DescribeContact
-func (c *Client) DescribeContactRequest(input *DescribeContactInput) DescribeContactRequest {
+func (c *Client) DescribeContactRequest(input *types.DescribeContactInput) DescribeContactRequest {
 	op := &aws.Operation{
 		Name:       opDescribeContact,
 		HTTPMethod: "GET",
@@ -194,10 +32,10 @@ func (c *Client) DescribeContactRequest(input *DescribeContactInput) DescribeCon
 	}
 
 	if input == nil {
-		input = &DescribeContactInput{}
+		input = &types.DescribeContactInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeContactOutput{})
+	req := c.newRequest(op, input, &types.DescribeContactOutput{})
 	return DescribeContactRequest{Request: req, Input: input, Copy: c.DescribeContactRequest}
 }
 
@@ -205,8 +43,8 @@ func (c *Client) DescribeContactRequest(input *DescribeContactInput) DescribeCon
 // DescribeContact API operation.
 type DescribeContactRequest struct {
 	*aws.Request
-	Input *DescribeContactInput
-	Copy  func(*DescribeContactInput) DescribeContactRequest
+	Input *types.DescribeContactInput
+	Copy  func(*types.DescribeContactInput) DescribeContactRequest
 }
 
 // Send marshals and sends the DescribeContact API request.
@@ -218,7 +56,7 @@ func (r DescribeContactRequest) Send(ctx context.Context) (*DescribeContactRespo
 	}
 
 	resp := &DescribeContactResponse{
-		DescribeContactOutput: r.Request.Data.(*DescribeContactOutput),
+		DescribeContactOutput: r.Request.Data.(*types.DescribeContactOutput),
 		response:              &aws.Response{Request: r.Request},
 	}
 
@@ -228,7 +66,7 @@ func (r DescribeContactRequest) Send(ctx context.Context) (*DescribeContactRespo
 // DescribeContactResponse is the response type for the
 // DescribeContact API operation.
 type DescribeContactResponse struct {
-	*DescribeContactOutput
+	*types.DescribeContactOutput
 
 	response *aws.Response
 }

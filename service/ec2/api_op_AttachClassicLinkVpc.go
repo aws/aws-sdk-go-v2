@@ -6,73 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-type AttachClassicLinkVpcInput struct {
-	_ struct{} `type:"structure"`
-
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have
-	// the required permissions, the error response is DryRunOperation. Otherwise,
-	// it is UnauthorizedOperation.
-	DryRun *bool `locationName:"dryRun" type:"boolean"`
-
-	// The ID of one or more of the VPC's security groups. You cannot specify security
-	// groups from a different VPC.
-	//
-	// Groups is a required field
-	Groups []string `locationName:"SecurityGroupId" locationNameList:"groupId" type:"list" required:"true"`
-
-	// The ID of an EC2-Classic instance to link to the ClassicLink-enabled VPC.
-	//
-	// InstanceId is a required field
-	InstanceId *string `locationName:"instanceId" type:"string" required:"true"`
-
-	// The ID of a ClassicLink-enabled VPC.
-	//
-	// VpcId is a required field
-	VpcId *string `locationName:"vpcId" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s AttachClassicLinkVpcInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *AttachClassicLinkVpcInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "AttachClassicLinkVpcInput"}
-
-	if s.Groups == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Groups"))
-	}
-
-	if s.InstanceId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("InstanceId"))
-	}
-
-	if s.VpcId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("VpcId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type AttachClassicLinkVpcOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Returns true if the request succeeds; otherwise, it returns an error.
-	Return *bool `locationName:"return" type:"boolean"`
-}
-
-// String returns the string representation
-func (s AttachClassicLinkVpcOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opAttachClassicLinkVpc = "AttachClassicLinkVpc"
 
@@ -100,7 +35,7 @@ const opAttachClassicLinkVpc = "AttachClassicLinkVpc"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AttachClassicLinkVpc
-func (c *Client) AttachClassicLinkVpcRequest(input *AttachClassicLinkVpcInput) AttachClassicLinkVpcRequest {
+func (c *Client) AttachClassicLinkVpcRequest(input *types.AttachClassicLinkVpcInput) AttachClassicLinkVpcRequest {
 	op := &aws.Operation{
 		Name:       opAttachClassicLinkVpc,
 		HTTPMethod: "POST",
@@ -108,10 +43,10 @@ func (c *Client) AttachClassicLinkVpcRequest(input *AttachClassicLinkVpcInput) A
 	}
 
 	if input == nil {
-		input = &AttachClassicLinkVpcInput{}
+		input = &types.AttachClassicLinkVpcInput{}
 	}
 
-	req := c.newRequest(op, input, &AttachClassicLinkVpcOutput{})
+	req := c.newRequest(op, input, &types.AttachClassicLinkVpcOutput{})
 	return AttachClassicLinkVpcRequest{Request: req, Input: input, Copy: c.AttachClassicLinkVpcRequest}
 }
 
@@ -119,8 +54,8 @@ func (c *Client) AttachClassicLinkVpcRequest(input *AttachClassicLinkVpcInput) A
 // AttachClassicLinkVpc API operation.
 type AttachClassicLinkVpcRequest struct {
 	*aws.Request
-	Input *AttachClassicLinkVpcInput
-	Copy  func(*AttachClassicLinkVpcInput) AttachClassicLinkVpcRequest
+	Input *types.AttachClassicLinkVpcInput
+	Copy  func(*types.AttachClassicLinkVpcInput) AttachClassicLinkVpcRequest
 }
 
 // Send marshals and sends the AttachClassicLinkVpc API request.
@@ -132,7 +67,7 @@ func (r AttachClassicLinkVpcRequest) Send(ctx context.Context) (*AttachClassicLi
 	}
 
 	resp := &AttachClassicLinkVpcResponse{
-		AttachClassicLinkVpcOutput: r.Request.Data.(*AttachClassicLinkVpcOutput),
+		AttachClassicLinkVpcOutput: r.Request.Data.(*types.AttachClassicLinkVpcOutput),
 		response:                   &aws.Response{Request: r.Request},
 	}
 
@@ -142,7 +77,7 @@ func (r AttachClassicLinkVpcRequest) Send(ctx context.Context) (*AttachClassicLi
 // AttachClassicLinkVpcResponse is the response type for the
 // AttachClassicLinkVpc API operation.
 type AttachClassicLinkVpcResponse struct {
-	*AttachClassicLinkVpcOutput
+	*types.AttachClassicLinkVpcOutput
 
 	response *aws.Response
 }

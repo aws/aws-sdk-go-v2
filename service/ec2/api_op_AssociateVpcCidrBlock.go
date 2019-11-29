@@ -6,62 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-type AssociateVpcCidrBlockInput struct {
-	_ struct{} `type:"structure"`
-
-	// Requests an Amazon-provided IPv6 CIDR block with a /56 prefix length for
-	// the VPC. You cannot specify the range of IPv6 addresses, or the size of the
-	// CIDR block.
-	AmazonProvidedIpv6CidrBlock *bool `locationName:"amazonProvidedIpv6CidrBlock" type:"boolean"`
-
-	// An IPv4 CIDR block to associate with the VPC.
-	CidrBlock *string `type:"string"`
-
-	// The ID of the VPC.
-	//
-	// VpcId is a required field
-	VpcId *string `locationName:"vpcId" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s AssociateVpcCidrBlockInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *AssociateVpcCidrBlockInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "AssociateVpcCidrBlockInput"}
-
-	if s.VpcId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("VpcId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type AssociateVpcCidrBlockOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Information about the IPv4 CIDR block association.
-	CidrBlockAssociation *VpcCidrBlockAssociation `locationName:"cidrBlockAssociation" type:"structure"`
-
-	// Information about the IPv6 CIDR block association.
-	Ipv6CidrBlockAssociation *VpcIpv6CidrBlockAssociation `locationName:"ipv6CidrBlockAssociation" type:"structure"`
-
-	// The ID of the VPC.
-	VpcId *string `locationName:"vpcId" type:"string"`
-}
-
-// String returns the string representation
-func (s AssociateVpcCidrBlockOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opAssociateVpcCidrBlock = "AssociateVpcCidrBlock"
 
@@ -84,7 +30,7 @@ const opAssociateVpcCidrBlock = "AssociateVpcCidrBlock"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AssociateVpcCidrBlock
-func (c *Client) AssociateVpcCidrBlockRequest(input *AssociateVpcCidrBlockInput) AssociateVpcCidrBlockRequest {
+func (c *Client) AssociateVpcCidrBlockRequest(input *types.AssociateVpcCidrBlockInput) AssociateVpcCidrBlockRequest {
 	op := &aws.Operation{
 		Name:       opAssociateVpcCidrBlock,
 		HTTPMethod: "POST",
@@ -92,10 +38,10 @@ func (c *Client) AssociateVpcCidrBlockRequest(input *AssociateVpcCidrBlockInput)
 	}
 
 	if input == nil {
-		input = &AssociateVpcCidrBlockInput{}
+		input = &types.AssociateVpcCidrBlockInput{}
 	}
 
-	req := c.newRequest(op, input, &AssociateVpcCidrBlockOutput{})
+	req := c.newRequest(op, input, &types.AssociateVpcCidrBlockOutput{})
 	return AssociateVpcCidrBlockRequest{Request: req, Input: input, Copy: c.AssociateVpcCidrBlockRequest}
 }
 
@@ -103,8 +49,8 @@ func (c *Client) AssociateVpcCidrBlockRequest(input *AssociateVpcCidrBlockInput)
 // AssociateVpcCidrBlock API operation.
 type AssociateVpcCidrBlockRequest struct {
 	*aws.Request
-	Input *AssociateVpcCidrBlockInput
-	Copy  func(*AssociateVpcCidrBlockInput) AssociateVpcCidrBlockRequest
+	Input *types.AssociateVpcCidrBlockInput
+	Copy  func(*types.AssociateVpcCidrBlockInput) AssociateVpcCidrBlockRequest
 }
 
 // Send marshals and sends the AssociateVpcCidrBlock API request.
@@ -116,7 +62,7 @@ func (r AssociateVpcCidrBlockRequest) Send(ctx context.Context) (*AssociateVpcCi
 	}
 
 	resp := &AssociateVpcCidrBlockResponse{
-		AssociateVpcCidrBlockOutput: r.Request.Data.(*AssociateVpcCidrBlockOutput),
+		AssociateVpcCidrBlockOutput: r.Request.Data.(*types.AssociateVpcCidrBlockOutput),
 		response:                    &aws.Response{Request: r.Request},
 	}
 
@@ -126,7 +72,7 @@ func (r AssociateVpcCidrBlockRequest) Send(ctx context.Context) (*AssociateVpcCi
 // AssociateVpcCidrBlockResponse is the response type for the
 // AssociateVpcCidrBlock API operation.
 type AssociateVpcCidrBlockResponse struct {
-	*AssociateVpcCidrBlockOutput
+	*types.AssociateVpcCidrBlockOutput
 
 	response *aws.Response
 }

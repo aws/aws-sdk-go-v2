@@ -10,6 +10,7 @@ package kinesisanalyticsv2iface
 
 import (
 	"github.com/aws/aws-sdk-go-v2/service/kinesisanalyticsv2"
+	"github.com/aws/aws-sdk-go-v2/service/kinesisanalyticsv2/types"
 )
 
 // ClientAPI provides an interface to enable mocking the
@@ -43,7 +44,7 @@ import (
 //    type mockClientClient struct {
 //        kinesisanalyticsv2iface.ClientPI
 //    }
-//    func (m *mockClientClient) AddApplicationCloudWatchLoggingOption(input *kinesisanalyticsv2.AddApplicationCloudWatchLoggingOptionInput) (*kinesisanalyticsv2.AddApplicationCloudWatchLoggingOptionOutput, error) {
+//    func (m *mockClientClient) AddApplicationCloudWatchLoggingOption(input *types.AddApplicationCloudWatchLoggingOptionInput) (*types.AddApplicationCloudWatchLoggingOptionOutput, error) {
 //        // mock response/functionality
 //    }
 //
@@ -61,53 +62,53 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type ClientAPI interface {
-	AddApplicationCloudWatchLoggingOptionRequest(*kinesisanalyticsv2.AddApplicationCloudWatchLoggingOptionInput) kinesisanalyticsv2.AddApplicationCloudWatchLoggingOptionRequest
+	AddApplicationCloudWatchLoggingOptionRequest(*types.AddApplicationCloudWatchLoggingOptionInput) kinesisanalyticsv2.AddApplicationCloudWatchLoggingOptionRequest
 
-	AddApplicationInputRequest(*kinesisanalyticsv2.AddApplicationInputInput) kinesisanalyticsv2.AddApplicationInputRequest
+	AddApplicationInputRequest(*types.AddApplicationInputInput) kinesisanalyticsv2.AddApplicationInputRequest
 
-	AddApplicationInputProcessingConfigurationRequest(*kinesisanalyticsv2.AddApplicationInputProcessingConfigurationInput) kinesisanalyticsv2.AddApplicationInputProcessingConfigurationRequest
+	AddApplicationInputProcessingConfigurationRequest(*types.AddApplicationInputProcessingConfigurationInput) kinesisanalyticsv2.AddApplicationInputProcessingConfigurationRequest
 
-	AddApplicationOutputRequest(*kinesisanalyticsv2.AddApplicationOutputInput) kinesisanalyticsv2.AddApplicationOutputRequest
+	AddApplicationOutputRequest(*types.AddApplicationOutputInput) kinesisanalyticsv2.AddApplicationOutputRequest
 
-	AddApplicationReferenceDataSourceRequest(*kinesisanalyticsv2.AddApplicationReferenceDataSourceInput) kinesisanalyticsv2.AddApplicationReferenceDataSourceRequest
+	AddApplicationReferenceDataSourceRequest(*types.AddApplicationReferenceDataSourceInput) kinesisanalyticsv2.AddApplicationReferenceDataSourceRequest
 
-	CreateApplicationRequest(*kinesisanalyticsv2.CreateApplicationInput) kinesisanalyticsv2.CreateApplicationRequest
+	CreateApplicationRequest(*types.CreateApplicationInput) kinesisanalyticsv2.CreateApplicationRequest
 
-	CreateApplicationSnapshotRequest(*kinesisanalyticsv2.CreateApplicationSnapshotInput) kinesisanalyticsv2.CreateApplicationSnapshotRequest
+	CreateApplicationSnapshotRequest(*types.CreateApplicationSnapshotInput) kinesisanalyticsv2.CreateApplicationSnapshotRequest
 
-	DeleteApplicationRequest(*kinesisanalyticsv2.DeleteApplicationInput) kinesisanalyticsv2.DeleteApplicationRequest
+	DeleteApplicationRequest(*types.DeleteApplicationInput) kinesisanalyticsv2.DeleteApplicationRequest
 
-	DeleteApplicationCloudWatchLoggingOptionRequest(*kinesisanalyticsv2.DeleteApplicationCloudWatchLoggingOptionInput) kinesisanalyticsv2.DeleteApplicationCloudWatchLoggingOptionRequest
+	DeleteApplicationCloudWatchLoggingOptionRequest(*types.DeleteApplicationCloudWatchLoggingOptionInput) kinesisanalyticsv2.DeleteApplicationCloudWatchLoggingOptionRequest
 
-	DeleteApplicationInputProcessingConfigurationRequest(*kinesisanalyticsv2.DeleteApplicationInputProcessingConfigurationInput) kinesisanalyticsv2.DeleteApplicationInputProcessingConfigurationRequest
+	DeleteApplicationInputProcessingConfigurationRequest(*types.DeleteApplicationInputProcessingConfigurationInput) kinesisanalyticsv2.DeleteApplicationInputProcessingConfigurationRequest
 
-	DeleteApplicationOutputRequest(*kinesisanalyticsv2.DeleteApplicationOutputInput) kinesisanalyticsv2.DeleteApplicationOutputRequest
+	DeleteApplicationOutputRequest(*types.DeleteApplicationOutputInput) kinesisanalyticsv2.DeleteApplicationOutputRequest
 
-	DeleteApplicationReferenceDataSourceRequest(*kinesisanalyticsv2.DeleteApplicationReferenceDataSourceInput) kinesisanalyticsv2.DeleteApplicationReferenceDataSourceRequest
+	DeleteApplicationReferenceDataSourceRequest(*types.DeleteApplicationReferenceDataSourceInput) kinesisanalyticsv2.DeleteApplicationReferenceDataSourceRequest
 
-	DeleteApplicationSnapshotRequest(*kinesisanalyticsv2.DeleteApplicationSnapshotInput) kinesisanalyticsv2.DeleteApplicationSnapshotRequest
+	DeleteApplicationSnapshotRequest(*types.DeleteApplicationSnapshotInput) kinesisanalyticsv2.DeleteApplicationSnapshotRequest
 
-	DescribeApplicationRequest(*kinesisanalyticsv2.DescribeApplicationInput) kinesisanalyticsv2.DescribeApplicationRequest
+	DescribeApplicationRequest(*types.DescribeApplicationInput) kinesisanalyticsv2.DescribeApplicationRequest
 
-	DescribeApplicationSnapshotRequest(*kinesisanalyticsv2.DescribeApplicationSnapshotInput) kinesisanalyticsv2.DescribeApplicationSnapshotRequest
+	DescribeApplicationSnapshotRequest(*types.DescribeApplicationSnapshotInput) kinesisanalyticsv2.DescribeApplicationSnapshotRequest
 
-	DiscoverInputSchemaRequest(*kinesisanalyticsv2.DiscoverInputSchemaInput) kinesisanalyticsv2.DiscoverInputSchemaRequest
+	DiscoverInputSchemaRequest(*types.DiscoverInputSchemaInput) kinesisanalyticsv2.DiscoverInputSchemaRequest
 
-	ListApplicationSnapshotsRequest(*kinesisanalyticsv2.ListApplicationSnapshotsInput) kinesisanalyticsv2.ListApplicationSnapshotsRequest
+	ListApplicationSnapshotsRequest(*types.ListApplicationSnapshotsInput) kinesisanalyticsv2.ListApplicationSnapshotsRequest
 
-	ListApplicationsRequest(*kinesisanalyticsv2.ListApplicationsInput) kinesisanalyticsv2.ListApplicationsRequest
+	ListApplicationsRequest(*types.ListApplicationsInput) kinesisanalyticsv2.ListApplicationsRequest
 
-	ListTagsForResourceRequest(*kinesisanalyticsv2.ListTagsForResourceInput) kinesisanalyticsv2.ListTagsForResourceRequest
+	ListTagsForResourceRequest(*types.ListTagsForResourceInput) kinesisanalyticsv2.ListTagsForResourceRequest
 
-	StartApplicationRequest(*kinesisanalyticsv2.StartApplicationInput) kinesisanalyticsv2.StartApplicationRequest
+	StartApplicationRequest(*types.StartApplicationInput) kinesisanalyticsv2.StartApplicationRequest
 
-	StopApplicationRequest(*kinesisanalyticsv2.StopApplicationInput) kinesisanalyticsv2.StopApplicationRequest
+	StopApplicationRequest(*types.StopApplicationInput) kinesisanalyticsv2.StopApplicationRequest
 
-	TagResourceRequest(*kinesisanalyticsv2.TagResourceInput) kinesisanalyticsv2.TagResourceRequest
+	TagResourceRequest(*types.TagResourceInput) kinesisanalyticsv2.TagResourceRequest
 
-	UntagResourceRequest(*kinesisanalyticsv2.UntagResourceInput) kinesisanalyticsv2.UntagResourceRequest
+	UntagResourceRequest(*types.UntagResourceInput) kinesisanalyticsv2.UntagResourceRequest
 
-	UpdateApplicationRequest(*kinesisanalyticsv2.UpdateApplicationInput) kinesisanalyticsv2.UpdateApplicationRequest
+	UpdateApplicationRequest(*types.UpdateApplicationInput) kinesisanalyticsv2.UpdateApplicationRequest
 }
 
 var _ ClientAPI = (*kinesisanalyticsv2.Client)(nil)

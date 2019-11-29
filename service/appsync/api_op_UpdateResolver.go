@@ -6,168 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/appsync/types"
 )
-
-type UpdateResolverInput struct {
-	_ struct{} `type:"structure"`
-
-	// The API ID.
-	//
-	// ApiId is a required field
-	ApiId *string `location:"uri" locationName:"apiId" type:"string" required:"true"`
-
-	// The new data source name.
-	DataSourceName *string `locationName:"dataSourceName" type:"string"`
-
-	// The new field name.
-	//
-	// FieldName is a required field
-	FieldName *string `location:"uri" locationName:"fieldName" type:"string" required:"true"`
-
-	// The resolver type.
-	//
-	//    * UNIT: A UNIT resolver type. A UNIT resolver is the default resolver
-	//    type. A UNIT resolver enables you to execute a GraphQL query against a
-	//    single data source.
-	//
-	//    * PIPELINE: A PIPELINE resolver type. A PIPELINE resolver enables you
-	//    to execute a series of Function in a serial manner. You can use a pipeline
-	//    resolver to execute a GraphQL query against multiple data sources.
-	Kind ResolverKind `locationName:"kind" type:"string" enum:"true"`
-
-	// The PipelineConfig.
-	PipelineConfig *PipelineConfig `locationName:"pipelineConfig" type:"structure"`
-
-	// The new request mapping template.
-	//
-	// RequestMappingTemplate is a required field
-	RequestMappingTemplate *string `locationName:"requestMappingTemplate" min:"1" type:"string" required:"true"`
-
-	// The new response mapping template.
-	ResponseMappingTemplate *string `locationName:"responseMappingTemplate" min:"1" type:"string"`
-
-	// The new type name.
-	//
-	// TypeName is a required field
-	TypeName *string `location:"uri" locationName:"typeName" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s UpdateResolverInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateResolverInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateResolverInput"}
-
-	if s.ApiId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ApiId"))
-	}
-
-	if s.FieldName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("FieldName"))
-	}
-
-	if s.RequestMappingTemplate == nil {
-		invalidParams.Add(aws.NewErrParamRequired("RequestMappingTemplate"))
-	}
-	if s.RequestMappingTemplate != nil && len(*s.RequestMappingTemplate) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("RequestMappingTemplate", 1))
-	}
-	if s.ResponseMappingTemplate != nil && len(*s.ResponseMappingTemplate) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ResponseMappingTemplate", 1))
-	}
-
-	if s.TypeName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("TypeName"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s UpdateResolverInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.DataSourceName != nil {
-		v := *s.DataSourceName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "dataSourceName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if len(s.Kind) > 0 {
-		v := s.Kind
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "kind", protocol.QuotedValue{ValueMarshaler: v}, metadata)
-	}
-	if s.PipelineConfig != nil {
-		v := s.PipelineConfig
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "pipelineConfig", v, metadata)
-	}
-	if s.RequestMappingTemplate != nil {
-		v := *s.RequestMappingTemplate
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "requestMappingTemplate", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.ResponseMappingTemplate != nil {
-		v := *s.ResponseMappingTemplate
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "responseMappingTemplate", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.ApiId != nil {
-		v := *s.ApiId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "apiId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.FieldName != nil {
-		v := *s.FieldName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "fieldName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.TypeName != nil {
-		v := *s.TypeName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "typeName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type UpdateResolverOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The updated Resolver object.
-	Resolver *Resolver `locationName:"resolver" type:"structure"`
-}
-
-// String returns the string representation
-func (s UpdateResolverOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s UpdateResolverOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.Resolver != nil {
-		v := s.Resolver
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "resolver", v, metadata)
-	}
-	return nil
-}
 
 const opUpdateResolver = "UpdateResolver"
 
@@ -184,7 +24,7 @@ const opUpdateResolver = "UpdateResolver"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/UpdateResolver
-func (c *Client) UpdateResolverRequest(input *UpdateResolverInput) UpdateResolverRequest {
+func (c *Client) UpdateResolverRequest(input *types.UpdateResolverInput) UpdateResolverRequest {
 	op := &aws.Operation{
 		Name:       opUpdateResolver,
 		HTTPMethod: "POST",
@@ -192,10 +32,10 @@ func (c *Client) UpdateResolverRequest(input *UpdateResolverInput) UpdateResolve
 	}
 
 	if input == nil {
-		input = &UpdateResolverInput{}
+		input = &types.UpdateResolverInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateResolverOutput{})
+	req := c.newRequest(op, input, &types.UpdateResolverOutput{})
 	return UpdateResolverRequest{Request: req, Input: input, Copy: c.UpdateResolverRequest}
 }
 
@@ -203,8 +43,8 @@ func (c *Client) UpdateResolverRequest(input *UpdateResolverInput) UpdateResolve
 // UpdateResolver API operation.
 type UpdateResolverRequest struct {
 	*aws.Request
-	Input *UpdateResolverInput
-	Copy  func(*UpdateResolverInput) UpdateResolverRequest
+	Input *types.UpdateResolverInput
+	Copy  func(*types.UpdateResolverInput) UpdateResolverRequest
 }
 
 // Send marshals and sends the UpdateResolver API request.
@@ -216,7 +56,7 @@ func (r UpdateResolverRequest) Send(ctx context.Context) (*UpdateResolverRespons
 	}
 
 	resp := &UpdateResolverResponse{
-		UpdateResolverOutput: r.Request.Data.(*UpdateResolverOutput),
+		UpdateResolverOutput: r.Request.Data.(*types.UpdateResolverOutput),
 		response:             &aws.Response{Request: r.Request},
 	}
 
@@ -226,7 +66,7 @@ func (r UpdateResolverRequest) Send(ctx context.Context) (*UpdateResolverRespons
 // UpdateResolverResponse is the response type for the
 // UpdateResolver API operation.
 type UpdateResolverResponse struct {
-	*UpdateResolverOutput
+	*types.UpdateResolverOutput
 
 	response *aws.Response
 }

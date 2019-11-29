@@ -6,107 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/appmesh/types"
 )
-
-type ListVirtualRoutersInput struct {
-	_ struct{} `type:"structure"`
-
-	Limit *int64 `location:"querystring" locationName:"limit" min:"1" type:"integer"`
-
-	// MeshName is a required field
-	MeshName *string `location:"uri" locationName:"meshName" min:"1" type:"string" required:"true"`
-
-	NextToken *string `location:"querystring" locationName:"nextToken" type:"string"`
-}
-
-// String returns the string representation
-func (s ListVirtualRoutersInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListVirtualRoutersInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListVirtualRoutersInput"}
-	if s.Limit != nil && *s.Limit < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("Limit", 1))
-	}
-
-	if s.MeshName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("MeshName"))
-	}
-	if s.MeshName != nil && len(*s.MeshName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("MeshName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListVirtualRoutersInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.MeshName != nil {
-		v := *s.MeshName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "meshName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Limit != nil {
-		v := *s.Limit
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "limit", protocol.Int64Value(v), metadata)
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type ListVirtualRoutersOutput struct {
-	_ struct{} `type:"structure"`
-
-	NextToken *string `locationName:"nextToken" type:"string"`
-
-	// VirtualRouters is a required field
-	VirtualRouters []VirtualRouterRef `locationName:"virtualRouters" type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s ListVirtualRoutersOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListVirtualRoutersOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.VirtualRouters != nil {
-		v := s.VirtualRouters
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "virtualRouters", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	return nil
-}
 
 const opListVirtualRouters = "ListVirtualRouters"
 
@@ -123,7 +24,7 @@ const opListVirtualRouters = "ListVirtualRouters"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/ListVirtualRouters
-func (c *Client) ListVirtualRoutersRequest(input *ListVirtualRoutersInput) ListVirtualRoutersRequest {
+func (c *Client) ListVirtualRoutersRequest(input *types.ListVirtualRoutersInput) ListVirtualRoutersRequest {
 	op := &aws.Operation{
 		Name:       opListVirtualRouters,
 		HTTPMethod: "GET",
@@ -137,10 +38,10 @@ func (c *Client) ListVirtualRoutersRequest(input *ListVirtualRoutersInput) ListV
 	}
 
 	if input == nil {
-		input = &ListVirtualRoutersInput{}
+		input = &types.ListVirtualRoutersInput{}
 	}
 
-	req := c.newRequest(op, input, &ListVirtualRoutersOutput{})
+	req := c.newRequest(op, input, &types.ListVirtualRoutersOutput{})
 	return ListVirtualRoutersRequest{Request: req, Input: input, Copy: c.ListVirtualRoutersRequest}
 }
 
@@ -148,8 +49,8 @@ func (c *Client) ListVirtualRoutersRequest(input *ListVirtualRoutersInput) ListV
 // ListVirtualRouters API operation.
 type ListVirtualRoutersRequest struct {
 	*aws.Request
-	Input *ListVirtualRoutersInput
-	Copy  func(*ListVirtualRoutersInput) ListVirtualRoutersRequest
+	Input *types.ListVirtualRoutersInput
+	Copy  func(*types.ListVirtualRoutersInput) ListVirtualRoutersRequest
 }
 
 // Send marshals and sends the ListVirtualRouters API request.
@@ -161,7 +62,7 @@ func (r ListVirtualRoutersRequest) Send(ctx context.Context) (*ListVirtualRouter
 	}
 
 	resp := &ListVirtualRoutersResponse{
-		ListVirtualRoutersOutput: r.Request.Data.(*ListVirtualRoutersOutput),
+		ListVirtualRoutersOutput: r.Request.Data.(*types.ListVirtualRoutersOutput),
 		response:                 &aws.Response{Request: r.Request},
 	}
 
@@ -191,7 +92,7 @@ func NewListVirtualRoutersPaginator(req ListVirtualRoutersRequest) ListVirtualRo
 	return ListVirtualRoutersPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListVirtualRoutersInput
+				var inCpy *types.ListVirtualRoutersInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -211,14 +112,14 @@ type ListVirtualRoutersPaginator struct {
 	aws.Pager
 }
 
-func (p *ListVirtualRoutersPaginator) CurrentPage() *ListVirtualRoutersOutput {
-	return p.Pager.CurrentPage().(*ListVirtualRoutersOutput)
+func (p *ListVirtualRoutersPaginator) CurrentPage() *types.ListVirtualRoutersOutput {
+	return p.Pager.CurrentPage().(*types.ListVirtualRoutersOutput)
 }
 
 // ListVirtualRoutersResponse is the response type for the
 // ListVirtualRouters API operation.
 type ListVirtualRoutersResponse struct {
-	*ListVirtualRoutersOutput
+	*types.ListVirtualRoutersOutput
 
 	response *aws.Response
 }

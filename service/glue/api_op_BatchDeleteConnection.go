@@ -6,59 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/glue/types"
 )
-
-type BatchDeleteConnectionInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the Data Catalog in which the connections reside. If none is provided,
-	// the AWS account ID is used by default.
-	CatalogId *string `min:"1" type:"string"`
-
-	// A list of names of the connections to delete.
-	//
-	// ConnectionNameList is a required field
-	ConnectionNameList []string `type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s BatchDeleteConnectionInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *BatchDeleteConnectionInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "BatchDeleteConnectionInput"}
-	if s.CatalogId != nil && len(*s.CatalogId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("CatalogId", 1))
-	}
-
-	if s.ConnectionNameList == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ConnectionNameList"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type BatchDeleteConnectionOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A map of the names of connections that were not successfully deleted to error
-	// details.
-	Errors map[string]ErrorDetail `type:"map"`
-
-	// A list of names of the connection definitions that were successfully deleted.
-	Succeeded []string `type:"list"`
-}
-
-// String returns the string representation
-func (s BatchDeleteConnectionOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opBatchDeleteConnection = "BatchDeleteConnection"
 
@@ -75,7 +24,7 @@ const opBatchDeleteConnection = "BatchDeleteConnection"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/BatchDeleteConnection
-func (c *Client) BatchDeleteConnectionRequest(input *BatchDeleteConnectionInput) BatchDeleteConnectionRequest {
+func (c *Client) BatchDeleteConnectionRequest(input *types.BatchDeleteConnectionInput) BatchDeleteConnectionRequest {
 	op := &aws.Operation{
 		Name:       opBatchDeleteConnection,
 		HTTPMethod: "POST",
@@ -83,10 +32,10 @@ func (c *Client) BatchDeleteConnectionRequest(input *BatchDeleteConnectionInput)
 	}
 
 	if input == nil {
-		input = &BatchDeleteConnectionInput{}
+		input = &types.BatchDeleteConnectionInput{}
 	}
 
-	req := c.newRequest(op, input, &BatchDeleteConnectionOutput{})
+	req := c.newRequest(op, input, &types.BatchDeleteConnectionOutput{})
 	return BatchDeleteConnectionRequest{Request: req, Input: input, Copy: c.BatchDeleteConnectionRequest}
 }
 
@@ -94,8 +43,8 @@ func (c *Client) BatchDeleteConnectionRequest(input *BatchDeleteConnectionInput)
 // BatchDeleteConnection API operation.
 type BatchDeleteConnectionRequest struct {
 	*aws.Request
-	Input *BatchDeleteConnectionInput
-	Copy  func(*BatchDeleteConnectionInput) BatchDeleteConnectionRequest
+	Input *types.BatchDeleteConnectionInput
+	Copy  func(*types.BatchDeleteConnectionInput) BatchDeleteConnectionRequest
 }
 
 // Send marshals and sends the BatchDeleteConnection API request.
@@ -107,7 +56,7 @@ func (r BatchDeleteConnectionRequest) Send(ctx context.Context) (*BatchDeleteCon
 	}
 
 	resp := &BatchDeleteConnectionResponse{
-		BatchDeleteConnectionOutput: r.Request.Data.(*BatchDeleteConnectionOutput),
+		BatchDeleteConnectionOutput: r.Request.Data.(*types.BatchDeleteConnectionOutput),
 		response:                    &aws.Response{Request: r.Request},
 	}
 
@@ -117,7 +66,7 @@ func (r BatchDeleteConnectionRequest) Send(ctx context.Context) (*BatchDeleteCon
 // BatchDeleteConnectionResponse is the response type for the
 // BatchDeleteConnection API operation.
 type BatchDeleteConnectionResponse struct {
-	*BatchDeleteConnectionOutput
+	*types.BatchDeleteConnectionOutput
 
 	response *aws.Response
 }

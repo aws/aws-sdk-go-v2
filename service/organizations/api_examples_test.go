@@ -12,6 +12,8 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws/awserr"
 	"github.com/aws/aws-sdk-go-v2/aws/external"
 	"github.com/aws/aws-sdk-go-v2/service/organizations"
+	"github.com/aws/aws-sdk-go-v2/service/organizations/enums"
+	"github.com/aws/aws-sdk-go-v2/service/organizations/types"
 )
 
 var _ time.Duration
@@ -38,7 +40,7 @@ func ExampleClient_AcceptHandshakeRequest_shared00() {
 	}
 
 	svc := organizations.New(cfg)
-	input := &organizations.AcceptHandshakeInput{
+	input := &types.AcceptHandshakeInput{
 		HandshakeId: aws.String("h-examplehandshakeid111"),
 	}
 
@@ -93,7 +95,7 @@ func ExampleClient_AttachPolicyRequest_shared00() {
 	}
 
 	svc := organizations.New(cfg)
-	input := &organizations.AttachPolicyInput{
+	input := &types.AttachPolicyInput{
 		PolicyId: aws.String("p-examplepolicyid111"),
 		TargetId: aws.String("ou-examplerootid111-exampleouid111"),
 	}
@@ -149,7 +151,7 @@ func ExampleClient_AttachPolicyRequest_shared01() {
 	}
 
 	svc := organizations.New(cfg)
-	input := &organizations.AttachPolicyInput{
+	input := &types.AttachPolicyInput{
 		PolicyId: aws.String("p-examplepolicyid111"),
 		TargetId: aws.String("333333333333"),
 	}
@@ -207,7 +209,7 @@ func ExampleClient_CancelHandshakeRequest_shared00() {
 	}
 
 	svc := organizations.New(cfg)
-	input := &organizations.CancelHandshakeInput{
+	input := &types.CancelHandshakeInput{
 		HandshakeId: aws.String("h-examplehandshakeid111"),
 	}
 
@@ -261,7 +263,7 @@ func ExampleClient_CreateAccountRequest_shared00() {
 	}
 
 	svc := organizations.New(cfg)
-	input := &organizations.CreateAccountInput{
+	input := &types.CreateAccountInput{
 		AccountName: aws.String("Production Account"),
 		Email:       aws.String("susan@example.com"),
 	}
@@ -316,7 +318,7 @@ func ExampleClient_CreateOrganizationRequest_shared00() {
 	}
 
 	svc := organizations.New(cfg)
-	input := &organizations.CreateOrganizationInput{}
+	input := &types.CreateOrganizationInput{}
 
 	req := svc.CreateOrganizationRequest(input)
 	result, err := req.Send(context.Background())
@@ -365,8 +367,8 @@ func ExampleClient_CreateOrganizationRequest_shared01() {
 	}
 
 	svc := organizations.New(cfg)
-	input := &organizations.CreateOrganizationInput{
-		FeatureSet: organizations.OrganizationFeatureSetConsolidatedBilling,
+	input := &types.CreateOrganizationInput{
+		FeatureSet: enums.OrganizationFeatureSetConsolidatedBilling,
 	}
 
 	req := svc.CreateOrganizationRequest(input)
@@ -415,7 +417,7 @@ func ExampleClient_CreateOrganizationalUnitRequest_shared00() {
 	}
 
 	svc := organizations.New(cfg)
-	input := &organizations.CreateOrganizationalUnitInput{
+	input := &types.CreateOrganizationalUnitInput{
 		Name:     aws.String("AccountingOU"),
 		ParentId: aws.String("r-examplerootid111"),
 	}
@@ -471,11 +473,11 @@ func ExampleClient_CreatePolicyRequest_shared00() {
 	}
 
 	svc := organizations.New(cfg)
-	input := &organizations.CreatePolicyInput{
+	input := &types.CreatePolicyInput{
 		Content:     aws.String("{\\\"Version\\\":\\\"2012-10-17\\\",\\\"Statement\\\":{\\\"Effect\\\":\\\"Allow\\\",\\\"Action\\\":\\\"s3:*\\\"}}"),
 		Description: aws.String("Enables admins of attached accounts to delegate all S3 permissions"),
 		Name:        aws.String("AllowAllS3Actions"),
-		Type:        organizations.PolicyTypeServiceControlPolicy,
+		Type:        enums.PolicyTypeServiceControlPolicy,
 	}
 
 	req := svc.CreatePolicyRequest(input)
@@ -529,7 +531,7 @@ func ExampleClient_DeclineHandshakeRequest_shared00() {
 	}
 
 	svc := organizations.New(cfg)
-	input := &organizations.DeclineHandshakeInput{
+	input := &types.DeclineHandshakeInput{
 		HandshakeId: aws.String("h-examplehandshakeid111"),
 	}
 
@@ -579,7 +581,7 @@ func ExampleClient_DeleteOrganizationalUnitRequest_shared00() {
 	}
 
 	svc := organizations.New(cfg)
-	input := &organizations.DeleteOrganizationalUnitInput{
+	input := &types.DeleteOrganizationalUnitInput{
 		OrganizationalUnitId: aws.String("ou-examplerootid111-exampleouid111"),
 	}
 
@@ -629,7 +631,7 @@ func ExampleClient_DeletePolicyRequest_shared00() {
 	}
 
 	svc := organizations.New(cfg)
-	input := &organizations.DeletePolicyInput{
+	input := &types.DeletePolicyInput{
 		PolicyId: aws.String("p-examplepolicyid111"),
 	}
 
@@ -679,7 +681,7 @@ func ExampleClient_DescribeAccountRequest_shared00() {
 	}
 
 	svc := organizations.New(cfg)
-	input := &organizations.DescribeAccountInput{
+	input := &types.DescribeAccountInput{
 		AccountId: aws.String("555555555555"),
 	}
 
@@ -727,7 +729,7 @@ func ExampleClient_DescribeCreateAccountStatusRequest_shared00() {
 	}
 
 	svc := organizations.New(cfg)
-	input := &organizations.DescribeCreateAccountStatusInput{
+	input := &types.DescribeCreateAccountStatusInput{
 		CreateAccountRequestId: aws.String("car-exampleaccountcreationrequestid"),
 	}
 
@@ -776,7 +778,7 @@ func ExampleClient_DescribeHandshakeRequest_shared00() {
 	}
 
 	svc := organizations.New(cfg)
-	input := &organizations.DescribeHandshakeInput{
+	input := &types.DescribeHandshakeInput{
 		HandshakeId: aws.String("h-examplehandshakeid111"),
 	}
 
@@ -821,7 +823,7 @@ func ExampleClient_DescribeOrganizationRequest_shared00() {
 	}
 
 	svc := organizations.New(cfg)
-	input := &organizations.DescribeOrganizationInput{}
+	input := &types.DescribeOrganizationInput{}
 
 	req := svc.DescribeOrganizationRequest(input)
 	result, err := req.Send(context.Background())
@@ -862,7 +864,7 @@ func ExampleClient_DescribeOrganizationalUnitRequest_shared00() {
 	}
 
 	svc := organizations.New(cfg)
-	input := &organizations.DescribeOrganizationalUnitInput{
+	input := &types.DescribeOrganizationalUnitInput{
 		OrganizationalUnitId: aws.String("ou-examplerootid111-exampleouid111"),
 	}
 
@@ -907,7 +909,7 @@ func ExampleClient_DescribePolicyRequest_shared00() {
 	}
 
 	svc := organizations.New(cfg)
-	input := &organizations.DescribePolicyInput{
+	input := &types.DescribePolicyInput{
 		PolicyId: aws.String("p-examplepolicyid111"),
 	}
 
@@ -952,7 +954,7 @@ func ExampleClient_DetachPolicyRequest_shared00() {
 	}
 
 	svc := organizations.New(cfg)
-	input := &organizations.DetachPolicyInput{
+	input := &types.DetachPolicyInput{
 		PolicyId: aws.String("p-examplepolicyid111"),
 		TargetId: aws.String("ou-examplerootid111-exampleouid111"),
 	}
@@ -1008,8 +1010,8 @@ func ExampleClient_DisablePolicyTypeRequest_shared00() {
 	}
 
 	svc := organizations.New(cfg)
-	input := &organizations.DisablePolicyTypeInput{
-		PolicyType: organizations.PolicyTypeServiceControlPolicy,
+	input := &types.DisablePolicyTypeInput{
+		PolicyType: enums.PolicyTypeServiceControlPolicy,
 		RootId:     aws.String("r-examplerootid111"),
 	}
 
@@ -1066,7 +1068,7 @@ func ExampleClient_EnableAllFeaturesRequest_shared00() {
 	}
 
 	svc := organizations.New(cfg)
-	input := &organizations.EnableAllFeaturesInput{}
+	input := &types.EnableAllFeaturesInput{}
 
 	req := svc.EnableAllFeaturesRequest(input)
 	result, err := req.Send(context.Background())
@@ -1113,8 +1115,8 @@ func ExampleClient_EnablePolicyTypeRequest_shared00() {
 	}
 
 	svc := organizations.New(cfg)
-	input := &organizations.EnablePolicyTypeInput{
-		PolicyType: organizations.PolicyTypeServiceControlPolicy,
+	input := &types.EnablePolicyTypeInput{
+		PolicyType: enums.PolicyTypeServiceControlPolicy,
 		RootId:     aws.String("r-examplerootid111"),
 	}
 
@@ -1168,11 +1170,11 @@ func ExampleClient_InviteAccountToOrganizationRequest_shared00() {
 	}
 
 	svc := organizations.New(cfg)
-	input := &organizations.InviteAccountToOrganizationInput{
+	input := &types.InviteAccountToOrganizationInput{
 		Notes: aws.String("This is a request for Juan's account to join Bill's organization"),
-		Target: &organizations.HandshakeParty{
+		Target: &types.HandshakeParty{
 			Id:   aws.String("juan@example.com"),
-			Type: organizations.HandshakePartyTypeEmail,
+			Type: enums.HandshakePartyTypeEmail,
 		},
 	}
 
@@ -1225,7 +1227,7 @@ func ExampleClient_LeaveOrganizationRequest_shared00() {
 	}
 
 	svc := organizations.New(cfg)
-	input := &organizations.LeaveOrganizationInput{}
+	input := &types.LeaveOrganizationInput{}
 
 	req := svc.LeaveOrganizationRequest(input)
 	result, err := req.Send(context.Background())
@@ -1274,7 +1276,7 @@ func ExampleClient_ListAccountsRequest_shared00() {
 	}
 
 	svc := organizations.New(cfg)
-	input := &organizations.ListAccountsInput{}
+	input := &types.ListAccountsInput{}
 
 	req := svc.ListAccountsRequest(input)
 	result, err := req.Send(context.Background())
@@ -1315,7 +1317,7 @@ func ExampleClient_ListAccountsForParentRequest_shared00() {
 	}
 
 	svc := organizations.New(cfg)
-	input := &organizations.ListAccountsForParentInput{
+	input := &types.ListAccountsForParentInput{
 		ParentId: aws.String("ou-examplerootid111-exampleouid111"),
 	}
 
@@ -1361,8 +1363,8 @@ func ExampleClient_ListChildrenRequest_shared00() {
 	}
 
 	svc := organizations.New(cfg)
-	input := &organizations.ListChildrenInput{
-		ChildType: organizations.ChildTypeOrganizationalUnit,
+	input := &types.ListChildrenInput{
+		ChildType: enums.ChildTypeOrganizationalUnit,
 		ParentId:  aws.String("ou-examplerootid111-exampleouid111"),
 	}
 
@@ -1408,9 +1410,9 @@ func ExampleClient_ListCreateAccountStatusRequest_shared00() {
 	}
 
 	svc := organizations.New(cfg)
-	input := &organizations.ListCreateAccountStatusInput{
-		States: []organizations.CreateAccountState{
-			organizations.CreateAccountState("SUCCEEDED"),
+	input := &types.ListCreateAccountStatusInput{
+		States: []enums.CreateAccountState{
+			enums.CreateAccountState("SUCCEEDED"),
 		},
 	}
 
@@ -1456,9 +1458,9 @@ func ExampleClient_ListCreateAccountStatusRequest_shared01() {
 	}
 
 	svc := organizations.New(cfg)
-	input := &organizations.ListCreateAccountStatusInput{
-		States: []organizations.CreateAccountState{
-			organizations.CreateAccountState("IN_PROGRESS"),
+	input := &types.ListCreateAccountStatusInput{
+		States: []enums.CreateAccountState{
+			enums.CreateAccountState("IN_PROGRESS"),
 		},
 	}
 
@@ -1504,7 +1506,7 @@ func ExampleClient_ListHandshakesForAccountRequest_shared00() {
 	}
 
 	svc := organizations.New(cfg)
-	input := &organizations.ListHandshakesForAccountInput{}
+	input := &types.ListHandshakesForAccountInput{}
 
 	req := svc.ListHandshakesForAccountRequest(input)
 	result, err := req.Send(context.Background())
@@ -1546,7 +1548,7 @@ func ExampleClient_ListHandshakesForOrganizationRequest_shared00() {
 	}
 
 	svc := organizations.New(cfg)
-	input := &organizations.ListHandshakesForOrganizationInput{}
+	input := &types.ListHandshakesForOrganizationInput{}
 
 	req := svc.ListHandshakesForOrganizationRequest(input)
 	result, err := req.Send(context.Background())
@@ -1589,7 +1591,7 @@ func ExampleClient_ListOrganizationalUnitsForParentRequest_shared00() {
 	}
 
 	svc := organizations.New(cfg)
-	input := &organizations.ListOrganizationalUnitsForParentInput{
+	input := &types.ListOrganizationalUnitsForParentInput{
 		ParentId: aws.String("r-examplerootid111"),
 	}
 
@@ -1634,7 +1636,7 @@ func ExampleClient_ListParentsRequest_shared00() {
 	}
 
 	svc := organizations.New(cfg)
-	input := &organizations.ListParentsInput{
+	input := &types.ListParentsInput{
 		ChildId: aws.String("444444444444"),
 	}
 
@@ -1679,8 +1681,8 @@ func ExampleClient_ListPoliciesRequest_shared00() {
 	}
 
 	svc := organizations.New(cfg)
-	input := &organizations.ListPoliciesInput{
-		Filter: organizations.PolicyTypeServiceControlPolicy,
+	input := &types.ListPoliciesInput{
+		Filter: enums.PolicyTypeServiceControlPolicy,
 	}
 
 	req := svc.ListPoliciesRequest(input)
@@ -1725,8 +1727,8 @@ func ExampleClient_ListPoliciesForTargetRequest_shared00() {
 	}
 
 	svc := organizations.New(cfg)
-	input := &organizations.ListPoliciesForTargetInput{
-		Filter:   organizations.PolicyTypeServiceControlPolicy,
+	input := &types.ListPoliciesForTargetInput{
+		Filter:   enums.PolicyTypeServiceControlPolicy,
 		TargetId: aws.String("444444444444"),
 	}
 
@@ -1771,7 +1773,7 @@ func ExampleClient_ListRootsRequest_shared00() {
 	}
 
 	svc := organizations.New(cfg)
-	input := &organizations.ListRootsInput{}
+	input := &types.ListRootsInput{}
 
 	req := svc.ListRootsRequest(input)
 	result, err := req.Send(context.Background())
@@ -1813,7 +1815,7 @@ func ExampleClient_ListTargetsForPolicyRequest_shared00() {
 	}
 
 	svc := organizations.New(cfg)
-	input := &organizations.ListTargetsForPolicyInput{
+	input := &types.ListTargetsForPolicyInput{
 		PolicyId: aws.String("p-FullAWSAccess"),
 	}
 
@@ -1858,7 +1860,7 @@ func ExampleClient_MoveAccountRequest_shared00() {
 	}
 
 	svc := organizations.New(cfg)
-	input := &organizations.MoveAccountInput{
+	input := &types.MoveAccountInput{
 		AccountId:           aws.String("333333333333"),
 		DestinationParentId: aws.String("ou-examplerootid111-exampleouid111"),
 		SourceParentId:      aws.String("r-examplerootid111"),
@@ -1913,7 +1915,7 @@ func ExampleClient_RemoveAccountFromOrganizationRequest_shared00() {
 	}
 
 	svc := organizations.New(cfg)
-	input := &organizations.RemoveAccountFromOrganizationInput{
+	input := &types.RemoveAccountFromOrganizationInput{
 		AccountId: aws.String("333333333333"),
 	}
 
@@ -1964,7 +1966,7 @@ func ExampleClient_UpdateOrganizationalUnitRequest_shared00() {
 	}
 
 	svc := organizations.New(cfg)
-	input := &organizations.UpdateOrganizationalUnitInput{
+	input := &types.UpdateOrganizationalUnitInput{
 		Name:                 aws.String("AccountingOU"),
 		OrganizationalUnitId: aws.String("ou-examplerootid111-exampleouid111"),
 	}
@@ -2015,7 +2017,7 @@ func ExampleClient_UpdatePolicyRequest_shared00() {
 	}
 
 	svc := organizations.New(cfg)
-	input := &organizations.UpdatePolicyInput{
+	input := &types.UpdatePolicyInput{
 		Description: aws.String("This description replaces the original."),
 		Name:        aws.String("Renamed-Policy"),
 		PolicyId:    aws.String("p-examplepolicyid111"),
@@ -2072,7 +2074,7 @@ func ExampleClient_UpdatePolicyRequest_shared01() {
 	}
 
 	svc := organizations.New(cfg)
-	input := &organizations.UpdatePolicyInput{
+	input := &types.UpdatePolicyInput{
 		Content:  aws.String("{ \\\"Version\\\": \\\"2012-10-17\\\", \\\"Statement\\\": {\\\"Effect\\\": \\\"Allow\\\", \\\"Action\\\": \\\"s3:*\\\", \\\"Resource\\\": \\\"*\\\" } }"),
 		PolicyId: aws.String("p-examplepolicyid111"),
 	}

@@ -10,6 +10,7 @@ package workmailmessageflowiface
 
 import (
 	"github.com/aws/aws-sdk-go-v2/service/workmailmessageflow"
+	"github.com/aws/aws-sdk-go-v2/service/workmailmessageflow/types"
 )
 
 // ClientAPI provides an interface to enable mocking the
@@ -43,7 +44,7 @@ import (
 //    type mockClientClient struct {
 //        workmailmessageflowiface.ClientPI
 //    }
-//    func (m *mockClientClient) GetRawMessageContent(input *workmailmessageflow.GetRawMessageContentInput) (*workmailmessageflow.GetRawMessageContentOutput, error) {
+//    func (m *mockClientClient) GetRawMessageContent(input *types.GetRawMessageContentInput) (*types.GetRawMessageContentOutput, error) {
 //        // mock response/functionality
 //    }
 //
@@ -61,7 +62,7 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type ClientAPI interface {
-	GetRawMessageContentRequest(*workmailmessageflow.GetRawMessageContentInput) workmailmessageflow.GetRawMessageContentRequest
+	GetRawMessageContentRequest(*types.GetRawMessageContentInput) workmailmessageflow.GetRawMessageContentRequest
 }
 
 var _ ClientAPI = (*workmailmessageflow.Client)(nil)

@@ -6,60 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/organizations/types"
 )
-
-type DisablePolicyTypeInput struct {
-	_ struct{} `type:"structure"`
-
-	// The policy type that you want to disable in this root.
-	//
-	// PolicyType is a required field
-	PolicyType PolicyType `type:"string" required:"true" enum:"true"`
-
-	// The unique identifier (ID) of the root in which you want to disable a policy
-	// type. You can get the ID from the ListRoots operation.
-	//
-	// The regex pattern (http://wikipedia.org/wiki/regex) for a root ID string
-	// requires "r-" followed by from 4 to 32 lower-case letters or digits.
-	//
-	// RootId is a required field
-	RootId *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DisablePolicyTypeInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DisablePolicyTypeInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DisablePolicyTypeInput"}
-	if len(s.PolicyType) == 0 {
-		invalidParams.Add(aws.NewErrParamRequired("PolicyType"))
-	}
-
-	if s.RootId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("RootId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DisablePolicyTypeOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A structure that shows the root with the updated list of enabled policy types.
-	Root *Root `type:"structure"`
-}
-
-// String returns the string representation
-func (s DisablePolicyTypeOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDisablePolicyType = "DisablePolicyType"
 
@@ -91,7 +39,7 @@ const opDisablePolicyType = "DisablePolicyType"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/DisablePolicyType
-func (c *Client) DisablePolicyTypeRequest(input *DisablePolicyTypeInput) DisablePolicyTypeRequest {
+func (c *Client) DisablePolicyTypeRequest(input *types.DisablePolicyTypeInput) DisablePolicyTypeRequest {
 	op := &aws.Operation{
 		Name:       opDisablePolicyType,
 		HTTPMethod: "POST",
@@ -99,10 +47,10 @@ func (c *Client) DisablePolicyTypeRequest(input *DisablePolicyTypeInput) Disable
 	}
 
 	if input == nil {
-		input = &DisablePolicyTypeInput{}
+		input = &types.DisablePolicyTypeInput{}
 	}
 
-	req := c.newRequest(op, input, &DisablePolicyTypeOutput{})
+	req := c.newRequest(op, input, &types.DisablePolicyTypeOutput{})
 	return DisablePolicyTypeRequest{Request: req, Input: input, Copy: c.DisablePolicyTypeRequest}
 }
 
@@ -110,8 +58,8 @@ func (c *Client) DisablePolicyTypeRequest(input *DisablePolicyTypeInput) Disable
 // DisablePolicyType API operation.
 type DisablePolicyTypeRequest struct {
 	*aws.Request
-	Input *DisablePolicyTypeInput
-	Copy  func(*DisablePolicyTypeInput) DisablePolicyTypeRequest
+	Input *types.DisablePolicyTypeInput
+	Copy  func(*types.DisablePolicyTypeInput) DisablePolicyTypeRequest
 }
 
 // Send marshals and sends the DisablePolicyType API request.
@@ -123,7 +71,7 @@ func (r DisablePolicyTypeRequest) Send(ctx context.Context) (*DisablePolicyTypeR
 	}
 
 	resp := &DisablePolicyTypeResponse{
-		DisablePolicyTypeOutput: r.Request.Data.(*DisablePolicyTypeOutput),
+		DisablePolicyTypeOutput: r.Request.Data.(*types.DisablePolicyTypeOutput),
 		response:                &aws.Response{Request: r.Request},
 	}
 
@@ -133,7 +81,7 @@ func (r DisablePolicyTypeRequest) Send(ctx context.Context) (*DisablePolicyTypeR
 // DisablePolicyTypeResponse is the response type for the
 // DisablePolicyType API operation.
 type DisablePolicyTypeResponse struct {
-	*DisablePolicyTypeOutput
+	*types.DisablePolicyTypeOutput
 
 	response *aws.Response
 }

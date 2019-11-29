@@ -4,469 +4,10 @@ package lexmodelbuildingservice
 
 import (
 	"context"
-	"fmt"
-	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/lexmodelbuildingservice/types"
 )
-
-type PutIntentInput struct {
-	_ struct{} `type:"structure"`
-
-	// Identifies a specific revision of the $LATEST version.
-	//
-	// When you create a new intent, leave the checksum field blank. If you specify
-	// a checksum you get a BadRequestException exception.
-	//
-	// When you want to update a intent, set the checksum field to the checksum
-	// of the most recent revision of the $LATEST version. If you don't specify
-	// the checksum field, or if the checksum does not match the $LATEST version,
-	// you get a PreconditionFailedException exception.
-	Checksum *string `locationName:"checksum" type:"string"`
-
-	// The statement that you want Amazon Lex to convey to the user after the intent
-	// is successfully fulfilled by the Lambda function.
-	//
-	// This element is relevant only if you provide a Lambda function in the fulfillmentActivity.
-	// If you return the intent to the client application, you can't specify this
-	// element.
-	//
-	// The followUpPrompt and conclusionStatement are mutually exclusive. You can
-	// specify only one.
-	ConclusionStatement *Statement `locationName:"conclusionStatement" type:"structure"`
-
-	// Prompts the user to confirm the intent. This question should have a yes or
-	// no answer.
-	//
-	// Amazon Lex uses this prompt to ensure that the user acknowledges that the
-	// intent is ready for fulfillment. For example, with the OrderPizza intent,
-	// you might want to confirm that the order is correct before placing it. For
-	// other intents, such as intents that simply respond to user questions, you
-	// might not need to ask the user for confirmation before providing the information.
-	//
-	// You you must provide both the rejectionStatement and the confirmationPrompt,
-	// or neither.
-	ConfirmationPrompt *Prompt `locationName:"confirmationPrompt" type:"structure"`
-
-	CreateVersion *bool `locationName:"createVersion" type:"boolean"`
-
-	// A description of the intent.
-	Description *string `locationName:"description" type:"string"`
-
-	// Specifies a Lambda function to invoke for each user input. You can invoke
-	// this Lambda function to personalize user interaction.
-	//
-	// For example, suppose your bot determines that the user is John. Your Lambda
-	// function might retrieve John's information from a backend database and prepopulate
-	// some of the values. For example, if you find that John is gluten intolerant,
-	// you might set the corresponding intent slot, GlutenIntolerant, to true. You
-	// might find John's phone number and set the corresponding session attribute.
-	DialogCodeHook *CodeHook `locationName:"dialogCodeHook" type:"structure"`
-
-	// Amazon Lex uses this prompt to solicit additional activity after fulfilling
-	// an intent. For example, after the OrderPizza intent is fulfilled, you might
-	// prompt the user to order a drink.
-	//
-	// The action that Amazon Lex takes depends on the user's response, as follows:
-	//
-	//    * If the user says "Yes" it responds with the clarification prompt that
-	//    is configured for the bot.
-	//
-	//    * if the user says "Yes" and continues with an utterance that triggers
-	//    an intent it starts a conversation for the intent.
-	//
-	//    * If the user says "No" it responds with the rejection statement configured
-	//    for the the follow-up prompt.
-	//
-	//    * If it doesn't recognize the utterance it repeats the follow-up prompt
-	//    again.
-	//
-	// The followUpPrompt field and the conclusionStatement field are mutually exclusive.
-	// You can specify only one.
-	FollowUpPrompt *FollowUpPrompt `locationName:"followUpPrompt" type:"structure"`
-
-	// Required. Describes how the intent is fulfilled. For example, after a user
-	// provides all of the information for a pizza order, fulfillmentActivity defines
-	// how the bot places an order with a local pizza store.
-	//
-	// You might configure Amazon Lex to return all of the intent information to
-	// the client application, or direct it to invoke a Lambda function that can
-	// process the intent (for example, place an order with a pizzeria).
-	FulfillmentActivity *FulfillmentActivity `locationName:"fulfillmentActivity" type:"structure"`
-
-	// The name of the intent. The name is not case sensitive.
-	//
-	// The name can't match a built-in intent name, or a built-in intent name with
-	// "AMAZON." removed. For example, because there is a built-in intent called
-	// AMAZON.HelpIntent, you can't create a custom intent called HelpIntent.
-	//
-	// For a list of built-in intents, see Standard Built-in Intents (https://developer.amazon.com/public/solutions/alexa/alexa-skills-kit/docs/built-in-intent-ref/standard-intents)
-	// in the Alexa Skills Kit.
-	//
-	// Name is a required field
-	Name *string `location:"uri" locationName:"name" min:"1" type:"string" required:"true"`
-
-	// A unique identifier for the built-in intent to base this intent on. To find
-	// the signature for an intent, see Standard Built-in Intents (https://developer.amazon.com/public/solutions/alexa/alexa-skills-kit/docs/built-in-intent-ref/standard-intents)
-	// in the Alexa Skills Kit.
-	ParentIntentSignature *string `locationName:"parentIntentSignature" type:"string"`
-
-	// When the user answers "no" to the question defined in confirmationPrompt,
-	// Amazon Lex responds with this statement to acknowledge that the intent was
-	// canceled.
-	//
-	// You must provide both the rejectionStatement and the confirmationPrompt,
-	// or neither.
-	RejectionStatement *Statement `locationName:"rejectionStatement" type:"structure"`
-
-	// An array of utterances (strings) that a user might say to signal the intent.
-	// For example, "I want {PizzaSize} pizza", "Order {Quantity} {PizzaSize} pizzas".
-	//
-	// In each utterance, a slot name is enclosed in curly braces.
-	SampleUtterances []string `locationName:"sampleUtterances" type:"list"`
-
-	// An array of intent slots. At runtime, Amazon Lex elicits required slot values
-	// from the user using prompts defined in the slots. For more information, see
-	// how-it-works.
-	Slots []Slot `locationName:"slots" type:"list"`
-}
-
-// String returns the string representation
-func (s PutIntentInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *PutIntentInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "PutIntentInput"}
-
-	if s.Name == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Name"))
-	}
-	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
-	}
-	if s.ConclusionStatement != nil {
-		if err := s.ConclusionStatement.Validate(); err != nil {
-			invalidParams.AddNested("ConclusionStatement", err.(aws.ErrInvalidParams))
-		}
-	}
-	if s.ConfirmationPrompt != nil {
-		if err := s.ConfirmationPrompt.Validate(); err != nil {
-			invalidParams.AddNested("ConfirmationPrompt", err.(aws.ErrInvalidParams))
-		}
-	}
-	if s.DialogCodeHook != nil {
-		if err := s.DialogCodeHook.Validate(); err != nil {
-			invalidParams.AddNested("DialogCodeHook", err.(aws.ErrInvalidParams))
-		}
-	}
-	if s.FollowUpPrompt != nil {
-		if err := s.FollowUpPrompt.Validate(); err != nil {
-			invalidParams.AddNested("FollowUpPrompt", err.(aws.ErrInvalidParams))
-		}
-	}
-	if s.FulfillmentActivity != nil {
-		if err := s.FulfillmentActivity.Validate(); err != nil {
-			invalidParams.AddNested("FulfillmentActivity", err.(aws.ErrInvalidParams))
-		}
-	}
-	if s.RejectionStatement != nil {
-		if err := s.RejectionStatement.Validate(); err != nil {
-			invalidParams.AddNested("RejectionStatement", err.(aws.ErrInvalidParams))
-		}
-	}
-	if s.Slots != nil {
-		for i, v := range s.Slots {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Slots", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s PutIntentInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.Checksum != nil {
-		v := *s.Checksum
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "checksum", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.ConclusionStatement != nil {
-		v := s.ConclusionStatement
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "conclusionStatement", v, metadata)
-	}
-	if s.ConfirmationPrompt != nil {
-		v := s.ConfirmationPrompt
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "confirmationPrompt", v, metadata)
-	}
-	if s.CreateVersion != nil {
-		v := *s.CreateVersion
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "createVersion", protocol.BoolValue(v), metadata)
-	}
-	if s.Description != nil {
-		v := *s.Description
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "description", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.DialogCodeHook != nil {
-		v := s.DialogCodeHook
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "dialogCodeHook", v, metadata)
-	}
-	if s.FollowUpPrompt != nil {
-		v := s.FollowUpPrompt
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "followUpPrompt", v, metadata)
-	}
-	if s.FulfillmentActivity != nil {
-		v := s.FulfillmentActivity
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "fulfillmentActivity", v, metadata)
-	}
-	if s.ParentIntentSignature != nil {
-		v := *s.ParentIntentSignature
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "parentIntentSignature", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.RejectionStatement != nil {
-		v := s.RejectionStatement
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "rejectionStatement", v, metadata)
-	}
-	if s.SampleUtterances != nil {
-		v := s.SampleUtterances
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "sampleUtterances", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
-		}
-		ls0.End()
-
-	}
-	if s.Slots != nil {
-		v := s.Slots
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "slots", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	if s.Name != nil {
-		v := *s.Name
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type PutIntentOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Checksum of the $LATESTversion of the intent created or updated.
-	Checksum *string `locationName:"checksum" type:"string"`
-
-	// After the Lambda function specified in thefulfillmentActivityintent fulfills
-	// the intent, Amazon Lex conveys this statement to the user.
-	ConclusionStatement *Statement `locationName:"conclusionStatement" type:"structure"`
-
-	// If defined in the intent, Amazon Lex prompts the user to confirm the intent
-	// before fulfilling it.
-	ConfirmationPrompt *Prompt `locationName:"confirmationPrompt" type:"structure"`
-
-	CreateVersion *bool `locationName:"createVersion" type:"boolean"`
-
-	// The date that the intent was created.
-	CreatedDate *time.Time `locationName:"createdDate" type:"timestamp"`
-
-	// A description of the intent.
-	Description *string `locationName:"description" type:"string"`
-
-	// If defined in the intent, Amazon Lex invokes this Lambda function for each
-	// user input.
-	DialogCodeHook *CodeHook `locationName:"dialogCodeHook" type:"structure"`
-
-	// If defined in the intent, Amazon Lex uses this prompt to solicit additional
-	// user activity after the intent is fulfilled.
-	FollowUpPrompt *FollowUpPrompt `locationName:"followUpPrompt" type:"structure"`
-
-	// If defined in the intent, Amazon Lex invokes this Lambda function to fulfill
-	// the intent after the user provides all of the information required by the
-	// intent.
-	FulfillmentActivity *FulfillmentActivity `locationName:"fulfillmentActivity" type:"structure"`
-
-	// The date that the intent was updated. When you create a resource, the creation
-	// date and last update dates are the same.
-	LastUpdatedDate *time.Time `locationName:"lastUpdatedDate" type:"timestamp"`
-
-	// The name of the intent.
-	Name *string `locationName:"name" min:"1" type:"string"`
-
-	// A unique identifier for the built-in intent that this intent is based on.
-	ParentIntentSignature *string `locationName:"parentIntentSignature" type:"string"`
-
-	// If the user answers "no" to the question defined in confirmationPrompt Amazon
-	// Lex responds with this statement to acknowledge that the intent was canceled.
-	RejectionStatement *Statement `locationName:"rejectionStatement" type:"structure"`
-
-	// An array of sample utterances that are configured for the intent.
-	SampleUtterances []string `locationName:"sampleUtterances" type:"list"`
-
-	// An array of intent slots that are configured for the intent.
-	Slots []Slot `locationName:"slots" type:"list"`
-
-	// The version of the intent. For a new intent, the version is always $LATEST.
-	Version *string `locationName:"version" min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s PutIntentOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s PutIntentOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.Checksum != nil {
-		v := *s.Checksum
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "checksum", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.ConclusionStatement != nil {
-		v := s.ConclusionStatement
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "conclusionStatement", v, metadata)
-	}
-	if s.ConfirmationPrompt != nil {
-		v := s.ConfirmationPrompt
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "confirmationPrompt", v, metadata)
-	}
-	if s.CreateVersion != nil {
-		v := *s.CreateVersion
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "createVersion", protocol.BoolValue(v), metadata)
-	}
-	if s.CreatedDate != nil {
-		v := *s.CreatedDate
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "createdDate",
-			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
-	}
-	if s.Description != nil {
-		v := *s.Description
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "description", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.DialogCodeHook != nil {
-		v := s.DialogCodeHook
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "dialogCodeHook", v, metadata)
-	}
-	if s.FollowUpPrompt != nil {
-		v := s.FollowUpPrompt
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "followUpPrompt", v, metadata)
-	}
-	if s.FulfillmentActivity != nil {
-		v := s.FulfillmentActivity
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "fulfillmentActivity", v, metadata)
-	}
-	if s.LastUpdatedDate != nil {
-		v := *s.LastUpdatedDate
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "lastUpdatedDate",
-			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
-	}
-	if s.Name != nil {
-		v := *s.Name
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.ParentIntentSignature != nil {
-		v := *s.ParentIntentSignature
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "parentIntentSignature", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.RejectionStatement != nil {
-		v := s.RejectionStatement
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "rejectionStatement", v, metadata)
-	}
-	if s.SampleUtterances != nil {
-		v := s.SampleUtterances
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "sampleUtterances", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
-		}
-		ls0.End()
-
-	}
-	if s.Slots != nil {
-		v := s.Slots
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "slots", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	if s.Version != nil {
-		v := *s.Version
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "version", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opPutIntent = "PutIntent"
 
@@ -527,7 +68,7 @@ const opPutIntent = "PutIntent"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/PutIntent
-func (c *Client) PutIntentRequest(input *PutIntentInput) PutIntentRequest {
+func (c *Client) PutIntentRequest(input *types.PutIntentInput) PutIntentRequest {
 	op := &aws.Operation{
 		Name:       opPutIntent,
 		HTTPMethod: "PUT",
@@ -535,10 +76,10 @@ func (c *Client) PutIntentRequest(input *PutIntentInput) PutIntentRequest {
 	}
 
 	if input == nil {
-		input = &PutIntentInput{}
+		input = &types.PutIntentInput{}
 	}
 
-	req := c.newRequest(op, input, &PutIntentOutput{})
+	req := c.newRequest(op, input, &types.PutIntentOutput{})
 	return PutIntentRequest{Request: req, Input: input, Copy: c.PutIntentRequest}
 }
 
@@ -546,8 +87,8 @@ func (c *Client) PutIntentRequest(input *PutIntentInput) PutIntentRequest {
 // PutIntent API operation.
 type PutIntentRequest struct {
 	*aws.Request
-	Input *PutIntentInput
-	Copy  func(*PutIntentInput) PutIntentRequest
+	Input *types.PutIntentInput
+	Copy  func(*types.PutIntentInput) PutIntentRequest
 }
 
 // Send marshals and sends the PutIntent API request.
@@ -559,7 +100,7 @@ func (r PutIntentRequest) Send(ctx context.Context) (*PutIntentResponse, error) 
 	}
 
 	resp := &PutIntentResponse{
-		PutIntentOutput: r.Request.Data.(*PutIntentOutput),
+		PutIntentOutput: r.Request.Data.(*types.PutIntentOutput),
 		response:        &aws.Response{Request: r.Request},
 	}
 
@@ -569,7 +110,7 @@ func (r PutIntentRequest) Send(ctx context.Context) (*PutIntentResponse, error) 
 // PutIntentResponse is the response type for the
 // PutIntent API operation.
 type PutIntentResponse struct {
-	*PutIntentOutput
+	*types.PutIntentOutput
 
 	response *aws.Response
 }

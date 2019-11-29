@@ -6,51 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/glue/types"
 )
-
-type GetCrawlerInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the crawler to retrieve metadata for.
-	//
-	// Name is a required field
-	Name *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetCrawlerInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetCrawlerInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetCrawlerInput"}
-
-	if s.Name == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Name"))
-	}
-	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type GetCrawlerOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The metadata for the specified crawler.
-	Crawler *Crawler `type:"structure"`
-}
-
-// String returns the string representation
-func (s GetCrawlerOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetCrawler = "GetCrawler"
 
@@ -67,7 +24,7 @@ const opGetCrawler = "GetCrawler"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetCrawler
-func (c *Client) GetCrawlerRequest(input *GetCrawlerInput) GetCrawlerRequest {
+func (c *Client) GetCrawlerRequest(input *types.GetCrawlerInput) GetCrawlerRequest {
 	op := &aws.Operation{
 		Name:       opGetCrawler,
 		HTTPMethod: "POST",
@@ -75,10 +32,10 @@ func (c *Client) GetCrawlerRequest(input *GetCrawlerInput) GetCrawlerRequest {
 	}
 
 	if input == nil {
-		input = &GetCrawlerInput{}
+		input = &types.GetCrawlerInput{}
 	}
 
-	req := c.newRequest(op, input, &GetCrawlerOutput{})
+	req := c.newRequest(op, input, &types.GetCrawlerOutput{})
 	return GetCrawlerRequest{Request: req, Input: input, Copy: c.GetCrawlerRequest}
 }
 
@@ -86,8 +43,8 @@ func (c *Client) GetCrawlerRequest(input *GetCrawlerInput) GetCrawlerRequest {
 // GetCrawler API operation.
 type GetCrawlerRequest struct {
 	*aws.Request
-	Input *GetCrawlerInput
-	Copy  func(*GetCrawlerInput) GetCrawlerRequest
+	Input *types.GetCrawlerInput
+	Copy  func(*types.GetCrawlerInput) GetCrawlerRequest
 }
 
 // Send marshals and sends the GetCrawler API request.
@@ -99,7 +56,7 @@ func (r GetCrawlerRequest) Send(ctx context.Context) (*GetCrawlerResponse, error
 	}
 
 	resp := &GetCrawlerResponse{
-		GetCrawlerOutput: r.Request.Data.(*GetCrawlerOutput),
+		GetCrawlerOutput: r.Request.Data.(*types.GetCrawlerOutput),
 		response:         &aws.Response{Request: r.Request},
 	}
 
@@ -109,7 +66,7 @@ func (r GetCrawlerRequest) Send(ctx context.Context) (*GetCrawlerResponse, error
 // GetCrawlerResponse is the response type for the
 // GetCrawler API operation.
 type GetCrawlerResponse struct {
-	*GetCrawlerOutput
+	*types.GetCrawlerOutput
 
 	response *aws.Response
 }

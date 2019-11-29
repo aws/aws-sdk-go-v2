@@ -6,76 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/iotanalytics/types"
 )
-
-type DescribeDatasetInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the data set whose information is retrieved.
-	//
-	// DatasetName is a required field
-	DatasetName *string `location:"uri" locationName:"datasetName" min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeDatasetInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeDatasetInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeDatasetInput"}
-
-	if s.DatasetName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DatasetName"))
-	}
-	if s.DatasetName != nil && len(*s.DatasetName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("DatasetName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DescribeDatasetInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.DatasetName != nil {
-		v := *s.DatasetName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "datasetName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type DescribeDatasetOutput struct {
-	_ struct{} `type:"structure"`
-
-	// An object that contains information about the data set.
-	Dataset *Dataset `locationName:"dataset" type:"structure"`
-}
-
-// String returns the string representation
-func (s DescribeDatasetOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DescribeDatasetOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.Dataset != nil {
-		v := s.Dataset
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "dataset", v, metadata)
-	}
-	return nil
-}
 
 const opDescribeDataset = "DescribeDataset"
 
@@ -92,7 +24,7 @@ const opDescribeDataset = "DescribeDataset"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iotanalytics-2017-11-27/DescribeDataset
-func (c *Client) DescribeDatasetRequest(input *DescribeDatasetInput) DescribeDatasetRequest {
+func (c *Client) DescribeDatasetRequest(input *types.DescribeDatasetInput) DescribeDatasetRequest {
 	op := &aws.Operation{
 		Name:       opDescribeDataset,
 		HTTPMethod: "GET",
@@ -100,10 +32,10 @@ func (c *Client) DescribeDatasetRequest(input *DescribeDatasetInput) DescribeDat
 	}
 
 	if input == nil {
-		input = &DescribeDatasetInput{}
+		input = &types.DescribeDatasetInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeDatasetOutput{})
+	req := c.newRequest(op, input, &types.DescribeDatasetOutput{})
 	return DescribeDatasetRequest{Request: req, Input: input, Copy: c.DescribeDatasetRequest}
 }
 
@@ -111,8 +43,8 @@ func (c *Client) DescribeDatasetRequest(input *DescribeDatasetInput) DescribeDat
 // DescribeDataset API operation.
 type DescribeDatasetRequest struct {
 	*aws.Request
-	Input *DescribeDatasetInput
-	Copy  func(*DescribeDatasetInput) DescribeDatasetRequest
+	Input *types.DescribeDatasetInput
+	Copy  func(*types.DescribeDatasetInput) DescribeDatasetRequest
 }
 
 // Send marshals and sends the DescribeDataset API request.
@@ -124,7 +56,7 @@ func (r DescribeDatasetRequest) Send(ctx context.Context) (*DescribeDatasetRespo
 	}
 
 	resp := &DescribeDatasetResponse{
-		DescribeDatasetOutput: r.Request.Data.(*DescribeDatasetOutput),
+		DescribeDatasetOutput: r.Request.Data.(*types.DescribeDatasetOutput),
 		response:              &aws.Response{Request: r.Request},
 	}
 
@@ -134,7 +66,7 @@ func (r DescribeDatasetRequest) Send(ctx context.Context) (*DescribeDatasetRespo
 // DescribeDatasetResponse is the response type for the
 // DescribeDataset API operation.
 type DescribeDatasetResponse struct {
-	*DescribeDatasetOutput
+	*types.DescribeDatasetOutput
 
 	response *aws.Response
 }

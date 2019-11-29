@@ -6,47 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
+	"github.com/aws/aws-sdk-go-v2/service/macie/types"
 )
-
-type DisassociateMemberAccountInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the member account that you want to remove from Amazon Macie.
-	//
-	// MemberAccountId is a required field
-	MemberAccountId *string `locationName:"memberAccountId" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DisassociateMemberAccountInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DisassociateMemberAccountInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DisassociateMemberAccountInput"}
-
-	if s.MemberAccountId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("MemberAccountId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DisassociateMemberAccountOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DisassociateMemberAccountOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDisassociateMemberAccount = "DisassociateMemberAccount"
 
@@ -63,7 +26,7 @@ const opDisassociateMemberAccount = "DisassociateMemberAccount"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/macie-2017-12-19/DisassociateMemberAccount
-func (c *Client) DisassociateMemberAccountRequest(input *DisassociateMemberAccountInput) DisassociateMemberAccountRequest {
+func (c *Client) DisassociateMemberAccountRequest(input *types.DisassociateMemberAccountInput) DisassociateMemberAccountRequest {
 	op := &aws.Operation{
 		Name:       opDisassociateMemberAccount,
 		HTTPMethod: "POST",
@@ -71,10 +34,10 @@ func (c *Client) DisassociateMemberAccountRequest(input *DisassociateMemberAccou
 	}
 
 	if input == nil {
-		input = &DisassociateMemberAccountInput{}
+		input = &types.DisassociateMemberAccountInput{}
 	}
 
-	req := c.newRequest(op, input, &DisassociateMemberAccountOutput{})
+	req := c.newRequest(op, input, &types.DisassociateMemberAccountOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return DisassociateMemberAccountRequest{Request: req, Input: input, Copy: c.DisassociateMemberAccountRequest}
@@ -84,8 +47,8 @@ func (c *Client) DisassociateMemberAccountRequest(input *DisassociateMemberAccou
 // DisassociateMemberAccount API operation.
 type DisassociateMemberAccountRequest struct {
 	*aws.Request
-	Input *DisassociateMemberAccountInput
-	Copy  func(*DisassociateMemberAccountInput) DisassociateMemberAccountRequest
+	Input *types.DisassociateMemberAccountInput
+	Copy  func(*types.DisassociateMemberAccountInput) DisassociateMemberAccountRequest
 }
 
 // Send marshals and sends the DisassociateMemberAccount API request.
@@ -97,7 +60,7 @@ func (r DisassociateMemberAccountRequest) Send(ctx context.Context) (*Disassocia
 	}
 
 	resp := &DisassociateMemberAccountResponse{
-		DisassociateMemberAccountOutput: r.Request.Data.(*DisassociateMemberAccountOutput),
+		DisassociateMemberAccountOutput: r.Request.Data.(*types.DisassociateMemberAccountOutput),
 		response:                        &aws.Response{Request: r.Request},
 	}
 
@@ -107,7 +70,7 @@ func (r DisassociateMemberAccountRequest) Send(ctx context.Context) (*Disassocia
 // DisassociateMemberAccountResponse is the response type for the
 // DisassociateMemberAccount API operation.
 type DisassociateMemberAccountResponse struct {
-	*DisassociateMemberAccountOutput
+	*types.DisassociateMemberAccountOutput
 
 	response *aws.Response
 }

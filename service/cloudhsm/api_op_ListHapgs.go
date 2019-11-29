@@ -6,39 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/cloudhsm/types"
 )
-
-type ListHapgsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The NextToken value from a previous call to ListHapgs. Pass null if this
-	// is the first call.
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s ListHapgsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type ListHapgsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The list of high-availability partition groups.
-	//
-	// HapgList is a required field
-	HapgList []string `type:"list" required:"true"`
-
-	// If not null, more results are available. Pass this value to ListHapgs to
-	// retrieve the next set of items.
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s ListHapgsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListHapgs = "ListHapgs"
 
@@ -69,7 +38,7 @@ const opListHapgs = "ListHapgs"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/ListHapgs
-func (c *Client) ListHapgsRequest(input *ListHapgsInput) ListHapgsRequest {
+func (c *Client) ListHapgsRequest(input *types.ListHapgsInput) ListHapgsRequest {
 	op := &aws.Operation{
 		Name:       opListHapgs,
 		HTTPMethod: "POST",
@@ -77,10 +46,10 @@ func (c *Client) ListHapgsRequest(input *ListHapgsInput) ListHapgsRequest {
 	}
 
 	if input == nil {
-		input = &ListHapgsInput{}
+		input = &types.ListHapgsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListHapgsOutput{})
+	req := c.newRequest(op, input, &types.ListHapgsOutput{})
 	return ListHapgsRequest{Request: req, Input: input, Copy: c.ListHapgsRequest}
 }
 
@@ -88,8 +57,8 @@ func (c *Client) ListHapgsRequest(input *ListHapgsInput) ListHapgsRequest {
 // ListHapgs API operation.
 type ListHapgsRequest struct {
 	*aws.Request
-	Input *ListHapgsInput
-	Copy  func(*ListHapgsInput) ListHapgsRequest
+	Input *types.ListHapgsInput
+	Copy  func(*types.ListHapgsInput) ListHapgsRequest
 }
 
 // Send marshals and sends the ListHapgs API request.
@@ -101,7 +70,7 @@ func (r ListHapgsRequest) Send(ctx context.Context) (*ListHapgsResponse, error) 
 	}
 
 	resp := &ListHapgsResponse{
-		ListHapgsOutput: r.Request.Data.(*ListHapgsOutput),
+		ListHapgsOutput: r.Request.Data.(*types.ListHapgsOutput),
 		response:        &aws.Response{Request: r.Request},
 	}
 
@@ -111,7 +80,7 @@ func (r ListHapgsRequest) Send(ctx context.Context) (*ListHapgsResponse, error) 
 // ListHapgsResponse is the response type for the
 // ListHapgs API operation.
 type ListHapgsResponse struct {
-	*ListHapgsOutput
+	*types.ListHapgsOutput
 
 	response *aws.Response
 }

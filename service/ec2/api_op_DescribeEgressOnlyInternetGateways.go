@@ -6,62 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-type DescribeEgressOnlyInternetGatewaysInput struct {
-	_ struct{} `type:"structure"`
-
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have
-	// the required permissions, the error response is DryRunOperation. Otherwise,
-	// it is UnauthorizedOperation.
-	DryRun *bool `type:"boolean"`
-
-	// One or more egress-only internet gateway IDs.
-	EgressOnlyInternetGatewayIds []string `locationName:"EgressOnlyInternetGatewayId" locationNameList:"item" type:"list"`
-
-	// The maximum number of results to return with a single call. To retrieve the
-	// remaining results, make another call with the returned nextToken value.
-	MaxResults *int64 `min:"5" type:"integer"`
-
-	// The token for the next page of results.
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeEgressOnlyInternetGatewaysInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeEgressOnlyInternetGatewaysInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeEgressOnlyInternetGatewaysInput"}
-	if s.MaxResults != nil && *s.MaxResults < 5 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 5))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribeEgressOnlyInternetGatewaysOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Information about the egress-only internet gateways.
-	EgressOnlyInternetGateways []EgressOnlyInternetGateway `locationName:"egressOnlyInternetGatewaySet" locationNameList:"item" type:"list"`
-
-	// The token to use to retrieve the next page of results. This value is null
-	// when there are no more results to return.
-	NextToken *string `locationName:"nextToken" type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeEgressOnlyInternetGatewaysOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeEgressOnlyInternetGateways = "DescribeEgressOnlyInternetGateways"
 
@@ -78,7 +24,7 @@ const opDescribeEgressOnlyInternetGateways = "DescribeEgressOnlyInternetGateways
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeEgressOnlyInternetGateways
-func (c *Client) DescribeEgressOnlyInternetGatewaysRequest(input *DescribeEgressOnlyInternetGatewaysInput) DescribeEgressOnlyInternetGatewaysRequest {
+func (c *Client) DescribeEgressOnlyInternetGatewaysRequest(input *types.DescribeEgressOnlyInternetGatewaysInput) DescribeEgressOnlyInternetGatewaysRequest {
 	op := &aws.Operation{
 		Name:       opDescribeEgressOnlyInternetGateways,
 		HTTPMethod: "POST",
@@ -92,10 +38,10 @@ func (c *Client) DescribeEgressOnlyInternetGatewaysRequest(input *DescribeEgress
 	}
 
 	if input == nil {
-		input = &DescribeEgressOnlyInternetGatewaysInput{}
+		input = &types.DescribeEgressOnlyInternetGatewaysInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeEgressOnlyInternetGatewaysOutput{})
+	req := c.newRequest(op, input, &types.DescribeEgressOnlyInternetGatewaysOutput{})
 	return DescribeEgressOnlyInternetGatewaysRequest{Request: req, Input: input, Copy: c.DescribeEgressOnlyInternetGatewaysRequest}
 }
 
@@ -103,8 +49,8 @@ func (c *Client) DescribeEgressOnlyInternetGatewaysRequest(input *DescribeEgress
 // DescribeEgressOnlyInternetGateways API operation.
 type DescribeEgressOnlyInternetGatewaysRequest struct {
 	*aws.Request
-	Input *DescribeEgressOnlyInternetGatewaysInput
-	Copy  func(*DescribeEgressOnlyInternetGatewaysInput) DescribeEgressOnlyInternetGatewaysRequest
+	Input *types.DescribeEgressOnlyInternetGatewaysInput
+	Copy  func(*types.DescribeEgressOnlyInternetGatewaysInput) DescribeEgressOnlyInternetGatewaysRequest
 }
 
 // Send marshals and sends the DescribeEgressOnlyInternetGateways API request.
@@ -116,7 +62,7 @@ func (r DescribeEgressOnlyInternetGatewaysRequest) Send(ctx context.Context) (*D
 	}
 
 	resp := &DescribeEgressOnlyInternetGatewaysResponse{
-		DescribeEgressOnlyInternetGatewaysOutput: r.Request.Data.(*DescribeEgressOnlyInternetGatewaysOutput),
+		DescribeEgressOnlyInternetGatewaysOutput: r.Request.Data.(*types.DescribeEgressOnlyInternetGatewaysOutput),
 		response:                                 &aws.Response{Request: r.Request},
 	}
 
@@ -146,7 +92,7 @@ func NewDescribeEgressOnlyInternetGatewaysPaginator(req DescribeEgressOnlyIntern
 	return DescribeEgressOnlyInternetGatewaysPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *DescribeEgressOnlyInternetGatewaysInput
+				var inCpy *types.DescribeEgressOnlyInternetGatewaysInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -166,14 +112,14 @@ type DescribeEgressOnlyInternetGatewaysPaginator struct {
 	aws.Pager
 }
 
-func (p *DescribeEgressOnlyInternetGatewaysPaginator) CurrentPage() *DescribeEgressOnlyInternetGatewaysOutput {
-	return p.Pager.CurrentPage().(*DescribeEgressOnlyInternetGatewaysOutput)
+func (p *DescribeEgressOnlyInternetGatewaysPaginator) CurrentPage() *types.DescribeEgressOnlyInternetGatewaysOutput {
+	return p.Pager.CurrentPage().(*types.DescribeEgressOnlyInternetGatewaysOutput)
 }
 
 // DescribeEgressOnlyInternetGatewaysResponse is the response type for the
 // DescribeEgressOnlyInternetGateways API operation.
 type DescribeEgressOnlyInternetGatewaysResponse struct {
-	*DescribeEgressOnlyInternetGatewaysOutput
+	*types.DescribeEgressOnlyInternetGatewaysOutput
 
 	response *aws.Response
 }

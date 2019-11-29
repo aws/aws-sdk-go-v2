@@ -6,72 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ecr/types"
 )
-
-type PutImageInput struct {
-	_ struct{} `type:"structure"`
-
-	// The image manifest corresponding to the image to be uploaded.
-	//
-	// ImageManifest is a required field
-	ImageManifest *string `locationName:"imageManifest" type:"string" required:"true"`
-
-	// The tag to associate with the image. This parameter is required for images
-	// that use the Docker Image Manifest V2 Schema 2 or OCI formats.
-	ImageTag *string `locationName:"imageTag" min:"1" type:"string"`
-
-	// The AWS account ID associated with the registry that contains the repository
-	// in which to put the image. If you do not specify a registry, the default
-	// registry is assumed.
-	RegistryId *string `locationName:"registryId" type:"string"`
-
-	// The name of the repository in which to put the image.
-	//
-	// RepositoryName is a required field
-	RepositoryName *string `locationName:"repositoryName" min:"2" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s PutImageInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *PutImageInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "PutImageInput"}
-
-	if s.ImageManifest == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ImageManifest"))
-	}
-	if s.ImageTag != nil && len(*s.ImageTag) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ImageTag", 1))
-	}
-
-	if s.RepositoryName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("RepositoryName"))
-	}
-	if s.RepositoryName != nil && len(*s.RepositoryName) < 2 {
-		invalidParams.Add(aws.NewErrParamMinLen("RepositoryName", 2))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type PutImageOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Details of the image uploaded.
-	Image *Image `locationName:"image" type:"structure"`
-}
-
-// String returns the string representation
-func (s PutImageOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opPutImage = "PutImage"
 
@@ -92,7 +28,7 @@ const opPutImage = "PutImage"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/PutImage
-func (c *Client) PutImageRequest(input *PutImageInput) PutImageRequest {
+func (c *Client) PutImageRequest(input *types.PutImageInput) PutImageRequest {
 	op := &aws.Operation{
 		Name:       opPutImage,
 		HTTPMethod: "POST",
@@ -100,10 +36,10 @@ func (c *Client) PutImageRequest(input *PutImageInput) PutImageRequest {
 	}
 
 	if input == nil {
-		input = &PutImageInput{}
+		input = &types.PutImageInput{}
 	}
 
-	req := c.newRequest(op, input, &PutImageOutput{})
+	req := c.newRequest(op, input, &types.PutImageOutput{})
 	return PutImageRequest{Request: req, Input: input, Copy: c.PutImageRequest}
 }
 
@@ -111,8 +47,8 @@ func (c *Client) PutImageRequest(input *PutImageInput) PutImageRequest {
 // PutImage API operation.
 type PutImageRequest struct {
 	*aws.Request
-	Input *PutImageInput
-	Copy  func(*PutImageInput) PutImageRequest
+	Input *types.PutImageInput
+	Copy  func(*types.PutImageInput) PutImageRequest
 }
 
 // Send marshals and sends the PutImage API request.
@@ -124,7 +60,7 @@ func (r PutImageRequest) Send(ctx context.Context) (*PutImageResponse, error) {
 	}
 
 	resp := &PutImageResponse{
-		PutImageOutput: r.Request.Data.(*PutImageOutput),
+		PutImageOutput: r.Request.Data.(*types.PutImageOutput),
 		response:       &aws.Response{Request: r.Request},
 	}
 
@@ -134,7 +70,7 @@ func (r PutImageRequest) Send(ctx context.Context) (*PutImageResponse, error) {
 // PutImageResponse is the response type for the
 // PutImage API operation.
 type PutImageResponse struct {
-	*PutImageOutput
+	*types.PutImageOutput
 
 	response *aws.Response
 }

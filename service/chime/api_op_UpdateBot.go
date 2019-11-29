@@ -6,97 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/chime/types"
 )
-
-type UpdateBotInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Chime account ID.
-	//
-	// AccountId is a required field
-	AccountId *string `location:"uri" locationName:"accountId" type:"string" required:"true"`
-
-	// The bot ID.
-	//
-	// BotId is a required field
-	BotId *string `location:"uri" locationName:"botId" type:"string" required:"true"`
-
-	// When true, stops the specified bot from running in your account.
-	Disabled *bool `type:"boolean"`
-}
-
-// String returns the string representation
-func (s UpdateBotInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateBotInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateBotInput"}
-
-	if s.AccountId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("AccountId"))
-	}
-
-	if s.BotId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("BotId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s UpdateBotInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.Disabled != nil {
-		v := *s.Disabled
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "Disabled", protocol.BoolValue(v), metadata)
-	}
-	if s.AccountId != nil {
-		v := *s.AccountId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "accountId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.BotId != nil {
-		v := *s.BotId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "botId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type UpdateBotOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The updated bot details.
-	Bot *Bot `type:"structure"`
-}
-
-// String returns the string representation
-func (s UpdateBotOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s UpdateBotOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.Bot != nil {
-		v := s.Bot
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "Bot", v, metadata)
-	}
-	return nil
-}
 
 const opUpdateBot = "UpdateBot"
 
@@ -114,7 +25,7 @@ const opUpdateBot = "UpdateBot"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/UpdateBot
-func (c *Client) UpdateBotRequest(input *UpdateBotInput) UpdateBotRequest {
+func (c *Client) UpdateBotRequest(input *types.UpdateBotInput) UpdateBotRequest {
 	op := &aws.Operation{
 		Name:       opUpdateBot,
 		HTTPMethod: "POST",
@@ -122,10 +33,10 @@ func (c *Client) UpdateBotRequest(input *UpdateBotInput) UpdateBotRequest {
 	}
 
 	if input == nil {
-		input = &UpdateBotInput{}
+		input = &types.UpdateBotInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateBotOutput{})
+	req := c.newRequest(op, input, &types.UpdateBotOutput{})
 	return UpdateBotRequest{Request: req, Input: input, Copy: c.UpdateBotRequest}
 }
 
@@ -133,8 +44,8 @@ func (c *Client) UpdateBotRequest(input *UpdateBotInput) UpdateBotRequest {
 // UpdateBot API operation.
 type UpdateBotRequest struct {
 	*aws.Request
-	Input *UpdateBotInput
-	Copy  func(*UpdateBotInput) UpdateBotRequest
+	Input *types.UpdateBotInput
+	Copy  func(*types.UpdateBotInput) UpdateBotRequest
 }
 
 // Send marshals and sends the UpdateBot API request.
@@ -146,7 +57,7 @@ func (r UpdateBotRequest) Send(ctx context.Context) (*UpdateBotResponse, error) 
 	}
 
 	resp := &UpdateBotResponse{
-		UpdateBotOutput: r.Request.Data.(*UpdateBotOutput),
+		UpdateBotOutput: r.Request.Data.(*types.UpdateBotOutput),
 		response:        &aws.Response{Request: r.Request},
 	}
 
@@ -156,7 +67,7 @@ func (r UpdateBotRequest) Send(ctx context.Context) (*UpdateBotResponse, error) 
 // UpdateBotResponse is the response type for the
 // UpdateBot API operation.
 type UpdateBotResponse struct {
-	*UpdateBotOutput
+	*types.UpdateBotOutput
 
 	response *aws.Response
 }

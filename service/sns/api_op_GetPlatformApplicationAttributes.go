@@ -6,63 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/sns/types"
 )
-
-// Input for GetPlatformApplicationAttributes action.
-type GetPlatformApplicationAttributesInput struct {
-	_ struct{} `type:"structure"`
-
-	// PlatformApplicationArn for GetPlatformApplicationAttributesInput.
-	//
-	// PlatformApplicationArn is a required field
-	PlatformApplicationArn *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetPlatformApplicationAttributesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetPlatformApplicationAttributesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetPlatformApplicationAttributesInput"}
-
-	if s.PlatformApplicationArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("PlatformApplicationArn"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Response for GetPlatformApplicationAttributes action.
-type GetPlatformApplicationAttributesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Attributes include the following:
-	//
-	//    * EventEndpointCreated – Topic ARN to which EndpointCreated event notifications
-	//    should be sent.
-	//
-	//    * EventEndpointDeleted – Topic ARN to which EndpointDeleted event notifications
-	//    should be sent.
-	//
-	//    * EventEndpointUpdated – Topic ARN to which EndpointUpdate event notifications
-	//    should be sent.
-	//
-	//    * EventDeliveryFailure – Topic ARN to which DeliveryFailure event notifications
-	//    should be sent upon Direct Publish delivery failure (permanent) to one
-	//    of the application's endpoints.
-	Attributes map[string]string `type:"map"`
-}
-
-// String returns the string representation
-func (s GetPlatformApplicationAttributesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetPlatformApplicationAttributes = "GetPlatformApplicationAttributes"
 
@@ -81,7 +26,7 @@ const opGetPlatformApplicationAttributes = "GetPlatformApplicationAttributes"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/GetPlatformApplicationAttributes
-func (c *Client) GetPlatformApplicationAttributesRequest(input *GetPlatformApplicationAttributesInput) GetPlatformApplicationAttributesRequest {
+func (c *Client) GetPlatformApplicationAttributesRequest(input *types.GetPlatformApplicationAttributesInput) GetPlatformApplicationAttributesRequest {
 	op := &aws.Operation{
 		Name:       opGetPlatformApplicationAttributes,
 		HTTPMethod: "POST",
@@ -89,10 +34,10 @@ func (c *Client) GetPlatformApplicationAttributesRequest(input *GetPlatformAppli
 	}
 
 	if input == nil {
-		input = &GetPlatformApplicationAttributesInput{}
+		input = &types.GetPlatformApplicationAttributesInput{}
 	}
 
-	req := c.newRequest(op, input, &GetPlatformApplicationAttributesOutput{})
+	req := c.newRequest(op, input, &types.GetPlatformApplicationAttributesOutput{})
 	return GetPlatformApplicationAttributesRequest{Request: req, Input: input, Copy: c.GetPlatformApplicationAttributesRequest}
 }
 
@@ -100,8 +45,8 @@ func (c *Client) GetPlatformApplicationAttributesRequest(input *GetPlatformAppli
 // GetPlatformApplicationAttributes API operation.
 type GetPlatformApplicationAttributesRequest struct {
 	*aws.Request
-	Input *GetPlatformApplicationAttributesInput
-	Copy  func(*GetPlatformApplicationAttributesInput) GetPlatformApplicationAttributesRequest
+	Input *types.GetPlatformApplicationAttributesInput
+	Copy  func(*types.GetPlatformApplicationAttributesInput) GetPlatformApplicationAttributesRequest
 }
 
 // Send marshals and sends the GetPlatformApplicationAttributes API request.
@@ -113,7 +58,7 @@ func (r GetPlatformApplicationAttributesRequest) Send(ctx context.Context) (*Get
 	}
 
 	resp := &GetPlatformApplicationAttributesResponse{
-		GetPlatformApplicationAttributesOutput: r.Request.Data.(*GetPlatformApplicationAttributesOutput),
+		GetPlatformApplicationAttributesOutput: r.Request.Data.(*types.GetPlatformApplicationAttributesOutput),
 		response:                               &aws.Response{Request: r.Request},
 	}
 
@@ -123,7 +68,7 @@ func (r GetPlatformApplicationAttributesRequest) Send(ctx context.Context) (*Get
 // GetPlatformApplicationAttributesResponse is the response type for the
 // GetPlatformApplicationAttributes API operation.
 type GetPlatformApplicationAttributesResponse struct {
-	*GetPlatformApplicationAttributesOutput
+	*types.GetPlatformApplicationAttributesOutput
 
 	response *aws.Response
 }

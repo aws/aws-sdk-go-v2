@@ -6,69 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/budgets/types"
 )
-
-// Request of DescribeBudgets
-type DescribeBudgetsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The accountId that is associated with the budgets that you want descriptions
-	// of.
-	//
-	// AccountId is a required field
-	AccountId *string `min:"12" type:"string" required:"true"`
-
-	// An optional integer that represents how many entries a paginated response
-	// contains. The maximum is 100.
-	MaxResults *int64 `min:"1" type:"integer"`
-
-	// The pagination token that you include in your request to indicate the next
-	// set of results that you want to retrieve.
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeBudgetsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeBudgetsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeBudgetsInput"}
-
-	if s.AccountId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("AccountId"))
-	}
-	if s.AccountId != nil && len(*s.AccountId) < 12 {
-		invalidParams.Add(aws.NewErrParamMinLen("AccountId", 12))
-	}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Response of DescribeBudgets
-type DescribeBudgetsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A list of budgets.
-	Budgets []Budget `type:"list"`
-
-	// The pagination token in the service response that indicates the next set
-	// of results that you can retrieve.
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeBudgetsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeBudgets = "DescribeBudgets"
 
@@ -87,7 +26,7 @@ const opDescribeBudgets = "DescribeBudgets"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) DescribeBudgetsRequest(input *DescribeBudgetsInput) DescribeBudgetsRequest {
+func (c *Client) DescribeBudgetsRequest(input *types.DescribeBudgetsInput) DescribeBudgetsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeBudgets,
 		HTTPMethod: "POST",
@@ -95,10 +34,10 @@ func (c *Client) DescribeBudgetsRequest(input *DescribeBudgetsInput) DescribeBud
 	}
 
 	if input == nil {
-		input = &DescribeBudgetsInput{}
+		input = &types.DescribeBudgetsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeBudgetsOutput{})
+	req := c.newRequest(op, input, &types.DescribeBudgetsOutput{})
 	return DescribeBudgetsRequest{Request: req, Input: input, Copy: c.DescribeBudgetsRequest}
 }
 
@@ -106,8 +45,8 @@ func (c *Client) DescribeBudgetsRequest(input *DescribeBudgetsInput) DescribeBud
 // DescribeBudgets API operation.
 type DescribeBudgetsRequest struct {
 	*aws.Request
-	Input *DescribeBudgetsInput
-	Copy  func(*DescribeBudgetsInput) DescribeBudgetsRequest
+	Input *types.DescribeBudgetsInput
+	Copy  func(*types.DescribeBudgetsInput) DescribeBudgetsRequest
 }
 
 // Send marshals and sends the DescribeBudgets API request.
@@ -119,7 +58,7 @@ func (r DescribeBudgetsRequest) Send(ctx context.Context) (*DescribeBudgetsRespo
 	}
 
 	resp := &DescribeBudgetsResponse{
-		DescribeBudgetsOutput: r.Request.Data.(*DescribeBudgetsOutput),
+		DescribeBudgetsOutput: r.Request.Data.(*types.DescribeBudgetsOutput),
 		response:              &aws.Response{Request: r.Request},
 	}
 
@@ -129,7 +68,7 @@ func (r DescribeBudgetsRequest) Send(ctx context.Context) (*DescribeBudgetsRespo
 // DescribeBudgetsResponse is the response type for the
 // DescribeBudgets API operation.
 type DescribeBudgetsResponse struct {
-	*DescribeBudgetsOutput
+	*types.DescribeBudgetsOutput
 
 	response *aws.Response
 }

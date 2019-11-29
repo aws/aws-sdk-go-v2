@@ -6,55 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/query"
+	"github.com/aws/aws-sdk-go-v2/service/autoscaling/types"
 )
-
-type DeleteAutoScalingGroupInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the Auto Scaling group.
-	//
-	// AutoScalingGroupName is a required field
-	AutoScalingGroupName *string `min:"1" type:"string" required:"true"`
-
-	// Specifies that the group is to be deleted along with all instances associated
-	// with the group, without waiting for all instances to be terminated. This
-	// parameter also deletes any lifecycle actions associated with the group.
-	ForceDelete *bool `type:"boolean"`
-}
-
-// String returns the string representation
-func (s DeleteAutoScalingGroupInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteAutoScalingGroupInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteAutoScalingGroupInput"}
-
-	if s.AutoScalingGroupName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("AutoScalingGroupName"))
-	}
-	if s.AutoScalingGroupName != nil && len(*s.AutoScalingGroupName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("AutoScalingGroupName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteAutoScalingGroupOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteAutoScalingGroupOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteAutoScalingGroup = "DeleteAutoScalingGroup"
 
@@ -86,7 +41,7 @@ const opDeleteAutoScalingGroup = "DeleteAutoScalingGroup"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DeleteAutoScalingGroup
-func (c *Client) DeleteAutoScalingGroupRequest(input *DeleteAutoScalingGroupInput) DeleteAutoScalingGroupRequest {
+func (c *Client) DeleteAutoScalingGroupRequest(input *types.DeleteAutoScalingGroupInput) DeleteAutoScalingGroupRequest {
 	op := &aws.Operation{
 		Name:       opDeleteAutoScalingGroup,
 		HTTPMethod: "POST",
@@ -94,10 +49,10 @@ func (c *Client) DeleteAutoScalingGroupRequest(input *DeleteAutoScalingGroupInpu
 	}
 
 	if input == nil {
-		input = &DeleteAutoScalingGroupInput{}
+		input = &types.DeleteAutoScalingGroupInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteAutoScalingGroupOutput{})
+	req := c.newRequest(op, input, &types.DeleteAutoScalingGroupOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return DeleteAutoScalingGroupRequest{Request: req, Input: input, Copy: c.DeleteAutoScalingGroupRequest}
@@ -107,8 +62,8 @@ func (c *Client) DeleteAutoScalingGroupRequest(input *DeleteAutoScalingGroupInpu
 // DeleteAutoScalingGroup API operation.
 type DeleteAutoScalingGroupRequest struct {
 	*aws.Request
-	Input *DeleteAutoScalingGroupInput
-	Copy  func(*DeleteAutoScalingGroupInput) DeleteAutoScalingGroupRequest
+	Input *types.DeleteAutoScalingGroupInput
+	Copy  func(*types.DeleteAutoScalingGroupInput) DeleteAutoScalingGroupRequest
 }
 
 // Send marshals and sends the DeleteAutoScalingGroup API request.
@@ -120,7 +75,7 @@ func (r DeleteAutoScalingGroupRequest) Send(ctx context.Context) (*DeleteAutoSca
 	}
 
 	resp := &DeleteAutoScalingGroupResponse{
-		DeleteAutoScalingGroupOutput: r.Request.Data.(*DeleteAutoScalingGroupOutput),
+		DeleteAutoScalingGroupOutput: r.Request.Data.(*types.DeleteAutoScalingGroupOutput),
 		response:                     &aws.Response{Request: r.Request},
 	}
 
@@ -130,7 +85,7 @@ func (r DeleteAutoScalingGroupRequest) Send(ctx context.Context) (*DeleteAutoSca
 // DeleteAutoScalingGroupResponse is the response type for the
 // DeleteAutoScalingGroup API operation.
 type DeleteAutoScalingGroupResponse struct {
-	*DeleteAutoScalingGroupOutput
+	*types.DeleteAutoScalingGroupOutput
 
 	response *aws.Response
 }

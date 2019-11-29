@@ -6,84 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/restjson"
+	"github.com/aws/aws-sdk-go-v2/service/backup/types"
 )
-
-type DeleteRecoveryPointInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of a logical container where backups are stored. Backup vaults are
-	// identified by names that are unique to the account used to create them and
-	// the AWS Region where they are created. They consist of lowercase letters,
-	// numbers, and hyphens.
-	//
-	// BackupVaultName is a required field
-	BackupVaultName *string `location:"uri" locationName:"backupVaultName" type:"string" required:"true"`
-
-	// An Amazon Resource Name (ARN) that uniquely identifies a recovery point;
-	// for example, arn:aws:backup:us-east-1:123456789012:recovery-point:1EB3B5E7-9EB0-435A-A80B-108B488B0D45.
-	//
-	// RecoveryPointArn is a required field
-	RecoveryPointArn *string `location:"uri" locationName:"recoveryPointArn" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteRecoveryPointInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteRecoveryPointInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteRecoveryPointInput"}
-
-	if s.BackupVaultName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("BackupVaultName"))
-	}
-
-	if s.RecoveryPointArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("RecoveryPointArn"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteRecoveryPointInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.BackupVaultName != nil {
-		v := *s.BackupVaultName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "backupVaultName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.RecoveryPointArn != nil {
-		v := *s.RecoveryPointArn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "recoveryPointArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type DeleteRecoveryPointOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteRecoveryPointOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteRecoveryPointOutput) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
 
 const opDeleteRecoveryPoint = "DeleteRecoveryPoint"
 
@@ -100,7 +26,7 @@ const opDeleteRecoveryPoint = "DeleteRecoveryPoint"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/DeleteRecoveryPoint
-func (c *Client) DeleteRecoveryPointRequest(input *DeleteRecoveryPointInput) DeleteRecoveryPointRequest {
+func (c *Client) DeleteRecoveryPointRequest(input *types.DeleteRecoveryPointInput) DeleteRecoveryPointRequest {
 	op := &aws.Operation{
 		Name:       opDeleteRecoveryPoint,
 		HTTPMethod: "DELETE",
@@ -108,10 +34,10 @@ func (c *Client) DeleteRecoveryPointRequest(input *DeleteRecoveryPointInput) Del
 	}
 
 	if input == nil {
-		input = &DeleteRecoveryPointInput{}
+		input = &types.DeleteRecoveryPointInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteRecoveryPointOutput{})
+	req := c.newRequest(op, input, &types.DeleteRecoveryPointOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return DeleteRecoveryPointRequest{Request: req, Input: input, Copy: c.DeleteRecoveryPointRequest}
@@ -121,8 +47,8 @@ func (c *Client) DeleteRecoveryPointRequest(input *DeleteRecoveryPointInput) Del
 // DeleteRecoveryPoint API operation.
 type DeleteRecoveryPointRequest struct {
 	*aws.Request
-	Input *DeleteRecoveryPointInput
-	Copy  func(*DeleteRecoveryPointInput) DeleteRecoveryPointRequest
+	Input *types.DeleteRecoveryPointInput
+	Copy  func(*types.DeleteRecoveryPointInput) DeleteRecoveryPointRequest
 }
 
 // Send marshals and sends the DeleteRecoveryPoint API request.
@@ -134,7 +60,7 @@ func (r DeleteRecoveryPointRequest) Send(ctx context.Context) (*DeleteRecoveryPo
 	}
 
 	resp := &DeleteRecoveryPointResponse{
-		DeleteRecoveryPointOutput: r.Request.Data.(*DeleteRecoveryPointOutput),
+		DeleteRecoveryPointOutput: r.Request.Data.(*types.DeleteRecoveryPointOutput),
 		response:                  &aws.Response{Request: r.Request},
 	}
 
@@ -144,7 +70,7 @@ func (r DeleteRecoveryPointRequest) Send(ctx context.Context) (*DeleteRecoveryPo
 // DeleteRecoveryPointResponse is the response type for the
 // DeleteRecoveryPoint API operation.
 type DeleteRecoveryPointResponse struct {
-	*DeleteRecoveryPointOutput
+	*types.DeleteRecoveryPointOutput
 
 	response *aws.Response
 }

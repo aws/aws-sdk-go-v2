@@ -6,57 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/lightsail/types"
 )
-
-type CloseInstancePublicPortsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the instance on which you're attempting to close the public ports.
-	//
-	// InstanceName is a required field
-	InstanceName *string `locationName:"instanceName" type:"string" required:"true"`
-
-	// Information about the public port you are trying to close.
-	//
-	// PortInfo is a required field
-	PortInfo *PortInfo `locationName:"portInfo" type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s CloseInstancePublicPortsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CloseInstancePublicPortsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CloseInstancePublicPortsInput"}
-
-	if s.InstanceName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("InstanceName"))
-	}
-
-	if s.PortInfo == nil {
-		invalidParams.Add(aws.NewErrParamRequired("PortInfo"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type CloseInstancePublicPortsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// An array of key-value pairs that contains information about the operation.
-	Operation *Operation `locationName:"operation" type:"structure"`
-}
-
-// String returns the string representation
-func (s CloseInstancePublicPortsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCloseInstancePublicPorts = "CloseInstancePublicPorts"
 
@@ -77,7 +28,7 @@ const opCloseInstancePublicPorts = "CloseInstancePublicPorts"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/CloseInstancePublicPorts
-func (c *Client) CloseInstancePublicPortsRequest(input *CloseInstancePublicPortsInput) CloseInstancePublicPortsRequest {
+func (c *Client) CloseInstancePublicPortsRequest(input *types.CloseInstancePublicPortsInput) CloseInstancePublicPortsRequest {
 	op := &aws.Operation{
 		Name:       opCloseInstancePublicPorts,
 		HTTPMethod: "POST",
@@ -85,10 +36,10 @@ func (c *Client) CloseInstancePublicPortsRequest(input *CloseInstancePublicPorts
 	}
 
 	if input == nil {
-		input = &CloseInstancePublicPortsInput{}
+		input = &types.CloseInstancePublicPortsInput{}
 	}
 
-	req := c.newRequest(op, input, &CloseInstancePublicPortsOutput{})
+	req := c.newRequest(op, input, &types.CloseInstancePublicPortsOutput{})
 	return CloseInstancePublicPortsRequest{Request: req, Input: input, Copy: c.CloseInstancePublicPortsRequest}
 }
 
@@ -96,8 +47,8 @@ func (c *Client) CloseInstancePublicPortsRequest(input *CloseInstancePublicPorts
 // CloseInstancePublicPorts API operation.
 type CloseInstancePublicPortsRequest struct {
 	*aws.Request
-	Input *CloseInstancePublicPortsInput
-	Copy  func(*CloseInstancePublicPortsInput) CloseInstancePublicPortsRequest
+	Input *types.CloseInstancePublicPortsInput
+	Copy  func(*types.CloseInstancePublicPortsInput) CloseInstancePublicPortsRequest
 }
 
 // Send marshals and sends the CloseInstancePublicPorts API request.
@@ -109,7 +60,7 @@ func (r CloseInstancePublicPortsRequest) Send(ctx context.Context) (*CloseInstan
 	}
 
 	resp := &CloseInstancePublicPortsResponse{
-		CloseInstancePublicPortsOutput: r.Request.Data.(*CloseInstancePublicPortsOutput),
+		CloseInstancePublicPortsOutput: r.Request.Data.(*types.CloseInstancePublicPortsOutput),
 		response:                       &aws.Response{Request: r.Request},
 	}
 
@@ -119,7 +70,7 @@ func (r CloseInstancePublicPortsRequest) Send(ctx context.Context) (*CloseInstan
 // CloseInstancePublicPortsResponse is the response type for the
 // CloseInstancePublicPorts API operation.
 type CloseInstancePublicPortsResponse struct {
-	*CloseInstancePublicPortsOutput
+	*types.CloseInstancePublicPortsOutput
 
 	response *aws.Response
 }

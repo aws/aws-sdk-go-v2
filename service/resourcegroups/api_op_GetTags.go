@@ -6,92 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/resourcegroups/types"
 )
-
-type GetTagsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ARN of the resource group for which you want a list of tags. The resource
-	// must exist within the account you are using.
-	//
-	// Arn is a required field
-	Arn *string `location:"uri" locationName:"Arn" min:"12" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetTagsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetTagsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetTagsInput"}
-
-	if s.Arn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Arn"))
-	}
-	if s.Arn != nil && len(*s.Arn) < 12 {
-		invalidParams.Add(aws.NewErrParamMinLen("Arn", 12))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetTagsInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.Arn != nil {
-		v := *s.Arn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "Arn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type GetTagsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The ARN of the tagged resource group.
-	Arn *string `min:"12" type:"string"`
-
-	// The tags associated with the specified resource group.
-	Tags map[string]string `type:"map"`
-}
-
-// String returns the string representation
-func (s GetTagsOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetTagsOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.Arn != nil {
-		v := *s.Arn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "Arn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Tags != nil {
-		v := s.Tags
-
-		metadata := protocol.Metadata{}
-		ms0 := e.Map(protocol.BodyTarget, "Tags", metadata)
-		ms0.Start()
-		for k1, v1 := range v {
-			ms0.MapSetValue(k1, protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
-		}
-		ms0.End()
-
-	}
-	return nil
-}
 
 const opGetTags = "GetTags"
 
@@ -109,7 +25,7 @@ const opGetTags = "GetTags"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/resource-groups-2017-11-27/GetTags
-func (c *Client) GetTagsRequest(input *GetTagsInput) GetTagsRequest {
+func (c *Client) GetTagsRequest(input *types.GetTagsInput) GetTagsRequest {
 	op := &aws.Operation{
 		Name:       opGetTags,
 		HTTPMethod: "GET",
@@ -117,10 +33,10 @@ func (c *Client) GetTagsRequest(input *GetTagsInput) GetTagsRequest {
 	}
 
 	if input == nil {
-		input = &GetTagsInput{}
+		input = &types.GetTagsInput{}
 	}
 
-	req := c.newRequest(op, input, &GetTagsOutput{})
+	req := c.newRequest(op, input, &types.GetTagsOutput{})
 	return GetTagsRequest{Request: req, Input: input, Copy: c.GetTagsRequest}
 }
 
@@ -128,8 +44,8 @@ func (c *Client) GetTagsRequest(input *GetTagsInput) GetTagsRequest {
 // GetTags API operation.
 type GetTagsRequest struct {
 	*aws.Request
-	Input *GetTagsInput
-	Copy  func(*GetTagsInput) GetTagsRequest
+	Input *types.GetTagsInput
+	Copy  func(*types.GetTagsInput) GetTagsRequest
 }
 
 // Send marshals and sends the GetTags API request.
@@ -141,7 +57,7 @@ func (r GetTagsRequest) Send(ctx context.Context) (*GetTagsResponse, error) {
 	}
 
 	resp := &GetTagsResponse{
-		GetTagsOutput: r.Request.Data.(*GetTagsOutput),
+		GetTagsOutput: r.Request.Data.(*types.GetTagsOutput),
 		response:      &aws.Response{Request: r.Request},
 	}
 
@@ -151,7 +67,7 @@ func (r GetTagsRequest) Send(ctx context.Context) (*GetTagsResponse, error) {
 // GetTagsResponse is the response type for the
 // GetTags API operation.
 type GetTagsResponse struct {
-	*GetTagsOutput
+	*types.GetTagsOutput
 
 	response *aws.Response
 }

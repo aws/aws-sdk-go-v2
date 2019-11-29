@@ -6,112 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/iot/types"
 )
-
-// The input for the ListPrincipalThings operation.
-type ListPrincipalThingsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The maximum number of results to return in this operation.
-	MaxResults *int64 `location:"querystring" locationName:"maxResults" min:"1" type:"integer"`
-
-	// The token to retrieve the next set of results.
-	NextToken *string `location:"querystring" locationName:"nextToken" type:"string"`
-
-	// The principal.
-	//
-	// Principal is a required field
-	Principal *string `location:"header" locationName:"x-amzn-principal" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s ListPrincipalThingsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListPrincipalThingsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListPrincipalThingsInput"}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-
-	if s.Principal == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Principal"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListPrincipalThingsInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.Principal != nil {
-		v := *s.Principal
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "x-amzn-principal", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.MaxResults != nil {
-		v := *s.MaxResults
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "maxResults", protocol.Int64Value(v), metadata)
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-// The output from the ListPrincipalThings operation.
-type ListPrincipalThingsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The token used to get the next set of results, or null if there are no additional
-	// results.
-	NextToken *string `locationName:"nextToken" type:"string"`
-
-	// The things.
-	Things []string `locationName:"things" type:"list"`
-}
-
-// String returns the string representation
-func (s ListPrincipalThingsOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListPrincipalThingsOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Things != nil {
-		v := s.Things
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "things", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
-		}
-		ls0.End()
-
-	}
-	return nil
-}
 
 const opListPrincipalThings = "ListPrincipalThings"
 
@@ -128,7 +24,7 @@ const opListPrincipalThings = "ListPrincipalThings"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) ListPrincipalThingsRequest(input *ListPrincipalThingsInput) ListPrincipalThingsRequest {
+func (c *Client) ListPrincipalThingsRequest(input *types.ListPrincipalThingsInput) ListPrincipalThingsRequest {
 	op := &aws.Operation{
 		Name:       opListPrincipalThings,
 		HTTPMethod: "GET",
@@ -136,10 +32,10 @@ func (c *Client) ListPrincipalThingsRequest(input *ListPrincipalThingsInput) Lis
 	}
 
 	if input == nil {
-		input = &ListPrincipalThingsInput{}
+		input = &types.ListPrincipalThingsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListPrincipalThingsOutput{})
+	req := c.newRequest(op, input, &types.ListPrincipalThingsOutput{})
 	return ListPrincipalThingsRequest{Request: req, Input: input, Copy: c.ListPrincipalThingsRequest}
 }
 
@@ -147,8 +43,8 @@ func (c *Client) ListPrincipalThingsRequest(input *ListPrincipalThingsInput) Lis
 // ListPrincipalThings API operation.
 type ListPrincipalThingsRequest struct {
 	*aws.Request
-	Input *ListPrincipalThingsInput
-	Copy  func(*ListPrincipalThingsInput) ListPrincipalThingsRequest
+	Input *types.ListPrincipalThingsInput
+	Copy  func(*types.ListPrincipalThingsInput) ListPrincipalThingsRequest
 }
 
 // Send marshals and sends the ListPrincipalThings API request.
@@ -160,7 +56,7 @@ func (r ListPrincipalThingsRequest) Send(ctx context.Context) (*ListPrincipalThi
 	}
 
 	resp := &ListPrincipalThingsResponse{
-		ListPrincipalThingsOutput: r.Request.Data.(*ListPrincipalThingsOutput),
+		ListPrincipalThingsOutput: r.Request.Data.(*types.ListPrincipalThingsOutput),
 		response:                  &aws.Response{Request: r.Request},
 	}
 
@@ -170,7 +66,7 @@ func (r ListPrincipalThingsRequest) Send(ctx context.Context) (*ListPrincipalThi
 // ListPrincipalThingsResponse is the response type for the
 // ListPrincipalThings API operation.
 type ListPrincipalThingsResponse struct {
-	*ListPrincipalThingsOutput
+	*types.ListPrincipalThingsOutput
 
 	response *aws.Response
 }

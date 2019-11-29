@@ -10,6 +10,7 @@ package iotdataplaneiface
 
 import (
 	"github.com/aws/aws-sdk-go-v2/service/iotdataplane"
+	"github.com/aws/aws-sdk-go-v2/service/iotdataplane/types"
 )
 
 // ClientAPI provides an interface to enable mocking the
@@ -43,7 +44,7 @@ import (
 //    type mockClientClient struct {
 //        iotdataplaneiface.ClientPI
 //    }
-//    func (m *mockClientClient) DeleteThingShadow(input *iotdataplane.DeleteThingShadowInput) (*iotdataplane.DeleteThingShadowOutput, error) {
+//    func (m *mockClientClient) DeleteThingShadow(input *types.DeleteThingShadowInput) (*types.DeleteThingShadowOutput, error) {
 //        // mock response/functionality
 //    }
 //
@@ -61,13 +62,13 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type ClientAPI interface {
-	DeleteThingShadowRequest(*iotdataplane.DeleteThingShadowInput) iotdataplane.DeleteThingShadowRequest
+	DeleteThingShadowRequest(*types.DeleteThingShadowInput) iotdataplane.DeleteThingShadowRequest
 
-	GetThingShadowRequest(*iotdataplane.GetThingShadowInput) iotdataplane.GetThingShadowRequest
+	GetThingShadowRequest(*types.GetThingShadowInput) iotdataplane.GetThingShadowRequest
 
-	PublishRequest(*iotdataplane.PublishInput) iotdataplane.PublishRequest
+	PublishRequest(*types.PublishInput) iotdataplane.PublishRequest
 
-	UpdateThingShadowRequest(*iotdataplane.UpdateThingShadowInput) iotdataplane.UpdateThingShadowRequest
+	UpdateThingShadowRequest(*types.UpdateThingShadowInput) iotdataplane.UpdateThingShadowRequest
 }
 
 var _ ClientAPI = (*iotdataplane.Client)(nil)

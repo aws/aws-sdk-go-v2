@@ -6,54 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/autoscaling/types"
 )
-
-type ExitStandbyInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the Auto Scaling group.
-	//
-	// AutoScalingGroupName is a required field
-	AutoScalingGroupName *string `min:"1" type:"string" required:"true"`
-
-	// The IDs of the instances. You can specify up to 20 instances.
-	InstanceIds []string `type:"list"`
-}
-
-// String returns the string representation
-func (s ExitStandbyInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ExitStandbyInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ExitStandbyInput"}
-
-	if s.AutoScalingGroupName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("AutoScalingGroupName"))
-	}
-	if s.AutoScalingGroupName != nil && len(*s.AutoScalingGroupName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("AutoScalingGroupName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ExitStandbyOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The activities related to moving instances out of Standby mode.
-	Activities []Activity `type:"list"`
-}
-
-// String returns the string representation
-func (s ExitStandbyOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opExitStandby = "ExitStandby"
 
@@ -61,6 +15,8 @@ const opExitStandby = "ExitStandby"
 // Auto Scaling.
 //
 // Moves the specified instances out of the standby state.
+//
+// After you put the instances back in service, the desired capacity is incremented.
 //
 // For more information, see Temporarily Removing Instances from Your Auto Scaling
 // Group (https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-enter-exit-standby.html)
@@ -74,7 +30,7 @@ const opExitStandby = "ExitStandby"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/ExitStandby
-func (c *Client) ExitStandbyRequest(input *ExitStandbyInput) ExitStandbyRequest {
+func (c *Client) ExitStandbyRequest(input *types.ExitStandbyInput) ExitStandbyRequest {
 	op := &aws.Operation{
 		Name:       opExitStandby,
 		HTTPMethod: "POST",
@@ -82,10 +38,10 @@ func (c *Client) ExitStandbyRequest(input *ExitStandbyInput) ExitStandbyRequest 
 	}
 
 	if input == nil {
-		input = &ExitStandbyInput{}
+		input = &types.ExitStandbyInput{}
 	}
 
-	req := c.newRequest(op, input, &ExitStandbyOutput{})
+	req := c.newRequest(op, input, &types.ExitStandbyOutput{})
 	return ExitStandbyRequest{Request: req, Input: input, Copy: c.ExitStandbyRequest}
 }
 
@@ -93,8 +49,8 @@ func (c *Client) ExitStandbyRequest(input *ExitStandbyInput) ExitStandbyRequest 
 // ExitStandby API operation.
 type ExitStandbyRequest struct {
 	*aws.Request
-	Input *ExitStandbyInput
-	Copy  func(*ExitStandbyInput) ExitStandbyRequest
+	Input *types.ExitStandbyInput
+	Copy  func(*types.ExitStandbyInput) ExitStandbyRequest
 }
 
 // Send marshals and sends the ExitStandby API request.
@@ -106,7 +62,7 @@ func (r ExitStandbyRequest) Send(ctx context.Context) (*ExitStandbyResponse, err
 	}
 
 	resp := &ExitStandbyResponse{
-		ExitStandbyOutput: r.Request.Data.(*ExitStandbyOutput),
+		ExitStandbyOutput: r.Request.Data.(*types.ExitStandbyOutput),
 		response:          &aws.Response{Request: r.Request},
 	}
 
@@ -116,7 +72,7 @@ func (r ExitStandbyRequest) Send(ctx context.Context) (*ExitStandbyResponse, err
 // ExitStandbyResponse is the response type for the
 // ExitStandby API operation.
 type ExitStandbyResponse struct {
-	*ExitStandbyOutput
+	*types.ExitStandbyOutput
 
 	response *aws.Response
 }

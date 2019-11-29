@@ -6,100 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/restjson"
+	"github.com/aws/aws-sdk-go-v2/service/glacier/types"
 )
-
-// The input value for RemoveTagsFromVaultInput.
-type RemoveTagsFromVaultInput struct {
-	_ struct{} `type:"structure"`
-
-	// The AccountId value is the AWS account ID of the account that owns the vault.
-	// You can either specify an AWS account ID or optionally a single '-' (hyphen),
-	// in which case Amazon S3 Glacier uses the AWS account ID associated with the
-	// credentials used to sign the request. If you use an account ID, do not include
-	// any hyphens ('-') in the ID.
-	//
-	// AccountId is a required field
-	AccountId *string `location:"uri" locationName:"accountId" type:"string" required:"true"`
-
-	// A list of tag keys. Each corresponding tag is removed from the vault.
-	TagKeys []string `type:"list"`
-
-	// The name of the vault.
-	//
-	// VaultName is a required field
-	VaultName *string `location:"uri" locationName:"vaultName" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s RemoveTagsFromVaultInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *RemoveTagsFromVaultInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "RemoveTagsFromVaultInput"}
-
-	if s.AccountId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("AccountId"))
-	}
-
-	if s.VaultName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("VaultName"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s RemoveTagsFromVaultInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.TagKeys != nil {
-		v := s.TagKeys
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "TagKeys", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
-		}
-		ls0.End()
-
-	}
-	if s.AccountId != nil {
-		v := *s.AccountId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "accountId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.VaultName != nil {
-		v := *s.VaultName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "vaultName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type RemoveTagsFromVaultOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s RemoveTagsFromVaultOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s RemoveTagsFromVaultOutput) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
 
 const opRemoveTagsFromVault = "RemoveTagsFromVault"
 
@@ -118,7 +28,7 @@ const opRemoveTagsFromVault = "RemoveTagsFromVault"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) RemoveTagsFromVaultRequest(input *RemoveTagsFromVaultInput) RemoveTagsFromVaultRequest {
+func (c *Client) RemoveTagsFromVaultRequest(input *types.RemoveTagsFromVaultInput) RemoveTagsFromVaultRequest {
 	op := &aws.Operation{
 		Name:       opRemoveTagsFromVault,
 		HTTPMethod: "POST",
@@ -126,10 +36,10 @@ func (c *Client) RemoveTagsFromVaultRequest(input *RemoveTagsFromVaultInput) Rem
 	}
 
 	if input == nil {
-		input = &RemoveTagsFromVaultInput{}
+		input = &types.RemoveTagsFromVaultInput{}
 	}
 
-	req := c.newRequest(op, input, &RemoveTagsFromVaultOutput{})
+	req := c.newRequest(op, input, &types.RemoveTagsFromVaultOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return RemoveTagsFromVaultRequest{Request: req, Input: input, Copy: c.RemoveTagsFromVaultRequest}
@@ -139,8 +49,8 @@ func (c *Client) RemoveTagsFromVaultRequest(input *RemoveTagsFromVaultInput) Rem
 // RemoveTagsFromVault API operation.
 type RemoveTagsFromVaultRequest struct {
 	*aws.Request
-	Input *RemoveTagsFromVaultInput
-	Copy  func(*RemoveTagsFromVaultInput) RemoveTagsFromVaultRequest
+	Input *types.RemoveTagsFromVaultInput
+	Copy  func(*types.RemoveTagsFromVaultInput) RemoveTagsFromVaultRequest
 }
 
 // Send marshals and sends the RemoveTagsFromVault API request.
@@ -152,7 +62,7 @@ func (r RemoveTagsFromVaultRequest) Send(ctx context.Context) (*RemoveTagsFromVa
 	}
 
 	resp := &RemoveTagsFromVaultResponse{
-		RemoveTagsFromVaultOutput: r.Request.Data.(*RemoveTagsFromVaultOutput),
+		RemoveTagsFromVaultOutput: r.Request.Data.(*types.RemoveTagsFromVaultOutput),
 		response:                  &aws.Response{Request: r.Request},
 	}
 
@@ -162,7 +72,7 @@ func (r RemoveTagsFromVaultRequest) Send(ctx context.Context) (*RemoveTagsFromVa
 // RemoveTagsFromVaultResponse is the response type for the
 // RemoveTagsFromVault API operation.
 type RemoveTagsFromVaultResponse struct {
-	*RemoveTagsFromVaultOutput
+	*types.RemoveTagsFromVaultOutput
 
 	response *aws.Response
 }

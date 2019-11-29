@@ -12,6 +12,8 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws/awserr"
 	"github.com/aws/aws-sdk-go-v2/aws/external"
 	"github.com/aws/aws-sdk-go-v2/service/elasticache"
+	"github.com/aws/aws-sdk-go-v2/service/elasticache/enums"
+	"github.com/aws/aws-sdk-go-v2/service/elasticache/types"
 )
 
 var _ time.Duration
@@ -36,9 +38,9 @@ func ExampleClient_AddTagsToResourceRequest_shared00() {
 	}
 
 	svc := elasticache.New(cfg)
-	input := &elasticache.AddTagsToResourceInput{
+	input := &types.AddTagsToResourceInput{
 		ResourceName: aws.String("arn:aws:elasticache:us-east-1:1234567890:cluster:my-mem-cluster"),
-		Tags: []elasticache.Tag{
+		Tags: []types.Tag{
 			{
 				Key:   aws.String("APIVersion"),
 				Value: aws.String("20150202"),
@@ -89,7 +91,7 @@ func ExampleClient_AuthorizeCacheSecurityGroupIngressRequest_shared00() {
 	}
 
 	svc := elasticache.New(cfg)
-	input := &elasticache.AuthorizeCacheSecurityGroupIngressInput{
+	input := &types.AuthorizeCacheSecurityGroupIngressInput{
 		CacheSecurityGroupName:  aws.String("my-sec-grp"),
 		EC2SecurityGroupName:    aws.String("my-ec2-sec-grp"),
 		EC2SecurityGroupOwnerId: aws.String("1234567890"),
@@ -134,7 +136,7 @@ func ExampleClient_CopySnapshotRequest_shared00() {
 	}
 
 	svc := elasticache.New(cfg)
-	input := &elasticache.CopySnapshotInput{
+	input := &types.CopySnapshotInput{
 		SourceSnapshotName: aws.String("my-snapshot"),
 		TargetBucket:       aws.String(""),
 		TargetSnapshotName: aws.String("my-snapshot-copy"),
@@ -181,8 +183,8 @@ func ExampleClient_CreateCacheClusterRequest_shared00() {
 	}
 
 	svc := elasticache.New(cfg)
-	input := &elasticache.CreateCacheClusterInput{
-		AZMode:               elasticache.AZModeCrossAz,
+	input := &types.CreateCacheClusterInput{
+		AZMode:               enums.AZModeCrossAz,
 		CacheClusterId:       aws.String("my-memcached-cluster"),
 		CacheNodeType:        aws.String("cache.r3.large"),
 		CacheSubnetGroupName: aws.String("default"),
@@ -249,7 +251,7 @@ func ExampleClient_CreateCacheClusterRequest_shared01() {
 	}
 
 	svc := elasticache.New(cfg)
-	input := &elasticache.CreateCacheClusterInput{
+	input := &types.CreateCacheClusterInput{
 		AutoMinorVersionUpgrade:   aws.Bool(true),
 		CacheClusterId:            aws.String("my-redis"),
 		CacheNodeType:             aws.String("cache.r3.larage"),
@@ -319,7 +321,7 @@ func ExampleClient_CreateCacheParameterGroupRequest_shared00() {
 	}
 
 	svc := elasticache.New(cfg)
-	input := &elasticache.CreateCacheParameterGroupInput{
+	input := &types.CreateCacheParameterGroupInput{
 		CacheParameterGroupFamily: aws.String("redis2.8"),
 		CacheParameterGroupName:   aws.String("custom-redis2-8"),
 		Description:               aws.String("Custom Redis 2.8 parameter group."),
@@ -365,7 +367,7 @@ func ExampleClient_CreateCacheSecurityGroupRequest_shared00() {
 	}
 
 	svc := elasticache.New(cfg)
-	input := &elasticache.CreateCacheSecurityGroupInput{
+	input := &types.CreateCacheSecurityGroupInput{
 		CacheSecurityGroupName: aws.String("my-cache-sec-grp"),
 		Description:            aws.String("Example ElastiCache security group."),
 	}
@@ -407,7 +409,7 @@ func ExampleClient_CreateCacheSubnetGroupRequest_shared00() {
 	}
 
 	svc := elasticache.New(cfg)
-	input := &elasticache.CreateCacheSubnetGroupInput{
+	input := &types.CreateCacheSubnetGroupInput{
 		CacheSubnetGroupDescription: aws.String("Sample subnet group"),
 		CacheSubnetGroupName:        aws.String("my-sn-grp2"),
 		SubnetIds: []string{
@@ -454,7 +456,7 @@ func ExampleClient_CreateReplicationGroupRequest_shared00() {
 	}
 
 	svc := elasticache.New(cfg)
-	input := &elasticache.CreateReplicationGroupInput{
+	input := &types.CreateReplicationGroupInput{
 		AutomaticFailoverEnabled:    aws.Bool(true),
 		CacheNodeType:               aws.String("cache.m3.medium"),
 		Engine:                      aws.String("redis"),
@@ -525,13 +527,13 @@ func ExampleClient_CreateReplicationGroupRequest_shared01() {
 	}
 
 	svc := elasticache.New(cfg)
-	input := &elasticache.CreateReplicationGroupInput{
+	input := &types.CreateReplicationGroupInput{
 		AutoMinorVersionUpgrade: aws.Bool(true),
 		CacheNodeType:           aws.String("cache.m3.medium"),
 		CacheParameterGroupName: aws.String("default.redis3.2.cluster.on"),
 		Engine:                  aws.String("redis"),
 		EngineVersion:           aws.String("3.2.4"),
-		NodeGroupConfiguration: []elasticache.NodeGroupConfiguration{
+		NodeGroupConfiguration: []types.NodeGroupConfiguration{
 			{
 				PrimaryAvailabilityZone: aws.String("us-east-1c"),
 				ReplicaAvailabilityZones: []string{
@@ -615,7 +617,7 @@ func ExampleClient_CreateSnapshotRequest_shared00() {
 	}
 
 	svc := elasticache.New(cfg)
-	input := &elasticache.CreateSnapshotInput{
+	input := &types.CreateSnapshotInput{
 		CacheClusterId: aws.String("onenoderedis"),
 		SnapshotName:   aws.String("snapshot-1"),
 	}
@@ -668,7 +670,7 @@ func ExampleClient_CreateSnapshotRequest_shared01() {
 	}
 
 	svc := elasticache.New(cfg)
-	input := &elasticache.CreateSnapshotInput{
+	input := &types.CreateSnapshotInput{
 		CacheClusterId: aws.String("threenoderedis-001"),
 		SnapshotName:   aws.String("snapshot-2"),
 	}
@@ -721,7 +723,7 @@ func ExampleClient_CreateSnapshotRequest_shared02() {
 	}
 
 	svc := elasticache.New(cfg)
-	input := &elasticache.CreateSnapshotInput{
+	input := &types.CreateSnapshotInput{
 		ReplicationGroupId: aws.String("clusteredredis"),
 		SnapshotName:       aws.String("snapshot-2x5"),
 	}
@@ -773,7 +775,7 @@ func ExampleClient_DeleteCacheClusterRequest_shared00() {
 	}
 
 	svc := elasticache.New(cfg)
-	input := &elasticache.DeleteCacheClusterInput{
+	input := &types.DeleteCacheClusterInput{
 		CacheClusterId: aws.String("my-memcached"),
 	}
 
@@ -820,7 +822,7 @@ func ExampleClient_DeleteCacheParameterGroupRequest_shared00() {
 	}
 
 	svc := elasticache.New(cfg)
-	input := &elasticache.DeleteCacheParameterGroupInput{
+	input := &types.DeleteCacheParameterGroupInput{
 		CacheParameterGroupName: aws.String("custom-mem1-4"),
 	}
 
@@ -861,7 +863,7 @@ func ExampleClient_DeleteCacheSecurityGroupRequest_shared00() {
 	}
 
 	svc := elasticache.New(cfg)
-	input := &elasticache.DeleteCacheSecurityGroupInput{
+	input := &types.DeleteCacheSecurityGroupInput{
 		CacheSecurityGroupName: aws.String("my-sec-group"),
 	}
 
@@ -902,7 +904,7 @@ func ExampleClient_DeleteCacheSubnetGroupRequest_shared00() {
 	}
 
 	svc := elasticache.New(cfg)
-	input := &elasticache.DeleteCacheSubnetGroupInput{
+	input := &types.DeleteCacheSubnetGroupInput{
 		CacheSubnetGroupName: aws.String("my-subnet-group"),
 	}
 
@@ -939,7 +941,7 @@ func ExampleClient_DeleteReplicationGroupRequest_shared00() {
 	}
 
 	svc := elasticache.New(cfg)
-	input := &elasticache.DeleteReplicationGroupInput{
+	input := &types.DeleteReplicationGroupInput{
 		ReplicationGroupId:   aws.String("my-redis-rg"),
 		RetainPrimaryCluster: aws.Bool(false),
 	}
@@ -987,7 +989,7 @@ func ExampleClient_DeleteSnapshotRequest_shared00() {
 	}
 
 	svc := elasticache.New(cfg)
-	input := &elasticache.DeleteSnapshotInput{
+	input := &types.DeleteSnapshotInput{
 		SnapshotName: aws.String("snapshot-20161212"),
 	}
 
@@ -1028,7 +1030,7 @@ func ExampleClient_DescribeCacheClustersRequest_shared00() {
 	}
 
 	svc := elasticache.New(cfg)
-	input := &elasticache.DescribeCacheClustersInput{
+	input := &types.DescribeCacheClustersInput{
 		CacheClusterId: aws.String("my-mem-cluster"),
 	}
 
@@ -1067,7 +1069,7 @@ func ExampleClient_DescribeCacheClustersRequest_shared01() {
 	}
 
 	svc := elasticache.New(cfg)
-	input := &elasticache.DescribeCacheClustersInput{
+	input := &types.DescribeCacheClustersInput{
 		CacheClusterId:    aws.String("my-mem-cluster"),
 		ShowCacheNodeInfo: aws.Bool(true),
 	}
@@ -1107,7 +1109,7 @@ func ExampleClient_DescribeCacheEngineVersionsRequest_shared00() {
 	}
 
 	svc := elasticache.New(cfg)
-	input := &elasticache.DescribeCacheEngineVersionsInput{}
+	input := &types.DescribeCacheEngineVersionsInput{}
 
 	req := svc.DescribeCacheEngineVersionsRequest(input)
 	result, err := req.Send(context.Background())
@@ -1138,7 +1140,7 @@ func ExampleClient_DescribeCacheEngineVersionsRequest_shared01() {
 	}
 
 	svc := elasticache.New(cfg)
-	input := &elasticache.DescribeCacheEngineVersionsInput{
+	input := &types.DescribeCacheEngineVersionsInput{
 		DefaultOnly: aws.Bool(false),
 		Engine:      aws.String("redis"),
 		MaxRecords:  aws.Int64(50),
@@ -1174,7 +1176,7 @@ func ExampleClient_DescribeCacheParameterGroupsRequest_shared00() {
 	}
 
 	svc := elasticache.New(cfg)
-	input := &elasticache.DescribeCacheParameterGroupsInput{
+	input := &types.DescribeCacheParameterGroupsInput{
 		CacheParameterGroupName: aws.String("custom-mem1-4"),
 	}
 
@@ -1213,7 +1215,7 @@ func ExampleClient_DescribeCacheParametersRequest_shared00() {
 	}
 
 	svc := elasticache.New(cfg)
-	input := &elasticache.DescribeCacheParametersInput{
+	input := &types.DescribeCacheParametersInput{
 		CacheParameterGroupName: aws.String("custom-redis2-8"),
 		MaxRecords:              aws.Int64(100),
 		Source:                  aws.String("user"),
@@ -1255,7 +1257,7 @@ func ExampleClient_DescribeCacheSecurityGroupsRequest_shared00() {
 	}
 
 	svc := elasticache.New(cfg)
-	input := &elasticache.DescribeCacheSecurityGroupsInput{
+	input := &types.DescribeCacheSecurityGroupsInput{
 		CacheSecurityGroupName: aws.String("my-sec-group"),
 	}
 
@@ -1294,7 +1296,7 @@ func ExampleClient_DescribeCacheSubnetGroupsRequest_shared00() {
 	}
 
 	svc := elasticache.New(cfg)
-	input := &elasticache.DescribeCacheSubnetGroupsInput{
+	input := &types.DescribeCacheSubnetGroupsInput{
 		MaxRecords: aws.Int64(25),
 	}
 
@@ -1330,7 +1332,7 @@ func ExampleClient_DescribeEngineDefaultParametersRequest_shared00() {
 	}
 
 	svc := elasticache.New(cfg)
-	input := &elasticache.DescribeEngineDefaultParametersInput{
+	input := &types.DescribeEngineDefaultParametersInput{
 		CacheParameterGroupFamily: aws.String("redis2.8"),
 		MaxRecords:                aws.Int64(25),
 	}
@@ -1368,9 +1370,9 @@ func ExampleClient_DescribeEventsRequest_shared00() {
 	}
 
 	svc := elasticache.New(cfg)
-	input := &elasticache.DescribeEventsInput{
+	input := &types.DescribeEventsInput{
 		Duration:   aws.Int64(360),
-		SourceType: elasticache.SourceTypeCacheCluster,
+		SourceType: enums.SourceTypeCacheCluster,
 	}
 
 	req := svc.DescribeEventsRequest(input)
@@ -1406,7 +1408,7 @@ func ExampleClient_DescribeEventsRequest_shared01() {
 	}
 
 	svc := elasticache.New(cfg)
-	input := &elasticache.DescribeEventsInput{
+	input := &types.DescribeEventsInput{
 		StartTime: parseTime("2006-01-02T15:04:05Z", "2016-12-22T15:00:00.000Z"),
 	}
 
@@ -1443,7 +1445,7 @@ func ExampleClient_DescribeReplicationGroupsRequest_shared00() {
 	}
 
 	svc := elasticache.New(cfg)
-	input := &elasticache.DescribeReplicationGroupsInput{}
+	input := &types.DescribeReplicationGroupsInput{}
 
 	req := svc.DescribeReplicationGroupsRequest(input)
 	result, err := req.Send(context.Background())
@@ -1482,7 +1484,7 @@ func ExampleClient_DescribeReservedCacheNodesRequest_shared00() {
 	}
 
 	svc := elasticache.New(cfg)
-	input := &elasticache.DescribeReservedCacheNodesInput{
+	input := &types.DescribeReservedCacheNodesInput{
 		MaxRecords: aws.Int64(25),
 	}
 
@@ -1521,7 +1523,7 @@ func ExampleClient_DescribeReservedCacheNodesOfferingsRequest_shared00() {
 	}
 
 	svc := elasticache.New(cfg)
-	input := &elasticache.DescribeReservedCacheNodesOfferingsInput{
+	input := &types.DescribeReservedCacheNodesOfferingsInput{
 		MaxRecords: aws.Int64(20),
 	}
 
@@ -1561,7 +1563,7 @@ func ExampleClient_DescribeReservedCacheNodesOfferingsRequest_shared01() {
 	}
 
 	svc := elasticache.New(cfg)
-	input := &elasticache.DescribeReservedCacheNodesOfferingsInput{
+	input := &types.DescribeReservedCacheNodesOfferingsInput{
 		CacheNodeType:                aws.String("cache.r3.large"),
 		Duration:                     aws.String("3"),
 		MaxRecords:                   aws.Int64(25),
@@ -1604,7 +1606,7 @@ func ExampleClient_DescribeReservedCacheNodesOfferingsRequest_shared02() {
 	}
 
 	svc := elasticache.New(cfg)
-	input := &elasticache.DescribeReservedCacheNodesOfferingsInput{
+	input := &types.DescribeReservedCacheNodesOfferingsInput{
 		CacheNodeType:                aws.String(""),
 		Duration:                     aws.String(""),
 		Marker:                       aws.String(""),
@@ -1649,7 +1651,7 @@ func ExampleClient_DescribeSnapshotsRequest_shared00() {
 	}
 
 	svc := elasticache.New(cfg)
-	input := &elasticache.DescribeSnapshotsInput{
+	input := &types.DescribeSnapshotsInput{
 		SnapshotName: aws.String("snapshot-20161212"),
 	}
 
@@ -1691,7 +1693,7 @@ func ExampleClient_ListAllowedNodeTypeModificationsRequest_shared00() {
 	}
 
 	svc := elasticache.New(cfg)
-	input := &elasticache.ListAllowedNodeTypeModificationsInput{
+	input := &types.ListAllowedNodeTypeModificationsInput{
 		ReplicationGroupId: aws.String("myreplgroup"),
 	}
 
@@ -1733,7 +1735,7 @@ func ExampleClient_ListAllowedNodeTypeModificationsRequest_shared01() {
 	}
 
 	svc := elasticache.New(cfg)
-	input := &elasticache.ListAllowedNodeTypeModificationsInput{
+	input := &types.ListAllowedNodeTypeModificationsInput{
 		CacheClusterId: aws.String("mycluster"),
 	}
 
@@ -1776,7 +1778,7 @@ func ExampleClient_ListTagsForResourceRequest_shared00() {
 	}
 
 	svc := elasticache.New(cfg)
-	input := &elasticache.ListTagsForResourceInput{
+	input := &types.ListTagsForResourceInput{
 		ResourceName: aws.String("arn:aws:elasticache:us-west-2:<my-account-id>:cluster:mycluster"),
 	}
 
@@ -1815,7 +1817,7 @@ func ExampleClient_ModifyCacheClusterRequest_shared00() {
 	}
 
 	svc := elasticache.New(cfg)
-	input := &elasticache.ModifyCacheClusterInput{
+	input := &types.ModifyCacheClusterInput{
 		ApplyImmediately:       aws.Bool(true),
 		CacheClusterId:         aws.String("redis-cluster"),
 		SnapshotRetentionLimit: aws.Int64(14),
@@ -1873,9 +1875,9 @@ func ExampleClient_ModifyCacheParameterGroupRequest_shared00() {
 	}
 
 	svc := elasticache.New(cfg)
-	input := &elasticache.ModifyCacheParameterGroupInput{
+	input := &types.ModifyCacheParameterGroupInput{
 		CacheParameterGroupName: aws.String("custom-mem1-4"),
-		ParameterNameValues: []elasticache.ParameterNameValue{
+		ParameterNameValues: []types.ParameterNameValue{
 			{
 				ParameterName:  aws.String("binding_protocol"),
 				ParameterValue: aws.String("ascii"),
@@ -1924,7 +1926,7 @@ func ExampleClient_ModifyCacheSubnetGroupRequest_shared00() {
 	}
 
 	svc := elasticache.New(cfg)
-	input := &elasticache.ModifyCacheSubnetGroupInput{
+	input := &types.ModifyCacheSubnetGroupInput{
 		CacheSubnetGroupName: aws.String("my-sn-grp"),
 		SubnetIds: []string{
 			"subnet-bcde2345",
@@ -1968,7 +1970,7 @@ func ExampleClient_ModifyReplicationGroupRequest_shared00() {
 	}
 
 	svc := elasticache.New(cfg)
-	input := &elasticache.ModifyReplicationGroupInput{
+	input := &types.ModifyReplicationGroupInput{
 		ApplyImmediately:            aws.Bool(true),
 		ReplicationGroupDescription: aws.String("Modified replication group"),
 		ReplicationGroupId:          aws.String("my-redis-rg"),
@@ -2033,7 +2035,7 @@ func ExampleClient_PurchaseReservedCacheNodesOfferingRequest_shared00() {
 	}
 
 	svc := elasticache.New(cfg)
-	input := &elasticache.PurchaseReservedCacheNodesOfferingInput{
+	input := &types.PurchaseReservedCacheNodesOfferingInput{
 		ReservedCacheNodesOfferingId: aws.String("1ef01f5b-94ff-433f-a530-61a56bfc8e7a"),
 	}
 
@@ -2076,7 +2078,7 @@ func ExampleClient_RebootCacheClusterRequest_shared00() {
 	}
 
 	svc := elasticache.New(cfg)
-	input := &elasticache.RebootCacheClusterInput{
+	input := &types.RebootCacheClusterInput{
 		CacheClusterId: aws.String("custom-mem1-4  "),
 		CacheNodeIdsToReboot: []string{
 			"0001",
@@ -2118,7 +2120,7 @@ func ExampleClient_RemoveTagsFromResourceRequest_shared00() {
 	}
 
 	svc := elasticache.New(cfg)
-	input := &elasticache.RemoveTagsFromResourceInput{
+	input := &types.RemoveTagsFromResourceInput{
 		ResourceName: aws.String("arn:aws:elasticache:us-east-1:1234567890:cluster:my-mem-cluster"),
 		TagKeys: []string{
 			"A",
@@ -2165,7 +2167,7 @@ func ExampleClient_ResetCacheParameterGroupRequest_shared00() {
 	}
 
 	svc := elasticache.New(cfg)
-	input := &elasticache.ResetCacheParameterGroupInput{
+	input := &types.ResetCacheParameterGroupInput{
 		CacheParameterGroupName: aws.String("custom-mem1-4"),
 		ResetAllParameters:      aws.Bool(true),
 	}
@@ -2208,7 +2210,7 @@ func ExampleClient_RevokeCacheSecurityGroupIngressRequest_shared00() {
 	}
 
 	svc := elasticache.New(cfg)
-	input := &elasticache.RevokeCacheSecurityGroupIngressInput{
+	input := &types.RevokeCacheSecurityGroupIngressInput{
 		CacheSecurityGroupName:  aws.String("my-sec-grp"),
 		EC2SecurityGroupName:    aws.String("my-ec2-sec-grp"),
 		EC2SecurityGroupOwnerId: aws.String("1234567890"),

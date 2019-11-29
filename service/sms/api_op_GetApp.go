@@ -6,38 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/sms/types"
 )
-
-type GetAppInput struct {
-	_ struct{} `type:"structure"`
-
-	// ID of the application whose information is being retrieved.
-	AppId *string `locationName:"appId" type:"string"`
-}
-
-// String returns the string representation
-func (s GetAppInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type GetAppOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Information about the application.
-	AppSummary *AppSummary `locationName:"appSummary" type:"structure"`
-
-	// List of server groups belonging to the application.
-	ServerGroups []ServerGroup `locationName:"serverGroups" type:"list"`
-
-	// List of tags associated with the application.
-	Tags []Tag `locationName:"tags" type:"list"`
-}
-
-// String returns the string representation
-func (s GetAppOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetApp = "GetApp"
 
@@ -54,7 +24,7 @@ const opGetApp = "GetApp"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sms-2016-10-24/GetApp
-func (c *Client) GetAppRequest(input *GetAppInput) GetAppRequest {
+func (c *Client) GetAppRequest(input *types.GetAppInput) GetAppRequest {
 	op := &aws.Operation{
 		Name:       opGetApp,
 		HTTPMethod: "POST",
@@ -62,10 +32,10 @@ func (c *Client) GetAppRequest(input *GetAppInput) GetAppRequest {
 	}
 
 	if input == nil {
-		input = &GetAppInput{}
+		input = &types.GetAppInput{}
 	}
 
-	req := c.newRequest(op, input, &GetAppOutput{})
+	req := c.newRequest(op, input, &types.GetAppOutput{})
 	return GetAppRequest{Request: req, Input: input, Copy: c.GetAppRequest}
 }
 
@@ -73,8 +43,8 @@ func (c *Client) GetAppRequest(input *GetAppInput) GetAppRequest {
 // GetApp API operation.
 type GetAppRequest struct {
 	*aws.Request
-	Input *GetAppInput
-	Copy  func(*GetAppInput) GetAppRequest
+	Input *types.GetAppInput
+	Copy  func(*types.GetAppInput) GetAppRequest
 }
 
 // Send marshals and sends the GetApp API request.
@@ -86,7 +56,7 @@ func (r GetAppRequest) Send(ctx context.Context) (*GetAppResponse, error) {
 	}
 
 	resp := &GetAppResponse{
-		GetAppOutput: r.Request.Data.(*GetAppOutput),
+		GetAppOutput: r.Request.Data.(*types.GetAppOutput),
 		response:     &aws.Response{Request: r.Request},
 	}
 
@@ -96,7 +66,7 @@ func (r GetAppRequest) Send(ctx context.Context) (*GetAppResponse, error) {
 // GetAppResponse is the response type for the
 // GetApp API operation.
 type GetAppResponse struct {
-	*GetAppOutput
+	*types.GetAppOutput
 
 	response *aws.Response
 }

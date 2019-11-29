@@ -6,81 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/efs/types"
 )
-
-type DescribeMountTargetSecurityGroupsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the mount target whose security groups you want to retrieve.
-	//
-	// MountTargetId is a required field
-	MountTargetId *string `location:"uri" locationName:"MountTargetId" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeMountTargetSecurityGroupsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeMountTargetSecurityGroupsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeMountTargetSecurityGroupsInput"}
-
-	if s.MountTargetId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("MountTargetId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DescribeMountTargetSecurityGroupsInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.MountTargetId != nil {
-		v := *s.MountTargetId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "MountTargetId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type DescribeMountTargetSecurityGroupsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// An array of security groups.
-	//
-	// SecurityGroups is a required field
-	SecurityGroups []string `type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeMountTargetSecurityGroupsOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DescribeMountTargetSecurityGroupsOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.SecurityGroups != nil {
-		v := s.SecurityGroups
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "SecurityGroups", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
-		}
-		ls0.End()
-
-	}
-	return nil
-}
 
 const opDescribeMountTargetSecurityGroups = "DescribeMountTargetSecurityGroups"
 
@@ -107,7 +34,7 @@ const opDescribeMountTargetSecurityGroups = "DescribeMountTargetSecurityGroups"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/DescribeMountTargetSecurityGroups
-func (c *Client) DescribeMountTargetSecurityGroupsRequest(input *DescribeMountTargetSecurityGroupsInput) DescribeMountTargetSecurityGroupsRequest {
+func (c *Client) DescribeMountTargetSecurityGroupsRequest(input *types.DescribeMountTargetSecurityGroupsInput) DescribeMountTargetSecurityGroupsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeMountTargetSecurityGroups,
 		HTTPMethod: "GET",
@@ -115,10 +42,10 @@ func (c *Client) DescribeMountTargetSecurityGroupsRequest(input *DescribeMountTa
 	}
 
 	if input == nil {
-		input = &DescribeMountTargetSecurityGroupsInput{}
+		input = &types.DescribeMountTargetSecurityGroupsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeMountTargetSecurityGroupsOutput{})
+	req := c.newRequest(op, input, &types.DescribeMountTargetSecurityGroupsOutput{})
 	return DescribeMountTargetSecurityGroupsRequest{Request: req, Input: input, Copy: c.DescribeMountTargetSecurityGroupsRequest}
 }
 
@@ -126,8 +53,8 @@ func (c *Client) DescribeMountTargetSecurityGroupsRequest(input *DescribeMountTa
 // DescribeMountTargetSecurityGroups API operation.
 type DescribeMountTargetSecurityGroupsRequest struct {
 	*aws.Request
-	Input *DescribeMountTargetSecurityGroupsInput
-	Copy  func(*DescribeMountTargetSecurityGroupsInput) DescribeMountTargetSecurityGroupsRequest
+	Input *types.DescribeMountTargetSecurityGroupsInput
+	Copy  func(*types.DescribeMountTargetSecurityGroupsInput) DescribeMountTargetSecurityGroupsRequest
 }
 
 // Send marshals and sends the DescribeMountTargetSecurityGroups API request.
@@ -139,7 +66,7 @@ func (r DescribeMountTargetSecurityGroupsRequest) Send(ctx context.Context) (*De
 	}
 
 	resp := &DescribeMountTargetSecurityGroupsResponse{
-		DescribeMountTargetSecurityGroupsOutput: r.Request.Data.(*DescribeMountTargetSecurityGroupsOutput),
+		DescribeMountTargetSecurityGroupsOutput: r.Request.Data.(*types.DescribeMountTargetSecurityGroupsOutput),
 		response:                                &aws.Response{Request: r.Request},
 	}
 
@@ -149,7 +76,7 @@ func (r DescribeMountTargetSecurityGroupsRequest) Send(ctx context.Context) (*De
 // DescribeMountTargetSecurityGroupsResponse is the response type for the
 // DescribeMountTargetSecurityGroups API operation.
 type DescribeMountTargetSecurityGroupsResponse struct {
-	*DescribeMountTargetSecurityGroupsOutput
+	*types.DescribeMountTargetSecurityGroupsOutput
 
 	response *aws.Response
 }

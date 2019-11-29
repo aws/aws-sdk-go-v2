@@ -6,88 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/chime/types"
 )
-
-type GetUserInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Chime account ID.
-	//
-	// AccountId is a required field
-	AccountId *string `location:"uri" locationName:"accountId" type:"string" required:"true"`
-
-	// The user ID.
-	//
-	// UserId is a required field
-	UserId *string `location:"uri" locationName:"userId" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetUserInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetUserInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetUserInput"}
-
-	if s.AccountId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("AccountId"))
-	}
-
-	if s.UserId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("UserId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetUserInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.AccountId != nil {
-		v := *s.AccountId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "accountId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.UserId != nil {
-		v := *s.UserId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "userId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type GetUserOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The user details.
-	User *User `type:"structure"`
-}
-
-// String returns the string representation
-func (s GetUserOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetUserOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.User != nil {
-		v := s.User
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "User", v, metadata)
-	}
-	return nil
-}
 
 const opGetUser = "GetUser"
 
@@ -108,7 +28,7 @@ const opGetUser = "GetUser"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/GetUser
-func (c *Client) GetUserRequest(input *GetUserInput) GetUserRequest {
+func (c *Client) GetUserRequest(input *types.GetUserInput) GetUserRequest {
 	op := &aws.Operation{
 		Name:       opGetUser,
 		HTTPMethod: "GET",
@@ -116,10 +36,10 @@ func (c *Client) GetUserRequest(input *GetUserInput) GetUserRequest {
 	}
 
 	if input == nil {
-		input = &GetUserInput{}
+		input = &types.GetUserInput{}
 	}
 
-	req := c.newRequest(op, input, &GetUserOutput{})
+	req := c.newRequest(op, input, &types.GetUserOutput{})
 	return GetUserRequest{Request: req, Input: input, Copy: c.GetUserRequest}
 }
 
@@ -127,8 +47,8 @@ func (c *Client) GetUserRequest(input *GetUserInput) GetUserRequest {
 // GetUser API operation.
 type GetUserRequest struct {
 	*aws.Request
-	Input *GetUserInput
-	Copy  func(*GetUserInput) GetUserRequest
+	Input *types.GetUserInput
+	Copy  func(*types.GetUserInput) GetUserRequest
 }
 
 // Send marshals and sends the GetUser API request.
@@ -140,7 +60,7 @@ func (r GetUserRequest) Send(ctx context.Context) (*GetUserResponse, error) {
 	}
 
 	resp := &GetUserResponse{
-		GetUserOutput: r.Request.Data.(*GetUserOutput),
+		GetUserOutput: r.Request.Data.(*types.GetUserOutput),
 		response:      &aws.Response{Request: r.Request},
 	}
 
@@ -150,7 +70,7 @@ func (r GetUserRequest) Send(ctx context.Context) (*GetUserResponse, error) {
 // GetUserResponse is the response type for the
 // GetUser API operation.
 type GetUserResponse struct {
-	*GetUserOutput
+	*types.GetUserOutput
 
 	response *aws.Response
 }

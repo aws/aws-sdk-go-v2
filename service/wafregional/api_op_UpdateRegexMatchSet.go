@@ -4,90 +4,10 @@ package wafregional
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/service/waf"
+	"github.com/aws/aws-sdk-go-v2/service/wafregional/types"
 )
-
-type UpdateRegexMatchSetInput struct {
-	_ struct{} `type:"structure"`
-
-	// The value returned by the most recent call to GetChangeToken.
-	//
-	// ChangeToken is a required field
-	ChangeToken *string `min:"1" type:"string" required:"true"`
-
-	// The RegexMatchSetId of the RegexMatchSet that you want to update. RegexMatchSetId
-	// is returned by CreateRegexMatchSet and by ListRegexMatchSets.
-	//
-	// RegexMatchSetId is a required field
-	RegexMatchSetId *string `min:"1" type:"string" required:"true"`
-
-	// An array of RegexMatchSetUpdate objects that you want to insert into or delete
-	// from a RegexMatchSet. For more information, see RegexMatchTuple.
-	//
-	// Updates is a required field
-	Updates []waf.RegexMatchSetUpdate `min:"1" type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s UpdateRegexMatchSetInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateRegexMatchSetInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateRegexMatchSetInput"}
-
-	if s.ChangeToken == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ChangeToken"))
-	}
-	if s.ChangeToken != nil && len(*s.ChangeToken) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ChangeToken", 1))
-	}
-
-	if s.RegexMatchSetId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("RegexMatchSetId"))
-	}
-	if s.RegexMatchSetId != nil && len(*s.RegexMatchSetId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("RegexMatchSetId", 1))
-	}
-
-	if s.Updates == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Updates"))
-	}
-	if s.Updates != nil && len(s.Updates) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Updates", 1))
-	}
-	if s.Updates != nil {
-		for i, v := range s.Updates {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Updates", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type UpdateRegexMatchSetOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The ChangeToken that you used to submit the UpdateRegexMatchSet request.
-	// You can also use this value to query the status of the request. For more
-	// information, see GetChangeTokenStatus.
-	ChangeToken *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s UpdateRegexMatchSetOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opUpdateRegexMatchSet = "UpdateRegexMatchSet"
 
@@ -137,7 +57,7 @@ const opUpdateRegexMatchSet = "UpdateRegexMatchSet"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/UpdateRegexMatchSet
-func (c *Client) UpdateRegexMatchSetRequest(input *UpdateRegexMatchSetInput) UpdateRegexMatchSetRequest {
+func (c *Client) UpdateRegexMatchSetRequest(input *types.UpdateRegexMatchSetInput) UpdateRegexMatchSetRequest {
 	op := &aws.Operation{
 		Name:       opUpdateRegexMatchSet,
 		HTTPMethod: "POST",
@@ -145,10 +65,10 @@ func (c *Client) UpdateRegexMatchSetRequest(input *UpdateRegexMatchSetInput) Upd
 	}
 
 	if input == nil {
-		input = &UpdateRegexMatchSetInput{}
+		input = &types.UpdateRegexMatchSetInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateRegexMatchSetOutput{})
+	req := c.newRequest(op, input, &types.UpdateRegexMatchSetOutput{})
 	return UpdateRegexMatchSetRequest{Request: req, Input: input, Copy: c.UpdateRegexMatchSetRequest}
 }
 
@@ -156,8 +76,8 @@ func (c *Client) UpdateRegexMatchSetRequest(input *UpdateRegexMatchSetInput) Upd
 // UpdateRegexMatchSet API operation.
 type UpdateRegexMatchSetRequest struct {
 	*aws.Request
-	Input *UpdateRegexMatchSetInput
-	Copy  func(*UpdateRegexMatchSetInput) UpdateRegexMatchSetRequest
+	Input *types.UpdateRegexMatchSetInput
+	Copy  func(*types.UpdateRegexMatchSetInput) UpdateRegexMatchSetRequest
 }
 
 // Send marshals and sends the UpdateRegexMatchSet API request.
@@ -169,7 +89,7 @@ func (r UpdateRegexMatchSetRequest) Send(ctx context.Context) (*UpdateRegexMatch
 	}
 
 	resp := &UpdateRegexMatchSetResponse{
-		UpdateRegexMatchSetOutput: r.Request.Data.(*UpdateRegexMatchSetOutput),
+		UpdateRegexMatchSetOutput: r.Request.Data.(*types.UpdateRegexMatchSetOutput),
 		response:                  &aws.Response{Request: r.Request},
 	}
 
@@ -179,7 +99,7 @@ func (r UpdateRegexMatchSetRequest) Send(ctx context.Context) (*UpdateRegexMatch
 // UpdateRegexMatchSetResponse is the response type for the
 // UpdateRegexMatchSet API operation.
 type UpdateRegexMatchSetResponse struct {
-	*UpdateRegexMatchSetOutput
+	*types.UpdateRegexMatchSetOutput
 
 	response *aws.Response
 }

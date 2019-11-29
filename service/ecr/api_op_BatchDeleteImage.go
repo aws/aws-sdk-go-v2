@@ -4,83 +4,10 @@ package ecr
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ecr/types"
 )
-
-// Deletes specified images within a specified repository. Images are specified
-// with either the imageTag or imageDigest.
-type BatchDeleteImageInput struct {
-	_ struct{} `type:"structure"`
-
-	// A list of image ID references that correspond to images to delete. The format
-	// of the imageIds reference is imageTag=tag or imageDigest=digest.
-	//
-	// ImageIds is a required field
-	ImageIds []ImageIdentifier `locationName:"imageIds" min:"1" type:"list" required:"true"`
-
-	// The AWS account ID associated with the registry that contains the image to
-	// delete. If you do not specify a registry, the default registry is assumed.
-	RegistryId *string `locationName:"registryId" type:"string"`
-
-	// The repository that contains the image to delete.
-	//
-	// RepositoryName is a required field
-	RepositoryName *string `locationName:"repositoryName" min:"2" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s BatchDeleteImageInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *BatchDeleteImageInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "BatchDeleteImageInput"}
-
-	if s.ImageIds == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ImageIds"))
-	}
-	if s.ImageIds != nil && len(s.ImageIds) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ImageIds", 1))
-	}
-
-	if s.RepositoryName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("RepositoryName"))
-	}
-	if s.RepositoryName != nil && len(*s.RepositoryName) < 2 {
-		invalidParams.Add(aws.NewErrParamMinLen("RepositoryName", 2))
-	}
-	if s.ImageIds != nil {
-		for i, v := range s.ImageIds {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "ImageIds", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type BatchDeleteImageOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Any failures associated with the call.
-	Failures []ImageFailure `locationName:"failures" type:"list"`
-
-	// The image IDs of the deleted images.
-	ImageIds []ImageIdentifier `locationName:"imageIds" min:"1" type:"list"`
-}
-
-// String returns the string representation
-func (s BatchDeleteImageOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opBatchDeleteImage = "BatchDeleteImage"
 
@@ -105,7 +32,7 @@ const opBatchDeleteImage = "BatchDeleteImage"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/BatchDeleteImage
-func (c *Client) BatchDeleteImageRequest(input *BatchDeleteImageInput) BatchDeleteImageRequest {
+func (c *Client) BatchDeleteImageRequest(input *types.BatchDeleteImageInput) BatchDeleteImageRequest {
 	op := &aws.Operation{
 		Name:       opBatchDeleteImage,
 		HTTPMethod: "POST",
@@ -113,10 +40,10 @@ func (c *Client) BatchDeleteImageRequest(input *BatchDeleteImageInput) BatchDele
 	}
 
 	if input == nil {
-		input = &BatchDeleteImageInput{}
+		input = &types.BatchDeleteImageInput{}
 	}
 
-	req := c.newRequest(op, input, &BatchDeleteImageOutput{})
+	req := c.newRequest(op, input, &types.BatchDeleteImageOutput{})
 	return BatchDeleteImageRequest{Request: req, Input: input, Copy: c.BatchDeleteImageRequest}
 }
 
@@ -124,8 +51,8 @@ func (c *Client) BatchDeleteImageRequest(input *BatchDeleteImageInput) BatchDele
 // BatchDeleteImage API operation.
 type BatchDeleteImageRequest struct {
 	*aws.Request
-	Input *BatchDeleteImageInput
-	Copy  func(*BatchDeleteImageInput) BatchDeleteImageRequest
+	Input *types.BatchDeleteImageInput
+	Copy  func(*types.BatchDeleteImageInput) BatchDeleteImageRequest
 }
 
 // Send marshals and sends the BatchDeleteImage API request.
@@ -137,7 +64,7 @@ func (r BatchDeleteImageRequest) Send(ctx context.Context) (*BatchDeleteImageRes
 	}
 
 	resp := &BatchDeleteImageResponse{
-		BatchDeleteImageOutput: r.Request.Data.(*BatchDeleteImageOutput),
+		BatchDeleteImageOutput: r.Request.Data.(*types.BatchDeleteImageOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -147,7 +74,7 @@ func (r BatchDeleteImageRequest) Send(ctx context.Context) (*BatchDeleteImageRes
 // BatchDeleteImageResponse is the response type for the
 // BatchDeleteImage API operation.
 type BatchDeleteImageResponse struct {
-	*BatchDeleteImageOutput
+	*types.BatchDeleteImageOutput
 
 	response *aws.Response
 }

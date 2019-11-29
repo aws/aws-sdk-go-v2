@@ -6,59 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/service/waf"
+	"github.com/aws/aws-sdk-go-v2/service/wafregional/types"
 )
-
-type GetRuleInput struct {
-	_ struct{} `type:"structure"`
-
-	// The RuleId of the Rule that you want to get. RuleId is returned by CreateRule
-	// and by ListRules.
-	//
-	// RuleId is a required field
-	RuleId *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetRuleInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetRuleInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetRuleInput"}
-
-	if s.RuleId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("RuleId"))
-	}
-	if s.RuleId != nil && len(*s.RuleId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("RuleId", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type GetRuleOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Information about the Rule that you specified in the GetRule request. For
-	// more information, see the following topics:
-	//
-	//    * Rule: Contains MetricName, Name, an array of Predicate objects, and
-	//    RuleId
-	//
-	//    * Predicate: Each Predicate object contains DataId, Negated, and Type
-	Rule *waf.Rule `type:"structure"`
-}
-
-// String returns the string representation
-func (s GetRuleOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetRule = "GetRule"
 
@@ -76,7 +25,7 @@ const opGetRule = "GetRule"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/GetRule
-func (c *Client) GetRuleRequest(input *GetRuleInput) GetRuleRequest {
+func (c *Client) GetRuleRequest(input *types.GetRuleInput) GetRuleRequest {
 	op := &aws.Operation{
 		Name:       opGetRule,
 		HTTPMethod: "POST",
@@ -84,10 +33,10 @@ func (c *Client) GetRuleRequest(input *GetRuleInput) GetRuleRequest {
 	}
 
 	if input == nil {
-		input = &GetRuleInput{}
+		input = &types.GetRuleInput{}
 	}
 
-	req := c.newRequest(op, input, &GetRuleOutput{})
+	req := c.newRequest(op, input, &types.GetRuleOutput{})
 	return GetRuleRequest{Request: req, Input: input, Copy: c.GetRuleRequest}
 }
 
@@ -95,8 +44,8 @@ func (c *Client) GetRuleRequest(input *GetRuleInput) GetRuleRequest {
 // GetRule API operation.
 type GetRuleRequest struct {
 	*aws.Request
-	Input *GetRuleInput
-	Copy  func(*GetRuleInput) GetRuleRequest
+	Input *types.GetRuleInput
+	Copy  func(*types.GetRuleInput) GetRuleRequest
 }
 
 // Send marshals and sends the GetRule API request.
@@ -108,7 +57,7 @@ func (r GetRuleRequest) Send(ctx context.Context) (*GetRuleResponse, error) {
 	}
 
 	resp := &GetRuleResponse{
-		GetRuleOutput: r.Request.Data.(*GetRuleOutput),
+		GetRuleOutput: r.Request.Data.(*types.GetRuleOutput),
 		response:      &aws.Response{Request: r.Request},
 	}
 
@@ -118,7 +67,7 @@ func (r GetRuleRequest) Send(ctx context.Context) (*GetRuleResponse, error) {
 // GetRuleResponse is the response type for the
 // GetRule API operation.
 type GetRuleResponse struct {
-	*GetRuleOutput
+	*types.GetRuleOutput
 
 	response *aws.Response
 }

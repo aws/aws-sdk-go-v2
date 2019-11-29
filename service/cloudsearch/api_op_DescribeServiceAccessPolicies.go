@@ -6,62 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/cloudsearch/types"
 )
-
-// Container for the parameters to the DescribeServiceAccessPolicies operation.
-// Specifies the name of the domain you want to describe. To show the active
-// configuration and exclude any pending changes, set the Deployed option to
-// true.
-type DescribeServiceAccessPoliciesInput struct {
-	_ struct{} `type:"structure"`
-
-	// Whether to display the deployed configuration (true) or include any pending
-	// changes (false). Defaults to false.
-	Deployed *bool `type:"boolean"`
-
-	// The name of the domain you want to describe.
-	//
-	// DomainName is a required field
-	DomainName *string `min:"3" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeServiceAccessPoliciesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeServiceAccessPoliciesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeServiceAccessPoliciesInput"}
-
-	if s.DomainName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DomainName"))
-	}
-	if s.DomainName != nil && len(*s.DomainName) < 3 {
-		invalidParams.Add(aws.NewErrParamMinLen("DomainName", 3))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// The result of a DescribeServiceAccessPolicies request.
-type DescribeServiceAccessPoliciesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The access rules configured for the domain specified in the request.
-	//
-	// AccessPolicies is a required field
-	AccessPolicies *AccessPoliciesStatus `type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeServiceAccessPoliciesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeServiceAccessPolicies = "DescribeServiceAccessPolicies"
 
@@ -81,7 +27,7 @@ const opDescribeServiceAccessPolicies = "DescribeServiceAccessPolicies"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) DescribeServiceAccessPoliciesRequest(input *DescribeServiceAccessPoliciesInput) DescribeServiceAccessPoliciesRequest {
+func (c *Client) DescribeServiceAccessPoliciesRequest(input *types.DescribeServiceAccessPoliciesInput) DescribeServiceAccessPoliciesRequest {
 	op := &aws.Operation{
 		Name:       opDescribeServiceAccessPolicies,
 		HTTPMethod: "POST",
@@ -89,10 +35,10 @@ func (c *Client) DescribeServiceAccessPoliciesRequest(input *DescribeServiceAcce
 	}
 
 	if input == nil {
-		input = &DescribeServiceAccessPoliciesInput{}
+		input = &types.DescribeServiceAccessPoliciesInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeServiceAccessPoliciesOutput{})
+	req := c.newRequest(op, input, &types.DescribeServiceAccessPoliciesOutput{})
 	return DescribeServiceAccessPoliciesRequest{Request: req, Input: input, Copy: c.DescribeServiceAccessPoliciesRequest}
 }
 
@@ -100,8 +46,8 @@ func (c *Client) DescribeServiceAccessPoliciesRequest(input *DescribeServiceAcce
 // DescribeServiceAccessPolicies API operation.
 type DescribeServiceAccessPoliciesRequest struct {
 	*aws.Request
-	Input *DescribeServiceAccessPoliciesInput
-	Copy  func(*DescribeServiceAccessPoliciesInput) DescribeServiceAccessPoliciesRequest
+	Input *types.DescribeServiceAccessPoliciesInput
+	Copy  func(*types.DescribeServiceAccessPoliciesInput) DescribeServiceAccessPoliciesRequest
 }
 
 // Send marshals and sends the DescribeServiceAccessPolicies API request.
@@ -113,7 +59,7 @@ func (r DescribeServiceAccessPoliciesRequest) Send(ctx context.Context) (*Descri
 	}
 
 	resp := &DescribeServiceAccessPoliciesResponse{
-		DescribeServiceAccessPoliciesOutput: r.Request.Data.(*DescribeServiceAccessPoliciesOutput),
+		DescribeServiceAccessPoliciesOutput: r.Request.Data.(*types.DescribeServiceAccessPoliciesOutput),
 		response:                            &aws.Response{Request: r.Request},
 	}
 
@@ -123,7 +69,7 @@ func (r DescribeServiceAccessPoliciesRequest) Send(ctx context.Context) (*Descri
 // DescribeServiceAccessPoliciesResponse is the response type for the
 // DescribeServiceAccessPolicies API operation.
 type DescribeServiceAccessPoliciesResponse struct {
-	*DescribeServiceAccessPoliciesOutput
+	*types.DescribeServiceAccessPoliciesOutput
 
 	response *aws.Response
 }

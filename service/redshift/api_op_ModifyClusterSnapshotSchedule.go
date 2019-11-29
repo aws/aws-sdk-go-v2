@@ -6,55 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/query"
+	"github.com/aws/aws-sdk-go-v2/service/redshift/types"
 )
-
-type ModifyClusterSnapshotScheduleInput struct {
-	_ struct{} `type:"structure"`
-
-	// A unique identifier for the cluster whose snapshot schedule you want to modify.
-	//
-	// ClusterIdentifier is a required field
-	ClusterIdentifier *string `type:"string" required:"true"`
-
-	// A boolean to indicate whether to remove the assoiciation between the cluster
-	// and the schedule.
-	DisassociateSchedule *bool `type:"boolean"`
-
-	// A unique alphanumeric identifier for the schedule that you want to associate
-	// with the cluster.
-	ScheduleIdentifier *string `type:"string"`
-}
-
-// String returns the string representation
-func (s ModifyClusterSnapshotScheduleInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ModifyClusterSnapshotScheduleInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ModifyClusterSnapshotScheduleInput"}
-
-	if s.ClusterIdentifier == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ClusterIdentifier"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ModifyClusterSnapshotScheduleOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s ModifyClusterSnapshotScheduleOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opModifyClusterSnapshotSchedule = "ModifyClusterSnapshotSchedule"
 
@@ -71,7 +26,7 @@ const opModifyClusterSnapshotSchedule = "ModifyClusterSnapshotSchedule"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ModifyClusterSnapshotSchedule
-func (c *Client) ModifyClusterSnapshotScheduleRequest(input *ModifyClusterSnapshotScheduleInput) ModifyClusterSnapshotScheduleRequest {
+func (c *Client) ModifyClusterSnapshotScheduleRequest(input *types.ModifyClusterSnapshotScheduleInput) ModifyClusterSnapshotScheduleRequest {
 	op := &aws.Operation{
 		Name:       opModifyClusterSnapshotSchedule,
 		HTTPMethod: "POST",
@@ -79,10 +34,10 @@ func (c *Client) ModifyClusterSnapshotScheduleRequest(input *ModifyClusterSnapsh
 	}
 
 	if input == nil {
-		input = &ModifyClusterSnapshotScheduleInput{}
+		input = &types.ModifyClusterSnapshotScheduleInput{}
 	}
 
-	req := c.newRequest(op, input, &ModifyClusterSnapshotScheduleOutput{})
+	req := c.newRequest(op, input, &types.ModifyClusterSnapshotScheduleOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return ModifyClusterSnapshotScheduleRequest{Request: req, Input: input, Copy: c.ModifyClusterSnapshotScheduleRequest}
@@ -92,8 +47,8 @@ func (c *Client) ModifyClusterSnapshotScheduleRequest(input *ModifyClusterSnapsh
 // ModifyClusterSnapshotSchedule API operation.
 type ModifyClusterSnapshotScheduleRequest struct {
 	*aws.Request
-	Input *ModifyClusterSnapshotScheduleInput
-	Copy  func(*ModifyClusterSnapshotScheduleInput) ModifyClusterSnapshotScheduleRequest
+	Input *types.ModifyClusterSnapshotScheduleInput
+	Copy  func(*types.ModifyClusterSnapshotScheduleInput) ModifyClusterSnapshotScheduleRequest
 }
 
 // Send marshals and sends the ModifyClusterSnapshotSchedule API request.
@@ -105,7 +60,7 @@ func (r ModifyClusterSnapshotScheduleRequest) Send(ctx context.Context) (*Modify
 	}
 
 	resp := &ModifyClusterSnapshotScheduleResponse{
-		ModifyClusterSnapshotScheduleOutput: r.Request.Data.(*ModifyClusterSnapshotScheduleOutput),
+		ModifyClusterSnapshotScheduleOutput: r.Request.Data.(*types.ModifyClusterSnapshotScheduleOutput),
 		response:                            &aws.Response{Request: r.Request},
 	}
 
@@ -115,7 +70,7 @@ func (r ModifyClusterSnapshotScheduleRequest) Send(ctx context.Context) (*Modify
 // ModifyClusterSnapshotScheduleResponse is the response type for the
 // ModifyClusterSnapshotSchedule API operation.
 type ModifyClusterSnapshotScheduleResponse struct {
-	*ModifyClusterSnapshotScheduleOutput
+	*types.ModifyClusterSnapshotScheduleOutput
 
 	response *aws.Response
 }

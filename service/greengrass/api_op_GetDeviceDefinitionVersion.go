@@ -6,139 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/greengrass/types"
 )
-
-type GetDeviceDefinitionVersionInput struct {
-	_ struct{} `type:"structure"`
-
-	// DeviceDefinitionId is a required field
-	DeviceDefinitionId *string `location:"uri" locationName:"DeviceDefinitionId" type:"string" required:"true"`
-
-	// DeviceDefinitionVersionId is a required field
-	DeviceDefinitionVersionId *string `location:"uri" locationName:"DeviceDefinitionVersionId" type:"string" required:"true"`
-
-	NextToken *string `location:"querystring" locationName:"NextToken" type:"string"`
-}
-
-// String returns the string representation
-func (s GetDeviceDefinitionVersionInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetDeviceDefinitionVersionInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetDeviceDefinitionVersionInput"}
-
-	if s.DeviceDefinitionId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DeviceDefinitionId"))
-	}
-
-	if s.DeviceDefinitionVersionId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DeviceDefinitionVersionId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetDeviceDefinitionVersionInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.DeviceDefinitionId != nil {
-		v := *s.DeviceDefinitionId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "DeviceDefinitionId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.DeviceDefinitionVersionId != nil {
-		v := *s.DeviceDefinitionVersionId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "DeviceDefinitionVersionId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type GetDeviceDefinitionVersionOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The ARN of the device definition version.
-	Arn *string `type:"string"`
-
-	// The time, in milliseconds since the epoch, when the device definition version
-	// was created.
-	CreationTimestamp *string `type:"string"`
-
-	// Information about the device definition version.
-	Definition *DeviceDefinitionVersion `type:"structure"`
-
-	// The ID of the device definition version.
-	Id *string `type:"string"`
-
-	// The token for the next set of results, or ''null'' if there are no additional
-	// results.
-	NextToken *string `type:"string"`
-
-	// The version of the device definition version.
-	Version *string `type:"string"`
-}
-
-// String returns the string representation
-func (s GetDeviceDefinitionVersionOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetDeviceDefinitionVersionOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.Arn != nil {
-		v := *s.Arn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "Arn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.CreationTimestamp != nil {
-		v := *s.CreationTimestamp
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "CreationTimestamp", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Definition != nil {
-		v := s.Definition
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "Definition", v, metadata)
-	}
-	if s.Id != nil {
-		v := *s.Id
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "Id", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Version != nil {
-		v := *s.Version
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "Version", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opGetDeviceDefinitionVersion = "GetDeviceDefinitionVersion"
 
@@ -155,7 +24,7 @@ const opGetDeviceDefinitionVersion = "GetDeviceDefinitionVersion"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GetDeviceDefinitionVersion
-func (c *Client) GetDeviceDefinitionVersionRequest(input *GetDeviceDefinitionVersionInput) GetDeviceDefinitionVersionRequest {
+func (c *Client) GetDeviceDefinitionVersionRequest(input *types.GetDeviceDefinitionVersionInput) GetDeviceDefinitionVersionRequest {
 	op := &aws.Operation{
 		Name:       opGetDeviceDefinitionVersion,
 		HTTPMethod: "GET",
@@ -163,10 +32,10 @@ func (c *Client) GetDeviceDefinitionVersionRequest(input *GetDeviceDefinitionVer
 	}
 
 	if input == nil {
-		input = &GetDeviceDefinitionVersionInput{}
+		input = &types.GetDeviceDefinitionVersionInput{}
 	}
 
-	req := c.newRequest(op, input, &GetDeviceDefinitionVersionOutput{})
+	req := c.newRequest(op, input, &types.GetDeviceDefinitionVersionOutput{})
 	return GetDeviceDefinitionVersionRequest{Request: req, Input: input, Copy: c.GetDeviceDefinitionVersionRequest}
 }
 
@@ -174,8 +43,8 @@ func (c *Client) GetDeviceDefinitionVersionRequest(input *GetDeviceDefinitionVer
 // GetDeviceDefinitionVersion API operation.
 type GetDeviceDefinitionVersionRequest struct {
 	*aws.Request
-	Input *GetDeviceDefinitionVersionInput
-	Copy  func(*GetDeviceDefinitionVersionInput) GetDeviceDefinitionVersionRequest
+	Input *types.GetDeviceDefinitionVersionInput
+	Copy  func(*types.GetDeviceDefinitionVersionInput) GetDeviceDefinitionVersionRequest
 }
 
 // Send marshals and sends the GetDeviceDefinitionVersion API request.
@@ -187,7 +56,7 @@ func (r GetDeviceDefinitionVersionRequest) Send(ctx context.Context) (*GetDevice
 	}
 
 	resp := &GetDeviceDefinitionVersionResponse{
-		GetDeviceDefinitionVersionOutput: r.Request.Data.(*GetDeviceDefinitionVersionOutput),
+		GetDeviceDefinitionVersionOutput: r.Request.Data.(*types.GetDeviceDefinitionVersionOutput),
 		response:                         &aws.Response{Request: r.Request},
 	}
 
@@ -197,7 +66,7 @@ func (r GetDeviceDefinitionVersionRequest) Send(ctx context.Context) (*GetDevice
 // GetDeviceDefinitionVersionResponse is the response type for the
 // GetDeviceDefinitionVersion API operation.
 type GetDeviceDefinitionVersionResponse struct {
-	*GetDeviceDefinitionVersionOutput
+	*types.GetDeviceDefinitionVersionOutput
 
 	response *aws.Response
 }

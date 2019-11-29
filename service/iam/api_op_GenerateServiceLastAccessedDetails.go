@@ -6,54 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/iam/types"
 )
-
-type GenerateServiceLastAccessedDetailsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ARN of the IAM resource (user, group, role, or managed policy) used to
-	// generate information about when the resource was last used in an attempt
-	// to access an AWS service.
-	//
-	// Arn is a required field
-	Arn *string `min:"20" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GenerateServiceLastAccessedDetailsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GenerateServiceLastAccessedDetailsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GenerateServiceLastAccessedDetailsInput"}
-
-	if s.Arn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Arn"))
-	}
-	if s.Arn != nil && len(*s.Arn) < 20 {
-		invalidParams.Add(aws.NewErrParamMinLen("Arn", 20))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type GenerateServiceLastAccessedDetailsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The job ID that you can use in the GetServiceLastAccessedDetails or GetServiceLastAccessedDetailsWithEntities
-	// operations.
-	JobId *string `min:"36" type:"string"`
-}
-
-// String returns the string representation
-func (s GenerateServiceLastAccessedDetailsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGenerateServiceLastAccessedDetails = "GenerateServiceLastAccessedDetails"
 
@@ -118,7 +72,7 @@ const opGenerateServiceLastAccessedDetails = "GenerateServiceLastAccessedDetails
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GenerateServiceLastAccessedDetails
-func (c *Client) GenerateServiceLastAccessedDetailsRequest(input *GenerateServiceLastAccessedDetailsInput) GenerateServiceLastAccessedDetailsRequest {
+func (c *Client) GenerateServiceLastAccessedDetailsRequest(input *types.GenerateServiceLastAccessedDetailsInput) GenerateServiceLastAccessedDetailsRequest {
 	op := &aws.Operation{
 		Name:       opGenerateServiceLastAccessedDetails,
 		HTTPMethod: "POST",
@@ -126,10 +80,10 @@ func (c *Client) GenerateServiceLastAccessedDetailsRequest(input *GenerateServic
 	}
 
 	if input == nil {
-		input = &GenerateServiceLastAccessedDetailsInput{}
+		input = &types.GenerateServiceLastAccessedDetailsInput{}
 	}
 
-	req := c.newRequest(op, input, &GenerateServiceLastAccessedDetailsOutput{})
+	req := c.newRequest(op, input, &types.GenerateServiceLastAccessedDetailsOutput{})
 	return GenerateServiceLastAccessedDetailsRequest{Request: req, Input: input, Copy: c.GenerateServiceLastAccessedDetailsRequest}
 }
 
@@ -137,8 +91,8 @@ func (c *Client) GenerateServiceLastAccessedDetailsRequest(input *GenerateServic
 // GenerateServiceLastAccessedDetails API operation.
 type GenerateServiceLastAccessedDetailsRequest struct {
 	*aws.Request
-	Input *GenerateServiceLastAccessedDetailsInput
-	Copy  func(*GenerateServiceLastAccessedDetailsInput) GenerateServiceLastAccessedDetailsRequest
+	Input *types.GenerateServiceLastAccessedDetailsInput
+	Copy  func(*types.GenerateServiceLastAccessedDetailsInput) GenerateServiceLastAccessedDetailsRequest
 }
 
 // Send marshals and sends the GenerateServiceLastAccessedDetails API request.
@@ -150,7 +104,7 @@ func (r GenerateServiceLastAccessedDetailsRequest) Send(ctx context.Context) (*G
 	}
 
 	resp := &GenerateServiceLastAccessedDetailsResponse{
-		GenerateServiceLastAccessedDetailsOutput: r.Request.Data.(*GenerateServiceLastAccessedDetailsOutput),
+		GenerateServiceLastAccessedDetailsOutput: r.Request.Data.(*types.GenerateServiceLastAccessedDetailsOutput),
 		response:                                 &aws.Response{Request: r.Request},
 	}
 
@@ -160,7 +114,7 @@ func (r GenerateServiceLastAccessedDetailsRequest) Send(ctx context.Context) (*G
 // GenerateServiceLastAccessedDetailsResponse is the response type for the
 // GenerateServiceLastAccessedDetails API operation.
 type GenerateServiceLastAccessedDetailsResponse struct {
-	*GenerateServiceLastAccessedDetailsOutput
+	*types.GenerateServiceLastAccessedDetailsOutput
 
 	response *aws.Response
 }

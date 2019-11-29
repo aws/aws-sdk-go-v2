@@ -6,47 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
+	"github.com/aws/aws-sdk-go-v2/service/transfer/types"
 )
-
-type DeleteServerInput struct {
-	_ struct{} `type:"structure"`
-
-	// A unique system-assigned identifier for an SFTP server instance.
-	//
-	// ServerId is a required field
-	ServerId *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteServerInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteServerInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteServerInput"}
-
-	if s.ServerId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ServerId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteServerOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteServerOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteServer = "DeleteServer"
 
@@ -65,7 +28,7 @@ const opDeleteServer = "DeleteServer"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/DeleteServer
-func (c *Client) DeleteServerRequest(input *DeleteServerInput) DeleteServerRequest {
+func (c *Client) DeleteServerRequest(input *types.DeleteServerInput) DeleteServerRequest {
 	op := &aws.Operation{
 		Name:       opDeleteServer,
 		HTTPMethod: "POST",
@@ -73,10 +36,10 @@ func (c *Client) DeleteServerRequest(input *DeleteServerInput) DeleteServerReque
 	}
 
 	if input == nil {
-		input = &DeleteServerInput{}
+		input = &types.DeleteServerInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteServerOutput{})
+	req := c.newRequest(op, input, &types.DeleteServerOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return DeleteServerRequest{Request: req, Input: input, Copy: c.DeleteServerRequest}
@@ -86,8 +49,8 @@ func (c *Client) DeleteServerRequest(input *DeleteServerInput) DeleteServerReque
 // DeleteServer API operation.
 type DeleteServerRequest struct {
 	*aws.Request
-	Input *DeleteServerInput
-	Copy  func(*DeleteServerInput) DeleteServerRequest
+	Input *types.DeleteServerInput
+	Copy  func(*types.DeleteServerInput) DeleteServerRequest
 }
 
 // Send marshals and sends the DeleteServer API request.
@@ -99,7 +62,7 @@ func (r DeleteServerRequest) Send(ctx context.Context) (*DeleteServerResponse, e
 	}
 
 	resp := &DeleteServerResponse{
-		DeleteServerOutput: r.Request.Data.(*DeleteServerOutput),
+		DeleteServerOutput: r.Request.Data.(*types.DeleteServerOutput),
 		response:           &aws.Response{Request: r.Request},
 	}
 
@@ -109,7 +72,7 @@ func (r DeleteServerRequest) Send(ctx context.Context) (*DeleteServerResponse, e
 // DeleteServerResponse is the response type for the
 // DeleteServer API operation.
 type DeleteServerResponse struct {
-	*DeleteServerOutput
+	*types.DeleteServerOutput
 
 	response *aws.Response
 }

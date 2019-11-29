@@ -6,114 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/elastictranscoder/types"
 )
-
-// The ListJobsByStatusRequest structure.
-type ListJobsByStatusInput struct {
-	_ struct{} `type:"structure"`
-
-	// To list jobs in chronological order by the date and time that they were submitted,
-	// enter true. To list jobs in reverse chronological order, enter false.
-	Ascending *string `location:"querystring" locationName:"Ascending" type:"string"`
-
-	// When Elastic Transcoder returns more than one page of results, use pageToken
-	// in subsequent GET requests to get each successive page of results.
-	PageToken *string `location:"querystring" locationName:"PageToken" type:"string"`
-
-	// To get information about all of the jobs associated with the current AWS
-	// account that have a given status, specify the following status: Submitted,
-	// Progressing, Complete, Canceled, or Error.
-	//
-	// Status is a required field
-	Status *string `location:"uri" locationName:"Status" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s ListJobsByStatusInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListJobsByStatusInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListJobsByStatusInput"}
-
-	if s.Status == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Status"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListJobsByStatusInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.Status != nil {
-		v := *s.Status
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "Status", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Ascending != nil {
-		v := *s.Ascending
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "Ascending", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.PageToken != nil {
-		v := *s.PageToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "PageToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-// The ListJobsByStatusResponse structure.
-type ListJobsByStatusOutput struct {
-	_ struct{} `type:"structure"`
-
-	// An array of Job objects that have the specified status.
-	Jobs []Job `type:"list"`
-
-	// A value that you use to access the second and subsequent pages of results,
-	// if any. When the jobs in the specified pipeline fit on one page or when you've
-	// reached the last page of results, the value of NextPageToken is null.
-	NextPageToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s ListJobsByStatusOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListJobsByStatusOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.Jobs != nil {
-		v := s.Jobs
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "Jobs", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	if s.NextPageToken != nil {
-		v := *s.NextPageToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "NextPageToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opListJobsByStatus = "ListJobsByStatus"
 
@@ -130,7 +24,7 @@ const opListJobsByStatus = "ListJobsByStatus"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) ListJobsByStatusRequest(input *ListJobsByStatusInput) ListJobsByStatusRequest {
+func (c *Client) ListJobsByStatusRequest(input *types.ListJobsByStatusInput) ListJobsByStatusRequest {
 	op := &aws.Operation{
 		Name:       opListJobsByStatus,
 		HTTPMethod: "GET",
@@ -144,10 +38,10 @@ func (c *Client) ListJobsByStatusRequest(input *ListJobsByStatusInput) ListJobsB
 	}
 
 	if input == nil {
-		input = &ListJobsByStatusInput{}
+		input = &types.ListJobsByStatusInput{}
 	}
 
-	req := c.newRequest(op, input, &ListJobsByStatusOutput{})
+	req := c.newRequest(op, input, &types.ListJobsByStatusOutput{})
 	return ListJobsByStatusRequest{Request: req, Input: input, Copy: c.ListJobsByStatusRequest}
 }
 
@@ -155,8 +49,8 @@ func (c *Client) ListJobsByStatusRequest(input *ListJobsByStatusInput) ListJobsB
 // ListJobsByStatus API operation.
 type ListJobsByStatusRequest struct {
 	*aws.Request
-	Input *ListJobsByStatusInput
-	Copy  func(*ListJobsByStatusInput) ListJobsByStatusRequest
+	Input *types.ListJobsByStatusInput
+	Copy  func(*types.ListJobsByStatusInput) ListJobsByStatusRequest
 }
 
 // Send marshals and sends the ListJobsByStatus API request.
@@ -168,7 +62,7 @@ func (r ListJobsByStatusRequest) Send(ctx context.Context) (*ListJobsByStatusRes
 	}
 
 	resp := &ListJobsByStatusResponse{
-		ListJobsByStatusOutput: r.Request.Data.(*ListJobsByStatusOutput),
+		ListJobsByStatusOutput: r.Request.Data.(*types.ListJobsByStatusOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -198,7 +92,7 @@ func NewListJobsByStatusPaginator(req ListJobsByStatusRequest) ListJobsByStatusP
 	return ListJobsByStatusPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListJobsByStatusInput
+				var inCpy *types.ListJobsByStatusInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -218,14 +112,14 @@ type ListJobsByStatusPaginator struct {
 	aws.Pager
 }
 
-func (p *ListJobsByStatusPaginator) CurrentPage() *ListJobsByStatusOutput {
-	return p.Pager.CurrentPage().(*ListJobsByStatusOutput)
+func (p *ListJobsByStatusPaginator) CurrentPage() *types.ListJobsByStatusOutput {
+	return p.Pager.CurrentPage().(*types.ListJobsByStatusOutput)
 }
 
 // ListJobsByStatusResponse is the response type for the
 // ListJobsByStatus API operation.
 type ListJobsByStatusResponse struct {
-	*ListJobsByStatusOutput
+	*types.ListJobsByStatusOutput
 
 	response *aws.Response
 }

@@ -10,6 +10,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws/endpoints"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting/unit"
 	"github.com/aws/aws-sdk-go-v2/service/ec2"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
 
 func TestCopySnapshotPresignedURL(t *testing.T) {
@@ -30,7 +31,7 @@ func TestCopySnapshotPresignedURL(t *testing.T) {
 		req.Sign()
 	}()
 
-	req := svc.CopySnapshotRequest(&ec2.CopySnapshotInput{
+	req := svc.CopySnapshotRequest(&types.CopySnapshotInput{
 		SourceRegion:     aws.String("us-west-1"),
 		SourceSnapshotId: aws.String("snap-id"),
 	})

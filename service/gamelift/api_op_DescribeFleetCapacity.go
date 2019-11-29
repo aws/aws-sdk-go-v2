@@ -6,72 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/gamelift/types"
 )
-
-// Represents the input for a request action.
-type DescribeFleetCapacityInput struct {
-	_ struct{} `type:"structure"`
-
-	// Unique identifier for a fleet(s) to retrieve capacity information for. To
-	// request capacity information for all fleets, leave this parameter empty.
-	FleetIds []string `min:"1" type:"list"`
-
-	// Maximum number of results to return. Use this parameter with NextToken to
-	// get results as a set of sequential pages. This parameter is ignored when
-	// the request specifies one or a list of fleet IDs.
-	Limit *int64 `min:"1" type:"integer"`
-
-	// Token that indicates the start of the next sequential page of results. Use
-	// the token that is returned with a previous call to this action. To start
-	// at the beginning of the result set, do not specify a value. This parameter
-	// is ignored when the request specifies one or a list of fleet IDs.
-	NextToken *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeFleetCapacityInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeFleetCapacityInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeFleetCapacityInput"}
-	if s.FleetIds != nil && len(s.FleetIds) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("FleetIds", 1))
-	}
-	if s.Limit != nil && *s.Limit < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("Limit", 1))
-	}
-	if s.NextToken != nil && len(*s.NextToken) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Represents the returned data in response to a request action.
-type DescribeFleetCapacityOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Collection of objects containing capacity information for each requested
-	// fleet ID. Leave this parameter empty to retrieve capacity information for
-	// all fleets.
-	FleetCapacity []FleetCapacity `type:"list"`
-
-	// Token that indicates where to resume retrieving results on the next call
-	// to this action. If no token is returned, these results represent the end
-	// of the list.
-	NextToken *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeFleetCapacityOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeFleetCapacity = "DescribeFleetCapacity"
 
@@ -120,7 +56,7 @@ const opDescribeFleetCapacity = "DescribeFleetCapacity"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DescribeFleetCapacity
-func (c *Client) DescribeFleetCapacityRequest(input *DescribeFleetCapacityInput) DescribeFleetCapacityRequest {
+func (c *Client) DescribeFleetCapacityRequest(input *types.DescribeFleetCapacityInput) DescribeFleetCapacityRequest {
 	op := &aws.Operation{
 		Name:       opDescribeFleetCapacity,
 		HTTPMethod: "POST",
@@ -128,10 +64,10 @@ func (c *Client) DescribeFleetCapacityRequest(input *DescribeFleetCapacityInput)
 	}
 
 	if input == nil {
-		input = &DescribeFleetCapacityInput{}
+		input = &types.DescribeFleetCapacityInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeFleetCapacityOutput{})
+	req := c.newRequest(op, input, &types.DescribeFleetCapacityOutput{})
 	return DescribeFleetCapacityRequest{Request: req, Input: input, Copy: c.DescribeFleetCapacityRequest}
 }
 
@@ -139,8 +75,8 @@ func (c *Client) DescribeFleetCapacityRequest(input *DescribeFleetCapacityInput)
 // DescribeFleetCapacity API operation.
 type DescribeFleetCapacityRequest struct {
 	*aws.Request
-	Input *DescribeFleetCapacityInput
-	Copy  func(*DescribeFleetCapacityInput) DescribeFleetCapacityRequest
+	Input *types.DescribeFleetCapacityInput
+	Copy  func(*types.DescribeFleetCapacityInput) DescribeFleetCapacityRequest
 }
 
 // Send marshals and sends the DescribeFleetCapacity API request.
@@ -152,7 +88,7 @@ func (r DescribeFleetCapacityRequest) Send(ctx context.Context) (*DescribeFleetC
 	}
 
 	resp := &DescribeFleetCapacityResponse{
-		DescribeFleetCapacityOutput: r.Request.Data.(*DescribeFleetCapacityOutput),
+		DescribeFleetCapacityOutput: r.Request.Data.(*types.DescribeFleetCapacityOutput),
 		response:                    &aws.Response{Request: r.Request},
 	}
 
@@ -162,7 +98,7 @@ func (r DescribeFleetCapacityRequest) Send(ctx context.Context) (*DescribeFleetC
 // DescribeFleetCapacityResponse is the response type for the
 // DescribeFleetCapacity API operation.
 type DescribeFleetCapacityResponse struct {
-	*DescribeFleetCapacityOutput
+	*types.DescribeFleetCapacityOutput
 
 	response *aws.Response
 }

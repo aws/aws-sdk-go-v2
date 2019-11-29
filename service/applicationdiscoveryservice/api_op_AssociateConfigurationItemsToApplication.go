@@ -6,54 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/applicationdiscoveryservice/types"
 )
-
-type AssociateConfigurationItemsToApplicationInput struct {
-	_ struct{} `type:"structure"`
-
-	// The configuration ID of an application with which items are to be associated.
-	//
-	// ApplicationConfigurationId is a required field
-	ApplicationConfigurationId *string `locationName:"applicationConfigurationId" type:"string" required:"true"`
-
-	// The ID of each configuration item to be associated with an application.
-	//
-	// ConfigurationIds is a required field
-	ConfigurationIds []string `locationName:"configurationIds" type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s AssociateConfigurationItemsToApplicationInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *AssociateConfigurationItemsToApplicationInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "AssociateConfigurationItemsToApplicationInput"}
-
-	if s.ApplicationConfigurationId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ApplicationConfigurationId"))
-	}
-
-	if s.ConfigurationIds == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ConfigurationIds"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type AssociateConfigurationItemsToApplicationOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s AssociateConfigurationItemsToApplicationOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opAssociateConfigurationItemsToApplication = "AssociateConfigurationItemsToApplication"
 
@@ -70,7 +24,7 @@ const opAssociateConfigurationItemsToApplication = "AssociateConfigurationItemsT
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/discovery-2015-11-01/AssociateConfigurationItemsToApplication
-func (c *Client) AssociateConfigurationItemsToApplicationRequest(input *AssociateConfigurationItemsToApplicationInput) AssociateConfigurationItemsToApplicationRequest {
+func (c *Client) AssociateConfigurationItemsToApplicationRequest(input *types.AssociateConfigurationItemsToApplicationInput) AssociateConfigurationItemsToApplicationRequest {
 	op := &aws.Operation{
 		Name:       opAssociateConfigurationItemsToApplication,
 		HTTPMethod: "POST",
@@ -78,10 +32,10 @@ func (c *Client) AssociateConfigurationItemsToApplicationRequest(input *Associat
 	}
 
 	if input == nil {
-		input = &AssociateConfigurationItemsToApplicationInput{}
+		input = &types.AssociateConfigurationItemsToApplicationInput{}
 	}
 
-	req := c.newRequest(op, input, &AssociateConfigurationItemsToApplicationOutput{})
+	req := c.newRequest(op, input, &types.AssociateConfigurationItemsToApplicationOutput{})
 	return AssociateConfigurationItemsToApplicationRequest{Request: req, Input: input, Copy: c.AssociateConfigurationItemsToApplicationRequest}
 }
 
@@ -89,8 +43,8 @@ func (c *Client) AssociateConfigurationItemsToApplicationRequest(input *Associat
 // AssociateConfigurationItemsToApplication API operation.
 type AssociateConfigurationItemsToApplicationRequest struct {
 	*aws.Request
-	Input *AssociateConfigurationItemsToApplicationInput
-	Copy  func(*AssociateConfigurationItemsToApplicationInput) AssociateConfigurationItemsToApplicationRequest
+	Input *types.AssociateConfigurationItemsToApplicationInput
+	Copy  func(*types.AssociateConfigurationItemsToApplicationInput) AssociateConfigurationItemsToApplicationRequest
 }
 
 // Send marshals and sends the AssociateConfigurationItemsToApplication API request.
@@ -102,7 +56,7 @@ func (r AssociateConfigurationItemsToApplicationRequest) Send(ctx context.Contex
 	}
 
 	resp := &AssociateConfigurationItemsToApplicationResponse{
-		AssociateConfigurationItemsToApplicationOutput: r.Request.Data.(*AssociateConfigurationItemsToApplicationOutput),
+		AssociateConfigurationItemsToApplicationOutput: r.Request.Data.(*types.AssociateConfigurationItemsToApplicationOutput),
 		response: &aws.Response{Request: r.Request},
 	}
 
@@ -112,7 +66,7 @@ func (r AssociateConfigurationItemsToApplicationRequest) Send(ctx context.Contex
 // AssociateConfigurationItemsToApplicationResponse is the response type for the
 // AssociateConfigurationItemsToApplication API operation.
 type AssociateConfigurationItemsToApplicationResponse struct {
-	*AssociateConfigurationItemsToApplicationOutput
+	*types.AssociateConfigurationItemsToApplicationOutput
 
 	response *aws.Response
 }

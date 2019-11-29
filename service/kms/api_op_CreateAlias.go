@@ -6,67 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
+	"github.com/aws/aws-sdk-go-v2/service/kms/types"
 )
-
-type CreateAliasInput struct {
-	_ struct{} `type:"structure"`
-
-	// Specifies the alias name. This value must begin with alias/ followed by a
-	// name, such as alias/ExampleAlias. The alias name cannot begin with alias/aws/.
-	// The alias/aws/ prefix is reserved for AWS managed CMKs.
-	//
-	// AliasName is a required field
-	AliasName *string `min:"1" type:"string" required:"true"`
-
-	// Identifies the CMK to which the alias refers. Specify the key ID or the Amazon
-	// Resource Name (ARN) of the CMK. You cannot specify another alias. For help
-	// finding the key ID and ARN, see Finding the Key ID and ARN (https://docs.aws.amazon.com/kms/latest/developerguide/viewing-keys.html#find-cmk-id-arn)
-	// in the AWS Key Management Service Developer Guide.
-	//
-	// TargetKeyId is a required field
-	TargetKeyId *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s CreateAliasInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateAliasInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateAliasInput"}
-
-	if s.AliasName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("AliasName"))
-	}
-	if s.AliasName != nil && len(*s.AliasName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("AliasName", 1))
-	}
-
-	if s.TargetKeyId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("TargetKeyId"))
-	}
-	if s.TargetKeyId != nil && len(*s.TargetKeyId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("TargetKeyId", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type CreateAliasOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s CreateAliasOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCreateAlias = "CreateAlias"
 
@@ -110,7 +53,7 @@ const opCreateAlias = "CreateAlias"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/CreateAlias
-func (c *Client) CreateAliasRequest(input *CreateAliasInput) CreateAliasRequest {
+func (c *Client) CreateAliasRequest(input *types.CreateAliasInput) CreateAliasRequest {
 	op := &aws.Operation{
 		Name:       opCreateAlias,
 		HTTPMethod: "POST",
@@ -118,10 +61,10 @@ func (c *Client) CreateAliasRequest(input *CreateAliasInput) CreateAliasRequest 
 	}
 
 	if input == nil {
-		input = &CreateAliasInput{}
+		input = &types.CreateAliasInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateAliasOutput{})
+	req := c.newRequest(op, input, &types.CreateAliasOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return CreateAliasRequest{Request: req, Input: input, Copy: c.CreateAliasRequest}
@@ -131,8 +74,8 @@ func (c *Client) CreateAliasRequest(input *CreateAliasInput) CreateAliasRequest 
 // CreateAlias API operation.
 type CreateAliasRequest struct {
 	*aws.Request
-	Input *CreateAliasInput
-	Copy  func(*CreateAliasInput) CreateAliasRequest
+	Input *types.CreateAliasInput
+	Copy  func(*types.CreateAliasInput) CreateAliasRequest
 }
 
 // Send marshals and sends the CreateAlias API request.
@@ -144,7 +87,7 @@ func (r CreateAliasRequest) Send(ctx context.Context) (*CreateAliasResponse, err
 	}
 
 	resp := &CreateAliasResponse{
-		CreateAliasOutput: r.Request.Data.(*CreateAliasOutput),
+		CreateAliasOutput: r.Request.Data.(*types.CreateAliasOutput),
 		response:          &aws.Response{Request: r.Request},
 	}
 
@@ -154,7 +97,7 @@ func (r CreateAliasRequest) Send(ctx context.Context) (*CreateAliasResponse, err
 // CreateAliasResponse is the response type for the
 // CreateAlias API operation.
 type CreateAliasResponse struct {
-	*CreateAliasOutput
+	*types.CreateAliasOutput
 
 	response *aws.Response
 }

@@ -13,6 +13,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws/awserr"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting/integration"
 	"github.com/aws/aws-sdk-go-v2/service/iam"
+	"github.com/aws/aws-sdk-go-v2/service/iam/types"
 )
 
 var _ aws.Config
@@ -24,7 +25,7 @@ func TestInteg_00_ListUsers(t *testing.T) {
 
 	cfg := integration.ConfigWithDefaultRegion("us-east-1")
 	svc := iam.New(cfg)
-	params := &iam.ListUsersInput{}
+	params := &types.ListUsersInput{}
 
 	req := svc.ListUsersRequest(params)
 
@@ -39,7 +40,7 @@ func TestInteg_01_GetUser(t *testing.T) {
 
 	cfg := integration.ConfigWithDefaultRegion("us-east-1")
 	svc := iam.New(cfg)
-	params := &iam.GetUserInput{
+	params := &types.GetUserInput{
 		UserName: aws.String("fake_user"),
 	}
 

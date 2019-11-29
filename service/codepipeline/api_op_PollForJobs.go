@@ -6,67 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/codepipeline/types"
 )
-
-// Represents the input of a PollForJobs action.
-type PollForJobsInput struct {
-	_ struct{} `type:"structure"`
-
-	// Represents information about an action type.
-	//
-	// ActionTypeId is a required field
-	ActionTypeId *ActionTypeId `locationName:"actionTypeId" type:"structure" required:"true"`
-
-	// The maximum number of jobs to return in a poll for jobs call.
-	MaxBatchSize *int64 `locationName:"maxBatchSize" min:"1" type:"integer"`
-
-	// A map of property names and values. For an action type with no queryable
-	// properties, this value must be null or an empty map. For an action type with
-	// a queryable property, you must supply that property as a key in the map.
-	// Only jobs whose action configuration matches the mapped value are returned.
-	QueryParam map[string]string `locationName:"queryParam" type:"map"`
-}
-
-// String returns the string representation
-func (s PollForJobsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *PollForJobsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "PollForJobsInput"}
-
-	if s.ActionTypeId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ActionTypeId"))
-	}
-	if s.MaxBatchSize != nil && *s.MaxBatchSize < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxBatchSize", 1))
-	}
-	if s.ActionTypeId != nil {
-		if err := s.ActionTypeId.Validate(); err != nil {
-			invalidParams.AddNested("ActionTypeId", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Represents the output of a PollForJobs action.
-type PollForJobsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Information about the jobs to take action on.
-	Jobs []Job `locationName:"jobs" type:"list"`
-}
-
-// String returns the string representation
-func (s PollForJobsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opPollForJobs = "PollForJobs"
 
@@ -91,7 +32,7 @@ const opPollForJobs = "PollForJobs"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/PollForJobs
-func (c *Client) PollForJobsRequest(input *PollForJobsInput) PollForJobsRequest {
+func (c *Client) PollForJobsRequest(input *types.PollForJobsInput) PollForJobsRequest {
 	op := &aws.Operation{
 		Name:       opPollForJobs,
 		HTTPMethod: "POST",
@@ -99,10 +40,10 @@ func (c *Client) PollForJobsRequest(input *PollForJobsInput) PollForJobsRequest 
 	}
 
 	if input == nil {
-		input = &PollForJobsInput{}
+		input = &types.PollForJobsInput{}
 	}
 
-	req := c.newRequest(op, input, &PollForJobsOutput{})
+	req := c.newRequest(op, input, &types.PollForJobsOutput{})
 	return PollForJobsRequest{Request: req, Input: input, Copy: c.PollForJobsRequest}
 }
 
@@ -110,8 +51,8 @@ func (c *Client) PollForJobsRequest(input *PollForJobsInput) PollForJobsRequest 
 // PollForJobs API operation.
 type PollForJobsRequest struct {
 	*aws.Request
-	Input *PollForJobsInput
-	Copy  func(*PollForJobsInput) PollForJobsRequest
+	Input *types.PollForJobsInput
+	Copy  func(*types.PollForJobsInput) PollForJobsRequest
 }
 
 // Send marshals and sends the PollForJobs API request.
@@ -123,7 +64,7 @@ func (r PollForJobsRequest) Send(ctx context.Context) (*PollForJobsResponse, err
 	}
 
 	resp := &PollForJobsResponse{
-		PollForJobsOutput: r.Request.Data.(*PollForJobsOutput),
+		PollForJobsOutput: r.Request.Data.(*types.PollForJobsOutput),
 		response:          &aws.Response{Request: r.Request},
 	}
 
@@ -133,7 +74,7 @@ func (r PollForJobsRequest) Send(ctx context.Context) (*PollForJobsResponse, err
 // PollForJobsResponse is the response type for the
 // PollForJobs API operation.
 type PollForJobsResponse struct {
-	*PollForJobsOutput
+	*types.PollForJobsOutput
 
 	response *aws.Response
 }

@@ -6,31 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/autoscaling/types"
 )
-
-type DescribeTerminationPolicyTypesInput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DescribeTerminationPolicyTypesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type DescribeTerminationPolicyTypesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The termination policies supported by Amazon EC2 Auto Scaling: OldestInstance,
-	// OldestLaunchConfiguration, NewestInstance, ClosestToNextInstanceHour, Default,
-	// OldestLaunchTemplate, and AllocationStrategy.
-	TerminationPolicyTypes []string `type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeTerminationPolicyTypesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeTerminationPolicyTypes = "DescribeTerminationPolicyTypes"
 
@@ -51,7 +28,7 @@ const opDescribeTerminationPolicyTypes = "DescribeTerminationPolicyTypes"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DescribeTerminationPolicyTypes
-func (c *Client) DescribeTerminationPolicyTypesRequest(input *DescribeTerminationPolicyTypesInput) DescribeTerminationPolicyTypesRequest {
+func (c *Client) DescribeTerminationPolicyTypesRequest(input *types.DescribeTerminationPolicyTypesInput) DescribeTerminationPolicyTypesRequest {
 	op := &aws.Operation{
 		Name:       opDescribeTerminationPolicyTypes,
 		HTTPMethod: "POST",
@@ -59,10 +36,10 @@ func (c *Client) DescribeTerminationPolicyTypesRequest(input *DescribeTerminatio
 	}
 
 	if input == nil {
-		input = &DescribeTerminationPolicyTypesInput{}
+		input = &types.DescribeTerminationPolicyTypesInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeTerminationPolicyTypesOutput{})
+	req := c.newRequest(op, input, &types.DescribeTerminationPolicyTypesOutput{})
 	return DescribeTerminationPolicyTypesRequest{Request: req, Input: input, Copy: c.DescribeTerminationPolicyTypesRequest}
 }
 
@@ -70,8 +47,8 @@ func (c *Client) DescribeTerminationPolicyTypesRequest(input *DescribeTerminatio
 // DescribeTerminationPolicyTypes API operation.
 type DescribeTerminationPolicyTypesRequest struct {
 	*aws.Request
-	Input *DescribeTerminationPolicyTypesInput
-	Copy  func(*DescribeTerminationPolicyTypesInput) DescribeTerminationPolicyTypesRequest
+	Input *types.DescribeTerminationPolicyTypesInput
+	Copy  func(*types.DescribeTerminationPolicyTypesInput) DescribeTerminationPolicyTypesRequest
 }
 
 // Send marshals and sends the DescribeTerminationPolicyTypes API request.
@@ -83,7 +60,7 @@ func (r DescribeTerminationPolicyTypesRequest) Send(ctx context.Context) (*Descr
 	}
 
 	resp := &DescribeTerminationPolicyTypesResponse{
-		DescribeTerminationPolicyTypesOutput: r.Request.Data.(*DescribeTerminationPolicyTypesOutput),
+		DescribeTerminationPolicyTypesOutput: r.Request.Data.(*types.DescribeTerminationPolicyTypesOutput),
 		response:                             &aws.Response{Request: r.Request},
 	}
 
@@ -93,7 +70,7 @@ func (r DescribeTerminationPolicyTypesRequest) Send(ctx context.Context) (*Descr
 // DescribeTerminationPolicyTypesResponse is the response type for the
 // DescribeTerminationPolicyTypes API operation.
 type DescribeTerminationPolicyTypesResponse struct {
-	*DescribeTerminationPolicyTypesOutput
+	*types.DescribeTerminationPolicyTypesOutput
 
 	response *aws.Response
 }

@@ -4,126 +4,10 @@ package greengrass
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/greengrass/types"
 )
-
-type CreateLoggerDefinitionVersionInput struct {
-	_ struct{} `type:"structure"`
-
-	AmznClientToken *string `location:"header" locationName:"X-Amzn-Client-Token" type:"string"`
-
-	// LoggerDefinitionId is a required field
-	LoggerDefinitionId *string `location:"uri" locationName:"LoggerDefinitionId" type:"string" required:"true"`
-
-	Loggers []Logger `type:"list"`
-}
-
-// String returns the string representation
-func (s CreateLoggerDefinitionVersionInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateLoggerDefinitionVersionInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateLoggerDefinitionVersionInput"}
-
-	if s.LoggerDefinitionId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("LoggerDefinitionId"))
-	}
-	if s.Loggers != nil {
-		for i, v := range s.Loggers {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Loggers", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s CreateLoggerDefinitionVersionInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.Loggers != nil {
-		v := s.Loggers
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "Loggers", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	if s.AmznClientToken != nil {
-		v := *s.AmznClientToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "X-Amzn-Client-Token", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.LoggerDefinitionId != nil {
-		v := *s.LoggerDefinitionId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "LoggerDefinitionId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type CreateLoggerDefinitionVersionOutput struct {
-	_ struct{} `type:"structure"`
-
-	Arn *string `type:"string"`
-
-	CreationTimestamp *string `type:"string"`
-
-	Id *string `type:"string"`
-
-	Version *string `type:"string"`
-}
-
-// String returns the string representation
-func (s CreateLoggerDefinitionVersionOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s CreateLoggerDefinitionVersionOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.Arn != nil {
-		v := *s.Arn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "Arn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.CreationTimestamp != nil {
-		v := *s.CreationTimestamp
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "CreationTimestamp", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Id != nil {
-		v := *s.Id
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "Id", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Version != nil {
-		v := *s.Version
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "Version", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opCreateLoggerDefinitionVersion = "CreateLoggerDefinitionVersion"
 
@@ -140,7 +24,7 @@ const opCreateLoggerDefinitionVersion = "CreateLoggerDefinitionVersion"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/CreateLoggerDefinitionVersion
-func (c *Client) CreateLoggerDefinitionVersionRequest(input *CreateLoggerDefinitionVersionInput) CreateLoggerDefinitionVersionRequest {
+func (c *Client) CreateLoggerDefinitionVersionRequest(input *types.CreateLoggerDefinitionVersionInput) CreateLoggerDefinitionVersionRequest {
 	op := &aws.Operation{
 		Name:       opCreateLoggerDefinitionVersion,
 		HTTPMethod: "POST",
@@ -148,10 +32,10 @@ func (c *Client) CreateLoggerDefinitionVersionRequest(input *CreateLoggerDefinit
 	}
 
 	if input == nil {
-		input = &CreateLoggerDefinitionVersionInput{}
+		input = &types.CreateLoggerDefinitionVersionInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateLoggerDefinitionVersionOutput{})
+	req := c.newRequest(op, input, &types.CreateLoggerDefinitionVersionOutput{})
 	return CreateLoggerDefinitionVersionRequest{Request: req, Input: input, Copy: c.CreateLoggerDefinitionVersionRequest}
 }
 
@@ -159,8 +43,8 @@ func (c *Client) CreateLoggerDefinitionVersionRequest(input *CreateLoggerDefinit
 // CreateLoggerDefinitionVersion API operation.
 type CreateLoggerDefinitionVersionRequest struct {
 	*aws.Request
-	Input *CreateLoggerDefinitionVersionInput
-	Copy  func(*CreateLoggerDefinitionVersionInput) CreateLoggerDefinitionVersionRequest
+	Input *types.CreateLoggerDefinitionVersionInput
+	Copy  func(*types.CreateLoggerDefinitionVersionInput) CreateLoggerDefinitionVersionRequest
 }
 
 // Send marshals and sends the CreateLoggerDefinitionVersion API request.
@@ -172,7 +56,7 @@ func (r CreateLoggerDefinitionVersionRequest) Send(ctx context.Context) (*Create
 	}
 
 	resp := &CreateLoggerDefinitionVersionResponse{
-		CreateLoggerDefinitionVersionOutput: r.Request.Data.(*CreateLoggerDefinitionVersionOutput),
+		CreateLoggerDefinitionVersionOutput: r.Request.Data.(*types.CreateLoggerDefinitionVersionOutput),
 		response:                            &aws.Response{Request: r.Request},
 	}
 
@@ -182,7 +66,7 @@ func (r CreateLoggerDefinitionVersionRequest) Send(ctx context.Context) (*Create
 // CreateLoggerDefinitionVersionResponse is the response type for the
 // CreateLoggerDefinitionVersion API operation.
 type CreateLoggerDefinitionVersionResponse struct {
-	*CreateLoggerDefinitionVersionOutput
+	*types.CreateLoggerDefinitionVersionOutput
 
 	response *aws.Response
 }

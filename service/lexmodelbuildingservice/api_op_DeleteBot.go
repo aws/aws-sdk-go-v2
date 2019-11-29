@@ -6,68 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/restjson"
+	"github.com/aws/aws-sdk-go-v2/service/lexmodelbuildingservice/types"
 )
-
-type DeleteBotInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the bot. The name is case sensitive.
-	//
-	// Name is a required field
-	Name *string `location:"uri" locationName:"name" min:"2" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteBotInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteBotInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteBotInput"}
-
-	if s.Name == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Name"))
-	}
-	if s.Name != nil && len(*s.Name) < 2 {
-		invalidParams.Add(aws.NewErrParamMinLen("Name", 2))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteBotInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.Name != nil {
-		v := *s.Name
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type DeleteBotOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteBotOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteBotOutput) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
 
 const opDeleteBot = "DeleteBot"
 
@@ -93,7 +35,7 @@ const opDeleteBot = "DeleteBot"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/DeleteBot
-func (c *Client) DeleteBotRequest(input *DeleteBotInput) DeleteBotRequest {
+func (c *Client) DeleteBotRequest(input *types.DeleteBotInput) DeleteBotRequest {
 	op := &aws.Operation{
 		Name:       opDeleteBot,
 		HTTPMethod: "DELETE",
@@ -101,10 +43,10 @@ func (c *Client) DeleteBotRequest(input *DeleteBotInput) DeleteBotRequest {
 	}
 
 	if input == nil {
-		input = &DeleteBotInput{}
+		input = &types.DeleteBotInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteBotOutput{})
+	req := c.newRequest(op, input, &types.DeleteBotOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return DeleteBotRequest{Request: req, Input: input, Copy: c.DeleteBotRequest}
@@ -114,8 +56,8 @@ func (c *Client) DeleteBotRequest(input *DeleteBotInput) DeleteBotRequest {
 // DeleteBot API operation.
 type DeleteBotRequest struct {
 	*aws.Request
-	Input *DeleteBotInput
-	Copy  func(*DeleteBotInput) DeleteBotRequest
+	Input *types.DeleteBotInput
+	Copy  func(*types.DeleteBotInput) DeleteBotRequest
 }
 
 // Send marshals and sends the DeleteBot API request.
@@ -127,7 +69,7 @@ func (r DeleteBotRequest) Send(ctx context.Context) (*DeleteBotResponse, error) 
 	}
 
 	resp := &DeleteBotResponse{
-		DeleteBotOutput: r.Request.Data.(*DeleteBotOutput),
+		DeleteBotOutput: r.Request.Data.(*types.DeleteBotOutput),
 		response:        &aws.Response{Request: r.Request},
 	}
 
@@ -137,7 +79,7 @@ func (r DeleteBotRequest) Send(ctx context.Context) (*DeleteBotResponse, error) 
 // DeleteBotResponse is the response type for the
 // DeleteBot API operation.
 type DeleteBotResponse struct {
-	*DeleteBotOutput
+	*types.DeleteBotOutput
 
 	response *aws.Response
 }

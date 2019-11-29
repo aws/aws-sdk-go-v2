@@ -4,95 +4,10 @@ package waf
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/waf/types"
 )
-
-type UpdateRuleGroupInput struct {
-	_ struct{} `type:"structure"`
-
-	// The value returned by the most recent call to GetChangeToken.
-	//
-	// ChangeToken is a required field
-	ChangeToken *string `min:"1" type:"string" required:"true"`
-
-	// The RuleGroupId of the RuleGroup that you want to update. RuleGroupId is
-	// returned by CreateRuleGroup and by ListRuleGroups.
-	//
-	// RuleGroupId is a required field
-	RuleGroupId *string `min:"1" type:"string" required:"true"`
-
-	// An array of RuleGroupUpdate objects that you want to insert into or delete
-	// from a RuleGroup.
-	//
-	// You can only insert REGULAR rules into a rule group.
-	//
-	// ActivatedRule|OverrideAction applies only when updating or adding a RuleGroup
-	// to a WebACL. In this case you do not use ActivatedRule|Action. For all other
-	// update requests, ActivatedRule|Action is used instead of ActivatedRule|OverrideAction.
-	//
-	// Updates is a required field
-	Updates []RuleGroupUpdate `min:"1" type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s UpdateRuleGroupInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateRuleGroupInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateRuleGroupInput"}
-
-	if s.ChangeToken == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ChangeToken"))
-	}
-	if s.ChangeToken != nil && len(*s.ChangeToken) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ChangeToken", 1))
-	}
-
-	if s.RuleGroupId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("RuleGroupId"))
-	}
-	if s.RuleGroupId != nil && len(*s.RuleGroupId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("RuleGroupId", 1))
-	}
-
-	if s.Updates == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Updates"))
-	}
-	if s.Updates != nil && len(s.Updates) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Updates", 1))
-	}
-	if s.Updates != nil {
-		for i, v := range s.Updates {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Updates", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type UpdateRuleGroupOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The ChangeToken that you used to submit the UpdateRuleGroup request. You
-	// can also use this value to query the status of the request. For more information,
-	// see GetChangeTokenStatus.
-	ChangeToken *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s UpdateRuleGroupOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opUpdateRuleGroup = "UpdateRuleGroup"
 
@@ -131,7 +46,7 @@ const opUpdateRuleGroup = "UpdateRuleGroup"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/UpdateRuleGroup
-func (c *Client) UpdateRuleGroupRequest(input *UpdateRuleGroupInput) UpdateRuleGroupRequest {
+func (c *Client) UpdateRuleGroupRequest(input *types.UpdateRuleGroupInput) UpdateRuleGroupRequest {
 	op := &aws.Operation{
 		Name:       opUpdateRuleGroup,
 		HTTPMethod: "POST",
@@ -139,10 +54,10 @@ func (c *Client) UpdateRuleGroupRequest(input *UpdateRuleGroupInput) UpdateRuleG
 	}
 
 	if input == nil {
-		input = &UpdateRuleGroupInput{}
+		input = &types.UpdateRuleGroupInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateRuleGroupOutput{})
+	req := c.newRequest(op, input, &types.UpdateRuleGroupOutput{})
 	return UpdateRuleGroupRequest{Request: req, Input: input, Copy: c.UpdateRuleGroupRequest}
 }
 
@@ -150,8 +65,8 @@ func (c *Client) UpdateRuleGroupRequest(input *UpdateRuleGroupInput) UpdateRuleG
 // UpdateRuleGroup API operation.
 type UpdateRuleGroupRequest struct {
 	*aws.Request
-	Input *UpdateRuleGroupInput
-	Copy  func(*UpdateRuleGroupInput) UpdateRuleGroupRequest
+	Input *types.UpdateRuleGroupInput
+	Copy  func(*types.UpdateRuleGroupInput) UpdateRuleGroupRequest
 }
 
 // Send marshals and sends the UpdateRuleGroup API request.
@@ -163,7 +78,7 @@ func (r UpdateRuleGroupRequest) Send(ctx context.Context) (*UpdateRuleGroupRespo
 	}
 
 	resp := &UpdateRuleGroupResponse{
-		UpdateRuleGroupOutput: r.Request.Data.(*UpdateRuleGroupOutput),
+		UpdateRuleGroupOutput: r.Request.Data.(*types.UpdateRuleGroupOutput),
 		response:              &aws.Response{Request: r.Request},
 	}
 
@@ -173,7 +88,7 @@ func (r UpdateRuleGroupRequest) Send(ctx context.Context) (*UpdateRuleGroupRespo
 // UpdateRuleGroupResponse is the response type for the
 // UpdateRuleGroup API operation.
 type UpdateRuleGroupResponse struct {
-	*UpdateRuleGroupOutput
+	*types.UpdateRuleGroupOutput
 
 	response *aws.Response
 }

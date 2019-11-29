@@ -6,60 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/appstream/types"
 )
-
-type AssociateFleetInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the fleet.
-	//
-	// FleetName is a required field
-	FleetName *string `min:"1" type:"string" required:"true"`
-
-	// The name of the stack.
-	//
-	// StackName is a required field
-	StackName *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s AssociateFleetInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *AssociateFleetInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "AssociateFleetInput"}
-
-	if s.FleetName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("FleetName"))
-	}
-	if s.FleetName != nil && len(*s.FleetName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("FleetName", 1))
-	}
-
-	if s.StackName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("StackName"))
-	}
-	if s.StackName != nil && len(*s.StackName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("StackName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type AssociateFleetOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s AssociateFleetOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opAssociateFleet = "AssociateFleet"
 
@@ -76,7 +24,7 @@ const opAssociateFleet = "AssociateFleet"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/AssociateFleet
-func (c *Client) AssociateFleetRequest(input *AssociateFleetInput) AssociateFleetRequest {
+func (c *Client) AssociateFleetRequest(input *types.AssociateFleetInput) AssociateFleetRequest {
 	op := &aws.Operation{
 		Name:       opAssociateFleet,
 		HTTPMethod: "POST",
@@ -84,10 +32,10 @@ func (c *Client) AssociateFleetRequest(input *AssociateFleetInput) AssociateFlee
 	}
 
 	if input == nil {
-		input = &AssociateFleetInput{}
+		input = &types.AssociateFleetInput{}
 	}
 
-	req := c.newRequest(op, input, &AssociateFleetOutput{})
+	req := c.newRequest(op, input, &types.AssociateFleetOutput{})
 	return AssociateFleetRequest{Request: req, Input: input, Copy: c.AssociateFleetRequest}
 }
 
@@ -95,8 +43,8 @@ func (c *Client) AssociateFleetRequest(input *AssociateFleetInput) AssociateFlee
 // AssociateFleet API operation.
 type AssociateFleetRequest struct {
 	*aws.Request
-	Input *AssociateFleetInput
-	Copy  func(*AssociateFleetInput) AssociateFleetRequest
+	Input *types.AssociateFleetInput
+	Copy  func(*types.AssociateFleetInput) AssociateFleetRequest
 }
 
 // Send marshals and sends the AssociateFleet API request.
@@ -108,7 +56,7 @@ func (r AssociateFleetRequest) Send(ctx context.Context) (*AssociateFleetRespons
 	}
 
 	resp := &AssociateFleetResponse{
-		AssociateFleetOutput: r.Request.Data.(*AssociateFleetOutput),
+		AssociateFleetOutput: r.Request.Data.(*types.AssociateFleetOutput),
 		response:             &aws.Response{Request: r.Request},
 	}
 
@@ -118,7 +66,7 @@ func (r AssociateFleetRequest) Send(ctx context.Context) (*AssociateFleetRespons
 // AssociateFleetResponse is the response type for the
 // AssociateFleet API operation.
 type AssociateFleetResponse struct {
-	*AssociateFleetOutput
+	*types.AssociateFleetOutput
 
 	response *aws.Response
 }

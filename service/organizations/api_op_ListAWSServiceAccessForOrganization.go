@@ -6,68 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/organizations/types"
 )
-
-type ListAWSServiceAccessForOrganizationInput struct {
-	_ struct{} `type:"structure"`
-
-	// (Optional) Use this to limit the number of results you want included per
-	// page in the response. If you do not include this parameter, it defaults to
-	// a value that is specific to the operation. If additional items exist beyond
-	// the maximum you specify, the NextToken response element is present and has
-	// a value (is not null). Include that value as the NextToken request parameter
-	// in the next call to the operation to get the next part of the results. Note
-	// that Organizations might return fewer results than the maximum even when
-	// there are more results available. You should check NextToken after every
-	// operation to ensure that you receive all of the results.
-	MaxResults *int64 `min:"1" type:"integer"`
-
-	// Use this parameter if you receive a NextToken response in a previous request
-	// that indicates that there is more output available. Set it to the value of
-	// the previous call's NextToken response to indicate where the output should
-	// continue from.
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s ListAWSServiceAccessForOrganizationInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListAWSServiceAccessForOrganizationInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListAWSServiceAccessForOrganizationInput"}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ListAWSServiceAccessForOrganizationOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A list of the service principals for the services that are enabled to integrate
-	// with your organization. Each principal is a structure that includes the name
-	// and the date that it was enabled for integration with AWS Organizations.
-	EnabledServicePrincipals []EnabledServicePrincipal `type:"list"`
-
-	// If present, this value indicates that there is more output available than
-	// is included in the current response. Use this value in the NextToken request
-	// parameter in a subsequent call to the operation to get the next part of the
-	// output. You should repeat this until the NextToken response element comes
-	// back as null.
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s ListAWSServiceAccessForOrganizationOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListAWSServiceAccessForOrganization = "ListAWSServiceAccessForOrganization"
 
@@ -94,7 +34,7 @@ const opListAWSServiceAccessForOrganization = "ListAWSServiceAccessForOrganizati
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListAWSServiceAccessForOrganization
-func (c *Client) ListAWSServiceAccessForOrganizationRequest(input *ListAWSServiceAccessForOrganizationInput) ListAWSServiceAccessForOrganizationRequest {
+func (c *Client) ListAWSServiceAccessForOrganizationRequest(input *types.ListAWSServiceAccessForOrganizationInput) ListAWSServiceAccessForOrganizationRequest {
 	op := &aws.Operation{
 		Name:       opListAWSServiceAccessForOrganization,
 		HTTPMethod: "POST",
@@ -108,10 +48,10 @@ func (c *Client) ListAWSServiceAccessForOrganizationRequest(input *ListAWSServic
 	}
 
 	if input == nil {
-		input = &ListAWSServiceAccessForOrganizationInput{}
+		input = &types.ListAWSServiceAccessForOrganizationInput{}
 	}
 
-	req := c.newRequest(op, input, &ListAWSServiceAccessForOrganizationOutput{})
+	req := c.newRequest(op, input, &types.ListAWSServiceAccessForOrganizationOutput{})
 	return ListAWSServiceAccessForOrganizationRequest{Request: req, Input: input, Copy: c.ListAWSServiceAccessForOrganizationRequest}
 }
 
@@ -119,8 +59,8 @@ func (c *Client) ListAWSServiceAccessForOrganizationRequest(input *ListAWSServic
 // ListAWSServiceAccessForOrganization API operation.
 type ListAWSServiceAccessForOrganizationRequest struct {
 	*aws.Request
-	Input *ListAWSServiceAccessForOrganizationInput
-	Copy  func(*ListAWSServiceAccessForOrganizationInput) ListAWSServiceAccessForOrganizationRequest
+	Input *types.ListAWSServiceAccessForOrganizationInput
+	Copy  func(*types.ListAWSServiceAccessForOrganizationInput) ListAWSServiceAccessForOrganizationRequest
 }
 
 // Send marshals and sends the ListAWSServiceAccessForOrganization API request.
@@ -132,7 +72,7 @@ func (r ListAWSServiceAccessForOrganizationRequest) Send(ctx context.Context) (*
 	}
 
 	resp := &ListAWSServiceAccessForOrganizationResponse{
-		ListAWSServiceAccessForOrganizationOutput: r.Request.Data.(*ListAWSServiceAccessForOrganizationOutput),
+		ListAWSServiceAccessForOrganizationOutput: r.Request.Data.(*types.ListAWSServiceAccessForOrganizationOutput),
 		response: &aws.Response{Request: r.Request},
 	}
 
@@ -162,7 +102,7 @@ func NewListAWSServiceAccessForOrganizationPaginator(req ListAWSServiceAccessFor
 	return ListAWSServiceAccessForOrganizationPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListAWSServiceAccessForOrganizationInput
+				var inCpy *types.ListAWSServiceAccessForOrganizationInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -182,14 +122,14 @@ type ListAWSServiceAccessForOrganizationPaginator struct {
 	aws.Pager
 }
 
-func (p *ListAWSServiceAccessForOrganizationPaginator) CurrentPage() *ListAWSServiceAccessForOrganizationOutput {
-	return p.Pager.CurrentPage().(*ListAWSServiceAccessForOrganizationOutput)
+func (p *ListAWSServiceAccessForOrganizationPaginator) CurrentPage() *types.ListAWSServiceAccessForOrganizationOutput {
+	return p.Pager.CurrentPage().(*types.ListAWSServiceAccessForOrganizationOutput)
 }
 
 // ListAWSServiceAccessForOrganizationResponse is the response type for the
 // ListAWSServiceAccessForOrganization API operation.
 type ListAWSServiceAccessForOrganizationResponse struct {
-	*ListAWSServiceAccessForOrganizationOutput
+	*types.ListAWSServiceAccessForOrganizationOutput
 
 	response *aws.Response
 }

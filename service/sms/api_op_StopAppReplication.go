@@ -6,29 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/sms/types"
 )
-
-type StopAppReplicationInput struct {
-	_ struct{} `type:"structure"`
-
-	// ID of the application to stop replicating.
-	AppId *string `locationName:"appId" type:"string"`
-}
-
-// String returns the string representation
-func (s StopAppReplicationInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type StopAppReplicationOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s StopAppReplicationOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opStopAppReplication = "StopAppReplication"
 
@@ -45,7 +24,7 @@ const opStopAppReplication = "StopAppReplication"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sms-2016-10-24/StopAppReplication
-func (c *Client) StopAppReplicationRequest(input *StopAppReplicationInput) StopAppReplicationRequest {
+func (c *Client) StopAppReplicationRequest(input *types.StopAppReplicationInput) StopAppReplicationRequest {
 	op := &aws.Operation{
 		Name:       opStopAppReplication,
 		HTTPMethod: "POST",
@@ -53,10 +32,10 @@ func (c *Client) StopAppReplicationRequest(input *StopAppReplicationInput) StopA
 	}
 
 	if input == nil {
-		input = &StopAppReplicationInput{}
+		input = &types.StopAppReplicationInput{}
 	}
 
-	req := c.newRequest(op, input, &StopAppReplicationOutput{})
+	req := c.newRequest(op, input, &types.StopAppReplicationOutput{})
 	return StopAppReplicationRequest{Request: req, Input: input, Copy: c.StopAppReplicationRequest}
 }
 
@@ -64,8 +43,8 @@ func (c *Client) StopAppReplicationRequest(input *StopAppReplicationInput) StopA
 // StopAppReplication API operation.
 type StopAppReplicationRequest struct {
 	*aws.Request
-	Input *StopAppReplicationInput
-	Copy  func(*StopAppReplicationInput) StopAppReplicationRequest
+	Input *types.StopAppReplicationInput
+	Copy  func(*types.StopAppReplicationInput) StopAppReplicationRequest
 }
 
 // Send marshals and sends the StopAppReplication API request.
@@ -77,7 +56,7 @@ func (r StopAppReplicationRequest) Send(ctx context.Context) (*StopAppReplicatio
 	}
 
 	resp := &StopAppReplicationResponse{
-		StopAppReplicationOutput: r.Request.Data.(*StopAppReplicationOutput),
+		StopAppReplicationOutput: r.Request.Data.(*types.StopAppReplicationOutput),
 		response:                 &aws.Response{Request: r.Request},
 	}
 
@@ -87,7 +66,7 @@ func (r StopAppReplicationRequest) Send(ctx context.Context) (*StopAppReplicatio
 // StopAppReplicationResponse is the response type for the
 // StopAppReplication API operation.
 type StopAppReplicationResponse struct {
-	*StopAppReplicationOutput
+	*types.StopAppReplicationOutput
 
 	response *aws.Response
 }

@@ -6,56 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/snowball/types"
 )
-
-type ListClustersInput struct {
-	_ struct{} `type:"structure"`
-
-	// The number of ClusterListEntry objects to return.
-	MaxResults *int64 `type:"integer"`
-
-	// HTTP requests are stateless. To identify what object comes "next" in the
-	// list of ClusterListEntry objects, you have the option of specifying NextToken
-	// as the starting point for your returned list.
-	NextToken *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s ListClustersInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListClustersInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListClustersInput"}
-	if s.NextToken != nil && len(*s.NextToken) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ListClustersOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Each ClusterListEntry object contains a cluster's state, a cluster's ID,
-	// and other important status information.
-	ClusterListEntries []ClusterListEntry `type:"list"`
-
-	// HTTP requests are stateless. If you use the automatically generated NextToken
-	// value in your next ClusterListEntry call, your list of returned clusters
-	// will start from this point in the array.
-	NextToken *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s ListClustersOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListClusters = "ListClusters"
 
@@ -74,7 +26,7 @@ const opListClusters = "ListClusters"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/ListClusters
-func (c *Client) ListClustersRequest(input *ListClustersInput) ListClustersRequest {
+func (c *Client) ListClustersRequest(input *types.ListClustersInput) ListClustersRequest {
 	op := &aws.Operation{
 		Name:       opListClusters,
 		HTTPMethod: "POST",
@@ -82,10 +34,10 @@ func (c *Client) ListClustersRequest(input *ListClustersInput) ListClustersReque
 	}
 
 	if input == nil {
-		input = &ListClustersInput{}
+		input = &types.ListClustersInput{}
 	}
 
-	req := c.newRequest(op, input, &ListClustersOutput{})
+	req := c.newRequest(op, input, &types.ListClustersOutput{})
 	return ListClustersRequest{Request: req, Input: input, Copy: c.ListClustersRequest}
 }
 
@@ -93,8 +45,8 @@ func (c *Client) ListClustersRequest(input *ListClustersInput) ListClustersReque
 // ListClusters API operation.
 type ListClustersRequest struct {
 	*aws.Request
-	Input *ListClustersInput
-	Copy  func(*ListClustersInput) ListClustersRequest
+	Input *types.ListClustersInput
+	Copy  func(*types.ListClustersInput) ListClustersRequest
 }
 
 // Send marshals and sends the ListClusters API request.
@@ -106,7 +58,7 @@ func (r ListClustersRequest) Send(ctx context.Context) (*ListClustersResponse, e
 	}
 
 	resp := &ListClustersResponse{
-		ListClustersOutput: r.Request.Data.(*ListClustersOutput),
+		ListClustersOutput: r.Request.Data.(*types.ListClustersOutput),
 		response:           &aws.Response{Request: r.Request},
 	}
 
@@ -116,7 +68,7 @@ func (r ListClustersRequest) Send(ctx context.Context) (*ListClustersResponse, e
 // ListClustersResponse is the response type for the
 // ListClusters API operation.
 type ListClustersResponse struct {
-	*ListClustersOutput
+	*types.ListClustersOutput
 
 	response *aws.Response
 }

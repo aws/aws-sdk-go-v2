@@ -6,142 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/appmesh/types"
 )
-
-type UpdateRouteInput struct {
-	_ struct{} `type:"structure"`
-
-	ClientToken *string `locationName:"clientToken" type:"string" idempotencyToken:"true"`
-
-	// MeshName is a required field
-	MeshName *string `location:"uri" locationName:"meshName" min:"1" type:"string" required:"true"`
-
-	// RouteName is a required field
-	RouteName *string `location:"uri" locationName:"routeName" min:"1" type:"string" required:"true"`
-
-	// An object representing the specification of a route.
-	//
-	// Spec is a required field
-	Spec *RouteSpec `locationName:"spec" type:"structure" required:"true"`
-
-	// VirtualRouterName is a required field
-	VirtualRouterName *string `location:"uri" locationName:"virtualRouterName" min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s UpdateRouteInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateRouteInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateRouteInput"}
-
-	if s.MeshName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("MeshName"))
-	}
-	if s.MeshName != nil && len(*s.MeshName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("MeshName", 1))
-	}
-
-	if s.RouteName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("RouteName"))
-	}
-	if s.RouteName != nil && len(*s.RouteName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("RouteName", 1))
-	}
-
-	if s.Spec == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Spec"))
-	}
-
-	if s.VirtualRouterName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("VirtualRouterName"))
-	}
-	if s.VirtualRouterName != nil && len(*s.VirtualRouterName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("VirtualRouterName", 1))
-	}
-	if s.Spec != nil {
-		if err := s.Spec.Validate(); err != nil {
-			invalidParams.AddNested("Spec", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s UpdateRouteInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	var ClientToken string
-	if s.ClientToken != nil {
-		ClientToken = *s.ClientToken
-	} else {
-		ClientToken = protocol.GetIdempotencyToken()
-	}
-	{
-		v := ClientToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "clientToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Spec != nil {
-		v := s.Spec
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "spec", v, metadata)
-	}
-	if s.MeshName != nil {
-		v := *s.MeshName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "meshName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.RouteName != nil {
-		v := *s.RouteName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "routeName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.VirtualRouterName != nil {
-		v := *s.VirtualRouterName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "virtualRouterName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type UpdateRouteOutput struct {
-	_ struct{} `type:"structure" payload:"Route"`
-
-	// An object representing a route returned by a describe operation.
-	//
-	// Route is a required field
-	Route *RouteData `locationName:"route" type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s UpdateRouteOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s UpdateRouteOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.Route != nil {
-		v := s.Route
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.PayloadTarget, "route", v, metadata)
-	}
-	return nil
-}
 
 const opUpdateRoute = "UpdateRoute"
 
@@ -158,7 +24,7 @@ const opUpdateRoute = "UpdateRoute"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/UpdateRoute
-func (c *Client) UpdateRouteRequest(input *UpdateRouteInput) UpdateRouteRequest {
+func (c *Client) UpdateRouteRequest(input *types.UpdateRouteInput) UpdateRouteRequest {
 	op := &aws.Operation{
 		Name:       opUpdateRoute,
 		HTTPMethod: "PUT",
@@ -166,10 +32,10 @@ func (c *Client) UpdateRouteRequest(input *UpdateRouteInput) UpdateRouteRequest 
 	}
 
 	if input == nil {
-		input = &UpdateRouteInput{}
+		input = &types.UpdateRouteInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateRouteOutput{})
+	req := c.newRequest(op, input, &types.UpdateRouteOutput{})
 	return UpdateRouteRequest{Request: req, Input: input, Copy: c.UpdateRouteRequest}
 }
 
@@ -177,8 +43,8 @@ func (c *Client) UpdateRouteRequest(input *UpdateRouteInput) UpdateRouteRequest 
 // UpdateRoute API operation.
 type UpdateRouteRequest struct {
 	*aws.Request
-	Input *UpdateRouteInput
-	Copy  func(*UpdateRouteInput) UpdateRouteRequest
+	Input *types.UpdateRouteInput
+	Copy  func(*types.UpdateRouteInput) UpdateRouteRequest
 }
 
 // Send marshals and sends the UpdateRoute API request.
@@ -190,7 +56,7 @@ func (r UpdateRouteRequest) Send(ctx context.Context) (*UpdateRouteResponse, err
 	}
 
 	resp := &UpdateRouteResponse{
-		UpdateRouteOutput: r.Request.Data.(*UpdateRouteOutput),
+		UpdateRouteOutput: r.Request.Data.(*types.UpdateRouteOutput),
 		response:          &aws.Response{Request: r.Request},
 	}
 
@@ -200,7 +66,7 @@ func (r UpdateRouteRequest) Send(ctx context.Context) (*UpdateRouteResponse, err
 // UpdateRouteResponse is the response type for the
 // UpdateRoute API operation.
 type UpdateRouteResponse struct {
-	*UpdateRouteOutput
+	*types.UpdateRouteOutput
 
 	response *aws.Response
 }

@@ -6,52 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/rds/types"
 )
-
-type StopDBClusterInput struct {
-	_ struct{} `type:"structure"`
-
-	// The DB cluster identifier of the Amazon Aurora DB cluster to be stopped.
-	// This parameter is stored as a lowercase string.
-	//
-	// DBClusterIdentifier is a required field
-	DBClusterIdentifier *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s StopDBClusterInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *StopDBClusterInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "StopDBClusterInput"}
-
-	if s.DBClusterIdentifier == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DBClusterIdentifier"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type StopDBClusterOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Contains the details of an Amazon Aurora DB cluster.
-	//
-	// This data type is used as a response element in the DescribeDBClusters, StopDBCluster,
-	// and StartDBCluster actions.
-	DBCluster *DBCluster `type:"structure"`
-}
-
-// String returns the string representation
-func (s StopDBClusterOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opStopDBCluster = "StopDBCluster"
 
@@ -76,7 +32,7 @@ const opStopDBCluster = "StopDBCluster"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/StopDBCluster
-func (c *Client) StopDBClusterRequest(input *StopDBClusterInput) StopDBClusterRequest {
+func (c *Client) StopDBClusterRequest(input *types.StopDBClusterInput) StopDBClusterRequest {
 	op := &aws.Operation{
 		Name:       opStopDBCluster,
 		HTTPMethod: "POST",
@@ -84,10 +40,10 @@ func (c *Client) StopDBClusterRequest(input *StopDBClusterInput) StopDBClusterRe
 	}
 
 	if input == nil {
-		input = &StopDBClusterInput{}
+		input = &types.StopDBClusterInput{}
 	}
 
-	req := c.newRequest(op, input, &StopDBClusterOutput{})
+	req := c.newRequest(op, input, &types.StopDBClusterOutput{})
 	return StopDBClusterRequest{Request: req, Input: input, Copy: c.StopDBClusterRequest}
 }
 
@@ -95,8 +51,8 @@ func (c *Client) StopDBClusterRequest(input *StopDBClusterInput) StopDBClusterRe
 // StopDBCluster API operation.
 type StopDBClusterRequest struct {
 	*aws.Request
-	Input *StopDBClusterInput
-	Copy  func(*StopDBClusterInput) StopDBClusterRequest
+	Input *types.StopDBClusterInput
+	Copy  func(*types.StopDBClusterInput) StopDBClusterRequest
 }
 
 // Send marshals and sends the StopDBCluster API request.
@@ -108,7 +64,7 @@ func (r StopDBClusterRequest) Send(ctx context.Context) (*StopDBClusterResponse,
 	}
 
 	resp := &StopDBClusterResponse{
-		StopDBClusterOutput: r.Request.Data.(*StopDBClusterOutput),
+		StopDBClusterOutput: r.Request.Data.(*types.StopDBClusterOutput),
 		response:            &aws.Response{Request: r.Request},
 	}
 
@@ -118,7 +74,7 @@ func (r StopDBClusterRequest) Send(ctx context.Context) (*StopDBClusterResponse,
 // StopDBClusterResponse is the response type for the
 // StopDBCluster API operation.
 type StopDBClusterResponse struct {
-	*StopDBClusterOutput
+	*types.StopDBClusterOutput
 
 	response *aws.Response
 }

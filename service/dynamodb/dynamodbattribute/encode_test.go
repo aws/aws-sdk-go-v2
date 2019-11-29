@@ -1,5 +1,6 @@
 package dynamodbattribute
 
+// code generation? No
 import (
 	"fmt"
 	"reflect"
@@ -8,7 +9,7 @@ import (
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/aws/awserr"
-	"github.com/aws/aws-sdk-go-v2/service/dynamodb"
+	"github.com/aws/aws-sdk-go-v2/service/dynamodb/types"
 )
 
 func TestMarshalErrorTypes(t *testing.T) {
@@ -50,8 +51,8 @@ type marshalMarshaler struct {
 	Value4 time.Time
 }
 
-func (m *marshalMarshaler) MarshalDynamoDBAttributeValue(av *dynamodb.AttributeValue) error {
-	av.M = map[string]dynamodb.AttributeValue{
+func (m *marshalMarshaler) MarshalDynamoDBAttributeValue(av *types.AttributeValue) error {
+	av.M = map[string]types.AttributeValue{
 		"abc": {S: &m.Value},
 		"def": {N: aws.String(fmt.Sprintf("%d", m.Value2))},
 		"ghi": {BOOL: &m.Value3},
@@ -69,8 +70,8 @@ func TestMarshalMashaler(t *testing.T) {
 		Value4: testDate,
 	}
 
-	expect := &dynamodb.AttributeValue{
-		M: map[string]dynamodb.AttributeValue{
+	expect := &types.AttributeValue{
+		M: map[string]types.AttributeValue{
 			"abc": {S: aws.String("value")},
 			"def": {N: aws.String("123")},
 			"ghi": {BOOL: aws.Bool(true)},
@@ -97,9 +98,9 @@ type testOmitEmptyElemMapStruct struct {
 }
 
 func TestMarshalListOmitEmptyElem(t *testing.T) {
-	expect := &dynamodb.AttributeValue{
-		M: map[string]dynamodb.AttributeValue{
-			"Values": {L: []dynamodb.AttributeValue{
+	expect := &types.AttributeValue{
+		M: map[string]types.AttributeValue{
+			"Values": {L: []types.AttributeValue{
 				{S: aws.String("abc")},
 				{S: aws.String("123")},
 			}},
@@ -118,9 +119,9 @@ func TestMarshalListOmitEmptyElem(t *testing.T) {
 }
 
 func TestMarshalMapOmitEmptyElem(t *testing.T) {
-	expect := &dynamodb.AttributeValue{
-		M: map[string]dynamodb.AttributeValue{
-			"Values": {M: map[string]dynamodb.AttributeValue{
+	expect := &types.AttributeValue{
+		M: map[string]types.AttributeValue{
+			"Values": {M: map[string]types.AttributeValue{
 				"abc": {N: aws.String("123")},
 				"klm": {S: aws.String("abc")},
 			}},
@@ -150,8 +151,8 @@ type testOmitEmptyScalar struct {
 }
 
 func TestMarshalOmitEmpty(t *testing.T) {
-	expect := &dynamodb.AttributeValue{
-		M: map[string]dynamodb.AttributeValue{
+	expect := &types.AttributeValue{
+		M: map[string]types.AttributeValue{
 			"IntPtrSetZero": {N: aws.String("0")},
 		},
 	}
@@ -194,8 +195,8 @@ func TestEncodeEmbeddedPointerStruct(t *testing.T) {
 	if err != nil {
 		t.Errorf("expect nil, got %v", err)
 	}
-	expect := &dynamodb.AttributeValue{
-		M: map[string]dynamodb.AttributeValue{
+	expect := &types.AttributeValue{
+		M: map[string]types.AttributeValue{
 			"Aint": {
 				N: aws.String("321"),
 			},
@@ -226,8 +227,8 @@ func TestEncodeUnixTime(t *testing.T) {
 	if err != nil {
 		t.Errorf("expect nil, got %v", err)
 	}
-	expect := &dynamodb.AttributeValue{
-		M: map[string]dynamodb.AttributeValue{
+	expect := &types.AttributeValue{
+		M: map[string]types.AttributeValue{
 			"Normal": {
 				S: aws.String("1970-01-01T00:02:03Z"),
 			},
@@ -261,8 +262,8 @@ func TestEncodeAliasedUnixTime(t *testing.T) {
 	if err != nil {
 		t.Errorf("expect no err, got %v", err)
 	}
-	expect := &dynamodb.AttributeValue{
-		M: map[string]dynamodb.AttributeValue{
+	expect := &types.AttributeValue{
+		M: map[string]types.AttributeValue{
 			"Normal": {
 				S: aws.String("1970-01-01T00:02:03Z"),
 			},

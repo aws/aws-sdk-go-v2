@@ -6,62 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
+	"github.com/aws/aws-sdk-go-v2/service/cloudwatchlogs/types"
 )
-
-type CreateLogStreamInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the log group.
-	//
-	// LogGroupName is a required field
-	LogGroupName *string `locationName:"logGroupName" min:"1" type:"string" required:"true"`
-
-	// The name of the log stream.
-	//
-	// LogStreamName is a required field
-	LogStreamName *string `locationName:"logStreamName" min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s CreateLogStreamInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateLogStreamInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateLogStreamInput"}
-
-	if s.LogGroupName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("LogGroupName"))
-	}
-	if s.LogGroupName != nil && len(*s.LogGroupName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("LogGroupName", 1))
-	}
-
-	if s.LogStreamName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("LogStreamName"))
-	}
-	if s.LogStreamName != nil && len(*s.LogStreamName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("LogStreamName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type CreateLogStreamOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s CreateLogStreamOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCreateLogStream = "CreateLogStream"
 
@@ -89,7 +37,7 @@ const opCreateLogStream = "CreateLogStream"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/CreateLogStream
-func (c *Client) CreateLogStreamRequest(input *CreateLogStreamInput) CreateLogStreamRequest {
+func (c *Client) CreateLogStreamRequest(input *types.CreateLogStreamInput) CreateLogStreamRequest {
 	op := &aws.Operation{
 		Name:       opCreateLogStream,
 		HTTPMethod: "POST",
@@ -97,10 +45,10 @@ func (c *Client) CreateLogStreamRequest(input *CreateLogStreamInput) CreateLogSt
 	}
 
 	if input == nil {
-		input = &CreateLogStreamInput{}
+		input = &types.CreateLogStreamInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateLogStreamOutput{})
+	req := c.newRequest(op, input, &types.CreateLogStreamOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return CreateLogStreamRequest{Request: req, Input: input, Copy: c.CreateLogStreamRequest}
@@ -110,8 +58,8 @@ func (c *Client) CreateLogStreamRequest(input *CreateLogStreamInput) CreateLogSt
 // CreateLogStream API operation.
 type CreateLogStreamRequest struct {
 	*aws.Request
-	Input *CreateLogStreamInput
-	Copy  func(*CreateLogStreamInput) CreateLogStreamRequest
+	Input *types.CreateLogStreamInput
+	Copy  func(*types.CreateLogStreamInput) CreateLogStreamRequest
 }
 
 // Send marshals and sends the CreateLogStream API request.
@@ -123,7 +71,7 @@ func (r CreateLogStreamRequest) Send(ctx context.Context) (*CreateLogStreamRespo
 	}
 
 	resp := &CreateLogStreamResponse{
-		CreateLogStreamOutput: r.Request.Data.(*CreateLogStreamOutput),
+		CreateLogStreamOutput: r.Request.Data.(*types.CreateLogStreamOutput),
 		response:              &aws.Response{Request: r.Request},
 	}
 
@@ -133,7 +81,7 @@ func (r CreateLogStreamRequest) Send(ctx context.Context) (*CreateLogStreamRespo
 // CreateLogStreamResponse is the response type for the
 // CreateLogStream API operation.
 type CreateLogStreamResponse struct {
-	*CreateLogStreamOutput
+	*types.CreateLogStreamOutput
 
 	response *aws.Response
 }

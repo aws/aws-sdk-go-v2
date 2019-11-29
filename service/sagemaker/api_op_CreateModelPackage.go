@@ -6,95 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
 )
-
-type CreateModelPackageInput struct {
-	_ struct{} `type:"structure"`
-
-	// Whether to certify the model package for listing on AWS Marketplace.
-	CertifyForMarketplace *bool `type:"boolean"`
-
-	// Specifies details about inference jobs that can be run with models based
-	// on this model package, including the following:
-	//
-	//    * The Amazon ECR paths of containers that contain the inference code and
-	//    model artifacts.
-	//
-	//    * The instance types that the model package supports for transform jobs
-	//    and real-time endpoints used for inference.
-	//
-	//    * The input and output content formats that the model package supports
-	//    for inference.
-	InferenceSpecification *InferenceSpecification `type:"structure"`
-
-	// A description of the model package.
-	ModelPackageDescription *string `type:"string"`
-
-	// The name of the model package. The name must have 1 to 63 characters. Valid
-	// characters are a-z, A-Z, 0-9, and - (hyphen).
-	//
-	// ModelPackageName is a required field
-	ModelPackageName *string `min:"1" type:"string" required:"true"`
-
-	// Details about the algorithm that was used to create the model package.
-	SourceAlgorithmSpecification *SourceAlgorithmSpecification `type:"structure"`
-
-	// Specifies configurations for one or more transform jobs that Amazon SageMaker
-	// runs to test the model package.
-	ValidationSpecification *ModelPackageValidationSpecification `type:"structure"`
-}
-
-// String returns the string representation
-func (s CreateModelPackageInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateModelPackageInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateModelPackageInput"}
-
-	if s.ModelPackageName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ModelPackageName"))
-	}
-	if s.ModelPackageName != nil && len(*s.ModelPackageName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ModelPackageName", 1))
-	}
-	if s.InferenceSpecification != nil {
-		if err := s.InferenceSpecification.Validate(); err != nil {
-			invalidParams.AddNested("InferenceSpecification", err.(aws.ErrInvalidParams))
-		}
-	}
-	if s.SourceAlgorithmSpecification != nil {
-		if err := s.SourceAlgorithmSpecification.Validate(); err != nil {
-			invalidParams.AddNested("SourceAlgorithmSpecification", err.(aws.ErrInvalidParams))
-		}
-	}
-	if s.ValidationSpecification != nil {
-		if err := s.ValidationSpecification.Validate(); err != nil {
-			invalidParams.AddNested("ValidationSpecification", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type CreateModelPackageOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the new model package.
-	//
-	// ModelPackageArn is a required field
-	ModelPackageArn *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s CreateModelPackageOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCreateModelPackage = "CreateModelPackage"
 
@@ -119,7 +32,7 @@ const opCreateModelPackage = "CreateModelPackage"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateModelPackage
-func (c *Client) CreateModelPackageRequest(input *CreateModelPackageInput) CreateModelPackageRequest {
+func (c *Client) CreateModelPackageRequest(input *types.CreateModelPackageInput) CreateModelPackageRequest {
 	op := &aws.Operation{
 		Name:       opCreateModelPackage,
 		HTTPMethod: "POST",
@@ -127,10 +40,10 @@ func (c *Client) CreateModelPackageRequest(input *CreateModelPackageInput) Creat
 	}
 
 	if input == nil {
-		input = &CreateModelPackageInput{}
+		input = &types.CreateModelPackageInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateModelPackageOutput{})
+	req := c.newRequest(op, input, &types.CreateModelPackageOutput{})
 	return CreateModelPackageRequest{Request: req, Input: input, Copy: c.CreateModelPackageRequest}
 }
 
@@ -138,8 +51,8 @@ func (c *Client) CreateModelPackageRequest(input *CreateModelPackageInput) Creat
 // CreateModelPackage API operation.
 type CreateModelPackageRequest struct {
 	*aws.Request
-	Input *CreateModelPackageInput
-	Copy  func(*CreateModelPackageInput) CreateModelPackageRequest
+	Input *types.CreateModelPackageInput
+	Copy  func(*types.CreateModelPackageInput) CreateModelPackageRequest
 }
 
 // Send marshals and sends the CreateModelPackage API request.
@@ -151,7 +64,7 @@ func (r CreateModelPackageRequest) Send(ctx context.Context) (*CreateModelPackag
 	}
 
 	resp := &CreateModelPackageResponse{
-		CreateModelPackageOutput: r.Request.Data.(*CreateModelPackageOutput),
+		CreateModelPackageOutput: r.Request.Data.(*types.CreateModelPackageOutput),
 		response:                 &aws.Response{Request: r.Request},
 	}
 
@@ -161,7 +74,7 @@ func (r CreateModelPackageRequest) Send(ctx context.Context) (*CreateModelPackag
 // CreateModelPackageResponse is the response type for the
 // CreateModelPackage API operation.
 type CreateModelPackageResponse struct {
-	*CreateModelPackageOutput
+	*types.CreateModelPackageOutput
 
 	response *aws.Response
 }

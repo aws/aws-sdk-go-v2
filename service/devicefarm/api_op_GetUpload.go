@@ -6,53 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/devicefarm/types"
 )
-
-// Represents a request to the get upload operation.
-type GetUploadInput struct {
-	_ struct{} `type:"structure"`
-
-	// The upload's ARN.
-	//
-	// Arn is a required field
-	Arn *string `locationName:"arn" min:"32" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetUploadInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetUploadInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetUploadInput"}
-
-	if s.Arn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Arn"))
-	}
-	if s.Arn != nil && len(*s.Arn) < 32 {
-		invalidParams.Add(aws.NewErrParamMinLen("Arn", 32))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Represents the result of a get upload request.
-type GetUploadOutput struct {
-	_ struct{} `type:"structure"`
-
-	// An app or a set of one or more tests to upload or that have been uploaded.
-	Upload *Upload `locationName:"upload" type:"structure"`
-}
-
-// String returns the string representation
-func (s GetUploadOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetUpload = "GetUpload"
 
@@ -69,7 +24,7 @@ const opGetUpload = "GetUpload"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/GetUpload
-func (c *Client) GetUploadRequest(input *GetUploadInput) GetUploadRequest {
+func (c *Client) GetUploadRequest(input *types.GetUploadInput) GetUploadRequest {
 	op := &aws.Operation{
 		Name:       opGetUpload,
 		HTTPMethod: "POST",
@@ -77,10 +32,10 @@ func (c *Client) GetUploadRequest(input *GetUploadInput) GetUploadRequest {
 	}
 
 	if input == nil {
-		input = &GetUploadInput{}
+		input = &types.GetUploadInput{}
 	}
 
-	req := c.newRequest(op, input, &GetUploadOutput{})
+	req := c.newRequest(op, input, &types.GetUploadOutput{})
 	return GetUploadRequest{Request: req, Input: input, Copy: c.GetUploadRequest}
 }
 
@@ -88,8 +43,8 @@ func (c *Client) GetUploadRequest(input *GetUploadInput) GetUploadRequest {
 // GetUpload API operation.
 type GetUploadRequest struct {
 	*aws.Request
-	Input *GetUploadInput
-	Copy  func(*GetUploadInput) GetUploadRequest
+	Input *types.GetUploadInput
+	Copy  func(*types.GetUploadInput) GetUploadRequest
 }
 
 // Send marshals and sends the GetUpload API request.
@@ -101,7 +56,7 @@ func (r GetUploadRequest) Send(ctx context.Context) (*GetUploadResponse, error) 
 	}
 
 	resp := &GetUploadResponse{
-		GetUploadOutput: r.Request.Data.(*GetUploadOutput),
+		GetUploadOutput: r.Request.Data.(*types.GetUploadOutput),
 		response:        &aws.Response{Request: r.Request},
 	}
 
@@ -111,7 +66,7 @@ func (r GetUploadRequest) Send(ctx context.Context) (*GetUploadResponse, error) 
 // GetUploadResponse is the response type for the
 // GetUpload API operation.
 type GetUploadResponse struct {
-	*GetUploadOutput
+	*types.GetUploadOutput
 
 	response *aws.Response
 }

@@ -6,94 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/pinpoint/types"
 )
-
-type UpdateEndpointsBatchInput struct {
-	_ struct{} `type:"structure" payload:"EndpointBatchRequest"`
-
-	// ApplicationId is a required field
-	ApplicationId *string `location:"uri" locationName:"application-id" type:"string" required:"true"`
-
-	// Specifies a batch of endpoints to create or update and the settings and attributes
-	// to set or change for each endpoint.
-	//
-	// EndpointBatchRequest is a required field
-	EndpointBatchRequest *EndpointBatchRequest `type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s UpdateEndpointsBatchInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateEndpointsBatchInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateEndpointsBatchInput"}
-
-	if s.ApplicationId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ApplicationId"))
-	}
-
-	if s.EndpointBatchRequest == nil {
-		invalidParams.Add(aws.NewErrParamRequired("EndpointBatchRequest"))
-	}
-	if s.EndpointBatchRequest != nil {
-		if err := s.EndpointBatchRequest.Validate(); err != nil {
-			invalidParams.AddNested("EndpointBatchRequest", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s UpdateEndpointsBatchInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.ApplicationId != nil {
-		v := *s.ApplicationId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "application-id", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.EndpointBatchRequest != nil {
-		v := s.EndpointBatchRequest
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.PayloadTarget, "EndpointBatchRequest", v, metadata)
-	}
-	return nil
-}
-
-type UpdateEndpointsBatchOutput struct {
-	_ struct{} `type:"structure" payload:"MessageBody"`
-
-	// Provides information about an API request or response.
-	//
-	// MessageBody is a required field
-	MessageBody *MessageBody `type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s UpdateEndpointsBatchOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s UpdateEndpointsBatchOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.MessageBody != nil {
-		v := s.MessageBody
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.PayloadTarget, "MessageBody", v, metadata)
-	}
-	return nil
-}
 
 const opUpdateEndpointsBatch = "UpdateEndpointsBatch"
 
@@ -113,7 +27,7 @@ const opUpdateEndpointsBatch = "UpdateEndpointsBatch"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/UpdateEndpointsBatch
-func (c *Client) UpdateEndpointsBatchRequest(input *UpdateEndpointsBatchInput) UpdateEndpointsBatchRequest {
+func (c *Client) UpdateEndpointsBatchRequest(input *types.UpdateEndpointsBatchInput) UpdateEndpointsBatchRequest {
 	op := &aws.Operation{
 		Name:       opUpdateEndpointsBatch,
 		HTTPMethod: "PUT",
@@ -121,10 +35,10 @@ func (c *Client) UpdateEndpointsBatchRequest(input *UpdateEndpointsBatchInput) U
 	}
 
 	if input == nil {
-		input = &UpdateEndpointsBatchInput{}
+		input = &types.UpdateEndpointsBatchInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateEndpointsBatchOutput{})
+	req := c.newRequest(op, input, &types.UpdateEndpointsBatchOutput{})
 	return UpdateEndpointsBatchRequest{Request: req, Input: input, Copy: c.UpdateEndpointsBatchRequest}
 }
 
@@ -132,8 +46,8 @@ func (c *Client) UpdateEndpointsBatchRequest(input *UpdateEndpointsBatchInput) U
 // UpdateEndpointsBatch API operation.
 type UpdateEndpointsBatchRequest struct {
 	*aws.Request
-	Input *UpdateEndpointsBatchInput
-	Copy  func(*UpdateEndpointsBatchInput) UpdateEndpointsBatchRequest
+	Input *types.UpdateEndpointsBatchInput
+	Copy  func(*types.UpdateEndpointsBatchInput) UpdateEndpointsBatchRequest
 }
 
 // Send marshals and sends the UpdateEndpointsBatch API request.
@@ -145,7 +59,7 @@ func (r UpdateEndpointsBatchRequest) Send(ctx context.Context) (*UpdateEndpoints
 	}
 
 	resp := &UpdateEndpointsBatchResponse{
-		UpdateEndpointsBatchOutput: r.Request.Data.(*UpdateEndpointsBatchOutput),
+		UpdateEndpointsBatchOutput: r.Request.Data.(*types.UpdateEndpointsBatchOutput),
 		response:                   &aws.Response{Request: r.Request},
 	}
 
@@ -155,7 +69,7 @@ func (r UpdateEndpointsBatchRequest) Send(ctx context.Context) (*UpdateEndpoints
 // UpdateEndpointsBatchResponse is the response type for the
 // UpdateEndpointsBatch API operation.
 type UpdateEndpointsBatchResponse struct {
-	*UpdateEndpointsBatchOutput
+	*types.UpdateEndpointsBatchOutput
 
 	response *aws.Response
 }

@@ -6,70 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/greengrass/types"
 )
-
-type UpdateSubscriptionDefinitionInput struct {
-	_ struct{} `type:"structure"`
-
-	Name *string `type:"string"`
-
-	// SubscriptionDefinitionId is a required field
-	SubscriptionDefinitionId *string `location:"uri" locationName:"SubscriptionDefinitionId" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s UpdateSubscriptionDefinitionInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateSubscriptionDefinitionInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateSubscriptionDefinitionInput"}
-
-	if s.SubscriptionDefinitionId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("SubscriptionDefinitionId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s UpdateSubscriptionDefinitionInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.Name != nil {
-		v := *s.Name
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "Name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.SubscriptionDefinitionId != nil {
-		v := *s.SubscriptionDefinitionId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "SubscriptionDefinitionId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type UpdateSubscriptionDefinitionOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s UpdateSubscriptionDefinitionOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s UpdateSubscriptionDefinitionOutput) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
 
 const opUpdateSubscriptionDefinition = "UpdateSubscriptionDefinition"
 
@@ -86,7 +24,7 @@ const opUpdateSubscriptionDefinition = "UpdateSubscriptionDefinition"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/UpdateSubscriptionDefinition
-func (c *Client) UpdateSubscriptionDefinitionRequest(input *UpdateSubscriptionDefinitionInput) UpdateSubscriptionDefinitionRequest {
+func (c *Client) UpdateSubscriptionDefinitionRequest(input *types.UpdateSubscriptionDefinitionInput) UpdateSubscriptionDefinitionRequest {
 	op := &aws.Operation{
 		Name:       opUpdateSubscriptionDefinition,
 		HTTPMethod: "PUT",
@@ -94,10 +32,10 @@ func (c *Client) UpdateSubscriptionDefinitionRequest(input *UpdateSubscriptionDe
 	}
 
 	if input == nil {
-		input = &UpdateSubscriptionDefinitionInput{}
+		input = &types.UpdateSubscriptionDefinitionInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateSubscriptionDefinitionOutput{})
+	req := c.newRequest(op, input, &types.UpdateSubscriptionDefinitionOutput{})
 	return UpdateSubscriptionDefinitionRequest{Request: req, Input: input, Copy: c.UpdateSubscriptionDefinitionRequest}
 }
 
@@ -105,8 +43,8 @@ func (c *Client) UpdateSubscriptionDefinitionRequest(input *UpdateSubscriptionDe
 // UpdateSubscriptionDefinition API operation.
 type UpdateSubscriptionDefinitionRequest struct {
 	*aws.Request
-	Input *UpdateSubscriptionDefinitionInput
-	Copy  func(*UpdateSubscriptionDefinitionInput) UpdateSubscriptionDefinitionRequest
+	Input *types.UpdateSubscriptionDefinitionInput
+	Copy  func(*types.UpdateSubscriptionDefinitionInput) UpdateSubscriptionDefinitionRequest
 }
 
 // Send marshals and sends the UpdateSubscriptionDefinition API request.
@@ -118,7 +56,7 @@ func (r UpdateSubscriptionDefinitionRequest) Send(ctx context.Context) (*UpdateS
 	}
 
 	resp := &UpdateSubscriptionDefinitionResponse{
-		UpdateSubscriptionDefinitionOutput: r.Request.Data.(*UpdateSubscriptionDefinitionOutput),
+		UpdateSubscriptionDefinitionOutput: r.Request.Data.(*types.UpdateSubscriptionDefinitionOutput),
 		response:                           &aws.Response{Request: r.Request},
 	}
 
@@ -128,7 +66,7 @@ func (r UpdateSubscriptionDefinitionRequest) Send(ctx context.Context) (*UpdateS
 // UpdateSubscriptionDefinitionResponse is the response type for the
 // UpdateSubscriptionDefinition API operation.
 type UpdateSubscriptionDefinitionResponse struct {
-	*UpdateSubscriptionDefinitionOutput
+	*types.UpdateSubscriptionDefinitionOutput
 
 	response *aws.Response
 }

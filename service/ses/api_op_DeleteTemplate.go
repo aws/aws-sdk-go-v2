@@ -6,47 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ses/types"
 )
-
-// Represents a request to delete an email template. For more information, see
-// the Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-personalized-email-api.html).
-type DeleteTemplateInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the template to be deleted.
-	//
-	// TemplateName is a required field
-	TemplateName *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteTemplateInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteTemplateInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteTemplateInput"}
-
-	if s.TemplateName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("TemplateName"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteTemplateOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteTemplateOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteTemplate = "DeleteTemplate"
 
@@ -65,7 +26,7 @@ const opDeleteTemplate = "DeleteTemplate"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/DeleteTemplate
-func (c *Client) DeleteTemplateRequest(input *DeleteTemplateInput) DeleteTemplateRequest {
+func (c *Client) DeleteTemplateRequest(input *types.DeleteTemplateInput) DeleteTemplateRequest {
 	op := &aws.Operation{
 		Name:       opDeleteTemplate,
 		HTTPMethod: "POST",
@@ -73,10 +34,10 @@ func (c *Client) DeleteTemplateRequest(input *DeleteTemplateInput) DeleteTemplat
 	}
 
 	if input == nil {
-		input = &DeleteTemplateInput{}
+		input = &types.DeleteTemplateInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteTemplateOutput{})
+	req := c.newRequest(op, input, &types.DeleteTemplateOutput{})
 	return DeleteTemplateRequest{Request: req, Input: input, Copy: c.DeleteTemplateRequest}
 }
 
@@ -84,8 +45,8 @@ func (c *Client) DeleteTemplateRequest(input *DeleteTemplateInput) DeleteTemplat
 // DeleteTemplate API operation.
 type DeleteTemplateRequest struct {
 	*aws.Request
-	Input *DeleteTemplateInput
-	Copy  func(*DeleteTemplateInput) DeleteTemplateRequest
+	Input *types.DeleteTemplateInput
+	Copy  func(*types.DeleteTemplateInput) DeleteTemplateRequest
 }
 
 // Send marshals and sends the DeleteTemplate API request.
@@ -97,7 +58,7 @@ func (r DeleteTemplateRequest) Send(ctx context.Context) (*DeleteTemplateRespons
 	}
 
 	resp := &DeleteTemplateResponse{
-		DeleteTemplateOutput: r.Request.Data.(*DeleteTemplateOutput),
+		DeleteTemplateOutput: r.Request.Data.(*types.DeleteTemplateOutput),
 		response:             &aws.Response{Request: r.Request},
 	}
 
@@ -107,7 +68,7 @@ func (r DeleteTemplateRequest) Send(ctx context.Context) (*DeleteTemplateRespons
 // DeleteTemplateResponse is the response type for the
 // DeleteTemplate API operation.
 type DeleteTemplateResponse struct {
-	*DeleteTemplateOutput
+	*types.DeleteTemplateOutput
 
 	response *aws.Response
 }

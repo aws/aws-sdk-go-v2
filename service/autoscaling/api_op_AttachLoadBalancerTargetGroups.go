@@ -6,58 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/autoscaling/types"
 )
-
-type AttachLoadBalancerTargetGroupsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the Auto Scaling group.
-	//
-	// AutoScalingGroupName is a required field
-	AutoScalingGroupName *string `min:"1" type:"string" required:"true"`
-
-	// The Amazon Resource Names (ARN) of the target groups. You can specify up
-	// to 10 target groups.
-	//
-	// TargetGroupARNs is a required field
-	TargetGroupARNs []string `type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s AttachLoadBalancerTargetGroupsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *AttachLoadBalancerTargetGroupsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "AttachLoadBalancerTargetGroupsInput"}
-
-	if s.AutoScalingGroupName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("AutoScalingGroupName"))
-	}
-	if s.AutoScalingGroupName != nil && len(*s.AutoScalingGroupName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("AutoScalingGroupName", 1))
-	}
-
-	if s.TargetGroupARNs == nil {
-		invalidParams.Add(aws.NewErrParamRequired("TargetGroupARNs"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type AttachLoadBalancerTargetGroupsOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s AttachLoadBalancerTargetGroupsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opAttachLoadBalancerTargetGroups = "AttachLoadBalancerTargetGroups"
 
@@ -83,7 +33,7 @@ const opAttachLoadBalancerTargetGroups = "AttachLoadBalancerTargetGroups"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/AttachLoadBalancerTargetGroups
-func (c *Client) AttachLoadBalancerTargetGroupsRequest(input *AttachLoadBalancerTargetGroupsInput) AttachLoadBalancerTargetGroupsRequest {
+func (c *Client) AttachLoadBalancerTargetGroupsRequest(input *types.AttachLoadBalancerTargetGroupsInput) AttachLoadBalancerTargetGroupsRequest {
 	op := &aws.Operation{
 		Name:       opAttachLoadBalancerTargetGroups,
 		HTTPMethod: "POST",
@@ -91,10 +41,10 @@ func (c *Client) AttachLoadBalancerTargetGroupsRequest(input *AttachLoadBalancer
 	}
 
 	if input == nil {
-		input = &AttachLoadBalancerTargetGroupsInput{}
+		input = &types.AttachLoadBalancerTargetGroupsInput{}
 	}
 
-	req := c.newRequest(op, input, &AttachLoadBalancerTargetGroupsOutput{})
+	req := c.newRequest(op, input, &types.AttachLoadBalancerTargetGroupsOutput{})
 	return AttachLoadBalancerTargetGroupsRequest{Request: req, Input: input, Copy: c.AttachLoadBalancerTargetGroupsRequest}
 }
 
@@ -102,8 +52,8 @@ func (c *Client) AttachLoadBalancerTargetGroupsRequest(input *AttachLoadBalancer
 // AttachLoadBalancerTargetGroups API operation.
 type AttachLoadBalancerTargetGroupsRequest struct {
 	*aws.Request
-	Input *AttachLoadBalancerTargetGroupsInput
-	Copy  func(*AttachLoadBalancerTargetGroupsInput) AttachLoadBalancerTargetGroupsRequest
+	Input *types.AttachLoadBalancerTargetGroupsInput
+	Copy  func(*types.AttachLoadBalancerTargetGroupsInput) AttachLoadBalancerTargetGroupsRequest
 }
 
 // Send marshals and sends the AttachLoadBalancerTargetGroups API request.
@@ -115,7 +65,7 @@ func (r AttachLoadBalancerTargetGroupsRequest) Send(ctx context.Context) (*Attac
 	}
 
 	resp := &AttachLoadBalancerTargetGroupsResponse{
-		AttachLoadBalancerTargetGroupsOutput: r.Request.Data.(*AttachLoadBalancerTargetGroupsOutput),
+		AttachLoadBalancerTargetGroupsOutput: r.Request.Data.(*types.AttachLoadBalancerTargetGroupsOutput),
 		response:                             &aws.Response{Request: r.Request},
 	}
 
@@ -125,7 +75,7 @@ func (r AttachLoadBalancerTargetGroupsRequest) Send(ctx context.Context) (*Attac
 // AttachLoadBalancerTargetGroupsResponse is the response type for the
 // AttachLoadBalancerTargetGroups API operation.
 type AttachLoadBalancerTargetGroupsResponse struct {
-	*AttachLoadBalancerTargetGroupsOutput
+	*types.AttachLoadBalancerTargetGroupsOutput
 
 	response *aws.Response
 }

@@ -6,60 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/cloudhsm/types"
 )
-
-type ModifyLunaClientInput struct {
-	_ struct{} `type:"structure"`
-
-	// The new certificate for the client.
-	//
-	// Certificate is a required field
-	Certificate *string `min:"600" type:"string" required:"true"`
-
-	// The ARN of the client.
-	//
-	// ClientArn is a required field
-	ClientArn *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s ModifyLunaClientInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ModifyLunaClientInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ModifyLunaClientInput"}
-
-	if s.Certificate == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Certificate"))
-	}
-	if s.Certificate != nil && len(*s.Certificate) < 600 {
-		invalidParams.Add(aws.NewErrParamMinLen("Certificate", 600))
-	}
-
-	if s.ClientArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ClientArn"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ModifyLunaClientOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The ARN of the client.
-	ClientArn *string `type:"string"`
-}
-
-// String returns the string representation
-func (s ModifyLunaClientOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opModifyLunaClient = "ModifyLunaClient"
 
@@ -88,7 +36,7 @@ const opModifyLunaClient = "ModifyLunaClient"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/ModifyLunaClient
-func (c *Client) ModifyLunaClientRequest(input *ModifyLunaClientInput) ModifyLunaClientRequest {
+func (c *Client) ModifyLunaClientRequest(input *types.ModifyLunaClientInput) ModifyLunaClientRequest {
 	op := &aws.Operation{
 		Name:       opModifyLunaClient,
 		HTTPMethod: "POST",
@@ -96,10 +44,10 @@ func (c *Client) ModifyLunaClientRequest(input *ModifyLunaClientInput) ModifyLun
 	}
 
 	if input == nil {
-		input = &ModifyLunaClientInput{}
+		input = &types.ModifyLunaClientInput{}
 	}
 
-	req := c.newRequest(op, input, &ModifyLunaClientOutput{})
+	req := c.newRequest(op, input, &types.ModifyLunaClientOutput{})
 	return ModifyLunaClientRequest{Request: req, Input: input, Copy: c.ModifyLunaClientRequest}
 }
 
@@ -107,8 +55,8 @@ func (c *Client) ModifyLunaClientRequest(input *ModifyLunaClientInput) ModifyLun
 // ModifyLunaClient API operation.
 type ModifyLunaClientRequest struct {
 	*aws.Request
-	Input *ModifyLunaClientInput
-	Copy  func(*ModifyLunaClientInput) ModifyLunaClientRequest
+	Input *types.ModifyLunaClientInput
+	Copy  func(*types.ModifyLunaClientInput) ModifyLunaClientRequest
 }
 
 // Send marshals and sends the ModifyLunaClient API request.
@@ -120,7 +68,7 @@ func (r ModifyLunaClientRequest) Send(ctx context.Context) (*ModifyLunaClientRes
 	}
 
 	resp := &ModifyLunaClientResponse{
-		ModifyLunaClientOutput: r.Request.Data.(*ModifyLunaClientOutput),
+		ModifyLunaClientOutput: r.Request.Data.(*types.ModifyLunaClientOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -130,7 +78,7 @@ func (r ModifyLunaClientRequest) Send(ctx context.Context) (*ModifyLunaClientRes
 // ModifyLunaClientResponse is the response type for the
 // ModifyLunaClient API operation.
 type ModifyLunaClientResponse struct {
-	*ModifyLunaClientOutput
+	*types.ModifyLunaClientOutput
 
 	response *aws.Response
 }

@@ -10,6 +10,7 @@ package athenaiface
 
 import (
 	"github.com/aws/aws-sdk-go-v2/service/athena"
+	"github.com/aws/aws-sdk-go-v2/service/athena/types"
 )
 
 // ClientAPI provides an interface to enable mocking the
@@ -43,7 +44,7 @@ import (
 //    type mockClientClient struct {
 //        athenaiface.ClientPI
 //    }
-//    func (m *mockClientClient) BatchGetNamedQuery(input *athena.BatchGetNamedQueryInput) (*athena.BatchGetNamedQueryOutput, error) {
+//    func (m *mockClientClient) BatchGetNamedQuery(input *types.BatchGetNamedQueryInput) (*types.BatchGetNamedQueryOutput, error) {
 //        // mock response/functionality
 //    }
 //
@@ -61,43 +62,43 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type ClientAPI interface {
-	BatchGetNamedQueryRequest(*athena.BatchGetNamedQueryInput) athena.BatchGetNamedQueryRequest
+	BatchGetNamedQueryRequest(*types.BatchGetNamedQueryInput) athena.BatchGetNamedQueryRequest
 
-	BatchGetQueryExecutionRequest(*athena.BatchGetQueryExecutionInput) athena.BatchGetQueryExecutionRequest
+	BatchGetQueryExecutionRequest(*types.BatchGetQueryExecutionInput) athena.BatchGetQueryExecutionRequest
 
-	CreateNamedQueryRequest(*athena.CreateNamedQueryInput) athena.CreateNamedQueryRequest
+	CreateNamedQueryRequest(*types.CreateNamedQueryInput) athena.CreateNamedQueryRequest
 
-	CreateWorkGroupRequest(*athena.CreateWorkGroupInput) athena.CreateWorkGroupRequest
+	CreateWorkGroupRequest(*types.CreateWorkGroupInput) athena.CreateWorkGroupRequest
 
-	DeleteNamedQueryRequest(*athena.DeleteNamedQueryInput) athena.DeleteNamedQueryRequest
+	DeleteNamedQueryRequest(*types.DeleteNamedQueryInput) athena.DeleteNamedQueryRequest
 
-	DeleteWorkGroupRequest(*athena.DeleteWorkGroupInput) athena.DeleteWorkGroupRequest
+	DeleteWorkGroupRequest(*types.DeleteWorkGroupInput) athena.DeleteWorkGroupRequest
 
-	GetNamedQueryRequest(*athena.GetNamedQueryInput) athena.GetNamedQueryRequest
+	GetNamedQueryRequest(*types.GetNamedQueryInput) athena.GetNamedQueryRequest
 
-	GetQueryExecutionRequest(*athena.GetQueryExecutionInput) athena.GetQueryExecutionRequest
+	GetQueryExecutionRequest(*types.GetQueryExecutionInput) athena.GetQueryExecutionRequest
 
-	GetQueryResultsRequest(*athena.GetQueryResultsInput) athena.GetQueryResultsRequest
+	GetQueryResultsRequest(*types.GetQueryResultsInput) athena.GetQueryResultsRequest
 
-	GetWorkGroupRequest(*athena.GetWorkGroupInput) athena.GetWorkGroupRequest
+	GetWorkGroupRequest(*types.GetWorkGroupInput) athena.GetWorkGroupRequest
 
-	ListNamedQueriesRequest(*athena.ListNamedQueriesInput) athena.ListNamedQueriesRequest
+	ListNamedQueriesRequest(*types.ListNamedQueriesInput) athena.ListNamedQueriesRequest
 
-	ListQueryExecutionsRequest(*athena.ListQueryExecutionsInput) athena.ListQueryExecutionsRequest
+	ListQueryExecutionsRequest(*types.ListQueryExecutionsInput) athena.ListQueryExecutionsRequest
 
-	ListTagsForResourceRequest(*athena.ListTagsForResourceInput) athena.ListTagsForResourceRequest
+	ListTagsForResourceRequest(*types.ListTagsForResourceInput) athena.ListTagsForResourceRequest
 
-	ListWorkGroupsRequest(*athena.ListWorkGroupsInput) athena.ListWorkGroupsRequest
+	ListWorkGroupsRequest(*types.ListWorkGroupsInput) athena.ListWorkGroupsRequest
 
-	StartQueryExecutionRequest(*athena.StartQueryExecutionInput) athena.StartQueryExecutionRequest
+	StartQueryExecutionRequest(*types.StartQueryExecutionInput) athena.StartQueryExecutionRequest
 
-	StopQueryExecutionRequest(*athena.StopQueryExecutionInput) athena.StopQueryExecutionRequest
+	StopQueryExecutionRequest(*types.StopQueryExecutionInput) athena.StopQueryExecutionRequest
 
-	TagResourceRequest(*athena.TagResourceInput) athena.TagResourceRequest
+	TagResourceRequest(*types.TagResourceInput) athena.TagResourceRequest
 
-	UntagResourceRequest(*athena.UntagResourceInput) athena.UntagResourceRequest
+	UntagResourceRequest(*types.UntagResourceInput) athena.UntagResourceRequest
 
-	UpdateWorkGroupRequest(*athena.UpdateWorkGroupInput) athena.UpdateWorkGroupRequest
+	UpdateWorkGroupRequest(*types.UpdateWorkGroupInput) athena.UpdateWorkGroupRequest
 }
 
 var _ ClientAPI = (*athena.Client)(nil)

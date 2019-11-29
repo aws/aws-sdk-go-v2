@@ -6,66 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
 )
-
-type UpdateCodeRepositoryInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the Git repository to update.
-	//
-	// CodeRepositoryName is a required field
-	CodeRepositoryName *string `min:"1" type:"string" required:"true"`
-
-	// The configuration of the git repository, including the URL and the Amazon
-	// Resource Name (ARN) of the AWS Secrets Manager secret that contains the credentials
-	// used to access the repository. The secret must have a staging label of AWSCURRENT
-	// and must be in the following format:
-	//
-	// {"username": UserName, "password": Password}
-	GitConfig *GitConfigForUpdate `type:"structure"`
-}
-
-// String returns the string representation
-func (s UpdateCodeRepositoryInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateCodeRepositoryInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateCodeRepositoryInput"}
-
-	if s.CodeRepositoryName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("CodeRepositoryName"))
-	}
-	if s.CodeRepositoryName != nil && len(*s.CodeRepositoryName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("CodeRepositoryName", 1))
-	}
-	if s.GitConfig != nil {
-		if err := s.GitConfig.Validate(); err != nil {
-			invalidParams.AddNested("GitConfig", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type UpdateCodeRepositoryOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The ARN of the Git repository.
-	//
-	// CodeRepositoryArn is a required field
-	CodeRepositoryArn *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s UpdateCodeRepositoryOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opUpdateCodeRepository = "UpdateCodeRepository"
 
@@ -82,7 +24,7 @@ const opUpdateCodeRepository = "UpdateCodeRepository"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/UpdateCodeRepository
-func (c *Client) UpdateCodeRepositoryRequest(input *UpdateCodeRepositoryInput) UpdateCodeRepositoryRequest {
+func (c *Client) UpdateCodeRepositoryRequest(input *types.UpdateCodeRepositoryInput) UpdateCodeRepositoryRequest {
 	op := &aws.Operation{
 		Name:       opUpdateCodeRepository,
 		HTTPMethod: "POST",
@@ -90,10 +32,10 @@ func (c *Client) UpdateCodeRepositoryRequest(input *UpdateCodeRepositoryInput) U
 	}
 
 	if input == nil {
-		input = &UpdateCodeRepositoryInput{}
+		input = &types.UpdateCodeRepositoryInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateCodeRepositoryOutput{})
+	req := c.newRequest(op, input, &types.UpdateCodeRepositoryOutput{})
 	return UpdateCodeRepositoryRequest{Request: req, Input: input, Copy: c.UpdateCodeRepositoryRequest}
 }
 
@@ -101,8 +43,8 @@ func (c *Client) UpdateCodeRepositoryRequest(input *UpdateCodeRepositoryInput) U
 // UpdateCodeRepository API operation.
 type UpdateCodeRepositoryRequest struct {
 	*aws.Request
-	Input *UpdateCodeRepositoryInput
-	Copy  func(*UpdateCodeRepositoryInput) UpdateCodeRepositoryRequest
+	Input *types.UpdateCodeRepositoryInput
+	Copy  func(*types.UpdateCodeRepositoryInput) UpdateCodeRepositoryRequest
 }
 
 // Send marshals and sends the UpdateCodeRepository API request.
@@ -114,7 +56,7 @@ func (r UpdateCodeRepositoryRequest) Send(ctx context.Context) (*UpdateCodeRepos
 	}
 
 	resp := &UpdateCodeRepositoryResponse{
-		UpdateCodeRepositoryOutput: r.Request.Data.(*UpdateCodeRepositoryOutput),
+		UpdateCodeRepositoryOutput: r.Request.Data.(*types.UpdateCodeRepositoryOutput),
 		response:                   &aws.Response{Request: r.Request},
 	}
 
@@ -124,7 +66,7 @@ func (r UpdateCodeRepositoryRequest) Send(ctx context.Context) (*UpdateCodeRepos
 // UpdateCodeRepositoryResponse is the response type for the
 // UpdateCodeRepository API operation.
 type UpdateCodeRepositoryResponse struct {
-	*UpdateCodeRepositoryOutput
+	*types.UpdateCodeRepositoryOutput
 
 	response *aws.Response
 }

@@ -6,109 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/chime/types"
 )
-
-type ListBotsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Chime account ID.
-	//
-	// AccountId is a required field
-	AccountId *string `location:"uri" locationName:"accountId" type:"string" required:"true"`
-
-	// The maximum number of results to return in a single call. Default is 10.
-	MaxResults *int64 `location:"querystring" locationName:"max-results" min:"1" type:"integer"`
-
-	// The token to use to retrieve the next page of results.
-	NextToken *string `location:"querystring" locationName:"next-token" type:"string"`
-}
-
-// String returns the string representation
-func (s ListBotsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListBotsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListBotsInput"}
-
-	if s.AccountId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("AccountId"))
-	}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListBotsInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.AccountId != nil {
-		v := *s.AccountId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "accountId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.MaxResults != nil {
-		v := *s.MaxResults
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "max-results", protocol.Int64Value(v), metadata)
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "next-token", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type ListBotsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// List of bots and bot details.
-	Bots []Bot `type:"list"`
-
-	// The token to use to retrieve the next page of results.
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s ListBotsOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListBotsOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.Bots != nil {
-		v := s.Bots
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "Bots", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opListBots = "ListBots"
 
@@ -126,18 +25,24 @@ const opListBots = "ListBots"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/ListBots
-func (c *Client) ListBotsRequest(input *ListBotsInput) ListBotsRequest {
+func (c *Client) ListBotsRequest(input *types.ListBotsInput) ListBotsRequest {
 	op := &aws.Operation{
 		Name:       opListBots,
 		HTTPMethod: "GET",
 		HTTPPath:   "/accounts/{accountId}/bots",
+		Paginator: &aws.Paginator{
+			InputTokens:     []string{"NextToken"},
+			OutputTokens:    []string{"NextToken"},
+			LimitToken:      "MaxResults",
+			TruncationToken: "",
+		},
 	}
 
 	if input == nil {
-		input = &ListBotsInput{}
+		input = &types.ListBotsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListBotsOutput{})
+	req := c.newRequest(op, input, &types.ListBotsOutput{})
 	return ListBotsRequest{Request: req, Input: input, Copy: c.ListBotsRequest}
 }
 
@@ -145,8 +50,8 @@ func (c *Client) ListBotsRequest(input *ListBotsInput) ListBotsRequest {
 // ListBots API operation.
 type ListBotsRequest struct {
 	*aws.Request
-	Input *ListBotsInput
-	Copy  func(*ListBotsInput) ListBotsRequest
+	Input *types.ListBotsInput
+	Copy  func(*types.ListBotsInput) ListBotsRequest
 }
 
 // Send marshals and sends the ListBots API request.
@@ -158,17 +63,64 @@ func (r ListBotsRequest) Send(ctx context.Context) (*ListBotsResponse, error) {
 	}
 
 	resp := &ListBotsResponse{
-		ListBotsOutput: r.Request.Data.(*ListBotsOutput),
+		ListBotsOutput: r.Request.Data.(*types.ListBotsOutput),
 		response:       &aws.Response{Request: r.Request},
 	}
 
 	return resp, nil
 }
 
+// NewListBotsRequestPaginator returns a paginator for ListBots.
+// Use Next method to get the next page, and CurrentPage to get the current
+// response page from the paginator. Next will return false, if there are
+// no more pages, or an error was encountered.
+//
+// Note: This operation can generate multiple requests to a service.
+//
+//   // Example iterating over pages.
+//   req := client.ListBotsRequest(input)
+//   p := chime.NewListBotsRequestPaginator(req)
+//
+//   for p.Next(context.TODO()) {
+//       page := p.CurrentPage()
+//   }
+//
+//   if err := p.Err(); err != nil {
+//       return err
+//   }
+//
+func NewListBotsPaginator(req ListBotsRequest) ListBotsPaginator {
+	return ListBotsPaginator{
+		Pager: aws.Pager{
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
+				var inCpy *types.ListBotsInput
+				if req.Input != nil {
+					tmp := *req.Input
+					inCpy = &tmp
+				}
+
+				newReq := req.Copy(inCpy)
+				newReq.SetContext(ctx)
+				return newReq.Request, nil
+			},
+		},
+	}
+}
+
+// ListBotsPaginator is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type ListBotsPaginator struct {
+	aws.Pager
+}
+
+func (p *ListBotsPaginator) CurrentPage() *types.ListBotsOutput {
+	return p.Pager.CurrentPage().(*types.ListBotsOutput)
+}
+
 // ListBotsResponse is the response type for the
 // ListBots API operation.
 type ListBotsResponse struct {
-	*ListBotsOutput
+	*types.ListBotsOutput
 
 	response *aws.Response
 }

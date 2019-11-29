@@ -6,123 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/cloudformation/types"
 )
-
-type CreateStackInstancesInput struct {
-	_ struct{} `type:"structure"`
-
-	// The names of one or more AWS accounts that you want to create stack instances
-	// in the specified region(s) for.
-	//
-	// Accounts is a required field
-	Accounts []string `type:"list" required:"true"`
-
-	// The unique identifier for this stack set operation.
-	//
-	// The operation ID also functions as an idempotency token, to ensure that AWS
-	// CloudFormation performs the stack set operation only once, even if you retry
-	// the request multiple times. You might retry stack set operation requests
-	// to ensure that AWS CloudFormation successfully received them.
-	//
-	// If you don't specify an operation ID, the SDK generates one automatically.
-	//
-	// Repeating this stack set operation with a new operation ID retries all stack
-	// instances whose status is OUTDATED.
-	OperationId *string `min:"1" type:"string" idempotencyToken:"true"`
-
-	// Preferences for how AWS CloudFormation performs this stack set operation.
-	OperationPreferences *StackSetOperationPreferences `type:"structure"`
-
-	// A list of stack set parameters whose values you want to override in the selected
-	// stack instances.
-	//
-	// Any overridden parameter values will be applied to all stack instances in
-	// the specified accounts and regions. When specifying parameters and their
-	// values, be aware of how AWS CloudFormation sets parameter values during stack
-	// instance operations:
-	//
-	//    * To override the current value for a parameter, include the parameter
-	//    and specify its value.
-	//
-	//    * To leave a parameter set to its present value, you can do one of the
-	//    following: Do not include the parameter in the list. Include the parameter
-	//    and specify UsePreviousValue as true. (You cannot specify both a value
-	//    and set UsePreviousValue to true.)
-	//
-	//    * To set all overridden parameter back to the values specified in the
-	//    stack set, specify a parameter list but do not include any parameters.
-	//
-	//    * To leave all parameters set to their present values, do not specify
-	//    this property at all.
-	//
-	// During stack set updates, any parameter values overridden for a stack instance
-	// are not updated, but retain their overridden value.
-	//
-	// You can only override the parameter values that are specified in the stack
-	// set; to add or delete a parameter itself, use UpdateStackSet (https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_UpdateStackSet.html)
-	// to update the stack set template.
-	ParameterOverrides []Parameter `type:"list"`
-
-	// The names of one or more regions where you want to create stack instances
-	// using the specified AWS account(s).
-	//
-	// Regions is a required field
-	Regions []string `type:"list" required:"true"`
-
-	// The name or unique ID of the stack set that you want to create stack instances
-	// from.
-	//
-	// StackSetName is a required field
-	StackSetName *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s CreateStackInstancesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateStackInstancesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateStackInstancesInput"}
-
-	if s.Accounts == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Accounts"))
-	}
-	if s.OperationId != nil && len(*s.OperationId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("OperationId", 1))
-	}
-
-	if s.Regions == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Regions"))
-	}
-
-	if s.StackSetName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("StackSetName"))
-	}
-	if s.OperationPreferences != nil {
-		if err := s.OperationPreferences.Validate(); err != nil {
-			invalidParams.AddNested("OperationPreferences", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type CreateStackInstancesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The unique identifier for this stack set operation.
-	OperationId *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s CreateStackInstancesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCreateStackInstances = "CreateStackInstances"
 
@@ -142,7 +27,7 @@ const opCreateStackInstances = "CreateStackInstances"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/CreateStackInstances
-func (c *Client) CreateStackInstancesRequest(input *CreateStackInstancesInput) CreateStackInstancesRequest {
+func (c *Client) CreateStackInstancesRequest(input *types.CreateStackInstancesInput) CreateStackInstancesRequest {
 	op := &aws.Operation{
 		Name:       opCreateStackInstances,
 		HTTPMethod: "POST",
@@ -150,10 +35,10 @@ func (c *Client) CreateStackInstancesRequest(input *CreateStackInstancesInput) C
 	}
 
 	if input == nil {
-		input = &CreateStackInstancesInput{}
+		input = &types.CreateStackInstancesInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateStackInstancesOutput{})
+	req := c.newRequest(op, input, &types.CreateStackInstancesOutput{})
 	return CreateStackInstancesRequest{Request: req, Input: input, Copy: c.CreateStackInstancesRequest}
 }
 
@@ -161,8 +46,8 @@ func (c *Client) CreateStackInstancesRequest(input *CreateStackInstancesInput) C
 // CreateStackInstances API operation.
 type CreateStackInstancesRequest struct {
 	*aws.Request
-	Input *CreateStackInstancesInput
-	Copy  func(*CreateStackInstancesInput) CreateStackInstancesRequest
+	Input *types.CreateStackInstancesInput
+	Copy  func(*types.CreateStackInstancesInput) CreateStackInstancesRequest
 }
 
 // Send marshals and sends the CreateStackInstances API request.
@@ -174,7 +59,7 @@ func (r CreateStackInstancesRequest) Send(ctx context.Context) (*CreateStackInst
 	}
 
 	resp := &CreateStackInstancesResponse{
-		CreateStackInstancesOutput: r.Request.Data.(*CreateStackInstancesOutput),
+		CreateStackInstancesOutput: r.Request.Data.(*types.CreateStackInstancesOutput),
 		response:                   &aws.Response{Request: r.Request},
 	}
 
@@ -184,7 +69,7 @@ func (r CreateStackInstancesRequest) Send(ctx context.Context) (*CreateStackInst
 // CreateStackInstancesResponse is the response type for the
 // CreateStackInstances API operation.
 type CreateStackInstancesResponse struct {
-	*CreateStackInstancesOutput
+	*types.CreateStackInstancesOutput
 
 	response *aws.Response
 }

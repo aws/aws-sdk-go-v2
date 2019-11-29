@@ -6,93 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/chime/types"
 )
-
-type CreatePhoneNumberOrderInput struct {
-	_ struct{} `type:"structure"`
-
-	// List of phone numbers, in E.164 format.
-	//
-	// E164PhoneNumbers is a required field
-	E164PhoneNumbers []string `type:"list" required:"true"`
-
-	// The phone number product type.
-	//
-	// ProductType is a required field
-	ProductType PhoneNumberProductType `type:"string" required:"true" enum:"true"`
-}
-
-// String returns the string representation
-func (s CreatePhoneNumberOrderInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreatePhoneNumberOrderInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreatePhoneNumberOrderInput"}
-
-	if s.E164PhoneNumbers == nil {
-		invalidParams.Add(aws.NewErrParamRequired("E164PhoneNumbers"))
-	}
-	if len(s.ProductType) == 0 {
-		invalidParams.Add(aws.NewErrParamRequired("ProductType"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s CreatePhoneNumberOrderInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.E164PhoneNumbers != nil {
-		v := s.E164PhoneNumbers
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "E164PhoneNumbers", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
-		}
-		ls0.End()
-
-	}
-	if len(s.ProductType) > 0 {
-		v := s.ProductType
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "ProductType", protocol.QuotedValue{ValueMarshaler: v}, metadata)
-	}
-	return nil
-}
-
-type CreatePhoneNumberOrderOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The phone number order details.
-	PhoneNumberOrder *PhoneNumberOrder `type:"structure"`
-}
-
-// String returns the string representation
-func (s CreatePhoneNumberOrderOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s CreatePhoneNumberOrderOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.PhoneNumberOrder != nil {
-		v := s.PhoneNumberOrder
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "PhoneNumberOrder", v, metadata)
-	}
-	return nil
-}
 
 const opCreatePhoneNumberOrder = "CreatePhoneNumberOrder"
 
@@ -101,7 +16,7 @@ const opCreatePhoneNumberOrder = "CreatePhoneNumberOrder"
 //
 // Creates an order for phone numbers to be provisioned. Choose from Amazon
 // Chime Business Calling and Amazon Chime Voice Connector product types. For
-// toll-free numbers, you can use only the Amazon Chime Voice Connector product
+// toll-free numbers, you must use the Amazon Chime Voice Connector product
 // type.
 //
 //    // Example sending a request using CreatePhoneNumberOrderRequest.
@@ -112,7 +27,7 @@ const opCreatePhoneNumberOrder = "CreatePhoneNumberOrder"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/CreatePhoneNumberOrder
-func (c *Client) CreatePhoneNumberOrderRequest(input *CreatePhoneNumberOrderInput) CreatePhoneNumberOrderRequest {
+func (c *Client) CreatePhoneNumberOrderRequest(input *types.CreatePhoneNumberOrderInput) CreatePhoneNumberOrderRequest {
 	op := &aws.Operation{
 		Name:       opCreatePhoneNumberOrder,
 		HTTPMethod: "POST",
@@ -120,10 +35,10 @@ func (c *Client) CreatePhoneNumberOrderRequest(input *CreatePhoneNumberOrderInpu
 	}
 
 	if input == nil {
-		input = &CreatePhoneNumberOrderInput{}
+		input = &types.CreatePhoneNumberOrderInput{}
 	}
 
-	req := c.newRequest(op, input, &CreatePhoneNumberOrderOutput{})
+	req := c.newRequest(op, input, &types.CreatePhoneNumberOrderOutput{})
 	return CreatePhoneNumberOrderRequest{Request: req, Input: input, Copy: c.CreatePhoneNumberOrderRequest}
 }
 
@@ -131,8 +46,8 @@ func (c *Client) CreatePhoneNumberOrderRequest(input *CreatePhoneNumberOrderInpu
 // CreatePhoneNumberOrder API operation.
 type CreatePhoneNumberOrderRequest struct {
 	*aws.Request
-	Input *CreatePhoneNumberOrderInput
-	Copy  func(*CreatePhoneNumberOrderInput) CreatePhoneNumberOrderRequest
+	Input *types.CreatePhoneNumberOrderInput
+	Copy  func(*types.CreatePhoneNumberOrderInput) CreatePhoneNumberOrderRequest
 }
 
 // Send marshals and sends the CreatePhoneNumberOrder API request.
@@ -144,7 +59,7 @@ func (r CreatePhoneNumberOrderRequest) Send(ctx context.Context) (*CreatePhoneNu
 	}
 
 	resp := &CreatePhoneNumberOrderResponse{
-		CreatePhoneNumberOrderOutput: r.Request.Data.(*CreatePhoneNumberOrderOutput),
+		CreatePhoneNumberOrderOutput: r.Request.Data.(*types.CreatePhoneNumberOrderOutput),
 		response:                     &aws.Response{Request: r.Request},
 	}
 
@@ -154,7 +69,7 @@ func (r CreatePhoneNumberOrderRequest) Send(ctx context.Context) (*CreatePhoneNu
 // CreatePhoneNumberOrderResponse is the response type for the
 // CreatePhoneNumberOrder API operation.
 type CreatePhoneNumberOrderResponse struct {
-	*CreatePhoneNumberOrderOutput
+	*types.CreatePhoneNumberOrderOutput
 
 	response *aws.Response
 }

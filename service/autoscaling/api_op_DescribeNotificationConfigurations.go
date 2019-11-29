@@ -6,48 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/autoscaling/types"
 )
-
-type DescribeNotificationConfigurationsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the Auto Scaling group.
-	AutoScalingGroupNames []string `type:"list"`
-
-	// The maximum number of items to return with this call. The default value is
-	// 50 and the maximum value is 100.
-	MaxRecords *int64 `type:"integer"`
-
-	// The token for the next set of items to return. (You received this token from
-	// a previous call.)
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeNotificationConfigurationsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type DescribeNotificationConfigurationsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A string that indicates that the response contains more items than can be
-	// returned in a single response. To receive additional items, specify this
-	// string for the NextToken value when requesting the next set of items. This
-	// value is null when there are no more items to return.
-	NextToken *string `type:"string"`
-
-	// The notification configurations.
-	//
-	// NotificationConfigurations is a required field
-	NotificationConfigurations []NotificationConfiguration `type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeNotificationConfigurationsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeNotificationConfigurations = "DescribeNotificationConfigurations"
 
@@ -65,7 +25,7 @@ const opDescribeNotificationConfigurations = "DescribeNotificationConfigurations
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DescribeNotificationConfigurations
-func (c *Client) DescribeNotificationConfigurationsRequest(input *DescribeNotificationConfigurationsInput) DescribeNotificationConfigurationsRequest {
+func (c *Client) DescribeNotificationConfigurationsRequest(input *types.DescribeNotificationConfigurationsInput) DescribeNotificationConfigurationsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeNotificationConfigurations,
 		HTTPMethod: "POST",
@@ -79,10 +39,10 @@ func (c *Client) DescribeNotificationConfigurationsRequest(input *DescribeNotifi
 	}
 
 	if input == nil {
-		input = &DescribeNotificationConfigurationsInput{}
+		input = &types.DescribeNotificationConfigurationsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeNotificationConfigurationsOutput{})
+	req := c.newRequest(op, input, &types.DescribeNotificationConfigurationsOutput{})
 	return DescribeNotificationConfigurationsRequest{Request: req, Input: input, Copy: c.DescribeNotificationConfigurationsRequest}
 }
 
@@ -90,8 +50,8 @@ func (c *Client) DescribeNotificationConfigurationsRequest(input *DescribeNotifi
 // DescribeNotificationConfigurations API operation.
 type DescribeNotificationConfigurationsRequest struct {
 	*aws.Request
-	Input *DescribeNotificationConfigurationsInput
-	Copy  func(*DescribeNotificationConfigurationsInput) DescribeNotificationConfigurationsRequest
+	Input *types.DescribeNotificationConfigurationsInput
+	Copy  func(*types.DescribeNotificationConfigurationsInput) DescribeNotificationConfigurationsRequest
 }
 
 // Send marshals and sends the DescribeNotificationConfigurations API request.
@@ -103,7 +63,7 @@ func (r DescribeNotificationConfigurationsRequest) Send(ctx context.Context) (*D
 	}
 
 	resp := &DescribeNotificationConfigurationsResponse{
-		DescribeNotificationConfigurationsOutput: r.Request.Data.(*DescribeNotificationConfigurationsOutput),
+		DescribeNotificationConfigurationsOutput: r.Request.Data.(*types.DescribeNotificationConfigurationsOutput),
 		response:                                 &aws.Response{Request: r.Request},
 	}
 
@@ -133,7 +93,7 @@ func NewDescribeNotificationConfigurationsPaginator(req DescribeNotificationConf
 	return DescribeNotificationConfigurationsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *DescribeNotificationConfigurationsInput
+				var inCpy *types.DescribeNotificationConfigurationsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -153,14 +113,14 @@ type DescribeNotificationConfigurationsPaginator struct {
 	aws.Pager
 }
 
-func (p *DescribeNotificationConfigurationsPaginator) CurrentPage() *DescribeNotificationConfigurationsOutput {
-	return p.Pager.CurrentPage().(*DescribeNotificationConfigurationsOutput)
+func (p *DescribeNotificationConfigurationsPaginator) CurrentPage() *types.DescribeNotificationConfigurationsOutput {
+	return p.Pager.CurrentPage().(*types.DescribeNotificationConfigurationsOutput)
 }
 
 // DescribeNotificationConfigurationsResponse is the response type for the
 // DescribeNotificationConfigurations API operation.
 type DescribeNotificationConfigurationsResponse struct {
-	*DescribeNotificationConfigurationsOutput
+	*types.DescribeNotificationConfigurationsOutput
 
 	response *aws.Response
 }

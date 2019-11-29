@@ -6,47 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
+	"github.com/aws/aws-sdk-go-v2/service/forecast/types"
 )
-
-type DeleteForecastInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the forecast to delete.
-	//
-	// ForecastArn is a required field
-	ForecastArn *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteForecastInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteForecastInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteForecastInput"}
-
-	if s.ForecastArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ForecastArn"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteForecastOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteForecastOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteForecast = "DeleteForecast"
 
@@ -67,7 +30,7 @@ const opDeleteForecast = "DeleteForecast"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/DeleteForecast
-func (c *Client) DeleteForecastRequest(input *DeleteForecastInput) DeleteForecastRequest {
+func (c *Client) DeleteForecastRequest(input *types.DeleteForecastInput) DeleteForecastRequest {
 	op := &aws.Operation{
 		Name:       opDeleteForecast,
 		HTTPMethod: "POST",
@@ -75,10 +38,10 @@ func (c *Client) DeleteForecastRequest(input *DeleteForecastInput) DeleteForecas
 	}
 
 	if input == nil {
-		input = &DeleteForecastInput{}
+		input = &types.DeleteForecastInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteForecastOutput{})
+	req := c.newRequest(op, input, &types.DeleteForecastOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return DeleteForecastRequest{Request: req, Input: input, Copy: c.DeleteForecastRequest}
@@ -88,8 +51,8 @@ func (c *Client) DeleteForecastRequest(input *DeleteForecastInput) DeleteForecas
 // DeleteForecast API operation.
 type DeleteForecastRequest struct {
 	*aws.Request
-	Input *DeleteForecastInput
-	Copy  func(*DeleteForecastInput) DeleteForecastRequest
+	Input *types.DeleteForecastInput
+	Copy  func(*types.DeleteForecastInput) DeleteForecastRequest
 }
 
 // Send marshals and sends the DeleteForecast API request.
@@ -101,7 +64,7 @@ func (r DeleteForecastRequest) Send(ctx context.Context) (*DeleteForecastRespons
 	}
 
 	resp := &DeleteForecastResponse{
-		DeleteForecastOutput: r.Request.Data.(*DeleteForecastOutput),
+		DeleteForecastOutput: r.Request.Data.(*types.DeleteForecastOutput),
 		response:             &aws.Response{Request: r.Request},
 	}
 
@@ -111,7 +74,7 @@ func (r DeleteForecastRequest) Send(ctx context.Context) (*DeleteForecastRespons
 // DeleteForecastResponse is the response type for the
 // DeleteForecast API operation.
 type DeleteForecastResponse struct {
-	*DeleteForecastOutput
+	*types.DeleteForecastOutput
 
 	response *aws.Response
 }

@@ -6,78 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/types"
 )
-
-type SearchProductsAsAdminInput struct {
-	_ struct{} `type:"structure"`
-
-	// The language code.
-	//
-	//    * en - English (default)
-	//
-	//    * jp - Japanese
-	//
-	//    * zh - Chinese
-	AcceptLanguage *string `type:"string"`
-
-	// The search filters. If no search filters are specified, the output includes
-	// all products to which the administrator has access.
-	Filters map[string][]string `type:"map"`
-
-	// The maximum number of items to return with this call.
-	PageSize *int64 `type:"integer"`
-
-	// The page token for the next set of results. To retrieve the first set of
-	// results, use null.
-	PageToken *string `type:"string"`
-
-	// The portfolio identifier.
-	PortfolioId *string `min:"1" type:"string"`
-
-	// Access level of the source of the product.
-	ProductSource ProductSource `type:"string" enum:"true"`
-
-	// The sort field. If no value is specified, the results are not sorted.
-	SortBy ProductViewSortBy `type:"string" enum:"true"`
-
-	// The sort order. If no value is specified, the results are not sorted.
-	SortOrder SortOrder `type:"string" enum:"true"`
-}
-
-// String returns the string representation
-func (s SearchProductsAsAdminInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *SearchProductsAsAdminInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "SearchProductsAsAdminInput"}
-	if s.PortfolioId != nil && len(*s.PortfolioId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("PortfolioId", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type SearchProductsAsAdminOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The page token to use to retrieve the next set of results. If there are no
-	// additional results, this value is null.
-	NextPageToken *string `type:"string"`
-
-	// Information about the product views.
-	ProductViewDetails []ProductViewDetail `type:"list"`
-}
-
-// String returns the string representation
-func (s SearchProductsAsAdminOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opSearchProductsAsAdmin = "SearchProductsAsAdmin"
 
@@ -94,7 +24,7 @@ const opSearchProductsAsAdmin = "SearchProductsAsAdmin"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/SearchProductsAsAdmin
-func (c *Client) SearchProductsAsAdminRequest(input *SearchProductsAsAdminInput) SearchProductsAsAdminRequest {
+func (c *Client) SearchProductsAsAdminRequest(input *types.SearchProductsAsAdminInput) SearchProductsAsAdminRequest {
 	op := &aws.Operation{
 		Name:       opSearchProductsAsAdmin,
 		HTTPMethod: "POST",
@@ -108,10 +38,10 @@ func (c *Client) SearchProductsAsAdminRequest(input *SearchProductsAsAdminInput)
 	}
 
 	if input == nil {
-		input = &SearchProductsAsAdminInput{}
+		input = &types.SearchProductsAsAdminInput{}
 	}
 
-	req := c.newRequest(op, input, &SearchProductsAsAdminOutput{})
+	req := c.newRequest(op, input, &types.SearchProductsAsAdminOutput{})
 	return SearchProductsAsAdminRequest{Request: req, Input: input, Copy: c.SearchProductsAsAdminRequest}
 }
 
@@ -119,8 +49,8 @@ func (c *Client) SearchProductsAsAdminRequest(input *SearchProductsAsAdminInput)
 // SearchProductsAsAdmin API operation.
 type SearchProductsAsAdminRequest struct {
 	*aws.Request
-	Input *SearchProductsAsAdminInput
-	Copy  func(*SearchProductsAsAdminInput) SearchProductsAsAdminRequest
+	Input *types.SearchProductsAsAdminInput
+	Copy  func(*types.SearchProductsAsAdminInput) SearchProductsAsAdminRequest
 }
 
 // Send marshals and sends the SearchProductsAsAdmin API request.
@@ -132,7 +62,7 @@ func (r SearchProductsAsAdminRequest) Send(ctx context.Context) (*SearchProducts
 	}
 
 	resp := &SearchProductsAsAdminResponse{
-		SearchProductsAsAdminOutput: r.Request.Data.(*SearchProductsAsAdminOutput),
+		SearchProductsAsAdminOutput: r.Request.Data.(*types.SearchProductsAsAdminOutput),
 		response:                    &aws.Response{Request: r.Request},
 	}
 
@@ -162,7 +92,7 @@ func NewSearchProductsAsAdminPaginator(req SearchProductsAsAdminRequest) SearchP
 	return SearchProductsAsAdminPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *SearchProductsAsAdminInput
+				var inCpy *types.SearchProductsAsAdminInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -182,14 +112,14 @@ type SearchProductsAsAdminPaginator struct {
 	aws.Pager
 }
 
-func (p *SearchProductsAsAdminPaginator) CurrentPage() *SearchProductsAsAdminOutput {
-	return p.Pager.CurrentPage().(*SearchProductsAsAdminOutput)
+func (p *SearchProductsAsAdminPaginator) CurrentPage() *types.SearchProductsAsAdminOutput {
+	return p.Pager.CurrentPage().(*types.SearchProductsAsAdminOutput)
 }
 
 // SearchProductsAsAdminResponse is the response type for the
 // SearchProductsAsAdmin API operation.
 type SearchProductsAsAdminResponse struct {
-	*SearchProductsAsAdminOutput
+	*types.SearchProductsAsAdminOutput
 
 	response *aws.Response
 }

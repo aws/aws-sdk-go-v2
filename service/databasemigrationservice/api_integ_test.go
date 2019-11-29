@@ -13,6 +13,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws/awserr"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting/integration"
 	"github.com/aws/aws-sdk-go-v2/service/databasemigrationservice"
+	"github.com/aws/aws-sdk-go-v2/service/databasemigrationservice/types"
 )
 
 var _ aws.Config
@@ -24,7 +25,7 @@ func TestInteg_00_DescribeEndpoints(t *testing.T) {
 
 	cfg := integration.ConfigWithDefaultRegion("us-west-2")
 	svc := databasemigrationservice.New(cfg)
-	params := &databasemigrationservice.DescribeEndpointsInput{}
+	params := &types.DescribeEndpointsInput{}
 
 	req := svc.DescribeEndpointsRequest(params)
 
@@ -39,7 +40,7 @@ func TestInteg_01_DescribeTableStatistics(t *testing.T) {
 
 	cfg := integration.ConfigWithDefaultRegion("us-west-2")
 	svc := databasemigrationservice.New(cfg)
-	params := &databasemigrationservice.DescribeTableStatisticsInput{
+	params := &types.DescribeTableStatisticsInput{
 		ReplicationTaskArn: aws.String("arn:aws:acm:region:123456789012"),
 	}
 

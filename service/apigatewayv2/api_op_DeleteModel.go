@@ -6,76 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/restjson"
+	"github.com/aws/aws-sdk-go-v2/service/apigatewayv2/types"
 )
-
-type DeleteModelInput struct {
-	_ struct{} `type:"structure"`
-
-	// ApiId is a required field
-	ApiId *string `location:"uri" locationName:"apiId" type:"string" required:"true"`
-
-	// ModelId is a required field
-	ModelId *string `location:"uri" locationName:"modelId" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteModelInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteModelInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteModelInput"}
-
-	if s.ApiId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ApiId"))
-	}
-
-	if s.ModelId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ModelId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteModelInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.ApiId != nil {
-		v := *s.ApiId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "apiId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.ModelId != nil {
-		v := *s.ModelId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "modelId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type DeleteModelOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteModelOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteModelOutput) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
 
 const opDeleteModel = "DeleteModel"
 
@@ -92,7 +26,7 @@ const opDeleteModel = "DeleteModel"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/apigatewayv2-2018-11-29/DeleteModel
-func (c *Client) DeleteModelRequest(input *DeleteModelInput) DeleteModelRequest {
+func (c *Client) DeleteModelRequest(input *types.DeleteModelInput) DeleteModelRequest {
 	op := &aws.Operation{
 		Name:       opDeleteModel,
 		HTTPMethod: "DELETE",
@@ -100,10 +34,10 @@ func (c *Client) DeleteModelRequest(input *DeleteModelInput) DeleteModelRequest 
 	}
 
 	if input == nil {
-		input = &DeleteModelInput{}
+		input = &types.DeleteModelInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteModelOutput{})
+	req := c.newRequest(op, input, &types.DeleteModelOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return DeleteModelRequest{Request: req, Input: input, Copy: c.DeleteModelRequest}
@@ -113,8 +47,8 @@ func (c *Client) DeleteModelRequest(input *DeleteModelInput) DeleteModelRequest 
 // DeleteModel API operation.
 type DeleteModelRequest struct {
 	*aws.Request
-	Input *DeleteModelInput
-	Copy  func(*DeleteModelInput) DeleteModelRequest
+	Input *types.DeleteModelInput
+	Copy  func(*types.DeleteModelInput) DeleteModelRequest
 }
 
 // Send marshals and sends the DeleteModel API request.
@@ -126,7 +60,7 @@ func (r DeleteModelRequest) Send(ctx context.Context) (*DeleteModelResponse, err
 	}
 
 	resp := &DeleteModelResponse{
-		DeleteModelOutput: r.Request.Data.(*DeleteModelOutput),
+		DeleteModelOutput: r.Request.Data.(*types.DeleteModelOutput),
 		response:          &aws.Response{Request: r.Request},
 	}
 
@@ -136,7 +70,7 @@ func (r DeleteModelRequest) Send(ctx context.Context) (*DeleteModelResponse, err
 // DeleteModelResponse is the response type for the
 // DeleteModel API operation.
 type DeleteModelResponse struct {
-	*DeleteModelOutput
+	*types.DeleteModelOutput
 
 	response *aws.Response
 }

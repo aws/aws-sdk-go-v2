@@ -6,60 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
+	"github.com/aws/aws-sdk-go-v2/service/kms/types"
 )
-
-type EnableKeyRotationInput struct {
-	_ struct{} `type:"structure"`
-
-	// A unique identifier for the customer master key (CMK).
-	//
-	// Specify the key ID or the Amazon Resource Name (ARN) of the CMK.
-	//
-	// For example:
-	//
-	//    * Key ID: 1234abcd-12ab-34cd-56ef-1234567890ab
-	//
-	//    * Key ARN: arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab
-	//
-	// To get the key ID and key ARN for a CMK, use ListKeys or DescribeKey.
-	//
-	// KeyId is a required field
-	KeyId *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s EnableKeyRotationInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *EnableKeyRotationInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "EnableKeyRotationInput"}
-
-	if s.KeyId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("KeyId"))
-	}
-	if s.KeyId != nil && len(*s.KeyId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("KeyId", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type EnableKeyRotationOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s EnableKeyRotationOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opEnableKeyRotation = "EnableKeyRotation"
 
@@ -85,7 +35,7 @@ const opEnableKeyRotation = "EnableKeyRotation"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/EnableKeyRotation
-func (c *Client) EnableKeyRotationRequest(input *EnableKeyRotationInput) EnableKeyRotationRequest {
+func (c *Client) EnableKeyRotationRequest(input *types.EnableKeyRotationInput) EnableKeyRotationRequest {
 	op := &aws.Operation{
 		Name:       opEnableKeyRotation,
 		HTTPMethod: "POST",
@@ -93,10 +43,10 @@ func (c *Client) EnableKeyRotationRequest(input *EnableKeyRotationInput) EnableK
 	}
 
 	if input == nil {
-		input = &EnableKeyRotationInput{}
+		input = &types.EnableKeyRotationInput{}
 	}
 
-	req := c.newRequest(op, input, &EnableKeyRotationOutput{})
+	req := c.newRequest(op, input, &types.EnableKeyRotationOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return EnableKeyRotationRequest{Request: req, Input: input, Copy: c.EnableKeyRotationRequest}
@@ -106,8 +56,8 @@ func (c *Client) EnableKeyRotationRequest(input *EnableKeyRotationInput) EnableK
 // EnableKeyRotation API operation.
 type EnableKeyRotationRequest struct {
 	*aws.Request
-	Input *EnableKeyRotationInput
-	Copy  func(*EnableKeyRotationInput) EnableKeyRotationRequest
+	Input *types.EnableKeyRotationInput
+	Copy  func(*types.EnableKeyRotationInput) EnableKeyRotationRequest
 }
 
 // Send marshals and sends the EnableKeyRotation API request.
@@ -119,7 +69,7 @@ func (r EnableKeyRotationRequest) Send(ctx context.Context) (*EnableKeyRotationR
 	}
 
 	resp := &EnableKeyRotationResponse{
-		EnableKeyRotationOutput: r.Request.Data.(*EnableKeyRotationOutput),
+		EnableKeyRotationOutput: r.Request.Data.(*types.EnableKeyRotationOutput),
 		response:                &aws.Response{Request: r.Request},
 	}
 
@@ -129,7 +79,7 @@ func (r EnableKeyRotationRequest) Send(ctx context.Context) (*EnableKeyRotationR
 // EnableKeyRotationResponse is the response type for the
 // EnableKeyRotation API operation.
 type EnableKeyRotationResponse struct {
-	*EnableKeyRotationOutput
+	*types.EnableKeyRotationOutput
 
 	response *aws.Response
 }

@@ -6,63 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-type ModifyVpnTunnelCertificateInput struct {
-	_ struct{} `type:"structure"`
-
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have
-	// the required permissions, the error response is DryRunOperation. Otherwise,
-	// it is UnauthorizedOperation.
-	DryRun *bool `type:"boolean"`
-
-	// The ID of the AWS Site-to-Site VPN connection.
-	//
-	// VpnConnectionId is a required field
-	VpnConnectionId *string `type:"string" required:"true"`
-
-	// The external IP address of the VPN tunnel.
-	//
-	// VpnTunnelOutsideIpAddress is a required field
-	VpnTunnelOutsideIpAddress *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s ModifyVpnTunnelCertificateInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ModifyVpnTunnelCertificateInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ModifyVpnTunnelCertificateInput"}
-
-	if s.VpnConnectionId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("VpnConnectionId"))
-	}
-
-	if s.VpnTunnelOutsideIpAddress == nil {
-		invalidParams.Add(aws.NewErrParamRequired("VpnTunnelOutsideIpAddress"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ModifyVpnTunnelCertificateOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Describes a VPN connection.
-	VpnConnection *VpnConnection `locationName:"vpnConnection" type:"structure"`
-}
-
-// String returns the string representation
-func (s ModifyVpnTunnelCertificateOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opModifyVpnTunnelCertificate = "ModifyVpnTunnelCertificate"
 
@@ -79,7 +24,7 @@ const opModifyVpnTunnelCertificate = "ModifyVpnTunnelCertificate"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyVpnTunnelCertificate
-func (c *Client) ModifyVpnTunnelCertificateRequest(input *ModifyVpnTunnelCertificateInput) ModifyVpnTunnelCertificateRequest {
+func (c *Client) ModifyVpnTunnelCertificateRequest(input *types.ModifyVpnTunnelCertificateInput) ModifyVpnTunnelCertificateRequest {
 	op := &aws.Operation{
 		Name:       opModifyVpnTunnelCertificate,
 		HTTPMethod: "POST",
@@ -87,10 +32,10 @@ func (c *Client) ModifyVpnTunnelCertificateRequest(input *ModifyVpnTunnelCertifi
 	}
 
 	if input == nil {
-		input = &ModifyVpnTunnelCertificateInput{}
+		input = &types.ModifyVpnTunnelCertificateInput{}
 	}
 
-	req := c.newRequest(op, input, &ModifyVpnTunnelCertificateOutput{})
+	req := c.newRequest(op, input, &types.ModifyVpnTunnelCertificateOutput{})
 	return ModifyVpnTunnelCertificateRequest{Request: req, Input: input, Copy: c.ModifyVpnTunnelCertificateRequest}
 }
 
@@ -98,8 +43,8 @@ func (c *Client) ModifyVpnTunnelCertificateRequest(input *ModifyVpnTunnelCertifi
 // ModifyVpnTunnelCertificate API operation.
 type ModifyVpnTunnelCertificateRequest struct {
 	*aws.Request
-	Input *ModifyVpnTunnelCertificateInput
-	Copy  func(*ModifyVpnTunnelCertificateInput) ModifyVpnTunnelCertificateRequest
+	Input *types.ModifyVpnTunnelCertificateInput
+	Copy  func(*types.ModifyVpnTunnelCertificateInput) ModifyVpnTunnelCertificateRequest
 }
 
 // Send marshals and sends the ModifyVpnTunnelCertificate API request.
@@ -111,7 +56,7 @@ func (r ModifyVpnTunnelCertificateRequest) Send(ctx context.Context) (*ModifyVpn
 	}
 
 	resp := &ModifyVpnTunnelCertificateResponse{
-		ModifyVpnTunnelCertificateOutput: r.Request.Data.(*ModifyVpnTunnelCertificateOutput),
+		ModifyVpnTunnelCertificateOutput: r.Request.Data.(*types.ModifyVpnTunnelCertificateOutput),
 		response:                         &aws.Response{Request: r.Request},
 	}
 
@@ -121,7 +66,7 @@ func (r ModifyVpnTunnelCertificateRequest) Send(ctx context.Context) (*ModifyVpn
 // ModifyVpnTunnelCertificateResponse is the response type for the
 // ModifyVpnTunnelCertificate API operation.
 type ModifyVpnTunnelCertificateResponse struct {
-	*ModifyVpnTunnelCertificateOutput
+	*types.ModifyVpnTunnelCertificateOutput
 
 	response *aws.Response
 }

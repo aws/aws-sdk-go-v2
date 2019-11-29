@@ -13,6 +13,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws/awserr"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting/integration"
 	"github.com/aws/aws-sdk-go-v2/service/opsworks"
+	"github.com/aws/aws-sdk-go-v2/service/opsworks/types"
 )
 
 var _ aws.Config
@@ -24,7 +25,7 @@ func TestInteg_00_DescribeStacks(t *testing.T) {
 
 	cfg := integration.ConfigWithDefaultRegion("us-west-2")
 	svc := opsworks.New(cfg)
-	params := &opsworks.DescribeStacksInput{}
+	params := &types.DescribeStacksInput{}
 
 	req := svc.DescribeStacksRequest(params)
 
@@ -39,7 +40,7 @@ func TestInteg_01_DescribeLayers(t *testing.T) {
 
 	cfg := integration.ConfigWithDefaultRegion("us-west-2")
 	svc := opsworks.New(cfg)
-	params := &opsworks.DescribeLayersInput{
+	params := &types.DescribeLayersInput{
 		StackId: aws.String("fake_stack"),
 	}
 

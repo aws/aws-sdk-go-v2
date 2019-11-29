@@ -6,114 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-type ExportImageInput struct {
-	_ struct{} `type:"structure"`
-
-	// Token to enable idempotency for export image requests.
-	ClientToken *string `type:"string" idempotencyToken:"true"`
-
-	// A description of the image being exported. The maximum length is 255 bytes.
-	Description *string `type:"string"`
-
-	// The disk image format.
-	//
-	// DiskImageFormat is a required field
-	DiskImageFormat DiskImageFormat `type:"string" required:"true" enum:"true"`
-
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have
-	// the required permissions, the error response is DryRunOperation. Otherwise,
-	// it is UnauthorizedOperation.
-	DryRun *bool `type:"boolean"`
-
-	// The ID of the image.
-	//
-	// ImageId is a required field
-	ImageId *string `type:"string" required:"true"`
-
-	// The name of the role that grants VM Import/Export permission to export images
-	// to your S3 bucket. If this parameter is not specified, the default role is
-	// named 'vmimport'.
-	RoleName *string `type:"string"`
-
-	// Information about the destination S3 bucket. The bucket must exist and grant
-	// WRITE and READ_ACP permissions to the AWS account vm-import-export@amazon.com.
-	//
-	// S3ExportLocation is a required field
-	S3ExportLocation *ExportTaskS3LocationRequest `type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s ExportImageInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ExportImageInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ExportImageInput"}
-	if len(s.DiskImageFormat) == 0 {
-		invalidParams.Add(aws.NewErrParamRequired("DiskImageFormat"))
-	}
-
-	if s.ImageId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ImageId"))
-	}
-
-	if s.S3ExportLocation == nil {
-		invalidParams.Add(aws.NewErrParamRequired("S3ExportLocation"))
-	}
-	if s.S3ExportLocation != nil {
-		if err := s.S3ExportLocation.Validate(); err != nil {
-			invalidParams.AddNested("S3ExportLocation", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ExportImageOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A description of the image being exported.
-	Description *string `locationName:"description" type:"string"`
-
-	// The disk image format for the exported image.
-	DiskImageFormat DiskImageFormat `locationName:"diskImageFormat" type:"string" enum:"true"`
-
-	// The ID of the export image task.
-	ExportImageTaskId *string `locationName:"exportImageTaskId" type:"string"`
-
-	// The ID of the image.
-	ImageId *string `locationName:"imageId" type:"string"`
-
-	// The percent complete of the export image task.
-	Progress *string `locationName:"progress" type:"string"`
-
-	// The name of the role that grants VM Import/Export permission to export images
-	// to your S3 bucket.
-	RoleName *string `locationName:"roleName" type:"string"`
-
-	// Information about the destination S3 bucket.
-	S3ExportLocation *ExportTaskS3Location `locationName:"s3ExportLocation" type:"structure"`
-
-	// The status of the export image task. The possible values are active, completed,
-	// deleting, and deleted.
-	Status *string `locationName:"status" type:"string"`
-
-	// The status message for the export image task.
-	StatusMessage *string `locationName:"statusMessage" type:"string"`
-}
-
-// String returns the string representation
-func (s ExportImageOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opExportImage = "ExportImage"
 
@@ -132,7 +26,7 @@ const opExportImage = "ExportImage"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ExportImage
-func (c *Client) ExportImageRequest(input *ExportImageInput) ExportImageRequest {
+func (c *Client) ExportImageRequest(input *types.ExportImageInput) ExportImageRequest {
 	op := &aws.Operation{
 		Name:       opExportImage,
 		HTTPMethod: "POST",
@@ -140,10 +34,10 @@ func (c *Client) ExportImageRequest(input *ExportImageInput) ExportImageRequest 
 	}
 
 	if input == nil {
-		input = &ExportImageInput{}
+		input = &types.ExportImageInput{}
 	}
 
-	req := c.newRequest(op, input, &ExportImageOutput{})
+	req := c.newRequest(op, input, &types.ExportImageOutput{})
 	return ExportImageRequest{Request: req, Input: input, Copy: c.ExportImageRequest}
 }
 
@@ -151,8 +45,8 @@ func (c *Client) ExportImageRequest(input *ExportImageInput) ExportImageRequest 
 // ExportImage API operation.
 type ExportImageRequest struct {
 	*aws.Request
-	Input *ExportImageInput
-	Copy  func(*ExportImageInput) ExportImageRequest
+	Input *types.ExportImageInput
+	Copy  func(*types.ExportImageInput) ExportImageRequest
 }
 
 // Send marshals and sends the ExportImage API request.
@@ -164,7 +58,7 @@ func (r ExportImageRequest) Send(ctx context.Context) (*ExportImageResponse, err
 	}
 
 	resp := &ExportImageResponse{
-		ExportImageOutput: r.Request.Data.(*ExportImageOutput),
+		ExportImageOutput: r.Request.Data.(*types.ExportImageOutput),
 		response:          &aws.Response{Request: r.Request},
 	}
 
@@ -174,7 +68,7 @@ func (r ExportImageRequest) Send(ctx context.Context) (*ExportImageResponse, err
 // ExportImageResponse is the response type for the
 // ExportImage API operation.
 type ExportImageResponse struct {
-	*ExportImageOutput
+	*types.ExportImageOutput
 
 	response *aws.Response
 }

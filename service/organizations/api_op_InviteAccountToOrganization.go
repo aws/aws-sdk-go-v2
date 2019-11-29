@@ -6,72 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/organizations/types"
 )
-
-type InviteAccountToOrganizationInput struct {
-	_ struct{} `type:"structure"`
-
-	// Additional information that you want to include in the generated email to
-	// the recipient account owner.
-	Notes *string `type:"string" sensitive:"true"`
-
-	// The identifier (ID) of the AWS account that you want to invite to join your
-	// organization. This is a JSON object that contains the following elements:
-	//
-	// { "Type": "ACCOUNT", "Id": "< account id number >" }
-	//
-	// If you use the AWS CLI, you can submit this as a single string, similar to
-	// the following example:
-	//
-	// --target Id=123456789012,Type=ACCOUNT
-	//
-	// If you specify "Type": "ACCOUNT", you must provide the AWS account ID number
-	// as the Id. If you specify "Type": "EMAIL", you must specify the email address
-	// that is associated with the account.
-	//
-	// --target Id=diego@example.com,Type=EMAIL
-	//
-	// Target is a required field
-	Target *HandshakeParty `type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s InviteAccountToOrganizationInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *InviteAccountToOrganizationInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "InviteAccountToOrganizationInput"}
-
-	if s.Target == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Target"))
-	}
-	if s.Target != nil {
-		if err := s.Target.Validate(); err != nil {
-			invalidParams.AddNested("Target", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type InviteAccountToOrganizationOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A structure that contains details about the handshake that is created to
-	// support this invitation request.
-	Handshake *Handshake `type:"structure"`
-}
-
-// String returns the string representation
-func (s InviteAccountToOrganizationOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opInviteAccountToOrganization = "InviteAccountToOrganization"
 
@@ -105,7 +41,7 @@ const opInviteAccountToOrganization = "InviteAccountToOrganization"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/InviteAccountToOrganization
-func (c *Client) InviteAccountToOrganizationRequest(input *InviteAccountToOrganizationInput) InviteAccountToOrganizationRequest {
+func (c *Client) InviteAccountToOrganizationRequest(input *types.InviteAccountToOrganizationInput) InviteAccountToOrganizationRequest {
 	op := &aws.Operation{
 		Name:       opInviteAccountToOrganization,
 		HTTPMethod: "POST",
@@ -113,10 +49,10 @@ func (c *Client) InviteAccountToOrganizationRequest(input *InviteAccountToOrgani
 	}
 
 	if input == nil {
-		input = &InviteAccountToOrganizationInput{}
+		input = &types.InviteAccountToOrganizationInput{}
 	}
 
-	req := c.newRequest(op, input, &InviteAccountToOrganizationOutput{})
+	req := c.newRequest(op, input, &types.InviteAccountToOrganizationOutput{})
 	return InviteAccountToOrganizationRequest{Request: req, Input: input, Copy: c.InviteAccountToOrganizationRequest}
 }
 
@@ -124,8 +60,8 @@ func (c *Client) InviteAccountToOrganizationRequest(input *InviteAccountToOrgani
 // InviteAccountToOrganization API operation.
 type InviteAccountToOrganizationRequest struct {
 	*aws.Request
-	Input *InviteAccountToOrganizationInput
-	Copy  func(*InviteAccountToOrganizationInput) InviteAccountToOrganizationRequest
+	Input *types.InviteAccountToOrganizationInput
+	Copy  func(*types.InviteAccountToOrganizationInput) InviteAccountToOrganizationRequest
 }
 
 // Send marshals and sends the InviteAccountToOrganization API request.
@@ -137,7 +73,7 @@ func (r InviteAccountToOrganizationRequest) Send(ctx context.Context) (*InviteAc
 	}
 
 	resp := &InviteAccountToOrganizationResponse{
-		InviteAccountToOrganizationOutput: r.Request.Data.(*InviteAccountToOrganizationOutput),
+		InviteAccountToOrganizationOutput: r.Request.Data.(*types.InviteAccountToOrganizationOutput),
 		response:                          &aws.Response{Request: r.Request},
 	}
 
@@ -147,7 +83,7 @@ func (r InviteAccountToOrganizationRequest) Send(ctx context.Context) (*InviteAc
 // InviteAccountToOrganizationResponse is the response type for the
 // InviteAccountToOrganization API operation.
 type InviteAccountToOrganizationResponse struct {
-	*InviteAccountToOrganizationOutput
+	*types.InviteAccountToOrganizationOutput
 
 	response *aws.Response
 }

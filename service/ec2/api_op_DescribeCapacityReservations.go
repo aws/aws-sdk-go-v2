@@ -6,66 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-type DescribeCapacityReservationsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the Capacity Reservation.
-	CapacityReservationIds []string `locationName:"CapacityReservationId" locationNameList:"item" type:"list"`
-
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have
-	// the required permissions, the error response is DryRunOperation. Otherwise,
-	// it is UnauthorizedOperation.
-	DryRun *bool `type:"boolean"`
-
-	// One or more filters.
-	Filters []Filter `locationName:"Filter" locationNameList:"Filter" type:"list"`
-
-	// The maximum number of results to return for the request in a single page.
-	// The remaining results can be seen by sending another request with the returned
-	// nextToken value.
-	MaxResults *int64 `min:"1" type:"integer"`
-
-	// The token to retrieve the next page of results.
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeCapacityReservationsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeCapacityReservationsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeCapacityReservationsInput"}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribeCapacityReservationsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Information about the Capacity Reservations.
-	CapacityReservations []CapacityReservation `locationName:"capacityReservationSet" locationNameList:"item" type:"list"`
-
-	// The token to use to retrieve the next page of results. This value is null
-	// when there are no more results to return.
-	NextToken *string `locationName:"nextToken" type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeCapacityReservationsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeCapacityReservations = "DescribeCapacityReservations"
 
@@ -83,7 +25,7 @@ const opDescribeCapacityReservations = "DescribeCapacityReservations"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeCapacityReservations
-func (c *Client) DescribeCapacityReservationsRequest(input *DescribeCapacityReservationsInput) DescribeCapacityReservationsRequest {
+func (c *Client) DescribeCapacityReservationsRequest(input *types.DescribeCapacityReservationsInput) DescribeCapacityReservationsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeCapacityReservations,
 		HTTPMethod: "POST",
@@ -97,10 +39,10 @@ func (c *Client) DescribeCapacityReservationsRequest(input *DescribeCapacityRese
 	}
 
 	if input == nil {
-		input = &DescribeCapacityReservationsInput{}
+		input = &types.DescribeCapacityReservationsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeCapacityReservationsOutput{})
+	req := c.newRequest(op, input, &types.DescribeCapacityReservationsOutput{})
 	return DescribeCapacityReservationsRequest{Request: req, Input: input, Copy: c.DescribeCapacityReservationsRequest}
 }
 
@@ -108,8 +50,8 @@ func (c *Client) DescribeCapacityReservationsRequest(input *DescribeCapacityRese
 // DescribeCapacityReservations API operation.
 type DescribeCapacityReservationsRequest struct {
 	*aws.Request
-	Input *DescribeCapacityReservationsInput
-	Copy  func(*DescribeCapacityReservationsInput) DescribeCapacityReservationsRequest
+	Input *types.DescribeCapacityReservationsInput
+	Copy  func(*types.DescribeCapacityReservationsInput) DescribeCapacityReservationsRequest
 }
 
 // Send marshals and sends the DescribeCapacityReservations API request.
@@ -121,7 +63,7 @@ func (r DescribeCapacityReservationsRequest) Send(ctx context.Context) (*Describ
 	}
 
 	resp := &DescribeCapacityReservationsResponse{
-		DescribeCapacityReservationsOutput: r.Request.Data.(*DescribeCapacityReservationsOutput),
+		DescribeCapacityReservationsOutput: r.Request.Data.(*types.DescribeCapacityReservationsOutput),
 		response:                           &aws.Response{Request: r.Request},
 	}
 
@@ -151,7 +93,7 @@ func NewDescribeCapacityReservationsPaginator(req DescribeCapacityReservationsRe
 	return DescribeCapacityReservationsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *DescribeCapacityReservationsInput
+				var inCpy *types.DescribeCapacityReservationsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -171,14 +113,14 @@ type DescribeCapacityReservationsPaginator struct {
 	aws.Pager
 }
 
-func (p *DescribeCapacityReservationsPaginator) CurrentPage() *DescribeCapacityReservationsOutput {
-	return p.Pager.CurrentPage().(*DescribeCapacityReservationsOutput)
+func (p *DescribeCapacityReservationsPaginator) CurrentPage() *types.DescribeCapacityReservationsOutput {
+	return p.Pager.CurrentPage().(*types.DescribeCapacityReservationsOutput)
 }
 
 // DescribeCapacityReservationsResponse is the response type for the
 // DescribeCapacityReservations API operation.
 type DescribeCapacityReservationsResponse struct {
-	*DescribeCapacityReservationsOutput
+	*types.DescribeCapacityReservationsOutput
 
 	response *aws.Response
 }

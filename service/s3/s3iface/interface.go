@@ -13,6 +13,7 @@ import (
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/s3"
+	"github.com/aws/aws-sdk-go-v2/service/s3/types"
 )
 
 // ClientAPI provides an interface to enable mocking the
@@ -46,7 +47,7 @@ import (
 //    type mockClientClient struct {
 //        s3iface.ClientPI
 //    }
-//    func (m *mockClientClient) AbortMultipartUpload(input *s3.AbortMultipartUploadInput) (*s3.AbortMultipartUploadOutput, error) {
+//    func (m *mockClientClient) AbortMultipartUpload(input *types.AbortMultipartUploadInput) (*types.AbortMultipartUploadOutput, error) {
 //        // mock response/functionality
 //    }
 //
@@ -64,187 +65,187 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type ClientAPI interface {
-	AbortMultipartUploadRequest(*s3.AbortMultipartUploadInput) s3.AbortMultipartUploadRequest
+	AbortMultipartUploadRequest(*types.AbortMultipartUploadInput) s3.AbortMultipartUploadRequest
 
-	CompleteMultipartUploadRequest(*s3.CompleteMultipartUploadInput) s3.CompleteMultipartUploadRequest
+	CompleteMultipartUploadRequest(*types.CompleteMultipartUploadInput) s3.CompleteMultipartUploadRequest
 
-	CopyObjectRequest(*s3.CopyObjectInput) s3.CopyObjectRequest
+	CopyObjectRequest(*types.CopyObjectInput) s3.CopyObjectRequest
 
-	CreateBucketRequest(*s3.CreateBucketInput) s3.CreateBucketRequest
+	CreateBucketRequest(*types.CreateBucketInput) s3.CreateBucketRequest
 
-	CreateMultipartUploadRequest(*s3.CreateMultipartUploadInput) s3.CreateMultipartUploadRequest
+	CreateMultipartUploadRequest(*types.CreateMultipartUploadInput) s3.CreateMultipartUploadRequest
 
-	DeleteBucketRequest(*s3.DeleteBucketInput) s3.DeleteBucketRequest
+	DeleteBucketRequest(*types.DeleteBucketInput) s3.DeleteBucketRequest
 
-	DeleteBucketAnalyticsConfigurationRequest(*s3.DeleteBucketAnalyticsConfigurationInput) s3.DeleteBucketAnalyticsConfigurationRequest
+	DeleteBucketAnalyticsConfigurationRequest(*types.DeleteBucketAnalyticsConfigurationInput) s3.DeleteBucketAnalyticsConfigurationRequest
 
-	DeleteBucketCorsRequest(*s3.DeleteBucketCorsInput) s3.DeleteBucketCorsRequest
+	DeleteBucketCorsRequest(*types.DeleteBucketCorsInput) s3.DeleteBucketCorsRequest
 
-	DeleteBucketEncryptionRequest(*s3.DeleteBucketEncryptionInput) s3.DeleteBucketEncryptionRequest
+	DeleteBucketEncryptionRequest(*types.DeleteBucketEncryptionInput) s3.DeleteBucketEncryptionRequest
 
-	DeleteBucketInventoryConfigurationRequest(*s3.DeleteBucketInventoryConfigurationInput) s3.DeleteBucketInventoryConfigurationRequest
+	DeleteBucketInventoryConfigurationRequest(*types.DeleteBucketInventoryConfigurationInput) s3.DeleteBucketInventoryConfigurationRequest
 
-	DeleteBucketLifecycleRequest(*s3.DeleteBucketLifecycleInput) s3.DeleteBucketLifecycleRequest
+	DeleteBucketLifecycleRequest(*types.DeleteBucketLifecycleInput) s3.DeleteBucketLifecycleRequest
 
-	DeleteBucketMetricsConfigurationRequest(*s3.DeleteBucketMetricsConfigurationInput) s3.DeleteBucketMetricsConfigurationRequest
+	DeleteBucketMetricsConfigurationRequest(*types.DeleteBucketMetricsConfigurationInput) s3.DeleteBucketMetricsConfigurationRequest
 
-	DeleteBucketPolicyRequest(*s3.DeleteBucketPolicyInput) s3.DeleteBucketPolicyRequest
+	DeleteBucketPolicyRequest(*types.DeleteBucketPolicyInput) s3.DeleteBucketPolicyRequest
 
-	DeleteBucketReplicationRequest(*s3.DeleteBucketReplicationInput) s3.DeleteBucketReplicationRequest
+	DeleteBucketReplicationRequest(*types.DeleteBucketReplicationInput) s3.DeleteBucketReplicationRequest
 
-	DeleteBucketTaggingRequest(*s3.DeleteBucketTaggingInput) s3.DeleteBucketTaggingRequest
+	DeleteBucketTaggingRequest(*types.DeleteBucketTaggingInput) s3.DeleteBucketTaggingRequest
 
-	DeleteBucketWebsiteRequest(*s3.DeleteBucketWebsiteInput) s3.DeleteBucketWebsiteRequest
+	DeleteBucketWebsiteRequest(*types.DeleteBucketWebsiteInput) s3.DeleteBucketWebsiteRequest
 
-	DeleteObjectRequest(*s3.DeleteObjectInput) s3.DeleteObjectRequest
+	DeleteObjectRequest(*types.DeleteObjectInput) s3.DeleteObjectRequest
 
-	DeleteObjectTaggingRequest(*s3.DeleteObjectTaggingInput) s3.DeleteObjectTaggingRequest
+	DeleteObjectTaggingRequest(*types.DeleteObjectTaggingInput) s3.DeleteObjectTaggingRequest
 
-	DeleteObjectsRequest(*s3.DeleteObjectsInput) s3.DeleteObjectsRequest
+	DeleteObjectsRequest(*types.DeleteObjectsInput) s3.DeleteObjectsRequest
 
-	DeletePublicAccessBlockRequest(*s3.DeletePublicAccessBlockInput) s3.DeletePublicAccessBlockRequest
+	DeletePublicAccessBlockRequest(*types.DeletePublicAccessBlockInput) s3.DeletePublicAccessBlockRequest
 
-	GetBucketAccelerateConfigurationRequest(*s3.GetBucketAccelerateConfigurationInput) s3.GetBucketAccelerateConfigurationRequest
+	GetBucketAccelerateConfigurationRequest(*types.GetBucketAccelerateConfigurationInput) s3.GetBucketAccelerateConfigurationRequest
 
-	GetBucketAclRequest(*s3.GetBucketAclInput) s3.GetBucketAclRequest
+	GetBucketAclRequest(*types.GetBucketAclInput) s3.GetBucketAclRequest
 
-	GetBucketAnalyticsConfigurationRequest(*s3.GetBucketAnalyticsConfigurationInput) s3.GetBucketAnalyticsConfigurationRequest
+	GetBucketAnalyticsConfigurationRequest(*types.GetBucketAnalyticsConfigurationInput) s3.GetBucketAnalyticsConfigurationRequest
 
-	GetBucketCorsRequest(*s3.GetBucketCorsInput) s3.GetBucketCorsRequest
+	GetBucketCorsRequest(*types.GetBucketCorsInput) s3.GetBucketCorsRequest
 
-	GetBucketEncryptionRequest(*s3.GetBucketEncryptionInput) s3.GetBucketEncryptionRequest
+	GetBucketEncryptionRequest(*types.GetBucketEncryptionInput) s3.GetBucketEncryptionRequest
 
-	GetBucketInventoryConfigurationRequest(*s3.GetBucketInventoryConfigurationInput) s3.GetBucketInventoryConfigurationRequest
+	GetBucketInventoryConfigurationRequest(*types.GetBucketInventoryConfigurationInput) s3.GetBucketInventoryConfigurationRequest
 
-	GetBucketLifecycleRequest(*s3.GetBucketLifecycleInput) s3.GetBucketLifecycleRequest
+	GetBucketLifecycleRequest(*types.GetBucketLifecycleInput) s3.GetBucketLifecycleRequest
 
-	GetBucketLifecycleConfigurationRequest(*s3.GetBucketLifecycleConfigurationInput) s3.GetBucketLifecycleConfigurationRequest
+	GetBucketLifecycleConfigurationRequest(*types.GetBucketLifecycleConfigurationInput) s3.GetBucketLifecycleConfigurationRequest
 
-	GetBucketLocationRequest(*s3.GetBucketLocationInput) s3.GetBucketLocationRequest
+	GetBucketLocationRequest(*types.GetBucketLocationInput) s3.GetBucketLocationRequest
 
-	GetBucketLoggingRequest(*s3.GetBucketLoggingInput) s3.GetBucketLoggingRequest
+	GetBucketLoggingRequest(*types.GetBucketLoggingInput) s3.GetBucketLoggingRequest
 
-	GetBucketMetricsConfigurationRequest(*s3.GetBucketMetricsConfigurationInput) s3.GetBucketMetricsConfigurationRequest
+	GetBucketMetricsConfigurationRequest(*types.GetBucketMetricsConfigurationInput) s3.GetBucketMetricsConfigurationRequest
 
-	GetBucketNotificationRequest(*s3.GetBucketNotificationInput) s3.GetBucketNotificationRequest
+	GetBucketNotificationRequest(*types.GetBucketNotificationInput) s3.GetBucketNotificationRequest
 
-	GetBucketNotificationConfigurationRequest(*s3.GetBucketNotificationConfigurationInput) s3.GetBucketNotificationConfigurationRequest
+	GetBucketNotificationConfigurationRequest(*types.GetBucketNotificationConfigurationInput) s3.GetBucketNotificationConfigurationRequest
 
-	GetBucketPolicyRequest(*s3.GetBucketPolicyInput) s3.GetBucketPolicyRequest
+	GetBucketPolicyRequest(*types.GetBucketPolicyInput) s3.GetBucketPolicyRequest
 
-	GetBucketPolicyStatusRequest(*s3.GetBucketPolicyStatusInput) s3.GetBucketPolicyStatusRequest
+	GetBucketPolicyStatusRequest(*types.GetBucketPolicyStatusInput) s3.GetBucketPolicyStatusRequest
 
-	GetBucketReplicationRequest(*s3.GetBucketReplicationInput) s3.GetBucketReplicationRequest
+	GetBucketReplicationRequest(*types.GetBucketReplicationInput) s3.GetBucketReplicationRequest
 
-	GetBucketRequestPaymentRequest(*s3.GetBucketRequestPaymentInput) s3.GetBucketRequestPaymentRequest
+	GetBucketRequestPaymentRequest(*types.GetBucketRequestPaymentInput) s3.GetBucketRequestPaymentRequest
 
-	GetBucketTaggingRequest(*s3.GetBucketTaggingInput) s3.GetBucketTaggingRequest
+	GetBucketTaggingRequest(*types.GetBucketTaggingInput) s3.GetBucketTaggingRequest
 
-	GetBucketVersioningRequest(*s3.GetBucketVersioningInput) s3.GetBucketVersioningRequest
+	GetBucketVersioningRequest(*types.GetBucketVersioningInput) s3.GetBucketVersioningRequest
 
-	GetBucketWebsiteRequest(*s3.GetBucketWebsiteInput) s3.GetBucketWebsiteRequest
+	GetBucketWebsiteRequest(*types.GetBucketWebsiteInput) s3.GetBucketWebsiteRequest
 
-	GetObjectRequest(*s3.GetObjectInput) s3.GetObjectRequest
+	GetObjectRequest(*types.GetObjectInput) s3.GetObjectRequest
 
-	GetObjectAclRequest(*s3.GetObjectAclInput) s3.GetObjectAclRequest
+	GetObjectAclRequest(*types.GetObjectAclInput) s3.GetObjectAclRequest
 
-	GetObjectLegalHoldRequest(*s3.GetObjectLegalHoldInput) s3.GetObjectLegalHoldRequest
+	GetObjectLegalHoldRequest(*types.GetObjectLegalHoldInput) s3.GetObjectLegalHoldRequest
 
-	GetObjectLockConfigurationRequest(*s3.GetObjectLockConfigurationInput) s3.GetObjectLockConfigurationRequest
+	GetObjectLockConfigurationRequest(*types.GetObjectLockConfigurationInput) s3.GetObjectLockConfigurationRequest
 
-	GetObjectRetentionRequest(*s3.GetObjectRetentionInput) s3.GetObjectRetentionRequest
+	GetObjectRetentionRequest(*types.GetObjectRetentionInput) s3.GetObjectRetentionRequest
 
-	GetObjectTaggingRequest(*s3.GetObjectTaggingInput) s3.GetObjectTaggingRequest
+	GetObjectTaggingRequest(*types.GetObjectTaggingInput) s3.GetObjectTaggingRequest
 
-	GetObjectTorrentRequest(*s3.GetObjectTorrentInput) s3.GetObjectTorrentRequest
+	GetObjectTorrentRequest(*types.GetObjectTorrentInput) s3.GetObjectTorrentRequest
 
-	GetPublicAccessBlockRequest(*s3.GetPublicAccessBlockInput) s3.GetPublicAccessBlockRequest
+	GetPublicAccessBlockRequest(*types.GetPublicAccessBlockInput) s3.GetPublicAccessBlockRequest
 
-	HeadBucketRequest(*s3.HeadBucketInput) s3.HeadBucketRequest
+	HeadBucketRequest(*types.HeadBucketInput) s3.HeadBucketRequest
 
-	HeadObjectRequest(*s3.HeadObjectInput) s3.HeadObjectRequest
+	HeadObjectRequest(*types.HeadObjectInput) s3.HeadObjectRequest
 
-	ListBucketAnalyticsConfigurationsRequest(*s3.ListBucketAnalyticsConfigurationsInput) s3.ListBucketAnalyticsConfigurationsRequest
+	ListBucketAnalyticsConfigurationsRequest(*types.ListBucketAnalyticsConfigurationsInput) s3.ListBucketAnalyticsConfigurationsRequest
 
-	ListBucketInventoryConfigurationsRequest(*s3.ListBucketInventoryConfigurationsInput) s3.ListBucketInventoryConfigurationsRequest
+	ListBucketInventoryConfigurationsRequest(*types.ListBucketInventoryConfigurationsInput) s3.ListBucketInventoryConfigurationsRequest
 
-	ListBucketMetricsConfigurationsRequest(*s3.ListBucketMetricsConfigurationsInput) s3.ListBucketMetricsConfigurationsRequest
+	ListBucketMetricsConfigurationsRequest(*types.ListBucketMetricsConfigurationsInput) s3.ListBucketMetricsConfigurationsRequest
 
-	ListBucketsRequest(*s3.ListBucketsInput) s3.ListBucketsRequest
+	ListBucketsRequest(*types.ListBucketsInput) s3.ListBucketsRequest
 
-	ListMultipartUploadsRequest(*s3.ListMultipartUploadsInput) s3.ListMultipartUploadsRequest
+	ListMultipartUploadsRequest(*types.ListMultipartUploadsInput) s3.ListMultipartUploadsRequest
 
-	ListObjectVersionsRequest(*s3.ListObjectVersionsInput) s3.ListObjectVersionsRequest
+	ListObjectVersionsRequest(*types.ListObjectVersionsInput) s3.ListObjectVersionsRequest
 
-	ListObjectsRequest(*s3.ListObjectsInput) s3.ListObjectsRequest
+	ListObjectsRequest(*types.ListObjectsInput) s3.ListObjectsRequest
 
-	ListObjectsV2Request(*s3.ListObjectsV2Input) s3.ListObjectsV2Request
+	ListObjectsV2Request(*types.ListObjectsV2Input) s3.ListObjectsV2Request
 
-	ListPartsRequest(*s3.ListPartsInput) s3.ListPartsRequest
+	ListPartsRequest(*types.ListPartsInput) s3.ListPartsRequest
 
-	PutBucketAccelerateConfigurationRequest(*s3.PutBucketAccelerateConfigurationInput) s3.PutBucketAccelerateConfigurationRequest
+	PutBucketAccelerateConfigurationRequest(*types.PutBucketAccelerateConfigurationInput) s3.PutBucketAccelerateConfigurationRequest
 
-	PutBucketAclRequest(*s3.PutBucketAclInput) s3.PutBucketAclRequest
+	PutBucketAclRequest(*types.PutBucketAclInput) s3.PutBucketAclRequest
 
-	PutBucketAnalyticsConfigurationRequest(*s3.PutBucketAnalyticsConfigurationInput) s3.PutBucketAnalyticsConfigurationRequest
+	PutBucketAnalyticsConfigurationRequest(*types.PutBucketAnalyticsConfigurationInput) s3.PutBucketAnalyticsConfigurationRequest
 
-	PutBucketCorsRequest(*s3.PutBucketCorsInput) s3.PutBucketCorsRequest
+	PutBucketCorsRequest(*types.PutBucketCorsInput) s3.PutBucketCorsRequest
 
-	PutBucketEncryptionRequest(*s3.PutBucketEncryptionInput) s3.PutBucketEncryptionRequest
+	PutBucketEncryptionRequest(*types.PutBucketEncryptionInput) s3.PutBucketEncryptionRequest
 
-	PutBucketInventoryConfigurationRequest(*s3.PutBucketInventoryConfigurationInput) s3.PutBucketInventoryConfigurationRequest
+	PutBucketInventoryConfigurationRequest(*types.PutBucketInventoryConfigurationInput) s3.PutBucketInventoryConfigurationRequest
 
-	PutBucketLifecycleRequest(*s3.PutBucketLifecycleInput) s3.PutBucketLifecycleRequest
+	PutBucketLifecycleRequest(*types.PutBucketLifecycleInput) s3.PutBucketLifecycleRequest
 
-	PutBucketLifecycleConfigurationRequest(*s3.PutBucketLifecycleConfigurationInput) s3.PutBucketLifecycleConfigurationRequest
+	PutBucketLifecycleConfigurationRequest(*types.PutBucketLifecycleConfigurationInput) s3.PutBucketLifecycleConfigurationRequest
 
-	PutBucketLoggingRequest(*s3.PutBucketLoggingInput) s3.PutBucketLoggingRequest
+	PutBucketLoggingRequest(*types.PutBucketLoggingInput) s3.PutBucketLoggingRequest
 
-	PutBucketMetricsConfigurationRequest(*s3.PutBucketMetricsConfigurationInput) s3.PutBucketMetricsConfigurationRequest
+	PutBucketMetricsConfigurationRequest(*types.PutBucketMetricsConfigurationInput) s3.PutBucketMetricsConfigurationRequest
 
-	PutBucketNotificationRequest(*s3.PutBucketNotificationInput) s3.PutBucketNotificationRequest
+	PutBucketNotificationRequest(*types.PutBucketNotificationInput) s3.PutBucketNotificationRequest
 
-	PutBucketNotificationConfigurationRequest(*s3.PutBucketNotificationConfigurationInput) s3.PutBucketNotificationConfigurationRequest
+	PutBucketNotificationConfigurationRequest(*types.PutBucketNotificationConfigurationInput) s3.PutBucketNotificationConfigurationRequest
 
-	PutBucketPolicyRequest(*s3.PutBucketPolicyInput) s3.PutBucketPolicyRequest
+	PutBucketPolicyRequest(*types.PutBucketPolicyInput) s3.PutBucketPolicyRequest
 
-	PutBucketReplicationRequest(*s3.PutBucketReplicationInput) s3.PutBucketReplicationRequest
+	PutBucketReplicationRequest(*types.PutBucketReplicationInput) s3.PutBucketReplicationRequest
 
-	PutBucketRequestPaymentRequest(*s3.PutBucketRequestPaymentInput) s3.PutBucketRequestPaymentRequest
+	PutBucketRequestPaymentRequest(*types.PutBucketRequestPaymentInput) s3.PutBucketRequestPaymentRequest
 
-	PutBucketTaggingRequest(*s3.PutBucketTaggingInput) s3.PutBucketTaggingRequest
+	PutBucketTaggingRequest(*types.PutBucketTaggingInput) s3.PutBucketTaggingRequest
 
-	PutBucketVersioningRequest(*s3.PutBucketVersioningInput) s3.PutBucketVersioningRequest
+	PutBucketVersioningRequest(*types.PutBucketVersioningInput) s3.PutBucketVersioningRequest
 
-	PutBucketWebsiteRequest(*s3.PutBucketWebsiteInput) s3.PutBucketWebsiteRequest
+	PutBucketWebsiteRequest(*types.PutBucketWebsiteInput) s3.PutBucketWebsiteRequest
 
-	PutObjectRequest(*s3.PutObjectInput) s3.PutObjectRequest
+	PutObjectRequest(*types.PutObjectInput) s3.PutObjectRequest
 
-	PutObjectAclRequest(*s3.PutObjectAclInput) s3.PutObjectAclRequest
+	PutObjectAclRequest(*types.PutObjectAclInput) s3.PutObjectAclRequest
 
-	PutObjectLegalHoldRequest(*s3.PutObjectLegalHoldInput) s3.PutObjectLegalHoldRequest
+	PutObjectLegalHoldRequest(*types.PutObjectLegalHoldInput) s3.PutObjectLegalHoldRequest
 
-	PutObjectLockConfigurationRequest(*s3.PutObjectLockConfigurationInput) s3.PutObjectLockConfigurationRequest
+	PutObjectLockConfigurationRequest(*types.PutObjectLockConfigurationInput) s3.PutObjectLockConfigurationRequest
 
-	PutObjectRetentionRequest(*s3.PutObjectRetentionInput) s3.PutObjectRetentionRequest
+	PutObjectRetentionRequest(*types.PutObjectRetentionInput) s3.PutObjectRetentionRequest
 
-	PutObjectTaggingRequest(*s3.PutObjectTaggingInput) s3.PutObjectTaggingRequest
+	PutObjectTaggingRequest(*types.PutObjectTaggingInput) s3.PutObjectTaggingRequest
 
-	PutPublicAccessBlockRequest(*s3.PutPublicAccessBlockInput) s3.PutPublicAccessBlockRequest
+	PutPublicAccessBlockRequest(*types.PutPublicAccessBlockInput) s3.PutPublicAccessBlockRequest
 
-	RestoreObjectRequest(*s3.RestoreObjectInput) s3.RestoreObjectRequest
+	RestoreObjectRequest(*types.RestoreObjectInput) s3.RestoreObjectRequest
 
-	UploadPartRequest(*s3.UploadPartInput) s3.UploadPartRequest
+	UploadPartRequest(*types.UploadPartInput) s3.UploadPartRequest
 
-	UploadPartCopyRequest(*s3.UploadPartCopyInput) s3.UploadPartCopyRequest
+	UploadPartCopyRequest(*types.UploadPartCopyInput) s3.UploadPartCopyRequest
 
-	WaitUntilBucketExists(context.Context, *s3.HeadBucketInput, ...aws.WaiterOption) error
+	WaitUntilBucketExists(context.Context, *types.HeadBucketInput, ...aws.WaiterOption) error
 
-	WaitUntilBucketNotExists(context.Context, *s3.HeadBucketInput, ...aws.WaiterOption) error
+	WaitUntilBucketNotExists(context.Context, *types.HeadBucketInput, ...aws.WaiterOption) error
 
-	WaitUntilObjectExists(context.Context, *s3.HeadObjectInput, ...aws.WaiterOption) error
+	WaitUntilObjectExists(context.Context, *types.HeadObjectInput, ...aws.WaiterOption) error
 
-	WaitUntilObjectNotExists(context.Context, *s3.HeadObjectInput, ...aws.WaiterOption) error
+	WaitUntilObjectNotExists(context.Context, *types.HeadObjectInput, ...aws.WaiterOption) error
 }
 
 var _ ClientAPI = (*s3.Client)(nil)

@@ -4,136 +4,10 @@ package worklink
 
 import (
 	"context"
-	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/worklink/types"
 )
-
-type DescribeFleetMetadataInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ARN of the fleet.
-	//
-	// FleetArn is a required field
-	FleetArn *string `min:"20" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeFleetMetadataInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeFleetMetadataInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeFleetMetadataInput"}
-
-	if s.FleetArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("FleetArn"))
-	}
-	if s.FleetArn != nil && len(*s.FleetArn) < 20 {
-		invalidParams.Add(aws.NewErrParamMinLen("FleetArn", 20))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DescribeFleetMetadataInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.FleetArn != nil {
-		v := *s.FleetArn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "FleetArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type DescribeFleetMetadataOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The identifier used by users to sign in to the Amazon WorkLink app.
-	CompanyCode *string `min:"1" type:"string"`
-
-	// The time that the fleet was created.
-	CreatedTime *time.Time `type:"timestamp"`
-
-	// The name to display.
-	DisplayName *string `type:"string"`
-
-	// The name of the fleet.
-	FleetName *string `min:"1" type:"string"`
-
-	// The current state of the fleet.
-	FleetStatus FleetStatus `type:"string" enum:"true"`
-
-	// The time that the fleet was last updated.
-	LastUpdatedTime *time.Time `type:"timestamp"`
-
-	// The option to optimize for better performance by routing traffic through
-	// the closest AWS Region to users, which may be outside of your home Region.
-	OptimizeForEndUserLocation *bool `type:"boolean"`
-}
-
-// String returns the string representation
-func (s DescribeFleetMetadataOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DescribeFleetMetadataOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.CompanyCode != nil {
-		v := *s.CompanyCode
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "CompanyCode", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.CreatedTime != nil {
-		v := *s.CreatedTime
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "CreatedTime",
-			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
-	}
-	if s.DisplayName != nil {
-		v := *s.DisplayName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "DisplayName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.FleetName != nil {
-		v := *s.FleetName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "FleetName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if len(s.FleetStatus) > 0 {
-		v := s.FleetStatus
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "FleetStatus", protocol.QuotedValue{ValueMarshaler: v}, metadata)
-	}
-	if s.LastUpdatedTime != nil {
-		v := *s.LastUpdatedTime
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "LastUpdatedTime",
-			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
-	}
-	if s.OptimizeForEndUserLocation != nil {
-		v := *s.OptimizeForEndUserLocation
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "OptimizeForEndUserLocation", protocol.BoolValue(v), metadata)
-	}
-	return nil
-}
 
 const opDescribeFleetMetadata = "DescribeFleetMetadata"
 
@@ -151,7 +25,7 @@ const opDescribeFleetMetadata = "DescribeFleetMetadata"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/worklink-2018-09-25/DescribeFleetMetadata
-func (c *Client) DescribeFleetMetadataRequest(input *DescribeFleetMetadataInput) DescribeFleetMetadataRequest {
+func (c *Client) DescribeFleetMetadataRequest(input *types.DescribeFleetMetadataInput) DescribeFleetMetadataRequest {
 	op := &aws.Operation{
 		Name:       opDescribeFleetMetadata,
 		HTTPMethod: "POST",
@@ -159,10 +33,10 @@ func (c *Client) DescribeFleetMetadataRequest(input *DescribeFleetMetadataInput)
 	}
 
 	if input == nil {
-		input = &DescribeFleetMetadataInput{}
+		input = &types.DescribeFleetMetadataInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeFleetMetadataOutput{})
+	req := c.newRequest(op, input, &types.DescribeFleetMetadataOutput{})
 	return DescribeFleetMetadataRequest{Request: req, Input: input, Copy: c.DescribeFleetMetadataRequest}
 }
 
@@ -170,8 +44,8 @@ func (c *Client) DescribeFleetMetadataRequest(input *DescribeFleetMetadataInput)
 // DescribeFleetMetadata API operation.
 type DescribeFleetMetadataRequest struct {
 	*aws.Request
-	Input *DescribeFleetMetadataInput
-	Copy  func(*DescribeFleetMetadataInput) DescribeFleetMetadataRequest
+	Input *types.DescribeFleetMetadataInput
+	Copy  func(*types.DescribeFleetMetadataInput) DescribeFleetMetadataRequest
 }
 
 // Send marshals and sends the DescribeFleetMetadata API request.
@@ -183,7 +57,7 @@ func (r DescribeFleetMetadataRequest) Send(ctx context.Context) (*DescribeFleetM
 	}
 
 	resp := &DescribeFleetMetadataResponse{
-		DescribeFleetMetadataOutput: r.Request.Data.(*DescribeFleetMetadataOutput),
+		DescribeFleetMetadataOutput: r.Request.Data.(*types.DescribeFleetMetadataOutput),
 		response:                    &aws.Response{Request: r.Request},
 	}
 
@@ -193,7 +67,7 @@ func (r DescribeFleetMetadataRequest) Send(ctx context.Context) (*DescribeFleetM
 // DescribeFleetMetadataResponse is the response type for the
 // DescribeFleetMetadata API operation.
 type DescribeFleetMetadataResponse struct {
-	*DescribeFleetMetadataOutput
+	*types.DescribeFleetMetadataOutput
 
 	response *aws.Response
 }

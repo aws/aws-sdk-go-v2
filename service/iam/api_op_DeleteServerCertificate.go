@@ -6,54 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/query"
+	"github.com/aws/aws-sdk-go-v2/service/iam/types"
 )
-
-type DeleteServerCertificateInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the server certificate you want to delete.
-	//
-	// This parameter allows (through its regex pattern (http://wikipedia.org/wiki/regex))
-	// a string of characters consisting of upper and lowercase alphanumeric characters
-	// with no spaces. You can also include any of the following characters: _+=,.@-
-	//
-	// ServerCertificateName is a required field
-	ServerCertificateName *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteServerCertificateInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteServerCertificateInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteServerCertificateInput"}
-
-	if s.ServerCertificateName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ServerCertificateName"))
-	}
-	if s.ServerCertificateName != nil && len(*s.ServerCertificateName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ServerCertificateName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteServerCertificateOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteServerCertificateOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteServerCertificate = "DeleteServerCertificate"
 
@@ -85,7 +41,7 @@ const opDeleteServerCertificate = "DeleteServerCertificate"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeleteServerCertificate
-func (c *Client) DeleteServerCertificateRequest(input *DeleteServerCertificateInput) DeleteServerCertificateRequest {
+func (c *Client) DeleteServerCertificateRequest(input *types.DeleteServerCertificateInput) DeleteServerCertificateRequest {
 	op := &aws.Operation{
 		Name:       opDeleteServerCertificate,
 		HTTPMethod: "POST",
@@ -93,10 +49,10 @@ func (c *Client) DeleteServerCertificateRequest(input *DeleteServerCertificateIn
 	}
 
 	if input == nil {
-		input = &DeleteServerCertificateInput{}
+		input = &types.DeleteServerCertificateInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteServerCertificateOutput{})
+	req := c.newRequest(op, input, &types.DeleteServerCertificateOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return DeleteServerCertificateRequest{Request: req, Input: input, Copy: c.DeleteServerCertificateRequest}
@@ -106,8 +62,8 @@ func (c *Client) DeleteServerCertificateRequest(input *DeleteServerCertificateIn
 // DeleteServerCertificate API operation.
 type DeleteServerCertificateRequest struct {
 	*aws.Request
-	Input *DeleteServerCertificateInput
-	Copy  func(*DeleteServerCertificateInput) DeleteServerCertificateRequest
+	Input *types.DeleteServerCertificateInput
+	Copy  func(*types.DeleteServerCertificateInput) DeleteServerCertificateRequest
 }
 
 // Send marshals and sends the DeleteServerCertificate API request.
@@ -119,7 +75,7 @@ func (r DeleteServerCertificateRequest) Send(ctx context.Context) (*DeleteServer
 	}
 
 	resp := &DeleteServerCertificateResponse{
-		DeleteServerCertificateOutput: r.Request.Data.(*DeleteServerCertificateOutput),
+		DeleteServerCertificateOutput: r.Request.Data.(*types.DeleteServerCertificateOutput),
 		response:                      &aws.Response{Request: r.Request},
 	}
 
@@ -129,7 +85,7 @@ func (r DeleteServerCertificateRequest) Send(ctx context.Context) (*DeleteServer
 // DeleteServerCertificateResponse is the response type for the
 // DeleteServerCertificate API operation.
 type DeleteServerCertificateResponse struct {
-	*DeleteServerCertificateOutput
+	*types.DeleteServerCertificateOutput
 
 	response *aws.Response
 }

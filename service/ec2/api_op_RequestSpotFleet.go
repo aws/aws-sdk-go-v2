@@ -6,61 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-// Contains the parameters for RequestSpotFleet.
-type RequestSpotFleetInput struct {
-	_ struct{} `type:"structure"`
-
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have
-	// the required permissions, the error response is DryRunOperation. Otherwise,
-	// it is UnauthorizedOperation.
-	DryRun *bool `locationName:"dryRun" type:"boolean"`
-
-	// The configuration for the Spot Fleet request.
-	//
-	// SpotFleetRequestConfig is a required field
-	SpotFleetRequestConfig *SpotFleetRequestConfigData `locationName:"spotFleetRequestConfig" type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s RequestSpotFleetInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *RequestSpotFleetInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "RequestSpotFleetInput"}
-
-	if s.SpotFleetRequestConfig == nil {
-		invalidParams.Add(aws.NewErrParamRequired("SpotFleetRequestConfig"))
-	}
-	if s.SpotFleetRequestConfig != nil {
-		if err := s.SpotFleetRequestConfig.Validate(); err != nil {
-			invalidParams.AddNested("SpotFleetRequestConfig", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Contains the output of RequestSpotFleet.
-type RequestSpotFleetOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the Spot Fleet request.
-	SpotFleetRequestId *string `locationName:"spotFleetRequestId" type:"string"`
-}
-
-// String returns the string representation
-func (s RequestSpotFleetOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opRequestSpotFleet = "RequestSpotFleet"
 
@@ -101,7 +48,7 @@ const opRequestSpotFleet = "RequestSpotFleet"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/RequestSpotFleet
-func (c *Client) RequestSpotFleetRequest(input *RequestSpotFleetInput) RequestSpotFleetRequest {
+func (c *Client) RequestSpotFleetRequest(input *types.RequestSpotFleetInput) RequestSpotFleetRequest {
 	op := &aws.Operation{
 		Name:       opRequestSpotFleet,
 		HTTPMethod: "POST",
@@ -109,10 +56,10 @@ func (c *Client) RequestSpotFleetRequest(input *RequestSpotFleetInput) RequestSp
 	}
 
 	if input == nil {
-		input = &RequestSpotFleetInput{}
+		input = &types.RequestSpotFleetInput{}
 	}
 
-	req := c.newRequest(op, input, &RequestSpotFleetOutput{})
+	req := c.newRequest(op, input, &types.RequestSpotFleetOutput{})
 	return RequestSpotFleetRequest{Request: req, Input: input, Copy: c.RequestSpotFleetRequest}
 }
 
@@ -120,8 +67,8 @@ func (c *Client) RequestSpotFleetRequest(input *RequestSpotFleetInput) RequestSp
 // RequestSpotFleet API operation.
 type RequestSpotFleetRequest struct {
 	*aws.Request
-	Input *RequestSpotFleetInput
-	Copy  func(*RequestSpotFleetInput) RequestSpotFleetRequest
+	Input *types.RequestSpotFleetInput
+	Copy  func(*types.RequestSpotFleetInput) RequestSpotFleetRequest
 }
 
 // Send marshals and sends the RequestSpotFleet API request.
@@ -133,7 +80,7 @@ func (r RequestSpotFleetRequest) Send(ctx context.Context) (*RequestSpotFleetRes
 	}
 
 	resp := &RequestSpotFleetResponse{
-		RequestSpotFleetOutput: r.Request.Data.(*RequestSpotFleetOutput),
+		RequestSpotFleetOutput: r.Request.Data.(*types.RequestSpotFleetOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -143,7 +90,7 @@ func (r RequestSpotFleetRequest) Send(ctx context.Context) (*RequestSpotFleetRes
 // RequestSpotFleetResponse is the response type for the
 // RequestSpotFleet API operation.
 type RequestSpotFleetResponse struct {
-	*RequestSpotFleetOutput
+	*types.RequestSpotFleetOutput
 
 	response *aws.Response
 }

@@ -6,54 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/query"
+	"github.com/aws/aws-sdk-go-v2/service/iam/types"
 )
-
-type DeleteRoleInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the role to delete.
-	//
-	// This parameter allows (through its regex pattern (http://wikipedia.org/wiki/regex))
-	// a string of characters consisting of upper and lowercase alphanumeric characters
-	// with no spaces. You can also include any of the following characters: _+=,.@-
-	//
-	// RoleName is a required field
-	RoleName *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteRoleInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteRoleInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteRoleInput"}
-
-	if s.RoleName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("RoleName"))
-	}
-	if s.RoleName != nil && len(*s.RoleName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("RoleName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteRoleOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteRoleOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteRole = "DeleteRole"
 
@@ -76,7 +32,7 @@ const opDeleteRole = "DeleteRole"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeleteRole
-func (c *Client) DeleteRoleRequest(input *DeleteRoleInput) DeleteRoleRequest {
+func (c *Client) DeleteRoleRequest(input *types.DeleteRoleInput) DeleteRoleRequest {
 	op := &aws.Operation{
 		Name:       opDeleteRole,
 		HTTPMethod: "POST",
@@ -84,10 +40,10 @@ func (c *Client) DeleteRoleRequest(input *DeleteRoleInput) DeleteRoleRequest {
 	}
 
 	if input == nil {
-		input = &DeleteRoleInput{}
+		input = &types.DeleteRoleInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteRoleOutput{})
+	req := c.newRequest(op, input, &types.DeleteRoleOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return DeleteRoleRequest{Request: req, Input: input, Copy: c.DeleteRoleRequest}
@@ -97,8 +53,8 @@ func (c *Client) DeleteRoleRequest(input *DeleteRoleInput) DeleteRoleRequest {
 // DeleteRole API operation.
 type DeleteRoleRequest struct {
 	*aws.Request
-	Input *DeleteRoleInput
-	Copy  func(*DeleteRoleInput) DeleteRoleRequest
+	Input *types.DeleteRoleInput
+	Copy  func(*types.DeleteRoleInput) DeleteRoleRequest
 }
 
 // Send marshals and sends the DeleteRole API request.
@@ -110,7 +66,7 @@ func (r DeleteRoleRequest) Send(ctx context.Context) (*DeleteRoleResponse, error
 	}
 
 	resp := &DeleteRoleResponse{
-		DeleteRoleOutput: r.Request.Data.(*DeleteRoleOutput),
+		DeleteRoleOutput: r.Request.Data.(*types.DeleteRoleOutput),
 		response:         &aws.Response{Request: r.Request},
 	}
 
@@ -120,7 +76,7 @@ func (r DeleteRoleRequest) Send(ctx context.Context) (*DeleteRoleResponse, error
 // DeleteRoleResponse is the response type for the
 // DeleteRole API operation.
 type DeleteRoleResponse struct {
-	*DeleteRoleOutput
+	*types.DeleteRoleOutput
 
 	response *aws.Response
 }

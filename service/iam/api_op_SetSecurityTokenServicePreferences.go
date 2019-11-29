@@ -6,53 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/query"
+	"github.com/aws/aws-sdk-go-v2/service/iam/types"
 )
-
-type SetSecurityTokenServicePreferencesInput struct {
-	_ struct{} `type:"structure"`
-
-	// The version of the global endpoint token. Version 1 tokens are valid only
-	// in AWS Regions that are available by default. These tokens do not work in
-	// manually enabled Regions, such as Asia Pacific (Hong Kong). Version 2 tokens
-	// are valid in all Regions. However, version 2 tokens are longer and might
-	// affect systems where you temporarily store tokens.
-	//
-	// For information, see Activating and Deactivating STS in an AWS Region (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_enable-regions.html)
-	// in the IAM User Guide.
-	//
-	// GlobalEndpointTokenVersion is a required field
-	GlobalEndpointTokenVersion GlobalEndpointTokenVersion `type:"string" required:"true" enum:"true"`
-}
-
-// String returns the string representation
-func (s SetSecurityTokenServicePreferencesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *SetSecurityTokenServicePreferencesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "SetSecurityTokenServicePreferencesInput"}
-	if len(s.GlobalEndpointTokenVersion) == 0 {
-		invalidParams.Add(aws.NewErrParamRequired("GlobalEndpointTokenVersion"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type SetSecurityTokenServicePreferencesOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s SetSecurityTokenServicePreferencesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opSetSecurityTokenServicePreferences = "SetSecurityTokenServicePreferences"
 
@@ -90,7 +47,7 @@ const opSetSecurityTokenServicePreferences = "SetSecurityTokenServicePreferences
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/SetSecurityTokenServicePreferences
-func (c *Client) SetSecurityTokenServicePreferencesRequest(input *SetSecurityTokenServicePreferencesInput) SetSecurityTokenServicePreferencesRequest {
+func (c *Client) SetSecurityTokenServicePreferencesRequest(input *types.SetSecurityTokenServicePreferencesInput) SetSecurityTokenServicePreferencesRequest {
 	op := &aws.Operation{
 		Name:       opSetSecurityTokenServicePreferences,
 		HTTPMethod: "POST",
@@ -98,10 +55,10 @@ func (c *Client) SetSecurityTokenServicePreferencesRequest(input *SetSecurityTok
 	}
 
 	if input == nil {
-		input = &SetSecurityTokenServicePreferencesInput{}
+		input = &types.SetSecurityTokenServicePreferencesInput{}
 	}
 
-	req := c.newRequest(op, input, &SetSecurityTokenServicePreferencesOutput{})
+	req := c.newRequest(op, input, &types.SetSecurityTokenServicePreferencesOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return SetSecurityTokenServicePreferencesRequest{Request: req, Input: input, Copy: c.SetSecurityTokenServicePreferencesRequest}
@@ -111,8 +68,8 @@ func (c *Client) SetSecurityTokenServicePreferencesRequest(input *SetSecurityTok
 // SetSecurityTokenServicePreferences API operation.
 type SetSecurityTokenServicePreferencesRequest struct {
 	*aws.Request
-	Input *SetSecurityTokenServicePreferencesInput
-	Copy  func(*SetSecurityTokenServicePreferencesInput) SetSecurityTokenServicePreferencesRequest
+	Input *types.SetSecurityTokenServicePreferencesInput
+	Copy  func(*types.SetSecurityTokenServicePreferencesInput) SetSecurityTokenServicePreferencesRequest
 }
 
 // Send marshals and sends the SetSecurityTokenServicePreferences API request.
@@ -124,7 +81,7 @@ func (r SetSecurityTokenServicePreferencesRequest) Send(ctx context.Context) (*S
 	}
 
 	resp := &SetSecurityTokenServicePreferencesResponse{
-		SetSecurityTokenServicePreferencesOutput: r.Request.Data.(*SetSecurityTokenServicePreferencesOutput),
+		SetSecurityTokenServicePreferencesOutput: r.Request.Data.(*types.SetSecurityTokenServicePreferencesOutput),
 		response:                                 &aws.Response{Request: r.Request},
 	}
 
@@ -134,7 +91,7 @@ func (r SetSecurityTokenServicePreferencesRequest) Send(ctx context.Context) (*S
 // SetSecurityTokenServicePreferencesResponse is the response type for the
 // SetSecurityTokenServicePreferences API operation.
 type SetSecurityTokenServicePreferencesResponse struct {
-	*SetSecurityTokenServicePreferencesOutput
+	*types.SetSecurityTokenServicePreferencesOutput
 
 	response *aws.Response
 }

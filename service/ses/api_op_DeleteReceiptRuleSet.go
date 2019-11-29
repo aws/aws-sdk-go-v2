@@ -6,49 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ses/types"
 )
-
-// Represents a request to delete a receipt rule set and all of the receipt
-// rules it contains. You use receipt rule sets to receive email with Amazon
-// SES. For more information, see the Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-concepts.html).
-type DeleteReceiptRuleSetInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the receipt rule set to delete.
-	//
-	// RuleSetName is a required field
-	RuleSetName *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteReceiptRuleSetInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteReceiptRuleSetInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteReceiptRuleSetInput"}
-
-	if s.RuleSetName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("RuleSetName"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// An empty element returned on a successful request.
-type DeleteReceiptRuleSetOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteReceiptRuleSetOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteReceiptRuleSet = "DeleteReceiptRuleSet"
 
@@ -72,7 +31,7 @@ const opDeleteReceiptRuleSet = "DeleteReceiptRuleSet"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/DeleteReceiptRuleSet
-func (c *Client) DeleteReceiptRuleSetRequest(input *DeleteReceiptRuleSetInput) DeleteReceiptRuleSetRequest {
+func (c *Client) DeleteReceiptRuleSetRequest(input *types.DeleteReceiptRuleSetInput) DeleteReceiptRuleSetRequest {
 	op := &aws.Operation{
 		Name:       opDeleteReceiptRuleSet,
 		HTTPMethod: "POST",
@@ -80,10 +39,10 @@ func (c *Client) DeleteReceiptRuleSetRequest(input *DeleteReceiptRuleSetInput) D
 	}
 
 	if input == nil {
-		input = &DeleteReceiptRuleSetInput{}
+		input = &types.DeleteReceiptRuleSetInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteReceiptRuleSetOutput{})
+	req := c.newRequest(op, input, &types.DeleteReceiptRuleSetOutput{})
 	return DeleteReceiptRuleSetRequest{Request: req, Input: input, Copy: c.DeleteReceiptRuleSetRequest}
 }
 
@@ -91,8 +50,8 @@ func (c *Client) DeleteReceiptRuleSetRequest(input *DeleteReceiptRuleSetInput) D
 // DeleteReceiptRuleSet API operation.
 type DeleteReceiptRuleSetRequest struct {
 	*aws.Request
-	Input *DeleteReceiptRuleSetInput
-	Copy  func(*DeleteReceiptRuleSetInput) DeleteReceiptRuleSetRequest
+	Input *types.DeleteReceiptRuleSetInput
+	Copy  func(*types.DeleteReceiptRuleSetInput) DeleteReceiptRuleSetRequest
 }
 
 // Send marshals and sends the DeleteReceiptRuleSet API request.
@@ -104,7 +63,7 @@ func (r DeleteReceiptRuleSetRequest) Send(ctx context.Context) (*DeleteReceiptRu
 	}
 
 	resp := &DeleteReceiptRuleSetResponse{
-		DeleteReceiptRuleSetOutput: r.Request.Data.(*DeleteReceiptRuleSetOutput),
+		DeleteReceiptRuleSetOutput: r.Request.Data.(*types.DeleteReceiptRuleSetOutput),
 		response:                   &aws.Response{Request: r.Request},
 	}
 
@@ -114,7 +73,7 @@ func (r DeleteReceiptRuleSetRequest) Send(ctx context.Context) (*DeleteReceiptRu
 // DeleteReceiptRuleSetResponse is the response type for the
 // DeleteReceiptRuleSet API operation.
 type DeleteReceiptRuleSetResponse struct {
-	*DeleteReceiptRuleSetOutput
+	*types.DeleteReceiptRuleSetOutput
 
 	response *aws.Response
 }

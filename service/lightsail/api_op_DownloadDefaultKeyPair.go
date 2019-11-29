@@ -6,32 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/lightsail/types"
 )
-
-type DownloadDefaultKeyPairInput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DownloadDefaultKeyPairInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type DownloadDefaultKeyPairOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A base64-encoded RSA private key.
-	PrivateKeyBase64 *string `locationName:"privateKeyBase64" type:"string"`
-
-	// A base64-encoded public key of the ssh-rsa type.
-	PublicKeyBase64 *string `locationName:"publicKeyBase64" type:"string"`
-}
-
-// String returns the string representation
-func (s DownloadDefaultKeyPairOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDownloadDefaultKeyPair = "DownloadDefaultKeyPair"
 
@@ -48,7 +24,7 @@ const opDownloadDefaultKeyPair = "DownloadDefaultKeyPair"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/DownloadDefaultKeyPair
-func (c *Client) DownloadDefaultKeyPairRequest(input *DownloadDefaultKeyPairInput) DownloadDefaultKeyPairRequest {
+func (c *Client) DownloadDefaultKeyPairRequest(input *types.DownloadDefaultKeyPairInput) DownloadDefaultKeyPairRequest {
 	op := &aws.Operation{
 		Name:       opDownloadDefaultKeyPair,
 		HTTPMethod: "POST",
@@ -56,10 +32,10 @@ func (c *Client) DownloadDefaultKeyPairRequest(input *DownloadDefaultKeyPairInpu
 	}
 
 	if input == nil {
-		input = &DownloadDefaultKeyPairInput{}
+		input = &types.DownloadDefaultKeyPairInput{}
 	}
 
-	req := c.newRequest(op, input, &DownloadDefaultKeyPairOutput{})
+	req := c.newRequest(op, input, &types.DownloadDefaultKeyPairOutput{})
 	return DownloadDefaultKeyPairRequest{Request: req, Input: input, Copy: c.DownloadDefaultKeyPairRequest}
 }
 
@@ -67,8 +43,8 @@ func (c *Client) DownloadDefaultKeyPairRequest(input *DownloadDefaultKeyPairInpu
 // DownloadDefaultKeyPair API operation.
 type DownloadDefaultKeyPairRequest struct {
 	*aws.Request
-	Input *DownloadDefaultKeyPairInput
-	Copy  func(*DownloadDefaultKeyPairInput) DownloadDefaultKeyPairRequest
+	Input *types.DownloadDefaultKeyPairInput
+	Copy  func(*types.DownloadDefaultKeyPairInput) DownloadDefaultKeyPairRequest
 }
 
 // Send marshals and sends the DownloadDefaultKeyPair API request.
@@ -80,7 +56,7 @@ func (r DownloadDefaultKeyPairRequest) Send(ctx context.Context) (*DownloadDefau
 	}
 
 	resp := &DownloadDefaultKeyPairResponse{
-		DownloadDefaultKeyPairOutput: r.Request.Data.(*DownloadDefaultKeyPairOutput),
+		DownloadDefaultKeyPairOutput: r.Request.Data.(*types.DownloadDefaultKeyPairOutput),
 		response:                     &aws.Response{Request: r.Request},
 	}
 
@@ -90,7 +66,7 @@ func (r DownloadDefaultKeyPairRequest) Send(ctx context.Context) (*DownloadDefau
 // DownloadDefaultKeyPairResponse is the response type for the
 // DownloadDefaultKeyPair API operation.
 type DownloadDefaultKeyPairResponse struct {
-	*DownloadDefaultKeyPairOutput
+	*types.DownloadDefaultKeyPairOutput
 
 	response *aws.Response
 }

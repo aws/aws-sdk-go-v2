@@ -6,68 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/glue/types"
 )
-
-type UpdateClassifierInput struct {
-	_ struct{} `type:"structure"`
-
-	// A CsvClassifier object with updated fields.
-	CsvClassifier *UpdateCsvClassifierRequest `type:"structure"`
-
-	// A GrokClassifier object with updated fields.
-	GrokClassifier *UpdateGrokClassifierRequest `type:"structure"`
-
-	// A JsonClassifier object with updated fields.
-	JsonClassifier *UpdateJsonClassifierRequest `type:"structure"`
-
-	// An XMLClassifier object with updated fields.
-	XMLClassifier *UpdateXMLClassifierRequest `type:"structure"`
-}
-
-// String returns the string representation
-func (s UpdateClassifierInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateClassifierInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateClassifierInput"}
-	if s.CsvClassifier != nil {
-		if err := s.CsvClassifier.Validate(); err != nil {
-			invalidParams.AddNested("CsvClassifier", err.(aws.ErrInvalidParams))
-		}
-	}
-	if s.GrokClassifier != nil {
-		if err := s.GrokClassifier.Validate(); err != nil {
-			invalidParams.AddNested("GrokClassifier", err.(aws.ErrInvalidParams))
-		}
-	}
-	if s.JsonClassifier != nil {
-		if err := s.JsonClassifier.Validate(); err != nil {
-			invalidParams.AddNested("JsonClassifier", err.(aws.ErrInvalidParams))
-		}
-	}
-	if s.XMLClassifier != nil {
-		if err := s.XMLClassifier.Validate(); err != nil {
-			invalidParams.AddNested("XMLClassifier", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type UpdateClassifierOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s UpdateClassifierOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opUpdateClassifier = "UpdateClassifier"
 
@@ -85,7 +25,7 @@ const opUpdateClassifier = "UpdateClassifier"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/UpdateClassifier
-func (c *Client) UpdateClassifierRequest(input *UpdateClassifierInput) UpdateClassifierRequest {
+func (c *Client) UpdateClassifierRequest(input *types.UpdateClassifierInput) UpdateClassifierRequest {
 	op := &aws.Operation{
 		Name:       opUpdateClassifier,
 		HTTPMethod: "POST",
@@ -93,10 +33,10 @@ func (c *Client) UpdateClassifierRequest(input *UpdateClassifierInput) UpdateCla
 	}
 
 	if input == nil {
-		input = &UpdateClassifierInput{}
+		input = &types.UpdateClassifierInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateClassifierOutput{})
+	req := c.newRequest(op, input, &types.UpdateClassifierOutput{})
 	return UpdateClassifierRequest{Request: req, Input: input, Copy: c.UpdateClassifierRequest}
 }
 
@@ -104,8 +44,8 @@ func (c *Client) UpdateClassifierRequest(input *UpdateClassifierInput) UpdateCla
 // UpdateClassifier API operation.
 type UpdateClassifierRequest struct {
 	*aws.Request
-	Input *UpdateClassifierInput
-	Copy  func(*UpdateClassifierInput) UpdateClassifierRequest
+	Input *types.UpdateClassifierInput
+	Copy  func(*types.UpdateClassifierInput) UpdateClassifierRequest
 }
 
 // Send marshals and sends the UpdateClassifier API request.
@@ -117,7 +57,7 @@ func (r UpdateClassifierRequest) Send(ctx context.Context) (*UpdateClassifierRes
 	}
 
 	resp := &UpdateClassifierResponse{
-		UpdateClassifierOutput: r.Request.Data.(*UpdateClassifierOutput),
+		UpdateClassifierOutput: r.Request.Data.(*types.UpdateClassifierOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -127,7 +67,7 @@ func (r UpdateClassifierRequest) Send(ctx context.Context) (*UpdateClassifierRes
 // UpdateClassifierResponse is the response type for the
 // UpdateClassifier API operation.
 type UpdateClassifierResponse struct {
-	*UpdateClassifierOutput
+	*types.UpdateClassifierOutput
 
 	response *aws.Response
 }

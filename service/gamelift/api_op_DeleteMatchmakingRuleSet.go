@@ -6,48 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/gamelift/types"
 )
-
-// Represents the input for a request action.
-type DeleteMatchmakingRuleSetInput struct {
-	_ struct{} `type:"structure"`
-
-	// Unique identifier for a matchmaking rule set to be deleted. (Note: The rule
-	// set name is different from the optional "name" field in the rule set body.)
-	//
-	// Name is a required field
-	Name *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteMatchmakingRuleSetInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteMatchmakingRuleSetInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteMatchmakingRuleSetInput"}
-
-	if s.Name == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Name"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Represents the returned data in response to a request action.
-type DeleteMatchmakingRuleSetOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteMatchmakingRuleSetOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteMatchmakingRuleSet = "DeleteMatchmakingRuleSet"
 
@@ -88,7 +48,7 @@ const opDeleteMatchmakingRuleSet = "DeleteMatchmakingRuleSet"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DeleteMatchmakingRuleSet
-func (c *Client) DeleteMatchmakingRuleSetRequest(input *DeleteMatchmakingRuleSetInput) DeleteMatchmakingRuleSetRequest {
+func (c *Client) DeleteMatchmakingRuleSetRequest(input *types.DeleteMatchmakingRuleSetInput) DeleteMatchmakingRuleSetRequest {
 	op := &aws.Operation{
 		Name:       opDeleteMatchmakingRuleSet,
 		HTTPMethod: "POST",
@@ -96,10 +56,10 @@ func (c *Client) DeleteMatchmakingRuleSetRequest(input *DeleteMatchmakingRuleSet
 	}
 
 	if input == nil {
-		input = &DeleteMatchmakingRuleSetInput{}
+		input = &types.DeleteMatchmakingRuleSetInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteMatchmakingRuleSetOutput{})
+	req := c.newRequest(op, input, &types.DeleteMatchmakingRuleSetOutput{})
 	return DeleteMatchmakingRuleSetRequest{Request: req, Input: input, Copy: c.DeleteMatchmakingRuleSetRequest}
 }
 
@@ -107,8 +67,8 @@ func (c *Client) DeleteMatchmakingRuleSetRequest(input *DeleteMatchmakingRuleSet
 // DeleteMatchmakingRuleSet API operation.
 type DeleteMatchmakingRuleSetRequest struct {
 	*aws.Request
-	Input *DeleteMatchmakingRuleSetInput
-	Copy  func(*DeleteMatchmakingRuleSetInput) DeleteMatchmakingRuleSetRequest
+	Input *types.DeleteMatchmakingRuleSetInput
+	Copy  func(*types.DeleteMatchmakingRuleSetInput) DeleteMatchmakingRuleSetRequest
 }
 
 // Send marshals and sends the DeleteMatchmakingRuleSet API request.
@@ -120,7 +80,7 @@ func (r DeleteMatchmakingRuleSetRequest) Send(ctx context.Context) (*DeleteMatch
 	}
 
 	resp := &DeleteMatchmakingRuleSetResponse{
-		DeleteMatchmakingRuleSetOutput: r.Request.Data.(*DeleteMatchmakingRuleSetOutput),
+		DeleteMatchmakingRuleSetOutput: r.Request.Data.(*types.DeleteMatchmakingRuleSetOutput),
 		response:                       &aws.Response{Request: r.Request},
 	}
 
@@ -130,7 +90,7 @@ func (r DeleteMatchmakingRuleSetRequest) Send(ctx context.Context) (*DeleteMatch
 // DeleteMatchmakingRuleSetResponse is the response type for the
 // DeleteMatchmakingRuleSet API operation.
 type DeleteMatchmakingRuleSetResponse struct {
-	*DeleteMatchmakingRuleSetOutput
+	*types.DeleteMatchmakingRuleSetOutput
 
 	response *aws.Response
 }

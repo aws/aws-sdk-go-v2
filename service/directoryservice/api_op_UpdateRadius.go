@@ -6,61 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/directoryservice/types"
 )
-
-// Contains the inputs for the UpdateRadius operation.
-type UpdateRadiusInput struct {
-	_ struct{} `type:"structure"`
-
-	// The identifier of the directory for which to update the RADIUS server information.
-	//
-	// DirectoryId is a required field
-	DirectoryId *string `type:"string" required:"true"`
-
-	// A RadiusSettings object that contains information about the RADIUS server.
-	//
-	// RadiusSettings is a required field
-	RadiusSettings *RadiusSettings `type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s UpdateRadiusInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateRadiusInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateRadiusInput"}
-
-	if s.DirectoryId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DirectoryId"))
-	}
-
-	if s.RadiusSettings == nil {
-		invalidParams.Add(aws.NewErrParamRequired("RadiusSettings"))
-	}
-	if s.RadiusSettings != nil {
-		if err := s.RadiusSettings.Validate(); err != nil {
-			invalidParams.AddNested("RadiusSettings", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Contains the results of the UpdateRadius operation.
-type UpdateRadiusOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s UpdateRadiusOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opUpdateRadius = "UpdateRadius"
 
@@ -78,7 +25,7 @@ const opUpdateRadius = "UpdateRadius"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/UpdateRadius
-func (c *Client) UpdateRadiusRequest(input *UpdateRadiusInput) UpdateRadiusRequest {
+func (c *Client) UpdateRadiusRequest(input *types.UpdateRadiusInput) UpdateRadiusRequest {
 	op := &aws.Operation{
 		Name:       opUpdateRadius,
 		HTTPMethod: "POST",
@@ -86,10 +33,10 @@ func (c *Client) UpdateRadiusRequest(input *UpdateRadiusInput) UpdateRadiusReque
 	}
 
 	if input == nil {
-		input = &UpdateRadiusInput{}
+		input = &types.UpdateRadiusInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateRadiusOutput{})
+	req := c.newRequest(op, input, &types.UpdateRadiusOutput{})
 	return UpdateRadiusRequest{Request: req, Input: input, Copy: c.UpdateRadiusRequest}
 }
 
@@ -97,8 +44,8 @@ func (c *Client) UpdateRadiusRequest(input *UpdateRadiusInput) UpdateRadiusReque
 // UpdateRadius API operation.
 type UpdateRadiusRequest struct {
 	*aws.Request
-	Input *UpdateRadiusInput
-	Copy  func(*UpdateRadiusInput) UpdateRadiusRequest
+	Input *types.UpdateRadiusInput
+	Copy  func(*types.UpdateRadiusInput) UpdateRadiusRequest
 }
 
 // Send marshals and sends the UpdateRadius API request.
@@ -110,7 +57,7 @@ func (r UpdateRadiusRequest) Send(ctx context.Context) (*UpdateRadiusResponse, e
 	}
 
 	resp := &UpdateRadiusResponse{
-		UpdateRadiusOutput: r.Request.Data.(*UpdateRadiusOutput),
+		UpdateRadiusOutput: r.Request.Data.(*types.UpdateRadiusOutput),
 		response:           &aws.Response{Request: r.Request},
 	}
 
@@ -120,7 +67,7 @@ func (r UpdateRadiusRequest) Send(ctx context.Context) (*UpdateRadiusResponse, e
 // UpdateRadiusResponse is the response type for the
 // UpdateRadius API operation.
 type UpdateRadiusResponse struct {
-	*UpdateRadiusOutput
+	*types.UpdateRadiusOutput
 
 	response *aws.Response
 }

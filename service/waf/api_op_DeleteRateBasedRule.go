@@ -6,66 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/waf/types"
 )
-
-type DeleteRateBasedRuleInput struct {
-	_ struct{} `type:"structure"`
-
-	// The value returned by the most recent call to GetChangeToken.
-	//
-	// ChangeToken is a required field
-	ChangeToken *string `min:"1" type:"string" required:"true"`
-
-	// The RuleId of the RateBasedRule that you want to delete. RuleId is returned
-	// by CreateRateBasedRule and by ListRateBasedRules.
-	//
-	// RuleId is a required field
-	RuleId *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteRateBasedRuleInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteRateBasedRuleInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteRateBasedRuleInput"}
-
-	if s.ChangeToken == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ChangeToken"))
-	}
-	if s.ChangeToken != nil && len(*s.ChangeToken) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ChangeToken", 1))
-	}
-
-	if s.RuleId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("RuleId"))
-	}
-	if s.RuleId != nil && len(*s.RuleId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("RuleId", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteRateBasedRuleOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The ChangeToken that you used to submit the DeleteRateBasedRule request.
-	// You can also use this value to query the status of the request. For more
-	// information, see GetChangeTokenStatus.
-	ChangeToken *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s DeleteRateBasedRuleOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteRateBasedRule = "DeleteRateBasedRule"
 
@@ -97,7 +39,7 @@ const opDeleteRateBasedRule = "DeleteRateBasedRule"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/DeleteRateBasedRule
-func (c *Client) DeleteRateBasedRuleRequest(input *DeleteRateBasedRuleInput) DeleteRateBasedRuleRequest {
+func (c *Client) DeleteRateBasedRuleRequest(input *types.DeleteRateBasedRuleInput) DeleteRateBasedRuleRequest {
 	op := &aws.Operation{
 		Name:       opDeleteRateBasedRule,
 		HTTPMethod: "POST",
@@ -105,10 +47,10 @@ func (c *Client) DeleteRateBasedRuleRequest(input *DeleteRateBasedRuleInput) Del
 	}
 
 	if input == nil {
-		input = &DeleteRateBasedRuleInput{}
+		input = &types.DeleteRateBasedRuleInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteRateBasedRuleOutput{})
+	req := c.newRequest(op, input, &types.DeleteRateBasedRuleOutput{})
 	return DeleteRateBasedRuleRequest{Request: req, Input: input, Copy: c.DeleteRateBasedRuleRequest}
 }
 
@@ -116,8 +58,8 @@ func (c *Client) DeleteRateBasedRuleRequest(input *DeleteRateBasedRuleInput) Del
 // DeleteRateBasedRule API operation.
 type DeleteRateBasedRuleRequest struct {
 	*aws.Request
-	Input *DeleteRateBasedRuleInput
-	Copy  func(*DeleteRateBasedRuleInput) DeleteRateBasedRuleRequest
+	Input *types.DeleteRateBasedRuleInput
+	Copy  func(*types.DeleteRateBasedRuleInput) DeleteRateBasedRuleRequest
 }
 
 // Send marshals and sends the DeleteRateBasedRule API request.
@@ -129,7 +71,7 @@ func (r DeleteRateBasedRuleRequest) Send(ctx context.Context) (*DeleteRateBasedR
 	}
 
 	resp := &DeleteRateBasedRuleResponse{
-		DeleteRateBasedRuleOutput: r.Request.Data.(*DeleteRateBasedRuleOutput),
+		DeleteRateBasedRuleOutput: r.Request.Data.(*types.DeleteRateBasedRuleOutput),
 		response:                  &aws.Response{Request: r.Request},
 	}
 
@@ -139,7 +81,7 @@ func (r DeleteRateBasedRuleRequest) Send(ctx context.Context) (*DeleteRateBasedR
 // DeleteRateBasedRuleResponse is the response type for the
 // DeleteRateBasedRule API operation.
 type DeleteRateBasedRuleResponse struct {
-	*DeleteRateBasedRuleOutput
+	*types.DeleteRateBasedRuleOutput
 
 	response *aws.Response
 }

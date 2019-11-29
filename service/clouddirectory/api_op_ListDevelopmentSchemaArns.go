@@ -6,94 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/clouddirectory/types"
 )
-
-type ListDevelopmentSchemaArnsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The maximum number of results to retrieve.
-	MaxResults *int64 `min:"1" type:"integer"`
-
-	// The pagination token.
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s ListDevelopmentSchemaArnsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListDevelopmentSchemaArnsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListDevelopmentSchemaArnsInput"}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListDevelopmentSchemaArnsInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.MaxResults != nil {
-		v := *s.MaxResults
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "MaxResults", protocol.Int64Value(v), metadata)
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type ListDevelopmentSchemaArnsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The pagination token.
-	NextToken *string `type:"string"`
-
-	// The ARNs of retrieved development schemas.
-	SchemaArns []string `type:"list"`
-}
-
-// String returns the string representation
-func (s ListDevelopmentSchemaArnsOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListDevelopmentSchemaArnsOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.SchemaArns != nil {
-		v := s.SchemaArns
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "SchemaArns", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
-		}
-		ls0.End()
-
-	}
-	return nil
-}
 
 const opListDevelopmentSchemaArns = "ListDevelopmentSchemaArns"
 
@@ -110,7 +24,7 @@ const opListDevelopmentSchemaArns = "ListDevelopmentSchemaArns"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/ListDevelopmentSchemaArns
-func (c *Client) ListDevelopmentSchemaArnsRequest(input *ListDevelopmentSchemaArnsInput) ListDevelopmentSchemaArnsRequest {
+func (c *Client) ListDevelopmentSchemaArnsRequest(input *types.ListDevelopmentSchemaArnsInput) ListDevelopmentSchemaArnsRequest {
 	op := &aws.Operation{
 		Name:       opListDevelopmentSchemaArns,
 		HTTPMethod: "POST",
@@ -124,10 +38,10 @@ func (c *Client) ListDevelopmentSchemaArnsRequest(input *ListDevelopmentSchemaAr
 	}
 
 	if input == nil {
-		input = &ListDevelopmentSchemaArnsInput{}
+		input = &types.ListDevelopmentSchemaArnsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListDevelopmentSchemaArnsOutput{})
+	req := c.newRequest(op, input, &types.ListDevelopmentSchemaArnsOutput{})
 	return ListDevelopmentSchemaArnsRequest{Request: req, Input: input, Copy: c.ListDevelopmentSchemaArnsRequest}
 }
 
@@ -135,8 +49,8 @@ func (c *Client) ListDevelopmentSchemaArnsRequest(input *ListDevelopmentSchemaAr
 // ListDevelopmentSchemaArns API operation.
 type ListDevelopmentSchemaArnsRequest struct {
 	*aws.Request
-	Input *ListDevelopmentSchemaArnsInput
-	Copy  func(*ListDevelopmentSchemaArnsInput) ListDevelopmentSchemaArnsRequest
+	Input *types.ListDevelopmentSchemaArnsInput
+	Copy  func(*types.ListDevelopmentSchemaArnsInput) ListDevelopmentSchemaArnsRequest
 }
 
 // Send marshals and sends the ListDevelopmentSchemaArns API request.
@@ -148,7 +62,7 @@ func (r ListDevelopmentSchemaArnsRequest) Send(ctx context.Context) (*ListDevelo
 	}
 
 	resp := &ListDevelopmentSchemaArnsResponse{
-		ListDevelopmentSchemaArnsOutput: r.Request.Data.(*ListDevelopmentSchemaArnsOutput),
+		ListDevelopmentSchemaArnsOutput: r.Request.Data.(*types.ListDevelopmentSchemaArnsOutput),
 		response:                        &aws.Response{Request: r.Request},
 	}
 
@@ -178,7 +92,7 @@ func NewListDevelopmentSchemaArnsPaginator(req ListDevelopmentSchemaArnsRequest)
 	return ListDevelopmentSchemaArnsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListDevelopmentSchemaArnsInput
+				var inCpy *types.ListDevelopmentSchemaArnsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -198,14 +112,14 @@ type ListDevelopmentSchemaArnsPaginator struct {
 	aws.Pager
 }
 
-func (p *ListDevelopmentSchemaArnsPaginator) CurrentPage() *ListDevelopmentSchemaArnsOutput {
-	return p.Pager.CurrentPage().(*ListDevelopmentSchemaArnsOutput)
+func (p *ListDevelopmentSchemaArnsPaginator) CurrentPage() *types.ListDevelopmentSchemaArnsOutput {
+	return p.Pager.CurrentPage().(*types.ListDevelopmentSchemaArnsOutput)
 }
 
 // ListDevelopmentSchemaArnsResponse is the response type for the
 // ListDevelopmentSchemaArns API operation.
 type ListDevelopmentSchemaArnsResponse struct {
-	*ListDevelopmentSchemaArnsOutput
+	*types.ListDevelopmentSchemaArnsOutput
 
 	response *aws.Response
 }

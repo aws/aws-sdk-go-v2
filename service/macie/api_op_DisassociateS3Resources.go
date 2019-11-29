@@ -4,65 +4,10 @@ package macie
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/macie/types"
 )
-
-type DisassociateS3ResourcesInput struct {
-	_ struct{} `type:"structure"`
-
-	// The S3 resources (buckets or prefixes) that you want to remove from being
-	// monitored and classified by Amazon Macie.
-	//
-	// AssociatedS3Resources is a required field
-	AssociatedS3Resources []S3Resource `locationName:"associatedS3Resources" type:"list" required:"true"`
-
-	// The ID of the Amazon Macie member account whose resources you want to remove
-	// from being monitored by Amazon Macie.
-	MemberAccountId *string `locationName:"memberAccountId" type:"string"`
-}
-
-// String returns the string representation
-func (s DisassociateS3ResourcesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DisassociateS3ResourcesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DisassociateS3ResourcesInput"}
-
-	if s.AssociatedS3Resources == nil {
-		invalidParams.Add(aws.NewErrParamRequired("AssociatedS3Resources"))
-	}
-	if s.AssociatedS3Resources != nil {
-		for i, v := range s.AssociatedS3Resources {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "AssociatedS3Resources", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DisassociateS3ResourcesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// S3 resources that couldn't be removed from being monitored and classified
-	// by Amazon Macie. An error code and an error message are provided for each
-	// failed item.
-	FailedS3Resources []FailedS3Resource `locationName:"failedS3Resources" type:"list"`
-}
-
-// String returns the string representation
-func (s DisassociateS3ResourcesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDisassociateS3Resources = "DisassociateS3Resources"
 
@@ -82,7 +27,7 @@ const opDisassociateS3Resources = "DisassociateS3Resources"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/macie-2017-12-19/DisassociateS3Resources
-func (c *Client) DisassociateS3ResourcesRequest(input *DisassociateS3ResourcesInput) DisassociateS3ResourcesRequest {
+func (c *Client) DisassociateS3ResourcesRequest(input *types.DisassociateS3ResourcesInput) DisassociateS3ResourcesRequest {
 	op := &aws.Operation{
 		Name:       opDisassociateS3Resources,
 		HTTPMethod: "POST",
@@ -90,10 +35,10 @@ func (c *Client) DisassociateS3ResourcesRequest(input *DisassociateS3ResourcesIn
 	}
 
 	if input == nil {
-		input = &DisassociateS3ResourcesInput{}
+		input = &types.DisassociateS3ResourcesInput{}
 	}
 
-	req := c.newRequest(op, input, &DisassociateS3ResourcesOutput{})
+	req := c.newRequest(op, input, &types.DisassociateS3ResourcesOutput{})
 	return DisassociateS3ResourcesRequest{Request: req, Input: input, Copy: c.DisassociateS3ResourcesRequest}
 }
 
@@ -101,8 +46,8 @@ func (c *Client) DisassociateS3ResourcesRequest(input *DisassociateS3ResourcesIn
 // DisassociateS3Resources API operation.
 type DisassociateS3ResourcesRequest struct {
 	*aws.Request
-	Input *DisassociateS3ResourcesInput
-	Copy  func(*DisassociateS3ResourcesInput) DisassociateS3ResourcesRequest
+	Input *types.DisassociateS3ResourcesInput
+	Copy  func(*types.DisassociateS3ResourcesInput) DisassociateS3ResourcesRequest
 }
 
 // Send marshals and sends the DisassociateS3Resources API request.
@@ -114,7 +59,7 @@ func (r DisassociateS3ResourcesRequest) Send(ctx context.Context) (*Disassociate
 	}
 
 	resp := &DisassociateS3ResourcesResponse{
-		DisassociateS3ResourcesOutput: r.Request.Data.(*DisassociateS3ResourcesOutput),
+		DisassociateS3ResourcesOutput: r.Request.Data.(*types.DisassociateS3ResourcesOutput),
 		response:                      &aws.Response{Request: r.Request},
 	}
 
@@ -124,7 +69,7 @@ func (r DisassociateS3ResourcesRequest) Send(ctx context.Context) (*Disassociate
 // DisassociateS3ResourcesResponse is the response type for the
 // DisassociateS3Resources API operation.
 type DisassociateS3ResourcesResponse struct {
-	*DisassociateS3ResourcesOutput
+	*types.DisassociateS3ResourcesOutput
 
 	response *aws.Response
 }

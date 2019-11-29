@@ -6,71 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/firehose/types"
 )
-
-type ListDeliveryStreamsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The delivery stream type. This can be one of the following values:
-	//
-	//    * DirectPut: Provider applications access the delivery stream directly.
-	//
-	//    * KinesisStreamAsSource: The delivery stream uses a Kinesis data stream
-	//    as a source.
-	//
-	// This parameter is optional. If this parameter is omitted, delivery streams
-	// of all types are returned.
-	DeliveryStreamType DeliveryStreamType `type:"string" enum:"true"`
-
-	// The list of delivery streams returned by this call to ListDeliveryStreams
-	// will start with the delivery stream whose name comes alphabetically immediately
-	// after the name you specify in ExclusiveStartDeliveryStreamName.
-	ExclusiveStartDeliveryStreamName *string `min:"1" type:"string"`
-
-	// The maximum number of delivery streams to list. The default value is 10.
-	Limit *int64 `min:"1" type:"integer"`
-}
-
-// String returns the string representation
-func (s ListDeliveryStreamsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListDeliveryStreamsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListDeliveryStreamsInput"}
-	if s.ExclusiveStartDeliveryStreamName != nil && len(*s.ExclusiveStartDeliveryStreamName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ExclusiveStartDeliveryStreamName", 1))
-	}
-	if s.Limit != nil && *s.Limit < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("Limit", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ListDeliveryStreamsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The names of the delivery streams.
-	//
-	// DeliveryStreamNames is a required field
-	DeliveryStreamNames []string `type:"list" required:"true"`
-
-	// Indicates whether there are more delivery streams available to list.
-	//
-	// HasMoreDeliveryStreams is a required field
-	HasMoreDeliveryStreams *bool `type:"boolean" required:"true"`
-}
-
-// String returns the string representation
-func (s ListDeliveryStreamsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListDeliveryStreams = "ListDeliveryStreams"
 
@@ -95,7 +32,7 @@ const opListDeliveryStreams = "ListDeliveryStreams"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/ListDeliveryStreams
-func (c *Client) ListDeliveryStreamsRequest(input *ListDeliveryStreamsInput) ListDeliveryStreamsRequest {
+func (c *Client) ListDeliveryStreamsRequest(input *types.ListDeliveryStreamsInput) ListDeliveryStreamsRequest {
 	op := &aws.Operation{
 		Name:       opListDeliveryStreams,
 		HTTPMethod: "POST",
@@ -103,10 +40,10 @@ func (c *Client) ListDeliveryStreamsRequest(input *ListDeliveryStreamsInput) Lis
 	}
 
 	if input == nil {
-		input = &ListDeliveryStreamsInput{}
+		input = &types.ListDeliveryStreamsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListDeliveryStreamsOutput{})
+	req := c.newRequest(op, input, &types.ListDeliveryStreamsOutput{})
 	return ListDeliveryStreamsRequest{Request: req, Input: input, Copy: c.ListDeliveryStreamsRequest}
 }
 
@@ -114,8 +51,8 @@ func (c *Client) ListDeliveryStreamsRequest(input *ListDeliveryStreamsInput) Lis
 // ListDeliveryStreams API operation.
 type ListDeliveryStreamsRequest struct {
 	*aws.Request
-	Input *ListDeliveryStreamsInput
-	Copy  func(*ListDeliveryStreamsInput) ListDeliveryStreamsRequest
+	Input *types.ListDeliveryStreamsInput
+	Copy  func(*types.ListDeliveryStreamsInput) ListDeliveryStreamsRequest
 }
 
 // Send marshals and sends the ListDeliveryStreams API request.
@@ -127,7 +64,7 @@ func (r ListDeliveryStreamsRequest) Send(ctx context.Context) (*ListDeliveryStre
 	}
 
 	resp := &ListDeliveryStreamsResponse{
-		ListDeliveryStreamsOutput: r.Request.Data.(*ListDeliveryStreamsOutput),
+		ListDeliveryStreamsOutput: r.Request.Data.(*types.ListDeliveryStreamsOutput),
 		response:                  &aws.Response{Request: r.Request},
 	}
 
@@ -137,7 +74,7 @@ func (r ListDeliveryStreamsRequest) Send(ctx context.Context) (*ListDeliveryStre
 // ListDeliveryStreamsResponse is the response type for the
 // ListDeliveryStreams API operation.
 type ListDeliveryStreamsResponse struct {
-	*ListDeliveryStreamsOutput
+	*types.ListDeliveryStreamsOutput
 
 	response *aws.Response
 }

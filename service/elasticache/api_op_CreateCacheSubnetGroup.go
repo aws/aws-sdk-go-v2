@@ -6,75 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/elasticache/types"
 )
-
-// Represents the input of a CreateCacheSubnetGroup operation.
-type CreateCacheSubnetGroupInput struct {
-	_ struct{} `type:"structure"`
-
-	// A description for the cache subnet group.
-	//
-	// CacheSubnetGroupDescription is a required field
-	CacheSubnetGroupDescription *string `type:"string" required:"true"`
-
-	// A name for the cache subnet group. This value is stored as a lowercase string.
-	//
-	// Constraints: Must contain no more than 255 alphanumeric characters or hyphens.
-	//
-	// Example: mysubnetgroup
-	//
-	// CacheSubnetGroupName is a required field
-	CacheSubnetGroupName *string `type:"string" required:"true"`
-
-	// A list of VPC subnet IDs for the cache subnet group.
-	//
-	// SubnetIds is a required field
-	SubnetIds []string `locationNameList:"SubnetIdentifier" type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s CreateCacheSubnetGroupInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateCacheSubnetGroupInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateCacheSubnetGroupInput"}
-
-	if s.CacheSubnetGroupDescription == nil {
-		invalidParams.Add(aws.NewErrParamRequired("CacheSubnetGroupDescription"))
-	}
-
-	if s.CacheSubnetGroupName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("CacheSubnetGroupName"))
-	}
-
-	if s.SubnetIds == nil {
-		invalidParams.Add(aws.NewErrParamRequired("SubnetIds"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type CreateCacheSubnetGroupOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Represents the output of one of the following operations:
-	//
-	//    * CreateCacheSubnetGroup
-	//
-	//    * ModifyCacheSubnetGroup
-	CacheSubnetGroup *CacheSubnetGroup `type:"structure"`
-}
-
-// String returns the string representation
-func (s CreateCacheSubnetGroupOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCreateCacheSubnetGroup = "CreateCacheSubnetGroup"
 
@@ -94,7 +27,7 @@ const opCreateCacheSubnetGroup = "CreateCacheSubnetGroup"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CreateCacheSubnetGroup
-func (c *Client) CreateCacheSubnetGroupRequest(input *CreateCacheSubnetGroupInput) CreateCacheSubnetGroupRequest {
+func (c *Client) CreateCacheSubnetGroupRequest(input *types.CreateCacheSubnetGroupInput) CreateCacheSubnetGroupRequest {
 	op := &aws.Operation{
 		Name:       opCreateCacheSubnetGroup,
 		HTTPMethod: "POST",
@@ -102,10 +35,10 @@ func (c *Client) CreateCacheSubnetGroupRequest(input *CreateCacheSubnetGroupInpu
 	}
 
 	if input == nil {
-		input = &CreateCacheSubnetGroupInput{}
+		input = &types.CreateCacheSubnetGroupInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateCacheSubnetGroupOutput{})
+	req := c.newRequest(op, input, &types.CreateCacheSubnetGroupOutput{})
 	return CreateCacheSubnetGroupRequest{Request: req, Input: input, Copy: c.CreateCacheSubnetGroupRequest}
 }
 
@@ -113,8 +46,8 @@ func (c *Client) CreateCacheSubnetGroupRequest(input *CreateCacheSubnetGroupInpu
 // CreateCacheSubnetGroup API operation.
 type CreateCacheSubnetGroupRequest struct {
 	*aws.Request
-	Input *CreateCacheSubnetGroupInput
-	Copy  func(*CreateCacheSubnetGroupInput) CreateCacheSubnetGroupRequest
+	Input *types.CreateCacheSubnetGroupInput
+	Copy  func(*types.CreateCacheSubnetGroupInput) CreateCacheSubnetGroupRequest
 }
 
 // Send marshals and sends the CreateCacheSubnetGroup API request.
@@ -126,7 +59,7 @@ func (r CreateCacheSubnetGroupRequest) Send(ctx context.Context) (*CreateCacheSu
 	}
 
 	resp := &CreateCacheSubnetGroupResponse{
-		CreateCacheSubnetGroupOutput: r.Request.Data.(*CreateCacheSubnetGroupOutput),
+		CreateCacheSubnetGroupOutput: r.Request.Data.(*types.CreateCacheSubnetGroupOutput),
 		response:                     &aws.Response{Request: r.Request},
 	}
 
@@ -136,7 +69,7 @@ func (r CreateCacheSubnetGroupRequest) Send(ctx context.Context) (*CreateCacheSu
 // CreateCacheSubnetGroupResponse is the response type for the
 // CreateCacheSubnetGroup API operation.
 type CreateCacheSubnetGroupResponse struct {
-	*CreateCacheSubnetGroupOutput
+	*types.CreateCacheSubnetGroupOutput
 
 	response *aws.Response
 }

@@ -6,70 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/query"
+	"github.com/aws/aws-sdk-go-v2/service/iam/types"
 )
-
-type DetachRolePolicyInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the IAM policy you want to detach.
-	//
-	// For more information about ARNs, see Amazon Resource Names (ARNs) and AWS
-	// Service Namespaces (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
-	// in the AWS General Reference.
-	//
-	// PolicyArn is a required field
-	PolicyArn *string `min:"20" type:"string" required:"true"`
-
-	// The name (friendly name, not ARN) of the IAM role to detach the policy from.
-	//
-	// This parameter allows (through its regex pattern (http://wikipedia.org/wiki/regex))
-	// a string of characters consisting of upper and lowercase alphanumeric characters
-	// with no spaces. You can also include any of the following characters: _+=,.@-
-	//
-	// RoleName is a required field
-	RoleName *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DetachRolePolicyInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DetachRolePolicyInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DetachRolePolicyInput"}
-
-	if s.PolicyArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("PolicyArn"))
-	}
-	if s.PolicyArn != nil && len(*s.PolicyArn) < 20 {
-		invalidParams.Add(aws.NewErrParamMinLen("PolicyArn", 20))
-	}
-
-	if s.RoleName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("RoleName"))
-	}
-	if s.RoleName != nil && len(*s.RoleName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("RoleName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DetachRolePolicyOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DetachRolePolicyOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDetachRolePolicy = "DetachRolePolicy"
 
@@ -91,7 +31,7 @@ const opDetachRolePolicy = "DetachRolePolicy"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DetachRolePolicy
-func (c *Client) DetachRolePolicyRequest(input *DetachRolePolicyInput) DetachRolePolicyRequest {
+func (c *Client) DetachRolePolicyRequest(input *types.DetachRolePolicyInput) DetachRolePolicyRequest {
 	op := &aws.Operation{
 		Name:       opDetachRolePolicy,
 		HTTPMethod: "POST",
@@ -99,10 +39,10 @@ func (c *Client) DetachRolePolicyRequest(input *DetachRolePolicyInput) DetachRol
 	}
 
 	if input == nil {
-		input = &DetachRolePolicyInput{}
+		input = &types.DetachRolePolicyInput{}
 	}
 
-	req := c.newRequest(op, input, &DetachRolePolicyOutput{})
+	req := c.newRequest(op, input, &types.DetachRolePolicyOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return DetachRolePolicyRequest{Request: req, Input: input, Copy: c.DetachRolePolicyRequest}
@@ -112,8 +52,8 @@ func (c *Client) DetachRolePolicyRequest(input *DetachRolePolicyInput) DetachRol
 // DetachRolePolicy API operation.
 type DetachRolePolicyRequest struct {
 	*aws.Request
-	Input *DetachRolePolicyInput
-	Copy  func(*DetachRolePolicyInput) DetachRolePolicyRequest
+	Input *types.DetachRolePolicyInput
+	Copy  func(*types.DetachRolePolicyInput) DetachRolePolicyRequest
 }
 
 // Send marshals and sends the DetachRolePolicy API request.
@@ -125,7 +65,7 @@ func (r DetachRolePolicyRequest) Send(ctx context.Context) (*DetachRolePolicyRes
 	}
 
 	resp := &DetachRolePolicyResponse{
-		DetachRolePolicyOutput: r.Request.Data.(*DetachRolePolicyOutput),
+		DetachRolePolicyOutput: r.Request.Data.(*types.DetachRolePolicyOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -135,7 +75,7 @@ func (r DetachRolePolicyRequest) Send(ctx context.Context) (*DetachRolePolicyRes
 // DetachRolePolicyResponse is the response type for the
 // DetachRolePolicy API operation.
 type DetachRolePolicyResponse struct {
-	*DetachRolePolicyOutput
+	*types.DetachRolePolicyOutput
 
 	response *aws.Response
 }

@@ -6,63 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ecs/types"
 )
-
-type DescribeServicesInput struct {
-	_ struct{} `type:"structure"`
-
-	// The short name or full Amazon Resource Name (ARN)the cluster that hosts the
-	// service to describe. If you do not specify a cluster, the default cluster
-	// is assumed. This parameter is required if the service or services you are
-	// describing were launched in any cluster other than the default cluster.
-	Cluster *string `locationName:"cluster" type:"string"`
-
-	// Specifies whether you want to see the resource tags for the service. If TAGS
-	// is specified, the tags are included in the response. If this field is omitted,
-	// tags are not included in the response.
-	Include []ServiceField `locationName:"include" type:"list"`
-
-	// A list of services to describe. You may specify up to 10 services to describe
-	// in a single operation.
-	//
-	// Services is a required field
-	Services []string `locationName:"services" type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeServicesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeServicesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeServicesInput"}
-
-	if s.Services == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Services"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribeServicesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Any failures associated with the call.
-	Failures []Failure `locationName:"failures" type:"list"`
-
-	// The list of services described.
-	Services []Service `locationName:"services" type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeServicesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeServices = "DescribeServices"
 
@@ -79,7 +24,7 @@ const opDescribeServices = "DescribeServices"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DescribeServices
-func (c *Client) DescribeServicesRequest(input *DescribeServicesInput) DescribeServicesRequest {
+func (c *Client) DescribeServicesRequest(input *types.DescribeServicesInput) DescribeServicesRequest {
 	op := &aws.Operation{
 		Name:       opDescribeServices,
 		HTTPMethod: "POST",
@@ -87,10 +32,10 @@ func (c *Client) DescribeServicesRequest(input *DescribeServicesInput) DescribeS
 	}
 
 	if input == nil {
-		input = &DescribeServicesInput{}
+		input = &types.DescribeServicesInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeServicesOutput{})
+	req := c.newRequest(op, input, &types.DescribeServicesOutput{})
 	return DescribeServicesRequest{Request: req, Input: input, Copy: c.DescribeServicesRequest}
 }
 
@@ -98,8 +43,8 @@ func (c *Client) DescribeServicesRequest(input *DescribeServicesInput) DescribeS
 // DescribeServices API operation.
 type DescribeServicesRequest struct {
 	*aws.Request
-	Input *DescribeServicesInput
-	Copy  func(*DescribeServicesInput) DescribeServicesRequest
+	Input *types.DescribeServicesInput
+	Copy  func(*types.DescribeServicesInput) DescribeServicesRequest
 }
 
 // Send marshals and sends the DescribeServices API request.
@@ -111,7 +56,7 @@ func (r DescribeServicesRequest) Send(ctx context.Context) (*DescribeServicesRes
 	}
 
 	resp := &DescribeServicesResponse{
-		DescribeServicesOutput: r.Request.Data.(*DescribeServicesOutput),
+		DescribeServicesOutput: r.Request.Data.(*types.DescribeServicesOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -121,7 +66,7 @@ func (r DescribeServicesRequest) Send(ctx context.Context) (*DescribeServicesRes
 // DescribeServicesResponse is the response type for the
 // DescribeServices API operation.
 type DescribeServicesResponse struct {
-	*DescribeServicesOutput
+	*types.DescribeServicesOutput
 
 	response *aws.Response
 }

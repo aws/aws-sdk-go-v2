@@ -6,135 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/quicksight/types"
 )
-
-type UpdateGroupInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID for the AWS account that the group is in. Currently, you use the ID
-	// for the AWS account that contains your Amazon QuickSight account.
-	//
-	// AwsAccountId is a required field
-	AwsAccountId *string `location:"uri" locationName:"AwsAccountId" min:"12" type:"string" required:"true"`
-
-	// The description for the group that you want to update.
-	Description *string `min:"1" type:"string"`
-
-	// The name of the group that you want to update.
-	//
-	// GroupName is a required field
-	GroupName *string `location:"uri" locationName:"GroupName" min:"1" type:"string" required:"true"`
-
-	// The namespace. Currently, you should set this to default.
-	//
-	// Namespace is a required field
-	Namespace *string `location:"uri" locationName:"Namespace" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s UpdateGroupInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateGroupInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateGroupInput"}
-
-	if s.AwsAccountId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("AwsAccountId"))
-	}
-	if s.AwsAccountId != nil && len(*s.AwsAccountId) < 12 {
-		invalidParams.Add(aws.NewErrParamMinLen("AwsAccountId", 12))
-	}
-	if s.Description != nil && len(*s.Description) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Description", 1))
-	}
-
-	if s.GroupName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("GroupName"))
-	}
-	if s.GroupName != nil && len(*s.GroupName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("GroupName", 1))
-	}
-
-	if s.Namespace == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Namespace"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s UpdateGroupInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.Description != nil {
-		v := *s.Description
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "Description", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.AwsAccountId != nil {
-		v := *s.AwsAccountId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "AwsAccountId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.GroupName != nil {
-		v := *s.GroupName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "GroupName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Namespace != nil {
-		v := *s.Namespace
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "Namespace", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type UpdateGroupOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the group.
-	Group *Group `type:"structure"`
-
-	// The AWS request ID for this operation.
-	RequestId *string `type:"string"`
-
-	// The http status of the request.
-	Status *int64 `location:"statusCode" type:"integer"`
-}
-
-// String returns the string representation
-func (s UpdateGroupOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s UpdateGroupOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.Group != nil {
-		v := s.Group
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "Group", v, metadata)
-	}
-	if s.RequestId != nil {
-		v := *s.RequestId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "RequestId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	// ignoring invalid encode state, StatusCode. Status
-	return nil
-}
 
 const opUpdateGroup = "UpdateGroup"
 
@@ -160,7 +33,7 @@ const opUpdateGroup = "UpdateGroup"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/UpdateGroup
-func (c *Client) UpdateGroupRequest(input *UpdateGroupInput) UpdateGroupRequest {
+func (c *Client) UpdateGroupRequest(input *types.UpdateGroupInput) UpdateGroupRequest {
 	op := &aws.Operation{
 		Name:       opUpdateGroup,
 		HTTPMethod: "PUT",
@@ -168,10 +41,10 @@ func (c *Client) UpdateGroupRequest(input *UpdateGroupInput) UpdateGroupRequest 
 	}
 
 	if input == nil {
-		input = &UpdateGroupInput{}
+		input = &types.UpdateGroupInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateGroupOutput{})
+	req := c.newRequest(op, input, &types.UpdateGroupOutput{})
 	return UpdateGroupRequest{Request: req, Input: input, Copy: c.UpdateGroupRequest}
 }
 
@@ -179,8 +52,8 @@ func (c *Client) UpdateGroupRequest(input *UpdateGroupInput) UpdateGroupRequest 
 // UpdateGroup API operation.
 type UpdateGroupRequest struct {
 	*aws.Request
-	Input *UpdateGroupInput
-	Copy  func(*UpdateGroupInput) UpdateGroupRequest
+	Input *types.UpdateGroupInput
+	Copy  func(*types.UpdateGroupInput) UpdateGroupRequest
 }
 
 // Send marshals and sends the UpdateGroup API request.
@@ -192,7 +65,7 @@ func (r UpdateGroupRequest) Send(ctx context.Context) (*UpdateGroupResponse, err
 	}
 
 	resp := &UpdateGroupResponse{
-		UpdateGroupOutput: r.Request.Data.(*UpdateGroupOutput),
+		UpdateGroupOutput: r.Request.Data.(*types.UpdateGroupOutput),
 		response:          &aws.Response{Request: r.Request},
 	}
 
@@ -202,7 +75,7 @@ func (r UpdateGroupRequest) Send(ctx context.Context) (*UpdateGroupResponse, err
 // UpdateGroupResponse is the response type for the
 // UpdateGroup API operation.
 type UpdateGroupResponse struct {
-	*UpdateGroupOutput
+	*types.UpdateGroupOutput
 
 	response *aws.Response
 }

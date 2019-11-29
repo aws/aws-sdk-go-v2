@@ -6,95 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/rds/types"
 )
-
-type ModifyCurrentDBClusterCapacityInput struct {
-	_ struct{} `type:"structure"`
-
-	// The DB cluster capacity.
-	//
-	// When you change the capacity of a paused Aurora Serverless DB cluster, it
-	// automatically resumes.
-	//
-	// Constraints:
-	//
-	//    * Value must be 1, 2, 4, 8, 16, 32, 64, 128, or 256.
-	Capacity *int64 `type:"integer"`
-
-	// The DB cluster identifier for the cluster being modified. This parameter
-	// is not case-sensitive.
-	//
-	// Constraints:
-	//
-	//    * Must match the identifier of an existing DB cluster.
-	//
-	// DBClusterIdentifier is a required field
-	DBClusterIdentifier *string `type:"string" required:"true"`
-
-	// The amount of time, in seconds, that Aurora Serverless tries to find a scaling
-	// point to perform seamless scaling before enforcing the timeout action. The
-	// default is 300.
-	//
-	//    * Value must be from 10 through 600.
-	SecondsBeforeTimeout *int64 `type:"integer"`
-
-	// The action to take when the timeout is reached, either ForceApplyCapacityChange
-	// or RollbackCapacityChange.
-	//
-	// ForceApplyCapacityChange, the default, sets the capacity to the specified
-	// value as soon as possible.
-	//
-	// RollbackCapacityChange ignores the capacity change if a scaling point is
-	// not found in the timeout period.
-	TimeoutAction *string `type:"string"`
-}
-
-// String returns the string representation
-func (s ModifyCurrentDBClusterCapacityInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ModifyCurrentDBClusterCapacityInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ModifyCurrentDBClusterCapacityInput"}
-
-	if s.DBClusterIdentifier == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DBClusterIdentifier"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ModifyCurrentDBClusterCapacityOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The current capacity of the DB cluster.
-	CurrentCapacity *int64 `type:"integer"`
-
-	// A user-supplied DB cluster identifier. This identifier is the unique key
-	// that identifies a DB cluster.
-	DBClusterIdentifier *string `type:"string"`
-
-	// A value that specifies the capacity that the DB cluster scales to next.
-	PendingCapacity *int64 `type:"integer"`
-
-	// The number of seconds before a call to ModifyCurrentDBClusterCapacity times
-	// out.
-	SecondsBeforeTimeout *int64 `type:"integer"`
-
-	// The timeout action of a call to ModifyCurrentDBClusterCapacity, either ForceApplyCapacityChange
-	// or RollbackCapacityChange.
-	TimeoutAction *string `type:"string"`
-}
-
-// String returns the string representation
-func (s ModifyCurrentDBClusterCapacityOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opModifyCurrentDBClusterCapacity = "ModifyCurrentDBClusterCapacity"
 
@@ -132,7 +45,7 @@ const opModifyCurrentDBClusterCapacity = "ModifyCurrentDBClusterCapacity"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyCurrentDBClusterCapacity
-func (c *Client) ModifyCurrentDBClusterCapacityRequest(input *ModifyCurrentDBClusterCapacityInput) ModifyCurrentDBClusterCapacityRequest {
+func (c *Client) ModifyCurrentDBClusterCapacityRequest(input *types.ModifyCurrentDBClusterCapacityInput) ModifyCurrentDBClusterCapacityRequest {
 	op := &aws.Operation{
 		Name:       opModifyCurrentDBClusterCapacity,
 		HTTPMethod: "POST",
@@ -140,10 +53,10 @@ func (c *Client) ModifyCurrentDBClusterCapacityRequest(input *ModifyCurrentDBClu
 	}
 
 	if input == nil {
-		input = &ModifyCurrentDBClusterCapacityInput{}
+		input = &types.ModifyCurrentDBClusterCapacityInput{}
 	}
 
-	req := c.newRequest(op, input, &ModifyCurrentDBClusterCapacityOutput{})
+	req := c.newRequest(op, input, &types.ModifyCurrentDBClusterCapacityOutput{})
 	return ModifyCurrentDBClusterCapacityRequest{Request: req, Input: input, Copy: c.ModifyCurrentDBClusterCapacityRequest}
 }
 
@@ -151,8 +64,8 @@ func (c *Client) ModifyCurrentDBClusterCapacityRequest(input *ModifyCurrentDBClu
 // ModifyCurrentDBClusterCapacity API operation.
 type ModifyCurrentDBClusterCapacityRequest struct {
 	*aws.Request
-	Input *ModifyCurrentDBClusterCapacityInput
-	Copy  func(*ModifyCurrentDBClusterCapacityInput) ModifyCurrentDBClusterCapacityRequest
+	Input *types.ModifyCurrentDBClusterCapacityInput
+	Copy  func(*types.ModifyCurrentDBClusterCapacityInput) ModifyCurrentDBClusterCapacityRequest
 }
 
 // Send marshals and sends the ModifyCurrentDBClusterCapacity API request.
@@ -164,7 +77,7 @@ func (r ModifyCurrentDBClusterCapacityRequest) Send(ctx context.Context) (*Modif
 	}
 
 	resp := &ModifyCurrentDBClusterCapacityResponse{
-		ModifyCurrentDBClusterCapacityOutput: r.Request.Data.(*ModifyCurrentDBClusterCapacityOutput),
+		ModifyCurrentDBClusterCapacityOutput: r.Request.Data.(*types.ModifyCurrentDBClusterCapacityOutput),
 		response:                             &aws.Response{Request: r.Request},
 	}
 
@@ -174,7 +87,7 @@ func (r ModifyCurrentDBClusterCapacityRequest) Send(ctx context.Context) (*Modif
 // ModifyCurrentDBClusterCapacityResponse is the response type for the
 // ModifyCurrentDBClusterCapacity API operation.
 type ModifyCurrentDBClusterCapacityResponse struct {
-	*ModifyCurrentDBClusterCapacityOutput
+	*types.ModifyCurrentDBClusterCapacityOutput
 
 	response *aws.Response
 }

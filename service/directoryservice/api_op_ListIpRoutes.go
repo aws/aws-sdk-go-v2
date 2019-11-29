@@ -6,61 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/directoryservice/types"
 )
-
-type ListIpRoutesInput struct {
-	_ struct{} `type:"structure"`
-
-	// Identifier (ID) of the directory for which you want to retrieve the IP addresses.
-	//
-	// DirectoryId is a required field
-	DirectoryId *string `type:"string" required:"true"`
-
-	// Maximum number of items to return. If this value is zero, the maximum number
-	// of items is specified by the limitations of the operation.
-	Limit *int64 `type:"integer"`
-
-	// The ListIpRoutes.NextToken value from a previous call to ListIpRoutes. Pass
-	// null if this is the first call.
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s ListIpRoutesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListIpRoutesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListIpRoutesInput"}
-
-	if s.DirectoryId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DirectoryId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ListIpRoutesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A list of IpRoutes.
-	IpRoutesInfo []IpRouteInfo `type:"list"`
-
-	// If not null, more results are available. Pass this value for the NextToken
-	// parameter in a subsequent call to ListIpRoutes to retrieve the next set of
-	// items.
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s ListIpRoutesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListIpRoutes = "ListIpRoutes"
 
@@ -77,7 +24,7 @@ const opListIpRoutes = "ListIpRoutes"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/ListIpRoutes
-func (c *Client) ListIpRoutesRequest(input *ListIpRoutesInput) ListIpRoutesRequest {
+func (c *Client) ListIpRoutesRequest(input *types.ListIpRoutesInput) ListIpRoutesRequest {
 	op := &aws.Operation{
 		Name:       opListIpRoutes,
 		HTTPMethod: "POST",
@@ -85,10 +32,10 @@ func (c *Client) ListIpRoutesRequest(input *ListIpRoutesInput) ListIpRoutesReque
 	}
 
 	if input == nil {
-		input = &ListIpRoutesInput{}
+		input = &types.ListIpRoutesInput{}
 	}
 
-	req := c.newRequest(op, input, &ListIpRoutesOutput{})
+	req := c.newRequest(op, input, &types.ListIpRoutesOutput{})
 	return ListIpRoutesRequest{Request: req, Input: input, Copy: c.ListIpRoutesRequest}
 }
 
@@ -96,8 +43,8 @@ func (c *Client) ListIpRoutesRequest(input *ListIpRoutesInput) ListIpRoutesReque
 // ListIpRoutes API operation.
 type ListIpRoutesRequest struct {
 	*aws.Request
-	Input *ListIpRoutesInput
-	Copy  func(*ListIpRoutesInput) ListIpRoutesRequest
+	Input *types.ListIpRoutesInput
+	Copy  func(*types.ListIpRoutesInput) ListIpRoutesRequest
 }
 
 // Send marshals and sends the ListIpRoutes API request.
@@ -109,7 +56,7 @@ func (r ListIpRoutesRequest) Send(ctx context.Context) (*ListIpRoutesResponse, e
 	}
 
 	resp := &ListIpRoutesResponse{
-		ListIpRoutesOutput: r.Request.Data.(*ListIpRoutesOutput),
+		ListIpRoutesOutput: r.Request.Data.(*types.ListIpRoutesOutput),
 		response:           &aws.Response{Request: r.Request},
 	}
 
@@ -119,7 +66,7 @@ func (r ListIpRoutesRequest) Send(ctx context.Context) (*ListIpRoutesResponse, e
 // ListIpRoutesResponse is the response type for the
 // ListIpRoutes API operation.
 type ListIpRoutesResponse struct {
-	*ListIpRoutesOutput
+	*types.ListIpRoutesOutput
 
 	response *aws.Response
 }

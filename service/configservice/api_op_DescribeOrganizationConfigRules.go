@@ -6,46 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/configservice/types"
 )
-
-type DescribeOrganizationConfigRulesInput struct {
-	_ struct{} `type:"structure"`
-
-	// The maximum number of organization config rules returned on each page. If
-	// you do no specify a number, AWS Config uses the default. The default is 100.
-	Limit *int64 `type:"integer"`
-
-	// The nextToken string returned on a previous page that you use to get the
-	// next page of results in a paginated response.
-	NextToken *string `type:"string"`
-
-	// The names of organization config rules for which you want details. If you
-	// do not specify any names, AWS Config returns details for all your organization
-	// config rules.
-	OrganizationConfigRuleNames []string `type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeOrganizationConfigRulesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type DescribeOrganizationConfigRulesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The nextToken string returned on a previous page that you use to get the
-	// next page of results in a paginated response.
-	NextToken *string `type:"string"`
-
-	// Retuns a list OrganizationConfigRule objects.
-	OrganizationConfigRules []OrganizationConfigRule `type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeOrganizationConfigRulesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeOrganizationConfigRules = "DescribeOrganizationConfigRules"
 
@@ -69,7 +31,7 @@ const opDescribeOrganizationConfigRules = "DescribeOrganizationConfigRules"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DescribeOrganizationConfigRules
-func (c *Client) DescribeOrganizationConfigRulesRequest(input *DescribeOrganizationConfigRulesInput) DescribeOrganizationConfigRulesRequest {
+func (c *Client) DescribeOrganizationConfigRulesRequest(input *types.DescribeOrganizationConfigRulesInput) DescribeOrganizationConfigRulesRequest {
 	op := &aws.Operation{
 		Name:       opDescribeOrganizationConfigRules,
 		HTTPMethod: "POST",
@@ -77,10 +39,10 @@ func (c *Client) DescribeOrganizationConfigRulesRequest(input *DescribeOrganizat
 	}
 
 	if input == nil {
-		input = &DescribeOrganizationConfigRulesInput{}
+		input = &types.DescribeOrganizationConfigRulesInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeOrganizationConfigRulesOutput{})
+	req := c.newRequest(op, input, &types.DescribeOrganizationConfigRulesOutput{})
 	return DescribeOrganizationConfigRulesRequest{Request: req, Input: input, Copy: c.DescribeOrganizationConfigRulesRequest}
 }
 
@@ -88,8 +50,8 @@ func (c *Client) DescribeOrganizationConfigRulesRequest(input *DescribeOrganizat
 // DescribeOrganizationConfigRules API operation.
 type DescribeOrganizationConfigRulesRequest struct {
 	*aws.Request
-	Input *DescribeOrganizationConfigRulesInput
-	Copy  func(*DescribeOrganizationConfigRulesInput) DescribeOrganizationConfigRulesRequest
+	Input *types.DescribeOrganizationConfigRulesInput
+	Copy  func(*types.DescribeOrganizationConfigRulesInput) DescribeOrganizationConfigRulesRequest
 }
 
 // Send marshals and sends the DescribeOrganizationConfigRules API request.
@@ -101,7 +63,7 @@ func (r DescribeOrganizationConfigRulesRequest) Send(ctx context.Context) (*Desc
 	}
 
 	resp := &DescribeOrganizationConfigRulesResponse{
-		DescribeOrganizationConfigRulesOutput: r.Request.Data.(*DescribeOrganizationConfigRulesOutput),
+		DescribeOrganizationConfigRulesOutput: r.Request.Data.(*types.DescribeOrganizationConfigRulesOutput),
 		response:                              &aws.Response{Request: r.Request},
 	}
 
@@ -111,7 +73,7 @@ func (r DescribeOrganizationConfigRulesRequest) Send(ctx context.Context) (*Desc
 // DescribeOrganizationConfigRulesResponse is the response type for the
 // DescribeOrganizationConfigRules API operation.
 type DescribeOrganizationConfigRulesResponse struct {
-	*DescribeOrganizationConfigRulesOutput
+	*types.DescribeOrganizationConfigRulesOutput
 
 	response *aws.Response
 }

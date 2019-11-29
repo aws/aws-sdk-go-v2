@@ -6,75 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/restxml"
+	"github.com/aws/aws-sdk-go-v2/service/cloudfront/types"
 )
-
-// The request to delete a streaming distribution.
-type DeleteStreamingDistributionInput struct {
-	_ struct{} `type:"structure"`
-
-	// The distribution ID.
-	//
-	// Id is a required field
-	Id *string `location:"uri" locationName:"Id" type:"string" required:"true"`
-
-	// The value of the ETag header that you received when you disabled the streaming
-	// distribution. For example: E2QWRUHAPOMQZL.
-	IfMatch *string `location:"header" locationName:"If-Match" type:"string"`
-}
-
-// String returns the string representation
-func (s DeleteStreamingDistributionInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteStreamingDistributionInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteStreamingDistributionInput"}
-
-	if s.Id == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Id"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteStreamingDistributionInput) MarshalFields(e protocol.FieldEncoder) error {
-
-	if s.IfMatch != nil {
-		v := *s.IfMatch
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "If-Match", protocol.StringValue(v), metadata)
-	}
-	if s.Id != nil {
-		v := *s.Id
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "Id", protocol.StringValue(v), metadata)
-	}
-	return nil
-}
-
-type DeleteStreamingDistributionOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteStreamingDistributionOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteStreamingDistributionOutput) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
 
 const opDeleteStreamingDistribution = "DeleteStreamingDistribution2019_03_26"
 
@@ -126,7 +61,7 @@ const opDeleteStreamingDistribution = "DeleteStreamingDistribution2019_03_26"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/DeleteStreamingDistribution
-func (c *Client) DeleteStreamingDistributionRequest(input *DeleteStreamingDistributionInput) DeleteStreamingDistributionRequest {
+func (c *Client) DeleteStreamingDistributionRequest(input *types.DeleteStreamingDistributionInput) DeleteStreamingDistributionRequest {
 	op := &aws.Operation{
 		Name:       opDeleteStreamingDistribution,
 		HTTPMethod: "DELETE",
@@ -134,10 +69,10 @@ func (c *Client) DeleteStreamingDistributionRequest(input *DeleteStreamingDistri
 	}
 
 	if input == nil {
-		input = &DeleteStreamingDistributionInput{}
+		input = &types.DeleteStreamingDistributionInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteStreamingDistributionOutput{})
+	req := c.newRequest(op, input, &types.DeleteStreamingDistributionOutput{})
 	req.Handlers.Unmarshal.Remove(restxml.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return DeleteStreamingDistributionRequest{Request: req, Input: input, Copy: c.DeleteStreamingDistributionRequest}
@@ -147,8 +82,8 @@ func (c *Client) DeleteStreamingDistributionRequest(input *DeleteStreamingDistri
 // DeleteStreamingDistribution API operation.
 type DeleteStreamingDistributionRequest struct {
 	*aws.Request
-	Input *DeleteStreamingDistributionInput
-	Copy  func(*DeleteStreamingDistributionInput) DeleteStreamingDistributionRequest
+	Input *types.DeleteStreamingDistributionInput
+	Copy  func(*types.DeleteStreamingDistributionInput) DeleteStreamingDistributionRequest
 }
 
 // Send marshals and sends the DeleteStreamingDistribution API request.
@@ -160,7 +95,7 @@ func (r DeleteStreamingDistributionRequest) Send(ctx context.Context) (*DeleteSt
 	}
 
 	resp := &DeleteStreamingDistributionResponse{
-		DeleteStreamingDistributionOutput: r.Request.Data.(*DeleteStreamingDistributionOutput),
+		DeleteStreamingDistributionOutput: r.Request.Data.(*types.DeleteStreamingDistributionOutput),
 		response:                          &aws.Response{Request: r.Request},
 	}
 
@@ -170,7 +105,7 @@ func (r DeleteStreamingDistributionRequest) Send(ctx context.Context) (*DeleteSt
 // DeleteStreamingDistributionResponse is the response type for the
 // DeleteStreamingDistribution API operation.
 type DeleteStreamingDistributionResponse struct {
-	*DeleteStreamingDistributionOutput
+	*types.DeleteStreamingDistributionOutput
 
 	response *aws.Response
 }

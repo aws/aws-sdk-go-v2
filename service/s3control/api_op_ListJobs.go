@@ -6,131 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/s3control/types"
 )
-
-type ListJobsInput struct {
-	_ struct{} `type:"structure"`
-
-	// AccountId is a required field
-	AccountId *string `location:"header" locationName:"x-amz-account-id" type:"string" required:"true"`
-
-	// The List Jobs request returns jobs that match the statuses listed in this
-	// element.
-	JobStatuses []JobStatus `location:"querystring" locationName:"jobStatuses" type:"list"`
-
-	// The maximum number of jobs that Amazon S3 will include in the List Jobs response.
-	// If there are more jobs than this number, the response will include a pagination
-	// token in the NextToken field to enable you to retrieve the next page of results.
-	MaxResults *int64 `location:"querystring" locationName:"maxResults" min:"1" type:"integer"`
-
-	// A pagination token to request the next page of results. Use the token that
-	// Amazon S3 returned in the NextToken element of the ListJobsResult from the
-	// previous List Jobs request.
-	NextToken *string `location:"querystring" locationName:"nextToken" min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s ListJobsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListJobsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListJobsInput"}
-
-	if s.AccountId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("AccountId"))
-	}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-	if s.NextToken != nil && len(*s.NextToken) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListJobsInput) MarshalFields(e protocol.FieldEncoder) error {
-
-	if s.AccountId != nil {
-		v := *s.AccountId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "x-amz-account-id", protocol.StringValue(v), metadata)
-	}
-	if s.JobStatuses != nil {
-		v := s.JobStatuses
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.QueryTarget, "jobStatuses", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddValue(protocol.StringValue(v1))
-		}
-		ls0.End()
-
-	}
-	if s.MaxResults != nil {
-		v := *s.MaxResults
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "maxResults", protocol.Int64Value(v), metadata)
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "nextToken", protocol.StringValue(v), metadata)
-	}
-	return nil
-}
-
-type ListJobsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The list of current jobs and jobs that have ended within the last 30 days.
-	Jobs []JobListDescriptor `type:"list"`
-
-	// If the List Jobs request produced more than the maximum number of results,
-	// you can pass this value into a subsequent List Jobs request in order to retrieve
-	// the next page of results.
-	NextToken *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s ListJobsOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListJobsOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.Jobs != nil {
-		v := s.Jobs
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "Jobs", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "NextToken", protocol.StringValue(v), metadata)
-	}
-	return nil
-}
 
 const opListJobs = "ListJobs"
 
@@ -148,7 +25,7 @@ const opListJobs = "ListJobs"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/ListJobs
-func (c *Client) ListJobsRequest(input *ListJobsInput) ListJobsRequest {
+func (c *Client) ListJobsRequest(input *types.ListJobsInput) ListJobsRequest {
 	op := &aws.Operation{
 		Name:       opListJobs,
 		HTTPMethod: "GET",
@@ -162,10 +39,10 @@ func (c *Client) ListJobsRequest(input *ListJobsInput) ListJobsRequest {
 	}
 
 	if input == nil {
-		input = &ListJobsInput{}
+		input = &types.ListJobsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListJobsOutput{})
+	req := c.newRequest(op, input, &types.ListJobsOutput{})
 	req.Handlers.Build.PushBackNamed(buildPrefixHostHandler("AccountID", aws.StringValue(input.AccountId)))
 	req.Handlers.Build.PushBackNamed(buildRemoveHeaderHandler("X-Amz-Account-Id"))
 	return ListJobsRequest{Request: req, Input: input, Copy: c.ListJobsRequest}
@@ -175,8 +52,8 @@ func (c *Client) ListJobsRequest(input *ListJobsInput) ListJobsRequest {
 // ListJobs API operation.
 type ListJobsRequest struct {
 	*aws.Request
-	Input *ListJobsInput
-	Copy  func(*ListJobsInput) ListJobsRequest
+	Input *types.ListJobsInput
+	Copy  func(*types.ListJobsInput) ListJobsRequest
 }
 
 // Send marshals and sends the ListJobs API request.
@@ -188,7 +65,7 @@ func (r ListJobsRequest) Send(ctx context.Context) (*ListJobsResponse, error) {
 	}
 
 	resp := &ListJobsResponse{
-		ListJobsOutput: r.Request.Data.(*ListJobsOutput),
+		ListJobsOutput: r.Request.Data.(*types.ListJobsOutput),
 		response:       &aws.Response{Request: r.Request},
 	}
 
@@ -218,7 +95,7 @@ func NewListJobsPaginator(req ListJobsRequest) ListJobsPaginator {
 	return ListJobsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListJobsInput
+				var inCpy *types.ListJobsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -238,14 +115,14 @@ type ListJobsPaginator struct {
 	aws.Pager
 }
 
-func (p *ListJobsPaginator) CurrentPage() *ListJobsOutput {
-	return p.Pager.CurrentPage().(*ListJobsOutput)
+func (p *ListJobsPaginator) CurrentPage() *types.ListJobsOutput {
+	return p.Pager.CurrentPage().(*types.ListJobsOutput)
 }
 
 // ListJobsResponse is the response type for the
 // ListJobs API operation.
 type ListJobsResponse struct {
-	*ListJobsOutput
+	*types.ListJobsOutput
 
 	response *aws.Response
 }

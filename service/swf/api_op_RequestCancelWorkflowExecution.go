@@ -6,65 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
+	"github.com/aws/aws-sdk-go-v2/service/swf/types"
 )
-
-type RequestCancelWorkflowExecutionInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the domain containing the workflow execution to cancel.
-	//
-	// Domain is a required field
-	Domain *string `locationName:"domain" min:"1" type:"string" required:"true"`
-
-	// The runId of the workflow execution to cancel.
-	RunId *string `locationName:"runId" type:"string"`
-
-	// The workflowId of the workflow execution to cancel.
-	//
-	// WorkflowId is a required field
-	WorkflowId *string `locationName:"workflowId" min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s RequestCancelWorkflowExecutionInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *RequestCancelWorkflowExecutionInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "RequestCancelWorkflowExecutionInput"}
-
-	if s.Domain == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Domain"))
-	}
-	if s.Domain != nil && len(*s.Domain) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Domain", 1))
-	}
-
-	if s.WorkflowId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("WorkflowId"))
-	}
-	if s.WorkflowId != nil && len(*s.WorkflowId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("WorkflowId", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type RequestCancelWorkflowExecutionOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s RequestCancelWorkflowExecutionOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opRequestCancelWorkflowExecution = "RequestCancelWorkflowExecution"
 
@@ -109,7 +54,7 @@ const opRequestCancelWorkflowExecution = "RequestCancelWorkflowExecution"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) RequestCancelWorkflowExecutionRequest(input *RequestCancelWorkflowExecutionInput) RequestCancelWorkflowExecutionRequest {
+func (c *Client) RequestCancelWorkflowExecutionRequest(input *types.RequestCancelWorkflowExecutionInput) RequestCancelWorkflowExecutionRequest {
 	op := &aws.Operation{
 		Name:       opRequestCancelWorkflowExecution,
 		HTTPMethod: "POST",
@@ -117,10 +62,10 @@ func (c *Client) RequestCancelWorkflowExecutionRequest(input *RequestCancelWorkf
 	}
 
 	if input == nil {
-		input = &RequestCancelWorkflowExecutionInput{}
+		input = &types.RequestCancelWorkflowExecutionInput{}
 	}
 
-	req := c.newRequest(op, input, &RequestCancelWorkflowExecutionOutput{})
+	req := c.newRequest(op, input, &types.RequestCancelWorkflowExecutionOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return RequestCancelWorkflowExecutionRequest{Request: req, Input: input, Copy: c.RequestCancelWorkflowExecutionRequest}
@@ -130,8 +75,8 @@ func (c *Client) RequestCancelWorkflowExecutionRequest(input *RequestCancelWorkf
 // RequestCancelWorkflowExecution API operation.
 type RequestCancelWorkflowExecutionRequest struct {
 	*aws.Request
-	Input *RequestCancelWorkflowExecutionInput
-	Copy  func(*RequestCancelWorkflowExecutionInput) RequestCancelWorkflowExecutionRequest
+	Input *types.RequestCancelWorkflowExecutionInput
+	Copy  func(*types.RequestCancelWorkflowExecutionInput) RequestCancelWorkflowExecutionRequest
 }
 
 // Send marshals and sends the RequestCancelWorkflowExecution API request.
@@ -143,7 +88,7 @@ func (r RequestCancelWorkflowExecutionRequest) Send(ctx context.Context) (*Reque
 	}
 
 	resp := &RequestCancelWorkflowExecutionResponse{
-		RequestCancelWorkflowExecutionOutput: r.Request.Data.(*RequestCancelWorkflowExecutionOutput),
+		RequestCancelWorkflowExecutionOutput: r.Request.Data.(*types.RequestCancelWorkflowExecutionOutput),
 		response:                             &aws.Response{Request: r.Request},
 	}
 
@@ -153,7 +98,7 @@ func (r RequestCancelWorkflowExecutionRequest) Send(ctx context.Context) (*Reque
 // RequestCancelWorkflowExecutionResponse is the response type for the
 // RequestCancelWorkflowExecution API operation.
 type RequestCancelWorkflowExecutionResponse struct {
-	*RequestCancelWorkflowExecutionOutput
+	*types.RequestCancelWorkflowExecutionOutput
 
 	response *aws.Response
 }

@@ -6,73 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/gamelift/types"
 )
-
-// Represents the input for a request action.
-type ListFleetsInput struct {
-	_ struct{} `type:"structure"`
-
-	// Unique identifier for a build to return fleets for. Use this parameter to
-	// return only fleets using the specified build. To retrieve all fleets, leave
-	// this parameter empty.
-	BuildId *string `type:"string"`
-
-	// Maximum number of results to return. Use this parameter with NextToken to
-	// get results as a set of sequential pages.
-	Limit *int64 `min:"1" type:"integer"`
-
-	// Token that indicates the start of the next sequential page of results. Use
-	// the token that is returned with a previous call to this action. To start
-	// at the beginning of the result set, do not specify a value.
-	NextToken *string `min:"1" type:"string"`
-
-	// Unique identifier for a Realtime script to return fleets for. Use this parameter
-	// to return only fleets using the specified script. To retrieve all fleets,
-	// leave this parameter empty.
-	ScriptId *string `type:"string"`
-}
-
-// String returns the string representation
-func (s ListFleetsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListFleetsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListFleetsInput"}
-	if s.Limit != nil && *s.Limit < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("Limit", 1))
-	}
-	if s.NextToken != nil && len(*s.NextToken) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Represents the returned data in response to a request action.
-type ListFleetsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Set of fleet IDs matching the list request. You can retrieve additional information
-	// about all returned fleets by passing this result set to a call to DescribeFleetAttributes,
-	// DescribeFleetCapacity, or DescribeFleetUtilization.
-	FleetIds []string `min:"1" type:"list"`
-
-	// Token that indicates where to resume retrieving results on the next call
-	// to this action. If no token is returned, these results represent the end
-	// of the list.
-	NextToken *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s ListFleetsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListFleets = "ListFleets"
 
@@ -115,7 +50,7 @@ const opListFleets = "ListFleets"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/ListFleets
-func (c *Client) ListFleetsRequest(input *ListFleetsInput) ListFleetsRequest {
+func (c *Client) ListFleetsRequest(input *types.ListFleetsInput) ListFleetsRequest {
 	op := &aws.Operation{
 		Name:       opListFleets,
 		HTTPMethod: "POST",
@@ -123,10 +58,10 @@ func (c *Client) ListFleetsRequest(input *ListFleetsInput) ListFleetsRequest {
 	}
 
 	if input == nil {
-		input = &ListFleetsInput{}
+		input = &types.ListFleetsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListFleetsOutput{})
+	req := c.newRequest(op, input, &types.ListFleetsOutput{})
 	return ListFleetsRequest{Request: req, Input: input, Copy: c.ListFleetsRequest}
 }
 
@@ -134,8 +69,8 @@ func (c *Client) ListFleetsRequest(input *ListFleetsInput) ListFleetsRequest {
 // ListFleets API operation.
 type ListFleetsRequest struct {
 	*aws.Request
-	Input *ListFleetsInput
-	Copy  func(*ListFleetsInput) ListFleetsRequest
+	Input *types.ListFleetsInput
+	Copy  func(*types.ListFleetsInput) ListFleetsRequest
 }
 
 // Send marshals and sends the ListFleets API request.
@@ -147,7 +82,7 @@ func (r ListFleetsRequest) Send(ctx context.Context) (*ListFleetsResponse, error
 	}
 
 	resp := &ListFleetsResponse{
-		ListFleetsOutput: r.Request.Data.(*ListFleetsOutput),
+		ListFleetsOutput: r.Request.Data.(*types.ListFleetsOutput),
 		response:         &aws.Response{Request: r.Request},
 	}
 
@@ -157,7 +92,7 @@ func (r ListFleetsRequest) Send(ctx context.Context) (*ListFleetsResponse, error
 // ListFleetsResponse is the response type for the
 // ListFleets API operation.
 type ListFleetsResponse struct {
-	*ListFleetsOutput
+	*types.ListFleetsOutput
 
 	response *aws.Response
 }

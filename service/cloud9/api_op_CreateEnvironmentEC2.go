@@ -6,91 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/cloud9/types"
 )
-
-type CreateEnvironmentEC2Input struct {
-	_ struct{} `type:"structure"`
-
-	// The number of minutes until the running instance is shut down after the environment
-	// has last been used.
-	AutomaticStopTimeMinutes *int64 `locationName:"automaticStopTimeMinutes" type:"integer"`
-
-	// A unique, case-sensitive string that helps AWS Cloud9 to ensure this operation
-	// completes no more than one time.
-	//
-	// For more information, see Client Tokens (http://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html)
-	// in the Amazon EC2 API Reference.
-	ClientRequestToken *string `locationName:"clientRequestToken" type:"string"`
-
-	// The description of the environment to create.
-	Description *string `locationName:"description" type:"string" sensitive:"true"`
-
-	// The type of instance to connect to the environment (for example, t2.micro).
-	//
-	// InstanceType is a required field
-	InstanceType *string `locationName:"instanceType" min:"5" type:"string" required:"true"`
-
-	// The name of the environment to create.
-	//
-	// This name is visible to other AWS IAM users in the same AWS account.
-	//
-	// Name is a required field
-	Name *string `locationName:"name" min:"1" type:"string" required:"true"`
-
-	// The Amazon Resource Name (ARN) of the environment owner. This ARN can be
-	// the ARN of any AWS IAM principal. If this value is not specified, the ARN
-	// defaults to this environment's creator.
-	OwnerArn *string `locationName:"ownerArn" type:"string"`
-
-	// The ID of the subnet in Amazon VPC that AWS Cloud9 will use to communicate
-	// with the Amazon EC2 instance.
-	SubnetId *string `locationName:"subnetId" min:"5" type:"string"`
-}
-
-// String returns the string representation
-func (s CreateEnvironmentEC2Input) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateEnvironmentEC2Input) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateEnvironmentEC2Input"}
-
-	if s.InstanceType == nil {
-		invalidParams.Add(aws.NewErrParamRequired("InstanceType"))
-	}
-	if s.InstanceType != nil && len(*s.InstanceType) < 5 {
-		invalidParams.Add(aws.NewErrParamMinLen("InstanceType", 5))
-	}
-
-	if s.Name == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Name"))
-	}
-	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
-	}
-	if s.SubnetId != nil && len(*s.SubnetId) < 5 {
-		invalidParams.Add(aws.NewErrParamMinLen("SubnetId", 5))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type CreateEnvironmentEC2Output struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the environment that was created.
-	EnvironmentId *string `locationName:"environmentId" type:"string"`
-}
-
-// String returns the string representation
-func (s CreateEnvironmentEC2Output) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCreateEnvironmentEC2 = "CreateEnvironmentEC2"
 
@@ -109,7 +26,7 @@ const opCreateEnvironmentEC2 = "CreateEnvironmentEC2"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloud9-2017-09-23/CreateEnvironmentEC2
-func (c *Client) CreateEnvironmentEC2Request(input *CreateEnvironmentEC2Input) CreateEnvironmentEC2Request {
+func (c *Client) CreateEnvironmentEC2Request(input *types.CreateEnvironmentEC2Input) CreateEnvironmentEC2Request {
 	op := &aws.Operation{
 		Name:       opCreateEnvironmentEC2,
 		HTTPMethod: "POST",
@@ -117,10 +34,10 @@ func (c *Client) CreateEnvironmentEC2Request(input *CreateEnvironmentEC2Input) C
 	}
 
 	if input == nil {
-		input = &CreateEnvironmentEC2Input{}
+		input = &types.CreateEnvironmentEC2Input{}
 	}
 
-	req := c.newRequest(op, input, &CreateEnvironmentEC2Output{})
+	req := c.newRequest(op, input, &types.CreateEnvironmentEC2Output{})
 	return CreateEnvironmentEC2Request{Request: req, Input: input, Copy: c.CreateEnvironmentEC2Request}
 }
 
@@ -128,8 +45,8 @@ func (c *Client) CreateEnvironmentEC2Request(input *CreateEnvironmentEC2Input) C
 // CreateEnvironmentEC2 API operation.
 type CreateEnvironmentEC2Request struct {
 	*aws.Request
-	Input *CreateEnvironmentEC2Input
-	Copy  func(*CreateEnvironmentEC2Input) CreateEnvironmentEC2Request
+	Input *types.CreateEnvironmentEC2Input
+	Copy  func(*types.CreateEnvironmentEC2Input) CreateEnvironmentEC2Request
 }
 
 // Send marshals and sends the CreateEnvironmentEC2 API request.
@@ -141,7 +58,7 @@ func (r CreateEnvironmentEC2Request) Send(ctx context.Context) (*CreateEnvironme
 	}
 
 	resp := &CreateEnvironmentEC2Response{
-		CreateEnvironmentEC2Output: r.Request.Data.(*CreateEnvironmentEC2Output),
+		CreateEnvironmentEC2Output: r.Request.Data.(*types.CreateEnvironmentEC2Output),
 		response:                   &aws.Response{Request: r.Request},
 	}
 
@@ -151,7 +68,7 @@ func (r CreateEnvironmentEC2Request) Send(ctx context.Context) (*CreateEnvironme
 // CreateEnvironmentEC2Response is the response type for the
 // CreateEnvironmentEC2 API operation.
 type CreateEnvironmentEC2Response struct {
-	*CreateEnvironmentEC2Output
+	*types.CreateEnvironmentEC2Output
 
 	response *aws.Response
 }

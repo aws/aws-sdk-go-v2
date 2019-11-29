@@ -6,47 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
+	"github.com/aws/aws-sdk-go-v2/service/opsworks/types"
 )
-
-type DisassociateElasticIpInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Elastic IP address.
-	//
-	// ElasticIp is a required field
-	ElasticIp *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DisassociateElasticIpInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DisassociateElasticIpInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DisassociateElasticIpInput"}
-
-	if s.ElasticIp == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ElasticIp"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DisassociateElasticIpOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DisassociateElasticIpOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDisassociateElasticIp = "DisassociateElasticIp"
 
@@ -70,7 +33,7 @@ const opDisassociateElasticIp = "DisassociateElasticIp"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DisassociateElasticIp
-func (c *Client) DisassociateElasticIpRequest(input *DisassociateElasticIpInput) DisassociateElasticIpRequest {
+func (c *Client) DisassociateElasticIpRequest(input *types.DisassociateElasticIpInput) DisassociateElasticIpRequest {
 	op := &aws.Operation{
 		Name:       opDisassociateElasticIp,
 		HTTPMethod: "POST",
@@ -78,10 +41,10 @@ func (c *Client) DisassociateElasticIpRequest(input *DisassociateElasticIpInput)
 	}
 
 	if input == nil {
-		input = &DisassociateElasticIpInput{}
+		input = &types.DisassociateElasticIpInput{}
 	}
 
-	req := c.newRequest(op, input, &DisassociateElasticIpOutput{})
+	req := c.newRequest(op, input, &types.DisassociateElasticIpOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return DisassociateElasticIpRequest{Request: req, Input: input, Copy: c.DisassociateElasticIpRequest}
@@ -91,8 +54,8 @@ func (c *Client) DisassociateElasticIpRequest(input *DisassociateElasticIpInput)
 // DisassociateElasticIp API operation.
 type DisassociateElasticIpRequest struct {
 	*aws.Request
-	Input *DisassociateElasticIpInput
-	Copy  func(*DisassociateElasticIpInput) DisassociateElasticIpRequest
+	Input *types.DisassociateElasticIpInput
+	Copy  func(*types.DisassociateElasticIpInput) DisassociateElasticIpRequest
 }
 
 // Send marshals and sends the DisassociateElasticIp API request.
@@ -104,7 +67,7 @@ func (r DisassociateElasticIpRequest) Send(ctx context.Context) (*DisassociateEl
 	}
 
 	resp := &DisassociateElasticIpResponse{
-		DisassociateElasticIpOutput: r.Request.Data.(*DisassociateElasticIpOutput),
+		DisassociateElasticIpOutput: r.Request.Data.(*types.DisassociateElasticIpOutput),
 		response:                    &aws.Response{Request: r.Request},
 	}
 
@@ -114,7 +77,7 @@ func (r DisassociateElasticIpRequest) Send(ctx context.Context) (*DisassociateEl
 // DisassociateElasticIpResponse is the response type for the
 // DisassociateElasticIp API operation.
 type DisassociateElasticIpResponse struct {
-	*DisassociateElasticIpOutput
+	*types.DisassociateElasticIpOutput
 
 	response *aws.Response
 }

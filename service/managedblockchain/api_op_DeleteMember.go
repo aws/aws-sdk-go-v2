@@ -6,85 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/managedblockchain/types"
 )
-
-type DeleteMemberInput struct {
-	_ struct{} `type:"structure"`
-
-	// The unique identifier of the member to remove.
-	//
-	// MemberId is a required field
-	MemberId *string `location:"uri" locationName:"memberId" min:"1" type:"string" required:"true"`
-
-	// The unique identifier of the network from which the member is removed.
-	//
-	// NetworkId is a required field
-	NetworkId *string `location:"uri" locationName:"networkId" min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteMemberInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteMemberInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteMemberInput"}
-
-	if s.MemberId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("MemberId"))
-	}
-	if s.MemberId != nil && len(*s.MemberId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("MemberId", 1))
-	}
-
-	if s.NetworkId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("NetworkId"))
-	}
-	if s.NetworkId != nil && len(*s.NetworkId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("NetworkId", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteMemberInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.MemberId != nil {
-		v := *s.MemberId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "memberId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.NetworkId != nil {
-		v := *s.NetworkId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "networkId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type DeleteMemberOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteMemberOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteMemberOutput) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
 
 const opDeleteMember = "DeleteMember"
 
@@ -107,7 +30,7 @@ const opDeleteMember = "DeleteMember"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/managedblockchain-2018-09-24/DeleteMember
-func (c *Client) DeleteMemberRequest(input *DeleteMemberInput) DeleteMemberRequest {
+func (c *Client) DeleteMemberRequest(input *types.DeleteMemberInput) DeleteMemberRequest {
 	op := &aws.Operation{
 		Name:       opDeleteMember,
 		HTTPMethod: "DELETE",
@@ -115,10 +38,10 @@ func (c *Client) DeleteMemberRequest(input *DeleteMemberInput) DeleteMemberReque
 	}
 
 	if input == nil {
-		input = &DeleteMemberInput{}
+		input = &types.DeleteMemberInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteMemberOutput{})
+	req := c.newRequest(op, input, &types.DeleteMemberOutput{})
 	return DeleteMemberRequest{Request: req, Input: input, Copy: c.DeleteMemberRequest}
 }
 
@@ -126,8 +49,8 @@ func (c *Client) DeleteMemberRequest(input *DeleteMemberInput) DeleteMemberReque
 // DeleteMember API operation.
 type DeleteMemberRequest struct {
 	*aws.Request
-	Input *DeleteMemberInput
-	Copy  func(*DeleteMemberInput) DeleteMemberRequest
+	Input *types.DeleteMemberInput
+	Copy  func(*types.DeleteMemberInput) DeleteMemberRequest
 }
 
 // Send marshals and sends the DeleteMember API request.
@@ -139,7 +62,7 @@ func (r DeleteMemberRequest) Send(ctx context.Context) (*DeleteMemberResponse, e
 	}
 
 	resp := &DeleteMemberResponse{
-		DeleteMemberOutput: r.Request.Data.(*DeleteMemberOutput),
+		DeleteMemberOutput: r.Request.Data.(*types.DeleteMemberOutput),
 		response:           &aws.Response{Request: r.Request},
 	}
 
@@ -149,7 +72,7 @@ func (r DeleteMemberRequest) Send(ctx context.Context) (*DeleteMemberResponse, e
 // DeleteMemberResponse is the response type for the
 // DeleteMember API operation.
 type DeleteMemberResponse struct {
-	*DeleteMemberOutput
+	*types.DeleteMemberOutput
 
 	response *aws.Response
 }

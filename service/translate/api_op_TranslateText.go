@@ -6,102 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/translate/types"
 )
-
-type TranslateTextInput struct {
-	_ struct{} `type:"structure"`
-
-	// The language code for the language of the source text. The language must
-	// be a language supported by Amazon Translate.
-	//
-	// To have Amazon Translate determine the source language of your text, you
-	// can specify auto in the SourceLanguageCode field. If you specify auto, Amazon
-	// Translate will call Amazon Comprehend to determine the source language.
-	//
-	// SourceLanguageCode is a required field
-	SourceLanguageCode *string `min:"2" type:"string" required:"true"`
-
-	// The language code requested for the language of the target text. The language
-	// must be a language supported by Amazon Translate.
-	//
-	// TargetLanguageCode is a required field
-	TargetLanguageCode *string `min:"2" type:"string" required:"true"`
-
-	// The TerminologyNames list that is taken as input to the TranslateText request.
-	// This has a minimum length of 0 and a maximum length of 1.
-	TerminologyNames []string `type:"list"`
-
-	// The text to translate. The text string can be a maximum of 5,000 bytes long.
-	// Depending on your character set, this may be fewer than 5,000 characters.
-	//
-	// Text is a required field
-	Text *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s TranslateTextInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *TranslateTextInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "TranslateTextInput"}
-
-	if s.SourceLanguageCode == nil {
-		invalidParams.Add(aws.NewErrParamRequired("SourceLanguageCode"))
-	}
-	if s.SourceLanguageCode != nil && len(*s.SourceLanguageCode) < 2 {
-		invalidParams.Add(aws.NewErrParamMinLen("SourceLanguageCode", 2))
-	}
-
-	if s.TargetLanguageCode == nil {
-		invalidParams.Add(aws.NewErrParamRequired("TargetLanguageCode"))
-	}
-	if s.TargetLanguageCode != nil && len(*s.TargetLanguageCode) < 2 {
-		invalidParams.Add(aws.NewErrParamMinLen("TargetLanguageCode", 2))
-	}
-
-	if s.Text == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Text"))
-	}
-	if s.Text != nil && len(*s.Text) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Text", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type TranslateTextOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The names of the custom terminologies applied to the input text by Amazon
-	// Translate for the translated text response.
-	AppliedTerminologies []AppliedTerminology `type:"list"`
-
-	// The language code for the language of the source text.
-	//
-	// SourceLanguageCode is a required field
-	SourceLanguageCode *string `min:"2" type:"string" required:"true"`
-
-	// The language code for the language of the target text.
-	//
-	// TargetLanguageCode is a required field
-	TargetLanguageCode *string `min:"2" type:"string" required:"true"`
-
-	// The the translated text. The maximum length of this text is 5kb.
-	//
-	// TranslatedText is a required field
-	TranslatedText *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s TranslateTextOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opTranslateText = "TranslateText"
 
@@ -167,7 +73,7 @@ const opTranslateText = "TranslateText"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/translate-2017-07-01/TranslateText
-func (c *Client) TranslateTextRequest(input *TranslateTextInput) TranslateTextRequest {
+func (c *Client) TranslateTextRequest(input *types.TranslateTextInput) TranslateTextRequest {
 	op := &aws.Operation{
 		Name:       opTranslateText,
 		HTTPMethod: "POST",
@@ -175,10 +81,10 @@ func (c *Client) TranslateTextRequest(input *TranslateTextInput) TranslateTextRe
 	}
 
 	if input == nil {
-		input = &TranslateTextInput{}
+		input = &types.TranslateTextInput{}
 	}
 
-	req := c.newRequest(op, input, &TranslateTextOutput{})
+	req := c.newRequest(op, input, &types.TranslateTextOutput{})
 	return TranslateTextRequest{Request: req, Input: input, Copy: c.TranslateTextRequest}
 }
 
@@ -186,8 +92,8 @@ func (c *Client) TranslateTextRequest(input *TranslateTextInput) TranslateTextRe
 // TranslateText API operation.
 type TranslateTextRequest struct {
 	*aws.Request
-	Input *TranslateTextInput
-	Copy  func(*TranslateTextInput) TranslateTextRequest
+	Input *types.TranslateTextInput
+	Copy  func(*types.TranslateTextInput) TranslateTextRequest
 }
 
 // Send marshals and sends the TranslateText API request.
@@ -199,7 +105,7 @@ func (r TranslateTextRequest) Send(ctx context.Context) (*TranslateTextResponse,
 	}
 
 	resp := &TranslateTextResponse{
-		TranslateTextOutput: r.Request.Data.(*TranslateTextOutput),
+		TranslateTextOutput: r.Request.Data.(*types.TranslateTextOutput),
 		response:            &aws.Response{Request: r.Request},
 	}
 
@@ -209,7 +115,7 @@ func (r TranslateTextRequest) Send(ctx context.Context) (*TranslateTextResponse,
 // TranslateTextResponse is the response type for the
 // TranslateText API operation.
 type TranslateTextResponse struct {
-	*TranslateTextOutput
+	*types.TranslateTextOutput
 
 	response *aws.Response
 }

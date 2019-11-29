@@ -4,183 +4,10 @@ package ssm
 
 import (
 	"context"
-	"fmt"
-	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ssm/types"
 )
-
-type UpdatePatchBaselineInput struct {
-	_ struct{} `type:"structure"`
-
-	// A set of rules used to include patches in the baseline.
-	ApprovalRules *PatchRuleGroup `type:"structure"`
-
-	// A list of explicitly approved patches for the baseline.
-	//
-	// For information about accepted formats for lists of approved patches and
-	// rejected patches, see Package Name Formats for Approved and Rejected Patch
-	// Lists (https://docs.aws.amazon.com/systems-manager/latest/userguide/patch-manager-approved-rejected-package-name-formats.html)
-	// in the AWS Systems Manager User Guide.
-	ApprovedPatches []string `type:"list"`
-
-	// Assigns a new compliance severity level to an existing patch baseline.
-	ApprovedPatchesComplianceLevel PatchComplianceLevel `type:"string" enum:"true"`
-
-	// Indicates whether the list of approved patches includes non-security updates
-	// that should be applied to the instances. The default value is 'false'. Applies
-	// to Linux instances only.
-	ApprovedPatchesEnableNonSecurity *bool `type:"boolean"`
-
-	// The ID of the patch baseline to update.
-	//
-	// BaselineId is a required field
-	BaselineId *string `min:"20" type:"string" required:"true"`
-
-	// A description of the patch baseline.
-	Description *string `min:"1" type:"string"`
-
-	// A set of global filters used to include patches in the baseline.
-	GlobalFilters *PatchFilterGroup `type:"structure"`
-
-	// The name of the patch baseline.
-	Name *string `min:"3" type:"string"`
-
-	// A list of explicitly rejected patches for the baseline.
-	//
-	// For information about accepted formats for lists of approved patches and
-	// rejected patches, see Package Name Formats for Approved and Rejected Patch
-	// Lists (https://docs.aws.amazon.com/systems-manager/latest/userguide/patch-manager-approved-rejected-package-name-formats.html)
-	// in the AWS Systems Manager User Guide.
-	RejectedPatches []string `type:"list"`
-
-	// The action for Patch Manager to take on patches included in the RejectedPackages
-	// list.
-	//
-	//    * ALLOW_AS_DEPENDENCY: A package in the Rejected patches list is installed
-	//    only if it is a dependency of another package. It is considered compliant
-	//    with the patch baseline, and its status is reported as InstalledOther.
-	//    This is the default action if no option is specified.
-	//
-	//    * BLOCK: Packages in the RejectedPatches list, and packages that include
-	//    them as dependencies, are not installed under any circumstances. If a
-	//    package was installed before it was added to the Rejected patches list,
-	//    it is considered non-compliant with the patch baseline, and its status
-	//    is reported as InstalledRejected.
-	RejectedPatchesAction PatchAction `type:"string" enum:"true"`
-
-	// If True, then all fields that are required by the CreatePatchBaseline action
-	// are also required for this API request. Optional fields that are not specified
-	// are set to null.
-	Replace *bool `type:"boolean"`
-
-	// Information about the patches to use to update the instances, including target
-	// operating systems and source repositories. Applies to Linux instances only.
-	Sources []PatchSource `type:"list"`
-}
-
-// String returns the string representation
-func (s UpdatePatchBaselineInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdatePatchBaselineInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdatePatchBaselineInput"}
-
-	if s.BaselineId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("BaselineId"))
-	}
-	if s.BaselineId != nil && len(*s.BaselineId) < 20 {
-		invalidParams.Add(aws.NewErrParamMinLen("BaselineId", 20))
-	}
-	if s.Description != nil && len(*s.Description) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Description", 1))
-	}
-	if s.Name != nil && len(*s.Name) < 3 {
-		invalidParams.Add(aws.NewErrParamMinLen("Name", 3))
-	}
-	if s.ApprovalRules != nil {
-		if err := s.ApprovalRules.Validate(); err != nil {
-			invalidParams.AddNested("ApprovalRules", err.(aws.ErrInvalidParams))
-		}
-	}
-	if s.GlobalFilters != nil {
-		if err := s.GlobalFilters.Validate(); err != nil {
-			invalidParams.AddNested("GlobalFilters", err.(aws.ErrInvalidParams))
-		}
-	}
-	if s.Sources != nil {
-		for i, v := range s.Sources {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Sources", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type UpdatePatchBaselineOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A set of rules used to include patches in the baseline.
-	ApprovalRules *PatchRuleGroup `type:"structure"`
-
-	// A list of explicitly approved patches for the baseline.
-	ApprovedPatches []string `type:"list"`
-
-	// The compliance severity level assigned to the patch baseline after the update
-	// completed.
-	ApprovedPatchesComplianceLevel PatchComplianceLevel `type:"string" enum:"true"`
-
-	// Indicates whether the list of approved patches includes non-security updates
-	// that should be applied to the instances. The default value is 'false'. Applies
-	// to Linux instances only.
-	ApprovedPatchesEnableNonSecurity *bool `type:"boolean"`
-
-	// The ID of the deleted patch baseline.
-	BaselineId *string `min:"20" type:"string"`
-
-	// The date when the patch baseline was created.
-	CreatedDate *time.Time `type:"timestamp"`
-
-	// A description of the Patch Baseline.
-	Description *string `min:"1" type:"string"`
-
-	// A set of global filters used to exclude patches from the baseline.
-	GlobalFilters *PatchFilterGroup `type:"structure"`
-
-	// The date when the patch baseline was last modified.
-	ModifiedDate *time.Time `type:"timestamp"`
-
-	// The name of the patch baseline.
-	Name *string `min:"3" type:"string"`
-
-	// The operating system rule used by the updated patch baseline.
-	OperatingSystem OperatingSystem `type:"string" enum:"true"`
-
-	// A list of explicitly rejected patches for the baseline.
-	RejectedPatches []string `type:"list"`
-
-	// The action specified to take on patches included in the RejectedPatches list.
-	// A patch can be allowed only if it is a dependency of another package, or
-	// blocked entirely along with packages that include it as a dependency.
-	RejectedPatchesAction PatchAction `type:"string" enum:"true"`
-
-	// Information about the patches to use to update the instances, including target
-	// operating systems and source repositories. Applies to Linux instances only.
-	Sources []PatchSource `type:"list"`
-}
-
-// String returns the string representation
-func (s UpdatePatchBaselineOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opUpdatePatchBaseline = "UpdatePatchBaseline"
 
@@ -201,7 +28,7 @@ const opUpdatePatchBaseline = "UpdatePatchBaseline"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/UpdatePatchBaseline
-func (c *Client) UpdatePatchBaselineRequest(input *UpdatePatchBaselineInput) UpdatePatchBaselineRequest {
+func (c *Client) UpdatePatchBaselineRequest(input *types.UpdatePatchBaselineInput) UpdatePatchBaselineRequest {
 	op := &aws.Operation{
 		Name:       opUpdatePatchBaseline,
 		HTTPMethod: "POST",
@@ -209,10 +36,10 @@ func (c *Client) UpdatePatchBaselineRequest(input *UpdatePatchBaselineInput) Upd
 	}
 
 	if input == nil {
-		input = &UpdatePatchBaselineInput{}
+		input = &types.UpdatePatchBaselineInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdatePatchBaselineOutput{})
+	req := c.newRequest(op, input, &types.UpdatePatchBaselineOutput{})
 	return UpdatePatchBaselineRequest{Request: req, Input: input, Copy: c.UpdatePatchBaselineRequest}
 }
 
@@ -220,8 +47,8 @@ func (c *Client) UpdatePatchBaselineRequest(input *UpdatePatchBaselineInput) Upd
 // UpdatePatchBaseline API operation.
 type UpdatePatchBaselineRequest struct {
 	*aws.Request
-	Input *UpdatePatchBaselineInput
-	Copy  func(*UpdatePatchBaselineInput) UpdatePatchBaselineRequest
+	Input *types.UpdatePatchBaselineInput
+	Copy  func(*types.UpdatePatchBaselineInput) UpdatePatchBaselineRequest
 }
 
 // Send marshals and sends the UpdatePatchBaseline API request.
@@ -233,7 +60,7 @@ func (r UpdatePatchBaselineRequest) Send(ctx context.Context) (*UpdatePatchBasel
 	}
 
 	resp := &UpdatePatchBaselineResponse{
-		UpdatePatchBaselineOutput: r.Request.Data.(*UpdatePatchBaselineOutput),
+		UpdatePatchBaselineOutput: r.Request.Data.(*types.UpdatePatchBaselineOutput),
 		response:                  &aws.Response{Request: r.Request},
 	}
 
@@ -243,7 +70,7 @@ func (r UpdatePatchBaselineRequest) Send(ctx context.Context) (*UpdatePatchBasel
 // UpdatePatchBaselineResponse is the response type for the
 // UpdatePatchBaseline API operation.
 type UpdatePatchBaselineResponse struct {
-	*UpdatePatchBaselineOutput
+	*types.UpdatePatchBaselineOutput
 
 	response *aws.Response
 }

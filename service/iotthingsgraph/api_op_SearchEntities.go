@@ -6,74 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/iotthingsgraph/types"
 )
-
-type SearchEntitiesInput struct {
-	_ struct{} `type:"structure"`
-
-	// The entity types for which to search.
-	//
-	// EntityTypes is a required field
-	EntityTypes []EntityType `locationName:"entityTypes" type:"list" required:"true"`
-
-	// Optional filter to apply to the search. Valid filters are NAME NAMESPACE,
-	// SEMANTIC_TYPE_PATH and REFERENCED_ENTITY_ID. REFERENCED_ENTITY_ID filters
-	// on entities that are used by the entity in the result set. For example, you
-	// can filter on the ID of a property that is used in a state.
-	//
-	// Multiple filters function as OR criteria in the query. Multiple values passed
-	// inside the filter function as AND criteria.
-	Filters []EntityFilter `locationName:"filters" type:"list"`
-
-	// The maximum number of results to return in the response.
-	MaxResults *int64 `locationName:"maxResults" min:"1" type:"integer"`
-
-	// The version of the user's namespace. Defaults to the latest version of the
-	// user's namespace.
-	NamespaceVersion *int64 `locationName:"namespaceVersion" type:"long"`
-
-	// The string that specifies the next page of results. Use this when you're
-	// paginating results.
-	NextToken *string `locationName:"nextToken" type:"string"`
-}
-
-// String returns the string representation
-func (s SearchEntitiesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *SearchEntitiesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "SearchEntitiesInput"}
-
-	if s.EntityTypes == nil {
-		invalidParams.Add(aws.NewErrParamRequired("EntityTypes"))
-	}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type SearchEntitiesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// An array of descriptions for each entity returned in the search result.
-	Descriptions []EntityDescription `locationName:"descriptions" type:"list"`
-
-	// The string to specify as nextToken when you request the next page of results.
-	NextToken *string `locationName:"nextToken" type:"string"`
-}
-
-// String returns the string representation
-func (s SearchEntitiesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opSearchEntities = "SearchEntities"
 
@@ -91,7 +25,7 @@ const opSearchEntities = "SearchEntities"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iotthingsgraph-2018-09-06/SearchEntities
-func (c *Client) SearchEntitiesRequest(input *SearchEntitiesInput) SearchEntitiesRequest {
+func (c *Client) SearchEntitiesRequest(input *types.SearchEntitiesInput) SearchEntitiesRequest {
 	op := &aws.Operation{
 		Name:       opSearchEntities,
 		HTTPMethod: "POST",
@@ -105,10 +39,10 @@ func (c *Client) SearchEntitiesRequest(input *SearchEntitiesInput) SearchEntitie
 	}
 
 	if input == nil {
-		input = &SearchEntitiesInput{}
+		input = &types.SearchEntitiesInput{}
 	}
 
-	req := c.newRequest(op, input, &SearchEntitiesOutput{})
+	req := c.newRequest(op, input, &types.SearchEntitiesOutput{})
 	return SearchEntitiesRequest{Request: req, Input: input, Copy: c.SearchEntitiesRequest}
 }
 
@@ -116,8 +50,8 @@ func (c *Client) SearchEntitiesRequest(input *SearchEntitiesInput) SearchEntitie
 // SearchEntities API operation.
 type SearchEntitiesRequest struct {
 	*aws.Request
-	Input *SearchEntitiesInput
-	Copy  func(*SearchEntitiesInput) SearchEntitiesRequest
+	Input *types.SearchEntitiesInput
+	Copy  func(*types.SearchEntitiesInput) SearchEntitiesRequest
 }
 
 // Send marshals and sends the SearchEntities API request.
@@ -129,7 +63,7 @@ func (r SearchEntitiesRequest) Send(ctx context.Context) (*SearchEntitiesRespons
 	}
 
 	resp := &SearchEntitiesResponse{
-		SearchEntitiesOutput: r.Request.Data.(*SearchEntitiesOutput),
+		SearchEntitiesOutput: r.Request.Data.(*types.SearchEntitiesOutput),
 		response:             &aws.Response{Request: r.Request},
 	}
 
@@ -159,7 +93,7 @@ func NewSearchEntitiesPaginator(req SearchEntitiesRequest) SearchEntitiesPaginat
 	return SearchEntitiesPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *SearchEntitiesInput
+				var inCpy *types.SearchEntitiesInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -179,14 +113,14 @@ type SearchEntitiesPaginator struct {
 	aws.Pager
 }
 
-func (p *SearchEntitiesPaginator) CurrentPage() *SearchEntitiesOutput {
-	return p.Pager.CurrentPage().(*SearchEntitiesOutput)
+func (p *SearchEntitiesPaginator) CurrentPage() *types.SearchEntitiesOutput {
+	return p.Pager.CurrentPage().(*types.SearchEntitiesOutput)
 }
 
 // SearchEntitiesResponse is the response type for the
 // SearchEntities API operation.
 type SearchEntitiesResponse struct {
-	*SearchEntitiesOutput
+	*types.SearchEntitiesOutput
 
 	response *aws.Response
 }

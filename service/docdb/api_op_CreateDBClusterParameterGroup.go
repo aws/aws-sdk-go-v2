@@ -6,76 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/docdb/types"
 )
-
-// Represents the input of CreateDBClusterParameterGroup.
-type CreateDBClusterParameterGroupInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the DB cluster parameter group.
-	//
-	// Constraints:
-	//
-	//    * Must match the name of an existing DBClusterParameterGroup.
-	//
-	// This value is stored as a lowercase string.
-	//
-	// DBClusterParameterGroupName is a required field
-	DBClusterParameterGroupName *string `type:"string" required:"true"`
-
-	// The DB cluster parameter group family name.
-	//
-	// DBParameterGroupFamily is a required field
-	DBParameterGroupFamily *string `type:"string" required:"true"`
-
-	// The description for the DB cluster parameter group.
-	//
-	// Description is a required field
-	Description *string `type:"string" required:"true"`
-
-	// The tags to be assigned to the DB cluster parameter group.
-	Tags []Tag `locationNameList:"Tag" type:"list"`
-}
-
-// String returns the string representation
-func (s CreateDBClusterParameterGroupInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateDBClusterParameterGroupInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateDBClusterParameterGroupInput"}
-
-	if s.DBClusterParameterGroupName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DBClusterParameterGroupName"))
-	}
-
-	if s.DBParameterGroupFamily == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DBParameterGroupFamily"))
-	}
-
-	if s.Description == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Description"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type CreateDBClusterParameterGroupOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Detailed information about a DB cluster parameter group.
-	DBClusterParameterGroup *DBClusterParameterGroup `type:"structure"`
-}
-
-// String returns the string representation
-func (s CreateDBClusterParameterGroupOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCreateDBClusterParameterGroup = "CreateDBClusterParameterGroup"
 
@@ -112,7 +44,7 @@ const opCreateDBClusterParameterGroup = "CreateDBClusterParameterGroup"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/CreateDBClusterParameterGroup
-func (c *Client) CreateDBClusterParameterGroupRequest(input *CreateDBClusterParameterGroupInput) CreateDBClusterParameterGroupRequest {
+func (c *Client) CreateDBClusterParameterGroupRequest(input *types.CreateDBClusterParameterGroupInput) CreateDBClusterParameterGroupRequest {
 	op := &aws.Operation{
 		Name:       opCreateDBClusterParameterGroup,
 		HTTPMethod: "POST",
@@ -120,10 +52,10 @@ func (c *Client) CreateDBClusterParameterGroupRequest(input *CreateDBClusterPara
 	}
 
 	if input == nil {
-		input = &CreateDBClusterParameterGroupInput{}
+		input = &types.CreateDBClusterParameterGroupInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateDBClusterParameterGroupOutput{})
+	req := c.newRequest(op, input, &types.CreateDBClusterParameterGroupOutput{})
 	return CreateDBClusterParameterGroupRequest{Request: req, Input: input, Copy: c.CreateDBClusterParameterGroupRequest}
 }
 
@@ -131,8 +63,8 @@ func (c *Client) CreateDBClusterParameterGroupRequest(input *CreateDBClusterPara
 // CreateDBClusterParameterGroup API operation.
 type CreateDBClusterParameterGroupRequest struct {
 	*aws.Request
-	Input *CreateDBClusterParameterGroupInput
-	Copy  func(*CreateDBClusterParameterGroupInput) CreateDBClusterParameterGroupRequest
+	Input *types.CreateDBClusterParameterGroupInput
+	Copy  func(*types.CreateDBClusterParameterGroupInput) CreateDBClusterParameterGroupRequest
 }
 
 // Send marshals and sends the CreateDBClusterParameterGroup API request.
@@ -144,7 +76,7 @@ func (r CreateDBClusterParameterGroupRequest) Send(ctx context.Context) (*Create
 	}
 
 	resp := &CreateDBClusterParameterGroupResponse{
-		CreateDBClusterParameterGroupOutput: r.Request.Data.(*CreateDBClusterParameterGroupOutput),
+		CreateDBClusterParameterGroupOutput: r.Request.Data.(*types.CreateDBClusterParameterGroupOutput),
 		response:                            &aws.Response{Request: r.Request},
 	}
 
@@ -154,7 +86,7 @@ func (r CreateDBClusterParameterGroupRequest) Send(ctx context.Context) (*Create
 // CreateDBClusterParameterGroupResponse is the response type for the
 // CreateDBClusterParameterGroup API operation.
 type CreateDBClusterParameterGroupResponse struct {
-	*CreateDBClusterParameterGroupOutput
+	*types.CreateDBClusterParameterGroupOutput
 
 	response *aws.Response
 }

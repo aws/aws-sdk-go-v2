@@ -6,55 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-type AdvertiseByoipCidrInput struct {
-	_ struct{} `type:"structure"`
-
-	// The IPv4 address range, in CIDR notation. This must be the exact range that
-	// you provisioned. You can't advertise only a portion of the provisioned range.
-	//
-	// Cidr is a required field
-	Cidr *string `type:"string" required:"true"`
-
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have
-	// the required permissions, the error response is DryRunOperation. Otherwise,
-	// it is UnauthorizedOperation.
-	DryRun *bool `type:"boolean"`
-}
-
-// String returns the string representation
-func (s AdvertiseByoipCidrInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *AdvertiseByoipCidrInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "AdvertiseByoipCidrInput"}
-
-	if s.Cidr == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Cidr"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type AdvertiseByoipCidrOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Information about the address range.
-	ByoipCidr *ByoipCidr `locationName:"byoipCidr" type:"structure"`
-}
-
-// String returns the string representation
-func (s AdvertiseByoipCidrOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opAdvertiseByoipCidr = "AdvertiseByoipCidr"
 
@@ -86,7 +39,7 @@ const opAdvertiseByoipCidr = "AdvertiseByoipCidr"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AdvertiseByoipCidr
-func (c *Client) AdvertiseByoipCidrRequest(input *AdvertiseByoipCidrInput) AdvertiseByoipCidrRequest {
+func (c *Client) AdvertiseByoipCidrRequest(input *types.AdvertiseByoipCidrInput) AdvertiseByoipCidrRequest {
 	op := &aws.Operation{
 		Name:       opAdvertiseByoipCidr,
 		HTTPMethod: "POST",
@@ -94,10 +47,10 @@ func (c *Client) AdvertiseByoipCidrRequest(input *AdvertiseByoipCidrInput) Adver
 	}
 
 	if input == nil {
-		input = &AdvertiseByoipCidrInput{}
+		input = &types.AdvertiseByoipCidrInput{}
 	}
 
-	req := c.newRequest(op, input, &AdvertiseByoipCidrOutput{})
+	req := c.newRequest(op, input, &types.AdvertiseByoipCidrOutput{})
 	return AdvertiseByoipCidrRequest{Request: req, Input: input, Copy: c.AdvertiseByoipCidrRequest}
 }
 
@@ -105,8 +58,8 @@ func (c *Client) AdvertiseByoipCidrRequest(input *AdvertiseByoipCidrInput) Adver
 // AdvertiseByoipCidr API operation.
 type AdvertiseByoipCidrRequest struct {
 	*aws.Request
-	Input *AdvertiseByoipCidrInput
-	Copy  func(*AdvertiseByoipCidrInput) AdvertiseByoipCidrRequest
+	Input *types.AdvertiseByoipCidrInput
+	Copy  func(*types.AdvertiseByoipCidrInput) AdvertiseByoipCidrRequest
 }
 
 // Send marshals and sends the AdvertiseByoipCidr API request.
@@ -118,7 +71,7 @@ func (r AdvertiseByoipCidrRequest) Send(ctx context.Context) (*AdvertiseByoipCid
 	}
 
 	resp := &AdvertiseByoipCidrResponse{
-		AdvertiseByoipCidrOutput: r.Request.Data.(*AdvertiseByoipCidrOutput),
+		AdvertiseByoipCidrOutput: r.Request.Data.(*types.AdvertiseByoipCidrOutput),
 		response:                 &aws.Response{Request: r.Request},
 	}
 
@@ -128,7 +81,7 @@ func (r AdvertiseByoipCidrRequest) Send(ctx context.Context) (*AdvertiseByoipCid
 // AdvertiseByoipCidrResponse is the response type for the
 // AdvertiseByoipCidr API operation.
 type AdvertiseByoipCidrResponse struct {
-	*AdvertiseByoipCidrOutput
+	*types.AdvertiseByoipCidrOutput
 
 	response *aws.Response
 }

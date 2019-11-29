@@ -6,57 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/codestar/types"
 )
-
-type UntagProjectInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the project to remove tags from.
-	//
-	// Id is a required field
-	Id *string `locationName:"id" min:"2" type:"string" required:"true"`
-
-	// The tags to remove from the project.
-	//
-	// Tags is a required field
-	Tags []string `locationName:"tags" type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s UntagProjectInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UntagProjectInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UntagProjectInput"}
-
-	if s.Id == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Id"))
-	}
-	if s.Id != nil && len(*s.Id) < 2 {
-		invalidParams.Add(aws.NewErrParamMinLen("Id", 2))
-	}
-
-	if s.Tags == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Tags"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type UntagProjectOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s UntagProjectOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opUntagProject = "UntagProject"
 
@@ -73,7 +24,7 @@ const opUntagProject = "UntagProject"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codestar-2017-04-19/UntagProject
-func (c *Client) UntagProjectRequest(input *UntagProjectInput) UntagProjectRequest {
+func (c *Client) UntagProjectRequest(input *types.UntagProjectInput) UntagProjectRequest {
 	op := &aws.Operation{
 		Name:       opUntagProject,
 		HTTPMethod: "POST",
@@ -81,10 +32,10 @@ func (c *Client) UntagProjectRequest(input *UntagProjectInput) UntagProjectReque
 	}
 
 	if input == nil {
-		input = &UntagProjectInput{}
+		input = &types.UntagProjectInput{}
 	}
 
-	req := c.newRequest(op, input, &UntagProjectOutput{})
+	req := c.newRequest(op, input, &types.UntagProjectOutput{})
 	return UntagProjectRequest{Request: req, Input: input, Copy: c.UntagProjectRequest}
 }
 
@@ -92,8 +43,8 @@ func (c *Client) UntagProjectRequest(input *UntagProjectInput) UntagProjectReque
 // UntagProject API operation.
 type UntagProjectRequest struct {
 	*aws.Request
-	Input *UntagProjectInput
-	Copy  func(*UntagProjectInput) UntagProjectRequest
+	Input *types.UntagProjectInput
+	Copy  func(*types.UntagProjectInput) UntagProjectRequest
 }
 
 // Send marshals and sends the UntagProject API request.
@@ -105,7 +56,7 @@ func (r UntagProjectRequest) Send(ctx context.Context) (*UntagProjectResponse, e
 	}
 
 	resp := &UntagProjectResponse{
-		UntagProjectOutput: r.Request.Data.(*UntagProjectOutput),
+		UntagProjectOutput: r.Request.Data.(*types.UntagProjectOutput),
 		response:           &aws.Response{Request: r.Request},
 	}
 
@@ -115,7 +66,7 @@ func (r UntagProjectRequest) Send(ctx context.Context) (*UntagProjectResponse, e
 // UntagProjectResponse is the response type for the
 // UntagProject API operation.
 type UntagProjectResponse struct {
-	*UntagProjectOutput
+	*types.UntagProjectOutput
 
 	response *aws.Response
 }

@@ -6,83 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/xray/types"
 )
-
-type GetGroupInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ARN of the group that was generated on creation.
-	GroupARN *string `min:"1" type:"string"`
-
-	// The case-sensitive name of the group.
-	GroupName *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s GetGroupInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetGroupInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetGroupInput"}
-	if s.GroupARN != nil && len(*s.GroupARN) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("GroupARN", 1))
-	}
-	if s.GroupName != nil && len(*s.GroupName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("GroupName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetGroupInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.GroupARN != nil {
-		v := *s.GroupARN
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "GroupARN", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.GroupName != nil {
-		v := *s.GroupName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "GroupName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type GetGroupOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The group that was requested. Contains the name of the group, the ARN of
-	// the group, and the filter expression that assigned to the group.
-	Group *Group `type:"structure"`
-}
-
-// String returns the string representation
-func (s GetGroupOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetGroupOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.Group != nil {
-		v := s.Group
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "Group", v, metadata)
-	}
-	return nil
-}
 
 const opGetGroup = "GetGroup"
 
@@ -99,7 +24,7 @@ const opGetGroup = "GetGroup"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/GetGroup
-func (c *Client) GetGroupRequest(input *GetGroupInput) GetGroupRequest {
+func (c *Client) GetGroupRequest(input *types.GetGroupInput) GetGroupRequest {
 	op := &aws.Operation{
 		Name:       opGetGroup,
 		HTTPMethod: "POST",
@@ -107,10 +32,10 @@ func (c *Client) GetGroupRequest(input *GetGroupInput) GetGroupRequest {
 	}
 
 	if input == nil {
-		input = &GetGroupInput{}
+		input = &types.GetGroupInput{}
 	}
 
-	req := c.newRequest(op, input, &GetGroupOutput{})
+	req := c.newRequest(op, input, &types.GetGroupOutput{})
 	return GetGroupRequest{Request: req, Input: input, Copy: c.GetGroupRequest}
 }
 
@@ -118,8 +43,8 @@ func (c *Client) GetGroupRequest(input *GetGroupInput) GetGroupRequest {
 // GetGroup API operation.
 type GetGroupRequest struct {
 	*aws.Request
-	Input *GetGroupInput
-	Copy  func(*GetGroupInput) GetGroupRequest
+	Input *types.GetGroupInput
+	Copy  func(*types.GetGroupInput) GetGroupRequest
 }
 
 // Send marshals and sends the GetGroup API request.
@@ -131,7 +56,7 @@ func (r GetGroupRequest) Send(ctx context.Context) (*GetGroupResponse, error) {
 	}
 
 	resp := &GetGroupResponse{
-		GetGroupOutput: r.Request.Data.(*GetGroupOutput),
+		GetGroupOutput: r.Request.Data.(*types.GetGroupOutput),
 		response:       &aws.Response{Request: r.Request},
 	}
 
@@ -141,7 +66,7 @@ func (r GetGroupRequest) Send(ctx context.Context) (*GetGroupResponse, error) {
 // GetGroupResponse is the response type for the
 // GetGroup API operation.
 type GetGroupResponse struct {
-	*GetGroupOutput
+	*types.GetGroupOutput
 
 	response *aws.Response
 }

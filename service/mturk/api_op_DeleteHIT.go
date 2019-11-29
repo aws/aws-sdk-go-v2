@@ -6,48 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/mturk/types"
 )
-
-type DeleteHITInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the HIT to be deleted.
-	//
-	// HITId is a required field
-	HITId *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteHITInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteHITInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteHITInput"}
-
-	if s.HITId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("HITId"))
-	}
-	if s.HITId != nil && len(*s.HITId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("HITId", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteHITOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteHITOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteHIT = "DeleteHIT"
 
@@ -82,7 +42,7 @@ const opDeleteHIT = "DeleteHIT"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/DeleteHIT
-func (c *Client) DeleteHITRequest(input *DeleteHITInput) DeleteHITRequest {
+func (c *Client) DeleteHITRequest(input *types.DeleteHITInput) DeleteHITRequest {
 	op := &aws.Operation{
 		Name:       opDeleteHIT,
 		HTTPMethod: "POST",
@@ -90,10 +50,10 @@ func (c *Client) DeleteHITRequest(input *DeleteHITInput) DeleteHITRequest {
 	}
 
 	if input == nil {
-		input = &DeleteHITInput{}
+		input = &types.DeleteHITInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteHITOutput{})
+	req := c.newRequest(op, input, &types.DeleteHITOutput{})
 	return DeleteHITRequest{Request: req, Input: input, Copy: c.DeleteHITRequest}
 }
 
@@ -101,8 +61,8 @@ func (c *Client) DeleteHITRequest(input *DeleteHITInput) DeleteHITRequest {
 // DeleteHIT API operation.
 type DeleteHITRequest struct {
 	*aws.Request
-	Input *DeleteHITInput
-	Copy  func(*DeleteHITInput) DeleteHITRequest
+	Input *types.DeleteHITInput
+	Copy  func(*types.DeleteHITInput) DeleteHITRequest
 }
 
 // Send marshals and sends the DeleteHIT API request.
@@ -114,7 +74,7 @@ func (r DeleteHITRequest) Send(ctx context.Context) (*DeleteHITResponse, error) 
 	}
 
 	resp := &DeleteHITResponse{
-		DeleteHITOutput: r.Request.Data.(*DeleteHITOutput),
+		DeleteHITOutput: r.Request.Data.(*types.DeleteHITOutput),
 		response:        &aws.Response{Request: r.Request},
 	}
 
@@ -124,7 +84,7 @@ func (r DeleteHITRequest) Send(ctx context.Context) (*DeleteHITResponse, error) 
 // DeleteHITResponse is the response type for the
 // DeleteHIT API operation.
 type DeleteHITResponse struct {
-	*DeleteHITOutput
+	*types.DeleteHITOutput
 
 	response *aws.Response
 }

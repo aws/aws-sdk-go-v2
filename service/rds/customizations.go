@@ -3,6 +3,8 @@ package rds
 import (
 	"time"
 
+	"github.com/aws/aws-sdk-go-v2/service/rds/types"
+
 	"github.com/aws/aws-sdk-go-v2/aws"
 	request "github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
@@ -40,7 +42,7 @@ func fillPresignedURL(r *request.Request) {
 }
 
 func copyDBSnapshotPresign(r *request.Request) {
-	originParams := r.Params.(*CopyDBSnapshotInput)
+	originParams := r.Params.(*types.CopyDBSnapshotInput)
 
 	if originParams.SourceRegion == nil || originParams.PreSignedUrl != nil || originParams.DestinationRegion != nil {
 		return
@@ -51,12 +53,12 @@ func copyDBSnapshotPresign(r *request.Request) {
 	if *originParams.SourceRegion == *originParams.DestinationRegion {
 		return
 	}
-	newParams := awsutil.CopyOf(r.Params).(*CopyDBSnapshotInput)
+	newParams := awsutil.CopyOf(r.Params).(*types.CopyDBSnapshotInput)
 	originParams.PreSignedUrl = presignURL(r, originParams.SourceRegion, newParams)
 }
 
 func createDBInstanceReadReplicaPresign(r *request.Request) {
-	originParams := r.Params.(*CreateDBInstanceReadReplicaInput)
+	originParams := r.Params.(*types.CreateDBInstanceReadReplicaInput)
 
 	if originParams.SourceRegion == nil || originParams.PreSignedUrl != nil || originParams.DestinationRegion != nil {
 		return
@@ -67,12 +69,12 @@ func createDBInstanceReadReplicaPresign(r *request.Request) {
 	if *originParams.SourceRegion == *originParams.DestinationRegion {
 		return
 	}
-	newParams := awsutil.CopyOf(r.Params).(*CreateDBInstanceReadReplicaInput)
+	newParams := awsutil.CopyOf(r.Params).(*types.CreateDBInstanceReadReplicaInput)
 	originParams.PreSignedUrl = presignURL(r, originParams.SourceRegion, newParams)
 }
 
 func copyDBClusterSnapshotPresign(r *request.Request) {
-	originParams := r.Params.(*CopyDBClusterSnapshotInput)
+	originParams := r.Params.(*types.CopyDBClusterSnapshotInput)
 
 	if originParams.SourceRegion == nil || originParams.PreSignedUrl != nil || originParams.DestinationRegion != nil {
 		return
@@ -83,12 +85,12 @@ func copyDBClusterSnapshotPresign(r *request.Request) {
 	if *originParams.SourceRegion == *originParams.DestinationRegion {
 		return
 	}
-	newParams := awsutil.CopyOf(r.Params).(*CopyDBClusterSnapshotInput)
+	newParams := awsutil.CopyOf(r.Params).(*types.CopyDBClusterSnapshotInput)
 	originParams.PreSignedUrl = presignURL(r, originParams.SourceRegion, newParams)
 }
 
 func createDBClusterPresign(r *request.Request) {
-	originParams := r.Params.(*CreateDBClusterInput)
+	originParams := r.Params.(*types.CreateDBClusterInput)
 
 	if originParams.SourceRegion == nil || originParams.PreSignedUrl != nil || originParams.DestinationRegion != nil {
 		return
@@ -99,7 +101,7 @@ func createDBClusterPresign(r *request.Request) {
 	if *originParams.SourceRegion == *originParams.DestinationRegion {
 		return
 	}
-	newParams := awsutil.CopyOf(r.Params).(*CreateDBClusterInput)
+	newParams := awsutil.CopyOf(r.Params).(*types.CreateDBClusterInput)
 	originParams.PreSignedUrl = presignURL(r, originParams.SourceRegion, newParams)
 }
 

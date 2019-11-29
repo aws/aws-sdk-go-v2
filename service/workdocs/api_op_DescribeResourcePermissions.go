@@ -6,142 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/workdocs/types"
 )
-
-type DescribeResourcePermissionsInput struct {
-	_ struct{} `type:"structure"`
-
-	// Amazon WorkDocs authentication token. Do not set this field when using administrative
-	// API actions, as in accessing the API using AWS credentials.
-	AuthenticationToken *string `location:"header" locationName:"Authentication" min:"1" type:"string" sensitive:"true"`
-
-	// The maximum number of items to return with this call.
-	Limit *int64 `location:"querystring" locationName:"limit" min:"1" type:"integer"`
-
-	// The marker for the next set of results. (You received this marker from a
-	// previous call)
-	Marker *string `location:"querystring" locationName:"marker" min:"1" type:"string"`
-
-	// The ID of the principal to filter permissions by.
-	PrincipalId *string `location:"querystring" locationName:"principalId" min:"1" type:"string"`
-
-	// The ID of the resource.
-	//
-	// ResourceId is a required field
-	ResourceId *string `location:"uri" locationName:"ResourceId" min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeResourcePermissionsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeResourcePermissionsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeResourcePermissionsInput"}
-	if s.AuthenticationToken != nil && len(*s.AuthenticationToken) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("AuthenticationToken", 1))
-	}
-	if s.Limit != nil && *s.Limit < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("Limit", 1))
-	}
-	if s.Marker != nil && len(*s.Marker) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Marker", 1))
-	}
-	if s.PrincipalId != nil && len(*s.PrincipalId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("PrincipalId", 1))
-	}
-
-	if s.ResourceId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ResourceId"))
-	}
-	if s.ResourceId != nil && len(*s.ResourceId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ResourceId", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DescribeResourcePermissionsInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.AuthenticationToken != nil {
-		v := *s.AuthenticationToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "Authentication", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.ResourceId != nil {
-		v := *s.ResourceId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "ResourceId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Limit != nil {
-		v := *s.Limit
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "limit", protocol.Int64Value(v), metadata)
-	}
-	if s.Marker != nil {
-		v := *s.Marker
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "marker", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.PrincipalId != nil {
-		v := *s.PrincipalId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "principalId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type DescribeResourcePermissionsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The marker to use when requesting the next set of results. If there are no
-	// additional results, the string is empty.
-	Marker *string `min:"1" type:"string"`
-
-	// The principals.
-	Principals []Principal `type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeResourcePermissionsOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DescribeResourcePermissionsOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.Marker != nil {
-		v := *s.Marker
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "Marker", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Principals != nil {
-		v := s.Principals
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "Principals", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	return nil
-}
 
 const opDescribeResourcePermissions = "DescribeResourcePermissions"
 
@@ -158,7 +24,7 @@ const opDescribeResourcePermissions = "DescribeResourcePermissions"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/DescribeResourcePermissions
-func (c *Client) DescribeResourcePermissionsRequest(input *DescribeResourcePermissionsInput) DescribeResourcePermissionsRequest {
+func (c *Client) DescribeResourcePermissionsRequest(input *types.DescribeResourcePermissionsInput) DescribeResourcePermissionsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeResourcePermissions,
 		HTTPMethod: "GET",
@@ -166,10 +32,10 @@ func (c *Client) DescribeResourcePermissionsRequest(input *DescribeResourcePermi
 	}
 
 	if input == nil {
-		input = &DescribeResourcePermissionsInput{}
+		input = &types.DescribeResourcePermissionsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeResourcePermissionsOutput{})
+	req := c.newRequest(op, input, &types.DescribeResourcePermissionsOutput{})
 	return DescribeResourcePermissionsRequest{Request: req, Input: input, Copy: c.DescribeResourcePermissionsRequest}
 }
 
@@ -177,8 +43,8 @@ func (c *Client) DescribeResourcePermissionsRequest(input *DescribeResourcePermi
 // DescribeResourcePermissions API operation.
 type DescribeResourcePermissionsRequest struct {
 	*aws.Request
-	Input *DescribeResourcePermissionsInput
-	Copy  func(*DescribeResourcePermissionsInput) DescribeResourcePermissionsRequest
+	Input *types.DescribeResourcePermissionsInput
+	Copy  func(*types.DescribeResourcePermissionsInput) DescribeResourcePermissionsRequest
 }
 
 // Send marshals and sends the DescribeResourcePermissions API request.
@@ -190,7 +56,7 @@ func (r DescribeResourcePermissionsRequest) Send(ctx context.Context) (*Describe
 	}
 
 	resp := &DescribeResourcePermissionsResponse{
-		DescribeResourcePermissionsOutput: r.Request.Data.(*DescribeResourcePermissionsOutput),
+		DescribeResourcePermissionsOutput: r.Request.Data.(*types.DescribeResourcePermissionsOutput),
 		response:                          &aws.Response{Request: r.Request},
 	}
 
@@ -200,7 +66,7 @@ func (r DescribeResourcePermissionsRequest) Send(ctx context.Context) (*Describe
 // DescribeResourcePermissionsResponse is the response type for the
 // DescribeResourcePermissions API operation.
 type DescribeResourcePermissionsResponse struct {
-	*DescribeResourcePermissionsOutput
+	*types.DescribeResourcePermissionsOutput
 
 	response *aws.Response
 }

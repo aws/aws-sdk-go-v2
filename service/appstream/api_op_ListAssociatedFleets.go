@@ -6,62 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/appstream/types"
 )
-
-type ListAssociatedFleetsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The pagination token to use to retrieve the next page of results for this
-	// operation. If this value is null, it retrieves the first page.
-	NextToken *string `min:"1" type:"string"`
-
-	// The name of the stack.
-	//
-	// StackName is a required field
-	StackName *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s ListAssociatedFleetsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListAssociatedFleetsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListAssociatedFleetsInput"}
-	if s.NextToken != nil && len(*s.NextToken) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
-	}
-
-	if s.StackName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("StackName"))
-	}
-	if s.StackName != nil && len(*s.StackName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("StackName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ListAssociatedFleetsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the fleet.
-	Names []string `type:"list"`
-
-	// The pagination token to use to retrieve the next page of results for this
-	// operation. If there are no more pages, this value is null.
-	NextToken *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s ListAssociatedFleetsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListAssociatedFleets = "ListAssociatedFleets"
 
@@ -78,7 +24,7 @@ const opListAssociatedFleets = "ListAssociatedFleets"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/ListAssociatedFleets
-func (c *Client) ListAssociatedFleetsRequest(input *ListAssociatedFleetsInput) ListAssociatedFleetsRequest {
+func (c *Client) ListAssociatedFleetsRequest(input *types.ListAssociatedFleetsInput) ListAssociatedFleetsRequest {
 	op := &aws.Operation{
 		Name:       opListAssociatedFleets,
 		HTTPMethod: "POST",
@@ -86,10 +32,10 @@ func (c *Client) ListAssociatedFleetsRequest(input *ListAssociatedFleetsInput) L
 	}
 
 	if input == nil {
-		input = &ListAssociatedFleetsInput{}
+		input = &types.ListAssociatedFleetsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListAssociatedFleetsOutput{})
+	req := c.newRequest(op, input, &types.ListAssociatedFleetsOutput{})
 	return ListAssociatedFleetsRequest{Request: req, Input: input, Copy: c.ListAssociatedFleetsRequest}
 }
 
@@ -97,8 +43,8 @@ func (c *Client) ListAssociatedFleetsRequest(input *ListAssociatedFleetsInput) L
 // ListAssociatedFleets API operation.
 type ListAssociatedFleetsRequest struct {
 	*aws.Request
-	Input *ListAssociatedFleetsInput
-	Copy  func(*ListAssociatedFleetsInput) ListAssociatedFleetsRequest
+	Input *types.ListAssociatedFleetsInput
+	Copy  func(*types.ListAssociatedFleetsInput) ListAssociatedFleetsRequest
 }
 
 // Send marshals and sends the ListAssociatedFleets API request.
@@ -110,7 +56,7 @@ func (r ListAssociatedFleetsRequest) Send(ctx context.Context) (*ListAssociatedF
 	}
 
 	resp := &ListAssociatedFleetsResponse{
-		ListAssociatedFleetsOutput: r.Request.Data.(*ListAssociatedFleetsOutput),
+		ListAssociatedFleetsOutput: r.Request.Data.(*types.ListAssociatedFleetsOutput),
 		response:                   &aws.Response{Request: r.Request},
 	}
 
@@ -120,7 +66,7 @@ func (r ListAssociatedFleetsRequest) Send(ctx context.Context) (*ListAssociatedF
 // ListAssociatedFleetsResponse is the response type for the
 // ListAssociatedFleets API operation.
 type ListAssociatedFleetsResponse struct {
-	*ListAssociatedFleetsOutput
+	*types.ListAssociatedFleetsOutput
 
 	response *aws.Response
 }

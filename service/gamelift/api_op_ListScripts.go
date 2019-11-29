@@ -6,59 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/gamelift/types"
 )
-
-type ListScriptsInput struct {
-	_ struct{} `type:"structure"`
-
-	// Maximum number of results to return. Use this parameter with NextToken to
-	// get results as a set of sequential pages.
-	Limit *int64 `min:"1" type:"integer"`
-
-	// Token that indicates the start of the next sequential page of results. Use
-	// the token that is returned with a previous call to this action. To start
-	// at the beginning of the result set, do not specify a value.
-	NextToken *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s ListScriptsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListScriptsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListScriptsInput"}
-	if s.Limit != nil && *s.Limit < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("Limit", 1))
-	}
-	if s.NextToken != nil && len(*s.NextToken) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ListScriptsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Token that indicates where to resume retrieving results on the next call
-	// to this action. If no token is returned, these results represent the end
-	// of the list.
-	NextToken *string `min:"1" type:"string"`
-
-	// Set of properties describing the requested script.
-	Scripts []Script `type:"list"`
-}
-
-// String returns the string representation
-func (s ListScriptsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListScripts = "ListScripts"
 
@@ -92,7 +41,7 @@ const opListScripts = "ListScripts"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/ListScripts
-func (c *Client) ListScriptsRequest(input *ListScriptsInput) ListScriptsRequest {
+func (c *Client) ListScriptsRequest(input *types.ListScriptsInput) ListScriptsRequest {
 	op := &aws.Operation{
 		Name:       opListScripts,
 		HTTPMethod: "POST",
@@ -100,10 +49,10 @@ func (c *Client) ListScriptsRequest(input *ListScriptsInput) ListScriptsRequest 
 	}
 
 	if input == nil {
-		input = &ListScriptsInput{}
+		input = &types.ListScriptsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListScriptsOutput{})
+	req := c.newRequest(op, input, &types.ListScriptsOutput{})
 	return ListScriptsRequest{Request: req, Input: input, Copy: c.ListScriptsRequest}
 }
 
@@ -111,8 +60,8 @@ func (c *Client) ListScriptsRequest(input *ListScriptsInput) ListScriptsRequest 
 // ListScripts API operation.
 type ListScriptsRequest struct {
 	*aws.Request
-	Input *ListScriptsInput
-	Copy  func(*ListScriptsInput) ListScriptsRequest
+	Input *types.ListScriptsInput
+	Copy  func(*types.ListScriptsInput) ListScriptsRequest
 }
 
 // Send marshals and sends the ListScripts API request.
@@ -124,7 +73,7 @@ func (r ListScriptsRequest) Send(ctx context.Context) (*ListScriptsResponse, err
 	}
 
 	resp := &ListScriptsResponse{
-		ListScriptsOutput: r.Request.Data.(*ListScriptsOutput),
+		ListScriptsOutput: r.Request.Data.(*types.ListScriptsOutput),
 		response:          &aws.Response{Request: r.Request},
 	}
 
@@ -134,7 +83,7 @@ func (r ListScriptsRequest) Send(ctx context.Context) (*ListScriptsResponse, err
 // ListScriptsResponse is the response type for the
 // ListScripts API operation.
 type ListScriptsResponse struct {
-	*ListScriptsOutput
+	*types.ListScriptsOutput
 
 	response *aws.Response
 }

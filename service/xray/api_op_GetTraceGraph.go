@@ -6,103 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/xray/types"
 )
-
-type GetTraceGraphInput struct {
-	_ struct{} `type:"structure"`
-
-	// Pagination token. Not used.
-	NextToken *string `type:"string"`
-
-	// Trace IDs of requests for which to generate a service graph.
-	//
-	// TraceIds is a required field
-	TraceIds []string `type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s GetTraceGraphInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetTraceGraphInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetTraceGraphInput"}
-
-	if s.TraceIds == nil {
-		invalidParams.Add(aws.NewErrParamRequired("TraceIds"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetTraceGraphInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.TraceIds != nil {
-		v := s.TraceIds
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "TraceIds", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
-		}
-		ls0.End()
-
-	}
-	return nil
-}
-
-type GetTraceGraphOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Pagination token. Not used.
-	NextToken *string `type:"string"`
-
-	// The services that have processed one of the specified requests.
-	Services []Service `type:"list"`
-}
-
-// String returns the string representation
-func (s GetTraceGraphOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetTraceGraphOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Services != nil {
-		v := s.Services
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "Services", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	return nil
-}
 
 const opGetTraceGraph = "GetTraceGraph"
 
@@ -119,7 +24,7 @@ const opGetTraceGraph = "GetTraceGraph"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/GetTraceGraph
-func (c *Client) GetTraceGraphRequest(input *GetTraceGraphInput) GetTraceGraphRequest {
+func (c *Client) GetTraceGraphRequest(input *types.GetTraceGraphInput) GetTraceGraphRequest {
 	op := &aws.Operation{
 		Name:       opGetTraceGraph,
 		HTTPMethod: "POST",
@@ -133,10 +38,10 @@ func (c *Client) GetTraceGraphRequest(input *GetTraceGraphInput) GetTraceGraphRe
 	}
 
 	if input == nil {
-		input = &GetTraceGraphInput{}
+		input = &types.GetTraceGraphInput{}
 	}
 
-	req := c.newRequest(op, input, &GetTraceGraphOutput{})
+	req := c.newRequest(op, input, &types.GetTraceGraphOutput{})
 	return GetTraceGraphRequest{Request: req, Input: input, Copy: c.GetTraceGraphRequest}
 }
 
@@ -144,8 +49,8 @@ func (c *Client) GetTraceGraphRequest(input *GetTraceGraphInput) GetTraceGraphRe
 // GetTraceGraph API operation.
 type GetTraceGraphRequest struct {
 	*aws.Request
-	Input *GetTraceGraphInput
-	Copy  func(*GetTraceGraphInput) GetTraceGraphRequest
+	Input *types.GetTraceGraphInput
+	Copy  func(*types.GetTraceGraphInput) GetTraceGraphRequest
 }
 
 // Send marshals and sends the GetTraceGraph API request.
@@ -157,7 +62,7 @@ func (r GetTraceGraphRequest) Send(ctx context.Context) (*GetTraceGraphResponse,
 	}
 
 	resp := &GetTraceGraphResponse{
-		GetTraceGraphOutput: r.Request.Data.(*GetTraceGraphOutput),
+		GetTraceGraphOutput: r.Request.Data.(*types.GetTraceGraphOutput),
 		response:            &aws.Response{Request: r.Request},
 	}
 
@@ -187,7 +92,7 @@ func NewGetTraceGraphPaginator(req GetTraceGraphRequest) GetTraceGraphPaginator 
 	return GetTraceGraphPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *GetTraceGraphInput
+				var inCpy *types.GetTraceGraphInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -207,14 +112,14 @@ type GetTraceGraphPaginator struct {
 	aws.Pager
 }
 
-func (p *GetTraceGraphPaginator) CurrentPage() *GetTraceGraphOutput {
-	return p.Pager.CurrentPage().(*GetTraceGraphOutput)
+func (p *GetTraceGraphPaginator) CurrentPage() *types.GetTraceGraphOutput {
+	return p.Pager.CurrentPage().(*types.GetTraceGraphOutput)
 }
 
 // GetTraceGraphResponse is the response type for the
 // GetTraceGraph API operation.
 type GetTraceGraphResponse struct {
-	*GetTraceGraphOutput
+	*types.GetTraceGraphOutput
 
 	response *aws.Response
 }

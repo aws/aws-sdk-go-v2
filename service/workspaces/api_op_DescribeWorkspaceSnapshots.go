@@ -6,53 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/workspaces/types"
 )
-
-type DescribeWorkspaceSnapshotsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The identifier of the WorkSpace.
-	//
-	// WorkspaceId is a required field
-	WorkspaceId *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeWorkspaceSnapshotsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeWorkspaceSnapshotsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeWorkspaceSnapshotsInput"}
-
-	if s.WorkspaceId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("WorkspaceId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribeWorkspaceSnapshotsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Information about the snapshots that can be used to rebuild a WorkSpace.
-	// These snapshots include the user volume.
-	RebuildSnapshots []Snapshot `type:"list"`
-
-	// Information about the snapshots that can be used to restore a WorkSpace.
-	// These snapshots include both the root volume and the user volume.
-	RestoreSnapshots []Snapshot `type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeWorkspaceSnapshotsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeWorkspaceSnapshots = "DescribeWorkspaceSnapshots"
 
@@ -69,7 +24,7 @@ const opDescribeWorkspaceSnapshots = "DescribeWorkspaceSnapshots"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DescribeWorkspaceSnapshots
-func (c *Client) DescribeWorkspaceSnapshotsRequest(input *DescribeWorkspaceSnapshotsInput) DescribeWorkspaceSnapshotsRequest {
+func (c *Client) DescribeWorkspaceSnapshotsRequest(input *types.DescribeWorkspaceSnapshotsInput) DescribeWorkspaceSnapshotsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeWorkspaceSnapshots,
 		HTTPMethod: "POST",
@@ -77,10 +32,10 @@ func (c *Client) DescribeWorkspaceSnapshotsRequest(input *DescribeWorkspaceSnaps
 	}
 
 	if input == nil {
-		input = &DescribeWorkspaceSnapshotsInput{}
+		input = &types.DescribeWorkspaceSnapshotsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeWorkspaceSnapshotsOutput{})
+	req := c.newRequest(op, input, &types.DescribeWorkspaceSnapshotsOutput{})
 	return DescribeWorkspaceSnapshotsRequest{Request: req, Input: input, Copy: c.DescribeWorkspaceSnapshotsRequest}
 }
 
@@ -88,8 +43,8 @@ func (c *Client) DescribeWorkspaceSnapshotsRequest(input *DescribeWorkspaceSnaps
 // DescribeWorkspaceSnapshots API operation.
 type DescribeWorkspaceSnapshotsRequest struct {
 	*aws.Request
-	Input *DescribeWorkspaceSnapshotsInput
-	Copy  func(*DescribeWorkspaceSnapshotsInput) DescribeWorkspaceSnapshotsRequest
+	Input *types.DescribeWorkspaceSnapshotsInput
+	Copy  func(*types.DescribeWorkspaceSnapshotsInput) DescribeWorkspaceSnapshotsRequest
 }
 
 // Send marshals and sends the DescribeWorkspaceSnapshots API request.
@@ -101,7 +56,7 @@ func (r DescribeWorkspaceSnapshotsRequest) Send(ctx context.Context) (*DescribeW
 	}
 
 	resp := &DescribeWorkspaceSnapshotsResponse{
-		DescribeWorkspaceSnapshotsOutput: r.Request.Data.(*DescribeWorkspaceSnapshotsOutput),
+		DescribeWorkspaceSnapshotsOutput: r.Request.Data.(*types.DescribeWorkspaceSnapshotsOutput),
 		response:                         &aws.Response{Request: r.Request},
 	}
 
@@ -111,7 +66,7 @@ func (r DescribeWorkspaceSnapshotsRequest) Send(ctx context.Context) (*DescribeW
 // DescribeWorkspaceSnapshotsResponse is the response type for the
 // DescribeWorkspaceSnapshots API operation.
 type DescribeWorkspaceSnapshotsResponse struct {
-	*DescribeWorkspaceSnapshotsOutput
+	*types.DescribeWorkspaceSnapshotsOutput
 
 	response *aws.Response
 }

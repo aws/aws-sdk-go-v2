@@ -6,79 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/chime/types"
 )
-
-type DisassociatePhoneNumberFromUserInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Chime account ID.
-	//
-	// AccountId is a required field
-	AccountId *string `location:"uri" locationName:"accountId" type:"string" required:"true"`
-
-	// The user ID.
-	//
-	// UserId is a required field
-	UserId *string `location:"uri" locationName:"userId" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DisassociatePhoneNumberFromUserInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DisassociatePhoneNumberFromUserInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DisassociatePhoneNumberFromUserInput"}
-
-	if s.AccountId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("AccountId"))
-	}
-
-	if s.UserId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("UserId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DisassociatePhoneNumberFromUserInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.AccountId != nil {
-		v := *s.AccountId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "accountId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.UserId != nil {
-		v := *s.UserId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "userId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type DisassociatePhoneNumberFromUserOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DisassociatePhoneNumberFromUserOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DisassociatePhoneNumberFromUserOutput) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
 
 const opDisassociatePhoneNumberFromUser = "DisassociatePhoneNumberFromUser"
 
@@ -96,7 +25,7 @@ const opDisassociatePhoneNumberFromUser = "DisassociatePhoneNumberFromUser"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/DisassociatePhoneNumberFromUser
-func (c *Client) DisassociatePhoneNumberFromUserRequest(input *DisassociatePhoneNumberFromUserInput) DisassociatePhoneNumberFromUserRequest {
+func (c *Client) DisassociatePhoneNumberFromUserRequest(input *types.DisassociatePhoneNumberFromUserInput) DisassociatePhoneNumberFromUserRequest {
 	op := &aws.Operation{
 		Name:       opDisassociatePhoneNumberFromUser,
 		HTTPMethod: "POST",
@@ -104,10 +33,10 @@ func (c *Client) DisassociatePhoneNumberFromUserRequest(input *DisassociatePhone
 	}
 
 	if input == nil {
-		input = &DisassociatePhoneNumberFromUserInput{}
+		input = &types.DisassociatePhoneNumberFromUserInput{}
 	}
 
-	req := c.newRequest(op, input, &DisassociatePhoneNumberFromUserOutput{})
+	req := c.newRequest(op, input, &types.DisassociatePhoneNumberFromUserOutput{})
 	return DisassociatePhoneNumberFromUserRequest{Request: req, Input: input, Copy: c.DisassociatePhoneNumberFromUserRequest}
 }
 
@@ -115,8 +44,8 @@ func (c *Client) DisassociatePhoneNumberFromUserRequest(input *DisassociatePhone
 // DisassociatePhoneNumberFromUser API operation.
 type DisassociatePhoneNumberFromUserRequest struct {
 	*aws.Request
-	Input *DisassociatePhoneNumberFromUserInput
-	Copy  func(*DisassociatePhoneNumberFromUserInput) DisassociatePhoneNumberFromUserRequest
+	Input *types.DisassociatePhoneNumberFromUserInput
+	Copy  func(*types.DisassociatePhoneNumberFromUserInput) DisassociatePhoneNumberFromUserRequest
 }
 
 // Send marshals and sends the DisassociatePhoneNumberFromUser API request.
@@ -128,7 +57,7 @@ func (r DisassociatePhoneNumberFromUserRequest) Send(ctx context.Context) (*Disa
 	}
 
 	resp := &DisassociatePhoneNumberFromUserResponse{
-		DisassociatePhoneNumberFromUserOutput: r.Request.Data.(*DisassociatePhoneNumberFromUserOutput),
+		DisassociatePhoneNumberFromUserOutput: r.Request.Data.(*types.DisassociatePhoneNumberFromUserOutput),
 		response:                              &aws.Response{Request: r.Request},
 	}
 
@@ -138,7 +67,7 @@ func (r DisassociatePhoneNumberFromUserRequest) Send(ctx context.Context) (*Disa
 // DisassociatePhoneNumberFromUserResponse is the response type for the
 // DisassociatePhoneNumberFromUser API operation.
 type DisassociatePhoneNumberFromUserResponse struct {
-	*DisassociatePhoneNumberFromUserOutput
+	*types.DisassociatePhoneNumberFromUserOutput
 
 	response *aws.Response
 }

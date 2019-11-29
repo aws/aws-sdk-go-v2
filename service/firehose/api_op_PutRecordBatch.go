@@ -4,86 +4,10 @@ package firehose
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/firehose/types"
 )
-
-type PutRecordBatchInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the delivery stream.
-	//
-	// DeliveryStreamName is a required field
-	DeliveryStreamName *string `min:"1" type:"string" required:"true"`
-
-	// One or more records.
-	//
-	// Records is a required field
-	Records []Record `min:"1" type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s PutRecordBatchInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *PutRecordBatchInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "PutRecordBatchInput"}
-
-	if s.DeliveryStreamName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DeliveryStreamName"))
-	}
-	if s.DeliveryStreamName != nil && len(*s.DeliveryStreamName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("DeliveryStreamName", 1))
-	}
-
-	if s.Records == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Records"))
-	}
-	if s.Records != nil && len(s.Records) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Records", 1))
-	}
-	if s.Records != nil {
-		for i, v := range s.Records {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Records", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type PutRecordBatchOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Indicates whether server-side encryption (SSE) was enabled during this operation.
-	Encrypted *bool `type:"boolean"`
-
-	// The number of records that might have failed processing. This number might
-	// be greater than 0 even if the PutRecordBatch call succeeds. Check FailedPutCount
-	// to determine whether there are records that you need to resend.
-	//
-	// FailedPutCount is a required field
-	FailedPutCount *int64 `type:"integer" required:"true"`
-
-	// The results array. For each record, the index of the response element is
-	// the same as the index used in the request array.
-	//
-	// RequestResponses is a required field
-	RequestResponses []PutRecordBatchResponseEntry `min:"1" type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s PutRecordBatchOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opPutRecordBatch = "PutRecordBatch"
 
@@ -162,7 +86,7 @@ const opPutRecordBatch = "PutRecordBatch"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/PutRecordBatch
-func (c *Client) PutRecordBatchRequest(input *PutRecordBatchInput) PutRecordBatchRequest {
+func (c *Client) PutRecordBatchRequest(input *types.PutRecordBatchInput) PutRecordBatchRequest {
 	op := &aws.Operation{
 		Name:       opPutRecordBatch,
 		HTTPMethod: "POST",
@@ -170,10 +94,10 @@ func (c *Client) PutRecordBatchRequest(input *PutRecordBatchInput) PutRecordBatc
 	}
 
 	if input == nil {
-		input = &PutRecordBatchInput{}
+		input = &types.PutRecordBatchInput{}
 	}
 
-	req := c.newRequest(op, input, &PutRecordBatchOutput{})
+	req := c.newRequest(op, input, &types.PutRecordBatchOutput{})
 	return PutRecordBatchRequest{Request: req, Input: input, Copy: c.PutRecordBatchRequest}
 }
 
@@ -181,8 +105,8 @@ func (c *Client) PutRecordBatchRequest(input *PutRecordBatchInput) PutRecordBatc
 // PutRecordBatch API operation.
 type PutRecordBatchRequest struct {
 	*aws.Request
-	Input *PutRecordBatchInput
-	Copy  func(*PutRecordBatchInput) PutRecordBatchRequest
+	Input *types.PutRecordBatchInput
+	Copy  func(*types.PutRecordBatchInput) PutRecordBatchRequest
 }
 
 // Send marshals and sends the PutRecordBatch API request.
@@ -194,7 +118,7 @@ func (r PutRecordBatchRequest) Send(ctx context.Context) (*PutRecordBatchRespons
 	}
 
 	resp := &PutRecordBatchResponse{
-		PutRecordBatchOutput: r.Request.Data.(*PutRecordBatchOutput),
+		PutRecordBatchOutput: r.Request.Data.(*types.PutRecordBatchOutput),
 		response:             &aws.Response{Request: r.Request},
 	}
 
@@ -204,7 +128,7 @@ func (r PutRecordBatchRequest) Send(ctx context.Context) (*PutRecordBatchRespons
 // PutRecordBatchResponse is the response type for the
 // PutRecordBatch API operation.
 type PutRecordBatchResponse struct {
-	*PutRecordBatchOutput
+	*types.PutRecordBatchOutput
 
 	response *aws.Response
 }

@@ -6,72 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/inspector/types"
 )
-
-type PreviewAgentsInput struct {
-	_ struct{} `type:"structure"`
-
-	// You can use this parameter to indicate the maximum number of items you want
-	// in the response. The default value is 10. The maximum value is 500.
-	MaxResults *int64 `locationName:"maxResults" type:"integer"`
-
-	// You can use this parameter when paginating results. Set the value of this
-	// parameter to null on your first call to the PreviewAgents action. Subsequent
-	// calls to the action fill nextToken in the request with the value of NextToken
-	// from the previous response to continue listing data.
-	NextToken *string `locationName:"nextToken" min:"1" type:"string"`
-
-	// The ARN of the assessment target whose agents you want to preview.
-	//
-	// PreviewAgentsArn is a required field
-	PreviewAgentsArn *string `locationName:"previewAgentsArn" min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s PreviewAgentsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *PreviewAgentsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "PreviewAgentsInput"}
-	if s.NextToken != nil && len(*s.NextToken) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
-	}
-
-	if s.PreviewAgentsArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("PreviewAgentsArn"))
-	}
-	if s.PreviewAgentsArn != nil && len(*s.PreviewAgentsArn) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("PreviewAgentsArn", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type PreviewAgentsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The resulting list of agents.
-	//
-	// AgentPreviews is a required field
-	AgentPreviews []AgentPreview `locationName:"agentPreviews" type:"list" required:"true"`
-
-	// When a response is generated, if there is more data to be listed, this parameter
-	// is present in the response and contains the value to use for the nextToken
-	// parameter in a subsequent pagination request. If there is no more data to
-	// be listed, this parameter is set to null.
-	NextToken *string `locationName:"nextToken" min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s PreviewAgentsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opPreviewAgents = "PreviewAgents"
 
@@ -89,7 +25,7 @@ const opPreviewAgents = "PreviewAgents"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/PreviewAgents
-func (c *Client) PreviewAgentsRequest(input *PreviewAgentsInput) PreviewAgentsRequest {
+func (c *Client) PreviewAgentsRequest(input *types.PreviewAgentsInput) PreviewAgentsRequest {
 	op := &aws.Operation{
 		Name:       opPreviewAgents,
 		HTTPMethod: "POST",
@@ -103,10 +39,10 @@ func (c *Client) PreviewAgentsRequest(input *PreviewAgentsInput) PreviewAgentsRe
 	}
 
 	if input == nil {
-		input = &PreviewAgentsInput{}
+		input = &types.PreviewAgentsInput{}
 	}
 
-	req := c.newRequest(op, input, &PreviewAgentsOutput{})
+	req := c.newRequest(op, input, &types.PreviewAgentsOutput{})
 	return PreviewAgentsRequest{Request: req, Input: input, Copy: c.PreviewAgentsRequest}
 }
 
@@ -114,8 +50,8 @@ func (c *Client) PreviewAgentsRequest(input *PreviewAgentsInput) PreviewAgentsRe
 // PreviewAgents API operation.
 type PreviewAgentsRequest struct {
 	*aws.Request
-	Input *PreviewAgentsInput
-	Copy  func(*PreviewAgentsInput) PreviewAgentsRequest
+	Input *types.PreviewAgentsInput
+	Copy  func(*types.PreviewAgentsInput) PreviewAgentsRequest
 }
 
 // Send marshals and sends the PreviewAgents API request.
@@ -127,7 +63,7 @@ func (r PreviewAgentsRequest) Send(ctx context.Context) (*PreviewAgentsResponse,
 	}
 
 	resp := &PreviewAgentsResponse{
-		PreviewAgentsOutput: r.Request.Data.(*PreviewAgentsOutput),
+		PreviewAgentsOutput: r.Request.Data.(*types.PreviewAgentsOutput),
 		response:            &aws.Response{Request: r.Request},
 	}
 
@@ -157,7 +93,7 @@ func NewPreviewAgentsPaginator(req PreviewAgentsRequest) PreviewAgentsPaginator 
 	return PreviewAgentsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *PreviewAgentsInput
+				var inCpy *types.PreviewAgentsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -177,14 +113,14 @@ type PreviewAgentsPaginator struct {
 	aws.Pager
 }
 
-func (p *PreviewAgentsPaginator) CurrentPage() *PreviewAgentsOutput {
-	return p.Pager.CurrentPage().(*PreviewAgentsOutput)
+func (p *PreviewAgentsPaginator) CurrentPage() *types.PreviewAgentsOutput {
+	return p.Pager.CurrentPage().(*types.PreviewAgentsOutput)
 }
 
 // PreviewAgentsResponse is the response type for the
 // PreviewAgents API operation.
 type PreviewAgentsResponse struct {
-	*PreviewAgentsOutput
+	*types.PreviewAgentsOutput
 
 	response *aws.Response
 }

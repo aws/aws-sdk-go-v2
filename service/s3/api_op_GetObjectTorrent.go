@@ -4,119 +4,29 @@ package s3
 
 import (
 	"context"
-	"io"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/s3/types"
 )
-
-type GetObjectTorrentInput struct {
-	_ struct{} `type:"structure"`
-
-	// Bucket is a required field
-	Bucket *string `location:"uri" locationName:"Bucket" type:"string" required:"true"`
-
-	// Key is a required field
-	Key *string `location:"uri" locationName:"Key" min:"1" type:"string" required:"true"`
-
-	// Confirms that the requester knows that she or he will be charged for the
-	// request. Bucket owners need not specify this parameter in their requests.
-	// Documentation on downloading objects from requester pays buckets can be found
-	// at http://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
-	RequestPayer RequestPayer `location:"header" locationName:"x-amz-request-payer" type:"string" enum:"true"`
-}
-
-// String returns the string representation
-func (s GetObjectTorrentInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetObjectTorrentInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetObjectTorrentInput"}
-
-	if s.Bucket == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Bucket"))
-	}
-
-	if s.Key == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Key"))
-	}
-	if s.Key != nil && len(*s.Key) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Key", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-func (s *GetObjectTorrentInput) getBucket() (v string) {
-	if s.Bucket == nil {
-		return v
-	}
-	return *s.Bucket
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetObjectTorrentInput) MarshalFields(e protocol.FieldEncoder) error {
-
-	if len(s.RequestPayer) > 0 {
-		v := s.RequestPayer
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "x-amz-request-payer", v, metadata)
-	}
-	if s.Bucket != nil {
-		v := *s.Bucket
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "Bucket", protocol.StringValue(v), metadata)
-	}
-	if s.Key != nil {
-		v := *s.Key
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "Key", protocol.StringValue(v), metadata)
-	}
-	return nil
-}
-
-type GetObjectTorrentOutput struct {
-	_ struct{} `type:"structure" payload:"Body"`
-
-	Body io.ReadCloser `type:"blob"`
-
-	// If present, indicates that the requester was successfully charged for the
-	// request.
-	RequestCharged RequestCharged `location:"header" locationName:"x-amz-request-charged" type:"string" enum:"true"`
-}
-
-// String returns the string representation
-func (s GetObjectTorrentOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetObjectTorrentOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.RequestCharged) > 0 {
-		v := s.RequestCharged
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "x-amz-request-charged", v, metadata)
-	}
-	// Skipping Body Output type's body not valid.
-	return nil
-}
 
 const opGetObjectTorrent = "GetObjectTorrent"
 
 // GetObjectTorrentRequest returns a request value for making API operation for
 // Amazon Simple Storage Service.
 //
-// Return torrent files from a bucket.
+// Return torrent files from a bucket. BitTorrent can save you bandwidth when
+// you're distributing large files. For more information about BitTorrent, see
+// Amazon S3 Torrent (https://docs.aws.amazon.com/AmazonS3/latest/dev/S3Torrent.html).
+//
+// You can get torrent only for objects that are less than 5 GB in size and
+// that are not encrypted using server-side encryption with customer-provided
+// encryption key.
+//
+// To use GET, you must have READ access to the object.
+//
+// The following operation is related to GetObjectTorrent:
+//
+//    * GetObject
 //
 //    // Example sending a request using GetObjectTorrentRequest.
 //    req := client.GetObjectTorrentRequest(params)
@@ -126,7 +36,7 @@ const opGetObjectTorrent = "GetObjectTorrent"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetObjectTorrent
-func (c *Client) GetObjectTorrentRequest(input *GetObjectTorrentInput) GetObjectTorrentRequest {
+func (c *Client) GetObjectTorrentRequest(input *types.GetObjectTorrentInput) GetObjectTorrentRequest {
 	op := &aws.Operation{
 		Name:       opGetObjectTorrent,
 		HTTPMethod: "GET",
@@ -134,10 +44,10 @@ func (c *Client) GetObjectTorrentRequest(input *GetObjectTorrentInput) GetObject
 	}
 
 	if input == nil {
-		input = &GetObjectTorrentInput{}
+		input = &types.GetObjectTorrentInput{}
 	}
 
-	req := c.newRequest(op, input, &GetObjectTorrentOutput{})
+	req := c.newRequest(op, input, &types.GetObjectTorrentOutput{})
 	return GetObjectTorrentRequest{Request: req, Input: input, Copy: c.GetObjectTorrentRequest}
 }
 
@@ -145,8 +55,8 @@ func (c *Client) GetObjectTorrentRequest(input *GetObjectTorrentInput) GetObject
 // GetObjectTorrent API operation.
 type GetObjectTorrentRequest struct {
 	*aws.Request
-	Input *GetObjectTorrentInput
-	Copy  func(*GetObjectTorrentInput) GetObjectTorrentRequest
+	Input *types.GetObjectTorrentInput
+	Copy  func(*types.GetObjectTorrentInput) GetObjectTorrentRequest
 }
 
 // Send marshals and sends the GetObjectTorrent API request.
@@ -158,7 +68,7 @@ func (r GetObjectTorrentRequest) Send(ctx context.Context) (*GetObjectTorrentRes
 	}
 
 	resp := &GetObjectTorrentResponse{
-		GetObjectTorrentOutput: r.Request.Data.(*GetObjectTorrentOutput),
+		GetObjectTorrentOutput: r.Request.Data.(*types.GetObjectTorrentOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -168,7 +78,7 @@ func (r GetObjectTorrentRequest) Send(ctx context.Context) (*GetObjectTorrentRes
 // GetObjectTorrentResponse is the response type for the
 // GetObjectTorrent API operation.
 type GetObjectTorrentResponse struct {
-	*GetObjectTorrentOutput
+	*types.GetObjectTorrentOutput
 
 	response *aws.Response
 }

@@ -6,52 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/iotthingsgraph/types"
 )
-
-type GetSystemInstanceInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the system deployment instance. This value is returned by CreateSystemInstance.
-	//
-	// The ID should be in the following format.
-	//
-	// urn:tdm:REGION/ACCOUNT ID/default:deployment:DEPLOYMENTNAME
-	//
-	// Id is a required field
-	Id *string `locationName:"id" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetSystemInstanceInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetSystemInstanceInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetSystemInstanceInput"}
-
-	if s.Id == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Id"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type GetSystemInstanceOutput struct {
-	_ struct{} `type:"structure"`
-
-	// An object that describes the system instance.
-	Description *SystemInstanceDescription `locationName:"description" type:"structure"`
-}
-
-// String returns the string representation
-func (s GetSystemInstanceOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetSystemInstance = "GetSystemInstance"
 
@@ -68,7 +24,7 @@ const opGetSystemInstance = "GetSystemInstance"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iotthingsgraph-2018-09-06/GetSystemInstance
-func (c *Client) GetSystemInstanceRequest(input *GetSystemInstanceInput) GetSystemInstanceRequest {
+func (c *Client) GetSystemInstanceRequest(input *types.GetSystemInstanceInput) GetSystemInstanceRequest {
 	op := &aws.Operation{
 		Name:       opGetSystemInstance,
 		HTTPMethod: "POST",
@@ -76,10 +32,10 @@ func (c *Client) GetSystemInstanceRequest(input *GetSystemInstanceInput) GetSyst
 	}
 
 	if input == nil {
-		input = &GetSystemInstanceInput{}
+		input = &types.GetSystemInstanceInput{}
 	}
 
-	req := c.newRequest(op, input, &GetSystemInstanceOutput{})
+	req := c.newRequest(op, input, &types.GetSystemInstanceOutput{})
 	return GetSystemInstanceRequest{Request: req, Input: input, Copy: c.GetSystemInstanceRequest}
 }
 
@@ -87,8 +43,8 @@ func (c *Client) GetSystemInstanceRequest(input *GetSystemInstanceInput) GetSyst
 // GetSystemInstance API operation.
 type GetSystemInstanceRequest struct {
 	*aws.Request
-	Input *GetSystemInstanceInput
-	Copy  func(*GetSystemInstanceInput) GetSystemInstanceRequest
+	Input *types.GetSystemInstanceInput
+	Copy  func(*types.GetSystemInstanceInput) GetSystemInstanceRequest
 }
 
 // Send marshals and sends the GetSystemInstance API request.
@@ -100,7 +56,7 @@ func (r GetSystemInstanceRequest) Send(ctx context.Context) (*GetSystemInstanceR
 	}
 
 	resp := &GetSystemInstanceResponse{
-		GetSystemInstanceOutput: r.Request.Data.(*GetSystemInstanceOutput),
+		GetSystemInstanceOutput: r.Request.Data.(*types.GetSystemInstanceOutput),
 		response:                &aws.Response{Request: r.Request},
 	}
 
@@ -110,7 +66,7 @@ func (r GetSystemInstanceRequest) Send(ctx context.Context) (*GetSystemInstanceR
 // GetSystemInstanceResponse is the response type for the
 // GetSystemInstance API operation.
 type GetSystemInstanceResponse struct {
-	*GetSystemInstanceOutput
+	*types.GetSystemInstanceOutput
 
 	response *aws.Response
 }

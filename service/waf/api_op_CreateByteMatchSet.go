@@ -6,69 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/waf/types"
 )
-
-type CreateByteMatchSetInput struct {
-	_ struct{} `type:"structure"`
-
-	// The value returned by the most recent call to GetChangeToken.
-	//
-	// ChangeToken is a required field
-	ChangeToken *string `min:"1" type:"string" required:"true"`
-
-	// A friendly name or description of the ByteMatchSet. You can't change Name
-	// after you create a ByteMatchSet.
-	//
-	// Name is a required field
-	Name *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s CreateByteMatchSetInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateByteMatchSetInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateByteMatchSetInput"}
-
-	if s.ChangeToken == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ChangeToken"))
-	}
-	if s.ChangeToken != nil && len(*s.ChangeToken) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ChangeToken", 1))
-	}
-
-	if s.Name == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Name"))
-	}
-	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type CreateByteMatchSetOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A ByteMatchSet that contains no ByteMatchTuple objects.
-	ByteMatchSet *ByteMatchSet `type:"structure"`
-
-	// The ChangeToken that you used to submit the CreateByteMatchSet request. You
-	// can also use this value to query the status of the request. For more information,
-	// see GetChangeTokenStatus.
-	ChangeToken *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s CreateByteMatchSetOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCreateByteMatchSet = "CreateByteMatchSet"
 
@@ -106,7 +45,7 @@ const opCreateByteMatchSet = "CreateByteMatchSet"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/CreateByteMatchSet
-func (c *Client) CreateByteMatchSetRequest(input *CreateByteMatchSetInput) CreateByteMatchSetRequest {
+func (c *Client) CreateByteMatchSetRequest(input *types.CreateByteMatchSetInput) CreateByteMatchSetRequest {
 	op := &aws.Operation{
 		Name:       opCreateByteMatchSet,
 		HTTPMethod: "POST",
@@ -114,10 +53,10 @@ func (c *Client) CreateByteMatchSetRequest(input *CreateByteMatchSetInput) Creat
 	}
 
 	if input == nil {
-		input = &CreateByteMatchSetInput{}
+		input = &types.CreateByteMatchSetInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateByteMatchSetOutput{})
+	req := c.newRequest(op, input, &types.CreateByteMatchSetOutput{})
 	return CreateByteMatchSetRequest{Request: req, Input: input, Copy: c.CreateByteMatchSetRequest}
 }
 
@@ -125,8 +64,8 @@ func (c *Client) CreateByteMatchSetRequest(input *CreateByteMatchSetInput) Creat
 // CreateByteMatchSet API operation.
 type CreateByteMatchSetRequest struct {
 	*aws.Request
-	Input *CreateByteMatchSetInput
-	Copy  func(*CreateByteMatchSetInput) CreateByteMatchSetRequest
+	Input *types.CreateByteMatchSetInput
+	Copy  func(*types.CreateByteMatchSetInput) CreateByteMatchSetRequest
 }
 
 // Send marshals and sends the CreateByteMatchSet API request.
@@ -138,7 +77,7 @@ func (r CreateByteMatchSetRequest) Send(ctx context.Context) (*CreateByteMatchSe
 	}
 
 	resp := &CreateByteMatchSetResponse{
-		CreateByteMatchSetOutput: r.Request.Data.(*CreateByteMatchSetOutput),
+		CreateByteMatchSetOutput: r.Request.Data.(*types.CreateByteMatchSetOutput),
 		response:                 &aws.Response{Request: r.Request},
 	}
 
@@ -148,7 +87,7 @@ func (r CreateByteMatchSetRequest) Send(ctx context.Context) (*CreateByteMatchSe
 // CreateByteMatchSetResponse is the response type for the
 // CreateByteMatchSet API operation.
 type CreateByteMatchSetResponse struct {
-	*CreateByteMatchSetOutput
+	*types.CreateByteMatchSetOutput
 
 	response *aws.Response
 }

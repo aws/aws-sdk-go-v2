@@ -6,38 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/lightsail/types"
 )
-
-type GetRelationalDatabaseSnapshotsInput struct {
-	_ struct{} `type:"structure"`
-
-	// A token used for advancing to a specific page of results for your get relational
-	// database snapshots request.
-	PageToken *string `locationName:"pageToken" type:"string"`
-}
-
-// String returns the string representation
-func (s GetRelationalDatabaseSnapshotsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type GetRelationalDatabaseSnapshotsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A token used for advancing to the next page of results from your get relational
-	// database snapshots request.
-	NextPageToken *string `locationName:"nextPageToken" type:"string"`
-
-	// An object describing the result of your get relational database snapshots
-	// request.
-	RelationalDatabaseSnapshots []RelationalDatabaseSnapshot `locationName:"relationalDatabaseSnapshots" type:"list"`
-}
-
-// String returns the string representation
-func (s GetRelationalDatabaseSnapshotsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetRelationalDatabaseSnapshots = "GetRelationalDatabaseSnapshots"
 
@@ -54,7 +24,7 @@ const opGetRelationalDatabaseSnapshots = "GetRelationalDatabaseSnapshots"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetRelationalDatabaseSnapshots
-func (c *Client) GetRelationalDatabaseSnapshotsRequest(input *GetRelationalDatabaseSnapshotsInput) GetRelationalDatabaseSnapshotsRequest {
+func (c *Client) GetRelationalDatabaseSnapshotsRequest(input *types.GetRelationalDatabaseSnapshotsInput) GetRelationalDatabaseSnapshotsRequest {
 	op := &aws.Operation{
 		Name:       opGetRelationalDatabaseSnapshots,
 		HTTPMethod: "POST",
@@ -62,10 +32,10 @@ func (c *Client) GetRelationalDatabaseSnapshotsRequest(input *GetRelationalDatab
 	}
 
 	if input == nil {
-		input = &GetRelationalDatabaseSnapshotsInput{}
+		input = &types.GetRelationalDatabaseSnapshotsInput{}
 	}
 
-	req := c.newRequest(op, input, &GetRelationalDatabaseSnapshotsOutput{})
+	req := c.newRequest(op, input, &types.GetRelationalDatabaseSnapshotsOutput{})
 	return GetRelationalDatabaseSnapshotsRequest{Request: req, Input: input, Copy: c.GetRelationalDatabaseSnapshotsRequest}
 }
 
@@ -73,8 +43,8 @@ func (c *Client) GetRelationalDatabaseSnapshotsRequest(input *GetRelationalDatab
 // GetRelationalDatabaseSnapshots API operation.
 type GetRelationalDatabaseSnapshotsRequest struct {
 	*aws.Request
-	Input *GetRelationalDatabaseSnapshotsInput
-	Copy  func(*GetRelationalDatabaseSnapshotsInput) GetRelationalDatabaseSnapshotsRequest
+	Input *types.GetRelationalDatabaseSnapshotsInput
+	Copy  func(*types.GetRelationalDatabaseSnapshotsInput) GetRelationalDatabaseSnapshotsRequest
 }
 
 // Send marshals and sends the GetRelationalDatabaseSnapshots API request.
@@ -86,7 +56,7 @@ func (r GetRelationalDatabaseSnapshotsRequest) Send(ctx context.Context) (*GetRe
 	}
 
 	resp := &GetRelationalDatabaseSnapshotsResponse{
-		GetRelationalDatabaseSnapshotsOutput: r.Request.Data.(*GetRelationalDatabaseSnapshotsOutput),
+		GetRelationalDatabaseSnapshotsOutput: r.Request.Data.(*types.GetRelationalDatabaseSnapshotsOutput),
 		response:                             &aws.Response{Request: r.Request},
 	}
 
@@ -96,7 +66,7 @@ func (r GetRelationalDatabaseSnapshotsRequest) Send(ctx context.Context) (*GetRe
 // GetRelationalDatabaseSnapshotsResponse is the response type for the
 // GetRelationalDatabaseSnapshots API operation.
 type GetRelationalDatabaseSnapshotsResponse struct {
-	*GetRelationalDatabaseSnapshotsOutput
+	*types.GetRelationalDatabaseSnapshotsOutput
 
 	response *aws.Response
 }

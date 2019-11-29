@@ -6,48 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/xray/types"
 )
-
-type GetEncryptionConfigInput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s GetEncryptionConfigInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetEncryptionConfigInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	return nil
-}
-
-type GetEncryptionConfigOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The encryption configuration document.
-	EncryptionConfig *EncryptionConfig `type:"structure"`
-}
-
-// String returns the string representation
-func (s GetEncryptionConfigOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetEncryptionConfigOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.EncryptionConfig != nil {
-		v := s.EncryptionConfig
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "EncryptionConfig", v, metadata)
-	}
-	return nil
-}
 
 const opGetEncryptionConfig = "GetEncryptionConfig"
 
@@ -64,7 +24,7 @@ const opGetEncryptionConfig = "GetEncryptionConfig"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/GetEncryptionConfig
-func (c *Client) GetEncryptionConfigRequest(input *GetEncryptionConfigInput) GetEncryptionConfigRequest {
+func (c *Client) GetEncryptionConfigRequest(input *types.GetEncryptionConfigInput) GetEncryptionConfigRequest {
 	op := &aws.Operation{
 		Name:       opGetEncryptionConfig,
 		HTTPMethod: "POST",
@@ -72,10 +32,10 @@ func (c *Client) GetEncryptionConfigRequest(input *GetEncryptionConfigInput) Get
 	}
 
 	if input == nil {
-		input = &GetEncryptionConfigInput{}
+		input = &types.GetEncryptionConfigInput{}
 	}
 
-	req := c.newRequest(op, input, &GetEncryptionConfigOutput{})
+	req := c.newRequest(op, input, &types.GetEncryptionConfigOutput{})
 	return GetEncryptionConfigRequest{Request: req, Input: input, Copy: c.GetEncryptionConfigRequest}
 }
 
@@ -83,8 +43,8 @@ func (c *Client) GetEncryptionConfigRequest(input *GetEncryptionConfigInput) Get
 // GetEncryptionConfig API operation.
 type GetEncryptionConfigRequest struct {
 	*aws.Request
-	Input *GetEncryptionConfigInput
-	Copy  func(*GetEncryptionConfigInput) GetEncryptionConfigRequest
+	Input *types.GetEncryptionConfigInput
+	Copy  func(*types.GetEncryptionConfigInput) GetEncryptionConfigRequest
 }
 
 // Send marshals and sends the GetEncryptionConfig API request.
@@ -96,7 +56,7 @@ func (r GetEncryptionConfigRequest) Send(ctx context.Context) (*GetEncryptionCon
 	}
 
 	resp := &GetEncryptionConfigResponse{
-		GetEncryptionConfigOutput: r.Request.Data.(*GetEncryptionConfigOutput),
+		GetEncryptionConfigOutput: r.Request.Data.(*types.GetEncryptionConfigOutput),
 		response:                  &aws.Response{Request: r.Request},
 	}
 
@@ -106,7 +66,7 @@ func (r GetEncryptionConfigRequest) Send(ctx context.Context) (*GetEncryptionCon
 // GetEncryptionConfigResponse is the response type for the
 // GetEncryptionConfig API operation.
 type GetEncryptionConfigResponse struct {
-	*GetEncryptionConfigOutput
+	*types.GetEncryptionConfigOutput
 
 	response *aws.Response
 }

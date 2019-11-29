@@ -6,77 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/greengrass/types"
 )
-
-type ListSubscriptionDefinitionsInput struct {
-	_ struct{} `type:"structure"`
-
-	MaxResults *string `location:"querystring" locationName:"MaxResults" type:"string"`
-
-	NextToken *string `location:"querystring" locationName:"NextToken" type:"string"`
-}
-
-// String returns the string representation
-func (s ListSubscriptionDefinitionsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListSubscriptionDefinitionsInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.MaxResults != nil {
-		v := *s.MaxResults
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "MaxResults", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type ListSubscriptionDefinitionsOutput struct {
-	_ struct{} `type:"structure"`
-
-	Definitions []DefinitionInformation `type:"list"`
-
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s ListSubscriptionDefinitionsOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListSubscriptionDefinitionsOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.Definitions != nil {
-		v := s.Definitions
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "Definitions", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opListSubscriptionDefinitions = "ListSubscriptionDefinitions"
 
@@ -93,7 +24,7 @@ const opListSubscriptionDefinitions = "ListSubscriptionDefinitions"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/ListSubscriptionDefinitions
-func (c *Client) ListSubscriptionDefinitionsRequest(input *ListSubscriptionDefinitionsInput) ListSubscriptionDefinitionsRequest {
+func (c *Client) ListSubscriptionDefinitionsRequest(input *types.ListSubscriptionDefinitionsInput) ListSubscriptionDefinitionsRequest {
 	op := &aws.Operation{
 		Name:       opListSubscriptionDefinitions,
 		HTTPMethod: "GET",
@@ -101,10 +32,10 @@ func (c *Client) ListSubscriptionDefinitionsRequest(input *ListSubscriptionDefin
 	}
 
 	if input == nil {
-		input = &ListSubscriptionDefinitionsInput{}
+		input = &types.ListSubscriptionDefinitionsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListSubscriptionDefinitionsOutput{})
+	req := c.newRequest(op, input, &types.ListSubscriptionDefinitionsOutput{})
 	return ListSubscriptionDefinitionsRequest{Request: req, Input: input, Copy: c.ListSubscriptionDefinitionsRequest}
 }
 
@@ -112,8 +43,8 @@ func (c *Client) ListSubscriptionDefinitionsRequest(input *ListSubscriptionDefin
 // ListSubscriptionDefinitions API operation.
 type ListSubscriptionDefinitionsRequest struct {
 	*aws.Request
-	Input *ListSubscriptionDefinitionsInput
-	Copy  func(*ListSubscriptionDefinitionsInput) ListSubscriptionDefinitionsRequest
+	Input *types.ListSubscriptionDefinitionsInput
+	Copy  func(*types.ListSubscriptionDefinitionsInput) ListSubscriptionDefinitionsRequest
 }
 
 // Send marshals and sends the ListSubscriptionDefinitions API request.
@@ -125,7 +56,7 @@ func (r ListSubscriptionDefinitionsRequest) Send(ctx context.Context) (*ListSubs
 	}
 
 	resp := &ListSubscriptionDefinitionsResponse{
-		ListSubscriptionDefinitionsOutput: r.Request.Data.(*ListSubscriptionDefinitionsOutput),
+		ListSubscriptionDefinitionsOutput: r.Request.Data.(*types.ListSubscriptionDefinitionsOutput),
 		response:                          &aws.Response{Request: r.Request},
 	}
 
@@ -135,7 +66,7 @@ func (r ListSubscriptionDefinitionsRequest) Send(ctx context.Context) (*ListSubs
 // ListSubscriptionDefinitionsResponse is the response type for the
 // ListSubscriptionDefinitions API operation.
 type ListSubscriptionDefinitionsResponse struct {
-	*ListSubscriptionDefinitionsOutput
+	*types.ListSubscriptionDefinitionsOutput
 
 	response *aws.Response
 }

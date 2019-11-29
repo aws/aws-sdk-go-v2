@@ -6,96 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/pinpoint/types"
 )
-
-type PutEventStreamInput struct {
-	_ struct{} `type:"structure" payload:"WriteEventStream"`
-
-	// ApplicationId is a required field
-	ApplicationId *string `location:"uri" locationName:"application-id" type:"string" required:"true"`
-
-	// Specifies the Amazon Resource Name (ARN) of an event stream to publish events
-	// to and the AWS Identity and Access Management (IAM) role to use when publishing
-	// those events.
-	//
-	// WriteEventStream is a required field
-	WriteEventStream *WriteEventStream `type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s PutEventStreamInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *PutEventStreamInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "PutEventStreamInput"}
-
-	if s.ApplicationId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ApplicationId"))
-	}
-
-	if s.WriteEventStream == nil {
-		invalidParams.Add(aws.NewErrParamRequired("WriteEventStream"))
-	}
-	if s.WriteEventStream != nil {
-		if err := s.WriteEventStream.Validate(); err != nil {
-			invalidParams.AddNested("WriteEventStream", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s PutEventStreamInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.ApplicationId != nil {
-		v := *s.ApplicationId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "application-id", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.WriteEventStream != nil {
-		v := s.WriteEventStream
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.PayloadTarget, "WriteEventStream", v, metadata)
-	}
-	return nil
-}
-
-type PutEventStreamOutput struct {
-	_ struct{} `type:"structure" payload:"EventStream"`
-
-	// Specifies settings for publishing event data to an Amazon Kinesis data stream
-	// or an Amazon Kinesis Data Firehose delivery stream.
-	//
-	// EventStream is a required field
-	EventStream *EventStream `type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s PutEventStreamOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s PutEventStreamOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.EventStream != nil {
-		v := s.EventStream
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.PayloadTarget, "EventStream", v, metadata)
-	}
-	return nil
-}
 
 const opPutEventStream = "PutEventStream"
 
@@ -113,7 +25,7 @@ const opPutEventStream = "PutEventStream"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/PutEventStream
-func (c *Client) PutEventStreamRequest(input *PutEventStreamInput) PutEventStreamRequest {
+func (c *Client) PutEventStreamRequest(input *types.PutEventStreamInput) PutEventStreamRequest {
 	op := &aws.Operation{
 		Name:       opPutEventStream,
 		HTTPMethod: "POST",
@@ -121,10 +33,10 @@ func (c *Client) PutEventStreamRequest(input *PutEventStreamInput) PutEventStrea
 	}
 
 	if input == nil {
-		input = &PutEventStreamInput{}
+		input = &types.PutEventStreamInput{}
 	}
 
-	req := c.newRequest(op, input, &PutEventStreamOutput{})
+	req := c.newRequest(op, input, &types.PutEventStreamOutput{})
 	return PutEventStreamRequest{Request: req, Input: input, Copy: c.PutEventStreamRequest}
 }
 
@@ -132,8 +44,8 @@ func (c *Client) PutEventStreamRequest(input *PutEventStreamInput) PutEventStrea
 // PutEventStream API operation.
 type PutEventStreamRequest struct {
 	*aws.Request
-	Input *PutEventStreamInput
-	Copy  func(*PutEventStreamInput) PutEventStreamRequest
+	Input *types.PutEventStreamInput
+	Copy  func(*types.PutEventStreamInput) PutEventStreamRequest
 }
 
 // Send marshals and sends the PutEventStream API request.
@@ -145,7 +57,7 @@ func (r PutEventStreamRequest) Send(ctx context.Context) (*PutEventStreamRespons
 	}
 
 	resp := &PutEventStreamResponse{
-		PutEventStreamOutput: r.Request.Data.(*PutEventStreamOutput),
+		PutEventStreamOutput: r.Request.Data.(*types.PutEventStreamOutput),
 		response:             &aws.Response{Request: r.Request},
 	}
 
@@ -155,7 +67,7 @@ func (r PutEventStreamRequest) Send(ctx context.Context) (*PutEventStreamRespons
 // PutEventStreamResponse is the response type for the
 // PutEventStream API operation.
 type PutEventStreamResponse struct {
-	*PutEventStreamOutput
+	*types.PutEventStreamOutput
 
 	response *aws.Response
 }

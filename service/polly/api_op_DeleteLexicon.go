@@ -6,64 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/polly/types"
 )
-
-type DeleteLexiconInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the lexicon to delete. Must be an existing lexicon in the region.
-	//
-	// Name is a required field
-	Name *string `location:"uri" locationName:"LexiconName" type:"string" required:"true" sensitive:"true"`
-}
-
-// String returns the string representation
-func (s DeleteLexiconInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteLexiconInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteLexiconInput"}
-
-	if s.Name == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Name"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteLexiconInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.Name != nil {
-		v := *s.Name
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "LexiconName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type DeleteLexiconOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteLexiconOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteLexiconOutput) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
 
 const opDeleteLexicon = "DeleteLexicon"
 
@@ -84,7 +28,7 @@ const opDeleteLexicon = "DeleteLexicon"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/polly-2016-06-10/DeleteLexicon
-func (c *Client) DeleteLexiconRequest(input *DeleteLexiconInput) DeleteLexiconRequest {
+func (c *Client) DeleteLexiconRequest(input *types.DeleteLexiconInput) DeleteLexiconRequest {
 	op := &aws.Operation{
 		Name:       opDeleteLexicon,
 		HTTPMethod: "DELETE",
@@ -92,10 +36,10 @@ func (c *Client) DeleteLexiconRequest(input *DeleteLexiconInput) DeleteLexiconRe
 	}
 
 	if input == nil {
-		input = &DeleteLexiconInput{}
+		input = &types.DeleteLexiconInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteLexiconOutput{})
+	req := c.newRequest(op, input, &types.DeleteLexiconOutput{})
 	return DeleteLexiconRequest{Request: req, Input: input, Copy: c.DeleteLexiconRequest}
 }
 
@@ -103,8 +47,8 @@ func (c *Client) DeleteLexiconRequest(input *DeleteLexiconInput) DeleteLexiconRe
 // DeleteLexicon API operation.
 type DeleteLexiconRequest struct {
 	*aws.Request
-	Input *DeleteLexiconInput
-	Copy  func(*DeleteLexiconInput) DeleteLexiconRequest
+	Input *types.DeleteLexiconInput
+	Copy  func(*types.DeleteLexiconInput) DeleteLexiconRequest
 }
 
 // Send marshals and sends the DeleteLexicon API request.
@@ -116,7 +60,7 @@ func (r DeleteLexiconRequest) Send(ctx context.Context) (*DeleteLexiconResponse,
 	}
 
 	resp := &DeleteLexiconResponse{
-		DeleteLexiconOutput: r.Request.Data.(*DeleteLexiconOutput),
+		DeleteLexiconOutput: r.Request.Data.(*types.DeleteLexiconOutput),
 		response:            &aws.Response{Request: r.Request},
 	}
 
@@ -126,7 +70,7 @@ func (r DeleteLexiconRequest) Send(ctx context.Context) (*DeleteLexiconResponse,
 // DeleteLexiconResponse is the response type for the
 // DeleteLexicon API operation.
 type DeleteLexiconResponse struct {
-	*DeleteLexiconOutput
+	*types.DeleteLexiconOutput
 
 	response *aws.Response
 }

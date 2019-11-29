@@ -6,63 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/inspector/types"
 )
-
-type DescribeExclusionsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The list of ARNs that specify the exclusions that you want to describe.
-	//
-	// ExclusionArns is a required field
-	ExclusionArns []string `locationName:"exclusionArns" min:"1" type:"list" required:"true"`
-
-	// The locale into which you want to translate the exclusion's title, description,
-	// and recommendation.
-	Locale Locale `locationName:"locale" type:"string" enum:"true"`
-}
-
-// String returns the string representation
-func (s DescribeExclusionsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeExclusionsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeExclusionsInput"}
-
-	if s.ExclusionArns == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ExclusionArns"))
-	}
-	if s.ExclusionArns != nil && len(s.ExclusionArns) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ExclusionArns", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribeExclusionsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Information about the exclusions.
-	//
-	// Exclusions is a required field
-	Exclusions map[string]Exclusion `locationName:"exclusions" min:"1" type:"map" required:"true"`
-
-	// Exclusion details that cannot be described. An error code is provided for
-	// each failed item.
-	//
-	// FailedItems is a required field
-	FailedItems map[string]FailedItemDetails `locationName:"failedItems" type:"map" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeExclusionsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeExclusions = "DescribeExclusions"
 
@@ -79,7 +24,7 @@ const opDescribeExclusions = "DescribeExclusions"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/DescribeExclusions
-func (c *Client) DescribeExclusionsRequest(input *DescribeExclusionsInput) DescribeExclusionsRequest {
+func (c *Client) DescribeExclusionsRequest(input *types.DescribeExclusionsInput) DescribeExclusionsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeExclusions,
 		HTTPMethod: "POST",
@@ -87,10 +32,10 @@ func (c *Client) DescribeExclusionsRequest(input *DescribeExclusionsInput) Descr
 	}
 
 	if input == nil {
-		input = &DescribeExclusionsInput{}
+		input = &types.DescribeExclusionsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeExclusionsOutput{})
+	req := c.newRequest(op, input, &types.DescribeExclusionsOutput{})
 	return DescribeExclusionsRequest{Request: req, Input: input, Copy: c.DescribeExclusionsRequest}
 }
 
@@ -98,8 +43,8 @@ func (c *Client) DescribeExclusionsRequest(input *DescribeExclusionsInput) Descr
 // DescribeExclusions API operation.
 type DescribeExclusionsRequest struct {
 	*aws.Request
-	Input *DescribeExclusionsInput
-	Copy  func(*DescribeExclusionsInput) DescribeExclusionsRequest
+	Input *types.DescribeExclusionsInput
+	Copy  func(*types.DescribeExclusionsInput) DescribeExclusionsRequest
 }
 
 // Send marshals and sends the DescribeExclusions API request.
@@ -111,7 +56,7 @@ func (r DescribeExclusionsRequest) Send(ctx context.Context) (*DescribeExclusion
 	}
 
 	resp := &DescribeExclusionsResponse{
-		DescribeExclusionsOutput: r.Request.Data.(*DescribeExclusionsOutput),
+		DescribeExclusionsOutput: r.Request.Data.(*types.DescribeExclusionsOutput),
 		response:                 &aws.Response{Request: r.Request},
 	}
 
@@ -121,7 +66,7 @@ func (r DescribeExclusionsRequest) Send(ctx context.Context) (*DescribeExclusion
 // DescribeExclusionsResponse is the response type for the
 // DescribeExclusions API operation.
 type DescribeExclusionsResponse struct {
-	*DescribeExclusionsOutput
+	*types.DescribeExclusionsOutput
 
 	response *aws.Response
 }

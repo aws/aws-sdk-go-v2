@@ -6,75 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/types"
 )
-
-type AssociateProductWithPortfolioInput struct {
-	_ struct{} `type:"structure"`
-
-	// The language code.
-	//
-	//    * en - English (default)
-	//
-	//    * jp - Japanese
-	//
-	//    * zh - Chinese
-	AcceptLanguage *string `type:"string"`
-
-	// The portfolio identifier.
-	//
-	// PortfolioId is a required field
-	PortfolioId *string `min:"1" type:"string" required:"true"`
-
-	// The product identifier.
-	//
-	// ProductId is a required field
-	ProductId *string `min:"1" type:"string" required:"true"`
-
-	// The identifier of the source portfolio.
-	SourcePortfolioId *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s AssociateProductWithPortfolioInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *AssociateProductWithPortfolioInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "AssociateProductWithPortfolioInput"}
-
-	if s.PortfolioId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("PortfolioId"))
-	}
-	if s.PortfolioId != nil && len(*s.PortfolioId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("PortfolioId", 1))
-	}
-
-	if s.ProductId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ProductId"))
-	}
-	if s.ProductId != nil && len(*s.ProductId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ProductId", 1))
-	}
-	if s.SourcePortfolioId != nil && len(*s.SourcePortfolioId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("SourcePortfolioId", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type AssociateProductWithPortfolioOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s AssociateProductWithPortfolioOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opAssociateProductWithPortfolio = "AssociateProductWithPortfolio"
 
@@ -91,7 +24,7 @@ const opAssociateProductWithPortfolio = "AssociateProductWithPortfolio"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/AssociateProductWithPortfolio
-func (c *Client) AssociateProductWithPortfolioRequest(input *AssociateProductWithPortfolioInput) AssociateProductWithPortfolioRequest {
+func (c *Client) AssociateProductWithPortfolioRequest(input *types.AssociateProductWithPortfolioInput) AssociateProductWithPortfolioRequest {
 	op := &aws.Operation{
 		Name:       opAssociateProductWithPortfolio,
 		HTTPMethod: "POST",
@@ -99,10 +32,10 @@ func (c *Client) AssociateProductWithPortfolioRequest(input *AssociateProductWit
 	}
 
 	if input == nil {
-		input = &AssociateProductWithPortfolioInput{}
+		input = &types.AssociateProductWithPortfolioInput{}
 	}
 
-	req := c.newRequest(op, input, &AssociateProductWithPortfolioOutput{})
+	req := c.newRequest(op, input, &types.AssociateProductWithPortfolioOutput{})
 	return AssociateProductWithPortfolioRequest{Request: req, Input: input, Copy: c.AssociateProductWithPortfolioRequest}
 }
 
@@ -110,8 +43,8 @@ func (c *Client) AssociateProductWithPortfolioRequest(input *AssociateProductWit
 // AssociateProductWithPortfolio API operation.
 type AssociateProductWithPortfolioRequest struct {
 	*aws.Request
-	Input *AssociateProductWithPortfolioInput
-	Copy  func(*AssociateProductWithPortfolioInput) AssociateProductWithPortfolioRequest
+	Input *types.AssociateProductWithPortfolioInput
+	Copy  func(*types.AssociateProductWithPortfolioInput) AssociateProductWithPortfolioRequest
 }
 
 // Send marshals and sends the AssociateProductWithPortfolio API request.
@@ -123,7 +56,7 @@ func (r AssociateProductWithPortfolioRequest) Send(ctx context.Context) (*Associ
 	}
 
 	resp := &AssociateProductWithPortfolioResponse{
-		AssociateProductWithPortfolioOutput: r.Request.Data.(*AssociateProductWithPortfolioOutput),
+		AssociateProductWithPortfolioOutput: r.Request.Data.(*types.AssociateProductWithPortfolioOutput),
 		response:                            &aws.Response{Request: r.Request},
 	}
 
@@ -133,7 +66,7 @@ func (r AssociateProductWithPortfolioRequest) Send(ctx context.Context) (*Associ
 // AssociateProductWithPortfolioResponse is the response type for the
 // AssociateProductWithPortfolio API operation.
 type AssociateProductWithPortfolioResponse struct {
-	*AssociateProductWithPortfolioOutput
+	*types.AssociateProductWithPortfolioOutput
 
 	response *aws.Response
 }

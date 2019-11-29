@@ -13,6 +13,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws/awserr"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting/integration"
 	"github.com/aws/aws-sdk-go-v2/service/lambda"
+	"github.com/aws/aws-sdk-go-v2/service/lambda/types"
 )
 
 var _ aws.Config
@@ -24,7 +25,7 @@ func TestInteg_00_ListFunctions(t *testing.T) {
 
 	cfg := integration.ConfigWithDefaultRegion("us-west-2")
 	svc := lambda.New(cfg)
-	params := &lambda.ListFunctionsInput{}
+	params := &types.ListFunctionsInput{}
 
 	req := svc.ListFunctionsRequest(params)
 
@@ -39,7 +40,7 @@ func TestInteg_01_Invoke(t *testing.T) {
 
 	cfg := integration.ConfigWithDefaultRegion("us-west-2")
 	svc := lambda.New(cfg)
-	params := &lambda.InvokeInput{
+	params := &types.InvokeInput{
 		FunctionName: aws.String("bogus-function"),
 	}
 

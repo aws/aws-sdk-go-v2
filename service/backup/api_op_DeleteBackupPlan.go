@@ -4,109 +4,10 @@ package backup
 
 import (
 	"context"
-	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/backup/types"
 )
-
-type DeleteBackupPlanInput struct {
-	_ struct{} `type:"structure"`
-
-	// Uniquely identifies a backup plan.
-	//
-	// BackupPlanId is a required field
-	BackupPlanId *string `location:"uri" locationName:"backupPlanId" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteBackupPlanInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteBackupPlanInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteBackupPlanInput"}
-
-	if s.BackupPlanId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("BackupPlanId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteBackupPlanInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.BackupPlanId != nil {
-		v := *s.BackupPlanId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "backupPlanId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type DeleteBackupPlanOutput struct {
-	_ struct{} `type:"structure"`
-
-	// An Amazon Resource Name (ARN) that uniquely identifies a backup plan; for
-	// example, arn:aws:backup:us-east-1:123456789012:plan:8F81F553-3A74-4A3F-B93D-B3360DC80C50.
-	BackupPlanArn *string `type:"string"`
-
-	// Uniquely identifies a backup plan.
-	BackupPlanId *string `type:"string"`
-
-	// The date and time a backup plan is deleted, in Unix format and Coordinated
-	// Universal Time (UTC). The value of CreationDate is accurate to milliseconds.
-	// For example, the value 1516925490.087 represents Friday, January 26, 2018
-	// 12:11:30.087 AM.
-	DeletionDate *time.Time `type:"timestamp"`
-
-	// Unique, randomly generated, Unicode, UTF-8 encoded strings that are at most
-	// 1,024 bytes long. Version Ids cannot be edited.
-	VersionId *string `type:"string"`
-}
-
-// String returns the string representation
-func (s DeleteBackupPlanOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteBackupPlanOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.BackupPlanArn != nil {
-		v := *s.BackupPlanArn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "BackupPlanArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.BackupPlanId != nil {
-		v := *s.BackupPlanId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "BackupPlanId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.DeletionDate != nil {
-		v := *s.DeletionDate
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "DeletionDate",
-			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
-	}
-	if s.VersionId != nil {
-		v := *s.VersionId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "VersionId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opDeleteBackupPlan = "DeleteBackupPlan"
 
@@ -126,7 +27,7 @@ const opDeleteBackupPlan = "DeleteBackupPlan"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/DeleteBackupPlan
-func (c *Client) DeleteBackupPlanRequest(input *DeleteBackupPlanInput) DeleteBackupPlanRequest {
+func (c *Client) DeleteBackupPlanRequest(input *types.DeleteBackupPlanInput) DeleteBackupPlanRequest {
 	op := &aws.Operation{
 		Name:       opDeleteBackupPlan,
 		HTTPMethod: "DELETE",
@@ -134,10 +35,10 @@ func (c *Client) DeleteBackupPlanRequest(input *DeleteBackupPlanInput) DeleteBac
 	}
 
 	if input == nil {
-		input = &DeleteBackupPlanInput{}
+		input = &types.DeleteBackupPlanInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteBackupPlanOutput{})
+	req := c.newRequest(op, input, &types.DeleteBackupPlanOutput{})
 	return DeleteBackupPlanRequest{Request: req, Input: input, Copy: c.DeleteBackupPlanRequest}
 }
 
@@ -145,8 +46,8 @@ func (c *Client) DeleteBackupPlanRequest(input *DeleteBackupPlanInput) DeleteBac
 // DeleteBackupPlan API operation.
 type DeleteBackupPlanRequest struct {
 	*aws.Request
-	Input *DeleteBackupPlanInput
-	Copy  func(*DeleteBackupPlanInput) DeleteBackupPlanRequest
+	Input *types.DeleteBackupPlanInput
+	Copy  func(*types.DeleteBackupPlanInput) DeleteBackupPlanRequest
 }
 
 // Send marshals and sends the DeleteBackupPlan API request.
@@ -158,7 +59,7 @@ func (r DeleteBackupPlanRequest) Send(ctx context.Context) (*DeleteBackupPlanRes
 	}
 
 	resp := &DeleteBackupPlanResponse{
-		DeleteBackupPlanOutput: r.Request.Data.(*DeleteBackupPlanOutput),
+		DeleteBackupPlanOutput: r.Request.Data.(*types.DeleteBackupPlanOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -168,7 +69,7 @@ func (r DeleteBackupPlanRequest) Send(ctx context.Context) (*DeleteBackupPlanRes
 // DeleteBackupPlanResponse is the response type for the
 // DeleteBackupPlan API operation.
 type DeleteBackupPlanResponse struct {
-	*DeleteBackupPlanOutput
+	*types.DeleteBackupPlanOutput
 
 	response *aws.Response
 }

@@ -6,68 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/servicediscovery/types"
 )
-
-type CreatePrivateDnsNamespaceInput struct {
-	_ struct{} `type:"structure"`
-
-	// A unique string that identifies the request and that allows failed CreatePrivateDnsNamespace
-	// requests to be retried without the risk of executing the operation twice.
-	// CreatorRequestId can be any unique string, for example, a date/time stamp.
-	CreatorRequestId *string `type:"string" idempotencyToken:"true"`
-
-	// A description for the namespace.
-	Description *string `type:"string"`
-
-	// The name that you want to assign to this namespace. When you create a private
-	// DNS namespace, AWS Cloud Map automatically creates an Amazon Route 53 private
-	// hosted zone that has the same name as the namespace.
-	//
-	// Name is a required field
-	Name *string `type:"string" required:"true"`
-
-	// The ID of the Amazon VPC that you want to associate the namespace with.
-	//
-	// Vpc is a required field
-	Vpc *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s CreatePrivateDnsNamespaceInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreatePrivateDnsNamespaceInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreatePrivateDnsNamespaceInput"}
-
-	if s.Name == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Name"))
-	}
-
-	if s.Vpc == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Vpc"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type CreatePrivateDnsNamespaceOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A value that you can use to determine whether the request completed successfully.
-	// To get the status of the operation, see GetOperation.
-	OperationId *string `type:"string"`
-}
-
-// String returns the string representation
-func (s CreatePrivateDnsNamespaceOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCreatePrivateDnsNamespace = "CreatePrivateDnsNamespace"
 
@@ -90,7 +30,7 @@ const opCreatePrivateDnsNamespace = "CreatePrivateDnsNamespace"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicediscovery-2017-03-14/CreatePrivateDnsNamespace
-func (c *Client) CreatePrivateDnsNamespaceRequest(input *CreatePrivateDnsNamespaceInput) CreatePrivateDnsNamespaceRequest {
+func (c *Client) CreatePrivateDnsNamespaceRequest(input *types.CreatePrivateDnsNamespaceInput) CreatePrivateDnsNamespaceRequest {
 	op := &aws.Operation{
 		Name:       opCreatePrivateDnsNamespace,
 		HTTPMethod: "POST",
@@ -98,10 +38,10 @@ func (c *Client) CreatePrivateDnsNamespaceRequest(input *CreatePrivateDnsNamespa
 	}
 
 	if input == nil {
-		input = &CreatePrivateDnsNamespaceInput{}
+		input = &types.CreatePrivateDnsNamespaceInput{}
 	}
 
-	req := c.newRequest(op, input, &CreatePrivateDnsNamespaceOutput{})
+	req := c.newRequest(op, input, &types.CreatePrivateDnsNamespaceOutput{})
 	return CreatePrivateDnsNamespaceRequest{Request: req, Input: input, Copy: c.CreatePrivateDnsNamespaceRequest}
 }
 
@@ -109,8 +49,8 @@ func (c *Client) CreatePrivateDnsNamespaceRequest(input *CreatePrivateDnsNamespa
 // CreatePrivateDnsNamespace API operation.
 type CreatePrivateDnsNamespaceRequest struct {
 	*aws.Request
-	Input *CreatePrivateDnsNamespaceInput
-	Copy  func(*CreatePrivateDnsNamespaceInput) CreatePrivateDnsNamespaceRequest
+	Input *types.CreatePrivateDnsNamespaceInput
+	Copy  func(*types.CreatePrivateDnsNamespaceInput) CreatePrivateDnsNamespaceRequest
 }
 
 // Send marshals and sends the CreatePrivateDnsNamespace API request.
@@ -122,7 +62,7 @@ func (r CreatePrivateDnsNamespaceRequest) Send(ctx context.Context) (*CreatePriv
 	}
 
 	resp := &CreatePrivateDnsNamespaceResponse{
-		CreatePrivateDnsNamespaceOutput: r.Request.Data.(*CreatePrivateDnsNamespaceOutput),
+		CreatePrivateDnsNamespaceOutput: r.Request.Data.(*types.CreatePrivateDnsNamespaceOutput),
 		response:                        &aws.Response{Request: r.Request},
 	}
 
@@ -132,7 +72,7 @@ func (r CreatePrivateDnsNamespaceRequest) Send(ctx context.Context) (*CreatePriv
 // CreatePrivateDnsNamespaceResponse is the response type for the
 // CreatePrivateDnsNamespace API operation.
 type CreatePrivateDnsNamespaceResponse struct {
-	*CreatePrivateDnsNamespaceOutput
+	*types.CreatePrivateDnsNamespaceOutput
 
 	response *aws.Response
 }

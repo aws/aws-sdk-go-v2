@@ -6,56 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/comprehend/types"
 )
-
-type ListTagsForResourceInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the given Amazon Comprehend resource you
-	// are querying.
-	//
-	// ResourceArn is a required field
-	ResourceArn *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s ListTagsForResourceInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListTagsForResourceInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListTagsForResourceInput"}
-
-	if s.ResourceArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ResourceArn"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ListTagsForResourceOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the given Amazon Comprehend resource you
-	// are querying.
-	ResourceArn *string `type:"string"`
-
-	// Tags associated with the Amazon Comprehend resource being queried. A tag
-	// is a key-value pair that adds as a metadata to a resource used by Amazon
-	// Comprehend. For example, a tag with "Sales" as the key might be added to
-	// a resource to indicate its use by the sales department.
-	Tags []Tag `type:"list"`
-}
-
-// String returns the string representation
-func (s ListTagsForResourceOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListTagsForResource = "ListTagsForResource"
 
@@ -72,7 +24,7 @@ const opListTagsForResource = "ListTagsForResource"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/ListTagsForResource
-func (c *Client) ListTagsForResourceRequest(input *ListTagsForResourceInput) ListTagsForResourceRequest {
+func (c *Client) ListTagsForResourceRequest(input *types.ListTagsForResourceInput) ListTagsForResourceRequest {
 	op := &aws.Operation{
 		Name:       opListTagsForResource,
 		HTTPMethod: "POST",
@@ -80,10 +32,10 @@ func (c *Client) ListTagsForResourceRequest(input *ListTagsForResourceInput) Lis
 	}
 
 	if input == nil {
-		input = &ListTagsForResourceInput{}
+		input = &types.ListTagsForResourceInput{}
 	}
 
-	req := c.newRequest(op, input, &ListTagsForResourceOutput{})
+	req := c.newRequest(op, input, &types.ListTagsForResourceOutput{})
 	return ListTagsForResourceRequest{Request: req, Input: input, Copy: c.ListTagsForResourceRequest}
 }
 
@@ -91,8 +43,8 @@ func (c *Client) ListTagsForResourceRequest(input *ListTagsForResourceInput) Lis
 // ListTagsForResource API operation.
 type ListTagsForResourceRequest struct {
 	*aws.Request
-	Input *ListTagsForResourceInput
-	Copy  func(*ListTagsForResourceInput) ListTagsForResourceRequest
+	Input *types.ListTagsForResourceInput
+	Copy  func(*types.ListTagsForResourceInput) ListTagsForResourceRequest
 }
 
 // Send marshals and sends the ListTagsForResource API request.
@@ -104,7 +56,7 @@ func (r ListTagsForResourceRequest) Send(ctx context.Context) (*ListTagsForResou
 	}
 
 	resp := &ListTagsForResourceResponse{
-		ListTagsForResourceOutput: r.Request.Data.(*ListTagsForResourceOutput),
+		ListTagsForResourceOutput: r.Request.Data.(*types.ListTagsForResourceOutput),
 		response:                  &aws.Response{Request: r.Request},
 	}
 
@@ -114,7 +66,7 @@ func (r ListTagsForResourceRequest) Send(ctx context.Context) (*ListTagsForResou
 // ListTagsForResourceResponse is the response type for the
 // ListTagsForResource API operation.
 type ListTagsForResourceResponse struct {
-	*ListTagsForResourceOutput
+	*types.ListTagsForResourceOutput
 
 	response *aws.Response
 }

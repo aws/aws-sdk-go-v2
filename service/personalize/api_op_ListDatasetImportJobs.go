@@ -6,56 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/personalize/types"
 )
-
-type ListDatasetImportJobsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the dataset to list the dataset import
-	// jobs for.
-	DatasetArn *string `locationName:"datasetArn" type:"string"`
-
-	// The maximum number of dataset import jobs to return.
-	MaxResults *int64 `locationName:"maxResults" min:"1" type:"integer"`
-
-	// A token returned from the previous call to ListDatasetImportJobs for getting
-	// the next set of dataset import jobs (if they exist).
-	NextToken *string `locationName:"nextToken" type:"string"`
-}
-
-// String returns the string representation
-func (s ListDatasetImportJobsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListDatasetImportJobsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListDatasetImportJobsInput"}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ListDatasetImportJobsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The list of dataset import jobs.
-	DatasetImportJobs []DatasetImportJobSummary `locationName:"datasetImportJobs" type:"list"`
-
-	// A token for getting the next set of dataset import jobs (if they exist).
-	NextToken *string `locationName:"nextToken" type:"string"`
-}
-
-// String returns the string representation
-func (s ListDatasetImportJobsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListDatasetImportJobs = "ListDatasetImportJobs"
 
@@ -77,7 +29,7 @@ const opListDatasetImportJobs = "ListDatasetImportJobs"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/ListDatasetImportJobs
-func (c *Client) ListDatasetImportJobsRequest(input *ListDatasetImportJobsInput) ListDatasetImportJobsRequest {
+func (c *Client) ListDatasetImportJobsRequest(input *types.ListDatasetImportJobsInput) ListDatasetImportJobsRequest {
 	op := &aws.Operation{
 		Name:       opListDatasetImportJobs,
 		HTTPMethod: "POST",
@@ -91,10 +43,10 @@ func (c *Client) ListDatasetImportJobsRequest(input *ListDatasetImportJobsInput)
 	}
 
 	if input == nil {
-		input = &ListDatasetImportJobsInput{}
+		input = &types.ListDatasetImportJobsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListDatasetImportJobsOutput{})
+	req := c.newRequest(op, input, &types.ListDatasetImportJobsOutput{})
 	return ListDatasetImportJobsRequest{Request: req, Input: input, Copy: c.ListDatasetImportJobsRequest}
 }
 
@@ -102,8 +54,8 @@ func (c *Client) ListDatasetImportJobsRequest(input *ListDatasetImportJobsInput)
 // ListDatasetImportJobs API operation.
 type ListDatasetImportJobsRequest struct {
 	*aws.Request
-	Input *ListDatasetImportJobsInput
-	Copy  func(*ListDatasetImportJobsInput) ListDatasetImportJobsRequest
+	Input *types.ListDatasetImportJobsInput
+	Copy  func(*types.ListDatasetImportJobsInput) ListDatasetImportJobsRequest
 }
 
 // Send marshals and sends the ListDatasetImportJobs API request.
@@ -115,7 +67,7 @@ func (r ListDatasetImportJobsRequest) Send(ctx context.Context) (*ListDatasetImp
 	}
 
 	resp := &ListDatasetImportJobsResponse{
-		ListDatasetImportJobsOutput: r.Request.Data.(*ListDatasetImportJobsOutput),
+		ListDatasetImportJobsOutput: r.Request.Data.(*types.ListDatasetImportJobsOutput),
 		response:                    &aws.Response{Request: r.Request},
 	}
 
@@ -145,7 +97,7 @@ func NewListDatasetImportJobsPaginator(req ListDatasetImportJobsRequest) ListDat
 	return ListDatasetImportJobsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListDatasetImportJobsInput
+				var inCpy *types.ListDatasetImportJobsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -165,14 +117,14 @@ type ListDatasetImportJobsPaginator struct {
 	aws.Pager
 }
 
-func (p *ListDatasetImportJobsPaginator) CurrentPage() *ListDatasetImportJobsOutput {
-	return p.Pager.CurrentPage().(*ListDatasetImportJobsOutput)
+func (p *ListDatasetImportJobsPaginator) CurrentPage() *types.ListDatasetImportJobsOutput {
+	return p.Pager.CurrentPage().(*types.ListDatasetImportJobsOutput)
 }
 
 // ListDatasetImportJobsResponse is the response type for the
 // ListDatasetImportJobs API operation.
 type ListDatasetImportJobsResponse struct {
-	*ListDatasetImportJobsOutput
+	*types.ListDatasetImportJobsOutput
 
 	response *aws.Response
 }

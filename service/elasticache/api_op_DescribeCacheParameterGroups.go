@@ -6,52 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/elasticache/types"
 )
-
-// Represents the input of a DescribeCacheParameterGroups operation.
-type DescribeCacheParameterGroupsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of a specific cache parameter group to return details for.
-	CacheParameterGroupName *string `type:"string"`
-
-	// An optional marker returned from a prior request. Use this marker for pagination
-	// of results from this operation. If this parameter is specified, the response
-	// includes only records beyond the marker, up to the value specified by MaxRecords.
-	Marker *string `type:"string"`
-
-	// The maximum number of records to include in the response. If more records
-	// exist than the specified MaxRecords value, a marker is included in the response
-	// so that the remaining results can be retrieved.
-	//
-	// Default: 100
-	//
-	// Constraints: minimum 20; maximum 100.
-	MaxRecords *int64 `type:"integer"`
-}
-
-// String returns the string representation
-func (s DescribeCacheParameterGroupsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Represents the output of a DescribeCacheParameterGroups operation.
-type DescribeCacheParameterGroupsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A list of cache parameter groups. Each element in the list contains detailed
-	// information about one cache parameter group.
-	CacheParameterGroups []CacheParameterGroup `locationNameList:"CacheParameterGroup" type:"list"`
-
-	// Provides an identifier to allow retrieval of paginated results.
-	Marker *string `type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeCacheParameterGroupsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeCacheParameterGroups = "DescribeCacheParameterGroups"
 
@@ -70,7 +26,7 @@ const opDescribeCacheParameterGroups = "DescribeCacheParameterGroups"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DescribeCacheParameterGroups
-func (c *Client) DescribeCacheParameterGroupsRequest(input *DescribeCacheParameterGroupsInput) DescribeCacheParameterGroupsRequest {
+func (c *Client) DescribeCacheParameterGroupsRequest(input *types.DescribeCacheParameterGroupsInput) DescribeCacheParameterGroupsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeCacheParameterGroups,
 		HTTPMethod: "POST",
@@ -84,10 +40,10 @@ func (c *Client) DescribeCacheParameterGroupsRequest(input *DescribeCacheParamet
 	}
 
 	if input == nil {
-		input = &DescribeCacheParameterGroupsInput{}
+		input = &types.DescribeCacheParameterGroupsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeCacheParameterGroupsOutput{})
+	req := c.newRequest(op, input, &types.DescribeCacheParameterGroupsOutput{})
 	return DescribeCacheParameterGroupsRequest{Request: req, Input: input, Copy: c.DescribeCacheParameterGroupsRequest}
 }
 
@@ -95,8 +51,8 @@ func (c *Client) DescribeCacheParameterGroupsRequest(input *DescribeCacheParamet
 // DescribeCacheParameterGroups API operation.
 type DescribeCacheParameterGroupsRequest struct {
 	*aws.Request
-	Input *DescribeCacheParameterGroupsInput
-	Copy  func(*DescribeCacheParameterGroupsInput) DescribeCacheParameterGroupsRequest
+	Input *types.DescribeCacheParameterGroupsInput
+	Copy  func(*types.DescribeCacheParameterGroupsInput) DescribeCacheParameterGroupsRequest
 }
 
 // Send marshals and sends the DescribeCacheParameterGroups API request.
@@ -108,7 +64,7 @@ func (r DescribeCacheParameterGroupsRequest) Send(ctx context.Context) (*Describ
 	}
 
 	resp := &DescribeCacheParameterGroupsResponse{
-		DescribeCacheParameterGroupsOutput: r.Request.Data.(*DescribeCacheParameterGroupsOutput),
+		DescribeCacheParameterGroupsOutput: r.Request.Data.(*types.DescribeCacheParameterGroupsOutput),
 		response:                           &aws.Response{Request: r.Request},
 	}
 
@@ -138,7 +94,7 @@ func NewDescribeCacheParameterGroupsPaginator(req DescribeCacheParameterGroupsRe
 	return DescribeCacheParameterGroupsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *DescribeCacheParameterGroupsInput
+				var inCpy *types.DescribeCacheParameterGroupsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -158,14 +114,14 @@ type DescribeCacheParameterGroupsPaginator struct {
 	aws.Pager
 }
 
-func (p *DescribeCacheParameterGroupsPaginator) CurrentPage() *DescribeCacheParameterGroupsOutput {
-	return p.Pager.CurrentPage().(*DescribeCacheParameterGroupsOutput)
+func (p *DescribeCacheParameterGroupsPaginator) CurrentPage() *types.DescribeCacheParameterGroupsOutput {
+	return p.Pager.CurrentPage().(*types.DescribeCacheParameterGroupsOutput)
 }
 
 // DescribeCacheParameterGroupsResponse is the response type for the
 // DescribeCacheParameterGroups API operation.
 type DescribeCacheParameterGroupsResponse struct {
-	*DescribeCacheParameterGroupsOutput
+	*types.DescribeCacheParameterGroupsOutput
 
 	response *aws.Response
 }

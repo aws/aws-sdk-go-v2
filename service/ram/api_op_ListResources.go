@@ -6,161 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/ram/types"
 )
-
-type ListResourcesInput struct {
-	_ struct{} `type:"structure"`
-
-	// The maximum number of results to return with a single call. To retrieve the
-	// remaining results, make another call with the returned nextToken value.
-	MaxResults *int64 `locationName:"maxResults" min:"1" type:"integer"`
-
-	// The token for the next page of results.
-	NextToken *string `locationName:"nextToken" type:"string"`
-
-	// The principal.
-	Principal *string `locationName:"principal" type:"string"`
-
-	// The Amazon Resource Names (ARN) of the resources.
-	ResourceArns []string `locationName:"resourceArns" type:"list"`
-
-	// The type of owner.
-	//
-	// ResourceOwner is a required field
-	ResourceOwner ResourceOwner `locationName:"resourceOwner" type:"string" required:"true" enum:"true"`
-
-	// The Amazon Resource Names (ARN) of the resource shares.
-	ResourceShareArns []string `locationName:"resourceShareArns" type:"list"`
-
-	// The resource type.
-	//
-	// Valid values: route53resolver:ResolverRule | ec2:TransitGateway | ec2:Subnet
-	// | license-manager:LicenseConfiguration
-	ResourceType *string `locationName:"resourceType" type:"string"`
-}
-
-// String returns the string representation
-func (s ListResourcesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListResourcesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListResourcesInput"}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-	if len(s.ResourceOwner) == 0 {
-		invalidParams.Add(aws.NewErrParamRequired("ResourceOwner"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListResourcesInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.MaxResults != nil {
-		v := *s.MaxResults
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "maxResults", protocol.Int64Value(v), metadata)
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Principal != nil {
-		v := *s.Principal
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "principal", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.ResourceArns != nil {
-		v := s.ResourceArns
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "resourceArns", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
-		}
-		ls0.End()
-
-	}
-	if len(s.ResourceOwner) > 0 {
-		v := s.ResourceOwner
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "resourceOwner", protocol.QuotedValue{ValueMarshaler: v}, metadata)
-	}
-	if s.ResourceShareArns != nil {
-		v := s.ResourceShareArns
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "resourceShareArns", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
-		}
-		ls0.End()
-
-	}
-	if s.ResourceType != nil {
-		v := *s.ResourceType
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "resourceType", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type ListResourcesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The token to use to retrieve the next page of results. This value is null
-	// when there are no more results to return.
-	NextToken *string `locationName:"nextToken" type:"string"`
-
-	// Information about the resources.
-	Resources []Resource `locationName:"resources" type:"list"`
-}
-
-// String returns the string representation
-func (s ListResourcesOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListResourcesOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Resources != nil {
-		v := s.Resources
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "resources", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	return nil
-}
 
 const opListResources = "ListResources"
 
@@ -178,7 +25,7 @@ const opListResources = "ListResources"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/ListResources
-func (c *Client) ListResourcesRequest(input *ListResourcesInput) ListResourcesRequest {
+func (c *Client) ListResourcesRequest(input *types.ListResourcesInput) ListResourcesRequest {
 	op := &aws.Operation{
 		Name:       opListResources,
 		HTTPMethod: "POST",
@@ -192,10 +39,10 @@ func (c *Client) ListResourcesRequest(input *ListResourcesInput) ListResourcesRe
 	}
 
 	if input == nil {
-		input = &ListResourcesInput{}
+		input = &types.ListResourcesInput{}
 	}
 
-	req := c.newRequest(op, input, &ListResourcesOutput{})
+	req := c.newRequest(op, input, &types.ListResourcesOutput{})
 	return ListResourcesRequest{Request: req, Input: input, Copy: c.ListResourcesRequest}
 }
 
@@ -203,8 +50,8 @@ func (c *Client) ListResourcesRequest(input *ListResourcesInput) ListResourcesRe
 // ListResources API operation.
 type ListResourcesRequest struct {
 	*aws.Request
-	Input *ListResourcesInput
-	Copy  func(*ListResourcesInput) ListResourcesRequest
+	Input *types.ListResourcesInput
+	Copy  func(*types.ListResourcesInput) ListResourcesRequest
 }
 
 // Send marshals and sends the ListResources API request.
@@ -216,7 +63,7 @@ func (r ListResourcesRequest) Send(ctx context.Context) (*ListResourcesResponse,
 	}
 
 	resp := &ListResourcesResponse{
-		ListResourcesOutput: r.Request.Data.(*ListResourcesOutput),
+		ListResourcesOutput: r.Request.Data.(*types.ListResourcesOutput),
 		response:            &aws.Response{Request: r.Request},
 	}
 
@@ -246,7 +93,7 @@ func NewListResourcesPaginator(req ListResourcesRequest) ListResourcesPaginator 
 	return ListResourcesPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListResourcesInput
+				var inCpy *types.ListResourcesInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -266,14 +113,14 @@ type ListResourcesPaginator struct {
 	aws.Pager
 }
 
-func (p *ListResourcesPaginator) CurrentPage() *ListResourcesOutput {
-	return p.Pager.CurrentPage().(*ListResourcesOutput)
+func (p *ListResourcesPaginator) CurrentPage() *types.ListResourcesOutput {
+	return p.Pager.CurrentPage().(*types.ListResourcesOutput)
 }
 
 // ListResourcesResponse is the response type for the
 // ListResources API operation.
 type ListResourcesResponse struct {
-	*ListResourcesOutput
+	*types.ListResourcesOutput
 
 	response *aws.Response
 }

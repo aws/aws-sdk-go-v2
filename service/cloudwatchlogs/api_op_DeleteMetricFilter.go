@@ -6,62 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
+	"github.com/aws/aws-sdk-go-v2/service/cloudwatchlogs/types"
 )
-
-type DeleteMetricFilterInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the metric filter.
-	//
-	// FilterName is a required field
-	FilterName *string `locationName:"filterName" min:"1" type:"string" required:"true"`
-
-	// The name of the log group.
-	//
-	// LogGroupName is a required field
-	LogGroupName *string `locationName:"logGroupName" min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteMetricFilterInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteMetricFilterInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteMetricFilterInput"}
-
-	if s.FilterName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("FilterName"))
-	}
-	if s.FilterName != nil && len(*s.FilterName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("FilterName", 1))
-	}
-
-	if s.LogGroupName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("LogGroupName"))
-	}
-	if s.LogGroupName != nil && len(*s.LogGroupName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("LogGroupName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteMetricFilterOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteMetricFilterOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteMetricFilter = "DeleteMetricFilter"
 
@@ -78,7 +26,7 @@ const opDeleteMetricFilter = "DeleteMetricFilter"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/DeleteMetricFilter
-func (c *Client) DeleteMetricFilterRequest(input *DeleteMetricFilterInput) DeleteMetricFilterRequest {
+func (c *Client) DeleteMetricFilterRequest(input *types.DeleteMetricFilterInput) DeleteMetricFilterRequest {
 	op := &aws.Operation{
 		Name:       opDeleteMetricFilter,
 		HTTPMethod: "POST",
@@ -86,10 +34,10 @@ func (c *Client) DeleteMetricFilterRequest(input *DeleteMetricFilterInput) Delet
 	}
 
 	if input == nil {
-		input = &DeleteMetricFilterInput{}
+		input = &types.DeleteMetricFilterInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteMetricFilterOutput{})
+	req := c.newRequest(op, input, &types.DeleteMetricFilterOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return DeleteMetricFilterRequest{Request: req, Input: input, Copy: c.DeleteMetricFilterRequest}
@@ -99,8 +47,8 @@ func (c *Client) DeleteMetricFilterRequest(input *DeleteMetricFilterInput) Delet
 // DeleteMetricFilter API operation.
 type DeleteMetricFilterRequest struct {
 	*aws.Request
-	Input *DeleteMetricFilterInput
-	Copy  func(*DeleteMetricFilterInput) DeleteMetricFilterRequest
+	Input *types.DeleteMetricFilterInput
+	Copy  func(*types.DeleteMetricFilterInput) DeleteMetricFilterRequest
 }
 
 // Send marshals and sends the DeleteMetricFilter API request.
@@ -112,7 +60,7 @@ func (r DeleteMetricFilterRequest) Send(ctx context.Context) (*DeleteMetricFilte
 	}
 
 	resp := &DeleteMetricFilterResponse{
-		DeleteMetricFilterOutput: r.Request.Data.(*DeleteMetricFilterOutput),
+		DeleteMetricFilterOutput: r.Request.Data.(*types.DeleteMetricFilterOutput),
 		response:                 &aws.Response{Request: r.Request},
 	}
 
@@ -122,7 +70,7 @@ func (r DeleteMetricFilterRequest) Send(ctx context.Context) (*DeleteMetricFilte
 // DeleteMetricFilterResponse is the response type for the
 // DeleteMetricFilter API operation.
 type DeleteMetricFilterResponse struct {
-	*DeleteMetricFilterOutput
+	*types.DeleteMetricFilterOutput
 
 	response *aws.Response
 }

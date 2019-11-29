@@ -4,76 +4,10 @@ package glue
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/glue/types"
 )
-
-type GetMappingInput struct {
-	_ struct{} `type:"structure"`
-
-	// Parameters for the mapping.
-	Location *Location `type:"structure"`
-
-	// A list of target tables.
-	Sinks []CatalogEntry `type:"list"`
-
-	// Specifies the source table.
-	//
-	// Source is a required field
-	Source *CatalogEntry `type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s GetMappingInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetMappingInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetMappingInput"}
-
-	if s.Source == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Source"))
-	}
-	if s.Location != nil {
-		if err := s.Location.Validate(); err != nil {
-			invalidParams.AddNested("Location", err.(aws.ErrInvalidParams))
-		}
-	}
-	if s.Sinks != nil {
-		for i, v := range s.Sinks {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Sinks", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-	if s.Source != nil {
-		if err := s.Source.Validate(); err != nil {
-			invalidParams.AddNested("Source", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type GetMappingOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A list of mappings to the specified targets.
-	//
-	// Mapping is a required field
-	Mapping []MappingEntry `type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s GetMappingOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetMapping = "GetMapping"
 
@@ -90,7 +24,7 @@ const opGetMapping = "GetMapping"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetMapping
-func (c *Client) GetMappingRequest(input *GetMappingInput) GetMappingRequest {
+func (c *Client) GetMappingRequest(input *types.GetMappingInput) GetMappingRequest {
 	op := &aws.Operation{
 		Name:       opGetMapping,
 		HTTPMethod: "POST",
@@ -98,10 +32,10 @@ func (c *Client) GetMappingRequest(input *GetMappingInput) GetMappingRequest {
 	}
 
 	if input == nil {
-		input = &GetMappingInput{}
+		input = &types.GetMappingInput{}
 	}
 
-	req := c.newRequest(op, input, &GetMappingOutput{})
+	req := c.newRequest(op, input, &types.GetMappingOutput{})
 	return GetMappingRequest{Request: req, Input: input, Copy: c.GetMappingRequest}
 }
 
@@ -109,8 +43,8 @@ func (c *Client) GetMappingRequest(input *GetMappingInput) GetMappingRequest {
 // GetMapping API operation.
 type GetMappingRequest struct {
 	*aws.Request
-	Input *GetMappingInput
-	Copy  func(*GetMappingInput) GetMappingRequest
+	Input *types.GetMappingInput
+	Copy  func(*types.GetMappingInput) GetMappingRequest
 }
 
 // Send marshals and sends the GetMapping API request.
@@ -122,7 +56,7 @@ func (r GetMappingRequest) Send(ctx context.Context) (*GetMappingResponse, error
 	}
 
 	resp := &GetMappingResponse{
-		GetMappingOutput: r.Request.Data.(*GetMappingOutput),
+		GetMappingOutput: r.Request.Data.(*types.GetMappingOutput),
 		response:         &aws.Response{Request: r.Request},
 	}
 
@@ -132,7 +66,7 @@ func (r GetMappingRequest) Send(ctx context.Context) (*GetMappingResponse, error
 // GetMappingResponse is the response type for the
 // GetMapping API operation.
 type GetMappingResponse struct {
-	*GetMappingOutput
+	*types.GetMappingOutput
 
 	response *aws.Response
 }

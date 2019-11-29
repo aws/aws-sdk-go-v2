@@ -6,58 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/query"
+	"github.com/aws/aws-sdk-go-v2/service/redshift/types"
 )
-
-// Contains the output from the DeleteTags action.
-type DeleteTagsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) from which you want to remove the tag or tags.
-	// For example, arn:aws:redshift:us-east-1:123456789:cluster:t1.
-	//
-	// ResourceName is a required field
-	ResourceName *string `type:"string" required:"true"`
-
-	// The tag key that you want to delete.
-	//
-	// TagKeys is a required field
-	TagKeys []string `locationNameList:"TagKey" type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteTagsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteTagsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteTagsInput"}
-
-	if s.ResourceName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ResourceName"))
-	}
-
-	if s.TagKeys == nil {
-		invalidParams.Add(aws.NewErrParamRequired("TagKeys"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteTagsOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteTagsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteTags = "DeleteTags"
 
@@ -75,7 +27,7 @@ const opDeleteTags = "DeleteTags"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DeleteTags
-func (c *Client) DeleteTagsRequest(input *DeleteTagsInput) DeleteTagsRequest {
+func (c *Client) DeleteTagsRequest(input *types.DeleteTagsInput) DeleteTagsRequest {
 	op := &aws.Operation{
 		Name:       opDeleteTags,
 		HTTPMethod: "POST",
@@ -83,10 +35,10 @@ func (c *Client) DeleteTagsRequest(input *DeleteTagsInput) DeleteTagsRequest {
 	}
 
 	if input == nil {
-		input = &DeleteTagsInput{}
+		input = &types.DeleteTagsInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteTagsOutput{})
+	req := c.newRequest(op, input, &types.DeleteTagsOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return DeleteTagsRequest{Request: req, Input: input, Copy: c.DeleteTagsRequest}
@@ -96,8 +48,8 @@ func (c *Client) DeleteTagsRequest(input *DeleteTagsInput) DeleteTagsRequest {
 // DeleteTags API operation.
 type DeleteTagsRequest struct {
 	*aws.Request
-	Input *DeleteTagsInput
-	Copy  func(*DeleteTagsInput) DeleteTagsRequest
+	Input *types.DeleteTagsInput
+	Copy  func(*types.DeleteTagsInput) DeleteTagsRequest
 }
 
 // Send marshals and sends the DeleteTags API request.
@@ -109,7 +61,7 @@ func (r DeleteTagsRequest) Send(ctx context.Context) (*DeleteTagsResponse, error
 	}
 
 	resp := &DeleteTagsResponse{
-		DeleteTagsOutput: r.Request.Data.(*DeleteTagsOutput),
+		DeleteTagsOutput: r.Request.Data.(*types.DeleteTagsOutput),
 		response:         &aws.Response{Request: r.Request},
 	}
 
@@ -119,7 +71,7 @@ func (r DeleteTagsRequest) Send(ctx context.Context) (*DeleteTagsResponse, error
 // DeleteTagsResponse is the response type for the
 // DeleteTags API operation.
 type DeleteTagsResponse struct {
-	*DeleteTagsOutput
+	*types.DeleteTagsOutput
 
 	response *aws.Response
 }

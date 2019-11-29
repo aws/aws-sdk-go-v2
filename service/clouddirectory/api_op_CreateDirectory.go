@@ -6,130 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/clouddirectory/types"
 )
-
-type CreateDirectoryInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the Directory. Should be unique per account, per region.
-	//
-	// Name is a required field
-	Name *string `min:"1" type:"string" required:"true"`
-
-	// The Amazon Resource Name (ARN) of the published schema that will be copied
-	// into the data Directory. For more information, see arns.
-	//
-	// SchemaArn is a required field
-	SchemaArn *string `location:"header" locationName:"x-amz-data-partition" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s CreateDirectoryInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateDirectoryInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateDirectoryInput"}
-
-	if s.Name == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Name"))
-	}
-	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
-	}
-
-	if s.SchemaArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("SchemaArn"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s CreateDirectoryInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.Name != nil {
-		v := *s.Name
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "Name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.SchemaArn != nil {
-		v := *s.SchemaArn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "x-amz-data-partition", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type CreateDirectoryOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The ARN of the published schema in the Directory. Once a published schema
-	// is copied into the directory, it has its own ARN, which is referred to applied
-	// schema ARN. For more information, see arns.
-	//
-	// AppliedSchemaArn is a required field
-	AppliedSchemaArn *string `type:"string" required:"true"`
-
-	// The ARN that is associated with the Directory. For more information, see
-	// arns.
-	//
-	// DirectoryArn is a required field
-	DirectoryArn *string `type:"string" required:"true"`
-
-	// The name of the Directory.
-	//
-	// Name is a required field
-	Name *string `min:"1" type:"string" required:"true"`
-
-	// The root object node of the created directory.
-	//
-	// ObjectIdentifier is a required field
-	ObjectIdentifier *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s CreateDirectoryOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s CreateDirectoryOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.AppliedSchemaArn != nil {
-		v := *s.AppliedSchemaArn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "AppliedSchemaArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.DirectoryArn != nil {
-		v := *s.DirectoryArn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "DirectoryArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Name != nil {
-		v := *s.Name
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "Name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.ObjectIdentifier != nil {
-		v := *s.ObjectIdentifier
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "ObjectIdentifier", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opCreateDirectory = "CreateDirectory"
 
@@ -151,7 +29,7 @@ const opCreateDirectory = "CreateDirectory"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/CreateDirectory
-func (c *Client) CreateDirectoryRequest(input *CreateDirectoryInput) CreateDirectoryRequest {
+func (c *Client) CreateDirectoryRequest(input *types.CreateDirectoryInput) CreateDirectoryRequest {
 	op := &aws.Operation{
 		Name:       opCreateDirectory,
 		HTTPMethod: "PUT",
@@ -159,10 +37,10 @@ func (c *Client) CreateDirectoryRequest(input *CreateDirectoryInput) CreateDirec
 	}
 
 	if input == nil {
-		input = &CreateDirectoryInput{}
+		input = &types.CreateDirectoryInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateDirectoryOutput{})
+	req := c.newRequest(op, input, &types.CreateDirectoryOutput{})
 	return CreateDirectoryRequest{Request: req, Input: input, Copy: c.CreateDirectoryRequest}
 }
 
@@ -170,8 +48,8 @@ func (c *Client) CreateDirectoryRequest(input *CreateDirectoryInput) CreateDirec
 // CreateDirectory API operation.
 type CreateDirectoryRequest struct {
 	*aws.Request
-	Input *CreateDirectoryInput
-	Copy  func(*CreateDirectoryInput) CreateDirectoryRequest
+	Input *types.CreateDirectoryInput
+	Copy  func(*types.CreateDirectoryInput) CreateDirectoryRequest
 }
 
 // Send marshals and sends the CreateDirectory API request.
@@ -183,7 +61,7 @@ func (r CreateDirectoryRequest) Send(ctx context.Context) (*CreateDirectoryRespo
 	}
 
 	resp := &CreateDirectoryResponse{
-		CreateDirectoryOutput: r.Request.Data.(*CreateDirectoryOutput),
+		CreateDirectoryOutput: r.Request.Data.(*types.CreateDirectoryOutput),
 		response:              &aws.Response{Request: r.Request},
 	}
 
@@ -193,7 +71,7 @@ func (r CreateDirectoryRequest) Send(ctx context.Context) (*CreateDirectoryRespo
 // CreateDirectoryResponse is the response type for the
 // CreateDirectory API operation.
 type CreateDirectoryResponse struct {
-	*CreateDirectoryOutput
+	*types.CreateDirectoryOutput
 
 	response *aws.Response
 }

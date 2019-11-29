@@ -6,62 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/types"
 )
-
-// Represents the request to update the device status.
-type UpdateDeviceStatusInput struct {
-	_ struct{} `type:"structure"`
-
-	// The access token.
-	//
-	// AccessToken is a required field
-	AccessToken *string `type:"string" required:"true" sensitive:"true"`
-
-	// The device key.
-	//
-	// DeviceKey is a required field
-	DeviceKey *string `min:"1" type:"string" required:"true"`
-
-	// The status of whether a device is remembered.
-	DeviceRememberedStatus DeviceRememberedStatusType `type:"string" enum:"true"`
-}
-
-// String returns the string representation
-func (s UpdateDeviceStatusInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateDeviceStatusInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateDeviceStatusInput"}
-
-	if s.AccessToken == nil {
-		invalidParams.Add(aws.NewErrParamRequired("AccessToken"))
-	}
-
-	if s.DeviceKey == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DeviceKey"))
-	}
-	if s.DeviceKey != nil && len(*s.DeviceKey) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("DeviceKey", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// The response to the request to update the device status.
-type UpdateDeviceStatusOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s UpdateDeviceStatusOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opUpdateDeviceStatus = "UpdateDeviceStatus"
 
@@ -78,7 +24,7 @@ const opUpdateDeviceStatus = "UpdateDeviceStatus"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/UpdateDeviceStatus
-func (c *Client) UpdateDeviceStatusRequest(input *UpdateDeviceStatusInput) UpdateDeviceStatusRequest {
+func (c *Client) UpdateDeviceStatusRequest(input *types.UpdateDeviceStatusInput) UpdateDeviceStatusRequest {
 	op := &aws.Operation{
 		Name:       opUpdateDeviceStatus,
 		HTTPMethod: "POST",
@@ -86,10 +32,10 @@ func (c *Client) UpdateDeviceStatusRequest(input *UpdateDeviceStatusInput) Updat
 	}
 
 	if input == nil {
-		input = &UpdateDeviceStatusInput{}
+		input = &types.UpdateDeviceStatusInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateDeviceStatusOutput{})
+	req := c.newRequest(op, input, &types.UpdateDeviceStatusOutput{})
 	return UpdateDeviceStatusRequest{Request: req, Input: input, Copy: c.UpdateDeviceStatusRequest}
 }
 
@@ -97,8 +43,8 @@ func (c *Client) UpdateDeviceStatusRequest(input *UpdateDeviceStatusInput) Updat
 // UpdateDeviceStatus API operation.
 type UpdateDeviceStatusRequest struct {
 	*aws.Request
-	Input *UpdateDeviceStatusInput
-	Copy  func(*UpdateDeviceStatusInput) UpdateDeviceStatusRequest
+	Input *types.UpdateDeviceStatusInput
+	Copy  func(*types.UpdateDeviceStatusInput) UpdateDeviceStatusRequest
 }
 
 // Send marshals and sends the UpdateDeviceStatus API request.
@@ -110,7 +56,7 @@ func (r UpdateDeviceStatusRequest) Send(ctx context.Context) (*UpdateDeviceStatu
 	}
 
 	resp := &UpdateDeviceStatusResponse{
-		UpdateDeviceStatusOutput: r.Request.Data.(*UpdateDeviceStatusOutput),
+		UpdateDeviceStatusOutput: r.Request.Data.(*types.UpdateDeviceStatusOutput),
 		response:                 &aws.Response{Request: r.Request},
 	}
 
@@ -120,7 +66,7 @@ func (r UpdateDeviceStatusRequest) Send(ctx context.Context) (*UpdateDeviceStatu
 // UpdateDeviceStatusResponse is the response type for the
 // UpdateDeviceStatus API operation.
 type UpdateDeviceStatusResponse struct {
-	*UpdateDeviceStatusOutput
+	*types.UpdateDeviceStatusOutput
 
 	response *aws.Response
 }

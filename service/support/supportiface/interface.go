@@ -10,6 +10,7 @@ package supportiface
 
 import (
 	"github.com/aws/aws-sdk-go-v2/service/support"
+	"github.com/aws/aws-sdk-go-v2/service/support/types"
 )
 
 // ClientAPI provides an interface to enable mocking the
@@ -43,7 +44,7 @@ import (
 //    type mockClientClient struct {
 //        supportiface.ClientPI
 //    }
-//    func (m *mockClientClient) AddAttachmentsToSet(input *support.AddAttachmentsToSetInput) (*support.AddAttachmentsToSetOutput, error) {
+//    func (m *mockClientClient) AddAttachmentsToSet(input *types.AddAttachmentsToSetInput) (*types.AddAttachmentsToSetOutput, error) {
 //        // mock response/functionality
 //    }
 //
@@ -61,33 +62,33 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type ClientAPI interface {
-	AddAttachmentsToSetRequest(*support.AddAttachmentsToSetInput) support.AddAttachmentsToSetRequest
+	AddAttachmentsToSetRequest(*types.AddAttachmentsToSetInput) support.AddAttachmentsToSetRequest
 
-	AddCommunicationToCaseRequest(*support.AddCommunicationToCaseInput) support.AddCommunicationToCaseRequest
+	AddCommunicationToCaseRequest(*types.AddCommunicationToCaseInput) support.AddCommunicationToCaseRequest
 
-	CreateCaseRequest(*support.CreateCaseInput) support.CreateCaseRequest
+	CreateCaseRequest(*types.CreateCaseInput) support.CreateCaseRequest
 
-	DescribeAttachmentRequest(*support.DescribeAttachmentInput) support.DescribeAttachmentRequest
+	DescribeAttachmentRequest(*types.DescribeAttachmentInput) support.DescribeAttachmentRequest
 
-	DescribeCasesRequest(*support.DescribeCasesInput) support.DescribeCasesRequest
+	DescribeCasesRequest(*types.DescribeCasesInput) support.DescribeCasesRequest
 
-	DescribeCommunicationsRequest(*support.DescribeCommunicationsInput) support.DescribeCommunicationsRequest
+	DescribeCommunicationsRequest(*types.DescribeCommunicationsInput) support.DescribeCommunicationsRequest
 
-	DescribeServicesRequest(*support.DescribeServicesInput) support.DescribeServicesRequest
+	DescribeServicesRequest(*types.DescribeServicesInput) support.DescribeServicesRequest
 
-	DescribeSeverityLevelsRequest(*support.DescribeSeverityLevelsInput) support.DescribeSeverityLevelsRequest
+	DescribeSeverityLevelsRequest(*types.DescribeSeverityLevelsInput) support.DescribeSeverityLevelsRequest
 
-	DescribeTrustedAdvisorCheckRefreshStatusesRequest(*support.DescribeTrustedAdvisorCheckRefreshStatusesInput) support.DescribeTrustedAdvisorCheckRefreshStatusesRequest
+	DescribeTrustedAdvisorCheckRefreshStatusesRequest(*types.DescribeTrustedAdvisorCheckRefreshStatusesInput) support.DescribeTrustedAdvisorCheckRefreshStatusesRequest
 
-	DescribeTrustedAdvisorCheckResultRequest(*support.DescribeTrustedAdvisorCheckResultInput) support.DescribeTrustedAdvisorCheckResultRequest
+	DescribeTrustedAdvisorCheckResultRequest(*types.DescribeTrustedAdvisorCheckResultInput) support.DescribeTrustedAdvisorCheckResultRequest
 
-	DescribeTrustedAdvisorCheckSummariesRequest(*support.DescribeTrustedAdvisorCheckSummariesInput) support.DescribeTrustedAdvisorCheckSummariesRequest
+	DescribeTrustedAdvisorCheckSummariesRequest(*types.DescribeTrustedAdvisorCheckSummariesInput) support.DescribeTrustedAdvisorCheckSummariesRequest
 
-	DescribeTrustedAdvisorChecksRequest(*support.DescribeTrustedAdvisorChecksInput) support.DescribeTrustedAdvisorChecksRequest
+	DescribeTrustedAdvisorChecksRequest(*types.DescribeTrustedAdvisorChecksInput) support.DescribeTrustedAdvisorChecksRequest
 
-	RefreshTrustedAdvisorCheckRequest(*support.RefreshTrustedAdvisorCheckInput) support.RefreshTrustedAdvisorCheckRequest
+	RefreshTrustedAdvisorCheckRequest(*types.RefreshTrustedAdvisorCheckInput) support.RefreshTrustedAdvisorCheckRequest
 
-	ResolveCaseRequest(*support.ResolveCaseInput) support.ResolveCaseRequest
+	ResolveCaseRequest(*types.ResolveCaseInput) support.ResolveCaseRequest
 }
 
 var _ ClientAPI = (*support.Client)(nil)

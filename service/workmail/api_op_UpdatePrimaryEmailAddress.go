@@ -6,69 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/workmail/types"
 )
-
-type UpdatePrimaryEmailAddressInput struct {
-	_ struct{} `type:"structure"`
-
-	// The value of the email to be updated as primary.
-	//
-	// Email is a required field
-	Email *string `min:"1" type:"string" required:"true"`
-
-	// The user, group, or resource to update.
-	//
-	// EntityId is a required field
-	EntityId *string `min:"12" type:"string" required:"true"`
-
-	// The organization that contains the user, group, or resource to update.
-	//
-	// OrganizationId is a required field
-	OrganizationId *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s UpdatePrimaryEmailAddressInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdatePrimaryEmailAddressInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdatePrimaryEmailAddressInput"}
-
-	if s.Email == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Email"))
-	}
-	if s.Email != nil && len(*s.Email) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Email", 1))
-	}
-
-	if s.EntityId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("EntityId"))
-	}
-	if s.EntityId != nil && len(*s.EntityId) < 12 {
-		invalidParams.Add(aws.NewErrParamMinLen("EntityId", 12))
-	}
-
-	if s.OrganizationId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("OrganizationId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type UpdatePrimaryEmailAddressOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s UpdatePrimaryEmailAddressOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opUpdatePrimaryEmailAddress = "UpdatePrimaryEmailAddress"
 
@@ -88,7 +27,7 @@ const opUpdatePrimaryEmailAddress = "UpdatePrimaryEmailAddress"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/UpdatePrimaryEmailAddress
-func (c *Client) UpdatePrimaryEmailAddressRequest(input *UpdatePrimaryEmailAddressInput) UpdatePrimaryEmailAddressRequest {
+func (c *Client) UpdatePrimaryEmailAddressRequest(input *types.UpdatePrimaryEmailAddressInput) UpdatePrimaryEmailAddressRequest {
 	op := &aws.Operation{
 		Name:       opUpdatePrimaryEmailAddress,
 		HTTPMethod: "POST",
@@ -96,10 +35,10 @@ func (c *Client) UpdatePrimaryEmailAddressRequest(input *UpdatePrimaryEmailAddre
 	}
 
 	if input == nil {
-		input = &UpdatePrimaryEmailAddressInput{}
+		input = &types.UpdatePrimaryEmailAddressInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdatePrimaryEmailAddressOutput{})
+	req := c.newRequest(op, input, &types.UpdatePrimaryEmailAddressOutput{})
 	return UpdatePrimaryEmailAddressRequest{Request: req, Input: input, Copy: c.UpdatePrimaryEmailAddressRequest}
 }
 
@@ -107,8 +46,8 @@ func (c *Client) UpdatePrimaryEmailAddressRequest(input *UpdatePrimaryEmailAddre
 // UpdatePrimaryEmailAddress API operation.
 type UpdatePrimaryEmailAddressRequest struct {
 	*aws.Request
-	Input *UpdatePrimaryEmailAddressInput
-	Copy  func(*UpdatePrimaryEmailAddressInput) UpdatePrimaryEmailAddressRequest
+	Input *types.UpdatePrimaryEmailAddressInput
+	Copy  func(*types.UpdatePrimaryEmailAddressInput) UpdatePrimaryEmailAddressRequest
 }
 
 // Send marshals and sends the UpdatePrimaryEmailAddress API request.
@@ -120,7 +59,7 @@ func (r UpdatePrimaryEmailAddressRequest) Send(ctx context.Context) (*UpdatePrim
 	}
 
 	resp := &UpdatePrimaryEmailAddressResponse{
-		UpdatePrimaryEmailAddressOutput: r.Request.Data.(*UpdatePrimaryEmailAddressOutput),
+		UpdatePrimaryEmailAddressOutput: r.Request.Data.(*types.UpdatePrimaryEmailAddressOutput),
 		response:                        &aws.Response{Request: r.Request},
 	}
 
@@ -130,7 +69,7 @@ func (r UpdatePrimaryEmailAddressRequest) Send(ctx context.Context) (*UpdatePrim
 // UpdatePrimaryEmailAddressResponse is the response type for the
 // UpdatePrimaryEmailAddress API operation.
 type UpdatePrimaryEmailAddressResponse struct {
-	*UpdatePrimaryEmailAddressOutput
+	*types.UpdatePrimaryEmailAddressOutput
 
 	response *aws.Response
 }

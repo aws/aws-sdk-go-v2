@@ -6,61 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/alexaforbusiness/types"
 )
-
-type UpdateGatewayInput struct {
-	_ struct{} `type:"structure"`
-
-	// The updated description of the gateway.
-	Description *string `type:"string"`
-
-	// The ARN of the gateway to update.
-	//
-	// GatewayArn is a required field
-	GatewayArn *string `type:"string" required:"true"`
-
-	// The updated name of the gateway.
-	Name *string `min:"1" type:"string"`
-
-	// The updated software version of the gateway. The gateway automatically updates
-	// its software version during normal operation.
-	SoftwareVersion *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s UpdateGatewayInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateGatewayInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateGatewayInput"}
-
-	if s.GatewayArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("GatewayArn"))
-	}
-	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
-	}
-	if s.SoftwareVersion != nil && len(*s.SoftwareVersion) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("SoftwareVersion", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type UpdateGatewayOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s UpdateGatewayOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opUpdateGateway = "UpdateGateway"
 
@@ -78,7 +25,7 @@ const opUpdateGateway = "UpdateGateway"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/UpdateGateway
-func (c *Client) UpdateGatewayRequest(input *UpdateGatewayInput) UpdateGatewayRequest {
+func (c *Client) UpdateGatewayRequest(input *types.UpdateGatewayInput) UpdateGatewayRequest {
 	op := &aws.Operation{
 		Name:       opUpdateGateway,
 		HTTPMethod: "POST",
@@ -86,10 +33,10 @@ func (c *Client) UpdateGatewayRequest(input *UpdateGatewayInput) UpdateGatewayRe
 	}
 
 	if input == nil {
-		input = &UpdateGatewayInput{}
+		input = &types.UpdateGatewayInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateGatewayOutput{})
+	req := c.newRequest(op, input, &types.UpdateGatewayOutput{})
 	return UpdateGatewayRequest{Request: req, Input: input, Copy: c.UpdateGatewayRequest}
 }
 
@@ -97,8 +44,8 @@ func (c *Client) UpdateGatewayRequest(input *UpdateGatewayInput) UpdateGatewayRe
 // UpdateGateway API operation.
 type UpdateGatewayRequest struct {
 	*aws.Request
-	Input *UpdateGatewayInput
-	Copy  func(*UpdateGatewayInput) UpdateGatewayRequest
+	Input *types.UpdateGatewayInput
+	Copy  func(*types.UpdateGatewayInput) UpdateGatewayRequest
 }
 
 // Send marshals and sends the UpdateGateway API request.
@@ -110,7 +57,7 @@ func (r UpdateGatewayRequest) Send(ctx context.Context) (*UpdateGatewayResponse,
 	}
 
 	resp := &UpdateGatewayResponse{
-		UpdateGatewayOutput: r.Request.Data.(*UpdateGatewayOutput),
+		UpdateGatewayOutput: r.Request.Data.(*types.UpdateGatewayOutput),
 		response:            &aws.Response{Request: r.Request},
 	}
 
@@ -120,7 +67,7 @@ func (r UpdateGatewayRequest) Send(ctx context.Context) (*UpdateGatewayResponse,
 // UpdateGatewayResponse is the response type for the
 // UpdateGateway API operation.
 type UpdateGatewayResponse struct {
-	*UpdateGatewayOutput
+	*types.UpdateGatewayOutput
 
 	response *aws.Response
 }

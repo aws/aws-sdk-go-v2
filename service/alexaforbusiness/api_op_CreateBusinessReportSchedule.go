@@ -6,77 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/alexaforbusiness/types"
 )
-
-type CreateBusinessReportScheduleInput struct {
-	_ struct{} `type:"structure"`
-
-	// The client request token.
-	ClientRequestToken *string `min:"10" type:"string" idempotencyToken:"true"`
-
-	// The content range of the reports.
-	//
-	// ContentRange is a required field
-	ContentRange *BusinessReportContentRange `type:"structure" required:"true"`
-
-	// The format of the generated report (individual CSV files or zipped files
-	// of individual files).
-	//
-	// Format is a required field
-	Format BusinessReportFormat `type:"string" required:"true" enum:"true"`
-
-	// The recurrence of the reports. If this isn't specified, the report will only
-	// be delivered one time when the API is called.
-	Recurrence *BusinessReportRecurrence `type:"structure"`
-
-	// The S3 bucket name of the output reports. If this isn't specified, the report
-	// can be retrieved from a download link by calling ListBusinessReportSchedule.
-	S3BucketName *string `type:"string"`
-
-	// The S3 key where the report is delivered.
-	S3KeyPrefix *string `type:"string"`
-
-	// The name identifier of the schedule.
-	ScheduleName *string `type:"string"`
-}
-
-// String returns the string representation
-func (s CreateBusinessReportScheduleInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateBusinessReportScheduleInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateBusinessReportScheduleInput"}
-	if s.ClientRequestToken != nil && len(*s.ClientRequestToken) < 10 {
-		invalidParams.Add(aws.NewErrParamMinLen("ClientRequestToken", 10))
-	}
-
-	if s.ContentRange == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ContentRange"))
-	}
-	if len(s.Format) == 0 {
-		invalidParams.Add(aws.NewErrParamRequired("Format"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type CreateBusinessReportScheduleOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The ARN of the business report schedule.
-	ScheduleArn *string `type:"string"`
-}
-
-// String returns the string representation
-func (s CreateBusinessReportScheduleOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCreateBusinessReportSchedule = "CreateBusinessReportSchedule"
 
@@ -94,7 +25,7 @@ const opCreateBusinessReportSchedule = "CreateBusinessReportSchedule"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/CreateBusinessReportSchedule
-func (c *Client) CreateBusinessReportScheduleRequest(input *CreateBusinessReportScheduleInput) CreateBusinessReportScheduleRequest {
+func (c *Client) CreateBusinessReportScheduleRequest(input *types.CreateBusinessReportScheduleInput) CreateBusinessReportScheduleRequest {
 	op := &aws.Operation{
 		Name:       opCreateBusinessReportSchedule,
 		HTTPMethod: "POST",
@@ -102,10 +33,10 @@ func (c *Client) CreateBusinessReportScheduleRequest(input *CreateBusinessReport
 	}
 
 	if input == nil {
-		input = &CreateBusinessReportScheduleInput{}
+		input = &types.CreateBusinessReportScheduleInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateBusinessReportScheduleOutput{})
+	req := c.newRequest(op, input, &types.CreateBusinessReportScheduleOutput{})
 	return CreateBusinessReportScheduleRequest{Request: req, Input: input, Copy: c.CreateBusinessReportScheduleRequest}
 }
 
@@ -113,8 +44,8 @@ func (c *Client) CreateBusinessReportScheduleRequest(input *CreateBusinessReport
 // CreateBusinessReportSchedule API operation.
 type CreateBusinessReportScheduleRequest struct {
 	*aws.Request
-	Input *CreateBusinessReportScheduleInput
-	Copy  func(*CreateBusinessReportScheduleInput) CreateBusinessReportScheduleRequest
+	Input *types.CreateBusinessReportScheduleInput
+	Copy  func(*types.CreateBusinessReportScheduleInput) CreateBusinessReportScheduleRequest
 }
 
 // Send marshals and sends the CreateBusinessReportSchedule API request.
@@ -126,7 +57,7 @@ func (r CreateBusinessReportScheduleRequest) Send(ctx context.Context) (*CreateB
 	}
 
 	resp := &CreateBusinessReportScheduleResponse{
-		CreateBusinessReportScheduleOutput: r.Request.Data.(*CreateBusinessReportScheduleOutput),
+		CreateBusinessReportScheduleOutput: r.Request.Data.(*types.CreateBusinessReportScheduleOutput),
 		response:                           &aws.Response{Request: r.Request},
 	}
 
@@ -136,7 +67,7 @@ func (r CreateBusinessReportScheduleRequest) Send(ctx context.Context) (*CreateB
 // CreateBusinessReportScheduleResponse is the response type for the
 // CreateBusinessReportSchedule API operation.
 type CreateBusinessReportScheduleResponse struct {
-	*CreateBusinessReportScheduleOutput
+	*types.CreateBusinessReportScheduleOutput
 
 	response *aws.Response
 }

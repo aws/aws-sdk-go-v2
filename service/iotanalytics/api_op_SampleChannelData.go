@@ -4,119 +4,10 @@ package iotanalytics
 
 import (
 	"context"
-	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/iotanalytics/types"
 )
-
-type SampleChannelDataInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the channel whose message samples are retrieved.
-	//
-	// ChannelName is a required field
-	ChannelName *string `location:"uri" locationName:"channelName" min:"1" type:"string" required:"true"`
-
-	// The end of the time window from which sample messages are retrieved.
-	EndTime *time.Time `location:"querystring" locationName:"endTime" type:"timestamp"`
-
-	// The number of sample messages to be retrieved. The limit is 10, the default
-	// is also 10.
-	MaxMessages *int64 `location:"querystring" locationName:"maxMessages" min:"1" type:"integer"`
-
-	// The start of the time window from which sample messages are retrieved.
-	StartTime *time.Time `location:"querystring" locationName:"startTime" type:"timestamp"`
-}
-
-// String returns the string representation
-func (s SampleChannelDataInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *SampleChannelDataInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "SampleChannelDataInput"}
-
-	if s.ChannelName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ChannelName"))
-	}
-	if s.ChannelName != nil && len(*s.ChannelName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ChannelName", 1))
-	}
-	if s.MaxMessages != nil && *s.MaxMessages < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxMessages", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s SampleChannelDataInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.ChannelName != nil {
-		v := *s.ChannelName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "channelName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.EndTime != nil {
-		v := *s.EndTime
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "endTime",
-			protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormatName, QuotedFormatTime: false}, metadata)
-	}
-	if s.MaxMessages != nil {
-		v := *s.MaxMessages
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "maxMessages", protocol.Int64Value(v), metadata)
-	}
-	if s.StartTime != nil {
-		v := *s.StartTime
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "startTime",
-			protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormatName, QuotedFormatTime: false}, metadata)
-	}
-	return nil
-}
-
-type SampleChannelDataOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The list of message samples. Each sample message is returned as a base64-encoded
-	// string.
-	Payloads [][]byte `locationName:"payloads" min:"1" type:"list"`
-}
-
-// String returns the string representation
-func (s SampleChannelDataOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s SampleChannelDataOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.Payloads != nil {
-		v := s.Payloads
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "payloads", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.BytesValue(v1)})
-		}
-		ls0.End()
-
-	}
-	return nil
-}
 
 const opSampleChannelData = "SampleChannelData"
 
@@ -134,7 +25,7 @@ const opSampleChannelData = "SampleChannelData"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iotanalytics-2017-11-27/SampleChannelData
-func (c *Client) SampleChannelDataRequest(input *SampleChannelDataInput) SampleChannelDataRequest {
+func (c *Client) SampleChannelDataRequest(input *types.SampleChannelDataInput) SampleChannelDataRequest {
 	op := &aws.Operation{
 		Name:       opSampleChannelData,
 		HTTPMethod: "GET",
@@ -142,10 +33,10 @@ func (c *Client) SampleChannelDataRequest(input *SampleChannelDataInput) SampleC
 	}
 
 	if input == nil {
-		input = &SampleChannelDataInput{}
+		input = &types.SampleChannelDataInput{}
 	}
 
-	req := c.newRequest(op, input, &SampleChannelDataOutput{})
+	req := c.newRequest(op, input, &types.SampleChannelDataOutput{})
 	return SampleChannelDataRequest{Request: req, Input: input, Copy: c.SampleChannelDataRequest}
 }
 
@@ -153,8 +44,8 @@ func (c *Client) SampleChannelDataRequest(input *SampleChannelDataInput) SampleC
 // SampleChannelData API operation.
 type SampleChannelDataRequest struct {
 	*aws.Request
-	Input *SampleChannelDataInput
-	Copy  func(*SampleChannelDataInput) SampleChannelDataRequest
+	Input *types.SampleChannelDataInput
+	Copy  func(*types.SampleChannelDataInput) SampleChannelDataRequest
 }
 
 // Send marshals and sends the SampleChannelData API request.
@@ -166,7 +57,7 @@ func (r SampleChannelDataRequest) Send(ctx context.Context) (*SampleChannelDataR
 	}
 
 	resp := &SampleChannelDataResponse{
-		SampleChannelDataOutput: r.Request.Data.(*SampleChannelDataOutput),
+		SampleChannelDataOutput: r.Request.Data.(*types.SampleChannelDataOutput),
 		response:                &aws.Response{Request: r.Request},
 	}
 
@@ -176,7 +67,7 @@ func (r SampleChannelDataRequest) Send(ctx context.Context) (*SampleChannelDataR
 // SampleChannelDataResponse is the response type for the
 // SampleChannelData API operation.
 type SampleChannelDataResponse struct {
-	*SampleChannelDataOutput
+	*types.SampleChannelDataOutput
 
 	response *aws.Response
 }

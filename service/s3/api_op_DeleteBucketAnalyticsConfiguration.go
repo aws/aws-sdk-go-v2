@@ -6,86 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/restxml"
+	"github.com/aws/aws-sdk-go-v2/service/s3/types"
 )
-
-type DeleteBucketAnalyticsConfigurationInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the bucket from which an analytics configuration is deleted.
-	//
-	// Bucket is a required field
-	Bucket *string `location:"uri" locationName:"Bucket" type:"string" required:"true"`
-
-	// The ID that identifies the analytics configuration.
-	//
-	// Id is a required field
-	Id *string `location:"querystring" locationName:"id" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteBucketAnalyticsConfigurationInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteBucketAnalyticsConfigurationInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteBucketAnalyticsConfigurationInput"}
-
-	if s.Bucket == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Bucket"))
-	}
-
-	if s.Id == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Id"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-func (s *DeleteBucketAnalyticsConfigurationInput) getBucket() (v string) {
-	if s.Bucket == nil {
-		return v
-	}
-	return *s.Bucket
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteBucketAnalyticsConfigurationInput) MarshalFields(e protocol.FieldEncoder) error {
-
-	if s.Bucket != nil {
-		v := *s.Bucket
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "Bucket", protocol.StringValue(v), metadata)
-	}
-	if s.Id != nil {
-		v := *s.Id
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "id", protocol.StringValue(v), metadata)
-	}
-	return nil
-}
-
-type DeleteBucketAnalyticsConfigurationOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteBucketAnalyticsConfigurationOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteBucketAnalyticsConfigurationOutput) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
 
 const opDeleteBucketAnalyticsConfiguration = "DeleteBucketAnalyticsConfiguration"
 
@@ -97,7 +21,20 @@ const opDeleteBucketAnalyticsConfiguration = "DeleteBucketAnalyticsConfiguration
 //
 // To use this operation, you must have permissions to perform the s3:PutAnalyticsConfiguration
 // action. The bucket owner has this permission by default. The bucket owner
-// can grant this permission to others.
+// can grant this permission to others. For more information about permissions,
+// see Permissions Related to Bucket Subresource Operations (https://docs.aws.amazon.com/AmazonS3/latest/dev//using-with-s3-actions.html#using-with-s3-actions-related-to-bucket-subresources)
+// and Managing Access Permissions to Your Amazon S3 Resources (https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-access-control.html).
+//
+// For information about Amazon S3 analytics feature, see Amazon S3 Analytics
+// – Storage Class Analysis (https://docs.aws.amazon.com/AmazonS3/latest/dev/analytics-storage-class.html).
+//
+// The following operations are related to DeleteBucketAnalyticsConfiguration:
+//
+//    *
+//
+//    *
+//
+//    *
 //
 //    // Example sending a request using DeleteBucketAnalyticsConfigurationRequest.
 //    req := client.DeleteBucketAnalyticsConfigurationRequest(params)
@@ -107,7 +44,7 @@ const opDeleteBucketAnalyticsConfiguration = "DeleteBucketAnalyticsConfiguration
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/DeleteBucketAnalyticsConfiguration
-func (c *Client) DeleteBucketAnalyticsConfigurationRequest(input *DeleteBucketAnalyticsConfigurationInput) DeleteBucketAnalyticsConfigurationRequest {
+func (c *Client) DeleteBucketAnalyticsConfigurationRequest(input *types.DeleteBucketAnalyticsConfigurationInput) DeleteBucketAnalyticsConfigurationRequest {
 	op := &aws.Operation{
 		Name:       opDeleteBucketAnalyticsConfiguration,
 		HTTPMethod: "DELETE",
@@ -115,10 +52,10 @@ func (c *Client) DeleteBucketAnalyticsConfigurationRequest(input *DeleteBucketAn
 	}
 
 	if input == nil {
-		input = &DeleteBucketAnalyticsConfigurationInput{}
+		input = &types.DeleteBucketAnalyticsConfigurationInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteBucketAnalyticsConfigurationOutput{})
+	req := c.newRequest(op, input, &types.DeleteBucketAnalyticsConfigurationOutput{})
 	req.Handlers.Unmarshal.Remove(restxml.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return DeleteBucketAnalyticsConfigurationRequest{Request: req, Input: input, Copy: c.DeleteBucketAnalyticsConfigurationRequest}
@@ -128,8 +65,8 @@ func (c *Client) DeleteBucketAnalyticsConfigurationRequest(input *DeleteBucketAn
 // DeleteBucketAnalyticsConfiguration API operation.
 type DeleteBucketAnalyticsConfigurationRequest struct {
 	*aws.Request
-	Input *DeleteBucketAnalyticsConfigurationInput
-	Copy  func(*DeleteBucketAnalyticsConfigurationInput) DeleteBucketAnalyticsConfigurationRequest
+	Input *types.DeleteBucketAnalyticsConfigurationInput
+	Copy  func(*types.DeleteBucketAnalyticsConfigurationInput) DeleteBucketAnalyticsConfigurationRequest
 }
 
 // Send marshals and sends the DeleteBucketAnalyticsConfiguration API request.
@@ -141,7 +78,7 @@ func (r DeleteBucketAnalyticsConfigurationRequest) Send(ctx context.Context) (*D
 	}
 
 	resp := &DeleteBucketAnalyticsConfigurationResponse{
-		DeleteBucketAnalyticsConfigurationOutput: r.Request.Data.(*DeleteBucketAnalyticsConfigurationOutput),
+		DeleteBucketAnalyticsConfigurationOutput: r.Request.Data.(*types.DeleteBucketAnalyticsConfigurationOutput),
 		response:                                 &aws.Response{Request: r.Request},
 	}
 
@@ -151,7 +88,7 @@ func (r DeleteBucketAnalyticsConfigurationRequest) Send(ctx context.Context) (*D
 // DeleteBucketAnalyticsConfigurationResponse is the response type for the
 // DeleteBucketAnalyticsConfiguration API operation.
 type DeleteBucketAnalyticsConfigurationResponse struct {
-	*DeleteBucketAnalyticsConfigurationOutput
+	*types.DeleteBucketAnalyticsConfigurationOutput
 
 	response *aws.Response
 }

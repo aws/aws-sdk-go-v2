@@ -6,74 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/redshift/types"
 )
-
-type DescribeClusterSubnetGroupsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the cluster subnet group for which information is requested.
-	ClusterSubnetGroupName *string `type:"string"`
-
-	// An optional parameter that specifies the starting point to return a set of
-	// response records. When the results of a DescribeClusterSubnetGroups request
-	// exceed the value specified in MaxRecords, AWS returns a value in the Marker
-	// field of the response. You can retrieve the next set of response records
-	// by providing the returned marker value in the Marker parameter and retrying
-	// the request.
-	Marker *string `type:"string"`
-
-	// The maximum number of response records to return in each call. If the number
-	// of remaining response records exceeds the specified MaxRecords value, a value
-	// is returned in a marker field of the response. You can retrieve the next
-	// set of records by retrying the command with the returned marker value.
-	//
-	// Default: 100
-	//
-	// Constraints: minimum 20, maximum 100.
-	MaxRecords *int64 `type:"integer"`
-
-	// A tag key or keys for which you want to return all matching cluster subnet
-	// groups that are associated with the specified key or keys. For example, suppose
-	// that you have subnet groups that are tagged with keys called owner and environment.
-	// If you specify both of these tag keys in the request, Amazon Redshift returns
-	// a response with the subnet groups that have either or both of these tag keys
-	// associated with them.
-	TagKeys []string `locationNameList:"TagKey" type:"list"`
-
-	// A tag value or values for which you want to return all matching cluster subnet
-	// groups that are associated with the specified tag value or values. For example,
-	// suppose that you have subnet groups that are tagged with values called admin
-	// and test. If you specify both of these tag values in the request, Amazon
-	// Redshift returns a response with the subnet groups that have either or both
-	// of these tag values associated with them.
-	TagValues []string `locationNameList:"TagValue" type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeClusterSubnetGroupsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Contains the output from the DescribeClusterSubnetGroups action.
-type DescribeClusterSubnetGroupsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A list of ClusterSubnetGroup instances.
-	ClusterSubnetGroups []ClusterSubnetGroup `locationNameList:"ClusterSubnetGroup" type:"list"`
-
-	// A value that indicates the starting point for the next set of response records
-	// in a subsequent request. If a value is returned in a response, you can retrieve
-	// the next set of records by providing this returned marker value in the Marker
-	// parameter and retrying the command. If the Marker field is empty, all response
-	// records have been retrieved for the request.
-	Marker *string `type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeClusterSubnetGroupsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeClusterSubnetGroups = "DescribeClusterSubnetGroups"
 
@@ -102,7 +36,7 @@ const opDescribeClusterSubnetGroups = "DescribeClusterSubnetGroups"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeClusterSubnetGroups
-func (c *Client) DescribeClusterSubnetGroupsRequest(input *DescribeClusterSubnetGroupsInput) DescribeClusterSubnetGroupsRequest {
+func (c *Client) DescribeClusterSubnetGroupsRequest(input *types.DescribeClusterSubnetGroupsInput) DescribeClusterSubnetGroupsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeClusterSubnetGroups,
 		HTTPMethod: "POST",
@@ -116,10 +50,10 @@ func (c *Client) DescribeClusterSubnetGroupsRequest(input *DescribeClusterSubnet
 	}
 
 	if input == nil {
-		input = &DescribeClusterSubnetGroupsInput{}
+		input = &types.DescribeClusterSubnetGroupsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeClusterSubnetGroupsOutput{})
+	req := c.newRequest(op, input, &types.DescribeClusterSubnetGroupsOutput{})
 	return DescribeClusterSubnetGroupsRequest{Request: req, Input: input, Copy: c.DescribeClusterSubnetGroupsRequest}
 }
 
@@ -127,8 +61,8 @@ func (c *Client) DescribeClusterSubnetGroupsRequest(input *DescribeClusterSubnet
 // DescribeClusterSubnetGroups API operation.
 type DescribeClusterSubnetGroupsRequest struct {
 	*aws.Request
-	Input *DescribeClusterSubnetGroupsInput
-	Copy  func(*DescribeClusterSubnetGroupsInput) DescribeClusterSubnetGroupsRequest
+	Input *types.DescribeClusterSubnetGroupsInput
+	Copy  func(*types.DescribeClusterSubnetGroupsInput) DescribeClusterSubnetGroupsRequest
 }
 
 // Send marshals and sends the DescribeClusterSubnetGroups API request.
@@ -140,7 +74,7 @@ func (r DescribeClusterSubnetGroupsRequest) Send(ctx context.Context) (*Describe
 	}
 
 	resp := &DescribeClusterSubnetGroupsResponse{
-		DescribeClusterSubnetGroupsOutput: r.Request.Data.(*DescribeClusterSubnetGroupsOutput),
+		DescribeClusterSubnetGroupsOutput: r.Request.Data.(*types.DescribeClusterSubnetGroupsOutput),
 		response:                          &aws.Response{Request: r.Request},
 	}
 
@@ -170,7 +104,7 @@ func NewDescribeClusterSubnetGroupsPaginator(req DescribeClusterSubnetGroupsRequ
 	return DescribeClusterSubnetGroupsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *DescribeClusterSubnetGroupsInput
+				var inCpy *types.DescribeClusterSubnetGroupsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -190,14 +124,14 @@ type DescribeClusterSubnetGroupsPaginator struct {
 	aws.Pager
 }
 
-func (p *DescribeClusterSubnetGroupsPaginator) CurrentPage() *DescribeClusterSubnetGroupsOutput {
-	return p.Pager.CurrentPage().(*DescribeClusterSubnetGroupsOutput)
+func (p *DescribeClusterSubnetGroupsPaginator) CurrentPage() *types.DescribeClusterSubnetGroupsOutput {
+	return p.Pager.CurrentPage().(*types.DescribeClusterSubnetGroupsOutput)
 }
 
 // DescribeClusterSubnetGroupsResponse is the response type for the
 // DescribeClusterSubnetGroups API operation.
 type DescribeClusterSubnetGroupsResponse struct {
-	*DescribeClusterSubnetGroupsOutput
+	*types.DescribeClusterSubnetGroupsOutput
 
 	response *aws.Response
 }

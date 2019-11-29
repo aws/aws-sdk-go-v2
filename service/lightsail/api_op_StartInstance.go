@@ -6,48 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/lightsail/types"
 )
-
-type StartInstanceInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the instance (a virtual private server) to start.
-	//
-	// InstanceName is a required field
-	InstanceName *string `locationName:"instanceName" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s StartInstanceInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *StartInstanceInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "StartInstanceInput"}
-
-	if s.InstanceName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("InstanceName"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type StartInstanceOutput struct {
-	_ struct{} `type:"structure"`
-
-	// An array of key-value pairs containing information about the request operation.
-	Operations []Operation `locationName:"operations" type:"list"`
-}
-
-// String returns the string representation
-func (s StartInstanceOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opStartInstance = "StartInstance"
 
@@ -74,7 +34,7 @@ const opStartInstance = "StartInstance"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/StartInstance
-func (c *Client) StartInstanceRequest(input *StartInstanceInput) StartInstanceRequest {
+func (c *Client) StartInstanceRequest(input *types.StartInstanceInput) StartInstanceRequest {
 	op := &aws.Operation{
 		Name:       opStartInstance,
 		HTTPMethod: "POST",
@@ -82,10 +42,10 @@ func (c *Client) StartInstanceRequest(input *StartInstanceInput) StartInstanceRe
 	}
 
 	if input == nil {
-		input = &StartInstanceInput{}
+		input = &types.StartInstanceInput{}
 	}
 
-	req := c.newRequest(op, input, &StartInstanceOutput{})
+	req := c.newRequest(op, input, &types.StartInstanceOutput{})
 	return StartInstanceRequest{Request: req, Input: input, Copy: c.StartInstanceRequest}
 }
 
@@ -93,8 +53,8 @@ func (c *Client) StartInstanceRequest(input *StartInstanceInput) StartInstanceRe
 // StartInstance API operation.
 type StartInstanceRequest struct {
 	*aws.Request
-	Input *StartInstanceInput
-	Copy  func(*StartInstanceInput) StartInstanceRequest
+	Input *types.StartInstanceInput
+	Copy  func(*types.StartInstanceInput) StartInstanceRequest
 }
 
 // Send marshals and sends the StartInstance API request.
@@ -106,7 +66,7 @@ func (r StartInstanceRequest) Send(ctx context.Context) (*StartInstanceResponse,
 	}
 
 	resp := &StartInstanceResponse{
-		StartInstanceOutput: r.Request.Data.(*StartInstanceOutput),
+		StartInstanceOutput: r.Request.Data.(*types.StartInstanceOutput),
 		response:            &aws.Response{Request: r.Request},
 	}
 
@@ -116,7 +76,7 @@ func (r StartInstanceRequest) Send(ctx context.Context) (*StartInstanceResponse,
 // StartInstanceResponse is the response type for the
 // StartInstance API operation.
 type StartInstanceResponse struct {
-	*StartInstanceOutput
+	*types.StartInstanceOutput
 
 	response *aws.Response
 }

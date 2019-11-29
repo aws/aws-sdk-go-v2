@@ -6,69 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ses/types"
 )
-
-// Represents a request to enable or disable the Amazon SES custom MAIL FROM
-// domain setup for a verified identity. For information about using a custom
-// MAIL FROM domain, see the Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/mail-from.html).
-type SetIdentityMailFromDomainInput struct {
-	_ struct{} `type:"structure"`
-
-	// The action that you want Amazon SES to take if it cannot successfully read
-	// the required MX record when you send an email. If you choose UseDefaultValue,
-	// Amazon SES will use amazonses.com (or a subdomain of that) as the MAIL FROM
-	// domain. If you choose RejectMessage, Amazon SES will return a MailFromDomainNotVerified
-	// error and not send the email.
-	//
-	// The action specified in BehaviorOnMXFailure is taken when the custom MAIL
-	// FROM domain setup is in the Pending, Failed, and TemporaryFailure states.
-	BehaviorOnMXFailure BehaviorOnMXFailure `type:"string" enum:"true"`
-
-	// The verified identity for which you want to enable or disable the specified
-	// custom MAIL FROM domain.
-	//
-	// Identity is a required field
-	Identity *string `type:"string" required:"true"`
-
-	// The custom MAIL FROM domain that you want the verified identity to use. The
-	// MAIL FROM domain must 1) be a subdomain of the verified identity, 2) not
-	// be used in a "From" address if the MAIL FROM domain is the destination of
-	// email feedback forwarding (for more information, see the Amazon SES Developer
-	// Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/mail-from.html)),
-	// and 3) not be used to receive emails. A value of null disables the custom
-	// MAIL FROM setting for the identity.
-	MailFromDomain *string `type:"string"`
-}
-
-// String returns the string representation
-func (s SetIdentityMailFromDomainInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *SetIdentityMailFromDomainInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "SetIdentityMailFromDomainInput"}
-
-	if s.Identity == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Identity"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// An empty element returned on a successful request.
-type SetIdentityMailFromDomainOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s SetIdentityMailFromDomainOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opSetIdentityMailFromDomain = "SetIdentityMailFromDomain"
 
@@ -93,7 +32,7 @@ const opSetIdentityMailFromDomain = "SetIdentityMailFromDomain"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/SetIdentityMailFromDomain
-func (c *Client) SetIdentityMailFromDomainRequest(input *SetIdentityMailFromDomainInput) SetIdentityMailFromDomainRequest {
+func (c *Client) SetIdentityMailFromDomainRequest(input *types.SetIdentityMailFromDomainInput) SetIdentityMailFromDomainRequest {
 	op := &aws.Operation{
 		Name:       opSetIdentityMailFromDomain,
 		HTTPMethod: "POST",
@@ -101,10 +40,10 @@ func (c *Client) SetIdentityMailFromDomainRequest(input *SetIdentityMailFromDoma
 	}
 
 	if input == nil {
-		input = &SetIdentityMailFromDomainInput{}
+		input = &types.SetIdentityMailFromDomainInput{}
 	}
 
-	req := c.newRequest(op, input, &SetIdentityMailFromDomainOutput{})
+	req := c.newRequest(op, input, &types.SetIdentityMailFromDomainOutput{})
 	return SetIdentityMailFromDomainRequest{Request: req, Input: input, Copy: c.SetIdentityMailFromDomainRequest}
 }
 
@@ -112,8 +51,8 @@ func (c *Client) SetIdentityMailFromDomainRequest(input *SetIdentityMailFromDoma
 // SetIdentityMailFromDomain API operation.
 type SetIdentityMailFromDomainRequest struct {
 	*aws.Request
-	Input *SetIdentityMailFromDomainInput
-	Copy  func(*SetIdentityMailFromDomainInput) SetIdentityMailFromDomainRequest
+	Input *types.SetIdentityMailFromDomainInput
+	Copy  func(*types.SetIdentityMailFromDomainInput) SetIdentityMailFromDomainRequest
 }
 
 // Send marshals and sends the SetIdentityMailFromDomain API request.
@@ -125,7 +64,7 @@ func (r SetIdentityMailFromDomainRequest) Send(ctx context.Context) (*SetIdentit
 	}
 
 	resp := &SetIdentityMailFromDomainResponse{
-		SetIdentityMailFromDomainOutput: r.Request.Data.(*SetIdentityMailFromDomainOutput),
+		SetIdentityMailFromDomainOutput: r.Request.Data.(*types.SetIdentityMailFromDomainOutput),
 		response:                        &aws.Response{Request: r.Request},
 	}
 
@@ -135,7 +74,7 @@ func (r SetIdentityMailFromDomainRequest) Send(ctx context.Context) (*SetIdentit
 // SetIdentityMailFromDomainResponse is the response type for the
 // SetIdentityMailFromDomain API operation.
 type SetIdentityMailFromDomainResponse struct {
-	*SetIdentityMailFromDomainOutput
+	*types.SetIdentityMailFromDomainOutput
 
 	response *aws.Response
 }

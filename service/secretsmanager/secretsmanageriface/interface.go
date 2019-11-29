@@ -10,6 +10,7 @@ package secretsmanageriface
 
 import (
 	"github.com/aws/aws-sdk-go-v2/service/secretsmanager"
+	"github.com/aws/aws-sdk-go-v2/service/secretsmanager/types"
 )
 
 // ClientAPI provides an interface to enable mocking the
@@ -43,7 +44,7 @@ import (
 //    type mockClientClient struct {
 //        secretsmanageriface.ClientPI
 //    }
-//    func (m *mockClientClient) CancelRotateSecret(input *secretsmanager.CancelRotateSecretInput) (*secretsmanager.CancelRotateSecretOutput, error) {
+//    func (m *mockClientClient) CancelRotateSecret(input *types.CancelRotateSecretInput) (*types.CancelRotateSecretOutput, error) {
 //        // mock response/functionality
 //    }
 //
@@ -61,41 +62,41 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type ClientAPI interface {
-	CancelRotateSecretRequest(*secretsmanager.CancelRotateSecretInput) secretsmanager.CancelRotateSecretRequest
+	CancelRotateSecretRequest(*types.CancelRotateSecretInput) secretsmanager.CancelRotateSecretRequest
 
-	CreateSecretRequest(*secretsmanager.CreateSecretInput) secretsmanager.CreateSecretRequest
+	CreateSecretRequest(*types.CreateSecretInput) secretsmanager.CreateSecretRequest
 
-	DeleteResourcePolicyRequest(*secretsmanager.DeleteResourcePolicyInput) secretsmanager.DeleteResourcePolicyRequest
+	DeleteResourcePolicyRequest(*types.DeleteResourcePolicyInput) secretsmanager.DeleteResourcePolicyRequest
 
-	DeleteSecretRequest(*secretsmanager.DeleteSecretInput) secretsmanager.DeleteSecretRequest
+	DeleteSecretRequest(*types.DeleteSecretInput) secretsmanager.DeleteSecretRequest
 
-	DescribeSecretRequest(*secretsmanager.DescribeSecretInput) secretsmanager.DescribeSecretRequest
+	DescribeSecretRequest(*types.DescribeSecretInput) secretsmanager.DescribeSecretRequest
 
-	GetRandomPasswordRequest(*secretsmanager.GetRandomPasswordInput) secretsmanager.GetRandomPasswordRequest
+	GetRandomPasswordRequest(*types.GetRandomPasswordInput) secretsmanager.GetRandomPasswordRequest
 
-	GetResourcePolicyRequest(*secretsmanager.GetResourcePolicyInput) secretsmanager.GetResourcePolicyRequest
+	GetResourcePolicyRequest(*types.GetResourcePolicyInput) secretsmanager.GetResourcePolicyRequest
 
-	GetSecretValueRequest(*secretsmanager.GetSecretValueInput) secretsmanager.GetSecretValueRequest
+	GetSecretValueRequest(*types.GetSecretValueInput) secretsmanager.GetSecretValueRequest
 
-	ListSecretVersionIdsRequest(*secretsmanager.ListSecretVersionIdsInput) secretsmanager.ListSecretVersionIdsRequest
+	ListSecretVersionIdsRequest(*types.ListSecretVersionIdsInput) secretsmanager.ListSecretVersionIdsRequest
 
-	ListSecretsRequest(*secretsmanager.ListSecretsInput) secretsmanager.ListSecretsRequest
+	ListSecretsRequest(*types.ListSecretsInput) secretsmanager.ListSecretsRequest
 
-	PutResourcePolicyRequest(*secretsmanager.PutResourcePolicyInput) secretsmanager.PutResourcePolicyRequest
+	PutResourcePolicyRequest(*types.PutResourcePolicyInput) secretsmanager.PutResourcePolicyRequest
 
-	PutSecretValueRequest(*secretsmanager.PutSecretValueInput) secretsmanager.PutSecretValueRequest
+	PutSecretValueRequest(*types.PutSecretValueInput) secretsmanager.PutSecretValueRequest
 
-	RestoreSecretRequest(*secretsmanager.RestoreSecretInput) secretsmanager.RestoreSecretRequest
+	RestoreSecretRequest(*types.RestoreSecretInput) secretsmanager.RestoreSecretRequest
 
-	RotateSecretRequest(*secretsmanager.RotateSecretInput) secretsmanager.RotateSecretRequest
+	RotateSecretRequest(*types.RotateSecretInput) secretsmanager.RotateSecretRequest
 
-	TagResourceRequest(*secretsmanager.TagResourceInput) secretsmanager.TagResourceRequest
+	TagResourceRequest(*types.TagResourceInput) secretsmanager.TagResourceRequest
 
-	UntagResourceRequest(*secretsmanager.UntagResourceInput) secretsmanager.UntagResourceRequest
+	UntagResourceRequest(*types.UntagResourceInput) secretsmanager.UntagResourceRequest
 
-	UpdateSecretRequest(*secretsmanager.UpdateSecretInput) secretsmanager.UpdateSecretRequest
+	UpdateSecretRequest(*types.UpdateSecretInput) secretsmanager.UpdateSecretRequest
 
-	UpdateSecretVersionStageRequest(*secretsmanager.UpdateSecretVersionStageInput) secretsmanager.UpdateSecretVersionStageRequest
+	UpdateSecretVersionStageRequest(*types.UpdateSecretVersionStageInput) secretsmanager.UpdateSecretVersionStageRequest
 }
 
 var _ ClientAPI = (*secretsmanager.Client)(nil)

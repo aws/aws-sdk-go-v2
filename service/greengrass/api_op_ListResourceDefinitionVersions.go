@@ -6,100 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/greengrass/types"
 )
-
-type ListResourceDefinitionVersionsInput struct {
-	_ struct{} `type:"structure"`
-
-	MaxResults *string `location:"querystring" locationName:"MaxResults" type:"string"`
-
-	NextToken *string `location:"querystring" locationName:"NextToken" type:"string"`
-
-	// ResourceDefinitionId is a required field
-	ResourceDefinitionId *string `location:"uri" locationName:"ResourceDefinitionId" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s ListResourceDefinitionVersionsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListResourceDefinitionVersionsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListResourceDefinitionVersionsInput"}
-
-	if s.ResourceDefinitionId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ResourceDefinitionId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListResourceDefinitionVersionsInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.ResourceDefinitionId != nil {
-		v := *s.ResourceDefinitionId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "ResourceDefinitionId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.MaxResults != nil {
-		v := *s.MaxResults
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "MaxResults", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type ListResourceDefinitionVersionsOutput struct {
-	_ struct{} `type:"structure"`
-
-	NextToken *string `type:"string"`
-
-	Versions []VersionInformation `type:"list"`
-}
-
-// String returns the string representation
-func (s ListResourceDefinitionVersionsOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListResourceDefinitionVersionsOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Versions != nil {
-		v := s.Versions
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "Versions", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	return nil
-}
 
 const opListResourceDefinitionVersions = "ListResourceDefinitionVersions"
 
@@ -116,7 +24,7 @@ const opListResourceDefinitionVersions = "ListResourceDefinitionVersions"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/ListResourceDefinitionVersions
-func (c *Client) ListResourceDefinitionVersionsRequest(input *ListResourceDefinitionVersionsInput) ListResourceDefinitionVersionsRequest {
+func (c *Client) ListResourceDefinitionVersionsRequest(input *types.ListResourceDefinitionVersionsInput) ListResourceDefinitionVersionsRequest {
 	op := &aws.Operation{
 		Name:       opListResourceDefinitionVersions,
 		HTTPMethod: "GET",
@@ -124,10 +32,10 @@ func (c *Client) ListResourceDefinitionVersionsRequest(input *ListResourceDefini
 	}
 
 	if input == nil {
-		input = &ListResourceDefinitionVersionsInput{}
+		input = &types.ListResourceDefinitionVersionsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListResourceDefinitionVersionsOutput{})
+	req := c.newRequest(op, input, &types.ListResourceDefinitionVersionsOutput{})
 	return ListResourceDefinitionVersionsRequest{Request: req, Input: input, Copy: c.ListResourceDefinitionVersionsRequest}
 }
 
@@ -135,8 +43,8 @@ func (c *Client) ListResourceDefinitionVersionsRequest(input *ListResourceDefini
 // ListResourceDefinitionVersions API operation.
 type ListResourceDefinitionVersionsRequest struct {
 	*aws.Request
-	Input *ListResourceDefinitionVersionsInput
-	Copy  func(*ListResourceDefinitionVersionsInput) ListResourceDefinitionVersionsRequest
+	Input *types.ListResourceDefinitionVersionsInput
+	Copy  func(*types.ListResourceDefinitionVersionsInput) ListResourceDefinitionVersionsRequest
 }
 
 // Send marshals and sends the ListResourceDefinitionVersions API request.
@@ -148,7 +56,7 @@ func (r ListResourceDefinitionVersionsRequest) Send(ctx context.Context) (*ListR
 	}
 
 	resp := &ListResourceDefinitionVersionsResponse{
-		ListResourceDefinitionVersionsOutput: r.Request.Data.(*ListResourceDefinitionVersionsOutput),
+		ListResourceDefinitionVersionsOutput: r.Request.Data.(*types.ListResourceDefinitionVersionsOutput),
 		response:                             &aws.Response{Request: r.Request},
 	}
 
@@ -158,7 +66,7 @@ func (r ListResourceDefinitionVersionsRequest) Send(ctx context.Context) (*ListR
 // ListResourceDefinitionVersionsResponse is the response type for the
 // ListResourceDefinitionVersions API operation.
 type ListResourceDefinitionVersionsResponse struct {
-	*ListResourceDefinitionVersionsOutput
+	*types.ListResourceDefinitionVersionsOutput
 
 	response *aws.Response
 }

@@ -6,84 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/cloudfront/types"
 )
-
-// The origin access identity's configuration information. For more information,
-// see CloudFrontOriginAccessIdentityConfig (https://docs.aws.amazon.com/cloudfront/latest/APIReference/API_CloudFrontOriginAccessIdentityConfig.html).
-type GetCloudFrontOriginAccessIdentityConfigInput struct {
-	_ struct{} `type:"structure"`
-
-	// The identity's ID.
-	//
-	// Id is a required field
-	Id *string `location:"uri" locationName:"Id" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetCloudFrontOriginAccessIdentityConfigInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetCloudFrontOriginAccessIdentityConfigInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetCloudFrontOriginAccessIdentityConfigInput"}
-
-	if s.Id == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Id"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetCloudFrontOriginAccessIdentityConfigInput) MarshalFields(e protocol.FieldEncoder) error {
-
-	if s.Id != nil {
-		v := *s.Id
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "Id", protocol.StringValue(v), metadata)
-	}
-	return nil
-}
-
-// The returned result of the corresponding request.
-type GetCloudFrontOriginAccessIdentityConfigOutput struct {
-	_ struct{} `type:"structure" payload:"CloudFrontOriginAccessIdentityConfig"`
-
-	// The origin access identity's configuration information.
-	CloudFrontOriginAccessIdentityConfig *CloudFrontOriginAccessIdentityConfig `type:"structure"`
-
-	// The current version of the configuration. For example: E2QWRUHAPOMQZL.
-	ETag *string `location:"header" locationName:"ETag" type:"string"`
-}
-
-// String returns the string representation
-func (s GetCloudFrontOriginAccessIdentityConfigOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetCloudFrontOriginAccessIdentityConfigOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.ETag != nil {
-		v := *s.ETag
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "ETag", protocol.StringValue(v), metadata)
-	}
-	if s.CloudFrontOriginAccessIdentityConfig != nil {
-		v := s.CloudFrontOriginAccessIdentityConfig
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.PayloadTarget, "CloudFrontOriginAccessIdentityConfig", v, metadata)
-	}
-	return nil
-}
 
 const opGetCloudFrontOriginAccessIdentityConfig = "GetCloudFrontOriginAccessIdentityConfig2019_03_26"
 
@@ -100,7 +24,7 @@ const opGetCloudFrontOriginAccessIdentityConfig = "GetCloudFrontOriginAccessIden
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/GetCloudFrontOriginAccessIdentityConfig
-func (c *Client) GetCloudFrontOriginAccessIdentityConfigRequest(input *GetCloudFrontOriginAccessIdentityConfigInput) GetCloudFrontOriginAccessIdentityConfigRequest {
+func (c *Client) GetCloudFrontOriginAccessIdentityConfigRequest(input *types.GetCloudFrontOriginAccessIdentityConfigInput) GetCloudFrontOriginAccessIdentityConfigRequest {
 	op := &aws.Operation{
 		Name:       opGetCloudFrontOriginAccessIdentityConfig,
 		HTTPMethod: "GET",
@@ -108,10 +32,10 @@ func (c *Client) GetCloudFrontOriginAccessIdentityConfigRequest(input *GetCloudF
 	}
 
 	if input == nil {
-		input = &GetCloudFrontOriginAccessIdentityConfigInput{}
+		input = &types.GetCloudFrontOriginAccessIdentityConfigInput{}
 	}
 
-	req := c.newRequest(op, input, &GetCloudFrontOriginAccessIdentityConfigOutput{})
+	req := c.newRequest(op, input, &types.GetCloudFrontOriginAccessIdentityConfigOutput{})
 	return GetCloudFrontOriginAccessIdentityConfigRequest{Request: req, Input: input, Copy: c.GetCloudFrontOriginAccessIdentityConfigRequest}
 }
 
@@ -119,8 +43,8 @@ func (c *Client) GetCloudFrontOriginAccessIdentityConfigRequest(input *GetCloudF
 // GetCloudFrontOriginAccessIdentityConfig API operation.
 type GetCloudFrontOriginAccessIdentityConfigRequest struct {
 	*aws.Request
-	Input *GetCloudFrontOriginAccessIdentityConfigInput
-	Copy  func(*GetCloudFrontOriginAccessIdentityConfigInput) GetCloudFrontOriginAccessIdentityConfigRequest
+	Input *types.GetCloudFrontOriginAccessIdentityConfigInput
+	Copy  func(*types.GetCloudFrontOriginAccessIdentityConfigInput) GetCloudFrontOriginAccessIdentityConfigRequest
 }
 
 // Send marshals and sends the GetCloudFrontOriginAccessIdentityConfig API request.
@@ -132,7 +56,7 @@ func (r GetCloudFrontOriginAccessIdentityConfigRequest) Send(ctx context.Context
 	}
 
 	resp := &GetCloudFrontOriginAccessIdentityConfigResponse{
-		GetCloudFrontOriginAccessIdentityConfigOutput: r.Request.Data.(*GetCloudFrontOriginAccessIdentityConfigOutput),
+		GetCloudFrontOriginAccessIdentityConfigOutput: r.Request.Data.(*types.GetCloudFrontOriginAccessIdentityConfigOutput),
 		response: &aws.Response{Request: r.Request},
 	}
 
@@ -142,7 +66,7 @@ func (r GetCloudFrontOriginAccessIdentityConfigRequest) Send(ctx context.Context
 // GetCloudFrontOriginAccessIdentityConfigResponse is the response type for the
 // GetCloudFrontOriginAccessIdentityConfig API operation.
 type GetCloudFrontOriginAccessIdentityConfigResponse struct {
-	*GetCloudFrontOriginAccessIdentityConfigOutput
+	*types.GetCloudFrontOriginAccessIdentityConfigOutput
 
 	response *aws.Response
 }

@@ -6,31 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/servicequotas/types"
 )
-
-type GetAssociationForServiceQuotaTemplateInput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s GetAssociationForServiceQuotaTemplateInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type GetAssociationForServiceQuotaTemplateOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Specifies whether the template is ASSOCIATED or DISASSOCIATED. If the template
-	// is ASSOCIATED, then it requests service quota increases for all new accounts
-	// created in your organization.
-	ServiceQuotaTemplateAssociationStatus ServiceQuotaTemplateAssociationStatus `type:"string" enum:"true"`
-}
-
-// String returns the string representation
-func (s GetAssociationForServiceQuotaTemplateOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetAssociationForServiceQuotaTemplate = "GetAssociationForServiceQuotaTemplate"
 
@@ -49,7 +26,7 @@ const opGetAssociationForServiceQuotaTemplate = "GetAssociationForServiceQuotaTe
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/service-quotas-2019-06-24/GetAssociationForServiceQuotaTemplate
-func (c *Client) GetAssociationForServiceQuotaTemplateRequest(input *GetAssociationForServiceQuotaTemplateInput) GetAssociationForServiceQuotaTemplateRequest {
+func (c *Client) GetAssociationForServiceQuotaTemplateRequest(input *types.GetAssociationForServiceQuotaTemplateInput) GetAssociationForServiceQuotaTemplateRequest {
 	op := &aws.Operation{
 		Name:       opGetAssociationForServiceQuotaTemplate,
 		HTTPMethod: "POST",
@@ -57,10 +34,10 @@ func (c *Client) GetAssociationForServiceQuotaTemplateRequest(input *GetAssociat
 	}
 
 	if input == nil {
-		input = &GetAssociationForServiceQuotaTemplateInput{}
+		input = &types.GetAssociationForServiceQuotaTemplateInput{}
 	}
 
-	req := c.newRequest(op, input, &GetAssociationForServiceQuotaTemplateOutput{})
+	req := c.newRequest(op, input, &types.GetAssociationForServiceQuotaTemplateOutput{})
 	return GetAssociationForServiceQuotaTemplateRequest{Request: req, Input: input, Copy: c.GetAssociationForServiceQuotaTemplateRequest}
 }
 
@@ -68,8 +45,8 @@ func (c *Client) GetAssociationForServiceQuotaTemplateRequest(input *GetAssociat
 // GetAssociationForServiceQuotaTemplate API operation.
 type GetAssociationForServiceQuotaTemplateRequest struct {
 	*aws.Request
-	Input *GetAssociationForServiceQuotaTemplateInput
-	Copy  func(*GetAssociationForServiceQuotaTemplateInput) GetAssociationForServiceQuotaTemplateRequest
+	Input *types.GetAssociationForServiceQuotaTemplateInput
+	Copy  func(*types.GetAssociationForServiceQuotaTemplateInput) GetAssociationForServiceQuotaTemplateRequest
 }
 
 // Send marshals and sends the GetAssociationForServiceQuotaTemplate API request.
@@ -81,7 +58,7 @@ func (r GetAssociationForServiceQuotaTemplateRequest) Send(ctx context.Context) 
 	}
 
 	resp := &GetAssociationForServiceQuotaTemplateResponse{
-		GetAssociationForServiceQuotaTemplateOutput: r.Request.Data.(*GetAssociationForServiceQuotaTemplateOutput),
+		GetAssociationForServiceQuotaTemplateOutput: r.Request.Data.(*types.GetAssociationForServiceQuotaTemplateOutput),
 		response: &aws.Response{Request: r.Request},
 	}
 
@@ -91,7 +68,7 @@ func (r GetAssociationForServiceQuotaTemplateRequest) Send(ctx context.Context) 
 // GetAssociationForServiceQuotaTemplateResponse is the response type for the
 // GetAssociationForServiceQuotaTemplate API operation.
 type GetAssociationForServiceQuotaTemplateResponse struct {
-	*GetAssociationForServiceQuotaTemplateOutput
+	*types.GetAssociationForServiceQuotaTemplateOutput
 
 	response *aws.Response
 }

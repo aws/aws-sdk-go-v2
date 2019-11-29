@@ -6,33 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/shield/types"
 )
-
-type UpdateSubscriptionInput struct {
-	_ struct{} `type:"structure"`
-
-	// When you initally create a subscription, AutoRenew is set to ENABLED. If
-	// ENABLED, the subscription will be automatically renewed at the end of the
-	// existing subscription period. You can change this by submitting an UpdateSubscription
-	// request. If the UpdateSubscription request does not included a value for
-	// AutoRenew, the existing value for AutoRenew remains unchanged.
-	AutoRenew AutoRenew `type:"string" enum:"true"`
-}
-
-// String returns the string representation
-func (s UpdateSubscriptionInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type UpdateSubscriptionOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s UpdateSubscriptionOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opUpdateSubscription = "UpdateSubscription"
 
@@ -50,7 +25,7 @@ const opUpdateSubscription = "UpdateSubscription"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/UpdateSubscription
-func (c *Client) UpdateSubscriptionRequest(input *UpdateSubscriptionInput) UpdateSubscriptionRequest {
+func (c *Client) UpdateSubscriptionRequest(input *types.UpdateSubscriptionInput) UpdateSubscriptionRequest {
 	op := &aws.Operation{
 		Name:       opUpdateSubscription,
 		HTTPMethod: "POST",
@@ -58,10 +33,10 @@ func (c *Client) UpdateSubscriptionRequest(input *UpdateSubscriptionInput) Updat
 	}
 
 	if input == nil {
-		input = &UpdateSubscriptionInput{}
+		input = &types.UpdateSubscriptionInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateSubscriptionOutput{})
+	req := c.newRequest(op, input, &types.UpdateSubscriptionOutput{})
 	return UpdateSubscriptionRequest{Request: req, Input: input, Copy: c.UpdateSubscriptionRequest}
 }
 
@@ -69,8 +44,8 @@ func (c *Client) UpdateSubscriptionRequest(input *UpdateSubscriptionInput) Updat
 // UpdateSubscription API operation.
 type UpdateSubscriptionRequest struct {
 	*aws.Request
-	Input *UpdateSubscriptionInput
-	Copy  func(*UpdateSubscriptionInput) UpdateSubscriptionRequest
+	Input *types.UpdateSubscriptionInput
+	Copy  func(*types.UpdateSubscriptionInput) UpdateSubscriptionRequest
 }
 
 // Send marshals and sends the UpdateSubscription API request.
@@ -82,7 +57,7 @@ func (r UpdateSubscriptionRequest) Send(ctx context.Context) (*UpdateSubscriptio
 	}
 
 	resp := &UpdateSubscriptionResponse{
-		UpdateSubscriptionOutput: r.Request.Data.(*UpdateSubscriptionOutput),
+		UpdateSubscriptionOutput: r.Request.Data.(*types.UpdateSubscriptionOutput),
 		response:                 &aws.Response{Request: r.Request},
 	}
 
@@ -92,7 +67,7 @@ func (r UpdateSubscriptionRequest) Send(ctx context.Context) (*UpdateSubscriptio
 // UpdateSubscriptionResponse is the response type for the
 // UpdateSubscription API operation.
 type UpdateSubscriptionResponse struct {
-	*UpdateSubscriptionOutput
+	*types.UpdateSubscriptionOutput
 
 	response *aws.Response
 }

@@ -6,45 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/comprehend/types"
 )
-
-type DeleteDocumentClassifierInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) that identifies the document classifier.
-	//
-	// DocumentClassifierArn is a required field
-	DocumentClassifierArn *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteDocumentClassifierInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteDocumentClassifierInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteDocumentClassifierInput"}
-
-	if s.DocumentClassifierArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DocumentClassifierArn"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteDocumentClassifierOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteDocumentClassifierOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteDocumentClassifier = "DeleteDocumentClassifier"
 
@@ -69,7 +32,7 @@ const opDeleteDocumentClassifier = "DeleteDocumentClassifier"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/DeleteDocumentClassifier
-func (c *Client) DeleteDocumentClassifierRequest(input *DeleteDocumentClassifierInput) DeleteDocumentClassifierRequest {
+func (c *Client) DeleteDocumentClassifierRequest(input *types.DeleteDocumentClassifierInput) DeleteDocumentClassifierRequest {
 	op := &aws.Operation{
 		Name:       opDeleteDocumentClassifier,
 		HTTPMethod: "POST",
@@ -77,10 +40,10 @@ func (c *Client) DeleteDocumentClassifierRequest(input *DeleteDocumentClassifier
 	}
 
 	if input == nil {
-		input = &DeleteDocumentClassifierInput{}
+		input = &types.DeleteDocumentClassifierInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteDocumentClassifierOutput{})
+	req := c.newRequest(op, input, &types.DeleteDocumentClassifierOutput{})
 	return DeleteDocumentClassifierRequest{Request: req, Input: input, Copy: c.DeleteDocumentClassifierRequest}
 }
 
@@ -88,8 +51,8 @@ func (c *Client) DeleteDocumentClassifierRequest(input *DeleteDocumentClassifier
 // DeleteDocumentClassifier API operation.
 type DeleteDocumentClassifierRequest struct {
 	*aws.Request
-	Input *DeleteDocumentClassifierInput
-	Copy  func(*DeleteDocumentClassifierInput) DeleteDocumentClassifierRequest
+	Input *types.DeleteDocumentClassifierInput
+	Copy  func(*types.DeleteDocumentClassifierInput) DeleteDocumentClassifierRequest
 }
 
 // Send marshals and sends the DeleteDocumentClassifier API request.
@@ -101,7 +64,7 @@ func (r DeleteDocumentClassifierRequest) Send(ctx context.Context) (*DeleteDocum
 	}
 
 	resp := &DeleteDocumentClassifierResponse{
-		DeleteDocumentClassifierOutput: r.Request.Data.(*DeleteDocumentClassifierOutput),
+		DeleteDocumentClassifierOutput: r.Request.Data.(*types.DeleteDocumentClassifierOutput),
 		response:                       &aws.Response{Request: r.Request},
 	}
 
@@ -111,7 +74,7 @@ func (r DeleteDocumentClassifierRequest) Send(ctx context.Context) (*DeleteDocum
 // DeleteDocumentClassifierResponse is the response type for the
 // DeleteDocumentClassifier API operation.
 type DeleteDocumentClassifierResponse struct {
-	*DeleteDocumentClassifierOutput
+	*types.DeleteDocumentClassifierOutput
 
 	response *aws.Response
 }

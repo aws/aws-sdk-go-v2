@@ -6,66 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/databasemigrationservice/types"
 )
-
-type ReloadTablesInput struct {
-	_ struct{} `type:"structure"`
-
-	// Options for reload. Specify data-reload to reload the data and re-validate
-	// it if validation is enabled. Specify validate-only to re-validate the table.
-	// This option applies only when validation is enabled for the task.
-	//
-	// Valid values: data-reload, validate-only
-	//
-	// Default value is data-reload.
-	ReloadOption ReloadOptionValue `type:"string" enum:"true"`
-
-	// The Amazon Resource Name (ARN) of the replication task.
-	//
-	// ReplicationTaskArn is a required field
-	ReplicationTaskArn *string `type:"string" required:"true"`
-
-	// The name and schema of the table to be reloaded.
-	//
-	// TablesToReload is a required field
-	TablesToReload []TableToReload `type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s ReloadTablesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ReloadTablesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ReloadTablesInput"}
-
-	if s.ReplicationTaskArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ReplicationTaskArn"))
-	}
-
-	if s.TablesToReload == nil {
-		invalidParams.Add(aws.NewErrParamRequired("TablesToReload"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ReloadTablesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the replication task.
-	ReplicationTaskArn *string `type:"string"`
-}
-
-// String returns the string representation
-func (s ReloadTablesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opReloadTables = "ReloadTables"
 
@@ -82,7 +24,7 @@ const opReloadTables = "ReloadTables"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/ReloadTables
-func (c *Client) ReloadTablesRequest(input *ReloadTablesInput) ReloadTablesRequest {
+func (c *Client) ReloadTablesRequest(input *types.ReloadTablesInput) ReloadTablesRequest {
 	op := &aws.Operation{
 		Name:       opReloadTables,
 		HTTPMethod: "POST",
@@ -90,10 +32,10 @@ func (c *Client) ReloadTablesRequest(input *ReloadTablesInput) ReloadTablesReque
 	}
 
 	if input == nil {
-		input = &ReloadTablesInput{}
+		input = &types.ReloadTablesInput{}
 	}
 
-	req := c.newRequest(op, input, &ReloadTablesOutput{})
+	req := c.newRequest(op, input, &types.ReloadTablesOutput{})
 	return ReloadTablesRequest{Request: req, Input: input, Copy: c.ReloadTablesRequest}
 }
 
@@ -101,8 +43,8 @@ func (c *Client) ReloadTablesRequest(input *ReloadTablesInput) ReloadTablesReque
 // ReloadTables API operation.
 type ReloadTablesRequest struct {
 	*aws.Request
-	Input *ReloadTablesInput
-	Copy  func(*ReloadTablesInput) ReloadTablesRequest
+	Input *types.ReloadTablesInput
+	Copy  func(*types.ReloadTablesInput) ReloadTablesRequest
 }
 
 // Send marshals and sends the ReloadTables API request.
@@ -114,7 +56,7 @@ func (r ReloadTablesRequest) Send(ctx context.Context) (*ReloadTablesResponse, e
 	}
 
 	resp := &ReloadTablesResponse{
-		ReloadTablesOutput: r.Request.Data.(*ReloadTablesOutput),
+		ReloadTablesOutput: r.Request.Data.(*types.ReloadTablesOutput),
 		response:           &aws.Response{Request: r.Request},
 	}
 
@@ -124,7 +66,7 @@ func (r ReloadTablesRequest) Send(ctx context.Context) (*ReloadTablesResponse, e
 // ReloadTablesResponse is the response type for the
 // ReloadTables API operation.
 type ReloadTablesResponse struct {
-	*ReloadTablesOutput
+	*types.ReloadTablesOutput
 
 	response *aws.Response
 }

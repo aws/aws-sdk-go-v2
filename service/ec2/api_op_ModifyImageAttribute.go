@@ -6,84 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/ec2query"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-// Contains the parameters for ModifyImageAttribute.
-type ModifyImageAttributeInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the attribute to modify. The valid values are description, launchPermission,
-	// and productCodes.
-	Attribute *string `type:"string"`
-
-	// A new description for the AMI.
-	Description *AttributeValue `type:"structure"`
-
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have
-	// the required permissions, the error response is DryRunOperation. Otherwise,
-	// it is UnauthorizedOperation.
-	DryRun *bool `locationName:"dryRun" type:"boolean"`
-
-	// The ID of the AMI.
-	//
-	// ImageId is a required field
-	ImageId *string `type:"string" required:"true"`
-
-	// A new launch permission for the AMI.
-	LaunchPermission *LaunchPermissionModifications `type:"structure"`
-
-	// The operation type. This parameter can be used only when the Attribute parameter
-	// is launchPermission.
-	OperationType OperationType `type:"string" enum:"true"`
-
-	// The DevPay product codes. After you add a product code to an AMI, it can't
-	// be removed.
-	ProductCodes []string `locationName:"ProductCode" locationNameList:"ProductCode" type:"list"`
-
-	// The user groups. This parameter can be used only when the Attribute parameter
-	// is launchPermission.
-	UserGroups []string `locationName:"UserGroup" locationNameList:"UserGroup" type:"list"`
-
-	// The AWS account IDs. This parameter can be used only when the Attribute parameter
-	// is launchPermission.
-	UserIds []string `locationName:"UserId" locationNameList:"UserId" type:"list"`
-
-	// The value of the attribute being modified. This parameter can be used only
-	// when the Attribute parameter is description or productCodes.
-	Value *string `type:"string"`
-}
-
-// String returns the string representation
-func (s ModifyImageAttributeInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ModifyImageAttributeInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ModifyImageAttributeInput"}
-
-	if s.ImageId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ImageId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ModifyImageAttributeOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s ModifyImageAttributeOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opModifyImageAttribute = "ModifyImageAttribute"
 
@@ -109,7 +35,7 @@ const opModifyImageAttribute = "ModifyImageAttribute"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyImageAttribute
-func (c *Client) ModifyImageAttributeRequest(input *ModifyImageAttributeInput) ModifyImageAttributeRequest {
+func (c *Client) ModifyImageAttributeRequest(input *types.ModifyImageAttributeInput) ModifyImageAttributeRequest {
 	op := &aws.Operation{
 		Name:       opModifyImageAttribute,
 		HTTPMethod: "POST",
@@ -117,10 +43,10 @@ func (c *Client) ModifyImageAttributeRequest(input *ModifyImageAttributeInput) M
 	}
 
 	if input == nil {
-		input = &ModifyImageAttributeInput{}
+		input = &types.ModifyImageAttributeInput{}
 	}
 
-	req := c.newRequest(op, input, &ModifyImageAttributeOutput{})
+	req := c.newRequest(op, input, &types.ModifyImageAttributeOutput{})
 	req.Handlers.Unmarshal.Remove(ec2query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return ModifyImageAttributeRequest{Request: req, Input: input, Copy: c.ModifyImageAttributeRequest}
@@ -130,8 +56,8 @@ func (c *Client) ModifyImageAttributeRequest(input *ModifyImageAttributeInput) M
 // ModifyImageAttribute API operation.
 type ModifyImageAttributeRequest struct {
 	*aws.Request
-	Input *ModifyImageAttributeInput
-	Copy  func(*ModifyImageAttributeInput) ModifyImageAttributeRequest
+	Input *types.ModifyImageAttributeInput
+	Copy  func(*types.ModifyImageAttributeInput) ModifyImageAttributeRequest
 }
 
 // Send marshals and sends the ModifyImageAttribute API request.
@@ -143,7 +69,7 @@ func (r ModifyImageAttributeRequest) Send(ctx context.Context) (*ModifyImageAttr
 	}
 
 	resp := &ModifyImageAttributeResponse{
-		ModifyImageAttributeOutput: r.Request.Data.(*ModifyImageAttributeOutput),
+		ModifyImageAttributeOutput: r.Request.Data.(*types.ModifyImageAttributeOutput),
 		response:                   &aws.Response{Request: r.Request},
 	}
 
@@ -153,7 +79,7 @@ func (r ModifyImageAttributeRequest) Send(ctx context.Context) (*ModifyImageAttr
 // ModifyImageAttributeResponse is the response type for the
 // ModifyImageAttribute API operation.
 type ModifyImageAttributeResponse struct {
-	*ModifyImageAttributeOutput
+	*types.ModifyImageAttributeOutput
 
 	response *aws.Response
 }

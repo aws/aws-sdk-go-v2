@@ -10,6 +10,7 @@ package servicediscoveryiface
 
 import (
 	"github.com/aws/aws-sdk-go-v2/service/servicediscovery"
+	"github.com/aws/aws-sdk-go-v2/service/servicediscovery/types"
 )
 
 // ClientAPI provides an interface to enable mocking the
@@ -43,7 +44,7 @@ import (
 //    type mockClientClient struct {
 //        servicediscoveryiface.ClientPI
 //    }
-//    func (m *mockClientClient) CreateHttpNamespace(input *servicediscovery.CreateHttpNamespaceInput) (*servicediscovery.CreateHttpNamespaceOutput, error) {
+//    func (m *mockClientClient) CreateHttpNamespace(input *types.CreateHttpNamespaceInput) (*types.CreateHttpNamespaceOutput, error) {
 //        // mock response/functionality
 //    }
 //
@@ -61,45 +62,45 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type ClientAPI interface {
-	CreateHttpNamespaceRequest(*servicediscovery.CreateHttpNamespaceInput) servicediscovery.CreateHttpNamespaceRequest
+	CreateHttpNamespaceRequest(*types.CreateHttpNamespaceInput) servicediscovery.CreateHttpNamespaceRequest
 
-	CreatePrivateDnsNamespaceRequest(*servicediscovery.CreatePrivateDnsNamespaceInput) servicediscovery.CreatePrivateDnsNamespaceRequest
+	CreatePrivateDnsNamespaceRequest(*types.CreatePrivateDnsNamespaceInput) servicediscovery.CreatePrivateDnsNamespaceRequest
 
-	CreatePublicDnsNamespaceRequest(*servicediscovery.CreatePublicDnsNamespaceInput) servicediscovery.CreatePublicDnsNamespaceRequest
+	CreatePublicDnsNamespaceRequest(*types.CreatePublicDnsNamespaceInput) servicediscovery.CreatePublicDnsNamespaceRequest
 
-	CreateServiceRequest(*servicediscovery.CreateServiceInput) servicediscovery.CreateServiceRequest
+	CreateServiceRequest(*types.CreateServiceInput) servicediscovery.CreateServiceRequest
 
-	DeleteNamespaceRequest(*servicediscovery.DeleteNamespaceInput) servicediscovery.DeleteNamespaceRequest
+	DeleteNamespaceRequest(*types.DeleteNamespaceInput) servicediscovery.DeleteNamespaceRequest
 
-	DeleteServiceRequest(*servicediscovery.DeleteServiceInput) servicediscovery.DeleteServiceRequest
+	DeleteServiceRequest(*types.DeleteServiceInput) servicediscovery.DeleteServiceRequest
 
-	DeregisterInstanceRequest(*servicediscovery.DeregisterInstanceInput) servicediscovery.DeregisterInstanceRequest
+	DeregisterInstanceRequest(*types.DeregisterInstanceInput) servicediscovery.DeregisterInstanceRequest
 
-	DiscoverInstancesRequest(*servicediscovery.DiscoverInstancesInput) servicediscovery.DiscoverInstancesRequest
+	DiscoverInstancesRequest(*types.DiscoverInstancesInput) servicediscovery.DiscoverInstancesRequest
 
-	GetInstanceRequest(*servicediscovery.GetInstanceInput) servicediscovery.GetInstanceRequest
+	GetInstanceRequest(*types.GetInstanceInput) servicediscovery.GetInstanceRequest
 
-	GetInstancesHealthStatusRequest(*servicediscovery.GetInstancesHealthStatusInput) servicediscovery.GetInstancesHealthStatusRequest
+	GetInstancesHealthStatusRequest(*types.GetInstancesHealthStatusInput) servicediscovery.GetInstancesHealthStatusRequest
 
-	GetNamespaceRequest(*servicediscovery.GetNamespaceInput) servicediscovery.GetNamespaceRequest
+	GetNamespaceRequest(*types.GetNamespaceInput) servicediscovery.GetNamespaceRequest
 
-	GetOperationRequest(*servicediscovery.GetOperationInput) servicediscovery.GetOperationRequest
+	GetOperationRequest(*types.GetOperationInput) servicediscovery.GetOperationRequest
 
-	GetServiceRequest(*servicediscovery.GetServiceInput) servicediscovery.GetServiceRequest
+	GetServiceRequest(*types.GetServiceInput) servicediscovery.GetServiceRequest
 
-	ListInstancesRequest(*servicediscovery.ListInstancesInput) servicediscovery.ListInstancesRequest
+	ListInstancesRequest(*types.ListInstancesInput) servicediscovery.ListInstancesRequest
 
-	ListNamespacesRequest(*servicediscovery.ListNamespacesInput) servicediscovery.ListNamespacesRequest
+	ListNamespacesRequest(*types.ListNamespacesInput) servicediscovery.ListNamespacesRequest
 
-	ListOperationsRequest(*servicediscovery.ListOperationsInput) servicediscovery.ListOperationsRequest
+	ListOperationsRequest(*types.ListOperationsInput) servicediscovery.ListOperationsRequest
 
-	ListServicesRequest(*servicediscovery.ListServicesInput) servicediscovery.ListServicesRequest
+	ListServicesRequest(*types.ListServicesInput) servicediscovery.ListServicesRequest
 
-	RegisterInstanceRequest(*servicediscovery.RegisterInstanceInput) servicediscovery.RegisterInstanceRequest
+	RegisterInstanceRequest(*types.RegisterInstanceInput) servicediscovery.RegisterInstanceRequest
 
-	UpdateInstanceCustomHealthStatusRequest(*servicediscovery.UpdateInstanceCustomHealthStatusInput) servicediscovery.UpdateInstanceCustomHealthStatusRequest
+	UpdateInstanceCustomHealthStatusRequest(*types.UpdateInstanceCustomHealthStatusInput) servicediscovery.UpdateInstanceCustomHealthStatusRequest
 
-	UpdateServiceRequest(*servicediscovery.UpdateServiceInput) servicediscovery.UpdateServiceRequest
+	UpdateServiceRequest(*types.UpdateServiceInput) servicediscovery.UpdateServiceRequest
 }
 
 var _ ClientAPI = (*servicediscovery.Client)(nil)

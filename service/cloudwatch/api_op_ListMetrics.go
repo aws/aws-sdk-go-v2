@@ -4,71 +4,10 @@ package cloudwatch
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/cloudwatch/types"
 )
-
-type ListMetricsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The dimensions to filter against.
-	Dimensions []DimensionFilter `type:"list"`
-
-	// The name of the metric to filter against.
-	MetricName *string `min:"1" type:"string"`
-
-	// The namespace to filter against.
-	Namespace *string `min:"1" type:"string"`
-
-	// The token returned by a previous call to indicate that there is more data
-	// available.
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s ListMetricsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListMetricsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListMetricsInput"}
-	if s.MetricName != nil && len(*s.MetricName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("MetricName", 1))
-	}
-	if s.Namespace != nil && len(*s.Namespace) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Namespace", 1))
-	}
-	if s.Dimensions != nil {
-		for i, v := range s.Dimensions {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Dimensions", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ListMetricsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The metrics.
-	Metrics []Metric `type:"list"`
-
-	// The token that marks the start of the next batch of returned results.
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s ListMetricsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListMetrics = "ListMetrics"
 
@@ -93,7 +32,7 @@ const opListMetrics = "ListMetrics"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/ListMetrics
-func (c *Client) ListMetricsRequest(input *ListMetricsInput) ListMetricsRequest {
+func (c *Client) ListMetricsRequest(input *types.ListMetricsInput) ListMetricsRequest {
 	op := &aws.Operation{
 		Name:       opListMetrics,
 		HTTPMethod: "POST",
@@ -107,10 +46,10 @@ func (c *Client) ListMetricsRequest(input *ListMetricsInput) ListMetricsRequest 
 	}
 
 	if input == nil {
-		input = &ListMetricsInput{}
+		input = &types.ListMetricsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListMetricsOutput{})
+	req := c.newRequest(op, input, &types.ListMetricsOutput{})
 	return ListMetricsRequest{Request: req, Input: input, Copy: c.ListMetricsRequest}
 }
 
@@ -118,8 +57,8 @@ func (c *Client) ListMetricsRequest(input *ListMetricsInput) ListMetricsRequest 
 // ListMetrics API operation.
 type ListMetricsRequest struct {
 	*aws.Request
-	Input *ListMetricsInput
-	Copy  func(*ListMetricsInput) ListMetricsRequest
+	Input *types.ListMetricsInput
+	Copy  func(*types.ListMetricsInput) ListMetricsRequest
 }
 
 // Send marshals and sends the ListMetrics API request.
@@ -131,7 +70,7 @@ func (r ListMetricsRequest) Send(ctx context.Context) (*ListMetricsResponse, err
 	}
 
 	resp := &ListMetricsResponse{
-		ListMetricsOutput: r.Request.Data.(*ListMetricsOutput),
+		ListMetricsOutput: r.Request.Data.(*types.ListMetricsOutput),
 		response:          &aws.Response{Request: r.Request},
 	}
 
@@ -161,7 +100,7 @@ func NewListMetricsPaginator(req ListMetricsRequest) ListMetricsPaginator {
 	return ListMetricsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListMetricsInput
+				var inCpy *types.ListMetricsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -181,14 +120,14 @@ type ListMetricsPaginator struct {
 	aws.Pager
 }
 
-func (p *ListMetricsPaginator) CurrentPage() *ListMetricsOutput {
-	return p.Pager.CurrentPage().(*ListMetricsOutput)
+func (p *ListMetricsPaginator) CurrentPage() *types.ListMetricsOutput {
+	return p.Pager.CurrentPage().(*types.ListMetricsOutput)
 }
 
 // ListMetricsResponse is the response type for the
 // ListMetrics API operation.
 type ListMetricsResponse struct {
-	*ListMetricsOutput
+	*types.ListMetricsOutput
 
 	response *aws.Response
 }

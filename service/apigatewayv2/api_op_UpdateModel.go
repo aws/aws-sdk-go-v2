@@ -6,156 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/apigatewayv2/types"
 )
-
-type UpdateModelInput struct {
-	_ struct{} `type:"structure"`
-
-	// ApiId is a required field
-	ApiId *string `location:"uri" locationName:"apiId" type:"string" required:"true"`
-
-	// A string with a length between [1-256].
-	ContentType *string `locationName:"contentType" type:"string"`
-
-	// A string with a length between [0-1024].
-	Description *string `locationName:"description" type:"string"`
-
-	// ModelId is a required field
-	ModelId *string `location:"uri" locationName:"modelId" type:"string" required:"true"`
-
-	// A string with a length between [1-128].
-	Name *string `locationName:"name" type:"string"`
-
-	// A string with a length between [0-32768].
-	Schema *string `locationName:"schema" type:"string"`
-}
-
-// String returns the string representation
-func (s UpdateModelInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateModelInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateModelInput"}
-
-	if s.ApiId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ApiId"))
-	}
-
-	if s.ModelId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ModelId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s UpdateModelInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.ContentType != nil {
-		v := *s.ContentType
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "contentType", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Description != nil {
-		v := *s.Description
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "description", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Name != nil {
-		v := *s.Name
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Schema != nil {
-		v := *s.Schema
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "schema", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.ApiId != nil {
-		v := *s.ApiId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "apiId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.ModelId != nil {
-		v := *s.ModelId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "modelId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type UpdateModelOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A string with a length between [1-256].
-	ContentType *string `locationName:"contentType" type:"string"`
-
-	// A string with a length between [0-1024].
-	Description *string `locationName:"description" type:"string"`
-
-	// The identifier.
-	ModelId *string `locationName:"modelId" type:"string"`
-
-	// A string with a length between [1-128].
-	Name *string `locationName:"name" type:"string"`
-
-	// A string with a length between [0-32768].
-	Schema *string `locationName:"schema" type:"string"`
-}
-
-// String returns the string representation
-func (s UpdateModelOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s UpdateModelOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.ContentType != nil {
-		v := *s.ContentType
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "contentType", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Description != nil {
-		v := *s.Description
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "description", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.ModelId != nil {
-		v := *s.ModelId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "modelId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Name != nil {
-		v := *s.Name
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Schema != nil {
-		v := *s.Schema
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "schema", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opUpdateModel = "UpdateModel"
 
@@ -172,7 +24,7 @@ const opUpdateModel = "UpdateModel"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/apigatewayv2-2018-11-29/UpdateModel
-func (c *Client) UpdateModelRequest(input *UpdateModelInput) UpdateModelRequest {
+func (c *Client) UpdateModelRequest(input *types.UpdateModelInput) UpdateModelRequest {
 	op := &aws.Operation{
 		Name:       opUpdateModel,
 		HTTPMethod: "PATCH",
@@ -180,10 +32,10 @@ func (c *Client) UpdateModelRequest(input *UpdateModelInput) UpdateModelRequest 
 	}
 
 	if input == nil {
-		input = &UpdateModelInput{}
+		input = &types.UpdateModelInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateModelOutput{})
+	req := c.newRequest(op, input, &types.UpdateModelOutput{})
 	return UpdateModelRequest{Request: req, Input: input, Copy: c.UpdateModelRequest}
 }
 
@@ -191,8 +43,8 @@ func (c *Client) UpdateModelRequest(input *UpdateModelInput) UpdateModelRequest 
 // UpdateModel API operation.
 type UpdateModelRequest struct {
 	*aws.Request
-	Input *UpdateModelInput
-	Copy  func(*UpdateModelInput) UpdateModelRequest
+	Input *types.UpdateModelInput
+	Copy  func(*types.UpdateModelInput) UpdateModelRequest
 }
 
 // Send marshals and sends the UpdateModel API request.
@@ -204,7 +56,7 @@ func (r UpdateModelRequest) Send(ctx context.Context) (*UpdateModelResponse, err
 	}
 
 	resp := &UpdateModelResponse{
-		UpdateModelOutput: r.Request.Data.(*UpdateModelOutput),
+		UpdateModelOutput: r.Request.Data.(*types.UpdateModelOutput),
 		response:          &aws.Response{Request: r.Request},
 	}
 
@@ -214,7 +66,7 @@ func (r UpdateModelRequest) Send(ctx context.Context) (*UpdateModelResponse, err
 // UpdateModelResponse is the response type for the
 // UpdateModel API operation.
 type UpdateModelResponse struct {
-	*UpdateModelOutput
+	*types.UpdateModelOutput
 
 	response *aws.Response
 }

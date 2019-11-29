@@ -6,75 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/pinpoint/types"
 )
-
-type PhoneNumberValidateInput struct {
-	_ struct{} `type:"structure" payload:"NumberValidateRequest"`
-
-	// Specifies a phone number to validate and retrieve information about.
-	//
-	// NumberValidateRequest is a required field
-	NumberValidateRequest *NumberValidateRequest `type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s PhoneNumberValidateInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *PhoneNumberValidateInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "PhoneNumberValidateInput"}
-
-	if s.NumberValidateRequest == nil {
-		invalidParams.Add(aws.NewErrParamRequired("NumberValidateRequest"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s PhoneNumberValidateInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.NumberValidateRequest != nil {
-		v := s.NumberValidateRequest
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.PayloadTarget, "NumberValidateRequest", v, metadata)
-	}
-	return nil
-}
-
-type PhoneNumberValidateOutput struct {
-	_ struct{} `type:"structure" payload:"NumberValidateResponse"`
-
-	// Provides information about a phone number.
-	//
-	// NumberValidateResponse is a required field
-	NumberValidateResponse *NumberValidateResponse `type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s PhoneNumberValidateOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s PhoneNumberValidateOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.NumberValidateResponse != nil {
-		v := s.NumberValidateResponse
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.PayloadTarget, "NumberValidateResponse", v, metadata)
-	}
-	return nil
-}
 
 const opPhoneNumberValidate = "PhoneNumberValidate"
 
@@ -91,7 +24,7 @@ const opPhoneNumberValidate = "PhoneNumberValidate"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/PhoneNumberValidate
-func (c *Client) PhoneNumberValidateRequest(input *PhoneNumberValidateInput) PhoneNumberValidateRequest {
+func (c *Client) PhoneNumberValidateRequest(input *types.PhoneNumberValidateInput) PhoneNumberValidateRequest {
 	op := &aws.Operation{
 		Name:       opPhoneNumberValidate,
 		HTTPMethod: "POST",
@@ -99,10 +32,10 @@ func (c *Client) PhoneNumberValidateRequest(input *PhoneNumberValidateInput) Pho
 	}
 
 	if input == nil {
-		input = &PhoneNumberValidateInput{}
+		input = &types.PhoneNumberValidateInput{}
 	}
 
-	req := c.newRequest(op, input, &PhoneNumberValidateOutput{})
+	req := c.newRequest(op, input, &types.PhoneNumberValidateOutput{})
 	return PhoneNumberValidateRequest{Request: req, Input: input, Copy: c.PhoneNumberValidateRequest}
 }
 
@@ -110,8 +43,8 @@ func (c *Client) PhoneNumberValidateRequest(input *PhoneNumberValidateInput) Pho
 // PhoneNumberValidate API operation.
 type PhoneNumberValidateRequest struct {
 	*aws.Request
-	Input *PhoneNumberValidateInput
-	Copy  func(*PhoneNumberValidateInput) PhoneNumberValidateRequest
+	Input *types.PhoneNumberValidateInput
+	Copy  func(*types.PhoneNumberValidateInput) PhoneNumberValidateRequest
 }
 
 // Send marshals and sends the PhoneNumberValidate API request.
@@ -123,7 +56,7 @@ func (r PhoneNumberValidateRequest) Send(ctx context.Context) (*PhoneNumberValid
 	}
 
 	resp := &PhoneNumberValidateResponse{
-		PhoneNumberValidateOutput: r.Request.Data.(*PhoneNumberValidateOutput),
+		PhoneNumberValidateOutput: r.Request.Data.(*types.PhoneNumberValidateOutput),
 		response:                  &aws.Response{Request: r.Request},
 	}
 
@@ -133,7 +66,7 @@ func (r PhoneNumberValidateRequest) Send(ctx context.Context) (*PhoneNumberValid
 // PhoneNumberValidateResponse is the response type for the
 // PhoneNumberValidate API operation.
 type PhoneNumberValidateResponse struct {
-	*PhoneNumberValidateOutput
+	*types.PhoneNumberValidateOutput
 
 	response *aws.Response
 }

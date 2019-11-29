@@ -13,6 +13,7 @@ import (
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/ec2"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
 
 // ClientAPI provides an interface to enable mocking the
@@ -46,7 +47,7 @@ import (
 //    type mockClientClient struct {
 //        ec2iface.ClientPI
 //    }
-//    func (m *mockClientClient) AcceptReservedInstancesExchangeQuote(input *ec2.AcceptReservedInstancesExchangeQuoteInput) (*ec2.AcceptReservedInstancesExchangeQuoteOutput, error) {
+//    func (m *mockClientClient) AcceptReservedInstancesExchangeQuote(input *types.AcceptReservedInstancesExchangeQuoteInput) (*types.AcceptReservedInstancesExchangeQuoteOutput, error) {
 //        // mock response/functionality
 //    }
 //
@@ -64,785 +65,795 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type ClientAPI interface {
-	AcceptReservedInstancesExchangeQuoteRequest(*ec2.AcceptReservedInstancesExchangeQuoteInput) ec2.AcceptReservedInstancesExchangeQuoteRequest
+	AcceptReservedInstancesExchangeQuoteRequest(*types.AcceptReservedInstancesExchangeQuoteInput) ec2.AcceptReservedInstancesExchangeQuoteRequest
 
-	AcceptTransitGatewayVpcAttachmentRequest(*ec2.AcceptTransitGatewayVpcAttachmentInput) ec2.AcceptTransitGatewayVpcAttachmentRequest
+	AcceptTransitGatewayVpcAttachmentRequest(*types.AcceptTransitGatewayVpcAttachmentInput) ec2.AcceptTransitGatewayVpcAttachmentRequest
 
-	AcceptVpcEndpointConnectionsRequest(*ec2.AcceptVpcEndpointConnectionsInput) ec2.AcceptVpcEndpointConnectionsRequest
+	AcceptVpcEndpointConnectionsRequest(*types.AcceptVpcEndpointConnectionsInput) ec2.AcceptVpcEndpointConnectionsRequest
 
-	AcceptVpcPeeringConnectionRequest(*ec2.AcceptVpcPeeringConnectionInput) ec2.AcceptVpcPeeringConnectionRequest
+	AcceptVpcPeeringConnectionRequest(*types.AcceptVpcPeeringConnectionInput) ec2.AcceptVpcPeeringConnectionRequest
 
-	AdvertiseByoipCidrRequest(*ec2.AdvertiseByoipCidrInput) ec2.AdvertiseByoipCidrRequest
+	AdvertiseByoipCidrRequest(*types.AdvertiseByoipCidrInput) ec2.AdvertiseByoipCidrRequest
 
-	AllocateAddressRequest(*ec2.AllocateAddressInput) ec2.AllocateAddressRequest
+	AllocateAddressRequest(*types.AllocateAddressInput) ec2.AllocateAddressRequest
 
-	AllocateHostsRequest(*ec2.AllocateHostsInput) ec2.AllocateHostsRequest
+	AllocateHostsRequest(*types.AllocateHostsInput) ec2.AllocateHostsRequest
 
-	ApplySecurityGroupsToClientVpnTargetNetworkRequest(*ec2.ApplySecurityGroupsToClientVpnTargetNetworkInput) ec2.ApplySecurityGroupsToClientVpnTargetNetworkRequest
+	ApplySecurityGroupsToClientVpnTargetNetworkRequest(*types.ApplySecurityGroupsToClientVpnTargetNetworkInput) ec2.ApplySecurityGroupsToClientVpnTargetNetworkRequest
 
-	AssignIpv6AddressesRequest(*ec2.AssignIpv6AddressesInput) ec2.AssignIpv6AddressesRequest
+	AssignIpv6AddressesRequest(*types.AssignIpv6AddressesInput) ec2.AssignIpv6AddressesRequest
 
-	AssignPrivateIpAddressesRequest(*ec2.AssignPrivateIpAddressesInput) ec2.AssignPrivateIpAddressesRequest
+	AssignPrivateIpAddressesRequest(*types.AssignPrivateIpAddressesInput) ec2.AssignPrivateIpAddressesRequest
 
-	AssociateAddressRequest(*ec2.AssociateAddressInput) ec2.AssociateAddressRequest
+	AssociateAddressRequest(*types.AssociateAddressInput) ec2.AssociateAddressRequest
 
-	AssociateClientVpnTargetNetworkRequest(*ec2.AssociateClientVpnTargetNetworkInput) ec2.AssociateClientVpnTargetNetworkRequest
+	AssociateClientVpnTargetNetworkRequest(*types.AssociateClientVpnTargetNetworkInput) ec2.AssociateClientVpnTargetNetworkRequest
 
-	AssociateDhcpOptionsRequest(*ec2.AssociateDhcpOptionsInput) ec2.AssociateDhcpOptionsRequest
+	AssociateDhcpOptionsRequest(*types.AssociateDhcpOptionsInput) ec2.AssociateDhcpOptionsRequest
 
-	AssociateIamInstanceProfileRequest(*ec2.AssociateIamInstanceProfileInput) ec2.AssociateIamInstanceProfileRequest
+	AssociateIamInstanceProfileRequest(*types.AssociateIamInstanceProfileInput) ec2.AssociateIamInstanceProfileRequest
 
-	AssociateRouteTableRequest(*ec2.AssociateRouteTableInput) ec2.AssociateRouteTableRequest
+	AssociateRouteTableRequest(*types.AssociateRouteTableInput) ec2.AssociateRouteTableRequest
 
-	AssociateSubnetCidrBlockRequest(*ec2.AssociateSubnetCidrBlockInput) ec2.AssociateSubnetCidrBlockRequest
+	AssociateSubnetCidrBlockRequest(*types.AssociateSubnetCidrBlockInput) ec2.AssociateSubnetCidrBlockRequest
 
-	AssociateTransitGatewayRouteTableRequest(*ec2.AssociateTransitGatewayRouteTableInput) ec2.AssociateTransitGatewayRouteTableRequest
+	AssociateTransitGatewayRouteTableRequest(*types.AssociateTransitGatewayRouteTableInput) ec2.AssociateTransitGatewayRouteTableRequest
 
-	AssociateVpcCidrBlockRequest(*ec2.AssociateVpcCidrBlockInput) ec2.AssociateVpcCidrBlockRequest
+	AssociateVpcCidrBlockRequest(*types.AssociateVpcCidrBlockInput) ec2.AssociateVpcCidrBlockRequest
 
-	AttachClassicLinkVpcRequest(*ec2.AttachClassicLinkVpcInput) ec2.AttachClassicLinkVpcRequest
+	AttachClassicLinkVpcRequest(*types.AttachClassicLinkVpcInput) ec2.AttachClassicLinkVpcRequest
 
-	AttachInternetGatewayRequest(*ec2.AttachInternetGatewayInput) ec2.AttachInternetGatewayRequest
+	AttachInternetGatewayRequest(*types.AttachInternetGatewayInput) ec2.AttachInternetGatewayRequest
 
-	AttachNetworkInterfaceRequest(*ec2.AttachNetworkInterfaceInput) ec2.AttachNetworkInterfaceRequest
+	AttachNetworkInterfaceRequest(*types.AttachNetworkInterfaceInput) ec2.AttachNetworkInterfaceRequest
 
-	AttachVolumeRequest(*ec2.AttachVolumeInput) ec2.AttachVolumeRequest
+	AttachVolumeRequest(*types.AttachVolumeInput) ec2.AttachVolumeRequest
 
-	AttachVpnGatewayRequest(*ec2.AttachVpnGatewayInput) ec2.AttachVpnGatewayRequest
+	AttachVpnGatewayRequest(*types.AttachVpnGatewayInput) ec2.AttachVpnGatewayRequest
 
-	AuthorizeClientVpnIngressRequest(*ec2.AuthorizeClientVpnIngressInput) ec2.AuthorizeClientVpnIngressRequest
+	AuthorizeClientVpnIngressRequest(*types.AuthorizeClientVpnIngressInput) ec2.AuthorizeClientVpnIngressRequest
 
-	AuthorizeSecurityGroupEgressRequest(*ec2.AuthorizeSecurityGroupEgressInput) ec2.AuthorizeSecurityGroupEgressRequest
+	AuthorizeSecurityGroupEgressRequest(*types.AuthorizeSecurityGroupEgressInput) ec2.AuthorizeSecurityGroupEgressRequest
 
-	AuthorizeSecurityGroupIngressRequest(*ec2.AuthorizeSecurityGroupIngressInput) ec2.AuthorizeSecurityGroupIngressRequest
+	AuthorizeSecurityGroupIngressRequest(*types.AuthorizeSecurityGroupIngressInput) ec2.AuthorizeSecurityGroupIngressRequest
 
-	BundleInstanceRequest(*ec2.BundleInstanceInput) ec2.BundleInstanceRequest
+	BundleInstanceRequest(*types.BundleInstanceInput) ec2.BundleInstanceRequest
 
-	CancelBundleTaskRequest(*ec2.CancelBundleTaskInput) ec2.CancelBundleTaskRequest
+	CancelBundleTaskRequest(*types.CancelBundleTaskInput) ec2.CancelBundleTaskRequest
 
-	CancelCapacityReservationRequest(*ec2.CancelCapacityReservationInput) ec2.CancelCapacityReservationRequest
+	CancelCapacityReservationRequest(*types.CancelCapacityReservationInput) ec2.CancelCapacityReservationRequest
 
-	CancelConversionTaskRequest(*ec2.CancelConversionTaskInput) ec2.CancelConversionTaskRequest
+	CancelConversionTaskRequest(*types.CancelConversionTaskInput) ec2.CancelConversionTaskRequest
 
-	CancelExportTaskRequest(*ec2.CancelExportTaskInput) ec2.CancelExportTaskRequest
+	CancelExportTaskRequest(*types.CancelExportTaskInput) ec2.CancelExportTaskRequest
 
-	CancelImportTaskRequest(*ec2.CancelImportTaskInput) ec2.CancelImportTaskRequest
+	CancelImportTaskRequest(*types.CancelImportTaskInput) ec2.CancelImportTaskRequest
 
-	CancelReservedInstancesListingRequest(*ec2.CancelReservedInstancesListingInput) ec2.CancelReservedInstancesListingRequest
+	CancelReservedInstancesListingRequest(*types.CancelReservedInstancesListingInput) ec2.CancelReservedInstancesListingRequest
 
-	CancelSpotFleetRequestsRequest(*ec2.CancelSpotFleetRequestsInput) ec2.CancelSpotFleetRequestsRequest
+	CancelSpotFleetRequestsRequest(*types.CancelSpotFleetRequestsInput) ec2.CancelSpotFleetRequestsRequest
 
-	CancelSpotInstanceRequestsRequest(*ec2.CancelSpotInstanceRequestsInput) ec2.CancelSpotInstanceRequestsRequest
+	CancelSpotInstanceRequestsRequest(*types.CancelSpotInstanceRequestsInput) ec2.CancelSpotInstanceRequestsRequest
 
-	ConfirmProductInstanceRequest(*ec2.ConfirmProductInstanceInput) ec2.ConfirmProductInstanceRequest
+	ConfirmProductInstanceRequest(*types.ConfirmProductInstanceInput) ec2.ConfirmProductInstanceRequest
 
-	CopyFpgaImageRequest(*ec2.CopyFpgaImageInput) ec2.CopyFpgaImageRequest
+	CopyFpgaImageRequest(*types.CopyFpgaImageInput) ec2.CopyFpgaImageRequest
 
-	CopyImageRequest(*ec2.CopyImageInput) ec2.CopyImageRequest
+	CopyImageRequest(*types.CopyImageInput) ec2.CopyImageRequest
 
-	CopySnapshotRequest(*ec2.CopySnapshotInput) ec2.CopySnapshotRequest
+	CopySnapshotRequest(*types.CopySnapshotInput) ec2.CopySnapshotRequest
 
-	CreateCapacityReservationRequest(*ec2.CreateCapacityReservationInput) ec2.CreateCapacityReservationRequest
+	CreateCapacityReservationRequest(*types.CreateCapacityReservationInput) ec2.CreateCapacityReservationRequest
 
-	CreateClientVpnEndpointRequest(*ec2.CreateClientVpnEndpointInput) ec2.CreateClientVpnEndpointRequest
+	CreateClientVpnEndpointRequest(*types.CreateClientVpnEndpointInput) ec2.CreateClientVpnEndpointRequest
 
-	CreateClientVpnRouteRequest(*ec2.CreateClientVpnRouteInput) ec2.CreateClientVpnRouteRequest
+	CreateClientVpnRouteRequest(*types.CreateClientVpnRouteInput) ec2.CreateClientVpnRouteRequest
 
-	CreateCustomerGatewayRequest(*ec2.CreateCustomerGatewayInput) ec2.CreateCustomerGatewayRequest
+	CreateCustomerGatewayRequest(*types.CreateCustomerGatewayInput) ec2.CreateCustomerGatewayRequest
 
-	CreateDefaultSubnetRequest(*ec2.CreateDefaultSubnetInput) ec2.CreateDefaultSubnetRequest
+	CreateDefaultSubnetRequest(*types.CreateDefaultSubnetInput) ec2.CreateDefaultSubnetRequest
 
-	CreateDefaultVpcRequest(*ec2.CreateDefaultVpcInput) ec2.CreateDefaultVpcRequest
+	CreateDefaultVpcRequest(*types.CreateDefaultVpcInput) ec2.CreateDefaultVpcRequest
 
-	CreateDhcpOptionsRequest(*ec2.CreateDhcpOptionsInput) ec2.CreateDhcpOptionsRequest
+	CreateDhcpOptionsRequest(*types.CreateDhcpOptionsInput) ec2.CreateDhcpOptionsRequest
 
-	CreateEgressOnlyInternetGatewayRequest(*ec2.CreateEgressOnlyInternetGatewayInput) ec2.CreateEgressOnlyInternetGatewayRequest
+	CreateEgressOnlyInternetGatewayRequest(*types.CreateEgressOnlyInternetGatewayInput) ec2.CreateEgressOnlyInternetGatewayRequest
 
-	CreateFleetRequest(*ec2.CreateFleetInput) ec2.CreateFleetRequest
+	CreateFleetRequest(*types.CreateFleetInput) ec2.CreateFleetRequest
 
-	CreateFlowLogsRequest(*ec2.CreateFlowLogsInput) ec2.CreateFlowLogsRequest
+	CreateFlowLogsRequest(*types.CreateFlowLogsInput) ec2.CreateFlowLogsRequest
 
-	CreateFpgaImageRequest(*ec2.CreateFpgaImageInput) ec2.CreateFpgaImageRequest
+	CreateFpgaImageRequest(*types.CreateFpgaImageInput) ec2.CreateFpgaImageRequest
 
-	CreateImageRequest(*ec2.CreateImageInput) ec2.CreateImageRequest
+	CreateImageRequest(*types.CreateImageInput) ec2.CreateImageRequest
 
-	CreateInstanceExportTaskRequest(*ec2.CreateInstanceExportTaskInput) ec2.CreateInstanceExportTaskRequest
+	CreateInstanceExportTaskRequest(*types.CreateInstanceExportTaskInput) ec2.CreateInstanceExportTaskRequest
 
-	CreateInternetGatewayRequest(*ec2.CreateInternetGatewayInput) ec2.CreateInternetGatewayRequest
+	CreateInternetGatewayRequest(*types.CreateInternetGatewayInput) ec2.CreateInternetGatewayRequest
 
-	CreateKeyPairRequest(*ec2.CreateKeyPairInput) ec2.CreateKeyPairRequest
+	CreateKeyPairRequest(*types.CreateKeyPairInput) ec2.CreateKeyPairRequest
 
-	CreateLaunchTemplateRequest(*ec2.CreateLaunchTemplateInput) ec2.CreateLaunchTemplateRequest
+	CreateLaunchTemplateRequest(*types.CreateLaunchTemplateInput) ec2.CreateLaunchTemplateRequest
 
-	CreateLaunchTemplateVersionRequest(*ec2.CreateLaunchTemplateVersionInput) ec2.CreateLaunchTemplateVersionRequest
+	CreateLaunchTemplateVersionRequest(*types.CreateLaunchTemplateVersionInput) ec2.CreateLaunchTemplateVersionRequest
 
-	CreateNatGatewayRequest(*ec2.CreateNatGatewayInput) ec2.CreateNatGatewayRequest
+	CreateNatGatewayRequest(*types.CreateNatGatewayInput) ec2.CreateNatGatewayRequest
 
-	CreateNetworkAclRequest(*ec2.CreateNetworkAclInput) ec2.CreateNetworkAclRequest
+	CreateNetworkAclRequest(*types.CreateNetworkAclInput) ec2.CreateNetworkAclRequest
 
-	CreateNetworkAclEntryRequest(*ec2.CreateNetworkAclEntryInput) ec2.CreateNetworkAclEntryRequest
+	CreateNetworkAclEntryRequest(*types.CreateNetworkAclEntryInput) ec2.CreateNetworkAclEntryRequest
 
-	CreateNetworkInterfaceRequest(*ec2.CreateNetworkInterfaceInput) ec2.CreateNetworkInterfaceRequest
+	CreateNetworkInterfaceRequest(*types.CreateNetworkInterfaceInput) ec2.CreateNetworkInterfaceRequest
 
-	CreateNetworkInterfacePermissionRequest(*ec2.CreateNetworkInterfacePermissionInput) ec2.CreateNetworkInterfacePermissionRequest
+	CreateNetworkInterfacePermissionRequest(*types.CreateNetworkInterfacePermissionInput) ec2.CreateNetworkInterfacePermissionRequest
 
-	CreatePlacementGroupRequest(*ec2.CreatePlacementGroupInput) ec2.CreatePlacementGroupRequest
+	CreatePlacementGroupRequest(*types.CreatePlacementGroupInput) ec2.CreatePlacementGroupRequest
 
-	CreateReservedInstancesListingRequest(*ec2.CreateReservedInstancesListingInput) ec2.CreateReservedInstancesListingRequest
+	CreateReservedInstancesListingRequest(*types.CreateReservedInstancesListingInput) ec2.CreateReservedInstancesListingRequest
 
-	CreateRouteRequest(*ec2.CreateRouteInput) ec2.CreateRouteRequest
+	CreateRouteRequest(*types.CreateRouteInput) ec2.CreateRouteRequest
 
-	CreateRouteTableRequest(*ec2.CreateRouteTableInput) ec2.CreateRouteTableRequest
+	CreateRouteTableRequest(*types.CreateRouteTableInput) ec2.CreateRouteTableRequest
 
-	CreateSecurityGroupRequest(*ec2.CreateSecurityGroupInput) ec2.CreateSecurityGroupRequest
+	CreateSecurityGroupRequest(*types.CreateSecurityGroupInput) ec2.CreateSecurityGroupRequest
 
-	CreateSnapshotRequest(*ec2.CreateSnapshotInput) ec2.CreateSnapshotRequest
+	CreateSnapshotRequest(*types.CreateSnapshotInput) ec2.CreateSnapshotRequest
 
-	CreateSnapshotsRequest(*ec2.CreateSnapshotsInput) ec2.CreateSnapshotsRequest
+	CreateSnapshotsRequest(*types.CreateSnapshotsInput) ec2.CreateSnapshotsRequest
 
-	CreateSpotDatafeedSubscriptionRequest(*ec2.CreateSpotDatafeedSubscriptionInput) ec2.CreateSpotDatafeedSubscriptionRequest
+	CreateSpotDatafeedSubscriptionRequest(*types.CreateSpotDatafeedSubscriptionInput) ec2.CreateSpotDatafeedSubscriptionRequest
 
-	CreateSubnetRequest(*ec2.CreateSubnetInput) ec2.CreateSubnetRequest
+	CreateSubnetRequest(*types.CreateSubnetInput) ec2.CreateSubnetRequest
 
-	CreateTagsRequest(*ec2.CreateTagsInput) ec2.CreateTagsRequest
+	CreateTagsRequest(*types.CreateTagsInput) ec2.CreateTagsRequest
 
-	CreateTrafficMirrorFilterRequest(*ec2.CreateTrafficMirrorFilterInput) ec2.CreateTrafficMirrorFilterRequest
+	CreateTrafficMirrorFilterRequest(*types.CreateTrafficMirrorFilterInput) ec2.CreateTrafficMirrorFilterRequest
 
-	CreateTrafficMirrorFilterRuleRequest(*ec2.CreateTrafficMirrorFilterRuleInput) ec2.CreateTrafficMirrorFilterRuleRequest
+	CreateTrafficMirrorFilterRuleRequest(*types.CreateTrafficMirrorFilterRuleInput) ec2.CreateTrafficMirrorFilterRuleRequest
 
-	CreateTrafficMirrorSessionRequest(*ec2.CreateTrafficMirrorSessionInput) ec2.CreateTrafficMirrorSessionRequest
+	CreateTrafficMirrorSessionRequest(*types.CreateTrafficMirrorSessionInput) ec2.CreateTrafficMirrorSessionRequest
 
-	CreateTrafficMirrorTargetRequest(*ec2.CreateTrafficMirrorTargetInput) ec2.CreateTrafficMirrorTargetRequest
+	CreateTrafficMirrorTargetRequest(*types.CreateTrafficMirrorTargetInput) ec2.CreateTrafficMirrorTargetRequest
 
-	CreateTransitGatewayRequest(*ec2.CreateTransitGatewayInput) ec2.CreateTransitGatewayRequest
+	CreateTransitGatewayRequest(*types.CreateTransitGatewayInput) ec2.CreateTransitGatewayRequest
 
-	CreateTransitGatewayRouteRequest(*ec2.CreateTransitGatewayRouteInput) ec2.CreateTransitGatewayRouteRequest
+	CreateTransitGatewayRouteRequest(*types.CreateTransitGatewayRouteInput) ec2.CreateTransitGatewayRouteRequest
 
-	CreateTransitGatewayRouteTableRequest(*ec2.CreateTransitGatewayRouteTableInput) ec2.CreateTransitGatewayRouteTableRequest
+	CreateTransitGatewayRouteTableRequest(*types.CreateTransitGatewayRouteTableInput) ec2.CreateTransitGatewayRouteTableRequest
 
-	CreateTransitGatewayVpcAttachmentRequest(*ec2.CreateTransitGatewayVpcAttachmentInput) ec2.CreateTransitGatewayVpcAttachmentRequest
+	CreateTransitGatewayVpcAttachmentRequest(*types.CreateTransitGatewayVpcAttachmentInput) ec2.CreateTransitGatewayVpcAttachmentRequest
 
-	CreateVolumeRequest(*ec2.CreateVolumeInput) ec2.CreateVolumeRequest
+	CreateVolumeRequest(*types.CreateVolumeInput) ec2.CreateVolumeRequest
 
-	CreateVpcRequest(*ec2.CreateVpcInput) ec2.CreateVpcRequest
+	CreateVpcRequest(*types.CreateVpcInput) ec2.CreateVpcRequest
 
-	CreateVpcEndpointRequest(*ec2.CreateVpcEndpointInput) ec2.CreateVpcEndpointRequest
+	CreateVpcEndpointRequest(*types.CreateVpcEndpointInput) ec2.CreateVpcEndpointRequest
 
-	CreateVpcEndpointConnectionNotificationRequest(*ec2.CreateVpcEndpointConnectionNotificationInput) ec2.CreateVpcEndpointConnectionNotificationRequest
+	CreateVpcEndpointConnectionNotificationRequest(*types.CreateVpcEndpointConnectionNotificationInput) ec2.CreateVpcEndpointConnectionNotificationRequest
 
-	CreateVpcEndpointServiceConfigurationRequest(*ec2.CreateVpcEndpointServiceConfigurationInput) ec2.CreateVpcEndpointServiceConfigurationRequest
+	CreateVpcEndpointServiceConfigurationRequest(*types.CreateVpcEndpointServiceConfigurationInput) ec2.CreateVpcEndpointServiceConfigurationRequest
 
-	CreateVpcPeeringConnectionRequest(*ec2.CreateVpcPeeringConnectionInput) ec2.CreateVpcPeeringConnectionRequest
+	CreateVpcPeeringConnectionRequest(*types.CreateVpcPeeringConnectionInput) ec2.CreateVpcPeeringConnectionRequest
 
-	CreateVpnConnectionRequest(*ec2.CreateVpnConnectionInput) ec2.CreateVpnConnectionRequest
+	CreateVpnConnectionRequest(*types.CreateVpnConnectionInput) ec2.CreateVpnConnectionRequest
 
-	CreateVpnConnectionRouteRequest(*ec2.CreateVpnConnectionRouteInput) ec2.CreateVpnConnectionRouteRequest
+	CreateVpnConnectionRouteRequest(*types.CreateVpnConnectionRouteInput) ec2.CreateVpnConnectionRouteRequest
 
-	CreateVpnGatewayRequest(*ec2.CreateVpnGatewayInput) ec2.CreateVpnGatewayRequest
+	CreateVpnGatewayRequest(*types.CreateVpnGatewayInput) ec2.CreateVpnGatewayRequest
 
-	DeleteClientVpnEndpointRequest(*ec2.DeleteClientVpnEndpointInput) ec2.DeleteClientVpnEndpointRequest
+	DeleteClientVpnEndpointRequest(*types.DeleteClientVpnEndpointInput) ec2.DeleteClientVpnEndpointRequest
 
-	DeleteClientVpnRouteRequest(*ec2.DeleteClientVpnRouteInput) ec2.DeleteClientVpnRouteRequest
+	DeleteClientVpnRouteRequest(*types.DeleteClientVpnRouteInput) ec2.DeleteClientVpnRouteRequest
 
-	DeleteCustomerGatewayRequest(*ec2.DeleteCustomerGatewayInput) ec2.DeleteCustomerGatewayRequest
+	DeleteCustomerGatewayRequest(*types.DeleteCustomerGatewayInput) ec2.DeleteCustomerGatewayRequest
 
-	DeleteDhcpOptionsRequest(*ec2.DeleteDhcpOptionsInput) ec2.DeleteDhcpOptionsRequest
+	DeleteDhcpOptionsRequest(*types.DeleteDhcpOptionsInput) ec2.DeleteDhcpOptionsRequest
 
-	DeleteEgressOnlyInternetGatewayRequest(*ec2.DeleteEgressOnlyInternetGatewayInput) ec2.DeleteEgressOnlyInternetGatewayRequest
+	DeleteEgressOnlyInternetGatewayRequest(*types.DeleteEgressOnlyInternetGatewayInput) ec2.DeleteEgressOnlyInternetGatewayRequest
 
-	DeleteFleetsRequest(*ec2.DeleteFleetsInput) ec2.DeleteFleetsRequest
+	DeleteFleetsRequest(*types.DeleteFleetsInput) ec2.DeleteFleetsRequest
 
-	DeleteFlowLogsRequest(*ec2.DeleteFlowLogsInput) ec2.DeleteFlowLogsRequest
+	DeleteFlowLogsRequest(*types.DeleteFlowLogsInput) ec2.DeleteFlowLogsRequest
 
-	DeleteFpgaImageRequest(*ec2.DeleteFpgaImageInput) ec2.DeleteFpgaImageRequest
+	DeleteFpgaImageRequest(*types.DeleteFpgaImageInput) ec2.DeleteFpgaImageRequest
 
-	DeleteInternetGatewayRequest(*ec2.DeleteInternetGatewayInput) ec2.DeleteInternetGatewayRequest
+	DeleteInternetGatewayRequest(*types.DeleteInternetGatewayInput) ec2.DeleteInternetGatewayRequest
 
-	DeleteKeyPairRequest(*ec2.DeleteKeyPairInput) ec2.DeleteKeyPairRequest
+	DeleteKeyPairRequest(*types.DeleteKeyPairInput) ec2.DeleteKeyPairRequest
 
-	DeleteLaunchTemplateRequest(*ec2.DeleteLaunchTemplateInput) ec2.DeleteLaunchTemplateRequest
+	DeleteLaunchTemplateRequest(*types.DeleteLaunchTemplateInput) ec2.DeleteLaunchTemplateRequest
 
-	DeleteLaunchTemplateVersionsRequest(*ec2.DeleteLaunchTemplateVersionsInput) ec2.DeleteLaunchTemplateVersionsRequest
+	DeleteLaunchTemplateVersionsRequest(*types.DeleteLaunchTemplateVersionsInput) ec2.DeleteLaunchTemplateVersionsRequest
 
-	DeleteNatGatewayRequest(*ec2.DeleteNatGatewayInput) ec2.DeleteNatGatewayRequest
+	DeleteNatGatewayRequest(*types.DeleteNatGatewayInput) ec2.DeleteNatGatewayRequest
 
-	DeleteNetworkAclRequest(*ec2.DeleteNetworkAclInput) ec2.DeleteNetworkAclRequest
+	DeleteNetworkAclRequest(*types.DeleteNetworkAclInput) ec2.DeleteNetworkAclRequest
 
-	DeleteNetworkAclEntryRequest(*ec2.DeleteNetworkAclEntryInput) ec2.DeleteNetworkAclEntryRequest
+	DeleteNetworkAclEntryRequest(*types.DeleteNetworkAclEntryInput) ec2.DeleteNetworkAclEntryRequest
 
-	DeleteNetworkInterfaceRequest(*ec2.DeleteNetworkInterfaceInput) ec2.DeleteNetworkInterfaceRequest
+	DeleteNetworkInterfaceRequest(*types.DeleteNetworkInterfaceInput) ec2.DeleteNetworkInterfaceRequest
 
-	DeleteNetworkInterfacePermissionRequest(*ec2.DeleteNetworkInterfacePermissionInput) ec2.DeleteNetworkInterfacePermissionRequest
+	DeleteNetworkInterfacePermissionRequest(*types.DeleteNetworkInterfacePermissionInput) ec2.DeleteNetworkInterfacePermissionRequest
 
-	DeletePlacementGroupRequest(*ec2.DeletePlacementGroupInput) ec2.DeletePlacementGroupRequest
+	DeletePlacementGroupRequest(*types.DeletePlacementGroupInput) ec2.DeletePlacementGroupRequest
 
-	DeleteQueuedReservedInstancesRequest(*ec2.DeleteQueuedReservedInstancesInput) ec2.DeleteQueuedReservedInstancesRequest
+	DeleteQueuedReservedInstancesRequest(*types.DeleteQueuedReservedInstancesInput) ec2.DeleteQueuedReservedInstancesRequest
 
-	DeleteRouteRequest(*ec2.DeleteRouteInput) ec2.DeleteRouteRequest
+	DeleteRouteRequest(*types.DeleteRouteInput) ec2.DeleteRouteRequest
 
-	DeleteRouteTableRequest(*ec2.DeleteRouteTableInput) ec2.DeleteRouteTableRequest
+	DeleteRouteTableRequest(*types.DeleteRouteTableInput) ec2.DeleteRouteTableRequest
 
-	DeleteSecurityGroupRequest(*ec2.DeleteSecurityGroupInput) ec2.DeleteSecurityGroupRequest
+	DeleteSecurityGroupRequest(*types.DeleteSecurityGroupInput) ec2.DeleteSecurityGroupRequest
 
-	DeleteSnapshotRequest(*ec2.DeleteSnapshotInput) ec2.DeleteSnapshotRequest
+	DeleteSnapshotRequest(*types.DeleteSnapshotInput) ec2.DeleteSnapshotRequest
 
-	DeleteSpotDatafeedSubscriptionRequest(*ec2.DeleteSpotDatafeedSubscriptionInput) ec2.DeleteSpotDatafeedSubscriptionRequest
+	DeleteSpotDatafeedSubscriptionRequest(*types.DeleteSpotDatafeedSubscriptionInput) ec2.DeleteSpotDatafeedSubscriptionRequest
 
-	DeleteSubnetRequest(*ec2.DeleteSubnetInput) ec2.DeleteSubnetRequest
+	DeleteSubnetRequest(*types.DeleteSubnetInput) ec2.DeleteSubnetRequest
 
-	DeleteTagsRequest(*ec2.DeleteTagsInput) ec2.DeleteTagsRequest
+	DeleteTagsRequest(*types.DeleteTagsInput) ec2.DeleteTagsRequest
 
-	DeleteTrafficMirrorFilterRequest(*ec2.DeleteTrafficMirrorFilterInput) ec2.DeleteTrafficMirrorFilterRequest
+	DeleteTrafficMirrorFilterRequest(*types.DeleteTrafficMirrorFilterInput) ec2.DeleteTrafficMirrorFilterRequest
 
-	DeleteTrafficMirrorFilterRuleRequest(*ec2.DeleteTrafficMirrorFilterRuleInput) ec2.DeleteTrafficMirrorFilterRuleRequest
+	DeleteTrafficMirrorFilterRuleRequest(*types.DeleteTrafficMirrorFilterRuleInput) ec2.DeleteTrafficMirrorFilterRuleRequest
 
-	DeleteTrafficMirrorSessionRequest(*ec2.DeleteTrafficMirrorSessionInput) ec2.DeleteTrafficMirrorSessionRequest
+	DeleteTrafficMirrorSessionRequest(*types.DeleteTrafficMirrorSessionInput) ec2.DeleteTrafficMirrorSessionRequest
 
-	DeleteTrafficMirrorTargetRequest(*ec2.DeleteTrafficMirrorTargetInput) ec2.DeleteTrafficMirrorTargetRequest
+	DeleteTrafficMirrorTargetRequest(*types.DeleteTrafficMirrorTargetInput) ec2.DeleteTrafficMirrorTargetRequest
 
-	DeleteTransitGatewayRequest(*ec2.DeleteTransitGatewayInput) ec2.DeleteTransitGatewayRequest
+	DeleteTransitGatewayRequest(*types.DeleteTransitGatewayInput) ec2.DeleteTransitGatewayRequest
 
-	DeleteTransitGatewayRouteRequest(*ec2.DeleteTransitGatewayRouteInput) ec2.DeleteTransitGatewayRouteRequest
+	DeleteTransitGatewayRouteRequest(*types.DeleteTransitGatewayRouteInput) ec2.DeleteTransitGatewayRouteRequest
 
-	DeleteTransitGatewayRouteTableRequest(*ec2.DeleteTransitGatewayRouteTableInput) ec2.DeleteTransitGatewayRouteTableRequest
+	DeleteTransitGatewayRouteTableRequest(*types.DeleteTransitGatewayRouteTableInput) ec2.DeleteTransitGatewayRouteTableRequest
 
-	DeleteTransitGatewayVpcAttachmentRequest(*ec2.DeleteTransitGatewayVpcAttachmentInput) ec2.DeleteTransitGatewayVpcAttachmentRequest
+	DeleteTransitGatewayVpcAttachmentRequest(*types.DeleteTransitGatewayVpcAttachmentInput) ec2.DeleteTransitGatewayVpcAttachmentRequest
 
-	DeleteVolumeRequest(*ec2.DeleteVolumeInput) ec2.DeleteVolumeRequest
+	DeleteVolumeRequest(*types.DeleteVolumeInput) ec2.DeleteVolumeRequest
 
-	DeleteVpcRequest(*ec2.DeleteVpcInput) ec2.DeleteVpcRequest
+	DeleteVpcRequest(*types.DeleteVpcInput) ec2.DeleteVpcRequest
 
-	DeleteVpcEndpointConnectionNotificationsRequest(*ec2.DeleteVpcEndpointConnectionNotificationsInput) ec2.DeleteVpcEndpointConnectionNotificationsRequest
+	DeleteVpcEndpointConnectionNotificationsRequest(*types.DeleteVpcEndpointConnectionNotificationsInput) ec2.DeleteVpcEndpointConnectionNotificationsRequest
 
-	DeleteVpcEndpointServiceConfigurationsRequest(*ec2.DeleteVpcEndpointServiceConfigurationsInput) ec2.DeleteVpcEndpointServiceConfigurationsRequest
+	DeleteVpcEndpointServiceConfigurationsRequest(*types.DeleteVpcEndpointServiceConfigurationsInput) ec2.DeleteVpcEndpointServiceConfigurationsRequest
 
-	DeleteVpcEndpointsRequest(*ec2.DeleteVpcEndpointsInput) ec2.DeleteVpcEndpointsRequest
+	DeleteVpcEndpointsRequest(*types.DeleteVpcEndpointsInput) ec2.DeleteVpcEndpointsRequest
 
-	DeleteVpcPeeringConnectionRequest(*ec2.DeleteVpcPeeringConnectionInput) ec2.DeleteVpcPeeringConnectionRequest
+	DeleteVpcPeeringConnectionRequest(*types.DeleteVpcPeeringConnectionInput) ec2.DeleteVpcPeeringConnectionRequest
 
-	DeleteVpnConnectionRequest(*ec2.DeleteVpnConnectionInput) ec2.DeleteVpnConnectionRequest
+	DeleteVpnConnectionRequest(*types.DeleteVpnConnectionInput) ec2.DeleteVpnConnectionRequest
 
-	DeleteVpnConnectionRouteRequest(*ec2.DeleteVpnConnectionRouteInput) ec2.DeleteVpnConnectionRouteRequest
+	DeleteVpnConnectionRouteRequest(*types.DeleteVpnConnectionRouteInput) ec2.DeleteVpnConnectionRouteRequest
 
-	DeleteVpnGatewayRequest(*ec2.DeleteVpnGatewayInput) ec2.DeleteVpnGatewayRequest
+	DeleteVpnGatewayRequest(*types.DeleteVpnGatewayInput) ec2.DeleteVpnGatewayRequest
 
-	DeprovisionByoipCidrRequest(*ec2.DeprovisionByoipCidrInput) ec2.DeprovisionByoipCidrRequest
+	DeprovisionByoipCidrRequest(*types.DeprovisionByoipCidrInput) ec2.DeprovisionByoipCidrRequest
 
-	DeregisterImageRequest(*ec2.DeregisterImageInput) ec2.DeregisterImageRequest
+	DeregisterImageRequest(*types.DeregisterImageInput) ec2.DeregisterImageRequest
 
-	DescribeAccountAttributesRequest(*ec2.DescribeAccountAttributesInput) ec2.DescribeAccountAttributesRequest
+	DescribeAccountAttributesRequest(*types.DescribeAccountAttributesInput) ec2.DescribeAccountAttributesRequest
 
-	DescribeAddressesRequest(*ec2.DescribeAddressesInput) ec2.DescribeAddressesRequest
+	DescribeAddressesRequest(*types.DescribeAddressesInput) ec2.DescribeAddressesRequest
 
-	DescribeAggregateIdFormatRequest(*ec2.DescribeAggregateIdFormatInput) ec2.DescribeAggregateIdFormatRequest
+	DescribeAggregateIdFormatRequest(*types.DescribeAggregateIdFormatInput) ec2.DescribeAggregateIdFormatRequest
 
-	DescribeAvailabilityZonesRequest(*ec2.DescribeAvailabilityZonesInput) ec2.DescribeAvailabilityZonesRequest
+	DescribeAvailabilityZonesRequest(*types.DescribeAvailabilityZonesInput) ec2.DescribeAvailabilityZonesRequest
 
-	DescribeBundleTasksRequest(*ec2.DescribeBundleTasksInput) ec2.DescribeBundleTasksRequest
+	DescribeBundleTasksRequest(*types.DescribeBundleTasksInput) ec2.DescribeBundleTasksRequest
 
-	DescribeByoipCidrsRequest(*ec2.DescribeByoipCidrsInput) ec2.DescribeByoipCidrsRequest
+	DescribeByoipCidrsRequest(*types.DescribeByoipCidrsInput) ec2.DescribeByoipCidrsRequest
 
-	DescribeCapacityReservationsRequest(*ec2.DescribeCapacityReservationsInput) ec2.DescribeCapacityReservationsRequest
+	DescribeCapacityReservationsRequest(*types.DescribeCapacityReservationsInput) ec2.DescribeCapacityReservationsRequest
 
-	DescribeClassicLinkInstancesRequest(*ec2.DescribeClassicLinkInstancesInput) ec2.DescribeClassicLinkInstancesRequest
+	DescribeClassicLinkInstancesRequest(*types.DescribeClassicLinkInstancesInput) ec2.DescribeClassicLinkInstancesRequest
 
-	DescribeClientVpnAuthorizationRulesRequest(*ec2.DescribeClientVpnAuthorizationRulesInput) ec2.DescribeClientVpnAuthorizationRulesRequest
+	DescribeClientVpnAuthorizationRulesRequest(*types.DescribeClientVpnAuthorizationRulesInput) ec2.DescribeClientVpnAuthorizationRulesRequest
 
-	DescribeClientVpnConnectionsRequest(*ec2.DescribeClientVpnConnectionsInput) ec2.DescribeClientVpnConnectionsRequest
+	DescribeClientVpnConnectionsRequest(*types.DescribeClientVpnConnectionsInput) ec2.DescribeClientVpnConnectionsRequest
 
-	DescribeClientVpnEndpointsRequest(*ec2.DescribeClientVpnEndpointsInput) ec2.DescribeClientVpnEndpointsRequest
+	DescribeClientVpnEndpointsRequest(*types.DescribeClientVpnEndpointsInput) ec2.DescribeClientVpnEndpointsRequest
 
-	DescribeClientVpnRoutesRequest(*ec2.DescribeClientVpnRoutesInput) ec2.DescribeClientVpnRoutesRequest
+	DescribeClientVpnRoutesRequest(*types.DescribeClientVpnRoutesInput) ec2.DescribeClientVpnRoutesRequest
 
-	DescribeClientVpnTargetNetworksRequest(*ec2.DescribeClientVpnTargetNetworksInput) ec2.DescribeClientVpnTargetNetworksRequest
+	DescribeClientVpnTargetNetworksRequest(*types.DescribeClientVpnTargetNetworksInput) ec2.DescribeClientVpnTargetNetworksRequest
 
-	DescribeConversionTasksRequest(*ec2.DescribeConversionTasksInput) ec2.DescribeConversionTasksRequest
+	DescribeConversionTasksRequest(*types.DescribeConversionTasksInput) ec2.DescribeConversionTasksRequest
 
-	DescribeCustomerGatewaysRequest(*ec2.DescribeCustomerGatewaysInput) ec2.DescribeCustomerGatewaysRequest
+	DescribeCustomerGatewaysRequest(*types.DescribeCustomerGatewaysInput) ec2.DescribeCustomerGatewaysRequest
 
-	DescribeDhcpOptionsRequest(*ec2.DescribeDhcpOptionsInput) ec2.DescribeDhcpOptionsRequest
+	DescribeDhcpOptionsRequest(*types.DescribeDhcpOptionsInput) ec2.DescribeDhcpOptionsRequest
 
-	DescribeEgressOnlyInternetGatewaysRequest(*ec2.DescribeEgressOnlyInternetGatewaysInput) ec2.DescribeEgressOnlyInternetGatewaysRequest
+	DescribeEgressOnlyInternetGatewaysRequest(*types.DescribeEgressOnlyInternetGatewaysInput) ec2.DescribeEgressOnlyInternetGatewaysRequest
 
-	DescribeElasticGpusRequest(*ec2.DescribeElasticGpusInput) ec2.DescribeElasticGpusRequest
+	DescribeElasticGpusRequest(*types.DescribeElasticGpusInput) ec2.DescribeElasticGpusRequest
 
-	DescribeExportImageTasksRequest(*ec2.DescribeExportImageTasksInput) ec2.DescribeExportImageTasksRequest
+	DescribeExportImageTasksRequest(*types.DescribeExportImageTasksInput) ec2.DescribeExportImageTasksRequest
 
-	DescribeExportTasksRequest(*ec2.DescribeExportTasksInput) ec2.DescribeExportTasksRequest
+	DescribeExportTasksRequest(*types.DescribeExportTasksInput) ec2.DescribeExportTasksRequest
 
-	DescribeFleetHistoryRequest(*ec2.DescribeFleetHistoryInput) ec2.DescribeFleetHistoryRequest
+	DescribeFastSnapshotRestoresRequest(*types.DescribeFastSnapshotRestoresInput) ec2.DescribeFastSnapshotRestoresRequest
 
-	DescribeFleetInstancesRequest(*ec2.DescribeFleetInstancesInput) ec2.DescribeFleetInstancesRequest
+	DescribeFleetHistoryRequest(*types.DescribeFleetHistoryInput) ec2.DescribeFleetHistoryRequest
 
-	DescribeFleetsRequest(*ec2.DescribeFleetsInput) ec2.DescribeFleetsRequest
+	DescribeFleetInstancesRequest(*types.DescribeFleetInstancesInput) ec2.DescribeFleetInstancesRequest
 
-	DescribeFlowLogsRequest(*ec2.DescribeFlowLogsInput) ec2.DescribeFlowLogsRequest
+	DescribeFleetsRequest(*types.DescribeFleetsInput) ec2.DescribeFleetsRequest
 
-	DescribeFpgaImageAttributeRequest(*ec2.DescribeFpgaImageAttributeInput) ec2.DescribeFpgaImageAttributeRequest
+	DescribeFlowLogsRequest(*types.DescribeFlowLogsInput) ec2.DescribeFlowLogsRequest
 
-	DescribeFpgaImagesRequest(*ec2.DescribeFpgaImagesInput) ec2.DescribeFpgaImagesRequest
+	DescribeFpgaImageAttributeRequest(*types.DescribeFpgaImageAttributeInput) ec2.DescribeFpgaImageAttributeRequest
 
-	DescribeHostReservationOfferingsRequest(*ec2.DescribeHostReservationOfferingsInput) ec2.DescribeHostReservationOfferingsRequest
+	DescribeFpgaImagesRequest(*types.DescribeFpgaImagesInput) ec2.DescribeFpgaImagesRequest
 
-	DescribeHostReservationsRequest(*ec2.DescribeHostReservationsInput) ec2.DescribeHostReservationsRequest
+	DescribeHostReservationOfferingsRequest(*types.DescribeHostReservationOfferingsInput) ec2.DescribeHostReservationOfferingsRequest
 
-	DescribeHostsRequest(*ec2.DescribeHostsInput) ec2.DescribeHostsRequest
+	DescribeHostReservationsRequest(*types.DescribeHostReservationsInput) ec2.DescribeHostReservationsRequest
 
-	DescribeIamInstanceProfileAssociationsRequest(*ec2.DescribeIamInstanceProfileAssociationsInput) ec2.DescribeIamInstanceProfileAssociationsRequest
+	DescribeHostsRequest(*types.DescribeHostsInput) ec2.DescribeHostsRequest
 
-	DescribeIdFormatRequest(*ec2.DescribeIdFormatInput) ec2.DescribeIdFormatRequest
+	DescribeIamInstanceProfileAssociationsRequest(*types.DescribeIamInstanceProfileAssociationsInput) ec2.DescribeIamInstanceProfileAssociationsRequest
 
-	DescribeIdentityIdFormatRequest(*ec2.DescribeIdentityIdFormatInput) ec2.DescribeIdentityIdFormatRequest
+	DescribeIdFormatRequest(*types.DescribeIdFormatInput) ec2.DescribeIdFormatRequest
 
-	DescribeImageAttributeRequest(*ec2.DescribeImageAttributeInput) ec2.DescribeImageAttributeRequest
+	DescribeIdentityIdFormatRequest(*types.DescribeIdentityIdFormatInput) ec2.DescribeIdentityIdFormatRequest
 
-	DescribeImagesRequest(*ec2.DescribeImagesInput) ec2.DescribeImagesRequest
+	DescribeImageAttributeRequest(*types.DescribeImageAttributeInput) ec2.DescribeImageAttributeRequest
 
-	DescribeImportImageTasksRequest(*ec2.DescribeImportImageTasksInput) ec2.DescribeImportImageTasksRequest
+	DescribeImagesRequest(*types.DescribeImagesInput) ec2.DescribeImagesRequest
 
-	DescribeImportSnapshotTasksRequest(*ec2.DescribeImportSnapshotTasksInput) ec2.DescribeImportSnapshotTasksRequest
+	DescribeImportImageTasksRequest(*types.DescribeImportImageTasksInput) ec2.DescribeImportImageTasksRequest
 
-	DescribeInstanceAttributeRequest(*ec2.DescribeInstanceAttributeInput) ec2.DescribeInstanceAttributeRequest
+	DescribeImportSnapshotTasksRequest(*types.DescribeImportSnapshotTasksInput) ec2.DescribeImportSnapshotTasksRequest
 
-	DescribeInstanceCreditSpecificationsRequest(*ec2.DescribeInstanceCreditSpecificationsInput) ec2.DescribeInstanceCreditSpecificationsRequest
+	DescribeInstanceAttributeRequest(*types.DescribeInstanceAttributeInput) ec2.DescribeInstanceAttributeRequest
 
-	DescribeInstanceStatusRequest(*ec2.DescribeInstanceStatusInput) ec2.DescribeInstanceStatusRequest
+	DescribeInstanceCreditSpecificationsRequest(*types.DescribeInstanceCreditSpecificationsInput) ec2.DescribeInstanceCreditSpecificationsRequest
 
-	DescribeInstancesRequest(*ec2.DescribeInstancesInput) ec2.DescribeInstancesRequest
+	DescribeInstanceStatusRequest(*types.DescribeInstanceStatusInput) ec2.DescribeInstanceStatusRequest
 
-	DescribeInternetGatewaysRequest(*ec2.DescribeInternetGatewaysInput) ec2.DescribeInternetGatewaysRequest
+	DescribeInstancesRequest(*types.DescribeInstancesInput) ec2.DescribeInstancesRequest
 
-	DescribeKeyPairsRequest(*ec2.DescribeKeyPairsInput) ec2.DescribeKeyPairsRequest
+	DescribeInternetGatewaysRequest(*types.DescribeInternetGatewaysInput) ec2.DescribeInternetGatewaysRequest
 
-	DescribeLaunchTemplateVersionsRequest(*ec2.DescribeLaunchTemplateVersionsInput) ec2.DescribeLaunchTemplateVersionsRequest
+	DescribeKeyPairsRequest(*types.DescribeKeyPairsInput) ec2.DescribeKeyPairsRequest
 
-	DescribeLaunchTemplatesRequest(*ec2.DescribeLaunchTemplatesInput) ec2.DescribeLaunchTemplatesRequest
+	DescribeLaunchTemplateVersionsRequest(*types.DescribeLaunchTemplateVersionsInput) ec2.DescribeLaunchTemplateVersionsRequest
 
-	DescribeMovingAddressesRequest(*ec2.DescribeMovingAddressesInput) ec2.DescribeMovingAddressesRequest
+	DescribeLaunchTemplatesRequest(*types.DescribeLaunchTemplatesInput) ec2.DescribeLaunchTemplatesRequest
 
-	DescribeNatGatewaysRequest(*ec2.DescribeNatGatewaysInput) ec2.DescribeNatGatewaysRequest
+	DescribeMovingAddressesRequest(*types.DescribeMovingAddressesInput) ec2.DescribeMovingAddressesRequest
 
-	DescribeNetworkAclsRequest(*ec2.DescribeNetworkAclsInput) ec2.DescribeNetworkAclsRequest
+	DescribeNatGatewaysRequest(*types.DescribeNatGatewaysInput) ec2.DescribeNatGatewaysRequest
 
-	DescribeNetworkInterfaceAttributeRequest(*ec2.DescribeNetworkInterfaceAttributeInput) ec2.DescribeNetworkInterfaceAttributeRequest
+	DescribeNetworkAclsRequest(*types.DescribeNetworkAclsInput) ec2.DescribeNetworkAclsRequest
 
-	DescribeNetworkInterfacePermissionsRequest(*ec2.DescribeNetworkInterfacePermissionsInput) ec2.DescribeNetworkInterfacePermissionsRequest
+	DescribeNetworkInterfaceAttributeRequest(*types.DescribeNetworkInterfaceAttributeInput) ec2.DescribeNetworkInterfaceAttributeRequest
 
-	DescribeNetworkInterfacesRequest(*ec2.DescribeNetworkInterfacesInput) ec2.DescribeNetworkInterfacesRequest
+	DescribeNetworkInterfacePermissionsRequest(*types.DescribeNetworkInterfacePermissionsInput) ec2.DescribeNetworkInterfacePermissionsRequest
 
-	DescribePlacementGroupsRequest(*ec2.DescribePlacementGroupsInput) ec2.DescribePlacementGroupsRequest
+	DescribeNetworkInterfacesRequest(*types.DescribeNetworkInterfacesInput) ec2.DescribeNetworkInterfacesRequest
 
-	DescribePrefixListsRequest(*ec2.DescribePrefixListsInput) ec2.DescribePrefixListsRequest
+	DescribePlacementGroupsRequest(*types.DescribePlacementGroupsInput) ec2.DescribePlacementGroupsRequest
 
-	DescribePrincipalIdFormatRequest(*ec2.DescribePrincipalIdFormatInput) ec2.DescribePrincipalIdFormatRequest
+	DescribePrefixListsRequest(*types.DescribePrefixListsInput) ec2.DescribePrefixListsRequest
 
-	DescribePublicIpv4PoolsRequest(*ec2.DescribePublicIpv4PoolsInput) ec2.DescribePublicIpv4PoolsRequest
+	DescribePrincipalIdFormatRequest(*types.DescribePrincipalIdFormatInput) ec2.DescribePrincipalIdFormatRequest
 
-	DescribeRegionsRequest(*ec2.DescribeRegionsInput) ec2.DescribeRegionsRequest
+	DescribePublicIpv4PoolsRequest(*types.DescribePublicIpv4PoolsInput) ec2.DescribePublicIpv4PoolsRequest
 
-	DescribeReservedInstancesRequest(*ec2.DescribeReservedInstancesInput) ec2.DescribeReservedInstancesRequest
+	DescribeRegionsRequest(*types.DescribeRegionsInput) ec2.DescribeRegionsRequest
 
-	DescribeReservedInstancesListingsRequest(*ec2.DescribeReservedInstancesListingsInput) ec2.DescribeReservedInstancesListingsRequest
+	DescribeReservedInstancesRequest(*types.DescribeReservedInstancesInput) ec2.DescribeReservedInstancesRequest
 
-	DescribeReservedInstancesModificationsRequest(*ec2.DescribeReservedInstancesModificationsInput) ec2.DescribeReservedInstancesModificationsRequest
+	DescribeReservedInstancesListingsRequest(*types.DescribeReservedInstancesListingsInput) ec2.DescribeReservedInstancesListingsRequest
 
-	DescribeReservedInstancesOfferingsRequest(*ec2.DescribeReservedInstancesOfferingsInput) ec2.DescribeReservedInstancesOfferingsRequest
+	DescribeReservedInstancesModificationsRequest(*types.DescribeReservedInstancesModificationsInput) ec2.DescribeReservedInstancesModificationsRequest
 
-	DescribeRouteTablesRequest(*ec2.DescribeRouteTablesInput) ec2.DescribeRouteTablesRequest
+	DescribeReservedInstancesOfferingsRequest(*types.DescribeReservedInstancesOfferingsInput) ec2.DescribeReservedInstancesOfferingsRequest
 
-	DescribeScheduledInstanceAvailabilityRequest(*ec2.DescribeScheduledInstanceAvailabilityInput) ec2.DescribeScheduledInstanceAvailabilityRequest
+	DescribeRouteTablesRequest(*types.DescribeRouteTablesInput) ec2.DescribeRouteTablesRequest
 
-	DescribeScheduledInstancesRequest(*ec2.DescribeScheduledInstancesInput) ec2.DescribeScheduledInstancesRequest
+	DescribeScheduledInstanceAvailabilityRequest(*types.DescribeScheduledInstanceAvailabilityInput) ec2.DescribeScheduledInstanceAvailabilityRequest
 
-	DescribeSecurityGroupReferencesRequest(*ec2.DescribeSecurityGroupReferencesInput) ec2.DescribeSecurityGroupReferencesRequest
+	DescribeScheduledInstancesRequest(*types.DescribeScheduledInstancesInput) ec2.DescribeScheduledInstancesRequest
 
-	DescribeSecurityGroupsRequest(*ec2.DescribeSecurityGroupsInput) ec2.DescribeSecurityGroupsRequest
+	DescribeSecurityGroupReferencesRequest(*types.DescribeSecurityGroupReferencesInput) ec2.DescribeSecurityGroupReferencesRequest
 
-	DescribeSnapshotAttributeRequest(*ec2.DescribeSnapshotAttributeInput) ec2.DescribeSnapshotAttributeRequest
+	DescribeSecurityGroupsRequest(*types.DescribeSecurityGroupsInput) ec2.DescribeSecurityGroupsRequest
 
-	DescribeSnapshotsRequest(*ec2.DescribeSnapshotsInput) ec2.DescribeSnapshotsRequest
+	DescribeSnapshotAttributeRequest(*types.DescribeSnapshotAttributeInput) ec2.DescribeSnapshotAttributeRequest
 
-	DescribeSpotDatafeedSubscriptionRequest(*ec2.DescribeSpotDatafeedSubscriptionInput) ec2.DescribeSpotDatafeedSubscriptionRequest
+	DescribeSnapshotsRequest(*types.DescribeSnapshotsInput) ec2.DescribeSnapshotsRequest
 
-	DescribeSpotFleetInstancesRequest(*ec2.DescribeSpotFleetInstancesInput) ec2.DescribeSpotFleetInstancesRequest
+	DescribeSpotDatafeedSubscriptionRequest(*types.DescribeSpotDatafeedSubscriptionInput) ec2.DescribeSpotDatafeedSubscriptionRequest
 
-	DescribeSpotFleetRequestHistoryRequest(*ec2.DescribeSpotFleetRequestHistoryInput) ec2.DescribeSpotFleetRequestHistoryRequest
+	DescribeSpotFleetInstancesRequest(*types.DescribeSpotFleetInstancesInput) ec2.DescribeSpotFleetInstancesRequest
 
-	DescribeSpotFleetRequestsRequest(*ec2.DescribeSpotFleetRequestsInput) ec2.DescribeSpotFleetRequestsRequest
+	DescribeSpotFleetRequestHistoryRequest(*types.DescribeSpotFleetRequestHistoryInput) ec2.DescribeSpotFleetRequestHistoryRequest
 
-	DescribeSpotInstanceRequestsRequest(*ec2.DescribeSpotInstanceRequestsInput) ec2.DescribeSpotInstanceRequestsRequest
+	DescribeSpotFleetRequestsRequest(*types.DescribeSpotFleetRequestsInput) ec2.DescribeSpotFleetRequestsRequest
 
-	DescribeSpotPriceHistoryRequest(*ec2.DescribeSpotPriceHistoryInput) ec2.DescribeSpotPriceHistoryRequest
+	DescribeSpotInstanceRequestsRequest(*types.DescribeSpotInstanceRequestsInput) ec2.DescribeSpotInstanceRequestsRequest
 
-	DescribeStaleSecurityGroupsRequest(*ec2.DescribeStaleSecurityGroupsInput) ec2.DescribeStaleSecurityGroupsRequest
+	DescribeSpotPriceHistoryRequest(*types.DescribeSpotPriceHistoryInput) ec2.DescribeSpotPriceHistoryRequest
 
-	DescribeSubnetsRequest(*ec2.DescribeSubnetsInput) ec2.DescribeSubnetsRequest
+	DescribeStaleSecurityGroupsRequest(*types.DescribeStaleSecurityGroupsInput) ec2.DescribeStaleSecurityGroupsRequest
 
-	DescribeTagsRequest(*ec2.DescribeTagsInput) ec2.DescribeTagsRequest
+	DescribeSubnetsRequest(*types.DescribeSubnetsInput) ec2.DescribeSubnetsRequest
 
-	DescribeTrafficMirrorFiltersRequest(*ec2.DescribeTrafficMirrorFiltersInput) ec2.DescribeTrafficMirrorFiltersRequest
+	DescribeTagsRequest(*types.DescribeTagsInput) ec2.DescribeTagsRequest
 
-	DescribeTrafficMirrorSessionsRequest(*ec2.DescribeTrafficMirrorSessionsInput) ec2.DescribeTrafficMirrorSessionsRequest
+	DescribeTrafficMirrorFiltersRequest(*types.DescribeTrafficMirrorFiltersInput) ec2.DescribeTrafficMirrorFiltersRequest
 
-	DescribeTrafficMirrorTargetsRequest(*ec2.DescribeTrafficMirrorTargetsInput) ec2.DescribeTrafficMirrorTargetsRequest
+	DescribeTrafficMirrorSessionsRequest(*types.DescribeTrafficMirrorSessionsInput) ec2.DescribeTrafficMirrorSessionsRequest
 
-	DescribeTransitGatewayAttachmentsRequest(*ec2.DescribeTransitGatewayAttachmentsInput) ec2.DescribeTransitGatewayAttachmentsRequest
+	DescribeTrafficMirrorTargetsRequest(*types.DescribeTrafficMirrorTargetsInput) ec2.DescribeTrafficMirrorTargetsRequest
 
-	DescribeTransitGatewayRouteTablesRequest(*ec2.DescribeTransitGatewayRouteTablesInput) ec2.DescribeTransitGatewayRouteTablesRequest
+	DescribeTransitGatewayAttachmentsRequest(*types.DescribeTransitGatewayAttachmentsInput) ec2.DescribeTransitGatewayAttachmentsRequest
 
-	DescribeTransitGatewayVpcAttachmentsRequest(*ec2.DescribeTransitGatewayVpcAttachmentsInput) ec2.DescribeTransitGatewayVpcAttachmentsRequest
+	DescribeTransitGatewayRouteTablesRequest(*types.DescribeTransitGatewayRouteTablesInput) ec2.DescribeTransitGatewayRouteTablesRequest
 
-	DescribeTransitGatewaysRequest(*ec2.DescribeTransitGatewaysInput) ec2.DescribeTransitGatewaysRequest
+	DescribeTransitGatewayVpcAttachmentsRequest(*types.DescribeTransitGatewayVpcAttachmentsInput) ec2.DescribeTransitGatewayVpcAttachmentsRequest
 
-	DescribeVolumeAttributeRequest(*ec2.DescribeVolumeAttributeInput) ec2.DescribeVolumeAttributeRequest
+	DescribeTransitGatewaysRequest(*types.DescribeTransitGatewaysInput) ec2.DescribeTransitGatewaysRequest
 
-	DescribeVolumeStatusRequest(*ec2.DescribeVolumeStatusInput) ec2.DescribeVolumeStatusRequest
+	DescribeVolumeAttributeRequest(*types.DescribeVolumeAttributeInput) ec2.DescribeVolumeAttributeRequest
 
-	DescribeVolumesRequest(*ec2.DescribeVolumesInput) ec2.DescribeVolumesRequest
+	DescribeVolumeStatusRequest(*types.DescribeVolumeStatusInput) ec2.DescribeVolumeStatusRequest
 
-	DescribeVolumesModificationsRequest(*ec2.DescribeVolumesModificationsInput) ec2.DescribeVolumesModificationsRequest
+	DescribeVolumesRequest(*types.DescribeVolumesInput) ec2.DescribeVolumesRequest
 
-	DescribeVpcAttributeRequest(*ec2.DescribeVpcAttributeInput) ec2.DescribeVpcAttributeRequest
+	DescribeVolumesModificationsRequest(*types.DescribeVolumesModificationsInput) ec2.DescribeVolumesModificationsRequest
 
-	DescribeVpcClassicLinkRequest(*ec2.DescribeVpcClassicLinkInput) ec2.DescribeVpcClassicLinkRequest
+	DescribeVpcAttributeRequest(*types.DescribeVpcAttributeInput) ec2.DescribeVpcAttributeRequest
 
-	DescribeVpcClassicLinkDnsSupportRequest(*ec2.DescribeVpcClassicLinkDnsSupportInput) ec2.DescribeVpcClassicLinkDnsSupportRequest
+	DescribeVpcClassicLinkRequest(*types.DescribeVpcClassicLinkInput) ec2.DescribeVpcClassicLinkRequest
 
-	DescribeVpcEndpointConnectionNotificationsRequest(*ec2.DescribeVpcEndpointConnectionNotificationsInput) ec2.DescribeVpcEndpointConnectionNotificationsRequest
+	DescribeVpcClassicLinkDnsSupportRequest(*types.DescribeVpcClassicLinkDnsSupportInput) ec2.DescribeVpcClassicLinkDnsSupportRequest
 
-	DescribeVpcEndpointConnectionsRequest(*ec2.DescribeVpcEndpointConnectionsInput) ec2.DescribeVpcEndpointConnectionsRequest
+	DescribeVpcEndpointConnectionNotificationsRequest(*types.DescribeVpcEndpointConnectionNotificationsInput) ec2.DescribeVpcEndpointConnectionNotificationsRequest
 
-	DescribeVpcEndpointServiceConfigurationsRequest(*ec2.DescribeVpcEndpointServiceConfigurationsInput) ec2.DescribeVpcEndpointServiceConfigurationsRequest
+	DescribeVpcEndpointConnectionsRequest(*types.DescribeVpcEndpointConnectionsInput) ec2.DescribeVpcEndpointConnectionsRequest
 
-	DescribeVpcEndpointServicePermissionsRequest(*ec2.DescribeVpcEndpointServicePermissionsInput) ec2.DescribeVpcEndpointServicePermissionsRequest
+	DescribeVpcEndpointServiceConfigurationsRequest(*types.DescribeVpcEndpointServiceConfigurationsInput) ec2.DescribeVpcEndpointServiceConfigurationsRequest
 
-	DescribeVpcEndpointServicesRequest(*ec2.DescribeVpcEndpointServicesInput) ec2.DescribeVpcEndpointServicesRequest
+	DescribeVpcEndpointServicePermissionsRequest(*types.DescribeVpcEndpointServicePermissionsInput) ec2.DescribeVpcEndpointServicePermissionsRequest
 
-	DescribeVpcEndpointsRequest(*ec2.DescribeVpcEndpointsInput) ec2.DescribeVpcEndpointsRequest
+	DescribeVpcEndpointServicesRequest(*types.DescribeVpcEndpointServicesInput) ec2.DescribeVpcEndpointServicesRequest
 
-	DescribeVpcPeeringConnectionsRequest(*ec2.DescribeVpcPeeringConnectionsInput) ec2.DescribeVpcPeeringConnectionsRequest
+	DescribeVpcEndpointsRequest(*types.DescribeVpcEndpointsInput) ec2.DescribeVpcEndpointsRequest
 
-	DescribeVpcsRequest(*ec2.DescribeVpcsInput) ec2.DescribeVpcsRequest
+	DescribeVpcPeeringConnectionsRequest(*types.DescribeVpcPeeringConnectionsInput) ec2.DescribeVpcPeeringConnectionsRequest
 
-	DescribeVpnConnectionsRequest(*ec2.DescribeVpnConnectionsInput) ec2.DescribeVpnConnectionsRequest
+	DescribeVpcsRequest(*types.DescribeVpcsInput) ec2.DescribeVpcsRequest
 
-	DescribeVpnGatewaysRequest(*ec2.DescribeVpnGatewaysInput) ec2.DescribeVpnGatewaysRequest
+	DescribeVpnConnectionsRequest(*types.DescribeVpnConnectionsInput) ec2.DescribeVpnConnectionsRequest
 
-	DetachClassicLinkVpcRequest(*ec2.DetachClassicLinkVpcInput) ec2.DetachClassicLinkVpcRequest
+	DescribeVpnGatewaysRequest(*types.DescribeVpnGatewaysInput) ec2.DescribeVpnGatewaysRequest
 
-	DetachInternetGatewayRequest(*ec2.DetachInternetGatewayInput) ec2.DetachInternetGatewayRequest
+	DetachClassicLinkVpcRequest(*types.DetachClassicLinkVpcInput) ec2.DetachClassicLinkVpcRequest
 
-	DetachNetworkInterfaceRequest(*ec2.DetachNetworkInterfaceInput) ec2.DetachNetworkInterfaceRequest
+	DetachInternetGatewayRequest(*types.DetachInternetGatewayInput) ec2.DetachInternetGatewayRequest
 
-	DetachVolumeRequest(*ec2.DetachVolumeInput) ec2.DetachVolumeRequest
+	DetachNetworkInterfaceRequest(*types.DetachNetworkInterfaceInput) ec2.DetachNetworkInterfaceRequest
 
-	DetachVpnGatewayRequest(*ec2.DetachVpnGatewayInput) ec2.DetachVpnGatewayRequest
+	DetachVolumeRequest(*types.DetachVolumeInput) ec2.DetachVolumeRequest
 
-	DisableEbsEncryptionByDefaultRequest(*ec2.DisableEbsEncryptionByDefaultInput) ec2.DisableEbsEncryptionByDefaultRequest
+	DetachVpnGatewayRequest(*types.DetachVpnGatewayInput) ec2.DetachVpnGatewayRequest
 
-	DisableTransitGatewayRouteTablePropagationRequest(*ec2.DisableTransitGatewayRouteTablePropagationInput) ec2.DisableTransitGatewayRouteTablePropagationRequest
+	DisableEbsEncryptionByDefaultRequest(*types.DisableEbsEncryptionByDefaultInput) ec2.DisableEbsEncryptionByDefaultRequest
 
-	DisableVgwRoutePropagationRequest(*ec2.DisableVgwRoutePropagationInput) ec2.DisableVgwRoutePropagationRequest
+	DisableFastSnapshotRestoresRequest(*types.DisableFastSnapshotRestoresInput) ec2.DisableFastSnapshotRestoresRequest
 
-	DisableVpcClassicLinkRequest(*ec2.DisableVpcClassicLinkInput) ec2.DisableVpcClassicLinkRequest
+	DisableTransitGatewayRouteTablePropagationRequest(*types.DisableTransitGatewayRouteTablePropagationInput) ec2.DisableTransitGatewayRouteTablePropagationRequest
 
-	DisableVpcClassicLinkDnsSupportRequest(*ec2.DisableVpcClassicLinkDnsSupportInput) ec2.DisableVpcClassicLinkDnsSupportRequest
+	DisableVgwRoutePropagationRequest(*types.DisableVgwRoutePropagationInput) ec2.DisableVgwRoutePropagationRequest
 
-	DisassociateAddressRequest(*ec2.DisassociateAddressInput) ec2.DisassociateAddressRequest
+	DisableVpcClassicLinkRequest(*types.DisableVpcClassicLinkInput) ec2.DisableVpcClassicLinkRequest
 
-	DisassociateClientVpnTargetNetworkRequest(*ec2.DisassociateClientVpnTargetNetworkInput) ec2.DisassociateClientVpnTargetNetworkRequest
+	DisableVpcClassicLinkDnsSupportRequest(*types.DisableVpcClassicLinkDnsSupportInput) ec2.DisableVpcClassicLinkDnsSupportRequest
 
-	DisassociateIamInstanceProfileRequest(*ec2.DisassociateIamInstanceProfileInput) ec2.DisassociateIamInstanceProfileRequest
+	DisassociateAddressRequest(*types.DisassociateAddressInput) ec2.DisassociateAddressRequest
 
-	DisassociateRouteTableRequest(*ec2.DisassociateRouteTableInput) ec2.DisassociateRouteTableRequest
+	DisassociateClientVpnTargetNetworkRequest(*types.DisassociateClientVpnTargetNetworkInput) ec2.DisassociateClientVpnTargetNetworkRequest
 
-	DisassociateSubnetCidrBlockRequest(*ec2.DisassociateSubnetCidrBlockInput) ec2.DisassociateSubnetCidrBlockRequest
+	DisassociateIamInstanceProfileRequest(*types.DisassociateIamInstanceProfileInput) ec2.DisassociateIamInstanceProfileRequest
 
-	DisassociateTransitGatewayRouteTableRequest(*ec2.DisassociateTransitGatewayRouteTableInput) ec2.DisassociateTransitGatewayRouteTableRequest
+	DisassociateRouteTableRequest(*types.DisassociateRouteTableInput) ec2.DisassociateRouteTableRequest
 
-	DisassociateVpcCidrBlockRequest(*ec2.DisassociateVpcCidrBlockInput) ec2.DisassociateVpcCidrBlockRequest
+	DisassociateSubnetCidrBlockRequest(*types.DisassociateSubnetCidrBlockInput) ec2.DisassociateSubnetCidrBlockRequest
 
-	EnableEbsEncryptionByDefaultRequest(*ec2.EnableEbsEncryptionByDefaultInput) ec2.EnableEbsEncryptionByDefaultRequest
+	DisassociateTransitGatewayRouteTableRequest(*types.DisassociateTransitGatewayRouteTableInput) ec2.DisassociateTransitGatewayRouteTableRequest
 
-	EnableTransitGatewayRouteTablePropagationRequest(*ec2.EnableTransitGatewayRouteTablePropagationInput) ec2.EnableTransitGatewayRouteTablePropagationRequest
+	DisassociateVpcCidrBlockRequest(*types.DisassociateVpcCidrBlockInput) ec2.DisassociateVpcCidrBlockRequest
 
-	EnableVgwRoutePropagationRequest(*ec2.EnableVgwRoutePropagationInput) ec2.EnableVgwRoutePropagationRequest
+	EnableEbsEncryptionByDefaultRequest(*types.EnableEbsEncryptionByDefaultInput) ec2.EnableEbsEncryptionByDefaultRequest
 
-	EnableVolumeIORequest(*ec2.EnableVolumeIOInput) ec2.EnableVolumeIORequest
+	EnableFastSnapshotRestoresRequest(*types.EnableFastSnapshotRestoresInput) ec2.EnableFastSnapshotRestoresRequest
 
-	EnableVpcClassicLinkRequest(*ec2.EnableVpcClassicLinkInput) ec2.EnableVpcClassicLinkRequest
+	EnableTransitGatewayRouteTablePropagationRequest(*types.EnableTransitGatewayRouteTablePropagationInput) ec2.EnableTransitGatewayRouteTablePropagationRequest
 
-	EnableVpcClassicLinkDnsSupportRequest(*ec2.EnableVpcClassicLinkDnsSupportInput) ec2.EnableVpcClassicLinkDnsSupportRequest
+	EnableVgwRoutePropagationRequest(*types.EnableVgwRoutePropagationInput) ec2.EnableVgwRoutePropagationRequest
 
-	ExportClientVpnClientCertificateRevocationListRequest(*ec2.ExportClientVpnClientCertificateRevocationListInput) ec2.ExportClientVpnClientCertificateRevocationListRequest
+	EnableVolumeIORequest(*types.EnableVolumeIOInput) ec2.EnableVolumeIORequest
 
-	ExportClientVpnClientConfigurationRequest(*ec2.ExportClientVpnClientConfigurationInput) ec2.ExportClientVpnClientConfigurationRequest
+	EnableVpcClassicLinkRequest(*types.EnableVpcClassicLinkInput) ec2.EnableVpcClassicLinkRequest
 
-	ExportImageRequest(*ec2.ExportImageInput) ec2.ExportImageRequest
+	EnableVpcClassicLinkDnsSupportRequest(*types.EnableVpcClassicLinkDnsSupportInput) ec2.EnableVpcClassicLinkDnsSupportRequest
 
-	ExportTransitGatewayRoutesRequest(*ec2.ExportTransitGatewayRoutesInput) ec2.ExportTransitGatewayRoutesRequest
+	ExportClientVpnClientCertificateRevocationListRequest(*types.ExportClientVpnClientCertificateRevocationListInput) ec2.ExportClientVpnClientCertificateRevocationListRequest
 
-	GetCapacityReservationUsageRequest(*ec2.GetCapacityReservationUsageInput) ec2.GetCapacityReservationUsageRequest
+	ExportClientVpnClientConfigurationRequest(*types.ExportClientVpnClientConfigurationInput) ec2.ExportClientVpnClientConfigurationRequest
 
-	GetConsoleOutputRequest(*ec2.GetConsoleOutputInput) ec2.GetConsoleOutputRequest
+	ExportImageRequest(*types.ExportImageInput) ec2.ExportImageRequest
 
-	GetConsoleScreenshotRequest(*ec2.GetConsoleScreenshotInput) ec2.GetConsoleScreenshotRequest
+	ExportTransitGatewayRoutesRequest(*types.ExportTransitGatewayRoutesInput) ec2.ExportTransitGatewayRoutesRequest
 
-	GetEbsDefaultKmsKeyIdRequest(*ec2.GetEbsDefaultKmsKeyIdInput) ec2.GetEbsDefaultKmsKeyIdRequest
+	GetCapacityReservationUsageRequest(*types.GetCapacityReservationUsageInput) ec2.GetCapacityReservationUsageRequest
 
-	GetEbsEncryptionByDefaultRequest(*ec2.GetEbsEncryptionByDefaultInput) ec2.GetEbsEncryptionByDefaultRequest
+	GetConsoleOutputRequest(*types.GetConsoleOutputInput) ec2.GetConsoleOutputRequest
 
-	GetHostReservationPurchasePreviewRequest(*ec2.GetHostReservationPurchasePreviewInput) ec2.GetHostReservationPurchasePreviewRequest
+	GetConsoleScreenshotRequest(*types.GetConsoleScreenshotInput) ec2.GetConsoleScreenshotRequest
 
-	GetLaunchTemplateDataRequest(*ec2.GetLaunchTemplateDataInput) ec2.GetLaunchTemplateDataRequest
+	GetEbsDefaultKmsKeyIdRequest(*types.GetEbsDefaultKmsKeyIdInput) ec2.GetEbsDefaultKmsKeyIdRequest
 
-	GetPasswordDataRequest(*ec2.GetPasswordDataInput) ec2.GetPasswordDataRequest
+	GetEbsEncryptionByDefaultRequest(*types.GetEbsEncryptionByDefaultInput) ec2.GetEbsEncryptionByDefaultRequest
 
-	GetReservedInstancesExchangeQuoteRequest(*ec2.GetReservedInstancesExchangeQuoteInput) ec2.GetReservedInstancesExchangeQuoteRequest
+	GetHostReservationPurchasePreviewRequest(*types.GetHostReservationPurchasePreviewInput) ec2.GetHostReservationPurchasePreviewRequest
 
-	GetTransitGatewayAttachmentPropagationsRequest(*ec2.GetTransitGatewayAttachmentPropagationsInput) ec2.GetTransitGatewayAttachmentPropagationsRequest
+	GetLaunchTemplateDataRequest(*types.GetLaunchTemplateDataInput) ec2.GetLaunchTemplateDataRequest
 
-	GetTransitGatewayRouteTableAssociationsRequest(*ec2.GetTransitGatewayRouteTableAssociationsInput) ec2.GetTransitGatewayRouteTableAssociationsRequest
+	GetPasswordDataRequest(*types.GetPasswordDataInput) ec2.GetPasswordDataRequest
 
-	GetTransitGatewayRouteTablePropagationsRequest(*ec2.GetTransitGatewayRouteTablePropagationsInput) ec2.GetTransitGatewayRouteTablePropagationsRequest
+	GetReservedInstancesExchangeQuoteRequest(*types.GetReservedInstancesExchangeQuoteInput) ec2.GetReservedInstancesExchangeQuoteRequest
 
-	ImportClientVpnClientCertificateRevocationListRequest(*ec2.ImportClientVpnClientCertificateRevocationListInput) ec2.ImportClientVpnClientCertificateRevocationListRequest
+	GetTransitGatewayAttachmentPropagationsRequest(*types.GetTransitGatewayAttachmentPropagationsInput) ec2.GetTransitGatewayAttachmentPropagationsRequest
 
-	ImportImageRequest(*ec2.ImportImageInput) ec2.ImportImageRequest
+	GetTransitGatewayRouteTableAssociationsRequest(*types.GetTransitGatewayRouteTableAssociationsInput) ec2.GetTransitGatewayRouteTableAssociationsRequest
 
-	ImportInstanceRequest(*ec2.ImportInstanceInput) ec2.ImportInstanceRequest
+	GetTransitGatewayRouteTablePropagationsRequest(*types.GetTransitGatewayRouteTablePropagationsInput) ec2.GetTransitGatewayRouteTablePropagationsRequest
 
-	ImportKeyPairRequest(*ec2.ImportKeyPairInput) ec2.ImportKeyPairRequest
+	ImportClientVpnClientCertificateRevocationListRequest(*types.ImportClientVpnClientCertificateRevocationListInput) ec2.ImportClientVpnClientCertificateRevocationListRequest
 
-	ImportSnapshotRequest(*ec2.ImportSnapshotInput) ec2.ImportSnapshotRequest
+	ImportImageRequest(*types.ImportImageInput) ec2.ImportImageRequest
 
-	ImportVolumeRequest(*ec2.ImportVolumeInput) ec2.ImportVolumeRequest
+	ImportInstanceRequest(*types.ImportInstanceInput) ec2.ImportInstanceRequest
 
-	ModifyCapacityReservationRequest(*ec2.ModifyCapacityReservationInput) ec2.ModifyCapacityReservationRequest
+	ImportKeyPairRequest(*types.ImportKeyPairInput) ec2.ImportKeyPairRequest
 
-	ModifyClientVpnEndpointRequest(*ec2.ModifyClientVpnEndpointInput) ec2.ModifyClientVpnEndpointRequest
+	ImportSnapshotRequest(*types.ImportSnapshotInput) ec2.ImportSnapshotRequest
 
-	ModifyEbsDefaultKmsKeyIdRequest(*ec2.ModifyEbsDefaultKmsKeyIdInput) ec2.ModifyEbsDefaultKmsKeyIdRequest
+	ImportVolumeRequest(*types.ImportVolumeInput) ec2.ImportVolumeRequest
 
-	ModifyFleetRequest(*ec2.ModifyFleetInput) ec2.ModifyFleetRequest
+	ModifyCapacityReservationRequest(*types.ModifyCapacityReservationInput) ec2.ModifyCapacityReservationRequest
 
-	ModifyFpgaImageAttributeRequest(*ec2.ModifyFpgaImageAttributeInput) ec2.ModifyFpgaImageAttributeRequest
+	ModifyClientVpnEndpointRequest(*types.ModifyClientVpnEndpointInput) ec2.ModifyClientVpnEndpointRequest
 
-	ModifyHostsRequest(*ec2.ModifyHostsInput) ec2.ModifyHostsRequest
+	ModifyEbsDefaultKmsKeyIdRequest(*types.ModifyEbsDefaultKmsKeyIdInput) ec2.ModifyEbsDefaultKmsKeyIdRequest
 
-	ModifyIdFormatRequest(*ec2.ModifyIdFormatInput) ec2.ModifyIdFormatRequest
+	ModifyFleetRequest(*types.ModifyFleetInput) ec2.ModifyFleetRequest
 
-	ModifyIdentityIdFormatRequest(*ec2.ModifyIdentityIdFormatInput) ec2.ModifyIdentityIdFormatRequest
+	ModifyFpgaImageAttributeRequest(*types.ModifyFpgaImageAttributeInput) ec2.ModifyFpgaImageAttributeRequest
 
-	ModifyImageAttributeRequest(*ec2.ModifyImageAttributeInput) ec2.ModifyImageAttributeRequest
+	ModifyHostsRequest(*types.ModifyHostsInput) ec2.ModifyHostsRequest
 
-	ModifyInstanceAttributeRequest(*ec2.ModifyInstanceAttributeInput) ec2.ModifyInstanceAttributeRequest
+	ModifyIdFormatRequest(*types.ModifyIdFormatInput) ec2.ModifyIdFormatRequest
 
-	ModifyInstanceCapacityReservationAttributesRequest(*ec2.ModifyInstanceCapacityReservationAttributesInput) ec2.ModifyInstanceCapacityReservationAttributesRequest
+	ModifyIdentityIdFormatRequest(*types.ModifyIdentityIdFormatInput) ec2.ModifyIdentityIdFormatRequest
 
-	ModifyInstanceCreditSpecificationRequest(*ec2.ModifyInstanceCreditSpecificationInput) ec2.ModifyInstanceCreditSpecificationRequest
+	ModifyImageAttributeRequest(*types.ModifyImageAttributeInput) ec2.ModifyImageAttributeRequest
 
-	ModifyInstanceEventStartTimeRequest(*ec2.ModifyInstanceEventStartTimeInput) ec2.ModifyInstanceEventStartTimeRequest
+	ModifyInstanceAttributeRequest(*types.ModifyInstanceAttributeInput) ec2.ModifyInstanceAttributeRequest
 
-	ModifyInstancePlacementRequest(*ec2.ModifyInstancePlacementInput) ec2.ModifyInstancePlacementRequest
+	ModifyInstanceCapacityReservationAttributesRequest(*types.ModifyInstanceCapacityReservationAttributesInput) ec2.ModifyInstanceCapacityReservationAttributesRequest
 
-	ModifyLaunchTemplateRequest(*ec2.ModifyLaunchTemplateInput) ec2.ModifyLaunchTemplateRequest
+	ModifyInstanceCreditSpecificationRequest(*types.ModifyInstanceCreditSpecificationInput) ec2.ModifyInstanceCreditSpecificationRequest
 
-	ModifyNetworkInterfaceAttributeRequest(*ec2.ModifyNetworkInterfaceAttributeInput) ec2.ModifyNetworkInterfaceAttributeRequest
+	ModifyInstanceEventStartTimeRequest(*types.ModifyInstanceEventStartTimeInput) ec2.ModifyInstanceEventStartTimeRequest
 
-	ModifyReservedInstancesRequest(*ec2.ModifyReservedInstancesInput) ec2.ModifyReservedInstancesRequest
+	ModifyInstanceMetadataOptionsRequest(*types.ModifyInstanceMetadataOptionsInput) ec2.ModifyInstanceMetadataOptionsRequest
 
-	ModifySnapshotAttributeRequest(*ec2.ModifySnapshotAttributeInput) ec2.ModifySnapshotAttributeRequest
+	ModifyInstancePlacementRequest(*types.ModifyInstancePlacementInput) ec2.ModifyInstancePlacementRequest
 
-	ModifySpotFleetRequestRequest(*ec2.ModifySpotFleetRequestInput) ec2.ModifySpotFleetRequestRequest
+	ModifyLaunchTemplateRequest(*types.ModifyLaunchTemplateInput) ec2.ModifyLaunchTemplateRequest
 
-	ModifySubnetAttributeRequest(*ec2.ModifySubnetAttributeInput) ec2.ModifySubnetAttributeRequest
+	ModifyNetworkInterfaceAttributeRequest(*types.ModifyNetworkInterfaceAttributeInput) ec2.ModifyNetworkInterfaceAttributeRequest
 
-	ModifyTrafficMirrorFilterNetworkServicesRequest(*ec2.ModifyTrafficMirrorFilterNetworkServicesInput) ec2.ModifyTrafficMirrorFilterNetworkServicesRequest
+	ModifyReservedInstancesRequest(*types.ModifyReservedInstancesInput) ec2.ModifyReservedInstancesRequest
 
-	ModifyTrafficMirrorFilterRuleRequest(*ec2.ModifyTrafficMirrorFilterRuleInput) ec2.ModifyTrafficMirrorFilterRuleRequest
+	ModifySnapshotAttributeRequest(*types.ModifySnapshotAttributeInput) ec2.ModifySnapshotAttributeRequest
 
-	ModifyTrafficMirrorSessionRequest(*ec2.ModifyTrafficMirrorSessionInput) ec2.ModifyTrafficMirrorSessionRequest
+	ModifySpotFleetRequestRequest(*types.ModifySpotFleetRequestInput) ec2.ModifySpotFleetRequestRequest
 
-	ModifyTransitGatewayVpcAttachmentRequest(*ec2.ModifyTransitGatewayVpcAttachmentInput) ec2.ModifyTransitGatewayVpcAttachmentRequest
+	ModifySubnetAttributeRequest(*types.ModifySubnetAttributeInput) ec2.ModifySubnetAttributeRequest
 
-	ModifyVolumeRequest(*ec2.ModifyVolumeInput) ec2.ModifyVolumeRequest
+	ModifyTrafficMirrorFilterNetworkServicesRequest(*types.ModifyTrafficMirrorFilterNetworkServicesInput) ec2.ModifyTrafficMirrorFilterNetworkServicesRequest
 
-	ModifyVolumeAttributeRequest(*ec2.ModifyVolumeAttributeInput) ec2.ModifyVolumeAttributeRequest
+	ModifyTrafficMirrorFilterRuleRequest(*types.ModifyTrafficMirrorFilterRuleInput) ec2.ModifyTrafficMirrorFilterRuleRequest
 
-	ModifyVpcAttributeRequest(*ec2.ModifyVpcAttributeInput) ec2.ModifyVpcAttributeRequest
+	ModifyTrafficMirrorSessionRequest(*types.ModifyTrafficMirrorSessionInput) ec2.ModifyTrafficMirrorSessionRequest
 
-	ModifyVpcEndpointRequest(*ec2.ModifyVpcEndpointInput) ec2.ModifyVpcEndpointRequest
+	ModifyTransitGatewayVpcAttachmentRequest(*types.ModifyTransitGatewayVpcAttachmentInput) ec2.ModifyTransitGatewayVpcAttachmentRequest
 
-	ModifyVpcEndpointConnectionNotificationRequest(*ec2.ModifyVpcEndpointConnectionNotificationInput) ec2.ModifyVpcEndpointConnectionNotificationRequest
+	ModifyVolumeRequest(*types.ModifyVolumeInput) ec2.ModifyVolumeRequest
 
-	ModifyVpcEndpointServiceConfigurationRequest(*ec2.ModifyVpcEndpointServiceConfigurationInput) ec2.ModifyVpcEndpointServiceConfigurationRequest
+	ModifyVolumeAttributeRequest(*types.ModifyVolumeAttributeInput) ec2.ModifyVolumeAttributeRequest
 
-	ModifyVpcEndpointServicePermissionsRequest(*ec2.ModifyVpcEndpointServicePermissionsInput) ec2.ModifyVpcEndpointServicePermissionsRequest
+	ModifyVpcAttributeRequest(*types.ModifyVpcAttributeInput) ec2.ModifyVpcAttributeRequest
 
-	ModifyVpcPeeringConnectionOptionsRequest(*ec2.ModifyVpcPeeringConnectionOptionsInput) ec2.ModifyVpcPeeringConnectionOptionsRequest
+	ModifyVpcEndpointRequest(*types.ModifyVpcEndpointInput) ec2.ModifyVpcEndpointRequest
 
-	ModifyVpcTenancyRequest(*ec2.ModifyVpcTenancyInput) ec2.ModifyVpcTenancyRequest
+	ModifyVpcEndpointConnectionNotificationRequest(*types.ModifyVpcEndpointConnectionNotificationInput) ec2.ModifyVpcEndpointConnectionNotificationRequest
 
-	ModifyVpnConnectionRequest(*ec2.ModifyVpnConnectionInput) ec2.ModifyVpnConnectionRequest
+	ModifyVpcEndpointServiceConfigurationRequest(*types.ModifyVpcEndpointServiceConfigurationInput) ec2.ModifyVpcEndpointServiceConfigurationRequest
 
-	ModifyVpnTunnelCertificateRequest(*ec2.ModifyVpnTunnelCertificateInput) ec2.ModifyVpnTunnelCertificateRequest
+	ModifyVpcEndpointServicePermissionsRequest(*types.ModifyVpcEndpointServicePermissionsInput) ec2.ModifyVpcEndpointServicePermissionsRequest
 
-	ModifyVpnTunnelOptionsRequest(*ec2.ModifyVpnTunnelOptionsInput) ec2.ModifyVpnTunnelOptionsRequest
+	ModifyVpcPeeringConnectionOptionsRequest(*types.ModifyVpcPeeringConnectionOptionsInput) ec2.ModifyVpcPeeringConnectionOptionsRequest
 
-	MonitorInstancesRequest(*ec2.MonitorInstancesInput) ec2.MonitorInstancesRequest
+	ModifyVpcTenancyRequest(*types.ModifyVpcTenancyInput) ec2.ModifyVpcTenancyRequest
 
-	MoveAddressToVpcRequest(*ec2.MoveAddressToVpcInput) ec2.MoveAddressToVpcRequest
+	ModifyVpnConnectionRequest(*types.ModifyVpnConnectionInput) ec2.ModifyVpnConnectionRequest
 
-	ProvisionByoipCidrRequest(*ec2.ProvisionByoipCidrInput) ec2.ProvisionByoipCidrRequest
+	ModifyVpnTunnelCertificateRequest(*types.ModifyVpnTunnelCertificateInput) ec2.ModifyVpnTunnelCertificateRequest
 
-	PurchaseHostReservationRequest(*ec2.PurchaseHostReservationInput) ec2.PurchaseHostReservationRequest
+	ModifyVpnTunnelOptionsRequest(*types.ModifyVpnTunnelOptionsInput) ec2.ModifyVpnTunnelOptionsRequest
 
-	PurchaseReservedInstancesOfferingRequest(*ec2.PurchaseReservedInstancesOfferingInput) ec2.PurchaseReservedInstancesOfferingRequest
+	MonitorInstancesRequest(*types.MonitorInstancesInput) ec2.MonitorInstancesRequest
 
-	PurchaseScheduledInstancesRequest(*ec2.PurchaseScheduledInstancesInput) ec2.PurchaseScheduledInstancesRequest
+	MoveAddressToVpcRequest(*types.MoveAddressToVpcInput) ec2.MoveAddressToVpcRequest
 
-	RebootInstancesRequest(*ec2.RebootInstancesInput) ec2.RebootInstancesRequest
+	ProvisionByoipCidrRequest(*types.ProvisionByoipCidrInput) ec2.ProvisionByoipCidrRequest
 
-	RegisterImageRequest(*ec2.RegisterImageInput) ec2.RegisterImageRequest
+	PurchaseHostReservationRequest(*types.PurchaseHostReservationInput) ec2.PurchaseHostReservationRequest
 
-	RejectTransitGatewayVpcAttachmentRequest(*ec2.RejectTransitGatewayVpcAttachmentInput) ec2.RejectTransitGatewayVpcAttachmentRequest
+	PurchaseReservedInstancesOfferingRequest(*types.PurchaseReservedInstancesOfferingInput) ec2.PurchaseReservedInstancesOfferingRequest
 
-	RejectVpcEndpointConnectionsRequest(*ec2.RejectVpcEndpointConnectionsInput) ec2.RejectVpcEndpointConnectionsRequest
+	PurchaseScheduledInstancesRequest(*types.PurchaseScheduledInstancesInput) ec2.PurchaseScheduledInstancesRequest
 
-	RejectVpcPeeringConnectionRequest(*ec2.RejectVpcPeeringConnectionInput) ec2.RejectVpcPeeringConnectionRequest
+	RebootInstancesRequest(*types.RebootInstancesInput) ec2.RebootInstancesRequest
 
-	ReleaseAddressRequest(*ec2.ReleaseAddressInput) ec2.ReleaseAddressRequest
+	RegisterImageRequest(*types.RegisterImageInput) ec2.RegisterImageRequest
 
-	ReleaseHostsRequest(*ec2.ReleaseHostsInput) ec2.ReleaseHostsRequest
+	RejectTransitGatewayVpcAttachmentRequest(*types.RejectTransitGatewayVpcAttachmentInput) ec2.RejectTransitGatewayVpcAttachmentRequest
 
-	ReplaceIamInstanceProfileAssociationRequest(*ec2.ReplaceIamInstanceProfileAssociationInput) ec2.ReplaceIamInstanceProfileAssociationRequest
+	RejectVpcEndpointConnectionsRequest(*types.RejectVpcEndpointConnectionsInput) ec2.RejectVpcEndpointConnectionsRequest
 
-	ReplaceNetworkAclAssociationRequest(*ec2.ReplaceNetworkAclAssociationInput) ec2.ReplaceNetworkAclAssociationRequest
+	RejectVpcPeeringConnectionRequest(*types.RejectVpcPeeringConnectionInput) ec2.RejectVpcPeeringConnectionRequest
 
-	ReplaceNetworkAclEntryRequest(*ec2.ReplaceNetworkAclEntryInput) ec2.ReplaceNetworkAclEntryRequest
+	ReleaseAddressRequest(*types.ReleaseAddressInput) ec2.ReleaseAddressRequest
 
-	ReplaceRouteRequest(*ec2.ReplaceRouteInput) ec2.ReplaceRouteRequest
+	ReleaseHostsRequest(*types.ReleaseHostsInput) ec2.ReleaseHostsRequest
 
-	ReplaceRouteTableAssociationRequest(*ec2.ReplaceRouteTableAssociationInput) ec2.ReplaceRouteTableAssociationRequest
+	ReplaceIamInstanceProfileAssociationRequest(*types.ReplaceIamInstanceProfileAssociationInput) ec2.ReplaceIamInstanceProfileAssociationRequest
 
-	ReplaceTransitGatewayRouteRequest(*ec2.ReplaceTransitGatewayRouteInput) ec2.ReplaceTransitGatewayRouteRequest
+	ReplaceNetworkAclAssociationRequest(*types.ReplaceNetworkAclAssociationInput) ec2.ReplaceNetworkAclAssociationRequest
 
-	ReportInstanceStatusRequest(*ec2.ReportInstanceStatusInput) ec2.ReportInstanceStatusRequest
+	ReplaceNetworkAclEntryRequest(*types.ReplaceNetworkAclEntryInput) ec2.ReplaceNetworkAclEntryRequest
 
-	RequestSpotFleetRequest(*ec2.RequestSpotFleetInput) ec2.RequestSpotFleetRequest
+	ReplaceRouteRequest(*types.ReplaceRouteInput) ec2.ReplaceRouteRequest
 
-	RequestSpotInstancesRequest(*ec2.RequestSpotInstancesInput) ec2.RequestSpotInstancesRequest
+	ReplaceRouteTableAssociationRequest(*types.ReplaceRouteTableAssociationInput) ec2.ReplaceRouteTableAssociationRequest
 
-	ResetEbsDefaultKmsKeyIdRequest(*ec2.ResetEbsDefaultKmsKeyIdInput) ec2.ResetEbsDefaultKmsKeyIdRequest
+	ReplaceTransitGatewayRouteRequest(*types.ReplaceTransitGatewayRouteInput) ec2.ReplaceTransitGatewayRouteRequest
 
-	ResetFpgaImageAttributeRequest(*ec2.ResetFpgaImageAttributeInput) ec2.ResetFpgaImageAttributeRequest
+	ReportInstanceStatusRequest(*types.ReportInstanceStatusInput) ec2.ReportInstanceStatusRequest
 
-	ResetImageAttributeRequest(*ec2.ResetImageAttributeInput) ec2.ResetImageAttributeRequest
+	RequestSpotFleetRequest(*types.RequestSpotFleetInput) ec2.RequestSpotFleetRequest
 
-	ResetInstanceAttributeRequest(*ec2.ResetInstanceAttributeInput) ec2.ResetInstanceAttributeRequest
+	RequestSpotInstancesRequest(*types.RequestSpotInstancesInput) ec2.RequestSpotInstancesRequest
 
-	ResetNetworkInterfaceAttributeRequest(*ec2.ResetNetworkInterfaceAttributeInput) ec2.ResetNetworkInterfaceAttributeRequest
+	ResetEbsDefaultKmsKeyIdRequest(*types.ResetEbsDefaultKmsKeyIdInput) ec2.ResetEbsDefaultKmsKeyIdRequest
 
-	ResetSnapshotAttributeRequest(*ec2.ResetSnapshotAttributeInput) ec2.ResetSnapshotAttributeRequest
+	ResetFpgaImageAttributeRequest(*types.ResetFpgaImageAttributeInput) ec2.ResetFpgaImageAttributeRequest
 
-	RestoreAddressToClassicRequest(*ec2.RestoreAddressToClassicInput) ec2.RestoreAddressToClassicRequest
+	ResetImageAttributeRequest(*types.ResetImageAttributeInput) ec2.ResetImageAttributeRequest
 
-	RevokeClientVpnIngressRequest(*ec2.RevokeClientVpnIngressInput) ec2.RevokeClientVpnIngressRequest
+	ResetInstanceAttributeRequest(*types.ResetInstanceAttributeInput) ec2.ResetInstanceAttributeRequest
 
-	RevokeSecurityGroupEgressRequest(*ec2.RevokeSecurityGroupEgressInput) ec2.RevokeSecurityGroupEgressRequest
+	ResetNetworkInterfaceAttributeRequest(*types.ResetNetworkInterfaceAttributeInput) ec2.ResetNetworkInterfaceAttributeRequest
 
-	RevokeSecurityGroupIngressRequest(*ec2.RevokeSecurityGroupIngressInput) ec2.RevokeSecurityGroupIngressRequest
+	ResetSnapshotAttributeRequest(*types.ResetSnapshotAttributeInput) ec2.ResetSnapshotAttributeRequest
 
-	RunInstancesRequest(*ec2.RunInstancesInput) ec2.RunInstancesRequest
+	RestoreAddressToClassicRequest(*types.RestoreAddressToClassicInput) ec2.RestoreAddressToClassicRequest
 
-	RunScheduledInstancesRequest(*ec2.RunScheduledInstancesInput) ec2.RunScheduledInstancesRequest
+	RevokeClientVpnIngressRequest(*types.RevokeClientVpnIngressInput) ec2.RevokeClientVpnIngressRequest
 
-	SearchTransitGatewayRoutesRequest(*ec2.SearchTransitGatewayRoutesInput) ec2.SearchTransitGatewayRoutesRequest
+	RevokeSecurityGroupEgressRequest(*types.RevokeSecurityGroupEgressInput) ec2.RevokeSecurityGroupEgressRequest
 
-	SendDiagnosticInterruptRequest(*ec2.SendDiagnosticInterruptInput) ec2.SendDiagnosticInterruptRequest
+	RevokeSecurityGroupIngressRequest(*types.RevokeSecurityGroupIngressInput) ec2.RevokeSecurityGroupIngressRequest
 
-	StartInstancesRequest(*ec2.StartInstancesInput) ec2.StartInstancesRequest
+	RunInstancesRequest(*types.RunInstancesInput) ec2.RunInstancesRequest
 
-	StopInstancesRequest(*ec2.StopInstancesInput) ec2.StopInstancesRequest
+	RunScheduledInstancesRequest(*types.RunScheduledInstancesInput) ec2.RunScheduledInstancesRequest
 
-	TerminateClientVpnConnectionsRequest(*ec2.TerminateClientVpnConnectionsInput) ec2.TerminateClientVpnConnectionsRequest
+	SearchTransitGatewayRoutesRequest(*types.SearchTransitGatewayRoutesInput) ec2.SearchTransitGatewayRoutesRequest
 
-	TerminateInstancesRequest(*ec2.TerminateInstancesInput) ec2.TerminateInstancesRequest
+	SendDiagnosticInterruptRequest(*types.SendDiagnosticInterruptInput) ec2.SendDiagnosticInterruptRequest
 
-	UnassignIpv6AddressesRequest(*ec2.UnassignIpv6AddressesInput) ec2.UnassignIpv6AddressesRequest
+	StartInstancesRequest(*types.StartInstancesInput) ec2.StartInstancesRequest
 
-	UnassignPrivateIpAddressesRequest(*ec2.UnassignPrivateIpAddressesInput) ec2.UnassignPrivateIpAddressesRequest
+	StopInstancesRequest(*types.StopInstancesInput) ec2.StopInstancesRequest
 
-	UnmonitorInstancesRequest(*ec2.UnmonitorInstancesInput) ec2.UnmonitorInstancesRequest
+	TerminateClientVpnConnectionsRequest(*types.TerminateClientVpnConnectionsInput) ec2.TerminateClientVpnConnectionsRequest
 
-	UpdateSecurityGroupRuleDescriptionsEgressRequest(*ec2.UpdateSecurityGroupRuleDescriptionsEgressInput) ec2.UpdateSecurityGroupRuleDescriptionsEgressRequest
+	TerminateInstancesRequest(*types.TerminateInstancesInput) ec2.TerminateInstancesRequest
 
-	UpdateSecurityGroupRuleDescriptionsIngressRequest(*ec2.UpdateSecurityGroupRuleDescriptionsIngressInput) ec2.UpdateSecurityGroupRuleDescriptionsIngressRequest
+	UnassignIpv6AddressesRequest(*types.UnassignIpv6AddressesInput) ec2.UnassignIpv6AddressesRequest
 
-	WithdrawByoipCidrRequest(*ec2.WithdrawByoipCidrInput) ec2.WithdrawByoipCidrRequest
+	UnassignPrivateIpAddressesRequest(*types.UnassignPrivateIpAddressesInput) ec2.UnassignPrivateIpAddressesRequest
 
-	WaitUntilBundleTaskComplete(context.Context, *ec2.DescribeBundleTasksInput, ...aws.WaiterOption) error
+	UnmonitorInstancesRequest(*types.UnmonitorInstancesInput) ec2.UnmonitorInstancesRequest
 
-	WaitUntilConversionTaskCancelled(context.Context, *ec2.DescribeConversionTasksInput, ...aws.WaiterOption) error
+	UpdateSecurityGroupRuleDescriptionsEgressRequest(*types.UpdateSecurityGroupRuleDescriptionsEgressInput) ec2.UpdateSecurityGroupRuleDescriptionsEgressRequest
 
-	WaitUntilConversionTaskCompleted(context.Context, *ec2.DescribeConversionTasksInput, ...aws.WaiterOption) error
+	UpdateSecurityGroupRuleDescriptionsIngressRequest(*types.UpdateSecurityGroupRuleDescriptionsIngressInput) ec2.UpdateSecurityGroupRuleDescriptionsIngressRequest
 
-	WaitUntilConversionTaskDeleted(context.Context, *ec2.DescribeConversionTasksInput, ...aws.WaiterOption) error
+	WithdrawByoipCidrRequest(*types.WithdrawByoipCidrInput) ec2.WithdrawByoipCidrRequest
 
-	WaitUntilCustomerGatewayAvailable(context.Context, *ec2.DescribeCustomerGatewaysInput, ...aws.WaiterOption) error
+	WaitUntilBundleTaskComplete(context.Context, *types.DescribeBundleTasksInput, ...aws.WaiterOption) error
 
-	WaitUntilExportTaskCancelled(context.Context, *ec2.DescribeExportTasksInput, ...aws.WaiterOption) error
+	WaitUntilConversionTaskCancelled(context.Context, *types.DescribeConversionTasksInput, ...aws.WaiterOption) error
 
-	WaitUntilExportTaskCompleted(context.Context, *ec2.DescribeExportTasksInput, ...aws.WaiterOption) error
+	WaitUntilConversionTaskCompleted(context.Context, *types.DescribeConversionTasksInput, ...aws.WaiterOption) error
 
-	WaitUntilImageAvailable(context.Context, *ec2.DescribeImagesInput, ...aws.WaiterOption) error
+	WaitUntilConversionTaskDeleted(context.Context, *types.DescribeConversionTasksInput, ...aws.WaiterOption) error
 
-	WaitUntilImageExists(context.Context, *ec2.DescribeImagesInput, ...aws.WaiterOption) error
+	WaitUntilCustomerGatewayAvailable(context.Context, *types.DescribeCustomerGatewaysInput, ...aws.WaiterOption) error
 
-	WaitUntilInstanceExists(context.Context, *ec2.DescribeInstancesInput, ...aws.WaiterOption) error
+	WaitUntilExportTaskCancelled(context.Context, *types.DescribeExportTasksInput, ...aws.WaiterOption) error
 
-	WaitUntilInstanceRunning(context.Context, *ec2.DescribeInstancesInput, ...aws.WaiterOption) error
+	WaitUntilExportTaskCompleted(context.Context, *types.DescribeExportTasksInput, ...aws.WaiterOption) error
 
-	WaitUntilInstanceStatusOk(context.Context, *ec2.DescribeInstanceStatusInput, ...aws.WaiterOption) error
+	WaitUntilImageAvailable(context.Context, *types.DescribeImagesInput, ...aws.WaiterOption) error
 
-	WaitUntilInstanceStopped(context.Context, *ec2.DescribeInstancesInput, ...aws.WaiterOption) error
+	WaitUntilImageExists(context.Context, *types.DescribeImagesInput, ...aws.WaiterOption) error
 
-	WaitUntilInstanceTerminated(context.Context, *ec2.DescribeInstancesInput, ...aws.WaiterOption) error
+	WaitUntilInstanceExists(context.Context, *types.DescribeInstancesInput, ...aws.WaiterOption) error
 
-	WaitUntilKeyPairExists(context.Context, *ec2.DescribeKeyPairsInput, ...aws.WaiterOption) error
+	WaitUntilInstanceRunning(context.Context, *types.DescribeInstancesInput, ...aws.WaiterOption) error
 
-	WaitUntilNatGatewayAvailable(context.Context, *ec2.DescribeNatGatewaysInput, ...aws.WaiterOption) error
+	WaitUntilInstanceStatusOk(context.Context, *types.DescribeInstanceStatusInput, ...aws.WaiterOption) error
 
-	WaitUntilNetworkInterfaceAvailable(context.Context, *ec2.DescribeNetworkInterfacesInput, ...aws.WaiterOption) error
+	WaitUntilInstanceStopped(context.Context, *types.DescribeInstancesInput, ...aws.WaiterOption) error
 
-	WaitUntilPasswordDataAvailable(context.Context, *ec2.GetPasswordDataInput, ...aws.WaiterOption) error
+	WaitUntilInstanceTerminated(context.Context, *types.DescribeInstancesInput, ...aws.WaiterOption) error
 
-	WaitUntilSnapshotCompleted(context.Context, *ec2.DescribeSnapshotsInput, ...aws.WaiterOption) error
+	WaitUntilKeyPairExists(context.Context, *types.DescribeKeyPairsInput, ...aws.WaiterOption) error
 
-	WaitUntilSpotInstanceRequestFulfilled(context.Context, *ec2.DescribeSpotInstanceRequestsInput, ...aws.WaiterOption) error
+	WaitUntilNatGatewayAvailable(context.Context, *types.DescribeNatGatewaysInput, ...aws.WaiterOption) error
 
-	WaitUntilSubnetAvailable(context.Context, *ec2.DescribeSubnetsInput, ...aws.WaiterOption) error
+	WaitUntilNetworkInterfaceAvailable(context.Context, *types.DescribeNetworkInterfacesInput, ...aws.WaiterOption) error
 
-	WaitUntilSystemStatusOk(context.Context, *ec2.DescribeInstanceStatusInput, ...aws.WaiterOption) error
+	WaitUntilPasswordDataAvailable(context.Context, *types.GetPasswordDataInput, ...aws.WaiterOption) error
 
-	WaitUntilVolumeAvailable(context.Context, *ec2.DescribeVolumesInput, ...aws.WaiterOption) error
+	WaitUntilSecurityGroupExists(context.Context, *types.DescribeSecurityGroupsInput, ...aws.WaiterOption) error
 
-	WaitUntilVolumeDeleted(context.Context, *ec2.DescribeVolumesInput, ...aws.WaiterOption) error
+	WaitUntilSnapshotCompleted(context.Context, *types.DescribeSnapshotsInput, ...aws.WaiterOption) error
 
-	WaitUntilVolumeInUse(context.Context, *ec2.DescribeVolumesInput, ...aws.WaiterOption) error
+	WaitUntilSpotInstanceRequestFulfilled(context.Context, *types.DescribeSpotInstanceRequestsInput, ...aws.WaiterOption) error
 
-	WaitUntilVpcAvailable(context.Context, *ec2.DescribeVpcsInput, ...aws.WaiterOption) error
+	WaitUntilSubnetAvailable(context.Context, *types.DescribeSubnetsInput, ...aws.WaiterOption) error
 
-	WaitUntilVpcExists(context.Context, *ec2.DescribeVpcsInput, ...aws.WaiterOption) error
+	WaitUntilSystemStatusOk(context.Context, *types.DescribeInstanceStatusInput, ...aws.WaiterOption) error
 
-	WaitUntilVpcPeeringConnectionDeleted(context.Context, *ec2.DescribeVpcPeeringConnectionsInput, ...aws.WaiterOption) error
+	WaitUntilVolumeAvailable(context.Context, *types.DescribeVolumesInput, ...aws.WaiterOption) error
 
-	WaitUntilVpcPeeringConnectionExists(context.Context, *ec2.DescribeVpcPeeringConnectionsInput, ...aws.WaiterOption) error
+	WaitUntilVolumeDeleted(context.Context, *types.DescribeVolumesInput, ...aws.WaiterOption) error
 
-	WaitUntilVpnConnectionAvailable(context.Context, *ec2.DescribeVpnConnectionsInput, ...aws.WaiterOption) error
+	WaitUntilVolumeInUse(context.Context, *types.DescribeVolumesInput, ...aws.WaiterOption) error
 
-	WaitUntilVpnConnectionDeleted(context.Context, *ec2.DescribeVpnConnectionsInput, ...aws.WaiterOption) error
+	WaitUntilVpcAvailable(context.Context, *types.DescribeVpcsInput, ...aws.WaiterOption) error
+
+	WaitUntilVpcExists(context.Context, *types.DescribeVpcsInput, ...aws.WaiterOption) error
+
+	WaitUntilVpcPeeringConnectionDeleted(context.Context, *types.DescribeVpcPeeringConnectionsInput, ...aws.WaiterOption) error
+
+	WaitUntilVpcPeeringConnectionExists(context.Context, *types.DescribeVpcPeeringConnectionsInput, ...aws.WaiterOption) error
+
+	WaitUntilVpnConnectionAvailable(context.Context, *types.DescribeVpnConnectionsInput, ...aws.WaiterOption) error
+
+	WaitUntilVpnConnectionDeleted(context.Context, *types.DescribeVpnConnectionsInput, ...aws.WaiterOption) error
 }
 
 var _ ClientAPI = (*ec2.Client)(nil)

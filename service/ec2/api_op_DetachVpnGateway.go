@@ -6,63 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/ec2query"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-// Contains the parameters for DetachVpnGateway.
-type DetachVpnGatewayInput struct {
-	_ struct{} `type:"structure"`
-
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have
-	// the required permissions, the error response is DryRunOperation. Otherwise,
-	// it is UnauthorizedOperation.
-	DryRun *bool `locationName:"dryRun" type:"boolean"`
-
-	// The ID of the VPC.
-	//
-	// VpcId is a required field
-	VpcId *string `type:"string" required:"true"`
-
-	// The ID of the virtual private gateway.
-	//
-	// VpnGatewayId is a required field
-	VpnGatewayId *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DetachVpnGatewayInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DetachVpnGatewayInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DetachVpnGatewayInput"}
-
-	if s.VpcId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("VpcId"))
-	}
-
-	if s.VpnGatewayId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("VpnGatewayId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DetachVpnGatewayOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DetachVpnGatewayOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDetachVpnGateway = "DetachVpnGateway"
 
@@ -86,7 +33,7 @@ const opDetachVpnGateway = "DetachVpnGateway"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DetachVpnGateway
-func (c *Client) DetachVpnGatewayRequest(input *DetachVpnGatewayInput) DetachVpnGatewayRequest {
+func (c *Client) DetachVpnGatewayRequest(input *types.DetachVpnGatewayInput) DetachVpnGatewayRequest {
 	op := &aws.Operation{
 		Name:       opDetachVpnGateway,
 		HTTPMethod: "POST",
@@ -94,10 +41,10 @@ func (c *Client) DetachVpnGatewayRequest(input *DetachVpnGatewayInput) DetachVpn
 	}
 
 	if input == nil {
-		input = &DetachVpnGatewayInput{}
+		input = &types.DetachVpnGatewayInput{}
 	}
 
-	req := c.newRequest(op, input, &DetachVpnGatewayOutput{})
+	req := c.newRequest(op, input, &types.DetachVpnGatewayOutput{})
 	req.Handlers.Unmarshal.Remove(ec2query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return DetachVpnGatewayRequest{Request: req, Input: input, Copy: c.DetachVpnGatewayRequest}
@@ -107,8 +54,8 @@ func (c *Client) DetachVpnGatewayRequest(input *DetachVpnGatewayInput) DetachVpn
 // DetachVpnGateway API operation.
 type DetachVpnGatewayRequest struct {
 	*aws.Request
-	Input *DetachVpnGatewayInput
-	Copy  func(*DetachVpnGatewayInput) DetachVpnGatewayRequest
+	Input *types.DetachVpnGatewayInput
+	Copy  func(*types.DetachVpnGatewayInput) DetachVpnGatewayRequest
 }
 
 // Send marshals and sends the DetachVpnGateway API request.
@@ -120,7 +67,7 @@ func (r DetachVpnGatewayRequest) Send(ctx context.Context) (*DetachVpnGatewayRes
 	}
 
 	resp := &DetachVpnGatewayResponse{
-		DetachVpnGatewayOutput: r.Request.Data.(*DetachVpnGatewayOutput),
+		DetachVpnGatewayOutput: r.Request.Data.(*types.DetachVpnGatewayOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -130,7 +77,7 @@ func (r DetachVpnGatewayRequest) Send(ctx context.Context) (*DetachVpnGatewayRes
 // DetachVpnGatewayResponse is the response type for the
 // DetachVpnGateway API operation.
 type DetachVpnGatewayResponse struct {
-	*DetachVpnGatewayOutput
+	*types.DetachVpnGatewayOutput
 
 	response *aws.Response
 }

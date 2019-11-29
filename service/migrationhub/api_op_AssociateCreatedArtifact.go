@@ -6,79 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/migrationhub/types"
 )
-
-type AssociateCreatedArtifactInput struct {
-	_ struct{} `type:"structure"`
-
-	// An ARN of the AWS resource related to the migration (e.g., AMI, EC2 instance,
-	// RDS instance, etc.)
-	//
-	// CreatedArtifact is a required field
-	CreatedArtifact *CreatedArtifact `type:"structure" required:"true"`
-
-	// Optional boolean flag to indicate whether any effect should take place. Used
-	// to test if the caller has permission to make the call.
-	DryRun *bool `type:"boolean"`
-
-	// Unique identifier that references the migration task.
-	//
-	// MigrationTaskName is a required field
-	MigrationTaskName *string `min:"1" type:"string" required:"true"`
-
-	// The name of the ProgressUpdateStream.
-	//
-	// ProgressUpdateStream is a required field
-	ProgressUpdateStream *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s AssociateCreatedArtifactInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *AssociateCreatedArtifactInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "AssociateCreatedArtifactInput"}
-
-	if s.CreatedArtifact == nil {
-		invalidParams.Add(aws.NewErrParamRequired("CreatedArtifact"))
-	}
-
-	if s.MigrationTaskName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("MigrationTaskName"))
-	}
-	if s.MigrationTaskName != nil && len(*s.MigrationTaskName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("MigrationTaskName", 1))
-	}
-
-	if s.ProgressUpdateStream == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ProgressUpdateStream"))
-	}
-	if s.ProgressUpdateStream != nil && len(*s.ProgressUpdateStream) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ProgressUpdateStream", 1))
-	}
-	if s.CreatedArtifact != nil {
-		if err := s.CreatedArtifact.Validate(); err != nil {
-			invalidParams.AddNested("CreatedArtifact", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type AssociateCreatedArtifactOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s AssociateCreatedArtifactOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opAssociateCreatedArtifact = "AssociateCreatedArtifact"
 
@@ -107,7 +36,7 @@ const opAssociateCreatedArtifact = "AssociateCreatedArtifact"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/AssociateCreatedArtifact
-func (c *Client) AssociateCreatedArtifactRequest(input *AssociateCreatedArtifactInput) AssociateCreatedArtifactRequest {
+func (c *Client) AssociateCreatedArtifactRequest(input *types.AssociateCreatedArtifactInput) AssociateCreatedArtifactRequest {
 	op := &aws.Operation{
 		Name:       opAssociateCreatedArtifact,
 		HTTPMethod: "POST",
@@ -115,10 +44,10 @@ func (c *Client) AssociateCreatedArtifactRequest(input *AssociateCreatedArtifact
 	}
 
 	if input == nil {
-		input = &AssociateCreatedArtifactInput{}
+		input = &types.AssociateCreatedArtifactInput{}
 	}
 
-	req := c.newRequest(op, input, &AssociateCreatedArtifactOutput{})
+	req := c.newRequest(op, input, &types.AssociateCreatedArtifactOutput{})
 	return AssociateCreatedArtifactRequest{Request: req, Input: input, Copy: c.AssociateCreatedArtifactRequest}
 }
 
@@ -126,8 +55,8 @@ func (c *Client) AssociateCreatedArtifactRequest(input *AssociateCreatedArtifact
 // AssociateCreatedArtifact API operation.
 type AssociateCreatedArtifactRequest struct {
 	*aws.Request
-	Input *AssociateCreatedArtifactInput
-	Copy  func(*AssociateCreatedArtifactInput) AssociateCreatedArtifactRequest
+	Input *types.AssociateCreatedArtifactInput
+	Copy  func(*types.AssociateCreatedArtifactInput) AssociateCreatedArtifactRequest
 }
 
 // Send marshals and sends the AssociateCreatedArtifact API request.
@@ -139,7 +68,7 @@ func (r AssociateCreatedArtifactRequest) Send(ctx context.Context) (*AssociateCr
 	}
 
 	resp := &AssociateCreatedArtifactResponse{
-		AssociateCreatedArtifactOutput: r.Request.Data.(*AssociateCreatedArtifactOutput),
+		AssociateCreatedArtifactOutput: r.Request.Data.(*types.AssociateCreatedArtifactOutput),
 		response:                       &aws.Response{Request: r.Request},
 	}
 
@@ -149,7 +78,7 @@ func (r AssociateCreatedArtifactRequest) Send(ctx context.Context) (*AssociateCr
 // AssociateCreatedArtifactResponse is the response type for the
 // AssociateCreatedArtifact API operation.
 type AssociateCreatedArtifactResponse struct {
-	*AssociateCreatedArtifactOutput
+	*types.AssociateCreatedArtifactOutput
 
 	response *aws.Response
 }

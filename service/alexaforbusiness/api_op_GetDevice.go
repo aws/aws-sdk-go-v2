@@ -6,32 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/alexaforbusiness/types"
 )
-
-type GetDeviceInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ARN of the device for which to request details. Required.
-	DeviceArn *string `type:"string"`
-}
-
-// String returns the string representation
-func (s GetDeviceInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type GetDeviceOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The details of the device requested. Required.
-	Device *Device `type:"structure"`
-}
-
-// String returns the string representation
-func (s GetDeviceOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetDevice = "GetDevice"
 
@@ -48,7 +24,7 @@ const opGetDevice = "GetDevice"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/GetDevice
-func (c *Client) GetDeviceRequest(input *GetDeviceInput) GetDeviceRequest {
+func (c *Client) GetDeviceRequest(input *types.GetDeviceInput) GetDeviceRequest {
 	op := &aws.Operation{
 		Name:       opGetDevice,
 		HTTPMethod: "POST",
@@ -56,10 +32,10 @@ func (c *Client) GetDeviceRequest(input *GetDeviceInput) GetDeviceRequest {
 	}
 
 	if input == nil {
-		input = &GetDeviceInput{}
+		input = &types.GetDeviceInput{}
 	}
 
-	req := c.newRequest(op, input, &GetDeviceOutput{})
+	req := c.newRequest(op, input, &types.GetDeviceOutput{})
 	return GetDeviceRequest{Request: req, Input: input, Copy: c.GetDeviceRequest}
 }
 
@@ -67,8 +43,8 @@ func (c *Client) GetDeviceRequest(input *GetDeviceInput) GetDeviceRequest {
 // GetDevice API operation.
 type GetDeviceRequest struct {
 	*aws.Request
-	Input *GetDeviceInput
-	Copy  func(*GetDeviceInput) GetDeviceRequest
+	Input *types.GetDeviceInput
+	Copy  func(*types.GetDeviceInput) GetDeviceRequest
 }
 
 // Send marshals and sends the GetDevice API request.
@@ -80,7 +56,7 @@ func (r GetDeviceRequest) Send(ctx context.Context) (*GetDeviceResponse, error) 
 	}
 
 	resp := &GetDeviceResponse{
-		GetDeviceOutput: r.Request.Data.(*GetDeviceOutput),
+		GetDeviceOutput: r.Request.Data.(*types.GetDeviceOutput),
 		response:        &aws.Response{Request: r.Request},
 	}
 
@@ -90,7 +66,7 @@ func (r GetDeviceRequest) Send(ctx context.Context) (*GetDeviceResponse, error) 
 // GetDeviceResponse is the response type for the
 // GetDevice API operation.
 type GetDeviceResponse struct {
-	*GetDeviceOutput
+	*types.GetDeviceOutput
 
 	response *aws.Response
 }

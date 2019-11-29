@@ -4,76 +4,10 @@ package rds
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/rds/types"
 )
-
-type DescribeDBSubnetGroupsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the DB subnet group to return details for.
-	DBSubnetGroupName *string `type:"string"`
-
-	// This parameter is not currently supported.
-	Filters []Filter `locationNameList:"Filter" type:"list"`
-
-	// An optional pagination token provided by a previous DescribeDBSubnetGroups
-	// request. If this parameter is specified, the response includes only records
-	// beyond the marker, up to the value specified by MaxRecords.
-	Marker *string `type:"string"`
-
-	// The maximum number of records to include in the response. If more records
-	// exist than the specified MaxRecords value, a pagination token called a marker
-	// is included in the response so that you can retrieve the remaining results.
-	//
-	// Default: 100
-	//
-	// Constraints: Minimum 20, maximum 100.
-	MaxRecords *int64 `type:"integer"`
-}
-
-// String returns the string representation
-func (s DescribeDBSubnetGroupsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeDBSubnetGroupsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeDBSubnetGroupsInput"}
-	if s.Filters != nil {
-		for i, v := range s.Filters {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Contains the result of a successful invocation of the DescribeDBSubnetGroups
-// action.
-type DescribeDBSubnetGroupsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A list of DBSubnetGroup instances.
-	DBSubnetGroups []DBSubnetGroup `locationNameList:"DBSubnetGroup" type:"list"`
-
-	// An optional pagination token provided by a previous request. If this parameter
-	// is specified, the response includes only records beyond the marker, up to
-	// the value specified by MaxRecords.
-	Marker *string `type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeDBSubnetGroupsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeDBSubnetGroups = "DescribeDBSubnetGroups"
 
@@ -93,7 +27,7 @@ const opDescribeDBSubnetGroups = "DescribeDBSubnetGroups"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeDBSubnetGroups
-func (c *Client) DescribeDBSubnetGroupsRequest(input *DescribeDBSubnetGroupsInput) DescribeDBSubnetGroupsRequest {
+func (c *Client) DescribeDBSubnetGroupsRequest(input *types.DescribeDBSubnetGroupsInput) DescribeDBSubnetGroupsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeDBSubnetGroups,
 		HTTPMethod: "POST",
@@ -107,10 +41,10 @@ func (c *Client) DescribeDBSubnetGroupsRequest(input *DescribeDBSubnetGroupsInpu
 	}
 
 	if input == nil {
-		input = &DescribeDBSubnetGroupsInput{}
+		input = &types.DescribeDBSubnetGroupsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeDBSubnetGroupsOutput{})
+	req := c.newRequest(op, input, &types.DescribeDBSubnetGroupsOutput{})
 	return DescribeDBSubnetGroupsRequest{Request: req, Input: input, Copy: c.DescribeDBSubnetGroupsRequest}
 }
 
@@ -118,8 +52,8 @@ func (c *Client) DescribeDBSubnetGroupsRequest(input *DescribeDBSubnetGroupsInpu
 // DescribeDBSubnetGroups API operation.
 type DescribeDBSubnetGroupsRequest struct {
 	*aws.Request
-	Input *DescribeDBSubnetGroupsInput
-	Copy  func(*DescribeDBSubnetGroupsInput) DescribeDBSubnetGroupsRequest
+	Input *types.DescribeDBSubnetGroupsInput
+	Copy  func(*types.DescribeDBSubnetGroupsInput) DescribeDBSubnetGroupsRequest
 }
 
 // Send marshals and sends the DescribeDBSubnetGroups API request.
@@ -131,7 +65,7 @@ func (r DescribeDBSubnetGroupsRequest) Send(ctx context.Context) (*DescribeDBSub
 	}
 
 	resp := &DescribeDBSubnetGroupsResponse{
-		DescribeDBSubnetGroupsOutput: r.Request.Data.(*DescribeDBSubnetGroupsOutput),
+		DescribeDBSubnetGroupsOutput: r.Request.Data.(*types.DescribeDBSubnetGroupsOutput),
 		response:                     &aws.Response{Request: r.Request},
 	}
 
@@ -161,7 +95,7 @@ func NewDescribeDBSubnetGroupsPaginator(req DescribeDBSubnetGroupsRequest) Descr
 	return DescribeDBSubnetGroupsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *DescribeDBSubnetGroupsInput
+				var inCpy *types.DescribeDBSubnetGroupsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -181,14 +115,14 @@ type DescribeDBSubnetGroupsPaginator struct {
 	aws.Pager
 }
 
-func (p *DescribeDBSubnetGroupsPaginator) CurrentPage() *DescribeDBSubnetGroupsOutput {
-	return p.Pager.CurrentPage().(*DescribeDBSubnetGroupsOutput)
+func (p *DescribeDBSubnetGroupsPaginator) CurrentPage() *types.DescribeDBSubnetGroupsOutput {
+	return p.Pager.CurrentPage().(*types.DescribeDBSubnetGroupsOutput)
 }
 
 // DescribeDBSubnetGroupsResponse is the response type for the
 // DescribeDBSubnetGroups API operation.
 type DescribeDBSubnetGroupsResponse struct {
-	*DescribeDBSubnetGroupsOutput
+	*types.DescribeDBSubnetGroupsOutput
 
 	response *aws.Response
 }

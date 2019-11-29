@@ -6,59 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/service/waf"
+	"github.com/aws/aws-sdk-go-v2/service/wafregional/types"
 )
-
-type ListIPSetsInput struct {
-	_ struct{} `type:"structure"`
-
-	// Specifies the number of IPSet objects that you want AWS WAF to return for
-	// this request. If you have more IPSet objects than the number you specify
-	// for Limit, the response includes a NextMarker value that you can use to get
-	// another batch of IPSet objects.
-	Limit *int64 `type:"integer"`
-
-	// AWS WAF returns a NextMarker value in the response that allows you to list
-	// another group of IPSets. For the second and subsequent ListIPSets requests,
-	// specify the value of NextMarker from the previous response to get information
-	// about another batch of IPSets.
-	NextMarker *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s ListIPSetsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListIPSetsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListIPSetsInput"}
-	if s.NextMarker != nil && len(*s.NextMarker) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("NextMarker", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ListIPSetsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// An array of IPSetSummary objects.
-	IPSets []waf.IPSetSummary `type:"list"`
-
-	// To list more IPSet objects, submit another ListIPSets request, and in the
-	// next request use the NextMarker response value as the NextMarker value.
-	NextMarker *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s ListIPSetsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListIPSets = "ListIPSets"
 
@@ -75,7 +24,7 @@ const opListIPSets = "ListIPSets"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/ListIPSets
-func (c *Client) ListIPSetsRequest(input *ListIPSetsInput) ListIPSetsRequest {
+func (c *Client) ListIPSetsRequest(input *types.ListIPSetsInput) ListIPSetsRequest {
 	op := &aws.Operation{
 		Name:       opListIPSets,
 		HTTPMethod: "POST",
@@ -83,10 +32,10 @@ func (c *Client) ListIPSetsRequest(input *ListIPSetsInput) ListIPSetsRequest {
 	}
 
 	if input == nil {
-		input = &ListIPSetsInput{}
+		input = &types.ListIPSetsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListIPSetsOutput{})
+	req := c.newRequest(op, input, &types.ListIPSetsOutput{})
 	return ListIPSetsRequest{Request: req, Input: input, Copy: c.ListIPSetsRequest}
 }
 
@@ -94,8 +43,8 @@ func (c *Client) ListIPSetsRequest(input *ListIPSetsInput) ListIPSetsRequest {
 // ListIPSets API operation.
 type ListIPSetsRequest struct {
 	*aws.Request
-	Input *ListIPSetsInput
-	Copy  func(*ListIPSetsInput) ListIPSetsRequest
+	Input *types.ListIPSetsInput
+	Copy  func(*types.ListIPSetsInput) ListIPSetsRequest
 }
 
 // Send marshals and sends the ListIPSets API request.
@@ -107,7 +56,7 @@ func (r ListIPSetsRequest) Send(ctx context.Context) (*ListIPSetsResponse, error
 	}
 
 	resp := &ListIPSetsResponse{
-		ListIPSetsOutput: r.Request.Data.(*ListIPSetsOutput),
+		ListIPSetsOutput: r.Request.Data.(*types.ListIPSetsOutput),
 		response:         &aws.Response{Request: r.Request},
 	}
 
@@ -117,7 +66,7 @@ func (r ListIPSetsRequest) Send(ctx context.Context) (*ListIPSetsResponse, error
 // ListIPSetsResponse is the response type for the
 // ListIPSets API operation.
 type ListIPSetsResponse struct {
-	*ListIPSetsOutput
+	*types.ListIPSetsOutput
 
 	response *aws.Response
 }

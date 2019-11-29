@@ -6,47 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
+	"github.com/aws/aws-sdk-go-v2/service/opsworks/types"
 )
-
-type StartStackInput struct {
-	_ struct{} `type:"structure"`
-
-	// The stack ID.
-	//
-	// StackId is a required field
-	StackId *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s StartStackInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *StartStackInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "StartStackInput"}
-
-	if s.StackId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("StackId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type StartStackOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s StartStackOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opStartStack = "StartStack"
 
@@ -68,7 +31,7 @@ const opStartStack = "StartStack"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/StartStack
-func (c *Client) StartStackRequest(input *StartStackInput) StartStackRequest {
+func (c *Client) StartStackRequest(input *types.StartStackInput) StartStackRequest {
 	op := &aws.Operation{
 		Name:       opStartStack,
 		HTTPMethod: "POST",
@@ -76,10 +39,10 @@ func (c *Client) StartStackRequest(input *StartStackInput) StartStackRequest {
 	}
 
 	if input == nil {
-		input = &StartStackInput{}
+		input = &types.StartStackInput{}
 	}
 
-	req := c.newRequest(op, input, &StartStackOutput{})
+	req := c.newRequest(op, input, &types.StartStackOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return StartStackRequest{Request: req, Input: input, Copy: c.StartStackRequest}
@@ -89,8 +52,8 @@ func (c *Client) StartStackRequest(input *StartStackInput) StartStackRequest {
 // StartStack API operation.
 type StartStackRequest struct {
 	*aws.Request
-	Input *StartStackInput
-	Copy  func(*StartStackInput) StartStackRequest
+	Input *types.StartStackInput
+	Copy  func(*types.StartStackInput) StartStackRequest
 }
 
 // Send marshals and sends the StartStack API request.
@@ -102,7 +65,7 @@ func (r StartStackRequest) Send(ctx context.Context) (*StartStackResponse, error
 	}
 
 	resp := &StartStackResponse{
-		StartStackOutput: r.Request.Data.(*StartStackOutput),
+		StartStackOutput: r.Request.Data.(*types.StartStackOutput),
 		response:         &aws.Response{Request: r.Request},
 	}
 
@@ -112,7 +75,7 @@ func (r StartStackRequest) Send(ctx context.Context) (*StartStackResponse, error
 // StartStackResponse is the response type for the
 // StartStack API operation.
 type StartStackResponse struct {
-	*StartStackOutput
+	*types.StartStackOutput
 
 	response *aws.Response
 }

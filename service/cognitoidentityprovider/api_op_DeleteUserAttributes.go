@@ -6,59 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/types"
 )
-
-// Represents the request to delete user attributes.
-type DeleteUserAttributesInput struct {
-	_ struct{} `type:"structure"`
-
-	// The access token used in the request to delete user attributes.
-	//
-	// AccessToken is a required field
-	AccessToken *string `type:"string" required:"true" sensitive:"true"`
-
-	// An array of strings representing the user attribute names you wish to delete.
-	//
-	// For custom attributes, you must prepend the custom: prefix to the attribute
-	// name.
-	//
-	// UserAttributeNames is a required field
-	UserAttributeNames []string `type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteUserAttributesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteUserAttributesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteUserAttributesInput"}
-
-	if s.AccessToken == nil {
-		invalidParams.Add(aws.NewErrParamRequired("AccessToken"))
-	}
-
-	if s.UserAttributeNames == nil {
-		invalidParams.Add(aws.NewErrParamRequired("UserAttributeNames"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Represents the response from the server to delete user attributes.
-type DeleteUserAttributesOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteUserAttributesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteUserAttributes = "DeleteUserAttributes"
 
@@ -75,7 +24,7 @@ const opDeleteUserAttributes = "DeleteUserAttributes"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/DeleteUserAttributes
-func (c *Client) DeleteUserAttributesRequest(input *DeleteUserAttributesInput) DeleteUserAttributesRequest {
+func (c *Client) DeleteUserAttributesRequest(input *types.DeleteUserAttributesInput) DeleteUserAttributesRequest {
 	op := &aws.Operation{
 		Name:       opDeleteUserAttributes,
 		HTTPMethod: "POST",
@@ -83,10 +32,10 @@ func (c *Client) DeleteUserAttributesRequest(input *DeleteUserAttributesInput) D
 	}
 
 	if input == nil {
-		input = &DeleteUserAttributesInput{}
+		input = &types.DeleteUserAttributesInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteUserAttributesOutput{})
+	req := c.newRequest(op, input, &types.DeleteUserAttributesOutput{})
 	req.Config.Credentials = aws.AnonymousCredentials
 	return DeleteUserAttributesRequest{Request: req, Input: input, Copy: c.DeleteUserAttributesRequest}
 }
@@ -95,8 +44,8 @@ func (c *Client) DeleteUserAttributesRequest(input *DeleteUserAttributesInput) D
 // DeleteUserAttributes API operation.
 type DeleteUserAttributesRequest struct {
 	*aws.Request
-	Input *DeleteUserAttributesInput
-	Copy  func(*DeleteUserAttributesInput) DeleteUserAttributesRequest
+	Input *types.DeleteUserAttributesInput
+	Copy  func(*types.DeleteUserAttributesInput) DeleteUserAttributesRequest
 }
 
 // Send marshals and sends the DeleteUserAttributes API request.
@@ -108,7 +57,7 @@ func (r DeleteUserAttributesRequest) Send(ctx context.Context) (*DeleteUserAttri
 	}
 
 	resp := &DeleteUserAttributesResponse{
-		DeleteUserAttributesOutput: r.Request.Data.(*DeleteUserAttributesOutput),
+		DeleteUserAttributesOutput: r.Request.Data.(*types.DeleteUserAttributesOutput),
 		response:                   &aws.Response{Request: r.Request},
 	}
 
@@ -118,7 +67,7 @@ func (r DeleteUserAttributesRequest) Send(ctx context.Context) (*DeleteUserAttri
 // DeleteUserAttributesResponse is the response type for the
 // DeleteUserAttributes API operation.
 type DeleteUserAttributesResponse struct {
-	*DeleteUserAttributesOutput
+	*types.DeleteUserAttributesOutput
 
 	response *aws.Response
 }

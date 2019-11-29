@@ -6,162 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/medialive/types"
 )
-
-type ListOfferingsInput struct {
-	_ struct{} `type:"structure"`
-
-	ChannelClass *string `location:"querystring" locationName:"channelClass" type:"string"`
-
-	ChannelConfiguration *string `location:"querystring" locationName:"channelConfiguration" type:"string"`
-
-	Codec *string `location:"querystring" locationName:"codec" type:"string"`
-
-	MaxResults *int64 `location:"querystring" locationName:"maxResults" min:"1" type:"integer"`
-
-	MaximumBitrate *string `location:"querystring" locationName:"maximumBitrate" type:"string"`
-
-	MaximumFramerate *string `location:"querystring" locationName:"maximumFramerate" type:"string"`
-
-	NextToken *string `location:"querystring" locationName:"nextToken" type:"string"`
-
-	Resolution *string `location:"querystring" locationName:"resolution" type:"string"`
-
-	ResourceType *string `location:"querystring" locationName:"resourceType" type:"string"`
-
-	SpecialFeature *string `location:"querystring" locationName:"specialFeature" type:"string"`
-
-	VideoQuality *string `location:"querystring" locationName:"videoQuality" type:"string"`
-}
-
-// String returns the string representation
-func (s ListOfferingsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListOfferingsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListOfferingsInput"}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListOfferingsInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.ChannelClass != nil {
-		v := *s.ChannelClass
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "channelClass", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.ChannelConfiguration != nil {
-		v := *s.ChannelConfiguration
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "channelConfiguration", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Codec != nil {
-		v := *s.Codec
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "codec", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.MaxResults != nil {
-		v := *s.MaxResults
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "maxResults", protocol.Int64Value(v), metadata)
-	}
-	if s.MaximumBitrate != nil {
-		v := *s.MaximumBitrate
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "maximumBitrate", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.MaximumFramerate != nil {
-		v := *s.MaximumFramerate
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "maximumFramerate", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Resolution != nil {
-		v := *s.Resolution
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "resolution", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.ResourceType != nil {
-		v := *s.ResourceType
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "resourceType", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.SpecialFeature != nil {
-		v := *s.SpecialFeature
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "specialFeature", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.VideoQuality != nil {
-		v := *s.VideoQuality
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "videoQuality", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type ListOfferingsOutput struct {
-	_ struct{} `type:"structure"`
-
-	NextToken *string `locationName:"nextToken" type:"string"`
-
-	Offerings []Offering `locationName:"offerings" type:"list"`
-}
-
-// String returns the string representation
-func (s ListOfferingsOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListOfferingsOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Offerings != nil {
-		v := s.Offerings
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "offerings", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	return nil
-}
 
 const opListOfferings = "ListOfferings"
 
@@ -178,7 +24,7 @@ const opListOfferings = "ListOfferings"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/ListOfferings
-func (c *Client) ListOfferingsRequest(input *ListOfferingsInput) ListOfferingsRequest {
+func (c *Client) ListOfferingsRequest(input *types.ListOfferingsInput) ListOfferingsRequest {
 	op := &aws.Operation{
 		Name:       opListOfferings,
 		HTTPMethod: "GET",
@@ -192,10 +38,10 @@ func (c *Client) ListOfferingsRequest(input *ListOfferingsInput) ListOfferingsRe
 	}
 
 	if input == nil {
-		input = &ListOfferingsInput{}
+		input = &types.ListOfferingsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListOfferingsOutput{})
+	req := c.newRequest(op, input, &types.ListOfferingsOutput{})
 	return ListOfferingsRequest{Request: req, Input: input, Copy: c.ListOfferingsRequest}
 }
 
@@ -203,8 +49,8 @@ func (c *Client) ListOfferingsRequest(input *ListOfferingsInput) ListOfferingsRe
 // ListOfferings API operation.
 type ListOfferingsRequest struct {
 	*aws.Request
-	Input *ListOfferingsInput
-	Copy  func(*ListOfferingsInput) ListOfferingsRequest
+	Input *types.ListOfferingsInput
+	Copy  func(*types.ListOfferingsInput) ListOfferingsRequest
 }
 
 // Send marshals and sends the ListOfferings API request.
@@ -216,7 +62,7 @@ func (r ListOfferingsRequest) Send(ctx context.Context) (*ListOfferingsResponse,
 	}
 
 	resp := &ListOfferingsResponse{
-		ListOfferingsOutput: r.Request.Data.(*ListOfferingsOutput),
+		ListOfferingsOutput: r.Request.Data.(*types.ListOfferingsOutput),
 		response:            &aws.Response{Request: r.Request},
 	}
 
@@ -246,7 +92,7 @@ func NewListOfferingsPaginator(req ListOfferingsRequest) ListOfferingsPaginator 
 	return ListOfferingsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListOfferingsInput
+				var inCpy *types.ListOfferingsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -266,14 +112,14 @@ type ListOfferingsPaginator struct {
 	aws.Pager
 }
 
-func (p *ListOfferingsPaginator) CurrentPage() *ListOfferingsOutput {
-	return p.Pager.CurrentPage().(*ListOfferingsOutput)
+func (p *ListOfferingsPaginator) CurrentPage() *types.ListOfferingsOutput {
+	return p.Pager.CurrentPage().(*types.ListOfferingsOutput)
 }
 
 // ListOfferingsResponse is the response type for the
 // ListOfferings API operation.
 type ListOfferingsResponse struct {
-	*ListOfferingsOutput
+	*types.ListOfferingsOutput
 
 	response *aws.Response
 }

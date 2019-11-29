@@ -6,51 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/types"
 )
-
-type SetUserMFAPreferenceInput struct {
-	_ struct{} `type:"structure"`
-
-	// The access token for the user.
-	//
-	// AccessToken is a required field
-	AccessToken *string `type:"string" required:"true" sensitive:"true"`
-
-	// The SMS text message multi-factor authentication (MFA) settings.
-	SMSMfaSettings *SMSMfaSettingsType `type:"structure"`
-
-	// The time-based one-time password software token MFA settings.
-	SoftwareTokenMfaSettings *SoftwareTokenMfaSettingsType `type:"structure"`
-}
-
-// String returns the string representation
-func (s SetUserMFAPreferenceInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *SetUserMFAPreferenceInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "SetUserMFAPreferenceInput"}
-
-	if s.AccessToken == nil {
-		invalidParams.Add(aws.NewErrParamRequired("AccessToken"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type SetUserMFAPreferenceOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s SetUserMFAPreferenceOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opSetUserMFAPreference = "SetUserMFAPreference"
 
@@ -72,7 +29,7 @@ const opSetUserMFAPreference = "SetUserMFAPreference"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/SetUserMFAPreference
-func (c *Client) SetUserMFAPreferenceRequest(input *SetUserMFAPreferenceInput) SetUserMFAPreferenceRequest {
+func (c *Client) SetUserMFAPreferenceRequest(input *types.SetUserMFAPreferenceInput) SetUserMFAPreferenceRequest {
 	op := &aws.Operation{
 		Name:       opSetUserMFAPreference,
 		HTTPMethod: "POST",
@@ -80,10 +37,10 @@ func (c *Client) SetUserMFAPreferenceRequest(input *SetUserMFAPreferenceInput) S
 	}
 
 	if input == nil {
-		input = &SetUserMFAPreferenceInput{}
+		input = &types.SetUserMFAPreferenceInput{}
 	}
 
-	req := c.newRequest(op, input, &SetUserMFAPreferenceOutput{})
+	req := c.newRequest(op, input, &types.SetUserMFAPreferenceOutput{})
 	return SetUserMFAPreferenceRequest{Request: req, Input: input, Copy: c.SetUserMFAPreferenceRequest}
 }
 
@@ -91,8 +48,8 @@ func (c *Client) SetUserMFAPreferenceRequest(input *SetUserMFAPreferenceInput) S
 // SetUserMFAPreference API operation.
 type SetUserMFAPreferenceRequest struct {
 	*aws.Request
-	Input *SetUserMFAPreferenceInput
-	Copy  func(*SetUserMFAPreferenceInput) SetUserMFAPreferenceRequest
+	Input *types.SetUserMFAPreferenceInput
+	Copy  func(*types.SetUserMFAPreferenceInput) SetUserMFAPreferenceRequest
 }
 
 // Send marshals and sends the SetUserMFAPreference API request.
@@ -104,7 +61,7 @@ func (r SetUserMFAPreferenceRequest) Send(ctx context.Context) (*SetUserMFAPrefe
 	}
 
 	resp := &SetUserMFAPreferenceResponse{
-		SetUserMFAPreferenceOutput: r.Request.Data.(*SetUserMFAPreferenceOutput),
+		SetUserMFAPreferenceOutput: r.Request.Data.(*types.SetUserMFAPreferenceOutput),
 		response:                   &aws.Response{Request: r.Request},
 	}
 
@@ -114,7 +71,7 @@ func (r SetUserMFAPreferenceRequest) Send(ctx context.Context) (*SetUserMFAPrefe
 // SetUserMFAPreferenceResponse is the response type for the
 // SetUserMFAPreference API operation.
 type SetUserMFAPreferenceResponse struct {
-	*SetUserMFAPreferenceOutput
+	*types.SetUserMFAPreferenceOutput
 
 	response *aws.Response
 }

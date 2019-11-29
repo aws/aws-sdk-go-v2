@@ -6,62 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/medialive/types"
 )
-
-type DeleteInputSecurityGroupInput struct {
-	_ struct{} `type:"structure"`
-
-	// InputSecurityGroupId is a required field
-	InputSecurityGroupId *string `location:"uri" locationName:"inputSecurityGroupId" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteInputSecurityGroupInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteInputSecurityGroupInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteInputSecurityGroupInput"}
-
-	if s.InputSecurityGroupId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("InputSecurityGroupId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteInputSecurityGroupInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.InputSecurityGroupId != nil {
-		v := *s.InputSecurityGroupId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "inputSecurityGroupId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type DeleteInputSecurityGroupOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteInputSecurityGroupOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteInputSecurityGroupOutput) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
 
 const opDeleteInputSecurityGroup = "DeleteInputSecurityGroup"
 
@@ -78,7 +24,7 @@ const opDeleteInputSecurityGroup = "DeleteInputSecurityGroup"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/DeleteInputSecurityGroup
-func (c *Client) DeleteInputSecurityGroupRequest(input *DeleteInputSecurityGroupInput) DeleteInputSecurityGroupRequest {
+func (c *Client) DeleteInputSecurityGroupRequest(input *types.DeleteInputSecurityGroupInput) DeleteInputSecurityGroupRequest {
 	op := &aws.Operation{
 		Name:       opDeleteInputSecurityGroup,
 		HTTPMethod: "DELETE",
@@ -86,10 +32,10 @@ func (c *Client) DeleteInputSecurityGroupRequest(input *DeleteInputSecurityGroup
 	}
 
 	if input == nil {
-		input = &DeleteInputSecurityGroupInput{}
+		input = &types.DeleteInputSecurityGroupInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteInputSecurityGroupOutput{})
+	req := c.newRequest(op, input, &types.DeleteInputSecurityGroupOutput{})
 	return DeleteInputSecurityGroupRequest{Request: req, Input: input, Copy: c.DeleteInputSecurityGroupRequest}
 }
 
@@ -97,8 +43,8 @@ func (c *Client) DeleteInputSecurityGroupRequest(input *DeleteInputSecurityGroup
 // DeleteInputSecurityGroup API operation.
 type DeleteInputSecurityGroupRequest struct {
 	*aws.Request
-	Input *DeleteInputSecurityGroupInput
-	Copy  func(*DeleteInputSecurityGroupInput) DeleteInputSecurityGroupRequest
+	Input *types.DeleteInputSecurityGroupInput
+	Copy  func(*types.DeleteInputSecurityGroupInput) DeleteInputSecurityGroupRequest
 }
 
 // Send marshals and sends the DeleteInputSecurityGroup API request.
@@ -110,7 +56,7 @@ func (r DeleteInputSecurityGroupRequest) Send(ctx context.Context) (*DeleteInput
 	}
 
 	resp := &DeleteInputSecurityGroupResponse{
-		DeleteInputSecurityGroupOutput: r.Request.Data.(*DeleteInputSecurityGroupOutput),
+		DeleteInputSecurityGroupOutput: r.Request.Data.(*types.DeleteInputSecurityGroupOutput),
 		response:                       &aws.Response{Request: r.Request},
 	}
 
@@ -120,7 +66,7 @@ func (r DeleteInputSecurityGroupRequest) Send(ctx context.Context) (*DeleteInput
 // DeleteInputSecurityGroupResponse is the response type for the
 // DeleteInputSecurityGroup API operation.
 type DeleteInputSecurityGroupResponse struct {
-	*DeleteInputSecurityGroupOutput
+	*types.DeleteInputSecurityGroupOutput
 
 	response *aws.Response
 }

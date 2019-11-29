@@ -6,78 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/route53/types"
 )
-
-// The input for a GetChange request.
-type GetChangeInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the change batch request. The value that you specify here is the
-	// value that ChangeResourceRecordSets returned in the Id element when you submitted
-	// the request.
-	//
-	// Id is a required field
-	Id *string `location:"uri" locationName:"Id" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetChangeInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetChangeInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetChangeInput"}
-
-	if s.Id == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Id"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetChangeInput) MarshalFields(e protocol.FieldEncoder) error {
-
-	if s.Id != nil {
-		v := *s.Id
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "Id", protocol.StringValue(v), metadata)
-	}
-	return nil
-}
-
-// A complex type that contains the ChangeInfo element.
-type GetChangeOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A complex type that contains information about the specified change batch.
-	//
-	// ChangeInfo is a required field
-	ChangeInfo *ChangeInfo `type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s GetChangeOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetChangeOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.ChangeInfo != nil {
-		v := s.ChangeInfo
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "ChangeInfo", v, metadata)
-	}
-	return nil
-}
 
 const opGetChange = "GetChange"
 
@@ -102,7 +32,7 @@ const opGetChange = "GetChange"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/GetChange
-func (c *Client) GetChangeRequest(input *GetChangeInput) GetChangeRequest {
+func (c *Client) GetChangeRequest(input *types.GetChangeInput) GetChangeRequest {
 	op := &aws.Operation{
 		Name:       opGetChange,
 		HTTPMethod: "GET",
@@ -110,10 +40,10 @@ func (c *Client) GetChangeRequest(input *GetChangeInput) GetChangeRequest {
 	}
 
 	if input == nil {
-		input = &GetChangeInput{}
+		input = &types.GetChangeInput{}
 	}
 
-	req := c.newRequest(op, input, &GetChangeOutput{})
+	req := c.newRequest(op, input, &types.GetChangeOutput{})
 	return GetChangeRequest{Request: req, Input: input, Copy: c.GetChangeRequest}
 }
 
@@ -121,8 +51,8 @@ func (c *Client) GetChangeRequest(input *GetChangeInput) GetChangeRequest {
 // GetChange API operation.
 type GetChangeRequest struct {
 	*aws.Request
-	Input *GetChangeInput
-	Copy  func(*GetChangeInput) GetChangeRequest
+	Input *types.GetChangeInput
+	Copy  func(*types.GetChangeInput) GetChangeRequest
 }
 
 // Send marshals and sends the GetChange API request.
@@ -134,7 +64,7 @@ func (r GetChangeRequest) Send(ctx context.Context) (*GetChangeResponse, error) 
 	}
 
 	resp := &GetChangeResponse{
-		GetChangeOutput: r.Request.Data.(*GetChangeOutput),
+		GetChangeOutput: r.Request.Data.(*types.GetChangeOutput),
 		response:        &aws.Response{Request: r.Request},
 	}
 
@@ -144,7 +74,7 @@ func (r GetChangeRequest) Send(ctx context.Context) (*GetChangeResponse, error) 
 // GetChangeResponse is the response type for the
 // GetChange API operation.
 type GetChangeResponse struct {
-	*GetChangeOutput
+	*types.GetChangeOutput
 
 	response *aws.Response
 }

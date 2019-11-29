@@ -6,88 +6,18 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/s3/types"
 )
-
-type GetObjectLockConfigurationInput struct {
-	_ struct{} `type:"structure"`
-
-	// The bucket whose object lock configuration you want to retrieve.
-	//
-	// Bucket is a required field
-	Bucket *string `location:"uri" locationName:"Bucket" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetObjectLockConfigurationInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetObjectLockConfigurationInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetObjectLockConfigurationInput"}
-
-	if s.Bucket == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Bucket"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-func (s *GetObjectLockConfigurationInput) getBucket() (v string) {
-	if s.Bucket == nil {
-		return v
-	}
-	return *s.Bucket
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetObjectLockConfigurationInput) MarshalFields(e protocol.FieldEncoder) error {
-
-	if s.Bucket != nil {
-		v := *s.Bucket
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "Bucket", protocol.StringValue(v), metadata)
-	}
-	return nil
-}
-
-type GetObjectLockConfigurationOutput struct {
-	_ struct{} `type:"structure" payload:"ObjectLockConfiguration"`
-
-	// The specified bucket's object lock configuration.
-	ObjectLockConfiguration *ObjectLockConfiguration `type:"structure"`
-}
-
-// String returns the string representation
-func (s GetObjectLockConfigurationOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetObjectLockConfigurationOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.ObjectLockConfiguration != nil {
-		v := s.ObjectLockConfiguration
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.PayloadTarget, "ObjectLockConfiguration", v, metadata)
-	}
-	return nil
-}
 
 const opGetObjectLockConfiguration = "GetObjectLockConfiguration"
 
 // GetObjectLockConfigurationRequest returns a request value for making API operation for
 // Amazon Simple Storage Service.
 //
-// Gets the object lock configuration for a bucket. The rule specified in the
-// object lock configuration will be applied by default to every new object
-// placed in the specified bucket.
+// Gets the Object Lock configuration for a bucket. The rule specified in the
+// Object Lock configuration will be applied by default to every new object
+// placed in the specified bucket. For more information, see Locking Objects
+// (https://docs.aws.amazon.com/AmazonS3/latest/dev/object-lock.html).
 //
 //    // Example sending a request using GetObjectLockConfigurationRequest.
 //    req := client.GetObjectLockConfigurationRequest(params)
@@ -97,7 +27,7 @@ const opGetObjectLockConfiguration = "GetObjectLockConfiguration"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetObjectLockConfiguration
-func (c *Client) GetObjectLockConfigurationRequest(input *GetObjectLockConfigurationInput) GetObjectLockConfigurationRequest {
+func (c *Client) GetObjectLockConfigurationRequest(input *types.GetObjectLockConfigurationInput) GetObjectLockConfigurationRequest {
 	op := &aws.Operation{
 		Name:       opGetObjectLockConfiguration,
 		HTTPMethod: "GET",
@@ -105,10 +35,10 @@ func (c *Client) GetObjectLockConfigurationRequest(input *GetObjectLockConfigura
 	}
 
 	if input == nil {
-		input = &GetObjectLockConfigurationInput{}
+		input = &types.GetObjectLockConfigurationInput{}
 	}
 
-	req := c.newRequest(op, input, &GetObjectLockConfigurationOutput{})
+	req := c.newRequest(op, input, &types.GetObjectLockConfigurationOutput{})
 	return GetObjectLockConfigurationRequest{Request: req, Input: input, Copy: c.GetObjectLockConfigurationRequest}
 }
 
@@ -116,8 +46,8 @@ func (c *Client) GetObjectLockConfigurationRequest(input *GetObjectLockConfigura
 // GetObjectLockConfiguration API operation.
 type GetObjectLockConfigurationRequest struct {
 	*aws.Request
-	Input *GetObjectLockConfigurationInput
-	Copy  func(*GetObjectLockConfigurationInput) GetObjectLockConfigurationRequest
+	Input *types.GetObjectLockConfigurationInput
+	Copy  func(*types.GetObjectLockConfigurationInput) GetObjectLockConfigurationRequest
 }
 
 // Send marshals and sends the GetObjectLockConfiguration API request.
@@ -129,7 +59,7 @@ func (r GetObjectLockConfigurationRequest) Send(ctx context.Context) (*GetObject
 	}
 
 	resp := &GetObjectLockConfigurationResponse{
-		GetObjectLockConfigurationOutput: r.Request.Data.(*GetObjectLockConfigurationOutput),
+		GetObjectLockConfigurationOutput: r.Request.Data.(*types.GetObjectLockConfigurationOutput),
 		response:                         &aws.Response{Request: r.Request},
 	}
 
@@ -139,7 +69,7 @@ func (r GetObjectLockConfigurationRequest) Send(ctx context.Context) (*GetObject
 // GetObjectLockConfigurationResponse is the response type for the
 // GetObjectLockConfiguration API operation.
 type GetObjectLockConfigurationResponse struct {
-	*GetObjectLockConfigurationOutput
+	*types.GetObjectLockConfigurationOutput
 
 	response *aws.Response
 }

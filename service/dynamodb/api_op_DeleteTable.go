@@ -6,53 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/dynamodb/types"
 )
-
-// Represents the input of a DeleteTable operation.
-type DeleteTableInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the table to delete.
-	//
-	// TableName is a required field
-	TableName *string `min:"3" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteTableInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteTableInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteTableInput"}
-
-	if s.TableName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("TableName"))
-	}
-	if s.TableName != nil && len(*s.TableName) < 3 {
-		invalidParams.Add(aws.NewErrParamMinLen("TableName", 3))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Represents the output of a DeleteTable operation.
-type DeleteTableOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Represents the properties of a table.
-	TableDescription *TableDescription `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteTableOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteTable = "DeleteTable"
 
@@ -86,7 +41,7 @@ const opDeleteTable = "DeleteTable"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/DeleteTable
-func (c *Client) DeleteTableRequest(input *DeleteTableInput) DeleteTableRequest {
+func (c *Client) DeleteTableRequest(input *types.DeleteTableInput) DeleteTableRequest {
 	op := &aws.Operation{
 		Name:       opDeleteTable,
 		HTTPMethod: "POST",
@@ -94,10 +49,10 @@ func (c *Client) DeleteTableRequest(input *DeleteTableInput) DeleteTableRequest 
 	}
 
 	if input == nil {
-		input = &DeleteTableInput{}
+		input = &types.DeleteTableInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteTableOutput{})
+	req := c.newRequest(op, input, &types.DeleteTableOutput{})
 	return DeleteTableRequest{Request: req, Input: input, Copy: c.DeleteTableRequest}
 }
 
@@ -105,8 +60,8 @@ func (c *Client) DeleteTableRequest(input *DeleteTableInput) DeleteTableRequest 
 // DeleteTable API operation.
 type DeleteTableRequest struct {
 	*aws.Request
-	Input *DeleteTableInput
-	Copy  func(*DeleteTableInput) DeleteTableRequest
+	Input *types.DeleteTableInput
+	Copy  func(*types.DeleteTableInput) DeleteTableRequest
 }
 
 // Send marshals and sends the DeleteTable API request.
@@ -118,7 +73,7 @@ func (r DeleteTableRequest) Send(ctx context.Context) (*DeleteTableResponse, err
 	}
 
 	resp := &DeleteTableResponse{
-		DeleteTableOutput: r.Request.Data.(*DeleteTableOutput),
+		DeleteTableOutput: r.Request.Data.(*types.DeleteTableOutput),
 		response:          &aws.Response{Request: r.Request},
 	}
 
@@ -128,7 +83,7 @@ func (r DeleteTableRequest) Send(ctx context.Context) (*DeleteTableResponse, err
 // DeleteTableResponse is the response type for the
 // DeleteTable API operation.
 type DeleteTableResponse struct {
-	*DeleteTableOutput
+	*types.DeleteTableOutput
 
 	response *aws.Response
 }

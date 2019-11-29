@@ -6,77 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/directconnect/types"
 )
-
-type DeleteVirtualInterfaceInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the virtual interface.
-	//
-	// VirtualInterfaceId is a required field
-	VirtualInterfaceId *string `locationName:"virtualInterfaceId" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteVirtualInterfaceInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteVirtualInterfaceInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteVirtualInterfaceInput"}
-
-	if s.VirtualInterfaceId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("VirtualInterfaceId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteVirtualInterfaceOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The state of the virtual interface. The following are the possible values:
-	//
-	//    * confirming: The creation of the virtual interface is pending confirmation
-	//    from the virtual interface owner. If the owner of the virtual interface
-	//    is different from the owner of the connection on which it is provisioned,
-	//    then the virtual interface will remain in this state until it is confirmed
-	//    by the virtual interface owner.
-	//
-	//    * verifying: This state only applies to public virtual interfaces. Each
-	//    public virtual interface needs validation before the virtual interface
-	//    can be created.
-	//
-	//    * pending: A virtual interface is in this state from the time that it
-	//    is created until the virtual interface is ready to forward traffic.
-	//
-	//    * available: A virtual interface that is able to forward traffic.
-	//
-	//    * down: A virtual interface that is BGP down.
-	//
-	//    * deleting: A virtual interface is in this state immediately after calling
-	//    DeleteVirtualInterface until it can no longer forward traffic.
-	//
-	//    * deleted: A virtual interface that cannot forward traffic.
-	//
-	//    * rejected: The virtual interface owner has declined creation of the virtual
-	//    interface. If a virtual interface in the Confirming state is deleted by
-	//    the virtual interface owner, the virtual interface enters the Rejected
-	//    state.
-	//
-	//    * unknown: The state of the virtual interface is not available.
-	VirtualInterfaceState VirtualInterfaceState `locationName:"virtualInterfaceState" type:"string" enum:"true"`
-}
-
-// String returns the string representation
-func (s DeleteVirtualInterfaceOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteVirtualInterface = "DeleteVirtualInterface"
 
@@ -93,7 +24,7 @@ const opDeleteVirtualInterface = "DeleteVirtualInterface"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DeleteVirtualInterface
-func (c *Client) DeleteVirtualInterfaceRequest(input *DeleteVirtualInterfaceInput) DeleteVirtualInterfaceRequest {
+func (c *Client) DeleteVirtualInterfaceRequest(input *types.DeleteVirtualInterfaceInput) DeleteVirtualInterfaceRequest {
 	op := &aws.Operation{
 		Name:       opDeleteVirtualInterface,
 		HTTPMethod: "POST",
@@ -101,10 +32,10 @@ func (c *Client) DeleteVirtualInterfaceRequest(input *DeleteVirtualInterfaceInpu
 	}
 
 	if input == nil {
-		input = &DeleteVirtualInterfaceInput{}
+		input = &types.DeleteVirtualInterfaceInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteVirtualInterfaceOutput{})
+	req := c.newRequest(op, input, &types.DeleteVirtualInterfaceOutput{})
 	return DeleteVirtualInterfaceRequest{Request: req, Input: input, Copy: c.DeleteVirtualInterfaceRequest}
 }
 
@@ -112,8 +43,8 @@ func (c *Client) DeleteVirtualInterfaceRequest(input *DeleteVirtualInterfaceInpu
 // DeleteVirtualInterface API operation.
 type DeleteVirtualInterfaceRequest struct {
 	*aws.Request
-	Input *DeleteVirtualInterfaceInput
-	Copy  func(*DeleteVirtualInterfaceInput) DeleteVirtualInterfaceRequest
+	Input *types.DeleteVirtualInterfaceInput
+	Copy  func(*types.DeleteVirtualInterfaceInput) DeleteVirtualInterfaceRequest
 }
 
 // Send marshals and sends the DeleteVirtualInterface API request.
@@ -125,7 +56,7 @@ func (r DeleteVirtualInterfaceRequest) Send(ctx context.Context) (*DeleteVirtual
 	}
 
 	resp := &DeleteVirtualInterfaceResponse{
-		DeleteVirtualInterfaceOutput: r.Request.Data.(*DeleteVirtualInterfaceOutput),
+		DeleteVirtualInterfaceOutput: r.Request.Data.(*types.DeleteVirtualInterfaceOutput),
 		response:                     &aws.Response{Request: r.Request},
 	}
 
@@ -135,7 +66,7 @@ func (r DeleteVirtualInterfaceRequest) Send(ctx context.Context) (*DeleteVirtual
 // DeleteVirtualInterfaceResponse is the response type for the
 // DeleteVirtualInterface API operation.
 type DeleteVirtualInterfaceResponse struct {
-	*DeleteVirtualInterfaceOutput
+	*types.DeleteVirtualInterfaceOutput
 
 	response *aws.Response
 }

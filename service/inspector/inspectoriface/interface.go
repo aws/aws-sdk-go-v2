@@ -10,6 +10,7 @@ package inspectoriface
 
 import (
 	"github.com/aws/aws-sdk-go-v2/service/inspector"
+	"github.com/aws/aws-sdk-go-v2/service/inspector/types"
 )
 
 // ClientAPI provides an interface to enable mocking the
@@ -43,7 +44,7 @@ import (
 //    type mockClientClient struct {
 //        inspectoriface.ClientPI
 //    }
-//    func (m *mockClientClient) AddAttributesToFindings(input *inspector.AddAttributesToFindingsInput) (*inspector.AddAttributesToFindingsOutput, error) {
+//    func (m *mockClientClient) AddAttributesToFindings(input *types.AddAttributesToFindingsInput) (*types.AddAttributesToFindingsOutput, error) {
 //        // mock response/functionality
 //    }
 //
@@ -61,79 +62,79 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type ClientAPI interface {
-	AddAttributesToFindingsRequest(*inspector.AddAttributesToFindingsInput) inspector.AddAttributesToFindingsRequest
+	AddAttributesToFindingsRequest(*types.AddAttributesToFindingsInput) inspector.AddAttributesToFindingsRequest
 
-	CreateAssessmentTargetRequest(*inspector.CreateAssessmentTargetInput) inspector.CreateAssessmentTargetRequest
+	CreateAssessmentTargetRequest(*types.CreateAssessmentTargetInput) inspector.CreateAssessmentTargetRequest
 
-	CreateAssessmentTemplateRequest(*inspector.CreateAssessmentTemplateInput) inspector.CreateAssessmentTemplateRequest
+	CreateAssessmentTemplateRequest(*types.CreateAssessmentTemplateInput) inspector.CreateAssessmentTemplateRequest
 
-	CreateExclusionsPreviewRequest(*inspector.CreateExclusionsPreviewInput) inspector.CreateExclusionsPreviewRequest
+	CreateExclusionsPreviewRequest(*types.CreateExclusionsPreviewInput) inspector.CreateExclusionsPreviewRequest
 
-	CreateResourceGroupRequest(*inspector.CreateResourceGroupInput) inspector.CreateResourceGroupRequest
+	CreateResourceGroupRequest(*types.CreateResourceGroupInput) inspector.CreateResourceGroupRequest
 
-	DeleteAssessmentRunRequest(*inspector.DeleteAssessmentRunInput) inspector.DeleteAssessmentRunRequest
+	DeleteAssessmentRunRequest(*types.DeleteAssessmentRunInput) inspector.DeleteAssessmentRunRequest
 
-	DeleteAssessmentTargetRequest(*inspector.DeleteAssessmentTargetInput) inspector.DeleteAssessmentTargetRequest
+	DeleteAssessmentTargetRequest(*types.DeleteAssessmentTargetInput) inspector.DeleteAssessmentTargetRequest
 
-	DeleteAssessmentTemplateRequest(*inspector.DeleteAssessmentTemplateInput) inspector.DeleteAssessmentTemplateRequest
+	DeleteAssessmentTemplateRequest(*types.DeleteAssessmentTemplateInput) inspector.DeleteAssessmentTemplateRequest
 
-	DescribeAssessmentRunsRequest(*inspector.DescribeAssessmentRunsInput) inspector.DescribeAssessmentRunsRequest
+	DescribeAssessmentRunsRequest(*types.DescribeAssessmentRunsInput) inspector.DescribeAssessmentRunsRequest
 
-	DescribeAssessmentTargetsRequest(*inspector.DescribeAssessmentTargetsInput) inspector.DescribeAssessmentTargetsRequest
+	DescribeAssessmentTargetsRequest(*types.DescribeAssessmentTargetsInput) inspector.DescribeAssessmentTargetsRequest
 
-	DescribeAssessmentTemplatesRequest(*inspector.DescribeAssessmentTemplatesInput) inspector.DescribeAssessmentTemplatesRequest
+	DescribeAssessmentTemplatesRequest(*types.DescribeAssessmentTemplatesInput) inspector.DescribeAssessmentTemplatesRequest
 
-	DescribeCrossAccountAccessRoleRequest(*inspector.DescribeCrossAccountAccessRoleInput) inspector.DescribeCrossAccountAccessRoleRequest
+	DescribeCrossAccountAccessRoleRequest(*types.DescribeCrossAccountAccessRoleInput) inspector.DescribeCrossAccountAccessRoleRequest
 
-	DescribeExclusionsRequest(*inspector.DescribeExclusionsInput) inspector.DescribeExclusionsRequest
+	DescribeExclusionsRequest(*types.DescribeExclusionsInput) inspector.DescribeExclusionsRequest
 
-	DescribeFindingsRequest(*inspector.DescribeFindingsInput) inspector.DescribeFindingsRequest
+	DescribeFindingsRequest(*types.DescribeFindingsInput) inspector.DescribeFindingsRequest
 
-	DescribeResourceGroupsRequest(*inspector.DescribeResourceGroupsInput) inspector.DescribeResourceGroupsRequest
+	DescribeResourceGroupsRequest(*types.DescribeResourceGroupsInput) inspector.DescribeResourceGroupsRequest
 
-	DescribeRulesPackagesRequest(*inspector.DescribeRulesPackagesInput) inspector.DescribeRulesPackagesRequest
+	DescribeRulesPackagesRequest(*types.DescribeRulesPackagesInput) inspector.DescribeRulesPackagesRequest
 
-	GetAssessmentReportRequest(*inspector.GetAssessmentReportInput) inspector.GetAssessmentReportRequest
+	GetAssessmentReportRequest(*types.GetAssessmentReportInput) inspector.GetAssessmentReportRequest
 
-	GetExclusionsPreviewRequest(*inspector.GetExclusionsPreviewInput) inspector.GetExclusionsPreviewRequest
+	GetExclusionsPreviewRequest(*types.GetExclusionsPreviewInput) inspector.GetExclusionsPreviewRequest
 
-	GetTelemetryMetadataRequest(*inspector.GetTelemetryMetadataInput) inspector.GetTelemetryMetadataRequest
+	GetTelemetryMetadataRequest(*types.GetTelemetryMetadataInput) inspector.GetTelemetryMetadataRequest
 
-	ListAssessmentRunAgentsRequest(*inspector.ListAssessmentRunAgentsInput) inspector.ListAssessmentRunAgentsRequest
+	ListAssessmentRunAgentsRequest(*types.ListAssessmentRunAgentsInput) inspector.ListAssessmentRunAgentsRequest
 
-	ListAssessmentRunsRequest(*inspector.ListAssessmentRunsInput) inspector.ListAssessmentRunsRequest
+	ListAssessmentRunsRequest(*types.ListAssessmentRunsInput) inspector.ListAssessmentRunsRequest
 
-	ListAssessmentTargetsRequest(*inspector.ListAssessmentTargetsInput) inspector.ListAssessmentTargetsRequest
+	ListAssessmentTargetsRequest(*types.ListAssessmentTargetsInput) inspector.ListAssessmentTargetsRequest
 
-	ListAssessmentTemplatesRequest(*inspector.ListAssessmentTemplatesInput) inspector.ListAssessmentTemplatesRequest
+	ListAssessmentTemplatesRequest(*types.ListAssessmentTemplatesInput) inspector.ListAssessmentTemplatesRequest
 
-	ListEventSubscriptionsRequest(*inspector.ListEventSubscriptionsInput) inspector.ListEventSubscriptionsRequest
+	ListEventSubscriptionsRequest(*types.ListEventSubscriptionsInput) inspector.ListEventSubscriptionsRequest
 
-	ListExclusionsRequest(*inspector.ListExclusionsInput) inspector.ListExclusionsRequest
+	ListExclusionsRequest(*types.ListExclusionsInput) inspector.ListExclusionsRequest
 
-	ListFindingsRequest(*inspector.ListFindingsInput) inspector.ListFindingsRequest
+	ListFindingsRequest(*types.ListFindingsInput) inspector.ListFindingsRequest
 
-	ListRulesPackagesRequest(*inspector.ListRulesPackagesInput) inspector.ListRulesPackagesRequest
+	ListRulesPackagesRequest(*types.ListRulesPackagesInput) inspector.ListRulesPackagesRequest
 
-	ListTagsForResourceRequest(*inspector.ListTagsForResourceInput) inspector.ListTagsForResourceRequest
+	ListTagsForResourceRequest(*types.ListTagsForResourceInput) inspector.ListTagsForResourceRequest
 
-	PreviewAgentsRequest(*inspector.PreviewAgentsInput) inspector.PreviewAgentsRequest
+	PreviewAgentsRequest(*types.PreviewAgentsInput) inspector.PreviewAgentsRequest
 
-	RegisterCrossAccountAccessRoleRequest(*inspector.RegisterCrossAccountAccessRoleInput) inspector.RegisterCrossAccountAccessRoleRequest
+	RegisterCrossAccountAccessRoleRequest(*types.RegisterCrossAccountAccessRoleInput) inspector.RegisterCrossAccountAccessRoleRequest
 
-	RemoveAttributesFromFindingsRequest(*inspector.RemoveAttributesFromFindingsInput) inspector.RemoveAttributesFromFindingsRequest
+	RemoveAttributesFromFindingsRequest(*types.RemoveAttributesFromFindingsInput) inspector.RemoveAttributesFromFindingsRequest
 
-	SetTagsForResourceRequest(*inspector.SetTagsForResourceInput) inspector.SetTagsForResourceRequest
+	SetTagsForResourceRequest(*types.SetTagsForResourceInput) inspector.SetTagsForResourceRequest
 
-	StartAssessmentRunRequest(*inspector.StartAssessmentRunInput) inspector.StartAssessmentRunRequest
+	StartAssessmentRunRequest(*types.StartAssessmentRunInput) inspector.StartAssessmentRunRequest
 
-	StopAssessmentRunRequest(*inspector.StopAssessmentRunInput) inspector.StopAssessmentRunRequest
+	StopAssessmentRunRequest(*types.StopAssessmentRunInput) inspector.StopAssessmentRunRequest
 
-	SubscribeToEventRequest(*inspector.SubscribeToEventInput) inspector.SubscribeToEventRequest
+	SubscribeToEventRequest(*types.SubscribeToEventInput) inspector.SubscribeToEventRequest
 
-	UnsubscribeFromEventRequest(*inspector.UnsubscribeFromEventInput) inspector.UnsubscribeFromEventRequest
+	UnsubscribeFromEventRequest(*types.UnsubscribeFromEventInput) inspector.UnsubscribeFromEventRequest
 
-	UpdateAssessmentTargetRequest(*inspector.UpdateAssessmentTargetInput) inspector.UpdateAssessmentTargetRequest
+	UpdateAssessmentTargetRequest(*types.UpdateAssessmentTargetInput) inspector.UpdateAssessmentTargetRequest
 }
 
 var _ ClientAPI = (*inspector.Client)(nil)

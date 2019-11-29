@@ -6,90 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/machinelearning/types"
 )
-
-type CreateDataSourceFromS3Input struct {
-	_ struct{} `type:"structure"`
-
-	// The compute statistics for a DataSource. The statistics are generated from
-	// the observation data referenced by a DataSource. Amazon ML uses the statistics
-	// internally during MLModel training. This parameter must be set to true if
-	// the DataSource needs to be used for MLModel training.
-	ComputeStatistics *bool `type:"boolean"`
-
-	// A user-supplied identifier that uniquely identifies the DataSource.
-	//
-	// DataSourceId is a required field
-	DataSourceId *string `min:"1" type:"string" required:"true"`
-
-	// A user-supplied name or description of the DataSource.
-	DataSourceName *string `type:"string"`
-
-	// The data specification of a DataSource:
-	//
-	//    * DataLocationS3 - The Amazon S3 location of the observation data.
-	//
-	//    * DataSchemaLocationS3 - The Amazon S3 location of the DataSchema.
-	//
-	//    * DataSchema - A JSON string representing the schema. This is not required
-	//    if DataSchemaUri is specified.
-	//
-	//    * DataRearrangement - A JSON string that represents the splitting and
-	//    rearrangement requirements for the Datasource. Sample - "{\"splitting\":{\"percentBegin\":10,\"percentEnd\":60}}"
-	//
-	// DataSpec is a required field
-	DataSpec *S3DataSpec `type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s CreateDataSourceFromS3Input) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateDataSourceFromS3Input) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateDataSourceFromS3Input"}
-
-	if s.DataSourceId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DataSourceId"))
-	}
-	if s.DataSourceId != nil && len(*s.DataSourceId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("DataSourceId", 1))
-	}
-
-	if s.DataSpec == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DataSpec"))
-	}
-	if s.DataSpec != nil {
-		if err := s.DataSpec.Validate(); err != nil {
-			invalidParams.AddNested("DataSpec", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Represents the output of a CreateDataSourceFromS3 operation, and is an acknowledgement
-// that Amazon ML received the request.
-//
-// The CreateDataSourceFromS3 operation is asynchronous. You can poll for updates
-// by using the GetBatchPrediction operation and checking the Status parameter.
-type CreateDataSourceFromS3Output struct {
-	_ struct{} `type:"structure"`
-
-	// A user-supplied ID that uniquely identifies the DataSource. This value should
-	// be identical to the value of the DataSourceID in the request.
-	DataSourceId *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s CreateDataSourceFromS3Output) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCreateDataSourceFromS3 = "CreateDataSourceFromS3"
 
@@ -131,7 +49,7 @@ const opCreateDataSourceFromS3 = "CreateDataSourceFromS3"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) CreateDataSourceFromS3Request(input *CreateDataSourceFromS3Input) CreateDataSourceFromS3Request {
+func (c *Client) CreateDataSourceFromS3Request(input *types.CreateDataSourceFromS3Input) CreateDataSourceFromS3Request {
 	op := &aws.Operation{
 		Name:       opCreateDataSourceFromS3,
 		HTTPMethod: "POST",
@@ -139,10 +57,10 @@ func (c *Client) CreateDataSourceFromS3Request(input *CreateDataSourceFromS3Inpu
 	}
 
 	if input == nil {
-		input = &CreateDataSourceFromS3Input{}
+		input = &types.CreateDataSourceFromS3Input{}
 	}
 
-	req := c.newRequest(op, input, &CreateDataSourceFromS3Output{})
+	req := c.newRequest(op, input, &types.CreateDataSourceFromS3Output{})
 	return CreateDataSourceFromS3Request{Request: req, Input: input, Copy: c.CreateDataSourceFromS3Request}
 }
 
@@ -150,8 +68,8 @@ func (c *Client) CreateDataSourceFromS3Request(input *CreateDataSourceFromS3Inpu
 // CreateDataSourceFromS3 API operation.
 type CreateDataSourceFromS3Request struct {
 	*aws.Request
-	Input *CreateDataSourceFromS3Input
-	Copy  func(*CreateDataSourceFromS3Input) CreateDataSourceFromS3Request
+	Input *types.CreateDataSourceFromS3Input
+	Copy  func(*types.CreateDataSourceFromS3Input) CreateDataSourceFromS3Request
 }
 
 // Send marshals and sends the CreateDataSourceFromS3 API request.
@@ -163,7 +81,7 @@ func (r CreateDataSourceFromS3Request) Send(ctx context.Context) (*CreateDataSou
 	}
 
 	resp := &CreateDataSourceFromS3Response{
-		CreateDataSourceFromS3Output: r.Request.Data.(*CreateDataSourceFromS3Output),
+		CreateDataSourceFromS3Output: r.Request.Data.(*types.CreateDataSourceFromS3Output),
 		response:                     &aws.Response{Request: r.Request},
 	}
 
@@ -173,7 +91,7 @@ func (r CreateDataSourceFromS3Request) Send(ctx context.Context) (*CreateDataSou
 // CreateDataSourceFromS3Response is the response type for the
 // CreateDataSourceFromS3 API operation.
 type CreateDataSourceFromS3Response struct {
-	*CreateDataSourceFromS3Output
+	*types.CreateDataSourceFromS3Output
 
 	response *aws.Response
 }

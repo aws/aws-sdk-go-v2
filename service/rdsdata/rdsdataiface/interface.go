@@ -10,6 +10,7 @@ package rdsdataiface
 
 import (
 	"github.com/aws/aws-sdk-go-v2/service/rdsdata"
+	"github.com/aws/aws-sdk-go-v2/service/rdsdata/types"
 )
 
 // ClientAPI provides an interface to enable mocking the
@@ -43,7 +44,7 @@ import (
 //    type mockClientClient struct {
 //        rdsdataiface.ClientPI
 //    }
-//    func (m *mockClientClient) BatchExecuteStatement(input *rdsdata.BatchExecuteStatementInput) (*rdsdata.BatchExecuteStatementOutput, error) {
+//    func (m *mockClientClient) BatchExecuteStatement(input *types.BatchExecuteStatementInput) (*types.BatchExecuteStatementOutput, error) {
 //        // mock response/functionality
 //    }
 //
@@ -61,17 +62,17 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type ClientAPI interface {
-	BatchExecuteStatementRequest(*rdsdata.BatchExecuteStatementInput) rdsdata.BatchExecuteStatementRequest
+	BatchExecuteStatementRequest(*types.BatchExecuteStatementInput) rdsdata.BatchExecuteStatementRequest
 
-	BeginTransactionRequest(*rdsdata.BeginTransactionInput) rdsdata.BeginTransactionRequest
+	BeginTransactionRequest(*types.BeginTransactionInput) rdsdata.BeginTransactionRequest
 
-	CommitTransactionRequest(*rdsdata.CommitTransactionInput) rdsdata.CommitTransactionRequest
+	CommitTransactionRequest(*types.CommitTransactionInput) rdsdata.CommitTransactionRequest
 
-	ExecuteSqlRequest(*rdsdata.ExecuteSqlInput) rdsdata.ExecuteSqlRequest
+	ExecuteSqlRequest(*types.ExecuteSqlInput) rdsdata.ExecuteSqlRequest
 
-	ExecuteStatementRequest(*rdsdata.ExecuteStatementInput) rdsdata.ExecuteStatementRequest
+	ExecuteStatementRequest(*types.ExecuteStatementInput) rdsdata.ExecuteStatementRequest
 
-	RollbackTransactionRequest(*rdsdata.RollbackTransactionInput) rdsdata.RollbackTransactionRequest
+	RollbackTransactionRequest(*types.RollbackTransactionInput) rdsdata.RollbackTransactionRequest
 }
 
 var _ ClientAPI = (*rdsdata.Client)(nil)

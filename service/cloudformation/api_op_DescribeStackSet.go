@@ -6,48 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/cloudformation/types"
 )
-
-type DescribeStackSetInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name or unique ID of the stack set whose description you want.
-	//
-	// StackSetName is a required field
-	StackSetName *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeStackSetInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeStackSetInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeStackSetInput"}
-
-	if s.StackSetName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("StackSetName"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribeStackSetOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The specified stack set.
-	StackSet *StackSet `type:"structure"`
-}
-
-// String returns the string representation
-func (s DescribeStackSetOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeStackSet = "DescribeStackSet"
 
@@ -64,7 +24,7 @@ const opDescribeStackSet = "DescribeStackSet"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DescribeStackSet
-func (c *Client) DescribeStackSetRequest(input *DescribeStackSetInput) DescribeStackSetRequest {
+func (c *Client) DescribeStackSetRequest(input *types.DescribeStackSetInput) DescribeStackSetRequest {
 	op := &aws.Operation{
 		Name:       opDescribeStackSet,
 		HTTPMethod: "POST",
@@ -72,10 +32,10 @@ func (c *Client) DescribeStackSetRequest(input *DescribeStackSetInput) DescribeS
 	}
 
 	if input == nil {
-		input = &DescribeStackSetInput{}
+		input = &types.DescribeStackSetInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeStackSetOutput{})
+	req := c.newRequest(op, input, &types.DescribeStackSetOutput{})
 	return DescribeStackSetRequest{Request: req, Input: input, Copy: c.DescribeStackSetRequest}
 }
 
@@ -83,8 +43,8 @@ func (c *Client) DescribeStackSetRequest(input *DescribeStackSetInput) DescribeS
 // DescribeStackSet API operation.
 type DescribeStackSetRequest struct {
 	*aws.Request
-	Input *DescribeStackSetInput
-	Copy  func(*DescribeStackSetInput) DescribeStackSetRequest
+	Input *types.DescribeStackSetInput
+	Copy  func(*types.DescribeStackSetInput) DescribeStackSetRequest
 }
 
 // Send marshals and sends the DescribeStackSet API request.
@@ -96,7 +56,7 @@ func (r DescribeStackSetRequest) Send(ctx context.Context) (*DescribeStackSetRes
 	}
 
 	resp := &DescribeStackSetResponse{
-		DescribeStackSetOutput: r.Request.Data.(*DescribeStackSetOutput),
+		DescribeStackSetOutput: r.Request.Data.(*types.DescribeStackSetOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -106,7 +66,7 @@ func (r DescribeStackSetRequest) Send(ctx context.Context) (*DescribeStackSetRes
 // DescribeStackSetResponse is the response type for the
 // DescribeStackSet API operation.
 type DescribeStackSetResponse struct {
-	*DescribeStackSetOutput
+	*types.DescribeStackSetOutput
 
 	response *aws.Response
 }

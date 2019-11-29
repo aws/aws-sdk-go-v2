@@ -6,107 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/iot/types"
 )
-
-type ListBillingGroupsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The maximum number of results to return per request.
-	MaxResults *int64 `location:"querystring" locationName:"maxResults" min:"1" type:"integer"`
-
-	// Limit the results to billing groups whose names have the given prefix.
-	NamePrefixFilter *string `location:"querystring" locationName:"namePrefixFilter" min:"1" type:"string"`
-
-	// The token to retrieve the next set of results.
-	NextToken *string `location:"querystring" locationName:"nextToken" type:"string"`
-}
-
-// String returns the string representation
-func (s ListBillingGroupsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListBillingGroupsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListBillingGroupsInput"}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-	if s.NamePrefixFilter != nil && len(*s.NamePrefixFilter) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("NamePrefixFilter", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListBillingGroupsInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.MaxResults != nil {
-		v := *s.MaxResults
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "maxResults", protocol.Int64Value(v), metadata)
-	}
-	if s.NamePrefixFilter != nil {
-		v := *s.NamePrefixFilter
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "namePrefixFilter", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type ListBillingGroupsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The list of billing groups.
-	BillingGroups []GroupNameAndArn `locationName:"billingGroups" type:"list"`
-
-	// The token used to get the next set of results, or null if there are no additional
-	// results.
-	NextToken *string `locationName:"nextToken" type:"string"`
-}
-
-// String returns the string representation
-func (s ListBillingGroupsOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListBillingGroupsOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.BillingGroups != nil {
-		v := s.BillingGroups
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "billingGroups", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opListBillingGroups = "ListBillingGroups"
 
@@ -121,7 +22,7 @@ const opListBillingGroups = "ListBillingGroups"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) ListBillingGroupsRequest(input *ListBillingGroupsInput) ListBillingGroupsRequest {
+func (c *Client) ListBillingGroupsRequest(input *types.ListBillingGroupsInput) ListBillingGroupsRequest {
 	op := &aws.Operation{
 		Name:       opListBillingGroups,
 		HTTPMethod: "GET",
@@ -129,10 +30,10 @@ func (c *Client) ListBillingGroupsRequest(input *ListBillingGroupsInput) ListBil
 	}
 
 	if input == nil {
-		input = &ListBillingGroupsInput{}
+		input = &types.ListBillingGroupsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListBillingGroupsOutput{})
+	req := c.newRequest(op, input, &types.ListBillingGroupsOutput{})
 	return ListBillingGroupsRequest{Request: req, Input: input, Copy: c.ListBillingGroupsRequest}
 }
 
@@ -140,8 +41,8 @@ func (c *Client) ListBillingGroupsRequest(input *ListBillingGroupsInput) ListBil
 // ListBillingGroups API operation.
 type ListBillingGroupsRequest struct {
 	*aws.Request
-	Input *ListBillingGroupsInput
-	Copy  func(*ListBillingGroupsInput) ListBillingGroupsRequest
+	Input *types.ListBillingGroupsInput
+	Copy  func(*types.ListBillingGroupsInput) ListBillingGroupsRequest
 }
 
 // Send marshals and sends the ListBillingGroups API request.
@@ -153,7 +54,7 @@ func (r ListBillingGroupsRequest) Send(ctx context.Context) (*ListBillingGroupsR
 	}
 
 	resp := &ListBillingGroupsResponse{
-		ListBillingGroupsOutput: r.Request.Data.(*ListBillingGroupsOutput),
+		ListBillingGroupsOutput: r.Request.Data.(*types.ListBillingGroupsOutput),
 		response:                &aws.Response{Request: r.Request},
 	}
 
@@ -163,7 +64,7 @@ func (r ListBillingGroupsRequest) Send(ctx context.Context) (*ListBillingGroupsR
 // ListBillingGroupsResponse is the response type for the
 // ListBillingGroups API operation.
 type ListBillingGroupsResponse struct {
-	*ListBillingGroupsOutput
+	*types.ListBillingGroupsOutput
 
 	response *aws.Response
 }

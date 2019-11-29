@@ -6,107 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/appmesh/types"
 )
-
-type ListVirtualServicesInput struct {
-	_ struct{} `type:"structure"`
-
-	Limit *int64 `location:"querystring" locationName:"limit" min:"1" type:"integer"`
-
-	// MeshName is a required field
-	MeshName *string `location:"uri" locationName:"meshName" min:"1" type:"string" required:"true"`
-
-	NextToken *string `location:"querystring" locationName:"nextToken" type:"string"`
-}
-
-// String returns the string representation
-func (s ListVirtualServicesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListVirtualServicesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListVirtualServicesInput"}
-	if s.Limit != nil && *s.Limit < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("Limit", 1))
-	}
-
-	if s.MeshName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("MeshName"))
-	}
-	if s.MeshName != nil && len(*s.MeshName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("MeshName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListVirtualServicesInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.MeshName != nil {
-		v := *s.MeshName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "meshName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Limit != nil {
-		v := *s.Limit
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "limit", protocol.Int64Value(v), metadata)
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type ListVirtualServicesOutput struct {
-	_ struct{} `type:"structure"`
-
-	NextToken *string `locationName:"nextToken" type:"string"`
-
-	// VirtualServices is a required field
-	VirtualServices []VirtualServiceRef `locationName:"virtualServices" type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s ListVirtualServicesOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListVirtualServicesOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.VirtualServices != nil {
-		v := s.VirtualServices
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "virtualServices", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	return nil
-}
 
 const opListVirtualServices = "ListVirtualServices"
 
@@ -123,7 +24,7 @@ const opListVirtualServices = "ListVirtualServices"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/ListVirtualServices
-func (c *Client) ListVirtualServicesRequest(input *ListVirtualServicesInput) ListVirtualServicesRequest {
+func (c *Client) ListVirtualServicesRequest(input *types.ListVirtualServicesInput) ListVirtualServicesRequest {
 	op := &aws.Operation{
 		Name:       opListVirtualServices,
 		HTTPMethod: "GET",
@@ -137,10 +38,10 @@ func (c *Client) ListVirtualServicesRequest(input *ListVirtualServicesInput) Lis
 	}
 
 	if input == nil {
-		input = &ListVirtualServicesInput{}
+		input = &types.ListVirtualServicesInput{}
 	}
 
-	req := c.newRequest(op, input, &ListVirtualServicesOutput{})
+	req := c.newRequest(op, input, &types.ListVirtualServicesOutput{})
 	return ListVirtualServicesRequest{Request: req, Input: input, Copy: c.ListVirtualServicesRequest}
 }
 
@@ -148,8 +49,8 @@ func (c *Client) ListVirtualServicesRequest(input *ListVirtualServicesInput) Lis
 // ListVirtualServices API operation.
 type ListVirtualServicesRequest struct {
 	*aws.Request
-	Input *ListVirtualServicesInput
-	Copy  func(*ListVirtualServicesInput) ListVirtualServicesRequest
+	Input *types.ListVirtualServicesInput
+	Copy  func(*types.ListVirtualServicesInput) ListVirtualServicesRequest
 }
 
 // Send marshals and sends the ListVirtualServices API request.
@@ -161,7 +62,7 @@ func (r ListVirtualServicesRequest) Send(ctx context.Context) (*ListVirtualServi
 	}
 
 	resp := &ListVirtualServicesResponse{
-		ListVirtualServicesOutput: r.Request.Data.(*ListVirtualServicesOutput),
+		ListVirtualServicesOutput: r.Request.Data.(*types.ListVirtualServicesOutput),
 		response:                  &aws.Response{Request: r.Request},
 	}
 
@@ -191,7 +92,7 @@ func NewListVirtualServicesPaginator(req ListVirtualServicesRequest) ListVirtual
 	return ListVirtualServicesPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListVirtualServicesInput
+				var inCpy *types.ListVirtualServicesInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -211,14 +112,14 @@ type ListVirtualServicesPaginator struct {
 	aws.Pager
 }
 
-func (p *ListVirtualServicesPaginator) CurrentPage() *ListVirtualServicesOutput {
-	return p.Pager.CurrentPage().(*ListVirtualServicesOutput)
+func (p *ListVirtualServicesPaginator) CurrentPage() *types.ListVirtualServicesOutput {
+	return p.Pager.CurrentPage().(*types.ListVirtualServicesOutput)
 }
 
 // ListVirtualServicesResponse is the response type for the
 // ListVirtualServices API operation.
 type ListVirtualServicesResponse struct {
-	*ListVirtualServicesOutput
+	*types.ListVirtualServicesOutput
 
 	response *aws.Response
 }

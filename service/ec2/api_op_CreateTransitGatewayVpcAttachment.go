@@ -6,81 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-type CreateTransitGatewayVpcAttachmentInput struct {
-	_ struct{} `type:"structure"`
-
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have
-	// the required permissions, the error response is DryRunOperation. Otherwise,
-	// it is UnauthorizedOperation.
-	DryRun *bool `type:"boolean"`
-
-	// The VPC attachment options.
-	Options *CreateTransitGatewayVpcAttachmentRequestOptions `type:"structure"`
-
-	// The IDs of one or more subnets. You can specify only one subnet per Availability
-	// Zone. You must specify at least one subnet, but we recommend that you specify
-	// two subnets for better availability. The transit gateway uses one IP address
-	// from each specified subnet.
-	//
-	// SubnetIds is a required field
-	SubnetIds []string `locationNameList:"item" type:"list" required:"true"`
-
-	// The tags to apply to the VPC attachment.
-	TagSpecifications []TagSpecification `locationNameList:"item" type:"list"`
-
-	// The ID of the transit gateway.
-	//
-	// TransitGatewayId is a required field
-	TransitGatewayId *string `type:"string" required:"true"`
-
-	// The ID of the VPC.
-	//
-	// VpcId is a required field
-	VpcId *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s CreateTransitGatewayVpcAttachmentInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateTransitGatewayVpcAttachmentInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateTransitGatewayVpcAttachmentInput"}
-
-	if s.SubnetIds == nil {
-		invalidParams.Add(aws.NewErrParamRequired("SubnetIds"))
-	}
-
-	if s.TransitGatewayId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("TransitGatewayId"))
-	}
-
-	if s.VpcId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("VpcId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type CreateTransitGatewayVpcAttachmentOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Information about the VPC attachment.
-	TransitGatewayVpcAttachment *TransitGatewayVpcAttachment `locationName:"transitGatewayVpcAttachment" type:"structure"`
-}
-
-// String returns the string representation
-func (s CreateTransitGatewayVpcAttachmentOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCreateTransitGatewayVpcAttachment = "CreateTransitGatewayVpcAttachment"
 
@@ -104,7 +31,7 @@ const opCreateTransitGatewayVpcAttachment = "CreateTransitGatewayVpcAttachment"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateTransitGatewayVpcAttachment
-func (c *Client) CreateTransitGatewayVpcAttachmentRequest(input *CreateTransitGatewayVpcAttachmentInput) CreateTransitGatewayVpcAttachmentRequest {
+func (c *Client) CreateTransitGatewayVpcAttachmentRequest(input *types.CreateTransitGatewayVpcAttachmentInput) CreateTransitGatewayVpcAttachmentRequest {
 	op := &aws.Operation{
 		Name:       opCreateTransitGatewayVpcAttachment,
 		HTTPMethod: "POST",
@@ -112,10 +39,10 @@ func (c *Client) CreateTransitGatewayVpcAttachmentRequest(input *CreateTransitGa
 	}
 
 	if input == nil {
-		input = &CreateTransitGatewayVpcAttachmentInput{}
+		input = &types.CreateTransitGatewayVpcAttachmentInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateTransitGatewayVpcAttachmentOutput{})
+	req := c.newRequest(op, input, &types.CreateTransitGatewayVpcAttachmentOutput{})
 	return CreateTransitGatewayVpcAttachmentRequest{Request: req, Input: input, Copy: c.CreateTransitGatewayVpcAttachmentRequest}
 }
 
@@ -123,8 +50,8 @@ func (c *Client) CreateTransitGatewayVpcAttachmentRequest(input *CreateTransitGa
 // CreateTransitGatewayVpcAttachment API operation.
 type CreateTransitGatewayVpcAttachmentRequest struct {
 	*aws.Request
-	Input *CreateTransitGatewayVpcAttachmentInput
-	Copy  func(*CreateTransitGatewayVpcAttachmentInput) CreateTransitGatewayVpcAttachmentRequest
+	Input *types.CreateTransitGatewayVpcAttachmentInput
+	Copy  func(*types.CreateTransitGatewayVpcAttachmentInput) CreateTransitGatewayVpcAttachmentRequest
 }
 
 // Send marshals and sends the CreateTransitGatewayVpcAttachment API request.
@@ -136,7 +63,7 @@ func (r CreateTransitGatewayVpcAttachmentRequest) Send(ctx context.Context) (*Cr
 	}
 
 	resp := &CreateTransitGatewayVpcAttachmentResponse{
-		CreateTransitGatewayVpcAttachmentOutput: r.Request.Data.(*CreateTransitGatewayVpcAttachmentOutput),
+		CreateTransitGatewayVpcAttachmentOutput: r.Request.Data.(*types.CreateTransitGatewayVpcAttachmentOutput),
 		response:                                &aws.Response{Request: r.Request},
 	}
 
@@ -146,7 +73,7 @@ func (r CreateTransitGatewayVpcAttachmentRequest) Send(ctx context.Context) (*Cr
 // CreateTransitGatewayVpcAttachmentResponse is the response type for the
 // CreateTransitGatewayVpcAttachment API operation.
 type CreateTransitGatewayVpcAttachmentResponse struct {
-	*CreateTransitGatewayVpcAttachmentOutput
+	*types.CreateTransitGatewayVpcAttachmentOutput
 
 	response *aws.Response
 }

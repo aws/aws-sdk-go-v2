@@ -6,97 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/iotanalytics/types"
 )
-
-type ListChannelsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The maximum number of results to return in this request.
-	//
-	// The default value is 100.
-	MaxResults *int64 `location:"querystring" locationName:"maxResults" min:"1" type:"integer"`
-
-	// The token for the next set of results.
-	NextToken *string `location:"querystring" locationName:"nextToken" type:"string"`
-}
-
-// String returns the string representation
-func (s ListChannelsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListChannelsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListChannelsInput"}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListChannelsInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.MaxResults != nil {
-		v := *s.MaxResults
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "maxResults", protocol.Int64Value(v), metadata)
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type ListChannelsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A list of "ChannelSummary" objects.
-	ChannelSummaries []ChannelSummary `locationName:"channelSummaries" type:"list"`
-
-	// The token to retrieve the next set of results, or null if there are no more
-	// results.
-	NextToken *string `locationName:"nextToken" type:"string"`
-}
-
-// String returns the string representation
-func (s ListChannelsOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListChannelsOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.ChannelSummaries != nil {
-		v := s.ChannelSummaries
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "channelSummaries", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opListChannels = "ListChannels"
 
@@ -113,7 +24,7 @@ const opListChannels = "ListChannels"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iotanalytics-2017-11-27/ListChannels
-func (c *Client) ListChannelsRequest(input *ListChannelsInput) ListChannelsRequest {
+func (c *Client) ListChannelsRequest(input *types.ListChannelsInput) ListChannelsRequest {
 	op := &aws.Operation{
 		Name:       opListChannels,
 		HTTPMethod: "GET",
@@ -127,10 +38,10 @@ func (c *Client) ListChannelsRequest(input *ListChannelsInput) ListChannelsReque
 	}
 
 	if input == nil {
-		input = &ListChannelsInput{}
+		input = &types.ListChannelsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListChannelsOutput{})
+	req := c.newRequest(op, input, &types.ListChannelsOutput{})
 	return ListChannelsRequest{Request: req, Input: input, Copy: c.ListChannelsRequest}
 }
 
@@ -138,8 +49,8 @@ func (c *Client) ListChannelsRequest(input *ListChannelsInput) ListChannelsReque
 // ListChannels API operation.
 type ListChannelsRequest struct {
 	*aws.Request
-	Input *ListChannelsInput
-	Copy  func(*ListChannelsInput) ListChannelsRequest
+	Input *types.ListChannelsInput
+	Copy  func(*types.ListChannelsInput) ListChannelsRequest
 }
 
 // Send marshals and sends the ListChannels API request.
@@ -151,7 +62,7 @@ func (r ListChannelsRequest) Send(ctx context.Context) (*ListChannelsResponse, e
 	}
 
 	resp := &ListChannelsResponse{
-		ListChannelsOutput: r.Request.Data.(*ListChannelsOutput),
+		ListChannelsOutput: r.Request.Data.(*types.ListChannelsOutput),
 		response:           &aws.Response{Request: r.Request},
 	}
 
@@ -181,7 +92,7 @@ func NewListChannelsPaginator(req ListChannelsRequest) ListChannelsPaginator {
 	return ListChannelsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListChannelsInput
+				var inCpy *types.ListChannelsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -201,14 +112,14 @@ type ListChannelsPaginator struct {
 	aws.Pager
 }
 
-func (p *ListChannelsPaginator) CurrentPage() *ListChannelsOutput {
-	return p.Pager.CurrentPage().(*ListChannelsOutput)
+func (p *ListChannelsPaginator) CurrentPage() *types.ListChannelsOutput {
+	return p.Pager.CurrentPage().(*types.ListChannelsOutput)
 }
 
 // ListChannelsResponse is the response type for the
 // ListChannels API operation.
 type ListChannelsResponse struct {
-	*ListChannelsOutput
+	*types.ListChannelsOutput
 
 	response *aws.Response
 }

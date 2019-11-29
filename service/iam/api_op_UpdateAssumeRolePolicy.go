@@ -6,83 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/query"
+	"github.com/aws/aws-sdk-go-v2/service/iam/types"
 )
-
-type UpdateAssumeRolePolicyInput struct {
-	_ struct{} `type:"structure"`
-
-	// The policy that grants an entity permission to assume the role.
-	//
-	// You must provide policies in JSON format in IAM. However, for AWS CloudFormation
-	// templates formatted in YAML, you can provide the policy in JSON or YAML format.
-	// AWS CloudFormation always converts a YAML policy to JSON format before submitting
-	// it to IAM.
-	//
-	// The regex pattern (http://wikipedia.org/wiki/regex) used to validate this
-	// parameter is a string of characters consisting of the following:
-	//
-	//    * Any printable ASCII character ranging from the space character (\u0020)
-	//    through the end of the ASCII character range
-	//
-	//    * The printable characters in the Basic Latin and Latin-1 Supplement character
-	//    set (through \u00FF)
-	//
-	//    * The special characters tab (\u0009), line feed (\u000A), and carriage
-	//    return (\u000D)
-	//
-	// PolicyDocument is a required field
-	PolicyDocument *string `min:"1" type:"string" required:"true"`
-
-	// The name of the role to update with the new policy.
-	//
-	// This parameter allows (through its regex pattern (http://wikipedia.org/wiki/regex))
-	// a string of characters consisting of upper and lowercase alphanumeric characters
-	// with no spaces. You can also include any of the following characters: _+=,.@-
-	//
-	// RoleName is a required field
-	RoleName *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s UpdateAssumeRolePolicyInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateAssumeRolePolicyInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateAssumeRolePolicyInput"}
-
-	if s.PolicyDocument == nil {
-		invalidParams.Add(aws.NewErrParamRequired("PolicyDocument"))
-	}
-	if s.PolicyDocument != nil && len(*s.PolicyDocument) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("PolicyDocument", 1))
-	}
-
-	if s.RoleName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("RoleName"))
-	}
-	if s.RoleName != nil && len(*s.RoleName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("RoleName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type UpdateAssumeRolePolicyOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s UpdateAssumeRolePolicyOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opUpdateAssumeRolePolicy = "UpdateAssumeRolePolicy"
 
@@ -102,7 +29,7 @@ const opUpdateAssumeRolePolicy = "UpdateAssumeRolePolicy"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/UpdateAssumeRolePolicy
-func (c *Client) UpdateAssumeRolePolicyRequest(input *UpdateAssumeRolePolicyInput) UpdateAssumeRolePolicyRequest {
+func (c *Client) UpdateAssumeRolePolicyRequest(input *types.UpdateAssumeRolePolicyInput) UpdateAssumeRolePolicyRequest {
 	op := &aws.Operation{
 		Name:       opUpdateAssumeRolePolicy,
 		HTTPMethod: "POST",
@@ -110,10 +37,10 @@ func (c *Client) UpdateAssumeRolePolicyRequest(input *UpdateAssumeRolePolicyInpu
 	}
 
 	if input == nil {
-		input = &UpdateAssumeRolePolicyInput{}
+		input = &types.UpdateAssumeRolePolicyInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateAssumeRolePolicyOutput{})
+	req := c.newRequest(op, input, &types.UpdateAssumeRolePolicyOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return UpdateAssumeRolePolicyRequest{Request: req, Input: input, Copy: c.UpdateAssumeRolePolicyRequest}
@@ -123,8 +50,8 @@ func (c *Client) UpdateAssumeRolePolicyRequest(input *UpdateAssumeRolePolicyInpu
 // UpdateAssumeRolePolicy API operation.
 type UpdateAssumeRolePolicyRequest struct {
 	*aws.Request
-	Input *UpdateAssumeRolePolicyInput
-	Copy  func(*UpdateAssumeRolePolicyInput) UpdateAssumeRolePolicyRequest
+	Input *types.UpdateAssumeRolePolicyInput
+	Copy  func(*types.UpdateAssumeRolePolicyInput) UpdateAssumeRolePolicyRequest
 }
 
 // Send marshals and sends the UpdateAssumeRolePolicy API request.
@@ -136,7 +63,7 @@ func (r UpdateAssumeRolePolicyRequest) Send(ctx context.Context) (*UpdateAssumeR
 	}
 
 	resp := &UpdateAssumeRolePolicyResponse{
-		UpdateAssumeRolePolicyOutput: r.Request.Data.(*UpdateAssumeRolePolicyOutput),
+		UpdateAssumeRolePolicyOutput: r.Request.Data.(*types.UpdateAssumeRolePolicyOutput),
 		response:                     &aws.Response{Request: r.Request},
 	}
 
@@ -146,7 +73,7 @@ func (r UpdateAssumeRolePolicyRequest) Send(ctx context.Context) (*UpdateAssumeR
 // UpdateAssumeRolePolicyResponse is the response type for the
 // UpdateAssumeRolePolicy API operation.
 type UpdateAssumeRolePolicyResponse struct {
-	*UpdateAssumeRolePolicyOutput
+	*types.UpdateAssumeRolePolicyOutput
 
 	response *aws.Response
 }

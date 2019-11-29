@@ -6,82 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/lightsail/types"
 )
-
-type CreateLoadBalancerTlsCertificateInput struct {
-	_ struct{} `type:"structure"`
-
-	// An array of strings listing alternative domains and subdomains for your SSL/TLS
-	// certificate. Lightsail will de-dupe the names for you. You can have a maximum
-	// of 9 alternative names (in addition to the 1 primary domain). We do not support
-	// wildcards (e.g., *.example.com).
-	CertificateAlternativeNames []string `locationName:"certificateAlternativeNames" type:"list"`
-
-	// The domain name (e.g., example.com) for your SSL/TLS certificate.
-	//
-	// CertificateDomainName is a required field
-	CertificateDomainName *string `locationName:"certificateDomainName" type:"string" required:"true"`
-
-	// The SSL/TLS certificate name.
-	//
-	// You can have up to 10 certificates in your account at one time. Each Lightsail
-	// load balancer can have up to 2 certificates associated with it at one time.
-	// There is also an overall limit to the number of certificates that can be
-	// issue in a 365-day period. For more information, see Limits (http://docs.aws.amazon.com/acm/latest/userguide/acm-limits.html).
-	//
-	// CertificateName is a required field
-	CertificateName *string `locationName:"certificateName" type:"string" required:"true"`
-
-	// The load balancer name where you want to create the SSL/TLS certificate.
-	//
-	// LoadBalancerName is a required field
-	LoadBalancerName *string `locationName:"loadBalancerName" type:"string" required:"true"`
-
-	// The tag keys and optional values to add to the resource during create.
-	//
-	// To tag a resource after it has been created, see the tag resource operation.
-	Tags []Tag `locationName:"tags" type:"list"`
-}
-
-// String returns the string representation
-func (s CreateLoadBalancerTlsCertificateInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateLoadBalancerTlsCertificateInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateLoadBalancerTlsCertificateInput"}
-
-	if s.CertificateDomainName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("CertificateDomainName"))
-	}
-
-	if s.CertificateName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("CertificateName"))
-	}
-
-	if s.LoadBalancerName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("LoadBalancerName"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type CreateLoadBalancerTlsCertificateOutput struct {
-	_ struct{} `type:"structure"`
-
-	// An object containing information about the API operations.
-	Operations []Operation `locationName:"operations" type:"list"`
-}
-
-// String returns the string representation
-func (s CreateLoadBalancerTlsCertificateOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCreateLoadBalancerTlsCertificate = "CreateLoadBalancerTlsCertificate"
 
@@ -104,7 +30,7 @@ const opCreateLoadBalancerTlsCertificate = "CreateLoadBalancerTlsCertificate"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/CreateLoadBalancerTlsCertificate
-func (c *Client) CreateLoadBalancerTlsCertificateRequest(input *CreateLoadBalancerTlsCertificateInput) CreateLoadBalancerTlsCertificateRequest {
+func (c *Client) CreateLoadBalancerTlsCertificateRequest(input *types.CreateLoadBalancerTlsCertificateInput) CreateLoadBalancerTlsCertificateRequest {
 	op := &aws.Operation{
 		Name:       opCreateLoadBalancerTlsCertificate,
 		HTTPMethod: "POST",
@@ -112,10 +38,10 @@ func (c *Client) CreateLoadBalancerTlsCertificateRequest(input *CreateLoadBalanc
 	}
 
 	if input == nil {
-		input = &CreateLoadBalancerTlsCertificateInput{}
+		input = &types.CreateLoadBalancerTlsCertificateInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateLoadBalancerTlsCertificateOutput{})
+	req := c.newRequest(op, input, &types.CreateLoadBalancerTlsCertificateOutput{})
 	return CreateLoadBalancerTlsCertificateRequest{Request: req, Input: input, Copy: c.CreateLoadBalancerTlsCertificateRequest}
 }
 
@@ -123,8 +49,8 @@ func (c *Client) CreateLoadBalancerTlsCertificateRequest(input *CreateLoadBalanc
 // CreateLoadBalancerTlsCertificate API operation.
 type CreateLoadBalancerTlsCertificateRequest struct {
 	*aws.Request
-	Input *CreateLoadBalancerTlsCertificateInput
-	Copy  func(*CreateLoadBalancerTlsCertificateInput) CreateLoadBalancerTlsCertificateRequest
+	Input *types.CreateLoadBalancerTlsCertificateInput
+	Copy  func(*types.CreateLoadBalancerTlsCertificateInput) CreateLoadBalancerTlsCertificateRequest
 }
 
 // Send marshals and sends the CreateLoadBalancerTlsCertificate API request.
@@ -136,7 +62,7 @@ func (r CreateLoadBalancerTlsCertificateRequest) Send(ctx context.Context) (*Cre
 	}
 
 	resp := &CreateLoadBalancerTlsCertificateResponse{
-		CreateLoadBalancerTlsCertificateOutput: r.Request.Data.(*CreateLoadBalancerTlsCertificateOutput),
+		CreateLoadBalancerTlsCertificateOutput: r.Request.Data.(*types.CreateLoadBalancerTlsCertificateOutput),
 		response:                               &aws.Response{Request: r.Request},
 	}
 
@@ -146,7 +72,7 @@ func (r CreateLoadBalancerTlsCertificateRequest) Send(ctx context.Context) (*Cre
 // CreateLoadBalancerTlsCertificateResponse is the response type for the
 // CreateLoadBalancerTlsCertificate API operation.
 type CreateLoadBalancerTlsCertificateResponse struct {
-	*CreateLoadBalancerTlsCertificateOutput
+	*types.CreateLoadBalancerTlsCertificateOutput
 
 	response *aws.Response
 }

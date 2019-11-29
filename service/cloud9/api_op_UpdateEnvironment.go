@@ -6,54 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/cloud9/types"
 )
-
-type UpdateEnvironmentInput struct {
-	_ struct{} `type:"structure"`
-
-	// Any new or replacement description for the environment.
-	Description *string `locationName:"description" type:"string" sensitive:"true"`
-
-	// The ID of the environment to change settings.
-	//
-	// EnvironmentId is a required field
-	EnvironmentId *string `locationName:"environmentId" type:"string" required:"true"`
-
-	// A replacement name for the environment.
-	Name *string `locationName:"name" min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s UpdateEnvironmentInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateEnvironmentInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateEnvironmentInput"}
-
-	if s.EnvironmentId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("EnvironmentId"))
-	}
-	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type UpdateEnvironmentOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s UpdateEnvironmentOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opUpdateEnvironment = "UpdateEnvironment"
 
@@ -70,7 +24,7 @@ const opUpdateEnvironment = "UpdateEnvironment"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloud9-2017-09-23/UpdateEnvironment
-func (c *Client) UpdateEnvironmentRequest(input *UpdateEnvironmentInput) UpdateEnvironmentRequest {
+func (c *Client) UpdateEnvironmentRequest(input *types.UpdateEnvironmentInput) UpdateEnvironmentRequest {
 	op := &aws.Operation{
 		Name:       opUpdateEnvironment,
 		HTTPMethod: "POST",
@@ -78,10 +32,10 @@ func (c *Client) UpdateEnvironmentRequest(input *UpdateEnvironmentInput) UpdateE
 	}
 
 	if input == nil {
-		input = &UpdateEnvironmentInput{}
+		input = &types.UpdateEnvironmentInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateEnvironmentOutput{})
+	req := c.newRequest(op, input, &types.UpdateEnvironmentOutput{})
 	return UpdateEnvironmentRequest{Request: req, Input: input, Copy: c.UpdateEnvironmentRequest}
 }
 
@@ -89,8 +43,8 @@ func (c *Client) UpdateEnvironmentRequest(input *UpdateEnvironmentInput) UpdateE
 // UpdateEnvironment API operation.
 type UpdateEnvironmentRequest struct {
 	*aws.Request
-	Input *UpdateEnvironmentInput
-	Copy  func(*UpdateEnvironmentInput) UpdateEnvironmentRequest
+	Input *types.UpdateEnvironmentInput
+	Copy  func(*types.UpdateEnvironmentInput) UpdateEnvironmentRequest
 }
 
 // Send marshals and sends the UpdateEnvironment API request.
@@ -102,7 +56,7 @@ func (r UpdateEnvironmentRequest) Send(ctx context.Context) (*UpdateEnvironmentR
 	}
 
 	resp := &UpdateEnvironmentResponse{
-		UpdateEnvironmentOutput: r.Request.Data.(*UpdateEnvironmentOutput),
+		UpdateEnvironmentOutput: r.Request.Data.(*types.UpdateEnvironmentOutput),
 		response:                &aws.Response{Request: r.Request},
 	}
 
@@ -112,7 +66,7 @@ func (r UpdateEnvironmentRequest) Send(ctx context.Context) (*UpdateEnvironmentR
 // UpdateEnvironmentResponse is the response type for the
 // UpdateEnvironment API operation.
 type UpdateEnvironmentResponse struct {
-	*UpdateEnvironmentOutput
+	*types.UpdateEnvironmentOutput
 
 	response *aws.Response
 }

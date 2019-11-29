@@ -6,75 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/acmpca/types"
 )
-
-type ListTagsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) that was returned when you called the CreateCertificateAuthority
-	// action. This must be of the form:
-	//
-	// arn:aws:acm-pca:region:account:certificate-authority/12345678-1234-1234-1234-123456789012
-	//
-	// CertificateAuthorityArn is a required field
-	CertificateAuthorityArn *string `min:"5" type:"string" required:"true"`
-
-	// Use this parameter when paginating results to specify the maximum number
-	// of items to return in the response. If additional items exist beyond the
-	// number you specify, the NextToken element is sent in the response. Use this
-	// NextToken value in a subsequent request to retrieve additional items.
-	MaxResults *int64 `min:"1" type:"integer"`
-
-	// Use this parameter when paginating results in a subsequent request after
-	// you receive a response with truncated results. Set it to the value of NextToken
-	// from the response you just received.
-	NextToken *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s ListTagsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListTagsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListTagsInput"}
-
-	if s.CertificateAuthorityArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("CertificateAuthorityArn"))
-	}
-	if s.CertificateAuthorityArn != nil && len(*s.CertificateAuthorityArn) < 5 {
-		invalidParams.Add(aws.NewErrParamMinLen("CertificateAuthorityArn", 5))
-	}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-	if s.NextToken != nil && len(*s.NextToken) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ListTagsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// When the list is truncated, this value is present and should be used for
-	// the NextToken parameter in a subsequent pagination request.
-	NextToken *string `min:"1" type:"string"`
-
-	// The tags associated with your private CA.
-	Tags []Tag `min:"1" type:"list"`
-}
-
-// String returns the string representation
-func (s ListTagsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListTags = "ListTags"
 
@@ -95,7 +28,7 @@ const opListTags = "ListTags"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/acm-pca-2017-08-22/ListTags
-func (c *Client) ListTagsRequest(input *ListTagsInput) ListTagsRequest {
+func (c *Client) ListTagsRequest(input *types.ListTagsInput) ListTagsRequest {
 	op := &aws.Operation{
 		Name:       opListTags,
 		HTTPMethod: "POST",
@@ -109,10 +42,10 @@ func (c *Client) ListTagsRequest(input *ListTagsInput) ListTagsRequest {
 	}
 
 	if input == nil {
-		input = &ListTagsInput{}
+		input = &types.ListTagsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListTagsOutput{})
+	req := c.newRequest(op, input, &types.ListTagsOutput{})
 	return ListTagsRequest{Request: req, Input: input, Copy: c.ListTagsRequest}
 }
 
@@ -120,8 +53,8 @@ func (c *Client) ListTagsRequest(input *ListTagsInput) ListTagsRequest {
 // ListTags API operation.
 type ListTagsRequest struct {
 	*aws.Request
-	Input *ListTagsInput
-	Copy  func(*ListTagsInput) ListTagsRequest
+	Input *types.ListTagsInput
+	Copy  func(*types.ListTagsInput) ListTagsRequest
 }
 
 // Send marshals and sends the ListTags API request.
@@ -133,7 +66,7 @@ func (r ListTagsRequest) Send(ctx context.Context) (*ListTagsResponse, error) {
 	}
 
 	resp := &ListTagsResponse{
-		ListTagsOutput: r.Request.Data.(*ListTagsOutput),
+		ListTagsOutput: r.Request.Data.(*types.ListTagsOutput),
 		response:       &aws.Response{Request: r.Request},
 	}
 
@@ -163,7 +96,7 @@ func NewListTagsPaginator(req ListTagsRequest) ListTagsPaginator {
 	return ListTagsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListTagsInput
+				var inCpy *types.ListTagsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -183,14 +116,14 @@ type ListTagsPaginator struct {
 	aws.Pager
 }
 
-func (p *ListTagsPaginator) CurrentPage() *ListTagsOutput {
-	return p.Pager.CurrentPage().(*ListTagsOutput)
+func (p *ListTagsPaginator) CurrentPage() *types.ListTagsOutput {
+	return p.Pager.CurrentPage().(*types.ListTagsOutput)
 }
 
 // ListTagsResponse is the response type for the
 // ListTags API operation.
 type ListTagsResponse struct {
-	*ListTagsOutput
+	*types.ListTagsOutput
 
 	response *aws.Response
 }

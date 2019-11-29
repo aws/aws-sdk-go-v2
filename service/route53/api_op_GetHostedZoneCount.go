@@ -6,53 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/route53/types"
 )
-
-// A request to retrieve a count of all the hosted zones that are associated
-// with the current AWS account.
-type GetHostedZoneCountInput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s GetHostedZoneCountInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetHostedZoneCountInput) MarshalFields(e protocol.FieldEncoder) error {
-
-	return nil
-}
-
-// A complex type that contains the response to a GetHostedZoneCount request.
-type GetHostedZoneCountOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The total number of public and private hosted zones that are associated with
-	// the current AWS account.
-	//
-	// HostedZoneCount is a required field
-	HostedZoneCount *int64 `type:"long" required:"true"`
-}
-
-// String returns the string representation
-func (s GetHostedZoneCountOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetHostedZoneCountOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.HostedZoneCount != nil {
-		v := *s.HostedZoneCount
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "HostedZoneCount", protocol.Int64Value(v), metadata)
-	}
-	return nil
-}
 
 const opGetHostedZoneCount = "GetHostedZoneCount"
 
@@ -70,7 +25,7 @@ const opGetHostedZoneCount = "GetHostedZoneCount"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/GetHostedZoneCount
-func (c *Client) GetHostedZoneCountRequest(input *GetHostedZoneCountInput) GetHostedZoneCountRequest {
+func (c *Client) GetHostedZoneCountRequest(input *types.GetHostedZoneCountInput) GetHostedZoneCountRequest {
 	op := &aws.Operation{
 		Name:       opGetHostedZoneCount,
 		HTTPMethod: "GET",
@@ -78,10 +33,10 @@ func (c *Client) GetHostedZoneCountRequest(input *GetHostedZoneCountInput) GetHo
 	}
 
 	if input == nil {
-		input = &GetHostedZoneCountInput{}
+		input = &types.GetHostedZoneCountInput{}
 	}
 
-	req := c.newRequest(op, input, &GetHostedZoneCountOutput{})
+	req := c.newRequest(op, input, &types.GetHostedZoneCountOutput{})
 	return GetHostedZoneCountRequest{Request: req, Input: input, Copy: c.GetHostedZoneCountRequest}
 }
 
@@ -89,8 +44,8 @@ func (c *Client) GetHostedZoneCountRequest(input *GetHostedZoneCountInput) GetHo
 // GetHostedZoneCount API operation.
 type GetHostedZoneCountRequest struct {
 	*aws.Request
-	Input *GetHostedZoneCountInput
-	Copy  func(*GetHostedZoneCountInput) GetHostedZoneCountRequest
+	Input *types.GetHostedZoneCountInput
+	Copy  func(*types.GetHostedZoneCountInput) GetHostedZoneCountRequest
 }
 
 // Send marshals and sends the GetHostedZoneCount API request.
@@ -102,7 +57,7 @@ func (r GetHostedZoneCountRequest) Send(ctx context.Context) (*GetHostedZoneCoun
 	}
 
 	resp := &GetHostedZoneCountResponse{
-		GetHostedZoneCountOutput: r.Request.Data.(*GetHostedZoneCountOutput),
+		GetHostedZoneCountOutput: r.Request.Data.(*types.GetHostedZoneCountOutput),
 		response:                 &aws.Response{Request: r.Request},
 	}
 
@@ -112,7 +67,7 @@ func (r GetHostedZoneCountRequest) Send(ctx context.Context) (*GetHostedZoneCoun
 // GetHostedZoneCountResponse is the response type for the
 // GetHostedZoneCount API operation.
 type GetHostedZoneCountResponse struct {
-	*GetHostedZoneCountOutput
+	*types.GetHostedZoneCountOutput
 
 	response *aws.Response
 }

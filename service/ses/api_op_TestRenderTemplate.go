@@ -6,60 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ses/types"
 )
-
-type TestRenderTemplateInput struct {
-	_ struct{} `type:"structure"`
-
-	// A list of replacement values to apply to the template. This parameter is
-	// a JSON object, typically consisting of key-value pairs in which the keys
-	// correspond to replacement tags in the email template.
-	//
-	// TemplateData is a required field
-	TemplateData *string `type:"string" required:"true"`
-
-	// The name of the template that you want to render.
-	//
-	// TemplateName is a required field
-	TemplateName *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s TestRenderTemplateInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *TestRenderTemplateInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "TestRenderTemplateInput"}
-
-	if s.TemplateData == nil {
-		invalidParams.Add(aws.NewErrParamRequired("TemplateData"))
-	}
-
-	if s.TemplateName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("TemplateName"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type TestRenderTemplateOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The complete MIME message rendered by applying the data in the TemplateData
-	// parameter to the template specified in the TemplateName parameter.
-	RenderedTemplate *string `type:"string"`
-}
-
-// String returns the string representation
-func (s TestRenderTemplateOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opTestRenderTemplate = "TestRenderTemplate"
 
@@ -79,7 +27,7 @@ const opTestRenderTemplate = "TestRenderTemplate"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/TestRenderTemplate
-func (c *Client) TestRenderTemplateRequest(input *TestRenderTemplateInput) TestRenderTemplateRequest {
+func (c *Client) TestRenderTemplateRequest(input *types.TestRenderTemplateInput) TestRenderTemplateRequest {
 	op := &aws.Operation{
 		Name:       opTestRenderTemplate,
 		HTTPMethod: "POST",
@@ -87,10 +35,10 @@ func (c *Client) TestRenderTemplateRequest(input *TestRenderTemplateInput) TestR
 	}
 
 	if input == nil {
-		input = &TestRenderTemplateInput{}
+		input = &types.TestRenderTemplateInput{}
 	}
 
-	req := c.newRequest(op, input, &TestRenderTemplateOutput{})
+	req := c.newRequest(op, input, &types.TestRenderTemplateOutput{})
 	return TestRenderTemplateRequest{Request: req, Input: input, Copy: c.TestRenderTemplateRequest}
 }
 
@@ -98,8 +46,8 @@ func (c *Client) TestRenderTemplateRequest(input *TestRenderTemplateInput) TestR
 // TestRenderTemplate API operation.
 type TestRenderTemplateRequest struct {
 	*aws.Request
-	Input *TestRenderTemplateInput
-	Copy  func(*TestRenderTemplateInput) TestRenderTemplateRequest
+	Input *types.TestRenderTemplateInput
+	Copy  func(*types.TestRenderTemplateInput) TestRenderTemplateRequest
 }
 
 // Send marshals and sends the TestRenderTemplate API request.
@@ -111,7 +59,7 @@ func (r TestRenderTemplateRequest) Send(ctx context.Context) (*TestRenderTemplat
 	}
 
 	resp := &TestRenderTemplateResponse{
-		TestRenderTemplateOutput: r.Request.Data.(*TestRenderTemplateOutput),
+		TestRenderTemplateOutput: r.Request.Data.(*types.TestRenderTemplateOutput),
 		response:                 &aws.Response{Request: r.Request},
 	}
 
@@ -121,7 +69,7 @@ func (r TestRenderTemplateRequest) Send(ctx context.Context) (*TestRenderTemplat
 // TestRenderTemplateResponse is the response type for the
 // TestRenderTemplate API operation.
 type TestRenderTemplateResponse struct {
-	*TestRenderTemplateOutput
+	*types.TestRenderTemplateOutput
 
 	response *aws.Response
 }

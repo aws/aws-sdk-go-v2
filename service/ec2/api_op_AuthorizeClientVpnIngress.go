@@ -6,78 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-type AuthorizeClientVpnIngressInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the Active Directory group to grant access.
-	AccessGroupId *string `type:"string"`
-
-	// Indicates whether to grant access to all clients. Use true to grant all clients
-	// who successfully establish a VPN connection access to the network.
-	AuthorizeAllGroups *bool `type:"boolean"`
-
-	// Unique, case-sensitive identifier that you provide to ensure the idempotency
-	// of the request. For more information, see How to Ensure Idempotency (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html).
-	ClientToken *string `type:"string" idempotencyToken:"true"`
-
-	// The ID of the Client VPN endpoint.
-	//
-	// ClientVpnEndpointId is a required field
-	ClientVpnEndpointId *string `type:"string" required:"true"`
-
-	// A brief description of the authorization rule.
-	Description *string `type:"string"`
-
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have
-	// the required permissions, the error response is DryRunOperation. Otherwise,
-	// it is UnauthorizedOperation.
-	DryRun *bool `type:"boolean"`
-
-	// The IPv4 address range, in CIDR notation, of the network for which access
-	// is being authorized.
-	//
-	// TargetNetworkCidr is a required field
-	TargetNetworkCidr *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s AuthorizeClientVpnIngressInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *AuthorizeClientVpnIngressInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "AuthorizeClientVpnIngressInput"}
-
-	if s.ClientVpnEndpointId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ClientVpnEndpointId"))
-	}
-
-	if s.TargetNetworkCidr == nil {
-		invalidParams.Add(aws.NewErrParamRequired("TargetNetworkCidr"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type AuthorizeClientVpnIngressOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The current state of the authorization rule.
-	Status *VpnAuthorizationRuleStatus `locationName:"status" type:"structure"`
-}
-
-// String returns the string representation
-func (s AuthorizeClientVpnIngressOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opAuthorizeClientVpnIngress = "AuthorizeClientVpnIngress"
 
@@ -97,7 +27,7 @@ const opAuthorizeClientVpnIngress = "AuthorizeClientVpnIngress"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AuthorizeClientVpnIngress
-func (c *Client) AuthorizeClientVpnIngressRequest(input *AuthorizeClientVpnIngressInput) AuthorizeClientVpnIngressRequest {
+func (c *Client) AuthorizeClientVpnIngressRequest(input *types.AuthorizeClientVpnIngressInput) AuthorizeClientVpnIngressRequest {
 	op := &aws.Operation{
 		Name:       opAuthorizeClientVpnIngress,
 		HTTPMethod: "POST",
@@ -105,10 +35,10 @@ func (c *Client) AuthorizeClientVpnIngressRequest(input *AuthorizeClientVpnIngre
 	}
 
 	if input == nil {
-		input = &AuthorizeClientVpnIngressInput{}
+		input = &types.AuthorizeClientVpnIngressInput{}
 	}
 
-	req := c.newRequest(op, input, &AuthorizeClientVpnIngressOutput{})
+	req := c.newRequest(op, input, &types.AuthorizeClientVpnIngressOutput{})
 	return AuthorizeClientVpnIngressRequest{Request: req, Input: input, Copy: c.AuthorizeClientVpnIngressRequest}
 }
 
@@ -116,8 +46,8 @@ func (c *Client) AuthorizeClientVpnIngressRequest(input *AuthorizeClientVpnIngre
 // AuthorizeClientVpnIngress API operation.
 type AuthorizeClientVpnIngressRequest struct {
 	*aws.Request
-	Input *AuthorizeClientVpnIngressInput
-	Copy  func(*AuthorizeClientVpnIngressInput) AuthorizeClientVpnIngressRequest
+	Input *types.AuthorizeClientVpnIngressInput
+	Copy  func(*types.AuthorizeClientVpnIngressInput) AuthorizeClientVpnIngressRequest
 }
 
 // Send marshals and sends the AuthorizeClientVpnIngress API request.
@@ -129,7 +59,7 @@ func (r AuthorizeClientVpnIngressRequest) Send(ctx context.Context) (*AuthorizeC
 	}
 
 	resp := &AuthorizeClientVpnIngressResponse{
-		AuthorizeClientVpnIngressOutput: r.Request.Data.(*AuthorizeClientVpnIngressOutput),
+		AuthorizeClientVpnIngressOutput: r.Request.Data.(*types.AuthorizeClientVpnIngressOutput),
 		response:                        &aws.Response{Request: r.Request},
 	}
 
@@ -139,7 +69,7 @@ func (r AuthorizeClientVpnIngressRequest) Send(ctx context.Context) (*AuthorizeC
 // AuthorizeClientVpnIngressResponse is the response type for the
 // AuthorizeClientVpnIngress API operation.
 type AuthorizeClientVpnIngressResponse struct {
-	*AuthorizeClientVpnIngressOutput
+	*types.AuthorizeClientVpnIngressOutput
 
 	response *aws.Response
 }

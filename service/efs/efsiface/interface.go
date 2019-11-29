@@ -10,6 +10,7 @@ package efsiface
 
 import (
 	"github.com/aws/aws-sdk-go-v2/service/efs"
+	"github.com/aws/aws-sdk-go-v2/service/efs/types"
 )
 
 // ClientAPI provides an interface to enable mocking the
@@ -43,7 +44,7 @@ import (
 //    type mockClientClient struct {
 //        efsiface.ClientPI
 //    }
-//    func (m *mockClientClient) CreateFileSystem(input *efs.CreateFileSystemInput) (*efs.CreateFileSystemOutput, error) {
+//    func (m *mockClientClient) CreateFileSystem(input *types.CreateFileSystemInput) (*types.CreateFileSystemOutput, error) {
 //        // mock response/functionality
 //    }
 //
@@ -61,33 +62,33 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type ClientAPI interface {
-	CreateFileSystemRequest(*efs.CreateFileSystemInput) efs.CreateFileSystemRequest
+	CreateFileSystemRequest(*types.CreateFileSystemInput) efs.CreateFileSystemRequest
 
-	CreateMountTargetRequest(*efs.CreateMountTargetInput) efs.CreateMountTargetRequest
+	CreateMountTargetRequest(*types.CreateMountTargetInput) efs.CreateMountTargetRequest
 
-	CreateTagsRequest(*efs.CreateTagsInput) efs.CreateTagsRequest
+	CreateTagsRequest(*types.CreateTagsInput) efs.CreateTagsRequest
 
-	DeleteFileSystemRequest(*efs.DeleteFileSystemInput) efs.DeleteFileSystemRequest
+	DeleteFileSystemRequest(*types.DeleteFileSystemInput) efs.DeleteFileSystemRequest
 
-	DeleteMountTargetRequest(*efs.DeleteMountTargetInput) efs.DeleteMountTargetRequest
+	DeleteMountTargetRequest(*types.DeleteMountTargetInput) efs.DeleteMountTargetRequest
 
-	DeleteTagsRequest(*efs.DeleteTagsInput) efs.DeleteTagsRequest
+	DeleteTagsRequest(*types.DeleteTagsInput) efs.DeleteTagsRequest
 
-	DescribeFileSystemsRequest(*efs.DescribeFileSystemsInput) efs.DescribeFileSystemsRequest
+	DescribeFileSystemsRequest(*types.DescribeFileSystemsInput) efs.DescribeFileSystemsRequest
 
-	DescribeLifecycleConfigurationRequest(*efs.DescribeLifecycleConfigurationInput) efs.DescribeLifecycleConfigurationRequest
+	DescribeLifecycleConfigurationRequest(*types.DescribeLifecycleConfigurationInput) efs.DescribeLifecycleConfigurationRequest
 
-	DescribeMountTargetSecurityGroupsRequest(*efs.DescribeMountTargetSecurityGroupsInput) efs.DescribeMountTargetSecurityGroupsRequest
+	DescribeMountTargetSecurityGroupsRequest(*types.DescribeMountTargetSecurityGroupsInput) efs.DescribeMountTargetSecurityGroupsRequest
 
-	DescribeMountTargetsRequest(*efs.DescribeMountTargetsInput) efs.DescribeMountTargetsRequest
+	DescribeMountTargetsRequest(*types.DescribeMountTargetsInput) efs.DescribeMountTargetsRequest
 
-	DescribeTagsRequest(*efs.DescribeTagsInput) efs.DescribeTagsRequest
+	DescribeTagsRequest(*types.DescribeTagsInput) efs.DescribeTagsRequest
 
-	ModifyMountTargetSecurityGroupsRequest(*efs.ModifyMountTargetSecurityGroupsInput) efs.ModifyMountTargetSecurityGroupsRequest
+	ModifyMountTargetSecurityGroupsRequest(*types.ModifyMountTargetSecurityGroupsInput) efs.ModifyMountTargetSecurityGroupsRequest
 
-	PutLifecycleConfigurationRequest(*efs.PutLifecycleConfigurationInput) efs.PutLifecycleConfigurationRequest
+	PutLifecycleConfigurationRequest(*types.PutLifecycleConfigurationInput) efs.PutLifecycleConfigurationRequest
 
-	UpdateFileSystemRequest(*efs.UpdateFileSystemInput) efs.UpdateFileSystemRequest
+	UpdateFileSystemRequest(*types.UpdateFileSystemInput) efs.UpdateFileSystemRequest
 }
 
 var _ ClientAPI = (*efs.Client)(nil)

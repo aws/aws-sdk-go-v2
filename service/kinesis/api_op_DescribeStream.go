@@ -6,70 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/kinesis/types"
 )
-
-// Represents the input for DescribeStream.
-type DescribeStreamInput struct {
-	_ struct{} `type:"structure"`
-
-	// The shard ID of the shard to start with.
-	ExclusiveStartShardId *string `min:"1" type:"string"`
-
-	// The maximum number of shards to return in a single call. The default value
-	// is 100. If you specify a value greater than 100, at most 100 shards are returned.
-	Limit *int64 `min:"1" type:"integer"`
-
-	// The name of the stream to describe.
-	//
-	// StreamName is a required field
-	StreamName *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeStreamInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeStreamInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeStreamInput"}
-	if s.ExclusiveStartShardId != nil && len(*s.ExclusiveStartShardId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ExclusiveStartShardId", 1))
-	}
-	if s.Limit != nil && *s.Limit < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("Limit", 1))
-	}
-
-	if s.StreamName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("StreamName"))
-	}
-	if s.StreamName != nil && len(*s.StreamName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("StreamName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Represents the output for DescribeStream.
-type DescribeStreamOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The current status of the stream, the stream Amazon Resource Name (ARN),
-	// an array of shard objects that comprise the stream, and whether there are
-	// more shards available.
-	//
-	// StreamDescription is a required field
-	StreamDescription *StreamDescription `type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeStreamOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeStream = "DescribeStream"
 
@@ -104,7 +42,7 @@ const opDescribeStream = "DescribeStream"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/DescribeStream
-func (c *Client) DescribeStreamRequest(input *DescribeStreamInput) DescribeStreamRequest {
+func (c *Client) DescribeStreamRequest(input *types.DescribeStreamInput) DescribeStreamRequest {
 	op := &aws.Operation{
 		Name:       opDescribeStream,
 		HTTPMethod: "POST",
@@ -118,10 +56,10 @@ func (c *Client) DescribeStreamRequest(input *DescribeStreamInput) DescribeStrea
 	}
 
 	if input == nil {
-		input = &DescribeStreamInput{}
+		input = &types.DescribeStreamInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeStreamOutput{})
+	req := c.newRequest(op, input, &types.DescribeStreamOutput{})
 	return DescribeStreamRequest{Request: req, Input: input, Copy: c.DescribeStreamRequest}
 }
 
@@ -129,8 +67,8 @@ func (c *Client) DescribeStreamRequest(input *DescribeStreamInput) DescribeStrea
 // DescribeStream API operation.
 type DescribeStreamRequest struct {
 	*aws.Request
-	Input *DescribeStreamInput
-	Copy  func(*DescribeStreamInput) DescribeStreamRequest
+	Input *types.DescribeStreamInput
+	Copy  func(*types.DescribeStreamInput) DescribeStreamRequest
 }
 
 // Send marshals and sends the DescribeStream API request.
@@ -142,7 +80,7 @@ func (r DescribeStreamRequest) Send(ctx context.Context) (*DescribeStreamRespons
 	}
 
 	resp := &DescribeStreamResponse{
-		DescribeStreamOutput: r.Request.Data.(*DescribeStreamOutput),
+		DescribeStreamOutput: r.Request.Data.(*types.DescribeStreamOutput),
 		response:             &aws.Response{Request: r.Request},
 	}
 
@@ -172,7 +110,7 @@ func NewDescribeStreamPaginator(req DescribeStreamRequest) DescribeStreamPaginat
 	return DescribeStreamPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *DescribeStreamInput
+				var inCpy *types.DescribeStreamInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -192,14 +130,14 @@ type DescribeStreamPaginator struct {
 	aws.Pager
 }
 
-func (p *DescribeStreamPaginator) CurrentPage() *DescribeStreamOutput {
-	return p.Pager.CurrentPage().(*DescribeStreamOutput)
+func (p *DescribeStreamPaginator) CurrentPage() *types.DescribeStreamOutput {
+	return p.Pager.CurrentPage().(*types.DescribeStreamOutput)
 }
 
 // DescribeStreamResponse is the response type for the
 // DescribeStream API operation.
 type DescribeStreamResponse struct {
-	*DescribeStreamOutput
+	*types.DescribeStreamOutput
 
 	response *aws.Response
 }

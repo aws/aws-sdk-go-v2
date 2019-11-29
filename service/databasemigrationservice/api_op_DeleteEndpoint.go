@@ -6,48 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/databasemigrationservice/types"
 )
-
-type DeleteEndpointInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) string that uniquely identifies the endpoint.
-	//
-	// EndpointArn is a required field
-	EndpointArn *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteEndpointInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteEndpointInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteEndpointInput"}
-
-	if s.EndpointArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("EndpointArn"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteEndpointOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The endpoint that was deleted.
-	Endpoint *Endpoint `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteEndpointOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteEndpoint = "DeleteEndpoint"
 
@@ -67,7 +27,7 @@ const opDeleteEndpoint = "DeleteEndpoint"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DeleteEndpoint
-func (c *Client) DeleteEndpointRequest(input *DeleteEndpointInput) DeleteEndpointRequest {
+func (c *Client) DeleteEndpointRequest(input *types.DeleteEndpointInput) DeleteEndpointRequest {
 	op := &aws.Operation{
 		Name:       opDeleteEndpoint,
 		HTTPMethod: "POST",
@@ -75,10 +35,10 @@ func (c *Client) DeleteEndpointRequest(input *DeleteEndpointInput) DeleteEndpoin
 	}
 
 	if input == nil {
-		input = &DeleteEndpointInput{}
+		input = &types.DeleteEndpointInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteEndpointOutput{})
+	req := c.newRequest(op, input, &types.DeleteEndpointOutput{})
 	return DeleteEndpointRequest{Request: req, Input: input, Copy: c.DeleteEndpointRequest}
 }
 
@@ -86,8 +46,8 @@ func (c *Client) DeleteEndpointRequest(input *DeleteEndpointInput) DeleteEndpoin
 // DeleteEndpoint API operation.
 type DeleteEndpointRequest struct {
 	*aws.Request
-	Input *DeleteEndpointInput
-	Copy  func(*DeleteEndpointInput) DeleteEndpointRequest
+	Input *types.DeleteEndpointInput
+	Copy  func(*types.DeleteEndpointInput) DeleteEndpointRequest
 }
 
 // Send marshals and sends the DeleteEndpoint API request.
@@ -99,7 +59,7 @@ func (r DeleteEndpointRequest) Send(ctx context.Context) (*DeleteEndpointRespons
 	}
 
 	resp := &DeleteEndpointResponse{
-		DeleteEndpointOutput: r.Request.Data.(*DeleteEndpointOutput),
+		DeleteEndpointOutput: r.Request.Data.(*types.DeleteEndpointOutput),
 		response:             &aws.Response{Request: r.Request},
 	}
 
@@ -109,7 +69,7 @@ func (r DeleteEndpointRequest) Send(ctx context.Context) (*DeleteEndpointRespons
 // DeleteEndpointResponse is the response type for the
 // DeleteEndpoint API operation.
 type DeleteEndpointResponse struct {
-	*DeleteEndpointOutput
+	*types.DeleteEndpointOutput
 
 	response *aws.Response
 }

@@ -4,140 +4,10 @@ package iotanalytics
 
 import (
 	"context"
-	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/iotanalytics/types"
 )
-
-type ListDatasetContentsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the data set whose contents information you want to list.
-	//
-	// DatasetName is a required field
-	DatasetName *string `location:"uri" locationName:"datasetName" min:"1" type:"string" required:"true"`
-
-	// The maximum number of results to return in this request.
-	MaxResults *int64 `location:"querystring" locationName:"maxResults" min:"1" type:"integer"`
-
-	// The token for the next set of results.
-	NextToken *string `location:"querystring" locationName:"nextToken" type:"string"`
-
-	// A filter to limit results to those data set contents whose creation is scheduled
-	// before the given time. See the field triggers.schedule in the CreateDataset
-	// request. (timestamp)
-	ScheduledBefore *time.Time `location:"querystring" locationName:"scheduledBefore" type:"timestamp"`
-
-	// A filter to limit results to those data set contents whose creation is scheduled
-	// on or after the given time. See the field triggers.schedule in the CreateDataset
-	// request. (timestamp)
-	ScheduledOnOrAfter *time.Time `location:"querystring" locationName:"scheduledOnOrAfter" type:"timestamp"`
-}
-
-// String returns the string representation
-func (s ListDatasetContentsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListDatasetContentsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListDatasetContentsInput"}
-
-	if s.DatasetName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DatasetName"))
-	}
-	if s.DatasetName != nil && len(*s.DatasetName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("DatasetName", 1))
-	}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListDatasetContentsInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.DatasetName != nil {
-		v := *s.DatasetName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "datasetName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.MaxResults != nil {
-		v := *s.MaxResults
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "maxResults", protocol.Int64Value(v), metadata)
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.ScheduledBefore != nil {
-		v := *s.ScheduledBefore
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "scheduledBefore",
-			protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormatName, QuotedFormatTime: false}, metadata)
-	}
-	if s.ScheduledOnOrAfter != nil {
-		v := *s.ScheduledOnOrAfter
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "scheduledOnOrAfter",
-			protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormatName, QuotedFormatTime: false}, metadata)
-	}
-	return nil
-}
-
-type ListDatasetContentsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Summary information about data set contents that have been created.
-	DatasetContentSummaries []DatasetContentSummary `locationName:"datasetContentSummaries" type:"list"`
-
-	// The token to retrieve the next set of results, or null if there are no more
-	// results.
-	NextToken *string `locationName:"nextToken" type:"string"`
-}
-
-// String returns the string representation
-func (s ListDatasetContentsOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListDatasetContentsOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.DatasetContentSummaries != nil {
-		v := s.DatasetContentSummaries
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "datasetContentSummaries", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opListDatasetContents = "ListDatasetContents"
 
@@ -154,7 +24,7 @@ const opListDatasetContents = "ListDatasetContents"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iotanalytics-2017-11-27/ListDatasetContents
-func (c *Client) ListDatasetContentsRequest(input *ListDatasetContentsInput) ListDatasetContentsRequest {
+func (c *Client) ListDatasetContentsRequest(input *types.ListDatasetContentsInput) ListDatasetContentsRequest {
 	op := &aws.Operation{
 		Name:       opListDatasetContents,
 		HTTPMethod: "GET",
@@ -168,10 +38,10 @@ func (c *Client) ListDatasetContentsRequest(input *ListDatasetContentsInput) Lis
 	}
 
 	if input == nil {
-		input = &ListDatasetContentsInput{}
+		input = &types.ListDatasetContentsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListDatasetContentsOutput{})
+	req := c.newRequest(op, input, &types.ListDatasetContentsOutput{})
 	return ListDatasetContentsRequest{Request: req, Input: input, Copy: c.ListDatasetContentsRequest}
 }
 
@@ -179,8 +49,8 @@ func (c *Client) ListDatasetContentsRequest(input *ListDatasetContentsInput) Lis
 // ListDatasetContents API operation.
 type ListDatasetContentsRequest struct {
 	*aws.Request
-	Input *ListDatasetContentsInput
-	Copy  func(*ListDatasetContentsInput) ListDatasetContentsRequest
+	Input *types.ListDatasetContentsInput
+	Copy  func(*types.ListDatasetContentsInput) ListDatasetContentsRequest
 }
 
 // Send marshals and sends the ListDatasetContents API request.
@@ -192,7 +62,7 @@ func (r ListDatasetContentsRequest) Send(ctx context.Context) (*ListDatasetConte
 	}
 
 	resp := &ListDatasetContentsResponse{
-		ListDatasetContentsOutput: r.Request.Data.(*ListDatasetContentsOutput),
+		ListDatasetContentsOutput: r.Request.Data.(*types.ListDatasetContentsOutput),
 		response:                  &aws.Response{Request: r.Request},
 	}
 
@@ -222,7 +92,7 @@ func NewListDatasetContentsPaginator(req ListDatasetContentsRequest) ListDataset
 	return ListDatasetContentsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListDatasetContentsInput
+				var inCpy *types.ListDatasetContentsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -242,14 +112,14 @@ type ListDatasetContentsPaginator struct {
 	aws.Pager
 }
 
-func (p *ListDatasetContentsPaginator) CurrentPage() *ListDatasetContentsOutput {
-	return p.Pager.CurrentPage().(*ListDatasetContentsOutput)
+func (p *ListDatasetContentsPaginator) CurrentPage() *types.ListDatasetContentsOutput {
+	return p.Pager.CurrentPage().(*types.ListDatasetContentsOutput)
 }
 
 // ListDatasetContentsResponse is the response type for the
 // ListDatasetContents API operation.
 type ListDatasetContentsResponse struct {
-	*ListDatasetContentsOutput
+	*types.ListDatasetContentsOutput
 
 	response *aws.Response
 }

@@ -6,58 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/dax/types"
 )
-
-type UpdateParameterGroupInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the parameter group.
-	//
-	// ParameterGroupName is a required field
-	ParameterGroupName *string `type:"string" required:"true"`
-
-	// An array of name-value pairs for the parameters in the group. Each element
-	// in the array represents a single parameter.
-	//
-	// ParameterNameValues is a required field
-	ParameterNameValues []ParameterNameValue `type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s UpdateParameterGroupInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateParameterGroupInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateParameterGroupInput"}
-
-	if s.ParameterGroupName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ParameterGroupName"))
-	}
-
-	if s.ParameterNameValues == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ParameterNameValues"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type UpdateParameterGroupOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The parameter group that has been modified.
-	ParameterGroup *ParameterGroup `type:"structure"`
-}
-
-// String returns the string representation
-func (s UpdateParameterGroupOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opUpdateParameterGroup = "UpdateParameterGroup"
 
@@ -75,7 +25,7 @@ const opUpdateParameterGroup = "UpdateParameterGroup"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dax-2017-04-19/UpdateParameterGroup
-func (c *Client) UpdateParameterGroupRequest(input *UpdateParameterGroupInput) UpdateParameterGroupRequest {
+func (c *Client) UpdateParameterGroupRequest(input *types.UpdateParameterGroupInput) UpdateParameterGroupRequest {
 	op := &aws.Operation{
 		Name:       opUpdateParameterGroup,
 		HTTPMethod: "POST",
@@ -83,10 +33,10 @@ func (c *Client) UpdateParameterGroupRequest(input *UpdateParameterGroupInput) U
 	}
 
 	if input == nil {
-		input = &UpdateParameterGroupInput{}
+		input = &types.UpdateParameterGroupInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateParameterGroupOutput{})
+	req := c.newRequest(op, input, &types.UpdateParameterGroupOutput{})
 	return UpdateParameterGroupRequest{Request: req, Input: input, Copy: c.UpdateParameterGroupRequest}
 }
 
@@ -94,8 +44,8 @@ func (c *Client) UpdateParameterGroupRequest(input *UpdateParameterGroupInput) U
 // UpdateParameterGroup API operation.
 type UpdateParameterGroupRequest struct {
 	*aws.Request
-	Input *UpdateParameterGroupInput
-	Copy  func(*UpdateParameterGroupInput) UpdateParameterGroupRequest
+	Input *types.UpdateParameterGroupInput
+	Copy  func(*types.UpdateParameterGroupInput) UpdateParameterGroupRequest
 }
 
 // Send marshals and sends the UpdateParameterGroup API request.
@@ -107,7 +57,7 @@ func (r UpdateParameterGroupRequest) Send(ctx context.Context) (*UpdateParameter
 	}
 
 	resp := &UpdateParameterGroupResponse{
-		UpdateParameterGroupOutput: r.Request.Data.(*UpdateParameterGroupOutput),
+		UpdateParameterGroupOutput: r.Request.Data.(*types.UpdateParameterGroupOutput),
 		response:                   &aws.Response{Request: r.Request},
 	}
 
@@ -117,7 +67,7 @@ func (r UpdateParameterGroupRequest) Send(ctx context.Context) (*UpdateParameter
 // UpdateParameterGroupResponse is the response type for the
 // UpdateParameterGroup API operation.
 type UpdateParameterGroupResponse struct {
-	*UpdateParameterGroupOutput
+	*types.UpdateParameterGroupOutput
 
 	response *aws.Response
 }

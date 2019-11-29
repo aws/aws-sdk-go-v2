@@ -6,158 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/glacier/types"
 )
-
-// Provides options to complete a multipart upload operation. This informs Amazon
-// Glacier that all the archive parts have been uploaded and Amazon S3 Glacier
-// (Glacier) can now assemble the archive from the uploaded parts. After assembling
-// and saving the archive to the vault, Glacier returns the URI path of the
-// newly created archive resource.
-type CompleteMultipartUploadInput struct {
-	_ struct{} `type:"structure"`
-
-	// The AccountId value is the AWS account ID of the account that owns the vault.
-	// You can either specify an AWS account ID or optionally a single '-' (hyphen),
-	// in which case Amazon S3 Glacier uses the AWS account ID associated with the
-	// credentials used to sign the request. If you use an account ID, do not include
-	// any hyphens ('-') in the ID.
-	//
-	// AccountId is a required field
-	AccountId *string `location:"uri" locationName:"accountId" type:"string" required:"true"`
-
-	// The total size, in bytes, of the entire archive. This value should be the
-	// sum of all the sizes of the individual parts that you uploaded.
-	ArchiveSize *string `location:"header" locationName:"x-amz-archive-size" type:"string"`
-
-	// The SHA256 tree hash of the entire archive. It is the tree hash of SHA256
-	// tree hash of the individual parts. If the value you specify in the request
-	// does not match the SHA256 tree hash of the final assembled archive as computed
-	// by Amazon S3 Glacier (Glacier), Glacier returns an error and the request
-	// fails.
-	Checksum *string `location:"header" locationName:"x-amz-sha256-tree-hash" type:"string"`
-
-	// The upload ID of the multipart upload.
-	//
-	// UploadId is a required field
-	UploadId *string `location:"uri" locationName:"uploadId" type:"string" required:"true"`
-
-	// The name of the vault.
-	//
-	// VaultName is a required field
-	VaultName *string `location:"uri" locationName:"vaultName" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s CompleteMultipartUploadInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CompleteMultipartUploadInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CompleteMultipartUploadInput"}
-
-	if s.AccountId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("AccountId"))
-	}
-
-	if s.UploadId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("UploadId"))
-	}
-
-	if s.VaultName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("VaultName"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s CompleteMultipartUploadInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.ArchiveSize != nil {
-		v := *s.ArchiveSize
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "x-amz-archive-size", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Checksum != nil {
-		v := *s.Checksum
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "x-amz-sha256-tree-hash", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.AccountId != nil {
-		v := *s.AccountId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "accountId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.UploadId != nil {
-		v := *s.UploadId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "uploadId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.VaultName != nil {
-		v := *s.VaultName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "vaultName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-// Contains the Amazon S3 Glacier response to your request.
-//
-// For information about the underlying REST API, see Upload Archive (https://docs.aws.amazon.com/amazonglacier/latest/dev/api-archive-post.html).
-// For conceptual information, see Working with Archives in Amazon S3 Glacier
-// (https://docs.aws.amazon.com/amazonglacier/latest/dev/working-with-archives.html).
-type CompleteMultipartUploadOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the archive. This value is also included as part of the location.
-	ArchiveId *string `location:"header" locationName:"x-amz-archive-id" type:"string"`
-
-	// The checksum of the archive computed by Amazon S3 Glacier.
-	Checksum *string `location:"header" locationName:"x-amz-sha256-tree-hash" type:"string"`
-
-	// The relative URI path of the newly added archive resource.
-	Location *string `location:"header" locationName:"Location" type:"string"`
-}
-
-// String returns the string representation
-func (s CompleteMultipartUploadOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s CompleteMultipartUploadOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.ArchiveId != nil {
-		v := *s.ArchiveId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "x-amz-archive-id", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Checksum != nil {
-		v := *s.Checksum
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "x-amz-sha256-tree-hash", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Location != nil {
-		v := *s.Location
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "Location", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opCompleteMultipartUpload = "CompleteMultipartUpload"
 
@@ -215,7 +65,7 @@ const opCompleteMultipartUpload = "CompleteMultipartUpload"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) CompleteMultipartUploadRequest(input *CompleteMultipartUploadInput) CompleteMultipartUploadRequest {
+func (c *Client) CompleteMultipartUploadRequest(input *types.CompleteMultipartUploadInput) CompleteMultipartUploadRequest {
 	op := &aws.Operation{
 		Name:       opCompleteMultipartUpload,
 		HTTPMethod: "POST",
@@ -223,10 +73,10 @@ func (c *Client) CompleteMultipartUploadRequest(input *CompleteMultipartUploadIn
 	}
 
 	if input == nil {
-		input = &CompleteMultipartUploadInput{}
+		input = &types.CompleteMultipartUploadInput{}
 	}
 
-	req := c.newRequest(op, input, &CompleteMultipartUploadOutput{})
+	req := c.newRequest(op, input, &types.CompleteMultipartUploadOutput{})
 	return CompleteMultipartUploadRequest{Request: req, Input: input, Copy: c.CompleteMultipartUploadRequest}
 }
 
@@ -234,8 +84,8 @@ func (c *Client) CompleteMultipartUploadRequest(input *CompleteMultipartUploadIn
 // CompleteMultipartUpload API operation.
 type CompleteMultipartUploadRequest struct {
 	*aws.Request
-	Input *CompleteMultipartUploadInput
-	Copy  func(*CompleteMultipartUploadInput) CompleteMultipartUploadRequest
+	Input *types.CompleteMultipartUploadInput
+	Copy  func(*types.CompleteMultipartUploadInput) CompleteMultipartUploadRequest
 }
 
 // Send marshals and sends the CompleteMultipartUpload API request.
@@ -247,7 +97,7 @@ func (r CompleteMultipartUploadRequest) Send(ctx context.Context) (*CompleteMult
 	}
 
 	resp := &CompleteMultipartUploadResponse{
-		CompleteMultipartUploadOutput: r.Request.Data.(*CompleteMultipartUploadOutput),
+		CompleteMultipartUploadOutput: r.Request.Data.(*types.CompleteMultipartUploadOutput),
 		response:                      &aws.Response{Request: r.Request},
 	}
 
@@ -257,7 +107,7 @@ func (r CompleteMultipartUploadRequest) Send(ctx context.Context) (*CompleteMult
 // CompleteMultipartUploadResponse is the response type for the
 // CompleteMultipartUpload API operation.
 type CompleteMultipartUploadResponse struct {
-	*CompleteMultipartUploadOutput
+	*types.CompleteMultipartUploadOutput
 
 	response *aws.Response
 }

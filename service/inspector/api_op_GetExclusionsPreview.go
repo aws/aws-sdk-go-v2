@@ -6,89 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/inspector/types"
 )
-
-type GetExclusionsPreviewInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ARN that specifies the assessment template for which the exclusions preview
-	// was requested.
-	//
-	// AssessmentTemplateArn is a required field
-	AssessmentTemplateArn *string `locationName:"assessmentTemplateArn" min:"1" type:"string" required:"true"`
-
-	// The locale into which you want to translate the exclusion's title, description,
-	// and recommendation.
-	Locale Locale `locationName:"locale" type:"string" enum:"true"`
-
-	// You can use this parameter to indicate the maximum number of items you want
-	// in the response. The default value is 100. The maximum value is 500.
-	MaxResults *int64 `locationName:"maxResults" type:"integer"`
-
-	// You can use this parameter when paginating results. Set the value of this
-	// parameter to null on your first call to the GetExclusionsPreviewRequest action.
-	// Subsequent calls to the action fill nextToken in the request with the value
-	// of nextToken from the previous response to continue listing data.
-	NextToken *string `locationName:"nextToken" min:"1" type:"string"`
-
-	// The unique identifier associated of the exclusions preview.
-	//
-	// PreviewToken is a required field
-	PreviewToken *string `locationName:"previewToken" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetExclusionsPreviewInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetExclusionsPreviewInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetExclusionsPreviewInput"}
-
-	if s.AssessmentTemplateArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("AssessmentTemplateArn"))
-	}
-	if s.AssessmentTemplateArn != nil && len(*s.AssessmentTemplateArn) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("AssessmentTemplateArn", 1))
-	}
-	if s.NextToken != nil && len(*s.NextToken) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
-	}
-
-	if s.PreviewToken == nil {
-		invalidParams.Add(aws.NewErrParamRequired("PreviewToken"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type GetExclusionsPreviewOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Information about the exclusions included in the preview.
-	ExclusionPreviews []ExclusionPreview `locationName:"exclusionPreviews" type:"list"`
-
-	// When a response is generated, if there is more data to be listed, this parameters
-	// is present in the response and contains the value to use for the nextToken
-	// parameter in a subsequent pagination request. If there is no more data to
-	// be listed, this parameter is set to null.
-	NextToken *string `locationName:"nextToken" min:"1" type:"string"`
-
-	// Specifies the status of the request to generate an exclusions preview.
-	//
-	// PreviewStatus is a required field
-	PreviewStatus PreviewStatus `locationName:"previewStatus" type:"string" required:"true" enum:"true"`
-}
-
-// String returns the string representation
-func (s GetExclusionsPreviewOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetExclusionsPreview = "GetExclusionsPreview"
 
@@ -107,7 +26,7 @@ const opGetExclusionsPreview = "GetExclusionsPreview"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/GetExclusionsPreview
-func (c *Client) GetExclusionsPreviewRequest(input *GetExclusionsPreviewInput) GetExclusionsPreviewRequest {
+func (c *Client) GetExclusionsPreviewRequest(input *types.GetExclusionsPreviewInput) GetExclusionsPreviewRequest {
 	op := &aws.Operation{
 		Name:       opGetExclusionsPreview,
 		HTTPMethod: "POST",
@@ -121,10 +40,10 @@ func (c *Client) GetExclusionsPreviewRequest(input *GetExclusionsPreviewInput) G
 	}
 
 	if input == nil {
-		input = &GetExclusionsPreviewInput{}
+		input = &types.GetExclusionsPreviewInput{}
 	}
 
-	req := c.newRequest(op, input, &GetExclusionsPreviewOutput{})
+	req := c.newRequest(op, input, &types.GetExclusionsPreviewOutput{})
 	return GetExclusionsPreviewRequest{Request: req, Input: input, Copy: c.GetExclusionsPreviewRequest}
 }
 
@@ -132,8 +51,8 @@ func (c *Client) GetExclusionsPreviewRequest(input *GetExclusionsPreviewInput) G
 // GetExclusionsPreview API operation.
 type GetExclusionsPreviewRequest struct {
 	*aws.Request
-	Input *GetExclusionsPreviewInput
-	Copy  func(*GetExclusionsPreviewInput) GetExclusionsPreviewRequest
+	Input *types.GetExclusionsPreviewInput
+	Copy  func(*types.GetExclusionsPreviewInput) GetExclusionsPreviewRequest
 }
 
 // Send marshals and sends the GetExclusionsPreview API request.
@@ -145,7 +64,7 @@ func (r GetExclusionsPreviewRequest) Send(ctx context.Context) (*GetExclusionsPr
 	}
 
 	resp := &GetExclusionsPreviewResponse{
-		GetExclusionsPreviewOutput: r.Request.Data.(*GetExclusionsPreviewOutput),
+		GetExclusionsPreviewOutput: r.Request.Data.(*types.GetExclusionsPreviewOutput),
 		response:                   &aws.Response{Request: r.Request},
 	}
 
@@ -175,7 +94,7 @@ func NewGetExclusionsPreviewPaginator(req GetExclusionsPreviewRequest) GetExclus
 	return GetExclusionsPreviewPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *GetExclusionsPreviewInput
+				var inCpy *types.GetExclusionsPreviewInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -195,14 +114,14 @@ type GetExclusionsPreviewPaginator struct {
 	aws.Pager
 }
 
-func (p *GetExclusionsPreviewPaginator) CurrentPage() *GetExclusionsPreviewOutput {
-	return p.Pager.CurrentPage().(*GetExclusionsPreviewOutput)
+func (p *GetExclusionsPreviewPaginator) CurrentPage() *types.GetExclusionsPreviewOutput {
+	return p.Pager.CurrentPage().(*types.GetExclusionsPreviewOutput)
 }
 
 // GetExclusionsPreviewResponse is the response type for the
 // GetExclusionsPreview API operation.
 type GetExclusionsPreviewResponse struct {
-	*GetExclusionsPreviewOutput
+	*types.GetExclusionsPreviewOutput
 
 	response *aws.Response
 }

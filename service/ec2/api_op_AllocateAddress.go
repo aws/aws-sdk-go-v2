@@ -6,60 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-type AllocateAddressInput struct {
-	_ struct{} `type:"structure"`
-
-	// [EC2-VPC] The Elastic IP address to recover or an IPv4 address from an address
-	// pool.
-	Address *string `type:"string"`
-
-	// Set to vpc to allocate the address for use with instances in a VPC.
-	//
-	// Default: The address is for use with instances in EC2-Classic.
-	Domain DomainType `type:"string" enum:"true"`
-
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have
-	// the required permissions, the error response is DryRunOperation. Otherwise,
-	// it is UnauthorizedOperation.
-	DryRun *bool `locationName:"dryRun" type:"boolean"`
-
-	// The ID of an address pool that you own. Use this parameter to let Amazon
-	// EC2 select an address from the address pool. To specify a specific address
-	// from the address pool, use the Address parameter instead.
-	PublicIpv4Pool *string `type:"string"`
-}
-
-// String returns the string representation
-func (s AllocateAddressInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type AllocateAddressOutput struct {
-	_ struct{} `type:"structure"`
-
-	// [EC2-VPC] The ID that AWS assigns to represent the allocation of the Elastic
-	// IP address for use with instances in a VPC.
-	AllocationId *string `locationName:"allocationId" type:"string"`
-
-	// Indicates whether this Elastic IP address is for use with instances in EC2-Classic
-	// (standard) or instances in a VPC (vpc).
-	Domain DomainType `locationName:"domain" type:"string" enum:"true"`
-
-	// The Elastic IP address.
-	PublicIp *string `locationName:"publicIp" type:"string"`
-
-	// The ID of an address pool.
-	PublicIpv4Pool *string `locationName:"publicIpv4Pool" type:"string"`
-}
-
-// String returns the string representation
-func (s AllocateAddressOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opAllocateAddress = "AllocateAddress"
 
@@ -99,7 +47,7 @@ const opAllocateAddress = "AllocateAddress"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AllocateAddress
-func (c *Client) AllocateAddressRequest(input *AllocateAddressInput) AllocateAddressRequest {
+func (c *Client) AllocateAddressRequest(input *types.AllocateAddressInput) AllocateAddressRequest {
 	op := &aws.Operation{
 		Name:       opAllocateAddress,
 		HTTPMethod: "POST",
@@ -107,10 +55,10 @@ func (c *Client) AllocateAddressRequest(input *AllocateAddressInput) AllocateAdd
 	}
 
 	if input == nil {
-		input = &AllocateAddressInput{}
+		input = &types.AllocateAddressInput{}
 	}
 
-	req := c.newRequest(op, input, &AllocateAddressOutput{})
+	req := c.newRequest(op, input, &types.AllocateAddressOutput{})
 	return AllocateAddressRequest{Request: req, Input: input, Copy: c.AllocateAddressRequest}
 }
 
@@ -118,8 +66,8 @@ func (c *Client) AllocateAddressRequest(input *AllocateAddressInput) AllocateAdd
 // AllocateAddress API operation.
 type AllocateAddressRequest struct {
 	*aws.Request
-	Input *AllocateAddressInput
-	Copy  func(*AllocateAddressInput) AllocateAddressRequest
+	Input *types.AllocateAddressInput
+	Copy  func(*types.AllocateAddressInput) AllocateAddressRequest
 }
 
 // Send marshals and sends the AllocateAddress API request.
@@ -131,7 +79,7 @@ func (r AllocateAddressRequest) Send(ctx context.Context) (*AllocateAddressRespo
 	}
 
 	resp := &AllocateAddressResponse{
-		AllocateAddressOutput: r.Request.Data.(*AllocateAddressOutput),
+		AllocateAddressOutput: r.Request.Data.(*types.AllocateAddressOutput),
 		response:              &aws.Response{Request: r.Request},
 	}
 
@@ -141,7 +89,7 @@ func (r AllocateAddressRequest) Send(ctx context.Context) (*AllocateAddressRespo
 // AllocateAddressResponse is the response type for the
 // AllocateAddress API operation.
 type AllocateAddressResponse struct {
-	*AllocateAddressOutput
+	*types.AllocateAddressOutput
 
 	response *aws.Response
 }

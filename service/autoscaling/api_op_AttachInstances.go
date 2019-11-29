@@ -6,53 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/query"
+	"github.com/aws/aws-sdk-go-v2/service/autoscaling/types"
 )
-
-type AttachInstancesInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the Auto Scaling group.
-	//
-	// AutoScalingGroupName is a required field
-	AutoScalingGroupName *string `min:"1" type:"string" required:"true"`
-
-	// The IDs of the instances. You can specify up to 20 instances.
-	InstanceIds []string `type:"list"`
-}
-
-// String returns the string representation
-func (s AttachInstancesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *AttachInstancesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "AttachInstancesInput"}
-
-	if s.AutoScalingGroupName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("AutoScalingGroupName"))
-	}
-	if s.AutoScalingGroupName != nil && len(*s.AutoScalingGroupName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("AutoScalingGroupName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type AttachInstancesOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s AttachInstancesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opAttachInstances = "AttachInstances"
 
@@ -83,7 +40,7 @@ const opAttachInstances = "AttachInstances"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/AttachInstances
-func (c *Client) AttachInstancesRequest(input *AttachInstancesInput) AttachInstancesRequest {
+func (c *Client) AttachInstancesRequest(input *types.AttachInstancesInput) AttachInstancesRequest {
 	op := &aws.Operation{
 		Name:       opAttachInstances,
 		HTTPMethod: "POST",
@@ -91,10 +48,10 @@ func (c *Client) AttachInstancesRequest(input *AttachInstancesInput) AttachInsta
 	}
 
 	if input == nil {
-		input = &AttachInstancesInput{}
+		input = &types.AttachInstancesInput{}
 	}
 
-	req := c.newRequest(op, input, &AttachInstancesOutput{})
+	req := c.newRequest(op, input, &types.AttachInstancesOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return AttachInstancesRequest{Request: req, Input: input, Copy: c.AttachInstancesRequest}
@@ -104,8 +61,8 @@ func (c *Client) AttachInstancesRequest(input *AttachInstancesInput) AttachInsta
 // AttachInstances API operation.
 type AttachInstancesRequest struct {
 	*aws.Request
-	Input *AttachInstancesInput
-	Copy  func(*AttachInstancesInput) AttachInstancesRequest
+	Input *types.AttachInstancesInput
+	Copy  func(*types.AttachInstancesInput) AttachInstancesRequest
 }
 
 // Send marshals and sends the AttachInstances API request.
@@ -117,7 +74,7 @@ func (r AttachInstancesRequest) Send(ctx context.Context) (*AttachInstancesRespo
 	}
 
 	resp := &AttachInstancesResponse{
-		AttachInstancesOutput: r.Request.Data.(*AttachInstancesOutput),
+		AttachInstancesOutput: r.Request.Data.(*types.AttachInstancesOutput),
 		response:              &aws.Response{Request: r.Request},
 	}
 
@@ -127,7 +84,7 @@ func (r AttachInstancesRequest) Send(ctx context.Context) (*AttachInstancesRespo
 // AttachInstancesResponse is the response type for the
 // AttachInstances API operation.
 type AttachInstancesResponse struct {
-	*AttachInstancesOutput
+	*types.AttachInstancesOutput
 
 	response *aws.Response
 }

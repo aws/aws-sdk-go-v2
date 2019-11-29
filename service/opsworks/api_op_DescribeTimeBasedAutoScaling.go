@@ -6,50 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/opsworks/types"
 )
-
-type DescribeTimeBasedAutoScalingInput struct {
-	_ struct{} `type:"structure"`
-
-	// An array of instance IDs.
-	//
-	// InstanceIds is a required field
-	InstanceIds []string `type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeTimeBasedAutoScalingInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeTimeBasedAutoScalingInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeTimeBasedAutoScalingInput"}
-
-	if s.InstanceIds == nil {
-		invalidParams.Add(aws.NewErrParamRequired("InstanceIds"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Contains the response to a DescribeTimeBasedAutoScaling request.
-type DescribeTimeBasedAutoScalingOutput struct {
-	_ struct{} `type:"structure"`
-
-	// An array of TimeBasedAutoScalingConfiguration objects that describe the configuration
-	// for the specified instances.
-	TimeBasedAutoScalingConfigurations []TimeBasedAutoScalingConfiguration `type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeTimeBasedAutoScalingOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeTimeBasedAutoScaling = "DescribeTimeBasedAutoScaling"
 
@@ -73,7 +31,7 @@ const opDescribeTimeBasedAutoScaling = "DescribeTimeBasedAutoScaling"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DescribeTimeBasedAutoScaling
-func (c *Client) DescribeTimeBasedAutoScalingRequest(input *DescribeTimeBasedAutoScalingInput) DescribeTimeBasedAutoScalingRequest {
+func (c *Client) DescribeTimeBasedAutoScalingRequest(input *types.DescribeTimeBasedAutoScalingInput) DescribeTimeBasedAutoScalingRequest {
 	op := &aws.Operation{
 		Name:       opDescribeTimeBasedAutoScaling,
 		HTTPMethod: "POST",
@@ -81,10 +39,10 @@ func (c *Client) DescribeTimeBasedAutoScalingRequest(input *DescribeTimeBasedAut
 	}
 
 	if input == nil {
-		input = &DescribeTimeBasedAutoScalingInput{}
+		input = &types.DescribeTimeBasedAutoScalingInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeTimeBasedAutoScalingOutput{})
+	req := c.newRequest(op, input, &types.DescribeTimeBasedAutoScalingOutput{})
 	return DescribeTimeBasedAutoScalingRequest{Request: req, Input: input, Copy: c.DescribeTimeBasedAutoScalingRequest}
 }
 
@@ -92,8 +50,8 @@ func (c *Client) DescribeTimeBasedAutoScalingRequest(input *DescribeTimeBasedAut
 // DescribeTimeBasedAutoScaling API operation.
 type DescribeTimeBasedAutoScalingRequest struct {
 	*aws.Request
-	Input *DescribeTimeBasedAutoScalingInput
-	Copy  func(*DescribeTimeBasedAutoScalingInput) DescribeTimeBasedAutoScalingRequest
+	Input *types.DescribeTimeBasedAutoScalingInput
+	Copy  func(*types.DescribeTimeBasedAutoScalingInput) DescribeTimeBasedAutoScalingRequest
 }
 
 // Send marshals and sends the DescribeTimeBasedAutoScaling API request.
@@ -105,7 +63,7 @@ func (r DescribeTimeBasedAutoScalingRequest) Send(ctx context.Context) (*Describ
 	}
 
 	resp := &DescribeTimeBasedAutoScalingResponse{
-		DescribeTimeBasedAutoScalingOutput: r.Request.Data.(*DescribeTimeBasedAutoScalingOutput),
+		DescribeTimeBasedAutoScalingOutput: r.Request.Data.(*types.DescribeTimeBasedAutoScalingOutput),
 		response:                           &aws.Response{Request: r.Request},
 	}
 
@@ -115,7 +73,7 @@ func (r DescribeTimeBasedAutoScalingRequest) Send(ctx context.Context) (*Describ
 // DescribeTimeBasedAutoScalingResponse is the response type for the
 // DescribeTimeBasedAutoScaling API operation.
 type DescribeTimeBasedAutoScalingResponse struct {
-	*DescribeTimeBasedAutoScalingOutput
+	*types.DescribeTimeBasedAutoScalingOutput
 
 	response *aws.Response
 }

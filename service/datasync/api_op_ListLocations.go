@@ -6,42 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/datasync/types"
 )
-
-// ListLocationsRequest
-type ListLocationsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The maximum number of locations to return.
-	MaxResults *int64 `type:"integer"`
-
-	// An opaque string that indicates the position at which to begin the next list
-	// of locations.
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s ListLocationsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// ListLocationsResponse
-type ListLocationsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// An array that contains a list of locations.
-	Locations []LocationListEntry `type:"list"`
-
-	// An opaque string that indicates the position at which to begin returning
-	// the next list of locations.
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s ListLocationsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListLocations = "ListLocations"
 
@@ -63,7 +29,7 @@ const opListLocations = "ListLocations"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/ListLocations
-func (c *Client) ListLocationsRequest(input *ListLocationsInput) ListLocationsRequest {
+func (c *Client) ListLocationsRequest(input *types.ListLocationsInput) ListLocationsRequest {
 	op := &aws.Operation{
 		Name:       opListLocations,
 		HTTPMethod: "POST",
@@ -77,10 +43,10 @@ func (c *Client) ListLocationsRequest(input *ListLocationsInput) ListLocationsRe
 	}
 
 	if input == nil {
-		input = &ListLocationsInput{}
+		input = &types.ListLocationsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListLocationsOutput{})
+	req := c.newRequest(op, input, &types.ListLocationsOutput{})
 	return ListLocationsRequest{Request: req, Input: input, Copy: c.ListLocationsRequest}
 }
 
@@ -88,8 +54,8 @@ func (c *Client) ListLocationsRequest(input *ListLocationsInput) ListLocationsRe
 // ListLocations API operation.
 type ListLocationsRequest struct {
 	*aws.Request
-	Input *ListLocationsInput
-	Copy  func(*ListLocationsInput) ListLocationsRequest
+	Input *types.ListLocationsInput
+	Copy  func(*types.ListLocationsInput) ListLocationsRequest
 }
 
 // Send marshals and sends the ListLocations API request.
@@ -101,7 +67,7 @@ func (r ListLocationsRequest) Send(ctx context.Context) (*ListLocationsResponse,
 	}
 
 	resp := &ListLocationsResponse{
-		ListLocationsOutput: r.Request.Data.(*ListLocationsOutput),
+		ListLocationsOutput: r.Request.Data.(*types.ListLocationsOutput),
 		response:            &aws.Response{Request: r.Request},
 	}
 
@@ -131,7 +97,7 @@ func NewListLocationsPaginator(req ListLocationsRequest) ListLocationsPaginator 
 	return ListLocationsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListLocationsInput
+				var inCpy *types.ListLocationsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -151,14 +117,14 @@ type ListLocationsPaginator struct {
 	aws.Pager
 }
 
-func (p *ListLocationsPaginator) CurrentPage() *ListLocationsOutput {
-	return p.Pager.CurrentPage().(*ListLocationsOutput)
+func (p *ListLocationsPaginator) CurrentPage() *types.ListLocationsOutput {
+	return p.Pager.CurrentPage().(*types.ListLocationsOutput)
 }
 
 // ListLocationsResponse is the response type for the
 // ListLocations API operation.
 type ListLocationsResponse struct {
-	*ListLocationsOutput
+	*types.ListLocationsOutput
 
 	response *aws.Response
 }

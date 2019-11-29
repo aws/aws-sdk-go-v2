@@ -6,40 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/emr/types"
 )
-
-// The input argument to the CancelSteps operation.
-type CancelStepsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ClusterID for which specified steps will be canceled. Use RunJobFlow
-	// and ListClusters to get ClusterIDs.
-	ClusterId *string `type:"string"`
-
-	// The list of StepIDs to cancel. Use ListSteps to get steps and their states
-	// for the specified cluster.
-	StepIds []string `type:"list"`
-}
-
-// String returns the string representation
-func (s CancelStepsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// The output for the CancelSteps operation.
-type CancelStepsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A list of CancelStepsInfo, which shows the status of specified cancel requests
-	// for each StepID specified.
-	CancelStepsInfoList []CancelStepsInfo `type:"list"`
-}
-
-// String returns the string representation
-func (s CancelStepsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCancelSteps = "CancelSteps"
 
@@ -60,7 +28,7 @@ const opCancelSteps = "CancelSteps"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/CancelSteps
-func (c *Client) CancelStepsRequest(input *CancelStepsInput) CancelStepsRequest {
+func (c *Client) CancelStepsRequest(input *types.CancelStepsInput) CancelStepsRequest {
 	op := &aws.Operation{
 		Name:       opCancelSteps,
 		HTTPMethod: "POST",
@@ -68,10 +36,10 @@ func (c *Client) CancelStepsRequest(input *CancelStepsInput) CancelStepsRequest 
 	}
 
 	if input == nil {
-		input = &CancelStepsInput{}
+		input = &types.CancelStepsInput{}
 	}
 
-	req := c.newRequest(op, input, &CancelStepsOutput{})
+	req := c.newRequest(op, input, &types.CancelStepsOutput{})
 	return CancelStepsRequest{Request: req, Input: input, Copy: c.CancelStepsRequest}
 }
 
@@ -79,8 +47,8 @@ func (c *Client) CancelStepsRequest(input *CancelStepsInput) CancelStepsRequest 
 // CancelSteps API operation.
 type CancelStepsRequest struct {
 	*aws.Request
-	Input *CancelStepsInput
-	Copy  func(*CancelStepsInput) CancelStepsRequest
+	Input *types.CancelStepsInput
+	Copy  func(*types.CancelStepsInput) CancelStepsRequest
 }
 
 // Send marshals and sends the CancelSteps API request.
@@ -92,7 +60,7 @@ func (r CancelStepsRequest) Send(ctx context.Context) (*CancelStepsResponse, err
 	}
 
 	resp := &CancelStepsResponse{
-		CancelStepsOutput: r.Request.Data.(*CancelStepsOutput),
+		CancelStepsOutput: r.Request.Data.(*types.CancelStepsOutput),
 		response:          &aws.Response{Request: r.Request},
 	}
 
@@ -102,7 +70,7 @@ func (r CancelStepsRequest) Send(ctx context.Context) (*CancelStepsResponse, err
 // CancelStepsResponse is the response type for the
 // CancelSteps API operation.
 type CancelStepsResponse struct {
-	*CancelStepsOutput
+	*types.CancelStepsOutput
 
 	response *aws.Response
 }

@@ -6,146 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/glacier/types"
 )
-
-// Provides options for retrieving metadata for a specific vault in Amazon Glacier.
-type DescribeVaultInput struct {
-	_ struct{} `type:"structure"`
-
-	// The AccountId value is the AWS account ID of the account that owns the vault.
-	// You can either specify an AWS account ID or optionally a single '-' (hyphen),
-	// in which case Amazon S3 Glacier uses the AWS account ID associated with the
-	// credentials used to sign the request. If you use an account ID, do not include
-	// any hyphens ('-') in the ID.
-	//
-	// AccountId is a required field
-	AccountId *string `location:"uri" locationName:"accountId" type:"string" required:"true"`
-
-	// The name of the vault.
-	//
-	// VaultName is a required field
-	VaultName *string `location:"uri" locationName:"vaultName" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeVaultInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeVaultInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeVaultInput"}
-
-	if s.AccountId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("AccountId"))
-	}
-
-	if s.VaultName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("VaultName"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DescribeVaultInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.AccountId != nil {
-		v := *s.AccountId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "accountId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.VaultName != nil {
-		v := *s.VaultName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "vaultName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-// Contains the Amazon S3 Glacier response to your request.
-type DescribeVaultOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The Universal Coordinated Time (UTC) date when the vault was created. This
-	// value should be a string in the ISO 8601 date format, for example 2012-03-20T17:03:43.221Z.
-	CreationDate *string `type:"string"`
-
-	// The Universal Coordinated Time (UTC) date when Amazon S3 Glacier completed
-	// the last vault inventory. This value should be a string in the ISO 8601 date
-	// format, for example 2012-03-20T17:03:43.221Z.
-	LastInventoryDate *string `type:"string"`
-
-	// The number of archives in the vault as of the last inventory date. This field
-	// will return null if an inventory has not yet run on the vault, for example
-	// if you just created the vault.
-	NumberOfArchives *int64 `type:"long"`
-
-	// Total size, in bytes, of the archives in the vault as of the last inventory
-	// date. This field will return null if an inventory has not yet run on the
-	// vault, for example if you just created the vault.
-	SizeInBytes *int64 `type:"long"`
-
-	// The Amazon Resource Name (ARN) of the vault.
-	VaultARN *string `type:"string"`
-
-	// The name of the vault.
-	VaultName *string `type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeVaultOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DescribeVaultOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.CreationDate != nil {
-		v := *s.CreationDate
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "CreationDate", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.LastInventoryDate != nil {
-		v := *s.LastInventoryDate
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "LastInventoryDate", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.NumberOfArchives != nil {
-		v := *s.NumberOfArchives
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "NumberOfArchives", protocol.Int64Value(v), metadata)
-	}
-	if s.SizeInBytes != nil {
-		v := *s.SizeInBytes
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "SizeInBytes", protocol.Int64Value(v), metadata)
-	}
-	if s.VaultARN != nil {
-		v := *s.VaultARN
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "VaultARN", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.VaultName != nil {
-		v := *s.VaultName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "VaultName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opDescribeVault = "DescribeVault"
 
@@ -179,7 +41,7 @@ const opDescribeVault = "DescribeVault"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) DescribeVaultRequest(input *DescribeVaultInput) DescribeVaultRequest {
+func (c *Client) DescribeVaultRequest(input *types.DescribeVaultInput) DescribeVaultRequest {
 	op := &aws.Operation{
 		Name:       opDescribeVault,
 		HTTPMethod: "GET",
@@ -187,10 +49,10 @@ func (c *Client) DescribeVaultRequest(input *DescribeVaultInput) DescribeVaultRe
 	}
 
 	if input == nil {
-		input = &DescribeVaultInput{}
+		input = &types.DescribeVaultInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeVaultOutput{})
+	req := c.newRequest(op, input, &types.DescribeVaultOutput{})
 	return DescribeVaultRequest{Request: req, Input: input, Copy: c.DescribeVaultRequest}
 }
 
@@ -198,8 +60,8 @@ func (c *Client) DescribeVaultRequest(input *DescribeVaultInput) DescribeVaultRe
 // DescribeVault API operation.
 type DescribeVaultRequest struct {
 	*aws.Request
-	Input *DescribeVaultInput
-	Copy  func(*DescribeVaultInput) DescribeVaultRequest
+	Input *types.DescribeVaultInput
+	Copy  func(*types.DescribeVaultInput) DescribeVaultRequest
 }
 
 // Send marshals and sends the DescribeVault API request.
@@ -211,7 +73,7 @@ func (r DescribeVaultRequest) Send(ctx context.Context) (*DescribeVaultResponse,
 	}
 
 	resp := &DescribeVaultResponse{
-		DescribeVaultOutput: r.Request.Data.(*DescribeVaultOutput),
+		DescribeVaultOutput: r.Request.Data.(*types.DescribeVaultOutput),
 		response:            &aws.Response{Request: r.Request},
 	}
 
@@ -221,7 +83,7 @@ func (r DescribeVaultRequest) Send(ctx context.Context) (*DescribeVaultResponse,
 // DescribeVaultResponse is the response type for the
 // DescribeVault API operation.
 type DescribeVaultResponse struct {
-	*DescribeVaultOutput
+	*types.DescribeVaultOutput
 
 	response *aws.Response
 }

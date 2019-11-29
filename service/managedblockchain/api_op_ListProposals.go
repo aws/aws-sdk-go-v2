@@ -6,112 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/managedblockchain/types"
 )
-
-type ListProposalsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The maximum number of proposals to return.
-	MaxResults *int64 `location:"querystring" locationName:"maxResults" min:"1" type:"integer"`
-
-	// The unique identifier of the network.
-	//
-	// NetworkId is a required field
-	NetworkId *string `location:"uri" locationName:"networkId" min:"1" type:"string" required:"true"`
-
-	// The pagination token that indicates the next set of results to retrieve.
-	NextToken *string `location:"querystring" locationName:"nextToken" type:"string"`
-}
-
-// String returns the string representation
-func (s ListProposalsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListProposalsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListProposalsInput"}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-
-	if s.NetworkId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("NetworkId"))
-	}
-	if s.NetworkId != nil && len(*s.NetworkId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("NetworkId", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListProposalsInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.NetworkId != nil {
-		v := *s.NetworkId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "networkId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.MaxResults != nil {
-		v := *s.MaxResults
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "maxResults", protocol.Int64Value(v), metadata)
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type ListProposalsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The pagination token that indicates the next set of results to retrieve.
-	NextToken *string `type:"string"`
-
-	// The summary of each proposal made on the network.
-	Proposals []ProposalSummary `type:"list"`
-}
-
-// String returns the string representation
-func (s ListProposalsOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListProposalsOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Proposals != nil {
-		v := s.Proposals
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "Proposals", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	return nil
-}
 
 const opListProposals = "ListProposals"
 
@@ -128,7 +24,7 @@ const opListProposals = "ListProposals"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/managedblockchain-2018-09-24/ListProposals
-func (c *Client) ListProposalsRequest(input *ListProposalsInput) ListProposalsRequest {
+func (c *Client) ListProposalsRequest(input *types.ListProposalsInput) ListProposalsRequest {
 	op := &aws.Operation{
 		Name:       opListProposals,
 		HTTPMethod: "GET",
@@ -142,10 +38,10 @@ func (c *Client) ListProposalsRequest(input *ListProposalsInput) ListProposalsRe
 	}
 
 	if input == nil {
-		input = &ListProposalsInput{}
+		input = &types.ListProposalsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListProposalsOutput{})
+	req := c.newRequest(op, input, &types.ListProposalsOutput{})
 	return ListProposalsRequest{Request: req, Input: input, Copy: c.ListProposalsRequest}
 }
 
@@ -153,8 +49,8 @@ func (c *Client) ListProposalsRequest(input *ListProposalsInput) ListProposalsRe
 // ListProposals API operation.
 type ListProposalsRequest struct {
 	*aws.Request
-	Input *ListProposalsInput
-	Copy  func(*ListProposalsInput) ListProposalsRequest
+	Input *types.ListProposalsInput
+	Copy  func(*types.ListProposalsInput) ListProposalsRequest
 }
 
 // Send marshals and sends the ListProposals API request.
@@ -166,7 +62,7 @@ func (r ListProposalsRequest) Send(ctx context.Context) (*ListProposalsResponse,
 	}
 
 	resp := &ListProposalsResponse{
-		ListProposalsOutput: r.Request.Data.(*ListProposalsOutput),
+		ListProposalsOutput: r.Request.Data.(*types.ListProposalsOutput),
 		response:            &aws.Response{Request: r.Request},
 	}
 
@@ -196,7 +92,7 @@ func NewListProposalsPaginator(req ListProposalsRequest) ListProposalsPaginator 
 	return ListProposalsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListProposalsInput
+				var inCpy *types.ListProposalsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -216,14 +112,14 @@ type ListProposalsPaginator struct {
 	aws.Pager
 }
 
-func (p *ListProposalsPaginator) CurrentPage() *ListProposalsOutput {
-	return p.Pager.CurrentPage().(*ListProposalsOutput)
+func (p *ListProposalsPaginator) CurrentPage() *types.ListProposalsOutput {
+	return p.Pager.CurrentPage().(*types.ListProposalsOutput)
 }
 
 // ListProposalsResponse is the response type for the
 // ListProposals API operation.
 type ListProposalsResponse struct {
-	*ListProposalsOutput
+	*types.ListProposalsOutput
 
 	response *aws.Response
 }

@@ -6,177 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/efs/types"
 )
-
-type CreateMountTargetInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the file system for which to create the mount target.
-	//
-	// FileSystemId is a required field
-	FileSystemId *string `type:"string" required:"true"`
-
-	// Valid IPv4 address within the address range of the specified subnet.
-	IpAddress *string `type:"string"`
-
-	// Up to five VPC security group IDs, of the form sg-xxxxxxxx. These must be
-	// for the same VPC as subnet specified.
-	SecurityGroups []string `type:"list"`
-
-	// The ID of the subnet to add the mount target in.
-	//
-	// SubnetId is a required field
-	SubnetId *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s CreateMountTargetInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateMountTargetInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateMountTargetInput"}
-
-	if s.FileSystemId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("FileSystemId"))
-	}
-
-	if s.SubnetId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("SubnetId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s CreateMountTargetInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.FileSystemId != nil {
-		v := *s.FileSystemId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "FileSystemId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.IpAddress != nil {
-		v := *s.IpAddress
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "IpAddress", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.SecurityGroups != nil {
-		v := s.SecurityGroups
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "SecurityGroups", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
-		}
-		ls0.End()
-
-	}
-	if s.SubnetId != nil {
-		v := *s.SubnetId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "SubnetId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-// Provides a description of a mount target.
-type CreateMountTargetOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the file system for which the mount target is intended.
-	//
-	// FileSystemId is a required field
-	FileSystemId *string `type:"string" required:"true"`
-
-	// Address at which the file system can be mounted by using the mount target.
-	IpAddress *string `type:"string"`
-
-	// Lifecycle state of the mount target.
-	//
-	// LifeCycleState is a required field
-	LifeCycleState LifeCycleState `type:"string" required:"true" enum:"true"`
-
-	// System-assigned mount target ID.
-	//
-	// MountTargetId is a required field
-	MountTargetId *string `type:"string" required:"true"`
-
-	// The ID of the network interface that Amazon EFS created when it created the
-	// mount target.
-	NetworkInterfaceId *string `type:"string"`
-
-	// AWS account ID that owns the resource.
-	OwnerId *string `type:"string"`
-
-	// The ID of the mount target's subnet.
-	//
-	// SubnetId is a required field
-	SubnetId *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s CreateMountTargetOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s CreateMountTargetOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.FileSystemId != nil {
-		v := *s.FileSystemId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "FileSystemId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.IpAddress != nil {
-		v := *s.IpAddress
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "IpAddress", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if len(s.LifeCycleState) > 0 {
-		v := s.LifeCycleState
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "LifeCycleState", protocol.QuotedValue{ValueMarshaler: v}, metadata)
-	}
-	if s.MountTargetId != nil {
-		v := *s.MountTargetId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "MountTargetId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.NetworkInterfaceId != nil {
-		v := *s.NetworkInterfaceId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "NetworkInterfaceId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.OwnerId != nil {
-		v := *s.OwnerId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "OwnerId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.SubnetId != nil {
-		v := *s.SubnetId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "SubnetId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opCreateMountTarget = "CreateMountTarget"
 
@@ -281,7 +112,7 @@ const opCreateMountTarget = "CreateMountTarget"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/CreateMountTarget
-func (c *Client) CreateMountTargetRequest(input *CreateMountTargetInput) CreateMountTargetRequest {
+func (c *Client) CreateMountTargetRequest(input *types.CreateMountTargetInput) CreateMountTargetRequest {
 	op := &aws.Operation{
 		Name:       opCreateMountTarget,
 		HTTPMethod: "POST",
@@ -289,10 +120,10 @@ func (c *Client) CreateMountTargetRequest(input *CreateMountTargetInput) CreateM
 	}
 
 	if input == nil {
-		input = &CreateMountTargetInput{}
+		input = &types.CreateMountTargetInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateMountTargetOutput{})
+	req := c.newRequest(op, input, &types.CreateMountTargetOutput{})
 	return CreateMountTargetRequest{Request: req, Input: input, Copy: c.CreateMountTargetRequest}
 }
 
@@ -300,8 +131,8 @@ func (c *Client) CreateMountTargetRequest(input *CreateMountTargetInput) CreateM
 // CreateMountTarget API operation.
 type CreateMountTargetRequest struct {
 	*aws.Request
-	Input *CreateMountTargetInput
-	Copy  func(*CreateMountTargetInput) CreateMountTargetRequest
+	Input *types.CreateMountTargetInput
+	Copy  func(*types.CreateMountTargetInput) CreateMountTargetRequest
 }
 
 // Send marshals and sends the CreateMountTarget API request.
@@ -313,7 +144,7 @@ func (r CreateMountTargetRequest) Send(ctx context.Context) (*CreateMountTargetR
 	}
 
 	resp := &CreateMountTargetResponse{
-		CreateMountTargetOutput: r.Request.Data.(*CreateMountTargetOutput),
+		CreateMountTargetOutput: r.Request.Data.(*types.CreateMountTargetOutput),
 		response:                &aws.Response{Request: r.Request},
 	}
 
@@ -323,7 +154,7 @@ func (r CreateMountTargetRequest) Send(ctx context.Context) (*CreateMountTargetR
 // CreateMountTargetResponse is the response type for the
 // CreateMountTarget API operation.
 type CreateMountTargetResponse struct {
-	*CreateMountTargetOutput
+	*types.CreateMountTargetOutput
 
 	response *aws.Response
 }

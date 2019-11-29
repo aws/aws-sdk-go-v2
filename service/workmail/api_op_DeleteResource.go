@@ -6,55 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/workmail/types"
 )
-
-type DeleteResourceInput struct {
-	_ struct{} `type:"structure"`
-
-	// The identifier associated with the organization from which the resource is
-	// deleted.
-	//
-	// OrganizationId is a required field
-	OrganizationId *string `type:"string" required:"true"`
-
-	// The identifier of the resource to be deleted.
-	//
-	// ResourceId is a required field
-	ResourceId *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteResourceInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteResourceInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteResourceInput"}
-
-	if s.OrganizationId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("OrganizationId"))
-	}
-
-	if s.ResourceId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ResourceId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteResourceOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteResourceOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteResource = "DeleteResource"
 
@@ -71,7 +24,7 @@ const opDeleteResource = "DeleteResource"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/DeleteResource
-func (c *Client) DeleteResourceRequest(input *DeleteResourceInput) DeleteResourceRequest {
+func (c *Client) DeleteResourceRequest(input *types.DeleteResourceInput) DeleteResourceRequest {
 	op := &aws.Operation{
 		Name:       opDeleteResource,
 		HTTPMethod: "POST",
@@ -79,10 +32,10 @@ func (c *Client) DeleteResourceRequest(input *DeleteResourceInput) DeleteResourc
 	}
 
 	if input == nil {
-		input = &DeleteResourceInput{}
+		input = &types.DeleteResourceInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteResourceOutput{})
+	req := c.newRequest(op, input, &types.DeleteResourceOutput{})
 	return DeleteResourceRequest{Request: req, Input: input, Copy: c.DeleteResourceRequest}
 }
 
@@ -90,8 +43,8 @@ func (c *Client) DeleteResourceRequest(input *DeleteResourceInput) DeleteResourc
 // DeleteResource API operation.
 type DeleteResourceRequest struct {
 	*aws.Request
-	Input *DeleteResourceInput
-	Copy  func(*DeleteResourceInput) DeleteResourceRequest
+	Input *types.DeleteResourceInput
+	Copy  func(*types.DeleteResourceInput) DeleteResourceRequest
 }
 
 // Send marshals and sends the DeleteResource API request.
@@ -103,7 +56,7 @@ func (r DeleteResourceRequest) Send(ctx context.Context) (*DeleteResourceRespons
 	}
 
 	resp := &DeleteResourceResponse{
-		DeleteResourceOutput: r.Request.Data.(*DeleteResourceOutput),
+		DeleteResourceOutput: r.Request.Data.(*types.DeleteResourceOutput),
 		response:             &aws.Response{Request: r.Request},
 	}
 
@@ -113,7 +66,7 @@ func (r DeleteResourceRequest) Send(ctx context.Context) (*DeleteResourceRespons
 // DeleteResourceResponse is the response type for the
 // DeleteResource API operation.
 type DeleteResourceResponse struct {
-	*DeleteResourceOutput
+	*types.DeleteResourceOutput
 
 	response *aws.Response
 }

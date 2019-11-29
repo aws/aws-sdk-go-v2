@@ -6,49 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/macie/types"
 )
-
-type ListS3ResourcesInput struct {
-	_ struct{} `type:"structure"`
-
-	// Use this parameter to indicate the maximum number of items that you want
-	// in the response. The default value is 250.
-	MaxResults *int64 `locationName:"maxResults" type:"integer"`
-
-	// The Amazon Macie member account ID whose associated S3 resources you want
-	// to list.
-	MemberAccountId *string `locationName:"memberAccountId" type:"string"`
-
-	// Use this parameter when paginating results. Set its value to null on your
-	// first call to the ListS3Resources action. Subsequent calls to the action
-	// fill nextToken in the request with the value of nextToken from the previous
-	// response to continue listing data.
-	NextToken *string `locationName:"nextToken" type:"string"`
-}
-
-// String returns the string representation
-func (s ListS3ResourcesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type ListS3ResourcesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// When a response is generated, if there is more data to be listed, this parameter
-	// is present in the response and contains the value to use for the nextToken
-	// parameter in a subsequent pagination request. If there is no more data to
-	// be listed, this parameter is set to null.
-	NextToken *string `locationName:"nextToken" type:"string"`
-
-	// A list of the associated S3 resources returned by the action.
-	S3Resources []S3ResourceClassification `locationName:"s3Resources" type:"list"`
-}
-
-// String returns the string representation
-func (s ListS3ResourcesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListS3Resources = "ListS3Resources"
 
@@ -69,7 +28,7 @@ const opListS3Resources = "ListS3Resources"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/macie-2017-12-19/ListS3Resources
-func (c *Client) ListS3ResourcesRequest(input *ListS3ResourcesInput) ListS3ResourcesRequest {
+func (c *Client) ListS3ResourcesRequest(input *types.ListS3ResourcesInput) ListS3ResourcesRequest {
 	op := &aws.Operation{
 		Name:       opListS3Resources,
 		HTTPMethod: "POST",
@@ -83,10 +42,10 @@ func (c *Client) ListS3ResourcesRequest(input *ListS3ResourcesInput) ListS3Resou
 	}
 
 	if input == nil {
-		input = &ListS3ResourcesInput{}
+		input = &types.ListS3ResourcesInput{}
 	}
 
-	req := c.newRequest(op, input, &ListS3ResourcesOutput{})
+	req := c.newRequest(op, input, &types.ListS3ResourcesOutput{})
 	return ListS3ResourcesRequest{Request: req, Input: input, Copy: c.ListS3ResourcesRequest}
 }
 
@@ -94,8 +53,8 @@ func (c *Client) ListS3ResourcesRequest(input *ListS3ResourcesInput) ListS3Resou
 // ListS3Resources API operation.
 type ListS3ResourcesRequest struct {
 	*aws.Request
-	Input *ListS3ResourcesInput
-	Copy  func(*ListS3ResourcesInput) ListS3ResourcesRequest
+	Input *types.ListS3ResourcesInput
+	Copy  func(*types.ListS3ResourcesInput) ListS3ResourcesRequest
 }
 
 // Send marshals and sends the ListS3Resources API request.
@@ -107,7 +66,7 @@ func (r ListS3ResourcesRequest) Send(ctx context.Context) (*ListS3ResourcesRespo
 	}
 
 	resp := &ListS3ResourcesResponse{
-		ListS3ResourcesOutput: r.Request.Data.(*ListS3ResourcesOutput),
+		ListS3ResourcesOutput: r.Request.Data.(*types.ListS3ResourcesOutput),
 		response:              &aws.Response{Request: r.Request},
 	}
 
@@ -137,7 +96,7 @@ func NewListS3ResourcesPaginator(req ListS3ResourcesRequest) ListS3ResourcesPagi
 	return ListS3ResourcesPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListS3ResourcesInput
+				var inCpy *types.ListS3ResourcesInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -157,14 +116,14 @@ type ListS3ResourcesPaginator struct {
 	aws.Pager
 }
 
-func (p *ListS3ResourcesPaginator) CurrentPage() *ListS3ResourcesOutput {
-	return p.Pager.CurrentPage().(*ListS3ResourcesOutput)
+func (p *ListS3ResourcesPaginator) CurrentPage() *types.ListS3ResourcesOutput {
+	return p.Pager.CurrentPage().(*types.ListS3ResourcesOutput)
 }
 
 // ListS3ResourcesResponse is the response type for the
 // ListS3Resources API operation.
 type ListS3ResourcesResponse struct {
-	*ListS3ResourcesOutput
+	*types.ListS3ResourcesOutput
 
 	response *aws.Response
 }

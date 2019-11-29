@@ -4,131 +4,10 @@ package cloudformation
 
 import (
 	"context"
-	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/cloudformation/types"
 )
-
-// The input for the DescribeChangeSet action.
-type DescribeChangeSetInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name or Amazon Resource Name (ARN) of the change set that you want to
-	// describe.
-	//
-	// ChangeSetName is a required field
-	ChangeSetName *string `min:"1" type:"string" required:"true"`
-
-	// A string (provided by the DescribeChangeSet response output) that identifies
-	// the next page of information that you want to retrieve.
-	NextToken *string `min:"1" type:"string"`
-
-	// If you specified the name of a change set, specify the stack name or ID (ARN)
-	// of the change set you want to describe.
-	StackName *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeChangeSetInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeChangeSetInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeChangeSetInput"}
-
-	if s.ChangeSetName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ChangeSetName"))
-	}
-	if s.ChangeSetName != nil && len(*s.ChangeSetName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ChangeSetName", 1))
-	}
-	if s.NextToken != nil && len(*s.NextToken) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
-	}
-	if s.StackName != nil && len(*s.StackName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("StackName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// The output for the DescribeChangeSet action.
-type DescribeChangeSetOutput struct {
-	_ struct{} `type:"structure"`
-
-	// If you execute the change set, the list of capabilities that were explicitly
-	// acknowledged when the change set was created.
-	Capabilities []Capability `type:"list"`
-
-	// The ARN of the change set.
-	ChangeSetId *string `min:"1" type:"string"`
-
-	// The name of the change set.
-	ChangeSetName *string `min:"1" type:"string"`
-
-	// A list of Change structures that describes the resources AWS CloudFormation
-	// changes if you execute the change set.
-	Changes []Change `type:"list"`
-
-	// The start time when the change set was created, in UTC.
-	CreationTime *time.Time `type:"timestamp"`
-
-	// Information about the change set.
-	Description *string `min:"1" type:"string"`
-
-	// If the change set execution status is AVAILABLE, you can execute the change
-	// set. If you can’t execute the change set, the status indicates why. For
-	// example, a change set might be in an UNAVAILABLE state because AWS CloudFormation
-	// is still creating it or in an OBSOLETE state because the stack was already
-	// updated.
-	ExecutionStatus ExecutionStatus `type:"string" enum:"true"`
-
-	// If the output exceeds 1 MB, a string that identifies the next page of changes.
-	// If there is no additional page, this value is null.
-	NextToken *string `min:"1" type:"string"`
-
-	// The ARNs of the Amazon Simple Notification Service (Amazon SNS) topics that
-	// will be associated with the stack if you execute the change set.
-	NotificationARNs []string `type:"list"`
-
-	// A list of Parameter structures that describes the input parameters and their
-	// values used to create the change set. For more information, see the Parameter
-	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_Parameter.html)
-	// data type.
-	Parameters []Parameter `type:"list"`
-
-	// The rollback triggers for AWS CloudFormation to monitor during stack creation
-	// and updating operations, and for the specified monitoring period afterwards.
-	RollbackConfiguration *RollbackConfiguration `type:"structure"`
-
-	// The ARN of the stack that is associated with the change set.
-	StackId *string `type:"string"`
-
-	// The name of the stack that is associated with the change set.
-	StackName *string `type:"string"`
-
-	// The current status of the change set, such as CREATE_IN_PROGRESS, CREATE_COMPLETE,
-	// or FAILED.
-	Status ChangeSetStatus `type:"string" enum:"true"`
-
-	// A description of the change set's status. For example, if your attempt to
-	// create a change set failed, AWS CloudFormation shows the error message.
-	StatusReason *string `type:"string"`
-
-	// If you execute the change set, the tags that will be associated with the
-	// stack.
-	Tags []Tag `type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeChangeSetOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeChangeSet = "DescribeChangeSet"
 
@@ -148,7 +27,7 @@ const opDescribeChangeSet = "DescribeChangeSet"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DescribeChangeSet
-func (c *Client) DescribeChangeSetRequest(input *DescribeChangeSetInput) DescribeChangeSetRequest {
+func (c *Client) DescribeChangeSetRequest(input *types.DescribeChangeSetInput) DescribeChangeSetRequest {
 	op := &aws.Operation{
 		Name:       opDescribeChangeSet,
 		HTTPMethod: "POST",
@@ -156,10 +35,10 @@ func (c *Client) DescribeChangeSetRequest(input *DescribeChangeSetInput) Describ
 	}
 
 	if input == nil {
-		input = &DescribeChangeSetInput{}
+		input = &types.DescribeChangeSetInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeChangeSetOutput{})
+	req := c.newRequest(op, input, &types.DescribeChangeSetOutput{})
 	return DescribeChangeSetRequest{Request: req, Input: input, Copy: c.DescribeChangeSetRequest}
 }
 
@@ -167,8 +46,8 @@ func (c *Client) DescribeChangeSetRequest(input *DescribeChangeSetInput) Describ
 // DescribeChangeSet API operation.
 type DescribeChangeSetRequest struct {
 	*aws.Request
-	Input *DescribeChangeSetInput
-	Copy  func(*DescribeChangeSetInput) DescribeChangeSetRequest
+	Input *types.DescribeChangeSetInput
+	Copy  func(*types.DescribeChangeSetInput) DescribeChangeSetRequest
 }
 
 // Send marshals and sends the DescribeChangeSet API request.
@@ -180,7 +59,7 @@ func (r DescribeChangeSetRequest) Send(ctx context.Context) (*DescribeChangeSetR
 	}
 
 	resp := &DescribeChangeSetResponse{
-		DescribeChangeSetOutput: r.Request.Data.(*DescribeChangeSetOutput),
+		DescribeChangeSetOutput: r.Request.Data.(*types.DescribeChangeSetOutput),
 		response:                &aws.Response{Request: r.Request},
 	}
 
@@ -190,7 +69,7 @@ func (r DescribeChangeSetRequest) Send(ctx context.Context) (*DescribeChangeSetR
 // DescribeChangeSetResponse is the response type for the
 // DescribeChangeSet API operation.
 type DescribeChangeSetResponse struct {
-	*DescribeChangeSetOutput
+	*types.DescribeChangeSetOutput
 
 	response *aws.Response
 }

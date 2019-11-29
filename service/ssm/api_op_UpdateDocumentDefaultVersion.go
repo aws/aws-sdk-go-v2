@@ -6,58 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ssm/types"
 )
-
-type UpdateDocumentDefaultVersionInput struct {
-	_ struct{} `type:"structure"`
-
-	// The version of a custom document that you want to set as the default version.
-	//
-	// DocumentVersion is a required field
-	DocumentVersion *string `type:"string" required:"true"`
-
-	// The name of a custom document that you want to set as the default version.
-	//
-	// Name is a required field
-	Name *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s UpdateDocumentDefaultVersionInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateDocumentDefaultVersionInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateDocumentDefaultVersionInput"}
-
-	if s.DocumentVersion == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DocumentVersion"))
-	}
-
-	if s.Name == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Name"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type UpdateDocumentDefaultVersionOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The description of a custom document that you want to set as the default
-	// version.
-	Description *DocumentDefaultVersionDescription `type:"structure"`
-}
-
-// String returns the string representation
-func (s UpdateDocumentDefaultVersionOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opUpdateDocumentDefaultVersion = "UpdateDocumentDefaultVersion"
 
@@ -74,7 +24,7 @@ const opUpdateDocumentDefaultVersion = "UpdateDocumentDefaultVersion"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/UpdateDocumentDefaultVersion
-func (c *Client) UpdateDocumentDefaultVersionRequest(input *UpdateDocumentDefaultVersionInput) UpdateDocumentDefaultVersionRequest {
+func (c *Client) UpdateDocumentDefaultVersionRequest(input *types.UpdateDocumentDefaultVersionInput) UpdateDocumentDefaultVersionRequest {
 	op := &aws.Operation{
 		Name:       opUpdateDocumentDefaultVersion,
 		HTTPMethod: "POST",
@@ -82,10 +32,10 @@ func (c *Client) UpdateDocumentDefaultVersionRequest(input *UpdateDocumentDefaul
 	}
 
 	if input == nil {
-		input = &UpdateDocumentDefaultVersionInput{}
+		input = &types.UpdateDocumentDefaultVersionInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateDocumentDefaultVersionOutput{})
+	req := c.newRequest(op, input, &types.UpdateDocumentDefaultVersionOutput{})
 	return UpdateDocumentDefaultVersionRequest{Request: req, Input: input, Copy: c.UpdateDocumentDefaultVersionRequest}
 }
 
@@ -93,8 +43,8 @@ func (c *Client) UpdateDocumentDefaultVersionRequest(input *UpdateDocumentDefaul
 // UpdateDocumentDefaultVersion API operation.
 type UpdateDocumentDefaultVersionRequest struct {
 	*aws.Request
-	Input *UpdateDocumentDefaultVersionInput
-	Copy  func(*UpdateDocumentDefaultVersionInput) UpdateDocumentDefaultVersionRequest
+	Input *types.UpdateDocumentDefaultVersionInput
+	Copy  func(*types.UpdateDocumentDefaultVersionInput) UpdateDocumentDefaultVersionRequest
 }
 
 // Send marshals and sends the UpdateDocumentDefaultVersion API request.
@@ -106,7 +56,7 @@ func (r UpdateDocumentDefaultVersionRequest) Send(ctx context.Context) (*UpdateD
 	}
 
 	resp := &UpdateDocumentDefaultVersionResponse{
-		UpdateDocumentDefaultVersionOutput: r.Request.Data.(*UpdateDocumentDefaultVersionOutput),
+		UpdateDocumentDefaultVersionOutput: r.Request.Data.(*types.UpdateDocumentDefaultVersionOutput),
 		response:                           &aws.Response{Request: r.Request},
 	}
 
@@ -116,7 +66,7 @@ func (r UpdateDocumentDefaultVersionRequest) Send(ctx context.Context) (*UpdateD
 // UpdateDocumentDefaultVersionResponse is the response type for the
 // UpdateDocumentDefaultVersion API operation.
 type UpdateDocumentDefaultVersionResponse struct {
-	*UpdateDocumentDefaultVersionOutput
+	*types.UpdateDocumentDefaultVersionOutput
 
 	response *aws.Response
 }

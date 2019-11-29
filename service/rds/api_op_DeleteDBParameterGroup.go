@@ -6,55 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/query"
+	"github.com/aws/aws-sdk-go-v2/service/rds/types"
 )
-
-type DeleteDBParameterGroupInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the DB parameter group.
-	//
-	// Constraints:
-	//
-	//    * Must be the name of an existing DB parameter group
-	//
-	//    * You can't delete a default DB parameter group
-	//
-	//    * Can't be associated with any DB instances
-	//
-	// DBParameterGroupName is a required field
-	DBParameterGroupName *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteDBParameterGroupInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteDBParameterGroupInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteDBParameterGroupInput"}
-
-	if s.DBParameterGroupName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DBParameterGroupName"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteDBParameterGroupOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteDBParameterGroupOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteDBParameterGroup = "DeleteDBParameterGroup"
 
@@ -72,7 +27,7 @@ const opDeleteDBParameterGroup = "DeleteDBParameterGroup"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteDBParameterGroup
-func (c *Client) DeleteDBParameterGroupRequest(input *DeleteDBParameterGroupInput) DeleteDBParameterGroupRequest {
+func (c *Client) DeleteDBParameterGroupRequest(input *types.DeleteDBParameterGroupInput) DeleteDBParameterGroupRequest {
 	op := &aws.Operation{
 		Name:       opDeleteDBParameterGroup,
 		HTTPMethod: "POST",
@@ -80,10 +35,10 @@ func (c *Client) DeleteDBParameterGroupRequest(input *DeleteDBParameterGroupInpu
 	}
 
 	if input == nil {
-		input = &DeleteDBParameterGroupInput{}
+		input = &types.DeleteDBParameterGroupInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteDBParameterGroupOutput{})
+	req := c.newRequest(op, input, &types.DeleteDBParameterGroupOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return DeleteDBParameterGroupRequest{Request: req, Input: input, Copy: c.DeleteDBParameterGroupRequest}
@@ -93,8 +48,8 @@ func (c *Client) DeleteDBParameterGroupRequest(input *DeleteDBParameterGroupInpu
 // DeleteDBParameterGroup API operation.
 type DeleteDBParameterGroupRequest struct {
 	*aws.Request
-	Input *DeleteDBParameterGroupInput
-	Copy  func(*DeleteDBParameterGroupInput) DeleteDBParameterGroupRequest
+	Input *types.DeleteDBParameterGroupInput
+	Copy  func(*types.DeleteDBParameterGroupInput) DeleteDBParameterGroupRequest
 }
 
 // Send marshals and sends the DeleteDBParameterGroup API request.
@@ -106,7 +61,7 @@ func (r DeleteDBParameterGroupRequest) Send(ctx context.Context) (*DeleteDBParam
 	}
 
 	resp := &DeleteDBParameterGroupResponse{
-		DeleteDBParameterGroupOutput: r.Request.Data.(*DeleteDBParameterGroupOutput),
+		DeleteDBParameterGroupOutput: r.Request.Data.(*types.DeleteDBParameterGroupOutput),
 		response:                     &aws.Response{Request: r.Request},
 	}
 
@@ -116,7 +71,7 @@ func (r DeleteDBParameterGroupRequest) Send(ctx context.Context) (*DeleteDBParam
 // DeleteDBParameterGroupResponse is the response type for the
 // DeleteDBParameterGroup API operation.
 type DeleteDBParameterGroupResponse struct {
-	*DeleteDBParameterGroupOutput
+	*types.DeleteDBParameterGroupOutput
 
 	response *aws.Response
 }

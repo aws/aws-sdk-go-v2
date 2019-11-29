@@ -6,66 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/codecommit/types"
 )
-
-type MergePullRequestByFastForwardInput struct {
-	_ struct{} `type:"structure"`
-
-	// The system-generated ID of the pull request. To get this ID, use ListPullRequests.
-	//
-	// PullRequestId is a required field
-	PullRequestId *string `locationName:"pullRequestId" type:"string" required:"true"`
-
-	// The name of the repository where the pull request was created.
-	//
-	// RepositoryName is a required field
-	RepositoryName *string `locationName:"repositoryName" min:"1" type:"string" required:"true"`
-
-	// The full commit ID of the original or updated commit in the pull request
-	// source branch. Pass this value if you want an exception thrown if the current
-	// commit ID of the tip of the source branch does not match this commit ID.
-	SourceCommitId *string `locationName:"sourceCommitId" type:"string"`
-}
-
-// String returns the string representation
-func (s MergePullRequestByFastForwardInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *MergePullRequestByFastForwardInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "MergePullRequestByFastForwardInput"}
-
-	if s.PullRequestId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("PullRequestId"))
-	}
-
-	if s.RepositoryName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("RepositoryName"))
-	}
-	if s.RepositoryName != nil && len(*s.RepositoryName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("RepositoryName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type MergePullRequestByFastForwardOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Information about the specified pull request, including information about
-	// the merge.
-	PullRequest *PullRequest `locationName:"pullRequest" type:"structure"`
-}
-
-// String returns the string representation
-func (s MergePullRequestByFastForwardOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opMergePullRequestByFastForward = "MergePullRequestByFastForward"
 
@@ -85,7 +27,7 @@ const opMergePullRequestByFastForward = "MergePullRequestByFastForward"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/MergePullRequestByFastForward
-func (c *Client) MergePullRequestByFastForwardRequest(input *MergePullRequestByFastForwardInput) MergePullRequestByFastForwardRequest {
+func (c *Client) MergePullRequestByFastForwardRequest(input *types.MergePullRequestByFastForwardInput) MergePullRequestByFastForwardRequest {
 	op := &aws.Operation{
 		Name:       opMergePullRequestByFastForward,
 		HTTPMethod: "POST",
@@ -93,10 +35,10 @@ func (c *Client) MergePullRequestByFastForwardRequest(input *MergePullRequestByF
 	}
 
 	if input == nil {
-		input = &MergePullRequestByFastForwardInput{}
+		input = &types.MergePullRequestByFastForwardInput{}
 	}
 
-	req := c.newRequest(op, input, &MergePullRequestByFastForwardOutput{})
+	req := c.newRequest(op, input, &types.MergePullRequestByFastForwardOutput{})
 	return MergePullRequestByFastForwardRequest{Request: req, Input: input, Copy: c.MergePullRequestByFastForwardRequest}
 }
 
@@ -104,8 +46,8 @@ func (c *Client) MergePullRequestByFastForwardRequest(input *MergePullRequestByF
 // MergePullRequestByFastForward API operation.
 type MergePullRequestByFastForwardRequest struct {
 	*aws.Request
-	Input *MergePullRequestByFastForwardInput
-	Copy  func(*MergePullRequestByFastForwardInput) MergePullRequestByFastForwardRequest
+	Input *types.MergePullRequestByFastForwardInput
+	Copy  func(*types.MergePullRequestByFastForwardInput) MergePullRequestByFastForwardRequest
 }
 
 // Send marshals and sends the MergePullRequestByFastForward API request.
@@ -117,7 +59,7 @@ func (r MergePullRequestByFastForwardRequest) Send(ctx context.Context) (*MergeP
 	}
 
 	resp := &MergePullRequestByFastForwardResponse{
-		MergePullRequestByFastForwardOutput: r.Request.Data.(*MergePullRequestByFastForwardOutput),
+		MergePullRequestByFastForwardOutput: r.Request.Data.(*types.MergePullRequestByFastForwardOutput),
 		response:                            &aws.Response{Request: r.Request},
 	}
 
@@ -127,7 +69,7 @@ func (r MergePullRequestByFastForwardRequest) Send(ctx context.Context) (*MergeP
 // MergePullRequestByFastForwardResponse is the response type for the
 // MergePullRequestByFastForward API operation.
 type MergePullRequestByFastForwardResponse struct {
-	*MergePullRequestByFastForwardOutput
+	*types.MergePullRequestByFastForwardOutput
 
 	response *aws.Response
 }

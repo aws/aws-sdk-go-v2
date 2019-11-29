@@ -6,66 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/glue/types"
 )
-
-type GetWorkflowRunsInput struct {
-	_ struct{} `type:"structure"`
-
-	// Specifies whether to include the workflow graph in response or not.
-	IncludeGraph *bool `type:"boolean"`
-
-	// The maximum number of workflow runs to be included in the response.
-	MaxResults *int64 `min:"1" type:"integer"`
-
-	// Name of the workflow whose metadata of runs should be returned.
-	//
-	// Name is a required field
-	Name *string `min:"1" type:"string" required:"true"`
-
-	// The maximum size of the response.
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s GetWorkflowRunsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetWorkflowRunsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetWorkflowRunsInput"}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-
-	if s.Name == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Name"))
-	}
-	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type GetWorkflowRunsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A continuation token, if not all requested workflow runs have been returned.
-	NextToken *string `type:"string"`
-
-	// A list of workflow run metadata objects.
-	Runs []WorkflowRun `min:"1" type:"list"`
-}
-
-// String returns the string representation
-func (s GetWorkflowRunsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetWorkflowRuns = "GetWorkflowRuns"
 
@@ -82,7 +24,7 @@ const opGetWorkflowRuns = "GetWorkflowRuns"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetWorkflowRuns
-func (c *Client) GetWorkflowRunsRequest(input *GetWorkflowRunsInput) GetWorkflowRunsRequest {
+func (c *Client) GetWorkflowRunsRequest(input *types.GetWorkflowRunsInput) GetWorkflowRunsRequest {
 	op := &aws.Operation{
 		Name:       opGetWorkflowRuns,
 		HTTPMethod: "POST",
@@ -96,10 +38,10 @@ func (c *Client) GetWorkflowRunsRequest(input *GetWorkflowRunsInput) GetWorkflow
 	}
 
 	if input == nil {
-		input = &GetWorkflowRunsInput{}
+		input = &types.GetWorkflowRunsInput{}
 	}
 
-	req := c.newRequest(op, input, &GetWorkflowRunsOutput{})
+	req := c.newRequest(op, input, &types.GetWorkflowRunsOutput{})
 	return GetWorkflowRunsRequest{Request: req, Input: input, Copy: c.GetWorkflowRunsRequest}
 }
 
@@ -107,8 +49,8 @@ func (c *Client) GetWorkflowRunsRequest(input *GetWorkflowRunsInput) GetWorkflow
 // GetWorkflowRuns API operation.
 type GetWorkflowRunsRequest struct {
 	*aws.Request
-	Input *GetWorkflowRunsInput
-	Copy  func(*GetWorkflowRunsInput) GetWorkflowRunsRequest
+	Input *types.GetWorkflowRunsInput
+	Copy  func(*types.GetWorkflowRunsInput) GetWorkflowRunsRequest
 }
 
 // Send marshals and sends the GetWorkflowRuns API request.
@@ -120,7 +62,7 @@ func (r GetWorkflowRunsRequest) Send(ctx context.Context) (*GetWorkflowRunsRespo
 	}
 
 	resp := &GetWorkflowRunsResponse{
-		GetWorkflowRunsOutput: r.Request.Data.(*GetWorkflowRunsOutput),
+		GetWorkflowRunsOutput: r.Request.Data.(*types.GetWorkflowRunsOutput),
 		response:              &aws.Response{Request: r.Request},
 	}
 
@@ -150,7 +92,7 @@ func NewGetWorkflowRunsPaginator(req GetWorkflowRunsRequest) GetWorkflowRunsPagi
 	return GetWorkflowRunsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *GetWorkflowRunsInput
+				var inCpy *types.GetWorkflowRunsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -170,14 +112,14 @@ type GetWorkflowRunsPaginator struct {
 	aws.Pager
 }
 
-func (p *GetWorkflowRunsPaginator) CurrentPage() *GetWorkflowRunsOutput {
-	return p.Pager.CurrentPage().(*GetWorkflowRunsOutput)
+func (p *GetWorkflowRunsPaginator) CurrentPage() *types.GetWorkflowRunsOutput {
+	return p.Pager.CurrentPage().(*types.GetWorkflowRunsOutput)
 }
 
 // GetWorkflowRunsResponse is the response type for the
 // GetWorkflowRuns API operation.
 type GetWorkflowRunsResponse struct {
-	*GetWorkflowRunsOutput
+	*types.GetWorkflowRunsOutput
 
 	response *aws.Response
 }

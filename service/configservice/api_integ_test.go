@@ -13,6 +13,8 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws/awserr"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting/integration"
 	"github.com/aws/aws-sdk-go-v2/service/configservice"
+	"github.com/aws/aws-sdk-go-v2/service/configservice/enums"
+	"github.com/aws/aws-sdk-go-v2/service/configservice/types"
 )
 
 var _ aws.Config
@@ -24,7 +26,7 @@ func TestInteg_00_DescribeConfigurationRecorders(t *testing.T) {
 
 	cfg := integration.ConfigWithDefaultRegion("us-west-2")
 	svc := configservice.New(cfg)
-	params := &configservice.DescribeConfigurationRecordersInput{}
+	params := &types.DescribeConfigurationRecordersInput{}
 
 	req := svc.DescribeConfigurationRecordersRequest(params)
 
@@ -39,9 +41,9 @@ func TestInteg_01_GetResourceConfigHistory(t *testing.T) {
 
 	cfg := integration.ConfigWithDefaultRegion("us-west-2")
 	svc := configservice.New(cfg)
-	params := &configservice.GetResourceConfigHistoryInput{
+	params := &types.GetResourceConfigHistoryInput{
 		ResourceId:   aws.String("fake-id"),
-		ResourceType: configservice.ResourceType("fake-type"),
+		ResourceType: enums.ResourceType("fake-type"),
 	}
 
 	req := svc.GetResourceConfigHistoryRequest(params)

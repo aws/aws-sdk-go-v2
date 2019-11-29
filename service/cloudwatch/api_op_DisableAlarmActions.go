@@ -6,47 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/query"
+	"github.com/aws/aws-sdk-go-v2/service/cloudwatch/types"
 )
-
-type DisableAlarmActionsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The names of the alarms.
-	//
-	// AlarmNames is a required field
-	AlarmNames []string `type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s DisableAlarmActionsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DisableAlarmActionsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DisableAlarmActionsInput"}
-
-	if s.AlarmNames == nil {
-		invalidParams.Add(aws.NewErrParamRequired("AlarmNames"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DisableAlarmActionsOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DisableAlarmActionsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDisableAlarmActions = "DisableAlarmActions"
 
@@ -64,7 +27,7 @@ const opDisableAlarmActions = "DisableAlarmActions"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/DisableAlarmActions
-func (c *Client) DisableAlarmActionsRequest(input *DisableAlarmActionsInput) DisableAlarmActionsRequest {
+func (c *Client) DisableAlarmActionsRequest(input *types.DisableAlarmActionsInput) DisableAlarmActionsRequest {
 	op := &aws.Operation{
 		Name:       opDisableAlarmActions,
 		HTTPMethod: "POST",
@@ -72,10 +35,10 @@ func (c *Client) DisableAlarmActionsRequest(input *DisableAlarmActionsInput) Dis
 	}
 
 	if input == nil {
-		input = &DisableAlarmActionsInput{}
+		input = &types.DisableAlarmActionsInput{}
 	}
 
-	req := c.newRequest(op, input, &DisableAlarmActionsOutput{})
+	req := c.newRequest(op, input, &types.DisableAlarmActionsOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return DisableAlarmActionsRequest{Request: req, Input: input, Copy: c.DisableAlarmActionsRequest}
@@ -85,8 +48,8 @@ func (c *Client) DisableAlarmActionsRequest(input *DisableAlarmActionsInput) Dis
 // DisableAlarmActions API operation.
 type DisableAlarmActionsRequest struct {
 	*aws.Request
-	Input *DisableAlarmActionsInput
-	Copy  func(*DisableAlarmActionsInput) DisableAlarmActionsRequest
+	Input *types.DisableAlarmActionsInput
+	Copy  func(*types.DisableAlarmActionsInput) DisableAlarmActionsRequest
 }
 
 // Send marshals and sends the DisableAlarmActions API request.
@@ -98,7 +61,7 @@ func (r DisableAlarmActionsRequest) Send(ctx context.Context) (*DisableAlarmActi
 	}
 
 	resp := &DisableAlarmActionsResponse{
-		DisableAlarmActionsOutput: r.Request.Data.(*DisableAlarmActionsOutput),
+		DisableAlarmActionsOutput: r.Request.Data.(*types.DisableAlarmActionsOutput),
 		response:                  &aws.Response{Request: r.Request},
 	}
 
@@ -108,7 +71,7 @@ func (r DisableAlarmActionsRequest) Send(ctx context.Context) (*DisableAlarmActi
 // DisableAlarmActionsResponse is the response type for the
 // DisableAlarmActions API operation.
 type DisableAlarmActionsResponse struct {
-	*DisableAlarmActionsOutput
+	*types.DisableAlarmActionsOutput
 
 	response *aws.Response
 }

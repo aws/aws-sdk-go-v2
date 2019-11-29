@@ -6,98 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/directoryservice/types"
 )
-
-// AWS Directory Service for Microsoft Active Directory allows you to configure
-// trust relationships. For example, you can establish a trust between your
-// AWS Managed Microsoft AD directory, and your existing on-premises Microsoft
-// Active Directory. This would allow you to provide users and groups access
-// to resources in either domain, with a single set of credentials.
-//
-// This action initiates the creation of the AWS side of a trust relationship
-// between an AWS Managed Microsoft AD directory and an external domain.
-type CreateTrustInput struct {
-	_ struct{} `type:"structure"`
-
-	// The IP addresses of the remote DNS server associated with RemoteDomainName.
-	ConditionalForwarderIpAddrs []string `type:"list"`
-
-	// The Directory ID of the AWS Managed Microsoft AD directory for which to establish
-	// the trust relationship.
-	//
-	// DirectoryId is a required field
-	DirectoryId *string `type:"string" required:"true"`
-
-	// The Fully Qualified Domain Name (FQDN) of the external domain for which to
-	// create the trust relationship.
-	//
-	// RemoteDomainName is a required field
-	RemoteDomainName *string `type:"string" required:"true"`
-
-	// Optional parameter to enable selective authentication for the trust.
-	SelectiveAuth SelectiveAuth `type:"string" enum:"true"`
-
-	// The direction of the trust relationship.
-	//
-	// TrustDirection is a required field
-	TrustDirection TrustDirection `type:"string" required:"true" enum:"true"`
-
-	// The trust password. The must be the same password that was used when creating
-	// the trust relationship on the external domain.
-	//
-	// TrustPassword is a required field
-	TrustPassword *string `min:"1" type:"string" required:"true" sensitive:"true"`
-
-	// The trust relationship type. Forest is the default.
-	TrustType TrustType `type:"string" enum:"true"`
-}
-
-// String returns the string representation
-func (s CreateTrustInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateTrustInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateTrustInput"}
-
-	if s.DirectoryId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DirectoryId"))
-	}
-
-	if s.RemoteDomainName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("RemoteDomainName"))
-	}
-	if len(s.TrustDirection) == 0 {
-		invalidParams.Add(aws.NewErrParamRequired("TrustDirection"))
-	}
-
-	if s.TrustPassword == nil {
-		invalidParams.Add(aws.NewErrParamRequired("TrustPassword"))
-	}
-	if s.TrustPassword != nil && len(*s.TrustPassword) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("TrustPassword", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// The result of a CreateTrust request.
-type CreateTrustOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A unique identifier for the trust relationship that was created.
-	TrustId *string `type:"string"`
-}
-
-// String returns the string representation
-func (s CreateTrustOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCreateTrust = "CreateTrust"
 
@@ -122,7 +32,7 @@ const opCreateTrust = "CreateTrust"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/CreateTrust
-func (c *Client) CreateTrustRequest(input *CreateTrustInput) CreateTrustRequest {
+func (c *Client) CreateTrustRequest(input *types.CreateTrustInput) CreateTrustRequest {
 	op := &aws.Operation{
 		Name:       opCreateTrust,
 		HTTPMethod: "POST",
@@ -130,10 +40,10 @@ func (c *Client) CreateTrustRequest(input *CreateTrustInput) CreateTrustRequest 
 	}
 
 	if input == nil {
-		input = &CreateTrustInput{}
+		input = &types.CreateTrustInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateTrustOutput{})
+	req := c.newRequest(op, input, &types.CreateTrustOutput{})
 	return CreateTrustRequest{Request: req, Input: input, Copy: c.CreateTrustRequest}
 }
 
@@ -141,8 +51,8 @@ func (c *Client) CreateTrustRequest(input *CreateTrustInput) CreateTrustRequest 
 // CreateTrust API operation.
 type CreateTrustRequest struct {
 	*aws.Request
-	Input *CreateTrustInput
-	Copy  func(*CreateTrustInput) CreateTrustRequest
+	Input *types.CreateTrustInput
+	Copy  func(*types.CreateTrustInput) CreateTrustRequest
 }
 
 // Send marshals and sends the CreateTrust API request.
@@ -154,7 +64,7 @@ func (r CreateTrustRequest) Send(ctx context.Context) (*CreateTrustResponse, err
 	}
 
 	resp := &CreateTrustResponse{
-		CreateTrustOutput: r.Request.Data.(*CreateTrustOutput),
+		CreateTrustOutput: r.Request.Data.(*types.CreateTrustOutput),
 		response:          &aws.Response{Request: r.Request},
 	}
 
@@ -164,7 +74,7 @@ func (r CreateTrustRequest) Send(ctx context.Context) (*CreateTrustResponse, err
 // CreateTrustResponse is the response type for the
 // CreateTrust API operation.
 type CreateTrustResponse struct {
-	*CreateTrustOutput
+	*types.CreateTrustOutput
 
 	response *aws.Response
 }

@@ -6,61 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/types"
 )
-
-type DisassociateBudgetFromResourceInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the budget you want to disassociate.
-	//
-	// BudgetName is a required field
-	BudgetName *string `min:"1" type:"string" required:"true"`
-
-	// The resource identifier you want to disassociate from. Either a portfolio-id
-	// or a product-id.
-	//
-	// ResourceId is a required field
-	ResourceId *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DisassociateBudgetFromResourceInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DisassociateBudgetFromResourceInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DisassociateBudgetFromResourceInput"}
-
-	if s.BudgetName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("BudgetName"))
-	}
-	if s.BudgetName != nil && len(*s.BudgetName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("BudgetName", 1))
-	}
-
-	if s.ResourceId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ResourceId"))
-	}
-	if s.ResourceId != nil && len(*s.ResourceId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ResourceId", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DisassociateBudgetFromResourceOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DisassociateBudgetFromResourceOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDisassociateBudgetFromResource = "DisassociateBudgetFromResource"
 
@@ -77,7 +24,7 @@ const opDisassociateBudgetFromResource = "DisassociateBudgetFromResource"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DisassociateBudgetFromResource
-func (c *Client) DisassociateBudgetFromResourceRequest(input *DisassociateBudgetFromResourceInput) DisassociateBudgetFromResourceRequest {
+func (c *Client) DisassociateBudgetFromResourceRequest(input *types.DisassociateBudgetFromResourceInput) DisassociateBudgetFromResourceRequest {
 	op := &aws.Operation{
 		Name:       opDisassociateBudgetFromResource,
 		HTTPMethod: "POST",
@@ -85,10 +32,10 @@ func (c *Client) DisassociateBudgetFromResourceRequest(input *DisassociateBudget
 	}
 
 	if input == nil {
-		input = &DisassociateBudgetFromResourceInput{}
+		input = &types.DisassociateBudgetFromResourceInput{}
 	}
 
-	req := c.newRequest(op, input, &DisassociateBudgetFromResourceOutput{})
+	req := c.newRequest(op, input, &types.DisassociateBudgetFromResourceOutput{})
 	return DisassociateBudgetFromResourceRequest{Request: req, Input: input, Copy: c.DisassociateBudgetFromResourceRequest}
 }
 
@@ -96,8 +43,8 @@ func (c *Client) DisassociateBudgetFromResourceRequest(input *DisassociateBudget
 // DisassociateBudgetFromResource API operation.
 type DisassociateBudgetFromResourceRequest struct {
 	*aws.Request
-	Input *DisassociateBudgetFromResourceInput
-	Copy  func(*DisassociateBudgetFromResourceInput) DisassociateBudgetFromResourceRequest
+	Input *types.DisassociateBudgetFromResourceInput
+	Copy  func(*types.DisassociateBudgetFromResourceInput) DisassociateBudgetFromResourceRequest
 }
 
 // Send marshals and sends the DisassociateBudgetFromResource API request.
@@ -109,7 +56,7 @@ func (r DisassociateBudgetFromResourceRequest) Send(ctx context.Context) (*Disas
 	}
 
 	resp := &DisassociateBudgetFromResourceResponse{
-		DisassociateBudgetFromResourceOutput: r.Request.Data.(*DisassociateBudgetFromResourceOutput),
+		DisassociateBudgetFromResourceOutput: r.Request.Data.(*types.DisassociateBudgetFromResourceOutput),
 		response:                             &aws.Response{Request: r.Request},
 	}
 
@@ -119,7 +66,7 @@ func (r DisassociateBudgetFromResourceRequest) Send(ctx context.Context) (*Disas
 // DisassociateBudgetFromResourceResponse is the response type for the
 // DisassociateBudgetFromResource API operation.
 type DisassociateBudgetFromResourceResponse struct {
-	*DisassociateBudgetFromResourceOutput
+	*types.DisassociateBudgetFromResourceOutput
 
 	response *aws.Response
 }

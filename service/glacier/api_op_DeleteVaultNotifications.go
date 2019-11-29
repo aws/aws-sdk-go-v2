@@ -6,86 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/restjson"
+	"github.com/aws/aws-sdk-go-v2/service/glacier/types"
 )
-
-// Provides options for deleting a vault notification configuration from an
-// Amazon Glacier vault.
-type DeleteVaultNotificationsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The AccountId value is the AWS account ID of the account that owns the vault.
-	// You can either specify an AWS account ID or optionally a single '-' (hyphen),
-	// in which case Amazon S3 Glacier uses the AWS account ID associated with the
-	// credentials used to sign the request. If you use an account ID, do not include
-	// any hyphens ('-') in the ID.
-	//
-	// AccountId is a required field
-	AccountId *string `location:"uri" locationName:"accountId" type:"string" required:"true"`
-
-	// The name of the vault.
-	//
-	// VaultName is a required field
-	VaultName *string `location:"uri" locationName:"vaultName" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteVaultNotificationsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteVaultNotificationsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteVaultNotificationsInput"}
-
-	if s.AccountId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("AccountId"))
-	}
-
-	if s.VaultName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("VaultName"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteVaultNotificationsInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.AccountId != nil {
-		v := *s.AccountId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "accountId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.VaultName != nil {
-		v := *s.VaultName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "vaultName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type DeleteVaultNotificationsOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteVaultNotificationsOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteVaultNotificationsOutput) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
 
 const opDeleteVaultNotifications = "DeleteVaultNotifications"
 
@@ -114,7 +38,7 @@ const opDeleteVaultNotifications = "DeleteVaultNotifications"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) DeleteVaultNotificationsRequest(input *DeleteVaultNotificationsInput) DeleteVaultNotificationsRequest {
+func (c *Client) DeleteVaultNotificationsRequest(input *types.DeleteVaultNotificationsInput) DeleteVaultNotificationsRequest {
 	op := &aws.Operation{
 		Name:       opDeleteVaultNotifications,
 		HTTPMethod: "DELETE",
@@ -122,10 +46,10 @@ func (c *Client) DeleteVaultNotificationsRequest(input *DeleteVaultNotifications
 	}
 
 	if input == nil {
-		input = &DeleteVaultNotificationsInput{}
+		input = &types.DeleteVaultNotificationsInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteVaultNotificationsOutput{})
+	req := c.newRequest(op, input, &types.DeleteVaultNotificationsOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return DeleteVaultNotificationsRequest{Request: req, Input: input, Copy: c.DeleteVaultNotificationsRequest}
@@ -135,8 +59,8 @@ func (c *Client) DeleteVaultNotificationsRequest(input *DeleteVaultNotifications
 // DeleteVaultNotifications API operation.
 type DeleteVaultNotificationsRequest struct {
 	*aws.Request
-	Input *DeleteVaultNotificationsInput
-	Copy  func(*DeleteVaultNotificationsInput) DeleteVaultNotificationsRequest
+	Input *types.DeleteVaultNotificationsInput
+	Copy  func(*types.DeleteVaultNotificationsInput) DeleteVaultNotificationsRequest
 }
 
 // Send marshals and sends the DeleteVaultNotifications API request.
@@ -148,7 +72,7 @@ func (r DeleteVaultNotificationsRequest) Send(ctx context.Context) (*DeleteVault
 	}
 
 	resp := &DeleteVaultNotificationsResponse{
-		DeleteVaultNotificationsOutput: r.Request.Data.(*DeleteVaultNotificationsOutput),
+		DeleteVaultNotificationsOutput: r.Request.Data.(*types.DeleteVaultNotificationsOutput),
 		response:                       &aws.Response{Request: r.Request},
 	}
 
@@ -158,7 +82,7 @@ func (r DeleteVaultNotificationsRequest) Send(ctx context.Context) (*DeleteVault
 // DeleteVaultNotificationsResponse is the response type for the
 // DeleteVaultNotifications API operation.
 type DeleteVaultNotificationsResponse struct {
-	*DeleteVaultNotificationsOutput
+	*types.DeleteVaultNotificationsOutput
 
 	response *aws.Response
 }

@@ -4,105 +4,10 @@ package migrationhub
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/migrationhub/types"
 )
-
-type PutResourceAttributesInput struct {
-	_ struct{} `type:"structure"`
-
-	// Optional boolean flag to indicate whether any effect should take place. Used
-	// to test if the caller has permission to make the call.
-	DryRun *bool `type:"boolean"`
-
-	// Unique identifier that references the migration task.
-	//
-	// MigrationTaskName is a required field
-	MigrationTaskName *string `min:"1" type:"string" required:"true"`
-
-	// The name of the ProgressUpdateStream.
-	//
-	// ProgressUpdateStream is a required field
-	ProgressUpdateStream *string `min:"1" type:"string" required:"true"`
-
-	// Information about the resource that is being migrated. This data will be
-	// used to map the task to a resource in the Application Discovery Service (ADS)'s
-	// repository.
-	//
-	// Takes the object array of ResourceAttribute where the Type field is reserved
-	// for the following values: IPV4_ADDRESS | IPV6_ADDRESS | MAC_ADDRESS | FQDN
-	// | VM_MANAGER_ID | VM_MANAGED_OBJECT_REFERENCE | VM_NAME | VM_PATH | BIOS_ID
-	// | MOTHERBOARD_SERIAL_NUMBER where the identifying value can be a string up
-	// to 256 characters.
-	//
-	//    * If any "VM" related value is set for a ResourceAttribute object, it
-	//    is required that VM_MANAGER_ID, as a minimum, is always set. If VM_MANAGER_ID
-	//    is not set, then all "VM" fields will be discarded and "VM" fields will
-	//    not be used for matching the migration task to a server in Application
-	//    Discovery Service (ADS)'s repository. See the Example (https://docs.aws.amazon.com/migrationhub/latest/ug/API_PutResourceAttributes.html#API_PutResourceAttributes_Examples)
-	//    section below for a use case of specifying "VM" related values.
-	//
-	//    * If a server you are trying to match has multiple IP or MAC addresses,
-	//    you should provide as many as you know in separate type/value pairs passed
-	//    to the ResourceAttributeList parameter to maximize the chances of matching.
-	//
-	// ResourceAttributeList is a required field
-	ResourceAttributeList []ResourceAttribute `min:"1" type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s PutResourceAttributesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *PutResourceAttributesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "PutResourceAttributesInput"}
-
-	if s.MigrationTaskName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("MigrationTaskName"))
-	}
-	if s.MigrationTaskName != nil && len(*s.MigrationTaskName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("MigrationTaskName", 1))
-	}
-
-	if s.ProgressUpdateStream == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ProgressUpdateStream"))
-	}
-	if s.ProgressUpdateStream != nil && len(*s.ProgressUpdateStream) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ProgressUpdateStream", 1))
-	}
-
-	if s.ResourceAttributeList == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ResourceAttributeList"))
-	}
-	if s.ResourceAttributeList != nil && len(s.ResourceAttributeList) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ResourceAttributeList", 1))
-	}
-	if s.ResourceAttributeList != nil {
-		for i, v := range s.ResourceAttributeList {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "ResourceAttributeList", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type PutResourceAttributesOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s PutResourceAttributesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opPutResourceAttributes = "PutResourceAttributes"
 
@@ -110,14 +15,14 @@ const opPutResourceAttributes = "PutResourceAttributes"
 // AWS Migration Hub.
 //
 // Provides identifying details of the resource being migrated so that it can
-// be associated in the Application Discovery Service (ADS)'s repository. This
-// association occurs asynchronously after PutResourceAttributes returns.
+// be associated in the Application Discovery Service repository. This association
+// occurs asynchronously after PutResourceAttributes returns.
 //
 //    * Keep in mind that subsequent calls to PutResourceAttributes will override
 //    previously stored attributes. For example, if it is first called with
 //    a MAC address, but later, it is desired to add an IP address, it will
 //    then be required to call it with both the IP and MAC addresses to prevent
-//    overiding the MAC address.
+//    overriding the MAC address.
 //
 //    * Note the instructions regarding the special use case of the ResourceAttributeList
 //    (https://docs.aws.amazon.com/migrationhub/latest/ug/API_PutResourceAttributes.html#migrationhub-PutResourceAttributes-request-ResourceAttributeList)
@@ -135,7 +40,7 @@ const opPutResourceAttributes = "PutResourceAttributes"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/PutResourceAttributes
-func (c *Client) PutResourceAttributesRequest(input *PutResourceAttributesInput) PutResourceAttributesRequest {
+func (c *Client) PutResourceAttributesRequest(input *types.PutResourceAttributesInput) PutResourceAttributesRequest {
 	op := &aws.Operation{
 		Name:       opPutResourceAttributes,
 		HTTPMethod: "POST",
@@ -143,10 +48,10 @@ func (c *Client) PutResourceAttributesRequest(input *PutResourceAttributesInput)
 	}
 
 	if input == nil {
-		input = &PutResourceAttributesInput{}
+		input = &types.PutResourceAttributesInput{}
 	}
 
-	req := c.newRequest(op, input, &PutResourceAttributesOutput{})
+	req := c.newRequest(op, input, &types.PutResourceAttributesOutput{})
 	return PutResourceAttributesRequest{Request: req, Input: input, Copy: c.PutResourceAttributesRequest}
 }
 
@@ -154,8 +59,8 @@ func (c *Client) PutResourceAttributesRequest(input *PutResourceAttributesInput)
 // PutResourceAttributes API operation.
 type PutResourceAttributesRequest struct {
 	*aws.Request
-	Input *PutResourceAttributesInput
-	Copy  func(*PutResourceAttributesInput) PutResourceAttributesRequest
+	Input *types.PutResourceAttributesInput
+	Copy  func(*types.PutResourceAttributesInput) PutResourceAttributesRequest
 }
 
 // Send marshals and sends the PutResourceAttributes API request.
@@ -167,7 +72,7 @@ func (r PutResourceAttributesRequest) Send(ctx context.Context) (*PutResourceAtt
 	}
 
 	resp := &PutResourceAttributesResponse{
-		PutResourceAttributesOutput: r.Request.Data.(*PutResourceAttributesOutput),
+		PutResourceAttributesOutput: r.Request.Data.(*types.PutResourceAttributesOutput),
 		response:                    &aws.Response{Request: r.Request},
 	}
 
@@ -177,7 +82,7 @@ func (r PutResourceAttributesRequest) Send(ctx context.Context) (*PutResourceAtt
 // PutResourceAttributesResponse is the response type for the
 // PutResourceAttributes API operation.
 type PutResourceAttributesResponse struct {
-	*PutResourceAttributesOutput
+	*types.PutResourceAttributesOutput
 
 	response *aws.Response
 }

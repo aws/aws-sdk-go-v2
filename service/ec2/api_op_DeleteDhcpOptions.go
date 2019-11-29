@@ -6,53 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/ec2query"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-type DeleteDhcpOptionsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the DHCP options set.
-	//
-	// DhcpOptionsId is a required field
-	DhcpOptionsId *string `type:"string" required:"true"`
-
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have
-	// the required permissions, the error response is DryRunOperation. Otherwise,
-	// it is UnauthorizedOperation.
-	DryRun *bool `locationName:"dryRun" type:"boolean"`
-}
-
-// String returns the string representation
-func (s DeleteDhcpOptionsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteDhcpOptionsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteDhcpOptionsInput"}
-
-	if s.DhcpOptionsId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DhcpOptionsId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteDhcpOptionsOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteDhcpOptionsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteDhcpOptions = "DeleteDhcpOptions"
 
@@ -72,7 +29,7 @@ const opDeleteDhcpOptions = "DeleteDhcpOptions"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteDhcpOptions
-func (c *Client) DeleteDhcpOptionsRequest(input *DeleteDhcpOptionsInput) DeleteDhcpOptionsRequest {
+func (c *Client) DeleteDhcpOptionsRequest(input *types.DeleteDhcpOptionsInput) DeleteDhcpOptionsRequest {
 	op := &aws.Operation{
 		Name:       opDeleteDhcpOptions,
 		HTTPMethod: "POST",
@@ -80,10 +37,10 @@ func (c *Client) DeleteDhcpOptionsRequest(input *DeleteDhcpOptionsInput) DeleteD
 	}
 
 	if input == nil {
-		input = &DeleteDhcpOptionsInput{}
+		input = &types.DeleteDhcpOptionsInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteDhcpOptionsOutput{})
+	req := c.newRequest(op, input, &types.DeleteDhcpOptionsOutput{})
 	req.Handlers.Unmarshal.Remove(ec2query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return DeleteDhcpOptionsRequest{Request: req, Input: input, Copy: c.DeleteDhcpOptionsRequest}
@@ -93,8 +50,8 @@ func (c *Client) DeleteDhcpOptionsRequest(input *DeleteDhcpOptionsInput) DeleteD
 // DeleteDhcpOptions API operation.
 type DeleteDhcpOptionsRequest struct {
 	*aws.Request
-	Input *DeleteDhcpOptionsInput
-	Copy  func(*DeleteDhcpOptionsInput) DeleteDhcpOptionsRequest
+	Input *types.DeleteDhcpOptionsInput
+	Copy  func(*types.DeleteDhcpOptionsInput) DeleteDhcpOptionsRequest
 }
 
 // Send marshals and sends the DeleteDhcpOptions API request.
@@ -106,7 +63,7 @@ func (r DeleteDhcpOptionsRequest) Send(ctx context.Context) (*DeleteDhcpOptionsR
 	}
 
 	resp := &DeleteDhcpOptionsResponse{
-		DeleteDhcpOptionsOutput: r.Request.Data.(*DeleteDhcpOptionsOutput),
+		DeleteDhcpOptionsOutput: r.Request.Data.(*types.DeleteDhcpOptionsOutput),
 		response:                &aws.Response{Request: r.Request},
 	}
 
@@ -116,7 +73,7 @@ func (r DeleteDhcpOptionsRequest) Send(ctx context.Context) (*DeleteDhcpOptionsR
 // DeleteDhcpOptionsResponse is the response type for the
 // DeleteDhcpOptions API operation.
 type DeleteDhcpOptionsResponse struct {
-	*DeleteDhcpOptionsOutput
+	*types.DeleteDhcpOptionsOutput
 
 	response *aws.Response
 }

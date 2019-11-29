@@ -6,46 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/macie/types"
 )
-
-type ListMemberAccountsInput struct {
-	_ struct{} `type:"structure"`
-
-	// Use this parameter to indicate the maximum number of items that you want
-	// in the response. The default value is 250.
-	MaxResults *int64 `locationName:"maxResults" type:"integer"`
-
-	// Use this parameter when paginating results. Set the value of this parameter
-	// to null on your first call to the ListMemberAccounts action. Subsequent calls
-	// to the action fill nextToken in the request with the value of nextToken from
-	// the previous response to continue listing data.
-	NextToken *string `locationName:"nextToken" type:"string"`
-}
-
-// String returns the string representation
-func (s ListMemberAccountsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type ListMemberAccountsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A list of the Amazon Macie member accounts returned by the action. The current
-	// master account is also included in this list.
-	MemberAccounts []MemberAccount `locationName:"memberAccounts" type:"list"`
-
-	// When a response is generated, if there is more data to be listed, this parameter
-	// is present in the response and contains the value to use for the nextToken
-	// parameter in a subsequent pagination request. If there is no more data to
-	// be listed, this parameter is set to null.
-	NextToken *string `locationName:"nextToken" type:"string"`
-}
-
-// String returns the string representation
-func (s ListMemberAccountsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListMemberAccounts = "ListMemberAccounts"
 
@@ -63,7 +25,7 @@ const opListMemberAccounts = "ListMemberAccounts"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/macie-2017-12-19/ListMemberAccounts
-func (c *Client) ListMemberAccountsRequest(input *ListMemberAccountsInput) ListMemberAccountsRequest {
+func (c *Client) ListMemberAccountsRequest(input *types.ListMemberAccountsInput) ListMemberAccountsRequest {
 	op := &aws.Operation{
 		Name:       opListMemberAccounts,
 		HTTPMethod: "POST",
@@ -77,10 +39,10 @@ func (c *Client) ListMemberAccountsRequest(input *ListMemberAccountsInput) ListM
 	}
 
 	if input == nil {
-		input = &ListMemberAccountsInput{}
+		input = &types.ListMemberAccountsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListMemberAccountsOutput{})
+	req := c.newRequest(op, input, &types.ListMemberAccountsOutput{})
 	return ListMemberAccountsRequest{Request: req, Input: input, Copy: c.ListMemberAccountsRequest}
 }
 
@@ -88,8 +50,8 @@ func (c *Client) ListMemberAccountsRequest(input *ListMemberAccountsInput) ListM
 // ListMemberAccounts API operation.
 type ListMemberAccountsRequest struct {
 	*aws.Request
-	Input *ListMemberAccountsInput
-	Copy  func(*ListMemberAccountsInput) ListMemberAccountsRequest
+	Input *types.ListMemberAccountsInput
+	Copy  func(*types.ListMemberAccountsInput) ListMemberAccountsRequest
 }
 
 // Send marshals and sends the ListMemberAccounts API request.
@@ -101,7 +63,7 @@ func (r ListMemberAccountsRequest) Send(ctx context.Context) (*ListMemberAccount
 	}
 
 	resp := &ListMemberAccountsResponse{
-		ListMemberAccountsOutput: r.Request.Data.(*ListMemberAccountsOutput),
+		ListMemberAccountsOutput: r.Request.Data.(*types.ListMemberAccountsOutput),
 		response:                 &aws.Response{Request: r.Request},
 	}
 
@@ -131,7 +93,7 @@ func NewListMemberAccountsPaginator(req ListMemberAccountsRequest) ListMemberAcc
 	return ListMemberAccountsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListMemberAccountsInput
+				var inCpy *types.ListMemberAccountsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -151,14 +113,14 @@ type ListMemberAccountsPaginator struct {
 	aws.Pager
 }
 
-func (p *ListMemberAccountsPaginator) CurrentPage() *ListMemberAccountsOutput {
-	return p.Pager.CurrentPage().(*ListMemberAccountsOutput)
+func (p *ListMemberAccountsPaginator) CurrentPage() *types.ListMemberAccountsOutput {
+	return p.Pager.CurrentPage().(*types.ListMemberAccountsOutput)
 }
 
 // ListMemberAccountsResponse is the response type for the
 // ListMemberAccounts API operation.
 type ListMemberAccountsResponse struct {
-	*ListMemberAccountsOutput
+	*types.ListMemberAccountsOutput
 
 	response *aws.Response
 }

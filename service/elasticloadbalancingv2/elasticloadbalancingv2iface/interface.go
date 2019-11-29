@@ -13,6 +13,7 @@ import (
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/elasticloadbalancingv2"
+	"github.com/aws/aws-sdk-go-v2/service/elasticloadbalancingv2/types"
 )
 
 // ClientAPI provides an interface to enable mocking the
@@ -46,7 +47,7 @@ import (
 //    type mockClientClient struct {
 //        elasticloadbalancingv2iface.ClientPI
 //    }
-//    func (m *mockClientClient) AddListenerCertificates(input *elasticloadbalancingv2.AddListenerCertificatesInput) (*elasticloadbalancingv2.AddListenerCertificatesOutput, error) {
+//    func (m *mockClientClient) AddListenerCertificates(input *types.AddListenerCertificatesInput) (*types.AddListenerCertificatesOutput, error) {
 //        // mock response/functionality
 //    }
 //
@@ -64,83 +65,83 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type ClientAPI interface {
-	AddListenerCertificatesRequest(*elasticloadbalancingv2.AddListenerCertificatesInput) elasticloadbalancingv2.AddListenerCertificatesRequest
+	AddListenerCertificatesRequest(*types.AddListenerCertificatesInput) elasticloadbalancingv2.AddListenerCertificatesRequest
 
-	AddTagsRequest(*elasticloadbalancingv2.AddTagsInput) elasticloadbalancingv2.AddTagsRequest
+	AddTagsRequest(*types.AddTagsInput) elasticloadbalancingv2.AddTagsRequest
 
-	CreateListenerRequest(*elasticloadbalancingv2.CreateListenerInput) elasticloadbalancingv2.CreateListenerRequest
+	CreateListenerRequest(*types.CreateListenerInput) elasticloadbalancingv2.CreateListenerRequest
 
-	CreateLoadBalancerRequest(*elasticloadbalancingv2.CreateLoadBalancerInput) elasticloadbalancingv2.CreateLoadBalancerRequest
+	CreateLoadBalancerRequest(*types.CreateLoadBalancerInput) elasticloadbalancingv2.CreateLoadBalancerRequest
 
-	CreateRuleRequest(*elasticloadbalancingv2.CreateRuleInput) elasticloadbalancingv2.CreateRuleRequest
+	CreateRuleRequest(*types.CreateRuleInput) elasticloadbalancingv2.CreateRuleRequest
 
-	CreateTargetGroupRequest(*elasticloadbalancingv2.CreateTargetGroupInput) elasticloadbalancingv2.CreateTargetGroupRequest
+	CreateTargetGroupRequest(*types.CreateTargetGroupInput) elasticloadbalancingv2.CreateTargetGroupRequest
 
-	DeleteListenerRequest(*elasticloadbalancingv2.DeleteListenerInput) elasticloadbalancingv2.DeleteListenerRequest
+	DeleteListenerRequest(*types.DeleteListenerInput) elasticloadbalancingv2.DeleteListenerRequest
 
-	DeleteLoadBalancerRequest(*elasticloadbalancingv2.DeleteLoadBalancerInput) elasticloadbalancingv2.DeleteLoadBalancerRequest
+	DeleteLoadBalancerRequest(*types.DeleteLoadBalancerInput) elasticloadbalancingv2.DeleteLoadBalancerRequest
 
-	DeleteRuleRequest(*elasticloadbalancingv2.DeleteRuleInput) elasticloadbalancingv2.DeleteRuleRequest
+	DeleteRuleRequest(*types.DeleteRuleInput) elasticloadbalancingv2.DeleteRuleRequest
 
-	DeleteTargetGroupRequest(*elasticloadbalancingv2.DeleteTargetGroupInput) elasticloadbalancingv2.DeleteTargetGroupRequest
+	DeleteTargetGroupRequest(*types.DeleteTargetGroupInput) elasticloadbalancingv2.DeleteTargetGroupRequest
 
-	DeregisterTargetsRequest(*elasticloadbalancingv2.DeregisterTargetsInput) elasticloadbalancingv2.DeregisterTargetsRequest
+	DeregisterTargetsRequest(*types.DeregisterTargetsInput) elasticloadbalancingv2.DeregisterTargetsRequest
 
-	DescribeAccountLimitsRequest(*elasticloadbalancingv2.DescribeAccountLimitsInput) elasticloadbalancingv2.DescribeAccountLimitsRequest
+	DescribeAccountLimitsRequest(*types.DescribeAccountLimitsInput) elasticloadbalancingv2.DescribeAccountLimitsRequest
 
-	DescribeListenerCertificatesRequest(*elasticloadbalancingv2.DescribeListenerCertificatesInput) elasticloadbalancingv2.DescribeListenerCertificatesRequest
+	DescribeListenerCertificatesRequest(*types.DescribeListenerCertificatesInput) elasticloadbalancingv2.DescribeListenerCertificatesRequest
 
-	DescribeListenersRequest(*elasticloadbalancingv2.DescribeListenersInput) elasticloadbalancingv2.DescribeListenersRequest
+	DescribeListenersRequest(*types.DescribeListenersInput) elasticloadbalancingv2.DescribeListenersRequest
 
-	DescribeLoadBalancerAttributesRequest(*elasticloadbalancingv2.DescribeLoadBalancerAttributesInput) elasticloadbalancingv2.DescribeLoadBalancerAttributesRequest
+	DescribeLoadBalancerAttributesRequest(*types.DescribeLoadBalancerAttributesInput) elasticloadbalancingv2.DescribeLoadBalancerAttributesRequest
 
-	DescribeLoadBalancersRequest(*elasticloadbalancingv2.DescribeLoadBalancersInput) elasticloadbalancingv2.DescribeLoadBalancersRequest
+	DescribeLoadBalancersRequest(*types.DescribeLoadBalancersInput) elasticloadbalancingv2.DescribeLoadBalancersRequest
 
-	DescribeRulesRequest(*elasticloadbalancingv2.DescribeRulesInput) elasticloadbalancingv2.DescribeRulesRequest
+	DescribeRulesRequest(*types.DescribeRulesInput) elasticloadbalancingv2.DescribeRulesRequest
 
-	DescribeSSLPoliciesRequest(*elasticloadbalancingv2.DescribeSSLPoliciesInput) elasticloadbalancingv2.DescribeSSLPoliciesRequest
+	DescribeSSLPoliciesRequest(*types.DescribeSSLPoliciesInput) elasticloadbalancingv2.DescribeSSLPoliciesRequest
 
-	DescribeTagsRequest(*elasticloadbalancingv2.DescribeTagsInput) elasticloadbalancingv2.DescribeTagsRequest
+	DescribeTagsRequest(*types.DescribeTagsInput) elasticloadbalancingv2.DescribeTagsRequest
 
-	DescribeTargetGroupAttributesRequest(*elasticloadbalancingv2.DescribeTargetGroupAttributesInput) elasticloadbalancingv2.DescribeTargetGroupAttributesRequest
+	DescribeTargetGroupAttributesRequest(*types.DescribeTargetGroupAttributesInput) elasticloadbalancingv2.DescribeTargetGroupAttributesRequest
 
-	DescribeTargetGroupsRequest(*elasticloadbalancingv2.DescribeTargetGroupsInput) elasticloadbalancingv2.DescribeTargetGroupsRequest
+	DescribeTargetGroupsRequest(*types.DescribeTargetGroupsInput) elasticloadbalancingv2.DescribeTargetGroupsRequest
 
-	DescribeTargetHealthRequest(*elasticloadbalancingv2.DescribeTargetHealthInput) elasticloadbalancingv2.DescribeTargetHealthRequest
+	DescribeTargetHealthRequest(*types.DescribeTargetHealthInput) elasticloadbalancingv2.DescribeTargetHealthRequest
 
-	ModifyListenerRequest(*elasticloadbalancingv2.ModifyListenerInput) elasticloadbalancingv2.ModifyListenerRequest
+	ModifyListenerRequest(*types.ModifyListenerInput) elasticloadbalancingv2.ModifyListenerRequest
 
-	ModifyLoadBalancerAttributesRequest(*elasticloadbalancingv2.ModifyLoadBalancerAttributesInput) elasticloadbalancingv2.ModifyLoadBalancerAttributesRequest
+	ModifyLoadBalancerAttributesRequest(*types.ModifyLoadBalancerAttributesInput) elasticloadbalancingv2.ModifyLoadBalancerAttributesRequest
 
-	ModifyRuleRequest(*elasticloadbalancingv2.ModifyRuleInput) elasticloadbalancingv2.ModifyRuleRequest
+	ModifyRuleRequest(*types.ModifyRuleInput) elasticloadbalancingv2.ModifyRuleRequest
 
-	ModifyTargetGroupRequest(*elasticloadbalancingv2.ModifyTargetGroupInput) elasticloadbalancingv2.ModifyTargetGroupRequest
+	ModifyTargetGroupRequest(*types.ModifyTargetGroupInput) elasticloadbalancingv2.ModifyTargetGroupRequest
 
-	ModifyTargetGroupAttributesRequest(*elasticloadbalancingv2.ModifyTargetGroupAttributesInput) elasticloadbalancingv2.ModifyTargetGroupAttributesRequest
+	ModifyTargetGroupAttributesRequest(*types.ModifyTargetGroupAttributesInput) elasticloadbalancingv2.ModifyTargetGroupAttributesRequest
 
-	RegisterTargetsRequest(*elasticloadbalancingv2.RegisterTargetsInput) elasticloadbalancingv2.RegisterTargetsRequest
+	RegisterTargetsRequest(*types.RegisterTargetsInput) elasticloadbalancingv2.RegisterTargetsRequest
 
-	RemoveListenerCertificatesRequest(*elasticloadbalancingv2.RemoveListenerCertificatesInput) elasticloadbalancingv2.RemoveListenerCertificatesRequest
+	RemoveListenerCertificatesRequest(*types.RemoveListenerCertificatesInput) elasticloadbalancingv2.RemoveListenerCertificatesRequest
 
-	RemoveTagsRequest(*elasticloadbalancingv2.RemoveTagsInput) elasticloadbalancingv2.RemoveTagsRequest
+	RemoveTagsRequest(*types.RemoveTagsInput) elasticloadbalancingv2.RemoveTagsRequest
 
-	SetIpAddressTypeRequest(*elasticloadbalancingv2.SetIpAddressTypeInput) elasticloadbalancingv2.SetIpAddressTypeRequest
+	SetIpAddressTypeRequest(*types.SetIpAddressTypeInput) elasticloadbalancingv2.SetIpAddressTypeRequest
 
-	SetRulePrioritiesRequest(*elasticloadbalancingv2.SetRulePrioritiesInput) elasticloadbalancingv2.SetRulePrioritiesRequest
+	SetRulePrioritiesRequest(*types.SetRulePrioritiesInput) elasticloadbalancingv2.SetRulePrioritiesRequest
 
-	SetSecurityGroupsRequest(*elasticloadbalancingv2.SetSecurityGroupsInput) elasticloadbalancingv2.SetSecurityGroupsRequest
+	SetSecurityGroupsRequest(*types.SetSecurityGroupsInput) elasticloadbalancingv2.SetSecurityGroupsRequest
 
-	SetSubnetsRequest(*elasticloadbalancingv2.SetSubnetsInput) elasticloadbalancingv2.SetSubnetsRequest
+	SetSubnetsRequest(*types.SetSubnetsInput) elasticloadbalancingv2.SetSubnetsRequest
 
-	WaitUntilLoadBalancerAvailable(context.Context, *elasticloadbalancingv2.DescribeLoadBalancersInput, ...aws.WaiterOption) error
+	WaitUntilLoadBalancerAvailable(context.Context, *types.DescribeLoadBalancersInput, ...aws.WaiterOption) error
 
-	WaitUntilLoadBalancerExists(context.Context, *elasticloadbalancingv2.DescribeLoadBalancersInput, ...aws.WaiterOption) error
+	WaitUntilLoadBalancerExists(context.Context, *types.DescribeLoadBalancersInput, ...aws.WaiterOption) error
 
-	WaitUntilLoadBalancersDeleted(context.Context, *elasticloadbalancingv2.DescribeLoadBalancersInput, ...aws.WaiterOption) error
+	WaitUntilLoadBalancersDeleted(context.Context, *types.DescribeLoadBalancersInput, ...aws.WaiterOption) error
 
-	WaitUntilTargetDeregistered(context.Context, *elasticloadbalancingv2.DescribeTargetHealthInput, ...aws.WaiterOption) error
+	WaitUntilTargetDeregistered(context.Context, *types.DescribeTargetHealthInput, ...aws.WaiterOption) error
 
-	WaitUntilTargetInService(context.Context, *elasticloadbalancingv2.DescribeTargetHealthInput, ...aws.WaiterOption) error
+	WaitUntilTargetInService(context.Context, *types.DescribeTargetHealthInput, ...aws.WaiterOption) error
 }
 
 var _ ClientAPI = (*elasticloadbalancingv2.Client)(nil)

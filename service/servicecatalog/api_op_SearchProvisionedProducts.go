@@ -6,71 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/types"
 )
-
-type SearchProvisionedProductsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The language code.
-	//
-	//    * en - English (default)
-	//
-	//    * jp - Japanese
-	//
-	//    * zh - Chinese
-	AcceptLanguage *string `type:"string"`
-
-	// The access level to use to obtain results. The default is User.
-	AccessLevelFilter *AccessLevelFilter `type:"structure"`
-
-	// The search filters.
-	//
-	// When the key is SearchQuery, the searchable fields are arn, createdTime,
-	// id, lastRecordId, idempotencyToken, name, physicalId, productId, provisioningArtifact,
-	// type, status, tags, userArn, and userArnSession.
-	//
-	// Example: "SearchQuery":["status:AVAILABLE"]
-	Filters map[string][]string `type:"map"`
-
-	// The maximum number of items to return with this call.
-	PageSize *int64 `type:"integer"`
-
-	// The page token for the next set of results. To retrieve the first set of
-	// results, use null.
-	PageToken *string `type:"string"`
-
-	// The sort field. If no value is specified, the results are not sorted. The
-	// valid values are arn, id, name, and lastRecordId.
-	SortBy *string `type:"string"`
-
-	// The sort order. If no value is specified, the results are not sorted.
-	SortOrder SortOrder `type:"string" enum:"true"`
-}
-
-// String returns the string representation
-func (s SearchProvisionedProductsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type SearchProvisionedProductsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The page token to use to retrieve the next set of results. If there are no
-	// additional results, this value is null.
-	NextPageToken *string `type:"string"`
-
-	// Information about the provisioned products.
-	ProvisionedProducts []ProvisionedProductAttribute `type:"list"`
-
-	// The number of provisioned products found.
-	TotalResultsCount *int64 `type:"integer"`
-}
-
-// String returns the string representation
-func (s SearchProvisionedProductsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opSearchProvisionedProducts = "SearchProvisionedProducts"
 
@@ -87,7 +24,7 @@ const opSearchProvisionedProducts = "SearchProvisionedProducts"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/SearchProvisionedProducts
-func (c *Client) SearchProvisionedProductsRequest(input *SearchProvisionedProductsInput) SearchProvisionedProductsRequest {
+func (c *Client) SearchProvisionedProductsRequest(input *types.SearchProvisionedProductsInput) SearchProvisionedProductsRequest {
 	op := &aws.Operation{
 		Name:       opSearchProvisionedProducts,
 		HTTPMethod: "POST",
@@ -101,10 +38,10 @@ func (c *Client) SearchProvisionedProductsRequest(input *SearchProvisionedProduc
 	}
 
 	if input == nil {
-		input = &SearchProvisionedProductsInput{}
+		input = &types.SearchProvisionedProductsInput{}
 	}
 
-	req := c.newRequest(op, input, &SearchProvisionedProductsOutput{})
+	req := c.newRequest(op, input, &types.SearchProvisionedProductsOutput{})
 	return SearchProvisionedProductsRequest{Request: req, Input: input, Copy: c.SearchProvisionedProductsRequest}
 }
 
@@ -112,8 +49,8 @@ func (c *Client) SearchProvisionedProductsRequest(input *SearchProvisionedProduc
 // SearchProvisionedProducts API operation.
 type SearchProvisionedProductsRequest struct {
 	*aws.Request
-	Input *SearchProvisionedProductsInput
-	Copy  func(*SearchProvisionedProductsInput) SearchProvisionedProductsRequest
+	Input *types.SearchProvisionedProductsInput
+	Copy  func(*types.SearchProvisionedProductsInput) SearchProvisionedProductsRequest
 }
 
 // Send marshals and sends the SearchProvisionedProducts API request.
@@ -125,7 +62,7 @@ func (r SearchProvisionedProductsRequest) Send(ctx context.Context) (*SearchProv
 	}
 
 	resp := &SearchProvisionedProductsResponse{
-		SearchProvisionedProductsOutput: r.Request.Data.(*SearchProvisionedProductsOutput),
+		SearchProvisionedProductsOutput: r.Request.Data.(*types.SearchProvisionedProductsOutput),
 		response:                        &aws.Response{Request: r.Request},
 	}
 
@@ -155,7 +92,7 @@ func NewSearchProvisionedProductsPaginator(req SearchProvisionedProductsRequest)
 	return SearchProvisionedProductsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *SearchProvisionedProductsInput
+				var inCpy *types.SearchProvisionedProductsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -175,14 +112,14 @@ type SearchProvisionedProductsPaginator struct {
 	aws.Pager
 }
 
-func (p *SearchProvisionedProductsPaginator) CurrentPage() *SearchProvisionedProductsOutput {
-	return p.Pager.CurrentPage().(*SearchProvisionedProductsOutput)
+func (p *SearchProvisionedProductsPaginator) CurrentPage() *types.SearchProvisionedProductsOutput {
+	return p.Pager.CurrentPage().(*types.SearchProvisionedProductsOutput)
 }
 
 // SearchProvisionedProductsResponse is the response type for the
 // SearchProvisionedProducts API operation.
 type SearchProvisionedProductsResponse struct {
-	*SearchProvisionedProductsOutput
+	*types.SearchProvisionedProductsOutput
 
 	response *aws.Response
 }

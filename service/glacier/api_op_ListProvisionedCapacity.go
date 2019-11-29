@@ -6,83 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/glacier/types"
 )
-
-type ListProvisionedCapacityInput struct {
-	_ struct{} `type:"structure"`
-
-	// The AWS account ID of the account that owns the vault. You can either specify
-	// an AWS account ID or optionally a single '-' (hyphen), in which case Amazon
-	// S3 Glacier uses the AWS account ID associated with the credentials used to
-	// sign the request. If you use an account ID, don't include any hyphens ('-')
-	// in the ID.
-	//
-	// AccountId is a required field
-	AccountId *string `location:"uri" locationName:"accountId" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s ListProvisionedCapacityInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListProvisionedCapacityInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListProvisionedCapacityInput"}
-
-	if s.AccountId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("AccountId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListProvisionedCapacityInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.AccountId != nil {
-		v := *s.AccountId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "accountId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type ListProvisionedCapacityOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The response body contains the following JSON fields.
-	ProvisionedCapacityList []ProvisionedCapacityDescription `type:"list"`
-}
-
-// String returns the string representation
-func (s ListProvisionedCapacityOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListProvisionedCapacityOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.ProvisionedCapacityList != nil {
-		v := s.ProvisionedCapacityList
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "ProvisionedCapacityList", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	return nil
-}
 
 const opListProvisionedCapacity = "ListProvisionedCapacity"
 
@@ -98,7 +23,7 @@ const opListProvisionedCapacity = "ListProvisionedCapacity"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) ListProvisionedCapacityRequest(input *ListProvisionedCapacityInput) ListProvisionedCapacityRequest {
+func (c *Client) ListProvisionedCapacityRequest(input *types.ListProvisionedCapacityInput) ListProvisionedCapacityRequest {
 	op := &aws.Operation{
 		Name:       opListProvisionedCapacity,
 		HTTPMethod: "GET",
@@ -106,10 +31,10 @@ func (c *Client) ListProvisionedCapacityRequest(input *ListProvisionedCapacityIn
 	}
 
 	if input == nil {
-		input = &ListProvisionedCapacityInput{}
+		input = &types.ListProvisionedCapacityInput{}
 	}
 
-	req := c.newRequest(op, input, &ListProvisionedCapacityOutput{})
+	req := c.newRequest(op, input, &types.ListProvisionedCapacityOutput{})
 	return ListProvisionedCapacityRequest{Request: req, Input: input, Copy: c.ListProvisionedCapacityRequest}
 }
 
@@ -117,8 +42,8 @@ func (c *Client) ListProvisionedCapacityRequest(input *ListProvisionedCapacityIn
 // ListProvisionedCapacity API operation.
 type ListProvisionedCapacityRequest struct {
 	*aws.Request
-	Input *ListProvisionedCapacityInput
-	Copy  func(*ListProvisionedCapacityInput) ListProvisionedCapacityRequest
+	Input *types.ListProvisionedCapacityInput
+	Copy  func(*types.ListProvisionedCapacityInput) ListProvisionedCapacityRequest
 }
 
 // Send marshals and sends the ListProvisionedCapacity API request.
@@ -130,7 +55,7 @@ func (r ListProvisionedCapacityRequest) Send(ctx context.Context) (*ListProvisio
 	}
 
 	resp := &ListProvisionedCapacityResponse{
-		ListProvisionedCapacityOutput: r.Request.Data.(*ListProvisionedCapacityOutput),
+		ListProvisionedCapacityOutput: r.Request.Data.(*types.ListProvisionedCapacityOutput),
 		response:                      &aws.Response{Request: r.Request},
 	}
 
@@ -140,7 +65,7 @@ func (r ListProvisionedCapacityRequest) Send(ctx context.Context) (*ListProvisio
 // ListProvisionedCapacityResponse is the response type for the
 // ListProvisionedCapacity API operation.
 type ListProvisionedCapacityResponse struct {
-	*ListProvisionedCapacityOutput
+	*types.ListProvisionedCapacityOutput
 
 	response *aws.Response
 }

@@ -6,61 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/kinesis/types"
 )
-
-type DescribeStreamConsumerInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ARN returned by Kinesis Data Streams when you registered the consumer.
-	ConsumerARN *string `min:"1" type:"string"`
-
-	// The name that you gave to the consumer.
-	ConsumerName *string `min:"1" type:"string"`
-
-	// The ARN of the Kinesis data stream that the consumer is registered with.
-	// For more information, see Amazon Resource Names (ARNs) and AWS Service Namespaces
-	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-kinesis-streams).
-	StreamARN *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeStreamConsumerInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeStreamConsumerInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeStreamConsumerInput"}
-	if s.ConsumerARN != nil && len(*s.ConsumerARN) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ConsumerARN", 1))
-	}
-	if s.ConsumerName != nil && len(*s.ConsumerName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ConsumerName", 1))
-	}
-	if s.StreamARN != nil && len(*s.StreamARN) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("StreamARN", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribeStreamConsumerOutput struct {
-	_ struct{} `type:"structure"`
-
-	// An object that represents the details of the consumer.
-	//
-	// ConsumerDescription is a required field
-	ConsumerDescription *ConsumerDescription `type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeStreamConsumerOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeStreamConsumer = "DescribeStreamConsumer"
 
@@ -85,7 +32,7 @@ const opDescribeStreamConsumer = "DescribeStreamConsumer"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/DescribeStreamConsumer
-func (c *Client) DescribeStreamConsumerRequest(input *DescribeStreamConsumerInput) DescribeStreamConsumerRequest {
+func (c *Client) DescribeStreamConsumerRequest(input *types.DescribeStreamConsumerInput) DescribeStreamConsumerRequest {
 	op := &aws.Operation{
 		Name:       opDescribeStreamConsumer,
 		HTTPMethod: "POST",
@@ -93,10 +40,10 @@ func (c *Client) DescribeStreamConsumerRequest(input *DescribeStreamConsumerInpu
 	}
 
 	if input == nil {
-		input = &DescribeStreamConsumerInput{}
+		input = &types.DescribeStreamConsumerInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeStreamConsumerOutput{})
+	req := c.newRequest(op, input, &types.DescribeStreamConsumerOutput{})
 	return DescribeStreamConsumerRequest{Request: req, Input: input, Copy: c.DescribeStreamConsumerRequest}
 }
 
@@ -104,8 +51,8 @@ func (c *Client) DescribeStreamConsumerRequest(input *DescribeStreamConsumerInpu
 // DescribeStreamConsumer API operation.
 type DescribeStreamConsumerRequest struct {
 	*aws.Request
-	Input *DescribeStreamConsumerInput
-	Copy  func(*DescribeStreamConsumerInput) DescribeStreamConsumerRequest
+	Input *types.DescribeStreamConsumerInput
+	Copy  func(*types.DescribeStreamConsumerInput) DescribeStreamConsumerRequest
 }
 
 // Send marshals and sends the DescribeStreamConsumer API request.
@@ -117,7 +64,7 @@ func (r DescribeStreamConsumerRequest) Send(ctx context.Context) (*DescribeStrea
 	}
 
 	resp := &DescribeStreamConsumerResponse{
-		DescribeStreamConsumerOutput: r.Request.Data.(*DescribeStreamConsumerOutput),
+		DescribeStreamConsumerOutput: r.Request.Data.(*types.DescribeStreamConsumerOutput),
 		response:                     &aws.Response{Request: r.Request},
 	}
 
@@ -127,7 +74,7 @@ func (r DescribeStreamConsumerRequest) Send(ctx context.Context) (*DescribeStrea
 // DescribeStreamConsumerResponse is the response type for the
 // DescribeStreamConsumer API operation.
 type DescribeStreamConsumerResponse struct {
-	*DescribeStreamConsumerOutput
+	*types.DescribeStreamConsumerOutput
 
 	response *aws.Response
 }

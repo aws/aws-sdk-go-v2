@@ -6,51 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/cloud9/types"
 )
-
-type DescribeEnvironmentsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The IDs of individual environments to get information about.
-	//
-	// EnvironmentIds is a required field
-	EnvironmentIds []string `locationName:"environmentIds" min:"1" type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeEnvironmentsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeEnvironmentsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeEnvironmentsInput"}
-
-	if s.EnvironmentIds == nil {
-		invalidParams.Add(aws.NewErrParamRequired("EnvironmentIds"))
-	}
-	if s.EnvironmentIds != nil && len(s.EnvironmentIds) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("EnvironmentIds", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribeEnvironmentsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Information about the environments that are returned.
-	Environments []Environment `locationName:"environments" type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeEnvironmentsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeEnvironments = "DescribeEnvironments"
 
@@ -67,7 +24,7 @@ const opDescribeEnvironments = "DescribeEnvironments"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloud9-2017-09-23/DescribeEnvironments
-func (c *Client) DescribeEnvironmentsRequest(input *DescribeEnvironmentsInput) DescribeEnvironmentsRequest {
+func (c *Client) DescribeEnvironmentsRequest(input *types.DescribeEnvironmentsInput) DescribeEnvironmentsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeEnvironments,
 		HTTPMethod: "POST",
@@ -75,10 +32,10 @@ func (c *Client) DescribeEnvironmentsRequest(input *DescribeEnvironmentsInput) D
 	}
 
 	if input == nil {
-		input = &DescribeEnvironmentsInput{}
+		input = &types.DescribeEnvironmentsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeEnvironmentsOutput{})
+	req := c.newRequest(op, input, &types.DescribeEnvironmentsOutput{})
 	return DescribeEnvironmentsRequest{Request: req, Input: input, Copy: c.DescribeEnvironmentsRequest}
 }
 
@@ -86,8 +43,8 @@ func (c *Client) DescribeEnvironmentsRequest(input *DescribeEnvironmentsInput) D
 // DescribeEnvironments API operation.
 type DescribeEnvironmentsRequest struct {
 	*aws.Request
-	Input *DescribeEnvironmentsInput
-	Copy  func(*DescribeEnvironmentsInput) DescribeEnvironmentsRequest
+	Input *types.DescribeEnvironmentsInput
+	Copy  func(*types.DescribeEnvironmentsInput) DescribeEnvironmentsRequest
 }
 
 // Send marshals and sends the DescribeEnvironments API request.
@@ -99,7 +56,7 @@ func (r DescribeEnvironmentsRequest) Send(ctx context.Context) (*DescribeEnviron
 	}
 
 	resp := &DescribeEnvironmentsResponse{
-		DescribeEnvironmentsOutput: r.Request.Data.(*DescribeEnvironmentsOutput),
+		DescribeEnvironmentsOutput: r.Request.Data.(*types.DescribeEnvironmentsOutput),
 		response:                   &aws.Response{Request: r.Request},
 	}
 
@@ -109,7 +66,7 @@ func (r DescribeEnvironmentsRequest) Send(ctx context.Context) (*DescribeEnviron
 // DescribeEnvironmentsResponse is the response type for the
 // DescribeEnvironments API operation.
 type DescribeEnvironmentsResponse struct {
-	*DescribeEnvironmentsOutput
+	*types.DescribeEnvironmentsOutput
 
 	response *aws.Response
 }

@@ -4,72 +4,10 @@ package ec2
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-type ImportInstanceInput struct {
-	_ struct{} `type:"structure"`
-
-	// A description for the instance being imported.
-	Description *string `locationName:"description" type:"string"`
-
-	// The disk image.
-	DiskImages []DiskImage `locationName:"diskImage" type:"list"`
-
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have
-	// the required permissions, the error response is DryRunOperation. Otherwise,
-	// it is UnauthorizedOperation.
-	DryRun *bool `locationName:"dryRun" type:"boolean"`
-
-	// The launch specification.
-	LaunchSpecification *ImportInstanceLaunchSpecification `locationName:"launchSpecification" type:"structure"`
-
-	// The instance operating system.
-	//
-	// Platform is a required field
-	Platform PlatformValues `locationName:"platform" type:"string" required:"true" enum:"true"`
-}
-
-// String returns the string representation
-func (s ImportInstanceInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ImportInstanceInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ImportInstanceInput"}
-	if len(s.Platform) == 0 {
-		invalidParams.Add(aws.NewErrParamRequired("Platform"))
-	}
-	if s.DiskImages != nil {
-		for i, v := range s.DiskImages {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "DiskImages", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ImportInstanceOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Information about the conversion task.
-	ConversionTask *ConversionTask `locationName:"conversionTask" type:"structure"`
-}
-
-// String returns the string representation
-func (s ImportInstanceOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opImportInstance = "ImportInstance"
 
@@ -92,7 +30,7 @@ const opImportInstance = "ImportInstance"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ImportInstance
-func (c *Client) ImportInstanceRequest(input *ImportInstanceInput) ImportInstanceRequest {
+func (c *Client) ImportInstanceRequest(input *types.ImportInstanceInput) ImportInstanceRequest {
 	op := &aws.Operation{
 		Name:       opImportInstance,
 		HTTPMethod: "POST",
@@ -100,10 +38,10 @@ func (c *Client) ImportInstanceRequest(input *ImportInstanceInput) ImportInstanc
 	}
 
 	if input == nil {
-		input = &ImportInstanceInput{}
+		input = &types.ImportInstanceInput{}
 	}
 
-	req := c.newRequest(op, input, &ImportInstanceOutput{})
+	req := c.newRequest(op, input, &types.ImportInstanceOutput{})
 	return ImportInstanceRequest{Request: req, Input: input, Copy: c.ImportInstanceRequest}
 }
 
@@ -111,8 +49,8 @@ func (c *Client) ImportInstanceRequest(input *ImportInstanceInput) ImportInstanc
 // ImportInstance API operation.
 type ImportInstanceRequest struct {
 	*aws.Request
-	Input *ImportInstanceInput
-	Copy  func(*ImportInstanceInput) ImportInstanceRequest
+	Input *types.ImportInstanceInput
+	Copy  func(*types.ImportInstanceInput) ImportInstanceRequest
 }
 
 // Send marshals and sends the ImportInstance API request.
@@ -124,7 +62,7 @@ func (r ImportInstanceRequest) Send(ctx context.Context) (*ImportInstanceRespons
 	}
 
 	resp := &ImportInstanceResponse{
-		ImportInstanceOutput: r.Request.Data.(*ImportInstanceOutput),
+		ImportInstanceOutput: r.Request.Data.(*types.ImportInstanceOutput),
 		response:             &aws.Response{Request: r.Request},
 	}
 
@@ -134,7 +72,7 @@ func (r ImportInstanceRequest) Send(ctx context.Context) (*ImportInstanceRespons
 // ImportInstanceResponse is the response type for the
 // ImportInstance API operation.
 type ImportInstanceResponse struct {
-	*ImportInstanceOutput
+	*types.ImportInstanceOutput
 
 	response *aws.Response
 }

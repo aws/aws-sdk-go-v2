@@ -6,155 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/apigatewayv2/types"
 )
-
-type CreateModelInput struct {
-	_ struct{} `type:"structure"`
-
-	// ApiId is a required field
-	ApiId *string `location:"uri" locationName:"apiId" type:"string" required:"true"`
-
-	// A string with a length between [1-256].
-	ContentType *string `locationName:"contentType" type:"string"`
-
-	// A string with a length between [0-1024].
-	Description *string `locationName:"description" type:"string"`
-
-	// A string with a length between [1-128].
-	//
-	// Name is a required field
-	Name *string `locationName:"name" type:"string" required:"true"`
-
-	// A string with a length between [0-32768].
-	//
-	// Schema is a required field
-	Schema *string `locationName:"schema" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s CreateModelInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateModelInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateModelInput"}
-
-	if s.ApiId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ApiId"))
-	}
-
-	if s.Name == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Name"))
-	}
-
-	if s.Schema == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Schema"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s CreateModelInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.ContentType != nil {
-		v := *s.ContentType
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "contentType", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Description != nil {
-		v := *s.Description
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "description", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Name != nil {
-		v := *s.Name
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Schema != nil {
-		v := *s.Schema
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "schema", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.ApiId != nil {
-		v := *s.ApiId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "apiId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type CreateModelOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A string with a length between [1-256].
-	ContentType *string `locationName:"contentType" type:"string"`
-
-	// A string with a length between [0-1024].
-	Description *string `locationName:"description" type:"string"`
-
-	// The identifier.
-	ModelId *string `locationName:"modelId" type:"string"`
-
-	// A string with a length between [1-128].
-	Name *string `locationName:"name" type:"string"`
-
-	// A string with a length between [0-32768].
-	Schema *string `locationName:"schema" type:"string"`
-}
-
-// String returns the string representation
-func (s CreateModelOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s CreateModelOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.ContentType != nil {
-		v := *s.ContentType
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "contentType", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Description != nil {
-		v := *s.Description
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "description", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.ModelId != nil {
-		v := *s.ModelId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "modelId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Name != nil {
-		v := *s.Name
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Schema != nil {
-		v := *s.Schema
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "schema", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opCreateModel = "CreateModel"
 
@@ -171,7 +24,7 @@ const opCreateModel = "CreateModel"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/apigatewayv2-2018-11-29/CreateModel
-func (c *Client) CreateModelRequest(input *CreateModelInput) CreateModelRequest {
+func (c *Client) CreateModelRequest(input *types.CreateModelInput) CreateModelRequest {
 	op := &aws.Operation{
 		Name:       opCreateModel,
 		HTTPMethod: "POST",
@@ -179,10 +32,10 @@ func (c *Client) CreateModelRequest(input *CreateModelInput) CreateModelRequest 
 	}
 
 	if input == nil {
-		input = &CreateModelInput{}
+		input = &types.CreateModelInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateModelOutput{})
+	req := c.newRequest(op, input, &types.CreateModelOutput{})
 	return CreateModelRequest{Request: req, Input: input, Copy: c.CreateModelRequest}
 }
 
@@ -190,8 +43,8 @@ func (c *Client) CreateModelRequest(input *CreateModelInput) CreateModelRequest 
 // CreateModel API operation.
 type CreateModelRequest struct {
 	*aws.Request
-	Input *CreateModelInput
-	Copy  func(*CreateModelInput) CreateModelRequest
+	Input *types.CreateModelInput
+	Copy  func(*types.CreateModelInput) CreateModelRequest
 }
 
 // Send marshals and sends the CreateModel API request.
@@ -203,7 +56,7 @@ func (r CreateModelRequest) Send(ctx context.Context) (*CreateModelResponse, err
 	}
 
 	resp := &CreateModelResponse{
-		CreateModelOutput: r.Request.Data.(*CreateModelOutput),
+		CreateModelOutput: r.Request.Data.(*types.CreateModelOutput),
 		response:          &aws.Response{Request: r.Request},
 	}
 
@@ -213,7 +66,7 @@ func (r CreateModelRequest) Send(ctx context.Context) (*CreateModelResponse, err
 // CreateModelResponse is the response type for the
 // CreateModel API operation.
 type CreateModelResponse struct {
-	*CreateModelOutput
+	*types.CreateModelOutput
 
 	response *aws.Response
 }

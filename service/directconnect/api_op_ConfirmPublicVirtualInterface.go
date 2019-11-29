@@ -6,77 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/directconnect/types"
 )
-
-type ConfirmPublicVirtualInterfaceInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the virtual interface.
-	//
-	// VirtualInterfaceId is a required field
-	VirtualInterfaceId *string `locationName:"virtualInterfaceId" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s ConfirmPublicVirtualInterfaceInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ConfirmPublicVirtualInterfaceInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ConfirmPublicVirtualInterfaceInput"}
-
-	if s.VirtualInterfaceId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("VirtualInterfaceId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ConfirmPublicVirtualInterfaceOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The state of the virtual interface. The following are the possible values:
-	//
-	//    * confirming: The creation of the virtual interface is pending confirmation
-	//    from the virtual interface owner. If the owner of the virtual interface
-	//    is different from the owner of the connection on which it is provisioned,
-	//    then the virtual interface will remain in this state until it is confirmed
-	//    by the virtual interface owner.
-	//
-	//    * verifying: This state only applies to public virtual interfaces. Each
-	//    public virtual interface needs validation before the virtual interface
-	//    can be created.
-	//
-	//    * pending: A virtual interface is in this state from the time that it
-	//    is created until the virtual interface is ready to forward traffic.
-	//
-	//    * available: A virtual interface that is able to forward traffic.
-	//
-	//    * down: A virtual interface that is BGP down.
-	//
-	//    * deleting: A virtual interface is in this state immediately after calling
-	//    DeleteVirtualInterface until it can no longer forward traffic.
-	//
-	//    * deleted: A virtual interface that cannot forward traffic.
-	//
-	//    * rejected: The virtual interface owner has declined creation of the virtual
-	//    interface. If a virtual interface in the Confirming state is deleted by
-	//    the virtual interface owner, the virtual interface enters the Rejected
-	//    state.
-	//
-	//    * unknown: The state of the virtual interface is not available.
-	VirtualInterfaceState VirtualInterfaceState `locationName:"virtualInterfaceState" type:"string" enum:"true"`
-}
-
-// String returns the string representation
-func (s ConfirmPublicVirtualInterfaceOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opConfirmPublicVirtualInterface = "ConfirmPublicVirtualInterface"
 
@@ -96,7 +27,7 @@ const opConfirmPublicVirtualInterface = "ConfirmPublicVirtualInterface"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/ConfirmPublicVirtualInterface
-func (c *Client) ConfirmPublicVirtualInterfaceRequest(input *ConfirmPublicVirtualInterfaceInput) ConfirmPublicVirtualInterfaceRequest {
+func (c *Client) ConfirmPublicVirtualInterfaceRequest(input *types.ConfirmPublicVirtualInterfaceInput) ConfirmPublicVirtualInterfaceRequest {
 	op := &aws.Operation{
 		Name:       opConfirmPublicVirtualInterface,
 		HTTPMethod: "POST",
@@ -104,10 +35,10 @@ func (c *Client) ConfirmPublicVirtualInterfaceRequest(input *ConfirmPublicVirtua
 	}
 
 	if input == nil {
-		input = &ConfirmPublicVirtualInterfaceInput{}
+		input = &types.ConfirmPublicVirtualInterfaceInput{}
 	}
 
-	req := c.newRequest(op, input, &ConfirmPublicVirtualInterfaceOutput{})
+	req := c.newRequest(op, input, &types.ConfirmPublicVirtualInterfaceOutput{})
 	return ConfirmPublicVirtualInterfaceRequest{Request: req, Input: input, Copy: c.ConfirmPublicVirtualInterfaceRequest}
 }
 
@@ -115,8 +46,8 @@ func (c *Client) ConfirmPublicVirtualInterfaceRequest(input *ConfirmPublicVirtua
 // ConfirmPublicVirtualInterface API operation.
 type ConfirmPublicVirtualInterfaceRequest struct {
 	*aws.Request
-	Input *ConfirmPublicVirtualInterfaceInput
-	Copy  func(*ConfirmPublicVirtualInterfaceInput) ConfirmPublicVirtualInterfaceRequest
+	Input *types.ConfirmPublicVirtualInterfaceInput
+	Copy  func(*types.ConfirmPublicVirtualInterfaceInput) ConfirmPublicVirtualInterfaceRequest
 }
 
 // Send marshals and sends the ConfirmPublicVirtualInterface API request.
@@ -128,7 +59,7 @@ func (r ConfirmPublicVirtualInterfaceRequest) Send(ctx context.Context) (*Confir
 	}
 
 	resp := &ConfirmPublicVirtualInterfaceResponse{
-		ConfirmPublicVirtualInterfaceOutput: r.Request.Data.(*ConfirmPublicVirtualInterfaceOutput),
+		ConfirmPublicVirtualInterfaceOutput: r.Request.Data.(*types.ConfirmPublicVirtualInterfaceOutput),
 		response:                            &aws.Response{Request: r.Request},
 	}
 
@@ -138,7 +69,7 @@ func (r ConfirmPublicVirtualInterfaceRequest) Send(ctx context.Context) (*Confir
 // ConfirmPublicVirtualInterfaceResponse is the response type for the
 // ConfirmPublicVirtualInterface API operation.
 type ConfirmPublicVirtualInterfaceResponse struct {
-	*ConfirmPublicVirtualInterfaceOutput
+	*types.ConfirmPublicVirtualInterfaceOutput
 
 	response *aws.Response
 }

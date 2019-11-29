@@ -4,73 +4,10 @@ package gamelift
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/gamelift/types"
 )
-
-// Represents the input for a request action.
-type UpdateFleetPortSettingsInput struct {
-	_ struct{} `type:"structure"`
-
-	// Unique identifier for a fleet to update port settings for.
-	//
-	// FleetId is a required field
-	FleetId *string `type:"string" required:"true"`
-
-	// Collection of port settings to be added to the fleet record.
-	InboundPermissionAuthorizations []IpPermission `type:"list"`
-
-	// Collection of port settings to be removed from the fleet record.
-	InboundPermissionRevocations []IpPermission `type:"list"`
-}
-
-// String returns the string representation
-func (s UpdateFleetPortSettingsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateFleetPortSettingsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateFleetPortSettingsInput"}
-
-	if s.FleetId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("FleetId"))
-	}
-	if s.InboundPermissionAuthorizations != nil {
-		for i, v := range s.InboundPermissionAuthorizations {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "InboundPermissionAuthorizations", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-	if s.InboundPermissionRevocations != nil {
-		for i, v := range s.InboundPermissionRevocations {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "InboundPermissionRevocations", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Represents the returned data in response to a request action.
-type UpdateFleetPortSettingsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Unique identifier for a fleet that was updated.
-	FleetId *string `type:"string"`
-}
-
-// String returns the string representation
-func (s UpdateFleetPortSettingsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opUpdateFleetPortSettings = "UpdateFleetPortSettings"
 
@@ -113,7 +50,7 @@ const opUpdateFleetPortSettings = "UpdateFleetPortSettings"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/UpdateFleetPortSettings
-func (c *Client) UpdateFleetPortSettingsRequest(input *UpdateFleetPortSettingsInput) UpdateFleetPortSettingsRequest {
+func (c *Client) UpdateFleetPortSettingsRequest(input *types.UpdateFleetPortSettingsInput) UpdateFleetPortSettingsRequest {
 	op := &aws.Operation{
 		Name:       opUpdateFleetPortSettings,
 		HTTPMethod: "POST",
@@ -121,10 +58,10 @@ func (c *Client) UpdateFleetPortSettingsRequest(input *UpdateFleetPortSettingsIn
 	}
 
 	if input == nil {
-		input = &UpdateFleetPortSettingsInput{}
+		input = &types.UpdateFleetPortSettingsInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateFleetPortSettingsOutput{})
+	req := c.newRequest(op, input, &types.UpdateFleetPortSettingsOutput{})
 	return UpdateFleetPortSettingsRequest{Request: req, Input: input, Copy: c.UpdateFleetPortSettingsRequest}
 }
 
@@ -132,8 +69,8 @@ func (c *Client) UpdateFleetPortSettingsRequest(input *UpdateFleetPortSettingsIn
 // UpdateFleetPortSettings API operation.
 type UpdateFleetPortSettingsRequest struct {
 	*aws.Request
-	Input *UpdateFleetPortSettingsInput
-	Copy  func(*UpdateFleetPortSettingsInput) UpdateFleetPortSettingsRequest
+	Input *types.UpdateFleetPortSettingsInput
+	Copy  func(*types.UpdateFleetPortSettingsInput) UpdateFleetPortSettingsRequest
 }
 
 // Send marshals and sends the UpdateFleetPortSettings API request.
@@ -145,7 +82,7 @@ func (r UpdateFleetPortSettingsRequest) Send(ctx context.Context) (*UpdateFleetP
 	}
 
 	resp := &UpdateFleetPortSettingsResponse{
-		UpdateFleetPortSettingsOutput: r.Request.Data.(*UpdateFleetPortSettingsOutput),
+		UpdateFleetPortSettingsOutput: r.Request.Data.(*types.UpdateFleetPortSettingsOutput),
 		response:                      &aws.Response{Request: r.Request},
 	}
 
@@ -155,7 +92,7 @@ func (r UpdateFleetPortSettingsRequest) Send(ctx context.Context) (*UpdateFleetP
 // UpdateFleetPortSettingsResponse is the response type for the
 // UpdateFleetPortSettings API operation.
 type UpdateFleetPortSettingsResponse struct {
-	*UpdateFleetPortSettingsOutput
+	*types.UpdateFleetPortSettingsOutput
 
 	response *aws.Response
 }

@@ -4,87 +4,10 @@ package servicediscovery
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/servicediscovery/types"
 )
-
-type ListOperationsInput struct {
-	_ struct{} `type:"structure"`
-
-	// A complex type that contains specifications for the operations that you want
-	// to list, for example, operations that you started between a specified start
-	// date and end date.
-	//
-	// If you specify more than one filter, an operation must match all filters
-	// to be returned by ListOperations.
-	Filters []OperationFilter `type:"list"`
-
-	// The maximum number of items that you want AWS Cloud Map to return in the
-	// response to a ListOperations request. If you don't specify a value for MaxResults,
-	// AWS Cloud Map returns up to 100 operations.
-	MaxResults *int64 `min:"1" type:"integer"`
-
-	// For the first ListOperations request, omit this value.
-	//
-	// If the response contains NextToken, submit another ListOperations request
-	// to get the next group of results. Specify the value of NextToken from the
-	// previous response in the next request.
-	//
-	// AWS Cloud Map gets MaxResults operations and then filters them based on the
-	// specified criteria. It's possible that no operations in the first MaxResults
-	// operations matched the specified criteria but that subsequent groups of MaxResults
-	// operations do contain operations that match the criteria.
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s ListOperationsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListOperationsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListOperationsInput"}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-	if s.Filters != nil {
-		for i, v := range s.Filters {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ListOperationsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// If the response contains NextToken, submit another ListOperations request
-	// to get the next group of results. Specify the value of NextToken from the
-	// previous response in the next request.
-	//
-	// AWS Cloud Map gets MaxResults operations and then filters them based on the
-	// specified criteria. It's possible that no operations in the first MaxResults
-	// operations matched the specified criteria but that subsequent groups of MaxResults
-	// operations do contain operations that match the criteria.
-	NextToken *string `type:"string"`
-
-	// Summary information about the operations that match the specified criteria.
-	Operations []OperationSummary `type:"list"`
-}
-
-// String returns the string representation
-func (s ListOperationsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListOperations = "ListOperations"
 
@@ -101,7 +24,7 @@ const opListOperations = "ListOperations"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicediscovery-2017-03-14/ListOperations
-func (c *Client) ListOperationsRequest(input *ListOperationsInput) ListOperationsRequest {
+func (c *Client) ListOperationsRequest(input *types.ListOperationsInput) ListOperationsRequest {
 	op := &aws.Operation{
 		Name:       opListOperations,
 		HTTPMethod: "POST",
@@ -115,10 +38,10 @@ func (c *Client) ListOperationsRequest(input *ListOperationsInput) ListOperation
 	}
 
 	if input == nil {
-		input = &ListOperationsInput{}
+		input = &types.ListOperationsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListOperationsOutput{})
+	req := c.newRequest(op, input, &types.ListOperationsOutput{})
 	return ListOperationsRequest{Request: req, Input: input, Copy: c.ListOperationsRequest}
 }
 
@@ -126,8 +49,8 @@ func (c *Client) ListOperationsRequest(input *ListOperationsInput) ListOperation
 // ListOperations API operation.
 type ListOperationsRequest struct {
 	*aws.Request
-	Input *ListOperationsInput
-	Copy  func(*ListOperationsInput) ListOperationsRequest
+	Input *types.ListOperationsInput
+	Copy  func(*types.ListOperationsInput) ListOperationsRequest
 }
 
 // Send marshals and sends the ListOperations API request.
@@ -139,7 +62,7 @@ func (r ListOperationsRequest) Send(ctx context.Context) (*ListOperationsRespons
 	}
 
 	resp := &ListOperationsResponse{
-		ListOperationsOutput: r.Request.Data.(*ListOperationsOutput),
+		ListOperationsOutput: r.Request.Data.(*types.ListOperationsOutput),
 		response:             &aws.Response{Request: r.Request},
 	}
 
@@ -169,7 +92,7 @@ func NewListOperationsPaginator(req ListOperationsRequest) ListOperationsPaginat
 	return ListOperationsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListOperationsInput
+				var inCpy *types.ListOperationsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -189,14 +112,14 @@ type ListOperationsPaginator struct {
 	aws.Pager
 }
 
-func (p *ListOperationsPaginator) CurrentPage() *ListOperationsOutput {
-	return p.Pager.CurrentPage().(*ListOperationsOutput)
+func (p *ListOperationsPaginator) CurrentPage() *types.ListOperationsOutput {
+	return p.Pager.CurrentPage().(*types.ListOperationsOutput)
 }
 
 // ListOperationsResponse is the response type for the
 // ListOperations API operation.
 type ListOperationsResponse struct {
-	*ListOperationsOutput
+	*types.ListOperationsOutput
 
 	response *aws.Response
 }

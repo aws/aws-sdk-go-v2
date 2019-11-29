@@ -6,56 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/gamelift/types"
 )
-
-// Represents the input for a request action.
-type GetGameSessionLogUrlInput struct {
-	_ struct{} `type:"structure"`
-
-	// Unique identifier for the game session to get logs for.
-	//
-	// GameSessionId is a required field
-	GameSessionId *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetGameSessionLogUrlInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetGameSessionLogUrlInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetGameSessionLogUrlInput"}
-
-	if s.GameSessionId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("GameSessionId"))
-	}
-	if s.GameSessionId != nil && len(*s.GameSessionId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("GameSessionId", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Represents the returned data in response to a request action.
-type GetGameSessionLogUrlOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Location of the requested game session logs, available for download. This
-	// URL is valid for 15 minutes, after which S3 will reject any download request
-	// using this URL. You can request a new URL any time within the 14-day period
-	// that the logs are retained.
-	PreSignedUrl *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s GetGameSessionLogUrlOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetGameSessionLogUrl = "GetGameSessionLogUrl"
 
@@ -94,7 +46,7 @@ const opGetGameSessionLogUrl = "GetGameSessionLogUrl"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/GetGameSessionLogUrl
-func (c *Client) GetGameSessionLogUrlRequest(input *GetGameSessionLogUrlInput) GetGameSessionLogUrlRequest {
+func (c *Client) GetGameSessionLogUrlRequest(input *types.GetGameSessionLogUrlInput) GetGameSessionLogUrlRequest {
 	op := &aws.Operation{
 		Name:       opGetGameSessionLogUrl,
 		HTTPMethod: "POST",
@@ -102,10 +54,10 @@ func (c *Client) GetGameSessionLogUrlRequest(input *GetGameSessionLogUrlInput) G
 	}
 
 	if input == nil {
-		input = &GetGameSessionLogUrlInput{}
+		input = &types.GetGameSessionLogUrlInput{}
 	}
 
-	req := c.newRequest(op, input, &GetGameSessionLogUrlOutput{})
+	req := c.newRequest(op, input, &types.GetGameSessionLogUrlOutput{})
 	return GetGameSessionLogUrlRequest{Request: req, Input: input, Copy: c.GetGameSessionLogUrlRequest}
 }
 
@@ -113,8 +65,8 @@ func (c *Client) GetGameSessionLogUrlRequest(input *GetGameSessionLogUrlInput) G
 // GetGameSessionLogUrl API operation.
 type GetGameSessionLogUrlRequest struct {
 	*aws.Request
-	Input *GetGameSessionLogUrlInput
-	Copy  func(*GetGameSessionLogUrlInput) GetGameSessionLogUrlRequest
+	Input *types.GetGameSessionLogUrlInput
+	Copy  func(*types.GetGameSessionLogUrlInput) GetGameSessionLogUrlRequest
 }
 
 // Send marshals and sends the GetGameSessionLogUrl API request.
@@ -126,7 +78,7 @@ func (r GetGameSessionLogUrlRequest) Send(ctx context.Context) (*GetGameSessionL
 	}
 
 	resp := &GetGameSessionLogUrlResponse{
-		GetGameSessionLogUrlOutput: r.Request.Data.(*GetGameSessionLogUrlOutput),
+		GetGameSessionLogUrlOutput: r.Request.Data.(*types.GetGameSessionLogUrlOutput),
 		response:                   &aws.Response{Request: r.Request},
 	}
 
@@ -136,7 +88,7 @@ func (r GetGameSessionLogUrlRequest) Send(ctx context.Context) (*GetGameSessionL
 // GetGameSessionLogUrlResponse is the response type for the
 // GetGameSessionLogUrl API operation.
 type GetGameSessionLogUrlResponse struct {
-	*GetGameSessionLogUrlOutput
+	*types.GetGameSessionLogUrlOutput
 
 	response *aws.Response
 }

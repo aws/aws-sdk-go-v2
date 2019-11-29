@@ -6,75 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ssm/types"
 )
-
-type StartSessionInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the SSM document to define the parameters and plugin settings
-	// for the session. For example, SSM-SessionManagerRunShell. If no document
-	// name is provided, a shell to the instance is launched by default.
-	DocumentName *string `type:"string"`
-
-	// Reserved for future use.
-	Parameters map[string][]string `type:"map"`
-
-	// The instance to connect to for the session.
-	//
-	// Target is a required field
-	Target *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s StartSessionInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *StartSessionInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "StartSessionInput"}
-
-	if s.Target == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Target"))
-	}
-	if s.Target != nil && len(*s.Target) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Target", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type StartSessionOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the session.
-	SessionId *string `min:"1" type:"string"`
-
-	// A URL back to SSM Agent on the instance that the Session Manager client uses
-	// to send commands and receive output from the instance. Format: wss://ssmmessages.region.amazonaws.com/v1/data-channel/session-id?stream=(input|output)
-	//
-	// region represents the Region identifier for an AWS Region supported by AWS
-	// Systems Manager, such as us-east-2 for the US East (Ohio) Region. For a list
-	// of supported region values, see the Region column in the AWS Systems Manager
-	// table of regions and endpoints (http://docs.aws.amazon.com/general/latest/gr/rande.html#ssm_region)
-	// in the AWS General Reference.
-	//
-	// session-id represents the ID of a Session Manager session, such as 1a2b3c4dEXAMPLE.
-	StreamUrl *string `type:"string"`
-
-	// An encrypted token value containing session and caller information. Used
-	// to authenticate the connection to the instance.
-	TokenValue *string `type:"string"`
-}
-
-// String returns the string representation
-func (s StartSessionOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opStartSession = "StartSession"
 
@@ -101,7 +34,7 @@ const opStartSession = "StartSession"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/StartSession
-func (c *Client) StartSessionRequest(input *StartSessionInput) StartSessionRequest {
+func (c *Client) StartSessionRequest(input *types.StartSessionInput) StartSessionRequest {
 	op := &aws.Operation{
 		Name:       opStartSession,
 		HTTPMethod: "POST",
@@ -109,10 +42,10 @@ func (c *Client) StartSessionRequest(input *StartSessionInput) StartSessionReque
 	}
 
 	if input == nil {
-		input = &StartSessionInput{}
+		input = &types.StartSessionInput{}
 	}
 
-	req := c.newRequest(op, input, &StartSessionOutput{})
+	req := c.newRequest(op, input, &types.StartSessionOutput{})
 	return StartSessionRequest{Request: req, Input: input, Copy: c.StartSessionRequest}
 }
 
@@ -120,8 +53,8 @@ func (c *Client) StartSessionRequest(input *StartSessionInput) StartSessionReque
 // StartSession API operation.
 type StartSessionRequest struct {
 	*aws.Request
-	Input *StartSessionInput
-	Copy  func(*StartSessionInput) StartSessionRequest
+	Input *types.StartSessionInput
+	Copy  func(*types.StartSessionInput) StartSessionRequest
 }
 
 // Send marshals and sends the StartSession API request.
@@ -133,7 +66,7 @@ func (r StartSessionRequest) Send(ctx context.Context) (*StartSessionResponse, e
 	}
 
 	resp := &StartSessionResponse{
-		StartSessionOutput: r.Request.Data.(*StartSessionOutput),
+		StartSessionOutput: r.Request.Data.(*types.StartSessionOutput),
 		response:           &aws.Response{Request: r.Request},
 	}
 
@@ -143,7 +76,7 @@ func (r StartSessionRequest) Send(ctx context.Context) (*StartSessionResponse, e
 // StartSessionResponse is the response type for the
 // StartSession API operation.
 type StartSessionResponse struct {
-	*StartSessionOutput
+	*types.StartSessionOutput
 
 	response *aws.Response
 }

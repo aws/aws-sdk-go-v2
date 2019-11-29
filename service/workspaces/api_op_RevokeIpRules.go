@@ -6,54 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/workspaces/types"
 )
-
-type RevokeIpRulesInput struct {
-	_ struct{} `type:"structure"`
-
-	// The identifier of the group.
-	//
-	// GroupId is a required field
-	GroupId *string `type:"string" required:"true"`
-
-	// The rules to remove from the group.
-	//
-	// UserRules is a required field
-	UserRules []string `type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s RevokeIpRulesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *RevokeIpRulesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "RevokeIpRulesInput"}
-
-	if s.GroupId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("GroupId"))
-	}
-
-	if s.UserRules == nil {
-		invalidParams.Add(aws.NewErrParamRequired("UserRules"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type RevokeIpRulesOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s RevokeIpRulesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opRevokeIpRules = "RevokeIpRules"
 
@@ -70,7 +24,7 @@ const opRevokeIpRules = "RevokeIpRules"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/RevokeIpRules
-func (c *Client) RevokeIpRulesRequest(input *RevokeIpRulesInput) RevokeIpRulesRequest {
+func (c *Client) RevokeIpRulesRequest(input *types.RevokeIpRulesInput) RevokeIpRulesRequest {
 	op := &aws.Operation{
 		Name:       opRevokeIpRules,
 		HTTPMethod: "POST",
@@ -78,10 +32,10 @@ func (c *Client) RevokeIpRulesRequest(input *RevokeIpRulesInput) RevokeIpRulesRe
 	}
 
 	if input == nil {
-		input = &RevokeIpRulesInput{}
+		input = &types.RevokeIpRulesInput{}
 	}
 
-	req := c.newRequest(op, input, &RevokeIpRulesOutput{})
+	req := c.newRequest(op, input, &types.RevokeIpRulesOutput{})
 	return RevokeIpRulesRequest{Request: req, Input: input, Copy: c.RevokeIpRulesRequest}
 }
 
@@ -89,8 +43,8 @@ func (c *Client) RevokeIpRulesRequest(input *RevokeIpRulesInput) RevokeIpRulesRe
 // RevokeIpRules API operation.
 type RevokeIpRulesRequest struct {
 	*aws.Request
-	Input *RevokeIpRulesInput
-	Copy  func(*RevokeIpRulesInput) RevokeIpRulesRequest
+	Input *types.RevokeIpRulesInput
+	Copy  func(*types.RevokeIpRulesInput) RevokeIpRulesRequest
 }
 
 // Send marshals and sends the RevokeIpRules API request.
@@ -102,7 +56,7 @@ func (r RevokeIpRulesRequest) Send(ctx context.Context) (*RevokeIpRulesResponse,
 	}
 
 	resp := &RevokeIpRulesResponse{
-		RevokeIpRulesOutput: r.Request.Data.(*RevokeIpRulesOutput),
+		RevokeIpRulesOutput: r.Request.Data.(*types.RevokeIpRulesOutput),
 		response:            &aws.Response{Request: r.Request},
 	}
 
@@ -112,7 +66,7 @@ func (r RevokeIpRulesRequest) Send(ctx context.Context) (*RevokeIpRulesResponse,
 // RevokeIpRulesResponse is the response type for the
 // RevokeIpRules API operation.
 type RevokeIpRulesResponse struct {
-	*RevokeIpRulesOutput
+	*types.RevokeIpRulesOutput
 
 	response *aws.Response
 }

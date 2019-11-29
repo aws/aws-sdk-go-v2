@@ -6,66 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/servicequotas/types"
 )
-
-type ListServicesInput struct {
-	_ struct{} `type:"structure"`
-
-	// (Optional) Limits the number of results that you want to include in the response.
-	// If you don't include this parameter, the response defaults to a value that's
-	// specific to the operation. If additional items exist beyond the specified
-	// maximum, the NextToken element is present and has a value (isn't null). Include
-	// that value as the NextToken request parameter in the call to the operation
-	// to get the next part of the results. You should check NextToken after every
-	// operation to ensure that you receive all of the results.
-	MaxResults *int64 `min:"1" type:"integer"`
-
-	// (Optional) Use this parameter in a request if you receive a NextToken response
-	// in a previous request that indicates that there's more output available.
-	// In a subsequent call, set it to the value of the previous call's NextToken
-	// response to indicate where the output should continue from.
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s ListServicesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListServicesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListServicesInput"}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ListServicesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// If present in the response, this value indicates there's more output available
-	// that what's included in the current response. This can occur even when the
-	// response includes no values at all, such as when you ask for a filtered view
-	// of a very long list. Use this value in the NextToken request parameter in
-	// a subsequent call to the operation to continue processing and get the next
-	// part of the output. You should repeat this until the NextToken response element
-	// comes back empty (as null).
-	NextToken *string `type:"string"`
-
-	// Returns a list of services.
-	Services []ServiceInfo `type:"list"`
-}
-
-// String returns the string representation
-func (s ListServicesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListServices = "ListServices"
 
@@ -84,7 +26,7 @@ const opListServices = "ListServices"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/service-quotas-2019-06-24/ListServices
-func (c *Client) ListServicesRequest(input *ListServicesInput) ListServicesRequest {
+func (c *Client) ListServicesRequest(input *types.ListServicesInput) ListServicesRequest {
 	op := &aws.Operation{
 		Name:       opListServices,
 		HTTPMethod: "POST",
@@ -98,10 +40,10 @@ func (c *Client) ListServicesRequest(input *ListServicesInput) ListServicesReque
 	}
 
 	if input == nil {
-		input = &ListServicesInput{}
+		input = &types.ListServicesInput{}
 	}
 
-	req := c.newRequest(op, input, &ListServicesOutput{})
+	req := c.newRequest(op, input, &types.ListServicesOutput{})
 	return ListServicesRequest{Request: req, Input: input, Copy: c.ListServicesRequest}
 }
 
@@ -109,8 +51,8 @@ func (c *Client) ListServicesRequest(input *ListServicesInput) ListServicesReque
 // ListServices API operation.
 type ListServicesRequest struct {
 	*aws.Request
-	Input *ListServicesInput
-	Copy  func(*ListServicesInput) ListServicesRequest
+	Input *types.ListServicesInput
+	Copy  func(*types.ListServicesInput) ListServicesRequest
 }
 
 // Send marshals and sends the ListServices API request.
@@ -122,7 +64,7 @@ func (r ListServicesRequest) Send(ctx context.Context) (*ListServicesResponse, e
 	}
 
 	resp := &ListServicesResponse{
-		ListServicesOutput: r.Request.Data.(*ListServicesOutput),
+		ListServicesOutput: r.Request.Data.(*types.ListServicesOutput),
 		response:           &aws.Response{Request: r.Request},
 	}
 
@@ -152,7 +94,7 @@ func NewListServicesPaginator(req ListServicesRequest) ListServicesPaginator {
 	return ListServicesPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListServicesInput
+				var inCpy *types.ListServicesInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -172,14 +114,14 @@ type ListServicesPaginator struct {
 	aws.Pager
 }
 
-func (p *ListServicesPaginator) CurrentPage() *ListServicesOutput {
-	return p.Pager.CurrentPage().(*ListServicesOutput)
+func (p *ListServicesPaginator) CurrentPage() *types.ListServicesOutput {
+	return p.Pager.CurrentPage().(*types.ListServicesOutput)
 }
 
 // ListServicesResponse is the response type for the
 // ListServices API operation.
 type ListServicesResponse struct {
-	*ListServicesOutput
+	*types.ListServicesOutput
 
 	response *aws.Response
 }

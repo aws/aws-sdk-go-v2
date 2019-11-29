@@ -4,65 +4,10 @@ package cognitoidentity
 
 import (
 	"context"
-	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/cognitoidentity/types"
 )
-
-// Input to the DescribeIdentity action.
-type DescribeIdentityInput struct {
-	_ struct{} `type:"structure"`
-
-	// A unique identifier in the format REGION:GUID.
-	//
-	// IdentityId is a required field
-	IdentityId *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeIdentityInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeIdentityInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeIdentityInput"}
-
-	if s.IdentityId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("IdentityId"))
-	}
-	if s.IdentityId != nil && len(*s.IdentityId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("IdentityId", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// A description of the identity.
-type DescribeIdentityOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Date on which the identity was created.
-	CreationDate *time.Time `type:"timestamp"`
-
-	// A unique identifier in the format REGION:GUID.
-	IdentityId *string `min:"1" type:"string"`
-
-	// Date on which the identity was last modified.
-	LastModifiedDate *time.Time `type:"timestamp"`
-
-	// The provider names.
-	Logins []string `type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeIdentityOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeIdentity = "DescribeIdentity"
 
@@ -82,7 +27,7 @@ const opDescribeIdentity = "DescribeIdentity"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-identity-2014-06-30/DescribeIdentity
-func (c *Client) DescribeIdentityRequest(input *DescribeIdentityInput) DescribeIdentityRequest {
+func (c *Client) DescribeIdentityRequest(input *types.DescribeIdentityInput) DescribeIdentityRequest {
 	op := &aws.Operation{
 		Name:       opDescribeIdentity,
 		HTTPMethod: "POST",
@@ -90,10 +35,10 @@ func (c *Client) DescribeIdentityRequest(input *DescribeIdentityInput) DescribeI
 	}
 
 	if input == nil {
-		input = &DescribeIdentityInput{}
+		input = &types.DescribeIdentityInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeIdentityOutput{})
+	req := c.newRequest(op, input, &types.DescribeIdentityOutput{})
 	return DescribeIdentityRequest{Request: req, Input: input, Copy: c.DescribeIdentityRequest}
 }
 
@@ -101,8 +46,8 @@ func (c *Client) DescribeIdentityRequest(input *DescribeIdentityInput) DescribeI
 // DescribeIdentity API operation.
 type DescribeIdentityRequest struct {
 	*aws.Request
-	Input *DescribeIdentityInput
-	Copy  func(*DescribeIdentityInput) DescribeIdentityRequest
+	Input *types.DescribeIdentityInput
+	Copy  func(*types.DescribeIdentityInput) DescribeIdentityRequest
 }
 
 // Send marshals and sends the DescribeIdentity API request.
@@ -114,7 +59,7 @@ func (r DescribeIdentityRequest) Send(ctx context.Context) (*DescribeIdentityRes
 	}
 
 	resp := &DescribeIdentityResponse{
-		DescribeIdentityOutput: r.Request.Data.(*DescribeIdentityOutput),
+		DescribeIdentityOutput: r.Request.Data.(*types.DescribeIdentityOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -124,7 +69,7 @@ func (r DescribeIdentityRequest) Send(ctx context.Context) (*DescribeIdentityRes
 // DescribeIdentityResponse is the response type for the
 // DescribeIdentity API operation.
 type DescribeIdentityResponse struct {
-	*DescribeIdentityOutput
+	*types.DescribeIdentityOutput
 
 	response *aws.Response
 }

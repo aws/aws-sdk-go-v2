@@ -6,66 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/waf/types"
 )
-
-type DeleteRuleGroupInput struct {
-	_ struct{} `type:"structure"`
-
-	// The value returned by the most recent call to GetChangeToken.
-	//
-	// ChangeToken is a required field
-	ChangeToken *string `min:"1" type:"string" required:"true"`
-
-	// The RuleGroupId of the RuleGroup that you want to delete. RuleGroupId is
-	// returned by CreateRuleGroup and by ListRuleGroups.
-	//
-	// RuleGroupId is a required field
-	RuleGroupId *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteRuleGroupInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteRuleGroupInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteRuleGroupInput"}
-
-	if s.ChangeToken == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ChangeToken"))
-	}
-	if s.ChangeToken != nil && len(*s.ChangeToken) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ChangeToken", 1))
-	}
-
-	if s.RuleGroupId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("RuleGroupId"))
-	}
-	if s.RuleGroupId != nil && len(*s.RuleGroupId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("RuleGroupId", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteRuleGroupOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The ChangeToken that you used to submit the DeleteRuleGroup request. You
-	// can also use this value to query the status of the request. For more information,
-	// see GetChangeTokenStatus.
-	ChangeToken *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s DeleteRuleGroupOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteRuleGroup = "DeleteRuleGroup"
 
@@ -94,7 +36,7 @@ const opDeleteRuleGroup = "DeleteRuleGroup"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/DeleteRuleGroup
-func (c *Client) DeleteRuleGroupRequest(input *DeleteRuleGroupInput) DeleteRuleGroupRequest {
+func (c *Client) DeleteRuleGroupRequest(input *types.DeleteRuleGroupInput) DeleteRuleGroupRequest {
 	op := &aws.Operation{
 		Name:       opDeleteRuleGroup,
 		HTTPMethod: "POST",
@@ -102,10 +44,10 @@ func (c *Client) DeleteRuleGroupRequest(input *DeleteRuleGroupInput) DeleteRuleG
 	}
 
 	if input == nil {
-		input = &DeleteRuleGroupInput{}
+		input = &types.DeleteRuleGroupInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteRuleGroupOutput{})
+	req := c.newRequest(op, input, &types.DeleteRuleGroupOutput{})
 	return DeleteRuleGroupRequest{Request: req, Input: input, Copy: c.DeleteRuleGroupRequest}
 }
 
@@ -113,8 +55,8 @@ func (c *Client) DeleteRuleGroupRequest(input *DeleteRuleGroupInput) DeleteRuleG
 // DeleteRuleGroup API operation.
 type DeleteRuleGroupRequest struct {
 	*aws.Request
-	Input *DeleteRuleGroupInput
-	Copy  func(*DeleteRuleGroupInput) DeleteRuleGroupRequest
+	Input *types.DeleteRuleGroupInput
+	Copy  func(*types.DeleteRuleGroupInput) DeleteRuleGroupRequest
 }
 
 // Send marshals and sends the DeleteRuleGroup API request.
@@ -126,7 +68,7 @@ func (r DeleteRuleGroupRequest) Send(ctx context.Context) (*DeleteRuleGroupRespo
 	}
 
 	resp := &DeleteRuleGroupResponse{
-		DeleteRuleGroupOutput: r.Request.Data.(*DeleteRuleGroupOutput),
+		DeleteRuleGroupOutput: r.Request.Data.(*types.DeleteRuleGroupOutput),
 		response:              &aws.Response{Request: r.Request},
 	}
 
@@ -136,7 +78,7 @@ func (r DeleteRuleGroupRequest) Send(ctx context.Context) (*DeleteRuleGroupRespo
 // DeleteRuleGroupResponse is the response type for the
 // DeleteRuleGroup API operation.
 type DeleteRuleGroupResponse struct {
-	*DeleteRuleGroupOutput
+	*types.DeleteRuleGroupOutput
 
 	response *aws.Response
 }

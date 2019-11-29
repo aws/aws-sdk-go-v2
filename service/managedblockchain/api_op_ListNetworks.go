@@ -6,124 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/managedblockchain/types"
 )
-
-type ListNetworksInput struct {
-	_ struct{} `type:"structure"`
-
-	// An optional framework specifier. If provided, only networks of this framework
-	// type are listed.
-	Framework Framework `location:"querystring" locationName:"framework" type:"string" enum:"true"`
-
-	// The maximum number of networks to list.
-	MaxResults *int64 `location:"querystring" locationName:"maxResults" min:"1" type:"integer"`
-
-	// The name of the network.
-	Name *string `location:"querystring" locationName:"name" type:"string"`
-
-	// The pagination token that indicates the next set of results to retrieve.
-	NextToken *string `location:"querystring" locationName:"nextToken" type:"string"`
-
-	// An optional status specifier. If provided, only networks currently in this
-	// status are listed.
-	Status NetworkStatus `location:"querystring" locationName:"status" type:"string" enum:"true"`
-}
-
-// String returns the string representation
-func (s ListNetworksInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListNetworksInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListNetworksInput"}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListNetworksInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if len(s.Framework) > 0 {
-		v := s.Framework
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "framework", protocol.QuotedValue{ValueMarshaler: v}, metadata)
-	}
-	if s.MaxResults != nil {
-		v := *s.MaxResults
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "maxResults", protocol.Int64Value(v), metadata)
-	}
-	if s.Name != nil {
-		v := *s.Name
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if len(s.Status) > 0 {
-		v := s.Status
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "status", protocol.QuotedValue{ValueMarshaler: v}, metadata)
-	}
-	return nil
-}
-
-type ListNetworksOutput struct {
-	_ struct{} `type:"structure"`
-
-	// An array of NetworkSummary objects that contain configuration properties
-	// for each network.
-	Networks []NetworkSummary `type:"list"`
-
-	// The pagination token that indicates the next set of results to retrieve.
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s ListNetworksOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListNetworksOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.Networks != nil {
-		v := s.Networks
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "Networks", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opListNetworks = "ListNetworks"
 
@@ -141,7 +25,7 @@ const opListNetworks = "ListNetworks"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/managedblockchain-2018-09-24/ListNetworks
-func (c *Client) ListNetworksRequest(input *ListNetworksInput) ListNetworksRequest {
+func (c *Client) ListNetworksRequest(input *types.ListNetworksInput) ListNetworksRequest {
 	op := &aws.Operation{
 		Name:       opListNetworks,
 		HTTPMethod: "GET",
@@ -155,10 +39,10 @@ func (c *Client) ListNetworksRequest(input *ListNetworksInput) ListNetworksReque
 	}
 
 	if input == nil {
-		input = &ListNetworksInput{}
+		input = &types.ListNetworksInput{}
 	}
 
-	req := c.newRequest(op, input, &ListNetworksOutput{})
+	req := c.newRequest(op, input, &types.ListNetworksOutput{})
 	return ListNetworksRequest{Request: req, Input: input, Copy: c.ListNetworksRequest}
 }
 
@@ -166,8 +50,8 @@ func (c *Client) ListNetworksRequest(input *ListNetworksInput) ListNetworksReque
 // ListNetworks API operation.
 type ListNetworksRequest struct {
 	*aws.Request
-	Input *ListNetworksInput
-	Copy  func(*ListNetworksInput) ListNetworksRequest
+	Input *types.ListNetworksInput
+	Copy  func(*types.ListNetworksInput) ListNetworksRequest
 }
 
 // Send marshals and sends the ListNetworks API request.
@@ -179,7 +63,7 @@ func (r ListNetworksRequest) Send(ctx context.Context) (*ListNetworksResponse, e
 	}
 
 	resp := &ListNetworksResponse{
-		ListNetworksOutput: r.Request.Data.(*ListNetworksOutput),
+		ListNetworksOutput: r.Request.Data.(*types.ListNetworksOutput),
 		response:           &aws.Response{Request: r.Request},
 	}
 
@@ -209,7 +93,7 @@ func NewListNetworksPaginator(req ListNetworksRequest) ListNetworksPaginator {
 	return ListNetworksPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListNetworksInput
+				var inCpy *types.ListNetworksInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -229,14 +113,14 @@ type ListNetworksPaginator struct {
 	aws.Pager
 }
 
-func (p *ListNetworksPaginator) CurrentPage() *ListNetworksOutput {
-	return p.Pager.CurrentPage().(*ListNetworksOutput)
+func (p *ListNetworksPaginator) CurrentPage() *types.ListNetworksOutput {
+	return p.Pager.CurrentPage().(*types.ListNetworksOutput)
 }
 
 // ListNetworksResponse is the response type for the
 // ListNetworks API operation.
 type ListNetworksResponse struct {
-	*ListNetworksOutput
+	*types.ListNetworksOutput
 
 	response *aws.Response
 }

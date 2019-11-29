@@ -6,63 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/servicediscovery/types"
 )
-
-type UpdateServiceInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the service that you want to update.
-	//
-	// Id is a required field
-	Id *string `type:"string" required:"true"`
-
-	// A complex type that contains the new settings for the service.
-	//
-	// Service is a required field
-	Service *ServiceChange `type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s UpdateServiceInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateServiceInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateServiceInput"}
-
-	if s.Id == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Id"))
-	}
-
-	if s.Service == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Service"))
-	}
-	if s.Service != nil {
-		if err := s.Service.Validate(); err != nil {
-			invalidParams.AddNested("Service", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type UpdateServiceOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A value that you can use to determine whether the request completed successfully.
-	// To get the status of the operation, see GetOperation.
-	OperationId *string `type:"string"`
-}
-
-// String returns the string representation
-func (s UpdateServiceOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opUpdateService = "UpdateService"
 
@@ -94,7 +39,7 @@ const opUpdateService = "UpdateService"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicediscovery-2017-03-14/UpdateService
-func (c *Client) UpdateServiceRequest(input *UpdateServiceInput) UpdateServiceRequest {
+func (c *Client) UpdateServiceRequest(input *types.UpdateServiceInput) UpdateServiceRequest {
 	op := &aws.Operation{
 		Name:       opUpdateService,
 		HTTPMethod: "POST",
@@ -102,10 +47,10 @@ func (c *Client) UpdateServiceRequest(input *UpdateServiceInput) UpdateServiceRe
 	}
 
 	if input == nil {
-		input = &UpdateServiceInput{}
+		input = &types.UpdateServiceInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateServiceOutput{})
+	req := c.newRequest(op, input, &types.UpdateServiceOutput{})
 	return UpdateServiceRequest{Request: req, Input: input, Copy: c.UpdateServiceRequest}
 }
 
@@ -113,8 +58,8 @@ func (c *Client) UpdateServiceRequest(input *UpdateServiceInput) UpdateServiceRe
 // UpdateService API operation.
 type UpdateServiceRequest struct {
 	*aws.Request
-	Input *UpdateServiceInput
-	Copy  func(*UpdateServiceInput) UpdateServiceRequest
+	Input *types.UpdateServiceInput
+	Copy  func(*types.UpdateServiceInput) UpdateServiceRequest
 }
 
 // Send marshals and sends the UpdateService API request.
@@ -126,7 +71,7 @@ func (r UpdateServiceRequest) Send(ctx context.Context) (*UpdateServiceResponse,
 	}
 
 	resp := &UpdateServiceResponse{
-		UpdateServiceOutput: r.Request.Data.(*UpdateServiceOutput),
+		UpdateServiceOutput: r.Request.Data.(*types.UpdateServiceOutput),
 		response:            &aws.Response{Request: r.Request},
 	}
 
@@ -136,7 +81,7 @@ func (r UpdateServiceRequest) Send(ctx context.Context) (*UpdateServiceResponse,
 // UpdateServiceResponse is the response type for the
 // UpdateService API operation.
 type UpdateServiceResponse struct {
-	*UpdateServiceOutput
+	*types.UpdateServiceOutput
 
 	response *aws.Response
 }

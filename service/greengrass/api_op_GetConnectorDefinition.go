@@ -6,133 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/greengrass/types"
 )
-
-type GetConnectorDefinitionInput struct {
-	_ struct{} `type:"structure"`
-
-	// ConnectorDefinitionId is a required field
-	ConnectorDefinitionId *string `location:"uri" locationName:"ConnectorDefinitionId" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetConnectorDefinitionInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetConnectorDefinitionInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetConnectorDefinitionInput"}
-
-	if s.ConnectorDefinitionId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ConnectorDefinitionId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetConnectorDefinitionInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.ConnectorDefinitionId != nil {
-		v := *s.ConnectorDefinitionId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "ConnectorDefinitionId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type GetConnectorDefinitionOutput struct {
-	_ struct{} `type:"structure"`
-
-	Arn *string `type:"string"`
-
-	CreationTimestamp *string `type:"string"`
-
-	Id *string `type:"string"`
-
-	LastUpdatedTimestamp *string `type:"string"`
-
-	LatestVersion *string `type:"string"`
-
-	LatestVersionArn *string `type:"string"`
-
-	Name *string `type:"string"`
-
-	// The key-value pair for the resource tag.
-	Tags map[string]string `locationName:"tags" type:"map"`
-}
-
-// String returns the string representation
-func (s GetConnectorDefinitionOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetConnectorDefinitionOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.Arn != nil {
-		v := *s.Arn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "Arn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.CreationTimestamp != nil {
-		v := *s.CreationTimestamp
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "CreationTimestamp", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Id != nil {
-		v := *s.Id
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "Id", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.LastUpdatedTimestamp != nil {
-		v := *s.LastUpdatedTimestamp
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "LastUpdatedTimestamp", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.LatestVersion != nil {
-		v := *s.LatestVersion
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "LatestVersion", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.LatestVersionArn != nil {
-		v := *s.LatestVersionArn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "LatestVersionArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Name != nil {
-		v := *s.Name
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "Name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Tags != nil {
-		v := s.Tags
-
-		metadata := protocol.Metadata{}
-		ms0 := e.Map(protocol.BodyTarget, "tags", metadata)
-		ms0.Start()
-		for k1, v1 := range v {
-			ms0.MapSetValue(k1, protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
-		}
-		ms0.End()
-
-	}
-	return nil
-}
 
 const opGetConnectorDefinition = "GetConnectorDefinition"
 
@@ -149,7 +24,7 @@ const opGetConnectorDefinition = "GetConnectorDefinition"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GetConnectorDefinition
-func (c *Client) GetConnectorDefinitionRequest(input *GetConnectorDefinitionInput) GetConnectorDefinitionRequest {
+func (c *Client) GetConnectorDefinitionRequest(input *types.GetConnectorDefinitionInput) GetConnectorDefinitionRequest {
 	op := &aws.Operation{
 		Name:       opGetConnectorDefinition,
 		HTTPMethod: "GET",
@@ -157,10 +32,10 @@ func (c *Client) GetConnectorDefinitionRequest(input *GetConnectorDefinitionInpu
 	}
 
 	if input == nil {
-		input = &GetConnectorDefinitionInput{}
+		input = &types.GetConnectorDefinitionInput{}
 	}
 
-	req := c.newRequest(op, input, &GetConnectorDefinitionOutput{})
+	req := c.newRequest(op, input, &types.GetConnectorDefinitionOutput{})
 	return GetConnectorDefinitionRequest{Request: req, Input: input, Copy: c.GetConnectorDefinitionRequest}
 }
 
@@ -168,8 +43,8 @@ func (c *Client) GetConnectorDefinitionRequest(input *GetConnectorDefinitionInpu
 // GetConnectorDefinition API operation.
 type GetConnectorDefinitionRequest struct {
 	*aws.Request
-	Input *GetConnectorDefinitionInput
-	Copy  func(*GetConnectorDefinitionInput) GetConnectorDefinitionRequest
+	Input *types.GetConnectorDefinitionInput
+	Copy  func(*types.GetConnectorDefinitionInput) GetConnectorDefinitionRequest
 }
 
 // Send marshals and sends the GetConnectorDefinition API request.
@@ -181,7 +56,7 @@ func (r GetConnectorDefinitionRequest) Send(ctx context.Context) (*GetConnectorD
 	}
 
 	resp := &GetConnectorDefinitionResponse{
-		GetConnectorDefinitionOutput: r.Request.Data.(*GetConnectorDefinitionOutput),
+		GetConnectorDefinitionOutput: r.Request.Data.(*types.GetConnectorDefinitionOutput),
 		response:                     &aws.Response{Request: r.Request},
 	}
 
@@ -191,7 +66,7 @@ func (r GetConnectorDefinitionRequest) Send(ctx context.Context) (*GetConnectorD
 // GetConnectorDefinitionResponse is the response type for the
 // GetConnectorDefinition API operation.
 type GetConnectorDefinitionResponse struct {
-	*GetConnectorDefinitionOutput
+	*types.GetConnectorDefinitionOutput
 
 	response *aws.Response
 }

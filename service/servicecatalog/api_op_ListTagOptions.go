@@ -6,59 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/types"
 )
-
-type ListTagOptionsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The search filters. If no search filters are specified, the output includes
-	// all TagOptions.
-	Filters *ListTagOptionsFilters `type:"structure"`
-
-	// The maximum number of items to return with this call.
-	PageSize *int64 `type:"integer"`
-
-	// The page token for the next set of results. To retrieve the first set of
-	// results, use null.
-	PageToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s ListTagOptionsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListTagOptionsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListTagOptionsInput"}
-	if s.Filters != nil {
-		if err := s.Filters.Validate(); err != nil {
-			invalidParams.AddNested("Filters", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ListTagOptionsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The page token for the next set of results. To retrieve the first set of
-	// results, use null.
-	PageToken *string `type:"string"`
-
-	// Information about the TagOptions.
-	TagOptionDetails []TagOptionDetail `type:"list"`
-}
-
-// String returns the string representation
-func (s ListTagOptionsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListTagOptions = "ListTagOptions"
 
@@ -75,7 +24,7 @@ const opListTagOptions = "ListTagOptions"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ListTagOptions
-func (c *Client) ListTagOptionsRequest(input *ListTagOptionsInput) ListTagOptionsRequest {
+func (c *Client) ListTagOptionsRequest(input *types.ListTagOptionsInput) ListTagOptionsRequest {
 	op := &aws.Operation{
 		Name:       opListTagOptions,
 		HTTPMethod: "POST",
@@ -89,10 +38,10 @@ func (c *Client) ListTagOptionsRequest(input *ListTagOptionsInput) ListTagOption
 	}
 
 	if input == nil {
-		input = &ListTagOptionsInput{}
+		input = &types.ListTagOptionsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListTagOptionsOutput{})
+	req := c.newRequest(op, input, &types.ListTagOptionsOutput{})
 	return ListTagOptionsRequest{Request: req, Input: input, Copy: c.ListTagOptionsRequest}
 }
 
@@ -100,8 +49,8 @@ func (c *Client) ListTagOptionsRequest(input *ListTagOptionsInput) ListTagOption
 // ListTagOptions API operation.
 type ListTagOptionsRequest struct {
 	*aws.Request
-	Input *ListTagOptionsInput
-	Copy  func(*ListTagOptionsInput) ListTagOptionsRequest
+	Input *types.ListTagOptionsInput
+	Copy  func(*types.ListTagOptionsInput) ListTagOptionsRequest
 }
 
 // Send marshals and sends the ListTagOptions API request.
@@ -113,7 +62,7 @@ func (r ListTagOptionsRequest) Send(ctx context.Context) (*ListTagOptionsRespons
 	}
 
 	resp := &ListTagOptionsResponse{
-		ListTagOptionsOutput: r.Request.Data.(*ListTagOptionsOutput),
+		ListTagOptionsOutput: r.Request.Data.(*types.ListTagOptionsOutput),
 		response:             &aws.Response{Request: r.Request},
 	}
 
@@ -143,7 +92,7 @@ func NewListTagOptionsPaginator(req ListTagOptionsRequest) ListTagOptionsPaginat
 	return ListTagOptionsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListTagOptionsInput
+				var inCpy *types.ListTagOptionsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -163,14 +112,14 @@ type ListTagOptionsPaginator struct {
 	aws.Pager
 }
 
-func (p *ListTagOptionsPaginator) CurrentPage() *ListTagOptionsOutput {
-	return p.Pager.CurrentPage().(*ListTagOptionsOutput)
+func (p *ListTagOptionsPaginator) CurrentPage() *types.ListTagOptionsOutput {
+	return p.Pager.CurrentPage().(*types.ListTagOptionsOutput)
 }
 
 // ListTagOptionsResponse is the response type for the
 // ListTagOptions API operation.
 type ListTagOptionsResponse struct {
-	*ListTagOptionsOutput
+	*types.ListTagOptionsOutput
 
 	response *aws.Response
 }

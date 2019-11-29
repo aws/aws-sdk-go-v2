@@ -6,98 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/chime/types"
 )
-
-type UpdateUserInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Chime account ID.
-	//
-	// AccountId is a required field
-	AccountId *string `location:"uri" locationName:"accountId" type:"string" required:"true"`
-
-	// The user license type to update. This must be a supported license type for
-	// the Amazon Chime account that the user belongs to.
-	LicenseType License `type:"string" enum:"true"`
-
-	// The user ID.
-	//
-	// UserId is a required field
-	UserId *string `location:"uri" locationName:"userId" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s UpdateUserInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateUserInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateUserInput"}
-
-	if s.AccountId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("AccountId"))
-	}
-
-	if s.UserId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("UserId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s UpdateUserInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if len(s.LicenseType) > 0 {
-		v := s.LicenseType
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "LicenseType", protocol.QuotedValue{ValueMarshaler: v}, metadata)
-	}
-	if s.AccountId != nil {
-		v := *s.AccountId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "accountId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.UserId != nil {
-		v := *s.UserId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "userId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type UpdateUserOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The updated user details.
-	User *User `type:"structure"`
-}
-
-// String returns the string representation
-func (s UpdateUserOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s UpdateUserOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.User != nil {
-		v := s.User
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "User", v, metadata)
-	}
-	return nil
-}
 
 const opUpdateUser = "UpdateUser"
 
@@ -115,7 +25,7 @@ const opUpdateUser = "UpdateUser"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/UpdateUser
-func (c *Client) UpdateUserRequest(input *UpdateUserInput) UpdateUserRequest {
+func (c *Client) UpdateUserRequest(input *types.UpdateUserInput) UpdateUserRequest {
 	op := &aws.Operation{
 		Name:       opUpdateUser,
 		HTTPMethod: "POST",
@@ -123,10 +33,10 @@ func (c *Client) UpdateUserRequest(input *UpdateUserInput) UpdateUserRequest {
 	}
 
 	if input == nil {
-		input = &UpdateUserInput{}
+		input = &types.UpdateUserInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateUserOutput{})
+	req := c.newRequest(op, input, &types.UpdateUserOutput{})
 	return UpdateUserRequest{Request: req, Input: input, Copy: c.UpdateUserRequest}
 }
 
@@ -134,8 +44,8 @@ func (c *Client) UpdateUserRequest(input *UpdateUserInput) UpdateUserRequest {
 // UpdateUser API operation.
 type UpdateUserRequest struct {
 	*aws.Request
-	Input *UpdateUserInput
-	Copy  func(*UpdateUserInput) UpdateUserRequest
+	Input *types.UpdateUserInput
+	Copy  func(*types.UpdateUserInput) UpdateUserRequest
 }
 
 // Send marshals and sends the UpdateUser API request.
@@ -147,7 +57,7 @@ func (r UpdateUserRequest) Send(ctx context.Context) (*UpdateUserResponse, error
 	}
 
 	resp := &UpdateUserResponse{
-		UpdateUserOutput: r.Request.Data.(*UpdateUserOutput),
+		UpdateUserOutput: r.Request.Data.(*types.UpdateUserOutput),
 		response:         &aws.Response{Request: r.Request},
 	}
 
@@ -157,7 +67,7 @@ func (r UpdateUserRequest) Send(ctx context.Context) (*UpdateUserResponse, error
 // UpdateUserResponse is the response type for the
 // UpdateUser API operation.
 type UpdateUserResponse struct {
-	*UpdateUserOutput
+	*types.UpdateUserOutput
 
 	response *aws.Response
 }

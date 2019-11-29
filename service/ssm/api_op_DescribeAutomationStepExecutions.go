@@ -4,88 +4,10 @@ package ssm
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ssm/types"
 )
-
-type DescribeAutomationStepExecutionsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Automation execution ID for which you want step execution descriptions.
-	//
-	// AutomationExecutionId is a required field
-	AutomationExecutionId *string `min:"36" type:"string" required:"true"`
-
-	// One or more filters to limit the number of step executions returned by the
-	// request.
-	Filters []StepExecutionFilter `min:"1" type:"list"`
-
-	// The maximum number of items to return for this call. The call also returns
-	// a token that you can specify in a subsequent call to get the next set of
-	// results.
-	MaxResults *int64 `min:"1" type:"integer"`
-
-	// The token for the next set of items to return. (You received this token from
-	// a previous call.)
-	NextToken *string `type:"string"`
-
-	// A boolean that indicates whether to list step executions in reverse order
-	// by start time. The default value is false.
-	ReverseOrder *bool `type:"boolean"`
-}
-
-// String returns the string representation
-func (s DescribeAutomationStepExecutionsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeAutomationStepExecutionsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeAutomationStepExecutionsInput"}
-
-	if s.AutomationExecutionId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("AutomationExecutionId"))
-	}
-	if s.AutomationExecutionId != nil && len(*s.AutomationExecutionId) < 36 {
-		invalidParams.Add(aws.NewErrParamMinLen("AutomationExecutionId", 36))
-	}
-	if s.Filters != nil && len(s.Filters) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Filters", 1))
-	}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-	if s.Filters != nil {
-		for i, v := range s.Filters {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribeAutomationStepExecutionsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The token to use when requesting the next set of items. If there are no additional
-	// items to return, the string is empty.
-	NextToken *string `type:"string"`
-
-	// A list of details about the current state of all steps that make up an execution.
-	StepExecutions []StepExecution `type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeAutomationStepExecutionsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeAutomationStepExecutions = "DescribeAutomationStepExecutions"
 
@@ -103,7 +25,7 @@ const opDescribeAutomationStepExecutions = "DescribeAutomationStepExecutions"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeAutomationStepExecutions
-func (c *Client) DescribeAutomationStepExecutionsRequest(input *DescribeAutomationStepExecutionsInput) DescribeAutomationStepExecutionsRequest {
+func (c *Client) DescribeAutomationStepExecutionsRequest(input *types.DescribeAutomationStepExecutionsInput) DescribeAutomationStepExecutionsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeAutomationStepExecutions,
 		HTTPMethod: "POST",
@@ -111,10 +33,10 @@ func (c *Client) DescribeAutomationStepExecutionsRequest(input *DescribeAutomati
 	}
 
 	if input == nil {
-		input = &DescribeAutomationStepExecutionsInput{}
+		input = &types.DescribeAutomationStepExecutionsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeAutomationStepExecutionsOutput{})
+	req := c.newRequest(op, input, &types.DescribeAutomationStepExecutionsOutput{})
 	return DescribeAutomationStepExecutionsRequest{Request: req, Input: input, Copy: c.DescribeAutomationStepExecutionsRequest}
 }
 
@@ -122,8 +44,8 @@ func (c *Client) DescribeAutomationStepExecutionsRequest(input *DescribeAutomati
 // DescribeAutomationStepExecutions API operation.
 type DescribeAutomationStepExecutionsRequest struct {
 	*aws.Request
-	Input *DescribeAutomationStepExecutionsInput
-	Copy  func(*DescribeAutomationStepExecutionsInput) DescribeAutomationStepExecutionsRequest
+	Input *types.DescribeAutomationStepExecutionsInput
+	Copy  func(*types.DescribeAutomationStepExecutionsInput) DescribeAutomationStepExecutionsRequest
 }
 
 // Send marshals and sends the DescribeAutomationStepExecutions API request.
@@ -135,7 +57,7 @@ func (r DescribeAutomationStepExecutionsRequest) Send(ctx context.Context) (*Des
 	}
 
 	resp := &DescribeAutomationStepExecutionsResponse{
-		DescribeAutomationStepExecutionsOutput: r.Request.Data.(*DescribeAutomationStepExecutionsOutput),
+		DescribeAutomationStepExecutionsOutput: r.Request.Data.(*types.DescribeAutomationStepExecutionsOutput),
 		response:                               &aws.Response{Request: r.Request},
 	}
 
@@ -145,7 +67,7 @@ func (r DescribeAutomationStepExecutionsRequest) Send(ctx context.Context) (*Des
 // DescribeAutomationStepExecutionsResponse is the response type for the
 // DescribeAutomationStepExecutions API operation.
 type DescribeAutomationStepExecutionsResponse struct {
-	*DescribeAutomationStepExecutionsOutput
+	*types.DescribeAutomationStepExecutionsOutput
 
 	response *aws.Response
 }

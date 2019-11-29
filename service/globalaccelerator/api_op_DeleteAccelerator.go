@@ -6,47 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
+	"github.com/aws/aws-sdk-go-v2/service/globalaccelerator/types"
 )
-
-type DeleteAcceleratorInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of an accelerator.
-	//
-	// AcceleratorArn is a required field
-	AcceleratorArn *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteAcceleratorInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteAcceleratorInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteAcceleratorInput"}
-
-	if s.AcceleratorArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("AcceleratorArn"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteAcceleratorOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteAcceleratorOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteAccelerator = "DeleteAccelerator"
 
@@ -64,7 +27,7 @@ const opDeleteAccelerator = "DeleteAccelerator"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/DeleteAccelerator
-func (c *Client) DeleteAcceleratorRequest(input *DeleteAcceleratorInput) DeleteAcceleratorRequest {
+func (c *Client) DeleteAcceleratorRequest(input *types.DeleteAcceleratorInput) DeleteAcceleratorRequest {
 	op := &aws.Operation{
 		Name:       opDeleteAccelerator,
 		HTTPMethod: "POST",
@@ -72,10 +35,10 @@ func (c *Client) DeleteAcceleratorRequest(input *DeleteAcceleratorInput) DeleteA
 	}
 
 	if input == nil {
-		input = &DeleteAcceleratorInput{}
+		input = &types.DeleteAcceleratorInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteAcceleratorOutput{})
+	req := c.newRequest(op, input, &types.DeleteAcceleratorOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return DeleteAcceleratorRequest{Request: req, Input: input, Copy: c.DeleteAcceleratorRequest}
@@ -85,8 +48,8 @@ func (c *Client) DeleteAcceleratorRequest(input *DeleteAcceleratorInput) DeleteA
 // DeleteAccelerator API operation.
 type DeleteAcceleratorRequest struct {
 	*aws.Request
-	Input *DeleteAcceleratorInput
-	Copy  func(*DeleteAcceleratorInput) DeleteAcceleratorRequest
+	Input *types.DeleteAcceleratorInput
+	Copy  func(*types.DeleteAcceleratorInput) DeleteAcceleratorRequest
 }
 
 // Send marshals and sends the DeleteAccelerator API request.
@@ -98,7 +61,7 @@ func (r DeleteAcceleratorRequest) Send(ctx context.Context) (*DeleteAcceleratorR
 	}
 
 	resp := &DeleteAcceleratorResponse{
-		DeleteAcceleratorOutput: r.Request.Data.(*DeleteAcceleratorOutput),
+		DeleteAcceleratorOutput: r.Request.Data.(*types.DeleteAcceleratorOutput),
 		response:                &aws.Response{Request: r.Request},
 	}
 
@@ -108,7 +71,7 @@ func (r DeleteAcceleratorRequest) Send(ctx context.Context) (*DeleteAcceleratorR
 // DeleteAcceleratorResponse is the response type for the
 // DeleteAccelerator API operation.
 type DeleteAcceleratorResponse struct {
-	*DeleteAcceleratorOutput
+	*types.DeleteAcceleratorOutput
 
 	response *aws.Response
 }

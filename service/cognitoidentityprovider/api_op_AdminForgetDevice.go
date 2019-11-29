@@ -6,75 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
+	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/types"
 )
-
-// Sends the forgot device request, as an administrator.
-type AdminForgetDeviceInput struct {
-	_ struct{} `type:"structure"`
-
-	// The device key.
-	//
-	// DeviceKey is a required field
-	DeviceKey *string `min:"1" type:"string" required:"true"`
-
-	// The user pool ID.
-	//
-	// UserPoolId is a required field
-	UserPoolId *string `min:"1" type:"string" required:"true"`
-
-	// The user name.
-	//
-	// Username is a required field
-	Username *string `min:"1" type:"string" required:"true" sensitive:"true"`
-}
-
-// String returns the string representation
-func (s AdminForgetDeviceInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *AdminForgetDeviceInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "AdminForgetDeviceInput"}
-
-	if s.DeviceKey == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DeviceKey"))
-	}
-	if s.DeviceKey != nil && len(*s.DeviceKey) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("DeviceKey", 1))
-	}
-
-	if s.UserPoolId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("UserPoolId"))
-	}
-	if s.UserPoolId != nil && len(*s.UserPoolId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("UserPoolId", 1))
-	}
-
-	if s.Username == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Username"))
-	}
-	if s.Username != nil && len(*s.Username) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Username", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type AdminForgetDeviceOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s AdminForgetDeviceOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opAdminForgetDevice = "AdminForgetDevice"
 
@@ -93,7 +28,7 @@ const opAdminForgetDevice = "AdminForgetDevice"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AdminForgetDevice
-func (c *Client) AdminForgetDeviceRequest(input *AdminForgetDeviceInput) AdminForgetDeviceRequest {
+func (c *Client) AdminForgetDeviceRequest(input *types.AdminForgetDeviceInput) AdminForgetDeviceRequest {
 	op := &aws.Operation{
 		Name:       opAdminForgetDevice,
 		HTTPMethod: "POST",
@@ -101,10 +36,10 @@ func (c *Client) AdminForgetDeviceRequest(input *AdminForgetDeviceInput) AdminFo
 	}
 
 	if input == nil {
-		input = &AdminForgetDeviceInput{}
+		input = &types.AdminForgetDeviceInput{}
 	}
 
-	req := c.newRequest(op, input, &AdminForgetDeviceOutput{})
+	req := c.newRequest(op, input, &types.AdminForgetDeviceOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return AdminForgetDeviceRequest{Request: req, Input: input, Copy: c.AdminForgetDeviceRequest}
@@ -114,8 +49,8 @@ func (c *Client) AdminForgetDeviceRequest(input *AdminForgetDeviceInput) AdminFo
 // AdminForgetDevice API operation.
 type AdminForgetDeviceRequest struct {
 	*aws.Request
-	Input *AdminForgetDeviceInput
-	Copy  func(*AdminForgetDeviceInput) AdminForgetDeviceRequest
+	Input *types.AdminForgetDeviceInput
+	Copy  func(*types.AdminForgetDeviceInput) AdminForgetDeviceRequest
 }
 
 // Send marshals and sends the AdminForgetDevice API request.
@@ -127,7 +62,7 @@ func (r AdminForgetDeviceRequest) Send(ctx context.Context) (*AdminForgetDeviceR
 	}
 
 	resp := &AdminForgetDeviceResponse{
-		AdminForgetDeviceOutput: r.Request.Data.(*AdminForgetDeviceOutput),
+		AdminForgetDeviceOutput: r.Request.Data.(*types.AdminForgetDeviceOutput),
 		response:                &aws.Response{Request: r.Request},
 	}
 
@@ -137,7 +72,7 @@ func (r AdminForgetDeviceRequest) Send(ctx context.Context) (*AdminForgetDeviceR
 // AdminForgetDeviceResponse is the response type for the
 // AdminForgetDevice API operation.
 type AdminForgetDeviceResponse struct {
-	*AdminForgetDeviceOutput
+	*types.AdminForgetDeviceOutput
 
 	response *aws.Response
 }

@@ -4,111 +4,10 @@ package datasync
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/datasync/types"
 )
-
-// CreateTaskRequest
-type CreateTaskInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the Amazon CloudWatch log group that is
-	// used to monitor and log events in the task.
-	//
-	// For more information on these groups, see Working with Log Groups and Log
-	// Streams in the Amazon CloudWatch User Guide.
-	//
-	// For more information about how to use CloudWatch Logs with DataSync, see
-	// Monitoring Your Task in the AWS DataSync User Guide.
-	CloudWatchLogGroupArn *string `type:"string"`
-
-	// The Amazon Resource Name (ARN) of an AWS storage resource's location.
-	//
-	// DestinationLocationArn is a required field
-	DestinationLocationArn *string `type:"string" required:"true"`
-
-	// A list of filter rules that determines which files to exclude from a task.
-	// The list should contain a single filter string that consists of the patterns
-	// to exclude. The patterns are delimited by "|" (that is, a pipe), for example,
-	// "/folder1|/folder2"
-	Excludes []FilterRule `type:"list"`
-
-	// The name of a task. This value is a text reference that is used to identify
-	// the task in the console.
-	Name *string `min:"1" type:"string"`
-
-	// The set of configuration options that control the behavior of a single execution
-	// of the task that occurs when you call StartTaskExecution. You can configure
-	// these options to preserve metadata such as user ID (UID) and group ID (GID),
-	// file permissions, data integrity verification, and so on.
-	//
-	// For each individual task execution, you can override these options by specifying
-	// the OverrideOptions before starting a the task execution. For more information,
-	// see the operation.
-	Options *Options `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the source location for the task.
-	//
-	// SourceLocationArn is a required field
-	SourceLocationArn *string `type:"string" required:"true"`
-
-	// The key-value pair that represents the tag that you want to add to the resource.
-	// The value can be an empty string.
-	Tags []TagListEntry `type:"list"`
-}
-
-// String returns the string representation
-func (s CreateTaskInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateTaskInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateTaskInput"}
-
-	if s.DestinationLocationArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DestinationLocationArn"))
-	}
-	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
-	}
-
-	if s.SourceLocationArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("SourceLocationArn"))
-	}
-	if s.Options != nil {
-		if err := s.Options.Validate(); err != nil {
-			invalidParams.AddNested("Options", err.(aws.ErrInvalidParams))
-		}
-	}
-	if s.Tags != nil {
-		for i, v := range s.Tags {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// CreateTaskResponse
-type CreateTaskOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the task.
-	TaskArn *string `type:"string"`
-}
-
-// String returns the string representation
-func (s CreateTaskOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCreateTask = "CreateTask"
 
@@ -141,7 +40,7 @@ const opCreateTask = "CreateTask"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/CreateTask
-func (c *Client) CreateTaskRequest(input *CreateTaskInput) CreateTaskRequest {
+func (c *Client) CreateTaskRequest(input *types.CreateTaskInput) CreateTaskRequest {
 	op := &aws.Operation{
 		Name:       opCreateTask,
 		HTTPMethod: "POST",
@@ -149,10 +48,10 @@ func (c *Client) CreateTaskRequest(input *CreateTaskInput) CreateTaskRequest {
 	}
 
 	if input == nil {
-		input = &CreateTaskInput{}
+		input = &types.CreateTaskInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateTaskOutput{})
+	req := c.newRequest(op, input, &types.CreateTaskOutput{})
 	return CreateTaskRequest{Request: req, Input: input, Copy: c.CreateTaskRequest}
 }
 
@@ -160,8 +59,8 @@ func (c *Client) CreateTaskRequest(input *CreateTaskInput) CreateTaskRequest {
 // CreateTask API operation.
 type CreateTaskRequest struct {
 	*aws.Request
-	Input *CreateTaskInput
-	Copy  func(*CreateTaskInput) CreateTaskRequest
+	Input *types.CreateTaskInput
+	Copy  func(*types.CreateTaskInput) CreateTaskRequest
 }
 
 // Send marshals and sends the CreateTask API request.
@@ -173,7 +72,7 @@ func (r CreateTaskRequest) Send(ctx context.Context) (*CreateTaskResponse, error
 	}
 
 	resp := &CreateTaskResponse{
-		CreateTaskOutput: r.Request.Data.(*CreateTaskOutput),
+		CreateTaskOutput: r.Request.Data.(*types.CreateTaskOutput),
 		response:         &aws.Response{Request: r.Request},
 	}
 
@@ -183,7 +82,7 @@ func (r CreateTaskRequest) Send(ctx context.Context) (*CreateTaskResponse, error
 // CreateTaskResponse is the response type for the
 // CreateTask API operation.
 type CreateTaskResponse struct {
-	*CreateTaskOutput
+	*types.CreateTaskOutput
 
 	response *aws.Response
 }

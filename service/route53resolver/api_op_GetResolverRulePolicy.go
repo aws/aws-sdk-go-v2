@@ -6,52 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/route53resolver/types"
 )
-
-type GetResolverRulePolicyInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the resolver rule policy that you want to get information about.
-	//
-	// Arn is a required field
-	Arn *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetResolverRulePolicyInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetResolverRulePolicyInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetResolverRulePolicyInput"}
-
-	if s.Arn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Arn"))
-	}
-	if s.Arn != nil && len(*s.Arn) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Arn", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type GetResolverRulePolicyOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Information about the resolver rule policy that you specified in a GetResolverRulePolicy
-	// request.
-	ResolverRulePolicy *string `type:"string"`
-}
-
-// String returns the string representation
-func (s GetResolverRulePolicyOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetResolverRulePolicy = "GetResolverRulePolicy"
 
@@ -70,7 +26,7 @@ const opGetResolverRulePolicy = "GetResolverRulePolicy"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/GetResolverRulePolicy
-func (c *Client) GetResolverRulePolicyRequest(input *GetResolverRulePolicyInput) GetResolverRulePolicyRequest {
+func (c *Client) GetResolverRulePolicyRequest(input *types.GetResolverRulePolicyInput) GetResolverRulePolicyRequest {
 	op := &aws.Operation{
 		Name:       opGetResolverRulePolicy,
 		HTTPMethod: "POST",
@@ -78,10 +34,10 @@ func (c *Client) GetResolverRulePolicyRequest(input *GetResolverRulePolicyInput)
 	}
 
 	if input == nil {
-		input = &GetResolverRulePolicyInput{}
+		input = &types.GetResolverRulePolicyInput{}
 	}
 
-	req := c.newRequest(op, input, &GetResolverRulePolicyOutput{})
+	req := c.newRequest(op, input, &types.GetResolverRulePolicyOutput{})
 	return GetResolverRulePolicyRequest{Request: req, Input: input, Copy: c.GetResolverRulePolicyRequest}
 }
 
@@ -89,8 +45,8 @@ func (c *Client) GetResolverRulePolicyRequest(input *GetResolverRulePolicyInput)
 // GetResolverRulePolicy API operation.
 type GetResolverRulePolicyRequest struct {
 	*aws.Request
-	Input *GetResolverRulePolicyInput
-	Copy  func(*GetResolverRulePolicyInput) GetResolverRulePolicyRequest
+	Input *types.GetResolverRulePolicyInput
+	Copy  func(*types.GetResolverRulePolicyInput) GetResolverRulePolicyRequest
 }
 
 // Send marshals and sends the GetResolverRulePolicy API request.
@@ -102,7 +58,7 @@ func (r GetResolverRulePolicyRequest) Send(ctx context.Context) (*GetResolverRul
 	}
 
 	resp := &GetResolverRulePolicyResponse{
-		GetResolverRulePolicyOutput: r.Request.Data.(*GetResolverRulePolicyOutput),
+		GetResolverRulePolicyOutput: r.Request.Data.(*types.GetResolverRulePolicyOutput),
 		response:                    &aws.Response{Request: r.Request},
 	}
 
@@ -112,7 +68,7 @@ func (r GetResolverRulePolicyRequest) Send(ctx context.Context) (*GetResolverRul
 // GetResolverRulePolicyResponse is the response type for the
 // GetResolverRulePolicy API operation.
 type GetResolverRulePolicyResponse struct {
-	*GetResolverRulePolicyOutput
+	*types.GetResolverRulePolicyOutput
 
 	response *aws.Response
 }

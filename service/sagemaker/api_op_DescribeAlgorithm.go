@@ -4,97 +4,10 @@ package sagemaker
 
 import (
 	"context"
-	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
 )
-
-type DescribeAlgorithmInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the algorithm to describe.
-	//
-	// AlgorithmName is a required field
-	AlgorithmName *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeAlgorithmInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeAlgorithmInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeAlgorithmInput"}
-
-	if s.AlgorithmName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("AlgorithmName"))
-	}
-	if s.AlgorithmName != nil && len(*s.AlgorithmName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("AlgorithmName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribeAlgorithmOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the algorithm.
-	//
-	// AlgorithmArn is a required field
-	AlgorithmArn *string `min:"1" type:"string" required:"true"`
-
-	// A brief summary about the algorithm.
-	AlgorithmDescription *string `type:"string"`
-
-	// The name of the algorithm being described.
-	//
-	// AlgorithmName is a required field
-	AlgorithmName *string `min:"1" type:"string" required:"true"`
-
-	// The current status of the algorithm.
-	//
-	// AlgorithmStatus is a required field
-	AlgorithmStatus AlgorithmStatus `type:"string" required:"true" enum:"true"`
-
-	// Details about the current status of the algorithm.
-	//
-	// AlgorithmStatusDetails is a required field
-	AlgorithmStatusDetails *AlgorithmStatusDetails `type:"structure" required:"true"`
-
-	// Whether the algorithm is certified to be listed in AWS Marketplace.
-	CertifyForMarketplace *bool `type:"boolean"`
-
-	// A timestamp specifying when the algorithm was created.
-	//
-	// CreationTime is a required field
-	CreationTime *time.Time `type:"timestamp" required:"true"`
-
-	// Details about inference jobs that the algorithm runs.
-	InferenceSpecification *InferenceSpecification `type:"structure"`
-
-	// The product identifier of the algorithm.
-	ProductId *string `type:"string"`
-
-	// Details about training jobs run by this algorithm.
-	//
-	// TrainingSpecification is a required field
-	TrainingSpecification *TrainingSpecification `type:"structure" required:"true"`
-
-	// Details about configurations for one or more training jobs that Amazon SageMaker
-	// runs to test the algorithm.
-	ValidationSpecification *AlgorithmValidationSpecification `type:"structure"`
-}
-
-// String returns the string representation
-func (s DescribeAlgorithmOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeAlgorithm = "DescribeAlgorithm"
 
@@ -111,7 +24,7 @@ const opDescribeAlgorithm = "DescribeAlgorithm"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeAlgorithm
-func (c *Client) DescribeAlgorithmRequest(input *DescribeAlgorithmInput) DescribeAlgorithmRequest {
+func (c *Client) DescribeAlgorithmRequest(input *types.DescribeAlgorithmInput) DescribeAlgorithmRequest {
 	op := &aws.Operation{
 		Name:       opDescribeAlgorithm,
 		HTTPMethod: "POST",
@@ -119,10 +32,10 @@ func (c *Client) DescribeAlgorithmRequest(input *DescribeAlgorithmInput) Describ
 	}
 
 	if input == nil {
-		input = &DescribeAlgorithmInput{}
+		input = &types.DescribeAlgorithmInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeAlgorithmOutput{})
+	req := c.newRequest(op, input, &types.DescribeAlgorithmOutput{})
 	return DescribeAlgorithmRequest{Request: req, Input: input, Copy: c.DescribeAlgorithmRequest}
 }
 
@@ -130,8 +43,8 @@ func (c *Client) DescribeAlgorithmRequest(input *DescribeAlgorithmInput) Describ
 // DescribeAlgorithm API operation.
 type DescribeAlgorithmRequest struct {
 	*aws.Request
-	Input *DescribeAlgorithmInput
-	Copy  func(*DescribeAlgorithmInput) DescribeAlgorithmRequest
+	Input *types.DescribeAlgorithmInput
+	Copy  func(*types.DescribeAlgorithmInput) DescribeAlgorithmRequest
 }
 
 // Send marshals and sends the DescribeAlgorithm API request.
@@ -143,7 +56,7 @@ func (r DescribeAlgorithmRequest) Send(ctx context.Context) (*DescribeAlgorithmR
 	}
 
 	resp := &DescribeAlgorithmResponse{
-		DescribeAlgorithmOutput: r.Request.Data.(*DescribeAlgorithmOutput),
+		DescribeAlgorithmOutput: r.Request.Data.(*types.DescribeAlgorithmOutput),
 		response:                &aws.Response{Request: r.Request},
 	}
 
@@ -153,7 +66,7 @@ func (r DescribeAlgorithmRequest) Send(ctx context.Context) (*DescribeAlgorithmR
 // DescribeAlgorithmResponse is the response type for the
 // DescribeAlgorithm API operation.
 type DescribeAlgorithmResponse struct {
-	*DescribeAlgorithmOutput
+	*types.DescribeAlgorithmOutput
 
 	response *aws.Response
 }

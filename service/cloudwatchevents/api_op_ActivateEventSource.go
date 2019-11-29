@@ -6,50 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
+	"github.com/aws/aws-sdk-go-v2/service/cloudwatchevents/types"
 )
-
-type ActivateEventSourceInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the partner event source to activate.
-	//
-	// Name is a required field
-	Name *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s ActivateEventSourceInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ActivateEventSourceInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ActivateEventSourceInput"}
-
-	if s.Name == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Name"))
-	}
-	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ActivateEventSourceOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s ActivateEventSourceOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opActivateEventSource = "ActivateEventSource"
 
@@ -69,7 +29,7 @@ const opActivateEventSource = "ActivateEventSource"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/ActivateEventSource
-func (c *Client) ActivateEventSourceRequest(input *ActivateEventSourceInput) ActivateEventSourceRequest {
+func (c *Client) ActivateEventSourceRequest(input *types.ActivateEventSourceInput) ActivateEventSourceRequest {
 	op := &aws.Operation{
 		Name:       opActivateEventSource,
 		HTTPMethod: "POST",
@@ -77,10 +37,10 @@ func (c *Client) ActivateEventSourceRequest(input *ActivateEventSourceInput) Act
 	}
 
 	if input == nil {
-		input = &ActivateEventSourceInput{}
+		input = &types.ActivateEventSourceInput{}
 	}
 
-	req := c.newRequest(op, input, &ActivateEventSourceOutput{})
+	req := c.newRequest(op, input, &types.ActivateEventSourceOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return ActivateEventSourceRequest{Request: req, Input: input, Copy: c.ActivateEventSourceRequest}
@@ -90,8 +50,8 @@ func (c *Client) ActivateEventSourceRequest(input *ActivateEventSourceInput) Act
 // ActivateEventSource API operation.
 type ActivateEventSourceRequest struct {
 	*aws.Request
-	Input *ActivateEventSourceInput
-	Copy  func(*ActivateEventSourceInput) ActivateEventSourceRequest
+	Input *types.ActivateEventSourceInput
+	Copy  func(*types.ActivateEventSourceInput) ActivateEventSourceRequest
 }
 
 // Send marshals and sends the ActivateEventSource API request.
@@ -103,7 +63,7 @@ func (r ActivateEventSourceRequest) Send(ctx context.Context) (*ActivateEventSou
 	}
 
 	resp := &ActivateEventSourceResponse{
-		ActivateEventSourceOutput: r.Request.Data.(*ActivateEventSourceOutput),
+		ActivateEventSourceOutput: r.Request.Data.(*types.ActivateEventSourceOutput),
 		response:                  &aws.Response{Request: r.Request},
 	}
 
@@ -113,7 +73,7 @@ func (r ActivateEventSourceRequest) Send(ctx context.Context) (*ActivateEventSou
 // ActivateEventSourceResponse is the response type for the
 // ActivateEventSource API operation.
 type ActivateEventSourceResponse struct {
-	*ActivateEventSourceOutput
+	*types.ActivateEventSourceOutput
 
 	response *aws.Response
 }

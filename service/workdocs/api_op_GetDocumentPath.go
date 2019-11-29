@@ -6,126 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/workdocs/types"
 )
-
-type GetDocumentPathInput struct {
-	_ struct{} `type:"structure"`
-
-	// Amazon WorkDocs authentication token. Do not set this field when using administrative
-	// API actions, as in accessing the API using AWS credentials.
-	AuthenticationToken *string `location:"header" locationName:"Authentication" min:"1" type:"string" sensitive:"true"`
-
-	// The ID of the document.
-	//
-	// DocumentId is a required field
-	DocumentId *string `location:"uri" locationName:"DocumentId" min:"1" type:"string" required:"true"`
-
-	// A comma-separated list of values. Specify NAME to include the names of the
-	// parent folders.
-	Fields *string `location:"querystring" locationName:"fields" min:"1" type:"string"`
-
-	// The maximum number of levels in the hierarchy to return.
-	Limit *int64 `location:"querystring" locationName:"limit" min:"1" type:"integer"`
-
-	// This value is not supported.
-	Marker *string `location:"querystring" locationName:"marker" min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s GetDocumentPathInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetDocumentPathInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetDocumentPathInput"}
-	if s.AuthenticationToken != nil && len(*s.AuthenticationToken) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("AuthenticationToken", 1))
-	}
-
-	if s.DocumentId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DocumentId"))
-	}
-	if s.DocumentId != nil && len(*s.DocumentId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("DocumentId", 1))
-	}
-	if s.Fields != nil && len(*s.Fields) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Fields", 1))
-	}
-	if s.Limit != nil && *s.Limit < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("Limit", 1))
-	}
-	if s.Marker != nil && len(*s.Marker) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Marker", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetDocumentPathInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.AuthenticationToken != nil {
-		v := *s.AuthenticationToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "Authentication", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.DocumentId != nil {
-		v := *s.DocumentId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "DocumentId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Fields != nil {
-		v := *s.Fields
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "fields", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Limit != nil {
-		v := *s.Limit
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "limit", protocol.Int64Value(v), metadata)
-	}
-	if s.Marker != nil {
-		v := *s.Marker
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "marker", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type GetDocumentPathOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The path information.
-	Path *ResourcePath `type:"structure"`
-}
-
-// String returns the string representation
-func (s GetDocumentPathOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetDocumentPathOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.Path != nil {
-		v := s.Path
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "Path", v, metadata)
-	}
-	return nil
-}
 
 const opGetDocumentPath = "GetDocumentPath"
 
@@ -148,7 +30,7 @@ const opGetDocumentPath = "GetDocumentPath"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/GetDocumentPath
-func (c *Client) GetDocumentPathRequest(input *GetDocumentPathInput) GetDocumentPathRequest {
+func (c *Client) GetDocumentPathRequest(input *types.GetDocumentPathInput) GetDocumentPathRequest {
 	op := &aws.Operation{
 		Name:       opGetDocumentPath,
 		HTTPMethod: "GET",
@@ -156,10 +38,10 @@ func (c *Client) GetDocumentPathRequest(input *GetDocumentPathInput) GetDocument
 	}
 
 	if input == nil {
-		input = &GetDocumentPathInput{}
+		input = &types.GetDocumentPathInput{}
 	}
 
-	req := c.newRequest(op, input, &GetDocumentPathOutput{})
+	req := c.newRequest(op, input, &types.GetDocumentPathOutput{})
 	return GetDocumentPathRequest{Request: req, Input: input, Copy: c.GetDocumentPathRequest}
 }
 
@@ -167,8 +49,8 @@ func (c *Client) GetDocumentPathRequest(input *GetDocumentPathInput) GetDocument
 // GetDocumentPath API operation.
 type GetDocumentPathRequest struct {
 	*aws.Request
-	Input *GetDocumentPathInput
-	Copy  func(*GetDocumentPathInput) GetDocumentPathRequest
+	Input *types.GetDocumentPathInput
+	Copy  func(*types.GetDocumentPathInput) GetDocumentPathRequest
 }
 
 // Send marshals and sends the GetDocumentPath API request.
@@ -180,7 +62,7 @@ func (r GetDocumentPathRequest) Send(ctx context.Context) (*GetDocumentPathRespo
 	}
 
 	resp := &GetDocumentPathResponse{
-		GetDocumentPathOutput: r.Request.Data.(*GetDocumentPathOutput),
+		GetDocumentPathOutput: r.Request.Data.(*types.GetDocumentPathOutput),
 		response:              &aws.Response{Request: r.Request},
 	}
 
@@ -190,7 +72,7 @@ func (r GetDocumentPathRequest) Send(ctx context.Context) (*GetDocumentPathRespo
 // GetDocumentPathResponse is the response type for the
 // GetDocumentPath API operation.
 type GetDocumentPathResponse struct {
-	*GetDocumentPathOutput
+	*types.GetDocumentPathOutput
 
 	response *aws.Response
 }

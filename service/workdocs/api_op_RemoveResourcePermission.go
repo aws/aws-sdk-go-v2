@@ -6,108 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/restjson"
+	"github.com/aws/aws-sdk-go-v2/service/workdocs/types"
 )
-
-type RemoveResourcePermissionInput struct {
-	_ struct{} `type:"structure"`
-
-	// Amazon WorkDocs authentication token. Do not set this field when using administrative
-	// API actions, as in accessing the API using AWS credentials.
-	AuthenticationToken *string `location:"header" locationName:"Authentication" min:"1" type:"string" sensitive:"true"`
-
-	// The principal ID of the resource.
-	//
-	// PrincipalId is a required field
-	PrincipalId *string `location:"uri" locationName:"PrincipalId" min:"1" type:"string" required:"true"`
-
-	// The principal type of the resource.
-	PrincipalType PrincipalType `location:"querystring" locationName:"type" type:"string" enum:"true"`
-
-	// The ID of the resource.
-	//
-	// ResourceId is a required field
-	ResourceId *string `location:"uri" locationName:"ResourceId" min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s RemoveResourcePermissionInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *RemoveResourcePermissionInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "RemoveResourcePermissionInput"}
-	if s.AuthenticationToken != nil && len(*s.AuthenticationToken) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("AuthenticationToken", 1))
-	}
-
-	if s.PrincipalId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("PrincipalId"))
-	}
-	if s.PrincipalId != nil && len(*s.PrincipalId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("PrincipalId", 1))
-	}
-
-	if s.ResourceId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ResourceId"))
-	}
-	if s.ResourceId != nil && len(*s.ResourceId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ResourceId", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s RemoveResourcePermissionInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.AuthenticationToken != nil {
-		v := *s.AuthenticationToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "Authentication", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.PrincipalId != nil {
-		v := *s.PrincipalId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "PrincipalId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.ResourceId != nil {
-		v := *s.ResourceId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "ResourceId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if len(s.PrincipalType) > 0 {
-		v := s.PrincipalType
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "type", protocol.QuotedValue{ValueMarshaler: v}, metadata)
-	}
-	return nil
-}
-
-type RemoveResourcePermissionOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s RemoveResourcePermissionOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s RemoveResourcePermissionOutput) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
 
 const opRemoveResourcePermission = "RemoveResourcePermission"
 
@@ -124,7 +26,7 @@ const opRemoveResourcePermission = "RemoveResourcePermission"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/RemoveResourcePermission
-func (c *Client) RemoveResourcePermissionRequest(input *RemoveResourcePermissionInput) RemoveResourcePermissionRequest {
+func (c *Client) RemoveResourcePermissionRequest(input *types.RemoveResourcePermissionInput) RemoveResourcePermissionRequest {
 	op := &aws.Operation{
 		Name:       opRemoveResourcePermission,
 		HTTPMethod: "DELETE",
@@ -132,10 +34,10 @@ func (c *Client) RemoveResourcePermissionRequest(input *RemoveResourcePermission
 	}
 
 	if input == nil {
-		input = &RemoveResourcePermissionInput{}
+		input = &types.RemoveResourcePermissionInput{}
 	}
 
-	req := c.newRequest(op, input, &RemoveResourcePermissionOutput{})
+	req := c.newRequest(op, input, &types.RemoveResourcePermissionOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return RemoveResourcePermissionRequest{Request: req, Input: input, Copy: c.RemoveResourcePermissionRequest}
@@ -145,8 +47,8 @@ func (c *Client) RemoveResourcePermissionRequest(input *RemoveResourcePermission
 // RemoveResourcePermission API operation.
 type RemoveResourcePermissionRequest struct {
 	*aws.Request
-	Input *RemoveResourcePermissionInput
-	Copy  func(*RemoveResourcePermissionInput) RemoveResourcePermissionRequest
+	Input *types.RemoveResourcePermissionInput
+	Copy  func(*types.RemoveResourcePermissionInput) RemoveResourcePermissionRequest
 }
 
 // Send marshals and sends the RemoveResourcePermission API request.
@@ -158,7 +60,7 @@ func (r RemoveResourcePermissionRequest) Send(ctx context.Context) (*RemoveResou
 	}
 
 	resp := &RemoveResourcePermissionResponse{
-		RemoveResourcePermissionOutput: r.Request.Data.(*RemoveResourcePermissionOutput),
+		RemoveResourcePermissionOutput: r.Request.Data.(*types.RemoveResourcePermissionOutput),
 		response:                       &aws.Response{Request: r.Request},
 	}
 
@@ -168,7 +70,7 @@ func (r RemoveResourcePermissionRequest) Send(ctx context.Context) (*RemoveResou
 // RemoveResourcePermissionResponse is the response type for the
 // RemoveResourcePermission API operation.
 type RemoveResourcePermissionResponse struct {
-	*RemoveResourcePermissionOutput
+	*types.RemoveResourcePermissionOutput
 
 	response *aws.Response
 }

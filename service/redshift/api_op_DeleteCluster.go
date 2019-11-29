@@ -6,89 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/redshift/types"
 )
-
-type DeleteClusterInput struct {
-	_ struct{} `type:"structure"`
-
-	// The identifier of the cluster to be deleted.
-	//
-	// Constraints:
-	//
-	//    * Must contain lowercase characters.
-	//
-	//    * Must contain from 1 to 63 alphanumeric characters or hyphens.
-	//
-	//    * First character must be a letter.
-	//
-	//    * Cannot end with a hyphen or contain two consecutive hyphens.
-	//
-	// ClusterIdentifier is a required field
-	ClusterIdentifier *string `type:"string" required:"true"`
-
-	// The identifier of the final snapshot that is to be created immediately before
-	// deleting the cluster. If this parameter is provided, SkipFinalClusterSnapshot
-	// must be false.
-	//
-	// Constraints:
-	//
-	//    * Must be 1 to 255 alphanumeric characters.
-	//
-	//    * First character must be a letter.
-	//
-	//    * Cannot end with a hyphen or contain two consecutive hyphens.
-	FinalClusterSnapshotIdentifier *string `type:"string"`
-
-	// The number of days that a manual snapshot is retained. If the value is -1,
-	// the manual snapshot is retained indefinitely.
-	//
-	// The value must be either -1 or an integer between 1 and 3,653.
-	//
-	// The default value is -1.
-	FinalClusterSnapshotRetentionPeriod *int64 `type:"integer"`
-
-	// Determines whether a final snapshot of the cluster is created before Amazon
-	// Redshift deletes the cluster. If true, a final cluster snapshot is not created.
-	// If false, a final cluster snapshot is created before the cluster is deleted.
-	//
-	// The FinalClusterSnapshotIdentifier parameter must be specified if SkipFinalClusterSnapshot
-	// is false.
-	//
-	// Default: false
-	SkipFinalClusterSnapshot *bool `type:"boolean"`
-}
-
-// String returns the string representation
-func (s DeleteClusterInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteClusterInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteClusterInput"}
-
-	if s.ClusterIdentifier == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ClusterIdentifier"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteClusterOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Describes a cluster.
-	Cluster *Cluster `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteClusterOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteCluster = "DeleteCluster"
 
@@ -121,7 +40,7 @@ const opDeleteCluster = "DeleteCluster"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DeleteCluster
-func (c *Client) DeleteClusterRequest(input *DeleteClusterInput) DeleteClusterRequest {
+func (c *Client) DeleteClusterRequest(input *types.DeleteClusterInput) DeleteClusterRequest {
 	op := &aws.Operation{
 		Name:       opDeleteCluster,
 		HTTPMethod: "POST",
@@ -129,10 +48,10 @@ func (c *Client) DeleteClusterRequest(input *DeleteClusterInput) DeleteClusterRe
 	}
 
 	if input == nil {
-		input = &DeleteClusterInput{}
+		input = &types.DeleteClusterInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteClusterOutput{})
+	req := c.newRequest(op, input, &types.DeleteClusterOutput{})
 	return DeleteClusterRequest{Request: req, Input: input, Copy: c.DeleteClusterRequest}
 }
 
@@ -140,8 +59,8 @@ func (c *Client) DeleteClusterRequest(input *DeleteClusterInput) DeleteClusterRe
 // DeleteCluster API operation.
 type DeleteClusterRequest struct {
 	*aws.Request
-	Input *DeleteClusterInput
-	Copy  func(*DeleteClusterInput) DeleteClusterRequest
+	Input *types.DeleteClusterInput
+	Copy  func(*types.DeleteClusterInput) DeleteClusterRequest
 }
 
 // Send marshals and sends the DeleteCluster API request.
@@ -153,7 +72,7 @@ func (r DeleteClusterRequest) Send(ctx context.Context) (*DeleteClusterResponse,
 	}
 
 	resp := &DeleteClusterResponse{
-		DeleteClusterOutput: r.Request.Data.(*DeleteClusterOutput),
+		DeleteClusterOutput: r.Request.Data.(*types.DeleteClusterOutput),
 		response:            &aws.Response{Request: r.Request},
 	}
 
@@ -163,7 +82,7 @@ func (r DeleteClusterRequest) Send(ctx context.Context) (*DeleteClusterResponse,
 // DeleteClusterResponse is the response type for the
 // DeleteCluster API operation.
 type DeleteClusterResponse struct {
-	*DeleteClusterOutput
+	*types.DeleteClusterOutput
 
 	response *aws.Response
 }

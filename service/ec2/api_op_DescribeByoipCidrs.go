@@ -6,65 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-type DescribeByoipCidrsInput struct {
-	_ struct{} `type:"structure"`
-
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have
-	// the required permissions, the error response is DryRunOperation. Otherwise,
-	// it is UnauthorizedOperation.
-	DryRun *bool `type:"boolean"`
-
-	// The maximum number of results to return with a single call. To retrieve the
-	// remaining results, make another call with the returned nextToken value.
-	//
-	// MaxResults is a required field
-	MaxResults *int64 `min:"1" type:"integer" required:"true"`
-
-	// The token for the next page of results.
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeByoipCidrsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeByoipCidrsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeByoipCidrsInput"}
-
-	if s.MaxResults == nil {
-		invalidParams.Add(aws.NewErrParamRequired("MaxResults"))
-	}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribeByoipCidrsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Information about your address ranges.
-	ByoipCidrs []ByoipCidr `locationName:"byoipCidrSet" locationNameList:"item" type:"list"`
-
-	// The token to use to retrieve the next page of results. This value is null
-	// when there are no more results to return.
-	NextToken *string `locationName:"nextToken" type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeByoipCidrsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeByoipCidrs = "DescribeByoipCidrs"
 
@@ -84,7 +27,7 @@ const opDescribeByoipCidrs = "DescribeByoipCidrs"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeByoipCidrs
-func (c *Client) DescribeByoipCidrsRequest(input *DescribeByoipCidrsInput) DescribeByoipCidrsRequest {
+func (c *Client) DescribeByoipCidrsRequest(input *types.DescribeByoipCidrsInput) DescribeByoipCidrsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeByoipCidrs,
 		HTTPMethod: "POST",
@@ -98,10 +41,10 @@ func (c *Client) DescribeByoipCidrsRequest(input *DescribeByoipCidrsInput) Descr
 	}
 
 	if input == nil {
-		input = &DescribeByoipCidrsInput{}
+		input = &types.DescribeByoipCidrsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeByoipCidrsOutput{})
+	req := c.newRequest(op, input, &types.DescribeByoipCidrsOutput{})
 	return DescribeByoipCidrsRequest{Request: req, Input: input, Copy: c.DescribeByoipCidrsRequest}
 }
 
@@ -109,8 +52,8 @@ func (c *Client) DescribeByoipCidrsRequest(input *DescribeByoipCidrsInput) Descr
 // DescribeByoipCidrs API operation.
 type DescribeByoipCidrsRequest struct {
 	*aws.Request
-	Input *DescribeByoipCidrsInput
-	Copy  func(*DescribeByoipCidrsInput) DescribeByoipCidrsRequest
+	Input *types.DescribeByoipCidrsInput
+	Copy  func(*types.DescribeByoipCidrsInput) DescribeByoipCidrsRequest
 }
 
 // Send marshals and sends the DescribeByoipCidrs API request.
@@ -122,7 +65,7 @@ func (r DescribeByoipCidrsRequest) Send(ctx context.Context) (*DescribeByoipCidr
 	}
 
 	resp := &DescribeByoipCidrsResponse{
-		DescribeByoipCidrsOutput: r.Request.Data.(*DescribeByoipCidrsOutput),
+		DescribeByoipCidrsOutput: r.Request.Data.(*types.DescribeByoipCidrsOutput),
 		response:                 &aws.Response{Request: r.Request},
 	}
 
@@ -152,7 +95,7 @@ func NewDescribeByoipCidrsPaginator(req DescribeByoipCidrsRequest) DescribeByoip
 	return DescribeByoipCidrsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *DescribeByoipCidrsInput
+				var inCpy *types.DescribeByoipCidrsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -172,14 +115,14 @@ type DescribeByoipCidrsPaginator struct {
 	aws.Pager
 }
 
-func (p *DescribeByoipCidrsPaginator) CurrentPage() *DescribeByoipCidrsOutput {
-	return p.Pager.CurrentPage().(*DescribeByoipCidrsOutput)
+func (p *DescribeByoipCidrsPaginator) CurrentPage() *types.DescribeByoipCidrsOutput {
+	return p.Pager.CurrentPage().(*types.DescribeByoipCidrsOutput)
 }
 
 // DescribeByoipCidrsResponse is the response type for the
 // DescribeByoipCidrs API operation.
 type DescribeByoipCidrsResponse struct {
-	*DescribeByoipCidrsOutput
+	*types.DescribeByoipCidrsOutput
 
 	response *aws.Response
 }

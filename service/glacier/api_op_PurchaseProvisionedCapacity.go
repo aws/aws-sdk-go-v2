@@ -6,77 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/glacier/types"
 )
-
-type PurchaseProvisionedCapacityInput struct {
-	_ struct{} `type:"structure"`
-
-	// The AWS account ID of the account that owns the vault. You can either specify
-	// an AWS account ID or optionally a single '-' (hyphen), in which case Amazon
-	// S3 Glacier uses the AWS account ID associated with the credentials used to
-	// sign the request. If you use an account ID, don't include any hyphens ('-')
-	// in the ID.
-	//
-	// AccountId is a required field
-	AccountId *string `location:"uri" locationName:"accountId" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s PurchaseProvisionedCapacityInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *PurchaseProvisionedCapacityInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "PurchaseProvisionedCapacityInput"}
-
-	if s.AccountId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("AccountId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s PurchaseProvisionedCapacityInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.AccountId != nil {
-		v := *s.AccountId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "accountId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type PurchaseProvisionedCapacityOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID that identifies the provisioned capacity unit.
-	CapacityId *string `location:"header" locationName:"x-amz-capacity-id" type:"string"`
-}
-
-// String returns the string representation
-func (s PurchaseProvisionedCapacityOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s PurchaseProvisionedCapacityOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.CapacityId != nil {
-		v := *s.CapacityId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "x-amz-capacity-id", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opPurchaseProvisionedCapacity = "PurchaseProvisionedCapacity"
 
@@ -91,7 +22,7 @@ const opPurchaseProvisionedCapacity = "PurchaseProvisionedCapacity"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) PurchaseProvisionedCapacityRequest(input *PurchaseProvisionedCapacityInput) PurchaseProvisionedCapacityRequest {
+func (c *Client) PurchaseProvisionedCapacityRequest(input *types.PurchaseProvisionedCapacityInput) PurchaseProvisionedCapacityRequest {
 	op := &aws.Operation{
 		Name:       opPurchaseProvisionedCapacity,
 		HTTPMethod: "POST",
@@ -99,10 +30,10 @@ func (c *Client) PurchaseProvisionedCapacityRequest(input *PurchaseProvisionedCa
 	}
 
 	if input == nil {
-		input = &PurchaseProvisionedCapacityInput{}
+		input = &types.PurchaseProvisionedCapacityInput{}
 	}
 
-	req := c.newRequest(op, input, &PurchaseProvisionedCapacityOutput{})
+	req := c.newRequest(op, input, &types.PurchaseProvisionedCapacityOutput{})
 	return PurchaseProvisionedCapacityRequest{Request: req, Input: input, Copy: c.PurchaseProvisionedCapacityRequest}
 }
 
@@ -110,8 +41,8 @@ func (c *Client) PurchaseProvisionedCapacityRequest(input *PurchaseProvisionedCa
 // PurchaseProvisionedCapacity API operation.
 type PurchaseProvisionedCapacityRequest struct {
 	*aws.Request
-	Input *PurchaseProvisionedCapacityInput
-	Copy  func(*PurchaseProvisionedCapacityInput) PurchaseProvisionedCapacityRequest
+	Input *types.PurchaseProvisionedCapacityInput
+	Copy  func(*types.PurchaseProvisionedCapacityInput) PurchaseProvisionedCapacityRequest
 }
 
 // Send marshals and sends the PurchaseProvisionedCapacity API request.
@@ -123,7 +54,7 @@ func (r PurchaseProvisionedCapacityRequest) Send(ctx context.Context) (*Purchase
 	}
 
 	resp := &PurchaseProvisionedCapacityResponse{
-		PurchaseProvisionedCapacityOutput: r.Request.Data.(*PurchaseProvisionedCapacityOutput),
+		PurchaseProvisionedCapacityOutput: r.Request.Data.(*types.PurchaseProvisionedCapacityOutput),
 		response:                          &aws.Response{Request: r.Request},
 	}
 
@@ -133,7 +64,7 @@ func (r PurchaseProvisionedCapacityRequest) Send(ctx context.Context) (*Purchase
 // PurchaseProvisionedCapacityResponse is the response type for the
 // PurchaseProvisionedCapacity API operation.
 type PurchaseProvisionedCapacityResponse struct {
-	*PurchaseProvisionedCapacityOutput
+	*types.PurchaseProvisionedCapacityOutput
 
 	response *aws.Response
 }

@@ -6,94 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/types"
 )
-
-type CreateProvisioningArtifactInput struct {
-	_ struct{} `type:"structure"`
-
-	// The language code.
-	//
-	//    * en - English (default)
-	//
-	//    * jp - Japanese
-	//
-	//    * zh - Chinese
-	AcceptLanguage *string `type:"string"`
-
-	// A unique identifier that you provide to ensure idempotency. If multiple requests
-	// differ only by the idempotency token, the same response is returned for each
-	// repeated request.
-	//
-	// IdempotencyToken is a required field
-	IdempotencyToken *string `min:"1" type:"string" required:"true" idempotencyToken:"true"`
-
-	// The configuration for the provisioning artifact.
-	//
-	// Parameters is a required field
-	Parameters *ProvisioningArtifactProperties `type:"structure" required:"true"`
-
-	// The product identifier.
-	//
-	// ProductId is a required field
-	ProductId *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s CreateProvisioningArtifactInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateProvisioningArtifactInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateProvisioningArtifactInput"}
-
-	if s.IdempotencyToken == nil {
-		invalidParams.Add(aws.NewErrParamRequired("IdempotencyToken"))
-	}
-	if s.IdempotencyToken != nil && len(*s.IdempotencyToken) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("IdempotencyToken", 1))
-	}
-
-	if s.Parameters == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Parameters"))
-	}
-
-	if s.ProductId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ProductId"))
-	}
-	if s.ProductId != nil && len(*s.ProductId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ProductId", 1))
-	}
-	if s.Parameters != nil {
-		if err := s.Parameters.Validate(); err != nil {
-			invalidParams.AddNested("Parameters", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type CreateProvisioningArtifactOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The URL of the CloudFormation template in Amazon S3, in JSON format.
-	Info map[string]string `min:"1" type:"map"`
-
-	// Information about the provisioning artifact.
-	ProvisioningArtifactDetail *ProvisioningArtifactDetail `type:"structure"`
-
-	// The status of the current request.
-	Status Status `type:"string" enum:"true"`
-}
-
-// String returns the string representation
-func (s CreateProvisioningArtifactOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCreateProvisioningArtifact = "CreateProvisioningArtifact"
 
@@ -114,7 +28,7 @@ const opCreateProvisioningArtifact = "CreateProvisioningArtifact"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/CreateProvisioningArtifact
-func (c *Client) CreateProvisioningArtifactRequest(input *CreateProvisioningArtifactInput) CreateProvisioningArtifactRequest {
+func (c *Client) CreateProvisioningArtifactRequest(input *types.CreateProvisioningArtifactInput) CreateProvisioningArtifactRequest {
 	op := &aws.Operation{
 		Name:       opCreateProvisioningArtifact,
 		HTTPMethod: "POST",
@@ -122,10 +36,10 @@ func (c *Client) CreateProvisioningArtifactRequest(input *CreateProvisioningArti
 	}
 
 	if input == nil {
-		input = &CreateProvisioningArtifactInput{}
+		input = &types.CreateProvisioningArtifactInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateProvisioningArtifactOutput{})
+	req := c.newRequest(op, input, &types.CreateProvisioningArtifactOutput{})
 	return CreateProvisioningArtifactRequest{Request: req, Input: input, Copy: c.CreateProvisioningArtifactRequest}
 }
 
@@ -133,8 +47,8 @@ func (c *Client) CreateProvisioningArtifactRequest(input *CreateProvisioningArti
 // CreateProvisioningArtifact API operation.
 type CreateProvisioningArtifactRequest struct {
 	*aws.Request
-	Input *CreateProvisioningArtifactInput
-	Copy  func(*CreateProvisioningArtifactInput) CreateProvisioningArtifactRequest
+	Input *types.CreateProvisioningArtifactInput
+	Copy  func(*types.CreateProvisioningArtifactInput) CreateProvisioningArtifactRequest
 }
 
 // Send marshals and sends the CreateProvisioningArtifact API request.
@@ -146,7 +60,7 @@ func (r CreateProvisioningArtifactRequest) Send(ctx context.Context) (*CreatePro
 	}
 
 	resp := &CreateProvisioningArtifactResponse{
-		CreateProvisioningArtifactOutput: r.Request.Data.(*CreateProvisioningArtifactOutput),
+		CreateProvisioningArtifactOutput: r.Request.Data.(*types.CreateProvisioningArtifactOutput),
 		response:                         &aws.Response{Request: r.Request},
 	}
 
@@ -156,7 +70,7 @@ func (r CreateProvisioningArtifactRequest) Send(ctx context.Context) (*CreatePro
 // CreateProvisioningArtifactResponse is the response type for the
 // CreateProvisioningArtifact API operation.
 type CreateProvisioningArtifactResponse struct {
-	*CreateProvisioningArtifactOutput
+	*types.CreateProvisioningArtifactOutput
 
 	response *aws.Response
 }

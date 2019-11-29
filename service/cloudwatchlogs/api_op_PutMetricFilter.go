@@ -4,93 +4,12 @@ package cloudwatchlogs
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
+	"github.com/aws/aws-sdk-go-v2/service/cloudwatchlogs/types"
 )
-
-type PutMetricFilterInput struct {
-	_ struct{} `type:"structure"`
-
-	// A name for the metric filter.
-	//
-	// FilterName is a required field
-	FilterName *string `locationName:"filterName" min:"1" type:"string" required:"true"`
-
-	// A filter pattern for extracting metric data out of ingested log events.
-	//
-	// FilterPattern is a required field
-	FilterPattern *string `locationName:"filterPattern" type:"string" required:"true"`
-
-	// The name of the log group.
-	//
-	// LogGroupName is a required field
-	LogGroupName *string `locationName:"logGroupName" min:"1" type:"string" required:"true"`
-
-	// A collection of information that defines how metric data gets emitted.
-	//
-	// MetricTransformations is a required field
-	MetricTransformations []MetricTransformation `locationName:"metricTransformations" min:"1" type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s PutMetricFilterInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *PutMetricFilterInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "PutMetricFilterInput"}
-
-	if s.FilterName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("FilterName"))
-	}
-	if s.FilterName != nil && len(*s.FilterName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("FilterName", 1))
-	}
-
-	if s.FilterPattern == nil {
-		invalidParams.Add(aws.NewErrParamRequired("FilterPattern"))
-	}
-
-	if s.LogGroupName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("LogGroupName"))
-	}
-	if s.LogGroupName != nil && len(*s.LogGroupName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("LogGroupName", 1))
-	}
-
-	if s.MetricTransformations == nil {
-		invalidParams.Add(aws.NewErrParamRequired("MetricTransformations"))
-	}
-	if s.MetricTransformations != nil && len(s.MetricTransformations) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("MetricTransformations", 1))
-	}
-	if s.MetricTransformations != nil {
-		for i, v := range s.MetricTransformations {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "MetricTransformations", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type PutMetricFilterOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s PutMetricFilterOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opPutMetricFilter = "PutMetricFilter"
 
@@ -112,7 +31,7 @@ const opPutMetricFilter = "PutMetricFilter"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/PutMetricFilter
-func (c *Client) PutMetricFilterRequest(input *PutMetricFilterInput) PutMetricFilterRequest {
+func (c *Client) PutMetricFilterRequest(input *types.PutMetricFilterInput) PutMetricFilterRequest {
 	op := &aws.Operation{
 		Name:       opPutMetricFilter,
 		HTTPMethod: "POST",
@@ -120,10 +39,10 @@ func (c *Client) PutMetricFilterRequest(input *PutMetricFilterInput) PutMetricFi
 	}
 
 	if input == nil {
-		input = &PutMetricFilterInput{}
+		input = &types.PutMetricFilterInput{}
 	}
 
-	req := c.newRequest(op, input, &PutMetricFilterOutput{})
+	req := c.newRequest(op, input, &types.PutMetricFilterOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return PutMetricFilterRequest{Request: req, Input: input, Copy: c.PutMetricFilterRequest}
@@ -133,8 +52,8 @@ func (c *Client) PutMetricFilterRequest(input *PutMetricFilterInput) PutMetricFi
 // PutMetricFilter API operation.
 type PutMetricFilterRequest struct {
 	*aws.Request
-	Input *PutMetricFilterInput
-	Copy  func(*PutMetricFilterInput) PutMetricFilterRequest
+	Input *types.PutMetricFilterInput
+	Copy  func(*types.PutMetricFilterInput) PutMetricFilterRequest
 }
 
 // Send marshals and sends the PutMetricFilter API request.
@@ -146,7 +65,7 @@ func (r PutMetricFilterRequest) Send(ctx context.Context) (*PutMetricFilterRespo
 	}
 
 	resp := &PutMetricFilterResponse{
-		PutMetricFilterOutput: r.Request.Data.(*PutMetricFilterOutput),
+		PutMetricFilterOutput: r.Request.Data.(*types.PutMetricFilterOutput),
 		response:              &aws.Response{Request: r.Request},
 	}
 
@@ -156,7 +75,7 @@ func (r PutMetricFilterRequest) Send(ctx context.Context) (*PutMetricFilterRespo
 // PutMetricFilterResponse is the response type for the
 // PutMetricFilter API operation.
 type PutMetricFilterResponse struct {
-	*PutMetricFilterOutput
+	*types.PutMetricFilterOutput
 
 	response *aws.Response
 }

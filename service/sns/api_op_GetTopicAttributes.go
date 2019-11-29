@@ -6,73 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/sns/types"
 )
-
-// Input for GetTopicAttributes action.
-type GetTopicAttributesInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ARN of the topic whose properties you want to get.
-	//
-	// TopicArn is a required field
-	TopicArn *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetTopicAttributesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetTopicAttributesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetTopicAttributesInput"}
-
-	if s.TopicArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("TopicArn"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Response for GetTopicAttributes action.
-type GetTopicAttributesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A map of the topic's attributes. Attributes in this map include the following:
-	//
-	//    * TopicArn – the topic's ARN
-	//
-	//    * Owner – the AWS account ID of the topic's owner
-	//
-	//    * Policy – the JSON serialization of the topic's access control policy
-	//
-	//    * DisplayName – the human-readable name used in the "From" field for
-	//    notifications to email and email-json endpoints
-	//
-	//    * SubscriptionsPending – the number of subscriptions pending confirmation
-	//    on this topic
-	//
-	//    * SubscriptionsConfirmed – the number of confirmed subscriptions on
-	//    this topic
-	//
-	//    * SubscriptionsDeleted – the number of deleted subscriptions on this
-	//    topic
-	//
-	//    * DeliveryPolicy – the JSON serialization of the topic's delivery policy
-	//
-	//    * EffectiveDeliveryPolicy – the JSON serialization of the effective
-	//    delivery policy that takes into account system defaults
-	Attributes map[string]string `type:"map"`
-}
-
-// String returns the string representation
-func (s GetTopicAttributesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetTopicAttributes = "GetTopicAttributes"
 
@@ -90,7 +25,7 @@ const opGetTopicAttributes = "GetTopicAttributes"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/GetTopicAttributes
-func (c *Client) GetTopicAttributesRequest(input *GetTopicAttributesInput) GetTopicAttributesRequest {
+func (c *Client) GetTopicAttributesRequest(input *types.GetTopicAttributesInput) GetTopicAttributesRequest {
 	op := &aws.Operation{
 		Name:       opGetTopicAttributes,
 		HTTPMethod: "POST",
@@ -98,10 +33,10 @@ func (c *Client) GetTopicAttributesRequest(input *GetTopicAttributesInput) GetTo
 	}
 
 	if input == nil {
-		input = &GetTopicAttributesInput{}
+		input = &types.GetTopicAttributesInput{}
 	}
 
-	req := c.newRequest(op, input, &GetTopicAttributesOutput{})
+	req := c.newRequest(op, input, &types.GetTopicAttributesOutput{})
 	return GetTopicAttributesRequest{Request: req, Input: input, Copy: c.GetTopicAttributesRequest}
 }
 
@@ -109,8 +44,8 @@ func (c *Client) GetTopicAttributesRequest(input *GetTopicAttributesInput) GetTo
 // GetTopicAttributes API operation.
 type GetTopicAttributesRequest struct {
 	*aws.Request
-	Input *GetTopicAttributesInput
-	Copy  func(*GetTopicAttributesInput) GetTopicAttributesRequest
+	Input *types.GetTopicAttributesInput
+	Copy  func(*types.GetTopicAttributesInput) GetTopicAttributesRequest
 }
 
 // Send marshals and sends the GetTopicAttributes API request.
@@ -122,7 +57,7 @@ func (r GetTopicAttributesRequest) Send(ctx context.Context) (*GetTopicAttribute
 	}
 
 	resp := &GetTopicAttributesResponse{
-		GetTopicAttributesOutput: r.Request.Data.(*GetTopicAttributesOutput),
+		GetTopicAttributesOutput: r.Request.Data.(*types.GetTopicAttributesOutput),
 		response:                 &aws.Response{Request: r.Request},
 	}
 
@@ -132,7 +67,7 @@ func (r GetTopicAttributesRequest) Send(ctx context.Context) (*GetTopicAttribute
 // GetTopicAttributesResponse is the response type for the
 // GetTopicAttributes API operation.
 type GetTopicAttributesResponse struct {
-	*GetTopicAttributesOutput
+	*types.GetTopicAttributesOutput
 
 	response *aws.Response
 }

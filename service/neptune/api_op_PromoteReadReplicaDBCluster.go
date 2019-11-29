@@ -6,50 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/neptune/types"
 )
-
-type PromoteReadReplicaDBClusterInput struct {
-	_ struct{} `type:"structure"`
-
-	// Not supported.
-	//
-	// DBClusterIdentifier is a required field
-	DBClusterIdentifier *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s PromoteReadReplicaDBClusterInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *PromoteReadReplicaDBClusterInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "PromoteReadReplicaDBClusterInput"}
-
-	if s.DBClusterIdentifier == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DBClusterIdentifier"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type PromoteReadReplicaDBClusterOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Contains the details of an Amazon Neptune DB cluster.
-	//
-	// This data type is used as a response element in the DescribeDBClusters action.
-	DBCluster *DBCluster `type:"structure"`
-}
-
-// String returns the string representation
-func (s PromoteReadReplicaDBClusterOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opPromoteReadReplicaDBCluster = "PromoteReadReplicaDBCluster"
 
@@ -66,7 +24,7 @@ const opPromoteReadReplicaDBCluster = "PromoteReadReplicaDBCluster"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/PromoteReadReplicaDBCluster
-func (c *Client) PromoteReadReplicaDBClusterRequest(input *PromoteReadReplicaDBClusterInput) PromoteReadReplicaDBClusterRequest {
+func (c *Client) PromoteReadReplicaDBClusterRequest(input *types.PromoteReadReplicaDBClusterInput) PromoteReadReplicaDBClusterRequest {
 	op := &aws.Operation{
 		Name:       opPromoteReadReplicaDBCluster,
 		HTTPMethod: "POST",
@@ -74,10 +32,10 @@ func (c *Client) PromoteReadReplicaDBClusterRequest(input *PromoteReadReplicaDBC
 	}
 
 	if input == nil {
-		input = &PromoteReadReplicaDBClusterInput{}
+		input = &types.PromoteReadReplicaDBClusterInput{}
 	}
 
-	req := c.newRequest(op, input, &PromoteReadReplicaDBClusterOutput{})
+	req := c.newRequest(op, input, &types.PromoteReadReplicaDBClusterOutput{})
 	return PromoteReadReplicaDBClusterRequest{Request: req, Input: input, Copy: c.PromoteReadReplicaDBClusterRequest}
 }
 
@@ -85,8 +43,8 @@ func (c *Client) PromoteReadReplicaDBClusterRequest(input *PromoteReadReplicaDBC
 // PromoteReadReplicaDBCluster API operation.
 type PromoteReadReplicaDBClusterRequest struct {
 	*aws.Request
-	Input *PromoteReadReplicaDBClusterInput
-	Copy  func(*PromoteReadReplicaDBClusterInput) PromoteReadReplicaDBClusterRequest
+	Input *types.PromoteReadReplicaDBClusterInput
+	Copy  func(*types.PromoteReadReplicaDBClusterInput) PromoteReadReplicaDBClusterRequest
 }
 
 // Send marshals and sends the PromoteReadReplicaDBCluster API request.
@@ -98,7 +56,7 @@ func (r PromoteReadReplicaDBClusterRequest) Send(ctx context.Context) (*PromoteR
 	}
 
 	resp := &PromoteReadReplicaDBClusterResponse{
-		PromoteReadReplicaDBClusterOutput: r.Request.Data.(*PromoteReadReplicaDBClusterOutput),
+		PromoteReadReplicaDBClusterOutput: r.Request.Data.(*types.PromoteReadReplicaDBClusterOutput),
 		response:                          &aws.Response{Request: r.Request},
 	}
 
@@ -108,7 +66,7 @@ func (r PromoteReadReplicaDBClusterRequest) Send(ctx context.Context) (*PromoteR
 // PromoteReadReplicaDBClusterResponse is the response type for the
 // PromoteReadReplicaDBCluster API operation.
 type PromoteReadReplicaDBClusterResponse struct {
-	*PromoteReadReplicaDBClusterOutput
+	*types.PromoteReadReplicaDBClusterOutput
 
 	response *aws.Response
 }

@@ -6,107 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/chime/types"
 )
-
-type PutEventsConfigurationInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Chime account ID.
-	//
-	// AccountId is a required field
-	AccountId *string `location:"uri" locationName:"accountId" type:"string" required:"true"`
-
-	// The bot ID.
-	//
-	// BotId is a required field
-	BotId *string `location:"uri" locationName:"botId" type:"string" required:"true"`
-
-	// Lambda function ARN that allows the bot to receive outgoing events.
-	LambdaFunctionArn *string `type:"string" sensitive:"true"`
-
-	// HTTPS endpoint that allows the bot to receive outgoing events.
-	OutboundEventsHTTPSEndpoint *string `type:"string" sensitive:"true"`
-}
-
-// String returns the string representation
-func (s PutEventsConfigurationInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *PutEventsConfigurationInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "PutEventsConfigurationInput"}
-
-	if s.AccountId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("AccountId"))
-	}
-
-	if s.BotId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("BotId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s PutEventsConfigurationInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.LambdaFunctionArn != nil {
-		v := *s.LambdaFunctionArn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "LambdaFunctionArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.OutboundEventsHTTPSEndpoint != nil {
-		v := *s.OutboundEventsHTTPSEndpoint
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "OutboundEventsHTTPSEndpoint", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.AccountId != nil {
-		v := *s.AccountId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "accountId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.BotId != nil {
-		v := *s.BotId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "botId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type PutEventsConfigurationOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The configuration that allows a bot to receive outgoing events. Can be either
-	// an HTTPS endpoint or a Lambda function ARN.
-	EventsConfiguration *EventsConfiguration `type:"structure"`
-}
-
-// String returns the string representation
-func (s PutEventsConfigurationOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s PutEventsConfigurationOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.EventsConfiguration != nil {
-		v := s.EventsConfiguration
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "EventsConfiguration", v, metadata)
-	}
-	return nil
-}
 
 const opPutEventsConfiguration = "PutEventsConfiguration"
 
@@ -125,7 +26,7 @@ const opPutEventsConfiguration = "PutEventsConfiguration"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/PutEventsConfiguration
-func (c *Client) PutEventsConfigurationRequest(input *PutEventsConfigurationInput) PutEventsConfigurationRequest {
+func (c *Client) PutEventsConfigurationRequest(input *types.PutEventsConfigurationInput) PutEventsConfigurationRequest {
 	op := &aws.Operation{
 		Name:       opPutEventsConfiguration,
 		HTTPMethod: "PUT",
@@ -133,10 +34,10 @@ func (c *Client) PutEventsConfigurationRequest(input *PutEventsConfigurationInpu
 	}
 
 	if input == nil {
-		input = &PutEventsConfigurationInput{}
+		input = &types.PutEventsConfigurationInput{}
 	}
 
-	req := c.newRequest(op, input, &PutEventsConfigurationOutput{})
+	req := c.newRequest(op, input, &types.PutEventsConfigurationOutput{})
 	return PutEventsConfigurationRequest{Request: req, Input: input, Copy: c.PutEventsConfigurationRequest}
 }
 
@@ -144,8 +45,8 @@ func (c *Client) PutEventsConfigurationRequest(input *PutEventsConfigurationInpu
 // PutEventsConfiguration API operation.
 type PutEventsConfigurationRequest struct {
 	*aws.Request
-	Input *PutEventsConfigurationInput
-	Copy  func(*PutEventsConfigurationInput) PutEventsConfigurationRequest
+	Input *types.PutEventsConfigurationInput
+	Copy  func(*types.PutEventsConfigurationInput) PutEventsConfigurationRequest
 }
 
 // Send marshals and sends the PutEventsConfiguration API request.
@@ -157,7 +58,7 @@ func (r PutEventsConfigurationRequest) Send(ctx context.Context) (*PutEventsConf
 	}
 
 	resp := &PutEventsConfigurationResponse{
-		PutEventsConfigurationOutput: r.Request.Data.(*PutEventsConfigurationOutput),
+		PutEventsConfigurationOutput: r.Request.Data.(*types.PutEventsConfigurationOutput),
 		response:                     &aws.Response{Request: r.Request},
 	}
 
@@ -167,7 +68,7 @@ func (r PutEventsConfigurationRequest) Send(ctx context.Context) (*PutEventsConf
 // PutEventsConfigurationResponse is the response type for the
 // PutEventsConfiguration API operation.
 type PutEventsConfigurationResponse struct {
-	*PutEventsConfigurationOutput
+	*types.PutEventsConfigurationOutput
 
 	response *aws.Response
 }

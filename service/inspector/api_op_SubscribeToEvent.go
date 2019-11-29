@@ -6,71 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
+	"github.com/aws/aws-sdk-go-v2/service/inspector/types"
 )
-
-type SubscribeToEventInput struct {
-	_ struct{} `type:"structure"`
-
-	// The event for which you want to receive SNS notifications.
-	//
-	// Event is a required field
-	Event InspectorEvent `locationName:"event" type:"string" required:"true" enum:"true"`
-
-	// The ARN of the assessment template that is used during the event for which
-	// you want to receive SNS notifications.
-	//
-	// ResourceArn is a required field
-	ResourceArn *string `locationName:"resourceArn" min:"1" type:"string" required:"true"`
-
-	// The ARN of the SNS topic to which the SNS notifications are sent.
-	//
-	// TopicArn is a required field
-	TopicArn *string `locationName:"topicArn" min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s SubscribeToEventInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *SubscribeToEventInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "SubscribeToEventInput"}
-	if len(s.Event) == 0 {
-		invalidParams.Add(aws.NewErrParamRequired("Event"))
-	}
-
-	if s.ResourceArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ResourceArn"))
-	}
-	if s.ResourceArn != nil && len(*s.ResourceArn) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ResourceArn", 1))
-	}
-
-	if s.TopicArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("TopicArn"))
-	}
-	if s.TopicArn != nil && len(*s.TopicArn) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("TopicArn", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type SubscribeToEventOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s SubscribeToEventOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opSubscribeToEvent = "SubscribeToEvent"
 
@@ -88,7 +27,7 @@ const opSubscribeToEvent = "SubscribeToEvent"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/SubscribeToEvent
-func (c *Client) SubscribeToEventRequest(input *SubscribeToEventInput) SubscribeToEventRequest {
+func (c *Client) SubscribeToEventRequest(input *types.SubscribeToEventInput) SubscribeToEventRequest {
 	op := &aws.Operation{
 		Name:       opSubscribeToEvent,
 		HTTPMethod: "POST",
@@ -96,10 +35,10 @@ func (c *Client) SubscribeToEventRequest(input *SubscribeToEventInput) Subscribe
 	}
 
 	if input == nil {
-		input = &SubscribeToEventInput{}
+		input = &types.SubscribeToEventInput{}
 	}
 
-	req := c.newRequest(op, input, &SubscribeToEventOutput{})
+	req := c.newRequest(op, input, &types.SubscribeToEventOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return SubscribeToEventRequest{Request: req, Input: input, Copy: c.SubscribeToEventRequest}
@@ -109,8 +48,8 @@ func (c *Client) SubscribeToEventRequest(input *SubscribeToEventInput) Subscribe
 // SubscribeToEvent API operation.
 type SubscribeToEventRequest struct {
 	*aws.Request
-	Input *SubscribeToEventInput
-	Copy  func(*SubscribeToEventInput) SubscribeToEventRequest
+	Input *types.SubscribeToEventInput
+	Copy  func(*types.SubscribeToEventInput) SubscribeToEventRequest
 }
 
 // Send marshals and sends the SubscribeToEvent API request.
@@ -122,7 +61,7 @@ func (r SubscribeToEventRequest) Send(ctx context.Context) (*SubscribeToEventRes
 	}
 
 	resp := &SubscribeToEventResponse{
-		SubscribeToEventOutput: r.Request.Data.(*SubscribeToEventOutput),
+		SubscribeToEventOutput: r.Request.Data.(*types.SubscribeToEventOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -132,7 +71,7 @@ func (r SubscribeToEventRequest) Send(ctx context.Context) (*SubscribeToEventRes
 // SubscribeToEventResponse is the response type for the
 // SubscribeToEvent API operation.
 type SubscribeToEventResponse struct {
-	*SubscribeToEventOutput
+	*types.SubscribeToEventOutput
 
 	response *aws.Response
 }

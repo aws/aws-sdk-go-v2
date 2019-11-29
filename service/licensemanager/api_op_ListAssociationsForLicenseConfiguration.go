@@ -6,60 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/licensemanager/types"
 )
-
-type ListAssociationsForLicenseConfigurationInput struct {
-	_ struct{} `type:"structure"`
-
-	// ARN of a LicenseConfiguration object.
-	//
-	// LicenseConfigurationArn is a required field
-	LicenseConfigurationArn *string `type:"string" required:"true"`
-
-	// Maximum number of results to return in a single call. To retrieve the remaining
-	// results, make another call with the returned NextToken value.
-	MaxResults *int64 `type:"integer"`
-
-	// Token for the next set of results.
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s ListAssociationsForLicenseConfigurationInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListAssociationsForLicenseConfigurationInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListAssociationsForLicenseConfigurationInput"}
-
-	if s.LicenseConfigurationArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("LicenseConfigurationArn"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ListAssociationsForLicenseConfigurationOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Lists association objects for the license configuration, each containing
-	// the association time, number of consumed licenses, resource ARN, resource
-	// ID, account ID that owns the resource, resource size, and resource type.
-	LicenseConfigurationAssociations []LicenseConfigurationAssociation `type:"list"`
-
-	// Token for the next set of results.
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s ListAssociationsForLicenseConfigurationOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListAssociationsForLicenseConfiguration = "ListAssociationsForLicenseConfiguration"
 
@@ -80,7 +28,7 @@ const opListAssociationsForLicenseConfiguration = "ListAssociationsForLicenseCon
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/license-manager-2018-08-01/ListAssociationsForLicenseConfiguration
-func (c *Client) ListAssociationsForLicenseConfigurationRequest(input *ListAssociationsForLicenseConfigurationInput) ListAssociationsForLicenseConfigurationRequest {
+func (c *Client) ListAssociationsForLicenseConfigurationRequest(input *types.ListAssociationsForLicenseConfigurationInput) ListAssociationsForLicenseConfigurationRequest {
 	op := &aws.Operation{
 		Name:       opListAssociationsForLicenseConfiguration,
 		HTTPMethod: "POST",
@@ -88,10 +36,10 @@ func (c *Client) ListAssociationsForLicenseConfigurationRequest(input *ListAssoc
 	}
 
 	if input == nil {
-		input = &ListAssociationsForLicenseConfigurationInput{}
+		input = &types.ListAssociationsForLicenseConfigurationInput{}
 	}
 
-	req := c.newRequest(op, input, &ListAssociationsForLicenseConfigurationOutput{})
+	req := c.newRequest(op, input, &types.ListAssociationsForLicenseConfigurationOutput{})
 	return ListAssociationsForLicenseConfigurationRequest{Request: req, Input: input, Copy: c.ListAssociationsForLicenseConfigurationRequest}
 }
 
@@ -99,8 +47,8 @@ func (c *Client) ListAssociationsForLicenseConfigurationRequest(input *ListAssoc
 // ListAssociationsForLicenseConfiguration API operation.
 type ListAssociationsForLicenseConfigurationRequest struct {
 	*aws.Request
-	Input *ListAssociationsForLicenseConfigurationInput
-	Copy  func(*ListAssociationsForLicenseConfigurationInput) ListAssociationsForLicenseConfigurationRequest
+	Input *types.ListAssociationsForLicenseConfigurationInput
+	Copy  func(*types.ListAssociationsForLicenseConfigurationInput) ListAssociationsForLicenseConfigurationRequest
 }
 
 // Send marshals and sends the ListAssociationsForLicenseConfiguration API request.
@@ -112,7 +60,7 @@ func (r ListAssociationsForLicenseConfigurationRequest) Send(ctx context.Context
 	}
 
 	resp := &ListAssociationsForLicenseConfigurationResponse{
-		ListAssociationsForLicenseConfigurationOutput: r.Request.Data.(*ListAssociationsForLicenseConfigurationOutput),
+		ListAssociationsForLicenseConfigurationOutput: r.Request.Data.(*types.ListAssociationsForLicenseConfigurationOutput),
 		response: &aws.Response{Request: r.Request},
 	}
 
@@ -122,7 +70,7 @@ func (r ListAssociationsForLicenseConfigurationRequest) Send(ctx context.Context
 // ListAssociationsForLicenseConfigurationResponse is the response type for the
 // ListAssociationsForLicenseConfiguration API operation.
 type ListAssociationsForLicenseConfigurationResponse struct {
-	*ListAssociationsForLicenseConfigurationOutput
+	*types.ListAssociationsForLicenseConfigurationOutput
 
 	response *aws.Response
 }

@@ -6,76 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/iot/types"
 )
-
-type DescribeRoleAliasInput struct {
-	_ struct{} `type:"structure"`
-
-	// The role alias to describe.
-	//
-	// RoleAlias is a required field
-	RoleAlias *string `location:"uri" locationName:"roleAlias" min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeRoleAliasInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeRoleAliasInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeRoleAliasInput"}
-
-	if s.RoleAlias == nil {
-		invalidParams.Add(aws.NewErrParamRequired("RoleAlias"))
-	}
-	if s.RoleAlias != nil && len(*s.RoleAlias) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("RoleAlias", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DescribeRoleAliasInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.RoleAlias != nil {
-		v := *s.RoleAlias
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "roleAlias", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type DescribeRoleAliasOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The role alias description.
-	RoleAliasDescription *RoleAliasDescription `locationName:"roleAliasDescription" type:"structure"`
-}
-
-// String returns the string representation
-func (s DescribeRoleAliasOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DescribeRoleAliasOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.RoleAliasDescription != nil {
-		v := s.RoleAliasDescription
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "roleAliasDescription", v, metadata)
-	}
-	return nil
-}
 
 const opDescribeRoleAlias = "DescribeRoleAlias"
 
@@ -90,7 +22,7 @@ const opDescribeRoleAlias = "DescribeRoleAlias"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) DescribeRoleAliasRequest(input *DescribeRoleAliasInput) DescribeRoleAliasRequest {
+func (c *Client) DescribeRoleAliasRequest(input *types.DescribeRoleAliasInput) DescribeRoleAliasRequest {
 	op := &aws.Operation{
 		Name:       opDescribeRoleAlias,
 		HTTPMethod: "GET",
@@ -98,10 +30,10 @@ func (c *Client) DescribeRoleAliasRequest(input *DescribeRoleAliasInput) Describ
 	}
 
 	if input == nil {
-		input = &DescribeRoleAliasInput{}
+		input = &types.DescribeRoleAliasInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeRoleAliasOutput{})
+	req := c.newRequest(op, input, &types.DescribeRoleAliasOutput{})
 	return DescribeRoleAliasRequest{Request: req, Input: input, Copy: c.DescribeRoleAliasRequest}
 }
 
@@ -109,8 +41,8 @@ func (c *Client) DescribeRoleAliasRequest(input *DescribeRoleAliasInput) Describ
 // DescribeRoleAlias API operation.
 type DescribeRoleAliasRequest struct {
 	*aws.Request
-	Input *DescribeRoleAliasInput
-	Copy  func(*DescribeRoleAliasInput) DescribeRoleAliasRequest
+	Input *types.DescribeRoleAliasInput
+	Copy  func(*types.DescribeRoleAliasInput) DescribeRoleAliasRequest
 }
 
 // Send marshals and sends the DescribeRoleAlias API request.
@@ -122,7 +54,7 @@ func (r DescribeRoleAliasRequest) Send(ctx context.Context) (*DescribeRoleAliasR
 	}
 
 	resp := &DescribeRoleAliasResponse{
-		DescribeRoleAliasOutput: r.Request.Data.(*DescribeRoleAliasOutput),
+		DescribeRoleAliasOutput: r.Request.Data.(*types.DescribeRoleAliasOutput),
 		response:                &aws.Response{Request: r.Request},
 	}
 
@@ -132,7 +64,7 @@ func (r DescribeRoleAliasRequest) Send(ctx context.Context) (*DescribeRoleAliasR
 // DescribeRoleAliasResponse is the response type for the
 // DescribeRoleAlias API operation.
 type DescribeRoleAliasResponse struct {
-	*DescribeRoleAliasOutput
+	*types.DescribeRoleAliasOutput
 
 	response *aws.Response
 }

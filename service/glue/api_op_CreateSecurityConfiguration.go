@@ -4,66 +4,10 @@ package glue
 
 import (
 	"context"
-	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/glue/types"
 )
-
-type CreateSecurityConfigurationInput struct {
-	_ struct{} `type:"structure"`
-
-	// The encryption configuration for the new security configuration.
-	//
-	// EncryptionConfiguration is a required field
-	EncryptionConfiguration *EncryptionConfiguration `type:"structure" required:"true"`
-
-	// The name for the new security configuration.
-	//
-	// Name is a required field
-	Name *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s CreateSecurityConfigurationInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateSecurityConfigurationInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateSecurityConfigurationInput"}
-
-	if s.EncryptionConfiguration == nil {
-		invalidParams.Add(aws.NewErrParamRequired("EncryptionConfiguration"))
-	}
-
-	if s.Name == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Name"))
-	}
-	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type CreateSecurityConfigurationOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The time at which the new security configuration was created.
-	CreatedTimestamp *time.Time `type:"timestamp"`
-
-	// The name assigned to the new security configuration.
-	Name *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s CreateSecurityConfigurationOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCreateSecurityConfiguration = "CreateSecurityConfiguration"
 
@@ -84,7 +28,7 @@ const opCreateSecurityConfiguration = "CreateSecurityConfiguration"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CreateSecurityConfiguration
-func (c *Client) CreateSecurityConfigurationRequest(input *CreateSecurityConfigurationInput) CreateSecurityConfigurationRequest {
+func (c *Client) CreateSecurityConfigurationRequest(input *types.CreateSecurityConfigurationInput) CreateSecurityConfigurationRequest {
 	op := &aws.Operation{
 		Name:       opCreateSecurityConfiguration,
 		HTTPMethod: "POST",
@@ -92,10 +36,10 @@ func (c *Client) CreateSecurityConfigurationRequest(input *CreateSecurityConfigu
 	}
 
 	if input == nil {
-		input = &CreateSecurityConfigurationInput{}
+		input = &types.CreateSecurityConfigurationInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateSecurityConfigurationOutput{})
+	req := c.newRequest(op, input, &types.CreateSecurityConfigurationOutput{})
 	return CreateSecurityConfigurationRequest{Request: req, Input: input, Copy: c.CreateSecurityConfigurationRequest}
 }
 
@@ -103,8 +47,8 @@ func (c *Client) CreateSecurityConfigurationRequest(input *CreateSecurityConfigu
 // CreateSecurityConfiguration API operation.
 type CreateSecurityConfigurationRequest struct {
 	*aws.Request
-	Input *CreateSecurityConfigurationInput
-	Copy  func(*CreateSecurityConfigurationInput) CreateSecurityConfigurationRequest
+	Input *types.CreateSecurityConfigurationInput
+	Copy  func(*types.CreateSecurityConfigurationInput) CreateSecurityConfigurationRequest
 }
 
 // Send marshals and sends the CreateSecurityConfiguration API request.
@@ -116,7 +60,7 @@ func (r CreateSecurityConfigurationRequest) Send(ctx context.Context) (*CreateSe
 	}
 
 	resp := &CreateSecurityConfigurationResponse{
-		CreateSecurityConfigurationOutput: r.Request.Data.(*CreateSecurityConfigurationOutput),
+		CreateSecurityConfigurationOutput: r.Request.Data.(*types.CreateSecurityConfigurationOutput),
 		response:                          &aws.Response{Request: r.Request},
 	}
 
@@ -126,7 +70,7 @@ func (r CreateSecurityConfigurationRequest) Send(ctx context.Context) (*CreateSe
 // CreateSecurityConfigurationResponse is the response type for the
 // CreateSecurityConfiguration API operation.
 type CreateSecurityConfigurationResponse struct {
-	*CreateSecurityConfigurationOutput
+	*types.CreateSecurityConfigurationOutput
 
 	response *aws.Response
 }

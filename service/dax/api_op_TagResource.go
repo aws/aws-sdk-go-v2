@@ -6,57 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/dax/types"
 )
-
-type TagResourceInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the DAX resource to which tags should be added.
-	//
-	// ResourceName is a required field
-	ResourceName *string `type:"string" required:"true"`
-
-	// The tags to be assigned to the DAX resource.
-	//
-	// Tags is a required field
-	Tags []Tag `type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s TagResourceInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *TagResourceInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "TagResourceInput"}
-
-	if s.ResourceName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ResourceName"))
-	}
-
-	if s.Tags == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Tags"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type TagResourceOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The list of tags that are associated with the DAX resource.
-	Tags []Tag `type:"list"`
-}
-
-// String returns the string representation
-func (s TagResourceOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opTagResource = "TagResource"
 
@@ -74,7 +25,7 @@ const opTagResource = "TagResource"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dax-2017-04-19/TagResource
-func (c *Client) TagResourceRequest(input *TagResourceInput) TagResourceRequest {
+func (c *Client) TagResourceRequest(input *types.TagResourceInput) TagResourceRequest {
 	op := &aws.Operation{
 		Name:       opTagResource,
 		HTTPMethod: "POST",
@@ -82,10 +33,10 @@ func (c *Client) TagResourceRequest(input *TagResourceInput) TagResourceRequest 
 	}
 
 	if input == nil {
-		input = &TagResourceInput{}
+		input = &types.TagResourceInput{}
 	}
 
-	req := c.newRequest(op, input, &TagResourceOutput{})
+	req := c.newRequest(op, input, &types.TagResourceOutput{})
 	return TagResourceRequest{Request: req, Input: input, Copy: c.TagResourceRequest}
 }
 
@@ -93,8 +44,8 @@ func (c *Client) TagResourceRequest(input *TagResourceInput) TagResourceRequest 
 // TagResource API operation.
 type TagResourceRequest struct {
 	*aws.Request
-	Input *TagResourceInput
-	Copy  func(*TagResourceInput) TagResourceRequest
+	Input *types.TagResourceInput
+	Copy  func(*types.TagResourceInput) TagResourceRequest
 }
 
 // Send marshals and sends the TagResource API request.
@@ -106,7 +57,7 @@ func (r TagResourceRequest) Send(ctx context.Context) (*TagResourceResponse, err
 	}
 
 	resp := &TagResourceResponse{
-		TagResourceOutput: r.Request.Data.(*TagResourceOutput),
+		TagResourceOutput: r.Request.Data.(*types.TagResourceOutput),
 		response:          &aws.Response{Request: r.Request},
 	}
 
@@ -116,7 +67,7 @@ func (r TagResourceRequest) Send(ctx context.Context) (*TagResourceResponse, err
 // TagResourceResponse is the response type for the
 // TagResource API operation.
 type TagResourceResponse struct {
-	*TagResourceOutput
+	*types.TagResourceOutput
 
 	response *aws.Response
 }

@@ -6,66 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/codestar/types"
 )
-
-type ListTagsForProjectInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the project to get tags for.
-	//
-	// Id is a required field
-	Id *string `locationName:"id" min:"2" type:"string" required:"true"`
-
-	// Reserved for future use.
-	MaxResults *int64 `locationName:"maxResults" min:"1" type:"integer"`
-
-	// Reserved for future use.
-	NextToken *string `locationName:"nextToken" min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s ListTagsForProjectInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListTagsForProjectInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListTagsForProjectInput"}
-
-	if s.Id == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Id"))
-	}
-	if s.Id != nil && len(*s.Id) < 2 {
-		invalidParams.Add(aws.NewErrParamMinLen("Id", 2))
-	}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-	if s.NextToken != nil && len(*s.NextToken) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ListTagsForProjectOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Reserved for future use.
-	NextToken *string `locationName:"nextToken" min:"1" type:"string"`
-
-	// The tags for the project.
-	Tags map[string]string `locationName:"tags" type:"map"`
-}
-
-// String returns the string representation
-func (s ListTagsForProjectOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListTagsForProject = "ListTagsForProject"
 
@@ -82,7 +24,7 @@ const opListTagsForProject = "ListTagsForProject"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codestar-2017-04-19/ListTagsForProject
-func (c *Client) ListTagsForProjectRequest(input *ListTagsForProjectInput) ListTagsForProjectRequest {
+func (c *Client) ListTagsForProjectRequest(input *types.ListTagsForProjectInput) ListTagsForProjectRequest {
 	op := &aws.Operation{
 		Name:       opListTagsForProject,
 		HTTPMethod: "POST",
@@ -90,10 +32,10 @@ func (c *Client) ListTagsForProjectRequest(input *ListTagsForProjectInput) ListT
 	}
 
 	if input == nil {
-		input = &ListTagsForProjectInput{}
+		input = &types.ListTagsForProjectInput{}
 	}
 
-	req := c.newRequest(op, input, &ListTagsForProjectOutput{})
+	req := c.newRequest(op, input, &types.ListTagsForProjectOutput{})
 	return ListTagsForProjectRequest{Request: req, Input: input, Copy: c.ListTagsForProjectRequest}
 }
 
@@ -101,8 +43,8 @@ func (c *Client) ListTagsForProjectRequest(input *ListTagsForProjectInput) ListT
 // ListTagsForProject API operation.
 type ListTagsForProjectRequest struct {
 	*aws.Request
-	Input *ListTagsForProjectInput
-	Copy  func(*ListTagsForProjectInput) ListTagsForProjectRequest
+	Input *types.ListTagsForProjectInput
+	Copy  func(*types.ListTagsForProjectInput) ListTagsForProjectRequest
 }
 
 // Send marshals and sends the ListTagsForProject API request.
@@ -114,7 +56,7 @@ func (r ListTagsForProjectRequest) Send(ctx context.Context) (*ListTagsForProjec
 	}
 
 	resp := &ListTagsForProjectResponse{
-		ListTagsForProjectOutput: r.Request.Data.(*ListTagsForProjectOutput),
+		ListTagsForProjectOutput: r.Request.Data.(*types.ListTagsForProjectOutput),
 		response:                 &aws.Response{Request: r.Request},
 	}
 
@@ -124,7 +66,7 @@ func (r ListTagsForProjectRequest) Send(ctx context.Context) (*ListTagsForProjec
 // ListTagsForProjectResponse is the response type for the
 // ListTagsForProject API operation.
 type ListTagsForProjectResponse struct {
-	*ListTagsForProjectOutput
+	*types.ListTagsForProjectOutput
 
 	response *aws.Response
 }

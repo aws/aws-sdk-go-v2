@@ -6,28 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
+	"github.com/aws/aws-sdk-go-v2/service/fms/types"
 )
-
-type DeleteNotificationChannelInput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteNotificationChannelInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type DeleteNotificationChannelOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteNotificationChannelOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteNotificationChannel = "DeleteNotificationChannel"
 
@@ -46,7 +28,7 @@ const opDeleteNotificationChannel = "DeleteNotificationChannel"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/DeleteNotificationChannel
-func (c *Client) DeleteNotificationChannelRequest(input *DeleteNotificationChannelInput) DeleteNotificationChannelRequest {
+func (c *Client) DeleteNotificationChannelRequest(input *types.DeleteNotificationChannelInput) DeleteNotificationChannelRequest {
 	op := &aws.Operation{
 		Name:       opDeleteNotificationChannel,
 		HTTPMethod: "POST",
@@ -54,10 +36,10 @@ func (c *Client) DeleteNotificationChannelRequest(input *DeleteNotificationChann
 	}
 
 	if input == nil {
-		input = &DeleteNotificationChannelInput{}
+		input = &types.DeleteNotificationChannelInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteNotificationChannelOutput{})
+	req := c.newRequest(op, input, &types.DeleteNotificationChannelOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return DeleteNotificationChannelRequest{Request: req, Input: input, Copy: c.DeleteNotificationChannelRequest}
@@ -67,8 +49,8 @@ func (c *Client) DeleteNotificationChannelRequest(input *DeleteNotificationChann
 // DeleteNotificationChannel API operation.
 type DeleteNotificationChannelRequest struct {
 	*aws.Request
-	Input *DeleteNotificationChannelInput
-	Copy  func(*DeleteNotificationChannelInput) DeleteNotificationChannelRequest
+	Input *types.DeleteNotificationChannelInput
+	Copy  func(*types.DeleteNotificationChannelInput) DeleteNotificationChannelRequest
 }
 
 // Send marshals and sends the DeleteNotificationChannel API request.
@@ -80,7 +62,7 @@ func (r DeleteNotificationChannelRequest) Send(ctx context.Context) (*DeleteNoti
 	}
 
 	resp := &DeleteNotificationChannelResponse{
-		DeleteNotificationChannelOutput: r.Request.Data.(*DeleteNotificationChannelOutput),
+		DeleteNotificationChannelOutput: r.Request.Data.(*types.DeleteNotificationChannelOutput),
 		response:                        &aws.Response{Request: r.Request},
 	}
 
@@ -90,7 +72,7 @@ func (r DeleteNotificationChannelRequest) Send(ctx context.Context) (*DeleteNoti
 // DeleteNotificationChannelResponse is the response type for the
 // DeleteNotificationChannel API operation.
 type DeleteNotificationChannelResponse struct {
-	*DeleteNotificationChannelOutput
+	*types.DeleteNotificationChannelOutput
 
 	response *aws.Response
 }

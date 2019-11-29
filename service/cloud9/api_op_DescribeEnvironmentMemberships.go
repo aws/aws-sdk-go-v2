@@ -6,66 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/cloud9/types"
 )
-
-type DescribeEnvironmentMembershipsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the environment to get environment member information about.
-	EnvironmentId *string `locationName:"environmentId" type:"string"`
-
-	// The maximum number of environment members to get information about.
-	MaxResults *int64 `locationName:"maxResults" type:"integer"`
-
-	// During a previous call, if there are more than 25 items in the list, only
-	// the first 25 items are returned, along with a unique string called a next
-	// token. To get the next batch of items in the list, call this operation again,
-	// adding the next token to the call. To get all of the items in the list, keep
-	// calling this operation with each subsequent next token that is returned,
-	// until no more next tokens are returned.
-	NextToken *string `locationName:"nextToken" type:"string"`
-
-	// The type of environment member permissions to get information about. Available
-	// values include:
-	//
-	//    * owner: Owns the environment.
-	//
-	//    * read-only: Has read-only access to the environment.
-	//
-	//    * read-write: Has read-write access to the environment.
-	//
-	// If no value is specified, information about all environment members are returned.
-	Permissions []Permissions `locationName:"permissions" type:"list"`
-
-	// The Amazon Resource Name (ARN) of an individual environment member to get
-	// information about. If no value is specified, information about all environment
-	// members are returned.
-	UserArn *string `locationName:"userArn" type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeEnvironmentMembershipsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type DescribeEnvironmentMembershipsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Information about the environment members for the environment.
-	Memberships []EnvironmentMember `locationName:"memberships" type:"list"`
-
-	// If there are more than 25 items in the list, only the first 25 items are
-	// returned, along with a unique string called a next token. To get the next
-	// batch of items in the list, call this operation again, adding the next token
-	// to the call.
-	NextToken *string `locationName:"nextToken" type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeEnvironmentMembershipsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeEnvironmentMemberships = "DescribeEnvironmentMemberships"
 
@@ -83,7 +25,7 @@ const opDescribeEnvironmentMemberships = "DescribeEnvironmentMemberships"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloud9-2017-09-23/DescribeEnvironmentMemberships
-func (c *Client) DescribeEnvironmentMembershipsRequest(input *DescribeEnvironmentMembershipsInput) DescribeEnvironmentMembershipsRequest {
+func (c *Client) DescribeEnvironmentMembershipsRequest(input *types.DescribeEnvironmentMembershipsInput) DescribeEnvironmentMembershipsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeEnvironmentMemberships,
 		HTTPMethod: "POST",
@@ -97,10 +39,10 @@ func (c *Client) DescribeEnvironmentMembershipsRequest(input *DescribeEnvironmen
 	}
 
 	if input == nil {
-		input = &DescribeEnvironmentMembershipsInput{}
+		input = &types.DescribeEnvironmentMembershipsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeEnvironmentMembershipsOutput{})
+	req := c.newRequest(op, input, &types.DescribeEnvironmentMembershipsOutput{})
 	return DescribeEnvironmentMembershipsRequest{Request: req, Input: input, Copy: c.DescribeEnvironmentMembershipsRequest}
 }
 
@@ -108,8 +50,8 @@ func (c *Client) DescribeEnvironmentMembershipsRequest(input *DescribeEnvironmen
 // DescribeEnvironmentMemberships API operation.
 type DescribeEnvironmentMembershipsRequest struct {
 	*aws.Request
-	Input *DescribeEnvironmentMembershipsInput
-	Copy  func(*DescribeEnvironmentMembershipsInput) DescribeEnvironmentMembershipsRequest
+	Input *types.DescribeEnvironmentMembershipsInput
+	Copy  func(*types.DescribeEnvironmentMembershipsInput) DescribeEnvironmentMembershipsRequest
 }
 
 // Send marshals and sends the DescribeEnvironmentMemberships API request.
@@ -121,7 +63,7 @@ func (r DescribeEnvironmentMembershipsRequest) Send(ctx context.Context) (*Descr
 	}
 
 	resp := &DescribeEnvironmentMembershipsResponse{
-		DescribeEnvironmentMembershipsOutput: r.Request.Data.(*DescribeEnvironmentMembershipsOutput),
+		DescribeEnvironmentMembershipsOutput: r.Request.Data.(*types.DescribeEnvironmentMembershipsOutput),
 		response:                             &aws.Response{Request: r.Request},
 	}
 
@@ -151,7 +93,7 @@ func NewDescribeEnvironmentMembershipsPaginator(req DescribeEnvironmentMembershi
 	return DescribeEnvironmentMembershipsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *DescribeEnvironmentMembershipsInput
+				var inCpy *types.DescribeEnvironmentMembershipsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -171,14 +113,14 @@ type DescribeEnvironmentMembershipsPaginator struct {
 	aws.Pager
 }
 
-func (p *DescribeEnvironmentMembershipsPaginator) CurrentPage() *DescribeEnvironmentMembershipsOutput {
-	return p.Pager.CurrentPage().(*DescribeEnvironmentMembershipsOutput)
+func (p *DescribeEnvironmentMembershipsPaginator) CurrentPage() *types.DescribeEnvironmentMembershipsOutput {
+	return p.Pager.CurrentPage().(*types.DescribeEnvironmentMembershipsOutput)
 }
 
 // DescribeEnvironmentMembershipsResponse is the response type for the
 // DescribeEnvironmentMemberships API operation.
 type DescribeEnvironmentMembershipsResponse struct {
-	*DescribeEnvironmentMembershipsOutput
+	*types.DescribeEnvironmentMembershipsOutput
 
 	response *aws.Response
 }

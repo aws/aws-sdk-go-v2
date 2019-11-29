@@ -6,65 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-type ModifyLaunchTemplateInput struct {
-	_ struct{} `type:"structure"`
-
-	// Unique, case-sensitive identifier you provide to ensure the idempotency of
-	// the request. For more information, see Ensuring Idempotency (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html).
-	//
-	// Constraint: Maximum 128 ASCII characters.
-	ClientToken *string `type:"string"`
-
-	// The version number of the launch template to set as the default version.
-	DefaultVersion *string `locationName:"SetDefaultVersion" type:"string"`
-
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have
-	// the required permissions, the error response is DryRunOperation. Otherwise,
-	// it is UnauthorizedOperation.
-	DryRun *bool `type:"boolean"`
-
-	// The ID of the launch template. You must specify either the launch template
-	// ID or launch template name in the request.
-	LaunchTemplateId *string `type:"string"`
-
-	// The name of the launch template. You must specify either the launch template
-	// ID or launch template name in the request.
-	LaunchTemplateName *string `min:"3" type:"string"`
-}
-
-// String returns the string representation
-func (s ModifyLaunchTemplateInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ModifyLaunchTemplateInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ModifyLaunchTemplateInput"}
-	if s.LaunchTemplateName != nil && len(*s.LaunchTemplateName) < 3 {
-		invalidParams.Add(aws.NewErrParamMinLen("LaunchTemplateName", 3))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ModifyLaunchTemplateOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Information about the launch template.
-	LaunchTemplate *LaunchTemplate `locationName:"launchTemplate" type:"structure"`
-}
-
-// String returns the string representation
-func (s ModifyLaunchTemplateOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opModifyLaunchTemplate = "ModifyLaunchTemplate"
 
@@ -83,7 +26,7 @@ const opModifyLaunchTemplate = "ModifyLaunchTemplate"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyLaunchTemplate
-func (c *Client) ModifyLaunchTemplateRequest(input *ModifyLaunchTemplateInput) ModifyLaunchTemplateRequest {
+func (c *Client) ModifyLaunchTemplateRequest(input *types.ModifyLaunchTemplateInput) ModifyLaunchTemplateRequest {
 	op := &aws.Operation{
 		Name:       opModifyLaunchTemplate,
 		HTTPMethod: "POST",
@@ -91,10 +34,10 @@ func (c *Client) ModifyLaunchTemplateRequest(input *ModifyLaunchTemplateInput) M
 	}
 
 	if input == nil {
-		input = &ModifyLaunchTemplateInput{}
+		input = &types.ModifyLaunchTemplateInput{}
 	}
 
-	req := c.newRequest(op, input, &ModifyLaunchTemplateOutput{})
+	req := c.newRequest(op, input, &types.ModifyLaunchTemplateOutput{})
 	return ModifyLaunchTemplateRequest{Request: req, Input: input, Copy: c.ModifyLaunchTemplateRequest}
 }
 
@@ -102,8 +45,8 @@ func (c *Client) ModifyLaunchTemplateRequest(input *ModifyLaunchTemplateInput) M
 // ModifyLaunchTemplate API operation.
 type ModifyLaunchTemplateRequest struct {
 	*aws.Request
-	Input *ModifyLaunchTemplateInput
-	Copy  func(*ModifyLaunchTemplateInput) ModifyLaunchTemplateRequest
+	Input *types.ModifyLaunchTemplateInput
+	Copy  func(*types.ModifyLaunchTemplateInput) ModifyLaunchTemplateRequest
 }
 
 // Send marshals and sends the ModifyLaunchTemplate API request.
@@ -115,7 +58,7 @@ func (r ModifyLaunchTemplateRequest) Send(ctx context.Context) (*ModifyLaunchTem
 	}
 
 	resp := &ModifyLaunchTemplateResponse{
-		ModifyLaunchTemplateOutput: r.Request.Data.(*ModifyLaunchTemplateOutput),
+		ModifyLaunchTemplateOutput: r.Request.Data.(*types.ModifyLaunchTemplateOutput),
 		response:                   &aws.Response{Request: r.Request},
 	}
 
@@ -125,7 +68,7 @@ func (r ModifyLaunchTemplateRequest) Send(ctx context.Context) (*ModifyLaunchTem
 // ModifyLaunchTemplateResponse is the response type for the
 // ModifyLaunchTemplate API operation.
 type ModifyLaunchTemplateResponse struct {
-	*ModifyLaunchTemplateOutput
+	*types.ModifyLaunchTemplateOutput
 
 	response *aws.Response
 }

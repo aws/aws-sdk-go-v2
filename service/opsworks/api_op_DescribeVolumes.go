@@ -6,46 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/opsworks/types"
 )
-
-type DescribeVolumesInput struct {
-	_ struct{} `type:"structure"`
-
-	// The instance ID. If you use this parameter, DescribeVolumes returns descriptions
-	// of the volumes associated with the specified instance.
-	InstanceId *string `type:"string"`
-
-	// The RAID array ID. If you use this parameter, DescribeVolumes returns descriptions
-	// of the volumes associated with the specified RAID array.
-	RaidArrayId *string `type:"string"`
-
-	// A stack ID. The action describes the stack's registered Amazon EBS volumes.
-	StackId *string `type:"string"`
-
-	// Am array of volume IDs. If you use this parameter, DescribeVolumes returns
-	// descriptions of the specified volumes. Otherwise, it returns a description
-	// of every volume.
-	VolumeIds []string `type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeVolumesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Contains the response to a DescribeVolumes request.
-type DescribeVolumesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// An array of volume IDs.
-	Volumes []Volume `type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeVolumesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeVolumes = "DescribeVolumes"
 
@@ -69,7 +31,7 @@ const opDescribeVolumes = "DescribeVolumes"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DescribeVolumes
-func (c *Client) DescribeVolumesRequest(input *DescribeVolumesInput) DescribeVolumesRequest {
+func (c *Client) DescribeVolumesRequest(input *types.DescribeVolumesInput) DescribeVolumesRequest {
 	op := &aws.Operation{
 		Name:       opDescribeVolumes,
 		HTTPMethod: "POST",
@@ -77,10 +39,10 @@ func (c *Client) DescribeVolumesRequest(input *DescribeVolumesInput) DescribeVol
 	}
 
 	if input == nil {
-		input = &DescribeVolumesInput{}
+		input = &types.DescribeVolumesInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeVolumesOutput{})
+	req := c.newRequest(op, input, &types.DescribeVolumesOutput{})
 	return DescribeVolumesRequest{Request: req, Input: input, Copy: c.DescribeVolumesRequest}
 }
 
@@ -88,8 +50,8 @@ func (c *Client) DescribeVolumesRequest(input *DescribeVolumesInput) DescribeVol
 // DescribeVolumes API operation.
 type DescribeVolumesRequest struct {
 	*aws.Request
-	Input *DescribeVolumesInput
-	Copy  func(*DescribeVolumesInput) DescribeVolumesRequest
+	Input *types.DescribeVolumesInput
+	Copy  func(*types.DescribeVolumesInput) DescribeVolumesRequest
 }
 
 // Send marshals and sends the DescribeVolumes API request.
@@ -101,7 +63,7 @@ func (r DescribeVolumesRequest) Send(ctx context.Context) (*DescribeVolumesRespo
 	}
 
 	resp := &DescribeVolumesResponse{
-		DescribeVolumesOutput: r.Request.Data.(*DescribeVolumesOutput),
+		DescribeVolumesOutput: r.Request.Data.(*types.DescribeVolumesOutput),
 		response:              &aws.Response{Request: r.Request},
 	}
 
@@ -111,7 +73,7 @@ func (r DescribeVolumesRequest) Send(ctx context.Context) (*DescribeVolumesRespo
 // DescribeVolumesResponse is the response type for the
 // DescribeVolumes API operation.
 type DescribeVolumesResponse struct {
-	*DescribeVolumesOutput
+	*types.DescribeVolumesOutput
 
 	response *aws.Response
 }

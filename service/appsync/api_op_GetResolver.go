@@ -6,103 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/appsync/types"
 )
-
-type GetResolverInput struct {
-	_ struct{} `type:"structure"`
-
-	// The API ID.
-	//
-	// ApiId is a required field
-	ApiId *string `location:"uri" locationName:"apiId" type:"string" required:"true"`
-
-	// The resolver field name.
-	//
-	// FieldName is a required field
-	FieldName *string `location:"uri" locationName:"fieldName" type:"string" required:"true"`
-
-	// The resolver type name.
-	//
-	// TypeName is a required field
-	TypeName *string `location:"uri" locationName:"typeName" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetResolverInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetResolverInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetResolverInput"}
-
-	if s.ApiId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ApiId"))
-	}
-
-	if s.FieldName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("FieldName"))
-	}
-
-	if s.TypeName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("TypeName"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetResolverInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.ApiId != nil {
-		v := *s.ApiId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "apiId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.FieldName != nil {
-		v := *s.FieldName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "fieldName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.TypeName != nil {
-		v := *s.TypeName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "typeName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type GetResolverOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The Resolver object.
-	Resolver *Resolver `locationName:"resolver" type:"structure"`
-}
-
-// String returns the string representation
-func (s GetResolverOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetResolverOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.Resolver != nil {
-		v := s.Resolver
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "resolver", v, metadata)
-	}
-	return nil
-}
 
 const opGetResolver = "GetResolver"
 
@@ -119,7 +24,7 @@ const opGetResolver = "GetResolver"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/GetResolver
-func (c *Client) GetResolverRequest(input *GetResolverInput) GetResolverRequest {
+func (c *Client) GetResolverRequest(input *types.GetResolverInput) GetResolverRequest {
 	op := &aws.Operation{
 		Name:       opGetResolver,
 		HTTPMethod: "GET",
@@ -127,10 +32,10 @@ func (c *Client) GetResolverRequest(input *GetResolverInput) GetResolverRequest 
 	}
 
 	if input == nil {
-		input = &GetResolverInput{}
+		input = &types.GetResolverInput{}
 	}
 
-	req := c.newRequest(op, input, &GetResolverOutput{})
+	req := c.newRequest(op, input, &types.GetResolverOutput{})
 	return GetResolverRequest{Request: req, Input: input, Copy: c.GetResolverRequest}
 }
 
@@ -138,8 +43,8 @@ func (c *Client) GetResolverRequest(input *GetResolverInput) GetResolverRequest 
 // GetResolver API operation.
 type GetResolverRequest struct {
 	*aws.Request
-	Input *GetResolverInput
-	Copy  func(*GetResolverInput) GetResolverRequest
+	Input *types.GetResolverInput
+	Copy  func(*types.GetResolverInput) GetResolverRequest
 }
 
 // Send marshals and sends the GetResolver API request.
@@ -151,7 +56,7 @@ func (r GetResolverRequest) Send(ctx context.Context) (*GetResolverResponse, err
 	}
 
 	resp := &GetResolverResponse{
-		GetResolverOutput: r.Request.Data.(*GetResolverOutput),
+		GetResolverOutput: r.Request.Data.(*types.GetResolverOutput),
 		response:          &aws.Response{Request: r.Request},
 	}
 
@@ -161,7 +66,7 @@ func (r GetResolverRequest) Send(ctx context.Context) (*GetResolverResponse, err
 // GetResolverResponse is the response type for the
 // GetResolver API operation.
 type GetResolverResponse struct {
-	*GetResolverOutput
+	*types.GetResolverOutput
 
 	response *aws.Response
 }

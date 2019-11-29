@@ -4,81 +4,10 @@ package ssm
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ssm/types"
 )
-
-type DescribeMaintenanceWindowTargetsInput struct {
-	_ struct{} `type:"structure"`
-
-	// Optional filters that can be used to narrow down the scope of the returned
-	// window targets. The supported filter keys are Type, WindowTargetId and OwnerInformation.
-	Filters []MaintenanceWindowFilter `type:"list"`
-
-	// The maximum number of items to return for this call. The call also returns
-	// a token that you can specify in a subsequent call to get the next set of
-	// results.
-	MaxResults *int64 `min:"10" type:"integer"`
-
-	// The token for the next set of items to return. (You received this token from
-	// a previous call.)
-	NextToken *string `type:"string"`
-
-	// The ID of the maintenance window whose targets should be retrieved.
-	//
-	// WindowId is a required field
-	WindowId *string `min:"20" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeMaintenanceWindowTargetsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeMaintenanceWindowTargetsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeMaintenanceWindowTargetsInput"}
-	if s.MaxResults != nil && *s.MaxResults < 10 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 10))
-	}
-
-	if s.WindowId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("WindowId"))
-	}
-	if s.WindowId != nil && len(*s.WindowId) < 20 {
-		invalidParams.Add(aws.NewErrParamMinLen("WindowId", 20))
-	}
-	if s.Filters != nil {
-		for i, v := range s.Filters {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribeMaintenanceWindowTargetsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The token to use when requesting the next set of items. If there are no additional
-	// items to return, the string is empty.
-	NextToken *string `type:"string"`
-
-	// Information about the targets in the maintenance window.
-	Targets []MaintenanceWindowTarget `type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeMaintenanceWindowTargetsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeMaintenanceWindowTargets = "DescribeMaintenanceWindowTargets"
 
@@ -95,7 +24,7 @@ const opDescribeMaintenanceWindowTargets = "DescribeMaintenanceWindowTargets"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeMaintenanceWindowTargets
-func (c *Client) DescribeMaintenanceWindowTargetsRequest(input *DescribeMaintenanceWindowTargetsInput) DescribeMaintenanceWindowTargetsRequest {
+func (c *Client) DescribeMaintenanceWindowTargetsRequest(input *types.DescribeMaintenanceWindowTargetsInput) DescribeMaintenanceWindowTargetsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeMaintenanceWindowTargets,
 		HTTPMethod: "POST",
@@ -103,10 +32,10 @@ func (c *Client) DescribeMaintenanceWindowTargetsRequest(input *DescribeMaintena
 	}
 
 	if input == nil {
-		input = &DescribeMaintenanceWindowTargetsInput{}
+		input = &types.DescribeMaintenanceWindowTargetsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeMaintenanceWindowTargetsOutput{})
+	req := c.newRequest(op, input, &types.DescribeMaintenanceWindowTargetsOutput{})
 	return DescribeMaintenanceWindowTargetsRequest{Request: req, Input: input, Copy: c.DescribeMaintenanceWindowTargetsRequest}
 }
 
@@ -114,8 +43,8 @@ func (c *Client) DescribeMaintenanceWindowTargetsRequest(input *DescribeMaintena
 // DescribeMaintenanceWindowTargets API operation.
 type DescribeMaintenanceWindowTargetsRequest struct {
 	*aws.Request
-	Input *DescribeMaintenanceWindowTargetsInput
-	Copy  func(*DescribeMaintenanceWindowTargetsInput) DescribeMaintenanceWindowTargetsRequest
+	Input *types.DescribeMaintenanceWindowTargetsInput
+	Copy  func(*types.DescribeMaintenanceWindowTargetsInput) DescribeMaintenanceWindowTargetsRequest
 }
 
 // Send marshals and sends the DescribeMaintenanceWindowTargets API request.
@@ -127,7 +56,7 @@ func (r DescribeMaintenanceWindowTargetsRequest) Send(ctx context.Context) (*Des
 	}
 
 	resp := &DescribeMaintenanceWindowTargetsResponse{
-		DescribeMaintenanceWindowTargetsOutput: r.Request.Data.(*DescribeMaintenanceWindowTargetsOutput),
+		DescribeMaintenanceWindowTargetsOutput: r.Request.Data.(*types.DescribeMaintenanceWindowTargetsOutput),
 		response:                               &aws.Response{Request: r.Request},
 	}
 
@@ -137,7 +66,7 @@ func (r DescribeMaintenanceWindowTargetsRequest) Send(ctx context.Context) (*Des
 // DescribeMaintenanceWindowTargetsResponse is the response type for the
 // DescribeMaintenanceWindowTargets API operation.
 type DescribeMaintenanceWindowTargetsResponse struct {
-	*DescribeMaintenanceWindowTargetsOutput
+	*types.DescribeMaintenanceWindowTargetsOutput
 
 	response *aws.Response
 }

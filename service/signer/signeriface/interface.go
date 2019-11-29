@@ -13,6 +13,7 @@ import (
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/signer"
+	"github.com/aws/aws-sdk-go-v2/service/signer/types"
 )
 
 // ClientAPI provides an interface to enable mocking the
@@ -46,7 +47,7 @@ import (
 //    type mockClientClient struct {
 //        signeriface.ClientPI
 //    }
-//    func (m *mockClientClient) CancelSigningProfile(input *signer.CancelSigningProfileInput) (*signer.CancelSigningProfileOutput, error) {
+//    func (m *mockClientClient) CancelSigningProfile(input *types.CancelSigningProfileInput) (*types.CancelSigningProfileOutput, error) {
 //        // mock response/functionality
 //    }
 //
@@ -64,25 +65,31 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type ClientAPI interface {
-	CancelSigningProfileRequest(*signer.CancelSigningProfileInput) signer.CancelSigningProfileRequest
+	CancelSigningProfileRequest(*types.CancelSigningProfileInput) signer.CancelSigningProfileRequest
 
-	DescribeSigningJobRequest(*signer.DescribeSigningJobInput) signer.DescribeSigningJobRequest
+	DescribeSigningJobRequest(*types.DescribeSigningJobInput) signer.DescribeSigningJobRequest
 
-	GetSigningPlatformRequest(*signer.GetSigningPlatformInput) signer.GetSigningPlatformRequest
+	GetSigningPlatformRequest(*types.GetSigningPlatformInput) signer.GetSigningPlatformRequest
 
-	GetSigningProfileRequest(*signer.GetSigningProfileInput) signer.GetSigningProfileRequest
+	GetSigningProfileRequest(*types.GetSigningProfileInput) signer.GetSigningProfileRequest
 
-	ListSigningJobsRequest(*signer.ListSigningJobsInput) signer.ListSigningJobsRequest
+	ListSigningJobsRequest(*types.ListSigningJobsInput) signer.ListSigningJobsRequest
 
-	ListSigningPlatformsRequest(*signer.ListSigningPlatformsInput) signer.ListSigningPlatformsRequest
+	ListSigningPlatformsRequest(*types.ListSigningPlatformsInput) signer.ListSigningPlatformsRequest
 
-	ListSigningProfilesRequest(*signer.ListSigningProfilesInput) signer.ListSigningProfilesRequest
+	ListSigningProfilesRequest(*types.ListSigningProfilesInput) signer.ListSigningProfilesRequest
 
-	PutSigningProfileRequest(*signer.PutSigningProfileInput) signer.PutSigningProfileRequest
+	ListTagsForResourceRequest(*types.ListTagsForResourceInput) signer.ListTagsForResourceRequest
 
-	StartSigningJobRequest(*signer.StartSigningJobInput) signer.StartSigningJobRequest
+	PutSigningProfileRequest(*types.PutSigningProfileInput) signer.PutSigningProfileRequest
 
-	WaitUntilSuccessfulSigningJob(context.Context, *signer.DescribeSigningJobInput, ...aws.WaiterOption) error
+	StartSigningJobRequest(*types.StartSigningJobInput) signer.StartSigningJobRequest
+
+	TagResourceRequest(*types.TagResourceInput) signer.TagResourceRequest
+
+	UntagResourceRequest(*types.UntagResourceInput) signer.UntagResourceRequest
+
+	WaitUntilSuccessfulSigningJob(context.Context, *types.DescribeSigningJobInput, ...aws.WaiterOption) error
 }
 
 var _ ClientAPI = (*signer.Client)(nil)

@@ -6,54 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-type DeleteVpcEndpointServiceConfigurationsInput struct {
-	_ struct{} `type:"structure"`
-
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have
-	// the required permissions, the error response is DryRunOperation. Otherwise,
-	// it is UnauthorizedOperation.
-	DryRun *bool `type:"boolean"`
-
-	// The IDs of one or more services.
-	//
-	// ServiceIds is a required field
-	ServiceIds []string `locationName:"ServiceId" locationNameList:"item" type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteVpcEndpointServiceConfigurationsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteVpcEndpointServiceConfigurationsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteVpcEndpointServiceConfigurationsInput"}
-
-	if s.ServiceIds == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ServiceIds"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteVpcEndpointServiceConfigurationsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Information about the service configurations that were not deleted, if applicable.
-	Unsuccessful []UnsuccessfulItem `locationName:"unsuccessful" locationNameList:"item" type:"list"`
-}
-
-// String returns the string representation
-func (s DeleteVpcEndpointServiceConfigurationsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteVpcEndpointServiceConfigurations = "DeleteVpcEndpointServiceConfigurations"
 
@@ -73,7 +27,7 @@ const opDeleteVpcEndpointServiceConfigurations = "DeleteVpcEndpointServiceConfig
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteVpcEndpointServiceConfigurations
-func (c *Client) DeleteVpcEndpointServiceConfigurationsRequest(input *DeleteVpcEndpointServiceConfigurationsInput) DeleteVpcEndpointServiceConfigurationsRequest {
+func (c *Client) DeleteVpcEndpointServiceConfigurationsRequest(input *types.DeleteVpcEndpointServiceConfigurationsInput) DeleteVpcEndpointServiceConfigurationsRequest {
 	op := &aws.Operation{
 		Name:       opDeleteVpcEndpointServiceConfigurations,
 		HTTPMethod: "POST",
@@ -81,10 +35,10 @@ func (c *Client) DeleteVpcEndpointServiceConfigurationsRequest(input *DeleteVpcE
 	}
 
 	if input == nil {
-		input = &DeleteVpcEndpointServiceConfigurationsInput{}
+		input = &types.DeleteVpcEndpointServiceConfigurationsInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteVpcEndpointServiceConfigurationsOutput{})
+	req := c.newRequest(op, input, &types.DeleteVpcEndpointServiceConfigurationsOutput{})
 	return DeleteVpcEndpointServiceConfigurationsRequest{Request: req, Input: input, Copy: c.DeleteVpcEndpointServiceConfigurationsRequest}
 }
 
@@ -92,8 +46,8 @@ func (c *Client) DeleteVpcEndpointServiceConfigurationsRequest(input *DeleteVpcE
 // DeleteVpcEndpointServiceConfigurations API operation.
 type DeleteVpcEndpointServiceConfigurationsRequest struct {
 	*aws.Request
-	Input *DeleteVpcEndpointServiceConfigurationsInput
-	Copy  func(*DeleteVpcEndpointServiceConfigurationsInput) DeleteVpcEndpointServiceConfigurationsRequest
+	Input *types.DeleteVpcEndpointServiceConfigurationsInput
+	Copy  func(*types.DeleteVpcEndpointServiceConfigurationsInput) DeleteVpcEndpointServiceConfigurationsRequest
 }
 
 // Send marshals and sends the DeleteVpcEndpointServiceConfigurations API request.
@@ -105,7 +59,7 @@ func (r DeleteVpcEndpointServiceConfigurationsRequest) Send(ctx context.Context)
 	}
 
 	resp := &DeleteVpcEndpointServiceConfigurationsResponse{
-		DeleteVpcEndpointServiceConfigurationsOutput: r.Request.Data.(*DeleteVpcEndpointServiceConfigurationsOutput),
+		DeleteVpcEndpointServiceConfigurationsOutput: r.Request.Data.(*types.DeleteVpcEndpointServiceConfigurationsOutput),
 		response: &aws.Response{Request: r.Request},
 	}
 
@@ -115,7 +69,7 @@ func (r DeleteVpcEndpointServiceConfigurationsRequest) Send(ctx context.Context)
 // DeleteVpcEndpointServiceConfigurationsResponse is the response type for the
 // DeleteVpcEndpointServiceConfigurations API operation.
 type DeleteVpcEndpointServiceConfigurationsResponse struct {
-	*DeleteVpcEndpointServiceConfigurationsOutput
+	*types.DeleteVpcEndpointServiceConfigurationsOutput
 
 	response *aws.Response
 }

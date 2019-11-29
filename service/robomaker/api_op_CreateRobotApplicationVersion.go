@@ -4,154 +4,10 @@ package robomaker
 
 import (
 	"context"
-	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/robomaker/types"
 )
-
-type CreateRobotApplicationVersionInput struct {
-	_ struct{} `type:"structure"`
-
-	// The application information for the robot application.
-	//
-	// Application is a required field
-	Application *string `locationName:"application" min:"1" type:"string" required:"true"`
-
-	// The current revision id for the robot application. If you provide a value
-	// and it matches the latest revision ID, a new version will be created.
-	CurrentRevisionId *string `locationName:"currentRevisionId" min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s CreateRobotApplicationVersionInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateRobotApplicationVersionInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateRobotApplicationVersionInput"}
-
-	if s.Application == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Application"))
-	}
-	if s.Application != nil && len(*s.Application) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Application", 1))
-	}
-	if s.CurrentRevisionId != nil && len(*s.CurrentRevisionId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("CurrentRevisionId", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s CreateRobotApplicationVersionInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.Application != nil {
-		v := *s.Application
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "application", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.CurrentRevisionId != nil {
-		v := *s.CurrentRevisionId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "currentRevisionId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type CreateRobotApplicationVersionOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the robot application.
-	Arn *string `locationName:"arn" min:"1" type:"string"`
-
-	// The time, in milliseconds since the epoch, when the robot application was
-	// last updated.
-	LastUpdatedAt *time.Time `locationName:"lastUpdatedAt" type:"timestamp"`
-
-	// The name of the robot application.
-	Name *string `locationName:"name" min:"1" type:"string"`
-
-	// The revision id of the robot application.
-	RevisionId *string `locationName:"revisionId" min:"1" type:"string"`
-
-	// The robot software suite used by the robot application.
-	RobotSoftwareSuite *RobotSoftwareSuite `locationName:"robotSoftwareSuite" type:"structure"`
-
-	// The sources of the robot application.
-	Sources []Source `locationName:"sources" type:"list"`
-
-	// The version of the robot application.
-	Version *string `locationName:"version" min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s CreateRobotApplicationVersionOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s CreateRobotApplicationVersionOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.Arn != nil {
-		v := *s.Arn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "arn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.LastUpdatedAt != nil {
-		v := *s.LastUpdatedAt
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "lastUpdatedAt",
-			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
-	}
-	if s.Name != nil {
-		v := *s.Name
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.RevisionId != nil {
-		v := *s.RevisionId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "revisionId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.RobotSoftwareSuite != nil {
-		v := s.RobotSoftwareSuite
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "robotSoftwareSuite", v, metadata)
-	}
-	if s.Sources != nil {
-		v := s.Sources
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "sources", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	if s.Version != nil {
-		v := *s.Version
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "version", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opCreateRobotApplicationVersion = "CreateRobotApplicationVersion"
 
@@ -168,7 +24,7 @@ const opCreateRobotApplicationVersion = "CreateRobotApplicationVersion"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/CreateRobotApplicationVersion
-func (c *Client) CreateRobotApplicationVersionRequest(input *CreateRobotApplicationVersionInput) CreateRobotApplicationVersionRequest {
+func (c *Client) CreateRobotApplicationVersionRequest(input *types.CreateRobotApplicationVersionInput) CreateRobotApplicationVersionRequest {
 	op := &aws.Operation{
 		Name:       opCreateRobotApplicationVersion,
 		HTTPMethod: "POST",
@@ -176,10 +32,10 @@ func (c *Client) CreateRobotApplicationVersionRequest(input *CreateRobotApplicat
 	}
 
 	if input == nil {
-		input = &CreateRobotApplicationVersionInput{}
+		input = &types.CreateRobotApplicationVersionInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateRobotApplicationVersionOutput{})
+	req := c.newRequest(op, input, &types.CreateRobotApplicationVersionOutput{})
 	return CreateRobotApplicationVersionRequest{Request: req, Input: input, Copy: c.CreateRobotApplicationVersionRequest}
 }
 
@@ -187,8 +43,8 @@ func (c *Client) CreateRobotApplicationVersionRequest(input *CreateRobotApplicat
 // CreateRobotApplicationVersion API operation.
 type CreateRobotApplicationVersionRequest struct {
 	*aws.Request
-	Input *CreateRobotApplicationVersionInput
-	Copy  func(*CreateRobotApplicationVersionInput) CreateRobotApplicationVersionRequest
+	Input *types.CreateRobotApplicationVersionInput
+	Copy  func(*types.CreateRobotApplicationVersionInput) CreateRobotApplicationVersionRequest
 }
 
 // Send marshals and sends the CreateRobotApplicationVersion API request.
@@ -200,7 +56,7 @@ func (r CreateRobotApplicationVersionRequest) Send(ctx context.Context) (*Create
 	}
 
 	resp := &CreateRobotApplicationVersionResponse{
-		CreateRobotApplicationVersionOutput: r.Request.Data.(*CreateRobotApplicationVersionOutput),
+		CreateRobotApplicationVersionOutput: r.Request.Data.(*types.CreateRobotApplicationVersionOutput),
 		response:                            &aws.Response{Request: r.Request},
 	}
 
@@ -210,7 +66,7 @@ func (r CreateRobotApplicationVersionRequest) Send(ctx context.Context) (*Create
 // CreateRobotApplicationVersionResponse is the response type for the
 // CreateRobotApplicationVersion API operation.
 type CreateRobotApplicationVersionResponse struct {
-	*CreateRobotApplicationVersionOutput
+	*types.CreateRobotApplicationVersionOutput
 
 	response *aws.Response
 }

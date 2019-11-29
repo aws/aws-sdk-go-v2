@@ -10,6 +10,7 @@ package kinesisanalyticsiface
 
 import (
 	"github.com/aws/aws-sdk-go-v2/service/kinesisanalytics"
+	"github.com/aws/aws-sdk-go-v2/service/kinesisanalytics/types"
 )
 
 // ClientAPI provides an interface to enable mocking the
@@ -43,7 +44,7 @@ import (
 //    type mockClientClient struct {
 //        kinesisanalyticsiface.ClientPI
 //    }
-//    func (m *mockClientClient) AddApplicationCloudWatchLoggingOption(input *kinesisanalytics.AddApplicationCloudWatchLoggingOptionInput) (*kinesisanalytics.AddApplicationCloudWatchLoggingOptionOutput, error) {
+//    func (m *mockClientClient) AddApplicationCloudWatchLoggingOption(input *types.AddApplicationCloudWatchLoggingOptionInput) (*types.AddApplicationCloudWatchLoggingOptionOutput, error) {
 //        // mock response/functionality
 //    }
 //
@@ -61,45 +62,45 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type ClientAPI interface {
-	AddApplicationCloudWatchLoggingOptionRequest(*kinesisanalytics.AddApplicationCloudWatchLoggingOptionInput) kinesisanalytics.AddApplicationCloudWatchLoggingOptionRequest
+	AddApplicationCloudWatchLoggingOptionRequest(*types.AddApplicationCloudWatchLoggingOptionInput) kinesisanalytics.AddApplicationCloudWatchLoggingOptionRequest
 
-	AddApplicationInputRequest(*kinesisanalytics.AddApplicationInputInput) kinesisanalytics.AddApplicationInputRequest
+	AddApplicationInputRequest(*types.AddApplicationInputInput) kinesisanalytics.AddApplicationInputRequest
 
-	AddApplicationInputProcessingConfigurationRequest(*kinesisanalytics.AddApplicationInputProcessingConfigurationInput) kinesisanalytics.AddApplicationInputProcessingConfigurationRequest
+	AddApplicationInputProcessingConfigurationRequest(*types.AddApplicationInputProcessingConfigurationInput) kinesisanalytics.AddApplicationInputProcessingConfigurationRequest
 
-	AddApplicationOutputRequest(*kinesisanalytics.AddApplicationOutputInput) kinesisanalytics.AddApplicationOutputRequest
+	AddApplicationOutputRequest(*types.AddApplicationOutputInput) kinesisanalytics.AddApplicationOutputRequest
 
-	AddApplicationReferenceDataSourceRequest(*kinesisanalytics.AddApplicationReferenceDataSourceInput) kinesisanalytics.AddApplicationReferenceDataSourceRequest
+	AddApplicationReferenceDataSourceRequest(*types.AddApplicationReferenceDataSourceInput) kinesisanalytics.AddApplicationReferenceDataSourceRequest
 
-	CreateApplicationRequest(*kinesisanalytics.CreateApplicationInput) kinesisanalytics.CreateApplicationRequest
+	CreateApplicationRequest(*types.CreateApplicationInput) kinesisanalytics.CreateApplicationRequest
 
-	DeleteApplicationRequest(*kinesisanalytics.DeleteApplicationInput) kinesisanalytics.DeleteApplicationRequest
+	DeleteApplicationRequest(*types.DeleteApplicationInput) kinesisanalytics.DeleteApplicationRequest
 
-	DeleteApplicationCloudWatchLoggingOptionRequest(*kinesisanalytics.DeleteApplicationCloudWatchLoggingOptionInput) kinesisanalytics.DeleteApplicationCloudWatchLoggingOptionRequest
+	DeleteApplicationCloudWatchLoggingOptionRequest(*types.DeleteApplicationCloudWatchLoggingOptionInput) kinesisanalytics.DeleteApplicationCloudWatchLoggingOptionRequest
 
-	DeleteApplicationInputProcessingConfigurationRequest(*kinesisanalytics.DeleteApplicationInputProcessingConfigurationInput) kinesisanalytics.DeleteApplicationInputProcessingConfigurationRequest
+	DeleteApplicationInputProcessingConfigurationRequest(*types.DeleteApplicationInputProcessingConfigurationInput) kinesisanalytics.DeleteApplicationInputProcessingConfigurationRequest
 
-	DeleteApplicationOutputRequest(*kinesisanalytics.DeleteApplicationOutputInput) kinesisanalytics.DeleteApplicationOutputRequest
+	DeleteApplicationOutputRequest(*types.DeleteApplicationOutputInput) kinesisanalytics.DeleteApplicationOutputRequest
 
-	DeleteApplicationReferenceDataSourceRequest(*kinesisanalytics.DeleteApplicationReferenceDataSourceInput) kinesisanalytics.DeleteApplicationReferenceDataSourceRequest
+	DeleteApplicationReferenceDataSourceRequest(*types.DeleteApplicationReferenceDataSourceInput) kinesisanalytics.DeleteApplicationReferenceDataSourceRequest
 
-	DescribeApplicationRequest(*kinesisanalytics.DescribeApplicationInput) kinesisanalytics.DescribeApplicationRequest
+	DescribeApplicationRequest(*types.DescribeApplicationInput) kinesisanalytics.DescribeApplicationRequest
 
-	DiscoverInputSchemaRequest(*kinesisanalytics.DiscoverInputSchemaInput) kinesisanalytics.DiscoverInputSchemaRequest
+	DiscoverInputSchemaRequest(*types.DiscoverInputSchemaInput) kinesisanalytics.DiscoverInputSchemaRequest
 
-	ListApplicationsRequest(*kinesisanalytics.ListApplicationsInput) kinesisanalytics.ListApplicationsRequest
+	ListApplicationsRequest(*types.ListApplicationsInput) kinesisanalytics.ListApplicationsRequest
 
-	ListTagsForResourceRequest(*kinesisanalytics.ListTagsForResourceInput) kinesisanalytics.ListTagsForResourceRequest
+	ListTagsForResourceRequest(*types.ListTagsForResourceInput) kinesisanalytics.ListTagsForResourceRequest
 
-	StartApplicationRequest(*kinesisanalytics.StartApplicationInput) kinesisanalytics.StartApplicationRequest
+	StartApplicationRequest(*types.StartApplicationInput) kinesisanalytics.StartApplicationRequest
 
-	StopApplicationRequest(*kinesisanalytics.StopApplicationInput) kinesisanalytics.StopApplicationRequest
+	StopApplicationRequest(*types.StopApplicationInput) kinesisanalytics.StopApplicationRequest
 
-	TagResourceRequest(*kinesisanalytics.TagResourceInput) kinesisanalytics.TagResourceRequest
+	TagResourceRequest(*types.TagResourceInput) kinesisanalytics.TagResourceRequest
 
-	UntagResourceRequest(*kinesisanalytics.UntagResourceInput) kinesisanalytics.UntagResourceRequest
+	UntagResourceRequest(*types.UntagResourceInput) kinesisanalytics.UntagResourceRequest
 
-	UpdateApplicationRequest(*kinesisanalytics.UpdateApplicationInput) kinesisanalytics.UpdateApplicationRequest
+	UpdateApplicationRequest(*types.UpdateApplicationInput) kinesisanalytics.UpdateApplicationRequest
 }
 
 var _ ClientAPI = (*kinesisanalytics.Client)(nil)

@@ -6,64 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/dlm/types"
 )
-
-type DeleteLifecyclePolicyInput struct {
-	_ struct{} `type:"structure"`
-
-	// The identifier of the lifecycle policy.
-	//
-	// PolicyId is a required field
-	PolicyId *string `location:"uri" locationName:"policyId" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteLifecyclePolicyInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteLifecyclePolicyInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteLifecyclePolicyInput"}
-
-	if s.PolicyId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("PolicyId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteLifecyclePolicyInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.PolicyId != nil {
-		v := *s.PolicyId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "policyId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type DeleteLifecyclePolicyOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteLifecyclePolicyOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteLifecyclePolicyOutput) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
 
 const opDeleteLifecyclePolicy = "DeleteLifecyclePolicy"
 
@@ -81,7 +25,7 @@ const opDeleteLifecyclePolicy = "DeleteLifecyclePolicy"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dlm-2018-01-12/DeleteLifecyclePolicy
-func (c *Client) DeleteLifecyclePolicyRequest(input *DeleteLifecyclePolicyInput) DeleteLifecyclePolicyRequest {
+func (c *Client) DeleteLifecyclePolicyRequest(input *types.DeleteLifecyclePolicyInput) DeleteLifecyclePolicyRequest {
 	op := &aws.Operation{
 		Name:       opDeleteLifecyclePolicy,
 		HTTPMethod: "DELETE",
@@ -89,10 +33,10 @@ func (c *Client) DeleteLifecyclePolicyRequest(input *DeleteLifecyclePolicyInput)
 	}
 
 	if input == nil {
-		input = &DeleteLifecyclePolicyInput{}
+		input = &types.DeleteLifecyclePolicyInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteLifecyclePolicyOutput{})
+	req := c.newRequest(op, input, &types.DeleteLifecyclePolicyOutput{})
 	return DeleteLifecyclePolicyRequest{Request: req, Input: input, Copy: c.DeleteLifecyclePolicyRequest}
 }
 
@@ -100,8 +44,8 @@ func (c *Client) DeleteLifecyclePolicyRequest(input *DeleteLifecyclePolicyInput)
 // DeleteLifecyclePolicy API operation.
 type DeleteLifecyclePolicyRequest struct {
 	*aws.Request
-	Input *DeleteLifecyclePolicyInput
-	Copy  func(*DeleteLifecyclePolicyInput) DeleteLifecyclePolicyRequest
+	Input *types.DeleteLifecyclePolicyInput
+	Copy  func(*types.DeleteLifecyclePolicyInput) DeleteLifecyclePolicyRequest
 }
 
 // Send marshals and sends the DeleteLifecyclePolicy API request.
@@ -113,7 +57,7 @@ func (r DeleteLifecyclePolicyRequest) Send(ctx context.Context) (*DeleteLifecycl
 	}
 
 	resp := &DeleteLifecyclePolicyResponse{
-		DeleteLifecyclePolicyOutput: r.Request.Data.(*DeleteLifecyclePolicyOutput),
+		DeleteLifecyclePolicyOutput: r.Request.Data.(*types.DeleteLifecyclePolicyOutput),
 		response:                    &aws.Response{Request: r.Request},
 	}
 
@@ -123,7 +67,7 @@ func (r DeleteLifecyclePolicyRequest) Send(ctx context.Context) (*DeleteLifecycl
 // DeleteLifecyclePolicyResponse is the response type for the
 // DeleteLifecyclePolicy API operation.
 type DeleteLifecyclePolicyResponse struct {
-	*DeleteLifecyclePolicyOutput
+	*types.DeleteLifecyclePolicyOutput
 
 	response *aws.Response
 }

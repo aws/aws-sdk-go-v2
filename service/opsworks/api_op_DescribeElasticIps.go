@@ -6,43 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/opsworks/types"
 )
-
-type DescribeElasticIpsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The instance ID. If you include this parameter, DescribeElasticIps returns
-	// a description of the Elastic IP addresses associated with the specified instance.
-	InstanceId *string `type:"string"`
-
-	// An array of Elastic IP addresses to be described. If you include this parameter,
-	// DescribeElasticIps returns a description of the specified Elastic IP addresses.
-	// Otherwise, it returns a description of every Elastic IP address.
-	Ips []string `type:"list"`
-
-	// A stack ID. If you include this parameter, DescribeElasticIps returns a description
-	// of the Elastic IP addresses that are registered with the specified stack.
-	StackId *string `type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeElasticIpsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Contains the response to a DescribeElasticIps request.
-type DescribeElasticIpsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// An ElasticIps object that describes the specified Elastic IP addresses.
-	ElasticIps []ElasticIp `type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeElasticIpsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeElasticIps = "DescribeElasticIps"
 
@@ -66,7 +31,7 @@ const opDescribeElasticIps = "DescribeElasticIps"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DescribeElasticIps
-func (c *Client) DescribeElasticIpsRequest(input *DescribeElasticIpsInput) DescribeElasticIpsRequest {
+func (c *Client) DescribeElasticIpsRequest(input *types.DescribeElasticIpsInput) DescribeElasticIpsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeElasticIps,
 		HTTPMethod: "POST",
@@ -74,10 +39,10 @@ func (c *Client) DescribeElasticIpsRequest(input *DescribeElasticIpsInput) Descr
 	}
 
 	if input == nil {
-		input = &DescribeElasticIpsInput{}
+		input = &types.DescribeElasticIpsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeElasticIpsOutput{})
+	req := c.newRequest(op, input, &types.DescribeElasticIpsOutput{})
 	return DescribeElasticIpsRequest{Request: req, Input: input, Copy: c.DescribeElasticIpsRequest}
 }
 
@@ -85,8 +50,8 @@ func (c *Client) DescribeElasticIpsRequest(input *DescribeElasticIpsInput) Descr
 // DescribeElasticIps API operation.
 type DescribeElasticIpsRequest struct {
 	*aws.Request
-	Input *DescribeElasticIpsInput
-	Copy  func(*DescribeElasticIpsInput) DescribeElasticIpsRequest
+	Input *types.DescribeElasticIpsInput
+	Copy  func(*types.DescribeElasticIpsInput) DescribeElasticIpsRequest
 }
 
 // Send marshals and sends the DescribeElasticIps API request.
@@ -98,7 +63,7 @@ func (r DescribeElasticIpsRequest) Send(ctx context.Context) (*DescribeElasticIp
 	}
 
 	resp := &DescribeElasticIpsResponse{
-		DescribeElasticIpsOutput: r.Request.Data.(*DescribeElasticIpsOutput),
+		DescribeElasticIpsOutput: r.Request.Data.(*types.DescribeElasticIpsOutput),
 		response:                 &aws.Response{Request: r.Request},
 	}
 
@@ -108,7 +73,7 @@ func (r DescribeElasticIpsRequest) Send(ctx context.Context) (*DescribeElasticIp
 // DescribeElasticIpsResponse is the response type for the
 // DescribeElasticIps API operation.
 type DescribeElasticIpsResponse struct {
-	*DescribeElasticIpsOutput
+	*types.DescribeElasticIpsOutput
 
 	response *aws.Response
 }

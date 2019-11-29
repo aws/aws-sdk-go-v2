@@ -6,117 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/workdocs/types"
 )
-
-type DescribeRootFoldersInput struct {
-	_ struct{} `type:"structure"`
-
-	// Amazon WorkDocs authentication token. Do not set this field when using administrative
-	// API actions, as in accessing the API using AWS credentials.
-	//
-	// AuthenticationToken is a required field
-	AuthenticationToken *string `location:"header" locationName:"Authentication" min:"1" type:"string" required:"true" sensitive:"true"`
-
-	// The maximum number of items to return.
-	Limit *int64 `location:"querystring" locationName:"limit" min:"1" type:"integer"`
-
-	// The marker for the next set of results. (You received this marker from a
-	// previous call.)
-	Marker *string `location:"querystring" locationName:"marker" min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeRootFoldersInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeRootFoldersInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeRootFoldersInput"}
-
-	if s.AuthenticationToken == nil {
-		invalidParams.Add(aws.NewErrParamRequired("AuthenticationToken"))
-	}
-	if s.AuthenticationToken != nil && len(*s.AuthenticationToken) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("AuthenticationToken", 1))
-	}
-	if s.Limit != nil && *s.Limit < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("Limit", 1))
-	}
-	if s.Marker != nil && len(*s.Marker) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Marker", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DescribeRootFoldersInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.AuthenticationToken != nil {
-		v := *s.AuthenticationToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "Authentication", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Limit != nil {
-		v := *s.Limit
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "limit", protocol.Int64Value(v), metadata)
-	}
-	if s.Marker != nil {
-		v := *s.Marker
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "marker", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type DescribeRootFoldersOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The user's special folders.
-	Folders []FolderMetadata `type:"list"`
-
-	// The marker for the next set of results.
-	Marker *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeRootFoldersOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DescribeRootFoldersOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.Folders != nil {
-		v := s.Folders
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "Folders", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	if s.Marker != nil {
-		v := *s.Marker
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "Marker", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opDescribeRootFolders = "DescribeRootFolders"
 
@@ -141,7 +32,7 @@ const opDescribeRootFolders = "DescribeRootFolders"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/DescribeRootFolders
-func (c *Client) DescribeRootFoldersRequest(input *DescribeRootFoldersInput) DescribeRootFoldersRequest {
+func (c *Client) DescribeRootFoldersRequest(input *types.DescribeRootFoldersInput) DescribeRootFoldersRequest {
 	op := &aws.Operation{
 		Name:       opDescribeRootFolders,
 		HTTPMethod: "GET",
@@ -149,10 +40,10 @@ func (c *Client) DescribeRootFoldersRequest(input *DescribeRootFoldersInput) Des
 	}
 
 	if input == nil {
-		input = &DescribeRootFoldersInput{}
+		input = &types.DescribeRootFoldersInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeRootFoldersOutput{})
+	req := c.newRequest(op, input, &types.DescribeRootFoldersOutput{})
 	return DescribeRootFoldersRequest{Request: req, Input: input, Copy: c.DescribeRootFoldersRequest}
 }
 
@@ -160,8 +51,8 @@ func (c *Client) DescribeRootFoldersRequest(input *DescribeRootFoldersInput) Des
 // DescribeRootFolders API operation.
 type DescribeRootFoldersRequest struct {
 	*aws.Request
-	Input *DescribeRootFoldersInput
-	Copy  func(*DescribeRootFoldersInput) DescribeRootFoldersRequest
+	Input *types.DescribeRootFoldersInput
+	Copy  func(*types.DescribeRootFoldersInput) DescribeRootFoldersRequest
 }
 
 // Send marshals and sends the DescribeRootFolders API request.
@@ -173,7 +64,7 @@ func (r DescribeRootFoldersRequest) Send(ctx context.Context) (*DescribeRootFold
 	}
 
 	resp := &DescribeRootFoldersResponse{
-		DescribeRootFoldersOutput: r.Request.Data.(*DescribeRootFoldersOutput),
+		DescribeRootFoldersOutput: r.Request.Data.(*types.DescribeRootFoldersOutput),
 		response:                  &aws.Response{Request: r.Request},
 	}
 
@@ -183,7 +74,7 @@ func (r DescribeRootFoldersRequest) Send(ctx context.Context) (*DescribeRootFold
 // DescribeRootFoldersResponse is the response type for the
 // DescribeRootFolders API operation.
 type DescribeRootFoldersResponse struct {
-	*DescribeRootFoldersOutput
+	*types.DescribeRootFoldersOutput
 
 	response *aws.Response
 }

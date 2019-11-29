@@ -6,120 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/alexaforbusiness/types"
 )
-
-type CreateProfileInput struct {
-	_ struct{} `type:"structure"`
-
-	// The valid address for the room.
-	//
-	// Address is a required field
-	Address *string `min:"1" type:"string" required:"true"`
-
-	// The user-specified token that is used during the creation of a profile.
-	ClientRequestToken *string `min:"10" type:"string" idempotencyToken:"true"`
-
-	// The distance unit to be used by devices in the profile.
-	//
-	// DistanceUnit is a required field
-	DistanceUnit DistanceUnit `type:"string" required:"true" enum:"true"`
-
-	// The locale of the room profile.
-	Locale *string `min:"1" type:"string"`
-
-	// The maximum volume limit for a room profile.
-	MaxVolumeLimit *int64 `type:"integer"`
-
-	// Whether PSTN calling is enabled.
-	PSTNEnabled *bool `type:"boolean"`
-
-	// The name of a room profile.
-	//
-	// ProfileName is a required field
-	ProfileName *string `min:"1" type:"string" required:"true"`
-
-	// Whether room profile setup is enabled.
-	SetupModeDisabled *bool `type:"boolean"`
-
-	// The temperature unit to be used by devices in the profile.
-	//
-	// TemperatureUnit is a required field
-	TemperatureUnit TemperatureUnit `type:"string" required:"true" enum:"true"`
-
-	// The time zone used by a room profile.
-	//
-	// Timezone is a required field
-	Timezone *string `min:"1" type:"string" required:"true"`
-
-	// A wake word for Alexa, Echo, Amazon, or a computer.
-	//
-	// WakeWord is a required field
-	WakeWord WakeWord `type:"string" required:"true" enum:"true"`
-}
-
-// String returns the string representation
-func (s CreateProfileInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateProfileInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateProfileInput"}
-
-	if s.Address == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Address"))
-	}
-	if s.Address != nil && len(*s.Address) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Address", 1))
-	}
-	if s.ClientRequestToken != nil && len(*s.ClientRequestToken) < 10 {
-		invalidParams.Add(aws.NewErrParamMinLen("ClientRequestToken", 10))
-	}
-	if len(s.DistanceUnit) == 0 {
-		invalidParams.Add(aws.NewErrParamRequired("DistanceUnit"))
-	}
-	if s.Locale != nil && len(*s.Locale) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Locale", 1))
-	}
-
-	if s.ProfileName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ProfileName"))
-	}
-	if s.ProfileName != nil && len(*s.ProfileName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ProfileName", 1))
-	}
-	if len(s.TemperatureUnit) == 0 {
-		invalidParams.Add(aws.NewErrParamRequired("TemperatureUnit"))
-	}
-
-	if s.Timezone == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Timezone"))
-	}
-	if s.Timezone != nil && len(*s.Timezone) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Timezone", 1))
-	}
-	if len(s.WakeWord) == 0 {
-		invalidParams.Add(aws.NewErrParamRequired("WakeWord"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type CreateProfileOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The ARN of the newly created room profile in the response.
-	ProfileArn *string `type:"string"`
-}
-
-// String returns the string representation
-func (s CreateProfileOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCreateProfile = "CreateProfile"
 
@@ -136,7 +24,7 @@ const opCreateProfile = "CreateProfile"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/CreateProfile
-func (c *Client) CreateProfileRequest(input *CreateProfileInput) CreateProfileRequest {
+func (c *Client) CreateProfileRequest(input *types.CreateProfileInput) CreateProfileRequest {
 	op := &aws.Operation{
 		Name:       opCreateProfile,
 		HTTPMethod: "POST",
@@ -144,10 +32,10 @@ func (c *Client) CreateProfileRequest(input *CreateProfileInput) CreateProfileRe
 	}
 
 	if input == nil {
-		input = &CreateProfileInput{}
+		input = &types.CreateProfileInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateProfileOutput{})
+	req := c.newRequest(op, input, &types.CreateProfileOutput{})
 	return CreateProfileRequest{Request: req, Input: input, Copy: c.CreateProfileRequest}
 }
 
@@ -155,8 +43,8 @@ func (c *Client) CreateProfileRequest(input *CreateProfileInput) CreateProfileRe
 // CreateProfile API operation.
 type CreateProfileRequest struct {
 	*aws.Request
-	Input *CreateProfileInput
-	Copy  func(*CreateProfileInput) CreateProfileRequest
+	Input *types.CreateProfileInput
+	Copy  func(*types.CreateProfileInput) CreateProfileRequest
 }
 
 // Send marshals and sends the CreateProfile API request.
@@ -168,7 +56,7 @@ func (r CreateProfileRequest) Send(ctx context.Context) (*CreateProfileResponse,
 	}
 
 	resp := &CreateProfileResponse{
-		CreateProfileOutput: r.Request.Data.(*CreateProfileOutput),
+		CreateProfileOutput: r.Request.Data.(*types.CreateProfileOutput),
 		response:            &aws.Response{Request: r.Request},
 	}
 
@@ -178,7 +66,7 @@ func (r CreateProfileRequest) Send(ctx context.Context) (*CreateProfileResponse,
 // CreateProfileResponse is the response type for the
 // CreateProfile API operation.
 type CreateProfileResponse struct {
-	*CreateProfileOutput
+	*types.CreateProfileOutput
 
 	response *aws.Response
 }

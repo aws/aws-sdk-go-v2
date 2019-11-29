@@ -6,61 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/directoryservice/types"
 )
-
-type ListSchemaExtensionsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The identifier of the directory from which to retrieve the schema extension
-	// information.
-	//
-	// DirectoryId is a required field
-	DirectoryId *string `type:"string" required:"true"`
-
-	// The maximum number of items to return.
-	Limit *int64 `type:"integer"`
-
-	// The ListSchemaExtensions.NextToken value from a previous call to ListSchemaExtensions.
-	// Pass null if this is the first call.
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s ListSchemaExtensionsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListSchemaExtensionsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListSchemaExtensionsInput"}
-
-	if s.DirectoryId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DirectoryId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ListSchemaExtensionsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// If not null, more results are available. Pass this value for the NextToken
-	// parameter in a subsequent call to ListSchemaExtensions to retrieve the next
-	// set of items.
-	NextToken *string `type:"string"`
-
-	// Information about the schema extensions applied to the directory.
-	SchemaExtensionsInfo []SchemaExtensionInfo `type:"list"`
-}
-
-// String returns the string representation
-func (s ListSchemaExtensionsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListSchemaExtensions = "ListSchemaExtensions"
 
@@ -77,7 +24,7 @@ const opListSchemaExtensions = "ListSchemaExtensions"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/ListSchemaExtensions
-func (c *Client) ListSchemaExtensionsRequest(input *ListSchemaExtensionsInput) ListSchemaExtensionsRequest {
+func (c *Client) ListSchemaExtensionsRequest(input *types.ListSchemaExtensionsInput) ListSchemaExtensionsRequest {
 	op := &aws.Operation{
 		Name:       opListSchemaExtensions,
 		HTTPMethod: "POST",
@@ -85,10 +32,10 @@ func (c *Client) ListSchemaExtensionsRequest(input *ListSchemaExtensionsInput) L
 	}
 
 	if input == nil {
-		input = &ListSchemaExtensionsInput{}
+		input = &types.ListSchemaExtensionsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListSchemaExtensionsOutput{})
+	req := c.newRequest(op, input, &types.ListSchemaExtensionsOutput{})
 	return ListSchemaExtensionsRequest{Request: req, Input: input, Copy: c.ListSchemaExtensionsRequest}
 }
 
@@ -96,8 +43,8 @@ func (c *Client) ListSchemaExtensionsRequest(input *ListSchemaExtensionsInput) L
 // ListSchemaExtensions API operation.
 type ListSchemaExtensionsRequest struct {
 	*aws.Request
-	Input *ListSchemaExtensionsInput
-	Copy  func(*ListSchemaExtensionsInput) ListSchemaExtensionsRequest
+	Input *types.ListSchemaExtensionsInput
+	Copy  func(*types.ListSchemaExtensionsInput) ListSchemaExtensionsRequest
 }
 
 // Send marshals and sends the ListSchemaExtensions API request.
@@ -109,7 +56,7 @@ func (r ListSchemaExtensionsRequest) Send(ctx context.Context) (*ListSchemaExten
 	}
 
 	resp := &ListSchemaExtensionsResponse{
-		ListSchemaExtensionsOutput: r.Request.Data.(*ListSchemaExtensionsOutput),
+		ListSchemaExtensionsOutput: r.Request.Data.(*types.ListSchemaExtensionsOutput),
 		response:                   &aws.Response{Request: r.Request},
 	}
 
@@ -119,7 +66,7 @@ func (r ListSchemaExtensionsRequest) Send(ctx context.Context) (*ListSchemaExten
 // ListSchemaExtensionsResponse is the response type for the
 // ListSchemaExtensions API operation.
 type ListSchemaExtensionsResponse struct {
-	*ListSchemaExtensionsOutput
+	*types.ListSchemaExtensionsOutput
 
 	response *aws.Response
 }

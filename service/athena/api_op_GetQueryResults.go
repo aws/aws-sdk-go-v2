@@ -6,67 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/athena/types"
 )
-
-type GetQueryResultsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The maximum number of results (rows) to return in this request.
-	MaxResults *int64 `min:"1" type:"integer"`
-
-	// The token that specifies where to start pagination if a previous request
-	// was truncated.
-	NextToken *string `min:"1" type:"string"`
-
-	// The unique ID of the query execution.
-	//
-	// QueryExecutionId is a required field
-	QueryExecutionId *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetQueryResultsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetQueryResultsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetQueryResultsInput"}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-	if s.NextToken != nil && len(*s.NextToken) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
-	}
-
-	if s.QueryExecutionId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("QueryExecutionId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type GetQueryResultsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A token to be used by the next request if this request is truncated.
-	NextToken *string `min:"1" type:"string"`
-
-	// The results of the query execution.
-	ResultSet *ResultSet `type:"structure"`
-
-	// The number of rows inserted with a CREATE TABLE AS SELECT statement.
-	UpdateCount *int64 `type:"long"`
-}
-
-// String returns the string representation
-func (s GetQueryResultsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetQueryResults = "GetQueryResults"
 
@@ -97,7 +38,7 @@ const opGetQueryResults = "GetQueryResults"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/GetQueryResults
-func (c *Client) GetQueryResultsRequest(input *GetQueryResultsInput) GetQueryResultsRequest {
+func (c *Client) GetQueryResultsRequest(input *types.GetQueryResultsInput) GetQueryResultsRequest {
 	op := &aws.Operation{
 		Name:       opGetQueryResults,
 		HTTPMethod: "POST",
@@ -111,10 +52,10 @@ func (c *Client) GetQueryResultsRequest(input *GetQueryResultsInput) GetQueryRes
 	}
 
 	if input == nil {
-		input = &GetQueryResultsInput{}
+		input = &types.GetQueryResultsInput{}
 	}
 
-	req := c.newRequest(op, input, &GetQueryResultsOutput{})
+	req := c.newRequest(op, input, &types.GetQueryResultsOutput{})
 	return GetQueryResultsRequest{Request: req, Input: input, Copy: c.GetQueryResultsRequest}
 }
 
@@ -122,8 +63,8 @@ func (c *Client) GetQueryResultsRequest(input *GetQueryResultsInput) GetQueryRes
 // GetQueryResults API operation.
 type GetQueryResultsRequest struct {
 	*aws.Request
-	Input *GetQueryResultsInput
-	Copy  func(*GetQueryResultsInput) GetQueryResultsRequest
+	Input *types.GetQueryResultsInput
+	Copy  func(*types.GetQueryResultsInput) GetQueryResultsRequest
 }
 
 // Send marshals and sends the GetQueryResults API request.
@@ -135,7 +76,7 @@ func (r GetQueryResultsRequest) Send(ctx context.Context) (*GetQueryResultsRespo
 	}
 
 	resp := &GetQueryResultsResponse{
-		GetQueryResultsOutput: r.Request.Data.(*GetQueryResultsOutput),
+		GetQueryResultsOutput: r.Request.Data.(*types.GetQueryResultsOutput),
 		response:              &aws.Response{Request: r.Request},
 	}
 
@@ -165,7 +106,7 @@ func NewGetQueryResultsPaginator(req GetQueryResultsRequest) GetQueryResultsPagi
 	return GetQueryResultsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *GetQueryResultsInput
+				var inCpy *types.GetQueryResultsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -185,14 +126,14 @@ type GetQueryResultsPaginator struct {
 	aws.Pager
 }
 
-func (p *GetQueryResultsPaginator) CurrentPage() *GetQueryResultsOutput {
-	return p.Pager.CurrentPage().(*GetQueryResultsOutput)
+func (p *GetQueryResultsPaginator) CurrentPage() *types.GetQueryResultsOutput {
+	return p.Pager.CurrentPage().(*types.GetQueryResultsOutput)
 }
 
 // GetQueryResultsResponse is the response type for the
 // GetQueryResults API operation.
 type GetQueryResultsResponse struct {
-	*GetQueryResultsOutput
+	*types.GetQueryResultsOutput
 
 	response *aws.Response
 }

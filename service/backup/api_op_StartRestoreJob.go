@@ -6,144 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/backup/types"
 )
-
-type StartRestoreJobInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the IAM role that AWS Backup uses to create
-	// the target recovery point; for example, arn:aws:iam::123456789012:role/S3Access.
-	//
-	// IamRoleArn is a required field
-	IamRoleArn *string `type:"string" required:"true"`
-
-	// A customer chosen string that can be used to distinguish between calls to
-	// StartRestoreJob. Idempotency tokens time out after one hour. Therefore, if
-	// you call StartRestoreJob multiple times with the same idempotency token within
-	// one hour, AWS Backup recognizes that you are requesting only one restore
-	// job and initiates only one. If you change the idempotency token for each
-	// call, AWS Backup recognizes that you are requesting to start multiple restores.
-	IdempotencyToken *string `type:"string"`
-
-	// A set of metadata key-value pairs. Lists the metadata that the recovery point
-	// was created with.
-	//
-	// Metadata is a required field
-	Metadata map[string]string `type:"map" required:"true"`
-
-	// An ARN that uniquely identifies a recovery point; for example, arn:aws:backup:us-east-1:123456789012:recovery-point:1EB3B5E7-9EB0-435A-A80B-108B488B0D45.
-	//
-	// RecoveryPointArn is a required field
-	RecoveryPointArn *string `type:"string" required:"true"`
-
-	// Starts a job to restore a recovery point for one of the following resources:
-	//
-	//    * EBS for Amazon Elastic Block Store
-	//
-	//    * SGW for AWS Storage Gateway
-	//
-	//    * RDS for Amazon Relational Database Service
-	//
-	//    * DDB for Amazon DynamoDB
-	//
-	//    * EFS for Amazon Elastic File System
-	ResourceType *string `type:"string"`
-}
-
-// String returns the string representation
-func (s StartRestoreJobInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *StartRestoreJobInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "StartRestoreJobInput"}
-
-	if s.IamRoleArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("IamRoleArn"))
-	}
-
-	if s.Metadata == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Metadata"))
-	}
-
-	if s.RecoveryPointArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("RecoveryPointArn"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s StartRestoreJobInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.IamRoleArn != nil {
-		v := *s.IamRoleArn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "IamRoleArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.IdempotencyToken != nil {
-		v := *s.IdempotencyToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "IdempotencyToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Metadata != nil {
-		v := s.Metadata
-
-		metadata := protocol.Metadata{}
-		ms0 := e.Map(protocol.BodyTarget, "Metadata", metadata)
-		ms0.Start()
-		for k1, v1 := range v {
-			ms0.MapSetValue(k1, protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
-		}
-		ms0.End()
-
-	}
-	if s.RecoveryPointArn != nil {
-		v := *s.RecoveryPointArn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "RecoveryPointArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.ResourceType != nil {
-		v := *s.ResourceType
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "ResourceType", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type StartRestoreJobOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Uniquely identifies the job that restores a recovery point.
-	RestoreJobId *string `type:"string"`
-}
-
-// String returns the string representation
-func (s StartRestoreJobOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s StartRestoreJobOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.RestoreJobId != nil {
-		v := *s.RestoreJobId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "RestoreJobId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opStartRestoreJob = "StartRestoreJob"
 
@@ -164,7 +28,7 @@ const opStartRestoreJob = "StartRestoreJob"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/StartRestoreJob
-func (c *Client) StartRestoreJobRequest(input *StartRestoreJobInput) StartRestoreJobRequest {
+func (c *Client) StartRestoreJobRequest(input *types.StartRestoreJobInput) StartRestoreJobRequest {
 	op := &aws.Operation{
 		Name:       opStartRestoreJob,
 		HTTPMethod: "PUT",
@@ -172,10 +36,10 @@ func (c *Client) StartRestoreJobRequest(input *StartRestoreJobInput) StartRestor
 	}
 
 	if input == nil {
-		input = &StartRestoreJobInput{}
+		input = &types.StartRestoreJobInput{}
 	}
 
-	req := c.newRequest(op, input, &StartRestoreJobOutput{})
+	req := c.newRequest(op, input, &types.StartRestoreJobOutput{})
 	return StartRestoreJobRequest{Request: req, Input: input, Copy: c.StartRestoreJobRequest}
 }
 
@@ -183,8 +47,8 @@ func (c *Client) StartRestoreJobRequest(input *StartRestoreJobInput) StartRestor
 // StartRestoreJob API operation.
 type StartRestoreJobRequest struct {
 	*aws.Request
-	Input *StartRestoreJobInput
-	Copy  func(*StartRestoreJobInput) StartRestoreJobRequest
+	Input *types.StartRestoreJobInput
+	Copy  func(*types.StartRestoreJobInput) StartRestoreJobRequest
 }
 
 // Send marshals and sends the StartRestoreJob API request.
@@ -196,7 +60,7 @@ func (r StartRestoreJobRequest) Send(ctx context.Context) (*StartRestoreJobRespo
 	}
 
 	resp := &StartRestoreJobResponse{
-		StartRestoreJobOutput: r.Request.Data.(*StartRestoreJobOutput),
+		StartRestoreJobOutput: r.Request.Data.(*types.StartRestoreJobOutput),
 		response:              &aws.Response{Request: r.Request},
 	}
 
@@ -206,7 +70,7 @@ func (r StartRestoreJobRequest) Send(ctx context.Context) (*StartRestoreJobRespo
 // StartRestoreJobResponse is the response type for the
 // StartRestoreJob API operation.
 type StartRestoreJobResponse struct {
-	*StartRestoreJobOutput
+	*types.StartRestoreJobOutput
 
 	response *aws.Response
 }

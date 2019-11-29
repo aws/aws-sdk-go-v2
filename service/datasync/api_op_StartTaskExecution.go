@@ -6,72 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/datasync/types"
 )
-
-// StartTaskExecutionRequest
-type StartTaskExecutionInput struct {
-	_ struct{} `type:"structure"`
-
-	// A list of filter rules that determines which files to include when running
-	// a task. The pattern should contain a single filter string that consists of
-	// the patterns to include. The patterns are delimited by "|" (that is, a pipe).
-	// For example: "/folder1|/folder2"
-	Includes []FilterRule `type:"list"`
-
-	// Represents the options that are available to control the behavior of a StartTaskExecution
-	// operation. Behavior includes preserving metadata such as user ID (UID), group
-	// ID (GID), and file permissions, and also overwriting files in the destination,
-	// data integrity verification, and so on.
-	//
-	// A task has a set of default options associated with it. If you don't specify
-	// an option in StartTaskExecution, the default value is used. You can override
-	// the defaults options on each task execution by specifying an overriding Options
-	// value to StartTaskExecution.
-	OverrideOptions *Options `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the task to start.
-	//
-	// TaskArn is a required field
-	TaskArn *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s StartTaskExecutionInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *StartTaskExecutionInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "StartTaskExecutionInput"}
-
-	if s.TaskArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("TaskArn"))
-	}
-	if s.OverrideOptions != nil {
-		if err := s.OverrideOptions.Validate(); err != nil {
-			invalidParams.AddNested("OverrideOptions", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// StartTaskExecutionResponse
-type StartTaskExecutionOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the specific task execution that was started.
-	TaskExecutionArn *string `type:"string"`
-}
-
-// String returns the string representation
-func (s StartTaskExecutionOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opStartTaskExecution = "StartTaskExecution"
 
@@ -96,7 +32,7 @@ const opStartTaskExecution = "StartTaskExecution"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/StartTaskExecution
-func (c *Client) StartTaskExecutionRequest(input *StartTaskExecutionInput) StartTaskExecutionRequest {
+func (c *Client) StartTaskExecutionRequest(input *types.StartTaskExecutionInput) StartTaskExecutionRequest {
 	op := &aws.Operation{
 		Name:       opStartTaskExecution,
 		HTTPMethod: "POST",
@@ -104,10 +40,10 @@ func (c *Client) StartTaskExecutionRequest(input *StartTaskExecutionInput) Start
 	}
 
 	if input == nil {
-		input = &StartTaskExecutionInput{}
+		input = &types.StartTaskExecutionInput{}
 	}
 
-	req := c.newRequest(op, input, &StartTaskExecutionOutput{})
+	req := c.newRequest(op, input, &types.StartTaskExecutionOutput{})
 	return StartTaskExecutionRequest{Request: req, Input: input, Copy: c.StartTaskExecutionRequest}
 }
 
@@ -115,8 +51,8 @@ func (c *Client) StartTaskExecutionRequest(input *StartTaskExecutionInput) Start
 // StartTaskExecution API operation.
 type StartTaskExecutionRequest struct {
 	*aws.Request
-	Input *StartTaskExecutionInput
-	Copy  func(*StartTaskExecutionInput) StartTaskExecutionRequest
+	Input *types.StartTaskExecutionInput
+	Copy  func(*types.StartTaskExecutionInput) StartTaskExecutionRequest
 }
 
 // Send marshals and sends the StartTaskExecution API request.
@@ -128,7 +64,7 @@ func (r StartTaskExecutionRequest) Send(ctx context.Context) (*StartTaskExecutio
 	}
 
 	resp := &StartTaskExecutionResponse{
-		StartTaskExecutionOutput: r.Request.Data.(*StartTaskExecutionOutput),
+		StartTaskExecutionOutput: r.Request.Data.(*types.StartTaskExecutionOutput),
 		response:                 &aws.Response{Request: r.Request},
 	}
 
@@ -138,7 +74,7 @@ func (r StartTaskExecutionRequest) Send(ctx context.Context) (*StartTaskExecutio
 // StartTaskExecutionResponse is the response type for the
 // StartTaskExecution API operation.
 type StartTaskExecutionResponse struct {
-	*StartTaskExecutionOutput
+	*types.StartTaskExecutionOutput
 
 	response *aws.Response
 }

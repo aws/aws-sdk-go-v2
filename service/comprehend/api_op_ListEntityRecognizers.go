@@ -6,58 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/comprehend/types"
 )
-
-type ListEntityRecognizersInput struct {
-	_ struct{} `type:"structure"`
-
-	// Filters the list of entities returned. You can filter on Status, SubmitTimeBefore,
-	// or SubmitTimeAfter. You can only set one filter at a time.
-	Filter *EntityRecognizerFilter `type:"structure"`
-
-	// The maximum number of results to return on each page. The default is 100.
-	MaxResults *int64 `min:"1" type:"integer"`
-
-	// Identifies the next page of results to return.
-	NextToken *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s ListEntityRecognizersInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListEntityRecognizersInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListEntityRecognizersInput"}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-	if s.NextToken != nil && len(*s.NextToken) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ListEntityRecognizersOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The list of properties of an entity recognizer.
-	EntityRecognizerPropertiesList []EntityRecognizerProperties `type:"list"`
-
-	// Identifies the next page of results to return.
-	NextToken *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s ListEntityRecognizersOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListEntityRecognizers = "ListEntityRecognizers"
 
@@ -81,7 +31,7 @@ const opListEntityRecognizers = "ListEntityRecognizers"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/ListEntityRecognizers
-func (c *Client) ListEntityRecognizersRequest(input *ListEntityRecognizersInput) ListEntityRecognizersRequest {
+func (c *Client) ListEntityRecognizersRequest(input *types.ListEntityRecognizersInput) ListEntityRecognizersRequest {
 	op := &aws.Operation{
 		Name:       opListEntityRecognizers,
 		HTTPMethod: "POST",
@@ -95,10 +45,10 @@ func (c *Client) ListEntityRecognizersRequest(input *ListEntityRecognizersInput)
 	}
 
 	if input == nil {
-		input = &ListEntityRecognizersInput{}
+		input = &types.ListEntityRecognizersInput{}
 	}
 
-	req := c.newRequest(op, input, &ListEntityRecognizersOutput{})
+	req := c.newRequest(op, input, &types.ListEntityRecognizersOutput{})
 	return ListEntityRecognizersRequest{Request: req, Input: input, Copy: c.ListEntityRecognizersRequest}
 }
 
@@ -106,8 +56,8 @@ func (c *Client) ListEntityRecognizersRequest(input *ListEntityRecognizersInput)
 // ListEntityRecognizers API operation.
 type ListEntityRecognizersRequest struct {
 	*aws.Request
-	Input *ListEntityRecognizersInput
-	Copy  func(*ListEntityRecognizersInput) ListEntityRecognizersRequest
+	Input *types.ListEntityRecognizersInput
+	Copy  func(*types.ListEntityRecognizersInput) ListEntityRecognizersRequest
 }
 
 // Send marshals and sends the ListEntityRecognizers API request.
@@ -119,7 +69,7 @@ func (r ListEntityRecognizersRequest) Send(ctx context.Context) (*ListEntityReco
 	}
 
 	resp := &ListEntityRecognizersResponse{
-		ListEntityRecognizersOutput: r.Request.Data.(*ListEntityRecognizersOutput),
+		ListEntityRecognizersOutput: r.Request.Data.(*types.ListEntityRecognizersOutput),
 		response:                    &aws.Response{Request: r.Request},
 	}
 
@@ -149,7 +99,7 @@ func NewListEntityRecognizersPaginator(req ListEntityRecognizersRequest) ListEnt
 	return ListEntityRecognizersPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListEntityRecognizersInput
+				var inCpy *types.ListEntityRecognizersInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -169,14 +119,14 @@ type ListEntityRecognizersPaginator struct {
 	aws.Pager
 }
 
-func (p *ListEntityRecognizersPaginator) CurrentPage() *ListEntityRecognizersOutput {
-	return p.Pager.CurrentPage().(*ListEntityRecognizersOutput)
+func (p *ListEntityRecognizersPaginator) CurrentPage() *types.ListEntityRecognizersOutput {
+	return p.Pager.CurrentPage().(*types.ListEntityRecognizersOutput)
 }
 
 // ListEntityRecognizersResponse is the response type for the
 // ListEntityRecognizers API operation.
 type ListEntityRecognizersResponse struct {
-	*ListEntityRecognizersOutput
+	*types.ListEntityRecognizersOutput
 
 	response *aws.Response
 }

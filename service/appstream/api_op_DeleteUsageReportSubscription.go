@@ -6,26 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/appstream/types"
 )
-
-type DeleteUsageReportSubscriptionInput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteUsageReportSubscriptionInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type DeleteUsageReportSubscriptionOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteUsageReportSubscriptionOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteUsageReportSubscription = "DeleteUsageReportSubscription"
 
@@ -42,7 +24,7 @@ const opDeleteUsageReportSubscription = "DeleteUsageReportSubscription"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DeleteUsageReportSubscription
-func (c *Client) DeleteUsageReportSubscriptionRequest(input *DeleteUsageReportSubscriptionInput) DeleteUsageReportSubscriptionRequest {
+func (c *Client) DeleteUsageReportSubscriptionRequest(input *types.DeleteUsageReportSubscriptionInput) DeleteUsageReportSubscriptionRequest {
 	op := &aws.Operation{
 		Name:       opDeleteUsageReportSubscription,
 		HTTPMethod: "POST",
@@ -50,10 +32,10 @@ func (c *Client) DeleteUsageReportSubscriptionRequest(input *DeleteUsageReportSu
 	}
 
 	if input == nil {
-		input = &DeleteUsageReportSubscriptionInput{}
+		input = &types.DeleteUsageReportSubscriptionInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteUsageReportSubscriptionOutput{})
+	req := c.newRequest(op, input, &types.DeleteUsageReportSubscriptionOutput{})
 	return DeleteUsageReportSubscriptionRequest{Request: req, Input: input, Copy: c.DeleteUsageReportSubscriptionRequest}
 }
 
@@ -61,8 +43,8 @@ func (c *Client) DeleteUsageReportSubscriptionRequest(input *DeleteUsageReportSu
 // DeleteUsageReportSubscription API operation.
 type DeleteUsageReportSubscriptionRequest struct {
 	*aws.Request
-	Input *DeleteUsageReportSubscriptionInput
-	Copy  func(*DeleteUsageReportSubscriptionInput) DeleteUsageReportSubscriptionRequest
+	Input *types.DeleteUsageReportSubscriptionInput
+	Copy  func(*types.DeleteUsageReportSubscriptionInput) DeleteUsageReportSubscriptionRequest
 }
 
 // Send marshals and sends the DeleteUsageReportSubscription API request.
@@ -74,7 +56,7 @@ func (r DeleteUsageReportSubscriptionRequest) Send(ctx context.Context) (*Delete
 	}
 
 	resp := &DeleteUsageReportSubscriptionResponse{
-		DeleteUsageReportSubscriptionOutput: r.Request.Data.(*DeleteUsageReportSubscriptionOutput),
+		DeleteUsageReportSubscriptionOutput: r.Request.Data.(*types.DeleteUsageReportSubscriptionOutput),
 		response:                            &aws.Response{Request: r.Request},
 	}
 
@@ -84,7 +66,7 @@ func (r DeleteUsageReportSubscriptionRequest) Send(ctx context.Context) (*Delete
 // DeleteUsageReportSubscriptionResponse is the response type for the
 // DeleteUsageReportSubscription API operation.
 type DeleteUsageReportSubscriptionResponse struct {
-	*DeleteUsageReportSubscriptionOutput
+	*types.DeleteUsageReportSubscriptionOutput
 
 	response *aws.Response
 }

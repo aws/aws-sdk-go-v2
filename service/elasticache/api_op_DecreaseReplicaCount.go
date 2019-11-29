@@ -4,92 +4,10 @@ package elasticache
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/elasticache/types"
 )
-
-type DecreaseReplicaCountInput struct {
-	_ struct{} `type:"structure"`
-
-	// If True, the number of replica nodes is decreased immediately. ApplyImmediately=False
-	// is not currently supported.
-	//
-	// ApplyImmediately is a required field
-	ApplyImmediately *bool `type:"boolean" required:"true"`
-
-	// The number of read replica nodes you want at the completion of this operation.
-	// For Redis (cluster mode disabled) replication groups, this is the number
-	// of replica nodes in the replication group. For Redis (cluster mode enabled)
-	// replication groups, this is the number of replica nodes in each of the replication
-	// group's node groups.
-	//
-	// The minimum number of replicas in a shard or replication group is:
-	//
-	//    * Redis (cluster mode disabled) If Multi-AZ with Automatic Failover is
-	//    enabled: 1 If Multi-AZ with Automatic Failover is not enabled: 0
-	//
-	//    * Redis (cluster mode enabled): 0 (though you will not be able to failover
-	//    to a replica if your primary node fails)
-	NewReplicaCount *int64 `type:"integer"`
-
-	// A list of ConfigureShard objects that can be used to configure each shard
-	// in a Redis (cluster mode enabled) replication group. The ConfigureShard has
-	// three members: NewReplicaCount, NodeGroupId, and PreferredAvailabilityZones.
-	ReplicaConfiguration []ConfigureShard `locationNameList:"ConfigureShard" type:"list"`
-
-	// A list of the node ids to remove from the replication group or node group
-	// (shard).
-	ReplicasToRemove []string `type:"list"`
-
-	// The id of the replication group from which you want to remove replica nodes.
-	//
-	// ReplicationGroupId is a required field
-	ReplicationGroupId *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DecreaseReplicaCountInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DecreaseReplicaCountInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DecreaseReplicaCountInput"}
-
-	if s.ApplyImmediately == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ApplyImmediately"))
-	}
-
-	if s.ReplicationGroupId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ReplicationGroupId"))
-	}
-	if s.ReplicaConfiguration != nil {
-		for i, v := range s.ReplicaConfiguration {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "ReplicaConfiguration", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DecreaseReplicaCountOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Contains all of the attributes of a specific Redis replication group.
-	ReplicationGroup *ReplicationGroup `type:"structure"`
-}
-
-// String returns the string representation
-func (s DecreaseReplicaCountOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDecreaseReplicaCount = "DecreaseReplicaCount"
 
@@ -109,7 +27,7 @@ const opDecreaseReplicaCount = "DecreaseReplicaCount"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DecreaseReplicaCount
-func (c *Client) DecreaseReplicaCountRequest(input *DecreaseReplicaCountInput) DecreaseReplicaCountRequest {
+func (c *Client) DecreaseReplicaCountRequest(input *types.DecreaseReplicaCountInput) DecreaseReplicaCountRequest {
 	op := &aws.Operation{
 		Name:       opDecreaseReplicaCount,
 		HTTPMethod: "POST",
@@ -117,10 +35,10 @@ func (c *Client) DecreaseReplicaCountRequest(input *DecreaseReplicaCountInput) D
 	}
 
 	if input == nil {
-		input = &DecreaseReplicaCountInput{}
+		input = &types.DecreaseReplicaCountInput{}
 	}
 
-	req := c.newRequest(op, input, &DecreaseReplicaCountOutput{})
+	req := c.newRequest(op, input, &types.DecreaseReplicaCountOutput{})
 	return DecreaseReplicaCountRequest{Request: req, Input: input, Copy: c.DecreaseReplicaCountRequest}
 }
 
@@ -128,8 +46,8 @@ func (c *Client) DecreaseReplicaCountRequest(input *DecreaseReplicaCountInput) D
 // DecreaseReplicaCount API operation.
 type DecreaseReplicaCountRequest struct {
 	*aws.Request
-	Input *DecreaseReplicaCountInput
-	Copy  func(*DecreaseReplicaCountInput) DecreaseReplicaCountRequest
+	Input *types.DecreaseReplicaCountInput
+	Copy  func(*types.DecreaseReplicaCountInput) DecreaseReplicaCountRequest
 }
 
 // Send marshals and sends the DecreaseReplicaCount API request.
@@ -141,7 +59,7 @@ func (r DecreaseReplicaCountRequest) Send(ctx context.Context) (*DecreaseReplica
 	}
 
 	resp := &DecreaseReplicaCountResponse{
-		DecreaseReplicaCountOutput: r.Request.Data.(*DecreaseReplicaCountOutput),
+		DecreaseReplicaCountOutput: r.Request.Data.(*types.DecreaseReplicaCountOutput),
 		response:                   &aws.Response{Request: r.Request},
 	}
 
@@ -151,7 +69,7 @@ func (r DecreaseReplicaCountRequest) Send(ctx context.Context) (*DecreaseReplica
 // DecreaseReplicaCountResponse is the response type for the
 // DecreaseReplicaCount API operation.
 type DecreaseReplicaCountResponse struct {
-	*DecreaseReplicaCountOutput
+	*types.DecreaseReplicaCountOutput
 
 	response *aws.Response
 }

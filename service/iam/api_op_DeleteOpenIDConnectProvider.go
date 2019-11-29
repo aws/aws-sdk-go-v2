@@ -6,52 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/query"
+	"github.com/aws/aws-sdk-go-v2/service/iam/types"
 )
-
-type DeleteOpenIDConnectProviderInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the IAM OpenID Connect provider resource
-	// object to delete. You can get a list of OpenID Connect provider resource
-	// ARNs by using the ListOpenIDConnectProviders operation.
-	//
-	// OpenIDConnectProviderArn is a required field
-	OpenIDConnectProviderArn *string `min:"20" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteOpenIDConnectProviderInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteOpenIDConnectProviderInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteOpenIDConnectProviderInput"}
-
-	if s.OpenIDConnectProviderArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("OpenIDConnectProviderArn"))
-	}
-	if s.OpenIDConnectProviderArn != nil && len(*s.OpenIDConnectProviderArn) < 20 {
-		invalidParams.Add(aws.NewErrParamMinLen("OpenIDConnectProviderArn", 20))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteOpenIDConnectProviderOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteOpenIDConnectProviderOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteOpenIDConnectProvider = "DeleteOpenIDConnectProvider"
 
@@ -75,7 +33,7 @@ const opDeleteOpenIDConnectProvider = "DeleteOpenIDConnectProvider"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeleteOpenIDConnectProvider
-func (c *Client) DeleteOpenIDConnectProviderRequest(input *DeleteOpenIDConnectProviderInput) DeleteOpenIDConnectProviderRequest {
+func (c *Client) DeleteOpenIDConnectProviderRequest(input *types.DeleteOpenIDConnectProviderInput) DeleteOpenIDConnectProviderRequest {
 	op := &aws.Operation{
 		Name:       opDeleteOpenIDConnectProvider,
 		HTTPMethod: "POST",
@@ -83,10 +41,10 @@ func (c *Client) DeleteOpenIDConnectProviderRequest(input *DeleteOpenIDConnectPr
 	}
 
 	if input == nil {
-		input = &DeleteOpenIDConnectProviderInput{}
+		input = &types.DeleteOpenIDConnectProviderInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteOpenIDConnectProviderOutput{})
+	req := c.newRequest(op, input, &types.DeleteOpenIDConnectProviderOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return DeleteOpenIDConnectProviderRequest{Request: req, Input: input, Copy: c.DeleteOpenIDConnectProviderRequest}
@@ -96,8 +54,8 @@ func (c *Client) DeleteOpenIDConnectProviderRequest(input *DeleteOpenIDConnectPr
 // DeleteOpenIDConnectProvider API operation.
 type DeleteOpenIDConnectProviderRequest struct {
 	*aws.Request
-	Input *DeleteOpenIDConnectProviderInput
-	Copy  func(*DeleteOpenIDConnectProviderInput) DeleteOpenIDConnectProviderRequest
+	Input *types.DeleteOpenIDConnectProviderInput
+	Copy  func(*types.DeleteOpenIDConnectProviderInput) DeleteOpenIDConnectProviderRequest
 }
 
 // Send marshals and sends the DeleteOpenIDConnectProvider API request.
@@ -109,7 +67,7 @@ func (r DeleteOpenIDConnectProviderRequest) Send(ctx context.Context) (*DeleteOp
 	}
 
 	resp := &DeleteOpenIDConnectProviderResponse{
-		DeleteOpenIDConnectProviderOutput: r.Request.Data.(*DeleteOpenIDConnectProviderOutput),
+		DeleteOpenIDConnectProviderOutput: r.Request.Data.(*types.DeleteOpenIDConnectProviderOutput),
 		response:                          &aws.Response{Request: r.Request},
 	}
 
@@ -119,7 +77,7 @@ func (r DeleteOpenIDConnectProviderRequest) Send(ctx context.Context) (*DeleteOp
 // DeleteOpenIDConnectProviderResponse is the response type for the
 // DeleteOpenIDConnectProvider API operation.
 type DeleteOpenIDConnectProviderResponse struct {
-	*DeleteOpenIDConnectProviderOutput
+	*types.DeleteOpenIDConnectProviderOutput
 
 	response *aws.Response
 }

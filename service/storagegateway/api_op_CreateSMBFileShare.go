@@ -4,187 +4,10 @@ package storagegateway
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/storagegateway/types"
 )
-
-// CreateSMBFileShareInput
-type CreateSMBFileShareInput struct {
-	_ struct{} `type:"structure"`
-
-	// A list of users in the Active Directory that will be granted administrator
-	// privileges on the file share. These users can do all file operations as the
-	// super-user.
-	//
-	// Use this option very carefully, because any user in this list can do anything
-	// they like on the file share, regardless of file permissions.
-	AdminUserList []string `type:"list"`
-
-	// The authentication method that users use to access the file share.
-	//
-	// Valid values are ActiveDirectory or GuestAccess. The default is ActiveDirectory.
-	Authentication *string `min:"5" type:"string"`
-
-	// A unique string value that you supply that is used by file gateway to ensure
-	// idempotent file share creation.
-	//
-	// ClientToken is a required field
-	ClientToken *string `min:"5" type:"string" required:"true"`
-
-	// The default storage class for objects put into an Amazon S3 bucket by the
-	// file gateway. Possible values are S3_STANDARD, S3_STANDARD_IA, or S3_ONEZONE_IA.
-	// If this field is not populated, the default value S3_STANDARD is used. Optional.
-	DefaultStorageClass *string `min:"5" type:"string"`
-
-	// The Amazon Resource Name (ARN) of the file gateway on which you want to create
-	// a file share.
-	//
-	// GatewayARN is a required field
-	GatewayARN *string `min:"50" type:"string" required:"true"`
-
-	// A value that enables guessing of the MIME type for uploaded objects based
-	// on file extensions. Set this value to true to enable MIME type guessing,
-	// and otherwise to false. The default value is true.
-	GuessMIMETypeEnabled *bool `type:"boolean"`
-
-	// A list of users or groups in the Active Directory that are not allowed to
-	// access the file share. A group must be prefixed with the @ character. For
-	// example @group1. Can only be set if Authentication is set to ActiveDirectory.
-	InvalidUserList []string `type:"list"`
-
-	// True to use Amazon S3 server side encryption with your own AWS KMS key, or
-	// false to use a key managed by Amazon S3. Optional.
-	KMSEncrypted *bool `type:"boolean"`
-
-	// The Amazon Resource Name (ARN) of the AWS KMS key used for Amazon S3 server
-	// side encryption. This value can only be set when KMSEncrypted is true. Optional.
-	KMSKey *string `min:"7" type:"string"`
-
-	// The ARN of the backed storage used for storing file data.
-	//
-	// LocationARN is a required field
-	LocationARN *string `min:"16" type:"string" required:"true"`
-
-	// A value that sets the access control list permission for objects in the S3
-	// bucket that a file gateway puts objects into. The default value is "private".
-	ObjectACL ObjectACL `type:"string" enum:"true"`
-
-	// A value that sets the write status of a file share. This value is true if
-	// the write status is read-only, and otherwise false.
-	ReadOnly *bool `type:"boolean"`
-
-	// A value that sets who pays the cost of the request and the cost associated
-	// with data download from the S3 bucket. If this value is set to true, the
-	// requester pays the costs. Otherwise the S3 bucket owner pays. However, the
-	// S3 bucket owner always pays the cost of storing data.
-	//
-	// RequesterPays is a configuration for the S3 bucket that backs the file share,
-	// so make sure that the configuration on the file share is the same as the
-	// S3 bucket configuration.
-	RequesterPays *bool `type:"boolean"`
-
-	// The ARN of the AWS Identity and Access Management (IAM) role that a file
-	// gateway assumes when it accesses the underlying storage.
-	//
-	// Role is a required field
-	Role *string `min:"20" type:"string" required:"true"`
-
-	// Set this value to "true to enable ACL (access control list) on the SMB file
-	// share. Set it to "false" to map file and directory permissions to the POSIX
-	// permissions.
-	//
-	// For more information, see https://docs.aws.amazon.com/storagegateway/latest/userguide/smb-acl.html
-	// in the Storage Gateway User Guide.
-	SMBACLEnabled *bool `type:"boolean"`
-
-	// A list of up to 50 tags that can be assigned to the NFS file share. Each
-	// tag is a key-value pair.
-	//
-	// Valid characters for key and value are letters, spaces, and numbers representable
-	// in UTF-8 format, and the following special characters: + - = . _ : / @. The
-	// maximum length of a tag's key is 128 characters, and the maximum length for
-	// a tag's value is 256.
-	Tags []Tag `type:"list"`
-
-	// A list of users or groups in the Active Directory that are allowed to access
-	// the file share. A group must be prefixed with the @ character. For example
-	// @group1. Can only be set if Authentication is set to ActiveDirectory.
-	ValidUserList []string `type:"list"`
-}
-
-// String returns the string representation
-func (s CreateSMBFileShareInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateSMBFileShareInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateSMBFileShareInput"}
-	if s.Authentication != nil && len(*s.Authentication) < 5 {
-		invalidParams.Add(aws.NewErrParamMinLen("Authentication", 5))
-	}
-
-	if s.ClientToken == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ClientToken"))
-	}
-	if s.ClientToken != nil && len(*s.ClientToken) < 5 {
-		invalidParams.Add(aws.NewErrParamMinLen("ClientToken", 5))
-	}
-	if s.DefaultStorageClass != nil && len(*s.DefaultStorageClass) < 5 {
-		invalidParams.Add(aws.NewErrParamMinLen("DefaultStorageClass", 5))
-	}
-
-	if s.GatewayARN == nil {
-		invalidParams.Add(aws.NewErrParamRequired("GatewayARN"))
-	}
-	if s.GatewayARN != nil && len(*s.GatewayARN) < 50 {
-		invalidParams.Add(aws.NewErrParamMinLen("GatewayARN", 50))
-	}
-	if s.KMSKey != nil && len(*s.KMSKey) < 7 {
-		invalidParams.Add(aws.NewErrParamMinLen("KMSKey", 7))
-	}
-
-	if s.LocationARN == nil {
-		invalidParams.Add(aws.NewErrParamRequired("LocationARN"))
-	}
-	if s.LocationARN != nil && len(*s.LocationARN) < 16 {
-		invalidParams.Add(aws.NewErrParamMinLen("LocationARN", 16))
-	}
-
-	if s.Role == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Role"))
-	}
-	if s.Role != nil && len(*s.Role) < 20 {
-		invalidParams.Add(aws.NewErrParamMinLen("Role", 20))
-	}
-	if s.Tags != nil {
-		for i, v := range s.Tags {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// CreateSMBFileShareOutput
-type CreateSMBFileShareOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the newly created file share.
-	FileShareARN *string `min:"50" type:"string"`
-}
-
-// String returns the string representation
-func (s CreateSMBFileShareOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCreateSMBFileShare = "CreateSMBFileShare"
 
@@ -213,7 +36,7 @@ const opCreateSMBFileShare = "CreateSMBFileShare"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/CreateSMBFileShare
-func (c *Client) CreateSMBFileShareRequest(input *CreateSMBFileShareInput) CreateSMBFileShareRequest {
+func (c *Client) CreateSMBFileShareRequest(input *types.CreateSMBFileShareInput) CreateSMBFileShareRequest {
 	op := &aws.Operation{
 		Name:       opCreateSMBFileShare,
 		HTTPMethod: "POST",
@@ -221,10 +44,10 @@ func (c *Client) CreateSMBFileShareRequest(input *CreateSMBFileShareInput) Creat
 	}
 
 	if input == nil {
-		input = &CreateSMBFileShareInput{}
+		input = &types.CreateSMBFileShareInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateSMBFileShareOutput{})
+	req := c.newRequest(op, input, &types.CreateSMBFileShareOutput{})
 	return CreateSMBFileShareRequest{Request: req, Input: input, Copy: c.CreateSMBFileShareRequest}
 }
 
@@ -232,8 +55,8 @@ func (c *Client) CreateSMBFileShareRequest(input *CreateSMBFileShareInput) Creat
 // CreateSMBFileShare API operation.
 type CreateSMBFileShareRequest struct {
 	*aws.Request
-	Input *CreateSMBFileShareInput
-	Copy  func(*CreateSMBFileShareInput) CreateSMBFileShareRequest
+	Input *types.CreateSMBFileShareInput
+	Copy  func(*types.CreateSMBFileShareInput) CreateSMBFileShareRequest
 }
 
 // Send marshals and sends the CreateSMBFileShare API request.
@@ -245,7 +68,7 @@ func (r CreateSMBFileShareRequest) Send(ctx context.Context) (*CreateSMBFileShar
 	}
 
 	resp := &CreateSMBFileShareResponse{
-		CreateSMBFileShareOutput: r.Request.Data.(*CreateSMBFileShareOutput),
+		CreateSMBFileShareOutput: r.Request.Data.(*types.CreateSMBFileShareOutput),
 		response:                 &aws.Response{Request: r.Request},
 	}
 
@@ -255,7 +78,7 @@ func (r CreateSMBFileShareRequest) Send(ctx context.Context) (*CreateSMBFileShar
 // CreateSMBFileShareResponse is the response type for the
 // CreateSMBFileShare API operation.
 type CreateSMBFileShareResponse struct {
-	*CreateSMBFileShareOutput
+	*types.CreateSMBFileShareOutput
 
 	response *aws.Response
 }

@@ -6,46 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/glue/types"
 )
-
-type GetDataCatalogEncryptionSettingsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the Data Catalog to retrieve the security configuration for. If
-	// none is provided, the AWS account ID is used by default.
-	CatalogId *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s GetDataCatalogEncryptionSettingsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetDataCatalogEncryptionSettingsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetDataCatalogEncryptionSettingsInput"}
-	if s.CatalogId != nil && len(*s.CatalogId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("CatalogId", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type GetDataCatalogEncryptionSettingsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The requested security configuration.
-	DataCatalogEncryptionSettings *DataCatalogEncryptionSettings `type:"structure"`
-}
-
-// String returns the string representation
-func (s GetDataCatalogEncryptionSettingsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetDataCatalogEncryptionSettings = "GetDataCatalogEncryptionSettings"
 
@@ -62,7 +24,7 @@ const opGetDataCatalogEncryptionSettings = "GetDataCatalogEncryptionSettings"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetDataCatalogEncryptionSettings
-func (c *Client) GetDataCatalogEncryptionSettingsRequest(input *GetDataCatalogEncryptionSettingsInput) GetDataCatalogEncryptionSettingsRequest {
+func (c *Client) GetDataCatalogEncryptionSettingsRequest(input *types.GetDataCatalogEncryptionSettingsInput) GetDataCatalogEncryptionSettingsRequest {
 	op := &aws.Operation{
 		Name:       opGetDataCatalogEncryptionSettings,
 		HTTPMethod: "POST",
@@ -70,10 +32,10 @@ func (c *Client) GetDataCatalogEncryptionSettingsRequest(input *GetDataCatalogEn
 	}
 
 	if input == nil {
-		input = &GetDataCatalogEncryptionSettingsInput{}
+		input = &types.GetDataCatalogEncryptionSettingsInput{}
 	}
 
-	req := c.newRequest(op, input, &GetDataCatalogEncryptionSettingsOutput{})
+	req := c.newRequest(op, input, &types.GetDataCatalogEncryptionSettingsOutput{})
 	return GetDataCatalogEncryptionSettingsRequest{Request: req, Input: input, Copy: c.GetDataCatalogEncryptionSettingsRequest}
 }
 
@@ -81,8 +43,8 @@ func (c *Client) GetDataCatalogEncryptionSettingsRequest(input *GetDataCatalogEn
 // GetDataCatalogEncryptionSettings API operation.
 type GetDataCatalogEncryptionSettingsRequest struct {
 	*aws.Request
-	Input *GetDataCatalogEncryptionSettingsInput
-	Copy  func(*GetDataCatalogEncryptionSettingsInput) GetDataCatalogEncryptionSettingsRequest
+	Input *types.GetDataCatalogEncryptionSettingsInput
+	Copy  func(*types.GetDataCatalogEncryptionSettingsInput) GetDataCatalogEncryptionSettingsRequest
 }
 
 // Send marshals and sends the GetDataCatalogEncryptionSettings API request.
@@ -94,7 +56,7 @@ func (r GetDataCatalogEncryptionSettingsRequest) Send(ctx context.Context) (*Get
 	}
 
 	resp := &GetDataCatalogEncryptionSettingsResponse{
-		GetDataCatalogEncryptionSettingsOutput: r.Request.Data.(*GetDataCatalogEncryptionSettingsOutput),
+		GetDataCatalogEncryptionSettingsOutput: r.Request.Data.(*types.GetDataCatalogEncryptionSettingsOutput),
 		response:                               &aws.Response{Request: r.Request},
 	}
 
@@ -104,7 +66,7 @@ func (r GetDataCatalogEncryptionSettingsRequest) Send(ctx context.Context) (*Get
 // GetDataCatalogEncryptionSettingsResponse is the response type for the
 // GetDataCatalogEncryptionSettings API operation.
 type GetDataCatalogEncryptionSettingsResponse struct {
-	*GetDataCatalogEncryptionSettingsOutput
+	*types.GetDataCatalogEncryptionSettingsOutput
 
 	response *aws.Response
 }

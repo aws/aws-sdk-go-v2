@@ -6,64 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/elasticloadbalancing/types"
 )
-
-// Contains the parameters for CreateLBCookieStickinessPolicy.
-type CreateLBCookieStickinessPolicyInput struct {
-	_ struct{} `type:"structure"`
-
-	// The time period, in seconds, after which the cookie should be considered
-	// stale. If you do not specify this parameter, the default value is 0, which
-	// indicates that the sticky session should last for the duration of the browser
-	// session.
-	CookieExpirationPeriod *int64 `type:"long"`
-
-	// The name of the load balancer.
-	//
-	// LoadBalancerName is a required field
-	LoadBalancerName *string `type:"string" required:"true"`
-
-	// The name of the policy being created. Policy names must consist of alphanumeric
-	// characters and dashes (-). This name must be unique within the set of policies
-	// for this load balancer.
-	//
-	// PolicyName is a required field
-	PolicyName *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s CreateLBCookieStickinessPolicyInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateLBCookieStickinessPolicyInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateLBCookieStickinessPolicyInput"}
-
-	if s.LoadBalancerName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("LoadBalancerName"))
-	}
-
-	if s.PolicyName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("PolicyName"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Contains the output for CreateLBCookieStickinessPolicy.
-type CreateLBCookieStickinessPolicyOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s CreateLBCookieStickinessPolicyOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCreateLBCookieStickinessPolicy = "CreateLBCookieStickinessPolicy"
 
@@ -96,7 +40,7 @@ const opCreateLBCookieStickinessPolicy = "CreateLBCookieStickinessPolicy"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/CreateLBCookieStickinessPolicy
-func (c *Client) CreateLBCookieStickinessPolicyRequest(input *CreateLBCookieStickinessPolicyInput) CreateLBCookieStickinessPolicyRequest {
+func (c *Client) CreateLBCookieStickinessPolicyRequest(input *types.CreateLBCookieStickinessPolicyInput) CreateLBCookieStickinessPolicyRequest {
 	op := &aws.Operation{
 		Name:       opCreateLBCookieStickinessPolicy,
 		HTTPMethod: "POST",
@@ -104,10 +48,10 @@ func (c *Client) CreateLBCookieStickinessPolicyRequest(input *CreateLBCookieStic
 	}
 
 	if input == nil {
-		input = &CreateLBCookieStickinessPolicyInput{}
+		input = &types.CreateLBCookieStickinessPolicyInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateLBCookieStickinessPolicyOutput{})
+	req := c.newRequest(op, input, &types.CreateLBCookieStickinessPolicyOutput{})
 	return CreateLBCookieStickinessPolicyRequest{Request: req, Input: input, Copy: c.CreateLBCookieStickinessPolicyRequest}
 }
 
@@ -115,8 +59,8 @@ func (c *Client) CreateLBCookieStickinessPolicyRequest(input *CreateLBCookieStic
 // CreateLBCookieStickinessPolicy API operation.
 type CreateLBCookieStickinessPolicyRequest struct {
 	*aws.Request
-	Input *CreateLBCookieStickinessPolicyInput
-	Copy  func(*CreateLBCookieStickinessPolicyInput) CreateLBCookieStickinessPolicyRequest
+	Input *types.CreateLBCookieStickinessPolicyInput
+	Copy  func(*types.CreateLBCookieStickinessPolicyInput) CreateLBCookieStickinessPolicyRequest
 }
 
 // Send marshals and sends the CreateLBCookieStickinessPolicy API request.
@@ -128,7 +72,7 @@ func (r CreateLBCookieStickinessPolicyRequest) Send(ctx context.Context) (*Creat
 	}
 
 	resp := &CreateLBCookieStickinessPolicyResponse{
-		CreateLBCookieStickinessPolicyOutput: r.Request.Data.(*CreateLBCookieStickinessPolicyOutput),
+		CreateLBCookieStickinessPolicyOutput: r.Request.Data.(*types.CreateLBCookieStickinessPolicyOutput),
 		response:                             &aws.Response{Request: r.Request},
 	}
 
@@ -138,7 +82,7 @@ func (r CreateLBCookieStickinessPolicyRequest) Send(ctx context.Context) (*Creat
 // CreateLBCookieStickinessPolicyResponse is the response type for the
 // CreateLBCookieStickinessPolicy API operation.
 type CreateLBCookieStickinessPolicyResponse struct {
-	*CreateLBCookieStickinessPolicyOutput
+	*types.CreateLBCookieStickinessPolicyOutput
 
 	response *aws.Response
 }

@@ -6,50 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/directoryservice/types"
 )
-
-// Contains the inputs for the DeleteDirectory operation.
-type DeleteDirectoryInput struct {
-	_ struct{} `type:"structure"`
-
-	// The identifier of the directory to delete.
-	//
-	// DirectoryId is a required field
-	DirectoryId *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteDirectoryInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteDirectoryInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteDirectoryInput"}
-
-	if s.DirectoryId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DirectoryId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Contains the results of the DeleteDirectory operation.
-type DeleteDirectoryOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The directory identifier.
-	DirectoryId *string `type:"string"`
-}
-
-// String returns the string representation
-func (s DeleteDirectoryOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteDirectory = "DeleteDirectory"
 
@@ -71,7 +29,7 @@ const opDeleteDirectory = "DeleteDirectory"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DeleteDirectory
-func (c *Client) DeleteDirectoryRequest(input *DeleteDirectoryInput) DeleteDirectoryRequest {
+func (c *Client) DeleteDirectoryRequest(input *types.DeleteDirectoryInput) DeleteDirectoryRequest {
 	op := &aws.Operation{
 		Name:       opDeleteDirectory,
 		HTTPMethod: "POST",
@@ -79,10 +37,10 @@ func (c *Client) DeleteDirectoryRequest(input *DeleteDirectoryInput) DeleteDirec
 	}
 
 	if input == nil {
-		input = &DeleteDirectoryInput{}
+		input = &types.DeleteDirectoryInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteDirectoryOutput{})
+	req := c.newRequest(op, input, &types.DeleteDirectoryOutput{})
 	return DeleteDirectoryRequest{Request: req, Input: input, Copy: c.DeleteDirectoryRequest}
 }
 
@@ -90,8 +48,8 @@ func (c *Client) DeleteDirectoryRequest(input *DeleteDirectoryInput) DeleteDirec
 // DeleteDirectory API operation.
 type DeleteDirectoryRequest struct {
 	*aws.Request
-	Input *DeleteDirectoryInput
-	Copy  func(*DeleteDirectoryInput) DeleteDirectoryRequest
+	Input *types.DeleteDirectoryInput
+	Copy  func(*types.DeleteDirectoryInput) DeleteDirectoryRequest
 }
 
 // Send marshals and sends the DeleteDirectory API request.
@@ -103,7 +61,7 @@ func (r DeleteDirectoryRequest) Send(ctx context.Context) (*DeleteDirectoryRespo
 	}
 
 	resp := &DeleteDirectoryResponse{
-		DeleteDirectoryOutput: r.Request.Data.(*DeleteDirectoryOutput),
+		DeleteDirectoryOutput: r.Request.Data.(*types.DeleteDirectoryOutput),
 		response:              &aws.Response{Request: r.Request},
 	}
 
@@ -113,7 +71,7 @@ func (r DeleteDirectoryRequest) Send(ctx context.Context) (*DeleteDirectoryRespo
 // DeleteDirectoryResponse is the response type for the
 // DeleteDirectory API operation.
 type DeleteDirectoryResponse struct {
-	*DeleteDirectoryOutput
+	*types.DeleteDirectoryOutput
 
 	response *aws.Response
 }

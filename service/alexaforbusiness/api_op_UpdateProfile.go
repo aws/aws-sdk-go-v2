@@ -6,85 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/alexaforbusiness/types"
 )
-
-type UpdateProfileInput struct {
-	_ struct{} `type:"structure"`
-
-	// The updated address for the room profile.
-	Address *string `min:"1" type:"string"`
-
-	// The updated distance unit for the room profile.
-	DistanceUnit DistanceUnit `type:"string" enum:"true"`
-
-	// Sets the profile as default if selected. If this is missing, no update is
-	// done to the default status.
-	IsDefault *bool `type:"boolean"`
-
-	// The updated locale for the room profile.
-	Locale *string `min:"1" type:"string"`
-
-	// The updated maximum volume limit for the room profile.
-	MaxVolumeLimit *int64 `type:"integer"`
-
-	// Whether the PSTN setting of the room profile is enabled.
-	PSTNEnabled *bool `type:"boolean"`
-
-	// The ARN of the room profile to update. Required.
-	ProfileArn *string `type:"string"`
-
-	// The updated name for the room profile.
-	ProfileName *string `min:"1" type:"string"`
-
-	// Whether the setup mode of the profile is enabled.
-	SetupModeDisabled *bool `type:"boolean"`
-
-	// The updated temperature unit for the room profile.
-	TemperatureUnit TemperatureUnit `type:"string" enum:"true"`
-
-	// The updated timezone for the room profile.
-	Timezone *string `min:"1" type:"string"`
-
-	// The updated wake word for the room profile.
-	WakeWord WakeWord `type:"string" enum:"true"`
-}
-
-// String returns the string representation
-func (s UpdateProfileInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateProfileInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateProfileInput"}
-	if s.Address != nil && len(*s.Address) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Address", 1))
-	}
-	if s.Locale != nil && len(*s.Locale) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Locale", 1))
-	}
-	if s.ProfileName != nil && len(*s.ProfileName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ProfileName", 1))
-	}
-	if s.Timezone != nil && len(*s.Timezone) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Timezone", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type UpdateProfileOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s UpdateProfileOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opUpdateProfile = "UpdateProfile"
 
@@ -101,7 +24,7 @@ const opUpdateProfile = "UpdateProfile"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/UpdateProfile
-func (c *Client) UpdateProfileRequest(input *UpdateProfileInput) UpdateProfileRequest {
+func (c *Client) UpdateProfileRequest(input *types.UpdateProfileInput) UpdateProfileRequest {
 	op := &aws.Operation{
 		Name:       opUpdateProfile,
 		HTTPMethod: "POST",
@@ -109,10 +32,10 @@ func (c *Client) UpdateProfileRequest(input *UpdateProfileInput) UpdateProfileRe
 	}
 
 	if input == nil {
-		input = &UpdateProfileInput{}
+		input = &types.UpdateProfileInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateProfileOutput{})
+	req := c.newRequest(op, input, &types.UpdateProfileOutput{})
 	return UpdateProfileRequest{Request: req, Input: input, Copy: c.UpdateProfileRequest}
 }
 
@@ -120,8 +43,8 @@ func (c *Client) UpdateProfileRequest(input *UpdateProfileInput) UpdateProfileRe
 // UpdateProfile API operation.
 type UpdateProfileRequest struct {
 	*aws.Request
-	Input *UpdateProfileInput
-	Copy  func(*UpdateProfileInput) UpdateProfileRequest
+	Input *types.UpdateProfileInput
+	Copy  func(*types.UpdateProfileInput) UpdateProfileRequest
 }
 
 // Send marshals and sends the UpdateProfile API request.
@@ -133,7 +56,7 @@ func (r UpdateProfileRequest) Send(ctx context.Context) (*UpdateProfileResponse,
 	}
 
 	resp := &UpdateProfileResponse{
-		UpdateProfileOutput: r.Request.Data.(*UpdateProfileOutput),
+		UpdateProfileOutput: r.Request.Data.(*types.UpdateProfileOutput),
 		response:            &aws.Response{Request: r.Request},
 	}
 
@@ -143,7 +66,7 @@ func (r UpdateProfileRequest) Send(ctx context.Context) (*UpdateProfileResponse,
 // UpdateProfileResponse is the response type for the
 // UpdateProfile API operation.
 type UpdateProfileResponse struct {
-	*UpdateProfileOutput
+	*types.UpdateProfileOutput
 
 	response *aws.Response
 }

@@ -13,6 +13,7 @@ import (
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/cloudfront"
+	"github.com/aws/aws-sdk-go-v2/service/cloudfront/types"
 )
 
 // ClientAPI provides an interface to enable mocking the
@@ -46,7 +47,7 @@ import (
 //    type mockClientClient struct {
 //        cloudfrontiface.ClientPI
 //    }
-//    func (m *mockClientClient) CreateCloudFrontOriginAccessIdentity(input *cloudfront.CreateCloudFrontOriginAccessIdentityInput) (*cloudfront.CreateCloudFrontOriginAccessIdentityOutput, error) {
+//    func (m *mockClientClient) CreateCloudFrontOriginAccessIdentity(input *types.CreateCloudFrontOriginAccessIdentityInput) (*types.CreateCloudFrontOriginAccessIdentityOutput, error) {
 //        // mock response/functionality
 //    }
 //
@@ -64,101 +65,101 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type ClientAPI interface {
-	CreateCloudFrontOriginAccessIdentityRequest(*cloudfront.CreateCloudFrontOriginAccessIdentityInput) cloudfront.CreateCloudFrontOriginAccessIdentityRequest
+	CreateCloudFrontOriginAccessIdentityRequest(*types.CreateCloudFrontOriginAccessIdentityInput) cloudfront.CreateCloudFrontOriginAccessIdentityRequest
 
-	CreateDistributionRequest(*cloudfront.CreateDistributionInput) cloudfront.CreateDistributionRequest
+	CreateDistributionRequest(*types.CreateDistributionInput) cloudfront.CreateDistributionRequest
 
-	CreateDistributionWithTagsRequest(*cloudfront.CreateDistributionWithTagsInput) cloudfront.CreateDistributionWithTagsRequest
+	CreateDistributionWithTagsRequest(*types.CreateDistributionWithTagsInput) cloudfront.CreateDistributionWithTagsRequest
 
-	CreateFieldLevelEncryptionConfigRequest(*cloudfront.CreateFieldLevelEncryptionConfigInput) cloudfront.CreateFieldLevelEncryptionConfigRequest
+	CreateFieldLevelEncryptionConfigRequest(*types.CreateFieldLevelEncryptionConfigInput) cloudfront.CreateFieldLevelEncryptionConfigRequest
 
-	CreateFieldLevelEncryptionProfileRequest(*cloudfront.CreateFieldLevelEncryptionProfileInput) cloudfront.CreateFieldLevelEncryptionProfileRequest
+	CreateFieldLevelEncryptionProfileRequest(*types.CreateFieldLevelEncryptionProfileInput) cloudfront.CreateFieldLevelEncryptionProfileRequest
 
-	CreateInvalidationRequest(*cloudfront.CreateInvalidationInput) cloudfront.CreateInvalidationRequest
+	CreateInvalidationRequest(*types.CreateInvalidationInput) cloudfront.CreateInvalidationRequest
 
-	CreatePublicKeyRequest(*cloudfront.CreatePublicKeyInput) cloudfront.CreatePublicKeyRequest
+	CreatePublicKeyRequest(*types.CreatePublicKeyInput) cloudfront.CreatePublicKeyRequest
 
-	CreateStreamingDistributionRequest(*cloudfront.CreateStreamingDistributionInput) cloudfront.CreateStreamingDistributionRequest
+	CreateStreamingDistributionRequest(*types.CreateStreamingDistributionInput) cloudfront.CreateStreamingDistributionRequest
 
-	CreateStreamingDistributionWithTagsRequest(*cloudfront.CreateStreamingDistributionWithTagsInput) cloudfront.CreateStreamingDistributionWithTagsRequest
+	CreateStreamingDistributionWithTagsRequest(*types.CreateStreamingDistributionWithTagsInput) cloudfront.CreateStreamingDistributionWithTagsRequest
 
-	DeleteCloudFrontOriginAccessIdentityRequest(*cloudfront.DeleteCloudFrontOriginAccessIdentityInput) cloudfront.DeleteCloudFrontOriginAccessIdentityRequest
+	DeleteCloudFrontOriginAccessIdentityRequest(*types.DeleteCloudFrontOriginAccessIdentityInput) cloudfront.DeleteCloudFrontOriginAccessIdentityRequest
 
-	DeleteDistributionRequest(*cloudfront.DeleteDistributionInput) cloudfront.DeleteDistributionRequest
+	DeleteDistributionRequest(*types.DeleteDistributionInput) cloudfront.DeleteDistributionRequest
 
-	DeleteFieldLevelEncryptionConfigRequest(*cloudfront.DeleteFieldLevelEncryptionConfigInput) cloudfront.DeleteFieldLevelEncryptionConfigRequest
+	DeleteFieldLevelEncryptionConfigRequest(*types.DeleteFieldLevelEncryptionConfigInput) cloudfront.DeleteFieldLevelEncryptionConfigRequest
 
-	DeleteFieldLevelEncryptionProfileRequest(*cloudfront.DeleteFieldLevelEncryptionProfileInput) cloudfront.DeleteFieldLevelEncryptionProfileRequest
+	DeleteFieldLevelEncryptionProfileRequest(*types.DeleteFieldLevelEncryptionProfileInput) cloudfront.DeleteFieldLevelEncryptionProfileRequest
 
-	DeletePublicKeyRequest(*cloudfront.DeletePublicKeyInput) cloudfront.DeletePublicKeyRequest
+	DeletePublicKeyRequest(*types.DeletePublicKeyInput) cloudfront.DeletePublicKeyRequest
 
-	DeleteStreamingDistributionRequest(*cloudfront.DeleteStreamingDistributionInput) cloudfront.DeleteStreamingDistributionRequest
+	DeleteStreamingDistributionRequest(*types.DeleteStreamingDistributionInput) cloudfront.DeleteStreamingDistributionRequest
 
-	GetCloudFrontOriginAccessIdentityRequest(*cloudfront.GetCloudFrontOriginAccessIdentityInput) cloudfront.GetCloudFrontOriginAccessIdentityRequest
+	GetCloudFrontOriginAccessIdentityRequest(*types.GetCloudFrontOriginAccessIdentityInput) cloudfront.GetCloudFrontOriginAccessIdentityRequest
 
-	GetCloudFrontOriginAccessIdentityConfigRequest(*cloudfront.GetCloudFrontOriginAccessIdentityConfigInput) cloudfront.GetCloudFrontOriginAccessIdentityConfigRequest
+	GetCloudFrontOriginAccessIdentityConfigRequest(*types.GetCloudFrontOriginAccessIdentityConfigInput) cloudfront.GetCloudFrontOriginAccessIdentityConfigRequest
 
-	GetDistributionRequest(*cloudfront.GetDistributionInput) cloudfront.GetDistributionRequest
+	GetDistributionRequest(*types.GetDistributionInput) cloudfront.GetDistributionRequest
 
-	GetDistributionConfigRequest(*cloudfront.GetDistributionConfigInput) cloudfront.GetDistributionConfigRequest
+	GetDistributionConfigRequest(*types.GetDistributionConfigInput) cloudfront.GetDistributionConfigRequest
 
-	GetFieldLevelEncryptionRequest(*cloudfront.GetFieldLevelEncryptionInput) cloudfront.GetFieldLevelEncryptionRequest
+	GetFieldLevelEncryptionRequest(*types.GetFieldLevelEncryptionInput) cloudfront.GetFieldLevelEncryptionRequest
 
-	GetFieldLevelEncryptionConfigRequest(*cloudfront.GetFieldLevelEncryptionConfigInput) cloudfront.GetFieldLevelEncryptionConfigRequest
+	GetFieldLevelEncryptionConfigRequest(*types.GetFieldLevelEncryptionConfigInput) cloudfront.GetFieldLevelEncryptionConfigRequest
 
-	GetFieldLevelEncryptionProfileRequest(*cloudfront.GetFieldLevelEncryptionProfileInput) cloudfront.GetFieldLevelEncryptionProfileRequest
+	GetFieldLevelEncryptionProfileRequest(*types.GetFieldLevelEncryptionProfileInput) cloudfront.GetFieldLevelEncryptionProfileRequest
 
-	GetFieldLevelEncryptionProfileConfigRequest(*cloudfront.GetFieldLevelEncryptionProfileConfigInput) cloudfront.GetFieldLevelEncryptionProfileConfigRequest
+	GetFieldLevelEncryptionProfileConfigRequest(*types.GetFieldLevelEncryptionProfileConfigInput) cloudfront.GetFieldLevelEncryptionProfileConfigRequest
 
-	GetInvalidationRequest(*cloudfront.GetInvalidationInput) cloudfront.GetInvalidationRequest
+	GetInvalidationRequest(*types.GetInvalidationInput) cloudfront.GetInvalidationRequest
 
-	GetPublicKeyRequest(*cloudfront.GetPublicKeyInput) cloudfront.GetPublicKeyRequest
+	GetPublicKeyRequest(*types.GetPublicKeyInput) cloudfront.GetPublicKeyRequest
 
-	GetPublicKeyConfigRequest(*cloudfront.GetPublicKeyConfigInput) cloudfront.GetPublicKeyConfigRequest
+	GetPublicKeyConfigRequest(*types.GetPublicKeyConfigInput) cloudfront.GetPublicKeyConfigRequest
 
-	GetStreamingDistributionRequest(*cloudfront.GetStreamingDistributionInput) cloudfront.GetStreamingDistributionRequest
+	GetStreamingDistributionRequest(*types.GetStreamingDistributionInput) cloudfront.GetStreamingDistributionRequest
 
-	GetStreamingDistributionConfigRequest(*cloudfront.GetStreamingDistributionConfigInput) cloudfront.GetStreamingDistributionConfigRequest
+	GetStreamingDistributionConfigRequest(*types.GetStreamingDistributionConfigInput) cloudfront.GetStreamingDistributionConfigRequest
 
-	ListCloudFrontOriginAccessIdentitiesRequest(*cloudfront.ListCloudFrontOriginAccessIdentitiesInput) cloudfront.ListCloudFrontOriginAccessIdentitiesRequest
+	ListCloudFrontOriginAccessIdentitiesRequest(*types.ListCloudFrontOriginAccessIdentitiesInput) cloudfront.ListCloudFrontOriginAccessIdentitiesRequest
 
-	ListDistributionsRequest(*cloudfront.ListDistributionsInput) cloudfront.ListDistributionsRequest
+	ListDistributionsRequest(*types.ListDistributionsInput) cloudfront.ListDistributionsRequest
 
-	ListDistributionsByWebACLIdRequest(*cloudfront.ListDistributionsByWebACLIdInput) cloudfront.ListDistributionsByWebACLIdRequest
+	ListDistributionsByWebACLIdRequest(*types.ListDistributionsByWebACLIdInput) cloudfront.ListDistributionsByWebACLIdRequest
 
-	ListFieldLevelEncryptionConfigsRequest(*cloudfront.ListFieldLevelEncryptionConfigsInput) cloudfront.ListFieldLevelEncryptionConfigsRequest
+	ListFieldLevelEncryptionConfigsRequest(*types.ListFieldLevelEncryptionConfigsInput) cloudfront.ListFieldLevelEncryptionConfigsRequest
 
-	ListFieldLevelEncryptionProfilesRequest(*cloudfront.ListFieldLevelEncryptionProfilesInput) cloudfront.ListFieldLevelEncryptionProfilesRequest
+	ListFieldLevelEncryptionProfilesRequest(*types.ListFieldLevelEncryptionProfilesInput) cloudfront.ListFieldLevelEncryptionProfilesRequest
 
-	ListInvalidationsRequest(*cloudfront.ListInvalidationsInput) cloudfront.ListInvalidationsRequest
+	ListInvalidationsRequest(*types.ListInvalidationsInput) cloudfront.ListInvalidationsRequest
 
-	ListPublicKeysRequest(*cloudfront.ListPublicKeysInput) cloudfront.ListPublicKeysRequest
+	ListPublicKeysRequest(*types.ListPublicKeysInput) cloudfront.ListPublicKeysRequest
 
-	ListStreamingDistributionsRequest(*cloudfront.ListStreamingDistributionsInput) cloudfront.ListStreamingDistributionsRequest
+	ListStreamingDistributionsRequest(*types.ListStreamingDistributionsInput) cloudfront.ListStreamingDistributionsRequest
 
-	ListTagsForResourceRequest(*cloudfront.ListTagsForResourceInput) cloudfront.ListTagsForResourceRequest
+	ListTagsForResourceRequest(*types.ListTagsForResourceInput) cloudfront.ListTagsForResourceRequest
 
-	TagResourceRequest(*cloudfront.TagResourceInput) cloudfront.TagResourceRequest
+	TagResourceRequest(*types.TagResourceInput) cloudfront.TagResourceRequest
 
-	UntagResourceRequest(*cloudfront.UntagResourceInput) cloudfront.UntagResourceRequest
+	UntagResourceRequest(*types.UntagResourceInput) cloudfront.UntagResourceRequest
 
-	UpdateCloudFrontOriginAccessIdentityRequest(*cloudfront.UpdateCloudFrontOriginAccessIdentityInput) cloudfront.UpdateCloudFrontOriginAccessIdentityRequest
+	UpdateCloudFrontOriginAccessIdentityRequest(*types.UpdateCloudFrontOriginAccessIdentityInput) cloudfront.UpdateCloudFrontOriginAccessIdentityRequest
 
-	UpdateDistributionRequest(*cloudfront.UpdateDistributionInput) cloudfront.UpdateDistributionRequest
+	UpdateDistributionRequest(*types.UpdateDistributionInput) cloudfront.UpdateDistributionRequest
 
-	UpdateFieldLevelEncryptionConfigRequest(*cloudfront.UpdateFieldLevelEncryptionConfigInput) cloudfront.UpdateFieldLevelEncryptionConfigRequest
+	UpdateFieldLevelEncryptionConfigRequest(*types.UpdateFieldLevelEncryptionConfigInput) cloudfront.UpdateFieldLevelEncryptionConfigRequest
 
-	UpdateFieldLevelEncryptionProfileRequest(*cloudfront.UpdateFieldLevelEncryptionProfileInput) cloudfront.UpdateFieldLevelEncryptionProfileRequest
+	UpdateFieldLevelEncryptionProfileRequest(*types.UpdateFieldLevelEncryptionProfileInput) cloudfront.UpdateFieldLevelEncryptionProfileRequest
 
-	UpdatePublicKeyRequest(*cloudfront.UpdatePublicKeyInput) cloudfront.UpdatePublicKeyRequest
+	UpdatePublicKeyRequest(*types.UpdatePublicKeyInput) cloudfront.UpdatePublicKeyRequest
 
-	UpdateStreamingDistributionRequest(*cloudfront.UpdateStreamingDistributionInput) cloudfront.UpdateStreamingDistributionRequest
+	UpdateStreamingDistributionRequest(*types.UpdateStreamingDistributionInput) cloudfront.UpdateStreamingDistributionRequest
 
-	WaitUntilDistributionDeployed(context.Context, *cloudfront.GetDistributionInput, ...aws.WaiterOption) error
+	WaitUntilDistributionDeployed(context.Context, *types.GetDistributionInput, ...aws.WaiterOption) error
 
-	WaitUntilInvalidationCompleted(context.Context, *cloudfront.GetInvalidationInput, ...aws.WaiterOption) error
+	WaitUntilInvalidationCompleted(context.Context, *types.GetInvalidationInput, ...aws.WaiterOption) error
 
-	WaitUntilStreamingDistributionDeployed(context.Context, *cloudfront.GetStreamingDistributionInput, ...aws.WaiterOption) error
+	WaitUntilStreamingDistributionDeployed(context.Context, *types.GetStreamingDistributionInput, ...aws.WaiterOption) error
 }
 
 var _ ClientAPI = (*cloudfront.Client)(nil)

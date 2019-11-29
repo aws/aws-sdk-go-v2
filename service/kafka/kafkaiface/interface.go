@@ -10,6 +10,7 @@ package kafkaiface
 
 import (
 	"github.com/aws/aws-sdk-go-v2/service/kafka"
+	"github.com/aws/aws-sdk-go-v2/service/kafka/types"
 )
 
 // ClientAPI provides an interface to enable mocking the
@@ -43,7 +44,7 @@ import (
 //    type mockClientClient struct {
 //        kafkaiface.ClientPI
 //    }
-//    func (m *mockClientClient) CreateCluster(input *kafka.CreateClusterInput) (*kafka.CreateClusterOutput, error) {
+//    func (m *mockClientClient) CreateCluster(input *types.CreateClusterInput) (*types.CreateClusterOutput, error) {
 //        // mock response/functionality
 //    }
 //
@@ -61,43 +62,43 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type ClientAPI interface {
-	CreateClusterRequest(*kafka.CreateClusterInput) kafka.CreateClusterRequest
+	CreateClusterRequest(*types.CreateClusterInput) kafka.CreateClusterRequest
 
-	CreateConfigurationRequest(*kafka.CreateConfigurationInput) kafka.CreateConfigurationRequest
+	CreateConfigurationRequest(*types.CreateConfigurationInput) kafka.CreateConfigurationRequest
 
-	DeleteClusterRequest(*kafka.DeleteClusterInput) kafka.DeleteClusterRequest
+	DeleteClusterRequest(*types.DeleteClusterInput) kafka.DeleteClusterRequest
 
-	DescribeClusterRequest(*kafka.DescribeClusterInput) kafka.DescribeClusterRequest
+	DescribeClusterRequest(*types.DescribeClusterInput) kafka.DescribeClusterRequest
 
-	DescribeClusterOperationRequest(*kafka.DescribeClusterOperationInput) kafka.DescribeClusterOperationRequest
+	DescribeClusterOperationRequest(*types.DescribeClusterOperationInput) kafka.DescribeClusterOperationRequest
 
-	DescribeConfigurationRequest(*kafka.DescribeConfigurationInput) kafka.DescribeConfigurationRequest
+	DescribeConfigurationRequest(*types.DescribeConfigurationInput) kafka.DescribeConfigurationRequest
 
-	DescribeConfigurationRevisionRequest(*kafka.DescribeConfigurationRevisionInput) kafka.DescribeConfigurationRevisionRequest
+	DescribeConfigurationRevisionRequest(*types.DescribeConfigurationRevisionInput) kafka.DescribeConfigurationRevisionRequest
 
-	GetBootstrapBrokersRequest(*kafka.GetBootstrapBrokersInput) kafka.GetBootstrapBrokersRequest
+	GetBootstrapBrokersRequest(*types.GetBootstrapBrokersInput) kafka.GetBootstrapBrokersRequest
 
-	ListClusterOperationsRequest(*kafka.ListClusterOperationsInput) kafka.ListClusterOperationsRequest
+	ListClusterOperationsRequest(*types.ListClusterOperationsInput) kafka.ListClusterOperationsRequest
 
-	ListClustersRequest(*kafka.ListClustersInput) kafka.ListClustersRequest
+	ListClustersRequest(*types.ListClustersInput) kafka.ListClustersRequest
 
-	ListConfigurationRevisionsRequest(*kafka.ListConfigurationRevisionsInput) kafka.ListConfigurationRevisionsRequest
+	ListConfigurationRevisionsRequest(*types.ListConfigurationRevisionsInput) kafka.ListConfigurationRevisionsRequest
 
-	ListConfigurationsRequest(*kafka.ListConfigurationsInput) kafka.ListConfigurationsRequest
+	ListConfigurationsRequest(*types.ListConfigurationsInput) kafka.ListConfigurationsRequest
 
-	ListNodesRequest(*kafka.ListNodesInput) kafka.ListNodesRequest
+	ListNodesRequest(*types.ListNodesInput) kafka.ListNodesRequest
 
-	ListTagsForResourceRequest(*kafka.ListTagsForResourceInput) kafka.ListTagsForResourceRequest
+	ListTagsForResourceRequest(*types.ListTagsForResourceInput) kafka.ListTagsForResourceRequest
 
-	TagResourceRequest(*kafka.TagResourceInput) kafka.TagResourceRequest
+	TagResourceRequest(*types.TagResourceInput) kafka.TagResourceRequest
 
-	UntagResourceRequest(*kafka.UntagResourceInput) kafka.UntagResourceRequest
+	UntagResourceRequest(*types.UntagResourceInput) kafka.UntagResourceRequest
 
-	UpdateBrokerCountRequest(*kafka.UpdateBrokerCountInput) kafka.UpdateBrokerCountRequest
+	UpdateBrokerCountRequest(*types.UpdateBrokerCountInput) kafka.UpdateBrokerCountRequest
 
-	UpdateBrokerStorageRequest(*kafka.UpdateBrokerStorageInput) kafka.UpdateBrokerStorageRequest
+	UpdateBrokerStorageRequest(*types.UpdateBrokerStorageInput) kafka.UpdateBrokerStorageRequest
 
-	UpdateClusterConfigurationRequest(*kafka.UpdateClusterConfigurationInput) kafka.UpdateClusterConfigurationRequest
+	UpdateClusterConfigurationRequest(*types.UpdateClusterConfigurationInput) kafka.UpdateClusterConfigurationRequest
 }
 
 var _ ClientAPI = (*kafka.Client)(nil)

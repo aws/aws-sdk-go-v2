@@ -7,6 +7,7 @@ import (
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
+	"github.com/aws/aws-sdk-go-v2/service/acm/types"
 )
 
 // WaitUntilCertificateValidated uses the ACM API operation
@@ -18,7 +19,7 @@ import (
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Client) WaitUntilCertificateValidated(ctx context.Context, input *DescribeCertificateInput, opts ...aws.WaiterOption) error {
+func (c *Client) WaitUntilCertificateValidated(ctx context.Context, input *types.DescribeCertificateInput, opts ...aws.WaiterOption) error {
 	w := aws.Waiter{
 		Name:        "WaitUntilCertificateValidated",
 		MaxAttempts: 40,
@@ -47,7 +48,7 @@ func (c *Client) WaitUntilCertificateValidated(ctx context.Context, input *Descr
 		},
 		Logger: c.Config.Logger,
 		NewRequest: func(opts []aws.Option) (*aws.Request, error) {
-			var inCpy *DescribeCertificateInput
+			var inCpy *types.DescribeCertificateInput
 			if input != nil {
 				tmp := *input
 				inCpy = &tmp

@@ -6,50 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
+	"github.com/aws/aws-sdk-go-v2/service/opsworks/types"
 )
-
-type AssignVolumeInput struct {
-	_ struct{} `type:"structure"`
-
-	// The instance ID.
-	InstanceId *string `type:"string"`
-
-	// The volume ID.
-	//
-	// VolumeId is a required field
-	VolumeId *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s AssignVolumeInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *AssignVolumeInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "AssignVolumeInput"}
-
-	if s.VolumeId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("VolumeId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type AssignVolumeOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s AssignVolumeOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opAssignVolume = "AssignVolume"
 
@@ -75,7 +35,7 @@ const opAssignVolume = "AssignVolume"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/AssignVolume
-func (c *Client) AssignVolumeRequest(input *AssignVolumeInput) AssignVolumeRequest {
+func (c *Client) AssignVolumeRequest(input *types.AssignVolumeInput) AssignVolumeRequest {
 	op := &aws.Operation{
 		Name:       opAssignVolume,
 		HTTPMethod: "POST",
@@ -83,10 +43,10 @@ func (c *Client) AssignVolumeRequest(input *AssignVolumeInput) AssignVolumeReque
 	}
 
 	if input == nil {
-		input = &AssignVolumeInput{}
+		input = &types.AssignVolumeInput{}
 	}
 
-	req := c.newRequest(op, input, &AssignVolumeOutput{})
+	req := c.newRequest(op, input, &types.AssignVolumeOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return AssignVolumeRequest{Request: req, Input: input, Copy: c.AssignVolumeRequest}
@@ -96,8 +56,8 @@ func (c *Client) AssignVolumeRequest(input *AssignVolumeInput) AssignVolumeReque
 // AssignVolume API operation.
 type AssignVolumeRequest struct {
 	*aws.Request
-	Input *AssignVolumeInput
-	Copy  func(*AssignVolumeInput) AssignVolumeRequest
+	Input *types.AssignVolumeInput
+	Copy  func(*types.AssignVolumeInput) AssignVolumeRequest
 }
 
 // Send marshals and sends the AssignVolume API request.
@@ -109,7 +69,7 @@ func (r AssignVolumeRequest) Send(ctx context.Context) (*AssignVolumeResponse, e
 	}
 
 	resp := &AssignVolumeResponse{
-		AssignVolumeOutput: r.Request.Data.(*AssignVolumeOutput),
+		AssignVolumeOutput: r.Request.Data.(*types.AssignVolumeOutput),
 		response:           &aws.Response{Request: r.Request},
 	}
 
@@ -119,7 +79,7 @@ func (r AssignVolumeRequest) Send(ctx context.Context) (*AssignVolumeResponse, e
 // AssignVolumeResponse is the response type for the
 // AssignVolume API operation.
 type AssignVolumeResponse struct {
-	*AssignVolumeOutput
+	*types.AssignVolumeOutput
 
 	response *aws.Response
 }

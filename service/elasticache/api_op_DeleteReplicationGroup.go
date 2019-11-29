@@ -6,60 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/elasticache/types"
 )
-
-// Represents the input of a DeleteReplicationGroup operation.
-type DeleteReplicationGroupInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of a final node group (shard) snapshot. ElastiCache creates the
-	// snapshot from the primary node in the cluster, rather than one of the replicas;
-	// this is to ensure that it captures the freshest data. After the final snapshot
-	// is taken, the replication group is immediately deleted.
-	FinalSnapshotIdentifier *string `type:"string"`
-
-	// The identifier for the cluster to be deleted. This parameter is not case
-	// sensitive.
-	//
-	// ReplicationGroupId is a required field
-	ReplicationGroupId *string `type:"string" required:"true"`
-
-	// If set to true, all of the read replicas are deleted, but the primary node
-	// is retained.
-	RetainPrimaryCluster *bool `type:"boolean"`
-}
-
-// String returns the string representation
-func (s DeleteReplicationGroupInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteReplicationGroupInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteReplicationGroupInput"}
-
-	if s.ReplicationGroupId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ReplicationGroupId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteReplicationGroupOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Contains all of the attributes of a specific Redis replication group.
-	ReplicationGroup *ReplicationGroup `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteReplicationGroupOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteReplicationGroup = "DeleteReplicationGroup"
 
@@ -86,7 +34,7 @@ const opDeleteReplicationGroup = "DeleteReplicationGroup"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DeleteReplicationGroup
-func (c *Client) DeleteReplicationGroupRequest(input *DeleteReplicationGroupInput) DeleteReplicationGroupRequest {
+func (c *Client) DeleteReplicationGroupRequest(input *types.DeleteReplicationGroupInput) DeleteReplicationGroupRequest {
 	op := &aws.Operation{
 		Name:       opDeleteReplicationGroup,
 		HTTPMethod: "POST",
@@ -94,10 +42,10 @@ func (c *Client) DeleteReplicationGroupRequest(input *DeleteReplicationGroupInpu
 	}
 
 	if input == nil {
-		input = &DeleteReplicationGroupInput{}
+		input = &types.DeleteReplicationGroupInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteReplicationGroupOutput{})
+	req := c.newRequest(op, input, &types.DeleteReplicationGroupOutput{})
 	return DeleteReplicationGroupRequest{Request: req, Input: input, Copy: c.DeleteReplicationGroupRequest}
 }
 
@@ -105,8 +53,8 @@ func (c *Client) DeleteReplicationGroupRequest(input *DeleteReplicationGroupInpu
 // DeleteReplicationGroup API operation.
 type DeleteReplicationGroupRequest struct {
 	*aws.Request
-	Input *DeleteReplicationGroupInput
-	Copy  func(*DeleteReplicationGroupInput) DeleteReplicationGroupRequest
+	Input *types.DeleteReplicationGroupInput
+	Copy  func(*types.DeleteReplicationGroupInput) DeleteReplicationGroupRequest
 }
 
 // Send marshals and sends the DeleteReplicationGroup API request.
@@ -118,7 +66,7 @@ func (r DeleteReplicationGroupRequest) Send(ctx context.Context) (*DeleteReplica
 	}
 
 	resp := &DeleteReplicationGroupResponse{
-		DeleteReplicationGroupOutput: r.Request.Data.(*DeleteReplicationGroupOutput),
+		DeleteReplicationGroupOutput: r.Request.Data.(*types.DeleteReplicationGroupOutput),
 		response:                     &aws.Response{Request: r.Request},
 	}
 
@@ -128,7 +76,7 @@ func (r DeleteReplicationGroupRequest) Send(ctx context.Context) (*DeleteReplica
 // DeleteReplicationGroupResponse is the response type for the
 // DeleteReplicationGroup API operation.
 type DeleteReplicationGroupResponse struct {
-	*DeleteReplicationGroupOutput
+	*types.DeleteReplicationGroupOutput
 
 	response *aws.Response
 }

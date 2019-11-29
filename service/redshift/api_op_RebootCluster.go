@@ -6,48 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/redshift/types"
 )
-
-type RebootClusterInput struct {
-	_ struct{} `type:"structure"`
-
-	// The cluster identifier.
-	//
-	// ClusterIdentifier is a required field
-	ClusterIdentifier *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s RebootClusterInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *RebootClusterInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "RebootClusterInput"}
-
-	if s.ClusterIdentifier == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ClusterIdentifier"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type RebootClusterOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Describes a cluster.
-	Cluster *Cluster `type:"structure"`
-}
-
-// String returns the string representation
-func (s RebootClusterOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opRebootCluster = "RebootCluster"
 
@@ -70,7 +30,7 @@ const opRebootCluster = "RebootCluster"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/RebootCluster
-func (c *Client) RebootClusterRequest(input *RebootClusterInput) RebootClusterRequest {
+func (c *Client) RebootClusterRequest(input *types.RebootClusterInput) RebootClusterRequest {
 	op := &aws.Operation{
 		Name:       opRebootCluster,
 		HTTPMethod: "POST",
@@ -78,10 +38,10 @@ func (c *Client) RebootClusterRequest(input *RebootClusterInput) RebootClusterRe
 	}
 
 	if input == nil {
-		input = &RebootClusterInput{}
+		input = &types.RebootClusterInput{}
 	}
 
-	req := c.newRequest(op, input, &RebootClusterOutput{})
+	req := c.newRequest(op, input, &types.RebootClusterOutput{})
 	return RebootClusterRequest{Request: req, Input: input, Copy: c.RebootClusterRequest}
 }
 
@@ -89,8 +49,8 @@ func (c *Client) RebootClusterRequest(input *RebootClusterInput) RebootClusterRe
 // RebootCluster API operation.
 type RebootClusterRequest struct {
 	*aws.Request
-	Input *RebootClusterInput
-	Copy  func(*RebootClusterInput) RebootClusterRequest
+	Input *types.RebootClusterInput
+	Copy  func(*types.RebootClusterInput) RebootClusterRequest
 }
 
 // Send marshals and sends the RebootCluster API request.
@@ -102,7 +62,7 @@ func (r RebootClusterRequest) Send(ctx context.Context) (*RebootClusterResponse,
 	}
 
 	resp := &RebootClusterResponse{
-		RebootClusterOutput: r.Request.Data.(*RebootClusterOutput),
+		RebootClusterOutput: r.Request.Data.(*types.RebootClusterOutput),
 		response:            &aws.Response{Request: r.Request},
 	}
 
@@ -112,7 +72,7 @@ func (r RebootClusterRequest) Send(ctx context.Context) (*RebootClusterResponse,
 // RebootClusterResponse is the response type for the
 // RebootCluster API operation.
 type RebootClusterResponse struct {
-	*RebootClusterOutput
+	*types.RebootClusterOutput
 
 	response *aws.Response
 }

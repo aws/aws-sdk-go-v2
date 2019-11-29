@@ -6,48 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/query"
+	"github.com/aws/aws-sdk-go-v2/service/redshift/types"
 )
-
-// The result of the DeleteSnapshotCopyGrant action.
-type DeleteSnapshotCopyGrantInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the snapshot copy grant to delete.
-	//
-	// SnapshotCopyGrantName is a required field
-	SnapshotCopyGrantName *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteSnapshotCopyGrantInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteSnapshotCopyGrantInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteSnapshotCopyGrantInput"}
-
-	if s.SnapshotCopyGrantName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("SnapshotCopyGrantName"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteSnapshotCopyGrantOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteSnapshotCopyGrantOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteSnapshotCopyGrant = "DeleteSnapshotCopyGrant"
 
@@ -64,7 +26,7 @@ const opDeleteSnapshotCopyGrant = "DeleteSnapshotCopyGrant"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DeleteSnapshotCopyGrant
-func (c *Client) DeleteSnapshotCopyGrantRequest(input *DeleteSnapshotCopyGrantInput) DeleteSnapshotCopyGrantRequest {
+func (c *Client) DeleteSnapshotCopyGrantRequest(input *types.DeleteSnapshotCopyGrantInput) DeleteSnapshotCopyGrantRequest {
 	op := &aws.Operation{
 		Name:       opDeleteSnapshotCopyGrant,
 		HTTPMethod: "POST",
@@ -72,10 +34,10 @@ func (c *Client) DeleteSnapshotCopyGrantRequest(input *DeleteSnapshotCopyGrantIn
 	}
 
 	if input == nil {
-		input = &DeleteSnapshotCopyGrantInput{}
+		input = &types.DeleteSnapshotCopyGrantInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteSnapshotCopyGrantOutput{})
+	req := c.newRequest(op, input, &types.DeleteSnapshotCopyGrantOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return DeleteSnapshotCopyGrantRequest{Request: req, Input: input, Copy: c.DeleteSnapshotCopyGrantRequest}
@@ -85,8 +47,8 @@ func (c *Client) DeleteSnapshotCopyGrantRequest(input *DeleteSnapshotCopyGrantIn
 // DeleteSnapshotCopyGrant API operation.
 type DeleteSnapshotCopyGrantRequest struct {
 	*aws.Request
-	Input *DeleteSnapshotCopyGrantInput
-	Copy  func(*DeleteSnapshotCopyGrantInput) DeleteSnapshotCopyGrantRequest
+	Input *types.DeleteSnapshotCopyGrantInput
+	Copy  func(*types.DeleteSnapshotCopyGrantInput) DeleteSnapshotCopyGrantRequest
 }
 
 // Send marshals and sends the DeleteSnapshotCopyGrant API request.
@@ -98,7 +60,7 @@ func (r DeleteSnapshotCopyGrantRequest) Send(ctx context.Context) (*DeleteSnapsh
 	}
 
 	resp := &DeleteSnapshotCopyGrantResponse{
-		DeleteSnapshotCopyGrantOutput: r.Request.Data.(*DeleteSnapshotCopyGrantOutput),
+		DeleteSnapshotCopyGrantOutput: r.Request.Data.(*types.DeleteSnapshotCopyGrantOutput),
 		response:                      &aws.Response{Request: r.Request},
 	}
 
@@ -108,7 +70,7 @@ func (r DeleteSnapshotCopyGrantRequest) Send(ctx context.Context) (*DeleteSnapsh
 // DeleteSnapshotCopyGrantResponse is the response type for the
 // DeleteSnapshotCopyGrant API operation.
 type DeleteSnapshotCopyGrantResponse struct {
-	*DeleteSnapshotCopyGrantOutput
+	*types.DeleteSnapshotCopyGrantOutput
 
 	response *aws.Response
 }

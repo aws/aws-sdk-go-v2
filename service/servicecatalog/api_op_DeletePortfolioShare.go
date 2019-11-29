@@ -6,67 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/types"
 )
-
-type DeletePortfolioShareInput struct {
-	_ struct{} `type:"structure"`
-
-	// The language code.
-	//
-	//    * en - English (default)
-	//
-	//    * jp - Japanese
-	//
-	//    * zh - Chinese
-	AcceptLanguage *string `type:"string"`
-
-	// The AWS account ID.
-	AccountId *string `type:"string"`
-
-	// The organization node to whom you are going to stop sharing.
-	OrganizationNode *OrganizationNode `type:"structure"`
-
-	// The portfolio identifier.
-	//
-	// PortfolioId is a required field
-	PortfolioId *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeletePortfolioShareInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeletePortfolioShareInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeletePortfolioShareInput"}
-
-	if s.PortfolioId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("PortfolioId"))
-	}
-	if s.PortfolioId != nil && len(*s.PortfolioId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("PortfolioId", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeletePortfolioShareOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The portfolio share unique identifier. This will only be returned if delete
-	// is made to an organization node.
-	PortfolioShareToken *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s DeletePortfolioShareOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeletePortfolioShare = "DeletePortfolioShare"
 
@@ -85,7 +26,7 @@ const opDeletePortfolioShare = "DeletePortfolioShare"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DeletePortfolioShare
-func (c *Client) DeletePortfolioShareRequest(input *DeletePortfolioShareInput) DeletePortfolioShareRequest {
+func (c *Client) DeletePortfolioShareRequest(input *types.DeletePortfolioShareInput) DeletePortfolioShareRequest {
 	op := &aws.Operation{
 		Name:       opDeletePortfolioShare,
 		HTTPMethod: "POST",
@@ -93,10 +34,10 @@ func (c *Client) DeletePortfolioShareRequest(input *DeletePortfolioShareInput) D
 	}
 
 	if input == nil {
-		input = &DeletePortfolioShareInput{}
+		input = &types.DeletePortfolioShareInput{}
 	}
 
-	req := c.newRequest(op, input, &DeletePortfolioShareOutput{})
+	req := c.newRequest(op, input, &types.DeletePortfolioShareOutput{})
 	return DeletePortfolioShareRequest{Request: req, Input: input, Copy: c.DeletePortfolioShareRequest}
 }
 
@@ -104,8 +45,8 @@ func (c *Client) DeletePortfolioShareRequest(input *DeletePortfolioShareInput) D
 // DeletePortfolioShare API operation.
 type DeletePortfolioShareRequest struct {
 	*aws.Request
-	Input *DeletePortfolioShareInput
-	Copy  func(*DeletePortfolioShareInput) DeletePortfolioShareRequest
+	Input *types.DeletePortfolioShareInput
+	Copy  func(*types.DeletePortfolioShareInput) DeletePortfolioShareRequest
 }
 
 // Send marshals and sends the DeletePortfolioShare API request.
@@ -117,7 +58,7 @@ func (r DeletePortfolioShareRequest) Send(ctx context.Context) (*DeletePortfolio
 	}
 
 	resp := &DeletePortfolioShareResponse{
-		DeletePortfolioShareOutput: r.Request.Data.(*DeletePortfolioShareOutput),
+		DeletePortfolioShareOutput: r.Request.Data.(*types.DeletePortfolioShareOutput),
 		response:                   &aws.Response{Request: r.Request},
 	}
 
@@ -127,7 +68,7 @@ func (r DeletePortfolioShareRequest) Send(ctx context.Context) (*DeletePortfolio
 // DeletePortfolioShareResponse is the response type for the
 // DeletePortfolioShare API operation.
 type DeletePortfolioShareResponse struct {
-	*DeletePortfolioShareOutput
+	*types.DeletePortfolioShareOutput
 
 	response *aws.Response
 }

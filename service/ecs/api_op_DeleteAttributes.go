@@ -4,66 +4,10 @@ package ecs
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ecs/types"
 )
-
-type DeleteAttributesInput struct {
-	_ struct{} `type:"structure"`
-
-	// The attributes to delete from your resource. You can specify up to 10 attributes
-	// per request. For custom attributes, specify the attribute name and target
-	// ID, but do not specify the value. If you specify the target ID using the
-	// short form, you must also specify the target type.
-	//
-	// Attributes is a required field
-	Attributes []Attribute `locationName:"attributes" type:"list" required:"true"`
-
-	// The short name or full Amazon Resource Name (ARN) of the cluster that contains
-	// the resource to delete attributes. If you do not specify a cluster, the default
-	// cluster is assumed.
-	Cluster *string `locationName:"cluster" type:"string"`
-}
-
-// String returns the string representation
-func (s DeleteAttributesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteAttributesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteAttributesInput"}
-
-	if s.Attributes == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Attributes"))
-	}
-	if s.Attributes != nil {
-		for i, v := range s.Attributes {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Attributes", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteAttributesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A list of attribute objects that were successfully deleted from your resource.
-	Attributes []Attribute `locationName:"attributes" type:"list"`
-}
-
-// String returns the string representation
-func (s DeleteAttributesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteAttributes = "DeleteAttributes"
 
@@ -80,7 +24,7 @@ const opDeleteAttributes = "DeleteAttributes"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DeleteAttributes
-func (c *Client) DeleteAttributesRequest(input *DeleteAttributesInput) DeleteAttributesRequest {
+func (c *Client) DeleteAttributesRequest(input *types.DeleteAttributesInput) DeleteAttributesRequest {
 	op := &aws.Operation{
 		Name:       opDeleteAttributes,
 		HTTPMethod: "POST",
@@ -88,10 +32,10 @@ func (c *Client) DeleteAttributesRequest(input *DeleteAttributesInput) DeleteAtt
 	}
 
 	if input == nil {
-		input = &DeleteAttributesInput{}
+		input = &types.DeleteAttributesInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteAttributesOutput{})
+	req := c.newRequest(op, input, &types.DeleteAttributesOutput{})
 	return DeleteAttributesRequest{Request: req, Input: input, Copy: c.DeleteAttributesRequest}
 }
 
@@ -99,8 +43,8 @@ func (c *Client) DeleteAttributesRequest(input *DeleteAttributesInput) DeleteAtt
 // DeleteAttributes API operation.
 type DeleteAttributesRequest struct {
 	*aws.Request
-	Input *DeleteAttributesInput
-	Copy  func(*DeleteAttributesInput) DeleteAttributesRequest
+	Input *types.DeleteAttributesInput
+	Copy  func(*types.DeleteAttributesInput) DeleteAttributesRequest
 }
 
 // Send marshals and sends the DeleteAttributes API request.
@@ -112,7 +56,7 @@ func (r DeleteAttributesRequest) Send(ctx context.Context) (*DeleteAttributesRes
 	}
 
 	resp := &DeleteAttributesResponse{
-		DeleteAttributesOutput: r.Request.Data.(*DeleteAttributesOutput),
+		DeleteAttributesOutput: r.Request.Data.(*types.DeleteAttributesOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -122,7 +66,7 @@ func (r DeleteAttributesRequest) Send(ctx context.Context) (*DeleteAttributesRes
 // DeleteAttributesResponse is the response type for the
 // DeleteAttributes API operation.
 type DeleteAttributesResponse struct {
-	*DeleteAttributesOutput
+	*types.DeleteAttributesOutput
 
 	response *aws.Response
 }

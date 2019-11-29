@@ -6,134 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/pinpointemail/types"
 )
-
-// A request to retrieve the results of a predictive inbox placement test.
-type GetDeliverabilityTestReportInput struct {
-	_ struct{} `type:"structure"`
-
-	// A unique string that identifies the predictive inbox placement test.
-	//
-	// ReportId is a required field
-	ReportId *string `location:"uri" locationName:"ReportId" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetDeliverabilityTestReportInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetDeliverabilityTestReportInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetDeliverabilityTestReportInput"}
-
-	if s.ReportId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ReportId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetDeliverabilityTestReportInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.ReportId != nil {
-		v := *s.ReportId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "ReportId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-// The results of the predictive inbox placement test.
-type GetDeliverabilityTestReportOutput struct {
-	_ struct{} `type:"structure"`
-
-	// An object that contains the results of the predictive inbox placement test.
-	//
-	// DeliverabilityTestReport is a required field
-	DeliverabilityTestReport *DeliverabilityTestReport `type:"structure" required:"true"`
-
-	// An object that describes how the test email was handled by several email
-	// providers, including Gmail, Hotmail, Yahoo, AOL, and others.
-	//
-	// IspPlacements is a required field
-	IspPlacements []IspPlacement `type:"list" required:"true"`
-
-	// An object that contains the message that you sent when you performed this
-	// predictive inbox placement test.
-	Message *string `type:"string"`
-
-	// An object that specifies how many test messages that were sent during the
-	// predictive inbox placement test were delivered to recipients' inboxes, how
-	// many were sent to recipients' spam folders, and how many weren't delivered.
-	//
-	// OverallPlacement is a required field
-	OverallPlacement *PlacementStatistics `type:"structure" required:"true"`
-
-	// An array of objects that define the tags (keys and values) that are associated
-	// with the predictive inbox placement test.
-	Tags []Tag `type:"list"`
-}
-
-// String returns the string representation
-func (s GetDeliverabilityTestReportOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetDeliverabilityTestReportOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.DeliverabilityTestReport != nil {
-		v := s.DeliverabilityTestReport
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "DeliverabilityTestReport", v, metadata)
-	}
-	if s.IspPlacements != nil {
-		v := s.IspPlacements
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "IspPlacements", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	if s.Message != nil {
-		v := *s.Message
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "Message", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.OverallPlacement != nil {
-		v := s.OverallPlacement
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "OverallPlacement", v, metadata)
-	}
-	if s.Tags != nil {
-		v := s.Tags
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "Tags", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	return nil
-}
 
 const opGetDeliverabilityTestReport = "GetDeliverabilityTestReport"
 
@@ -150,7 +24,7 @@ const opGetDeliverabilityTestReport = "GetDeliverabilityTestReport"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/GetDeliverabilityTestReport
-func (c *Client) GetDeliverabilityTestReportRequest(input *GetDeliverabilityTestReportInput) GetDeliverabilityTestReportRequest {
+func (c *Client) GetDeliverabilityTestReportRequest(input *types.GetDeliverabilityTestReportInput) GetDeliverabilityTestReportRequest {
 	op := &aws.Operation{
 		Name:       opGetDeliverabilityTestReport,
 		HTTPMethod: "GET",
@@ -158,10 +32,10 @@ func (c *Client) GetDeliverabilityTestReportRequest(input *GetDeliverabilityTest
 	}
 
 	if input == nil {
-		input = &GetDeliverabilityTestReportInput{}
+		input = &types.GetDeliverabilityTestReportInput{}
 	}
 
-	req := c.newRequest(op, input, &GetDeliverabilityTestReportOutput{})
+	req := c.newRequest(op, input, &types.GetDeliverabilityTestReportOutput{})
 	return GetDeliverabilityTestReportRequest{Request: req, Input: input, Copy: c.GetDeliverabilityTestReportRequest}
 }
 
@@ -169,8 +43,8 @@ func (c *Client) GetDeliverabilityTestReportRequest(input *GetDeliverabilityTest
 // GetDeliverabilityTestReport API operation.
 type GetDeliverabilityTestReportRequest struct {
 	*aws.Request
-	Input *GetDeliverabilityTestReportInput
-	Copy  func(*GetDeliverabilityTestReportInput) GetDeliverabilityTestReportRequest
+	Input *types.GetDeliverabilityTestReportInput
+	Copy  func(*types.GetDeliverabilityTestReportInput) GetDeliverabilityTestReportRequest
 }
 
 // Send marshals and sends the GetDeliverabilityTestReport API request.
@@ -182,7 +56,7 @@ func (r GetDeliverabilityTestReportRequest) Send(ctx context.Context) (*GetDeliv
 	}
 
 	resp := &GetDeliverabilityTestReportResponse{
-		GetDeliverabilityTestReportOutput: r.Request.Data.(*GetDeliverabilityTestReportOutput),
+		GetDeliverabilityTestReportOutput: r.Request.Data.(*types.GetDeliverabilityTestReportOutput),
 		response:                          &aws.Response{Request: r.Request},
 	}
 
@@ -192,7 +66,7 @@ func (r GetDeliverabilityTestReportRequest) Send(ctx context.Context) (*GetDeliv
 // GetDeliverabilityTestReportResponse is the response type for the
 // GetDeliverabilityTestReport API operation.
 type GetDeliverabilityTestReportResponse struct {
-	*GetDeliverabilityTestReportOutput
+	*types.GetDeliverabilityTestReportOutput
 
 	response *aws.Response
 }

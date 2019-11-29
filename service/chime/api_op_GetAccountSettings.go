@@ -6,73 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/chime/types"
 )
-
-type GetAccountSettingsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Chime account ID.
-	//
-	// AccountId is a required field
-	AccountId *string `location:"uri" locationName:"accountId" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetAccountSettingsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetAccountSettingsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetAccountSettingsInput"}
-
-	if s.AccountId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("AccountId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetAccountSettingsInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.AccountId != nil {
-		v := *s.AccountId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "accountId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type GetAccountSettingsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Chime account settings.
-	AccountSettings *AccountSettings `type:"structure"`
-}
-
-// String returns the string representation
-func (s GetAccountSettingsOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetAccountSettingsOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.AccountSettings != nil {
-		v := s.AccountSettings
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "AccountSettings", v, metadata)
-	}
-	return nil
-}
 
 const opGetAccountSettings = "GetAccountSettings"
 
@@ -92,7 +27,7 @@ const opGetAccountSettings = "GetAccountSettings"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/GetAccountSettings
-func (c *Client) GetAccountSettingsRequest(input *GetAccountSettingsInput) GetAccountSettingsRequest {
+func (c *Client) GetAccountSettingsRequest(input *types.GetAccountSettingsInput) GetAccountSettingsRequest {
 	op := &aws.Operation{
 		Name:       opGetAccountSettings,
 		HTTPMethod: "GET",
@@ -100,10 +35,10 @@ func (c *Client) GetAccountSettingsRequest(input *GetAccountSettingsInput) GetAc
 	}
 
 	if input == nil {
-		input = &GetAccountSettingsInput{}
+		input = &types.GetAccountSettingsInput{}
 	}
 
-	req := c.newRequest(op, input, &GetAccountSettingsOutput{})
+	req := c.newRequest(op, input, &types.GetAccountSettingsOutput{})
 	return GetAccountSettingsRequest{Request: req, Input: input, Copy: c.GetAccountSettingsRequest}
 }
 
@@ -111,8 +46,8 @@ func (c *Client) GetAccountSettingsRequest(input *GetAccountSettingsInput) GetAc
 // GetAccountSettings API operation.
 type GetAccountSettingsRequest struct {
 	*aws.Request
-	Input *GetAccountSettingsInput
-	Copy  func(*GetAccountSettingsInput) GetAccountSettingsRequest
+	Input *types.GetAccountSettingsInput
+	Copy  func(*types.GetAccountSettingsInput) GetAccountSettingsRequest
 }
 
 // Send marshals and sends the GetAccountSettings API request.
@@ -124,7 +59,7 @@ func (r GetAccountSettingsRequest) Send(ctx context.Context) (*GetAccountSetting
 	}
 
 	resp := &GetAccountSettingsResponse{
-		GetAccountSettingsOutput: r.Request.Data.(*GetAccountSettingsOutput),
+		GetAccountSettingsOutput: r.Request.Data.(*types.GetAccountSettingsOutput),
 		response:                 &aws.Response{Request: r.Request},
 	}
 
@@ -134,7 +69,7 @@ func (r GetAccountSettingsRequest) Send(ctx context.Context) (*GetAccountSetting
 // GetAccountSettingsResponse is the response type for the
 // GetAccountSettings API operation.
 type GetAccountSettingsResponse struct {
-	*GetAccountSettingsOutput
+	*types.GetAccountSettingsOutput
 
 	response *aws.Response
 }

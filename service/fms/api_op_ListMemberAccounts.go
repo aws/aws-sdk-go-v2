@@ -6,65 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/fms/types"
 )
-
-type ListMemberAccountsInput struct {
-	_ struct{} `type:"structure"`
-
-	// Specifies the number of member account IDs that you want AWS Firewall Manager
-	// to return for this request. If you have more IDs than the number that you
-	// specify for MaxResults, the response includes a NextToken value that you
-	// can use to get another batch of member account IDs.
-	MaxResults *int64 `min:"1" type:"integer"`
-
-	// If you specify a value for MaxResults and you have more account IDs than
-	// the number that you specify for MaxResults, AWS Firewall Manager returns
-	// a NextToken value in the response that allows you to list another group of
-	// IDs. For the second and subsequent ListMemberAccountsRequest requests, specify
-	// the value of NextToken from the previous response to get information about
-	// another batch of member account IDs.
-	NextToken *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s ListMemberAccountsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListMemberAccountsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListMemberAccountsInput"}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-	if s.NextToken != nil && len(*s.NextToken) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ListMemberAccountsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// An array of account IDs.
-	MemberAccounts []string `type:"list"`
-
-	// If you have more member account IDs than the number that you specified for
-	// MaxResults in the request, the response includes a NextToken value. To list
-	// more IDs, submit another ListMemberAccounts request, and specify the NextToken
-	// value from the response in the NextToken value in the next request.
-	NextToken *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s ListMemberAccountsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListMemberAccounts = "ListMemberAccounts"
 
@@ -85,7 +28,7 @@ const opListMemberAccounts = "ListMemberAccounts"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/ListMemberAccounts
-func (c *Client) ListMemberAccountsRequest(input *ListMemberAccountsInput) ListMemberAccountsRequest {
+func (c *Client) ListMemberAccountsRequest(input *types.ListMemberAccountsInput) ListMemberAccountsRequest {
 	op := &aws.Operation{
 		Name:       opListMemberAccounts,
 		HTTPMethod: "POST",
@@ -99,10 +42,10 @@ func (c *Client) ListMemberAccountsRequest(input *ListMemberAccountsInput) ListM
 	}
 
 	if input == nil {
-		input = &ListMemberAccountsInput{}
+		input = &types.ListMemberAccountsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListMemberAccountsOutput{})
+	req := c.newRequest(op, input, &types.ListMemberAccountsOutput{})
 	return ListMemberAccountsRequest{Request: req, Input: input, Copy: c.ListMemberAccountsRequest}
 }
 
@@ -110,8 +53,8 @@ func (c *Client) ListMemberAccountsRequest(input *ListMemberAccountsInput) ListM
 // ListMemberAccounts API operation.
 type ListMemberAccountsRequest struct {
 	*aws.Request
-	Input *ListMemberAccountsInput
-	Copy  func(*ListMemberAccountsInput) ListMemberAccountsRequest
+	Input *types.ListMemberAccountsInput
+	Copy  func(*types.ListMemberAccountsInput) ListMemberAccountsRequest
 }
 
 // Send marshals and sends the ListMemberAccounts API request.
@@ -123,7 +66,7 @@ func (r ListMemberAccountsRequest) Send(ctx context.Context) (*ListMemberAccount
 	}
 
 	resp := &ListMemberAccountsResponse{
-		ListMemberAccountsOutput: r.Request.Data.(*ListMemberAccountsOutput),
+		ListMemberAccountsOutput: r.Request.Data.(*types.ListMemberAccountsOutput),
 		response:                 &aws.Response{Request: r.Request},
 	}
 
@@ -153,7 +96,7 @@ func NewListMemberAccountsPaginator(req ListMemberAccountsRequest) ListMemberAcc
 	return ListMemberAccountsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListMemberAccountsInput
+				var inCpy *types.ListMemberAccountsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -173,14 +116,14 @@ type ListMemberAccountsPaginator struct {
 	aws.Pager
 }
 
-func (p *ListMemberAccountsPaginator) CurrentPage() *ListMemberAccountsOutput {
-	return p.Pager.CurrentPage().(*ListMemberAccountsOutput)
+func (p *ListMemberAccountsPaginator) CurrentPage() *types.ListMemberAccountsOutput {
+	return p.Pager.CurrentPage().(*types.ListMemberAccountsOutput)
 }
 
 // ListMemberAccountsResponse is the response type for the
 // ListMemberAccounts API operation.
 type ListMemberAccountsResponse struct {
-	*ListMemberAccountsOutput
+	*types.ListMemberAccountsOutput
 
 	response *aws.Response
 }

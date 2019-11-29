@@ -6,65 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/elasticache/types"
 )
-
-// Represents the input of a RemoveTagsFromResource operation.
-type RemoveTagsFromResourceInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the resource from which you want the tags
-	// removed, for example arn:aws:elasticache:us-west-2:0123456789:cluster:myCluster
-	// or arn:aws:elasticache:us-west-2:0123456789:snapshot:mySnapshot.
-	//
-	// For more information about ARNs, see Amazon Resource Names (ARNs) and AWS
-	// Service Namespaces (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html).
-	//
-	// ResourceName is a required field
-	ResourceName *string `type:"string" required:"true"`
-
-	// A list of TagKeys identifying the tags you want removed from the named resource.
-	//
-	// TagKeys is a required field
-	TagKeys []string `type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s RemoveTagsFromResourceInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *RemoveTagsFromResourceInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "RemoveTagsFromResourceInput"}
-
-	if s.ResourceName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ResourceName"))
-	}
-
-	if s.TagKeys == nil {
-		invalidParams.Add(aws.NewErrParamRequired("TagKeys"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Represents the output from the AddTagsToResource, ListTagsForResource, and
-// RemoveTagsFromResource operations.
-type RemoveTagsFromResourceOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A list of cost allocation tags as key-value pairs.
-	TagList []Tag `locationNameList:"Tag" type:"list"`
-}
-
-// String returns the string representation
-func (s RemoveTagsFromResourceOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opRemoveTagsFromResource = "RemoveTagsFromResource"
 
@@ -81,7 +24,7 @@ const opRemoveTagsFromResource = "RemoveTagsFromResource"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/RemoveTagsFromResource
-func (c *Client) RemoveTagsFromResourceRequest(input *RemoveTagsFromResourceInput) RemoveTagsFromResourceRequest {
+func (c *Client) RemoveTagsFromResourceRequest(input *types.RemoveTagsFromResourceInput) RemoveTagsFromResourceRequest {
 	op := &aws.Operation{
 		Name:       opRemoveTagsFromResource,
 		HTTPMethod: "POST",
@@ -89,10 +32,10 @@ func (c *Client) RemoveTagsFromResourceRequest(input *RemoveTagsFromResourceInpu
 	}
 
 	if input == nil {
-		input = &RemoveTagsFromResourceInput{}
+		input = &types.RemoveTagsFromResourceInput{}
 	}
 
-	req := c.newRequest(op, input, &RemoveTagsFromResourceOutput{})
+	req := c.newRequest(op, input, &types.RemoveTagsFromResourceOutput{})
 	return RemoveTagsFromResourceRequest{Request: req, Input: input, Copy: c.RemoveTagsFromResourceRequest}
 }
 
@@ -100,8 +43,8 @@ func (c *Client) RemoveTagsFromResourceRequest(input *RemoveTagsFromResourceInpu
 // RemoveTagsFromResource API operation.
 type RemoveTagsFromResourceRequest struct {
 	*aws.Request
-	Input *RemoveTagsFromResourceInput
-	Copy  func(*RemoveTagsFromResourceInput) RemoveTagsFromResourceRequest
+	Input *types.RemoveTagsFromResourceInput
+	Copy  func(*types.RemoveTagsFromResourceInput) RemoveTagsFromResourceRequest
 }
 
 // Send marshals and sends the RemoveTagsFromResource API request.
@@ -113,7 +56,7 @@ func (r RemoveTagsFromResourceRequest) Send(ctx context.Context) (*RemoveTagsFro
 	}
 
 	resp := &RemoveTagsFromResourceResponse{
-		RemoveTagsFromResourceOutput: r.Request.Data.(*RemoveTagsFromResourceOutput),
+		RemoveTagsFromResourceOutput: r.Request.Data.(*types.RemoveTagsFromResourceOutput),
 		response:                     &aws.Response{Request: r.Request},
 	}
 
@@ -123,7 +66,7 @@ func (r RemoveTagsFromResourceRequest) Send(ctx context.Context) (*RemoveTagsFro
 // RemoveTagsFromResourceResponse is the response type for the
 // RemoveTagsFromResource API operation.
 type RemoveTagsFromResourceResponse struct {
-	*RemoveTagsFromResourceOutput
+	*types.RemoveTagsFromResourceOutput
 
 	response *aws.Response
 }

@@ -6,65 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/types"
 )
-
-type DescribeIdentityProviderInput struct {
-	_ struct{} `type:"structure"`
-
-	// The identity provider name.
-	//
-	// ProviderName is a required field
-	ProviderName *string `min:"1" type:"string" required:"true"`
-
-	// The user pool ID.
-	//
-	// UserPoolId is a required field
-	UserPoolId *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeIdentityProviderInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeIdentityProviderInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeIdentityProviderInput"}
-
-	if s.ProviderName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ProviderName"))
-	}
-	if s.ProviderName != nil && len(*s.ProviderName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ProviderName", 1))
-	}
-
-	if s.UserPoolId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("UserPoolId"))
-	}
-	if s.UserPoolId != nil && len(*s.UserPoolId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("UserPoolId", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribeIdentityProviderOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The identity provider that was deleted.
-	//
-	// IdentityProvider is a required field
-	IdentityProvider *IdentityProviderType `type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeIdentityProviderOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeIdentityProvider = "DescribeIdentityProvider"
 
@@ -81,7 +24,7 @@ const opDescribeIdentityProvider = "DescribeIdentityProvider"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/DescribeIdentityProvider
-func (c *Client) DescribeIdentityProviderRequest(input *DescribeIdentityProviderInput) DescribeIdentityProviderRequest {
+func (c *Client) DescribeIdentityProviderRequest(input *types.DescribeIdentityProviderInput) DescribeIdentityProviderRequest {
 	op := &aws.Operation{
 		Name:       opDescribeIdentityProvider,
 		HTTPMethod: "POST",
@@ -89,10 +32,10 @@ func (c *Client) DescribeIdentityProviderRequest(input *DescribeIdentityProvider
 	}
 
 	if input == nil {
-		input = &DescribeIdentityProviderInput{}
+		input = &types.DescribeIdentityProviderInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeIdentityProviderOutput{})
+	req := c.newRequest(op, input, &types.DescribeIdentityProviderOutput{})
 	return DescribeIdentityProviderRequest{Request: req, Input: input, Copy: c.DescribeIdentityProviderRequest}
 }
 
@@ -100,8 +43,8 @@ func (c *Client) DescribeIdentityProviderRequest(input *DescribeIdentityProvider
 // DescribeIdentityProvider API operation.
 type DescribeIdentityProviderRequest struct {
 	*aws.Request
-	Input *DescribeIdentityProviderInput
-	Copy  func(*DescribeIdentityProviderInput) DescribeIdentityProviderRequest
+	Input *types.DescribeIdentityProviderInput
+	Copy  func(*types.DescribeIdentityProviderInput) DescribeIdentityProviderRequest
 }
 
 // Send marshals and sends the DescribeIdentityProvider API request.
@@ -113,7 +56,7 @@ func (r DescribeIdentityProviderRequest) Send(ctx context.Context) (*DescribeIde
 	}
 
 	resp := &DescribeIdentityProviderResponse{
-		DescribeIdentityProviderOutput: r.Request.Data.(*DescribeIdentityProviderOutput),
+		DescribeIdentityProviderOutput: r.Request.Data.(*types.DescribeIdentityProviderOutput),
 		response:                       &aws.Response{Request: r.Request},
 	}
 
@@ -123,7 +66,7 @@ func (r DescribeIdentityProviderRequest) Send(ctx context.Context) (*DescribeIde
 // DescribeIdentityProviderResponse is the response type for the
 // DescribeIdentityProvider API operation.
 type DescribeIdentityProviderResponse struct {
-	*DescribeIdentityProviderOutput
+	*types.DescribeIdentityProviderOutput
 
 	response *aws.Response
 }

@@ -6,65 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/globalaccelerator/types"
 )
-
-type UpdateAcceleratorAttributesInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the accelerator that you want to update.
-	//
-	// AcceleratorArn is a required field
-	AcceleratorArn *string `type:"string" required:"true"`
-
-	// Update whether flow logs are enabled. The default value is false. If the
-	// value is true, FlowLogsS3Bucket and FlowLogsS3Prefix must be specified.
-	//
-	// For more information, see Flow Logs (https://docs.aws.amazon.com/global-accelerator/latest/dg/monitoring-global-accelerator.flow-logs.html)
-	// in the AWS Global Accelerator Developer Guide.
-	FlowLogsEnabled *bool `type:"boolean"`
-
-	// The name of the Amazon S3 bucket for the flow logs. Attribute is required
-	// if FlowLogsEnabled is true. The bucket must exist and have a bucket policy
-	// that grants AWS Global Accelerator permission to write to the bucket.
-	FlowLogsS3Bucket *string `type:"string"`
-
-	// Update the prefix for the location in the Amazon S3 bucket for the flow logs.
-	// Attribute is required if FlowLogsEnabled is true. If you don’t specify
-	// a prefix, the flow logs are stored in the root of the bucket.
-	FlowLogsS3Prefix *string `type:"string"`
-}
-
-// String returns the string representation
-func (s UpdateAcceleratorAttributesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateAcceleratorAttributesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateAcceleratorAttributesInput"}
-
-	if s.AcceleratorArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("AcceleratorArn"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type UpdateAcceleratorAttributesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Updated attributes for the accelerator.
-	AcceleratorAttributes *AcceleratorAttributes `type:"structure"`
-}
-
-// String returns the string representation
-func (s UpdateAcceleratorAttributesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opUpdateAcceleratorAttributes = "UpdateAcceleratorAttributes"
 
@@ -82,7 +25,7 @@ const opUpdateAcceleratorAttributes = "UpdateAcceleratorAttributes"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/UpdateAcceleratorAttributes
-func (c *Client) UpdateAcceleratorAttributesRequest(input *UpdateAcceleratorAttributesInput) UpdateAcceleratorAttributesRequest {
+func (c *Client) UpdateAcceleratorAttributesRequest(input *types.UpdateAcceleratorAttributesInput) UpdateAcceleratorAttributesRequest {
 	op := &aws.Operation{
 		Name:       opUpdateAcceleratorAttributes,
 		HTTPMethod: "POST",
@@ -90,10 +33,10 @@ func (c *Client) UpdateAcceleratorAttributesRequest(input *UpdateAcceleratorAttr
 	}
 
 	if input == nil {
-		input = &UpdateAcceleratorAttributesInput{}
+		input = &types.UpdateAcceleratorAttributesInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateAcceleratorAttributesOutput{})
+	req := c.newRequest(op, input, &types.UpdateAcceleratorAttributesOutput{})
 	return UpdateAcceleratorAttributesRequest{Request: req, Input: input, Copy: c.UpdateAcceleratorAttributesRequest}
 }
 
@@ -101,8 +44,8 @@ func (c *Client) UpdateAcceleratorAttributesRequest(input *UpdateAcceleratorAttr
 // UpdateAcceleratorAttributes API operation.
 type UpdateAcceleratorAttributesRequest struct {
 	*aws.Request
-	Input *UpdateAcceleratorAttributesInput
-	Copy  func(*UpdateAcceleratorAttributesInput) UpdateAcceleratorAttributesRequest
+	Input *types.UpdateAcceleratorAttributesInput
+	Copy  func(*types.UpdateAcceleratorAttributesInput) UpdateAcceleratorAttributesRequest
 }
 
 // Send marshals and sends the UpdateAcceleratorAttributes API request.
@@ -114,7 +57,7 @@ func (r UpdateAcceleratorAttributesRequest) Send(ctx context.Context) (*UpdateAc
 	}
 
 	resp := &UpdateAcceleratorAttributesResponse{
-		UpdateAcceleratorAttributesOutput: r.Request.Data.(*UpdateAcceleratorAttributesOutput),
+		UpdateAcceleratorAttributesOutput: r.Request.Data.(*types.UpdateAcceleratorAttributesOutput),
 		response:                          &aws.Response{Request: r.Request},
 	}
 
@@ -124,7 +67,7 @@ func (r UpdateAcceleratorAttributesRequest) Send(ctx context.Context) (*UpdateAc
 // UpdateAcceleratorAttributesResponse is the response type for the
 // UpdateAcceleratorAttributes API operation.
 type UpdateAcceleratorAttributesResponse struct {
-	*UpdateAcceleratorAttributesOutput
+	*types.UpdateAcceleratorAttributesOutput
 
 	response *aws.Response
 }

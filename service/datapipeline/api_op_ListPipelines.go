@@ -6,49 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/datapipeline/types"
 )
-
-// Contains the parameters for ListPipelines.
-type ListPipelinesInput struct {
-	_ struct{} `type:"structure"`
-
-	// The starting point for the results to be returned. For the first call, this
-	// value should be empty. As long as there are more results, continue to call
-	// ListPipelines with the marker value from the previous call to retrieve the
-	// next set of results.
-	Marker *string `locationName:"marker" type:"string"`
-}
-
-// String returns the string representation
-func (s ListPipelinesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Contains the output of ListPipelines.
-type ListPipelinesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Indicates whether there are more results that can be obtained by a subsequent
-	// call.
-	HasMoreResults *bool `locationName:"hasMoreResults" type:"boolean"`
-
-	// The starting point for the next page of results. To view the next page of
-	// results, call ListPipelinesOutput again with this marker value. If the value
-	// is null, there are no more results.
-	Marker *string `locationName:"marker" type:"string"`
-
-	// The pipeline identifiers. If you require additional information about the
-	// pipelines, you can use these identifiers to call DescribePipelines and GetPipelineDefinition.
-	//
-	// PipelineIdList is a required field
-	PipelineIdList []PipelineIdName `locationName:"pipelineIdList" type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s ListPipelinesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListPipelines = "ListPipelines"
 
@@ -66,7 +25,7 @@ const opListPipelines = "ListPipelines"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/datapipeline-2012-10-29/ListPipelines
-func (c *Client) ListPipelinesRequest(input *ListPipelinesInput) ListPipelinesRequest {
+func (c *Client) ListPipelinesRequest(input *types.ListPipelinesInput) ListPipelinesRequest {
 	op := &aws.Operation{
 		Name:       opListPipelines,
 		HTTPMethod: "POST",
@@ -80,10 +39,10 @@ func (c *Client) ListPipelinesRequest(input *ListPipelinesInput) ListPipelinesRe
 	}
 
 	if input == nil {
-		input = &ListPipelinesInput{}
+		input = &types.ListPipelinesInput{}
 	}
 
-	req := c.newRequest(op, input, &ListPipelinesOutput{})
+	req := c.newRequest(op, input, &types.ListPipelinesOutput{})
 	return ListPipelinesRequest{Request: req, Input: input, Copy: c.ListPipelinesRequest}
 }
 
@@ -91,8 +50,8 @@ func (c *Client) ListPipelinesRequest(input *ListPipelinesInput) ListPipelinesRe
 // ListPipelines API operation.
 type ListPipelinesRequest struct {
 	*aws.Request
-	Input *ListPipelinesInput
-	Copy  func(*ListPipelinesInput) ListPipelinesRequest
+	Input *types.ListPipelinesInput
+	Copy  func(*types.ListPipelinesInput) ListPipelinesRequest
 }
 
 // Send marshals and sends the ListPipelines API request.
@@ -104,7 +63,7 @@ func (r ListPipelinesRequest) Send(ctx context.Context) (*ListPipelinesResponse,
 	}
 
 	resp := &ListPipelinesResponse{
-		ListPipelinesOutput: r.Request.Data.(*ListPipelinesOutput),
+		ListPipelinesOutput: r.Request.Data.(*types.ListPipelinesOutput),
 		response:            &aws.Response{Request: r.Request},
 	}
 
@@ -134,7 +93,7 @@ func NewListPipelinesPaginator(req ListPipelinesRequest) ListPipelinesPaginator 
 	return ListPipelinesPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListPipelinesInput
+				var inCpy *types.ListPipelinesInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -154,14 +113,14 @@ type ListPipelinesPaginator struct {
 	aws.Pager
 }
 
-func (p *ListPipelinesPaginator) CurrentPage() *ListPipelinesOutput {
-	return p.Pager.CurrentPage().(*ListPipelinesOutput)
+func (p *ListPipelinesPaginator) CurrentPage() *types.ListPipelinesOutput {
+	return p.Pager.CurrentPage().(*types.ListPipelinesOutput)
 }
 
 // ListPipelinesResponse is the response type for the
 // ListPipelines API operation.
 type ListPipelinesResponse struct {
-	*ListPipelinesOutput
+	*types.ListPipelinesOutput
 
 	response *aws.Response
 }

@@ -10,6 +10,7 @@ package guarddutyiface
 
 import (
 	"github.com/aws/aws-sdk-go-v2/service/guardduty"
+	"github.com/aws/aws-sdk-go-v2/service/guardduty/types"
 )
 
 // ClientAPI provides an interface to enable mocking the
@@ -43,7 +44,7 @@ import (
 //    type mockClientClient struct {
 //        guarddutyiface.ClientPI
 //    }
-//    func (m *mockClientClient) AcceptInvitation(input *guardduty.AcceptInvitationInput) (*guardduty.AcceptInvitationOutput, error) {
+//    func (m *mockClientClient) AcceptInvitation(input *types.AcceptInvitationInput) (*types.AcceptInvitationOutput, error) {
 //        // mock response/functionality
 //    }
 //
@@ -61,95 +62,105 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type ClientAPI interface {
-	AcceptInvitationRequest(*guardduty.AcceptInvitationInput) guardduty.AcceptInvitationRequest
+	AcceptInvitationRequest(*types.AcceptInvitationInput) guardduty.AcceptInvitationRequest
 
-	ArchiveFindingsRequest(*guardduty.ArchiveFindingsInput) guardduty.ArchiveFindingsRequest
+	ArchiveFindingsRequest(*types.ArchiveFindingsInput) guardduty.ArchiveFindingsRequest
 
-	CreateDetectorRequest(*guardduty.CreateDetectorInput) guardduty.CreateDetectorRequest
+	CreateDetectorRequest(*types.CreateDetectorInput) guardduty.CreateDetectorRequest
 
-	CreateFilterRequest(*guardduty.CreateFilterInput) guardduty.CreateFilterRequest
+	CreateFilterRequest(*types.CreateFilterInput) guardduty.CreateFilterRequest
 
-	CreateIPSetRequest(*guardduty.CreateIPSetInput) guardduty.CreateIPSetRequest
+	CreateIPSetRequest(*types.CreateIPSetInput) guardduty.CreateIPSetRequest
 
-	CreateMembersRequest(*guardduty.CreateMembersInput) guardduty.CreateMembersRequest
+	CreateMembersRequest(*types.CreateMembersInput) guardduty.CreateMembersRequest
 
-	CreateSampleFindingsRequest(*guardduty.CreateSampleFindingsInput) guardduty.CreateSampleFindingsRequest
+	CreatePublishingDestinationRequest(*types.CreatePublishingDestinationInput) guardduty.CreatePublishingDestinationRequest
 
-	CreateThreatIntelSetRequest(*guardduty.CreateThreatIntelSetInput) guardduty.CreateThreatIntelSetRequest
+	CreateSampleFindingsRequest(*types.CreateSampleFindingsInput) guardduty.CreateSampleFindingsRequest
 
-	DeclineInvitationsRequest(*guardduty.DeclineInvitationsInput) guardduty.DeclineInvitationsRequest
+	CreateThreatIntelSetRequest(*types.CreateThreatIntelSetInput) guardduty.CreateThreatIntelSetRequest
 
-	DeleteDetectorRequest(*guardduty.DeleteDetectorInput) guardduty.DeleteDetectorRequest
+	DeclineInvitationsRequest(*types.DeclineInvitationsInput) guardduty.DeclineInvitationsRequest
 
-	DeleteFilterRequest(*guardduty.DeleteFilterInput) guardduty.DeleteFilterRequest
+	DeleteDetectorRequest(*types.DeleteDetectorInput) guardduty.DeleteDetectorRequest
 
-	DeleteIPSetRequest(*guardduty.DeleteIPSetInput) guardduty.DeleteIPSetRequest
+	DeleteFilterRequest(*types.DeleteFilterInput) guardduty.DeleteFilterRequest
 
-	DeleteInvitationsRequest(*guardduty.DeleteInvitationsInput) guardduty.DeleteInvitationsRequest
+	DeleteIPSetRequest(*types.DeleteIPSetInput) guardduty.DeleteIPSetRequest
 
-	DeleteMembersRequest(*guardduty.DeleteMembersInput) guardduty.DeleteMembersRequest
+	DeleteInvitationsRequest(*types.DeleteInvitationsInput) guardduty.DeleteInvitationsRequest
 
-	DeleteThreatIntelSetRequest(*guardduty.DeleteThreatIntelSetInput) guardduty.DeleteThreatIntelSetRequest
+	DeleteMembersRequest(*types.DeleteMembersInput) guardduty.DeleteMembersRequest
 
-	DisassociateFromMasterAccountRequest(*guardduty.DisassociateFromMasterAccountInput) guardduty.DisassociateFromMasterAccountRequest
+	DeletePublishingDestinationRequest(*types.DeletePublishingDestinationInput) guardduty.DeletePublishingDestinationRequest
 
-	DisassociateMembersRequest(*guardduty.DisassociateMembersInput) guardduty.DisassociateMembersRequest
+	DeleteThreatIntelSetRequest(*types.DeleteThreatIntelSetInput) guardduty.DeleteThreatIntelSetRequest
 
-	GetDetectorRequest(*guardduty.GetDetectorInput) guardduty.GetDetectorRequest
+	DescribePublishingDestinationRequest(*types.DescribePublishingDestinationInput) guardduty.DescribePublishingDestinationRequest
 
-	GetFilterRequest(*guardduty.GetFilterInput) guardduty.GetFilterRequest
+	DisassociateFromMasterAccountRequest(*types.DisassociateFromMasterAccountInput) guardduty.DisassociateFromMasterAccountRequest
 
-	GetFindingsRequest(*guardduty.GetFindingsInput) guardduty.GetFindingsRequest
+	DisassociateMembersRequest(*types.DisassociateMembersInput) guardduty.DisassociateMembersRequest
 
-	GetFindingsStatisticsRequest(*guardduty.GetFindingsStatisticsInput) guardduty.GetFindingsStatisticsRequest
+	GetDetectorRequest(*types.GetDetectorInput) guardduty.GetDetectorRequest
 
-	GetIPSetRequest(*guardduty.GetIPSetInput) guardduty.GetIPSetRequest
+	GetFilterRequest(*types.GetFilterInput) guardduty.GetFilterRequest
 
-	GetInvitationsCountRequest(*guardduty.GetInvitationsCountInput) guardduty.GetInvitationsCountRequest
+	GetFindingsRequest(*types.GetFindingsInput) guardduty.GetFindingsRequest
 
-	GetMasterAccountRequest(*guardduty.GetMasterAccountInput) guardduty.GetMasterAccountRequest
+	GetFindingsStatisticsRequest(*types.GetFindingsStatisticsInput) guardduty.GetFindingsStatisticsRequest
 
-	GetMembersRequest(*guardduty.GetMembersInput) guardduty.GetMembersRequest
+	GetIPSetRequest(*types.GetIPSetInput) guardduty.GetIPSetRequest
 
-	GetThreatIntelSetRequest(*guardduty.GetThreatIntelSetInput) guardduty.GetThreatIntelSetRequest
+	GetInvitationsCountRequest(*types.GetInvitationsCountInput) guardduty.GetInvitationsCountRequest
 
-	InviteMembersRequest(*guardduty.InviteMembersInput) guardduty.InviteMembersRequest
+	GetMasterAccountRequest(*types.GetMasterAccountInput) guardduty.GetMasterAccountRequest
 
-	ListDetectorsRequest(*guardduty.ListDetectorsInput) guardduty.ListDetectorsRequest
+	GetMembersRequest(*types.GetMembersInput) guardduty.GetMembersRequest
 
-	ListFiltersRequest(*guardduty.ListFiltersInput) guardduty.ListFiltersRequest
+	GetThreatIntelSetRequest(*types.GetThreatIntelSetInput) guardduty.GetThreatIntelSetRequest
 
-	ListFindingsRequest(*guardduty.ListFindingsInput) guardduty.ListFindingsRequest
+	InviteMembersRequest(*types.InviteMembersInput) guardduty.InviteMembersRequest
 
-	ListIPSetsRequest(*guardduty.ListIPSetsInput) guardduty.ListIPSetsRequest
+	ListDetectorsRequest(*types.ListDetectorsInput) guardduty.ListDetectorsRequest
 
-	ListInvitationsRequest(*guardduty.ListInvitationsInput) guardduty.ListInvitationsRequest
+	ListFiltersRequest(*types.ListFiltersInput) guardduty.ListFiltersRequest
 
-	ListMembersRequest(*guardduty.ListMembersInput) guardduty.ListMembersRequest
+	ListFindingsRequest(*types.ListFindingsInput) guardduty.ListFindingsRequest
 
-	ListTagsForResourceRequest(*guardduty.ListTagsForResourceInput) guardduty.ListTagsForResourceRequest
+	ListIPSetsRequest(*types.ListIPSetsInput) guardduty.ListIPSetsRequest
 
-	ListThreatIntelSetsRequest(*guardduty.ListThreatIntelSetsInput) guardduty.ListThreatIntelSetsRequest
+	ListInvitationsRequest(*types.ListInvitationsInput) guardduty.ListInvitationsRequest
 
-	StartMonitoringMembersRequest(*guardduty.StartMonitoringMembersInput) guardduty.StartMonitoringMembersRequest
+	ListMembersRequest(*types.ListMembersInput) guardduty.ListMembersRequest
 
-	StopMonitoringMembersRequest(*guardduty.StopMonitoringMembersInput) guardduty.StopMonitoringMembersRequest
+	ListPublishingDestinationsRequest(*types.ListPublishingDestinationsInput) guardduty.ListPublishingDestinationsRequest
 
-	TagResourceRequest(*guardduty.TagResourceInput) guardduty.TagResourceRequest
+	ListTagsForResourceRequest(*types.ListTagsForResourceInput) guardduty.ListTagsForResourceRequest
 
-	UnarchiveFindingsRequest(*guardduty.UnarchiveFindingsInput) guardduty.UnarchiveFindingsRequest
+	ListThreatIntelSetsRequest(*types.ListThreatIntelSetsInput) guardduty.ListThreatIntelSetsRequest
 
-	UntagResourceRequest(*guardduty.UntagResourceInput) guardduty.UntagResourceRequest
+	StartMonitoringMembersRequest(*types.StartMonitoringMembersInput) guardduty.StartMonitoringMembersRequest
 
-	UpdateDetectorRequest(*guardduty.UpdateDetectorInput) guardduty.UpdateDetectorRequest
+	StopMonitoringMembersRequest(*types.StopMonitoringMembersInput) guardduty.StopMonitoringMembersRequest
 
-	UpdateFilterRequest(*guardduty.UpdateFilterInput) guardduty.UpdateFilterRequest
+	TagResourceRequest(*types.TagResourceInput) guardduty.TagResourceRequest
 
-	UpdateFindingsFeedbackRequest(*guardduty.UpdateFindingsFeedbackInput) guardduty.UpdateFindingsFeedbackRequest
+	UnarchiveFindingsRequest(*types.UnarchiveFindingsInput) guardduty.UnarchiveFindingsRequest
 
-	UpdateIPSetRequest(*guardduty.UpdateIPSetInput) guardduty.UpdateIPSetRequest
+	UntagResourceRequest(*types.UntagResourceInput) guardduty.UntagResourceRequest
 
-	UpdateThreatIntelSetRequest(*guardduty.UpdateThreatIntelSetInput) guardduty.UpdateThreatIntelSetRequest
+	UpdateDetectorRequest(*types.UpdateDetectorInput) guardduty.UpdateDetectorRequest
+
+	UpdateFilterRequest(*types.UpdateFilterInput) guardduty.UpdateFilterRequest
+
+	UpdateFindingsFeedbackRequest(*types.UpdateFindingsFeedbackInput) guardduty.UpdateFindingsFeedbackRequest
+
+	UpdateIPSetRequest(*types.UpdateIPSetInput) guardduty.UpdateIPSetRequest
+
+	UpdatePublishingDestinationRequest(*types.UpdatePublishingDestinationInput) guardduty.UpdatePublishingDestinationRequest
+
+	UpdateThreatIntelSetRequest(*types.UpdateThreatIntelSetInput) guardduty.UpdateThreatIntelSetRequest
 }
 
 var _ ClientAPI = (*guardduty.Client)(nil)

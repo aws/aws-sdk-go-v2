@@ -6,43 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/opsworks/types"
 )
-
-type DescribeCommandsInput struct {
-	_ struct{} `type:"structure"`
-
-	// An array of command IDs. If you include this parameter, DescribeCommands
-	// returns a description of the specified commands. Otherwise, it returns a
-	// description of every command.
-	CommandIds []string `type:"list"`
-
-	// The deployment ID. If you include this parameter, DescribeCommands returns
-	// a description of the commands associated with the specified deployment.
-	DeploymentId *string `type:"string"`
-
-	// The instance ID. If you include this parameter, DescribeCommands returns
-	// a description of the commands associated with the specified instance.
-	InstanceId *string `type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeCommandsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Contains the response to a DescribeCommands request.
-type DescribeCommandsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// An array of Command objects that describe each of the specified commands.
-	Commands []Command `type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeCommandsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeCommands = "DescribeCommands"
 
@@ -66,7 +31,7 @@ const opDescribeCommands = "DescribeCommands"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DescribeCommands
-func (c *Client) DescribeCommandsRequest(input *DescribeCommandsInput) DescribeCommandsRequest {
+func (c *Client) DescribeCommandsRequest(input *types.DescribeCommandsInput) DescribeCommandsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeCommands,
 		HTTPMethod: "POST",
@@ -74,10 +39,10 @@ func (c *Client) DescribeCommandsRequest(input *DescribeCommandsInput) DescribeC
 	}
 
 	if input == nil {
-		input = &DescribeCommandsInput{}
+		input = &types.DescribeCommandsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeCommandsOutput{})
+	req := c.newRequest(op, input, &types.DescribeCommandsOutput{})
 	return DescribeCommandsRequest{Request: req, Input: input, Copy: c.DescribeCommandsRequest}
 }
 
@@ -85,8 +50,8 @@ func (c *Client) DescribeCommandsRequest(input *DescribeCommandsInput) DescribeC
 // DescribeCommands API operation.
 type DescribeCommandsRequest struct {
 	*aws.Request
-	Input *DescribeCommandsInput
-	Copy  func(*DescribeCommandsInput) DescribeCommandsRequest
+	Input *types.DescribeCommandsInput
+	Copy  func(*types.DescribeCommandsInput) DescribeCommandsRequest
 }
 
 // Send marshals and sends the DescribeCommands API request.
@@ -98,7 +63,7 @@ func (r DescribeCommandsRequest) Send(ctx context.Context) (*DescribeCommandsRes
 	}
 
 	resp := &DescribeCommandsResponse{
-		DescribeCommandsOutput: r.Request.Data.(*DescribeCommandsOutput),
+		DescribeCommandsOutput: r.Request.Data.(*types.DescribeCommandsOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -108,7 +73,7 @@ func (r DescribeCommandsRequest) Send(ctx context.Context) (*DescribeCommandsRes
 // DescribeCommandsResponse is the response type for the
 // DescribeCommands API operation.
 type DescribeCommandsResponse struct {
-	*DescribeCommandsOutput
+	*types.DescribeCommandsOutput
 
 	response *aws.Response
 }

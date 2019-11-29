@@ -6,38 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/cloudhsm/types"
 )
-
-type ListHsmsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The NextToken value from a previous call to ListHsms. Pass null if this is
-	// the first call.
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s ListHsmsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Contains the output of the ListHsms operation.
-type ListHsmsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The list of ARNs that identify the HSMs.
-	HsmList []string `type:"list"`
-
-	// If not null, more results are available. Pass this value to ListHsms to retrieve
-	// the next set of items.
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s ListHsmsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListHsms = "ListHsms"
 
@@ -69,7 +39,7 @@ const opListHsms = "ListHsms"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/ListHsms
-func (c *Client) ListHsmsRequest(input *ListHsmsInput) ListHsmsRequest {
+func (c *Client) ListHsmsRequest(input *types.ListHsmsInput) ListHsmsRequest {
 	op := &aws.Operation{
 		Name:       opListHsms,
 		HTTPMethod: "POST",
@@ -77,10 +47,10 @@ func (c *Client) ListHsmsRequest(input *ListHsmsInput) ListHsmsRequest {
 	}
 
 	if input == nil {
-		input = &ListHsmsInput{}
+		input = &types.ListHsmsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListHsmsOutput{})
+	req := c.newRequest(op, input, &types.ListHsmsOutput{})
 	return ListHsmsRequest{Request: req, Input: input, Copy: c.ListHsmsRequest}
 }
 
@@ -88,8 +58,8 @@ func (c *Client) ListHsmsRequest(input *ListHsmsInput) ListHsmsRequest {
 // ListHsms API operation.
 type ListHsmsRequest struct {
 	*aws.Request
-	Input *ListHsmsInput
-	Copy  func(*ListHsmsInput) ListHsmsRequest
+	Input *types.ListHsmsInput
+	Copy  func(*types.ListHsmsInput) ListHsmsRequest
 }
 
 // Send marshals and sends the ListHsms API request.
@@ -101,7 +71,7 @@ func (r ListHsmsRequest) Send(ctx context.Context) (*ListHsmsResponse, error) {
 	}
 
 	resp := &ListHsmsResponse{
-		ListHsmsOutput: r.Request.Data.(*ListHsmsOutput),
+		ListHsmsOutput: r.Request.Data.(*types.ListHsmsOutput),
 		response:       &aws.Response{Request: r.Request},
 	}
 
@@ -111,7 +81,7 @@ func (r ListHsmsRequest) Send(ctx context.Context) (*ListHsmsResponse, error) {
 // ListHsmsResponse is the response type for the
 // ListHsms API operation.
 type ListHsmsResponse struct {
-	*ListHsmsOutput
+	*types.ListHsmsOutput
 
 	response *aws.Response
 }

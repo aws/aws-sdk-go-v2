@@ -6,73 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/pinpoint/types"
 )
-
-type DeletePushTemplateInput struct {
-	_ struct{} `type:"structure"`
-
-	// TemplateName is a required field
-	TemplateName *string `location:"uri" locationName:"template-name" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeletePushTemplateInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeletePushTemplateInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeletePushTemplateInput"}
-
-	if s.TemplateName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("TemplateName"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeletePushTemplateInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.TemplateName != nil {
-		v := *s.TemplateName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "template-name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type DeletePushTemplateOutput struct {
-	_ struct{} `type:"structure" payload:"MessageBody"`
-
-	// Provides information about an API request or response.
-	//
-	// MessageBody is a required field
-	MessageBody *MessageBody `type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s DeletePushTemplateOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeletePushTemplateOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.MessageBody != nil {
-		v := s.MessageBody
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.PayloadTarget, "MessageBody", v, metadata)
-	}
-	return nil
-}
 
 const opDeletePushTemplate = "DeletePushTemplate"
 
@@ -90,7 +25,7 @@ const opDeletePushTemplate = "DeletePushTemplate"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/DeletePushTemplate
-func (c *Client) DeletePushTemplateRequest(input *DeletePushTemplateInput) DeletePushTemplateRequest {
+func (c *Client) DeletePushTemplateRequest(input *types.DeletePushTemplateInput) DeletePushTemplateRequest {
 	op := &aws.Operation{
 		Name:       opDeletePushTemplate,
 		HTTPMethod: "DELETE",
@@ -98,10 +33,10 @@ func (c *Client) DeletePushTemplateRequest(input *DeletePushTemplateInput) Delet
 	}
 
 	if input == nil {
-		input = &DeletePushTemplateInput{}
+		input = &types.DeletePushTemplateInput{}
 	}
 
-	req := c.newRequest(op, input, &DeletePushTemplateOutput{})
+	req := c.newRequest(op, input, &types.DeletePushTemplateOutput{})
 	return DeletePushTemplateRequest{Request: req, Input: input, Copy: c.DeletePushTemplateRequest}
 }
 
@@ -109,8 +44,8 @@ func (c *Client) DeletePushTemplateRequest(input *DeletePushTemplateInput) Delet
 // DeletePushTemplate API operation.
 type DeletePushTemplateRequest struct {
 	*aws.Request
-	Input *DeletePushTemplateInput
-	Copy  func(*DeletePushTemplateInput) DeletePushTemplateRequest
+	Input *types.DeletePushTemplateInput
+	Copy  func(*types.DeletePushTemplateInput) DeletePushTemplateRequest
 }
 
 // Send marshals and sends the DeletePushTemplate API request.
@@ -122,7 +57,7 @@ func (r DeletePushTemplateRequest) Send(ctx context.Context) (*DeletePushTemplat
 	}
 
 	resp := &DeletePushTemplateResponse{
-		DeletePushTemplateOutput: r.Request.Data.(*DeletePushTemplateOutput),
+		DeletePushTemplateOutput: r.Request.Data.(*types.DeletePushTemplateOutput),
 		response:                 &aws.Response{Request: r.Request},
 	}
 
@@ -132,7 +67,7 @@ func (r DeletePushTemplateRequest) Send(ctx context.Context) (*DeletePushTemplat
 // DeletePushTemplateResponse is the response type for the
 // DeletePushTemplate API operation.
 type DeletePushTemplateResponse struct {
-	*DeletePushTemplateOutput
+	*types.DeletePushTemplateOutput
 
 	response *aws.Response
 }

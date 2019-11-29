@@ -6,71 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/types"
 )
-
-type ListLaunchPathsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The language code.
-	//
-	//    * en - English (default)
-	//
-	//    * jp - Japanese
-	//
-	//    * zh - Chinese
-	AcceptLanguage *string `type:"string"`
-
-	// The maximum number of items to return with this call.
-	PageSize *int64 `type:"integer"`
-
-	// The page token for the next set of results. To retrieve the first set of
-	// results, use null.
-	PageToken *string `type:"string"`
-
-	// The product identifier.
-	//
-	// ProductId is a required field
-	ProductId *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s ListLaunchPathsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListLaunchPathsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListLaunchPathsInput"}
-
-	if s.ProductId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ProductId"))
-	}
-	if s.ProductId != nil && len(*s.ProductId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ProductId", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ListLaunchPathsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Information about the launch path.
-	LaunchPathSummaries []LaunchPathSummary `type:"list"`
-
-	// The page token to use to retrieve the next set of results. If there are no
-	// additional results, this value is null.
-	NextPageToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s ListLaunchPathsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListLaunchPaths = "ListLaunchPaths"
 
@@ -89,7 +26,7 @@ const opListLaunchPaths = "ListLaunchPaths"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ListLaunchPaths
-func (c *Client) ListLaunchPathsRequest(input *ListLaunchPathsInput) ListLaunchPathsRequest {
+func (c *Client) ListLaunchPathsRequest(input *types.ListLaunchPathsInput) ListLaunchPathsRequest {
 	op := &aws.Operation{
 		Name:       opListLaunchPaths,
 		HTTPMethod: "POST",
@@ -103,10 +40,10 @@ func (c *Client) ListLaunchPathsRequest(input *ListLaunchPathsInput) ListLaunchP
 	}
 
 	if input == nil {
-		input = &ListLaunchPathsInput{}
+		input = &types.ListLaunchPathsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListLaunchPathsOutput{})
+	req := c.newRequest(op, input, &types.ListLaunchPathsOutput{})
 	return ListLaunchPathsRequest{Request: req, Input: input, Copy: c.ListLaunchPathsRequest}
 }
 
@@ -114,8 +51,8 @@ func (c *Client) ListLaunchPathsRequest(input *ListLaunchPathsInput) ListLaunchP
 // ListLaunchPaths API operation.
 type ListLaunchPathsRequest struct {
 	*aws.Request
-	Input *ListLaunchPathsInput
-	Copy  func(*ListLaunchPathsInput) ListLaunchPathsRequest
+	Input *types.ListLaunchPathsInput
+	Copy  func(*types.ListLaunchPathsInput) ListLaunchPathsRequest
 }
 
 // Send marshals and sends the ListLaunchPaths API request.
@@ -127,7 +64,7 @@ func (r ListLaunchPathsRequest) Send(ctx context.Context) (*ListLaunchPathsRespo
 	}
 
 	resp := &ListLaunchPathsResponse{
-		ListLaunchPathsOutput: r.Request.Data.(*ListLaunchPathsOutput),
+		ListLaunchPathsOutput: r.Request.Data.(*types.ListLaunchPathsOutput),
 		response:              &aws.Response{Request: r.Request},
 	}
 
@@ -157,7 +94,7 @@ func NewListLaunchPathsPaginator(req ListLaunchPathsRequest) ListLaunchPathsPagi
 	return ListLaunchPathsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListLaunchPathsInput
+				var inCpy *types.ListLaunchPathsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -177,14 +114,14 @@ type ListLaunchPathsPaginator struct {
 	aws.Pager
 }
 
-func (p *ListLaunchPathsPaginator) CurrentPage() *ListLaunchPathsOutput {
-	return p.Pager.CurrentPage().(*ListLaunchPathsOutput)
+func (p *ListLaunchPathsPaginator) CurrentPage() *types.ListLaunchPathsOutput {
+	return p.Pager.CurrentPage().(*types.ListLaunchPathsOutput)
 }
 
 // ListLaunchPathsResponse is the response type for the
 // ListLaunchPaths API operation.
 type ListLaunchPathsResponse struct {
-	*ListLaunchPathsOutput
+	*types.ListLaunchPathsOutput
 
 	response *aws.Response
 }

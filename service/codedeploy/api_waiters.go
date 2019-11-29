@@ -7,6 +7,7 @@ import (
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
+	"github.com/aws/aws-sdk-go-v2/service/codedeploy/types"
 )
 
 // WaitUntilDeploymentSuccessful uses the CodeDeploy API operation
@@ -18,7 +19,7 @@ import (
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Client) WaitUntilDeploymentSuccessful(ctx context.Context, input *GetDeploymentInput, opts ...aws.WaiterOption) error {
+func (c *Client) WaitUntilDeploymentSuccessful(ctx context.Context, input *types.GetDeploymentInput, opts ...aws.WaiterOption) error {
 	w := aws.Waiter{
 		Name:        "WaitUntilDeploymentSuccessful",
 		MaxAttempts: 120,
@@ -42,7 +43,7 @@ func (c *Client) WaitUntilDeploymentSuccessful(ctx context.Context, input *GetDe
 		},
 		Logger: c.Config.Logger,
 		NewRequest: func(opts []aws.Option) (*aws.Request, error) {
-			var inCpy *GetDeploymentInput
+			var inCpy *types.GetDeploymentInput
 			if input != nil {
 				tmp := *input
 				inCpy = &tmp

@@ -6,57 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/glue/types"
 )
-
-type CreateConnectionInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the Data Catalog in which to create the connection. If none is
-	// provided, the AWS account ID is used by default.
-	CatalogId *string `min:"1" type:"string"`
-
-	// A ConnectionInput object defining the connection to create.
-	//
-	// ConnectionInput is a required field
-	ConnectionInput *ConnectionInput `type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s CreateConnectionInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateConnectionInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateConnectionInput"}
-	if s.CatalogId != nil && len(*s.CatalogId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("CatalogId", 1))
-	}
-
-	if s.ConnectionInput == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ConnectionInput"))
-	}
-	if s.ConnectionInput != nil {
-		if err := s.ConnectionInput.Validate(); err != nil {
-			invalidParams.AddNested("ConnectionInput", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type CreateConnectionOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s CreateConnectionOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCreateConnection = "CreateConnection"
 
@@ -73,7 +24,7 @@ const opCreateConnection = "CreateConnection"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CreateConnection
-func (c *Client) CreateConnectionRequest(input *CreateConnectionInput) CreateConnectionRequest {
+func (c *Client) CreateConnectionRequest(input *types.CreateConnectionInput) CreateConnectionRequest {
 	op := &aws.Operation{
 		Name:       opCreateConnection,
 		HTTPMethod: "POST",
@@ -81,10 +32,10 @@ func (c *Client) CreateConnectionRequest(input *CreateConnectionInput) CreateCon
 	}
 
 	if input == nil {
-		input = &CreateConnectionInput{}
+		input = &types.CreateConnectionInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateConnectionOutput{})
+	req := c.newRequest(op, input, &types.CreateConnectionOutput{})
 	return CreateConnectionRequest{Request: req, Input: input, Copy: c.CreateConnectionRequest}
 }
 
@@ -92,8 +43,8 @@ func (c *Client) CreateConnectionRequest(input *CreateConnectionInput) CreateCon
 // CreateConnection API operation.
 type CreateConnectionRequest struct {
 	*aws.Request
-	Input *CreateConnectionInput
-	Copy  func(*CreateConnectionInput) CreateConnectionRequest
+	Input *types.CreateConnectionInput
+	Copy  func(*types.CreateConnectionInput) CreateConnectionRequest
 }
 
 // Send marshals and sends the CreateConnection API request.
@@ -105,7 +56,7 @@ func (r CreateConnectionRequest) Send(ctx context.Context) (*CreateConnectionRes
 	}
 
 	resp := &CreateConnectionResponse{
-		CreateConnectionOutput: r.Request.Data.(*CreateConnectionOutput),
+		CreateConnectionOutput: r.Request.Data.(*types.CreateConnectionOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -115,7 +66,7 @@ func (r CreateConnectionRequest) Send(ctx context.Context) (*CreateConnectionRes
 // CreateConnectionResponse is the response type for the
 // CreateConnection API operation.
 type CreateConnectionResponse struct {
-	*CreateConnectionOutput
+	*types.CreateConnectionOutput
 
 	response *aws.Response
 }

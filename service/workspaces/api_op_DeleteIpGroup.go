@@ -6,45 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/workspaces/types"
 )
-
-type DeleteIpGroupInput struct {
-	_ struct{} `type:"structure"`
-
-	// The identifier of the IP access control group.
-	//
-	// GroupId is a required field
-	GroupId *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteIpGroupInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteIpGroupInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteIpGroupInput"}
-
-	if s.GroupId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("GroupId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteIpGroupOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteIpGroupOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteIpGroup = "DeleteIpGroup"
 
@@ -63,7 +26,7 @@ const opDeleteIpGroup = "DeleteIpGroup"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DeleteIpGroup
-func (c *Client) DeleteIpGroupRequest(input *DeleteIpGroupInput) DeleteIpGroupRequest {
+func (c *Client) DeleteIpGroupRequest(input *types.DeleteIpGroupInput) DeleteIpGroupRequest {
 	op := &aws.Operation{
 		Name:       opDeleteIpGroup,
 		HTTPMethod: "POST",
@@ -71,10 +34,10 @@ func (c *Client) DeleteIpGroupRequest(input *DeleteIpGroupInput) DeleteIpGroupRe
 	}
 
 	if input == nil {
-		input = &DeleteIpGroupInput{}
+		input = &types.DeleteIpGroupInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteIpGroupOutput{})
+	req := c.newRequest(op, input, &types.DeleteIpGroupOutput{})
 	return DeleteIpGroupRequest{Request: req, Input: input, Copy: c.DeleteIpGroupRequest}
 }
 
@@ -82,8 +45,8 @@ func (c *Client) DeleteIpGroupRequest(input *DeleteIpGroupInput) DeleteIpGroupRe
 // DeleteIpGroup API operation.
 type DeleteIpGroupRequest struct {
 	*aws.Request
-	Input *DeleteIpGroupInput
-	Copy  func(*DeleteIpGroupInput) DeleteIpGroupRequest
+	Input *types.DeleteIpGroupInput
+	Copy  func(*types.DeleteIpGroupInput) DeleteIpGroupRequest
 }
 
 // Send marshals and sends the DeleteIpGroup API request.
@@ -95,7 +58,7 @@ func (r DeleteIpGroupRequest) Send(ctx context.Context) (*DeleteIpGroupResponse,
 	}
 
 	resp := &DeleteIpGroupResponse{
-		DeleteIpGroupOutput: r.Request.Data.(*DeleteIpGroupOutput),
+		DeleteIpGroupOutput: r.Request.Data.(*types.DeleteIpGroupOutput),
 		response:            &aws.Response{Request: r.Request},
 	}
 
@@ -105,7 +68,7 @@ func (r DeleteIpGroupRequest) Send(ctx context.Context) (*DeleteIpGroupResponse,
 // DeleteIpGroupResponse is the response type for the
 // DeleteIpGroup API operation.
 type DeleteIpGroupResponse struct {
-	*DeleteIpGroupOutput
+	*types.DeleteIpGroupOutput
 
 	response *aws.Response
 }

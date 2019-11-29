@@ -4,68 +4,10 @@ package eventbridge
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/eventbridge/types"
 )
-
-type PutEventsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The entry that defines an event in your system. You can specify several parameters
-	// for the entry such as the source and type of the event, resources associated
-	// with the event, and so on.
-	//
-	// Entries is a required field
-	Entries []PutEventsRequestEntry `min:"1" type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s PutEventsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *PutEventsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "PutEventsInput"}
-
-	if s.Entries == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Entries"))
-	}
-	if s.Entries != nil && len(s.Entries) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Entries", 1))
-	}
-	if s.Entries != nil {
-		for i, v := range s.Entries {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Entries", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type PutEventsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The successfully and unsuccessfully ingested events results. If the ingestion
-	// was successful, the entry has the event ID in it. Otherwise, you can use
-	// the error code and error message to identify the problem with the entry.
-	Entries []PutEventsResultEntry `type:"list"`
-
-	// The number of failed entries.
-	FailedEntryCount *int64 `type:"integer"`
-}
-
-// String returns the string representation
-func (s PutEventsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opPutEvents = "PutEvents"
 
@@ -83,7 +25,7 @@ const opPutEvents = "PutEvents"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/PutEvents
-func (c *Client) PutEventsRequest(input *PutEventsInput) PutEventsRequest {
+func (c *Client) PutEventsRequest(input *types.PutEventsInput) PutEventsRequest {
 	op := &aws.Operation{
 		Name:       opPutEvents,
 		HTTPMethod: "POST",
@@ -91,10 +33,10 @@ func (c *Client) PutEventsRequest(input *PutEventsInput) PutEventsRequest {
 	}
 
 	if input == nil {
-		input = &PutEventsInput{}
+		input = &types.PutEventsInput{}
 	}
 
-	req := c.newRequest(op, input, &PutEventsOutput{})
+	req := c.newRequest(op, input, &types.PutEventsOutput{})
 	return PutEventsRequest{Request: req, Input: input, Copy: c.PutEventsRequest}
 }
 
@@ -102,8 +44,8 @@ func (c *Client) PutEventsRequest(input *PutEventsInput) PutEventsRequest {
 // PutEvents API operation.
 type PutEventsRequest struct {
 	*aws.Request
-	Input *PutEventsInput
-	Copy  func(*PutEventsInput) PutEventsRequest
+	Input *types.PutEventsInput
+	Copy  func(*types.PutEventsInput) PutEventsRequest
 }
 
 // Send marshals and sends the PutEvents API request.
@@ -115,7 +57,7 @@ func (r PutEventsRequest) Send(ctx context.Context) (*PutEventsResponse, error) 
 	}
 
 	resp := &PutEventsResponse{
-		PutEventsOutput: r.Request.Data.(*PutEventsOutput),
+		PutEventsOutput: r.Request.Data.(*types.PutEventsOutput),
 		response:        &aws.Response{Request: r.Request},
 	}
 
@@ -125,7 +67,7 @@ func (r PutEventsRequest) Send(ctx context.Context) (*PutEventsResponse, error) 
 // PutEventsResponse is the response type for the
 // PutEvents API operation.
 type PutEventsResponse struct {
-	*PutEventsOutput
+	*types.PutEventsOutput
 
 	response *aws.Response
 }

@@ -6,39 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ses/types"
 )
-
-// Represents a request to return the metadata and receipt rules for the receipt
-// rule set that is currently active. You use receipt rule sets to receive email
-// with Amazon SES. For more information, see the Amazon SES Developer Guide
-// (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-concepts.html).
-type DescribeActiveReceiptRuleSetInput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DescribeActiveReceiptRuleSetInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Represents the metadata and receipt rules for the receipt rule set that is
-// currently active.
-type DescribeActiveReceiptRuleSetOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The metadata for the currently active receipt rule set. The metadata consists
-	// of the rule set name and a timestamp of when the rule set was created.
-	Metadata *ReceiptRuleSetMetadata `type:"structure"`
-
-	// The receipt rules that belong to the active rule set.
-	Rules []ReceiptRule `type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeActiveReceiptRuleSetOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeActiveReceiptRuleSet = "DescribeActiveReceiptRuleSet"
 
@@ -61,7 +30,7 @@ const opDescribeActiveReceiptRuleSet = "DescribeActiveReceiptRuleSet"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/DescribeActiveReceiptRuleSet
-func (c *Client) DescribeActiveReceiptRuleSetRequest(input *DescribeActiveReceiptRuleSetInput) DescribeActiveReceiptRuleSetRequest {
+func (c *Client) DescribeActiveReceiptRuleSetRequest(input *types.DescribeActiveReceiptRuleSetInput) DescribeActiveReceiptRuleSetRequest {
 	op := &aws.Operation{
 		Name:       opDescribeActiveReceiptRuleSet,
 		HTTPMethod: "POST",
@@ -69,10 +38,10 @@ func (c *Client) DescribeActiveReceiptRuleSetRequest(input *DescribeActiveReceip
 	}
 
 	if input == nil {
-		input = &DescribeActiveReceiptRuleSetInput{}
+		input = &types.DescribeActiveReceiptRuleSetInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeActiveReceiptRuleSetOutput{})
+	req := c.newRequest(op, input, &types.DescribeActiveReceiptRuleSetOutput{})
 	return DescribeActiveReceiptRuleSetRequest{Request: req, Input: input, Copy: c.DescribeActiveReceiptRuleSetRequest}
 }
 
@@ -80,8 +49,8 @@ func (c *Client) DescribeActiveReceiptRuleSetRequest(input *DescribeActiveReceip
 // DescribeActiveReceiptRuleSet API operation.
 type DescribeActiveReceiptRuleSetRequest struct {
 	*aws.Request
-	Input *DescribeActiveReceiptRuleSetInput
-	Copy  func(*DescribeActiveReceiptRuleSetInput) DescribeActiveReceiptRuleSetRequest
+	Input *types.DescribeActiveReceiptRuleSetInput
+	Copy  func(*types.DescribeActiveReceiptRuleSetInput) DescribeActiveReceiptRuleSetRequest
 }
 
 // Send marshals and sends the DescribeActiveReceiptRuleSet API request.
@@ -93,7 +62,7 @@ func (r DescribeActiveReceiptRuleSetRequest) Send(ctx context.Context) (*Describ
 	}
 
 	resp := &DescribeActiveReceiptRuleSetResponse{
-		DescribeActiveReceiptRuleSetOutput: r.Request.Data.(*DescribeActiveReceiptRuleSetOutput),
+		DescribeActiveReceiptRuleSetOutput: r.Request.Data.(*types.DescribeActiveReceiptRuleSetOutput),
 		response:                           &aws.Response{Request: r.Request},
 	}
 
@@ -103,7 +72,7 @@ func (r DescribeActiveReceiptRuleSetRequest) Send(ctx context.Context) (*Describ
 // DescribeActiveReceiptRuleSetResponse is the response type for the
 // DescribeActiveReceiptRuleSet API operation.
 type DescribeActiveReceiptRuleSetResponse struct {
-	*DescribeActiveReceiptRuleSetOutput
+	*types.DescribeActiveReceiptRuleSetOutput
 
 	response *aws.Response
 }

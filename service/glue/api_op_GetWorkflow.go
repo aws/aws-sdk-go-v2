@@ -6,55 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/glue/types"
 )
-
-type GetWorkflowInput struct {
-	_ struct{} `type:"structure"`
-
-	// Specifies whether to include a graph when returning the workflow resource
-	// metadata.
-	IncludeGraph *bool `type:"boolean"`
-
-	// The name of the workflow to retrieve.
-	//
-	// Name is a required field
-	Name *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetWorkflowInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetWorkflowInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetWorkflowInput"}
-
-	if s.Name == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Name"))
-	}
-	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type GetWorkflowOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The resource metadata for the workflow.
-	Workflow *Workflow `type:"structure"`
-}
-
-// String returns the string representation
-func (s GetWorkflowOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetWorkflow = "GetWorkflow"
 
@@ -71,7 +24,7 @@ const opGetWorkflow = "GetWorkflow"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetWorkflow
-func (c *Client) GetWorkflowRequest(input *GetWorkflowInput) GetWorkflowRequest {
+func (c *Client) GetWorkflowRequest(input *types.GetWorkflowInput) GetWorkflowRequest {
 	op := &aws.Operation{
 		Name:       opGetWorkflow,
 		HTTPMethod: "POST",
@@ -79,10 +32,10 @@ func (c *Client) GetWorkflowRequest(input *GetWorkflowInput) GetWorkflowRequest 
 	}
 
 	if input == nil {
-		input = &GetWorkflowInput{}
+		input = &types.GetWorkflowInput{}
 	}
 
-	req := c.newRequest(op, input, &GetWorkflowOutput{})
+	req := c.newRequest(op, input, &types.GetWorkflowOutput{})
 	return GetWorkflowRequest{Request: req, Input: input, Copy: c.GetWorkflowRequest}
 }
 
@@ -90,8 +43,8 @@ func (c *Client) GetWorkflowRequest(input *GetWorkflowInput) GetWorkflowRequest 
 // GetWorkflow API operation.
 type GetWorkflowRequest struct {
 	*aws.Request
-	Input *GetWorkflowInput
-	Copy  func(*GetWorkflowInput) GetWorkflowRequest
+	Input *types.GetWorkflowInput
+	Copy  func(*types.GetWorkflowInput) GetWorkflowRequest
 }
 
 // Send marshals and sends the GetWorkflow API request.
@@ -103,7 +56,7 @@ func (r GetWorkflowRequest) Send(ctx context.Context) (*GetWorkflowResponse, err
 	}
 
 	resp := &GetWorkflowResponse{
-		GetWorkflowOutput: r.Request.Data.(*GetWorkflowOutput),
+		GetWorkflowOutput: r.Request.Data.(*types.GetWorkflowOutput),
 		response:          &aws.Response{Request: r.Request},
 	}
 
@@ -113,7 +66,7 @@ func (r GetWorkflowRequest) Send(ctx context.Context) (*GetWorkflowResponse, err
 // GetWorkflowResponse is the response type for the
 // GetWorkflow API operation.
 type GetWorkflowResponse struct {
-	*GetWorkflowOutput
+	*types.GetWorkflowOutput
 
 	response *aws.Response
 }

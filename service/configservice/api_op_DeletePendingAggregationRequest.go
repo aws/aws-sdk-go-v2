@@ -6,59 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
+	"github.com/aws/aws-sdk-go-v2/service/configservice/types"
 )
-
-type DeletePendingAggregationRequestInput struct {
-	_ struct{} `type:"structure"`
-
-	// The 12-digit account ID of the account requesting to aggregate data.
-	//
-	// RequesterAccountId is a required field
-	RequesterAccountId *string `type:"string" required:"true"`
-
-	// The region requesting to aggregate data.
-	//
-	// RequesterAwsRegion is a required field
-	RequesterAwsRegion *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeletePendingAggregationRequestInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeletePendingAggregationRequestInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeletePendingAggregationRequestInput"}
-
-	if s.RequesterAccountId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("RequesterAccountId"))
-	}
-
-	if s.RequesterAwsRegion == nil {
-		invalidParams.Add(aws.NewErrParamRequired("RequesterAwsRegion"))
-	}
-	if s.RequesterAwsRegion != nil && len(*s.RequesterAwsRegion) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("RequesterAwsRegion", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeletePendingAggregationRequestOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeletePendingAggregationRequestOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeletePendingAggregationRequest = "DeletePendingAggregationRequest"
 
@@ -76,7 +27,7 @@ const opDeletePendingAggregationRequest = "DeletePendingAggregationRequest"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DeletePendingAggregationRequest
-func (c *Client) DeletePendingAggregationRequestRequest(input *DeletePendingAggregationRequestInput) DeletePendingAggregationRequestRequest {
+func (c *Client) DeletePendingAggregationRequestRequest(input *types.DeletePendingAggregationRequestInput) DeletePendingAggregationRequestRequest {
 	op := &aws.Operation{
 		Name:       opDeletePendingAggregationRequest,
 		HTTPMethod: "POST",
@@ -84,10 +35,10 @@ func (c *Client) DeletePendingAggregationRequestRequest(input *DeletePendingAggr
 	}
 
 	if input == nil {
-		input = &DeletePendingAggregationRequestInput{}
+		input = &types.DeletePendingAggregationRequestInput{}
 	}
 
-	req := c.newRequest(op, input, &DeletePendingAggregationRequestOutput{})
+	req := c.newRequest(op, input, &types.DeletePendingAggregationRequestOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return DeletePendingAggregationRequestRequest{Request: req, Input: input, Copy: c.DeletePendingAggregationRequestRequest}
@@ -97,8 +48,8 @@ func (c *Client) DeletePendingAggregationRequestRequest(input *DeletePendingAggr
 // DeletePendingAggregationRequest API operation.
 type DeletePendingAggregationRequestRequest struct {
 	*aws.Request
-	Input *DeletePendingAggregationRequestInput
-	Copy  func(*DeletePendingAggregationRequestInput) DeletePendingAggregationRequestRequest
+	Input *types.DeletePendingAggregationRequestInput
+	Copy  func(*types.DeletePendingAggregationRequestInput) DeletePendingAggregationRequestRequest
 }
 
 // Send marshals and sends the DeletePendingAggregationRequest API request.
@@ -110,7 +61,7 @@ func (r DeletePendingAggregationRequestRequest) Send(ctx context.Context) (*Dele
 	}
 
 	resp := &DeletePendingAggregationRequestResponse{
-		DeletePendingAggregationRequestOutput: r.Request.Data.(*DeletePendingAggregationRequestOutput),
+		DeletePendingAggregationRequestOutput: r.Request.Data.(*types.DeletePendingAggregationRequestOutput),
 		response:                              &aws.Response{Request: r.Request},
 	}
 
@@ -120,7 +71,7 @@ func (r DeletePendingAggregationRequestRequest) Send(ctx context.Context) (*Dele
 // DeletePendingAggregationRequestResponse is the response type for the
 // DeletePendingAggregationRequest API operation.
 type DeletePendingAggregationRequestResponse struct {
-	*DeletePendingAggregationRequestOutput
+	*types.DeletePendingAggregationRequestOutput
 
 	response *aws.Response
 }

@@ -6,73 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
+	"github.com/aws/aws-sdk-go-v2/service/codepipeline/types"
 )
-
-// Represents the input of a DeleteCustomActionType operation. The custom action
-// will be marked as deleted.
-type DeleteCustomActionTypeInput struct {
-	_ struct{} `type:"structure"`
-
-	// The category of the custom action that you want to delete, such as source
-	// or deploy.
-	//
-	// Category is a required field
-	Category ActionCategory `locationName:"category" type:"string" required:"true" enum:"true"`
-
-	// The provider of the service used in the custom action, such as AWS CodeDeploy.
-	//
-	// Provider is a required field
-	Provider *string `locationName:"provider" min:"1" type:"string" required:"true"`
-
-	// The version of the custom action to delete.
-	//
-	// Version is a required field
-	Version *string `locationName:"version" min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteCustomActionTypeInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteCustomActionTypeInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteCustomActionTypeInput"}
-	if len(s.Category) == 0 {
-		invalidParams.Add(aws.NewErrParamRequired("Category"))
-	}
-
-	if s.Provider == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Provider"))
-	}
-	if s.Provider != nil && len(*s.Provider) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Provider", 1))
-	}
-
-	if s.Version == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Version"))
-	}
-	if s.Version != nil && len(*s.Version) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Version", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteCustomActionTypeOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteCustomActionTypeOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteCustomActionType = "DeleteCustomActionType"
 
@@ -96,7 +33,7 @@ const opDeleteCustomActionType = "DeleteCustomActionType"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/DeleteCustomActionType
-func (c *Client) DeleteCustomActionTypeRequest(input *DeleteCustomActionTypeInput) DeleteCustomActionTypeRequest {
+func (c *Client) DeleteCustomActionTypeRequest(input *types.DeleteCustomActionTypeInput) DeleteCustomActionTypeRequest {
 	op := &aws.Operation{
 		Name:       opDeleteCustomActionType,
 		HTTPMethod: "POST",
@@ -104,10 +41,10 @@ func (c *Client) DeleteCustomActionTypeRequest(input *DeleteCustomActionTypeInpu
 	}
 
 	if input == nil {
-		input = &DeleteCustomActionTypeInput{}
+		input = &types.DeleteCustomActionTypeInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteCustomActionTypeOutput{})
+	req := c.newRequest(op, input, &types.DeleteCustomActionTypeOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return DeleteCustomActionTypeRequest{Request: req, Input: input, Copy: c.DeleteCustomActionTypeRequest}
@@ -117,8 +54,8 @@ func (c *Client) DeleteCustomActionTypeRequest(input *DeleteCustomActionTypeInpu
 // DeleteCustomActionType API operation.
 type DeleteCustomActionTypeRequest struct {
 	*aws.Request
-	Input *DeleteCustomActionTypeInput
-	Copy  func(*DeleteCustomActionTypeInput) DeleteCustomActionTypeRequest
+	Input *types.DeleteCustomActionTypeInput
+	Copy  func(*types.DeleteCustomActionTypeInput) DeleteCustomActionTypeRequest
 }
 
 // Send marshals and sends the DeleteCustomActionType API request.
@@ -130,7 +67,7 @@ func (r DeleteCustomActionTypeRequest) Send(ctx context.Context) (*DeleteCustomA
 	}
 
 	resp := &DeleteCustomActionTypeResponse{
-		DeleteCustomActionTypeOutput: r.Request.Data.(*DeleteCustomActionTypeOutput),
+		DeleteCustomActionTypeOutput: r.Request.Data.(*types.DeleteCustomActionTypeOutput),
 		response:                     &aws.Response{Request: r.Request},
 	}
 
@@ -140,7 +77,7 @@ func (r DeleteCustomActionTypeRequest) Send(ctx context.Context) (*DeleteCustomA
 // DeleteCustomActionTypeResponse is the response type for the
 // DeleteCustomActionType API operation.
 type DeleteCustomActionTypeResponse struct {
-	*DeleteCustomActionTypeOutput
+	*types.DeleteCustomActionTypeOutput
 
 	response *aws.Response
 }

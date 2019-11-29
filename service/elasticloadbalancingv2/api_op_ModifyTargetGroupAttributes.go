@@ -6,57 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/elasticloadbalancingv2/types"
 )
-
-type ModifyTargetGroupAttributesInput struct {
-	_ struct{} `type:"structure"`
-
-	// The attributes.
-	//
-	// Attributes is a required field
-	Attributes []TargetGroupAttribute `type:"list" required:"true"`
-
-	// The Amazon Resource Name (ARN) of the target group.
-	//
-	// TargetGroupArn is a required field
-	TargetGroupArn *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s ModifyTargetGroupAttributesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ModifyTargetGroupAttributesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ModifyTargetGroupAttributesInput"}
-
-	if s.Attributes == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Attributes"))
-	}
-
-	if s.TargetGroupArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("TargetGroupArn"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ModifyTargetGroupAttributesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Information about the attributes.
-	Attributes []TargetGroupAttribute `type:"list"`
-}
-
-// String returns the string representation
-func (s ModifyTargetGroupAttributesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opModifyTargetGroupAttributes = "ModifyTargetGroupAttributes"
 
@@ -73,7 +24,7 @@ const opModifyTargetGroupAttributes = "ModifyTargetGroupAttributes"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/ModifyTargetGroupAttributes
-func (c *Client) ModifyTargetGroupAttributesRequest(input *ModifyTargetGroupAttributesInput) ModifyTargetGroupAttributesRequest {
+func (c *Client) ModifyTargetGroupAttributesRequest(input *types.ModifyTargetGroupAttributesInput) ModifyTargetGroupAttributesRequest {
 	op := &aws.Operation{
 		Name:       opModifyTargetGroupAttributes,
 		HTTPMethod: "POST",
@@ -81,10 +32,10 @@ func (c *Client) ModifyTargetGroupAttributesRequest(input *ModifyTargetGroupAttr
 	}
 
 	if input == nil {
-		input = &ModifyTargetGroupAttributesInput{}
+		input = &types.ModifyTargetGroupAttributesInput{}
 	}
 
-	req := c.newRequest(op, input, &ModifyTargetGroupAttributesOutput{})
+	req := c.newRequest(op, input, &types.ModifyTargetGroupAttributesOutput{})
 	return ModifyTargetGroupAttributesRequest{Request: req, Input: input, Copy: c.ModifyTargetGroupAttributesRequest}
 }
 
@@ -92,8 +43,8 @@ func (c *Client) ModifyTargetGroupAttributesRequest(input *ModifyTargetGroupAttr
 // ModifyTargetGroupAttributes API operation.
 type ModifyTargetGroupAttributesRequest struct {
 	*aws.Request
-	Input *ModifyTargetGroupAttributesInput
-	Copy  func(*ModifyTargetGroupAttributesInput) ModifyTargetGroupAttributesRequest
+	Input *types.ModifyTargetGroupAttributesInput
+	Copy  func(*types.ModifyTargetGroupAttributesInput) ModifyTargetGroupAttributesRequest
 }
 
 // Send marshals and sends the ModifyTargetGroupAttributes API request.
@@ -105,7 +56,7 @@ func (r ModifyTargetGroupAttributesRequest) Send(ctx context.Context) (*ModifyTa
 	}
 
 	resp := &ModifyTargetGroupAttributesResponse{
-		ModifyTargetGroupAttributesOutput: r.Request.Data.(*ModifyTargetGroupAttributesOutput),
+		ModifyTargetGroupAttributesOutput: r.Request.Data.(*types.ModifyTargetGroupAttributesOutput),
 		response:                          &aws.Response{Request: r.Request},
 	}
 
@@ -115,7 +66,7 @@ func (r ModifyTargetGroupAttributesRequest) Send(ctx context.Context) (*ModifyTa
 // ModifyTargetGroupAttributesResponse is the response type for the
 // ModifyTargetGroupAttributes API operation.
 type ModifyTargetGroupAttributesResponse struct {
-	*ModifyTargetGroupAttributesOutput
+	*types.ModifyTargetGroupAttributesOutput
 
 	response *aws.Response
 }

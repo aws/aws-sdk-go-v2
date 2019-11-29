@@ -6,48 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/mediastore/types"
 )
-
-type DeleteContainerPolicyInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the container that holds the policy.
-	//
-	// ContainerName is a required field
-	ContainerName *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteContainerPolicyInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteContainerPolicyInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteContainerPolicyInput"}
-
-	if s.ContainerName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ContainerName"))
-	}
-	if s.ContainerName != nil && len(*s.ContainerName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ContainerName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteContainerPolicyOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteContainerPolicyOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteContainerPolicy = "DeleteContainerPolicy"
 
@@ -64,7 +24,7 @@ const opDeleteContainerPolicy = "DeleteContainerPolicy"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mediastore-2017-09-01/DeleteContainerPolicy
-func (c *Client) DeleteContainerPolicyRequest(input *DeleteContainerPolicyInput) DeleteContainerPolicyRequest {
+func (c *Client) DeleteContainerPolicyRequest(input *types.DeleteContainerPolicyInput) DeleteContainerPolicyRequest {
 	op := &aws.Operation{
 		Name:       opDeleteContainerPolicy,
 		HTTPMethod: "POST",
@@ -72,10 +32,10 @@ func (c *Client) DeleteContainerPolicyRequest(input *DeleteContainerPolicyInput)
 	}
 
 	if input == nil {
-		input = &DeleteContainerPolicyInput{}
+		input = &types.DeleteContainerPolicyInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteContainerPolicyOutput{})
+	req := c.newRequest(op, input, &types.DeleteContainerPolicyOutput{})
 	return DeleteContainerPolicyRequest{Request: req, Input: input, Copy: c.DeleteContainerPolicyRequest}
 }
 
@@ -83,8 +43,8 @@ func (c *Client) DeleteContainerPolicyRequest(input *DeleteContainerPolicyInput)
 // DeleteContainerPolicy API operation.
 type DeleteContainerPolicyRequest struct {
 	*aws.Request
-	Input *DeleteContainerPolicyInput
-	Copy  func(*DeleteContainerPolicyInput) DeleteContainerPolicyRequest
+	Input *types.DeleteContainerPolicyInput
+	Copy  func(*types.DeleteContainerPolicyInput) DeleteContainerPolicyRequest
 }
 
 // Send marshals and sends the DeleteContainerPolicy API request.
@@ -96,7 +56,7 @@ func (r DeleteContainerPolicyRequest) Send(ctx context.Context) (*DeleteContaine
 	}
 
 	resp := &DeleteContainerPolicyResponse{
-		DeleteContainerPolicyOutput: r.Request.Data.(*DeleteContainerPolicyOutput),
+		DeleteContainerPolicyOutput: r.Request.Data.(*types.DeleteContainerPolicyOutput),
 		response:                    &aws.Response{Request: r.Request},
 	}
 
@@ -106,7 +66,7 @@ func (r DeleteContainerPolicyRequest) Send(ctx context.Context) (*DeleteContaine
 // DeleteContainerPolicyResponse is the response type for the
 // DeleteContainerPolicy API operation.
 type DeleteContainerPolicyResponse struct {
-	*DeleteContainerPolicyOutput
+	*types.DeleteContainerPolicyOutput
 
 	response *aws.Response
 }

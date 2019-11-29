@@ -10,6 +10,7 @@ package globalacceleratoriface
 
 import (
 	"github.com/aws/aws-sdk-go-v2/service/globalaccelerator"
+	"github.com/aws/aws-sdk-go-v2/service/globalaccelerator/types"
 )
 
 // ClientAPI provides an interface to enable mocking the
@@ -43,7 +44,7 @@ import (
 //    type mockClientClient struct {
 //        globalacceleratoriface.ClientPI
 //    }
-//    func (m *mockClientClient) CreateAccelerator(input *globalaccelerator.CreateAcceleratorInput) (*globalaccelerator.CreateAcceleratorOutput, error) {
+//    func (m *mockClientClient) CreateAccelerator(input *types.CreateAcceleratorInput) (*types.CreateAcceleratorOutput, error) {
 //        // mock response/functionality
 //    }
 //
@@ -61,39 +62,39 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type ClientAPI interface {
-	CreateAcceleratorRequest(*globalaccelerator.CreateAcceleratorInput) globalaccelerator.CreateAcceleratorRequest
+	CreateAcceleratorRequest(*types.CreateAcceleratorInput) globalaccelerator.CreateAcceleratorRequest
 
-	CreateEndpointGroupRequest(*globalaccelerator.CreateEndpointGroupInput) globalaccelerator.CreateEndpointGroupRequest
+	CreateEndpointGroupRequest(*types.CreateEndpointGroupInput) globalaccelerator.CreateEndpointGroupRequest
 
-	CreateListenerRequest(*globalaccelerator.CreateListenerInput) globalaccelerator.CreateListenerRequest
+	CreateListenerRequest(*types.CreateListenerInput) globalaccelerator.CreateListenerRequest
 
-	DeleteAcceleratorRequest(*globalaccelerator.DeleteAcceleratorInput) globalaccelerator.DeleteAcceleratorRequest
+	DeleteAcceleratorRequest(*types.DeleteAcceleratorInput) globalaccelerator.DeleteAcceleratorRequest
 
-	DeleteEndpointGroupRequest(*globalaccelerator.DeleteEndpointGroupInput) globalaccelerator.DeleteEndpointGroupRequest
+	DeleteEndpointGroupRequest(*types.DeleteEndpointGroupInput) globalaccelerator.DeleteEndpointGroupRequest
 
-	DeleteListenerRequest(*globalaccelerator.DeleteListenerInput) globalaccelerator.DeleteListenerRequest
+	DeleteListenerRequest(*types.DeleteListenerInput) globalaccelerator.DeleteListenerRequest
 
-	DescribeAcceleratorRequest(*globalaccelerator.DescribeAcceleratorInput) globalaccelerator.DescribeAcceleratorRequest
+	DescribeAcceleratorRequest(*types.DescribeAcceleratorInput) globalaccelerator.DescribeAcceleratorRequest
 
-	DescribeAcceleratorAttributesRequest(*globalaccelerator.DescribeAcceleratorAttributesInput) globalaccelerator.DescribeAcceleratorAttributesRequest
+	DescribeAcceleratorAttributesRequest(*types.DescribeAcceleratorAttributesInput) globalaccelerator.DescribeAcceleratorAttributesRequest
 
-	DescribeEndpointGroupRequest(*globalaccelerator.DescribeEndpointGroupInput) globalaccelerator.DescribeEndpointGroupRequest
+	DescribeEndpointGroupRequest(*types.DescribeEndpointGroupInput) globalaccelerator.DescribeEndpointGroupRequest
 
-	DescribeListenerRequest(*globalaccelerator.DescribeListenerInput) globalaccelerator.DescribeListenerRequest
+	DescribeListenerRequest(*types.DescribeListenerInput) globalaccelerator.DescribeListenerRequest
 
-	ListAcceleratorsRequest(*globalaccelerator.ListAcceleratorsInput) globalaccelerator.ListAcceleratorsRequest
+	ListAcceleratorsRequest(*types.ListAcceleratorsInput) globalaccelerator.ListAcceleratorsRequest
 
-	ListEndpointGroupsRequest(*globalaccelerator.ListEndpointGroupsInput) globalaccelerator.ListEndpointGroupsRequest
+	ListEndpointGroupsRequest(*types.ListEndpointGroupsInput) globalaccelerator.ListEndpointGroupsRequest
 
-	ListListenersRequest(*globalaccelerator.ListListenersInput) globalaccelerator.ListListenersRequest
+	ListListenersRequest(*types.ListListenersInput) globalaccelerator.ListListenersRequest
 
-	UpdateAcceleratorRequest(*globalaccelerator.UpdateAcceleratorInput) globalaccelerator.UpdateAcceleratorRequest
+	UpdateAcceleratorRequest(*types.UpdateAcceleratorInput) globalaccelerator.UpdateAcceleratorRequest
 
-	UpdateAcceleratorAttributesRequest(*globalaccelerator.UpdateAcceleratorAttributesInput) globalaccelerator.UpdateAcceleratorAttributesRequest
+	UpdateAcceleratorAttributesRequest(*types.UpdateAcceleratorAttributesInput) globalaccelerator.UpdateAcceleratorAttributesRequest
 
-	UpdateEndpointGroupRequest(*globalaccelerator.UpdateEndpointGroupInput) globalaccelerator.UpdateEndpointGroupRequest
+	UpdateEndpointGroupRequest(*types.UpdateEndpointGroupInput) globalaccelerator.UpdateEndpointGroupRequest
 
-	UpdateListenerRequest(*globalaccelerator.UpdateListenerInput) globalaccelerator.UpdateListenerRequest
+	UpdateListenerRequest(*types.UpdateListenerInput) globalaccelerator.UpdateListenerRequest
 }
 
 var _ ClientAPI = (*globalaccelerator.Client)(nil)

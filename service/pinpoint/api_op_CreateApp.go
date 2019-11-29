@@ -6,81 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/pinpoint/types"
 )
-
-type CreateAppInput struct {
-	_ struct{} `type:"structure" payload:"CreateApplicationRequest"`
-
-	// Specifies the display name of an application and the tags to associate with
-	// the application.
-	//
-	// CreateApplicationRequest is a required field
-	CreateApplicationRequest *CreateApplicationRequest `type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s CreateAppInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateAppInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateAppInput"}
-
-	if s.CreateApplicationRequest == nil {
-		invalidParams.Add(aws.NewErrParamRequired("CreateApplicationRequest"))
-	}
-	if s.CreateApplicationRequest != nil {
-		if err := s.CreateApplicationRequest.Validate(); err != nil {
-			invalidParams.AddNested("CreateApplicationRequest", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s CreateAppInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.CreateApplicationRequest != nil {
-		v := s.CreateApplicationRequest
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.PayloadTarget, "CreateApplicationRequest", v, metadata)
-	}
-	return nil
-}
-
-type CreateAppOutput struct {
-	_ struct{} `type:"structure" payload:"ApplicationResponse"`
-
-	// Provides information about an application.
-	//
-	// ApplicationResponse is a required field
-	ApplicationResponse *ApplicationResponse `type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s CreateAppOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s CreateAppOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.ApplicationResponse != nil {
-		v := s.ApplicationResponse
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.PayloadTarget, "ApplicationResponse", v, metadata)
-	}
-	return nil
-}
 
 const opCreateApp = "CreateApp"
 
@@ -97,7 +24,7 @@ const opCreateApp = "CreateApp"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/CreateApp
-func (c *Client) CreateAppRequest(input *CreateAppInput) CreateAppRequest {
+func (c *Client) CreateAppRequest(input *types.CreateAppInput) CreateAppRequest {
 	op := &aws.Operation{
 		Name:       opCreateApp,
 		HTTPMethod: "POST",
@@ -105,10 +32,10 @@ func (c *Client) CreateAppRequest(input *CreateAppInput) CreateAppRequest {
 	}
 
 	if input == nil {
-		input = &CreateAppInput{}
+		input = &types.CreateAppInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateAppOutput{})
+	req := c.newRequest(op, input, &types.CreateAppOutput{})
 	return CreateAppRequest{Request: req, Input: input, Copy: c.CreateAppRequest}
 }
 
@@ -116,8 +43,8 @@ func (c *Client) CreateAppRequest(input *CreateAppInput) CreateAppRequest {
 // CreateApp API operation.
 type CreateAppRequest struct {
 	*aws.Request
-	Input *CreateAppInput
-	Copy  func(*CreateAppInput) CreateAppRequest
+	Input *types.CreateAppInput
+	Copy  func(*types.CreateAppInput) CreateAppRequest
 }
 
 // Send marshals and sends the CreateApp API request.
@@ -129,7 +56,7 @@ func (r CreateAppRequest) Send(ctx context.Context) (*CreateAppResponse, error) 
 	}
 
 	resp := &CreateAppResponse{
-		CreateAppOutput: r.Request.Data.(*CreateAppOutput),
+		CreateAppOutput: r.Request.Data.(*types.CreateAppOutput),
 		response:        &aws.Response{Request: r.Request},
 	}
 
@@ -139,7 +66,7 @@ func (r CreateAppRequest) Send(ctx context.Context) (*CreateAppResponse, error) 
 // CreateAppResponse is the response type for the
 // CreateApp API operation.
 type CreateAppResponse struct {
-	*CreateAppOutput
+	*types.CreateAppOutput
 
 	response *aws.Response
 }

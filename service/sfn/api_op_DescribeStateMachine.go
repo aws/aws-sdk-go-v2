@@ -4,94 +4,10 @@ package sfn
 
 import (
 	"context"
-	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/sfn/types"
 )
-
-type DescribeStateMachineInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the state machine to describe.
-	//
-	// StateMachineArn is a required field
-	StateMachineArn *string `locationName:"stateMachineArn" min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeStateMachineInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeStateMachineInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeStateMachineInput"}
-
-	if s.StateMachineArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("StateMachineArn"))
-	}
-	if s.StateMachineArn != nil && len(*s.StateMachineArn) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("StateMachineArn", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribeStateMachineOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The date the state machine is created.
-	//
-	// CreationDate is a required field
-	CreationDate *time.Time `locationName:"creationDate" type:"timestamp" required:"true"`
-
-	// The Amazon States Language definition of the state machine. See Amazon States
-	// Language (https://docs.aws.amazon.com/step-functions/latest/dg/concepts-amazon-states-language.html).
-	//
-	// Definition is a required field
-	Definition *string `locationName:"definition" min:"1" type:"string" required:"true" sensitive:"true"`
-
-	// The name of the state machine.
-	//
-	// A name must not contain:
-	//
-	//    * white space
-	//
-	//    * brackets < > { } [ ]
-	//
-	//    * wildcard characters ? *
-	//
-	//    * special characters " # % \ ^ | ~ ` $ & , ; : /
-	//
-	//    * control characters (U+0000-001F, U+007F-009F)
-	//
-	// Name is a required field
-	Name *string `locationName:"name" min:"1" type:"string" required:"true"`
-
-	// The Amazon Resource Name (ARN) of the IAM role used when creating this state
-	// machine. (The IAM role maintains security by granting Step Functions access
-	// to AWS resources.)
-	//
-	// RoleArn is a required field
-	RoleArn *string `locationName:"roleArn" min:"1" type:"string" required:"true"`
-
-	// The Amazon Resource Name (ARN) that identifies the state machine.
-	//
-	// StateMachineArn is a required field
-	StateMachineArn *string `locationName:"stateMachineArn" min:"1" type:"string" required:"true"`
-
-	// The current status of the state machine.
-	Status StateMachineStatus `locationName:"status" type:"string" enum:"true"`
-}
-
-// String returns the string representation
-func (s DescribeStateMachineOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeStateMachine = "DescribeStateMachine"
 
@@ -111,7 +27,7 @@ const opDescribeStateMachine = "DescribeStateMachine"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/DescribeStateMachine
-func (c *Client) DescribeStateMachineRequest(input *DescribeStateMachineInput) DescribeStateMachineRequest {
+func (c *Client) DescribeStateMachineRequest(input *types.DescribeStateMachineInput) DescribeStateMachineRequest {
 	op := &aws.Operation{
 		Name:       opDescribeStateMachine,
 		HTTPMethod: "POST",
@@ -119,10 +35,10 @@ func (c *Client) DescribeStateMachineRequest(input *DescribeStateMachineInput) D
 	}
 
 	if input == nil {
-		input = &DescribeStateMachineInput{}
+		input = &types.DescribeStateMachineInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeStateMachineOutput{})
+	req := c.newRequest(op, input, &types.DescribeStateMachineOutput{})
 	return DescribeStateMachineRequest{Request: req, Input: input, Copy: c.DescribeStateMachineRequest}
 }
 
@@ -130,8 +46,8 @@ func (c *Client) DescribeStateMachineRequest(input *DescribeStateMachineInput) D
 // DescribeStateMachine API operation.
 type DescribeStateMachineRequest struct {
 	*aws.Request
-	Input *DescribeStateMachineInput
-	Copy  func(*DescribeStateMachineInput) DescribeStateMachineRequest
+	Input *types.DescribeStateMachineInput
+	Copy  func(*types.DescribeStateMachineInput) DescribeStateMachineRequest
 }
 
 // Send marshals and sends the DescribeStateMachine API request.
@@ -143,7 +59,7 @@ func (r DescribeStateMachineRequest) Send(ctx context.Context) (*DescribeStateMa
 	}
 
 	resp := &DescribeStateMachineResponse{
-		DescribeStateMachineOutput: r.Request.Data.(*DescribeStateMachineOutput),
+		DescribeStateMachineOutput: r.Request.Data.(*types.DescribeStateMachineOutput),
 		response:                   &aws.Response{Request: r.Request},
 	}
 
@@ -153,7 +69,7 @@ func (r DescribeStateMachineRequest) Send(ctx context.Context) (*DescribeStateMa
 // DescribeStateMachineResponse is the response type for the
 // DescribeStateMachine API operation.
 type DescribeStateMachineResponse struct {
-	*DescribeStateMachineOutput
+	*types.DescribeStateMachineOutput
 
 	response *aws.Response
 }

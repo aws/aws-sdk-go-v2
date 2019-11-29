@@ -6,122 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/redshift/types"
 )
-
-type CancelResizeInput struct {
-	_ struct{} `type:"structure"`
-
-	// The unique identifier for the cluster that you want to cancel a resize operation
-	// for.
-	//
-	// ClusterIdentifier is a required field
-	ClusterIdentifier *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s CancelResizeInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CancelResizeInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CancelResizeInput"}
-
-	if s.ClusterIdentifier == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ClusterIdentifier"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Describes the result of a cluster resize operation.
-type CancelResizeOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The average rate of the resize operation over the last few minutes, measured
-	// in megabytes per second. After the resize operation completes, this value
-	// shows the average rate of the entire resize operation.
-	AvgResizeRateInMegaBytesPerSecond *float64 `type:"double"`
-
-	// The percent of data transferred from source cluster to target cluster.
-	DataTransferProgressPercent *float64 `type:"double"`
-
-	// The amount of seconds that have elapsed since the resize operation began.
-	// After the resize operation completes, this value shows the total actual time,
-	// in seconds, for the resize operation.
-	ElapsedTimeInSeconds *int64 `type:"long"`
-
-	// The estimated time remaining, in seconds, until the resize operation is complete.
-	// This value is calculated based on the average resize rate and the estimated
-	// amount of data remaining to be processed. Once the resize operation is complete,
-	// this value will be 0.
-	EstimatedTimeToCompletionInSeconds *int64 `type:"long"`
-
-	// The names of tables that have been completely imported .
-	//
-	// Valid Values: List of table names.
-	ImportTablesCompleted []string `type:"list"`
-
-	// The names of tables that are being currently imported.
-	//
-	// Valid Values: List of table names.
-	ImportTablesInProgress []string `type:"list"`
-
-	// The names of tables that have not been yet imported.
-	//
-	// Valid Values: List of table names
-	ImportTablesNotStarted []string `type:"list"`
-
-	// An optional string to provide additional details about the resize action.
-	Message *string `type:"string"`
-
-	// While the resize operation is in progress, this value shows the current amount
-	// of data, in megabytes, that has been processed so far. When the resize operation
-	// is complete, this value shows the total amount of data, in megabytes, on
-	// the cluster, which may be more or less than TotalResizeDataInMegaBytes (the
-	// estimated total amount of data before resize).
-	ProgressInMegaBytes *int64 `type:"long"`
-
-	// An enum with possible values of ClassicResize and ElasticResize. These values
-	// describe the type of resize operation being performed.
-	ResizeType *string `type:"string"`
-
-	// The status of the resize operation.
-	//
-	// Valid Values: NONE | IN_PROGRESS | FAILED | SUCCEEDED | CANCELLING
-	Status *string `type:"string"`
-
-	// The cluster type after the resize operation is complete.
-	//
-	// Valid Values: multi-node | single-node
-	TargetClusterType *string `type:"string"`
-
-	// The type of encryption for the cluster after the resize is complete.
-	//
-	// Possible values are KMS and None. In the China region possible values are:
-	// Legacy and None.
-	TargetEncryptionType *string `type:"string"`
-
-	// The node type that the cluster will have after the resize operation is complete.
-	TargetNodeType *string `type:"string"`
-
-	// The number of nodes that the cluster will have after the resize operation
-	// is complete.
-	TargetNumberOfNodes *int64 `type:"integer"`
-
-	// The estimated total amount of data, in megabytes, on the cluster before the
-	// resize operation began.
-	TotalResizeDataInMegaBytes *int64 `type:"long"`
-}
-
-// String returns the string representation
-func (s CancelResizeOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCancelResize = "CancelResize"
 
@@ -138,7 +24,7 @@ const opCancelResize = "CancelResize"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/CancelResize
-func (c *Client) CancelResizeRequest(input *CancelResizeInput) CancelResizeRequest {
+func (c *Client) CancelResizeRequest(input *types.CancelResizeInput) CancelResizeRequest {
 	op := &aws.Operation{
 		Name:       opCancelResize,
 		HTTPMethod: "POST",
@@ -146,10 +32,10 @@ func (c *Client) CancelResizeRequest(input *CancelResizeInput) CancelResizeReque
 	}
 
 	if input == nil {
-		input = &CancelResizeInput{}
+		input = &types.CancelResizeInput{}
 	}
 
-	req := c.newRequest(op, input, &CancelResizeOutput{})
+	req := c.newRequest(op, input, &types.CancelResizeOutput{})
 	return CancelResizeRequest{Request: req, Input: input, Copy: c.CancelResizeRequest}
 }
 
@@ -157,8 +43,8 @@ func (c *Client) CancelResizeRequest(input *CancelResizeInput) CancelResizeReque
 // CancelResize API operation.
 type CancelResizeRequest struct {
 	*aws.Request
-	Input *CancelResizeInput
-	Copy  func(*CancelResizeInput) CancelResizeRequest
+	Input *types.CancelResizeInput
+	Copy  func(*types.CancelResizeInput) CancelResizeRequest
 }
 
 // Send marshals and sends the CancelResize API request.
@@ -170,7 +56,7 @@ func (r CancelResizeRequest) Send(ctx context.Context) (*CancelResizeResponse, e
 	}
 
 	resp := &CancelResizeResponse{
-		CancelResizeOutput: r.Request.Data.(*CancelResizeOutput),
+		CancelResizeOutput: r.Request.Data.(*types.CancelResizeOutput),
 		response:           &aws.Response{Request: r.Request},
 	}
 
@@ -180,7 +66,7 @@ func (r CancelResizeRequest) Send(ctx context.Context) (*CancelResizeResponse, e
 // CancelResizeResponse is the response type for the
 // CancelResize API operation.
 type CancelResizeResponse struct {
-	*CancelResizeOutput
+	*types.CancelResizeOutput
 
 	response *aws.Response
 }

@@ -6,81 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/restjson"
+	"github.com/aws/aws-sdk-go-v2/service/apigateway/types"
 )
-
-// Request to delete a Resource.
-type DeleteResourceInput struct {
-	_ struct{} `type:"structure"`
-
-	// [Required] The identifier of the Resource resource.
-	//
-	// ResourceId is a required field
-	ResourceId *string `location:"uri" locationName:"resource_id" type:"string" required:"true"`
-
-	// [Required] The string identifier of the associated RestApi.
-	//
-	// RestApiId is a required field
-	RestApiId *string `location:"uri" locationName:"restapi_id" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteResourceInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteResourceInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteResourceInput"}
-
-	if s.ResourceId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ResourceId"))
-	}
-
-	if s.RestApiId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("RestApiId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteResourceInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.ResourceId != nil {
-		v := *s.ResourceId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "resource_id", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.RestApiId != nil {
-		v := *s.RestApiId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "restapi_id", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type DeleteResourceOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteResourceOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteResourceOutput) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
 
 const opDeleteResource = "DeleteResource"
 
@@ -95,7 +24,7 @@ const opDeleteResource = "DeleteResource"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) DeleteResourceRequest(input *DeleteResourceInput) DeleteResourceRequest {
+func (c *Client) DeleteResourceRequest(input *types.DeleteResourceInput) DeleteResourceRequest {
 	op := &aws.Operation{
 		Name:       opDeleteResource,
 		HTTPMethod: "DELETE",
@@ -103,10 +32,10 @@ func (c *Client) DeleteResourceRequest(input *DeleteResourceInput) DeleteResourc
 	}
 
 	if input == nil {
-		input = &DeleteResourceInput{}
+		input = &types.DeleteResourceInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteResourceOutput{})
+	req := c.newRequest(op, input, &types.DeleteResourceOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return DeleteResourceRequest{Request: req, Input: input, Copy: c.DeleteResourceRequest}
@@ -116,8 +45,8 @@ func (c *Client) DeleteResourceRequest(input *DeleteResourceInput) DeleteResourc
 // DeleteResource API operation.
 type DeleteResourceRequest struct {
 	*aws.Request
-	Input *DeleteResourceInput
-	Copy  func(*DeleteResourceInput) DeleteResourceRequest
+	Input *types.DeleteResourceInput
+	Copy  func(*types.DeleteResourceInput) DeleteResourceRequest
 }
 
 // Send marshals and sends the DeleteResource API request.
@@ -129,7 +58,7 @@ func (r DeleteResourceRequest) Send(ctx context.Context) (*DeleteResourceRespons
 	}
 
 	resp := &DeleteResourceResponse{
-		DeleteResourceOutput: r.Request.Data.(*DeleteResourceOutput),
+		DeleteResourceOutput: r.Request.Data.(*types.DeleteResourceOutput),
 		response:             &aws.Response{Request: r.Request},
 	}
 
@@ -139,7 +68,7 @@ func (r DeleteResourceRequest) Send(ctx context.Context) (*DeleteResourceRespons
 // DeleteResourceResponse is the response type for the
 // DeleteResource API operation.
 type DeleteResourceResponse struct {
-	*DeleteResourceOutput
+	*types.DeleteResourceOutput
 
 	response *aws.Response
 }

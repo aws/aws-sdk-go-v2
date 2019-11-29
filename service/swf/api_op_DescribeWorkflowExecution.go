@@ -4,93 +4,10 @@ package swf
 
 import (
 	"context"
-	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/swf/types"
 )
-
-type DescribeWorkflowExecutionInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the domain containing the workflow execution.
-	//
-	// Domain is a required field
-	Domain *string `locationName:"domain" min:"1" type:"string" required:"true"`
-
-	// The workflow execution to describe.
-	//
-	// Execution is a required field
-	Execution *WorkflowExecution `locationName:"execution" type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeWorkflowExecutionInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeWorkflowExecutionInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeWorkflowExecutionInput"}
-
-	if s.Domain == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Domain"))
-	}
-	if s.Domain != nil && len(*s.Domain) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Domain", 1))
-	}
-
-	if s.Execution == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Execution"))
-	}
-	if s.Execution != nil {
-		if err := s.Execution.Validate(); err != nil {
-			invalidParams.AddNested("Execution", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Contains details about a workflow execution.
-type DescribeWorkflowExecutionOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The configuration settings for this workflow execution including timeout
-	// values, tasklist etc.
-	//
-	// ExecutionConfiguration is a required field
-	ExecutionConfiguration *WorkflowExecutionConfiguration `locationName:"executionConfiguration" type:"structure" required:"true"`
-
-	// Information about the workflow execution.
-	//
-	// ExecutionInfo is a required field
-	ExecutionInfo *WorkflowExecutionInfo `locationName:"executionInfo" type:"structure" required:"true"`
-
-	// The time when the last activity task was scheduled for this workflow execution.
-	// You can use this information to determine if the workflow has not made progress
-	// for an unusually long period of time and might require a corrective action.
-	LatestActivityTaskTimestamp *time.Time `locationName:"latestActivityTaskTimestamp" type:"timestamp"`
-
-	// The latest executionContext provided by the decider for this workflow execution.
-	// A decider can provide an executionContext (a free-form string) when closing
-	// a decision task using RespondDecisionTaskCompleted.
-	LatestExecutionContext *string `locationName:"latestExecutionContext" type:"string"`
-
-	// The number of tasks for this workflow execution. This includes open and closed
-	// tasks of all types.
-	//
-	// OpenCounts is a required field
-	OpenCounts *WorkflowExecutionOpenCounts `locationName:"openCounts" type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeWorkflowExecutionOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeWorkflowExecution = "DescribeWorkflowExecution"
 
@@ -128,7 +45,7 @@ const opDescribeWorkflowExecution = "DescribeWorkflowExecution"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) DescribeWorkflowExecutionRequest(input *DescribeWorkflowExecutionInput) DescribeWorkflowExecutionRequest {
+func (c *Client) DescribeWorkflowExecutionRequest(input *types.DescribeWorkflowExecutionInput) DescribeWorkflowExecutionRequest {
 	op := &aws.Operation{
 		Name:       opDescribeWorkflowExecution,
 		HTTPMethod: "POST",
@@ -136,10 +53,10 @@ func (c *Client) DescribeWorkflowExecutionRequest(input *DescribeWorkflowExecuti
 	}
 
 	if input == nil {
-		input = &DescribeWorkflowExecutionInput{}
+		input = &types.DescribeWorkflowExecutionInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeWorkflowExecutionOutput{})
+	req := c.newRequest(op, input, &types.DescribeWorkflowExecutionOutput{})
 	return DescribeWorkflowExecutionRequest{Request: req, Input: input, Copy: c.DescribeWorkflowExecutionRequest}
 }
 
@@ -147,8 +64,8 @@ func (c *Client) DescribeWorkflowExecutionRequest(input *DescribeWorkflowExecuti
 // DescribeWorkflowExecution API operation.
 type DescribeWorkflowExecutionRequest struct {
 	*aws.Request
-	Input *DescribeWorkflowExecutionInput
-	Copy  func(*DescribeWorkflowExecutionInput) DescribeWorkflowExecutionRequest
+	Input *types.DescribeWorkflowExecutionInput
+	Copy  func(*types.DescribeWorkflowExecutionInput) DescribeWorkflowExecutionRequest
 }
 
 // Send marshals and sends the DescribeWorkflowExecution API request.
@@ -160,7 +77,7 @@ func (r DescribeWorkflowExecutionRequest) Send(ctx context.Context) (*DescribeWo
 	}
 
 	resp := &DescribeWorkflowExecutionResponse{
-		DescribeWorkflowExecutionOutput: r.Request.Data.(*DescribeWorkflowExecutionOutput),
+		DescribeWorkflowExecutionOutput: r.Request.Data.(*types.DescribeWorkflowExecutionOutput),
 		response:                        &aws.Response{Request: r.Request},
 	}
 
@@ -170,7 +87,7 @@ func (r DescribeWorkflowExecutionRequest) Send(ctx context.Context) (*DescribeWo
 // DescribeWorkflowExecutionResponse is the response type for the
 // DescribeWorkflowExecution API operation.
 type DescribeWorkflowExecutionResponse struct {
-	*DescribeWorkflowExecutionOutput
+	*types.DescribeWorkflowExecutionOutput
 
 	response *aws.Response
 }

@@ -6,29 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/autoscaling/types"
 )
-
-type DescribeScalingProcessTypesInput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DescribeScalingProcessTypesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type DescribeScalingProcessTypesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The names of the process types.
-	Processes []ProcessType `type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeScalingProcessTypesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeScalingProcessTypes = "DescribeScalingProcessTypes"
 
@@ -45,7 +24,7 @@ const opDescribeScalingProcessTypes = "DescribeScalingProcessTypes"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DescribeScalingProcessTypes
-func (c *Client) DescribeScalingProcessTypesRequest(input *DescribeScalingProcessTypesInput) DescribeScalingProcessTypesRequest {
+func (c *Client) DescribeScalingProcessTypesRequest(input *types.DescribeScalingProcessTypesInput) DescribeScalingProcessTypesRequest {
 	op := &aws.Operation{
 		Name:       opDescribeScalingProcessTypes,
 		HTTPMethod: "POST",
@@ -53,10 +32,10 @@ func (c *Client) DescribeScalingProcessTypesRequest(input *DescribeScalingProces
 	}
 
 	if input == nil {
-		input = &DescribeScalingProcessTypesInput{}
+		input = &types.DescribeScalingProcessTypesInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeScalingProcessTypesOutput{})
+	req := c.newRequest(op, input, &types.DescribeScalingProcessTypesOutput{})
 	return DescribeScalingProcessTypesRequest{Request: req, Input: input, Copy: c.DescribeScalingProcessTypesRequest}
 }
 
@@ -64,8 +43,8 @@ func (c *Client) DescribeScalingProcessTypesRequest(input *DescribeScalingProces
 // DescribeScalingProcessTypes API operation.
 type DescribeScalingProcessTypesRequest struct {
 	*aws.Request
-	Input *DescribeScalingProcessTypesInput
-	Copy  func(*DescribeScalingProcessTypesInput) DescribeScalingProcessTypesRequest
+	Input *types.DescribeScalingProcessTypesInput
+	Copy  func(*types.DescribeScalingProcessTypesInput) DescribeScalingProcessTypesRequest
 }
 
 // Send marshals and sends the DescribeScalingProcessTypes API request.
@@ -77,7 +56,7 @@ func (r DescribeScalingProcessTypesRequest) Send(ctx context.Context) (*Describe
 	}
 
 	resp := &DescribeScalingProcessTypesResponse{
-		DescribeScalingProcessTypesOutput: r.Request.Data.(*DescribeScalingProcessTypesOutput),
+		DescribeScalingProcessTypesOutput: r.Request.Data.(*types.DescribeScalingProcessTypesOutput),
 		response:                          &aws.Response{Request: r.Request},
 	}
 
@@ -87,7 +66,7 @@ func (r DescribeScalingProcessTypesRequest) Send(ctx context.Context) (*Describe
 // DescribeScalingProcessTypesResponse is the response type for the
 // DescribeScalingProcessTypes API operation.
 type DescribeScalingProcessTypesResponse struct {
-	*DescribeScalingProcessTypesOutput
+	*types.DescribeScalingProcessTypesOutput
 
 	response *aws.Response
 }

@@ -6,84 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
+	"github.com/aws/aws-sdk-go-v2/service/kinesis/types"
 )
-
-type StartStreamEncryptionInput struct {
-	_ struct{} `type:"structure"`
-
-	// The encryption type to use. The only valid value is KMS.
-	//
-	// EncryptionType is a required field
-	EncryptionType EncryptionType `type:"string" required:"true" enum:"true"`
-
-	// The GUID for the customer-managed AWS KMS key to use for encryption. This
-	// value can be a globally unique identifier, a fully specified Amazon Resource
-	// Name (ARN) to either an alias or a key, or an alias name prefixed by "alias/".You
-	// can also use a master key owned by Kinesis Data Streams by specifying the
-	// alias aws/kinesis.
-	//
-	//    * Key ARN example: arn:aws:kms:us-east-1:123456789012:key/12345678-1234-1234-1234-123456789012
-	//
-	//    * Alias ARN example: arn:aws:kms:us-east-1:123456789012:alias/MyAliasName
-	//
-	//    * Globally unique key ID example: 12345678-1234-1234-1234-123456789012
-	//
-	//    * Alias name example: alias/MyAliasName
-	//
-	//    * Master key owned by Kinesis Data Streams: alias/aws/kinesis
-	//
-	// KeyId is a required field
-	KeyId *string `min:"1" type:"string" required:"true"`
-
-	// The name of the stream for which to start encrypting records.
-	//
-	// StreamName is a required field
-	StreamName *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s StartStreamEncryptionInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *StartStreamEncryptionInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "StartStreamEncryptionInput"}
-	if len(s.EncryptionType) == 0 {
-		invalidParams.Add(aws.NewErrParamRequired("EncryptionType"))
-	}
-
-	if s.KeyId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("KeyId"))
-	}
-	if s.KeyId != nil && len(*s.KeyId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("KeyId", 1))
-	}
-
-	if s.StreamName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("StreamName"))
-	}
-	if s.StreamName != nil && len(*s.StreamName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("StreamName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type StartStreamEncryptionOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s StartStreamEncryptionOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opStartStreamEncryption = "StartStreamEncryption"
 
@@ -118,7 +44,7 @@ const opStartStreamEncryption = "StartStreamEncryption"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/StartStreamEncryption
-func (c *Client) StartStreamEncryptionRequest(input *StartStreamEncryptionInput) StartStreamEncryptionRequest {
+func (c *Client) StartStreamEncryptionRequest(input *types.StartStreamEncryptionInput) StartStreamEncryptionRequest {
 	op := &aws.Operation{
 		Name:       opStartStreamEncryption,
 		HTTPMethod: "POST",
@@ -126,10 +52,10 @@ func (c *Client) StartStreamEncryptionRequest(input *StartStreamEncryptionInput)
 	}
 
 	if input == nil {
-		input = &StartStreamEncryptionInput{}
+		input = &types.StartStreamEncryptionInput{}
 	}
 
-	req := c.newRequest(op, input, &StartStreamEncryptionOutput{})
+	req := c.newRequest(op, input, &types.StartStreamEncryptionOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return StartStreamEncryptionRequest{Request: req, Input: input, Copy: c.StartStreamEncryptionRequest}
@@ -139,8 +65,8 @@ func (c *Client) StartStreamEncryptionRequest(input *StartStreamEncryptionInput)
 // StartStreamEncryption API operation.
 type StartStreamEncryptionRequest struct {
 	*aws.Request
-	Input *StartStreamEncryptionInput
-	Copy  func(*StartStreamEncryptionInput) StartStreamEncryptionRequest
+	Input *types.StartStreamEncryptionInput
+	Copy  func(*types.StartStreamEncryptionInput) StartStreamEncryptionRequest
 }
 
 // Send marshals and sends the StartStreamEncryption API request.
@@ -152,7 +78,7 @@ func (r StartStreamEncryptionRequest) Send(ctx context.Context) (*StartStreamEnc
 	}
 
 	resp := &StartStreamEncryptionResponse{
-		StartStreamEncryptionOutput: r.Request.Data.(*StartStreamEncryptionOutput),
+		StartStreamEncryptionOutput: r.Request.Data.(*types.StartStreamEncryptionOutput),
 		response:                    &aws.Response{Request: r.Request},
 	}
 
@@ -162,7 +88,7 @@ func (r StartStreamEncryptionRequest) Send(ctx context.Context) (*StartStreamEnc
 // StartStreamEncryptionResponse is the response type for the
 // StartStreamEncryption API operation.
 type StartStreamEncryptionResponse struct {
-	*StartStreamEncryptionOutput
+	*types.StartStreamEncryptionOutput
 
 	response *aws.Response
 }

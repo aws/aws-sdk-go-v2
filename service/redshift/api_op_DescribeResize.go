@@ -6,125 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/redshift/types"
 )
-
-type DescribeResizeInput struct {
-	_ struct{} `type:"structure"`
-
-	// The unique identifier of a cluster whose resize progress you are requesting.
-	// This parameter is case-sensitive.
-	//
-	// By default, resize operations for all clusters defined for an AWS account
-	// are returned.
-	//
-	// ClusterIdentifier is a required field
-	ClusterIdentifier *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeResizeInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeResizeInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeResizeInput"}
-
-	if s.ClusterIdentifier == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ClusterIdentifier"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Describes the result of a cluster resize operation.
-type DescribeResizeOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The average rate of the resize operation over the last few minutes, measured
-	// in megabytes per second. After the resize operation completes, this value
-	// shows the average rate of the entire resize operation.
-	AvgResizeRateInMegaBytesPerSecond *float64 `type:"double"`
-
-	// The percent of data transferred from source cluster to target cluster.
-	DataTransferProgressPercent *float64 `type:"double"`
-
-	// The amount of seconds that have elapsed since the resize operation began.
-	// After the resize operation completes, this value shows the total actual time,
-	// in seconds, for the resize operation.
-	ElapsedTimeInSeconds *int64 `type:"long"`
-
-	// The estimated time remaining, in seconds, until the resize operation is complete.
-	// This value is calculated based on the average resize rate and the estimated
-	// amount of data remaining to be processed. Once the resize operation is complete,
-	// this value will be 0.
-	EstimatedTimeToCompletionInSeconds *int64 `type:"long"`
-
-	// The names of tables that have been completely imported .
-	//
-	// Valid Values: List of table names.
-	ImportTablesCompleted []string `type:"list"`
-
-	// The names of tables that are being currently imported.
-	//
-	// Valid Values: List of table names.
-	ImportTablesInProgress []string `type:"list"`
-
-	// The names of tables that have not been yet imported.
-	//
-	// Valid Values: List of table names
-	ImportTablesNotStarted []string `type:"list"`
-
-	// An optional string to provide additional details about the resize action.
-	Message *string `type:"string"`
-
-	// While the resize operation is in progress, this value shows the current amount
-	// of data, in megabytes, that has been processed so far. When the resize operation
-	// is complete, this value shows the total amount of data, in megabytes, on
-	// the cluster, which may be more or less than TotalResizeDataInMegaBytes (the
-	// estimated total amount of data before resize).
-	ProgressInMegaBytes *int64 `type:"long"`
-
-	// An enum with possible values of ClassicResize and ElasticResize. These values
-	// describe the type of resize operation being performed.
-	ResizeType *string `type:"string"`
-
-	// The status of the resize operation.
-	//
-	// Valid Values: NONE | IN_PROGRESS | FAILED | SUCCEEDED | CANCELLING
-	Status *string `type:"string"`
-
-	// The cluster type after the resize operation is complete.
-	//
-	// Valid Values: multi-node | single-node
-	TargetClusterType *string `type:"string"`
-
-	// The type of encryption for the cluster after the resize is complete.
-	//
-	// Possible values are KMS and None. In the China region possible values are:
-	// Legacy and None.
-	TargetEncryptionType *string `type:"string"`
-
-	// The node type that the cluster will have after the resize operation is complete.
-	TargetNodeType *string `type:"string"`
-
-	// The number of nodes that the cluster will have after the resize operation
-	// is complete.
-	TargetNumberOfNodes *int64 `type:"integer"`
-
-	// The estimated total amount of data, in megabytes, on the cluster before the
-	// resize operation began.
-	TotalResizeDataInMegaBytes *int64 `type:"long"`
-}
-
-// String returns the string representation
-func (s DescribeResizeOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeResize = "DescribeResize"
 
@@ -147,7 +30,7 @@ const opDescribeResize = "DescribeResize"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeResize
-func (c *Client) DescribeResizeRequest(input *DescribeResizeInput) DescribeResizeRequest {
+func (c *Client) DescribeResizeRequest(input *types.DescribeResizeInput) DescribeResizeRequest {
 	op := &aws.Operation{
 		Name:       opDescribeResize,
 		HTTPMethod: "POST",
@@ -155,10 +38,10 @@ func (c *Client) DescribeResizeRequest(input *DescribeResizeInput) DescribeResiz
 	}
 
 	if input == nil {
-		input = &DescribeResizeInput{}
+		input = &types.DescribeResizeInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeResizeOutput{})
+	req := c.newRequest(op, input, &types.DescribeResizeOutput{})
 	return DescribeResizeRequest{Request: req, Input: input, Copy: c.DescribeResizeRequest}
 }
 
@@ -166,8 +49,8 @@ func (c *Client) DescribeResizeRequest(input *DescribeResizeInput) DescribeResiz
 // DescribeResize API operation.
 type DescribeResizeRequest struct {
 	*aws.Request
-	Input *DescribeResizeInput
-	Copy  func(*DescribeResizeInput) DescribeResizeRequest
+	Input *types.DescribeResizeInput
+	Copy  func(*types.DescribeResizeInput) DescribeResizeRequest
 }
 
 // Send marshals and sends the DescribeResize API request.
@@ -179,7 +62,7 @@ func (r DescribeResizeRequest) Send(ctx context.Context) (*DescribeResizeRespons
 	}
 
 	resp := &DescribeResizeResponse{
-		DescribeResizeOutput: r.Request.Data.(*DescribeResizeOutput),
+		DescribeResizeOutput: r.Request.Data.(*types.DescribeResizeOutput),
 		response:             &aws.Response{Request: r.Request},
 	}
 
@@ -189,7 +72,7 @@ func (r DescribeResizeRequest) Send(ctx context.Context) (*DescribeResizeRespons
 // DescribeResizeResponse is the response type for the
 // DescribeResize API operation.
 type DescribeResizeResponse struct {
-	*DescribeResizeOutput
+	*types.DescribeResizeOutput
 
 	response *aws.Response
 }

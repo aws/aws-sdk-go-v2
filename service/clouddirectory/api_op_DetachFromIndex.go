@@ -6,104 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/clouddirectory/types"
 )
-
-type DetachFromIndexInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the directory the index and object exist
-	// in.
-	//
-	// DirectoryArn is a required field
-	DirectoryArn *string `location:"header" locationName:"x-amz-data-partition" type:"string" required:"true"`
-
-	// A reference to the index object.
-	//
-	// IndexReference is a required field
-	IndexReference *ObjectReference `type:"structure" required:"true"`
-
-	// A reference to the object being detached from the index.
-	//
-	// TargetReference is a required field
-	TargetReference *ObjectReference `type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s DetachFromIndexInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DetachFromIndexInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DetachFromIndexInput"}
-
-	if s.DirectoryArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DirectoryArn"))
-	}
-
-	if s.IndexReference == nil {
-		invalidParams.Add(aws.NewErrParamRequired("IndexReference"))
-	}
-
-	if s.TargetReference == nil {
-		invalidParams.Add(aws.NewErrParamRequired("TargetReference"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DetachFromIndexInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.IndexReference != nil {
-		v := s.IndexReference
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "IndexReference", v, metadata)
-	}
-	if s.TargetReference != nil {
-		v := s.TargetReference
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "TargetReference", v, metadata)
-	}
-	if s.DirectoryArn != nil {
-		v := *s.DirectoryArn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "x-amz-data-partition", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type DetachFromIndexOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The ObjectIdentifier of the object that was detached from the index.
-	DetachedObjectIdentifier *string `type:"string"`
-}
-
-// String returns the string representation
-func (s DetachFromIndexOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DetachFromIndexOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.DetachedObjectIdentifier != nil {
-		v := *s.DetachedObjectIdentifier
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "DetachedObjectIdentifier", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opDetachFromIndex = "DetachFromIndex"
 
@@ -120,7 +24,7 @@ const opDetachFromIndex = "DetachFromIndex"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/DetachFromIndex
-func (c *Client) DetachFromIndexRequest(input *DetachFromIndexInput) DetachFromIndexRequest {
+func (c *Client) DetachFromIndexRequest(input *types.DetachFromIndexInput) DetachFromIndexRequest {
 	op := &aws.Operation{
 		Name:       opDetachFromIndex,
 		HTTPMethod: "PUT",
@@ -128,10 +32,10 @@ func (c *Client) DetachFromIndexRequest(input *DetachFromIndexInput) DetachFromI
 	}
 
 	if input == nil {
-		input = &DetachFromIndexInput{}
+		input = &types.DetachFromIndexInput{}
 	}
 
-	req := c.newRequest(op, input, &DetachFromIndexOutput{})
+	req := c.newRequest(op, input, &types.DetachFromIndexOutput{})
 	return DetachFromIndexRequest{Request: req, Input: input, Copy: c.DetachFromIndexRequest}
 }
 
@@ -139,8 +43,8 @@ func (c *Client) DetachFromIndexRequest(input *DetachFromIndexInput) DetachFromI
 // DetachFromIndex API operation.
 type DetachFromIndexRequest struct {
 	*aws.Request
-	Input *DetachFromIndexInput
-	Copy  func(*DetachFromIndexInput) DetachFromIndexRequest
+	Input *types.DetachFromIndexInput
+	Copy  func(*types.DetachFromIndexInput) DetachFromIndexRequest
 }
 
 // Send marshals and sends the DetachFromIndex API request.
@@ -152,7 +56,7 @@ func (r DetachFromIndexRequest) Send(ctx context.Context) (*DetachFromIndexRespo
 	}
 
 	resp := &DetachFromIndexResponse{
-		DetachFromIndexOutput: r.Request.Data.(*DetachFromIndexOutput),
+		DetachFromIndexOutput: r.Request.Data.(*types.DetachFromIndexOutput),
 		response:              &aws.Response{Request: r.Request},
 	}
 
@@ -162,7 +66,7 @@ func (r DetachFromIndexRequest) Send(ctx context.Context) (*DetachFromIndexRespo
 // DetachFromIndexResponse is the response type for the
 // DetachFromIndex API operation.
 type DetachFromIndexResponse struct {
-	*DetachFromIndexOutput
+	*types.DetachFromIndexOutput
 
 	response *aws.Response
 }

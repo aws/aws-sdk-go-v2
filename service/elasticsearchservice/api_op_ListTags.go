@@ -6,85 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/elasticsearchservice/types"
 )
-
-// Container for the parameters to the ListTags operation. Specify the ARN for
-// the Elasticsearch domain to which the tags are attached that you want to
-// view are attached.
-type ListTagsInput struct {
-	_ struct{} `type:"structure"`
-
-	// Specify the ARN for the Elasticsearch domain to which the tags are attached
-	// that you want to view.
-	//
-	// ARN is a required field
-	ARN *string `location:"querystring" locationName:"arn" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s ListTagsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListTagsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListTagsInput"}
-
-	if s.ARN == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ARN"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListTagsInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.ARN != nil {
-		v := *s.ARN
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "arn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-// The result of a ListTags operation. Contains tags for all requested Elasticsearch
-// domains.
-type ListTagsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// List of Tag for the requested Elasticsearch domain.
-	TagList []Tag `type:"list"`
-}
-
-// String returns the string representation
-func (s ListTagsOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListTagsOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.TagList != nil {
-		v := s.TagList
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "TagList", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	return nil
-}
 
 const opListTags = "ListTags"
 
@@ -99,7 +22,7 @@ const opListTags = "ListTags"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) ListTagsRequest(input *ListTagsInput) ListTagsRequest {
+func (c *Client) ListTagsRequest(input *types.ListTagsInput) ListTagsRequest {
 	op := &aws.Operation{
 		Name:       opListTags,
 		HTTPMethod: "GET",
@@ -107,10 +30,10 @@ func (c *Client) ListTagsRequest(input *ListTagsInput) ListTagsRequest {
 	}
 
 	if input == nil {
-		input = &ListTagsInput{}
+		input = &types.ListTagsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListTagsOutput{})
+	req := c.newRequest(op, input, &types.ListTagsOutput{})
 	return ListTagsRequest{Request: req, Input: input, Copy: c.ListTagsRequest}
 }
 
@@ -118,8 +41,8 @@ func (c *Client) ListTagsRequest(input *ListTagsInput) ListTagsRequest {
 // ListTags API operation.
 type ListTagsRequest struct {
 	*aws.Request
-	Input *ListTagsInput
-	Copy  func(*ListTagsInput) ListTagsRequest
+	Input *types.ListTagsInput
+	Copy  func(*types.ListTagsInput) ListTagsRequest
 }
 
 // Send marshals and sends the ListTags API request.
@@ -131,7 +54,7 @@ func (r ListTagsRequest) Send(ctx context.Context) (*ListTagsResponse, error) {
 	}
 
 	resp := &ListTagsResponse{
-		ListTagsOutput: r.Request.Data.(*ListTagsOutput),
+		ListTagsOutput: r.Request.Data.(*types.ListTagsOutput),
 		response:       &aws.Response{Request: r.Request},
 	}
 
@@ -141,7 +64,7 @@ func (r ListTagsRequest) Send(ctx context.Context) (*ListTagsResponse, error) {
 // ListTagsResponse is the response type for the
 // ListTags API operation.
 type ListTagsResponse struct {
-	*ListTagsOutput
+	*types.ListTagsOutput
 
 	response *aws.Response
 }

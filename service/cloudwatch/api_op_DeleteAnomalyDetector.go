@@ -4,82 +4,10 @@ package cloudwatch
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/cloudwatch/types"
 )
-
-type DeleteAnomalyDetectorInput struct {
-	_ struct{} `type:"structure"`
-
-	// The metric dimensions associated with the anomaly detection model to delete.
-	Dimensions []Dimension `type:"list"`
-
-	// The metric name associated with the anomaly detection model to delete.
-	//
-	// MetricName is a required field
-	MetricName *string `min:"1" type:"string" required:"true"`
-
-	// The namespace associated with the anomaly detection model to delete.
-	//
-	// Namespace is a required field
-	Namespace *string `min:"1" type:"string" required:"true"`
-
-	// The statistic associated with the anomaly detection model to delete.
-	//
-	// Stat is a required field
-	Stat *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteAnomalyDetectorInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteAnomalyDetectorInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteAnomalyDetectorInput"}
-
-	if s.MetricName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("MetricName"))
-	}
-	if s.MetricName != nil && len(*s.MetricName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("MetricName", 1))
-	}
-
-	if s.Namespace == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Namespace"))
-	}
-	if s.Namespace != nil && len(*s.Namespace) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Namespace", 1))
-	}
-
-	if s.Stat == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Stat"))
-	}
-	if s.Dimensions != nil {
-		for i, v := range s.Dimensions {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Dimensions", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteAnomalyDetectorOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteAnomalyDetectorOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteAnomalyDetector = "DeleteAnomalyDetector"
 
@@ -96,7 +24,7 @@ const opDeleteAnomalyDetector = "DeleteAnomalyDetector"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/DeleteAnomalyDetector
-func (c *Client) DeleteAnomalyDetectorRequest(input *DeleteAnomalyDetectorInput) DeleteAnomalyDetectorRequest {
+func (c *Client) DeleteAnomalyDetectorRequest(input *types.DeleteAnomalyDetectorInput) DeleteAnomalyDetectorRequest {
 	op := &aws.Operation{
 		Name:       opDeleteAnomalyDetector,
 		HTTPMethod: "POST",
@@ -104,10 +32,10 @@ func (c *Client) DeleteAnomalyDetectorRequest(input *DeleteAnomalyDetectorInput)
 	}
 
 	if input == nil {
-		input = &DeleteAnomalyDetectorInput{}
+		input = &types.DeleteAnomalyDetectorInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteAnomalyDetectorOutput{})
+	req := c.newRequest(op, input, &types.DeleteAnomalyDetectorOutput{})
 	return DeleteAnomalyDetectorRequest{Request: req, Input: input, Copy: c.DeleteAnomalyDetectorRequest}
 }
 
@@ -115,8 +43,8 @@ func (c *Client) DeleteAnomalyDetectorRequest(input *DeleteAnomalyDetectorInput)
 // DeleteAnomalyDetector API operation.
 type DeleteAnomalyDetectorRequest struct {
 	*aws.Request
-	Input *DeleteAnomalyDetectorInput
-	Copy  func(*DeleteAnomalyDetectorInput) DeleteAnomalyDetectorRequest
+	Input *types.DeleteAnomalyDetectorInput
+	Copy  func(*types.DeleteAnomalyDetectorInput) DeleteAnomalyDetectorRequest
 }
 
 // Send marshals and sends the DeleteAnomalyDetector API request.
@@ -128,7 +56,7 @@ func (r DeleteAnomalyDetectorRequest) Send(ctx context.Context) (*DeleteAnomalyD
 	}
 
 	resp := &DeleteAnomalyDetectorResponse{
-		DeleteAnomalyDetectorOutput: r.Request.Data.(*DeleteAnomalyDetectorOutput),
+		DeleteAnomalyDetectorOutput: r.Request.Data.(*types.DeleteAnomalyDetectorOutput),
 		response:                    &aws.Response{Request: r.Request},
 	}
 
@@ -138,7 +66,7 @@ func (r DeleteAnomalyDetectorRequest) Send(ctx context.Context) (*DeleteAnomalyD
 // DeleteAnomalyDetectorResponse is the response type for the
 // DeleteAnomalyDetector API operation.
 type DeleteAnomalyDetectorResponse struct {
-	*DeleteAnomalyDetectorOutput
+	*types.DeleteAnomalyDetectorOutput
 
 	response *aws.Response
 }

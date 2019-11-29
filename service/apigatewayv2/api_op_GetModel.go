@@ -6,120 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/apigatewayv2/types"
 )
-
-type GetModelInput struct {
-	_ struct{} `type:"structure"`
-
-	// ApiId is a required field
-	ApiId *string `location:"uri" locationName:"apiId" type:"string" required:"true"`
-
-	// ModelId is a required field
-	ModelId *string `location:"uri" locationName:"modelId" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetModelInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetModelInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetModelInput"}
-
-	if s.ApiId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ApiId"))
-	}
-
-	if s.ModelId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ModelId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetModelInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.ApiId != nil {
-		v := *s.ApiId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "apiId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.ModelId != nil {
-		v := *s.ModelId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "modelId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type GetModelOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A string with a length between [1-256].
-	ContentType *string `locationName:"contentType" type:"string"`
-
-	// A string with a length between [0-1024].
-	Description *string `locationName:"description" type:"string"`
-
-	// The identifier.
-	ModelId *string `locationName:"modelId" type:"string"`
-
-	// A string with a length between [1-128].
-	Name *string `locationName:"name" type:"string"`
-
-	// A string with a length between [0-32768].
-	Schema *string `locationName:"schema" type:"string"`
-}
-
-// String returns the string representation
-func (s GetModelOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetModelOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.ContentType != nil {
-		v := *s.ContentType
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "contentType", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Description != nil {
-		v := *s.Description
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "description", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.ModelId != nil {
-		v := *s.ModelId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "modelId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Name != nil {
-		v := *s.Name
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Schema != nil {
-		v := *s.Schema
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "schema", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opGetModel = "GetModel"
 
@@ -136,7 +24,7 @@ const opGetModel = "GetModel"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/apigatewayv2-2018-11-29/GetModel
-func (c *Client) GetModelRequest(input *GetModelInput) GetModelRequest {
+func (c *Client) GetModelRequest(input *types.GetModelInput) GetModelRequest {
 	op := &aws.Operation{
 		Name:       opGetModel,
 		HTTPMethod: "GET",
@@ -144,10 +32,10 @@ func (c *Client) GetModelRequest(input *GetModelInput) GetModelRequest {
 	}
 
 	if input == nil {
-		input = &GetModelInput{}
+		input = &types.GetModelInput{}
 	}
 
-	req := c.newRequest(op, input, &GetModelOutput{})
+	req := c.newRequest(op, input, &types.GetModelOutput{})
 	return GetModelRequest{Request: req, Input: input, Copy: c.GetModelRequest}
 }
 
@@ -155,8 +43,8 @@ func (c *Client) GetModelRequest(input *GetModelInput) GetModelRequest {
 // GetModel API operation.
 type GetModelRequest struct {
 	*aws.Request
-	Input *GetModelInput
-	Copy  func(*GetModelInput) GetModelRequest
+	Input *types.GetModelInput
+	Copy  func(*types.GetModelInput) GetModelRequest
 }
 
 // Send marshals and sends the GetModel API request.
@@ -168,7 +56,7 @@ func (r GetModelRequest) Send(ctx context.Context) (*GetModelResponse, error) {
 	}
 
 	resp := &GetModelResponse{
-		GetModelOutput: r.Request.Data.(*GetModelOutput),
+		GetModelOutput: r.Request.Data.(*types.GetModelOutput),
 		response:       &aws.Response{Request: r.Request},
 	}
 
@@ -178,7 +66,7 @@ func (r GetModelRequest) Send(ctx context.Context) (*GetModelResponse, error) {
 // GetModelResponse is the response type for the
 // GetModel API operation.
 type GetModelResponse struct {
-	*GetModelOutput
+	*types.GetModelOutput
 
 	response *aws.Response
 }

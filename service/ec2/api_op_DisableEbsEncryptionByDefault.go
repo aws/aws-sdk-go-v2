@@ -6,35 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-type DisableEbsEncryptionByDefaultInput struct {
-	_ struct{} `type:"structure"`
-
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have
-	// the required permissions, the error response is DryRunOperation. Otherwise,
-	// it is UnauthorizedOperation.
-	DryRun *bool `type:"boolean"`
-}
-
-// String returns the string representation
-func (s DisableEbsEncryptionByDefaultInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type DisableEbsEncryptionByDefaultOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The updated status of encryption by default.
-	EbsEncryptionByDefault *bool `locationName:"ebsEncryptionByDefault" type:"boolean"`
-}
-
-// String returns the string representation
-func (s DisableEbsEncryptionByDefaultOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDisableEbsEncryptionByDefault = "DisableEbsEncryptionByDefault"
 
@@ -60,7 +33,7 @@ const opDisableEbsEncryptionByDefault = "DisableEbsEncryptionByDefault"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DisableEbsEncryptionByDefault
-func (c *Client) DisableEbsEncryptionByDefaultRequest(input *DisableEbsEncryptionByDefaultInput) DisableEbsEncryptionByDefaultRequest {
+func (c *Client) DisableEbsEncryptionByDefaultRequest(input *types.DisableEbsEncryptionByDefaultInput) DisableEbsEncryptionByDefaultRequest {
 	op := &aws.Operation{
 		Name:       opDisableEbsEncryptionByDefault,
 		HTTPMethod: "POST",
@@ -68,10 +41,10 @@ func (c *Client) DisableEbsEncryptionByDefaultRequest(input *DisableEbsEncryptio
 	}
 
 	if input == nil {
-		input = &DisableEbsEncryptionByDefaultInput{}
+		input = &types.DisableEbsEncryptionByDefaultInput{}
 	}
 
-	req := c.newRequest(op, input, &DisableEbsEncryptionByDefaultOutput{})
+	req := c.newRequest(op, input, &types.DisableEbsEncryptionByDefaultOutput{})
 	return DisableEbsEncryptionByDefaultRequest{Request: req, Input: input, Copy: c.DisableEbsEncryptionByDefaultRequest}
 }
 
@@ -79,8 +52,8 @@ func (c *Client) DisableEbsEncryptionByDefaultRequest(input *DisableEbsEncryptio
 // DisableEbsEncryptionByDefault API operation.
 type DisableEbsEncryptionByDefaultRequest struct {
 	*aws.Request
-	Input *DisableEbsEncryptionByDefaultInput
-	Copy  func(*DisableEbsEncryptionByDefaultInput) DisableEbsEncryptionByDefaultRequest
+	Input *types.DisableEbsEncryptionByDefaultInput
+	Copy  func(*types.DisableEbsEncryptionByDefaultInput) DisableEbsEncryptionByDefaultRequest
 }
 
 // Send marshals and sends the DisableEbsEncryptionByDefault API request.
@@ -92,7 +65,7 @@ func (r DisableEbsEncryptionByDefaultRequest) Send(ctx context.Context) (*Disabl
 	}
 
 	resp := &DisableEbsEncryptionByDefaultResponse{
-		DisableEbsEncryptionByDefaultOutput: r.Request.Data.(*DisableEbsEncryptionByDefaultOutput),
+		DisableEbsEncryptionByDefaultOutput: r.Request.Data.(*types.DisableEbsEncryptionByDefaultOutput),
 		response:                            &aws.Response{Request: r.Request},
 	}
 
@@ -102,7 +75,7 @@ func (r DisableEbsEncryptionByDefaultRequest) Send(ctx context.Context) (*Disabl
 // DisableEbsEncryptionByDefaultResponse is the response type for the
 // DisableEbsEncryptionByDefault API operation.
 type DisableEbsEncryptionByDefaultResponse struct {
-	*DisableEbsEncryptionByDefaultOutput
+	*types.DisableEbsEncryptionByDefaultOutput
 
 	response *aws.Response
 }

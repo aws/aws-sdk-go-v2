@@ -6,63 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/glue/types"
 )
-
-type GetJobRunsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the job definition for which to retrieve all job runs.
-	//
-	// JobName is a required field
-	JobName *string `min:"1" type:"string" required:"true"`
-
-	// The maximum size of the response.
-	MaxResults *int64 `min:"1" type:"integer"`
-
-	// A continuation token, if this is a continuation call.
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s GetJobRunsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetJobRunsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetJobRunsInput"}
-
-	if s.JobName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("JobName"))
-	}
-	if s.JobName != nil && len(*s.JobName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("JobName", 1))
-	}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type GetJobRunsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A list of job-run metadata objects.
-	JobRuns []JobRun `type:"list"`
-
-	// A continuation token, if not all requested job runs have been returned.
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s GetJobRunsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetJobRuns = "GetJobRuns"
 
@@ -79,7 +24,7 @@ const opGetJobRuns = "GetJobRuns"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetJobRuns
-func (c *Client) GetJobRunsRequest(input *GetJobRunsInput) GetJobRunsRequest {
+func (c *Client) GetJobRunsRequest(input *types.GetJobRunsInput) GetJobRunsRequest {
 	op := &aws.Operation{
 		Name:       opGetJobRuns,
 		HTTPMethod: "POST",
@@ -93,10 +38,10 @@ func (c *Client) GetJobRunsRequest(input *GetJobRunsInput) GetJobRunsRequest {
 	}
 
 	if input == nil {
-		input = &GetJobRunsInput{}
+		input = &types.GetJobRunsInput{}
 	}
 
-	req := c.newRequest(op, input, &GetJobRunsOutput{})
+	req := c.newRequest(op, input, &types.GetJobRunsOutput{})
 	return GetJobRunsRequest{Request: req, Input: input, Copy: c.GetJobRunsRequest}
 }
 
@@ -104,8 +49,8 @@ func (c *Client) GetJobRunsRequest(input *GetJobRunsInput) GetJobRunsRequest {
 // GetJobRuns API operation.
 type GetJobRunsRequest struct {
 	*aws.Request
-	Input *GetJobRunsInput
-	Copy  func(*GetJobRunsInput) GetJobRunsRequest
+	Input *types.GetJobRunsInput
+	Copy  func(*types.GetJobRunsInput) GetJobRunsRequest
 }
 
 // Send marshals and sends the GetJobRuns API request.
@@ -117,7 +62,7 @@ func (r GetJobRunsRequest) Send(ctx context.Context) (*GetJobRunsResponse, error
 	}
 
 	resp := &GetJobRunsResponse{
-		GetJobRunsOutput: r.Request.Data.(*GetJobRunsOutput),
+		GetJobRunsOutput: r.Request.Data.(*types.GetJobRunsOutput),
 		response:         &aws.Response{Request: r.Request},
 	}
 
@@ -147,7 +92,7 @@ func NewGetJobRunsPaginator(req GetJobRunsRequest) GetJobRunsPaginator {
 	return GetJobRunsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *GetJobRunsInput
+				var inCpy *types.GetJobRunsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -167,14 +112,14 @@ type GetJobRunsPaginator struct {
 	aws.Pager
 }
 
-func (p *GetJobRunsPaginator) CurrentPage() *GetJobRunsOutput {
-	return p.Pager.CurrentPage().(*GetJobRunsOutput)
+func (p *GetJobRunsPaginator) CurrentPage() *types.GetJobRunsOutput {
+	return p.Pager.CurrentPage().(*types.GetJobRunsOutput)
 }
 
 // GetJobRunsResponse is the response type for the
 // GetJobRuns API operation.
 type GetJobRunsResponse struct {
-	*GetJobRunsOutput
+	*types.GetJobRunsOutput
 
 	response *aws.Response
 }

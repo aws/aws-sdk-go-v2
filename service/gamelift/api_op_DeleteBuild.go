@@ -6,48 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
+	"github.com/aws/aws-sdk-go-v2/service/gamelift/types"
 )
-
-// Represents the input for a request action.
-type DeleteBuildInput struct {
-	_ struct{} `type:"structure"`
-
-	// Unique identifier for a build to delete.
-	//
-	// BuildId is a required field
-	BuildId *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteBuildInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteBuildInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteBuildInput"}
-
-	if s.BuildId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("BuildId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteBuildOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteBuildOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteBuild = "DeleteBuild"
 
@@ -85,7 +47,7 @@ const opDeleteBuild = "DeleteBuild"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DeleteBuild
-func (c *Client) DeleteBuildRequest(input *DeleteBuildInput) DeleteBuildRequest {
+func (c *Client) DeleteBuildRequest(input *types.DeleteBuildInput) DeleteBuildRequest {
 	op := &aws.Operation{
 		Name:       opDeleteBuild,
 		HTTPMethod: "POST",
@@ -93,10 +55,10 @@ func (c *Client) DeleteBuildRequest(input *DeleteBuildInput) DeleteBuildRequest 
 	}
 
 	if input == nil {
-		input = &DeleteBuildInput{}
+		input = &types.DeleteBuildInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteBuildOutput{})
+	req := c.newRequest(op, input, &types.DeleteBuildOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return DeleteBuildRequest{Request: req, Input: input, Copy: c.DeleteBuildRequest}
@@ -106,8 +68,8 @@ func (c *Client) DeleteBuildRequest(input *DeleteBuildInput) DeleteBuildRequest 
 // DeleteBuild API operation.
 type DeleteBuildRequest struct {
 	*aws.Request
-	Input *DeleteBuildInput
-	Copy  func(*DeleteBuildInput) DeleteBuildRequest
+	Input *types.DeleteBuildInput
+	Copy  func(*types.DeleteBuildInput) DeleteBuildRequest
 }
 
 // Send marshals and sends the DeleteBuild API request.
@@ -119,7 +81,7 @@ func (r DeleteBuildRequest) Send(ctx context.Context) (*DeleteBuildResponse, err
 	}
 
 	resp := &DeleteBuildResponse{
-		DeleteBuildOutput: r.Request.Data.(*DeleteBuildOutput),
+		DeleteBuildOutput: r.Request.Data.(*types.DeleteBuildOutput),
 		response:          &aws.Response{Request: r.Request},
 	}
 
@@ -129,7 +91,7 @@ func (r DeleteBuildRequest) Send(ctx context.Context) (*DeleteBuildResponse, err
 // DeleteBuildResponse is the response type for the
 // DeleteBuild API operation.
 type DeleteBuildResponse struct {
-	*DeleteBuildOutput
+	*types.DeleteBuildOutput
 
 	response *aws.Response
 }

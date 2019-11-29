@@ -6,64 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/opsworks/types"
 )
-
-type ListTagsInput struct {
-	_ struct{} `type:"structure"`
-
-	// Do not use. A validation exception occurs if you add a MaxResults parameter
-	// to a ListTagsRequest call.
-	MaxResults *int64 `type:"integer"`
-
-	// Do not use. A validation exception occurs if you add a NextToken parameter
-	// to a ListTagsRequest call.
-	NextToken *string `type:"string"`
-
-	// The stack or layer's Amazon Resource Number (ARN).
-	//
-	// ResourceArn is a required field
-	ResourceArn *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s ListTagsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListTagsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListTagsInput"}
-
-	if s.ResourceArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ResourceArn"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Contains the response to a ListTags request.
-type ListTagsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// If a paginated request does not return all of the remaining results, this
-	// parameter is set to a token that you can assign to the request object's NextToken
-	// parameter to get the next set of results. If the previous paginated request
-	// returned all of the remaining results, this parameter is set to null.
-	NextToken *string `type:"string"`
-
-	// A set of key-value pairs that contain tag keys and tag values that are attached
-	// to a stack or layer.
-	Tags map[string]string `type:"map"`
-}
-
-// String returns the string representation
-func (s ListTagsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListTags = "ListTags"
 
@@ -80,7 +24,7 @@ const opListTags = "ListTags"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/ListTags
-func (c *Client) ListTagsRequest(input *ListTagsInput) ListTagsRequest {
+func (c *Client) ListTagsRequest(input *types.ListTagsInput) ListTagsRequest {
 	op := &aws.Operation{
 		Name:       opListTags,
 		HTTPMethod: "POST",
@@ -88,10 +32,10 @@ func (c *Client) ListTagsRequest(input *ListTagsInput) ListTagsRequest {
 	}
 
 	if input == nil {
-		input = &ListTagsInput{}
+		input = &types.ListTagsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListTagsOutput{})
+	req := c.newRequest(op, input, &types.ListTagsOutput{})
 	return ListTagsRequest{Request: req, Input: input, Copy: c.ListTagsRequest}
 }
 
@@ -99,8 +43,8 @@ func (c *Client) ListTagsRequest(input *ListTagsInput) ListTagsRequest {
 // ListTags API operation.
 type ListTagsRequest struct {
 	*aws.Request
-	Input *ListTagsInput
-	Copy  func(*ListTagsInput) ListTagsRequest
+	Input *types.ListTagsInput
+	Copy  func(*types.ListTagsInput) ListTagsRequest
 }
 
 // Send marshals and sends the ListTags API request.
@@ -112,7 +56,7 @@ func (r ListTagsRequest) Send(ctx context.Context) (*ListTagsResponse, error) {
 	}
 
 	resp := &ListTagsResponse{
-		ListTagsOutput: r.Request.Data.(*ListTagsOutput),
+		ListTagsOutput: r.Request.Data.(*types.ListTagsOutput),
 		response:       &aws.Response{Request: r.Request},
 	}
 
@@ -122,7 +66,7 @@ func (r ListTagsRequest) Send(ctx context.Context) (*ListTagsResponse, error) {
 // ListTagsResponse is the response type for the
 // ListTags API operation.
 type ListTagsResponse struct {
-	*ListTagsOutput
+	*types.ListTagsOutput
 
 	response *aws.Response
 }

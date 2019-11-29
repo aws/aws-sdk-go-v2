@@ -4,90 +4,10 @@ package sagemaker
 
 import (
 	"context"
-	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
 )
-
-type ListHyperParameterTuningJobsInput struct {
-	_ struct{} `type:"structure"`
-
-	// A filter that returns only tuning jobs that were created after the specified
-	// time.
-	CreationTimeAfter *time.Time `type:"timestamp"`
-
-	// A filter that returns only tuning jobs that were created before the specified
-	// time.
-	CreationTimeBefore *time.Time `type:"timestamp"`
-
-	// A filter that returns only tuning jobs that were modified after the specified
-	// time.
-	LastModifiedTimeAfter *time.Time `type:"timestamp"`
-
-	// A filter that returns only tuning jobs that were modified before the specified
-	// time.
-	LastModifiedTimeBefore *time.Time `type:"timestamp"`
-
-	// The maximum number of tuning jobs to return. The default value is 10.
-	MaxResults *int64 `min:"1" type:"integer"`
-
-	// A string in the tuning job name. This filter returns only tuning jobs whose
-	// name contains the specified string.
-	NameContains *string `type:"string"`
-
-	// If the result of the previous ListHyperParameterTuningJobs request was truncated,
-	// the response includes a NextToken. To retrieve the next set of tuning jobs,
-	// use the token in the next request.
-	NextToken *string `type:"string"`
-
-	// The field to sort results by. The default is Name.
-	SortBy HyperParameterTuningJobSortByOptions `type:"string" enum:"true"`
-
-	// The sort order for results. The default is Ascending.
-	SortOrder SortOrder `type:"string" enum:"true"`
-
-	// A filter that returns only tuning jobs with the specified status.
-	StatusEquals HyperParameterTuningJobStatus `type:"string" enum:"true"`
-}
-
-// String returns the string representation
-func (s ListHyperParameterTuningJobsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListHyperParameterTuningJobsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListHyperParameterTuningJobsInput"}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ListHyperParameterTuningJobsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A list of HyperParameterTuningJobSummary objects that describe the tuning
-	// jobs that the ListHyperParameterTuningJobs request returned.
-	//
-	// HyperParameterTuningJobSummaries is a required field
-	HyperParameterTuningJobSummaries []HyperParameterTuningJobSummary `type:"list" required:"true"`
-
-	// If the result of this ListHyperParameterTuningJobs request was truncated,
-	// the response includes a NextToken. To retrieve the next set of tuning jobs,
-	// use the token in the next request.
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s ListHyperParameterTuningJobsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListHyperParameterTuningJobs = "ListHyperParameterTuningJobs"
 
@@ -105,7 +25,7 @@ const opListHyperParameterTuningJobs = "ListHyperParameterTuningJobs"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListHyperParameterTuningJobs
-func (c *Client) ListHyperParameterTuningJobsRequest(input *ListHyperParameterTuningJobsInput) ListHyperParameterTuningJobsRequest {
+func (c *Client) ListHyperParameterTuningJobsRequest(input *types.ListHyperParameterTuningJobsInput) ListHyperParameterTuningJobsRequest {
 	op := &aws.Operation{
 		Name:       opListHyperParameterTuningJobs,
 		HTTPMethod: "POST",
@@ -119,10 +39,10 @@ func (c *Client) ListHyperParameterTuningJobsRequest(input *ListHyperParameterTu
 	}
 
 	if input == nil {
-		input = &ListHyperParameterTuningJobsInput{}
+		input = &types.ListHyperParameterTuningJobsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListHyperParameterTuningJobsOutput{})
+	req := c.newRequest(op, input, &types.ListHyperParameterTuningJobsOutput{})
 	return ListHyperParameterTuningJobsRequest{Request: req, Input: input, Copy: c.ListHyperParameterTuningJobsRequest}
 }
 
@@ -130,8 +50,8 @@ func (c *Client) ListHyperParameterTuningJobsRequest(input *ListHyperParameterTu
 // ListHyperParameterTuningJobs API operation.
 type ListHyperParameterTuningJobsRequest struct {
 	*aws.Request
-	Input *ListHyperParameterTuningJobsInput
-	Copy  func(*ListHyperParameterTuningJobsInput) ListHyperParameterTuningJobsRequest
+	Input *types.ListHyperParameterTuningJobsInput
+	Copy  func(*types.ListHyperParameterTuningJobsInput) ListHyperParameterTuningJobsRequest
 }
 
 // Send marshals and sends the ListHyperParameterTuningJobs API request.
@@ -143,7 +63,7 @@ func (r ListHyperParameterTuningJobsRequest) Send(ctx context.Context) (*ListHyp
 	}
 
 	resp := &ListHyperParameterTuningJobsResponse{
-		ListHyperParameterTuningJobsOutput: r.Request.Data.(*ListHyperParameterTuningJobsOutput),
+		ListHyperParameterTuningJobsOutput: r.Request.Data.(*types.ListHyperParameterTuningJobsOutput),
 		response:                           &aws.Response{Request: r.Request},
 	}
 
@@ -173,7 +93,7 @@ func NewListHyperParameterTuningJobsPaginator(req ListHyperParameterTuningJobsRe
 	return ListHyperParameterTuningJobsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListHyperParameterTuningJobsInput
+				var inCpy *types.ListHyperParameterTuningJobsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -193,14 +113,14 @@ type ListHyperParameterTuningJobsPaginator struct {
 	aws.Pager
 }
 
-func (p *ListHyperParameterTuningJobsPaginator) CurrentPage() *ListHyperParameterTuningJobsOutput {
-	return p.Pager.CurrentPage().(*ListHyperParameterTuningJobsOutput)
+func (p *ListHyperParameterTuningJobsPaginator) CurrentPage() *types.ListHyperParameterTuningJobsOutput {
+	return p.Pager.CurrentPage().(*types.ListHyperParameterTuningJobsOutput)
 }
 
 // ListHyperParameterTuningJobsResponse is the response type for the
 // ListHyperParameterTuningJobs API operation.
 type ListHyperParameterTuningJobsResponse struct {
-	*ListHyperParameterTuningJobsOutput
+	*types.ListHyperParameterTuningJobsOutput
 
 	response *aws.Response
 }

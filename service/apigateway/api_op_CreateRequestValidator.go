@@ -6,141 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/apigateway/types"
 )
-
-// Creates a RequestValidator of a given RestApi.
-type CreateRequestValidatorInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the to-be-created RequestValidator.
-	Name *string `locationName:"name" type:"string"`
-
-	// [Required] The string identifier of the associated RestApi.
-	//
-	// RestApiId is a required field
-	RestApiId *string `location:"uri" locationName:"restapi_id" type:"string" required:"true"`
-
-	// A Boolean flag to indicate whether to validate request body according to
-	// the configured model schema for the method (true) or not (false).
-	ValidateRequestBody *bool `locationName:"validateRequestBody" type:"boolean"`
-
-	// A Boolean flag to indicate whether to validate request parameters, true,
-	// or not false.
-	ValidateRequestParameters *bool `locationName:"validateRequestParameters" type:"boolean"`
-}
-
-// String returns the string representation
-func (s CreateRequestValidatorInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateRequestValidatorInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateRequestValidatorInput"}
-
-	if s.RestApiId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("RestApiId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s CreateRequestValidatorInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.Name != nil {
-		v := *s.Name
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.ValidateRequestBody != nil {
-		v := *s.ValidateRequestBody
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "validateRequestBody", protocol.BoolValue(v), metadata)
-	}
-	if s.ValidateRequestParameters != nil {
-		v := *s.ValidateRequestParameters
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "validateRequestParameters", protocol.BoolValue(v), metadata)
-	}
-	if s.RestApiId != nil {
-		v := *s.RestApiId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "restapi_id", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-// A set of validation rules for incoming Method requests.
-//
-// In OpenAPI, a RequestValidator of an API is defined by the x-amazon-apigateway-request-validators.requestValidator
-// (https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-swagger-extensions.html#api-gateway-swagger-extensions-request-validators.requestValidator.html)
-// object. It the referenced using the x-amazon-apigateway-request-validator
-// (https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-swagger-extensions.html#api-gateway-swagger-extensions-request-validator)
-// property.
-//
-// Enable Basic Request Validation in API Gateway (https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-method-request-validation.html)
-type CreateRequestValidatorOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The identifier of this RequestValidator.
-	Id *string `locationName:"id" type:"string"`
-
-	// The name of this RequestValidator
-	Name *string `locationName:"name" type:"string"`
-
-	// A Boolean flag to indicate whether to validate a request body according to
-	// the configured Model schema.
-	ValidateRequestBody *bool `locationName:"validateRequestBody" type:"boolean"`
-
-	// A Boolean flag to indicate whether to validate request parameters (true)
-	// or not (false).
-	ValidateRequestParameters *bool `locationName:"validateRequestParameters" type:"boolean"`
-}
-
-// String returns the string representation
-func (s CreateRequestValidatorOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s CreateRequestValidatorOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.Id != nil {
-		v := *s.Id
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "id", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Name != nil {
-		v := *s.Name
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.ValidateRequestBody != nil {
-		v := *s.ValidateRequestBody
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "validateRequestBody", protocol.BoolValue(v), metadata)
-	}
-	if s.ValidateRequestParameters != nil {
-		v := *s.ValidateRequestParameters
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "validateRequestParameters", protocol.BoolValue(v), metadata)
-	}
-	return nil
-}
 
 const opCreateRequestValidator = "CreateRequestValidator"
 
@@ -155,7 +22,7 @@ const opCreateRequestValidator = "CreateRequestValidator"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) CreateRequestValidatorRequest(input *CreateRequestValidatorInput) CreateRequestValidatorRequest {
+func (c *Client) CreateRequestValidatorRequest(input *types.CreateRequestValidatorInput) CreateRequestValidatorRequest {
 	op := &aws.Operation{
 		Name:       opCreateRequestValidator,
 		HTTPMethod: "POST",
@@ -163,10 +30,10 @@ func (c *Client) CreateRequestValidatorRequest(input *CreateRequestValidatorInpu
 	}
 
 	if input == nil {
-		input = &CreateRequestValidatorInput{}
+		input = &types.CreateRequestValidatorInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateRequestValidatorOutput{})
+	req := c.newRequest(op, input, &types.CreateRequestValidatorOutput{})
 	return CreateRequestValidatorRequest{Request: req, Input: input, Copy: c.CreateRequestValidatorRequest}
 }
 
@@ -174,8 +41,8 @@ func (c *Client) CreateRequestValidatorRequest(input *CreateRequestValidatorInpu
 // CreateRequestValidator API operation.
 type CreateRequestValidatorRequest struct {
 	*aws.Request
-	Input *CreateRequestValidatorInput
-	Copy  func(*CreateRequestValidatorInput) CreateRequestValidatorRequest
+	Input *types.CreateRequestValidatorInput
+	Copy  func(*types.CreateRequestValidatorInput) CreateRequestValidatorRequest
 }
 
 // Send marshals and sends the CreateRequestValidator API request.
@@ -187,7 +54,7 @@ func (r CreateRequestValidatorRequest) Send(ctx context.Context) (*CreateRequest
 	}
 
 	resp := &CreateRequestValidatorResponse{
-		CreateRequestValidatorOutput: r.Request.Data.(*CreateRequestValidatorOutput),
+		CreateRequestValidatorOutput: r.Request.Data.(*types.CreateRequestValidatorOutput),
 		response:                     &aws.Response{Request: r.Request},
 	}
 
@@ -197,7 +64,7 @@ func (r CreateRequestValidatorRequest) Send(ctx context.Context) (*CreateRequest
 // CreateRequestValidatorResponse is the response type for the
 // CreateRequestValidator API operation.
 type CreateRequestValidatorResponse struct {
-	*CreateRequestValidatorOutput
+	*types.CreateRequestValidatorOutput
 
 	response *aws.Response
 }

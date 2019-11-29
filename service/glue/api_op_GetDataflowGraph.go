@@ -6,35 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/glue/types"
 )
-
-type GetDataflowGraphInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Python script to transform.
-	PythonScript *string `type:"string"`
-}
-
-// String returns the string representation
-func (s GetDataflowGraphInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type GetDataflowGraphOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A list of the edges in the resulting DAG.
-	DagEdges []CodeGenEdge `type:"list"`
-
-	// A list of the nodes in the resulting DAG.
-	DagNodes []CodeGenNode `type:"list"`
-}
-
-// String returns the string representation
-func (s GetDataflowGraphOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetDataflowGraph = "GetDataflowGraph"
 
@@ -51,7 +24,7 @@ const opGetDataflowGraph = "GetDataflowGraph"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetDataflowGraph
-func (c *Client) GetDataflowGraphRequest(input *GetDataflowGraphInput) GetDataflowGraphRequest {
+func (c *Client) GetDataflowGraphRequest(input *types.GetDataflowGraphInput) GetDataflowGraphRequest {
 	op := &aws.Operation{
 		Name:       opGetDataflowGraph,
 		HTTPMethod: "POST",
@@ -59,10 +32,10 @@ func (c *Client) GetDataflowGraphRequest(input *GetDataflowGraphInput) GetDatafl
 	}
 
 	if input == nil {
-		input = &GetDataflowGraphInput{}
+		input = &types.GetDataflowGraphInput{}
 	}
 
-	req := c.newRequest(op, input, &GetDataflowGraphOutput{})
+	req := c.newRequest(op, input, &types.GetDataflowGraphOutput{})
 	return GetDataflowGraphRequest{Request: req, Input: input, Copy: c.GetDataflowGraphRequest}
 }
 
@@ -70,8 +43,8 @@ func (c *Client) GetDataflowGraphRequest(input *GetDataflowGraphInput) GetDatafl
 // GetDataflowGraph API operation.
 type GetDataflowGraphRequest struct {
 	*aws.Request
-	Input *GetDataflowGraphInput
-	Copy  func(*GetDataflowGraphInput) GetDataflowGraphRequest
+	Input *types.GetDataflowGraphInput
+	Copy  func(*types.GetDataflowGraphInput) GetDataflowGraphRequest
 }
 
 // Send marshals and sends the GetDataflowGraph API request.
@@ -83,7 +56,7 @@ func (r GetDataflowGraphRequest) Send(ctx context.Context) (*GetDataflowGraphRes
 	}
 
 	resp := &GetDataflowGraphResponse{
-		GetDataflowGraphOutput: r.Request.Data.(*GetDataflowGraphOutput),
+		GetDataflowGraphOutput: r.Request.Data.(*types.GetDataflowGraphOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -93,7 +66,7 @@ func (r GetDataflowGraphRequest) Send(ctx context.Context) (*GetDataflowGraphRes
 // GetDataflowGraphResponse is the response type for the
 // GetDataflowGraph API operation.
 type GetDataflowGraphResponse struct {
-	*GetDataflowGraphOutput
+	*types.GetDataflowGraphOutput
 
 	response *aws.Response
 }

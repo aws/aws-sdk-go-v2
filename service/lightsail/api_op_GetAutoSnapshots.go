@@ -6,55 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/lightsail/types"
 )
-
-type GetAutoSnapshotsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the source resource from which to get automatic snapshot information.
-	//
-	// ResourceName is a required field
-	ResourceName *string `locationName:"resourceName" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetAutoSnapshotsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetAutoSnapshotsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetAutoSnapshotsInput"}
-
-	if s.ResourceName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ResourceName"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type GetAutoSnapshotsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// An array of objects that describe the automatic snapshots that are available
-	// for the specified source resource.asdf
-	AutoSnapshots []AutoSnapshotDetails `locationName:"autoSnapshots" type:"list"`
-
-	// The name of the source resource for the automatic snapshots.
-	ResourceName *string `locationName:"resourceName" type:"string"`
-
-	// The resource type (e.g., Instance or Disk).
-	ResourceType ResourceType `locationName:"resourceType" type:"string" enum:"true"`
-}
-
-// String returns the string representation
-func (s GetAutoSnapshotsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetAutoSnapshots = "GetAutoSnapshots"
 
@@ -72,7 +25,7 @@ const opGetAutoSnapshots = "GetAutoSnapshots"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetAutoSnapshots
-func (c *Client) GetAutoSnapshotsRequest(input *GetAutoSnapshotsInput) GetAutoSnapshotsRequest {
+func (c *Client) GetAutoSnapshotsRequest(input *types.GetAutoSnapshotsInput) GetAutoSnapshotsRequest {
 	op := &aws.Operation{
 		Name:       opGetAutoSnapshots,
 		HTTPMethod: "POST",
@@ -80,10 +33,10 @@ func (c *Client) GetAutoSnapshotsRequest(input *GetAutoSnapshotsInput) GetAutoSn
 	}
 
 	if input == nil {
-		input = &GetAutoSnapshotsInput{}
+		input = &types.GetAutoSnapshotsInput{}
 	}
 
-	req := c.newRequest(op, input, &GetAutoSnapshotsOutput{})
+	req := c.newRequest(op, input, &types.GetAutoSnapshotsOutput{})
 	return GetAutoSnapshotsRequest{Request: req, Input: input, Copy: c.GetAutoSnapshotsRequest}
 }
 
@@ -91,8 +44,8 @@ func (c *Client) GetAutoSnapshotsRequest(input *GetAutoSnapshotsInput) GetAutoSn
 // GetAutoSnapshots API operation.
 type GetAutoSnapshotsRequest struct {
 	*aws.Request
-	Input *GetAutoSnapshotsInput
-	Copy  func(*GetAutoSnapshotsInput) GetAutoSnapshotsRequest
+	Input *types.GetAutoSnapshotsInput
+	Copy  func(*types.GetAutoSnapshotsInput) GetAutoSnapshotsRequest
 }
 
 // Send marshals and sends the GetAutoSnapshots API request.
@@ -104,7 +57,7 @@ func (r GetAutoSnapshotsRequest) Send(ctx context.Context) (*GetAutoSnapshotsRes
 	}
 
 	resp := &GetAutoSnapshotsResponse{
-		GetAutoSnapshotsOutput: r.Request.Data.(*GetAutoSnapshotsOutput),
+		GetAutoSnapshotsOutput: r.Request.Data.(*types.GetAutoSnapshotsOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -114,7 +67,7 @@ func (r GetAutoSnapshotsRequest) Send(ctx context.Context) (*GetAutoSnapshotsRes
 // GetAutoSnapshotsResponse is the response type for the
 // GetAutoSnapshots API operation.
 type GetAutoSnapshotsResponse struct {
-	*GetAutoSnapshotsOutput
+	*types.GetAutoSnapshotsOutput
 
 	response *aws.Response
 }

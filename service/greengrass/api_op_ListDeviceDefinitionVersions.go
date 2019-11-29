@@ -6,100 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/greengrass/types"
 )
-
-type ListDeviceDefinitionVersionsInput struct {
-	_ struct{} `type:"structure"`
-
-	// DeviceDefinitionId is a required field
-	DeviceDefinitionId *string `location:"uri" locationName:"DeviceDefinitionId" type:"string" required:"true"`
-
-	MaxResults *string `location:"querystring" locationName:"MaxResults" type:"string"`
-
-	NextToken *string `location:"querystring" locationName:"NextToken" type:"string"`
-}
-
-// String returns the string representation
-func (s ListDeviceDefinitionVersionsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListDeviceDefinitionVersionsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListDeviceDefinitionVersionsInput"}
-
-	if s.DeviceDefinitionId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DeviceDefinitionId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListDeviceDefinitionVersionsInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.DeviceDefinitionId != nil {
-		v := *s.DeviceDefinitionId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "DeviceDefinitionId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.MaxResults != nil {
-		v := *s.MaxResults
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "MaxResults", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type ListDeviceDefinitionVersionsOutput struct {
-	_ struct{} `type:"structure"`
-
-	NextToken *string `type:"string"`
-
-	Versions []VersionInformation `type:"list"`
-}
-
-// String returns the string representation
-func (s ListDeviceDefinitionVersionsOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListDeviceDefinitionVersionsOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Versions != nil {
-		v := s.Versions
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "Versions", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	return nil
-}
 
 const opListDeviceDefinitionVersions = "ListDeviceDefinitionVersions"
 
@@ -116,7 +24,7 @@ const opListDeviceDefinitionVersions = "ListDeviceDefinitionVersions"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/ListDeviceDefinitionVersions
-func (c *Client) ListDeviceDefinitionVersionsRequest(input *ListDeviceDefinitionVersionsInput) ListDeviceDefinitionVersionsRequest {
+func (c *Client) ListDeviceDefinitionVersionsRequest(input *types.ListDeviceDefinitionVersionsInput) ListDeviceDefinitionVersionsRequest {
 	op := &aws.Operation{
 		Name:       opListDeviceDefinitionVersions,
 		HTTPMethod: "GET",
@@ -124,10 +32,10 @@ func (c *Client) ListDeviceDefinitionVersionsRequest(input *ListDeviceDefinition
 	}
 
 	if input == nil {
-		input = &ListDeviceDefinitionVersionsInput{}
+		input = &types.ListDeviceDefinitionVersionsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListDeviceDefinitionVersionsOutput{})
+	req := c.newRequest(op, input, &types.ListDeviceDefinitionVersionsOutput{})
 	return ListDeviceDefinitionVersionsRequest{Request: req, Input: input, Copy: c.ListDeviceDefinitionVersionsRequest}
 }
 
@@ -135,8 +43,8 @@ func (c *Client) ListDeviceDefinitionVersionsRequest(input *ListDeviceDefinition
 // ListDeviceDefinitionVersions API operation.
 type ListDeviceDefinitionVersionsRequest struct {
 	*aws.Request
-	Input *ListDeviceDefinitionVersionsInput
-	Copy  func(*ListDeviceDefinitionVersionsInput) ListDeviceDefinitionVersionsRequest
+	Input *types.ListDeviceDefinitionVersionsInput
+	Copy  func(*types.ListDeviceDefinitionVersionsInput) ListDeviceDefinitionVersionsRequest
 }
 
 // Send marshals and sends the ListDeviceDefinitionVersions API request.
@@ -148,7 +56,7 @@ func (r ListDeviceDefinitionVersionsRequest) Send(ctx context.Context) (*ListDev
 	}
 
 	resp := &ListDeviceDefinitionVersionsResponse{
-		ListDeviceDefinitionVersionsOutput: r.Request.Data.(*ListDeviceDefinitionVersionsOutput),
+		ListDeviceDefinitionVersionsOutput: r.Request.Data.(*types.ListDeviceDefinitionVersionsOutput),
 		response:                           &aws.Response{Request: r.Request},
 	}
 
@@ -158,7 +66,7 @@ func (r ListDeviceDefinitionVersionsRequest) Send(ctx context.Context) (*ListDev
 // ListDeviceDefinitionVersionsResponse is the response type for the
 // ListDeviceDefinitionVersions API operation.
 type ListDeviceDefinitionVersionsResponse struct {
-	*ListDeviceDefinitionVersionsOutput
+	*types.ListDeviceDefinitionVersionsOutput
 
 	response *aws.Response
 }

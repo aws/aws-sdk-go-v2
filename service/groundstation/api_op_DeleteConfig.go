@@ -6,98 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/groundstation/types"
 )
-
-type DeleteConfigInput struct {
-	_ struct{} `type:"structure"`
-
-	// ConfigId is a required field
-	ConfigId *string `location:"uri" locationName:"configId" type:"string" required:"true"`
-
-	// ConfigType is a required field
-	ConfigType ConfigCapabilityType `location:"uri" locationName:"configType" type:"string" required:"true" enum:"true"`
-}
-
-// String returns the string representation
-func (s DeleteConfigInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteConfigInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteConfigInput"}
-
-	if s.ConfigId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ConfigId"))
-	}
-	if len(s.ConfigType) == 0 {
-		invalidParams.Add(aws.NewErrParamRequired("ConfigType"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteConfigInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.ConfigId != nil {
-		v := *s.ConfigId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "configId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if len(s.ConfigType) > 0 {
-		v := s.ConfigType
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "configType", protocol.QuotedValue{ValueMarshaler: v}, metadata)
-	}
-	return nil
-}
-
-type DeleteConfigOutput struct {
-	_ struct{} `type:"structure"`
-
-	ConfigArn *string `locationName:"configArn" type:"string"`
-
-	ConfigId *string `locationName:"configId" type:"string"`
-
-	ConfigType ConfigCapabilityType `locationName:"configType" type:"string" enum:"true"`
-}
-
-// String returns the string representation
-func (s DeleteConfigOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteConfigOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.ConfigArn != nil {
-		v := *s.ConfigArn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "configArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.ConfigId != nil {
-		v := *s.ConfigId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "configId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if len(s.ConfigType) > 0 {
-		v := s.ConfigType
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "configType", protocol.QuotedValue{ValueMarshaler: v}, metadata)
-	}
-	return nil
-}
 
 const opDeleteConfig = "DeleteConfig"
 
@@ -114,7 +24,7 @@ const opDeleteConfig = "DeleteConfig"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/groundstation-2019-05-23/DeleteConfig
-func (c *Client) DeleteConfigRequest(input *DeleteConfigInput) DeleteConfigRequest {
+func (c *Client) DeleteConfigRequest(input *types.DeleteConfigInput) DeleteConfigRequest {
 	op := &aws.Operation{
 		Name:       opDeleteConfig,
 		HTTPMethod: "DELETE",
@@ -122,10 +32,10 @@ func (c *Client) DeleteConfigRequest(input *DeleteConfigInput) DeleteConfigReque
 	}
 
 	if input == nil {
-		input = &DeleteConfigInput{}
+		input = &types.DeleteConfigInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteConfigOutput{})
+	req := c.newRequest(op, input, &types.DeleteConfigOutput{})
 	return DeleteConfigRequest{Request: req, Input: input, Copy: c.DeleteConfigRequest}
 }
 
@@ -133,8 +43,8 @@ func (c *Client) DeleteConfigRequest(input *DeleteConfigInput) DeleteConfigReque
 // DeleteConfig API operation.
 type DeleteConfigRequest struct {
 	*aws.Request
-	Input *DeleteConfigInput
-	Copy  func(*DeleteConfigInput) DeleteConfigRequest
+	Input *types.DeleteConfigInput
+	Copy  func(*types.DeleteConfigInput) DeleteConfigRequest
 }
 
 // Send marshals and sends the DeleteConfig API request.
@@ -146,7 +56,7 @@ func (r DeleteConfigRequest) Send(ctx context.Context) (*DeleteConfigResponse, e
 	}
 
 	resp := &DeleteConfigResponse{
-		DeleteConfigOutput: r.Request.Data.(*DeleteConfigOutput),
+		DeleteConfigOutput: r.Request.Data.(*types.DeleteConfigOutput),
 		response:           &aws.Response{Request: r.Request},
 	}
 
@@ -156,7 +66,7 @@ func (r DeleteConfigRequest) Send(ctx context.Context) (*DeleteConfigResponse, e
 // DeleteConfigResponse is the response type for the
 // DeleteConfig API operation.
 type DeleteConfigResponse struct {
-	*DeleteConfigOutput
+	*types.DeleteConfigOutput
 
 	response *aws.Response
 }

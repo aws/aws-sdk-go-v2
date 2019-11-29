@@ -6,78 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/query"
+	"github.com/aws/aws-sdk-go-v2/service/sns/types"
 )
-
-// Input for SetTopicAttributes action.
-type SetTopicAttributesInput struct {
-	_ struct{} `type:"structure"`
-
-	// A map of attributes with their corresponding values.
-	//
-	// The following lists the names, descriptions, and values of the special request
-	// parameters that the SetTopicAttributes action uses:
-	//
-	//    * DeliveryPolicy – The policy that defines how Amazon SNS retries failed
-	//    deliveries to HTTP/S endpoints.
-	//
-	//    * DisplayName – The display name to use for a topic with SMS subscriptions.
-	//
-	//    * Policy – The policy that defines who can access your topic. By default,
-	//    only the topic owner can publish or subscribe to the topic.
-	//
-	// The following attribute applies only to server-side-encryption (https://docs.aws.amazon.com/sns/latest/dg/sns-server-side-encryption.html):
-	//
-	//    * KmsMasterKeyId - The ID of an AWS-managed customer master key (CMK)
-	//    for Amazon SNS or a custom CMK. For more information, see Key Terms (https://docs.aws.amazon.com/sns/latest/dg/sns-server-side-encryption.html#sse-key-terms).
-	//    For more examples, see KeyId (https://docs.aws.amazon.com/kms/latest/APIReference/API_DescribeKey.html#API_DescribeKey_RequestParameters)
-	//    in the AWS Key Management Service API Reference.
-	//
-	// AttributeName is a required field
-	AttributeName *string `type:"string" required:"true"`
-
-	// The new value for the attribute.
-	AttributeValue *string `type:"string"`
-
-	// The ARN of the topic to modify.
-	//
-	// TopicArn is a required field
-	TopicArn *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s SetTopicAttributesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *SetTopicAttributesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "SetTopicAttributesInput"}
-
-	if s.AttributeName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("AttributeName"))
-	}
-
-	if s.TopicArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("TopicArn"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type SetTopicAttributesOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s SetTopicAttributesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opSetTopicAttributes = "SetTopicAttributes"
 
@@ -94,7 +26,7 @@ const opSetTopicAttributes = "SetTopicAttributes"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/SetTopicAttributes
-func (c *Client) SetTopicAttributesRequest(input *SetTopicAttributesInput) SetTopicAttributesRequest {
+func (c *Client) SetTopicAttributesRequest(input *types.SetTopicAttributesInput) SetTopicAttributesRequest {
 	op := &aws.Operation{
 		Name:       opSetTopicAttributes,
 		HTTPMethod: "POST",
@@ -102,10 +34,10 @@ func (c *Client) SetTopicAttributesRequest(input *SetTopicAttributesInput) SetTo
 	}
 
 	if input == nil {
-		input = &SetTopicAttributesInput{}
+		input = &types.SetTopicAttributesInput{}
 	}
 
-	req := c.newRequest(op, input, &SetTopicAttributesOutput{})
+	req := c.newRequest(op, input, &types.SetTopicAttributesOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return SetTopicAttributesRequest{Request: req, Input: input, Copy: c.SetTopicAttributesRequest}
@@ -115,8 +47,8 @@ func (c *Client) SetTopicAttributesRequest(input *SetTopicAttributesInput) SetTo
 // SetTopicAttributes API operation.
 type SetTopicAttributesRequest struct {
 	*aws.Request
-	Input *SetTopicAttributesInput
-	Copy  func(*SetTopicAttributesInput) SetTopicAttributesRequest
+	Input *types.SetTopicAttributesInput
+	Copy  func(*types.SetTopicAttributesInput) SetTopicAttributesRequest
 }
 
 // Send marshals and sends the SetTopicAttributes API request.
@@ -128,7 +60,7 @@ func (r SetTopicAttributesRequest) Send(ctx context.Context) (*SetTopicAttribute
 	}
 
 	resp := &SetTopicAttributesResponse{
-		SetTopicAttributesOutput: r.Request.Data.(*SetTopicAttributesOutput),
+		SetTopicAttributesOutput: r.Request.Data.(*types.SetTopicAttributesOutput),
 		response:                 &aws.Response{Request: r.Request},
 	}
 
@@ -138,7 +70,7 @@ func (r SetTopicAttributesRequest) Send(ctx context.Context) (*SetTopicAttribute
 // SetTopicAttributesResponse is the response type for the
 // SetTopicAttributes API operation.
 type SetTopicAttributesResponse struct {
-	*SetTopicAttributesOutput
+	*types.SetTopicAttributesOutput
 
 	response *aws.Response
 }

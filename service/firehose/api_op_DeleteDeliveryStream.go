@@ -6,48 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/firehose/types"
 )
-
-type DeleteDeliveryStreamInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the delivery stream.
-	//
-	// DeliveryStreamName is a required field
-	DeliveryStreamName *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteDeliveryStreamInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteDeliveryStreamInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteDeliveryStreamInput"}
-
-	if s.DeliveryStreamName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DeliveryStreamName"))
-	}
-	if s.DeliveryStreamName != nil && len(*s.DeliveryStreamName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("DeliveryStreamName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteDeliveryStreamOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteDeliveryStreamOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteDeliveryStream = "DeleteDeliveryStream"
 
@@ -56,16 +16,16 @@ const opDeleteDeliveryStream = "DeleteDeliveryStream"
 //
 // Deletes a delivery stream and its data.
 //
-// You can delete a delivery stream only if it is in ACTIVE or DELETING state,
-// and not in the CREATING state. While the deletion request is in process,
-// the delivery stream is in the DELETING state.
+// To check the state of a delivery stream, use DescribeDeliveryStream. You
+// can delete a delivery stream only if it is in one of the following states:
+// ACTIVE, DELETING, CREATING_FAILED, or DELETING_FAILED. You can't delete a
+// delivery stream that is in the CREATING state. While the deletion request
+// is in process, the delivery stream is in the DELETING state.
 //
-// To check the state of a delivery stream, use DescribeDeliveryStream.
-//
-// While the delivery stream is DELETING state, the service might continue to
-// accept the records, but it doesn't make any guarantees with respect to delivering
-// the data. Therefore, as a best practice, you should first stop any applications
-// that are sending records before deleting a delivery stream.
+// While the delivery stream is in the DELETING state, the service might continue
+// to accept records, but it doesn't make any guarantees with respect to delivering
+// the data. Therefore, as a best practice, first stop any applications that
+// are sending records before you delete a delivery stream.
 //
 //    // Example sending a request using DeleteDeliveryStreamRequest.
 //    req := client.DeleteDeliveryStreamRequest(params)
@@ -75,7 +35,7 @@ const opDeleteDeliveryStream = "DeleteDeliveryStream"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/DeleteDeliveryStream
-func (c *Client) DeleteDeliveryStreamRequest(input *DeleteDeliveryStreamInput) DeleteDeliveryStreamRequest {
+func (c *Client) DeleteDeliveryStreamRequest(input *types.DeleteDeliveryStreamInput) DeleteDeliveryStreamRequest {
 	op := &aws.Operation{
 		Name:       opDeleteDeliveryStream,
 		HTTPMethod: "POST",
@@ -83,10 +43,10 @@ func (c *Client) DeleteDeliveryStreamRequest(input *DeleteDeliveryStreamInput) D
 	}
 
 	if input == nil {
-		input = &DeleteDeliveryStreamInput{}
+		input = &types.DeleteDeliveryStreamInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteDeliveryStreamOutput{})
+	req := c.newRequest(op, input, &types.DeleteDeliveryStreamOutput{})
 	return DeleteDeliveryStreamRequest{Request: req, Input: input, Copy: c.DeleteDeliveryStreamRequest}
 }
 
@@ -94,8 +54,8 @@ func (c *Client) DeleteDeliveryStreamRequest(input *DeleteDeliveryStreamInput) D
 // DeleteDeliveryStream API operation.
 type DeleteDeliveryStreamRequest struct {
 	*aws.Request
-	Input *DeleteDeliveryStreamInput
-	Copy  func(*DeleteDeliveryStreamInput) DeleteDeliveryStreamRequest
+	Input *types.DeleteDeliveryStreamInput
+	Copy  func(*types.DeleteDeliveryStreamInput) DeleteDeliveryStreamRequest
 }
 
 // Send marshals and sends the DeleteDeliveryStream API request.
@@ -107,7 +67,7 @@ func (r DeleteDeliveryStreamRequest) Send(ctx context.Context) (*DeleteDeliveryS
 	}
 
 	resp := &DeleteDeliveryStreamResponse{
-		DeleteDeliveryStreamOutput: r.Request.Data.(*DeleteDeliveryStreamOutput),
+		DeleteDeliveryStreamOutput: r.Request.Data.(*types.DeleteDeliveryStreamOutput),
 		response:                   &aws.Response{Request: r.Request},
 	}
 
@@ -117,7 +77,7 @@ func (r DeleteDeliveryStreamRequest) Send(ctx context.Context) (*DeleteDeliveryS
 // DeleteDeliveryStreamResponse is the response type for the
 // DeleteDeliveryStream API operation.
 type DeleteDeliveryStreamResponse struct {
-	*DeleteDeliveryStreamOutput
+	*types.DeleteDeliveryStreamOutput
 
 	response *aws.Response
 }

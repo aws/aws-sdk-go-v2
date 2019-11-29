@@ -6,79 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/workmail/types"
 )
-
-type CreateUserInput struct {
-	_ struct{} `type:"structure"`
-
-	// The display name for the new user.
-	//
-	// DisplayName is a required field
-	DisplayName *string `type:"string" required:"true"`
-
-	// The name for the new user. Simple AD or AD Connector user names have a maximum
-	// length of 20. All others have a maximum length of 64.
-	//
-	// Name is a required field
-	Name *string `min:"1" type:"string" required:"true"`
-
-	// The identifier of the organization for which the user is created.
-	//
-	// OrganizationId is a required field
-	OrganizationId *string `type:"string" required:"true"`
-
-	// The password for the new user.
-	//
-	// Password is a required field
-	Password *string `type:"string" required:"true" sensitive:"true"`
-}
-
-// String returns the string representation
-func (s CreateUserInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateUserInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateUserInput"}
-
-	if s.DisplayName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DisplayName"))
-	}
-
-	if s.Name == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Name"))
-	}
-	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
-	}
-
-	if s.OrganizationId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("OrganizationId"))
-	}
-
-	if s.Password == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Password"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type CreateUserOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The identifier for the new user.
-	UserId *string `min:"12" type:"string"`
-}
-
-// String returns the string representation
-func (s CreateUserOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCreateUser = "CreateUser"
 
@@ -96,7 +25,7 @@ const opCreateUser = "CreateUser"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/CreateUser
-func (c *Client) CreateUserRequest(input *CreateUserInput) CreateUserRequest {
+func (c *Client) CreateUserRequest(input *types.CreateUserInput) CreateUserRequest {
 	op := &aws.Operation{
 		Name:       opCreateUser,
 		HTTPMethod: "POST",
@@ -104,10 +33,10 @@ func (c *Client) CreateUserRequest(input *CreateUserInput) CreateUserRequest {
 	}
 
 	if input == nil {
-		input = &CreateUserInput{}
+		input = &types.CreateUserInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateUserOutput{})
+	req := c.newRequest(op, input, &types.CreateUserOutput{})
 	return CreateUserRequest{Request: req, Input: input, Copy: c.CreateUserRequest}
 }
 
@@ -115,8 +44,8 @@ func (c *Client) CreateUserRequest(input *CreateUserInput) CreateUserRequest {
 // CreateUser API operation.
 type CreateUserRequest struct {
 	*aws.Request
-	Input *CreateUserInput
-	Copy  func(*CreateUserInput) CreateUserRequest
+	Input *types.CreateUserInput
+	Copy  func(*types.CreateUserInput) CreateUserRequest
 }
 
 // Send marshals and sends the CreateUser API request.
@@ -128,7 +57,7 @@ func (r CreateUserRequest) Send(ctx context.Context) (*CreateUserResponse, error
 	}
 
 	resp := &CreateUserResponse{
-		CreateUserOutput: r.Request.Data.(*CreateUserOutput),
+		CreateUserOutput: r.Request.Data.(*types.CreateUserOutput),
 		response:         &aws.Response{Request: r.Request},
 	}
 
@@ -138,7 +67,7 @@ func (r CreateUserRequest) Send(ctx context.Context) (*CreateUserResponse, error
 // CreateUserResponse is the response type for the
 // CreateUser API operation.
 type CreateUserResponse struct {
-	*CreateUserOutput
+	*types.CreateUserOutput
 
 	response *aws.Response
 }

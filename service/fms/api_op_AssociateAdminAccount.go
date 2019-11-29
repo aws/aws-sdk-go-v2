@@ -6,53 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
+	"github.com/aws/aws-sdk-go-v2/service/fms/types"
 )
-
-type AssociateAdminAccountInput struct {
-	_ struct{} `type:"structure"`
-
-	// The AWS account ID to associate with AWS Firewall Manager as the AWS Firewall
-	// Manager administrator account. This can be an AWS Organizations master account
-	// or a member account. For more information about AWS Organizations and master
-	// accounts, see Managing the AWS Accounts in Your Organization (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts.html).
-	//
-	// AdminAccount is a required field
-	AdminAccount *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s AssociateAdminAccountInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *AssociateAdminAccountInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "AssociateAdminAccountInput"}
-
-	if s.AdminAccount == nil {
-		invalidParams.Add(aws.NewErrParamRequired("AdminAccount"))
-	}
-	if s.AdminAccount != nil && len(*s.AdminAccount) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("AdminAccount", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type AssociateAdminAccountOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s AssociateAdminAccountOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opAssociateAdminAccount = "AssociateAdminAccount"
 
@@ -76,7 +33,7 @@ const opAssociateAdminAccount = "AssociateAdminAccount"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/AssociateAdminAccount
-func (c *Client) AssociateAdminAccountRequest(input *AssociateAdminAccountInput) AssociateAdminAccountRequest {
+func (c *Client) AssociateAdminAccountRequest(input *types.AssociateAdminAccountInput) AssociateAdminAccountRequest {
 	op := &aws.Operation{
 		Name:       opAssociateAdminAccount,
 		HTTPMethod: "POST",
@@ -84,10 +41,10 @@ func (c *Client) AssociateAdminAccountRequest(input *AssociateAdminAccountInput)
 	}
 
 	if input == nil {
-		input = &AssociateAdminAccountInput{}
+		input = &types.AssociateAdminAccountInput{}
 	}
 
-	req := c.newRequest(op, input, &AssociateAdminAccountOutput{})
+	req := c.newRequest(op, input, &types.AssociateAdminAccountOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return AssociateAdminAccountRequest{Request: req, Input: input, Copy: c.AssociateAdminAccountRequest}
@@ -97,8 +54,8 @@ func (c *Client) AssociateAdminAccountRequest(input *AssociateAdminAccountInput)
 // AssociateAdminAccount API operation.
 type AssociateAdminAccountRequest struct {
 	*aws.Request
-	Input *AssociateAdminAccountInput
-	Copy  func(*AssociateAdminAccountInput) AssociateAdminAccountRequest
+	Input *types.AssociateAdminAccountInput
+	Copy  func(*types.AssociateAdminAccountInput) AssociateAdminAccountRequest
 }
 
 // Send marshals and sends the AssociateAdminAccount API request.
@@ -110,7 +67,7 @@ func (r AssociateAdminAccountRequest) Send(ctx context.Context) (*AssociateAdmin
 	}
 
 	resp := &AssociateAdminAccountResponse{
-		AssociateAdminAccountOutput: r.Request.Data.(*AssociateAdminAccountOutput),
+		AssociateAdminAccountOutput: r.Request.Data.(*types.AssociateAdminAccountOutput),
 		response:                    &aws.Response{Request: r.Request},
 	}
 
@@ -120,7 +77,7 @@ func (r AssociateAdminAccountRequest) Send(ctx context.Context) (*AssociateAdmin
 // AssociateAdminAccountResponse is the response type for the
 // AssociateAdminAccount API operation.
 type AssociateAdminAccountResponse struct {
-	*AssociateAdminAccountOutput
+	*types.AssociateAdminAccountOutput
 
 	response *aws.Response
 }

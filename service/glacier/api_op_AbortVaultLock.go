@@ -6,86 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/restjson"
+	"github.com/aws/aws-sdk-go-v2/service/glacier/types"
 )
-
-// The input values for AbortVaultLock.
-type AbortVaultLockInput struct {
-	_ struct{} `type:"structure"`
-
-	// The AccountId value is the AWS account ID. This value must match the AWS
-	// account ID associated with the credentials used to sign the request. You
-	// can either specify an AWS account ID or optionally a single '-' (hyphen),
-	// in which case Amazon Glacier uses the AWS account ID associated with the
-	// credentials used to sign the request. If you specify your account ID, do
-	// not include any hyphens ('-') in the ID.
-	//
-	// AccountId is a required field
-	AccountId *string `location:"uri" locationName:"accountId" type:"string" required:"true"`
-
-	// The name of the vault.
-	//
-	// VaultName is a required field
-	VaultName *string `location:"uri" locationName:"vaultName" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s AbortVaultLockInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *AbortVaultLockInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "AbortVaultLockInput"}
-
-	if s.AccountId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("AccountId"))
-	}
-
-	if s.VaultName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("VaultName"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s AbortVaultLockInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.AccountId != nil {
-		v := *s.AccountId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "accountId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.VaultName != nil {
-		v := *s.VaultName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "vaultName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type AbortVaultLockOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s AbortVaultLockOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s AbortVaultLockOutput) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
 
 const opAbortVaultLock = "AbortVaultLock"
 
@@ -115,7 +39,7 @@ const opAbortVaultLock = "AbortVaultLock"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) AbortVaultLockRequest(input *AbortVaultLockInput) AbortVaultLockRequest {
+func (c *Client) AbortVaultLockRequest(input *types.AbortVaultLockInput) AbortVaultLockRequest {
 	op := &aws.Operation{
 		Name:       opAbortVaultLock,
 		HTTPMethod: "DELETE",
@@ -123,10 +47,10 @@ func (c *Client) AbortVaultLockRequest(input *AbortVaultLockInput) AbortVaultLoc
 	}
 
 	if input == nil {
-		input = &AbortVaultLockInput{}
+		input = &types.AbortVaultLockInput{}
 	}
 
-	req := c.newRequest(op, input, &AbortVaultLockOutput{})
+	req := c.newRequest(op, input, &types.AbortVaultLockOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return AbortVaultLockRequest{Request: req, Input: input, Copy: c.AbortVaultLockRequest}
@@ -136,8 +60,8 @@ func (c *Client) AbortVaultLockRequest(input *AbortVaultLockInput) AbortVaultLoc
 // AbortVaultLock API operation.
 type AbortVaultLockRequest struct {
 	*aws.Request
-	Input *AbortVaultLockInput
-	Copy  func(*AbortVaultLockInput) AbortVaultLockRequest
+	Input *types.AbortVaultLockInput
+	Copy  func(*types.AbortVaultLockInput) AbortVaultLockRequest
 }
 
 // Send marshals and sends the AbortVaultLock API request.
@@ -149,7 +73,7 @@ func (r AbortVaultLockRequest) Send(ctx context.Context) (*AbortVaultLockRespons
 	}
 
 	resp := &AbortVaultLockResponse{
-		AbortVaultLockOutput: r.Request.Data.(*AbortVaultLockOutput),
+		AbortVaultLockOutput: r.Request.Data.(*types.AbortVaultLockOutput),
 		response:             &aws.Response{Request: r.Request},
 	}
 
@@ -159,7 +83,7 @@ func (r AbortVaultLockRequest) Send(ctx context.Context) (*AbortVaultLockRespons
 // AbortVaultLockResponse is the response type for the
 // AbortVaultLock API operation.
 type AbortVaultLockResponse struct {
-	*AbortVaultLockOutput
+	*types.AbortVaultLockOutput
 
 	response *aws.Response
 }

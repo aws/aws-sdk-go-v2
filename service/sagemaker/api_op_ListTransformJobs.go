@@ -4,85 +4,10 @@ package sagemaker
 
 import (
 	"context"
-	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
 )
-
-type ListTransformJobsInput struct {
-	_ struct{} `type:"structure"`
-
-	// A filter that returns only transform jobs created after the specified time.
-	CreationTimeAfter *time.Time `type:"timestamp"`
-
-	// A filter that returns only transform jobs created before the specified time.
-	CreationTimeBefore *time.Time `type:"timestamp"`
-
-	// A filter that returns only transform jobs modified after the specified time.
-	LastModifiedTimeAfter *time.Time `type:"timestamp"`
-
-	// A filter that returns only transform jobs modified before the specified time.
-	LastModifiedTimeBefore *time.Time `type:"timestamp"`
-
-	// The maximum number of transform jobs to return in the response. The default
-	// value is 10.
-	MaxResults *int64 `min:"1" type:"integer"`
-
-	// A string in the transform job name. This filter returns only transform jobs
-	// whose name contains the specified string.
-	NameContains *string `type:"string"`
-
-	// If the result of the previous ListTransformJobs request was truncated, the
-	// response includes a NextToken. To retrieve the next set of transform jobs,
-	// use the token in the next request.
-	NextToken *string `type:"string"`
-
-	// The field to sort results by. The default is CreationTime.
-	SortBy SortBy `type:"string" enum:"true"`
-
-	// The sort order for results. The default is Descending.
-	SortOrder SortOrder `type:"string" enum:"true"`
-
-	// A filter that retrieves only transform jobs with a specific status.
-	StatusEquals TransformJobStatus `type:"string" enum:"true"`
-}
-
-// String returns the string representation
-func (s ListTransformJobsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListTransformJobsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListTransformJobsInput"}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ListTransformJobsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// If the response is truncated, Amazon SageMaker returns this token. To retrieve
-	// the next set of transform jobs, use it in the next request.
-	NextToken *string `type:"string"`
-
-	// An array of TransformJobSummary objects.
-	//
-	// TransformJobSummaries is a required field
-	TransformJobSummaries []TransformJobSummary `type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s ListTransformJobsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListTransformJobs = "ListTransformJobs"
 
@@ -99,7 +24,7 @@ const opListTransformJobs = "ListTransformJobs"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListTransformJobs
-func (c *Client) ListTransformJobsRequest(input *ListTransformJobsInput) ListTransformJobsRequest {
+func (c *Client) ListTransformJobsRequest(input *types.ListTransformJobsInput) ListTransformJobsRequest {
 	op := &aws.Operation{
 		Name:       opListTransformJobs,
 		HTTPMethod: "POST",
@@ -113,10 +38,10 @@ func (c *Client) ListTransformJobsRequest(input *ListTransformJobsInput) ListTra
 	}
 
 	if input == nil {
-		input = &ListTransformJobsInput{}
+		input = &types.ListTransformJobsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListTransformJobsOutput{})
+	req := c.newRequest(op, input, &types.ListTransformJobsOutput{})
 	return ListTransformJobsRequest{Request: req, Input: input, Copy: c.ListTransformJobsRequest}
 }
 
@@ -124,8 +49,8 @@ func (c *Client) ListTransformJobsRequest(input *ListTransformJobsInput) ListTra
 // ListTransformJobs API operation.
 type ListTransformJobsRequest struct {
 	*aws.Request
-	Input *ListTransformJobsInput
-	Copy  func(*ListTransformJobsInput) ListTransformJobsRequest
+	Input *types.ListTransformJobsInput
+	Copy  func(*types.ListTransformJobsInput) ListTransformJobsRequest
 }
 
 // Send marshals and sends the ListTransformJobs API request.
@@ -137,7 +62,7 @@ func (r ListTransformJobsRequest) Send(ctx context.Context) (*ListTransformJobsR
 	}
 
 	resp := &ListTransformJobsResponse{
-		ListTransformJobsOutput: r.Request.Data.(*ListTransformJobsOutput),
+		ListTransformJobsOutput: r.Request.Data.(*types.ListTransformJobsOutput),
 		response:                &aws.Response{Request: r.Request},
 	}
 
@@ -167,7 +92,7 @@ func NewListTransformJobsPaginator(req ListTransformJobsRequest) ListTransformJo
 	return ListTransformJobsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListTransformJobsInput
+				var inCpy *types.ListTransformJobsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -187,14 +112,14 @@ type ListTransformJobsPaginator struct {
 	aws.Pager
 }
 
-func (p *ListTransformJobsPaginator) CurrentPage() *ListTransformJobsOutput {
-	return p.Pager.CurrentPage().(*ListTransformJobsOutput)
+func (p *ListTransformJobsPaginator) CurrentPage() *types.ListTransformJobsOutput {
+	return p.Pager.CurrentPage().(*types.ListTransformJobsOutput)
 }
 
 // ListTransformJobsResponse is the response type for the
 // ListTransformJobs API operation.
 type ListTransformJobsResponse struct {
-	*ListTransformJobsOutput
+	*types.ListTransformJobsOutput
 
 	response *aws.Response
 }

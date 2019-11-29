@@ -12,6 +12,8 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws/awserr"
 	"github.com/aws/aws-sdk-go-v2/aws/external"
 	"github.com/aws/aws-sdk-go-v2/service/lambda"
+	"github.com/aws/aws-sdk-go-v2/service/lambda/enums"
+	"github.com/aws/aws-sdk-go-v2/service/lambda/types"
 )
 
 var _ time.Duration
@@ -36,7 +38,7 @@ func ExampleClient_AddPermissionRequest_shared00() {
 	}
 
 	svc := lambda.New(cfg)
-	input := &lambda.AddPermissionInput{
+	input := &types.AddPermissionInput{
 		Action:        aws.String("lambda:InvokeFunction"),
 		FunctionName:  aws.String("MyFunction"),
 		Principal:     aws.String("s3.amazonaws.com"),
@@ -88,17 +90,17 @@ func ExampleClient_CreateFunctionRequest_shared00() {
 	}
 
 	svc := lambda.New(cfg)
-	input := &lambda.CreateFunctionInput{
-		Code:         &lambda.FunctionCode{},
+	input := &types.CreateFunctionInput{
+		Code:         &types.FunctionCode{},
 		Description:  aws.String(""),
 		FunctionName: aws.String("MyFunction"),
 		Handler:      aws.String("souce_file.handler_name"),
 		MemorySize:   aws.Int64(128),
 		Publish:      aws.Bool(true),
 		Role:         aws.String("arn:aws:iam::123456789012:role/service-role/role-name"),
-		Runtime:      lambda.RuntimeNodejs810,
+		Runtime:      enums.RuntimeNodejs810,
 		Timeout:      aws.Int64(15),
-		VpcConfig:    &lambda.VpcConfig{},
+		VpcConfig:    &types.VpcConfig{},
 	}
 
 	req := svc.CreateFunctionRequest(input)
@@ -142,7 +144,7 @@ func ExampleClient_DeleteAliasRequest_shared00() {
 	}
 
 	svc := lambda.New(cfg)
-	input := &lambda.DeleteAliasInput{
+	input := &types.DeleteAliasInput{
 		FunctionName: aws.String("myFunction"),
 		Name:         aws.String("alias"),
 	}
@@ -182,7 +184,7 @@ func ExampleClient_DeleteEventSourceMappingRequest_shared00() {
 	}
 
 	svc := lambda.New(cfg)
-	input := &lambda.DeleteEventSourceMappingInput{
+	input := &types.DeleteEventSourceMappingInput{
 		UUID: aws.String("12345kxodurf3443"),
 	}
 
@@ -225,7 +227,7 @@ func ExampleClient_DeleteFunctionRequest_shared00() {
 	}
 
 	svc := lambda.New(cfg)
-	input := &lambda.DeleteFunctionInput{
+	input := &types.DeleteFunctionInput{
 		FunctionName: aws.String("myFunction"),
 		Qualifier:    aws.String("1"),
 	}
@@ -269,7 +271,7 @@ func ExampleClient_GetAccountSettingsRequest_shared00() {
 	}
 
 	svc := lambda.New(cfg)
-	input := &lambda.GetAccountSettingsInput{}
+	input := &types.GetAccountSettingsInput{}
 
 	req := svc.GetAccountSettingsRequest(input)
 	result, err := req.Send(context.Background())
@@ -304,7 +306,7 @@ func ExampleClient_GetAliasRequest_shared00() {
 	}
 
 	svc := lambda.New(cfg)
-	input := &lambda.GetAliasInput{
+	input := &types.GetAliasInput{
 		FunctionName: aws.String("myFunction"),
 		Name:         aws.String("myFunctionAlias"),
 	}
@@ -346,7 +348,7 @@ func ExampleClient_GetEventSourceMappingRequest_shared00() {
 	}
 
 	svc := lambda.New(cfg)
-	input := &lambda.GetEventSourceMappingInput{
+	input := &types.GetEventSourceMappingInput{
 		UUID: aws.String("123489-xxxxx-kdla8d89d7"),
 	}
 
@@ -387,7 +389,7 @@ func ExampleClient_GetFunctionRequest_shared00() {
 	}
 
 	svc := lambda.New(cfg)
-	input := &lambda.GetFunctionInput{
+	input := &types.GetFunctionInput{
 		FunctionName: aws.String("myFunction"),
 		Qualifier:    aws.String("1"),
 	}
@@ -429,7 +431,7 @@ func ExampleClient_GetFunctionConfigurationRequest_shared00() {
 	}
 
 	svc := lambda.New(cfg)
-	input := &lambda.GetFunctionConfigurationInput{
+	input := &types.GetFunctionConfigurationInput{
 		FunctionName: aws.String("myFunction"),
 		Qualifier:    aws.String("1"),
 	}
@@ -471,7 +473,7 @@ func ExampleClient_GetPolicyRequest_shared00() {
 	}
 
 	svc := lambda.New(cfg)
-	input := &lambda.GetPolicyInput{
+	input := &types.GetPolicyInput{
 		FunctionName: aws.String("myFunction"),
 		Qualifier:    aws.String("1"),
 	}
@@ -513,11 +515,11 @@ func ExampleClient_InvokeRequest_shared00() {
 	}
 
 	svc := lambda.New(cfg)
-	input := &lambda.InvokeInput{
+	input := &types.InvokeInput{
 		ClientContext:  aws.String("MyApp"),
 		FunctionName:   aws.String("MyFunction"),
-		InvocationType: lambda.InvocationTypeEvent,
-		LogType:        lambda.LogTypeTail,
+		InvocationType: enums.InvocationTypeEvent,
+		LogType:        enums.LogTypeTail,
 		Payload:        []byte("fileb://file-path/input.json"),
 		Qualifier:      aws.String("1"),
 	}
@@ -591,7 +593,7 @@ func ExampleClient_InvokeAsyncRequest_shared00() {
 	}
 
 	svc := lambda.New(cfg)
-	input := &lambda.InvokeAsyncInput{
+	input := &types.InvokeAsyncInput{
 		FunctionName: aws.String("myFunction"),
 		InvokeArgs:   aws.ReadSeekCloser(strings.NewReader("fileb://file-path/input.json")),
 	}
@@ -633,7 +635,7 @@ func ExampleClient_ListAliasesRequest_shared00() {
 	}
 
 	svc := lambda.New(cfg)
-	input := &lambda.ListAliasesInput{
+	input := &types.ListAliasesInput{
 		FunctionName:    aws.String("myFunction"),
 		FunctionVersion: aws.String("1"),
 		Marker:          aws.String(""),
@@ -677,7 +679,7 @@ func ExampleClient_ListFunctionsRequest_shared00() {
 	}
 
 	svc := lambda.New(cfg)
-	input := &lambda.ListFunctionsInput{
+	input := &types.ListFunctionsInput{
 		Marker:   aws.String(""),
 		MaxItems: aws.Int64(123),
 	}
@@ -717,7 +719,7 @@ func ExampleClient_ListVersionsByFunctionRequest_shared00() {
 	}
 
 	svc := lambda.New(cfg)
-	input := &lambda.ListVersionsByFunctionInput{
+	input := &types.ListVersionsByFunctionInput{
 		FunctionName: aws.String("myFunction"),
 		Marker:       aws.String(""),
 		MaxItems:     aws.Int64(123),
@@ -760,7 +762,7 @@ func ExampleClient_PublishVersionRequest_shared00() {
 	}
 
 	svc := lambda.New(cfg)
-	input := &lambda.PublishVersionInput{
+	input := &types.PublishVersionInput{
 		CodeSha256:   aws.String(""),
 		Description:  aws.String(""),
 		FunctionName: aws.String("myFunction"),
@@ -807,7 +809,7 @@ func ExampleClient_RemovePermissionRequest_shared00() {
 	}
 
 	svc := lambda.New(cfg)
-	input := &lambda.RemovePermissionInput{
+	input := &types.RemovePermissionInput{
 		FunctionName: aws.String("myFunction"),
 		Qualifier:    aws.String("1"),
 		StatementId:  aws.String("role-statement-id"),
@@ -852,7 +854,7 @@ func ExampleClient_UpdateAliasRequest_shared00() {
 	}
 
 	svc := lambda.New(cfg)
-	input := &lambda.UpdateAliasInput{
+	input := &types.UpdateAliasInput{
 		Description:     aws.String(""),
 		FunctionName:    aws.String("myFunction"),
 		FunctionVersion: aws.String("1"),
@@ -898,7 +900,7 @@ func ExampleClient_UpdateEventSourceMappingRequest_shared00() {
 	}
 
 	svc := lambda.New(cfg)
-	input := &lambda.UpdateEventSourceMappingInput{
+	input := &types.UpdateEventSourceMappingInput{
 		BatchSize:    aws.Int64(123),
 		Enabled:      aws.Bool(true),
 		FunctionName: aws.String("myFunction"),
@@ -946,7 +948,7 @@ func ExampleClient_UpdateFunctionCodeRequest_shared00() {
 	}
 
 	svc := lambda.New(cfg)
-	input := &lambda.UpdateFunctionCodeInput{
+	input := &types.UpdateFunctionCodeInput{
 		FunctionName:    aws.String("myFunction"),
 		Publish:         aws.Bool(true),
 		S3Bucket:        aws.String("myBucket"),
@@ -996,15 +998,15 @@ func ExampleClient_UpdateFunctionConfigurationRequest_shared00() {
 	}
 
 	svc := lambda.New(cfg)
-	input := &lambda.UpdateFunctionConfigurationInput{
+	input := &types.UpdateFunctionConfigurationInput{
 		Description:  aws.String(""),
 		FunctionName: aws.String("myFunction"),
 		Handler:      aws.String("index.handler"),
 		MemorySize:   aws.Int64(128),
 		Role:         aws.String("arn:aws:iam::123456789012:role/lambda_basic_execution"),
-		Runtime:      lambda.RuntimePython27,
+		Runtime:      enums.RuntimePython27,
 		Timeout:      aws.Int64(123),
-		VpcConfig:    &lambda.VpcConfig{},
+		VpcConfig:    &types.VpcConfig{},
 	}
 
 	req := svc.UpdateFunctionConfigurationRequest(input)

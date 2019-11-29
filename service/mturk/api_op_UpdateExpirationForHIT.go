@@ -4,60 +4,10 @@ package mturk
 
 import (
 	"context"
-	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/mturk/types"
 )
-
-type UpdateExpirationForHITInput struct {
-	_ struct{} `type:"structure"`
-
-	// The date and time at which you want the HIT to expire
-	//
-	// ExpireAt is a required field
-	ExpireAt *time.Time `type:"timestamp" required:"true"`
-
-	// The HIT to update.
-	//
-	// HITId is a required field
-	HITId *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s UpdateExpirationForHITInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateExpirationForHITInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateExpirationForHITInput"}
-
-	if s.ExpireAt == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ExpireAt"))
-	}
-
-	if s.HITId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("HITId"))
-	}
-	if s.HITId != nil && len(*s.HITId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("HITId", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type UpdateExpirationForHITOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s UpdateExpirationForHITOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opUpdateExpirationForHIT = "UpdateExpirationForHIT"
 
@@ -76,7 +26,7 @@ const opUpdateExpirationForHIT = "UpdateExpirationForHIT"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/UpdateExpirationForHIT
-func (c *Client) UpdateExpirationForHITRequest(input *UpdateExpirationForHITInput) UpdateExpirationForHITRequest {
+func (c *Client) UpdateExpirationForHITRequest(input *types.UpdateExpirationForHITInput) UpdateExpirationForHITRequest {
 	op := &aws.Operation{
 		Name:       opUpdateExpirationForHIT,
 		HTTPMethod: "POST",
@@ -84,10 +34,10 @@ func (c *Client) UpdateExpirationForHITRequest(input *UpdateExpirationForHITInpu
 	}
 
 	if input == nil {
-		input = &UpdateExpirationForHITInput{}
+		input = &types.UpdateExpirationForHITInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateExpirationForHITOutput{})
+	req := c.newRequest(op, input, &types.UpdateExpirationForHITOutput{})
 	return UpdateExpirationForHITRequest{Request: req, Input: input, Copy: c.UpdateExpirationForHITRequest}
 }
 
@@ -95,8 +45,8 @@ func (c *Client) UpdateExpirationForHITRequest(input *UpdateExpirationForHITInpu
 // UpdateExpirationForHIT API operation.
 type UpdateExpirationForHITRequest struct {
 	*aws.Request
-	Input *UpdateExpirationForHITInput
-	Copy  func(*UpdateExpirationForHITInput) UpdateExpirationForHITRequest
+	Input *types.UpdateExpirationForHITInput
+	Copy  func(*types.UpdateExpirationForHITInput) UpdateExpirationForHITRequest
 }
 
 // Send marshals and sends the UpdateExpirationForHIT API request.
@@ -108,7 +58,7 @@ func (r UpdateExpirationForHITRequest) Send(ctx context.Context) (*UpdateExpirat
 	}
 
 	resp := &UpdateExpirationForHITResponse{
-		UpdateExpirationForHITOutput: r.Request.Data.(*UpdateExpirationForHITOutput),
+		UpdateExpirationForHITOutput: r.Request.Data.(*types.UpdateExpirationForHITOutput),
 		response:                     &aws.Response{Request: r.Request},
 	}
 
@@ -118,7 +68,7 @@ func (r UpdateExpirationForHITRequest) Send(ctx context.Context) (*UpdateExpirat
 // UpdateExpirationForHITResponse is the response type for the
 // UpdateExpirationForHIT API operation.
 type UpdateExpirationForHITResponse struct {
-	*UpdateExpirationForHITOutput
+	*types.UpdateExpirationForHITOutput
 
 	response *aws.Response
 }

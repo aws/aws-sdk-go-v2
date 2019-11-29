@@ -6,59 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/inspector/types"
 )
-
-type DescribeAssessmentTargetsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ARNs that specifies the assessment targets that you want to describe.
-	//
-	// AssessmentTargetArns is a required field
-	AssessmentTargetArns []string `locationName:"assessmentTargetArns" min:"1" type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeAssessmentTargetsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeAssessmentTargetsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeAssessmentTargetsInput"}
-
-	if s.AssessmentTargetArns == nil {
-		invalidParams.Add(aws.NewErrParamRequired("AssessmentTargetArns"))
-	}
-	if s.AssessmentTargetArns != nil && len(s.AssessmentTargetArns) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("AssessmentTargetArns", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribeAssessmentTargetsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Information about the assessment targets.
-	//
-	// AssessmentTargets is a required field
-	AssessmentTargets []AssessmentTarget `locationName:"assessmentTargets" type:"list" required:"true"`
-
-	// Assessment target details that cannot be described. An error code is provided
-	// for each failed item.
-	//
-	// FailedItems is a required field
-	FailedItems map[string]FailedItemDetails `locationName:"failedItems" type:"map" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeAssessmentTargetsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeAssessmentTargets = "DescribeAssessmentTargets"
 
@@ -76,7 +25,7 @@ const opDescribeAssessmentTargets = "DescribeAssessmentTargets"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/DescribeAssessmentTargets
-func (c *Client) DescribeAssessmentTargetsRequest(input *DescribeAssessmentTargetsInput) DescribeAssessmentTargetsRequest {
+func (c *Client) DescribeAssessmentTargetsRequest(input *types.DescribeAssessmentTargetsInput) DescribeAssessmentTargetsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeAssessmentTargets,
 		HTTPMethod: "POST",
@@ -84,10 +33,10 @@ func (c *Client) DescribeAssessmentTargetsRequest(input *DescribeAssessmentTarge
 	}
 
 	if input == nil {
-		input = &DescribeAssessmentTargetsInput{}
+		input = &types.DescribeAssessmentTargetsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeAssessmentTargetsOutput{})
+	req := c.newRequest(op, input, &types.DescribeAssessmentTargetsOutput{})
 	return DescribeAssessmentTargetsRequest{Request: req, Input: input, Copy: c.DescribeAssessmentTargetsRequest}
 }
 
@@ -95,8 +44,8 @@ func (c *Client) DescribeAssessmentTargetsRequest(input *DescribeAssessmentTarge
 // DescribeAssessmentTargets API operation.
 type DescribeAssessmentTargetsRequest struct {
 	*aws.Request
-	Input *DescribeAssessmentTargetsInput
-	Copy  func(*DescribeAssessmentTargetsInput) DescribeAssessmentTargetsRequest
+	Input *types.DescribeAssessmentTargetsInput
+	Copy  func(*types.DescribeAssessmentTargetsInput) DescribeAssessmentTargetsRequest
 }
 
 // Send marshals and sends the DescribeAssessmentTargets API request.
@@ -108,7 +57,7 @@ func (r DescribeAssessmentTargetsRequest) Send(ctx context.Context) (*DescribeAs
 	}
 
 	resp := &DescribeAssessmentTargetsResponse{
-		DescribeAssessmentTargetsOutput: r.Request.Data.(*DescribeAssessmentTargetsOutput),
+		DescribeAssessmentTargetsOutput: r.Request.Data.(*types.DescribeAssessmentTargetsOutput),
 		response:                        &aws.Response{Request: r.Request},
 	}
 
@@ -118,7 +67,7 @@ func (r DescribeAssessmentTargetsRequest) Send(ctx context.Context) (*DescribeAs
 // DescribeAssessmentTargetsResponse is the response type for the
 // DescribeAssessmentTargets API operation.
 type DescribeAssessmentTargetsResponse struct {
-	*DescribeAssessmentTargetsOutput
+	*types.DescribeAssessmentTargetsOutput
 
 	response *aws.Response
 }

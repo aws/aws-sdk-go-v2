@@ -6,79 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/eventbridge/types"
 )
-
-type RemoveTargetsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the event bus associated with the rule.
-	EventBusName *string `min:"1" type:"string"`
-
-	// If this is a managed rule created by an AWS service on your behalf, you must
-	// specify Force as True to remove targets. This parameter is ignored for rules
-	// that aren't managed rules. You can check whether a rule is a managed rule
-	// by using DescribeRule or ListRules and checking the ManagedBy field of the
-	// response.
-	Force *bool `type:"boolean"`
-
-	// The IDs of the targets to remove from the rule.
-	//
-	// Ids is a required field
-	Ids []string `min:"1" type:"list" required:"true"`
-
-	// The name of the rule.
-	//
-	// Rule is a required field
-	Rule *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s RemoveTargetsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *RemoveTargetsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "RemoveTargetsInput"}
-	if s.EventBusName != nil && len(*s.EventBusName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("EventBusName", 1))
-	}
-
-	if s.Ids == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Ids"))
-	}
-	if s.Ids != nil && len(s.Ids) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Ids", 1))
-	}
-
-	if s.Rule == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Rule"))
-	}
-	if s.Rule != nil && len(*s.Rule) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Rule", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type RemoveTargetsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The failed target entries.
-	FailedEntries []RemoveTargetsResultEntry `type:"list"`
-
-	// The number of failed entries.
-	FailedEntryCount *int64 `type:"integer"`
-}
-
-// String returns the string representation
-func (s RemoveTargetsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opRemoveTargets = "RemoveTargets"
 
@@ -105,7 +34,7 @@ const opRemoveTargets = "RemoveTargets"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/RemoveTargets
-func (c *Client) RemoveTargetsRequest(input *RemoveTargetsInput) RemoveTargetsRequest {
+func (c *Client) RemoveTargetsRequest(input *types.RemoveTargetsInput) RemoveTargetsRequest {
 	op := &aws.Operation{
 		Name:       opRemoveTargets,
 		HTTPMethod: "POST",
@@ -113,10 +42,10 @@ func (c *Client) RemoveTargetsRequest(input *RemoveTargetsInput) RemoveTargetsRe
 	}
 
 	if input == nil {
-		input = &RemoveTargetsInput{}
+		input = &types.RemoveTargetsInput{}
 	}
 
-	req := c.newRequest(op, input, &RemoveTargetsOutput{})
+	req := c.newRequest(op, input, &types.RemoveTargetsOutput{})
 	return RemoveTargetsRequest{Request: req, Input: input, Copy: c.RemoveTargetsRequest}
 }
 
@@ -124,8 +53,8 @@ func (c *Client) RemoveTargetsRequest(input *RemoveTargetsInput) RemoveTargetsRe
 // RemoveTargets API operation.
 type RemoveTargetsRequest struct {
 	*aws.Request
-	Input *RemoveTargetsInput
-	Copy  func(*RemoveTargetsInput) RemoveTargetsRequest
+	Input *types.RemoveTargetsInput
+	Copy  func(*types.RemoveTargetsInput) RemoveTargetsRequest
 }
 
 // Send marshals and sends the RemoveTargets API request.
@@ -137,7 +66,7 @@ func (r RemoveTargetsRequest) Send(ctx context.Context) (*RemoveTargetsResponse,
 	}
 
 	resp := &RemoveTargetsResponse{
-		RemoveTargetsOutput: r.Request.Data.(*RemoveTargetsOutput),
+		RemoveTargetsOutput: r.Request.Data.(*types.RemoveTargetsOutput),
 		response:            &aws.Response{Request: r.Request},
 	}
 
@@ -147,7 +76,7 @@ func (r RemoveTargetsRequest) Send(ctx context.Context) (*RemoveTargetsResponse,
 // RemoveTargetsResponse is the response type for the
 // RemoveTargets API operation.
 type RemoveTargetsResponse struct {
-	*RemoveTargetsOutput
+	*types.RemoveTargetsOutput
 
 	response *aws.Response
 }

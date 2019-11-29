@@ -4,47 +4,10 @@ package applicationdiscoveryservice
 
 import (
 	"context"
-	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/applicationdiscoveryservice/types"
 )
-
-type StartContinuousExportInput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s StartContinuousExportInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type StartContinuousExportOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The type of data collector used to gather this data (currently only offered
-	// for AGENT).
-	DataSource DataSource `locationName:"dataSource" type:"string" enum:"true"`
-
-	// The unique ID assigned to this export.
-	ExportId *string `locationName:"exportId" type:"string"`
-
-	// The name of the s3 bucket where the export data parquet files are stored.
-	S3Bucket *string `locationName:"s3Bucket" type:"string"`
-
-	// A dictionary which describes how the data is stored.
-	//
-	//    * databaseName - the name of the Glue database used to store the schema.
-	SchemaStorageConfig map[string]string `locationName:"schemaStorageConfig" type:"map"`
-
-	// The timestamp representing when the continuous export was started.
-	StartTime *time.Time `locationName:"startTime" type:"timestamp"`
-}
-
-// String returns the string representation
-func (s StartContinuousExportOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opStartContinuousExport = "StartContinuousExport"
 
@@ -61,7 +24,7 @@ const opStartContinuousExport = "StartContinuousExport"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/discovery-2015-11-01/StartContinuousExport
-func (c *Client) StartContinuousExportRequest(input *StartContinuousExportInput) StartContinuousExportRequest {
+func (c *Client) StartContinuousExportRequest(input *types.StartContinuousExportInput) StartContinuousExportRequest {
 	op := &aws.Operation{
 		Name:       opStartContinuousExport,
 		HTTPMethod: "POST",
@@ -69,10 +32,10 @@ func (c *Client) StartContinuousExportRequest(input *StartContinuousExportInput)
 	}
 
 	if input == nil {
-		input = &StartContinuousExportInput{}
+		input = &types.StartContinuousExportInput{}
 	}
 
-	req := c.newRequest(op, input, &StartContinuousExportOutput{})
+	req := c.newRequest(op, input, &types.StartContinuousExportOutput{})
 	return StartContinuousExportRequest{Request: req, Input: input, Copy: c.StartContinuousExportRequest}
 }
 
@@ -80,8 +43,8 @@ func (c *Client) StartContinuousExportRequest(input *StartContinuousExportInput)
 // StartContinuousExport API operation.
 type StartContinuousExportRequest struct {
 	*aws.Request
-	Input *StartContinuousExportInput
-	Copy  func(*StartContinuousExportInput) StartContinuousExportRequest
+	Input *types.StartContinuousExportInput
+	Copy  func(*types.StartContinuousExportInput) StartContinuousExportRequest
 }
 
 // Send marshals and sends the StartContinuousExport API request.
@@ -93,7 +56,7 @@ func (r StartContinuousExportRequest) Send(ctx context.Context) (*StartContinuou
 	}
 
 	resp := &StartContinuousExportResponse{
-		StartContinuousExportOutput: r.Request.Data.(*StartContinuousExportOutput),
+		StartContinuousExportOutput: r.Request.Data.(*types.StartContinuousExportOutput),
 		response:                    &aws.Response{Request: r.Request},
 	}
 
@@ -103,7 +66,7 @@ func (r StartContinuousExportRequest) Send(ctx context.Context) (*StartContinuou
 // StartContinuousExportResponse is the response type for the
 // StartContinuousExport API operation.
 type StartContinuousExportResponse struct {
-	*StartContinuousExportOutput
+	*types.StartContinuousExportOutput
 
 	response *aws.Response
 }

@@ -6,63 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-type DetachClassicLinkVpcInput struct {
-	_ struct{} `type:"structure"`
-
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have
-	// the required permissions, the error response is DryRunOperation. Otherwise,
-	// it is UnauthorizedOperation.
-	DryRun *bool `locationName:"dryRun" type:"boolean"`
-
-	// The ID of the instance to unlink from the VPC.
-	//
-	// InstanceId is a required field
-	InstanceId *string `locationName:"instanceId" type:"string" required:"true"`
-
-	// The ID of the VPC to which the instance is linked.
-	//
-	// VpcId is a required field
-	VpcId *string `locationName:"vpcId" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DetachClassicLinkVpcInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DetachClassicLinkVpcInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DetachClassicLinkVpcInput"}
-
-	if s.InstanceId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("InstanceId"))
-	}
-
-	if s.VpcId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("VpcId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DetachClassicLinkVpcOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Returns true if the request succeeds; otherwise, it returns an error.
-	Return *bool `locationName:"return" type:"boolean"`
-}
-
-// String returns the string representation
-func (s DetachClassicLinkVpcOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDetachClassicLinkVpc = "DetachClassicLinkVpc"
 
@@ -81,7 +26,7 @@ const opDetachClassicLinkVpc = "DetachClassicLinkVpc"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DetachClassicLinkVpc
-func (c *Client) DetachClassicLinkVpcRequest(input *DetachClassicLinkVpcInput) DetachClassicLinkVpcRequest {
+func (c *Client) DetachClassicLinkVpcRequest(input *types.DetachClassicLinkVpcInput) DetachClassicLinkVpcRequest {
 	op := &aws.Operation{
 		Name:       opDetachClassicLinkVpc,
 		HTTPMethod: "POST",
@@ -89,10 +34,10 @@ func (c *Client) DetachClassicLinkVpcRequest(input *DetachClassicLinkVpcInput) D
 	}
 
 	if input == nil {
-		input = &DetachClassicLinkVpcInput{}
+		input = &types.DetachClassicLinkVpcInput{}
 	}
 
-	req := c.newRequest(op, input, &DetachClassicLinkVpcOutput{})
+	req := c.newRequest(op, input, &types.DetachClassicLinkVpcOutput{})
 	return DetachClassicLinkVpcRequest{Request: req, Input: input, Copy: c.DetachClassicLinkVpcRequest}
 }
 
@@ -100,8 +45,8 @@ func (c *Client) DetachClassicLinkVpcRequest(input *DetachClassicLinkVpcInput) D
 // DetachClassicLinkVpc API operation.
 type DetachClassicLinkVpcRequest struct {
 	*aws.Request
-	Input *DetachClassicLinkVpcInput
-	Copy  func(*DetachClassicLinkVpcInput) DetachClassicLinkVpcRequest
+	Input *types.DetachClassicLinkVpcInput
+	Copy  func(*types.DetachClassicLinkVpcInput) DetachClassicLinkVpcRequest
 }
 
 // Send marshals and sends the DetachClassicLinkVpc API request.
@@ -113,7 +58,7 @@ func (r DetachClassicLinkVpcRequest) Send(ctx context.Context) (*DetachClassicLi
 	}
 
 	resp := &DetachClassicLinkVpcResponse{
-		DetachClassicLinkVpcOutput: r.Request.Data.(*DetachClassicLinkVpcOutput),
+		DetachClassicLinkVpcOutput: r.Request.Data.(*types.DetachClassicLinkVpcOutput),
 		response:                   &aws.Response{Request: r.Request},
 	}
 
@@ -123,7 +68,7 @@ func (r DetachClassicLinkVpcRequest) Send(ctx context.Context) (*DetachClassicLi
 // DetachClassicLinkVpcResponse is the response type for the
 // DetachClassicLinkVpc API operation.
 type DetachClassicLinkVpcResponse struct {
-	*DetachClassicLinkVpcOutput
+	*types.DetachClassicLinkVpcOutput
 
 	response *aws.Response
 }

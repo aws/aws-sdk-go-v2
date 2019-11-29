@@ -6,78 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/iot1clickprojects/types"
 )
-
-type DescribeProjectInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the project to be described.
-	//
-	// ProjectName is a required field
-	ProjectName *string `location:"uri" locationName:"projectName" min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeProjectInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeProjectInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeProjectInput"}
-
-	if s.ProjectName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ProjectName"))
-	}
-	if s.ProjectName != nil && len(*s.ProjectName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ProjectName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DescribeProjectInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.ProjectName != nil {
-		v := *s.ProjectName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "projectName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type DescribeProjectOutput struct {
-	_ struct{} `type:"structure"`
-
-	// An object describing the project.
-	//
-	// Project is a required field
-	Project *ProjectDescription `locationName:"project" type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeProjectOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DescribeProjectOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.Project != nil {
-		v := s.Project
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "project", v, metadata)
-	}
-	return nil
-}
 
 const opDescribeProject = "DescribeProject"
 
@@ -94,7 +24,7 @@ const opDescribeProject = "DescribeProject"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iot1click-projects-2018-05-14/DescribeProject
-func (c *Client) DescribeProjectRequest(input *DescribeProjectInput) DescribeProjectRequest {
+func (c *Client) DescribeProjectRequest(input *types.DescribeProjectInput) DescribeProjectRequest {
 	op := &aws.Operation{
 		Name:       opDescribeProject,
 		HTTPMethod: "GET",
@@ -102,10 +32,10 @@ func (c *Client) DescribeProjectRequest(input *DescribeProjectInput) DescribePro
 	}
 
 	if input == nil {
-		input = &DescribeProjectInput{}
+		input = &types.DescribeProjectInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeProjectOutput{})
+	req := c.newRequest(op, input, &types.DescribeProjectOutput{})
 	return DescribeProjectRequest{Request: req, Input: input, Copy: c.DescribeProjectRequest}
 }
 
@@ -113,8 +43,8 @@ func (c *Client) DescribeProjectRequest(input *DescribeProjectInput) DescribePro
 // DescribeProject API operation.
 type DescribeProjectRequest struct {
 	*aws.Request
-	Input *DescribeProjectInput
-	Copy  func(*DescribeProjectInput) DescribeProjectRequest
+	Input *types.DescribeProjectInput
+	Copy  func(*types.DescribeProjectInput) DescribeProjectRequest
 }
 
 // Send marshals and sends the DescribeProject API request.
@@ -126,7 +56,7 @@ func (r DescribeProjectRequest) Send(ctx context.Context) (*DescribeProjectRespo
 	}
 
 	resp := &DescribeProjectResponse{
-		DescribeProjectOutput: r.Request.Data.(*DescribeProjectOutput),
+		DescribeProjectOutput: r.Request.Data.(*types.DescribeProjectOutput),
 		response:              &aws.Response{Request: r.Request},
 	}
 
@@ -136,7 +66,7 @@ func (r DescribeProjectRequest) Send(ctx context.Context) (*DescribeProjectRespo
 // DescribeProjectResponse is the response type for the
 // DescribeProject API operation.
 type DescribeProjectResponse struct {
-	*DescribeProjectOutput
+	*types.DescribeProjectOutput
 
 	response *aws.Response
 }

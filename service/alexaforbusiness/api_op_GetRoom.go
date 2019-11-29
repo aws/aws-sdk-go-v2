@@ -6,32 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/alexaforbusiness/types"
 )
-
-type GetRoomInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ARN of the room for which to request details. Required.
-	RoomArn *string `type:"string"`
-}
-
-// String returns the string representation
-func (s GetRoomInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type GetRoomOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The details of the room requested.
-	Room *Room `type:"structure"`
-}
-
-// String returns the string representation
-func (s GetRoomOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetRoom = "GetRoom"
 
@@ -48,7 +24,7 @@ const opGetRoom = "GetRoom"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/GetRoom
-func (c *Client) GetRoomRequest(input *GetRoomInput) GetRoomRequest {
+func (c *Client) GetRoomRequest(input *types.GetRoomInput) GetRoomRequest {
 	op := &aws.Operation{
 		Name:       opGetRoom,
 		HTTPMethod: "POST",
@@ -56,10 +32,10 @@ func (c *Client) GetRoomRequest(input *GetRoomInput) GetRoomRequest {
 	}
 
 	if input == nil {
-		input = &GetRoomInput{}
+		input = &types.GetRoomInput{}
 	}
 
-	req := c.newRequest(op, input, &GetRoomOutput{})
+	req := c.newRequest(op, input, &types.GetRoomOutput{})
 	return GetRoomRequest{Request: req, Input: input, Copy: c.GetRoomRequest}
 }
 
@@ -67,8 +43,8 @@ func (c *Client) GetRoomRequest(input *GetRoomInput) GetRoomRequest {
 // GetRoom API operation.
 type GetRoomRequest struct {
 	*aws.Request
-	Input *GetRoomInput
-	Copy  func(*GetRoomInput) GetRoomRequest
+	Input *types.GetRoomInput
+	Copy  func(*types.GetRoomInput) GetRoomRequest
 }
 
 // Send marshals and sends the GetRoom API request.
@@ -80,7 +56,7 @@ func (r GetRoomRequest) Send(ctx context.Context) (*GetRoomResponse, error) {
 	}
 
 	resp := &GetRoomResponse{
-		GetRoomOutput: r.Request.Data.(*GetRoomOutput),
+		GetRoomOutput: r.Request.Data.(*types.GetRoomOutput),
 		response:      &aws.Response{Request: r.Request},
 	}
 
@@ -90,7 +66,7 @@ func (r GetRoomRequest) Send(ctx context.Context) (*GetRoomResponse, error) {
 // GetRoomResponse is the response type for the
 // GetRoom API operation.
 type GetRoomResponse struct {
-	*GetRoomOutput
+	*types.GetRoomOutput
 
 	response *aws.Response
 }

@@ -6,54 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/codecommit/types"
 )
-
-// Represents the input of a get branch operation.
-type GetBranchInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the branch for which you want to retrieve information.
-	BranchName *string `locationName:"branchName" min:"1" type:"string"`
-
-	// The name of the repository that contains the branch for which you want to
-	// retrieve information.
-	RepositoryName *string `locationName:"repositoryName" min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s GetBranchInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetBranchInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetBranchInput"}
-	if s.BranchName != nil && len(*s.BranchName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("BranchName", 1))
-	}
-	if s.RepositoryName != nil && len(*s.RepositoryName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("RepositoryName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Represents the output of a get branch operation.
-type GetBranchOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the branch.
-	Branch *BranchInfo `locationName:"branch" type:"structure"`
-}
-
-// String returns the string representation
-func (s GetBranchOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetBranch = "GetBranch"
 
@@ -71,7 +25,7 @@ const opGetBranch = "GetBranch"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/GetBranch
-func (c *Client) GetBranchRequest(input *GetBranchInput) GetBranchRequest {
+func (c *Client) GetBranchRequest(input *types.GetBranchInput) GetBranchRequest {
 	op := &aws.Operation{
 		Name:       opGetBranch,
 		HTTPMethod: "POST",
@@ -79,10 +33,10 @@ func (c *Client) GetBranchRequest(input *GetBranchInput) GetBranchRequest {
 	}
 
 	if input == nil {
-		input = &GetBranchInput{}
+		input = &types.GetBranchInput{}
 	}
 
-	req := c.newRequest(op, input, &GetBranchOutput{})
+	req := c.newRequest(op, input, &types.GetBranchOutput{})
 	return GetBranchRequest{Request: req, Input: input, Copy: c.GetBranchRequest}
 }
 
@@ -90,8 +44,8 @@ func (c *Client) GetBranchRequest(input *GetBranchInput) GetBranchRequest {
 // GetBranch API operation.
 type GetBranchRequest struct {
 	*aws.Request
-	Input *GetBranchInput
-	Copy  func(*GetBranchInput) GetBranchRequest
+	Input *types.GetBranchInput
+	Copy  func(*types.GetBranchInput) GetBranchRequest
 }
 
 // Send marshals and sends the GetBranch API request.
@@ -103,7 +57,7 @@ func (r GetBranchRequest) Send(ctx context.Context) (*GetBranchResponse, error) 
 	}
 
 	resp := &GetBranchResponse{
-		GetBranchOutput: r.Request.Data.(*GetBranchOutput),
+		GetBranchOutput: r.Request.Data.(*types.GetBranchOutput),
 		response:        &aws.Response{Request: r.Request},
 	}
 
@@ -113,7 +67,7 @@ func (r GetBranchRequest) Send(ctx context.Context) (*GetBranchResponse, error) 
 // GetBranchResponse is the response type for the
 // GetBranch API operation.
 type GetBranchResponse struct {
-	*GetBranchOutput
+	*types.GetBranchOutput
 
 	response *aws.Response
 }

@@ -6,69 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/workmail/types"
 )
-
-type AssociateMemberToGroupInput struct {
-	_ struct{} `type:"structure"`
-
-	// The group to which the member (user or group) is associated.
-	//
-	// GroupId is a required field
-	GroupId *string `min:"12" type:"string" required:"true"`
-
-	// The member (user or group) to associate to the group.
-	//
-	// MemberId is a required field
-	MemberId *string `min:"12" type:"string" required:"true"`
-
-	// The organization under which the group exists.
-	//
-	// OrganizationId is a required field
-	OrganizationId *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s AssociateMemberToGroupInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *AssociateMemberToGroupInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "AssociateMemberToGroupInput"}
-
-	if s.GroupId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("GroupId"))
-	}
-	if s.GroupId != nil && len(*s.GroupId) < 12 {
-		invalidParams.Add(aws.NewErrParamMinLen("GroupId", 12))
-	}
-
-	if s.MemberId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("MemberId"))
-	}
-	if s.MemberId != nil && len(*s.MemberId) < 12 {
-		invalidParams.Add(aws.NewErrParamMinLen("MemberId", 12))
-	}
-
-	if s.OrganizationId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("OrganizationId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type AssociateMemberToGroupOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s AssociateMemberToGroupOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opAssociateMemberToGroup = "AssociateMemberToGroup"
 
@@ -85,7 +24,7 @@ const opAssociateMemberToGroup = "AssociateMemberToGroup"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/AssociateMemberToGroup
-func (c *Client) AssociateMemberToGroupRequest(input *AssociateMemberToGroupInput) AssociateMemberToGroupRequest {
+func (c *Client) AssociateMemberToGroupRequest(input *types.AssociateMemberToGroupInput) AssociateMemberToGroupRequest {
 	op := &aws.Operation{
 		Name:       opAssociateMemberToGroup,
 		HTTPMethod: "POST",
@@ -93,10 +32,10 @@ func (c *Client) AssociateMemberToGroupRequest(input *AssociateMemberToGroupInpu
 	}
 
 	if input == nil {
-		input = &AssociateMemberToGroupInput{}
+		input = &types.AssociateMemberToGroupInput{}
 	}
 
-	req := c.newRequest(op, input, &AssociateMemberToGroupOutput{})
+	req := c.newRequest(op, input, &types.AssociateMemberToGroupOutput{})
 	return AssociateMemberToGroupRequest{Request: req, Input: input, Copy: c.AssociateMemberToGroupRequest}
 }
 
@@ -104,8 +43,8 @@ func (c *Client) AssociateMemberToGroupRequest(input *AssociateMemberToGroupInpu
 // AssociateMemberToGroup API operation.
 type AssociateMemberToGroupRequest struct {
 	*aws.Request
-	Input *AssociateMemberToGroupInput
-	Copy  func(*AssociateMemberToGroupInput) AssociateMemberToGroupRequest
+	Input *types.AssociateMemberToGroupInput
+	Copy  func(*types.AssociateMemberToGroupInput) AssociateMemberToGroupRequest
 }
 
 // Send marshals and sends the AssociateMemberToGroup API request.
@@ -117,7 +56,7 @@ func (r AssociateMemberToGroupRequest) Send(ctx context.Context) (*AssociateMemb
 	}
 
 	resp := &AssociateMemberToGroupResponse{
-		AssociateMemberToGroupOutput: r.Request.Data.(*AssociateMemberToGroupOutput),
+		AssociateMemberToGroupOutput: r.Request.Data.(*types.AssociateMemberToGroupOutput),
 		response:                     &aws.Response{Request: r.Request},
 	}
 
@@ -127,7 +66,7 @@ func (r AssociateMemberToGroupRequest) Send(ctx context.Context) (*AssociateMemb
 // AssociateMemberToGroupResponse is the response type for the
 // AssociateMemberToGroup API operation.
 type AssociateMemberToGroupResponse struct {
-	*AssociateMemberToGroupOutput
+	*types.AssociateMemberToGroupOutput
 
 	response *aws.Response
 }

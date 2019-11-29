@@ -6,136 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/groundstation/types"
 )
-
-type GetConfigInput struct {
-	_ struct{} `type:"structure"`
-
-	// ConfigId is a required field
-	ConfigId *string `location:"uri" locationName:"configId" type:"string" required:"true"`
-
-	// ConfigType is a required field
-	ConfigType ConfigCapabilityType `location:"uri" locationName:"configType" type:"string" required:"true" enum:"true"`
-}
-
-// String returns the string representation
-func (s GetConfigInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetConfigInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetConfigInput"}
-
-	if s.ConfigId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ConfigId"))
-	}
-	if len(s.ConfigType) == 0 {
-		invalidParams.Add(aws.NewErrParamRequired("ConfigType"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetConfigInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.ConfigId != nil {
-		v := *s.ConfigId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "configId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if len(s.ConfigType) > 0 {
-		v := s.ConfigType
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "configType", protocol.QuotedValue{ValueMarshaler: v}, metadata)
-	}
-	return nil
-}
-
-type GetConfigOutput struct {
-	_ struct{} `type:"structure"`
-
-	// ConfigArn is a required field
-	ConfigArn *string `locationName:"configArn" type:"string" required:"true"`
-
-	// Object containing the parameters for a Config.
-	//
-	// See the subtype definitions for what each type of Config contains.
-	//
-	// ConfigData is a required field
-	ConfigData *ConfigTypeData `locationName:"configData" type:"structure" required:"true"`
-
-	// ConfigId is a required field
-	ConfigId *string `locationName:"configId" type:"string" required:"true"`
-
-	ConfigType ConfigCapabilityType `locationName:"configType" type:"string" enum:"true"`
-
-	// Name is a required field
-	Name *string `locationName:"name" type:"string" required:"true"`
-
-	Tags map[string]string `locationName:"tags" type:"map"`
-}
-
-// String returns the string representation
-func (s GetConfigOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetConfigOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.ConfigArn != nil {
-		v := *s.ConfigArn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "configArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.ConfigData != nil {
-		v := s.ConfigData
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "configData", v, metadata)
-	}
-	if s.ConfigId != nil {
-		v := *s.ConfigId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "configId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if len(s.ConfigType) > 0 {
-		v := s.ConfigType
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "configType", protocol.QuotedValue{ValueMarshaler: v}, metadata)
-	}
-	if s.Name != nil {
-		v := *s.Name
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Tags != nil {
-		v := s.Tags
-
-		metadata := protocol.Metadata{}
-		ms0 := e.Map(protocol.BodyTarget, "tags", metadata)
-		ms0.Start()
-		for k1, v1 := range v {
-			ms0.MapSetValue(k1, protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
-		}
-		ms0.End()
-
-	}
-	return nil
-}
 
 const opGetConfig = "GetConfig"
 
@@ -154,7 +26,7 @@ const opGetConfig = "GetConfig"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/groundstation-2019-05-23/GetConfig
-func (c *Client) GetConfigRequest(input *GetConfigInput) GetConfigRequest {
+func (c *Client) GetConfigRequest(input *types.GetConfigInput) GetConfigRequest {
 	op := &aws.Operation{
 		Name:       opGetConfig,
 		HTTPMethod: "GET",
@@ -162,10 +34,10 @@ func (c *Client) GetConfigRequest(input *GetConfigInput) GetConfigRequest {
 	}
 
 	if input == nil {
-		input = &GetConfigInput{}
+		input = &types.GetConfigInput{}
 	}
 
-	req := c.newRequest(op, input, &GetConfigOutput{})
+	req := c.newRequest(op, input, &types.GetConfigOutput{})
 	return GetConfigRequest{Request: req, Input: input, Copy: c.GetConfigRequest}
 }
 
@@ -173,8 +45,8 @@ func (c *Client) GetConfigRequest(input *GetConfigInput) GetConfigRequest {
 // GetConfig API operation.
 type GetConfigRequest struct {
 	*aws.Request
-	Input *GetConfigInput
-	Copy  func(*GetConfigInput) GetConfigRequest
+	Input *types.GetConfigInput
+	Copy  func(*types.GetConfigInput) GetConfigRequest
 }
 
 // Send marshals and sends the GetConfig API request.
@@ -186,7 +58,7 @@ func (r GetConfigRequest) Send(ctx context.Context) (*GetConfigResponse, error) 
 	}
 
 	resp := &GetConfigResponse{
-		GetConfigOutput: r.Request.Data.(*GetConfigOutput),
+		GetConfigOutput: r.Request.Data.(*types.GetConfigOutput),
 		response:        &aws.Response{Request: r.Request},
 	}
 
@@ -196,7 +68,7 @@ func (r GetConfigRequest) Send(ctx context.Context) (*GetConfigResponse, error) 
 // GetConfigResponse is the response type for the
 // GetConfig API operation.
 type GetConfigResponse struct {
-	*GetConfigOutput
+	*types.GetConfigOutput
 
 	response *aws.Response
 }

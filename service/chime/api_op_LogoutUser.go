@@ -6,79 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/chime/types"
 )
-
-type LogoutUserInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Chime account ID.
-	//
-	// AccountId is a required field
-	AccountId *string `location:"uri" locationName:"accountId" type:"string" required:"true"`
-
-	// The user ID.
-	//
-	// UserId is a required field
-	UserId *string `location:"uri" locationName:"userId" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s LogoutUserInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *LogoutUserInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "LogoutUserInput"}
-
-	if s.AccountId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("AccountId"))
-	}
-
-	if s.UserId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("UserId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s LogoutUserInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.AccountId != nil {
-		v := *s.AccountId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "accountId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.UserId != nil {
-		v := *s.UserId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "userId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type LogoutUserOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s LogoutUserOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s LogoutUserOutput) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
 
 const opLogoutUser = "LogoutUser"
 
@@ -96,7 +25,7 @@ const opLogoutUser = "LogoutUser"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/LogoutUser
-func (c *Client) LogoutUserRequest(input *LogoutUserInput) LogoutUserRequest {
+func (c *Client) LogoutUserRequest(input *types.LogoutUserInput) LogoutUserRequest {
 	op := &aws.Operation{
 		Name:       opLogoutUser,
 		HTTPMethod: "POST",
@@ -104,10 +33,10 @@ func (c *Client) LogoutUserRequest(input *LogoutUserInput) LogoutUserRequest {
 	}
 
 	if input == nil {
-		input = &LogoutUserInput{}
+		input = &types.LogoutUserInput{}
 	}
 
-	req := c.newRequest(op, input, &LogoutUserOutput{})
+	req := c.newRequest(op, input, &types.LogoutUserOutput{})
 	return LogoutUserRequest{Request: req, Input: input, Copy: c.LogoutUserRequest}
 }
 
@@ -115,8 +44,8 @@ func (c *Client) LogoutUserRequest(input *LogoutUserInput) LogoutUserRequest {
 // LogoutUser API operation.
 type LogoutUserRequest struct {
 	*aws.Request
-	Input *LogoutUserInput
-	Copy  func(*LogoutUserInput) LogoutUserRequest
+	Input *types.LogoutUserInput
+	Copy  func(*types.LogoutUserInput) LogoutUserRequest
 }
 
 // Send marshals and sends the LogoutUser API request.
@@ -128,7 +57,7 @@ func (r LogoutUserRequest) Send(ctx context.Context) (*LogoutUserResponse, error
 	}
 
 	resp := &LogoutUserResponse{
-		LogoutUserOutput: r.Request.Data.(*LogoutUserOutput),
+		LogoutUserOutput: r.Request.Data.(*types.LogoutUserOutput),
 		response:         &aws.Response{Request: r.Request},
 	}
 
@@ -138,7 +67,7 @@ func (r LogoutUserRequest) Send(ctx context.Context) (*LogoutUserResponse, error
 // LogoutUserResponse is the response type for the
 // LogoutUser API operation.
 type LogoutUserResponse struct {
-	*LogoutUserOutput
+	*types.LogoutUserOutput
 
 	response *aws.Response
 }

@@ -6,86 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/iot/types"
 )
-
-// The input for the DetachThingPrincipal operation.
-type DetachThingPrincipalInput struct {
-	_ struct{} `type:"structure"`
-
-	// If the principal is a certificate, this value must be ARN of the certificate.
-	// If the principal is an Amazon Cognito identity, this value must be the ID
-	// of the Amazon Cognito identity.
-	//
-	// Principal is a required field
-	Principal *string `location:"header" locationName:"x-amzn-principal" type:"string" required:"true"`
-
-	// The name of the thing.
-	//
-	// ThingName is a required field
-	ThingName *string `location:"uri" locationName:"thingName" min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DetachThingPrincipalInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DetachThingPrincipalInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DetachThingPrincipalInput"}
-
-	if s.Principal == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Principal"))
-	}
-
-	if s.ThingName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ThingName"))
-	}
-	if s.ThingName != nil && len(*s.ThingName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ThingName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DetachThingPrincipalInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.Principal != nil {
-		v := *s.Principal
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "x-amzn-principal", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.ThingName != nil {
-		v := *s.ThingName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "thingName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-// The output from the DetachThingPrincipal operation.
-type DetachThingPrincipalOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DetachThingPrincipalOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DetachThingPrincipalOutput) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
 
 const opDetachThingPrincipal = "DetachThingPrincipal"
 
@@ -105,7 +27,7 @@ const opDetachThingPrincipal = "DetachThingPrincipal"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) DetachThingPrincipalRequest(input *DetachThingPrincipalInput) DetachThingPrincipalRequest {
+func (c *Client) DetachThingPrincipalRequest(input *types.DetachThingPrincipalInput) DetachThingPrincipalRequest {
 	op := &aws.Operation{
 		Name:       opDetachThingPrincipal,
 		HTTPMethod: "DELETE",
@@ -113,10 +35,10 @@ func (c *Client) DetachThingPrincipalRequest(input *DetachThingPrincipalInput) D
 	}
 
 	if input == nil {
-		input = &DetachThingPrincipalInput{}
+		input = &types.DetachThingPrincipalInput{}
 	}
 
-	req := c.newRequest(op, input, &DetachThingPrincipalOutput{})
+	req := c.newRequest(op, input, &types.DetachThingPrincipalOutput{})
 	return DetachThingPrincipalRequest{Request: req, Input: input, Copy: c.DetachThingPrincipalRequest}
 }
 
@@ -124,8 +46,8 @@ func (c *Client) DetachThingPrincipalRequest(input *DetachThingPrincipalInput) D
 // DetachThingPrincipal API operation.
 type DetachThingPrincipalRequest struct {
 	*aws.Request
-	Input *DetachThingPrincipalInput
-	Copy  func(*DetachThingPrincipalInput) DetachThingPrincipalRequest
+	Input *types.DetachThingPrincipalInput
+	Copy  func(*types.DetachThingPrincipalInput) DetachThingPrincipalRequest
 }
 
 // Send marshals and sends the DetachThingPrincipal API request.
@@ -137,7 +59,7 @@ func (r DetachThingPrincipalRequest) Send(ctx context.Context) (*DetachThingPrin
 	}
 
 	resp := &DetachThingPrincipalResponse{
-		DetachThingPrincipalOutput: r.Request.Data.(*DetachThingPrincipalOutput),
+		DetachThingPrincipalOutput: r.Request.Data.(*types.DetachThingPrincipalOutput),
 		response:                   &aws.Response{Request: r.Request},
 	}
 
@@ -147,7 +69,7 @@ func (r DetachThingPrincipalRequest) Send(ctx context.Context) (*DetachThingPrin
 // DetachThingPrincipalResponse is the response type for the
 // DetachThingPrincipal API operation.
 type DetachThingPrincipalResponse struct {
-	*DetachThingPrincipalOutput
+	*types.DetachThingPrincipalOutput
 
 	response *aws.Response
 }

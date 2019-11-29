@@ -4,76 +4,10 @@ package workmailmessageflow
 
 import (
 	"context"
-	"io"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/workmailmessageflow/types"
 )
-
-type GetRawMessageContentInput struct {
-	_ struct{} `type:"structure"`
-
-	// The identifier of the email message to retrieve.
-	//
-	// MessageId is a required field
-	MessageId *string `location:"uri" locationName:"messageId" min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetRawMessageContentInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetRawMessageContentInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetRawMessageContentInput"}
-
-	if s.MessageId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("MessageId"))
-	}
-	if s.MessageId != nil && len(*s.MessageId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("MessageId", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetRawMessageContentInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.MessageId != nil {
-		v := *s.MessageId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "messageId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type GetRawMessageContentOutput struct {
-	_ struct{} `type:"structure" payload:"MessageContent"`
-
-	// The raw content of the email message, in MIME format.
-	//
-	// MessageContent is a required field
-	MessageContent io.ReadCloser `locationName:"messageContent" type:"blob" required:"true"`
-}
-
-// String returns the string representation
-func (s GetRawMessageContentOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetRawMessageContentOutput) MarshalFields(e protocol.FieldEncoder) error {
-	// Skipping MessageContent Output type's body not valid.
-	return nil
-}
 
 const opGetRawMessageContent = "GetRawMessageContent"
 
@@ -90,7 +24,7 @@ const opGetRawMessageContent = "GetRawMessageContent"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workmailmessageflow-2019-05-01/GetRawMessageContent
-func (c *Client) GetRawMessageContentRequest(input *GetRawMessageContentInput) GetRawMessageContentRequest {
+func (c *Client) GetRawMessageContentRequest(input *types.GetRawMessageContentInput) GetRawMessageContentRequest {
 	op := &aws.Operation{
 		Name:       opGetRawMessageContent,
 		HTTPMethod: "GET",
@@ -98,10 +32,10 @@ func (c *Client) GetRawMessageContentRequest(input *GetRawMessageContentInput) G
 	}
 
 	if input == nil {
-		input = &GetRawMessageContentInput{}
+		input = &types.GetRawMessageContentInput{}
 	}
 
-	req := c.newRequest(op, input, &GetRawMessageContentOutput{})
+	req := c.newRequest(op, input, &types.GetRawMessageContentOutput{})
 	return GetRawMessageContentRequest{Request: req, Input: input, Copy: c.GetRawMessageContentRequest}
 }
 
@@ -109,8 +43,8 @@ func (c *Client) GetRawMessageContentRequest(input *GetRawMessageContentInput) G
 // GetRawMessageContent API operation.
 type GetRawMessageContentRequest struct {
 	*aws.Request
-	Input *GetRawMessageContentInput
-	Copy  func(*GetRawMessageContentInput) GetRawMessageContentRequest
+	Input *types.GetRawMessageContentInput
+	Copy  func(*types.GetRawMessageContentInput) GetRawMessageContentRequest
 }
 
 // Send marshals and sends the GetRawMessageContent API request.
@@ -122,7 +56,7 @@ func (r GetRawMessageContentRequest) Send(ctx context.Context) (*GetRawMessageCo
 	}
 
 	resp := &GetRawMessageContentResponse{
-		GetRawMessageContentOutput: r.Request.Data.(*GetRawMessageContentOutput),
+		GetRawMessageContentOutput: r.Request.Data.(*types.GetRawMessageContentOutput),
 		response:                   &aws.Response{Request: r.Request},
 	}
 
@@ -132,7 +66,7 @@ func (r GetRawMessageContentRequest) Send(ctx context.Context) (*GetRawMessageCo
 // GetRawMessageContentResponse is the response type for the
 // GetRawMessageContent API operation.
 type GetRawMessageContentResponse struct {
-	*GetRawMessageContentOutput
+	*types.GetRawMessageContentOutput
 
 	response *aws.Response
 }

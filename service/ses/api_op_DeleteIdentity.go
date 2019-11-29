@@ -6,48 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ses/types"
 )
-
-// Represents a request to delete one of your Amazon SES identities (an email
-// address or domain).
-type DeleteIdentityInput struct {
-	_ struct{} `type:"structure"`
-
-	// The identity to be removed from the list of identities for the AWS Account.
-	//
-	// Identity is a required field
-	Identity *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteIdentityInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteIdentityInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteIdentityInput"}
-
-	if s.Identity == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Identity"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// An empty element returned on a successful request.
-type DeleteIdentityOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteIdentityOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteIdentity = "DeleteIdentity"
 
@@ -67,7 +27,7 @@ const opDeleteIdentity = "DeleteIdentity"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/DeleteIdentity
-func (c *Client) DeleteIdentityRequest(input *DeleteIdentityInput) DeleteIdentityRequest {
+func (c *Client) DeleteIdentityRequest(input *types.DeleteIdentityInput) DeleteIdentityRequest {
 	op := &aws.Operation{
 		Name:       opDeleteIdentity,
 		HTTPMethod: "POST",
@@ -75,10 +35,10 @@ func (c *Client) DeleteIdentityRequest(input *DeleteIdentityInput) DeleteIdentit
 	}
 
 	if input == nil {
-		input = &DeleteIdentityInput{}
+		input = &types.DeleteIdentityInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteIdentityOutput{})
+	req := c.newRequest(op, input, &types.DeleteIdentityOutput{})
 	return DeleteIdentityRequest{Request: req, Input: input, Copy: c.DeleteIdentityRequest}
 }
 
@@ -86,8 +46,8 @@ func (c *Client) DeleteIdentityRequest(input *DeleteIdentityInput) DeleteIdentit
 // DeleteIdentity API operation.
 type DeleteIdentityRequest struct {
 	*aws.Request
-	Input *DeleteIdentityInput
-	Copy  func(*DeleteIdentityInput) DeleteIdentityRequest
+	Input *types.DeleteIdentityInput
+	Copy  func(*types.DeleteIdentityInput) DeleteIdentityRequest
 }
 
 // Send marshals and sends the DeleteIdentity API request.
@@ -99,7 +59,7 @@ func (r DeleteIdentityRequest) Send(ctx context.Context) (*DeleteIdentityRespons
 	}
 
 	resp := &DeleteIdentityResponse{
-		DeleteIdentityOutput: r.Request.Data.(*DeleteIdentityOutput),
+		DeleteIdentityOutput: r.Request.Data.(*types.DeleteIdentityOutput),
 		response:             &aws.Response{Request: r.Request},
 	}
 
@@ -109,7 +69,7 @@ func (r DeleteIdentityRequest) Send(ctx context.Context) (*DeleteIdentityRespons
 // DeleteIdentityResponse is the response type for the
 // DeleteIdentity API operation.
 type DeleteIdentityResponse struct {
-	*DeleteIdentityOutput
+	*types.DeleteIdentityOutput
 
 	response *aws.Response
 }

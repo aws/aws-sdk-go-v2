@@ -6,72 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-type DescribeClientVpnConnectionsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the Client VPN endpoint.
-	//
-	// ClientVpnEndpointId is a required field
-	ClientVpnEndpointId *string `type:"string" required:"true"`
-
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have
-	// the required permissions, the error response is DryRunOperation. Otherwise,
-	// it is UnauthorizedOperation.
-	DryRun *bool `type:"boolean"`
-
-	// One or more filters. Filter names and values are case-sensitive.
-	Filters []Filter `locationName:"Filter" locationNameList:"Filter" type:"list"`
-
-	// The maximum number of results to return for the request in a single page.
-	// The remaining results can be seen by sending another request with the nextToken
-	// value.
-	MaxResults *int64 `min:"5" type:"integer"`
-
-	// The token to retrieve the next page of results.
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeClientVpnConnectionsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeClientVpnConnectionsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeClientVpnConnectionsInput"}
-
-	if s.ClientVpnEndpointId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ClientVpnEndpointId"))
-	}
-	if s.MaxResults != nil && *s.MaxResults < 5 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 5))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribeClientVpnConnectionsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Information about the active and terminated client connections.
-	Connections []VpnConnection `locationName:"connections" locationNameList:"item" type:"list"`
-
-	// The token to use to retrieve the next page of results. This value is null
-	// when there are no more results to return.
-	NextToken *string `locationName:"nextToken" type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeClientVpnConnectionsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeClientVpnConnections = "DescribeClientVpnConnections"
 
@@ -89,7 +25,7 @@ const opDescribeClientVpnConnections = "DescribeClientVpnConnections"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeClientVpnConnections
-func (c *Client) DescribeClientVpnConnectionsRequest(input *DescribeClientVpnConnectionsInput) DescribeClientVpnConnectionsRequest {
+func (c *Client) DescribeClientVpnConnectionsRequest(input *types.DescribeClientVpnConnectionsInput) DescribeClientVpnConnectionsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeClientVpnConnections,
 		HTTPMethod: "POST",
@@ -103,10 +39,10 @@ func (c *Client) DescribeClientVpnConnectionsRequest(input *DescribeClientVpnCon
 	}
 
 	if input == nil {
-		input = &DescribeClientVpnConnectionsInput{}
+		input = &types.DescribeClientVpnConnectionsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeClientVpnConnectionsOutput{})
+	req := c.newRequest(op, input, &types.DescribeClientVpnConnectionsOutput{})
 	return DescribeClientVpnConnectionsRequest{Request: req, Input: input, Copy: c.DescribeClientVpnConnectionsRequest}
 }
 
@@ -114,8 +50,8 @@ func (c *Client) DescribeClientVpnConnectionsRequest(input *DescribeClientVpnCon
 // DescribeClientVpnConnections API operation.
 type DescribeClientVpnConnectionsRequest struct {
 	*aws.Request
-	Input *DescribeClientVpnConnectionsInput
-	Copy  func(*DescribeClientVpnConnectionsInput) DescribeClientVpnConnectionsRequest
+	Input *types.DescribeClientVpnConnectionsInput
+	Copy  func(*types.DescribeClientVpnConnectionsInput) DescribeClientVpnConnectionsRequest
 }
 
 // Send marshals and sends the DescribeClientVpnConnections API request.
@@ -127,7 +63,7 @@ func (r DescribeClientVpnConnectionsRequest) Send(ctx context.Context) (*Describ
 	}
 
 	resp := &DescribeClientVpnConnectionsResponse{
-		DescribeClientVpnConnectionsOutput: r.Request.Data.(*DescribeClientVpnConnectionsOutput),
+		DescribeClientVpnConnectionsOutput: r.Request.Data.(*types.DescribeClientVpnConnectionsOutput),
 		response:                           &aws.Response{Request: r.Request},
 	}
 
@@ -157,7 +93,7 @@ func NewDescribeClientVpnConnectionsPaginator(req DescribeClientVpnConnectionsRe
 	return DescribeClientVpnConnectionsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *DescribeClientVpnConnectionsInput
+				var inCpy *types.DescribeClientVpnConnectionsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -177,14 +113,14 @@ type DescribeClientVpnConnectionsPaginator struct {
 	aws.Pager
 }
 
-func (p *DescribeClientVpnConnectionsPaginator) CurrentPage() *DescribeClientVpnConnectionsOutput {
-	return p.Pager.CurrentPage().(*DescribeClientVpnConnectionsOutput)
+func (p *DescribeClientVpnConnectionsPaginator) CurrentPage() *types.DescribeClientVpnConnectionsOutput {
+	return p.Pager.CurrentPage().(*types.DescribeClientVpnConnectionsOutput)
 }
 
 // DescribeClientVpnConnectionsResponse is the response type for the
 // DescribeClientVpnConnections API operation.
 type DescribeClientVpnConnectionsResponse struct {
-	*DescribeClientVpnConnectionsOutput
+	*types.DescribeClientVpnConnectionsOutput
 
 	response *aws.Response
 }

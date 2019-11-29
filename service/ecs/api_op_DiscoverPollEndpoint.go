@@ -6,42 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ecs/types"
 )
-
-type DiscoverPollEndpointInput struct {
-	_ struct{} `type:"structure"`
-
-	// The short name or full Amazon Resource Name (ARN) of the cluster to which
-	// the container instance belongs.
-	Cluster *string `locationName:"cluster" type:"string"`
-
-	// The container instance ID or full ARN of the container instance. The ARN
-	// contains the arn:aws:ecs namespace, followed by the Region of the container
-	// instance, the AWS account ID of the container instance owner, the container-instance
-	// namespace, and then the container instance ID. For example, arn:aws:ecs:region:aws_account_id:container-instance/container_instance_ID.
-	ContainerInstance *string `locationName:"containerInstance" type:"string"`
-}
-
-// String returns the string representation
-func (s DiscoverPollEndpointInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type DiscoverPollEndpointOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The endpoint for the Amazon ECS agent to poll.
-	Endpoint *string `locationName:"endpoint" type:"string"`
-
-	// The telemetry endpoint for the Amazon ECS agent.
-	TelemetryEndpoint *string `locationName:"telemetryEndpoint" type:"string"`
-}
-
-// String returns the string representation
-func (s DiscoverPollEndpointOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDiscoverPollEndpoint = "DiscoverPollEndpoint"
 
@@ -62,7 +28,7 @@ const opDiscoverPollEndpoint = "DiscoverPollEndpoint"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DiscoverPollEndpoint
-func (c *Client) DiscoverPollEndpointRequest(input *DiscoverPollEndpointInput) DiscoverPollEndpointRequest {
+func (c *Client) DiscoverPollEndpointRequest(input *types.DiscoverPollEndpointInput) DiscoverPollEndpointRequest {
 	op := &aws.Operation{
 		Name:       opDiscoverPollEndpoint,
 		HTTPMethod: "POST",
@@ -70,10 +36,10 @@ func (c *Client) DiscoverPollEndpointRequest(input *DiscoverPollEndpointInput) D
 	}
 
 	if input == nil {
-		input = &DiscoverPollEndpointInput{}
+		input = &types.DiscoverPollEndpointInput{}
 	}
 
-	req := c.newRequest(op, input, &DiscoverPollEndpointOutput{})
+	req := c.newRequest(op, input, &types.DiscoverPollEndpointOutput{})
 	return DiscoverPollEndpointRequest{Request: req, Input: input, Copy: c.DiscoverPollEndpointRequest}
 }
 
@@ -81,8 +47,8 @@ func (c *Client) DiscoverPollEndpointRequest(input *DiscoverPollEndpointInput) D
 // DiscoverPollEndpoint API operation.
 type DiscoverPollEndpointRequest struct {
 	*aws.Request
-	Input *DiscoverPollEndpointInput
-	Copy  func(*DiscoverPollEndpointInput) DiscoverPollEndpointRequest
+	Input *types.DiscoverPollEndpointInput
+	Copy  func(*types.DiscoverPollEndpointInput) DiscoverPollEndpointRequest
 }
 
 // Send marshals and sends the DiscoverPollEndpoint API request.
@@ -94,7 +60,7 @@ func (r DiscoverPollEndpointRequest) Send(ctx context.Context) (*DiscoverPollEnd
 	}
 
 	resp := &DiscoverPollEndpointResponse{
-		DiscoverPollEndpointOutput: r.Request.Data.(*DiscoverPollEndpointOutput),
+		DiscoverPollEndpointOutput: r.Request.Data.(*types.DiscoverPollEndpointOutput),
 		response:                   &aws.Response{Request: r.Request},
 	}
 
@@ -104,7 +70,7 @@ func (r DiscoverPollEndpointRequest) Send(ctx context.Context) (*DiscoverPollEnd
 // DiscoverPollEndpointResponse is the response type for the
 // DiscoverPollEndpoint API operation.
 type DiscoverPollEndpointResponse struct {
-	*DiscoverPollEndpointOutput
+	*types.DiscoverPollEndpointOutput
 
 	response *aws.Response
 }

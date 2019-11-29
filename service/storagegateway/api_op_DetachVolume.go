@@ -6,58 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/storagegateway/types"
 )
-
-// AttachVolumeInput
-type DetachVolumeInput struct {
-	_ struct{} `type:"structure"`
-
-	// Set to true to forcibly remove the iSCSI connection of the target volume
-	// and detach the volume. The default is false. If this value is set to false,
-	// you must manually disconnect the iSCSI connection from the target volume.
-	ForceDetach *bool `type:"boolean"`
-
-	// The Amazon Resource Name (ARN) of the volume to detach from the gateway.
-	//
-	// VolumeARN is a required field
-	VolumeARN *string `min:"50" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DetachVolumeInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DetachVolumeInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DetachVolumeInput"}
-
-	if s.VolumeARN == nil {
-		invalidParams.Add(aws.NewErrParamRequired("VolumeARN"))
-	}
-	if s.VolumeARN != nil && len(*s.VolumeARN) < 50 {
-		invalidParams.Add(aws.NewErrParamMinLen("VolumeARN", 50))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// AttachVolumeOutput
-type DetachVolumeOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the volume that was detached.
-	VolumeARN *string `min:"50" type:"string"`
-}
-
-// String returns the string representation
-func (s DetachVolumeOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDetachVolume = "DetachVolume"
 
@@ -68,7 +18,8 @@ const opDetachVolume = "DetachVolume"
 // from the specified gateway. Detaching and attaching a volume enables you
 // to recover your data from one gateway to a different gateway without creating
 // a snapshot. It also makes it easier to move your volumes from an on-premises
-// gateway to a gateway hosted on an Amazon EC2 instance.
+// gateway to a gateway hosted on an Amazon EC2 instance. This operation is
+// only supported in the volume gateway type.
 //
 //    // Example sending a request using DetachVolumeRequest.
 //    req := client.DetachVolumeRequest(params)
@@ -78,7 +29,7 @@ const opDetachVolume = "DetachVolume"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DetachVolume
-func (c *Client) DetachVolumeRequest(input *DetachVolumeInput) DetachVolumeRequest {
+func (c *Client) DetachVolumeRequest(input *types.DetachVolumeInput) DetachVolumeRequest {
 	op := &aws.Operation{
 		Name:       opDetachVolume,
 		HTTPMethod: "POST",
@@ -86,10 +37,10 @@ func (c *Client) DetachVolumeRequest(input *DetachVolumeInput) DetachVolumeReque
 	}
 
 	if input == nil {
-		input = &DetachVolumeInput{}
+		input = &types.DetachVolumeInput{}
 	}
 
-	req := c.newRequest(op, input, &DetachVolumeOutput{})
+	req := c.newRequest(op, input, &types.DetachVolumeOutput{})
 	return DetachVolumeRequest{Request: req, Input: input, Copy: c.DetachVolumeRequest}
 }
 
@@ -97,8 +48,8 @@ func (c *Client) DetachVolumeRequest(input *DetachVolumeInput) DetachVolumeReque
 // DetachVolume API operation.
 type DetachVolumeRequest struct {
 	*aws.Request
-	Input *DetachVolumeInput
-	Copy  func(*DetachVolumeInput) DetachVolumeRequest
+	Input *types.DetachVolumeInput
+	Copy  func(*types.DetachVolumeInput) DetachVolumeRequest
 }
 
 // Send marshals and sends the DetachVolume API request.
@@ -110,7 +61,7 @@ func (r DetachVolumeRequest) Send(ctx context.Context) (*DetachVolumeResponse, e
 	}
 
 	resp := &DetachVolumeResponse{
-		DetachVolumeOutput: r.Request.Data.(*DetachVolumeOutput),
+		DetachVolumeOutput: r.Request.Data.(*types.DetachVolumeOutput),
 		response:           &aws.Response{Request: r.Request},
 	}
 
@@ -120,7 +71,7 @@ func (r DetachVolumeRequest) Send(ctx context.Context) (*DetachVolumeResponse, e
 // DetachVolumeResponse is the response type for the
 // DetachVolume API operation.
 type DetachVolumeResponse struct {
-	*DetachVolumeOutput
+	*types.DetachVolumeOutput
 
 	response *aws.Response
 }

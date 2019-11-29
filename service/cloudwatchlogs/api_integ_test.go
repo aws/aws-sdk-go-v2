@@ -13,6 +13,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws/awserr"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting/integration"
 	"github.com/aws/aws-sdk-go-v2/service/cloudwatchlogs"
+	"github.com/aws/aws-sdk-go-v2/service/cloudwatchlogs/types"
 )
 
 var _ aws.Config
@@ -24,7 +25,7 @@ func TestInteg_00_DescribeLogGroups(t *testing.T) {
 
 	cfg := integration.ConfigWithDefaultRegion("us-west-2")
 	svc := cloudwatchlogs.New(cfg)
-	params := &cloudwatchlogs.DescribeLogGroupsInput{}
+	params := &types.DescribeLogGroupsInput{}
 
 	req := svc.DescribeLogGroupsRequest(params)
 
@@ -39,7 +40,7 @@ func TestInteg_01_GetLogEvents(t *testing.T) {
 
 	cfg := integration.ConfigWithDefaultRegion("us-west-2")
 	svc := cloudwatchlogs.New(cfg)
-	params := &cloudwatchlogs.GetLogEventsInput{
+	params := &types.GetLogEventsInput{
 		LogGroupName:  aws.String("fakegroup"),
 		LogStreamName: aws.String("fakestream"),
 	}

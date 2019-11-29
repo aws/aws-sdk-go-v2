@@ -6,64 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/batch/types"
 )
-
-type DeleteJobQueueInput struct {
-	_ struct{} `type:"structure"`
-
-	// The short name or full Amazon Resource Name (ARN) of the queue to delete.
-	//
-	// JobQueue is a required field
-	JobQueue *string `locationName:"jobQueue" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteJobQueueInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteJobQueueInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteJobQueueInput"}
-
-	if s.JobQueue == nil {
-		invalidParams.Add(aws.NewErrParamRequired("JobQueue"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteJobQueueInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.JobQueue != nil {
-		v := *s.JobQueue
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "jobQueue", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type DeleteJobQueueOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteJobQueueOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteJobQueueOutput) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
 
 const opDeleteJobQueue = "DeleteJobQueue"
 
@@ -85,7 +29,7 @@ const opDeleteJobQueue = "DeleteJobQueue"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/DeleteJobQueue
-func (c *Client) DeleteJobQueueRequest(input *DeleteJobQueueInput) DeleteJobQueueRequest {
+func (c *Client) DeleteJobQueueRequest(input *types.DeleteJobQueueInput) DeleteJobQueueRequest {
 	op := &aws.Operation{
 		Name:       opDeleteJobQueue,
 		HTTPMethod: "POST",
@@ -93,10 +37,10 @@ func (c *Client) DeleteJobQueueRequest(input *DeleteJobQueueInput) DeleteJobQueu
 	}
 
 	if input == nil {
-		input = &DeleteJobQueueInput{}
+		input = &types.DeleteJobQueueInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteJobQueueOutput{})
+	req := c.newRequest(op, input, &types.DeleteJobQueueOutput{})
 	return DeleteJobQueueRequest{Request: req, Input: input, Copy: c.DeleteJobQueueRequest}
 }
 
@@ -104,8 +48,8 @@ func (c *Client) DeleteJobQueueRequest(input *DeleteJobQueueInput) DeleteJobQueu
 // DeleteJobQueue API operation.
 type DeleteJobQueueRequest struct {
 	*aws.Request
-	Input *DeleteJobQueueInput
-	Copy  func(*DeleteJobQueueInput) DeleteJobQueueRequest
+	Input *types.DeleteJobQueueInput
+	Copy  func(*types.DeleteJobQueueInput) DeleteJobQueueRequest
 }
 
 // Send marshals and sends the DeleteJobQueue API request.
@@ -117,7 +61,7 @@ func (r DeleteJobQueueRequest) Send(ctx context.Context) (*DeleteJobQueueRespons
 	}
 
 	resp := &DeleteJobQueueResponse{
-		DeleteJobQueueOutput: r.Request.Data.(*DeleteJobQueueOutput),
+		DeleteJobQueueOutput: r.Request.Data.(*types.DeleteJobQueueOutput),
 		response:             &aws.Response{Request: r.Request},
 	}
 
@@ -127,7 +71,7 @@ func (r DeleteJobQueueRequest) Send(ctx context.Context) (*DeleteJobQueueRespons
 // DeleteJobQueueResponse is the response type for the
 // DeleteJobQueue API operation.
 type DeleteJobQueueResponse struct {
-	*DeleteJobQueueOutput
+	*types.DeleteJobQueueOutput
 
 	response *aws.Response
 }

@@ -6,129 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/iot/types"
 )
-
-type StartThingRegistrationTaskInput struct {
-	_ struct{} `type:"structure"`
-
-	// The S3 bucket that contains the input file.
-	//
-	// InputFileBucket is a required field
-	InputFileBucket *string `locationName:"inputFileBucket" min:"3" type:"string" required:"true"`
-
-	// The name of input file within the S3 bucket. This file contains a newline
-	// delimited JSON file. Each line contains the parameter values to provision
-	// one device (thing).
-	//
-	// InputFileKey is a required field
-	InputFileKey *string `locationName:"inputFileKey" min:"1" type:"string" required:"true"`
-
-	// The IAM role ARN that grants permission the input file.
-	//
-	// RoleArn is a required field
-	RoleArn *string `locationName:"roleArn" min:"20" type:"string" required:"true"`
-
-	// The provisioning template.
-	//
-	// TemplateBody is a required field
-	TemplateBody *string `locationName:"templateBody" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s StartThingRegistrationTaskInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *StartThingRegistrationTaskInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "StartThingRegistrationTaskInput"}
-
-	if s.InputFileBucket == nil {
-		invalidParams.Add(aws.NewErrParamRequired("InputFileBucket"))
-	}
-	if s.InputFileBucket != nil && len(*s.InputFileBucket) < 3 {
-		invalidParams.Add(aws.NewErrParamMinLen("InputFileBucket", 3))
-	}
-
-	if s.InputFileKey == nil {
-		invalidParams.Add(aws.NewErrParamRequired("InputFileKey"))
-	}
-	if s.InputFileKey != nil && len(*s.InputFileKey) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("InputFileKey", 1))
-	}
-
-	if s.RoleArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("RoleArn"))
-	}
-	if s.RoleArn != nil && len(*s.RoleArn) < 20 {
-		invalidParams.Add(aws.NewErrParamMinLen("RoleArn", 20))
-	}
-
-	if s.TemplateBody == nil {
-		invalidParams.Add(aws.NewErrParamRequired("TemplateBody"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s StartThingRegistrationTaskInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.InputFileBucket != nil {
-		v := *s.InputFileBucket
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "inputFileBucket", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.InputFileKey != nil {
-		v := *s.InputFileKey
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "inputFileKey", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.RoleArn != nil {
-		v := *s.RoleArn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "roleArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.TemplateBody != nil {
-		v := *s.TemplateBody
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "templateBody", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type StartThingRegistrationTaskOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The bulk thing provisioning task ID.
-	TaskId *string `locationName:"taskId" type:"string"`
-}
-
-// String returns the string representation
-func (s StartThingRegistrationTaskOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s StartThingRegistrationTaskOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.TaskId != nil {
-		v := *s.TaskId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "taskId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opStartThingRegistrationTask = "StartThingRegistrationTask"
 
@@ -143,7 +22,7 @@ const opStartThingRegistrationTask = "StartThingRegistrationTask"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) StartThingRegistrationTaskRequest(input *StartThingRegistrationTaskInput) StartThingRegistrationTaskRequest {
+func (c *Client) StartThingRegistrationTaskRequest(input *types.StartThingRegistrationTaskInput) StartThingRegistrationTaskRequest {
 	op := &aws.Operation{
 		Name:       opStartThingRegistrationTask,
 		HTTPMethod: "POST",
@@ -151,10 +30,10 @@ func (c *Client) StartThingRegistrationTaskRequest(input *StartThingRegistration
 	}
 
 	if input == nil {
-		input = &StartThingRegistrationTaskInput{}
+		input = &types.StartThingRegistrationTaskInput{}
 	}
 
-	req := c.newRequest(op, input, &StartThingRegistrationTaskOutput{})
+	req := c.newRequest(op, input, &types.StartThingRegistrationTaskOutput{})
 	return StartThingRegistrationTaskRequest{Request: req, Input: input, Copy: c.StartThingRegistrationTaskRequest}
 }
 
@@ -162,8 +41,8 @@ func (c *Client) StartThingRegistrationTaskRequest(input *StartThingRegistration
 // StartThingRegistrationTask API operation.
 type StartThingRegistrationTaskRequest struct {
 	*aws.Request
-	Input *StartThingRegistrationTaskInput
-	Copy  func(*StartThingRegistrationTaskInput) StartThingRegistrationTaskRequest
+	Input *types.StartThingRegistrationTaskInput
+	Copy  func(*types.StartThingRegistrationTaskInput) StartThingRegistrationTaskRequest
 }
 
 // Send marshals and sends the StartThingRegistrationTask API request.
@@ -175,7 +54,7 @@ func (r StartThingRegistrationTaskRequest) Send(ctx context.Context) (*StartThin
 	}
 
 	resp := &StartThingRegistrationTaskResponse{
-		StartThingRegistrationTaskOutput: r.Request.Data.(*StartThingRegistrationTaskOutput),
+		StartThingRegistrationTaskOutput: r.Request.Data.(*types.StartThingRegistrationTaskOutput),
 		response:                         &aws.Response{Request: r.Request},
 	}
 
@@ -185,7 +64,7 @@ func (r StartThingRegistrationTaskRequest) Send(ctx context.Context) (*StartThin
 // StartThingRegistrationTaskResponse is the response type for the
 // StartThingRegistrationTask API operation.
 type StartThingRegistrationTaskResponse struct {
-	*StartThingRegistrationTaskOutput
+	*types.StartThingRegistrationTaskOutput
 
 	response *aws.Response
 }

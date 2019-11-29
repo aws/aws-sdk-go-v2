@@ -6,72 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/storagegateway/types"
 )
-
-// ListFileShareInput
-type ListFileSharesInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon resource Name (ARN) of the gateway whose file shares you want
-	// to list. If this field is not present, all file shares under your account
-	// are listed.
-	GatewayARN *string `min:"50" type:"string"`
-
-	// The maximum number of file shares to return in the response. The value must
-	// be an integer with a value greater than zero. Optional.
-	Limit *int64 `min:"1" type:"integer"`
-
-	// Opaque pagination token returned from a previous ListFileShares operation.
-	// If present, Marker specifies where to continue the list from after a previous
-	// call to ListFileShares. Optional.
-	Marker *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s ListFileSharesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListFileSharesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListFileSharesInput"}
-	if s.GatewayARN != nil && len(*s.GatewayARN) < 50 {
-		invalidParams.Add(aws.NewErrParamMinLen("GatewayARN", 50))
-	}
-	if s.Limit != nil && *s.Limit < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("Limit", 1))
-	}
-	if s.Marker != nil && len(*s.Marker) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Marker", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// ListFileShareOutput
-type ListFileSharesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// An array of information about the file gateway's file shares.
-	FileShareInfoList []FileShareInfo `type:"list"`
-
-	// If the request includes Marker, the response returns that value in this field.
-	Marker *string `min:"1" type:"string"`
-
-	// If a value is present, there are more file shares to return. In a subsequent
-	// request, use NextMarker as the value for Marker to retrieve the next set
-	// of file shares.
-	NextMarker *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s ListFileSharesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListFileShares = "ListFileShares"
 
@@ -90,7 +26,7 @@ const opListFileShares = "ListFileShares"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/ListFileShares
-func (c *Client) ListFileSharesRequest(input *ListFileSharesInput) ListFileSharesRequest {
+func (c *Client) ListFileSharesRequest(input *types.ListFileSharesInput) ListFileSharesRequest {
 	op := &aws.Operation{
 		Name:       opListFileShares,
 		HTTPMethod: "POST",
@@ -104,10 +40,10 @@ func (c *Client) ListFileSharesRequest(input *ListFileSharesInput) ListFileShare
 	}
 
 	if input == nil {
-		input = &ListFileSharesInput{}
+		input = &types.ListFileSharesInput{}
 	}
 
-	req := c.newRequest(op, input, &ListFileSharesOutput{})
+	req := c.newRequest(op, input, &types.ListFileSharesOutput{})
 	return ListFileSharesRequest{Request: req, Input: input, Copy: c.ListFileSharesRequest}
 }
 
@@ -115,8 +51,8 @@ func (c *Client) ListFileSharesRequest(input *ListFileSharesInput) ListFileShare
 // ListFileShares API operation.
 type ListFileSharesRequest struct {
 	*aws.Request
-	Input *ListFileSharesInput
-	Copy  func(*ListFileSharesInput) ListFileSharesRequest
+	Input *types.ListFileSharesInput
+	Copy  func(*types.ListFileSharesInput) ListFileSharesRequest
 }
 
 // Send marshals and sends the ListFileShares API request.
@@ -128,7 +64,7 @@ func (r ListFileSharesRequest) Send(ctx context.Context) (*ListFileSharesRespons
 	}
 
 	resp := &ListFileSharesResponse{
-		ListFileSharesOutput: r.Request.Data.(*ListFileSharesOutput),
+		ListFileSharesOutput: r.Request.Data.(*types.ListFileSharesOutput),
 		response:             &aws.Response{Request: r.Request},
 	}
 
@@ -158,7 +94,7 @@ func NewListFileSharesPaginator(req ListFileSharesRequest) ListFileSharesPaginat
 	return ListFileSharesPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListFileSharesInput
+				var inCpy *types.ListFileSharesInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -178,14 +114,14 @@ type ListFileSharesPaginator struct {
 	aws.Pager
 }
 
-func (p *ListFileSharesPaginator) CurrentPage() *ListFileSharesOutput {
-	return p.Pager.CurrentPage().(*ListFileSharesOutput)
+func (p *ListFileSharesPaginator) CurrentPage() *types.ListFileSharesOutput {
+	return p.Pager.CurrentPage().(*types.ListFileSharesOutput)
 }
 
 // ListFileSharesResponse is the response type for the
 // ListFileShares API operation.
 type ListFileSharesResponse struct {
-	*ListFileSharesOutput
+	*types.ListFileSharesOutput
 
 	response *aws.Response
 }

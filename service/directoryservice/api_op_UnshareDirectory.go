@@ -6,65 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/directoryservice/types"
 )
-
-type UnshareDirectoryInput struct {
-	_ struct{} `type:"structure"`
-
-	// The identifier of the AWS Managed Microsoft AD directory that you want to
-	// stop sharing.
-	//
-	// DirectoryId is a required field
-	DirectoryId *string `type:"string" required:"true"`
-
-	// Identifier for the directory consumer account with whom the directory has
-	// to be unshared.
-	//
-	// UnshareTarget is a required field
-	UnshareTarget *UnshareTarget `type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s UnshareDirectoryInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UnshareDirectoryInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UnshareDirectoryInput"}
-
-	if s.DirectoryId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DirectoryId"))
-	}
-
-	if s.UnshareTarget == nil {
-		invalidParams.Add(aws.NewErrParamRequired("UnshareTarget"))
-	}
-	if s.UnshareTarget != nil {
-		if err := s.UnshareTarget.Validate(); err != nil {
-			invalidParams.AddNested("UnshareTarget", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type UnshareDirectoryOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Identifier of the directory stored in the directory consumer account that
-	// is to be unshared from the specified directory (DirectoryId).
-	SharedDirectoryId *string `type:"string"`
-}
-
-// String returns the string representation
-func (s UnshareDirectoryOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opUnshareDirectory = "UnshareDirectory"
 
@@ -81,7 +24,7 @@ const opUnshareDirectory = "UnshareDirectory"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/UnshareDirectory
-func (c *Client) UnshareDirectoryRequest(input *UnshareDirectoryInput) UnshareDirectoryRequest {
+func (c *Client) UnshareDirectoryRequest(input *types.UnshareDirectoryInput) UnshareDirectoryRequest {
 	op := &aws.Operation{
 		Name:       opUnshareDirectory,
 		HTTPMethod: "POST",
@@ -89,10 +32,10 @@ func (c *Client) UnshareDirectoryRequest(input *UnshareDirectoryInput) UnshareDi
 	}
 
 	if input == nil {
-		input = &UnshareDirectoryInput{}
+		input = &types.UnshareDirectoryInput{}
 	}
 
-	req := c.newRequest(op, input, &UnshareDirectoryOutput{})
+	req := c.newRequest(op, input, &types.UnshareDirectoryOutput{})
 	return UnshareDirectoryRequest{Request: req, Input: input, Copy: c.UnshareDirectoryRequest}
 }
 
@@ -100,8 +43,8 @@ func (c *Client) UnshareDirectoryRequest(input *UnshareDirectoryInput) UnshareDi
 // UnshareDirectory API operation.
 type UnshareDirectoryRequest struct {
 	*aws.Request
-	Input *UnshareDirectoryInput
-	Copy  func(*UnshareDirectoryInput) UnshareDirectoryRequest
+	Input *types.UnshareDirectoryInput
+	Copy  func(*types.UnshareDirectoryInput) UnshareDirectoryRequest
 }
 
 // Send marshals and sends the UnshareDirectory API request.
@@ -113,7 +56,7 @@ func (r UnshareDirectoryRequest) Send(ctx context.Context) (*UnshareDirectoryRes
 	}
 
 	resp := &UnshareDirectoryResponse{
-		UnshareDirectoryOutput: r.Request.Data.(*UnshareDirectoryOutput),
+		UnshareDirectoryOutput: r.Request.Data.(*types.UnshareDirectoryOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -123,7 +66,7 @@ func (r UnshareDirectoryRequest) Send(ctx context.Context) (*UnshareDirectoryRes
 // UnshareDirectoryResponse is the response type for the
 // UnshareDirectory API operation.
 type UnshareDirectoryResponse struct {
-	*UnshareDirectoryOutput
+	*types.UnshareDirectoryOutput
 
 	response *aws.Response
 }

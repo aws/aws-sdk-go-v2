@@ -6,75 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
+	"github.com/aws/aws-sdk-go-v2/service/organizations/types"
 )
-
-type DetachPolicyInput struct {
-	_ struct{} `type:"structure"`
-
-	// The unique identifier (ID) of the policy you want to detach. You can get
-	// the ID from the ListPolicies or ListPoliciesForTarget operations.
-	//
-	// The regex pattern (http://wikipedia.org/wiki/regex) for a policy ID string
-	// requires "p-" followed by from 8 to 128 lower-case letters or digits.
-	//
-	// PolicyId is a required field
-	PolicyId *string `type:"string" required:"true"`
-
-	// The unique identifier (ID) of the root, OU, or account that you want to detach
-	// the policy from. You can get the ID from the ListRoots, ListOrganizationalUnitsForParent,
-	// or ListAccounts operations.
-	//
-	// The regex pattern (http://wikipedia.org/wiki/regex) for a target ID string
-	// requires one of the following:
-	//
-	//    * Root - A string that begins with "r-" followed by from 4 to 32 lower-case
-	//    letters or digits.
-	//
-	//    * Account - A string that consists of exactly 12 digits.
-	//
-	//    * Organizational unit (OU) - A string that begins with "ou-" followed
-	//    by from 4 to 32 lower-case letters or digits (the ID of the root that
-	//    the OU is in) followed by a second "-" dash and from 8 to 32 additional
-	//    lower-case letters or digits.
-	//
-	// TargetId is a required field
-	TargetId *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DetachPolicyInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DetachPolicyInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DetachPolicyInput"}
-
-	if s.PolicyId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("PolicyId"))
-	}
-
-	if s.TargetId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("TargetId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DetachPolicyOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DetachPolicyOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDetachPolicy = "DetachPolicy"
 
@@ -105,7 +40,7 @@ const opDetachPolicy = "DetachPolicy"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/DetachPolicy
-func (c *Client) DetachPolicyRequest(input *DetachPolicyInput) DetachPolicyRequest {
+func (c *Client) DetachPolicyRequest(input *types.DetachPolicyInput) DetachPolicyRequest {
 	op := &aws.Operation{
 		Name:       opDetachPolicy,
 		HTTPMethod: "POST",
@@ -113,10 +48,10 @@ func (c *Client) DetachPolicyRequest(input *DetachPolicyInput) DetachPolicyReque
 	}
 
 	if input == nil {
-		input = &DetachPolicyInput{}
+		input = &types.DetachPolicyInput{}
 	}
 
-	req := c.newRequest(op, input, &DetachPolicyOutput{})
+	req := c.newRequest(op, input, &types.DetachPolicyOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return DetachPolicyRequest{Request: req, Input: input, Copy: c.DetachPolicyRequest}
@@ -126,8 +61,8 @@ func (c *Client) DetachPolicyRequest(input *DetachPolicyInput) DetachPolicyReque
 // DetachPolicy API operation.
 type DetachPolicyRequest struct {
 	*aws.Request
-	Input *DetachPolicyInput
-	Copy  func(*DetachPolicyInput) DetachPolicyRequest
+	Input *types.DetachPolicyInput
+	Copy  func(*types.DetachPolicyInput) DetachPolicyRequest
 }
 
 // Send marshals and sends the DetachPolicy API request.
@@ -139,7 +74,7 @@ func (r DetachPolicyRequest) Send(ctx context.Context) (*DetachPolicyResponse, e
 	}
 
 	resp := &DetachPolicyResponse{
-		DetachPolicyOutput: r.Request.Data.(*DetachPolicyOutput),
+		DetachPolicyOutput: r.Request.Data.(*types.DetachPolicyOutput),
 		response:           &aws.Response{Request: r.Request},
 	}
 
@@ -149,7 +84,7 @@ func (r DetachPolicyRequest) Send(ctx context.Context) (*DetachPolicyResponse, e
 // DetachPolicyResponse is the response type for the
 // DetachPolicy API operation.
 type DetachPolicyResponse struct {
-	*DetachPolicyOutput
+	*types.DetachPolicyOutput
 
 	response *aws.Response
 }

@@ -6,69 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/route53resolver/types"
 )
-
-type AssociateResolverRuleInput struct {
-	_ struct{} `type:"structure"`
-
-	// A name for the association that you're creating between a resolver rule and
-	// a VPC.
-	Name *string `type:"string"`
-
-	// The ID of the resolver rule that you want to associate with the VPC. To list
-	// the existing resolver rules, use ListResolverRules.
-	//
-	// ResolverRuleId is a required field
-	ResolverRuleId *string `min:"1" type:"string" required:"true"`
-
-	// The ID of the VPC that you want to associate the resolver rule with.
-	//
-	// VPCId is a required field
-	VPCId *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s AssociateResolverRuleInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *AssociateResolverRuleInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "AssociateResolverRuleInput"}
-
-	if s.ResolverRuleId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ResolverRuleId"))
-	}
-	if s.ResolverRuleId != nil && len(*s.ResolverRuleId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ResolverRuleId", 1))
-	}
-
-	if s.VPCId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("VPCId"))
-	}
-	if s.VPCId != nil && len(*s.VPCId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("VPCId", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type AssociateResolverRuleOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Information about the AssociateResolverRule request, including the status
-	// of the request.
-	ResolverRuleAssociation *ResolverRuleAssociation `type:"structure"`
-}
-
-// String returns the string representation
-func (s AssociateResolverRuleOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opAssociateResolverRule = "AssociateResolverRule"
 
@@ -89,7 +28,7 @@ const opAssociateResolverRule = "AssociateResolverRule"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/AssociateResolverRule
-func (c *Client) AssociateResolverRuleRequest(input *AssociateResolverRuleInput) AssociateResolverRuleRequest {
+func (c *Client) AssociateResolverRuleRequest(input *types.AssociateResolverRuleInput) AssociateResolverRuleRequest {
 	op := &aws.Operation{
 		Name:       opAssociateResolverRule,
 		HTTPMethod: "POST",
@@ -97,10 +36,10 @@ func (c *Client) AssociateResolverRuleRequest(input *AssociateResolverRuleInput)
 	}
 
 	if input == nil {
-		input = &AssociateResolverRuleInput{}
+		input = &types.AssociateResolverRuleInput{}
 	}
 
-	req := c.newRequest(op, input, &AssociateResolverRuleOutput{})
+	req := c.newRequest(op, input, &types.AssociateResolverRuleOutput{})
 	return AssociateResolverRuleRequest{Request: req, Input: input, Copy: c.AssociateResolverRuleRequest}
 }
 
@@ -108,8 +47,8 @@ func (c *Client) AssociateResolverRuleRequest(input *AssociateResolverRuleInput)
 // AssociateResolverRule API operation.
 type AssociateResolverRuleRequest struct {
 	*aws.Request
-	Input *AssociateResolverRuleInput
-	Copy  func(*AssociateResolverRuleInput) AssociateResolverRuleRequest
+	Input *types.AssociateResolverRuleInput
+	Copy  func(*types.AssociateResolverRuleInput) AssociateResolverRuleRequest
 }
 
 // Send marshals and sends the AssociateResolverRule API request.
@@ -121,7 +60,7 @@ func (r AssociateResolverRuleRequest) Send(ctx context.Context) (*AssociateResol
 	}
 
 	resp := &AssociateResolverRuleResponse{
-		AssociateResolverRuleOutput: r.Request.Data.(*AssociateResolverRuleOutput),
+		AssociateResolverRuleOutput: r.Request.Data.(*types.AssociateResolverRuleOutput),
 		response:                    &aws.Response{Request: r.Request},
 	}
 
@@ -131,7 +70,7 @@ func (r AssociateResolverRuleRequest) Send(ctx context.Context) (*AssociateResol
 // AssociateResolverRuleResponse is the response type for the
 // AssociateResolverRule API operation.
 type AssociateResolverRuleResponse struct {
-	*AssociateResolverRuleOutput
+	*types.AssociateResolverRuleOutput
 
 	response *aws.Response
 }

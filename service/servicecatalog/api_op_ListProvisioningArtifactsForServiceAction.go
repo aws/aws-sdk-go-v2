@@ -6,72 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/types"
 )
-
-type ListProvisioningArtifactsForServiceActionInput struct {
-	_ struct{} `type:"structure"`
-
-	// The language code.
-	//
-	//    * en - English (default)
-	//
-	//    * jp - Japanese
-	//
-	//    * zh - Chinese
-	AcceptLanguage *string `type:"string"`
-
-	// The maximum number of items to return with this call.
-	PageSize *int64 `type:"integer"`
-
-	// The page token for the next set of results. To retrieve the first set of
-	// results, use null.
-	PageToken *string `type:"string"`
-
-	// The self-service action identifier. For example, act-fs7abcd89wxyz.
-	//
-	// ServiceActionId is a required field
-	ServiceActionId *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s ListProvisioningArtifactsForServiceActionInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListProvisioningArtifactsForServiceActionInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListProvisioningArtifactsForServiceActionInput"}
-
-	if s.ServiceActionId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ServiceActionId"))
-	}
-	if s.ServiceActionId != nil && len(*s.ServiceActionId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ServiceActionId", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ListProvisioningArtifactsForServiceActionOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The page token to use to retrieve the next set of results. If there are no
-	// additional results, this value is null.
-	NextPageToken *string `type:"string"`
-
-	// An array of objects with information about product views and provisioning
-	// artifacts.
-	ProvisioningArtifactViews []ProvisioningArtifactView `type:"list"`
-}
-
-// String returns the string representation
-func (s ListProvisioningArtifactsForServiceActionOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListProvisioningArtifactsForServiceAction = "ListProvisioningArtifactsForServiceAction"
 
@@ -89,7 +25,7 @@ const opListProvisioningArtifactsForServiceAction = "ListProvisioningArtifactsFo
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ListProvisioningArtifactsForServiceAction
-func (c *Client) ListProvisioningArtifactsForServiceActionRequest(input *ListProvisioningArtifactsForServiceActionInput) ListProvisioningArtifactsForServiceActionRequest {
+func (c *Client) ListProvisioningArtifactsForServiceActionRequest(input *types.ListProvisioningArtifactsForServiceActionInput) ListProvisioningArtifactsForServiceActionRequest {
 	op := &aws.Operation{
 		Name:       opListProvisioningArtifactsForServiceAction,
 		HTTPMethod: "POST",
@@ -103,10 +39,10 @@ func (c *Client) ListProvisioningArtifactsForServiceActionRequest(input *ListPro
 	}
 
 	if input == nil {
-		input = &ListProvisioningArtifactsForServiceActionInput{}
+		input = &types.ListProvisioningArtifactsForServiceActionInput{}
 	}
 
-	req := c.newRequest(op, input, &ListProvisioningArtifactsForServiceActionOutput{})
+	req := c.newRequest(op, input, &types.ListProvisioningArtifactsForServiceActionOutput{})
 	return ListProvisioningArtifactsForServiceActionRequest{Request: req, Input: input, Copy: c.ListProvisioningArtifactsForServiceActionRequest}
 }
 
@@ -114,8 +50,8 @@ func (c *Client) ListProvisioningArtifactsForServiceActionRequest(input *ListPro
 // ListProvisioningArtifactsForServiceAction API operation.
 type ListProvisioningArtifactsForServiceActionRequest struct {
 	*aws.Request
-	Input *ListProvisioningArtifactsForServiceActionInput
-	Copy  func(*ListProvisioningArtifactsForServiceActionInput) ListProvisioningArtifactsForServiceActionRequest
+	Input *types.ListProvisioningArtifactsForServiceActionInput
+	Copy  func(*types.ListProvisioningArtifactsForServiceActionInput) ListProvisioningArtifactsForServiceActionRequest
 }
 
 // Send marshals and sends the ListProvisioningArtifactsForServiceAction API request.
@@ -127,7 +63,7 @@ func (r ListProvisioningArtifactsForServiceActionRequest) Send(ctx context.Conte
 	}
 
 	resp := &ListProvisioningArtifactsForServiceActionResponse{
-		ListProvisioningArtifactsForServiceActionOutput: r.Request.Data.(*ListProvisioningArtifactsForServiceActionOutput),
+		ListProvisioningArtifactsForServiceActionOutput: r.Request.Data.(*types.ListProvisioningArtifactsForServiceActionOutput),
 		response: &aws.Response{Request: r.Request},
 	}
 
@@ -157,7 +93,7 @@ func NewListProvisioningArtifactsForServiceActionPaginator(req ListProvisioningA
 	return ListProvisioningArtifactsForServiceActionPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListProvisioningArtifactsForServiceActionInput
+				var inCpy *types.ListProvisioningArtifactsForServiceActionInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -177,14 +113,14 @@ type ListProvisioningArtifactsForServiceActionPaginator struct {
 	aws.Pager
 }
 
-func (p *ListProvisioningArtifactsForServiceActionPaginator) CurrentPage() *ListProvisioningArtifactsForServiceActionOutput {
-	return p.Pager.CurrentPage().(*ListProvisioningArtifactsForServiceActionOutput)
+func (p *ListProvisioningArtifactsForServiceActionPaginator) CurrentPage() *types.ListProvisioningArtifactsForServiceActionOutput {
+	return p.Pager.CurrentPage().(*types.ListProvisioningArtifactsForServiceActionOutput)
 }
 
 // ListProvisioningArtifactsForServiceActionResponse is the response type for the
 // ListProvisioningArtifactsForServiceAction API operation.
 type ListProvisioningArtifactsForServiceActionResponse struct {
-	*ListProvisioningArtifactsForServiceActionOutput
+	*types.ListProvisioningArtifactsForServiceActionOutput
 
 	response *aws.Response
 }

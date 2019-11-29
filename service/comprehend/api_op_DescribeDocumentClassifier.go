@@ -6,49 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/comprehend/types"
 )
-
-type DescribeDocumentClassifierInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) that identifies the document classifier. The
-	// operation returns this identifier in its response.
-	//
-	// DocumentClassifierArn is a required field
-	DocumentClassifierArn *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeDocumentClassifierInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeDocumentClassifierInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeDocumentClassifierInput"}
-
-	if s.DocumentClassifierArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DocumentClassifierArn"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribeDocumentClassifierOutput struct {
-	_ struct{} `type:"structure"`
-
-	// An object that contains the properties associated with a document classifier.
-	DocumentClassifierProperties *DocumentClassifierProperties `type:"structure"`
-}
-
-// String returns the string representation
-func (s DescribeDocumentClassifierOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeDocumentClassifier = "DescribeDocumentClassifier"
 
@@ -65,7 +24,7 @@ const opDescribeDocumentClassifier = "DescribeDocumentClassifier"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/DescribeDocumentClassifier
-func (c *Client) DescribeDocumentClassifierRequest(input *DescribeDocumentClassifierInput) DescribeDocumentClassifierRequest {
+func (c *Client) DescribeDocumentClassifierRequest(input *types.DescribeDocumentClassifierInput) DescribeDocumentClassifierRequest {
 	op := &aws.Operation{
 		Name:       opDescribeDocumentClassifier,
 		HTTPMethod: "POST",
@@ -73,10 +32,10 @@ func (c *Client) DescribeDocumentClassifierRequest(input *DescribeDocumentClassi
 	}
 
 	if input == nil {
-		input = &DescribeDocumentClassifierInput{}
+		input = &types.DescribeDocumentClassifierInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeDocumentClassifierOutput{})
+	req := c.newRequest(op, input, &types.DescribeDocumentClassifierOutput{})
 	return DescribeDocumentClassifierRequest{Request: req, Input: input, Copy: c.DescribeDocumentClassifierRequest}
 }
 
@@ -84,8 +43,8 @@ func (c *Client) DescribeDocumentClassifierRequest(input *DescribeDocumentClassi
 // DescribeDocumentClassifier API operation.
 type DescribeDocumentClassifierRequest struct {
 	*aws.Request
-	Input *DescribeDocumentClassifierInput
-	Copy  func(*DescribeDocumentClassifierInput) DescribeDocumentClassifierRequest
+	Input *types.DescribeDocumentClassifierInput
+	Copy  func(*types.DescribeDocumentClassifierInput) DescribeDocumentClassifierRequest
 }
 
 // Send marshals and sends the DescribeDocumentClassifier API request.
@@ -97,7 +56,7 @@ func (r DescribeDocumentClassifierRequest) Send(ctx context.Context) (*DescribeD
 	}
 
 	resp := &DescribeDocumentClassifierResponse{
-		DescribeDocumentClassifierOutput: r.Request.Data.(*DescribeDocumentClassifierOutput),
+		DescribeDocumentClassifierOutput: r.Request.Data.(*types.DescribeDocumentClassifierOutput),
 		response:                         &aws.Response{Request: r.Request},
 	}
 
@@ -107,7 +66,7 @@ func (r DescribeDocumentClassifierRequest) Send(ctx context.Context) (*DescribeD
 // DescribeDocumentClassifierResponse is the response type for the
 // DescribeDocumentClassifier API operation.
 type DescribeDocumentClassifierResponse struct {
-	*DescribeDocumentClassifierOutput
+	*types.DescribeDocumentClassifierOutput
 
 	response *aws.Response
 }

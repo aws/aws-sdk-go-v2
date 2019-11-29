@@ -6,48 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/lightsail/types"
 )
-
-type ReleaseStaticIpInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the static IP to delete.
-	//
-	// StaticIpName is a required field
-	StaticIpName *string `locationName:"staticIpName" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s ReleaseStaticIpInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ReleaseStaticIpInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ReleaseStaticIpInput"}
-
-	if s.StaticIpName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("StaticIpName"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ReleaseStaticIpOutput struct {
-	_ struct{} `type:"structure"`
-
-	// An array of key-value pairs containing information about the request operation.
-	Operations []Operation `locationName:"operations" type:"list"`
-}
-
-// String returns the string representation
-func (s ReleaseStaticIpOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opReleaseStaticIp = "ReleaseStaticIp"
 
@@ -64,7 +24,7 @@ const opReleaseStaticIp = "ReleaseStaticIp"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/ReleaseStaticIp
-func (c *Client) ReleaseStaticIpRequest(input *ReleaseStaticIpInput) ReleaseStaticIpRequest {
+func (c *Client) ReleaseStaticIpRequest(input *types.ReleaseStaticIpInput) ReleaseStaticIpRequest {
 	op := &aws.Operation{
 		Name:       opReleaseStaticIp,
 		HTTPMethod: "POST",
@@ -72,10 +32,10 @@ func (c *Client) ReleaseStaticIpRequest(input *ReleaseStaticIpInput) ReleaseStat
 	}
 
 	if input == nil {
-		input = &ReleaseStaticIpInput{}
+		input = &types.ReleaseStaticIpInput{}
 	}
 
-	req := c.newRequest(op, input, &ReleaseStaticIpOutput{})
+	req := c.newRequest(op, input, &types.ReleaseStaticIpOutput{})
 	return ReleaseStaticIpRequest{Request: req, Input: input, Copy: c.ReleaseStaticIpRequest}
 }
 
@@ -83,8 +43,8 @@ func (c *Client) ReleaseStaticIpRequest(input *ReleaseStaticIpInput) ReleaseStat
 // ReleaseStaticIp API operation.
 type ReleaseStaticIpRequest struct {
 	*aws.Request
-	Input *ReleaseStaticIpInput
-	Copy  func(*ReleaseStaticIpInput) ReleaseStaticIpRequest
+	Input *types.ReleaseStaticIpInput
+	Copy  func(*types.ReleaseStaticIpInput) ReleaseStaticIpRequest
 }
 
 // Send marshals and sends the ReleaseStaticIp API request.
@@ -96,7 +56,7 @@ func (r ReleaseStaticIpRequest) Send(ctx context.Context) (*ReleaseStaticIpRespo
 	}
 
 	resp := &ReleaseStaticIpResponse{
-		ReleaseStaticIpOutput: r.Request.Data.(*ReleaseStaticIpOutput),
+		ReleaseStaticIpOutput: r.Request.Data.(*types.ReleaseStaticIpOutput),
 		response:              &aws.Response{Request: r.Request},
 	}
 
@@ -106,7 +66,7 @@ func (r ReleaseStaticIpRequest) Send(ctx context.Context) (*ReleaseStaticIpRespo
 // ReleaseStaticIpResponse is the response type for the
 // ReleaseStaticIp API operation.
 type ReleaseStaticIpResponse struct {
-	*ReleaseStaticIpOutput
+	*types.ReleaseStaticIpOutput
 
 	response *aws.Response
 }

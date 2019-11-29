@@ -6,79 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/appsync/types"
 )
-
-type DeleteDataSourceInput struct {
-	_ struct{} `type:"structure"`
-
-	// The API ID.
-	//
-	// ApiId is a required field
-	ApiId *string `location:"uri" locationName:"apiId" type:"string" required:"true"`
-
-	// The name of the data source.
-	//
-	// Name is a required field
-	Name *string `location:"uri" locationName:"name" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteDataSourceInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteDataSourceInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteDataSourceInput"}
-
-	if s.ApiId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ApiId"))
-	}
-
-	if s.Name == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Name"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteDataSourceInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.ApiId != nil {
-		v := *s.ApiId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "apiId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Name != nil {
-		v := *s.Name
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type DeleteDataSourceOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteDataSourceOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteDataSourceOutput) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
 
 const opDeleteDataSource = "DeleteDataSource"
 
@@ -95,7 +24,7 @@ const opDeleteDataSource = "DeleteDataSource"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/DeleteDataSource
-func (c *Client) DeleteDataSourceRequest(input *DeleteDataSourceInput) DeleteDataSourceRequest {
+func (c *Client) DeleteDataSourceRequest(input *types.DeleteDataSourceInput) DeleteDataSourceRequest {
 	op := &aws.Operation{
 		Name:       opDeleteDataSource,
 		HTTPMethod: "DELETE",
@@ -103,10 +32,10 @@ func (c *Client) DeleteDataSourceRequest(input *DeleteDataSourceInput) DeleteDat
 	}
 
 	if input == nil {
-		input = &DeleteDataSourceInput{}
+		input = &types.DeleteDataSourceInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteDataSourceOutput{})
+	req := c.newRequest(op, input, &types.DeleteDataSourceOutput{})
 	return DeleteDataSourceRequest{Request: req, Input: input, Copy: c.DeleteDataSourceRequest}
 }
 
@@ -114,8 +43,8 @@ func (c *Client) DeleteDataSourceRequest(input *DeleteDataSourceInput) DeleteDat
 // DeleteDataSource API operation.
 type DeleteDataSourceRequest struct {
 	*aws.Request
-	Input *DeleteDataSourceInput
-	Copy  func(*DeleteDataSourceInput) DeleteDataSourceRequest
+	Input *types.DeleteDataSourceInput
+	Copy  func(*types.DeleteDataSourceInput) DeleteDataSourceRequest
 }
 
 // Send marshals and sends the DeleteDataSource API request.
@@ -127,7 +56,7 @@ func (r DeleteDataSourceRequest) Send(ctx context.Context) (*DeleteDataSourceRes
 	}
 
 	resp := &DeleteDataSourceResponse{
-		DeleteDataSourceOutput: r.Request.Data.(*DeleteDataSourceOutput),
+		DeleteDataSourceOutput: r.Request.Data.(*types.DeleteDataSourceOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -137,7 +66,7 @@ func (r DeleteDataSourceRequest) Send(ctx context.Context) (*DeleteDataSourceRes
 // DeleteDataSourceResponse is the response type for the
 // DeleteDataSource API operation.
 type DeleteDataSourceResponse struct {
-	*DeleteDataSourceOutput
+	*types.DeleteDataSourceOutput
 
 	response *aws.Response
 }

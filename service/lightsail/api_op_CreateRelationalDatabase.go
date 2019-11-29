@@ -6,181 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/lightsail/types"
 )
-
-type CreateRelationalDatabaseInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Availability Zone in which to create your new database. Use the us-east-2a
-	// case-sensitive format.
-	//
-	// You can get a list of Availability Zones by using the get regions operation.
-	// Be sure to add the include relational database Availability Zones parameter
-	// to your request.
-	AvailabilityZone *string `locationName:"availabilityZone" type:"string"`
-
-	// The name of the master database created when the Lightsail database resource
-	// is created.
-	//
-	// Constraints:
-	//
-	//    * Must contain from 1 to 64 alphanumeric characters.
-	//
-	//    * Cannot be a word reserved by the specified database engine
-	//
-	// MasterDatabaseName is a required field
-	MasterDatabaseName *string `locationName:"masterDatabaseName" type:"string" required:"true"`
-
-	// The password for the master user of your new database. The password can include
-	// any printable ASCII character except "/", """, or "@".
-	//
-	// Constraints: Must contain 8 to 41 characters.
-	MasterUserPassword *string `locationName:"masterUserPassword" type:"string" sensitive:"true"`
-
-	// The master user name for your new database.
-	//
-	// Constraints:
-	//
-	//    * Master user name is required.
-	//
-	//    * Must contain from 1 to 16 alphanumeric characters.
-	//
-	//    * The first character must be a letter.
-	//
-	//    * Cannot be a reserved word for the database engine you choose. For more
-	//    information about reserved words in MySQL 5.6 or 5.7, see the Keywords
-	//    and Reserved Words articles for MySQL 5.6 (https://dev.mysql.com/doc/refman/5.6/en/keywords.html)
-	//    or MySQL 5.7 (https://dev.mysql.com/doc/refman/5.7/en/keywords.html) respectively.
-	//
-	// MasterUsername is a required field
-	MasterUsername *string `locationName:"masterUsername" type:"string" required:"true"`
-
-	// The daily time range during which automated backups are created for your
-	// new database if automated backups are enabled.
-	//
-	// The default is a 30-minute window selected at random from an 8-hour block
-	// of time for each AWS Region. For more information about the preferred backup
-	// window time blocks for each region, see the Working With Backups (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_WorkingWithAutomatedBackups.html#USER_WorkingWithAutomatedBackups.BackupWindow)
-	// guide in the Amazon Relational Database Service (Amazon RDS) documentation.
-	//
-	// Constraints:
-	//
-	//    * Must be in the hh24:mi-hh24:mi format. Example: 16:00-16:30
-	//
-	//    * Specified in Coordinated Universal Time (UTC).
-	//
-	//    * Must not conflict with the preferred maintenance window.
-	//
-	//    * Must be at least 30 minutes.
-	PreferredBackupWindow *string `locationName:"preferredBackupWindow" type:"string"`
-
-	// The weekly time range during which system maintenance can occur on your new
-	// database.
-	//
-	// The default is a 30-minute window selected at random from an 8-hour block
-	// of time for each AWS Region, occurring on a random day of the week.
-	//
-	// Constraints:
-	//
-	//    * Must be in the ddd:hh24:mi-ddd:hh24:mi format.
-	//
-	//    * Valid days: Mon, Tue, Wed, Thu, Fri, Sat, Sun.
-	//
-	//    * Must be at least 30 minutes.
-	//
-	//    * Specified in Coordinated Universal Time (UTC).
-	//
-	//    * Example: Tue:17:00-Tue:17:30
-	PreferredMaintenanceWindow *string `locationName:"preferredMaintenanceWindow" type:"string"`
-
-	// Specifies the accessibility options for your new database. A value of true
-	// specifies a database that is available to resources outside of your Lightsail
-	// account. A value of false specifies a database that is available only to
-	// your Lightsail resources in the same region as your database.
-	PubliclyAccessible *bool `locationName:"publiclyAccessible" type:"boolean"`
-
-	// The blueprint ID for your new database. A blueprint describes the major engine
-	// version of a database.
-	//
-	// You can get a list of database blueprints IDs by using the get relational
-	// database blueprints operation.
-	//
-	// RelationalDatabaseBlueprintId is a required field
-	RelationalDatabaseBlueprintId *string `locationName:"relationalDatabaseBlueprintId" type:"string" required:"true"`
-
-	// The bundle ID for your new database. A bundle describes the performance specifications
-	// for your database.
-	//
-	// You can get a list of database bundle IDs by using the get relational database
-	// bundles operation.
-	//
-	// RelationalDatabaseBundleId is a required field
-	RelationalDatabaseBundleId *string `locationName:"relationalDatabaseBundleId" type:"string" required:"true"`
-
-	// The name to use for your new database.
-	//
-	// Constraints:
-	//
-	//    * Must contain from 2 to 255 alphanumeric characters, or hyphens.
-	//
-	//    * The first and last character must be a letter or number.
-	//
-	// RelationalDatabaseName is a required field
-	RelationalDatabaseName *string `locationName:"relationalDatabaseName" type:"string" required:"true"`
-
-	// The tag keys and optional values to add to the resource during create.
-	//
-	// To tag a resource after it has been created, see the tag resource operation.
-	Tags []Tag `locationName:"tags" type:"list"`
-}
-
-// String returns the string representation
-func (s CreateRelationalDatabaseInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateRelationalDatabaseInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateRelationalDatabaseInput"}
-
-	if s.MasterDatabaseName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("MasterDatabaseName"))
-	}
-
-	if s.MasterUsername == nil {
-		invalidParams.Add(aws.NewErrParamRequired("MasterUsername"))
-	}
-
-	if s.RelationalDatabaseBlueprintId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("RelationalDatabaseBlueprintId"))
-	}
-
-	if s.RelationalDatabaseBundleId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("RelationalDatabaseBundleId"))
-	}
-
-	if s.RelationalDatabaseName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("RelationalDatabaseName"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type CreateRelationalDatabaseOutput struct {
-	_ struct{} `type:"structure"`
-
-	// An object describing the result of your create relational database request.
-	Operations []Operation `locationName:"operations" type:"list"`
-}
-
-// String returns the string representation
-func (s CreateRelationalDatabaseOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCreateRelationalDatabase = "CreateRelationalDatabase"
 
@@ -200,7 +27,7 @@ const opCreateRelationalDatabase = "CreateRelationalDatabase"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/CreateRelationalDatabase
-func (c *Client) CreateRelationalDatabaseRequest(input *CreateRelationalDatabaseInput) CreateRelationalDatabaseRequest {
+func (c *Client) CreateRelationalDatabaseRequest(input *types.CreateRelationalDatabaseInput) CreateRelationalDatabaseRequest {
 	op := &aws.Operation{
 		Name:       opCreateRelationalDatabase,
 		HTTPMethod: "POST",
@@ -208,10 +35,10 @@ func (c *Client) CreateRelationalDatabaseRequest(input *CreateRelationalDatabase
 	}
 
 	if input == nil {
-		input = &CreateRelationalDatabaseInput{}
+		input = &types.CreateRelationalDatabaseInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateRelationalDatabaseOutput{})
+	req := c.newRequest(op, input, &types.CreateRelationalDatabaseOutput{})
 	return CreateRelationalDatabaseRequest{Request: req, Input: input, Copy: c.CreateRelationalDatabaseRequest}
 }
 
@@ -219,8 +46,8 @@ func (c *Client) CreateRelationalDatabaseRequest(input *CreateRelationalDatabase
 // CreateRelationalDatabase API operation.
 type CreateRelationalDatabaseRequest struct {
 	*aws.Request
-	Input *CreateRelationalDatabaseInput
-	Copy  func(*CreateRelationalDatabaseInput) CreateRelationalDatabaseRequest
+	Input *types.CreateRelationalDatabaseInput
+	Copy  func(*types.CreateRelationalDatabaseInput) CreateRelationalDatabaseRequest
 }
 
 // Send marshals and sends the CreateRelationalDatabase API request.
@@ -232,7 +59,7 @@ func (r CreateRelationalDatabaseRequest) Send(ctx context.Context) (*CreateRelat
 	}
 
 	resp := &CreateRelationalDatabaseResponse{
-		CreateRelationalDatabaseOutput: r.Request.Data.(*CreateRelationalDatabaseOutput),
+		CreateRelationalDatabaseOutput: r.Request.Data.(*types.CreateRelationalDatabaseOutput),
 		response:                       &aws.Response{Request: r.Request},
 	}
 
@@ -242,7 +69,7 @@ func (r CreateRelationalDatabaseRequest) Send(ctx context.Context) (*CreateRelat
 // CreateRelationalDatabaseResponse is the response type for the
 // CreateRelationalDatabase API operation.
 type CreateRelationalDatabaseResponse struct {
-	*CreateRelationalDatabaseOutput
+	*types.CreateRelationalDatabaseOutput
 
 	response *aws.Response
 }

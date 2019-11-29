@@ -6,92 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/qldb/types"
 )
-
-type GetDigestInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the ledger.
-	//
-	// Name is a required field
-	Name *string `location:"uri" locationName:"name" min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetDigestInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetDigestInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetDigestInput"}
-
-	if s.Name == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Name"))
-	}
-	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetDigestInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.Name != nil {
-		v := *s.Name
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type GetDigestOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The 256-bit hash value representing the digest returned by a GetDigest request.
-	//
-	// Digest is automatically base64 encoded/decoded by the SDK.
-	//
-	// Digest is a required field
-	Digest []byte `min:"32" type:"blob" required:"true"`
-
-	// The latest block location covered by the digest that you requested. An address
-	// is an Amazon Ion structure that has two fields: strandId and sequenceNo.
-	//
-	// DigestTipAddress is a required field
-	DigestTipAddress *ValueHolder `type:"structure" required:"true" sensitive:"true"`
-}
-
-// String returns the string representation
-func (s GetDigestOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetDigestOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.Digest != nil {
-		v := s.Digest
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "Digest", protocol.QuotedValue{ValueMarshaler: protocol.BytesValue(v)}, metadata)
-	}
-	if s.DigestTipAddress != nil {
-		v := s.DigestTipAddress
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "DigestTipAddress", v, metadata)
-	}
-	return nil
-}
 
 const opGetDigest = "GetDigest"
 
@@ -109,7 +25,7 @@ const opGetDigest = "GetDigest"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/qldb-2019-01-02/GetDigest
-func (c *Client) GetDigestRequest(input *GetDigestInput) GetDigestRequest {
+func (c *Client) GetDigestRequest(input *types.GetDigestInput) GetDigestRequest {
 	op := &aws.Operation{
 		Name:       opGetDigest,
 		HTTPMethod: "POST",
@@ -117,10 +33,10 @@ func (c *Client) GetDigestRequest(input *GetDigestInput) GetDigestRequest {
 	}
 
 	if input == nil {
-		input = &GetDigestInput{}
+		input = &types.GetDigestInput{}
 	}
 
-	req := c.newRequest(op, input, &GetDigestOutput{})
+	req := c.newRequest(op, input, &types.GetDigestOutput{})
 	return GetDigestRequest{Request: req, Input: input, Copy: c.GetDigestRequest}
 }
 
@@ -128,8 +44,8 @@ func (c *Client) GetDigestRequest(input *GetDigestInput) GetDigestRequest {
 // GetDigest API operation.
 type GetDigestRequest struct {
 	*aws.Request
-	Input *GetDigestInput
-	Copy  func(*GetDigestInput) GetDigestRequest
+	Input *types.GetDigestInput
+	Copy  func(*types.GetDigestInput) GetDigestRequest
 }
 
 // Send marshals and sends the GetDigest API request.
@@ -141,7 +57,7 @@ func (r GetDigestRequest) Send(ctx context.Context) (*GetDigestResponse, error) 
 	}
 
 	resp := &GetDigestResponse{
-		GetDigestOutput: r.Request.Data.(*GetDigestOutput),
+		GetDigestOutput: r.Request.Data.(*types.GetDigestOutput),
 		response:        &aws.Response{Request: r.Request},
 	}
 
@@ -151,7 +67,7 @@ func (r GetDigestRequest) Send(ctx context.Context) (*GetDigestResponse, error) 
 // GetDigestResponse is the response type for the
 // GetDigest API operation.
 type GetDigestResponse struct {
-	*GetDigestOutput
+	*types.GetDigestOutput
 
 	response *aws.Response
 }

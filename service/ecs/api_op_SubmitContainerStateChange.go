@@ -6,54 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ecs/types"
 )
-
-type SubmitContainerStateChangeInput struct {
-	_ struct{} `type:"structure"`
-
-	// The short name or full ARN of the cluster that hosts the container.
-	Cluster *string `locationName:"cluster" type:"string"`
-
-	// The name of the container.
-	ContainerName *string `locationName:"containerName" type:"string"`
-
-	// The exit code returned for the state change request.
-	ExitCode *int64 `locationName:"exitCode" type:"integer"`
-
-	// The network bindings of the container.
-	NetworkBindings []NetworkBinding `locationName:"networkBindings" type:"list"`
-
-	// The reason for the state change request.
-	Reason *string `locationName:"reason" type:"string"`
-
-	// The ID of the Docker container.
-	RuntimeId *string `locationName:"runtimeId" type:"string"`
-
-	// The status of the state change request.
-	Status *string `locationName:"status" type:"string"`
-
-	// The task ID or full Amazon Resource Name (ARN) of the task that hosts the
-	// container.
-	Task *string `locationName:"task" type:"string"`
-}
-
-// String returns the string representation
-func (s SubmitContainerStateChangeInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type SubmitContainerStateChangeOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Acknowledgement of the state change.
-	Acknowledgment *string `locationName:"acknowledgment" type:"string"`
-}
-
-// String returns the string representation
-func (s SubmitContainerStateChangeOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opSubmitContainerStateChange = "SubmitContainerStateChange"
 
@@ -74,7 +28,7 @@ const opSubmitContainerStateChange = "SubmitContainerStateChange"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/SubmitContainerStateChange
-func (c *Client) SubmitContainerStateChangeRequest(input *SubmitContainerStateChangeInput) SubmitContainerStateChangeRequest {
+func (c *Client) SubmitContainerStateChangeRequest(input *types.SubmitContainerStateChangeInput) SubmitContainerStateChangeRequest {
 	op := &aws.Operation{
 		Name:       opSubmitContainerStateChange,
 		HTTPMethod: "POST",
@@ -82,10 +36,10 @@ func (c *Client) SubmitContainerStateChangeRequest(input *SubmitContainerStateCh
 	}
 
 	if input == nil {
-		input = &SubmitContainerStateChangeInput{}
+		input = &types.SubmitContainerStateChangeInput{}
 	}
 
-	req := c.newRequest(op, input, &SubmitContainerStateChangeOutput{})
+	req := c.newRequest(op, input, &types.SubmitContainerStateChangeOutput{})
 	return SubmitContainerStateChangeRequest{Request: req, Input: input, Copy: c.SubmitContainerStateChangeRequest}
 }
 
@@ -93,8 +47,8 @@ func (c *Client) SubmitContainerStateChangeRequest(input *SubmitContainerStateCh
 // SubmitContainerStateChange API operation.
 type SubmitContainerStateChangeRequest struct {
 	*aws.Request
-	Input *SubmitContainerStateChangeInput
-	Copy  func(*SubmitContainerStateChangeInput) SubmitContainerStateChangeRequest
+	Input *types.SubmitContainerStateChangeInput
+	Copy  func(*types.SubmitContainerStateChangeInput) SubmitContainerStateChangeRequest
 }
 
 // Send marshals and sends the SubmitContainerStateChange API request.
@@ -106,7 +60,7 @@ func (r SubmitContainerStateChangeRequest) Send(ctx context.Context) (*SubmitCon
 	}
 
 	resp := &SubmitContainerStateChangeResponse{
-		SubmitContainerStateChangeOutput: r.Request.Data.(*SubmitContainerStateChangeOutput),
+		SubmitContainerStateChangeOutput: r.Request.Data.(*types.SubmitContainerStateChangeOutput),
 		response:                         &aws.Response{Request: r.Request},
 	}
 
@@ -116,7 +70,7 @@ func (r SubmitContainerStateChangeRequest) Send(ctx context.Context) (*SubmitCon
 // SubmitContainerStateChangeResponse is the response type for the
 // SubmitContainerStateChange API operation.
 type SubmitContainerStateChangeResponse struct {
-	*SubmitContainerStateChangeOutput
+	*types.SubmitContainerStateChangeOutput
 
 	response *aws.Response
 }

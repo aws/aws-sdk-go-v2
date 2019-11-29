@@ -4,167 +4,10 @@ package lexmodelbuildingservice
 
 import (
 	"context"
-	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/lexmodelbuildingservice/types"
 )
-
-type CreateSlotTypeVersionInput struct {
-	_ struct{} `type:"structure"`
-
-	// Checksum for the $LATEST version of the slot type that you want to publish.
-	// If you specify a checksum and the $LATEST version of the slot type has a
-	// different checksum, Amazon Lex returns a PreconditionFailedException exception
-	// and doesn't publish the new version. If you don't specify a checksum, Amazon
-	// Lex publishes the $LATEST version.
-	Checksum *string `locationName:"checksum" type:"string"`
-
-	// The name of the slot type that you want to create a new version for. The
-	// name is case sensitive.
-	//
-	// Name is a required field
-	Name *string `location:"uri" locationName:"name" min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s CreateSlotTypeVersionInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateSlotTypeVersionInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateSlotTypeVersionInput"}
-
-	if s.Name == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Name"))
-	}
-	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s CreateSlotTypeVersionInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.Checksum != nil {
-		v := *s.Checksum
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "checksum", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Name != nil {
-		v := *s.Name
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type CreateSlotTypeVersionOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Checksum of the $LATEST version of the slot type.
-	Checksum *string `locationName:"checksum" type:"string"`
-
-	// The date that the slot type was created.
-	CreatedDate *time.Time `locationName:"createdDate" type:"timestamp"`
-
-	// A description of the slot type.
-	Description *string `locationName:"description" type:"string"`
-
-	// A list of EnumerationValue objects that defines the values that the slot
-	// type can take.
-	EnumerationValues []EnumerationValue `locationName:"enumerationValues" min:"1" type:"list"`
-
-	// The date that the slot type was updated. When you create a resource, the
-	// creation date and last update date are the same.
-	LastUpdatedDate *time.Time `locationName:"lastUpdatedDate" type:"timestamp"`
-
-	// The name of the slot type.
-	Name *string `locationName:"name" min:"1" type:"string"`
-
-	// The strategy that Amazon Lex uses to determine the value of the slot. For
-	// more information, see PutSlotType.
-	ValueSelectionStrategy SlotValueSelectionStrategy `locationName:"valueSelectionStrategy" type:"string" enum:"true"`
-
-	// The version assigned to the new slot type version.
-	Version *string `locationName:"version" min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s CreateSlotTypeVersionOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s CreateSlotTypeVersionOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.Checksum != nil {
-		v := *s.Checksum
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "checksum", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.CreatedDate != nil {
-		v := *s.CreatedDate
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "createdDate",
-			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
-	}
-	if s.Description != nil {
-		v := *s.Description
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "description", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.EnumerationValues != nil {
-		v := s.EnumerationValues
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "enumerationValues", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	if s.LastUpdatedDate != nil {
-		v := *s.LastUpdatedDate
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "lastUpdatedDate",
-			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
-	}
-	if s.Name != nil {
-		v := *s.Name
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if len(s.ValueSelectionStrategy) > 0 {
-		v := s.ValueSelectionStrategy
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "valueSelectionStrategy", protocol.QuotedValue{ValueMarshaler: v}, metadata)
-	}
-	if s.Version != nil {
-		v := *s.Version
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "version", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opCreateSlotTypeVersion = "CreateSlotTypeVersion"
 
@@ -192,7 +35,7 @@ const opCreateSlotTypeVersion = "CreateSlotTypeVersion"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/CreateSlotTypeVersion
-func (c *Client) CreateSlotTypeVersionRequest(input *CreateSlotTypeVersionInput) CreateSlotTypeVersionRequest {
+func (c *Client) CreateSlotTypeVersionRequest(input *types.CreateSlotTypeVersionInput) CreateSlotTypeVersionRequest {
 	op := &aws.Operation{
 		Name:       opCreateSlotTypeVersion,
 		HTTPMethod: "POST",
@@ -200,10 +43,10 @@ func (c *Client) CreateSlotTypeVersionRequest(input *CreateSlotTypeVersionInput)
 	}
 
 	if input == nil {
-		input = &CreateSlotTypeVersionInput{}
+		input = &types.CreateSlotTypeVersionInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateSlotTypeVersionOutput{})
+	req := c.newRequest(op, input, &types.CreateSlotTypeVersionOutput{})
 	return CreateSlotTypeVersionRequest{Request: req, Input: input, Copy: c.CreateSlotTypeVersionRequest}
 }
 
@@ -211,8 +54,8 @@ func (c *Client) CreateSlotTypeVersionRequest(input *CreateSlotTypeVersionInput)
 // CreateSlotTypeVersion API operation.
 type CreateSlotTypeVersionRequest struct {
 	*aws.Request
-	Input *CreateSlotTypeVersionInput
-	Copy  func(*CreateSlotTypeVersionInput) CreateSlotTypeVersionRequest
+	Input *types.CreateSlotTypeVersionInput
+	Copy  func(*types.CreateSlotTypeVersionInput) CreateSlotTypeVersionRequest
 }
 
 // Send marshals and sends the CreateSlotTypeVersion API request.
@@ -224,7 +67,7 @@ func (r CreateSlotTypeVersionRequest) Send(ctx context.Context) (*CreateSlotType
 	}
 
 	resp := &CreateSlotTypeVersionResponse{
-		CreateSlotTypeVersionOutput: r.Request.Data.(*CreateSlotTypeVersionOutput),
+		CreateSlotTypeVersionOutput: r.Request.Data.(*types.CreateSlotTypeVersionOutput),
 		response:                    &aws.Response{Request: r.Request},
 	}
 
@@ -234,7 +77,7 @@ func (r CreateSlotTypeVersionRequest) Send(ctx context.Context) (*CreateSlotType
 // CreateSlotTypeVersionResponse is the response type for the
 // CreateSlotTypeVersion API operation.
 type CreateSlotTypeVersionResponse struct {
-	*CreateSlotTypeVersionOutput
+	*types.CreateSlotTypeVersionOutput
 
 	response *aws.Response
 }

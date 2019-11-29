@@ -6,40 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/elasticbeanstalk/types"
 )
-
-// Request to list an environment's upcoming and in-progress managed actions.
-type DescribeEnvironmentManagedActionsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The environment ID of the target environment.
-	EnvironmentId *string `type:"string"`
-
-	// The name of the target environment.
-	EnvironmentName *string `type:"string"`
-
-	// To show only actions with a particular status, specify a status.
-	Status ActionStatus `type:"string" enum:"true"`
-}
-
-// String returns the string representation
-func (s DescribeEnvironmentManagedActionsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// The result message containing a list of managed actions.
-type DescribeEnvironmentManagedActionsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A list of upcoming and in-progress managed actions.
-	ManagedActions []ManagedAction `min:"1" type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeEnvironmentManagedActionsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeEnvironmentManagedActions = "DescribeEnvironmentManagedActions"
 
@@ -56,7 +24,7 @@ const opDescribeEnvironmentManagedActions = "DescribeEnvironmentManagedActions"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/DescribeEnvironmentManagedActions
-func (c *Client) DescribeEnvironmentManagedActionsRequest(input *DescribeEnvironmentManagedActionsInput) DescribeEnvironmentManagedActionsRequest {
+func (c *Client) DescribeEnvironmentManagedActionsRequest(input *types.DescribeEnvironmentManagedActionsInput) DescribeEnvironmentManagedActionsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeEnvironmentManagedActions,
 		HTTPMethod: "POST",
@@ -64,10 +32,10 @@ func (c *Client) DescribeEnvironmentManagedActionsRequest(input *DescribeEnviron
 	}
 
 	if input == nil {
-		input = &DescribeEnvironmentManagedActionsInput{}
+		input = &types.DescribeEnvironmentManagedActionsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeEnvironmentManagedActionsOutput{})
+	req := c.newRequest(op, input, &types.DescribeEnvironmentManagedActionsOutput{})
 	return DescribeEnvironmentManagedActionsRequest{Request: req, Input: input, Copy: c.DescribeEnvironmentManagedActionsRequest}
 }
 
@@ -75,8 +43,8 @@ func (c *Client) DescribeEnvironmentManagedActionsRequest(input *DescribeEnviron
 // DescribeEnvironmentManagedActions API operation.
 type DescribeEnvironmentManagedActionsRequest struct {
 	*aws.Request
-	Input *DescribeEnvironmentManagedActionsInput
-	Copy  func(*DescribeEnvironmentManagedActionsInput) DescribeEnvironmentManagedActionsRequest
+	Input *types.DescribeEnvironmentManagedActionsInput
+	Copy  func(*types.DescribeEnvironmentManagedActionsInput) DescribeEnvironmentManagedActionsRequest
 }
 
 // Send marshals and sends the DescribeEnvironmentManagedActions API request.
@@ -88,7 +56,7 @@ func (r DescribeEnvironmentManagedActionsRequest) Send(ctx context.Context) (*De
 	}
 
 	resp := &DescribeEnvironmentManagedActionsResponse{
-		DescribeEnvironmentManagedActionsOutput: r.Request.Data.(*DescribeEnvironmentManagedActionsOutput),
+		DescribeEnvironmentManagedActionsOutput: r.Request.Data.(*types.DescribeEnvironmentManagedActionsOutput),
 		response:                                &aws.Response{Request: r.Request},
 	}
 
@@ -98,7 +66,7 @@ func (r DescribeEnvironmentManagedActionsRequest) Send(ctx context.Context) (*De
 // DescribeEnvironmentManagedActionsResponse is the response type for the
 // DescribeEnvironmentManagedActions API operation.
 type DescribeEnvironmentManagedActionsResponse struct {
-	*DescribeEnvironmentManagedActionsOutput
+	*types.DescribeEnvironmentManagedActionsOutput
 
 	response *aws.Response
 }

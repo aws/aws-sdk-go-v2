@@ -4,108 +4,10 @@ package elasticloadbalancingv2
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/elasticloadbalancingv2/types"
 )
-
-type CreateRuleInput struct {
-	_ struct{} `type:"structure"`
-
-	// The actions. Each rule must include exactly one of the following types of
-	// actions: forward, fixed-response, or redirect.
-	//
-	// If the action type is forward, you specify a target group. The protocol of
-	// the target group must be HTTP or HTTPS for an Application Load Balancer.
-	// The protocol of the target group must be TCP, TLS, UDP, or TCP_UDP for a
-	// Network Load Balancer.
-	//
-	// [HTTPS listeners] If the action type is authenticate-oidc, you authenticate
-	// users through an identity provider that is OpenID Connect (OIDC) compliant.
-	//
-	// [HTTPS listeners] If the action type is authenticate-cognito, you authenticate
-	// users through the user pools supported by Amazon Cognito.
-	//
-	// [Application Load Balancer] If the action type is redirect, you redirect
-	// specified client requests from one URL to another.
-	//
-	// [Application Load Balancer] If the action type is fixed-response, you drop
-	// specified client requests and return a custom HTTP response.
-	//
-	// Actions is a required field
-	Actions []Action `type:"list" required:"true"`
-
-	// The conditions. Each rule can include zero or one of the following conditions:
-	// http-request-method, host-header, path-pattern, and source-ip, and zero or
-	// more of the following conditions: http-header and query-string.
-	//
-	// Conditions is a required field
-	Conditions []RuleCondition `type:"list" required:"true"`
-
-	// The Amazon Resource Name (ARN) of the listener.
-	//
-	// ListenerArn is a required field
-	ListenerArn *string `type:"string" required:"true"`
-
-	// The rule priority. A listener can't have multiple rules with the same priority.
-	//
-	// Priority is a required field
-	Priority *int64 `min:"1" type:"integer" required:"true"`
-}
-
-// String returns the string representation
-func (s CreateRuleInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateRuleInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateRuleInput"}
-
-	if s.Actions == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Actions"))
-	}
-
-	if s.Conditions == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Conditions"))
-	}
-
-	if s.ListenerArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ListenerArn"))
-	}
-
-	if s.Priority == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Priority"))
-	}
-	if s.Priority != nil && *s.Priority < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("Priority", 1))
-	}
-	if s.Actions != nil {
-		for i, v := range s.Actions {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Actions", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type CreateRuleOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Information about the rule.
-	Rules []Rule `type:"list"`
-}
-
-// String returns the string representation
-func (s CreateRuleOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCreateRule = "CreateRule"
 
@@ -133,7 +35,7 @@ const opCreateRule = "CreateRule"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/CreateRule
-func (c *Client) CreateRuleRequest(input *CreateRuleInput) CreateRuleRequest {
+func (c *Client) CreateRuleRequest(input *types.CreateRuleInput) CreateRuleRequest {
 	op := &aws.Operation{
 		Name:       opCreateRule,
 		HTTPMethod: "POST",
@@ -141,10 +43,10 @@ func (c *Client) CreateRuleRequest(input *CreateRuleInput) CreateRuleRequest {
 	}
 
 	if input == nil {
-		input = &CreateRuleInput{}
+		input = &types.CreateRuleInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateRuleOutput{})
+	req := c.newRequest(op, input, &types.CreateRuleOutput{})
 	return CreateRuleRequest{Request: req, Input: input, Copy: c.CreateRuleRequest}
 }
 
@@ -152,8 +54,8 @@ func (c *Client) CreateRuleRequest(input *CreateRuleInput) CreateRuleRequest {
 // CreateRule API operation.
 type CreateRuleRequest struct {
 	*aws.Request
-	Input *CreateRuleInput
-	Copy  func(*CreateRuleInput) CreateRuleRequest
+	Input *types.CreateRuleInput
+	Copy  func(*types.CreateRuleInput) CreateRuleRequest
 }
 
 // Send marshals and sends the CreateRule API request.
@@ -165,7 +67,7 @@ func (r CreateRuleRequest) Send(ctx context.Context) (*CreateRuleResponse, error
 	}
 
 	resp := &CreateRuleResponse{
-		CreateRuleOutput: r.Request.Data.(*CreateRuleOutput),
+		CreateRuleOutput: r.Request.Data.(*types.CreateRuleOutput),
 		response:         &aws.Response{Request: r.Request},
 	}
 
@@ -175,7 +77,7 @@ func (r CreateRuleRequest) Send(ctx context.Context) (*CreateRuleResponse, error
 // CreateRuleResponse is the response type for the
 // CreateRule API operation.
 type CreateRuleResponse struct {
-	*CreateRuleOutput
+	*types.CreateRuleOutput
 
 	response *aws.Response
 }

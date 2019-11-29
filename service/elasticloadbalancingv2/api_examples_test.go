@@ -12,6 +12,8 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws/awserr"
 	"github.com/aws/aws-sdk-go-v2/aws/external"
 	"github.com/aws/aws-sdk-go-v2/service/elasticloadbalancingv2"
+	"github.com/aws/aws-sdk-go-v2/service/elasticloadbalancingv2/enums"
+	"github.com/aws/aws-sdk-go-v2/service/elasticloadbalancingv2/types"
 )
 
 var _ time.Duration
@@ -36,11 +38,11 @@ func ExampleClient_AddTagsRequest_shared00() {
 	}
 
 	svc := elasticloadbalancingv2.New(cfg)
-	input := &elasticloadbalancingv2.AddTagsInput{
+	input := &types.AddTagsInput{
 		ResourceArns: []string{
 			"arn:aws:elasticloadbalancing:us-west-2:123456789012:loadbalancer/app/my-load-balancer/50dc6c495c0c9188",
 		},
-		Tags: []elasticloadbalancingv2.Tag{
+		Tags: []types.Tag{
 			{
 				Key:   aws.String("project"),
 				Value: aws.String("lima"),
@@ -90,16 +92,16 @@ func ExampleClient_CreateListenerRequest_shared00() {
 	}
 
 	svc := elasticloadbalancingv2.New(cfg)
-	input := &elasticloadbalancingv2.CreateListenerInput{
-		DefaultActions: []elasticloadbalancingv2.Action{
+	input := &types.CreateListenerInput{
+		DefaultActions: []types.Action{
 			{
 				TargetGroupArn: aws.String("arn:aws:elasticloadbalancing:us-west-2:123456789012:targetgroup/my-targets/73e2d6bc24d8a067"),
-				Type:           elasticloadbalancingv2.ActionTypeEnumForward,
+				Type:           enums.ActionTypeEnumForward,
 			},
 		},
 		LoadBalancerArn: aws.String("arn:aws:elasticloadbalancing:us-west-2:123456789012:loadbalancer/app/my-load-balancer/50dc6c495c0c9188"),
 		Port:            aws.Int64(80),
-		Protocol:        elasticloadbalancingv2.ProtocolEnumHttp,
+		Protocol:        enums.ProtocolEnumHttp,
 	}
 
 	req := svc.CreateListenerRequest(input)
@@ -137,6 +139,8 @@ func ExampleClient_CreateListenerRequest_shared00() {
 				fmt.Println(elasticloadbalancingv2.ErrCodeTooManyActionsException, aerr.Error())
 			case elasticloadbalancingv2.ErrCodeInvalidLoadBalancerActionException:
 				fmt.Println(elasticloadbalancingv2.ErrCodeInvalidLoadBalancerActionException, aerr.Error())
+			case elasticloadbalancingv2.ErrCodeTooManyUniqueTargetGroupsPerLoadBalancerException:
+				fmt.Println(elasticloadbalancingv2.ErrCodeTooManyUniqueTargetGroupsPerLoadBalancerException, aerr.Error())
 			default:
 				fmt.Println(aerr.Error())
 			}
@@ -166,21 +170,21 @@ func ExampleClient_CreateListenerRequest_shared01() {
 	}
 
 	svc := elasticloadbalancingv2.New(cfg)
-	input := &elasticloadbalancingv2.CreateListenerInput{
-		Certificates: []elasticloadbalancingv2.Certificate{
+	input := &types.CreateListenerInput{
+		Certificates: []types.Certificate{
 			{
 				CertificateArn: aws.String("arn:aws:iam::123456789012:server-certificate/my-server-cert"),
 			},
 		},
-		DefaultActions: []elasticloadbalancingv2.Action{
+		DefaultActions: []types.Action{
 			{
 				TargetGroupArn: aws.String("arn:aws:elasticloadbalancing:us-west-2:123456789012:targetgroup/my-targets/73e2d6bc24d8a067"),
-				Type:           elasticloadbalancingv2.ActionTypeEnumForward,
+				Type:           enums.ActionTypeEnumForward,
 			},
 		},
 		LoadBalancerArn: aws.String("arn:aws:elasticloadbalancing:us-west-2:123456789012:loadbalancer/app/my-load-balancer/50dc6c495c0c9188"),
 		Port:            aws.Int64(443),
-		Protocol:        elasticloadbalancingv2.ProtocolEnumHttps,
+		Protocol:        enums.ProtocolEnumHttps,
 		SslPolicy:       aws.String("ELBSecurityPolicy-2015-05"),
 	}
 
@@ -219,6 +223,8 @@ func ExampleClient_CreateListenerRequest_shared01() {
 				fmt.Println(elasticloadbalancingv2.ErrCodeTooManyActionsException, aerr.Error())
 			case elasticloadbalancingv2.ErrCodeInvalidLoadBalancerActionException:
 				fmt.Println(elasticloadbalancingv2.ErrCodeInvalidLoadBalancerActionException, aerr.Error())
+			case elasticloadbalancingv2.ErrCodeTooManyUniqueTargetGroupsPerLoadBalancerException:
+				fmt.Println(elasticloadbalancingv2.ErrCodeTooManyUniqueTargetGroupsPerLoadBalancerException, aerr.Error())
 			default:
 				fmt.Println(aerr.Error())
 			}
@@ -244,7 +250,7 @@ func ExampleClient_CreateLoadBalancerRequest_shared00() {
 	}
 
 	svc := elasticloadbalancingv2.New(cfg)
-	input := &elasticloadbalancingv2.CreateLoadBalancerInput{
+	input := &types.CreateLoadBalancerInput{
 		Name: aws.String("my-load-balancer"),
 		Subnets: []string{
 			"subnet-b7d581c0",
@@ -308,9 +314,9 @@ func ExampleClient_CreateLoadBalancerRequest_shared01() {
 	}
 
 	svc := elasticloadbalancingv2.New(cfg)
-	input := &elasticloadbalancingv2.CreateLoadBalancerInput{
+	input := &types.CreateLoadBalancerInput{
 		Name:   aws.String("my-internal-load-balancer"),
-		Scheme: elasticloadbalancingv2.LoadBalancerSchemeEnumInternal,
+		Scheme: enums.LoadBalancerSchemeEnumInternal,
 		Subnets: []string{
 			"subnet-b7d581c0",
 			"subnet-8360a9e7",
@@ -373,14 +379,14 @@ func ExampleClient_CreateRuleRequest_shared00() {
 	}
 
 	svc := elasticloadbalancingv2.New(cfg)
-	input := &elasticloadbalancingv2.CreateRuleInput{
-		Actions: []elasticloadbalancingv2.Action{
+	input := &types.CreateRuleInput{
+		Actions: []types.Action{
 			{
 				TargetGroupArn: aws.String("arn:aws:elasticloadbalancing:us-west-2:123456789012:targetgroup/my-targets/73e2d6bc24d8a067"),
-				Type:           elasticloadbalancingv2.ActionTypeEnumForward,
+				Type:           enums.ActionTypeEnumForward,
 			},
 		},
-		Conditions: []elasticloadbalancingv2.RuleCondition{
+		Conditions: []types.RuleCondition{
 			{
 				Field: aws.String("path-pattern"),
 				Values: []string{
@@ -423,6 +429,8 @@ func ExampleClient_CreateRuleRequest_shared00() {
 				fmt.Println(elasticloadbalancingv2.ErrCodeTooManyActionsException, aerr.Error())
 			case elasticloadbalancingv2.ErrCodeInvalidLoadBalancerActionException:
 				fmt.Println(elasticloadbalancingv2.ErrCodeInvalidLoadBalancerActionException, aerr.Error())
+			case elasticloadbalancingv2.ErrCodeTooManyUniqueTargetGroupsPerLoadBalancerException:
+				fmt.Println(elasticloadbalancingv2.ErrCodeTooManyUniqueTargetGroupsPerLoadBalancerException, aerr.Error())
 			default:
 				fmt.Println(aerr.Error())
 			}
@@ -448,10 +456,10 @@ func ExampleClient_CreateTargetGroupRequest_shared00() {
 	}
 
 	svc := elasticloadbalancingv2.New(cfg)
-	input := &elasticloadbalancingv2.CreateTargetGroupInput{
+	input := &types.CreateTargetGroupInput{
 		Name:     aws.String("my-targets"),
 		Port:     aws.Int64(80),
-		Protocol: elasticloadbalancingv2.ProtocolEnumHttp,
+		Protocol: enums.ProtocolEnumHttp,
 		VpcId:    aws.String("vpc-3ac0fb5f"),
 	}
 
@@ -490,7 +498,7 @@ func ExampleClient_DeleteListenerRequest_shared00() {
 	}
 
 	svc := elasticloadbalancingv2.New(cfg)
-	input := &elasticloadbalancingv2.DeleteListenerInput{
+	input := &types.DeleteListenerInput{
 		ListenerArn: aws.String("arn:aws:elasticloadbalancing:ua-west-2:123456789012:listener/app/my-load-balancer/50dc6c495c0c9188/f2f7dc8efc522ab2"),
 	}
 
@@ -525,7 +533,7 @@ func ExampleClient_DeleteLoadBalancerRequest_shared00() {
 	}
 
 	svc := elasticloadbalancingv2.New(cfg)
-	input := &elasticloadbalancingv2.DeleteLoadBalancerInput{
+	input := &types.DeleteLoadBalancerInput{
 		LoadBalancerArn: aws.String("arn:aws:elasticloadbalancing:us-west-2:123456789012:loadbalancer/app/my-load-balancer/50dc6c495c0c9188"),
 	}
 
@@ -564,7 +572,7 @@ func ExampleClient_DeleteRuleRequest_shared00() {
 	}
 
 	svc := elasticloadbalancingv2.New(cfg)
-	input := &elasticloadbalancingv2.DeleteRuleInput{
+	input := &types.DeleteRuleInput{
 		RuleArn: aws.String("arn:aws:elasticloadbalancing:us-west-2:123456789012:listener-rule/app/my-load-balancer/50dc6c495c0c9188/f2f7dc8efc522ab2/1291d13826f405c3"),
 	}
 
@@ -601,7 +609,7 @@ func ExampleClient_DeleteTargetGroupRequest_shared00() {
 	}
 
 	svc := elasticloadbalancingv2.New(cfg)
-	input := &elasticloadbalancingv2.DeleteTargetGroupInput{
+	input := &types.DeleteTargetGroupInput{
 		TargetGroupArn: aws.String("arn:aws:elasticloadbalancing:us-west-2:123456789012:targetgroup/my-targets/73e2d6bc24d8a067"),
 	}
 
@@ -636,9 +644,9 @@ func ExampleClient_DeregisterTargetsRequest_shared00() {
 	}
 
 	svc := elasticloadbalancingv2.New(cfg)
-	input := &elasticloadbalancingv2.DeregisterTargetsInput{
+	input := &types.DeregisterTargetsInput{
 		TargetGroupArn: aws.String("arn:aws:elasticloadbalancing:us-west-2:123456789012:targetgroup/my-targets/73e2d6bc24d8a067"),
-		Targets: []elasticloadbalancingv2.TargetDescription{
+		Targets: []types.TargetDescription{
 			{
 				Id: aws.String("i-0f76fade"),
 			},
@@ -678,7 +686,7 @@ func ExampleClient_DescribeListenersRequest_shared00() {
 	}
 
 	svc := elasticloadbalancingv2.New(cfg)
-	input := &elasticloadbalancingv2.DescribeListenersInput{
+	input := &types.DescribeListenersInput{
 		ListenerArns: []string{
 			"arn:aws:elasticloadbalancing:us-west-2:123456789012:listener/app/my-load-balancer/50dc6c495c0c9188/f2f7dc8efc522ab2",
 		},
@@ -719,7 +727,7 @@ func ExampleClient_DescribeLoadBalancerAttributesRequest_shared00() {
 	}
 
 	svc := elasticloadbalancingv2.New(cfg)
-	input := &elasticloadbalancingv2.DescribeLoadBalancerAttributesInput{
+	input := &types.DescribeLoadBalancerAttributesInput{
 		LoadBalancerArn: aws.String("arn:aws:elasticloadbalancing:us-west-2:123456789012:loadbalancer/app/my-load-balancer/50dc6c495c0c9188"),
 	}
 
@@ -754,7 +762,7 @@ func ExampleClient_DescribeLoadBalancersRequest_shared00() {
 	}
 
 	svc := elasticloadbalancingv2.New(cfg)
-	input := &elasticloadbalancingv2.DescribeLoadBalancersInput{
+	input := &types.DescribeLoadBalancersInput{
 		LoadBalancerArns: []string{
 			"arn:aws:elasticloadbalancing:us-west-2:123456789012:loadbalancer/app/my-load-balancer/50dc6c495c0c9188",
 		},
@@ -791,7 +799,7 @@ func ExampleClient_DescribeRulesRequest_shared00() {
 	}
 
 	svc := elasticloadbalancingv2.New(cfg)
-	input := &elasticloadbalancingv2.DescribeRulesInput{
+	input := &types.DescribeRulesInput{
 		RuleArns: []string{
 			"arn:aws:elasticloadbalancing:us-west-2:123456789012:listener-rule/app/my-load-balancer/50dc6c495c0c9188/f2f7dc8efc522ab2/9683b2d02a6cabee",
 		},
@@ -832,7 +840,7 @@ func ExampleClient_DescribeSSLPoliciesRequest_shared00() {
 	}
 
 	svc := elasticloadbalancingv2.New(cfg)
-	input := &elasticloadbalancingv2.DescribeSSLPoliciesInput{
+	input := &types.DescribeSSLPoliciesInput{
 		Names: []string{
 			"ELBSecurityPolicy-2015-05",
 		},
@@ -869,7 +877,7 @@ func ExampleClient_DescribeTagsRequest_shared00() {
 	}
 
 	svc := elasticloadbalancingv2.New(cfg)
-	input := &elasticloadbalancingv2.DescribeTagsInput{
+	input := &types.DescribeTagsInput{
 		ResourceArns: []string{
 			"arn:aws:elasticloadbalancing:us-west-2:123456789012:loadbalancer/app/my-load-balancer/50dc6c495c0c9188",
 		},
@@ -912,7 +920,7 @@ func ExampleClient_DescribeTargetGroupAttributesRequest_shared00() {
 	}
 
 	svc := elasticloadbalancingv2.New(cfg)
-	input := &elasticloadbalancingv2.DescribeTargetGroupAttributesInput{
+	input := &types.DescribeTargetGroupAttributesInput{
 		TargetGroupArn: aws.String("arn:aws:elasticloadbalancing:us-west-2:123456789012:targetgroup/my-targets/73e2d6bc24d8a067"),
 	}
 
@@ -947,7 +955,7 @@ func ExampleClient_DescribeTargetGroupsRequest_shared00() {
 	}
 
 	svc := elasticloadbalancingv2.New(cfg)
-	input := &elasticloadbalancingv2.DescribeTargetGroupsInput{
+	input := &types.DescribeTargetGroupsInput{
 		TargetGroupArns: []string{
 			"arn:aws:elasticloadbalancing:us-west-2:123456789012:targetgroup/my-targets/73e2d6bc24d8a067",
 		},
@@ -988,7 +996,7 @@ func ExampleClient_DescribeTargetHealthRequest_shared00() {
 	}
 
 	svc := elasticloadbalancingv2.New(cfg)
-	input := &elasticloadbalancingv2.DescribeTargetHealthInput{
+	input := &types.DescribeTargetHealthInput{
 		TargetGroupArn: aws.String("arn:aws:elasticloadbalancing:us-west-2:123456789012:targetgroup/my-targets/73e2d6bc24d8a067"),
 	}
 
@@ -1027,9 +1035,9 @@ func ExampleClient_DescribeTargetHealthRequest_shared01() {
 	}
 
 	svc := elasticloadbalancingv2.New(cfg)
-	input := &elasticloadbalancingv2.DescribeTargetHealthInput{
+	input := &types.DescribeTargetHealthInput{
 		TargetGroupArn: aws.String("arn:aws:elasticloadbalancing:us-west-2:123456789012:targetgroup/my-targets/73e2d6bc24d8a067"),
-		Targets: []elasticloadbalancingv2.TargetDescription{
+		Targets: []types.TargetDescription{
 			{
 				Id:   aws.String("i-0f76fade"),
 				Port: aws.Int64(80),
@@ -1072,11 +1080,11 @@ func ExampleClient_ModifyListenerRequest_shared00() {
 	}
 
 	svc := elasticloadbalancingv2.New(cfg)
-	input := &elasticloadbalancingv2.ModifyListenerInput{
-		DefaultActions: []elasticloadbalancingv2.Action{
+	input := &types.ModifyListenerInput{
+		DefaultActions: []types.Action{
 			{
 				TargetGroupArn: aws.String("arn:aws:elasticloadbalancing:us-west-2:123456789012:targetgroup/my-new-targets/2453ed029918f21f"),
-				Type:           elasticloadbalancingv2.ActionTypeEnumForward,
+				Type:           enums.ActionTypeEnumForward,
 			},
 		},
 		ListenerArn: aws.String("arn:aws:elasticloadbalancing:us-west-2:123456789012:listener/app/my-load-balancer/50dc6c495c0c9188/f2f7dc8efc522ab2"),
@@ -1117,6 +1125,8 @@ func ExampleClient_ModifyListenerRequest_shared00() {
 				fmt.Println(elasticloadbalancingv2.ErrCodeTooManyActionsException, aerr.Error())
 			case elasticloadbalancingv2.ErrCodeInvalidLoadBalancerActionException:
 				fmt.Println(elasticloadbalancingv2.ErrCodeInvalidLoadBalancerActionException, aerr.Error())
+			case elasticloadbalancingv2.ErrCodeTooManyUniqueTargetGroupsPerLoadBalancerException:
+				fmt.Println(elasticloadbalancingv2.ErrCodeTooManyUniqueTargetGroupsPerLoadBalancerException, aerr.Error())
 			default:
 				fmt.Println(aerr.Error())
 			}
@@ -1141,8 +1151,8 @@ func ExampleClient_ModifyListenerRequest_shared01() {
 	}
 
 	svc := elasticloadbalancingv2.New(cfg)
-	input := &elasticloadbalancingv2.ModifyListenerInput{
-		Certificates: []elasticloadbalancingv2.Certificate{
+	input := &types.ModifyListenerInput{
+		Certificates: []types.Certificate{
 			{
 				CertificateArn: aws.String("arn:aws:iam::123456789012:server-certificate/my-new-server-cert"),
 			},
@@ -1185,6 +1195,8 @@ func ExampleClient_ModifyListenerRequest_shared01() {
 				fmt.Println(elasticloadbalancingv2.ErrCodeTooManyActionsException, aerr.Error())
 			case elasticloadbalancingv2.ErrCodeInvalidLoadBalancerActionException:
 				fmt.Println(elasticloadbalancingv2.ErrCodeInvalidLoadBalancerActionException, aerr.Error())
+			case elasticloadbalancingv2.ErrCodeTooManyUniqueTargetGroupsPerLoadBalancerException:
+				fmt.Println(elasticloadbalancingv2.ErrCodeTooManyUniqueTargetGroupsPerLoadBalancerException, aerr.Error())
 			default:
 				fmt.Println(aerr.Error())
 			}
@@ -1209,8 +1221,8 @@ func ExampleClient_ModifyLoadBalancerAttributesRequest_shared00() {
 	}
 
 	svc := elasticloadbalancingv2.New(cfg)
-	input := &elasticloadbalancingv2.ModifyLoadBalancerAttributesInput{
-		Attributes: []elasticloadbalancingv2.LoadBalancerAttribute{
+	input := &types.ModifyLoadBalancerAttributesInput{
+		Attributes: []types.LoadBalancerAttribute{
 			{
 				Key:   aws.String("deletion_protection.enabled"),
 				Value: aws.String("true"),
@@ -1252,8 +1264,8 @@ func ExampleClient_ModifyLoadBalancerAttributesRequest_shared01() {
 	}
 
 	svc := elasticloadbalancingv2.New(cfg)
-	input := &elasticloadbalancingv2.ModifyLoadBalancerAttributesInput{
-		Attributes: []elasticloadbalancingv2.LoadBalancerAttribute{
+	input := &types.ModifyLoadBalancerAttributesInput{
+		Attributes: []types.LoadBalancerAttribute{
 			{
 				Key:   aws.String("idle_timeout.timeout_seconds"),
 				Value: aws.String("30"),
@@ -1297,8 +1309,8 @@ func ExampleClient_ModifyLoadBalancerAttributesRequest_shared02() {
 	}
 
 	svc := elasticloadbalancingv2.New(cfg)
-	input := &elasticloadbalancingv2.ModifyLoadBalancerAttributesInput{
-		Attributes: []elasticloadbalancingv2.LoadBalancerAttribute{
+	input := &types.ModifyLoadBalancerAttributesInput{
+		Attributes: []types.LoadBalancerAttribute{
 			{
 				Key:   aws.String("access_logs.s3.enabled"),
 				Value: aws.String("true"),
@@ -1348,8 +1360,8 @@ func ExampleClient_ModifyRuleRequest_shared00() {
 	}
 
 	svc := elasticloadbalancingv2.New(cfg)
-	input := &elasticloadbalancingv2.ModifyRuleInput{
-		Conditions: []elasticloadbalancingv2.RuleCondition{
+	input := &types.ModifyRuleInput{
+		Conditions: []types.RuleCondition{
 			{
 				Field: aws.String("path-pattern"),
 				Values: []string{
@@ -1385,6 +1397,8 @@ func ExampleClient_ModifyRuleRequest_shared00() {
 				fmt.Println(elasticloadbalancingv2.ErrCodeTooManyActionsException, aerr.Error())
 			case elasticloadbalancingv2.ErrCodeInvalidLoadBalancerActionException:
 				fmt.Println(elasticloadbalancingv2.ErrCodeInvalidLoadBalancerActionException, aerr.Error())
+			case elasticloadbalancingv2.ErrCodeTooManyUniqueTargetGroupsPerLoadBalancerException:
+				fmt.Println(elasticloadbalancingv2.ErrCodeTooManyUniqueTargetGroupsPerLoadBalancerException, aerr.Error())
 			default:
 				fmt.Println(aerr.Error())
 			}
@@ -1410,9 +1424,9 @@ func ExampleClient_ModifyTargetGroupRequest_shared00() {
 	}
 
 	svc := elasticloadbalancingv2.New(cfg)
-	input := &elasticloadbalancingv2.ModifyTargetGroupInput{
+	input := &types.ModifyTargetGroupInput{
 		HealthCheckPort:     aws.String("443"),
-		HealthCheckProtocol: elasticloadbalancingv2.ProtocolEnumHttps,
+		HealthCheckProtocol: enums.ProtocolEnumHttps,
 		TargetGroupArn:      aws.String("arn:aws:elasticloadbalancing:us-west-2:123456789012:targetgroup/my-https-targets/2453ed029918f21f"),
 	}
 
@@ -1450,8 +1464,8 @@ func ExampleClient_ModifyTargetGroupAttributesRequest_shared00() {
 	}
 
 	svc := elasticloadbalancingv2.New(cfg)
-	input := &elasticloadbalancingv2.ModifyTargetGroupAttributesInput{
-		Attributes: []elasticloadbalancingv2.TargetGroupAttribute{
+	input := &types.ModifyTargetGroupAttributesInput{
+		Attributes: []types.TargetGroupAttribute{
 			{
 				Key:   aws.String("deregistration_delay.timeout_seconds"),
 				Value: aws.String("600"),
@@ -1493,9 +1507,9 @@ func ExampleClient_RegisterTargetsRequest_shared00() {
 	}
 
 	svc := elasticloadbalancingv2.New(cfg)
-	input := &elasticloadbalancingv2.RegisterTargetsInput{
+	input := &types.RegisterTargetsInput{
 		TargetGroupArn: aws.String("arn:aws:elasticloadbalancing:us-west-2:123456789012:targetgroup/my-targets/73e2d6bc24d8a067"),
-		Targets: []elasticloadbalancingv2.TargetDescription{
+		Targets: []types.TargetDescription{
 			{
 				Id: aws.String("i-80c8dd94"),
 			},
@@ -1544,9 +1558,9 @@ func ExampleClient_RegisterTargetsRequest_shared01() {
 	}
 
 	svc := elasticloadbalancingv2.New(cfg)
-	input := &elasticloadbalancingv2.RegisterTargetsInput{
+	input := &types.RegisterTargetsInput{
 		TargetGroupArn: aws.String("arn:aws:elasticloadbalancing:us-west-2:123456789012:targetgroup/my-new-targets/3bb63f11dfb0faf9"),
-		Targets: []elasticloadbalancingv2.TargetDescription{
+		Targets: []types.TargetDescription{
 			{
 				Id:   aws.String("i-80c8dd94"),
 				Port: aws.Int64(80),
@@ -1595,7 +1609,7 @@ func ExampleClient_RemoveTagsRequest_shared00() {
 	}
 
 	svc := elasticloadbalancingv2.New(cfg)
-	input := &elasticloadbalancingv2.RemoveTagsInput{
+	input := &types.RemoveTagsInput{
 		ResourceArns: []string{
 			"arn:aws:elasticloadbalancing:us-west-2:123456789012:loadbalancer/app/my-load-balancer/50dc6c495c0c9188",
 		},
@@ -1644,8 +1658,8 @@ func ExampleClient_SetRulePrioritiesRequest_shared00() {
 	}
 
 	svc := elasticloadbalancingv2.New(cfg)
-	input := &elasticloadbalancingv2.SetRulePrioritiesInput{
-		RulePriorities: []elasticloadbalancingv2.RulePriorityPair{
+	input := &types.SetRulePrioritiesInput{
+		RulePriorities: []types.RulePriorityPair{
 			{
 				Priority: aws.Int64(5),
 				RuleArn:  aws.String("arn:aws:elasticloadbalancing:us-west-2:123456789012:listener-rule/app/my-load-balancer/50dc6c495c0c9188/f2f7dc8efc522ab2/1291d13826f405c3"),
@@ -1688,7 +1702,7 @@ func ExampleClient_SetSecurityGroupsRequest_shared00() {
 	}
 
 	svc := elasticloadbalancingv2.New(cfg)
-	input := &elasticloadbalancingv2.SetSecurityGroupsInput{
+	input := &types.SetSecurityGroupsInput{
 		LoadBalancerArn: aws.String("arn:aws:elasticloadbalancing:us-west-2:123456789012:loadbalancer/app/my-load-balancer/50dc6c495c0c9188"),
 		SecurityGroups: []string{
 			"sg-5943793c",
@@ -1731,7 +1745,7 @@ func ExampleClient_SetSubnetsRequest_shared00() {
 	}
 
 	svc := elasticloadbalancingv2.New(cfg)
-	input := &elasticloadbalancingv2.SetSubnetsInput{
+	input := &types.SetSubnetsInput{
 		LoadBalancerArn: aws.String("arn:aws:elasticloadbalancing:us-west-2:123456789012:loadbalancer/app/my-load-balancer/50dc6c495c0c9188"),
 		Subnets: []string{
 			"subnet-8360a9e7",

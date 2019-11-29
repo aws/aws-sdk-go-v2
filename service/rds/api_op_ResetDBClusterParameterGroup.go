@@ -6,68 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/rds/types"
 )
-
-type ResetDBClusterParameterGroupInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the DB cluster parameter group to reset.
-	//
-	// DBClusterParameterGroupName is a required field
-	DBClusterParameterGroupName *string `type:"string" required:"true"`
-
-	// A list of parameter names in the DB cluster parameter group to reset to the
-	// default values. You can't use this parameter if the ResetAllParameters parameter
-	// is enabled.
-	Parameters []Parameter `locationNameList:"Parameter" type:"list"`
-
-	// A value that indicates whether to reset all parameters in the DB cluster
-	// parameter group to their default values. You can't use this parameter if
-	// there is a list of parameter names specified for the Parameters parameter.
-	ResetAllParameters *bool `type:"boolean"`
-}
-
-// String returns the string representation
-func (s ResetDBClusterParameterGroupInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ResetDBClusterParameterGroupInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ResetDBClusterParameterGroupInput"}
-
-	if s.DBClusterParameterGroupName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DBClusterParameterGroupName"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ResetDBClusterParameterGroupOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the DB cluster parameter group.
-	//
-	// Constraints:
-	//
-	//    * Must be 1 to 255 letters or numbers.
-	//
-	//    * First character must be a letter
-	//
-	//    * Can't end with a hyphen or contain two consecutive hyphens
-	//
-	// This value is stored as a lowercase string.
-	DBClusterParameterGroupName *string `type:"string"`
-}
-
-// String returns the string representation
-func (s ResetDBClusterParameterGroupOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opResetDBClusterParameterGroup = "ResetDBClusterParameterGroup"
 
@@ -98,7 +38,7 @@ const opResetDBClusterParameterGroup = "ResetDBClusterParameterGroup"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ResetDBClusterParameterGroup
-func (c *Client) ResetDBClusterParameterGroupRequest(input *ResetDBClusterParameterGroupInput) ResetDBClusterParameterGroupRequest {
+func (c *Client) ResetDBClusterParameterGroupRequest(input *types.ResetDBClusterParameterGroupInput) ResetDBClusterParameterGroupRequest {
 	op := &aws.Operation{
 		Name:       opResetDBClusterParameterGroup,
 		HTTPMethod: "POST",
@@ -106,10 +46,10 @@ func (c *Client) ResetDBClusterParameterGroupRequest(input *ResetDBClusterParame
 	}
 
 	if input == nil {
-		input = &ResetDBClusterParameterGroupInput{}
+		input = &types.ResetDBClusterParameterGroupInput{}
 	}
 
-	req := c.newRequest(op, input, &ResetDBClusterParameterGroupOutput{})
+	req := c.newRequest(op, input, &types.ResetDBClusterParameterGroupOutput{})
 	return ResetDBClusterParameterGroupRequest{Request: req, Input: input, Copy: c.ResetDBClusterParameterGroupRequest}
 }
 
@@ -117,8 +57,8 @@ func (c *Client) ResetDBClusterParameterGroupRequest(input *ResetDBClusterParame
 // ResetDBClusterParameterGroup API operation.
 type ResetDBClusterParameterGroupRequest struct {
 	*aws.Request
-	Input *ResetDBClusterParameterGroupInput
-	Copy  func(*ResetDBClusterParameterGroupInput) ResetDBClusterParameterGroupRequest
+	Input *types.ResetDBClusterParameterGroupInput
+	Copy  func(*types.ResetDBClusterParameterGroupInput) ResetDBClusterParameterGroupRequest
 }
 
 // Send marshals and sends the ResetDBClusterParameterGroup API request.
@@ -130,7 +70,7 @@ func (r ResetDBClusterParameterGroupRequest) Send(ctx context.Context) (*ResetDB
 	}
 
 	resp := &ResetDBClusterParameterGroupResponse{
-		ResetDBClusterParameterGroupOutput: r.Request.Data.(*ResetDBClusterParameterGroupOutput),
+		ResetDBClusterParameterGroupOutput: r.Request.Data.(*types.ResetDBClusterParameterGroupOutput),
 		response:                           &aws.Response{Request: r.Request},
 	}
 
@@ -140,7 +80,7 @@ func (r ResetDBClusterParameterGroupRequest) Send(ctx context.Context) (*ResetDB
 // ResetDBClusterParameterGroupResponse is the response type for the
 // ResetDBClusterParameterGroup API operation.
 type ResetDBClusterParameterGroupResponse struct {
-	*ResetDBClusterParameterGroupOutput
+	*types.ResetDBClusterParameterGroupOutput
 
 	response *aws.Response
 }

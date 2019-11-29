@@ -6,90 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/snowball/types"
 )
-
-type UpdateJobInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the updated Address object.
-	AddressId *string `min:"40" type:"string"`
-
-	// The updated description of this job's JobMetadata object.
-	Description *string `min:"1" type:"string"`
-
-	// The updated ID for the forwarding address for a job. This field is not supported
-	// in most regions.
-	ForwardingAddressId *string `min:"40" type:"string"`
-
-	// The job ID of the job that you want to update, for example JID123e4567-e89b-12d3-a456-426655440000.
-	//
-	// JobId is a required field
-	JobId *string `min:"39" type:"string" required:"true"`
-
-	// The new or updated Notification object.
-	Notification *Notification `type:"structure"`
-
-	// The updated JobResource object, or the updated JobResource object.
-	Resources *JobResource `type:"structure"`
-
-	// The new role Amazon Resource Name (ARN) that you want to associate with this
-	// job. To create a role ARN, use the CreateRole (https://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateRole.html)AWS
-	// Identity and Access Management (IAM) API action.
-	RoleARN *string `type:"string"`
-
-	// The updated shipping option value of this job's ShippingDetails object.
-	ShippingOption ShippingOption `type:"string" enum:"true"`
-
-	// The updated SnowballCapacityPreference of this job's JobMetadata object.
-	// The 50 TB Snowballs are only available in the US regions.
-	SnowballCapacityPreference SnowballCapacity `type:"string" enum:"true"`
-}
-
-// String returns the string representation
-func (s UpdateJobInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateJobInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateJobInput"}
-	if s.AddressId != nil && len(*s.AddressId) < 40 {
-		invalidParams.Add(aws.NewErrParamMinLen("AddressId", 40))
-	}
-	if s.Description != nil && len(*s.Description) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Description", 1))
-	}
-	if s.ForwardingAddressId != nil && len(*s.ForwardingAddressId) < 40 {
-		invalidParams.Add(aws.NewErrParamMinLen("ForwardingAddressId", 40))
-	}
-
-	if s.JobId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("JobId"))
-	}
-	if s.JobId != nil && len(*s.JobId) < 39 {
-		invalidParams.Add(aws.NewErrParamMinLen("JobId", 39))
-	}
-	if s.Resources != nil {
-		if err := s.Resources.Validate(); err != nil {
-			invalidParams.AddNested("Resources", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type UpdateJobOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s UpdateJobOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opUpdateJob = "UpdateJob"
 
@@ -108,7 +26,7 @@ const opUpdateJob = "UpdateJob"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/UpdateJob
-func (c *Client) UpdateJobRequest(input *UpdateJobInput) UpdateJobRequest {
+func (c *Client) UpdateJobRequest(input *types.UpdateJobInput) UpdateJobRequest {
 	op := &aws.Operation{
 		Name:       opUpdateJob,
 		HTTPMethod: "POST",
@@ -116,10 +34,10 @@ func (c *Client) UpdateJobRequest(input *UpdateJobInput) UpdateJobRequest {
 	}
 
 	if input == nil {
-		input = &UpdateJobInput{}
+		input = &types.UpdateJobInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateJobOutput{})
+	req := c.newRequest(op, input, &types.UpdateJobOutput{})
 	return UpdateJobRequest{Request: req, Input: input, Copy: c.UpdateJobRequest}
 }
 
@@ -127,8 +45,8 @@ func (c *Client) UpdateJobRequest(input *UpdateJobInput) UpdateJobRequest {
 // UpdateJob API operation.
 type UpdateJobRequest struct {
 	*aws.Request
-	Input *UpdateJobInput
-	Copy  func(*UpdateJobInput) UpdateJobRequest
+	Input *types.UpdateJobInput
+	Copy  func(*types.UpdateJobInput) UpdateJobRequest
 }
 
 // Send marshals and sends the UpdateJob API request.
@@ -140,7 +58,7 @@ func (r UpdateJobRequest) Send(ctx context.Context) (*UpdateJobResponse, error) 
 	}
 
 	resp := &UpdateJobResponse{
-		UpdateJobOutput: r.Request.Data.(*UpdateJobOutput),
+		UpdateJobOutput: r.Request.Data.(*types.UpdateJobOutput),
 		response:        &aws.Response{Request: r.Request},
 	}
 
@@ -150,7 +68,7 @@ func (r UpdateJobRequest) Send(ctx context.Context) (*UpdateJobResponse, error) 
 // UpdateJobResponse is the response type for the
 // UpdateJob API operation.
 type UpdateJobResponse struct {
-	*UpdateJobOutput
+	*types.UpdateJobOutput
 
 	response *aws.Response
 }

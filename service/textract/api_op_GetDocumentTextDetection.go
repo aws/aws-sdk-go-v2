@@ -6,87 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/textract/types"
 )
-
-type GetDocumentTextDetectionInput struct {
-	_ struct{} `type:"structure"`
-
-	// A unique identifier for the text detection job. The JobId is returned from
-	// StartDocumentTextDetection.
-	//
-	// JobId is a required field
-	JobId *string `min:"1" type:"string" required:"true"`
-
-	// The maximum number of results to return per paginated call. The largest value
-	// you can specify is 1,000. If you specify a value greater than 1,000, a maximum
-	// of 1,000 results is returned. The default value is 1,000.
-	MaxResults *int64 `min:"1" type:"integer"`
-
-	// If the previous response was incomplete (because there are more blocks to
-	// retrieve), Amazon Textract returns a pagination token in the response. You
-	// can use this pagination token to retrieve the next set of blocks.
-	NextToken *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s GetDocumentTextDetectionInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetDocumentTextDetectionInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetDocumentTextDetectionInput"}
-
-	if s.JobId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("JobId"))
-	}
-	if s.JobId != nil && len(*s.JobId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("JobId", 1))
-	}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-	if s.NextToken != nil && len(*s.NextToken) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type GetDocumentTextDetectionOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The results of the text-detection operation.
-	Blocks []Block `type:"list"`
-
-	// Information about a document that Amazon Textract processed. DocumentMetadata
-	// is returned in every page of paginated responses from an Amazon Textract
-	// video operation.
-	DocumentMetadata *DocumentMetadata `type:"structure"`
-
-	// The current status of the text detection job.
-	JobStatus JobStatus `type:"string" enum:"true"`
-
-	// If the response is truncated, Amazon Textract returns this token. You can
-	// use this token in the subsequent request to retrieve the next set of text-detection
-	// results.
-	NextToken *string `min:"1" type:"string"`
-
-	// The current status of an asynchronous document text-detection operation.
-	StatusMessage *string `type:"string"`
-
-	// A list of warnings that occurred during the document text-detection operation.
-	Warnings []Warning `type:"list"`
-}
-
-// String returns the string representation
-func (s GetDocumentTextDetectionOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetDocumentTextDetection = "GetDocumentTextDetection"
 
@@ -130,7 +51,7 @@ const opGetDocumentTextDetection = "GetDocumentTextDetection"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/textract-2018-06-27/GetDocumentTextDetection
-func (c *Client) GetDocumentTextDetectionRequest(input *GetDocumentTextDetectionInput) GetDocumentTextDetectionRequest {
+func (c *Client) GetDocumentTextDetectionRequest(input *types.GetDocumentTextDetectionInput) GetDocumentTextDetectionRequest {
 	op := &aws.Operation{
 		Name:       opGetDocumentTextDetection,
 		HTTPMethod: "POST",
@@ -138,10 +59,10 @@ func (c *Client) GetDocumentTextDetectionRequest(input *GetDocumentTextDetection
 	}
 
 	if input == nil {
-		input = &GetDocumentTextDetectionInput{}
+		input = &types.GetDocumentTextDetectionInput{}
 	}
 
-	req := c.newRequest(op, input, &GetDocumentTextDetectionOutput{})
+	req := c.newRequest(op, input, &types.GetDocumentTextDetectionOutput{})
 	return GetDocumentTextDetectionRequest{Request: req, Input: input, Copy: c.GetDocumentTextDetectionRequest}
 }
 
@@ -149,8 +70,8 @@ func (c *Client) GetDocumentTextDetectionRequest(input *GetDocumentTextDetection
 // GetDocumentTextDetection API operation.
 type GetDocumentTextDetectionRequest struct {
 	*aws.Request
-	Input *GetDocumentTextDetectionInput
-	Copy  func(*GetDocumentTextDetectionInput) GetDocumentTextDetectionRequest
+	Input *types.GetDocumentTextDetectionInput
+	Copy  func(*types.GetDocumentTextDetectionInput) GetDocumentTextDetectionRequest
 }
 
 // Send marshals and sends the GetDocumentTextDetection API request.
@@ -162,7 +83,7 @@ func (r GetDocumentTextDetectionRequest) Send(ctx context.Context) (*GetDocument
 	}
 
 	resp := &GetDocumentTextDetectionResponse{
-		GetDocumentTextDetectionOutput: r.Request.Data.(*GetDocumentTextDetectionOutput),
+		GetDocumentTextDetectionOutput: r.Request.Data.(*types.GetDocumentTextDetectionOutput),
 		response:                       &aws.Response{Request: r.Request},
 	}
 
@@ -172,7 +93,7 @@ func (r GetDocumentTextDetectionRequest) Send(ctx context.Context) (*GetDocument
 // GetDocumentTextDetectionResponse is the response type for the
 // GetDocumentTextDetection API operation.
 type GetDocumentTextDetectionResponse struct {
-	*GetDocumentTextDetectionOutput
+	*types.GetDocumentTextDetectionOutput
 
 	response *aws.Response
 }

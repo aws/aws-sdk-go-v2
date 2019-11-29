@@ -6,60 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-// Contains the parameters for DeleteNetworkInterfacePermission.
-type DeleteNetworkInterfacePermissionInput struct {
-	_ struct{} `type:"structure"`
-
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have
-	// the required permissions, the error response is DryRunOperation. Otherwise,
-	// it is UnauthorizedOperation.
-	DryRun *bool `type:"boolean"`
-
-	// Specify true to remove the permission even if the network interface is attached
-	// to an instance.
-	Force *bool `type:"boolean"`
-
-	// The ID of the network interface permission.
-	//
-	// NetworkInterfacePermissionId is a required field
-	NetworkInterfacePermissionId *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteNetworkInterfacePermissionInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteNetworkInterfacePermissionInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteNetworkInterfacePermissionInput"}
-
-	if s.NetworkInterfacePermissionId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("NetworkInterfacePermissionId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Contains the output for DeleteNetworkInterfacePermission.
-type DeleteNetworkInterfacePermissionOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Returns true if the request succeeds, otherwise returns an error.
-	Return *bool `locationName:"return" type:"boolean"`
-}
-
-// String returns the string representation
-func (s DeleteNetworkInterfacePermissionOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteNetworkInterfacePermission = "DeleteNetworkInterfacePermission"
 
@@ -79,7 +27,7 @@ const opDeleteNetworkInterfacePermission = "DeleteNetworkInterfacePermission"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteNetworkInterfacePermission
-func (c *Client) DeleteNetworkInterfacePermissionRequest(input *DeleteNetworkInterfacePermissionInput) DeleteNetworkInterfacePermissionRequest {
+func (c *Client) DeleteNetworkInterfacePermissionRequest(input *types.DeleteNetworkInterfacePermissionInput) DeleteNetworkInterfacePermissionRequest {
 	op := &aws.Operation{
 		Name:       opDeleteNetworkInterfacePermission,
 		HTTPMethod: "POST",
@@ -87,10 +35,10 @@ func (c *Client) DeleteNetworkInterfacePermissionRequest(input *DeleteNetworkInt
 	}
 
 	if input == nil {
-		input = &DeleteNetworkInterfacePermissionInput{}
+		input = &types.DeleteNetworkInterfacePermissionInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteNetworkInterfacePermissionOutput{})
+	req := c.newRequest(op, input, &types.DeleteNetworkInterfacePermissionOutput{})
 	return DeleteNetworkInterfacePermissionRequest{Request: req, Input: input, Copy: c.DeleteNetworkInterfacePermissionRequest}
 }
 
@@ -98,8 +46,8 @@ func (c *Client) DeleteNetworkInterfacePermissionRequest(input *DeleteNetworkInt
 // DeleteNetworkInterfacePermission API operation.
 type DeleteNetworkInterfacePermissionRequest struct {
 	*aws.Request
-	Input *DeleteNetworkInterfacePermissionInput
-	Copy  func(*DeleteNetworkInterfacePermissionInput) DeleteNetworkInterfacePermissionRequest
+	Input *types.DeleteNetworkInterfacePermissionInput
+	Copy  func(*types.DeleteNetworkInterfacePermissionInput) DeleteNetworkInterfacePermissionRequest
 }
 
 // Send marshals and sends the DeleteNetworkInterfacePermission API request.
@@ -111,7 +59,7 @@ func (r DeleteNetworkInterfacePermissionRequest) Send(ctx context.Context) (*Del
 	}
 
 	resp := &DeleteNetworkInterfacePermissionResponse{
-		DeleteNetworkInterfacePermissionOutput: r.Request.Data.(*DeleteNetworkInterfacePermissionOutput),
+		DeleteNetworkInterfacePermissionOutput: r.Request.Data.(*types.DeleteNetworkInterfacePermissionOutput),
 		response:                               &aws.Response{Request: r.Request},
 	}
 
@@ -121,7 +69,7 @@ func (r DeleteNetworkInterfacePermissionRequest) Send(ctx context.Context) (*Del
 // DeleteNetworkInterfacePermissionResponse is the response type for the
 // DeleteNetworkInterfacePermission API operation.
 type DeleteNetworkInterfacePermissionResponse struct {
-	*DeleteNetworkInterfacePermissionOutput
+	*types.DeleteNetworkInterfacePermissionOutput
 
 	response *aws.Response
 }

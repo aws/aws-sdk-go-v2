@@ -6,105 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/securityhub/types"
 )
-
-type CreateActionTargetInput struct {
-	_ struct{} `type:"structure"`
-
-	// The description for the custom action target.
-	//
-	// Description is a required field
-	Description *string `type:"string" required:"true"`
-
-	// The ID for the custom action target.
-	//
-	// Id is a required field
-	Id *string `type:"string" required:"true"`
-
-	// The name of the custom action target.
-	//
-	// Name is a required field
-	Name *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s CreateActionTargetInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateActionTargetInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateActionTargetInput"}
-
-	if s.Description == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Description"))
-	}
-
-	if s.Id == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Id"))
-	}
-
-	if s.Name == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Name"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s CreateActionTargetInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.Description != nil {
-		v := *s.Description
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "Description", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Id != nil {
-		v := *s.Id
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "Id", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Name != nil {
-		v := *s.Name
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "Name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type CreateActionTargetOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The ARN for the custom action target.
-	//
-	// ActionTargetArn is a required field
-	ActionTargetArn *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s CreateActionTargetOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s CreateActionTargetOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.ActionTargetArn != nil {
-		v := *s.ActionTargetArn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "ActionTargetArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opCreateActionTarget = "CreateActionTarget"
 
@@ -123,7 +26,7 @@ const opCreateActionTarget = "CreateActionTarget"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/CreateActionTarget
-func (c *Client) CreateActionTargetRequest(input *CreateActionTargetInput) CreateActionTargetRequest {
+func (c *Client) CreateActionTargetRequest(input *types.CreateActionTargetInput) CreateActionTargetRequest {
 	op := &aws.Operation{
 		Name:       opCreateActionTarget,
 		HTTPMethod: "POST",
@@ -131,10 +34,10 @@ func (c *Client) CreateActionTargetRequest(input *CreateActionTargetInput) Creat
 	}
 
 	if input == nil {
-		input = &CreateActionTargetInput{}
+		input = &types.CreateActionTargetInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateActionTargetOutput{})
+	req := c.newRequest(op, input, &types.CreateActionTargetOutput{})
 	return CreateActionTargetRequest{Request: req, Input: input, Copy: c.CreateActionTargetRequest}
 }
 
@@ -142,8 +45,8 @@ func (c *Client) CreateActionTargetRequest(input *CreateActionTargetInput) Creat
 // CreateActionTarget API operation.
 type CreateActionTargetRequest struct {
 	*aws.Request
-	Input *CreateActionTargetInput
-	Copy  func(*CreateActionTargetInput) CreateActionTargetRequest
+	Input *types.CreateActionTargetInput
+	Copy  func(*types.CreateActionTargetInput) CreateActionTargetRequest
 }
 
 // Send marshals and sends the CreateActionTarget API request.
@@ -155,7 +58,7 @@ func (r CreateActionTargetRequest) Send(ctx context.Context) (*CreateActionTarge
 	}
 
 	resp := &CreateActionTargetResponse{
-		CreateActionTargetOutput: r.Request.Data.(*CreateActionTargetOutput),
+		CreateActionTargetOutput: r.Request.Data.(*types.CreateActionTargetOutput),
 		response:                 &aws.Response{Request: r.Request},
 	}
 
@@ -165,7 +68,7 @@ func (r CreateActionTargetRequest) Send(ctx context.Context) (*CreateActionTarge
 // CreateActionTargetResponse is the response type for the
 // CreateActionTarget API operation.
 type CreateActionTargetResponse struct {
-	*CreateActionTargetOutput
+	*types.CreateActionTargetOutput
 
 	response *aws.Response
 }

@@ -6,128 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/elasticsearchservice/types"
 )
-
-// Container for request parameters to UpgradeElasticsearchDomain operation.
-type UpgradeElasticsearchDomainInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of an Elasticsearch domain. Domain names are unique across the domains
-	// owned by an account within an AWS region. Domain names start with a letter
-	// or number and can contain the following characters: a-z (lowercase), 0-9,
-	// and - (hyphen).
-	//
-	// DomainName is a required field
-	DomainName *string `min:"3" type:"string" required:"true"`
-
-	// This flag, when set to True, indicates that an Upgrade Eligibility Check
-	// needs to be performed. This will not actually perform the Upgrade.
-	PerformCheckOnly *bool `type:"boolean"`
-
-	// The version of Elasticsearch that you intend to upgrade the domain to.
-	//
-	// TargetVersion is a required field
-	TargetVersion *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s UpgradeElasticsearchDomainInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpgradeElasticsearchDomainInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpgradeElasticsearchDomainInput"}
-
-	if s.DomainName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DomainName"))
-	}
-	if s.DomainName != nil && len(*s.DomainName) < 3 {
-		invalidParams.Add(aws.NewErrParamMinLen("DomainName", 3))
-	}
-
-	if s.TargetVersion == nil {
-		invalidParams.Add(aws.NewErrParamRequired("TargetVersion"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s UpgradeElasticsearchDomainInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.DomainName != nil {
-		v := *s.DomainName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "DomainName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.PerformCheckOnly != nil {
-		v := *s.PerformCheckOnly
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "PerformCheckOnly", protocol.BoolValue(v), metadata)
-	}
-	if s.TargetVersion != nil {
-		v := *s.TargetVersion
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "TargetVersion", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-// Container for response returned by UpgradeElasticsearchDomain operation.
-type UpgradeElasticsearchDomainOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of an Elasticsearch domain. Domain names are unique across the domains
-	// owned by an account within an AWS region. Domain names start with a letter
-	// or number and can contain the following characters: a-z (lowercase), 0-9,
-	// and - (hyphen).
-	DomainName *string `min:"3" type:"string"`
-
-	// This flag, when set to True, indicates that an Upgrade Eligibility Check
-	// needs to be performed. This will not actually perform the Upgrade.
-	PerformCheckOnly *bool `type:"boolean"`
-
-	// The version of Elasticsearch that you intend to upgrade the domain to.
-	TargetVersion *string `type:"string"`
-}
-
-// String returns the string representation
-func (s UpgradeElasticsearchDomainOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s UpgradeElasticsearchDomainOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.DomainName != nil {
-		v := *s.DomainName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "DomainName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.PerformCheckOnly != nil {
-		v := *s.PerformCheckOnly
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "PerformCheckOnly", protocol.BoolValue(v), metadata)
-	}
-	if s.TargetVersion != nil {
-		v := *s.TargetVersion
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "TargetVersion", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opUpgradeElasticsearchDomain = "UpgradeElasticsearchDomain"
 
@@ -143,7 +23,7 @@ const opUpgradeElasticsearchDomain = "UpgradeElasticsearchDomain"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) UpgradeElasticsearchDomainRequest(input *UpgradeElasticsearchDomainInput) UpgradeElasticsearchDomainRequest {
+func (c *Client) UpgradeElasticsearchDomainRequest(input *types.UpgradeElasticsearchDomainInput) UpgradeElasticsearchDomainRequest {
 	op := &aws.Operation{
 		Name:       opUpgradeElasticsearchDomain,
 		HTTPMethod: "POST",
@@ -151,10 +31,10 @@ func (c *Client) UpgradeElasticsearchDomainRequest(input *UpgradeElasticsearchDo
 	}
 
 	if input == nil {
-		input = &UpgradeElasticsearchDomainInput{}
+		input = &types.UpgradeElasticsearchDomainInput{}
 	}
 
-	req := c.newRequest(op, input, &UpgradeElasticsearchDomainOutput{})
+	req := c.newRequest(op, input, &types.UpgradeElasticsearchDomainOutput{})
 	return UpgradeElasticsearchDomainRequest{Request: req, Input: input, Copy: c.UpgradeElasticsearchDomainRequest}
 }
 
@@ -162,8 +42,8 @@ func (c *Client) UpgradeElasticsearchDomainRequest(input *UpgradeElasticsearchDo
 // UpgradeElasticsearchDomain API operation.
 type UpgradeElasticsearchDomainRequest struct {
 	*aws.Request
-	Input *UpgradeElasticsearchDomainInput
-	Copy  func(*UpgradeElasticsearchDomainInput) UpgradeElasticsearchDomainRequest
+	Input *types.UpgradeElasticsearchDomainInput
+	Copy  func(*types.UpgradeElasticsearchDomainInput) UpgradeElasticsearchDomainRequest
 }
 
 // Send marshals and sends the UpgradeElasticsearchDomain API request.
@@ -175,7 +55,7 @@ func (r UpgradeElasticsearchDomainRequest) Send(ctx context.Context) (*UpgradeEl
 	}
 
 	resp := &UpgradeElasticsearchDomainResponse{
-		UpgradeElasticsearchDomainOutput: r.Request.Data.(*UpgradeElasticsearchDomainOutput),
+		UpgradeElasticsearchDomainOutput: r.Request.Data.(*types.UpgradeElasticsearchDomainOutput),
 		response:                         &aws.Response{Request: r.Request},
 	}
 
@@ -185,7 +65,7 @@ func (r UpgradeElasticsearchDomainRequest) Send(ctx context.Context) (*UpgradeEl
 // UpgradeElasticsearchDomainResponse is the response type for the
 // UpgradeElasticsearchDomain API operation.
 type UpgradeElasticsearchDomainResponse struct {
-	*UpgradeElasticsearchDomainOutput
+	*types.UpgradeElasticsearchDomainOutput
 
 	response *aws.Response
 }

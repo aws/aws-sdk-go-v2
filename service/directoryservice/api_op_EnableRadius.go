@@ -6,61 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/directoryservice/types"
 )
-
-// Contains the inputs for the EnableRadius operation.
-type EnableRadiusInput struct {
-	_ struct{} `type:"structure"`
-
-	// The identifier of the directory for which to enable MFA.
-	//
-	// DirectoryId is a required field
-	DirectoryId *string `type:"string" required:"true"`
-
-	// A RadiusSettings object that contains information about the RADIUS server.
-	//
-	// RadiusSettings is a required field
-	RadiusSettings *RadiusSettings `type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s EnableRadiusInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *EnableRadiusInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "EnableRadiusInput"}
-
-	if s.DirectoryId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DirectoryId"))
-	}
-
-	if s.RadiusSettings == nil {
-		invalidParams.Add(aws.NewErrParamRequired("RadiusSettings"))
-	}
-	if s.RadiusSettings != nil {
-		if err := s.RadiusSettings.Validate(); err != nil {
-			invalidParams.AddNested("RadiusSettings", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Contains the results of the EnableRadius operation.
-type EnableRadiusOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s EnableRadiusOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opEnableRadius = "EnableRadius"
 
@@ -79,7 +26,7 @@ const opEnableRadius = "EnableRadius"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/EnableRadius
-func (c *Client) EnableRadiusRequest(input *EnableRadiusInput) EnableRadiusRequest {
+func (c *Client) EnableRadiusRequest(input *types.EnableRadiusInput) EnableRadiusRequest {
 	op := &aws.Operation{
 		Name:       opEnableRadius,
 		HTTPMethod: "POST",
@@ -87,10 +34,10 @@ func (c *Client) EnableRadiusRequest(input *EnableRadiusInput) EnableRadiusReque
 	}
 
 	if input == nil {
-		input = &EnableRadiusInput{}
+		input = &types.EnableRadiusInput{}
 	}
 
-	req := c.newRequest(op, input, &EnableRadiusOutput{})
+	req := c.newRequest(op, input, &types.EnableRadiusOutput{})
 	return EnableRadiusRequest{Request: req, Input: input, Copy: c.EnableRadiusRequest}
 }
 
@@ -98,8 +45,8 @@ func (c *Client) EnableRadiusRequest(input *EnableRadiusInput) EnableRadiusReque
 // EnableRadius API operation.
 type EnableRadiusRequest struct {
 	*aws.Request
-	Input *EnableRadiusInput
-	Copy  func(*EnableRadiusInput) EnableRadiusRequest
+	Input *types.EnableRadiusInput
+	Copy  func(*types.EnableRadiusInput) EnableRadiusRequest
 }
 
 // Send marshals and sends the EnableRadius API request.
@@ -111,7 +58,7 @@ func (r EnableRadiusRequest) Send(ctx context.Context) (*EnableRadiusResponse, e
 	}
 
 	resp := &EnableRadiusResponse{
-		EnableRadiusOutput: r.Request.Data.(*EnableRadiusOutput),
+		EnableRadiusOutput: r.Request.Data.(*types.EnableRadiusOutput),
 		response:           &aws.Response{Request: r.Request},
 	}
 
@@ -121,7 +68,7 @@ func (r EnableRadiusRequest) Send(ctx context.Context) (*EnableRadiusResponse, e
 // EnableRadiusResponse is the response type for the
 // EnableRadius API operation.
 type EnableRadiusResponse struct {
-	*EnableRadiusOutput
+	*types.EnableRadiusOutput
 
 	response *aws.Response
 }

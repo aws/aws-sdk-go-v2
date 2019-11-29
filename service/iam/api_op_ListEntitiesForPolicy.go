@@ -6,128 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/iam/types"
 )
-
-type ListEntitiesForPolicyInput struct {
-	_ struct{} `type:"structure"`
-
-	// The entity type to use for filtering the results.
-	//
-	// For example, when EntityFilter is Role, only the roles that are attached
-	// to the specified policy are returned. This parameter is optional. If it is
-	// not included, all attached entities (users, groups, and roles) are returned.
-	// The argument for this parameter must be one of the valid values listed below.
-	EntityFilter EntityType `type:"string" enum:"true"`
-
-	// Use this parameter only when paginating results and only after you receive
-	// a response indicating that the results are truncated. Set it to the value
-	// of the Marker element in the response that you received to indicate where
-	// the next call should start.
-	Marker *string `min:"1" type:"string"`
-
-	// Use this only when paginating results to indicate the maximum number of items
-	// you want in the response. If additional items exist beyond the maximum you
-	// specify, the IsTruncated response element is true.
-	//
-	// If you do not include this parameter, the number of items defaults to 100.
-	// Note that IAM might return fewer results, even when there are more results
-	// available. In that case, the IsTruncated response element returns true, and
-	// Marker contains a value to include in the subsequent call that tells the
-	// service where to continue from.
-	MaxItems *int64 `min:"1" type:"integer"`
-
-	// The path prefix for filtering the results. This parameter is optional. If
-	// it is not included, it defaults to a slash (/), listing all entities.
-	//
-	// This parameter allows (through its regex pattern (http://wikipedia.org/wiki/regex))
-	// a string of characters consisting of either a forward slash (/) by itself
-	// or a string that must begin and end with forward slashes. In addition, it
-	// can contain any ASCII character from the ! (\u0021) through the DEL character
-	// (\u007F), including most punctuation characters, digits, and upper and lowercased
-	// letters.
-	PathPrefix *string `min:"1" type:"string"`
-
-	// The Amazon Resource Name (ARN) of the IAM policy for which you want the versions.
-	//
-	// For more information about ARNs, see Amazon Resource Names (ARNs) and AWS
-	// Service Namespaces (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
-	// in the AWS General Reference.
-	//
-	// PolicyArn is a required field
-	PolicyArn *string `min:"20" type:"string" required:"true"`
-
-	// The policy usage method to use for filtering the results.
-	//
-	// To list only permissions policies, set PolicyUsageFilter to PermissionsPolicy.
-	// To list only the policies used to set permissions boundaries, set the value
-	// to PermissionsBoundary.
-	//
-	// This parameter is optional. If it is not included, all policies are returned.
-	PolicyUsageFilter PolicyUsageType `type:"string" enum:"true"`
-}
-
-// String returns the string representation
-func (s ListEntitiesForPolicyInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListEntitiesForPolicyInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListEntitiesForPolicyInput"}
-	if s.Marker != nil && len(*s.Marker) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Marker", 1))
-	}
-	if s.MaxItems != nil && *s.MaxItems < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxItems", 1))
-	}
-	if s.PathPrefix != nil && len(*s.PathPrefix) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("PathPrefix", 1))
-	}
-
-	if s.PolicyArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("PolicyArn"))
-	}
-	if s.PolicyArn != nil && len(*s.PolicyArn) < 20 {
-		invalidParams.Add(aws.NewErrParamMinLen("PolicyArn", 20))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Contains the response to a successful ListEntitiesForPolicy request.
-type ListEntitiesForPolicyOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A flag that indicates whether there are more items to return. If your results
-	// were truncated, you can make a subsequent pagination request using the Marker
-	// request parameter to retrieve more items. Note that IAM might return fewer
-	// than the MaxItems number of results even when there are more results available.
-	// We recommend that you check IsTruncated after every call to ensure that you
-	// receive all your results.
-	IsTruncated *bool `type:"boolean"`
-
-	// When IsTruncated is true, this element is present and contains the value
-	// to use for the Marker parameter in a subsequent pagination request.
-	Marker *string `type:"string"`
-
-	// A list of IAM groups that the policy is attached to.
-	PolicyGroups []PolicyGroup `type:"list"`
-
-	// A list of IAM roles that the policy is attached to.
-	PolicyRoles []PolicyRole `type:"list"`
-
-	// A list of IAM users that the policy is attached to.
-	PolicyUsers []PolicyUser `type:"list"`
-}
-
-// String returns the string representation
-func (s ListEntitiesForPolicyOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListEntitiesForPolicy = "ListEntitiesForPolicy"
 
@@ -152,7 +32,7 @@ const opListEntitiesForPolicy = "ListEntitiesForPolicy"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListEntitiesForPolicy
-func (c *Client) ListEntitiesForPolicyRequest(input *ListEntitiesForPolicyInput) ListEntitiesForPolicyRequest {
+func (c *Client) ListEntitiesForPolicyRequest(input *types.ListEntitiesForPolicyInput) ListEntitiesForPolicyRequest {
 	op := &aws.Operation{
 		Name:       opListEntitiesForPolicy,
 		HTTPMethod: "POST",
@@ -166,10 +46,10 @@ func (c *Client) ListEntitiesForPolicyRequest(input *ListEntitiesForPolicyInput)
 	}
 
 	if input == nil {
-		input = &ListEntitiesForPolicyInput{}
+		input = &types.ListEntitiesForPolicyInput{}
 	}
 
-	req := c.newRequest(op, input, &ListEntitiesForPolicyOutput{})
+	req := c.newRequest(op, input, &types.ListEntitiesForPolicyOutput{})
 	return ListEntitiesForPolicyRequest{Request: req, Input: input, Copy: c.ListEntitiesForPolicyRequest}
 }
 
@@ -177,8 +57,8 @@ func (c *Client) ListEntitiesForPolicyRequest(input *ListEntitiesForPolicyInput)
 // ListEntitiesForPolicy API operation.
 type ListEntitiesForPolicyRequest struct {
 	*aws.Request
-	Input *ListEntitiesForPolicyInput
-	Copy  func(*ListEntitiesForPolicyInput) ListEntitiesForPolicyRequest
+	Input *types.ListEntitiesForPolicyInput
+	Copy  func(*types.ListEntitiesForPolicyInput) ListEntitiesForPolicyRequest
 }
 
 // Send marshals and sends the ListEntitiesForPolicy API request.
@@ -190,7 +70,7 @@ func (r ListEntitiesForPolicyRequest) Send(ctx context.Context) (*ListEntitiesFo
 	}
 
 	resp := &ListEntitiesForPolicyResponse{
-		ListEntitiesForPolicyOutput: r.Request.Data.(*ListEntitiesForPolicyOutput),
+		ListEntitiesForPolicyOutput: r.Request.Data.(*types.ListEntitiesForPolicyOutput),
 		response:                    &aws.Response{Request: r.Request},
 	}
 
@@ -220,7 +100,7 @@ func NewListEntitiesForPolicyPaginator(req ListEntitiesForPolicyRequest) ListEnt
 	return ListEntitiesForPolicyPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListEntitiesForPolicyInput
+				var inCpy *types.ListEntitiesForPolicyInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -240,14 +120,14 @@ type ListEntitiesForPolicyPaginator struct {
 	aws.Pager
 }
 
-func (p *ListEntitiesForPolicyPaginator) CurrentPage() *ListEntitiesForPolicyOutput {
-	return p.Pager.CurrentPage().(*ListEntitiesForPolicyOutput)
+func (p *ListEntitiesForPolicyPaginator) CurrentPage() *types.ListEntitiesForPolicyOutput {
+	return p.Pager.CurrentPage().(*types.ListEntitiesForPolicyOutput)
 }
 
 // ListEntitiesForPolicyResponse is the response type for the
 // ListEntitiesForPolicy API operation.
 type ListEntitiesForPolicyResponse struct {
-	*ListEntitiesForPolicyOutput
+	*types.ListEntitiesForPolicyOutput
 
 	response *aws.Response
 }

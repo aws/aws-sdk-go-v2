@@ -4,117 +4,10 @@ package clouddirectory
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/clouddirectory/types"
 )
-
-type UpdateLinkAttributesInput struct {
-	_ struct{} `type:"structure"`
-
-	// The attributes update structure.
-	//
-	// AttributeUpdates is a required field
-	AttributeUpdates []LinkAttributeUpdate `type:"list" required:"true"`
-
-	// The Amazon Resource Name (ARN) that is associated with the Directory where
-	// the updated typed link resides. For more information, see arns or Typed Links
-	// (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/directory_objects_links.html#directory_objects_links_typedlink).
-	//
-	// DirectoryArn is a required field
-	DirectoryArn *string `location:"header" locationName:"x-amz-data-partition" type:"string" required:"true"`
-
-	// Allows a typed link specifier to be accepted as input.
-	//
-	// TypedLinkSpecifier is a required field
-	TypedLinkSpecifier *TypedLinkSpecifier `type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s UpdateLinkAttributesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateLinkAttributesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateLinkAttributesInput"}
-
-	if s.AttributeUpdates == nil {
-		invalidParams.Add(aws.NewErrParamRequired("AttributeUpdates"))
-	}
-
-	if s.DirectoryArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DirectoryArn"))
-	}
-
-	if s.TypedLinkSpecifier == nil {
-		invalidParams.Add(aws.NewErrParamRequired("TypedLinkSpecifier"))
-	}
-	if s.AttributeUpdates != nil {
-		for i, v := range s.AttributeUpdates {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "AttributeUpdates", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-	if s.TypedLinkSpecifier != nil {
-		if err := s.TypedLinkSpecifier.Validate(); err != nil {
-			invalidParams.AddNested("TypedLinkSpecifier", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s UpdateLinkAttributesInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.AttributeUpdates != nil {
-		v := s.AttributeUpdates
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "AttributeUpdates", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	if s.TypedLinkSpecifier != nil {
-		v := s.TypedLinkSpecifier
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "TypedLinkSpecifier", v, metadata)
-	}
-	if s.DirectoryArn != nil {
-		v := *s.DirectoryArn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "x-amz-data-partition", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type UpdateLinkAttributesOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s UpdateLinkAttributesOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s UpdateLinkAttributesOutput) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
 
 const opUpdateLinkAttributes = "UpdateLinkAttributes"
 
@@ -132,7 +25,7 @@ const opUpdateLinkAttributes = "UpdateLinkAttributes"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/UpdateLinkAttributes
-func (c *Client) UpdateLinkAttributesRequest(input *UpdateLinkAttributesInput) UpdateLinkAttributesRequest {
+func (c *Client) UpdateLinkAttributesRequest(input *types.UpdateLinkAttributesInput) UpdateLinkAttributesRequest {
 	op := &aws.Operation{
 		Name:       opUpdateLinkAttributes,
 		HTTPMethod: "POST",
@@ -140,10 +33,10 @@ func (c *Client) UpdateLinkAttributesRequest(input *UpdateLinkAttributesInput) U
 	}
 
 	if input == nil {
-		input = &UpdateLinkAttributesInput{}
+		input = &types.UpdateLinkAttributesInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateLinkAttributesOutput{})
+	req := c.newRequest(op, input, &types.UpdateLinkAttributesOutput{})
 	return UpdateLinkAttributesRequest{Request: req, Input: input, Copy: c.UpdateLinkAttributesRequest}
 }
 
@@ -151,8 +44,8 @@ func (c *Client) UpdateLinkAttributesRequest(input *UpdateLinkAttributesInput) U
 // UpdateLinkAttributes API operation.
 type UpdateLinkAttributesRequest struct {
 	*aws.Request
-	Input *UpdateLinkAttributesInput
-	Copy  func(*UpdateLinkAttributesInput) UpdateLinkAttributesRequest
+	Input *types.UpdateLinkAttributesInput
+	Copy  func(*types.UpdateLinkAttributesInput) UpdateLinkAttributesRequest
 }
 
 // Send marshals and sends the UpdateLinkAttributes API request.
@@ -164,7 +57,7 @@ func (r UpdateLinkAttributesRequest) Send(ctx context.Context) (*UpdateLinkAttri
 	}
 
 	resp := &UpdateLinkAttributesResponse{
-		UpdateLinkAttributesOutput: r.Request.Data.(*UpdateLinkAttributesOutput),
+		UpdateLinkAttributesOutput: r.Request.Data.(*types.UpdateLinkAttributesOutput),
 		response:                   &aws.Response{Request: r.Request},
 	}
 
@@ -174,7 +67,7 @@ func (r UpdateLinkAttributesRequest) Send(ctx context.Context) (*UpdateLinkAttri
 // UpdateLinkAttributesResponse is the response type for the
 // UpdateLinkAttributes API operation.
 type UpdateLinkAttributesResponse struct {
-	*UpdateLinkAttributesOutput
+	*types.UpdateLinkAttributesOutput
 
 	response *aws.Response
 }

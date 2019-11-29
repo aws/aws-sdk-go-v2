@@ -6,80 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/acm/types"
 )
-
-type ExportCertificateInput struct {
-	_ struct{} `type:"structure"`
-
-	// An Amazon Resource Name (ARN) of the issued certificate. This must be of
-	// the form:
-	//
-	// arn:aws:acm:region:account:certificate/12345678-1234-1234-1234-123456789012
-	//
-	// CertificateArn is a required field
-	CertificateArn *string `min:"20" type:"string" required:"true"`
-
-	// Passphrase to associate with the encrypted exported private key. If you want
-	// to later decrypt the private key, you must have the passphrase. You can use
-	// the following OpenSSL command to decrypt a private key:
-	//
-	// openssl rsa -in encrypted_key.pem -out decrypted_key.pem
-	//
-	// Passphrase is automatically base64 encoded/decoded by the SDK.
-	//
-	// Passphrase is a required field
-	Passphrase []byte `min:"4" type:"blob" required:"true" sensitive:"true"`
-}
-
-// String returns the string representation
-func (s ExportCertificateInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ExportCertificateInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ExportCertificateInput"}
-
-	if s.CertificateArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("CertificateArn"))
-	}
-	if s.CertificateArn != nil && len(*s.CertificateArn) < 20 {
-		invalidParams.Add(aws.NewErrParamMinLen("CertificateArn", 20))
-	}
-
-	if s.Passphrase == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Passphrase"))
-	}
-	if s.Passphrase != nil && len(s.Passphrase) < 4 {
-		invalidParams.Add(aws.NewErrParamMinLen("Passphrase", 4))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ExportCertificateOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The base64 PEM-encoded certificate.
-	Certificate *string `min:"1" type:"string"`
-
-	// The base64 PEM-encoded certificate chain. This does not include the certificate
-	// that you are exporting.
-	CertificateChain *string `min:"1" type:"string"`
-
-	// The encrypted private key associated with the public key in the certificate.
-	// The key is output in PKCS #8 format and is base64 PEM-encoded.
-	PrivateKey *string `min:"1" type:"string" sensitive:"true"`
-}
-
-// String returns the string representation
-func (s ExportCertificateOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opExportCertificate = "ExportCertificate"
 
@@ -104,7 +32,7 @@ const opExportCertificate = "ExportCertificate"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/ExportCertificate
-func (c *Client) ExportCertificateRequest(input *ExportCertificateInput) ExportCertificateRequest {
+func (c *Client) ExportCertificateRequest(input *types.ExportCertificateInput) ExportCertificateRequest {
 	op := &aws.Operation{
 		Name:       opExportCertificate,
 		HTTPMethod: "POST",
@@ -112,10 +40,10 @@ func (c *Client) ExportCertificateRequest(input *ExportCertificateInput) ExportC
 	}
 
 	if input == nil {
-		input = &ExportCertificateInput{}
+		input = &types.ExportCertificateInput{}
 	}
 
-	req := c.newRequest(op, input, &ExportCertificateOutput{})
+	req := c.newRequest(op, input, &types.ExportCertificateOutput{})
 	return ExportCertificateRequest{Request: req, Input: input, Copy: c.ExportCertificateRequest}
 }
 
@@ -123,8 +51,8 @@ func (c *Client) ExportCertificateRequest(input *ExportCertificateInput) ExportC
 // ExportCertificate API operation.
 type ExportCertificateRequest struct {
 	*aws.Request
-	Input *ExportCertificateInput
-	Copy  func(*ExportCertificateInput) ExportCertificateRequest
+	Input *types.ExportCertificateInput
+	Copy  func(*types.ExportCertificateInput) ExportCertificateRequest
 }
 
 // Send marshals and sends the ExportCertificate API request.
@@ -136,7 +64,7 @@ func (r ExportCertificateRequest) Send(ctx context.Context) (*ExportCertificateR
 	}
 
 	resp := &ExportCertificateResponse{
-		ExportCertificateOutput: r.Request.Data.(*ExportCertificateOutput),
+		ExportCertificateOutput: r.Request.Data.(*types.ExportCertificateOutput),
 		response:                &aws.Response{Request: r.Request},
 	}
 
@@ -146,7 +74,7 @@ func (r ExportCertificateRequest) Send(ctx context.Context) (*ExportCertificateR
 // ExportCertificateResponse is the response type for the
 // ExportCertificate API operation.
 type ExportCertificateResponse struct {
-	*ExportCertificateOutput
+	*types.ExportCertificateOutput
 
 	response *aws.Response
 }

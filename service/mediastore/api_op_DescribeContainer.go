@@ -6,45 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/mediastore/types"
 )
-
-type DescribeContainerInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the container to query.
-	ContainerName *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeContainerInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeContainerInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeContainerInput"}
-	if s.ContainerName != nil && len(*s.ContainerName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ContainerName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribeContainerOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the queried container.
-	Container *Container `type:"structure"`
-}
-
-// String returns the string representation
-func (s DescribeContainerOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeContainer = "DescribeContainer"
 
@@ -66,7 +29,7 @@ const opDescribeContainer = "DescribeContainer"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mediastore-2017-09-01/DescribeContainer
-func (c *Client) DescribeContainerRequest(input *DescribeContainerInput) DescribeContainerRequest {
+func (c *Client) DescribeContainerRequest(input *types.DescribeContainerInput) DescribeContainerRequest {
 	op := &aws.Operation{
 		Name:       opDescribeContainer,
 		HTTPMethod: "POST",
@@ -74,10 +37,10 @@ func (c *Client) DescribeContainerRequest(input *DescribeContainerInput) Describ
 	}
 
 	if input == nil {
-		input = &DescribeContainerInput{}
+		input = &types.DescribeContainerInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeContainerOutput{})
+	req := c.newRequest(op, input, &types.DescribeContainerOutput{})
 	return DescribeContainerRequest{Request: req, Input: input, Copy: c.DescribeContainerRequest}
 }
 
@@ -85,8 +48,8 @@ func (c *Client) DescribeContainerRequest(input *DescribeContainerInput) Describ
 // DescribeContainer API operation.
 type DescribeContainerRequest struct {
 	*aws.Request
-	Input *DescribeContainerInput
-	Copy  func(*DescribeContainerInput) DescribeContainerRequest
+	Input *types.DescribeContainerInput
+	Copy  func(*types.DescribeContainerInput) DescribeContainerRequest
 }
 
 // Send marshals and sends the DescribeContainer API request.
@@ -98,7 +61,7 @@ func (r DescribeContainerRequest) Send(ctx context.Context) (*DescribeContainerR
 	}
 
 	resp := &DescribeContainerResponse{
-		DescribeContainerOutput: r.Request.Data.(*DescribeContainerOutput),
+		DescribeContainerOutput: r.Request.Data.(*types.DescribeContainerOutput),
 		response:                &aws.Response{Request: r.Request},
 	}
 
@@ -108,7 +71,7 @@ func (r DescribeContainerRequest) Send(ctx context.Context) (*DescribeContainerR
 // DescribeContainerResponse is the response type for the
 // DescribeContainer API operation.
 type DescribeContainerResponse struct {
-	*DescribeContainerOutput
+	*types.DescribeContainerOutput
 
 	response *aws.Response
 }

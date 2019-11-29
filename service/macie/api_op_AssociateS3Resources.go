@@ -4,64 +4,10 @@ package macie
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/macie/types"
 )
-
-type AssociateS3ResourcesInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the Amazon Macie member account whose resources you want to associate
-	// with Macie.
-	MemberAccountId *string `locationName:"memberAccountId" type:"string"`
-
-	// The S3 resources that you want to associate with Amazon Macie for monitoring
-	// and data classification.
-	//
-	// S3Resources is a required field
-	S3Resources []S3ResourceClassification `locationName:"s3Resources" type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s AssociateS3ResourcesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *AssociateS3ResourcesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "AssociateS3ResourcesInput"}
-
-	if s.S3Resources == nil {
-		invalidParams.Add(aws.NewErrParamRequired("S3Resources"))
-	}
-	if s.S3Resources != nil {
-		for i, v := range s.S3Resources {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "S3Resources", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type AssociateS3ResourcesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// S3 resources that couldn't be associated with Amazon Macie. An error code
-	// and an error message are provided for each failed item.
-	FailedS3Resources []FailedS3Resource `locationName:"failedS3Resources" type:"list"`
-}
-
-// String returns the string representation
-func (s AssociateS3ResourcesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opAssociateS3Resources = "AssociateS3Resources"
 
@@ -82,7 +28,7 @@ const opAssociateS3Resources = "AssociateS3Resources"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/macie-2017-12-19/AssociateS3Resources
-func (c *Client) AssociateS3ResourcesRequest(input *AssociateS3ResourcesInput) AssociateS3ResourcesRequest {
+func (c *Client) AssociateS3ResourcesRequest(input *types.AssociateS3ResourcesInput) AssociateS3ResourcesRequest {
 	op := &aws.Operation{
 		Name:       opAssociateS3Resources,
 		HTTPMethod: "POST",
@@ -90,10 +36,10 @@ func (c *Client) AssociateS3ResourcesRequest(input *AssociateS3ResourcesInput) A
 	}
 
 	if input == nil {
-		input = &AssociateS3ResourcesInput{}
+		input = &types.AssociateS3ResourcesInput{}
 	}
 
-	req := c.newRequest(op, input, &AssociateS3ResourcesOutput{})
+	req := c.newRequest(op, input, &types.AssociateS3ResourcesOutput{})
 	return AssociateS3ResourcesRequest{Request: req, Input: input, Copy: c.AssociateS3ResourcesRequest}
 }
 
@@ -101,8 +47,8 @@ func (c *Client) AssociateS3ResourcesRequest(input *AssociateS3ResourcesInput) A
 // AssociateS3Resources API operation.
 type AssociateS3ResourcesRequest struct {
 	*aws.Request
-	Input *AssociateS3ResourcesInput
-	Copy  func(*AssociateS3ResourcesInput) AssociateS3ResourcesRequest
+	Input *types.AssociateS3ResourcesInput
+	Copy  func(*types.AssociateS3ResourcesInput) AssociateS3ResourcesRequest
 }
 
 // Send marshals and sends the AssociateS3Resources API request.
@@ -114,7 +60,7 @@ func (r AssociateS3ResourcesRequest) Send(ctx context.Context) (*AssociateS3Reso
 	}
 
 	resp := &AssociateS3ResourcesResponse{
-		AssociateS3ResourcesOutput: r.Request.Data.(*AssociateS3ResourcesOutput),
+		AssociateS3ResourcesOutput: r.Request.Data.(*types.AssociateS3ResourcesOutput),
 		response:                   &aws.Response{Request: r.Request},
 	}
 
@@ -124,7 +70,7 @@ func (r AssociateS3ResourcesRequest) Send(ctx context.Context) (*AssociateS3Reso
 // AssociateS3ResourcesResponse is the response type for the
 // AssociateS3Resources API operation.
 type AssociateS3ResourcesResponse struct {
-	*AssociateS3ResourcesOutput
+	*types.AssociateS3ResourcesOutput
 
 	response *aws.Response
 }

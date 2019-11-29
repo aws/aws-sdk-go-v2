@@ -6,48 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/lightsail/types"
 )
-
-type GetDiskSnapshotInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the disk snapshot (e.g., my-disk-snapshot).
-	//
-	// DiskSnapshotName is a required field
-	DiskSnapshotName *string `locationName:"diskSnapshotName" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetDiskSnapshotInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetDiskSnapshotInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetDiskSnapshotInput"}
-
-	if s.DiskSnapshotName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DiskSnapshotName"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type GetDiskSnapshotOutput struct {
-	_ struct{} `type:"structure"`
-
-	// An object containing information about the disk snapshot.
-	DiskSnapshot *DiskSnapshot `locationName:"diskSnapshot" type:"structure"`
-}
-
-// String returns the string representation
-func (s GetDiskSnapshotOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetDiskSnapshot = "GetDiskSnapshot"
 
@@ -64,7 +24,7 @@ const opGetDiskSnapshot = "GetDiskSnapshot"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetDiskSnapshot
-func (c *Client) GetDiskSnapshotRequest(input *GetDiskSnapshotInput) GetDiskSnapshotRequest {
+func (c *Client) GetDiskSnapshotRequest(input *types.GetDiskSnapshotInput) GetDiskSnapshotRequest {
 	op := &aws.Operation{
 		Name:       opGetDiskSnapshot,
 		HTTPMethod: "POST",
@@ -72,10 +32,10 @@ func (c *Client) GetDiskSnapshotRequest(input *GetDiskSnapshotInput) GetDiskSnap
 	}
 
 	if input == nil {
-		input = &GetDiskSnapshotInput{}
+		input = &types.GetDiskSnapshotInput{}
 	}
 
-	req := c.newRequest(op, input, &GetDiskSnapshotOutput{})
+	req := c.newRequest(op, input, &types.GetDiskSnapshotOutput{})
 	return GetDiskSnapshotRequest{Request: req, Input: input, Copy: c.GetDiskSnapshotRequest}
 }
 
@@ -83,8 +43,8 @@ func (c *Client) GetDiskSnapshotRequest(input *GetDiskSnapshotInput) GetDiskSnap
 // GetDiskSnapshot API operation.
 type GetDiskSnapshotRequest struct {
 	*aws.Request
-	Input *GetDiskSnapshotInput
-	Copy  func(*GetDiskSnapshotInput) GetDiskSnapshotRequest
+	Input *types.GetDiskSnapshotInput
+	Copy  func(*types.GetDiskSnapshotInput) GetDiskSnapshotRequest
 }
 
 // Send marshals and sends the GetDiskSnapshot API request.
@@ -96,7 +56,7 @@ func (r GetDiskSnapshotRequest) Send(ctx context.Context) (*GetDiskSnapshotRespo
 	}
 
 	resp := &GetDiskSnapshotResponse{
-		GetDiskSnapshotOutput: r.Request.Data.(*GetDiskSnapshotOutput),
+		GetDiskSnapshotOutput: r.Request.Data.(*types.GetDiskSnapshotOutput),
 		response:              &aws.Response{Request: r.Request},
 	}
 
@@ -106,7 +66,7 @@ func (r GetDiskSnapshotRequest) Send(ctx context.Context) (*GetDiskSnapshotRespo
 // GetDiskSnapshotResponse is the response type for the
 // GetDiskSnapshot API operation.
 type GetDiskSnapshotResponse struct {
-	*GetDiskSnapshotOutput
+	*types.GetDiskSnapshotOutput
 
 	response *aws.Response
 }

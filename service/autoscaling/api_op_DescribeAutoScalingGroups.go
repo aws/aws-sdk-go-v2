@@ -6,52 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/autoscaling/types"
 )
-
-type DescribeAutoScalingGroupsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The names of the Auto Scaling groups. Each name can be a maximum of 1600
-	// characters. By default, you can only specify up to 50 names. You can optionally
-	// increase this limit using the MaxRecords parameter.
-	//
-	// If you omit this parameter, all Auto Scaling groups are described.
-	AutoScalingGroupNames []string `type:"list"`
-
-	// The maximum number of items to return with this call. The default value is
-	// 50 and the maximum value is 100.
-	MaxRecords *int64 `type:"integer"`
-
-	// The token for the next set of items to return. (You received this token from
-	// a previous call.)
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeAutoScalingGroupsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type DescribeAutoScalingGroupsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The groups.
-	//
-	// AutoScalingGroups is a required field
-	AutoScalingGroups []AutoScalingGroup `type:"list" required:"true"`
-
-	// A string that indicates that the response contains more items than can be
-	// returned in a single response. To receive additional items, specify this
-	// string for the NextToken value when requesting the next set of items. This
-	// value is null when there are no more items to return.
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeAutoScalingGroupsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeAutoScalingGroups = "DescribeAutoScalingGroups"
 
@@ -68,7 +24,7 @@ const opDescribeAutoScalingGroups = "DescribeAutoScalingGroups"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DescribeAutoScalingGroups
-func (c *Client) DescribeAutoScalingGroupsRequest(input *DescribeAutoScalingGroupsInput) DescribeAutoScalingGroupsRequest {
+func (c *Client) DescribeAutoScalingGroupsRequest(input *types.DescribeAutoScalingGroupsInput) DescribeAutoScalingGroupsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeAutoScalingGroups,
 		HTTPMethod: "POST",
@@ -82,10 +38,10 @@ func (c *Client) DescribeAutoScalingGroupsRequest(input *DescribeAutoScalingGrou
 	}
 
 	if input == nil {
-		input = &DescribeAutoScalingGroupsInput{}
+		input = &types.DescribeAutoScalingGroupsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeAutoScalingGroupsOutput{})
+	req := c.newRequest(op, input, &types.DescribeAutoScalingGroupsOutput{})
 	return DescribeAutoScalingGroupsRequest{Request: req, Input: input, Copy: c.DescribeAutoScalingGroupsRequest}
 }
 
@@ -93,8 +49,8 @@ func (c *Client) DescribeAutoScalingGroupsRequest(input *DescribeAutoScalingGrou
 // DescribeAutoScalingGroups API operation.
 type DescribeAutoScalingGroupsRequest struct {
 	*aws.Request
-	Input *DescribeAutoScalingGroupsInput
-	Copy  func(*DescribeAutoScalingGroupsInput) DescribeAutoScalingGroupsRequest
+	Input *types.DescribeAutoScalingGroupsInput
+	Copy  func(*types.DescribeAutoScalingGroupsInput) DescribeAutoScalingGroupsRequest
 }
 
 // Send marshals and sends the DescribeAutoScalingGroups API request.
@@ -106,7 +62,7 @@ func (r DescribeAutoScalingGroupsRequest) Send(ctx context.Context) (*DescribeAu
 	}
 
 	resp := &DescribeAutoScalingGroupsResponse{
-		DescribeAutoScalingGroupsOutput: r.Request.Data.(*DescribeAutoScalingGroupsOutput),
+		DescribeAutoScalingGroupsOutput: r.Request.Data.(*types.DescribeAutoScalingGroupsOutput),
 		response:                        &aws.Response{Request: r.Request},
 	}
 
@@ -136,7 +92,7 @@ func NewDescribeAutoScalingGroupsPaginator(req DescribeAutoScalingGroupsRequest)
 	return DescribeAutoScalingGroupsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *DescribeAutoScalingGroupsInput
+				var inCpy *types.DescribeAutoScalingGroupsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -156,14 +112,14 @@ type DescribeAutoScalingGroupsPaginator struct {
 	aws.Pager
 }
 
-func (p *DescribeAutoScalingGroupsPaginator) CurrentPage() *DescribeAutoScalingGroupsOutput {
-	return p.Pager.CurrentPage().(*DescribeAutoScalingGroupsOutput)
+func (p *DescribeAutoScalingGroupsPaginator) CurrentPage() *types.DescribeAutoScalingGroupsOutput {
+	return p.Pager.CurrentPage().(*types.DescribeAutoScalingGroupsOutput)
 }
 
 // DescribeAutoScalingGroupsResponse is the response type for the
 // DescribeAutoScalingGroups API operation.
 type DescribeAutoScalingGroupsResponse struct {
-	*DescribeAutoScalingGroupsOutput
+	*types.DescribeAutoScalingGroupsOutput
 
 	response *aws.Response
 }

@@ -6,52 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/glue/types"
 )
-
-type BatchGetCrawlersInput struct {
-	_ struct{} `type:"structure"`
-
-	// A list of crawler names, which might be the names returned from the ListCrawlers
-	// operation.
-	//
-	// CrawlerNames is a required field
-	CrawlerNames []string `type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s BatchGetCrawlersInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *BatchGetCrawlersInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "BatchGetCrawlersInput"}
-
-	if s.CrawlerNames == nil {
-		invalidParams.Add(aws.NewErrParamRequired("CrawlerNames"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type BatchGetCrawlersOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A list of crawler definitions.
-	Crawlers []Crawler `type:"list"`
-
-	// A list of names of crawlers that were not found.
-	CrawlersNotFound []string `type:"list"`
-}
-
-// String returns the string representation
-func (s BatchGetCrawlersOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opBatchGetCrawlers = "BatchGetCrawlers"
 
@@ -71,7 +27,7 @@ const opBatchGetCrawlers = "BatchGetCrawlers"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/BatchGetCrawlers
-func (c *Client) BatchGetCrawlersRequest(input *BatchGetCrawlersInput) BatchGetCrawlersRequest {
+func (c *Client) BatchGetCrawlersRequest(input *types.BatchGetCrawlersInput) BatchGetCrawlersRequest {
 	op := &aws.Operation{
 		Name:       opBatchGetCrawlers,
 		HTTPMethod: "POST",
@@ -79,10 +35,10 @@ func (c *Client) BatchGetCrawlersRequest(input *BatchGetCrawlersInput) BatchGetC
 	}
 
 	if input == nil {
-		input = &BatchGetCrawlersInput{}
+		input = &types.BatchGetCrawlersInput{}
 	}
 
-	req := c.newRequest(op, input, &BatchGetCrawlersOutput{})
+	req := c.newRequest(op, input, &types.BatchGetCrawlersOutput{})
 	return BatchGetCrawlersRequest{Request: req, Input: input, Copy: c.BatchGetCrawlersRequest}
 }
 
@@ -90,8 +46,8 @@ func (c *Client) BatchGetCrawlersRequest(input *BatchGetCrawlersInput) BatchGetC
 // BatchGetCrawlers API operation.
 type BatchGetCrawlersRequest struct {
 	*aws.Request
-	Input *BatchGetCrawlersInput
-	Copy  func(*BatchGetCrawlersInput) BatchGetCrawlersRequest
+	Input *types.BatchGetCrawlersInput
+	Copy  func(*types.BatchGetCrawlersInput) BatchGetCrawlersRequest
 }
 
 // Send marshals and sends the BatchGetCrawlers API request.
@@ -103,7 +59,7 @@ func (r BatchGetCrawlersRequest) Send(ctx context.Context) (*BatchGetCrawlersRes
 	}
 
 	resp := &BatchGetCrawlersResponse{
-		BatchGetCrawlersOutput: r.Request.Data.(*BatchGetCrawlersOutput),
+		BatchGetCrawlersOutput: r.Request.Data.(*types.BatchGetCrawlersOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -113,7 +69,7 @@ func (r BatchGetCrawlersRequest) Send(ctx context.Context) (*BatchGetCrawlersRes
 // BatchGetCrawlersResponse is the response type for the
 // BatchGetCrawlers API operation.
 type BatchGetCrawlersResponse struct {
-	*BatchGetCrawlersOutput
+	*types.BatchGetCrawlersOutput
 
 	response *aws.Response
 }

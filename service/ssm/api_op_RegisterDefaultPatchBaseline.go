@@ -6,51 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ssm/types"
 )
-
-type RegisterDefaultPatchBaselineInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the patch baseline that should be the default patch baseline.
-	//
-	// BaselineId is a required field
-	BaselineId *string `min:"20" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s RegisterDefaultPatchBaselineInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *RegisterDefaultPatchBaselineInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "RegisterDefaultPatchBaselineInput"}
-
-	if s.BaselineId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("BaselineId"))
-	}
-	if s.BaselineId != nil && len(*s.BaselineId) < 20 {
-		invalidParams.Add(aws.NewErrParamMinLen("BaselineId", 20))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type RegisterDefaultPatchBaselineOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the default patch baseline.
-	BaselineId *string `min:"20" type:"string"`
-}
-
-// String returns the string representation
-func (s RegisterDefaultPatchBaselineOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opRegisterDefaultPatchBaseline = "RegisterDefaultPatchBaseline"
 
@@ -72,7 +29,7 @@ const opRegisterDefaultPatchBaseline = "RegisterDefaultPatchBaseline"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/RegisterDefaultPatchBaseline
-func (c *Client) RegisterDefaultPatchBaselineRequest(input *RegisterDefaultPatchBaselineInput) RegisterDefaultPatchBaselineRequest {
+func (c *Client) RegisterDefaultPatchBaselineRequest(input *types.RegisterDefaultPatchBaselineInput) RegisterDefaultPatchBaselineRequest {
 	op := &aws.Operation{
 		Name:       opRegisterDefaultPatchBaseline,
 		HTTPMethod: "POST",
@@ -80,10 +37,10 @@ func (c *Client) RegisterDefaultPatchBaselineRequest(input *RegisterDefaultPatch
 	}
 
 	if input == nil {
-		input = &RegisterDefaultPatchBaselineInput{}
+		input = &types.RegisterDefaultPatchBaselineInput{}
 	}
 
-	req := c.newRequest(op, input, &RegisterDefaultPatchBaselineOutput{})
+	req := c.newRequest(op, input, &types.RegisterDefaultPatchBaselineOutput{})
 	return RegisterDefaultPatchBaselineRequest{Request: req, Input: input, Copy: c.RegisterDefaultPatchBaselineRequest}
 }
 
@@ -91,8 +48,8 @@ func (c *Client) RegisterDefaultPatchBaselineRequest(input *RegisterDefaultPatch
 // RegisterDefaultPatchBaseline API operation.
 type RegisterDefaultPatchBaselineRequest struct {
 	*aws.Request
-	Input *RegisterDefaultPatchBaselineInput
-	Copy  func(*RegisterDefaultPatchBaselineInput) RegisterDefaultPatchBaselineRequest
+	Input *types.RegisterDefaultPatchBaselineInput
+	Copy  func(*types.RegisterDefaultPatchBaselineInput) RegisterDefaultPatchBaselineRequest
 }
 
 // Send marshals and sends the RegisterDefaultPatchBaseline API request.
@@ -104,7 +61,7 @@ func (r RegisterDefaultPatchBaselineRequest) Send(ctx context.Context) (*Registe
 	}
 
 	resp := &RegisterDefaultPatchBaselineResponse{
-		RegisterDefaultPatchBaselineOutput: r.Request.Data.(*RegisterDefaultPatchBaselineOutput),
+		RegisterDefaultPatchBaselineOutput: r.Request.Data.(*types.RegisterDefaultPatchBaselineOutput),
 		response:                           &aws.Response{Request: r.Request},
 	}
 
@@ -114,7 +71,7 @@ func (r RegisterDefaultPatchBaselineRequest) Send(ctx context.Context) (*Registe
 // RegisterDefaultPatchBaselineResponse is the response type for the
 // RegisterDefaultPatchBaseline API operation.
 type RegisterDefaultPatchBaselineResponse struct {
-	*RegisterDefaultPatchBaselineOutput
+	*types.RegisterDefaultPatchBaselineOutput
 
 	response *aws.Response
 }

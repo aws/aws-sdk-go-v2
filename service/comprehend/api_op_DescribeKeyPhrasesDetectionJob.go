@@ -6,53 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/comprehend/types"
 )
-
-type DescribeKeyPhrasesDetectionJobInput struct {
-	_ struct{} `type:"structure"`
-
-	// The identifier that Amazon Comprehend generated for the job. The operation
-	// returns this identifier in its response.
-	//
-	// JobId is a required field
-	JobId *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeKeyPhrasesDetectionJobInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeKeyPhrasesDetectionJobInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeKeyPhrasesDetectionJobInput"}
-
-	if s.JobId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("JobId"))
-	}
-	if s.JobId != nil && len(*s.JobId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("JobId", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribeKeyPhrasesDetectionJobOutput struct {
-	_ struct{} `type:"structure"`
-
-	// An object that contains the properties associated with a key phrases detection
-	// job.
-	KeyPhrasesDetectionJobProperties *KeyPhrasesDetectionJobProperties `type:"structure"`
-}
-
-// String returns the string representation
-func (s DescribeKeyPhrasesDetectionJobOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeKeyPhrasesDetectionJob = "DescribeKeyPhrasesDetectionJob"
 
@@ -70,7 +25,7 @@ const opDescribeKeyPhrasesDetectionJob = "DescribeKeyPhrasesDetectionJob"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/DescribeKeyPhrasesDetectionJob
-func (c *Client) DescribeKeyPhrasesDetectionJobRequest(input *DescribeKeyPhrasesDetectionJobInput) DescribeKeyPhrasesDetectionJobRequest {
+func (c *Client) DescribeKeyPhrasesDetectionJobRequest(input *types.DescribeKeyPhrasesDetectionJobInput) DescribeKeyPhrasesDetectionJobRequest {
 	op := &aws.Operation{
 		Name:       opDescribeKeyPhrasesDetectionJob,
 		HTTPMethod: "POST",
@@ -78,10 +33,10 @@ func (c *Client) DescribeKeyPhrasesDetectionJobRequest(input *DescribeKeyPhrases
 	}
 
 	if input == nil {
-		input = &DescribeKeyPhrasesDetectionJobInput{}
+		input = &types.DescribeKeyPhrasesDetectionJobInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeKeyPhrasesDetectionJobOutput{})
+	req := c.newRequest(op, input, &types.DescribeKeyPhrasesDetectionJobOutput{})
 	return DescribeKeyPhrasesDetectionJobRequest{Request: req, Input: input, Copy: c.DescribeKeyPhrasesDetectionJobRequest}
 }
 
@@ -89,8 +44,8 @@ func (c *Client) DescribeKeyPhrasesDetectionJobRequest(input *DescribeKeyPhrases
 // DescribeKeyPhrasesDetectionJob API operation.
 type DescribeKeyPhrasesDetectionJobRequest struct {
 	*aws.Request
-	Input *DescribeKeyPhrasesDetectionJobInput
-	Copy  func(*DescribeKeyPhrasesDetectionJobInput) DescribeKeyPhrasesDetectionJobRequest
+	Input *types.DescribeKeyPhrasesDetectionJobInput
+	Copy  func(*types.DescribeKeyPhrasesDetectionJobInput) DescribeKeyPhrasesDetectionJobRequest
 }
 
 // Send marshals and sends the DescribeKeyPhrasesDetectionJob API request.
@@ -102,7 +57,7 @@ func (r DescribeKeyPhrasesDetectionJobRequest) Send(ctx context.Context) (*Descr
 	}
 
 	resp := &DescribeKeyPhrasesDetectionJobResponse{
-		DescribeKeyPhrasesDetectionJobOutput: r.Request.Data.(*DescribeKeyPhrasesDetectionJobOutput),
+		DescribeKeyPhrasesDetectionJobOutput: r.Request.Data.(*types.DescribeKeyPhrasesDetectionJobOutput),
 		response:                             &aws.Response{Request: r.Request},
 	}
 
@@ -112,7 +67,7 @@ func (r DescribeKeyPhrasesDetectionJobRequest) Send(ctx context.Context) (*Descr
 // DescribeKeyPhrasesDetectionJobResponse is the response type for the
 // DescribeKeyPhrasesDetectionJob API operation.
 type DescribeKeyPhrasesDetectionJobResponse struct {
-	*DescribeKeyPhrasesDetectionJobOutput
+	*types.DescribeKeyPhrasesDetectionJobOutput
 
 	response *aws.Response
 }

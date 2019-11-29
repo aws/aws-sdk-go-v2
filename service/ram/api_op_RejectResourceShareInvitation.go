@@ -6,93 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/ram/types"
 )
-
-type RejectResourceShareInvitationInput struct {
-	_ struct{} `type:"structure"`
-
-	// A unique, case-sensitive identifier that you provide to ensure the idempotency
-	// of the request.
-	ClientToken *string `locationName:"clientToken" type:"string"`
-
-	// The Amazon Resource Name (ARN) of the invitation.
-	//
-	// ResourceShareInvitationArn is a required field
-	ResourceShareInvitationArn *string `locationName:"resourceShareInvitationArn" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s RejectResourceShareInvitationInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *RejectResourceShareInvitationInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "RejectResourceShareInvitationInput"}
-
-	if s.ResourceShareInvitationArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ResourceShareInvitationArn"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s RejectResourceShareInvitationInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.ClientToken != nil {
-		v := *s.ClientToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "clientToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.ResourceShareInvitationArn != nil {
-		v := *s.ResourceShareInvitationArn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "resourceShareInvitationArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type RejectResourceShareInvitationOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A unique, case-sensitive identifier that you provide to ensure the idempotency
-	// of the request.
-	ClientToken *string `locationName:"clientToken" type:"string"`
-
-	// Information about the invitation.
-	ResourceShareInvitation *ResourceShareInvitation `locationName:"resourceShareInvitation" type:"structure"`
-}
-
-// String returns the string representation
-func (s RejectResourceShareInvitationOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s RejectResourceShareInvitationOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.ClientToken != nil {
-		v := *s.ClientToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "clientToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.ResourceShareInvitation != nil {
-		v := s.ResourceShareInvitation
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "resourceShareInvitation", v, metadata)
-	}
-	return nil
-}
 
 const opRejectResourceShareInvitation = "RejectResourceShareInvitation"
 
@@ -109,7 +24,7 @@ const opRejectResourceShareInvitation = "RejectResourceShareInvitation"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/RejectResourceShareInvitation
-func (c *Client) RejectResourceShareInvitationRequest(input *RejectResourceShareInvitationInput) RejectResourceShareInvitationRequest {
+func (c *Client) RejectResourceShareInvitationRequest(input *types.RejectResourceShareInvitationInput) RejectResourceShareInvitationRequest {
 	op := &aws.Operation{
 		Name:       opRejectResourceShareInvitation,
 		HTTPMethod: "POST",
@@ -117,10 +32,10 @@ func (c *Client) RejectResourceShareInvitationRequest(input *RejectResourceShare
 	}
 
 	if input == nil {
-		input = &RejectResourceShareInvitationInput{}
+		input = &types.RejectResourceShareInvitationInput{}
 	}
 
-	req := c.newRequest(op, input, &RejectResourceShareInvitationOutput{})
+	req := c.newRequest(op, input, &types.RejectResourceShareInvitationOutput{})
 	return RejectResourceShareInvitationRequest{Request: req, Input: input, Copy: c.RejectResourceShareInvitationRequest}
 }
 
@@ -128,8 +43,8 @@ func (c *Client) RejectResourceShareInvitationRequest(input *RejectResourceShare
 // RejectResourceShareInvitation API operation.
 type RejectResourceShareInvitationRequest struct {
 	*aws.Request
-	Input *RejectResourceShareInvitationInput
-	Copy  func(*RejectResourceShareInvitationInput) RejectResourceShareInvitationRequest
+	Input *types.RejectResourceShareInvitationInput
+	Copy  func(*types.RejectResourceShareInvitationInput) RejectResourceShareInvitationRequest
 }
 
 // Send marshals and sends the RejectResourceShareInvitation API request.
@@ -141,7 +56,7 @@ func (r RejectResourceShareInvitationRequest) Send(ctx context.Context) (*Reject
 	}
 
 	resp := &RejectResourceShareInvitationResponse{
-		RejectResourceShareInvitationOutput: r.Request.Data.(*RejectResourceShareInvitationOutput),
+		RejectResourceShareInvitationOutput: r.Request.Data.(*types.RejectResourceShareInvitationOutput),
 		response:                            &aws.Response{Request: r.Request},
 	}
 
@@ -151,7 +66,7 @@ func (r RejectResourceShareInvitationRequest) Send(ctx context.Context) (*Reject
 // RejectResourceShareInvitationResponse is the response type for the
 // RejectResourceShareInvitation API operation.
 type RejectResourceShareInvitationResponse struct {
-	*RejectResourceShareInvitationOutput
+	*types.RejectResourceShareInvitationOutput
 
 	response *aws.Response
 }

@@ -6,47 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/query"
+	"github.com/aws/aws-sdk-go-v2/service/redshift/types"
 )
-
-type DeleteClusterSecurityGroupInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the cluster security group to be deleted.
-	//
-	// ClusterSecurityGroupName is a required field
-	ClusterSecurityGroupName *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteClusterSecurityGroupInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteClusterSecurityGroupInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteClusterSecurityGroupInput"}
-
-	if s.ClusterSecurityGroupName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ClusterSecurityGroupName"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteClusterSecurityGroupOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteClusterSecurityGroupOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteClusterSecurityGroup = "DeleteClusterSecurityGroup"
 
@@ -70,7 +33,7 @@ const opDeleteClusterSecurityGroup = "DeleteClusterSecurityGroup"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DeleteClusterSecurityGroup
-func (c *Client) DeleteClusterSecurityGroupRequest(input *DeleteClusterSecurityGroupInput) DeleteClusterSecurityGroupRequest {
+func (c *Client) DeleteClusterSecurityGroupRequest(input *types.DeleteClusterSecurityGroupInput) DeleteClusterSecurityGroupRequest {
 	op := &aws.Operation{
 		Name:       opDeleteClusterSecurityGroup,
 		HTTPMethod: "POST",
@@ -78,10 +41,10 @@ func (c *Client) DeleteClusterSecurityGroupRequest(input *DeleteClusterSecurityG
 	}
 
 	if input == nil {
-		input = &DeleteClusterSecurityGroupInput{}
+		input = &types.DeleteClusterSecurityGroupInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteClusterSecurityGroupOutput{})
+	req := c.newRequest(op, input, &types.DeleteClusterSecurityGroupOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return DeleteClusterSecurityGroupRequest{Request: req, Input: input, Copy: c.DeleteClusterSecurityGroupRequest}
@@ -91,8 +54,8 @@ func (c *Client) DeleteClusterSecurityGroupRequest(input *DeleteClusterSecurityG
 // DeleteClusterSecurityGroup API operation.
 type DeleteClusterSecurityGroupRequest struct {
 	*aws.Request
-	Input *DeleteClusterSecurityGroupInput
-	Copy  func(*DeleteClusterSecurityGroupInput) DeleteClusterSecurityGroupRequest
+	Input *types.DeleteClusterSecurityGroupInput
+	Copy  func(*types.DeleteClusterSecurityGroupInput) DeleteClusterSecurityGroupRequest
 }
 
 // Send marshals and sends the DeleteClusterSecurityGroup API request.
@@ -104,7 +67,7 @@ func (r DeleteClusterSecurityGroupRequest) Send(ctx context.Context) (*DeleteClu
 	}
 
 	resp := &DeleteClusterSecurityGroupResponse{
-		DeleteClusterSecurityGroupOutput: r.Request.Data.(*DeleteClusterSecurityGroupOutput),
+		DeleteClusterSecurityGroupOutput: r.Request.Data.(*types.DeleteClusterSecurityGroupOutput),
 		response:                         &aws.Response{Request: r.Request},
 	}
 
@@ -114,7 +77,7 @@ func (r DeleteClusterSecurityGroupRequest) Send(ctx context.Context) (*DeleteClu
 // DeleteClusterSecurityGroupResponse is the response type for the
 // DeleteClusterSecurityGroup API operation.
 type DeleteClusterSecurityGroupResponse struct {
-	*DeleteClusterSecurityGroupOutput
+	*types.DeleteClusterSecurityGroupOutput
 
 	response *aws.Response
 }

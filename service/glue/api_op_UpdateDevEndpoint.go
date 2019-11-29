@@ -6,80 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/glue/types"
 )
-
-type UpdateDevEndpointInput struct {
-	_ struct{} `type:"structure"`
-
-	// The map of arguments to add the map of arguments used to configure the DevEndpoint.
-	//
-	// Valid arguments are:
-	//
-	//    * "--enable-glue-datacatalog": ""
-	//
-	//    * "GLUE_PYTHON_VERSION": "3"
-	//
-	//    * "GLUE_PYTHON_VERSION": "2"
-	//
-	// You can specify a version of Python support for development endpoints by
-	// using the Arguments parameter in the CreateDevEndpoint or UpdateDevEndpoint
-	// APIs. If no arguments are provided, the version defaults to Python 2.
-	AddArguments map[string]string `type:"map"`
-
-	// The list of public keys for the DevEndpoint to use.
-	AddPublicKeys []string `type:"list"`
-
-	// Custom Python or Java libraries to be loaded in the DevEndpoint.
-	CustomLibraries *DevEndpointCustomLibraries `type:"structure"`
-
-	// The list of argument keys to be deleted from the map of arguments used to
-	// configure the DevEndpoint.
-	DeleteArguments []string `type:"list"`
-
-	// The list of public keys to be deleted from the DevEndpoint.
-	DeletePublicKeys []string `type:"list"`
-
-	// The name of the DevEndpoint to be updated.
-	//
-	// EndpointName is a required field
-	EndpointName *string `type:"string" required:"true"`
-
-	// The public key for the DevEndpoint to use.
-	PublicKey *string `type:"string"`
-
-	// True if the list of custom libraries to be loaded in the development endpoint
-	// needs to be updated, or False if otherwise.
-	UpdateEtlLibraries *bool `type:"boolean"`
-}
-
-// String returns the string representation
-func (s UpdateDevEndpointInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateDevEndpointInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateDevEndpointInput"}
-
-	if s.EndpointName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("EndpointName"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type UpdateDevEndpointOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s UpdateDevEndpointOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opUpdateDevEndpoint = "UpdateDevEndpoint"
 
@@ -96,7 +24,7 @@ const opUpdateDevEndpoint = "UpdateDevEndpoint"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/UpdateDevEndpoint
-func (c *Client) UpdateDevEndpointRequest(input *UpdateDevEndpointInput) UpdateDevEndpointRequest {
+func (c *Client) UpdateDevEndpointRequest(input *types.UpdateDevEndpointInput) UpdateDevEndpointRequest {
 	op := &aws.Operation{
 		Name:       opUpdateDevEndpoint,
 		HTTPMethod: "POST",
@@ -104,10 +32,10 @@ func (c *Client) UpdateDevEndpointRequest(input *UpdateDevEndpointInput) UpdateD
 	}
 
 	if input == nil {
-		input = &UpdateDevEndpointInput{}
+		input = &types.UpdateDevEndpointInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateDevEndpointOutput{})
+	req := c.newRequest(op, input, &types.UpdateDevEndpointOutput{})
 	return UpdateDevEndpointRequest{Request: req, Input: input, Copy: c.UpdateDevEndpointRequest}
 }
 
@@ -115,8 +43,8 @@ func (c *Client) UpdateDevEndpointRequest(input *UpdateDevEndpointInput) UpdateD
 // UpdateDevEndpoint API operation.
 type UpdateDevEndpointRequest struct {
 	*aws.Request
-	Input *UpdateDevEndpointInput
-	Copy  func(*UpdateDevEndpointInput) UpdateDevEndpointRequest
+	Input *types.UpdateDevEndpointInput
+	Copy  func(*types.UpdateDevEndpointInput) UpdateDevEndpointRequest
 }
 
 // Send marshals and sends the UpdateDevEndpoint API request.
@@ -128,7 +56,7 @@ func (r UpdateDevEndpointRequest) Send(ctx context.Context) (*UpdateDevEndpointR
 	}
 
 	resp := &UpdateDevEndpointResponse{
-		UpdateDevEndpointOutput: r.Request.Data.(*UpdateDevEndpointOutput),
+		UpdateDevEndpointOutput: r.Request.Data.(*types.UpdateDevEndpointOutput),
 		response:                &aws.Response{Request: r.Request},
 	}
 
@@ -138,7 +66,7 @@ func (r UpdateDevEndpointRequest) Send(ctx context.Context) (*UpdateDevEndpointR
 // UpdateDevEndpointResponse is the response type for the
 // UpdateDevEndpoint API operation.
 type UpdateDevEndpointResponse struct {
-	*UpdateDevEndpointOutput
+	*types.UpdateDevEndpointOutput
 
 	response *aws.Response
 }

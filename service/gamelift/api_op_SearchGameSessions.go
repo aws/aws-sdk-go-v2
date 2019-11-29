@@ -6,134 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/gamelift/types"
 )
-
-// Represents the input for a request action.
-type SearchGameSessionsInput struct {
-	_ struct{} `type:"structure"`
-
-	// Unique identifier for an alias associated with the fleet to search for active
-	// game sessions. Each request must reference either a fleet ID or alias ID,
-	// but not both.
-	AliasId *string `type:"string"`
-
-	// String containing the search criteria for the session search. If no filter
-	// expression is included, the request returns results for all game sessions
-	// in the fleet that are in ACTIVE status.
-	//
-	// A filter expression can contain one or multiple conditions. Each condition
-	// consists of the following:
-	//
-	//    * Operand -- Name of a game session attribute. Valid values are gameSessionName,
-	//    gameSessionId, gameSessionProperties, maximumSessions, creationTimeMillis,
-	//    playerSessionCount, hasAvailablePlayerSessions.
-	//
-	//    * Comparator -- Valid comparators are: =, <>, <, >, <=, >=.
-	//
-	//    * Value -- Value to be searched for. Values may be numbers, boolean values
-	//    (true/false) or strings depending on the operand. String values are case
-	//    sensitive and must be enclosed in single quotes. Special characters must
-	//    be escaped. Boolean and string values can only be used with the comparators
-	//    = and <>. For example, the following filter expression searches on gameSessionName:
-	//    "FilterExpression": "gameSessionName = 'Matt\\'s Awesome Game 1'".
-	//
-	// To chain multiple conditions in a single expression, use the logical keywords
-	// AND, OR, and NOT and parentheses as needed. For example: x AND y AND NOT
-	// z, NOT (x OR y).
-	//
-	// Session search evaluates conditions from left to right using the following
-	// precedence rules:
-	//
-	// =, <>, <, >, <=, >=
-	//
-	// Parentheses
-	//
-	// NOT
-	//
-	// AND
-	//
-	// OR
-	//
-	// For example, this filter expression retrieves game sessions hosting at least
-	// ten players that have an open player slot: "maximumSessions>=10 AND hasAvailablePlayerSessions=true".
-	FilterExpression *string `min:"1" type:"string"`
-
-	// Unique identifier for a fleet to search for active game sessions. Each request
-	// must reference either a fleet ID or alias ID, but not both.
-	FleetId *string `type:"string"`
-
-	// Maximum number of results to return. Use this parameter with NextToken to
-	// get results as a set of sequential pages. The maximum number of results returned
-	// is 20, even if this value is not set or is set higher than 20.
-	Limit *int64 `min:"1" type:"integer"`
-
-	// Token that indicates the start of the next sequential page of results. Use
-	// the token that is returned with a previous call to this action. To start
-	// at the beginning of the result set, do not specify a value.
-	NextToken *string `min:"1" type:"string"`
-
-	// Instructions on how to sort the search results. If no sort expression is
-	// included, the request returns results in random order. A sort expression
-	// consists of the following elements:
-	//
-	//    * Operand -- Name of a game session attribute. Valid values are gameSessionName,
-	//    gameSessionId, gameSessionProperties, maximumSessions, creationTimeMillis,
-	//    playerSessionCount, hasAvailablePlayerSessions.
-	//
-	//    * Order -- Valid sort orders are ASC (ascending) and DESC (descending).
-	//
-	// For example, this sort expression returns the oldest active sessions first:
-	// "SortExpression": "creationTimeMillis ASC". Results with a null value for
-	// the sort operand are returned at the end of the list.
-	SortExpression *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s SearchGameSessionsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *SearchGameSessionsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "SearchGameSessionsInput"}
-	if s.FilterExpression != nil && len(*s.FilterExpression) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("FilterExpression", 1))
-	}
-	if s.Limit != nil && *s.Limit < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("Limit", 1))
-	}
-	if s.NextToken != nil && len(*s.NextToken) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
-	}
-	if s.SortExpression != nil && len(*s.SortExpression) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("SortExpression", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Represents the returned data in response to a request action.
-type SearchGameSessionsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Collection of objects containing game session properties for each session
-	// matching the request.
-	GameSessions []GameSession `type:"list"`
-
-	// Token that indicates where to resume retrieving results on the next call
-	// to this action. If no token is returned, these results represent the end
-	// of the list.
-	NextToken *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s SearchGameSessionsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opSearchGameSessions = "SearchGameSessions"
 
@@ -213,7 +87,7 @@ const opSearchGameSessions = "SearchGameSessions"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/SearchGameSessions
-func (c *Client) SearchGameSessionsRequest(input *SearchGameSessionsInput) SearchGameSessionsRequest {
+func (c *Client) SearchGameSessionsRequest(input *types.SearchGameSessionsInput) SearchGameSessionsRequest {
 	op := &aws.Operation{
 		Name:       opSearchGameSessions,
 		HTTPMethod: "POST",
@@ -221,10 +95,10 @@ func (c *Client) SearchGameSessionsRequest(input *SearchGameSessionsInput) Searc
 	}
 
 	if input == nil {
-		input = &SearchGameSessionsInput{}
+		input = &types.SearchGameSessionsInput{}
 	}
 
-	req := c.newRequest(op, input, &SearchGameSessionsOutput{})
+	req := c.newRequest(op, input, &types.SearchGameSessionsOutput{})
 	return SearchGameSessionsRequest{Request: req, Input: input, Copy: c.SearchGameSessionsRequest}
 }
 
@@ -232,8 +106,8 @@ func (c *Client) SearchGameSessionsRequest(input *SearchGameSessionsInput) Searc
 // SearchGameSessions API operation.
 type SearchGameSessionsRequest struct {
 	*aws.Request
-	Input *SearchGameSessionsInput
-	Copy  func(*SearchGameSessionsInput) SearchGameSessionsRequest
+	Input *types.SearchGameSessionsInput
+	Copy  func(*types.SearchGameSessionsInput) SearchGameSessionsRequest
 }
 
 // Send marshals and sends the SearchGameSessions API request.
@@ -245,7 +119,7 @@ func (r SearchGameSessionsRequest) Send(ctx context.Context) (*SearchGameSession
 	}
 
 	resp := &SearchGameSessionsResponse{
-		SearchGameSessionsOutput: r.Request.Data.(*SearchGameSessionsOutput),
+		SearchGameSessionsOutput: r.Request.Data.(*types.SearchGameSessionsOutput),
 		response:                 &aws.Response{Request: r.Request},
 	}
 
@@ -255,7 +129,7 @@ func (r SearchGameSessionsRequest) Send(ctx context.Context) (*SearchGameSession
 // SearchGameSessionsResponse is the response type for the
 // SearchGameSessions API operation.
 type SearchGameSessionsResponse struct {
-	*SearchGameSessionsOutput
+	*types.SearchGameSessionsOutput
 
 	response *aws.Response
 }

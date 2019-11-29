@@ -6,53 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/ec2query"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-type DeletePlacementGroupInput struct {
-	_ struct{} `type:"structure"`
-
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have
-	// the required permissions, the error response is DryRunOperation. Otherwise,
-	// it is UnauthorizedOperation.
-	DryRun *bool `locationName:"dryRun" type:"boolean"`
-
-	// The name of the placement group.
-	//
-	// GroupName is a required field
-	GroupName *string `locationName:"groupName" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeletePlacementGroupInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeletePlacementGroupInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeletePlacementGroupInput"}
-
-	if s.GroupName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("GroupName"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeletePlacementGroupOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeletePlacementGroupOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeletePlacementGroup = "DeletePlacementGroup"
 
@@ -72,7 +29,7 @@ const opDeletePlacementGroup = "DeletePlacementGroup"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeletePlacementGroup
-func (c *Client) DeletePlacementGroupRequest(input *DeletePlacementGroupInput) DeletePlacementGroupRequest {
+func (c *Client) DeletePlacementGroupRequest(input *types.DeletePlacementGroupInput) DeletePlacementGroupRequest {
 	op := &aws.Operation{
 		Name:       opDeletePlacementGroup,
 		HTTPMethod: "POST",
@@ -80,10 +37,10 @@ func (c *Client) DeletePlacementGroupRequest(input *DeletePlacementGroupInput) D
 	}
 
 	if input == nil {
-		input = &DeletePlacementGroupInput{}
+		input = &types.DeletePlacementGroupInput{}
 	}
 
-	req := c.newRequest(op, input, &DeletePlacementGroupOutput{})
+	req := c.newRequest(op, input, &types.DeletePlacementGroupOutput{})
 	req.Handlers.Unmarshal.Remove(ec2query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return DeletePlacementGroupRequest{Request: req, Input: input, Copy: c.DeletePlacementGroupRequest}
@@ -93,8 +50,8 @@ func (c *Client) DeletePlacementGroupRequest(input *DeletePlacementGroupInput) D
 // DeletePlacementGroup API operation.
 type DeletePlacementGroupRequest struct {
 	*aws.Request
-	Input *DeletePlacementGroupInput
-	Copy  func(*DeletePlacementGroupInput) DeletePlacementGroupRequest
+	Input *types.DeletePlacementGroupInput
+	Copy  func(*types.DeletePlacementGroupInput) DeletePlacementGroupRequest
 }
 
 // Send marshals and sends the DeletePlacementGroup API request.
@@ -106,7 +63,7 @@ func (r DeletePlacementGroupRequest) Send(ctx context.Context) (*DeletePlacement
 	}
 
 	resp := &DeletePlacementGroupResponse{
-		DeletePlacementGroupOutput: r.Request.Data.(*DeletePlacementGroupOutput),
+		DeletePlacementGroupOutput: r.Request.Data.(*types.DeletePlacementGroupOutput),
 		response:                   &aws.Response{Request: r.Request},
 	}
 
@@ -116,7 +73,7 @@ func (r DeletePlacementGroupRequest) Send(ctx context.Context) (*DeletePlacement
 // DeletePlacementGroupResponse is the response type for the
 // DeletePlacementGroup API operation.
 type DeletePlacementGroupResponse struct {
-	*DeletePlacementGroupOutput
+	*types.DeletePlacementGroupOutput
 
 	response *aws.Response
 }

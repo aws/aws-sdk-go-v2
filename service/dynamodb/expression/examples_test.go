@@ -8,7 +8,9 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws/awserr"
 	"github.com/aws/aws-sdk-go-v2/aws/external"
 	"github.com/aws/aws-sdk-go-v2/service/dynamodb"
+	"github.com/aws/aws-sdk-go-v2/service/dynamodb/enums"
 	"github.com/aws/aws-sdk-go-v2/service/dynamodb/expression"
+	"github.com/aws/aws-sdk-go-v2/service/dynamodb/types"
 )
 
 // Using Projection Expression
@@ -42,7 +44,7 @@ func ExampleBuilder_WithProjection() {
 
 	// Use the built expression to populate the DynamoDB Query's API input
 	// parameters.
-	input := &dynamodb.QueryInput{
+	input := &types.QueryInput{
 		ExpressionAttributeValues: expr.Values(),
 		KeyConditionExpression:    expr.KeyCondition(),
 		ProjectionExpression:      expr.Projection(),
@@ -105,7 +107,7 @@ func ExampleBuilder_WithKeyCondition() {
 
 	// Use the built expression to populate the DynamoDB Query's API input
 	// parameters.
-	input := &dynamodb.QueryInput{
+	input := &types.QueryInput{
 		ExpressionAttributeNames:  expr.Names(),
 		ExpressionAttributeValues: expr.Values(),
 		KeyConditionExpression:    expr.KeyCondition(),
@@ -170,7 +172,7 @@ func ExampleBuilder_WithFilter() {
 	}
 
 	// Use the built expression to populate the DynamoDB Scan API input parameters.
-	input := &dynamodb.ScanInput{
+	input := &types.ScanInput{
 		ExpressionAttributeNames:  expr.Names(),
 		ExpressionAttributeValues: expr.Values(),
 		FilterExpression:          expr.Filter(),
@@ -232,10 +234,10 @@ func ExampleBuilder_WithUpdate() {
 
 	// Use the built expression to populate the DynamoDB UpdateItem API
 	// input parameters.
-	input := &dynamodb.UpdateItemInput{
+	input := &types.UpdateItemInput{
 		ExpressionAttributeNames:  expr.Names(),
 		ExpressionAttributeValues: expr.Values(),
-		Key: map[string]dynamodb.AttributeValue{
+		Key: map[string]types.AttributeValue{
 			"Artist": {
 				S: aws.String("Acme Band"),
 			},
@@ -243,7 +245,7 @@ func ExampleBuilder_WithUpdate() {
 				S: aws.String("Happy Day"),
 			},
 		},
-		ReturnValues:     dynamodb.ReturnValueAllNew,
+		ReturnValues:     enums.ReturnValueAllNew,
 		TableName:        aws.String("Music"),
 		UpdateExpression: expr.Update(),
 	}
@@ -302,8 +304,8 @@ func ExampleBuilder_WithCondition() {
 
 	// Use the built expression to populate the DeleteItem API operation with the
 	// condition expression.
-	input := &dynamodb.DeleteItemInput{
-		Key: map[string]dynamodb.AttributeValue{
+	input := &types.DeleteItemInput{
+		Key: map[string]types.AttributeValue{
 			"Artist": {
 				S: aws.String("No One You Know"),
 			},

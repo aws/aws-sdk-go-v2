@@ -6,59 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ses/types"
 )
-
-// Represents a request to delete a configuration set event destination. Configuration
-// set event destinations are associated with configuration sets, which enable
-// you to publish email sending events. For information about using configuration
-// sets, see the Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html).
-type DeleteConfigurationSetEventDestinationInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the configuration set from which to delete the event destination.
-	//
-	// ConfigurationSetName is a required field
-	ConfigurationSetName *string `type:"string" required:"true"`
-
-	// The name of the event destination to delete.
-	//
-	// EventDestinationName is a required field
-	EventDestinationName *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteConfigurationSetEventDestinationInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteConfigurationSetEventDestinationInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteConfigurationSetEventDestinationInput"}
-
-	if s.ConfigurationSetName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ConfigurationSetName"))
-	}
-
-	if s.EventDestinationName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("EventDestinationName"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// An empty element returned on a successful request.
-type DeleteConfigurationSetEventDestinationOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteConfigurationSetEventDestinationOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteConfigurationSetEventDestination = "DeleteConfigurationSetEventDestination"
 
@@ -80,7 +29,7 @@ const opDeleteConfigurationSetEventDestination = "DeleteConfigurationSetEventDes
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/DeleteConfigurationSetEventDestination
-func (c *Client) DeleteConfigurationSetEventDestinationRequest(input *DeleteConfigurationSetEventDestinationInput) DeleteConfigurationSetEventDestinationRequest {
+func (c *Client) DeleteConfigurationSetEventDestinationRequest(input *types.DeleteConfigurationSetEventDestinationInput) DeleteConfigurationSetEventDestinationRequest {
 	op := &aws.Operation{
 		Name:       opDeleteConfigurationSetEventDestination,
 		HTTPMethod: "POST",
@@ -88,10 +37,10 @@ func (c *Client) DeleteConfigurationSetEventDestinationRequest(input *DeleteConf
 	}
 
 	if input == nil {
-		input = &DeleteConfigurationSetEventDestinationInput{}
+		input = &types.DeleteConfigurationSetEventDestinationInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteConfigurationSetEventDestinationOutput{})
+	req := c.newRequest(op, input, &types.DeleteConfigurationSetEventDestinationOutput{})
 	return DeleteConfigurationSetEventDestinationRequest{Request: req, Input: input, Copy: c.DeleteConfigurationSetEventDestinationRequest}
 }
 
@@ -99,8 +48,8 @@ func (c *Client) DeleteConfigurationSetEventDestinationRequest(input *DeleteConf
 // DeleteConfigurationSetEventDestination API operation.
 type DeleteConfigurationSetEventDestinationRequest struct {
 	*aws.Request
-	Input *DeleteConfigurationSetEventDestinationInput
-	Copy  func(*DeleteConfigurationSetEventDestinationInput) DeleteConfigurationSetEventDestinationRequest
+	Input *types.DeleteConfigurationSetEventDestinationInput
+	Copy  func(*types.DeleteConfigurationSetEventDestinationInput) DeleteConfigurationSetEventDestinationRequest
 }
 
 // Send marshals and sends the DeleteConfigurationSetEventDestination API request.
@@ -112,7 +61,7 @@ func (r DeleteConfigurationSetEventDestinationRequest) Send(ctx context.Context)
 	}
 
 	resp := &DeleteConfigurationSetEventDestinationResponse{
-		DeleteConfigurationSetEventDestinationOutput: r.Request.Data.(*DeleteConfigurationSetEventDestinationOutput),
+		DeleteConfigurationSetEventDestinationOutput: r.Request.Data.(*types.DeleteConfigurationSetEventDestinationOutput),
 		response: &aws.Response{Request: r.Request},
 	}
 
@@ -122,7 +71,7 @@ func (r DeleteConfigurationSetEventDestinationRequest) Send(ctx context.Context)
 // DeleteConfigurationSetEventDestinationResponse is the response type for the
 // DeleteConfigurationSetEventDestination API operation.
 type DeleteConfigurationSetEventDestinationResponse struct {
-	*DeleteConfigurationSetEventDestinationOutput
+	*types.DeleteConfigurationSetEventDestinationOutput
 
 	response *aws.Response
 }

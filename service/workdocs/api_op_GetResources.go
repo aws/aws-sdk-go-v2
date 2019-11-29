@@ -6,149 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/workdocs/types"
 )
-
-type GetResourcesInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon WorkDocs authentication token. Do not set this field when using
-	// administrative API actions, as in accessing the API operation using AWS credentials.
-	AuthenticationToken *string `location:"header" locationName:"Authentication" min:"1" type:"string" sensitive:"true"`
-
-	// The collection type.
-	CollectionType ResourceCollectionType `location:"querystring" locationName:"collectionType" type:"string" enum:"true"`
-
-	// The maximum number of resources to return.
-	Limit *int64 `location:"querystring" locationName:"limit" min:"1" type:"integer"`
-
-	// The marker for the next set of results. This marker was received from a previous
-	// call.
-	Marker *string `location:"querystring" locationName:"marker" min:"1" type:"string"`
-
-	// The user ID for the resource collection. This is a required field for accessing
-	// the API operation using IAM credentials.
-	UserId *string `location:"querystring" locationName:"userId" min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s GetResourcesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetResourcesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetResourcesInput"}
-	if s.AuthenticationToken != nil && len(*s.AuthenticationToken) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("AuthenticationToken", 1))
-	}
-	if s.Limit != nil && *s.Limit < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("Limit", 1))
-	}
-	if s.Marker != nil && len(*s.Marker) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Marker", 1))
-	}
-	if s.UserId != nil && len(*s.UserId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("UserId", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetResourcesInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.AuthenticationToken != nil {
-		v := *s.AuthenticationToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "Authentication", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if len(s.CollectionType) > 0 {
-		v := s.CollectionType
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "collectionType", protocol.QuotedValue{ValueMarshaler: v}, metadata)
-	}
-	if s.Limit != nil {
-		v := *s.Limit
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "limit", protocol.Int64Value(v), metadata)
-	}
-	if s.Marker != nil {
-		v := *s.Marker
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "marker", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.UserId != nil {
-		v := *s.UserId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "userId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type GetResourcesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The documents in the specified collection.
-	Documents []DocumentMetadata `type:"list"`
-
-	// The folders in the specified folder.
-	Folders []FolderMetadata `type:"list"`
-
-	// The marker to use when requesting the next set of results. If there are no
-	// additional results, the string is empty.
-	Marker *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s GetResourcesOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetResourcesOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.Documents != nil {
-		v := s.Documents
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "Documents", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	if s.Folders != nil {
-		v := s.Folders
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "Folders", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	if s.Marker != nil {
-		v := *s.Marker
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "Marker", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opGetResources = "GetResources"
 
@@ -166,7 +25,7 @@ const opGetResources = "GetResources"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/GetResources
-func (c *Client) GetResourcesRequest(input *GetResourcesInput) GetResourcesRequest {
+func (c *Client) GetResourcesRequest(input *types.GetResourcesInput) GetResourcesRequest {
 	op := &aws.Operation{
 		Name:       opGetResources,
 		HTTPMethod: "GET",
@@ -174,10 +33,10 @@ func (c *Client) GetResourcesRequest(input *GetResourcesInput) GetResourcesReque
 	}
 
 	if input == nil {
-		input = &GetResourcesInput{}
+		input = &types.GetResourcesInput{}
 	}
 
-	req := c.newRequest(op, input, &GetResourcesOutput{})
+	req := c.newRequest(op, input, &types.GetResourcesOutput{})
 	return GetResourcesRequest{Request: req, Input: input, Copy: c.GetResourcesRequest}
 }
 
@@ -185,8 +44,8 @@ func (c *Client) GetResourcesRequest(input *GetResourcesInput) GetResourcesReque
 // GetResources API operation.
 type GetResourcesRequest struct {
 	*aws.Request
-	Input *GetResourcesInput
-	Copy  func(*GetResourcesInput) GetResourcesRequest
+	Input *types.GetResourcesInput
+	Copy  func(*types.GetResourcesInput) GetResourcesRequest
 }
 
 // Send marshals and sends the GetResources API request.
@@ -198,7 +57,7 @@ func (r GetResourcesRequest) Send(ctx context.Context) (*GetResourcesResponse, e
 	}
 
 	resp := &GetResourcesResponse{
-		GetResourcesOutput: r.Request.Data.(*GetResourcesOutput),
+		GetResourcesOutput: r.Request.Data.(*types.GetResourcesOutput),
 		response:           &aws.Response{Request: r.Request},
 	}
 
@@ -208,7 +67,7 @@ func (r GetResourcesRequest) Send(ctx context.Context) (*GetResourcesResponse, e
 // GetResourcesResponse is the response type for the
 // GetResources API operation.
 type GetResourcesResponse struct {
-	*GetResourcesOutput
+	*types.GetResourcesOutput
 
 	response *aws.Response
 }

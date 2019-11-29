@@ -6,108 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/costexplorer/types"
 )
-
-type GetCostAndUsageInput struct {
-	_ struct{} `type:"structure"`
-
-	// Filters AWS costs by different dimensions. For example, you can specify SERVICE
-	// and LINKED_ACCOUNT and get the costs that are associated with that account's
-	// usage of that service. You can nest Expression objects to define any combination
-	// of dimension filters. For more information, see Expression (http://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html).
-	Filter *Expression `type:"structure"`
-
-	// Sets the AWS cost granularity to MONTHLY or DAILY. If Granularity isn't set,
-	// the response object doesn't include the Granularity, either MONTHLY or DAILY.
-	//
-	// The GetCostAndUsageRequest operation supports only DAILY and MONTHLY granularities.
-	Granularity Granularity `type:"string" enum:"true"`
-
-	// You can group AWS costs using up to two different groups, either dimensions,
-	// tag keys, or both.
-	//
-	// When you group by tag key, you get all tag values, including empty strings.
-	//
-	// Valid values are AZ, INSTANCE_TYPE, LEGAL_ENTITY_NAME, LINKED_ACCOUNT, OPERATION,
-	// PLATFORM, PURCHASE_TYPE, SERVICE, TAGS, TENANCY, and USAGE_TYPE.
-	GroupBy []GroupDefinition `type:"list"`
-
-	// Which metrics are returned in the query. For more information about blended
-	// and unblended rates, see Why does the "blended" annotation appear on some
-	// line items in my bill? (https://aws.amazon.com/premiumsupport/knowledge-center/blended-rates-intro/).
-	//
-	// Valid values are AmortizedCost, BlendedCost, NetAmortizedCost, NetUnblendedCost,
-	// NormalizedUsageAmount, UnblendedCost, and UsageQuantity.
-	//
-	// If you return the UsageQuantity metric, the service aggregates all usage
-	// numbers without taking into account the units. For example, if you aggregate
-	// usageQuantity across all of Amazon EC2, the results aren't meaningful because
-	// Amazon EC2 compute hours and data transfer are measured in different units
-	// (for example, hours vs. GB). To get more meaningful UsageQuantity metrics,
-	// filter by UsageType or UsageTypeGroups.
-	//
-	// Metrics is required for GetCostAndUsage requests.
-	Metrics []string `type:"list"`
-
-	// The token to retrieve the next set of results. AWS provides the token when
-	// the response from a previous call has more results than the maximum page
-	// size.
-	NextPageToken *string `type:"string"`
-
-	// Sets the start and end dates for retrieving AWS costs. The start date is
-	// inclusive, but the end date is exclusive. For example, if start is 2017-01-01
-	// and end is 2017-05-01, then the cost and usage data is retrieved from 2017-01-01
-	// up to and including 2017-04-30 but not including 2017-05-01.
-	//
-	// TimePeriod is a required field
-	TimePeriod *DateInterval `type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s GetCostAndUsageInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetCostAndUsageInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetCostAndUsageInput"}
-
-	if s.TimePeriod == nil {
-		invalidParams.Add(aws.NewErrParamRequired("TimePeriod"))
-	}
-	if s.TimePeriod != nil {
-		if err := s.TimePeriod.Validate(); err != nil {
-			invalidParams.AddNested("TimePeriod", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type GetCostAndUsageOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The groups that are specified by the Filter or GroupBy parameters in the
-	// request.
-	GroupDefinitions []GroupDefinition `type:"list"`
-
-	// The token for the next set of retrievable results. AWS provides the token
-	// when the response from a previous call has more results than the maximum
-	// page size.
-	NextPageToken *string `type:"string"`
-
-	// The time period that is covered by the results in the response.
-	ResultsByTime []ResultByTime `type:"list"`
-}
-
-// String returns the string representation
-func (s GetCostAndUsageOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetCostAndUsage = "GetCostAndUsage"
 
@@ -130,7 +30,7 @@ const opGetCostAndUsage = "GetCostAndUsage"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/GetCostAndUsage
-func (c *Client) GetCostAndUsageRequest(input *GetCostAndUsageInput) GetCostAndUsageRequest {
+func (c *Client) GetCostAndUsageRequest(input *types.GetCostAndUsageInput) GetCostAndUsageRequest {
 	op := &aws.Operation{
 		Name:       opGetCostAndUsage,
 		HTTPMethod: "POST",
@@ -138,10 +38,10 @@ func (c *Client) GetCostAndUsageRequest(input *GetCostAndUsageInput) GetCostAndU
 	}
 
 	if input == nil {
-		input = &GetCostAndUsageInput{}
+		input = &types.GetCostAndUsageInput{}
 	}
 
-	req := c.newRequest(op, input, &GetCostAndUsageOutput{})
+	req := c.newRequest(op, input, &types.GetCostAndUsageOutput{})
 	return GetCostAndUsageRequest{Request: req, Input: input, Copy: c.GetCostAndUsageRequest}
 }
 
@@ -149,8 +49,8 @@ func (c *Client) GetCostAndUsageRequest(input *GetCostAndUsageInput) GetCostAndU
 // GetCostAndUsage API operation.
 type GetCostAndUsageRequest struct {
 	*aws.Request
-	Input *GetCostAndUsageInput
-	Copy  func(*GetCostAndUsageInput) GetCostAndUsageRequest
+	Input *types.GetCostAndUsageInput
+	Copy  func(*types.GetCostAndUsageInput) GetCostAndUsageRequest
 }
 
 // Send marshals and sends the GetCostAndUsage API request.
@@ -162,7 +62,7 @@ func (r GetCostAndUsageRequest) Send(ctx context.Context) (*GetCostAndUsageRespo
 	}
 
 	resp := &GetCostAndUsageResponse{
-		GetCostAndUsageOutput: r.Request.Data.(*GetCostAndUsageOutput),
+		GetCostAndUsageOutput: r.Request.Data.(*types.GetCostAndUsageOutput),
 		response:              &aws.Response{Request: r.Request},
 	}
 
@@ -172,7 +72,7 @@ func (r GetCostAndUsageRequest) Send(ctx context.Context) (*GetCostAndUsageRespo
 // GetCostAndUsageResponse is the response type for the
 // GetCostAndUsage API operation.
 type GetCostAndUsageResponse struct {
-	*GetCostAndUsageOutput
+	*types.GetCostAndUsageOutput
 
 	response *aws.Response
 }

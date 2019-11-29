@@ -6,88 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/appsync/types"
 )
-
-type GetFunctionInput struct {
-	_ struct{} `type:"structure"`
-
-	// The GraphQL API ID.
-	//
-	// ApiId is a required field
-	ApiId *string `location:"uri" locationName:"apiId" type:"string" required:"true"`
-
-	// The Function ID.
-	//
-	// FunctionId is a required field
-	FunctionId *string `location:"uri" locationName:"functionId" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetFunctionInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetFunctionInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetFunctionInput"}
-
-	if s.ApiId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ApiId"))
-	}
-
-	if s.FunctionId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("FunctionId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetFunctionInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.ApiId != nil {
-		v := *s.ApiId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "apiId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.FunctionId != nil {
-		v := *s.FunctionId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "functionId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type GetFunctionOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The Function object.
-	FunctionConfiguration *FunctionConfiguration `locationName:"functionConfiguration" type:"structure"`
-}
-
-// String returns the string representation
-func (s GetFunctionOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetFunctionOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.FunctionConfiguration != nil {
-		v := s.FunctionConfiguration
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "functionConfiguration", v, metadata)
-	}
-	return nil
-}
 
 const opGetFunction = "GetFunction"
 
@@ -104,7 +24,7 @@ const opGetFunction = "GetFunction"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/GetFunction
-func (c *Client) GetFunctionRequest(input *GetFunctionInput) GetFunctionRequest {
+func (c *Client) GetFunctionRequest(input *types.GetFunctionInput) GetFunctionRequest {
 	op := &aws.Operation{
 		Name:       opGetFunction,
 		HTTPMethod: "GET",
@@ -112,10 +32,10 @@ func (c *Client) GetFunctionRequest(input *GetFunctionInput) GetFunctionRequest 
 	}
 
 	if input == nil {
-		input = &GetFunctionInput{}
+		input = &types.GetFunctionInput{}
 	}
 
-	req := c.newRequest(op, input, &GetFunctionOutput{})
+	req := c.newRequest(op, input, &types.GetFunctionOutput{})
 	return GetFunctionRequest{Request: req, Input: input, Copy: c.GetFunctionRequest}
 }
 
@@ -123,8 +43,8 @@ func (c *Client) GetFunctionRequest(input *GetFunctionInput) GetFunctionRequest 
 // GetFunction API operation.
 type GetFunctionRequest struct {
 	*aws.Request
-	Input *GetFunctionInput
-	Copy  func(*GetFunctionInput) GetFunctionRequest
+	Input *types.GetFunctionInput
+	Copy  func(*types.GetFunctionInput) GetFunctionRequest
 }
 
 // Send marshals and sends the GetFunction API request.
@@ -136,7 +56,7 @@ func (r GetFunctionRequest) Send(ctx context.Context) (*GetFunctionResponse, err
 	}
 
 	resp := &GetFunctionResponse{
-		GetFunctionOutput: r.Request.Data.(*GetFunctionOutput),
+		GetFunctionOutput: r.Request.Data.(*types.GetFunctionOutput),
 		response:          &aws.Response{Request: r.Request},
 	}
 
@@ -146,7 +66,7 @@ func (r GetFunctionRequest) Send(ctx context.Context) (*GetFunctionResponse, err
 // GetFunctionResponse is the response type for the
 // GetFunction API operation.
 type GetFunctionResponse struct {
-	*GetFunctionOutput
+	*types.GetFunctionOutput
 
 	response *aws.Response
 }

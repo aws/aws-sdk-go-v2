@@ -6,81 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/restjson"
+	"github.com/aws/aws-sdk-go-v2/service/apigateway/types"
 )
-
-// Request to flush authorizer cache entries on a specified stage.
-type FlushStageAuthorizersCacheInput struct {
-	_ struct{} `type:"structure"`
-
-	// The string identifier of the associated RestApi.
-	//
-	// RestApiId is a required field
-	RestApiId *string `location:"uri" locationName:"restapi_id" type:"string" required:"true"`
-
-	// The name of the stage to flush.
-	//
-	// StageName is a required field
-	StageName *string `location:"uri" locationName:"stage_name" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s FlushStageAuthorizersCacheInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *FlushStageAuthorizersCacheInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "FlushStageAuthorizersCacheInput"}
-
-	if s.RestApiId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("RestApiId"))
-	}
-
-	if s.StageName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("StageName"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s FlushStageAuthorizersCacheInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.RestApiId != nil {
-		v := *s.RestApiId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "restapi_id", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.StageName != nil {
-		v := *s.StageName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "stage_name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type FlushStageAuthorizersCacheOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s FlushStageAuthorizersCacheOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s FlushStageAuthorizersCacheOutput) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
 
 const opFlushStageAuthorizersCache = "FlushStageAuthorizersCache"
 
@@ -95,7 +24,7 @@ const opFlushStageAuthorizersCache = "FlushStageAuthorizersCache"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) FlushStageAuthorizersCacheRequest(input *FlushStageAuthorizersCacheInput) FlushStageAuthorizersCacheRequest {
+func (c *Client) FlushStageAuthorizersCacheRequest(input *types.FlushStageAuthorizersCacheInput) FlushStageAuthorizersCacheRequest {
 	op := &aws.Operation{
 		Name:       opFlushStageAuthorizersCache,
 		HTTPMethod: "DELETE",
@@ -103,10 +32,10 @@ func (c *Client) FlushStageAuthorizersCacheRequest(input *FlushStageAuthorizersC
 	}
 
 	if input == nil {
-		input = &FlushStageAuthorizersCacheInput{}
+		input = &types.FlushStageAuthorizersCacheInput{}
 	}
 
-	req := c.newRequest(op, input, &FlushStageAuthorizersCacheOutput{})
+	req := c.newRequest(op, input, &types.FlushStageAuthorizersCacheOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return FlushStageAuthorizersCacheRequest{Request: req, Input: input, Copy: c.FlushStageAuthorizersCacheRequest}
@@ -116,8 +45,8 @@ func (c *Client) FlushStageAuthorizersCacheRequest(input *FlushStageAuthorizersC
 // FlushStageAuthorizersCache API operation.
 type FlushStageAuthorizersCacheRequest struct {
 	*aws.Request
-	Input *FlushStageAuthorizersCacheInput
-	Copy  func(*FlushStageAuthorizersCacheInput) FlushStageAuthorizersCacheRequest
+	Input *types.FlushStageAuthorizersCacheInput
+	Copy  func(*types.FlushStageAuthorizersCacheInput) FlushStageAuthorizersCacheRequest
 }
 
 // Send marshals and sends the FlushStageAuthorizersCache API request.
@@ -129,7 +58,7 @@ func (r FlushStageAuthorizersCacheRequest) Send(ctx context.Context) (*FlushStag
 	}
 
 	resp := &FlushStageAuthorizersCacheResponse{
-		FlushStageAuthorizersCacheOutput: r.Request.Data.(*FlushStageAuthorizersCacheOutput),
+		FlushStageAuthorizersCacheOutput: r.Request.Data.(*types.FlushStageAuthorizersCacheOutput),
 		response:                         &aws.Response{Request: r.Request},
 	}
 
@@ -139,7 +68,7 @@ func (r FlushStageAuthorizersCacheRequest) Send(ctx context.Context) (*FlushStag
 // FlushStageAuthorizersCacheResponse is the response type for the
 // FlushStageAuthorizersCache API operation.
 type FlushStageAuthorizersCacheResponse struct {
-	*FlushStageAuthorizersCacheOutput
+	*types.FlushStageAuthorizersCacheOutput
 
 	response *aws.Response
 }

@@ -6,63 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/cloudformation/types"
 )
-
-type DetectStackDriftInput struct {
-	_ struct{} `type:"structure"`
-
-	// The logical names of any resources you want to use as filters.
-	LogicalResourceIds []string `min:"1" type:"list"`
-
-	// The name of the stack for which you want to detect drift.
-	//
-	// StackName is a required field
-	StackName *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DetectStackDriftInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DetectStackDriftInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DetectStackDriftInput"}
-	if s.LogicalResourceIds != nil && len(s.LogicalResourceIds) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("LogicalResourceIds", 1))
-	}
-
-	if s.StackName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("StackName"))
-	}
-	if s.StackName != nil && len(*s.StackName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("StackName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DetectStackDriftOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the drift detection results of this operation.
-	//
-	// AWS CloudFormation generates new results, with a new drift detection ID,
-	// each time this operation is run. However, the number of drift results AWS
-	// CloudFormation retains for any given stack, and for how long, may vary.
-	//
-	// StackDriftDetectionId is a required field
-	StackDriftDetectionId *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DetectStackDriftOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDetectStackDrift = "DetectStackDrift"
 
@@ -103,7 +48,7 @@ const opDetectStackDrift = "DetectStackDrift"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DetectStackDrift
-func (c *Client) DetectStackDriftRequest(input *DetectStackDriftInput) DetectStackDriftRequest {
+func (c *Client) DetectStackDriftRequest(input *types.DetectStackDriftInput) DetectStackDriftRequest {
 	op := &aws.Operation{
 		Name:       opDetectStackDrift,
 		HTTPMethod: "POST",
@@ -111,10 +56,10 @@ func (c *Client) DetectStackDriftRequest(input *DetectStackDriftInput) DetectSta
 	}
 
 	if input == nil {
-		input = &DetectStackDriftInput{}
+		input = &types.DetectStackDriftInput{}
 	}
 
-	req := c.newRequest(op, input, &DetectStackDriftOutput{})
+	req := c.newRequest(op, input, &types.DetectStackDriftOutput{})
 	return DetectStackDriftRequest{Request: req, Input: input, Copy: c.DetectStackDriftRequest}
 }
 
@@ -122,8 +67,8 @@ func (c *Client) DetectStackDriftRequest(input *DetectStackDriftInput) DetectSta
 // DetectStackDrift API operation.
 type DetectStackDriftRequest struct {
 	*aws.Request
-	Input *DetectStackDriftInput
-	Copy  func(*DetectStackDriftInput) DetectStackDriftRequest
+	Input *types.DetectStackDriftInput
+	Copy  func(*types.DetectStackDriftInput) DetectStackDriftRequest
 }
 
 // Send marshals and sends the DetectStackDrift API request.
@@ -135,7 +80,7 @@ func (r DetectStackDriftRequest) Send(ctx context.Context) (*DetectStackDriftRes
 	}
 
 	resp := &DetectStackDriftResponse{
-		DetectStackDriftOutput: r.Request.Data.(*DetectStackDriftOutput),
+		DetectStackDriftOutput: r.Request.Data.(*types.DetectStackDriftOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -145,7 +90,7 @@ func (r DetectStackDriftRequest) Send(ctx context.Context) (*DetectStackDriftRes
 // DetectStackDriftResponse is the response type for the
 // DetectStackDrift API operation.
 type DetectStackDriftResponse struct {
-	*DetectStackDriftOutput
+	*types.DetectStackDriftOutput
 
 	response *aws.Response
 }

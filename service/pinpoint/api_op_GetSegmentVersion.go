@@ -6,100 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/pinpoint/types"
 )
-
-type GetSegmentVersionInput struct {
-	_ struct{} `type:"structure"`
-
-	// ApplicationId is a required field
-	ApplicationId *string `location:"uri" locationName:"application-id" type:"string" required:"true"`
-
-	// SegmentId is a required field
-	SegmentId *string `location:"uri" locationName:"segment-id" type:"string" required:"true"`
-
-	// Version is a required field
-	Version *string `location:"uri" locationName:"version" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetSegmentVersionInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetSegmentVersionInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetSegmentVersionInput"}
-
-	if s.ApplicationId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ApplicationId"))
-	}
-
-	if s.SegmentId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("SegmentId"))
-	}
-
-	if s.Version == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Version"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetSegmentVersionInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.ApplicationId != nil {
-		v := *s.ApplicationId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "application-id", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.SegmentId != nil {
-		v := *s.SegmentId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "segment-id", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Version != nil {
-		v := *s.Version
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "version", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type GetSegmentVersionOutput struct {
-	_ struct{} `type:"structure" payload:"SegmentResponse"`
-
-	// Provides information about the configuration, dimension, and other settings
-	// for a segment.
-	//
-	// SegmentResponse is a required field
-	SegmentResponse *SegmentResponse `type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s GetSegmentVersionOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetSegmentVersionOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.SegmentResponse != nil {
-		v := s.SegmentResponse
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.PayloadTarget, "SegmentResponse", v, metadata)
-	}
-	return nil
-}
 
 const opGetSegmentVersion = "GetSegmentVersion"
 
@@ -117,7 +25,7 @@ const opGetSegmentVersion = "GetSegmentVersion"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetSegmentVersion
-func (c *Client) GetSegmentVersionRequest(input *GetSegmentVersionInput) GetSegmentVersionRequest {
+func (c *Client) GetSegmentVersionRequest(input *types.GetSegmentVersionInput) GetSegmentVersionRequest {
 	op := &aws.Operation{
 		Name:       opGetSegmentVersion,
 		HTTPMethod: "GET",
@@ -125,10 +33,10 @@ func (c *Client) GetSegmentVersionRequest(input *GetSegmentVersionInput) GetSegm
 	}
 
 	if input == nil {
-		input = &GetSegmentVersionInput{}
+		input = &types.GetSegmentVersionInput{}
 	}
 
-	req := c.newRequest(op, input, &GetSegmentVersionOutput{})
+	req := c.newRequest(op, input, &types.GetSegmentVersionOutput{})
 	return GetSegmentVersionRequest{Request: req, Input: input, Copy: c.GetSegmentVersionRequest}
 }
 
@@ -136,8 +44,8 @@ func (c *Client) GetSegmentVersionRequest(input *GetSegmentVersionInput) GetSegm
 // GetSegmentVersion API operation.
 type GetSegmentVersionRequest struct {
 	*aws.Request
-	Input *GetSegmentVersionInput
-	Copy  func(*GetSegmentVersionInput) GetSegmentVersionRequest
+	Input *types.GetSegmentVersionInput
+	Copy  func(*types.GetSegmentVersionInput) GetSegmentVersionRequest
 }
 
 // Send marshals and sends the GetSegmentVersion API request.
@@ -149,7 +57,7 @@ func (r GetSegmentVersionRequest) Send(ctx context.Context) (*GetSegmentVersionR
 	}
 
 	resp := &GetSegmentVersionResponse{
-		GetSegmentVersionOutput: r.Request.Data.(*GetSegmentVersionOutput),
+		GetSegmentVersionOutput: r.Request.Data.(*types.GetSegmentVersionOutput),
 		response:                &aws.Response{Request: r.Request},
 	}
 
@@ -159,7 +67,7 @@ func (r GetSegmentVersionRequest) Send(ctx context.Context) (*GetSegmentVersionR
 // GetSegmentVersionResponse is the response type for the
 // GetSegmentVersion API operation.
 type GetSegmentVersionResponse struct {
-	*GetSegmentVersionOutput
+	*types.GetSegmentVersionOutput
 
 	response *aws.Response
 }

@@ -6,119 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/mq/types"
 )
-
-type ListUsersInput struct {
-	_ struct{} `type:"structure"`
-
-	// BrokerId is a required field
-	BrokerId *string `location:"uri" locationName:"broker-id" type:"string" required:"true"`
-
-	MaxResults *int64 `location:"querystring" locationName:"maxResults" min:"1" type:"integer"`
-
-	NextToken *string `location:"querystring" locationName:"nextToken" type:"string"`
-}
-
-// String returns the string representation
-func (s ListUsersInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListUsersInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListUsersInput"}
-
-	if s.BrokerId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("BrokerId"))
-	}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListUsersInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.BrokerId != nil {
-		v := *s.BrokerId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "broker-id", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.MaxResults != nil {
-		v := *s.MaxResults
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "maxResults", protocol.Int64Value(v), metadata)
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type ListUsersOutput struct {
-	_ struct{} `type:"structure"`
-
-	BrokerId *string `locationName:"brokerId" type:"string"`
-
-	MaxResults *int64 `locationName:"maxResults" min:"5" type:"integer"`
-
-	NextToken *string `locationName:"nextToken" type:"string"`
-
-	Users []UserSummary `locationName:"users" type:"list"`
-}
-
-// String returns the string representation
-func (s ListUsersOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListUsersOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.BrokerId != nil {
-		v := *s.BrokerId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "brokerId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.MaxResults != nil {
-		v := *s.MaxResults
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "maxResults", protocol.Int64Value(v), metadata)
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Users != nil {
-		v := s.Users
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "users", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	return nil
-}
 
 const opListUsers = "ListUsers"
 
@@ -135,7 +24,7 @@ const opListUsers = "ListUsers"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/ListUsers
-func (c *Client) ListUsersRequest(input *ListUsersInput) ListUsersRequest {
+func (c *Client) ListUsersRequest(input *types.ListUsersInput) ListUsersRequest {
 	op := &aws.Operation{
 		Name:       opListUsers,
 		HTTPMethod: "GET",
@@ -143,10 +32,10 @@ func (c *Client) ListUsersRequest(input *ListUsersInput) ListUsersRequest {
 	}
 
 	if input == nil {
-		input = &ListUsersInput{}
+		input = &types.ListUsersInput{}
 	}
 
-	req := c.newRequest(op, input, &ListUsersOutput{})
+	req := c.newRequest(op, input, &types.ListUsersOutput{})
 	return ListUsersRequest{Request: req, Input: input, Copy: c.ListUsersRequest}
 }
 
@@ -154,8 +43,8 @@ func (c *Client) ListUsersRequest(input *ListUsersInput) ListUsersRequest {
 // ListUsers API operation.
 type ListUsersRequest struct {
 	*aws.Request
-	Input *ListUsersInput
-	Copy  func(*ListUsersInput) ListUsersRequest
+	Input *types.ListUsersInput
+	Copy  func(*types.ListUsersInput) ListUsersRequest
 }
 
 // Send marshals and sends the ListUsers API request.
@@ -167,7 +56,7 @@ func (r ListUsersRequest) Send(ctx context.Context) (*ListUsersResponse, error) 
 	}
 
 	resp := &ListUsersResponse{
-		ListUsersOutput: r.Request.Data.(*ListUsersOutput),
+		ListUsersOutput: r.Request.Data.(*types.ListUsersOutput),
 		response:        &aws.Response{Request: r.Request},
 	}
 
@@ -177,7 +66,7 @@ func (r ListUsersRequest) Send(ctx context.Context) (*ListUsersResponse, error) 
 // ListUsersResponse is the response type for the
 // ListUsers API operation.
 type ListUsersResponse struct {
-	*ListUsersOutput
+	*types.ListUsersOutput
 
 	response *aws.Response
 }

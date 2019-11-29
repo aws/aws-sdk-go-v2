@@ -6,54 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/storagegateway/types"
 )
-
-// DescribeNFSFileSharesInput
-type DescribeNFSFileSharesInput struct {
-	_ struct{} `type:"structure"`
-
-	// An array containing the Amazon Resource Name (ARN) of each file share to
-	// be described.
-	//
-	// FileShareARNList is a required field
-	FileShareARNList []string `min:"1" type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeNFSFileSharesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeNFSFileSharesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeNFSFileSharesInput"}
-
-	if s.FileShareARNList == nil {
-		invalidParams.Add(aws.NewErrParamRequired("FileShareARNList"))
-	}
-	if s.FileShareARNList != nil && len(s.FileShareARNList) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("FileShareARNList", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// DescribeNFSFileSharesOutput
-type DescribeNFSFileSharesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// An array containing a description for each requested file share.
-	NFSFileShareInfoList []NFSFileShareInfo `type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeNFSFileSharesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeNFSFileShares = "DescribeNFSFileShares"
 
@@ -71,7 +25,7 @@ const opDescribeNFSFileShares = "DescribeNFSFileShares"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DescribeNFSFileShares
-func (c *Client) DescribeNFSFileSharesRequest(input *DescribeNFSFileSharesInput) DescribeNFSFileSharesRequest {
+func (c *Client) DescribeNFSFileSharesRequest(input *types.DescribeNFSFileSharesInput) DescribeNFSFileSharesRequest {
 	op := &aws.Operation{
 		Name:       opDescribeNFSFileShares,
 		HTTPMethod: "POST",
@@ -79,10 +33,10 @@ func (c *Client) DescribeNFSFileSharesRequest(input *DescribeNFSFileSharesInput)
 	}
 
 	if input == nil {
-		input = &DescribeNFSFileSharesInput{}
+		input = &types.DescribeNFSFileSharesInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeNFSFileSharesOutput{})
+	req := c.newRequest(op, input, &types.DescribeNFSFileSharesOutput{})
 	return DescribeNFSFileSharesRequest{Request: req, Input: input, Copy: c.DescribeNFSFileSharesRequest}
 }
 
@@ -90,8 +44,8 @@ func (c *Client) DescribeNFSFileSharesRequest(input *DescribeNFSFileSharesInput)
 // DescribeNFSFileShares API operation.
 type DescribeNFSFileSharesRequest struct {
 	*aws.Request
-	Input *DescribeNFSFileSharesInput
-	Copy  func(*DescribeNFSFileSharesInput) DescribeNFSFileSharesRequest
+	Input *types.DescribeNFSFileSharesInput
+	Copy  func(*types.DescribeNFSFileSharesInput) DescribeNFSFileSharesRequest
 }
 
 // Send marshals and sends the DescribeNFSFileShares API request.
@@ -103,7 +57,7 @@ func (r DescribeNFSFileSharesRequest) Send(ctx context.Context) (*DescribeNFSFil
 	}
 
 	resp := &DescribeNFSFileSharesResponse{
-		DescribeNFSFileSharesOutput: r.Request.Data.(*DescribeNFSFileSharesOutput),
+		DescribeNFSFileSharesOutput: r.Request.Data.(*types.DescribeNFSFileSharesOutput),
 		response:                    &aws.Response{Request: r.Request},
 	}
 
@@ -113,7 +67,7 @@ func (r DescribeNFSFileSharesRequest) Send(ctx context.Context) (*DescribeNFSFil
 // DescribeNFSFileSharesResponse is the response type for the
 // DescribeNFSFileShares API operation.
 type DescribeNFSFileSharesResponse struct {
-	*DescribeNFSFileSharesOutput
+	*types.DescribeNFSFileSharesOutput
 
 	response *aws.Response
 }

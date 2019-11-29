@@ -6,35 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/directconnect/types"
 )
-
-type DescribeVirtualInterfacesInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the connection.
-	ConnectionId *string `locationName:"connectionId" type:"string"`
-
-	// The ID of the virtual interface.
-	VirtualInterfaceId *string `locationName:"virtualInterfaceId" type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeVirtualInterfacesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type DescribeVirtualInterfacesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The virtual interfaces
-	VirtualInterfaces []VirtualInterface `locationName:"virtualInterfaces" type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeVirtualInterfacesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeVirtualInterfaces = "DescribeVirtualInterfaces"
 
@@ -58,7 +31,7 @@ const opDescribeVirtualInterfaces = "DescribeVirtualInterfaces"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DescribeVirtualInterfaces
-func (c *Client) DescribeVirtualInterfacesRequest(input *DescribeVirtualInterfacesInput) DescribeVirtualInterfacesRequest {
+func (c *Client) DescribeVirtualInterfacesRequest(input *types.DescribeVirtualInterfacesInput) DescribeVirtualInterfacesRequest {
 	op := &aws.Operation{
 		Name:       opDescribeVirtualInterfaces,
 		HTTPMethod: "POST",
@@ -66,10 +39,10 @@ func (c *Client) DescribeVirtualInterfacesRequest(input *DescribeVirtualInterfac
 	}
 
 	if input == nil {
-		input = &DescribeVirtualInterfacesInput{}
+		input = &types.DescribeVirtualInterfacesInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeVirtualInterfacesOutput{})
+	req := c.newRequest(op, input, &types.DescribeVirtualInterfacesOutput{})
 	return DescribeVirtualInterfacesRequest{Request: req, Input: input, Copy: c.DescribeVirtualInterfacesRequest}
 }
 
@@ -77,8 +50,8 @@ func (c *Client) DescribeVirtualInterfacesRequest(input *DescribeVirtualInterfac
 // DescribeVirtualInterfaces API operation.
 type DescribeVirtualInterfacesRequest struct {
 	*aws.Request
-	Input *DescribeVirtualInterfacesInput
-	Copy  func(*DescribeVirtualInterfacesInput) DescribeVirtualInterfacesRequest
+	Input *types.DescribeVirtualInterfacesInput
+	Copy  func(*types.DescribeVirtualInterfacesInput) DescribeVirtualInterfacesRequest
 }
 
 // Send marshals and sends the DescribeVirtualInterfaces API request.
@@ -90,7 +63,7 @@ func (r DescribeVirtualInterfacesRequest) Send(ctx context.Context) (*DescribeVi
 	}
 
 	resp := &DescribeVirtualInterfacesResponse{
-		DescribeVirtualInterfacesOutput: r.Request.Data.(*DescribeVirtualInterfacesOutput),
+		DescribeVirtualInterfacesOutput: r.Request.Data.(*types.DescribeVirtualInterfacesOutput),
 		response:                        &aws.Response{Request: r.Request},
 	}
 
@@ -100,7 +73,7 @@ func (r DescribeVirtualInterfacesRequest) Send(ctx context.Context) (*DescribeVi
 // DescribeVirtualInterfacesResponse is the response type for the
 // DescribeVirtualInterfaces API operation.
 type DescribeVirtualInterfacesResponse struct {
-	*DescribeVirtualInterfacesOutput
+	*types.DescribeVirtualInterfacesOutput
 
 	response *aws.Response
 }

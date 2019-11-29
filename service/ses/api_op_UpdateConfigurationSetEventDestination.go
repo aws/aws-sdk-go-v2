@@ -6,65 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ses/types"
 )
-
-// Represents a request to update the event destination of a configuration set.
-// Configuration sets enable you to publish email sending events. For information
-// about using configuration sets, see the Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html).
-type UpdateConfigurationSetEventDestinationInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the configuration set that contains the event destination that
-	// you want to update.
-	//
-	// ConfigurationSetName is a required field
-	ConfigurationSetName *string `type:"string" required:"true"`
-
-	// The event destination object that you want to apply to the specified configuration
-	// set.
-	//
-	// EventDestination is a required field
-	EventDestination *EventDestination `type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s UpdateConfigurationSetEventDestinationInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateConfigurationSetEventDestinationInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateConfigurationSetEventDestinationInput"}
-
-	if s.ConfigurationSetName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ConfigurationSetName"))
-	}
-
-	if s.EventDestination == nil {
-		invalidParams.Add(aws.NewErrParamRequired("EventDestination"))
-	}
-	if s.EventDestination != nil {
-		if err := s.EventDestination.Validate(); err != nil {
-			invalidParams.AddNested("EventDestination", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// An empty element returned on a successful request.
-type UpdateConfigurationSetEventDestinationOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s UpdateConfigurationSetEventDestinationOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opUpdateConfigurationSetEventDestination = "UpdateConfigurationSetEventDestination"
 
@@ -92,7 +35,7 @@ const opUpdateConfigurationSetEventDestination = "UpdateConfigurationSetEventDes
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/UpdateConfigurationSetEventDestination
-func (c *Client) UpdateConfigurationSetEventDestinationRequest(input *UpdateConfigurationSetEventDestinationInput) UpdateConfigurationSetEventDestinationRequest {
+func (c *Client) UpdateConfigurationSetEventDestinationRequest(input *types.UpdateConfigurationSetEventDestinationInput) UpdateConfigurationSetEventDestinationRequest {
 	op := &aws.Operation{
 		Name:       opUpdateConfigurationSetEventDestination,
 		HTTPMethod: "POST",
@@ -100,10 +43,10 @@ func (c *Client) UpdateConfigurationSetEventDestinationRequest(input *UpdateConf
 	}
 
 	if input == nil {
-		input = &UpdateConfigurationSetEventDestinationInput{}
+		input = &types.UpdateConfigurationSetEventDestinationInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateConfigurationSetEventDestinationOutput{})
+	req := c.newRequest(op, input, &types.UpdateConfigurationSetEventDestinationOutput{})
 	return UpdateConfigurationSetEventDestinationRequest{Request: req, Input: input, Copy: c.UpdateConfigurationSetEventDestinationRequest}
 }
 
@@ -111,8 +54,8 @@ func (c *Client) UpdateConfigurationSetEventDestinationRequest(input *UpdateConf
 // UpdateConfigurationSetEventDestination API operation.
 type UpdateConfigurationSetEventDestinationRequest struct {
 	*aws.Request
-	Input *UpdateConfigurationSetEventDestinationInput
-	Copy  func(*UpdateConfigurationSetEventDestinationInput) UpdateConfigurationSetEventDestinationRequest
+	Input *types.UpdateConfigurationSetEventDestinationInput
+	Copy  func(*types.UpdateConfigurationSetEventDestinationInput) UpdateConfigurationSetEventDestinationRequest
 }
 
 // Send marshals and sends the UpdateConfigurationSetEventDestination API request.
@@ -124,7 +67,7 @@ func (r UpdateConfigurationSetEventDestinationRequest) Send(ctx context.Context)
 	}
 
 	resp := &UpdateConfigurationSetEventDestinationResponse{
-		UpdateConfigurationSetEventDestinationOutput: r.Request.Data.(*UpdateConfigurationSetEventDestinationOutput),
+		UpdateConfigurationSetEventDestinationOutput: r.Request.Data.(*types.UpdateConfigurationSetEventDestinationOutput),
 		response: &aws.Response{Request: r.Request},
 	}
 
@@ -134,7 +77,7 @@ func (r UpdateConfigurationSetEventDestinationRequest) Send(ctx context.Context)
 // UpdateConfigurationSetEventDestinationResponse is the response type for the
 // UpdateConfigurationSetEventDestination API operation.
 type UpdateConfigurationSetEventDestinationResponse struct {
-	*UpdateConfigurationSetEventDestinationOutput
+	*types.UpdateConfigurationSetEventDestinationOutput
 
 	response *aws.Response
 }

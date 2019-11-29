@@ -6,106 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/iot/types"
 )
-
-// The input to the ListOutgoingCertificates operation.
-type ListOutgoingCertificatesInput struct {
-	_ struct{} `type:"structure"`
-
-	// Specifies the order for results. If True, the results are returned in ascending
-	// order, based on the creation date.
-	AscendingOrder *bool `location:"querystring" locationName:"isAscendingOrder" type:"boolean"`
-
-	// The marker for the next set of results.
-	Marker *string `location:"querystring" locationName:"marker" type:"string"`
-
-	// The result page size.
-	PageSize *int64 `location:"querystring" locationName:"pageSize" min:"1" type:"integer"`
-}
-
-// String returns the string representation
-func (s ListOutgoingCertificatesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListOutgoingCertificatesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListOutgoingCertificatesInput"}
-	if s.PageSize != nil && *s.PageSize < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("PageSize", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListOutgoingCertificatesInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.AscendingOrder != nil {
-		v := *s.AscendingOrder
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "isAscendingOrder", protocol.BoolValue(v), metadata)
-	}
-	if s.Marker != nil {
-		v := *s.Marker
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "marker", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.PageSize != nil {
-		v := *s.PageSize
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "pageSize", protocol.Int64Value(v), metadata)
-	}
-	return nil
-}
-
-// The output from the ListOutgoingCertificates operation.
-type ListOutgoingCertificatesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The marker for the next set of results.
-	NextMarker *string `locationName:"nextMarker" type:"string"`
-
-	// The certificates that are being transferred but not yet accepted.
-	OutgoingCertificates []OutgoingCertificate `locationName:"outgoingCertificates" type:"list"`
-}
-
-// String returns the string representation
-func (s ListOutgoingCertificatesOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListOutgoingCertificatesOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.NextMarker != nil {
-		v := *s.NextMarker
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "nextMarker", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.OutgoingCertificates != nil {
-		v := s.OutgoingCertificates
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "outgoingCertificates", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	return nil
-}
 
 const opListOutgoingCertificates = "ListOutgoingCertificates"
 
@@ -120,7 +22,7 @@ const opListOutgoingCertificates = "ListOutgoingCertificates"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) ListOutgoingCertificatesRequest(input *ListOutgoingCertificatesInput) ListOutgoingCertificatesRequest {
+func (c *Client) ListOutgoingCertificatesRequest(input *types.ListOutgoingCertificatesInput) ListOutgoingCertificatesRequest {
 	op := &aws.Operation{
 		Name:       opListOutgoingCertificates,
 		HTTPMethod: "GET",
@@ -128,10 +30,10 @@ func (c *Client) ListOutgoingCertificatesRequest(input *ListOutgoingCertificates
 	}
 
 	if input == nil {
-		input = &ListOutgoingCertificatesInput{}
+		input = &types.ListOutgoingCertificatesInput{}
 	}
 
-	req := c.newRequest(op, input, &ListOutgoingCertificatesOutput{})
+	req := c.newRequest(op, input, &types.ListOutgoingCertificatesOutput{})
 	return ListOutgoingCertificatesRequest{Request: req, Input: input, Copy: c.ListOutgoingCertificatesRequest}
 }
 
@@ -139,8 +41,8 @@ func (c *Client) ListOutgoingCertificatesRequest(input *ListOutgoingCertificates
 // ListOutgoingCertificates API operation.
 type ListOutgoingCertificatesRequest struct {
 	*aws.Request
-	Input *ListOutgoingCertificatesInput
-	Copy  func(*ListOutgoingCertificatesInput) ListOutgoingCertificatesRequest
+	Input *types.ListOutgoingCertificatesInput
+	Copy  func(*types.ListOutgoingCertificatesInput) ListOutgoingCertificatesRequest
 }
 
 // Send marshals and sends the ListOutgoingCertificates API request.
@@ -152,7 +54,7 @@ func (r ListOutgoingCertificatesRequest) Send(ctx context.Context) (*ListOutgoin
 	}
 
 	resp := &ListOutgoingCertificatesResponse{
-		ListOutgoingCertificatesOutput: r.Request.Data.(*ListOutgoingCertificatesOutput),
+		ListOutgoingCertificatesOutput: r.Request.Data.(*types.ListOutgoingCertificatesOutput),
 		response:                       &aws.Response{Request: r.Request},
 	}
 
@@ -162,7 +64,7 @@ func (r ListOutgoingCertificatesRequest) Send(ctx context.Context) (*ListOutgoin
 // ListOutgoingCertificatesResponse is the response type for the
 // ListOutgoingCertificates API operation.
 type ListOutgoingCertificatesResponse struct {
-	*ListOutgoingCertificatesOutput
+	*types.ListOutgoingCertificatesOutput
 
 	response *aws.Response
 }

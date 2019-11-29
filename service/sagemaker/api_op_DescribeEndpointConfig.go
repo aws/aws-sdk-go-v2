@@ -4,73 +4,10 @@ package sagemaker
 
 import (
 	"context"
-	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
 )
-
-type DescribeEndpointConfigInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the endpoint configuration.
-	//
-	// EndpointConfigName is a required field
-	EndpointConfigName *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeEndpointConfigInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeEndpointConfigInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeEndpointConfigInput"}
-
-	if s.EndpointConfigName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("EndpointConfigName"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribeEndpointConfigOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A timestamp that shows when the endpoint configuration was created.
-	//
-	// CreationTime is a required field
-	CreationTime *time.Time `type:"timestamp" required:"true"`
-
-	// The Amazon Resource Name (ARN) of the endpoint configuration.
-	//
-	// EndpointConfigArn is a required field
-	EndpointConfigArn *string `min:"20" type:"string" required:"true"`
-
-	// Name of the Amazon SageMaker endpoint configuration.
-	//
-	// EndpointConfigName is a required field
-	EndpointConfigName *string `type:"string" required:"true"`
-
-	// AWS KMS key ID Amazon SageMaker uses to encrypt data when storing it on the
-	// ML storage volume attached to the instance.
-	KmsKeyId *string `type:"string"`
-
-	// An array of ProductionVariant objects, one for each model that you want to
-	// host at this endpoint.
-	//
-	// ProductionVariants is a required field
-	ProductionVariants []ProductionVariant `min:"1" type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeEndpointConfigOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeEndpointConfig = "DescribeEndpointConfig"
 
@@ -88,7 +25,7 @@ const opDescribeEndpointConfig = "DescribeEndpointConfig"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeEndpointConfig
-func (c *Client) DescribeEndpointConfigRequest(input *DescribeEndpointConfigInput) DescribeEndpointConfigRequest {
+func (c *Client) DescribeEndpointConfigRequest(input *types.DescribeEndpointConfigInput) DescribeEndpointConfigRequest {
 	op := &aws.Operation{
 		Name:       opDescribeEndpointConfig,
 		HTTPMethod: "POST",
@@ -96,10 +33,10 @@ func (c *Client) DescribeEndpointConfigRequest(input *DescribeEndpointConfigInpu
 	}
 
 	if input == nil {
-		input = &DescribeEndpointConfigInput{}
+		input = &types.DescribeEndpointConfigInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeEndpointConfigOutput{})
+	req := c.newRequest(op, input, &types.DescribeEndpointConfigOutput{})
 	return DescribeEndpointConfigRequest{Request: req, Input: input, Copy: c.DescribeEndpointConfigRequest}
 }
 
@@ -107,8 +44,8 @@ func (c *Client) DescribeEndpointConfigRequest(input *DescribeEndpointConfigInpu
 // DescribeEndpointConfig API operation.
 type DescribeEndpointConfigRequest struct {
 	*aws.Request
-	Input *DescribeEndpointConfigInput
-	Copy  func(*DescribeEndpointConfigInput) DescribeEndpointConfigRequest
+	Input *types.DescribeEndpointConfigInput
+	Copy  func(*types.DescribeEndpointConfigInput) DescribeEndpointConfigRequest
 }
 
 // Send marshals and sends the DescribeEndpointConfig API request.
@@ -120,7 +57,7 @@ func (r DescribeEndpointConfigRequest) Send(ctx context.Context) (*DescribeEndpo
 	}
 
 	resp := &DescribeEndpointConfigResponse{
-		DescribeEndpointConfigOutput: r.Request.Data.(*DescribeEndpointConfigOutput),
+		DescribeEndpointConfigOutput: r.Request.Data.(*types.DescribeEndpointConfigOutput),
 		response:                     &aws.Response{Request: r.Request},
 	}
 
@@ -130,7 +67,7 @@ func (r DescribeEndpointConfigRequest) Send(ctx context.Context) (*DescribeEndpo
 // DescribeEndpointConfigResponse is the response type for the
 // DescribeEndpointConfig API operation.
 type DescribeEndpointConfigResponse struct {
-	*DescribeEndpointConfigOutput
+	*types.DescribeEndpointConfigOutput
 
 	response *aws.Response
 }

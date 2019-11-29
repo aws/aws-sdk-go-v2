@@ -6,61 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
+	"github.com/aws/aws-sdk-go-v2/service/kms/types"
 )
-
-type DeleteImportedKeyMaterialInput struct {
-	_ struct{} `type:"structure"`
-
-	// Identifies the CMK from which you are deleting imported key material. The
-	// Origin of the CMK must be EXTERNAL.
-	//
-	// Specify the key ID or the Amazon Resource Name (ARN) of the CMK.
-	//
-	// For example:
-	//
-	//    * Key ID: 1234abcd-12ab-34cd-56ef-1234567890ab
-	//
-	//    * Key ARN: arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab
-	//
-	// To get the key ID and key ARN for a CMK, use ListKeys or DescribeKey.
-	//
-	// KeyId is a required field
-	KeyId *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteImportedKeyMaterialInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteImportedKeyMaterialInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteImportedKeyMaterialInput"}
-
-	if s.KeyId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("KeyId"))
-	}
-	if s.KeyId != nil && len(*s.KeyId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("KeyId", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteImportedKeyMaterialOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteImportedKeyMaterialOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteImportedKeyMaterial = "DeleteImportedKeyMaterial"
 
@@ -91,7 +40,7 @@ const opDeleteImportedKeyMaterial = "DeleteImportedKeyMaterial"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/DeleteImportedKeyMaterial
-func (c *Client) DeleteImportedKeyMaterialRequest(input *DeleteImportedKeyMaterialInput) DeleteImportedKeyMaterialRequest {
+func (c *Client) DeleteImportedKeyMaterialRequest(input *types.DeleteImportedKeyMaterialInput) DeleteImportedKeyMaterialRequest {
 	op := &aws.Operation{
 		Name:       opDeleteImportedKeyMaterial,
 		HTTPMethod: "POST",
@@ -99,10 +48,10 @@ func (c *Client) DeleteImportedKeyMaterialRequest(input *DeleteImportedKeyMateri
 	}
 
 	if input == nil {
-		input = &DeleteImportedKeyMaterialInput{}
+		input = &types.DeleteImportedKeyMaterialInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteImportedKeyMaterialOutput{})
+	req := c.newRequest(op, input, &types.DeleteImportedKeyMaterialOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return DeleteImportedKeyMaterialRequest{Request: req, Input: input, Copy: c.DeleteImportedKeyMaterialRequest}
@@ -112,8 +61,8 @@ func (c *Client) DeleteImportedKeyMaterialRequest(input *DeleteImportedKeyMateri
 // DeleteImportedKeyMaterial API operation.
 type DeleteImportedKeyMaterialRequest struct {
 	*aws.Request
-	Input *DeleteImportedKeyMaterialInput
-	Copy  func(*DeleteImportedKeyMaterialInput) DeleteImportedKeyMaterialRequest
+	Input *types.DeleteImportedKeyMaterialInput
+	Copy  func(*types.DeleteImportedKeyMaterialInput) DeleteImportedKeyMaterialRequest
 }
 
 // Send marshals and sends the DeleteImportedKeyMaterial API request.
@@ -125,7 +74,7 @@ func (r DeleteImportedKeyMaterialRequest) Send(ctx context.Context) (*DeleteImpo
 	}
 
 	resp := &DeleteImportedKeyMaterialResponse{
-		DeleteImportedKeyMaterialOutput: r.Request.Data.(*DeleteImportedKeyMaterialOutput),
+		DeleteImportedKeyMaterialOutput: r.Request.Data.(*types.DeleteImportedKeyMaterialOutput),
 		response:                        &aws.Response{Request: r.Request},
 	}
 
@@ -135,7 +84,7 @@ func (r DeleteImportedKeyMaterialRequest) Send(ctx context.Context) (*DeleteImpo
 // DeleteImportedKeyMaterialResponse is the response type for the
 // DeleteImportedKeyMaterial API operation.
 type DeleteImportedKeyMaterialResponse struct {
-	*DeleteImportedKeyMaterialOutput
+	*types.DeleteImportedKeyMaterialOutput
 
 	response *aws.Response
 }

@@ -6,75 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/securityhub/types"
 )
-
-type GetInsightResultsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ARN of the insight whose results you want to see.
-	//
-	// InsightArn is a required field
-	InsightArn *string `location:"uri" locationName:"InsightArn" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetInsightResultsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetInsightResultsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetInsightResultsInput"}
-
-	if s.InsightArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("InsightArn"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetInsightResultsInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.InsightArn != nil {
-		v := *s.InsightArn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "InsightArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type GetInsightResultsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The insight results returned by the operation.
-	//
-	// InsightResults is a required field
-	InsightResults *InsightResults `type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s GetInsightResultsOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetInsightResultsOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.InsightResults != nil {
-		v := s.InsightResults
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "InsightResults", v, metadata)
-	}
-	return nil
-}
 
 const opGetInsightResults = "GetInsightResults"
 
@@ -91,7 +24,7 @@ const opGetInsightResults = "GetInsightResults"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/GetInsightResults
-func (c *Client) GetInsightResultsRequest(input *GetInsightResultsInput) GetInsightResultsRequest {
+func (c *Client) GetInsightResultsRequest(input *types.GetInsightResultsInput) GetInsightResultsRequest {
 	op := &aws.Operation{
 		Name:       opGetInsightResults,
 		HTTPMethod: "GET",
@@ -99,10 +32,10 @@ func (c *Client) GetInsightResultsRequest(input *GetInsightResultsInput) GetInsi
 	}
 
 	if input == nil {
-		input = &GetInsightResultsInput{}
+		input = &types.GetInsightResultsInput{}
 	}
 
-	req := c.newRequest(op, input, &GetInsightResultsOutput{})
+	req := c.newRequest(op, input, &types.GetInsightResultsOutput{})
 	return GetInsightResultsRequest{Request: req, Input: input, Copy: c.GetInsightResultsRequest}
 }
 
@@ -110,8 +43,8 @@ func (c *Client) GetInsightResultsRequest(input *GetInsightResultsInput) GetInsi
 // GetInsightResults API operation.
 type GetInsightResultsRequest struct {
 	*aws.Request
-	Input *GetInsightResultsInput
-	Copy  func(*GetInsightResultsInput) GetInsightResultsRequest
+	Input *types.GetInsightResultsInput
+	Copy  func(*types.GetInsightResultsInput) GetInsightResultsRequest
 }
 
 // Send marshals and sends the GetInsightResults API request.
@@ -123,7 +56,7 @@ func (r GetInsightResultsRequest) Send(ctx context.Context) (*GetInsightResultsR
 	}
 
 	resp := &GetInsightResultsResponse{
-		GetInsightResultsOutput: r.Request.Data.(*GetInsightResultsOutput),
+		GetInsightResultsOutput: r.Request.Data.(*types.GetInsightResultsOutput),
 		response:                &aws.Response{Request: r.Request},
 	}
 
@@ -133,7 +66,7 @@ func (r GetInsightResultsRequest) Send(ctx context.Context) (*GetInsightResultsR
 // GetInsightResultsResponse is the response type for the
 // GetInsightResults API operation.
 type GetInsightResultsResponse struct {
-	*GetInsightResultsOutput
+	*types.GetInsightResultsOutput
 
 	response *aws.Response
 }

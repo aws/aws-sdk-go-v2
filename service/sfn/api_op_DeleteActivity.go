@@ -6,48 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/sfn/types"
 )
-
-type DeleteActivityInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the activity to delete.
-	//
-	// ActivityArn is a required field
-	ActivityArn *string `locationName:"activityArn" min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteActivityInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteActivityInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteActivityInput"}
-
-	if s.ActivityArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ActivityArn"))
-	}
-	if s.ActivityArn != nil && len(*s.ActivityArn) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ActivityArn", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteActivityOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteActivityOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteActivity = "DeleteActivity"
 
@@ -64,7 +24,7 @@ const opDeleteActivity = "DeleteActivity"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/DeleteActivity
-func (c *Client) DeleteActivityRequest(input *DeleteActivityInput) DeleteActivityRequest {
+func (c *Client) DeleteActivityRequest(input *types.DeleteActivityInput) DeleteActivityRequest {
 	op := &aws.Operation{
 		Name:       opDeleteActivity,
 		HTTPMethod: "POST",
@@ -72,10 +32,10 @@ func (c *Client) DeleteActivityRequest(input *DeleteActivityInput) DeleteActivit
 	}
 
 	if input == nil {
-		input = &DeleteActivityInput{}
+		input = &types.DeleteActivityInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteActivityOutput{})
+	req := c.newRequest(op, input, &types.DeleteActivityOutput{})
 	return DeleteActivityRequest{Request: req, Input: input, Copy: c.DeleteActivityRequest}
 }
 
@@ -83,8 +43,8 @@ func (c *Client) DeleteActivityRequest(input *DeleteActivityInput) DeleteActivit
 // DeleteActivity API operation.
 type DeleteActivityRequest struct {
 	*aws.Request
-	Input *DeleteActivityInput
-	Copy  func(*DeleteActivityInput) DeleteActivityRequest
+	Input *types.DeleteActivityInput
+	Copy  func(*types.DeleteActivityInput) DeleteActivityRequest
 }
 
 // Send marshals and sends the DeleteActivity API request.
@@ -96,7 +56,7 @@ func (r DeleteActivityRequest) Send(ctx context.Context) (*DeleteActivityRespons
 	}
 
 	resp := &DeleteActivityResponse{
-		DeleteActivityOutput: r.Request.Data.(*DeleteActivityOutput),
+		DeleteActivityOutput: r.Request.Data.(*types.DeleteActivityOutput),
 		response:             &aws.Response{Request: r.Request},
 	}
 
@@ -106,7 +66,7 @@ func (r DeleteActivityRequest) Send(ctx context.Context) (*DeleteActivityRespons
 // DeleteActivityResponse is the response type for the
 // DeleteActivity API operation.
 type DeleteActivityResponse struct {
-	*DeleteActivityOutput
+	*types.DeleteActivityOutput
 
 	response *aws.Response
 }

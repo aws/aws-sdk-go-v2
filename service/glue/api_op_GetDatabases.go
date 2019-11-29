@@ -6,61 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/glue/types"
 )
-
-type GetDatabasesInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the Data Catalog from which to retrieve Databases. If none is provided,
-	// the AWS account ID is used by default.
-	CatalogId *string `min:"1" type:"string"`
-
-	// The maximum number of databases to return in one response.
-	MaxResults *int64 `min:"1" type:"integer"`
-
-	// A continuation token, if this is a continuation call.
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s GetDatabasesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetDatabasesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetDatabasesInput"}
-	if s.CatalogId != nil && len(*s.CatalogId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("CatalogId", 1))
-	}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type GetDatabasesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A list of Database objects from the specified catalog.
-	//
-	// DatabaseList is a required field
-	DatabaseList []Database `type:"list" required:"true"`
-
-	// A continuation token for paginating the returned list of tokens, returned
-	// if the current segment of the list is not the last.
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s GetDatabasesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetDatabases = "GetDatabases"
 
@@ -77,7 +24,7 @@ const opGetDatabases = "GetDatabases"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetDatabases
-func (c *Client) GetDatabasesRequest(input *GetDatabasesInput) GetDatabasesRequest {
+func (c *Client) GetDatabasesRequest(input *types.GetDatabasesInput) GetDatabasesRequest {
 	op := &aws.Operation{
 		Name:       opGetDatabases,
 		HTTPMethod: "POST",
@@ -91,10 +38,10 @@ func (c *Client) GetDatabasesRequest(input *GetDatabasesInput) GetDatabasesReque
 	}
 
 	if input == nil {
-		input = &GetDatabasesInput{}
+		input = &types.GetDatabasesInput{}
 	}
 
-	req := c.newRequest(op, input, &GetDatabasesOutput{})
+	req := c.newRequest(op, input, &types.GetDatabasesOutput{})
 	return GetDatabasesRequest{Request: req, Input: input, Copy: c.GetDatabasesRequest}
 }
 
@@ -102,8 +49,8 @@ func (c *Client) GetDatabasesRequest(input *GetDatabasesInput) GetDatabasesReque
 // GetDatabases API operation.
 type GetDatabasesRequest struct {
 	*aws.Request
-	Input *GetDatabasesInput
-	Copy  func(*GetDatabasesInput) GetDatabasesRequest
+	Input *types.GetDatabasesInput
+	Copy  func(*types.GetDatabasesInput) GetDatabasesRequest
 }
 
 // Send marshals and sends the GetDatabases API request.
@@ -115,7 +62,7 @@ func (r GetDatabasesRequest) Send(ctx context.Context) (*GetDatabasesResponse, e
 	}
 
 	resp := &GetDatabasesResponse{
-		GetDatabasesOutput: r.Request.Data.(*GetDatabasesOutput),
+		GetDatabasesOutput: r.Request.Data.(*types.GetDatabasesOutput),
 		response:           &aws.Response{Request: r.Request},
 	}
 
@@ -145,7 +92,7 @@ func NewGetDatabasesPaginator(req GetDatabasesRequest) GetDatabasesPaginator {
 	return GetDatabasesPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *GetDatabasesInput
+				var inCpy *types.GetDatabasesInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -165,14 +112,14 @@ type GetDatabasesPaginator struct {
 	aws.Pager
 }
 
-func (p *GetDatabasesPaginator) CurrentPage() *GetDatabasesOutput {
-	return p.Pager.CurrentPage().(*GetDatabasesOutput)
+func (p *GetDatabasesPaginator) CurrentPage() *types.GetDatabasesOutput {
+	return p.Pager.CurrentPage().(*types.GetDatabasesOutput)
 }
 
 // GetDatabasesResponse is the response type for the
 // GetDatabases API operation.
 type GetDatabasesResponse struct {
-	*GetDatabasesOutput
+	*types.GetDatabasesOutput
 
 	response *aws.Response
 }

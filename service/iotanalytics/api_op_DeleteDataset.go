@@ -6,68 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/restjson"
+	"github.com/aws/aws-sdk-go-v2/service/iotanalytics/types"
 )
-
-type DeleteDatasetInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the data set to delete.
-	//
-	// DatasetName is a required field
-	DatasetName *string `location:"uri" locationName:"datasetName" min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteDatasetInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteDatasetInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteDatasetInput"}
-
-	if s.DatasetName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DatasetName"))
-	}
-	if s.DatasetName != nil && len(*s.DatasetName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("DatasetName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteDatasetInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.DatasetName != nil {
-		v := *s.DatasetName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "datasetName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type DeleteDatasetOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteDatasetOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteDatasetOutput) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
 
 const opDeleteDataset = "DeleteDataset"
 
@@ -87,7 +29,7 @@ const opDeleteDataset = "DeleteDataset"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iotanalytics-2017-11-27/DeleteDataset
-func (c *Client) DeleteDatasetRequest(input *DeleteDatasetInput) DeleteDatasetRequest {
+func (c *Client) DeleteDatasetRequest(input *types.DeleteDatasetInput) DeleteDatasetRequest {
 	op := &aws.Operation{
 		Name:       opDeleteDataset,
 		HTTPMethod: "DELETE",
@@ -95,10 +37,10 @@ func (c *Client) DeleteDatasetRequest(input *DeleteDatasetInput) DeleteDatasetRe
 	}
 
 	if input == nil {
-		input = &DeleteDatasetInput{}
+		input = &types.DeleteDatasetInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteDatasetOutput{})
+	req := c.newRequest(op, input, &types.DeleteDatasetOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return DeleteDatasetRequest{Request: req, Input: input, Copy: c.DeleteDatasetRequest}
@@ -108,8 +50,8 @@ func (c *Client) DeleteDatasetRequest(input *DeleteDatasetInput) DeleteDatasetRe
 // DeleteDataset API operation.
 type DeleteDatasetRequest struct {
 	*aws.Request
-	Input *DeleteDatasetInput
-	Copy  func(*DeleteDatasetInput) DeleteDatasetRequest
+	Input *types.DeleteDatasetInput
+	Copy  func(*types.DeleteDatasetInput) DeleteDatasetRequest
 }
 
 // Send marshals and sends the DeleteDataset API request.
@@ -121,7 +63,7 @@ func (r DeleteDatasetRequest) Send(ctx context.Context) (*DeleteDatasetResponse,
 	}
 
 	resp := &DeleteDatasetResponse{
-		DeleteDatasetOutput: r.Request.Data.(*DeleteDatasetOutput),
+		DeleteDatasetOutput: r.Request.Data.(*types.DeleteDatasetOutput),
 		response:            &aws.Response{Request: r.Request},
 	}
 
@@ -131,7 +73,7 @@ func (r DeleteDatasetRequest) Send(ctx context.Context) (*DeleteDatasetResponse,
 // DeleteDatasetResponse is the response type for the
 // DeleteDataset API operation.
 type DeleteDatasetResponse struct {
-	*DeleteDatasetOutput
+	*types.DeleteDatasetOutput
 
 	response *aws.Response
 }

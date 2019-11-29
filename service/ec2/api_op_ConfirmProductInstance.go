@@ -6,68 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-type ConfirmProductInstanceInput struct {
-	_ struct{} `type:"structure"`
-
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have
-	// the required permissions, the error response is DryRunOperation. Otherwise,
-	// it is UnauthorizedOperation.
-	DryRun *bool `locationName:"dryRun" type:"boolean"`
-
-	// The ID of the instance.
-	//
-	// InstanceId is a required field
-	InstanceId *string `type:"string" required:"true"`
-
-	// The product code. This must be a product code that you own.
-	//
-	// ProductCode is a required field
-	ProductCode *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s ConfirmProductInstanceInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ConfirmProductInstanceInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ConfirmProductInstanceInput"}
-
-	if s.InstanceId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("InstanceId"))
-	}
-
-	if s.ProductCode == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ProductCode"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ConfirmProductInstanceOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The AWS account ID of the instance owner. This is only present if the product
-	// code is attached to the instance.
-	OwnerId *string `locationName:"ownerId" type:"string"`
-
-	// The return value of the request. Returns true if the specified product code
-	// is owned by the requester and associated with the specified instance.
-	Return *bool `locationName:"return" type:"boolean"`
-}
-
-// String returns the string representation
-func (s ConfirmProductInstanceOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opConfirmProductInstance = "ConfirmProductInstance"
 
@@ -86,7 +26,7 @@ const opConfirmProductInstance = "ConfirmProductInstance"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ConfirmProductInstance
-func (c *Client) ConfirmProductInstanceRequest(input *ConfirmProductInstanceInput) ConfirmProductInstanceRequest {
+func (c *Client) ConfirmProductInstanceRequest(input *types.ConfirmProductInstanceInput) ConfirmProductInstanceRequest {
 	op := &aws.Operation{
 		Name:       opConfirmProductInstance,
 		HTTPMethod: "POST",
@@ -94,10 +34,10 @@ func (c *Client) ConfirmProductInstanceRequest(input *ConfirmProductInstanceInpu
 	}
 
 	if input == nil {
-		input = &ConfirmProductInstanceInput{}
+		input = &types.ConfirmProductInstanceInput{}
 	}
 
-	req := c.newRequest(op, input, &ConfirmProductInstanceOutput{})
+	req := c.newRequest(op, input, &types.ConfirmProductInstanceOutput{})
 	return ConfirmProductInstanceRequest{Request: req, Input: input, Copy: c.ConfirmProductInstanceRequest}
 }
 
@@ -105,8 +45,8 @@ func (c *Client) ConfirmProductInstanceRequest(input *ConfirmProductInstanceInpu
 // ConfirmProductInstance API operation.
 type ConfirmProductInstanceRequest struct {
 	*aws.Request
-	Input *ConfirmProductInstanceInput
-	Copy  func(*ConfirmProductInstanceInput) ConfirmProductInstanceRequest
+	Input *types.ConfirmProductInstanceInput
+	Copy  func(*types.ConfirmProductInstanceInput) ConfirmProductInstanceRequest
 }
 
 // Send marshals and sends the ConfirmProductInstance API request.
@@ -118,7 +58,7 @@ func (r ConfirmProductInstanceRequest) Send(ctx context.Context) (*ConfirmProduc
 	}
 
 	resp := &ConfirmProductInstanceResponse{
-		ConfirmProductInstanceOutput: r.Request.Data.(*ConfirmProductInstanceOutput),
+		ConfirmProductInstanceOutput: r.Request.Data.(*types.ConfirmProductInstanceOutput),
 		response:                     &aws.Response{Request: r.Request},
 	}
 
@@ -128,7 +68,7 @@ func (r ConfirmProductInstanceRequest) Send(ctx context.Context) (*ConfirmProduc
 // ConfirmProductInstanceResponse is the response type for the
 // ConfirmProductInstance API operation.
 type ConfirmProductInstanceResponse struct {
-	*ConfirmProductInstanceOutput
+	*types.ConfirmProductInstanceOutput
 
 	response *aws.Response
 }

@@ -6,42 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/codepipeline/types"
 )
-
-type DeregisterWebhookWithThirdPartyInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the webhook you want to deregister.
-	WebhookName *string `locationName:"webhookName" min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s DeregisterWebhookWithThirdPartyInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeregisterWebhookWithThirdPartyInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeregisterWebhookWithThirdPartyInput"}
-	if s.WebhookName != nil && len(*s.WebhookName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("WebhookName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeregisterWebhookWithThirdPartyOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeregisterWebhookWithThirdPartyOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeregisterWebhookWithThirdParty = "DeregisterWebhookWithThirdParty"
 
@@ -60,7 +26,7 @@ const opDeregisterWebhookWithThirdParty = "DeregisterWebhookWithThirdParty"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/DeregisterWebhookWithThirdParty
-func (c *Client) DeregisterWebhookWithThirdPartyRequest(input *DeregisterWebhookWithThirdPartyInput) DeregisterWebhookWithThirdPartyRequest {
+func (c *Client) DeregisterWebhookWithThirdPartyRequest(input *types.DeregisterWebhookWithThirdPartyInput) DeregisterWebhookWithThirdPartyRequest {
 	op := &aws.Operation{
 		Name:       opDeregisterWebhookWithThirdParty,
 		HTTPMethod: "POST",
@@ -68,10 +34,10 @@ func (c *Client) DeregisterWebhookWithThirdPartyRequest(input *DeregisterWebhook
 	}
 
 	if input == nil {
-		input = &DeregisterWebhookWithThirdPartyInput{}
+		input = &types.DeregisterWebhookWithThirdPartyInput{}
 	}
 
-	req := c.newRequest(op, input, &DeregisterWebhookWithThirdPartyOutput{})
+	req := c.newRequest(op, input, &types.DeregisterWebhookWithThirdPartyOutput{})
 	return DeregisterWebhookWithThirdPartyRequest{Request: req, Input: input, Copy: c.DeregisterWebhookWithThirdPartyRequest}
 }
 
@@ -79,8 +45,8 @@ func (c *Client) DeregisterWebhookWithThirdPartyRequest(input *DeregisterWebhook
 // DeregisterWebhookWithThirdParty API operation.
 type DeregisterWebhookWithThirdPartyRequest struct {
 	*aws.Request
-	Input *DeregisterWebhookWithThirdPartyInput
-	Copy  func(*DeregisterWebhookWithThirdPartyInput) DeregisterWebhookWithThirdPartyRequest
+	Input *types.DeregisterWebhookWithThirdPartyInput
+	Copy  func(*types.DeregisterWebhookWithThirdPartyInput) DeregisterWebhookWithThirdPartyRequest
 }
 
 // Send marshals and sends the DeregisterWebhookWithThirdParty API request.
@@ -92,7 +58,7 @@ func (r DeregisterWebhookWithThirdPartyRequest) Send(ctx context.Context) (*Dere
 	}
 
 	resp := &DeregisterWebhookWithThirdPartyResponse{
-		DeregisterWebhookWithThirdPartyOutput: r.Request.Data.(*DeregisterWebhookWithThirdPartyOutput),
+		DeregisterWebhookWithThirdPartyOutput: r.Request.Data.(*types.DeregisterWebhookWithThirdPartyOutput),
 		response:                              &aws.Response{Request: r.Request},
 	}
 
@@ -102,7 +68,7 @@ func (r DeregisterWebhookWithThirdPartyRequest) Send(ctx context.Context) (*Dere
 // DeregisterWebhookWithThirdPartyResponse is the response type for the
 // DeregisterWebhookWithThirdParty API operation.
 type DeregisterWebhookWithThirdPartyResponse struct {
-	*DeregisterWebhookWithThirdPartyOutput
+	*types.DeregisterWebhookWithThirdPartyOutput
 
 	response *aws.Response
 }

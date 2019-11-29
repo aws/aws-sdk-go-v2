@@ -4,77 +4,10 @@ package sagemaker
 
 import (
 	"context"
-	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
 )
-
-type ListEndpointConfigsInput struct {
-	_ struct{} `type:"structure"`
-
-	// A filter that returns only endpoint configurations with a creation time greater
-	// than or equal to the specified time (timestamp).
-	CreationTimeAfter *time.Time `type:"timestamp"`
-
-	// A filter that returns only endpoint configurations created before the specified
-	// time (timestamp).
-	CreationTimeBefore *time.Time `type:"timestamp"`
-
-	// The maximum number of training jobs to return in the response.
-	MaxResults *int64 `min:"1" type:"integer"`
-
-	// A string in the endpoint configuration name. This filter returns only endpoint
-	// configurations whose name contains the specified string.
-	NameContains *string `type:"string"`
-
-	// If the result of the previous ListEndpointConfig request was truncated, the
-	// response includes a NextToken. To retrieve the next set of endpoint configurations,
-	// use the token in the next request.
-	NextToken *string `type:"string"`
-
-	// The field to sort results by. The default is CreationTime.
-	SortBy EndpointConfigSortKey `type:"string" enum:"true"`
-
-	// The sort order for results. The default is Descending.
-	SortOrder OrderKey `type:"string" enum:"true"`
-}
-
-// String returns the string representation
-func (s ListEndpointConfigsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListEndpointConfigsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListEndpointConfigsInput"}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ListEndpointConfigsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// An array of endpoint configurations.
-	//
-	// EndpointConfigs is a required field
-	EndpointConfigs []EndpointConfigSummary `type:"list" required:"true"`
-
-	// If the response is truncated, Amazon SageMaker returns this token. To retrieve
-	// the next set of endpoint configurations, use it in the subsequent request
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s ListEndpointConfigsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListEndpointConfigs = "ListEndpointConfigs"
 
@@ -91,7 +24,7 @@ const opListEndpointConfigs = "ListEndpointConfigs"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListEndpointConfigs
-func (c *Client) ListEndpointConfigsRequest(input *ListEndpointConfigsInput) ListEndpointConfigsRequest {
+func (c *Client) ListEndpointConfigsRequest(input *types.ListEndpointConfigsInput) ListEndpointConfigsRequest {
 	op := &aws.Operation{
 		Name:       opListEndpointConfigs,
 		HTTPMethod: "POST",
@@ -105,10 +38,10 @@ func (c *Client) ListEndpointConfigsRequest(input *ListEndpointConfigsInput) Lis
 	}
 
 	if input == nil {
-		input = &ListEndpointConfigsInput{}
+		input = &types.ListEndpointConfigsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListEndpointConfigsOutput{})
+	req := c.newRequest(op, input, &types.ListEndpointConfigsOutput{})
 	return ListEndpointConfigsRequest{Request: req, Input: input, Copy: c.ListEndpointConfigsRequest}
 }
 
@@ -116,8 +49,8 @@ func (c *Client) ListEndpointConfigsRequest(input *ListEndpointConfigsInput) Lis
 // ListEndpointConfigs API operation.
 type ListEndpointConfigsRequest struct {
 	*aws.Request
-	Input *ListEndpointConfigsInput
-	Copy  func(*ListEndpointConfigsInput) ListEndpointConfigsRequest
+	Input *types.ListEndpointConfigsInput
+	Copy  func(*types.ListEndpointConfigsInput) ListEndpointConfigsRequest
 }
 
 // Send marshals and sends the ListEndpointConfigs API request.
@@ -129,7 +62,7 @@ func (r ListEndpointConfigsRequest) Send(ctx context.Context) (*ListEndpointConf
 	}
 
 	resp := &ListEndpointConfigsResponse{
-		ListEndpointConfigsOutput: r.Request.Data.(*ListEndpointConfigsOutput),
+		ListEndpointConfigsOutput: r.Request.Data.(*types.ListEndpointConfigsOutput),
 		response:                  &aws.Response{Request: r.Request},
 	}
 
@@ -159,7 +92,7 @@ func NewListEndpointConfigsPaginator(req ListEndpointConfigsRequest) ListEndpoin
 	return ListEndpointConfigsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListEndpointConfigsInput
+				var inCpy *types.ListEndpointConfigsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -179,14 +112,14 @@ type ListEndpointConfigsPaginator struct {
 	aws.Pager
 }
 
-func (p *ListEndpointConfigsPaginator) CurrentPage() *ListEndpointConfigsOutput {
-	return p.Pager.CurrentPage().(*ListEndpointConfigsOutput)
+func (p *ListEndpointConfigsPaginator) CurrentPage() *types.ListEndpointConfigsOutput {
+	return p.Pager.CurrentPage().(*types.ListEndpointConfigsOutput)
 }
 
 // ListEndpointConfigsResponse is the response type for the
 // ListEndpointConfigs API operation.
 type ListEndpointConfigsResponse struct {
-	*ListEndpointConfigsOutput
+	*types.ListEndpointConfigsOutput
 
 	response *aws.Response
 }

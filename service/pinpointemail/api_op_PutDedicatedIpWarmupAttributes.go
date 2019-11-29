@@ -6,84 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/pinpointemail/types"
 )
-
-// A request to change the warm-up attributes for a dedicated IP address. This
-// operation is useful when you want to resume the warm-up process for an existing
-// IP address.
-type PutDedicatedIpWarmupAttributesInput struct {
-	_ struct{} `type:"structure"`
-
-	// The dedicated IP address that you want to update the warm-up attributes for.
-	//
-	// Ip is a required field
-	Ip *string `location:"uri" locationName:"IP" type:"string" required:"true"`
-
-	// The warm-up percentage that you want to associate with the dedicated IP address.
-	//
-	// WarmupPercentage is a required field
-	WarmupPercentage *int64 `type:"integer" required:"true"`
-}
-
-// String returns the string representation
-func (s PutDedicatedIpWarmupAttributesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *PutDedicatedIpWarmupAttributesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "PutDedicatedIpWarmupAttributesInput"}
-
-	if s.Ip == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Ip"))
-	}
-
-	if s.WarmupPercentage == nil {
-		invalidParams.Add(aws.NewErrParamRequired("WarmupPercentage"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s PutDedicatedIpWarmupAttributesInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.WarmupPercentage != nil {
-		v := *s.WarmupPercentage
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "WarmupPercentage", protocol.Int64Value(v), metadata)
-	}
-	if s.Ip != nil {
-		v := *s.Ip
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "IP", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-// An HTTP 200 response if the request succeeds, or an error message if the
-// request fails.
-type PutDedicatedIpWarmupAttributesOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s PutDedicatedIpWarmupAttributesOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s PutDedicatedIpWarmupAttributesOutput) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
 
 const opPutDedicatedIpWarmupAttributes = "PutDedicatedIpWarmupAttributes"
 
@@ -98,7 +22,7 @@ const opPutDedicatedIpWarmupAttributes = "PutDedicatedIpWarmupAttributes"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/PutDedicatedIpWarmupAttributes
-func (c *Client) PutDedicatedIpWarmupAttributesRequest(input *PutDedicatedIpWarmupAttributesInput) PutDedicatedIpWarmupAttributesRequest {
+func (c *Client) PutDedicatedIpWarmupAttributesRequest(input *types.PutDedicatedIpWarmupAttributesInput) PutDedicatedIpWarmupAttributesRequest {
 	op := &aws.Operation{
 		Name:       opPutDedicatedIpWarmupAttributes,
 		HTTPMethod: "PUT",
@@ -106,10 +30,10 @@ func (c *Client) PutDedicatedIpWarmupAttributesRequest(input *PutDedicatedIpWarm
 	}
 
 	if input == nil {
-		input = &PutDedicatedIpWarmupAttributesInput{}
+		input = &types.PutDedicatedIpWarmupAttributesInput{}
 	}
 
-	req := c.newRequest(op, input, &PutDedicatedIpWarmupAttributesOutput{})
+	req := c.newRequest(op, input, &types.PutDedicatedIpWarmupAttributesOutput{})
 	return PutDedicatedIpWarmupAttributesRequest{Request: req, Input: input, Copy: c.PutDedicatedIpWarmupAttributesRequest}
 }
 
@@ -117,8 +41,8 @@ func (c *Client) PutDedicatedIpWarmupAttributesRequest(input *PutDedicatedIpWarm
 // PutDedicatedIpWarmupAttributes API operation.
 type PutDedicatedIpWarmupAttributesRequest struct {
 	*aws.Request
-	Input *PutDedicatedIpWarmupAttributesInput
-	Copy  func(*PutDedicatedIpWarmupAttributesInput) PutDedicatedIpWarmupAttributesRequest
+	Input *types.PutDedicatedIpWarmupAttributesInput
+	Copy  func(*types.PutDedicatedIpWarmupAttributesInput) PutDedicatedIpWarmupAttributesRequest
 }
 
 // Send marshals and sends the PutDedicatedIpWarmupAttributes API request.
@@ -130,7 +54,7 @@ func (r PutDedicatedIpWarmupAttributesRequest) Send(ctx context.Context) (*PutDe
 	}
 
 	resp := &PutDedicatedIpWarmupAttributesResponse{
-		PutDedicatedIpWarmupAttributesOutput: r.Request.Data.(*PutDedicatedIpWarmupAttributesOutput),
+		PutDedicatedIpWarmupAttributesOutput: r.Request.Data.(*types.PutDedicatedIpWarmupAttributesOutput),
 		response:                             &aws.Response{Request: r.Request},
 	}
 
@@ -140,7 +64,7 @@ func (r PutDedicatedIpWarmupAttributesRequest) Send(ctx context.Context) (*PutDe
 // PutDedicatedIpWarmupAttributesResponse is the response type for the
 // PutDedicatedIpWarmupAttributes API operation.
 type PutDedicatedIpWarmupAttributesResponse struct {
-	*PutDedicatedIpWarmupAttributesOutput
+	*types.PutDedicatedIpWarmupAttributesOutput
 
 	response *aws.Response
 }

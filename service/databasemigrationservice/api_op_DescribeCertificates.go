@@ -4,68 +4,10 @@ package databasemigrationservice
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/databasemigrationservice/types"
 )
-
-type DescribeCertificatesInput struct {
-	_ struct{} `type:"structure"`
-
-	// Filters applied to the certificate described in the form of key-value pairs.
-	Filters []Filter `type:"list"`
-
-	// An optional pagination token provided by a previous request. If this parameter
-	// is specified, the response includes only records beyond the marker, up to
-	// the vlue specified by MaxRecords.
-	Marker *string `type:"string"`
-
-	// The maximum number of records to include in the response. If more records
-	// exist than the specified MaxRecords value, a pagination token called a marker
-	// is included in the response so that the remaining results can be retrieved.
-	//
-	// Default: 10
-	MaxRecords *int64 `type:"integer"`
-}
-
-// String returns the string representation
-func (s DescribeCertificatesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeCertificatesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeCertificatesInput"}
-	if s.Filters != nil {
-		for i, v := range s.Filters {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribeCertificatesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The Secure Sockets Layer (SSL) certificates associated with the replication
-	// instance.
-	Certificates []Certificate `type:"list"`
-
-	// The pagination token.
-	Marker *string `type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeCertificatesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeCertificates = "DescribeCertificates"
 
@@ -82,7 +24,7 @@ const opDescribeCertificates = "DescribeCertificates"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeCertificates
-func (c *Client) DescribeCertificatesRequest(input *DescribeCertificatesInput) DescribeCertificatesRequest {
+func (c *Client) DescribeCertificatesRequest(input *types.DescribeCertificatesInput) DescribeCertificatesRequest {
 	op := &aws.Operation{
 		Name:       opDescribeCertificates,
 		HTTPMethod: "POST",
@@ -96,10 +38,10 @@ func (c *Client) DescribeCertificatesRequest(input *DescribeCertificatesInput) D
 	}
 
 	if input == nil {
-		input = &DescribeCertificatesInput{}
+		input = &types.DescribeCertificatesInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeCertificatesOutput{})
+	req := c.newRequest(op, input, &types.DescribeCertificatesOutput{})
 	return DescribeCertificatesRequest{Request: req, Input: input, Copy: c.DescribeCertificatesRequest}
 }
 
@@ -107,8 +49,8 @@ func (c *Client) DescribeCertificatesRequest(input *DescribeCertificatesInput) D
 // DescribeCertificates API operation.
 type DescribeCertificatesRequest struct {
 	*aws.Request
-	Input *DescribeCertificatesInput
-	Copy  func(*DescribeCertificatesInput) DescribeCertificatesRequest
+	Input *types.DescribeCertificatesInput
+	Copy  func(*types.DescribeCertificatesInput) DescribeCertificatesRequest
 }
 
 // Send marshals and sends the DescribeCertificates API request.
@@ -120,7 +62,7 @@ func (r DescribeCertificatesRequest) Send(ctx context.Context) (*DescribeCertifi
 	}
 
 	resp := &DescribeCertificatesResponse{
-		DescribeCertificatesOutput: r.Request.Data.(*DescribeCertificatesOutput),
+		DescribeCertificatesOutput: r.Request.Data.(*types.DescribeCertificatesOutput),
 		response:                   &aws.Response{Request: r.Request},
 	}
 
@@ -150,7 +92,7 @@ func NewDescribeCertificatesPaginator(req DescribeCertificatesRequest) DescribeC
 	return DescribeCertificatesPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *DescribeCertificatesInput
+				var inCpy *types.DescribeCertificatesInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -170,14 +112,14 @@ type DescribeCertificatesPaginator struct {
 	aws.Pager
 }
 
-func (p *DescribeCertificatesPaginator) CurrentPage() *DescribeCertificatesOutput {
-	return p.Pager.CurrentPage().(*DescribeCertificatesOutput)
+func (p *DescribeCertificatesPaginator) CurrentPage() *types.DescribeCertificatesOutput {
+	return p.Pager.CurrentPage().(*types.DescribeCertificatesOutput)
 }
 
 // DescribeCertificatesResponse is the response type for the
 // DescribeCertificates API operation.
 type DescribeCertificatesResponse struct {
-	*DescribeCertificatesOutput
+	*types.DescribeCertificatesOutput
 
 	response *aws.Response
 }

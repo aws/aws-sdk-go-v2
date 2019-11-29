@@ -4,133 +4,10 @@ package directconnect
 
 import (
 	"context"
-	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/directconnect/types"
 )
-
-type AssociateConnectionWithLagInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the connection.
-	//
-	// ConnectionId is a required field
-	ConnectionId *string `locationName:"connectionId" type:"string" required:"true"`
-
-	// The ID of the LAG with which to associate the connection.
-	//
-	// LagId is a required field
-	LagId *string `locationName:"lagId" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s AssociateConnectionWithLagInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *AssociateConnectionWithLagInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "AssociateConnectionWithLagInput"}
-
-	if s.ConnectionId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ConnectionId"))
-	}
-
-	if s.LagId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("LagId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Information about an AWS Direct Connect connection.
-type AssociateConnectionWithLagOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The Direct Connect endpoint on which the physical connection terminates.
-	AwsDevice *string `locationName:"awsDevice" deprecated:"true" type:"string"`
-
-	// The Direct Connect endpoint on which the physical connection terminates.
-	AwsDeviceV2 *string `locationName:"awsDeviceV2" type:"string"`
-
-	// The bandwidth of the connection.
-	Bandwidth *string `locationName:"bandwidth" type:"string"`
-
-	// The ID of the connection.
-	ConnectionId *string `locationName:"connectionId" type:"string"`
-
-	// The name of the connection.
-	ConnectionName *string `locationName:"connectionName" type:"string"`
-
-	// The state of the connection. The following are the possible values:
-	//
-	//    * ordering: The initial state of a hosted connection provisioned on an
-	//    interconnect. The connection stays in the ordering state until the owner
-	//    of the hosted connection confirms or declines the connection order.
-	//
-	//    * requested: The initial state of a standard connection. The connection
-	//    stays in the requested state until the Letter of Authorization (LOA) is
-	//    sent to the customer.
-	//
-	//    * pending: The connection has been approved and is being initialized.
-	//
-	//    * available: The network link is up and the connection is ready for use.
-	//
-	//    * down: The network link is down.
-	//
-	//    * deleting: The connection is being deleted.
-	//
-	//    * deleted: The connection has been deleted.
-	//
-	//    * rejected: A hosted connection in the ordering state enters the rejected
-	//    state if it is deleted by the customer.
-	//
-	//    * unknown: The state of the connection is not available.
-	ConnectionState ConnectionState `locationName:"connectionState" type:"string" enum:"true"`
-
-	// Indicates whether the connection supports a secondary BGP peer in the same
-	// address family (IPv4/IPv6).
-	HasLogicalRedundancy HasLogicalRedundancy `locationName:"hasLogicalRedundancy" type:"string" enum:"true"`
-
-	// Indicates whether jumbo frames (9001 MTU) are supported.
-	JumboFrameCapable *bool `locationName:"jumboFrameCapable" type:"boolean"`
-
-	// The ID of the LAG.
-	LagId *string `locationName:"lagId" type:"string"`
-
-	// The time of the most recent call to DescribeLoa for this connection.
-	LoaIssueTime *time.Time `locationName:"loaIssueTime" type:"timestamp"`
-
-	// The location of the connection.
-	Location *string `locationName:"location" type:"string"`
-
-	// The ID of the AWS account that owns the connection.
-	OwnerAccount *string `locationName:"ownerAccount" type:"string"`
-
-	// The name of the AWS Direct Connect service provider associated with the connection.
-	PartnerName *string `locationName:"partnerName" type:"string"`
-
-	// The name of the service provider associated with the connection.
-	ProviderName *string `locationName:"providerName" type:"string"`
-
-	// The AWS Region where the connection is located.
-	Region *string `locationName:"region" type:"string"`
-
-	// The tags associated with the connection.
-	Tags []Tag `locationName:"tags" min:"1" type:"list"`
-
-	// The ID of the VLAN.
-	Vlan *int64 `locationName:"vlan" type:"integer"`
-}
-
-// String returns the string representation
-func (s AssociateConnectionWithLagOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opAssociateConnectionWithLag = "AssociateConnectionWithLag"
 
@@ -163,7 +40,7 @@ const opAssociateConnectionWithLag = "AssociateConnectionWithLag"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/AssociateConnectionWithLag
-func (c *Client) AssociateConnectionWithLagRequest(input *AssociateConnectionWithLagInput) AssociateConnectionWithLagRequest {
+func (c *Client) AssociateConnectionWithLagRequest(input *types.AssociateConnectionWithLagInput) AssociateConnectionWithLagRequest {
 	op := &aws.Operation{
 		Name:       opAssociateConnectionWithLag,
 		HTTPMethod: "POST",
@@ -171,10 +48,10 @@ func (c *Client) AssociateConnectionWithLagRequest(input *AssociateConnectionWit
 	}
 
 	if input == nil {
-		input = &AssociateConnectionWithLagInput{}
+		input = &types.AssociateConnectionWithLagInput{}
 	}
 
-	req := c.newRequest(op, input, &AssociateConnectionWithLagOutput{})
+	req := c.newRequest(op, input, &types.AssociateConnectionWithLagOutput{})
 	return AssociateConnectionWithLagRequest{Request: req, Input: input, Copy: c.AssociateConnectionWithLagRequest}
 }
 
@@ -182,8 +59,8 @@ func (c *Client) AssociateConnectionWithLagRequest(input *AssociateConnectionWit
 // AssociateConnectionWithLag API operation.
 type AssociateConnectionWithLagRequest struct {
 	*aws.Request
-	Input *AssociateConnectionWithLagInput
-	Copy  func(*AssociateConnectionWithLagInput) AssociateConnectionWithLagRequest
+	Input *types.AssociateConnectionWithLagInput
+	Copy  func(*types.AssociateConnectionWithLagInput) AssociateConnectionWithLagRequest
 }
 
 // Send marshals and sends the AssociateConnectionWithLag API request.
@@ -195,7 +72,7 @@ func (r AssociateConnectionWithLagRequest) Send(ctx context.Context) (*Associate
 	}
 
 	resp := &AssociateConnectionWithLagResponse{
-		AssociateConnectionWithLagOutput: r.Request.Data.(*AssociateConnectionWithLagOutput),
+		AssociateConnectionWithLagOutput: r.Request.Data.(*types.AssociateConnectionWithLagOutput),
 		response:                         &aws.Response{Request: r.Request},
 	}
 
@@ -205,7 +82,7 @@ func (r AssociateConnectionWithLagRequest) Send(ctx context.Context) (*Associate
 // AssociateConnectionWithLagResponse is the response type for the
 // AssociateConnectionWithLag API operation.
 type AssociateConnectionWithLagResponse struct {
-	*AssociateConnectionWithLagOutput
+	*types.AssociateConnectionWithLagOutput
 
 	response *aws.Response
 }

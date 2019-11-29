@@ -6,72 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-type DescribeMovingAddressesInput struct {
-	_ struct{} `type:"structure"`
-
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have
-	// the required permissions, the error response is DryRunOperation. Otherwise,
-	// it is UnauthorizedOperation.
-	DryRun *bool `locationName:"dryRun" type:"boolean"`
-
-	// One or more filters.
-	//
-	//    * moving-status - The status of the Elastic IP address (MovingToVpc |
-	//    RestoringToClassic).
-	Filters []Filter `locationName:"filter" locationNameList:"Filter" type:"list"`
-
-	// The maximum number of results to return for the request in a single page.
-	// The remaining results of the initial request can be seen by sending another
-	// request with the returned NextToken value. This value can be between 5 and
-	// 1000; if MaxResults is given a value outside of this range, an error is returned.
-	//
-	// Default: If no value is provided, the default is 1000.
-	MaxResults *int64 `locationName:"maxResults" min:"5" type:"integer"`
-
-	// The token for the next page of results.
-	NextToken *string `locationName:"nextToken" type:"string"`
-
-	// One or more Elastic IP addresses.
-	PublicIps []string `locationName:"publicIp" locationNameList:"item" type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeMovingAddressesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeMovingAddressesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeMovingAddressesInput"}
-	if s.MaxResults != nil && *s.MaxResults < 5 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 5))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribeMovingAddressesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The status for each Elastic IP address.
-	MovingAddressStatuses []MovingAddressStatus `locationName:"movingAddressStatusSet" locationNameList:"item" type:"list"`
-
-	// The token to use to retrieve the next page of results. This value is null
-	// when there are no more results to return.
-	NextToken *string `locationName:"nextToken" type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeMovingAddressesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeMovingAddresses = "DescribeMovingAddresses"
 
@@ -90,7 +26,7 @@ const opDescribeMovingAddresses = "DescribeMovingAddresses"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeMovingAddresses
-func (c *Client) DescribeMovingAddressesRequest(input *DescribeMovingAddressesInput) DescribeMovingAddressesRequest {
+func (c *Client) DescribeMovingAddressesRequest(input *types.DescribeMovingAddressesInput) DescribeMovingAddressesRequest {
 	op := &aws.Operation{
 		Name:       opDescribeMovingAddresses,
 		HTTPMethod: "POST",
@@ -104,10 +40,10 @@ func (c *Client) DescribeMovingAddressesRequest(input *DescribeMovingAddressesIn
 	}
 
 	if input == nil {
-		input = &DescribeMovingAddressesInput{}
+		input = &types.DescribeMovingAddressesInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeMovingAddressesOutput{})
+	req := c.newRequest(op, input, &types.DescribeMovingAddressesOutput{})
 	return DescribeMovingAddressesRequest{Request: req, Input: input, Copy: c.DescribeMovingAddressesRequest}
 }
 
@@ -115,8 +51,8 @@ func (c *Client) DescribeMovingAddressesRequest(input *DescribeMovingAddressesIn
 // DescribeMovingAddresses API operation.
 type DescribeMovingAddressesRequest struct {
 	*aws.Request
-	Input *DescribeMovingAddressesInput
-	Copy  func(*DescribeMovingAddressesInput) DescribeMovingAddressesRequest
+	Input *types.DescribeMovingAddressesInput
+	Copy  func(*types.DescribeMovingAddressesInput) DescribeMovingAddressesRequest
 }
 
 // Send marshals and sends the DescribeMovingAddresses API request.
@@ -128,7 +64,7 @@ func (r DescribeMovingAddressesRequest) Send(ctx context.Context) (*DescribeMovi
 	}
 
 	resp := &DescribeMovingAddressesResponse{
-		DescribeMovingAddressesOutput: r.Request.Data.(*DescribeMovingAddressesOutput),
+		DescribeMovingAddressesOutput: r.Request.Data.(*types.DescribeMovingAddressesOutput),
 		response:                      &aws.Response{Request: r.Request},
 	}
 
@@ -158,7 +94,7 @@ func NewDescribeMovingAddressesPaginator(req DescribeMovingAddressesRequest) Des
 	return DescribeMovingAddressesPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *DescribeMovingAddressesInput
+				var inCpy *types.DescribeMovingAddressesInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -178,14 +114,14 @@ type DescribeMovingAddressesPaginator struct {
 	aws.Pager
 }
 
-func (p *DescribeMovingAddressesPaginator) CurrentPage() *DescribeMovingAddressesOutput {
-	return p.Pager.CurrentPage().(*DescribeMovingAddressesOutput)
+func (p *DescribeMovingAddressesPaginator) CurrentPage() *types.DescribeMovingAddressesOutput {
+	return p.Pager.CurrentPage().(*types.DescribeMovingAddressesOutput)
 }
 
 // DescribeMovingAddressesResponse is the response type for the
 // DescribeMovingAddresses API operation.
 type DescribeMovingAddressesResponse struct {
-	*DescribeMovingAddressesOutput
+	*types.DescribeMovingAddressesOutput
 
 	response *aws.Response
 }

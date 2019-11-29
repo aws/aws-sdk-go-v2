@@ -6,54 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/mturk/types"
 )
-
-type GetAssignmentInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the Assignment to be retrieved.
-	//
-	// AssignmentId is a required field
-	AssignmentId *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetAssignmentInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetAssignmentInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetAssignmentInput"}
-
-	if s.AssignmentId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("AssignmentId"))
-	}
-	if s.AssignmentId != nil && len(*s.AssignmentId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("AssignmentId", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type GetAssignmentOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The assignment. The response includes one Assignment element.
-	Assignment *Assignment `type:"structure"`
-
-	// The HIT associated with this assignment. The response includes one HIT element.
-	HIT *HIT `type:"structure"`
-}
-
-// String returns the string representation
-func (s GetAssignmentOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetAssignment = "GetAssignment"
 
@@ -70,7 +24,7 @@ const opGetAssignment = "GetAssignment"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/GetAssignment
-func (c *Client) GetAssignmentRequest(input *GetAssignmentInput) GetAssignmentRequest {
+func (c *Client) GetAssignmentRequest(input *types.GetAssignmentInput) GetAssignmentRequest {
 	op := &aws.Operation{
 		Name:       opGetAssignment,
 		HTTPMethod: "POST",
@@ -78,10 +32,10 @@ func (c *Client) GetAssignmentRequest(input *GetAssignmentInput) GetAssignmentRe
 	}
 
 	if input == nil {
-		input = &GetAssignmentInput{}
+		input = &types.GetAssignmentInput{}
 	}
 
-	req := c.newRequest(op, input, &GetAssignmentOutput{})
+	req := c.newRequest(op, input, &types.GetAssignmentOutput{})
 	return GetAssignmentRequest{Request: req, Input: input, Copy: c.GetAssignmentRequest}
 }
 
@@ -89,8 +43,8 @@ func (c *Client) GetAssignmentRequest(input *GetAssignmentInput) GetAssignmentRe
 // GetAssignment API operation.
 type GetAssignmentRequest struct {
 	*aws.Request
-	Input *GetAssignmentInput
-	Copy  func(*GetAssignmentInput) GetAssignmentRequest
+	Input *types.GetAssignmentInput
+	Copy  func(*types.GetAssignmentInput) GetAssignmentRequest
 }
 
 // Send marshals and sends the GetAssignment API request.
@@ -102,7 +56,7 @@ func (r GetAssignmentRequest) Send(ctx context.Context) (*GetAssignmentResponse,
 	}
 
 	resp := &GetAssignmentResponse{
-		GetAssignmentOutput: r.Request.Data.(*GetAssignmentOutput),
+		GetAssignmentOutput: r.Request.Data.(*types.GetAssignmentOutput),
 		response:            &aws.Response{Request: r.Request},
 	}
 
@@ -112,7 +66,7 @@ func (r GetAssignmentRequest) Send(ctx context.Context) (*GetAssignmentResponse,
 // GetAssignmentResponse is the response type for the
 // GetAssignment API operation.
 type GetAssignmentResponse struct {
-	*GetAssignmentOutput
+	*types.GetAssignmentOutput
 
 	response *aws.Response
 }

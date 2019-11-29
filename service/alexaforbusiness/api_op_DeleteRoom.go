@@ -6,29 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/alexaforbusiness/types"
 )
-
-type DeleteRoomInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ARN of the room to delete. Required.
-	RoomArn *string `type:"string"`
-}
-
-// String returns the string representation
-func (s DeleteRoomInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type DeleteRoomOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteRoomOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteRoom = "DeleteRoom"
 
@@ -45,7 +24,7 @@ const opDeleteRoom = "DeleteRoom"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/DeleteRoom
-func (c *Client) DeleteRoomRequest(input *DeleteRoomInput) DeleteRoomRequest {
+func (c *Client) DeleteRoomRequest(input *types.DeleteRoomInput) DeleteRoomRequest {
 	op := &aws.Operation{
 		Name:       opDeleteRoom,
 		HTTPMethod: "POST",
@@ -53,10 +32,10 @@ func (c *Client) DeleteRoomRequest(input *DeleteRoomInput) DeleteRoomRequest {
 	}
 
 	if input == nil {
-		input = &DeleteRoomInput{}
+		input = &types.DeleteRoomInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteRoomOutput{})
+	req := c.newRequest(op, input, &types.DeleteRoomOutput{})
 	return DeleteRoomRequest{Request: req, Input: input, Copy: c.DeleteRoomRequest}
 }
 
@@ -64,8 +43,8 @@ func (c *Client) DeleteRoomRequest(input *DeleteRoomInput) DeleteRoomRequest {
 // DeleteRoom API operation.
 type DeleteRoomRequest struct {
 	*aws.Request
-	Input *DeleteRoomInput
-	Copy  func(*DeleteRoomInput) DeleteRoomRequest
+	Input *types.DeleteRoomInput
+	Copy  func(*types.DeleteRoomInput) DeleteRoomRequest
 }
 
 // Send marshals and sends the DeleteRoom API request.
@@ -77,7 +56,7 @@ func (r DeleteRoomRequest) Send(ctx context.Context) (*DeleteRoomResponse, error
 	}
 
 	resp := &DeleteRoomResponse{
-		DeleteRoomOutput: r.Request.Data.(*DeleteRoomOutput),
+		DeleteRoomOutput: r.Request.Data.(*types.DeleteRoomOutput),
 		response:         &aws.Response{Request: r.Request},
 	}
 
@@ -87,7 +66,7 @@ func (r DeleteRoomRequest) Send(ctx context.Context) (*DeleteRoomResponse, error
 // DeleteRoomResponse is the response type for the
 // DeleteRoom API operation.
 type DeleteRoomResponse struct {
-	*DeleteRoomOutput
+	*types.DeleteRoomOutput
 
 	response *aws.Response
 }

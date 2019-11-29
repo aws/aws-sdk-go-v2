@@ -6,53 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ses/types"
 )
-
-// Represents a request to create an email template. For more information, see
-// the Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-personalized-email-api.html).
-type CreateTemplateInput struct {
-	_ struct{} `type:"structure"`
-
-	// The content of the email, composed of a subject line, an HTML part, and a
-	// text-only part.
-	//
-	// Template is a required field
-	Template *Template `type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s CreateTemplateInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateTemplateInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateTemplateInput"}
-
-	if s.Template == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Template"))
-	}
-	if s.Template != nil {
-		if err := s.Template.Validate(); err != nil {
-			invalidParams.AddNested("Template", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type CreateTemplateOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s CreateTemplateOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCreateTemplate = "CreateTemplate"
 
@@ -73,7 +28,7 @@ const opCreateTemplate = "CreateTemplate"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/CreateTemplate
-func (c *Client) CreateTemplateRequest(input *CreateTemplateInput) CreateTemplateRequest {
+func (c *Client) CreateTemplateRequest(input *types.CreateTemplateInput) CreateTemplateRequest {
 	op := &aws.Operation{
 		Name:       opCreateTemplate,
 		HTTPMethod: "POST",
@@ -81,10 +36,10 @@ func (c *Client) CreateTemplateRequest(input *CreateTemplateInput) CreateTemplat
 	}
 
 	if input == nil {
-		input = &CreateTemplateInput{}
+		input = &types.CreateTemplateInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateTemplateOutput{})
+	req := c.newRequest(op, input, &types.CreateTemplateOutput{})
 	return CreateTemplateRequest{Request: req, Input: input, Copy: c.CreateTemplateRequest}
 }
 
@@ -92,8 +47,8 @@ func (c *Client) CreateTemplateRequest(input *CreateTemplateInput) CreateTemplat
 // CreateTemplate API operation.
 type CreateTemplateRequest struct {
 	*aws.Request
-	Input *CreateTemplateInput
-	Copy  func(*CreateTemplateInput) CreateTemplateRequest
+	Input *types.CreateTemplateInput
+	Copy  func(*types.CreateTemplateInput) CreateTemplateRequest
 }
 
 // Send marshals and sends the CreateTemplate API request.
@@ -105,7 +60,7 @@ func (r CreateTemplateRequest) Send(ctx context.Context) (*CreateTemplateRespons
 	}
 
 	resp := &CreateTemplateResponse{
-		CreateTemplateOutput: r.Request.Data.(*CreateTemplateOutput),
+		CreateTemplateOutput: r.Request.Data.(*types.CreateTemplateOutput),
 		response:             &aws.Response{Request: r.Request},
 	}
 
@@ -115,7 +70,7 @@ func (r CreateTemplateRequest) Send(ctx context.Context) (*CreateTemplateRespons
 // CreateTemplateResponse is the response type for the
 // CreateTemplate API operation.
 type CreateTemplateResponse struct {
-	*CreateTemplateOutput
+	*types.CreateTemplateOutput
 
 	response *aws.Response
 }

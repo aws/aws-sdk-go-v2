@@ -6,59 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/mturk/types"
 )
-
-type RejectAssignmentInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the assignment. The assignment must correspond to a HIT created
-	// by the Requester.
-	//
-	// AssignmentId is a required field
-	AssignmentId *string `min:"1" type:"string" required:"true"`
-
-	// A message for the Worker, which the Worker can see in the Status section
-	// of the web site.
-	//
-	// RequesterFeedback is a required field
-	RequesterFeedback *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s RejectAssignmentInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *RejectAssignmentInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "RejectAssignmentInput"}
-
-	if s.AssignmentId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("AssignmentId"))
-	}
-	if s.AssignmentId != nil && len(*s.AssignmentId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("AssignmentId", 1))
-	}
-
-	if s.RequesterFeedback == nil {
-		invalidParams.Add(aws.NewErrParamRequired("RequesterFeedback"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type RejectAssignmentOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s RejectAssignmentOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opRejectAssignment = "RejectAssignment"
 
@@ -83,7 +32,7 @@ const opRejectAssignment = "RejectAssignment"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/RejectAssignment
-func (c *Client) RejectAssignmentRequest(input *RejectAssignmentInput) RejectAssignmentRequest {
+func (c *Client) RejectAssignmentRequest(input *types.RejectAssignmentInput) RejectAssignmentRequest {
 	op := &aws.Operation{
 		Name:       opRejectAssignment,
 		HTTPMethod: "POST",
@@ -91,10 +40,10 @@ func (c *Client) RejectAssignmentRequest(input *RejectAssignmentInput) RejectAss
 	}
 
 	if input == nil {
-		input = &RejectAssignmentInput{}
+		input = &types.RejectAssignmentInput{}
 	}
 
-	req := c.newRequest(op, input, &RejectAssignmentOutput{})
+	req := c.newRequest(op, input, &types.RejectAssignmentOutput{})
 	return RejectAssignmentRequest{Request: req, Input: input, Copy: c.RejectAssignmentRequest}
 }
 
@@ -102,8 +51,8 @@ func (c *Client) RejectAssignmentRequest(input *RejectAssignmentInput) RejectAss
 // RejectAssignment API operation.
 type RejectAssignmentRequest struct {
 	*aws.Request
-	Input *RejectAssignmentInput
-	Copy  func(*RejectAssignmentInput) RejectAssignmentRequest
+	Input *types.RejectAssignmentInput
+	Copy  func(*types.RejectAssignmentInput) RejectAssignmentRequest
 }
 
 // Send marshals and sends the RejectAssignment API request.
@@ -115,7 +64,7 @@ func (r RejectAssignmentRequest) Send(ctx context.Context) (*RejectAssignmentRes
 	}
 
 	resp := &RejectAssignmentResponse{
-		RejectAssignmentOutput: r.Request.Data.(*RejectAssignmentOutput),
+		RejectAssignmentOutput: r.Request.Data.(*types.RejectAssignmentOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -125,7 +74,7 @@ func (r RejectAssignmentRequest) Send(ctx context.Context) (*RejectAssignmentRes
 // RejectAssignmentResponse is the response type for the
 // RejectAssignment API operation.
 type RejectAssignmentResponse struct {
-	*RejectAssignmentOutput
+	*types.RejectAssignmentOutput
 
 	response *aws.Response
 }

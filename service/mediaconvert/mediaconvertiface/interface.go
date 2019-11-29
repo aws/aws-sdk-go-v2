@@ -10,6 +10,7 @@ package mediaconvertiface
 
 import (
 	"github.com/aws/aws-sdk-go-v2/service/mediaconvert"
+	"github.com/aws/aws-sdk-go-v2/service/mediaconvert/types"
 )
 
 // ClientAPI provides an interface to enable mocking the
@@ -43,7 +44,7 @@ import (
 //    type mockClientClient struct {
 //        mediaconvertiface.ClientPI
 //    }
-//    func (m *mockClientClient) AssociateCertificate(input *mediaconvert.AssociateCertificateInput) (*mediaconvert.AssociateCertificateOutput, error) {
+//    func (m *mockClientClient) AssociateCertificate(input *types.AssociateCertificateInput) (*types.AssociateCertificateOutput, error) {
 //        // mock response/functionality
 //    }
 //
@@ -61,55 +62,55 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type ClientAPI interface {
-	AssociateCertificateRequest(*mediaconvert.AssociateCertificateInput) mediaconvert.AssociateCertificateRequest
+	AssociateCertificateRequest(*types.AssociateCertificateInput) mediaconvert.AssociateCertificateRequest
 
-	CancelJobRequest(*mediaconvert.CancelJobInput) mediaconvert.CancelJobRequest
+	CancelJobRequest(*types.CancelJobInput) mediaconvert.CancelJobRequest
 
-	CreateJobRequest(*mediaconvert.CreateJobInput) mediaconvert.CreateJobRequest
+	CreateJobRequest(*types.CreateJobInput) mediaconvert.CreateJobRequest
 
-	CreateJobTemplateRequest(*mediaconvert.CreateJobTemplateInput) mediaconvert.CreateJobTemplateRequest
+	CreateJobTemplateRequest(*types.CreateJobTemplateInput) mediaconvert.CreateJobTemplateRequest
 
-	CreatePresetRequest(*mediaconvert.CreatePresetInput) mediaconvert.CreatePresetRequest
+	CreatePresetRequest(*types.CreatePresetInput) mediaconvert.CreatePresetRequest
 
-	CreateQueueRequest(*mediaconvert.CreateQueueInput) mediaconvert.CreateQueueRequest
+	CreateQueueRequest(*types.CreateQueueInput) mediaconvert.CreateQueueRequest
 
-	DeleteJobTemplateRequest(*mediaconvert.DeleteJobTemplateInput) mediaconvert.DeleteJobTemplateRequest
+	DeleteJobTemplateRequest(*types.DeleteJobTemplateInput) mediaconvert.DeleteJobTemplateRequest
 
-	DeletePresetRequest(*mediaconvert.DeletePresetInput) mediaconvert.DeletePresetRequest
+	DeletePresetRequest(*types.DeletePresetInput) mediaconvert.DeletePresetRequest
 
-	DeleteQueueRequest(*mediaconvert.DeleteQueueInput) mediaconvert.DeleteQueueRequest
+	DeleteQueueRequest(*types.DeleteQueueInput) mediaconvert.DeleteQueueRequest
 
-	DescribeEndpointsRequest(*mediaconvert.DescribeEndpointsInput) mediaconvert.DescribeEndpointsRequest
+	DescribeEndpointsRequest(*types.DescribeEndpointsInput) mediaconvert.DescribeEndpointsRequest
 
-	DisassociateCertificateRequest(*mediaconvert.DisassociateCertificateInput) mediaconvert.DisassociateCertificateRequest
+	DisassociateCertificateRequest(*types.DisassociateCertificateInput) mediaconvert.DisassociateCertificateRequest
 
-	GetJobRequest(*mediaconvert.GetJobInput) mediaconvert.GetJobRequest
+	GetJobRequest(*types.GetJobInput) mediaconvert.GetJobRequest
 
-	GetJobTemplateRequest(*mediaconvert.GetJobTemplateInput) mediaconvert.GetJobTemplateRequest
+	GetJobTemplateRequest(*types.GetJobTemplateInput) mediaconvert.GetJobTemplateRequest
 
-	GetPresetRequest(*mediaconvert.GetPresetInput) mediaconvert.GetPresetRequest
+	GetPresetRequest(*types.GetPresetInput) mediaconvert.GetPresetRequest
 
-	GetQueueRequest(*mediaconvert.GetQueueInput) mediaconvert.GetQueueRequest
+	GetQueueRequest(*types.GetQueueInput) mediaconvert.GetQueueRequest
 
-	ListJobTemplatesRequest(*mediaconvert.ListJobTemplatesInput) mediaconvert.ListJobTemplatesRequest
+	ListJobTemplatesRequest(*types.ListJobTemplatesInput) mediaconvert.ListJobTemplatesRequest
 
-	ListJobsRequest(*mediaconvert.ListJobsInput) mediaconvert.ListJobsRequest
+	ListJobsRequest(*types.ListJobsInput) mediaconvert.ListJobsRequest
 
-	ListPresetsRequest(*mediaconvert.ListPresetsInput) mediaconvert.ListPresetsRequest
+	ListPresetsRequest(*types.ListPresetsInput) mediaconvert.ListPresetsRequest
 
-	ListQueuesRequest(*mediaconvert.ListQueuesInput) mediaconvert.ListQueuesRequest
+	ListQueuesRequest(*types.ListQueuesInput) mediaconvert.ListQueuesRequest
 
-	ListTagsForResourceRequest(*mediaconvert.ListTagsForResourceInput) mediaconvert.ListTagsForResourceRequest
+	ListTagsForResourceRequest(*types.ListTagsForResourceInput) mediaconvert.ListTagsForResourceRequest
 
-	TagResourceRequest(*mediaconvert.TagResourceInput) mediaconvert.TagResourceRequest
+	TagResourceRequest(*types.TagResourceInput) mediaconvert.TagResourceRequest
 
-	UntagResourceRequest(*mediaconvert.UntagResourceInput) mediaconvert.UntagResourceRequest
+	UntagResourceRequest(*types.UntagResourceInput) mediaconvert.UntagResourceRequest
 
-	UpdateJobTemplateRequest(*mediaconvert.UpdateJobTemplateInput) mediaconvert.UpdateJobTemplateRequest
+	UpdateJobTemplateRequest(*types.UpdateJobTemplateInput) mediaconvert.UpdateJobTemplateRequest
 
-	UpdatePresetRequest(*mediaconvert.UpdatePresetInput) mediaconvert.UpdatePresetRequest
+	UpdatePresetRequest(*types.UpdatePresetInput) mediaconvert.UpdatePresetRequest
 
-	UpdateQueueRequest(*mediaconvert.UpdateQueueInput) mediaconvert.UpdateQueueRequest
+	UpdateQueueRequest(*types.UpdateQueueInput) mediaconvert.UpdateQueueRequest
 }
 
 var _ ClientAPI = (*mediaconvert.Client)(nil)

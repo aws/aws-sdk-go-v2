@@ -6,62 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/greengrass/types"
 )
-
-type DeleteConnectorDefinitionInput struct {
-	_ struct{} `type:"structure"`
-
-	// ConnectorDefinitionId is a required field
-	ConnectorDefinitionId *string `location:"uri" locationName:"ConnectorDefinitionId" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteConnectorDefinitionInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteConnectorDefinitionInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteConnectorDefinitionInput"}
-
-	if s.ConnectorDefinitionId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ConnectorDefinitionId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteConnectorDefinitionInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.ConnectorDefinitionId != nil {
-		v := *s.ConnectorDefinitionId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "ConnectorDefinitionId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type DeleteConnectorDefinitionOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteConnectorDefinitionOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteConnectorDefinitionOutput) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
 
 const opDeleteConnectorDefinition = "DeleteConnectorDefinition"
 
@@ -78,7 +24,7 @@ const opDeleteConnectorDefinition = "DeleteConnectorDefinition"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/DeleteConnectorDefinition
-func (c *Client) DeleteConnectorDefinitionRequest(input *DeleteConnectorDefinitionInput) DeleteConnectorDefinitionRequest {
+func (c *Client) DeleteConnectorDefinitionRequest(input *types.DeleteConnectorDefinitionInput) DeleteConnectorDefinitionRequest {
 	op := &aws.Operation{
 		Name:       opDeleteConnectorDefinition,
 		HTTPMethod: "DELETE",
@@ -86,10 +32,10 @@ func (c *Client) DeleteConnectorDefinitionRequest(input *DeleteConnectorDefiniti
 	}
 
 	if input == nil {
-		input = &DeleteConnectorDefinitionInput{}
+		input = &types.DeleteConnectorDefinitionInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteConnectorDefinitionOutput{})
+	req := c.newRequest(op, input, &types.DeleteConnectorDefinitionOutput{})
 	return DeleteConnectorDefinitionRequest{Request: req, Input: input, Copy: c.DeleteConnectorDefinitionRequest}
 }
 
@@ -97,8 +43,8 @@ func (c *Client) DeleteConnectorDefinitionRequest(input *DeleteConnectorDefiniti
 // DeleteConnectorDefinition API operation.
 type DeleteConnectorDefinitionRequest struct {
 	*aws.Request
-	Input *DeleteConnectorDefinitionInput
-	Copy  func(*DeleteConnectorDefinitionInput) DeleteConnectorDefinitionRequest
+	Input *types.DeleteConnectorDefinitionInput
+	Copy  func(*types.DeleteConnectorDefinitionInput) DeleteConnectorDefinitionRequest
 }
 
 // Send marshals and sends the DeleteConnectorDefinition API request.
@@ -110,7 +56,7 @@ func (r DeleteConnectorDefinitionRequest) Send(ctx context.Context) (*DeleteConn
 	}
 
 	resp := &DeleteConnectorDefinitionResponse{
-		DeleteConnectorDefinitionOutput: r.Request.Data.(*DeleteConnectorDefinitionOutput),
+		DeleteConnectorDefinitionOutput: r.Request.Data.(*types.DeleteConnectorDefinitionOutput),
 		response:                        &aws.Response{Request: r.Request},
 	}
 
@@ -120,7 +66,7 @@ func (r DeleteConnectorDefinitionRequest) Send(ctx context.Context) (*DeleteConn
 // DeleteConnectorDefinitionResponse is the response type for the
 // DeleteConnectorDefinition API operation.
 type DeleteConnectorDefinitionResponse struct {
-	*DeleteConnectorDefinitionOutput
+	*types.DeleteConnectorDefinitionOutput
 
 	response *aws.Response
 }

@@ -6,70 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/elasticache/types"
 )
-
-// Represents the input of a CreateCacheSecurityGroup operation.
-type CreateCacheSecurityGroupInput struct {
-	_ struct{} `type:"structure"`
-
-	// A name for the cache security group. This value is stored as a lowercase
-	// string.
-	//
-	// Constraints: Must contain no more than 255 alphanumeric characters. Cannot
-	// be the word "Default".
-	//
-	// Example: mysecuritygroup
-	//
-	// CacheSecurityGroupName is a required field
-	CacheSecurityGroupName *string `type:"string" required:"true"`
-
-	// A description for the cache security group.
-	//
-	// Description is a required field
-	Description *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s CreateCacheSecurityGroupInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateCacheSecurityGroupInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateCacheSecurityGroupInput"}
-
-	if s.CacheSecurityGroupName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("CacheSecurityGroupName"))
-	}
-
-	if s.Description == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Description"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type CreateCacheSecurityGroupOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Represents the output of one of the following operations:
-	//
-	//    * AuthorizeCacheSecurityGroupIngress
-	//
-	//    * CreateCacheSecurityGroup
-	//
-	//    * RevokeCacheSecurityGroupIngress
-	CacheSecurityGroup *CacheSecurityGroup `type:"structure"`
-}
-
-// String returns the string representation
-func (s CreateCacheSecurityGroupOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCreateCacheSecurityGroup = "CreateCacheSecurityGroup"
 
@@ -92,7 +30,7 @@ const opCreateCacheSecurityGroup = "CreateCacheSecurityGroup"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CreateCacheSecurityGroup
-func (c *Client) CreateCacheSecurityGroupRequest(input *CreateCacheSecurityGroupInput) CreateCacheSecurityGroupRequest {
+func (c *Client) CreateCacheSecurityGroupRequest(input *types.CreateCacheSecurityGroupInput) CreateCacheSecurityGroupRequest {
 	op := &aws.Operation{
 		Name:       opCreateCacheSecurityGroup,
 		HTTPMethod: "POST",
@@ -100,10 +38,10 @@ func (c *Client) CreateCacheSecurityGroupRequest(input *CreateCacheSecurityGroup
 	}
 
 	if input == nil {
-		input = &CreateCacheSecurityGroupInput{}
+		input = &types.CreateCacheSecurityGroupInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateCacheSecurityGroupOutput{})
+	req := c.newRequest(op, input, &types.CreateCacheSecurityGroupOutput{})
 	return CreateCacheSecurityGroupRequest{Request: req, Input: input, Copy: c.CreateCacheSecurityGroupRequest}
 }
 
@@ -111,8 +49,8 @@ func (c *Client) CreateCacheSecurityGroupRequest(input *CreateCacheSecurityGroup
 // CreateCacheSecurityGroup API operation.
 type CreateCacheSecurityGroupRequest struct {
 	*aws.Request
-	Input *CreateCacheSecurityGroupInput
-	Copy  func(*CreateCacheSecurityGroupInput) CreateCacheSecurityGroupRequest
+	Input *types.CreateCacheSecurityGroupInput
+	Copy  func(*types.CreateCacheSecurityGroupInput) CreateCacheSecurityGroupRequest
 }
 
 // Send marshals and sends the CreateCacheSecurityGroup API request.
@@ -124,7 +62,7 @@ func (r CreateCacheSecurityGroupRequest) Send(ctx context.Context) (*CreateCache
 	}
 
 	resp := &CreateCacheSecurityGroupResponse{
-		CreateCacheSecurityGroupOutput: r.Request.Data.(*CreateCacheSecurityGroupOutput),
+		CreateCacheSecurityGroupOutput: r.Request.Data.(*types.CreateCacheSecurityGroupOutput),
 		response:                       &aws.Response{Request: r.Request},
 	}
 
@@ -134,7 +72,7 @@ func (r CreateCacheSecurityGroupRequest) Send(ctx context.Context) (*CreateCache
 // CreateCacheSecurityGroupResponse is the response type for the
 // CreateCacheSecurityGroup API operation.
 type CreateCacheSecurityGroupResponse struct {
-	*CreateCacheSecurityGroupOutput
+	*types.CreateCacheSecurityGroupOutput
 
 	response *aws.Response
 }

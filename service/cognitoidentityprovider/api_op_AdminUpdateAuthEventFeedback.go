@@ -6,80 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/types"
 )
-
-type AdminUpdateAuthEventFeedbackInput struct {
-	_ struct{} `type:"structure"`
-
-	// The authentication event ID.
-	//
-	// EventId is a required field
-	EventId *string `min:"1" type:"string" required:"true"`
-
-	// The authentication event feedback value.
-	//
-	// FeedbackValue is a required field
-	FeedbackValue FeedbackValueType `type:"string" required:"true" enum:"true"`
-
-	// The user pool ID.
-	//
-	// UserPoolId is a required field
-	UserPoolId *string `min:"1" type:"string" required:"true"`
-
-	// The user pool username.
-	//
-	// Username is a required field
-	Username *string `min:"1" type:"string" required:"true" sensitive:"true"`
-}
-
-// String returns the string representation
-func (s AdminUpdateAuthEventFeedbackInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *AdminUpdateAuthEventFeedbackInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "AdminUpdateAuthEventFeedbackInput"}
-
-	if s.EventId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("EventId"))
-	}
-	if s.EventId != nil && len(*s.EventId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("EventId", 1))
-	}
-	if len(s.FeedbackValue) == 0 {
-		invalidParams.Add(aws.NewErrParamRequired("FeedbackValue"))
-	}
-
-	if s.UserPoolId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("UserPoolId"))
-	}
-	if s.UserPoolId != nil && len(*s.UserPoolId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("UserPoolId", 1))
-	}
-
-	if s.Username == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Username"))
-	}
-	if s.Username != nil && len(*s.Username) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Username", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type AdminUpdateAuthEventFeedbackOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s AdminUpdateAuthEventFeedbackOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opAdminUpdateAuthEventFeedback = "AdminUpdateAuthEventFeedback"
 
@@ -98,7 +26,7 @@ const opAdminUpdateAuthEventFeedback = "AdminUpdateAuthEventFeedback"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AdminUpdateAuthEventFeedback
-func (c *Client) AdminUpdateAuthEventFeedbackRequest(input *AdminUpdateAuthEventFeedbackInput) AdminUpdateAuthEventFeedbackRequest {
+func (c *Client) AdminUpdateAuthEventFeedbackRequest(input *types.AdminUpdateAuthEventFeedbackInput) AdminUpdateAuthEventFeedbackRequest {
 	op := &aws.Operation{
 		Name:       opAdminUpdateAuthEventFeedback,
 		HTTPMethod: "POST",
@@ -106,10 +34,10 @@ func (c *Client) AdminUpdateAuthEventFeedbackRequest(input *AdminUpdateAuthEvent
 	}
 
 	if input == nil {
-		input = &AdminUpdateAuthEventFeedbackInput{}
+		input = &types.AdminUpdateAuthEventFeedbackInput{}
 	}
 
-	req := c.newRequest(op, input, &AdminUpdateAuthEventFeedbackOutput{})
+	req := c.newRequest(op, input, &types.AdminUpdateAuthEventFeedbackOutput{})
 	return AdminUpdateAuthEventFeedbackRequest{Request: req, Input: input, Copy: c.AdminUpdateAuthEventFeedbackRequest}
 }
 
@@ -117,8 +45,8 @@ func (c *Client) AdminUpdateAuthEventFeedbackRequest(input *AdminUpdateAuthEvent
 // AdminUpdateAuthEventFeedback API operation.
 type AdminUpdateAuthEventFeedbackRequest struct {
 	*aws.Request
-	Input *AdminUpdateAuthEventFeedbackInput
-	Copy  func(*AdminUpdateAuthEventFeedbackInput) AdminUpdateAuthEventFeedbackRequest
+	Input *types.AdminUpdateAuthEventFeedbackInput
+	Copy  func(*types.AdminUpdateAuthEventFeedbackInput) AdminUpdateAuthEventFeedbackRequest
 }
 
 // Send marshals and sends the AdminUpdateAuthEventFeedback API request.
@@ -130,7 +58,7 @@ func (r AdminUpdateAuthEventFeedbackRequest) Send(ctx context.Context) (*AdminUp
 	}
 
 	resp := &AdminUpdateAuthEventFeedbackResponse{
-		AdminUpdateAuthEventFeedbackOutput: r.Request.Data.(*AdminUpdateAuthEventFeedbackOutput),
+		AdminUpdateAuthEventFeedbackOutput: r.Request.Data.(*types.AdminUpdateAuthEventFeedbackOutput),
 		response:                           &aws.Response{Request: r.Request},
 	}
 
@@ -140,7 +68,7 @@ func (r AdminUpdateAuthEventFeedbackRequest) Send(ctx context.Context) (*AdminUp
 // AdminUpdateAuthEventFeedbackResponse is the response type for the
 // AdminUpdateAuthEventFeedback API operation.
 type AdminUpdateAuthEventFeedbackResponse struct {
-	*AdminUpdateAuthEventFeedbackOutput
+	*types.AdminUpdateAuthEventFeedbackOutput
 
 	response *aws.Response
 }

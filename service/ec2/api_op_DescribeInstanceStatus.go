@@ -6,104 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-type DescribeInstanceStatusInput struct {
-	_ struct{} `type:"structure"`
-
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have
-	// the required permissions, the error response is DryRunOperation. Otherwise,
-	// it is UnauthorizedOperation.
-	DryRun *bool `locationName:"dryRun" type:"boolean"`
-
-	// The filters.
-	//
-	//    * availability-zone - The Availability Zone of the instance.
-	//
-	//    * event.code - The code for the scheduled event (instance-reboot | system-reboot
-	//    | system-maintenance | instance-retirement | instance-stop).
-	//
-	//    * event.description - A description of the event.
-	//
-	//    * event.instance-event-id - The ID of the event whose date and time you
-	//    are modifying.
-	//
-	//    * event.not-after - The latest end time for the scheduled event (for example,
-	//    2014-09-15T17:15:20.000Z).
-	//
-	//    * event.not-before - The earliest start time for the scheduled event (for
-	//    example, 2014-09-15T17:15:20.000Z).
-	//
-	//    * event.not-before-deadline - The deadline for starting the event (for
-	//    example, 2014-09-15T17:15:20.000Z).
-	//
-	//    * instance-state-code - The code for the instance state, as a 16-bit unsigned
-	//    integer. The high byte is used for internal purposes and should be ignored.
-	//    The low byte is set based on the state represented. The valid values are
-	//    0 (pending), 16 (running), 32 (shutting-down), 48 (terminated), 64 (stopping),
-	//    and 80 (stopped).
-	//
-	//    * instance-state-name - The state of the instance (pending | running |
-	//    shutting-down | terminated | stopping | stopped).
-	//
-	//    * instance-status.reachability - Filters on instance status where the
-	//    name is reachability (passed | failed | initializing | insufficient-data).
-	//
-	//    * instance-status.status - The status of the instance (ok | impaired |
-	//    initializing | insufficient-data | not-applicable).
-	//
-	//    * system-status.reachability - Filters on system status where the name
-	//    is reachability (passed | failed | initializing | insufficient-data).
-	//
-	//    * system-status.status - The system status of the instance (ok | impaired
-	//    | initializing | insufficient-data | not-applicable).
-	Filters []Filter `locationName:"Filter" locationNameList:"Filter" type:"list"`
-
-	// When true, includes the health status for all instances. When false, includes
-	// the health status for running instances only.
-	//
-	// Default: false
-	IncludeAllInstances *bool `locationName:"includeAllInstances" type:"boolean"`
-
-	// The instance IDs.
-	//
-	// Default: Describes all your instances.
-	//
-	// Constraints: Maximum 100 explicitly specified instance IDs.
-	InstanceIds []string `locationName:"InstanceId" locationNameList:"InstanceId" type:"list"`
-
-	// The maximum number of results to return in a single call. To retrieve the
-	// remaining results, make another call with the returned NextToken value. This
-	// value can be between 5 and 1000. You cannot specify this parameter and the
-	// instance IDs parameter in the same call.
-	MaxResults *int64 `type:"integer"`
-
-	// The token to retrieve the next page of results.
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeInstanceStatusInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type DescribeInstanceStatusOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Information about the status of the instances.
-	InstanceStatuses []InstanceStatus `locationName:"instanceStatusSet" locationNameList:"item" type:"list"`
-
-	// The token to use to retrieve the next page of results. This value is null
-	// when there are no more results to return.
-	NextToken *string `locationName:"nextToken" type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeInstanceStatusOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeInstanceStatus = "DescribeInstanceStatus"
 
@@ -141,7 +45,7 @@ const opDescribeInstanceStatus = "DescribeInstanceStatus"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeInstanceStatus
-func (c *Client) DescribeInstanceStatusRequest(input *DescribeInstanceStatusInput) DescribeInstanceStatusRequest {
+func (c *Client) DescribeInstanceStatusRequest(input *types.DescribeInstanceStatusInput) DescribeInstanceStatusRequest {
 	op := &aws.Operation{
 		Name:       opDescribeInstanceStatus,
 		HTTPMethod: "POST",
@@ -155,10 +59,10 @@ func (c *Client) DescribeInstanceStatusRequest(input *DescribeInstanceStatusInpu
 	}
 
 	if input == nil {
-		input = &DescribeInstanceStatusInput{}
+		input = &types.DescribeInstanceStatusInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeInstanceStatusOutput{})
+	req := c.newRequest(op, input, &types.DescribeInstanceStatusOutput{})
 	return DescribeInstanceStatusRequest{Request: req, Input: input, Copy: c.DescribeInstanceStatusRequest}
 }
 
@@ -166,8 +70,8 @@ func (c *Client) DescribeInstanceStatusRequest(input *DescribeInstanceStatusInpu
 // DescribeInstanceStatus API operation.
 type DescribeInstanceStatusRequest struct {
 	*aws.Request
-	Input *DescribeInstanceStatusInput
-	Copy  func(*DescribeInstanceStatusInput) DescribeInstanceStatusRequest
+	Input *types.DescribeInstanceStatusInput
+	Copy  func(*types.DescribeInstanceStatusInput) DescribeInstanceStatusRequest
 }
 
 // Send marshals and sends the DescribeInstanceStatus API request.
@@ -179,7 +83,7 @@ func (r DescribeInstanceStatusRequest) Send(ctx context.Context) (*DescribeInsta
 	}
 
 	resp := &DescribeInstanceStatusResponse{
-		DescribeInstanceStatusOutput: r.Request.Data.(*DescribeInstanceStatusOutput),
+		DescribeInstanceStatusOutput: r.Request.Data.(*types.DescribeInstanceStatusOutput),
 		response:                     &aws.Response{Request: r.Request},
 	}
 
@@ -209,7 +113,7 @@ func NewDescribeInstanceStatusPaginator(req DescribeInstanceStatusRequest) Descr
 	return DescribeInstanceStatusPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *DescribeInstanceStatusInput
+				var inCpy *types.DescribeInstanceStatusInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -229,14 +133,14 @@ type DescribeInstanceStatusPaginator struct {
 	aws.Pager
 }
 
-func (p *DescribeInstanceStatusPaginator) CurrentPage() *DescribeInstanceStatusOutput {
-	return p.Pager.CurrentPage().(*DescribeInstanceStatusOutput)
+func (p *DescribeInstanceStatusPaginator) CurrentPage() *types.DescribeInstanceStatusOutput {
+	return p.Pager.CurrentPage().(*types.DescribeInstanceStatusOutput)
 }
 
 // DescribeInstanceStatusResponse is the response type for the
 // DescribeInstanceStatus API operation.
 type DescribeInstanceStatusResponse struct {
-	*DescribeInstanceStatusOutput
+	*types.DescribeInstanceStatusOutput
 
 	response *aws.Response
 }

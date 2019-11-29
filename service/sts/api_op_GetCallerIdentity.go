@@ -6,41 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/sts/types"
 )
-
-type GetCallerIdentityInput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s GetCallerIdentityInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Contains the response to a successful GetCallerIdentity request, including
-// information about the entity making the request.
-type GetCallerIdentityOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The AWS account ID number of the account that owns or contains the calling
-	// entity.
-	Account *string `type:"string"`
-
-	// The AWS ARN associated with the calling entity.
-	Arn *string `min:"20" type:"string"`
-
-	// The unique identifier of the calling entity. The exact value depends on the
-	// type of entity that is making the call. The values returned are those listed
-	// in the aws:userid column in the Principal table (https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_variables.html#principaltable)
-	// found on the Policy Variables reference page in the IAM User Guide.
-	UserId *string `type:"string"`
-}
-
-// String returns the string representation
-func (s GetCallerIdentityOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetCallerIdentity = "GetCallerIdentity"
 
@@ -65,7 +32,7 @@ const opGetCallerIdentity = "GetCallerIdentity"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sts-2011-06-15/GetCallerIdentity
-func (c *Client) GetCallerIdentityRequest(input *GetCallerIdentityInput) GetCallerIdentityRequest {
+func (c *Client) GetCallerIdentityRequest(input *types.GetCallerIdentityInput) GetCallerIdentityRequest {
 	op := &aws.Operation{
 		Name:       opGetCallerIdentity,
 		HTTPMethod: "POST",
@@ -73,10 +40,10 @@ func (c *Client) GetCallerIdentityRequest(input *GetCallerIdentityInput) GetCall
 	}
 
 	if input == nil {
-		input = &GetCallerIdentityInput{}
+		input = &types.GetCallerIdentityInput{}
 	}
 
-	req := c.newRequest(op, input, &GetCallerIdentityOutput{})
+	req := c.newRequest(op, input, &types.GetCallerIdentityOutput{})
 	return GetCallerIdentityRequest{Request: req, Input: input, Copy: c.GetCallerIdentityRequest}
 }
 
@@ -84,8 +51,8 @@ func (c *Client) GetCallerIdentityRequest(input *GetCallerIdentityInput) GetCall
 // GetCallerIdentity API operation.
 type GetCallerIdentityRequest struct {
 	*aws.Request
-	Input *GetCallerIdentityInput
-	Copy  func(*GetCallerIdentityInput) GetCallerIdentityRequest
+	Input *types.GetCallerIdentityInput
+	Copy  func(*types.GetCallerIdentityInput) GetCallerIdentityRequest
 }
 
 // Send marshals and sends the GetCallerIdentity API request.
@@ -97,7 +64,7 @@ func (r GetCallerIdentityRequest) Send(ctx context.Context) (*GetCallerIdentityR
 	}
 
 	resp := &GetCallerIdentityResponse{
-		GetCallerIdentityOutput: r.Request.Data.(*GetCallerIdentityOutput),
+		GetCallerIdentityOutput: r.Request.Data.(*types.GetCallerIdentityOutput),
 		response:                &aws.Response{Request: r.Request},
 	}
 
@@ -107,7 +74,7 @@ func (r GetCallerIdentityRequest) Send(ctx context.Context) (*GetCallerIdentityR
 // GetCallerIdentityResponse is the response type for the
 // GetCallerIdentity API operation.
 type GetCallerIdentityResponse struct {
-	*GetCallerIdentityOutput
+	*types.GetCallerIdentityOutput
 
 	response *aws.Response
 }

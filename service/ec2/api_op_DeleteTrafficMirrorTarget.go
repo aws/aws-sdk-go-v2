@@ -6,54 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-type DeleteTrafficMirrorTargetInput struct {
-	_ struct{} `type:"structure"`
-
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have
-	// the required permissions, the error response is DryRunOperation. Otherwise,
-	// it is UnauthorizedOperation.
-	DryRun *bool `type:"boolean"`
-
-	// The ID of the Traffic Mirror target.
-	//
-	// TrafficMirrorTargetId is a required field
-	TrafficMirrorTargetId *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteTrafficMirrorTargetInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteTrafficMirrorTargetInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteTrafficMirrorTargetInput"}
-
-	if s.TrafficMirrorTargetId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("TrafficMirrorTargetId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteTrafficMirrorTargetOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the deleted Traffic Mirror target.
-	TrafficMirrorTargetId *string `locationName:"trafficMirrorTargetId" type:"string"`
-}
-
-// String returns the string representation
-func (s DeleteTrafficMirrorTargetOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteTrafficMirrorTarget = "DeleteTrafficMirrorTarget"
 
@@ -73,7 +27,7 @@ const opDeleteTrafficMirrorTarget = "DeleteTrafficMirrorTarget"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteTrafficMirrorTarget
-func (c *Client) DeleteTrafficMirrorTargetRequest(input *DeleteTrafficMirrorTargetInput) DeleteTrafficMirrorTargetRequest {
+func (c *Client) DeleteTrafficMirrorTargetRequest(input *types.DeleteTrafficMirrorTargetInput) DeleteTrafficMirrorTargetRequest {
 	op := &aws.Operation{
 		Name:       opDeleteTrafficMirrorTarget,
 		HTTPMethod: "POST",
@@ -81,10 +35,10 @@ func (c *Client) DeleteTrafficMirrorTargetRequest(input *DeleteTrafficMirrorTarg
 	}
 
 	if input == nil {
-		input = &DeleteTrafficMirrorTargetInput{}
+		input = &types.DeleteTrafficMirrorTargetInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteTrafficMirrorTargetOutput{})
+	req := c.newRequest(op, input, &types.DeleteTrafficMirrorTargetOutput{})
 	return DeleteTrafficMirrorTargetRequest{Request: req, Input: input, Copy: c.DeleteTrafficMirrorTargetRequest}
 }
 
@@ -92,8 +46,8 @@ func (c *Client) DeleteTrafficMirrorTargetRequest(input *DeleteTrafficMirrorTarg
 // DeleteTrafficMirrorTarget API operation.
 type DeleteTrafficMirrorTargetRequest struct {
 	*aws.Request
-	Input *DeleteTrafficMirrorTargetInput
-	Copy  func(*DeleteTrafficMirrorTargetInput) DeleteTrafficMirrorTargetRequest
+	Input *types.DeleteTrafficMirrorTargetInput
+	Copy  func(*types.DeleteTrafficMirrorTargetInput) DeleteTrafficMirrorTargetRequest
 }
 
 // Send marshals and sends the DeleteTrafficMirrorTarget API request.
@@ -105,7 +59,7 @@ func (r DeleteTrafficMirrorTargetRequest) Send(ctx context.Context) (*DeleteTraf
 	}
 
 	resp := &DeleteTrafficMirrorTargetResponse{
-		DeleteTrafficMirrorTargetOutput: r.Request.Data.(*DeleteTrafficMirrorTargetOutput),
+		DeleteTrafficMirrorTargetOutput: r.Request.Data.(*types.DeleteTrafficMirrorTargetOutput),
 		response:                        &aws.Response{Request: r.Request},
 	}
 
@@ -115,7 +69,7 @@ func (r DeleteTrafficMirrorTargetRequest) Send(ctx context.Context) (*DeleteTraf
 // DeleteTrafficMirrorTargetResponse is the response type for the
 // DeleteTrafficMirrorTarget API operation.
 type DeleteTrafficMirrorTargetResponse struct {
-	*DeleteTrafficMirrorTargetOutput
+	*types.DeleteTrafficMirrorTargetOutput
 
 	response *aws.Response
 }

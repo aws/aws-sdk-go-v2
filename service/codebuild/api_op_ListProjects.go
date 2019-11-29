@@ -6,79 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/codebuild/types"
 )
-
-type ListProjectsInput struct {
-	_ struct{} `type:"structure"`
-
-	// During a previous call, if there are more than 100 items in the list, only
-	// the first 100 items are returned, along with a unique string called a next
-	// token. To get the next batch of items in the list, call this operation again,
-	// adding the next token to the call. To get all of the items in the list, keep
-	// calling this operation with each subsequent next token that is returned,
-	// until no more next tokens are returned.
-	NextToken *string `locationName:"nextToken" min:"1" type:"string"`
-
-	// The criterion to be used to list build project names. Valid values include:
-	//
-	//    * CREATED_TIME: List based on when each build project was created.
-	//
-	//    * LAST_MODIFIED_TIME: List based on when information about each build
-	//    project was last changed.
-	//
-	//    * NAME: List based on each build project's name.
-	//
-	// Use sortOrder to specify in what order to list the build project names based
-	// on the preceding criteria.
-	SortBy ProjectSortByType `locationName:"sortBy" type:"string" enum:"true"`
-
-	// The order in which to list build projects. Valid values include:
-	//
-	//    * ASCENDING: List in ascending order.
-	//
-	//    * DESCENDING: List in descending order.
-	//
-	// Use sortBy to specify the criterion to be used to list build project names.
-	SortOrder SortOrderType `locationName:"sortOrder" type:"string" enum:"true"`
-}
-
-// String returns the string representation
-func (s ListProjectsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListProjectsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListProjectsInput"}
-	if s.NextToken != nil && len(*s.NextToken) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ListProjectsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// If there are more than 100 items in the list, only the first 100 items are
-	// returned, along with a unique string called a next token. To get the next
-	// batch of items in the list, call this operation again, adding the next token
-	// to the call.
-	NextToken *string `locationName:"nextToken" type:"string"`
-
-	// The list of build project names, with each build project name representing
-	// a single build project.
-	Projects []string `locationName:"projects" min:"1" type:"list"`
-}
-
-// String returns the string representation
-func (s ListProjectsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListProjects = "ListProjects"
 
@@ -96,7 +25,7 @@ const opListProjects = "ListProjects"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/ListProjects
-func (c *Client) ListProjectsRequest(input *ListProjectsInput) ListProjectsRequest {
+func (c *Client) ListProjectsRequest(input *types.ListProjectsInput) ListProjectsRequest {
 	op := &aws.Operation{
 		Name:       opListProjects,
 		HTTPMethod: "POST",
@@ -104,10 +33,10 @@ func (c *Client) ListProjectsRequest(input *ListProjectsInput) ListProjectsReque
 	}
 
 	if input == nil {
-		input = &ListProjectsInput{}
+		input = &types.ListProjectsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListProjectsOutput{})
+	req := c.newRequest(op, input, &types.ListProjectsOutput{})
 	return ListProjectsRequest{Request: req, Input: input, Copy: c.ListProjectsRequest}
 }
 
@@ -115,8 +44,8 @@ func (c *Client) ListProjectsRequest(input *ListProjectsInput) ListProjectsReque
 // ListProjects API operation.
 type ListProjectsRequest struct {
 	*aws.Request
-	Input *ListProjectsInput
-	Copy  func(*ListProjectsInput) ListProjectsRequest
+	Input *types.ListProjectsInput
+	Copy  func(*types.ListProjectsInput) ListProjectsRequest
 }
 
 // Send marshals and sends the ListProjects API request.
@@ -128,7 +57,7 @@ func (r ListProjectsRequest) Send(ctx context.Context) (*ListProjectsResponse, e
 	}
 
 	resp := &ListProjectsResponse{
-		ListProjectsOutput: r.Request.Data.(*ListProjectsOutput),
+		ListProjectsOutput: r.Request.Data.(*types.ListProjectsOutput),
 		response:           &aws.Response{Request: r.Request},
 	}
 
@@ -138,7 +67,7 @@ func (r ListProjectsRequest) Send(ctx context.Context) (*ListProjectsResponse, e
 // ListProjectsResponse is the response type for the
 // ListProjects API operation.
 type ListProjectsResponse struct {
-	*ListProjectsOutput
+	*types.ListProjectsOutput
 
 	response *aws.Response
 }

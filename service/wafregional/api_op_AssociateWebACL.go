@@ -6,67 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/wafregional/types"
 )
-
-type AssociateWebACLInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ARN (Amazon Resource Name) of the resource to be protected, either an
-	// application load balancer or Amazon API Gateway stage.
-	//
-	// The ARN should be in one of the following formats:
-	//
-	//    * For an Application Load Balancer: arn:aws:elasticloadbalancing:region:account-id:loadbalancer/app/load-balancer-name/load-balancer-id
-	//
-	//    * For an Amazon API Gateway stage: arn:aws:apigateway:region::/restapis/api-id/stages/stage-name
-	//
-	// ResourceArn is a required field
-	ResourceArn *string `min:"1" type:"string" required:"true"`
-
-	// A unique identifier (ID) for the web ACL.
-	//
-	// WebACLId is a required field
-	WebACLId *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s AssociateWebACLInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *AssociateWebACLInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "AssociateWebACLInput"}
-
-	if s.ResourceArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ResourceArn"))
-	}
-	if s.ResourceArn != nil && len(*s.ResourceArn) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ResourceArn", 1))
-	}
-
-	if s.WebACLId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("WebACLId"))
-	}
-	if s.WebACLId != nil && len(*s.WebACLId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("WebACLId", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type AssociateWebACLOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s AssociateWebACLOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opAssociateWebACL = "AssociateWebACL"
 
@@ -84,7 +25,7 @@ const opAssociateWebACL = "AssociateWebACL"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/AssociateWebACL
-func (c *Client) AssociateWebACLRequest(input *AssociateWebACLInput) AssociateWebACLRequest {
+func (c *Client) AssociateWebACLRequest(input *types.AssociateWebACLInput) AssociateWebACLRequest {
 	op := &aws.Operation{
 		Name:       opAssociateWebACL,
 		HTTPMethod: "POST",
@@ -92,10 +33,10 @@ func (c *Client) AssociateWebACLRequest(input *AssociateWebACLInput) AssociateWe
 	}
 
 	if input == nil {
-		input = &AssociateWebACLInput{}
+		input = &types.AssociateWebACLInput{}
 	}
 
-	req := c.newRequest(op, input, &AssociateWebACLOutput{})
+	req := c.newRequest(op, input, &types.AssociateWebACLOutput{})
 	return AssociateWebACLRequest{Request: req, Input: input, Copy: c.AssociateWebACLRequest}
 }
 
@@ -103,8 +44,8 @@ func (c *Client) AssociateWebACLRequest(input *AssociateWebACLInput) AssociateWe
 // AssociateWebACL API operation.
 type AssociateWebACLRequest struct {
 	*aws.Request
-	Input *AssociateWebACLInput
-	Copy  func(*AssociateWebACLInput) AssociateWebACLRequest
+	Input *types.AssociateWebACLInput
+	Copy  func(*types.AssociateWebACLInput) AssociateWebACLRequest
 }
 
 // Send marshals and sends the AssociateWebACL API request.
@@ -116,7 +57,7 @@ func (r AssociateWebACLRequest) Send(ctx context.Context) (*AssociateWebACLRespo
 	}
 
 	resp := &AssociateWebACLResponse{
-		AssociateWebACLOutput: r.Request.Data.(*AssociateWebACLOutput),
+		AssociateWebACLOutput: r.Request.Data.(*types.AssociateWebACLOutput),
 		response:              &aws.Response{Request: r.Request},
 	}
 
@@ -126,7 +67,7 @@ func (r AssociateWebACLRequest) Send(ctx context.Context) (*AssociateWebACLRespo
 // AssociateWebACLResponse is the response type for the
 // AssociateWebACL API operation.
 type AssociateWebACLResponse struct {
-	*AssociateWebACLOutput
+	*types.AssociateWebACLOutput
 
 	response *aws.Response
 }

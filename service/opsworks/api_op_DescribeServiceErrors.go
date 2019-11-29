@@ -6,43 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/opsworks/types"
 )
-
-type DescribeServiceErrorsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The instance ID. If you use this parameter, DescribeServiceErrors returns
-	// descriptions of the errors associated with the specified instance.
-	InstanceId *string `type:"string"`
-
-	// An array of service error IDs. If you use this parameter, DescribeServiceErrors
-	// returns descriptions of the specified errors. Otherwise, it returns a description
-	// of every error.
-	ServiceErrorIds []string `type:"list"`
-
-	// The stack ID. If you use this parameter, DescribeServiceErrors returns descriptions
-	// of the errors associated with the specified stack.
-	StackId *string `type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeServiceErrorsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Contains the response to a DescribeServiceErrors request.
-type DescribeServiceErrorsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// An array of ServiceError objects that describe the specified service errors.
-	ServiceErrors []ServiceError `type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeServiceErrorsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeServiceErrors = "DescribeServiceErrors"
 
@@ -66,7 +31,7 @@ const opDescribeServiceErrors = "DescribeServiceErrors"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DescribeServiceErrors
-func (c *Client) DescribeServiceErrorsRequest(input *DescribeServiceErrorsInput) DescribeServiceErrorsRequest {
+func (c *Client) DescribeServiceErrorsRequest(input *types.DescribeServiceErrorsInput) DescribeServiceErrorsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeServiceErrors,
 		HTTPMethod: "POST",
@@ -74,10 +39,10 @@ func (c *Client) DescribeServiceErrorsRequest(input *DescribeServiceErrorsInput)
 	}
 
 	if input == nil {
-		input = &DescribeServiceErrorsInput{}
+		input = &types.DescribeServiceErrorsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeServiceErrorsOutput{})
+	req := c.newRequest(op, input, &types.DescribeServiceErrorsOutput{})
 	return DescribeServiceErrorsRequest{Request: req, Input: input, Copy: c.DescribeServiceErrorsRequest}
 }
 
@@ -85,8 +50,8 @@ func (c *Client) DescribeServiceErrorsRequest(input *DescribeServiceErrorsInput)
 // DescribeServiceErrors API operation.
 type DescribeServiceErrorsRequest struct {
 	*aws.Request
-	Input *DescribeServiceErrorsInput
-	Copy  func(*DescribeServiceErrorsInput) DescribeServiceErrorsRequest
+	Input *types.DescribeServiceErrorsInput
+	Copy  func(*types.DescribeServiceErrorsInput) DescribeServiceErrorsRequest
 }
 
 // Send marshals and sends the DescribeServiceErrors API request.
@@ -98,7 +63,7 @@ func (r DescribeServiceErrorsRequest) Send(ctx context.Context) (*DescribeServic
 	}
 
 	resp := &DescribeServiceErrorsResponse{
-		DescribeServiceErrorsOutput: r.Request.Data.(*DescribeServiceErrorsOutput),
+		DescribeServiceErrorsOutput: r.Request.Data.(*types.DescribeServiceErrorsOutput),
 		response:                    &aws.Response{Request: r.Request},
 	}
 
@@ -108,7 +73,7 @@ func (r DescribeServiceErrorsRequest) Send(ctx context.Context) (*DescribeServic
 // DescribeServiceErrorsResponse is the response type for the
 // DescribeServiceErrors API operation.
 type DescribeServiceErrorsResponse struct {
-	*DescribeServiceErrorsOutput
+	*types.DescribeServiceErrorsOutput
 
 	response *aws.Response
 }

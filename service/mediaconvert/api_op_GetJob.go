@@ -6,76 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/mediaconvert/types"
 )
-
-// Query a job by sending a request with the job ID.
-type GetJobInput struct {
-	_ struct{} `type:"structure"`
-
-	// the job ID of the job.
-	//
-	// Id is a required field
-	Id *string `location:"uri" locationName:"id" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetJobInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetJobInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetJobInput"}
-
-	if s.Id == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Id"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetJobInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.Id != nil {
-		v := *s.Id
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "id", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-// Successful get job requests will return an OK message and the job JSON.
-type GetJobOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Each job converts an input file into an output file or files. For more information,
-	// see the User Guide at http://docs.aws.amazon.com/mediaconvert/latest/ug/what-is.html
-	Job *Job `locationName:"job" type:"structure"`
-}
-
-// String returns the string representation
-func (s GetJobOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetJobOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.Job != nil {
-		v := s.Job
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "job", v, metadata)
-	}
-	return nil
-}
 
 const opGetJob = "GetJob"
 
@@ -92,7 +24,7 @@ const opGetJob = "GetJob"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/GetJob
-func (c *Client) GetJobRequest(input *GetJobInput) GetJobRequest {
+func (c *Client) GetJobRequest(input *types.GetJobInput) GetJobRequest {
 	op := &aws.Operation{
 		Name:       opGetJob,
 		HTTPMethod: "GET",
@@ -100,10 +32,10 @@ func (c *Client) GetJobRequest(input *GetJobInput) GetJobRequest {
 	}
 
 	if input == nil {
-		input = &GetJobInput{}
+		input = &types.GetJobInput{}
 	}
 
-	req := c.newRequest(op, input, &GetJobOutput{})
+	req := c.newRequest(op, input, &types.GetJobOutput{})
 	return GetJobRequest{Request: req, Input: input, Copy: c.GetJobRequest}
 }
 
@@ -111,8 +43,8 @@ func (c *Client) GetJobRequest(input *GetJobInput) GetJobRequest {
 // GetJob API operation.
 type GetJobRequest struct {
 	*aws.Request
-	Input *GetJobInput
-	Copy  func(*GetJobInput) GetJobRequest
+	Input *types.GetJobInput
+	Copy  func(*types.GetJobInput) GetJobRequest
 }
 
 // Send marshals and sends the GetJob API request.
@@ -124,7 +56,7 @@ func (r GetJobRequest) Send(ctx context.Context) (*GetJobResponse, error) {
 	}
 
 	resp := &GetJobResponse{
-		GetJobOutput: r.Request.Data.(*GetJobOutput),
+		GetJobOutput: r.Request.Data.(*types.GetJobOutput),
 		response:     &aws.Response{Request: r.Request},
 	}
 
@@ -134,7 +66,7 @@ func (r GetJobRequest) Send(ctx context.Context) (*GetJobResponse, error) {
 // GetJobResponse is the response type for the
 // GetJob API operation.
 type GetJobResponse struct {
-	*GetJobOutput
+	*types.GetJobOutput
 
 	response *aws.Response
 }

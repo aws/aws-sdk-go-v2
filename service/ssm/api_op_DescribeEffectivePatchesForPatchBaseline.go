@@ -6,65 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ssm/types"
 )
-
-type DescribeEffectivePatchesForPatchBaselineInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the patch baseline to retrieve the effective patches for.
-	//
-	// BaselineId is a required field
-	BaselineId *string `min:"20" type:"string" required:"true"`
-
-	// The maximum number of patches to return (per page).
-	MaxResults *int64 `min:"1" type:"integer"`
-
-	// The token for the next set of items to return. (You received this token from
-	// a previous call.)
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeEffectivePatchesForPatchBaselineInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeEffectivePatchesForPatchBaselineInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeEffectivePatchesForPatchBaselineInput"}
-
-	if s.BaselineId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("BaselineId"))
-	}
-	if s.BaselineId != nil && len(*s.BaselineId) < 20 {
-		invalidParams.Add(aws.NewErrParamMinLen("BaselineId", 20))
-	}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribeEffectivePatchesForPatchBaselineOutput struct {
-	_ struct{} `type:"structure"`
-
-	// An array of patches and patch status.
-	EffectivePatches []EffectivePatch `type:"list"`
-
-	// The token to use when requesting the next set of items. If there are no additional
-	// items to return, the string is empty.
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeEffectivePatchesForPatchBaselineOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeEffectivePatchesForPatchBaseline = "DescribeEffectivePatchesForPatchBaseline"
 
@@ -83,7 +26,7 @@ const opDescribeEffectivePatchesForPatchBaseline = "DescribeEffectivePatchesForP
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeEffectivePatchesForPatchBaseline
-func (c *Client) DescribeEffectivePatchesForPatchBaselineRequest(input *DescribeEffectivePatchesForPatchBaselineInput) DescribeEffectivePatchesForPatchBaselineRequest {
+func (c *Client) DescribeEffectivePatchesForPatchBaselineRequest(input *types.DescribeEffectivePatchesForPatchBaselineInput) DescribeEffectivePatchesForPatchBaselineRequest {
 	op := &aws.Operation{
 		Name:       opDescribeEffectivePatchesForPatchBaseline,
 		HTTPMethod: "POST",
@@ -91,10 +34,10 @@ func (c *Client) DescribeEffectivePatchesForPatchBaselineRequest(input *Describe
 	}
 
 	if input == nil {
-		input = &DescribeEffectivePatchesForPatchBaselineInput{}
+		input = &types.DescribeEffectivePatchesForPatchBaselineInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeEffectivePatchesForPatchBaselineOutput{})
+	req := c.newRequest(op, input, &types.DescribeEffectivePatchesForPatchBaselineOutput{})
 	return DescribeEffectivePatchesForPatchBaselineRequest{Request: req, Input: input, Copy: c.DescribeEffectivePatchesForPatchBaselineRequest}
 }
 
@@ -102,8 +45,8 @@ func (c *Client) DescribeEffectivePatchesForPatchBaselineRequest(input *Describe
 // DescribeEffectivePatchesForPatchBaseline API operation.
 type DescribeEffectivePatchesForPatchBaselineRequest struct {
 	*aws.Request
-	Input *DescribeEffectivePatchesForPatchBaselineInput
-	Copy  func(*DescribeEffectivePatchesForPatchBaselineInput) DescribeEffectivePatchesForPatchBaselineRequest
+	Input *types.DescribeEffectivePatchesForPatchBaselineInput
+	Copy  func(*types.DescribeEffectivePatchesForPatchBaselineInput) DescribeEffectivePatchesForPatchBaselineRequest
 }
 
 // Send marshals and sends the DescribeEffectivePatchesForPatchBaseline API request.
@@ -115,7 +58,7 @@ func (r DescribeEffectivePatchesForPatchBaselineRequest) Send(ctx context.Contex
 	}
 
 	resp := &DescribeEffectivePatchesForPatchBaselineResponse{
-		DescribeEffectivePatchesForPatchBaselineOutput: r.Request.Data.(*DescribeEffectivePatchesForPatchBaselineOutput),
+		DescribeEffectivePatchesForPatchBaselineOutput: r.Request.Data.(*types.DescribeEffectivePatchesForPatchBaselineOutput),
 		response: &aws.Response{Request: r.Request},
 	}
 
@@ -125,7 +68,7 @@ func (r DescribeEffectivePatchesForPatchBaselineRequest) Send(ctx context.Contex
 // DescribeEffectivePatchesForPatchBaselineResponse is the response type for the
 // DescribeEffectivePatchesForPatchBaseline API operation.
 type DescribeEffectivePatchesForPatchBaselineResponse struct {
-	*DescribeEffectivePatchesForPatchBaselineOutput
+	*types.DescribeEffectivePatchesForPatchBaselineOutput
 
 	response *aws.Response
 }

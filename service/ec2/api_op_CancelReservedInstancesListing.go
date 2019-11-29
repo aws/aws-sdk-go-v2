@@ -6,50 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-// Contains the parameters for CancelReservedInstancesListing.
-type CancelReservedInstancesListingInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the Reserved Instance listing.
-	//
-	// ReservedInstancesListingId is a required field
-	ReservedInstancesListingId *string `locationName:"reservedInstancesListingId" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s CancelReservedInstancesListingInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CancelReservedInstancesListingInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CancelReservedInstancesListingInput"}
-
-	if s.ReservedInstancesListingId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ReservedInstancesListingId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Contains the output of CancelReservedInstancesListing.
-type CancelReservedInstancesListingOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The Reserved Instance listing.
-	ReservedInstancesListings []ReservedInstancesListing `locationName:"reservedInstancesListingsSet" locationNameList:"item" type:"list"`
-}
-
-// String returns the string representation
-func (s CancelReservedInstancesListingOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCancelReservedInstancesListing = "CancelReservedInstancesListing"
 
@@ -70,7 +28,7 @@ const opCancelReservedInstancesListing = "CancelReservedInstancesListing"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CancelReservedInstancesListing
-func (c *Client) CancelReservedInstancesListingRequest(input *CancelReservedInstancesListingInput) CancelReservedInstancesListingRequest {
+func (c *Client) CancelReservedInstancesListingRequest(input *types.CancelReservedInstancesListingInput) CancelReservedInstancesListingRequest {
 	op := &aws.Operation{
 		Name:       opCancelReservedInstancesListing,
 		HTTPMethod: "POST",
@@ -78,10 +36,10 @@ func (c *Client) CancelReservedInstancesListingRequest(input *CancelReservedInst
 	}
 
 	if input == nil {
-		input = &CancelReservedInstancesListingInput{}
+		input = &types.CancelReservedInstancesListingInput{}
 	}
 
-	req := c.newRequest(op, input, &CancelReservedInstancesListingOutput{})
+	req := c.newRequest(op, input, &types.CancelReservedInstancesListingOutput{})
 	return CancelReservedInstancesListingRequest{Request: req, Input: input, Copy: c.CancelReservedInstancesListingRequest}
 }
 
@@ -89,8 +47,8 @@ func (c *Client) CancelReservedInstancesListingRequest(input *CancelReservedInst
 // CancelReservedInstancesListing API operation.
 type CancelReservedInstancesListingRequest struct {
 	*aws.Request
-	Input *CancelReservedInstancesListingInput
-	Copy  func(*CancelReservedInstancesListingInput) CancelReservedInstancesListingRequest
+	Input *types.CancelReservedInstancesListingInput
+	Copy  func(*types.CancelReservedInstancesListingInput) CancelReservedInstancesListingRequest
 }
 
 // Send marshals and sends the CancelReservedInstancesListing API request.
@@ -102,7 +60,7 @@ func (r CancelReservedInstancesListingRequest) Send(ctx context.Context) (*Cance
 	}
 
 	resp := &CancelReservedInstancesListingResponse{
-		CancelReservedInstancesListingOutput: r.Request.Data.(*CancelReservedInstancesListingOutput),
+		CancelReservedInstancesListingOutput: r.Request.Data.(*types.CancelReservedInstancesListingOutput),
 		response:                             &aws.Response{Request: r.Request},
 	}
 
@@ -112,7 +70,7 @@ func (r CancelReservedInstancesListingRequest) Send(ctx context.Context) (*Cance
 // CancelReservedInstancesListingResponse is the response type for the
 // CancelReservedInstancesListing API operation.
 type CancelReservedInstancesListingResponse struct {
-	*CancelReservedInstancesListingOutput
+	*types.CancelReservedInstancesListingOutput
 
 	response *aws.Response
 }

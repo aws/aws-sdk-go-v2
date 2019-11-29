@@ -6,63 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/storagegateway/types"
 )
-
-// A JSON object containing zero or more of the following fields:
-//
-//    * ListGatewaysInput$Limit
-//
-//    * ListGatewaysInput$Marker
-type ListGatewaysInput struct {
-	_ struct{} `type:"structure"`
-
-	// Specifies that the list of gateways returned be limited to the specified
-	// number of items.
-	Limit *int64 `min:"1" type:"integer"`
-
-	// An opaque string that indicates the position at which to begin the returned
-	// list of gateways.
-	Marker *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s ListGatewaysInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListGatewaysInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListGatewaysInput"}
-	if s.Limit != nil && *s.Limit < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("Limit", 1))
-	}
-	if s.Marker != nil && len(*s.Marker) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Marker", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ListGatewaysOutput struct {
-	_ struct{} `type:"structure"`
-
-	// An array of GatewayInfo objects.
-	Gateways []GatewayInfo `type:"list"`
-
-	// Use the marker in your next request to fetch the next set of gateways in
-	// the list. If there are no more gateways to list, this field does not appear
-	// in the response.
-	Marker *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s ListGatewaysOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListGateways = "ListGateways"
 
@@ -89,7 +34,7 @@ const opListGateways = "ListGateways"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/ListGateways
-func (c *Client) ListGatewaysRequest(input *ListGatewaysInput) ListGatewaysRequest {
+func (c *Client) ListGatewaysRequest(input *types.ListGatewaysInput) ListGatewaysRequest {
 	op := &aws.Operation{
 		Name:       opListGateways,
 		HTTPMethod: "POST",
@@ -103,10 +48,10 @@ func (c *Client) ListGatewaysRequest(input *ListGatewaysInput) ListGatewaysReque
 	}
 
 	if input == nil {
-		input = &ListGatewaysInput{}
+		input = &types.ListGatewaysInput{}
 	}
 
-	req := c.newRequest(op, input, &ListGatewaysOutput{})
+	req := c.newRequest(op, input, &types.ListGatewaysOutput{})
 	return ListGatewaysRequest{Request: req, Input: input, Copy: c.ListGatewaysRequest}
 }
 
@@ -114,8 +59,8 @@ func (c *Client) ListGatewaysRequest(input *ListGatewaysInput) ListGatewaysReque
 // ListGateways API operation.
 type ListGatewaysRequest struct {
 	*aws.Request
-	Input *ListGatewaysInput
-	Copy  func(*ListGatewaysInput) ListGatewaysRequest
+	Input *types.ListGatewaysInput
+	Copy  func(*types.ListGatewaysInput) ListGatewaysRequest
 }
 
 // Send marshals and sends the ListGateways API request.
@@ -127,7 +72,7 @@ func (r ListGatewaysRequest) Send(ctx context.Context) (*ListGatewaysResponse, e
 	}
 
 	resp := &ListGatewaysResponse{
-		ListGatewaysOutput: r.Request.Data.(*ListGatewaysOutput),
+		ListGatewaysOutput: r.Request.Data.(*types.ListGatewaysOutput),
 		response:           &aws.Response{Request: r.Request},
 	}
 
@@ -157,7 +102,7 @@ func NewListGatewaysPaginator(req ListGatewaysRequest) ListGatewaysPaginator {
 	return ListGatewaysPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListGatewaysInput
+				var inCpy *types.ListGatewaysInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -177,14 +122,14 @@ type ListGatewaysPaginator struct {
 	aws.Pager
 }
 
-func (p *ListGatewaysPaginator) CurrentPage() *ListGatewaysOutput {
-	return p.Pager.CurrentPage().(*ListGatewaysOutput)
+func (p *ListGatewaysPaginator) CurrentPage() *types.ListGatewaysOutput {
+	return p.Pager.CurrentPage().(*types.ListGatewaysOutput)
 }
 
 // ListGatewaysResponse is the response type for the
 // ListGateways API operation.
 type ListGatewaysResponse struct {
-	*ListGatewaysOutput
+	*types.ListGatewaysOutput
 
 	response *aws.Response
 }

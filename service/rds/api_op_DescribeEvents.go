@@ -4,121 +4,10 @@ package rds
 
 import (
 	"context"
-	"fmt"
-	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/rds/types"
 )
-
-type DescribeEventsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The number of minutes to retrieve events for.
-	//
-	// Default: 60
-	Duration *int64 `type:"integer"`
-
-	// The end of the time interval for which to retrieve events, specified in ISO
-	// 8601 format. For more information about ISO 8601, go to the ISO8601 Wikipedia
-	// page. (http://en.wikipedia.org/wiki/ISO_8601)
-	//
-	// Example: 2009-07-08T18:00Z
-	EndTime *time.Time `type:"timestamp"`
-
-	// A list of event categories that trigger notifications for a event notification
-	// subscription.
-	EventCategories []string `locationNameList:"EventCategory" type:"list"`
-
-	// This parameter is not currently supported.
-	Filters []Filter `locationNameList:"Filter" type:"list"`
-
-	// An optional pagination token provided by a previous DescribeEvents request.
-	// If this parameter is specified, the response includes only records beyond
-	// the marker, up to the value specified by MaxRecords.
-	Marker *string `type:"string"`
-
-	// The maximum number of records to include in the response. If more records
-	// exist than the specified MaxRecords value, a pagination token called a marker
-	// is included in the response so that you can retrieve the remaining results.
-	//
-	// Default: 100
-	//
-	// Constraints: Minimum 20, maximum 100.
-	MaxRecords *int64 `type:"integer"`
-
-	// The identifier of the event source for which events are returned. If not
-	// specified, then all sources are included in the response.
-	//
-	// Constraints:
-	//
-	//    * If SourceIdentifier is supplied, SourceType must also be provided.
-	//
-	//    * If the source type is DBInstance, then a DBInstanceIdentifier must be
-	//    supplied.
-	//
-	//    * If the source type is DBSecurityGroup, a DBSecurityGroupName must be
-	//    supplied.
-	//
-	//    * If the source type is DBParameterGroup, a DBParameterGroupName must
-	//    be supplied.
-	//
-	//    * If the source type is DBSnapshot, a DBSnapshotIdentifier must be supplied.
-	//
-	//    * Can't end with a hyphen or contain two consecutive hyphens.
-	SourceIdentifier *string `type:"string"`
-
-	// The event source to retrieve events for. If no value is specified, all events
-	// are returned.
-	SourceType SourceType `type:"string" enum:"true"`
-
-	// The beginning of the time interval to retrieve events for, specified in ISO
-	// 8601 format. For more information about ISO 8601, go to the ISO8601 Wikipedia
-	// page. (http://en.wikipedia.org/wiki/ISO_8601)
-	//
-	// Example: 2009-07-08T18:00Z
-	StartTime *time.Time `type:"timestamp"`
-}
-
-// String returns the string representation
-func (s DescribeEventsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeEventsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeEventsInput"}
-	if s.Filters != nil {
-		for i, v := range s.Filters {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Contains the result of a successful invocation of the DescribeEvents action.
-type DescribeEventsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A list of Event instances.
-	Events []Event `locationNameList:"Event" type:"list"`
-
-	// An optional pagination token provided by a previous Events request. If this
-	// parameter is specified, the response includes only records beyond the marker,
-	// up to the value specified by MaxRecords .
-	Marker *string `type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeEventsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeEvents = "DescribeEvents"
 
@@ -139,7 +28,7 @@ const opDescribeEvents = "DescribeEvents"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeEvents
-func (c *Client) DescribeEventsRequest(input *DescribeEventsInput) DescribeEventsRequest {
+func (c *Client) DescribeEventsRequest(input *types.DescribeEventsInput) DescribeEventsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeEvents,
 		HTTPMethod: "POST",
@@ -153,10 +42,10 @@ func (c *Client) DescribeEventsRequest(input *DescribeEventsInput) DescribeEvent
 	}
 
 	if input == nil {
-		input = &DescribeEventsInput{}
+		input = &types.DescribeEventsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeEventsOutput{})
+	req := c.newRequest(op, input, &types.DescribeEventsOutput{})
 	return DescribeEventsRequest{Request: req, Input: input, Copy: c.DescribeEventsRequest}
 }
 
@@ -164,8 +53,8 @@ func (c *Client) DescribeEventsRequest(input *DescribeEventsInput) DescribeEvent
 // DescribeEvents API operation.
 type DescribeEventsRequest struct {
 	*aws.Request
-	Input *DescribeEventsInput
-	Copy  func(*DescribeEventsInput) DescribeEventsRequest
+	Input *types.DescribeEventsInput
+	Copy  func(*types.DescribeEventsInput) DescribeEventsRequest
 }
 
 // Send marshals and sends the DescribeEvents API request.
@@ -177,7 +66,7 @@ func (r DescribeEventsRequest) Send(ctx context.Context) (*DescribeEventsRespons
 	}
 
 	resp := &DescribeEventsResponse{
-		DescribeEventsOutput: r.Request.Data.(*DescribeEventsOutput),
+		DescribeEventsOutput: r.Request.Data.(*types.DescribeEventsOutput),
 		response:             &aws.Response{Request: r.Request},
 	}
 
@@ -207,7 +96,7 @@ func NewDescribeEventsPaginator(req DescribeEventsRequest) DescribeEventsPaginat
 	return DescribeEventsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *DescribeEventsInput
+				var inCpy *types.DescribeEventsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -227,14 +116,14 @@ type DescribeEventsPaginator struct {
 	aws.Pager
 }
 
-func (p *DescribeEventsPaginator) CurrentPage() *DescribeEventsOutput {
-	return p.Pager.CurrentPage().(*DescribeEventsOutput)
+func (p *DescribeEventsPaginator) CurrentPage() *types.DescribeEventsOutput {
+	return p.Pager.CurrentPage().(*types.DescribeEventsOutput)
 }
 
 // DescribeEventsResponse is the response type for the
 // DescribeEvents API operation.
 type DescribeEventsResponse struct {
-	*DescribeEventsOutput
+	*types.DescribeEventsOutput
 
 	response *aws.Response
 }

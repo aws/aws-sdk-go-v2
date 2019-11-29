@@ -6,50 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/gamelift/types"
 )
-
-// Represents the input for a request action.
-type DescribeBuildInput struct {
-	_ struct{} `type:"structure"`
-
-	// Unique identifier for a build to retrieve properties for.
-	//
-	// BuildId is a required field
-	BuildId *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeBuildInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeBuildInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeBuildInput"}
-
-	if s.BuildId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("BuildId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Represents the returned data in response to a request action.
-type DescribeBuildOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Set of properties describing the requested build.
-	Build *Build `type:"structure"`
-}
-
-// String returns the string representation
-func (s DescribeBuildOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeBuild = "DescribeBuild"
 
@@ -83,7 +41,7 @@ const opDescribeBuild = "DescribeBuild"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DescribeBuild
-func (c *Client) DescribeBuildRequest(input *DescribeBuildInput) DescribeBuildRequest {
+func (c *Client) DescribeBuildRequest(input *types.DescribeBuildInput) DescribeBuildRequest {
 	op := &aws.Operation{
 		Name:       opDescribeBuild,
 		HTTPMethod: "POST",
@@ -91,10 +49,10 @@ func (c *Client) DescribeBuildRequest(input *DescribeBuildInput) DescribeBuildRe
 	}
 
 	if input == nil {
-		input = &DescribeBuildInput{}
+		input = &types.DescribeBuildInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeBuildOutput{})
+	req := c.newRequest(op, input, &types.DescribeBuildOutput{})
 	return DescribeBuildRequest{Request: req, Input: input, Copy: c.DescribeBuildRequest}
 }
 
@@ -102,8 +60,8 @@ func (c *Client) DescribeBuildRequest(input *DescribeBuildInput) DescribeBuildRe
 // DescribeBuild API operation.
 type DescribeBuildRequest struct {
 	*aws.Request
-	Input *DescribeBuildInput
-	Copy  func(*DescribeBuildInput) DescribeBuildRequest
+	Input *types.DescribeBuildInput
+	Copy  func(*types.DescribeBuildInput) DescribeBuildRequest
 }
 
 // Send marshals and sends the DescribeBuild API request.
@@ -115,7 +73,7 @@ func (r DescribeBuildRequest) Send(ctx context.Context) (*DescribeBuildResponse,
 	}
 
 	resp := &DescribeBuildResponse{
-		DescribeBuildOutput: r.Request.Data.(*DescribeBuildOutput),
+		DescribeBuildOutput: r.Request.Data.(*types.DescribeBuildOutput),
 		response:            &aws.Response{Request: r.Request},
 	}
 
@@ -125,7 +83,7 @@ func (r DescribeBuildRequest) Send(ctx context.Context) (*DescribeBuildResponse,
 // DescribeBuildResponse is the response type for the
 // DescribeBuild API operation.
 type DescribeBuildResponse struct {
-	*DescribeBuildOutput
+	*types.DescribeBuildOutput
 
 	response *aws.Response
 }

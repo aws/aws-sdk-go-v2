@@ -6,110 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/route53/types"
 )
-
-// A complex type that contains information about the request to create a hosted
-// zone.
-type GetAccountLimitInput struct {
-	_ struct{} `type:"structure"`
-
-	// The limit that you want to get. Valid values include the following:
-	//
-	//    * MAX_HEALTH_CHECKS_BY_OWNER: The maximum number of health checks that
-	//    you can create using the current account.
-	//
-	//    * MAX_HOSTED_ZONES_BY_OWNER: The maximum number of hosted zones that you
-	//    can create using the current account.
-	//
-	//    * MAX_REUSABLE_DELEGATION_SETS_BY_OWNER: The maximum number of reusable
-	//    delegation sets that you can create using the current account.
-	//
-	//    * MAX_TRAFFIC_POLICIES_BY_OWNER: The maximum number of traffic policies
-	//    that you can create using the current account.
-	//
-	//    * MAX_TRAFFIC_POLICY_INSTANCES_BY_OWNER: The maximum number of traffic
-	//    policy instances that you can create using the current account. (Traffic
-	//    policy instances are referred to as traffic flow policy records in the
-	//    Amazon Route 53 console.)
-	//
-	// Type is a required field
-	Type AccountLimitType `location:"uri" locationName:"Type" type:"string" required:"true" enum:"true"`
-}
-
-// String returns the string representation
-func (s GetAccountLimitInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetAccountLimitInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetAccountLimitInput"}
-	if len(s.Type) == 0 {
-		invalidParams.Add(aws.NewErrParamRequired("Type"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetAccountLimitInput) MarshalFields(e protocol.FieldEncoder) error {
-
-	if len(s.Type) > 0 {
-		v := s.Type
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "Type", v, metadata)
-	}
-	return nil
-}
-
-// A complex type that contains the requested limit.
-type GetAccountLimitOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The current number of entities that you have created of the specified type.
-	// For example, if you specified MAX_HEALTH_CHECKS_BY_OWNER for the value of
-	// Type in the request, the value of Count is the current number of health checks
-	// that you have created using the current account.
-	//
-	// Count is a required field
-	Count *int64 `type:"long" required:"true"`
-
-	// The current setting for the specified limit. For example, if you specified
-	// MAX_HEALTH_CHECKS_BY_OWNER for the value of Type in the request, the value
-	// of Limit is the maximum number of health checks that you can create using
-	// the current account.
-	//
-	// Limit is a required field
-	Limit *AccountLimit `type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s GetAccountLimitOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetAccountLimitOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.Count != nil {
-		v := *s.Count
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "Count", protocol.Int64Value(v), metadata)
-	}
-	if s.Limit != nil {
-		v := s.Limit
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "Limit", v, metadata)
-	}
-	return nil
-}
 
 const opGetAccountLimit = "GetAccountLimit"
 
@@ -136,7 +34,7 @@ const opGetAccountLimit = "GetAccountLimit"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/GetAccountLimit
-func (c *Client) GetAccountLimitRequest(input *GetAccountLimitInput) GetAccountLimitRequest {
+func (c *Client) GetAccountLimitRequest(input *types.GetAccountLimitInput) GetAccountLimitRequest {
 	op := &aws.Operation{
 		Name:       opGetAccountLimit,
 		HTTPMethod: "GET",
@@ -144,10 +42,10 @@ func (c *Client) GetAccountLimitRequest(input *GetAccountLimitInput) GetAccountL
 	}
 
 	if input == nil {
-		input = &GetAccountLimitInput{}
+		input = &types.GetAccountLimitInput{}
 	}
 
-	req := c.newRequest(op, input, &GetAccountLimitOutput{})
+	req := c.newRequest(op, input, &types.GetAccountLimitOutput{})
 	return GetAccountLimitRequest{Request: req, Input: input, Copy: c.GetAccountLimitRequest}
 }
 
@@ -155,8 +53,8 @@ func (c *Client) GetAccountLimitRequest(input *GetAccountLimitInput) GetAccountL
 // GetAccountLimit API operation.
 type GetAccountLimitRequest struct {
 	*aws.Request
-	Input *GetAccountLimitInput
-	Copy  func(*GetAccountLimitInput) GetAccountLimitRequest
+	Input *types.GetAccountLimitInput
+	Copy  func(*types.GetAccountLimitInput) GetAccountLimitRequest
 }
 
 // Send marshals and sends the GetAccountLimit API request.
@@ -168,7 +66,7 @@ func (r GetAccountLimitRequest) Send(ctx context.Context) (*GetAccountLimitRespo
 	}
 
 	resp := &GetAccountLimitResponse{
-		GetAccountLimitOutput: r.Request.Data.(*GetAccountLimitOutput),
+		GetAccountLimitOutput: r.Request.Data.(*types.GetAccountLimitOutput),
 		response:              &aws.Response{Request: r.Request},
 	}
 
@@ -178,7 +76,7 @@ func (r GetAccountLimitRequest) Send(ctx context.Context) (*GetAccountLimitRespo
 // GetAccountLimitResponse is the response type for the
 // GetAccountLimit API operation.
 type GetAccountLimitResponse struct {
-	*GetAccountLimitOutput
+	*types.GetAccountLimitOutput
 
 	response *aws.Response
 }

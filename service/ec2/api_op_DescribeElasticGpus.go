@@ -6,85 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-type DescribeElasticGpusInput struct {
-	_ struct{} `type:"structure"`
-
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have
-	// the required permissions, the error response is DryRunOperation. Otherwise,
-	// it is UnauthorizedOperation.
-	DryRun *bool `type:"boolean"`
-
-	// The Elastic Graphics accelerator IDs.
-	ElasticGpuIds []string `locationName:"ElasticGpuId" locationNameList:"item" type:"list"`
-
-	// The filters.
-	//
-	//    * availability-zone - The Availability Zone in which the Elastic Graphics
-	//    accelerator resides.
-	//
-	//    * elastic-gpu-health - The status of the Elastic Graphics accelerator
-	//    (OK | IMPAIRED).
-	//
-	//    * elastic-gpu-state - The state of the Elastic Graphics accelerator (ATTACHED).
-	//
-	//    * elastic-gpu-type - The type of Elastic Graphics accelerator; for example,
-	//    eg1.medium.
-	//
-	//    * instance-id - The ID of the instance to which the Elastic Graphics accelerator
-	//    is associated.
-	Filters []Filter `locationName:"Filter" locationNameList:"Filter" type:"list"`
-
-	// The maximum number of results to return in a single call. To retrieve the
-	// remaining results, make another call with the returned NextToken value. This
-	// value can be between 5 and 1000.
-	MaxResults *int64 `min:"10" type:"integer"`
-
-	// The token to request the next page of results.
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeElasticGpusInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeElasticGpusInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeElasticGpusInput"}
-	if s.MaxResults != nil && *s.MaxResults < 10 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 10))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribeElasticGpusOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Information about the Elastic Graphics accelerators.
-	ElasticGpuSet []ElasticGpus `locationName:"elasticGpuSet" locationNameList:"item" type:"list"`
-
-	// The total number of items to return. If the total number of items available
-	// is more than the value specified in max-items then a Next-Token will be provided
-	// in the output that you can use to resume pagination.
-	MaxResults *int64 `locationName:"maxResults" type:"integer"`
-
-	// The token to use to retrieve the next page of results. This value is null
-	// when there are no more results to return.
-	NextToken *string `locationName:"nextToken" type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeElasticGpusOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeElasticGpus = "DescribeElasticGpus"
 
@@ -103,7 +26,7 @@ const opDescribeElasticGpus = "DescribeElasticGpus"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeElasticGpus
-func (c *Client) DescribeElasticGpusRequest(input *DescribeElasticGpusInput) DescribeElasticGpusRequest {
+func (c *Client) DescribeElasticGpusRequest(input *types.DescribeElasticGpusInput) DescribeElasticGpusRequest {
 	op := &aws.Operation{
 		Name:       opDescribeElasticGpus,
 		HTTPMethod: "POST",
@@ -111,10 +34,10 @@ func (c *Client) DescribeElasticGpusRequest(input *DescribeElasticGpusInput) Des
 	}
 
 	if input == nil {
-		input = &DescribeElasticGpusInput{}
+		input = &types.DescribeElasticGpusInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeElasticGpusOutput{})
+	req := c.newRequest(op, input, &types.DescribeElasticGpusOutput{})
 	return DescribeElasticGpusRequest{Request: req, Input: input, Copy: c.DescribeElasticGpusRequest}
 }
 
@@ -122,8 +45,8 @@ func (c *Client) DescribeElasticGpusRequest(input *DescribeElasticGpusInput) Des
 // DescribeElasticGpus API operation.
 type DescribeElasticGpusRequest struct {
 	*aws.Request
-	Input *DescribeElasticGpusInput
-	Copy  func(*DescribeElasticGpusInput) DescribeElasticGpusRequest
+	Input *types.DescribeElasticGpusInput
+	Copy  func(*types.DescribeElasticGpusInput) DescribeElasticGpusRequest
 }
 
 // Send marshals and sends the DescribeElasticGpus API request.
@@ -135,7 +58,7 @@ func (r DescribeElasticGpusRequest) Send(ctx context.Context) (*DescribeElasticG
 	}
 
 	resp := &DescribeElasticGpusResponse{
-		DescribeElasticGpusOutput: r.Request.Data.(*DescribeElasticGpusOutput),
+		DescribeElasticGpusOutput: r.Request.Data.(*types.DescribeElasticGpusOutput),
 		response:                  &aws.Response{Request: r.Request},
 	}
 
@@ -145,7 +68,7 @@ func (r DescribeElasticGpusRequest) Send(ctx context.Context) (*DescribeElasticG
 // DescribeElasticGpusResponse is the response type for the
 // DescribeElasticGpus API operation.
 type DescribeElasticGpusResponse struct {
-	*DescribeElasticGpusOutput
+	*types.DescribeElasticGpusOutput
 
 	response *aws.Response
 }

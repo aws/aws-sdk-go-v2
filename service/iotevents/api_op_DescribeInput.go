@@ -6,76 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/iotevents/types"
 )
-
-type DescribeInputInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the input.
-	//
-	// InputName is a required field
-	InputName *string `location:"uri" locationName:"inputName" min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeInputInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeInputInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeInputInput"}
-
-	if s.InputName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("InputName"))
-	}
-	if s.InputName != nil && len(*s.InputName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("InputName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DescribeInputInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.InputName != nil {
-		v := *s.InputName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "inputName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type DescribeInputOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Information about the input.
-	Input *Input `locationName:"input" type:"structure"`
-}
-
-// String returns the string representation
-func (s DescribeInputOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DescribeInputOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.Input != nil {
-		v := s.Input
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "input", v, metadata)
-	}
-	return nil
-}
 
 const opDescribeInput = "DescribeInput"
 
@@ -92,7 +24,7 @@ const opDescribeInput = "DescribeInput"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iotevents-2018-07-27/DescribeInput
-func (c *Client) DescribeInputRequest(input *DescribeInputInput) DescribeInputRequest {
+func (c *Client) DescribeInputRequest(input *types.DescribeInputInput) DescribeInputRequest {
 	op := &aws.Operation{
 		Name:       opDescribeInput,
 		HTTPMethod: "GET",
@@ -100,10 +32,10 @@ func (c *Client) DescribeInputRequest(input *DescribeInputInput) DescribeInputRe
 	}
 
 	if input == nil {
-		input = &DescribeInputInput{}
+		input = &types.DescribeInputInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeInputOutput{})
+	req := c.newRequest(op, input, &types.DescribeInputOutput{})
 	return DescribeInputRequest{Request: req, Input: input, Copy: c.DescribeInputRequest}
 }
 
@@ -111,8 +43,8 @@ func (c *Client) DescribeInputRequest(input *DescribeInputInput) DescribeInputRe
 // DescribeInput API operation.
 type DescribeInputRequest struct {
 	*aws.Request
-	Input *DescribeInputInput
-	Copy  func(*DescribeInputInput) DescribeInputRequest
+	Input *types.DescribeInputInput
+	Copy  func(*types.DescribeInputInput) DescribeInputRequest
 }
 
 // Send marshals and sends the DescribeInput API request.
@@ -124,7 +56,7 @@ func (r DescribeInputRequest) Send(ctx context.Context) (*DescribeInputResponse,
 	}
 
 	resp := &DescribeInputResponse{
-		DescribeInputOutput: r.Request.Data.(*DescribeInputOutput),
+		DescribeInputOutput: r.Request.Data.(*types.DescribeInputOutput),
 		response:            &aws.Response{Request: r.Request},
 	}
 
@@ -134,7 +66,7 @@ func (r DescribeInputRequest) Send(ctx context.Context) (*DescribeInputResponse,
 // DescribeInputResponse is the response type for the
 // DescribeInput API operation.
 type DescribeInputResponse struct {
-	*DescribeInputOutput
+	*types.DescribeInputOutput
 
 	response *aws.Response
 }

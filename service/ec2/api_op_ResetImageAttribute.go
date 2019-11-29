@@ -6,63 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/ec2query"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-// Contains the parameters for ResetImageAttribute.
-type ResetImageAttributeInput struct {
-	_ struct{} `type:"structure"`
-
-	// The attribute to reset (currently you can only reset the launch permission
-	// attribute).
-	//
-	// Attribute is a required field
-	Attribute ResetImageAttributeName `type:"string" required:"true" enum:"true"`
-
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have
-	// the required permissions, the error response is DryRunOperation. Otherwise,
-	// it is UnauthorizedOperation.
-	DryRun *bool `locationName:"dryRun" type:"boolean"`
-
-	// The ID of the AMI.
-	//
-	// ImageId is a required field
-	ImageId *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s ResetImageAttributeInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ResetImageAttributeInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ResetImageAttributeInput"}
-	if len(s.Attribute) == 0 {
-		invalidParams.Add(aws.NewErrParamRequired("Attribute"))
-	}
-
-	if s.ImageId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ImageId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ResetImageAttributeOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s ResetImageAttributeOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opResetImageAttribute = "ResetImageAttribute"
 
@@ -81,7 +28,7 @@ const opResetImageAttribute = "ResetImageAttribute"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ResetImageAttribute
-func (c *Client) ResetImageAttributeRequest(input *ResetImageAttributeInput) ResetImageAttributeRequest {
+func (c *Client) ResetImageAttributeRequest(input *types.ResetImageAttributeInput) ResetImageAttributeRequest {
 	op := &aws.Operation{
 		Name:       opResetImageAttribute,
 		HTTPMethod: "POST",
@@ -89,10 +36,10 @@ func (c *Client) ResetImageAttributeRequest(input *ResetImageAttributeInput) Res
 	}
 
 	if input == nil {
-		input = &ResetImageAttributeInput{}
+		input = &types.ResetImageAttributeInput{}
 	}
 
-	req := c.newRequest(op, input, &ResetImageAttributeOutput{})
+	req := c.newRequest(op, input, &types.ResetImageAttributeOutput{})
 	req.Handlers.Unmarshal.Remove(ec2query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return ResetImageAttributeRequest{Request: req, Input: input, Copy: c.ResetImageAttributeRequest}
@@ -102,8 +49,8 @@ func (c *Client) ResetImageAttributeRequest(input *ResetImageAttributeInput) Res
 // ResetImageAttribute API operation.
 type ResetImageAttributeRequest struct {
 	*aws.Request
-	Input *ResetImageAttributeInput
-	Copy  func(*ResetImageAttributeInput) ResetImageAttributeRequest
+	Input *types.ResetImageAttributeInput
+	Copy  func(*types.ResetImageAttributeInput) ResetImageAttributeRequest
 }
 
 // Send marshals and sends the ResetImageAttribute API request.
@@ -115,7 +62,7 @@ func (r ResetImageAttributeRequest) Send(ctx context.Context) (*ResetImageAttrib
 	}
 
 	resp := &ResetImageAttributeResponse{
-		ResetImageAttributeOutput: r.Request.Data.(*ResetImageAttributeOutput),
+		ResetImageAttributeOutput: r.Request.Data.(*types.ResetImageAttributeOutput),
 		response:                  &aws.Response{Request: r.Request},
 	}
 
@@ -125,7 +72,7 @@ func (r ResetImageAttributeRequest) Send(ctx context.Context) (*ResetImageAttrib
 // ResetImageAttributeResponse is the response type for the
 // ResetImageAttribute API operation.
 type ResetImageAttributeResponse struct {
-	*ResetImageAttributeOutput
+	*types.ResetImageAttributeOutput
 
 	response *aws.Response
 }

@@ -6,77 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/types"
 )
-
-type DescribeRecordInput struct {
-	_ struct{} `type:"structure"`
-
-	// The language code.
-	//
-	//    * en - English (default)
-	//
-	//    * jp - Japanese
-	//
-	//    * zh - Chinese
-	AcceptLanguage *string `type:"string"`
-
-	// The record identifier of the provisioned product. This identifier is returned
-	// by the request operation.
-	//
-	// Id is a required field
-	Id *string `min:"1" type:"string" required:"true"`
-
-	// The maximum number of items to return with this call.
-	PageSize *int64 `type:"integer"`
-
-	// The page token for the next set of results. To retrieve the first set of
-	// results, use null.
-	PageToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeRecordInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeRecordInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeRecordInput"}
-
-	if s.Id == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Id"))
-	}
-	if s.Id != nil && len(*s.Id) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Id", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribeRecordOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The page token to use to retrieve the next set of results. If there are no
-	// additional results, this value is null.
-	NextPageToken *string `type:"string"`
-
-	// Information about the product.
-	RecordDetail *RecordDetail `type:"structure"`
-
-	// Information about the product created as the result of a request. For example,
-	// the output for a CloudFormation-backed product that creates an S3 bucket
-	// would include the S3 bucket URL.
-	RecordOutputs []RecordOutput `type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeRecordOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeRecord = "DescribeRecord"
 
@@ -102,7 +33,7 @@ const opDescribeRecord = "DescribeRecord"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DescribeRecord
-func (c *Client) DescribeRecordRequest(input *DescribeRecordInput) DescribeRecordRequest {
+func (c *Client) DescribeRecordRequest(input *types.DescribeRecordInput) DescribeRecordRequest {
 	op := &aws.Operation{
 		Name:       opDescribeRecord,
 		HTTPMethod: "POST",
@@ -110,10 +41,10 @@ func (c *Client) DescribeRecordRequest(input *DescribeRecordInput) DescribeRecor
 	}
 
 	if input == nil {
-		input = &DescribeRecordInput{}
+		input = &types.DescribeRecordInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeRecordOutput{})
+	req := c.newRequest(op, input, &types.DescribeRecordOutput{})
 	return DescribeRecordRequest{Request: req, Input: input, Copy: c.DescribeRecordRequest}
 }
 
@@ -121,8 +52,8 @@ func (c *Client) DescribeRecordRequest(input *DescribeRecordInput) DescribeRecor
 // DescribeRecord API operation.
 type DescribeRecordRequest struct {
 	*aws.Request
-	Input *DescribeRecordInput
-	Copy  func(*DescribeRecordInput) DescribeRecordRequest
+	Input *types.DescribeRecordInput
+	Copy  func(*types.DescribeRecordInput) DescribeRecordRequest
 }
 
 // Send marshals and sends the DescribeRecord API request.
@@ -134,7 +65,7 @@ func (r DescribeRecordRequest) Send(ctx context.Context) (*DescribeRecordRespons
 	}
 
 	resp := &DescribeRecordResponse{
-		DescribeRecordOutput: r.Request.Data.(*DescribeRecordOutput),
+		DescribeRecordOutput: r.Request.Data.(*types.DescribeRecordOutput),
 		response:             &aws.Response{Request: r.Request},
 	}
 
@@ -144,7 +75,7 @@ func (r DescribeRecordRequest) Send(ctx context.Context) (*DescribeRecordRespons
 // DescribeRecordResponse is the response type for the
 // DescribeRecord API operation.
 type DescribeRecordResponse struct {
-	*DescribeRecordOutput
+	*types.DescribeRecordOutput
 
 	response *aws.Response
 }

@@ -6,74 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/pinpoint/types"
 )
-
-type DeleteApnsChannelInput struct {
-	_ struct{} `type:"structure"`
-
-	// ApplicationId is a required field
-	ApplicationId *string `location:"uri" locationName:"application-id" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteApnsChannelInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteApnsChannelInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteApnsChannelInput"}
-
-	if s.ApplicationId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ApplicationId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteApnsChannelInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.ApplicationId != nil {
-		v := *s.ApplicationId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "application-id", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type DeleteApnsChannelOutput struct {
-	_ struct{} `type:"structure" payload:"APNSChannelResponse"`
-
-	// Provides information about the status and settings of the APNs (Apple Push
-	// Notification service) channel for an application.
-	//
-	// APNSChannelResponse is a required field
-	APNSChannelResponse *APNSChannelResponse `type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteApnsChannelOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteApnsChannelOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.APNSChannelResponse != nil {
-		v := s.APNSChannelResponse
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.PayloadTarget, "APNSChannelResponse", v, metadata)
-	}
-	return nil
-}
 
 const opDeleteApnsChannel = "DeleteApnsChannel"
 
@@ -91,7 +25,7 @@ const opDeleteApnsChannel = "DeleteApnsChannel"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/DeleteApnsChannel
-func (c *Client) DeleteApnsChannelRequest(input *DeleteApnsChannelInput) DeleteApnsChannelRequest {
+func (c *Client) DeleteApnsChannelRequest(input *types.DeleteApnsChannelInput) DeleteApnsChannelRequest {
 	op := &aws.Operation{
 		Name:       opDeleteApnsChannel,
 		HTTPMethod: "DELETE",
@@ -99,10 +33,10 @@ func (c *Client) DeleteApnsChannelRequest(input *DeleteApnsChannelInput) DeleteA
 	}
 
 	if input == nil {
-		input = &DeleteApnsChannelInput{}
+		input = &types.DeleteApnsChannelInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteApnsChannelOutput{})
+	req := c.newRequest(op, input, &types.DeleteApnsChannelOutput{})
 	return DeleteApnsChannelRequest{Request: req, Input: input, Copy: c.DeleteApnsChannelRequest}
 }
 
@@ -110,8 +44,8 @@ func (c *Client) DeleteApnsChannelRequest(input *DeleteApnsChannelInput) DeleteA
 // DeleteApnsChannel API operation.
 type DeleteApnsChannelRequest struct {
 	*aws.Request
-	Input *DeleteApnsChannelInput
-	Copy  func(*DeleteApnsChannelInput) DeleteApnsChannelRequest
+	Input *types.DeleteApnsChannelInput
+	Copy  func(*types.DeleteApnsChannelInput) DeleteApnsChannelRequest
 }
 
 // Send marshals and sends the DeleteApnsChannel API request.
@@ -123,7 +57,7 @@ func (r DeleteApnsChannelRequest) Send(ctx context.Context) (*DeleteApnsChannelR
 	}
 
 	resp := &DeleteApnsChannelResponse{
-		DeleteApnsChannelOutput: r.Request.Data.(*DeleteApnsChannelOutput),
+		DeleteApnsChannelOutput: r.Request.Data.(*types.DeleteApnsChannelOutput),
 		response:                &aws.Response{Request: r.Request},
 	}
 
@@ -133,7 +67,7 @@ func (r DeleteApnsChannelRequest) Send(ctx context.Context) (*DeleteApnsChannelR
 // DeleteApnsChannelResponse is the response type for the
 // DeleteApnsChannel API operation.
 type DeleteApnsChannelResponse struct {
-	*DeleteApnsChannelOutput
+	*types.DeleteApnsChannelOutput
 
 	response *aws.Response
 }

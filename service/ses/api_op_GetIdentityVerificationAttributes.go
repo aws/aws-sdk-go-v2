@@ -6,56 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ses/types"
 )
-
-// Represents a request to return the Amazon SES verification status of a list
-// of identities. For domain identities, this request also returns the verification
-// token. For information about verifying identities with Amazon SES, see the
-// Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/verify-addresses-and-domains.html).
-type GetIdentityVerificationAttributesInput struct {
-	_ struct{} `type:"structure"`
-
-	// A list of identities.
-	//
-	// Identities is a required field
-	Identities []string `type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s GetIdentityVerificationAttributesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetIdentityVerificationAttributesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetIdentityVerificationAttributesInput"}
-
-	if s.Identities == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Identities"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// The Amazon SES verification status of a list of identities. For domain identities,
-// this response also contains the verification token.
-type GetIdentityVerificationAttributesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A map of Identities to IdentityVerificationAttributes objects.
-	//
-	// VerificationAttributes is a required field
-	VerificationAttributes map[string]IdentityVerificationAttributes `type:"map" required:"true"`
-}
-
-// String returns the string representation
-func (s GetIdentityVerificationAttributesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetIdentityVerificationAttributes = "GetIdentityVerificationAttributes"
 
@@ -93,7 +45,7 @@ const opGetIdentityVerificationAttributes = "GetIdentityVerificationAttributes"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/GetIdentityVerificationAttributes
-func (c *Client) GetIdentityVerificationAttributesRequest(input *GetIdentityVerificationAttributesInput) GetIdentityVerificationAttributesRequest {
+func (c *Client) GetIdentityVerificationAttributesRequest(input *types.GetIdentityVerificationAttributesInput) GetIdentityVerificationAttributesRequest {
 	op := &aws.Operation{
 		Name:       opGetIdentityVerificationAttributes,
 		HTTPMethod: "POST",
@@ -101,10 +53,10 @@ func (c *Client) GetIdentityVerificationAttributesRequest(input *GetIdentityVeri
 	}
 
 	if input == nil {
-		input = &GetIdentityVerificationAttributesInput{}
+		input = &types.GetIdentityVerificationAttributesInput{}
 	}
 
-	req := c.newRequest(op, input, &GetIdentityVerificationAttributesOutput{})
+	req := c.newRequest(op, input, &types.GetIdentityVerificationAttributesOutput{})
 	return GetIdentityVerificationAttributesRequest{Request: req, Input: input, Copy: c.GetIdentityVerificationAttributesRequest}
 }
 
@@ -112,8 +64,8 @@ func (c *Client) GetIdentityVerificationAttributesRequest(input *GetIdentityVeri
 // GetIdentityVerificationAttributes API operation.
 type GetIdentityVerificationAttributesRequest struct {
 	*aws.Request
-	Input *GetIdentityVerificationAttributesInput
-	Copy  func(*GetIdentityVerificationAttributesInput) GetIdentityVerificationAttributesRequest
+	Input *types.GetIdentityVerificationAttributesInput
+	Copy  func(*types.GetIdentityVerificationAttributesInput) GetIdentityVerificationAttributesRequest
 }
 
 // Send marshals and sends the GetIdentityVerificationAttributes API request.
@@ -125,7 +77,7 @@ func (r GetIdentityVerificationAttributesRequest) Send(ctx context.Context) (*Ge
 	}
 
 	resp := &GetIdentityVerificationAttributesResponse{
-		GetIdentityVerificationAttributesOutput: r.Request.Data.(*GetIdentityVerificationAttributesOutput),
+		GetIdentityVerificationAttributesOutput: r.Request.Data.(*types.GetIdentityVerificationAttributesOutput),
 		response:                                &aws.Response{Request: r.Request},
 	}
 
@@ -135,7 +87,7 @@ func (r GetIdentityVerificationAttributesRequest) Send(ctx context.Context) (*Ge
 // GetIdentityVerificationAttributesResponse is the response type for the
 // GetIdentityVerificationAttributes API operation.
 type GetIdentityVerificationAttributesResponse struct {
-	*GetIdentityVerificationAttributesOutput
+	*types.GetIdentityVerificationAttributesOutput
 
 	response *aws.Response
 }

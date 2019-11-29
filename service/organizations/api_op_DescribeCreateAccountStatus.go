@@ -6,54 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/organizations/types"
 )
-
-type DescribeCreateAccountStatusInput struct {
-	_ struct{} `type:"structure"`
-
-	// Specifies the operationId that uniquely identifies the request. You can get
-	// the ID from the response to an earlier CreateAccount request, or from the
-	// ListCreateAccountStatus operation.
-	//
-	// The regex pattern (http://wikipedia.org/wiki/regex) for a create account
-	// request ID string requires "car-" followed by from 8 to 32 lower-case letters
-	// or digits.
-	//
-	// CreateAccountRequestId is a required field
-	CreateAccountRequestId *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeCreateAccountStatusInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeCreateAccountStatusInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeCreateAccountStatusInput"}
-
-	if s.CreateAccountRequestId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("CreateAccountRequestId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribeCreateAccountStatusOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A structure that contains the current status of an account creation request.
-	CreateAccountStatus *CreateAccountStatus `type:"structure"`
-}
-
-// String returns the string representation
-func (s DescribeCreateAccountStatusOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeCreateAccountStatus = "DescribeCreateAccountStatus"
 
@@ -72,7 +26,7 @@ const opDescribeCreateAccountStatus = "DescribeCreateAccountStatus"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/DescribeCreateAccountStatus
-func (c *Client) DescribeCreateAccountStatusRequest(input *DescribeCreateAccountStatusInput) DescribeCreateAccountStatusRequest {
+func (c *Client) DescribeCreateAccountStatusRequest(input *types.DescribeCreateAccountStatusInput) DescribeCreateAccountStatusRequest {
 	op := &aws.Operation{
 		Name:       opDescribeCreateAccountStatus,
 		HTTPMethod: "POST",
@@ -80,10 +34,10 @@ func (c *Client) DescribeCreateAccountStatusRequest(input *DescribeCreateAccount
 	}
 
 	if input == nil {
-		input = &DescribeCreateAccountStatusInput{}
+		input = &types.DescribeCreateAccountStatusInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeCreateAccountStatusOutput{})
+	req := c.newRequest(op, input, &types.DescribeCreateAccountStatusOutput{})
 	return DescribeCreateAccountStatusRequest{Request: req, Input: input, Copy: c.DescribeCreateAccountStatusRequest}
 }
 
@@ -91,8 +45,8 @@ func (c *Client) DescribeCreateAccountStatusRequest(input *DescribeCreateAccount
 // DescribeCreateAccountStatus API operation.
 type DescribeCreateAccountStatusRequest struct {
 	*aws.Request
-	Input *DescribeCreateAccountStatusInput
-	Copy  func(*DescribeCreateAccountStatusInput) DescribeCreateAccountStatusRequest
+	Input *types.DescribeCreateAccountStatusInput
+	Copy  func(*types.DescribeCreateAccountStatusInput) DescribeCreateAccountStatusRequest
 }
 
 // Send marshals and sends the DescribeCreateAccountStatus API request.
@@ -104,7 +58,7 @@ func (r DescribeCreateAccountStatusRequest) Send(ctx context.Context) (*Describe
 	}
 
 	resp := &DescribeCreateAccountStatusResponse{
-		DescribeCreateAccountStatusOutput: r.Request.Data.(*DescribeCreateAccountStatusOutput),
+		DescribeCreateAccountStatusOutput: r.Request.Data.(*types.DescribeCreateAccountStatusOutput),
 		response:                          &aws.Response{Request: r.Request},
 	}
 
@@ -114,7 +68,7 @@ func (r DescribeCreateAccountStatusRequest) Send(ctx context.Context) (*Describe
 // DescribeCreateAccountStatusResponse is the response type for the
 // DescribeCreateAccountStatus API operation.
 type DescribeCreateAccountStatusResponse struct {
-	*DescribeCreateAccountStatusOutput
+	*types.DescribeCreateAccountStatusOutput
 
 	response *aws.Response
 }

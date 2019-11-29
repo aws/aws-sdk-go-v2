@@ -6,72 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/iotthingsgraph/types"
 )
-
-type UpdateSystemTemplateInput struct {
-	_ struct{} `type:"structure"`
-
-	// The version of the user's namespace. Defaults to the latest version of the
-	// user's namespace.
-	//
-	// If no value is specified, the latest version is used by default.
-	CompatibleNamespaceVersion *int64 `locationName:"compatibleNamespaceVersion" type:"long"`
-
-	// The DefinitionDocument that contains the updated system definition.
-	//
-	// Definition is a required field
-	Definition *DefinitionDocument `locationName:"definition" type:"structure" required:"true"`
-
-	// The ID of the system to be updated.
-	//
-	// The ID should be in the following format.
-	//
-	// urn:tdm:REGION/ACCOUNT ID/default:system:SYSTEMNAME
-	//
-	// Id is a required field
-	Id *string `locationName:"id" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s UpdateSystemTemplateInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateSystemTemplateInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateSystemTemplateInput"}
-
-	if s.Definition == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Definition"))
-	}
-
-	if s.Id == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Id"))
-	}
-	if s.Definition != nil {
-		if err := s.Definition.Validate(); err != nil {
-			invalidParams.AddNested("Definition", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type UpdateSystemTemplateOutput struct {
-	_ struct{} `type:"structure"`
-
-	// An object containing summary information about the updated system.
-	Summary *SystemTemplateSummary `locationName:"summary" type:"structure"`
-}
-
-// String returns the string representation
-func (s UpdateSystemTemplateOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opUpdateSystemTemplate = "UpdateSystemTemplate"
 
@@ -90,7 +26,7 @@ const opUpdateSystemTemplate = "UpdateSystemTemplate"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iotthingsgraph-2018-09-06/UpdateSystemTemplate
-func (c *Client) UpdateSystemTemplateRequest(input *UpdateSystemTemplateInput) UpdateSystemTemplateRequest {
+func (c *Client) UpdateSystemTemplateRequest(input *types.UpdateSystemTemplateInput) UpdateSystemTemplateRequest {
 	op := &aws.Operation{
 		Name:       opUpdateSystemTemplate,
 		HTTPMethod: "POST",
@@ -98,10 +34,10 @@ func (c *Client) UpdateSystemTemplateRequest(input *UpdateSystemTemplateInput) U
 	}
 
 	if input == nil {
-		input = &UpdateSystemTemplateInput{}
+		input = &types.UpdateSystemTemplateInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateSystemTemplateOutput{})
+	req := c.newRequest(op, input, &types.UpdateSystemTemplateOutput{})
 	return UpdateSystemTemplateRequest{Request: req, Input: input, Copy: c.UpdateSystemTemplateRequest}
 }
 
@@ -109,8 +45,8 @@ func (c *Client) UpdateSystemTemplateRequest(input *UpdateSystemTemplateInput) U
 // UpdateSystemTemplate API operation.
 type UpdateSystemTemplateRequest struct {
 	*aws.Request
-	Input *UpdateSystemTemplateInput
-	Copy  func(*UpdateSystemTemplateInput) UpdateSystemTemplateRequest
+	Input *types.UpdateSystemTemplateInput
+	Copy  func(*types.UpdateSystemTemplateInput) UpdateSystemTemplateRequest
 }
 
 // Send marshals and sends the UpdateSystemTemplate API request.
@@ -122,7 +58,7 @@ func (r UpdateSystemTemplateRequest) Send(ctx context.Context) (*UpdateSystemTem
 	}
 
 	resp := &UpdateSystemTemplateResponse{
-		UpdateSystemTemplateOutput: r.Request.Data.(*UpdateSystemTemplateOutput),
+		UpdateSystemTemplateOutput: r.Request.Data.(*types.UpdateSystemTemplateOutput),
 		response:                   &aws.Response{Request: r.Request},
 	}
 
@@ -132,7 +68,7 @@ func (r UpdateSystemTemplateRequest) Send(ctx context.Context) (*UpdateSystemTem
 // UpdateSystemTemplateResponse is the response type for the
 // UpdateSystemTemplate API operation.
 type UpdateSystemTemplateResponse struct {
-	*UpdateSystemTemplateOutput
+	*types.UpdateSystemTemplateOutput
 
 	response *aws.Response
 }

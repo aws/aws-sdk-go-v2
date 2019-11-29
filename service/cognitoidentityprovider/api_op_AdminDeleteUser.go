@@ -6,63 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
+	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/types"
 )
-
-// Represents the request to delete a user as an administrator.
-type AdminDeleteUserInput struct {
-	_ struct{} `type:"structure"`
-
-	// The user pool ID for the user pool where you want to delete the user.
-	//
-	// UserPoolId is a required field
-	UserPoolId *string `min:"1" type:"string" required:"true"`
-
-	// The user name of the user you wish to delete.
-	//
-	// Username is a required field
-	Username *string `min:"1" type:"string" required:"true" sensitive:"true"`
-}
-
-// String returns the string representation
-func (s AdminDeleteUserInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *AdminDeleteUserInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "AdminDeleteUserInput"}
-
-	if s.UserPoolId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("UserPoolId"))
-	}
-	if s.UserPoolId != nil && len(*s.UserPoolId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("UserPoolId", 1))
-	}
-
-	if s.Username == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Username"))
-	}
-	if s.Username != nil && len(*s.Username) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Username", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type AdminDeleteUserOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s AdminDeleteUserOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opAdminDeleteUser = "AdminDeleteUser"
 
@@ -81,7 +28,7 @@ const opAdminDeleteUser = "AdminDeleteUser"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AdminDeleteUser
-func (c *Client) AdminDeleteUserRequest(input *AdminDeleteUserInput) AdminDeleteUserRequest {
+func (c *Client) AdminDeleteUserRequest(input *types.AdminDeleteUserInput) AdminDeleteUserRequest {
 	op := &aws.Operation{
 		Name:       opAdminDeleteUser,
 		HTTPMethod: "POST",
@@ -89,10 +36,10 @@ func (c *Client) AdminDeleteUserRequest(input *AdminDeleteUserInput) AdminDelete
 	}
 
 	if input == nil {
-		input = &AdminDeleteUserInput{}
+		input = &types.AdminDeleteUserInput{}
 	}
 
-	req := c.newRequest(op, input, &AdminDeleteUserOutput{})
+	req := c.newRequest(op, input, &types.AdminDeleteUserOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return AdminDeleteUserRequest{Request: req, Input: input, Copy: c.AdminDeleteUserRequest}
@@ -102,8 +49,8 @@ func (c *Client) AdminDeleteUserRequest(input *AdminDeleteUserInput) AdminDelete
 // AdminDeleteUser API operation.
 type AdminDeleteUserRequest struct {
 	*aws.Request
-	Input *AdminDeleteUserInput
-	Copy  func(*AdminDeleteUserInput) AdminDeleteUserRequest
+	Input *types.AdminDeleteUserInput
+	Copy  func(*types.AdminDeleteUserInput) AdminDeleteUserRequest
 }
 
 // Send marshals and sends the AdminDeleteUser API request.
@@ -115,7 +62,7 @@ func (r AdminDeleteUserRequest) Send(ctx context.Context) (*AdminDeleteUserRespo
 	}
 
 	resp := &AdminDeleteUserResponse{
-		AdminDeleteUserOutput: r.Request.Data.(*AdminDeleteUserOutput),
+		AdminDeleteUserOutput: r.Request.Data.(*types.AdminDeleteUserOutput),
 		response:              &aws.Response{Request: r.Request},
 	}
 
@@ -125,7 +72,7 @@ func (r AdminDeleteUserRequest) Send(ctx context.Context) (*AdminDeleteUserRespo
 // AdminDeleteUserResponse is the response type for the
 // AdminDeleteUser API operation.
 type AdminDeleteUserResponse struct {
-	*AdminDeleteUserOutput
+	*types.AdminDeleteUserOutput
 
 	response *aws.Response
 }

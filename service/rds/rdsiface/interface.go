@@ -13,6 +13,7 @@ import (
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/rds"
+	"github.com/aws/aws-sdk-go-v2/service/rds/types"
 )
 
 // ClientAPI provides an interface to enable mocking the
@@ -46,7 +47,7 @@ import (
 //    type mockClientClient struct {
 //        rdsiface.ClientPI
 //    }
-//    func (m *mockClientClient) AddRoleToDBCluster(input *rds.AddRoleToDBClusterInput) (*rds.AddRoleToDBClusterOutput, error) {
+//    func (m *mockClientClient) AddRoleToDBCluster(input *types.AddRoleToDBClusterInput) (*types.AddRoleToDBClusterOutput, error) {
 //        // mock response/functionality
 //    }
 //
@@ -64,251 +65,251 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type ClientAPI interface {
-	AddRoleToDBClusterRequest(*rds.AddRoleToDBClusterInput) rds.AddRoleToDBClusterRequest
+	AddRoleToDBClusterRequest(*types.AddRoleToDBClusterInput) rds.AddRoleToDBClusterRequest
 
-	AddRoleToDBInstanceRequest(*rds.AddRoleToDBInstanceInput) rds.AddRoleToDBInstanceRequest
+	AddRoleToDBInstanceRequest(*types.AddRoleToDBInstanceInput) rds.AddRoleToDBInstanceRequest
 
-	AddSourceIdentifierToSubscriptionRequest(*rds.AddSourceIdentifierToSubscriptionInput) rds.AddSourceIdentifierToSubscriptionRequest
+	AddSourceIdentifierToSubscriptionRequest(*types.AddSourceIdentifierToSubscriptionInput) rds.AddSourceIdentifierToSubscriptionRequest
 
-	AddTagsToResourceRequest(*rds.AddTagsToResourceInput) rds.AddTagsToResourceRequest
+	AddTagsToResourceRequest(*types.AddTagsToResourceInput) rds.AddTagsToResourceRequest
 
-	ApplyPendingMaintenanceActionRequest(*rds.ApplyPendingMaintenanceActionInput) rds.ApplyPendingMaintenanceActionRequest
+	ApplyPendingMaintenanceActionRequest(*types.ApplyPendingMaintenanceActionInput) rds.ApplyPendingMaintenanceActionRequest
 
-	AuthorizeDBSecurityGroupIngressRequest(*rds.AuthorizeDBSecurityGroupIngressInput) rds.AuthorizeDBSecurityGroupIngressRequest
+	AuthorizeDBSecurityGroupIngressRequest(*types.AuthorizeDBSecurityGroupIngressInput) rds.AuthorizeDBSecurityGroupIngressRequest
 
-	BacktrackDBClusterRequest(*rds.BacktrackDBClusterInput) rds.BacktrackDBClusterRequest
+	BacktrackDBClusterRequest(*types.BacktrackDBClusterInput) rds.BacktrackDBClusterRequest
 
-	CopyDBClusterParameterGroupRequest(*rds.CopyDBClusterParameterGroupInput) rds.CopyDBClusterParameterGroupRequest
+	CopyDBClusterParameterGroupRequest(*types.CopyDBClusterParameterGroupInput) rds.CopyDBClusterParameterGroupRequest
 
-	CopyDBClusterSnapshotRequest(*rds.CopyDBClusterSnapshotInput) rds.CopyDBClusterSnapshotRequest
+	CopyDBClusterSnapshotRequest(*types.CopyDBClusterSnapshotInput) rds.CopyDBClusterSnapshotRequest
 
-	CopyDBParameterGroupRequest(*rds.CopyDBParameterGroupInput) rds.CopyDBParameterGroupRequest
+	CopyDBParameterGroupRequest(*types.CopyDBParameterGroupInput) rds.CopyDBParameterGroupRequest
 
-	CopyDBSnapshotRequest(*rds.CopyDBSnapshotInput) rds.CopyDBSnapshotRequest
+	CopyDBSnapshotRequest(*types.CopyDBSnapshotInput) rds.CopyDBSnapshotRequest
 
-	CopyOptionGroupRequest(*rds.CopyOptionGroupInput) rds.CopyOptionGroupRequest
+	CopyOptionGroupRequest(*types.CopyOptionGroupInput) rds.CopyOptionGroupRequest
 
-	CreateCustomAvailabilityZoneRequest(*rds.CreateCustomAvailabilityZoneInput) rds.CreateCustomAvailabilityZoneRequest
+	CreateCustomAvailabilityZoneRequest(*types.CreateCustomAvailabilityZoneInput) rds.CreateCustomAvailabilityZoneRequest
 
-	CreateDBClusterRequest(*rds.CreateDBClusterInput) rds.CreateDBClusterRequest
+	CreateDBClusterRequest(*types.CreateDBClusterInput) rds.CreateDBClusterRequest
 
-	CreateDBClusterEndpointRequest(*rds.CreateDBClusterEndpointInput) rds.CreateDBClusterEndpointRequest
+	CreateDBClusterEndpointRequest(*types.CreateDBClusterEndpointInput) rds.CreateDBClusterEndpointRequest
 
-	CreateDBClusterParameterGroupRequest(*rds.CreateDBClusterParameterGroupInput) rds.CreateDBClusterParameterGroupRequest
+	CreateDBClusterParameterGroupRequest(*types.CreateDBClusterParameterGroupInput) rds.CreateDBClusterParameterGroupRequest
 
-	CreateDBClusterSnapshotRequest(*rds.CreateDBClusterSnapshotInput) rds.CreateDBClusterSnapshotRequest
+	CreateDBClusterSnapshotRequest(*types.CreateDBClusterSnapshotInput) rds.CreateDBClusterSnapshotRequest
 
-	CreateDBInstanceRequest(*rds.CreateDBInstanceInput) rds.CreateDBInstanceRequest
+	CreateDBInstanceRequest(*types.CreateDBInstanceInput) rds.CreateDBInstanceRequest
 
-	CreateDBInstanceReadReplicaRequest(*rds.CreateDBInstanceReadReplicaInput) rds.CreateDBInstanceReadReplicaRequest
+	CreateDBInstanceReadReplicaRequest(*types.CreateDBInstanceReadReplicaInput) rds.CreateDBInstanceReadReplicaRequest
 
-	CreateDBParameterGroupRequest(*rds.CreateDBParameterGroupInput) rds.CreateDBParameterGroupRequest
+	CreateDBParameterGroupRequest(*types.CreateDBParameterGroupInput) rds.CreateDBParameterGroupRequest
 
-	CreateDBSecurityGroupRequest(*rds.CreateDBSecurityGroupInput) rds.CreateDBSecurityGroupRequest
+	CreateDBSecurityGroupRequest(*types.CreateDBSecurityGroupInput) rds.CreateDBSecurityGroupRequest
 
-	CreateDBSnapshotRequest(*rds.CreateDBSnapshotInput) rds.CreateDBSnapshotRequest
+	CreateDBSnapshotRequest(*types.CreateDBSnapshotInput) rds.CreateDBSnapshotRequest
 
-	CreateDBSubnetGroupRequest(*rds.CreateDBSubnetGroupInput) rds.CreateDBSubnetGroupRequest
+	CreateDBSubnetGroupRequest(*types.CreateDBSubnetGroupInput) rds.CreateDBSubnetGroupRequest
 
-	CreateEventSubscriptionRequest(*rds.CreateEventSubscriptionInput) rds.CreateEventSubscriptionRequest
+	CreateEventSubscriptionRequest(*types.CreateEventSubscriptionInput) rds.CreateEventSubscriptionRequest
 
-	CreateGlobalClusterRequest(*rds.CreateGlobalClusterInput) rds.CreateGlobalClusterRequest
+	CreateGlobalClusterRequest(*types.CreateGlobalClusterInput) rds.CreateGlobalClusterRequest
 
-	CreateOptionGroupRequest(*rds.CreateOptionGroupInput) rds.CreateOptionGroupRequest
+	CreateOptionGroupRequest(*types.CreateOptionGroupInput) rds.CreateOptionGroupRequest
 
-	DeleteCustomAvailabilityZoneRequest(*rds.DeleteCustomAvailabilityZoneInput) rds.DeleteCustomAvailabilityZoneRequest
+	DeleteCustomAvailabilityZoneRequest(*types.DeleteCustomAvailabilityZoneInput) rds.DeleteCustomAvailabilityZoneRequest
 
-	DeleteDBClusterRequest(*rds.DeleteDBClusterInput) rds.DeleteDBClusterRequest
+	DeleteDBClusterRequest(*types.DeleteDBClusterInput) rds.DeleteDBClusterRequest
 
-	DeleteDBClusterEndpointRequest(*rds.DeleteDBClusterEndpointInput) rds.DeleteDBClusterEndpointRequest
+	DeleteDBClusterEndpointRequest(*types.DeleteDBClusterEndpointInput) rds.DeleteDBClusterEndpointRequest
 
-	DeleteDBClusterParameterGroupRequest(*rds.DeleteDBClusterParameterGroupInput) rds.DeleteDBClusterParameterGroupRequest
+	DeleteDBClusterParameterGroupRequest(*types.DeleteDBClusterParameterGroupInput) rds.DeleteDBClusterParameterGroupRequest
 
-	DeleteDBClusterSnapshotRequest(*rds.DeleteDBClusterSnapshotInput) rds.DeleteDBClusterSnapshotRequest
+	DeleteDBClusterSnapshotRequest(*types.DeleteDBClusterSnapshotInput) rds.DeleteDBClusterSnapshotRequest
 
-	DeleteDBInstanceRequest(*rds.DeleteDBInstanceInput) rds.DeleteDBInstanceRequest
+	DeleteDBInstanceRequest(*types.DeleteDBInstanceInput) rds.DeleteDBInstanceRequest
 
-	DeleteDBInstanceAutomatedBackupRequest(*rds.DeleteDBInstanceAutomatedBackupInput) rds.DeleteDBInstanceAutomatedBackupRequest
+	DeleteDBInstanceAutomatedBackupRequest(*types.DeleteDBInstanceAutomatedBackupInput) rds.DeleteDBInstanceAutomatedBackupRequest
 
-	DeleteDBParameterGroupRequest(*rds.DeleteDBParameterGroupInput) rds.DeleteDBParameterGroupRequest
+	DeleteDBParameterGroupRequest(*types.DeleteDBParameterGroupInput) rds.DeleteDBParameterGroupRequest
 
-	DeleteDBSecurityGroupRequest(*rds.DeleteDBSecurityGroupInput) rds.DeleteDBSecurityGroupRequest
+	DeleteDBSecurityGroupRequest(*types.DeleteDBSecurityGroupInput) rds.DeleteDBSecurityGroupRequest
 
-	DeleteDBSnapshotRequest(*rds.DeleteDBSnapshotInput) rds.DeleteDBSnapshotRequest
+	DeleteDBSnapshotRequest(*types.DeleteDBSnapshotInput) rds.DeleteDBSnapshotRequest
 
-	DeleteDBSubnetGroupRequest(*rds.DeleteDBSubnetGroupInput) rds.DeleteDBSubnetGroupRequest
+	DeleteDBSubnetGroupRequest(*types.DeleteDBSubnetGroupInput) rds.DeleteDBSubnetGroupRequest
 
-	DeleteEventSubscriptionRequest(*rds.DeleteEventSubscriptionInput) rds.DeleteEventSubscriptionRequest
+	DeleteEventSubscriptionRequest(*types.DeleteEventSubscriptionInput) rds.DeleteEventSubscriptionRequest
 
-	DeleteGlobalClusterRequest(*rds.DeleteGlobalClusterInput) rds.DeleteGlobalClusterRequest
+	DeleteGlobalClusterRequest(*types.DeleteGlobalClusterInput) rds.DeleteGlobalClusterRequest
 
-	DeleteInstallationMediaRequest(*rds.DeleteInstallationMediaInput) rds.DeleteInstallationMediaRequest
+	DeleteInstallationMediaRequest(*types.DeleteInstallationMediaInput) rds.DeleteInstallationMediaRequest
 
-	DeleteOptionGroupRequest(*rds.DeleteOptionGroupInput) rds.DeleteOptionGroupRequest
+	DeleteOptionGroupRequest(*types.DeleteOptionGroupInput) rds.DeleteOptionGroupRequest
 
-	DescribeAccountAttributesRequest(*rds.DescribeAccountAttributesInput) rds.DescribeAccountAttributesRequest
+	DescribeAccountAttributesRequest(*types.DescribeAccountAttributesInput) rds.DescribeAccountAttributesRequest
 
-	DescribeCertificatesRequest(*rds.DescribeCertificatesInput) rds.DescribeCertificatesRequest
+	DescribeCertificatesRequest(*types.DescribeCertificatesInput) rds.DescribeCertificatesRequest
 
-	DescribeCustomAvailabilityZonesRequest(*rds.DescribeCustomAvailabilityZonesInput) rds.DescribeCustomAvailabilityZonesRequest
+	DescribeCustomAvailabilityZonesRequest(*types.DescribeCustomAvailabilityZonesInput) rds.DescribeCustomAvailabilityZonesRequest
 
-	DescribeDBClusterBacktracksRequest(*rds.DescribeDBClusterBacktracksInput) rds.DescribeDBClusterBacktracksRequest
+	DescribeDBClusterBacktracksRequest(*types.DescribeDBClusterBacktracksInput) rds.DescribeDBClusterBacktracksRequest
 
-	DescribeDBClusterEndpointsRequest(*rds.DescribeDBClusterEndpointsInput) rds.DescribeDBClusterEndpointsRequest
+	DescribeDBClusterEndpointsRequest(*types.DescribeDBClusterEndpointsInput) rds.DescribeDBClusterEndpointsRequest
 
-	DescribeDBClusterParameterGroupsRequest(*rds.DescribeDBClusterParameterGroupsInput) rds.DescribeDBClusterParameterGroupsRequest
+	DescribeDBClusterParameterGroupsRequest(*types.DescribeDBClusterParameterGroupsInput) rds.DescribeDBClusterParameterGroupsRequest
 
-	DescribeDBClusterParametersRequest(*rds.DescribeDBClusterParametersInput) rds.DescribeDBClusterParametersRequest
+	DescribeDBClusterParametersRequest(*types.DescribeDBClusterParametersInput) rds.DescribeDBClusterParametersRequest
 
-	DescribeDBClusterSnapshotAttributesRequest(*rds.DescribeDBClusterSnapshotAttributesInput) rds.DescribeDBClusterSnapshotAttributesRequest
+	DescribeDBClusterSnapshotAttributesRequest(*types.DescribeDBClusterSnapshotAttributesInput) rds.DescribeDBClusterSnapshotAttributesRequest
 
-	DescribeDBClusterSnapshotsRequest(*rds.DescribeDBClusterSnapshotsInput) rds.DescribeDBClusterSnapshotsRequest
+	DescribeDBClusterSnapshotsRequest(*types.DescribeDBClusterSnapshotsInput) rds.DescribeDBClusterSnapshotsRequest
 
-	DescribeDBClustersRequest(*rds.DescribeDBClustersInput) rds.DescribeDBClustersRequest
+	DescribeDBClustersRequest(*types.DescribeDBClustersInput) rds.DescribeDBClustersRequest
 
-	DescribeDBEngineVersionsRequest(*rds.DescribeDBEngineVersionsInput) rds.DescribeDBEngineVersionsRequest
+	DescribeDBEngineVersionsRequest(*types.DescribeDBEngineVersionsInput) rds.DescribeDBEngineVersionsRequest
 
-	DescribeDBInstanceAutomatedBackupsRequest(*rds.DescribeDBInstanceAutomatedBackupsInput) rds.DescribeDBInstanceAutomatedBackupsRequest
+	DescribeDBInstanceAutomatedBackupsRequest(*types.DescribeDBInstanceAutomatedBackupsInput) rds.DescribeDBInstanceAutomatedBackupsRequest
 
-	DescribeDBInstancesRequest(*rds.DescribeDBInstancesInput) rds.DescribeDBInstancesRequest
+	DescribeDBInstancesRequest(*types.DescribeDBInstancesInput) rds.DescribeDBInstancesRequest
 
-	DescribeDBLogFilesRequest(*rds.DescribeDBLogFilesInput) rds.DescribeDBLogFilesRequest
+	DescribeDBLogFilesRequest(*types.DescribeDBLogFilesInput) rds.DescribeDBLogFilesRequest
 
-	DescribeDBParameterGroupsRequest(*rds.DescribeDBParameterGroupsInput) rds.DescribeDBParameterGroupsRequest
+	DescribeDBParameterGroupsRequest(*types.DescribeDBParameterGroupsInput) rds.DescribeDBParameterGroupsRequest
 
-	DescribeDBParametersRequest(*rds.DescribeDBParametersInput) rds.DescribeDBParametersRequest
+	DescribeDBParametersRequest(*types.DescribeDBParametersInput) rds.DescribeDBParametersRequest
 
-	DescribeDBSecurityGroupsRequest(*rds.DescribeDBSecurityGroupsInput) rds.DescribeDBSecurityGroupsRequest
+	DescribeDBSecurityGroupsRequest(*types.DescribeDBSecurityGroupsInput) rds.DescribeDBSecurityGroupsRequest
 
-	DescribeDBSnapshotAttributesRequest(*rds.DescribeDBSnapshotAttributesInput) rds.DescribeDBSnapshotAttributesRequest
+	DescribeDBSnapshotAttributesRequest(*types.DescribeDBSnapshotAttributesInput) rds.DescribeDBSnapshotAttributesRequest
 
-	DescribeDBSnapshotsRequest(*rds.DescribeDBSnapshotsInput) rds.DescribeDBSnapshotsRequest
+	DescribeDBSnapshotsRequest(*types.DescribeDBSnapshotsInput) rds.DescribeDBSnapshotsRequest
 
-	DescribeDBSubnetGroupsRequest(*rds.DescribeDBSubnetGroupsInput) rds.DescribeDBSubnetGroupsRequest
+	DescribeDBSubnetGroupsRequest(*types.DescribeDBSubnetGroupsInput) rds.DescribeDBSubnetGroupsRequest
 
-	DescribeEngineDefaultClusterParametersRequest(*rds.DescribeEngineDefaultClusterParametersInput) rds.DescribeEngineDefaultClusterParametersRequest
+	DescribeEngineDefaultClusterParametersRequest(*types.DescribeEngineDefaultClusterParametersInput) rds.DescribeEngineDefaultClusterParametersRequest
 
-	DescribeEngineDefaultParametersRequest(*rds.DescribeEngineDefaultParametersInput) rds.DescribeEngineDefaultParametersRequest
+	DescribeEngineDefaultParametersRequest(*types.DescribeEngineDefaultParametersInput) rds.DescribeEngineDefaultParametersRequest
 
-	DescribeEventCategoriesRequest(*rds.DescribeEventCategoriesInput) rds.DescribeEventCategoriesRequest
+	DescribeEventCategoriesRequest(*types.DescribeEventCategoriesInput) rds.DescribeEventCategoriesRequest
 
-	DescribeEventSubscriptionsRequest(*rds.DescribeEventSubscriptionsInput) rds.DescribeEventSubscriptionsRequest
+	DescribeEventSubscriptionsRequest(*types.DescribeEventSubscriptionsInput) rds.DescribeEventSubscriptionsRequest
 
-	DescribeEventsRequest(*rds.DescribeEventsInput) rds.DescribeEventsRequest
+	DescribeEventsRequest(*types.DescribeEventsInput) rds.DescribeEventsRequest
 
-	DescribeGlobalClustersRequest(*rds.DescribeGlobalClustersInput) rds.DescribeGlobalClustersRequest
+	DescribeGlobalClustersRequest(*types.DescribeGlobalClustersInput) rds.DescribeGlobalClustersRequest
 
-	DescribeInstallationMediaRequest(*rds.DescribeInstallationMediaInput) rds.DescribeInstallationMediaRequest
+	DescribeInstallationMediaRequest(*types.DescribeInstallationMediaInput) rds.DescribeInstallationMediaRequest
 
-	DescribeOptionGroupOptionsRequest(*rds.DescribeOptionGroupOptionsInput) rds.DescribeOptionGroupOptionsRequest
+	DescribeOptionGroupOptionsRequest(*types.DescribeOptionGroupOptionsInput) rds.DescribeOptionGroupOptionsRequest
 
-	DescribeOptionGroupsRequest(*rds.DescribeOptionGroupsInput) rds.DescribeOptionGroupsRequest
+	DescribeOptionGroupsRequest(*types.DescribeOptionGroupsInput) rds.DescribeOptionGroupsRequest
 
-	DescribeOrderableDBInstanceOptionsRequest(*rds.DescribeOrderableDBInstanceOptionsInput) rds.DescribeOrderableDBInstanceOptionsRequest
+	DescribeOrderableDBInstanceOptionsRequest(*types.DescribeOrderableDBInstanceOptionsInput) rds.DescribeOrderableDBInstanceOptionsRequest
 
-	DescribePendingMaintenanceActionsRequest(*rds.DescribePendingMaintenanceActionsInput) rds.DescribePendingMaintenanceActionsRequest
+	DescribePendingMaintenanceActionsRequest(*types.DescribePendingMaintenanceActionsInput) rds.DescribePendingMaintenanceActionsRequest
 
-	DescribeReservedDBInstancesRequest(*rds.DescribeReservedDBInstancesInput) rds.DescribeReservedDBInstancesRequest
+	DescribeReservedDBInstancesRequest(*types.DescribeReservedDBInstancesInput) rds.DescribeReservedDBInstancesRequest
 
-	DescribeReservedDBInstancesOfferingsRequest(*rds.DescribeReservedDBInstancesOfferingsInput) rds.DescribeReservedDBInstancesOfferingsRequest
+	DescribeReservedDBInstancesOfferingsRequest(*types.DescribeReservedDBInstancesOfferingsInput) rds.DescribeReservedDBInstancesOfferingsRequest
 
-	DescribeSourceRegionsRequest(*rds.DescribeSourceRegionsInput) rds.DescribeSourceRegionsRequest
+	DescribeSourceRegionsRequest(*types.DescribeSourceRegionsInput) rds.DescribeSourceRegionsRequest
 
-	DescribeValidDBInstanceModificationsRequest(*rds.DescribeValidDBInstanceModificationsInput) rds.DescribeValidDBInstanceModificationsRequest
+	DescribeValidDBInstanceModificationsRequest(*types.DescribeValidDBInstanceModificationsInput) rds.DescribeValidDBInstanceModificationsRequest
 
-	DownloadDBLogFilePortionRequest(*rds.DownloadDBLogFilePortionInput) rds.DownloadDBLogFilePortionRequest
+	DownloadDBLogFilePortionRequest(*types.DownloadDBLogFilePortionInput) rds.DownloadDBLogFilePortionRequest
 
-	FailoverDBClusterRequest(*rds.FailoverDBClusterInput) rds.FailoverDBClusterRequest
+	FailoverDBClusterRequest(*types.FailoverDBClusterInput) rds.FailoverDBClusterRequest
 
-	ImportInstallationMediaRequest(*rds.ImportInstallationMediaInput) rds.ImportInstallationMediaRequest
+	ImportInstallationMediaRequest(*types.ImportInstallationMediaInput) rds.ImportInstallationMediaRequest
 
-	ListTagsForResourceRequest(*rds.ListTagsForResourceInput) rds.ListTagsForResourceRequest
+	ListTagsForResourceRequest(*types.ListTagsForResourceInput) rds.ListTagsForResourceRequest
 
-	ModifyCurrentDBClusterCapacityRequest(*rds.ModifyCurrentDBClusterCapacityInput) rds.ModifyCurrentDBClusterCapacityRequest
+	ModifyCurrentDBClusterCapacityRequest(*types.ModifyCurrentDBClusterCapacityInput) rds.ModifyCurrentDBClusterCapacityRequest
 
-	ModifyDBClusterRequest(*rds.ModifyDBClusterInput) rds.ModifyDBClusterRequest
+	ModifyDBClusterRequest(*types.ModifyDBClusterInput) rds.ModifyDBClusterRequest
 
-	ModifyDBClusterEndpointRequest(*rds.ModifyDBClusterEndpointInput) rds.ModifyDBClusterEndpointRequest
+	ModifyDBClusterEndpointRequest(*types.ModifyDBClusterEndpointInput) rds.ModifyDBClusterEndpointRequest
 
-	ModifyDBClusterParameterGroupRequest(*rds.ModifyDBClusterParameterGroupInput) rds.ModifyDBClusterParameterGroupRequest
+	ModifyDBClusterParameterGroupRequest(*types.ModifyDBClusterParameterGroupInput) rds.ModifyDBClusterParameterGroupRequest
 
-	ModifyDBClusterSnapshotAttributeRequest(*rds.ModifyDBClusterSnapshotAttributeInput) rds.ModifyDBClusterSnapshotAttributeRequest
+	ModifyDBClusterSnapshotAttributeRequest(*types.ModifyDBClusterSnapshotAttributeInput) rds.ModifyDBClusterSnapshotAttributeRequest
 
-	ModifyDBInstanceRequest(*rds.ModifyDBInstanceInput) rds.ModifyDBInstanceRequest
+	ModifyDBInstanceRequest(*types.ModifyDBInstanceInput) rds.ModifyDBInstanceRequest
 
-	ModifyDBParameterGroupRequest(*rds.ModifyDBParameterGroupInput) rds.ModifyDBParameterGroupRequest
+	ModifyDBParameterGroupRequest(*types.ModifyDBParameterGroupInput) rds.ModifyDBParameterGroupRequest
 
-	ModifyDBSnapshotRequest(*rds.ModifyDBSnapshotInput) rds.ModifyDBSnapshotRequest
+	ModifyDBSnapshotRequest(*types.ModifyDBSnapshotInput) rds.ModifyDBSnapshotRequest
 
-	ModifyDBSnapshotAttributeRequest(*rds.ModifyDBSnapshotAttributeInput) rds.ModifyDBSnapshotAttributeRequest
+	ModifyDBSnapshotAttributeRequest(*types.ModifyDBSnapshotAttributeInput) rds.ModifyDBSnapshotAttributeRequest
 
-	ModifyDBSubnetGroupRequest(*rds.ModifyDBSubnetGroupInput) rds.ModifyDBSubnetGroupRequest
+	ModifyDBSubnetGroupRequest(*types.ModifyDBSubnetGroupInput) rds.ModifyDBSubnetGroupRequest
 
-	ModifyEventSubscriptionRequest(*rds.ModifyEventSubscriptionInput) rds.ModifyEventSubscriptionRequest
+	ModifyEventSubscriptionRequest(*types.ModifyEventSubscriptionInput) rds.ModifyEventSubscriptionRequest
 
-	ModifyGlobalClusterRequest(*rds.ModifyGlobalClusterInput) rds.ModifyGlobalClusterRequest
+	ModifyGlobalClusterRequest(*types.ModifyGlobalClusterInput) rds.ModifyGlobalClusterRequest
 
-	ModifyOptionGroupRequest(*rds.ModifyOptionGroupInput) rds.ModifyOptionGroupRequest
+	ModifyOptionGroupRequest(*types.ModifyOptionGroupInput) rds.ModifyOptionGroupRequest
 
-	PromoteReadReplicaRequest(*rds.PromoteReadReplicaInput) rds.PromoteReadReplicaRequest
+	PromoteReadReplicaRequest(*types.PromoteReadReplicaInput) rds.PromoteReadReplicaRequest
 
-	PromoteReadReplicaDBClusterRequest(*rds.PromoteReadReplicaDBClusterInput) rds.PromoteReadReplicaDBClusterRequest
+	PromoteReadReplicaDBClusterRequest(*types.PromoteReadReplicaDBClusterInput) rds.PromoteReadReplicaDBClusterRequest
 
-	PurchaseReservedDBInstancesOfferingRequest(*rds.PurchaseReservedDBInstancesOfferingInput) rds.PurchaseReservedDBInstancesOfferingRequest
+	PurchaseReservedDBInstancesOfferingRequest(*types.PurchaseReservedDBInstancesOfferingInput) rds.PurchaseReservedDBInstancesOfferingRequest
 
-	RebootDBInstanceRequest(*rds.RebootDBInstanceInput) rds.RebootDBInstanceRequest
+	RebootDBInstanceRequest(*types.RebootDBInstanceInput) rds.RebootDBInstanceRequest
 
-	RemoveFromGlobalClusterRequest(*rds.RemoveFromGlobalClusterInput) rds.RemoveFromGlobalClusterRequest
+	RemoveFromGlobalClusterRequest(*types.RemoveFromGlobalClusterInput) rds.RemoveFromGlobalClusterRequest
 
-	RemoveRoleFromDBClusterRequest(*rds.RemoveRoleFromDBClusterInput) rds.RemoveRoleFromDBClusterRequest
+	RemoveRoleFromDBClusterRequest(*types.RemoveRoleFromDBClusterInput) rds.RemoveRoleFromDBClusterRequest
 
-	RemoveRoleFromDBInstanceRequest(*rds.RemoveRoleFromDBInstanceInput) rds.RemoveRoleFromDBInstanceRequest
+	RemoveRoleFromDBInstanceRequest(*types.RemoveRoleFromDBInstanceInput) rds.RemoveRoleFromDBInstanceRequest
 
-	RemoveSourceIdentifierFromSubscriptionRequest(*rds.RemoveSourceIdentifierFromSubscriptionInput) rds.RemoveSourceIdentifierFromSubscriptionRequest
+	RemoveSourceIdentifierFromSubscriptionRequest(*types.RemoveSourceIdentifierFromSubscriptionInput) rds.RemoveSourceIdentifierFromSubscriptionRequest
 
-	RemoveTagsFromResourceRequest(*rds.RemoveTagsFromResourceInput) rds.RemoveTagsFromResourceRequest
+	RemoveTagsFromResourceRequest(*types.RemoveTagsFromResourceInput) rds.RemoveTagsFromResourceRequest
 
-	ResetDBClusterParameterGroupRequest(*rds.ResetDBClusterParameterGroupInput) rds.ResetDBClusterParameterGroupRequest
+	ResetDBClusterParameterGroupRequest(*types.ResetDBClusterParameterGroupInput) rds.ResetDBClusterParameterGroupRequest
 
-	ResetDBParameterGroupRequest(*rds.ResetDBParameterGroupInput) rds.ResetDBParameterGroupRequest
+	ResetDBParameterGroupRequest(*types.ResetDBParameterGroupInput) rds.ResetDBParameterGroupRequest
 
-	RestoreDBClusterFromS3Request(*rds.RestoreDBClusterFromS3Input) rds.RestoreDBClusterFromS3Request
+	RestoreDBClusterFromS3Request(*types.RestoreDBClusterFromS3Input) rds.RestoreDBClusterFromS3Request
 
-	RestoreDBClusterFromSnapshotRequest(*rds.RestoreDBClusterFromSnapshotInput) rds.RestoreDBClusterFromSnapshotRequest
+	RestoreDBClusterFromSnapshotRequest(*types.RestoreDBClusterFromSnapshotInput) rds.RestoreDBClusterFromSnapshotRequest
 
-	RestoreDBClusterToPointInTimeRequest(*rds.RestoreDBClusterToPointInTimeInput) rds.RestoreDBClusterToPointInTimeRequest
+	RestoreDBClusterToPointInTimeRequest(*types.RestoreDBClusterToPointInTimeInput) rds.RestoreDBClusterToPointInTimeRequest
 
-	RestoreDBInstanceFromDBSnapshotRequest(*rds.RestoreDBInstanceFromDBSnapshotInput) rds.RestoreDBInstanceFromDBSnapshotRequest
+	RestoreDBInstanceFromDBSnapshotRequest(*types.RestoreDBInstanceFromDBSnapshotInput) rds.RestoreDBInstanceFromDBSnapshotRequest
 
-	RestoreDBInstanceFromS3Request(*rds.RestoreDBInstanceFromS3Input) rds.RestoreDBInstanceFromS3Request
+	RestoreDBInstanceFromS3Request(*types.RestoreDBInstanceFromS3Input) rds.RestoreDBInstanceFromS3Request
 
-	RestoreDBInstanceToPointInTimeRequest(*rds.RestoreDBInstanceToPointInTimeInput) rds.RestoreDBInstanceToPointInTimeRequest
+	RestoreDBInstanceToPointInTimeRequest(*types.RestoreDBInstanceToPointInTimeInput) rds.RestoreDBInstanceToPointInTimeRequest
 
-	RevokeDBSecurityGroupIngressRequest(*rds.RevokeDBSecurityGroupIngressInput) rds.RevokeDBSecurityGroupIngressRequest
+	RevokeDBSecurityGroupIngressRequest(*types.RevokeDBSecurityGroupIngressInput) rds.RevokeDBSecurityGroupIngressRequest
 
-	StartActivityStreamRequest(*rds.StartActivityStreamInput) rds.StartActivityStreamRequest
+	StartActivityStreamRequest(*types.StartActivityStreamInput) rds.StartActivityStreamRequest
 
-	StartDBClusterRequest(*rds.StartDBClusterInput) rds.StartDBClusterRequest
+	StartDBClusterRequest(*types.StartDBClusterInput) rds.StartDBClusterRequest
 
-	StartDBInstanceRequest(*rds.StartDBInstanceInput) rds.StartDBInstanceRequest
+	StartDBInstanceRequest(*types.StartDBInstanceInput) rds.StartDBInstanceRequest
 
-	StopActivityStreamRequest(*rds.StopActivityStreamInput) rds.StopActivityStreamRequest
+	StopActivityStreamRequest(*types.StopActivityStreamInput) rds.StopActivityStreamRequest
 
-	StopDBClusterRequest(*rds.StopDBClusterInput) rds.StopDBClusterRequest
+	StopDBClusterRequest(*types.StopDBClusterInput) rds.StopDBClusterRequest
 
-	StopDBInstanceRequest(*rds.StopDBInstanceInput) rds.StopDBInstanceRequest
+	StopDBInstanceRequest(*types.StopDBInstanceInput) rds.StopDBInstanceRequest
 
-	WaitUntilDBClusterSnapshotAvailable(context.Context, *rds.DescribeDBClusterSnapshotsInput, ...aws.WaiterOption) error
+	WaitUntilDBClusterSnapshotAvailable(context.Context, *types.DescribeDBClusterSnapshotsInput, ...aws.WaiterOption) error
 
-	WaitUntilDBClusterSnapshotDeleted(context.Context, *rds.DescribeDBClusterSnapshotsInput, ...aws.WaiterOption) error
+	WaitUntilDBClusterSnapshotDeleted(context.Context, *types.DescribeDBClusterSnapshotsInput, ...aws.WaiterOption) error
 
-	WaitUntilDBInstanceAvailable(context.Context, *rds.DescribeDBInstancesInput, ...aws.WaiterOption) error
+	WaitUntilDBInstanceAvailable(context.Context, *types.DescribeDBInstancesInput, ...aws.WaiterOption) error
 
-	WaitUntilDBInstanceDeleted(context.Context, *rds.DescribeDBInstancesInput, ...aws.WaiterOption) error
+	WaitUntilDBInstanceDeleted(context.Context, *types.DescribeDBInstancesInput, ...aws.WaiterOption) error
 
-	WaitUntilDBSnapshotAvailable(context.Context, *rds.DescribeDBSnapshotsInput, ...aws.WaiterOption) error
+	WaitUntilDBSnapshotAvailable(context.Context, *types.DescribeDBSnapshotsInput, ...aws.WaiterOption) error
 
-	WaitUntilDBSnapshotDeleted(context.Context, *rds.DescribeDBSnapshotsInput, ...aws.WaiterOption) error
+	WaitUntilDBSnapshotDeleted(context.Context, *types.DescribeDBSnapshotsInput, ...aws.WaiterOption) error
 }
 
 var _ ClientAPI = (*rds.Client)(nil)

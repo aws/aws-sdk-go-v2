@@ -6,229 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/dynamodb/types"
 )
-
-// Represents the input of a PutItem operation.
-type PutItemInput struct {
-	_ struct{} `type:"structure"`
-
-	// A condition that must be satisfied in order for a conditional PutItem operation
-	// to succeed.
-	//
-	// An expression can contain any of the following:
-	//
-	//    * Functions: attribute_exists | attribute_not_exists | attribute_type
-	//    | contains | begins_with | size These function names are case-sensitive.
-	//
-	//    * Comparison operators: = | <> | < | > | <= | >= | BETWEEN | IN
-	//
-	//    * Logical operators: AND | OR | NOT
-	//
-	// For more information on condition expressions, see Condition Expressions
-	// (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.SpecifyingConditions.html)
-	// in the Amazon DynamoDB Developer Guide.
-	ConditionExpression *string `type:"string"`
-
-	// This is a legacy parameter. Use ConditionExpression instead. For more information,
-	// see ConditionalOperator (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/LegacyConditionalParameters.ConditionalOperator.html)
-	// in the Amazon DynamoDB Developer Guide.
-	ConditionalOperator ConditionalOperator `type:"string" enum:"true"`
-
-	// This is a legacy parameter. Use ConditionExpression instead. For more information,
-	// see Expected (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/LegacyConditionalParameters.Expected.html)
-	// in the Amazon DynamoDB Developer Guide.
-	Expected map[string]ExpectedAttributeValue `type:"map"`
-
-	// One or more substitution tokens for attribute names in an expression. The
-	// following are some use cases for using ExpressionAttributeNames:
-	//
-	//    * To access an attribute whose name conflicts with a DynamoDB reserved
-	//    word.
-	//
-	//    * To create a placeholder for repeating occurrences of an attribute name
-	//    in an expression.
-	//
-	//    * To prevent special characters in an attribute name from being misinterpreted
-	//    in an expression.
-	//
-	// Use the # character in an expression to dereference an attribute name. For
-	// example, consider the following attribute name:
-	//
-	//    * Percentile
-	//
-	// The name of this attribute conflicts with a reserved word, so it cannot be
-	// used directly in an expression. (For the complete list of reserved words,
-	// see Reserved Words (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ReservedWords.html)
-	// in the Amazon DynamoDB Developer Guide). To work around this, you could specify
-	// the following for ExpressionAttributeNames:
-	//
-	//    * {"#P":"Percentile"}
-	//
-	// You could then use this substitution in an expression, as in this example:
-	//
-	//    * #P = :val
-	//
-	// Tokens that begin with the : character are expression attribute values, which
-	// are placeholders for the actual value at runtime.
-	//
-	// For more information on expression attribute names, see Specifying Item Attributes
-	// (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.AccessingItemAttributes.html)
-	// in the Amazon DynamoDB Developer Guide.
-	ExpressionAttributeNames map[string]string `type:"map"`
-
-	// One or more values that can be substituted in an expression.
-	//
-	// Use the : (colon) character in an expression to dereference an attribute
-	// value. For example, suppose that you wanted to check whether the value of
-	// the ProductStatus attribute was one of the following:
-	//
-	// Available | Backordered | Discontinued
-	//
-	// You would first need to specify ExpressionAttributeValues as follows:
-	//
-	// { ":avail":{"S":"Available"}, ":back":{"S":"Backordered"}, ":disc":{"S":"Discontinued"}
-	// }
-	//
-	// You could then use these values in an expression, such as this:
-	//
-	// ProductStatus IN (:avail, :back, :disc)
-	//
-	// For more information on expression attribute values, see Condition Expressions
-	// (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.SpecifyingConditions.html)
-	// in the Amazon DynamoDB Developer Guide.
-	ExpressionAttributeValues map[string]AttributeValue `type:"map"`
-
-	// A map of attribute name/value pairs, one for each attribute. Only the primary
-	// key attributes are required; you can optionally provide other attribute name-value
-	// pairs for the item.
-	//
-	// You must provide all of the attributes for the primary key. For example,
-	// with a simple primary key, you only need to provide a value for the partition
-	// key. For a composite primary key, you must provide both values for both the
-	// partition key and the sort key.
-	//
-	// If you specify any attributes that are part of an index key, then the data
-	// types for those attributes must match those of the schema in the table's
-	// attribute definition.
-	//
-	// For more information about primary keys, see Primary Key (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.CoreComponents.html#HowItWorks.CoreComponents.PrimaryKey)
-	// in the Amazon DynamoDB Developer Guide.
-	//
-	// Each element in the Item map is an AttributeValue object.
-	//
-	// Item is a required field
-	Item map[string]AttributeValue `type:"map" required:"true"`
-
-	// Determines the level of detail about provisioned throughput consumption that
-	// is returned in the response:
-	//
-	//    * INDEXES - The response includes the aggregate ConsumedCapacity for the
-	//    operation, together with ConsumedCapacity for each table and secondary
-	//    index that was accessed. Note that some operations, such as GetItem and
-	//    BatchGetItem, do not access any indexes at all. In these cases, specifying
-	//    INDEXES will only return ConsumedCapacity information for table(s).
-	//
-	//    * TOTAL - The response includes only the aggregate ConsumedCapacity for
-	//    the operation.
-	//
-	//    * NONE - No ConsumedCapacity details are included in the response.
-	ReturnConsumedCapacity ReturnConsumedCapacity `type:"string" enum:"true"`
-
-	// Determines whether item collection metrics are returned. If set to SIZE,
-	// the response includes statistics about item collections, if any, that were
-	// modified during the operation are returned in the response. If set to NONE
-	// (the default), no statistics are returned.
-	ReturnItemCollectionMetrics ReturnItemCollectionMetrics `type:"string" enum:"true"`
-
-	// Use ReturnValues if you want to get the item attributes as they appeared
-	// before they were updated with the PutItem request. For PutItem, the valid
-	// values are:
-	//
-	//    * NONE - If ReturnValues is not specified, or if its value is NONE, then
-	//    nothing is returned. (This setting is the default for ReturnValues.)
-	//
-	//    * ALL_OLD - If PutItem overwrote an attribute name-value pair, then the
-	//    content of the old item is returned.
-	//
-	// The ReturnValues parameter is used by several DynamoDB operations; however,
-	// PutItem does not recognize any values other than NONE or ALL_OLD.
-	ReturnValues ReturnValue `type:"string" enum:"true"`
-
-	// The name of the table to contain the item.
-	//
-	// TableName is a required field
-	TableName *string `min:"3" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s PutItemInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *PutItemInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "PutItemInput"}
-
-	if s.Item == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Item"))
-	}
-
-	if s.TableName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("TableName"))
-	}
-	if s.TableName != nil && len(*s.TableName) < 3 {
-		invalidParams.Add(aws.NewErrParamMinLen("TableName", 3))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Represents the output of a PutItem operation.
-type PutItemOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The attribute values as they appeared before the PutItem operation, but only
-	// if ReturnValues is specified as ALL_OLD in the request. Each element consists
-	// of an attribute name and an attribute value.
-	Attributes map[string]AttributeValue `type:"map"`
-
-	// The capacity units consumed by the PutItem operation. The data returned includes
-	// the total provisioned throughput consumed, along with statistics for the
-	// table and any indexes involved in the operation. ConsumedCapacity is only
-	// returned if the ReturnConsumedCapacity parameter was specified. For more
-	// information, see Read/Write Capacity Mode (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ProvisionedThroughputIntro.html)
-	// in the Amazon DynamoDB Developer Guide.
-	ConsumedCapacity *ConsumedCapacity `type:"structure"`
-
-	// Information about item collections, if any, that were affected by the PutItem
-	// operation. ItemCollectionMetrics is only returned if the ReturnItemCollectionMetrics
-	// parameter was specified. If the table does not have any local secondary indexes,
-	// this information is not returned in the response.
-	//
-	// Each ItemCollectionMetrics element consists of:
-	//
-	//    * ItemCollectionKey - The partition key value of the item collection.
-	//    This is the same as the partition key value of the item itself.
-	//
-	//    * SizeEstimateRangeGB - An estimate of item collection size, in gigabytes.
-	//    This value is a two-element array containing a lower bound and an upper
-	//    bound for the estimate. The estimate includes the size of all the items
-	//    in the table, plus the size of all attributes projected into all of the
-	//    local secondary indexes on that table. Use this estimate to measure whether
-	//    a local secondary index is approaching its size limit. The estimate is
-	//    subject to change over time; therefore, do not rely on the precision or
-	//    accuracy of the estimate.
-	ItemCollectionMetrics *ItemCollectionMetrics `type:"structure"`
-}
-
-// String returns the string representation
-func (s PutItemOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opPutItem = "PutItem"
 
@@ -288,7 +67,7 @@ const opPutItem = "PutItem"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/PutItem
-func (c *Client) PutItemRequest(input *PutItemInput) PutItemRequest {
+func (c *Client) PutItemRequest(input *types.PutItemInput) PutItemRequest {
 	op := &aws.Operation{
 		Name:       opPutItem,
 		HTTPMethod: "POST",
@@ -296,10 +75,10 @@ func (c *Client) PutItemRequest(input *PutItemInput) PutItemRequest {
 	}
 
 	if input == nil {
-		input = &PutItemInput{}
+		input = &types.PutItemInput{}
 	}
 
-	req := c.newRequest(op, input, &PutItemOutput{})
+	req := c.newRequest(op, input, &types.PutItemOutput{})
 	return PutItemRequest{Request: req, Input: input, Copy: c.PutItemRequest}
 }
 
@@ -307,8 +86,8 @@ func (c *Client) PutItemRequest(input *PutItemInput) PutItemRequest {
 // PutItem API operation.
 type PutItemRequest struct {
 	*aws.Request
-	Input *PutItemInput
-	Copy  func(*PutItemInput) PutItemRequest
+	Input *types.PutItemInput
+	Copy  func(*types.PutItemInput) PutItemRequest
 }
 
 // Send marshals and sends the PutItem API request.
@@ -320,7 +99,7 @@ func (r PutItemRequest) Send(ctx context.Context) (*PutItemResponse, error) {
 	}
 
 	resp := &PutItemResponse{
-		PutItemOutput: r.Request.Data.(*PutItemOutput),
+		PutItemOutput: r.Request.Data.(*types.PutItemOutput),
 		response:      &aws.Response{Request: r.Request},
 	}
 
@@ -330,7 +109,7 @@ func (r PutItemRequest) Send(ctx context.Context) (*PutItemResponse, error) {
 // PutItemResponse is the response type for the
 // PutItem API operation.
 type PutItemResponse struct {
-	*PutItemOutput
+	*types.PutItemOutput
 
 	response *aws.Response
 }

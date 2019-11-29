@@ -6,44 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/iotthingsgraph/types"
 )
-
-type DescribeNamespaceInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the user's namespace. Set this to aws to get the public namespace.
-	NamespaceName *string `locationName:"namespaceName" type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeNamespaceInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type DescribeNamespaceOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The ARN of the namespace.
-	NamespaceArn *string `locationName:"namespaceArn" type:"string"`
-
-	// The name of the namespace.
-	NamespaceName *string `locationName:"namespaceName" type:"string"`
-
-	// The version of the user's namespace to describe.
-	NamespaceVersion *int64 `locationName:"namespaceVersion" type:"long"`
-
-	// The name of the public namespace that the latest namespace version is tracking.
-	TrackingNamespaceName *string `locationName:"trackingNamespaceName" type:"string"`
-
-	// The version of the public namespace that the latest version is tracking.
-	TrackingNamespaceVersion *int64 `locationName:"trackingNamespaceVersion" type:"long"`
-}
-
-// String returns the string representation
-func (s DescribeNamespaceOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeNamespace = "DescribeNamespace"
 
@@ -61,7 +25,7 @@ const opDescribeNamespace = "DescribeNamespace"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iotthingsgraph-2018-09-06/DescribeNamespace
-func (c *Client) DescribeNamespaceRequest(input *DescribeNamespaceInput) DescribeNamespaceRequest {
+func (c *Client) DescribeNamespaceRequest(input *types.DescribeNamespaceInput) DescribeNamespaceRequest {
 	op := &aws.Operation{
 		Name:       opDescribeNamespace,
 		HTTPMethod: "POST",
@@ -69,10 +33,10 @@ func (c *Client) DescribeNamespaceRequest(input *DescribeNamespaceInput) Describ
 	}
 
 	if input == nil {
-		input = &DescribeNamespaceInput{}
+		input = &types.DescribeNamespaceInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeNamespaceOutput{})
+	req := c.newRequest(op, input, &types.DescribeNamespaceOutput{})
 	return DescribeNamespaceRequest{Request: req, Input: input, Copy: c.DescribeNamespaceRequest}
 }
 
@@ -80,8 +44,8 @@ func (c *Client) DescribeNamespaceRequest(input *DescribeNamespaceInput) Describ
 // DescribeNamespace API operation.
 type DescribeNamespaceRequest struct {
 	*aws.Request
-	Input *DescribeNamespaceInput
-	Copy  func(*DescribeNamespaceInput) DescribeNamespaceRequest
+	Input *types.DescribeNamespaceInput
+	Copy  func(*types.DescribeNamespaceInput) DescribeNamespaceRequest
 }
 
 // Send marshals and sends the DescribeNamespace API request.
@@ -93,7 +57,7 @@ func (r DescribeNamespaceRequest) Send(ctx context.Context) (*DescribeNamespaceR
 	}
 
 	resp := &DescribeNamespaceResponse{
-		DescribeNamespaceOutput: r.Request.Data.(*DescribeNamespaceOutput),
+		DescribeNamespaceOutput: r.Request.Data.(*types.DescribeNamespaceOutput),
 		response:                &aws.Response{Request: r.Request},
 	}
 
@@ -103,7 +67,7 @@ func (r DescribeNamespaceRequest) Send(ctx context.Context) (*DescribeNamespaceR
 // DescribeNamespaceResponse is the response type for the
 // DescribeNamespace API operation.
 type DescribeNamespaceResponse struct {
-	*DescribeNamespaceOutput
+	*types.DescribeNamespaceOutput
 
 	response *aws.Response
 }

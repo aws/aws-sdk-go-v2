@@ -6,62 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/greengrass/types"
 )
-
-type DeleteResourceDefinitionInput struct {
-	_ struct{} `type:"structure"`
-
-	// ResourceDefinitionId is a required field
-	ResourceDefinitionId *string `location:"uri" locationName:"ResourceDefinitionId" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteResourceDefinitionInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteResourceDefinitionInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteResourceDefinitionInput"}
-
-	if s.ResourceDefinitionId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ResourceDefinitionId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteResourceDefinitionInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.ResourceDefinitionId != nil {
-		v := *s.ResourceDefinitionId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "ResourceDefinitionId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type DeleteResourceDefinitionOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteResourceDefinitionOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteResourceDefinitionOutput) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
 
 const opDeleteResourceDefinition = "DeleteResourceDefinition"
 
@@ -78,7 +24,7 @@ const opDeleteResourceDefinition = "DeleteResourceDefinition"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/DeleteResourceDefinition
-func (c *Client) DeleteResourceDefinitionRequest(input *DeleteResourceDefinitionInput) DeleteResourceDefinitionRequest {
+func (c *Client) DeleteResourceDefinitionRequest(input *types.DeleteResourceDefinitionInput) DeleteResourceDefinitionRequest {
 	op := &aws.Operation{
 		Name:       opDeleteResourceDefinition,
 		HTTPMethod: "DELETE",
@@ -86,10 +32,10 @@ func (c *Client) DeleteResourceDefinitionRequest(input *DeleteResourceDefinition
 	}
 
 	if input == nil {
-		input = &DeleteResourceDefinitionInput{}
+		input = &types.DeleteResourceDefinitionInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteResourceDefinitionOutput{})
+	req := c.newRequest(op, input, &types.DeleteResourceDefinitionOutput{})
 	return DeleteResourceDefinitionRequest{Request: req, Input: input, Copy: c.DeleteResourceDefinitionRequest}
 }
 
@@ -97,8 +43,8 @@ func (c *Client) DeleteResourceDefinitionRequest(input *DeleteResourceDefinition
 // DeleteResourceDefinition API operation.
 type DeleteResourceDefinitionRequest struct {
 	*aws.Request
-	Input *DeleteResourceDefinitionInput
-	Copy  func(*DeleteResourceDefinitionInput) DeleteResourceDefinitionRequest
+	Input *types.DeleteResourceDefinitionInput
+	Copy  func(*types.DeleteResourceDefinitionInput) DeleteResourceDefinitionRequest
 }
 
 // Send marshals and sends the DeleteResourceDefinition API request.
@@ -110,7 +56,7 @@ func (r DeleteResourceDefinitionRequest) Send(ctx context.Context) (*DeleteResou
 	}
 
 	resp := &DeleteResourceDefinitionResponse{
-		DeleteResourceDefinitionOutput: r.Request.Data.(*DeleteResourceDefinitionOutput),
+		DeleteResourceDefinitionOutput: r.Request.Data.(*types.DeleteResourceDefinitionOutput),
 		response:                       &aws.Response{Request: r.Request},
 	}
 
@@ -120,7 +66,7 @@ func (r DeleteResourceDefinitionRequest) Send(ctx context.Context) (*DeleteResou
 // DeleteResourceDefinitionResponse is the response type for the
 // DeleteResourceDefinition API operation.
 type DeleteResourceDefinitionResponse struct {
-	*DeleteResourceDefinitionOutput
+	*types.DeleteResourceDefinitionOutput
 
 	response *aws.Response
 }

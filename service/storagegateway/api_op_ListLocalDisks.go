@@ -6,59 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/storagegateway/types"
 )
-
-// A JSON object containing the of the gateway.
-type ListLocalDisksInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation
-	// to return a list of gateways for your account and AWS Region.
-	//
-	// GatewayARN is a required field
-	GatewayARN *string `min:"50" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s ListLocalDisksInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListLocalDisksInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListLocalDisksInput"}
-
-	if s.GatewayARN == nil {
-		invalidParams.Add(aws.NewErrParamRequired("GatewayARN"))
-	}
-	if s.GatewayARN != nil && len(*s.GatewayARN) < 50 {
-		invalidParams.Add(aws.NewErrParamMinLen("GatewayARN", 50))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ListLocalDisksOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A JSON object containing the following fields:
-	//
-	//    * ListLocalDisksOutput$Disks
-	Disks []Disk `type:"list"`
-
-	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation
-	// to return a list of gateways for your account and AWS Region.
-	GatewayARN *string `min:"50" type:"string"`
-}
-
-// String returns the string representation
-func (s ListLocalDisksOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListLocalDisks = "ListLocalDisks"
 
@@ -84,7 +33,7 @@ const opListLocalDisks = "ListLocalDisks"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/ListLocalDisks
-func (c *Client) ListLocalDisksRequest(input *ListLocalDisksInput) ListLocalDisksRequest {
+func (c *Client) ListLocalDisksRequest(input *types.ListLocalDisksInput) ListLocalDisksRequest {
 	op := &aws.Operation{
 		Name:       opListLocalDisks,
 		HTTPMethod: "POST",
@@ -92,10 +41,10 @@ func (c *Client) ListLocalDisksRequest(input *ListLocalDisksInput) ListLocalDisk
 	}
 
 	if input == nil {
-		input = &ListLocalDisksInput{}
+		input = &types.ListLocalDisksInput{}
 	}
 
-	req := c.newRequest(op, input, &ListLocalDisksOutput{})
+	req := c.newRequest(op, input, &types.ListLocalDisksOutput{})
 	return ListLocalDisksRequest{Request: req, Input: input, Copy: c.ListLocalDisksRequest}
 }
 
@@ -103,8 +52,8 @@ func (c *Client) ListLocalDisksRequest(input *ListLocalDisksInput) ListLocalDisk
 // ListLocalDisks API operation.
 type ListLocalDisksRequest struct {
 	*aws.Request
-	Input *ListLocalDisksInput
-	Copy  func(*ListLocalDisksInput) ListLocalDisksRequest
+	Input *types.ListLocalDisksInput
+	Copy  func(*types.ListLocalDisksInput) ListLocalDisksRequest
 }
 
 // Send marshals and sends the ListLocalDisks API request.
@@ -116,7 +65,7 @@ func (r ListLocalDisksRequest) Send(ctx context.Context) (*ListLocalDisksRespons
 	}
 
 	resp := &ListLocalDisksResponse{
-		ListLocalDisksOutput: r.Request.Data.(*ListLocalDisksOutput),
+		ListLocalDisksOutput: r.Request.Data.(*types.ListLocalDisksOutput),
 		response:             &aws.Response{Request: r.Request},
 	}
 
@@ -126,7 +75,7 @@ func (r ListLocalDisksRequest) Send(ctx context.Context) (*ListLocalDisksRespons
 // ListLocalDisksResponse is the response type for the
 // ListLocalDisks API operation.
 type ListLocalDisksResponse struct {
-	*ListLocalDisksOutput
+	*types.ListLocalDisksOutput
 
 	response *aws.Response
 }

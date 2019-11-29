@@ -6,71 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/codecommit/types"
 )
-
-// Represents the input of a create repository operation.
-type CreateRepositoryInput struct {
-	_ struct{} `type:"structure"`
-
-	// A comment or description about the new repository.
-	//
-	// The description field for a repository accepts all HTML characters and all
-	// valid Unicode characters. Applications that do not HTML-encode the description
-	// and display it in a web page could expose users to potentially malicious
-	// code. Make sure that you HTML-encode the description field in any application
-	// that uses this API to display the repository description on a web page.
-	RepositoryDescription *string `locationName:"repositoryDescription" type:"string"`
-
-	// The name of the new repository to be created.
-	//
-	// The repository name must be unique across the calling AWS account. In addition,
-	// repository names are limited to 100 alphanumeric, dash, and underscore characters,
-	// and cannot include certain characters. For a full description of the limits
-	// on repository names, see Limits (https://docs.aws.amazon.com/codecommit/latest/userguide/limits.html)
-	// in the AWS CodeCommit User Guide. The suffix ".git" is prohibited.
-	//
-	// RepositoryName is a required field
-	RepositoryName *string `locationName:"repositoryName" min:"1" type:"string" required:"true"`
-
-	// One or more tag key-value pairs to use when tagging this repository.
-	Tags map[string]string `locationName:"tags" type:"map"`
-}
-
-// String returns the string representation
-func (s CreateRepositoryInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateRepositoryInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateRepositoryInput"}
-
-	if s.RepositoryName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("RepositoryName"))
-	}
-	if s.RepositoryName != nil && len(*s.RepositoryName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("RepositoryName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Represents the output of a create repository operation.
-type CreateRepositoryOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Information about the newly created repository.
-	RepositoryMetadata *RepositoryMetadata `locationName:"repositoryMetadata" type:"structure"`
-}
-
-// String returns the string representation
-func (s CreateRepositoryOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCreateRepository = "CreateRepository"
 
@@ -87,7 +24,7 @@ const opCreateRepository = "CreateRepository"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/CreateRepository
-func (c *Client) CreateRepositoryRequest(input *CreateRepositoryInput) CreateRepositoryRequest {
+func (c *Client) CreateRepositoryRequest(input *types.CreateRepositoryInput) CreateRepositoryRequest {
 	op := &aws.Operation{
 		Name:       opCreateRepository,
 		HTTPMethod: "POST",
@@ -95,10 +32,10 @@ func (c *Client) CreateRepositoryRequest(input *CreateRepositoryInput) CreateRep
 	}
 
 	if input == nil {
-		input = &CreateRepositoryInput{}
+		input = &types.CreateRepositoryInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateRepositoryOutput{})
+	req := c.newRequest(op, input, &types.CreateRepositoryOutput{})
 	return CreateRepositoryRequest{Request: req, Input: input, Copy: c.CreateRepositoryRequest}
 }
 
@@ -106,8 +43,8 @@ func (c *Client) CreateRepositoryRequest(input *CreateRepositoryInput) CreateRep
 // CreateRepository API operation.
 type CreateRepositoryRequest struct {
 	*aws.Request
-	Input *CreateRepositoryInput
-	Copy  func(*CreateRepositoryInput) CreateRepositoryRequest
+	Input *types.CreateRepositoryInput
+	Copy  func(*types.CreateRepositoryInput) CreateRepositoryRequest
 }
 
 // Send marshals and sends the CreateRepository API request.
@@ -119,7 +56,7 @@ func (r CreateRepositoryRequest) Send(ctx context.Context) (*CreateRepositoryRes
 	}
 
 	resp := &CreateRepositoryResponse{
-		CreateRepositoryOutput: r.Request.Data.(*CreateRepositoryOutput),
+		CreateRepositoryOutput: r.Request.Data.(*types.CreateRepositoryOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -129,7 +66,7 @@ func (r CreateRepositoryRequest) Send(ctx context.Context) (*CreateRepositoryRes
 // CreateRepositoryResponse is the response type for the
 // CreateRepository API operation.
 type CreateRepositoryResponse struct {
-	*CreateRepositoryOutput
+	*types.CreateRepositoryOutput
 
 	response *aws.Response
 }

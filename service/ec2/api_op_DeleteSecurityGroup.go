@@ -6,41 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/ec2query"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-type DeleteSecurityGroupInput struct {
-	_ struct{} `type:"structure"`
-
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have
-	// the required permissions, the error response is DryRunOperation. Otherwise,
-	// it is UnauthorizedOperation.
-	DryRun *bool `locationName:"dryRun" type:"boolean"`
-
-	// The ID of the security group. Required for a nondefault VPC.
-	GroupId *string `type:"string"`
-
-	// [EC2-Classic, default VPC] The name of the security group. You can specify
-	// either the security group name or the security group ID.
-	GroupName *string `type:"string"`
-}
-
-// String returns the string representation
-func (s DeleteSecurityGroupInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type DeleteSecurityGroupOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteSecurityGroupOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteSecurityGroup = "DeleteSecurityGroup"
 
@@ -61,7 +30,7 @@ const opDeleteSecurityGroup = "DeleteSecurityGroup"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteSecurityGroup
-func (c *Client) DeleteSecurityGroupRequest(input *DeleteSecurityGroupInput) DeleteSecurityGroupRequest {
+func (c *Client) DeleteSecurityGroupRequest(input *types.DeleteSecurityGroupInput) DeleteSecurityGroupRequest {
 	op := &aws.Operation{
 		Name:       opDeleteSecurityGroup,
 		HTTPMethod: "POST",
@@ -69,10 +38,10 @@ func (c *Client) DeleteSecurityGroupRequest(input *DeleteSecurityGroupInput) Del
 	}
 
 	if input == nil {
-		input = &DeleteSecurityGroupInput{}
+		input = &types.DeleteSecurityGroupInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteSecurityGroupOutput{})
+	req := c.newRequest(op, input, &types.DeleteSecurityGroupOutput{})
 	req.Handlers.Unmarshal.Remove(ec2query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return DeleteSecurityGroupRequest{Request: req, Input: input, Copy: c.DeleteSecurityGroupRequest}
@@ -82,8 +51,8 @@ func (c *Client) DeleteSecurityGroupRequest(input *DeleteSecurityGroupInput) Del
 // DeleteSecurityGroup API operation.
 type DeleteSecurityGroupRequest struct {
 	*aws.Request
-	Input *DeleteSecurityGroupInput
-	Copy  func(*DeleteSecurityGroupInput) DeleteSecurityGroupRequest
+	Input *types.DeleteSecurityGroupInput
+	Copy  func(*types.DeleteSecurityGroupInput) DeleteSecurityGroupRequest
 }
 
 // Send marshals and sends the DeleteSecurityGroup API request.
@@ -95,7 +64,7 @@ func (r DeleteSecurityGroupRequest) Send(ctx context.Context) (*DeleteSecurityGr
 	}
 
 	resp := &DeleteSecurityGroupResponse{
-		DeleteSecurityGroupOutput: r.Request.Data.(*DeleteSecurityGroupOutput),
+		DeleteSecurityGroupOutput: r.Request.Data.(*types.DeleteSecurityGroupOutput),
 		response:                  &aws.Response{Request: r.Request},
 	}
 
@@ -105,7 +74,7 @@ func (r DeleteSecurityGroupRequest) Send(ctx context.Context) (*DeleteSecurityGr
 // DeleteSecurityGroupResponse is the response type for the
 // DeleteSecurityGroup API operation.
 type DeleteSecurityGroupResponse struct {
-	*DeleteSecurityGroupOutput
+	*types.DeleteSecurityGroupOutput
 
 	response *aws.Response
 }

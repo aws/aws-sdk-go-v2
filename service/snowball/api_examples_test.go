@@ -12,6 +12,8 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws/awserr"
 	"github.com/aws/aws-sdk-go-v2/aws/external"
 	"github.com/aws/aws-sdk-go-v2/service/snowball"
+	"github.com/aws/aws-sdk-go-v2/service/snowball/enums"
+	"github.com/aws/aws-sdk-go-v2/service/snowball/types"
 )
 
 var _ time.Duration
@@ -37,7 +39,7 @@ func ExampleClient_CancelClusterRequest_shared00() {
 	}
 
 	svc := snowball.New(cfg)
-	input := &snowball.CancelClusterInput{
+	input := &types.CancelClusterInput{
 		ClusterId: aws.String("CID123e4567-e89b-12d3-a456-426655440000"),
 	}
 
@@ -77,7 +79,7 @@ func ExampleClient_CancelJobRequest_shared00() {
 	}
 
 	svc := snowball.New(cfg)
-	input := &snowball.CancelJobInput{
+	input := &types.CancelJobInput{
 		JobId: aws.String("JID123e4567-e89b-12d3-a456-426655440000"),
 	}
 
@@ -118,8 +120,8 @@ func ExampleClient_CreateAddressRequest_shared00() {
 	}
 
 	svc := snowball.New(cfg)
-	input := &snowball.CreateAddressInput{
-		Address: &snowball.Address{
+	input := &types.CreateAddressInput{
+		Address: &types.Address{
 			City:            aws.String("Seattle"),
 			Company:         aws.String("My Company's Name"),
 			Country:         aws.String("USA"),
@@ -166,24 +168,24 @@ func ExampleClient_CreateClusterRequest_shared00() {
 	}
 
 	svc := snowball.New(cfg)
-	input := &snowball.CreateClusterInput{
+	input := &types.CreateClusterInput{
 		AddressId:   aws.String("ADID1234ab12-3eec-4eb3-9be6-9374c10eb51b"),
 		Description: aws.String("MyCluster"),
-		JobType:     snowball.JobTypeLocalUse,
+		JobType:     enums.JobTypeLocalUse,
 		KmsKeyARN:   aws.String("arn:aws:kms:us-east-1:123456789012:key/abcd1234-12ab-34cd-56ef-123456123456"),
-		Notification: &snowball.Notification{
+		Notification: &types.Notification{
 			NotifyAll: aws.Bool(false),
 		},
-		Resources: &snowball.JobResource{
-			S3Resources: []snowball.S3Resource{
+		Resources: &types.JobResource{
+			S3Resources: []types.S3Resource{
 				{
 					BucketArn: aws.String("arn:aws:s3:::MyBucket"),
 				},
 			},
 		},
 		RoleARN:        aws.String("arn:aws:iam::123456789012:role/snowball-import-S3-role"),
-		ShippingOption: snowball.ShippingOptionSecondDay,
-		SnowballType:   snowball.SnowballTypeEdge,
+		ShippingOption: enums.ShippingOptionSecondDay,
+		SnowballType:   enums.SnowballTypeEdge,
 	}
 
 	req := svc.CreateClusterRequest(input)
@@ -227,25 +229,25 @@ func ExampleClient_CreateJobRequest_shared00() {
 	}
 
 	svc := snowball.New(cfg)
-	input := &snowball.CreateJobInput{
+	input := &types.CreateJobInput{
 		AddressId:   aws.String("ADID1234ab12-3eec-4eb3-9be6-9374c10eb51b"),
 		Description: aws.String("My Job"),
-		JobType:     snowball.JobTypeImport,
+		JobType:     enums.JobTypeImport,
 		KmsKeyARN:   aws.String("arn:aws:kms:us-east-1:123456789012:key/abcd1234-12ab-34cd-56ef-123456123456"),
-		Notification: &snowball.Notification{
+		Notification: &types.Notification{
 			NotifyAll: aws.Bool(false),
 		},
-		Resources: &snowball.JobResource{
-			S3Resources: []snowball.S3Resource{
+		Resources: &types.JobResource{
+			S3Resources: []types.S3Resource{
 				{
 					BucketArn: aws.String("arn:aws:s3:::MyBucket"),
 				},
 			},
 		},
 		RoleARN:                    aws.String("arn:aws:iam::123456789012:role/snowball-import-S3-role"),
-		ShippingOption:             snowball.ShippingOptionSecondDay,
-		SnowballCapacityPreference: snowball.SnowballCapacityT80,
-		SnowballType:               snowball.SnowballTypeStandard,
+		ShippingOption:             enums.ShippingOptionSecondDay,
+		SnowballCapacityPreference: enums.SnowballCapacityT80,
+		SnowballType:               enums.SnowballTypeStandard,
 	}
 
 	req := svc.CreateJobRequest(input)
@@ -287,7 +289,7 @@ func ExampleClient_DescribeAddressRequest_shared00() {
 	}
 
 	svc := snowball.New(cfg)
-	input := &snowball.DescribeAddressInput{
+	input := &types.DescribeAddressInput{
 		AddressId: aws.String("ADID1234ab12-3eec-4eb3-9be6-9374c10eb51b"),
 	}
 
@@ -324,7 +326,7 @@ func ExampleClient_DescribeAddressesRequest_shared00() {
 	}
 
 	svc := snowball.New(cfg)
-	input := &snowball.DescribeAddressesInput{}
+	input := &types.DescribeAddressesInput{}
 
 	req := svc.DescribeAddressesRequest(input)
 	result, err := req.Send(context.Background())
@@ -360,7 +362,7 @@ func ExampleClient_DescribeClusterRequest_shared00() {
 	}
 
 	svc := snowball.New(cfg)
-	input := &snowball.DescribeClusterInput{
+	input := &types.DescribeClusterInput{
 		ClusterId: aws.String("CID123e4567-e89b-12d3-a456-426655440000"),
 	}
 
@@ -395,7 +397,7 @@ func ExampleClient_DescribeJobRequest_shared00() {
 	}
 
 	svc := snowball.New(cfg)
-	input := &snowball.DescribeJobInput{
+	input := &types.DescribeJobInput{
 		JobId: aws.String("JID123e4567-e89b-12d3-a456-426655440000"),
 	}
 
@@ -446,7 +448,7 @@ func ExampleClient_GetJobManifestRequest_shared00() {
 	}
 
 	svc := snowball.New(cfg)
-	input := &snowball.GetJobManifestInput{
+	input := &types.GetJobManifestInput{
 		JobId: aws.String("JID123e4567-e89b-12d3-a456-426655440000"),
 	}
 
@@ -494,7 +496,7 @@ func ExampleClient_GetJobUnlockCodeRequest_shared00() {
 	}
 
 	svc := snowball.New(cfg)
-	input := &snowball.GetJobUnlockCodeInput{
+	input := &types.GetJobUnlockCodeInput{
 		JobId: aws.String("JID123e4567-e89b-12d3-a456-426655440000"),
 	}
 
@@ -535,7 +537,7 @@ func ExampleClient_GetSnowballUsageRequest_shared00() {
 	}
 
 	svc := snowball.New(cfg)
-	input := &snowball.GetSnowballUsageInput{}
+	input := &types.GetSnowballUsageInput{}
 
 	req := svc.GetSnowballUsageRequest(input)
 	result, err := req.Send(context.Background())
@@ -568,7 +570,7 @@ func ExampleClient_ListClusterJobsRequest_shared00() {
 	}
 
 	svc := snowball.New(cfg)
-	input := &snowball.ListClusterJobsInput{
+	input := &types.ListClusterJobsInput{
 		ClusterId: aws.String("CID123e4567-e89b-12d3-a456-426655440000"),
 	}
 
@@ -606,7 +608,7 @@ func ExampleClient_ListClustersRequest_shared00() {
 	}
 
 	svc := snowball.New(cfg)
-	input := &snowball.ListClustersInput{}
+	input := &types.ListClustersInput{}
 
 	req := svc.ListClustersRequest(input)
 	result, err := req.Send(context.Background())
@@ -643,7 +645,7 @@ func ExampleClient_ListJobsRequest_shared00() {
 	}
 
 	svc := snowball.New(cfg)
-	input := &snowball.ListJobsInput{}
+	input := &types.ListJobsInput{}
 
 	req := svc.ListJobsRequest(input)
 	result, err := req.Send(context.Background())
@@ -678,7 +680,7 @@ func ExampleClient_UpdateClusterRequest_shared00() {
 	}
 
 	svc := snowball.New(cfg)
-	input := &snowball.UpdateClusterInput{
+	input := &types.UpdateClusterInput{
 		AddressId:   aws.String("ADID1234ab12-3eec-4eb3-9be6-9374c10eb51b"),
 		ClusterId:   aws.String("CID123e4567-e89b-12d3-a456-426655440000"),
 		Description: aws.String("Updated the address to send this to image processing - RJ"),
@@ -725,12 +727,12 @@ func ExampleClient_UpdateJobRequest_shared00() {
 	}
 
 	svc := snowball.New(cfg)
-	input := &snowball.UpdateJobInput{
+	input := &types.UpdateJobInput{
 		AddressId:                  aws.String("ADID1234ab12-3eec-4eb3-9be6-9374c10eb51b"),
 		Description:                aws.String("Upgraded to Edge, shipped to Finance Dept, and requested faster shipping speed - TS."),
 		JobId:                      aws.String("JID123e4567-e89b-12d3-a456-426655440000"),
-		ShippingOption:             snowball.ShippingOptionNextDay,
-		SnowballCapacityPreference: snowball.SnowballCapacityT100,
+		ShippingOption:             enums.ShippingOptionNextDay,
+		SnowballCapacityPreference: enums.SnowballCapacityT100,
 	}
 
 	req := svc.UpdateJobRequest(input)

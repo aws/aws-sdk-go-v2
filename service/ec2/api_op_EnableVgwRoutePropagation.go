@@ -6,60 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/ec2query"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-// Contains the parameters for EnableVgwRoutePropagation.
-type EnableVgwRoutePropagationInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the virtual private gateway that is attached to a VPC. The virtual
-	// private gateway must be attached to the same VPC that the routing tables
-	// are associated with.
-	//
-	// GatewayId is a required field
-	GatewayId *string `type:"string" required:"true"`
-
-	// The ID of the route table. The routing table must be associated with the
-	// same VPC that the virtual private gateway is attached to.
-	//
-	// RouteTableId is a required field
-	RouteTableId *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s EnableVgwRoutePropagationInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *EnableVgwRoutePropagationInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "EnableVgwRoutePropagationInput"}
-
-	if s.GatewayId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("GatewayId"))
-	}
-
-	if s.RouteTableId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("RouteTableId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type EnableVgwRoutePropagationOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s EnableVgwRoutePropagationOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opEnableVgwRoutePropagation = "EnableVgwRoutePropagation"
 
@@ -77,7 +27,7 @@ const opEnableVgwRoutePropagation = "EnableVgwRoutePropagation"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/EnableVgwRoutePropagation
-func (c *Client) EnableVgwRoutePropagationRequest(input *EnableVgwRoutePropagationInput) EnableVgwRoutePropagationRequest {
+func (c *Client) EnableVgwRoutePropagationRequest(input *types.EnableVgwRoutePropagationInput) EnableVgwRoutePropagationRequest {
 	op := &aws.Operation{
 		Name:       opEnableVgwRoutePropagation,
 		HTTPMethod: "POST",
@@ -85,10 +35,10 @@ func (c *Client) EnableVgwRoutePropagationRequest(input *EnableVgwRoutePropagati
 	}
 
 	if input == nil {
-		input = &EnableVgwRoutePropagationInput{}
+		input = &types.EnableVgwRoutePropagationInput{}
 	}
 
-	req := c.newRequest(op, input, &EnableVgwRoutePropagationOutput{})
+	req := c.newRequest(op, input, &types.EnableVgwRoutePropagationOutput{})
 	req.Handlers.Unmarshal.Remove(ec2query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return EnableVgwRoutePropagationRequest{Request: req, Input: input, Copy: c.EnableVgwRoutePropagationRequest}
@@ -98,8 +48,8 @@ func (c *Client) EnableVgwRoutePropagationRequest(input *EnableVgwRoutePropagati
 // EnableVgwRoutePropagation API operation.
 type EnableVgwRoutePropagationRequest struct {
 	*aws.Request
-	Input *EnableVgwRoutePropagationInput
-	Copy  func(*EnableVgwRoutePropagationInput) EnableVgwRoutePropagationRequest
+	Input *types.EnableVgwRoutePropagationInput
+	Copy  func(*types.EnableVgwRoutePropagationInput) EnableVgwRoutePropagationRequest
 }
 
 // Send marshals and sends the EnableVgwRoutePropagation API request.
@@ -111,7 +61,7 @@ func (r EnableVgwRoutePropagationRequest) Send(ctx context.Context) (*EnableVgwR
 	}
 
 	resp := &EnableVgwRoutePropagationResponse{
-		EnableVgwRoutePropagationOutput: r.Request.Data.(*EnableVgwRoutePropagationOutput),
+		EnableVgwRoutePropagationOutput: r.Request.Data.(*types.EnableVgwRoutePropagationOutput),
 		response:                        &aws.Response{Request: r.Request},
 	}
 
@@ -121,7 +71,7 @@ func (r EnableVgwRoutePropagationRequest) Send(ctx context.Context) (*EnableVgwR
 // EnableVgwRoutePropagationResponse is the response type for the
 // EnableVgwRoutePropagation API operation.
 type EnableVgwRoutePropagationResponse struct {
-	*EnableVgwRoutePropagationOutput
+	*types.EnableVgwRoutePropagationOutput
 
 	response *aws.Response
 }

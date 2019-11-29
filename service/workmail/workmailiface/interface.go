@@ -10,6 +10,7 @@ package workmailiface
 
 import (
 	"github.com/aws/aws-sdk-go-v2/service/workmail"
+	"github.com/aws/aws-sdk-go-v2/service/workmail/types"
 )
 
 // ClientAPI provides an interface to enable mocking the
@@ -43,7 +44,7 @@ import (
 //    type mockClientClient struct {
 //        workmailiface.ClientPI
 //    }
-//    func (m *mockClientClient) AssociateDelegateToResource(input *workmail.AssociateDelegateToResourceInput) (*workmail.AssociateDelegateToResourceOutput, error) {
+//    func (m *mockClientClient) AssociateDelegateToResource(input *types.AssociateDelegateToResourceInput) (*types.AssociateDelegateToResourceOutput, error) {
 //        // mock response/functionality
 //    }
 //
@@ -61,71 +62,71 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type ClientAPI interface {
-	AssociateDelegateToResourceRequest(*workmail.AssociateDelegateToResourceInput) workmail.AssociateDelegateToResourceRequest
+	AssociateDelegateToResourceRequest(*types.AssociateDelegateToResourceInput) workmail.AssociateDelegateToResourceRequest
 
-	AssociateMemberToGroupRequest(*workmail.AssociateMemberToGroupInput) workmail.AssociateMemberToGroupRequest
+	AssociateMemberToGroupRequest(*types.AssociateMemberToGroupInput) workmail.AssociateMemberToGroupRequest
 
-	CreateAliasRequest(*workmail.CreateAliasInput) workmail.CreateAliasRequest
+	CreateAliasRequest(*types.CreateAliasInput) workmail.CreateAliasRequest
 
-	CreateGroupRequest(*workmail.CreateGroupInput) workmail.CreateGroupRequest
+	CreateGroupRequest(*types.CreateGroupInput) workmail.CreateGroupRequest
 
-	CreateResourceRequest(*workmail.CreateResourceInput) workmail.CreateResourceRequest
+	CreateResourceRequest(*types.CreateResourceInput) workmail.CreateResourceRequest
 
-	CreateUserRequest(*workmail.CreateUserInput) workmail.CreateUserRequest
+	CreateUserRequest(*types.CreateUserInput) workmail.CreateUserRequest
 
-	DeleteAliasRequest(*workmail.DeleteAliasInput) workmail.DeleteAliasRequest
+	DeleteAliasRequest(*types.DeleteAliasInput) workmail.DeleteAliasRequest
 
-	DeleteGroupRequest(*workmail.DeleteGroupInput) workmail.DeleteGroupRequest
+	DeleteGroupRequest(*types.DeleteGroupInput) workmail.DeleteGroupRequest
 
-	DeleteMailboxPermissionsRequest(*workmail.DeleteMailboxPermissionsInput) workmail.DeleteMailboxPermissionsRequest
+	DeleteMailboxPermissionsRequest(*types.DeleteMailboxPermissionsInput) workmail.DeleteMailboxPermissionsRequest
 
-	DeleteResourceRequest(*workmail.DeleteResourceInput) workmail.DeleteResourceRequest
+	DeleteResourceRequest(*types.DeleteResourceInput) workmail.DeleteResourceRequest
 
-	DeleteUserRequest(*workmail.DeleteUserInput) workmail.DeleteUserRequest
+	DeleteUserRequest(*types.DeleteUserInput) workmail.DeleteUserRequest
 
-	DeregisterFromWorkMailRequest(*workmail.DeregisterFromWorkMailInput) workmail.DeregisterFromWorkMailRequest
+	DeregisterFromWorkMailRequest(*types.DeregisterFromWorkMailInput) workmail.DeregisterFromWorkMailRequest
 
-	DescribeGroupRequest(*workmail.DescribeGroupInput) workmail.DescribeGroupRequest
+	DescribeGroupRequest(*types.DescribeGroupInput) workmail.DescribeGroupRequest
 
-	DescribeOrganizationRequest(*workmail.DescribeOrganizationInput) workmail.DescribeOrganizationRequest
+	DescribeOrganizationRequest(*types.DescribeOrganizationInput) workmail.DescribeOrganizationRequest
 
-	DescribeResourceRequest(*workmail.DescribeResourceInput) workmail.DescribeResourceRequest
+	DescribeResourceRequest(*types.DescribeResourceInput) workmail.DescribeResourceRequest
 
-	DescribeUserRequest(*workmail.DescribeUserInput) workmail.DescribeUserRequest
+	DescribeUserRequest(*types.DescribeUserInput) workmail.DescribeUserRequest
 
-	DisassociateDelegateFromResourceRequest(*workmail.DisassociateDelegateFromResourceInput) workmail.DisassociateDelegateFromResourceRequest
+	DisassociateDelegateFromResourceRequest(*types.DisassociateDelegateFromResourceInput) workmail.DisassociateDelegateFromResourceRequest
 
-	DisassociateMemberFromGroupRequest(*workmail.DisassociateMemberFromGroupInput) workmail.DisassociateMemberFromGroupRequest
+	DisassociateMemberFromGroupRequest(*types.DisassociateMemberFromGroupInput) workmail.DisassociateMemberFromGroupRequest
 
-	GetMailboxDetailsRequest(*workmail.GetMailboxDetailsInput) workmail.GetMailboxDetailsRequest
+	GetMailboxDetailsRequest(*types.GetMailboxDetailsInput) workmail.GetMailboxDetailsRequest
 
-	ListAliasesRequest(*workmail.ListAliasesInput) workmail.ListAliasesRequest
+	ListAliasesRequest(*types.ListAliasesInput) workmail.ListAliasesRequest
 
-	ListGroupMembersRequest(*workmail.ListGroupMembersInput) workmail.ListGroupMembersRequest
+	ListGroupMembersRequest(*types.ListGroupMembersInput) workmail.ListGroupMembersRequest
 
-	ListGroupsRequest(*workmail.ListGroupsInput) workmail.ListGroupsRequest
+	ListGroupsRequest(*types.ListGroupsInput) workmail.ListGroupsRequest
 
-	ListMailboxPermissionsRequest(*workmail.ListMailboxPermissionsInput) workmail.ListMailboxPermissionsRequest
+	ListMailboxPermissionsRequest(*types.ListMailboxPermissionsInput) workmail.ListMailboxPermissionsRequest
 
-	ListOrganizationsRequest(*workmail.ListOrganizationsInput) workmail.ListOrganizationsRequest
+	ListOrganizationsRequest(*types.ListOrganizationsInput) workmail.ListOrganizationsRequest
 
-	ListResourceDelegatesRequest(*workmail.ListResourceDelegatesInput) workmail.ListResourceDelegatesRequest
+	ListResourceDelegatesRequest(*types.ListResourceDelegatesInput) workmail.ListResourceDelegatesRequest
 
-	ListResourcesRequest(*workmail.ListResourcesInput) workmail.ListResourcesRequest
+	ListResourcesRequest(*types.ListResourcesInput) workmail.ListResourcesRequest
 
-	ListUsersRequest(*workmail.ListUsersInput) workmail.ListUsersRequest
+	ListUsersRequest(*types.ListUsersInput) workmail.ListUsersRequest
 
-	PutMailboxPermissionsRequest(*workmail.PutMailboxPermissionsInput) workmail.PutMailboxPermissionsRequest
+	PutMailboxPermissionsRequest(*types.PutMailboxPermissionsInput) workmail.PutMailboxPermissionsRequest
 
-	RegisterToWorkMailRequest(*workmail.RegisterToWorkMailInput) workmail.RegisterToWorkMailRequest
+	RegisterToWorkMailRequest(*types.RegisterToWorkMailInput) workmail.RegisterToWorkMailRequest
 
-	ResetPasswordRequest(*workmail.ResetPasswordInput) workmail.ResetPasswordRequest
+	ResetPasswordRequest(*types.ResetPasswordInput) workmail.ResetPasswordRequest
 
-	UpdateMailboxQuotaRequest(*workmail.UpdateMailboxQuotaInput) workmail.UpdateMailboxQuotaRequest
+	UpdateMailboxQuotaRequest(*types.UpdateMailboxQuotaInput) workmail.UpdateMailboxQuotaRequest
 
-	UpdatePrimaryEmailAddressRequest(*workmail.UpdatePrimaryEmailAddressInput) workmail.UpdatePrimaryEmailAddressRequest
+	UpdatePrimaryEmailAddressRequest(*types.UpdatePrimaryEmailAddressInput) workmail.UpdatePrimaryEmailAddressRequest
 
-	UpdateResourceRequest(*workmail.UpdateResourceInput) workmail.UpdateResourceRequest
+	UpdateResourceRequest(*types.UpdateResourceInput) workmail.UpdateResourceRequest
 }
 
 var _ ClientAPI = (*workmail.Client)(nil)

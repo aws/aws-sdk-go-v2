@@ -10,6 +10,7 @@ package cloudwatcheventsiface
 
 import (
 	"github.com/aws/aws-sdk-go-v2/service/cloudwatchevents"
+	"github.com/aws/aws-sdk-go-v2/service/cloudwatchevents/types"
 )
 
 // ClientAPI provides an interface to enable mocking the
@@ -43,7 +44,7 @@ import (
 //    type mockClientClient struct {
 //        cloudwatcheventsiface.ClientPI
 //    }
-//    func (m *mockClientClient) ActivateEventSource(input *cloudwatchevents.ActivateEventSourceInput) (*cloudwatchevents.ActivateEventSourceOutput, error) {
+//    func (m *mockClientClient) ActivateEventSource(input *types.ActivateEventSourceInput) (*types.ActivateEventSourceOutput, error) {
 //        // mock response/functionality
 //    }
 //
@@ -61,67 +62,67 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type ClientAPI interface {
-	ActivateEventSourceRequest(*cloudwatchevents.ActivateEventSourceInput) cloudwatchevents.ActivateEventSourceRequest
+	ActivateEventSourceRequest(*types.ActivateEventSourceInput) cloudwatchevents.ActivateEventSourceRequest
 
-	CreateEventBusRequest(*cloudwatchevents.CreateEventBusInput) cloudwatchevents.CreateEventBusRequest
+	CreateEventBusRequest(*types.CreateEventBusInput) cloudwatchevents.CreateEventBusRequest
 
-	CreatePartnerEventSourceRequest(*cloudwatchevents.CreatePartnerEventSourceInput) cloudwatchevents.CreatePartnerEventSourceRequest
+	CreatePartnerEventSourceRequest(*types.CreatePartnerEventSourceInput) cloudwatchevents.CreatePartnerEventSourceRequest
 
-	DeactivateEventSourceRequest(*cloudwatchevents.DeactivateEventSourceInput) cloudwatchevents.DeactivateEventSourceRequest
+	DeactivateEventSourceRequest(*types.DeactivateEventSourceInput) cloudwatchevents.DeactivateEventSourceRequest
 
-	DeleteEventBusRequest(*cloudwatchevents.DeleteEventBusInput) cloudwatchevents.DeleteEventBusRequest
+	DeleteEventBusRequest(*types.DeleteEventBusInput) cloudwatchevents.DeleteEventBusRequest
 
-	DeletePartnerEventSourceRequest(*cloudwatchevents.DeletePartnerEventSourceInput) cloudwatchevents.DeletePartnerEventSourceRequest
+	DeletePartnerEventSourceRequest(*types.DeletePartnerEventSourceInput) cloudwatchevents.DeletePartnerEventSourceRequest
 
-	DeleteRuleRequest(*cloudwatchevents.DeleteRuleInput) cloudwatchevents.DeleteRuleRequest
+	DeleteRuleRequest(*types.DeleteRuleInput) cloudwatchevents.DeleteRuleRequest
 
-	DescribeEventBusRequest(*cloudwatchevents.DescribeEventBusInput) cloudwatchevents.DescribeEventBusRequest
+	DescribeEventBusRequest(*types.DescribeEventBusInput) cloudwatchevents.DescribeEventBusRequest
 
-	DescribeEventSourceRequest(*cloudwatchevents.DescribeEventSourceInput) cloudwatchevents.DescribeEventSourceRequest
+	DescribeEventSourceRequest(*types.DescribeEventSourceInput) cloudwatchevents.DescribeEventSourceRequest
 
-	DescribePartnerEventSourceRequest(*cloudwatchevents.DescribePartnerEventSourceInput) cloudwatchevents.DescribePartnerEventSourceRequest
+	DescribePartnerEventSourceRequest(*types.DescribePartnerEventSourceInput) cloudwatchevents.DescribePartnerEventSourceRequest
 
-	DescribeRuleRequest(*cloudwatchevents.DescribeRuleInput) cloudwatchevents.DescribeRuleRequest
+	DescribeRuleRequest(*types.DescribeRuleInput) cloudwatchevents.DescribeRuleRequest
 
-	DisableRuleRequest(*cloudwatchevents.DisableRuleInput) cloudwatchevents.DisableRuleRequest
+	DisableRuleRequest(*types.DisableRuleInput) cloudwatchevents.DisableRuleRequest
 
-	EnableRuleRequest(*cloudwatchevents.EnableRuleInput) cloudwatchevents.EnableRuleRequest
+	EnableRuleRequest(*types.EnableRuleInput) cloudwatchevents.EnableRuleRequest
 
-	ListEventBusesRequest(*cloudwatchevents.ListEventBusesInput) cloudwatchevents.ListEventBusesRequest
+	ListEventBusesRequest(*types.ListEventBusesInput) cloudwatchevents.ListEventBusesRequest
 
-	ListEventSourcesRequest(*cloudwatchevents.ListEventSourcesInput) cloudwatchevents.ListEventSourcesRequest
+	ListEventSourcesRequest(*types.ListEventSourcesInput) cloudwatchevents.ListEventSourcesRequest
 
-	ListPartnerEventSourceAccountsRequest(*cloudwatchevents.ListPartnerEventSourceAccountsInput) cloudwatchevents.ListPartnerEventSourceAccountsRequest
+	ListPartnerEventSourceAccountsRequest(*types.ListPartnerEventSourceAccountsInput) cloudwatchevents.ListPartnerEventSourceAccountsRequest
 
-	ListPartnerEventSourcesRequest(*cloudwatchevents.ListPartnerEventSourcesInput) cloudwatchevents.ListPartnerEventSourcesRequest
+	ListPartnerEventSourcesRequest(*types.ListPartnerEventSourcesInput) cloudwatchevents.ListPartnerEventSourcesRequest
 
-	ListRuleNamesByTargetRequest(*cloudwatchevents.ListRuleNamesByTargetInput) cloudwatchevents.ListRuleNamesByTargetRequest
+	ListRuleNamesByTargetRequest(*types.ListRuleNamesByTargetInput) cloudwatchevents.ListRuleNamesByTargetRequest
 
-	ListRulesRequest(*cloudwatchevents.ListRulesInput) cloudwatchevents.ListRulesRequest
+	ListRulesRequest(*types.ListRulesInput) cloudwatchevents.ListRulesRequest
 
-	ListTagsForResourceRequest(*cloudwatchevents.ListTagsForResourceInput) cloudwatchevents.ListTagsForResourceRequest
+	ListTagsForResourceRequest(*types.ListTagsForResourceInput) cloudwatchevents.ListTagsForResourceRequest
 
-	ListTargetsByRuleRequest(*cloudwatchevents.ListTargetsByRuleInput) cloudwatchevents.ListTargetsByRuleRequest
+	ListTargetsByRuleRequest(*types.ListTargetsByRuleInput) cloudwatchevents.ListTargetsByRuleRequest
 
-	PutEventsRequest(*cloudwatchevents.PutEventsInput) cloudwatchevents.PutEventsRequest
+	PutEventsRequest(*types.PutEventsInput) cloudwatchevents.PutEventsRequest
 
-	PutPartnerEventsRequest(*cloudwatchevents.PutPartnerEventsInput) cloudwatchevents.PutPartnerEventsRequest
+	PutPartnerEventsRequest(*types.PutPartnerEventsInput) cloudwatchevents.PutPartnerEventsRequest
 
-	PutPermissionRequest(*cloudwatchevents.PutPermissionInput) cloudwatchevents.PutPermissionRequest
+	PutPermissionRequest(*types.PutPermissionInput) cloudwatchevents.PutPermissionRequest
 
-	PutRuleRequest(*cloudwatchevents.PutRuleInput) cloudwatchevents.PutRuleRequest
+	PutRuleRequest(*types.PutRuleInput) cloudwatchevents.PutRuleRequest
 
-	PutTargetsRequest(*cloudwatchevents.PutTargetsInput) cloudwatchevents.PutTargetsRequest
+	PutTargetsRequest(*types.PutTargetsInput) cloudwatchevents.PutTargetsRequest
 
-	RemovePermissionRequest(*cloudwatchevents.RemovePermissionInput) cloudwatchevents.RemovePermissionRequest
+	RemovePermissionRequest(*types.RemovePermissionInput) cloudwatchevents.RemovePermissionRequest
 
-	RemoveTargetsRequest(*cloudwatchevents.RemoveTargetsInput) cloudwatchevents.RemoveTargetsRequest
+	RemoveTargetsRequest(*types.RemoveTargetsInput) cloudwatchevents.RemoveTargetsRequest
 
-	TagResourceRequest(*cloudwatchevents.TagResourceInput) cloudwatchevents.TagResourceRequest
+	TagResourceRequest(*types.TagResourceInput) cloudwatchevents.TagResourceRequest
 
-	TestEventPatternRequest(*cloudwatchevents.TestEventPatternInput) cloudwatchevents.TestEventPatternRequest
+	TestEventPatternRequest(*types.TestEventPatternInput) cloudwatchevents.TestEventPatternRequest
 
-	UntagResourceRequest(*cloudwatchevents.UntagResourceInput) cloudwatchevents.UntagResourceRequest
+	UntagResourceRequest(*types.UntagResourceInput) cloudwatchevents.UntagResourceRequest
 }
 
 var _ ClientAPI = (*cloudwatchevents.Client)(nil)

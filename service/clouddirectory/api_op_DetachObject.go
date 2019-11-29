@@ -6,108 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/clouddirectory/types"
 )
-
-type DetachObjectInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) that is associated with the Directory where
-	// objects reside. For more information, see arns.
-	//
-	// DirectoryArn is a required field
-	DirectoryArn *string `location:"header" locationName:"x-amz-data-partition" type:"string" required:"true"`
-
-	// The link name associated with the object that needs to be detached.
-	//
-	// LinkName is a required field
-	LinkName *string `min:"1" type:"string" required:"true"`
-
-	// The parent reference from which the object with the specified link name is
-	// detached.
-	//
-	// ParentReference is a required field
-	ParentReference *ObjectReference `type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s DetachObjectInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DetachObjectInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DetachObjectInput"}
-
-	if s.DirectoryArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DirectoryArn"))
-	}
-
-	if s.LinkName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("LinkName"))
-	}
-	if s.LinkName != nil && len(*s.LinkName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("LinkName", 1))
-	}
-
-	if s.ParentReference == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ParentReference"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DetachObjectInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.LinkName != nil {
-		v := *s.LinkName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "LinkName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.ParentReference != nil {
-		v := s.ParentReference
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "ParentReference", v, metadata)
-	}
-	if s.DirectoryArn != nil {
-		v := *s.DirectoryArn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "x-amz-data-partition", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type DetachObjectOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The ObjectIdentifier that was detached from the object.
-	DetachedObjectIdentifier *string `type:"string"`
-}
-
-// String returns the string representation
-func (s DetachObjectOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DetachObjectOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.DetachedObjectIdentifier != nil {
-		v := *s.DetachedObjectIdentifier
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "DetachedObjectIdentifier", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opDetachObject = "DetachObject"
 
@@ -125,7 +25,7 @@ const opDetachObject = "DetachObject"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/DetachObject
-func (c *Client) DetachObjectRequest(input *DetachObjectInput) DetachObjectRequest {
+func (c *Client) DetachObjectRequest(input *types.DetachObjectInput) DetachObjectRequest {
 	op := &aws.Operation{
 		Name:       opDetachObject,
 		HTTPMethod: "PUT",
@@ -133,10 +33,10 @@ func (c *Client) DetachObjectRequest(input *DetachObjectInput) DetachObjectReque
 	}
 
 	if input == nil {
-		input = &DetachObjectInput{}
+		input = &types.DetachObjectInput{}
 	}
 
-	req := c.newRequest(op, input, &DetachObjectOutput{})
+	req := c.newRequest(op, input, &types.DetachObjectOutput{})
 	return DetachObjectRequest{Request: req, Input: input, Copy: c.DetachObjectRequest}
 }
 
@@ -144,8 +44,8 @@ func (c *Client) DetachObjectRequest(input *DetachObjectInput) DetachObjectReque
 // DetachObject API operation.
 type DetachObjectRequest struct {
 	*aws.Request
-	Input *DetachObjectInput
-	Copy  func(*DetachObjectInput) DetachObjectRequest
+	Input *types.DetachObjectInput
+	Copy  func(*types.DetachObjectInput) DetachObjectRequest
 }
 
 // Send marshals and sends the DetachObject API request.
@@ -157,7 +57,7 @@ func (r DetachObjectRequest) Send(ctx context.Context) (*DetachObjectResponse, e
 	}
 
 	resp := &DetachObjectResponse{
-		DetachObjectOutput: r.Request.Data.(*DetachObjectOutput),
+		DetachObjectOutput: r.Request.Data.(*types.DetachObjectOutput),
 		response:           &aws.Response{Request: r.Request},
 	}
 
@@ -167,7 +67,7 @@ func (r DetachObjectRequest) Send(ctx context.Context) (*DetachObjectResponse, e
 // DetachObjectResponse is the response type for the
 // DetachObject API operation.
 type DetachObjectResponse struct {
-	*DetachObjectOutput
+	*types.DetachObjectOutput
 
 	response *aws.Response
 }

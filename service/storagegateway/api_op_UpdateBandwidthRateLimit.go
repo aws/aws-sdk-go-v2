@@ -6,72 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/storagegateway/types"
 )
-
-// A JSON object containing one or more of the following fields:
-//
-//    * UpdateBandwidthRateLimitInput$AverageDownloadRateLimitInBitsPerSec
-//
-//    * UpdateBandwidthRateLimitInput$AverageUploadRateLimitInBitsPerSec
-type UpdateBandwidthRateLimitInput struct {
-	_ struct{} `type:"structure"`
-
-	// The average download bandwidth rate limit in bits per second.
-	AverageDownloadRateLimitInBitsPerSec *int64 `min:"102400" type:"long"`
-
-	// The average upload bandwidth rate limit in bits per second.
-	AverageUploadRateLimitInBitsPerSec *int64 `min:"51200" type:"long"`
-
-	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation
-	// to return a list of gateways for your account and AWS Region.
-	//
-	// GatewayARN is a required field
-	GatewayARN *string `min:"50" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s UpdateBandwidthRateLimitInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateBandwidthRateLimitInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateBandwidthRateLimitInput"}
-	if s.AverageDownloadRateLimitInBitsPerSec != nil && *s.AverageDownloadRateLimitInBitsPerSec < 102400 {
-		invalidParams.Add(aws.NewErrParamMinValue("AverageDownloadRateLimitInBitsPerSec", 102400))
-	}
-	if s.AverageUploadRateLimitInBitsPerSec != nil && *s.AverageUploadRateLimitInBitsPerSec < 51200 {
-		invalidParams.Add(aws.NewErrParamMinValue("AverageUploadRateLimitInBitsPerSec", 51200))
-	}
-
-	if s.GatewayARN == nil {
-		invalidParams.Add(aws.NewErrParamRequired("GatewayARN"))
-	}
-	if s.GatewayARN != nil && len(*s.GatewayARN) < 50 {
-		invalidParams.Add(aws.NewErrParamMinLen("GatewayARN", 50))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// A JSON object containing the of the gateway whose throttle information was
-// updated.
-type UpdateBandwidthRateLimitOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation
-	// to return a list of gateways for your account and AWS Region.
-	GatewayARN *string `min:"50" type:"string"`
-}
-
-// String returns the string representation
-func (s UpdateBandwidthRateLimitOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opUpdateBandwidthRateLimit = "UpdateBandwidthRateLimit"
 
@@ -80,7 +16,8 @@ const opUpdateBandwidthRateLimit = "UpdateBandwidthRateLimit"
 //
 // Updates the bandwidth rate limits of a gateway. You can update both the upload
 // and download bandwidth rate limit or specify only one of the two. If you
-// don't set a bandwidth rate limit, the existing rate limit remains.
+// don't set a bandwidth rate limit, the existing rate limit remains. This operation
+// is supported for the stored volume, cached volume and tape gateway types.'
 //
 // By default, a gateway's bandwidth rate limits are not set. If you don't set
 // any limit, the gateway does not have any limitations on its bandwidth usage
@@ -97,7 +34,7 @@ const opUpdateBandwidthRateLimit = "UpdateBandwidthRateLimit"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/UpdateBandwidthRateLimit
-func (c *Client) UpdateBandwidthRateLimitRequest(input *UpdateBandwidthRateLimitInput) UpdateBandwidthRateLimitRequest {
+func (c *Client) UpdateBandwidthRateLimitRequest(input *types.UpdateBandwidthRateLimitInput) UpdateBandwidthRateLimitRequest {
 	op := &aws.Operation{
 		Name:       opUpdateBandwidthRateLimit,
 		HTTPMethod: "POST",
@@ -105,10 +42,10 @@ func (c *Client) UpdateBandwidthRateLimitRequest(input *UpdateBandwidthRateLimit
 	}
 
 	if input == nil {
-		input = &UpdateBandwidthRateLimitInput{}
+		input = &types.UpdateBandwidthRateLimitInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateBandwidthRateLimitOutput{})
+	req := c.newRequest(op, input, &types.UpdateBandwidthRateLimitOutput{})
 	return UpdateBandwidthRateLimitRequest{Request: req, Input: input, Copy: c.UpdateBandwidthRateLimitRequest}
 }
 
@@ -116,8 +53,8 @@ func (c *Client) UpdateBandwidthRateLimitRequest(input *UpdateBandwidthRateLimit
 // UpdateBandwidthRateLimit API operation.
 type UpdateBandwidthRateLimitRequest struct {
 	*aws.Request
-	Input *UpdateBandwidthRateLimitInput
-	Copy  func(*UpdateBandwidthRateLimitInput) UpdateBandwidthRateLimitRequest
+	Input *types.UpdateBandwidthRateLimitInput
+	Copy  func(*types.UpdateBandwidthRateLimitInput) UpdateBandwidthRateLimitRequest
 }
 
 // Send marshals and sends the UpdateBandwidthRateLimit API request.
@@ -129,7 +66,7 @@ func (r UpdateBandwidthRateLimitRequest) Send(ctx context.Context) (*UpdateBandw
 	}
 
 	resp := &UpdateBandwidthRateLimitResponse{
-		UpdateBandwidthRateLimitOutput: r.Request.Data.(*UpdateBandwidthRateLimitOutput),
+		UpdateBandwidthRateLimitOutput: r.Request.Data.(*types.UpdateBandwidthRateLimitOutput),
 		response:                       &aws.Response{Request: r.Request},
 	}
 
@@ -139,7 +76,7 @@ func (r UpdateBandwidthRateLimitRequest) Send(ctx context.Context) (*UpdateBandw
 // UpdateBandwidthRateLimitResponse is the response type for the
 // UpdateBandwidthRateLimit API operation.
 type UpdateBandwidthRateLimitResponse struct {
-	*UpdateBandwidthRateLimitOutput
+	*types.UpdateBandwidthRateLimitOutput
 
 	response *aws.Response
 }

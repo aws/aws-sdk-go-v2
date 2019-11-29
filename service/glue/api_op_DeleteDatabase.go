@@ -6,56 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/glue/types"
 )
-
-type DeleteDatabaseInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the Data Catalog in which the database resides. If none is provided,
-	// the AWS account ID is used by default.
-	CatalogId *string `min:"1" type:"string"`
-
-	// The name of the database to delete. For Hive compatibility, this must be
-	// all lowercase.
-	//
-	// Name is a required field
-	Name *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteDatabaseInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteDatabaseInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteDatabaseInput"}
-	if s.CatalogId != nil && len(*s.CatalogId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("CatalogId", 1))
-	}
-
-	if s.Name == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Name"))
-	}
-	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteDatabaseOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteDatabaseOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteDatabase = "DeleteDatabase"
 
@@ -83,7 +35,7 @@ const opDeleteDatabase = "DeleteDatabase"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DeleteDatabase
-func (c *Client) DeleteDatabaseRequest(input *DeleteDatabaseInput) DeleteDatabaseRequest {
+func (c *Client) DeleteDatabaseRequest(input *types.DeleteDatabaseInput) DeleteDatabaseRequest {
 	op := &aws.Operation{
 		Name:       opDeleteDatabase,
 		HTTPMethod: "POST",
@@ -91,10 +43,10 @@ func (c *Client) DeleteDatabaseRequest(input *DeleteDatabaseInput) DeleteDatabas
 	}
 
 	if input == nil {
-		input = &DeleteDatabaseInput{}
+		input = &types.DeleteDatabaseInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteDatabaseOutput{})
+	req := c.newRequest(op, input, &types.DeleteDatabaseOutput{})
 	return DeleteDatabaseRequest{Request: req, Input: input, Copy: c.DeleteDatabaseRequest}
 }
 
@@ -102,8 +54,8 @@ func (c *Client) DeleteDatabaseRequest(input *DeleteDatabaseInput) DeleteDatabas
 // DeleteDatabase API operation.
 type DeleteDatabaseRequest struct {
 	*aws.Request
-	Input *DeleteDatabaseInput
-	Copy  func(*DeleteDatabaseInput) DeleteDatabaseRequest
+	Input *types.DeleteDatabaseInput
+	Copy  func(*types.DeleteDatabaseInput) DeleteDatabaseRequest
 }
 
 // Send marshals and sends the DeleteDatabase API request.
@@ -115,7 +67,7 @@ func (r DeleteDatabaseRequest) Send(ctx context.Context) (*DeleteDatabaseRespons
 	}
 
 	resp := &DeleteDatabaseResponse{
-		DeleteDatabaseOutput: r.Request.Data.(*DeleteDatabaseOutput),
+		DeleteDatabaseOutput: r.Request.Data.(*types.DeleteDatabaseOutput),
 		response:             &aws.Response{Request: r.Request},
 	}
 
@@ -125,7 +77,7 @@ func (r DeleteDatabaseRequest) Send(ctx context.Context) (*DeleteDatabaseRespons
 // DeleteDatabaseResponse is the response type for the
 // DeleteDatabase API operation.
 type DeleteDatabaseResponse struct {
-	*DeleteDatabaseOutput
+	*types.DeleteDatabaseOutput
 
 	response *aws.Response
 }

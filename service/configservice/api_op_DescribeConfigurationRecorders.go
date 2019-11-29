@@ -6,34 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/configservice/types"
 )
-
-// The input for the DescribeConfigurationRecorders action.
-type DescribeConfigurationRecordersInput struct {
-	_ struct{} `type:"structure"`
-
-	// A list of configuration recorder names.
-	ConfigurationRecorderNames []string `type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeConfigurationRecordersInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// The output for the DescribeConfigurationRecorders action.
-type DescribeConfigurationRecordersOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A list that contains the descriptions of the specified configuration recorders.
-	ConfigurationRecorders []ConfigurationRecorder `type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeConfigurationRecordersOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeConfigurationRecorders = "DescribeConfigurationRecorders"
 
@@ -55,7 +29,7 @@ const opDescribeConfigurationRecorders = "DescribeConfigurationRecorders"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DescribeConfigurationRecorders
-func (c *Client) DescribeConfigurationRecordersRequest(input *DescribeConfigurationRecordersInput) DescribeConfigurationRecordersRequest {
+func (c *Client) DescribeConfigurationRecordersRequest(input *types.DescribeConfigurationRecordersInput) DescribeConfigurationRecordersRequest {
 	op := &aws.Operation{
 		Name:       opDescribeConfigurationRecorders,
 		HTTPMethod: "POST",
@@ -63,10 +37,10 @@ func (c *Client) DescribeConfigurationRecordersRequest(input *DescribeConfigurat
 	}
 
 	if input == nil {
-		input = &DescribeConfigurationRecordersInput{}
+		input = &types.DescribeConfigurationRecordersInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeConfigurationRecordersOutput{})
+	req := c.newRequest(op, input, &types.DescribeConfigurationRecordersOutput{})
 	return DescribeConfigurationRecordersRequest{Request: req, Input: input, Copy: c.DescribeConfigurationRecordersRequest}
 }
 
@@ -74,8 +48,8 @@ func (c *Client) DescribeConfigurationRecordersRequest(input *DescribeConfigurat
 // DescribeConfigurationRecorders API operation.
 type DescribeConfigurationRecordersRequest struct {
 	*aws.Request
-	Input *DescribeConfigurationRecordersInput
-	Copy  func(*DescribeConfigurationRecordersInput) DescribeConfigurationRecordersRequest
+	Input *types.DescribeConfigurationRecordersInput
+	Copy  func(*types.DescribeConfigurationRecordersInput) DescribeConfigurationRecordersRequest
 }
 
 // Send marshals and sends the DescribeConfigurationRecorders API request.
@@ -87,7 +61,7 @@ func (r DescribeConfigurationRecordersRequest) Send(ctx context.Context) (*Descr
 	}
 
 	resp := &DescribeConfigurationRecordersResponse{
-		DescribeConfigurationRecordersOutput: r.Request.Data.(*DescribeConfigurationRecordersOutput),
+		DescribeConfigurationRecordersOutput: r.Request.Data.(*types.DescribeConfigurationRecordersOutput),
 		response:                             &aws.Response{Request: r.Request},
 	}
 
@@ -97,7 +71,7 @@ func (r DescribeConfigurationRecordersRequest) Send(ctx context.Context) (*Descr
 // DescribeConfigurationRecordersResponse is the response type for the
 // DescribeConfigurationRecorders API operation.
 type DescribeConfigurationRecordersResponse struct {
-	*DescribeConfigurationRecordersOutput
+	*types.DescribeConfigurationRecordersOutput
 
 	response *aws.Response
 }

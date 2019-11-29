@@ -6,65 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/rds/types"
 )
-
-type PurchaseReservedDBInstancesOfferingInput struct {
-	_ struct{} `type:"structure"`
-
-	// The number of instances to reserve.
-	//
-	// Default: 1
-	DBInstanceCount *int64 `type:"integer"`
-
-	// Customer-specified identifier to track this reservation.
-	//
-	// Example: myreservationID
-	ReservedDBInstanceId *string `type:"string"`
-
-	// The ID of the Reserved DB instance offering to purchase.
-	//
-	// Example: 438012d3-4052-4cc7-b2e3-8d3372e0e706
-	//
-	// ReservedDBInstancesOfferingId is a required field
-	ReservedDBInstancesOfferingId *string `type:"string" required:"true"`
-
-	// A list of tags. For more information, see Tagging Amazon RDS Resources (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html)
-	// in the Amazon RDS User Guide.
-	Tags []Tag `locationNameList:"Tag" type:"list"`
-}
-
-// String returns the string representation
-func (s PurchaseReservedDBInstancesOfferingInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *PurchaseReservedDBInstancesOfferingInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "PurchaseReservedDBInstancesOfferingInput"}
-
-	if s.ReservedDBInstancesOfferingId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ReservedDBInstancesOfferingId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type PurchaseReservedDBInstancesOfferingOutput struct {
-	_ struct{} `type:"structure"`
-
-	// This data type is used as a response element in the DescribeReservedDBInstances
-	// and PurchaseReservedDBInstancesOffering actions.
-	ReservedDBInstance *ReservedDBInstance `type:"structure"`
-}
-
-// String returns the string representation
-func (s PurchaseReservedDBInstancesOfferingOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opPurchaseReservedDBInstancesOffering = "PurchaseReservedDBInstancesOffering"
 
@@ -81,7 +24,7 @@ const opPurchaseReservedDBInstancesOffering = "PurchaseReservedDBInstancesOfferi
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/PurchaseReservedDBInstancesOffering
-func (c *Client) PurchaseReservedDBInstancesOfferingRequest(input *PurchaseReservedDBInstancesOfferingInput) PurchaseReservedDBInstancesOfferingRequest {
+func (c *Client) PurchaseReservedDBInstancesOfferingRequest(input *types.PurchaseReservedDBInstancesOfferingInput) PurchaseReservedDBInstancesOfferingRequest {
 	op := &aws.Operation{
 		Name:       opPurchaseReservedDBInstancesOffering,
 		HTTPMethod: "POST",
@@ -89,10 +32,10 @@ func (c *Client) PurchaseReservedDBInstancesOfferingRequest(input *PurchaseReser
 	}
 
 	if input == nil {
-		input = &PurchaseReservedDBInstancesOfferingInput{}
+		input = &types.PurchaseReservedDBInstancesOfferingInput{}
 	}
 
-	req := c.newRequest(op, input, &PurchaseReservedDBInstancesOfferingOutput{})
+	req := c.newRequest(op, input, &types.PurchaseReservedDBInstancesOfferingOutput{})
 	return PurchaseReservedDBInstancesOfferingRequest{Request: req, Input: input, Copy: c.PurchaseReservedDBInstancesOfferingRequest}
 }
 
@@ -100,8 +43,8 @@ func (c *Client) PurchaseReservedDBInstancesOfferingRequest(input *PurchaseReser
 // PurchaseReservedDBInstancesOffering API operation.
 type PurchaseReservedDBInstancesOfferingRequest struct {
 	*aws.Request
-	Input *PurchaseReservedDBInstancesOfferingInput
-	Copy  func(*PurchaseReservedDBInstancesOfferingInput) PurchaseReservedDBInstancesOfferingRequest
+	Input *types.PurchaseReservedDBInstancesOfferingInput
+	Copy  func(*types.PurchaseReservedDBInstancesOfferingInput) PurchaseReservedDBInstancesOfferingRequest
 }
 
 // Send marshals and sends the PurchaseReservedDBInstancesOffering API request.
@@ -113,7 +56,7 @@ func (r PurchaseReservedDBInstancesOfferingRequest) Send(ctx context.Context) (*
 	}
 
 	resp := &PurchaseReservedDBInstancesOfferingResponse{
-		PurchaseReservedDBInstancesOfferingOutput: r.Request.Data.(*PurchaseReservedDBInstancesOfferingOutput),
+		PurchaseReservedDBInstancesOfferingOutput: r.Request.Data.(*types.PurchaseReservedDBInstancesOfferingOutput),
 		response: &aws.Response{Request: r.Request},
 	}
 
@@ -123,7 +66,7 @@ func (r PurchaseReservedDBInstancesOfferingRequest) Send(ctx context.Context) (*
 // PurchaseReservedDBInstancesOfferingResponse is the response type for the
 // PurchaseReservedDBInstancesOffering API operation.
 type PurchaseReservedDBInstancesOfferingResponse struct {
-	*PurchaseReservedDBInstancesOfferingOutput
+	*types.PurchaseReservedDBInstancesOfferingOutput
 
 	response *aws.Response
 }

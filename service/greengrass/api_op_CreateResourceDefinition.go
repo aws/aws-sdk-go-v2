@@ -6,150 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/greengrass/types"
 )
-
-type CreateResourceDefinitionInput struct {
-	_ struct{} `type:"structure"`
-
-	AmznClientToken *string `location:"header" locationName:"X-Amzn-Client-Token" type:"string"`
-
-	// Information about a resource definition version.
-	InitialVersion *ResourceDefinitionVersion `type:"structure"`
-
-	Name *string `type:"string"`
-
-	// The key-value pair for the resource tag.
-	Tags map[string]string `locationName:"tags" type:"map"`
-}
-
-// String returns the string representation
-func (s CreateResourceDefinitionInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateResourceDefinitionInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateResourceDefinitionInput"}
-	if s.InitialVersion != nil {
-		if err := s.InitialVersion.Validate(); err != nil {
-			invalidParams.AddNested("InitialVersion", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s CreateResourceDefinitionInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.InitialVersion != nil {
-		v := s.InitialVersion
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "InitialVersion", v, metadata)
-	}
-	if s.Name != nil {
-		v := *s.Name
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "Name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Tags != nil {
-		v := s.Tags
-
-		metadata := protocol.Metadata{}
-		ms0 := e.Map(protocol.BodyTarget, "tags", metadata)
-		ms0.Start()
-		for k1, v1 := range v {
-			ms0.MapSetValue(k1, protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
-		}
-		ms0.End()
-
-	}
-	if s.AmznClientToken != nil {
-		v := *s.AmznClientToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "X-Amzn-Client-Token", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type CreateResourceDefinitionOutput struct {
-	_ struct{} `type:"structure"`
-
-	Arn *string `type:"string"`
-
-	CreationTimestamp *string `type:"string"`
-
-	Id *string `type:"string"`
-
-	LastUpdatedTimestamp *string `type:"string"`
-
-	LatestVersion *string `type:"string"`
-
-	LatestVersionArn *string `type:"string"`
-
-	Name *string `type:"string"`
-}
-
-// String returns the string representation
-func (s CreateResourceDefinitionOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s CreateResourceDefinitionOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.Arn != nil {
-		v := *s.Arn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "Arn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.CreationTimestamp != nil {
-		v := *s.CreationTimestamp
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "CreationTimestamp", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Id != nil {
-		v := *s.Id
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "Id", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.LastUpdatedTimestamp != nil {
-		v := *s.LastUpdatedTimestamp
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "LastUpdatedTimestamp", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.LatestVersion != nil {
-		v := *s.LatestVersion
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "LatestVersion", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.LatestVersionArn != nil {
-		v := *s.LatestVersionArn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "LatestVersionArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Name != nil {
-		v := *s.Name
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "Name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opCreateResourceDefinition = "CreateResourceDefinition"
 
@@ -168,7 +26,7 @@ const opCreateResourceDefinition = "CreateResourceDefinition"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/CreateResourceDefinition
-func (c *Client) CreateResourceDefinitionRequest(input *CreateResourceDefinitionInput) CreateResourceDefinitionRequest {
+func (c *Client) CreateResourceDefinitionRequest(input *types.CreateResourceDefinitionInput) CreateResourceDefinitionRequest {
 	op := &aws.Operation{
 		Name:       opCreateResourceDefinition,
 		HTTPMethod: "POST",
@@ -176,10 +34,10 @@ func (c *Client) CreateResourceDefinitionRequest(input *CreateResourceDefinition
 	}
 
 	if input == nil {
-		input = &CreateResourceDefinitionInput{}
+		input = &types.CreateResourceDefinitionInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateResourceDefinitionOutput{})
+	req := c.newRequest(op, input, &types.CreateResourceDefinitionOutput{})
 	return CreateResourceDefinitionRequest{Request: req, Input: input, Copy: c.CreateResourceDefinitionRequest}
 }
 
@@ -187,8 +45,8 @@ func (c *Client) CreateResourceDefinitionRequest(input *CreateResourceDefinition
 // CreateResourceDefinition API operation.
 type CreateResourceDefinitionRequest struct {
 	*aws.Request
-	Input *CreateResourceDefinitionInput
-	Copy  func(*CreateResourceDefinitionInput) CreateResourceDefinitionRequest
+	Input *types.CreateResourceDefinitionInput
+	Copy  func(*types.CreateResourceDefinitionInput) CreateResourceDefinitionRequest
 }
 
 // Send marshals and sends the CreateResourceDefinition API request.
@@ -200,7 +58,7 @@ func (r CreateResourceDefinitionRequest) Send(ctx context.Context) (*CreateResou
 	}
 
 	resp := &CreateResourceDefinitionResponse{
-		CreateResourceDefinitionOutput: r.Request.Data.(*CreateResourceDefinitionOutput),
+		CreateResourceDefinitionOutput: r.Request.Data.(*types.CreateResourceDefinitionOutput),
 		response:                       &aws.Response{Request: r.Request},
 	}
 
@@ -210,7 +68,7 @@ func (r CreateResourceDefinitionRequest) Send(ctx context.Context) (*CreateResou
 // CreateResourceDefinitionResponse is the response type for the
 // CreateResourceDefinition API operation.
 type CreateResourceDefinitionResponse struct {
-	*CreateResourceDefinitionOutput
+	*types.CreateResourceDefinitionOutput
 
 	response *aws.Response
 }

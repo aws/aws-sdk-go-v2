@@ -6,55 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/glue/types"
 )
-
-type GetCrawlerMetricsInput struct {
-	_ struct{} `type:"structure"`
-
-	// A list of the names of crawlers about which to retrieve metrics.
-	CrawlerNameList []string `type:"list"`
-
-	// The maximum size of a list to return.
-	MaxResults *int64 `min:"1" type:"integer"`
-
-	// A continuation token, if this is a continuation call.
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s GetCrawlerMetricsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetCrawlerMetricsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetCrawlerMetricsInput"}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type GetCrawlerMetricsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A list of metrics for the specified crawler.
-	CrawlerMetricsList []CrawlerMetrics `type:"list"`
-
-	// A continuation token, if the returned list does not contain the last metric
-	// available.
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s GetCrawlerMetricsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetCrawlerMetrics = "GetCrawlerMetrics"
 
@@ -71,7 +24,7 @@ const opGetCrawlerMetrics = "GetCrawlerMetrics"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetCrawlerMetrics
-func (c *Client) GetCrawlerMetricsRequest(input *GetCrawlerMetricsInput) GetCrawlerMetricsRequest {
+func (c *Client) GetCrawlerMetricsRequest(input *types.GetCrawlerMetricsInput) GetCrawlerMetricsRequest {
 	op := &aws.Operation{
 		Name:       opGetCrawlerMetrics,
 		HTTPMethod: "POST",
@@ -85,10 +38,10 @@ func (c *Client) GetCrawlerMetricsRequest(input *GetCrawlerMetricsInput) GetCraw
 	}
 
 	if input == nil {
-		input = &GetCrawlerMetricsInput{}
+		input = &types.GetCrawlerMetricsInput{}
 	}
 
-	req := c.newRequest(op, input, &GetCrawlerMetricsOutput{})
+	req := c.newRequest(op, input, &types.GetCrawlerMetricsOutput{})
 	return GetCrawlerMetricsRequest{Request: req, Input: input, Copy: c.GetCrawlerMetricsRequest}
 }
 
@@ -96,8 +49,8 @@ func (c *Client) GetCrawlerMetricsRequest(input *GetCrawlerMetricsInput) GetCraw
 // GetCrawlerMetrics API operation.
 type GetCrawlerMetricsRequest struct {
 	*aws.Request
-	Input *GetCrawlerMetricsInput
-	Copy  func(*GetCrawlerMetricsInput) GetCrawlerMetricsRequest
+	Input *types.GetCrawlerMetricsInput
+	Copy  func(*types.GetCrawlerMetricsInput) GetCrawlerMetricsRequest
 }
 
 // Send marshals and sends the GetCrawlerMetrics API request.
@@ -109,7 +62,7 @@ func (r GetCrawlerMetricsRequest) Send(ctx context.Context) (*GetCrawlerMetricsR
 	}
 
 	resp := &GetCrawlerMetricsResponse{
-		GetCrawlerMetricsOutput: r.Request.Data.(*GetCrawlerMetricsOutput),
+		GetCrawlerMetricsOutput: r.Request.Data.(*types.GetCrawlerMetricsOutput),
 		response:                &aws.Response{Request: r.Request},
 	}
 
@@ -139,7 +92,7 @@ func NewGetCrawlerMetricsPaginator(req GetCrawlerMetricsRequest) GetCrawlerMetri
 	return GetCrawlerMetricsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *GetCrawlerMetricsInput
+				var inCpy *types.GetCrawlerMetricsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -159,14 +112,14 @@ type GetCrawlerMetricsPaginator struct {
 	aws.Pager
 }
 
-func (p *GetCrawlerMetricsPaginator) CurrentPage() *GetCrawlerMetricsOutput {
-	return p.Pager.CurrentPage().(*GetCrawlerMetricsOutput)
+func (p *GetCrawlerMetricsPaginator) CurrentPage() *types.GetCrawlerMetricsOutput {
+	return p.Pager.CurrentPage().(*types.GetCrawlerMetricsOutput)
 }
 
 // GetCrawlerMetricsResponse is the response type for the
 // GetCrawlerMetrics API operation.
 type GetCrawlerMetricsResponse struct {
-	*GetCrawlerMetricsOutput
+	*types.GetCrawlerMetricsOutput
 
 	response *aws.Response
 }

@@ -6,53 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/translate/types"
 )
-
-type ListTerminologiesInput struct {
-	_ struct{} `type:"structure"`
-
-	// The maximum number of custom terminologies returned per list request.
-	MaxResults *int64 `min:"1" type:"integer"`
-
-	// If the result of the request to ListTerminologies was truncated, include
-	// the NextToken to fetch the next group of custom terminologies.
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s ListTerminologiesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListTerminologiesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListTerminologiesInput"}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ListTerminologiesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// If the response to the ListTerminologies was truncated, the NextToken fetches
-	// the next group of custom terminologies.
-	NextToken *string `type:"string"`
-
-	// The properties list of the custom terminologies returned on the list request.
-	TerminologyPropertiesList []TerminologyProperties `type:"list"`
-}
-
-// String returns the string representation
-func (s ListTerminologiesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListTerminologies = "ListTerminologies"
 
@@ -69,7 +24,7 @@ const opListTerminologies = "ListTerminologies"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/translate-2017-07-01/ListTerminologies
-func (c *Client) ListTerminologiesRequest(input *ListTerminologiesInput) ListTerminologiesRequest {
+func (c *Client) ListTerminologiesRequest(input *types.ListTerminologiesInput) ListTerminologiesRequest {
 	op := &aws.Operation{
 		Name:       opListTerminologies,
 		HTTPMethod: "POST",
@@ -77,10 +32,10 @@ func (c *Client) ListTerminologiesRequest(input *ListTerminologiesInput) ListTer
 	}
 
 	if input == nil {
-		input = &ListTerminologiesInput{}
+		input = &types.ListTerminologiesInput{}
 	}
 
-	req := c.newRequest(op, input, &ListTerminologiesOutput{})
+	req := c.newRequest(op, input, &types.ListTerminologiesOutput{})
 	return ListTerminologiesRequest{Request: req, Input: input, Copy: c.ListTerminologiesRequest}
 }
 
@@ -88,8 +43,8 @@ func (c *Client) ListTerminologiesRequest(input *ListTerminologiesInput) ListTer
 // ListTerminologies API operation.
 type ListTerminologiesRequest struct {
 	*aws.Request
-	Input *ListTerminologiesInput
-	Copy  func(*ListTerminologiesInput) ListTerminologiesRequest
+	Input *types.ListTerminologiesInput
+	Copy  func(*types.ListTerminologiesInput) ListTerminologiesRequest
 }
 
 // Send marshals and sends the ListTerminologies API request.
@@ -101,7 +56,7 @@ func (r ListTerminologiesRequest) Send(ctx context.Context) (*ListTerminologiesR
 	}
 
 	resp := &ListTerminologiesResponse{
-		ListTerminologiesOutput: r.Request.Data.(*ListTerminologiesOutput),
+		ListTerminologiesOutput: r.Request.Data.(*types.ListTerminologiesOutput),
 		response:                &aws.Response{Request: r.Request},
 	}
 
@@ -111,7 +66,7 @@ func (r ListTerminologiesRequest) Send(ctx context.Context) (*ListTerminologiesR
 // ListTerminologiesResponse is the response type for the
 // ListTerminologies API operation.
 type ListTerminologiesResponse struct {
-	*ListTerminologiesOutput
+	*types.ListTerminologiesOutput
 
 	response *aws.Response
 }

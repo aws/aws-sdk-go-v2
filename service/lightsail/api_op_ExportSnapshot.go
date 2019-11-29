@@ -6,48 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/lightsail/types"
 )
-
-type ExportSnapshotInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the instance or disk snapshot to be exported to Amazon EC2.
-	//
-	// SourceSnapshotName is a required field
-	SourceSnapshotName *string `locationName:"sourceSnapshotName" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s ExportSnapshotInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ExportSnapshotInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ExportSnapshotInput"}
-
-	if s.SourceSnapshotName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("SourceSnapshotName"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ExportSnapshotOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A list of objects describing the API operation.
-	Operations []Operation `locationName:"operations" type:"list"`
-}
-
-// String returns the string representation
-func (s ExportSnapshotOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opExportSnapshot = "ExportSnapshot"
 
@@ -80,7 +40,7 @@ const opExportSnapshot = "ExportSnapshot"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/ExportSnapshot
-func (c *Client) ExportSnapshotRequest(input *ExportSnapshotInput) ExportSnapshotRequest {
+func (c *Client) ExportSnapshotRequest(input *types.ExportSnapshotInput) ExportSnapshotRequest {
 	op := &aws.Operation{
 		Name:       opExportSnapshot,
 		HTTPMethod: "POST",
@@ -88,10 +48,10 @@ func (c *Client) ExportSnapshotRequest(input *ExportSnapshotInput) ExportSnapsho
 	}
 
 	if input == nil {
-		input = &ExportSnapshotInput{}
+		input = &types.ExportSnapshotInput{}
 	}
 
-	req := c.newRequest(op, input, &ExportSnapshotOutput{})
+	req := c.newRequest(op, input, &types.ExportSnapshotOutput{})
 	return ExportSnapshotRequest{Request: req, Input: input, Copy: c.ExportSnapshotRequest}
 }
 
@@ -99,8 +59,8 @@ func (c *Client) ExportSnapshotRequest(input *ExportSnapshotInput) ExportSnapsho
 // ExportSnapshot API operation.
 type ExportSnapshotRequest struct {
 	*aws.Request
-	Input *ExportSnapshotInput
-	Copy  func(*ExportSnapshotInput) ExportSnapshotRequest
+	Input *types.ExportSnapshotInput
+	Copy  func(*types.ExportSnapshotInput) ExportSnapshotRequest
 }
 
 // Send marshals and sends the ExportSnapshot API request.
@@ -112,7 +72,7 @@ func (r ExportSnapshotRequest) Send(ctx context.Context) (*ExportSnapshotRespons
 	}
 
 	resp := &ExportSnapshotResponse{
-		ExportSnapshotOutput: r.Request.Data.(*ExportSnapshotOutput),
+		ExportSnapshotOutput: r.Request.Data.(*types.ExportSnapshotOutput),
 		response:             &aws.Response{Request: r.Request},
 	}
 
@@ -122,7 +82,7 @@ func (r ExportSnapshotRequest) Send(ctx context.Context) (*ExportSnapshotRespons
 // ExportSnapshotResponse is the response type for the
 // ExportSnapshot API operation.
 type ExportSnapshotResponse struct {
-	*ExportSnapshotOutput
+	*types.ExportSnapshotOutput
 
 	response *aws.Response
 }

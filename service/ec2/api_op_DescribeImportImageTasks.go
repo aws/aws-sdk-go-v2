@@ -6,53 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-type DescribeImportImageTasksInput struct {
-	_ struct{} `type:"structure"`
-
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have
-	// the required permissions, the error response is DryRunOperation. Otherwise,
-	// it is UnauthorizedOperation.
-	DryRun *bool `type:"boolean"`
-
-	// Filter tasks using the task-state filter and one of the following values:
-	// active, completed, deleting, or deleted.
-	Filters []Filter `locationNameList:"Filter" type:"list"`
-
-	// The IDs of the import image tasks.
-	ImportTaskIds []string `locationName:"ImportTaskId" locationNameList:"ImportTaskId" type:"list"`
-
-	// The maximum number of results to return in a single call.
-	MaxResults *int64 `type:"integer"`
-
-	// A token that indicates the next page of results.
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeImportImageTasksInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type DescribeImportImageTasksOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A list of zero or more import image tasks that are currently active or were
-	// completed or canceled in the previous 7 days.
-	ImportImageTasks []ImportImageTask `locationName:"importImageTaskSet" locationNameList:"item" type:"list"`
-
-	// The token to use to get the next page of results. This value is null when
-	// there are no more results to return.
-	NextToken *string `locationName:"nextToken" type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeImportImageTasksOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeImportImageTasks = "DescribeImportImageTasks"
 
@@ -70,7 +25,7 @@ const opDescribeImportImageTasks = "DescribeImportImageTasks"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeImportImageTasks
-func (c *Client) DescribeImportImageTasksRequest(input *DescribeImportImageTasksInput) DescribeImportImageTasksRequest {
+func (c *Client) DescribeImportImageTasksRequest(input *types.DescribeImportImageTasksInput) DescribeImportImageTasksRequest {
 	op := &aws.Operation{
 		Name:       opDescribeImportImageTasks,
 		HTTPMethod: "POST",
@@ -84,10 +39,10 @@ func (c *Client) DescribeImportImageTasksRequest(input *DescribeImportImageTasks
 	}
 
 	if input == nil {
-		input = &DescribeImportImageTasksInput{}
+		input = &types.DescribeImportImageTasksInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeImportImageTasksOutput{})
+	req := c.newRequest(op, input, &types.DescribeImportImageTasksOutput{})
 	return DescribeImportImageTasksRequest{Request: req, Input: input, Copy: c.DescribeImportImageTasksRequest}
 }
 
@@ -95,8 +50,8 @@ func (c *Client) DescribeImportImageTasksRequest(input *DescribeImportImageTasks
 // DescribeImportImageTasks API operation.
 type DescribeImportImageTasksRequest struct {
 	*aws.Request
-	Input *DescribeImportImageTasksInput
-	Copy  func(*DescribeImportImageTasksInput) DescribeImportImageTasksRequest
+	Input *types.DescribeImportImageTasksInput
+	Copy  func(*types.DescribeImportImageTasksInput) DescribeImportImageTasksRequest
 }
 
 // Send marshals and sends the DescribeImportImageTasks API request.
@@ -108,7 +63,7 @@ func (r DescribeImportImageTasksRequest) Send(ctx context.Context) (*DescribeImp
 	}
 
 	resp := &DescribeImportImageTasksResponse{
-		DescribeImportImageTasksOutput: r.Request.Data.(*DescribeImportImageTasksOutput),
+		DescribeImportImageTasksOutput: r.Request.Data.(*types.DescribeImportImageTasksOutput),
 		response:                       &aws.Response{Request: r.Request},
 	}
 
@@ -138,7 +93,7 @@ func NewDescribeImportImageTasksPaginator(req DescribeImportImageTasksRequest) D
 	return DescribeImportImageTasksPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *DescribeImportImageTasksInput
+				var inCpy *types.DescribeImportImageTasksInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -158,14 +113,14 @@ type DescribeImportImageTasksPaginator struct {
 	aws.Pager
 }
 
-func (p *DescribeImportImageTasksPaginator) CurrentPage() *DescribeImportImageTasksOutput {
-	return p.Pager.CurrentPage().(*DescribeImportImageTasksOutput)
+func (p *DescribeImportImageTasksPaginator) CurrentPage() *types.DescribeImportImageTasksOutput {
+	return p.Pager.CurrentPage().(*types.DescribeImportImageTasksOutput)
 }
 
 // DescribeImportImageTasksResponse is the response type for the
 // DescribeImportImageTasks API operation.
 type DescribeImportImageTasksResponse struct {
-	*DescribeImportImageTasksOutput
+	*types.DescribeImportImageTasksOutput
 
 	response *aws.Response
 }

@@ -6,70 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/firehose/types"
 )
-
-type PutRecordInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the delivery stream.
-	//
-	// DeliveryStreamName is a required field
-	DeliveryStreamName *string `min:"1" type:"string" required:"true"`
-
-	// The record.
-	//
-	// Record is a required field
-	Record *Record `type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s PutRecordInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *PutRecordInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "PutRecordInput"}
-
-	if s.DeliveryStreamName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DeliveryStreamName"))
-	}
-	if s.DeliveryStreamName != nil && len(*s.DeliveryStreamName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("DeliveryStreamName", 1))
-	}
-
-	if s.Record == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Record"))
-	}
-	if s.Record != nil {
-		if err := s.Record.Validate(); err != nil {
-			invalidParams.AddNested("Record", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type PutRecordOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Indicates whether server-side encryption (SSE) was enabled during this operation.
-	Encrypted *bool `type:"boolean"`
-
-	// The ID of the record.
-	//
-	// RecordId is a required field
-	RecordId *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s PutRecordOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opPutRecord = "PutRecord"
 
@@ -122,7 +60,7 @@ const opPutRecord = "PutRecord"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/PutRecord
-func (c *Client) PutRecordRequest(input *PutRecordInput) PutRecordRequest {
+func (c *Client) PutRecordRequest(input *types.PutRecordInput) PutRecordRequest {
 	op := &aws.Operation{
 		Name:       opPutRecord,
 		HTTPMethod: "POST",
@@ -130,10 +68,10 @@ func (c *Client) PutRecordRequest(input *PutRecordInput) PutRecordRequest {
 	}
 
 	if input == nil {
-		input = &PutRecordInput{}
+		input = &types.PutRecordInput{}
 	}
 
-	req := c.newRequest(op, input, &PutRecordOutput{})
+	req := c.newRequest(op, input, &types.PutRecordOutput{})
 	return PutRecordRequest{Request: req, Input: input, Copy: c.PutRecordRequest}
 }
 
@@ -141,8 +79,8 @@ func (c *Client) PutRecordRequest(input *PutRecordInput) PutRecordRequest {
 // PutRecord API operation.
 type PutRecordRequest struct {
 	*aws.Request
-	Input *PutRecordInput
-	Copy  func(*PutRecordInput) PutRecordRequest
+	Input *types.PutRecordInput
+	Copy  func(*types.PutRecordInput) PutRecordRequest
 }
 
 // Send marshals and sends the PutRecord API request.
@@ -154,7 +92,7 @@ func (r PutRecordRequest) Send(ctx context.Context) (*PutRecordResponse, error) 
 	}
 
 	resp := &PutRecordResponse{
-		PutRecordOutput: r.Request.Data.(*PutRecordOutput),
+		PutRecordOutput: r.Request.Data.(*types.PutRecordOutput),
 		response:        &aws.Response{Request: r.Request},
 	}
 
@@ -164,7 +102,7 @@ func (r PutRecordRequest) Send(ctx context.Context) (*PutRecordResponse, error) 
 // PutRecordResponse is the response type for the
 // PutRecord API operation.
 type PutRecordResponse struct {
-	*PutRecordOutput
+	*types.PutRecordOutput
 
 	response *aws.Response
 }

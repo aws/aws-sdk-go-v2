@@ -6,65 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/support/types"
 )
-
-// To be written.
-type AddCommunicationToCaseInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of a set of one or more attachments for the communication to add to
-	// the case. Create the set by calling AddAttachmentsToSet
-	AttachmentSetId *string `locationName:"attachmentSetId" type:"string"`
-
-	// The AWS Support case ID requested or returned in the call. The case ID is
-	// an alphanumeric string formatted as shown in this example: case-12345678910-2013-c4c1d2bf33c5cf47
-	CaseId *string `locationName:"caseId" type:"string"`
-
-	// The email addresses in the CC line of an email to be added to the support
-	// case.
-	CcEmailAddresses []string `locationName:"ccEmailAddresses" type:"list"`
-
-	// The body of an email communication to add to the support case.
-	//
-	// CommunicationBody is a required field
-	CommunicationBody *string `locationName:"communicationBody" min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s AddCommunicationToCaseInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *AddCommunicationToCaseInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "AddCommunicationToCaseInput"}
-
-	if s.CommunicationBody == nil {
-		invalidParams.Add(aws.NewErrParamRequired("CommunicationBody"))
-	}
-	if s.CommunicationBody != nil && len(*s.CommunicationBody) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("CommunicationBody", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// The result of the AddCommunicationToCase operation.
-type AddCommunicationToCaseOutput struct {
-	_ struct{} `type:"structure"`
-
-	// True if AddCommunicationToCase succeeds. Otherwise, returns an error.
-	Result *bool `locationName:"result" type:"boolean"`
-}
-
-// String returns the string representation
-func (s AddCommunicationToCaseOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opAddCommunicationToCase = "AddCommunicationToCase"
 
@@ -88,7 +31,7 @@ const opAddCommunicationToCase = "AddCommunicationToCase"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/support-2013-04-15/AddCommunicationToCase
-func (c *Client) AddCommunicationToCaseRequest(input *AddCommunicationToCaseInput) AddCommunicationToCaseRequest {
+func (c *Client) AddCommunicationToCaseRequest(input *types.AddCommunicationToCaseInput) AddCommunicationToCaseRequest {
 	op := &aws.Operation{
 		Name:       opAddCommunicationToCase,
 		HTTPMethod: "POST",
@@ -96,10 +39,10 @@ func (c *Client) AddCommunicationToCaseRequest(input *AddCommunicationToCaseInpu
 	}
 
 	if input == nil {
-		input = &AddCommunicationToCaseInput{}
+		input = &types.AddCommunicationToCaseInput{}
 	}
 
-	req := c.newRequest(op, input, &AddCommunicationToCaseOutput{})
+	req := c.newRequest(op, input, &types.AddCommunicationToCaseOutput{})
 	return AddCommunicationToCaseRequest{Request: req, Input: input, Copy: c.AddCommunicationToCaseRequest}
 }
 
@@ -107,8 +50,8 @@ func (c *Client) AddCommunicationToCaseRequest(input *AddCommunicationToCaseInpu
 // AddCommunicationToCase API operation.
 type AddCommunicationToCaseRequest struct {
 	*aws.Request
-	Input *AddCommunicationToCaseInput
-	Copy  func(*AddCommunicationToCaseInput) AddCommunicationToCaseRequest
+	Input *types.AddCommunicationToCaseInput
+	Copy  func(*types.AddCommunicationToCaseInput) AddCommunicationToCaseRequest
 }
 
 // Send marshals and sends the AddCommunicationToCase API request.
@@ -120,7 +63,7 @@ func (r AddCommunicationToCaseRequest) Send(ctx context.Context) (*AddCommunicat
 	}
 
 	resp := &AddCommunicationToCaseResponse{
-		AddCommunicationToCaseOutput: r.Request.Data.(*AddCommunicationToCaseOutput),
+		AddCommunicationToCaseOutput: r.Request.Data.(*types.AddCommunicationToCaseOutput),
 		response:                     &aws.Response{Request: r.Request},
 	}
 
@@ -130,7 +73,7 @@ func (r AddCommunicationToCaseRequest) Send(ctx context.Context) (*AddCommunicat
 // AddCommunicationToCaseResponse is the response type for the
 // AddCommunicationToCase API operation.
 type AddCommunicationToCaseResponse struct {
-	*AddCommunicationToCaseOutput
+	*types.AddCommunicationToCaseOutput
 
 	response *aws.Response
 }

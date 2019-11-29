@@ -6,84 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/polly/types"
 )
-
-type GetLexiconInput struct {
-	_ struct{} `type:"structure"`
-
-	// Name of the lexicon.
-	//
-	// Name is a required field
-	Name *string `location:"uri" locationName:"LexiconName" type:"string" required:"true" sensitive:"true"`
-}
-
-// String returns the string representation
-func (s GetLexiconInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetLexiconInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetLexiconInput"}
-
-	if s.Name == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Name"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetLexiconInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.Name != nil {
-		v := *s.Name
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "LexiconName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type GetLexiconOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Lexicon object that provides name and the string content of the lexicon.
-	Lexicon *Lexicon `type:"structure"`
-
-	// Metadata of the lexicon, including phonetic alphabetic used, language code,
-	// lexicon ARN, number of lexemes defined in the lexicon, and size of lexicon
-	// in bytes.
-	LexiconAttributes *LexiconAttributes `type:"structure"`
-}
-
-// String returns the string representation
-func (s GetLexiconOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetLexiconOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.Lexicon != nil {
-		v := s.Lexicon
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "Lexicon", v, metadata)
-	}
-	if s.LexiconAttributes != nil {
-		v := s.LexiconAttributes
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "LexiconAttributes", v, metadata)
-	}
-	return nil
-}
 
 const opGetLexicon = "GetLexicon"
 
@@ -101,7 +25,7 @@ const opGetLexicon = "GetLexicon"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/polly-2016-06-10/GetLexicon
-func (c *Client) GetLexiconRequest(input *GetLexiconInput) GetLexiconRequest {
+func (c *Client) GetLexiconRequest(input *types.GetLexiconInput) GetLexiconRequest {
 	op := &aws.Operation{
 		Name:       opGetLexicon,
 		HTTPMethod: "GET",
@@ -109,10 +33,10 @@ func (c *Client) GetLexiconRequest(input *GetLexiconInput) GetLexiconRequest {
 	}
 
 	if input == nil {
-		input = &GetLexiconInput{}
+		input = &types.GetLexiconInput{}
 	}
 
-	req := c.newRequest(op, input, &GetLexiconOutput{})
+	req := c.newRequest(op, input, &types.GetLexiconOutput{})
 	return GetLexiconRequest{Request: req, Input: input, Copy: c.GetLexiconRequest}
 }
 
@@ -120,8 +44,8 @@ func (c *Client) GetLexiconRequest(input *GetLexiconInput) GetLexiconRequest {
 // GetLexicon API operation.
 type GetLexiconRequest struct {
 	*aws.Request
-	Input *GetLexiconInput
-	Copy  func(*GetLexiconInput) GetLexiconRequest
+	Input *types.GetLexiconInput
+	Copy  func(*types.GetLexiconInput) GetLexiconRequest
 }
 
 // Send marshals and sends the GetLexicon API request.
@@ -133,7 +57,7 @@ func (r GetLexiconRequest) Send(ctx context.Context) (*GetLexiconResponse, error
 	}
 
 	resp := &GetLexiconResponse{
-		GetLexiconOutput: r.Request.Data.(*GetLexiconOutput),
+		GetLexiconOutput: r.Request.Data.(*types.GetLexiconOutput),
 		response:         &aws.Response{Request: r.Request},
 	}
 
@@ -143,7 +67,7 @@ func (r GetLexiconRequest) Send(ctx context.Context) (*GetLexiconResponse, error
 // GetLexiconResponse is the response type for the
 // GetLexicon API operation.
 type GetLexiconResponse struct {
-	*GetLexiconOutput
+	*types.GetLexiconOutput
 
 	response *aws.Response
 }

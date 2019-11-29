@@ -6,65 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/directconnect/types"
 )
-
-type DescribeLoaInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of a connection, LAG, or interconnect.
-	//
-	// ConnectionId is a required field
-	ConnectionId *string `locationName:"connectionId" type:"string" required:"true"`
-
-	// The standard media type for the LOA-CFA document. The only supported value
-	// is application/pdf.
-	LoaContentType LoaContentType `locationName:"loaContentType" type:"string" enum:"true"`
-
-	// The name of the service provider who establishes connectivity on your behalf.
-	// If you specify this parameter, the LOA-CFA lists the provider name alongside
-	// your company name as the requester of the cross connect.
-	ProviderName *string `locationName:"providerName" type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeLoaInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeLoaInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeLoaInput"}
-
-	if s.ConnectionId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ConnectionId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Information about a Letter of Authorization - Connecting Facility Assignment
-// (LOA-CFA) for a connection.
-type DescribeLoaOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The binary contents of the LOA-CFA document.
-	//
-	// LoaContent is automatically base64 encoded/decoded by the SDK.
-	LoaContent []byte `locationName:"loaContent" type:"blob"`
-
-	// The standard media type for the LOA-CFA document. The only supported value
-	// is application/pdf.
-	LoaContentType LoaContentType `locationName:"loaContentType" type:"string" enum:"true"`
-}
-
-// String returns the string representation
-func (s DescribeLoaOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeLoa = "DescribeLoa"
 
@@ -88,7 +31,7 @@ const opDescribeLoa = "DescribeLoa"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DescribeLoa
-func (c *Client) DescribeLoaRequest(input *DescribeLoaInput) DescribeLoaRequest {
+func (c *Client) DescribeLoaRequest(input *types.DescribeLoaInput) DescribeLoaRequest {
 	op := &aws.Operation{
 		Name:       opDescribeLoa,
 		HTTPMethod: "POST",
@@ -96,10 +39,10 @@ func (c *Client) DescribeLoaRequest(input *DescribeLoaInput) DescribeLoaRequest 
 	}
 
 	if input == nil {
-		input = &DescribeLoaInput{}
+		input = &types.DescribeLoaInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeLoaOutput{})
+	req := c.newRequest(op, input, &types.DescribeLoaOutput{})
 	return DescribeLoaRequest{Request: req, Input: input, Copy: c.DescribeLoaRequest}
 }
 
@@ -107,8 +50,8 @@ func (c *Client) DescribeLoaRequest(input *DescribeLoaInput) DescribeLoaRequest 
 // DescribeLoa API operation.
 type DescribeLoaRequest struct {
 	*aws.Request
-	Input *DescribeLoaInput
-	Copy  func(*DescribeLoaInput) DescribeLoaRequest
+	Input *types.DescribeLoaInput
+	Copy  func(*types.DescribeLoaInput) DescribeLoaRequest
 }
 
 // Send marshals and sends the DescribeLoa API request.
@@ -120,7 +63,7 @@ func (r DescribeLoaRequest) Send(ctx context.Context) (*DescribeLoaResponse, err
 	}
 
 	resp := &DescribeLoaResponse{
-		DescribeLoaOutput: r.Request.Data.(*DescribeLoaOutput),
+		DescribeLoaOutput: r.Request.Data.(*types.DescribeLoaOutput),
 		response:          &aws.Response{Request: r.Request},
 	}
 
@@ -130,7 +73,7 @@ func (r DescribeLoaRequest) Send(ctx context.Context) (*DescribeLoaResponse, err
 // DescribeLoaResponse is the response type for the
 // DescribeLoa API operation.
 type DescribeLoaResponse struct {
-	*DescribeLoaOutput
+	*types.DescribeLoaOutput
 
 	response *aws.Response
 }

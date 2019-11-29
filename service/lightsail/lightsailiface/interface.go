@@ -10,6 +10,7 @@ package lightsailiface
 
 import (
 	"github.com/aws/aws-sdk-go-v2/service/lightsail"
+	"github.com/aws/aws-sdk-go-v2/service/lightsail/types"
 )
 
 // ClientAPI provides an interface to enable mocking the
@@ -43,7 +44,7 @@ import (
 //    type mockClientClient struct {
 //        lightsailiface.ClientPI
 //    }
-//    func (m *mockClientClient) AllocateStaticIp(input *lightsail.AllocateStaticIpInput) (*lightsail.AllocateStaticIpOutput, error) {
+//    func (m *mockClientClient) AllocateStaticIp(input *types.AllocateStaticIpInput) (*types.AllocateStaticIpOutput, error) {
 //        // mock response/functionality
 //    }
 //
@@ -61,215 +62,215 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type ClientAPI interface {
-	AllocateStaticIpRequest(*lightsail.AllocateStaticIpInput) lightsail.AllocateStaticIpRequest
+	AllocateStaticIpRequest(*types.AllocateStaticIpInput) lightsail.AllocateStaticIpRequest
 
-	AttachDiskRequest(*lightsail.AttachDiskInput) lightsail.AttachDiskRequest
+	AttachDiskRequest(*types.AttachDiskInput) lightsail.AttachDiskRequest
 
-	AttachInstancesToLoadBalancerRequest(*lightsail.AttachInstancesToLoadBalancerInput) lightsail.AttachInstancesToLoadBalancerRequest
+	AttachInstancesToLoadBalancerRequest(*types.AttachInstancesToLoadBalancerInput) lightsail.AttachInstancesToLoadBalancerRequest
 
-	AttachLoadBalancerTlsCertificateRequest(*lightsail.AttachLoadBalancerTlsCertificateInput) lightsail.AttachLoadBalancerTlsCertificateRequest
+	AttachLoadBalancerTlsCertificateRequest(*types.AttachLoadBalancerTlsCertificateInput) lightsail.AttachLoadBalancerTlsCertificateRequest
 
-	AttachStaticIpRequest(*lightsail.AttachStaticIpInput) lightsail.AttachStaticIpRequest
+	AttachStaticIpRequest(*types.AttachStaticIpInput) lightsail.AttachStaticIpRequest
 
-	CloseInstancePublicPortsRequest(*lightsail.CloseInstancePublicPortsInput) lightsail.CloseInstancePublicPortsRequest
+	CloseInstancePublicPortsRequest(*types.CloseInstancePublicPortsInput) lightsail.CloseInstancePublicPortsRequest
 
-	CopySnapshotRequest(*lightsail.CopySnapshotInput) lightsail.CopySnapshotRequest
+	CopySnapshotRequest(*types.CopySnapshotInput) lightsail.CopySnapshotRequest
 
-	CreateCloudFormationStackRequest(*lightsail.CreateCloudFormationStackInput) lightsail.CreateCloudFormationStackRequest
+	CreateCloudFormationStackRequest(*types.CreateCloudFormationStackInput) lightsail.CreateCloudFormationStackRequest
 
-	CreateDiskRequest(*lightsail.CreateDiskInput) lightsail.CreateDiskRequest
+	CreateDiskRequest(*types.CreateDiskInput) lightsail.CreateDiskRequest
 
-	CreateDiskFromSnapshotRequest(*lightsail.CreateDiskFromSnapshotInput) lightsail.CreateDiskFromSnapshotRequest
+	CreateDiskFromSnapshotRequest(*types.CreateDiskFromSnapshotInput) lightsail.CreateDiskFromSnapshotRequest
 
-	CreateDiskSnapshotRequest(*lightsail.CreateDiskSnapshotInput) lightsail.CreateDiskSnapshotRequest
+	CreateDiskSnapshotRequest(*types.CreateDiskSnapshotInput) lightsail.CreateDiskSnapshotRequest
 
-	CreateDomainRequest(*lightsail.CreateDomainInput) lightsail.CreateDomainRequest
+	CreateDomainRequest(*types.CreateDomainInput) lightsail.CreateDomainRequest
 
-	CreateDomainEntryRequest(*lightsail.CreateDomainEntryInput) lightsail.CreateDomainEntryRequest
+	CreateDomainEntryRequest(*types.CreateDomainEntryInput) lightsail.CreateDomainEntryRequest
 
-	CreateInstanceSnapshotRequest(*lightsail.CreateInstanceSnapshotInput) lightsail.CreateInstanceSnapshotRequest
+	CreateInstanceSnapshotRequest(*types.CreateInstanceSnapshotInput) lightsail.CreateInstanceSnapshotRequest
 
-	CreateInstancesRequest(*lightsail.CreateInstancesInput) lightsail.CreateInstancesRequest
+	CreateInstancesRequest(*types.CreateInstancesInput) lightsail.CreateInstancesRequest
 
-	CreateInstancesFromSnapshotRequest(*lightsail.CreateInstancesFromSnapshotInput) lightsail.CreateInstancesFromSnapshotRequest
+	CreateInstancesFromSnapshotRequest(*types.CreateInstancesFromSnapshotInput) lightsail.CreateInstancesFromSnapshotRequest
 
-	CreateKeyPairRequest(*lightsail.CreateKeyPairInput) lightsail.CreateKeyPairRequest
+	CreateKeyPairRequest(*types.CreateKeyPairInput) lightsail.CreateKeyPairRequest
 
-	CreateLoadBalancerRequest(*lightsail.CreateLoadBalancerInput) lightsail.CreateLoadBalancerRequest
+	CreateLoadBalancerRequest(*types.CreateLoadBalancerInput) lightsail.CreateLoadBalancerRequest
 
-	CreateLoadBalancerTlsCertificateRequest(*lightsail.CreateLoadBalancerTlsCertificateInput) lightsail.CreateLoadBalancerTlsCertificateRequest
+	CreateLoadBalancerTlsCertificateRequest(*types.CreateLoadBalancerTlsCertificateInput) lightsail.CreateLoadBalancerTlsCertificateRequest
 
-	CreateRelationalDatabaseRequest(*lightsail.CreateRelationalDatabaseInput) lightsail.CreateRelationalDatabaseRequest
+	CreateRelationalDatabaseRequest(*types.CreateRelationalDatabaseInput) lightsail.CreateRelationalDatabaseRequest
 
-	CreateRelationalDatabaseFromSnapshotRequest(*lightsail.CreateRelationalDatabaseFromSnapshotInput) lightsail.CreateRelationalDatabaseFromSnapshotRequest
+	CreateRelationalDatabaseFromSnapshotRequest(*types.CreateRelationalDatabaseFromSnapshotInput) lightsail.CreateRelationalDatabaseFromSnapshotRequest
 
-	CreateRelationalDatabaseSnapshotRequest(*lightsail.CreateRelationalDatabaseSnapshotInput) lightsail.CreateRelationalDatabaseSnapshotRequest
+	CreateRelationalDatabaseSnapshotRequest(*types.CreateRelationalDatabaseSnapshotInput) lightsail.CreateRelationalDatabaseSnapshotRequest
 
-	DeleteAutoSnapshotRequest(*lightsail.DeleteAutoSnapshotInput) lightsail.DeleteAutoSnapshotRequest
+	DeleteAutoSnapshotRequest(*types.DeleteAutoSnapshotInput) lightsail.DeleteAutoSnapshotRequest
 
-	DeleteDiskRequest(*lightsail.DeleteDiskInput) lightsail.DeleteDiskRequest
+	DeleteDiskRequest(*types.DeleteDiskInput) lightsail.DeleteDiskRequest
 
-	DeleteDiskSnapshotRequest(*lightsail.DeleteDiskSnapshotInput) lightsail.DeleteDiskSnapshotRequest
+	DeleteDiskSnapshotRequest(*types.DeleteDiskSnapshotInput) lightsail.DeleteDiskSnapshotRequest
 
-	DeleteDomainRequest(*lightsail.DeleteDomainInput) lightsail.DeleteDomainRequest
+	DeleteDomainRequest(*types.DeleteDomainInput) lightsail.DeleteDomainRequest
 
-	DeleteDomainEntryRequest(*lightsail.DeleteDomainEntryInput) lightsail.DeleteDomainEntryRequest
+	DeleteDomainEntryRequest(*types.DeleteDomainEntryInput) lightsail.DeleteDomainEntryRequest
 
-	DeleteInstanceRequest(*lightsail.DeleteInstanceInput) lightsail.DeleteInstanceRequest
+	DeleteInstanceRequest(*types.DeleteInstanceInput) lightsail.DeleteInstanceRequest
 
-	DeleteInstanceSnapshotRequest(*lightsail.DeleteInstanceSnapshotInput) lightsail.DeleteInstanceSnapshotRequest
+	DeleteInstanceSnapshotRequest(*types.DeleteInstanceSnapshotInput) lightsail.DeleteInstanceSnapshotRequest
 
-	DeleteKeyPairRequest(*lightsail.DeleteKeyPairInput) lightsail.DeleteKeyPairRequest
+	DeleteKeyPairRequest(*types.DeleteKeyPairInput) lightsail.DeleteKeyPairRequest
 
-	DeleteKnownHostKeysRequest(*lightsail.DeleteKnownHostKeysInput) lightsail.DeleteKnownHostKeysRequest
+	DeleteKnownHostKeysRequest(*types.DeleteKnownHostKeysInput) lightsail.DeleteKnownHostKeysRequest
 
-	DeleteLoadBalancerRequest(*lightsail.DeleteLoadBalancerInput) lightsail.DeleteLoadBalancerRequest
+	DeleteLoadBalancerRequest(*types.DeleteLoadBalancerInput) lightsail.DeleteLoadBalancerRequest
 
-	DeleteLoadBalancerTlsCertificateRequest(*lightsail.DeleteLoadBalancerTlsCertificateInput) lightsail.DeleteLoadBalancerTlsCertificateRequest
+	DeleteLoadBalancerTlsCertificateRequest(*types.DeleteLoadBalancerTlsCertificateInput) lightsail.DeleteLoadBalancerTlsCertificateRequest
 
-	DeleteRelationalDatabaseRequest(*lightsail.DeleteRelationalDatabaseInput) lightsail.DeleteRelationalDatabaseRequest
+	DeleteRelationalDatabaseRequest(*types.DeleteRelationalDatabaseInput) lightsail.DeleteRelationalDatabaseRequest
 
-	DeleteRelationalDatabaseSnapshotRequest(*lightsail.DeleteRelationalDatabaseSnapshotInput) lightsail.DeleteRelationalDatabaseSnapshotRequest
+	DeleteRelationalDatabaseSnapshotRequest(*types.DeleteRelationalDatabaseSnapshotInput) lightsail.DeleteRelationalDatabaseSnapshotRequest
 
-	DetachDiskRequest(*lightsail.DetachDiskInput) lightsail.DetachDiskRequest
+	DetachDiskRequest(*types.DetachDiskInput) lightsail.DetachDiskRequest
 
-	DetachInstancesFromLoadBalancerRequest(*lightsail.DetachInstancesFromLoadBalancerInput) lightsail.DetachInstancesFromLoadBalancerRequest
+	DetachInstancesFromLoadBalancerRequest(*types.DetachInstancesFromLoadBalancerInput) lightsail.DetachInstancesFromLoadBalancerRequest
 
-	DetachStaticIpRequest(*lightsail.DetachStaticIpInput) lightsail.DetachStaticIpRequest
+	DetachStaticIpRequest(*types.DetachStaticIpInput) lightsail.DetachStaticIpRequest
 
-	DisableAddOnRequest(*lightsail.DisableAddOnInput) lightsail.DisableAddOnRequest
+	DisableAddOnRequest(*types.DisableAddOnInput) lightsail.DisableAddOnRequest
 
-	DownloadDefaultKeyPairRequest(*lightsail.DownloadDefaultKeyPairInput) lightsail.DownloadDefaultKeyPairRequest
+	DownloadDefaultKeyPairRequest(*types.DownloadDefaultKeyPairInput) lightsail.DownloadDefaultKeyPairRequest
 
-	EnableAddOnRequest(*lightsail.EnableAddOnInput) lightsail.EnableAddOnRequest
+	EnableAddOnRequest(*types.EnableAddOnInput) lightsail.EnableAddOnRequest
 
-	ExportSnapshotRequest(*lightsail.ExportSnapshotInput) lightsail.ExportSnapshotRequest
+	ExportSnapshotRequest(*types.ExportSnapshotInput) lightsail.ExportSnapshotRequest
 
-	GetActiveNamesRequest(*lightsail.GetActiveNamesInput) lightsail.GetActiveNamesRequest
+	GetActiveNamesRequest(*types.GetActiveNamesInput) lightsail.GetActiveNamesRequest
 
-	GetAutoSnapshotsRequest(*lightsail.GetAutoSnapshotsInput) lightsail.GetAutoSnapshotsRequest
+	GetAutoSnapshotsRequest(*types.GetAutoSnapshotsInput) lightsail.GetAutoSnapshotsRequest
 
-	GetBlueprintsRequest(*lightsail.GetBlueprintsInput) lightsail.GetBlueprintsRequest
+	GetBlueprintsRequest(*types.GetBlueprintsInput) lightsail.GetBlueprintsRequest
 
-	GetBundlesRequest(*lightsail.GetBundlesInput) lightsail.GetBundlesRequest
+	GetBundlesRequest(*types.GetBundlesInput) lightsail.GetBundlesRequest
 
-	GetCloudFormationStackRecordsRequest(*lightsail.GetCloudFormationStackRecordsInput) lightsail.GetCloudFormationStackRecordsRequest
+	GetCloudFormationStackRecordsRequest(*types.GetCloudFormationStackRecordsInput) lightsail.GetCloudFormationStackRecordsRequest
 
-	GetDiskRequest(*lightsail.GetDiskInput) lightsail.GetDiskRequest
+	GetDiskRequest(*types.GetDiskInput) lightsail.GetDiskRequest
 
-	GetDiskSnapshotRequest(*lightsail.GetDiskSnapshotInput) lightsail.GetDiskSnapshotRequest
+	GetDiskSnapshotRequest(*types.GetDiskSnapshotInput) lightsail.GetDiskSnapshotRequest
 
-	GetDiskSnapshotsRequest(*lightsail.GetDiskSnapshotsInput) lightsail.GetDiskSnapshotsRequest
+	GetDiskSnapshotsRequest(*types.GetDiskSnapshotsInput) lightsail.GetDiskSnapshotsRequest
 
-	GetDisksRequest(*lightsail.GetDisksInput) lightsail.GetDisksRequest
+	GetDisksRequest(*types.GetDisksInput) lightsail.GetDisksRequest
 
-	GetDomainRequest(*lightsail.GetDomainInput) lightsail.GetDomainRequest
+	GetDomainRequest(*types.GetDomainInput) lightsail.GetDomainRequest
 
-	GetDomainsRequest(*lightsail.GetDomainsInput) lightsail.GetDomainsRequest
+	GetDomainsRequest(*types.GetDomainsInput) lightsail.GetDomainsRequest
 
-	GetExportSnapshotRecordsRequest(*lightsail.GetExportSnapshotRecordsInput) lightsail.GetExportSnapshotRecordsRequest
+	GetExportSnapshotRecordsRequest(*types.GetExportSnapshotRecordsInput) lightsail.GetExportSnapshotRecordsRequest
 
-	GetInstanceRequest(*lightsail.GetInstanceInput) lightsail.GetInstanceRequest
+	GetInstanceRequest(*types.GetInstanceInput) lightsail.GetInstanceRequest
 
-	GetInstanceAccessDetailsRequest(*lightsail.GetInstanceAccessDetailsInput) lightsail.GetInstanceAccessDetailsRequest
+	GetInstanceAccessDetailsRequest(*types.GetInstanceAccessDetailsInput) lightsail.GetInstanceAccessDetailsRequest
 
-	GetInstanceMetricDataRequest(*lightsail.GetInstanceMetricDataInput) lightsail.GetInstanceMetricDataRequest
+	GetInstanceMetricDataRequest(*types.GetInstanceMetricDataInput) lightsail.GetInstanceMetricDataRequest
 
-	GetInstancePortStatesRequest(*lightsail.GetInstancePortStatesInput) lightsail.GetInstancePortStatesRequest
+	GetInstancePortStatesRequest(*types.GetInstancePortStatesInput) lightsail.GetInstancePortStatesRequest
 
-	GetInstanceSnapshotRequest(*lightsail.GetInstanceSnapshotInput) lightsail.GetInstanceSnapshotRequest
+	GetInstanceSnapshotRequest(*types.GetInstanceSnapshotInput) lightsail.GetInstanceSnapshotRequest
 
-	GetInstanceSnapshotsRequest(*lightsail.GetInstanceSnapshotsInput) lightsail.GetInstanceSnapshotsRequest
+	GetInstanceSnapshotsRequest(*types.GetInstanceSnapshotsInput) lightsail.GetInstanceSnapshotsRequest
 
-	GetInstanceStateRequest(*lightsail.GetInstanceStateInput) lightsail.GetInstanceStateRequest
+	GetInstanceStateRequest(*types.GetInstanceStateInput) lightsail.GetInstanceStateRequest
 
-	GetInstancesRequest(*lightsail.GetInstancesInput) lightsail.GetInstancesRequest
+	GetInstancesRequest(*types.GetInstancesInput) lightsail.GetInstancesRequest
 
-	GetKeyPairRequest(*lightsail.GetKeyPairInput) lightsail.GetKeyPairRequest
+	GetKeyPairRequest(*types.GetKeyPairInput) lightsail.GetKeyPairRequest
 
-	GetKeyPairsRequest(*lightsail.GetKeyPairsInput) lightsail.GetKeyPairsRequest
+	GetKeyPairsRequest(*types.GetKeyPairsInput) lightsail.GetKeyPairsRequest
 
-	GetLoadBalancerRequest(*lightsail.GetLoadBalancerInput) lightsail.GetLoadBalancerRequest
+	GetLoadBalancerRequest(*types.GetLoadBalancerInput) lightsail.GetLoadBalancerRequest
 
-	GetLoadBalancerMetricDataRequest(*lightsail.GetLoadBalancerMetricDataInput) lightsail.GetLoadBalancerMetricDataRequest
+	GetLoadBalancerMetricDataRequest(*types.GetLoadBalancerMetricDataInput) lightsail.GetLoadBalancerMetricDataRequest
 
-	GetLoadBalancerTlsCertificatesRequest(*lightsail.GetLoadBalancerTlsCertificatesInput) lightsail.GetLoadBalancerTlsCertificatesRequest
+	GetLoadBalancerTlsCertificatesRequest(*types.GetLoadBalancerTlsCertificatesInput) lightsail.GetLoadBalancerTlsCertificatesRequest
 
-	GetLoadBalancersRequest(*lightsail.GetLoadBalancersInput) lightsail.GetLoadBalancersRequest
+	GetLoadBalancersRequest(*types.GetLoadBalancersInput) lightsail.GetLoadBalancersRequest
 
-	GetOperationRequest(*lightsail.GetOperationInput) lightsail.GetOperationRequest
+	GetOperationRequest(*types.GetOperationInput) lightsail.GetOperationRequest
 
-	GetOperationsRequest(*lightsail.GetOperationsInput) lightsail.GetOperationsRequest
+	GetOperationsRequest(*types.GetOperationsInput) lightsail.GetOperationsRequest
 
-	GetOperationsForResourceRequest(*lightsail.GetOperationsForResourceInput) lightsail.GetOperationsForResourceRequest
+	GetOperationsForResourceRequest(*types.GetOperationsForResourceInput) lightsail.GetOperationsForResourceRequest
 
-	GetRegionsRequest(*lightsail.GetRegionsInput) lightsail.GetRegionsRequest
+	GetRegionsRequest(*types.GetRegionsInput) lightsail.GetRegionsRequest
 
-	GetRelationalDatabaseRequest(*lightsail.GetRelationalDatabaseInput) lightsail.GetRelationalDatabaseRequest
+	GetRelationalDatabaseRequest(*types.GetRelationalDatabaseInput) lightsail.GetRelationalDatabaseRequest
 
-	GetRelationalDatabaseBlueprintsRequest(*lightsail.GetRelationalDatabaseBlueprintsInput) lightsail.GetRelationalDatabaseBlueprintsRequest
+	GetRelationalDatabaseBlueprintsRequest(*types.GetRelationalDatabaseBlueprintsInput) lightsail.GetRelationalDatabaseBlueprintsRequest
 
-	GetRelationalDatabaseBundlesRequest(*lightsail.GetRelationalDatabaseBundlesInput) lightsail.GetRelationalDatabaseBundlesRequest
+	GetRelationalDatabaseBundlesRequest(*types.GetRelationalDatabaseBundlesInput) lightsail.GetRelationalDatabaseBundlesRequest
 
-	GetRelationalDatabaseEventsRequest(*lightsail.GetRelationalDatabaseEventsInput) lightsail.GetRelationalDatabaseEventsRequest
+	GetRelationalDatabaseEventsRequest(*types.GetRelationalDatabaseEventsInput) lightsail.GetRelationalDatabaseEventsRequest
 
-	GetRelationalDatabaseLogEventsRequest(*lightsail.GetRelationalDatabaseLogEventsInput) lightsail.GetRelationalDatabaseLogEventsRequest
+	GetRelationalDatabaseLogEventsRequest(*types.GetRelationalDatabaseLogEventsInput) lightsail.GetRelationalDatabaseLogEventsRequest
 
-	GetRelationalDatabaseLogStreamsRequest(*lightsail.GetRelationalDatabaseLogStreamsInput) lightsail.GetRelationalDatabaseLogStreamsRequest
+	GetRelationalDatabaseLogStreamsRequest(*types.GetRelationalDatabaseLogStreamsInput) lightsail.GetRelationalDatabaseLogStreamsRequest
 
-	GetRelationalDatabaseMasterUserPasswordRequest(*lightsail.GetRelationalDatabaseMasterUserPasswordInput) lightsail.GetRelationalDatabaseMasterUserPasswordRequest
+	GetRelationalDatabaseMasterUserPasswordRequest(*types.GetRelationalDatabaseMasterUserPasswordInput) lightsail.GetRelationalDatabaseMasterUserPasswordRequest
 
-	GetRelationalDatabaseMetricDataRequest(*lightsail.GetRelationalDatabaseMetricDataInput) lightsail.GetRelationalDatabaseMetricDataRequest
+	GetRelationalDatabaseMetricDataRequest(*types.GetRelationalDatabaseMetricDataInput) lightsail.GetRelationalDatabaseMetricDataRequest
 
-	GetRelationalDatabaseParametersRequest(*lightsail.GetRelationalDatabaseParametersInput) lightsail.GetRelationalDatabaseParametersRequest
+	GetRelationalDatabaseParametersRequest(*types.GetRelationalDatabaseParametersInput) lightsail.GetRelationalDatabaseParametersRequest
 
-	GetRelationalDatabaseSnapshotRequest(*lightsail.GetRelationalDatabaseSnapshotInput) lightsail.GetRelationalDatabaseSnapshotRequest
+	GetRelationalDatabaseSnapshotRequest(*types.GetRelationalDatabaseSnapshotInput) lightsail.GetRelationalDatabaseSnapshotRequest
 
-	GetRelationalDatabaseSnapshotsRequest(*lightsail.GetRelationalDatabaseSnapshotsInput) lightsail.GetRelationalDatabaseSnapshotsRequest
+	GetRelationalDatabaseSnapshotsRequest(*types.GetRelationalDatabaseSnapshotsInput) lightsail.GetRelationalDatabaseSnapshotsRequest
 
-	GetRelationalDatabasesRequest(*lightsail.GetRelationalDatabasesInput) lightsail.GetRelationalDatabasesRequest
+	GetRelationalDatabasesRequest(*types.GetRelationalDatabasesInput) lightsail.GetRelationalDatabasesRequest
 
-	GetStaticIpRequest(*lightsail.GetStaticIpInput) lightsail.GetStaticIpRequest
+	GetStaticIpRequest(*types.GetStaticIpInput) lightsail.GetStaticIpRequest
 
-	GetStaticIpsRequest(*lightsail.GetStaticIpsInput) lightsail.GetStaticIpsRequest
+	GetStaticIpsRequest(*types.GetStaticIpsInput) lightsail.GetStaticIpsRequest
 
-	ImportKeyPairRequest(*lightsail.ImportKeyPairInput) lightsail.ImportKeyPairRequest
+	ImportKeyPairRequest(*types.ImportKeyPairInput) lightsail.ImportKeyPairRequest
 
-	IsVpcPeeredRequest(*lightsail.IsVpcPeeredInput) lightsail.IsVpcPeeredRequest
+	IsVpcPeeredRequest(*types.IsVpcPeeredInput) lightsail.IsVpcPeeredRequest
 
-	OpenInstancePublicPortsRequest(*lightsail.OpenInstancePublicPortsInput) lightsail.OpenInstancePublicPortsRequest
+	OpenInstancePublicPortsRequest(*types.OpenInstancePublicPortsInput) lightsail.OpenInstancePublicPortsRequest
 
-	PeerVpcRequest(*lightsail.PeerVpcInput) lightsail.PeerVpcRequest
+	PeerVpcRequest(*types.PeerVpcInput) lightsail.PeerVpcRequest
 
-	PutInstancePublicPortsRequest(*lightsail.PutInstancePublicPortsInput) lightsail.PutInstancePublicPortsRequest
+	PutInstancePublicPortsRequest(*types.PutInstancePublicPortsInput) lightsail.PutInstancePublicPortsRequest
 
-	RebootInstanceRequest(*lightsail.RebootInstanceInput) lightsail.RebootInstanceRequest
+	RebootInstanceRequest(*types.RebootInstanceInput) lightsail.RebootInstanceRequest
 
-	RebootRelationalDatabaseRequest(*lightsail.RebootRelationalDatabaseInput) lightsail.RebootRelationalDatabaseRequest
+	RebootRelationalDatabaseRequest(*types.RebootRelationalDatabaseInput) lightsail.RebootRelationalDatabaseRequest
 
-	ReleaseStaticIpRequest(*lightsail.ReleaseStaticIpInput) lightsail.ReleaseStaticIpRequest
+	ReleaseStaticIpRequest(*types.ReleaseStaticIpInput) lightsail.ReleaseStaticIpRequest
 
-	StartInstanceRequest(*lightsail.StartInstanceInput) lightsail.StartInstanceRequest
+	StartInstanceRequest(*types.StartInstanceInput) lightsail.StartInstanceRequest
 
-	StartRelationalDatabaseRequest(*lightsail.StartRelationalDatabaseInput) lightsail.StartRelationalDatabaseRequest
+	StartRelationalDatabaseRequest(*types.StartRelationalDatabaseInput) lightsail.StartRelationalDatabaseRequest
 
-	StopInstanceRequest(*lightsail.StopInstanceInput) lightsail.StopInstanceRequest
+	StopInstanceRequest(*types.StopInstanceInput) lightsail.StopInstanceRequest
 
-	StopRelationalDatabaseRequest(*lightsail.StopRelationalDatabaseInput) lightsail.StopRelationalDatabaseRequest
+	StopRelationalDatabaseRequest(*types.StopRelationalDatabaseInput) lightsail.StopRelationalDatabaseRequest
 
-	TagResourceRequest(*lightsail.TagResourceInput) lightsail.TagResourceRequest
+	TagResourceRequest(*types.TagResourceInput) lightsail.TagResourceRequest
 
-	UnpeerVpcRequest(*lightsail.UnpeerVpcInput) lightsail.UnpeerVpcRequest
+	UnpeerVpcRequest(*types.UnpeerVpcInput) lightsail.UnpeerVpcRequest
 
-	UntagResourceRequest(*lightsail.UntagResourceInput) lightsail.UntagResourceRequest
+	UntagResourceRequest(*types.UntagResourceInput) lightsail.UntagResourceRequest
 
-	UpdateDomainEntryRequest(*lightsail.UpdateDomainEntryInput) lightsail.UpdateDomainEntryRequest
+	UpdateDomainEntryRequest(*types.UpdateDomainEntryInput) lightsail.UpdateDomainEntryRequest
 
-	UpdateLoadBalancerAttributeRequest(*lightsail.UpdateLoadBalancerAttributeInput) lightsail.UpdateLoadBalancerAttributeRequest
+	UpdateLoadBalancerAttributeRequest(*types.UpdateLoadBalancerAttributeInput) lightsail.UpdateLoadBalancerAttributeRequest
 
-	UpdateRelationalDatabaseRequest(*lightsail.UpdateRelationalDatabaseInput) lightsail.UpdateRelationalDatabaseRequest
+	UpdateRelationalDatabaseRequest(*types.UpdateRelationalDatabaseInput) lightsail.UpdateRelationalDatabaseRequest
 
-	UpdateRelationalDatabaseParametersRequest(*lightsail.UpdateRelationalDatabaseParametersInput) lightsail.UpdateRelationalDatabaseParametersRequest
+	UpdateRelationalDatabaseParametersRequest(*types.UpdateRelationalDatabaseParametersInput) lightsail.UpdateRelationalDatabaseParametersRequest
 }
 
 var _ ClientAPI = (*lightsail.Client)(nil)

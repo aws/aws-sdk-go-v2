@@ -6,63 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
+	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/types"
 )
-
-// Represents the request to delete a user pool client.
-type DeleteUserPoolClientInput struct {
-	_ struct{} `type:"structure"`
-
-	// The app client ID of the app associated with the user pool.
-	//
-	// ClientId is a required field
-	ClientId *string `min:"1" type:"string" required:"true" sensitive:"true"`
-
-	// The user pool ID for the user pool where you want to delete the client.
-	//
-	// UserPoolId is a required field
-	UserPoolId *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteUserPoolClientInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteUserPoolClientInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteUserPoolClientInput"}
-
-	if s.ClientId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ClientId"))
-	}
-	if s.ClientId != nil && len(*s.ClientId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ClientId", 1))
-	}
-
-	if s.UserPoolId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("UserPoolId"))
-	}
-	if s.UserPoolId != nil && len(*s.UserPoolId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("UserPoolId", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteUserPoolClientOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteUserPoolClientOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteUserPoolClient = "DeleteUserPoolClient"
 
@@ -79,7 +26,7 @@ const opDeleteUserPoolClient = "DeleteUserPoolClient"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/DeleteUserPoolClient
-func (c *Client) DeleteUserPoolClientRequest(input *DeleteUserPoolClientInput) DeleteUserPoolClientRequest {
+func (c *Client) DeleteUserPoolClientRequest(input *types.DeleteUserPoolClientInput) DeleteUserPoolClientRequest {
 	op := &aws.Operation{
 		Name:       opDeleteUserPoolClient,
 		HTTPMethod: "POST",
@@ -87,10 +34,10 @@ func (c *Client) DeleteUserPoolClientRequest(input *DeleteUserPoolClientInput) D
 	}
 
 	if input == nil {
-		input = &DeleteUserPoolClientInput{}
+		input = &types.DeleteUserPoolClientInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteUserPoolClientOutput{})
+	req := c.newRequest(op, input, &types.DeleteUserPoolClientOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return DeleteUserPoolClientRequest{Request: req, Input: input, Copy: c.DeleteUserPoolClientRequest}
@@ -100,8 +47,8 @@ func (c *Client) DeleteUserPoolClientRequest(input *DeleteUserPoolClientInput) D
 // DeleteUserPoolClient API operation.
 type DeleteUserPoolClientRequest struct {
 	*aws.Request
-	Input *DeleteUserPoolClientInput
-	Copy  func(*DeleteUserPoolClientInput) DeleteUserPoolClientRequest
+	Input *types.DeleteUserPoolClientInput
+	Copy  func(*types.DeleteUserPoolClientInput) DeleteUserPoolClientRequest
 }
 
 // Send marshals and sends the DeleteUserPoolClient API request.
@@ -113,7 +60,7 @@ func (r DeleteUserPoolClientRequest) Send(ctx context.Context) (*DeleteUserPoolC
 	}
 
 	resp := &DeleteUserPoolClientResponse{
-		DeleteUserPoolClientOutput: r.Request.Data.(*DeleteUserPoolClientOutput),
+		DeleteUserPoolClientOutput: r.Request.Data.(*types.DeleteUserPoolClientOutput),
 		response:                   &aws.Response{Request: r.Request},
 	}
 
@@ -123,7 +70,7 @@ func (r DeleteUserPoolClientRequest) Send(ctx context.Context) (*DeleteUserPoolC
 // DeleteUserPoolClientResponse is the response type for the
 // DeleteUserPoolClient API operation.
 type DeleteUserPoolClientResponse struct {
-	*DeleteUserPoolClientOutput
+	*types.DeleteUserPoolClientOutput
 
 	response *aws.Response
 }

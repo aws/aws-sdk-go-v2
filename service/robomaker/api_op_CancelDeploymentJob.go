@@ -6,67 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/robomaker/types"
 )
-
-type CancelDeploymentJobInput struct {
-	_ struct{} `type:"structure"`
-
-	// The deployment job ARN to cancel.
-	//
-	// Job is a required field
-	Job *string `locationName:"job" min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s CancelDeploymentJobInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CancelDeploymentJobInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CancelDeploymentJobInput"}
-
-	if s.Job == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Job"))
-	}
-	if s.Job != nil && len(*s.Job) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Job", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s CancelDeploymentJobInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.Job != nil {
-		v := *s.Job
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "job", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type CancelDeploymentJobOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s CancelDeploymentJobOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s CancelDeploymentJobOutput) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
 
 const opCancelDeploymentJob = "CancelDeploymentJob"
 
@@ -83,7 +24,7 @@ const opCancelDeploymentJob = "CancelDeploymentJob"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/CancelDeploymentJob
-func (c *Client) CancelDeploymentJobRequest(input *CancelDeploymentJobInput) CancelDeploymentJobRequest {
+func (c *Client) CancelDeploymentJobRequest(input *types.CancelDeploymentJobInput) CancelDeploymentJobRequest {
 	op := &aws.Operation{
 		Name:       opCancelDeploymentJob,
 		HTTPMethod: "POST",
@@ -91,10 +32,10 @@ func (c *Client) CancelDeploymentJobRequest(input *CancelDeploymentJobInput) Can
 	}
 
 	if input == nil {
-		input = &CancelDeploymentJobInput{}
+		input = &types.CancelDeploymentJobInput{}
 	}
 
-	req := c.newRequest(op, input, &CancelDeploymentJobOutput{})
+	req := c.newRequest(op, input, &types.CancelDeploymentJobOutput{})
 	return CancelDeploymentJobRequest{Request: req, Input: input, Copy: c.CancelDeploymentJobRequest}
 }
 
@@ -102,8 +43,8 @@ func (c *Client) CancelDeploymentJobRequest(input *CancelDeploymentJobInput) Can
 // CancelDeploymentJob API operation.
 type CancelDeploymentJobRequest struct {
 	*aws.Request
-	Input *CancelDeploymentJobInput
-	Copy  func(*CancelDeploymentJobInput) CancelDeploymentJobRequest
+	Input *types.CancelDeploymentJobInput
+	Copy  func(*types.CancelDeploymentJobInput) CancelDeploymentJobRequest
 }
 
 // Send marshals and sends the CancelDeploymentJob API request.
@@ -115,7 +56,7 @@ func (r CancelDeploymentJobRequest) Send(ctx context.Context) (*CancelDeployment
 	}
 
 	resp := &CancelDeploymentJobResponse{
-		CancelDeploymentJobOutput: r.Request.Data.(*CancelDeploymentJobOutput),
+		CancelDeploymentJobOutput: r.Request.Data.(*types.CancelDeploymentJobOutput),
 		response:                  &aws.Response{Request: r.Request},
 	}
 
@@ -125,7 +66,7 @@ func (r CancelDeploymentJobRequest) Send(ctx context.Context) (*CancelDeployment
 // CancelDeploymentJobResponse is the response type for the
 // CancelDeploymentJob API operation.
 type CancelDeploymentJobResponse struct {
-	*CancelDeploymentJobOutput
+	*types.CancelDeploymentJobOutput
 
 	response *aws.Response
 }

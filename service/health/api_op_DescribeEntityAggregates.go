@@ -6,46 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/health/types"
 )
-
-type DescribeEntityAggregatesInput struct {
-	_ struct{} `type:"structure"`
-
-	// A list of event ARNs (unique identifiers). For example: "arn:aws:health:us-east-1::event/EC2/EC2_INSTANCE_RETIREMENT_SCHEDULED/EC2_INSTANCE_RETIREMENT_SCHEDULED_ABC123-CDE456",
-	// "arn:aws:health:us-west-1::event/EBS/AWS_EBS_LOST_VOLUME/AWS_EBS_LOST_VOLUME_CHI789_JKL101"
-	EventArns []string `locationName:"eventArns" min:"1" type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeEntityAggregatesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeEntityAggregatesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeEntityAggregatesInput"}
-	if s.EventArns != nil && len(s.EventArns) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("EventArns", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribeEntityAggregatesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The number of entities that are affected by each of the specified events.
-	EntityAggregates []EntityAggregate `locationName:"entityAggregates" type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeEntityAggregatesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeEntityAggregates = "DescribeEntityAggregates"
 
@@ -64,7 +26,7 @@ const opDescribeEntityAggregates = "DescribeEntityAggregates"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/health-2016-08-04/DescribeEntityAggregates
-func (c *Client) DescribeEntityAggregatesRequest(input *DescribeEntityAggregatesInput) DescribeEntityAggregatesRequest {
+func (c *Client) DescribeEntityAggregatesRequest(input *types.DescribeEntityAggregatesInput) DescribeEntityAggregatesRequest {
 	op := &aws.Operation{
 		Name:       opDescribeEntityAggregates,
 		HTTPMethod: "POST",
@@ -72,10 +34,10 @@ func (c *Client) DescribeEntityAggregatesRequest(input *DescribeEntityAggregates
 	}
 
 	if input == nil {
-		input = &DescribeEntityAggregatesInput{}
+		input = &types.DescribeEntityAggregatesInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeEntityAggregatesOutput{})
+	req := c.newRequest(op, input, &types.DescribeEntityAggregatesOutput{})
 	return DescribeEntityAggregatesRequest{Request: req, Input: input, Copy: c.DescribeEntityAggregatesRequest}
 }
 
@@ -83,8 +45,8 @@ func (c *Client) DescribeEntityAggregatesRequest(input *DescribeEntityAggregates
 // DescribeEntityAggregates API operation.
 type DescribeEntityAggregatesRequest struct {
 	*aws.Request
-	Input *DescribeEntityAggregatesInput
-	Copy  func(*DescribeEntityAggregatesInput) DescribeEntityAggregatesRequest
+	Input *types.DescribeEntityAggregatesInput
+	Copy  func(*types.DescribeEntityAggregatesInput) DescribeEntityAggregatesRequest
 }
 
 // Send marshals and sends the DescribeEntityAggregates API request.
@@ -96,7 +58,7 @@ func (r DescribeEntityAggregatesRequest) Send(ctx context.Context) (*DescribeEnt
 	}
 
 	resp := &DescribeEntityAggregatesResponse{
-		DescribeEntityAggregatesOutput: r.Request.Data.(*DescribeEntityAggregatesOutput),
+		DescribeEntityAggregatesOutput: r.Request.Data.(*types.DescribeEntityAggregatesOutput),
 		response:                       &aws.Response{Request: r.Request},
 	}
 
@@ -106,7 +68,7 @@ func (r DescribeEntityAggregatesRequest) Send(ctx context.Context) (*DescribeEnt
 // DescribeEntityAggregatesResponse is the response type for the
 // DescribeEntityAggregates API operation.
 type DescribeEntityAggregatesResponse struct {
-	*DescribeEntityAggregatesOutput
+	*types.DescribeEntityAggregatesOutput
 
 	response *aws.Response
 }

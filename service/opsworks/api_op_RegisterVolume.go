@@ -6,52 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/opsworks/types"
 )
-
-type RegisterVolumeInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon EBS volume ID.
-	Ec2VolumeId *string `type:"string"`
-
-	// The stack ID.
-	//
-	// StackId is a required field
-	StackId *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s RegisterVolumeInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *RegisterVolumeInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "RegisterVolumeInput"}
-
-	if s.StackId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("StackId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Contains the response to a RegisterVolume request.
-type RegisterVolumeOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The volume ID.
-	VolumeId *string `type:"string"`
-}
-
-// String returns the string representation
-func (s RegisterVolumeOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opRegisterVolume = "RegisterVolume"
 
@@ -76,7 +32,7 @@ const opRegisterVolume = "RegisterVolume"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/RegisterVolume
-func (c *Client) RegisterVolumeRequest(input *RegisterVolumeInput) RegisterVolumeRequest {
+func (c *Client) RegisterVolumeRequest(input *types.RegisterVolumeInput) RegisterVolumeRequest {
 	op := &aws.Operation{
 		Name:       opRegisterVolume,
 		HTTPMethod: "POST",
@@ -84,10 +40,10 @@ func (c *Client) RegisterVolumeRequest(input *RegisterVolumeInput) RegisterVolum
 	}
 
 	if input == nil {
-		input = &RegisterVolumeInput{}
+		input = &types.RegisterVolumeInput{}
 	}
 
-	req := c.newRequest(op, input, &RegisterVolumeOutput{})
+	req := c.newRequest(op, input, &types.RegisterVolumeOutput{})
 	return RegisterVolumeRequest{Request: req, Input: input, Copy: c.RegisterVolumeRequest}
 }
 
@@ -95,8 +51,8 @@ func (c *Client) RegisterVolumeRequest(input *RegisterVolumeInput) RegisterVolum
 // RegisterVolume API operation.
 type RegisterVolumeRequest struct {
 	*aws.Request
-	Input *RegisterVolumeInput
-	Copy  func(*RegisterVolumeInput) RegisterVolumeRequest
+	Input *types.RegisterVolumeInput
+	Copy  func(*types.RegisterVolumeInput) RegisterVolumeRequest
 }
 
 // Send marshals and sends the RegisterVolume API request.
@@ -108,7 +64,7 @@ func (r RegisterVolumeRequest) Send(ctx context.Context) (*RegisterVolumeRespons
 	}
 
 	resp := &RegisterVolumeResponse{
-		RegisterVolumeOutput: r.Request.Data.(*RegisterVolumeOutput),
+		RegisterVolumeOutput: r.Request.Data.(*types.RegisterVolumeOutput),
 		response:             &aws.Response{Request: r.Request},
 	}
 
@@ -118,7 +74,7 @@ func (r RegisterVolumeRequest) Send(ctx context.Context) (*RegisterVolumeRespons
 // RegisterVolumeResponse is the response type for the
 // RegisterVolume API operation.
 type RegisterVolumeResponse struct {
-	*RegisterVolumeOutput
+	*types.RegisterVolumeOutput
 
 	response *aws.Response
 }

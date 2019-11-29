@@ -6,121 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/restjson"
+	"github.com/aws/aws-sdk-go-v2/service/apigateway/types"
 )
-
-// Clears any customization of a GatewayResponse of a specified response type
-// on the given RestApi and resets it with the default settings.
-type DeleteGatewayResponseInput struct {
-	_ struct{} `type:"structure"`
-
-	// [Required]
-	// The response type of the associated GatewayResponse. Valid values are
-	//    * ACCESS_DENIED
-	//
-	//    * API_CONFIGURATION_ERROR
-	//
-	//    * AUTHORIZER_FAILURE
-	//
-	//    * AUTHORIZER_CONFIGURATION_ERROR
-	//
-	//    * BAD_REQUEST_PARAMETERS
-	//
-	//    * BAD_REQUEST_BODY
-	//
-	//    * DEFAULT_4XX
-	//
-	//    * DEFAULT_5XX
-	//
-	//    * EXPIRED_TOKEN
-	//
-	//    * INVALID_SIGNATURE
-	//
-	//    * INTEGRATION_FAILURE
-	//
-	//    * INTEGRATION_TIMEOUT
-	//
-	//    * INVALID_API_KEY
-	//
-	//    * MISSING_AUTHENTICATION_TOKEN
-	//
-	//    * QUOTA_EXCEEDED
-	//
-	//    * REQUEST_TOO_LARGE
-	//
-	//    * RESOURCE_NOT_FOUND
-	//
-	//    * THROTTLED
-	//
-	//    * UNAUTHORIZED
-	//
-	//    * UNSUPPORTED_MEDIA_TYPE
-	//
-	// ResponseType is a required field
-	ResponseType GatewayResponseType `location:"uri" locationName:"response_type" type:"string" required:"true" enum:"true"`
-
-	// [Required] The string identifier of the associated RestApi.
-	//
-	// RestApiId is a required field
-	RestApiId *string `location:"uri" locationName:"restapi_id" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteGatewayResponseInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteGatewayResponseInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteGatewayResponseInput"}
-	if len(s.ResponseType) == 0 {
-		invalidParams.Add(aws.NewErrParamRequired("ResponseType"))
-	}
-
-	if s.RestApiId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("RestApiId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteGatewayResponseInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if len(s.ResponseType) > 0 {
-		v := s.ResponseType
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "response_type", protocol.QuotedValue{ValueMarshaler: v}, metadata)
-	}
-	if s.RestApiId != nil {
-		v := *s.RestApiId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "restapi_id", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type DeleteGatewayResponseOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteGatewayResponseOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteGatewayResponseOutput) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
 
 const opDeleteGatewayResponse = "DeleteGatewayResponse"
 
@@ -136,7 +25,7 @@ const opDeleteGatewayResponse = "DeleteGatewayResponse"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) DeleteGatewayResponseRequest(input *DeleteGatewayResponseInput) DeleteGatewayResponseRequest {
+func (c *Client) DeleteGatewayResponseRequest(input *types.DeleteGatewayResponseInput) DeleteGatewayResponseRequest {
 	op := &aws.Operation{
 		Name:       opDeleteGatewayResponse,
 		HTTPMethod: "DELETE",
@@ -144,10 +33,10 @@ func (c *Client) DeleteGatewayResponseRequest(input *DeleteGatewayResponseInput)
 	}
 
 	if input == nil {
-		input = &DeleteGatewayResponseInput{}
+		input = &types.DeleteGatewayResponseInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteGatewayResponseOutput{})
+	req := c.newRequest(op, input, &types.DeleteGatewayResponseOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return DeleteGatewayResponseRequest{Request: req, Input: input, Copy: c.DeleteGatewayResponseRequest}
@@ -157,8 +46,8 @@ func (c *Client) DeleteGatewayResponseRequest(input *DeleteGatewayResponseInput)
 // DeleteGatewayResponse API operation.
 type DeleteGatewayResponseRequest struct {
 	*aws.Request
-	Input *DeleteGatewayResponseInput
-	Copy  func(*DeleteGatewayResponseInput) DeleteGatewayResponseRequest
+	Input *types.DeleteGatewayResponseInput
+	Copy  func(*types.DeleteGatewayResponseInput) DeleteGatewayResponseRequest
 }
 
 // Send marshals and sends the DeleteGatewayResponse API request.
@@ -170,7 +59,7 @@ func (r DeleteGatewayResponseRequest) Send(ctx context.Context) (*DeleteGatewayR
 	}
 
 	resp := &DeleteGatewayResponseResponse{
-		DeleteGatewayResponseOutput: r.Request.Data.(*DeleteGatewayResponseOutput),
+		DeleteGatewayResponseOutput: r.Request.Data.(*types.DeleteGatewayResponseOutput),
 		response:                    &aws.Response{Request: r.Request},
 	}
 
@@ -180,7 +69,7 @@ func (r DeleteGatewayResponseRequest) Send(ctx context.Context) (*DeleteGatewayR
 // DeleteGatewayResponseResponse is the response type for the
 // DeleteGatewayResponse API operation.
 type DeleteGatewayResponseResponse struct {
-	*DeleteGatewayResponseOutput
+	*types.DeleteGatewayResponseOutput
 
 	response *aws.Response
 }

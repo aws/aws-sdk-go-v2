@@ -4,163 +4,10 @@ package pi
 
 import (
 	"context"
-	"fmt"
-	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/pi/types"
 )
-
-type GetResourceMetricsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The date and time specifiying the end of the requested time series data.
-	// The value specified is exclusive - data points less than (but not equal to)
-	// EndTime will be returned.
-	//
-	// The value for EndTime must be later than the value for StartTime.
-	//
-	// EndTime is a required field
-	EndTime *time.Time `type:"timestamp" required:"true"`
-
-	// An immutable, AWS Region-unique identifier for a data source. Performance
-	// Insights gathers metrics from this data source.
-	//
-	// To use an Amazon RDS instance as a data source, you specify its DbiResourceId
-	// value - for example: db-FAIHNTYBKTGAUSUZQYPDS2GW4A
-	//
-	// Identifier is a required field
-	Identifier *string `type:"string" required:"true"`
-
-	// The maximum number of items to return in the response. If more items exist
-	// than the specified MaxRecords value, a pagination token is included in the
-	// response so that the remaining results can be retrieved.
-	MaxResults *int64 `type:"integer"`
-
-	// An array of one or more queries to perform. Each query must specify a Performance
-	// Insights metric, and can optionally specify aggregation and filtering criteria.
-	//
-	// MetricQueries is a required field
-	MetricQueries []MetricQuery `min:"1" type:"list" required:"true"`
-
-	// An optional pagination token provided by a previous request. If this parameter
-	// is specified, the response includes only records beyond the token, up to
-	// the value specified by MaxRecords.
-	NextToken *string `type:"string"`
-
-	// The granularity, in seconds, of the data points returned from Performance
-	// Insights. A period can be as short as one second, or as long as one day (86400
-	// seconds). Valid values are:
-	//
-	//    * 1 (one second)
-	//
-	//    * 60 (one minute)
-	//
-	//    * 300 (five minutes)
-	//
-	//    * 3600 (one hour)
-	//
-	//    * 86400 (twenty-four hours)
-	//
-	// If you don't specify PeriodInSeconds, then Performance Insights will choose
-	// a value for you, with a goal of returning roughly 100-200 data points in
-	// the response.
-	PeriodInSeconds *int64 `type:"integer"`
-
-	// The AWS service for which Performance Insights will return metrics. The only
-	// valid value for ServiceType is: RDS
-	//
-	// ServiceType is a required field
-	ServiceType ServiceType `type:"string" required:"true" enum:"true"`
-
-	// The date and time specifying the beginning of the requested time series data.
-	// You can't specify a StartTime that's earlier than 7 days ago. The value specified
-	// is inclusive - data points equal to or greater than StartTime will be returned.
-	//
-	// The value for StartTime must be earlier than the value for EndTime.
-	//
-	// StartTime is a required field
-	StartTime *time.Time `type:"timestamp" required:"true"`
-}
-
-// String returns the string representation
-func (s GetResourceMetricsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetResourceMetricsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetResourceMetricsInput"}
-
-	if s.EndTime == nil {
-		invalidParams.Add(aws.NewErrParamRequired("EndTime"))
-	}
-
-	if s.Identifier == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Identifier"))
-	}
-
-	if s.MetricQueries == nil {
-		invalidParams.Add(aws.NewErrParamRequired("MetricQueries"))
-	}
-	if s.MetricQueries != nil && len(s.MetricQueries) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("MetricQueries", 1))
-	}
-	if len(s.ServiceType) == 0 {
-		invalidParams.Add(aws.NewErrParamRequired("ServiceType"))
-	}
-
-	if s.StartTime == nil {
-		invalidParams.Add(aws.NewErrParamRequired("StartTime"))
-	}
-	if s.MetricQueries != nil {
-		for i, v := range s.MetricQueries {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "MetricQueries", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type GetResourceMetricsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The end time for the returned metrics, after alignment to a granular boundary
-	// (as specified by PeriodInSeconds). AlignedEndTime will be greater than or
-	// equal to the value of the user-specified Endtime.
-	AlignedEndTime *time.Time `type:"timestamp"`
-
-	// The start time for the returned metrics, after alignment to a granular boundary
-	// (as specified by PeriodInSeconds). AlignedStartTime will be less than or
-	// equal to the value of the user-specified StartTime.
-	AlignedStartTime *time.Time `type:"timestamp"`
-
-	// An immutable, AWS Region-unique identifier for a data source. Performance
-	// Insights gathers metrics from this data source.
-	//
-	// To use an Amazon RDS instance as a data source, you specify its DbiResourceId
-	// value - for example: db-FAIHNTYBKTGAUSUZQYPDS2GW4A
-	Identifier *string `type:"string"`
-
-	// An array of metric results,, where each array element contains all of the
-	// data points for a particular dimension.
-	MetricList []MetricKeyDataPoints `type:"list"`
-
-	// An optional pagination token provided by a previous request. If this parameter
-	// is specified, the response includes only records beyond the token, up to
-	// the value specified by MaxRecords.
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s GetResourceMetricsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetResourceMetrics = "GetResourceMetrics"
 
@@ -179,7 +26,7 @@ const opGetResourceMetrics = "GetResourceMetrics"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pi-2018-02-27/GetResourceMetrics
-func (c *Client) GetResourceMetricsRequest(input *GetResourceMetricsInput) GetResourceMetricsRequest {
+func (c *Client) GetResourceMetricsRequest(input *types.GetResourceMetricsInput) GetResourceMetricsRequest {
 	op := &aws.Operation{
 		Name:       opGetResourceMetrics,
 		HTTPMethod: "POST",
@@ -187,10 +34,10 @@ func (c *Client) GetResourceMetricsRequest(input *GetResourceMetricsInput) GetRe
 	}
 
 	if input == nil {
-		input = &GetResourceMetricsInput{}
+		input = &types.GetResourceMetricsInput{}
 	}
 
-	req := c.newRequest(op, input, &GetResourceMetricsOutput{})
+	req := c.newRequest(op, input, &types.GetResourceMetricsOutput{})
 	return GetResourceMetricsRequest{Request: req, Input: input, Copy: c.GetResourceMetricsRequest}
 }
 
@@ -198,8 +45,8 @@ func (c *Client) GetResourceMetricsRequest(input *GetResourceMetricsInput) GetRe
 // GetResourceMetrics API operation.
 type GetResourceMetricsRequest struct {
 	*aws.Request
-	Input *GetResourceMetricsInput
-	Copy  func(*GetResourceMetricsInput) GetResourceMetricsRequest
+	Input *types.GetResourceMetricsInput
+	Copy  func(*types.GetResourceMetricsInput) GetResourceMetricsRequest
 }
 
 // Send marshals and sends the GetResourceMetrics API request.
@@ -211,7 +58,7 @@ func (r GetResourceMetricsRequest) Send(ctx context.Context) (*GetResourceMetric
 	}
 
 	resp := &GetResourceMetricsResponse{
-		GetResourceMetricsOutput: r.Request.Data.(*GetResourceMetricsOutput),
+		GetResourceMetricsOutput: r.Request.Data.(*types.GetResourceMetricsOutput),
 		response:                 &aws.Response{Request: r.Request},
 	}
 
@@ -221,7 +68,7 @@ func (r GetResourceMetricsRequest) Send(ctx context.Context) (*GetResourceMetric
 // GetResourceMetricsResponse is the response type for the
 // GetResourceMetrics API operation.
 type GetResourceMetricsResponse struct {
-	*GetResourceMetricsOutput
+	*types.GetResourceMetricsOutput
 
 	response *aws.Response
 }

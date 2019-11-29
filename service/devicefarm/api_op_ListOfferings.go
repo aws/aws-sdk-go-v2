@@ -6,52 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/devicefarm/types"
 )
-
-// Represents the request to list all offerings.
-type ListOfferingsInput struct {
-	_ struct{} `type:"structure"`
-
-	// An identifier that was returned from the previous call to this operation,
-	// which can be used to return the next set of items in the list.
-	NextToken *string `locationName:"nextToken" min:"4" type:"string"`
-}
-
-// String returns the string representation
-func (s ListOfferingsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListOfferingsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListOfferingsInput"}
-	if s.NextToken != nil && len(*s.NextToken) < 4 {
-		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 4))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Represents the return values of the list of offerings.
-type ListOfferingsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// An identifier that was returned from the previous call to this operation,
-	// which can be used to return the next set of items in the list.
-	NextToken *string `locationName:"nextToken" min:"4" type:"string"`
-
-	// A value representing the list offering results.
-	Offerings []Offering `locationName:"offerings" type:"list"`
-}
-
-// String returns the string representation
-func (s ListOfferingsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListOfferings = "ListOfferings"
 
@@ -73,7 +29,7 @@ const opListOfferings = "ListOfferings"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ListOfferings
-func (c *Client) ListOfferingsRequest(input *ListOfferingsInput) ListOfferingsRequest {
+func (c *Client) ListOfferingsRequest(input *types.ListOfferingsInput) ListOfferingsRequest {
 	op := &aws.Operation{
 		Name:       opListOfferings,
 		HTTPMethod: "POST",
@@ -87,10 +43,10 @@ func (c *Client) ListOfferingsRequest(input *ListOfferingsInput) ListOfferingsRe
 	}
 
 	if input == nil {
-		input = &ListOfferingsInput{}
+		input = &types.ListOfferingsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListOfferingsOutput{})
+	req := c.newRequest(op, input, &types.ListOfferingsOutput{})
 	return ListOfferingsRequest{Request: req, Input: input, Copy: c.ListOfferingsRequest}
 }
 
@@ -98,8 +54,8 @@ func (c *Client) ListOfferingsRequest(input *ListOfferingsInput) ListOfferingsRe
 // ListOfferings API operation.
 type ListOfferingsRequest struct {
 	*aws.Request
-	Input *ListOfferingsInput
-	Copy  func(*ListOfferingsInput) ListOfferingsRequest
+	Input *types.ListOfferingsInput
+	Copy  func(*types.ListOfferingsInput) ListOfferingsRequest
 }
 
 // Send marshals and sends the ListOfferings API request.
@@ -111,7 +67,7 @@ func (r ListOfferingsRequest) Send(ctx context.Context) (*ListOfferingsResponse,
 	}
 
 	resp := &ListOfferingsResponse{
-		ListOfferingsOutput: r.Request.Data.(*ListOfferingsOutput),
+		ListOfferingsOutput: r.Request.Data.(*types.ListOfferingsOutput),
 		response:            &aws.Response{Request: r.Request},
 	}
 
@@ -141,7 +97,7 @@ func NewListOfferingsPaginator(req ListOfferingsRequest) ListOfferingsPaginator 
 	return ListOfferingsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListOfferingsInput
+				var inCpy *types.ListOfferingsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -161,14 +117,14 @@ type ListOfferingsPaginator struct {
 	aws.Pager
 }
 
-func (p *ListOfferingsPaginator) CurrentPage() *ListOfferingsOutput {
-	return p.Pager.CurrentPage().(*ListOfferingsOutput)
+func (p *ListOfferingsPaginator) CurrentPage() *types.ListOfferingsOutput {
+	return p.Pager.CurrentPage().(*types.ListOfferingsOutput)
 }
 
 // ListOfferingsResponse is the response type for the
 // ListOfferings API operation.
 type ListOfferingsResponse struct {
-	*ListOfferingsOutput
+	*types.ListOfferingsOutput
 
 	response *aws.Response
 }

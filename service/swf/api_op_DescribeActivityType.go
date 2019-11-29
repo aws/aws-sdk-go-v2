@@ -6,84 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/swf/types"
 )
-
-type DescribeActivityTypeInput struct {
-	_ struct{} `type:"structure"`
-
-	// The activity type to get information about. Activity types are identified
-	// by the name and version that were supplied when the activity was registered.
-	//
-	// ActivityType is a required field
-	ActivityType *ActivityType `locationName:"activityType" type:"structure" required:"true"`
-
-	// The name of the domain in which the activity type is registered.
-	//
-	// Domain is a required field
-	Domain *string `locationName:"domain" min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeActivityTypeInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeActivityTypeInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeActivityTypeInput"}
-
-	if s.ActivityType == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ActivityType"))
-	}
-
-	if s.Domain == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Domain"))
-	}
-	if s.Domain != nil && len(*s.Domain) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Domain", 1))
-	}
-	if s.ActivityType != nil {
-		if err := s.ActivityType.Validate(); err != nil {
-			invalidParams.AddNested("ActivityType", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Detailed information about an activity type.
-type DescribeActivityTypeOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The configuration settings registered with the activity type.
-	//
-	// Configuration is a required field
-	Configuration *ActivityTypeConfiguration `locationName:"configuration" type:"structure" required:"true"`
-
-	// General information about the activity type.
-	//
-	// The status of activity type (returned in the ActivityTypeInfo structure)
-	// can be one of the following.
-	//
-	//    * REGISTERED – The type is registered and available. Workers supporting
-	//    this type should be running.
-	//
-	//    * DEPRECATED – The type was deprecated using DeprecateActivityType,
-	//    but is still in use. You should keep workers supporting this type running.
-	//    You cannot create new tasks of this type.
-	//
-	// TypeInfo is a required field
-	TypeInfo *ActivityTypeInfo `locationName:"typeInfo" type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeActivityTypeOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeActivityType = "DescribeActivityType"
 
@@ -122,7 +46,7 @@ const opDescribeActivityType = "DescribeActivityType"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) DescribeActivityTypeRequest(input *DescribeActivityTypeInput) DescribeActivityTypeRequest {
+func (c *Client) DescribeActivityTypeRequest(input *types.DescribeActivityTypeInput) DescribeActivityTypeRequest {
 	op := &aws.Operation{
 		Name:       opDescribeActivityType,
 		HTTPMethod: "POST",
@@ -130,10 +54,10 @@ func (c *Client) DescribeActivityTypeRequest(input *DescribeActivityTypeInput) D
 	}
 
 	if input == nil {
-		input = &DescribeActivityTypeInput{}
+		input = &types.DescribeActivityTypeInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeActivityTypeOutput{})
+	req := c.newRequest(op, input, &types.DescribeActivityTypeOutput{})
 	return DescribeActivityTypeRequest{Request: req, Input: input, Copy: c.DescribeActivityTypeRequest}
 }
 
@@ -141,8 +65,8 @@ func (c *Client) DescribeActivityTypeRequest(input *DescribeActivityTypeInput) D
 // DescribeActivityType API operation.
 type DescribeActivityTypeRequest struct {
 	*aws.Request
-	Input *DescribeActivityTypeInput
-	Copy  func(*DescribeActivityTypeInput) DescribeActivityTypeRequest
+	Input *types.DescribeActivityTypeInput
+	Copy  func(*types.DescribeActivityTypeInput) DescribeActivityTypeRequest
 }
 
 // Send marshals and sends the DescribeActivityType API request.
@@ -154,7 +78,7 @@ func (r DescribeActivityTypeRequest) Send(ctx context.Context) (*DescribeActivit
 	}
 
 	resp := &DescribeActivityTypeResponse{
-		DescribeActivityTypeOutput: r.Request.Data.(*DescribeActivityTypeOutput),
+		DescribeActivityTypeOutput: r.Request.Data.(*types.DescribeActivityTypeOutput),
 		response:                   &aws.Response{Request: r.Request},
 	}
 
@@ -164,7 +88,7 @@ func (r DescribeActivityTypeRequest) Send(ctx context.Context) (*DescribeActivit
 // DescribeActivityTypeResponse is the response type for the
 // DescribeActivityType API operation.
 type DescribeActivityTypeResponse struct {
-	*DescribeActivityTypeOutput
+	*types.DescribeActivityTypeOutput
 
 	response *aws.Response
 }

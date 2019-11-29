@@ -6,81 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/support/types"
 )
-
-type DescribeCasesInput struct {
-	_ struct{} `type:"structure"`
-
-	// The start date for a filtered date search on support case communications.
-	// Case communications are available for 12 months after creation.
-	AfterTime *string `locationName:"afterTime" type:"string"`
-
-	// The end date for a filtered date search on support case communications. Case
-	// communications are available for 12 months after creation.
-	BeforeTime *string `locationName:"beforeTime" type:"string"`
-
-	// A list of ID numbers of the support cases you want returned. The maximum
-	// number of cases is 100.
-	CaseIdList []string `locationName:"caseIdList" type:"list"`
-
-	// The ID displayed for a case in the AWS Support Center user interface.
-	DisplayId *string `locationName:"displayId" type:"string"`
-
-	// Specifies whether communications should be included in the DescribeCases
-	// results. The default is true.
-	IncludeCommunications *bool `locationName:"includeCommunications" type:"boolean"`
-
-	// Specifies whether resolved support cases should be included in the DescribeCases
-	// results. The default is false.
-	IncludeResolvedCases *bool `locationName:"includeResolvedCases" type:"boolean"`
-
-	// The ISO 639-1 code for the language in which AWS provides support. AWS Support
-	// currently supports English ("en") and Japanese ("ja"). Language parameters
-	// must be passed explicitly for operations that take them.
-	Language *string `locationName:"language" type:"string"`
-
-	// The maximum number of results to return before paginating.
-	MaxResults *int64 `locationName:"maxResults" min:"10" type:"integer"`
-
-	// A resumption point for pagination.
-	NextToken *string `locationName:"nextToken" type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeCasesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeCasesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeCasesInput"}
-	if s.MaxResults != nil && *s.MaxResults < 10 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 10))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Returns an array of CaseDetails objects and a nextToken that defines a point
-// for pagination in the result set.
-type DescribeCasesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The details for the cases that match the request.
-	Cases []CaseDetails `locationName:"cases" type:"list"`
-
-	// A resumption point for pagination.
-	NextToken *string `locationName:"nextToken" type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeCasesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeCases = "DescribeCases"
 
@@ -111,7 +38,7 @@ const opDescribeCases = "DescribeCases"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/support-2013-04-15/DescribeCases
-func (c *Client) DescribeCasesRequest(input *DescribeCasesInput) DescribeCasesRequest {
+func (c *Client) DescribeCasesRequest(input *types.DescribeCasesInput) DescribeCasesRequest {
 	op := &aws.Operation{
 		Name:       opDescribeCases,
 		HTTPMethod: "POST",
@@ -125,10 +52,10 @@ func (c *Client) DescribeCasesRequest(input *DescribeCasesInput) DescribeCasesRe
 	}
 
 	if input == nil {
-		input = &DescribeCasesInput{}
+		input = &types.DescribeCasesInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeCasesOutput{})
+	req := c.newRequest(op, input, &types.DescribeCasesOutput{})
 	return DescribeCasesRequest{Request: req, Input: input, Copy: c.DescribeCasesRequest}
 }
 
@@ -136,8 +63,8 @@ func (c *Client) DescribeCasesRequest(input *DescribeCasesInput) DescribeCasesRe
 // DescribeCases API operation.
 type DescribeCasesRequest struct {
 	*aws.Request
-	Input *DescribeCasesInput
-	Copy  func(*DescribeCasesInput) DescribeCasesRequest
+	Input *types.DescribeCasesInput
+	Copy  func(*types.DescribeCasesInput) DescribeCasesRequest
 }
 
 // Send marshals and sends the DescribeCases API request.
@@ -149,7 +76,7 @@ func (r DescribeCasesRequest) Send(ctx context.Context) (*DescribeCasesResponse,
 	}
 
 	resp := &DescribeCasesResponse{
-		DescribeCasesOutput: r.Request.Data.(*DescribeCasesOutput),
+		DescribeCasesOutput: r.Request.Data.(*types.DescribeCasesOutput),
 		response:            &aws.Response{Request: r.Request},
 	}
 
@@ -179,7 +106,7 @@ func NewDescribeCasesPaginator(req DescribeCasesRequest) DescribeCasesPaginator 
 	return DescribeCasesPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *DescribeCasesInput
+				var inCpy *types.DescribeCasesInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -199,14 +126,14 @@ type DescribeCasesPaginator struct {
 	aws.Pager
 }
 
-func (p *DescribeCasesPaginator) CurrentPage() *DescribeCasesOutput {
-	return p.Pager.CurrentPage().(*DescribeCasesOutput)
+func (p *DescribeCasesPaginator) CurrentPage() *types.DescribeCasesOutput {
+	return p.Pager.CurrentPage().(*types.DescribeCasesOutput)
 }
 
 // DescribeCasesResponse is the response type for the
 // DescribeCases API operation.
 type DescribeCasesResponse struct {
-	*DescribeCasesOutput
+	*types.DescribeCasesOutput
 
 	response *aws.Response
 }

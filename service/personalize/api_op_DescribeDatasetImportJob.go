@@ -6,58 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/personalize/types"
 )
-
-type DescribeDatasetImportJobInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the dataset import job to describe.
-	//
-	// DatasetImportJobArn is a required field
-	DatasetImportJobArn *string `locationName:"datasetImportJobArn" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeDatasetImportJobInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeDatasetImportJobInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeDatasetImportJobInput"}
-
-	if s.DatasetImportJobArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DatasetImportJobArn"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribeDatasetImportJobOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Information about the dataset import job, including the status.
-	//
-	// The status is one of the following values:
-	//
-	//    * CREATE PENDING
-	//
-	//    * CREATE IN_PROGRESS
-	//
-	//    * ACTIVE
-	//
-	//    * CREATE FAILED
-	DatasetImportJob *DatasetImportJob `locationName:"datasetImportJob" type:"structure"`
-}
-
-// String returns the string representation
-func (s DescribeDatasetImportJobOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeDatasetImportJob = "DescribeDatasetImportJob"
 
@@ -75,7 +25,7 @@ const opDescribeDatasetImportJob = "DescribeDatasetImportJob"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/DescribeDatasetImportJob
-func (c *Client) DescribeDatasetImportJobRequest(input *DescribeDatasetImportJobInput) DescribeDatasetImportJobRequest {
+func (c *Client) DescribeDatasetImportJobRequest(input *types.DescribeDatasetImportJobInput) DescribeDatasetImportJobRequest {
 	op := &aws.Operation{
 		Name:       opDescribeDatasetImportJob,
 		HTTPMethod: "POST",
@@ -83,10 +33,10 @@ func (c *Client) DescribeDatasetImportJobRequest(input *DescribeDatasetImportJob
 	}
 
 	if input == nil {
-		input = &DescribeDatasetImportJobInput{}
+		input = &types.DescribeDatasetImportJobInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeDatasetImportJobOutput{})
+	req := c.newRequest(op, input, &types.DescribeDatasetImportJobOutput{})
 	return DescribeDatasetImportJobRequest{Request: req, Input: input, Copy: c.DescribeDatasetImportJobRequest}
 }
 
@@ -94,8 +44,8 @@ func (c *Client) DescribeDatasetImportJobRequest(input *DescribeDatasetImportJob
 // DescribeDatasetImportJob API operation.
 type DescribeDatasetImportJobRequest struct {
 	*aws.Request
-	Input *DescribeDatasetImportJobInput
-	Copy  func(*DescribeDatasetImportJobInput) DescribeDatasetImportJobRequest
+	Input *types.DescribeDatasetImportJobInput
+	Copy  func(*types.DescribeDatasetImportJobInput) DescribeDatasetImportJobRequest
 }
 
 // Send marshals and sends the DescribeDatasetImportJob API request.
@@ -107,7 +57,7 @@ func (r DescribeDatasetImportJobRequest) Send(ctx context.Context) (*DescribeDat
 	}
 
 	resp := &DescribeDatasetImportJobResponse{
-		DescribeDatasetImportJobOutput: r.Request.Data.(*DescribeDatasetImportJobOutput),
+		DescribeDatasetImportJobOutput: r.Request.Data.(*types.DescribeDatasetImportJobOutput),
 		response:                       &aws.Response{Request: r.Request},
 	}
 
@@ -117,7 +67,7 @@ func (r DescribeDatasetImportJobRequest) Send(ctx context.Context) (*DescribeDat
 // DescribeDatasetImportJobResponse is the response type for the
 // DescribeDatasetImportJob API operation.
 type DescribeDatasetImportJobResponse struct {
-	*DescribeDatasetImportJobOutput
+	*types.DescribeDatasetImportJobOutput
 
 	response *aws.Response
 }

@@ -6,65 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/restjson"
+	"github.com/aws/aws-sdk-go-v2/service/chime/types"
 )
-
-type DeleteVoiceConnectorTerminationInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Chime Voice Connector ID.
-	//
-	// VoiceConnectorId is a required field
-	VoiceConnectorId *string `location:"uri" locationName:"voiceConnectorId" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteVoiceConnectorTerminationInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteVoiceConnectorTerminationInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteVoiceConnectorTerminationInput"}
-
-	if s.VoiceConnectorId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("VoiceConnectorId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteVoiceConnectorTerminationInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.VoiceConnectorId != nil {
-		v := *s.VoiceConnectorId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "voiceConnectorId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type DeleteVoiceConnectorTerminationOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteVoiceConnectorTerminationOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteVoiceConnectorTerminationOutput) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
 
 const opDeleteVoiceConnectorTermination = "DeleteVoiceConnectorTermination"
 
@@ -81,7 +26,7 @@ const opDeleteVoiceConnectorTermination = "DeleteVoiceConnectorTermination"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/DeleteVoiceConnectorTermination
-func (c *Client) DeleteVoiceConnectorTerminationRequest(input *DeleteVoiceConnectorTerminationInput) DeleteVoiceConnectorTerminationRequest {
+func (c *Client) DeleteVoiceConnectorTerminationRequest(input *types.DeleteVoiceConnectorTerminationInput) DeleteVoiceConnectorTerminationRequest {
 	op := &aws.Operation{
 		Name:       opDeleteVoiceConnectorTermination,
 		HTTPMethod: "DELETE",
@@ -89,10 +34,10 @@ func (c *Client) DeleteVoiceConnectorTerminationRequest(input *DeleteVoiceConnec
 	}
 
 	if input == nil {
-		input = &DeleteVoiceConnectorTerminationInput{}
+		input = &types.DeleteVoiceConnectorTerminationInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteVoiceConnectorTerminationOutput{})
+	req := c.newRequest(op, input, &types.DeleteVoiceConnectorTerminationOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return DeleteVoiceConnectorTerminationRequest{Request: req, Input: input, Copy: c.DeleteVoiceConnectorTerminationRequest}
@@ -102,8 +47,8 @@ func (c *Client) DeleteVoiceConnectorTerminationRequest(input *DeleteVoiceConnec
 // DeleteVoiceConnectorTermination API operation.
 type DeleteVoiceConnectorTerminationRequest struct {
 	*aws.Request
-	Input *DeleteVoiceConnectorTerminationInput
-	Copy  func(*DeleteVoiceConnectorTerminationInput) DeleteVoiceConnectorTerminationRequest
+	Input *types.DeleteVoiceConnectorTerminationInput
+	Copy  func(*types.DeleteVoiceConnectorTerminationInput) DeleteVoiceConnectorTerminationRequest
 }
 
 // Send marshals and sends the DeleteVoiceConnectorTermination API request.
@@ -115,7 +60,7 @@ func (r DeleteVoiceConnectorTerminationRequest) Send(ctx context.Context) (*Dele
 	}
 
 	resp := &DeleteVoiceConnectorTerminationResponse{
-		DeleteVoiceConnectorTerminationOutput: r.Request.Data.(*DeleteVoiceConnectorTerminationOutput),
+		DeleteVoiceConnectorTerminationOutput: r.Request.Data.(*types.DeleteVoiceConnectorTerminationOutput),
 		response:                              &aws.Response{Request: r.Request},
 	}
 
@@ -125,7 +70,7 @@ func (r DeleteVoiceConnectorTerminationRequest) Send(ctx context.Context) (*Dele
 // DeleteVoiceConnectorTerminationResponse is the response type for the
 // DeleteVoiceConnectorTermination API operation.
 type DeleteVoiceConnectorTerminationResponse struct {
-	*DeleteVoiceConnectorTerminationOutput
+	*types.DeleteVoiceConnectorTerminationOutput
 
 	response *aws.Response
 }

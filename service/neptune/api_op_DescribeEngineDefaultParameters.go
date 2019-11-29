@@ -4,76 +4,10 @@ package neptune
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/neptune/types"
 )
-
-type DescribeEngineDefaultParametersInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the DB parameter group family.
-	//
-	// DBParameterGroupFamily is a required field
-	DBParameterGroupFamily *string `type:"string" required:"true"`
-
-	// Not currently supported.
-	Filters []Filter `locationNameList:"Filter" type:"list"`
-
-	// An optional pagination token provided by a previous DescribeEngineDefaultParameters
-	// request. If this parameter is specified, the response includes only records
-	// beyond the marker, up to the value specified by MaxRecords.
-	Marker *string `type:"string"`
-
-	// The maximum number of records to include in the response. If more records
-	// exist than the specified MaxRecords value, a pagination token called a marker
-	// is included in the response so that the remaining results can be retrieved.
-	//
-	// Default: 100
-	//
-	// Constraints: Minimum 20, maximum 100.
-	MaxRecords *int64 `type:"integer"`
-}
-
-// String returns the string representation
-func (s DescribeEngineDefaultParametersInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeEngineDefaultParametersInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeEngineDefaultParametersInput"}
-
-	if s.DBParameterGroupFamily == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DBParameterGroupFamily"))
-	}
-	if s.Filters != nil {
-		for i, v := range s.Filters {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribeEngineDefaultParametersOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Contains the result of a successful invocation of the DescribeEngineDefaultParameters
-	// action.
-	EngineDefaults *EngineDefaults `type:"structure"`
-}
-
-// String returns the string representation
-func (s DescribeEngineDefaultParametersOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeEngineDefaultParameters = "DescribeEngineDefaultParameters"
 
@@ -91,7 +25,7 @@ const opDescribeEngineDefaultParameters = "DescribeEngineDefaultParameters"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/DescribeEngineDefaultParameters
-func (c *Client) DescribeEngineDefaultParametersRequest(input *DescribeEngineDefaultParametersInput) DescribeEngineDefaultParametersRequest {
+func (c *Client) DescribeEngineDefaultParametersRequest(input *types.DescribeEngineDefaultParametersInput) DescribeEngineDefaultParametersRequest {
 	op := &aws.Operation{
 		Name:       opDescribeEngineDefaultParameters,
 		HTTPMethod: "POST",
@@ -105,10 +39,10 @@ func (c *Client) DescribeEngineDefaultParametersRequest(input *DescribeEngineDef
 	}
 
 	if input == nil {
-		input = &DescribeEngineDefaultParametersInput{}
+		input = &types.DescribeEngineDefaultParametersInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeEngineDefaultParametersOutput{})
+	req := c.newRequest(op, input, &types.DescribeEngineDefaultParametersOutput{})
 	return DescribeEngineDefaultParametersRequest{Request: req, Input: input, Copy: c.DescribeEngineDefaultParametersRequest}
 }
 
@@ -116,8 +50,8 @@ func (c *Client) DescribeEngineDefaultParametersRequest(input *DescribeEngineDef
 // DescribeEngineDefaultParameters API operation.
 type DescribeEngineDefaultParametersRequest struct {
 	*aws.Request
-	Input *DescribeEngineDefaultParametersInput
-	Copy  func(*DescribeEngineDefaultParametersInput) DescribeEngineDefaultParametersRequest
+	Input *types.DescribeEngineDefaultParametersInput
+	Copy  func(*types.DescribeEngineDefaultParametersInput) DescribeEngineDefaultParametersRequest
 }
 
 // Send marshals and sends the DescribeEngineDefaultParameters API request.
@@ -129,7 +63,7 @@ func (r DescribeEngineDefaultParametersRequest) Send(ctx context.Context) (*Desc
 	}
 
 	resp := &DescribeEngineDefaultParametersResponse{
-		DescribeEngineDefaultParametersOutput: r.Request.Data.(*DescribeEngineDefaultParametersOutput),
+		DescribeEngineDefaultParametersOutput: r.Request.Data.(*types.DescribeEngineDefaultParametersOutput),
 		response:                              &aws.Response{Request: r.Request},
 	}
 
@@ -159,7 +93,7 @@ func NewDescribeEngineDefaultParametersPaginator(req DescribeEngineDefaultParame
 	return DescribeEngineDefaultParametersPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *DescribeEngineDefaultParametersInput
+				var inCpy *types.DescribeEngineDefaultParametersInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -179,14 +113,14 @@ type DescribeEngineDefaultParametersPaginator struct {
 	aws.Pager
 }
 
-func (p *DescribeEngineDefaultParametersPaginator) CurrentPage() *DescribeEngineDefaultParametersOutput {
-	return p.Pager.CurrentPage().(*DescribeEngineDefaultParametersOutput)
+func (p *DescribeEngineDefaultParametersPaginator) CurrentPage() *types.DescribeEngineDefaultParametersOutput {
+	return p.Pager.CurrentPage().(*types.DescribeEngineDefaultParametersOutput)
 }
 
 // DescribeEngineDefaultParametersResponse is the response type for the
 // DescribeEngineDefaultParameters API operation.
 type DescribeEngineDefaultParametersResponse struct {
-	*DescribeEngineDefaultParametersOutput
+	*types.DescribeEngineDefaultParametersOutput
 
 	response *aws.Response
 }

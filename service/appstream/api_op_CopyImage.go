@@ -6,73 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/appstream/types"
 )
-
-type CopyImageInput struct {
-	_ struct{} `type:"structure"`
-
-	// The description that the image will have when it is copied to the destination.
-	DestinationImageDescription *string `type:"string"`
-
-	// The name that the image will have when it is copied to the destination.
-	//
-	// DestinationImageName is a required field
-	DestinationImageName *string `type:"string" required:"true"`
-
-	// The destination region to which the image will be copied. This parameter
-	// is required, even if you are copying an image within the same region.
-	//
-	// DestinationRegion is a required field
-	DestinationRegion *string `min:"1" type:"string" required:"true"`
-
-	// The name of the image to copy.
-	//
-	// SourceImageName is a required field
-	SourceImageName *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s CopyImageInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CopyImageInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CopyImageInput"}
-
-	if s.DestinationImageName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DestinationImageName"))
-	}
-
-	if s.DestinationRegion == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DestinationRegion"))
-	}
-	if s.DestinationRegion != nil && len(*s.DestinationRegion) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("DestinationRegion", 1))
-	}
-
-	if s.SourceImageName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("SourceImageName"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type CopyImageOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the destination image.
-	DestinationImageName *string `type:"string"`
-}
-
-// String returns the string representation
-func (s CopyImageOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCopyImage = "CopyImage"
 
@@ -90,7 +25,7 @@ const opCopyImage = "CopyImage"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/CopyImage
-func (c *Client) CopyImageRequest(input *CopyImageInput) CopyImageRequest {
+func (c *Client) CopyImageRequest(input *types.CopyImageInput) CopyImageRequest {
 	op := &aws.Operation{
 		Name:       opCopyImage,
 		HTTPMethod: "POST",
@@ -98,10 +33,10 @@ func (c *Client) CopyImageRequest(input *CopyImageInput) CopyImageRequest {
 	}
 
 	if input == nil {
-		input = &CopyImageInput{}
+		input = &types.CopyImageInput{}
 	}
 
-	req := c.newRequest(op, input, &CopyImageOutput{})
+	req := c.newRequest(op, input, &types.CopyImageOutput{})
 	return CopyImageRequest{Request: req, Input: input, Copy: c.CopyImageRequest}
 }
 
@@ -109,8 +44,8 @@ func (c *Client) CopyImageRequest(input *CopyImageInput) CopyImageRequest {
 // CopyImage API operation.
 type CopyImageRequest struct {
 	*aws.Request
-	Input *CopyImageInput
-	Copy  func(*CopyImageInput) CopyImageRequest
+	Input *types.CopyImageInput
+	Copy  func(*types.CopyImageInput) CopyImageRequest
 }
 
 // Send marshals and sends the CopyImage API request.
@@ -122,7 +57,7 @@ func (r CopyImageRequest) Send(ctx context.Context) (*CopyImageResponse, error) 
 	}
 
 	resp := &CopyImageResponse{
-		CopyImageOutput: r.Request.Data.(*CopyImageOutput),
+		CopyImageOutput: r.Request.Data.(*types.CopyImageOutput),
 		response:        &aws.Response{Request: r.Request},
 	}
 
@@ -132,7 +67,7 @@ func (r CopyImageRequest) Send(ctx context.Context) (*CopyImageResponse, error) 
 // CopyImageResponse is the response type for the
 // CopyImage API operation.
 type CopyImageResponse struct {
-	*CopyImageOutput
+	*types.CopyImageOutput
 
 	response *aws.Response
 }

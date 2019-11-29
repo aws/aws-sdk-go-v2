@@ -6,117 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/kafka/types"
 )
-
-// Request body for UpdateClusterConfiguration.
-type UpdateClusterConfigurationInput struct {
-	_ struct{} `type:"structure"`
-
-	// ClusterArn is a required field
-	ClusterArn *string `location:"uri" locationName:"clusterArn" type:"string" required:"true"`
-
-	// Represents the configuration that you want MSK to use for the cluster.
-	//
-	// ConfigurationInfo is a required field
-	ConfigurationInfo *ConfigurationInfo `locationName:"configurationInfo" type:"structure" required:"true"`
-
-	// The version of the cluster that you want to update.
-	//
-	// CurrentVersion is a required field
-	CurrentVersion *string `locationName:"currentVersion" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s UpdateClusterConfigurationInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateClusterConfigurationInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateClusterConfigurationInput"}
-
-	if s.ClusterArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ClusterArn"))
-	}
-
-	if s.ConfigurationInfo == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ConfigurationInfo"))
-	}
-
-	if s.CurrentVersion == nil {
-		invalidParams.Add(aws.NewErrParamRequired("CurrentVersion"))
-	}
-	if s.ConfigurationInfo != nil {
-		if err := s.ConfigurationInfo.Validate(); err != nil {
-			invalidParams.AddNested("ConfigurationInfo", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s UpdateClusterConfigurationInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.ConfigurationInfo != nil {
-		v := s.ConfigurationInfo
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "configurationInfo", v, metadata)
-	}
-	if s.CurrentVersion != nil {
-		v := *s.CurrentVersion
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "currentVersion", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.ClusterArn != nil {
-		v := *s.ClusterArn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "clusterArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-// Response body for UpdateClusterConfiguration.
-type UpdateClusterConfigurationOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the cluster.
-	ClusterArn *string `locationName:"clusterArn" type:"string"`
-
-	// The Amazon Resource Name (ARN) of the cluster operation.
-	ClusterOperationArn *string `locationName:"clusterOperationArn" type:"string"`
-}
-
-// String returns the string representation
-func (s UpdateClusterConfigurationOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s UpdateClusterConfigurationOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.ClusterArn != nil {
-		v := *s.ClusterArn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "clusterArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.ClusterOperationArn != nil {
-		v := *s.ClusterOperationArn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "clusterOperationArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opUpdateClusterConfiguration = "UpdateClusterConfiguration"
 
@@ -134,7 +25,7 @@ const opUpdateClusterConfiguration = "UpdateClusterConfiguration"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/UpdateClusterConfiguration
-func (c *Client) UpdateClusterConfigurationRequest(input *UpdateClusterConfigurationInput) UpdateClusterConfigurationRequest {
+func (c *Client) UpdateClusterConfigurationRequest(input *types.UpdateClusterConfigurationInput) UpdateClusterConfigurationRequest {
 	op := &aws.Operation{
 		Name:       opUpdateClusterConfiguration,
 		HTTPMethod: "PUT",
@@ -142,10 +33,10 @@ func (c *Client) UpdateClusterConfigurationRequest(input *UpdateClusterConfigura
 	}
 
 	if input == nil {
-		input = &UpdateClusterConfigurationInput{}
+		input = &types.UpdateClusterConfigurationInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateClusterConfigurationOutput{})
+	req := c.newRequest(op, input, &types.UpdateClusterConfigurationOutput{})
 	return UpdateClusterConfigurationRequest{Request: req, Input: input, Copy: c.UpdateClusterConfigurationRequest}
 }
 
@@ -153,8 +44,8 @@ func (c *Client) UpdateClusterConfigurationRequest(input *UpdateClusterConfigura
 // UpdateClusterConfiguration API operation.
 type UpdateClusterConfigurationRequest struct {
 	*aws.Request
-	Input *UpdateClusterConfigurationInput
-	Copy  func(*UpdateClusterConfigurationInput) UpdateClusterConfigurationRequest
+	Input *types.UpdateClusterConfigurationInput
+	Copy  func(*types.UpdateClusterConfigurationInput) UpdateClusterConfigurationRequest
 }
 
 // Send marshals and sends the UpdateClusterConfiguration API request.
@@ -166,7 +57,7 @@ func (r UpdateClusterConfigurationRequest) Send(ctx context.Context) (*UpdateClu
 	}
 
 	resp := &UpdateClusterConfigurationResponse{
-		UpdateClusterConfigurationOutput: r.Request.Data.(*UpdateClusterConfigurationOutput),
+		UpdateClusterConfigurationOutput: r.Request.Data.(*types.UpdateClusterConfigurationOutput),
 		response:                         &aws.Response{Request: r.Request},
 	}
 
@@ -176,7 +67,7 @@ func (r UpdateClusterConfigurationRequest) Send(ctx context.Context) (*UpdateClu
 // UpdateClusterConfigurationResponse is the response type for the
 // UpdateClusterConfiguration API operation.
 type UpdateClusterConfigurationResponse struct {
-	*UpdateClusterConfigurationOutput
+	*types.UpdateClusterConfigurationOutput
 
 	response *aws.Response
 }

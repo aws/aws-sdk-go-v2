@@ -4,75 +4,10 @@ package rds
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/rds/types"
 )
-
-type DescribeEventSubscriptionsInput struct {
-	_ struct{} `type:"structure"`
-
-	// This parameter is not currently supported.
-	Filters []Filter `locationNameList:"Filter" type:"list"`
-
-	// An optional pagination token provided by a previous DescribeOrderableDBInstanceOptions
-	// request. If this parameter is specified, the response includes only records
-	// beyond the marker, up to the value specified by MaxRecords .
-	Marker *string `type:"string"`
-
-	// The maximum number of records to include in the response. If more records
-	// exist than the specified MaxRecords value, a pagination token called a marker
-	// is included in the response so that you can retrieve the remaining results.
-	//
-	// Default: 100
-	//
-	// Constraints: Minimum 20, maximum 100.
-	MaxRecords *int64 `type:"integer"`
-
-	// The name of the RDS event notification subscription you want to describe.
-	SubscriptionName *string `type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeEventSubscriptionsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeEventSubscriptionsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeEventSubscriptionsInput"}
-	if s.Filters != nil {
-		for i, v := range s.Filters {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Data returned by the DescribeEventSubscriptions action.
-type DescribeEventSubscriptionsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A list of EventSubscriptions data types.
-	EventSubscriptionsList []EventSubscription `locationNameList:"EventSubscription" type:"list"`
-
-	// An optional pagination token provided by a previous DescribeOrderableDBInstanceOptions
-	// request. If this parameter is specified, the response includes only records
-	// beyond the marker, up to the value specified by MaxRecords.
-	Marker *string `type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeEventSubscriptionsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeEventSubscriptions = "DescribeEventSubscriptions"
 
@@ -93,7 +28,7 @@ const opDescribeEventSubscriptions = "DescribeEventSubscriptions"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeEventSubscriptions
-func (c *Client) DescribeEventSubscriptionsRequest(input *DescribeEventSubscriptionsInput) DescribeEventSubscriptionsRequest {
+func (c *Client) DescribeEventSubscriptionsRequest(input *types.DescribeEventSubscriptionsInput) DescribeEventSubscriptionsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeEventSubscriptions,
 		HTTPMethod: "POST",
@@ -107,10 +42,10 @@ func (c *Client) DescribeEventSubscriptionsRequest(input *DescribeEventSubscript
 	}
 
 	if input == nil {
-		input = &DescribeEventSubscriptionsInput{}
+		input = &types.DescribeEventSubscriptionsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeEventSubscriptionsOutput{})
+	req := c.newRequest(op, input, &types.DescribeEventSubscriptionsOutput{})
 	return DescribeEventSubscriptionsRequest{Request: req, Input: input, Copy: c.DescribeEventSubscriptionsRequest}
 }
 
@@ -118,8 +53,8 @@ func (c *Client) DescribeEventSubscriptionsRequest(input *DescribeEventSubscript
 // DescribeEventSubscriptions API operation.
 type DescribeEventSubscriptionsRequest struct {
 	*aws.Request
-	Input *DescribeEventSubscriptionsInput
-	Copy  func(*DescribeEventSubscriptionsInput) DescribeEventSubscriptionsRequest
+	Input *types.DescribeEventSubscriptionsInput
+	Copy  func(*types.DescribeEventSubscriptionsInput) DescribeEventSubscriptionsRequest
 }
 
 // Send marshals and sends the DescribeEventSubscriptions API request.
@@ -131,7 +66,7 @@ func (r DescribeEventSubscriptionsRequest) Send(ctx context.Context) (*DescribeE
 	}
 
 	resp := &DescribeEventSubscriptionsResponse{
-		DescribeEventSubscriptionsOutput: r.Request.Data.(*DescribeEventSubscriptionsOutput),
+		DescribeEventSubscriptionsOutput: r.Request.Data.(*types.DescribeEventSubscriptionsOutput),
 		response:                         &aws.Response{Request: r.Request},
 	}
 
@@ -161,7 +96,7 @@ func NewDescribeEventSubscriptionsPaginator(req DescribeEventSubscriptionsReques
 	return DescribeEventSubscriptionsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *DescribeEventSubscriptionsInput
+				var inCpy *types.DescribeEventSubscriptionsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -181,14 +116,14 @@ type DescribeEventSubscriptionsPaginator struct {
 	aws.Pager
 }
 
-func (p *DescribeEventSubscriptionsPaginator) CurrentPage() *DescribeEventSubscriptionsOutput {
-	return p.Pager.CurrentPage().(*DescribeEventSubscriptionsOutput)
+func (p *DescribeEventSubscriptionsPaginator) CurrentPage() *types.DescribeEventSubscriptionsOutput {
+	return p.Pager.CurrentPage().(*types.DescribeEventSubscriptionsOutput)
 }
 
 // DescribeEventSubscriptionsResponse is the response type for the
 // DescribeEventSubscriptions API operation.
 type DescribeEventSubscriptionsResponse struct {
-	*DescribeEventSubscriptionsOutput
+	*types.DescribeEventSubscriptionsOutput
 
 	response *aws.Response
 }

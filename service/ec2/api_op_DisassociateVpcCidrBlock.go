@@ -6,54 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-type DisassociateVpcCidrBlockInput struct {
-	_ struct{} `type:"structure"`
-
-	// The association ID for the CIDR block.
-	//
-	// AssociationId is a required field
-	AssociationId *string `locationName:"associationId" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DisassociateVpcCidrBlockInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DisassociateVpcCidrBlockInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DisassociateVpcCidrBlockInput"}
-
-	if s.AssociationId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("AssociationId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DisassociateVpcCidrBlockOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Information about the IPv4 CIDR block association.
-	CidrBlockAssociation *VpcCidrBlockAssociation `locationName:"cidrBlockAssociation" type:"structure"`
-
-	// Information about the IPv6 CIDR block association.
-	Ipv6CidrBlockAssociation *VpcIpv6CidrBlockAssociation `locationName:"ipv6CidrBlockAssociation" type:"structure"`
-
-	// The ID of the VPC.
-	VpcId *string `locationName:"vpcId" type:"string"`
-}
-
-// String returns the string representation
-func (s DisassociateVpcCidrBlockOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDisassociateVpcCidrBlock = "DisassociateVpcCidrBlock"
 
@@ -76,7 +30,7 @@ const opDisassociateVpcCidrBlock = "DisassociateVpcCidrBlock"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DisassociateVpcCidrBlock
-func (c *Client) DisassociateVpcCidrBlockRequest(input *DisassociateVpcCidrBlockInput) DisassociateVpcCidrBlockRequest {
+func (c *Client) DisassociateVpcCidrBlockRequest(input *types.DisassociateVpcCidrBlockInput) DisassociateVpcCidrBlockRequest {
 	op := &aws.Operation{
 		Name:       opDisassociateVpcCidrBlock,
 		HTTPMethod: "POST",
@@ -84,10 +38,10 @@ func (c *Client) DisassociateVpcCidrBlockRequest(input *DisassociateVpcCidrBlock
 	}
 
 	if input == nil {
-		input = &DisassociateVpcCidrBlockInput{}
+		input = &types.DisassociateVpcCidrBlockInput{}
 	}
 
-	req := c.newRequest(op, input, &DisassociateVpcCidrBlockOutput{})
+	req := c.newRequest(op, input, &types.DisassociateVpcCidrBlockOutput{})
 	return DisassociateVpcCidrBlockRequest{Request: req, Input: input, Copy: c.DisassociateVpcCidrBlockRequest}
 }
 
@@ -95,8 +49,8 @@ func (c *Client) DisassociateVpcCidrBlockRequest(input *DisassociateVpcCidrBlock
 // DisassociateVpcCidrBlock API operation.
 type DisassociateVpcCidrBlockRequest struct {
 	*aws.Request
-	Input *DisassociateVpcCidrBlockInput
-	Copy  func(*DisassociateVpcCidrBlockInput) DisassociateVpcCidrBlockRequest
+	Input *types.DisassociateVpcCidrBlockInput
+	Copy  func(*types.DisassociateVpcCidrBlockInput) DisassociateVpcCidrBlockRequest
 }
 
 // Send marshals and sends the DisassociateVpcCidrBlock API request.
@@ -108,7 +62,7 @@ func (r DisassociateVpcCidrBlockRequest) Send(ctx context.Context) (*Disassociat
 	}
 
 	resp := &DisassociateVpcCidrBlockResponse{
-		DisassociateVpcCidrBlockOutput: r.Request.Data.(*DisassociateVpcCidrBlockOutput),
+		DisassociateVpcCidrBlockOutput: r.Request.Data.(*types.DisassociateVpcCidrBlockOutput),
 		response:                       &aws.Response{Request: r.Request},
 	}
 
@@ -118,7 +72,7 @@ func (r DisassociateVpcCidrBlockRequest) Send(ctx context.Context) (*Disassociat
 // DisassociateVpcCidrBlockResponse is the response type for the
 // DisassociateVpcCidrBlock API operation.
 type DisassociateVpcCidrBlockResponse struct {
-	*DisassociateVpcCidrBlockOutput
+	*types.DisassociateVpcCidrBlockOutput
 
 	response *aws.Response
 }

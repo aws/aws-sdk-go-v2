@@ -6,47 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
 )
-
-type DeleteNotebookInstanceInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the Amazon SageMaker notebook instance to delete.
-	//
-	// NotebookInstanceName is a required field
-	NotebookInstanceName *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteNotebookInstanceInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteNotebookInstanceInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteNotebookInstanceInput"}
-
-	if s.NotebookInstanceName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("NotebookInstanceName"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteNotebookInstanceOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteNotebookInstanceOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteNotebookInstance = "DeleteNotebookInstance"
 
@@ -68,7 +31,7 @@ const opDeleteNotebookInstance = "DeleteNotebookInstance"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DeleteNotebookInstance
-func (c *Client) DeleteNotebookInstanceRequest(input *DeleteNotebookInstanceInput) DeleteNotebookInstanceRequest {
+func (c *Client) DeleteNotebookInstanceRequest(input *types.DeleteNotebookInstanceInput) DeleteNotebookInstanceRequest {
 	op := &aws.Operation{
 		Name:       opDeleteNotebookInstance,
 		HTTPMethod: "POST",
@@ -76,10 +39,10 @@ func (c *Client) DeleteNotebookInstanceRequest(input *DeleteNotebookInstanceInpu
 	}
 
 	if input == nil {
-		input = &DeleteNotebookInstanceInput{}
+		input = &types.DeleteNotebookInstanceInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteNotebookInstanceOutput{})
+	req := c.newRequest(op, input, &types.DeleteNotebookInstanceOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return DeleteNotebookInstanceRequest{Request: req, Input: input, Copy: c.DeleteNotebookInstanceRequest}
@@ -89,8 +52,8 @@ func (c *Client) DeleteNotebookInstanceRequest(input *DeleteNotebookInstanceInpu
 // DeleteNotebookInstance API operation.
 type DeleteNotebookInstanceRequest struct {
 	*aws.Request
-	Input *DeleteNotebookInstanceInput
-	Copy  func(*DeleteNotebookInstanceInput) DeleteNotebookInstanceRequest
+	Input *types.DeleteNotebookInstanceInput
+	Copy  func(*types.DeleteNotebookInstanceInput) DeleteNotebookInstanceRequest
 }
 
 // Send marshals and sends the DeleteNotebookInstance API request.
@@ -102,7 +65,7 @@ func (r DeleteNotebookInstanceRequest) Send(ctx context.Context) (*DeleteNoteboo
 	}
 
 	resp := &DeleteNotebookInstanceResponse{
-		DeleteNotebookInstanceOutput: r.Request.Data.(*DeleteNotebookInstanceOutput),
+		DeleteNotebookInstanceOutput: r.Request.Data.(*types.DeleteNotebookInstanceOutput),
 		response:                     &aws.Response{Request: r.Request},
 	}
 
@@ -112,7 +75,7 @@ func (r DeleteNotebookInstanceRequest) Send(ctx context.Context) (*DeleteNoteboo
 // DeleteNotebookInstanceResponse is the response type for the
 // DeleteNotebookInstance API operation.
 type DeleteNotebookInstanceResponse struct {
-	*DeleteNotebookInstanceOutput
+	*types.DeleteNotebookInstanceOutput
 
 	response *aws.Response
 }

@@ -6,66 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/acm/types"
 )
-
-type ListCertificatesInput struct {
-	_ struct{} `type:"structure"`
-
-	// Filter the certificate list by status value.
-	CertificateStatuses []CertificateStatus `type:"list"`
-
-	// Filter the certificate list. For more information, see the Filters structure.
-	Includes *Filters `type:"structure"`
-
-	// Use this parameter when paginating results to specify the maximum number
-	// of items to return in the response. If additional items exist beyond the
-	// number you specify, the NextToken element is sent in the response. Use this
-	// NextToken value in a subsequent request to retrieve additional items.
-	MaxItems *int64 `min:"1" type:"integer"`
-
-	// Use this parameter only when paginating results and only in a subsequent
-	// request after you receive a response with truncated results. Set it to the
-	// value of NextToken from the response you just received.
-	NextToken *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s ListCertificatesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListCertificatesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListCertificatesInput"}
-	if s.MaxItems != nil && *s.MaxItems < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxItems", 1))
-	}
-	if s.NextToken != nil && len(*s.NextToken) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ListCertificatesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A list of ACM certificates.
-	CertificateSummaryList []CertificateSummary `type:"list"`
-
-	// When the list is truncated, this value is present and contains the value
-	// to use for the NextToken parameter in a subsequent pagination request.
-	NextToken *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s ListCertificatesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListCertificates = "ListCertificates"
 
@@ -84,7 +26,7 @@ const opListCertificates = "ListCertificates"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/ListCertificates
-func (c *Client) ListCertificatesRequest(input *ListCertificatesInput) ListCertificatesRequest {
+func (c *Client) ListCertificatesRequest(input *types.ListCertificatesInput) ListCertificatesRequest {
 	op := &aws.Operation{
 		Name:       opListCertificates,
 		HTTPMethod: "POST",
@@ -98,10 +40,10 @@ func (c *Client) ListCertificatesRequest(input *ListCertificatesInput) ListCerti
 	}
 
 	if input == nil {
-		input = &ListCertificatesInput{}
+		input = &types.ListCertificatesInput{}
 	}
 
-	req := c.newRequest(op, input, &ListCertificatesOutput{})
+	req := c.newRequest(op, input, &types.ListCertificatesOutput{})
 	return ListCertificatesRequest{Request: req, Input: input, Copy: c.ListCertificatesRequest}
 }
 
@@ -109,8 +51,8 @@ func (c *Client) ListCertificatesRequest(input *ListCertificatesInput) ListCerti
 // ListCertificates API operation.
 type ListCertificatesRequest struct {
 	*aws.Request
-	Input *ListCertificatesInput
-	Copy  func(*ListCertificatesInput) ListCertificatesRequest
+	Input *types.ListCertificatesInput
+	Copy  func(*types.ListCertificatesInput) ListCertificatesRequest
 }
 
 // Send marshals and sends the ListCertificates API request.
@@ -122,7 +64,7 @@ func (r ListCertificatesRequest) Send(ctx context.Context) (*ListCertificatesRes
 	}
 
 	resp := &ListCertificatesResponse{
-		ListCertificatesOutput: r.Request.Data.(*ListCertificatesOutput),
+		ListCertificatesOutput: r.Request.Data.(*types.ListCertificatesOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -152,7 +94,7 @@ func NewListCertificatesPaginator(req ListCertificatesRequest) ListCertificatesP
 	return ListCertificatesPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListCertificatesInput
+				var inCpy *types.ListCertificatesInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -172,14 +114,14 @@ type ListCertificatesPaginator struct {
 	aws.Pager
 }
 
-func (p *ListCertificatesPaginator) CurrentPage() *ListCertificatesOutput {
-	return p.Pager.CurrentPage().(*ListCertificatesOutput)
+func (p *ListCertificatesPaginator) CurrentPage() *types.ListCertificatesOutput {
+	return p.Pager.CurrentPage().(*types.ListCertificatesOutput)
 }
 
 // ListCertificatesResponse is the response type for the
 // ListCertificates API operation.
 type ListCertificatesResponse struct {
-	*ListCertificatesOutput
+	*types.ListCertificatesOutput
 
 	response *aws.Response
 }

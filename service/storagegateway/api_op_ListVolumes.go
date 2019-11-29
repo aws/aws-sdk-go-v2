@@ -6,82 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/storagegateway/types"
 )
-
-// A JSON object that contains one or more of the following fields:
-//
-//    * ListVolumesInput$Limit
-//
-//    * ListVolumesInput$Marker
-type ListVolumesInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation
-	// to return a list of gateways for your account and AWS Region.
-	GatewayARN *string `min:"50" type:"string"`
-
-	// Specifies that the list of volumes returned be limited to the specified number
-	// of items.
-	Limit *int64 `min:"1" type:"integer"`
-
-	// A string that indicates the position at which to begin the returned list
-	// of volumes. Obtain the marker from the response of a previous List iSCSI
-	// Volumes request.
-	Marker *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s ListVolumesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListVolumesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListVolumesInput"}
-	if s.GatewayARN != nil && len(*s.GatewayARN) < 50 {
-		invalidParams.Add(aws.NewErrParamMinLen("GatewayARN", 50))
-	}
-	if s.Limit != nil && *s.Limit < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("Limit", 1))
-	}
-	if s.Marker != nil && len(*s.Marker) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Marker", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// A JSON object containing the following fields:
-//
-//    * ListVolumesOutput$Marker
-//
-//    * ListVolumesOutput$VolumeInfos
-type ListVolumesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation
-	// to return a list of gateways for your account and AWS Region.
-	GatewayARN *string `min:"50" type:"string"`
-
-	// Use the marker in your next request to continue pagination of iSCSI volumes.
-	// If there are no more volumes to list, this field does not appear in the response
-	// body.
-	Marker *string `min:"1" type:"string"`
-
-	// An array of VolumeInfo objects, where each object describes an iSCSI volume.
-	// If no volumes are defined for the gateway, then VolumeInfos is an empty array
-	// "[]".
-	VolumeInfos []VolumeInfo `type:"list"`
-}
-
-// String returns the string representation
-func (s ListVolumesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListVolumes = "ListVolumes"
 
@@ -109,7 +35,7 @@ const opListVolumes = "ListVolumes"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/ListVolumes
-func (c *Client) ListVolumesRequest(input *ListVolumesInput) ListVolumesRequest {
+func (c *Client) ListVolumesRequest(input *types.ListVolumesInput) ListVolumesRequest {
 	op := &aws.Operation{
 		Name:       opListVolumes,
 		HTTPMethod: "POST",
@@ -123,10 +49,10 @@ func (c *Client) ListVolumesRequest(input *ListVolumesInput) ListVolumesRequest 
 	}
 
 	if input == nil {
-		input = &ListVolumesInput{}
+		input = &types.ListVolumesInput{}
 	}
 
-	req := c.newRequest(op, input, &ListVolumesOutput{})
+	req := c.newRequest(op, input, &types.ListVolumesOutput{})
 	return ListVolumesRequest{Request: req, Input: input, Copy: c.ListVolumesRequest}
 }
 
@@ -134,8 +60,8 @@ func (c *Client) ListVolumesRequest(input *ListVolumesInput) ListVolumesRequest 
 // ListVolumes API operation.
 type ListVolumesRequest struct {
 	*aws.Request
-	Input *ListVolumesInput
-	Copy  func(*ListVolumesInput) ListVolumesRequest
+	Input *types.ListVolumesInput
+	Copy  func(*types.ListVolumesInput) ListVolumesRequest
 }
 
 // Send marshals and sends the ListVolumes API request.
@@ -147,7 +73,7 @@ func (r ListVolumesRequest) Send(ctx context.Context) (*ListVolumesResponse, err
 	}
 
 	resp := &ListVolumesResponse{
-		ListVolumesOutput: r.Request.Data.(*ListVolumesOutput),
+		ListVolumesOutput: r.Request.Data.(*types.ListVolumesOutput),
 		response:          &aws.Response{Request: r.Request},
 	}
 
@@ -177,7 +103,7 @@ func NewListVolumesPaginator(req ListVolumesRequest) ListVolumesPaginator {
 	return ListVolumesPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListVolumesInput
+				var inCpy *types.ListVolumesInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -197,14 +123,14 @@ type ListVolumesPaginator struct {
 	aws.Pager
 }
 
-func (p *ListVolumesPaginator) CurrentPage() *ListVolumesOutput {
-	return p.Pager.CurrentPage().(*ListVolumesOutput)
+func (p *ListVolumesPaginator) CurrentPage() *types.ListVolumesOutput {
+	return p.Pager.CurrentPage().(*types.ListVolumesOutput)
 }
 
 // ListVolumesResponse is the response type for the
 // ListVolumes API operation.
 type ListVolumesResponse struct {
-	*ListVolumesOutput
+	*types.ListVolumesOutput
 
 	response *aws.Response
 }

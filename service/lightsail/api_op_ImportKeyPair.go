@@ -6,57 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/lightsail/types"
 )
-
-type ImportKeyPairInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the key pair for which you want to import the public key.
-	//
-	// KeyPairName is a required field
-	KeyPairName *string `locationName:"keyPairName" type:"string" required:"true"`
-
-	// A base64-encoded public key of the ssh-rsa type.
-	//
-	// PublicKeyBase64 is a required field
-	PublicKeyBase64 *string `locationName:"publicKeyBase64" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s ImportKeyPairInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ImportKeyPairInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ImportKeyPairInput"}
-
-	if s.KeyPairName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("KeyPairName"))
-	}
-
-	if s.PublicKeyBase64 == nil {
-		invalidParams.Add(aws.NewErrParamRequired("PublicKeyBase64"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ImportKeyPairOutput struct {
-	_ struct{} `type:"structure"`
-
-	// An array of key-value pairs containing information about the request operation.
-	Operation *Operation `locationName:"operation" type:"structure"`
-}
-
-// String returns the string representation
-func (s ImportKeyPairOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opImportKeyPair = "ImportKeyPair"
 
@@ -73,7 +24,7 @@ const opImportKeyPair = "ImportKeyPair"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/ImportKeyPair
-func (c *Client) ImportKeyPairRequest(input *ImportKeyPairInput) ImportKeyPairRequest {
+func (c *Client) ImportKeyPairRequest(input *types.ImportKeyPairInput) ImportKeyPairRequest {
 	op := &aws.Operation{
 		Name:       opImportKeyPair,
 		HTTPMethod: "POST",
@@ -81,10 +32,10 @@ func (c *Client) ImportKeyPairRequest(input *ImportKeyPairInput) ImportKeyPairRe
 	}
 
 	if input == nil {
-		input = &ImportKeyPairInput{}
+		input = &types.ImportKeyPairInput{}
 	}
 
-	req := c.newRequest(op, input, &ImportKeyPairOutput{})
+	req := c.newRequest(op, input, &types.ImportKeyPairOutput{})
 	return ImportKeyPairRequest{Request: req, Input: input, Copy: c.ImportKeyPairRequest}
 }
 
@@ -92,8 +43,8 @@ func (c *Client) ImportKeyPairRequest(input *ImportKeyPairInput) ImportKeyPairRe
 // ImportKeyPair API operation.
 type ImportKeyPairRequest struct {
 	*aws.Request
-	Input *ImportKeyPairInput
-	Copy  func(*ImportKeyPairInput) ImportKeyPairRequest
+	Input *types.ImportKeyPairInput
+	Copy  func(*types.ImportKeyPairInput) ImportKeyPairRequest
 }
 
 // Send marshals and sends the ImportKeyPair API request.
@@ -105,7 +56,7 @@ func (r ImportKeyPairRequest) Send(ctx context.Context) (*ImportKeyPairResponse,
 	}
 
 	resp := &ImportKeyPairResponse{
-		ImportKeyPairOutput: r.Request.Data.(*ImportKeyPairOutput),
+		ImportKeyPairOutput: r.Request.Data.(*types.ImportKeyPairOutput),
 		response:            &aws.Response{Request: r.Request},
 	}
 
@@ -115,7 +66,7 @@ func (r ImportKeyPairRequest) Send(ctx context.Context) (*ImportKeyPairResponse,
 // ImportKeyPairResponse is the response type for the
 // ImportKeyPair API operation.
 type ImportKeyPairResponse struct {
-	*ImportKeyPairOutput
+	*types.ImportKeyPairOutput
 
 	response *aws.Response
 }

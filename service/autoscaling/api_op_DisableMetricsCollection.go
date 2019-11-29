@@ -6,70 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/query"
+	"github.com/aws/aws-sdk-go-v2/service/autoscaling/types"
 )
-
-type DisableMetricsCollectionInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the Auto Scaling group.
-	//
-	// AutoScalingGroupName is a required field
-	AutoScalingGroupName *string `min:"1" type:"string" required:"true"`
-
-	// One or more of the following metrics. If you omit this parameter, all metrics
-	// are disabled.
-	//
-	//    * GroupMinSize
-	//
-	//    * GroupMaxSize
-	//
-	//    * GroupDesiredCapacity
-	//
-	//    * GroupInServiceInstances
-	//
-	//    * GroupPendingInstances
-	//
-	//    * GroupStandbyInstances
-	//
-	//    * GroupTerminatingInstances
-	//
-	//    * GroupTotalInstances
-	Metrics []string `type:"list"`
-}
-
-// String returns the string representation
-func (s DisableMetricsCollectionInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DisableMetricsCollectionInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DisableMetricsCollectionInput"}
-
-	if s.AutoScalingGroupName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("AutoScalingGroupName"))
-	}
-	if s.AutoScalingGroupName != nil && len(*s.AutoScalingGroupName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("AutoScalingGroupName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DisableMetricsCollectionOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DisableMetricsCollectionOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDisableMetricsCollection = "DisableMetricsCollection"
 
@@ -86,7 +26,7 @@ const opDisableMetricsCollection = "DisableMetricsCollection"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DisableMetricsCollection
-func (c *Client) DisableMetricsCollectionRequest(input *DisableMetricsCollectionInput) DisableMetricsCollectionRequest {
+func (c *Client) DisableMetricsCollectionRequest(input *types.DisableMetricsCollectionInput) DisableMetricsCollectionRequest {
 	op := &aws.Operation{
 		Name:       opDisableMetricsCollection,
 		HTTPMethod: "POST",
@@ -94,10 +34,10 @@ func (c *Client) DisableMetricsCollectionRequest(input *DisableMetricsCollection
 	}
 
 	if input == nil {
-		input = &DisableMetricsCollectionInput{}
+		input = &types.DisableMetricsCollectionInput{}
 	}
 
-	req := c.newRequest(op, input, &DisableMetricsCollectionOutput{})
+	req := c.newRequest(op, input, &types.DisableMetricsCollectionOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return DisableMetricsCollectionRequest{Request: req, Input: input, Copy: c.DisableMetricsCollectionRequest}
@@ -107,8 +47,8 @@ func (c *Client) DisableMetricsCollectionRequest(input *DisableMetricsCollection
 // DisableMetricsCollection API operation.
 type DisableMetricsCollectionRequest struct {
 	*aws.Request
-	Input *DisableMetricsCollectionInput
-	Copy  func(*DisableMetricsCollectionInput) DisableMetricsCollectionRequest
+	Input *types.DisableMetricsCollectionInput
+	Copy  func(*types.DisableMetricsCollectionInput) DisableMetricsCollectionRequest
 }
 
 // Send marshals and sends the DisableMetricsCollection API request.
@@ -120,7 +60,7 @@ func (r DisableMetricsCollectionRequest) Send(ctx context.Context) (*DisableMetr
 	}
 
 	resp := &DisableMetricsCollectionResponse{
-		DisableMetricsCollectionOutput: r.Request.Data.(*DisableMetricsCollectionOutput),
+		DisableMetricsCollectionOutput: r.Request.Data.(*types.DisableMetricsCollectionOutput),
 		response:                       &aws.Response{Request: r.Request},
 	}
 
@@ -130,7 +70,7 @@ func (r DisableMetricsCollectionRequest) Send(ctx context.Context) (*DisableMetr
 // DisableMetricsCollectionResponse is the response type for the
 // DisableMetricsCollection API operation.
 type DisableMetricsCollectionResponse struct {
-	*DisableMetricsCollectionOutput
+	*types.DisableMetricsCollectionOutput
 
 	response *aws.Response
 }

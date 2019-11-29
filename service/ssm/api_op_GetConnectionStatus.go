@@ -6,55 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ssm/types"
 )
-
-type GetConnectionStatusInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the instance.
-	//
-	// Target is a required field
-	Target *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetConnectionStatusInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetConnectionStatusInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetConnectionStatusInput"}
-
-	if s.Target == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Target"))
-	}
-	if s.Target != nil && len(*s.Target) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Target", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type GetConnectionStatusOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The status of the connection to the instance. For example, 'Connected' or
-	// 'Not Connected'.
-	Status ConnectionStatus `type:"string" enum:"true"`
-
-	// The ID of the instance to check connection status.
-	Target *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s GetConnectionStatusOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetConnectionStatus = "GetConnectionStatus"
 
@@ -72,7 +25,7 @@ const opGetConnectionStatus = "GetConnectionStatus"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetConnectionStatus
-func (c *Client) GetConnectionStatusRequest(input *GetConnectionStatusInput) GetConnectionStatusRequest {
+func (c *Client) GetConnectionStatusRequest(input *types.GetConnectionStatusInput) GetConnectionStatusRequest {
 	op := &aws.Operation{
 		Name:       opGetConnectionStatus,
 		HTTPMethod: "POST",
@@ -80,10 +33,10 @@ func (c *Client) GetConnectionStatusRequest(input *GetConnectionStatusInput) Get
 	}
 
 	if input == nil {
-		input = &GetConnectionStatusInput{}
+		input = &types.GetConnectionStatusInput{}
 	}
 
-	req := c.newRequest(op, input, &GetConnectionStatusOutput{})
+	req := c.newRequest(op, input, &types.GetConnectionStatusOutput{})
 	return GetConnectionStatusRequest{Request: req, Input: input, Copy: c.GetConnectionStatusRequest}
 }
 
@@ -91,8 +44,8 @@ func (c *Client) GetConnectionStatusRequest(input *GetConnectionStatusInput) Get
 // GetConnectionStatus API operation.
 type GetConnectionStatusRequest struct {
 	*aws.Request
-	Input *GetConnectionStatusInput
-	Copy  func(*GetConnectionStatusInput) GetConnectionStatusRequest
+	Input *types.GetConnectionStatusInput
+	Copy  func(*types.GetConnectionStatusInput) GetConnectionStatusRequest
 }
 
 // Send marshals and sends the GetConnectionStatus API request.
@@ -104,7 +57,7 @@ func (r GetConnectionStatusRequest) Send(ctx context.Context) (*GetConnectionSta
 	}
 
 	resp := &GetConnectionStatusResponse{
-		GetConnectionStatusOutput: r.Request.Data.(*GetConnectionStatusOutput),
+		GetConnectionStatusOutput: r.Request.Data.(*types.GetConnectionStatusOutput),
 		response:                  &aws.Response{Request: r.Request},
 	}
 
@@ -114,7 +67,7 @@ func (r GetConnectionStatusRequest) Send(ctx context.Context) (*GetConnectionSta
 // GetConnectionStatusResponse is the response type for the
 // GetConnectionStatus API operation.
 type GetConnectionStatusResponse struct {
-	*GetConnectionStatusOutput
+	*types.GetConnectionStatusOutput
 
 	response *aws.Response
 }

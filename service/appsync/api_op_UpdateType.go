@@ -6,111 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/appsync/types"
 )
-
-type UpdateTypeInput struct {
-	_ struct{} `type:"structure"`
-
-	// The API ID.
-	//
-	// ApiId is a required field
-	ApiId *string `location:"uri" locationName:"apiId" type:"string" required:"true"`
-
-	// The new definition.
-	Definition *string `locationName:"definition" type:"string"`
-
-	// The new type format: SDL or JSON.
-	//
-	// Format is a required field
-	Format TypeDefinitionFormat `locationName:"format" type:"string" required:"true" enum:"true"`
-
-	// The new type name.
-	//
-	// TypeName is a required field
-	TypeName *string `location:"uri" locationName:"typeName" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s UpdateTypeInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateTypeInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateTypeInput"}
-
-	if s.ApiId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ApiId"))
-	}
-	if len(s.Format) == 0 {
-		invalidParams.Add(aws.NewErrParamRequired("Format"))
-	}
-
-	if s.TypeName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("TypeName"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s UpdateTypeInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.Definition != nil {
-		v := *s.Definition
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "definition", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if len(s.Format) > 0 {
-		v := s.Format
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "format", protocol.QuotedValue{ValueMarshaler: v}, metadata)
-	}
-	if s.ApiId != nil {
-		v := *s.ApiId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "apiId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.TypeName != nil {
-		v := *s.TypeName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "typeName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type UpdateTypeOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The updated Type object.
-	Type *Type `locationName:"type" type:"structure"`
-}
-
-// String returns the string representation
-func (s UpdateTypeOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s UpdateTypeOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.Type != nil {
-		v := s.Type
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "type", v, metadata)
-	}
-	return nil
-}
 
 const opUpdateType = "UpdateType"
 
@@ -127,7 +24,7 @@ const opUpdateType = "UpdateType"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/UpdateType
-func (c *Client) UpdateTypeRequest(input *UpdateTypeInput) UpdateTypeRequest {
+func (c *Client) UpdateTypeRequest(input *types.UpdateTypeInput) UpdateTypeRequest {
 	op := &aws.Operation{
 		Name:       opUpdateType,
 		HTTPMethod: "POST",
@@ -135,10 +32,10 @@ func (c *Client) UpdateTypeRequest(input *UpdateTypeInput) UpdateTypeRequest {
 	}
 
 	if input == nil {
-		input = &UpdateTypeInput{}
+		input = &types.UpdateTypeInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateTypeOutput{})
+	req := c.newRequest(op, input, &types.UpdateTypeOutput{})
 	return UpdateTypeRequest{Request: req, Input: input, Copy: c.UpdateTypeRequest}
 }
 
@@ -146,8 +43,8 @@ func (c *Client) UpdateTypeRequest(input *UpdateTypeInput) UpdateTypeRequest {
 // UpdateType API operation.
 type UpdateTypeRequest struct {
 	*aws.Request
-	Input *UpdateTypeInput
-	Copy  func(*UpdateTypeInput) UpdateTypeRequest
+	Input *types.UpdateTypeInput
+	Copy  func(*types.UpdateTypeInput) UpdateTypeRequest
 }
 
 // Send marshals and sends the UpdateType API request.
@@ -159,7 +56,7 @@ func (r UpdateTypeRequest) Send(ctx context.Context) (*UpdateTypeResponse, error
 	}
 
 	resp := &UpdateTypeResponse{
-		UpdateTypeOutput: r.Request.Data.(*UpdateTypeOutput),
+		UpdateTypeOutput: r.Request.Data.(*types.UpdateTypeOutput),
 		response:         &aws.Response{Request: r.Request},
 	}
 
@@ -169,7 +66,7 @@ func (r UpdateTypeRequest) Send(ctx context.Context) (*UpdateTypeResponse, error
 // UpdateTypeResponse is the response type for the
 // UpdateType API operation.
 type UpdateTypeResponse struct {
-	*UpdateTypeOutput
+	*types.UpdateTypeOutput
 
 	response *aws.Response
 }

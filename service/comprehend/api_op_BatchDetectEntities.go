@@ -6,74 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/comprehend/types"
 )
-
-type BatchDetectEntitiesInput struct {
-	_ struct{} `type:"structure"`
-
-	// The language of the input documents. You can specify any of the primary languages
-	// supported by Amazon Comprehend: German ("de"), English ("en"), Spanish ("es"),
-	// French ("fr"), Italian ("it"), or Portuguese ("pt"). All documents must be
-	// in the same language.
-	//
-	// LanguageCode is a required field
-	LanguageCode LanguageCode `type:"string" required:"true" enum:"true"`
-
-	// A list containing the text of the input documents. The list can contain a
-	// maximum of 25 documents. Each document must contain fewer than 5,000 bytes
-	// of UTF-8 encoded characters.
-	//
-	// TextList is a required field
-	TextList []string `type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s BatchDetectEntitiesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *BatchDetectEntitiesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "BatchDetectEntitiesInput"}
-	if len(s.LanguageCode) == 0 {
-		invalidParams.Add(aws.NewErrParamRequired("LanguageCode"))
-	}
-
-	if s.TextList == nil {
-		invalidParams.Add(aws.NewErrParamRequired("TextList"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type BatchDetectEntitiesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A list containing one object for each document that contained an error. The
-	// results are sorted in ascending order by the Index field and match the order
-	// of the documents in the input list. If there are no errors in the batch,
-	// the ErrorList is empty.
-	//
-	// ErrorList is a required field
-	ErrorList []BatchItemError `type:"list" required:"true"`
-
-	// A list of objects containing the results of the operation. The results are
-	// sorted in ascending order by the Index field and match the order of the documents
-	// in the input list. If all of the documents contain an error, the ResultList
-	// is empty.
-	//
-	// ResultList is a required field
-	ResultList []BatchDetectEntitiesItemResult `type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s BatchDetectEntitiesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opBatchDetectEntities = "BatchDetectEntities"
 
@@ -91,7 +25,7 @@ const opBatchDetectEntities = "BatchDetectEntities"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/BatchDetectEntities
-func (c *Client) BatchDetectEntitiesRequest(input *BatchDetectEntitiesInput) BatchDetectEntitiesRequest {
+func (c *Client) BatchDetectEntitiesRequest(input *types.BatchDetectEntitiesInput) BatchDetectEntitiesRequest {
 	op := &aws.Operation{
 		Name:       opBatchDetectEntities,
 		HTTPMethod: "POST",
@@ -99,10 +33,10 @@ func (c *Client) BatchDetectEntitiesRequest(input *BatchDetectEntitiesInput) Bat
 	}
 
 	if input == nil {
-		input = &BatchDetectEntitiesInput{}
+		input = &types.BatchDetectEntitiesInput{}
 	}
 
-	req := c.newRequest(op, input, &BatchDetectEntitiesOutput{})
+	req := c.newRequest(op, input, &types.BatchDetectEntitiesOutput{})
 	return BatchDetectEntitiesRequest{Request: req, Input: input, Copy: c.BatchDetectEntitiesRequest}
 }
 
@@ -110,8 +44,8 @@ func (c *Client) BatchDetectEntitiesRequest(input *BatchDetectEntitiesInput) Bat
 // BatchDetectEntities API operation.
 type BatchDetectEntitiesRequest struct {
 	*aws.Request
-	Input *BatchDetectEntitiesInput
-	Copy  func(*BatchDetectEntitiesInput) BatchDetectEntitiesRequest
+	Input *types.BatchDetectEntitiesInput
+	Copy  func(*types.BatchDetectEntitiesInput) BatchDetectEntitiesRequest
 }
 
 // Send marshals and sends the BatchDetectEntities API request.
@@ -123,7 +57,7 @@ func (r BatchDetectEntitiesRequest) Send(ctx context.Context) (*BatchDetectEntit
 	}
 
 	resp := &BatchDetectEntitiesResponse{
-		BatchDetectEntitiesOutput: r.Request.Data.(*BatchDetectEntitiesOutput),
+		BatchDetectEntitiesOutput: r.Request.Data.(*types.BatchDetectEntitiesOutput),
 		response:                  &aws.Response{Request: r.Request},
 	}
 
@@ -133,7 +67,7 @@ func (r BatchDetectEntitiesRequest) Send(ctx context.Context) (*BatchDetectEntit
 // BatchDetectEntitiesResponse is the response type for the
 // BatchDetectEntities API operation.
 type BatchDetectEntitiesResponse struct {
-	*BatchDetectEntitiesOutput
+	*types.BatchDetectEntitiesOutput
 
 	response *aws.Response
 }

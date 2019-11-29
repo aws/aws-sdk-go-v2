@@ -6,72 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/swf/types"
 )
-
-type CountPendingActivityTasksInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the domain that contains the task list.
-	//
-	// Domain is a required field
-	Domain *string `locationName:"domain" min:"1" type:"string" required:"true"`
-
-	// The name of the task list.
-	//
-	// TaskList is a required field
-	TaskList *TaskList `locationName:"taskList" type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s CountPendingActivityTasksInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CountPendingActivityTasksInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CountPendingActivityTasksInput"}
-
-	if s.Domain == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Domain"))
-	}
-	if s.Domain != nil && len(*s.Domain) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Domain", 1))
-	}
-
-	if s.TaskList == nil {
-		invalidParams.Add(aws.NewErrParamRequired("TaskList"))
-	}
-	if s.TaskList != nil {
-		if err := s.TaskList.Validate(); err != nil {
-			invalidParams.AddNested("TaskList", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Contains the count of tasks in a task list.
-type CountPendingActivityTasksOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The number of tasks in the task list.
-	//
-	// Count is a required field
-	Count *int64 `locationName:"count" type:"integer" required:"true"`
-
-	// If set to true, indicates that the actual count was more than the maximum
-	// supported by this API and the count returned is the truncated value.
-	Truncated *bool `locationName:"truncated" type:"boolean"`
-}
-
-// String returns the string representation
-func (s CountPendingActivityTasksOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCountPendingActivityTasks = "CountPendingActivityTasks"
 
@@ -110,7 +46,7 @@ const opCountPendingActivityTasks = "CountPendingActivityTasks"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) CountPendingActivityTasksRequest(input *CountPendingActivityTasksInput) CountPendingActivityTasksRequest {
+func (c *Client) CountPendingActivityTasksRequest(input *types.CountPendingActivityTasksInput) CountPendingActivityTasksRequest {
 	op := &aws.Operation{
 		Name:       opCountPendingActivityTasks,
 		HTTPMethod: "POST",
@@ -118,10 +54,10 @@ func (c *Client) CountPendingActivityTasksRequest(input *CountPendingActivityTas
 	}
 
 	if input == nil {
-		input = &CountPendingActivityTasksInput{}
+		input = &types.CountPendingActivityTasksInput{}
 	}
 
-	req := c.newRequest(op, input, &CountPendingActivityTasksOutput{})
+	req := c.newRequest(op, input, &types.CountPendingActivityTasksOutput{})
 	return CountPendingActivityTasksRequest{Request: req, Input: input, Copy: c.CountPendingActivityTasksRequest}
 }
 
@@ -129,8 +65,8 @@ func (c *Client) CountPendingActivityTasksRequest(input *CountPendingActivityTas
 // CountPendingActivityTasks API operation.
 type CountPendingActivityTasksRequest struct {
 	*aws.Request
-	Input *CountPendingActivityTasksInput
-	Copy  func(*CountPendingActivityTasksInput) CountPendingActivityTasksRequest
+	Input *types.CountPendingActivityTasksInput
+	Copy  func(*types.CountPendingActivityTasksInput) CountPendingActivityTasksRequest
 }
 
 // Send marshals and sends the CountPendingActivityTasks API request.
@@ -142,7 +78,7 @@ func (r CountPendingActivityTasksRequest) Send(ctx context.Context) (*CountPendi
 	}
 
 	resp := &CountPendingActivityTasksResponse{
-		CountPendingActivityTasksOutput: r.Request.Data.(*CountPendingActivityTasksOutput),
+		CountPendingActivityTasksOutput: r.Request.Data.(*types.CountPendingActivityTasksOutput),
 		response:                        &aws.Response{Request: r.Request},
 	}
 
@@ -152,7 +88,7 @@ func (r CountPendingActivityTasksRequest) Send(ctx context.Context) (*CountPendi
 // CountPendingActivityTasksResponse is the response type for the
 // CountPendingActivityTasks API operation.
 type CountPendingActivityTasksResponse struct {
-	*CountPendingActivityTasksOutput
+	*types.CountPendingActivityTasksOutput
 
 	response *aws.Response
 }

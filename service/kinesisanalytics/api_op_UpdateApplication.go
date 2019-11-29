@@ -6,75 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/kinesisanalytics/types"
 )
-
-type UpdateApplicationInput struct {
-	_ struct{} `type:"structure"`
-
-	// Name of the Amazon Kinesis Analytics application to update.
-	//
-	// ApplicationName is a required field
-	ApplicationName *string `min:"1" type:"string" required:"true"`
-
-	// Describes application updates.
-	//
-	// ApplicationUpdate is a required field
-	ApplicationUpdate *ApplicationUpdate `type:"structure" required:"true"`
-
-	// The current application version ID. You can use the DescribeApplication (https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_DescribeApplication.html)
-	// operation to get this value.
-	//
-	// CurrentApplicationVersionId is a required field
-	CurrentApplicationVersionId *int64 `min:"1" type:"long" required:"true"`
-}
-
-// String returns the string representation
-func (s UpdateApplicationInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateApplicationInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateApplicationInput"}
-
-	if s.ApplicationName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ApplicationName"))
-	}
-	if s.ApplicationName != nil && len(*s.ApplicationName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ApplicationName", 1))
-	}
-
-	if s.ApplicationUpdate == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ApplicationUpdate"))
-	}
-
-	if s.CurrentApplicationVersionId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("CurrentApplicationVersionId"))
-	}
-	if s.CurrentApplicationVersionId != nil && *s.CurrentApplicationVersionId < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("CurrentApplicationVersionId", 1))
-	}
-	if s.ApplicationUpdate != nil {
-		if err := s.ApplicationUpdate.Validate(); err != nil {
-			invalidParams.AddNested("ApplicationUpdate", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type UpdateApplicationOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s UpdateApplicationOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opUpdateApplication = "UpdateApplication"
 
@@ -104,7 +37,7 @@ const opUpdateApplication = "UpdateApplication"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/UpdateApplication
-func (c *Client) UpdateApplicationRequest(input *UpdateApplicationInput) UpdateApplicationRequest {
+func (c *Client) UpdateApplicationRequest(input *types.UpdateApplicationInput) UpdateApplicationRequest {
 	op := &aws.Operation{
 		Name:       opUpdateApplication,
 		HTTPMethod: "POST",
@@ -112,10 +45,10 @@ func (c *Client) UpdateApplicationRequest(input *UpdateApplicationInput) UpdateA
 	}
 
 	if input == nil {
-		input = &UpdateApplicationInput{}
+		input = &types.UpdateApplicationInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateApplicationOutput{})
+	req := c.newRequest(op, input, &types.UpdateApplicationOutput{})
 	return UpdateApplicationRequest{Request: req, Input: input, Copy: c.UpdateApplicationRequest}
 }
 
@@ -123,8 +56,8 @@ func (c *Client) UpdateApplicationRequest(input *UpdateApplicationInput) UpdateA
 // UpdateApplication API operation.
 type UpdateApplicationRequest struct {
 	*aws.Request
-	Input *UpdateApplicationInput
-	Copy  func(*UpdateApplicationInput) UpdateApplicationRequest
+	Input *types.UpdateApplicationInput
+	Copy  func(*types.UpdateApplicationInput) UpdateApplicationRequest
 }
 
 // Send marshals and sends the UpdateApplication API request.
@@ -136,7 +69,7 @@ func (r UpdateApplicationRequest) Send(ctx context.Context) (*UpdateApplicationR
 	}
 
 	resp := &UpdateApplicationResponse{
-		UpdateApplicationOutput: r.Request.Data.(*UpdateApplicationOutput),
+		UpdateApplicationOutput: r.Request.Data.(*types.UpdateApplicationOutput),
 		response:                &aws.Response{Request: r.Request},
 	}
 
@@ -146,7 +79,7 @@ func (r UpdateApplicationRequest) Send(ctx context.Context) (*UpdateApplicationR
 // UpdateApplicationResponse is the response type for the
 // UpdateApplication API operation.
 type UpdateApplicationResponse struct {
-	*UpdateApplicationOutput
+	*types.UpdateApplicationOutput
 
 	response *aws.Response
 }

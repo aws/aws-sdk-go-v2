@@ -10,6 +10,7 @@ package dynamodbstreamsiface
 
 import (
 	"github.com/aws/aws-sdk-go-v2/service/dynamodbstreams"
+	"github.com/aws/aws-sdk-go-v2/service/dynamodbstreams/types"
 )
 
 // ClientAPI provides an interface to enable mocking the
@@ -43,7 +44,7 @@ import (
 //    type mockClientClient struct {
 //        dynamodbstreamsiface.ClientPI
 //    }
-//    func (m *mockClientClient) DescribeStream(input *dynamodbstreams.DescribeStreamInput) (*dynamodbstreams.DescribeStreamOutput, error) {
+//    func (m *mockClientClient) DescribeStream(input *types.DescribeStreamInput) (*types.DescribeStreamOutput, error) {
 //        // mock response/functionality
 //    }
 //
@@ -61,13 +62,13 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type ClientAPI interface {
-	DescribeStreamRequest(*dynamodbstreams.DescribeStreamInput) dynamodbstreams.DescribeStreamRequest
+	DescribeStreamRequest(*types.DescribeStreamInput) dynamodbstreams.DescribeStreamRequest
 
-	GetRecordsRequest(*dynamodbstreams.GetRecordsInput) dynamodbstreams.GetRecordsRequest
+	GetRecordsRequest(*types.GetRecordsInput) dynamodbstreams.GetRecordsRequest
 
-	GetShardIteratorRequest(*dynamodbstreams.GetShardIteratorInput) dynamodbstreams.GetShardIteratorRequest
+	GetShardIteratorRequest(*types.GetShardIteratorInput) dynamodbstreams.GetShardIteratorRequest
 
-	ListStreamsRequest(*dynamodbstreams.ListStreamsInput) dynamodbstreams.ListStreamsRequest
+	ListStreamsRequest(*types.ListStreamsInput) dynamodbstreams.ListStreamsRequest
 }
 
 var _ ClientAPI = (*dynamodbstreams.Client)(nil)

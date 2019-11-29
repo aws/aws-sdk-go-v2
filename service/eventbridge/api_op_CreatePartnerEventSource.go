@@ -6,67 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/eventbridge/types"
 )
-
-type CreatePartnerEventSourceInput struct {
-	_ struct{} `type:"structure"`
-
-	// The AWS account ID of the customer who is permitted to create a matching
-	// partner event bus for this partner event source.
-	//
-	// Account is a required field
-	Account *string `min:"12" type:"string" required:"true"`
-
-	// The name of the partner event source. This name must be unique and must be
-	// in the format partner_name/event_namespace/event_name . The AWS account that
-	// wants to use this partner event source must create a partner event bus with
-	// a name that matches the name of the partner event source.
-	//
-	// Name is a required field
-	Name *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s CreatePartnerEventSourceInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreatePartnerEventSourceInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreatePartnerEventSourceInput"}
-
-	if s.Account == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Account"))
-	}
-	if s.Account != nil && len(*s.Account) < 12 {
-		invalidParams.Add(aws.NewErrParamMinLen("Account", 12))
-	}
-
-	if s.Name == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Name"))
-	}
-	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type CreatePartnerEventSourceOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The ARN of the partner event source.
-	EventSourceArn *string `type:"string"`
-}
-
-// String returns the string representation
-func (s CreatePartnerEventSourceOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCreatePartnerEventSource = "CreatePartnerEventSource"
 
@@ -111,7 +52,7 @@ const opCreatePartnerEventSource = "CreatePartnerEventSource"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/CreatePartnerEventSource
-func (c *Client) CreatePartnerEventSourceRequest(input *CreatePartnerEventSourceInput) CreatePartnerEventSourceRequest {
+func (c *Client) CreatePartnerEventSourceRequest(input *types.CreatePartnerEventSourceInput) CreatePartnerEventSourceRequest {
 	op := &aws.Operation{
 		Name:       opCreatePartnerEventSource,
 		HTTPMethod: "POST",
@@ -119,10 +60,10 @@ func (c *Client) CreatePartnerEventSourceRequest(input *CreatePartnerEventSource
 	}
 
 	if input == nil {
-		input = &CreatePartnerEventSourceInput{}
+		input = &types.CreatePartnerEventSourceInput{}
 	}
 
-	req := c.newRequest(op, input, &CreatePartnerEventSourceOutput{})
+	req := c.newRequest(op, input, &types.CreatePartnerEventSourceOutput{})
 	return CreatePartnerEventSourceRequest{Request: req, Input: input, Copy: c.CreatePartnerEventSourceRequest}
 }
 
@@ -130,8 +71,8 @@ func (c *Client) CreatePartnerEventSourceRequest(input *CreatePartnerEventSource
 // CreatePartnerEventSource API operation.
 type CreatePartnerEventSourceRequest struct {
 	*aws.Request
-	Input *CreatePartnerEventSourceInput
-	Copy  func(*CreatePartnerEventSourceInput) CreatePartnerEventSourceRequest
+	Input *types.CreatePartnerEventSourceInput
+	Copy  func(*types.CreatePartnerEventSourceInput) CreatePartnerEventSourceRequest
 }
 
 // Send marshals and sends the CreatePartnerEventSource API request.
@@ -143,7 +84,7 @@ func (r CreatePartnerEventSourceRequest) Send(ctx context.Context) (*CreatePartn
 	}
 
 	resp := &CreatePartnerEventSourceResponse{
-		CreatePartnerEventSourceOutput: r.Request.Data.(*CreatePartnerEventSourceOutput),
+		CreatePartnerEventSourceOutput: r.Request.Data.(*types.CreatePartnerEventSourceOutput),
 		response:                       &aws.Response{Request: r.Request},
 	}
 
@@ -153,7 +94,7 @@ func (r CreatePartnerEventSourceRequest) Send(ctx context.Context) (*CreatePartn
 // CreatePartnerEventSourceResponse is the response type for the
 // CreatePartnerEventSource API operation.
 type CreatePartnerEventSourceResponse struct {
-	*CreatePartnerEventSourceOutput
+	*types.CreatePartnerEventSourceOutput
 
 	response *aws.Response
 }

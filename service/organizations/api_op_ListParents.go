@@ -6,86 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/organizations/types"
 )
-
-type ListParentsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The unique identifier (ID) of the OU or account whose parent containers you
-	// want to list. Don't specify a root.
-	//
-	// The regex pattern (http://wikipedia.org/wiki/regex) for a child ID string
-	// requires one of the following:
-	//
-	//    * Account - A string that consists of exactly 12 digits.
-	//
-	//    * Organizational unit (OU) - A string that begins with "ou-" followed
-	//    by from 4 to 32 lower-case letters or digits (the ID of the root that
-	//    contains the OU) followed by a second "-" dash and from 8 to 32 additional
-	//    lower-case letters or digits.
-	//
-	// ChildId is a required field
-	ChildId *string `type:"string" required:"true"`
-
-	// (Optional) Use this to limit the number of results you want included per
-	// page in the response. If you do not include this parameter, it defaults to
-	// a value that is specific to the operation. If additional items exist beyond
-	// the maximum you specify, the NextToken response element is present and has
-	// a value (is not null). Include that value as the NextToken request parameter
-	// in the next call to the operation to get the next part of the results. Note
-	// that Organizations might return fewer results than the maximum even when
-	// there are more results available. You should check NextToken after every
-	// operation to ensure that you receive all of the results.
-	MaxResults *int64 `min:"1" type:"integer"`
-
-	// Use this parameter if you receive a NextToken response in a previous request
-	// that indicates that there is more output available. Set it to the value of
-	// the previous call's NextToken response to indicate where the output should
-	// continue from.
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s ListParentsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListParentsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListParentsInput"}
-
-	if s.ChildId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ChildId"))
-	}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ListParentsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// If present, this value indicates that there is more output available than
-	// is included in the current response. Use this value in the NextToken request
-	// parameter in a subsequent call to the operation to get the next part of the
-	// output. You should repeat this until the NextToken response element comes
-	// back as null.
-	NextToken *string `type:"string"`
-
-	// A list of parents for the specified child account or OU.
-	Parents []Parent `type:"list"`
-}
-
-// String returns the string representation
-func (s ListParentsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListParents = "ListParents"
 
@@ -113,7 +35,7 @@ const opListParents = "ListParents"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListParents
-func (c *Client) ListParentsRequest(input *ListParentsInput) ListParentsRequest {
+func (c *Client) ListParentsRequest(input *types.ListParentsInput) ListParentsRequest {
 	op := &aws.Operation{
 		Name:       opListParents,
 		HTTPMethod: "POST",
@@ -127,10 +49,10 @@ func (c *Client) ListParentsRequest(input *ListParentsInput) ListParentsRequest 
 	}
 
 	if input == nil {
-		input = &ListParentsInput{}
+		input = &types.ListParentsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListParentsOutput{})
+	req := c.newRequest(op, input, &types.ListParentsOutput{})
 	return ListParentsRequest{Request: req, Input: input, Copy: c.ListParentsRequest}
 }
 
@@ -138,8 +60,8 @@ func (c *Client) ListParentsRequest(input *ListParentsInput) ListParentsRequest 
 // ListParents API operation.
 type ListParentsRequest struct {
 	*aws.Request
-	Input *ListParentsInput
-	Copy  func(*ListParentsInput) ListParentsRequest
+	Input *types.ListParentsInput
+	Copy  func(*types.ListParentsInput) ListParentsRequest
 }
 
 // Send marshals and sends the ListParents API request.
@@ -151,7 +73,7 @@ func (r ListParentsRequest) Send(ctx context.Context) (*ListParentsResponse, err
 	}
 
 	resp := &ListParentsResponse{
-		ListParentsOutput: r.Request.Data.(*ListParentsOutput),
+		ListParentsOutput: r.Request.Data.(*types.ListParentsOutput),
 		response:          &aws.Response{Request: r.Request},
 	}
 
@@ -181,7 +103,7 @@ func NewListParentsPaginator(req ListParentsRequest) ListParentsPaginator {
 	return ListParentsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListParentsInput
+				var inCpy *types.ListParentsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -201,14 +123,14 @@ type ListParentsPaginator struct {
 	aws.Pager
 }
 
-func (p *ListParentsPaginator) CurrentPage() *ListParentsOutput {
-	return p.Pager.CurrentPage().(*ListParentsOutput)
+func (p *ListParentsPaginator) CurrentPage() *types.ListParentsOutput {
+	return p.Pager.CurrentPage().(*types.ListParentsOutput)
 }
 
 // ListParentsResponse is the response type for the
 // ListParents API operation.
 type ListParentsResponse struct {
-	*ListParentsOutput
+	*types.ListParentsOutput
 
 	response *aws.Response
 }

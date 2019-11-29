@@ -6,126 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/kinesisvideo/types"
 )
-
-type UpdateDataRetentionInput struct {
-	_ struct{} `type:"structure"`
-
-	// The version of the stream whose retention period you want to change. To get
-	// the version, call either the DescribeStream or the ListStreams API.
-	//
-	// CurrentVersion is a required field
-	CurrentVersion *string `min:"1" type:"string" required:"true"`
-
-	// The retention period, in hours. The value you specify replaces the current
-	// value. The maximum value for this parameter is 87600 (ten years).
-	//
-	// DataRetentionChangeInHours is a required field
-	DataRetentionChangeInHours *int64 `min:"1" type:"integer" required:"true"`
-
-	// Indicates whether you want to increase or decrease the retention period.
-	//
-	// Operation is a required field
-	Operation UpdateDataRetentionOperation `type:"string" required:"true" enum:"true"`
-
-	// The Amazon Resource Name (ARN) of the stream whose retention period you want
-	// to change.
-	StreamARN *string `min:"1" type:"string"`
-
-	// The name of the stream whose retention period you want to change.
-	StreamName *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s UpdateDataRetentionInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateDataRetentionInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateDataRetentionInput"}
-
-	if s.CurrentVersion == nil {
-		invalidParams.Add(aws.NewErrParamRequired("CurrentVersion"))
-	}
-	if s.CurrentVersion != nil && len(*s.CurrentVersion) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("CurrentVersion", 1))
-	}
-
-	if s.DataRetentionChangeInHours == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DataRetentionChangeInHours"))
-	}
-	if s.DataRetentionChangeInHours != nil && *s.DataRetentionChangeInHours < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("DataRetentionChangeInHours", 1))
-	}
-	if len(s.Operation) == 0 {
-		invalidParams.Add(aws.NewErrParamRequired("Operation"))
-	}
-	if s.StreamARN != nil && len(*s.StreamARN) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("StreamARN", 1))
-	}
-	if s.StreamName != nil && len(*s.StreamName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("StreamName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s UpdateDataRetentionInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.CurrentVersion != nil {
-		v := *s.CurrentVersion
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "CurrentVersion", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.DataRetentionChangeInHours != nil {
-		v := *s.DataRetentionChangeInHours
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "DataRetentionChangeInHours", protocol.Int64Value(v), metadata)
-	}
-	if len(s.Operation) > 0 {
-		v := s.Operation
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "Operation", protocol.QuotedValue{ValueMarshaler: v}, metadata)
-	}
-	if s.StreamARN != nil {
-		v := *s.StreamARN
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "StreamARN", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.StreamName != nil {
-		v := *s.StreamName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "StreamName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type UpdateDataRetentionOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s UpdateDataRetentionOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s UpdateDataRetentionOutput) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
 
 const opUpdateDataRetention = "UpdateDataRetention"
 
@@ -162,7 +44,7 @@ const opUpdateDataRetention = "UpdateDataRetention"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesisvideo-2017-09-30/UpdateDataRetention
-func (c *Client) UpdateDataRetentionRequest(input *UpdateDataRetentionInput) UpdateDataRetentionRequest {
+func (c *Client) UpdateDataRetentionRequest(input *types.UpdateDataRetentionInput) UpdateDataRetentionRequest {
 	op := &aws.Operation{
 		Name:       opUpdateDataRetention,
 		HTTPMethod: "POST",
@@ -170,10 +52,10 @@ func (c *Client) UpdateDataRetentionRequest(input *UpdateDataRetentionInput) Upd
 	}
 
 	if input == nil {
-		input = &UpdateDataRetentionInput{}
+		input = &types.UpdateDataRetentionInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateDataRetentionOutput{})
+	req := c.newRequest(op, input, &types.UpdateDataRetentionOutput{})
 	return UpdateDataRetentionRequest{Request: req, Input: input, Copy: c.UpdateDataRetentionRequest}
 }
 
@@ -181,8 +63,8 @@ func (c *Client) UpdateDataRetentionRequest(input *UpdateDataRetentionInput) Upd
 // UpdateDataRetention API operation.
 type UpdateDataRetentionRequest struct {
 	*aws.Request
-	Input *UpdateDataRetentionInput
-	Copy  func(*UpdateDataRetentionInput) UpdateDataRetentionRequest
+	Input *types.UpdateDataRetentionInput
+	Copy  func(*types.UpdateDataRetentionInput) UpdateDataRetentionRequest
 }
 
 // Send marshals and sends the UpdateDataRetention API request.
@@ -194,7 +76,7 @@ func (r UpdateDataRetentionRequest) Send(ctx context.Context) (*UpdateDataRetent
 	}
 
 	resp := &UpdateDataRetentionResponse{
-		UpdateDataRetentionOutput: r.Request.Data.(*UpdateDataRetentionOutput),
+		UpdateDataRetentionOutput: r.Request.Data.(*types.UpdateDataRetentionOutput),
 		response:                  &aws.Response{Request: r.Request},
 	}
 
@@ -204,7 +86,7 @@ func (r UpdateDataRetentionRequest) Send(ctx context.Context) (*UpdateDataRetent
 // UpdateDataRetentionResponse is the response type for the
 // UpdateDataRetention API operation.
 type UpdateDataRetentionResponse struct {
-	*UpdateDataRetentionOutput
+	*types.UpdateDataRetentionOutput
 
 	response *aws.Response
 }

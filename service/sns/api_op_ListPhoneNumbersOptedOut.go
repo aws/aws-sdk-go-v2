@@ -6,41 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/sns/types"
 )
-
-// The input for the ListPhoneNumbersOptedOut action.
-type ListPhoneNumbersOptedOutInput struct {
-	_ struct{} `type:"structure"`
-
-	// A NextToken string is used when you call the ListPhoneNumbersOptedOut action
-	// to retrieve additional records that are available after the first page of
-	// results.
-	NextToken *string `locationName:"nextToken" type:"string"`
-}
-
-// String returns the string representation
-func (s ListPhoneNumbersOptedOutInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// The response from the ListPhoneNumbersOptedOut action.
-type ListPhoneNumbersOptedOutOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A NextToken string is returned when you call the ListPhoneNumbersOptedOut
-	// action if additional records are available after the first page of results.
-	NextToken *string `locationName:"nextToken" type:"string"`
-
-	// A list of phone numbers that are opted out of receiving SMS messages. The
-	// list is paginated, and each page can contain up to 100 phone numbers.
-	PhoneNumbers []string `locationName:"phoneNumbers" type:"list"`
-}
-
-// String returns the string representation
-func (s ListPhoneNumbersOptedOutOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListPhoneNumbersOptedOut = "ListPhoneNumbersOptedOut"
 
@@ -65,7 +32,7 @@ const opListPhoneNumbersOptedOut = "ListPhoneNumbersOptedOut"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/ListPhoneNumbersOptedOut
-func (c *Client) ListPhoneNumbersOptedOutRequest(input *ListPhoneNumbersOptedOutInput) ListPhoneNumbersOptedOutRequest {
+func (c *Client) ListPhoneNumbersOptedOutRequest(input *types.ListPhoneNumbersOptedOutInput) ListPhoneNumbersOptedOutRequest {
 	op := &aws.Operation{
 		Name:       opListPhoneNumbersOptedOut,
 		HTTPMethod: "POST",
@@ -73,10 +40,10 @@ func (c *Client) ListPhoneNumbersOptedOutRequest(input *ListPhoneNumbersOptedOut
 	}
 
 	if input == nil {
-		input = &ListPhoneNumbersOptedOutInput{}
+		input = &types.ListPhoneNumbersOptedOutInput{}
 	}
 
-	req := c.newRequest(op, input, &ListPhoneNumbersOptedOutOutput{})
+	req := c.newRequest(op, input, &types.ListPhoneNumbersOptedOutOutput{})
 	return ListPhoneNumbersOptedOutRequest{Request: req, Input: input, Copy: c.ListPhoneNumbersOptedOutRequest}
 }
 
@@ -84,8 +51,8 @@ func (c *Client) ListPhoneNumbersOptedOutRequest(input *ListPhoneNumbersOptedOut
 // ListPhoneNumbersOptedOut API operation.
 type ListPhoneNumbersOptedOutRequest struct {
 	*aws.Request
-	Input *ListPhoneNumbersOptedOutInput
-	Copy  func(*ListPhoneNumbersOptedOutInput) ListPhoneNumbersOptedOutRequest
+	Input *types.ListPhoneNumbersOptedOutInput
+	Copy  func(*types.ListPhoneNumbersOptedOutInput) ListPhoneNumbersOptedOutRequest
 }
 
 // Send marshals and sends the ListPhoneNumbersOptedOut API request.
@@ -97,7 +64,7 @@ func (r ListPhoneNumbersOptedOutRequest) Send(ctx context.Context) (*ListPhoneNu
 	}
 
 	resp := &ListPhoneNumbersOptedOutResponse{
-		ListPhoneNumbersOptedOutOutput: r.Request.Data.(*ListPhoneNumbersOptedOutOutput),
+		ListPhoneNumbersOptedOutOutput: r.Request.Data.(*types.ListPhoneNumbersOptedOutOutput),
 		response:                       &aws.Response{Request: r.Request},
 	}
 
@@ -107,7 +74,7 @@ func (r ListPhoneNumbersOptedOutRequest) Send(ctx context.Context) (*ListPhoneNu
 // ListPhoneNumbersOptedOutResponse is the response type for the
 // ListPhoneNumbersOptedOut API operation.
 type ListPhoneNumbersOptedOutResponse struct {
-	*ListPhoneNumbersOptedOutOutput
+	*types.ListPhoneNumbersOptedOutOutput
 
 	response *aws.Response
 }

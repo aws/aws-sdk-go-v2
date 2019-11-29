@@ -6,76 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/iam/types"
 )
-
-type UploadSigningCertificateInput struct {
-	_ struct{} `type:"structure"`
-
-	// The contents of the signing certificate.
-	//
-	// The regex pattern (http://wikipedia.org/wiki/regex) used to validate this
-	// parameter is a string of characters consisting of the following:
-	//
-	//    * Any printable ASCII character ranging from the space character (\u0020)
-	//    through the end of the ASCII character range
-	//
-	//    * The printable characters in the Basic Latin and Latin-1 Supplement character
-	//    set (through \u00FF)
-	//
-	//    * The special characters tab (\u0009), line feed (\u000A), and carriage
-	//    return (\u000D)
-	//
-	// CertificateBody is a required field
-	CertificateBody *string `min:"1" type:"string" required:"true"`
-
-	// The name of the user the signing certificate is for.
-	//
-	// This parameter allows (through its regex pattern (http://wikipedia.org/wiki/regex))
-	// a string of characters consisting of upper and lowercase alphanumeric characters
-	// with no spaces. You can also include any of the following characters: _+=,.@-
-	UserName *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s UploadSigningCertificateInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UploadSigningCertificateInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UploadSigningCertificateInput"}
-
-	if s.CertificateBody == nil {
-		invalidParams.Add(aws.NewErrParamRequired("CertificateBody"))
-	}
-	if s.CertificateBody != nil && len(*s.CertificateBody) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("CertificateBody", 1))
-	}
-	if s.UserName != nil && len(*s.UserName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("UserName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Contains the response to a successful UploadSigningCertificate request.
-type UploadSigningCertificateOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Information about the certificate.
-	//
-	// Certificate is a required field
-	Certificate *SigningCertificate `type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s UploadSigningCertificateOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opUploadSigningCertificate = "UploadSigningCertificate"
 
@@ -109,7 +41,7 @@ const opUploadSigningCertificate = "UploadSigningCertificate"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/UploadSigningCertificate
-func (c *Client) UploadSigningCertificateRequest(input *UploadSigningCertificateInput) UploadSigningCertificateRequest {
+func (c *Client) UploadSigningCertificateRequest(input *types.UploadSigningCertificateInput) UploadSigningCertificateRequest {
 	op := &aws.Operation{
 		Name:       opUploadSigningCertificate,
 		HTTPMethod: "POST",
@@ -117,10 +49,10 @@ func (c *Client) UploadSigningCertificateRequest(input *UploadSigningCertificate
 	}
 
 	if input == nil {
-		input = &UploadSigningCertificateInput{}
+		input = &types.UploadSigningCertificateInput{}
 	}
 
-	req := c.newRequest(op, input, &UploadSigningCertificateOutput{})
+	req := c.newRequest(op, input, &types.UploadSigningCertificateOutput{})
 	return UploadSigningCertificateRequest{Request: req, Input: input, Copy: c.UploadSigningCertificateRequest}
 }
 
@@ -128,8 +60,8 @@ func (c *Client) UploadSigningCertificateRequest(input *UploadSigningCertificate
 // UploadSigningCertificate API operation.
 type UploadSigningCertificateRequest struct {
 	*aws.Request
-	Input *UploadSigningCertificateInput
-	Copy  func(*UploadSigningCertificateInput) UploadSigningCertificateRequest
+	Input *types.UploadSigningCertificateInput
+	Copy  func(*types.UploadSigningCertificateInput) UploadSigningCertificateRequest
 }
 
 // Send marshals and sends the UploadSigningCertificate API request.
@@ -141,7 +73,7 @@ func (r UploadSigningCertificateRequest) Send(ctx context.Context) (*UploadSigni
 	}
 
 	resp := &UploadSigningCertificateResponse{
-		UploadSigningCertificateOutput: r.Request.Data.(*UploadSigningCertificateOutput),
+		UploadSigningCertificateOutput: r.Request.Data.(*types.UploadSigningCertificateOutput),
 		response:                       &aws.Response{Request: r.Request},
 	}
 
@@ -151,7 +83,7 @@ func (r UploadSigningCertificateRequest) Send(ctx context.Context) (*UploadSigni
 // UploadSigningCertificateResponse is the response type for the
 // UploadSigningCertificate API operation.
 type UploadSigningCertificateResponse struct {
-	*UploadSigningCertificateOutput
+	*types.UploadSigningCertificateOutput
 
 	response *aws.Response
 }

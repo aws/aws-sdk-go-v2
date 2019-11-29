@@ -6,48 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/glue/types"
 )
-
-type StartCrawlerScheduleInput struct {
-	_ struct{} `type:"structure"`
-
-	// Name of the crawler to schedule.
-	//
-	// CrawlerName is a required field
-	CrawlerName *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s StartCrawlerScheduleInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *StartCrawlerScheduleInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "StartCrawlerScheduleInput"}
-
-	if s.CrawlerName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("CrawlerName"))
-	}
-	if s.CrawlerName != nil && len(*s.CrawlerName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("CrawlerName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type StartCrawlerScheduleOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s StartCrawlerScheduleOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opStartCrawlerSchedule = "StartCrawlerSchedule"
 
@@ -65,7 +25,7 @@ const opStartCrawlerSchedule = "StartCrawlerSchedule"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/StartCrawlerSchedule
-func (c *Client) StartCrawlerScheduleRequest(input *StartCrawlerScheduleInput) StartCrawlerScheduleRequest {
+func (c *Client) StartCrawlerScheduleRequest(input *types.StartCrawlerScheduleInput) StartCrawlerScheduleRequest {
 	op := &aws.Operation{
 		Name:       opStartCrawlerSchedule,
 		HTTPMethod: "POST",
@@ -73,10 +33,10 @@ func (c *Client) StartCrawlerScheduleRequest(input *StartCrawlerScheduleInput) S
 	}
 
 	if input == nil {
-		input = &StartCrawlerScheduleInput{}
+		input = &types.StartCrawlerScheduleInput{}
 	}
 
-	req := c.newRequest(op, input, &StartCrawlerScheduleOutput{})
+	req := c.newRequest(op, input, &types.StartCrawlerScheduleOutput{})
 	return StartCrawlerScheduleRequest{Request: req, Input: input, Copy: c.StartCrawlerScheduleRequest}
 }
 
@@ -84,8 +44,8 @@ func (c *Client) StartCrawlerScheduleRequest(input *StartCrawlerScheduleInput) S
 // StartCrawlerSchedule API operation.
 type StartCrawlerScheduleRequest struct {
 	*aws.Request
-	Input *StartCrawlerScheduleInput
-	Copy  func(*StartCrawlerScheduleInput) StartCrawlerScheduleRequest
+	Input *types.StartCrawlerScheduleInput
+	Copy  func(*types.StartCrawlerScheduleInput) StartCrawlerScheduleRequest
 }
 
 // Send marshals and sends the StartCrawlerSchedule API request.
@@ -97,7 +57,7 @@ func (r StartCrawlerScheduleRequest) Send(ctx context.Context) (*StartCrawlerSch
 	}
 
 	resp := &StartCrawlerScheduleResponse{
-		StartCrawlerScheduleOutput: r.Request.Data.(*StartCrawlerScheduleOutput),
+		StartCrawlerScheduleOutput: r.Request.Data.(*types.StartCrawlerScheduleOutput),
 		response:                   &aws.Response{Request: r.Request},
 	}
 
@@ -107,7 +67,7 @@ func (r StartCrawlerScheduleRequest) Send(ctx context.Context) (*StartCrawlerSch
 // StartCrawlerScheduleResponse is the response type for the
 // StartCrawlerSchedule API operation.
 type StartCrawlerScheduleResponse struct {
-	*StartCrawlerScheduleOutput
+	*types.StartCrawlerScheduleOutput
 
 	response *aws.Response
 }

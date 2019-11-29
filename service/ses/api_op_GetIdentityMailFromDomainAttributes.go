@@ -6,54 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ses/types"
 )
-
-// Represents a request to return the Amazon SES custom MAIL FROM attributes
-// for a list of identities. For information about using a custom MAIL FROM
-// domain, see the Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/mail-from.html).
-type GetIdentityMailFromDomainAttributesInput struct {
-	_ struct{} `type:"structure"`
-
-	// A list of one or more identities.
-	//
-	// Identities is a required field
-	Identities []string `type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s GetIdentityMailFromDomainAttributesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetIdentityMailFromDomainAttributesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetIdentityMailFromDomainAttributesInput"}
-
-	if s.Identities == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Identities"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Represents the custom MAIL FROM attributes for a list of identities.
-type GetIdentityMailFromDomainAttributesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A map of identities to custom MAIL FROM attributes.
-	//
-	// MailFromDomainAttributes is a required field
-	MailFromDomainAttributes map[string]IdentityMailFromDomainAttributes `type:"map" required:"true"`
-}
-
-// String returns the string representation
-func (s GetIdentityMailFromDomainAttributesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetIdentityMailFromDomainAttributes = "GetIdentityMailFromDomainAttributes"
 
@@ -74,7 +28,7 @@ const opGetIdentityMailFromDomainAttributes = "GetIdentityMailFromDomainAttribut
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/GetIdentityMailFromDomainAttributes
-func (c *Client) GetIdentityMailFromDomainAttributesRequest(input *GetIdentityMailFromDomainAttributesInput) GetIdentityMailFromDomainAttributesRequest {
+func (c *Client) GetIdentityMailFromDomainAttributesRequest(input *types.GetIdentityMailFromDomainAttributesInput) GetIdentityMailFromDomainAttributesRequest {
 	op := &aws.Operation{
 		Name:       opGetIdentityMailFromDomainAttributes,
 		HTTPMethod: "POST",
@@ -82,10 +36,10 @@ func (c *Client) GetIdentityMailFromDomainAttributesRequest(input *GetIdentityMa
 	}
 
 	if input == nil {
-		input = &GetIdentityMailFromDomainAttributesInput{}
+		input = &types.GetIdentityMailFromDomainAttributesInput{}
 	}
 
-	req := c.newRequest(op, input, &GetIdentityMailFromDomainAttributesOutput{})
+	req := c.newRequest(op, input, &types.GetIdentityMailFromDomainAttributesOutput{})
 	return GetIdentityMailFromDomainAttributesRequest{Request: req, Input: input, Copy: c.GetIdentityMailFromDomainAttributesRequest}
 }
 
@@ -93,8 +47,8 @@ func (c *Client) GetIdentityMailFromDomainAttributesRequest(input *GetIdentityMa
 // GetIdentityMailFromDomainAttributes API operation.
 type GetIdentityMailFromDomainAttributesRequest struct {
 	*aws.Request
-	Input *GetIdentityMailFromDomainAttributesInput
-	Copy  func(*GetIdentityMailFromDomainAttributesInput) GetIdentityMailFromDomainAttributesRequest
+	Input *types.GetIdentityMailFromDomainAttributesInput
+	Copy  func(*types.GetIdentityMailFromDomainAttributesInput) GetIdentityMailFromDomainAttributesRequest
 }
 
 // Send marshals and sends the GetIdentityMailFromDomainAttributes API request.
@@ -106,7 +60,7 @@ func (r GetIdentityMailFromDomainAttributesRequest) Send(ctx context.Context) (*
 	}
 
 	resp := &GetIdentityMailFromDomainAttributesResponse{
-		GetIdentityMailFromDomainAttributesOutput: r.Request.Data.(*GetIdentityMailFromDomainAttributesOutput),
+		GetIdentityMailFromDomainAttributesOutput: r.Request.Data.(*types.GetIdentityMailFromDomainAttributesOutput),
 		response: &aws.Response{Request: r.Request},
 	}
 
@@ -116,7 +70,7 @@ func (r GetIdentityMailFromDomainAttributesRequest) Send(ctx context.Context) (*
 // GetIdentityMailFromDomainAttributesResponse is the response type for the
 // GetIdentityMailFromDomainAttributes API operation.
 type GetIdentityMailFromDomainAttributesResponse struct {
-	*GetIdentityMailFromDomainAttributesOutput
+	*types.GetIdentityMailFromDomainAttributesOutput
 
 	response *aws.Response
 }

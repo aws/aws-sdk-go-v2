@@ -6,53 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/devicefarm/types"
 )
-
-// Represents a request to the get job operation.
-type GetJobInput struct {
-	_ struct{} `type:"structure"`
-
-	// The job's ARN.
-	//
-	// Arn is a required field
-	Arn *string `locationName:"arn" min:"32" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetJobInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetJobInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetJobInput"}
-
-	if s.Arn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Arn"))
-	}
-	if s.Arn != nil && len(*s.Arn) < 32 {
-		invalidParams.Add(aws.NewErrParamMinLen("Arn", 32))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Represents the result of a get job request.
-type GetJobOutput struct {
-	_ struct{} `type:"structure"`
-
-	// An object containing information about the requested job.
-	Job *Job `locationName:"job" type:"structure"`
-}
-
-// String returns the string representation
-func (s GetJobOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetJob = "GetJob"
 
@@ -69,7 +24,7 @@ const opGetJob = "GetJob"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/GetJob
-func (c *Client) GetJobRequest(input *GetJobInput) GetJobRequest {
+func (c *Client) GetJobRequest(input *types.GetJobInput) GetJobRequest {
 	op := &aws.Operation{
 		Name:       opGetJob,
 		HTTPMethod: "POST",
@@ -77,10 +32,10 @@ func (c *Client) GetJobRequest(input *GetJobInput) GetJobRequest {
 	}
 
 	if input == nil {
-		input = &GetJobInput{}
+		input = &types.GetJobInput{}
 	}
 
-	req := c.newRequest(op, input, &GetJobOutput{})
+	req := c.newRequest(op, input, &types.GetJobOutput{})
 	return GetJobRequest{Request: req, Input: input, Copy: c.GetJobRequest}
 }
 
@@ -88,8 +43,8 @@ func (c *Client) GetJobRequest(input *GetJobInput) GetJobRequest {
 // GetJob API operation.
 type GetJobRequest struct {
 	*aws.Request
-	Input *GetJobInput
-	Copy  func(*GetJobInput) GetJobRequest
+	Input *types.GetJobInput
+	Copy  func(*types.GetJobInput) GetJobRequest
 }
 
 // Send marshals and sends the GetJob API request.
@@ -101,7 +56,7 @@ func (r GetJobRequest) Send(ctx context.Context) (*GetJobResponse, error) {
 	}
 
 	resp := &GetJobResponse{
-		GetJobOutput: r.Request.Data.(*GetJobOutput),
+		GetJobOutput: r.Request.Data.(*types.GetJobOutput),
 		response:     &aws.Response{Request: r.Request},
 	}
 
@@ -111,7 +66,7 @@ func (r GetJobRequest) Send(ctx context.Context) (*GetJobResponse, error) {
 // GetJobResponse is the response type for the
 // GetJob API operation.
 type GetJobResponse struct {
-	*GetJobOutput
+	*types.GetJobOutput
 
 	response *aws.Response
 }

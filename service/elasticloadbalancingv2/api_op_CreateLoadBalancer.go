@@ -4,115 +4,10 @@ package elasticloadbalancingv2
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/elasticloadbalancingv2/types"
 )
-
-type CreateLoadBalancerInput struct {
-	_ struct{} `type:"structure"`
-
-	// [Application Load Balancers] The type of IP addresses used by the subnets
-	// for your load balancer. The possible values are ipv4 (for IPv4 addresses)
-	// and dualstack (for IPv4 and IPv6 addresses). Internal load balancers must
-	// use ipv4.
-	IpAddressType IpAddressType `type:"string" enum:"true"`
-
-	// The name of the load balancer.
-	//
-	// This name must be unique per region per account, can have a maximum of 32
-	// characters, must contain only alphanumeric characters or hyphens, must not
-	// begin or end with a hyphen, and must not begin with "internal-".
-	//
-	// Name is a required field
-	Name *string `type:"string" required:"true"`
-
-	// The nodes of an Internet-facing load balancer have public IP addresses. The
-	// DNS name of an Internet-facing load balancer is publicly resolvable to the
-	// public IP addresses of the nodes. Therefore, Internet-facing load balancers
-	// can route requests from clients over the internet.
-	//
-	// The nodes of an internal load balancer have only private IP addresses. The
-	// DNS name of an internal load balancer is publicly resolvable to the private
-	// IP addresses of the nodes. Therefore, internal load balancers can only route
-	// requests from clients with access to the VPC for the load balancer.
-	//
-	// The default is an Internet-facing load balancer.
-	Scheme LoadBalancerSchemeEnum `type:"string" enum:"true"`
-
-	// [Application Load Balancers] The IDs of the security groups for the load
-	// balancer.
-	SecurityGroups []string `type:"list"`
-
-	// The IDs of the public subnets. You can specify only one subnet per Availability
-	// Zone. You must specify either subnets or subnet mappings.
-	//
-	// [Application Load Balancers] You must specify subnets from at least two Availability
-	// Zones. You cannot specify Elastic IP addresses for your subnets.
-	//
-	// [Network Load Balancers] You can specify subnets from one or more Availability
-	// Zones. You can specify one Elastic IP address per subnet if you need static
-	// IP addresses for your load balancer.
-	SubnetMappings []SubnetMapping `type:"list"`
-
-	// The IDs of the public subnets. You can specify only one subnet per Availability
-	// Zone. You must specify either subnets or subnet mappings.
-	//
-	// [Application Load Balancers] You must specify subnets from at least two Availability
-	// Zones.
-	//
-	// [Network Load Balancers] You can specify subnets from one or more Availability
-	// Zones.
-	Subnets []string `type:"list"`
-
-	// One or more tags to assign to the load balancer.
-	Tags []Tag `min:"1" type:"list"`
-
-	// The type of load balancer. The default is application.
-	Type LoadBalancerTypeEnum `type:"string" enum:"true"`
-}
-
-// String returns the string representation
-func (s CreateLoadBalancerInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateLoadBalancerInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateLoadBalancerInput"}
-
-	if s.Name == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Name"))
-	}
-	if s.Tags != nil && len(s.Tags) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Tags", 1))
-	}
-	if s.Tags != nil {
-		for i, v := range s.Tags {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type CreateLoadBalancerOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Information about the load balancer.
-	LoadBalancers []LoadBalancer `type:"list"`
-}
-
-// String returns the string representation
-func (s CreateLoadBalancerOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCreateLoadBalancer = "CreateLoadBalancer"
 
@@ -150,7 +45,7 @@ const opCreateLoadBalancer = "CreateLoadBalancer"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/CreateLoadBalancer
-func (c *Client) CreateLoadBalancerRequest(input *CreateLoadBalancerInput) CreateLoadBalancerRequest {
+func (c *Client) CreateLoadBalancerRequest(input *types.CreateLoadBalancerInput) CreateLoadBalancerRequest {
 	op := &aws.Operation{
 		Name:       opCreateLoadBalancer,
 		HTTPMethod: "POST",
@@ -158,10 +53,10 @@ func (c *Client) CreateLoadBalancerRequest(input *CreateLoadBalancerInput) Creat
 	}
 
 	if input == nil {
-		input = &CreateLoadBalancerInput{}
+		input = &types.CreateLoadBalancerInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateLoadBalancerOutput{})
+	req := c.newRequest(op, input, &types.CreateLoadBalancerOutput{})
 	return CreateLoadBalancerRequest{Request: req, Input: input, Copy: c.CreateLoadBalancerRequest}
 }
 
@@ -169,8 +64,8 @@ func (c *Client) CreateLoadBalancerRequest(input *CreateLoadBalancerInput) Creat
 // CreateLoadBalancer API operation.
 type CreateLoadBalancerRequest struct {
 	*aws.Request
-	Input *CreateLoadBalancerInput
-	Copy  func(*CreateLoadBalancerInput) CreateLoadBalancerRequest
+	Input *types.CreateLoadBalancerInput
+	Copy  func(*types.CreateLoadBalancerInput) CreateLoadBalancerRequest
 }
 
 // Send marshals and sends the CreateLoadBalancer API request.
@@ -182,7 +77,7 @@ func (r CreateLoadBalancerRequest) Send(ctx context.Context) (*CreateLoadBalance
 	}
 
 	resp := &CreateLoadBalancerResponse{
-		CreateLoadBalancerOutput: r.Request.Data.(*CreateLoadBalancerOutput),
+		CreateLoadBalancerOutput: r.Request.Data.(*types.CreateLoadBalancerOutput),
 		response:                 &aws.Response{Request: r.Request},
 	}
 
@@ -192,7 +87,7 @@ func (r CreateLoadBalancerRequest) Send(ctx context.Context) (*CreateLoadBalance
 // CreateLoadBalancerResponse is the response type for the
 // CreateLoadBalancer API operation.
 type CreateLoadBalancerResponse struct {
-	*CreateLoadBalancerOutput
+	*types.CreateLoadBalancerOutput
 
 	response *aws.Response
 }

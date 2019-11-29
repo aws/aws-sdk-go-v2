@@ -6,52 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/personalize/types"
 )
-
-type ListSchemasInput struct {
-	_ struct{} `type:"structure"`
-
-	// The maximum number of schemas to return.
-	MaxResults *int64 `locationName:"maxResults" min:"1" type:"integer"`
-
-	// A token returned from the previous call to ListSchemas for getting the next
-	// set of schemas (if they exist).
-	NextToken *string `locationName:"nextToken" type:"string"`
-}
-
-// String returns the string representation
-func (s ListSchemasInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListSchemasInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListSchemasInput"}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ListSchemasOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A token used to get the next set of schemas (if they exist).
-	NextToken *string `locationName:"nextToken" type:"string"`
-
-	// A list of schemas.
-	Schemas []DatasetSchemaSummary `locationName:"schemas" type:"list"`
-}
-
-// String returns the string representation
-func (s ListSchemasOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListSchemas = "ListSchemas"
 
@@ -70,7 +26,7 @@ const opListSchemas = "ListSchemas"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/ListSchemas
-func (c *Client) ListSchemasRequest(input *ListSchemasInput) ListSchemasRequest {
+func (c *Client) ListSchemasRequest(input *types.ListSchemasInput) ListSchemasRequest {
 	op := &aws.Operation{
 		Name:       opListSchemas,
 		HTTPMethod: "POST",
@@ -84,10 +40,10 @@ func (c *Client) ListSchemasRequest(input *ListSchemasInput) ListSchemasRequest 
 	}
 
 	if input == nil {
-		input = &ListSchemasInput{}
+		input = &types.ListSchemasInput{}
 	}
 
-	req := c.newRequest(op, input, &ListSchemasOutput{})
+	req := c.newRequest(op, input, &types.ListSchemasOutput{})
 	return ListSchemasRequest{Request: req, Input: input, Copy: c.ListSchemasRequest}
 }
 
@@ -95,8 +51,8 @@ func (c *Client) ListSchemasRequest(input *ListSchemasInput) ListSchemasRequest 
 // ListSchemas API operation.
 type ListSchemasRequest struct {
 	*aws.Request
-	Input *ListSchemasInput
-	Copy  func(*ListSchemasInput) ListSchemasRequest
+	Input *types.ListSchemasInput
+	Copy  func(*types.ListSchemasInput) ListSchemasRequest
 }
 
 // Send marshals and sends the ListSchemas API request.
@@ -108,7 +64,7 @@ func (r ListSchemasRequest) Send(ctx context.Context) (*ListSchemasResponse, err
 	}
 
 	resp := &ListSchemasResponse{
-		ListSchemasOutput: r.Request.Data.(*ListSchemasOutput),
+		ListSchemasOutput: r.Request.Data.(*types.ListSchemasOutput),
 		response:          &aws.Response{Request: r.Request},
 	}
 
@@ -138,7 +94,7 @@ func NewListSchemasPaginator(req ListSchemasRequest) ListSchemasPaginator {
 	return ListSchemasPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListSchemasInput
+				var inCpy *types.ListSchemasInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -158,14 +114,14 @@ type ListSchemasPaginator struct {
 	aws.Pager
 }
 
-func (p *ListSchemasPaginator) CurrentPage() *ListSchemasOutput {
-	return p.Pager.CurrentPage().(*ListSchemasOutput)
+func (p *ListSchemasPaginator) CurrentPage() *types.ListSchemasOutput {
+	return p.Pager.CurrentPage().(*types.ListSchemasOutput)
 }
 
 // ListSchemasResponse is the response type for the
 // ListSchemas API operation.
 type ListSchemasResponse struct {
-	*ListSchemasOutput
+	*types.ListSchemasOutput
 
 	response *aws.Response
 }

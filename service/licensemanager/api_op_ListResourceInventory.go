@@ -4,62 +4,10 @@ package licensemanager
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/licensemanager/types"
 )
-
-type ListResourceInventoryInput struct {
-	_ struct{} `type:"structure"`
-
-	// One or more filters.
-	Filters []InventoryFilter `type:"list"`
-
-	// Maximum number of results to return in a single call. To retrieve the remaining
-	// results, make another call with the returned NextToken value.
-	MaxResults *int64 `type:"integer"`
-
-	// Token for the next set of results.
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s ListResourceInventoryInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListResourceInventoryInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListResourceInventoryInput"}
-	if s.Filters != nil {
-		for i, v := range s.Filters {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ListResourceInventoryOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Token for the next set of results.
-	NextToken *string `type:"string"`
-
-	// The detailed list of resources.
-	ResourceInventoryList []ResourceInventory `type:"list"`
-}
-
-// String returns the string representation
-func (s ListResourceInventoryOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListResourceInventory = "ListResourceInventory"
 
@@ -76,7 +24,7 @@ const opListResourceInventory = "ListResourceInventory"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/license-manager-2018-08-01/ListResourceInventory
-func (c *Client) ListResourceInventoryRequest(input *ListResourceInventoryInput) ListResourceInventoryRequest {
+func (c *Client) ListResourceInventoryRequest(input *types.ListResourceInventoryInput) ListResourceInventoryRequest {
 	op := &aws.Operation{
 		Name:       opListResourceInventory,
 		HTTPMethod: "POST",
@@ -84,10 +32,10 @@ func (c *Client) ListResourceInventoryRequest(input *ListResourceInventoryInput)
 	}
 
 	if input == nil {
-		input = &ListResourceInventoryInput{}
+		input = &types.ListResourceInventoryInput{}
 	}
 
-	req := c.newRequest(op, input, &ListResourceInventoryOutput{})
+	req := c.newRequest(op, input, &types.ListResourceInventoryOutput{})
 	return ListResourceInventoryRequest{Request: req, Input: input, Copy: c.ListResourceInventoryRequest}
 }
 
@@ -95,8 +43,8 @@ func (c *Client) ListResourceInventoryRequest(input *ListResourceInventoryInput)
 // ListResourceInventory API operation.
 type ListResourceInventoryRequest struct {
 	*aws.Request
-	Input *ListResourceInventoryInput
-	Copy  func(*ListResourceInventoryInput) ListResourceInventoryRequest
+	Input *types.ListResourceInventoryInput
+	Copy  func(*types.ListResourceInventoryInput) ListResourceInventoryRequest
 }
 
 // Send marshals and sends the ListResourceInventory API request.
@@ -108,7 +56,7 @@ func (r ListResourceInventoryRequest) Send(ctx context.Context) (*ListResourceIn
 	}
 
 	resp := &ListResourceInventoryResponse{
-		ListResourceInventoryOutput: r.Request.Data.(*ListResourceInventoryOutput),
+		ListResourceInventoryOutput: r.Request.Data.(*types.ListResourceInventoryOutput),
 		response:                    &aws.Response{Request: r.Request},
 	}
 
@@ -118,7 +66,7 @@ func (r ListResourceInventoryRequest) Send(ctx context.Context) (*ListResourceIn
 // ListResourceInventoryResponse is the response type for the
 // ListResourceInventory API operation.
 type ListResourceInventoryResponse struct {
-	*ListResourceInventoryOutput
+	*types.ListResourceInventoryOutput
 
 	response *aws.Response
 }

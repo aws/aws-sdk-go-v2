@@ -6,87 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/iam/types"
 )
-
-type ListAccessKeysInput struct {
-	_ struct{} `type:"structure"`
-
-	// Use this parameter only when paginating results and only after you receive
-	// a response indicating that the results are truncated. Set it to the value
-	// of the Marker element in the response that you received to indicate where
-	// the next call should start.
-	Marker *string `min:"1" type:"string"`
-
-	// Use this only when paginating results to indicate the maximum number of items
-	// you want in the response. If additional items exist beyond the maximum you
-	// specify, the IsTruncated response element is true.
-	//
-	// If you do not include this parameter, the number of items defaults to 100.
-	// Note that IAM might return fewer results, even when there are more results
-	// available. In that case, the IsTruncated response element returns true, and
-	// Marker contains a value to include in the subsequent call that tells the
-	// service where to continue from.
-	MaxItems *int64 `min:"1" type:"integer"`
-
-	// The name of the user.
-	//
-	// This parameter allows (through its regex pattern (http://wikipedia.org/wiki/regex))
-	// a string of characters consisting of upper and lowercase alphanumeric characters
-	// with no spaces. You can also include any of the following characters: _+=,.@-
-	UserName *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s ListAccessKeysInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListAccessKeysInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListAccessKeysInput"}
-	if s.Marker != nil && len(*s.Marker) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Marker", 1))
-	}
-	if s.MaxItems != nil && *s.MaxItems < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxItems", 1))
-	}
-	if s.UserName != nil && len(*s.UserName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("UserName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Contains the response to a successful ListAccessKeys request.
-type ListAccessKeysOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A list of objects containing metadata about the access keys.
-	//
-	// AccessKeyMetadata is a required field
-	AccessKeyMetadata []AccessKeyMetadata `type:"list" required:"true"`
-
-	// A flag that indicates whether there are more items to return. If your results
-	// were truncated, you can make a subsequent pagination request using the Marker
-	// request parameter to retrieve more items. Note that IAM might return fewer
-	// than the MaxItems number of results even when there are more results available.
-	// We recommend that you check IsTruncated after every call to ensure that you
-	// receive all your results.
-	IsTruncated *bool `type:"boolean"`
-
-	// When IsTruncated is true, this element is present and contains the value
-	// to use for the Marker parameter in a subsequent pagination request.
-	Marker *string `type:"string"`
-}
-
-// String returns the string representation
-func (s ListAccessKeysOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListAccessKeys = "ListAccessKeys"
 
@@ -116,7 +37,7 @@ const opListAccessKeys = "ListAccessKeys"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListAccessKeys
-func (c *Client) ListAccessKeysRequest(input *ListAccessKeysInput) ListAccessKeysRequest {
+func (c *Client) ListAccessKeysRequest(input *types.ListAccessKeysInput) ListAccessKeysRequest {
 	op := &aws.Operation{
 		Name:       opListAccessKeys,
 		HTTPMethod: "POST",
@@ -130,10 +51,10 @@ func (c *Client) ListAccessKeysRequest(input *ListAccessKeysInput) ListAccessKey
 	}
 
 	if input == nil {
-		input = &ListAccessKeysInput{}
+		input = &types.ListAccessKeysInput{}
 	}
 
-	req := c.newRequest(op, input, &ListAccessKeysOutput{})
+	req := c.newRequest(op, input, &types.ListAccessKeysOutput{})
 	return ListAccessKeysRequest{Request: req, Input: input, Copy: c.ListAccessKeysRequest}
 }
 
@@ -141,8 +62,8 @@ func (c *Client) ListAccessKeysRequest(input *ListAccessKeysInput) ListAccessKey
 // ListAccessKeys API operation.
 type ListAccessKeysRequest struct {
 	*aws.Request
-	Input *ListAccessKeysInput
-	Copy  func(*ListAccessKeysInput) ListAccessKeysRequest
+	Input *types.ListAccessKeysInput
+	Copy  func(*types.ListAccessKeysInput) ListAccessKeysRequest
 }
 
 // Send marshals and sends the ListAccessKeys API request.
@@ -154,7 +75,7 @@ func (r ListAccessKeysRequest) Send(ctx context.Context) (*ListAccessKeysRespons
 	}
 
 	resp := &ListAccessKeysResponse{
-		ListAccessKeysOutput: r.Request.Data.(*ListAccessKeysOutput),
+		ListAccessKeysOutput: r.Request.Data.(*types.ListAccessKeysOutput),
 		response:             &aws.Response{Request: r.Request},
 	}
 
@@ -184,7 +105,7 @@ func NewListAccessKeysPaginator(req ListAccessKeysRequest) ListAccessKeysPaginat
 	return ListAccessKeysPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListAccessKeysInput
+				var inCpy *types.ListAccessKeysInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -204,14 +125,14 @@ type ListAccessKeysPaginator struct {
 	aws.Pager
 }
 
-func (p *ListAccessKeysPaginator) CurrentPage() *ListAccessKeysOutput {
-	return p.Pager.CurrentPage().(*ListAccessKeysOutput)
+func (p *ListAccessKeysPaginator) CurrentPage() *types.ListAccessKeysOutput {
+	return p.Pager.CurrentPage().(*types.ListAccessKeysOutput)
 }
 
 // ListAccessKeysResponse is the response type for the
 // ListAccessKeys API operation.
 type ListAccessKeysResponse struct {
-	*ListAccessKeysOutput
+	*types.ListAccessKeysOutput
 
 	response *aws.Response
 }

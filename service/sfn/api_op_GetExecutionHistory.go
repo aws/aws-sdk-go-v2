@@ -6,81 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/sfn/types"
 )
-
-type GetExecutionHistoryInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the execution.
-	//
-	// ExecutionArn is a required field
-	ExecutionArn *string `locationName:"executionArn" min:"1" type:"string" required:"true"`
-
-	// The maximum number of results that are returned per call. You can use nextToken
-	// to obtain further pages of results. The default is 100 and the maximum allowed
-	// page size is 1000. A value of 0 uses the default.
-	//
-	// This is only an upper limit. The actual number of results returned per call
-	// might be fewer than the specified maximum.
-	MaxResults *int64 `locationName:"maxResults" type:"integer"`
-
-	// If nextToken is returned, there are more results available. The value of
-	// nextToken is a unique pagination token for each page. Make the call again
-	// using the returned token to retrieve the next page. Keep all other arguments
-	// unchanged. Each pagination token expires after 24 hours. Using an expired
-	// pagination token will return an HTTP 400 InvalidToken error.
-	NextToken *string `locationName:"nextToken" min:"1" type:"string"`
-
-	// Lists events in descending order of their timeStamp.
-	ReverseOrder *bool `locationName:"reverseOrder" type:"boolean"`
-}
-
-// String returns the string representation
-func (s GetExecutionHistoryInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetExecutionHistoryInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetExecutionHistoryInput"}
-
-	if s.ExecutionArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ExecutionArn"))
-	}
-	if s.ExecutionArn != nil && len(*s.ExecutionArn) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ExecutionArn", 1))
-	}
-	if s.NextToken != nil && len(*s.NextToken) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type GetExecutionHistoryOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The list of events that occurred in the execution.
-	//
-	// Events is a required field
-	Events []HistoryEvent `locationName:"events" type:"list" required:"true"`
-
-	// If nextToken is returned, there are more results available. The value of
-	// nextToken is a unique pagination token for each page. Make the call again
-	// using the returned token to retrieve the next page. Keep all other arguments
-	// unchanged. Each pagination token expires after 24 hours. Using an expired
-	// pagination token will return an HTTP 400 InvalidToken error.
-	NextToken *string `locationName:"nextToken" min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s GetExecutionHistoryOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetExecutionHistory = "GetExecutionHistory"
 
@@ -105,7 +32,7 @@ const opGetExecutionHistory = "GetExecutionHistory"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/GetExecutionHistory
-func (c *Client) GetExecutionHistoryRequest(input *GetExecutionHistoryInput) GetExecutionHistoryRequest {
+func (c *Client) GetExecutionHistoryRequest(input *types.GetExecutionHistoryInput) GetExecutionHistoryRequest {
 	op := &aws.Operation{
 		Name:       opGetExecutionHistory,
 		HTTPMethod: "POST",
@@ -119,10 +46,10 @@ func (c *Client) GetExecutionHistoryRequest(input *GetExecutionHistoryInput) Get
 	}
 
 	if input == nil {
-		input = &GetExecutionHistoryInput{}
+		input = &types.GetExecutionHistoryInput{}
 	}
 
-	req := c.newRequest(op, input, &GetExecutionHistoryOutput{})
+	req := c.newRequest(op, input, &types.GetExecutionHistoryOutput{})
 	return GetExecutionHistoryRequest{Request: req, Input: input, Copy: c.GetExecutionHistoryRequest}
 }
 
@@ -130,8 +57,8 @@ func (c *Client) GetExecutionHistoryRequest(input *GetExecutionHistoryInput) Get
 // GetExecutionHistory API operation.
 type GetExecutionHistoryRequest struct {
 	*aws.Request
-	Input *GetExecutionHistoryInput
-	Copy  func(*GetExecutionHistoryInput) GetExecutionHistoryRequest
+	Input *types.GetExecutionHistoryInput
+	Copy  func(*types.GetExecutionHistoryInput) GetExecutionHistoryRequest
 }
 
 // Send marshals and sends the GetExecutionHistory API request.
@@ -143,7 +70,7 @@ func (r GetExecutionHistoryRequest) Send(ctx context.Context) (*GetExecutionHist
 	}
 
 	resp := &GetExecutionHistoryResponse{
-		GetExecutionHistoryOutput: r.Request.Data.(*GetExecutionHistoryOutput),
+		GetExecutionHistoryOutput: r.Request.Data.(*types.GetExecutionHistoryOutput),
 		response:                  &aws.Response{Request: r.Request},
 	}
 
@@ -173,7 +100,7 @@ func NewGetExecutionHistoryPaginator(req GetExecutionHistoryRequest) GetExecutio
 	return GetExecutionHistoryPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *GetExecutionHistoryInput
+				var inCpy *types.GetExecutionHistoryInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -193,14 +120,14 @@ type GetExecutionHistoryPaginator struct {
 	aws.Pager
 }
 
-func (p *GetExecutionHistoryPaginator) CurrentPage() *GetExecutionHistoryOutput {
-	return p.Pager.CurrentPage().(*GetExecutionHistoryOutput)
+func (p *GetExecutionHistoryPaginator) CurrentPage() *types.GetExecutionHistoryOutput {
+	return p.Pager.CurrentPage().(*types.GetExecutionHistoryOutput)
 }
 
 // GetExecutionHistoryResponse is the response type for the
 // GetExecutionHistory API operation.
 type GetExecutionHistoryResponse struct {
-	*GetExecutionHistoryOutput
+	*types.GetExecutionHistoryOutput
 
 	response *aws.Response
 }

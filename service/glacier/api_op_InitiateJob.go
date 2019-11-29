@@ -6,126 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/glacier/types"
 )
-
-// Provides options for initiating an Amazon S3 Glacier job.
-type InitiateJobInput struct {
-	_ struct{} `type:"structure" payload:"JobParameters"`
-
-	// The AccountId value is the AWS account ID of the account that owns the vault.
-	// You can either specify an AWS account ID or optionally a single '-' (hyphen),
-	// in which case Amazon S3 Glacier uses the AWS account ID associated with the
-	// credentials used to sign the request. If you use an account ID, do not include
-	// any hyphens ('-') in the ID.
-	//
-	// AccountId is a required field
-	AccountId *string `location:"uri" locationName:"accountId" type:"string" required:"true"`
-
-	// Provides options for specifying job information.
-	JobParameters *JobParameters `locationName:"jobParameters" type:"structure"`
-
-	// The name of the vault.
-	//
-	// VaultName is a required field
-	VaultName *string `location:"uri" locationName:"vaultName" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s InitiateJobInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *InitiateJobInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "InitiateJobInput"}
-
-	if s.AccountId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("AccountId"))
-	}
-
-	if s.VaultName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("VaultName"))
-	}
-	if s.JobParameters != nil {
-		if err := s.JobParameters.Validate(); err != nil {
-			invalidParams.AddNested("JobParameters", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s InitiateJobInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.AccountId != nil {
-		v := *s.AccountId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "accountId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.VaultName != nil {
-		v := *s.VaultName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "vaultName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.JobParameters != nil {
-		v := s.JobParameters
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.PayloadTarget, "jobParameters", v, metadata)
-	}
-	return nil
-}
-
-// Contains the Amazon S3 Glacier response to your request.
-type InitiateJobOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the job.
-	JobId *string `location:"header" locationName:"x-amz-job-id" type:"string"`
-
-	// The path to the location of where the select results are stored.
-	JobOutputPath *string `location:"header" locationName:"x-amz-job-output-path" type:"string"`
-
-	// The relative URI path of the job.
-	Location *string `location:"header" locationName:"Location" type:"string"`
-}
-
-// String returns the string representation
-func (s InitiateJobOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s InitiateJobOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.JobId != nil {
-		v := *s.JobId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "x-amz-job-id", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.JobOutputPath != nil {
-		v := *s.JobOutputPath
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "x-amz-job-output-path", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Location != nil {
-		v := *s.Location
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "Location", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opInitiateJob = "InitiateJob"
 
@@ -143,7 +25,7 @@ const opInitiateJob = "InitiateJob"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) InitiateJobRequest(input *InitiateJobInput) InitiateJobRequest {
+func (c *Client) InitiateJobRequest(input *types.InitiateJobInput) InitiateJobRequest {
 	op := &aws.Operation{
 		Name:       opInitiateJob,
 		HTTPMethod: "POST",
@@ -151,10 +33,10 @@ func (c *Client) InitiateJobRequest(input *InitiateJobInput) InitiateJobRequest 
 	}
 
 	if input == nil {
-		input = &InitiateJobInput{}
+		input = &types.InitiateJobInput{}
 	}
 
-	req := c.newRequest(op, input, &InitiateJobOutput{})
+	req := c.newRequest(op, input, &types.InitiateJobOutput{})
 	return InitiateJobRequest{Request: req, Input: input, Copy: c.InitiateJobRequest}
 }
 
@@ -162,8 +44,8 @@ func (c *Client) InitiateJobRequest(input *InitiateJobInput) InitiateJobRequest 
 // InitiateJob API operation.
 type InitiateJobRequest struct {
 	*aws.Request
-	Input *InitiateJobInput
-	Copy  func(*InitiateJobInput) InitiateJobRequest
+	Input *types.InitiateJobInput
+	Copy  func(*types.InitiateJobInput) InitiateJobRequest
 }
 
 // Send marshals and sends the InitiateJob API request.
@@ -175,7 +57,7 @@ func (r InitiateJobRequest) Send(ctx context.Context) (*InitiateJobResponse, err
 	}
 
 	resp := &InitiateJobResponse{
-		InitiateJobOutput: r.Request.Data.(*InitiateJobOutput),
+		InitiateJobOutput: r.Request.Data.(*types.InitiateJobOutput),
 		response:          &aws.Response{Request: r.Request},
 	}
 
@@ -185,7 +67,7 @@ func (r InitiateJobRequest) Send(ctx context.Context) (*InitiateJobResponse, err
 // InitiateJobResponse is the response type for the
 // InitiateJob API operation.
 type InitiateJobResponse struct {
-	*InitiateJobOutput
+	*types.InitiateJobOutput
 
 	response *aws.Response
 }

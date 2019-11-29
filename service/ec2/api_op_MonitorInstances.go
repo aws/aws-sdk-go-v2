@@ -6,54 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-type MonitorInstancesInput struct {
-	_ struct{} `type:"structure"`
-
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have
-	// the required permissions, the error response is DryRunOperation. Otherwise,
-	// it is UnauthorizedOperation.
-	DryRun *bool `locationName:"dryRun" type:"boolean"`
-
-	// The IDs of the instances.
-	//
-	// InstanceIds is a required field
-	InstanceIds []string `locationName:"InstanceId" locationNameList:"InstanceId" type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s MonitorInstancesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *MonitorInstancesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "MonitorInstancesInput"}
-
-	if s.InstanceIds == nil {
-		invalidParams.Add(aws.NewErrParamRequired("InstanceIds"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type MonitorInstancesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The monitoring information.
-	InstanceMonitorings []InstanceMonitoring `locationName:"instancesSet" locationNameList:"item" type:"list"`
-}
-
-// String returns the string representation
-func (s MonitorInstancesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opMonitorInstances = "MonitorInstances"
 
@@ -75,7 +29,7 @@ const opMonitorInstances = "MonitorInstances"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/MonitorInstances
-func (c *Client) MonitorInstancesRequest(input *MonitorInstancesInput) MonitorInstancesRequest {
+func (c *Client) MonitorInstancesRequest(input *types.MonitorInstancesInput) MonitorInstancesRequest {
 	op := &aws.Operation{
 		Name:       opMonitorInstances,
 		HTTPMethod: "POST",
@@ -83,10 +37,10 @@ func (c *Client) MonitorInstancesRequest(input *MonitorInstancesInput) MonitorIn
 	}
 
 	if input == nil {
-		input = &MonitorInstancesInput{}
+		input = &types.MonitorInstancesInput{}
 	}
 
-	req := c.newRequest(op, input, &MonitorInstancesOutput{})
+	req := c.newRequest(op, input, &types.MonitorInstancesOutput{})
 	return MonitorInstancesRequest{Request: req, Input: input, Copy: c.MonitorInstancesRequest}
 }
 
@@ -94,8 +48,8 @@ func (c *Client) MonitorInstancesRequest(input *MonitorInstancesInput) MonitorIn
 // MonitorInstances API operation.
 type MonitorInstancesRequest struct {
 	*aws.Request
-	Input *MonitorInstancesInput
-	Copy  func(*MonitorInstancesInput) MonitorInstancesRequest
+	Input *types.MonitorInstancesInput
+	Copy  func(*types.MonitorInstancesInput) MonitorInstancesRequest
 }
 
 // Send marshals and sends the MonitorInstances API request.
@@ -107,7 +61,7 @@ func (r MonitorInstancesRequest) Send(ctx context.Context) (*MonitorInstancesRes
 	}
 
 	resp := &MonitorInstancesResponse{
-		MonitorInstancesOutput: r.Request.Data.(*MonitorInstancesOutput),
+		MonitorInstancesOutput: r.Request.Data.(*types.MonitorInstancesOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -117,7 +71,7 @@ func (r MonitorInstancesRequest) Send(ctx context.Context) (*MonitorInstancesRes
 // MonitorInstancesResponse is the response type for the
 // MonitorInstances API operation.
 type MonitorInstancesResponse struct {
-	*MonitorInstancesOutput
+	*types.MonitorInstancesOutput
 
 	response *aws.Response
 }

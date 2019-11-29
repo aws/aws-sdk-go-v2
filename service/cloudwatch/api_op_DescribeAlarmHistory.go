@@ -4,70 +4,10 @@ package cloudwatch
 
 import (
 	"context"
-	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/cloudwatch/types"
 )
-
-type DescribeAlarmHistoryInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the alarm.
-	AlarmName *string `min:"1" type:"string"`
-
-	// The ending date to retrieve alarm history.
-	EndDate *time.Time `type:"timestamp"`
-
-	// The type of alarm histories to retrieve.
-	HistoryItemType HistoryItemType `type:"string" enum:"true"`
-
-	// The maximum number of alarm history records to retrieve.
-	MaxRecords *int64 `min:"1" type:"integer"`
-
-	// The token returned by a previous call to indicate that there is more data
-	// available.
-	NextToken *string `type:"string"`
-
-	// The starting date to retrieve alarm history.
-	StartDate *time.Time `type:"timestamp"`
-}
-
-// String returns the string representation
-func (s DescribeAlarmHistoryInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeAlarmHistoryInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeAlarmHistoryInput"}
-	if s.AlarmName != nil && len(*s.AlarmName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("AlarmName", 1))
-	}
-	if s.MaxRecords != nil && *s.MaxRecords < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxRecords", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribeAlarmHistoryOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The alarm histories, in JSON format.
-	AlarmHistoryItems []AlarmHistoryItem `type:"list"`
-
-	// The token that marks the start of the next batch of returned results.
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeAlarmHistoryOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeAlarmHistory = "DescribeAlarmHistory"
 
@@ -88,7 +28,7 @@ const opDescribeAlarmHistory = "DescribeAlarmHistory"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/DescribeAlarmHistory
-func (c *Client) DescribeAlarmHistoryRequest(input *DescribeAlarmHistoryInput) DescribeAlarmHistoryRequest {
+func (c *Client) DescribeAlarmHistoryRequest(input *types.DescribeAlarmHistoryInput) DescribeAlarmHistoryRequest {
 	op := &aws.Operation{
 		Name:       opDescribeAlarmHistory,
 		HTTPMethod: "POST",
@@ -102,10 +42,10 @@ func (c *Client) DescribeAlarmHistoryRequest(input *DescribeAlarmHistoryInput) D
 	}
 
 	if input == nil {
-		input = &DescribeAlarmHistoryInput{}
+		input = &types.DescribeAlarmHistoryInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeAlarmHistoryOutput{})
+	req := c.newRequest(op, input, &types.DescribeAlarmHistoryOutput{})
 	return DescribeAlarmHistoryRequest{Request: req, Input: input, Copy: c.DescribeAlarmHistoryRequest}
 }
 
@@ -113,8 +53,8 @@ func (c *Client) DescribeAlarmHistoryRequest(input *DescribeAlarmHistoryInput) D
 // DescribeAlarmHistory API operation.
 type DescribeAlarmHistoryRequest struct {
 	*aws.Request
-	Input *DescribeAlarmHistoryInput
-	Copy  func(*DescribeAlarmHistoryInput) DescribeAlarmHistoryRequest
+	Input *types.DescribeAlarmHistoryInput
+	Copy  func(*types.DescribeAlarmHistoryInput) DescribeAlarmHistoryRequest
 }
 
 // Send marshals and sends the DescribeAlarmHistory API request.
@@ -126,7 +66,7 @@ func (r DescribeAlarmHistoryRequest) Send(ctx context.Context) (*DescribeAlarmHi
 	}
 
 	resp := &DescribeAlarmHistoryResponse{
-		DescribeAlarmHistoryOutput: r.Request.Data.(*DescribeAlarmHistoryOutput),
+		DescribeAlarmHistoryOutput: r.Request.Data.(*types.DescribeAlarmHistoryOutput),
 		response:                   &aws.Response{Request: r.Request},
 	}
 
@@ -156,7 +96,7 @@ func NewDescribeAlarmHistoryPaginator(req DescribeAlarmHistoryRequest) DescribeA
 	return DescribeAlarmHistoryPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *DescribeAlarmHistoryInput
+				var inCpy *types.DescribeAlarmHistoryInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -176,14 +116,14 @@ type DescribeAlarmHistoryPaginator struct {
 	aws.Pager
 }
 
-func (p *DescribeAlarmHistoryPaginator) CurrentPage() *DescribeAlarmHistoryOutput {
-	return p.Pager.CurrentPage().(*DescribeAlarmHistoryOutput)
+func (p *DescribeAlarmHistoryPaginator) CurrentPage() *types.DescribeAlarmHistoryOutput {
+	return p.Pager.CurrentPage().(*types.DescribeAlarmHistoryOutput)
 }
 
 // DescribeAlarmHistoryResponse is the response type for the
 // DescribeAlarmHistory API operation.
 type DescribeAlarmHistoryResponse struct {
-	*DescribeAlarmHistoryOutput
+	*types.DescribeAlarmHistoryOutput
 
 	response *aws.Response
 }

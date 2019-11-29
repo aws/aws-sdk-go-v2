@@ -6,94 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/chime/types"
 )
-
-type ListPhoneNumberOrdersInput struct {
-	_ struct{} `type:"structure"`
-
-	// The maximum number of results to return in a single call.
-	MaxResults *int64 `location:"querystring" locationName:"max-results" min:"1" type:"integer"`
-
-	// The token to use to retrieve the next page of results.
-	NextToken *string `location:"querystring" locationName:"next-token" type:"string"`
-}
-
-// String returns the string representation
-func (s ListPhoneNumberOrdersInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListPhoneNumberOrdersInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListPhoneNumberOrdersInput"}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListPhoneNumberOrdersInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.MaxResults != nil {
-		v := *s.MaxResults
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "max-results", protocol.Int64Value(v), metadata)
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "next-token", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type ListPhoneNumberOrdersOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The token to use to retrieve the next page of results.
-	NextToken *string `type:"string"`
-
-	// The phone number order details.
-	PhoneNumberOrders []PhoneNumberOrder `type:"list"`
-}
-
-// String returns the string representation
-func (s ListPhoneNumberOrdersOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListPhoneNumberOrdersOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.PhoneNumberOrders != nil {
-		v := s.PhoneNumberOrders
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "PhoneNumberOrders", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	return nil
-}
 
 const opListPhoneNumberOrders = "ListPhoneNumberOrders"
 
@@ -110,7 +24,7 @@ const opListPhoneNumberOrders = "ListPhoneNumberOrders"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/ListPhoneNumberOrders
-func (c *Client) ListPhoneNumberOrdersRequest(input *ListPhoneNumberOrdersInput) ListPhoneNumberOrdersRequest {
+func (c *Client) ListPhoneNumberOrdersRequest(input *types.ListPhoneNumberOrdersInput) ListPhoneNumberOrdersRequest {
 	op := &aws.Operation{
 		Name:       opListPhoneNumberOrders,
 		HTTPMethod: "GET",
@@ -124,10 +38,10 @@ func (c *Client) ListPhoneNumberOrdersRequest(input *ListPhoneNumberOrdersInput)
 	}
 
 	if input == nil {
-		input = &ListPhoneNumberOrdersInput{}
+		input = &types.ListPhoneNumberOrdersInput{}
 	}
 
-	req := c.newRequest(op, input, &ListPhoneNumberOrdersOutput{})
+	req := c.newRequest(op, input, &types.ListPhoneNumberOrdersOutput{})
 	return ListPhoneNumberOrdersRequest{Request: req, Input: input, Copy: c.ListPhoneNumberOrdersRequest}
 }
 
@@ -135,8 +49,8 @@ func (c *Client) ListPhoneNumberOrdersRequest(input *ListPhoneNumberOrdersInput)
 // ListPhoneNumberOrders API operation.
 type ListPhoneNumberOrdersRequest struct {
 	*aws.Request
-	Input *ListPhoneNumberOrdersInput
-	Copy  func(*ListPhoneNumberOrdersInput) ListPhoneNumberOrdersRequest
+	Input *types.ListPhoneNumberOrdersInput
+	Copy  func(*types.ListPhoneNumberOrdersInput) ListPhoneNumberOrdersRequest
 }
 
 // Send marshals and sends the ListPhoneNumberOrders API request.
@@ -148,7 +62,7 @@ func (r ListPhoneNumberOrdersRequest) Send(ctx context.Context) (*ListPhoneNumbe
 	}
 
 	resp := &ListPhoneNumberOrdersResponse{
-		ListPhoneNumberOrdersOutput: r.Request.Data.(*ListPhoneNumberOrdersOutput),
+		ListPhoneNumberOrdersOutput: r.Request.Data.(*types.ListPhoneNumberOrdersOutput),
 		response:                    &aws.Response{Request: r.Request},
 	}
 
@@ -178,7 +92,7 @@ func NewListPhoneNumberOrdersPaginator(req ListPhoneNumberOrdersRequest) ListPho
 	return ListPhoneNumberOrdersPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListPhoneNumberOrdersInput
+				var inCpy *types.ListPhoneNumberOrdersInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -198,14 +112,14 @@ type ListPhoneNumberOrdersPaginator struct {
 	aws.Pager
 }
 
-func (p *ListPhoneNumberOrdersPaginator) CurrentPage() *ListPhoneNumberOrdersOutput {
-	return p.Pager.CurrentPage().(*ListPhoneNumberOrdersOutput)
+func (p *ListPhoneNumberOrdersPaginator) CurrentPage() *types.ListPhoneNumberOrdersOutput {
+	return p.Pager.CurrentPage().(*types.ListPhoneNumberOrdersOutput)
 }
 
 // ListPhoneNumberOrdersResponse is the response type for the
 // ListPhoneNumberOrders API operation.
 type ListPhoneNumberOrdersResponse struct {
-	*ListPhoneNumberOrdersOutput
+	*types.ListPhoneNumberOrdersOutput
 
 	response *aws.Response
 }

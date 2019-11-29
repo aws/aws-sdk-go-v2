@@ -4,162 +4,10 @@ package pinpointemail
 
 import (
 	"context"
-	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/pinpointemail/types"
 )
-
-// Retrieve deliverability data for all the campaigns that used a specific domain
-// to send email during a specified time range. This data is available for a
-// domain only if you enabled the Deliverability dashboard (PutDeliverabilityDashboardOption
-// operation) for the domain.
-type ListDomainDeliverabilityCampaignsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The last day, in Unix time format, that you want to obtain deliverability
-	// data for. This value has to be less than or equal to 30 days after the value
-	// of the StartDate parameter.
-	//
-	// EndDate is a required field
-	EndDate *time.Time `location:"querystring" locationName:"EndDate" type:"timestamp" required:"true"`
-
-	// A token that’s returned from a previous call to the ListDomainDeliverabilityCampaigns
-	// operation. This token indicates the position of a campaign in the list of
-	// campaigns.
-	NextToken *string `location:"querystring" locationName:"NextToken" type:"string"`
-
-	// The maximum number of results to include in response to a single call to
-	// the ListDomainDeliverabilityCampaigns operation. If the number of results
-	// is larger than the number that you specify in this parameter, the response
-	// includes a NextToken element, which you can use to obtain additional results.
-	PageSize *int64 `location:"querystring" locationName:"PageSize" type:"integer"`
-
-	// The first day, in Unix time format, that you want to obtain deliverability
-	// data for.
-	//
-	// StartDate is a required field
-	StartDate *time.Time `location:"querystring" locationName:"StartDate" type:"timestamp" required:"true"`
-
-	// The domain to obtain deliverability data for.
-	//
-	// SubscribedDomain is a required field
-	SubscribedDomain *string `location:"uri" locationName:"SubscribedDomain" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s ListDomainDeliverabilityCampaignsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListDomainDeliverabilityCampaignsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListDomainDeliverabilityCampaignsInput"}
-
-	if s.EndDate == nil {
-		invalidParams.Add(aws.NewErrParamRequired("EndDate"))
-	}
-
-	if s.StartDate == nil {
-		invalidParams.Add(aws.NewErrParamRequired("StartDate"))
-	}
-
-	if s.SubscribedDomain == nil {
-		invalidParams.Add(aws.NewErrParamRequired("SubscribedDomain"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListDomainDeliverabilityCampaignsInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.SubscribedDomain != nil {
-		v := *s.SubscribedDomain
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "SubscribedDomain", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.EndDate != nil {
-		v := *s.EndDate
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "EndDate",
-			protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormatName, QuotedFormatTime: false}, metadata)
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.PageSize != nil {
-		v := *s.PageSize
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "PageSize", protocol.Int64Value(v), metadata)
-	}
-	if s.StartDate != nil {
-		v := *s.StartDate
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "StartDate",
-			protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormatName, QuotedFormatTime: false}, metadata)
-	}
-	return nil
-}
-
-// An array of objects that provide deliverability data for all the campaigns
-// that used a specific domain to send email during a specified time range.
-// This data is available for a domain only if you enabled the Deliverability
-// dashboard (PutDeliverabilityDashboardOption operation) for the domain.
-type ListDomainDeliverabilityCampaignsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// An array of responses, one for each campaign that used the domain to send
-	// email during the specified time range.
-	//
-	// DomainDeliverabilityCampaigns is a required field
-	DomainDeliverabilityCampaigns []DomainDeliverabilityCampaign `type:"list" required:"true"`
-
-	// A token that’s returned from a previous call to the ListDomainDeliverabilityCampaigns
-	// operation. This token indicates the position of the campaign in the list
-	// of campaigns.
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s ListDomainDeliverabilityCampaignsOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListDomainDeliverabilityCampaignsOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.DomainDeliverabilityCampaigns != nil {
-		v := s.DomainDeliverabilityCampaigns
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "DomainDeliverabilityCampaigns", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opListDomainDeliverabilityCampaigns = "ListDomainDeliverabilityCampaigns"
 
@@ -179,7 +27,7 @@ const opListDomainDeliverabilityCampaigns = "ListDomainDeliverabilityCampaigns"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/ListDomainDeliverabilityCampaigns
-func (c *Client) ListDomainDeliverabilityCampaignsRequest(input *ListDomainDeliverabilityCampaignsInput) ListDomainDeliverabilityCampaignsRequest {
+func (c *Client) ListDomainDeliverabilityCampaignsRequest(input *types.ListDomainDeliverabilityCampaignsInput) ListDomainDeliverabilityCampaignsRequest {
 	op := &aws.Operation{
 		Name:       opListDomainDeliverabilityCampaigns,
 		HTTPMethod: "GET",
@@ -193,10 +41,10 @@ func (c *Client) ListDomainDeliverabilityCampaignsRequest(input *ListDomainDeliv
 	}
 
 	if input == nil {
-		input = &ListDomainDeliverabilityCampaignsInput{}
+		input = &types.ListDomainDeliverabilityCampaignsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListDomainDeliverabilityCampaignsOutput{})
+	req := c.newRequest(op, input, &types.ListDomainDeliverabilityCampaignsOutput{})
 	return ListDomainDeliverabilityCampaignsRequest{Request: req, Input: input, Copy: c.ListDomainDeliverabilityCampaignsRequest}
 }
 
@@ -204,8 +52,8 @@ func (c *Client) ListDomainDeliverabilityCampaignsRequest(input *ListDomainDeliv
 // ListDomainDeliverabilityCampaigns API operation.
 type ListDomainDeliverabilityCampaignsRequest struct {
 	*aws.Request
-	Input *ListDomainDeliverabilityCampaignsInput
-	Copy  func(*ListDomainDeliverabilityCampaignsInput) ListDomainDeliverabilityCampaignsRequest
+	Input *types.ListDomainDeliverabilityCampaignsInput
+	Copy  func(*types.ListDomainDeliverabilityCampaignsInput) ListDomainDeliverabilityCampaignsRequest
 }
 
 // Send marshals and sends the ListDomainDeliverabilityCampaigns API request.
@@ -217,7 +65,7 @@ func (r ListDomainDeliverabilityCampaignsRequest) Send(ctx context.Context) (*Li
 	}
 
 	resp := &ListDomainDeliverabilityCampaignsResponse{
-		ListDomainDeliverabilityCampaignsOutput: r.Request.Data.(*ListDomainDeliverabilityCampaignsOutput),
+		ListDomainDeliverabilityCampaignsOutput: r.Request.Data.(*types.ListDomainDeliverabilityCampaignsOutput),
 		response:                                &aws.Response{Request: r.Request},
 	}
 
@@ -247,7 +95,7 @@ func NewListDomainDeliverabilityCampaignsPaginator(req ListDomainDeliverabilityC
 	return ListDomainDeliverabilityCampaignsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListDomainDeliverabilityCampaignsInput
+				var inCpy *types.ListDomainDeliverabilityCampaignsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -267,14 +115,14 @@ type ListDomainDeliverabilityCampaignsPaginator struct {
 	aws.Pager
 }
 
-func (p *ListDomainDeliverabilityCampaignsPaginator) CurrentPage() *ListDomainDeliverabilityCampaignsOutput {
-	return p.Pager.CurrentPage().(*ListDomainDeliverabilityCampaignsOutput)
+func (p *ListDomainDeliverabilityCampaignsPaginator) CurrentPage() *types.ListDomainDeliverabilityCampaignsOutput {
+	return p.Pager.CurrentPage().(*types.ListDomainDeliverabilityCampaignsOutput)
 }
 
 // ListDomainDeliverabilityCampaignsResponse is the response type for the
 // ListDomainDeliverabilityCampaigns API operation.
 type ListDomainDeliverabilityCampaignsResponse struct {
-	*ListDomainDeliverabilityCampaignsOutput
+	*types.ListDomainDeliverabilityCampaignsOutput
 
 	response *aws.Response
 }

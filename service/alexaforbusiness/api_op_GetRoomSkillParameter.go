@@ -6,64 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/alexaforbusiness/types"
 )
-
-type GetRoomSkillParameterInput struct {
-	_ struct{} `type:"structure"`
-
-	// The room skill parameter key for which to get details. Required.
-	//
-	// ParameterKey is a required field
-	ParameterKey *string `min:"1" type:"string" required:"true"`
-
-	// The ARN of the room from which to get the room skill parameter details.
-	RoomArn *string `type:"string"`
-
-	// The ARN of the skill from which to get the room skill parameter details.
-	// Required.
-	//
-	// SkillId is a required field
-	SkillId *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetRoomSkillParameterInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetRoomSkillParameterInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetRoomSkillParameterInput"}
-
-	if s.ParameterKey == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ParameterKey"))
-	}
-	if s.ParameterKey != nil && len(*s.ParameterKey) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ParameterKey", 1))
-	}
-
-	if s.SkillId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("SkillId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type GetRoomSkillParameterOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The details of the room skill parameter requested. Required.
-	RoomSkillParameter *RoomSkillParameter `type:"structure"`
-}
-
-// String returns the string representation
-func (s GetRoomSkillParameterOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetRoomSkillParameter = "GetRoomSkillParameter"
 
@@ -80,7 +24,7 @@ const opGetRoomSkillParameter = "GetRoomSkillParameter"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/GetRoomSkillParameter
-func (c *Client) GetRoomSkillParameterRequest(input *GetRoomSkillParameterInput) GetRoomSkillParameterRequest {
+func (c *Client) GetRoomSkillParameterRequest(input *types.GetRoomSkillParameterInput) GetRoomSkillParameterRequest {
 	op := &aws.Operation{
 		Name:       opGetRoomSkillParameter,
 		HTTPMethod: "POST",
@@ -88,10 +32,10 @@ func (c *Client) GetRoomSkillParameterRequest(input *GetRoomSkillParameterInput)
 	}
 
 	if input == nil {
-		input = &GetRoomSkillParameterInput{}
+		input = &types.GetRoomSkillParameterInput{}
 	}
 
-	req := c.newRequest(op, input, &GetRoomSkillParameterOutput{})
+	req := c.newRequest(op, input, &types.GetRoomSkillParameterOutput{})
 	return GetRoomSkillParameterRequest{Request: req, Input: input, Copy: c.GetRoomSkillParameterRequest}
 }
 
@@ -99,8 +43,8 @@ func (c *Client) GetRoomSkillParameterRequest(input *GetRoomSkillParameterInput)
 // GetRoomSkillParameter API operation.
 type GetRoomSkillParameterRequest struct {
 	*aws.Request
-	Input *GetRoomSkillParameterInput
-	Copy  func(*GetRoomSkillParameterInput) GetRoomSkillParameterRequest
+	Input *types.GetRoomSkillParameterInput
+	Copy  func(*types.GetRoomSkillParameterInput) GetRoomSkillParameterRequest
 }
 
 // Send marshals and sends the GetRoomSkillParameter API request.
@@ -112,7 +56,7 @@ func (r GetRoomSkillParameterRequest) Send(ctx context.Context) (*GetRoomSkillPa
 	}
 
 	resp := &GetRoomSkillParameterResponse{
-		GetRoomSkillParameterOutput: r.Request.Data.(*GetRoomSkillParameterOutput),
+		GetRoomSkillParameterOutput: r.Request.Data.(*types.GetRoomSkillParameterOutput),
 		response:                    &aws.Response{Request: r.Request},
 	}
 
@@ -122,7 +66,7 @@ func (r GetRoomSkillParameterRequest) Send(ctx context.Context) (*GetRoomSkillPa
 // GetRoomSkillParameterResponse is the response type for the
 // GetRoomSkillParameter API operation.
 type GetRoomSkillParameterResponse struct {
-	*GetRoomSkillParameterOutput
+	*types.GetRoomSkillParameterOutput
 
 	response *aws.Response
 }

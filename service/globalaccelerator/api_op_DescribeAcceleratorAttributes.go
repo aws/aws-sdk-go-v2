@@ -6,49 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/globalaccelerator/types"
 )
-
-type DescribeAcceleratorAttributesInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the accelerator with the attributes that
-	// you want to describe.
-	//
-	// AcceleratorArn is a required field
-	AcceleratorArn *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeAcceleratorAttributesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeAcceleratorAttributesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeAcceleratorAttributesInput"}
-
-	if s.AcceleratorArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("AcceleratorArn"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribeAcceleratorAttributesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The attributes of the accelerator.
-	AcceleratorAttributes *AcceleratorAttributes `type:"structure"`
-}
-
-// String returns the string representation
-func (s DescribeAcceleratorAttributesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeAcceleratorAttributes = "DescribeAcceleratorAttributes"
 
@@ -65,7 +24,7 @@ const opDescribeAcceleratorAttributes = "DescribeAcceleratorAttributes"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/DescribeAcceleratorAttributes
-func (c *Client) DescribeAcceleratorAttributesRequest(input *DescribeAcceleratorAttributesInput) DescribeAcceleratorAttributesRequest {
+func (c *Client) DescribeAcceleratorAttributesRequest(input *types.DescribeAcceleratorAttributesInput) DescribeAcceleratorAttributesRequest {
 	op := &aws.Operation{
 		Name:       opDescribeAcceleratorAttributes,
 		HTTPMethod: "POST",
@@ -73,10 +32,10 @@ func (c *Client) DescribeAcceleratorAttributesRequest(input *DescribeAccelerator
 	}
 
 	if input == nil {
-		input = &DescribeAcceleratorAttributesInput{}
+		input = &types.DescribeAcceleratorAttributesInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeAcceleratorAttributesOutput{})
+	req := c.newRequest(op, input, &types.DescribeAcceleratorAttributesOutput{})
 	return DescribeAcceleratorAttributesRequest{Request: req, Input: input, Copy: c.DescribeAcceleratorAttributesRequest}
 }
 
@@ -84,8 +43,8 @@ func (c *Client) DescribeAcceleratorAttributesRequest(input *DescribeAccelerator
 // DescribeAcceleratorAttributes API operation.
 type DescribeAcceleratorAttributesRequest struct {
 	*aws.Request
-	Input *DescribeAcceleratorAttributesInput
-	Copy  func(*DescribeAcceleratorAttributesInput) DescribeAcceleratorAttributesRequest
+	Input *types.DescribeAcceleratorAttributesInput
+	Copy  func(*types.DescribeAcceleratorAttributesInput) DescribeAcceleratorAttributesRequest
 }
 
 // Send marshals and sends the DescribeAcceleratorAttributes API request.
@@ -97,7 +56,7 @@ func (r DescribeAcceleratorAttributesRequest) Send(ctx context.Context) (*Descri
 	}
 
 	resp := &DescribeAcceleratorAttributesResponse{
-		DescribeAcceleratorAttributesOutput: r.Request.Data.(*DescribeAcceleratorAttributesOutput),
+		DescribeAcceleratorAttributesOutput: r.Request.Data.(*types.DescribeAcceleratorAttributesOutput),
 		response:                            &aws.Response{Request: r.Request},
 	}
 
@@ -107,7 +66,7 @@ func (r DescribeAcceleratorAttributesRequest) Send(ctx context.Context) (*Descri
 // DescribeAcceleratorAttributesResponse is the response type for the
 // DescribeAcceleratorAttributes API operation.
 type DescribeAcceleratorAttributesResponse struct {
-	*DescribeAcceleratorAttributesOutput
+	*types.DescribeAcceleratorAttributesOutput
 
 	response *aws.Response
 }

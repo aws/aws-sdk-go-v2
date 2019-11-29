@@ -6,64 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ses/types"
 )
-
-// Represents a request to send a custom verification email to a specified recipient.
-type SendCustomVerificationEmailInput struct {
-	_ struct{} `type:"structure"`
-
-	// Name of a configuration set to use when sending the verification email.
-	ConfigurationSetName *string `type:"string"`
-
-	// The email address to verify.
-	//
-	// EmailAddress is a required field
-	EmailAddress *string `type:"string" required:"true"`
-
-	// The name of the custom verification email template to use when sending the
-	// verification email.
-	//
-	// TemplateName is a required field
-	TemplateName *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s SendCustomVerificationEmailInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *SendCustomVerificationEmailInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "SendCustomVerificationEmailInput"}
-
-	if s.EmailAddress == nil {
-		invalidParams.Add(aws.NewErrParamRequired("EmailAddress"))
-	}
-
-	if s.TemplateName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("TemplateName"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// The response received when attempting to send the custom verification email.
-type SendCustomVerificationEmailOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The unique message identifier returned from the SendCustomVerificationEmail
-	// operation.
-	MessageId *string `type:"string"`
-}
-
-// String returns the string representation
-func (s SendCustomVerificationEmailOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opSendCustomVerificationEmail = "SendCustomVerificationEmail"
 
@@ -90,7 +34,7 @@ const opSendCustomVerificationEmail = "SendCustomVerificationEmail"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/SendCustomVerificationEmail
-func (c *Client) SendCustomVerificationEmailRequest(input *SendCustomVerificationEmailInput) SendCustomVerificationEmailRequest {
+func (c *Client) SendCustomVerificationEmailRequest(input *types.SendCustomVerificationEmailInput) SendCustomVerificationEmailRequest {
 	op := &aws.Operation{
 		Name:       opSendCustomVerificationEmail,
 		HTTPMethod: "POST",
@@ -98,10 +42,10 @@ func (c *Client) SendCustomVerificationEmailRequest(input *SendCustomVerificatio
 	}
 
 	if input == nil {
-		input = &SendCustomVerificationEmailInput{}
+		input = &types.SendCustomVerificationEmailInput{}
 	}
 
-	req := c.newRequest(op, input, &SendCustomVerificationEmailOutput{})
+	req := c.newRequest(op, input, &types.SendCustomVerificationEmailOutput{})
 	return SendCustomVerificationEmailRequest{Request: req, Input: input, Copy: c.SendCustomVerificationEmailRequest}
 }
 
@@ -109,8 +53,8 @@ func (c *Client) SendCustomVerificationEmailRequest(input *SendCustomVerificatio
 // SendCustomVerificationEmail API operation.
 type SendCustomVerificationEmailRequest struct {
 	*aws.Request
-	Input *SendCustomVerificationEmailInput
-	Copy  func(*SendCustomVerificationEmailInput) SendCustomVerificationEmailRequest
+	Input *types.SendCustomVerificationEmailInput
+	Copy  func(*types.SendCustomVerificationEmailInput) SendCustomVerificationEmailRequest
 }
 
 // Send marshals and sends the SendCustomVerificationEmail API request.
@@ -122,7 +66,7 @@ func (r SendCustomVerificationEmailRequest) Send(ctx context.Context) (*SendCust
 	}
 
 	resp := &SendCustomVerificationEmailResponse{
-		SendCustomVerificationEmailOutput: r.Request.Data.(*SendCustomVerificationEmailOutput),
+		SendCustomVerificationEmailOutput: r.Request.Data.(*types.SendCustomVerificationEmailOutput),
 		response:                          &aws.Response{Request: r.Request},
 	}
 
@@ -132,7 +76,7 @@ func (r SendCustomVerificationEmailRequest) Send(ctx context.Context) (*SendCust
 // SendCustomVerificationEmailResponse is the response type for the
 // SendCustomVerificationEmail API operation.
 type SendCustomVerificationEmailResponse struct {
-	*SendCustomVerificationEmailOutput
+	*types.SendCustomVerificationEmailOutput
 
 	response *aws.Response
 }

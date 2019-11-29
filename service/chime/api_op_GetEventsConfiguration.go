@@ -6,88 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/chime/types"
 )
-
-type GetEventsConfigurationInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Chime account ID.
-	//
-	// AccountId is a required field
-	AccountId *string `location:"uri" locationName:"accountId" type:"string" required:"true"`
-
-	// The bot ID.
-	//
-	// BotId is a required field
-	BotId *string `location:"uri" locationName:"botId" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetEventsConfigurationInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetEventsConfigurationInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetEventsConfigurationInput"}
-
-	if s.AccountId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("AccountId"))
-	}
-
-	if s.BotId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("BotId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetEventsConfigurationInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.AccountId != nil {
-		v := *s.AccountId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "accountId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.BotId != nil {
-		v := *s.BotId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "botId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type GetEventsConfigurationOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The events configuration details.
-	EventsConfiguration *EventsConfiguration `type:"structure"`
-}
-
-// String returns the string representation
-func (s GetEventsConfigurationOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetEventsConfigurationOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.EventsConfiguration != nil {
-		v := s.EventsConfiguration
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "EventsConfiguration", v, metadata)
-	}
-	return nil
-}
 
 const opGetEventsConfiguration = "GetEventsConfiguration"
 
@@ -105,7 +25,7 @@ const opGetEventsConfiguration = "GetEventsConfiguration"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/GetEventsConfiguration
-func (c *Client) GetEventsConfigurationRequest(input *GetEventsConfigurationInput) GetEventsConfigurationRequest {
+func (c *Client) GetEventsConfigurationRequest(input *types.GetEventsConfigurationInput) GetEventsConfigurationRequest {
 	op := &aws.Operation{
 		Name:       opGetEventsConfiguration,
 		HTTPMethod: "GET",
@@ -113,10 +33,10 @@ func (c *Client) GetEventsConfigurationRequest(input *GetEventsConfigurationInpu
 	}
 
 	if input == nil {
-		input = &GetEventsConfigurationInput{}
+		input = &types.GetEventsConfigurationInput{}
 	}
 
-	req := c.newRequest(op, input, &GetEventsConfigurationOutput{})
+	req := c.newRequest(op, input, &types.GetEventsConfigurationOutput{})
 	return GetEventsConfigurationRequest{Request: req, Input: input, Copy: c.GetEventsConfigurationRequest}
 }
 
@@ -124,8 +44,8 @@ func (c *Client) GetEventsConfigurationRequest(input *GetEventsConfigurationInpu
 // GetEventsConfiguration API operation.
 type GetEventsConfigurationRequest struct {
 	*aws.Request
-	Input *GetEventsConfigurationInput
-	Copy  func(*GetEventsConfigurationInput) GetEventsConfigurationRequest
+	Input *types.GetEventsConfigurationInput
+	Copy  func(*types.GetEventsConfigurationInput) GetEventsConfigurationRequest
 }
 
 // Send marshals and sends the GetEventsConfiguration API request.
@@ -137,7 +57,7 @@ func (r GetEventsConfigurationRequest) Send(ctx context.Context) (*GetEventsConf
 	}
 
 	resp := &GetEventsConfigurationResponse{
-		GetEventsConfigurationOutput: r.Request.Data.(*GetEventsConfigurationOutput),
+		GetEventsConfigurationOutput: r.Request.Data.(*types.GetEventsConfigurationOutput),
 		response:                     &aws.Response{Request: r.Request},
 	}
 
@@ -147,7 +67,7 @@ func (r GetEventsConfigurationRequest) Send(ctx context.Context) (*GetEventsConf
 // GetEventsConfigurationResponse is the response type for the
 // GetEventsConfiguration API operation.
 type GetEventsConfigurationResponse struct {
-	*GetEventsConfigurationOutput
+	*types.GetEventsConfigurationOutput
 
 	response *aws.Response
 }

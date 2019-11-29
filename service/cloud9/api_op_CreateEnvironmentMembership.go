@@ -6,71 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/cloud9/types"
 )
-
-type CreateEnvironmentMembershipInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the environment that contains the environment member you want to
-	// add.
-	//
-	// EnvironmentId is a required field
-	EnvironmentId *string `locationName:"environmentId" type:"string" required:"true"`
-
-	// The type of environment member permissions you want to associate with this
-	// environment member. Available values include:
-	//
-	//    * read-only: Has read-only access to the environment.
-	//
-	//    * read-write: Has read-write access to the environment.
-	//
-	// Permissions is a required field
-	Permissions MemberPermissions `locationName:"permissions" type:"string" required:"true" enum:"true"`
-
-	// The Amazon Resource Name (ARN) of the environment member you want to add.
-	//
-	// UserArn is a required field
-	UserArn *string `locationName:"userArn" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s CreateEnvironmentMembershipInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateEnvironmentMembershipInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateEnvironmentMembershipInput"}
-
-	if s.EnvironmentId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("EnvironmentId"))
-	}
-	if len(s.Permissions) == 0 {
-		invalidParams.Add(aws.NewErrParamRequired("Permissions"))
-	}
-
-	if s.UserArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("UserArn"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type CreateEnvironmentMembershipOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Information about the environment member that was added.
-	Membership *EnvironmentMember `locationName:"membership" type:"structure"`
-}
-
-// String returns the string representation
-func (s CreateEnvironmentMembershipOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCreateEnvironmentMembership = "CreateEnvironmentMembership"
 
@@ -87,7 +24,7 @@ const opCreateEnvironmentMembership = "CreateEnvironmentMembership"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloud9-2017-09-23/CreateEnvironmentMembership
-func (c *Client) CreateEnvironmentMembershipRequest(input *CreateEnvironmentMembershipInput) CreateEnvironmentMembershipRequest {
+func (c *Client) CreateEnvironmentMembershipRequest(input *types.CreateEnvironmentMembershipInput) CreateEnvironmentMembershipRequest {
 	op := &aws.Operation{
 		Name:       opCreateEnvironmentMembership,
 		HTTPMethod: "POST",
@@ -95,10 +32,10 @@ func (c *Client) CreateEnvironmentMembershipRequest(input *CreateEnvironmentMemb
 	}
 
 	if input == nil {
-		input = &CreateEnvironmentMembershipInput{}
+		input = &types.CreateEnvironmentMembershipInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateEnvironmentMembershipOutput{})
+	req := c.newRequest(op, input, &types.CreateEnvironmentMembershipOutput{})
 	return CreateEnvironmentMembershipRequest{Request: req, Input: input, Copy: c.CreateEnvironmentMembershipRequest}
 }
 
@@ -106,8 +43,8 @@ func (c *Client) CreateEnvironmentMembershipRequest(input *CreateEnvironmentMemb
 // CreateEnvironmentMembership API operation.
 type CreateEnvironmentMembershipRequest struct {
 	*aws.Request
-	Input *CreateEnvironmentMembershipInput
-	Copy  func(*CreateEnvironmentMembershipInput) CreateEnvironmentMembershipRequest
+	Input *types.CreateEnvironmentMembershipInput
+	Copy  func(*types.CreateEnvironmentMembershipInput) CreateEnvironmentMembershipRequest
 }
 
 // Send marshals and sends the CreateEnvironmentMembership API request.
@@ -119,7 +56,7 @@ func (r CreateEnvironmentMembershipRequest) Send(ctx context.Context) (*CreateEn
 	}
 
 	resp := &CreateEnvironmentMembershipResponse{
-		CreateEnvironmentMembershipOutput: r.Request.Data.(*CreateEnvironmentMembershipOutput),
+		CreateEnvironmentMembershipOutput: r.Request.Data.(*types.CreateEnvironmentMembershipOutput),
 		response:                          &aws.Response{Request: r.Request},
 	}
 
@@ -129,7 +66,7 @@ func (r CreateEnvironmentMembershipRequest) Send(ctx context.Context) (*CreateEn
 // CreateEnvironmentMembershipResponse is the response type for the
 // CreateEnvironmentMembership API operation.
 type CreateEnvironmentMembershipResponse struct {
-	*CreateEnvironmentMembershipOutput
+	*types.CreateEnvironmentMembershipOutput
 
 	response *aws.Response
 }

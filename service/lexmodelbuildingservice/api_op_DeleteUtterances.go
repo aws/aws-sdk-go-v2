@@ -6,89 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/restjson"
+	"github.com/aws/aws-sdk-go-v2/service/lexmodelbuildingservice/types"
 )
-
-type DeleteUtterancesInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the bot that stored the utterances.
-	//
-	// BotName is a required field
-	BotName *string `location:"uri" locationName:"botName" min:"2" type:"string" required:"true"`
-
-	// The unique identifier for the user that made the utterances. This is the
-	// user ID that was sent in the PostContent (http://docs.aws.amazon.com/lex/latest/dg/API_runtime_PostContent.html)
-	// or PostText (http://docs.aws.amazon.com/lex/latest/dg/API_runtime_PostText.html)
-	// operation request that contained the utterance.
-	//
-	// UserId is a required field
-	UserId *string `location:"uri" locationName:"userId" min:"2" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteUtterancesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteUtterancesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteUtterancesInput"}
-
-	if s.BotName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("BotName"))
-	}
-	if s.BotName != nil && len(*s.BotName) < 2 {
-		invalidParams.Add(aws.NewErrParamMinLen("BotName", 2))
-	}
-
-	if s.UserId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("UserId"))
-	}
-	if s.UserId != nil && len(*s.UserId) < 2 {
-		invalidParams.Add(aws.NewErrParamMinLen("UserId", 2))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteUtterancesInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.BotName != nil {
-		v := *s.BotName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "botName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.UserId != nil {
-		v := *s.UserId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "userId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type DeleteUtterancesOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteUtterancesOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteUtterancesOutput) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
 
 const opDeleteUtterances = "DeleteUtterances"
 
@@ -115,7 +36,7 @@ const opDeleteUtterances = "DeleteUtterances"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/DeleteUtterances
-func (c *Client) DeleteUtterancesRequest(input *DeleteUtterancesInput) DeleteUtterancesRequest {
+func (c *Client) DeleteUtterancesRequest(input *types.DeleteUtterancesInput) DeleteUtterancesRequest {
 	op := &aws.Operation{
 		Name:       opDeleteUtterances,
 		HTTPMethod: "DELETE",
@@ -123,10 +44,10 @@ func (c *Client) DeleteUtterancesRequest(input *DeleteUtterancesInput) DeleteUtt
 	}
 
 	if input == nil {
-		input = &DeleteUtterancesInput{}
+		input = &types.DeleteUtterancesInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteUtterancesOutput{})
+	req := c.newRequest(op, input, &types.DeleteUtterancesOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return DeleteUtterancesRequest{Request: req, Input: input, Copy: c.DeleteUtterancesRequest}
@@ -136,8 +57,8 @@ func (c *Client) DeleteUtterancesRequest(input *DeleteUtterancesInput) DeleteUtt
 // DeleteUtterances API operation.
 type DeleteUtterancesRequest struct {
 	*aws.Request
-	Input *DeleteUtterancesInput
-	Copy  func(*DeleteUtterancesInput) DeleteUtterancesRequest
+	Input *types.DeleteUtterancesInput
+	Copy  func(*types.DeleteUtterancesInput) DeleteUtterancesRequest
 }
 
 // Send marshals and sends the DeleteUtterances API request.
@@ -149,7 +70,7 @@ func (r DeleteUtterancesRequest) Send(ctx context.Context) (*DeleteUtterancesRes
 	}
 
 	resp := &DeleteUtterancesResponse{
-		DeleteUtterancesOutput: r.Request.Data.(*DeleteUtterancesOutput),
+		DeleteUtterancesOutput: r.Request.Data.(*types.DeleteUtterancesOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -159,7 +80,7 @@ func (r DeleteUtterancesRequest) Send(ctx context.Context) (*DeleteUtterancesRes
 // DeleteUtterancesResponse is the response type for the
 // DeleteUtterances API operation.
 type DeleteUtterancesResponse struct {
-	*DeleteUtterancesOutput
+	*types.DeleteUtterancesOutput
 
 	response *aws.Response
 }

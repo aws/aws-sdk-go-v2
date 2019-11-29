@@ -6,111 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/restjson"
+	"github.com/aws/aws-sdk-go-v2/service/apigateway/types"
 )
-
-// Represents a delete integration response request.
-type DeleteIntegrationResponseInput struct {
-	_ struct{} `type:"structure"`
-
-	// [Required] Specifies a delete integration response request's HTTP method.
-	//
-	// HttpMethod is a required field
-	HttpMethod *string `location:"uri" locationName:"http_method" type:"string" required:"true"`
-
-	// [Required] Specifies a delete integration response request's resource identifier.
-	//
-	// ResourceId is a required field
-	ResourceId *string `location:"uri" locationName:"resource_id" type:"string" required:"true"`
-
-	// [Required] The string identifier of the associated RestApi.
-	//
-	// RestApiId is a required field
-	RestApiId *string `location:"uri" locationName:"restapi_id" type:"string" required:"true"`
-
-	// [Required] Specifies a delete integration response request's status code.
-	//
-	// StatusCode is a required field
-	StatusCode *string `location:"uri" locationName:"status_code" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteIntegrationResponseInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteIntegrationResponseInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteIntegrationResponseInput"}
-
-	if s.HttpMethod == nil {
-		invalidParams.Add(aws.NewErrParamRequired("HttpMethod"))
-	}
-
-	if s.ResourceId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ResourceId"))
-	}
-
-	if s.RestApiId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("RestApiId"))
-	}
-
-	if s.StatusCode == nil {
-		invalidParams.Add(aws.NewErrParamRequired("StatusCode"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteIntegrationResponseInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.HttpMethod != nil {
-		v := *s.HttpMethod
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "http_method", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.ResourceId != nil {
-		v := *s.ResourceId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "resource_id", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.RestApiId != nil {
-		v := *s.RestApiId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "restapi_id", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.StatusCode != nil {
-		v := *s.StatusCode
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "status_code", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type DeleteIntegrationResponseOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteIntegrationResponseOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteIntegrationResponseOutput) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
 
 const opDeleteIntegrationResponse = "DeleteIntegrationResponse"
 
@@ -125,7 +24,7 @@ const opDeleteIntegrationResponse = "DeleteIntegrationResponse"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) DeleteIntegrationResponseRequest(input *DeleteIntegrationResponseInput) DeleteIntegrationResponseRequest {
+func (c *Client) DeleteIntegrationResponseRequest(input *types.DeleteIntegrationResponseInput) DeleteIntegrationResponseRequest {
 	op := &aws.Operation{
 		Name:       opDeleteIntegrationResponse,
 		HTTPMethod: "DELETE",
@@ -133,10 +32,10 @@ func (c *Client) DeleteIntegrationResponseRequest(input *DeleteIntegrationRespon
 	}
 
 	if input == nil {
-		input = &DeleteIntegrationResponseInput{}
+		input = &types.DeleteIntegrationResponseInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteIntegrationResponseOutput{})
+	req := c.newRequest(op, input, &types.DeleteIntegrationResponseOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return DeleteIntegrationResponseRequest{Request: req, Input: input, Copy: c.DeleteIntegrationResponseRequest}
@@ -146,8 +45,8 @@ func (c *Client) DeleteIntegrationResponseRequest(input *DeleteIntegrationRespon
 // DeleteIntegrationResponse API operation.
 type DeleteIntegrationResponseRequest struct {
 	*aws.Request
-	Input *DeleteIntegrationResponseInput
-	Copy  func(*DeleteIntegrationResponseInput) DeleteIntegrationResponseRequest
+	Input *types.DeleteIntegrationResponseInput
+	Copy  func(*types.DeleteIntegrationResponseInput) DeleteIntegrationResponseRequest
 }
 
 // Send marshals and sends the DeleteIntegrationResponse API request.
@@ -159,7 +58,7 @@ func (r DeleteIntegrationResponseRequest) Send(ctx context.Context) (*DeleteInte
 	}
 
 	resp := &DeleteIntegrationResponseResponse{
-		DeleteIntegrationResponseOutput: r.Request.Data.(*DeleteIntegrationResponseOutput),
+		DeleteIntegrationResponseOutput: r.Request.Data.(*types.DeleteIntegrationResponseOutput),
 		response:                        &aws.Response{Request: r.Request},
 	}
 
@@ -169,7 +68,7 @@ func (r DeleteIntegrationResponseRequest) Send(ctx context.Context) (*DeleteInte
 // DeleteIntegrationResponseResponse is the response type for the
 // DeleteIntegrationResponse API operation.
 type DeleteIntegrationResponseResponse struct {
-	*DeleteIntegrationResponseOutput
+	*types.DeleteIntegrationResponseOutput
 
 	response *aws.Response
 }

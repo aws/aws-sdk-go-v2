@@ -10,6 +10,7 @@ package firehoseiface
 
 import (
 	"github.com/aws/aws-sdk-go-v2/service/firehose"
+	"github.com/aws/aws-sdk-go-v2/service/firehose/types"
 )
 
 // ClientAPI provides an interface to enable mocking the
@@ -43,7 +44,7 @@ import (
 //    type mockClientClient struct {
 //        firehoseiface.ClientPI
 //    }
-//    func (m *mockClientClient) CreateDeliveryStream(input *firehose.CreateDeliveryStreamInput) (*firehose.CreateDeliveryStreamOutput, error) {
+//    func (m *mockClientClient) CreateDeliveryStream(input *types.CreateDeliveryStreamInput) (*types.CreateDeliveryStreamOutput, error) {
 //        // mock response/functionality
 //    }
 //
@@ -61,29 +62,29 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type ClientAPI interface {
-	CreateDeliveryStreamRequest(*firehose.CreateDeliveryStreamInput) firehose.CreateDeliveryStreamRequest
+	CreateDeliveryStreamRequest(*types.CreateDeliveryStreamInput) firehose.CreateDeliveryStreamRequest
 
-	DeleteDeliveryStreamRequest(*firehose.DeleteDeliveryStreamInput) firehose.DeleteDeliveryStreamRequest
+	DeleteDeliveryStreamRequest(*types.DeleteDeliveryStreamInput) firehose.DeleteDeliveryStreamRequest
 
-	DescribeDeliveryStreamRequest(*firehose.DescribeDeliveryStreamInput) firehose.DescribeDeliveryStreamRequest
+	DescribeDeliveryStreamRequest(*types.DescribeDeliveryStreamInput) firehose.DescribeDeliveryStreamRequest
 
-	ListDeliveryStreamsRequest(*firehose.ListDeliveryStreamsInput) firehose.ListDeliveryStreamsRequest
+	ListDeliveryStreamsRequest(*types.ListDeliveryStreamsInput) firehose.ListDeliveryStreamsRequest
 
-	ListTagsForDeliveryStreamRequest(*firehose.ListTagsForDeliveryStreamInput) firehose.ListTagsForDeliveryStreamRequest
+	ListTagsForDeliveryStreamRequest(*types.ListTagsForDeliveryStreamInput) firehose.ListTagsForDeliveryStreamRequest
 
-	PutRecordRequest(*firehose.PutRecordInput) firehose.PutRecordRequest
+	PutRecordRequest(*types.PutRecordInput) firehose.PutRecordRequest
 
-	PutRecordBatchRequest(*firehose.PutRecordBatchInput) firehose.PutRecordBatchRequest
+	PutRecordBatchRequest(*types.PutRecordBatchInput) firehose.PutRecordBatchRequest
 
-	StartDeliveryStreamEncryptionRequest(*firehose.StartDeliveryStreamEncryptionInput) firehose.StartDeliveryStreamEncryptionRequest
+	StartDeliveryStreamEncryptionRequest(*types.StartDeliveryStreamEncryptionInput) firehose.StartDeliveryStreamEncryptionRequest
 
-	StopDeliveryStreamEncryptionRequest(*firehose.StopDeliveryStreamEncryptionInput) firehose.StopDeliveryStreamEncryptionRequest
+	StopDeliveryStreamEncryptionRequest(*types.StopDeliveryStreamEncryptionInput) firehose.StopDeliveryStreamEncryptionRequest
 
-	TagDeliveryStreamRequest(*firehose.TagDeliveryStreamInput) firehose.TagDeliveryStreamRequest
+	TagDeliveryStreamRequest(*types.TagDeliveryStreamInput) firehose.TagDeliveryStreamRequest
 
-	UntagDeliveryStreamRequest(*firehose.UntagDeliveryStreamInput) firehose.UntagDeliveryStreamRequest
+	UntagDeliveryStreamRequest(*types.UntagDeliveryStreamInput) firehose.UntagDeliveryStreamRequest
 
-	UpdateDestinationRequest(*firehose.UpdateDestinationInput) firehose.UpdateDestinationRequest
+	UpdateDestinationRequest(*types.UpdateDestinationInput) firehose.UpdateDestinationRequest
 }
 
 var _ ClientAPI = (*firehose.Client)(nil)

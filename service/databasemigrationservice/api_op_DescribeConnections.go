@@ -4,73 +4,10 @@ package databasemigrationservice
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/databasemigrationservice/types"
 )
-
-type DescribeConnectionsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The filters applied to the connection.
-	//
-	// Valid filter names: endpoint-arn | replication-instance-arn
-	Filters []Filter `type:"list"`
-
-	// An optional pagination token provided by a previous request. If this parameter
-	// is specified, the response includes only records beyond the marker, up to
-	// the value specified by MaxRecords.
-	Marker *string `type:"string"`
-
-	// The maximum number of records to include in the response. If more records
-	// exist than the specified MaxRecords value, a pagination token called a marker
-	// is included in the response so that the remaining results can be retrieved.
-	//
-	// Default: 100
-	//
-	// Constraints: Minimum 20, maximum 100.
-	MaxRecords *int64 `type:"integer"`
-}
-
-// String returns the string representation
-func (s DescribeConnectionsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeConnectionsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeConnectionsInput"}
-	if s.Filters != nil {
-		for i, v := range s.Filters {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribeConnectionsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A description of the connections.
-	Connections []Connection `type:"list"`
-
-	// An optional pagination token provided by a previous request. If this parameter
-	// is specified, the response includes only records beyond the marker, up to
-	// the value specified by MaxRecords.
-	Marker *string `type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeConnectionsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeConnections = "DescribeConnections"
 
@@ -88,7 +25,7 @@ const opDescribeConnections = "DescribeConnections"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeConnections
-func (c *Client) DescribeConnectionsRequest(input *DescribeConnectionsInput) DescribeConnectionsRequest {
+func (c *Client) DescribeConnectionsRequest(input *types.DescribeConnectionsInput) DescribeConnectionsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeConnections,
 		HTTPMethod: "POST",
@@ -102,10 +39,10 @@ func (c *Client) DescribeConnectionsRequest(input *DescribeConnectionsInput) Des
 	}
 
 	if input == nil {
-		input = &DescribeConnectionsInput{}
+		input = &types.DescribeConnectionsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeConnectionsOutput{})
+	req := c.newRequest(op, input, &types.DescribeConnectionsOutput{})
 	return DescribeConnectionsRequest{Request: req, Input: input, Copy: c.DescribeConnectionsRequest}
 }
 
@@ -113,8 +50,8 @@ func (c *Client) DescribeConnectionsRequest(input *DescribeConnectionsInput) Des
 // DescribeConnections API operation.
 type DescribeConnectionsRequest struct {
 	*aws.Request
-	Input *DescribeConnectionsInput
-	Copy  func(*DescribeConnectionsInput) DescribeConnectionsRequest
+	Input *types.DescribeConnectionsInput
+	Copy  func(*types.DescribeConnectionsInput) DescribeConnectionsRequest
 }
 
 // Send marshals and sends the DescribeConnections API request.
@@ -126,7 +63,7 @@ func (r DescribeConnectionsRequest) Send(ctx context.Context) (*DescribeConnecti
 	}
 
 	resp := &DescribeConnectionsResponse{
-		DescribeConnectionsOutput: r.Request.Data.(*DescribeConnectionsOutput),
+		DescribeConnectionsOutput: r.Request.Data.(*types.DescribeConnectionsOutput),
 		response:                  &aws.Response{Request: r.Request},
 	}
 
@@ -156,7 +93,7 @@ func NewDescribeConnectionsPaginator(req DescribeConnectionsRequest) DescribeCon
 	return DescribeConnectionsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *DescribeConnectionsInput
+				var inCpy *types.DescribeConnectionsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -176,14 +113,14 @@ type DescribeConnectionsPaginator struct {
 	aws.Pager
 }
 
-func (p *DescribeConnectionsPaginator) CurrentPage() *DescribeConnectionsOutput {
-	return p.Pager.CurrentPage().(*DescribeConnectionsOutput)
+func (p *DescribeConnectionsPaginator) CurrentPage() *types.DescribeConnectionsOutput {
+	return p.Pager.CurrentPage().(*types.DescribeConnectionsOutput)
 }
 
 // DescribeConnectionsResponse is the response type for the
 // DescribeConnections API operation.
 type DescribeConnectionsResponse struct {
-	*DescribeConnectionsOutput
+	*types.DescribeConnectionsOutput
 
 	response *aws.Response
 }

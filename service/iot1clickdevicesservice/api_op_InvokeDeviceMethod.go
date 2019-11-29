@@ -6,89 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/iot1clickdevicesservice/types"
 )
-
-type InvokeDeviceMethodInput struct {
-	_ struct{} `type:"structure"`
-
-	// DeviceId is a required field
-	DeviceId *string `location:"uri" locationName:"deviceId" type:"string" required:"true"`
-
-	// The device method to invoke.
-	DeviceMethod *DeviceMethod `locationName:"deviceMethod" type:"structure"`
-
-	// A JSON encoded string containing the device method request parameters.
-	DeviceMethodParameters *string `locationName:"deviceMethodParameters" type:"string"`
-}
-
-// String returns the string representation
-func (s InvokeDeviceMethodInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *InvokeDeviceMethodInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "InvokeDeviceMethodInput"}
-
-	if s.DeviceId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DeviceId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s InvokeDeviceMethodInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.DeviceMethod != nil {
-		v := s.DeviceMethod
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "deviceMethod", v, metadata)
-	}
-	if s.DeviceMethodParameters != nil {
-		v := *s.DeviceMethodParameters
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "deviceMethodParameters", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.DeviceId != nil {
-		v := *s.DeviceId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "deviceId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type InvokeDeviceMethodOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A JSON encoded string containing the device method response.
-	DeviceMethodResponse *string `locationName:"deviceMethodResponse" type:"string"`
-}
-
-// String returns the string representation
-func (s InvokeDeviceMethodOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s InvokeDeviceMethodOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.DeviceMethodResponse != nil {
-		v := *s.DeviceMethodResponse
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "deviceMethodResponse", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opInvokeDeviceMethod = "InvokeDeviceMethod"
 
@@ -106,7 +25,7 @@ const opInvokeDeviceMethod = "InvokeDeviceMethod"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/devices-2018-05-14/InvokeDeviceMethod
-func (c *Client) InvokeDeviceMethodRequest(input *InvokeDeviceMethodInput) InvokeDeviceMethodRequest {
+func (c *Client) InvokeDeviceMethodRequest(input *types.InvokeDeviceMethodInput) InvokeDeviceMethodRequest {
 	op := &aws.Operation{
 		Name:       opInvokeDeviceMethod,
 		HTTPMethod: "POST",
@@ -114,10 +33,10 @@ func (c *Client) InvokeDeviceMethodRequest(input *InvokeDeviceMethodInput) Invok
 	}
 
 	if input == nil {
-		input = &InvokeDeviceMethodInput{}
+		input = &types.InvokeDeviceMethodInput{}
 	}
 
-	req := c.newRequest(op, input, &InvokeDeviceMethodOutput{})
+	req := c.newRequest(op, input, &types.InvokeDeviceMethodOutput{})
 	return InvokeDeviceMethodRequest{Request: req, Input: input, Copy: c.InvokeDeviceMethodRequest}
 }
 
@@ -125,8 +44,8 @@ func (c *Client) InvokeDeviceMethodRequest(input *InvokeDeviceMethodInput) Invok
 // InvokeDeviceMethod API operation.
 type InvokeDeviceMethodRequest struct {
 	*aws.Request
-	Input *InvokeDeviceMethodInput
-	Copy  func(*InvokeDeviceMethodInput) InvokeDeviceMethodRequest
+	Input *types.InvokeDeviceMethodInput
+	Copy  func(*types.InvokeDeviceMethodInput) InvokeDeviceMethodRequest
 }
 
 // Send marshals and sends the InvokeDeviceMethod API request.
@@ -138,7 +57,7 @@ func (r InvokeDeviceMethodRequest) Send(ctx context.Context) (*InvokeDeviceMetho
 	}
 
 	resp := &InvokeDeviceMethodResponse{
-		InvokeDeviceMethodOutput: r.Request.Data.(*InvokeDeviceMethodOutput),
+		InvokeDeviceMethodOutput: r.Request.Data.(*types.InvokeDeviceMethodOutput),
 		response:                 &aws.Response{Request: r.Request},
 	}
 
@@ -148,7 +67,7 @@ func (r InvokeDeviceMethodRequest) Send(ctx context.Context) (*InvokeDeviceMetho
 // InvokeDeviceMethodResponse is the response type for the
 // InvokeDeviceMethod API operation.
 type InvokeDeviceMethodResponse struct {
-	*InvokeDeviceMethodOutput
+	*types.InvokeDeviceMethodOutput
 
 	response *aws.Response
 }

@@ -6,65 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/batch/types"
 )
-
-type DeregisterJobDefinitionInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name and revision (name:revision) or full Amazon Resource Name (ARN)
-	// of the job definition to deregister.
-	//
-	// JobDefinition is a required field
-	JobDefinition *string `locationName:"jobDefinition" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeregisterJobDefinitionInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeregisterJobDefinitionInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeregisterJobDefinitionInput"}
-
-	if s.JobDefinition == nil {
-		invalidParams.Add(aws.NewErrParamRequired("JobDefinition"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeregisterJobDefinitionInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.JobDefinition != nil {
-		v := *s.JobDefinition
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "jobDefinition", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type DeregisterJobDefinitionOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeregisterJobDefinitionOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeregisterJobDefinitionOutput) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
 
 const opDeregisterJobDefinition = "DeregisterJobDefinition"
 
@@ -81,7 +24,7 @@ const opDeregisterJobDefinition = "DeregisterJobDefinition"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/DeregisterJobDefinition
-func (c *Client) DeregisterJobDefinitionRequest(input *DeregisterJobDefinitionInput) DeregisterJobDefinitionRequest {
+func (c *Client) DeregisterJobDefinitionRequest(input *types.DeregisterJobDefinitionInput) DeregisterJobDefinitionRequest {
 	op := &aws.Operation{
 		Name:       opDeregisterJobDefinition,
 		HTTPMethod: "POST",
@@ -89,10 +32,10 @@ func (c *Client) DeregisterJobDefinitionRequest(input *DeregisterJobDefinitionIn
 	}
 
 	if input == nil {
-		input = &DeregisterJobDefinitionInput{}
+		input = &types.DeregisterJobDefinitionInput{}
 	}
 
-	req := c.newRequest(op, input, &DeregisterJobDefinitionOutput{})
+	req := c.newRequest(op, input, &types.DeregisterJobDefinitionOutput{})
 	return DeregisterJobDefinitionRequest{Request: req, Input: input, Copy: c.DeregisterJobDefinitionRequest}
 }
 
@@ -100,8 +43,8 @@ func (c *Client) DeregisterJobDefinitionRequest(input *DeregisterJobDefinitionIn
 // DeregisterJobDefinition API operation.
 type DeregisterJobDefinitionRequest struct {
 	*aws.Request
-	Input *DeregisterJobDefinitionInput
-	Copy  func(*DeregisterJobDefinitionInput) DeregisterJobDefinitionRequest
+	Input *types.DeregisterJobDefinitionInput
+	Copy  func(*types.DeregisterJobDefinitionInput) DeregisterJobDefinitionRequest
 }
 
 // Send marshals and sends the DeregisterJobDefinition API request.
@@ -113,7 +56,7 @@ func (r DeregisterJobDefinitionRequest) Send(ctx context.Context) (*DeregisterJo
 	}
 
 	resp := &DeregisterJobDefinitionResponse{
-		DeregisterJobDefinitionOutput: r.Request.Data.(*DeregisterJobDefinitionOutput),
+		DeregisterJobDefinitionOutput: r.Request.Data.(*types.DeregisterJobDefinitionOutput),
 		response:                      &aws.Response{Request: r.Request},
 	}
 
@@ -123,7 +66,7 @@ func (r DeregisterJobDefinitionRequest) Send(ctx context.Context) (*DeregisterJo
 // DeregisterJobDefinitionResponse is the response type for the
 // DeregisterJobDefinition API operation.
 type DeregisterJobDefinitionResponse struct {
-	*DeregisterJobDefinitionOutput
+	*types.DeregisterJobDefinitionOutput
 
 	response *aws.Response
 }

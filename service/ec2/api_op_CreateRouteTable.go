@@ -6,54 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-type CreateRouteTableInput struct {
-	_ struct{} `type:"structure"`
-
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have
-	// the required permissions, the error response is DryRunOperation. Otherwise,
-	// it is UnauthorizedOperation.
-	DryRun *bool `locationName:"dryRun" type:"boolean"`
-
-	// The ID of the VPC.
-	//
-	// VpcId is a required field
-	VpcId *string `locationName:"vpcId" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s CreateRouteTableInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateRouteTableInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateRouteTableInput"}
-
-	if s.VpcId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("VpcId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type CreateRouteTableOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Information about the route table.
-	RouteTable *RouteTable `locationName:"routeTable" type:"structure"`
-}
-
-// String returns the string representation
-func (s CreateRouteTableOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCreateRouteTable = "CreateRouteTable"
 
@@ -74,7 +28,7 @@ const opCreateRouteTable = "CreateRouteTable"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateRouteTable
-func (c *Client) CreateRouteTableRequest(input *CreateRouteTableInput) CreateRouteTableRequest {
+func (c *Client) CreateRouteTableRequest(input *types.CreateRouteTableInput) CreateRouteTableRequest {
 	op := &aws.Operation{
 		Name:       opCreateRouteTable,
 		HTTPMethod: "POST",
@@ -82,10 +36,10 @@ func (c *Client) CreateRouteTableRequest(input *CreateRouteTableInput) CreateRou
 	}
 
 	if input == nil {
-		input = &CreateRouteTableInput{}
+		input = &types.CreateRouteTableInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateRouteTableOutput{})
+	req := c.newRequest(op, input, &types.CreateRouteTableOutput{})
 	return CreateRouteTableRequest{Request: req, Input: input, Copy: c.CreateRouteTableRequest}
 }
 
@@ -93,8 +47,8 @@ func (c *Client) CreateRouteTableRequest(input *CreateRouteTableInput) CreateRou
 // CreateRouteTable API operation.
 type CreateRouteTableRequest struct {
 	*aws.Request
-	Input *CreateRouteTableInput
-	Copy  func(*CreateRouteTableInput) CreateRouteTableRequest
+	Input *types.CreateRouteTableInput
+	Copy  func(*types.CreateRouteTableInput) CreateRouteTableRequest
 }
 
 // Send marshals and sends the CreateRouteTable API request.
@@ -106,7 +60,7 @@ func (r CreateRouteTableRequest) Send(ctx context.Context) (*CreateRouteTableRes
 	}
 
 	resp := &CreateRouteTableResponse{
-		CreateRouteTableOutput: r.Request.Data.(*CreateRouteTableOutput),
+		CreateRouteTableOutput: r.Request.Data.(*types.CreateRouteTableOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -116,7 +70,7 @@ func (r CreateRouteTableRequest) Send(ctx context.Context) (*CreateRouteTableRes
 // CreateRouteTableResponse is the response type for the
 // CreateRouteTable API operation.
 type CreateRouteTableResponse struct {
-	*CreateRouteTableOutput
+	*types.CreateRouteTableOutput
 
 	response *aws.Response
 }

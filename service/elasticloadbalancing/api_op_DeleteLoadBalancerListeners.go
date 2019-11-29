@@ -6,56 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/elasticloadbalancing/types"
 )
-
-// Contains the parameters for DeleteLoadBalancerListeners.
-type DeleteLoadBalancerListenersInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the load balancer.
-	//
-	// LoadBalancerName is a required field
-	LoadBalancerName *string `type:"string" required:"true"`
-
-	// The client port numbers of the listeners.
-	//
-	// LoadBalancerPorts is a required field
-	LoadBalancerPorts []int64 `type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteLoadBalancerListenersInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteLoadBalancerListenersInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteLoadBalancerListenersInput"}
-
-	if s.LoadBalancerName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("LoadBalancerName"))
-	}
-
-	if s.LoadBalancerPorts == nil {
-		invalidParams.Add(aws.NewErrParamRequired("LoadBalancerPorts"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Contains the output of DeleteLoadBalancerListeners.
-type DeleteLoadBalancerListenersOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteLoadBalancerListenersOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteLoadBalancerListeners = "DeleteLoadBalancerListeners"
 
@@ -72,7 +24,7 @@ const opDeleteLoadBalancerListeners = "DeleteLoadBalancerListeners"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/DeleteLoadBalancerListeners
-func (c *Client) DeleteLoadBalancerListenersRequest(input *DeleteLoadBalancerListenersInput) DeleteLoadBalancerListenersRequest {
+func (c *Client) DeleteLoadBalancerListenersRequest(input *types.DeleteLoadBalancerListenersInput) DeleteLoadBalancerListenersRequest {
 	op := &aws.Operation{
 		Name:       opDeleteLoadBalancerListeners,
 		HTTPMethod: "POST",
@@ -80,10 +32,10 @@ func (c *Client) DeleteLoadBalancerListenersRequest(input *DeleteLoadBalancerLis
 	}
 
 	if input == nil {
-		input = &DeleteLoadBalancerListenersInput{}
+		input = &types.DeleteLoadBalancerListenersInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteLoadBalancerListenersOutput{})
+	req := c.newRequest(op, input, &types.DeleteLoadBalancerListenersOutput{})
 	return DeleteLoadBalancerListenersRequest{Request: req, Input: input, Copy: c.DeleteLoadBalancerListenersRequest}
 }
 
@@ -91,8 +43,8 @@ func (c *Client) DeleteLoadBalancerListenersRequest(input *DeleteLoadBalancerLis
 // DeleteLoadBalancerListeners API operation.
 type DeleteLoadBalancerListenersRequest struct {
 	*aws.Request
-	Input *DeleteLoadBalancerListenersInput
-	Copy  func(*DeleteLoadBalancerListenersInput) DeleteLoadBalancerListenersRequest
+	Input *types.DeleteLoadBalancerListenersInput
+	Copy  func(*types.DeleteLoadBalancerListenersInput) DeleteLoadBalancerListenersRequest
 }
 
 // Send marshals and sends the DeleteLoadBalancerListeners API request.
@@ -104,7 +56,7 @@ func (r DeleteLoadBalancerListenersRequest) Send(ctx context.Context) (*DeleteLo
 	}
 
 	resp := &DeleteLoadBalancerListenersResponse{
-		DeleteLoadBalancerListenersOutput: r.Request.Data.(*DeleteLoadBalancerListenersOutput),
+		DeleteLoadBalancerListenersOutput: r.Request.Data.(*types.DeleteLoadBalancerListenersOutput),
 		response:                          &aws.Response{Request: r.Request},
 	}
 
@@ -114,7 +66,7 @@ func (r DeleteLoadBalancerListenersRequest) Send(ctx context.Context) (*DeleteLo
 // DeleteLoadBalancerListenersResponse is the response type for the
 // DeleteLoadBalancerListeners API operation.
 type DeleteLoadBalancerListenersResponse struct {
-	*DeleteLoadBalancerListenersOutput
+	*types.DeleteLoadBalancerListenersOutput
 
 	response *aws.Response
 }

@@ -6,63 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-type ModifyInstanceCapacityReservationAttributesInput struct {
-	_ struct{} `type:"structure"`
-
-	// Information about the Capacity Reservation targeting option.
-	//
-	// CapacityReservationSpecification is a required field
-	CapacityReservationSpecification *CapacityReservationSpecification `type:"structure" required:"true"`
-
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have
-	// the required permissions, the error response is DryRunOperation. Otherwise,
-	// it is UnauthorizedOperation.
-	DryRun *bool `type:"boolean"`
-
-	// The ID of the instance to be modified.
-	//
-	// InstanceId is a required field
-	InstanceId *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s ModifyInstanceCapacityReservationAttributesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ModifyInstanceCapacityReservationAttributesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ModifyInstanceCapacityReservationAttributesInput"}
-
-	if s.CapacityReservationSpecification == nil {
-		invalidParams.Add(aws.NewErrParamRequired("CapacityReservationSpecification"))
-	}
-
-	if s.InstanceId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("InstanceId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ModifyInstanceCapacityReservationAttributesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Returns true if the request succeeds; otherwise, it returns an error.
-	Return *bool `locationName:"return" type:"boolean"`
-}
-
-// String returns the string representation
-func (s ModifyInstanceCapacityReservationAttributesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opModifyInstanceCapacityReservationAttributes = "ModifyInstanceCapacityReservationAttributes"
 
@@ -82,7 +27,7 @@ const opModifyInstanceCapacityReservationAttributes = "ModifyInstanceCapacityRes
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyInstanceCapacityReservationAttributes
-func (c *Client) ModifyInstanceCapacityReservationAttributesRequest(input *ModifyInstanceCapacityReservationAttributesInput) ModifyInstanceCapacityReservationAttributesRequest {
+func (c *Client) ModifyInstanceCapacityReservationAttributesRequest(input *types.ModifyInstanceCapacityReservationAttributesInput) ModifyInstanceCapacityReservationAttributesRequest {
 	op := &aws.Operation{
 		Name:       opModifyInstanceCapacityReservationAttributes,
 		HTTPMethod: "POST",
@@ -90,10 +35,10 @@ func (c *Client) ModifyInstanceCapacityReservationAttributesRequest(input *Modif
 	}
 
 	if input == nil {
-		input = &ModifyInstanceCapacityReservationAttributesInput{}
+		input = &types.ModifyInstanceCapacityReservationAttributesInput{}
 	}
 
-	req := c.newRequest(op, input, &ModifyInstanceCapacityReservationAttributesOutput{})
+	req := c.newRequest(op, input, &types.ModifyInstanceCapacityReservationAttributesOutput{})
 	return ModifyInstanceCapacityReservationAttributesRequest{Request: req, Input: input, Copy: c.ModifyInstanceCapacityReservationAttributesRequest}
 }
 
@@ -101,8 +46,8 @@ func (c *Client) ModifyInstanceCapacityReservationAttributesRequest(input *Modif
 // ModifyInstanceCapacityReservationAttributes API operation.
 type ModifyInstanceCapacityReservationAttributesRequest struct {
 	*aws.Request
-	Input *ModifyInstanceCapacityReservationAttributesInput
-	Copy  func(*ModifyInstanceCapacityReservationAttributesInput) ModifyInstanceCapacityReservationAttributesRequest
+	Input *types.ModifyInstanceCapacityReservationAttributesInput
+	Copy  func(*types.ModifyInstanceCapacityReservationAttributesInput) ModifyInstanceCapacityReservationAttributesRequest
 }
 
 // Send marshals and sends the ModifyInstanceCapacityReservationAttributes API request.
@@ -114,7 +59,7 @@ func (r ModifyInstanceCapacityReservationAttributesRequest) Send(ctx context.Con
 	}
 
 	resp := &ModifyInstanceCapacityReservationAttributesResponse{
-		ModifyInstanceCapacityReservationAttributesOutput: r.Request.Data.(*ModifyInstanceCapacityReservationAttributesOutput),
+		ModifyInstanceCapacityReservationAttributesOutput: r.Request.Data.(*types.ModifyInstanceCapacityReservationAttributesOutput),
 		response: &aws.Response{Request: r.Request},
 	}
 
@@ -124,7 +69,7 @@ func (r ModifyInstanceCapacityReservationAttributesRequest) Send(ctx context.Con
 // ModifyInstanceCapacityReservationAttributesResponse is the response type for the
 // ModifyInstanceCapacityReservationAttributes API operation.
 type ModifyInstanceCapacityReservationAttributesResponse struct {
-	*ModifyInstanceCapacityReservationAttributesOutput
+	*types.ModifyInstanceCapacityReservationAttributesOutput
 
 	response *aws.Response
 }

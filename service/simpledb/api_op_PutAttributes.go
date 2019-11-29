@@ -4,80 +4,12 @@ package simpledb
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/query"
+	"github.com/aws/aws-sdk-go-v2/service/simpledb/types"
 )
-
-type PutAttributesInput struct {
-	_ struct{} `type:"structure"`
-
-	// The list of attributes.
-	//
-	// Attributes is a required field
-	Attributes []ReplaceableAttribute `locationNameList:"Attribute" type:"list" flattened:"true" required:"true"`
-
-	// The name of the domain in which to perform the operation.
-	//
-	// DomainName is a required field
-	DomainName *string `type:"string" required:"true"`
-
-	// The update condition which, if specified, determines whether the specified
-	// attributes will be updated or not. The update condition must be satisfied
-	// in order for this request to be processed and the attributes to be updated.
-	Expected *UpdateCondition `type:"structure"`
-
-	// The name of the item.
-	//
-	// ItemName is a required field
-	ItemName *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s PutAttributesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *PutAttributesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "PutAttributesInput"}
-
-	if s.Attributes == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Attributes"))
-	}
-
-	if s.DomainName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DomainName"))
-	}
-
-	if s.ItemName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ItemName"))
-	}
-	if s.Attributes != nil {
-		for i, v := range s.Attributes {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Attributes", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type PutAttributesOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s PutAttributesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opPutAttributes = "PutAttributes"
 
@@ -126,7 +58,7 @@ const opPutAttributes = "PutAttributes"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) PutAttributesRequest(input *PutAttributesInput) PutAttributesRequest {
+func (c *Client) PutAttributesRequest(input *types.PutAttributesInput) PutAttributesRequest {
 	op := &aws.Operation{
 		Name:       opPutAttributes,
 		HTTPMethod: "POST",
@@ -134,10 +66,10 @@ func (c *Client) PutAttributesRequest(input *PutAttributesInput) PutAttributesRe
 	}
 
 	if input == nil {
-		input = &PutAttributesInput{}
+		input = &types.PutAttributesInput{}
 	}
 
-	req := c.newRequest(op, input, &PutAttributesOutput{})
+	req := c.newRequest(op, input, &types.PutAttributesOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return PutAttributesRequest{Request: req, Input: input, Copy: c.PutAttributesRequest}
@@ -147,8 +79,8 @@ func (c *Client) PutAttributesRequest(input *PutAttributesInput) PutAttributesRe
 // PutAttributes API operation.
 type PutAttributesRequest struct {
 	*aws.Request
-	Input *PutAttributesInput
-	Copy  func(*PutAttributesInput) PutAttributesRequest
+	Input *types.PutAttributesInput
+	Copy  func(*types.PutAttributesInput) PutAttributesRequest
 }
 
 // Send marshals and sends the PutAttributes API request.
@@ -160,7 +92,7 @@ func (r PutAttributesRequest) Send(ctx context.Context) (*PutAttributesResponse,
 	}
 
 	resp := &PutAttributesResponse{
-		PutAttributesOutput: r.Request.Data.(*PutAttributesOutput),
+		PutAttributesOutput: r.Request.Data.(*types.PutAttributesOutput),
 		response:            &aws.Response{Request: r.Request},
 	}
 
@@ -170,7 +102,7 @@ func (r PutAttributesRequest) Send(ctx context.Context) (*PutAttributesResponse,
 // PutAttributesResponse is the response type for the
 // PutAttributes API operation.
 type PutAttributesResponse struct {
-	*PutAttributesOutput
+	*types.PutAttributesOutput
 
 	response *aws.Response
 }

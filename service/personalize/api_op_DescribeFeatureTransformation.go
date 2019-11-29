@@ -6,48 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/personalize/types"
 )
-
-type DescribeFeatureTransformationInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the feature transformation to describe.
-	//
-	// FeatureTransformationArn is a required field
-	FeatureTransformationArn *string `locationName:"featureTransformationArn" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeFeatureTransformationInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeFeatureTransformationInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeFeatureTransformationInput"}
-
-	if s.FeatureTransformationArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("FeatureTransformationArn"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribeFeatureTransformationOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A listing of the FeatureTransformation properties.
-	FeatureTransformation *FeatureTransformation `locationName:"featureTransformation" type:"structure"`
-}
-
-// String returns the string representation
-func (s DescribeFeatureTransformationOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeFeatureTransformation = "DescribeFeatureTransformation"
 
@@ -64,7 +24,7 @@ const opDescribeFeatureTransformation = "DescribeFeatureTransformation"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/DescribeFeatureTransformation
-func (c *Client) DescribeFeatureTransformationRequest(input *DescribeFeatureTransformationInput) DescribeFeatureTransformationRequest {
+func (c *Client) DescribeFeatureTransformationRequest(input *types.DescribeFeatureTransformationInput) DescribeFeatureTransformationRequest {
 	op := &aws.Operation{
 		Name:       opDescribeFeatureTransformation,
 		HTTPMethod: "POST",
@@ -72,10 +32,10 @@ func (c *Client) DescribeFeatureTransformationRequest(input *DescribeFeatureTran
 	}
 
 	if input == nil {
-		input = &DescribeFeatureTransformationInput{}
+		input = &types.DescribeFeatureTransformationInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeFeatureTransformationOutput{})
+	req := c.newRequest(op, input, &types.DescribeFeatureTransformationOutput{})
 	return DescribeFeatureTransformationRequest{Request: req, Input: input, Copy: c.DescribeFeatureTransformationRequest}
 }
 
@@ -83,8 +43,8 @@ func (c *Client) DescribeFeatureTransformationRequest(input *DescribeFeatureTran
 // DescribeFeatureTransformation API operation.
 type DescribeFeatureTransformationRequest struct {
 	*aws.Request
-	Input *DescribeFeatureTransformationInput
-	Copy  func(*DescribeFeatureTransformationInput) DescribeFeatureTransformationRequest
+	Input *types.DescribeFeatureTransformationInput
+	Copy  func(*types.DescribeFeatureTransformationInput) DescribeFeatureTransformationRequest
 }
 
 // Send marshals and sends the DescribeFeatureTransformation API request.
@@ -96,7 +56,7 @@ func (r DescribeFeatureTransformationRequest) Send(ctx context.Context) (*Descri
 	}
 
 	resp := &DescribeFeatureTransformationResponse{
-		DescribeFeatureTransformationOutput: r.Request.Data.(*DescribeFeatureTransformationOutput),
+		DescribeFeatureTransformationOutput: r.Request.Data.(*types.DescribeFeatureTransformationOutput),
 		response:                            &aws.Response{Request: r.Request},
 	}
 
@@ -106,7 +66,7 @@ func (r DescribeFeatureTransformationRequest) Send(ctx context.Context) (*Descri
 // DescribeFeatureTransformationResponse is the response type for the
 // DescribeFeatureTransformation API operation.
 type DescribeFeatureTransformationResponse struct {
-	*DescribeFeatureTransformationOutput
+	*types.DescribeFeatureTransformationOutput
 
 	response *aws.Response
 }

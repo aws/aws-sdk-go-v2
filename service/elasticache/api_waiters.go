@@ -7,6 +7,7 @@ import (
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
+	"github.com/aws/aws-sdk-go-v2/service/elasticache/types"
 )
 
 // WaitUntilCacheClusterAvailable uses the Amazon ElastiCache API operation
@@ -18,7 +19,7 @@ import (
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Client) WaitUntilCacheClusterAvailable(ctx context.Context, input *DescribeCacheClustersInput, opts ...aws.WaiterOption) error {
+func (c *Client) WaitUntilCacheClusterAvailable(ctx context.Context, input *types.DescribeCacheClustersInput, opts ...aws.WaiterOption) error {
 	w := aws.Waiter{
 		Name:        "WaitUntilCacheClusterAvailable",
 		MaxAttempts: 40,
@@ -52,7 +53,7 @@ func (c *Client) WaitUntilCacheClusterAvailable(ctx context.Context, input *Desc
 		},
 		Logger: c.Config.Logger,
 		NewRequest: func(opts []aws.Option) (*aws.Request, error) {
-			var inCpy *DescribeCacheClustersInput
+			var inCpy *types.DescribeCacheClustersInput
 			if input != nil {
 				tmp := *input
 				inCpy = &tmp
@@ -77,7 +78,7 @@ func (c *Client) WaitUntilCacheClusterAvailable(ctx context.Context, input *Desc
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Client) WaitUntilCacheClusterDeleted(ctx context.Context, input *DescribeCacheClustersInput, opts ...aws.WaiterOption) error {
+func (c *Client) WaitUntilCacheClusterDeleted(ctx context.Context, input *types.DescribeCacheClustersInput, opts ...aws.WaiterOption) error {
 	w := aws.Waiter{
 		Name:        "WaitUntilCacheClusterDeleted",
 		MaxAttempts: 40,
@@ -126,7 +127,7 @@ func (c *Client) WaitUntilCacheClusterDeleted(ctx context.Context, input *Descri
 		},
 		Logger: c.Config.Logger,
 		NewRequest: func(opts []aws.Option) (*aws.Request, error) {
-			var inCpy *DescribeCacheClustersInput
+			var inCpy *types.DescribeCacheClustersInput
 			if input != nil {
 				tmp := *input
 				inCpy = &tmp
@@ -151,7 +152,7 @@ func (c *Client) WaitUntilCacheClusterDeleted(ctx context.Context, input *Descri
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Client) WaitUntilReplicationGroupAvailable(ctx context.Context, input *DescribeReplicationGroupsInput, opts ...aws.WaiterOption) error {
+func (c *Client) WaitUntilReplicationGroupAvailable(ctx context.Context, input *types.DescribeReplicationGroupsInput, opts ...aws.WaiterOption) error {
 	w := aws.Waiter{
 		Name:        "WaitUntilReplicationGroupAvailable",
 		MaxAttempts: 40,
@@ -170,7 +171,7 @@ func (c *Client) WaitUntilReplicationGroupAvailable(ctx context.Context, input *
 		},
 		Logger: c.Config.Logger,
 		NewRequest: func(opts []aws.Option) (*aws.Request, error) {
-			var inCpy *DescribeReplicationGroupsInput
+			var inCpy *types.DescribeReplicationGroupsInput
 			if input != nil {
 				tmp := *input
 				inCpy = &tmp
@@ -195,7 +196,7 @@ func (c *Client) WaitUntilReplicationGroupAvailable(ctx context.Context, input *
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Client) WaitUntilReplicationGroupDeleted(ctx context.Context, input *DescribeReplicationGroupsInput, opts ...aws.WaiterOption) error {
+func (c *Client) WaitUntilReplicationGroupDeleted(ctx context.Context, input *types.DescribeReplicationGroupsInput, opts ...aws.WaiterOption) error {
 	w := aws.Waiter{
 		Name:        "WaitUntilReplicationGroupDeleted",
 		MaxAttempts: 40,
@@ -219,7 +220,7 @@ func (c *Client) WaitUntilReplicationGroupDeleted(ctx context.Context, input *De
 		},
 		Logger: c.Config.Logger,
 		NewRequest: func(opts []aws.Option) (*aws.Request, error) {
-			var inCpy *DescribeReplicationGroupsInput
+			var inCpy *types.DescribeReplicationGroupsInput
 			if input != nil {
 				tmp := *input
 				inCpy = &tmp

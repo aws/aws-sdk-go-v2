@@ -6,62 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/iotthingsgraph/types"
 )
-
-type ListFlowExecutionMessagesInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the flow execution.
-	//
-	// FlowExecutionId is a required field
-	FlowExecutionId *string `locationName:"flowExecutionId" type:"string" required:"true"`
-
-	// The maximum number of results to return in the response.
-	MaxResults *int64 `locationName:"maxResults" min:"1" type:"integer"`
-
-	// The string that specifies the next page of results. Use this when you're
-	// paginating results.
-	NextToken *string `locationName:"nextToken" type:"string"`
-}
-
-// String returns the string representation
-func (s ListFlowExecutionMessagesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListFlowExecutionMessagesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListFlowExecutionMessagesInput"}
-
-	if s.FlowExecutionId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("FlowExecutionId"))
-	}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ListFlowExecutionMessagesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A list of objects that contain information about events in the specified
-	// flow execution.
-	Messages []FlowExecutionMessage `locationName:"messages" type:"list"`
-
-	// The string to specify as nextToken when you request the next page of results.
-	NextToken *string `locationName:"nextToken" type:"string"`
-}
-
-// String returns the string representation
-func (s ListFlowExecutionMessagesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListFlowExecutionMessages = "ListFlowExecutionMessages"
 
@@ -79,7 +25,7 @@ const opListFlowExecutionMessages = "ListFlowExecutionMessages"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iotthingsgraph-2018-09-06/ListFlowExecutionMessages
-func (c *Client) ListFlowExecutionMessagesRequest(input *ListFlowExecutionMessagesInput) ListFlowExecutionMessagesRequest {
+func (c *Client) ListFlowExecutionMessagesRequest(input *types.ListFlowExecutionMessagesInput) ListFlowExecutionMessagesRequest {
 	op := &aws.Operation{
 		Name:       opListFlowExecutionMessages,
 		HTTPMethod: "POST",
@@ -93,10 +39,10 @@ func (c *Client) ListFlowExecutionMessagesRequest(input *ListFlowExecutionMessag
 	}
 
 	if input == nil {
-		input = &ListFlowExecutionMessagesInput{}
+		input = &types.ListFlowExecutionMessagesInput{}
 	}
 
-	req := c.newRequest(op, input, &ListFlowExecutionMessagesOutput{})
+	req := c.newRequest(op, input, &types.ListFlowExecutionMessagesOutput{})
 	return ListFlowExecutionMessagesRequest{Request: req, Input: input, Copy: c.ListFlowExecutionMessagesRequest}
 }
 
@@ -104,8 +50,8 @@ func (c *Client) ListFlowExecutionMessagesRequest(input *ListFlowExecutionMessag
 // ListFlowExecutionMessages API operation.
 type ListFlowExecutionMessagesRequest struct {
 	*aws.Request
-	Input *ListFlowExecutionMessagesInput
-	Copy  func(*ListFlowExecutionMessagesInput) ListFlowExecutionMessagesRequest
+	Input *types.ListFlowExecutionMessagesInput
+	Copy  func(*types.ListFlowExecutionMessagesInput) ListFlowExecutionMessagesRequest
 }
 
 // Send marshals and sends the ListFlowExecutionMessages API request.
@@ -117,7 +63,7 @@ func (r ListFlowExecutionMessagesRequest) Send(ctx context.Context) (*ListFlowEx
 	}
 
 	resp := &ListFlowExecutionMessagesResponse{
-		ListFlowExecutionMessagesOutput: r.Request.Data.(*ListFlowExecutionMessagesOutput),
+		ListFlowExecutionMessagesOutput: r.Request.Data.(*types.ListFlowExecutionMessagesOutput),
 		response:                        &aws.Response{Request: r.Request},
 	}
 
@@ -147,7 +93,7 @@ func NewListFlowExecutionMessagesPaginator(req ListFlowExecutionMessagesRequest)
 	return ListFlowExecutionMessagesPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListFlowExecutionMessagesInput
+				var inCpy *types.ListFlowExecutionMessagesInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -167,14 +113,14 @@ type ListFlowExecutionMessagesPaginator struct {
 	aws.Pager
 }
 
-func (p *ListFlowExecutionMessagesPaginator) CurrentPage() *ListFlowExecutionMessagesOutput {
-	return p.Pager.CurrentPage().(*ListFlowExecutionMessagesOutput)
+func (p *ListFlowExecutionMessagesPaginator) CurrentPage() *types.ListFlowExecutionMessagesOutput {
+	return p.Pager.CurrentPage().(*types.ListFlowExecutionMessagesOutput)
 }
 
 // ListFlowExecutionMessagesResponse is the response type for the
 // ListFlowExecutionMessages API operation.
 type ListFlowExecutionMessagesResponse struct {
-	*ListFlowExecutionMessagesOutput
+	*types.ListFlowExecutionMessagesOutput
 
 	response *aws.Response
 }

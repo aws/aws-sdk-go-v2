@@ -4,74 +4,10 @@ package datasync
 
 import (
 	"context"
-	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/datasync/types"
 )
-
-// DescribeLocationS3Request
-type DescribeLocationS3Input struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the Amazon S3 bucket location to describe.
-	//
-	// LocationArn is a required field
-	LocationArn *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeLocationS3Input) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeLocationS3Input) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeLocationS3Input"}
-
-	if s.LocationArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("LocationArn"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// DescribeLocationS3Response
-type DescribeLocationS3Output struct {
-	_ struct{} `type:"structure"`
-
-	// The time that the Amazon S3 bucket location was created.
-	CreationTime *time.Time `type:"timestamp"`
-
-	// The Amazon Resource Name (ARN) of the Amazon S3 bucket location.
-	LocationArn *string `type:"string"`
-
-	// The URL of the Amazon S3 location that was described.
-	LocationUri *string `type:"string"`
-
-	// The Amazon Resource Name (ARN) of the AWS Identity and Access Management
-	// (IAM) role that is used to access an Amazon S3 bucket.
-	//
-	// For detailed information about using such a role, see Creating a Location
-	// for Amazon S3 in the AWS DataSync User Guide.
-	S3Config *S3Config `type:"structure"`
-
-	// The Amazon S3 storage class that you chose to store your files in when this
-	// location is used as a task destination. For more information about S3 storage
-	// classes, see Amazon S3 Storage Classes (https://aws.amazon.com/s3/storage-classes/)
-	// in the Amazon Simple Storage Service Developer Guide. Some storage classes
-	// have behaviors that can affect your S3 storage cost. For detailed information,
-	// see using-storage-classes.
-	S3StorageClass S3StorageClass `type:"string" enum:"true"`
-}
-
-// String returns the string representation
-func (s DescribeLocationS3Output) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeLocationS3 = "DescribeLocationS3"
 
@@ -88,7 +24,7 @@ const opDescribeLocationS3 = "DescribeLocationS3"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/DescribeLocationS3
-func (c *Client) DescribeLocationS3Request(input *DescribeLocationS3Input) DescribeLocationS3Request {
+func (c *Client) DescribeLocationS3Request(input *types.DescribeLocationS3Input) DescribeLocationS3Request {
 	op := &aws.Operation{
 		Name:       opDescribeLocationS3,
 		HTTPMethod: "POST",
@@ -96,10 +32,10 @@ func (c *Client) DescribeLocationS3Request(input *DescribeLocationS3Input) Descr
 	}
 
 	if input == nil {
-		input = &DescribeLocationS3Input{}
+		input = &types.DescribeLocationS3Input{}
 	}
 
-	req := c.newRequest(op, input, &DescribeLocationS3Output{})
+	req := c.newRequest(op, input, &types.DescribeLocationS3Output{})
 	return DescribeLocationS3Request{Request: req, Input: input, Copy: c.DescribeLocationS3Request}
 }
 
@@ -107,8 +43,8 @@ func (c *Client) DescribeLocationS3Request(input *DescribeLocationS3Input) Descr
 // DescribeLocationS3 API operation.
 type DescribeLocationS3Request struct {
 	*aws.Request
-	Input *DescribeLocationS3Input
-	Copy  func(*DescribeLocationS3Input) DescribeLocationS3Request
+	Input *types.DescribeLocationS3Input
+	Copy  func(*types.DescribeLocationS3Input) DescribeLocationS3Request
 }
 
 // Send marshals and sends the DescribeLocationS3 API request.
@@ -120,7 +56,7 @@ func (r DescribeLocationS3Request) Send(ctx context.Context) (*DescribeLocationS
 	}
 
 	resp := &DescribeLocationS3Response{
-		DescribeLocationS3Output: r.Request.Data.(*DescribeLocationS3Output),
+		DescribeLocationS3Output: r.Request.Data.(*types.DescribeLocationS3Output),
 		response:                 &aws.Response{Request: r.Request},
 	}
 
@@ -130,7 +66,7 @@ func (r DescribeLocationS3Request) Send(ctx context.Context) (*DescribeLocationS
 // DescribeLocationS3Response is the response type for the
 // DescribeLocationS3 API operation.
 type DescribeLocationS3Response struct {
-	*DescribeLocationS3Output
+	*types.DescribeLocationS3Output
 
 	response *aws.Response
 }

@@ -6,69 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/glue/types"
 )
-
-type CancelMLTaskRunInput struct {
-	_ struct{} `type:"structure"`
-
-	// A unique identifier for the task run.
-	//
-	// TaskRunId is a required field
-	TaskRunId *string `min:"1" type:"string" required:"true"`
-
-	// The unique identifier of the machine learning transform.
-	//
-	// TransformId is a required field
-	TransformId *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s CancelMLTaskRunInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CancelMLTaskRunInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CancelMLTaskRunInput"}
-
-	if s.TaskRunId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("TaskRunId"))
-	}
-	if s.TaskRunId != nil && len(*s.TaskRunId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("TaskRunId", 1))
-	}
-
-	if s.TransformId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("TransformId"))
-	}
-	if s.TransformId != nil && len(*s.TransformId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("TransformId", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type CancelMLTaskRunOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The status for this run.
-	Status TaskStatusType `type:"string" enum:"true"`
-
-	// The unique identifier for the task run.
-	TaskRunId *string `min:"1" type:"string"`
-
-	// The unique identifier of the machine learning transform.
-	TransformId *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s CancelMLTaskRunOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCancelMLTaskRun = "CancelMLTaskRun"
 
@@ -88,7 +27,7 @@ const opCancelMLTaskRun = "CancelMLTaskRun"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CancelMLTaskRun
-func (c *Client) CancelMLTaskRunRequest(input *CancelMLTaskRunInput) CancelMLTaskRunRequest {
+func (c *Client) CancelMLTaskRunRequest(input *types.CancelMLTaskRunInput) CancelMLTaskRunRequest {
 	op := &aws.Operation{
 		Name:       opCancelMLTaskRun,
 		HTTPMethod: "POST",
@@ -96,10 +35,10 @@ func (c *Client) CancelMLTaskRunRequest(input *CancelMLTaskRunInput) CancelMLTas
 	}
 
 	if input == nil {
-		input = &CancelMLTaskRunInput{}
+		input = &types.CancelMLTaskRunInput{}
 	}
 
-	req := c.newRequest(op, input, &CancelMLTaskRunOutput{})
+	req := c.newRequest(op, input, &types.CancelMLTaskRunOutput{})
 	return CancelMLTaskRunRequest{Request: req, Input: input, Copy: c.CancelMLTaskRunRequest}
 }
 
@@ -107,8 +46,8 @@ func (c *Client) CancelMLTaskRunRequest(input *CancelMLTaskRunInput) CancelMLTas
 // CancelMLTaskRun API operation.
 type CancelMLTaskRunRequest struct {
 	*aws.Request
-	Input *CancelMLTaskRunInput
-	Copy  func(*CancelMLTaskRunInput) CancelMLTaskRunRequest
+	Input *types.CancelMLTaskRunInput
+	Copy  func(*types.CancelMLTaskRunInput) CancelMLTaskRunRequest
 }
 
 // Send marshals and sends the CancelMLTaskRun API request.
@@ -120,7 +59,7 @@ func (r CancelMLTaskRunRequest) Send(ctx context.Context) (*CancelMLTaskRunRespo
 	}
 
 	resp := &CancelMLTaskRunResponse{
-		CancelMLTaskRunOutput: r.Request.Data.(*CancelMLTaskRunOutput),
+		CancelMLTaskRunOutput: r.Request.Data.(*types.CancelMLTaskRunOutput),
 		response:              &aws.Response{Request: r.Request},
 	}
 
@@ -130,7 +69,7 @@ func (r CancelMLTaskRunRequest) Send(ctx context.Context) (*CancelMLTaskRunRespo
 // CancelMLTaskRunResponse is the response type for the
 // CancelMLTaskRun API operation.
 type CancelMLTaskRunResponse struct {
-	*CancelMLTaskRunOutput
+	*types.CancelMLTaskRunOutput
 
 	response *aws.Response
 }

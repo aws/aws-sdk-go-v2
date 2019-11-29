@@ -6,71 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/types"
 )
-
-type ListStackInstancesForProvisionedProductInput struct {
-	_ struct{} `type:"structure"`
-
-	// The language code.
-	//
-	//    * en - English (default)
-	//
-	//    * jp - Japanese
-	//
-	//    * zh - Chinese
-	AcceptLanguage *string `type:"string"`
-
-	// The maximum number of items to return with this call.
-	PageSize *int64 `type:"integer"`
-
-	// The page token for the next set of results. To retrieve the first set of
-	// results, use null.
-	PageToken *string `type:"string"`
-
-	// The identifier of the provisioned product.
-	//
-	// ProvisionedProductId is a required field
-	ProvisionedProductId *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s ListStackInstancesForProvisionedProductInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListStackInstancesForProvisionedProductInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListStackInstancesForProvisionedProductInput"}
-
-	if s.ProvisionedProductId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ProvisionedProductId"))
-	}
-	if s.ProvisionedProductId != nil && len(*s.ProvisionedProductId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ProvisionedProductId", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ListStackInstancesForProvisionedProductOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The page token to use to retrieve the next set of results. If there are no
-	// additional results, this value is null.
-	NextPageToken *string `type:"string"`
-
-	// List of stack instances.
-	StackInstances []StackInstance `type:"list"`
-}
-
-// String returns the string representation
-func (s ListStackInstancesForProvisionedProductOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListStackInstancesForProvisionedProduct = "ListStackInstancesForProvisionedProduct"
 
@@ -89,7 +26,7 @@ const opListStackInstancesForProvisionedProduct = "ListStackInstancesForProvisio
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ListStackInstancesForProvisionedProduct
-func (c *Client) ListStackInstancesForProvisionedProductRequest(input *ListStackInstancesForProvisionedProductInput) ListStackInstancesForProvisionedProductRequest {
+func (c *Client) ListStackInstancesForProvisionedProductRequest(input *types.ListStackInstancesForProvisionedProductInput) ListStackInstancesForProvisionedProductRequest {
 	op := &aws.Operation{
 		Name:       opListStackInstancesForProvisionedProduct,
 		HTTPMethod: "POST",
@@ -97,10 +34,10 @@ func (c *Client) ListStackInstancesForProvisionedProductRequest(input *ListStack
 	}
 
 	if input == nil {
-		input = &ListStackInstancesForProvisionedProductInput{}
+		input = &types.ListStackInstancesForProvisionedProductInput{}
 	}
 
-	req := c.newRequest(op, input, &ListStackInstancesForProvisionedProductOutput{})
+	req := c.newRequest(op, input, &types.ListStackInstancesForProvisionedProductOutput{})
 	return ListStackInstancesForProvisionedProductRequest{Request: req, Input: input, Copy: c.ListStackInstancesForProvisionedProductRequest}
 }
 
@@ -108,8 +45,8 @@ func (c *Client) ListStackInstancesForProvisionedProductRequest(input *ListStack
 // ListStackInstancesForProvisionedProduct API operation.
 type ListStackInstancesForProvisionedProductRequest struct {
 	*aws.Request
-	Input *ListStackInstancesForProvisionedProductInput
-	Copy  func(*ListStackInstancesForProvisionedProductInput) ListStackInstancesForProvisionedProductRequest
+	Input *types.ListStackInstancesForProvisionedProductInput
+	Copy  func(*types.ListStackInstancesForProvisionedProductInput) ListStackInstancesForProvisionedProductRequest
 }
 
 // Send marshals and sends the ListStackInstancesForProvisionedProduct API request.
@@ -121,7 +58,7 @@ func (r ListStackInstancesForProvisionedProductRequest) Send(ctx context.Context
 	}
 
 	resp := &ListStackInstancesForProvisionedProductResponse{
-		ListStackInstancesForProvisionedProductOutput: r.Request.Data.(*ListStackInstancesForProvisionedProductOutput),
+		ListStackInstancesForProvisionedProductOutput: r.Request.Data.(*types.ListStackInstancesForProvisionedProductOutput),
 		response: &aws.Response{Request: r.Request},
 	}
 
@@ -131,7 +68,7 @@ func (r ListStackInstancesForProvisionedProductRequest) Send(ctx context.Context
 // ListStackInstancesForProvisionedProductResponse is the response type for the
 // ListStackInstancesForProvisionedProduct API operation.
 type ListStackInstancesForProvisionedProductResponse struct {
-	*ListStackInstancesForProvisionedProductOutput
+	*types.ListStackInstancesForProvisionedProductOutput
 
 	response *aws.Response
 }

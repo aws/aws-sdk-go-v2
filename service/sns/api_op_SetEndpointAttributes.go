@@ -6,70 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/query"
+	"github.com/aws/aws-sdk-go-v2/service/sns/types"
 )
-
-// Input for SetEndpointAttributes action.
-type SetEndpointAttributesInput struct {
-	_ struct{} `type:"structure"`
-
-	// A map of the endpoint attributes. Attributes in this map include the following:
-	//
-	//    * CustomUserData – arbitrary user data to associate with the endpoint.
-	//    Amazon SNS does not use this data. The data must be in UTF-8 format and
-	//    less than 2KB.
-	//
-	//    * Enabled – flag that enables/disables delivery to the endpoint. Amazon
-	//    SNS will set this to false when a notification service indicates to Amazon
-	//    SNS that the endpoint is invalid. Users can set it back to true, typically
-	//    after updating Token.
-	//
-	//    * Token – device token, also referred to as a registration id, for an
-	//    app and mobile device. This is returned from the notification service
-	//    when an app and mobile device are registered with the notification service.
-	//
-	// Attributes is a required field
-	Attributes map[string]string `type:"map" required:"true"`
-
-	// EndpointArn used for SetEndpointAttributes action.
-	//
-	// EndpointArn is a required field
-	EndpointArn *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s SetEndpointAttributesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *SetEndpointAttributesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "SetEndpointAttributesInput"}
-
-	if s.Attributes == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Attributes"))
-	}
-
-	if s.EndpointArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("EndpointArn"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type SetEndpointAttributesOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s SetEndpointAttributesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opSetEndpointAttributes = "SetEndpointAttributes"
 
@@ -88,7 +28,7 @@ const opSetEndpointAttributes = "SetEndpointAttributes"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/SetEndpointAttributes
-func (c *Client) SetEndpointAttributesRequest(input *SetEndpointAttributesInput) SetEndpointAttributesRequest {
+func (c *Client) SetEndpointAttributesRequest(input *types.SetEndpointAttributesInput) SetEndpointAttributesRequest {
 	op := &aws.Operation{
 		Name:       opSetEndpointAttributes,
 		HTTPMethod: "POST",
@@ -96,10 +36,10 @@ func (c *Client) SetEndpointAttributesRequest(input *SetEndpointAttributesInput)
 	}
 
 	if input == nil {
-		input = &SetEndpointAttributesInput{}
+		input = &types.SetEndpointAttributesInput{}
 	}
 
-	req := c.newRequest(op, input, &SetEndpointAttributesOutput{})
+	req := c.newRequest(op, input, &types.SetEndpointAttributesOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return SetEndpointAttributesRequest{Request: req, Input: input, Copy: c.SetEndpointAttributesRequest}
@@ -109,8 +49,8 @@ func (c *Client) SetEndpointAttributesRequest(input *SetEndpointAttributesInput)
 // SetEndpointAttributes API operation.
 type SetEndpointAttributesRequest struct {
 	*aws.Request
-	Input *SetEndpointAttributesInput
-	Copy  func(*SetEndpointAttributesInput) SetEndpointAttributesRequest
+	Input *types.SetEndpointAttributesInput
+	Copy  func(*types.SetEndpointAttributesInput) SetEndpointAttributesRequest
 }
 
 // Send marshals and sends the SetEndpointAttributes API request.
@@ -122,7 +62,7 @@ func (r SetEndpointAttributesRequest) Send(ctx context.Context) (*SetEndpointAtt
 	}
 
 	resp := &SetEndpointAttributesResponse{
-		SetEndpointAttributesOutput: r.Request.Data.(*SetEndpointAttributesOutput),
+		SetEndpointAttributesOutput: r.Request.Data.(*types.SetEndpointAttributesOutput),
 		response:                    &aws.Response{Request: r.Request},
 	}
 
@@ -132,7 +72,7 @@ func (r SetEndpointAttributesRequest) Send(ctx context.Context) (*SetEndpointAtt
 // SetEndpointAttributesResponse is the response type for the
 // SetEndpointAttributes API operation.
 type SetEndpointAttributesResponse struct {
-	*SetEndpointAttributesOutput
+	*types.SetEndpointAttributesOutput
 
 	response *aws.Response
 }

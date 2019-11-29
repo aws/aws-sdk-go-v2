@@ -6,59 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/elasticloadbalancing/types"
 )
-
-// Contains the parameters for RegisterInstancesWithLoadBalancer.
-type RegisterInstancesWithLoadBalancerInput struct {
-	_ struct{} `type:"structure"`
-
-	// The IDs of the instances.
-	//
-	// Instances is a required field
-	Instances []Instance `type:"list" required:"true"`
-
-	// The name of the load balancer.
-	//
-	// LoadBalancerName is a required field
-	LoadBalancerName *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s RegisterInstancesWithLoadBalancerInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *RegisterInstancesWithLoadBalancerInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "RegisterInstancesWithLoadBalancerInput"}
-
-	if s.Instances == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Instances"))
-	}
-
-	if s.LoadBalancerName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("LoadBalancerName"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Contains the output of RegisterInstancesWithLoadBalancer.
-type RegisterInstancesWithLoadBalancerOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The updated list of instances for the load balancer.
-	Instances []Instance `type:"list"`
-}
-
-// String returns the string representation
-func (s RegisterInstancesWithLoadBalancerOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opRegisterInstancesWithLoadBalancer = "RegisterInstancesWithLoadBalancer"
 
@@ -97,7 +46,7 @@ const opRegisterInstancesWithLoadBalancer = "RegisterInstancesWithLoadBalancer"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/RegisterInstancesWithLoadBalancer
-func (c *Client) RegisterInstancesWithLoadBalancerRequest(input *RegisterInstancesWithLoadBalancerInput) RegisterInstancesWithLoadBalancerRequest {
+func (c *Client) RegisterInstancesWithLoadBalancerRequest(input *types.RegisterInstancesWithLoadBalancerInput) RegisterInstancesWithLoadBalancerRequest {
 	op := &aws.Operation{
 		Name:       opRegisterInstancesWithLoadBalancer,
 		HTTPMethod: "POST",
@@ -105,10 +54,10 @@ func (c *Client) RegisterInstancesWithLoadBalancerRequest(input *RegisterInstanc
 	}
 
 	if input == nil {
-		input = &RegisterInstancesWithLoadBalancerInput{}
+		input = &types.RegisterInstancesWithLoadBalancerInput{}
 	}
 
-	req := c.newRequest(op, input, &RegisterInstancesWithLoadBalancerOutput{})
+	req := c.newRequest(op, input, &types.RegisterInstancesWithLoadBalancerOutput{})
 	return RegisterInstancesWithLoadBalancerRequest{Request: req, Input: input, Copy: c.RegisterInstancesWithLoadBalancerRequest}
 }
 
@@ -116,8 +65,8 @@ func (c *Client) RegisterInstancesWithLoadBalancerRequest(input *RegisterInstanc
 // RegisterInstancesWithLoadBalancer API operation.
 type RegisterInstancesWithLoadBalancerRequest struct {
 	*aws.Request
-	Input *RegisterInstancesWithLoadBalancerInput
-	Copy  func(*RegisterInstancesWithLoadBalancerInput) RegisterInstancesWithLoadBalancerRequest
+	Input *types.RegisterInstancesWithLoadBalancerInput
+	Copy  func(*types.RegisterInstancesWithLoadBalancerInput) RegisterInstancesWithLoadBalancerRequest
 }
 
 // Send marshals and sends the RegisterInstancesWithLoadBalancer API request.
@@ -129,7 +78,7 @@ func (r RegisterInstancesWithLoadBalancerRequest) Send(ctx context.Context) (*Re
 	}
 
 	resp := &RegisterInstancesWithLoadBalancerResponse{
-		RegisterInstancesWithLoadBalancerOutput: r.Request.Data.(*RegisterInstancesWithLoadBalancerOutput),
+		RegisterInstancesWithLoadBalancerOutput: r.Request.Data.(*types.RegisterInstancesWithLoadBalancerOutput),
 		response:                                &aws.Response{Request: r.Request},
 	}
 
@@ -139,7 +88,7 @@ func (r RegisterInstancesWithLoadBalancerRequest) Send(ctx context.Context) (*Re
 // RegisterInstancesWithLoadBalancerResponse is the response type for the
 // RegisterInstancesWithLoadBalancer API operation.
 type RegisterInstancesWithLoadBalancerResponse struct {
-	*RegisterInstancesWithLoadBalancerOutput
+	*types.RegisterInstancesWithLoadBalancerOutput
 
 	response *aws.Response
 }

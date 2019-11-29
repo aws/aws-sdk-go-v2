@@ -6,72 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/cloudhsm/types"
 )
-
-type GetConfigInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ARN of the client.
-	//
-	// ClientArn is a required field
-	ClientArn *string `type:"string" required:"true"`
-
-	// The client version.
-	//
-	// ClientVersion is a required field
-	ClientVersion Version `type:"string" required:"true" enum:"true"`
-
-	// A list of ARNs that identify the high-availability partition groups that
-	// are associated with the client.
-	//
-	// HapgList is a required field
-	HapgList []string `type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s GetConfigInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetConfigInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetConfigInput"}
-
-	if s.ClientArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ClientArn"))
-	}
-	if len(s.ClientVersion) == 0 {
-		invalidParams.Add(aws.NewErrParamRequired("ClientVersion"))
-	}
-
-	if s.HapgList == nil {
-		invalidParams.Add(aws.NewErrParamRequired("HapgList"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type GetConfigOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The certificate file containing the server.pem files of the HSMs.
-	ConfigCred *string `type:"string"`
-
-	// The chrystoki.conf configuration file.
-	ConfigFile *string `type:"string"`
-
-	// The type of credentials.
-	ConfigType *string `type:"string"`
-}
-
-// String returns the string representation
-func (s GetConfigOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetConfig = "GetConfig"
 
@@ -98,7 +34,7 @@ const opGetConfig = "GetConfig"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/GetConfig
-func (c *Client) GetConfigRequest(input *GetConfigInput) GetConfigRequest {
+func (c *Client) GetConfigRequest(input *types.GetConfigInput) GetConfigRequest {
 	op := &aws.Operation{
 		Name:       opGetConfig,
 		HTTPMethod: "POST",
@@ -106,10 +42,10 @@ func (c *Client) GetConfigRequest(input *GetConfigInput) GetConfigRequest {
 	}
 
 	if input == nil {
-		input = &GetConfigInput{}
+		input = &types.GetConfigInput{}
 	}
 
-	req := c.newRequest(op, input, &GetConfigOutput{})
+	req := c.newRequest(op, input, &types.GetConfigOutput{})
 	return GetConfigRequest{Request: req, Input: input, Copy: c.GetConfigRequest}
 }
 
@@ -117,8 +53,8 @@ func (c *Client) GetConfigRequest(input *GetConfigInput) GetConfigRequest {
 // GetConfig API operation.
 type GetConfigRequest struct {
 	*aws.Request
-	Input *GetConfigInput
-	Copy  func(*GetConfigInput) GetConfigRequest
+	Input *types.GetConfigInput
+	Copy  func(*types.GetConfigInput) GetConfigRequest
 }
 
 // Send marshals and sends the GetConfig API request.
@@ -130,7 +66,7 @@ func (r GetConfigRequest) Send(ctx context.Context) (*GetConfigResponse, error) 
 	}
 
 	resp := &GetConfigResponse{
-		GetConfigOutput: r.Request.Data.(*GetConfigOutput),
+		GetConfigOutput: r.Request.Data.(*types.GetConfigOutput),
 		response:        &aws.Response{Request: r.Request},
 	}
 
@@ -140,7 +76,7 @@ func (r GetConfigRequest) Send(ctx context.Context) (*GetConfigResponse, error) 
 // GetConfigResponse is the response type for the
 // GetConfig API operation.
 type GetConfigResponse struct {
-	*GetConfigOutput
+	*types.GetConfigOutput
 
 	response *aws.Response
 }

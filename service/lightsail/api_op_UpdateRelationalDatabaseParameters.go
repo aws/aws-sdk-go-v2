@@ -6,58 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/lightsail/types"
 )
-
-type UpdateRelationalDatabaseParametersInput struct {
-	_ struct{} `type:"structure"`
-
-	// The database parameters to update.
-	//
-	// Parameters is a required field
-	Parameters []RelationalDatabaseParameter `locationName:"parameters" type:"list" required:"true"`
-
-	// The name of your database for which to update parameters.
-	//
-	// RelationalDatabaseName is a required field
-	RelationalDatabaseName *string `locationName:"relationalDatabaseName" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s UpdateRelationalDatabaseParametersInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateRelationalDatabaseParametersInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateRelationalDatabaseParametersInput"}
-
-	if s.Parameters == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Parameters"))
-	}
-
-	if s.RelationalDatabaseName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("RelationalDatabaseName"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type UpdateRelationalDatabaseParametersOutput struct {
-	_ struct{} `type:"structure"`
-
-	// An object describing the result of your update relational database parameters
-	// request.
-	Operations []Operation `locationName:"operations" type:"list"`
-}
-
-// String returns the string representation
-func (s UpdateRelationalDatabaseParametersOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opUpdateRelationalDatabaseParameters = "UpdateRelationalDatabaseParameters"
 
@@ -85,7 +35,7 @@ const opUpdateRelationalDatabaseParameters = "UpdateRelationalDatabaseParameters
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/UpdateRelationalDatabaseParameters
-func (c *Client) UpdateRelationalDatabaseParametersRequest(input *UpdateRelationalDatabaseParametersInput) UpdateRelationalDatabaseParametersRequest {
+func (c *Client) UpdateRelationalDatabaseParametersRequest(input *types.UpdateRelationalDatabaseParametersInput) UpdateRelationalDatabaseParametersRequest {
 	op := &aws.Operation{
 		Name:       opUpdateRelationalDatabaseParameters,
 		HTTPMethod: "POST",
@@ -93,10 +43,10 @@ func (c *Client) UpdateRelationalDatabaseParametersRequest(input *UpdateRelation
 	}
 
 	if input == nil {
-		input = &UpdateRelationalDatabaseParametersInput{}
+		input = &types.UpdateRelationalDatabaseParametersInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateRelationalDatabaseParametersOutput{})
+	req := c.newRequest(op, input, &types.UpdateRelationalDatabaseParametersOutput{})
 	return UpdateRelationalDatabaseParametersRequest{Request: req, Input: input, Copy: c.UpdateRelationalDatabaseParametersRequest}
 }
 
@@ -104,8 +54,8 @@ func (c *Client) UpdateRelationalDatabaseParametersRequest(input *UpdateRelation
 // UpdateRelationalDatabaseParameters API operation.
 type UpdateRelationalDatabaseParametersRequest struct {
 	*aws.Request
-	Input *UpdateRelationalDatabaseParametersInput
-	Copy  func(*UpdateRelationalDatabaseParametersInput) UpdateRelationalDatabaseParametersRequest
+	Input *types.UpdateRelationalDatabaseParametersInput
+	Copy  func(*types.UpdateRelationalDatabaseParametersInput) UpdateRelationalDatabaseParametersRequest
 }
 
 // Send marshals and sends the UpdateRelationalDatabaseParameters API request.
@@ -117,7 +67,7 @@ func (r UpdateRelationalDatabaseParametersRequest) Send(ctx context.Context) (*U
 	}
 
 	resp := &UpdateRelationalDatabaseParametersResponse{
-		UpdateRelationalDatabaseParametersOutput: r.Request.Data.(*UpdateRelationalDatabaseParametersOutput),
+		UpdateRelationalDatabaseParametersOutput: r.Request.Data.(*types.UpdateRelationalDatabaseParametersOutput),
 		response:                                 &aws.Response{Request: r.Request},
 	}
 
@@ -127,7 +77,7 @@ func (r UpdateRelationalDatabaseParametersRequest) Send(ctx context.Context) (*U
 // UpdateRelationalDatabaseParametersResponse is the response type for the
 // UpdateRelationalDatabaseParameters API operation.
 type UpdateRelationalDatabaseParametersResponse struct {
-	*UpdateRelationalDatabaseParametersOutput
+	*types.UpdateRelationalDatabaseParametersOutput
 
 	response *aws.Response
 }

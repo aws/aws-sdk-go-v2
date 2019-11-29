@@ -6,85 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/workmail/types"
 )
-
-type PutMailboxPermissionsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The identifier of the user, group, or resource for which to update mailbox
-	// permissions.
-	//
-	// EntityId is a required field
-	EntityId *string `min:"12" type:"string" required:"true"`
-
-	// The identifier of the user, group, or resource to which to grant the permissions.
-	//
-	// GranteeId is a required field
-	GranteeId *string `min:"12" type:"string" required:"true"`
-
-	// The identifier of the organization under which the user, group, or resource
-	// exists.
-	//
-	// OrganizationId is a required field
-	OrganizationId *string `type:"string" required:"true"`
-
-	// The permissions granted to the grantee. SEND_AS allows the grantee to send
-	// email as the owner of the mailbox (the grantee is not mentioned on these
-	// emails). SEND_ON_BEHALF allows the grantee to send email on behalf of the
-	// owner of the mailbox (the grantee is not mentioned as the physical sender
-	// of these emails). FULL_ACCESS allows the grantee full access to the mailbox,
-	// irrespective of other folder-level permissions set on the mailbox.
-	//
-	// PermissionValues is a required field
-	PermissionValues []PermissionType `type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s PutMailboxPermissionsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *PutMailboxPermissionsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "PutMailboxPermissionsInput"}
-
-	if s.EntityId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("EntityId"))
-	}
-	if s.EntityId != nil && len(*s.EntityId) < 12 {
-		invalidParams.Add(aws.NewErrParamMinLen("EntityId", 12))
-	}
-
-	if s.GranteeId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("GranteeId"))
-	}
-	if s.GranteeId != nil && len(*s.GranteeId) < 12 {
-		invalidParams.Add(aws.NewErrParamMinLen("GranteeId", 12))
-	}
-
-	if s.OrganizationId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("OrganizationId"))
-	}
-
-	if s.PermissionValues == nil {
-		invalidParams.Add(aws.NewErrParamRequired("PermissionValues"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type PutMailboxPermissionsOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s PutMailboxPermissionsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opPutMailboxPermissions = "PutMailboxPermissions"
 
@@ -102,7 +25,7 @@ const opPutMailboxPermissions = "PutMailboxPermissions"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/PutMailboxPermissions
-func (c *Client) PutMailboxPermissionsRequest(input *PutMailboxPermissionsInput) PutMailboxPermissionsRequest {
+func (c *Client) PutMailboxPermissionsRequest(input *types.PutMailboxPermissionsInput) PutMailboxPermissionsRequest {
 	op := &aws.Operation{
 		Name:       opPutMailboxPermissions,
 		HTTPMethod: "POST",
@@ -110,10 +33,10 @@ func (c *Client) PutMailboxPermissionsRequest(input *PutMailboxPermissionsInput)
 	}
 
 	if input == nil {
-		input = &PutMailboxPermissionsInput{}
+		input = &types.PutMailboxPermissionsInput{}
 	}
 
-	req := c.newRequest(op, input, &PutMailboxPermissionsOutput{})
+	req := c.newRequest(op, input, &types.PutMailboxPermissionsOutput{})
 	return PutMailboxPermissionsRequest{Request: req, Input: input, Copy: c.PutMailboxPermissionsRequest}
 }
 
@@ -121,8 +44,8 @@ func (c *Client) PutMailboxPermissionsRequest(input *PutMailboxPermissionsInput)
 // PutMailboxPermissions API operation.
 type PutMailboxPermissionsRequest struct {
 	*aws.Request
-	Input *PutMailboxPermissionsInput
-	Copy  func(*PutMailboxPermissionsInput) PutMailboxPermissionsRequest
+	Input *types.PutMailboxPermissionsInput
+	Copy  func(*types.PutMailboxPermissionsInput) PutMailboxPermissionsRequest
 }
 
 // Send marshals and sends the PutMailboxPermissions API request.
@@ -134,7 +57,7 @@ func (r PutMailboxPermissionsRequest) Send(ctx context.Context) (*PutMailboxPerm
 	}
 
 	resp := &PutMailboxPermissionsResponse{
-		PutMailboxPermissionsOutput: r.Request.Data.(*PutMailboxPermissionsOutput),
+		PutMailboxPermissionsOutput: r.Request.Data.(*types.PutMailboxPermissionsOutput),
 		response:                    &aws.Response{Request: r.Request},
 	}
 
@@ -144,7 +67,7 @@ func (r PutMailboxPermissionsRequest) Send(ctx context.Context) (*PutMailboxPerm
 // PutMailboxPermissionsResponse is the response type for the
 // PutMailboxPermissions API operation.
 type PutMailboxPermissionsResponse struct {
-	*PutMailboxPermissionsOutput
+	*types.PutMailboxPermissionsOutput
 
 	response *aws.Response
 }

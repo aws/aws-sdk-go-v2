@@ -6,148 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/iot/types"
 )
-
-type TestAuthorizationInput struct {
-	_ struct{} `type:"structure"`
-
-	// A list of authorization info objects. Simulating authorization will create
-	// a response for each authInfo object in the list.
-	//
-	// AuthInfos is a required field
-	AuthInfos []AuthInfo `locationName:"authInfos" min:"1" type:"list" required:"true"`
-
-	// The MQTT client ID.
-	ClientId *string `location:"querystring" locationName:"clientId" type:"string"`
-
-	// The Cognito identity pool ID.
-	CognitoIdentityPoolId *string `locationName:"cognitoIdentityPoolId" type:"string"`
-
-	// When testing custom authorization, the policies specified here are treated
-	// as if they are attached to the principal being authorized.
-	PolicyNamesToAdd []string `locationName:"policyNamesToAdd" type:"list"`
-
-	// When testing custom authorization, the policies specified here are treated
-	// as if they are not attached to the principal being authorized.
-	PolicyNamesToSkip []string `locationName:"policyNamesToSkip" type:"list"`
-
-	// The principal.
-	Principal *string `locationName:"principal" type:"string"`
-}
-
-// String returns the string representation
-func (s TestAuthorizationInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *TestAuthorizationInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "TestAuthorizationInput"}
-
-	if s.AuthInfos == nil {
-		invalidParams.Add(aws.NewErrParamRequired("AuthInfos"))
-	}
-	if s.AuthInfos != nil && len(s.AuthInfos) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("AuthInfos", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s TestAuthorizationInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.AuthInfos != nil {
-		v := s.AuthInfos
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "authInfos", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	if s.CognitoIdentityPoolId != nil {
-		v := *s.CognitoIdentityPoolId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "cognitoIdentityPoolId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.PolicyNamesToAdd != nil {
-		v := s.PolicyNamesToAdd
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "policyNamesToAdd", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
-		}
-		ls0.End()
-
-	}
-	if s.PolicyNamesToSkip != nil {
-		v := s.PolicyNamesToSkip
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "policyNamesToSkip", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
-		}
-		ls0.End()
-
-	}
-	if s.Principal != nil {
-		v := *s.Principal
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "principal", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.ClientId != nil {
-		v := *s.ClientId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "clientId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type TestAuthorizationOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The authentication results.
-	AuthResults []AuthResult `locationName:"authResults" type:"list"`
-}
-
-// String returns the string representation
-func (s TestAuthorizationOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s TestAuthorizationOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.AuthResults != nil {
-		v := s.AuthResults
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "authResults", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	return nil
-}
 
 const opTestAuthorization = "TestAuthorization"
 
@@ -164,7 +24,7 @@ const opTestAuthorization = "TestAuthorization"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) TestAuthorizationRequest(input *TestAuthorizationInput) TestAuthorizationRequest {
+func (c *Client) TestAuthorizationRequest(input *types.TestAuthorizationInput) TestAuthorizationRequest {
 	op := &aws.Operation{
 		Name:       opTestAuthorization,
 		HTTPMethod: "POST",
@@ -172,10 +32,10 @@ func (c *Client) TestAuthorizationRequest(input *TestAuthorizationInput) TestAut
 	}
 
 	if input == nil {
-		input = &TestAuthorizationInput{}
+		input = &types.TestAuthorizationInput{}
 	}
 
-	req := c.newRequest(op, input, &TestAuthorizationOutput{})
+	req := c.newRequest(op, input, &types.TestAuthorizationOutput{})
 	return TestAuthorizationRequest{Request: req, Input: input, Copy: c.TestAuthorizationRequest}
 }
 
@@ -183,8 +43,8 @@ func (c *Client) TestAuthorizationRequest(input *TestAuthorizationInput) TestAut
 // TestAuthorization API operation.
 type TestAuthorizationRequest struct {
 	*aws.Request
-	Input *TestAuthorizationInput
-	Copy  func(*TestAuthorizationInput) TestAuthorizationRequest
+	Input *types.TestAuthorizationInput
+	Copy  func(*types.TestAuthorizationInput) TestAuthorizationRequest
 }
 
 // Send marshals and sends the TestAuthorization API request.
@@ -196,7 +56,7 @@ func (r TestAuthorizationRequest) Send(ctx context.Context) (*TestAuthorizationR
 	}
 
 	resp := &TestAuthorizationResponse{
-		TestAuthorizationOutput: r.Request.Data.(*TestAuthorizationOutput),
+		TestAuthorizationOutput: r.Request.Data.(*types.TestAuthorizationOutput),
 		response:                &aws.Response{Request: r.Request},
 	}
 
@@ -206,7 +66,7 @@ func (r TestAuthorizationRequest) Send(ctx context.Context) (*TestAuthorizationR
 // TestAuthorizationResponse is the response type for the
 // TestAuthorization API operation.
 type TestAuthorizationResponse struct {
-	*TestAuthorizationOutput
+	*types.TestAuthorizationOutput
 
 	response *aws.Response
 }

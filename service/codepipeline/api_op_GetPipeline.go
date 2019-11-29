@@ -6,65 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/codepipeline/types"
 )
-
-// Represents the input of a GetPipeline action.
-type GetPipelineInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the pipeline for which you want to get information. Pipeline
-	// names must be unique under an AWS user account.
-	//
-	// Name is a required field
-	Name *string `locationName:"name" min:"1" type:"string" required:"true"`
-
-	// The version number of the pipeline. If you do not specify a version, defaults
-	// to the current version.
-	Version *int64 `locationName:"version" min:"1" type:"integer"`
-}
-
-// String returns the string representation
-func (s GetPipelineInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetPipelineInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetPipelineInput"}
-
-	if s.Name == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Name"))
-	}
-	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
-	}
-	if s.Version != nil && *s.Version < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("Version", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Represents the output of a GetPipeline action.
-type GetPipelineOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Represents the pipeline metadata information returned as part of the output
-	// of a GetPipeline action.
-	Metadata *PipelineMetadata `locationName:"metadata" type:"structure"`
-
-	// Represents the structure of actions and stages to be performed in the pipeline.
-	Pipeline *PipelineDeclaration `locationName:"pipeline" type:"structure"`
-}
-
-// String returns the string representation
-func (s GetPipelineOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetPipeline = "GetPipeline"
 
@@ -83,7 +26,7 @@ const opGetPipeline = "GetPipeline"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/GetPipeline
-func (c *Client) GetPipelineRequest(input *GetPipelineInput) GetPipelineRequest {
+func (c *Client) GetPipelineRequest(input *types.GetPipelineInput) GetPipelineRequest {
 	op := &aws.Operation{
 		Name:       opGetPipeline,
 		HTTPMethod: "POST",
@@ -91,10 +34,10 @@ func (c *Client) GetPipelineRequest(input *GetPipelineInput) GetPipelineRequest 
 	}
 
 	if input == nil {
-		input = &GetPipelineInput{}
+		input = &types.GetPipelineInput{}
 	}
 
-	req := c.newRequest(op, input, &GetPipelineOutput{})
+	req := c.newRequest(op, input, &types.GetPipelineOutput{})
 	return GetPipelineRequest{Request: req, Input: input, Copy: c.GetPipelineRequest}
 }
 
@@ -102,8 +45,8 @@ func (c *Client) GetPipelineRequest(input *GetPipelineInput) GetPipelineRequest 
 // GetPipeline API operation.
 type GetPipelineRequest struct {
 	*aws.Request
-	Input *GetPipelineInput
-	Copy  func(*GetPipelineInput) GetPipelineRequest
+	Input *types.GetPipelineInput
+	Copy  func(*types.GetPipelineInput) GetPipelineRequest
 }
 
 // Send marshals and sends the GetPipeline API request.
@@ -115,7 +58,7 @@ func (r GetPipelineRequest) Send(ctx context.Context) (*GetPipelineResponse, err
 	}
 
 	resp := &GetPipelineResponse{
-		GetPipelineOutput: r.Request.Data.(*GetPipelineOutput),
+		GetPipelineOutput: r.Request.Data.(*types.GetPipelineOutput),
 		response:          &aws.Response{Request: r.Request},
 	}
 
@@ -125,7 +68,7 @@ func (r GetPipelineRequest) Send(ctx context.Context) (*GetPipelineResponse, err
 // GetPipelineResponse is the response type for the
 // GetPipeline API operation.
 type GetPipelineResponse struct {
-	*GetPipelineOutput
+	*types.GetPipelineOutput
 
 	response *aws.Response
 }

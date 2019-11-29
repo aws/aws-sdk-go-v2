@@ -6,84 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/iot/types"
 )
-
-// The input for the ListThingPrincipal operation.
-type ListThingPrincipalsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the thing.
-	//
-	// ThingName is a required field
-	ThingName *string `location:"uri" locationName:"thingName" min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s ListThingPrincipalsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListThingPrincipalsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListThingPrincipalsInput"}
-
-	if s.ThingName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ThingName"))
-	}
-	if s.ThingName != nil && len(*s.ThingName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ThingName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListThingPrincipalsInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.ThingName != nil {
-		v := *s.ThingName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "thingName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-// The output from the ListThingPrincipals operation.
-type ListThingPrincipalsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The principals associated with the thing.
-	Principals []string `locationName:"principals" type:"list"`
-}
-
-// String returns the string representation
-func (s ListThingPrincipalsOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListThingPrincipalsOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.Principals != nil {
-		v := s.Principals
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "principals", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
-		}
-		ls0.End()
-
-	}
-	return nil
-}
 
 const opListThingPrincipals = "ListThingPrincipals"
 
@@ -100,7 +24,7 @@ const opListThingPrincipals = "ListThingPrincipals"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) ListThingPrincipalsRequest(input *ListThingPrincipalsInput) ListThingPrincipalsRequest {
+func (c *Client) ListThingPrincipalsRequest(input *types.ListThingPrincipalsInput) ListThingPrincipalsRequest {
 	op := &aws.Operation{
 		Name:       opListThingPrincipals,
 		HTTPMethod: "GET",
@@ -108,10 +32,10 @@ func (c *Client) ListThingPrincipalsRequest(input *ListThingPrincipalsInput) Lis
 	}
 
 	if input == nil {
-		input = &ListThingPrincipalsInput{}
+		input = &types.ListThingPrincipalsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListThingPrincipalsOutput{})
+	req := c.newRequest(op, input, &types.ListThingPrincipalsOutput{})
 	return ListThingPrincipalsRequest{Request: req, Input: input, Copy: c.ListThingPrincipalsRequest}
 }
 
@@ -119,8 +43,8 @@ func (c *Client) ListThingPrincipalsRequest(input *ListThingPrincipalsInput) Lis
 // ListThingPrincipals API operation.
 type ListThingPrincipalsRequest struct {
 	*aws.Request
-	Input *ListThingPrincipalsInput
-	Copy  func(*ListThingPrincipalsInput) ListThingPrincipalsRequest
+	Input *types.ListThingPrincipalsInput
+	Copy  func(*types.ListThingPrincipalsInput) ListThingPrincipalsRequest
 }
 
 // Send marshals and sends the ListThingPrincipals API request.
@@ -132,7 +56,7 @@ func (r ListThingPrincipalsRequest) Send(ctx context.Context) (*ListThingPrincip
 	}
 
 	resp := &ListThingPrincipalsResponse{
-		ListThingPrincipalsOutput: r.Request.Data.(*ListThingPrincipalsOutput),
+		ListThingPrincipalsOutput: r.Request.Data.(*types.ListThingPrincipalsOutput),
 		response:                  &aws.Response{Request: r.Request},
 	}
 
@@ -142,7 +66,7 @@ func (r ListThingPrincipalsRequest) Send(ctx context.Context) (*ListThingPrincip
 // ListThingPrincipalsResponse is the response type for the
 // ListThingPrincipals API operation.
 type ListThingPrincipalsResponse struct {
-	*ListThingPrincipalsOutput
+	*types.ListThingPrincipalsOutput
 
 	response *aws.Response
 }

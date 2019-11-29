@@ -6,53 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/organizations/types"
 )
-
-type DeclineHandshakeInput struct {
-	_ struct{} `type:"structure"`
-
-	// The unique identifier (ID) of the handshake that you want to decline. You
-	// can get the ID from the ListHandshakesForAccount operation.
-	//
-	// The regex pattern (http://wikipedia.org/wiki/regex) for handshake ID string
-	// requires "h-" followed by from 8 to 32 lower-case letters or digits.
-	//
-	// HandshakeId is a required field
-	HandshakeId *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeclineHandshakeInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeclineHandshakeInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeclineHandshakeInput"}
-
-	if s.HandshakeId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("HandshakeId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeclineHandshakeOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A structure that contains details about the declined handshake. The state
-	// is updated to show the value DECLINED.
-	Handshake *Handshake `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeclineHandshakeOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeclineHandshake = "DeclineHandshake"
 
@@ -78,7 +33,7 @@ const opDeclineHandshake = "DeclineHandshake"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/DeclineHandshake
-func (c *Client) DeclineHandshakeRequest(input *DeclineHandshakeInput) DeclineHandshakeRequest {
+func (c *Client) DeclineHandshakeRequest(input *types.DeclineHandshakeInput) DeclineHandshakeRequest {
 	op := &aws.Operation{
 		Name:       opDeclineHandshake,
 		HTTPMethod: "POST",
@@ -86,10 +41,10 @@ func (c *Client) DeclineHandshakeRequest(input *DeclineHandshakeInput) DeclineHa
 	}
 
 	if input == nil {
-		input = &DeclineHandshakeInput{}
+		input = &types.DeclineHandshakeInput{}
 	}
 
-	req := c.newRequest(op, input, &DeclineHandshakeOutput{})
+	req := c.newRequest(op, input, &types.DeclineHandshakeOutput{})
 	return DeclineHandshakeRequest{Request: req, Input: input, Copy: c.DeclineHandshakeRequest}
 }
 
@@ -97,8 +52,8 @@ func (c *Client) DeclineHandshakeRequest(input *DeclineHandshakeInput) DeclineHa
 // DeclineHandshake API operation.
 type DeclineHandshakeRequest struct {
 	*aws.Request
-	Input *DeclineHandshakeInput
-	Copy  func(*DeclineHandshakeInput) DeclineHandshakeRequest
+	Input *types.DeclineHandshakeInput
+	Copy  func(*types.DeclineHandshakeInput) DeclineHandshakeRequest
 }
 
 // Send marshals and sends the DeclineHandshake API request.
@@ -110,7 +65,7 @@ func (r DeclineHandshakeRequest) Send(ctx context.Context) (*DeclineHandshakeRes
 	}
 
 	resp := &DeclineHandshakeResponse{
-		DeclineHandshakeOutput: r.Request.Data.(*DeclineHandshakeOutput),
+		DeclineHandshakeOutput: r.Request.Data.(*types.DeclineHandshakeOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -120,7 +75,7 @@ func (r DeclineHandshakeRequest) Send(ctx context.Context) (*DeclineHandshakeRes
 // DeclineHandshakeResponse is the response type for the
 // DeclineHandshake API operation.
 type DeclineHandshakeResponse struct {
-	*DeclineHandshakeOutput
+	*types.DeclineHandshakeOutput
 
 	response *aws.Response
 }

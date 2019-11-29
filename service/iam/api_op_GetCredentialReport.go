@@ -4,42 +4,10 @@ package iam
 
 import (
 	"context"
-	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/iam/types"
 )
-
-type GetCredentialReportInput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s GetCredentialReportInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Contains the response to a successful GetCredentialReport request.
-type GetCredentialReportOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Contains the credential report. The report is Base64-encoded.
-	//
-	// Content is automatically base64 encoded/decoded by the SDK.
-	Content []byte `type:"blob"`
-
-	// The date and time when the credential report was created, in ISO 8601 date-time
-	// format (http://www.iso.org/iso/iso8601).
-	GeneratedTime *time.Time `type:"timestamp"`
-
-	// The format (MIME type) of the credential report.
-	ReportFormat ReportFormatType `type:"string" enum:"true"`
-}
-
-// String returns the string representation
-func (s GetCredentialReportOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetCredentialReport = "GetCredentialReport"
 
@@ -58,7 +26,7 @@ const opGetCredentialReport = "GetCredentialReport"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetCredentialReport
-func (c *Client) GetCredentialReportRequest(input *GetCredentialReportInput) GetCredentialReportRequest {
+func (c *Client) GetCredentialReportRequest(input *types.GetCredentialReportInput) GetCredentialReportRequest {
 	op := &aws.Operation{
 		Name:       opGetCredentialReport,
 		HTTPMethod: "POST",
@@ -66,10 +34,10 @@ func (c *Client) GetCredentialReportRequest(input *GetCredentialReportInput) Get
 	}
 
 	if input == nil {
-		input = &GetCredentialReportInput{}
+		input = &types.GetCredentialReportInput{}
 	}
 
-	req := c.newRequest(op, input, &GetCredentialReportOutput{})
+	req := c.newRequest(op, input, &types.GetCredentialReportOutput{})
 	return GetCredentialReportRequest{Request: req, Input: input, Copy: c.GetCredentialReportRequest}
 }
 
@@ -77,8 +45,8 @@ func (c *Client) GetCredentialReportRequest(input *GetCredentialReportInput) Get
 // GetCredentialReport API operation.
 type GetCredentialReportRequest struct {
 	*aws.Request
-	Input *GetCredentialReportInput
-	Copy  func(*GetCredentialReportInput) GetCredentialReportRequest
+	Input *types.GetCredentialReportInput
+	Copy  func(*types.GetCredentialReportInput) GetCredentialReportRequest
 }
 
 // Send marshals and sends the GetCredentialReport API request.
@@ -90,7 +58,7 @@ func (r GetCredentialReportRequest) Send(ctx context.Context) (*GetCredentialRep
 	}
 
 	resp := &GetCredentialReportResponse{
-		GetCredentialReportOutput: r.Request.Data.(*GetCredentialReportOutput),
+		GetCredentialReportOutput: r.Request.Data.(*types.GetCredentialReportOutput),
 		response:                  &aws.Response{Request: r.Request},
 	}
 
@@ -100,7 +68,7 @@ func (r GetCredentialReportRequest) Send(ctx context.Context) (*GetCredentialRep
 // GetCredentialReportResponse is the response type for the
 // GetCredentialReport API operation.
 type GetCredentialReportResponse struct {
-	*GetCredentialReportOutput
+	*types.GetCredentialReportOutput
 
 	response *aws.Response
 }

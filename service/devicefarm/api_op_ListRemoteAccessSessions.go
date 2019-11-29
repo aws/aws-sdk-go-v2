@@ -6,67 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/devicefarm/types"
 )
-
-// Represents the request to return information about the remote access session.
-type ListRemoteAccessSessionsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the project about which you are requesting
-	// information.
-	//
-	// Arn is a required field
-	Arn *string `locationName:"arn" min:"32" type:"string" required:"true"`
-
-	// An identifier that was returned from the previous call to this operation,
-	// which can be used to return the next set of items in the list.
-	NextToken *string `locationName:"nextToken" min:"4" type:"string"`
-}
-
-// String returns the string representation
-func (s ListRemoteAccessSessionsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListRemoteAccessSessionsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListRemoteAccessSessionsInput"}
-
-	if s.Arn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Arn"))
-	}
-	if s.Arn != nil && len(*s.Arn) < 32 {
-		invalidParams.Add(aws.NewErrParamMinLen("Arn", 32))
-	}
-	if s.NextToken != nil && len(*s.NextToken) < 4 {
-		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 4))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Represents the response from the server after AWS Device Farm makes a request
-// to return information about the remote access session.
-type ListRemoteAccessSessionsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// An identifier that was returned from the previous call to this operation,
-	// which can be used to return the next set of items in the list.
-	NextToken *string `locationName:"nextToken" min:"4" type:"string"`
-
-	// A container representing the metadata from the service about each remote
-	// access session you are requesting.
-	RemoteAccessSessions []RemoteAccessSession `locationName:"remoteAccessSessions" type:"list"`
-}
-
-// String returns the string representation
-func (s ListRemoteAccessSessionsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListRemoteAccessSessions = "ListRemoteAccessSessions"
 
@@ -83,7 +24,7 @@ const opListRemoteAccessSessions = "ListRemoteAccessSessions"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ListRemoteAccessSessions
-func (c *Client) ListRemoteAccessSessionsRequest(input *ListRemoteAccessSessionsInput) ListRemoteAccessSessionsRequest {
+func (c *Client) ListRemoteAccessSessionsRequest(input *types.ListRemoteAccessSessionsInput) ListRemoteAccessSessionsRequest {
 	op := &aws.Operation{
 		Name:       opListRemoteAccessSessions,
 		HTTPMethod: "POST",
@@ -91,10 +32,10 @@ func (c *Client) ListRemoteAccessSessionsRequest(input *ListRemoteAccessSessions
 	}
 
 	if input == nil {
-		input = &ListRemoteAccessSessionsInput{}
+		input = &types.ListRemoteAccessSessionsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListRemoteAccessSessionsOutput{})
+	req := c.newRequest(op, input, &types.ListRemoteAccessSessionsOutput{})
 	return ListRemoteAccessSessionsRequest{Request: req, Input: input, Copy: c.ListRemoteAccessSessionsRequest}
 }
 
@@ -102,8 +43,8 @@ func (c *Client) ListRemoteAccessSessionsRequest(input *ListRemoteAccessSessions
 // ListRemoteAccessSessions API operation.
 type ListRemoteAccessSessionsRequest struct {
 	*aws.Request
-	Input *ListRemoteAccessSessionsInput
-	Copy  func(*ListRemoteAccessSessionsInput) ListRemoteAccessSessionsRequest
+	Input *types.ListRemoteAccessSessionsInput
+	Copy  func(*types.ListRemoteAccessSessionsInput) ListRemoteAccessSessionsRequest
 }
 
 // Send marshals and sends the ListRemoteAccessSessions API request.
@@ -115,7 +56,7 @@ func (r ListRemoteAccessSessionsRequest) Send(ctx context.Context) (*ListRemoteA
 	}
 
 	resp := &ListRemoteAccessSessionsResponse{
-		ListRemoteAccessSessionsOutput: r.Request.Data.(*ListRemoteAccessSessionsOutput),
+		ListRemoteAccessSessionsOutput: r.Request.Data.(*types.ListRemoteAccessSessionsOutput),
 		response:                       &aws.Response{Request: r.Request},
 	}
 
@@ -125,7 +66,7 @@ func (r ListRemoteAccessSessionsRequest) Send(ctx context.Context) (*ListRemoteA
 // ListRemoteAccessSessionsResponse is the response type for the
 // ListRemoteAccessSessions API operation.
 type ListRemoteAccessSessionsResponse struct {
-	*ListRemoteAccessSessionsOutput
+	*types.ListRemoteAccessSessionsOutput
 
 	response *aws.Response
 }

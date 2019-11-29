@@ -6,50 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
+	"github.com/aws/aws-sdk-go-v2/service/transcribe/types"
 )
-
-type DeleteVocabularyInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the vocabulary to delete.
-	//
-	// VocabularyName is a required field
-	VocabularyName *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteVocabularyInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteVocabularyInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteVocabularyInput"}
-
-	if s.VocabularyName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("VocabularyName"))
-	}
-	if s.VocabularyName != nil && len(*s.VocabularyName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("VocabularyName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteVocabularyOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteVocabularyOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteVocabulary = "DeleteVocabulary"
 
@@ -66,7 +26,7 @@ const opDeleteVocabulary = "DeleteVocabulary"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/DeleteVocabulary
-func (c *Client) DeleteVocabularyRequest(input *DeleteVocabularyInput) DeleteVocabularyRequest {
+func (c *Client) DeleteVocabularyRequest(input *types.DeleteVocabularyInput) DeleteVocabularyRequest {
 	op := &aws.Operation{
 		Name:       opDeleteVocabulary,
 		HTTPMethod: "POST",
@@ -74,10 +34,10 @@ func (c *Client) DeleteVocabularyRequest(input *DeleteVocabularyInput) DeleteVoc
 	}
 
 	if input == nil {
-		input = &DeleteVocabularyInput{}
+		input = &types.DeleteVocabularyInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteVocabularyOutput{})
+	req := c.newRequest(op, input, &types.DeleteVocabularyOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return DeleteVocabularyRequest{Request: req, Input: input, Copy: c.DeleteVocabularyRequest}
@@ -87,8 +47,8 @@ func (c *Client) DeleteVocabularyRequest(input *DeleteVocabularyInput) DeleteVoc
 // DeleteVocabulary API operation.
 type DeleteVocabularyRequest struct {
 	*aws.Request
-	Input *DeleteVocabularyInput
-	Copy  func(*DeleteVocabularyInput) DeleteVocabularyRequest
+	Input *types.DeleteVocabularyInput
+	Copy  func(*types.DeleteVocabularyInput) DeleteVocabularyRequest
 }
 
 // Send marshals and sends the DeleteVocabulary API request.
@@ -100,7 +60,7 @@ func (r DeleteVocabularyRequest) Send(ctx context.Context) (*DeleteVocabularyRes
 	}
 
 	resp := &DeleteVocabularyResponse{
-		DeleteVocabularyOutput: r.Request.Data.(*DeleteVocabularyOutput),
+		DeleteVocabularyOutput: r.Request.Data.(*types.DeleteVocabularyOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -110,7 +70,7 @@ func (r DeleteVocabularyRequest) Send(ctx context.Context) (*DeleteVocabularyRes
 // DeleteVocabularyResponse is the response type for the
 // DeleteVocabulary API operation.
 type DeleteVocabularyResponse struct {
-	*DeleteVocabularyOutput
+	*types.DeleteVocabularyOutput
 
 	response *aws.Response
 }

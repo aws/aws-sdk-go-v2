@@ -6,70 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/mturk/types"
 )
-
-type ListQualificationRequestsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The maximum number of results to return in a single call.
-	MaxResults *int64 `min:"1" type:"integer"`
-
-	// If the previous response was incomplete (because there is more data to retrieve),
-	// Amazon Mechanical Turk returns a pagination token in the response. You can
-	// use this pagination token to retrieve the next set of results.
-	NextToken *string `min:"1" type:"string"`
-
-	// The ID of the QualificationType.
-	QualificationTypeId *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s ListQualificationRequestsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListQualificationRequestsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListQualificationRequestsInput"}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-	if s.NextToken != nil && len(*s.NextToken) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
-	}
-	if s.QualificationTypeId != nil && len(*s.QualificationTypeId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("QualificationTypeId", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ListQualificationRequestsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// If the previous response was incomplete (because there is more data to retrieve),
-	// Amazon Mechanical Turk returns a pagination token in the response. You can
-	// use this pagination token to retrieve the next set of results.
-	NextToken *string `min:"1" type:"string"`
-
-	// The number of Qualification requests on this page in the filtered results
-	// list, equivalent to the number of Qualification requests being returned by
-	// this call.
-	NumResults *int64 `type:"integer"`
-
-	// The Qualification request. The response includes one QualificationRequest
-	// element for each Qualification request returned by the query.
-	QualificationRequests []QualificationRequest `type:"list"`
-}
-
-// String returns the string representation
-func (s ListQualificationRequestsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListQualificationRequests = "ListQualificationRequests"
 
@@ -89,7 +27,7 @@ const opListQualificationRequests = "ListQualificationRequests"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/ListQualificationRequests
-func (c *Client) ListQualificationRequestsRequest(input *ListQualificationRequestsInput) ListQualificationRequestsRequest {
+func (c *Client) ListQualificationRequestsRequest(input *types.ListQualificationRequestsInput) ListQualificationRequestsRequest {
 	op := &aws.Operation{
 		Name:       opListQualificationRequests,
 		HTTPMethod: "POST",
@@ -103,10 +41,10 @@ func (c *Client) ListQualificationRequestsRequest(input *ListQualificationReques
 	}
 
 	if input == nil {
-		input = &ListQualificationRequestsInput{}
+		input = &types.ListQualificationRequestsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListQualificationRequestsOutput{})
+	req := c.newRequest(op, input, &types.ListQualificationRequestsOutput{})
 	return ListQualificationRequestsRequest{Request: req, Input: input, Copy: c.ListQualificationRequestsRequest}
 }
 
@@ -114,8 +52,8 @@ func (c *Client) ListQualificationRequestsRequest(input *ListQualificationReques
 // ListQualificationRequests API operation.
 type ListQualificationRequestsRequest struct {
 	*aws.Request
-	Input *ListQualificationRequestsInput
-	Copy  func(*ListQualificationRequestsInput) ListQualificationRequestsRequest
+	Input *types.ListQualificationRequestsInput
+	Copy  func(*types.ListQualificationRequestsInput) ListQualificationRequestsRequest
 }
 
 // Send marshals and sends the ListQualificationRequests API request.
@@ -127,7 +65,7 @@ func (r ListQualificationRequestsRequest) Send(ctx context.Context) (*ListQualif
 	}
 
 	resp := &ListQualificationRequestsResponse{
-		ListQualificationRequestsOutput: r.Request.Data.(*ListQualificationRequestsOutput),
+		ListQualificationRequestsOutput: r.Request.Data.(*types.ListQualificationRequestsOutput),
 		response:                        &aws.Response{Request: r.Request},
 	}
 
@@ -157,7 +95,7 @@ func NewListQualificationRequestsPaginator(req ListQualificationRequestsRequest)
 	return ListQualificationRequestsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListQualificationRequestsInput
+				var inCpy *types.ListQualificationRequestsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -177,14 +115,14 @@ type ListQualificationRequestsPaginator struct {
 	aws.Pager
 }
 
-func (p *ListQualificationRequestsPaginator) CurrentPage() *ListQualificationRequestsOutput {
-	return p.Pager.CurrentPage().(*ListQualificationRequestsOutput)
+func (p *ListQualificationRequestsPaginator) CurrentPage() *types.ListQualificationRequestsOutput {
+	return p.Pager.CurrentPage().(*types.ListQualificationRequestsOutput)
 }
 
 // ListQualificationRequestsResponse is the response type for the
 // ListQualificationRequests API operation.
 type ListQualificationRequestsResponse struct {
-	*ListQualificationRequestsOutput
+	*types.ListQualificationRequestsOutput
 
 	response *aws.Response
 }

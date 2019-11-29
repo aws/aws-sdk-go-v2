@@ -13,6 +13,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws/awserr"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting/integration"
 	"github.com/aws/aws-sdk-go-v2/service/efs"
+	"github.com/aws/aws-sdk-go-v2/service/efs/types"
 )
 
 var _ aws.Config
@@ -24,7 +25,7 @@ func TestInteg_00_DescribeFileSystems(t *testing.T) {
 
 	cfg := integration.ConfigWithDefaultRegion("us-west-2")
 	svc := efs.New(cfg)
-	params := &efs.DescribeFileSystemsInput{}
+	params := &types.DescribeFileSystemsInput{}
 
 	req := svc.DescribeFileSystemsRequest(params)
 
@@ -39,7 +40,7 @@ func TestInteg_01_DeleteFileSystem(t *testing.T) {
 
 	cfg := integration.ConfigWithDefaultRegion("us-west-2")
 	svc := efs.New(cfg)
-	params := &efs.DeleteFileSystemInput{
+	params := &types.DeleteFileSystemInput{
 		FileSystemId: aws.String("fs-c5a1446c"),
 	}
 

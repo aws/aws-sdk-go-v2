@@ -6,80 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ssm/types"
 )
-
-type DescribePatchGroupStateInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the patch group whose patch snapshot should be retrieved.
-	//
-	// PatchGroup is a required field
-	PatchGroup *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribePatchGroupStateInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribePatchGroupStateInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribePatchGroupStateInput"}
-
-	if s.PatchGroup == nil {
-		invalidParams.Add(aws.NewErrParamRequired("PatchGroup"))
-	}
-	if s.PatchGroup != nil && len(*s.PatchGroup) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("PatchGroup", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribePatchGroupStateOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The number of instances in the patch group.
-	Instances *int64 `type:"integer"`
-
-	// The number of instances with patches from the patch baseline that failed
-	// to install.
-	InstancesWithFailedPatches *int64 `type:"integer"`
-
-	// The number of instances with patches installed that aren't defined in the
-	// patch baseline.
-	InstancesWithInstalledOtherPatches *int64 `type:"integer"`
-
-	// The number of instances with installed patches.
-	InstancesWithInstalledPatches *int64 `type:"integer"`
-
-	// The number of instances with patches installed that are specified in a RejectedPatches
-	// list. Patches with a status of INSTALLED_REJECTED were typically installed
-	// before they were added to a RejectedPatches list.
-	//
-	// If ALLOW_AS_DEPENDENCY is the specified option for RejectedPatchesAction,
-	// the value of InstancesWithInstalledRejectedPatches will always be 0 (zero).
-	InstancesWithInstalledRejectedPatches *int64 `type:"integer"`
-
-	// The number of instances with missing patches from the patch baseline.
-	InstancesWithMissingPatches *int64 `type:"integer"`
-
-	// The number of instances with patches that aren't applicable.
-	InstancesWithNotApplicablePatches *int64 `type:"integer"`
-
-	// The number of instances with NotApplicable patches beyond the supported limit,
-	// which are not reported by name to Systems Manager Inventory.
-	InstancesWithUnreportedNotApplicablePatches *int64 `type:"integer"`
-}
-
-// String returns the string representation
-func (s DescribePatchGroupStateOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribePatchGroupState = "DescribePatchGroupState"
 
@@ -96,7 +24,7 @@ const opDescribePatchGroupState = "DescribePatchGroupState"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribePatchGroupState
-func (c *Client) DescribePatchGroupStateRequest(input *DescribePatchGroupStateInput) DescribePatchGroupStateRequest {
+func (c *Client) DescribePatchGroupStateRequest(input *types.DescribePatchGroupStateInput) DescribePatchGroupStateRequest {
 	op := &aws.Operation{
 		Name:       opDescribePatchGroupState,
 		HTTPMethod: "POST",
@@ -104,10 +32,10 @@ func (c *Client) DescribePatchGroupStateRequest(input *DescribePatchGroupStateIn
 	}
 
 	if input == nil {
-		input = &DescribePatchGroupStateInput{}
+		input = &types.DescribePatchGroupStateInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribePatchGroupStateOutput{})
+	req := c.newRequest(op, input, &types.DescribePatchGroupStateOutput{})
 	return DescribePatchGroupStateRequest{Request: req, Input: input, Copy: c.DescribePatchGroupStateRequest}
 }
 
@@ -115,8 +43,8 @@ func (c *Client) DescribePatchGroupStateRequest(input *DescribePatchGroupStateIn
 // DescribePatchGroupState API operation.
 type DescribePatchGroupStateRequest struct {
 	*aws.Request
-	Input *DescribePatchGroupStateInput
-	Copy  func(*DescribePatchGroupStateInput) DescribePatchGroupStateRequest
+	Input *types.DescribePatchGroupStateInput
+	Copy  func(*types.DescribePatchGroupStateInput) DescribePatchGroupStateRequest
 }
 
 // Send marshals and sends the DescribePatchGroupState API request.
@@ -128,7 +56,7 @@ func (r DescribePatchGroupStateRequest) Send(ctx context.Context) (*DescribePatc
 	}
 
 	resp := &DescribePatchGroupStateResponse{
-		DescribePatchGroupStateOutput: r.Request.Data.(*DescribePatchGroupStateOutput),
+		DescribePatchGroupStateOutput: r.Request.Data.(*types.DescribePatchGroupStateOutput),
 		response:                      &aws.Response{Request: r.Request},
 	}
 
@@ -138,7 +66,7 @@ func (r DescribePatchGroupStateRequest) Send(ctx context.Context) (*DescribePatc
 // DescribePatchGroupStateResponse is the response type for the
 // DescribePatchGroupState API operation.
 type DescribePatchGroupStateResponse struct {
-	*DescribePatchGroupStateOutput
+	*types.DescribePatchGroupStateOutput
 
 	response *aws.Response
 }

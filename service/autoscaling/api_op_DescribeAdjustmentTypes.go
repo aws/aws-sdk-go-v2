@@ -6,29 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/autoscaling/types"
 )
-
-type DescribeAdjustmentTypesInput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DescribeAdjustmentTypesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type DescribeAdjustmentTypesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The policy adjustment types.
-	AdjustmentTypes []AdjustmentType `type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeAdjustmentTypesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeAdjustmentTypes = "DescribeAdjustmentTypes"
 
@@ -45,7 +24,7 @@ const opDescribeAdjustmentTypes = "DescribeAdjustmentTypes"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DescribeAdjustmentTypes
-func (c *Client) DescribeAdjustmentTypesRequest(input *DescribeAdjustmentTypesInput) DescribeAdjustmentTypesRequest {
+func (c *Client) DescribeAdjustmentTypesRequest(input *types.DescribeAdjustmentTypesInput) DescribeAdjustmentTypesRequest {
 	op := &aws.Operation{
 		Name:       opDescribeAdjustmentTypes,
 		HTTPMethod: "POST",
@@ -53,10 +32,10 @@ func (c *Client) DescribeAdjustmentTypesRequest(input *DescribeAdjustmentTypesIn
 	}
 
 	if input == nil {
-		input = &DescribeAdjustmentTypesInput{}
+		input = &types.DescribeAdjustmentTypesInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeAdjustmentTypesOutput{})
+	req := c.newRequest(op, input, &types.DescribeAdjustmentTypesOutput{})
 	return DescribeAdjustmentTypesRequest{Request: req, Input: input, Copy: c.DescribeAdjustmentTypesRequest}
 }
 
@@ -64,8 +43,8 @@ func (c *Client) DescribeAdjustmentTypesRequest(input *DescribeAdjustmentTypesIn
 // DescribeAdjustmentTypes API operation.
 type DescribeAdjustmentTypesRequest struct {
 	*aws.Request
-	Input *DescribeAdjustmentTypesInput
-	Copy  func(*DescribeAdjustmentTypesInput) DescribeAdjustmentTypesRequest
+	Input *types.DescribeAdjustmentTypesInput
+	Copy  func(*types.DescribeAdjustmentTypesInput) DescribeAdjustmentTypesRequest
 }
 
 // Send marshals and sends the DescribeAdjustmentTypes API request.
@@ -77,7 +56,7 @@ func (r DescribeAdjustmentTypesRequest) Send(ctx context.Context) (*DescribeAdju
 	}
 
 	resp := &DescribeAdjustmentTypesResponse{
-		DescribeAdjustmentTypesOutput: r.Request.Data.(*DescribeAdjustmentTypesOutput),
+		DescribeAdjustmentTypesOutput: r.Request.Data.(*types.DescribeAdjustmentTypesOutput),
 		response:                      &aws.Response{Request: r.Request},
 	}
 
@@ -87,7 +66,7 @@ func (r DescribeAdjustmentTypesRequest) Send(ctx context.Context) (*DescribeAdju
 // DescribeAdjustmentTypesResponse is the response type for the
 // DescribeAdjustmentTypes API operation.
 type DescribeAdjustmentTypesResponse struct {
-	*DescribeAdjustmentTypesOutput
+	*types.DescribeAdjustmentTypesOutput
 
 	response *aws.Response
 }

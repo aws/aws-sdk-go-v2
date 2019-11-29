@@ -6,69 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/gamelift/types"
 )
-
-// Represents the input for a request action.
-type DescribeMatchmakingConfigurationsInput struct {
-	_ struct{} `type:"structure"`
-
-	// Maximum number of results to return. Use this parameter with NextToken to
-	// get results as a set of sequential pages. This parameter is limited to 10.
-	Limit *int64 `min:"1" type:"integer"`
-
-	// Unique identifier for a matchmaking configuration(s) to retrieve. To request
-	// all existing configurations, leave this parameter empty.
-	Names []string `type:"list"`
-
-	// Token that indicates the start of the next sequential page of results. Use
-	// the token that is returned with a previous call to this action. To start
-	// at the beginning of the result set, do not specify a value.
-	NextToken *string `min:"1" type:"string"`
-
-	// Unique identifier for a matchmaking rule set. Use this parameter to retrieve
-	// all matchmaking configurations that use this rule set.
-	RuleSetName *string `type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeMatchmakingConfigurationsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeMatchmakingConfigurationsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeMatchmakingConfigurationsInput"}
-	if s.Limit != nil && *s.Limit < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("Limit", 1))
-	}
-	if s.NextToken != nil && len(*s.NextToken) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Represents the returned data in response to a request action.
-type DescribeMatchmakingConfigurationsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Collection of requested matchmaking configuration objects.
-	Configurations []MatchmakingConfiguration `type:"list"`
-
-	// Token that indicates where to resume retrieving results on the next call
-	// to this action. If no token is returned, these results represent the end
-	// of the list.
-	NextToken *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeMatchmakingConfigurationsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeMatchmakingConfigurations = "DescribeMatchmakingConfigurations"
 
@@ -114,7 +53,7 @@ const opDescribeMatchmakingConfigurations = "DescribeMatchmakingConfigurations"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DescribeMatchmakingConfigurations
-func (c *Client) DescribeMatchmakingConfigurationsRequest(input *DescribeMatchmakingConfigurationsInput) DescribeMatchmakingConfigurationsRequest {
+func (c *Client) DescribeMatchmakingConfigurationsRequest(input *types.DescribeMatchmakingConfigurationsInput) DescribeMatchmakingConfigurationsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeMatchmakingConfigurations,
 		HTTPMethod: "POST",
@@ -122,10 +61,10 @@ func (c *Client) DescribeMatchmakingConfigurationsRequest(input *DescribeMatchma
 	}
 
 	if input == nil {
-		input = &DescribeMatchmakingConfigurationsInput{}
+		input = &types.DescribeMatchmakingConfigurationsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeMatchmakingConfigurationsOutput{})
+	req := c.newRequest(op, input, &types.DescribeMatchmakingConfigurationsOutput{})
 	return DescribeMatchmakingConfigurationsRequest{Request: req, Input: input, Copy: c.DescribeMatchmakingConfigurationsRequest}
 }
 
@@ -133,8 +72,8 @@ func (c *Client) DescribeMatchmakingConfigurationsRequest(input *DescribeMatchma
 // DescribeMatchmakingConfigurations API operation.
 type DescribeMatchmakingConfigurationsRequest struct {
 	*aws.Request
-	Input *DescribeMatchmakingConfigurationsInput
-	Copy  func(*DescribeMatchmakingConfigurationsInput) DescribeMatchmakingConfigurationsRequest
+	Input *types.DescribeMatchmakingConfigurationsInput
+	Copy  func(*types.DescribeMatchmakingConfigurationsInput) DescribeMatchmakingConfigurationsRequest
 }
 
 // Send marshals and sends the DescribeMatchmakingConfigurations API request.
@@ -146,7 +85,7 @@ func (r DescribeMatchmakingConfigurationsRequest) Send(ctx context.Context) (*De
 	}
 
 	resp := &DescribeMatchmakingConfigurationsResponse{
-		DescribeMatchmakingConfigurationsOutput: r.Request.Data.(*DescribeMatchmakingConfigurationsOutput),
+		DescribeMatchmakingConfigurationsOutput: r.Request.Data.(*types.DescribeMatchmakingConfigurationsOutput),
 		response:                                &aws.Response{Request: r.Request},
 	}
 
@@ -156,7 +95,7 @@ func (r DescribeMatchmakingConfigurationsRequest) Send(ctx context.Context) (*De
 // DescribeMatchmakingConfigurationsResponse is the response type for the
 // DescribeMatchmakingConfigurations API operation.
 type DescribeMatchmakingConfigurationsResponse struct {
-	*DescribeMatchmakingConfigurationsOutput
+	*types.DescribeMatchmakingConfigurationsOutput
 
 	response *aws.Response
 }

@@ -10,6 +10,7 @@ package mediapackagevodiface
 
 import (
 	"github.com/aws/aws-sdk-go-v2/service/mediapackagevod"
+	"github.com/aws/aws-sdk-go-v2/service/mediapackagevod/types"
 )
 
 // ClientAPI provides an interface to enable mocking the
@@ -43,7 +44,7 @@ import (
 //    type mockClientClient struct {
 //        mediapackagevodiface.ClientPI
 //    }
-//    func (m *mockClientClient) CreateAsset(input *mediapackagevod.CreateAssetInput) (*mediapackagevod.CreateAssetOutput, error) {
+//    func (m *mockClientClient) CreateAsset(input *types.CreateAssetInput) (*types.CreateAssetOutput, error) {
 //        // mock response/functionality
 //    }
 //
@@ -61,29 +62,29 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type ClientAPI interface {
-	CreateAssetRequest(*mediapackagevod.CreateAssetInput) mediapackagevod.CreateAssetRequest
+	CreateAssetRequest(*types.CreateAssetInput) mediapackagevod.CreateAssetRequest
 
-	CreatePackagingConfigurationRequest(*mediapackagevod.CreatePackagingConfigurationInput) mediapackagevod.CreatePackagingConfigurationRequest
+	CreatePackagingConfigurationRequest(*types.CreatePackagingConfigurationInput) mediapackagevod.CreatePackagingConfigurationRequest
 
-	CreatePackagingGroupRequest(*mediapackagevod.CreatePackagingGroupInput) mediapackagevod.CreatePackagingGroupRequest
+	CreatePackagingGroupRequest(*types.CreatePackagingGroupInput) mediapackagevod.CreatePackagingGroupRequest
 
-	DeleteAssetRequest(*mediapackagevod.DeleteAssetInput) mediapackagevod.DeleteAssetRequest
+	DeleteAssetRequest(*types.DeleteAssetInput) mediapackagevod.DeleteAssetRequest
 
-	DeletePackagingConfigurationRequest(*mediapackagevod.DeletePackagingConfigurationInput) mediapackagevod.DeletePackagingConfigurationRequest
+	DeletePackagingConfigurationRequest(*types.DeletePackagingConfigurationInput) mediapackagevod.DeletePackagingConfigurationRequest
 
-	DeletePackagingGroupRequest(*mediapackagevod.DeletePackagingGroupInput) mediapackagevod.DeletePackagingGroupRequest
+	DeletePackagingGroupRequest(*types.DeletePackagingGroupInput) mediapackagevod.DeletePackagingGroupRequest
 
-	DescribeAssetRequest(*mediapackagevod.DescribeAssetInput) mediapackagevod.DescribeAssetRequest
+	DescribeAssetRequest(*types.DescribeAssetInput) mediapackagevod.DescribeAssetRequest
 
-	DescribePackagingConfigurationRequest(*mediapackagevod.DescribePackagingConfigurationInput) mediapackagevod.DescribePackagingConfigurationRequest
+	DescribePackagingConfigurationRequest(*types.DescribePackagingConfigurationInput) mediapackagevod.DescribePackagingConfigurationRequest
 
-	DescribePackagingGroupRequest(*mediapackagevod.DescribePackagingGroupInput) mediapackagevod.DescribePackagingGroupRequest
+	DescribePackagingGroupRequest(*types.DescribePackagingGroupInput) mediapackagevod.DescribePackagingGroupRequest
 
-	ListAssetsRequest(*mediapackagevod.ListAssetsInput) mediapackagevod.ListAssetsRequest
+	ListAssetsRequest(*types.ListAssetsInput) mediapackagevod.ListAssetsRequest
 
-	ListPackagingConfigurationsRequest(*mediapackagevod.ListPackagingConfigurationsInput) mediapackagevod.ListPackagingConfigurationsRequest
+	ListPackagingConfigurationsRequest(*types.ListPackagingConfigurationsInput) mediapackagevod.ListPackagingConfigurationsRequest
 
-	ListPackagingGroupsRequest(*mediapackagevod.ListPackagingGroupsInput) mediapackagevod.ListPackagingGroupsRequest
+	ListPackagingGroupsRequest(*types.ListPackagingGroupsInput) mediapackagevod.ListPackagingGroupsRequest
 }
 
 var _ ClientAPI = (*mediapackagevod.Client)(nil)

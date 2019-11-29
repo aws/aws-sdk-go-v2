@@ -6,63 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-// Contains the parameters for ModifyReservedInstances.
-type ModifyReservedInstancesInput struct {
-	_ struct{} `type:"structure"`
-
-	// A unique, case-sensitive token you provide to ensure idempotency of your
-	// modification request. For more information, see Ensuring Idempotency (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html).
-	ClientToken *string `locationName:"clientToken" type:"string"`
-
-	// The IDs of the Reserved Instances to modify.
-	//
-	// ReservedInstancesIds is a required field
-	ReservedInstancesIds []string `locationName:"ReservedInstancesId" locationNameList:"ReservedInstancesId" type:"list" required:"true"`
-
-	// The configuration settings for the Reserved Instances to modify.
-	//
-	// TargetConfigurations is a required field
-	TargetConfigurations []ReservedInstancesConfiguration `locationName:"ReservedInstancesConfigurationSetItemType" locationNameList:"item" type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s ModifyReservedInstancesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ModifyReservedInstancesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ModifyReservedInstancesInput"}
-
-	if s.ReservedInstancesIds == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ReservedInstancesIds"))
-	}
-
-	if s.TargetConfigurations == nil {
-		invalidParams.Add(aws.NewErrParamRequired("TargetConfigurations"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Contains the output of ModifyReservedInstances.
-type ModifyReservedInstancesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID for the modification.
-	ReservedInstancesModificationId *string `locationName:"reservedInstancesModificationId" type:"string"`
-}
-
-// String returns the string representation
-func (s ModifyReservedInstancesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opModifyReservedInstances = "ModifyReservedInstances"
 
@@ -85,7 +30,7 @@ const opModifyReservedInstances = "ModifyReservedInstances"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyReservedInstances
-func (c *Client) ModifyReservedInstancesRequest(input *ModifyReservedInstancesInput) ModifyReservedInstancesRequest {
+func (c *Client) ModifyReservedInstancesRequest(input *types.ModifyReservedInstancesInput) ModifyReservedInstancesRequest {
 	op := &aws.Operation{
 		Name:       opModifyReservedInstances,
 		HTTPMethod: "POST",
@@ -93,10 +38,10 @@ func (c *Client) ModifyReservedInstancesRequest(input *ModifyReservedInstancesIn
 	}
 
 	if input == nil {
-		input = &ModifyReservedInstancesInput{}
+		input = &types.ModifyReservedInstancesInput{}
 	}
 
-	req := c.newRequest(op, input, &ModifyReservedInstancesOutput{})
+	req := c.newRequest(op, input, &types.ModifyReservedInstancesOutput{})
 	return ModifyReservedInstancesRequest{Request: req, Input: input, Copy: c.ModifyReservedInstancesRequest}
 }
 
@@ -104,8 +49,8 @@ func (c *Client) ModifyReservedInstancesRequest(input *ModifyReservedInstancesIn
 // ModifyReservedInstances API operation.
 type ModifyReservedInstancesRequest struct {
 	*aws.Request
-	Input *ModifyReservedInstancesInput
-	Copy  func(*ModifyReservedInstancesInput) ModifyReservedInstancesRequest
+	Input *types.ModifyReservedInstancesInput
+	Copy  func(*types.ModifyReservedInstancesInput) ModifyReservedInstancesRequest
 }
 
 // Send marshals and sends the ModifyReservedInstances API request.
@@ -117,7 +62,7 @@ func (r ModifyReservedInstancesRequest) Send(ctx context.Context) (*ModifyReserv
 	}
 
 	resp := &ModifyReservedInstancesResponse{
-		ModifyReservedInstancesOutput: r.Request.Data.(*ModifyReservedInstancesOutput),
+		ModifyReservedInstancesOutput: r.Request.Data.(*types.ModifyReservedInstancesOutput),
 		response:                      &aws.Response{Request: r.Request},
 	}
 
@@ -127,7 +72,7 @@ func (r ModifyReservedInstancesRequest) Send(ctx context.Context) (*ModifyReserv
 // ModifyReservedInstancesResponse is the response type for the
 // ModifyReservedInstances API operation.
 type ModifyReservedInstancesResponse struct {
-	*ModifyReservedInstancesOutput
+	*types.ModifyReservedInstancesOutput
 
 	response *aws.Response
 }

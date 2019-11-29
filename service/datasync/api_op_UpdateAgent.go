@@ -6,52 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/datasync/types"
 )
-
-// UpdateAgentRequest
-type UpdateAgentInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the agent to update.
-	//
-	// AgentArn is a required field
-	AgentArn *string `type:"string" required:"true"`
-
-	// The name that you want to use to configure the agent.
-	Name *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s UpdateAgentInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateAgentInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateAgentInput"}
-
-	if s.AgentArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("AgentArn"))
-	}
-	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type UpdateAgentOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s UpdateAgentOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opUpdateAgent = "UpdateAgent"
 
@@ -68,7 +24,7 @@ const opUpdateAgent = "UpdateAgent"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/UpdateAgent
-func (c *Client) UpdateAgentRequest(input *UpdateAgentInput) UpdateAgentRequest {
+func (c *Client) UpdateAgentRequest(input *types.UpdateAgentInput) UpdateAgentRequest {
 	op := &aws.Operation{
 		Name:       opUpdateAgent,
 		HTTPMethod: "POST",
@@ -76,10 +32,10 @@ func (c *Client) UpdateAgentRequest(input *UpdateAgentInput) UpdateAgentRequest 
 	}
 
 	if input == nil {
-		input = &UpdateAgentInput{}
+		input = &types.UpdateAgentInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateAgentOutput{})
+	req := c.newRequest(op, input, &types.UpdateAgentOutput{})
 	return UpdateAgentRequest{Request: req, Input: input, Copy: c.UpdateAgentRequest}
 }
 
@@ -87,8 +43,8 @@ func (c *Client) UpdateAgentRequest(input *UpdateAgentInput) UpdateAgentRequest 
 // UpdateAgent API operation.
 type UpdateAgentRequest struct {
 	*aws.Request
-	Input *UpdateAgentInput
-	Copy  func(*UpdateAgentInput) UpdateAgentRequest
+	Input *types.UpdateAgentInput
+	Copy  func(*types.UpdateAgentInput) UpdateAgentRequest
 }
 
 // Send marshals and sends the UpdateAgent API request.
@@ -100,7 +56,7 @@ func (r UpdateAgentRequest) Send(ctx context.Context) (*UpdateAgentResponse, err
 	}
 
 	resp := &UpdateAgentResponse{
-		UpdateAgentOutput: r.Request.Data.(*UpdateAgentOutput),
+		UpdateAgentOutput: r.Request.Data.(*types.UpdateAgentOutput),
 		response:          &aws.Response{Request: r.Request},
 	}
 
@@ -110,7 +66,7 @@ func (r UpdateAgentRequest) Send(ctx context.Context) (*UpdateAgentResponse, err
 // UpdateAgentResponse is the response type for the
 // UpdateAgent API operation.
 type UpdateAgentResponse struct {
-	*UpdateAgentOutput
+	*types.UpdateAgentOutput
 
 	response *aws.Response
 }

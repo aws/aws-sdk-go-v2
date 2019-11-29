@@ -6,88 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/appsync/types"
 )
-
-type GetDataSourceInput struct {
-	_ struct{} `type:"structure"`
-
-	// The API ID.
-	//
-	// ApiId is a required field
-	ApiId *string `location:"uri" locationName:"apiId" type:"string" required:"true"`
-
-	// The name of the data source.
-	//
-	// Name is a required field
-	Name *string `location:"uri" locationName:"name" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetDataSourceInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetDataSourceInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetDataSourceInput"}
-
-	if s.ApiId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ApiId"))
-	}
-
-	if s.Name == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Name"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetDataSourceInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.ApiId != nil {
-		v := *s.ApiId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "apiId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Name != nil {
-		v := *s.Name
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type GetDataSourceOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The DataSource object.
-	DataSource *DataSource `locationName:"dataSource" type:"structure"`
-}
-
-// String returns the string representation
-func (s GetDataSourceOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetDataSourceOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.DataSource != nil {
-		v := s.DataSource
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "dataSource", v, metadata)
-	}
-	return nil
-}
 
 const opGetDataSource = "GetDataSource"
 
@@ -104,7 +24,7 @@ const opGetDataSource = "GetDataSource"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/GetDataSource
-func (c *Client) GetDataSourceRequest(input *GetDataSourceInput) GetDataSourceRequest {
+func (c *Client) GetDataSourceRequest(input *types.GetDataSourceInput) GetDataSourceRequest {
 	op := &aws.Operation{
 		Name:       opGetDataSource,
 		HTTPMethod: "GET",
@@ -112,10 +32,10 @@ func (c *Client) GetDataSourceRequest(input *GetDataSourceInput) GetDataSourceRe
 	}
 
 	if input == nil {
-		input = &GetDataSourceInput{}
+		input = &types.GetDataSourceInput{}
 	}
 
-	req := c.newRequest(op, input, &GetDataSourceOutput{})
+	req := c.newRequest(op, input, &types.GetDataSourceOutput{})
 	return GetDataSourceRequest{Request: req, Input: input, Copy: c.GetDataSourceRequest}
 }
 
@@ -123,8 +43,8 @@ func (c *Client) GetDataSourceRequest(input *GetDataSourceInput) GetDataSourceRe
 // GetDataSource API operation.
 type GetDataSourceRequest struct {
 	*aws.Request
-	Input *GetDataSourceInput
-	Copy  func(*GetDataSourceInput) GetDataSourceRequest
+	Input *types.GetDataSourceInput
+	Copy  func(*types.GetDataSourceInput) GetDataSourceRequest
 }
 
 // Send marshals and sends the GetDataSource API request.
@@ -136,7 +56,7 @@ func (r GetDataSourceRequest) Send(ctx context.Context) (*GetDataSourceResponse,
 	}
 
 	resp := &GetDataSourceResponse{
-		GetDataSourceOutput: r.Request.Data.(*GetDataSourceOutput),
+		GetDataSourceOutput: r.Request.Data.(*types.GetDataSourceOutput),
 		response:            &aws.Response{Request: r.Request},
 	}
 
@@ -146,7 +66,7 @@ func (r GetDataSourceRequest) Send(ctx context.Context) (*GetDataSourceResponse,
 // GetDataSourceResponse is the response type for the
 // GetDataSource API operation.
 type GetDataSourceResponse struct {
-	*GetDataSourceOutput
+	*types.GetDataSourceOutput
 
 	response *aws.Response
 }

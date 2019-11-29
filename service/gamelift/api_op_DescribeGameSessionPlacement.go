@@ -6,53 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/gamelift/types"
 )
-
-// Represents the input for a request action.
-type DescribeGameSessionPlacementInput struct {
-	_ struct{} `type:"structure"`
-
-	// Unique identifier for a game session placement to retrieve.
-	//
-	// PlacementId is a required field
-	PlacementId *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeGameSessionPlacementInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeGameSessionPlacementInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeGameSessionPlacementInput"}
-
-	if s.PlacementId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("PlacementId"))
-	}
-	if s.PlacementId != nil && len(*s.PlacementId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("PlacementId", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Represents the returned data in response to a request action.
-type DescribeGameSessionPlacementOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Object that describes the requested game session placement.
-	GameSessionPlacement *GameSessionPlacement `type:"structure"`
-}
-
-// String returns the string representation
-func (s DescribeGameSessionPlacementOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeGameSessionPlacement = "DescribeGameSessionPlacement"
 
@@ -86,7 +41,7 @@ const opDescribeGameSessionPlacement = "DescribeGameSessionPlacement"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DescribeGameSessionPlacement
-func (c *Client) DescribeGameSessionPlacementRequest(input *DescribeGameSessionPlacementInput) DescribeGameSessionPlacementRequest {
+func (c *Client) DescribeGameSessionPlacementRequest(input *types.DescribeGameSessionPlacementInput) DescribeGameSessionPlacementRequest {
 	op := &aws.Operation{
 		Name:       opDescribeGameSessionPlacement,
 		HTTPMethod: "POST",
@@ -94,10 +49,10 @@ func (c *Client) DescribeGameSessionPlacementRequest(input *DescribeGameSessionP
 	}
 
 	if input == nil {
-		input = &DescribeGameSessionPlacementInput{}
+		input = &types.DescribeGameSessionPlacementInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeGameSessionPlacementOutput{})
+	req := c.newRequest(op, input, &types.DescribeGameSessionPlacementOutput{})
 	return DescribeGameSessionPlacementRequest{Request: req, Input: input, Copy: c.DescribeGameSessionPlacementRequest}
 }
 
@@ -105,8 +60,8 @@ func (c *Client) DescribeGameSessionPlacementRequest(input *DescribeGameSessionP
 // DescribeGameSessionPlacement API operation.
 type DescribeGameSessionPlacementRequest struct {
 	*aws.Request
-	Input *DescribeGameSessionPlacementInput
-	Copy  func(*DescribeGameSessionPlacementInput) DescribeGameSessionPlacementRequest
+	Input *types.DescribeGameSessionPlacementInput
+	Copy  func(*types.DescribeGameSessionPlacementInput) DescribeGameSessionPlacementRequest
 }
 
 // Send marshals and sends the DescribeGameSessionPlacement API request.
@@ -118,7 +73,7 @@ func (r DescribeGameSessionPlacementRequest) Send(ctx context.Context) (*Describ
 	}
 
 	resp := &DescribeGameSessionPlacementResponse{
-		DescribeGameSessionPlacementOutput: r.Request.Data.(*DescribeGameSessionPlacementOutput),
+		DescribeGameSessionPlacementOutput: r.Request.Data.(*types.DescribeGameSessionPlacementOutput),
 		response:                           &aws.Response{Request: r.Request},
 	}
 
@@ -128,7 +83,7 @@ func (r DescribeGameSessionPlacementRequest) Send(ctx context.Context) (*Describ
 // DescribeGameSessionPlacementResponse is the response type for the
 // DescribeGameSessionPlacement API operation.
 type DescribeGameSessionPlacementResponse struct {
-	*DescribeGameSessionPlacementOutput
+	*types.DescribeGameSessionPlacementOutput
 
 	response *aws.Response
 }

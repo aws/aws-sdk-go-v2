@@ -6,48 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/kinesisanalytics/types"
 )
-
-type StopApplicationInput struct {
-	_ struct{} `type:"structure"`
-
-	// Name of the running application to stop.
-	//
-	// ApplicationName is a required field
-	ApplicationName *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s StopApplicationInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *StopApplicationInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "StopApplicationInput"}
-
-	if s.ApplicationName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ApplicationName"))
-	}
-	if s.ApplicationName != nil && len(*s.ApplicationName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ApplicationName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type StopApplicationOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s StopApplicationOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opStopApplication = "StopApplication"
 
@@ -77,7 +37,7 @@ const opStopApplication = "StopApplication"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/StopApplication
-func (c *Client) StopApplicationRequest(input *StopApplicationInput) StopApplicationRequest {
+func (c *Client) StopApplicationRequest(input *types.StopApplicationInput) StopApplicationRequest {
 	op := &aws.Operation{
 		Name:       opStopApplication,
 		HTTPMethod: "POST",
@@ -85,10 +45,10 @@ func (c *Client) StopApplicationRequest(input *StopApplicationInput) StopApplica
 	}
 
 	if input == nil {
-		input = &StopApplicationInput{}
+		input = &types.StopApplicationInput{}
 	}
 
-	req := c.newRequest(op, input, &StopApplicationOutput{})
+	req := c.newRequest(op, input, &types.StopApplicationOutput{})
 	return StopApplicationRequest{Request: req, Input: input, Copy: c.StopApplicationRequest}
 }
 
@@ -96,8 +56,8 @@ func (c *Client) StopApplicationRequest(input *StopApplicationInput) StopApplica
 // StopApplication API operation.
 type StopApplicationRequest struct {
 	*aws.Request
-	Input *StopApplicationInput
-	Copy  func(*StopApplicationInput) StopApplicationRequest
+	Input *types.StopApplicationInput
+	Copy  func(*types.StopApplicationInput) StopApplicationRequest
 }
 
 // Send marshals and sends the StopApplication API request.
@@ -109,7 +69,7 @@ func (r StopApplicationRequest) Send(ctx context.Context) (*StopApplicationRespo
 	}
 
 	resp := &StopApplicationResponse{
-		StopApplicationOutput: r.Request.Data.(*StopApplicationOutput),
+		StopApplicationOutput: r.Request.Data.(*types.StopApplicationOutput),
 		response:              &aws.Response{Request: r.Request},
 	}
 
@@ -119,7 +79,7 @@ func (r StopApplicationRequest) Send(ctx context.Context) (*StopApplicationRespo
 // StopApplicationResponse is the response type for the
 // StopApplication API operation.
 type StopApplicationResponse struct {
-	*StopApplicationOutput
+	*types.StopApplicationOutput
 
 	response *aws.Response
 }

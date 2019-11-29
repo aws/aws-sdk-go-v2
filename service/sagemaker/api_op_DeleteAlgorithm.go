@@ -6,50 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
 )
-
-type DeleteAlgorithmInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the algorithm to delete.
-	//
-	// AlgorithmName is a required field
-	AlgorithmName *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteAlgorithmInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteAlgorithmInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteAlgorithmInput"}
-
-	if s.AlgorithmName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("AlgorithmName"))
-	}
-	if s.AlgorithmName != nil && len(*s.AlgorithmName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("AlgorithmName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteAlgorithmOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteAlgorithmOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteAlgorithm = "DeleteAlgorithm"
 
@@ -66,7 +26,7 @@ const opDeleteAlgorithm = "DeleteAlgorithm"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DeleteAlgorithm
-func (c *Client) DeleteAlgorithmRequest(input *DeleteAlgorithmInput) DeleteAlgorithmRequest {
+func (c *Client) DeleteAlgorithmRequest(input *types.DeleteAlgorithmInput) DeleteAlgorithmRequest {
 	op := &aws.Operation{
 		Name:       opDeleteAlgorithm,
 		HTTPMethod: "POST",
@@ -74,10 +34,10 @@ func (c *Client) DeleteAlgorithmRequest(input *DeleteAlgorithmInput) DeleteAlgor
 	}
 
 	if input == nil {
-		input = &DeleteAlgorithmInput{}
+		input = &types.DeleteAlgorithmInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteAlgorithmOutput{})
+	req := c.newRequest(op, input, &types.DeleteAlgorithmOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return DeleteAlgorithmRequest{Request: req, Input: input, Copy: c.DeleteAlgorithmRequest}
@@ -87,8 +47,8 @@ func (c *Client) DeleteAlgorithmRequest(input *DeleteAlgorithmInput) DeleteAlgor
 // DeleteAlgorithm API operation.
 type DeleteAlgorithmRequest struct {
 	*aws.Request
-	Input *DeleteAlgorithmInput
-	Copy  func(*DeleteAlgorithmInput) DeleteAlgorithmRequest
+	Input *types.DeleteAlgorithmInput
+	Copy  func(*types.DeleteAlgorithmInput) DeleteAlgorithmRequest
 }
 
 // Send marshals and sends the DeleteAlgorithm API request.
@@ -100,7 +60,7 @@ func (r DeleteAlgorithmRequest) Send(ctx context.Context) (*DeleteAlgorithmRespo
 	}
 
 	resp := &DeleteAlgorithmResponse{
-		DeleteAlgorithmOutput: r.Request.Data.(*DeleteAlgorithmOutput),
+		DeleteAlgorithmOutput: r.Request.Data.(*types.DeleteAlgorithmOutput),
 		response:              &aws.Response{Request: r.Request},
 	}
 
@@ -110,7 +70,7 @@ func (r DeleteAlgorithmRequest) Send(ctx context.Context) (*DeleteAlgorithmRespo
 // DeleteAlgorithmResponse is the response type for the
 // DeleteAlgorithm API operation.
 type DeleteAlgorithmResponse struct {
-	*DeleteAlgorithmOutput
+	*types.DeleteAlgorithmOutput
 
 	response *aws.Response
 }

@@ -6,32 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/directconnect/types"
 )
-
-type DescribeInterconnectsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the interconnect.
-	InterconnectId *string `locationName:"interconnectId" type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeInterconnectsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type DescribeInterconnectsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The interconnects.
-	Interconnects []Interconnect `locationName:"interconnects" type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeInterconnectsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeInterconnects = "DescribeInterconnects"
 
@@ -48,7 +24,7 @@ const opDescribeInterconnects = "DescribeInterconnects"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DescribeInterconnects
-func (c *Client) DescribeInterconnectsRequest(input *DescribeInterconnectsInput) DescribeInterconnectsRequest {
+func (c *Client) DescribeInterconnectsRequest(input *types.DescribeInterconnectsInput) DescribeInterconnectsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeInterconnects,
 		HTTPMethod: "POST",
@@ -56,10 +32,10 @@ func (c *Client) DescribeInterconnectsRequest(input *DescribeInterconnectsInput)
 	}
 
 	if input == nil {
-		input = &DescribeInterconnectsInput{}
+		input = &types.DescribeInterconnectsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeInterconnectsOutput{})
+	req := c.newRequest(op, input, &types.DescribeInterconnectsOutput{})
 	return DescribeInterconnectsRequest{Request: req, Input: input, Copy: c.DescribeInterconnectsRequest}
 }
 
@@ -67,8 +43,8 @@ func (c *Client) DescribeInterconnectsRequest(input *DescribeInterconnectsInput)
 // DescribeInterconnects API operation.
 type DescribeInterconnectsRequest struct {
 	*aws.Request
-	Input *DescribeInterconnectsInput
-	Copy  func(*DescribeInterconnectsInput) DescribeInterconnectsRequest
+	Input *types.DescribeInterconnectsInput
+	Copy  func(*types.DescribeInterconnectsInput) DescribeInterconnectsRequest
 }
 
 // Send marshals and sends the DescribeInterconnects API request.
@@ -80,7 +56,7 @@ func (r DescribeInterconnectsRequest) Send(ctx context.Context) (*DescribeInterc
 	}
 
 	resp := &DescribeInterconnectsResponse{
-		DescribeInterconnectsOutput: r.Request.Data.(*DescribeInterconnectsOutput),
+		DescribeInterconnectsOutput: r.Request.Data.(*types.DescribeInterconnectsOutput),
 		response:                    &aws.Response{Request: r.Request},
 	}
 
@@ -90,7 +66,7 @@ func (r DescribeInterconnectsRequest) Send(ctx context.Context) (*DescribeInterc
 // DescribeInterconnectsResponse is the response type for the
 // DescribeInterconnects API operation.
 type DescribeInterconnectsResponse struct {
-	*DescribeInterconnectsOutput
+	*types.DescribeInterconnectsOutput
 
 	response *aws.Response
 }

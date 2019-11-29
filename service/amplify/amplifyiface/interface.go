@@ -10,6 +10,7 @@ package amplifyiface
 
 import (
 	"github.com/aws/aws-sdk-go-v2/service/amplify"
+	"github.com/aws/aws-sdk-go-v2/service/amplify/types"
 )
 
 // ClientAPI provides an interface to enable mocking the
@@ -43,7 +44,7 @@ import (
 //    type mockClientClient struct {
 //        amplifyiface.ClientPI
 //    }
-//    func (m *mockClientClient) CreateApp(input *amplify.CreateAppInput) (*amplify.CreateAppOutput, error) {
+//    func (m *mockClientClient) CreateApp(input *types.CreateAppInput) (*types.CreateAppOutput, error) {
 //        // mock response/functionality
 //    }
 //
@@ -61,71 +62,71 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type ClientAPI interface {
-	CreateAppRequest(*amplify.CreateAppInput) amplify.CreateAppRequest
+	CreateAppRequest(*types.CreateAppInput) amplify.CreateAppRequest
 
-	CreateBranchRequest(*amplify.CreateBranchInput) amplify.CreateBranchRequest
+	CreateBranchRequest(*types.CreateBranchInput) amplify.CreateBranchRequest
 
-	CreateDeploymentRequest(*amplify.CreateDeploymentInput) amplify.CreateDeploymentRequest
+	CreateDeploymentRequest(*types.CreateDeploymentInput) amplify.CreateDeploymentRequest
 
-	CreateDomainAssociationRequest(*amplify.CreateDomainAssociationInput) amplify.CreateDomainAssociationRequest
+	CreateDomainAssociationRequest(*types.CreateDomainAssociationInput) amplify.CreateDomainAssociationRequest
 
-	CreateWebhookRequest(*amplify.CreateWebhookInput) amplify.CreateWebhookRequest
+	CreateWebhookRequest(*types.CreateWebhookInput) amplify.CreateWebhookRequest
 
-	DeleteAppRequest(*amplify.DeleteAppInput) amplify.DeleteAppRequest
+	DeleteAppRequest(*types.DeleteAppInput) amplify.DeleteAppRequest
 
-	DeleteBranchRequest(*amplify.DeleteBranchInput) amplify.DeleteBranchRequest
+	DeleteBranchRequest(*types.DeleteBranchInput) amplify.DeleteBranchRequest
 
-	DeleteDomainAssociationRequest(*amplify.DeleteDomainAssociationInput) amplify.DeleteDomainAssociationRequest
+	DeleteDomainAssociationRequest(*types.DeleteDomainAssociationInput) amplify.DeleteDomainAssociationRequest
 
-	DeleteJobRequest(*amplify.DeleteJobInput) amplify.DeleteJobRequest
+	DeleteJobRequest(*types.DeleteJobInput) amplify.DeleteJobRequest
 
-	DeleteWebhookRequest(*amplify.DeleteWebhookInput) amplify.DeleteWebhookRequest
+	DeleteWebhookRequest(*types.DeleteWebhookInput) amplify.DeleteWebhookRequest
 
-	GenerateAccessLogsRequest(*amplify.GenerateAccessLogsInput) amplify.GenerateAccessLogsRequest
+	GenerateAccessLogsRequest(*types.GenerateAccessLogsInput) amplify.GenerateAccessLogsRequest
 
-	GetAppRequest(*amplify.GetAppInput) amplify.GetAppRequest
+	GetAppRequest(*types.GetAppInput) amplify.GetAppRequest
 
-	GetArtifactUrlRequest(*amplify.GetArtifactUrlInput) amplify.GetArtifactUrlRequest
+	GetArtifactUrlRequest(*types.GetArtifactUrlInput) amplify.GetArtifactUrlRequest
 
-	GetBranchRequest(*amplify.GetBranchInput) amplify.GetBranchRequest
+	GetBranchRequest(*types.GetBranchInput) amplify.GetBranchRequest
 
-	GetDomainAssociationRequest(*amplify.GetDomainAssociationInput) amplify.GetDomainAssociationRequest
+	GetDomainAssociationRequest(*types.GetDomainAssociationInput) amplify.GetDomainAssociationRequest
 
-	GetJobRequest(*amplify.GetJobInput) amplify.GetJobRequest
+	GetJobRequest(*types.GetJobInput) amplify.GetJobRequest
 
-	GetWebhookRequest(*amplify.GetWebhookInput) amplify.GetWebhookRequest
+	GetWebhookRequest(*types.GetWebhookInput) amplify.GetWebhookRequest
 
-	ListAppsRequest(*amplify.ListAppsInput) amplify.ListAppsRequest
+	ListAppsRequest(*types.ListAppsInput) amplify.ListAppsRequest
 
-	ListArtifactsRequest(*amplify.ListArtifactsInput) amplify.ListArtifactsRequest
+	ListArtifactsRequest(*types.ListArtifactsInput) amplify.ListArtifactsRequest
 
-	ListBranchesRequest(*amplify.ListBranchesInput) amplify.ListBranchesRequest
+	ListBranchesRequest(*types.ListBranchesInput) amplify.ListBranchesRequest
 
-	ListDomainAssociationsRequest(*amplify.ListDomainAssociationsInput) amplify.ListDomainAssociationsRequest
+	ListDomainAssociationsRequest(*types.ListDomainAssociationsInput) amplify.ListDomainAssociationsRequest
 
-	ListJobsRequest(*amplify.ListJobsInput) amplify.ListJobsRequest
+	ListJobsRequest(*types.ListJobsInput) amplify.ListJobsRequest
 
-	ListTagsForResourceRequest(*amplify.ListTagsForResourceInput) amplify.ListTagsForResourceRequest
+	ListTagsForResourceRequest(*types.ListTagsForResourceInput) amplify.ListTagsForResourceRequest
 
-	ListWebhooksRequest(*amplify.ListWebhooksInput) amplify.ListWebhooksRequest
+	ListWebhooksRequest(*types.ListWebhooksInput) amplify.ListWebhooksRequest
 
-	StartDeploymentRequest(*amplify.StartDeploymentInput) amplify.StartDeploymentRequest
+	StartDeploymentRequest(*types.StartDeploymentInput) amplify.StartDeploymentRequest
 
-	StartJobRequest(*amplify.StartJobInput) amplify.StartJobRequest
+	StartJobRequest(*types.StartJobInput) amplify.StartJobRequest
 
-	StopJobRequest(*amplify.StopJobInput) amplify.StopJobRequest
+	StopJobRequest(*types.StopJobInput) amplify.StopJobRequest
 
-	TagResourceRequest(*amplify.TagResourceInput) amplify.TagResourceRequest
+	TagResourceRequest(*types.TagResourceInput) amplify.TagResourceRequest
 
-	UntagResourceRequest(*amplify.UntagResourceInput) amplify.UntagResourceRequest
+	UntagResourceRequest(*types.UntagResourceInput) amplify.UntagResourceRequest
 
-	UpdateAppRequest(*amplify.UpdateAppInput) amplify.UpdateAppRequest
+	UpdateAppRequest(*types.UpdateAppInput) amplify.UpdateAppRequest
 
-	UpdateBranchRequest(*amplify.UpdateBranchInput) amplify.UpdateBranchRequest
+	UpdateBranchRequest(*types.UpdateBranchInput) amplify.UpdateBranchRequest
 
-	UpdateDomainAssociationRequest(*amplify.UpdateDomainAssociationInput) amplify.UpdateDomainAssociationRequest
+	UpdateDomainAssociationRequest(*types.UpdateDomainAssociationInput) amplify.UpdateDomainAssociationRequest
 
-	UpdateWebhookRequest(*amplify.UpdateWebhookInput) amplify.UpdateWebhookRequest
+	UpdateWebhookRequest(*types.UpdateWebhookInput) amplify.UpdateWebhookRequest
 }
 
 var _ ClientAPI = (*amplify.Client)(nil)

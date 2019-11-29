@@ -6,49 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/kms/types"
 )
-
-type DeleteCustomKeyStoreInput struct {
-	_ struct{} `type:"structure"`
-
-	// Enter the ID of the custom key store you want to delete. To find the ID of
-	// a custom key store, use the DescribeCustomKeyStores operation.
-	//
-	// CustomKeyStoreId is a required field
-	CustomKeyStoreId *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteCustomKeyStoreInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteCustomKeyStoreInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteCustomKeyStoreInput"}
-
-	if s.CustomKeyStoreId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("CustomKeyStoreId"))
-	}
-	if s.CustomKeyStoreId != nil && len(*s.CustomKeyStoreId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("CustomKeyStoreId", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteCustomKeyStoreOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteCustomKeyStoreOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteCustomKeyStore = "DeleteCustomKeyStore"
 
@@ -93,7 +52,7 @@ const opDeleteCustomKeyStore = "DeleteCustomKeyStore"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/DeleteCustomKeyStore
-func (c *Client) DeleteCustomKeyStoreRequest(input *DeleteCustomKeyStoreInput) DeleteCustomKeyStoreRequest {
+func (c *Client) DeleteCustomKeyStoreRequest(input *types.DeleteCustomKeyStoreInput) DeleteCustomKeyStoreRequest {
 	op := &aws.Operation{
 		Name:       opDeleteCustomKeyStore,
 		HTTPMethod: "POST",
@@ -101,10 +60,10 @@ func (c *Client) DeleteCustomKeyStoreRequest(input *DeleteCustomKeyStoreInput) D
 	}
 
 	if input == nil {
-		input = &DeleteCustomKeyStoreInput{}
+		input = &types.DeleteCustomKeyStoreInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteCustomKeyStoreOutput{})
+	req := c.newRequest(op, input, &types.DeleteCustomKeyStoreOutput{})
 	return DeleteCustomKeyStoreRequest{Request: req, Input: input, Copy: c.DeleteCustomKeyStoreRequest}
 }
 
@@ -112,8 +71,8 @@ func (c *Client) DeleteCustomKeyStoreRequest(input *DeleteCustomKeyStoreInput) D
 // DeleteCustomKeyStore API operation.
 type DeleteCustomKeyStoreRequest struct {
 	*aws.Request
-	Input *DeleteCustomKeyStoreInput
-	Copy  func(*DeleteCustomKeyStoreInput) DeleteCustomKeyStoreRequest
+	Input *types.DeleteCustomKeyStoreInput
+	Copy  func(*types.DeleteCustomKeyStoreInput) DeleteCustomKeyStoreRequest
 }
 
 // Send marshals and sends the DeleteCustomKeyStore API request.
@@ -125,7 +84,7 @@ func (r DeleteCustomKeyStoreRequest) Send(ctx context.Context) (*DeleteCustomKey
 	}
 
 	resp := &DeleteCustomKeyStoreResponse{
-		DeleteCustomKeyStoreOutput: r.Request.Data.(*DeleteCustomKeyStoreOutput),
+		DeleteCustomKeyStoreOutput: r.Request.Data.(*types.DeleteCustomKeyStoreOutput),
 		response:                   &aws.Response{Request: r.Request},
 	}
 
@@ -135,7 +94,7 @@ func (r DeleteCustomKeyStoreRequest) Send(ctx context.Context) (*DeleteCustomKey
 // DeleteCustomKeyStoreResponse is the response type for the
 // DeleteCustomKeyStore API operation.
 type DeleteCustomKeyStoreResponse struct {
-	*DeleteCustomKeyStoreOutput
+	*types.DeleteCustomKeyStoreOutput
 
 	response *aws.Response
 }

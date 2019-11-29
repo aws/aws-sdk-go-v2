@@ -6,62 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ssm/types"
 )
-
-// The request body of the UpdateServiceSetting API action.
-type UpdateServiceSettingInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the service setting to update.
-	//
-	// SettingId is a required field
-	SettingId *string `min:"1" type:"string" required:"true"`
-
-	// The new value to specify for the service setting.
-	//
-	// SettingValue is a required field
-	SettingValue *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s UpdateServiceSettingInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateServiceSettingInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateServiceSettingInput"}
-
-	if s.SettingId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("SettingId"))
-	}
-	if s.SettingId != nil && len(*s.SettingId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("SettingId", 1))
-	}
-
-	if s.SettingValue == nil {
-		invalidParams.Add(aws.NewErrParamRequired("SettingValue"))
-	}
-	if s.SettingValue != nil && len(*s.SettingValue) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("SettingValue", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// The result body of the UpdateServiceSetting API action.
-type UpdateServiceSettingOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s UpdateServiceSettingOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opUpdateServiceSetting = "UpdateServiceSetting"
 
@@ -92,7 +38,7 @@ const opUpdateServiceSetting = "UpdateServiceSetting"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/UpdateServiceSetting
-func (c *Client) UpdateServiceSettingRequest(input *UpdateServiceSettingInput) UpdateServiceSettingRequest {
+func (c *Client) UpdateServiceSettingRequest(input *types.UpdateServiceSettingInput) UpdateServiceSettingRequest {
 	op := &aws.Operation{
 		Name:       opUpdateServiceSetting,
 		HTTPMethod: "POST",
@@ -100,10 +46,10 @@ func (c *Client) UpdateServiceSettingRequest(input *UpdateServiceSettingInput) U
 	}
 
 	if input == nil {
-		input = &UpdateServiceSettingInput{}
+		input = &types.UpdateServiceSettingInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateServiceSettingOutput{})
+	req := c.newRequest(op, input, &types.UpdateServiceSettingOutput{})
 	return UpdateServiceSettingRequest{Request: req, Input: input, Copy: c.UpdateServiceSettingRequest}
 }
 
@@ -111,8 +57,8 @@ func (c *Client) UpdateServiceSettingRequest(input *UpdateServiceSettingInput) U
 // UpdateServiceSetting API operation.
 type UpdateServiceSettingRequest struct {
 	*aws.Request
-	Input *UpdateServiceSettingInput
-	Copy  func(*UpdateServiceSettingInput) UpdateServiceSettingRequest
+	Input *types.UpdateServiceSettingInput
+	Copy  func(*types.UpdateServiceSettingInput) UpdateServiceSettingRequest
 }
 
 // Send marshals and sends the UpdateServiceSetting API request.
@@ -124,7 +70,7 @@ func (r UpdateServiceSettingRequest) Send(ctx context.Context) (*UpdateServiceSe
 	}
 
 	resp := &UpdateServiceSettingResponse{
-		UpdateServiceSettingOutput: r.Request.Data.(*UpdateServiceSettingOutput),
+		UpdateServiceSettingOutput: r.Request.Data.(*types.UpdateServiceSettingOutput),
 		response:                   &aws.Response{Request: r.Request},
 	}
 
@@ -134,7 +80,7 @@ func (r UpdateServiceSettingRequest) Send(ctx context.Context) (*UpdateServiceSe
 // UpdateServiceSettingResponse is the response type for the
 // UpdateServiceSetting API operation.
 type UpdateServiceSettingResponse struct {
-	*UpdateServiceSettingOutput
+	*types.UpdateServiceSettingOutput
 
 	response *aws.Response
 }

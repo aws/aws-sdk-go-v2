@@ -6,33 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/shield/types"
 )
-
-type DescribeDRTAccessInput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DescribeDRTAccessInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type DescribeDRTAccessOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The list of Amazon S3 buckets accessed by the DRT.
-	LogBucketList []string `type:"list"`
-
-	// The Amazon Resource Name (ARN) of the role the DRT used to access your AWS
-	// account.
-	RoleArn *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeDRTAccessOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeDRTAccess = "DescribeDRTAccess"
 
@@ -51,7 +26,7 @@ const opDescribeDRTAccess = "DescribeDRTAccess"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/DescribeDRTAccess
-func (c *Client) DescribeDRTAccessRequest(input *DescribeDRTAccessInput) DescribeDRTAccessRequest {
+func (c *Client) DescribeDRTAccessRequest(input *types.DescribeDRTAccessInput) DescribeDRTAccessRequest {
 	op := &aws.Operation{
 		Name:       opDescribeDRTAccess,
 		HTTPMethod: "POST",
@@ -59,10 +34,10 @@ func (c *Client) DescribeDRTAccessRequest(input *DescribeDRTAccessInput) Describ
 	}
 
 	if input == nil {
-		input = &DescribeDRTAccessInput{}
+		input = &types.DescribeDRTAccessInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeDRTAccessOutput{})
+	req := c.newRequest(op, input, &types.DescribeDRTAccessOutput{})
 	return DescribeDRTAccessRequest{Request: req, Input: input, Copy: c.DescribeDRTAccessRequest}
 }
 
@@ -70,8 +45,8 @@ func (c *Client) DescribeDRTAccessRequest(input *DescribeDRTAccessInput) Describ
 // DescribeDRTAccess API operation.
 type DescribeDRTAccessRequest struct {
 	*aws.Request
-	Input *DescribeDRTAccessInput
-	Copy  func(*DescribeDRTAccessInput) DescribeDRTAccessRequest
+	Input *types.DescribeDRTAccessInput
+	Copy  func(*types.DescribeDRTAccessInput) DescribeDRTAccessRequest
 }
 
 // Send marshals and sends the DescribeDRTAccess API request.
@@ -83,7 +58,7 @@ func (r DescribeDRTAccessRequest) Send(ctx context.Context) (*DescribeDRTAccessR
 	}
 
 	resp := &DescribeDRTAccessResponse{
-		DescribeDRTAccessOutput: r.Request.Data.(*DescribeDRTAccessOutput),
+		DescribeDRTAccessOutput: r.Request.Data.(*types.DescribeDRTAccessOutput),
 		response:                &aws.Response{Request: r.Request},
 	}
 
@@ -93,7 +68,7 @@ func (r DescribeDRTAccessRequest) Send(ctx context.Context) (*DescribeDRTAccessR
 // DescribeDRTAccessResponse is the response type for the
 // DescribeDRTAccess API operation.
 type DescribeDRTAccessResponse struct {
-	*DescribeDRTAccessOutput
+	*types.DescribeDRTAccessOutput
 
 	response *aws.Response
 }

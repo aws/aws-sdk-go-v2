@@ -4,142 +4,10 @@ package clouddirectory
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/clouddirectory/types"
 )
-
-type CreateIndexInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ARN of the directory where the index should be created.
-	//
-	// DirectoryArn is a required field
-	DirectoryArn *string `location:"header" locationName:"x-amz-data-partition" type:"string" required:"true"`
-
-	// Indicates whether the attribute that is being indexed has unique values or
-	// not.
-	//
-	// IsUnique is a required field
-	IsUnique *bool `type:"boolean" required:"true"`
-
-	// The name of the link between the parent object and the index object.
-	LinkName *string `min:"1" type:"string"`
-
-	// Specifies the attributes that should be indexed on. Currently only a single
-	// attribute is supported.
-	//
-	// OrderedIndexedAttributeList is a required field
-	OrderedIndexedAttributeList []AttributeKey `type:"list" required:"true"`
-
-	// A reference to the parent object that contains the index object.
-	ParentReference *ObjectReference `type:"structure"`
-}
-
-// String returns the string representation
-func (s CreateIndexInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateIndexInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateIndexInput"}
-
-	if s.DirectoryArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DirectoryArn"))
-	}
-
-	if s.IsUnique == nil {
-		invalidParams.Add(aws.NewErrParamRequired("IsUnique"))
-	}
-	if s.LinkName != nil && len(*s.LinkName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("LinkName", 1))
-	}
-
-	if s.OrderedIndexedAttributeList == nil {
-		invalidParams.Add(aws.NewErrParamRequired("OrderedIndexedAttributeList"))
-	}
-	if s.OrderedIndexedAttributeList != nil {
-		for i, v := range s.OrderedIndexedAttributeList {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "OrderedIndexedAttributeList", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s CreateIndexInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.IsUnique != nil {
-		v := *s.IsUnique
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "IsUnique", protocol.BoolValue(v), metadata)
-	}
-	if s.LinkName != nil {
-		v := *s.LinkName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "LinkName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.OrderedIndexedAttributeList != nil {
-		v := s.OrderedIndexedAttributeList
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "OrderedIndexedAttributeList", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	if s.ParentReference != nil {
-		v := s.ParentReference
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "ParentReference", v, metadata)
-	}
-	if s.DirectoryArn != nil {
-		v := *s.DirectoryArn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "x-amz-data-partition", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type CreateIndexOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The ObjectIdentifier of the index created by this operation.
-	ObjectIdentifier *string `type:"string"`
-}
-
-// String returns the string representation
-func (s CreateIndexOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s CreateIndexOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.ObjectIdentifier != nil {
-		v := *s.ObjectIdentifier
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "ObjectIdentifier", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opCreateIndex = "CreateIndex"
 
@@ -157,7 +25,7 @@ const opCreateIndex = "CreateIndex"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/CreateIndex
-func (c *Client) CreateIndexRequest(input *CreateIndexInput) CreateIndexRequest {
+func (c *Client) CreateIndexRequest(input *types.CreateIndexInput) CreateIndexRequest {
 	op := &aws.Operation{
 		Name:       opCreateIndex,
 		HTTPMethod: "PUT",
@@ -165,10 +33,10 @@ func (c *Client) CreateIndexRequest(input *CreateIndexInput) CreateIndexRequest 
 	}
 
 	if input == nil {
-		input = &CreateIndexInput{}
+		input = &types.CreateIndexInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateIndexOutput{})
+	req := c.newRequest(op, input, &types.CreateIndexOutput{})
 	return CreateIndexRequest{Request: req, Input: input, Copy: c.CreateIndexRequest}
 }
 
@@ -176,8 +44,8 @@ func (c *Client) CreateIndexRequest(input *CreateIndexInput) CreateIndexRequest 
 // CreateIndex API operation.
 type CreateIndexRequest struct {
 	*aws.Request
-	Input *CreateIndexInput
-	Copy  func(*CreateIndexInput) CreateIndexRequest
+	Input *types.CreateIndexInput
+	Copy  func(*types.CreateIndexInput) CreateIndexRequest
 }
 
 // Send marshals and sends the CreateIndex API request.
@@ -189,7 +57,7 @@ func (r CreateIndexRequest) Send(ctx context.Context) (*CreateIndexResponse, err
 	}
 
 	resp := &CreateIndexResponse{
-		CreateIndexOutput: r.Request.Data.(*CreateIndexOutput),
+		CreateIndexOutput: r.Request.Data.(*types.CreateIndexOutput),
 		response:          &aws.Response{Request: r.Request},
 	}
 
@@ -199,7 +67,7 @@ func (r CreateIndexRequest) Send(ctx context.Context) (*CreateIndexResponse, err
 // CreateIndexResponse is the response type for the
 // CreateIndex API operation.
 type CreateIndexResponse struct {
-	*CreateIndexOutput
+	*types.CreateIndexOutput
 
 	response *aws.Response
 }

@@ -13,6 +13,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws/awserr"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting/integration"
 	"github.com/aws/aws-sdk-go-v2/service/inspector"
+	"github.com/aws/aws-sdk-go-v2/service/inspector/types"
 )
 
 var _ aws.Config
@@ -24,7 +25,7 @@ func TestInteg_00_ListAssessmentTemplates(t *testing.T) {
 
 	cfg := integration.ConfigWithDefaultRegion("us-west-2")
 	svc := inspector.New(cfg)
-	params := &inspector.ListAssessmentTemplatesInput{}
+	params := &types.ListAssessmentTemplatesInput{}
 
 	req := svc.ListAssessmentTemplatesRequest(params)
 
@@ -39,7 +40,7 @@ func TestInteg_01_ListTagsForResource(t *testing.T) {
 
 	cfg := integration.ConfigWithDefaultRegion("us-west-2")
 	svc := inspector.New(cfg)
-	params := &inspector.ListTagsForResourceInput{
+	params := &types.ListTagsForResourceInput{
 		ResourceArn: aws.String("fake-arn"),
 	}
 

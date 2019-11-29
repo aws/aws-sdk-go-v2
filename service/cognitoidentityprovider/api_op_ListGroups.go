@@ -6,65 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/types"
 )
-
-type ListGroupsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The limit of the request to list groups.
-	Limit *int64 `type:"integer"`
-
-	// An identifier that was returned from the previous call to this operation,
-	// which can be used to return the next set of items in the list.
-	NextToken *string `min:"1" type:"string"`
-
-	// The user pool ID for the user pool.
-	//
-	// UserPoolId is a required field
-	UserPoolId *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s ListGroupsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListGroupsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListGroupsInput"}
-	if s.NextToken != nil && len(*s.NextToken) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
-	}
-
-	if s.UserPoolId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("UserPoolId"))
-	}
-	if s.UserPoolId != nil && len(*s.UserPoolId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("UserPoolId", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ListGroupsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The group objects for the groups.
-	Groups []GroupType `type:"list"`
-
-	// An identifier that was returned from the previous call to this operation,
-	// which can be used to return the next set of items in the list.
-	NextToken *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s ListGroupsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListGroups = "ListGroups"
 
@@ -83,7 +26,7 @@ const opListGroups = "ListGroups"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/ListGroups
-func (c *Client) ListGroupsRequest(input *ListGroupsInput) ListGroupsRequest {
+func (c *Client) ListGroupsRequest(input *types.ListGroupsInput) ListGroupsRequest {
 	op := &aws.Operation{
 		Name:       opListGroups,
 		HTTPMethod: "POST",
@@ -97,10 +40,10 @@ func (c *Client) ListGroupsRequest(input *ListGroupsInput) ListGroupsRequest {
 	}
 
 	if input == nil {
-		input = &ListGroupsInput{}
+		input = &types.ListGroupsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListGroupsOutput{})
+	req := c.newRequest(op, input, &types.ListGroupsOutput{})
 	return ListGroupsRequest{Request: req, Input: input, Copy: c.ListGroupsRequest}
 }
 
@@ -108,8 +51,8 @@ func (c *Client) ListGroupsRequest(input *ListGroupsInput) ListGroupsRequest {
 // ListGroups API operation.
 type ListGroupsRequest struct {
 	*aws.Request
-	Input *ListGroupsInput
-	Copy  func(*ListGroupsInput) ListGroupsRequest
+	Input *types.ListGroupsInput
+	Copy  func(*types.ListGroupsInput) ListGroupsRequest
 }
 
 // Send marshals and sends the ListGroups API request.
@@ -121,7 +64,7 @@ func (r ListGroupsRequest) Send(ctx context.Context) (*ListGroupsResponse, error
 	}
 
 	resp := &ListGroupsResponse{
-		ListGroupsOutput: r.Request.Data.(*ListGroupsOutput),
+		ListGroupsOutput: r.Request.Data.(*types.ListGroupsOutput),
 		response:         &aws.Response{Request: r.Request},
 	}
 
@@ -151,7 +94,7 @@ func NewListGroupsPaginator(req ListGroupsRequest) ListGroupsPaginator {
 	return ListGroupsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListGroupsInput
+				var inCpy *types.ListGroupsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -171,14 +114,14 @@ type ListGroupsPaginator struct {
 	aws.Pager
 }
 
-func (p *ListGroupsPaginator) CurrentPage() *ListGroupsOutput {
-	return p.Pager.CurrentPage().(*ListGroupsOutput)
+func (p *ListGroupsPaginator) CurrentPage() *types.ListGroupsOutput {
+	return p.Pager.CurrentPage().(*types.ListGroupsOutput)
 }
 
 // ListGroupsResponse is the response type for the
 // ListGroups API operation.
 type ListGroupsResponse struct {
-	*ListGroupsOutput
+	*types.ListGroupsOutput
 
 	response *aws.Response
 }

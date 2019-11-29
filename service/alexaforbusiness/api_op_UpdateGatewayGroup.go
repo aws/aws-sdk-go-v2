@@ -6,54 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/alexaforbusiness/types"
 )
-
-type UpdateGatewayGroupInput struct {
-	_ struct{} `type:"structure"`
-
-	// The updated description of the gateway group.
-	Description *string `type:"string"`
-
-	// The ARN of the gateway group to update.
-	//
-	// GatewayGroupArn is a required field
-	GatewayGroupArn *string `type:"string" required:"true"`
-
-	// The updated name of the gateway group.
-	Name *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s UpdateGatewayGroupInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateGatewayGroupInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateGatewayGroupInput"}
-
-	if s.GatewayGroupArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("GatewayGroupArn"))
-	}
-	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type UpdateGatewayGroupOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s UpdateGatewayGroupOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opUpdateGatewayGroup = "UpdateGatewayGroup"
 
@@ -71,7 +25,7 @@ const opUpdateGatewayGroup = "UpdateGatewayGroup"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/UpdateGatewayGroup
-func (c *Client) UpdateGatewayGroupRequest(input *UpdateGatewayGroupInput) UpdateGatewayGroupRequest {
+func (c *Client) UpdateGatewayGroupRequest(input *types.UpdateGatewayGroupInput) UpdateGatewayGroupRequest {
 	op := &aws.Operation{
 		Name:       opUpdateGatewayGroup,
 		HTTPMethod: "POST",
@@ -79,10 +33,10 @@ func (c *Client) UpdateGatewayGroupRequest(input *UpdateGatewayGroupInput) Updat
 	}
 
 	if input == nil {
-		input = &UpdateGatewayGroupInput{}
+		input = &types.UpdateGatewayGroupInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateGatewayGroupOutput{})
+	req := c.newRequest(op, input, &types.UpdateGatewayGroupOutput{})
 	return UpdateGatewayGroupRequest{Request: req, Input: input, Copy: c.UpdateGatewayGroupRequest}
 }
 
@@ -90,8 +44,8 @@ func (c *Client) UpdateGatewayGroupRequest(input *UpdateGatewayGroupInput) Updat
 // UpdateGatewayGroup API operation.
 type UpdateGatewayGroupRequest struct {
 	*aws.Request
-	Input *UpdateGatewayGroupInput
-	Copy  func(*UpdateGatewayGroupInput) UpdateGatewayGroupRequest
+	Input *types.UpdateGatewayGroupInput
+	Copy  func(*types.UpdateGatewayGroupInput) UpdateGatewayGroupRequest
 }
 
 // Send marshals and sends the UpdateGatewayGroup API request.
@@ -103,7 +57,7 @@ func (r UpdateGatewayGroupRequest) Send(ctx context.Context) (*UpdateGatewayGrou
 	}
 
 	resp := &UpdateGatewayGroupResponse{
-		UpdateGatewayGroupOutput: r.Request.Data.(*UpdateGatewayGroupOutput),
+		UpdateGatewayGroupOutput: r.Request.Data.(*types.UpdateGatewayGroupOutput),
 		response:                 &aws.Response{Request: r.Request},
 	}
 
@@ -113,7 +67,7 @@ func (r UpdateGatewayGroupRequest) Send(ctx context.Context) (*UpdateGatewayGrou
 // UpdateGatewayGroupResponse is the response type for the
 // UpdateGatewayGroup API operation.
 type UpdateGatewayGroupResponse struct {
-	*UpdateGatewayGroupOutput
+	*types.UpdateGatewayGroupOutput
 
 	response *aws.Response
 }

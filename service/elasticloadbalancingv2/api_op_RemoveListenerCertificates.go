@@ -6,55 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/elasticloadbalancingv2/types"
 )
-
-type RemoveListenerCertificatesInput struct {
-	_ struct{} `type:"structure"`
-
-	// The certificate to remove. You can specify one certificate per call. Set
-	// CertificateArn to the certificate ARN but do not set IsDefault.
-	//
-	// Certificates is a required field
-	Certificates []Certificate `type:"list" required:"true"`
-
-	// The Amazon Resource Name (ARN) of the listener.
-	//
-	// ListenerArn is a required field
-	ListenerArn *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s RemoveListenerCertificatesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *RemoveListenerCertificatesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "RemoveListenerCertificatesInput"}
-
-	if s.Certificates == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Certificates"))
-	}
-
-	if s.ListenerArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ListenerArn"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type RemoveListenerCertificatesOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s RemoveListenerCertificatesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opRemoveListenerCertificates = "RemoveListenerCertificates"
 
@@ -77,7 +30,7 @@ const opRemoveListenerCertificates = "RemoveListenerCertificates"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/RemoveListenerCertificates
-func (c *Client) RemoveListenerCertificatesRequest(input *RemoveListenerCertificatesInput) RemoveListenerCertificatesRequest {
+func (c *Client) RemoveListenerCertificatesRequest(input *types.RemoveListenerCertificatesInput) RemoveListenerCertificatesRequest {
 	op := &aws.Operation{
 		Name:       opRemoveListenerCertificates,
 		HTTPMethod: "POST",
@@ -85,10 +38,10 @@ func (c *Client) RemoveListenerCertificatesRequest(input *RemoveListenerCertific
 	}
 
 	if input == nil {
-		input = &RemoveListenerCertificatesInput{}
+		input = &types.RemoveListenerCertificatesInput{}
 	}
 
-	req := c.newRequest(op, input, &RemoveListenerCertificatesOutput{})
+	req := c.newRequest(op, input, &types.RemoveListenerCertificatesOutput{})
 	return RemoveListenerCertificatesRequest{Request: req, Input: input, Copy: c.RemoveListenerCertificatesRequest}
 }
 
@@ -96,8 +49,8 @@ func (c *Client) RemoveListenerCertificatesRequest(input *RemoveListenerCertific
 // RemoveListenerCertificates API operation.
 type RemoveListenerCertificatesRequest struct {
 	*aws.Request
-	Input *RemoveListenerCertificatesInput
-	Copy  func(*RemoveListenerCertificatesInput) RemoveListenerCertificatesRequest
+	Input *types.RemoveListenerCertificatesInput
+	Copy  func(*types.RemoveListenerCertificatesInput) RemoveListenerCertificatesRequest
 }
 
 // Send marshals and sends the RemoveListenerCertificates API request.
@@ -109,7 +62,7 @@ func (r RemoveListenerCertificatesRequest) Send(ctx context.Context) (*RemoveLis
 	}
 
 	resp := &RemoveListenerCertificatesResponse{
-		RemoveListenerCertificatesOutput: r.Request.Data.(*RemoveListenerCertificatesOutput),
+		RemoveListenerCertificatesOutput: r.Request.Data.(*types.RemoveListenerCertificatesOutput),
 		response:                         &aws.Response{Request: r.Request},
 	}
 
@@ -119,7 +72,7 @@ func (r RemoveListenerCertificatesRequest) Send(ctx context.Context) (*RemoveLis
 // RemoveListenerCertificatesResponse is the response type for the
 // RemoveListenerCertificates API operation.
 type RemoveListenerCertificatesResponse struct {
-	*RemoveListenerCertificatesOutput
+	*types.RemoveListenerCertificatesOutput
 
 	response *aws.Response
 }

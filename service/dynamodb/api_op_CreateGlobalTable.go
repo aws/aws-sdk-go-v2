@@ -6,60 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/dynamodb/types"
 )
-
-type CreateGlobalTableInput struct {
-	_ struct{} `type:"structure"`
-
-	// The global table name.
-	//
-	// GlobalTableName is a required field
-	GlobalTableName *string `min:"3" type:"string" required:"true"`
-
-	// The Regions where the global table needs to be created.
-	//
-	// ReplicationGroup is a required field
-	ReplicationGroup []Replica `type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s CreateGlobalTableInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateGlobalTableInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateGlobalTableInput"}
-
-	if s.GlobalTableName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("GlobalTableName"))
-	}
-	if s.GlobalTableName != nil && len(*s.GlobalTableName) < 3 {
-		invalidParams.Add(aws.NewErrParamMinLen("GlobalTableName", 3))
-	}
-
-	if s.ReplicationGroup == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ReplicationGroup"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type CreateGlobalTableOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Contains the details of the global table.
-	GlobalTableDescription *GlobalTableDescription `type:"structure"`
-}
-
-// String returns the string representation
-func (s CreateGlobalTableOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCreateGlobalTable = "CreateGlobalTable"
 
@@ -108,7 +56,7 @@ const opCreateGlobalTable = "CreateGlobalTable"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/CreateGlobalTable
-func (c *Client) CreateGlobalTableRequest(input *CreateGlobalTableInput) CreateGlobalTableRequest {
+func (c *Client) CreateGlobalTableRequest(input *types.CreateGlobalTableInput) CreateGlobalTableRequest {
 	op := &aws.Operation{
 		Name:       opCreateGlobalTable,
 		HTTPMethod: "POST",
@@ -116,10 +64,10 @@ func (c *Client) CreateGlobalTableRequest(input *CreateGlobalTableInput) CreateG
 	}
 
 	if input == nil {
-		input = &CreateGlobalTableInput{}
+		input = &types.CreateGlobalTableInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateGlobalTableOutput{})
+	req := c.newRequest(op, input, &types.CreateGlobalTableOutput{})
 	return CreateGlobalTableRequest{Request: req, Input: input, Copy: c.CreateGlobalTableRequest}
 }
 
@@ -127,8 +75,8 @@ func (c *Client) CreateGlobalTableRequest(input *CreateGlobalTableInput) CreateG
 // CreateGlobalTable API operation.
 type CreateGlobalTableRequest struct {
 	*aws.Request
-	Input *CreateGlobalTableInput
-	Copy  func(*CreateGlobalTableInput) CreateGlobalTableRequest
+	Input *types.CreateGlobalTableInput
+	Copy  func(*types.CreateGlobalTableInput) CreateGlobalTableRequest
 }
 
 // Send marshals and sends the CreateGlobalTable API request.
@@ -140,7 +88,7 @@ func (r CreateGlobalTableRequest) Send(ctx context.Context) (*CreateGlobalTableR
 	}
 
 	resp := &CreateGlobalTableResponse{
-		CreateGlobalTableOutput: r.Request.Data.(*CreateGlobalTableOutput),
+		CreateGlobalTableOutput: r.Request.Data.(*types.CreateGlobalTableOutput),
 		response:                &aws.Response{Request: r.Request},
 	}
 
@@ -150,7 +98,7 @@ func (r CreateGlobalTableRequest) Send(ctx context.Context) (*CreateGlobalTableR
 // CreateGlobalTableResponse is the response type for the
 // CreateGlobalTable API operation.
 type CreateGlobalTableResponse struct {
-	*CreateGlobalTableOutput
+	*types.CreateGlobalTableOutput
 
 	response *aws.Response
 }

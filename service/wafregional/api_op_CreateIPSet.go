@@ -6,70 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/service/waf"
+	"github.com/aws/aws-sdk-go-v2/service/wafregional/types"
 )
-
-type CreateIPSetInput struct {
-	_ struct{} `type:"structure"`
-
-	// The value returned by the most recent call to GetChangeToken.
-	//
-	// ChangeToken is a required field
-	ChangeToken *string `min:"1" type:"string" required:"true"`
-
-	// A friendly name or description of the IPSet. You can't change Name after
-	// you create the IPSet.
-	//
-	// Name is a required field
-	Name *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s CreateIPSetInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateIPSetInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateIPSetInput"}
-
-	if s.ChangeToken == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ChangeToken"))
-	}
-	if s.ChangeToken != nil && len(*s.ChangeToken) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ChangeToken", 1))
-	}
-
-	if s.Name == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Name"))
-	}
-	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type CreateIPSetOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The ChangeToken that you used to submit the CreateIPSet request. You can
-	// also use this value to query the status of the request. For more information,
-	// see GetChangeTokenStatus.
-	ChangeToken *string `min:"1" type:"string"`
-
-	// The IPSet returned in the CreateIPSet response.
-	IPSet *waf.IPSet `type:"structure"`
-}
-
-// String returns the string representation
-func (s CreateIPSetOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCreateIPSet = "CreateIPSet"
 
@@ -107,7 +45,7 @@ const opCreateIPSet = "CreateIPSet"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/CreateIPSet
-func (c *Client) CreateIPSetRequest(input *CreateIPSetInput) CreateIPSetRequest {
+func (c *Client) CreateIPSetRequest(input *types.CreateIPSetInput) CreateIPSetRequest {
 	op := &aws.Operation{
 		Name:       opCreateIPSet,
 		HTTPMethod: "POST",
@@ -115,10 +53,10 @@ func (c *Client) CreateIPSetRequest(input *CreateIPSetInput) CreateIPSetRequest 
 	}
 
 	if input == nil {
-		input = &CreateIPSetInput{}
+		input = &types.CreateIPSetInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateIPSetOutput{})
+	req := c.newRequest(op, input, &types.CreateIPSetOutput{})
 	return CreateIPSetRequest{Request: req, Input: input, Copy: c.CreateIPSetRequest}
 }
 
@@ -126,8 +64,8 @@ func (c *Client) CreateIPSetRequest(input *CreateIPSetInput) CreateIPSetRequest 
 // CreateIPSet API operation.
 type CreateIPSetRequest struct {
 	*aws.Request
-	Input *CreateIPSetInput
-	Copy  func(*CreateIPSetInput) CreateIPSetRequest
+	Input *types.CreateIPSetInput
+	Copy  func(*types.CreateIPSetInput) CreateIPSetRequest
 }
 
 // Send marshals and sends the CreateIPSet API request.
@@ -139,7 +77,7 @@ func (r CreateIPSetRequest) Send(ctx context.Context) (*CreateIPSetResponse, err
 	}
 
 	resp := &CreateIPSetResponse{
-		CreateIPSetOutput: r.Request.Data.(*CreateIPSetOutput),
+		CreateIPSetOutput: r.Request.Data.(*types.CreateIPSetOutput),
 		response:          &aws.Response{Request: r.Request},
 	}
 
@@ -149,7 +87,7 @@ func (r CreateIPSetRequest) Send(ctx context.Context) (*CreateIPSetResponse, err
 // CreateIPSetResponse is the response type for the
 // CreateIPSet API operation.
 type CreateIPSetResponse struct {
-	*CreateIPSetOutput
+	*types.CreateIPSetOutput
 
 	response *aws.Response
 }

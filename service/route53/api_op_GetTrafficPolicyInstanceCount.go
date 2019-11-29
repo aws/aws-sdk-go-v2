@@ -6,54 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/route53/types"
 )
-
-// Request to get the number of traffic policy instances that are associated
-// with the current AWS account.
-type GetTrafficPolicyInstanceCountInput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s GetTrafficPolicyInstanceCountInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetTrafficPolicyInstanceCountInput) MarshalFields(e protocol.FieldEncoder) error {
-
-	return nil
-}
-
-// A complex type that contains information about the resource record sets that
-// Amazon Route 53 created based on a specified traffic policy.
-type GetTrafficPolicyInstanceCountOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The number of traffic policy instances that are associated with the current
-	// AWS account.
-	//
-	// TrafficPolicyInstanceCount is a required field
-	TrafficPolicyInstanceCount *int64 `type:"integer" required:"true"`
-}
-
-// String returns the string representation
-func (s GetTrafficPolicyInstanceCountOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetTrafficPolicyInstanceCountOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.TrafficPolicyInstanceCount != nil {
-		v := *s.TrafficPolicyInstanceCount
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "TrafficPolicyInstanceCount", protocol.Int64Value(v), metadata)
-	}
-	return nil
-}
 
 const opGetTrafficPolicyInstanceCount = "GetTrafficPolicyInstanceCount"
 
@@ -71,7 +25,7 @@ const opGetTrafficPolicyInstanceCount = "GetTrafficPolicyInstanceCount"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/GetTrafficPolicyInstanceCount
-func (c *Client) GetTrafficPolicyInstanceCountRequest(input *GetTrafficPolicyInstanceCountInput) GetTrafficPolicyInstanceCountRequest {
+func (c *Client) GetTrafficPolicyInstanceCountRequest(input *types.GetTrafficPolicyInstanceCountInput) GetTrafficPolicyInstanceCountRequest {
 	op := &aws.Operation{
 		Name:       opGetTrafficPolicyInstanceCount,
 		HTTPMethod: "GET",
@@ -79,10 +33,10 @@ func (c *Client) GetTrafficPolicyInstanceCountRequest(input *GetTrafficPolicyIns
 	}
 
 	if input == nil {
-		input = &GetTrafficPolicyInstanceCountInput{}
+		input = &types.GetTrafficPolicyInstanceCountInput{}
 	}
 
-	req := c.newRequest(op, input, &GetTrafficPolicyInstanceCountOutput{})
+	req := c.newRequest(op, input, &types.GetTrafficPolicyInstanceCountOutput{})
 	return GetTrafficPolicyInstanceCountRequest{Request: req, Input: input, Copy: c.GetTrafficPolicyInstanceCountRequest}
 }
 
@@ -90,8 +44,8 @@ func (c *Client) GetTrafficPolicyInstanceCountRequest(input *GetTrafficPolicyIns
 // GetTrafficPolicyInstanceCount API operation.
 type GetTrafficPolicyInstanceCountRequest struct {
 	*aws.Request
-	Input *GetTrafficPolicyInstanceCountInput
-	Copy  func(*GetTrafficPolicyInstanceCountInput) GetTrafficPolicyInstanceCountRequest
+	Input *types.GetTrafficPolicyInstanceCountInput
+	Copy  func(*types.GetTrafficPolicyInstanceCountInput) GetTrafficPolicyInstanceCountRequest
 }
 
 // Send marshals and sends the GetTrafficPolicyInstanceCount API request.
@@ -103,7 +57,7 @@ func (r GetTrafficPolicyInstanceCountRequest) Send(ctx context.Context) (*GetTra
 	}
 
 	resp := &GetTrafficPolicyInstanceCountResponse{
-		GetTrafficPolicyInstanceCountOutput: r.Request.Data.(*GetTrafficPolicyInstanceCountOutput),
+		GetTrafficPolicyInstanceCountOutput: r.Request.Data.(*types.GetTrafficPolicyInstanceCountOutput),
 		response:                            &aws.Response{Request: r.Request},
 	}
 
@@ -113,7 +67,7 @@ func (r GetTrafficPolicyInstanceCountRequest) Send(ctx context.Context) (*GetTra
 // GetTrafficPolicyInstanceCountResponse is the response type for the
 // GetTrafficPolicyInstanceCount API operation.
 type GetTrafficPolicyInstanceCountResponse struct {
-	*GetTrafficPolicyInstanceCountOutput
+	*types.GetTrafficPolicyInstanceCountOutput
 
 	response *aws.Response
 }

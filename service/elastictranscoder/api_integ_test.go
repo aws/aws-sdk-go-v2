@@ -13,6 +13,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws/awserr"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting/integration"
 	"github.com/aws/aws-sdk-go-v2/service/elastictranscoder"
+	"github.com/aws/aws-sdk-go-v2/service/elastictranscoder/types"
 )
 
 var _ aws.Config
@@ -24,7 +25,7 @@ func TestInteg_00_ListPresets(t *testing.T) {
 
 	cfg := integration.ConfigWithDefaultRegion("us-west-2")
 	svc := elastictranscoder.New(cfg)
-	params := &elastictranscoder.ListPresetsInput{}
+	params := &types.ListPresetsInput{}
 
 	req := svc.ListPresetsRequest(params)
 
@@ -39,7 +40,7 @@ func TestInteg_01_ReadJob(t *testing.T) {
 
 	cfg := integration.ConfigWithDefaultRegion("us-west-2")
 	svc := elastictranscoder.New(cfg)
-	params := &elastictranscoder.ReadJobInput{
+	params := &types.ReadJobInput{
 		Id: aws.String("fake_job"),
 	}
 

@@ -4,92 +4,10 @@ package storagegateway
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/storagegateway/types"
 )
-
-type CreateSnapshotFromVolumeRecoveryPointInput struct {
-	_ struct{} `type:"structure"`
-
-	// Textual description of the snapshot that appears in the Amazon EC2 console,
-	// Elastic Block Store snapshots panel in the Description field, and in the
-	// AWS Storage Gateway snapshot Details pane, Description field
-	//
-	// SnapshotDescription is a required field
-	SnapshotDescription *string `min:"1" type:"string" required:"true"`
-
-	// A list of up to 50 tags that can be assigned to a snapshot. Each tag is a
-	// key-value pair.
-	//
-	// Valid characters for key and value are letters, spaces, and numbers representable
-	// in UTF-8 format, and the following special characters: + - = . _ : / @. The
-	// maximum length of a tag's key is 128 characters, and the maximum length for
-	// a tag's value is 256.
-	Tags []Tag `type:"list"`
-
-	// The Amazon Resource Name (ARN) of the iSCSI volume target. Use the DescribeStorediSCSIVolumes
-	// operation to return to retrieve the TargetARN for specified VolumeARN.
-	//
-	// VolumeARN is a required field
-	VolumeARN *string `min:"50" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s CreateSnapshotFromVolumeRecoveryPointInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateSnapshotFromVolumeRecoveryPointInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateSnapshotFromVolumeRecoveryPointInput"}
-
-	if s.SnapshotDescription == nil {
-		invalidParams.Add(aws.NewErrParamRequired("SnapshotDescription"))
-	}
-	if s.SnapshotDescription != nil && len(*s.SnapshotDescription) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("SnapshotDescription", 1))
-	}
-
-	if s.VolumeARN == nil {
-		invalidParams.Add(aws.NewErrParamRequired("VolumeARN"))
-	}
-	if s.VolumeARN != nil && len(*s.VolumeARN) < 50 {
-		invalidParams.Add(aws.NewErrParamMinLen("VolumeARN", 50))
-	}
-	if s.Tags != nil {
-		for i, v := range s.Tags {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type CreateSnapshotFromVolumeRecoveryPointOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the snapshot.
-	SnapshotId *string `type:"string"`
-
-	// The Amazon Resource Name (ARN) of the iSCSI volume target. Use the DescribeStorediSCSIVolumes
-	// operation to return to retrieve the TargetARN for specified VolumeARN.
-	VolumeARN *string `min:"50" type:"string"`
-
-	// The time the volume was created from the recovery point.
-	VolumeRecoveryPointTime *string `type:"string"`
-}
-
-// String returns the string representation
-func (s CreateSnapshotFromVolumeRecoveryPointOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCreateSnapshotFromVolumeRecoveryPoint = "CreateSnapshotFromVolumeRecoveryPoint"
 
@@ -122,7 +40,7 @@ const opCreateSnapshotFromVolumeRecoveryPoint = "CreateSnapshotFromVolumeRecover
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/CreateSnapshotFromVolumeRecoveryPoint
-func (c *Client) CreateSnapshotFromVolumeRecoveryPointRequest(input *CreateSnapshotFromVolumeRecoveryPointInput) CreateSnapshotFromVolumeRecoveryPointRequest {
+func (c *Client) CreateSnapshotFromVolumeRecoveryPointRequest(input *types.CreateSnapshotFromVolumeRecoveryPointInput) CreateSnapshotFromVolumeRecoveryPointRequest {
 	op := &aws.Operation{
 		Name:       opCreateSnapshotFromVolumeRecoveryPoint,
 		HTTPMethod: "POST",
@@ -130,10 +48,10 @@ func (c *Client) CreateSnapshotFromVolumeRecoveryPointRequest(input *CreateSnaps
 	}
 
 	if input == nil {
-		input = &CreateSnapshotFromVolumeRecoveryPointInput{}
+		input = &types.CreateSnapshotFromVolumeRecoveryPointInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateSnapshotFromVolumeRecoveryPointOutput{})
+	req := c.newRequest(op, input, &types.CreateSnapshotFromVolumeRecoveryPointOutput{})
 	return CreateSnapshotFromVolumeRecoveryPointRequest{Request: req, Input: input, Copy: c.CreateSnapshotFromVolumeRecoveryPointRequest}
 }
 
@@ -141,8 +59,8 @@ func (c *Client) CreateSnapshotFromVolumeRecoveryPointRequest(input *CreateSnaps
 // CreateSnapshotFromVolumeRecoveryPoint API operation.
 type CreateSnapshotFromVolumeRecoveryPointRequest struct {
 	*aws.Request
-	Input *CreateSnapshotFromVolumeRecoveryPointInput
-	Copy  func(*CreateSnapshotFromVolumeRecoveryPointInput) CreateSnapshotFromVolumeRecoveryPointRequest
+	Input *types.CreateSnapshotFromVolumeRecoveryPointInput
+	Copy  func(*types.CreateSnapshotFromVolumeRecoveryPointInput) CreateSnapshotFromVolumeRecoveryPointRequest
 }
 
 // Send marshals and sends the CreateSnapshotFromVolumeRecoveryPoint API request.
@@ -154,7 +72,7 @@ func (r CreateSnapshotFromVolumeRecoveryPointRequest) Send(ctx context.Context) 
 	}
 
 	resp := &CreateSnapshotFromVolumeRecoveryPointResponse{
-		CreateSnapshotFromVolumeRecoveryPointOutput: r.Request.Data.(*CreateSnapshotFromVolumeRecoveryPointOutput),
+		CreateSnapshotFromVolumeRecoveryPointOutput: r.Request.Data.(*types.CreateSnapshotFromVolumeRecoveryPointOutput),
 		response: &aws.Response{Request: r.Request},
 	}
 
@@ -164,7 +82,7 @@ func (r CreateSnapshotFromVolumeRecoveryPointRequest) Send(ctx context.Context) 
 // CreateSnapshotFromVolumeRecoveryPointResponse is the response type for the
 // CreateSnapshotFromVolumeRecoveryPoint API operation.
 type CreateSnapshotFromVolumeRecoveryPointResponse struct {
-	*CreateSnapshotFromVolumeRecoveryPointOutput
+	*types.CreateSnapshotFromVolumeRecoveryPointOutput
 
 	response *aws.Response
 }

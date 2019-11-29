@@ -6,61 +6,15 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/codebuild/types"
 )
-
-type BatchGetBuildsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The IDs of the builds.
-	//
-	// Ids is a required field
-	Ids []string `locationName:"ids" min:"1" type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s BatchGetBuildsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *BatchGetBuildsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "BatchGetBuildsInput"}
-
-	if s.Ids == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Ids"))
-	}
-	if s.Ids != nil && len(s.Ids) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Ids", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type BatchGetBuildsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Information about the requested builds.
-	Builds []Build `locationName:"builds" type:"list"`
-
-	// The IDs of builds for which information could not be found.
-	BuildsNotFound []string `locationName:"buildsNotFound" min:"1" type:"list"`
-}
-
-// String returns the string representation
-func (s BatchGetBuildsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opBatchGetBuilds = "BatchGetBuilds"
 
 // BatchGetBuildsRequest returns a request value for making API operation for
 // AWS CodeBuild.
 //
-// Gets information about builds.
+// Gets information about one or more builds.
 //
 //    // Example sending a request using BatchGetBuildsRequest.
 //    req := client.BatchGetBuildsRequest(params)
@@ -70,7 +24,7 @@ const opBatchGetBuilds = "BatchGetBuilds"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/BatchGetBuilds
-func (c *Client) BatchGetBuildsRequest(input *BatchGetBuildsInput) BatchGetBuildsRequest {
+func (c *Client) BatchGetBuildsRequest(input *types.BatchGetBuildsInput) BatchGetBuildsRequest {
 	op := &aws.Operation{
 		Name:       opBatchGetBuilds,
 		HTTPMethod: "POST",
@@ -78,10 +32,10 @@ func (c *Client) BatchGetBuildsRequest(input *BatchGetBuildsInput) BatchGetBuild
 	}
 
 	if input == nil {
-		input = &BatchGetBuildsInput{}
+		input = &types.BatchGetBuildsInput{}
 	}
 
-	req := c.newRequest(op, input, &BatchGetBuildsOutput{})
+	req := c.newRequest(op, input, &types.BatchGetBuildsOutput{})
 	return BatchGetBuildsRequest{Request: req, Input: input, Copy: c.BatchGetBuildsRequest}
 }
 
@@ -89,8 +43,8 @@ func (c *Client) BatchGetBuildsRequest(input *BatchGetBuildsInput) BatchGetBuild
 // BatchGetBuilds API operation.
 type BatchGetBuildsRequest struct {
 	*aws.Request
-	Input *BatchGetBuildsInput
-	Copy  func(*BatchGetBuildsInput) BatchGetBuildsRequest
+	Input *types.BatchGetBuildsInput
+	Copy  func(*types.BatchGetBuildsInput) BatchGetBuildsRequest
 }
 
 // Send marshals and sends the BatchGetBuilds API request.
@@ -102,7 +56,7 @@ func (r BatchGetBuildsRequest) Send(ctx context.Context) (*BatchGetBuildsRespons
 	}
 
 	resp := &BatchGetBuildsResponse{
-		BatchGetBuildsOutput: r.Request.Data.(*BatchGetBuildsOutput),
+		BatchGetBuildsOutput: r.Request.Data.(*types.BatchGetBuildsOutput),
 		response:             &aws.Response{Request: r.Request},
 	}
 
@@ -112,7 +66,7 @@ func (r BatchGetBuildsRequest) Send(ctx context.Context) (*BatchGetBuildsRespons
 // BatchGetBuildsResponse is the response type for the
 // BatchGetBuilds API operation.
 type BatchGetBuildsResponse struct {
-	*BatchGetBuildsOutput
+	*types.BatchGetBuildsOutput
 
 	response *aws.Response
 }

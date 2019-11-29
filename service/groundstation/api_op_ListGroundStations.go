@@ -6,77 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/groundstation/types"
 )
-
-type ListGroundStationsInput struct {
-	_ struct{} `type:"structure"`
-
-	MaxResults *int64 `location:"querystring" locationName:"maxResults" type:"integer"`
-
-	NextToken *string `location:"querystring" locationName:"nextToken" type:"string"`
-}
-
-// String returns the string representation
-func (s ListGroundStationsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListGroundStationsInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.MaxResults != nil {
-		v := *s.MaxResults
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "maxResults", protocol.Int64Value(v), metadata)
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type ListGroundStationsOutput struct {
-	_ struct{} `type:"structure"`
-
-	GroundStationList []GroundStationData `locationName:"groundStationList" type:"list"`
-
-	NextToken *string `locationName:"nextToken" type:"string"`
-}
-
-// String returns the string representation
-func (s ListGroundStationsOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListGroundStationsOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.GroundStationList != nil {
-		v := s.GroundStationList
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "groundStationList", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opListGroundStations = "ListGroundStations"
 
@@ -93,7 +24,7 @@ const opListGroundStations = "ListGroundStations"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/groundstation-2019-05-23/ListGroundStations
-func (c *Client) ListGroundStationsRequest(input *ListGroundStationsInput) ListGroundStationsRequest {
+func (c *Client) ListGroundStationsRequest(input *types.ListGroundStationsInput) ListGroundStationsRequest {
 	op := &aws.Operation{
 		Name:       opListGroundStations,
 		HTTPMethod: "GET",
@@ -107,10 +38,10 @@ func (c *Client) ListGroundStationsRequest(input *ListGroundStationsInput) ListG
 	}
 
 	if input == nil {
-		input = &ListGroundStationsInput{}
+		input = &types.ListGroundStationsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListGroundStationsOutput{})
+	req := c.newRequest(op, input, &types.ListGroundStationsOutput{})
 	return ListGroundStationsRequest{Request: req, Input: input, Copy: c.ListGroundStationsRequest}
 }
 
@@ -118,8 +49,8 @@ func (c *Client) ListGroundStationsRequest(input *ListGroundStationsInput) ListG
 // ListGroundStations API operation.
 type ListGroundStationsRequest struct {
 	*aws.Request
-	Input *ListGroundStationsInput
-	Copy  func(*ListGroundStationsInput) ListGroundStationsRequest
+	Input *types.ListGroundStationsInput
+	Copy  func(*types.ListGroundStationsInput) ListGroundStationsRequest
 }
 
 // Send marshals and sends the ListGroundStations API request.
@@ -131,7 +62,7 @@ func (r ListGroundStationsRequest) Send(ctx context.Context) (*ListGroundStation
 	}
 
 	resp := &ListGroundStationsResponse{
-		ListGroundStationsOutput: r.Request.Data.(*ListGroundStationsOutput),
+		ListGroundStationsOutput: r.Request.Data.(*types.ListGroundStationsOutput),
 		response:                 &aws.Response{Request: r.Request},
 	}
 
@@ -161,7 +92,7 @@ func NewListGroundStationsPaginator(req ListGroundStationsRequest) ListGroundSta
 	return ListGroundStationsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListGroundStationsInput
+				var inCpy *types.ListGroundStationsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -181,14 +112,14 @@ type ListGroundStationsPaginator struct {
 	aws.Pager
 }
 
-func (p *ListGroundStationsPaginator) CurrentPage() *ListGroundStationsOutput {
-	return p.Pager.CurrentPage().(*ListGroundStationsOutput)
+func (p *ListGroundStationsPaginator) CurrentPage() *types.ListGroundStationsOutput {
+	return p.Pager.CurrentPage().(*types.ListGroundStationsOutput)
 }
 
 // ListGroundStationsResponse is the response type for the
 // ListGroundStations API operation.
 type ListGroundStationsResponse struct {
-	*ListGroundStationsOutput
+	*types.ListGroundStationsOutput
 
 	response *aws.Response
 }

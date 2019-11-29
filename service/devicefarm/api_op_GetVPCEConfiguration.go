@@ -6,52 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/devicefarm/types"
 )
-
-type GetVPCEConfigurationInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the VPC endpoint configuration you want
-	// to describe.
-	//
-	// Arn is a required field
-	Arn *string `locationName:"arn" min:"32" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetVPCEConfigurationInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetVPCEConfigurationInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetVPCEConfigurationInput"}
-
-	if s.Arn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Arn"))
-	}
-	if s.Arn != nil && len(*s.Arn) < 32 {
-		invalidParams.Add(aws.NewErrParamMinLen("Arn", 32))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type GetVPCEConfigurationOutput struct {
-	_ struct{} `type:"structure"`
-
-	// An object containing information about your VPC endpoint configuration.
-	VpceConfiguration *VPCEConfiguration `locationName:"vpceConfiguration" type:"structure"`
-}
-
-// String returns the string representation
-func (s GetVPCEConfigurationOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetVPCEConfiguration = "GetVPCEConfiguration"
 
@@ -69,7 +25,7 @@ const opGetVPCEConfiguration = "GetVPCEConfiguration"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/GetVPCEConfiguration
-func (c *Client) GetVPCEConfigurationRequest(input *GetVPCEConfigurationInput) GetVPCEConfigurationRequest {
+func (c *Client) GetVPCEConfigurationRequest(input *types.GetVPCEConfigurationInput) GetVPCEConfigurationRequest {
 	op := &aws.Operation{
 		Name:       opGetVPCEConfiguration,
 		HTTPMethod: "POST",
@@ -77,10 +33,10 @@ func (c *Client) GetVPCEConfigurationRequest(input *GetVPCEConfigurationInput) G
 	}
 
 	if input == nil {
-		input = &GetVPCEConfigurationInput{}
+		input = &types.GetVPCEConfigurationInput{}
 	}
 
-	req := c.newRequest(op, input, &GetVPCEConfigurationOutput{})
+	req := c.newRequest(op, input, &types.GetVPCEConfigurationOutput{})
 	return GetVPCEConfigurationRequest{Request: req, Input: input, Copy: c.GetVPCEConfigurationRequest}
 }
 
@@ -88,8 +44,8 @@ func (c *Client) GetVPCEConfigurationRequest(input *GetVPCEConfigurationInput) G
 // GetVPCEConfiguration API operation.
 type GetVPCEConfigurationRequest struct {
 	*aws.Request
-	Input *GetVPCEConfigurationInput
-	Copy  func(*GetVPCEConfigurationInput) GetVPCEConfigurationRequest
+	Input *types.GetVPCEConfigurationInput
+	Copy  func(*types.GetVPCEConfigurationInput) GetVPCEConfigurationRequest
 }
 
 // Send marshals and sends the GetVPCEConfiguration API request.
@@ -101,7 +57,7 @@ func (r GetVPCEConfigurationRequest) Send(ctx context.Context) (*GetVPCEConfigur
 	}
 
 	resp := &GetVPCEConfigurationResponse{
-		GetVPCEConfigurationOutput: r.Request.Data.(*GetVPCEConfigurationOutput),
+		GetVPCEConfigurationOutput: r.Request.Data.(*types.GetVPCEConfigurationOutput),
 		response:                   &aws.Response{Request: r.Request},
 	}
 
@@ -111,7 +67,7 @@ func (r GetVPCEConfigurationRequest) Send(ctx context.Context) (*GetVPCEConfigur
 // GetVPCEConfigurationResponse is the response type for the
 // GetVPCEConfiguration API operation.
 type GetVPCEConfigurationResponse struct {
-	*GetVPCEConfigurationOutput
+	*types.GetVPCEConfigurationOutput
 
 	response *aws.Response
 }

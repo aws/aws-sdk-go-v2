@@ -6,73 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/elasticache/types"
 )
-
-// Represents the input of a DescribeSnapshotsMessage operation.
-type DescribeSnapshotsInput struct {
-	_ struct{} `type:"structure"`
-
-	// A user-supplied cluster identifier. If this parameter is specified, only
-	// snapshots associated with that specific cluster are described.
-	CacheClusterId *string `type:"string"`
-
-	// An optional marker returned from a prior request. Use this marker for pagination
-	// of results from this operation. If this parameter is specified, the response
-	// includes only records beyond the marker, up to the value specified by MaxRecords.
-	Marker *string `type:"string"`
-
-	// The maximum number of records to include in the response. If more records
-	// exist than the specified MaxRecords value, a marker is included in the response
-	// so that the remaining results can be retrieved.
-	//
-	// Default: 50
-	//
-	// Constraints: minimum 20; maximum 50.
-	MaxRecords *int64 `type:"integer"`
-
-	// A user-supplied replication group identifier. If this parameter is specified,
-	// only snapshots associated with that specific replication group are described.
-	ReplicationGroupId *string `type:"string"`
-
-	// A Boolean value which if true, the node group (shard) configuration is included
-	// in the snapshot description.
-	ShowNodeGroupConfig *bool `type:"boolean"`
-
-	// A user-supplied name of the snapshot. If this parameter is specified, only
-	// this snapshot are described.
-	SnapshotName *string `type:"string"`
-
-	// If set to system, the output shows snapshots that were automatically created
-	// by ElastiCache. If set to user the output shows snapshots that were manually
-	// created. If omitted, the output shows both automatically and manually created
-	// snapshots.
-	SnapshotSource *string `type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeSnapshotsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Represents the output of a DescribeSnapshots operation.
-type DescribeSnapshotsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// An optional marker returned from a prior request. Use this marker for pagination
-	// of results from this operation. If this parameter is specified, the response
-	// includes only records beyond the marker, up to the value specified by MaxRecords.
-	Marker *string `type:"string"`
-
-	// A list of snapshots. Each item in the list contains detailed information
-	// about one snapshot.
-	Snapshots []Snapshot `locationNameList:"Snapshot" type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeSnapshotsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeSnapshots = "DescribeSnapshots"
 
@@ -94,7 +29,7 @@ const opDescribeSnapshots = "DescribeSnapshots"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DescribeSnapshots
-func (c *Client) DescribeSnapshotsRequest(input *DescribeSnapshotsInput) DescribeSnapshotsRequest {
+func (c *Client) DescribeSnapshotsRequest(input *types.DescribeSnapshotsInput) DescribeSnapshotsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeSnapshots,
 		HTTPMethod: "POST",
@@ -108,10 +43,10 @@ func (c *Client) DescribeSnapshotsRequest(input *DescribeSnapshotsInput) Describ
 	}
 
 	if input == nil {
-		input = &DescribeSnapshotsInput{}
+		input = &types.DescribeSnapshotsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeSnapshotsOutput{})
+	req := c.newRequest(op, input, &types.DescribeSnapshotsOutput{})
 	return DescribeSnapshotsRequest{Request: req, Input: input, Copy: c.DescribeSnapshotsRequest}
 }
 
@@ -119,8 +54,8 @@ func (c *Client) DescribeSnapshotsRequest(input *DescribeSnapshotsInput) Describ
 // DescribeSnapshots API operation.
 type DescribeSnapshotsRequest struct {
 	*aws.Request
-	Input *DescribeSnapshotsInput
-	Copy  func(*DescribeSnapshotsInput) DescribeSnapshotsRequest
+	Input *types.DescribeSnapshotsInput
+	Copy  func(*types.DescribeSnapshotsInput) DescribeSnapshotsRequest
 }
 
 // Send marshals and sends the DescribeSnapshots API request.
@@ -132,7 +67,7 @@ func (r DescribeSnapshotsRequest) Send(ctx context.Context) (*DescribeSnapshotsR
 	}
 
 	resp := &DescribeSnapshotsResponse{
-		DescribeSnapshotsOutput: r.Request.Data.(*DescribeSnapshotsOutput),
+		DescribeSnapshotsOutput: r.Request.Data.(*types.DescribeSnapshotsOutput),
 		response:                &aws.Response{Request: r.Request},
 	}
 
@@ -162,7 +97,7 @@ func NewDescribeSnapshotsPaginator(req DescribeSnapshotsRequest) DescribeSnapsho
 	return DescribeSnapshotsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *DescribeSnapshotsInput
+				var inCpy *types.DescribeSnapshotsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -182,14 +117,14 @@ type DescribeSnapshotsPaginator struct {
 	aws.Pager
 }
 
-func (p *DescribeSnapshotsPaginator) CurrentPage() *DescribeSnapshotsOutput {
-	return p.Pager.CurrentPage().(*DescribeSnapshotsOutput)
+func (p *DescribeSnapshotsPaginator) CurrentPage() *types.DescribeSnapshotsOutput {
+	return p.Pager.CurrentPage().(*types.DescribeSnapshotsOutput)
 }
 
 // DescribeSnapshotsResponse is the response type for the
 // DescribeSnapshots API operation.
 type DescribeSnapshotsResponse struct {
-	*DescribeSnapshotsOutput
+	*types.DescribeSnapshotsOutput
 
 	response *aws.Response
 }

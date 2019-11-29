@@ -6,47 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
+	"github.com/aws/aws-sdk-go-v2/service/opsworks/types"
 )
-
-type DeleteAppInput struct {
-	_ struct{} `type:"structure"`
-
-	// The app ID.
-	//
-	// AppId is a required field
-	AppId *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteAppInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteAppInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteAppInput"}
-
-	if s.AppId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("AppId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteAppOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteAppOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteApp = "DeleteApp"
 
@@ -68,7 +31,7 @@ const opDeleteApp = "DeleteApp"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DeleteApp
-func (c *Client) DeleteAppRequest(input *DeleteAppInput) DeleteAppRequest {
+func (c *Client) DeleteAppRequest(input *types.DeleteAppInput) DeleteAppRequest {
 	op := &aws.Operation{
 		Name:       opDeleteApp,
 		HTTPMethod: "POST",
@@ -76,10 +39,10 @@ func (c *Client) DeleteAppRequest(input *DeleteAppInput) DeleteAppRequest {
 	}
 
 	if input == nil {
-		input = &DeleteAppInput{}
+		input = &types.DeleteAppInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteAppOutput{})
+	req := c.newRequest(op, input, &types.DeleteAppOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return DeleteAppRequest{Request: req, Input: input, Copy: c.DeleteAppRequest}
@@ -89,8 +52,8 @@ func (c *Client) DeleteAppRequest(input *DeleteAppInput) DeleteAppRequest {
 // DeleteApp API operation.
 type DeleteAppRequest struct {
 	*aws.Request
-	Input *DeleteAppInput
-	Copy  func(*DeleteAppInput) DeleteAppRequest
+	Input *types.DeleteAppInput
+	Copy  func(*types.DeleteAppInput) DeleteAppRequest
 }
 
 // Send marshals and sends the DeleteApp API request.
@@ -102,7 +65,7 @@ func (r DeleteAppRequest) Send(ctx context.Context) (*DeleteAppResponse, error) 
 	}
 
 	resp := &DeleteAppResponse{
-		DeleteAppOutput: r.Request.Data.(*DeleteAppOutput),
+		DeleteAppOutput: r.Request.Data.(*types.DeleteAppOutput),
 		response:        &aws.Response{Request: r.Request},
 	}
 
@@ -112,7 +75,7 @@ func (r DeleteAppRequest) Send(ctx context.Context) (*DeleteAppResponse, error) 
 // DeleteAppResponse is the response type for the
 // DeleteApp API operation.
 type DeleteAppResponse struct {
-	*DeleteAppOutput
+	*types.DeleteAppOutput
 
 	response *aws.Response
 }

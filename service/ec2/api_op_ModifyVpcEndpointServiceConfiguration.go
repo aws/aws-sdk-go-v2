@@ -6,65 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-type ModifyVpcEndpointServiceConfigurationInput struct {
-	_ struct{} `type:"structure"`
-
-	// Indicate whether requests to create an endpoint to your service must be accepted.
-	AcceptanceRequired *bool `type:"boolean"`
-
-	// The Amazon Resource Names (ARNs) of Network Load Balancers to add to your
-	// service configuration.
-	AddNetworkLoadBalancerArns []string `locationName:"AddNetworkLoadBalancerArn" locationNameList:"item" type:"list"`
-
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have
-	// the required permissions, the error response is DryRunOperation. Otherwise,
-	// it is UnauthorizedOperation.
-	DryRun *bool `type:"boolean"`
-
-	// The Amazon Resource Names (ARNs) of Network Load Balancers to remove from
-	// your service configuration.
-	RemoveNetworkLoadBalancerArns []string `locationName:"RemoveNetworkLoadBalancerArn" locationNameList:"item" type:"list"`
-
-	// The ID of the service.
-	//
-	// ServiceId is a required field
-	ServiceId *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s ModifyVpcEndpointServiceConfigurationInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ModifyVpcEndpointServiceConfigurationInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ModifyVpcEndpointServiceConfigurationInput"}
-
-	if s.ServiceId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ServiceId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ModifyVpcEndpointServiceConfigurationOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Returns true if the request succeeds; otherwise, it returns an error.
-	Return *bool `locationName:"return" type:"boolean"`
-}
-
-// String returns the string representation
-func (s ModifyVpcEndpointServiceConfigurationOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opModifyVpcEndpointServiceConfiguration = "ModifyVpcEndpointServiceConfiguration"
 
@@ -84,7 +27,7 @@ const opModifyVpcEndpointServiceConfiguration = "ModifyVpcEndpointServiceConfigu
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyVpcEndpointServiceConfiguration
-func (c *Client) ModifyVpcEndpointServiceConfigurationRequest(input *ModifyVpcEndpointServiceConfigurationInput) ModifyVpcEndpointServiceConfigurationRequest {
+func (c *Client) ModifyVpcEndpointServiceConfigurationRequest(input *types.ModifyVpcEndpointServiceConfigurationInput) ModifyVpcEndpointServiceConfigurationRequest {
 	op := &aws.Operation{
 		Name:       opModifyVpcEndpointServiceConfiguration,
 		HTTPMethod: "POST",
@@ -92,10 +35,10 @@ func (c *Client) ModifyVpcEndpointServiceConfigurationRequest(input *ModifyVpcEn
 	}
 
 	if input == nil {
-		input = &ModifyVpcEndpointServiceConfigurationInput{}
+		input = &types.ModifyVpcEndpointServiceConfigurationInput{}
 	}
 
-	req := c.newRequest(op, input, &ModifyVpcEndpointServiceConfigurationOutput{})
+	req := c.newRequest(op, input, &types.ModifyVpcEndpointServiceConfigurationOutput{})
 	return ModifyVpcEndpointServiceConfigurationRequest{Request: req, Input: input, Copy: c.ModifyVpcEndpointServiceConfigurationRequest}
 }
 
@@ -103,8 +46,8 @@ func (c *Client) ModifyVpcEndpointServiceConfigurationRequest(input *ModifyVpcEn
 // ModifyVpcEndpointServiceConfiguration API operation.
 type ModifyVpcEndpointServiceConfigurationRequest struct {
 	*aws.Request
-	Input *ModifyVpcEndpointServiceConfigurationInput
-	Copy  func(*ModifyVpcEndpointServiceConfigurationInput) ModifyVpcEndpointServiceConfigurationRequest
+	Input *types.ModifyVpcEndpointServiceConfigurationInput
+	Copy  func(*types.ModifyVpcEndpointServiceConfigurationInput) ModifyVpcEndpointServiceConfigurationRequest
 }
 
 // Send marshals and sends the ModifyVpcEndpointServiceConfiguration API request.
@@ -116,7 +59,7 @@ func (r ModifyVpcEndpointServiceConfigurationRequest) Send(ctx context.Context) 
 	}
 
 	resp := &ModifyVpcEndpointServiceConfigurationResponse{
-		ModifyVpcEndpointServiceConfigurationOutput: r.Request.Data.(*ModifyVpcEndpointServiceConfigurationOutput),
+		ModifyVpcEndpointServiceConfigurationOutput: r.Request.Data.(*types.ModifyVpcEndpointServiceConfigurationOutput),
 		response: &aws.Response{Request: r.Request},
 	}
 
@@ -126,7 +69,7 @@ func (r ModifyVpcEndpointServiceConfigurationRequest) Send(ctx context.Context) 
 // ModifyVpcEndpointServiceConfigurationResponse is the response type for the
 // ModifyVpcEndpointServiceConfiguration API operation.
 type ModifyVpcEndpointServiceConfigurationResponse struct {
-	*ModifyVpcEndpointServiceConfigurationOutput
+	*types.ModifyVpcEndpointServiceConfigurationOutput
 
 	response *aws.Response
 }

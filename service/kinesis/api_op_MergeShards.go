@@ -6,75 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
+	"github.com/aws/aws-sdk-go-v2/service/kinesis/types"
 )
-
-// Represents the input for MergeShards.
-type MergeShardsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The shard ID of the adjacent shard for the merge.
-	//
-	// AdjacentShardToMerge is a required field
-	AdjacentShardToMerge *string `min:"1" type:"string" required:"true"`
-
-	// The shard ID of the shard to combine with the adjacent shard for the merge.
-	//
-	// ShardToMerge is a required field
-	ShardToMerge *string `min:"1" type:"string" required:"true"`
-
-	// The name of the stream for the merge.
-	//
-	// StreamName is a required field
-	StreamName *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s MergeShardsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *MergeShardsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "MergeShardsInput"}
-
-	if s.AdjacentShardToMerge == nil {
-		invalidParams.Add(aws.NewErrParamRequired("AdjacentShardToMerge"))
-	}
-	if s.AdjacentShardToMerge != nil && len(*s.AdjacentShardToMerge) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("AdjacentShardToMerge", 1))
-	}
-
-	if s.ShardToMerge == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ShardToMerge"))
-	}
-	if s.ShardToMerge != nil && len(*s.ShardToMerge) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ShardToMerge", 1))
-	}
-
-	if s.StreamName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("StreamName"))
-	}
-	if s.StreamName != nil && len(*s.StreamName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("StreamName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type MergeShardsOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s MergeShardsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opMergeShards = "MergeShards"
 
@@ -126,7 +61,7 @@ const opMergeShards = "MergeShards"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/MergeShards
-func (c *Client) MergeShardsRequest(input *MergeShardsInput) MergeShardsRequest {
+func (c *Client) MergeShardsRequest(input *types.MergeShardsInput) MergeShardsRequest {
 	op := &aws.Operation{
 		Name:       opMergeShards,
 		HTTPMethod: "POST",
@@ -134,10 +69,10 @@ func (c *Client) MergeShardsRequest(input *MergeShardsInput) MergeShardsRequest 
 	}
 
 	if input == nil {
-		input = &MergeShardsInput{}
+		input = &types.MergeShardsInput{}
 	}
 
-	req := c.newRequest(op, input, &MergeShardsOutput{})
+	req := c.newRequest(op, input, &types.MergeShardsOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return MergeShardsRequest{Request: req, Input: input, Copy: c.MergeShardsRequest}
@@ -147,8 +82,8 @@ func (c *Client) MergeShardsRequest(input *MergeShardsInput) MergeShardsRequest 
 // MergeShards API operation.
 type MergeShardsRequest struct {
 	*aws.Request
-	Input *MergeShardsInput
-	Copy  func(*MergeShardsInput) MergeShardsRequest
+	Input *types.MergeShardsInput
+	Copy  func(*types.MergeShardsInput) MergeShardsRequest
 }
 
 // Send marshals and sends the MergeShards API request.
@@ -160,7 +95,7 @@ func (r MergeShardsRequest) Send(ctx context.Context) (*MergeShardsResponse, err
 	}
 
 	resp := &MergeShardsResponse{
-		MergeShardsOutput: r.Request.Data.(*MergeShardsOutput),
+		MergeShardsOutput: r.Request.Data.(*types.MergeShardsOutput),
 		response:          &aws.Response{Request: r.Request},
 	}
 
@@ -170,7 +105,7 @@ func (r MergeShardsRequest) Send(ctx context.Context) (*MergeShardsResponse, err
 // MergeShardsResponse is the response type for the
 // MergeShards API operation.
 type MergeShardsResponse struct {
-	*MergeShardsOutput
+	*types.MergeShardsOutput
 
 	response *aws.Response
 }

@@ -6,63 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
+	"github.com/aws/aws-sdk-go-v2/service/codepipeline/types"
 )
-
-// Represents the input of a PutJobFailureResult action.
-type PutJobFailureResultInput struct {
-	_ struct{} `type:"structure"`
-
-	// The details about the failure of a job.
-	//
-	// FailureDetails is a required field
-	FailureDetails *FailureDetails `locationName:"failureDetails" type:"structure" required:"true"`
-
-	// The unique system-generated ID of the job that failed. This is the same ID
-	// returned from PollForJobs.
-	//
-	// JobId is a required field
-	JobId *string `locationName:"jobId" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s PutJobFailureResultInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *PutJobFailureResultInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "PutJobFailureResultInput"}
-
-	if s.FailureDetails == nil {
-		invalidParams.Add(aws.NewErrParamRequired("FailureDetails"))
-	}
-
-	if s.JobId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("JobId"))
-	}
-	if s.FailureDetails != nil {
-		if err := s.FailureDetails.Validate(); err != nil {
-			invalidParams.AddNested("FailureDetails", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type PutJobFailureResultOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s PutJobFailureResultOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opPutJobFailureResult = "PutJobFailureResult"
 
@@ -80,7 +27,7 @@ const opPutJobFailureResult = "PutJobFailureResult"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/PutJobFailureResult
-func (c *Client) PutJobFailureResultRequest(input *PutJobFailureResultInput) PutJobFailureResultRequest {
+func (c *Client) PutJobFailureResultRequest(input *types.PutJobFailureResultInput) PutJobFailureResultRequest {
 	op := &aws.Operation{
 		Name:       opPutJobFailureResult,
 		HTTPMethod: "POST",
@@ -88,10 +35,10 @@ func (c *Client) PutJobFailureResultRequest(input *PutJobFailureResultInput) Put
 	}
 
 	if input == nil {
-		input = &PutJobFailureResultInput{}
+		input = &types.PutJobFailureResultInput{}
 	}
 
-	req := c.newRequest(op, input, &PutJobFailureResultOutput{})
+	req := c.newRequest(op, input, &types.PutJobFailureResultOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return PutJobFailureResultRequest{Request: req, Input: input, Copy: c.PutJobFailureResultRequest}
@@ -101,8 +48,8 @@ func (c *Client) PutJobFailureResultRequest(input *PutJobFailureResultInput) Put
 // PutJobFailureResult API operation.
 type PutJobFailureResultRequest struct {
 	*aws.Request
-	Input *PutJobFailureResultInput
-	Copy  func(*PutJobFailureResultInput) PutJobFailureResultRequest
+	Input *types.PutJobFailureResultInput
+	Copy  func(*types.PutJobFailureResultInput) PutJobFailureResultRequest
 }
 
 // Send marshals and sends the PutJobFailureResult API request.
@@ -114,7 +61,7 @@ func (r PutJobFailureResultRequest) Send(ctx context.Context) (*PutJobFailureRes
 	}
 
 	resp := &PutJobFailureResultResponse{
-		PutJobFailureResultOutput: r.Request.Data.(*PutJobFailureResultOutput),
+		PutJobFailureResultOutput: r.Request.Data.(*types.PutJobFailureResultOutput),
 		response:                  &aws.Response{Request: r.Request},
 	}
 
@@ -124,7 +71,7 @@ func (r PutJobFailureResultRequest) Send(ctx context.Context) (*PutJobFailureRes
 // PutJobFailureResultResponse is the response type for the
 // PutJobFailureResult API operation.
 type PutJobFailureResultResponse struct {
-	*PutJobFailureResultOutput
+	*types.PutJobFailureResultOutput
 
 	response *aws.Response
 }

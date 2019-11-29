@@ -6,70 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/iam/types"
 )
-
-type UpdateRoleInput struct {
-	_ struct{} `type:"structure"`
-
-	// The new description that you want to apply to the specified role.
-	Description *string `type:"string"`
-
-	// The maximum session duration (in seconds) that you want to set for the specified
-	// role. If you do not specify a value for this setting, the default maximum
-	// of one hour is applied. This setting can have a value from 1 hour to 12 hours.
-	//
-	// Anyone who assumes the role from the AWS CLI or API can use the DurationSeconds
-	// API parameter or the duration-seconds CLI parameter to request a longer session.
-	// The MaxSessionDuration setting determines the maximum duration that can be
-	// requested using the DurationSeconds parameter. If users don't specify a value
-	// for the DurationSeconds parameter, their security credentials are valid for
-	// one hour by default. This applies when you use the AssumeRole* API operations
-	// or the assume-role* CLI operations but does not apply when you use those
-	// operations to create a console URL. For more information, see Using IAM Roles
-	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use.html) in the
-	// IAM User Guide.
-	MaxSessionDuration *int64 `min:"3600" type:"integer"`
-
-	// The name of the role that you want to modify.
-	//
-	// RoleName is a required field
-	RoleName *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s UpdateRoleInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateRoleInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateRoleInput"}
-	if s.MaxSessionDuration != nil && *s.MaxSessionDuration < 3600 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxSessionDuration", 3600))
-	}
-
-	if s.RoleName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("RoleName"))
-	}
-	if s.RoleName != nil && len(*s.RoleName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("RoleName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type UpdateRoleOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s UpdateRoleOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opUpdateRole = "UpdateRole"
 
@@ -86,7 +24,7 @@ const opUpdateRole = "UpdateRole"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/UpdateRole
-func (c *Client) UpdateRoleRequest(input *UpdateRoleInput) UpdateRoleRequest {
+func (c *Client) UpdateRoleRequest(input *types.UpdateRoleInput) UpdateRoleRequest {
 	op := &aws.Operation{
 		Name:       opUpdateRole,
 		HTTPMethod: "POST",
@@ -94,10 +32,10 @@ func (c *Client) UpdateRoleRequest(input *UpdateRoleInput) UpdateRoleRequest {
 	}
 
 	if input == nil {
-		input = &UpdateRoleInput{}
+		input = &types.UpdateRoleInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateRoleOutput{})
+	req := c.newRequest(op, input, &types.UpdateRoleOutput{})
 	return UpdateRoleRequest{Request: req, Input: input, Copy: c.UpdateRoleRequest}
 }
 
@@ -105,8 +43,8 @@ func (c *Client) UpdateRoleRequest(input *UpdateRoleInput) UpdateRoleRequest {
 // UpdateRole API operation.
 type UpdateRoleRequest struct {
 	*aws.Request
-	Input *UpdateRoleInput
-	Copy  func(*UpdateRoleInput) UpdateRoleRequest
+	Input *types.UpdateRoleInput
+	Copy  func(*types.UpdateRoleInput) UpdateRoleRequest
 }
 
 // Send marshals and sends the UpdateRole API request.
@@ -118,7 +56,7 @@ func (r UpdateRoleRequest) Send(ctx context.Context) (*UpdateRoleResponse, error
 	}
 
 	resp := &UpdateRoleResponse{
-		UpdateRoleOutput: r.Request.Data.(*UpdateRoleOutput),
+		UpdateRoleOutput: r.Request.Data.(*types.UpdateRoleOutput),
 		response:         &aws.Response{Request: r.Request},
 	}
 
@@ -128,7 +66,7 @@ func (r UpdateRoleRequest) Send(ctx context.Context) (*UpdateRoleResponse, error
 // UpdateRoleResponse is the response type for the
 // UpdateRole API operation.
 type UpdateRoleResponse struct {
-	*UpdateRoleOutput
+	*types.UpdateRoleOutput
 
 	response *aws.Response
 }

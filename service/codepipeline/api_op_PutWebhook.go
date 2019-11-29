@@ -4,71 +4,10 @@ package codepipeline
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/codepipeline/types"
 )
-
-type PutWebhookInput struct {
-	_ struct{} `type:"structure"`
-
-	// The tags for the webhook.
-	Tags []Tag `locationName:"tags" type:"list"`
-
-	// The detail provided in an input file to create the webhook, such as the webhook
-	// name, the pipeline name, and the action name. Give the webhook a unique name
-	// that helps you identify it. You might name the webhook after the pipeline
-	// and action it targets so that you can easily recognize what it's used for
-	// later.
-	//
-	// Webhook is a required field
-	Webhook *WebhookDefinition `locationName:"webhook" type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s PutWebhookInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *PutWebhookInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "PutWebhookInput"}
-
-	if s.Webhook == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Webhook"))
-	}
-	if s.Tags != nil {
-		for i, v := range s.Tags {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-	if s.Webhook != nil {
-		if err := s.Webhook.Validate(); err != nil {
-			invalidParams.AddNested("Webhook", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type PutWebhookOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The detail returned from creating the webhook, such as the webhook name,
-	// webhook URL, and webhook ARN.
-	Webhook *ListWebhookItem `locationName:"webhook" type:"structure"`
-}
-
-// String returns the string representation
-func (s PutWebhookOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opPutWebhook = "PutWebhook"
 
@@ -92,7 +31,7 @@ const opPutWebhook = "PutWebhook"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/PutWebhook
-func (c *Client) PutWebhookRequest(input *PutWebhookInput) PutWebhookRequest {
+func (c *Client) PutWebhookRequest(input *types.PutWebhookInput) PutWebhookRequest {
 	op := &aws.Operation{
 		Name:       opPutWebhook,
 		HTTPMethod: "POST",
@@ -100,10 +39,10 @@ func (c *Client) PutWebhookRequest(input *PutWebhookInput) PutWebhookRequest {
 	}
 
 	if input == nil {
-		input = &PutWebhookInput{}
+		input = &types.PutWebhookInput{}
 	}
 
-	req := c.newRequest(op, input, &PutWebhookOutput{})
+	req := c.newRequest(op, input, &types.PutWebhookOutput{})
 	return PutWebhookRequest{Request: req, Input: input, Copy: c.PutWebhookRequest}
 }
 
@@ -111,8 +50,8 @@ func (c *Client) PutWebhookRequest(input *PutWebhookInput) PutWebhookRequest {
 // PutWebhook API operation.
 type PutWebhookRequest struct {
 	*aws.Request
-	Input *PutWebhookInput
-	Copy  func(*PutWebhookInput) PutWebhookRequest
+	Input *types.PutWebhookInput
+	Copy  func(*types.PutWebhookInput) PutWebhookRequest
 }
 
 // Send marshals and sends the PutWebhook API request.
@@ -124,7 +63,7 @@ func (r PutWebhookRequest) Send(ctx context.Context) (*PutWebhookResponse, error
 	}
 
 	resp := &PutWebhookResponse{
-		PutWebhookOutput: r.Request.Data.(*PutWebhookOutput),
+		PutWebhookOutput: r.Request.Data.(*types.PutWebhookOutput),
 		response:         &aws.Response{Request: r.Request},
 	}
 
@@ -134,7 +73,7 @@ func (r PutWebhookRequest) Send(ctx context.Context) (*PutWebhookResponse, error
 // PutWebhookResponse is the response type for the
 // PutWebhook API operation.
 type PutWebhookResponse struct {
-	*PutWebhookOutput
+	*types.PutWebhookOutput
 
 	response *aws.Response
 }

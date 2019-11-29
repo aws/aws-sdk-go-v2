@@ -10,6 +10,7 @@ package mobileiface
 
 import (
 	"github.com/aws/aws-sdk-go-v2/service/mobile"
+	"github.com/aws/aws-sdk-go-v2/service/mobile/types"
 )
 
 // ClientAPI provides an interface to enable mocking the
@@ -43,7 +44,7 @@ import (
 //    type mockClientClient struct {
 //        mobileiface.ClientPI
 //    }
-//    func (m *mockClientClient) CreateProject(input *mobile.CreateProjectInput) (*mobile.CreateProjectOutput, error) {
+//    func (m *mockClientClient) CreateProject(input *types.CreateProjectInput) (*types.CreateProjectOutput, error) {
 //        // mock response/functionality
 //    }
 //
@@ -61,23 +62,23 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type ClientAPI interface {
-	CreateProjectRequest(*mobile.CreateProjectInput) mobile.CreateProjectRequest
+	CreateProjectRequest(*types.CreateProjectInput) mobile.CreateProjectRequest
 
-	DeleteProjectRequest(*mobile.DeleteProjectInput) mobile.DeleteProjectRequest
+	DeleteProjectRequest(*types.DeleteProjectInput) mobile.DeleteProjectRequest
 
-	DescribeBundleRequest(*mobile.DescribeBundleInput) mobile.DescribeBundleRequest
+	DescribeBundleRequest(*types.DescribeBundleInput) mobile.DescribeBundleRequest
 
-	DescribeProjectRequest(*mobile.DescribeProjectInput) mobile.DescribeProjectRequest
+	DescribeProjectRequest(*types.DescribeProjectInput) mobile.DescribeProjectRequest
 
-	ExportBundleRequest(*mobile.ExportBundleInput) mobile.ExportBundleRequest
+	ExportBundleRequest(*types.ExportBundleInput) mobile.ExportBundleRequest
 
-	ExportProjectRequest(*mobile.ExportProjectInput) mobile.ExportProjectRequest
+	ExportProjectRequest(*types.ExportProjectInput) mobile.ExportProjectRequest
 
-	ListBundlesRequest(*mobile.ListBundlesInput) mobile.ListBundlesRequest
+	ListBundlesRequest(*types.ListBundlesInput) mobile.ListBundlesRequest
 
-	ListProjectsRequest(*mobile.ListProjectsInput) mobile.ListProjectsRequest
+	ListProjectsRequest(*types.ListProjectsInput) mobile.ListProjectsRequest
 
-	UpdateProjectRequest(*mobile.UpdateProjectInput) mobile.UpdateProjectRequest
+	UpdateProjectRequest(*types.UpdateProjectInput) mobile.UpdateProjectRequest
 }
 
 var _ ClientAPI = (*mobile.Client)(nil)

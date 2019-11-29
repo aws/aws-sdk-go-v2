@@ -6,51 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/glue/types"
 )
-
-type StartWorkflowRunInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the workflow to start.
-	//
-	// Name is a required field
-	Name *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s StartWorkflowRunInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *StartWorkflowRunInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "StartWorkflowRunInput"}
-
-	if s.Name == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Name"))
-	}
-	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type StartWorkflowRunOutput struct {
-	_ struct{} `type:"structure"`
-
-	// An Id for the new run.
-	RunId *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s StartWorkflowRunOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opStartWorkflowRun = "StartWorkflowRun"
 
@@ -67,7 +24,7 @@ const opStartWorkflowRun = "StartWorkflowRun"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/StartWorkflowRun
-func (c *Client) StartWorkflowRunRequest(input *StartWorkflowRunInput) StartWorkflowRunRequest {
+func (c *Client) StartWorkflowRunRequest(input *types.StartWorkflowRunInput) StartWorkflowRunRequest {
 	op := &aws.Operation{
 		Name:       opStartWorkflowRun,
 		HTTPMethod: "POST",
@@ -75,10 +32,10 @@ func (c *Client) StartWorkflowRunRequest(input *StartWorkflowRunInput) StartWork
 	}
 
 	if input == nil {
-		input = &StartWorkflowRunInput{}
+		input = &types.StartWorkflowRunInput{}
 	}
 
-	req := c.newRequest(op, input, &StartWorkflowRunOutput{})
+	req := c.newRequest(op, input, &types.StartWorkflowRunOutput{})
 	return StartWorkflowRunRequest{Request: req, Input: input, Copy: c.StartWorkflowRunRequest}
 }
 
@@ -86,8 +43,8 @@ func (c *Client) StartWorkflowRunRequest(input *StartWorkflowRunInput) StartWork
 // StartWorkflowRun API operation.
 type StartWorkflowRunRequest struct {
 	*aws.Request
-	Input *StartWorkflowRunInput
-	Copy  func(*StartWorkflowRunInput) StartWorkflowRunRequest
+	Input *types.StartWorkflowRunInput
+	Copy  func(*types.StartWorkflowRunInput) StartWorkflowRunRequest
 }
 
 // Send marshals and sends the StartWorkflowRun API request.
@@ -99,7 +56,7 @@ func (r StartWorkflowRunRequest) Send(ctx context.Context) (*StartWorkflowRunRes
 	}
 
 	resp := &StartWorkflowRunResponse{
-		StartWorkflowRunOutput: r.Request.Data.(*StartWorkflowRunOutput),
+		StartWorkflowRunOutput: r.Request.Data.(*types.StartWorkflowRunOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -109,7 +66,7 @@ func (r StartWorkflowRunRequest) Send(ctx context.Context) (*StartWorkflowRunRes
 // StartWorkflowRunResponse is the response type for the
 // StartWorkflowRun API operation.
 type StartWorkflowRunResponse struct {
-	*StartWorkflowRunOutput
+	*types.StartWorkflowRunOutput
 
 	response *aws.Response
 }

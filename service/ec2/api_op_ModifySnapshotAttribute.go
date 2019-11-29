@@ -6,70 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/ec2query"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-// Contains the parameters for ModifySnapshotAttribute.
-type ModifySnapshotAttributeInput struct {
-	_ struct{} `type:"structure"`
-
-	// The snapshot attribute to modify. Only volume creation permissions can be
-	// modified.
-	Attribute SnapshotAttributeName `type:"string" enum:"true"`
-
-	// A JSON representation of the snapshot attribute modification.
-	CreateVolumePermission *CreateVolumePermissionModifications `type:"structure"`
-
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have
-	// the required permissions, the error response is DryRunOperation. Otherwise,
-	// it is UnauthorizedOperation.
-	DryRun *bool `locationName:"dryRun" type:"boolean"`
-
-	// The group to modify for the snapshot.
-	GroupNames []string `locationName:"UserGroup" locationNameList:"GroupName" type:"list"`
-
-	// The type of operation to perform to the attribute.
-	OperationType OperationType `type:"string" enum:"true"`
-
-	// The ID of the snapshot.
-	//
-	// SnapshotId is a required field
-	SnapshotId *string `type:"string" required:"true"`
-
-	// The account ID to modify for the snapshot.
-	UserIds []string `locationName:"UserId" locationNameList:"UserId" type:"list"`
-}
-
-// String returns the string representation
-func (s ModifySnapshotAttributeInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ModifySnapshotAttributeInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ModifySnapshotAttributeInput"}
-
-	if s.SnapshotId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("SnapshotId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ModifySnapshotAttributeOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s ModifySnapshotAttributeOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opModifySnapshotAttribute = "ModifySnapshotAttribute"
 
@@ -98,7 +38,7 @@ const opModifySnapshotAttribute = "ModifySnapshotAttribute"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifySnapshotAttribute
-func (c *Client) ModifySnapshotAttributeRequest(input *ModifySnapshotAttributeInput) ModifySnapshotAttributeRequest {
+func (c *Client) ModifySnapshotAttributeRequest(input *types.ModifySnapshotAttributeInput) ModifySnapshotAttributeRequest {
 	op := &aws.Operation{
 		Name:       opModifySnapshotAttribute,
 		HTTPMethod: "POST",
@@ -106,10 +46,10 @@ func (c *Client) ModifySnapshotAttributeRequest(input *ModifySnapshotAttributeIn
 	}
 
 	if input == nil {
-		input = &ModifySnapshotAttributeInput{}
+		input = &types.ModifySnapshotAttributeInput{}
 	}
 
-	req := c.newRequest(op, input, &ModifySnapshotAttributeOutput{})
+	req := c.newRequest(op, input, &types.ModifySnapshotAttributeOutput{})
 	req.Handlers.Unmarshal.Remove(ec2query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return ModifySnapshotAttributeRequest{Request: req, Input: input, Copy: c.ModifySnapshotAttributeRequest}
@@ -119,8 +59,8 @@ func (c *Client) ModifySnapshotAttributeRequest(input *ModifySnapshotAttributeIn
 // ModifySnapshotAttribute API operation.
 type ModifySnapshotAttributeRequest struct {
 	*aws.Request
-	Input *ModifySnapshotAttributeInput
-	Copy  func(*ModifySnapshotAttributeInput) ModifySnapshotAttributeRequest
+	Input *types.ModifySnapshotAttributeInput
+	Copy  func(*types.ModifySnapshotAttributeInput) ModifySnapshotAttributeRequest
 }
 
 // Send marshals and sends the ModifySnapshotAttribute API request.
@@ -132,7 +72,7 @@ func (r ModifySnapshotAttributeRequest) Send(ctx context.Context) (*ModifySnapsh
 	}
 
 	resp := &ModifySnapshotAttributeResponse{
-		ModifySnapshotAttributeOutput: r.Request.Data.(*ModifySnapshotAttributeOutput),
+		ModifySnapshotAttributeOutput: r.Request.Data.(*types.ModifySnapshotAttributeOutput),
 		response:                      &aws.Response{Request: r.Request},
 	}
 
@@ -142,7 +82,7 @@ func (r ModifySnapshotAttributeRequest) Send(ctx context.Context) (*ModifySnapsh
 // ModifySnapshotAttributeResponse is the response type for the
 // ModifySnapshotAttribute API operation.
 type ModifySnapshotAttributeResponse struct {
-	*ModifySnapshotAttributeOutput
+	*types.ModifySnapshotAttributeOutput
 
 	response *aws.Response
 }

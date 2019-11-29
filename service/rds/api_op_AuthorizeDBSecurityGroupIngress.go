@@ -6,71 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/rds/types"
 )
-
-type AuthorizeDBSecurityGroupIngressInput struct {
-	_ struct{} `type:"structure"`
-
-	// The IP range to authorize.
-	CIDRIP *string `type:"string"`
-
-	// The name of the DB security group to add authorization to.
-	//
-	// DBSecurityGroupName is a required field
-	DBSecurityGroupName *string `type:"string" required:"true"`
-
-	// Id of the EC2 security group to authorize. For VPC DB security groups, EC2SecurityGroupId
-	// must be provided. Otherwise, EC2SecurityGroupOwnerId and either EC2SecurityGroupName
-	// or EC2SecurityGroupId must be provided.
-	EC2SecurityGroupId *string `type:"string"`
-
-	// Name of the EC2 security group to authorize. For VPC DB security groups,
-	// EC2SecurityGroupId must be provided. Otherwise, EC2SecurityGroupOwnerId and
-	// either EC2SecurityGroupName or EC2SecurityGroupId must be provided.
-	EC2SecurityGroupName *string `type:"string"`
-
-	// AWS account number of the owner of the EC2 security group specified in the
-	// EC2SecurityGroupName parameter. The AWS Access Key ID is not an acceptable
-	// value. For VPC DB security groups, EC2SecurityGroupId must be provided. Otherwise,
-	// EC2SecurityGroupOwnerId and either EC2SecurityGroupName or EC2SecurityGroupId
-	// must be provided.
-	EC2SecurityGroupOwnerId *string `type:"string"`
-}
-
-// String returns the string representation
-func (s AuthorizeDBSecurityGroupIngressInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *AuthorizeDBSecurityGroupIngressInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "AuthorizeDBSecurityGroupIngressInput"}
-
-	if s.DBSecurityGroupName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DBSecurityGroupName"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type AuthorizeDBSecurityGroupIngressOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Contains the details for an Amazon RDS DB security group.
-	//
-	// This data type is used as a response element in the DescribeDBSecurityGroups
-	// action.
-	DBSecurityGroup *DBSecurityGroup `type:"structure"`
-}
-
-// String returns the string representation
-func (s AuthorizeDBSecurityGroupIngressOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opAuthorizeDBSecurityGroupIngress = "AuthorizeDBSecurityGroupIngress"
 
@@ -99,7 +36,7 @@ const opAuthorizeDBSecurityGroupIngress = "AuthorizeDBSecurityGroupIngress"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/AuthorizeDBSecurityGroupIngress
-func (c *Client) AuthorizeDBSecurityGroupIngressRequest(input *AuthorizeDBSecurityGroupIngressInput) AuthorizeDBSecurityGroupIngressRequest {
+func (c *Client) AuthorizeDBSecurityGroupIngressRequest(input *types.AuthorizeDBSecurityGroupIngressInput) AuthorizeDBSecurityGroupIngressRequest {
 	op := &aws.Operation{
 		Name:       opAuthorizeDBSecurityGroupIngress,
 		HTTPMethod: "POST",
@@ -107,10 +44,10 @@ func (c *Client) AuthorizeDBSecurityGroupIngressRequest(input *AuthorizeDBSecuri
 	}
 
 	if input == nil {
-		input = &AuthorizeDBSecurityGroupIngressInput{}
+		input = &types.AuthorizeDBSecurityGroupIngressInput{}
 	}
 
-	req := c.newRequest(op, input, &AuthorizeDBSecurityGroupIngressOutput{})
+	req := c.newRequest(op, input, &types.AuthorizeDBSecurityGroupIngressOutput{})
 	return AuthorizeDBSecurityGroupIngressRequest{Request: req, Input: input, Copy: c.AuthorizeDBSecurityGroupIngressRequest}
 }
 
@@ -118,8 +55,8 @@ func (c *Client) AuthorizeDBSecurityGroupIngressRequest(input *AuthorizeDBSecuri
 // AuthorizeDBSecurityGroupIngress API operation.
 type AuthorizeDBSecurityGroupIngressRequest struct {
 	*aws.Request
-	Input *AuthorizeDBSecurityGroupIngressInput
-	Copy  func(*AuthorizeDBSecurityGroupIngressInput) AuthorizeDBSecurityGroupIngressRequest
+	Input *types.AuthorizeDBSecurityGroupIngressInput
+	Copy  func(*types.AuthorizeDBSecurityGroupIngressInput) AuthorizeDBSecurityGroupIngressRequest
 }
 
 // Send marshals and sends the AuthorizeDBSecurityGroupIngress API request.
@@ -131,7 +68,7 @@ func (r AuthorizeDBSecurityGroupIngressRequest) Send(ctx context.Context) (*Auth
 	}
 
 	resp := &AuthorizeDBSecurityGroupIngressResponse{
-		AuthorizeDBSecurityGroupIngressOutput: r.Request.Data.(*AuthorizeDBSecurityGroupIngressOutput),
+		AuthorizeDBSecurityGroupIngressOutput: r.Request.Data.(*types.AuthorizeDBSecurityGroupIngressOutput),
 		response:                              &aws.Response{Request: r.Request},
 	}
 
@@ -141,7 +78,7 @@ func (r AuthorizeDBSecurityGroupIngressRequest) Send(ctx context.Context) (*Auth
 // AuthorizeDBSecurityGroupIngressResponse is the response type for the
 // AuthorizeDBSecurityGroupIngress API operation.
 type AuthorizeDBSecurityGroupIngressResponse struct {
-	*AuthorizeDBSecurityGroupIngressOutput
+	*types.AuthorizeDBSecurityGroupIngressOutput
 
 	response *aws.Response
 }

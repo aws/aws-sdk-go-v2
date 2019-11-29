@@ -6,53 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/query"
+	"github.com/aws/aws-sdk-go-v2/service/redshift/types"
 )
-
-type DeleteClusterParameterGroupInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the parameter group to be deleted.
-	//
-	// Constraints:
-	//
-	//    * Must be the name of an existing cluster parameter group.
-	//
-	//    * Cannot delete a default cluster parameter group.
-	//
-	// ParameterGroupName is a required field
-	ParameterGroupName *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteClusterParameterGroupInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteClusterParameterGroupInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteClusterParameterGroupInput"}
-
-	if s.ParameterGroupName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ParameterGroupName"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteClusterParameterGroupOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteClusterParameterGroupOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteClusterParameterGroup = "DeleteClusterParameterGroup"
 
@@ -71,7 +28,7 @@ const opDeleteClusterParameterGroup = "DeleteClusterParameterGroup"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DeleteClusterParameterGroup
-func (c *Client) DeleteClusterParameterGroupRequest(input *DeleteClusterParameterGroupInput) DeleteClusterParameterGroupRequest {
+func (c *Client) DeleteClusterParameterGroupRequest(input *types.DeleteClusterParameterGroupInput) DeleteClusterParameterGroupRequest {
 	op := &aws.Operation{
 		Name:       opDeleteClusterParameterGroup,
 		HTTPMethod: "POST",
@@ -79,10 +36,10 @@ func (c *Client) DeleteClusterParameterGroupRequest(input *DeleteClusterParamete
 	}
 
 	if input == nil {
-		input = &DeleteClusterParameterGroupInput{}
+		input = &types.DeleteClusterParameterGroupInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteClusterParameterGroupOutput{})
+	req := c.newRequest(op, input, &types.DeleteClusterParameterGroupOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return DeleteClusterParameterGroupRequest{Request: req, Input: input, Copy: c.DeleteClusterParameterGroupRequest}
@@ -92,8 +49,8 @@ func (c *Client) DeleteClusterParameterGroupRequest(input *DeleteClusterParamete
 // DeleteClusterParameterGroup API operation.
 type DeleteClusterParameterGroupRequest struct {
 	*aws.Request
-	Input *DeleteClusterParameterGroupInput
-	Copy  func(*DeleteClusterParameterGroupInput) DeleteClusterParameterGroupRequest
+	Input *types.DeleteClusterParameterGroupInput
+	Copy  func(*types.DeleteClusterParameterGroupInput) DeleteClusterParameterGroupRequest
 }
 
 // Send marshals and sends the DeleteClusterParameterGroup API request.
@@ -105,7 +62,7 @@ func (r DeleteClusterParameterGroupRequest) Send(ctx context.Context) (*DeleteCl
 	}
 
 	resp := &DeleteClusterParameterGroupResponse{
-		DeleteClusterParameterGroupOutput: r.Request.Data.(*DeleteClusterParameterGroupOutput),
+		DeleteClusterParameterGroupOutput: r.Request.Data.(*types.DeleteClusterParameterGroupOutput),
 		response:                          &aws.Response{Request: r.Request},
 	}
 
@@ -115,7 +72,7 @@ func (r DeleteClusterParameterGroupRequest) Send(ctx context.Context) (*DeleteCl
 // DeleteClusterParameterGroupResponse is the response type for the
 // DeleteClusterParameterGroup API operation.
 type DeleteClusterParameterGroupResponse struct {
-	*DeleteClusterParameterGroupOutput
+	*types.DeleteClusterParameterGroupOutput
 
 	response *aws.Response
 }

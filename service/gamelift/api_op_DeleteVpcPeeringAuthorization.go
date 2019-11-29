@@ -6,67 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/gamelift/types"
 )
-
-// Represents the input for a request action.
-type DeleteVpcPeeringAuthorizationInput struct {
-	_ struct{} `type:"structure"`
-
-	// Unique identifier for the AWS account that you use to manage your Amazon
-	// GameLift fleet. You can find your Account ID in the AWS Management Console
-	// under account settings.
-	//
-	// GameLiftAwsAccountId is a required field
-	GameLiftAwsAccountId *string `min:"1" type:"string" required:"true"`
-
-	// Unique identifier for a VPC with resources to be accessed by your Amazon
-	// GameLift fleet. The VPC must be in the same region where your fleet is deployed.
-	// Look up a VPC ID using the VPC Dashboard (https://console.aws.amazon.com/vpc/)
-	// in the AWS Management Console. Learn more about VPC peering in VPC Peering
-	// with Amazon GameLift Fleets (https://docs.aws.amazon.com/gamelift/latest/developerguide/vpc-peering.html).
-	//
-	// PeerVpcId is a required field
-	PeerVpcId *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteVpcPeeringAuthorizationInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteVpcPeeringAuthorizationInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteVpcPeeringAuthorizationInput"}
-
-	if s.GameLiftAwsAccountId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("GameLiftAwsAccountId"))
-	}
-	if s.GameLiftAwsAccountId != nil && len(*s.GameLiftAwsAccountId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("GameLiftAwsAccountId", 1))
-	}
-
-	if s.PeerVpcId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("PeerVpcId"))
-	}
-	if s.PeerVpcId != nil && len(*s.PeerVpcId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("PeerVpcId", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteVpcPeeringAuthorizationOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteVpcPeeringAuthorizationOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteVpcPeeringAuthorization = "DeleteVpcPeeringAuthorization"
 
@@ -96,7 +37,7 @@ const opDeleteVpcPeeringAuthorization = "DeleteVpcPeeringAuthorization"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DeleteVpcPeeringAuthorization
-func (c *Client) DeleteVpcPeeringAuthorizationRequest(input *DeleteVpcPeeringAuthorizationInput) DeleteVpcPeeringAuthorizationRequest {
+func (c *Client) DeleteVpcPeeringAuthorizationRequest(input *types.DeleteVpcPeeringAuthorizationInput) DeleteVpcPeeringAuthorizationRequest {
 	op := &aws.Operation{
 		Name:       opDeleteVpcPeeringAuthorization,
 		HTTPMethod: "POST",
@@ -104,10 +45,10 @@ func (c *Client) DeleteVpcPeeringAuthorizationRequest(input *DeleteVpcPeeringAut
 	}
 
 	if input == nil {
-		input = &DeleteVpcPeeringAuthorizationInput{}
+		input = &types.DeleteVpcPeeringAuthorizationInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteVpcPeeringAuthorizationOutput{})
+	req := c.newRequest(op, input, &types.DeleteVpcPeeringAuthorizationOutput{})
 	return DeleteVpcPeeringAuthorizationRequest{Request: req, Input: input, Copy: c.DeleteVpcPeeringAuthorizationRequest}
 }
 
@@ -115,8 +56,8 @@ func (c *Client) DeleteVpcPeeringAuthorizationRequest(input *DeleteVpcPeeringAut
 // DeleteVpcPeeringAuthorization API operation.
 type DeleteVpcPeeringAuthorizationRequest struct {
 	*aws.Request
-	Input *DeleteVpcPeeringAuthorizationInput
-	Copy  func(*DeleteVpcPeeringAuthorizationInput) DeleteVpcPeeringAuthorizationRequest
+	Input *types.DeleteVpcPeeringAuthorizationInput
+	Copy  func(*types.DeleteVpcPeeringAuthorizationInput) DeleteVpcPeeringAuthorizationRequest
 }
 
 // Send marshals and sends the DeleteVpcPeeringAuthorization API request.
@@ -128,7 +69,7 @@ func (r DeleteVpcPeeringAuthorizationRequest) Send(ctx context.Context) (*Delete
 	}
 
 	resp := &DeleteVpcPeeringAuthorizationResponse{
-		DeleteVpcPeeringAuthorizationOutput: r.Request.Data.(*DeleteVpcPeeringAuthorizationOutput),
+		DeleteVpcPeeringAuthorizationOutput: r.Request.Data.(*types.DeleteVpcPeeringAuthorizationOutput),
 		response:                            &aws.Response{Request: r.Request},
 	}
 
@@ -138,7 +79,7 @@ func (r DeleteVpcPeeringAuthorizationRequest) Send(ctx context.Context) (*Delete
 // DeleteVpcPeeringAuthorizationResponse is the response type for the
 // DeleteVpcPeeringAuthorization API operation.
 type DeleteVpcPeeringAuthorizationResponse struct {
-	*DeleteVpcPeeringAuthorizationOutput
+	*types.DeleteVpcPeeringAuthorizationOutput
 
 	response *aws.Response
 }

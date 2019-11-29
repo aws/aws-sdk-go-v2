@@ -6,103 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/directoryservice/types"
 )
-
-type AddIpRoutesInput struct {
-	_ struct{} `type:"structure"`
-
-	// Identifier (ID) of the directory to which to add the address block.
-	//
-	// DirectoryId is a required field
-	DirectoryId *string `type:"string" required:"true"`
-
-	// IP address blocks, using CIDR format, of the traffic to route. This is often
-	// the IP address block of the DNS server used for your on-premises domain.
-	//
-	// IpRoutes is a required field
-	IpRoutes []IpRoute `type:"list" required:"true"`
-
-	// If set to true, updates the inbound and outbound rules of the security group
-	// that has the description: "AWS created security group for directory ID directory
-	// controllers." Following are the new rules:
-	//
-	// Inbound:
-	//
-	//    * Type: Custom UDP Rule, Protocol: UDP, Range: 88, Source: 0.0.0.0/0
-	//
-	//    * Type: Custom UDP Rule, Protocol: UDP, Range: 123, Source: 0.0.0.0/0
-	//
-	//    * Type: Custom UDP Rule, Protocol: UDP, Range: 138, Source: 0.0.0.0/0
-	//
-	//    * Type: Custom UDP Rule, Protocol: UDP, Range: 389, Source: 0.0.0.0/0
-	//
-	//    * Type: Custom UDP Rule, Protocol: UDP, Range: 464, Source: 0.0.0.0/0
-	//
-	//    * Type: Custom UDP Rule, Protocol: UDP, Range: 445, Source: 0.0.0.0/0
-	//
-	//    * Type: Custom TCP Rule, Protocol: TCP, Range: 88, Source: 0.0.0.0/0
-	//
-	//    * Type: Custom TCP Rule, Protocol: TCP, Range: 135, Source: 0.0.0.0/0
-	//
-	//    * Type: Custom TCP Rule, Protocol: TCP, Range: 445, Source: 0.0.0.0/0
-	//
-	//    * Type: Custom TCP Rule, Protocol: TCP, Range: 464, Source: 0.0.0.0/0
-	//
-	//    * Type: Custom TCP Rule, Protocol: TCP, Range: 636, Source: 0.0.0.0/0
-	//
-	//    * Type: Custom TCP Rule, Protocol: TCP, Range: 1024-65535, Source: 0.0.0.0/0
-	//
-	//    * Type: Custom TCP Rule, Protocol: TCP, Range: 3268-33269, Source: 0.0.0.0/0
-	//
-	//    * Type: DNS (UDP), Protocol: UDP, Range: 53, Source: 0.0.0.0/0
-	//
-	//    * Type: DNS (TCP), Protocol: TCP, Range: 53, Source: 0.0.0.0/0
-	//
-	//    * Type: LDAP, Protocol: TCP, Range: 389, Source: 0.0.0.0/0
-	//
-	//    * Type: All ICMP, Protocol: All, Range: N/A, Source: 0.0.0.0/0
-	//
-	// Outbound:
-	//
-	//    * Type: All traffic, Protocol: All, Range: All, Destination: 0.0.0.0/0
-	//
-	// These security rules impact an internal network interface that is not exposed
-	// publicly.
-	UpdateSecurityGroupForDirectoryControllers *bool `type:"boolean"`
-}
-
-// String returns the string representation
-func (s AddIpRoutesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *AddIpRoutesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "AddIpRoutesInput"}
-
-	if s.DirectoryId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DirectoryId"))
-	}
-
-	if s.IpRoutes == nil {
-		invalidParams.Add(aws.NewErrParamRequired("IpRoutes"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type AddIpRoutesOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s AddIpRoutesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opAddIpRoutes = "AddIpRoutes"
 
@@ -128,7 +33,7 @@ const opAddIpRoutes = "AddIpRoutes"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/AddIpRoutes
-func (c *Client) AddIpRoutesRequest(input *AddIpRoutesInput) AddIpRoutesRequest {
+func (c *Client) AddIpRoutesRequest(input *types.AddIpRoutesInput) AddIpRoutesRequest {
 	op := &aws.Operation{
 		Name:       opAddIpRoutes,
 		HTTPMethod: "POST",
@@ -136,10 +41,10 @@ func (c *Client) AddIpRoutesRequest(input *AddIpRoutesInput) AddIpRoutesRequest 
 	}
 
 	if input == nil {
-		input = &AddIpRoutesInput{}
+		input = &types.AddIpRoutesInput{}
 	}
 
-	req := c.newRequest(op, input, &AddIpRoutesOutput{})
+	req := c.newRequest(op, input, &types.AddIpRoutesOutput{})
 	return AddIpRoutesRequest{Request: req, Input: input, Copy: c.AddIpRoutesRequest}
 }
 
@@ -147,8 +52,8 @@ func (c *Client) AddIpRoutesRequest(input *AddIpRoutesInput) AddIpRoutesRequest 
 // AddIpRoutes API operation.
 type AddIpRoutesRequest struct {
 	*aws.Request
-	Input *AddIpRoutesInput
-	Copy  func(*AddIpRoutesInput) AddIpRoutesRequest
+	Input *types.AddIpRoutesInput
+	Copy  func(*types.AddIpRoutesInput) AddIpRoutesRequest
 }
 
 // Send marshals and sends the AddIpRoutes API request.
@@ -160,7 +65,7 @@ func (r AddIpRoutesRequest) Send(ctx context.Context) (*AddIpRoutesResponse, err
 	}
 
 	resp := &AddIpRoutesResponse{
-		AddIpRoutesOutput: r.Request.Data.(*AddIpRoutesOutput),
+		AddIpRoutesOutput: r.Request.Data.(*types.AddIpRoutesOutput),
 		response:          &aws.Response{Request: r.Request},
 	}
 
@@ -170,7 +75,7 @@ func (r AddIpRoutesRequest) Send(ctx context.Context) (*AddIpRoutesResponse, err
 // AddIpRoutesResponse is the response type for the
 // AddIpRoutes API operation.
 type AddIpRoutesResponse struct {
-	*AddIpRoutesOutput
+	*types.AddIpRoutesOutput
 
 	response *aws.Response
 }

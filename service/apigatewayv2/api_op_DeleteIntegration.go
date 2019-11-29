@@ -6,76 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/restjson"
+	"github.com/aws/aws-sdk-go-v2/service/apigatewayv2/types"
 )
-
-type DeleteIntegrationInput struct {
-	_ struct{} `type:"structure"`
-
-	// ApiId is a required field
-	ApiId *string `location:"uri" locationName:"apiId" type:"string" required:"true"`
-
-	// IntegrationId is a required field
-	IntegrationId *string `location:"uri" locationName:"integrationId" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteIntegrationInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteIntegrationInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteIntegrationInput"}
-
-	if s.ApiId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ApiId"))
-	}
-
-	if s.IntegrationId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("IntegrationId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteIntegrationInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.ApiId != nil {
-		v := *s.ApiId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "apiId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.IntegrationId != nil {
-		v := *s.IntegrationId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "integrationId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type DeleteIntegrationOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteIntegrationOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteIntegrationOutput) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
 
 const opDeleteIntegration = "DeleteIntegration"
 
@@ -92,7 +26,7 @@ const opDeleteIntegration = "DeleteIntegration"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/apigatewayv2-2018-11-29/DeleteIntegration
-func (c *Client) DeleteIntegrationRequest(input *DeleteIntegrationInput) DeleteIntegrationRequest {
+func (c *Client) DeleteIntegrationRequest(input *types.DeleteIntegrationInput) DeleteIntegrationRequest {
 	op := &aws.Operation{
 		Name:       opDeleteIntegration,
 		HTTPMethod: "DELETE",
@@ -100,10 +34,10 @@ func (c *Client) DeleteIntegrationRequest(input *DeleteIntegrationInput) DeleteI
 	}
 
 	if input == nil {
-		input = &DeleteIntegrationInput{}
+		input = &types.DeleteIntegrationInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteIntegrationOutput{})
+	req := c.newRequest(op, input, &types.DeleteIntegrationOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return DeleteIntegrationRequest{Request: req, Input: input, Copy: c.DeleteIntegrationRequest}
@@ -113,8 +47,8 @@ func (c *Client) DeleteIntegrationRequest(input *DeleteIntegrationInput) DeleteI
 // DeleteIntegration API operation.
 type DeleteIntegrationRequest struct {
 	*aws.Request
-	Input *DeleteIntegrationInput
-	Copy  func(*DeleteIntegrationInput) DeleteIntegrationRequest
+	Input *types.DeleteIntegrationInput
+	Copy  func(*types.DeleteIntegrationInput) DeleteIntegrationRequest
 }
 
 // Send marshals and sends the DeleteIntegration API request.
@@ -126,7 +60,7 @@ func (r DeleteIntegrationRequest) Send(ctx context.Context) (*DeleteIntegrationR
 	}
 
 	resp := &DeleteIntegrationResponse{
-		DeleteIntegrationOutput: r.Request.Data.(*DeleteIntegrationOutput),
+		DeleteIntegrationOutput: r.Request.Data.(*types.DeleteIntegrationOutput),
 		response:                &aws.Response{Request: r.Request},
 	}
 
@@ -136,7 +70,7 @@ func (r DeleteIntegrationRequest) Send(ctx context.Context) (*DeleteIntegrationR
 // DeleteIntegrationResponse is the response type for the
 // DeleteIntegration API operation.
 type DeleteIntegrationResponse struct {
-	*DeleteIntegrationOutput
+	*types.DeleteIntegrationOutput
 
 	response *aws.Response
 }

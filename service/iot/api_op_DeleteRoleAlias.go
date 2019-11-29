@@ -6,67 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/iot/types"
 )
-
-type DeleteRoleAliasInput struct {
-	_ struct{} `type:"structure"`
-
-	// The role alias to delete.
-	//
-	// RoleAlias is a required field
-	RoleAlias *string `location:"uri" locationName:"roleAlias" min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteRoleAliasInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteRoleAliasInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteRoleAliasInput"}
-
-	if s.RoleAlias == nil {
-		invalidParams.Add(aws.NewErrParamRequired("RoleAlias"))
-	}
-	if s.RoleAlias != nil && len(*s.RoleAlias) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("RoleAlias", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteRoleAliasInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.RoleAlias != nil {
-		v := *s.RoleAlias
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "roleAlias", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type DeleteRoleAliasOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteRoleAliasOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteRoleAliasOutput) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
 
 const opDeleteRoleAlias = "DeleteRoleAlias"
 
@@ -81,7 +22,7 @@ const opDeleteRoleAlias = "DeleteRoleAlias"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) DeleteRoleAliasRequest(input *DeleteRoleAliasInput) DeleteRoleAliasRequest {
+func (c *Client) DeleteRoleAliasRequest(input *types.DeleteRoleAliasInput) DeleteRoleAliasRequest {
 	op := &aws.Operation{
 		Name:       opDeleteRoleAlias,
 		HTTPMethod: "DELETE",
@@ -89,10 +30,10 @@ func (c *Client) DeleteRoleAliasRequest(input *DeleteRoleAliasInput) DeleteRoleA
 	}
 
 	if input == nil {
-		input = &DeleteRoleAliasInput{}
+		input = &types.DeleteRoleAliasInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteRoleAliasOutput{})
+	req := c.newRequest(op, input, &types.DeleteRoleAliasOutput{})
 	return DeleteRoleAliasRequest{Request: req, Input: input, Copy: c.DeleteRoleAliasRequest}
 }
 
@@ -100,8 +41,8 @@ func (c *Client) DeleteRoleAliasRequest(input *DeleteRoleAliasInput) DeleteRoleA
 // DeleteRoleAlias API operation.
 type DeleteRoleAliasRequest struct {
 	*aws.Request
-	Input *DeleteRoleAliasInput
-	Copy  func(*DeleteRoleAliasInput) DeleteRoleAliasRequest
+	Input *types.DeleteRoleAliasInput
+	Copy  func(*types.DeleteRoleAliasInput) DeleteRoleAliasRequest
 }
 
 // Send marshals and sends the DeleteRoleAlias API request.
@@ -113,7 +54,7 @@ func (r DeleteRoleAliasRequest) Send(ctx context.Context) (*DeleteRoleAliasRespo
 	}
 
 	resp := &DeleteRoleAliasResponse{
-		DeleteRoleAliasOutput: r.Request.Data.(*DeleteRoleAliasOutput),
+		DeleteRoleAliasOutput: r.Request.Data.(*types.DeleteRoleAliasOutput),
 		response:              &aws.Response{Request: r.Request},
 	}
 
@@ -123,7 +64,7 @@ func (r DeleteRoleAliasRequest) Send(ctx context.Context) (*DeleteRoleAliasRespo
 // DeleteRoleAliasResponse is the response type for the
 // DeleteRoleAlias API operation.
 type DeleteRoleAliasResponse struct {
-	*DeleteRoleAliasOutput
+	*types.DeleteRoleAliasOutput
 
 	response *aws.Response
 }

@@ -6,56 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/applicationdiscoveryservice/types"
 )
-
-type StartDataCollectionByAgentIdsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The IDs of the agents or connectors from which to start collecting data.
-	// If you send a request to an agent/connector ID that you do not have permission
-	// to contact, according to your AWS account, the service does not throw an
-	// exception. Instead, it returns the error in the Description field. If you
-	// send a request to multiple agents/connectors and you do not have permission
-	// to contact some of those agents/connectors, the system does not throw an
-	// exception. Instead, the system shows Failed in the Description field.
-	//
-	// AgentIds is a required field
-	AgentIds []string `locationName:"agentIds" type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s StartDataCollectionByAgentIdsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *StartDataCollectionByAgentIdsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "StartDataCollectionByAgentIdsInput"}
-
-	if s.AgentIds == nil {
-		invalidParams.Add(aws.NewErrParamRequired("AgentIds"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type StartDataCollectionByAgentIdsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Information about agents or the connector that were instructed to start collecting
-	// data. Information includes the agent/connector ID, a description of the operation
-	// performed, and whether the agent/connector configuration was updated.
-	AgentsConfigurationStatus []AgentConfigurationStatus `locationName:"agentsConfigurationStatus" type:"list"`
-}
-
-// String returns the string representation
-func (s StartDataCollectionByAgentIdsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opStartDataCollectionByAgentIds = "StartDataCollectionByAgentIds"
 
@@ -72,7 +24,7 @@ const opStartDataCollectionByAgentIds = "StartDataCollectionByAgentIds"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/discovery-2015-11-01/StartDataCollectionByAgentIds
-func (c *Client) StartDataCollectionByAgentIdsRequest(input *StartDataCollectionByAgentIdsInput) StartDataCollectionByAgentIdsRequest {
+func (c *Client) StartDataCollectionByAgentIdsRequest(input *types.StartDataCollectionByAgentIdsInput) StartDataCollectionByAgentIdsRequest {
 	op := &aws.Operation{
 		Name:       opStartDataCollectionByAgentIds,
 		HTTPMethod: "POST",
@@ -80,10 +32,10 @@ func (c *Client) StartDataCollectionByAgentIdsRequest(input *StartDataCollection
 	}
 
 	if input == nil {
-		input = &StartDataCollectionByAgentIdsInput{}
+		input = &types.StartDataCollectionByAgentIdsInput{}
 	}
 
-	req := c.newRequest(op, input, &StartDataCollectionByAgentIdsOutput{})
+	req := c.newRequest(op, input, &types.StartDataCollectionByAgentIdsOutput{})
 	return StartDataCollectionByAgentIdsRequest{Request: req, Input: input, Copy: c.StartDataCollectionByAgentIdsRequest}
 }
 
@@ -91,8 +43,8 @@ func (c *Client) StartDataCollectionByAgentIdsRequest(input *StartDataCollection
 // StartDataCollectionByAgentIds API operation.
 type StartDataCollectionByAgentIdsRequest struct {
 	*aws.Request
-	Input *StartDataCollectionByAgentIdsInput
-	Copy  func(*StartDataCollectionByAgentIdsInput) StartDataCollectionByAgentIdsRequest
+	Input *types.StartDataCollectionByAgentIdsInput
+	Copy  func(*types.StartDataCollectionByAgentIdsInput) StartDataCollectionByAgentIdsRequest
 }
 
 // Send marshals and sends the StartDataCollectionByAgentIds API request.
@@ -104,7 +56,7 @@ func (r StartDataCollectionByAgentIdsRequest) Send(ctx context.Context) (*StartD
 	}
 
 	resp := &StartDataCollectionByAgentIdsResponse{
-		StartDataCollectionByAgentIdsOutput: r.Request.Data.(*StartDataCollectionByAgentIdsOutput),
+		StartDataCollectionByAgentIdsOutput: r.Request.Data.(*types.StartDataCollectionByAgentIdsOutput),
 		response:                            &aws.Response{Request: r.Request},
 	}
 
@@ -114,7 +66,7 @@ func (r StartDataCollectionByAgentIdsRequest) Send(ctx context.Context) (*StartD
 // StartDataCollectionByAgentIdsResponse is the response type for the
 // StartDataCollectionByAgentIds API operation.
 type StartDataCollectionByAgentIdsResponse struct {
-	*StartDataCollectionByAgentIdsOutput
+	*types.StartDataCollectionByAgentIdsOutput
 
 	response *aws.Response
 }

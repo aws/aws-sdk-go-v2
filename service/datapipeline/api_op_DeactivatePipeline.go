@@ -6,55 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/datapipeline/types"
 )
-
-// Contains the parameters for DeactivatePipeline.
-type DeactivatePipelineInput struct {
-	_ struct{} `type:"structure"`
-
-	// Indicates whether to cancel any running objects. The default is true, which
-	// sets the state of any running objects to CANCELED. If this value is false,
-	// the pipeline is deactivated after all running objects finish.
-	CancelActive *bool `locationName:"cancelActive" type:"boolean"`
-
-	// The ID of the pipeline.
-	//
-	// PipelineId is a required field
-	PipelineId *string `locationName:"pipelineId" min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeactivatePipelineInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeactivatePipelineInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeactivatePipelineInput"}
-
-	if s.PipelineId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("PipelineId"))
-	}
-	if s.PipelineId != nil && len(*s.PipelineId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("PipelineId", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Contains the output of DeactivatePipeline.
-type DeactivatePipelineOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeactivatePipelineOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeactivatePipeline = "DeactivatePipeline"
 
@@ -76,7 +29,7 @@ const opDeactivatePipeline = "DeactivatePipeline"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/datapipeline-2012-10-29/DeactivatePipeline
-func (c *Client) DeactivatePipelineRequest(input *DeactivatePipelineInput) DeactivatePipelineRequest {
+func (c *Client) DeactivatePipelineRequest(input *types.DeactivatePipelineInput) DeactivatePipelineRequest {
 	op := &aws.Operation{
 		Name:       opDeactivatePipeline,
 		HTTPMethod: "POST",
@@ -84,10 +37,10 @@ func (c *Client) DeactivatePipelineRequest(input *DeactivatePipelineInput) Deact
 	}
 
 	if input == nil {
-		input = &DeactivatePipelineInput{}
+		input = &types.DeactivatePipelineInput{}
 	}
 
-	req := c.newRequest(op, input, &DeactivatePipelineOutput{})
+	req := c.newRequest(op, input, &types.DeactivatePipelineOutput{})
 	return DeactivatePipelineRequest{Request: req, Input: input, Copy: c.DeactivatePipelineRequest}
 }
 
@@ -95,8 +48,8 @@ func (c *Client) DeactivatePipelineRequest(input *DeactivatePipelineInput) Deact
 // DeactivatePipeline API operation.
 type DeactivatePipelineRequest struct {
 	*aws.Request
-	Input *DeactivatePipelineInput
-	Copy  func(*DeactivatePipelineInput) DeactivatePipelineRequest
+	Input *types.DeactivatePipelineInput
+	Copy  func(*types.DeactivatePipelineInput) DeactivatePipelineRequest
 }
 
 // Send marshals and sends the DeactivatePipeline API request.
@@ -108,7 +61,7 @@ func (r DeactivatePipelineRequest) Send(ctx context.Context) (*DeactivatePipelin
 	}
 
 	resp := &DeactivatePipelineResponse{
-		DeactivatePipelineOutput: r.Request.Data.(*DeactivatePipelineOutput),
+		DeactivatePipelineOutput: r.Request.Data.(*types.DeactivatePipelineOutput),
 		response:                 &aws.Response{Request: r.Request},
 	}
 
@@ -118,7 +71,7 @@ func (r DeactivatePipelineRequest) Send(ctx context.Context) (*DeactivatePipelin
 // DeactivatePipelineResponse is the response type for the
 // DeactivatePipeline API operation.
 type DeactivatePipelineResponse struct {
-	*DeactivatePipelineOutput
+	*types.DeactivatePipelineOutput
 
 	response *aws.Response
 }

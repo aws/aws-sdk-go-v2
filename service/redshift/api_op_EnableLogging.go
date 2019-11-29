@@ -4,95 +4,10 @@ package redshift
 
 import (
 	"context"
-	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/redshift/types"
 )
-
-type EnableLoggingInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of an existing S3 bucket where the log files are to be stored.
-	//
-	// Constraints:
-	//
-	//    * Must be in the same region as the cluster
-	//
-	//    * The cluster must have read bucket and put object permissions
-	//
-	// BucketName is a required field
-	BucketName *string `type:"string" required:"true"`
-
-	// The identifier of the cluster on which logging is to be started.
-	//
-	// Example: examplecluster
-	//
-	// ClusterIdentifier is a required field
-	ClusterIdentifier *string `type:"string" required:"true"`
-
-	// The prefix applied to the log file names.
-	//
-	// Constraints:
-	//
-	//    * Cannot exceed 512 characters
-	//
-	//    * Cannot contain spaces( ), double quotes ("), single quotes ('), a backslash
-	//    (\), or control characters. The hexadecimal codes for invalid characters
-	//    are: x00 to x20 x22 x27 x5c x7f or larger
-	S3KeyPrefix *string `type:"string"`
-}
-
-// String returns the string representation
-func (s EnableLoggingInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *EnableLoggingInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "EnableLoggingInput"}
-
-	if s.BucketName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("BucketName"))
-	}
-
-	if s.ClusterIdentifier == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ClusterIdentifier"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Describes the status of logging for a cluster.
-type EnableLoggingOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the S3 bucket where the log files are stored.
-	BucketName *string `type:"string"`
-
-	// The message indicating that logs failed to be delivered.
-	LastFailureMessage *string `type:"string"`
-
-	// The last time when logs failed to be delivered.
-	LastFailureTime *time.Time `type:"timestamp"`
-
-	// The last time that logs were delivered.
-	LastSuccessfulDeliveryTime *time.Time `type:"timestamp"`
-
-	// true if logging is on, false if logging is off.
-	LoggingEnabled *bool `type:"boolean"`
-
-	// The prefix applied to the log file names.
-	S3KeyPrefix *string `type:"string"`
-}
-
-// String returns the string representation
-func (s EnableLoggingOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opEnableLogging = "EnableLogging"
 
@@ -110,7 +25,7 @@ const opEnableLogging = "EnableLogging"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/EnableLogging
-func (c *Client) EnableLoggingRequest(input *EnableLoggingInput) EnableLoggingRequest {
+func (c *Client) EnableLoggingRequest(input *types.EnableLoggingInput) EnableLoggingRequest {
 	op := &aws.Operation{
 		Name:       opEnableLogging,
 		HTTPMethod: "POST",
@@ -118,10 +33,10 @@ func (c *Client) EnableLoggingRequest(input *EnableLoggingInput) EnableLoggingRe
 	}
 
 	if input == nil {
-		input = &EnableLoggingInput{}
+		input = &types.EnableLoggingInput{}
 	}
 
-	req := c.newRequest(op, input, &EnableLoggingOutput{})
+	req := c.newRequest(op, input, &types.EnableLoggingOutput{})
 	return EnableLoggingRequest{Request: req, Input: input, Copy: c.EnableLoggingRequest}
 }
 
@@ -129,8 +44,8 @@ func (c *Client) EnableLoggingRequest(input *EnableLoggingInput) EnableLoggingRe
 // EnableLogging API operation.
 type EnableLoggingRequest struct {
 	*aws.Request
-	Input *EnableLoggingInput
-	Copy  func(*EnableLoggingInput) EnableLoggingRequest
+	Input *types.EnableLoggingInput
+	Copy  func(*types.EnableLoggingInput) EnableLoggingRequest
 }
 
 // Send marshals and sends the EnableLogging API request.
@@ -142,7 +57,7 @@ func (r EnableLoggingRequest) Send(ctx context.Context) (*EnableLoggingResponse,
 	}
 
 	resp := &EnableLoggingResponse{
-		EnableLoggingOutput: r.Request.Data.(*EnableLoggingOutput),
+		EnableLoggingOutput: r.Request.Data.(*types.EnableLoggingOutput),
 		response:            &aws.Response{Request: r.Request},
 	}
 
@@ -152,7 +67,7 @@ func (r EnableLoggingRequest) Send(ctx context.Context) (*EnableLoggingResponse,
 // EnableLoggingResponse is the response type for the
 // EnableLogging API operation.
 type EnableLoggingResponse struct {
-	*EnableLoggingOutput
+	*types.EnableLoggingOutput
 
 	response *aws.Response
 }

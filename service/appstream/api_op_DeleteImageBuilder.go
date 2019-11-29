@@ -6,48 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/appstream/types"
 )
-
-type DeleteImageBuilderInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the image builder.
-	//
-	// Name is a required field
-	Name *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteImageBuilderInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteImageBuilderInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteImageBuilderInput"}
-
-	if s.Name == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Name"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteImageBuilderOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Information about the image builder.
-	ImageBuilder *ImageBuilder `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteImageBuilderOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteImageBuilder = "DeleteImageBuilder"
 
@@ -64,7 +24,7 @@ const opDeleteImageBuilder = "DeleteImageBuilder"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DeleteImageBuilder
-func (c *Client) DeleteImageBuilderRequest(input *DeleteImageBuilderInput) DeleteImageBuilderRequest {
+func (c *Client) DeleteImageBuilderRequest(input *types.DeleteImageBuilderInput) DeleteImageBuilderRequest {
 	op := &aws.Operation{
 		Name:       opDeleteImageBuilder,
 		HTTPMethod: "POST",
@@ -72,10 +32,10 @@ func (c *Client) DeleteImageBuilderRequest(input *DeleteImageBuilderInput) Delet
 	}
 
 	if input == nil {
-		input = &DeleteImageBuilderInput{}
+		input = &types.DeleteImageBuilderInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteImageBuilderOutput{})
+	req := c.newRequest(op, input, &types.DeleteImageBuilderOutput{})
 	return DeleteImageBuilderRequest{Request: req, Input: input, Copy: c.DeleteImageBuilderRequest}
 }
 
@@ -83,8 +43,8 @@ func (c *Client) DeleteImageBuilderRequest(input *DeleteImageBuilderInput) Delet
 // DeleteImageBuilder API operation.
 type DeleteImageBuilderRequest struct {
 	*aws.Request
-	Input *DeleteImageBuilderInput
-	Copy  func(*DeleteImageBuilderInput) DeleteImageBuilderRequest
+	Input *types.DeleteImageBuilderInput
+	Copy  func(*types.DeleteImageBuilderInput) DeleteImageBuilderRequest
 }
 
 // Send marshals and sends the DeleteImageBuilder API request.
@@ -96,7 +56,7 @@ func (r DeleteImageBuilderRequest) Send(ctx context.Context) (*DeleteImageBuilde
 	}
 
 	resp := &DeleteImageBuilderResponse{
-		DeleteImageBuilderOutput: r.Request.Data.(*DeleteImageBuilderOutput),
+		DeleteImageBuilderOutput: r.Request.Data.(*types.DeleteImageBuilderOutput),
 		response:                 &aws.Response{Request: r.Request},
 	}
 
@@ -106,7 +66,7 @@ func (r DeleteImageBuilderRequest) Send(ctx context.Context) (*DeleteImageBuilde
 // DeleteImageBuilderResponse is the response type for the
 // DeleteImageBuilder API operation.
 type DeleteImageBuilderResponse struct {
-	*DeleteImageBuilderOutput
+	*types.DeleteImageBuilderOutput
 
 	response *aws.Response
 }

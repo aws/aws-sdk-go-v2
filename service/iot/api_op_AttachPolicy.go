@@ -6,84 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/restjson"
+	"github.com/aws/aws-sdk-go-v2/service/iot/types"
 )
-
-type AttachPolicyInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the policy to attach.
-	//
-	// PolicyName is a required field
-	PolicyName *string `location:"uri" locationName:"policyName" min:"1" type:"string" required:"true"`
-
-	// The identity (https://docs.aws.amazon.com/iot/latest/developerguide/iot-security-identity.html)
-	// to which the policy is attached.
-	//
-	// Target is a required field
-	Target *string `locationName:"target" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s AttachPolicyInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *AttachPolicyInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "AttachPolicyInput"}
-
-	if s.PolicyName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("PolicyName"))
-	}
-	if s.PolicyName != nil && len(*s.PolicyName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("PolicyName", 1))
-	}
-
-	if s.Target == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Target"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s AttachPolicyInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.Target != nil {
-		v := *s.Target
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "target", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.PolicyName != nil {
-		v := *s.PolicyName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "policyName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type AttachPolicyOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s AttachPolicyOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s AttachPolicyOutput) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
 
 const opAttachPolicy = "AttachPolicy"
 
@@ -98,7 +24,7 @@ const opAttachPolicy = "AttachPolicy"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) AttachPolicyRequest(input *AttachPolicyInput) AttachPolicyRequest {
+func (c *Client) AttachPolicyRequest(input *types.AttachPolicyInput) AttachPolicyRequest {
 	op := &aws.Operation{
 		Name:       opAttachPolicy,
 		HTTPMethod: "PUT",
@@ -106,10 +32,10 @@ func (c *Client) AttachPolicyRequest(input *AttachPolicyInput) AttachPolicyReque
 	}
 
 	if input == nil {
-		input = &AttachPolicyInput{}
+		input = &types.AttachPolicyInput{}
 	}
 
-	req := c.newRequest(op, input, &AttachPolicyOutput{})
+	req := c.newRequest(op, input, &types.AttachPolicyOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return AttachPolicyRequest{Request: req, Input: input, Copy: c.AttachPolicyRequest}
@@ -119,8 +45,8 @@ func (c *Client) AttachPolicyRequest(input *AttachPolicyInput) AttachPolicyReque
 // AttachPolicy API operation.
 type AttachPolicyRequest struct {
 	*aws.Request
-	Input *AttachPolicyInput
-	Copy  func(*AttachPolicyInput) AttachPolicyRequest
+	Input *types.AttachPolicyInput
+	Copy  func(*types.AttachPolicyInput) AttachPolicyRequest
 }
 
 // Send marshals and sends the AttachPolicy API request.
@@ -132,7 +58,7 @@ func (r AttachPolicyRequest) Send(ctx context.Context) (*AttachPolicyResponse, e
 	}
 
 	resp := &AttachPolicyResponse{
-		AttachPolicyOutput: r.Request.Data.(*AttachPolicyOutput),
+		AttachPolicyOutput: r.Request.Data.(*types.AttachPolicyOutput),
 		response:           &aws.Response{Request: r.Request},
 	}
 
@@ -142,7 +68,7 @@ func (r AttachPolicyRequest) Send(ctx context.Context) (*AttachPolicyResponse, e
 // AttachPolicyResponse is the response type for the
 // AttachPolicy API operation.
 type AttachPolicyResponse struct {
-	*AttachPolicyOutput
+	*types.AttachPolicyOutput
 
 	response *aws.Response
 }

@@ -6,49 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ses/types"
 )
-
-type GetTemplateInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the template you want to retrieve.
-	//
-	// TemplateName is a required field
-	TemplateName *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetTemplateInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetTemplateInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetTemplateInput"}
-
-	if s.TemplateName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("TemplateName"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type GetTemplateOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The content of the email, composed of a subject line, an HTML part, and a
-	// text-only part.
-	Template *Template `type:"structure"`
-}
-
-// String returns the string representation
-func (s GetTemplateOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetTemplate = "GetTemplate"
 
@@ -68,7 +27,7 @@ const opGetTemplate = "GetTemplate"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/GetTemplate
-func (c *Client) GetTemplateRequest(input *GetTemplateInput) GetTemplateRequest {
+func (c *Client) GetTemplateRequest(input *types.GetTemplateInput) GetTemplateRequest {
 	op := &aws.Operation{
 		Name:       opGetTemplate,
 		HTTPMethod: "POST",
@@ -76,10 +35,10 @@ func (c *Client) GetTemplateRequest(input *GetTemplateInput) GetTemplateRequest 
 	}
 
 	if input == nil {
-		input = &GetTemplateInput{}
+		input = &types.GetTemplateInput{}
 	}
 
-	req := c.newRequest(op, input, &GetTemplateOutput{})
+	req := c.newRequest(op, input, &types.GetTemplateOutput{})
 	return GetTemplateRequest{Request: req, Input: input, Copy: c.GetTemplateRequest}
 }
 
@@ -87,8 +46,8 @@ func (c *Client) GetTemplateRequest(input *GetTemplateInput) GetTemplateRequest 
 // GetTemplate API operation.
 type GetTemplateRequest struct {
 	*aws.Request
-	Input *GetTemplateInput
-	Copy  func(*GetTemplateInput) GetTemplateRequest
+	Input *types.GetTemplateInput
+	Copy  func(*types.GetTemplateInput) GetTemplateRequest
 }
 
 // Send marshals and sends the GetTemplate API request.
@@ -100,7 +59,7 @@ func (r GetTemplateRequest) Send(ctx context.Context) (*GetTemplateResponse, err
 	}
 
 	resp := &GetTemplateResponse{
-		GetTemplateOutput: r.Request.Data.(*GetTemplateOutput),
+		GetTemplateOutput: r.Request.Data.(*types.GetTemplateOutput),
 		response:          &aws.Response{Request: r.Request},
 	}
 
@@ -110,7 +69,7 @@ func (r GetTemplateRequest) Send(ctx context.Context) (*GetTemplateResponse, err
 // GetTemplateResponse is the response type for the
 // GetTemplate API operation.
 type GetTemplateResponse struct {
-	*GetTemplateOutput
+	*types.GetTemplateOutput
 
 	response *aws.Response
 }

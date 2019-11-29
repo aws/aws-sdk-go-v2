@@ -6,53 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ssm/types"
 )
-
-type GetAutomationExecutionInput struct {
-	_ struct{} `type:"structure"`
-
-	// The unique identifier for an existing automation execution to examine. The
-	// execution ID is returned by StartAutomationExecution when the execution of
-	// an Automation document is initiated.
-	//
-	// AutomationExecutionId is a required field
-	AutomationExecutionId *string `min:"36" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetAutomationExecutionInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetAutomationExecutionInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetAutomationExecutionInput"}
-
-	if s.AutomationExecutionId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("AutomationExecutionId"))
-	}
-	if s.AutomationExecutionId != nil && len(*s.AutomationExecutionId) < 36 {
-		invalidParams.Add(aws.NewErrParamMinLen("AutomationExecutionId", 36))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type GetAutomationExecutionOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Detailed information about the current state of an automation execution.
-	AutomationExecution *AutomationExecution `type:"structure"`
-}
-
-// String returns the string representation
-func (s GetAutomationExecutionOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetAutomationExecution = "GetAutomationExecution"
 
@@ -69,7 +24,7 @@ const opGetAutomationExecution = "GetAutomationExecution"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetAutomationExecution
-func (c *Client) GetAutomationExecutionRequest(input *GetAutomationExecutionInput) GetAutomationExecutionRequest {
+func (c *Client) GetAutomationExecutionRequest(input *types.GetAutomationExecutionInput) GetAutomationExecutionRequest {
 	op := &aws.Operation{
 		Name:       opGetAutomationExecution,
 		HTTPMethod: "POST",
@@ -77,10 +32,10 @@ func (c *Client) GetAutomationExecutionRequest(input *GetAutomationExecutionInpu
 	}
 
 	if input == nil {
-		input = &GetAutomationExecutionInput{}
+		input = &types.GetAutomationExecutionInput{}
 	}
 
-	req := c.newRequest(op, input, &GetAutomationExecutionOutput{})
+	req := c.newRequest(op, input, &types.GetAutomationExecutionOutput{})
 	return GetAutomationExecutionRequest{Request: req, Input: input, Copy: c.GetAutomationExecutionRequest}
 }
 
@@ -88,8 +43,8 @@ func (c *Client) GetAutomationExecutionRequest(input *GetAutomationExecutionInpu
 // GetAutomationExecution API operation.
 type GetAutomationExecutionRequest struct {
 	*aws.Request
-	Input *GetAutomationExecutionInput
-	Copy  func(*GetAutomationExecutionInput) GetAutomationExecutionRequest
+	Input *types.GetAutomationExecutionInput
+	Copy  func(*types.GetAutomationExecutionInput) GetAutomationExecutionRequest
 }
 
 // Send marshals and sends the GetAutomationExecution API request.
@@ -101,7 +56,7 @@ func (r GetAutomationExecutionRequest) Send(ctx context.Context) (*GetAutomation
 	}
 
 	resp := &GetAutomationExecutionResponse{
-		GetAutomationExecutionOutput: r.Request.Data.(*GetAutomationExecutionOutput),
+		GetAutomationExecutionOutput: r.Request.Data.(*types.GetAutomationExecutionOutput),
 		response:                     &aws.Response{Request: r.Request},
 	}
 
@@ -111,7 +66,7 @@ func (r GetAutomationExecutionRequest) Send(ctx context.Context) (*GetAutomation
 // GetAutomationExecutionResponse is the response type for the
 // GetAutomationExecution API operation.
 type GetAutomationExecutionResponse struct {
-	*GetAutomationExecutionOutput
+	*types.GetAutomationExecutionOutput
 
 	response *aws.Response
 }

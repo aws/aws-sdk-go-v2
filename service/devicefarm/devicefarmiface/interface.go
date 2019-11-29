@@ -10,6 +10,7 @@ package devicefarmiface
 
 import (
 	"github.com/aws/aws-sdk-go-v2/service/devicefarm"
+	"github.com/aws/aws-sdk-go-v2/service/devicefarm/types"
 )
 
 // ClientAPI provides an interface to enable mocking the
@@ -43,7 +44,7 @@ import (
 //    type mockClientClient struct {
 //        devicefarmiface.ClientPI
 //    }
-//    func (m *mockClientClient) CreateDevicePool(input *devicefarm.CreateDevicePoolInput) (*devicefarm.CreateDevicePoolOutput, error) {
+//    func (m *mockClientClient) CreateDevicePool(input *types.CreateDevicePoolInput) (*types.CreateDevicePoolOutput, error) {
 //        // mock response/functionality
 //    }
 //
@@ -61,139 +62,139 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type ClientAPI interface {
-	CreateDevicePoolRequest(*devicefarm.CreateDevicePoolInput) devicefarm.CreateDevicePoolRequest
+	CreateDevicePoolRequest(*types.CreateDevicePoolInput) devicefarm.CreateDevicePoolRequest
 
-	CreateInstanceProfileRequest(*devicefarm.CreateInstanceProfileInput) devicefarm.CreateInstanceProfileRequest
+	CreateInstanceProfileRequest(*types.CreateInstanceProfileInput) devicefarm.CreateInstanceProfileRequest
 
-	CreateNetworkProfileRequest(*devicefarm.CreateNetworkProfileInput) devicefarm.CreateNetworkProfileRequest
+	CreateNetworkProfileRequest(*types.CreateNetworkProfileInput) devicefarm.CreateNetworkProfileRequest
 
-	CreateProjectRequest(*devicefarm.CreateProjectInput) devicefarm.CreateProjectRequest
+	CreateProjectRequest(*types.CreateProjectInput) devicefarm.CreateProjectRequest
 
-	CreateRemoteAccessSessionRequest(*devicefarm.CreateRemoteAccessSessionInput) devicefarm.CreateRemoteAccessSessionRequest
+	CreateRemoteAccessSessionRequest(*types.CreateRemoteAccessSessionInput) devicefarm.CreateRemoteAccessSessionRequest
 
-	CreateUploadRequest(*devicefarm.CreateUploadInput) devicefarm.CreateUploadRequest
+	CreateUploadRequest(*types.CreateUploadInput) devicefarm.CreateUploadRequest
 
-	CreateVPCEConfigurationRequest(*devicefarm.CreateVPCEConfigurationInput) devicefarm.CreateVPCEConfigurationRequest
+	CreateVPCEConfigurationRequest(*types.CreateVPCEConfigurationInput) devicefarm.CreateVPCEConfigurationRequest
 
-	DeleteDevicePoolRequest(*devicefarm.DeleteDevicePoolInput) devicefarm.DeleteDevicePoolRequest
+	DeleteDevicePoolRequest(*types.DeleteDevicePoolInput) devicefarm.DeleteDevicePoolRequest
 
-	DeleteInstanceProfileRequest(*devicefarm.DeleteInstanceProfileInput) devicefarm.DeleteInstanceProfileRequest
+	DeleteInstanceProfileRequest(*types.DeleteInstanceProfileInput) devicefarm.DeleteInstanceProfileRequest
 
-	DeleteNetworkProfileRequest(*devicefarm.DeleteNetworkProfileInput) devicefarm.DeleteNetworkProfileRequest
+	DeleteNetworkProfileRequest(*types.DeleteNetworkProfileInput) devicefarm.DeleteNetworkProfileRequest
 
-	DeleteProjectRequest(*devicefarm.DeleteProjectInput) devicefarm.DeleteProjectRequest
+	DeleteProjectRequest(*types.DeleteProjectInput) devicefarm.DeleteProjectRequest
 
-	DeleteRemoteAccessSessionRequest(*devicefarm.DeleteRemoteAccessSessionInput) devicefarm.DeleteRemoteAccessSessionRequest
+	DeleteRemoteAccessSessionRequest(*types.DeleteRemoteAccessSessionInput) devicefarm.DeleteRemoteAccessSessionRequest
 
-	DeleteRunRequest(*devicefarm.DeleteRunInput) devicefarm.DeleteRunRequest
+	DeleteRunRequest(*types.DeleteRunInput) devicefarm.DeleteRunRequest
 
-	DeleteUploadRequest(*devicefarm.DeleteUploadInput) devicefarm.DeleteUploadRequest
+	DeleteUploadRequest(*types.DeleteUploadInput) devicefarm.DeleteUploadRequest
 
-	DeleteVPCEConfigurationRequest(*devicefarm.DeleteVPCEConfigurationInput) devicefarm.DeleteVPCEConfigurationRequest
+	DeleteVPCEConfigurationRequest(*types.DeleteVPCEConfigurationInput) devicefarm.DeleteVPCEConfigurationRequest
 
-	GetAccountSettingsRequest(*devicefarm.GetAccountSettingsInput) devicefarm.GetAccountSettingsRequest
+	GetAccountSettingsRequest(*types.GetAccountSettingsInput) devicefarm.GetAccountSettingsRequest
 
-	GetDeviceRequest(*devicefarm.GetDeviceInput) devicefarm.GetDeviceRequest
+	GetDeviceRequest(*types.GetDeviceInput) devicefarm.GetDeviceRequest
 
-	GetDeviceInstanceRequest(*devicefarm.GetDeviceInstanceInput) devicefarm.GetDeviceInstanceRequest
+	GetDeviceInstanceRequest(*types.GetDeviceInstanceInput) devicefarm.GetDeviceInstanceRequest
 
-	GetDevicePoolRequest(*devicefarm.GetDevicePoolInput) devicefarm.GetDevicePoolRequest
+	GetDevicePoolRequest(*types.GetDevicePoolInput) devicefarm.GetDevicePoolRequest
 
-	GetDevicePoolCompatibilityRequest(*devicefarm.GetDevicePoolCompatibilityInput) devicefarm.GetDevicePoolCompatibilityRequest
+	GetDevicePoolCompatibilityRequest(*types.GetDevicePoolCompatibilityInput) devicefarm.GetDevicePoolCompatibilityRequest
 
-	GetInstanceProfileRequest(*devicefarm.GetInstanceProfileInput) devicefarm.GetInstanceProfileRequest
+	GetInstanceProfileRequest(*types.GetInstanceProfileInput) devicefarm.GetInstanceProfileRequest
 
-	GetJobRequest(*devicefarm.GetJobInput) devicefarm.GetJobRequest
+	GetJobRequest(*types.GetJobInput) devicefarm.GetJobRequest
 
-	GetNetworkProfileRequest(*devicefarm.GetNetworkProfileInput) devicefarm.GetNetworkProfileRequest
+	GetNetworkProfileRequest(*types.GetNetworkProfileInput) devicefarm.GetNetworkProfileRequest
 
-	GetOfferingStatusRequest(*devicefarm.GetOfferingStatusInput) devicefarm.GetOfferingStatusRequest
+	GetOfferingStatusRequest(*types.GetOfferingStatusInput) devicefarm.GetOfferingStatusRequest
 
-	GetProjectRequest(*devicefarm.GetProjectInput) devicefarm.GetProjectRequest
+	GetProjectRequest(*types.GetProjectInput) devicefarm.GetProjectRequest
 
-	GetRemoteAccessSessionRequest(*devicefarm.GetRemoteAccessSessionInput) devicefarm.GetRemoteAccessSessionRequest
+	GetRemoteAccessSessionRequest(*types.GetRemoteAccessSessionInput) devicefarm.GetRemoteAccessSessionRequest
 
-	GetRunRequest(*devicefarm.GetRunInput) devicefarm.GetRunRequest
+	GetRunRequest(*types.GetRunInput) devicefarm.GetRunRequest
 
-	GetSuiteRequest(*devicefarm.GetSuiteInput) devicefarm.GetSuiteRequest
+	GetSuiteRequest(*types.GetSuiteInput) devicefarm.GetSuiteRequest
 
-	GetTestRequest(*devicefarm.GetTestInput) devicefarm.GetTestRequest
+	GetTestRequest(*types.GetTestInput) devicefarm.GetTestRequest
 
-	GetUploadRequest(*devicefarm.GetUploadInput) devicefarm.GetUploadRequest
+	GetUploadRequest(*types.GetUploadInput) devicefarm.GetUploadRequest
 
-	GetVPCEConfigurationRequest(*devicefarm.GetVPCEConfigurationInput) devicefarm.GetVPCEConfigurationRequest
+	GetVPCEConfigurationRequest(*types.GetVPCEConfigurationInput) devicefarm.GetVPCEConfigurationRequest
 
-	InstallToRemoteAccessSessionRequest(*devicefarm.InstallToRemoteAccessSessionInput) devicefarm.InstallToRemoteAccessSessionRequest
+	InstallToRemoteAccessSessionRequest(*types.InstallToRemoteAccessSessionInput) devicefarm.InstallToRemoteAccessSessionRequest
 
-	ListArtifactsRequest(*devicefarm.ListArtifactsInput) devicefarm.ListArtifactsRequest
+	ListArtifactsRequest(*types.ListArtifactsInput) devicefarm.ListArtifactsRequest
 
-	ListDeviceInstancesRequest(*devicefarm.ListDeviceInstancesInput) devicefarm.ListDeviceInstancesRequest
+	ListDeviceInstancesRequest(*types.ListDeviceInstancesInput) devicefarm.ListDeviceInstancesRequest
 
-	ListDevicePoolsRequest(*devicefarm.ListDevicePoolsInput) devicefarm.ListDevicePoolsRequest
+	ListDevicePoolsRequest(*types.ListDevicePoolsInput) devicefarm.ListDevicePoolsRequest
 
-	ListDevicesRequest(*devicefarm.ListDevicesInput) devicefarm.ListDevicesRequest
+	ListDevicesRequest(*types.ListDevicesInput) devicefarm.ListDevicesRequest
 
-	ListInstanceProfilesRequest(*devicefarm.ListInstanceProfilesInput) devicefarm.ListInstanceProfilesRequest
+	ListInstanceProfilesRequest(*types.ListInstanceProfilesInput) devicefarm.ListInstanceProfilesRequest
 
-	ListJobsRequest(*devicefarm.ListJobsInput) devicefarm.ListJobsRequest
+	ListJobsRequest(*types.ListJobsInput) devicefarm.ListJobsRequest
 
-	ListNetworkProfilesRequest(*devicefarm.ListNetworkProfilesInput) devicefarm.ListNetworkProfilesRequest
+	ListNetworkProfilesRequest(*types.ListNetworkProfilesInput) devicefarm.ListNetworkProfilesRequest
 
-	ListOfferingPromotionsRequest(*devicefarm.ListOfferingPromotionsInput) devicefarm.ListOfferingPromotionsRequest
+	ListOfferingPromotionsRequest(*types.ListOfferingPromotionsInput) devicefarm.ListOfferingPromotionsRequest
 
-	ListOfferingTransactionsRequest(*devicefarm.ListOfferingTransactionsInput) devicefarm.ListOfferingTransactionsRequest
+	ListOfferingTransactionsRequest(*types.ListOfferingTransactionsInput) devicefarm.ListOfferingTransactionsRequest
 
-	ListOfferingsRequest(*devicefarm.ListOfferingsInput) devicefarm.ListOfferingsRequest
+	ListOfferingsRequest(*types.ListOfferingsInput) devicefarm.ListOfferingsRequest
 
-	ListProjectsRequest(*devicefarm.ListProjectsInput) devicefarm.ListProjectsRequest
+	ListProjectsRequest(*types.ListProjectsInput) devicefarm.ListProjectsRequest
 
-	ListRemoteAccessSessionsRequest(*devicefarm.ListRemoteAccessSessionsInput) devicefarm.ListRemoteAccessSessionsRequest
+	ListRemoteAccessSessionsRequest(*types.ListRemoteAccessSessionsInput) devicefarm.ListRemoteAccessSessionsRequest
 
-	ListRunsRequest(*devicefarm.ListRunsInput) devicefarm.ListRunsRequest
+	ListRunsRequest(*types.ListRunsInput) devicefarm.ListRunsRequest
 
-	ListSamplesRequest(*devicefarm.ListSamplesInput) devicefarm.ListSamplesRequest
+	ListSamplesRequest(*types.ListSamplesInput) devicefarm.ListSamplesRequest
 
-	ListSuitesRequest(*devicefarm.ListSuitesInput) devicefarm.ListSuitesRequest
+	ListSuitesRequest(*types.ListSuitesInput) devicefarm.ListSuitesRequest
 
-	ListTagsForResourceRequest(*devicefarm.ListTagsForResourceInput) devicefarm.ListTagsForResourceRequest
+	ListTagsForResourceRequest(*types.ListTagsForResourceInput) devicefarm.ListTagsForResourceRequest
 
-	ListTestsRequest(*devicefarm.ListTestsInput) devicefarm.ListTestsRequest
+	ListTestsRequest(*types.ListTestsInput) devicefarm.ListTestsRequest
 
-	ListUniqueProblemsRequest(*devicefarm.ListUniqueProblemsInput) devicefarm.ListUniqueProblemsRequest
+	ListUniqueProblemsRequest(*types.ListUniqueProblemsInput) devicefarm.ListUniqueProblemsRequest
 
-	ListUploadsRequest(*devicefarm.ListUploadsInput) devicefarm.ListUploadsRequest
+	ListUploadsRequest(*types.ListUploadsInput) devicefarm.ListUploadsRequest
 
-	ListVPCEConfigurationsRequest(*devicefarm.ListVPCEConfigurationsInput) devicefarm.ListVPCEConfigurationsRequest
+	ListVPCEConfigurationsRequest(*types.ListVPCEConfigurationsInput) devicefarm.ListVPCEConfigurationsRequest
 
-	PurchaseOfferingRequest(*devicefarm.PurchaseOfferingInput) devicefarm.PurchaseOfferingRequest
+	PurchaseOfferingRequest(*types.PurchaseOfferingInput) devicefarm.PurchaseOfferingRequest
 
-	RenewOfferingRequest(*devicefarm.RenewOfferingInput) devicefarm.RenewOfferingRequest
+	RenewOfferingRequest(*types.RenewOfferingInput) devicefarm.RenewOfferingRequest
 
-	ScheduleRunRequest(*devicefarm.ScheduleRunInput) devicefarm.ScheduleRunRequest
+	ScheduleRunRequest(*types.ScheduleRunInput) devicefarm.ScheduleRunRequest
 
-	StopJobRequest(*devicefarm.StopJobInput) devicefarm.StopJobRequest
+	StopJobRequest(*types.StopJobInput) devicefarm.StopJobRequest
 
-	StopRemoteAccessSessionRequest(*devicefarm.StopRemoteAccessSessionInput) devicefarm.StopRemoteAccessSessionRequest
+	StopRemoteAccessSessionRequest(*types.StopRemoteAccessSessionInput) devicefarm.StopRemoteAccessSessionRequest
 
-	StopRunRequest(*devicefarm.StopRunInput) devicefarm.StopRunRequest
+	StopRunRequest(*types.StopRunInput) devicefarm.StopRunRequest
 
-	TagResourceRequest(*devicefarm.TagResourceInput) devicefarm.TagResourceRequest
+	TagResourceRequest(*types.TagResourceInput) devicefarm.TagResourceRequest
 
-	UntagResourceRequest(*devicefarm.UntagResourceInput) devicefarm.UntagResourceRequest
+	UntagResourceRequest(*types.UntagResourceInput) devicefarm.UntagResourceRequest
 
-	UpdateDeviceInstanceRequest(*devicefarm.UpdateDeviceInstanceInput) devicefarm.UpdateDeviceInstanceRequest
+	UpdateDeviceInstanceRequest(*types.UpdateDeviceInstanceInput) devicefarm.UpdateDeviceInstanceRequest
 
-	UpdateDevicePoolRequest(*devicefarm.UpdateDevicePoolInput) devicefarm.UpdateDevicePoolRequest
+	UpdateDevicePoolRequest(*types.UpdateDevicePoolInput) devicefarm.UpdateDevicePoolRequest
 
-	UpdateInstanceProfileRequest(*devicefarm.UpdateInstanceProfileInput) devicefarm.UpdateInstanceProfileRequest
+	UpdateInstanceProfileRequest(*types.UpdateInstanceProfileInput) devicefarm.UpdateInstanceProfileRequest
 
-	UpdateNetworkProfileRequest(*devicefarm.UpdateNetworkProfileInput) devicefarm.UpdateNetworkProfileRequest
+	UpdateNetworkProfileRequest(*types.UpdateNetworkProfileInput) devicefarm.UpdateNetworkProfileRequest
 
-	UpdateProjectRequest(*devicefarm.UpdateProjectInput) devicefarm.UpdateProjectRequest
+	UpdateProjectRequest(*types.UpdateProjectInput) devicefarm.UpdateProjectRequest
 
-	UpdateUploadRequest(*devicefarm.UpdateUploadInput) devicefarm.UpdateUploadRequest
+	UpdateUploadRequest(*types.UpdateUploadInput) devicefarm.UpdateUploadRequest
 
-	UpdateVPCEConfigurationRequest(*devicefarm.UpdateVPCEConfigurationInput) devicefarm.UpdateVPCEConfigurationRequest
+	UpdateVPCEConfigurationRequest(*types.UpdateVPCEConfigurationInput) devicefarm.UpdateVPCEConfigurationRequest
 }
 
 var _ ClientAPI = (*devicefarm.Client)(nil)

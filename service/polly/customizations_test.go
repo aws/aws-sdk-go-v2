@@ -8,6 +8,8 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/aws/endpoints"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting/unit"
+	"github.com/aws/aws-sdk-go-v2/service/polly/enums"
+	"github.com/aws/aws-sdk-go-v2/service/polly/types"
 )
 
 func TestRestGETStrategy(t *testing.T) {
@@ -34,10 +36,10 @@ func TestPresign(t *testing.T) {
 	cfg.EndpointResolver = endpoints.NewDefaultResolver()
 
 	svc := New(cfg)
-	r := svc.SynthesizeSpeechRequest(&SynthesizeSpeechInput{
+	r := svc.SynthesizeSpeechRequest(&types.SynthesizeSpeechInput{
 		Text:         aws.String("Moo"),
-		OutputFormat: OutputFormatMp3,
-		VoiceId:      VoiceIdGeraint,
+		OutputFormat: enums.OutputFormatMp3,
+		VoiceId:      enums.VoiceIdGeraint,
 	})
 	url, err := r.Presign(time.Second)
 

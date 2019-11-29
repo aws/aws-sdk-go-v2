@@ -6,52 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/configservice/types"
 )
-
-type DescribeConfigRuleEvaluationStatusInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the AWS managed Config rules for which you want status information.
-	// If you do not specify any names, AWS Config returns status information for
-	// all AWS managed Config rules that you use.
-	ConfigRuleNames []string `type:"list"`
-
-	// The number of rule evaluation results that you want returned.
-	//
-	// This parameter is required if the rule limit for your account is more than
-	// the default of 150 rules.
-	//
-	// For information about requesting a rule limit increase, see AWS Config Limits
-	// (http://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html#limits_config)
-	// in the AWS General Reference Guide.
-	Limit *int64 `type:"integer"`
-
-	// The nextToken string returned on a previous page that you use to get the
-	// next page of results in a paginated response.
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeConfigRuleEvaluationStatusInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type DescribeConfigRuleEvaluationStatusOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Status information about your AWS managed Config rules.
-	ConfigRulesEvaluationStatus []ConfigRuleEvaluationStatus `type:"list"`
-
-	// The string that you use in a subsequent request to get the next page of results
-	// in a paginated response.
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeConfigRuleEvaluationStatusOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeConfigRuleEvaluationStatus = "DescribeConfigRuleEvaluationStatus"
 
@@ -71,7 +27,7 @@ const opDescribeConfigRuleEvaluationStatus = "DescribeConfigRuleEvaluationStatus
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DescribeConfigRuleEvaluationStatus
-func (c *Client) DescribeConfigRuleEvaluationStatusRequest(input *DescribeConfigRuleEvaluationStatusInput) DescribeConfigRuleEvaluationStatusRequest {
+func (c *Client) DescribeConfigRuleEvaluationStatusRequest(input *types.DescribeConfigRuleEvaluationStatusInput) DescribeConfigRuleEvaluationStatusRequest {
 	op := &aws.Operation{
 		Name:       opDescribeConfigRuleEvaluationStatus,
 		HTTPMethod: "POST",
@@ -79,10 +35,10 @@ func (c *Client) DescribeConfigRuleEvaluationStatusRequest(input *DescribeConfig
 	}
 
 	if input == nil {
-		input = &DescribeConfigRuleEvaluationStatusInput{}
+		input = &types.DescribeConfigRuleEvaluationStatusInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeConfigRuleEvaluationStatusOutput{})
+	req := c.newRequest(op, input, &types.DescribeConfigRuleEvaluationStatusOutput{})
 	return DescribeConfigRuleEvaluationStatusRequest{Request: req, Input: input, Copy: c.DescribeConfigRuleEvaluationStatusRequest}
 }
 
@@ -90,8 +46,8 @@ func (c *Client) DescribeConfigRuleEvaluationStatusRequest(input *DescribeConfig
 // DescribeConfigRuleEvaluationStatus API operation.
 type DescribeConfigRuleEvaluationStatusRequest struct {
 	*aws.Request
-	Input *DescribeConfigRuleEvaluationStatusInput
-	Copy  func(*DescribeConfigRuleEvaluationStatusInput) DescribeConfigRuleEvaluationStatusRequest
+	Input *types.DescribeConfigRuleEvaluationStatusInput
+	Copy  func(*types.DescribeConfigRuleEvaluationStatusInput) DescribeConfigRuleEvaluationStatusRequest
 }
 
 // Send marshals and sends the DescribeConfigRuleEvaluationStatus API request.
@@ -103,7 +59,7 @@ func (r DescribeConfigRuleEvaluationStatusRequest) Send(ctx context.Context) (*D
 	}
 
 	resp := &DescribeConfigRuleEvaluationStatusResponse{
-		DescribeConfigRuleEvaluationStatusOutput: r.Request.Data.(*DescribeConfigRuleEvaluationStatusOutput),
+		DescribeConfigRuleEvaluationStatusOutput: r.Request.Data.(*types.DescribeConfigRuleEvaluationStatusOutput),
 		response:                                 &aws.Response{Request: r.Request},
 	}
 
@@ -113,7 +69,7 @@ func (r DescribeConfigRuleEvaluationStatusRequest) Send(ctx context.Context) (*D
 // DescribeConfigRuleEvaluationStatusResponse is the response type for the
 // DescribeConfigRuleEvaluationStatus API operation.
 type DescribeConfigRuleEvaluationStatusResponse struct {
-	*DescribeConfigRuleEvaluationStatusOutput
+	*types.DescribeConfigRuleEvaluationStatusOutput
 
 	response *aws.Response
 }

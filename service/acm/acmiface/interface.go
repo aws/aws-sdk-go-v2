@@ -13,6 +13,7 @@ import (
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/acm"
+	"github.com/aws/aws-sdk-go-v2/service/acm/types"
 )
 
 // ClientAPI provides an interface to enable mocking the
@@ -46,7 +47,7 @@ import (
 //    type mockClientClient struct {
 //        acmiface.ClientPI
 //    }
-//    func (m *mockClientClient) AddTagsToCertificate(input *acm.AddTagsToCertificateInput) (*acm.AddTagsToCertificateOutput, error) {
+//    func (m *mockClientClient) AddTagsToCertificate(input *types.AddTagsToCertificateInput) (*types.AddTagsToCertificateOutput, error) {
 //        // mock response/functionality
 //    }
 //
@@ -64,33 +65,33 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type ClientAPI interface {
-	AddTagsToCertificateRequest(*acm.AddTagsToCertificateInput) acm.AddTagsToCertificateRequest
+	AddTagsToCertificateRequest(*types.AddTagsToCertificateInput) acm.AddTagsToCertificateRequest
 
-	DeleteCertificateRequest(*acm.DeleteCertificateInput) acm.DeleteCertificateRequest
+	DeleteCertificateRequest(*types.DeleteCertificateInput) acm.DeleteCertificateRequest
 
-	DescribeCertificateRequest(*acm.DescribeCertificateInput) acm.DescribeCertificateRequest
+	DescribeCertificateRequest(*types.DescribeCertificateInput) acm.DescribeCertificateRequest
 
-	ExportCertificateRequest(*acm.ExportCertificateInput) acm.ExportCertificateRequest
+	ExportCertificateRequest(*types.ExportCertificateInput) acm.ExportCertificateRequest
 
-	GetCertificateRequest(*acm.GetCertificateInput) acm.GetCertificateRequest
+	GetCertificateRequest(*types.GetCertificateInput) acm.GetCertificateRequest
 
-	ImportCertificateRequest(*acm.ImportCertificateInput) acm.ImportCertificateRequest
+	ImportCertificateRequest(*types.ImportCertificateInput) acm.ImportCertificateRequest
 
-	ListCertificatesRequest(*acm.ListCertificatesInput) acm.ListCertificatesRequest
+	ListCertificatesRequest(*types.ListCertificatesInput) acm.ListCertificatesRequest
 
-	ListTagsForCertificateRequest(*acm.ListTagsForCertificateInput) acm.ListTagsForCertificateRequest
+	ListTagsForCertificateRequest(*types.ListTagsForCertificateInput) acm.ListTagsForCertificateRequest
 
-	RemoveTagsFromCertificateRequest(*acm.RemoveTagsFromCertificateInput) acm.RemoveTagsFromCertificateRequest
+	RemoveTagsFromCertificateRequest(*types.RemoveTagsFromCertificateInput) acm.RemoveTagsFromCertificateRequest
 
-	RenewCertificateRequest(*acm.RenewCertificateInput) acm.RenewCertificateRequest
+	RenewCertificateRequest(*types.RenewCertificateInput) acm.RenewCertificateRequest
 
-	RequestCertificateRequest(*acm.RequestCertificateInput) acm.RequestCertificateRequest
+	RequestCertificateRequest(*types.RequestCertificateInput) acm.RequestCertificateRequest
 
-	ResendValidationEmailRequest(*acm.ResendValidationEmailInput) acm.ResendValidationEmailRequest
+	ResendValidationEmailRequest(*types.ResendValidationEmailInput) acm.ResendValidationEmailRequest
 
-	UpdateCertificateOptionsRequest(*acm.UpdateCertificateOptionsInput) acm.UpdateCertificateOptionsRequest
+	UpdateCertificateOptionsRequest(*types.UpdateCertificateOptionsInput) acm.UpdateCertificateOptionsRequest
 
-	WaitUntilCertificateValidated(context.Context, *acm.DescribeCertificateInput, ...aws.WaiterOption) error
+	WaitUntilCertificateValidated(context.Context, *types.DescribeCertificateInput, ...aws.WaiterOption) error
 }
 
 var _ ClientAPI = (*acm.Client)(nil)

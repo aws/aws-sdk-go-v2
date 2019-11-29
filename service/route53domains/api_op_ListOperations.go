@@ -4,59 +4,10 @@ package route53domains
 
 import (
 	"context"
-	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/route53domains/types"
 )
-
-// The ListOperations request includes the following elements.
-type ListOperationsInput struct {
-	_ struct{} `type:"structure"`
-
-	// For an initial request for a list of operations, omit this element. If the
-	// number of operations that are not yet complete is greater than the value
-	// that you specified for MaxItems, you can use Marker to return additional
-	// operations. Get the value of NextPageMarker from the previous response, and
-	// submit another request that includes the value of NextPageMarker in the Marker
-	// element.
-	Marker *string `type:"string"`
-
-	// Number of domains to be returned.
-	//
-	// Default: 20
-	MaxItems *int64 `type:"integer"`
-
-	// An optional parameter that lets you get information about all the operations
-	// that you submitted after a specified date and time. Specify the date and
-	// time in Coordinated Universal time (UTC).
-	SubmittedSince *time.Time `type:"timestamp"`
-}
-
-// String returns the string representation
-func (s ListOperationsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// The ListOperations response includes the following elements.
-type ListOperationsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// If there are more operations than you specified for MaxItems in the request,
-	// submit another request and include the value of NextPageMarker in the value
-	// of Marker.
-	NextPageMarker *string `type:"string"`
-
-	// Lists summaries of the operations.
-	//
-	// Operations is a required field
-	Operations []OperationSummary `type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s ListOperationsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListOperations = "ListOperations"
 
@@ -73,7 +24,7 @@ const opListOperations = "ListOperations"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/ListOperations
-func (c *Client) ListOperationsRequest(input *ListOperationsInput) ListOperationsRequest {
+func (c *Client) ListOperationsRequest(input *types.ListOperationsInput) ListOperationsRequest {
 	op := &aws.Operation{
 		Name:       opListOperations,
 		HTTPMethod: "POST",
@@ -87,10 +38,10 @@ func (c *Client) ListOperationsRequest(input *ListOperationsInput) ListOperation
 	}
 
 	if input == nil {
-		input = &ListOperationsInput{}
+		input = &types.ListOperationsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListOperationsOutput{})
+	req := c.newRequest(op, input, &types.ListOperationsOutput{})
 	return ListOperationsRequest{Request: req, Input: input, Copy: c.ListOperationsRequest}
 }
 
@@ -98,8 +49,8 @@ func (c *Client) ListOperationsRequest(input *ListOperationsInput) ListOperation
 // ListOperations API operation.
 type ListOperationsRequest struct {
 	*aws.Request
-	Input *ListOperationsInput
-	Copy  func(*ListOperationsInput) ListOperationsRequest
+	Input *types.ListOperationsInput
+	Copy  func(*types.ListOperationsInput) ListOperationsRequest
 }
 
 // Send marshals and sends the ListOperations API request.
@@ -111,7 +62,7 @@ func (r ListOperationsRequest) Send(ctx context.Context) (*ListOperationsRespons
 	}
 
 	resp := &ListOperationsResponse{
-		ListOperationsOutput: r.Request.Data.(*ListOperationsOutput),
+		ListOperationsOutput: r.Request.Data.(*types.ListOperationsOutput),
 		response:             &aws.Response{Request: r.Request},
 	}
 
@@ -141,7 +92,7 @@ func NewListOperationsPaginator(req ListOperationsRequest) ListOperationsPaginat
 	return ListOperationsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListOperationsInput
+				var inCpy *types.ListOperationsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -161,14 +112,14 @@ type ListOperationsPaginator struct {
 	aws.Pager
 }
 
-func (p *ListOperationsPaginator) CurrentPage() *ListOperationsOutput {
-	return p.Pager.CurrentPage().(*ListOperationsOutput)
+func (p *ListOperationsPaginator) CurrentPage() *types.ListOperationsOutput {
+	return p.Pager.CurrentPage().(*types.ListOperationsOutput)
 }
 
 // ListOperationsResponse is the response type for the
 // ListOperations API operation.
 type ListOperationsResponse struct {
-	*ListOperationsOutput
+	*types.ListOperationsOutput
 
 	response *aws.Response
 }

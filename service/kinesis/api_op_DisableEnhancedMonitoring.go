@@ -6,96 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/kinesis/types"
 )
-
-// Represents the input for DisableEnhancedMonitoring.
-type DisableEnhancedMonitoringInput struct {
-	_ struct{} `type:"structure"`
-
-	// List of shard-level metrics to disable.
-	//
-	// The following are the valid shard-level metrics. The value "ALL" disables
-	// every metric.
-	//
-	//    * IncomingBytes
-	//
-	//    * IncomingRecords
-	//
-	//    * OutgoingBytes
-	//
-	//    * OutgoingRecords
-	//
-	//    * WriteProvisionedThroughputExceeded
-	//
-	//    * ReadProvisionedThroughputExceeded
-	//
-	//    * IteratorAgeMilliseconds
-	//
-	//    * ALL
-	//
-	// For more information, see Monitoring the Amazon Kinesis Data Streams Service
-	// with Amazon CloudWatch (http://docs.aws.amazon.com/kinesis/latest/dev/monitoring-with-cloudwatch.html)
-	// in the Amazon Kinesis Data Streams Developer Guide.
-	//
-	// ShardLevelMetrics is a required field
-	ShardLevelMetrics []MetricsName `min:"1" type:"list" required:"true"`
-
-	// The name of the Kinesis data stream for which to disable enhanced monitoring.
-	//
-	// StreamName is a required field
-	StreamName *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DisableEnhancedMonitoringInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DisableEnhancedMonitoringInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DisableEnhancedMonitoringInput"}
-
-	if s.ShardLevelMetrics == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ShardLevelMetrics"))
-	}
-	if s.ShardLevelMetrics != nil && len(s.ShardLevelMetrics) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ShardLevelMetrics", 1))
-	}
-
-	if s.StreamName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("StreamName"))
-	}
-	if s.StreamName != nil && len(*s.StreamName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("StreamName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Represents the output for EnableEnhancedMonitoring and DisableEnhancedMonitoring.
-type DisableEnhancedMonitoringOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Represents the current state of the metrics that are in the enhanced state
-	// before the operation.
-	CurrentShardLevelMetrics []MetricsName `min:"1" type:"list"`
-
-	// Represents the list of all the metrics that would be in the enhanced state
-	// after the operation.
-	DesiredShardLevelMetrics []MetricsName `min:"1" type:"list"`
-
-	// The name of the Kinesis data stream.
-	StreamName *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s DisableEnhancedMonitoringOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDisableEnhancedMonitoring = "DisableEnhancedMonitoring"
 
@@ -112,7 +24,7 @@ const opDisableEnhancedMonitoring = "DisableEnhancedMonitoring"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/DisableEnhancedMonitoring
-func (c *Client) DisableEnhancedMonitoringRequest(input *DisableEnhancedMonitoringInput) DisableEnhancedMonitoringRequest {
+func (c *Client) DisableEnhancedMonitoringRequest(input *types.DisableEnhancedMonitoringInput) DisableEnhancedMonitoringRequest {
 	op := &aws.Operation{
 		Name:       opDisableEnhancedMonitoring,
 		HTTPMethod: "POST",
@@ -120,10 +32,10 @@ func (c *Client) DisableEnhancedMonitoringRequest(input *DisableEnhancedMonitori
 	}
 
 	if input == nil {
-		input = &DisableEnhancedMonitoringInput{}
+		input = &types.DisableEnhancedMonitoringInput{}
 	}
 
-	req := c.newRequest(op, input, &DisableEnhancedMonitoringOutput{})
+	req := c.newRequest(op, input, &types.DisableEnhancedMonitoringOutput{})
 	return DisableEnhancedMonitoringRequest{Request: req, Input: input, Copy: c.DisableEnhancedMonitoringRequest}
 }
 
@@ -131,8 +43,8 @@ func (c *Client) DisableEnhancedMonitoringRequest(input *DisableEnhancedMonitori
 // DisableEnhancedMonitoring API operation.
 type DisableEnhancedMonitoringRequest struct {
 	*aws.Request
-	Input *DisableEnhancedMonitoringInput
-	Copy  func(*DisableEnhancedMonitoringInput) DisableEnhancedMonitoringRequest
+	Input *types.DisableEnhancedMonitoringInput
+	Copy  func(*types.DisableEnhancedMonitoringInput) DisableEnhancedMonitoringRequest
 }
 
 // Send marshals and sends the DisableEnhancedMonitoring API request.
@@ -144,7 +56,7 @@ func (r DisableEnhancedMonitoringRequest) Send(ctx context.Context) (*DisableEnh
 	}
 
 	resp := &DisableEnhancedMonitoringResponse{
-		DisableEnhancedMonitoringOutput: r.Request.Data.(*DisableEnhancedMonitoringOutput),
+		DisableEnhancedMonitoringOutput: r.Request.Data.(*types.DisableEnhancedMonitoringOutput),
 		response:                        &aws.Response{Request: r.Request},
 	}
 
@@ -154,7 +66,7 @@ func (r DisableEnhancedMonitoringRequest) Send(ctx context.Context) (*DisableEnh
 // DisableEnhancedMonitoringResponse is the response type for the
 // DisableEnhancedMonitoring API operation.
 type DisableEnhancedMonitoringResponse struct {
-	*DisableEnhancedMonitoringOutput
+	*types.DisableEnhancedMonitoringOutput
 
 	response *aws.Response
 }

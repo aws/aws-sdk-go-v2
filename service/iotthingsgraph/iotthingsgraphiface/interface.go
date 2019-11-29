@@ -10,6 +10,7 @@ package iotthingsgraphiface
 
 import (
 	"github.com/aws/aws-sdk-go-v2/service/iotthingsgraph"
+	"github.com/aws/aws-sdk-go-v2/service/iotthingsgraph/types"
 )
 
 // ClientAPI provides an interface to enable mocking the
@@ -43,7 +44,7 @@ import (
 //    type mockClientClient struct {
 //        iotthingsgraphiface.ClientPI
 //    }
-//    func (m *mockClientClient) AssociateEntityToThing(input *iotthingsgraph.AssociateEntityToThingInput) (*iotthingsgraph.AssociateEntityToThingOutput, error) {
+//    func (m *mockClientClient) AssociateEntityToThing(input *types.AssociateEntityToThingInput) (*types.AssociateEntityToThingOutput, error) {
 //        // mock response/functionality
 //    }
 //
@@ -61,75 +62,75 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type ClientAPI interface {
-	AssociateEntityToThingRequest(*iotthingsgraph.AssociateEntityToThingInput) iotthingsgraph.AssociateEntityToThingRequest
+	AssociateEntityToThingRequest(*types.AssociateEntityToThingInput) iotthingsgraph.AssociateEntityToThingRequest
 
-	CreateFlowTemplateRequest(*iotthingsgraph.CreateFlowTemplateInput) iotthingsgraph.CreateFlowTemplateRequest
+	CreateFlowTemplateRequest(*types.CreateFlowTemplateInput) iotthingsgraph.CreateFlowTemplateRequest
 
-	CreateSystemInstanceRequest(*iotthingsgraph.CreateSystemInstanceInput) iotthingsgraph.CreateSystemInstanceRequest
+	CreateSystemInstanceRequest(*types.CreateSystemInstanceInput) iotthingsgraph.CreateSystemInstanceRequest
 
-	CreateSystemTemplateRequest(*iotthingsgraph.CreateSystemTemplateInput) iotthingsgraph.CreateSystemTemplateRequest
+	CreateSystemTemplateRequest(*types.CreateSystemTemplateInput) iotthingsgraph.CreateSystemTemplateRequest
 
-	DeleteFlowTemplateRequest(*iotthingsgraph.DeleteFlowTemplateInput) iotthingsgraph.DeleteFlowTemplateRequest
+	DeleteFlowTemplateRequest(*types.DeleteFlowTemplateInput) iotthingsgraph.DeleteFlowTemplateRequest
 
-	DeleteNamespaceRequest(*iotthingsgraph.DeleteNamespaceInput) iotthingsgraph.DeleteNamespaceRequest
+	DeleteNamespaceRequest(*types.DeleteNamespaceInput) iotthingsgraph.DeleteNamespaceRequest
 
-	DeleteSystemInstanceRequest(*iotthingsgraph.DeleteSystemInstanceInput) iotthingsgraph.DeleteSystemInstanceRequest
+	DeleteSystemInstanceRequest(*types.DeleteSystemInstanceInput) iotthingsgraph.DeleteSystemInstanceRequest
 
-	DeleteSystemTemplateRequest(*iotthingsgraph.DeleteSystemTemplateInput) iotthingsgraph.DeleteSystemTemplateRequest
+	DeleteSystemTemplateRequest(*types.DeleteSystemTemplateInput) iotthingsgraph.DeleteSystemTemplateRequest
 
-	DeploySystemInstanceRequest(*iotthingsgraph.DeploySystemInstanceInput) iotthingsgraph.DeploySystemInstanceRequest
+	DeploySystemInstanceRequest(*types.DeploySystemInstanceInput) iotthingsgraph.DeploySystemInstanceRequest
 
-	DeprecateFlowTemplateRequest(*iotthingsgraph.DeprecateFlowTemplateInput) iotthingsgraph.DeprecateFlowTemplateRequest
+	DeprecateFlowTemplateRequest(*types.DeprecateFlowTemplateInput) iotthingsgraph.DeprecateFlowTemplateRequest
 
-	DeprecateSystemTemplateRequest(*iotthingsgraph.DeprecateSystemTemplateInput) iotthingsgraph.DeprecateSystemTemplateRequest
+	DeprecateSystemTemplateRequest(*types.DeprecateSystemTemplateInput) iotthingsgraph.DeprecateSystemTemplateRequest
 
-	DescribeNamespaceRequest(*iotthingsgraph.DescribeNamespaceInput) iotthingsgraph.DescribeNamespaceRequest
+	DescribeNamespaceRequest(*types.DescribeNamespaceInput) iotthingsgraph.DescribeNamespaceRequest
 
-	DissociateEntityFromThingRequest(*iotthingsgraph.DissociateEntityFromThingInput) iotthingsgraph.DissociateEntityFromThingRequest
+	DissociateEntityFromThingRequest(*types.DissociateEntityFromThingInput) iotthingsgraph.DissociateEntityFromThingRequest
 
-	GetEntitiesRequest(*iotthingsgraph.GetEntitiesInput) iotthingsgraph.GetEntitiesRequest
+	GetEntitiesRequest(*types.GetEntitiesInput) iotthingsgraph.GetEntitiesRequest
 
-	GetFlowTemplateRequest(*iotthingsgraph.GetFlowTemplateInput) iotthingsgraph.GetFlowTemplateRequest
+	GetFlowTemplateRequest(*types.GetFlowTemplateInput) iotthingsgraph.GetFlowTemplateRequest
 
-	GetFlowTemplateRevisionsRequest(*iotthingsgraph.GetFlowTemplateRevisionsInput) iotthingsgraph.GetFlowTemplateRevisionsRequest
+	GetFlowTemplateRevisionsRequest(*types.GetFlowTemplateRevisionsInput) iotthingsgraph.GetFlowTemplateRevisionsRequest
 
-	GetNamespaceDeletionStatusRequest(*iotthingsgraph.GetNamespaceDeletionStatusInput) iotthingsgraph.GetNamespaceDeletionStatusRequest
+	GetNamespaceDeletionStatusRequest(*types.GetNamespaceDeletionStatusInput) iotthingsgraph.GetNamespaceDeletionStatusRequest
 
-	GetSystemInstanceRequest(*iotthingsgraph.GetSystemInstanceInput) iotthingsgraph.GetSystemInstanceRequest
+	GetSystemInstanceRequest(*types.GetSystemInstanceInput) iotthingsgraph.GetSystemInstanceRequest
 
-	GetSystemTemplateRequest(*iotthingsgraph.GetSystemTemplateInput) iotthingsgraph.GetSystemTemplateRequest
+	GetSystemTemplateRequest(*types.GetSystemTemplateInput) iotthingsgraph.GetSystemTemplateRequest
 
-	GetSystemTemplateRevisionsRequest(*iotthingsgraph.GetSystemTemplateRevisionsInput) iotthingsgraph.GetSystemTemplateRevisionsRequest
+	GetSystemTemplateRevisionsRequest(*types.GetSystemTemplateRevisionsInput) iotthingsgraph.GetSystemTemplateRevisionsRequest
 
-	GetUploadStatusRequest(*iotthingsgraph.GetUploadStatusInput) iotthingsgraph.GetUploadStatusRequest
+	GetUploadStatusRequest(*types.GetUploadStatusInput) iotthingsgraph.GetUploadStatusRequest
 
-	ListFlowExecutionMessagesRequest(*iotthingsgraph.ListFlowExecutionMessagesInput) iotthingsgraph.ListFlowExecutionMessagesRequest
+	ListFlowExecutionMessagesRequest(*types.ListFlowExecutionMessagesInput) iotthingsgraph.ListFlowExecutionMessagesRequest
 
-	ListTagsForResourceRequest(*iotthingsgraph.ListTagsForResourceInput) iotthingsgraph.ListTagsForResourceRequest
+	ListTagsForResourceRequest(*types.ListTagsForResourceInput) iotthingsgraph.ListTagsForResourceRequest
 
-	SearchEntitiesRequest(*iotthingsgraph.SearchEntitiesInput) iotthingsgraph.SearchEntitiesRequest
+	SearchEntitiesRequest(*types.SearchEntitiesInput) iotthingsgraph.SearchEntitiesRequest
 
-	SearchFlowExecutionsRequest(*iotthingsgraph.SearchFlowExecutionsInput) iotthingsgraph.SearchFlowExecutionsRequest
+	SearchFlowExecutionsRequest(*types.SearchFlowExecutionsInput) iotthingsgraph.SearchFlowExecutionsRequest
 
-	SearchFlowTemplatesRequest(*iotthingsgraph.SearchFlowTemplatesInput) iotthingsgraph.SearchFlowTemplatesRequest
+	SearchFlowTemplatesRequest(*types.SearchFlowTemplatesInput) iotthingsgraph.SearchFlowTemplatesRequest
 
-	SearchSystemInstancesRequest(*iotthingsgraph.SearchSystemInstancesInput) iotthingsgraph.SearchSystemInstancesRequest
+	SearchSystemInstancesRequest(*types.SearchSystemInstancesInput) iotthingsgraph.SearchSystemInstancesRequest
 
-	SearchSystemTemplatesRequest(*iotthingsgraph.SearchSystemTemplatesInput) iotthingsgraph.SearchSystemTemplatesRequest
+	SearchSystemTemplatesRequest(*types.SearchSystemTemplatesInput) iotthingsgraph.SearchSystemTemplatesRequest
 
-	SearchThingsRequest(*iotthingsgraph.SearchThingsInput) iotthingsgraph.SearchThingsRequest
+	SearchThingsRequest(*types.SearchThingsInput) iotthingsgraph.SearchThingsRequest
 
-	TagResourceRequest(*iotthingsgraph.TagResourceInput) iotthingsgraph.TagResourceRequest
+	TagResourceRequest(*types.TagResourceInput) iotthingsgraph.TagResourceRequest
 
-	UndeploySystemInstanceRequest(*iotthingsgraph.UndeploySystemInstanceInput) iotthingsgraph.UndeploySystemInstanceRequest
+	UndeploySystemInstanceRequest(*types.UndeploySystemInstanceInput) iotthingsgraph.UndeploySystemInstanceRequest
 
-	UntagResourceRequest(*iotthingsgraph.UntagResourceInput) iotthingsgraph.UntagResourceRequest
+	UntagResourceRequest(*types.UntagResourceInput) iotthingsgraph.UntagResourceRequest
 
-	UpdateFlowTemplateRequest(*iotthingsgraph.UpdateFlowTemplateInput) iotthingsgraph.UpdateFlowTemplateRequest
+	UpdateFlowTemplateRequest(*types.UpdateFlowTemplateInput) iotthingsgraph.UpdateFlowTemplateRequest
 
-	UpdateSystemTemplateRequest(*iotthingsgraph.UpdateSystemTemplateInput) iotthingsgraph.UpdateSystemTemplateRequest
+	UpdateSystemTemplateRequest(*types.UpdateSystemTemplateInput) iotthingsgraph.UpdateSystemTemplateRequest
 
-	UploadEntityDefinitionsRequest(*iotthingsgraph.UploadEntityDefinitionsInput) iotthingsgraph.UploadEntityDefinitionsRequest
+	UploadEntityDefinitionsRequest(*types.UploadEntityDefinitionsInput) iotthingsgraph.UploadEntityDefinitionsRequest
 }
 
 var _ ClientAPI = (*iotthingsgraph.Client)(nil)

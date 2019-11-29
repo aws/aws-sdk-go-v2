@@ -6,65 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/elasticache/types"
 )
-
-// Represents the input of a ModifyCacheParameterGroup operation.
-type ModifyCacheParameterGroupInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the cache parameter group to modify.
-	//
-	// CacheParameterGroupName is a required field
-	CacheParameterGroupName *string `type:"string" required:"true"`
-
-	// An array of parameter names and values for the parameter update. You must
-	// supply at least one parameter name and value; subsequent arguments are optional.
-	// A maximum of 20 parameters may be modified per request.
-	//
-	// ParameterNameValues is a required field
-	ParameterNameValues []ParameterNameValue `locationNameList:"ParameterNameValue" type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s ModifyCacheParameterGroupInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ModifyCacheParameterGroupInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ModifyCacheParameterGroupInput"}
-
-	if s.CacheParameterGroupName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("CacheParameterGroupName"))
-	}
-
-	if s.ParameterNameValues == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ParameterNameValues"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Represents the output of one of the following operations:
-//
-//    * ModifyCacheParameterGroup
-//
-//    * ResetCacheParameterGroup
-type ModifyCacheParameterGroupOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the cache parameter group.
-	CacheParameterGroupName *string `type:"string"`
-}
-
-// String returns the string representation
-func (s ModifyCacheParameterGroupOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opModifyCacheParameterGroup = "ModifyCacheParameterGroup"
 
@@ -83,7 +26,7 @@ const opModifyCacheParameterGroup = "ModifyCacheParameterGroup"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/ModifyCacheParameterGroup
-func (c *Client) ModifyCacheParameterGroupRequest(input *ModifyCacheParameterGroupInput) ModifyCacheParameterGroupRequest {
+func (c *Client) ModifyCacheParameterGroupRequest(input *types.ModifyCacheParameterGroupInput) ModifyCacheParameterGroupRequest {
 	op := &aws.Operation{
 		Name:       opModifyCacheParameterGroup,
 		HTTPMethod: "POST",
@@ -91,10 +34,10 @@ func (c *Client) ModifyCacheParameterGroupRequest(input *ModifyCacheParameterGro
 	}
 
 	if input == nil {
-		input = &ModifyCacheParameterGroupInput{}
+		input = &types.ModifyCacheParameterGroupInput{}
 	}
 
-	req := c.newRequest(op, input, &ModifyCacheParameterGroupOutput{})
+	req := c.newRequest(op, input, &types.ModifyCacheParameterGroupOutput{})
 	return ModifyCacheParameterGroupRequest{Request: req, Input: input, Copy: c.ModifyCacheParameterGroupRequest}
 }
 
@@ -102,8 +45,8 @@ func (c *Client) ModifyCacheParameterGroupRequest(input *ModifyCacheParameterGro
 // ModifyCacheParameterGroup API operation.
 type ModifyCacheParameterGroupRequest struct {
 	*aws.Request
-	Input *ModifyCacheParameterGroupInput
-	Copy  func(*ModifyCacheParameterGroupInput) ModifyCacheParameterGroupRequest
+	Input *types.ModifyCacheParameterGroupInput
+	Copy  func(*types.ModifyCacheParameterGroupInput) ModifyCacheParameterGroupRequest
 }
 
 // Send marshals and sends the ModifyCacheParameterGroup API request.
@@ -115,7 +58,7 @@ func (r ModifyCacheParameterGroupRequest) Send(ctx context.Context) (*ModifyCach
 	}
 
 	resp := &ModifyCacheParameterGroupResponse{
-		ModifyCacheParameterGroupOutput: r.Request.Data.(*ModifyCacheParameterGroupOutput),
+		ModifyCacheParameterGroupOutput: r.Request.Data.(*types.ModifyCacheParameterGroupOutput),
 		response:                        &aws.Response{Request: r.Request},
 	}
 
@@ -125,7 +68,7 @@ func (r ModifyCacheParameterGroupRequest) Send(ctx context.Context) (*ModifyCach
 // ModifyCacheParameterGroupResponse is the response type for the
 // ModifyCacheParameterGroup API operation.
 type ModifyCacheParameterGroupResponse struct {
-	*ModifyCacheParameterGroupOutput
+	*types.ModifyCacheParameterGroupOutput
 
 	response *aws.Response
 }

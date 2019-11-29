@@ -6,48 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/forecast/types"
 )
-
-type GetAccuracyMetricsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the predictor to get metrics for.
-	//
-	// PredictorArn is a required field
-	PredictorArn *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetAccuracyMetricsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetAccuracyMetricsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetAccuracyMetricsInput"}
-
-	if s.PredictorArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("PredictorArn"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type GetAccuracyMetricsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// An array of results from evaluating the predictor.
-	PredictorEvaluationResults []EvaluationResult `type:"list"`
-}
-
-// String returns the string representation
-func (s GetAccuracyMetricsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetAccuracyMetrics = "GetAccuracyMetrics"
 
@@ -76,7 +36,7 @@ const opGetAccuracyMetrics = "GetAccuracyMetrics"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/GetAccuracyMetrics
-func (c *Client) GetAccuracyMetricsRequest(input *GetAccuracyMetricsInput) GetAccuracyMetricsRequest {
+func (c *Client) GetAccuracyMetricsRequest(input *types.GetAccuracyMetricsInput) GetAccuracyMetricsRequest {
 	op := &aws.Operation{
 		Name:       opGetAccuracyMetrics,
 		HTTPMethod: "POST",
@@ -84,10 +44,10 @@ func (c *Client) GetAccuracyMetricsRequest(input *GetAccuracyMetricsInput) GetAc
 	}
 
 	if input == nil {
-		input = &GetAccuracyMetricsInput{}
+		input = &types.GetAccuracyMetricsInput{}
 	}
 
-	req := c.newRequest(op, input, &GetAccuracyMetricsOutput{})
+	req := c.newRequest(op, input, &types.GetAccuracyMetricsOutput{})
 	return GetAccuracyMetricsRequest{Request: req, Input: input, Copy: c.GetAccuracyMetricsRequest}
 }
 
@@ -95,8 +55,8 @@ func (c *Client) GetAccuracyMetricsRequest(input *GetAccuracyMetricsInput) GetAc
 // GetAccuracyMetrics API operation.
 type GetAccuracyMetricsRequest struct {
 	*aws.Request
-	Input *GetAccuracyMetricsInput
-	Copy  func(*GetAccuracyMetricsInput) GetAccuracyMetricsRequest
+	Input *types.GetAccuracyMetricsInput
+	Copy  func(*types.GetAccuracyMetricsInput) GetAccuracyMetricsRequest
 }
 
 // Send marshals and sends the GetAccuracyMetrics API request.
@@ -108,7 +68,7 @@ func (r GetAccuracyMetricsRequest) Send(ctx context.Context) (*GetAccuracyMetric
 	}
 
 	resp := &GetAccuracyMetricsResponse{
-		GetAccuracyMetricsOutput: r.Request.Data.(*GetAccuracyMetricsOutput),
+		GetAccuracyMetricsOutput: r.Request.Data.(*types.GetAccuracyMetricsOutput),
 		response:                 &aws.Response{Request: r.Request},
 	}
 
@@ -118,7 +78,7 @@ func (r GetAccuracyMetricsRequest) Send(ctx context.Context) (*GetAccuracyMetric
 // GetAccuracyMetricsResponse is the response type for the
 // GetAccuracyMetrics API operation.
 type GetAccuracyMetricsResponse struct {
-	*GetAccuracyMetricsOutput
+	*types.GetAccuracyMetricsOutput
 
 	response *aws.Response
 }

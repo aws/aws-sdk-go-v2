@@ -6,47 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
+	"github.com/aws/aws-sdk-go-v2/service/globalaccelerator/types"
 )
-
-type DeleteListenerInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the listener.
-	//
-	// ListenerArn is a required field
-	ListenerArn *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteListenerInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteListenerInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteListenerInput"}
-
-	if s.ListenerArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ListenerArn"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteListenerOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteListenerOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteListener = "DeleteListener"
 
@@ -63,7 +26,7 @@ const opDeleteListener = "DeleteListener"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/DeleteListener
-func (c *Client) DeleteListenerRequest(input *DeleteListenerInput) DeleteListenerRequest {
+func (c *Client) DeleteListenerRequest(input *types.DeleteListenerInput) DeleteListenerRequest {
 	op := &aws.Operation{
 		Name:       opDeleteListener,
 		HTTPMethod: "POST",
@@ -71,10 +34,10 @@ func (c *Client) DeleteListenerRequest(input *DeleteListenerInput) DeleteListene
 	}
 
 	if input == nil {
-		input = &DeleteListenerInput{}
+		input = &types.DeleteListenerInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteListenerOutput{})
+	req := c.newRequest(op, input, &types.DeleteListenerOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return DeleteListenerRequest{Request: req, Input: input, Copy: c.DeleteListenerRequest}
@@ -84,8 +47,8 @@ func (c *Client) DeleteListenerRequest(input *DeleteListenerInput) DeleteListene
 // DeleteListener API operation.
 type DeleteListenerRequest struct {
 	*aws.Request
-	Input *DeleteListenerInput
-	Copy  func(*DeleteListenerInput) DeleteListenerRequest
+	Input *types.DeleteListenerInput
+	Copy  func(*types.DeleteListenerInput) DeleteListenerRequest
 }
 
 // Send marshals and sends the DeleteListener API request.
@@ -97,7 +60,7 @@ func (r DeleteListenerRequest) Send(ctx context.Context) (*DeleteListenerRespons
 	}
 
 	resp := &DeleteListenerResponse{
-		DeleteListenerOutput: r.Request.Data.(*DeleteListenerOutput),
+		DeleteListenerOutput: r.Request.Data.(*types.DeleteListenerOutput),
 		response:             &aws.Response{Request: r.Request},
 	}
 
@@ -107,7 +70,7 @@ func (r DeleteListenerRequest) Send(ctx context.Context) (*DeleteListenerRespons
 // DeleteListenerResponse is the response type for the
 // DeleteListener API operation.
 type DeleteListenerResponse struct {
-	*DeleteListenerOutput
+	*types.DeleteListenerOutput
 
 	response *aws.Response
 }

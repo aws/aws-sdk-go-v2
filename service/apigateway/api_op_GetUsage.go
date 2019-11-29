@@ -6,192 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/apigateway/types"
 )
-
-// The GET request to get the usage data of a usage plan in a specified time
-// interval.
-type GetUsageInput struct {
-	_ struct{} `type:"structure"`
-
-	// [Required] The ending date (e.g., 2016-12-31) of the usage data.
-	//
-	// EndDate is a required field
-	EndDate *string `location:"querystring" locationName:"endDate" type:"string" required:"true"`
-
-	// The Id of the API key associated with the resultant usage data.
-	KeyId *string `location:"querystring" locationName:"keyId" type:"string"`
-
-	// The maximum number of returned results per page. The default value is 25
-	// and the maximum value is 500.
-	Limit *int64 `location:"querystring" locationName:"limit" type:"integer"`
-
-	// The current pagination position in the paged result set.
-	Position *string `location:"querystring" locationName:"position" type:"string"`
-
-	// [Required] The starting date (e.g., 2016-01-01) of the usage data.
-	//
-	// StartDate is a required field
-	StartDate *string `location:"querystring" locationName:"startDate" type:"string" required:"true"`
-
-	// [Required] The Id of the usage plan associated with the usage data.
-	//
-	// UsagePlanId is a required field
-	UsagePlanId *string `location:"uri" locationName:"usageplanId" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetUsageInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetUsageInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetUsageInput"}
-
-	if s.EndDate == nil {
-		invalidParams.Add(aws.NewErrParamRequired("EndDate"))
-	}
-
-	if s.StartDate == nil {
-		invalidParams.Add(aws.NewErrParamRequired("StartDate"))
-	}
-
-	if s.UsagePlanId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("UsagePlanId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetUsageInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.UsagePlanId != nil {
-		v := *s.UsagePlanId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "usageplanId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.EndDate != nil {
-		v := *s.EndDate
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "endDate", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.KeyId != nil {
-		v := *s.KeyId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "keyId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Limit != nil {
-		v := *s.Limit
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "limit", protocol.Int64Value(v), metadata)
-	}
-	if s.Position != nil {
-		v := *s.Position
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "position", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.StartDate != nil {
-		v := *s.StartDate
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "startDate", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-// Represents the usage data of a usage plan.
-//
-// Create and Use Usage Plans (https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-api-usage-plans.html),
-// Manage Usage in a Usage Plan (https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-create-usage-plans-with-console.html#api-gateway-usage-plan-manage-usage)
-type GetUsageOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The ending date of the usage data.
-	EndDate *string `locationName:"endDate" type:"string"`
-
-	// The usage data, as daily logs of used and remaining quotas, over the specified
-	// time interval indexed over the API keys in a usage plan. For example, {...,
-	// "values" : { "{api_key}" : [ [0, 100], [10, 90], [100, 10]]}, where {api_key}
-	// stands for an API key value and the daily log entry is of the format [used
-	// quota, remaining quota].
-	Items map[string][][]int64 `locationName:"values" type:"map"`
-
-	Position *string `locationName:"position" type:"string"`
-
-	// The starting date of the usage data.
-	StartDate *string `locationName:"startDate" type:"string"`
-
-	// The plan Id associated with this usage data.
-	UsagePlanId *string `locationName:"usagePlanId" type:"string"`
-}
-
-// String returns the string representation
-func (s GetUsageOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetUsageOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.EndDate != nil {
-		v := *s.EndDate
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "endDate", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Items != nil {
-		v := s.Items
-
-		metadata := protocol.Metadata{}
-		ms0 := e.Map(protocol.BodyTarget, "values", metadata)
-		ms0.Start()
-		for k1, v1 := range v {
-			ls1 := ms0.List(k1)
-			ls1.Start()
-			for _, v2 := range v1 {
-				ls2 := ls1.List()
-				ls2.Start()
-				for _, v3 := range v2 {
-					ls2.ListAddValue(protocol.Int64Value(v3))
-				}
-				ls2.End()
-			}
-			ls1.End()
-		}
-		ms0.End()
-
-	}
-	if s.Position != nil {
-		v := *s.Position
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "position", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.StartDate != nil {
-		v := *s.StartDate
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "startDate", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.UsagePlanId != nil {
-		v := *s.UsagePlanId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "usagePlanId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opGetUsage = "GetUsage"
 
@@ -206,7 +22,7 @@ const opGetUsage = "GetUsage"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) GetUsageRequest(input *GetUsageInput) GetUsageRequest {
+func (c *Client) GetUsageRequest(input *types.GetUsageInput) GetUsageRequest {
 	op := &aws.Operation{
 		Name:       opGetUsage,
 		HTTPMethod: "GET",
@@ -220,10 +36,10 @@ func (c *Client) GetUsageRequest(input *GetUsageInput) GetUsageRequest {
 	}
 
 	if input == nil {
-		input = &GetUsageInput{}
+		input = &types.GetUsageInput{}
 	}
 
-	req := c.newRequest(op, input, &GetUsageOutput{})
+	req := c.newRequest(op, input, &types.GetUsageOutput{})
 	return GetUsageRequest{Request: req, Input: input, Copy: c.GetUsageRequest}
 }
 
@@ -231,8 +47,8 @@ func (c *Client) GetUsageRequest(input *GetUsageInput) GetUsageRequest {
 // GetUsage API operation.
 type GetUsageRequest struct {
 	*aws.Request
-	Input *GetUsageInput
-	Copy  func(*GetUsageInput) GetUsageRequest
+	Input *types.GetUsageInput
+	Copy  func(*types.GetUsageInput) GetUsageRequest
 }
 
 // Send marshals and sends the GetUsage API request.
@@ -244,7 +60,7 @@ func (r GetUsageRequest) Send(ctx context.Context) (*GetUsageResponse, error) {
 	}
 
 	resp := &GetUsageResponse{
-		GetUsageOutput: r.Request.Data.(*GetUsageOutput),
+		GetUsageOutput: r.Request.Data.(*types.GetUsageOutput),
 		response:       &aws.Response{Request: r.Request},
 	}
 
@@ -274,7 +90,7 @@ func NewGetUsagePaginator(req GetUsageRequest) GetUsagePaginator {
 	return GetUsagePaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *GetUsageInput
+				var inCpy *types.GetUsageInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -294,14 +110,14 @@ type GetUsagePaginator struct {
 	aws.Pager
 }
 
-func (p *GetUsagePaginator) CurrentPage() *GetUsageOutput {
-	return p.Pager.CurrentPage().(*GetUsageOutput)
+func (p *GetUsagePaginator) CurrentPage() *types.GetUsageOutput {
+	return p.Pager.CurrentPage().(*types.GetUsageOutput)
 }
 
 // GetUsageResponse is the response type for the
 // GetUsage API operation.
 type GetUsageResponse struct {
-	*GetUsageOutput
+	*types.GetUsageOutput
 
 	response *aws.Response
 }

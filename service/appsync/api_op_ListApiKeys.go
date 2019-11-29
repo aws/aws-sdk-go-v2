@@ -6,108 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/appsync/types"
 )
-
-type ListApiKeysInput struct {
-	_ struct{} `type:"structure"`
-
-	// The API ID.
-	//
-	// ApiId is a required field
-	ApiId *string `location:"uri" locationName:"apiId" type:"string" required:"true"`
-
-	// The maximum number of results you want the request to return.
-	MaxResults *int64 `location:"querystring" locationName:"maxResults" type:"integer"`
-
-	// An identifier that was returned from the previous call to this operation,
-	// which can be used to return the next set of items in the list.
-	NextToken *string `location:"querystring" locationName:"nextToken" type:"string"`
-}
-
-// String returns the string representation
-func (s ListApiKeysInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListApiKeysInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListApiKeysInput"}
-
-	if s.ApiId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ApiId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListApiKeysInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.ApiId != nil {
-		v := *s.ApiId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "apiId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.MaxResults != nil {
-		v := *s.MaxResults
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "maxResults", protocol.Int64Value(v), metadata)
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type ListApiKeysOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The ApiKey objects.
-	ApiKeys []ApiKey `locationName:"apiKeys" type:"list"`
-
-	// An identifier to be passed in the next request to this operation to return
-	// the next set of items in the list.
-	NextToken *string `locationName:"nextToken" type:"string"`
-}
-
-// String returns the string representation
-func (s ListApiKeysOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListApiKeysOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.ApiKeys != nil {
-		v := s.ApiKeys
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "apiKeys", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opListApiKeys = "ListApiKeys"
 
@@ -129,7 +29,7 @@ const opListApiKeys = "ListApiKeys"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/ListApiKeys
-func (c *Client) ListApiKeysRequest(input *ListApiKeysInput) ListApiKeysRequest {
+func (c *Client) ListApiKeysRequest(input *types.ListApiKeysInput) ListApiKeysRequest {
 	op := &aws.Operation{
 		Name:       opListApiKeys,
 		HTTPMethod: "GET",
@@ -137,10 +37,10 @@ func (c *Client) ListApiKeysRequest(input *ListApiKeysInput) ListApiKeysRequest 
 	}
 
 	if input == nil {
-		input = &ListApiKeysInput{}
+		input = &types.ListApiKeysInput{}
 	}
 
-	req := c.newRequest(op, input, &ListApiKeysOutput{})
+	req := c.newRequest(op, input, &types.ListApiKeysOutput{})
 	return ListApiKeysRequest{Request: req, Input: input, Copy: c.ListApiKeysRequest}
 }
 
@@ -148,8 +48,8 @@ func (c *Client) ListApiKeysRequest(input *ListApiKeysInput) ListApiKeysRequest 
 // ListApiKeys API operation.
 type ListApiKeysRequest struct {
 	*aws.Request
-	Input *ListApiKeysInput
-	Copy  func(*ListApiKeysInput) ListApiKeysRequest
+	Input *types.ListApiKeysInput
+	Copy  func(*types.ListApiKeysInput) ListApiKeysRequest
 }
 
 // Send marshals and sends the ListApiKeys API request.
@@ -161,7 +61,7 @@ func (r ListApiKeysRequest) Send(ctx context.Context) (*ListApiKeysResponse, err
 	}
 
 	resp := &ListApiKeysResponse{
-		ListApiKeysOutput: r.Request.Data.(*ListApiKeysOutput),
+		ListApiKeysOutput: r.Request.Data.(*types.ListApiKeysOutput),
 		response:          &aws.Response{Request: r.Request},
 	}
 
@@ -171,7 +71,7 @@ func (r ListApiKeysRequest) Send(ctx context.Context) (*ListApiKeysResponse, err
 // ListApiKeysResponse is the response type for the
 // ListApiKeys API operation.
 type ListApiKeysResponse struct {
-	*ListApiKeysOutput
+	*types.ListApiKeysOutput
 
 	response *aws.Response
 }

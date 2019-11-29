@@ -6,57 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-type ResetFpgaImageAttributeInput struct {
-	_ struct{} `type:"structure"`
-
-	// The attribute.
-	Attribute ResetFpgaImageAttributeName `type:"string" enum:"true"`
-
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have
-	// the required permissions, the error response is DryRunOperation. Otherwise,
-	// it is UnauthorizedOperation.
-	DryRun *bool `type:"boolean"`
-
-	// The ID of the AFI.
-	//
-	// FpgaImageId is a required field
-	FpgaImageId *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s ResetFpgaImageAttributeInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ResetFpgaImageAttributeInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ResetFpgaImageAttributeInput"}
-
-	if s.FpgaImageId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("FpgaImageId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ResetFpgaImageAttributeOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Is true if the request succeeds, and an error otherwise.
-	Return *bool `locationName:"return" type:"boolean"`
-}
-
-// String returns the string representation
-func (s ResetFpgaImageAttributeOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opResetFpgaImageAttribute = "ResetFpgaImageAttribute"
 
@@ -74,7 +25,7 @@ const opResetFpgaImageAttribute = "ResetFpgaImageAttribute"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ResetFpgaImageAttribute
-func (c *Client) ResetFpgaImageAttributeRequest(input *ResetFpgaImageAttributeInput) ResetFpgaImageAttributeRequest {
+func (c *Client) ResetFpgaImageAttributeRequest(input *types.ResetFpgaImageAttributeInput) ResetFpgaImageAttributeRequest {
 	op := &aws.Operation{
 		Name:       opResetFpgaImageAttribute,
 		HTTPMethod: "POST",
@@ -82,10 +33,10 @@ func (c *Client) ResetFpgaImageAttributeRequest(input *ResetFpgaImageAttributeIn
 	}
 
 	if input == nil {
-		input = &ResetFpgaImageAttributeInput{}
+		input = &types.ResetFpgaImageAttributeInput{}
 	}
 
-	req := c.newRequest(op, input, &ResetFpgaImageAttributeOutput{})
+	req := c.newRequest(op, input, &types.ResetFpgaImageAttributeOutput{})
 	return ResetFpgaImageAttributeRequest{Request: req, Input: input, Copy: c.ResetFpgaImageAttributeRequest}
 }
 
@@ -93,8 +44,8 @@ func (c *Client) ResetFpgaImageAttributeRequest(input *ResetFpgaImageAttributeIn
 // ResetFpgaImageAttribute API operation.
 type ResetFpgaImageAttributeRequest struct {
 	*aws.Request
-	Input *ResetFpgaImageAttributeInput
-	Copy  func(*ResetFpgaImageAttributeInput) ResetFpgaImageAttributeRequest
+	Input *types.ResetFpgaImageAttributeInput
+	Copy  func(*types.ResetFpgaImageAttributeInput) ResetFpgaImageAttributeRequest
 }
 
 // Send marshals and sends the ResetFpgaImageAttribute API request.
@@ -106,7 +57,7 @@ func (r ResetFpgaImageAttributeRequest) Send(ctx context.Context) (*ResetFpgaIma
 	}
 
 	resp := &ResetFpgaImageAttributeResponse{
-		ResetFpgaImageAttributeOutput: r.Request.Data.(*ResetFpgaImageAttributeOutput),
+		ResetFpgaImageAttributeOutput: r.Request.Data.(*types.ResetFpgaImageAttributeOutput),
 		response:                      &aws.Response{Request: r.Request},
 	}
 
@@ -116,7 +67,7 @@ func (r ResetFpgaImageAttributeRequest) Send(ctx context.Context) (*ResetFpgaIma
 // ResetFpgaImageAttributeResponse is the response type for the
 // ResetFpgaImageAttribute API operation.
 type ResetFpgaImageAttributeResponse struct {
-	*ResetFpgaImageAttributeOutput
+	*types.ResetFpgaImageAttributeOutput
 
 	response *aws.Response
 }

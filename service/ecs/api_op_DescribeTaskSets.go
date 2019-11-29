@@ -6,65 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ecs/types"
 )
-
-type DescribeTaskSetsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The short name or full Amazon Resource Name (ARN) of the cluster that hosts
-	// the service that the task sets exist in.
-	//
-	// Cluster is a required field
-	Cluster *string `locationName:"cluster" type:"string" required:"true"`
-
-	// The short name or full Amazon Resource Name (ARN) of the service that the
-	// task sets exist in.
-	//
-	// Service is a required field
-	Service *string `locationName:"service" type:"string" required:"true"`
-
-	// The ID or full Amazon Resource Name (ARN) of task sets to describe.
-	TaskSets []string `locationName:"taskSets" type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeTaskSetsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeTaskSetsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeTaskSetsInput"}
-
-	if s.Cluster == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Cluster"))
-	}
-
-	if s.Service == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Service"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribeTaskSetsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Any failures associated with the call.
-	Failures []Failure `locationName:"failures" type:"list"`
-
-	// The list of task sets described.
-	TaskSets []TaskSet `locationName:"taskSets" type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeTaskSetsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeTaskSets = "DescribeTaskSets"
 
@@ -84,7 +27,7 @@ const opDescribeTaskSets = "DescribeTaskSets"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DescribeTaskSets
-func (c *Client) DescribeTaskSetsRequest(input *DescribeTaskSetsInput) DescribeTaskSetsRequest {
+func (c *Client) DescribeTaskSetsRequest(input *types.DescribeTaskSetsInput) DescribeTaskSetsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeTaskSets,
 		HTTPMethod: "POST",
@@ -92,10 +35,10 @@ func (c *Client) DescribeTaskSetsRequest(input *DescribeTaskSetsInput) DescribeT
 	}
 
 	if input == nil {
-		input = &DescribeTaskSetsInput{}
+		input = &types.DescribeTaskSetsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeTaskSetsOutput{})
+	req := c.newRequest(op, input, &types.DescribeTaskSetsOutput{})
 	return DescribeTaskSetsRequest{Request: req, Input: input, Copy: c.DescribeTaskSetsRequest}
 }
 
@@ -103,8 +46,8 @@ func (c *Client) DescribeTaskSetsRequest(input *DescribeTaskSetsInput) DescribeT
 // DescribeTaskSets API operation.
 type DescribeTaskSetsRequest struct {
 	*aws.Request
-	Input *DescribeTaskSetsInput
-	Copy  func(*DescribeTaskSetsInput) DescribeTaskSetsRequest
+	Input *types.DescribeTaskSetsInput
+	Copy  func(*types.DescribeTaskSetsInput) DescribeTaskSetsRequest
 }
 
 // Send marshals and sends the DescribeTaskSets API request.
@@ -116,7 +59,7 @@ func (r DescribeTaskSetsRequest) Send(ctx context.Context) (*DescribeTaskSetsRes
 	}
 
 	resp := &DescribeTaskSetsResponse{
-		DescribeTaskSetsOutput: r.Request.Data.(*DescribeTaskSetsOutput),
+		DescribeTaskSetsOutput: r.Request.Data.(*types.DescribeTaskSetsOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -126,7 +69,7 @@ func (r DescribeTaskSetsRequest) Send(ctx context.Context) (*DescribeTaskSetsRes
 // DescribeTaskSetsResponse is the response type for the
 // DescribeTaskSets API operation.
 type DescribeTaskSetsResponse struct {
-	*DescribeTaskSetsOutput
+	*types.DescribeTaskSetsOutput
 
 	response *aws.Response
 }

@@ -6,42 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/datasync/types"
 )
-
-// ListAgentsRequest
-type ListAgentsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The maximum number of agents to list.
-	MaxResults *int64 `type:"integer"`
-
-	// An opaque string that indicates the position at which to begin the next list
-	// of agents.
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s ListAgentsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// ListAgentsResponse
-type ListAgentsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A list of agents in your account.
-	Agents []AgentListEntry `type:"list"`
-
-	// An opaque string that indicates the position at which to begin returning
-	// the next list of agents.
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s ListAgentsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListAgents = "ListAgents"
 
@@ -68,7 +34,7 @@ const opListAgents = "ListAgents"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/ListAgents
-func (c *Client) ListAgentsRequest(input *ListAgentsInput) ListAgentsRequest {
+func (c *Client) ListAgentsRequest(input *types.ListAgentsInput) ListAgentsRequest {
 	op := &aws.Operation{
 		Name:       opListAgents,
 		HTTPMethod: "POST",
@@ -82,10 +48,10 @@ func (c *Client) ListAgentsRequest(input *ListAgentsInput) ListAgentsRequest {
 	}
 
 	if input == nil {
-		input = &ListAgentsInput{}
+		input = &types.ListAgentsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListAgentsOutput{})
+	req := c.newRequest(op, input, &types.ListAgentsOutput{})
 	return ListAgentsRequest{Request: req, Input: input, Copy: c.ListAgentsRequest}
 }
 
@@ -93,8 +59,8 @@ func (c *Client) ListAgentsRequest(input *ListAgentsInput) ListAgentsRequest {
 // ListAgents API operation.
 type ListAgentsRequest struct {
 	*aws.Request
-	Input *ListAgentsInput
-	Copy  func(*ListAgentsInput) ListAgentsRequest
+	Input *types.ListAgentsInput
+	Copy  func(*types.ListAgentsInput) ListAgentsRequest
 }
 
 // Send marshals and sends the ListAgents API request.
@@ -106,7 +72,7 @@ func (r ListAgentsRequest) Send(ctx context.Context) (*ListAgentsResponse, error
 	}
 
 	resp := &ListAgentsResponse{
-		ListAgentsOutput: r.Request.Data.(*ListAgentsOutput),
+		ListAgentsOutput: r.Request.Data.(*types.ListAgentsOutput),
 		response:         &aws.Response{Request: r.Request},
 	}
 
@@ -136,7 +102,7 @@ func NewListAgentsPaginator(req ListAgentsRequest) ListAgentsPaginator {
 	return ListAgentsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListAgentsInput
+				var inCpy *types.ListAgentsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -156,14 +122,14 @@ type ListAgentsPaginator struct {
 	aws.Pager
 }
 
-func (p *ListAgentsPaginator) CurrentPage() *ListAgentsOutput {
-	return p.Pager.CurrentPage().(*ListAgentsOutput)
+func (p *ListAgentsPaginator) CurrentPage() *types.ListAgentsOutput {
+	return p.Pager.CurrentPage().(*types.ListAgentsOutput)
 }
 
 // ListAgentsResponse is the response type for the
 // ListAgents API operation.
 type ListAgentsResponse struct {
-	*ListAgentsOutput
+	*types.ListAgentsOutput
 
 	response *aws.Response
 }

@@ -6,92 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/kms/types"
 )
-
-type ListKeyPoliciesInput struct {
-	_ struct{} `type:"structure"`
-
-	// A unique identifier for the customer master key (CMK).
-	//
-	// Specify the key ID or the Amazon Resource Name (ARN) of the CMK.
-	//
-	// For example:
-	//
-	//    * Key ID: 1234abcd-12ab-34cd-56ef-1234567890ab
-	//
-	//    * Key ARN: arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab
-	//
-	// To get the key ID and key ARN for a CMK, use ListKeys or DescribeKey.
-	//
-	// KeyId is a required field
-	KeyId *string `min:"1" type:"string" required:"true"`
-
-	// Use this parameter to specify the maximum number of items to return. When
-	// this value is present, AWS KMS does not return more than the specified number
-	// of items, but it might return fewer.
-	//
-	// This value is optional. If you include a value, it must be between 1 and
-	// 1000, inclusive. If you do not include a value, it defaults to 100.
-	//
-	// Only one policy can be attached to a key.
-	Limit *int64 `min:"1" type:"integer"`
-
-	// Use this parameter in a subsequent request after you receive a response with
-	// truncated results. Set it to the value of NextMarker from the truncated response
-	// you just received.
-	Marker *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s ListKeyPoliciesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListKeyPoliciesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListKeyPoliciesInput"}
-
-	if s.KeyId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("KeyId"))
-	}
-	if s.KeyId != nil && len(*s.KeyId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("KeyId", 1))
-	}
-	if s.Limit != nil && *s.Limit < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("Limit", 1))
-	}
-	if s.Marker != nil && len(*s.Marker) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Marker", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ListKeyPoliciesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// When Truncated is true, this element is present and contains the value to
-	// use for the Marker parameter in a subsequent request.
-	NextMarker *string `min:"1" type:"string"`
-
-	// A list of key policy names. The only valid value is default.
-	PolicyNames []string `type:"list"`
-
-	// A flag that indicates whether there are more items in the list. When this
-	// value is true, the list in this response is truncated. To get more items,
-	// pass the value of the NextMarker element in thisresponse to the Marker parameter
-	// in a subsequent request.
-	Truncated *bool `type:"boolean"`
-}
-
-// String returns the string representation
-func (s ListKeyPoliciesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListKeyPolicies = "ListKeyPolicies"
 
@@ -111,7 +27,7 @@ const opListKeyPolicies = "ListKeyPolicies"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/ListKeyPolicies
-func (c *Client) ListKeyPoliciesRequest(input *ListKeyPoliciesInput) ListKeyPoliciesRequest {
+func (c *Client) ListKeyPoliciesRequest(input *types.ListKeyPoliciesInput) ListKeyPoliciesRequest {
 	op := &aws.Operation{
 		Name:       opListKeyPolicies,
 		HTTPMethod: "POST",
@@ -125,10 +41,10 @@ func (c *Client) ListKeyPoliciesRequest(input *ListKeyPoliciesInput) ListKeyPoli
 	}
 
 	if input == nil {
-		input = &ListKeyPoliciesInput{}
+		input = &types.ListKeyPoliciesInput{}
 	}
 
-	req := c.newRequest(op, input, &ListKeyPoliciesOutput{})
+	req := c.newRequest(op, input, &types.ListKeyPoliciesOutput{})
 	return ListKeyPoliciesRequest{Request: req, Input: input, Copy: c.ListKeyPoliciesRequest}
 }
 
@@ -136,8 +52,8 @@ func (c *Client) ListKeyPoliciesRequest(input *ListKeyPoliciesInput) ListKeyPoli
 // ListKeyPolicies API operation.
 type ListKeyPoliciesRequest struct {
 	*aws.Request
-	Input *ListKeyPoliciesInput
-	Copy  func(*ListKeyPoliciesInput) ListKeyPoliciesRequest
+	Input *types.ListKeyPoliciesInput
+	Copy  func(*types.ListKeyPoliciesInput) ListKeyPoliciesRequest
 }
 
 // Send marshals and sends the ListKeyPolicies API request.
@@ -149,7 +65,7 @@ func (r ListKeyPoliciesRequest) Send(ctx context.Context) (*ListKeyPoliciesRespo
 	}
 
 	resp := &ListKeyPoliciesResponse{
-		ListKeyPoliciesOutput: r.Request.Data.(*ListKeyPoliciesOutput),
+		ListKeyPoliciesOutput: r.Request.Data.(*types.ListKeyPoliciesOutput),
 		response:              &aws.Response{Request: r.Request},
 	}
 
@@ -179,7 +95,7 @@ func NewListKeyPoliciesPaginator(req ListKeyPoliciesRequest) ListKeyPoliciesPagi
 	return ListKeyPoliciesPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListKeyPoliciesInput
+				var inCpy *types.ListKeyPoliciesInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -199,14 +115,14 @@ type ListKeyPoliciesPaginator struct {
 	aws.Pager
 }
 
-func (p *ListKeyPoliciesPaginator) CurrentPage() *ListKeyPoliciesOutput {
-	return p.Pager.CurrentPage().(*ListKeyPoliciesOutput)
+func (p *ListKeyPoliciesPaginator) CurrentPage() *types.ListKeyPoliciesOutput {
+	return p.Pager.CurrentPage().(*types.ListKeyPoliciesOutput)
 }
 
 // ListKeyPoliciesResponse is the response type for the
 // ListKeyPolicies API operation.
 type ListKeyPoliciesResponse struct {
-	*ListKeyPoliciesOutput
+	*types.ListKeyPoliciesOutput
 
 	response *aws.Response
 }

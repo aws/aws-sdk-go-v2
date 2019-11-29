@@ -6,76 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/types"
 )
-
-type AdminListUserAuthEventsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The maximum number of authentication events to return.
-	MaxResults *int64 `type:"integer"`
-
-	// A pagination token.
-	NextToken *string `min:"1" type:"string"`
-
-	// The user pool ID.
-	//
-	// UserPoolId is a required field
-	UserPoolId *string `min:"1" type:"string" required:"true"`
-
-	// The user pool username or an alias.
-	//
-	// Username is a required field
-	Username *string `min:"1" type:"string" required:"true" sensitive:"true"`
-}
-
-// String returns the string representation
-func (s AdminListUserAuthEventsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *AdminListUserAuthEventsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "AdminListUserAuthEventsInput"}
-	if s.NextToken != nil && len(*s.NextToken) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
-	}
-
-	if s.UserPoolId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("UserPoolId"))
-	}
-	if s.UserPoolId != nil && len(*s.UserPoolId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("UserPoolId", 1))
-	}
-
-	if s.Username == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Username"))
-	}
-	if s.Username != nil && len(*s.Username) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Username", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type AdminListUserAuthEventsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The response object. It includes the EventID, EventType, CreationDate, EventRisk,
-	// and EventResponse.
-	AuthEvents []AuthEventType `type:"list"`
-
-	// A pagination token.
-	NextToken *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s AdminListUserAuthEventsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opAdminListUserAuthEvents = "AdminListUserAuthEvents"
 
@@ -93,7 +25,7 @@ const opAdminListUserAuthEvents = "AdminListUserAuthEvents"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AdminListUserAuthEvents
-func (c *Client) AdminListUserAuthEventsRequest(input *AdminListUserAuthEventsInput) AdminListUserAuthEventsRequest {
+func (c *Client) AdminListUserAuthEventsRequest(input *types.AdminListUserAuthEventsInput) AdminListUserAuthEventsRequest {
 	op := &aws.Operation{
 		Name:       opAdminListUserAuthEvents,
 		HTTPMethod: "POST",
@@ -107,10 +39,10 @@ func (c *Client) AdminListUserAuthEventsRequest(input *AdminListUserAuthEventsIn
 	}
 
 	if input == nil {
-		input = &AdminListUserAuthEventsInput{}
+		input = &types.AdminListUserAuthEventsInput{}
 	}
 
-	req := c.newRequest(op, input, &AdminListUserAuthEventsOutput{})
+	req := c.newRequest(op, input, &types.AdminListUserAuthEventsOutput{})
 	return AdminListUserAuthEventsRequest{Request: req, Input: input, Copy: c.AdminListUserAuthEventsRequest}
 }
 
@@ -118,8 +50,8 @@ func (c *Client) AdminListUserAuthEventsRequest(input *AdminListUserAuthEventsIn
 // AdminListUserAuthEvents API operation.
 type AdminListUserAuthEventsRequest struct {
 	*aws.Request
-	Input *AdminListUserAuthEventsInput
-	Copy  func(*AdminListUserAuthEventsInput) AdminListUserAuthEventsRequest
+	Input *types.AdminListUserAuthEventsInput
+	Copy  func(*types.AdminListUserAuthEventsInput) AdminListUserAuthEventsRequest
 }
 
 // Send marshals and sends the AdminListUserAuthEvents API request.
@@ -131,7 +63,7 @@ func (r AdminListUserAuthEventsRequest) Send(ctx context.Context) (*AdminListUse
 	}
 
 	resp := &AdminListUserAuthEventsResponse{
-		AdminListUserAuthEventsOutput: r.Request.Data.(*AdminListUserAuthEventsOutput),
+		AdminListUserAuthEventsOutput: r.Request.Data.(*types.AdminListUserAuthEventsOutput),
 		response:                      &aws.Response{Request: r.Request},
 	}
 
@@ -161,7 +93,7 @@ func NewAdminListUserAuthEventsPaginator(req AdminListUserAuthEventsRequest) Adm
 	return AdminListUserAuthEventsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *AdminListUserAuthEventsInput
+				var inCpy *types.AdminListUserAuthEventsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -181,14 +113,14 @@ type AdminListUserAuthEventsPaginator struct {
 	aws.Pager
 }
 
-func (p *AdminListUserAuthEventsPaginator) CurrentPage() *AdminListUserAuthEventsOutput {
-	return p.Pager.CurrentPage().(*AdminListUserAuthEventsOutput)
+func (p *AdminListUserAuthEventsPaginator) CurrentPage() *types.AdminListUserAuthEventsOutput {
+	return p.Pager.CurrentPage().(*types.AdminListUserAuthEventsOutput)
 }
 
 // AdminListUserAuthEventsResponse is the response type for the
 // AdminListUserAuthEvents API operation.
 type AdminListUserAuthEventsResponse struct {
-	*AdminListUserAuthEventsOutput
+	*types.AdminListUserAuthEventsOutput
 
 	response *aws.Response
 }

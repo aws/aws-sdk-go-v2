@@ -6,63 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-type DisassociateTransitGatewayRouteTableInput struct {
-	_ struct{} `type:"structure"`
-
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have
-	// the required permissions, the error response is DryRunOperation. Otherwise,
-	// it is UnauthorizedOperation.
-	DryRun *bool `type:"boolean"`
-
-	// The ID of the attachment.
-	//
-	// TransitGatewayAttachmentId is a required field
-	TransitGatewayAttachmentId *string `type:"string" required:"true"`
-
-	// The ID of the transit gateway route table.
-	//
-	// TransitGatewayRouteTableId is a required field
-	TransitGatewayRouteTableId *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DisassociateTransitGatewayRouteTableInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DisassociateTransitGatewayRouteTableInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DisassociateTransitGatewayRouteTableInput"}
-
-	if s.TransitGatewayAttachmentId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("TransitGatewayAttachmentId"))
-	}
-
-	if s.TransitGatewayRouteTableId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("TransitGatewayRouteTableId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DisassociateTransitGatewayRouteTableOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Information about the association.
-	Association *TransitGatewayAssociation `locationName:"association" type:"structure"`
-}
-
-// String returns the string representation
-func (s DisassociateTransitGatewayRouteTableOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDisassociateTransitGatewayRouteTable = "DisassociateTransitGatewayRouteTable"
 
@@ -79,7 +24,7 @@ const opDisassociateTransitGatewayRouteTable = "DisassociateTransitGatewayRouteT
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DisassociateTransitGatewayRouteTable
-func (c *Client) DisassociateTransitGatewayRouteTableRequest(input *DisassociateTransitGatewayRouteTableInput) DisassociateTransitGatewayRouteTableRequest {
+func (c *Client) DisassociateTransitGatewayRouteTableRequest(input *types.DisassociateTransitGatewayRouteTableInput) DisassociateTransitGatewayRouteTableRequest {
 	op := &aws.Operation{
 		Name:       opDisassociateTransitGatewayRouteTable,
 		HTTPMethod: "POST",
@@ -87,10 +32,10 @@ func (c *Client) DisassociateTransitGatewayRouteTableRequest(input *Disassociate
 	}
 
 	if input == nil {
-		input = &DisassociateTransitGatewayRouteTableInput{}
+		input = &types.DisassociateTransitGatewayRouteTableInput{}
 	}
 
-	req := c.newRequest(op, input, &DisassociateTransitGatewayRouteTableOutput{})
+	req := c.newRequest(op, input, &types.DisassociateTransitGatewayRouteTableOutput{})
 	return DisassociateTransitGatewayRouteTableRequest{Request: req, Input: input, Copy: c.DisassociateTransitGatewayRouteTableRequest}
 }
 
@@ -98,8 +43,8 @@ func (c *Client) DisassociateTransitGatewayRouteTableRequest(input *Disassociate
 // DisassociateTransitGatewayRouteTable API operation.
 type DisassociateTransitGatewayRouteTableRequest struct {
 	*aws.Request
-	Input *DisassociateTransitGatewayRouteTableInput
-	Copy  func(*DisassociateTransitGatewayRouteTableInput) DisassociateTransitGatewayRouteTableRequest
+	Input *types.DisassociateTransitGatewayRouteTableInput
+	Copy  func(*types.DisassociateTransitGatewayRouteTableInput) DisassociateTransitGatewayRouteTableRequest
 }
 
 // Send marshals and sends the DisassociateTransitGatewayRouteTable API request.
@@ -111,7 +56,7 @@ func (r DisassociateTransitGatewayRouteTableRequest) Send(ctx context.Context) (
 	}
 
 	resp := &DisassociateTransitGatewayRouteTableResponse{
-		DisassociateTransitGatewayRouteTableOutput: r.Request.Data.(*DisassociateTransitGatewayRouteTableOutput),
+		DisassociateTransitGatewayRouteTableOutput: r.Request.Data.(*types.DisassociateTransitGatewayRouteTableOutput),
 		response: &aws.Response{Request: r.Request},
 	}
 
@@ -121,7 +66,7 @@ func (r DisassociateTransitGatewayRouteTableRequest) Send(ctx context.Context) (
 // DisassociateTransitGatewayRouteTableResponse is the response type for the
 // DisassociateTransitGatewayRouteTable API operation.
 type DisassociateTransitGatewayRouteTableResponse struct {
-	*DisassociateTransitGatewayRouteTableOutput
+	*types.DisassociateTransitGatewayRouteTableOutput
 
 	response *aws.Response
 }

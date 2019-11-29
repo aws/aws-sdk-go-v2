@@ -6,61 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/elasticbeanstalk/types"
 )
-
-// Results message indicating whether a CNAME is available.
-type CheckDNSAvailabilityInput struct {
-	_ struct{} `type:"structure"`
-
-	// The prefix used when this CNAME is reserved.
-	//
-	// CNAMEPrefix is a required field
-	CNAMEPrefix *string `min:"4" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s CheckDNSAvailabilityInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CheckDNSAvailabilityInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CheckDNSAvailabilityInput"}
-
-	if s.CNAMEPrefix == nil {
-		invalidParams.Add(aws.NewErrParamRequired("CNAMEPrefix"))
-	}
-	if s.CNAMEPrefix != nil && len(*s.CNAMEPrefix) < 4 {
-		invalidParams.Add(aws.NewErrParamMinLen("CNAMEPrefix", 4))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Indicates if the specified CNAME is available.
-type CheckDNSAvailabilityOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Indicates if the specified CNAME is available:
-	//
-	//    * true : The CNAME is available.
-	//
-	//    * false : The CNAME is not available.
-	Available *bool `type:"boolean"`
-
-	// The fully qualified CNAME to reserve when CreateEnvironment is called with
-	// the provided prefix.
-	FullyQualifiedCNAME *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s CheckDNSAvailabilityOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCheckDNSAvailability = "CheckDNSAvailability"
 
@@ -77,7 +24,7 @@ const opCheckDNSAvailability = "CheckDNSAvailability"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/CheckDNSAvailability
-func (c *Client) CheckDNSAvailabilityRequest(input *CheckDNSAvailabilityInput) CheckDNSAvailabilityRequest {
+func (c *Client) CheckDNSAvailabilityRequest(input *types.CheckDNSAvailabilityInput) CheckDNSAvailabilityRequest {
 	op := &aws.Operation{
 		Name:       opCheckDNSAvailability,
 		HTTPMethod: "POST",
@@ -85,10 +32,10 @@ func (c *Client) CheckDNSAvailabilityRequest(input *CheckDNSAvailabilityInput) C
 	}
 
 	if input == nil {
-		input = &CheckDNSAvailabilityInput{}
+		input = &types.CheckDNSAvailabilityInput{}
 	}
 
-	req := c.newRequest(op, input, &CheckDNSAvailabilityOutput{})
+	req := c.newRequest(op, input, &types.CheckDNSAvailabilityOutput{})
 	return CheckDNSAvailabilityRequest{Request: req, Input: input, Copy: c.CheckDNSAvailabilityRequest}
 }
 
@@ -96,8 +43,8 @@ func (c *Client) CheckDNSAvailabilityRequest(input *CheckDNSAvailabilityInput) C
 // CheckDNSAvailability API operation.
 type CheckDNSAvailabilityRequest struct {
 	*aws.Request
-	Input *CheckDNSAvailabilityInput
-	Copy  func(*CheckDNSAvailabilityInput) CheckDNSAvailabilityRequest
+	Input *types.CheckDNSAvailabilityInput
+	Copy  func(*types.CheckDNSAvailabilityInput) CheckDNSAvailabilityRequest
 }
 
 // Send marshals and sends the CheckDNSAvailability API request.
@@ -109,7 +56,7 @@ func (r CheckDNSAvailabilityRequest) Send(ctx context.Context) (*CheckDNSAvailab
 	}
 
 	resp := &CheckDNSAvailabilityResponse{
-		CheckDNSAvailabilityOutput: r.Request.Data.(*CheckDNSAvailabilityOutput),
+		CheckDNSAvailabilityOutput: r.Request.Data.(*types.CheckDNSAvailabilityOutput),
 		response:                   &aws.Response{Request: r.Request},
 	}
 
@@ -119,7 +66,7 @@ func (r CheckDNSAvailabilityRequest) Send(ctx context.Context) (*CheckDNSAvailab
 // CheckDNSAvailabilityResponse is the response type for the
 // CheckDNSAvailability API operation.
 type CheckDNSAvailabilityResponse struct {
-	*CheckDNSAvailabilityOutput
+	*types.CheckDNSAvailabilityOutput
 
 	response *aws.Response
 }

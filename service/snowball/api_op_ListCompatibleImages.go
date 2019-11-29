@@ -6,56 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/snowball/types"
 )
-
-type ListCompatibleImagesInput struct {
-	_ struct{} `type:"structure"`
-
-	// The maximum number of results for the list of compatible images. Currently,
-	// a Snowball Edge device can store 10 AMIs.
-	MaxResults *int64 `type:"integer"`
-
-	// HTTP requests are stateless. To identify what object comes "next" in the
-	// list of compatible images, you can specify a value for NextToken as the starting
-	// point for your list of returned images.
-	NextToken *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s ListCompatibleImagesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListCompatibleImagesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListCompatibleImagesInput"}
-	if s.NextToken != nil && len(*s.NextToken) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ListCompatibleImagesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A JSON-formatted object that describes a compatible AMI, including the ID
-	// and name for a Snowball Edge AMI.
-	CompatibleImages []CompatibleImage `type:"list"`
-
-	// Because HTTP requests are stateless, this is the starting point for your
-	// next list of returned images.
-	NextToken *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s ListCompatibleImagesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListCompatibleImages = "ListCompatibleImages"
 
@@ -76,7 +28,7 @@ const opListCompatibleImages = "ListCompatibleImages"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/ListCompatibleImages
-func (c *Client) ListCompatibleImagesRequest(input *ListCompatibleImagesInput) ListCompatibleImagesRequest {
+func (c *Client) ListCompatibleImagesRequest(input *types.ListCompatibleImagesInput) ListCompatibleImagesRequest {
 	op := &aws.Operation{
 		Name:       opListCompatibleImages,
 		HTTPMethod: "POST",
@@ -84,10 +36,10 @@ func (c *Client) ListCompatibleImagesRequest(input *ListCompatibleImagesInput) L
 	}
 
 	if input == nil {
-		input = &ListCompatibleImagesInput{}
+		input = &types.ListCompatibleImagesInput{}
 	}
 
-	req := c.newRequest(op, input, &ListCompatibleImagesOutput{})
+	req := c.newRequest(op, input, &types.ListCompatibleImagesOutput{})
 	return ListCompatibleImagesRequest{Request: req, Input: input, Copy: c.ListCompatibleImagesRequest}
 }
 
@@ -95,8 +47,8 @@ func (c *Client) ListCompatibleImagesRequest(input *ListCompatibleImagesInput) L
 // ListCompatibleImages API operation.
 type ListCompatibleImagesRequest struct {
 	*aws.Request
-	Input *ListCompatibleImagesInput
-	Copy  func(*ListCompatibleImagesInput) ListCompatibleImagesRequest
+	Input *types.ListCompatibleImagesInput
+	Copy  func(*types.ListCompatibleImagesInput) ListCompatibleImagesRequest
 }
 
 // Send marshals and sends the ListCompatibleImages API request.
@@ -108,7 +60,7 @@ func (r ListCompatibleImagesRequest) Send(ctx context.Context) (*ListCompatibleI
 	}
 
 	resp := &ListCompatibleImagesResponse{
-		ListCompatibleImagesOutput: r.Request.Data.(*ListCompatibleImagesOutput),
+		ListCompatibleImagesOutput: r.Request.Data.(*types.ListCompatibleImagesOutput),
 		response:                   &aws.Response{Request: r.Request},
 	}
 
@@ -118,7 +70,7 @@ func (r ListCompatibleImagesRequest) Send(ctx context.Context) (*ListCompatibleI
 // ListCompatibleImagesResponse is the response type for the
 // ListCompatibleImages API operation.
 type ListCompatibleImagesResponse struct {
-	*ListCompatibleImagesOutput
+	*types.ListCompatibleImagesOutput
 
 	response *aws.Response
 }

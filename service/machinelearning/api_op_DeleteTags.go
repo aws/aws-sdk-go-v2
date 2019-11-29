@@ -6,72 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/machinelearning/types"
 )
-
-type DeleteTagsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the tagged ML object. For example, exampleModelId.
-	//
-	// ResourceId is a required field
-	ResourceId *string `min:"1" type:"string" required:"true"`
-
-	// The type of the tagged ML object.
-	//
-	// ResourceType is a required field
-	ResourceType TaggableResourceType `type:"string" required:"true" enum:"true"`
-
-	// One or more tags to delete.
-	//
-	// TagKeys is a required field
-	TagKeys []string `type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteTagsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteTagsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteTagsInput"}
-
-	if s.ResourceId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ResourceId"))
-	}
-	if s.ResourceId != nil && len(*s.ResourceId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ResourceId", 1))
-	}
-	if len(s.ResourceType) == 0 {
-		invalidParams.Add(aws.NewErrParamRequired("ResourceType"))
-	}
-
-	if s.TagKeys == nil {
-		invalidParams.Add(aws.NewErrParamRequired("TagKeys"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Amazon ML returns the following elements.
-type DeleteTagsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the ML object from which tags were deleted.
-	ResourceId *string `min:"1" type:"string"`
-
-	// The type of the ML object from which tags were deleted.
-	ResourceType TaggableResourceType `type:"string" enum:"true"`
-}
-
-// String returns the string representation
-func (s DeleteTagsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteTags = "DeleteTags"
 
@@ -89,7 +25,7 @@ const opDeleteTags = "DeleteTags"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) DeleteTagsRequest(input *DeleteTagsInput) DeleteTagsRequest {
+func (c *Client) DeleteTagsRequest(input *types.DeleteTagsInput) DeleteTagsRequest {
 	op := &aws.Operation{
 		Name:       opDeleteTags,
 		HTTPMethod: "POST",
@@ -97,10 +33,10 @@ func (c *Client) DeleteTagsRequest(input *DeleteTagsInput) DeleteTagsRequest {
 	}
 
 	if input == nil {
-		input = &DeleteTagsInput{}
+		input = &types.DeleteTagsInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteTagsOutput{})
+	req := c.newRequest(op, input, &types.DeleteTagsOutput{})
 	return DeleteTagsRequest{Request: req, Input: input, Copy: c.DeleteTagsRequest}
 }
 
@@ -108,8 +44,8 @@ func (c *Client) DeleteTagsRequest(input *DeleteTagsInput) DeleteTagsRequest {
 // DeleteTags API operation.
 type DeleteTagsRequest struct {
 	*aws.Request
-	Input *DeleteTagsInput
-	Copy  func(*DeleteTagsInput) DeleteTagsRequest
+	Input *types.DeleteTagsInput
+	Copy  func(*types.DeleteTagsInput) DeleteTagsRequest
 }
 
 // Send marshals and sends the DeleteTags API request.
@@ -121,7 +57,7 @@ func (r DeleteTagsRequest) Send(ctx context.Context) (*DeleteTagsResponse, error
 	}
 
 	resp := &DeleteTagsResponse{
-		DeleteTagsOutput: r.Request.Data.(*DeleteTagsOutput),
+		DeleteTagsOutput: r.Request.Data.(*types.DeleteTagsOutput),
 		response:         &aws.Response{Request: r.Request},
 	}
 
@@ -131,7 +67,7 @@ func (r DeleteTagsRequest) Send(ctx context.Context) (*DeleteTagsResponse, error
 // DeleteTagsResponse is the response type for the
 // DeleteTags API operation.
 type DeleteTagsResponse struct {
-	*DeleteTagsOutput
+	*types.DeleteTagsOutput
 
 	response *aws.Response
 }

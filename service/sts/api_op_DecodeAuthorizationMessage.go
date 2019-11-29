@@ -6,54 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/sts/types"
 )
-
-type DecodeAuthorizationMessageInput struct {
-	_ struct{} `type:"structure"`
-
-	// The encoded message that was returned with the response.
-	//
-	// EncodedMessage is a required field
-	EncodedMessage *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DecodeAuthorizationMessageInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DecodeAuthorizationMessageInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DecodeAuthorizationMessageInput"}
-
-	if s.EncodedMessage == nil {
-		invalidParams.Add(aws.NewErrParamRequired("EncodedMessage"))
-	}
-	if s.EncodedMessage != nil && len(*s.EncodedMessage) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("EncodedMessage", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// A document that contains additional information about the authorization status
-// of a request from an encoded message that is returned in response to an AWS
-// request.
-type DecodeAuthorizationMessageOutput struct {
-	_ struct{} `type:"structure"`
-
-	// An XML document that contains the decoded message.
-	DecodedMessage *string `type:"string"`
-}
-
-// String returns the string representation
-func (s DecodeAuthorizationMessageOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDecodeAuthorizationMessage = "DecodeAuthorizationMessage"
 
@@ -101,7 +55,7 @@ const opDecodeAuthorizationMessage = "DecodeAuthorizationMessage"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sts-2011-06-15/DecodeAuthorizationMessage
-func (c *Client) DecodeAuthorizationMessageRequest(input *DecodeAuthorizationMessageInput) DecodeAuthorizationMessageRequest {
+func (c *Client) DecodeAuthorizationMessageRequest(input *types.DecodeAuthorizationMessageInput) DecodeAuthorizationMessageRequest {
 	op := &aws.Operation{
 		Name:       opDecodeAuthorizationMessage,
 		HTTPMethod: "POST",
@@ -109,10 +63,10 @@ func (c *Client) DecodeAuthorizationMessageRequest(input *DecodeAuthorizationMes
 	}
 
 	if input == nil {
-		input = &DecodeAuthorizationMessageInput{}
+		input = &types.DecodeAuthorizationMessageInput{}
 	}
 
-	req := c.newRequest(op, input, &DecodeAuthorizationMessageOutput{})
+	req := c.newRequest(op, input, &types.DecodeAuthorizationMessageOutput{})
 	return DecodeAuthorizationMessageRequest{Request: req, Input: input, Copy: c.DecodeAuthorizationMessageRequest}
 }
 
@@ -120,8 +74,8 @@ func (c *Client) DecodeAuthorizationMessageRequest(input *DecodeAuthorizationMes
 // DecodeAuthorizationMessage API operation.
 type DecodeAuthorizationMessageRequest struct {
 	*aws.Request
-	Input *DecodeAuthorizationMessageInput
-	Copy  func(*DecodeAuthorizationMessageInput) DecodeAuthorizationMessageRequest
+	Input *types.DecodeAuthorizationMessageInput
+	Copy  func(*types.DecodeAuthorizationMessageInput) DecodeAuthorizationMessageRequest
 }
 
 // Send marshals and sends the DecodeAuthorizationMessage API request.
@@ -133,7 +87,7 @@ func (r DecodeAuthorizationMessageRequest) Send(ctx context.Context) (*DecodeAut
 	}
 
 	resp := &DecodeAuthorizationMessageResponse{
-		DecodeAuthorizationMessageOutput: r.Request.Data.(*DecodeAuthorizationMessageOutput),
+		DecodeAuthorizationMessageOutput: r.Request.Data.(*types.DecodeAuthorizationMessageOutput),
 		response:                         &aws.Response{Request: r.Request},
 	}
 
@@ -143,7 +97,7 @@ func (r DecodeAuthorizationMessageRequest) Send(ctx context.Context) (*DecodeAut
 // DecodeAuthorizationMessageResponse is the response type for the
 // DecodeAuthorizationMessage API operation.
 type DecodeAuthorizationMessageResponse struct {
-	*DecodeAuthorizationMessageOutput
+	*types.DecodeAuthorizationMessageOutput
 
 	response *aws.Response
 }

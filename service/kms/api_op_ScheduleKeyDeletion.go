@@ -4,78 +4,10 @@ package kms
 
 import (
 	"context"
-	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/kms/types"
 )
-
-type ScheduleKeyDeletionInput struct {
-	_ struct{} `type:"structure"`
-
-	// The unique identifier of the customer master key (CMK) to delete.
-	//
-	// Specify the key ID or the Amazon Resource Name (ARN) of the CMK.
-	//
-	// For example:
-	//
-	//    * Key ID: 1234abcd-12ab-34cd-56ef-1234567890ab
-	//
-	//    * Key ARN: arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab
-	//
-	// To get the key ID and key ARN for a CMK, use ListKeys or DescribeKey.
-	//
-	// KeyId is a required field
-	KeyId *string `min:"1" type:"string" required:"true"`
-
-	// The waiting period, specified in number of days. After the waiting period
-	// ends, AWS KMS deletes the customer master key (CMK).
-	//
-	// This value is optional. If you include a value, it must be between 7 and
-	// 30, inclusive. If you do not include a value, it defaults to 30.
-	PendingWindowInDays *int64 `min:"1" type:"integer"`
-}
-
-// String returns the string representation
-func (s ScheduleKeyDeletionInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ScheduleKeyDeletionInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ScheduleKeyDeletionInput"}
-
-	if s.KeyId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("KeyId"))
-	}
-	if s.KeyId != nil && len(*s.KeyId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("KeyId", 1))
-	}
-	if s.PendingWindowInDays != nil && *s.PendingWindowInDays < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("PendingWindowInDays", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ScheduleKeyDeletionOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The date and time after which AWS KMS deletes the customer master key (CMK).
-	DeletionDate *time.Time `type:"timestamp"`
-
-	// The unique identifier of the customer master key (CMK) for which deletion
-	// is scheduled.
-	KeyId *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s ScheduleKeyDeletionOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opScheduleKeyDeletion = "ScheduleKeyDeletion"
 
@@ -120,7 +52,7 @@ const opScheduleKeyDeletion = "ScheduleKeyDeletion"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/ScheduleKeyDeletion
-func (c *Client) ScheduleKeyDeletionRequest(input *ScheduleKeyDeletionInput) ScheduleKeyDeletionRequest {
+func (c *Client) ScheduleKeyDeletionRequest(input *types.ScheduleKeyDeletionInput) ScheduleKeyDeletionRequest {
 	op := &aws.Operation{
 		Name:       opScheduleKeyDeletion,
 		HTTPMethod: "POST",
@@ -128,10 +60,10 @@ func (c *Client) ScheduleKeyDeletionRequest(input *ScheduleKeyDeletionInput) Sch
 	}
 
 	if input == nil {
-		input = &ScheduleKeyDeletionInput{}
+		input = &types.ScheduleKeyDeletionInput{}
 	}
 
-	req := c.newRequest(op, input, &ScheduleKeyDeletionOutput{})
+	req := c.newRequest(op, input, &types.ScheduleKeyDeletionOutput{})
 	return ScheduleKeyDeletionRequest{Request: req, Input: input, Copy: c.ScheduleKeyDeletionRequest}
 }
 
@@ -139,8 +71,8 @@ func (c *Client) ScheduleKeyDeletionRequest(input *ScheduleKeyDeletionInput) Sch
 // ScheduleKeyDeletion API operation.
 type ScheduleKeyDeletionRequest struct {
 	*aws.Request
-	Input *ScheduleKeyDeletionInput
-	Copy  func(*ScheduleKeyDeletionInput) ScheduleKeyDeletionRequest
+	Input *types.ScheduleKeyDeletionInput
+	Copy  func(*types.ScheduleKeyDeletionInput) ScheduleKeyDeletionRequest
 }
 
 // Send marshals and sends the ScheduleKeyDeletion API request.
@@ -152,7 +84,7 @@ func (r ScheduleKeyDeletionRequest) Send(ctx context.Context) (*ScheduleKeyDelet
 	}
 
 	resp := &ScheduleKeyDeletionResponse{
-		ScheduleKeyDeletionOutput: r.Request.Data.(*ScheduleKeyDeletionOutput),
+		ScheduleKeyDeletionOutput: r.Request.Data.(*types.ScheduleKeyDeletionOutput),
 		response:                  &aws.Response{Request: r.Request},
 	}
 
@@ -162,7 +94,7 @@ func (r ScheduleKeyDeletionRequest) Send(ctx context.Context) (*ScheduleKeyDelet
 // ScheduleKeyDeletionResponse is the response type for the
 // ScheduleKeyDeletion API operation.
 type ScheduleKeyDeletionResponse struct {
-	*ScheduleKeyDeletionOutput
+	*types.ScheduleKeyDeletionOutput
 
 	response *aws.Response
 }

@@ -6,75 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/clouddirectory/types"
 )
-
-type EnableDirectoryInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ARN of the directory to enable.
-	//
-	// DirectoryArn is a required field
-	DirectoryArn *string `location:"header" locationName:"x-amz-data-partition" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s EnableDirectoryInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *EnableDirectoryInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "EnableDirectoryInput"}
-
-	if s.DirectoryArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DirectoryArn"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s EnableDirectoryInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.DirectoryArn != nil {
-		v := *s.DirectoryArn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "x-amz-data-partition", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type EnableDirectoryOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The ARN of the enabled directory.
-	//
-	// DirectoryArn is a required field
-	DirectoryArn *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s EnableDirectoryOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s EnableDirectoryOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.DirectoryArn != nil {
-		v := *s.DirectoryArn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "DirectoryArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opEnableDirectory = "EnableDirectory"
 
@@ -92,7 +25,7 @@ const opEnableDirectory = "EnableDirectory"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/EnableDirectory
-func (c *Client) EnableDirectoryRequest(input *EnableDirectoryInput) EnableDirectoryRequest {
+func (c *Client) EnableDirectoryRequest(input *types.EnableDirectoryInput) EnableDirectoryRequest {
 	op := &aws.Operation{
 		Name:       opEnableDirectory,
 		HTTPMethod: "PUT",
@@ -100,10 +33,10 @@ func (c *Client) EnableDirectoryRequest(input *EnableDirectoryInput) EnableDirec
 	}
 
 	if input == nil {
-		input = &EnableDirectoryInput{}
+		input = &types.EnableDirectoryInput{}
 	}
 
-	req := c.newRequest(op, input, &EnableDirectoryOutput{})
+	req := c.newRequest(op, input, &types.EnableDirectoryOutput{})
 	return EnableDirectoryRequest{Request: req, Input: input, Copy: c.EnableDirectoryRequest}
 }
 
@@ -111,8 +44,8 @@ func (c *Client) EnableDirectoryRequest(input *EnableDirectoryInput) EnableDirec
 // EnableDirectory API operation.
 type EnableDirectoryRequest struct {
 	*aws.Request
-	Input *EnableDirectoryInput
-	Copy  func(*EnableDirectoryInput) EnableDirectoryRequest
+	Input *types.EnableDirectoryInput
+	Copy  func(*types.EnableDirectoryInput) EnableDirectoryRequest
 }
 
 // Send marshals and sends the EnableDirectory API request.
@@ -124,7 +57,7 @@ func (r EnableDirectoryRequest) Send(ctx context.Context) (*EnableDirectoryRespo
 	}
 
 	resp := &EnableDirectoryResponse{
-		EnableDirectoryOutput: r.Request.Data.(*EnableDirectoryOutput),
+		EnableDirectoryOutput: r.Request.Data.(*types.EnableDirectoryOutput),
 		response:              &aws.Response{Request: r.Request},
 	}
 
@@ -134,7 +67,7 @@ func (r EnableDirectoryRequest) Send(ctx context.Context) (*EnableDirectoryRespo
 // EnableDirectoryResponse is the response type for the
 // EnableDirectory API operation.
 type EnableDirectoryResponse struct {
-	*EnableDirectoryOutput
+	*types.EnableDirectoryOutput
 
 	response *aws.Response
 }

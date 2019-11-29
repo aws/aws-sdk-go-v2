@@ -4,169 +4,10 @@ package lexmodelbuildingservice
 
 import (
 	"context"
-	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/lexmodelbuildingservice/types"
 )
-
-type StartImportInput struct {
-	_ struct{} `type:"structure"`
-
-	// Specifies the action that the StartImport operation should take when there
-	// is an existing resource with the same name.
-	//
-	//    * FAIL_ON_CONFLICT - The import operation is stopped on the first conflict
-	//    between a resource in the import file and an existing resource. The name
-	//    of the resource causing the conflict is in the failureReason field of
-	//    the response to the GetImport operation. OVERWRITE_LATEST - The import
-	//    operation proceeds even if there is a conflict with an existing resource.
-	//    The $LASTEST version of the existing resource is overwritten with the
-	//    data from the import file.
-	//
-	// MergeStrategy is a required field
-	MergeStrategy MergeStrategy `locationName:"mergeStrategy" type:"string" required:"true" enum:"true"`
-
-	// A zip archive in binary format. The archive should contain one file, a JSON
-	// file containing the resource to import. The resource should match the type
-	// specified in the resourceType field.
-	//
-	// Payload is automatically base64 encoded/decoded by the SDK.
-	//
-	// Payload is a required field
-	Payload []byte `locationName:"payload" type:"blob" required:"true"`
-
-	// Specifies the type of resource to export. Each resource also exports any
-	// resources that it depends on.
-	//
-	//    * A bot exports dependent intents.
-	//
-	//    * An intent exports dependent slot types.
-	//
-	// ResourceType is a required field
-	ResourceType ResourceType `locationName:"resourceType" type:"string" required:"true" enum:"true"`
-}
-
-// String returns the string representation
-func (s StartImportInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *StartImportInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "StartImportInput"}
-	if len(s.MergeStrategy) == 0 {
-		invalidParams.Add(aws.NewErrParamRequired("MergeStrategy"))
-	}
-
-	if s.Payload == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Payload"))
-	}
-	if len(s.ResourceType) == 0 {
-		invalidParams.Add(aws.NewErrParamRequired("ResourceType"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s StartImportInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if len(s.MergeStrategy) > 0 {
-		v := s.MergeStrategy
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "mergeStrategy", protocol.QuotedValue{ValueMarshaler: v}, metadata)
-	}
-	if s.Payload != nil {
-		v := s.Payload
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "payload", protocol.QuotedValue{ValueMarshaler: protocol.BytesValue(v)}, metadata)
-	}
-	if len(s.ResourceType) > 0 {
-		v := s.ResourceType
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "resourceType", protocol.QuotedValue{ValueMarshaler: v}, metadata)
-	}
-	return nil
-}
-
-type StartImportOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A timestamp for the date and time that the import job was requested.
-	CreatedDate *time.Time `locationName:"createdDate" type:"timestamp"`
-
-	// The identifier for the specific import job.
-	ImportId *string `locationName:"importId" type:"string"`
-
-	// The status of the import job. If the status is FAILED, you can get the reason
-	// for the failure using the GetImport operation.
-	ImportStatus ImportStatus `locationName:"importStatus" type:"string" enum:"true"`
-
-	// The action to take when there is a merge conflict.
-	MergeStrategy MergeStrategy `locationName:"mergeStrategy" type:"string" enum:"true"`
-
-	// The name given to the import job.
-	Name *string `locationName:"name" min:"1" type:"string"`
-
-	// The type of resource to import.
-	ResourceType ResourceType `locationName:"resourceType" type:"string" enum:"true"`
-}
-
-// String returns the string representation
-func (s StartImportOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s StartImportOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.CreatedDate != nil {
-		v := *s.CreatedDate
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "createdDate",
-			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
-	}
-	if s.ImportId != nil {
-		v := *s.ImportId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "importId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if len(s.ImportStatus) > 0 {
-		v := s.ImportStatus
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "importStatus", protocol.QuotedValue{ValueMarshaler: v}, metadata)
-	}
-	if len(s.MergeStrategy) > 0 {
-		v := s.MergeStrategy
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "mergeStrategy", protocol.QuotedValue{ValueMarshaler: v}, metadata)
-	}
-	if s.Name != nil {
-		v := *s.Name
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if len(s.ResourceType) > 0 {
-		v := s.ResourceType
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "resourceType", protocol.QuotedValue{ValueMarshaler: v}, metadata)
-	}
-	return nil
-}
 
 const opStartImport = "StartImport"
 
@@ -183,7 +24,7 @@ const opStartImport = "StartImport"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/StartImport
-func (c *Client) StartImportRequest(input *StartImportInput) StartImportRequest {
+func (c *Client) StartImportRequest(input *types.StartImportInput) StartImportRequest {
 	op := &aws.Operation{
 		Name:       opStartImport,
 		HTTPMethod: "POST",
@@ -191,10 +32,10 @@ func (c *Client) StartImportRequest(input *StartImportInput) StartImportRequest 
 	}
 
 	if input == nil {
-		input = &StartImportInput{}
+		input = &types.StartImportInput{}
 	}
 
-	req := c.newRequest(op, input, &StartImportOutput{})
+	req := c.newRequest(op, input, &types.StartImportOutput{})
 	return StartImportRequest{Request: req, Input: input, Copy: c.StartImportRequest}
 }
 
@@ -202,8 +43,8 @@ func (c *Client) StartImportRequest(input *StartImportInput) StartImportRequest 
 // StartImport API operation.
 type StartImportRequest struct {
 	*aws.Request
-	Input *StartImportInput
-	Copy  func(*StartImportInput) StartImportRequest
+	Input *types.StartImportInput
+	Copy  func(*types.StartImportInput) StartImportRequest
 }
 
 // Send marshals and sends the StartImport API request.
@@ -215,7 +56,7 @@ func (r StartImportRequest) Send(ctx context.Context) (*StartImportResponse, err
 	}
 
 	resp := &StartImportResponse{
-		StartImportOutput: r.Request.Data.(*StartImportOutput),
+		StartImportOutput: r.Request.Data.(*types.StartImportOutput),
 		response:          &aws.Response{Request: r.Request},
 	}
 
@@ -225,7 +66,7 @@ func (r StartImportRequest) Send(ctx context.Context) (*StartImportResponse, err
 // StartImportResponse is the response type for the
 // StartImport API operation.
 type StartImportResponse struct {
-	*StartImportOutput
+	*types.StartImportOutput
 
 	response *aws.Response
 }

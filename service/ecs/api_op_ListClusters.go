@@ -6,54 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ecs/types"
 )
-
-type ListClustersInput struct {
-	_ struct{} `type:"structure"`
-
-	// The maximum number of cluster results returned by ListClusters in paginated
-	// output. When this parameter is used, ListClusters only returns maxResults
-	// results in a single page along with a nextToken response element. The remaining
-	// results of the initial request can be seen by sending another ListClusters
-	// request with the returned nextToken value. This value can be between 1 and
-	// 100. If this parameter is not used, then ListClusters returns up to 100 results
-	// and a nextToken value if applicable.
-	MaxResults *int64 `locationName:"maxResults" type:"integer"`
-
-	// The nextToken value returned from a previous paginated ListClusters request
-	// where maxResults was used and the results exceeded the value of that parameter.
-	// Pagination continues from the end of the previous results that returned the
-	// nextToken value.
-	//
-	// This token should be treated as an opaque identifier that is only used to
-	// retrieve the next items in a list and not for other programmatic purposes.
-	NextToken *string `locationName:"nextToken" type:"string"`
-}
-
-// String returns the string representation
-func (s ListClustersInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type ListClustersOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The list of full Amazon Resource Name (ARN) entries for each cluster associated
-	// with your account.
-	ClusterArns []string `locationName:"clusterArns" type:"list"`
-
-	// The nextToken value to include in a future ListClusters request. When the
-	// results of a ListClusters request exceed maxResults, this value can be used
-	// to retrieve the next page of results. This value is null when there are no
-	// more results to return.
-	NextToken *string `locationName:"nextToken" type:"string"`
-}
-
-// String returns the string representation
-func (s ListClustersOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListClusters = "ListClusters"
 
@@ -70,7 +24,7 @@ const opListClusters = "ListClusters"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ListClusters
-func (c *Client) ListClustersRequest(input *ListClustersInput) ListClustersRequest {
+func (c *Client) ListClustersRequest(input *types.ListClustersInput) ListClustersRequest {
 	op := &aws.Operation{
 		Name:       opListClusters,
 		HTTPMethod: "POST",
@@ -84,10 +38,10 @@ func (c *Client) ListClustersRequest(input *ListClustersInput) ListClustersReque
 	}
 
 	if input == nil {
-		input = &ListClustersInput{}
+		input = &types.ListClustersInput{}
 	}
 
-	req := c.newRequest(op, input, &ListClustersOutput{})
+	req := c.newRequest(op, input, &types.ListClustersOutput{})
 	return ListClustersRequest{Request: req, Input: input, Copy: c.ListClustersRequest}
 }
 
@@ -95,8 +49,8 @@ func (c *Client) ListClustersRequest(input *ListClustersInput) ListClustersReque
 // ListClusters API operation.
 type ListClustersRequest struct {
 	*aws.Request
-	Input *ListClustersInput
-	Copy  func(*ListClustersInput) ListClustersRequest
+	Input *types.ListClustersInput
+	Copy  func(*types.ListClustersInput) ListClustersRequest
 }
 
 // Send marshals and sends the ListClusters API request.
@@ -108,7 +62,7 @@ func (r ListClustersRequest) Send(ctx context.Context) (*ListClustersResponse, e
 	}
 
 	resp := &ListClustersResponse{
-		ListClustersOutput: r.Request.Data.(*ListClustersOutput),
+		ListClustersOutput: r.Request.Data.(*types.ListClustersOutput),
 		response:           &aws.Response{Request: r.Request},
 	}
 
@@ -138,7 +92,7 @@ func NewListClustersPaginator(req ListClustersRequest) ListClustersPaginator {
 	return ListClustersPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListClustersInput
+				var inCpy *types.ListClustersInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -158,14 +112,14 @@ type ListClustersPaginator struct {
 	aws.Pager
 }
 
-func (p *ListClustersPaginator) CurrentPage() *ListClustersOutput {
-	return p.Pager.CurrentPage().(*ListClustersOutput)
+func (p *ListClustersPaginator) CurrentPage() *types.ListClustersOutput {
+	return p.Pager.CurrentPage().(*types.ListClustersOutput)
 }
 
 // ListClustersResponse is the response type for the
 // ListClusters API operation.
 type ListClustersResponse struct {
-	*ListClustersOutput
+	*types.ListClustersOutput
 
 	response *aws.Response
 }

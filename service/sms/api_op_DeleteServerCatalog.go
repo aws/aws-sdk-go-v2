@@ -6,26 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/sms/types"
 )
-
-type DeleteServerCatalogInput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteServerCatalogInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type DeleteServerCatalogOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteServerCatalogOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteServerCatalog = "DeleteServerCatalog"
 
@@ -42,7 +24,7 @@ const opDeleteServerCatalog = "DeleteServerCatalog"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sms-2016-10-24/DeleteServerCatalog
-func (c *Client) DeleteServerCatalogRequest(input *DeleteServerCatalogInput) DeleteServerCatalogRequest {
+func (c *Client) DeleteServerCatalogRequest(input *types.DeleteServerCatalogInput) DeleteServerCatalogRequest {
 	op := &aws.Operation{
 		Name:       opDeleteServerCatalog,
 		HTTPMethod: "POST",
@@ -50,10 +32,10 @@ func (c *Client) DeleteServerCatalogRequest(input *DeleteServerCatalogInput) Del
 	}
 
 	if input == nil {
-		input = &DeleteServerCatalogInput{}
+		input = &types.DeleteServerCatalogInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteServerCatalogOutput{})
+	req := c.newRequest(op, input, &types.DeleteServerCatalogOutput{})
 	return DeleteServerCatalogRequest{Request: req, Input: input, Copy: c.DeleteServerCatalogRequest}
 }
 
@@ -61,8 +43,8 @@ func (c *Client) DeleteServerCatalogRequest(input *DeleteServerCatalogInput) Del
 // DeleteServerCatalog API operation.
 type DeleteServerCatalogRequest struct {
 	*aws.Request
-	Input *DeleteServerCatalogInput
-	Copy  func(*DeleteServerCatalogInput) DeleteServerCatalogRequest
+	Input *types.DeleteServerCatalogInput
+	Copy  func(*types.DeleteServerCatalogInput) DeleteServerCatalogRequest
 }
 
 // Send marshals and sends the DeleteServerCatalog API request.
@@ -74,7 +56,7 @@ func (r DeleteServerCatalogRequest) Send(ctx context.Context) (*DeleteServerCata
 	}
 
 	resp := &DeleteServerCatalogResponse{
-		DeleteServerCatalogOutput: r.Request.Data.(*DeleteServerCatalogOutput),
+		DeleteServerCatalogOutput: r.Request.Data.(*types.DeleteServerCatalogOutput),
 		response:                  &aws.Response{Request: r.Request},
 	}
 
@@ -84,7 +66,7 @@ func (r DeleteServerCatalogRequest) Send(ctx context.Context) (*DeleteServerCata
 // DeleteServerCatalogResponse is the response type for the
 // DeleteServerCatalog API operation.
 type DeleteServerCatalogResponse struct {
-	*DeleteServerCatalogOutput
+	*types.DeleteServerCatalogOutput
 
 	response *aws.Response
 }

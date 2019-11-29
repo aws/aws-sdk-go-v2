@@ -6,54 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/alexaforbusiness/types"
 )
-
-type ListGatewayGroupsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The maximum number of gateway group summaries to return. The default is 50.
-	MaxResults *int64 `min:"1" type:"integer"`
-
-	// The token used to paginate though multiple pages of gateway group summaries.
-	NextToken *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s ListGatewayGroupsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListGatewayGroupsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListGatewayGroupsInput"}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-	if s.NextToken != nil && len(*s.NextToken) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ListGatewayGroupsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The gateway groups in the list.
-	GatewayGroups []GatewayGroupSummary `type:"list"`
-
-	// The token used to paginate though multiple pages of gateway group summaries.
-	NextToken *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s ListGatewayGroupsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListGatewayGroups = "ListGatewayGroups"
 
@@ -71,7 +25,7 @@ const opListGatewayGroups = "ListGatewayGroups"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/ListGatewayGroups
-func (c *Client) ListGatewayGroupsRequest(input *ListGatewayGroupsInput) ListGatewayGroupsRequest {
+func (c *Client) ListGatewayGroupsRequest(input *types.ListGatewayGroupsInput) ListGatewayGroupsRequest {
 	op := &aws.Operation{
 		Name:       opListGatewayGroups,
 		HTTPMethod: "POST",
@@ -85,10 +39,10 @@ func (c *Client) ListGatewayGroupsRequest(input *ListGatewayGroupsInput) ListGat
 	}
 
 	if input == nil {
-		input = &ListGatewayGroupsInput{}
+		input = &types.ListGatewayGroupsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListGatewayGroupsOutput{})
+	req := c.newRequest(op, input, &types.ListGatewayGroupsOutput{})
 	return ListGatewayGroupsRequest{Request: req, Input: input, Copy: c.ListGatewayGroupsRequest}
 }
 
@@ -96,8 +50,8 @@ func (c *Client) ListGatewayGroupsRequest(input *ListGatewayGroupsInput) ListGat
 // ListGatewayGroups API operation.
 type ListGatewayGroupsRequest struct {
 	*aws.Request
-	Input *ListGatewayGroupsInput
-	Copy  func(*ListGatewayGroupsInput) ListGatewayGroupsRequest
+	Input *types.ListGatewayGroupsInput
+	Copy  func(*types.ListGatewayGroupsInput) ListGatewayGroupsRequest
 }
 
 // Send marshals and sends the ListGatewayGroups API request.
@@ -109,7 +63,7 @@ func (r ListGatewayGroupsRequest) Send(ctx context.Context) (*ListGatewayGroupsR
 	}
 
 	resp := &ListGatewayGroupsResponse{
-		ListGatewayGroupsOutput: r.Request.Data.(*ListGatewayGroupsOutput),
+		ListGatewayGroupsOutput: r.Request.Data.(*types.ListGatewayGroupsOutput),
 		response:                &aws.Response{Request: r.Request},
 	}
 
@@ -139,7 +93,7 @@ func NewListGatewayGroupsPaginator(req ListGatewayGroupsRequest) ListGatewayGrou
 	return ListGatewayGroupsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListGatewayGroupsInput
+				var inCpy *types.ListGatewayGroupsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -159,14 +113,14 @@ type ListGatewayGroupsPaginator struct {
 	aws.Pager
 }
 
-func (p *ListGatewayGroupsPaginator) CurrentPage() *ListGatewayGroupsOutput {
-	return p.Pager.CurrentPage().(*ListGatewayGroupsOutput)
+func (p *ListGatewayGroupsPaginator) CurrentPage() *types.ListGatewayGroupsOutput {
+	return p.Pager.CurrentPage().(*types.ListGatewayGroupsOutput)
 }
 
 // ListGatewayGroupsResponse is the response type for the
 // ListGatewayGroups API operation.
 type ListGatewayGroupsResponse struct {
-	*ListGatewayGroupsOutput
+	*types.ListGatewayGroupsOutput
 
 	response *aws.Response
 }

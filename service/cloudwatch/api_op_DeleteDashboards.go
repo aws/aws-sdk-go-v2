@@ -6,45 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/cloudwatch/types"
 )
-
-type DeleteDashboardsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The dashboards to be deleted. This parameter is required.
-	//
-	// DashboardNames is a required field
-	DashboardNames []string `type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteDashboardsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteDashboardsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteDashboardsInput"}
-
-	if s.DashboardNames == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DashboardNames"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteDashboardsOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteDashboardsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteDashboards = "DeleteDashboards"
 
@@ -62,7 +25,7 @@ const opDeleteDashboards = "DeleteDashboards"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/DeleteDashboards
-func (c *Client) DeleteDashboardsRequest(input *DeleteDashboardsInput) DeleteDashboardsRequest {
+func (c *Client) DeleteDashboardsRequest(input *types.DeleteDashboardsInput) DeleteDashboardsRequest {
 	op := &aws.Operation{
 		Name:       opDeleteDashboards,
 		HTTPMethod: "POST",
@@ -70,10 +33,10 @@ func (c *Client) DeleteDashboardsRequest(input *DeleteDashboardsInput) DeleteDas
 	}
 
 	if input == nil {
-		input = &DeleteDashboardsInput{}
+		input = &types.DeleteDashboardsInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteDashboardsOutput{})
+	req := c.newRequest(op, input, &types.DeleteDashboardsOutput{})
 	return DeleteDashboardsRequest{Request: req, Input: input, Copy: c.DeleteDashboardsRequest}
 }
 
@@ -81,8 +44,8 @@ func (c *Client) DeleteDashboardsRequest(input *DeleteDashboardsInput) DeleteDas
 // DeleteDashboards API operation.
 type DeleteDashboardsRequest struct {
 	*aws.Request
-	Input *DeleteDashboardsInput
-	Copy  func(*DeleteDashboardsInput) DeleteDashboardsRequest
+	Input *types.DeleteDashboardsInput
+	Copy  func(*types.DeleteDashboardsInput) DeleteDashboardsRequest
 }
 
 // Send marshals and sends the DeleteDashboards API request.
@@ -94,7 +57,7 @@ func (r DeleteDashboardsRequest) Send(ctx context.Context) (*DeleteDashboardsRes
 	}
 
 	resp := &DeleteDashboardsResponse{
-		DeleteDashboardsOutput: r.Request.Data.(*DeleteDashboardsOutput),
+		DeleteDashboardsOutput: r.Request.Data.(*types.DeleteDashboardsOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -104,7 +67,7 @@ func (r DeleteDashboardsRequest) Send(ctx context.Context) (*DeleteDashboardsRes
 // DeleteDashboardsResponse is the response type for the
 // DeleteDashboards API operation.
 type DeleteDashboardsResponse struct {
-	*DeleteDashboardsOutput
+	*types.DeleteDashboardsOutput
 
 	response *aws.Response
 }

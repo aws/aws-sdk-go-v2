@@ -6,58 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/elasticbeanstalk/types"
 )
-
-// Request to describe the resources in an environment.
-type DescribeEnvironmentResourcesInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the environment to retrieve AWS resource usage data.
-	//
-	// Condition: You must specify either this or an EnvironmentName, or both. If
-	// you do not specify either, AWS Elastic Beanstalk returns MissingRequiredParameter
-	// error.
-	EnvironmentId *string `type:"string"`
-
-	// The name of the environment to retrieve AWS resource usage data.
-	//
-	// Condition: You must specify either this or an EnvironmentId, or both. If
-	// you do not specify either, AWS Elastic Beanstalk returns MissingRequiredParameter
-	// error.
-	EnvironmentName *string `min:"4" type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeEnvironmentResourcesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeEnvironmentResourcesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeEnvironmentResourcesInput"}
-	if s.EnvironmentName != nil && len(*s.EnvironmentName) < 4 {
-		invalidParams.Add(aws.NewErrParamMinLen("EnvironmentName", 4))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Result message containing a list of environment resource descriptions.
-type DescribeEnvironmentResourcesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A list of EnvironmentResourceDescription.
-	EnvironmentResources *EnvironmentResourceDescription `type:"structure"`
-}
-
-// String returns the string representation
-func (s DescribeEnvironmentResourcesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeEnvironmentResources = "DescribeEnvironmentResources"
 
@@ -74,7 +24,7 @@ const opDescribeEnvironmentResources = "DescribeEnvironmentResources"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/DescribeEnvironmentResources
-func (c *Client) DescribeEnvironmentResourcesRequest(input *DescribeEnvironmentResourcesInput) DescribeEnvironmentResourcesRequest {
+func (c *Client) DescribeEnvironmentResourcesRequest(input *types.DescribeEnvironmentResourcesInput) DescribeEnvironmentResourcesRequest {
 	op := &aws.Operation{
 		Name:       opDescribeEnvironmentResources,
 		HTTPMethod: "POST",
@@ -82,10 +32,10 @@ func (c *Client) DescribeEnvironmentResourcesRequest(input *DescribeEnvironmentR
 	}
 
 	if input == nil {
-		input = &DescribeEnvironmentResourcesInput{}
+		input = &types.DescribeEnvironmentResourcesInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeEnvironmentResourcesOutput{})
+	req := c.newRequest(op, input, &types.DescribeEnvironmentResourcesOutput{})
 	return DescribeEnvironmentResourcesRequest{Request: req, Input: input, Copy: c.DescribeEnvironmentResourcesRequest}
 }
 
@@ -93,8 +43,8 @@ func (c *Client) DescribeEnvironmentResourcesRequest(input *DescribeEnvironmentR
 // DescribeEnvironmentResources API operation.
 type DescribeEnvironmentResourcesRequest struct {
 	*aws.Request
-	Input *DescribeEnvironmentResourcesInput
-	Copy  func(*DescribeEnvironmentResourcesInput) DescribeEnvironmentResourcesRequest
+	Input *types.DescribeEnvironmentResourcesInput
+	Copy  func(*types.DescribeEnvironmentResourcesInput) DescribeEnvironmentResourcesRequest
 }
 
 // Send marshals and sends the DescribeEnvironmentResources API request.
@@ -106,7 +56,7 @@ func (r DescribeEnvironmentResourcesRequest) Send(ctx context.Context) (*Describ
 	}
 
 	resp := &DescribeEnvironmentResourcesResponse{
-		DescribeEnvironmentResourcesOutput: r.Request.Data.(*DescribeEnvironmentResourcesOutput),
+		DescribeEnvironmentResourcesOutput: r.Request.Data.(*types.DescribeEnvironmentResourcesOutput),
 		response:                           &aws.Response{Request: r.Request},
 	}
 
@@ -116,7 +66,7 @@ func (r DescribeEnvironmentResourcesRequest) Send(ctx context.Context) (*Describ
 // DescribeEnvironmentResourcesResponse is the response type for the
 // DescribeEnvironmentResources API operation.
 type DescribeEnvironmentResourcesResponse struct {
-	*DescribeEnvironmentResourcesOutput
+	*types.DescribeEnvironmentResourcesOutput
 
 	response *aws.Response
 }

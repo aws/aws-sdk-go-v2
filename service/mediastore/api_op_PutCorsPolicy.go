@@ -4,70 +4,10 @@ package mediastore
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/mediastore/types"
 )
-
-type PutCorsPolicyInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the container that you want to assign the CORS policy to.
-	//
-	// ContainerName is a required field
-	ContainerName *string `min:"1" type:"string" required:"true"`
-
-	// The CORS policy to apply to the container.
-	//
-	// CorsPolicy is a required field
-	CorsPolicy []CorsRule `min:"1" type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s PutCorsPolicyInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *PutCorsPolicyInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "PutCorsPolicyInput"}
-
-	if s.ContainerName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ContainerName"))
-	}
-	if s.ContainerName != nil && len(*s.ContainerName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ContainerName", 1))
-	}
-
-	if s.CorsPolicy == nil {
-		invalidParams.Add(aws.NewErrParamRequired("CorsPolicy"))
-	}
-	if s.CorsPolicy != nil && len(s.CorsPolicy) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("CorsPolicy", 1))
-	}
-	if s.CorsPolicy != nil {
-		for i, v := range s.CorsPolicy {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "CorsPolicy", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type PutCorsPolicyOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s PutCorsPolicyOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opPutCorsPolicy = "PutCorsPolicy"
 
@@ -97,7 +37,7 @@ const opPutCorsPolicy = "PutCorsPolicy"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mediastore-2017-09-01/PutCorsPolicy
-func (c *Client) PutCorsPolicyRequest(input *PutCorsPolicyInput) PutCorsPolicyRequest {
+func (c *Client) PutCorsPolicyRequest(input *types.PutCorsPolicyInput) PutCorsPolicyRequest {
 	op := &aws.Operation{
 		Name:       opPutCorsPolicy,
 		HTTPMethod: "POST",
@@ -105,10 +45,10 @@ func (c *Client) PutCorsPolicyRequest(input *PutCorsPolicyInput) PutCorsPolicyRe
 	}
 
 	if input == nil {
-		input = &PutCorsPolicyInput{}
+		input = &types.PutCorsPolicyInput{}
 	}
 
-	req := c.newRequest(op, input, &PutCorsPolicyOutput{})
+	req := c.newRequest(op, input, &types.PutCorsPolicyOutput{})
 	return PutCorsPolicyRequest{Request: req, Input: input, Copy: c.PutCorsPolicyRequest}
 }
 
@@ -116,8 +56,8 @@ func (c *Client) PutCorsPolicyRequest(input *PutCorsPolicyInput) PutCorsPolicyRe
 // PutCorsPolicy API operation.
 type PutCorsPolicyRequest struct {
 	*aws.Request
-	Input *PutCorsPolicyInput
-	Copy  func(*PutCorsPolicyInput) PutCorsPolicyRequest
+	Input *types.PutCorsPolicyInput
+	Copy  func(*types.PutCorsPolicyInput) PutCorsPolicyRequest
 }
 
 // Send marshals and sends the PutCorsPolicy API request.
@@ -129,7 +69,7 @@ func (r PutCorsPolicyRequest) Send(ctx context.Context) (*PutCorsPolicyResponse,
 	}
 
 	resp := &PutCorsPolicyResponse{
-		PutCorsPolicyOutput: r.Request.Data.(*PutCorsPolicyOutput),
+		PutCorsPolicyOutput: r.Request.Data.(*types.PutCorsPolicyOutput),
 		response:            &aws.Response{Request: r.Request},
 	}
 
@@ -139,7 +79,7 @@ func (r PutCorsPolicyRequest) Send(ctx context.Context) (*PutCorsPolicyResponse,
 // PutCorsPolicyResponse is the response type for the
 // PutCorsPolicy API operation.
 type PutCorsPolicyResponse struct {
-	*PutCorsPolicyOutput
+	*types.PutCorsPolicyOutput
 
 	response *aws.Response
 }

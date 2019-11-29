@@ -6,49 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/iotthingsgraph/types"
 )
-
-type DeprecateFlowTemplateInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the workflow to be deleted.
-	//
-	// The ID should be in the following format.
-	//
-	// urn:tdm:REGION/ACCOUNT ID/default:workflow:WORKFLOWNAME
-	//
-	// Id is a required field
-	Id *string `locationName:"id" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeprecateFlowTemplateInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeprecateFlowTemplateInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeprecateFlowTemplateInput"}
-
-	if s.Id == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Id"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeprecateFlowTemplateOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeprecateFlowTemplateOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeprecateFlowTemplate = "DeprecateFlowTemplate"
 
@@ -67,7 +26,7 @@ const opDeprecateFlowTemplate = "DeprecateFlowTemplate"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iotthingsgraph-2018-09-06/DeprecateFlowTemplate
-func (c *Client) DeprecateFlowTemplateRequest(input *DeprecateFlowTemplateInput) DeprecateFlowTemplateRequest {
+func (c *Client) DeprecateFlowTemplateRequest(input *types.DeprecateFlowTemplateInput) DeprecateFlowTemplateRequest {
 	op := &aws.Operation{
 		Name:       opDeprecateFlowTemplate,
 		HTTPMethod: "POST",
@@ -75,10 +34,10 @@ func (c *Client) DeprecateFlowTemplateRequest(input *DeprecateFlowTemplateInput)
 	}
 
 	if input == nil {
-		input = &DeprecateFlowTemplateInput{}
+		input = &types.DeprecateFlowTemplateInput{}
 	}
 
-	req := c.newRequest(op, input, &DeprecateFlowTemplateOutput{})
+	req := c.newRequest(op, input, &types.DeprecateFlowTemplateOutput{})
 	return DeprecateFlowTemplateRequest{Request: req, Input: input, Copy: c.DeprecateFlowTemplateRequest}
 }
 
@@ -86,8 +45,8 @@ func (c *Client) DeprecateFlowTemplateRequest(input *DeprecateFlowTemplateInput)
 // DeprecateFlowTemplate API operation.
 type DeprecateFlowTemplateRequest struct {
 	*aws.Request
-	Input *DeprecateFlowTemplateInput
-	Copy  func(*DeprecateFlowTemplateInput) DeprecateFlowTemplateRequest
+	Input *types.DeprecateFlowTemplateInput
+	Copy  func(*types.DeprecateFlowTemplateInput) DeprecateFlowTemplateRequest
 }
 
 // Send marshals and sends the DeprecateFlowTemplate API request.
@@ -99,7 +58,7 @@ func (r DeprecateFlowTemplateRequest) Send(ctx context.Context) (*DeprecateFlowT
 	}
 
 	resp := &DeprecateFlowTemplateResponse{
-		DeprecateFlowTemplateOutput: r.Request.Data.(*DeprecateFlowTemplateOutput),
+		DeprecateFlowTemplateOutput: r.Request.Data.(*types.DeprecateFlowTemplateOutput),
 		response:                    &aws.Response{Request: r.Request},
 	}
 
@@ -109,7 +68,7 @@ func (r DeprecateFlowTemplateRequest) Send(ctx context.Context) (*DeprecateFlowT
 // DeprecateFlowTemplateResponse is the response type for the
 // DeprecateFlowTemplate API operation.
 type DeprecateFlowTemplateResponse struct {
-	*DeprecateFlowTemplateOutput
+	*types.DeprecateFlowTemplateOutput
 
 	response *aws.Response
 }

@@ -6,48 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/appstream/types"
 )
-
-type StartFleetInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the fleet.
-	//
-	// Name is a required field
-	Name *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s StartFleetInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *StartFleetInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "StartFleetInput"}
-
-	if s.Name == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Name"))
-	}
-	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type StartFleetOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s StartFleetOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opStartFleet = "StartFleet"
 
@@ -64,7 +24,7 @@ const opStartFleet = "StartFleet"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/StartFleet
-func (c *Client) StartFleetRequest(input *StartFleetInput) StartFleetRequest {
+func (c *Client) StartFleetRequest(input *types.StartFleetInput) StartFleetRequest {
 	op := &aws.Operation{
 		Name:       opStartFleet,
 		HTTPMethod: "POST",
@@ -72,10 +32,10 @@ func (c *Client) StartFleetRequest(input *StartFleetInput) StartFleetRequest {
 	}
 
 	if input == nil {
-		input = &StartFleetInput{}
+		input = &types.StartFleetInput{}
 	}
 
-	req := c.newRequest(op, input, &StartFleetOutput{})
+	req := c.newRequest(op, input, &types.StartFleetOutput{})
 	return StartFleetRequest{Request: req, Input: input, Copy: c.StartFleetRequest}
 }
 
@@ -83,8 +43,8 @@ func (c *Client) StartFleetRequest(input *StartFleetInput) StartFleetRequest {
 // StartFleet API operation.
 type StartFleetRequest struct {
 	*aws.Request
-	Input *StartFleetInput
-	Copy  func(*StartFleetInput) StartFleetRequest
+	Input *types.StartFleetInput
+	Copy  func(*types.StartFleetInput) StartFleetRequest
 }
 
 // Send marshals and sends the StartFleet API request.
@@ -96,7 +56,7 @@ func (r StartFleetRequest) Send(ctx context.Context) (*StartFleetResponse, error
 	}
 
 	resp := &StartFleetResponse{
-		StartFleetOutput: r.Request.Data.(*StartFleetOutput),
+		StartFleetOutput: r.Request.Data.(*types.StartFleetOutput),
 		response:         &aws.Response{Request: r.Request},
 	}
 
@@ -106,7 +66,7 @@ func (r StartFleetRequest) Send(ctx context.Context) (*StartFleetResponse, error
 // StartFleetResponse is the response type for the
 // StartFleet API operation.
 type StartFleetResponse struct {
-	*StartFleetOutput
+	*types.StartFleetOutput
 
 	response *aws.Response
 }

@@ -6,133 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/greengrass/types"
 )
-
-type GetLoggerDefinitionInput struct {
-	_ struct{} `type:"structure"`
-
-	// LoggerDefinitionId is a required field
-	LoggerDefinitionId *string `location:"uri" locationName:"LoggerDefinitionId" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetLoggerDefinitionInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetLoggerDefinitionInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetLoggerDefinitionInput"}
-
-	if s.LoggerDefinitionId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("LoggerDefinitionId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetLoggerDefinitionInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.LoggerDefinitionId != nil {
-		v := *s.LoggerDefinitionId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "LoggerDefinitionId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type GetLoggerDefinitionOutput struct {
-	_ struct{} `type:"structure"`
-
-	Arn *string `type:"string"`
-
-	CreationTimestamp *string `type:"string"`
-
-	Id *string `type:"string"`
-
-	LastUpdatedTimestamp *string `type:"string"`
-
-	LatestVersion *string `type:"string"`
-
-	LatestVersionArn *string `type:"string"`
-
-	Name *string `type:"string"`
-
-	// The key-value pair for the resource tag.
-	Tags map[string]string `locationName:"tags" type:"map"`
-}
-
-// String returns the string representation
-func (s GetLoggerDefinitionOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetLoggerDefinitionOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.Arn != nil {
-		v := *s.Arn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "Arn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.CreationTimestamp != nil {
-		v := *s.CreationTimestamp
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "CreationTimestamp", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Id != nil {
-		v := *s.Id
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "Id", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.LastUpdatedTimestamp != nil {
-		v := *s.LastUpdatedTimestamp
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "LastUpdatedTimestamp", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.LatestVersion != nil {
-		v := *s.LatestVersion
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "LatestVersion", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.LatestVersionArn != nil {
-		v := *s.LatestVersionArn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "LatestVersionArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Name != nil {
-		v := *s.Name
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "Name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Tags != nil {
-		v := s.Tags
-
-		metadata := protocol.Metadata{}
-		ms0 := e.Map(protocol.BodyTarget, "tags", metadata)
-		ms0.Start()
-		for k1, v1 := range v {
-			ms0.MapSetValue(k1, protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
-		}
-		ms0.End()
-
-	}
-	return nil
-}
 
 const opGetLoggerDefinition = "GetLoggerDefinition"
 
@@ -149,7 +24,7 @@ const opGetLoggerDefinition = "GetLoggerDefinition"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GetLoggerDefinition
-func (c *Client) GetLoggerDefinitionRequest(input *GetLoggerDefinitionInput) GetLoggerDefinitionRequest {
+func (c *Client) GetLoggerDefinitionRequest(input *types.GetLoggerDefinitionInput) GetLoggerDefinitionRequest {
 	op := &aws.Operation{
 		Name:       opGetLoggerDefinition,
 		HTTPMethod: "GET",
@@ -157,10 +32,10 @@ func (c *Client) GetLoggerDefinitionRequest(input *GetLoggerDefinitionInput) Get
 	}
 
 	if input == nil {
-		input = &GetLoggerDefinitionInput{}
+		input = &types.GetLoggerDefinitionInput{}
 	}
 
-	req := c.newRequest(op, input, &GetLoggerDefinitionOutput{})
+	req := c.newRequest(op, input, &types.GetLoggerDefinitionOutput{})
 	return GetLoggerDefinitionRequest{Request: req, Input: input, Copy: c.GetLoggerDefinitionRequest}
 }
 
@@ -168,8 +43,8 @@ func (c *Client) GetLoggerDefinitionRequest(input *GetLoggerDefinitionInput) Get
 // GetLoggerDefinition API operation.
 type GetLoggerDefinitionRequest struct {
 	*aws.Request
-	Input *GetLoggerDefinitionInput
-	Copy  func(*GetLoggerDefinitionInput) GetLoggerDefinitionRequest
+	Input *types.GetLoggerDefinitionInput
+	Copy  func(*types.GetLoggerDefinitionInput) GetLoggerDefinitionRequest
 }
 
 // Send marshals and sends the GetLoggerDefinition API request.
@@ -181,7 +56,7 @@ func (r GetLoggerDefinitionRequest) Send(ctx context.Context) (*GetLoggerDefinit
 	}
 
 	resp := &GetLoggerDefinitionResponse{
-		GetLoggerDefinitionOutput: r.Request.Data.(*GetLoggerDefinitionOutput),
+		GetLoggerDefinitionOutput: r.Request.Data.(*types.GetLoggerDefinitionOutput),
 		response:                  &aws.Response{Request: r.Request},
 	}
 
@@ -191,7 +66,7 @@ func (r GetLoggerDefinitionRequest) Send(ctx context.Context) (*GetLoggerDefinit
 // GetLoggerDefinitionResponse is the response type for the
 // GetLoggerDefinition API operation.
 type GetLoggerDefinitionResponse struct {
-	*GetLoggerDefinitionOutput
+	*types.GetLoggerDefinitionOutput
 
 	response *aws.Response
 }

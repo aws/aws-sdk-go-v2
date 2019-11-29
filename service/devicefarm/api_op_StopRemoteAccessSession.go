@@ -6,55 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/devicefarm/types"
 )
-
-// Represents the request to stop the remote access session.
-type StopRemoteAccessSessionInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the remote access session you wish to stop.
-	//
-	// Arn is a required field
-	Arn *string `locationName:"arn" min:"32" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s StopRemoteAccessSessionInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *StopRemoteAccessSessionInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "StopRemoteAccessSessionInput"}
-
-	if s.Arn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Arn"))
-	}
-	if s.Arn != nil && len(*s.Arn) < 32 {
-		invalidParams.Add(aws.NewErrParamMinLen("Arn", 32))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Represents the response from the server that describes the remote access
-// session when AWS Device Farm stops the session.
-type StopRemoteAccessSessionOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A container representing the metadata from the service about the remote access
-	// session you are stopping.
-	RemoteAccessSession *RemoteAccessSession `locationName:"remoteAccessSession" type:"structure"`
-}
-
-// String returns the string representation
-func (s StopRemoteAccessSessionOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opStopRemoteAccessSession = "StopRemoteAccessSession"
 
@@ -71,7 +24,7 @@ const opStopRemoteAccessSession = "StopRemoteAccessSession"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/StopRemoteAccessSession
-func (c *Client) StopRemoteAccessSessionRequest(input *StopRemoteAccessSessionInput) StopRemoteAccessSessionRequest {
+func (c *Client) StopRemoteAccessSessionRequest(input *types.StopRemoteAccessSessionInput) StopRemoteAccessSessionRequest {
 	op := &aws.Operation{
 		Name:       opStopRemoteAccessSession,
 		HTTPMethod: "POST",
@@ -79,10 +32,10 @@ func (c *Client) StopRemoteAccessSessionRequest(input *StopRemoteAccessSessionIn
 	}
 
 	if input == nil {
-		input = &StopRemoteAccessSessionInput{}
+		input = &types.StopRemoteAccessSessionInput{}
 	}
 
-	req := c.newRequest(op, input, &StopRemoteAccessSessionOutput{})
+	req := c.newRequest(op, input, &types.StopRemoteAccessSessionOutput{})
 	return StopRemoteAccessSessionRequest{Request: req, Input: input, Copy: c.StopRemoteAccessSessionRequest}
 }
 
@@ -90,8 +43,8 @@ func (c *Client) StopRemoteAccessSessionRequest(input *StopRemoteAccessSessionIn
 // StopRemoteAccessSession API operation.
 type StopRemoteAccessSessionRequest struct {
 	*aws.Request
-	Input *StopRemoteAccessSessionInput
-	Copy  func(*StopRemoteAccessSessionInput) StopRemoteAccessSessionRequest
+	Input *types.StopRemoteAccessSessionInput
+	Copy  func(*types.StopRemoteAccessSessionInput) StopRemoteAccessSessionRequest
 }
 
 // Send marshals and sends the StopRemoteAccessSession API request.
@@ -103,7 +56,7 @@ func (r StopRemoteAccessSessionRequest) Send(ctx context.Context) (*StopRemoteAc
 	}
 
 	resp := &StopRemoteAccessSessionResponse{
-		StopRemoteAccessSessionOutput: r.Request.Data.(*StopRemoteAccessSessionOutput),
+		StopRemoteAccessSessionOutput: r.Request.Data.(*types.StopRemoteAccessSessionOutput),
 		response:                      &aws.Response{Request: r.Request},
 	}
 
@@ -113,7 +66,7 @@ func (r StopRemoteAccessSessionRequest) Send(ctx context.Context) (*StopRemoteAc
 // StopRemoteAccessSessionResponse is the response type for the
 // StopRemoteAccessSession API operation.
 type StopRemoteAccessSessionResponse struct {
-	*StopRemoteAccessSessionOutput
+	*types.StopRemoteAccessSessionOutput
 
 	response *aws.Response
 }

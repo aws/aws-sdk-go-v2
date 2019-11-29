@@ -13,6 +13,7 @@ import (
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/elastictranscoder"
+	"github.com/aws/aws-sdk-go-v2/service/elastictranscoder/types"
 )
 
 // ClientAPI provides an interface to enable mocking the
@@ -46,7 +47,7 @@ import (
 //    type mockClientClient struct {
 //        elastictranscoderiface.ClientPI
 //    }
-//    func (m *mockClientClient) CancelJob(input *elastictranscoder.CancelJobInput) (*elastictranscoder.CancelJobOutput, error) {
+//    func (m *mockClientClient) CancelJob(input *types.CancelJobInput) (*types.CancelJobOutput, error) {
 //        // mock response/functionality
 //    }
 //
@@ -64,41 +65,41 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type ClientAPI interface {
-	CancelJobRequest(*elastictranscoder.CancelJobInput) elastictranscoder.CancelJobRequest
+	CancelJobRequest(*types.CancelJobInput) elastictranscoder.CancelJobRequest
 
-	CreateJobRequest(*elastictranscoder.CreateJobInput) elastictranscoder.CreateJobRequest
+	CreateJobRequest(*types.CreateJobInput) elastictranscoder.CreateJobRequest
 
-	CreatePipelineRequest(*elastictranscoder.CreatePipelineInput) elastictranscoder.CreatePipelineRequest
+	CreatePipelineRequest(*types.CreatePipelineInput) elastictranscoder.CreatePipelineRequest
 
-	CreatePresetRequest(*elastictranscoder.CreatePresetInput) elastictranscoder.CreatePresetRequest
+	CreatePresetRequest(*types.CreatePresetInput) elastictranscoder.CreatePresetRequest
 
-	DeletePipelineRequest(*elastictranscoder.DeletePipelineInput) elastictranscoder.DeletePipelineRequest
+	DeletePipelineRequest(*types.DeletePipelineInput) elastictranscoder.DeletePipelineRequest
 
-	DeletePresetRequest(*elastictranscoder.DeletePresetInput) elastictranscoder.DeletePresetRequest
+	DeletePresetRequest(*types.DeletePresetInput) elastictranscoder.DeletePresetRequest
 
-	ListJobsByPipelineRequest(*elastictranscoder.ListJobsByPipelineInput) elastictranscoder.ListJobsByPipelineRequest
+	ListJobsByPipelineRequest(*types.ListJobsByPipelineInput) elastictranscoder.ListJobsByPipelineRequest
 
-	ListJobsByStatusRequest(*elastictranscoder.ListJobsByStatusInput) elastictranscoder.ListJobsByStatusRequest
+	ListJobsByStatusRequest(*types.ListJobsByStatusInput) elastictranscoder.ListJobsByStatusRequest
 
-	ListPipelinesRequest(*elastictranscoder.ListPipelinesInput) elastictranscoder.ListPipelinesRequest
+	ListPipelinesRequest(*types.ListPipelinesInput) elastictranscoder.ListPipelinesRequest
 
-	ListPresetsRequest(*elastictranscoder.ListPresetsInput) elastictranscoder.ListPresetsRequest
+	ListPresetsRequest(*types.ListPresetsInput) elastictranscoder.ListPresetsRequest
 
-	ReadJobRequest(*elastictranscoder.ReadJobInput) elastictranscoder.ReadJobRequest
+	ReadJobRequest(*types.ReadJobInput) elastictranscoder.ReadJobRequest
 
-	ReadPipelineRequest(*elastictranscoder.ReadPipelineInput) elastictranscoder.ReadPipelineRequest
+	ReadPipelineRequest(*types.ReadPipelineInput) elastictranscoder.ReadPipelineRequest
 
-	ReadPresetRequest(*elastictranscoder.ReadPresetInput) elastictranscoder.ReadPresetRequest
+	ReadPresetRequest(*types.ReadPresetInput) elastictranscoder.ReadPresetRequest
 
-	TestRoleRequest(*elastictranscoder.TestRoleInput) elastictranscoder.TestRoleRequest
+	TestRoleRequest(*types.TestRoleInput) elastictranscoder.TestRoleRequest
 
-	UpdatePipelineRequest(*elastictranscoder.UpdatePipelineInput) elastictranscoder.UpdatePipelineRequest
+	UpdatePipelineRequest(*types.UpdatePipelineInput) elastictranscoder.UpdatePipelineRequest
 
-	UpdatePipelineNotificationsRequest(*elastictranscoder.UpdatePipelineNotificationsInput) elastictranscoder.UpdatePipelineNotificationsRequest
+	UpdatePipelineNotificationsRequest(*types.UpdatePipelineNotificationsInput) elastictranscoder.UpdatePipelineNotificationsRequest
 
-	UpdatePipelineStatusRequest(*elastictranscoder.UpdatePipelineStatusInput) elastictranscoder.UpdatePipelineStatusRequest
+	UpdatePipelineStatusRequest(*types.UpdatePipelineStatusInput) elastictranscoder.UpdatePipelineStatusRequest
 
-	WaitUntilJobComplete(context.Context, *elastictranscoder.ReadJobInput, ...aws.WaiterOption) error
+	WaitUntilJobComplete(context.Context, *types.ReadJobInput, ...aws.WaiterOption) error
 }
 
 var _ ClientAPI = (*elastictranscoder.Client)(nil)

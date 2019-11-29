@@ -6,77 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/machinelearning/types"
 )
-
-type PredictInput struct {
-	_ struct{} `type:"structure"`
-
-	// A unique identifier of the MLModel.
-	//
-	// MLModelId is a required field
-	MLModelId *string `min:"1" type:"string" required:"true"`
-
-	// PredictEndpoint is a required field
-	PredictEndpoint *string `type:"string" required:"true"`
-
-	// A map of variable name-value pairs that represent an observation.
-	//
-	// Record is a required field
-	Record map[string]string `type:"map" required:"true"`
-}
-
-// String returns the string representation
-func (s PredictInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *PredictInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "PredictInput"}
-
-	if s.MLModelId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("MLModelId"))
-	}
-	if s.MLModelId != nil && len(*s.MLModelId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("MLModelId", 1))
-	}
-
-	if s.PredictEndpoint == nil {
-		invalidParams.Add(aws.NewErrParamRequired("PredictEndpoint"))
-	}
-
-	if s.Record == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Record"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type PredictOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The output from a Predict operation:
-	//
-	//    * Details - Contains the following attributes: DetailsAttributes.PREDICTIVE_MODEL_TYPE
-	//    - REGRESSION | BINARY | MULTICLASS DetailsAttributes.ALGORITHM - SGD
-	//
-	//    * PredictedLabel - Present for either a BINARY or MULTICLASS MLModel request.
-	//
-	//    * PredictedScores - Contains the raw classification score corresponding
-	//    to each label.
-	//
-	//    * PredictedValue - Present for a REGRESSION MLModel request.
-	Prediction *Prediction `type:"structure"`
-}
-
-// String returns the string representation
-func (s PredictOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opPredict = "Predict"
 
@@ -94,7 +25,7 @@ const opPredict = "Predict"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) PredictRequest(input *PredictInput) PredictRequest {
+func (c *Client) PredictRequest(input *types.PredictInput) PredictRequest {
 	op := &aws.Operation{
 		Name:       opPredict,
 		HTTPMethod: "POST",
@@ -102,10 +33,10 @@ func (c *Client) PredictRequest(input *PredictInput) PredictRequest {
 	}
 
 	if input == nil {
-		input = &PredictInput{}
+		input = &types.PredictInput{}
 	}
 
-	req := c.newRequest(op, input, &PredictOutput{})
+	req := c.newRequest(op, input, &types.PredictOutput{})
 	return PredictRequest{Request: req, Input: input, Copy: c.PredictRequest}
 }
 
@@ -113,8 +44,8 @@ func (c *Client) PredictRequest(input *PredictInput) PredictRequest {
 // Predict API operation.
 type PredictRequest struct {
 	*aws.Request
-	Input *PredictInput
-	Copy  func(*PredictInput) PredictRequest
+	Input *types.PredictInput
+	Copy  func(*types.PredictInput) PredictRequest
 }
 
 // Send marshals and sends the Predict API request.
@@ -126,7 +57,7 @@ func (r PredictRequest) Send(ctx context.Context) (*PredictResponse, error) {
 	}
 
 	resp := &PredictResponse{
-		PredictOutput: r.Request.Data.(*PredictOutput),
+		PredictOutput: r.Request.Data.(*types.PredictOutput),
 		response:      &aws.Response{Request: r.Request},
 	}
 
@@ -136,7 +67,7 @@ func (r PredictRequest) Send(ctx context.Context) (*PredictResponse, error) {
 // PredictResponse is the response type for the
 // Predict API operation.
 type PredictResponse struct {
-	*PredictOutput
+	*types.PredictOutput
 
 	response *aws.Response
 }

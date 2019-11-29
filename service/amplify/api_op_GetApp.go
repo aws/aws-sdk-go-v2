@@ -6,80 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/amplify/types"
 )
-
-// Request structure for get App request.
-type GetAppInput struct {
-	_ struct{} `type:"structure"`
-
-	// Unique Id for an Amplify App.
-	//
-	// AppId is a required field
-	AppId *string `location:"uri" locationName:"appId" min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetAppInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetAppInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetAppInput"}
-
-	if s.AppId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("AppId"))
-	}
-	if s.AppId != nil && len(*s.AppId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("AppId", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetAppInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.AppId != nil {
-		v := *s.AppId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "appId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type GetAppOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Amplify App represents different branches of a repository for building, deploying,
-	// and hosting.
-	//
-	// App is a required field
-	App *App `locationName:"app" type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s GetAppOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetAppOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.App != nil {
-		v := s.App
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "app", v, metadata)
-	}
-	return nil
-}
 
 const opGetApp = "GetApp"
 
@@ -96,7 +24,7 @@ const opGetApp = "GetApp"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/GetApp
-func (c *Client) GetAppRequest(input *GetAppInput) GetAppRequest {
+func (c *Client) GetAppRequest(input *types.GetAppInput) GetAppRequest {
 	op := &aws.Operation{
 		Name:       opGetApp,
 		HTTPMethod: "GET",
@@ -104,10 +32,10 @@ func (c *Client) GetAppRequest(input *GetAppInput) GetAppRequest {
 	}
 
 	if input == nil {
-		input = &GetAppInput{}
+		input = &types.GetAppInput{}
 	}
 
-	req := c.newRequest(op, input, &GetAppOutput{})
+	req := c.newRequest(op, input, &types.GetAppOutput{})
 	return GetAppRequest{Request: req, Input: input, Copy: c.GetAppRequest}
 }
 
@@ -115,8 +43,8 @@ func (c *Client) GetAppRequest(input *GetAppInput) GetAppRequest {
 // GetApp API operation.
 type GetAppRequest struct {
 	*aws.Request
-	Input *GetAppInput
-	Copy  func(*GetAppInput) GetAppRequest
+	Input *types.GetAppInput
+	Copy  func(*types.GetAppInput) GetAppRequest
 }
 
 // Send marshals and sends the GetApp API request.
@@ -128,7 +56,7 @@ func (r GetAppRequest) Send(ctx context.Context) (*GetAppResponse, error) {
 	}
 
 	resp := &GetAppResponse{
-		GetAppOutput: r.Request.Data.(*GetAppOutput),
+		GetAppOutput: r.Request.Data.(*types.GetAppOutput),
 		response:     &aws.Response{Request: r.Request},
 	}
 
@@ -138,7 +66,7 @@ func (r GetAppRequest) Send(ctx context.Context) (*GetAppResponse, error) {
 // GetAppResponse is the response type for the
 // GetApp API operation.
 type GetAppResponse struct {
-	*GetAppOutput
+	*types.GetAppOutput
 
 	response *aws.Response
 }

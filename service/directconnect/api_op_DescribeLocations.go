@@ -6,29 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/directconnect/types"
 )
-
-type DescribeLocationsInput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DescribeLocationsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type DescribeLocationsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The locations.
-	Locations []Location `locationName:"locations" type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeLocationsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeLocations = "DescribeLocations"
 
@@ -46,7 +25,7 @@ const opDescribeLocations = "DescribeLocations"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DescribeLocations
-func (c *Client) DescribeLocationsRequest(input *DescribeLocationsInput) DescribeLocationsRequest {
+func (c *Client) DescribeLocationsRequest(input *types.DescribeLocationsInput) DescribeLocationsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeLocations,
 		HTTPMethod: "POST",
@@ -54,10 +33,10 @@ func (c *Client) DescribeLocationsRequest(input *DescribeLocationsInput) Describ
 	}
 
 	if input == nil {
-		input = &DescribeLocationsInput{}
+		input = &types.DescribeLocationsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeLocationsOutput{})
+	req := c.newRequest(op, input, &types.DescribeLocationsOutput{})
 	return DescribeLocationsRequest{Request: req, Input: input, Copy: c.DescribeLocationsRequest}
 }
 
@@ -65,8 +44,8 @@ func (c *Client) DescribeLocationsRequest(input *DescribeLocationsInput) Describ
 // DescribeLocations API operation.
 type DescribeLocationsRequest struct {
 	*aws.Request
-	Input *DescribeLocationsInput
-	Copy  func(*DescribeLocationsInput) DescribeLocationsRequest
+	Input *types.DescribeLocationsInput
+	Copy  func(*types.DescribeLocationsInput) DescribeLocationsRequest
 }
 
 // Send marshals and sends the DescribeLocations API request.
@@ -78,7 +57,7 @@ func (r DescribeLocationsRequest) Send(ctx context.Context) (*DescribeLocationsR
 	}
 
 	resp := &DescribeLocationsResponse{
-		DescribeLocationsOutput: r.Request.Data.(*DescribeLocationsOutput),
+		DescribeLocationsOutput: r.Request.Data.(*types.DescribeLocationsOutput),
 		response:                &aws.Response{Request: r.Request},
 	}
 
@@ -88,7 +67,7 @@ func (r DescribeLocationsRequest) Send(ctx context.Context) (*DescribeLocationsR
 // DescribeLocationsResponse is the response type for the
 // DescribeLocations API operation.
 type DescribeLocationsResponse struct {
-	*DescribeLocationsOutput
+	*types.DescribeLocationsOutput
 
 	response *aws.Response
 }

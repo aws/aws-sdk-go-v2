@@ -6,64 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/storagegateway/types"
 )
-
-type AddCacheInput struct {
-	_ struct{} `type:"structure"`
-
-	// An array of strings that identify disks that are to be configured as working
-	// storage. Each string have a minimum length of 1 and maximum length of 300.
-	// You can get the disk IDs from the ListLocalDisks API.
-	//
-	// DiskIds is a required field
-	DiskIds []string `type:"list" required:"true"`
-
-	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation
-	// to return a list of gateways for your account and AWS Region.
-	//
-	// GatewayARN is a required field
-	GatewayARN *string `min:"50" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s AddCacheInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *AddCacheInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "AddCacheInput"}
-
-	if s.DiskIds == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DiskIds"))
-	}
-
-	if s.GatewayARN == nil {
-		invalidParams.Add(aws.NewErrParamRequired("GatewayARN"))
-	}
-	if s.GatewayARN != nil && len(*s.GatewayARN) < 50 {
-		invalidParams.Add(aws.NewErrParamMinLen("GatewayARN", 50))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type AddCacheOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation
-	// to return a list of gateways for your account and AWS Region.
-	GatewayARN *string `min:"50" type:"string"`
-}
-
-// String returns the string representation
-func (s AddCacheOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opAddCache = "AddCache"
 
@@ -86,7 +30,7 @@ const opAddCache = "AddCache"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/AddCache
-func (c *Client) AddCacheRequest(input *AddCacheInput) AddCacheRequest {
+func (c *Client) AddCacheRequest(input *types.AddCacheInput) AddCacheRequest {
 	op := &aws.Operation{
 		Name:       opAddCache,
 		HTTPMethod: "POST",
@@ -94,10 +38,10 @@ func (c *Client) AddCacheRequest(input *AddCacheInput) AddCacheRequest {
 	}
 
 	if input == nil {
-		input = &AddCacheInput{}
+		input = &types.AddCacheInput{}
 	}
 
-	req := c.newRequest(op, input, &AddCacheOutput{})
+	req := c.newRequest(op, input, &types.AddCacheOutput{})
 	return AddCacheRequest{Request: req, Input: input, Copy: c.AddCacheRequest}
 }
 
@@ -105,8 +49,8 @@ func (c *Client) AddCacheRequest(input *AddCacheInput) AddCacheRequest {
 // AddCache API operation.
 type AddCacheRequest struct {
 	*aws.Request
-	Input *AddCacheInput
-	Copy  func(*AddCacheInput) AddCacheRequest
+	Input *types.AddCacheInput
+	Copy  func(*types.AddCacheInput) AddCacheRequest
 }
 
 // Send marshals and sends the AddCache API request.
@@ -118,7 +62,7 @@ func (r AddCacheRequest) Send(ctx context.Context) (*AddCacheResponse, error) {
 	}
 
 	resp := &AddCacheResponse{
-		AddCacheOutput: r.Request.Data.(*AddCacheOutput),
+		AddCacheOutput: r.Request.Data.(*types.AddCacheOutput),
 		response:       &aws.Response{Request: r.Request},
 	}
 
@@ -128,7 +72,7 @@ func (r AddCacheRequest) Send(ctx context.Context) (*AddCacheResponse, error) {
 // AddCacheResponse is the response type for the
 // AddCache API operation.
 type AddCacheResponse struct {
-	*AddCacheOutput
+	*types.AddCacheOutput
 
 	response *aws.Response
 }

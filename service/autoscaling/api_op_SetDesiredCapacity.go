@@ -6,65 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/query"
+	"github.com/aws/aws-sdk-go-v2/service/autoscaling/types"
 )
-
-type SetDesiredCapacityInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the Auto Scaling group.
-	//
-	// AutoScalingGroupName is a required field
-	AutoScalingGroupName *string `min:"1" type:"string" required:"true"`
-
-	// The number of EC2 instances that should be running in the Auto Scaling group.
-	//
-	// DesiredCapacity is a required field
-	DesiredCapacity *int64 `type:"integer" required:"true"`
-
-	// Indicates whether Amazon EC2 Auto Scaling waits for the cooldown period to
-	// complete before initiating a scaling activity to set your Auto Scaling group
-	// to its new capacity. By default, Amazon EC2 Auto Scaling does not honor the
-	// cooldown period during manual scaling activities.
-	HonorCooldown *bool `type:"boolean"`
-}
-
-// String returns the string representation
-func (s SetDesiredCapacityInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *SetDesiredCapacityInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "SetDesiredCapacityInput"}
-
-	if s.AutoScalingGroupName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("AutoScalingGroupName"))
-	}
-	if s.AutoScalingGroupName != nil && len(*s.AutoScalingGroupName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("AutoScalingGroupName", 1))
-	}
-
-	if s.DesiredCapacity == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DesiredCapacity"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type SetDesiredCapacityOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s SetDesiredCapacityOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opSetDesiredCapacity = "SetDesiredCapacity"
 
@@ -85,7 +30,7 @@ const opSetDesiredCapacity = "SetDesiredCapacity"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/SetDesiredCapacity
-func (c *Client) SetDesiredCapacityRequest(input *SetDesiredCapacityInput) SetDesiredCapacityRequest {
+func (c *Client) SetDesiredCapacityRequest(input *types.SetDesiredCapacityInput) SetDesiredCapacityRequest {
 	op := &aws.Operation{
 		Name:       opSetDesiredCapacity,
 		HTTPMethod: "POST",
@@ -93,10 +38,10 @@ func (c *Client) SetDesiredCapacityRequest(input *SetDesiredCapacityInput) SetDe
 	}
 
 	if input == nil {
-		input = &SetDesiredCapacityInput{}
+		input = &types.SetDesiredCapacityInput{}
 	}
 
-	req := c.newRequest(op, input, &SetDesiredCapacityOutput{})
+	req := c.newRequest(op, input, &types.SetDesiredCapacityOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return SetDesiredCapacityRequest{Request: req, Input: input, Copy: c.SetDesiredCapacityRequest}
@@ -106,8 +51,8 @@ func (c *Client) SetDesiredCapacityRequest(input *SetDesiredCapacityInput) SetDe
 // SetDesiredCapacity API operation.
 type SetDesiredCapacityRequest struct {
 	*aws.Request
-	Input *SetDesiredCapacityInput
-	Copy  func(*SetDesiredCapacityInput) SetDesiredCapacityRequest
+	Input *types.SetDesiredCapacityInput
+	Copy  func(*types.SetDesiredCapacityInput) SetDesiredCapacityRequest
 }
 
 // Send marshals and sends the SetDesiredCapacity API request.
@@ -119,7 +64,7 @@ func (r SetDesiredCapacityRequest) Send(ctx context.Context) (*SetDesiredCapacit
 	}
 
 	resp := &SetDesiredCapacityResponse{
-		SetDesiredCapacityOutput: r.Request.Data.(*SetDesiredCapacityOutput),
+		SetDesiredCapacityOutput: r.Request.Data.(*types.SetDesiredCapacityOutput),
 		response:                 &aws.Response{Request: r.Request},
 	}
 
@@ -129,7 +74,7 @@ func (r SetDesiredCapacityRequest) Send(ctx context.Context) (*SetDesiredCapacit
 // SetDesiredCapacityResponse is the response type for the
 // SetDesiredCapacity API operation.
 type SetDesiredCapacityResponse struct {
-	*SetDesiredCapacityOutput
+	*types.SetDesiredCapacityOutput
 
 	response *aws.Response
 }

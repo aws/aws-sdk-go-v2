@@ -6,74 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/pinpoint/types"
 )
-
-type GetSmsChannelInput struct {
-	_ struct{} `type:"structure"`
-
-	// ApplicationId is a required field
-	ApplicationId *string `location:"uri" locationName:"application-id" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetSmsChannelInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetSmsChannelInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetSmsChannelInput"}
-
-	if s.ApplicationId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ApplicationId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetSmsChannelInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.ApplicationId != nil {
-		v := *s.ApplicationId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "application-id", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type GetSmsChannelOutput struct {
-	_ struct{} `type:"structure" payload:"SMSChannelResponse"`
-
-	// Provides information about the status and settings of the SMS channel for
-	// an application.
-	//
-	// SMSChannelResponse is a required field
-	SMSChannelResponse *SMSChannelResponse `type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s GetSmsChannelOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetSmsChannelOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.SMSChannelResponse != nil {
-		v := s.SMSChannelResponse
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.PayloadTarget, "SMSChannelResponse", v, metadata)
-	}
-	return nil
-}
 
 const opGetSmsChannel = "GetSmsChannel"
 
@@ -91,7 +25,7 @@ const opGetSmsChannel = "GetSmsChannel"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetSmsChannel
-func (c *Client) GetSmsChannelRequest(input *GetSmsChannelInput) GetSmsChannelRequest {
+func (c *Client) GetSmsChannelRequest(input *types.GetSmsChannelInput) GetSmsChannelRequest {
 	op := &aws.Operation{
 		Name:       opGetSmsChannel,
 		HTTPMethod: "GET",
@@ -99,10 +33,10 @@ func (c *Client) GetSmsChannelRequest(input *GetSmsChannelInput) GetSmsChannelRe
 	}
 
 	if input == nil {
-		input = &GetSmsChannelInput{}
+		input = &types.GetSmsChannelInput{}
 	}
 
-	req := c.newRequest(op, input, &GetSmsChannelOutput{})
+	req := c.newRequest(op, input, &types.GetSmsChannelOutput{})
 	return GetSmsChannelRequest{Request: req, Input: input, Copy: c.GetSmsChannelRequest}
 }
 
@@ -110,8 +44,8 @@ func (c *Client) GetSmsChannelRequest(input *GetSmsChannelInput) GetSmsChannelRe
 // GetSmsChannel API operation.
 type GetSmsChannelRequest struct {
 	*aws.Request
-	Input *GetSmsChannelInput
-	Copy  func(*GetSmsChannelInput) GetSmsChannelRequest
+	Input *types.GetSmsChannelInput
+	Copy  func(*types.GetSmsChannelInput) GetSmsChannelRequest
 }
 
 // Send marshals and sends the GetSmsChannel API request.
@@ -123,7 +57,7 @@ func (r GetSmsChannelRequest) Send(ctx context.Context) (*GetSmsChannelResponse,
 	}
 
 	resp := &GetSmsChannelResponse{
-		GetSmsChannelOutput: r.Request.Data.(*GetSmsChannelOutput),
+		GetSmsChannelOutput: r.Request.Data.(*types.GetSmsChannelOutput),
 		response:            &aws.Response{Request: r.Request},
 	}
 
@@ -133,7 +67,7 @@ func (r GetSmsChannelRequest) Send(ctx context.Context) (*GetSmsChannelResponse,
 // GetSmsChannelResponse is the response type for the
 // GetSmsChannel API operation.
 type GetSmsChannelResponse struct {
-	*GetSmsChannelOutput
+	*types.GetSmsChannelOutput
 
 	response *aws.Response
 }

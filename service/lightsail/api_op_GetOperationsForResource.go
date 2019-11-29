@@ -6,63 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/lightsail/types"
 )
-
-type GetOperationsForResourceInput struct {
-	_ struct{} `type:"structure"`
-
-	// A token used for advancing to the next page of results from your get operations
-	// for resource request.
-	PageToken *string `locationName:"pageToken" type:"string"`
-
-	// The name of the resource for which you are requesting information.
-	//
-	// ResourceName is a required field
-	ResourceName *string `locationName:"resourceName" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetOperationsForResourceInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetOperationsForResourceInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetOperationsForResourceInput"}
-
-	if s.ResourceName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ResourceName"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type GetOperationsForResourceOutput struct {
-	_ struct{} `type:"structure"`
-
-	// (Deprecated) Returns the number of pages of results that remain.
-	//
-	// In releases prior to June 12, 2017, this parameter returned null by the API.
-	// It is now deprecated, and the API returns the next page token parameter instead.
-	NextPageCount *string `locationName:"nextPageCount" deprecated:"true" type:"string"`
-
-	// An identifier that was returned from the previous call to this operation,
-	// which can be used to return the next set of items in the list.
-	NextPageToken *string `locationName:"nextPageToken" type:"string"`
-
-	// An array of key-value pairs containing information about the results of your
-	// get operations for resource request.
-	Operations []Operation `locationName:"operations" type:"list"`
-}
-
-// String returns the string representation
-func (s GetOperationsForResourceOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetOperationsForResource = "GetOperationsForResource"
 
@@ -79,7 +24,7 @@ const opGetOperationsForResource = "GetOperationsForResource"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetOperationsForResource
-func (c *Client) GetOperationsForResourceRequest(input *GetOperationsForResourceInput) GetOperationsForResourceRequest {
+func (c *Client) GetOperationsForResourceRequest(input *types.GetOperationsForResourceInput) GetOperationsForResourceRequest {
 	op := &aws.Operation{
 		Name:       opGetOperationsForResource,
 		HTTPMethod: "POST",
@@ -87,10 +32,10 @@ func (c *Client) GetOperationsForResourceRequest(input *GetOperationsForResource
 	}
 
 	if input == nil {
-		input = &GetOperationsForResourceInput{}
+		input = &types.GetOperationsForResourceInput{}
 	}
 
-	req := c.newRequest(op, input, &GetOperationsForResourceOutput{})
+	req := c.newRequest(op, input, &types.GetOperationsForResourceOutput{})
 	return GetOperationsForResourceRequest{Request: req, Input: input, Copy: c.GetOperationsForResourceRequest}
 }
 
@@ -98,8 +43,8 @@ func (c *Client) GetOperationsForResourceRequest(input *GetOperationsForResource
 // GetOperationsForResource API operation.
 type GetOperationsForResourceRequest struct {
 	*aws.Request
-	Input *GetOperationsForResourceInput
-	Copy  func(*GetOperationsForResourceInput) GetOperationsForResourceRequest
+	Input *types.GetOperationsForResourceInput
+	Copy  func(*types.GetOperationsForResourceInput) GetOperationsForResourceRequest
 }
 
 // Send marshals and sends the GetOperationsForResource API request.
@@ -111,7 +56,7 @@ func (r GetOperationsForResourceRequest) Send(ctx context.Context) (*GetOperatio
 	}
 
 	resp := &GetOperationsForResourceResponse{
-		GetOperationsForResourceOutput: r.Request.Data.(*GetOperationsForResourceOutput),
+		GetOperationsForResourceOutput: r.Request.Data.(*types.GetOperationsForResourceOutput),
 		response:                       &aws.Response{Request: r.Request},
 	}
 
@@ -121,7 +66,7 @@ func (r GetOperationsForResourceRequest) Send(ctx context.Context) (*GetOperatio
 // GetOperationsForResourceResponse is the response type for the
 // GetOperationsForResource API operation.
 type GetOperationsForResourceResponse struct {
-	*GetOperationsForResourceOutput
+	*types.GetOperationsForResourceOutput
 
 	response *aws.Response
 }

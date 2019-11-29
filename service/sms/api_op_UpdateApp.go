@@ -6,53 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/sms/types"
 )
-
-type UpdateAppInput struct {
-	_ struct{} `type:"structure"`
-
-	// ID of the application to update.
-	AppId *string `locationName:"appId" type:"string"`
-
-	// New description of the application.
-	Description *string `locationName:"description" type:"string"`
-
-	// New name of the application.
-	Name *string `locationName:"name" type:"string"`
-
-	// Name of the service role in the customer's account used by AWS SMS.
-	RoleName *string `locationName:"roleName" type:"string"`
-
-	// List of server groups in the application to update.
-	ServerGroups []ServerGroup `locationName:"serverGroups" type:"list"`
-
-	// List of tags to associate with the application.
-	Tags []Tag `locationName:"tags" type:"list"`
-}
-
-// String returns the string representation
-func (s UpdateAppInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type UpdateAppOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Summary description of the application.
-	AppSummary *AppSummary `locationName:"appSummary" type:"structure"`
-
-	// List of updated server groups in the application.
-	ServerGroups []ServerGroup `locationName:"serverGroups" type:"list"`
-
-	// List of tags associated with the application.
-	Tags []Tag `locationName:"tags" type:"list"`
-}
-
-// String returns the string representation
-func (s UpdateAppOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opUpdateApp = "UpdateApp"
 
@@ -69,7 +24,7 @@ const opUpdateApp = "UpdateApp"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sms-2016-10-24/UpdateApp
-func (c *Client) UpdateAppRequest(input *UpdateAppInput) UpdateAppRequest {
+func (c *Client) UpdateAppRequest(input *types.UpdateAppInput) UpdateAppRequest {
 	op := &aws.Operation{
 		Name:       opUpdateApp,
 		HTTPMethod: "POST",
@@ -77,10 +32,10 @@ func (c *Client) UpdateAppRequest(input *UpdateAppInput) UpdateAppRequest {
 	}
 
 	if input == nil {
-		input = &UpdateAppInput{}
+		input = &types.UpdateAppInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateAppOutput{})
+	req := c.newRequest(op, input, &types.UpdateAppOutput{})
 	return UpdateAppRequest{Request: req, Input: input, Copy: c.UpdateAppRequest}
 }
 
@@ -88,8 +43,8 @@ func (c *Client) UpdateAppRequest(input *UpdateAppInput) UpdateAppRequest {
 // UpdateApp API operation.
 type UpdateAppRequest struct {
 	*aws.Request
-	Input *UpdateAppInput
-	Copy  func(*UpdateAppInput) UpdateAppRequest
+	Input *types.UpdateAppInput
+	Copy  func(*types.UpdateAppInput) UpdateAppRequest
 }
 
 // Send marshals and sends the UpdateApp API request.
@@ -101,7 +56,7 @@ func (r UpdateAppRequest) Send(ctx context.Context) (*UpdateAppResponse, error) 
 	}
 
 	resp := &UpdateAppResponse{
-		UpdateAppOutput: r.Request.Data.(*UpdateAppOutput),
+		UpdateAppOutput: r.Request.Data.(*types.UpdateAppOutput),
 		response:        &aws.Response{Request: r.Request},
 	}
 
@@ -111,7 +66,7 @@ func (r UpdateAppRequest) Send(ctx context.Context) (*UpdateAppResponse, error) 
 // UpdateAppResponse is the response type for the
 // UpdateApp API operation.
 type UpdateAppResponse struct {
-	*UpdateAppOutput
+	*types.UpdateAppOutput
 
 	response *aws.Response
 }

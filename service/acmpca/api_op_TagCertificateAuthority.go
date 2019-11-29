@@ -4,75 +4,12 @@ package acmpca
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
+	"github.com/aws/aws-sdk-go-v2/service/acmpca/types"
 )
-
-type TagCertificateAuthorityInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) that was returned when you called CreateCertificateAuthority.
-	// This must be of the form:
-	//
-	// arn:aws:acm-pca:region:account:certificate-authority/12345678-1234-1234-1234-123456789012
-	//
-	// CertificateAuthorityArn is a required field
-	CertificateAuthorityArn *string `min:"5" type:"string" required:"true"`
-
-	// List of tags to be associated with the CA.
-	//
-	// Tags is a required field
-	Tags []Tag `min:"1" type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s TagCertificateAuthorityInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *TagCertificateAuthorityInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "TagCertificateAuthorityInput"}
-
-	if s.CertificateAuthorityArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("CertificateAuthorityArn"))
-	}
-	if s.CertificateAuthorityArn != nil && len(*s.CertificateAuthorityArn) < 5 {
-		invalidParams.Add(aws.NewErrParamMinLen("CertificateAuthorityArn", 5))
-	}
-
-	if s.Tags == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Tags"))
-	}
-	if s.Tags != nil && len(s.Tags) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Tags", 1))
-	}
-	if s.Tags != nil {
-		for i, v := range s.Tags {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type TagCertificateAuthorityOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s TagCertificateAuthorityOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opTagCertificateAuthority = "TagCertificateAuthority"
 
@@ -97,7 +34,7 @@ const opTagCertificateAuthority = "TagCertificateAuthority"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/acm-pca-2017-08-22/TagCertificateAuthority
-func (c *Client) TagCertificateAuthorityRequest(input *TagCertificateAuthorityInput) TagCertificateAuthorityRequest {
+func (c *Client) TagCertificateAuthorityRequest(input *types.TagCertificateAuthorityInput) TagCertificateAuthorityRequest {
 	op := &aws.Operation{
 		Name:       opTagCertificateAuthority,
 		HTTPMethod: "POST",
@@ -105,10 +42,10 @@ func (c *Client) TagCertificateAuthorityRequest(input *TagCertificateAuthorityIn
 	}
 
 	if input == nil {
-		input = &TagCertificateAuthorityInput{}
+		input = &types.TagCertificateAuthorityInput{}
 	}
 
-	req := c.newRequest(op, input, &TagCertificateAuthorityOutput{})
+	req := c.newRequest(op, input, &types.TagCertificateAuthorityOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return TagCertificateAuthorityRequest{Request: req, Input: input, Copy: c.TagCertificateAuthorityRequest}
@@ -118,8 +55,8 @@ func (c *Client) TagCertificateAuthorityRequest(input *TagCertificateAuthorityIn
 // TagCertificateAuthority API operation.
 type TagCertificateAuthorityRequest struct {
 	*aws.Request
-	Input *TagCertificateAuthorityInput
-	Copy  func(*TagCertificateAuthorityInput) TagCertificateAuthorityRequest
+	Input *types.TagCertificateAuthorityInput
+	Copy  func(*types.TagCertificateAuthorityInput) TagCertificateAuthorityRequest
 }
 
 // Send marshals and sends the TagCertificateAuthority API request.
@@ -131,7 +68,7 @@ func (r TagCertificateAuthorityRequest) Send(ctx context.Context) (*TagCertifica
 	}
 
 	resp := &TagCertificateAuthorityResponse{
-		TagCertificateAuthorityOutput: r.Request.Data.(*TagCertificateAuthorityOutput),
+		TagCertificateAuthorityOutput: r.Request.Data.(*types.TagCertificateAuthorityOutput),
 		response:                      &aws.Response{Request: r.Request},
 	}
 
@@ -141,7 +78,7 @@ func (r TagCertificateAuthorityRequest) Send(ctx context.Context) (*TagCertifica
 // TagCertificateAuthorityResponse is the response type for the
 // TagCertificateAuthority API operation.
 type TagCertificateAuthorityResponse struct {
-	*TagCertificateAuthorityOutput
+	*types.TagCertificateAuthorityOutput
 
 	response *aws.Response
 }

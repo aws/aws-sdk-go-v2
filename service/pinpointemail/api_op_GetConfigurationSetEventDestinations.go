@@ -6,83 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/pinpointemail/types"
 )
-
-// A request to obtain information about the event destinations for a configuration
-// set.
-type GetConfigurationSetEventDestinationsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the configuration set that contains the event destination.
-	//
-	// ConfigurationSetName is a required field
-	ConfigurationSetName *string `location:"uri" locationName:"ConfigurationSetName" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetConfigurationSetEventDestinationsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetConfigurationSetEventDestinationsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetConfigurationSetEventDestinationsInput"}
-
-	if s.ConfigurationSetName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ConfigurationSetName"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetConfigurationSetEventDestinationsInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.ConfigurationSetName != nil {
-		v := *s.ConfigurationSetName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "ConfigurationSetName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-// Information about an event destination for a configuration set.
-type GetConfigurationSetEventDestinationsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// An array that includes all of the events destinations that have been configured
-	// for the configuration set.
-	EventDestinations []EventDestination `type:"list"`
-}
-
-// String returns the string representation
-func (s GetConfigurationSetEventDestinationsOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetConfigurationSetEventDestinationsOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.EventDestinations != nil {
-		v := s.EventDestinations
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "EventDestinations", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	return nil
-}
 
 const opGetConfigurationSetEventDestinations = "GetConfigurationSetEventDestinations"
 
@@ -107,7 +32,7 @@ const opGetConfigurationSetEventDestinations = "GetConfigurationSetEventDestinat
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/GetConfigurationSetEventDestinations
-func (c *Client) GetConfigurationSetEventDestinationsRequest(input *GetConfigurationSetEventDestinationsInput) GetConfigurationSetEventDestinationsRequest {
+func (c *Client) GetConfigurationSetEventDestinationsRequest(input *types.GetConfigurationSetEventDestinationsInput) GetConfigurationSetEventDestinationsRequest {
 	op := &aws.Operation{
 		Name:       opGetConfigurationSetEventDestinations,
 		HTTPMethod: "GET",
@@ -115,10 +40,10 @@ func (c *Client) GetConfigurationSetEventDestinationsRequest(input *GetConfigura
 	}
 
 	if input == nil {
-		input = &GetConfigurationSetEventDestinationsInput{}
+		input = &types.GetConfigurationSetEventDestinationsInput{}
 	}
 
-	req := c.newRequest(op, input, &GetConfigurationSetEventDestinationsOutput{})
+	req := c.newRequest(op, input, &types.GetConfigurationSetEventDestinationsOutput{})
 	return GetConfigurationSetEventDestinationsRequest{Request: req, Input: input, Copy: c.GetConfigurationSetEventDestinationsRequest}
 }
 
@@ -126,8 +51,8 @@ func (c *Client) GetConfigurationSetEventDestinationsRequest(input *GetConfigura
 // GetConfigurationSetEventDestinations API operation.
 type GetConfigurationSetEventDestinationsRequest struct {
 	*aws.Request
-	Input *GetConfigurationSetEventDestinationsInput
-	Copy  func(*GetConfigurationSetEventDestinationsInput) GetConfigurationSetEventDestinationsRequest
+	Input *types.GetConfigurationSetEventDestinationsInput
+	Copy  func(*types.GetConfigurationSetEventDestinationsInput) GetConfigurationSetEventDestinationsRequest
 }
 
 // Send marshals and sends the GetConfigurationSetEventDestinations API request.
@@ -139,7 +64,7 @@ func (r GetConfigurationSetEventDestinationsRequest) Send(ctx context.Context) (
 	}
 
 	resp := &GetConfigurationSetEventDestinationsResponse{
-		GetConfigurationSetEventDestinationsOutput: r.Request.Data.(*GetConfigurationSetEventDestinationsOutput),
+		GetConfigurationSetEventDestinationsOutput: r.Request.Data.(*types.GetConfigurationSetEventDestinationsOutput),
 		response: &aws.Response{Request: r.Request},
 	}
 
@@ -149,7 +74,7 @@ func (r GetConfigurationSetEventDestinationsRequest) Send(ctx context.Context) (
 // GetConfigurationSetEventDestinationsResponse is the response type for the
 // GetConfigurationSetEventDestinations API operation.
 type GetConfigurationSetEventDestinationsResponse struct {
-	*GetConfigurationSetEventDestinationsOutput
+	*types.GetConfigurationSetEventDestinationsOutput
 
 	response *aws.Response
 }

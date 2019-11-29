@@ -6,48 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/devicefarm/types"
 )
-
-type DeleteNetworkProfileInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the network profile you want to delete.
-	//
-	// Arn is a required field
-	Arn *string `locationName:"arn" min:"32" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteNetworkProfileInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteNetworkProfileInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteNetworkProfileInput"}
-
-	if s.Arn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Arn"))
-	}
-	if s.Arn != nil && len(*s.Arn) < 32 {
-		invalidParams.Add(aws.NewErrParamMinLen("Arn", 32))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteNetworkProfileOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteNetworkProfileOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteNetworkProfile = "DeleteNetworkProfile"
 
@@ -64,7 +24,7 @@ const opDeleteNetworkProfile = "DeleteNetworkProfile"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/DeleteNetworkProfile
-func (c *Client) DeleteNetworkProfileRequest(input *DeleteNetworkProfileInput) DeleteNetworkProfileRequest {
+func (c *Client) DeleteNetworkProfileRequest(input *types.DeleteNetworkProfileInput) DeleteNetworkProfileRequest {
 	op := &aws.Operation{
 		Name:       opDeleteNetworkProfile,
 		HTTPMethod: "POST",
@@ -72,10 +32,10 @@ func (c *Client) DeleteNetworkProfileRequest(input *DeleteNetworkProfileInput) D
 	}
 
 	if input == nil {
-		input = &DeleteNetworkProfileInput{}
+		input = &types.DeleteNetworkProfileInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteNetworkProfileOutput{})
+	req := c.newRequest(op, input, &types.DeleteNetworkProfileOutput{})
 	return DeleteNetworkProfileRequest{Request: req, Input: input, Copy: c.DeleteNetworkProfileRequest}
 }
 
@@ -83,8 +43,8 @@ func (c *Client) DeleteNetworkProfileRequest(input *DeleteNetworkProfileInput) D
 // DeleteNetworkProfile API operation.
 type DeleteNetworkProfileRequest struct {
 	*aws.Request
-	Input *DeleteNetworkProfileInput
-	Copy  func(*DeleteNetworkProfileInput) DeleteNetworkProfileRequest
+	Input *types.DeleteNetworkProfileInput
+	Copy  func(*types.DeleteNetworkProfileInput) DeleteNetworkProfileRequest
 }
 
 // Send marshals and sends the DeleteNetworkProfile API request.
@@ -96,7 +56,7 @@ func (r DeleteNetworkProfileRequest) Send(ctx context.Context) (*DeleteNetworkPr
 	}
 
 	resp := &DeleteNetworkProfileResponse{
-		DeleteNetworkProfileOutput: r.Request.Data.(*DeleteNetworkProfileOutput),
+		DeleteNetworkProfileOutput: r.Request.Data.(*types.DeleteNetworkProfileOutput),
 		response:                   &aws.Response{Request: r.Request},
 	}
 
@@ -106,7 +66,7 @@ func (r DeleteNetworkProfileRequest) Send(ctx context.Context) (*DeleteNetworkPr
 // DeleteNetworkProfileResponse is the response type for the
 // DeleteNetworkProfile API operation.
 type DeleteNetworkProfileResponse struct {
-	*DeleteNetworkProfileOutput
+	*types.DeleteNetworkProfileOutput
 
 	response *aws.Response
 }

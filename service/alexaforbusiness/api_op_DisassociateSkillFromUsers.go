@@ -6,45 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/alexaforbusiness/types"
 )
-
-type DisassociateSkillFromUsersInput struct {
-	_ struct{} `type:"structure"`
-
-	// The private skill ID you want to make unavailable for enrolled users.
-	//
-	// SkillId is a required field
-	SkillId *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DisassociateSkillFromUsersInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DisassociateSkillFromUsersInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DisassociateSkillFromUsersInput"}
-
-	if s.SkillId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("SkillId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DisassociateSkillFromUsersOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DisassociateSkillFromUsersOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDisassociateSkillFromUsers = "DisassociateSkillFromUsers"
 
@@ -62,7 +25,7 @@ const opDisassociateSkillFromUsers = "DisassociateSkillFromUsers"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/DisassociateSkillFromUsers
-func (c *Client) DisassociateSkillFromUsersRequest(input *DisassociateSkillFromUsersInput) DisassociateSkillFromUsersRequest {
+func (c *Client) DisassociateSkillFromUsersRequest(input *types.DisassociateSkillFromUsersInput) DisassociateSkillFromUsersRequest {
 	op := &aws.Operation{
 		Name:       opDisassociateSkillFromUsers,
 		HTTPMethod: "POST",
@@ -70,10 +33,10 @@ func (c *Client) DisassociateSkillFromUsersRequest(input *DisassociateSkillFromU
 	}
 
 	if input == nil {
-		input = &DisassociateSkillFromUsersInput{}
+		input = &types.DisassociateSkillFromUsersInput{}
 	}
 
-	req := c.newRequest(op, input, &DisassociateSkillFromUsersOutput{})
+	req := c.newRequest(op, input, &types.DisassociateSkillFromUsersOutput{})
 	return DisassociateSkillFromUsersRequest{Request: req, Input: input, Copy: c.DisassociateSkillFromUsersRequest}
 }
 
@@ -81,8 +44,8 @@ func (c *Client) DisassociateSkillFromUsersRequest(input *DisassociateSkillFromU
 // DisassociateSkillFromUsers API operation.
 type DisassociateSkillFromUsersRequest struct {
 	*aws.Request
-	Input *DisassociateSkillFromUsersInput
-	Copy  func(*DisassociateSkillFromUsersInput) DisassociateSkillFromUsersRequest
+	Input *types.DisassociateSkillFromUsersInput
+	Copy  func(*types.DisassociateSkillFromUsersInput) DisassociateSkillFromUsersRequest
 }
 
 // Send marshals and sends the DisassociateSkillFromUsers API request.
@@ -94,7 +57,7 @@ func (r DisassociateSkillFromUsersRequest) Send(ctx context.Context) (*Disassoci
 	}
 
 	resp := &DisassociateSkillFromUsersResponse{
-		DisassociateSkillFromUsersOutput: r.Request.Data.(*DisassociateSkillFromUsersOutput),
+		DisassociateSkillFromUsersOutput: r.Request.Data.(*types.DisassociateSkillFromUsersOutput),
 		response:                         &aws.Response{Request: r.Request},
 	}
 
@@ -104,7 +67,7 @@ func (r DisassociateSkillFromUsersRequest) Send(ctx context.Context) (*Disassoci
 // DisassociateSkillFromUsersResponse is the response type for the
 // DisassociateSkillFromUsers API operation.
 type DisassociateSkillFromUsersResponse struct {
-	*DisassociateSkillFromUsersOutput
+	*types.DisassociateSkillFromUsersOutput
 
 	response *aws.Response
 }

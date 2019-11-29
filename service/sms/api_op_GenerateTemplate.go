@@ -6,35 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/sms/types"
 )
-
-type GenerateTemplateInput struct {
-	_ struct{} `type:"structure"`
-
-	// ID of the application associated with the Amazon CloudFormation template.
-	AppId *string `locationName:"appId" type:"string"`
-
-	// Format for generating the Amazon CloudFormation template.
-	TemplateFormat OutputFormat `locationName:"templateFormat" type:"string" enum:"true"`
-}
-
-// String returns the string representation
-func (s GenerateTemplateInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type GenerateTemplateOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Location of the Amazon S3 object.
-	S3Location *S3Location `locationName:"s3Location" type:"structure"`
-}
-
-// String returns the string representation
-func (s GenerateTemplateOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGenerateTemplate = "GenerateTemplate"
 
@@ -52,7 +25,7 @@ const opGenerateTemplate = "GenerateTemplate"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sms-2016-10-24/GenerateTemplate
-func (c *Client) GenerateTemplateRequest(input *GenerateTemplateInput) GenerateTemplateRequest {
+func (c *Client) GenerateTemplateRequest(input *types.GenerateTemplateInput) GenerateTemplateRequest {
 	op := &aws.Operation{
 		Name:       opGenerateTemplate,
 		HTTPMethod: "POST",
@@ -60,10 +33,10 @@ func (c *Client) GenerateTemplateRequest(input *GenerateTemplateInput) GenerateT
 	}
 
 	if input == nil {
-		input = &GenerateTemplateInput{}
+		input = &types.GenerateTemplateInput{}
 	}
 
-	req := c.newRequest(op, input, &GenerateTemplateOutput{})
+	req := c.newRequest(op, input, &types.GenerateTemplateOutput{})
 	return GenerateTemplateRequest{Request: req, Input: input, Copy: c.GenerateTemplateRequest}
 }
 
@@ -71,8 +44,8 @@ func (c *Client) GenerateTemplateRequest(input *GenerateTemplateInput) GenerateT
 // GenerateTemplate API operation.
 type GenerateTemplateRequest struct {
 	*aws.Request
-	Input *GenerateTemplateInput
-	Copy  func(*GenerateTemplateInput) GenerateTemplateRequest
+	Input *types.GenerateTemplateInput
+	Copy  func(*types.GenerateTemplateInput) GenerateTemplateRequest
 }
 
 // Send marshals and sends the GenerateTemplate API request.
@@ -84,7 +57,7 @@ func (r GenerateTemplateRequest) Send(ctx context.Context) (*GenerateTemplateRes
 	}
 
 	resp := &GenerateTemplateResponse{
-		GenerateTemplateOutput: r.Request.Data.(*GenerateTemplateOutput),
+		GenerateTemplateOutput: r.Request.Data.(*types.GenerateTemplateOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -94,7 +67,7 @@ func (r GenerateTemplateRequest) Send(ctx context.Context) (*GenerateTemplateRes
 // GenerateTemplateResponse is the response type for the
 // GenerateTemplate API operation.
 type GenerateTemplateResponse struct {
-	*GenerateTemplateOutput
+	*types.GenerateTemplateOutput
 
 	response *aws.Response
 }

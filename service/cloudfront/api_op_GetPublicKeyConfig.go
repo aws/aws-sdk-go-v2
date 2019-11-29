@@ -6,81 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/cloudfront/types"
 )
-
-type GetPublicKeyConfigInput struct {
-	_ struct{} `type:"structure"`
-
-	// Request the ID for the public key configuration.
-	//
-	// Id is a required field
-	Id *string `location:"uri" locationName:"Id" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetPublicKeyConfigInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetPublicKeyConfigInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetPublicKeyConfigInput"}
-
-	if s.Id == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Id"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetPublicKeyConfigInput) MarshalFields(e protocol.FieldEncoder) error {
-
-	if s.Id != nil {
-		v := *s.Id
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "Id", protocol.StringValue(v), metadata)
-	}
-	return nil
-}
-
-type GetPublicKeyConfigOutput struct {
-	_ struct{} `type:"structure" payload:"PublicKeyConfig"`
-
-	// The current version of the public key configuration. For example: E2QWRUHAPOMQZL.
-	ETag *string `location:"header" locationName:"ETag" type:"string"`
-
-	// Return the result for the public key configuration.
-	PublicKeyConfig *PublicKeyConfig `type:"structure"`
-}
-
-// String returns the string representation
-func (s GetPublicKeyConfigOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetPublicKeyConfigOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.ETag != nil {
-		v := *s.ETag
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "ETag", protocol.StringValue(v), metadata)
-	}
-	if s.PublicKeyConfig != nil {
-		v := s.PublicKeyConfig
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.PayloadTarget, "PublicKeyConfig", v, metadata)
-	}
-	return nil
-}
 
 const opGetPublicKeyConfig = "GetPublicKeyConfig2019_03_26"
 
@@ -97,7 +24,7 @@ const opGetPublicKeyConfig = "GetPublicKeyConfig2019_03_26"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/GetPublicKeyConfig
-func (c *Client) GetPublicKeyConfigRequest(input *GetPublicKeyConfigInput) GetPublicKeyConfigRequest {
+func (c *Client) GetPublicKeyConfigRequest(input *types.GetPublicKeyConfigInput) GetPublicKeyConfigRequest {
 	op := &aws.Operation{
 		Name:       opGetPublicKeyConfig,
 		HTTPMethod: "GET",
@@ -105,10 +32,10 @@ func (c *Client) GetPublicKeyConfigRequest(input *GetPublicKeyConfigInput) GetPu
 	}
 
 	if input == nil {
-		input = &GetPublicKeyConfigInput{}
+		input = &types.GetPublicKeyConfigInput{}
 	}
 
-	req := c.newRequest(op, input, &GetPublicKeyConfigOutput{})
+	req := c.newRequest(op, input, &types.GetPublicKeyConfigOutput{})
 	return GetPublicKeyConfigRequest{Request: req, Input: input, Copy: c.GetPublicKeyConfigRequest}
 }
 
@@ -116,8 +43,8 @@ func (c *Client) GetPublicKeyConfigRequest(input *GetPublicKeyConfigInput) GetPu
 // GetPublicKeyConfig API operation.
 type GetPublicKeyConfigRequest struct {
 	*aws.Request
-	Input *GetPublicKeyConfigInput
-	Copy  func(*GetPublicKeyConfigInput) GetPublicKeyConfigRequest
+	Input *types.GetPublicKeyConfigInput
+	Copy  func(*types.GetPublicKeyConfigInput) GetPublicKeyConfigRequest
 }
 
 // Send marshals and sends the GetPublicKeyConfig API request.
@@ -129,7 +56,7 @@ func (r GetPublicKeyConfigRequest) Send(ctx context.Context) (*GetPublicKeyConfi
 	}
 
 	resp := &GetPublicKeyConfigResponse{
-		GetPublicKeyConfigOutput: r.Request.Data.(*GetPublicKeyConfigOutput),
+		GetPublicKeyConfigOutput: r.Request.Data.(*types.GetPublicKeyConfigOutput),
 		response:                 &aws.Response{Request: r.Request},
 	}
 
@@ -139,7 +66,7 @@ func (r GetPublicKeyConfigRequest) Send(ctx context.Context) (*GetPublicKeyConfi
 // GetPublicKeyConfigResponse is the response type for the
 // GetPublicKeyConfig API operation.
 type GetPublicKeyConfigResponse struct {
-	*GetPublicKeyConfigOutput
+	*types.GetPublicKeyConfigOutput
 
 	response *aws.Response
 }

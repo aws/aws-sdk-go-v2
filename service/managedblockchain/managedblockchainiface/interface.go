@@ -10,6 +10,7 @@ package managedblockchainiface
 
 import (
 	"github.com/aws/aws-sdk-go-v2/service/managedblockchain"
+	"github.com/aws/aws-sdk-go-v2/service/managedblockchain/types"
 )
 
 // ClientAPI provides an interface to enable mocking the
@@ -43,7 +44,7 @@ import (
 //    type mockClientClient struct {
 //        managedblockchainiface.ClientPI
 //    }
-//    func (m *mockClientClient) CreateMember(input *managedblockchain.CreateMemberInput) (*managedblockchain.CreateMemberOutput, error) {
+//    func (m *mockClientClient) CreateMember(input *types.CreateMemberInput) (*types.CreateMemberOutput, error) {
 //        // mock response/functionality
 //    }
 //
@@ -61,41 +62,41 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type ClientAPI interface {
-	CreateMemberRequest(*managedblockchain.CreateMemberInput) managedblockchain.CreateMemberRequest
+	CreateMemberRequest(*types.CreateMemberInput) managedblockchain.CreateMemberRequest
 
-	CreateNetworkRequest(*managedblockchain.CreateNetworkInput) managedblockchain.CreateNetworkRequest
+	CreateNetworkRequest(*types.CreateNetworkInput) managedblockchain.CreateNetworkRequest
 
-	CreateNodeRequest(*managedblockchain.CreateNodeInput) managedblockchain.CreateNodeRequest
+	CreateNodeRequest(*types.CreateNodeInput) managedblockchain.CreateNodeRequest
 
-	CreateProposalRequest(*managedblockchain.CreateProposalInput) managedblockchain.CreateProposalRequest
+	CreateProposalRequest(*types.CreateProposalInput) managedblockchain.CreateProposalRequest
 
-	DeleteMemberRequest(*managedblockchain.DeleteMemberInput) managedblockchain.DeleteMemberRequest
+	DeleteMemberRequest(*types.DeleteMemberInput) managedblockchain.DeleteMemberRequest
 
-	DeleteNodeRequest(*managedblockchain.DeleteNodeInput) managedblockchain.DeleteNodeRequest
+	DeleteNodeRequest(*types.DeleteNodeInput) managedblockchain.DeleteNodeRequest
 
-	GetMemberRequest(*managedblockchain.GetMemberInput) managedblockchain.GetMemberRequest
+	GetMemberRequest(*types.GetMemberInput) managedblockchain.GetMemberRequest
 
-	GetNetworkRequest(*managedblockchain.GetNetworkInput) managedblockchain.GetNetworkRequest
+	GetNetworkRequest(*types.GetNetworkInput) managedblockchain.GetNetworkRequest
 
-	GetNodeRequest(*managedblockchain.GetNodeInput) managedblockchain.GetNodeRequest
+	GetNodeRequest(*types.GetNodeInput) managedblockchain.GetNodeRequest
 
-	GetProposalRequest(*managedblockchain.GetProposalInput) managedblockchain.GetProposalRequest
+	GetProposalRequest(*types.GetProposalInput) managedblockchain.GetProposalRequest
 
-	ListInvitationsRequest(*managedblockchain.ListInvitationsInput) managedblockchain.ListInvitationsRequest
+	ListInvitationsRequest(*types.ListInvitationsInput) managedblockchain.ListInvitationsRequest
 
-	ListMembersRequest(*managedblockchain.ListMembersInput) managedblockchain.ListMembersRequest
+	ListMembersRequest(*types.ListMembersInput) managedblockchain.ListMembersRequest
 
-	ListNetworksRequest(*managedblockchain.ListNetworksInput) managedblockchain.ListNetworksRequest
+	ListNetworksRequest(*types.ListNetworksInput) managedblockchain.ListNetworksRequest
 
-	ListNodesRequest(*managedblockchain.ListNodesInput) managedblockchain.ListNodesRequest
+	ListNodesRequest(*types.ListNodesInput) managedblockchain.ListNodesRequest
 
-	ListProposalVotesRequest(*managedblockchain.ListProposalVotesInput) managedblockchain.ListProposalVotesRequest
+	ListProposalVotesRequest(*types.ListProposalVotesInput) managedblockchain.ListProposalVotesRequest
 
-	ListProposalsRequest(*managedblockchain.ListProposalsInput) managedblockchain.ListProposalsRequest
+	ListProposalsRequest(*types.ListProposalsInput) managedblockchain.ListProposalsRequest
 
-	RejectInvitationRequest(*managedblockchain.RejectInvitationInput) managedblockchain.RejectInvitationRequest
+	RejectInvitationRequest(*types.RejectInvitationInput) managedblockchain.RejectInvitationRequest
 
-	VoteOnProposalRequest(*managedblockchain.VoteOnProposalInput) managedblockchain.VoteOnProposalRequest
+	VoteOnProposalRequest(*types.VoteOnProposalInput) managedblockchain.VoteOnProposalRequest
 }
 
 var _ ClientAPI = (*managedblockchain.Client)(nil)

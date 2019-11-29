@@ -6,50 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/gamelift/types"
 )
-
-// Represents the input for a request action.
-type DeleteGameSessionQueueInput struct {
-	_ struct{} `type:"structure"`
-
-	// Descriptive label that is associated with game session queue. Queue names
-	// must be unique within each region.
-	//
-	// Name is a required field
-	Name *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteGameSessionQueueInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteGameSessionQueueInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteGameSessionQueueInput"}
-
-	if s.Name == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Name"))
-	}
-	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteGameSessionQueueOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteGameSessionQueueOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteGameSessionQueue = "DeleteGameSessionQueue"
 
@@ -76,7 +34,7 @@ const opDeleteGameSessionQueue = "DeleteGameSessionQueue"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DeleteGameSessionQueue
-func (c *Client) DeleteGameSessionQueueRequest(input *DeleteGameSessionQueueInput) DeleteGameSessionQueueRequest {
+func (c *Client) DeleteGameSessionQueueRequest(input *types.DeleteGameSessionQueueInput) DeleteGameSessionQueueRequest {
 	op := &aws.Operation{
 		Name:       opDeleteGameSessionQueue,
 		HTTPMethod: "POST",
@@ -84,10 +42,10 @@ func (c *Client) DeleteGameSessionQueueRequest(input *DeleteGameSessionQueueInpu
 	}
 
 	if input == nil {
-		input = &DeleteGameSessionQueueInput{}
+		input = &types.DeleteGameSessionQueueInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteGameSessionQueueOutput{})
+	req := c.newRequest(op, input, &types.DeleteGameSessionQueueOutput{})
 	return DeleteGameSessionQueueRequest{Request: req, Input: input, Copy: c.DeleteGameSessionQueueRequest}
 }
 
@@ -95,8 +53,8 @@ func (c *Client) DeleteGameSessionQueueRequest(input *DeleteGameSessionQueueInpu
 // DeleteGameSessionQueue API operation.
 type DeleteGameSessionQueueRequest struct {
 	*aws.Request
-	Input *DeleteGameSessionQueueInput
-	Copy  func(*DeleteGameSessionQueueInput) DeleteGameSessionQueueRequest
+	Input *types.DeleteGameSessionQueueInput
+	Copy  func(*types.DeleteGameSessionQueueInput) DeleteGameSessionQueueRequest
 }
 
 // Send marshals and sends the DeleteGameSessionQueue API request.
@@ -108,7 +66,7 @@ func (r DeleteGameSessionQueueRequest) Send(ctx context.Context) (*DeleteGameSes
 	}
 
 	resp := &DeleteGameSessionQueueResponse{
-		DeleteGameSessionQueueOutput: r.Request.Data.(*DeleteGameSessionQueueOutput),
+		DeleteGameSessionQueueOutput: r.Request.Data.(*types.DeleteGameSessionQueueOutput),
 		response:                     &aws.Response{Request: r.Request},
 	}
 
@@ -118,7 +76,7 @@ func (r DeleteGameSessionQueueRequest) Send(ctx context.Context) (*DeleteGameSes
 // DeleteGameSessionQueueResponse is the response type for the
 // DeleteGameSessionQueue API operation.
 type DeleteGameSessionQueueResponse struct {
-	*DeleteGameSessionQueueOutput
+	*types.DeleteGameSessionQueueOutput
 
 	response *aws.Response
 }

@@ -6,62 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/query"
+	"github.com/aws/aws-sdk-go-v2/service/autoscaling/types"
 )
-
-type DeleteScheduledActionInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the Auto Scaling group.
-	//
-	// AutoScalingGroupName is a required field
-	AutoScalingGroupName *string `min:"1" type:"string" required:"true"`
-
-	// The name of the action to delete.
-	//
-	// ScheduledActionName is a required field
-	ScheduledActionName *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteScheduledActionInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteScheduledActionInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteScheduledActionInput"}
-
-	if s.AutoScalingGroupName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("AutoScalingGroupName"))
-	}
-	if s.AutoScalingGroupName != nil && len(*s.AutoScalingGroupName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("AutoScalingGroupName", 1))
-	}
-
-	if s.ScheduledActionName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ScheduledActionName"))
-	}
-	if s.ScheduledActionName != nil && len(*s.ScheduledActionName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ScheduledActionName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteScheduledActionOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteScheduledActionOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteScheduledAction = "DeleteScheduledAction"
 
@@ -78,7 +26,7 @@ const opDeleteScheduledAction = "DeleteScheduledAction"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DeleteScheduledAction
-func (c *Client) DeleteScheduledActionRequest(input *DeleteScheduledActionInput) DeleteScheduledActionRequest {
+func (c *Client) DeleteScheduledActionRequest(input *types.DeleteScheduledActionInput) DeleteScheduledActionRequest {
 	op := &aws.Operation{
 		Name:       opDeleteScheduledAction,
 		HTTPMethod: "POST",
@@ -86,10 +34,10 @@ func (c *Client) DeleteScheduledActionRequest(input *DeleteScheduledActionInput)
 	}
 
 	if input == nil {
-		input = &DeleteScheduledActionInput{}
+		input = &types.DeleteScheduledActionInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteScheduledActionOutput{})
+	req := c.newRequest(op, input, &types.DeleteScheduledActionOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return DeleteScheduledActionRequest{Request: req, Input: input, Copy: c.DeleteScheduledActionRequest}
@@ -99,8 +47,8 @@ func (c *Client) DeleteScheduledActionRequest(input *DeleteScheduledActionInput)
 // DeleteScheduledAction API operation.
 type DeleteScheduledActionRequest struct {
 	*aws.Request
-	Input *DeleteScheduledActionInput
-	Copy  func(*DeleteScheduledActionInput) DeleteScheduledActionRequest
+	Input *types.DeleteScheduledActionInput
+	Copy  func(*types.DeleteScheduledActionInput) DeleteScheduledActionRequest
 }
 
 // Send marshals and sends the DeleteScheduledAction API request.
@@ -112,7 +60,7 @@ func (r DeleteScheduledActionRequest) Send(ctx context.Context) (*DeleteSchedule
 	}
 
 	resp := &DeleteScheduledActionResponse{
-		DeleteScheduledActionOutput: r.Request.Data.(*DeleteScheduledActionOutput),
+		DeleteScheduledActionOutput: r.Request.Data.(*types.DeleteScheduledActionOutput),
 		response:                    &aws.Response{Request: r.Request},
 	}
 
@@ -122,7 +70,7 @@ func (r DeleteScheduledActionRequest) Send(ctx context.Context) (*DeleteSchedule
 // DeleteScheduledActionResponse is the response type for the
 // DeleteScheduledAction API operation.
 type DeleteScheduledActionResponse struct {
-	*DeleteScheduledActionOutput
+	*types.DeleteScheduledActionOutput
 
 	response *aws.Response
 }

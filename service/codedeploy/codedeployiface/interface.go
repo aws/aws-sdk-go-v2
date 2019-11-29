@@ -13,6 +13,7 @@ import (
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/codedeploy"
+	"github.com/aws/aws-sdk-go-v2/service/codedeploy/types"
 )
 
 // ClientAPI provides an interface to enable mocking the
@@ -46,7 +47,7 @@ import (
 //    type mockClientClient struct {
 //        codedeployiface.ClientPI
 //    }
-//    func (m *mockClientClient) AddTagsToOnPremisesInstances(input *codedeploy.AddTagsToOnPremisesInstancesInput) (*codedeploy.AddTagsToOnPremisesInstancesOutput, error) {
+//    func (m *mockClientClient) AddTagsToOnPremisesInstances(input *types.AddTagsToOnPremisesInstancesInput) (*types.AddTagsToOnPremisesInstancesOutput, error) {
 //        // mock response/functionality
 //    }
 //
@@ -64,99 +65,99 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type ClientAPI interface {
-	AddTagsToOnPremisesInstancesRequest(*codedeploy.AddTagsToOnPremisesInstancesInput) codedeploy.AddTagsToOnPremisesInstancesRequest
+	AddTagsToOnPremisesInstancesRequest(*types.AddTagsToOnPremisesInstancesInput) codedeploy.AddTagsToOnPremisesInstancesRequest
 
-	BatchGetApplicationRevisionsRequest(*codedeploy.BatchGetApplicationRevisionsInput) codedeploy.BatchGetApplicationRevisionsRequest
+	BatchGetApplicationRevisionsRequest(*types.BatchGetApplicationRevisionsInput) codedeploy.BatchGetApplicationRevisionsRequest
 
-	BatchGetApplicationsRequest(*codedeploy.BatchGetApplicationsInput) codedeploy.BatchGetApplicationsRequest
+	BatchGetApplicationsRequest(*types.BatchGetApplicationsInput) codedeploy.BatchGetApplicationsRequest
 
-	BatchGetDeploymentGroupsRequest(*codedeploy.BatchGetDeploymentGroupsInput) codedeploy.BatchGetDeploymentGroupsRequest
+	BatchGetDeploymentGroupsRequest(*types.BatchGetDeploymentGroupsInput) codedeploy.BatchGetDeploymentGroupsRequest
 
-	BatchGetDeploymentInstancesRequest(*codedeploy.BatchGetDeploymentInstancesInput) codedeploy.BatchGetDeploymentInstancesRequest
+	BatchGetDeploymentInstancesRequest(*types.BatchGetDeploymentInstancesInput) codedeploy.BatchGetDeploymentInstancesRequest
 
-	BatchGetDeploymentTargetsRequest(*codedeploy.BatchGetDeploymentTargetsInput) codedeploy.BatchGetDeploymentTargetsRequest
+	BatchGetDeploymentTargetsRequest(*types.BatchGetDeploymentTargetsInput) codedeploy.BatchGetDeploymentTargetsRequest
 
-	BatchGetDeploymentsRequest(*codedeploy.BatchGetDeploymentsInput) codedeploy.BatchGetDeploymentsRequest
+	BatchGetDeploymentsRequest(*types.BatchGetDeploymentsInput) codedeploy.BatchGetDeploymentsRequest
 
-	BatchGetOnPremisesInstancesRequest(*codedeploy.BatchGetOnPremisesInstancesInput) codedeploy.BatchGetOnPremisesInstancesRequest
+	BatchGetOnPremisesInstancesRequest(*types.BatchGetOnPremisesInstancesInput) codedeploy.BatchGetOnPremisesInstancesRequest
 
-	ContinueDeploymentRequest(*codedeploy.ContinueDeploymentInput) codedeploy.ContinueDeploymentRequest
+	ContinueDeploymentRequest(*types.ContinueDeploymentInput) codedeploy.ContinueDeploymentRequest
 
-	CreateApplicationRequest(*codedeploy.CreateApplicationInput) codedeploy.CreateApplicationRequest
+	CreateApplicationRequest(*types.CreateApplicationInput) codedeploy.CreateApplicationRequest
 
-	CreateDeploymentRequest(*codedeploy.CreateDeploymentInput) codedeploy.CreateDeploymentRequest
+	CreateDeploymentRequest(*types.CreateDeploymentInput) codedeploy.CreateDeploymentRequest
 
-	CreateDeploymentConfigRequest(*codedeploy.CreateDeploymentConfigInput) codedeploy.CreateDeploymentConfigRequest
+	CreateDeploymentConfigRequest(*types.CreateDeploymentConfigInput) codedeploy.CreateDeploymentConfigRequest
 
-	CreateDeploymentGroupRequest(*codedeploy.CreateDeploymentGroupInput) codedeploy.CreateDeploymentGroupRequest
+	CreateDeploymentGroupRequest(*types.CreateDeploymentGroupInput) codedeploy.CreateDeploymentGroupRequest
 
-	DeleteApplicationRequest(*codedeploy.DeleteApplicationInput) codedeploy.DeleteApplicationRequest
+	DeleteApplicationRequest(*types.DeleteApplicationInput) codedeploy.DeleteApplicationRequest
 
-	DeleteDeploymentConfigRequest(*codedeploy.DeleteDeploymentConfigInput) codedeploy.DeleteDeploymentConfigRequest
+	DeleteDeploymentConfigRequest(*types.DeleteDeploymentConfigInput) codedeploy.DeleteDeploymentConfigRequest
 
-	DeleteDeploymentGroupRequest(*codedeploy.DeleteDeploymentGroupInput) codedeploy.DeleteDeploymentGroupRequest
+	DeleteDeploymentGroupRequest(*types.DeleteDeploymentGroupInput) codedeploy.DeleteDeploymentGroupRequest
 
-	DeleteGitHubAccountTokenRequest(*codedeploy.DeleteGitHubAccountTokenInput) codedeploy.DeleteGitHubAccountTokenRequest
+	DeleteGitHubAccountTokenRequest(*types.DeleteGitHubAccountTokenInput) codedeploy.DeleteGitHubAccountTokenRequest
 
-	DeregisterOnPremisesInstanceRequest(*codedeploy.DeregisterOnPremisesInstanceInput) codedeploy.DeregisterOnPremisesInstanceRequest
+	DeregisterOnPremisesInstanceRequest(*types.DeregisterOnPremisesInstanceInput) codedeploy.DeregisterOnPremisesInstanceRequest
 
-	GetApplicationRequest(*codedeploy.GetApplicationInput) codedeploy.GetApplicationRequest
+	GetApplicationRequest(*types.GetApplicationInput) codedeploy.GetApplicationRequest
 
-	GetApplicationRevisionRequest(*codedeploy.GetApplicationRevisionInput) codedeploy.GetApplicationRevisionRequest
+	GetApplicationRevisionRequest(*types.GetApplicationRevisionInput) codedeploy.GetApplicationRevisionRequest
 
-	GetDeploymentRequest(*codedeploy.GetDeploymentInput) codedeploy.GetDeploymentRequest
+	GetDeploymentRequest(*types.GetDeploymentInput) codedeploy.GetDeploymentRequest
 
-	GetDeploymentConfigRequest(*codedeploy.GetDeploymentConfigInput) codedeploy.GetDeploymentConfigRequest
+	GetDeploymentConfigRequest(*types.GetDeploymentConfigInput) codedeploy.GetDeploymentConfigRequest
 
-	GetDeploymentGroupRequest(*codedeploy.GetDeploymentGroupInput) codedeploy.GetDeploymentGroupRequest
+	GetDeploymentGroupRequest(*types.GetDeploymentGroupInput) codedeploy.GetDeploymentGroupRequest
 
-	GetDeploymentInstanceRequest(*codedeploy.GetDeploymentInstanceInput) codedeploy.GetDeploymentInstanceRequest
+	GetDeploymentInstanceRequest(*types.GetDeploymentInstanceInput) codedeploy.GetDeploymentInstanceRequest
 
-	GetDeploymentTargetRequest(*codedeploy.GetDeploymentTargetInput) codedeploy.GetDeploymentTargetRequest
+	GetDeploymentTargetRequest(*types.GetDeploymentTargetInput) codedeploy.GetDeploymentTargetRequest
 
-	GetOnPremisesInstanceRequest(*codedeploy.GetOnPremisesInstanceInput) codedeploy.GetOnPremisesInstanceRequest
+	GetOnPremisesInstanceRequest(*types.GetOnPremisesInstanceInput) codedeploy.GetOnPremisesInstanceRequest
 
-	ListApplicationRevisionsRequest(*codedeploy.ListApplicationRevisionsInput) codedeploy.ListApplicationRevisionsRequest
+	ListApplicationRevisionsRequest(*types.ListApplicationRevisionsInput) codedeploy.ListApplicationRevisionsRequest
 
-	ListApplicationsRequest(*codedeploy.ListApplicationsInput) codedeploy.ListApplicationsRequest
+	ListApplicationsRequest(*types.ListApplicationsInput) codedeploy.ListApplicationsRequest
 
-	ListDeploymentConfigsRequest(*codedeploy.ListDeploymentConfigsInput) codedeploy.ListDeploymentConfigsRequest
+	ListDeploymentConfigsRequest(*types.ListDeploymentConfigsInput) codedeploy.ListDeploymentConfigsRequest
 
-	ListDeploymentGroupsRequest(*codedeploy.ListDeploymentGroupsInput) codedeploy.ListDeploymentGroupsRequest
+	ListDeploymentGroupsRequest(*types.ListDeploymentGroupsInput) codedeploy.ListDeploymentGroupsRequest
 
-	ListDeploymentInstancesRequest(*codedeploy.ListDeploymentInstancesInput) codedeploy.ListDeploymentInstancesRequest
+	ListDeploymentInstancesRequest(*types.ListDeploymentInstancesInput) codedeploy.ListDeploymentInstancesRequest
 
-	ListDeploymentTargetsRequest(*codedeploy.ListDeploymentTargetsInput) codedeploy.ListDeploymentTargetsRequest
+	ListDeploymentTargetsRequest(*types.ListDeploymentTargetsInput) codedeploy.ListDeploymentTargetsRequest
 
-	ListDeploymentsRequest(*codedeploy.ListDeploymentsInput) codedeploy.ListDeploymentsRequest
+	ListDeploymentsRequest(*types.ListDeploymentsInput) codedeploy.ListDeploymentsRequest
 
-	ListGitHubAccountTokenNamesRequest(*codedeploy.ListGitHubAccountTokenNamesInput) codedeploy.ListGitHubAccountTokenNamesRequest
+	ListGitHubAccountTokenNamesRequest(*types.ListGitHubAccountTokenNamesInput) codedeploy.ListGitHubAccountTokenNamesRequest
 
-	ListOnPremisesInstancesRequest(*codedeploy.ListOnPremisesInstancesInput) codedeploy.ListOnPremisesInstancesRequest
+	ListOnPremisesInstancesRequest(*types.ListOnPremisesInstancesInput) codedeploy.ListOnPremisesInstancesRequest
 
-	ListTagsForResourceRequest(*codedeploy.ListTagsForResourceInput) codedeploy.ListTagsForResourceRequest
+	ListTagsForResourceRequest(*types.ListTagsForResourceInput) codedeploy.ListTagsForResourceRequest
 
-	PutLifecycleEventHookExecutionStatusRequest(*codedeploy.PutLifecycleEventHookExecutionStatusInput) codedeploy.PutLifecycleEventHookExecutionStatusRequest
+	PutLifecycleEventHookExecutionStatusRequest(*types.PutLifecycleEventHookExecutionStatusInput) codedeploy.PutLifecycleEventHookExecutionStatusRequest
 
-	RegisterApplicationRevisionRequest(*codedeploy.RegisterApplicationRevisionInput) codedeploy.RegisterApplicationRevisionRequest
+	RegisterApplicationRevisionRequest(*types.RegisterApplicationRevisionInput) codedeploy.RegisterApplicationRevisionRequest
 
-	RegisterOnPremisesInstanceRequest(*codedeploy.RegisterOnPremisesInstanceInput) codedeploy.RegisterOnPremisesInstanceRequest
+	RegisterOnPremisesInstanceRequest(*types.RegisterOnPremisesInstanceInput) codedeploy.RegisterOnPremisesInstanceRequest
 
-	RemoveTagsFromOnPremisesInstancesRequest(*codedeploy.RemoveTagsFromOnPremisesInstancesInput) codedeploy.RemoveTagsFromOnPremisesInstancesRequest
+	RemoveTagsFromOnPremisesInstancesRequest(*types.RemoveTagsFromOnPremisesInstancesInput) codedeploy.RemoveTagsFromOnPremisesInstancesRequest
 
-	SkipWaitTimeForInstanceTerminationRequest(*codedeploy.SkipWaitTimeForInstanceTerminationInput) codedeploy.SkipWaitTimeForInstanceTerminationRequest
+	SkipWaitTimeForInstanceTerminationRequest(*types.SkipWaitTimeForInstanceTerminationInput) codedeploy.SkipWaitTimeForInstanceTerminationRequest
 
-	StopDeploymentRequest(*codedeploy.StopDeploymentInput) codedeploy.StopDeploymentRequest
+	StopDeploymentRequest(*types.StopDeploymentInput) codedeploy.StopDeploymentRequest
 
-	TagResourceRequest(*codedeploy.TagResourceInput) codedeploy.TagResourceRequest
+	TagResourceRequest(*types.TagResourceInput) codedeploy.TagResourceRequest
 
-	UntagResourceRequest(*codedeploy.UntagResourceInput) codedeploy.UntagResourceRequest
+	UntagResourceRequest(*types.UntagResourceInput) codedeploy.UntagResourceRequest
 
-	UpdateApplicationRequest(*codedeploy.UpdateApplicationInput) codedeploy.UpdateApplicationRequest
+	UpdateApplicationRequest(*types.UpdateApplicationInput) codedeploy.UpdateApplicationRequest
 
-	UpdateDeploymentGroupRequest(*codedeploy.UpdateDeploymentGroupInput) codedeploy.UpdateDeploymentGroupRequest
+	UpdateDeploymentGroupRequest(*types.UpdateDeploymentGroupInput) codedeploy.UpdateDeploymentGroupRequest
 
-	WaitUntilDeploymentSuccessful(context.Context, *codedeploy.GetDeploymentInput, ...aws.WaiterOption) error
+	WaitUntilDeploymentSuccessful(context.Context, *types.GetDeploymentInput, ...aws.WaiterOption) error
 }
 
 var _ ClientAPI = (*codedeploy.Client)(nil)

@@ -10,6 +10,7 @@ package glueiface
 
 import (
 	"github.com/aws/aws-sdk-go-v2/service/glue"
+	"github.com/aws/aws-sdk-go-v2/service/glue/types"
 )
 
 // ClientAPI provides an interface to enable mocking the
@@ -43,7 +44,7 @@ import (
 //    type mockClientClient struct {
 //        glueiface.ClientPI
 //    }
-//    func (m *mockClientClient) BatchCreatePartition(input *glue.BatchCreatePartitionInput) (*glue.BatchCreatePartitionOutput, error) {
+//    func (m *mockClientClient) BatchCreatePartition(input *types.BatchCreatePartitionInput) (*types.BatchCreatePartitionOutput, error) {
 //        // mock response/functionality
 //    }
 //
@@ -61,251 +62,251 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type ClientAPI interface {
-	BatchCreatePartitionRequest(*glue.BatchCreatePartitionInput) glue.BatchCreatePartitionRequest
+	BatchCreatePartitionRequest(*types.BatchCreatePartitionInput) glue.BatchCreatePartitionRequest
 
-	BatchDeleteConnectionRequest(*glue.BatchDeleteConnectionInput) glue.BatchDeleteConnectionRequest
+	BatchDeleteConnectionRequest(*types.BatchDeleteConnectionInput) glue.BatchDeleteConnectionRequest
 
-	BatchDeletePartitionRequest(*glue.BatchDeletePartitionInput) glue.BatchDeletePartitionRequest
+	BatchDeletePartitionRequest(*types.BatchDeletePartitionInput) glue.BatchDeletePartitionRequest
 
-	BatchDeleteTableRequest(*glue.BatchDeleteTableInput) glue.BatchDeleteTableRequest
+	BatchDeleteTableRequest(*types.BatchDeleteTableInput) glue.BatchDeleteTableRequest
 
-	BatchDeleteTableVersionRequest(*glue.BatchDeleteTableVersionInput) glue.BatchDeleteTableVersionRequest
+	BatchDeleteTableVersionRequest(*types.BatchDeleteTableVersionInput) glue.BatchDeleteTableVersionRequest
 
-	BatchGetCrawlersRequest(*glue.BatchGetCrawlersInput) glue.BatchGetCrawlersRequest
+	BatchGetCrawlersRequest(*types.BatchGetCrawlersInput) glue.BatchGetCrawlersRequest
 
-	BatchGetDevEndpointsRequest(*glue.BatchGetDevEndpointsInput) glue.BatchGetDevEndpointsRequest
+	BatchGetDevEndpointsRequest(*types.BatchGetDevEndpointsInput) glue.BatchGetDevEndpointsRequest
 
-	BatchGetJobsRequest(*glue.BatchGetJobsInput) glue.BatchGetJobsRequest
+	BatchGetJobsRequest(*types.BatchGetJobsInput) glue.BatchGetJobsRequest
 
-	BatchGetPartitionRequest(*glue.BatchGetPartitionInput) glue.BatchGetPartitionRequest
+	BatchGetPartitionRequest(*types.BatchGetPartitionInput) glue.BatchGetPartitionRequest
 
-	BatchGetTriggersRequest(*glue.BatchGetTriggersInput) glue.BatchGetTriggersRequest
+	BatchGetTriggersRequest(*types.BatchGetTriggersInput) glue.BatchGetTriggersRequest
 
-	BatchGetWorkflowsRequest(*glue.BatchGetWorkflowsInput) glue.BatchGetWorkflowsRequest
+	BatchGetWorkflowsRequest(*types.BatchGetWorkflowsInput) glue.BatchGetWorkflowsRequest
 
-	BatchStopJobRunRequest(*glue.BatchStopJobRunInput) glue.BatchStopJobRunRequest
+	BatchStopJobRunRequest(*types.BatchStopJobRunInput) glue.BatchStopJobRunRequest
 
-	CancelMLTaskRunRequest(*glue.CancelMLTaskRunInput) glue.CancelMLTaskRunRequest
+	CancelMLTaskRunRequest(*types.CancelMLTaskRunInput) glue.CancelMLTaskRunRequest
 
-	CreateClassifierRequest(*glue.CreateClassifierInput) glue.CreateClassifierRequest
+	CreateClassifierRequest(*types.CreateClassifierInput) glue.CreateClassifierRequest
 
-	CreateConnectionRequest(*glue.CreateConnectionInput) glue.CreateConnectionRequest
+	CreateConnectionRequest(*types.CreateConnectionInput) glue.CreateConnectionRequest
 
-	CreateCrawlerRequest(*glue.CreateCrawlerInput) glue.CreateCrawlerRequest
+	CreateCrawlerRequest(*types.CreateCrawlerInput) glue.CreateCrawlerRequest
 
-	CreateDatabaseRequest(*glue.CreateDatabaseInput) glue.CreateDatabaseRequest
+	CreateDatabaseRequest(*types.CreateDatabaseInput) glue.CreateDatabaseRequest
 
-	CreateDevEndpointRequest(*glue.CreateDevEndpointInput) glue.CreateDevEndpointRequest
+	CreateDevEndpointRequest(*types.CreateDevEndpointInput) glue.CreateDevEndpointRequest
 
-	CreateJobRequest(*glue.CreateJobInput) glue.CreateJobRequest
+	CreateJobRequest(*types.CreateJobInput) glue.CreateJobRequest
 
-	CreateMLTransformRequest(*glue.CreateMLTransformInput) glue.CreateMLTransformRequest
+	CreateMLTransformRequest(*types.CreateMLTransformInput) glue.CreateMLTransformRequest
 
-	CreatePartitionRequest(*glue.CreatePartitionInput) glue.CreatePartitionRequest
+	CreatePartitionRequest(*types.CreatePartitionInput) glue.CreatePartitionRequest
 
-	CreateScriptRequest(*glue.CreateScriptInput) glue.CreateScriptRequest
+	CreateScriptRequest(*types.CreateScriptInput) glue.CreateScriptRequest
 
-	CreateSecurityConfigurationRequest(*glue.CreateSecurityConfigurationInput) glue.CreateSecurityConfigurationRequest
+	CreateSecurityConfigurationRequest(*types.CreateSecurityConfigurationInput) glue.CreateSecurityConfigurationRequest
 
-	CreateTableRequest(*glue.CreateTableInput) glue.CreateTableRequest
+	CreateTableRequest(*types.CreateTableInput) glue.CreateTableRequest
 
-	CreateTriggerRequest(*glue.CreateTriggerInput) glue.CreateTriggerRequest
+	CreateTriggerRequest(*types.CreateTriggerInput) glue.CreateTriggerRequest
 
-	CreateUserDefinedFunctionRequest(*glue.CreateUserDefinedFunctionInput) glue.CreateUserDefinedFunctionRequest
+	CreateUserDefinedFunctionRequest(*types.CreateUserDefinedFunctionInput) glue.CreateUserDefinedFunctionRequest
 
-	CreateWorkflowRequest(*glue.CreateWorkflowInput) glue.CreateWorkflowRequest
+	CreateWorkflowRequest(*types.CreateWorkflowInput) glue.CreateWorkflowRequest
 
-	DeleteClassifierRequest(*glue.DeleteClassifierInput) glue.DeleteClassifierRequest
+	DeleteClassifierRequest(*types.DeleteClassifierInput) glue.DeleteClassifierRequest
 
-	DeleteConnectionRequest(*glue.DeleteConnectionInput) glue.DeleteConnectionRequest
+	DeleteConnectionRequest(*types.DeleteConnectionInput) glue.DeleteConnectionRequest
 
-	DeleteCrawlerRequest(*glue.DeleteCrawlerInput) glue.DeleteCrawlerRequest
+	DeleteCrawlerRequest(*types.DeleteCrawlerInput) glue.DeleteCrawlerRequest
 
-	DeleteDatabaseRequest(*glue.DeleteDatabaseInput) glue.DeleteDatabaseRequest
+	DeleteDatabaseRequest(*types.DeleteDatabaseInput) glue.DeleteDatabaseRequest
 
-	DeleteDevEndpointRequest(*glue.DeleteDevEndpointInput) glue.DeleteDevEndpointRequest
+	DeleteDevEndpointRequest(*types.DeleteDevEndpointInput) glue.DeleteDevEndpointRequest
 
-	DeleteJobRequest(*glue.DeleteJobInput) glue.DeleteJobRequest
+	DeleteJobRequest(*types.DeleteJobInput) glue.DeleteJobRequest
 
-	DeleteMLTransformRequest(*glue.DeleteMLTransformInput) glue.DeleteMLTransformRequest
+	DeleteMLTransformRequest(*types.DeleteMLTransformInput) glue.DeleteMLTransformRequest
 
-	DeletePartitionRequest(*glue.DeletePartitionInput) glue.DeletePartitionRequest
+	DeletePartitionRequest(*types.DeletePartitionInput) glue.DeletePartitionRequest
 
-	DeleteResourcePolicyRequest(*glue.DeleteResourcePolicyInput) glue.DeleteResourcePolicyRequest
+	DeleteResourcePolicyRequest(*types.DeleteResourcePolicyInput) glue.DeleteResourcePolicyRequest
 
-	DeleteSecurityConfigurationRequest(*glue.DeleteSecurityConfigurationInput) glue.DeleteSecurityConfigurationRequest
+	DeleteSecurityConfigurationRequest(*types.DeleteSecurityConfigurationInput) glue.DeleteSecurityConfigurationRequest
 
-	DeleteTableRequest(*glue.DeleteTableInput) glue.DeleteTableRequest
+	DeleteTableRequest(*types.DeleteTableInput) glue.DeleteTableRequest
 
-	DeleteTableVersionRequest(*glue.DeleteTableVersionInput) glue.DeleteTableVersionRequest
+	DeleteTableVersionRequest(*types.DeleteTableVersionInput) glue.DeleteTableVersionRequest
 
-	DeleteTriggerRequest(*glue.DeleteTriggerInput) glue.DeleteTriggerRequest
+	DeleteTriggerRequest(*types.DeleteTriggerInput) glue.DeleteTriggerRequest
 
-	DeleteUserDefinedFunctionRequest(*glue.DeleteUserDefinedFunctionInput) glue.DeleteUserDefinedFunctionRequest
+	DeleteUserDefinedFunctionRequest(*types.DeleteUserDefinedFunctionInput) glue.DeleteUserDefinedFunctionRequest
 
-	DeleteWorkflowRequest(*glue.DeleteWorkflowInput) glue.DeleteWorkflowRequest
+	DeleteWorkflowRequest(*types.DeleteWorkflowInput) glue.DeleteWorkflowRequest
 
-	GetCatalogImportStatusRequest(*glue.GetCatalogImportStatusInput) glue.GetCatalogImportStatusRequest
+	GetCatalogImportStatusRequest(*types.GetCatalogImportStatusInput) glue.GetCatalogImportStatusRequest
 
-	GetClassifierRequest(*glue.GetClassifierInput) glue.GetClassifierRequest
+	GetClassifierRequest(*types.GetClassifierInput) glue.GetClassifierRequest
 
-	GetClassifiersRequest(*glue.GetClassifiersInput) glue.GetClassifiersRequest
+	GetClassifiersRequest(*types.GetClassifiersInput) glue.GetClassifiersRequest
 
-	GetConnectionRequest(*glue.GetConnectionInput) glue.GetConnectionRequest
+	GetConnectionRequest(*types.GetConnectionInput) glue.GetConnectionRequest
 
-	GetConnectionsRequest(*glue.GetConnectionsInput) glue.GetConnectionsRequest
+	GetConnectionsRequest(*types.GetConnectionsInput) glue.GetConnectionsRequest
 
-	GetCrawlerRequest(*glue.GetCrawlerInput) glue.GetCrawlerRequest
+	GetCrawlerRequest(*types.GetCrawlerInput) glue.GetCrawlerRequest
 
-	GetCrawlerMetricsRequest(*glue.GetCrawlerMetricsInput) glue.GetCrawlerMetricsRequest
+	GetCrawlerMetricsRequest(*types.GetCrawlerMetricsInput) glue.GetCrawlerMetricsRequest
 
-	GetCrawlersRequest(*glue.GetCrawlersInput) glue.GetCrawlersRequest
+	GetCrawlersRequest(*types.GetCrawlersInput) glue.GetCrawlersRequest
 
-	GetDataCatalogEncryptionSettingsRequest(*glue.GetDataCatalogEncryptionSettingsInput) glue.GetDataCatalogEncryptionSettingsRequest
+	GetDataCatalogEncryptionSettingsRequest(*types.GetDataCatalogEncryptionSettingsInput) glue.GetDataCatalogEncryptionSettingsRequest
 
-	GetDatabaseRequest(*glue.GetDatabaseInput) glue.GetDatabaseRequest
+	GetDatabaseRequest(*types.GetDatabaseInput) glue.GetDatabaseRequest
 
-	GetDatabasesRequest(*glue.GetDatabasesInput) glue.GetDatabasesRequest
+	GetDatabasesRequest(*types.GetDatabasesInput) glue.GetDatabasesRequest
 
-	GetDataflowGraphRequest(*glue.GetDataflowGraphInput) glue.GetDataflowGraphRequest
+	GetDataflowGraphRequest(*types.GetDataflowGraphInput) glue.GetDataflowGraphRequest
 
-	GetDevEndpointRequest(*glue.GetDevEndpointInput) glue.GetDevEndpointRequest
+	GetDevEndpointRequest(*types.GetDevEndpointInput) glue.GetDevEndpointRequest
 
-	GetDevEndpointsRequest(*glue.GetDevEndpointsInput) glue.GetDevEndpointsRequest
+	GetDevEndpointsRequest(*types.GetDevEndpointsInput) glue.GetDevEndpointsRequest
 
-	GetJobRequest(*glue.GetJobInput) glue.GetJobRequest
+	GetJobRequest(*types.GetJobInput) glue.GetJobRequest
 
-	GetJobBookmarkRequest(*glue.GetJobBookmarkInput) glue.GetJobBookmarkRequest
+	GetJobBookmarkRequest(*types.GetJobBookmarkInput) glue.GetJobBookmarkRequest
 
-	GetJobRunRequest(*glue.GetJobRunInput) glue.GetJobRunRequest
+	GetJobRunRequest(*types.GetJobRunInput) glue.GetJobRunRequest
 
-	GetJobRunsRequest(*glue.GetJobRunsInput) glue.GetJobRunsRequest
+	GetJobRunsRequest(*types.GetJobRunsInput) glue.GetJobRunsRequest
 
-	GetJobsRequest(*glue.GetJobsInput) glue.GetJobsRequest
+	GetJobsRequest(*types.GetJobsInput) glue.GetJobsRequest
 
-	GetMLTaskRunRequest(*glue.GetMLTaskRunInput) glue.GetMLTaskRunRequest
+	GetMLTaskRunRequest(*types.GetMLTaskRunInput) glue.GetMLTaskRunRequest
 
-	GetMLTaskRunsRequest(*glue.GetMLTaskRunsInput) glue.GetMLTaskRunsRequest
+	GetMLTaskRunsRequest(*types.GetMLTaskRunsInput) glue.GetMLTaskRunsRequest
 
-	GetMLTransformRequest(*glue.GetMLTransformInput) glue.GetMLTransformRequest
+	GetMLTransformRequest(*types.GetMLTransformInput) glue.GetMLTransformRequest
 
-	GetMLTransformsRequest(*glue.GetMLTransformsInput) glue.GetMLTransformsRequest
+	GetMLTransformsRequest(*types.GetMLTransformsInput) glue.GetMLTransformsRequest
 
-	GetMappingRequest(*glue.GetMappingInput) glue.GetMappingRequest
+	GetMappingRequest(*types.GetMappingInput) glue.GetMappingRequest
 
-	GetPartitionRequest(*glue.GetPartitionInput) glue.GetPartitionRequest
+	GetPartitionRequest(*types.GetPartitionInput) glue.GetPartitionRequest
 
-	GetPartitionsRequest(*glue.GetPartitionsInput) glue.GetPartitionsRequest
+	GetPartitionsRequest(*types.GetPartitionsInput) glue.GetPartitionsRequest
 
-	GetPlanRequest(*glue.GetPlanInput) glue.GetPlanRequest
+	GetPlanRequest(*types.GetPlanInput) glue.GetPlanRequest
 
-	GetResourcePolicyRequest(*glue.GetResourcePolicyInput) glue.GetResourcePolicyRequest
+	GetResourcePolicyRequest(*types.GetResourcePolicyInput) glue.GetResourcePolicyRequest
 
-	GetSecurityConfigurationRequest(*glue.GetSecurityConfigurationInput) glue.GetSecurityConfigurationRequest
+	GetSecurityConfigurationRequest(*types.GetSecurityConfigurationInput) glue.GetSecurityConfigurationRequest
 
-	GetSecurityConfigurationsRequest(*glue.GetSecurityConfigurationsInput) glue.GetSecurityConfigurationsRequest
+	GetSecurityConfigurationsRequest(*types.GetSecurityConfigurationsInput) glue.GetSecurityConfigurationsRequest
 
-	GetTableRequest(*glue.GetTableInput) glue.GetTableRequest
+	GetTableRequest(*types.GetTableInput) glue.GetTableRequest
 
-	GetTableVersionRequest(*glue.GetTableVersionInput) glue.GetTableVersionRequest
+	GetTableVersionRequest(*types.GetTableVersionInput) glue.GetTableVersionRequest
 
-	GetTableVersionsRequest(*glue.GetTableVersionsInput) glue.GetTableVersionsRequest
+	GetTableVersionsRequest(*types.GetTableVersionsInput) glue.GetTableVersionsRequest
 
-	GetTablesRequest(*glue.GetTablesInput) glue.GetTablesRequest
+	GetTablesRequest(*types.GetTablesInput) glue.GetTablesRequest
 
-	GetTagsRequest(*glue.GetTagsInput) glue.GetTagsRequest
+	GetTagsRequest(*types.GetTagsInput) glue.GetTagsRequest
 
-	GetTriggerRequest(*glue.GetTriggerInput) glue.GetTriggerRequest
+	GetTriggerRequest(*types.GetTriggerInput) glue.GetTriggerRequest
 
-	GetTriggersRequest(*glue.GetTriggersInput) glue.GetTriggersRequest
+	GetTriggersRequest(*types.GetTriggersInput) glue.GetTriggersRequest
 
-	GetUserDefinedFunctionRequest(*glue.GetUserDefinedFunctionInput) glue.GetUserDefinedFunctionRequest
+	GetUserDefinedFunctionRequest(*types.GetUserDefinedFunctionInput) glue.GetUserDefinedFunctionRequest
 
-	GetUserDefinedFunctionsRequest(*glue.GetUserDefinedFunctionsInput) glue.GetUserDefinedFunctionsRequest
+	GetUserDefinedFunctionsRequest(*types.GetUserDefinedFunctionsInput) glue.GetUserDefinedFunctionsRequest
 
-	GetWorkflowRequest(*glue.GetWorkflowInput) glue.GetWorkflowRequest
+	GetWorkflowRequest(*types.GetWorkflowInput) glue.GetWorkflowRequest
 
-	GetWorkflowRunRequest(*glue.GetWorkflowRunInput) glue.GetWorkflowRunRequest
+	GetWorkflowRunRequest(*types.GetWorkflowRunInput) glue.GetWorkflowRunRequest
 
-	GetWorkflowRunPropertiesRequest(*glue.GetWorkflowRunPropertiesInput) glue.GetWorkflowRunPropertiesRequest
+	GetWorkflowRunPropertiesRequest(*types.GetWorkflowRunPropertiesInput) glue.GetWorkflowRunPropertiesRequest
 
-	GetWorkflowRunsRequest(*glue.GetWorkflowRunsInput) glue.GetWorkflowRunsRequest
+	GetWorkflowRunsRequest(*types.GetWorkflowRunsInput) glue.GetWorkflowRunsRequest
 
-	ImportCatalogToGlueRequest(*glue.ImportCatalogToGlueInput) glue.ImportCatalogToGlueRequest
+	ImportCatalogToGlueRequest(*types.ImportCatalogToGlueInput) glue.ImportCatalogToGlueRequest
 
-	ListCrawlersRequest(*glue.ListCrawlersInput) glue.ListCrawlersRequest
+	ListCrawlersRequest(*types.ListCrawlersInput) glue.ListCrawlersRequest
 
-	ListDevEndpointsRequest(*glue.ListDevEndpointsInput) glue.ListDevEndpointsRequest
+	ListDevEndpointsRequest(*types.ListDevEndpointsInput) glue.ListDevEndpointsRequest
 
-	ListJobsRequest(*glue.ListJobsInput) glue.ListJobsRequest
+	ListJobsRequest(*types.ListJobsInput) glue.ListJobsRequest
 
-	ListTriggersRequest(*glue.ListTriggersInput) glue.ListTriggersRequest
+	ListTriggersRequest(*types.ListTriggersInput) glue.ListTriggersRequest
 
-	ListWorkflowsRequest(*glue.ListWorkflowsInput) glue.ListWorkflowsRequest
+	ListWorkflowsRequest(*types.ListWorkflowsInput) glue.ListWorkflowsRequest
 
-	PutDataCatalogEncryptionSettingsRequest(*glue.PutDataCatalogEncryptionSettingsInput) glue.PutDataCatalogEncryptionSettingsRequest
+	PutDataCatalogEncryptionSettingsRequest(*types.PutDataCatalogEncryptionSettingsInput) glue.PutDataCatalogEncryptionSettingsRequest
 
-	PutResourcePolicyRequest(*glue.PutResourcePolicyInput) glue.PutResourcePolicyRequest
+	PutResourcePolicyRequest(*types.PutResourcePolicyInput) glue.PutResourcePolicyRequest
 
-	PutWorkflowRunPropertiesRequest(*glue.PutWorkflowRunPropertiesInput) glue.PutWorkflowRunPropertiesRequest
+	PutWorkflowRunPropertiesRequest(*types.PutWorkflowRunPropertiesInput) glue.PutWorkflowRunPropertiesRequest
 
-	ResetJobBookmarkRequest(*glue.ResetJobBookmarkInput) glue.ResetJobBookmarkRequest
+	ResetJobBookmarkRequest(*types.ResetJobBookmarkInput) glue.ResetJobBookmarkRequest
 
-	SearchTablesRequest(*glue.SearchTablesInput) glue.SearchTablesRequest
+	SearchTablesRequest(*types.SearchTablesInput) glue.SearchTablesRequest
 
-	StartCrawlerRequest(*glue.StartCrawlerInput) glue.StartCrawlerRequest
+	StartCrawlerRequest(*types.StartCrawlerInput) glue.StartCrawlerRequest
 
-	StartCrawlerScheduleRequest(*glue.StartCrawlerScheduleInput) glue.StartCrawlerScheduleRequest
+	StartCrawlerScheduleRequest(*types.StartCrawlerScheduleInput) glue.StartCrawlerScheduleRequest
 
-	StartExportLabelsTaskRunRequest(*glue.StartExportLabelsTaskRunInput) glue.StartExportLabelsTaskRunRequest
+	StartExportLabelsTaskRunRequest(*types.StartExportLabelsTaskRunInput) glue.StartExportLabelsTaskRunRequest
 
-	StartImportLabelsTaskRunRequest(*glue.StartImportLabelsTaskRunInput) glue.StartImportLabelsTaskRunRequest
+	StartImportLabelsTaskRunRequest(*types.StartImportLabelsTaskRunInput) glue.StartImportLabelsTaskRunRequest
 
-	StartJobRunRequest(*glue.StartJobRunInput) glue.StartJobRunRequest
+	StartJobRunRequest(*types.StartJobRunInput) glue.StartJobRunRequest
 
-	StartMLEvaluationTaskRunRequest(*glue.StartMLEvaluationTaskRunInput) glue.StartMLEvaluationTaskRunRequest
+	StartMLEvaluationTaskRunRequest(*types.StartMLEvaluationTaskRunInput) glue.StartMLEvaluationTaskRunRequest
 
-	StartMLLabelingSetGenerationTaskRunRequest(*glue.StartMLLabelingSetGenerationTaskRunInput) glue.StartMLLabelingSetGenerationTaskRunRequest
+	StartMLLabelingSetGenerationTaskRunRequest(*types.StartMLLabelingSetGenerationTaskRunInput) glue.StartMLLabelingSetGenerationTaskRunRequest
 
-	StartTriggerRequest(*glue.StartTriggerInput) glue.StartTriggerRequest
+	StartTriggerRequest(*types.StartTriggerInput) glue.StartTriggerRequest
 
-	StartWorkflowRunRequest(*glue.StartWorkflowRunInput) glue.StartWorkflowRunRequest
+	StartWorkflowRunRequest(*types.StartWorkflowRunInput) glue.StartWorkflowRunRequest
 
-	StopCrawlerRequest(*glue.StopCrawlerInput) glue.StopCrawlerRequest
+	StopCrawlerRequest(*types.StopCrawlerInput) glue.StopCrawlerRequest
 
-	StopCrawlerScheduleRequest(*glue.StopCrawlerScheduleInput) glue.StopCrawlerScheduleRequest
+	StopCrawlerScheduleRequest(*types.StopCrawlerScheduleInput) glue.StopCrawlerScheduleRequest
 
-	StopTriggerRequest(*glue.StopTriggerInput) glue.StopTriggerRequest
+	StopTriggerRequest(*types.StopTriggerInput) glue.StopTriggerRequest
 
-	TagResourceRequest(*glue.TagResourceInput) glue.TagResourceRequest
+	TagResourceRequest(*types.TagResourceInput) glue.TagResourceRequest
 
-	UntagResourceRequest(*glue.UntagResourceInput) glue.UntagResourceRequest
+	UntagResourceRequest(*types.UntagResourceInput) glue.UntagResourceRequest
 
-	UpdateClassifierRequest(*glue.UpdateClassifierInput) glue.UpdateClassifierRequest
+	UpdateClassifierRequest(*types.UpdateClassifierInput) glue.UpdateClassifierRequest
 
-	UpdateConnectionRequest(*glue.UpdateConnectionInput) glue.UpdateConnectionRequest
+	UpdateConnectionRequest(*types.UpdateConnectionInput) glue.UpdateConnectionRequest
 
-	UpdateCrawlerRequest(*glue.UpdateCrawlerInput) glue.UpdateCrawlerRequest
+	UpdateCrawlerRequest(*types.UpdateCrawlerInput) glue.UpdateCrawlerRequest
 
-	UpdateCrawlerScheduleRequest(*glue.UpdateCrawlerScheduleInput) glue.UpdateCrawlerScheduleRequest
+	UpdateCrawlerScheduleRequest(*types.UpdateCrawlerScheduleInput) glue.UpdateCrawlerScheduleRequest
 
-	UpdateDatabaseRequest(*glue.UpdateDatabaseInput) glue.UpdateDatabaseRequest
+	UpdateDatabaseRequest(*types.UpdateDatabaseInput) glue.UpdateDatabaseRequest
 
-	UpdateDevEndpointRequest(*glue.UpdateDevEndpointInput) glue.UpdateDevEndpointRequest
+	UpdateDevEndpointRequest(*types.UpdateDevEndpointInput) glue.UpdateDevEndpointRequest
 
-	UpdateJobRequest(*glue.UpdateJobInput) glue.UpdateJobRequest
+	UpdateJobRequest(*types.UpdateJobInput) glue.UpdateJobRequest
 
-	UpdateMLTransformRequest(*glue.UpdateMLTransformInput) glue.UpdateMLTransformRequest
+	UpdateMLTransformRequest(*types.UpdateMLTransformInput) glue.UpdateMLTransformRequest
 
-	UpdatePartitionRequest(*glue.UpdatePartitionInput) glue.UpdatePartitionRequest
+	UpdatePartitionRequest(*types.UpdatePartitionInput) glue.UpdatePartitionRequest
 
-	UpdateTableRequest(*glue.UpdateTableInput) glue.UpdateTableRequest
+	UpdateTableRequest(*types.UpdateTableInput) glue.UpdateTableRequest
 
-	UpdateTriggerRequest(*glue.UpdateTriggerInput) glue.UpdateTriggerRequest
+	UpdateTriggerRequest(*types.UpdateTriggerInput) glue.UpdateTriggerRequest
 
-	UpdateUserDefinedFunctionRequest(*glue.UpdateUserDefinedFunctionInput) glue.UpdateUserDefinedFunctionRequest
+	UpdateUserDefinedFunctionRequest(*types.UpdateUserDefinedFunctionInput) glue.UpdateUserDefinedFunctionRequest
 
-	UpdateWorkflowRequest(*glue.UpdateWorkflowInput) glue.UpdateWorkflowRequest
+	UpdateWorkflowRequest(*types.UpdateWorkflowInput) glue.UpdateWorkflowRequest
 }
 
 var _ ClientAPI = (*glue.Client)(nil)

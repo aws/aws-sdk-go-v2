@@ -6,91 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/redshift/types"
 )
-
-type CopyClusterSnapshotInput struct {
-	_ struct{} `type:"structure"`
-
-	// The number of days that a manual snapshot is retained. If the value is -1,
-	// the manual snapshot is retained indefinitely.
-	//
-	// The value must be either -1 or an integer between 1 and 3,653.
-	//
-	// The default value is -1.
-	ManualSnapshotRetentionPeriod *int64 `type:"integer"`
-
-	// The identifier of the cluster the source snapshot was created from. This
-	// parameter is required if your IAM user has a policy containing a snapshot
-	// resource element that specifies anything other than * for the cluster name.
-	//
-	// Constraints:
-	//
-	//    * Must be the identifier for a valid cluster.
-	SourceSnapshotClusterIdentifier *string `type:"string"`
-
-	// The identifier for the source snapshot.
-	//
-	// Constraints:
-	//
-	//    * Must be the identifier for a valid automated snapshot whose state is
-	//    available.
-	//
-	// SourceSnapshotIdentifier is a required field
-	SourceSnapshotIdentifier *string `type:"string" required:"true"`
-
-	// The identifier given to the new manual snapshot.
-	//
-	// Constraints:
-	//
-	//    * Cannot be null, empty, or blank.
-	//
-	//    * Must contain from 1 to 255 alphanumeric characters or hyphens.
-	//
-	//    * First character must be a letter.
-	//
-	//    * Cannot end with a hyphen or contain two consecutive hyphens.
-	//
-	//    * Must be unique for the AWS account that is making the request.
-	//
-	// TargetSnapshotIdentifier is a required field
-	TargetSnapshotIdentifier *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s CopyClusterSnapshotInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CopyClusterSnapshotInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CopyClusterSnapshotInput"}
-
-	if s.SourceSnapshotIdentifier == nil {
-		invalidParams.Add(aws.NewErrParamRequired("SourceSnapshotIdentifier"))
-	}
-
-	if s.TargetSnapshotIdentifier == nil {
-		invalidParams.Add(aws.NewErrParamRequired("TargetSnapshotIdentifier"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type CopyClusterSnapshotOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Describes a snapshot.
-	Snapshot *Snapshot `type:"structure"`
-}
-
-// String returns the string representation
-func (s CopyClusterSnapshotOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCopyClusterSnapshot = "CopyClusterSnapshot"
 
@@ -119,7 +36,7 @@ const opCopyClusterSnapshot = "CopyClusterSnapshot"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/CopyClusterSnapshot
-func (c *Client) CopyClusterSnapshotRequest(input *CopyClusterSnapshotInput) CopyClusterSnapshotRequest {
+func (c *Client) CopyClusterSnapshotRequest(input *types.CopyClusterSnapshotInput) CopyClusterSnapshotRequest {
 	op := &aws.Operation{
 		Name:       opCopyClusterSnapshot,
 		HTTPMethod: "POST",
@@ -127,10 +44,10 @@ func (c *Client) CopyClusterSnapshotRequest(input *CopyClusterSnapshotInput) Cop
 	}
 
 	if input == nil {
-		input = &CopyClusterSnapshotInput{}
+		input = &types.CopyClusterSnapshotInput{}
 	}
 
-	req := c.newRequest(op, input, &CopyClusterSnapshotOutput{})
+	req := c.newRequest(op, input, &types.CopyClusterSnapshotOutput{})
 	return CopyClusterSnapshotRequest{Request: req, Input: input, Copy: c.CopyClusterSnapshotRequest}
 }
 
@@ -138,8 +55,8 @@ func (c *Client) CopyClusterSnapshotRequest(input *CopyClusterSnapshotInput) Cop
 // CopyClusterSnapshot API operation.
 type CopyClusterSnapshotRequest struct {
 	*aws.Request
-	Input *CopyClusterSnapshotInput
-	Copy  func(*CopyClusterSnapshotInput) CopyClusterSnapshotRequest
+	Input *types.CopyClusterSnapshotInput
+	Copy  func(*types.CopyClusterSnapshotInput) CopyClusterSnapshotRequest
 }
 
 // Send marshals and sends the CopyClusterSnapshot API request.
@@ -151,7 +68,7 @@ func (r CopyClusterSnapshotRequest) Send(ctx context.Context) (*CopyClusterSnaps
 	}
 
 	resp := &CopyClusterSnapshotResponse{
-		CopyClusterSnapshotOutput: r.Request.Data.(*CopyClusterSnapshotOutput),
+		CopyClusterSnapshotOutput: r.Request.Data.(*types.CopyClusterSnapshotOutput),
 		response:                  &aws.Response{Request: r.Request},
 	}
 
@@ -161,7 +78,7 @@ func (r CopyClusterSnapshotRequest) Send(ctx context.Context) (*CopyClusterSnaps
 // CopyClusterSnapshotResponse is the response type for the
 // CopyClusterSnapshot API operation.
 type CopyClusterSnapshotResponse struct {
-	*CopyClusterSnapshotOutput
+	*types.CopyClusterSnapshotOutput
 
 	response *aws.Response
 }

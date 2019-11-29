@@ -6,70 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/query"
+	"github.com/aws/aws-sdk-go-v2/service/autoscaling/types"
 )
-
-type ResumeProcessesInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the Auto Scaling group.
-	//
-	// AutoScalingGroupName is a required field
-	AutoScalingGroupName *string `min:"1" type:"string" required:"true"`
-
-	// One or more of the following processes. If you omit this parameter, all processes
-	// are specified.
-	//
-	//    * Launch
-	//
-	//    * Terminate
-	//
-	//    * HealthCheck
-	//
-	//    * ReplaceUnhealthy
-	//
-	//    * AZRebalance
-	//
-	//    * AlarmNotification
-	//
-	//    * ScheduledActions
-	//
-	//    * AddToLoadBalancer
-	ScalingProcesses []string `type:"list"`
-}
-
-// String returns the string representation
-func (s ResumeProcessesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ResumeProcessesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ResumeProcessesInput"}
-
-	if s.AutoScalingGroupName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("AutoScalingGroupName"))
-	}
-	if s.AutoScalingGroupName != nil && len(*s.AutoScalingGroupName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("AutoScalingGroupName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ResumeProcessesOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s ResumeProcessesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opResumeProcesses = "ResumeProcesses"
 
@@ -90,7 +30,7 @@ const opResumeProcesses = "ResumeProcesses"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/ResumeProcesses
-func (c *Client) ResumeProcessesRequest(input *ResumeProcessesInput) ResumeProcessesRequest {
+func (c *Client) ResumeProcessesRequest(input *types.ResumeProcessesInput) ResumeProcessesRequest {
 	op := &aws.Operation{
 		Name:       opResumeProcesses,
 		HTTPMethod: "POST",
@@ -98,10 +38,10 @@ func (c *Client) ResumeProcessesRequest(input *ResumeProcessesInput) ResumeProce
 	}
 
 	if input == nil {
-		input = &ResumeProcessesInput{}
+		input = &types.ResumeProcessesInput{}
 	}
 
-	req := c.newRequest(op, input, &ResumeProcessesOutput{})
+	req := c.newRequest(op, input, &types.ResumeProcessesOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return ResumeProcessesRequest{Request: req, Input: input, Copy: c.ResumeProcessesRequest}
@@ -111,8 +51,8 @@ func (c *Client) ResumeProcessesRequest(input *ResumeProcessesInput) ResumeProce
 // ResumeProcesses API operation.
 type ResumeProcessesRequest struct {
 	*aws.Request
-	Input *ResumeProcessesInput
-	Copy  func(*ResumeProcessesInput) ResumeProcessesRequest
+	Input *types.ResumeProcessesInput
+	Copy  func(*types.ResumeProcessesInput) ResumeProcessesRequest
 }
 
 // Send marshals and sends the ResumeProcesses API request.
@@ -124,7 +64,7 @@ func (r ResumeProcessesRequest) Send(ctx context.Context) (*ResumeProcessesRespo
 	}
 
 	resp := &ResumeProcessesResponse{
-		ResumeProcessesOutput: r.Request.Data.(*ResumeProcessesOutput),
+		ResumeProcessesOutput: r.Request.Data.(*types.ResumeProcessesOutput),
 		response:              &aws.Response{Request: r.Request},
 	}
 
@@ -134,7 +74,7 @@ func (r ResumeProcessesRequest) Send(ctx context.Context) (*ResumeProcessesRespo
 // ResumeProcessesResponse is the response type for the
 // ResumeProcesses API operation.
 type ResumeProcessesResponse struct {
-	*ResumeProcessesOutput
+	*types.ResumeProcessesOutput
 
 	response *aws.Response
 }

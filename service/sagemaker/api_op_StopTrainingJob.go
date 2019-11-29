@@ -6,50 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
 )
-
-type StopTrainingJobInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the training job to stop.
-	//
-	// TrainingJobName is a required field
-	TrainingJobName *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s StopTrainingJobInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *StopTrainingJobInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "StopTrainingJobInput"}
-
-	if s.TrainingJobName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("TrainingJobName"))
-	}
-	if s.TrainingJobName != nil && len(*s.TrainingJobName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("TrainingJobName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type StopTrainingJobOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s StopTrainingJobOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opStopTrainingJob = "StopTrainingJob"
 
@@ -73,7 +33,7 @@ const opStopTrainingJob = "StopTrainingJob"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/StopTrainingJob
-func (c *Client) StopTrainingJobRequest(input *StopTrainingJobInput) StopTrainingJobRequest {
+func (c *Client) StopTrainingJobRequest(input *types.StopTrainingJobInput) StopTrainingJobRequest {
 	op := &aws.Operation{
 		Name:       opStopTrainingJob,
 		HTTPMethod: "POST",
@@ -81,10 +41,10 @@ func (c *Client) StopTrainingJobRequest(input *StopTrainingJobInput) StopTrainin
 	}
 
 	if input == nil {
-		input = &StopTrainingJobInput{}
+		input = &types.StopTrainingJobInput{}
 	}
 
-	req := c.newRequest(op, input, &StopTrainingJobOutput{})
+	req := c.newRequest(op, input, &types.StopTrainingJobOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return StopTrainingJobRequest{Request: req, Input: input, Copy: c.StopTrainingJobRequest}
@@ -94,8 +54,8 @@ func (c *Client) StopTrainingJobRequest(input *StopTrainingJobInput) StopTrainin
 // StopTrainingJob API operation.
 type StopTrainingJobRequest struct {
 	*aws.Request
-	Input *StopTrainingJobInput
-	Copy  func(*StopTrainingJobInput) StopTrainingJobRequest
+	Input *types.StopTrainingJobInput
+	Copy  func(*types.StopTrainingJobInput) StopTrainingJobRequest
 }
 
 // Send marshals and sends the StopTrainingJob API request.
@@ -107,7 +67,7 @@ func (r StopTrainingJobRequest) Send(ctx context.Context) (*StopTrainingJobRespo
 	}
 
 	resp := &StopTrainingJobResponse{
-		StopTrainingJobOutput: r.Request.Data.(*StopTrainingJobOutput),
+		StopTrainingJobOutput: r.Request.Data.(*types.StopTrainingJobOutput),
 		response:              &aws.Response{Request: r.Request},
 	}
 
@@ -117,7 +77,7 @@ func (r StopTrainingJobRequest) Send(ctx context.Context) (*StopTrainingJobRespo
 // StopTrainingJobResponse is the response type for the
 // StopTrainingJob API operation.
 type StopTrainingJobResponse struct {
-	*StopTrainingJobOutput
+	*types.StopTrainingJobOutput
 
 	response *aws.Response
 }

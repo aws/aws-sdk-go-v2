@@ -6,71 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/devicefarm/types"
 )
-
-type UpdateInstanceProfileInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the instance profile.
-	//
-	// Arn is a required field
-	Arn *string `locationName:"arn" min:"32" type:"string" required:"true"`
-
-	// The updated description for your instance profile.
-	Description *string `locationName:"description" type:"string"`
-
-	// An array of strings specifying the list of app packages that should not be
-	// cleaned up from the device after a test run is over.
-	//
-	// The list of packages is only considered if you set packageCleanup to true.
-	ExcludeAppPackagesFromCleanup []string `locationName:"excludeAppPackagesFromCleanup" type:"list"`
-
-	// The updated name for your instance profile.
-	Name *string `locationName:"name" type:"string"`
-
-	// The updated choice for whether you want to specify package cleanup. The default
-	// value is false for private devices.
-	PackageCleanup *bool `locationName:"packageCleanup" type:"boolean"`
-
-	// The updated choice for whether you want to reboot the device after use. The
-	// default value is true.
-	RebootAfterUse *bool `locationName:"rebootAfterUse" type:"boolean"`
-}
-
-// String returns the string representation
-func (s UpdateInstanceProfileInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateInstanceProfileInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateInstanceProfileInput"}
-
-	if s.Arn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Arn"))
-	}
-	if s.Arn != nil && len(*s.Arn) < 32 {
-		invalidParams.Add(aws.NewErrParamMinLen("Arn", 32))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type UpdateInstanceProfileOutput struct {
-	_ struct{} `type:"structure"`
-
-	// An object containing information about your instance profile.
-	InstanceProfile *InstanceProfile `locationName:"instanceProfile" type:"structure"`
-}
-
-// String returns the string representation
-func (s UpdateInstanceProfileOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opUpdateInstanceProfile = "UpdateInstanceProfile"
 
@@ -87,7 +24,7 @@ const opUpdateInstanceProfile = "UpdateInstanceProfile"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/UpdateInstanceProfile
-func (c *Client) UpdateInstanceProfileRequest(input *UpdateInstanceProfileInput) UpdateInstanceProfileRequest {
+func (c *Client) UpdateInstanceProfileRequest(input *types.UpdateInstanceProfileInput) UpdateInstanceProfileRequest {
 	op := &aws.Operation{
 		Name:       opUpdateInstanceProfile,
 		HTTPMethod: "POST",
@@ -95,10 +32,10 @@ func (c *Client) UpdateInstanceProfileRequest(input *UpdateInstanceProfileInput)
 	}
 
 	if input == nil {
-		input = &UpdateInstanceProfileInput{}
+		input = &types.UpdateInstanceProfileInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateInstanceProfileOutput{})
+	req := c.newRequest(op, input, &types.UpdateInstanceProfileOutput{})
 	return UpdateInstanceProfileRequest{Request: req, Input: input, Copy: c.UpdateInstanceProfileRequest}
 }
 
@@ -106,8 +43,8 @@ func (c *Client) UpdateInstanceProfileRequest(input *UpdateInstanceProfileInput)
 // UpdateInstanceProfile API operation.
 type UpdateInstanceProfileRequest struct {
 	*aws.Request
-	Input *UpdateInstanceProfileInput
-	Copy  func(*UpdateInstanceProfileInput) UpdateInstanceProfileRequest
+	Input *types.UpdateInstanceProfileInput
+	Copy  func(*types.UpdateInstanceProfileInput) UpdateInstanceProfileRequest
 }
 
 // Send marshals and sends the UpdateInstanceProfile API request.
@@ -119,7 +56,7 @@ func (r UpdateInstanceProfileRequest) Send(ctx context.Context) (*UpdateInstance
 	}
 
 	resp := &UpdateInstanceProfileResponse{
-		UpdateInstanceProfileOutput: r.Request.Data.(*UpdateInstanceProfileOutput),
+		UpdateInstanceProfileOutput: r.Request.Data.(*types.UpdateInstanceProfileOutput),
 		response:                    &aws.Response{Request: r.Request},
 	}
 
@@ -129,7 +66,7 @@ func (r UpdateInstanceProfileRequest) Send(ctx context.Context) (*UpdateInstance
 // UpdateInstanceProfileResponse is the response type for the
 // UpdateInstanceProfile API operation.
 type UpdateInstanceProfileResponse struct {
-	*UpdateInstanceProfileOutput
+	*types.UpdateInstanceProfileOutput
 
 	response *aws.Response
 }

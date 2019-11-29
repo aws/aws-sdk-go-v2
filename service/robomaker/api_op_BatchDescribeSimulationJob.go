@@ -6,103 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/robomaker/types"
 )
-
-type BatchDescribeSimulationJobInput struct {
-	_ struct{} `type:"structure"`
-
-	// A list of Amazon Resource Names (ARNs) of simulation jobs to describe.
-	//
-	// Jobs is a required field
-	Jobs []string `locationName:"jobs" min:"1" type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s BatchDescribeSimulationJobInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *BatchDescribeSimulationJobInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "BatchDescribeSimulationJobInput"}
-
-	if s.Jobs == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Jobs"))
-	}
-	if s.Jobs != nil && len(s.Jobs) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Jobs", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s BatchDescribeSimulationJobInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.Jobs != nil {
-		v := s.Jobs
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "jobs", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
-		}
-		ls0.End()
-
-	}
-	return nil
-}
-
-type BatchDescribeSimulationJobOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A list of simulation jobs.
-	Jobs []SimulationJob `locationName:"jobs" type:"list"`
-
-	// A list of unprocessed simulation job Amazon Resource Names (ARNs).
-	UnprocessedJobs []string `locationName:"unprocessedJobs" min:"1" type:"list"`
-}
-
-// String returns the string representation
-func (s BatchDescribeSimulationJobOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s BatchDescribeSimulationJobOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.Jobs != nil {
-		v := s.Jobs
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "jobs", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	if s.UnprocessedJobs != nil {
-		v := s.UnprocessedJobs
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "unprocessedJobs", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
-		}
-		ls0.End()
-
-	}
-	return nil
-}
 
 const opBatchDescribeSimulationJob = "BatchDescribeSimulationJob"
 
@@ -119,7 +24,7 @@ const opBatchDescribeSimulationJob = "BatchDescribeSimulationJob"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/BatchDescribeSimulationJob
-func (c *Client) BatchDescribeSimulationJobRequest(input *BatchDescribeSimulationJobInput) BatchDescribeSimulationJobRequest {
+func (c *Client) BatchDescribeSimulationJobRequest(input *types.BatchDescribeSimulationJobInput) BatchDescribeSimulationJobRequest {
 	op := &aws.Operation{
 		Name:       opBatchDescribeSimulationJob,
 		HTTPMethod: "POST",
@@ -127,10 +32,10 @@ func (c *Client) BatchDescribeSimulationJobRequest(input *BatchDescribeSimulatio
 	}
 
 	if input == nil {
-		input = &BatchDescribeSimulationJobInput{}
+		input = &types.BatchDescribeSimulationJobInput{}
 	}
 
-	req := c.newRequest(op, input, &BatchDescribeSimulationJobOutput{})
+	req := c.newRequest(op, input, &types.BatchDescribeSimulationJobOutput{})
 	return BatchDescribeSimulationJobRequest{Request: req, Input: input, Copy: c.BatchDescribeSimulationJobRequest}
 }
 
@@ -138,8 +43,8 @@ func (c *Client) BatchDescribeSimulationJobRequest(input *BatchDescribeSimulatio
 // BatchDescribeSimulationJob API operation.
 type BatchDescribeSimulationJobRequest struct {
 	*aws.Request
-	Input *BatchDescribeSimulationJobInput
-	Copy  func(*BatchDescribeSimulationJobInput) BatchDescribeSimulationJobRequest
+	Input *types.BatchDescribeSimulationJobInput
+	Copy  func(*types.BatchDescribeSimulationJobInput) BatchDescribeSimulationJobRequest
 }
 
 // Send marshals and sends the BatchDescribeSimulationJob API request.
@@ -151,7 +56,7 @@ func (r BatchDescribeSimulationJobRequest) Send(ctx context.Context) (*BatchDesc
 	}
 
 	resp := &BatchDescribeSimulationJobResponse{
-		BatchDescribeSimulationJobOutput: r.Request.Data.(*BatchDescribeSimulationJobOutput),
+		BatchDescribeSimulationJobOutput: r.Request.Data.(*types.BatchDescribeSimulationJobOutput),
 		response:                         &aws.Response{Request: r.Request},
 	}
 
@@ -161,7 +66,7 @@ func (r BatchDescribeSimulationJobRequest) Send(ctx context.Context) (*BatchDesc
 // BatchDescribeSimulationJobResponse is the response type for the
 // BatchDescribeSimulationJob API operation.
 type BatchDescribeSimulationJobResponse struct {
-	*BatchDescribeSimulationJobOutput
+	*types.BatchDescribeSimulationJobOutput
 
 	response *aws.Response
 }

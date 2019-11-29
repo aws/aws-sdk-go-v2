@@ -6,113 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/iot/types"
 )
-
-type ListTargetsForSecurityProfileInput struct {
-	_ struct{} `type:"structure"`
-
-	// The maximum number of results to return at one time.
-	MaxResults *int64 `location:"querystring" locationName:"maxResults" min:"1" type:"integer"`
-
-	// The token for the next set of results.
-	NextToken *string `location:"querystring" locationName:"nextToken" type:"string"`
-
-	// The security profile.
-	//
-	// SecurityProfileName is a required field
-	SecurityProfileName *string `location:"uri" locationName:"securityProfileName" min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s ListTargetsForSecurityProfileInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListTargetsForSecurityProfileInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListTargetsForSecurityProfileInput"}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-
-	if s.SecurityProfileName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("SecurityProfileName"))
-	}
-	if s.SecurityProfileName != nil && len(*s.SecurityProfileName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("SecurityProfileName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListTargetsForSecurityProfileInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.SecurityProfileName != nil {
-		v := *s.SecurityProfileName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "securityProfileName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.MaxResults != nil {
-		v := *s.MaxResults
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "maxResults", protocol.Int64Value(v), metadata)
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type ListTargetsForSecurityProfileOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A token that can be used to retrieve the next set of results, or null if
-	// there are no additional results.
-	NextToken *string `locationName:"nextToken" type:"string"`
-
-	// The thing groups to which the security profile is attached.
-	SecurityProfileTargets []SecurityProfileTarget `locationName:"securityProfileTargets" type:"list"`
-}
-
-// String returns the string representation
-func (s ListTargetsForSecurityProfileOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListTargetsForSecurityProfileOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.SecurityProfileTargets != nil {
-		v := s.SecurityProfileTargets
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "securityProfileTargets", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	return nil
-}
 
 const opListTargetsForSecurityProfile = "ListTargetsForSecurityProfile"
 
@@ -128,7 +23,7 @@ const opListTargetsForSecurityProfile = "ListTargetsForSecurityProfile"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) ListTargetsForSecurityProfileRequest(input *ListTargetsForSecurityProfileInput) ListTargetsForSecurityProfileRequest {
+func (c *Client) ListTargetsForSecurityProfileRequest(input *types.ListTargetsForSecurityProfileInput) ListTargetsForSecurityProfileRequest {
 	op := &aws.Operation{
 		Name:       opListTargetsForSecurityProfile,
 		HTTPMethod: "GET",
@@ -136,10 +31,10 @@ func (c *Client) ListTargetsForSecurityProfileRequest(input *ListTargetsForSecur
 	}
 
 	if input == nil {
-		input = &ListTargetsForSecurityProfileInput{}
+		input = &types.ListTargetsForSecurityProfileInput{}
 	}
 
-	req := c.newRequest(op, input, &ListTargetsForSecurityProfileOutput{})
+	req := c.newRequest(op, input, &types.ListTargetsForSecurityProfileOutput{})
 	return ListTargetsForSecurityProfileRequest{Request: req, Input: input, Copy: c.ListTargetsForSecurityProfileRequest}
 }
 
@@ -147,8 +42,8 @@ func (c *Client) ListTargetsForSecurityProfileRequest(input *ListTargetsForSecur
 // ListTargetsForSecurityProfile API operation.
 type ListTargetsForSecurityProfileRequest struct {
 	*aws.Request
-	Input *ListTargetsForSecurityProfileInput
-	Copy  func(*ListTargetsForSecurityProfileInput) ListTargetsForSecurityProfileRequest
+	Input *types.ListTargetsForSecurityProfileInput
+	Copy  func(*types.ListTargetsForSecurityProfileInput) ListTargetsForSecurityProfileRequest
 }
 
 // Send marshals and sends the ListTargetsForSecurityProfile API request.
@@ -160,7 +55,7 @@ func (r ListTargetsForSecurityProfileRequest) Send(ctx context.Context) (*ListTa
 	}
 
 	resp := &ListTargetsForSecurityProfileResponse{
-		ListTargetsForSecurityProfileOutput: r.Request.Data.(*ListTargetsForSecurityProfileOutput),
+		ListTargetsForSecurityProfileOutput: r.Request.Data.(*types.ListTargetsForSecurityProfileOutput),
 		response:                            &aws.Response{Request: r.Request},
 	}
 
@@ -170,7 +65,7 @@ func (r ListTargetsForSecurityProfileRequest) Send(ctx context.Context) (*ListTa
 // ListTargetsForSecurityProfileResponse is the response type for the
 // ListTargetsForSecurityProfile API operation.
 type ListTargetsForSecurityProfileResponse struct {
-	*ListTargetsForSecurityProfileOutput
+	*types.ListTargetsForSecurityProfileOutput
 
 	response *aws.Response
 }

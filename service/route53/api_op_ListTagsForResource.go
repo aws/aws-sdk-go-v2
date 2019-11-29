@@ -6,96 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/route53/types"
 )
-
-// A complex type containing information about a request for a list of the tags
-// that are associated with an individual resource.
-type ListTagsForResourceInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the resource for which you want to retrieve tags.
-	//
-	// ResourceId is a required field
-	ResourceId *string `location:"uri" locationName:"ResourceId" type:"string" required:"true"`
-
-	// The type of the resource.
-	//
-	//    * The resource type for health checks is healthcheck.
-	//
-	//    * The resource type for hosted zones is hostedzone.
-	//
-	// ResourceType is a required field
-	ResourceType TagResourceType `location:"uri" locationName:"ResourceType" type:"string" required:"true" enum:"true"`
-}
-
-// String returns the string representation
-func (s ListTagsForResourceInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListTagsForResourceInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListTagsForResourceInput"}
-
-	if s.ResourceId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ResourceId"))
-	}
-	if len(s.ResourceType) == 0 {
-		invalidParams.Add(aws.NewErrParamRequired("ResourceType"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListTagsForResourceInput) MarshalFields(e protocol.FieldEncoder) error {
-
-	if s.ResourceId != nil {
-		v := *s.ResourceId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "ResourceId", protocol.StringValue(v), metadata)
-	}
-	if len(s.ResourceType) > 0 {
-		v := s.ResourceType
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "ResourceType", v, metadata)
-	}
-	return nil
-}
-
-// A complex type that contains information about the health checks or hosted
-// zones for which you want to list tags.
-type ListTagsForResourceOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A ResourceTagSet containing tags associated with the specified resource.
-	//
-	// ResourceTagSet is a required field
-	ResourceTagSet *ResourceTagSet `type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s ListTagsForResourceOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListTagsForResourceOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.ResourceTagSet != nil {
-		v := s.ResourceTagSet
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "ResourceTagSet", v, metadata)
-	}
-	return nil
-}
 
 const opListTagsForResource = "ListTagsForResource"
 
@@ -116,7 +28,7 @@ const opListTagsForResource = "ListTagsForResource"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/ListTagsForResource
-func (c *Client) ListTagsForResourceRequest(input *ListTagsForResourceInput) ListTagsForResourceRequest {
+func (c *Client) ListTagsForResourceRequest(input *types.ListTagsForResourceInput) ListTagsForResourceRequest {
 	op := &aws.Operation{
 		Name:       opListTagsForResource,
 		HTTPMethod: "GET",
@@ -124,10 +36,10 @@ func (c *Client) ListTagsForResourceRequest(input *ListTagsForResourceInput) Lis
 	}
 
 	if input == nil {
-		input = &ListTagsForResourceInput{}
+		input = &types.ListTagsForResourceInput{}
 	}
 
-	req := c.newRequest(op, input, &ListTagsForResourceOutput{})
+	req := c.newRequest(op, input, &types.ListTagsForResourceOutput{})
 	return ListTagsForResourceRequest{Request: req, Input: input, Copy: c.ListTagsForResourceRequest}
 }
 
@@ -135,8 +47,8 @@ func (c *Client) ListTagsForResourceRequest(input *ListTagsForResourceInput) Lis
 // ListTagsForResource API operation.
 type ListTagsForResourceRequest struct {
 	*aws.Request
-	Input *ListTagsForResourceInput
-	Copy  func(*ListTagsForResourceInput) ListTagsForResourceRequest
+	Input *types.ListTagsForResourceInput
+	Copy  func(*types.ListTagsForResourceInput) ListTagsForResourceRequest
 }
 
 // Send marshals and sends the ListTagsForResource API request.
@@ -148,7 +60,7 @@ func (r ListTagsForResourceRequest) Send(ctx context.Context) (*ListTagsForResou
 	}
 
 	resp := &ListTagsForResourceResponse{
-		ListTagsForResourceOutput: r.Request.Data.(*ListTagsForResourceOutput),
+		ListTagsForResourceOutput: r.Request.Data.(*types.ListTagsForResourceOutput),
 		response:                  &aws.Response{Request: r.Request},
 	}
 
@@ -158,7 +70,7 @@ func (r ListTagsForResourceRequest) Send(ctx context.Context) (*ListTagsForResou
 // ListTagsForResourceResponse is the response type for the
 // ListTagsForResource API operation.
 type ListTagsForResourceResponse struct {
-	*ListTagsForResourceOutput
+	*types.ListTagsForResourceOutput
 
 	response *aws.Response
 }

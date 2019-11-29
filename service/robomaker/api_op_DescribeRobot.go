@@ -4,168 +4,10 @@ package robomaker
 
 import (
 	"context"
-	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/robomaker/types"
 )
-
-type DescribeRobotInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the robot to be described.
-	//
-	// Robot is a required field
-	Robot *string `locationName:"robot" min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeRobotInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeRobotInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeRobotInput"}
-
-	if s.Robot == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Robot"))
-	}
-	if s.Robot != nil && len(*s.Robot) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Robot", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DescribeRobotInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.Robot != nil {
-		v := *s.Robot
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "robot", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type DescribeRobotOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The target architecture of the robot application.
-	Architecture Architecture `locationName:"architecture" type:"string" enum:"true"`
-
-	// The Amazon Resource Name (ARN) of the robot.
-	Arn *string `locationName:"arn" min:"1" type:"string"`
-
-	// The time, in milliseconds since the epoch, when the robot was created.
-	CreatedAt *time.Time `locationName:"createdAt" type:"timestamp"`
-
-	// The Amazon Resource Name (ARN) of the fleet.
-	FleetArn *string `locationName:"fleetArn" min:"1" type:"string"`
-
-	// The Greengrass group id.
-	GreengrassGroupId *string `locationName:"greengrassGroupId" min:"1" type:"string"`
-
-	// The Amazon Resource Name (ARN) of the last deployment job.
-	LastDeploymentJob *string `locationName:"lastDeploymentJob" min:"1" type:"string"`
-
-	// The time of the last deployment job.
-	LastDeploymentTime *time.Time `locationName:"lastDeploymentTime" type:"timestamp"`
-
-	// The name of the robot.
-	Name *string `locationName:"name" min:"1" type:"string"`
-
-	// The status of the fleet.
-	Status RobotStatus `locationName:"status" type:"string" enum:"true"`
-
-	// The list of all tags added to the specified robot.
-	Tags map[string]string `locationName:"tags" type:"map"`
-}
-
-// String returns the string representation
-func (s DescribeRobotOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DescribeRobotOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.Architecture) > 0 {
-		v := s.Architecture
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "architecture", protocol.QuotedValue{ValueMarshaler: v}, metadata)
-	}
-	if s.Arn != nil {
-		v := *s.Arn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "arn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.CreatedAt != nil {
-		v := *s.CreatedAt
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "createdAt",
-			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
-	}
-	if s.FleetArn != nil {
-		v := *s.FleetArn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "fleetArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.GreengrassGroupId != nil {
-		v := *s.GreengrassGroupId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "greengrassGroupId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.LastDeploymentJob != nil {
-		v := *s.LastDeploymentJob
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "lastDeploymentJob", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.LastDeploymentTime != nil {
-		v := *s.LastDeploymentTime
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "lastDeploymentTime",
-			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
-	}
-	if s.Name != nil {
-		v := *s.Name
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if len(s.Status) > 0 {
-		v := s.Status
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "status", protocol.QuotedValue{ValueMarshaler: v}, metadata)
-	}
-	if s.Tags != nil {
-		v := s.Tags
-
-		metadata := protocol.Metadata{}
-		ms0 := e.Map(protocol.BodyTarget, "tags", metadata)
-		ms0.Start()
-		for k1, v1 := range v {
-			ms0.MapSetValue(k1, protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
-		}
-		ms0.End()
-
-	}
-	return nil
-}
 
 const opDescribeRobot = "DescribeRobot"
 
@@ -182,7 +24,7 @@ const opDescribeRobot = "DescribeRobot"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/DescribeRobot
-func (c *Client) DescribeRobotRequest(input *DescribeRobotInput) DescribeRobotRequest {
+func (c *Client) DescribeRobotRequest(input *types.DescribeRobotInput) DescribeRobotRequest {
 	op := &aws.Operation{
 		Name:       opDescribeRobot,
 		HTTPMethod: "POST",
@@ -190,10 +32,10 @@ func (c *Client) DescribeRobotRequest(input *DescribeRobotInput) DescribeRobotRe
 	}
 
 	if input == nil {
-		input = &DescribeRobotInput{}
+		input = &types.DescribeRobotInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeRobotOutput{})
+	req := c.newRequest(op, input, &types.DescribeRobotOutput{})
 	return DescribeRobotRequest{Request: req, Input: input, Copy: c.DescribeRobotRequest}
 }
 
@@ -201,8 +43,8 @@ func (c *Client) DescribeRobotRequest(input *DescribeRobotInput) DescribeRobotRe
 // DescribeRobot API operation.
 type DescribeRobotRequest struct {
 	*aws.Request
-	Input *DescribeRobotInput
-	Copy  func(*DescribeRobotInput) DescribeRobotRequest
+	Input *types.DescribeRobotInput
+	Copy  func(*types.DescribeRobotInput) DescribeRobotRequest
 }
 
 // Send marshals and sends the DescribeRobot API request.
@@ -214,7 +56,7 @@ func (r DescribeRobotRequest) Send(ctx context.Context) (*DescribeRobotResponse,
 	}
 
 	resp := &DescribeRobotResponse{
-		DescribeRobotOutput: r.Request.Data.(*DescribeRobotOutput),
+		DescribeRobotOutput: r.Request.Data.(*types.DescribeRobotOutput),
 		response:            &aws.Response{Request: r.Request},
 	}
 
@@ -224,7 +66,7 @@ func (r DescribeRobotRequest) Send(ctx context.Context) (*DescribeRobotResponse,
 // DescribeRobotResponse is the response type for the
 // DescribeRobot API operation.
 type DescribeRobotResponse struct {
-	*DescribeRobotOutput
+	*types.DescribeRobotOutput
 
 	response *aws.Response
 }

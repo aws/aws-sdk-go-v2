@@ -4,125 +4,10 @@ package kafka
 
 import (
 	"context"
-	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/kafka/types"
 )
-
-type DescribeConfigurationRevisionInput struct {
-	_ struct{} `type:"structure"`
-
-	// Arn is a required field
-	Arn *string `location:"uri" locationName:"arn" type:"string" required:"true"`
-
-	// Revision is a required field
-	Revision *int64 `location:"uri" locationName:"revision" type:"long" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeConfigurationRevisionInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeConfigurationRevisionInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeConfigurationRevisionInput"}
-
-	if s.Arn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Arn"))
-	}
-
-	if s.Revision == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Revision"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DescribeConfigurationRevisionInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.Arn != nil {
-		v := *s.Arn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "arn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Revision != nil {
-		v := *s.Revision
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "revision", protocol.Int64Value(v), metadata)
-	}
-	return nil
-}
-
-// Response body for DescribeConfigurationRevision.
-type DescribeConfigurationRevisionOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the configuration.
-	Arn *string `locationName:"arn" type:"string"`
-
-	// The time when the configuration was created.
-	CreationTime *time.Time `locationName:"creationTime" type:"timestamp" timestampFormat:"iso8601"`
-
-	// The description of the configuration.
-	Description *string `locationName:"description" type:"string"`
-
-	// The revision number.
-	Revision *int64 `locationName:"revision" type:"long"`
-
-	// ServerProperties is automatically base64 encoded/decoded by the SDK.
-	ServerProperties []byte `locationName:"serverProperties" type:"blob"`
-}
-
-// String returns the string representation
-func (s DescribeConfigurationRevisionOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DescribeConfigurationRevisionOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.Arn != nil {
-		v := *s.Arn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "arn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.CreationTime != nil {
-		v := *s.CreationTime
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "creationTime",
-			protocol.TimeValue{V: v, Format: "iso8601", QuotedFormatTime: true}, metadata)
-	}
-	if s.Description != nil {
-		v := *s.Description
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "description", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Revision != nil {
-		v := *s.Revision
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "revision", protocol.Int64Value(v), metadata)
-	}
-	if s.ServerProperties != nil {
-		v := s.ServerProperties
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "serverProperties", protocol.QuotedValue{ValueMarshaler: protocol.BytesValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opDescribeConfigurationRevision = "DescribeConfigurationRevision"
 
@@ -139,7 +24,7 @@ const opDescribeConfigurationRevision = "DescribeConfigurationRevision"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/DescribeConfigurationRevision
-func (c *Client) DescribeConfigurationRevisionRequest(input *DescribeConfigurationRevisionInput) DescribeConfigurationRevisionRequest {
+func (c *Client) DescribeConfigurationRevisionRequest(input *types.DescribeConfigurationRevisionInput) DescribeConfigurationRevisionRequest {
 	op := &aws.Operation{
 		Name:       opDescribeConfigurationRevision,
 		HTTPMethod: "GET",
@@ -147,10 +32,10 @@ func (c *Client) DescribeConfigurationRevisionRequest(input *DescribeConfigurati
 	}
 
 	if input == nil {
-		input = &DescribeConfigurationRevisionInput{}
+		input = &types.DescribeConfigurationRevisionInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeConfigurationRevisionOutput{})
+	req := c.newRequest(op, input, &types.DescribeConfigurationRevisionOutput{})
 	return DescribeConfigurationRevisionRequest{Request: req, Input: input, Copy: c.DescribeConfigurationRevisionRequest}
 }
 
@@ -158,8 +43,8 @@ func (c *Client) DescribeConfigurationRevisionRequest(input *DescribeConfigurati
 // DescribeConfigurationRevision API operation.
 type DescribeConfigurationRevisionRequest struct {
 	*aws.Request
-	Input *DescribeConfigurationRevisionInput
-	Copy  func(*DescribeConfigurationRevisionInput) DescribeConfigurationRevisionRequest
+	Input *types.DescribeConfigurationRevisionInput
+	Copy  func(*types.DescribeConfigurationRevisionInput) DescribeConfigurationRevisionRequest
 }
 
 // Send marshals and sends the DescribeConfigurationRevision API request.
@@ -171,7 +56,7 @@ func (r DescribeConfigurationRevisionRequest) Send(ctx context.Context) (*Descri
 	}
 
 	resp := &DescribeConfigurationRevisionResponse{
-		DescribeConfigurationRevisionOutput: r.Request.Data.(*DescribeConfigurationRevisionOutput),
+		DescribeConfigurationRevisionOutput: r.Request.Data.(*types.DescribeConfigurationRevisionOutput),
 		response:                            &aws.Response{Request: r.Request},
 	}
 
@@ -181,7 +66,7 @@ func (r DescribeConfigurationRevisionRequest) Send(ctx context.Context) (*Descri
 // DescribeConfigurationRevisionResponse is the response type for the
 // DescribeConfigurationRevision API operation.
 type DescribeConfigurationRevisionResponse struct {
-	*DescribeConfigurationRevisionOutput
+	*types.DescribeConfigurationRevisionOutput
 
 	response *aws.Response
 }

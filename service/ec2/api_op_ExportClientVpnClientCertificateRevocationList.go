@@ -6,57 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-type ExportClientVpnClientCertificateRevocationListInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the Client VPN endpoint.
-	//
-	// ClientVpnEndpointId is a required field
-	ClientVpnEndpointId *string `type:"string" required:"true"`
-
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have
-	// the required permissions, the error response is DryRunOperation. Otherwise,
-	// it is UnauthorizedOperation.
-	DryRun *bool `type:"boolean"`
-}
-
-// String returns the string representation
-func (s ExportClientVpnClientCertificateRevocationListInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ExportClientVpnClientCertificateRevocationListInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ExportClientVpnClientCertificateRevocationListInput"}
-
-	if s.ClientVpnEndpointId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ClientVpnEndpointId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ExportClientVpnClientCertificateRevocationListOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Information about the client certificate revocation list.
-	CertificateRevocationList *string `locationName:"certificateRevocationList" type:"string"`
-
-	// The current state of the client certificate revocation list.
-	Status *CertificateRevocationListStatus `locationName:"status" type:"structure"`
-}
-
-// String returns the string representation
-func (s ExportClientVpnClientCertificateRevocationListOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opExportClientVpnClientCertificateRevocationList = "ExportClientVpnClientCertificateRevocationList"
 
@@ -74,7 +25,7 @@ const opExportClientVpnClientCertificateRevocationList = "ExportClientVpnClientC
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ExportClientVpnClientCertificateRevocationList
-func (c *Client) ExportClientVpnClientCertificateRevocationListRequest(input *ExportClientVpnClientCertificateRevocationListInput) ExportClientVpnClientCertificateRevocationListRequest {
+func (c *Client) ExportClientVpnClientCertificateRevocationListRequest(input *types.ExportClientVpnClientCertificateRevocationListInput) ExportClientVpnClientCertificateRevocationListRequest {
 	op := &aws.Operation{
 		Name:       opExportClientVpnClientCertificateRevocationList,
 		HTTPMethod: "POST",
@@ -82,10 +33,10 @@ func (c *Client) ExportClientVpnClientCertificateRevocationListRequest(input *Ex
 	}
 
 	if input == nil {
-		input = &ExportClientVpnClientCertificateRevocationListInput{}
+		input = &types.ExportClientVpnClientCertificateRevocationListInput{}
 	}
 
-	req := c.newRequest(op, input, &ExportClientVpnClientCertificateRevocationListOutput{})
+	req := c.newRequest(op, input, &types.ExportClientVpnClientCertificateRevocationListOutput{})
 	return ExportClientVpnClientCertificateRevocationListRequest{Request: req, Input: input, Copy: c.ExportClientVpnClientCertificateRevocationListRequest}
 }
 
@@ -93,8 +44,8 @@ func (c *Client) ExportClientVpnClientCertificateRevocationListRequest(input *Ex
 // ExportClientVpnClientCertificateRevocationList API operation.
 type ExportClientVpnClientCertificateRevocationListRequest struct {
 	*aws.Request
-	Input *ExportClientVpnClientCertificateRevocationListInput
-	Copy  func(*ExportClientVpnClientCertificateRevocationListInput) ExportClientVpnClientCertificateRevocationListRequest
+	Input *types.ExportClientVpnClientCertificateRevocationListInput
+	Copy  func(*types.ExportClientVpnClientCertificateRevocationListInput) ExportClientVpnClientCertificateRevocationListRequest
 }
 
 // Send marshals and sends the ExportClientVpnClientCertificateRevocationList API request.
@@ -106,7 +57,7 @@ func (r ExportClientVpnClientCertificateRevocationListRequest) Send(ctx context.
 	}
 
 	resp := &ExportClientVpnClientCertificateRevocationListResponse{
-		ExportClientVpnClientCertificateRevocationListOutput: r.Request.Data.(*ExportClientVpnClientCertificateRevocationListOutput),
+		ExportClientVpnClientCertificateRevocationListOutput: r.Request.Data.(*types.ExportClientVpnClientCertificateRevocationListOutput),
 		response: &aws.Response{Request: r.Request},
 	}
 
@@ -116,7 +67,7 @@ func (r ExportClientVpnClientCertificateRevocationListRequest) Send(ctx context.
 // ExportClientVpnClientCertificateRevocationListResponse is the response type for the
 // ExportClientVpnClientCertificateRevocationList API operation.
 type ExportClientVpnClientCertificateRevocationListResponse struct {
-	*ExportClientVpnClientCertificateRevocationListOutput
+	*types.ExportClientVpnClientCertificateRevocationListOutput
 
 	response *aws.Response
 }

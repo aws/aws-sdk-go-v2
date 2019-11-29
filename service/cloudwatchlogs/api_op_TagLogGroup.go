@@ -6,62 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
+	"github.com/aws/aws-sdk-go-v2/service/cloudwatchlogs/types"
 )
-
-type TagLogGroupInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the log group.
-	//
-	// LogGroupName is a required field
-	LogGroupName *string `locationName:"logGroupName" min:"1" type:"string" required:"true"`
-
-	// The key-value pairs to use for the tags.
-	//
-	// Tags is a required field
-	Tags map[string]string `locationName:"tags" min:"1" type:"map" required:"true"`
-}
-
-// String returns the string representation
-func (s TagLogGroupInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *TagLogGroupInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "TagLogGroupInput"}
-
-	if s.LogGroupName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("LogGroupName"))
-	}
-	if s.LogGroupName != nil && len(*s.LogGroupName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("LogGroupName", 1))
-	}
-
-	if s.Tags == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Tags"))
-	}
-	if s.Tags != nil && len(s.Tags) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Tags", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type TagLogGroupOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s TagLogGroupOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opTagLogGroup = "TagLogGroup"
 
@@ -85,7 +33,7 @@ const opTagLogGroup = "TagLogGroup"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/TagLogGroup
-func (c *Client) TagLogGroupRequest(input *TagLogGroupInput) TagLogGroupRequest {
+func (c *Client) TagLogGroupRequest(input *types.TagLogGroupInput) TagLogGroupRequest {
 	op := &aws.Operation{
 		Name:       opTagLogGroup,
 		HTTPMethod: "POST",
@@ -93,10 +41,10 @@ func (c *Client) TagLogGroupRequest(input *TagLogGroupInput) TagLogGroupRequest 
 	}
 
 	if input == nil {
-		input = &TagLogGroupInput{}
+		input = &types.TagLogGroupInput{}
 	}
 
-	req := c.newRequest(op, input, &TagLogGroupOutput{})
+	req := c.newRequest(op, input, &types.TagLogGroupOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return TagLogGroupRequest{Request: req, Input: input, Copy: c.TagLogGroupRequest}
@@ -106,8 +54,8 @@ func (c *Client) TagLogGroupRequest(input *TagLogGroupInput) TagLogGroupRequest 
 // TagLogGroup API operation.
 type TagLogGroupRequest struct {
 	*aws.Request
-	Input *TagLogGroupInput
-	Copy  func(*TagLogGroupInput) TagLogGroupRequest
+	Input *types.TagLogGroupInput
+	Copy  func(*types.TagLogGroupInput) TagLogGroupRequest
 }
 
 // Send marshals and sends the TagLogGroup API request.
@@ -119,7 +67,7 @@ func (r TagLogGroupRequest) Send(ctx context.Context) (*TagLogGroupResponse, err
 	}
 
 	resp := &TagLogGroupResponse{
-		TagLogGroupOutput: r.Request.Data.(*TagLogGroupOutput),
+		TagLogGroupOutput: r.Request.Data.(*types.TagLogGroupOutput),
 		response:          &aws.Response{Request: r.Request},
 	}
 
@@ -129,7 +77,7 @@ func (r TagLogGroupRequest) Send(ctx context.Context) (*TagLogGroupResponse, err
 // TagLogGroupResponse is the response type for the
 // TagLogGroup API operation.
 type TagLogGroupResponse struct {
-	*TagLogGroupOutput
+	*types.TagLogGroupOutput
 
 	response *aws.Response
 }

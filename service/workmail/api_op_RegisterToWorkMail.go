@@ -6,70 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/workmail/types"
 )
-
-type RegisterToWorkMailInput struct {
-	_ struct{} `type:"structure"`
-
-	// The email for the user, group, or resource to be updated.
-	//
-	// Email is a required field
-	Email *string `min:"1" type:"string" required:"true"`
-
-	// The identifier for the user, group, or resource to be updated.
-	//
-	// EntityId is a required field
-	EntityId *string `min:"12" type:"string" required:"true"`
-
-	// The identifier for the organization under which the user, group, or resource
-	// exists.
-	//
-	// OrganizationId is a required field
-	OrganizationId *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s RegisterToWorkMailInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *RegisterToWorkMailInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "RegisterToWorkMailInput"}
-
-	if s.Email == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Email"))
-	}
-	if s.Email != nil && len(*s.Email) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Email", 1))
-	}
-
-	if s.EntityId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("EntityId"))
-	}
-	if s.EntityId != nil && len(*s.EntityId) < 12 {
-		invalidParams.Add(aws.NewErrParamMinLen("EntityId", 12))
-	}
-
-	if s.OrganizationId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("OrganizationId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type RegisterToWorkMailOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s RegisterToWorkMailOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opRegisterToWorkMail = "RegisterToWorkMail"
 
@@ -94,7 +32,7 @@ const opRegisterToWorkMail = "RegisterToWorkMail"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/RegisterToWorkMail
-func (c *Client) RegisterToWorkMailRequest(input *RegisterToWorkMailInput) RegisterToWorkMailRequest {
+func (c *Client) RegisterToWorkMailRequest(input *types.RegisterToWorkMailInput) RegisterToWorkMailRequest {
 	op := &aws.Operation{
 		Name:       opRegisterToWorkMail,
 		HTTPMethod: "POST",
@@ -102,10 +40,10 @@ func (c *Client) RegisterToWorkMailRequest(input *RegisterToWorkMailInput) Regis
 	}
 
 	if input == nil {
-		input = &RegisterToWorkMailInput{}
+		input = &types.RegisterToWorkMailInput{}
 	}
 
-	req := c.newRequest(op, input, &RegisterToWorkMailOutput{})
+	req := c.newRequest(op, input, &types.RegisterToWorkMailOutput{})
 	return RegisterToWorkMailRequest{Request: req, Input: input, Copy: c.RegisterToWorkMailRequest}
 }
 
@@ -113,8 +51,8 @@ func (c *Client) RegisterToWorkMailRequest(input *RegisterToWorkMailInput) Regis
 // RegisterToWorkMail API operation.
 type RegisterToWorkMailRequest struct {
 	*aws.Request
-	Input *RegisterToWorkMailInput
-	Copy  func(*RegisterToWorkMailInput) RegisterToWorkMailRequest
+	Input *types.RegisterToWorkMailInput
+	Copy  func(*types.RegisterToWorkMailInput) RegisterToWorkMailRequest
 }
 
 // Send marshals and sends the RegisterToWorkMail API request.
@@ -126,7 +64,7 @@ func (r RegisterToWorkMailRequest) Send(ctx context.Context) (*RegisterToWorkMai
 	}
 
 	resp := &RegisterToWorkMailResponse{
-		RegisterToWorkMailOutput: r.Request.Data.(*RegisterToWorkMailOutput),
+		RegisterToWorkMailOutput: r.Request.Data.(*types.RegisterToWorkMailOutput),
 		response:                 &aws.Response{Request: r.Request},
 	}
 
@@ -136,7 +74,7 @@ func (r RegisterToWorkMailRequest) Send(ctx context.Context) (*RegisterToWorkMai
 // RegisterToWorkMailResponse is the response type for the
 // RegisterToWorkMail API operation.
 type RegisterToWorkMailResponse struct {
-	*RegisterToWorkMailOutput
+	*types.RegisterToWorkMailOutput
 
 	response *aws.Response
 }

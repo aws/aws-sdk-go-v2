@@ -6,33 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/iotthingsgraph/types"
 )
-
-type UndeploySystemInstanceInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the system instance to remove from its target.
-	Id *string `locationName:"id" type:"string"`
-}
-
-// String returns the string representation
-func (s UndeploySystemInstanceInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type UndeploySystemInstanceOutput struct {
-	_ struct{} `type:"structure"`
-
-	// An object that contains summary information about the system instance that
-	// was removed from its target.
-	Summary *SystemInstanceSummary `locationName:"summary" type:"structure"`
-}
-
-// String returns the string representation
-func (s UndeploySystemInstanceOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opUndeploySystemInstance = "UndeploySystemInstance"
 
@@ -49,7 +24,7 @@ const opUndeploySystemInstance = "UndeploySystemInstance"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iotthingsgraph-2018-09-06/UndeploySystemInstance
-func (c *Client) UndeploySystemInstanceRequest(input *UndeploySystemInstanceInput) UndeploySystemInstanceRequest {
+func (c *Client) UndeploySystemInstanceRequest(input *types.UndeploySystemInstanceInput) UndeploySystemInstanceRequest {
 	op := &aws.Operation{
 		Name:       opUndeploySystemInstance,
 		HTTPMethod: "POST",
@@ -57,10 +32,10 @@ func (c *Client) UndeploySystemInstanceRequest(input *UndeploySystemInstanceInpu
 	}
 
 	if input == nil {
-		input = &UndeploySystemInstanceInput{}
+		input = &types.UndeploySystemInstanceInput{}
 	}
 
-	req := c.newRequest(op, input, &UndeploySystemInstanceOutput{})
+	req := c.newRequest(op, input, &types.UndeploySystemInstanceOutput{})
 	return UndeploySystemInstanceRequest{Request: req, Input: input, Copy: c.UndeploySystemInstanceRequest}
 }
 
@@ -68,8 +43,8 @@ func (c *Client) UndeploySystemInstanceRequest(input *UndeploySystemInstanceInpu
 // UndeploySystemInstance API operation.
 type UndeploySystemInstanceRequest struct {
 	*aws.Request
-	Input *UndeploySystemInstanceInput
-	Copy  func(*UndeploySystemInstanceInput) UndeploySystemInstanceRequest
+	Input *types.UndeploySystemInstanceInput
+	Copy  func(*types.UndeploySystemInstanceInput) UndeploySystemInstanceRequest
 }
 
 // Send marshals and sends the UndeploySystemInstance API request.
@@ -81,7 +56,7 @@ func (r UndeploySystemInstanceRequest) Send(ctx context.Context) (*UndeploySyste
 	}
 
 	resp := &UndeploySystemInstanceResponse{
-		UndeploySystemInstanceOutput: r.Request.Data.(*UndeploySystemInstanceOutput),
+		UndeploySystemInstanceOutput: r.Request.Data.(*types.UndeploySystemInstanceOutput),
 		response:                     &aws.Response{Request: r.Request},
 	}
 
@@ -91,7 +66,7 @@ func (r UndeploySystemInstanceRequest) Send(ctx context.Context) (*UndeploySyste
 // UndeploySystemInstanceResponse is the response type for the
 // UndeploySystemInstance API operation.
 type UndeploySystemInstanceResponse struct {
-	*UndeploySystemInstanceOutput
+	*types.UndeploySystemInstanceOutput
 
 	response *aws.Response
 }

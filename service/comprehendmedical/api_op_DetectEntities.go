@@ -6,73 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/comprehendmedical/types"
 )
-
-type DetectEntitiesInput struct {
-	_ struct{} `type:"structure"`
-
-	// A UTF-8 text string containing the clinical content being examined for entities.
-	// Each string must contain fewer than 20,000 bytes of characters.
-	//
-	// Text is a required field
-	Text *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DetectEntitiesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DetectEntitiesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DetectEntitiesInput"}
-
-	if s.Text == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Text"))
-	}
-	if s.Text != nil && len(*s.Text) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Text", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DetectEntitiesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The collection of medical entities extracted from the input text and their
-	// associated information. For each entity, the response provides the entity
-	// text, the entity category, where the entity text begins and ends, and the
-	// level of confidence that Amazon Comprehend Medical has in the detection and
-	// analysis. Attributes and traits of the entity are also returned.
-	//
-	// Entities is a required field
-	Entities []Entity `type:"list" required:"true"`
-
-	// The version of the model used to analyze the documents. The version number
-	// looks like X.X.X. You can use this information to track the model used for
-	// a particular batch of documents.
-	//
-	// ModelVersion is a required field
-	ModelVersion *string `min:"1" type:"string" required:"true"`
-
-	// If the result of the previous request to DetectEntities was truncated, include
-	// the PaginationToken to fetch the next page of entities.
-	PaginationToken *string `min:"1" type:"string"`
-
-	// Attributes extracted from the input text that we were unable to relate to
-	// an entity.
-	UnmappedAttributes []UnmappedAttribute `type:"list"`
-}
-
-// String returns the string representation
-func (s DetectEntitiesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDetectEntities = "DetectEntities"
 
@@ -94,7 +29,7 @@ const opDetectEntities = "DetectEntities"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/comprehendmedical-2018-10-30/DetectEntities
-func (c *Client) DetectEntitiesRequest(input *DetectEntitiesInput) DetectEntitiesRequest {
+func (c *Client) DetectEntitiesRequest(input *types.DetectEntitiesInput) DetectEntitiesRequest {
 	if c.Client.Config.Logger != nil {
 		c.Client.Config.Logger.Log("This operation, DetectEntities, has been deprecated")
 	}
@@ -105,10 +40,10 @@ func (c *Client) DetectEntitiesRequest(input *DetectEntitiesInput) DetectEntitie
 	}
 
 	if input == nil {
-		input = &DetectEntitiesInput{}
+		input = &types.DetectEntitiesInput{}
 	}
 
-	req := c.newRequest(op, input, &DetectEntitiesOutput{})
+	req := c.newRequest(op, input, &types.DetectEntitiesOutput{})
 	return DetectEntitiesRequest{Request: req, Input: input, Copy: c.DetectEntitiesRequest}
 }
 
@@ -116,8 +51,8 @@ func (c *Client) DetectEntitiesRequest(input *DetectEntitiesInput) DetectEntitie
 // DetectEntities API operation.
 type DetectEntitiesRequest struct {
 	*aws.Request
-	Input *DetectEntitiesInput
-	Copy  func(*DetectEntitiesInput) DetectEntitiesRequest
+	Input *types.DetectEntitiesInput
+	Copy  func(*types.DetectEntitiesInput) DetectEntitiesRequest
 }
 
 // Send marshals and sends the DetectEntities API request.
@@ -129,7 +64,7 @@ func (r DetectEntitiesRequest) Send(ctx context.Context) (*DetectEntitiesRespons
 	}
 
 	resp := &DetectEntitiesResponse{
-		DetectEntitiesOutput: r.Request.Data.(*DetectEntitiesOutput),
+		DetectEntitiesOutput: r.Request.Data.(*types.DetectEntitiesOutput),
 		response:             &aws.Response{Request: r.Request},
 	}
 
@@ -139,7 +74,7 @@ func (r DetectEntitiesRequest) Send(ctx context.Context) (*DetectEntitiesRespons
 // DetectEntitiesResponse is the response type for the
 // DetectEntities API operation.
 type DetectEntitiesResponse struct {
-	*DetectEntitiesOutput
+	*types.DetectEntitiesOutput
 
 	response *aws.Response
 }

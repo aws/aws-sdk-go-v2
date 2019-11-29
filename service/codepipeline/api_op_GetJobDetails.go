@@ -6,53 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/codepipeline/types"
 )
-
-// Represents the input of a GetJobDetails action.
-type GetJobDetailsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The unique system-generated ID for the job.
-	//
-	// JobId is a required field
-	JobId *string `locationName:"jobId" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetJobDetailsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetJobDetailsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetJobDetailsInput"}
-
-	if s.JobId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("JobId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Represents the output of a GetJobDetails action.
-type GetJobDetailsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The details of the job.
-	//
-	// If AWSSessionCredentials is used, a long-running job can call GetJobDetails
-	// again to obtain new credentials.
-	JobDetails *JobDetails `locationName:"jobDetails" type:"structure"`
-}
-
-// String returns the string representation
-func (s GetJobDetailsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetJobDetails = "GetJobDetails"
 
@@ -74,7 +29,7 @@ const opGetJobDetails = "GetJobDetails"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/GetJobDetails
-func (c *Client) GetJobDetailsRequest(input *GetJobDetailsInput) GetJobDetailsRequest {
+func (c *Client) GetJobDetailsRequest(input *types.GetJobDetailsInput) GetJobDetailsRequest {
 	op := &aws.Operation{
 		Name:       opGetJobDetails,
 		HTTPMethod: "POST",
@@ -82,10 +37,10 @@ func (c *Client) GetJobDetailsRequest(input *GetJobDetailsInput) GetJobDetailsRe
 	}
 
 	if input == nil {
-		input = &GetJobDetailsInput{}
+		input = &types.GetJobDetailsInput{}
 	}
 
-	req := c.newRequest(op, input, &GetJobDetailsOutput{})
+	req := c.newRequest(op, input, &types.GetJobDetailsOutput{})
 	return GetJobDetailsRequest{Request: req, Input: input, Copy: c.GetJobDetailsRequest}
 }
 
@@ -93,8 +48,8 @@ func (c *Client) GetJobDetailsRequest(input *GetJobDetailsInput) GetJobDetailsRe
 // GetJobDetails API operation.
 type GetJobDetailsRequest struct {
 	*aws.Request
-	Input *GetJobDetailsInput
-	Copy  func(*GetJobDetailsInput) GetJobDetailsRequest
+	Input *types.GetJobDetailsInput
+	Copy  func(*types.GetJobDetailsInput) GetJobDetailsRequest
 }
 
 // Send marshals and sends the GetJobDetails API request.
@@ -106,7 +61,7 @@ func (r GetJobDetailsRequest) Send(ctx context.Context) (*GetJobDetailsResponse,
 	}
 
 	resp := &GetJobDetailsResponse{
-		GetJobDetailsOutput: r.Request.Data.(*GetJobDetailsOutput),
+		GetJobDetailsOutput: r.Request.Data.(*types.GetJobDetailsOutput),
 		response:            &aws.Response{Request: r.Request},
 	}
 
@@ -116,7 +71,7 @@ func (r GetJobDetailsRequest) Send(ctx context.Context) (*GetJobDetailsResponse,
 // GetJobDetailsResponse is the response type for the
 // GetJobDetails API operation.
 type GetJobDetailsResponse struct {
-	*GetJobDetailsOutput
+	*types.GetJobDetailsOutput
 
 	response *aws.Response
 }

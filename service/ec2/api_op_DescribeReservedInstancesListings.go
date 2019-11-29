@@ -6,49 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-// Contains the parameters for DescribeReservedInstancesListings.
-type DescribeReservedInstancesListingsInput struct {
-	_ struct{} `type:"structure"`
-
-	// One or more filters.
-	//
-	//    * reserved-instances-id - The ID of the Reserved Instances.
-	//
-	//    * reserved-instances-listing-id - The ID of the Reserved Instances listing.
-	//
-	//    * status - The status of the Reserved Instance listing (pending | active
-	//    | cancelled | closed).
-	//
-	//    * status-message - The reason for the status.
-	Filters []Filter `locationName:"Filter" locationNameList:"Filter" type:"list"`
-
-	// One or more Reserved Instance IDs.
-	ReservedInstancesId *string `locationName:"reservedInstancesId" type:"string"`
-
-	// One or more Reserved Instance listing IDs.
-	ReservedInstancesListingId *string `locationName:"reservedInstancesListingId" type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeReservedInstancesListingsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Contains the output of DescribeReservedInstancesListings.
-type DescribeReservedInstancesListingsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Information about the Reserved Instance listing.
-	ReservedInstancesListings []ReservedInstancesListing `locationName:"reservedInstancesListingsSet" locationNameList:"item" type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeReservedInstancesListingsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeReservedInstancesListings = "DescribeReservedInstancesListings"
 
@@ -86,7 +45,7 @@ const opDescribeReservedInstancesListings = "DescribeReservedInstancesListings"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeReservedInstancesListings
-func (c *Client) DescribeReservedInstancesListingsRequest(input *DescribeReservedInstancesListingsInput) DescribeReservedInstancesListingsRequest {
+func (c *Client) DescribeReservedInstancesListingsRequest(input *types.DescribeReservedInstancesListingsInput) DescribeReservedInstancesListingsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeReservedInstancesListings,
 		HTTPMethod: "POST",
@@ -94,10 +53,10 @@ func (c *Client) DescribeReservedInstancesListingsRequest(input *DescribeReserve
 	}
 
 	if input == nil {
-		input = &DescribeReservedInstancesListingsInput{}
+		input = &types.DescribeReservedInstancesListingsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeReservedInstancesListingsOutput{})
+	req := c.newRequest(op, input, &types.DescribeReservedInstancesListingsOutput{})
 	return DescribeReservedInstancesListingsRequest{Request: req, Input: input, Copy: c.DescribeReservedInstancesListingsRequest}
 }
 
@@ -105,8 +64,8 @@ func (c *Client) DescribeReservedInstancesListingsRequest(input *DescribeReserve
 // DescribeReservedInstancesListings API operation.
 type DescribeReservedInstancesListingsRequest struct {
 	*aws.Request
-	Input *DescribeReservedInstancesListingsInput
-	Copy  func(*DescribeReservedInstancesListingsInput) DescribeReservedInstancesListingsRequest
+	Input *types.DescribeReservedInstancesListingsInput
+	Copy  func(*types.DescribeReservedInstancesListingsInput) DescribeReservedInstancesListingsRequest
 }
 
 // Send marshals and sends the DescribeReservedInstancesListings API request.
@@ -118,7 +77,7 @@ func (r DescribeReservedInstancesListingsRequest) Send(ctx context.Context) (*De
 	}
 
 	resp := &DescribeReservedInstancesListingsResponse{
-		DescribeReservedInstancesListingsOutput: r.Request.Data.(*DescribeReservedInstancesListingsOutput),
+		DescribeReservedInstancesListingsOutput: r.Request.Data.(*types.DescribeReservedInstancesListingsOutput),
 		response:                                &aws.Response{Request: r.Request},
 	}
 
@@ -128,7 +87,7 @@ func (r DescribeReservedInstancesListingsRequest) Send(ctx context.Context) (*De
 // DescribeReservedInstancesListingsResponse is the response type for the
 // DescribeReservedInstancesListings API operation.
 type DescribeReservedInstancesListingsResponse struct {
-	*DescribeReservedInstancesListingsOutput
+	*types.DescribeReservedInstancesListingsOutput
 
 	response *aws.Response
 }

@@ -6,56 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/devicefarm/types"
 )
-
-// Represents a request for a purchase offering.
-type PurchaseOfferingInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the offering.
-	OfferingId *string `locationName:"offeringId" min:"32" type:"string"`
-
-	// The ID of the offering promotion to be applied to the purchase.
-	OfferingPromotionId *string `locationName:"offeringPromotionId" min:"4" type:"string"`
-
-	// The number of device slots you wish to purchase in an offering request.
-	Quantity *int64 `locationName:"quantity" type:"integer"`
-}
-
-// String returns the string representation
-func (s PurchaseOfferingInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *PurchaseOfferingInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "PurchaseOfferingInput"}
-	if s.OfferingId != nil && len(*s.OfferingId) < 32 {
-		invalidParams.Add(aws.NewErrParamMinLen("OfferingId", 32))
-	}
-	if s.OfferingPromotionId != nil && len(*s.OfferingPromotionId) < 4 {
-		invalidParams.Add(aws.NewErrParamMinLen("OfferingPromotionId", 4))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// The result of the purchase offering (e.g., success or failure).
-type PurchaseOfferingOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Represents the offering transaction for the purchase result.
-	OfferingTransaction *OfferingTransaction `locationName:"offeringTransaction" type:"structure"`
-}
-
-// String returns the string representation
-func (s PurchaseOfferingOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opPurchaseOffering = "PurchaseOffering"
 
@@ -77,7 +29,7 @@ const opPurchaseOffering = "PurchaseOffering"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/PurchaseOffering
-func (c *Client) PurchaseOfferingRequest(input *PurchaseOfferingInput) PurchaseOfferingRequest {
+func (c *Client) PurchaseOfferingRequest(input *types.PurchaseOfferingInput) PurchaseOfferingRequest {
 	op := &aws.Operation{
 		Name:       opPurchaseOffering,
 		HTTPMethod: "POST",
@@ -85,10 +37,10 @@ func (c *Client) PurchaseOfferingRequest(input *PurchaseOfferingInput) PurchaseO
 	}
 
 	if input == nil {
-		input = &PurchaseOfferingInput{}
+		input = &types.PurchaseOfferingInput{}
 	}
 
-	req := c.newRequest(op, input, &PurchaseOfferingOutput{})
+	req := c.newRequest(op, input, &types.PurchaseOfferingOutput{})
 	return PurchaseOfferingRequest{Request: req, Input: input, Copy: c.PurchaseOfferingRequest}
 }
 
@@ -96,8 +48,8 @@ func (c *Client) PurchaseOfferingRequest(input *PurchaseOfferingInput) PurchaseO
 // PurchaseOffering API operation.
 type PurchaseOfferingRequest struct {
 	*aws.Request
-	Input *PurchaseOfferingInput
-	Copy  func(*PurchaseOfferingInput) PurchaseOfferingRequest
+	Input *types.PurchaseOfferingInput
+	Copy  func(*types.PurchaseOfferingInput) PurchaseOfferingRequest
 }
 
 // Send marshals and sends the PurchaseOffering API request.
@@ -109,7 +61,7 @@ func (r PurchaseOfferingRequest) Send(ctx context.Context) (*PurchaseOfferingRes
 	}
 
 	resp := &PurchaseOfferingResponse{
-		PurchaseOfferingOutput: r.Request.Data.(*PurchaseOfferingOutput),
+		PurchaseOfferingOutput: r.Request.Data.(*types.PurchaseOfferingOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -119,7 +71,7 @@ func (r PurchaseOfferingRequest) Send(ctx context.Context) (*PurchaseOfferingRes
 // PurchaseOfferingResponse is the response type for the
 // PurchaseOffering API operation.
 type PurchaseOfferingResponse struct {
-	*PurchaseOfferingOutput
+	*types.PurchaseOfferingOutput
 
 	response *aws.Response
 }

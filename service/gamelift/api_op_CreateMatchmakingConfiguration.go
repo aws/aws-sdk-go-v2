@@ -4,160 +4,10 @@ package gamelift
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/gamelift/types"
 )
-
-// Represents the input for a request action.
-type CreateMatchmakingConfigurationInput struct {
-	_ struct{} `type:"structure"`
-
-	// Flag that determines whether a match that was created with this configuration
-	// must be accepted by the matched players. To require acceptance, set to TRUE.
-	//
-	// AcceptanceRequired is a required field
-	AcceptanceRequired *bool `type:"boolean" required:"true"`
-
-	// Length of time (in seconds) to wait for players to accept a proposed match.
-	// If any player rejects the match or fails to accept before the timeout, the
-	// ticket continues to look for an acceptable match.
-	AcceptanceTimeoutSeconds *int64 `min:"1" type:"integer"`
-
-	// Number of player slots in a match to keep open for future players. For example,
-	// if the configuration's rule set specifies a match for a single 12-person
-	// team, and the additional player count is set to 2, only 10 players are selected
-	// for the match.
-	AdditionalPlayerCount *int64 `type:"integer"`
-
-	// Method used to backfill game sessions created with this matchmaking configuration.
-	// Specify MANUAL when your game manages backfill requests manually or does
-	// not use the match backfill feature. Specify AUTOMATIC to have GameLift create
-	// a StartMatchBackfill request whenever a game session has one or more open
-	// slots. Learn more about manual and automatic backfill in Backfill Existing
-	// Games with FlexMatch (https://docs.aws.amazon.com/gamelift/latest/developerguide/match-backfill.html).
-	BackfillMode BackfillMode `type:"string" enum:"true"`
-
-	// Information to be added to all events related to this matchmaking configuration.
-	CustomEventData *string `type:"string"`
-
-	// Meaningful description of the matchmaking configuration.
-	Description *string `min:"1" type:"string"`
-
-	// Set of custom properties for a game session, formatted as key:value pairs.
-	// These properties are passed to a game server process in the GameSession object
-	// with a request to start a new game session (see Start a Game Session (https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession)).
-	// This information is added to the new GameSession object that is created for
-	// a successful match.
-	GameProperties []GameProperty `type:"list"`
-
-	// Set of custom game session properties, formatted as a single string value.
-	// This data is passed to a game server process in the GameSession object with
-	// a request to start a new game session (see Start a Game Session (https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession)).
-	// This information is added to the new GameSession object that is created for
-	// a successful match.
-	GameSessionData *string `min:"1" type:"string"`
-
-	// Amazon Resource Name (ARN (https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html))
-	// that is assigned to a game session queue and uniquely identifies it. Format
-	// is arn:aws:gamelift:<region>:<aws account>:gamesessionqueue/<queue name>.
-	// These queues are used when placing game sessions for matches that are created
-	// with this matchmaking configuration. Queues can be located in any region.
-	//
-	// GameSessionQueueArns is a required field
-	GameSessionQueueArns []string `type:"list" required:"true"`
-
-	// Unique identifier for a matchmaking configuration. This name is used to identify
-	// the configuration associated with a matchmaking request or ticket.
-	//
-	// Name is a required field
-	Name *string `type:"string" required:"true"`
-
-	// SNS topic ARN that is set up to receive matchmaking notifications.
-	NotificationTarget *string `type:"string"`
-
-	// Maximum duration, in seconds, that a matchmaking ticket can remain in process
-	// before timing out. Requests that fail due to timing out can be resubmitted
-	// as needed.
-	//
-	// RequestTimeoutSeconds is a required field
-	RequestTimeoutSeconds *int64 `min:"1" type:"integer" required:"true"`
-
-	// Unique identifier for a matchmaking rule set to use with this configuration.
-	// A matchmaking configuration can only use rule sets that are defined in the
-	// same region.
-	//
-	// RuleSetName is a required field
-	RuleSetName *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s CreateMatchmakingConfigurationInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateMatchmakingConfigurationInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateMatchmakingConfigurationInput"}
-
-	if s.AcceptanceRequired == nil {
-		invalidParams.Add(aws.NewErrParamRequired("AcceptanceRequired"))
-	}
-	if s.AcceptanceTimeoutSeconds != nil && *s.AcceptanceTimeoutSeconds < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("AcceptanceTimeoutSeconds", 1))
-	}
-	if s.Description != nil && len(*s.Description) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Description", 1))
-	}
-	if s.GameSessionData != nil && len(*s.GameSessionData) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("GameSessionData", 1))
-	}
-
-	if s.GameSessionQueueArns == nil {
-		invalidParams.Add(aws.NewErrParamRequired("GameSessionQueueArns"))
-	}
-
-	if s.Name == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Name"))
-	}
-
-	if s.RequestTimeoutSeconds == nil {
-		invalidParams.Add(aws.NewErrParamRequired("RequestTimeoutSeconds"))
-	}
-	if s.RequestTimeoutSeconds != nil && *s.RequestTimeoutSeconds < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("RequestTimeoutSeconds", 1))
-	}
-
-	if s.RuleSetName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("RuleSetName"))
-	}
-	if s.GameProperties != nil {
-		for i, v := range s.GameProperties {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "GameProperties", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Represents the returned data in response to a request action.
-type CreateMatchmakingConfigurationOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Object that describes the newly created matchmaking configuration.
-	Configuration *MatchmakingConfiguration `type:"structure"`
-}
-
-// String returns the string representation
-func (s CreateMatchmakingConfigurationOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCreateMatchmakingConfiguration = "CreateMatchmakingConfiguration"
 
@@ -217,7 +67,7 @@ const opCreateMatchmakingConfiguration = "CreateMatchmakingConfiguration"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/CreateMatchmakingConfiguration
-func (c *Client) CreateMatchmakingConfigurationRequest(input *CreateMatchmakingConfigurationInput) CreateMatchmakingConfigurationRequest {
+func (c *Client) CreateMatchmakingConfigurationRequest(input *types.CreateMatchmakingConfigurationInput) CreateMatchmakingConfigurationRequest {
 	op := &aws.Operation{
 		Name:       opCreateMatchmakingConfiguration,
 		HTTPMethod: "POST",
@@ -225,10 +75,10 @@ func (c *Client) CreateMatchmakingConfigurationRequest(input *CreateMatchmakingC
 	}
 
 	if input == nil {
-		input = &CreateMatchmakingConfigurationInput{}
+		input = &types.CreateMatchmakingConfigurationInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateMatchmakingConfigurationOutput{})
+	req := c.newRequest(op, input, &types.CreateMatchmakingConfigurationOutput{})
 	return CreateMatchmakingConfigurationRequest{Request: req, Input: input, Copy: c.CreateMatchmakingConfigurationRequest}
 }
 
@@ -236,8 +86,8 @@ func (c *Client) CreateMatchmakingConfigurationRequest(input *CreateMatchmakingC
 // CreateMatchmakingConfiguration API operation.
 type CreateMatchmakingConfigurationRequest struct {
 	*aws.Request
-	Input *CreateMatchmakingConfigurationInput
-	Copy  func(*CreateMatchmakingConfigurationInput) CreateMatchmakingConfigurationRequest
+	Input *types.CreateMatchmakingConfigurationInput
+	Copy  func(*types.CreateMatchmakingConfigurationInput) CreateMatchmakingConfigurationRequest
 }
 
 // Send marshals and sends the CreateMatchmakingConfiguration API request.
@@ -249,7 +99,7 @@ func (r CreateMatchmakingConfigurationRequest) Send(ctx context.Context) (*Creat
 	}
 
 	resp := &CreateMatchmakingConfigurationResponse{
-		CreateMatchmakingConfigurationOutput: r.Request.Data.(*CreateMatchmakingConfigurationOutput),
+		CreateMatchmakingConfigurationOutput: r.Request.Data.(*types.CreateMatchmakingConfigurationOutput),
 		response:                             &aws.Response{Request: r.Request},
 	}
 
@@ -259,7 +109,7 @@ func (r CreateMatchmakingConfigurationRequest) Send(ctx context.Context) (*Creat
 // CreateMatchmakingConfigurationResponse is the response type for the
 // CreateMatchmakingConfiguration API operation.
 type CreateMatchmakingConfigurationResponse struct {
-	*CreateMatchmakingConfigurationOutput
+	*types.CreateMatchmakingConfigurationOutput
 
 	response *aws.Response
 }

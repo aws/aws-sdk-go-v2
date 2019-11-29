@@ -6,96 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-type SearchTransitGatewayRoutesInput struct {
-	_ struct{} `type:"structure"`
-
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have
-	// the required permissions, the error response is DryRunOperation. Otherwise,
-	// it is UnauthorizedOperation.
-	DryRun *bool `type:"boolean"`
-
-	// One or more filters. The possible values are:
-	//
-	//    * attachment.transit-gateway-attachment-id- The id of the transit gateway
-	//    attachment.
-	//
-	//    * attachment.resource-id - The resource id of the transit gateway attachment.
-	//
-	//    * attachment.resource-type - The attachment resource type (vpc | vpn).
-	//
-	//    * route-search.exact-match - The exact match of the specified filter.
-	//
-	//    * route-search.longest-prefix-match - The longest prefix that matches
-	//    the route.
-	//
-	//    * route-search.subnet-of-match - The routes with a subnet that match the
-	//    specified CIDR filter.
-	//
-	//    * route-search.supernet-of-match - The routes with a CIDR that encompass
-	//    the CIDR filter. For example, if you have 10.0.1.0/29 and 10.0.1.0/31
-	//    routes in your route table and you specify supernet-of-match as 10.0.1.0/30,
-	//    then the result returns 10.0.1.0/29.
-	//
-	//    * state - The state of the route (active | blackhole).
-	//
-	//    * type - The type of route (propagated | static).
-	//
-	// Filters is a required field
-	Filters []Filter `locationName:"Filter" locationNameList:"Filter" type:"list" required:"true"`
-
-	// The maximum number of routes to return.
-	MaxResults *int64 `min:"5" type:"integer"`
-
-	// The ID of the transit gateway route table.
-	//
-	// TransitGatewayRouteTableId is a required field
-	TransitGatewayRouteTableId *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s SearchTransitGatewayRoutesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *SearchTransitGatewayRoutesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "SearchTransitGatewayRoutesInput"}
-
-	if s.Filters == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Filters"))
-	}
-	if s.MaxResults != nil && *s.MaxResults < 5 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 5))
-	}
-
-	if s.TransitGatewayRouteTableId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("TransitGatewayRouteTableId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type SearchTransitGatewayRoutesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Indicates whether there are additional routes available.
-	AdditionalRoutesAvailable *bool `locationName:"additionalRoutesAvailable" type:"boolean"`
-
-	// Information about the routes.
-	Routes []TransitGatewayRoute `locationName:"routeSet" locationNameList:"item" type:"list"`
-}
-
-// String returns the string representation
-func (s SearchTransitGatewayRoutesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opSearchTransitGatewayRoutes = "SearchTransitGatewayRoutes"
 
@@ -112,7 +24,7 @@ const opSearchTransitGatewayRoutes = "SearchTransitGatewayRoutes"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/SearchTransitGatewayRoutes
-func (c *Client) SearchTransitGatewayRoutesRequest(input *SearchTransitGatewayRoutesInput) SearchTransitGatewayRoutesRequest {
+func (c *Client) SearchTransitGatewayRoutesRequest(input *types.SearchTransitGatewayRoutesInput) SearchTransitGatewayRoutesRequest {
 	op := &aws.Operation{
 		Name:       opSearchTransitGatewayRoutes,
 		HTTPMethod: "POST",
@@ -120,10 +32,10 @@ func (c *Client) SearchTransitGatewayRoutesRequest(input *SearchTransitGatewayRo
 	}
 
 	if input == nil {
-		input = &SearchTransitGatewayRoutesInput{}
+		input = &types.SearchTransitGatewayRoutesInput{}
 	}
 
-	req := c.newRequest(op, input, &SearchTransitGatewayRoutesOutput{})
+	req := c.newRequest(op, input, &types.SearchTransitGatewayRoutesOutput{})
 	return SearchTransitGatewayRoutesRequest{Request: req, Input: input, Copy: c.SearchTransitGatewayRoutesRequest}
 }
 
@@ -131,8 +43,8 @@ func (c *Client) SearchTransitGatewayRoutesRequest(input *SearchTransitGatewayRo
 // SearchTransitGatewayRoutes API operation.
 type SearchTransitGatewayRoutesRequest struct {
 	*aws.Request
-	Input *SearchTransitGatewayRoutesInput
-	Copy  func(*SearchTransitGatewayRoutesInput) SearchTransitGatewayRoutesRequest
+	Input *types.SearchTransitGatewayRoutesInput
+	Copy  func(*types.SearchTransitGatewayRoutesInput) SearchTransitGatewayRoutesRequest
 }
 
 // Send marshals and sends the SearchTransitGatewayRoutes API request.
@@ -144,7 +56,7 @@ func (r SearchTransitGatewayRoutesRequest) Send(ctx context.Context) (*SearchTra
 	}
 
 	resp := &SearchTransitGatewayRoutesResponse{
-		SearchTransitGatewayRoutesOutput: r.Request.Data.(*SearchTransitGatewayRoutesOutput),
+		SearchTransitGatewayRoutesOutput: r.Request.Data.(*types.SearchTransitGatewayRoutesOutput),
 		response:                         &aws.Response{Request: r.Request},
 	}
 
@@ -154,7 +66,7 @@ func (r SearchTransitGatewayRoutesRequest) Send(ctx context.Context) (*SearchTra
 // SearchTransitGatewayRoutesResponse is the response type for the
 // SearchTransitGatewayRoutes API operation.
 type SearchTransitGatewayRoutesResponse struct {
-	*SearchTransitGatewayRoutesOutput
+	*types.SearchTransitGatewayRoutesOutput
 
 	response *aws.Response
 }

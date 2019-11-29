@@ -6,49 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/directoryservice/types"
 )
-
-type AcceptSharedDirectoryInput struct {
-	_ struct{} `type:"structure"`
-
-	// Identifier of the shared directory in the directory consumer account. This
-	// identifier is different for each directory owner account.
-	//
-	// SharedDirectoryId is a required field
-	SharedDirectoryId *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s AcceptSharedDirectoryInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *AcceptSharedDirectoryInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "AcceptSharedDirectoryInput"}
-
-	if s.SharedDirectoryId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("SharedDirectoryId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type AcceptSharedDirectoryOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The shared directory in the directory consumer account.
-	SharedDirectory *SharedDirectory `type:"structure"`
-}
-
-// String returns the string representation
-func (s AcceptSharedDirectoryOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opAcceptSharedDirectory = "AcceptSharedDirectory"
 
@@ -66,7 +25,7 @@ const opAcceptSharedDirectory = "AcceptSharedDirectory"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/AcceptSharedDirectory
-func (c *Client) AcceptSharedDirectoryRequest(input *AcceptSharedDirectoryInput) AcceptSharedDirectoryRequest {
+func (c *Client) AcceptSharedDirectoryRequest(input *types.AcceptSharedDirectoryInput) AcceptSharedDirectoryRequest {
 	op := &aws.Operation{
 		Name:       opAcceptSharedDirectory,
 		HTTPMethod: "POST",
@@ -74,10 +33,10 @@ func (c *Client) AcceptSharedDirectoryRequest(input *AcceptSharedDirectoryInput)
 	}
 
 	if input == nil {
-		input = &AcceptSharedDirectoryInput{}
+		input = &types.AcceptSharedDirectoryInput{}
 	}
 
-	req := c.newRequest(op, input, &AcceptSharedDirectoryOutput{})
+	req := c.newRequest(op, input, &types.AcceptSharedDirectoryOutput{})
 	return AcceptSharedDirectoryRequest{Request: req, Input: input, Copy: c.AcceptSharedDirectoryRequest}
 }
 
@@ -85,8 +44,8 @@ func (c *Client) AcceptSharedDirectoryRequest(input *AcceptSharedDirectoryInput)
 // AcceptSharedDirectory API operation.
 type AcceptSharedDirectoryRequest struct {
 	*aws.Request
-	Input *AcceptSharedDirectoryInput
-	Copy  func(*AcceptSharedDirectoryInput) AcceptSharedDirectoryRequest
+	Input *types.AcceptSharedDirectoryInput
+	Copy  func(*types.AcceptSharedDirectoryInput) AcceptSharedDirectoryRequest
 }
 
 // Send marshals and sends the AcceptSharedDirectory API request.
@@ -98,7 +57,7 @@ func (r AcceptSharedDirectoryRequest) Send(ctx context.Context) (*AcceptSharedDi
 	}
 
 	resp := &AcceptSharedDirectoryResponse{
-		AcceptSharedDirectoryOutput: r.Request.Data.(*AcceptSharedDirectoryOutput),
+		AcceptSharedDirectoryOutput: r.Request.Data.(*types.AcceptSharedDirectoryOutput),
 		response:                    &aws.Response{Request: r.Request},
 	}
 
@@ -108,7 +67,7 @@ func (r AcceptSharedDirectoryRequest) Send(ctx context.Context) (*AcceptSharedDi
 // AcceptSharedDirectoryResponse is the response type for the
 // AcceptSharedDirectory API operation.
 type AcceptSharedDirectoryResponse struct {
-	*AcceptSharedDirectoryOutput
+	*types.AcceptSharedDirectoryOutput
 
 	response *aws.Response
 }

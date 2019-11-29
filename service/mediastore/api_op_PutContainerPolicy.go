@@ -6,64 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/mediastore/types"
 )
-
-type PutContainerPolicyInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the container.
-	//
-	// ContainerName is a required field
-	ContainerName *string `min:"1" type:"string" required:"true"`
-
-	// The contents of the policy, which includes the following:
-	//
-	//    * One Version tag
-	//
-	//    * One Statement tag that contains the standard tags for the policy.
-	//
-	// Policy is a required field
-	Policy *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s PutContainerPolicyInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *PutContainerPolicyInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "PutContainerPolicyInput"}
-
-	if s.ContainerName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ContainerName"))
-	}
-	if s.ContainerName != nil && len(*s.ContainerName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ContainerName", 1))
-	}
-
-	if s.Policy == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Policy"))
-	}
-	if s.Policy != nil && len(*s.Policy) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Policy", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type PutContainerPolicyOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s PutContainerPolicyOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opPutContainerPolicy = "PutContainerPolicy"
 
@@ -87,7 +31,7 @@ const opPutContainerPolicy = "PutContainerPolicy"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mediastore-2017-09-01/PutContainerPolicy
-func (c *Client) PutContainerPolicyRequest(input *PutContainerPolicyInput) PutContainerPolicyRequest {
+func (c *Client) PutContainerPolicyRequest(input *types.PutContainerPolicyInput) PutContainerPolicyRequest {
 	op := &aws.Operation{
 		Name:       opPutContainerPolicy,
 		HTTPMethod: "POST",
@@ -95,10 +39,10 @@ func (c *Client) PutContainerPolicyRequest(input *PutContainerPolicyInput) PutCo
 	}
 
 	if input == nil {
-		input = &PutContainerPolicyInput{}
+		input = &types.PutContainerPolicyInput{}
 	}
 
-	req := c.newRequest(op, input, &PutContainerPolicyOutput{})
+	req := c.newRequest(op, input, &types.PutContainerPolicyOutput{})
 	return PutContainerPolicyRequest{Request: req, Input: input, Copy: c.PutContainerPolicyRequest}
 }
 
@@ -106,8 +50,8 @@ func (c *Client) PutContainerPolicyRequest(input *PutContainerPolicyInput) PutCo
 // PutContainerPolicy API operation.
 type PutContainerPolicyRequest struct {
 	*aws.Request
-	Input *PutContainerPolicyInput
-	Copy  func(*PutContainerPolicyInput) PutContainerPolicyRequest
+	Input *types.PutContainerPolicyInput
+	Copy  func(*types.PutContainerPolicyInput) PutContainerPolicyRequest
 }
 
 // Send marshals and sends the PutContainerPolicy API request.
@@ -119,7 +63,7 @@ func (r PutContainerPolicyRequest) Send(ctx context.Context) (*PutContainerPolic
 	}
 
 	resp := &PutContainerPolicyResponse{
-		PutContainerPolicyOutput: r.Request.Data.(*PutContainerPolicyOutput),
+		PutContainerPolicyOutput: r.Request.Data.(*types.PutContainerPolicyOutput),
 		response:                 &aws.Response{Request: r.Request},
 	}
 
@@ -129,7 +73,7 @@ func (r PutContainerPolicyRequest) Send(ctx context.Context) (*PutContainerPolic
 // PutContainerPolicyResponse is the response type for the
 // PutContainerPolicy API operation.
 type PutContainerPolicyResponse struct {
-	*PutContainerPolicyOutput
+	*types.PutContainerPolicyOutput
 
 	response *aws.Response
 }

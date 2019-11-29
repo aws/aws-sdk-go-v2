@@ -6,77 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/sns/types"
 )
-
-// Input for GetSubscriptionAttributes.
-type GetSubscriptionAttributesInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ARN of the subscription whose properties you want to get.
-	//
-	// SubscriptionArn is a required field
-	SubscriptionArn *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetSubscriptionAttributesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetSubscriptionAttributesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetSubscriptionAttributesInput"}
-
-	if s.SubscriptionArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("SubscriptionArn"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Response for GetSubscriptionAttributes action.
-type GetSubscriptionAttributesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A map of the subscription's attributes. Attributes in this map include the
-	// following:
-	//
-	//    * ConfirmationWasAuthenticated – true if the subscription confirmation
-	//    request was authenticated.
-	//
-	//    * DeliveryPolicy – The JSON serialization of the subscription's delivery
-	//    policy.
-	//
-	//    * EffectiveDeliveryPolicy – The JSON serialization of the effective
-	//    delivery policy that takes into account the topic delivery policy and
-	//    account system defaults.
-	//
-	//    * FilterPolicy – The filter policy JSON that is assigned to the subscription.
-	//
-	//    * Owner – The AWS account ID of the subscription's owner.
-	//
-	//    * PendingConfirmation – true if the subscription hasn't been confirmed.
-	//    To confirm a pending subscription, call the ConfirmSubscription action
-	//    with a confirmation token.
-	//
-	//    * RawMessageDelivery – true if raw message delivery is enabled for the
-	//    subscription. Raw messages are free of JSON formatting and can be sent
-	//    to HTTP/S and Amazon SQS endpoints.
-	//
-	//    * SubscriptionArn – The subscription's ARN.
-	//
-	//    * TopicArn – The topic ARN that the subscription is associated with.
-	Attributes map[string]string `type:"map"`
-}
-
-// String returns the string representation
-func (s GetSubscriptionAttributesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetSubscriptionAttributes = "GetSubscriptionAttributes"
 
@@ -93,7 +24,7 @@ const opGetSubscriptionAttributes = "GetSubscriptionAttributes"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/GetSubscriptionAttributes
-func (c *Client) GetSubscriptionAttributesRequest(input *GetSubscriptionAttributesInput) GetSubscriptionAttributesRequest {
+func (c *Client) GetSubscriptionAttributesRequest(input *types.GetSubscriptionAttributesInput) GetSubscriptionAttributesRequest {
 	op := &aws.Operation{
 		Name:       opGetSubscriptionAttributes,
 		HTTPMethod: "POST",
@@ -101,10 +32,10 @@ func (c *Client) GetSubscriptionAttributesRequest(input *GetSubscriptionAttribut
 	}
 
 	if input == nil {
-		input = &GetSubscriptionAttributesInput{}
+		input = &types.GetSubscriptionAttributesInput{}
 	}
 
-	req := c.newRequest(op, input, &GetSubscriptionAttributesOutput{})
+	req := c.newRequest(op, input, &types.GetSubscriptionAttributesOutput{})
 	return GetSubscriptionAttributesRequest{Request: req, Input: input, Copy: c.GetSubscriptionAttributesRequest}
 }
 
@@ -112,8 +43,8 @@ func (c *Client) GetSubscriptionAttributesRequest(input *GetSubscriptionAttribut
 // GetSubscriptionAttributes API operation.
 type GetSubscriptionAttributesRequest struct {
 	*aws.Request
-	Input *GetSubscriptionAttributesInput
-	Copy  func(*GetSubscriptionAttributesInput) GetSubscriptionAttributesRequest
+	Input *types.GetSubscriptionAttributesInput
+	Copy  func(*types.GetSubscriptionAttributesInput) GetSubscriptionAttributesRequest
 }
 
 // Send marshals and sends the GetSubscriptionAttributes API request.
@@ -125,7 +56,7 @@ func (r GetSubscriptionAttributesRequest) Send(ctx context.Context) (*GetSubscri
 	}
 
 	resp := &GetSubscriptionAttributesResponse{
-		GetSubscriptionAttributesOutput: r.Request.Data.(*GetSubscriptionAttributesOutput),
+		GetSubscriptionAttributesOutput: r.Request.Data.(*types.GetSubscriptionAttributesOutput),
 		response:                        &aws.Response{Request: r.Request},
 	}
 
@@ -135,7 +66,7 @@ func (r GetSubscriptionAttributesRequest) Send(ctx context.Context) (*GetSubscri
 // GetSubscriptionAttributesResponse is the response type for the
 // GetSubscriptionAttributes API operation.
 type GetSubscriptionAttributesResponse struct {
-	*GetSubscriptionAttributesOutput
+	*types.GetSubscriptionAttributesOutput
 
 	response *aws.Response
 }

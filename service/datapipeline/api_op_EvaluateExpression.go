@@ -6,76 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/datapipeline/types"
 )
-
-// Contains the parameters for EvaluateExpression.
-type EvaluateExpressionInput struct {
-	_ struct{} `type:"structure"`
-
-	// The expression to evaluate.
-	//
-	// Expression is a required field
-	Expression *string `locationName:"expression" type:"string" required:"true"`
-
-	// The ID of the object.
-	//
-	// ObjectId is a required field
-	ObjectId *string `locationName:"objectId" min:"1" type:"string" required:"true"`
-
-	// The ID of the pipeline.
-	//
-	// PipelineId is a required field
-	PipelineId *string `locationName:"pipelineId" min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s EvaluateExpressionInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *EvaluateExpressionInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "EvaluateExpressionInput"}
-
-	if s.Expression == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Expression"))
-	}
-
-	if s.ObjectId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ObjectId"))
-	}
-	if s.ObjectId != nil && len(*s.ObjectId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ObjectId", 1))
-	}
-
-	if s.PipelineId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("PipelineId"))
-	}
-	if s.PipelineId != nil && len(*s.PipelineId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("PipelineId", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Contains the output of EvaluateExpression.
-type EvaluateExpressionOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The evaluated expression.
-	//
-	// EvaluatedExpression is a required field
-	EvaluatedExpression *string `locationName:"evaluatedExpression" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s EvaluateExpressionOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opEvaluateExpression = "EvaluateExpression"
 
@@ -94,7 +26,7 @@ const opEvaluateExpression = "EvaluateExpression"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/datapipeline-2012-10-29/EvaluateExpression
-func (c *Client) EvaluateExpressionRequest(input *EvaluateExpressionInput) EvaluateExpressionRequest {
+func (c *Client) EvaluateExpressionRequest(input *types.EvaluateExpressionInput) EvaluateExpressionRequest {
 	op := &aws.Operation{
 		Name:       opEvaluateExpression,
 		HTTPMethod: "POST",
@@ -102,10 +34,10 @@ func (c *Client) EvaluateExpressionRequest(input *EvaluateExpressionInput) Evalu
 	}
 
 	if input == nil {
-		input = &EvaluateExpressionInput{}
+		input = &types.EvaluateExpressionInput{}
 	}
 
-	req := c.newRequest(op, input, &EvaluateExpressionOutput{})
+	req := c.newRequest(op, input, &types.EvaluateExpressionOutput{})
 	return EvaluateExpressionRequest{Request: req, Input: input, Copy: c.EvaluateExpressionRequest}
 }
 
@@ -113,8 +45,8 @@ func (c *Client) EvaluateExpressionRequest(input *EvaluateExpressionInput) Evalu
 // EvaluateExpression API operation.
 type EvaluateExpressionRequest struct {
 	*aws.Request
-	Input *EvaluateExpressionInput
-	Copy  func(*EvaluateExpressionInput) EvaluateExpressionRequest
+	Input *types.EvaluateExpressionInput
+	Copy  func(*types.EvaluateExpressionInput) EvaluateExpressionRequest
 }
 
 // Send marshals and sends the EvaluateExpression API request.
@@ -126,7 +58,7 @@ func (r EvaluateExpressionRequest) Send(ctx context.Context) (*EvaluateExpressio
 	}
 
 	resp := &EvaluateExpressionResponse{
-		EvaluateExpressionOutput: r.Request.Data.(*EvaluateExpressionOutput),
+		EvaluateExpressionOutput: r.Request.Data.(*types.EvaluateExpressionOutput),
 		response:                 &aws.Response{Request: r.Request},
 	}
 
@@ -136,7 +68,7 @@ func (r EvaluateExpressionRequest) Send(ctx context.Context) (*EvaluateExpressio
 // EvaluateExpressionResponse is the response type for the
 // EvaluateExpression API operation.
 type EvaluateExpressionResponse struct {
-	*EvaluateExpressionOutput
+	*types.EvaluateExpressionOutput
 
 	response *aws.Response
 }

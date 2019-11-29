@@ -6,86 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/restjson"
+	"github.com/aws/aws-sdk-go-v2/service/workdocs/types"
 )
-
-type DeleteNotificationSubscriptionInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the organization.
-	//
-	// OrganizationId is a required field
-	OrganizationId *string `location:"uri" locationName:"OrganizationId" min:"1" type:"string" required:"true"`
-
-	// The ID of the subscription.
-	//
-	// SubscriptionId is a required field
-	SubscriptionId *string `location:"uri" locationName:"SubscriptionId" min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteNotificationSubscriptionInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteNotificationSubscriptionInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteNotificationSubscriptionInput"}
-
-	if s.OrganizationId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("OrganizationId"))
-	}
-	if s.OrganizationId != nil && len(*s.OrganizationId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("OrganizationId", 1))
-	}
-
-	if s.SubscriptionId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("SubscriptionId"))
-	}
-	if s.SubscriptionId != nil && len(*s.SubscriptionId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("SubscriptionId", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteNotificationSubscriptionInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.OrganizationId != nil {
-		v := *s.OrganizationId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "OrganizationId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.SubscriptionId != nil {
-		v := *s.SubscriptionId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "SubscriptionId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type DeleteNotificationSubscriptionOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteNotificationSubscriptionOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteNotificationSubscriptionOutput) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
 
 const opDeleteNotificationSubscription = "DeleteNotificationSubscription"
 
@@ -102,7 +26,7 @@ const opDeleteNotificationSubscription = "DeleteNotificationSubscription"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/DeleteNotificationSubscription
-func (c *Client) DeleteNotificationSubscriptionRequest(input *DeleteNotificationSubscriptionInput) DeleteNotificationSubscriptionRequest {
+func (c *Client) DeleteNotificationSubscriptionRequest(input *types.DeleteNotificationSubscriptionInput) DeleteNotificationSubscriptionRequest {
 	op := &aws.Operation{
 		Name:       opDeleteNotificationSubscription,
 		HTTPMethod: "DELETE",
@@ -110,10 +34,10 @@ func (c *Client) DeleteNotificationSubscriptionRequest(input *DeleteNotification
 	}
 
 	if input == nil {
-		input = &DeleteNotificationSubscriptionInput{}
+		input = &types.DeleteNotificationSubscriptionInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteNotificationSubscriptionOutput{})
+	req := c.newRequest(op, input, &types.DeleteNotificationSubscriptionOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return DeleteNotificationSubscriptionRequest{Request: req, Input: input, Copy: c.DeleteNotificationSubscriptionRequest}
@@ -123,8 +47,8 @@ func (c *Client) DeleteNotificationSubscriptionRequest(input *DeleteNotification
 // DeleteNotificationSubscription API operation.
 type DeleteNotificationSubscriptionRequest struct {
 	*aws.Request
-	Input *DeleteNotificationSubscriptionInput
-	Copy  func(*DeleteNotificationSubscriptionInput) DeleteNotificationSubscriptionRequest
+	Input *types.DeleteNotificationSubscriptionInput
+	Copy  func(*types.DeleteNotificationSubscriptionInput) DeleteNotificationSubscriptionRequest
 }
 
 // Send marshals and sends the DeleteNotificationSubscription API request.
@@ -136,7 +60,7 @@ func (r DeleteNotificationSubscriptionRequest) Send(ctx context.Context) (*Delet
 	}
 
 	resp := &DeleteNotificationSubscriptionResponse{
-		DeleteNotificationSubscriptionOutput: r.Request.Data.(*DeleteNotificationSubscriptionOutput),
+		DeleteNotificationSubscriptionOutput: r.Request.Data.(*types.DeleteNotificationSubscriptionOutput),
 		response:                             &aws.Response{Request: r.Request},
 	}
 
@@ -146,7 +70,7 @@ func (r DeleteNotificationSubscriptionRequest) Send(ctx context.Context) (*Delet
 // DeleteNotificationSubscriptionResponse is the response type for the
 // DeleteNotificationSubscription API operation.
 type DeleteNotificationSubscriptionResponse struct {
-	*DeleteNotificationSubscriptionOutput
+	*types.DeleteNotificationSubscriptionOutput
 
 	response *aws.Response
 }

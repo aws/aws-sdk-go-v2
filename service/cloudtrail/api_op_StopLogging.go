@@ -6,52 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/cloudtrail/types"
 )
-
-// Passes the request to CloudTrail to stop logging AWS API calls for the specified
-// account.
-type StopLoggingInput struct {
-	_ struct{} `type:"structure"`
-
-	// Specifies the name or the CloudTrail ARN of the trail for which CloudTrail
-	// will stop logging AWS API calls. The format of a trail ARN is:
-	//
-	// arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail
-	//
-	// Name is a required field
-	Name *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s StopLoggingInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *StopLoggingInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "StopLoggingInput"}
-
-	if s.Name == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Name"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Returns the objects or data listed below if successful. Otherwise, returns
-// an error.
-type StopLoggingOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s StopLoggingOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opStopLogging = "StopLogging"
 
@@ -74,7 +30,7 @@ const opStopLogging = "StopLogging"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/StopLogging
-func (c *Client) StopLoggingRequest(input *StopLoggingInput) StopLoggingRequest {
+func (c *Client) StopLoggingRequest(input *types.StopLoggingInput) StopLoggingRequest {
 	op := &aws.Operation{
 		Name:       opStopLogging,
 		HTTPMethod: "POST",
@@ -82,10 +38,10 @@ func (c *Client) StopLoggingRequest(input *StopLoggingInput) StopLoggingRequest 
 	}
 
 	if input == nil {
-		input = &StopLoggingInput{}
+		input = &types.StopLoggingInput{}
 	}
 
-	req := c.newRequest(op, input, &StopLoggingOutput{})
+	req := c.newRequest(op, input, &types.StopLoggingOutput{})
 	return StopLoggingRequest{Request: req, Input: input, Copy: c.StopLoggingRequest}
 }
 
@@ -93,8 +49,8 @@ func (c *Client) StopLoggingRequest(input *StopLoggingInput) StopLoggingRequest 
 // StopLogging API operation.
 type StopLoggingRequest struct {
 	*aws.Request
-	Input *StopLoggingInput
-	Copy  func(*StopLoggingInput) StopLoggingRequest
+	Input *types.StopLoggingInput
+	Copy  func(*types.StopLoggingInput) StopLoggingRequest
 }
 
 // Send marshals and sends the StopLogging API request.
@@ -106,7 +62,7 @@ func (r StopLoggingRequest) Send(ctx context.Context) (*StopLoggingResponse, err
 	}
 
 	resp := &StopLoggingResponse{
-		StopLoggingOutput: r.Request.Data.(*StopLoggingOutput),
+		StopLoggingOutput: r.Request.Data.(*types.StopLoggingOutput),
 		response:          &aws.Response{Request: r.Request},
 	}
 
@@ -116,7 +72,7 @@ func (r StopLoggingRequest) Send(ctx context.Context) (*StopLoggingResponse, err
 // StopLoggingResponse is the response type for the
 // StopLogging API operation.
 type StopLoggingResponse struct {
-	*StopLoggingOutput
+	*types.StopLoggingOutput
 
 	response *aws.Response
 }

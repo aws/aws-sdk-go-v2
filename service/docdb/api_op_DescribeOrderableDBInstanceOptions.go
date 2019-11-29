@@ -4,98 +4,10 @@ package docdb
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/docdb/types"
 )
-
-// Represents the input to DescribeOrderableDBInstanceOptions.
-type DescribeOrderableDBInstanceOptionsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The DB instance class filter value. Specify this parameter to show only the
-	// available offerings that match the specified DB instance class.
-	DBInstanceClass *string `type:"string"`
-
-	// The name of the engine to retrieve DB instance options for.
-	//
-	// Engine is a required field
-	Engine *string `type:"string" required:"true"`
-
-	// The engine version filter value. Specify this parameter to show only the
-	// available offerings that match the specified engine version.
-	EngineVersion *string `type:"string"`
-
-	// This parameter is not currently supported.
-	Filters []Filter `locationNameList:"Filter" type:"list"`
-
-	// The license model filter value. Specify this parameter to show only the available
-	// offerings that match the specified license model.
-	LicenseModel *string `type:"string"`
-
-	// An optional pagination token provided by a previous request. If this parameter
-	// is specified, the response includes only records beyond the marker, up to
-	// the value specified by MaxRecords.
-	Marker *string `type:"string"`
-
-	// The maximum number of records to include in the response. If more records
-	// exist than the specified MaxRecords value, a pagination token (marker) is
-	// included in the response so that the remaining results can be retrieved.
-	//
-	// Default: 100
-	//
-	// Constraints: Minimum 20, maximum 100.
-	MaxRecords *int64 `type:"integer"`
-
-	// The virtual private cloud (VPC) filter value. Specify this parameter to show
-	// only the available VPC or non-VPC offerings.
-	Vpc *bool `type:"boolean"`
-}
-
-// String returns the string representation
-func (s DescribeOrderableDBInstanceOptionsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeOrderableDBInstanceOptionsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeOrderableDBInstanceOptionsInput"}
-
-	if s.Engine == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Engine"))
-	}
-	if s.Filters != nil {
-		for i, v := range s.Filters {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Represents the output of DescribeOrderableDBInstanceOptions.
-type DescribeOrderableDBInstanceOptionsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// An optional pagination token provided by a previous request. If this parameter
-	// is specified, the response includes only records beyond the marker, up to
-	// the value specified by MaxRecords.
-	Marker *string `type:"string"`
-
-	// The options that are available for a particular orderable DB instance.
-	OrderableDBInstanceOptions []OrderableDBInstanceOption `locationNameList:"OrderableDBInstanceOption" type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeOrderableDBInstanceOptionsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeOrderableDBInstanceOptions = "DescribeOrderableDBInstanceOptions"
 
@@ -112,7 +24,7 @@ const opDescribeOrderableDBInstanceOptions = "DescribeOrderableDBInstanceOptions
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/DescribeOrderableDBInstanceOptions
-func (c *Client) DescribeOrderableDBInstanceOptionsRequest(input *DescribeOrderableDBInstanceOptionsInput) DescribeOrderableDBInstanceOptionsRequest {
+func (c *Client) DescribeOrderableDBInstanceOptionsRequest(input *types.DescribeOrderableDBInstanceOptionsInput) DescribeOrderableDBInstanceOptionsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeOrderableDBInstanceOptions,
 		HTTPMethod: "POST",
@@ -126,10 +38,10 @@ func (c *Client) DescribeOrderableDBInstanceOptionsRequest(input *DescribeOrdera
 	}
 
 	if input == nil {
-		input = &DescribeOrderableDBInstanceOptionsInput{}
+		input = &types.DescribeOrderableDBInstanceOptionsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeOrderableDBInstanceOptionsOutput{})
+	req := c.newRequest(op, input, &types.DescribeOrderableDBInstanceOptionsOutput{})
 	return DescribeOrderableDBInstanceOptionsRequest{Request: req, Input: input, Copy: c.DescribeOrderableDBInstanceOptionsRequest}
 }
 
@@ -137,8 +49,8 @@ func (c *Client) DescribeOrderableDBInstanceOptionsRequest(input *DescribeOrdera
 // DescribeOrderableDBInstanceOptions API operation.
 type DescribeOrderableDBInstanceOptionsRequest struct {
 	*aws.Request
-	Input *DescribeOrderableDBInstanceOptionsInput
-	Copy  func(*DescribeOrderableDBInstanceOptionsInput) DescribeOrderableDBInstanceOptionsRequest
+	Input *types.DescribeOrderableDBInstanceOptionsInput
+	Copy  func(*types.DescribeOrderableDBInstanceOptionsInput) DescribeOrderableDBInstanceOptionsRequest
 }
 
 // Send marshals and sends the DescribeOrderableDBInstanceOptions API request.
@@ -150,7 +62,7 @@ func (r DescribeOrderableDBInstanceOptionsRequest) Send(ctx context.Context) (*D
 	}
 
 	resp := &DescribeOrderableDBInstanceOptionsResponse{
-		DescribeOrderableDBInstanceOptionsOutput: r.Request.Data.(*DescribeOrderableDBInstanceOptionsOutput),
+		DescribeOrderableDBInstanceOptionsOutput: r.Request.Data.(*types.DescribeOrderableDBInstanceOptionsOutput),
 		response:                                 &aws.Response{Request: r.Request},
 	}
 
@@ -180,7 +92,7 @@ func NewDescribeOrderableDBInstanceOptionsPaginator(req DescribeOrderableDBInsta
 	return DescribeOrderableDBInstanceOptionsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *DescribeOrderableDBInstanceOptionsInput
+				var inCpy *types.DescribeOrderableDBInstanceOptionsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -200,14 +112,14 @@ type DescribeOrderableDBInstanceOptionsPaginator struct {
 	aws.Pager
 }
 
-func (p *DescribeOrderableDBInstanceOptionsPaginator) CurrentPage() *DescribeOrderableDBInstanceOptionsOutput {
-	return p.Pager.CurrentPage().(*DescribeOrderableDBInstanceOptionsOutput)
+func (p *DescribeOrderableDBInstanceOptionsPaginator) CurrentPage() *types.DescribeOrderableDBInstanceOptionsOutput {
+	return p.Pager.CurrentPage().(*types.DescribeOrderableDBInstanceOptionsOutput)
 }
 
 // DescribeOrderableDBInstanceOptionsResponse is the response type for the
 // DescribeOrderableDBInstanceOptions API operation.
 type DescribeOrderableDBInstanceOptionsResponse struct {
-	*DescribeOrderableDBInstanceOptionsOutput
+	*types.DescribeOrderableDBInstanceOptionsOutput
 
 	response *aws.Response
 }

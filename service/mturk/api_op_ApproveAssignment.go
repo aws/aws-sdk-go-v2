@@ -6,57 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/mturk/types"
 )
-
-type ApproveAssignmentInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the assignment. The assignment must correspond to a HIT created
-	// by the Requester.
-	//
-	// AssignmentId is a required field
-	AssignmentId *string `min:"1" type:"string" required:"true"`
-
-	// A flag indicating that an assignment should be approved even if it was previously
-	// rejected. Defaults to False.
-	OverrideRejection *bool `type:"boolean"`
-
-	// A message for the Worker, which the Worker can see in the Status section
-	// of the web site.
-	RequesterFeedback *string `type:"string"`
-}
-
-// String returns the string representation
-func (s ApproveAssignmentInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ApproveAssignmentInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ApproveAssignmentInput"}
-
-	if s.AssignmentId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("AssignmentId"))
-	}
-	if s.AssignmentId != nil && len(*s.AssignmentId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("AssignmentId", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ApproveAssignmentOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s ApproveAssignmentOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opApproveAssignment = "ApproveAssignment"
 
@@ -91,7 +42,7 @@ const opApproveAssignment = "ApproveAssignment"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/ApproveAssignment
-func (c *Client) ApproveAssignmentRequest(input *ApproveAssignmentInput) ApproveAssignmentRequest {
+func (c *Client) ApproveAssignmentRequest(input *types.ApproveAssignmentInput) ApproveAssignmentRequest {
 	op := &aws.Operation{
 		Name:       opApproveAssignment,
 		HTTPMethod: "POST",
@@ -99,10 +50,10 @@ func (c *Client) ApproveAssignmentRequest(input *ApproveAssignmentInput) Approve
 	}
 
 	if input == nil {
-		input = &ApproveAssignmentInput{}
+		input = &types.ApproveAssignmentInput{}
 	}
 
-	req := c.newRequest(op, input, &ApproveAssignmentOutput{})
+	req := c.newRequest(op, input, &types.ApproveAssignmentOutput{})
 	return ApproveAssignmentRequest{Request: req, Input: input, Copy: c.ApproveAssignmentRequest}
 }
 
@@ -110,8 +61,8 @@ func (c *Client) ApproveAssignmentRequest(input *ApproveAssignmentInput) Approve
 // ApproveAssignment API operation.
 type ApproveAssignmentRequest struct {
 	*aws.Request
-	Input *ApproveAssignmentInput
-	Copy  func(*ApproveAssignmentInput) ApproveAssignmentRequest
+	Input *types.ApproveAssignmentInput
+	Copy  func(*types.ApproveAssignmentInput) ApproveAssignmentRequest
 }
 
 // Send marshals and sends the ApproveAssignment API request.
@@ -123,7 +74,7 @@ func (r ApproveAssignmentRequest) Send(ctx context.Context) (*ApproveAssignmentR
 	}
 
 	resp := &ApproveAssignmentResponse{
-		ApproveAssignmentOutput: r.Request.Data.(*ApproveAssignmentOutput),
+		ApproveAssignmentOutput: r.Request.Data.(*types.ApproveAssignmentOutput),
 		response:                &aws.Response{Request: r.Request},
 	}
 
@@ -133,7 +84,7 @@ func (r ApproveAssignmentRequest) Send(ctx context.Context) (*ApproveAssignmentR
 // ApproveAssignmentResponse is the response type for the
 // ApproveAssignment API operation.
 type ApproveAssignmentResponse struct {
-	*ApproveAssignmentOutput
+	*types.ApproveAssignmentOutput
 
 	response *aws.Response
 }

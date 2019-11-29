@@ -6,60 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
+	"github.com/aws/aws-sdk-go-v2/service/emr/types"
 )
-
-// The input argument to the TerminationProtection operation.
-type SetTerminationProtectionInput struct {
-	_ struct{} `type:"structure"`
-
-	// A list of strings that uniquely identify the clusters to protect. This identifier
-	// is returned by RunJobFlow and can also be obtained from DescribeJobFlows .
-	//
-	// JobFlowIds is a required field
-	JobFlowIds []string `type:"list" required:"true"`
-
-	// A Boolean that indicates whether to protect the cluster and prevent the Amazon
-	// EC2 instances in the cluster from shutting down due to API calls, user intervention,
-	// or job-flow error.
-	//
-	// TerminationProtected is a required field
-	TerminationProtected *bool `type:"boolean" required:"true"`
-}
-
-// String returns the string representation
-func (s SetTerminationProtectionInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *SetTerminationProtectionInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "SetTerminationProtectionInput"}
-
-	if s.JobFlowIds == nil {
-		invalidParams.Add(aws.NewErrParamRequired("JobFlowIds"))
-	}
-
-	if s.TerminationProtected == nil {
-		invalidParams.Add(aws.NewErrParamRequired("TerminationProtected"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type SetTerminationProtectionOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s SetTerminationProtectionOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opSetTerminationProtection = "SetTerminationProtection"
 
@@ -92,7 +42,7 @@ const opSetTerminationProtection = "SetTerminationProtection"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/SetTerminationProtection
-func (c *Client) SetTerminationProtectionRequest(input *SetTerminationProtectionInput) SetTerminationProtectionRequest {
+func (c *Client) SetTerminationProtectionRequest(input *types.SetTerminationProtectionInput) SetTerminationProtectionRequest {
 	op := &aws.Operation{
 		Name:       opSetTerminationProtection,
 		HTTPMethod: "POST",
@@ -100,10 +50,10 @@ func (c *Client) SetTerminationProtectionRequest(input *SetTerminationProtection
 	}
 
 	if input == nil {
-		input = &SetTerminationProtectionInput{}
+		input = &types.SetTerminationProtectionInput{}
 	}
 
-	req := c.newRequest(op, input, &SetTerminationProtectionOutput{})
+	req := c.newRequest(op, input, &types.SetTerminationProtectionOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return SetTerminationProtectionRequest{Request: req, Input: input, Copy: c.SetTerminationProtectionRequest}
@@ -113,8 +63,8 @@ func (c *Client) SetTerminationProtectionRequest(input *SetTerminationProtection
 // SetTerminationProtection API operation.
 type SetTerminationProtectionRequest struct {
 	*aws.Request
-	Input *SetTerminationProtectionInput
-	Copy  func(*SetTerminationProtectionInput) SetTerminationProtectionRequest
+	Input *types.SetTerminationProtectionInput
+	Copy  func(*types.SetTerminationProtectionInput) SetTerminationProtectionRequest
 }
 
 // Send marshals and sends the SetTerminationProtection API request.
@@ -126,7 +76,7 @@ func (r SetTerminationProtectionRequest) Send(ctx context.Context) (*SetTerminat
 	}
 
 	resp := &SetTerminationProtectionResponse{
-		SetTerminationProtectionOutput: r.Request.Data.(*SetTerminationProtectionOutput),
+		SetTerminationProtectionOutput: r.Request.Data.(*types.SetTerminationProtectionOutput),
 		response:                       &aws.Response{Request: r.Request},
 	}
 
@@ -136,7 +86,7 @@ func (r SetTerminationProtectionRequest) Send(ctx context.Context) (*SetTerminat
 // SetTerminationProtectionResponse is the response type for the
 // SetTerminationProtection API operation.
 type SetTerminationProtectionResponse struct {
-	*SetTerminationProtectionOutput
+	*types.SetTerminationProtectionOutput
 
 	response *aws.Response
 }

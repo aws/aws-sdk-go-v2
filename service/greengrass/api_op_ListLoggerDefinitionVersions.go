@@ -6,100 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/greengrass/types"
 )
-
-type ListLoggerDefinitionVersionsInput struct {
-	_ struct{} `type:"structure"`
-
-	// LoggerDefinitionId is a required field
-	LoggerDefinitionId *string `location:"uri" locationName:"LoggerDefinitionId" type:"string" required:"true"`
-
-	MaxResults *string `location:"querystring" locationName:"MaxResults" type:"string"`
-
-	NextToken *string `location:"querystring" locationName:"NextToken" type:"string"`
-}
-
-// String returns the string representation
-func (s ListLoggerDefinitionVersionsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListLoggerDefinitionVersionsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListLoggerDefinitionVersionsInput"}
-
-	if s.LoggerDefinitionId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("LoggerDefinitionId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListLoggerDefinitionVersionsInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.LoggerDefinitionId != nil {
-		v := *s.LoggerDefinitionId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "LoggerDefinitionId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.MaxResults != nil {
-		v := *s.MaxResults
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "MaxResults", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type ListLoggerDefinitionVersionsOutput struct {
-	_ struct{} `type:"structure"`
-
-	NextToken *string `type:"string"`
-
-	Versions []VersionInformation `type:"list"`
-}
-
-// String returns the string representation
-func (s ListLoggerDefinitionVersionsOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListLoggerDefinitionVersionsOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Versions != nil {
-		v := s.Versions
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "Versions", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	return nil
-}
 
 const opListLoggerDefinitionVersions = "ListLoggerDefinitionVersions"
 
@@ -116,7 +24,7 @@ const opListLoggerDefinitionVersions = "ListLoggerDefinitionVersions"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/ListLoggerDefinitionVersions
-func (c *Client) ListLoggerDefinitionVersionsRequest(input *ListLoggerDefinitionVersionsInput) ListLoggerDefinitionVersionsRequest {
+func (c *Client) ListLoggerDefinitionVersionsRequest(input *types.ListLoggerDefinitionVersionsInput) ListLoggerDefinitionVersionsRequest {
 	op := &aws.Operation{
 		Name:       opListLoggerDefinitionVersions,
 		HTTPMethod: "GET",
@@ -124,10 +32,10 @@ func (c *Client) ListLoggerDefinitionVersionsRequest(input *ListLoggerDefinition
 	}
 
 	if input == nil {
-		input = &ListLoggerDefinitionVersionsInput{}
+		input = &types.ListLoggerDefinitionVersionsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListLoggerDefinitionVersionsOutput{})
+	req := c.newRequest(op, input, &types.ListLoggerDefinitionVersionsOutput{})
 	return ListLoggerDefinitionVersionsRequest{Request: req, Input: input, Copy: c.ListLoggerDefinitionVersionsRequest}
 }
 
@@ -135,8 +43,8 @@ func (c *Client) ListLoggerDefinitionVersionsRequest(input *ListLoggerDefinition
 // ListLoggerDefinitionVersions API operation.
 type ListLoggerDefinitionVersionsRequest struct {
 	*aws.Request
-	Input *ListLoggerDefinitionVersionsInput
-	Copy  func(*ListLoggerDefinitionVersionsInput) ListLoggerDefinitionVersionsRequest
+	Input *types.ListLoggerDefinitionVersionsInput
+	Copy  func(*types.ListLoggerDefinitionVersionsInput) ListLoggerDefinitionVersionsRequest
 }
 
 // Send marshals and sends the ListLoggerDefinitionVersions API request.
@@ -148,7 +56,7 @@ func (r ListLoggerDefinitionVersionsRequest) Send(ctx context.Context) (*ListLog
 	}
 
 	resp := &ListLoggerDefinitionVersionsResponse{
-		ListLoggerDefinitionVersionsOutput: r.Request.Data.(*ListLoggerDefinitionVersionsOutput),
+		ListLoggerDefinitionVersionsOutput: r.Request.Data.(*types.ListLoggerDefinitionVersionsOutput),
 		response:                           &aws.Response{Request: r.Request},
 	}
 
@@ -158,7 +66,7 @@ func (r ListLoggerDefinitionVersionsRequest) Send(ctx context.Context) (*ListLog
 // ListLoggerDefinitionVersionsResponse is the response type for the
 // ListLoggerDefinitionVersions API operation.
 type ListLoggerDefinitionVersionsResponse struct {
-	*ListLoggerDefinitionVersionsOutput
+	*types.ListLoggerDefinitionVersionsOutput
 
 	response *aws.Response
 }

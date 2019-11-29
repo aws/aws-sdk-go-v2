@@ -6,65 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/glue/types"
 )
-
-type UpdateJobInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the job definition to update.
-	//
-	// JobName is a required field
-	JobName *string `min:"1" type:"string" required:"true"`
-
-	// Specifies the values with which to update the job definition.
-	//
-	// JobUpdate is a required field
-	JobUpdate *JobUpdate `type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s UpdateJobInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateJobInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateJobInput"}
-
-	if s.JobName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("JobName"))
-	}
-	if s.JobName != nil && len(*s.JobName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("JobName", 1))
-	}
-
-	if s.JobUpdate == nil {
-		invalidParams.Add(aws.NewErrParamRequired("JobUpdate"))
-	}
-	if s.JobUpdate != nil {
-		if err := s.JobUpdate.Validate(); err != nil {
-			invalidParams.AddNested("JobUpdate", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type UpdateJobOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Returns the name of the updated job definition.
-	JobName *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s UpdateJobOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opUpdateJob = "UpdateJob"
 
@@ -81,7 +24,7 @@ const opUpdateJob = "UpdateJob"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/UpdateJob
-func (c *Client) UpdateJobRequest(input *UpdateJobInput) UpdateJobRequest {
+func (c *Client) UpdateJobRequest(input *types.UpdateJobInput) UpdateJobRequest {
 	op := &aws.Operation{
 		Name:       opUpdateJob,
 		HTTPMethod: "POST",
@@ -89,10 +32,10 @@ func (c *Client) UpdateJobRequest(input *UpdateJobInput) UpdateJobRequest {
 	}
 
 	if input == nil {
-		input = &UpdateJobInput{}
+		input = &types.UpdateJobInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateJobOutput{})
+	req := c.newRequest(op, input, &types.UpdateJobOutput{})
 	return UpdateJobRequest{Request: req, Input: input, Copy: c.UpdateJobRequest}
 }
 
@@ -100,8 +43,8 @@ func (c *Client) UpdateJobRequest(input *UpdateJobInput) UpdateJobRequest {
 // UpdateJob API operation.
 type UpdateJobRequest struct {
 	*aws.Request
-	Input *UpdateJobInput
-	Copy  func(*UpdateJobInput) UpdateJobRequest
+	Input *types.UpdateJobInput
+	Copy  func(*types.UpdateJobInput) UpdateJobRequest
 }
 
 // Send marshals and sends the UpdateJob API request.
@@ -113,7 +56,7 @@ func (r UpdateJobRequest) Send(ctx context.Context) (*UpdateJobResponse, error) 
 	}
 
 	resp := &UpdateJobResponse{
-		UpdateJobOutput: r.Request.Data.(*UpdateJobOutput),
+		UpdateJobOutput: r.Request.Data.(*types.UpdateJobOutput),
 		response:        &aws.Response{Request: r.Request},
 	}
 
@@ -123,7 +66,7 @@ func (r UpdateJobRequest) Send(ctx context.Context) (*UpdateJobResponse, error) 
 // UpdateJobResponse is the response type for the
 // UpdateJob API operation.
 type UpdateJobResponse struct {
-	*UpdateJobOutput
+	*types.UpdateJobOutput
 
 	response *aws.Response
 }

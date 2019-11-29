@@ -6,64 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/appstream/types"
 )
-
-type UpdateImagePermissionsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The permissions for the image.
-	//
-	// ImagePermissions is a required field
-	ImagePermissions *ImagePermissions `type:"structure" required:"true"`
-
-	// The name of the private image.
-	//
-	// Name is a required field
-	Name *string `type:"string" required:"true"`
-
-	// The 12-digit identifier of the AWS account for which you want add or update
-	// image permissions.
-	//
-	// SharedAccountId is a required field
-	SharedAccountId *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s UpdateImagePermissionsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateImagePermissionsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateImagePermissionsInput"}
-
-	if s.ImagePermissions == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ImagePermissions"))
-	}
-
-	if s.Name == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Name"))
-	}
-
-	if s.SharedAccountId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("SharedAccountId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type UpdateImagePermissionsOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s UpdateImagePermissionsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opUpdateImagePermissions = "UpdateImagePermissions"
 
@@ -80,7 +24,7 @@ const opUpdateImagePermissions = "UpdateImagePermissions"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/UpdateImagePermissions
-func (c *Client) UpdateImagePermissionsRequest(input *UpdateImagePermissionsInput) UpdateImagePermissionsRequest {
+func (c *Client) UpdateImagePermissionsRequest(input *types.UpdateImagePermissionsInput) UpdateImagePermissionsRequest {
 	op := &aws.Operation{
 		Name:       opUpdateImagePermissions,
 		HTTPMethod: "POST",
@@ -88,10 +32,10 @@ func (c *Client) UpdateImagePermissionsRequest(input *UpdateImagePermissionsInpu
 	}
 
 	if input == nil {
-		input = &UpdateImagePermissionsInput{}
+		input = &types.UpdateImagePermissionsInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateImagePermissionsOutput{})
+	req := c.newRequest(op, input, &types.UpdateImagePermissionsOutput{})
 	return UpdateImagePermissionsRequest{Request: req, Input: input, Copy: c.UpdateImagePermissionsRequest}
 }
 
@@ -99,8 +43,8 @@ func (c *Client) UpdateImagePermissionsRequest(input *UpdateImagePermissionsInpu
 // UpdateImagePermissions API operation.
 type UpdateImagePermissionsRequest struct {
 	*aws.Request
-	Input *UpdateImagePermissionsInput
-	Copy  func(*UpdateImagePermissionsInput) UpdateImagePermissionsRequest
+	Input *types.UpdateImagePermissionsInput
+	Copy  func(*types.UpdateImagePermissionsInput) UpdateImagePermissionsRequest
 }
 
 // Send marshals and sends the UpdateImagePermissions API request.
@@ -112,7 +56,7 @@ func (r UpdateImagePermissionsRequest) Send(ctx context.Context) (*UpdateImagePe
 	}
 
 	resp := &UpdateImagePermissionsResponse{
-		UpdateImagePermissionsOutput: r.Request.Data.(*UpdateImagePermissionsOutput),
+		UpdateImagePermissionsOutput: r.Request.Data.(*types.UpdateImagePermissionsOutput),
 		response:                     &aws.Response{Request: r.Request},
 	}
 
@@ -122,7 +66,7 @@ func (r UpdateImagePermissionsRequest) Send(ctx context.Context) (*UpdateImagePe
 // UpdateImagePermissionsResponse is the response type for the
 // UpdateImagePermissions API operation.
 type UpdateImagePermissionsResponse struct {
-	*UpdateImagePermissionsOutput
+	*types.UpdateImagePermissionsOutput
 
 	response *aws.Response
 }

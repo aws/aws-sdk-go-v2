@@ -6,65 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/ec2query"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-type ModifyIdFormatInput struct {
-	_ struct{} `type:"structure"`
-
-	// The type of resource: bundle | conversion-task | customer-gateway | dhcp-options
-	// | elastic-ip-allocation | elastic-ip-association | export-task | flow-log
-	// | image | import-task | internet-gateway | network-acl | network-acl-association
-	// | network-interface | network-interface-attachment | prefix-list | route-table
-	// | route-table-association | security-group | subnet | subnet-cidr-block-association
-	// | vpc | vpc-cidr-block-association | vpc-endpoint | vpc-peering-connection
-	// | vpn-connection | vpn-gateway.
-	//
-	// Alternatively, use the all-current option to include all resource types that
-	// are currently within their opt-in period for longer IDs.
-	//
-	// Resource is a required field
-	Resource *string `type:"string" required:"true"`
-
-	// Indicate whether the resource should use longer IDs (17-character IDs).
-	//
-	// UseLongIds is a required field
-	UseLongIds *bool `type:"boolean" required:"true"`
-}
-
-// String returns the string representation
-func (s ModifyIdFormatInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ModifyIdFormatInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ModifyIdFormatInput"}
-
-	if s.Resource == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Resource"))
-	}
-
-	if s.UseLongIds == nil {
-		invalidParams.Add(aws.NewErrParamRequired("UseLongIds"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ModifyIdFormatOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s ModifyIdFormatOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opModifyIdFormat = "ModifyIdFormat"
 
@@ -103,7 +48,7 @@ const opModifyIdFormat = "ModifyIdFormat"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyIdFormat
-func (c *Client) ModifyIdFormatRequest(input *ModifyIdFormatInput) ModifyIdFormatRequest {
+func (c *Client) ModifyIdFormatRequest(input *types.ModifyIdFormatInput) ModifyIdFormatRequest {
 	op := &aws.Operation{
 		Name:       opModifyIdFormat,
 		HTTPMethod: "POST",
@@ -111,10 +56,10 @@ func (c *Client) ModifyIdFormatRequest(input *ModifyIdFormatInput) ModifyIdForma
 	}
 
 	if input == nil {
-		input = &ModifyIdFormatInput{}
+		input = &types.ModifyIdFormatInput{}
 	}
 
-	req := c.newRequest(op, input, &ModifyIdFormatOutput{})
+	req := c.newRequest(op, input, &types.ModifyIdFormatOutput{})
 	req.Handlers.Unmarshal.Remove(ec2query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return ModifyIdFormatRequest{Request: req, Input: input, Copy: c.ModifyIdFormatRequest}
@@ -124,8 +69,8 @@ func (c *Client) ModifyIdFormatRequest(input *ModifyIdFormatInput) ModifyIdForma
 // ModifyIdFormat API operation.
 type ModifyIdFormatRequest struct {
 	*aws.Request
-	Input *ModifyIdFormatInput
-	Copy  func(*ModifyIdFormatInput) ModifyIdFormatRequest
+	Input *types.ModifyIdFormatInput
+	Copy  func(*types.ModifyIdFormatInput) ModifyIdFormatRequest
 }
 
 // Send marshals and sends the ModifyIdFormat API request.
@@ -137,7 +82,7 @@ func (r ModifyIdFormatRequest) Send(ctx context.Context) (*ModifyIdFormatRespons
 	}
 
 	resp := &ModifyIdFormatResponse{
-		ModifyIdFormatOutput: r.Request.Data.(*ModifyIdFormatOutput),
+		ModifyIdFormatOutput: r.Request.Data.(*types.ModifyIdFormatOutput),
 		response:             &aws.Response{Request: r.Request},
 	}
 
@@ -147,7 +92,7 @@ func (r ModifyIdFormatRequest) Send(ctx context.Context) (*ModifyIdFormatRespons
 // ModifyIdFormatResponse is the response type for the
 // ModifyIdFormat API operation.
 type ModifyIdFormatResponse struct {
-	*ModifyIdFormatOutput
+	*types.ModifyIdFormatOutput
 
 	response *aws.Response
 }

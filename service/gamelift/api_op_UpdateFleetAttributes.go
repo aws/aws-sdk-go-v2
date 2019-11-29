@@ -6,85 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/gamelift/types"
 )
-
-// Represents the input for a request action.
-type UpdateFleetAttributesInput struct {
-	_ struct{} `type:"structure"`
-
-	// Human-readable description of a fleet.
-	Description *string `min:"1" type:"string"`
-
-	// Unique identifier for a fleet to update attribute metadata for.
-	//
-	// FleetId is a required field
-	FleetId *string `type:"string" required:"true"`
-
-	// Names of metric groups to include this fleet in. Amazon CloudWatch uses a
-	// fleet metric group is to aggregate metrics from multiple fleets. Use an existing
-	// metric group name to add this fleet to the group. Or use a new name to create
-	// a new metric group. A fleet can only be included in one metric group at a
-	// time.
-	MetricGroups []string `type:"list"`
-
-	// Descriptive label that is associated with a fleet. Fleet names do not need
-	// to be unique.
-	Name *string `min:"1" type:"string"`
-
-	// Game session protection policy to apply to all new instances created in this
-	// fleet. Instances that already exist are not affected. You can set protection
-	// for individual instances using UpdateGameSession.
-	//
-	//    * NoProtection -- The game session can be terminated during a scale-down
-	//    event.
-	//
-	//    * FullProtection -- If the game session is in an ACTIVE status, it cannot
-	//    be terminated during a scale-down event.
-	NewGameSessionProtectionPolicy ProtectionPolicy `type:"string" enum:"true"`
-
-	// Policy that limits the number of game sessions an individual player can create
-	// over a span of time.
-	ResourceCreationLimitPolicy *ResourceCreationLimitPolicy `type:"structure"`
-}
-
-// String returns the string representation
-func (s UpdateFleetAttributesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateFleetAttributesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateFleetAttributesInput"}
-	if s.Description != nil && len(*s.Description) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Description", 1))
-	}
-
-	if s.FleetId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("FleetId"))
-	}
-	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Represents the returned data in response to a request action.
-type UpdateFleetAttributesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Unique identifier for a fleet that was updated.
-	FleetId *string `type:"string"`
-}
-
-// String returns the string representation
-func (s UpdateFleetAttributesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opUpdateFleetAttributes = "UpdateFleetAttributes"
 
@@ -124,7 +47,7 @@ const opUpdateFleetAttributes = "UpdateFleetAttributes"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/UpdateFleetAttributes
-func (c *Client) UpdateFleetAttributesRequest(input *UpdateFleetAttributesInput) UpdateFleetAttributesRequest {
+func (c *Client) UpdateFleetAttributesRequest(input *types.UpdateFleetAttributesInput) UpdateFleetAttributesRequest {
 	op := &aws.Operation{
 		Name:       opUpdateFleetAttributes,
 		HTTPMethod: "POST",
@@ -132,10 +55,10 @@ func (c *Client) UpdateFleetAttributesRequest(input *UpdateFleetAttributesInput)
 	}
 
 	if input == nil {
-		input = &UpdateFleetAttributesInput{}
+		input = &types.UpdateFleetAttributesInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateFleetAttributesOutput{})
+	req := c.newRequest(op, input, &types.UpdateFleetAttributesOutput{})
 	return UpdateFleetAttributesRequest{Request: req, Input: input, Copy: c.UpdateFleetAttributesRequest}
 }
 
@@ -143,8 +66,8 @@ func (c *Client) UpdateFleetAttributesRequest(input *UpdateFleetAttributesInput)
 // UpdateFleetAttributes API operation.
 type UpdateFleetAttributesRequest struct {
 	*aws.Request
-	Input *UpdateFleetAttributesInput
-	Copy  func(*UpdateFleetAttributesInput) UpdateFleetAttributesRequest
+	Input *types.UpdateFleetAttributesInput
+	Copy  func(*types.UpdateFleetAttributesInput) UpdateFleetAttributesRequest
 }
 
 // Send marshals and sends the UpdateFleetAttributes API request.
@@ -156,7 +79,7 @@ func (r UpdateFleetAttributesRequest) Send(ctx context.Context) (*UpdateFleetAtt
 	}
 
 	resp := &UpdateFleetAttributesResponse{
-		UpdateFleetAttributesOutput: r.Request.Data.(*UpdateFleetAttributesOutput),
+		UpdateFleetAttributesOutput: r.Request.Data.(*types.UpdateFleetAttributesOutput),
 		response:                    &aws.Response{Request: r.Request},
 	}
 
@@ -166,7 +89,7 @@ func (r UpdateFleetAttributesRequest) Send(ctx context.Context) (*UpdateFleetAtt
 // UpdateFleetAttributesResponse is the response type for the
 // UpdateFleetAttributes API operation.
 type UpdateFleetAttributesResponse struct {
-	*UpdateFleetAttributesOutput
+	*types.UpdateFleetAttributesOutput
 
 	response *aws.Response
 }

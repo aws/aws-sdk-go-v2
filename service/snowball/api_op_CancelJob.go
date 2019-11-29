@@ -6,49 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/snowball/types"
 )
-
-type CancelJobInput struct {
-	_ struct{} `type:"structure"`
-
-	// The 39-character job ID for the job that you want to cancel, for example
-	// JID123e4567-e89b-12d3-a456-426655440000.
-	//
-	// JobId is a required field
-	JobId *string `min:"39" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s CancelJobInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CancelJobInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CancelJobInput"}
-
-	if s.JobId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("JobId"))
-	}
-	if s.JobId != nil && len(*s.JobId) < 39 {
-		invalidParams.Add(aws.NewErrParamMinLen("JobId", 39))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type CancelJobOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s CancelJobOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCancelJob = "CancelJob"
 
@@ -67,7 +26,7 @@ const opCancelJob = "CancelJob"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/CancelJob
-func (c *Client) CancelJobRequest(input *CancelJobInput) CancelJobRequest {
+func (c *Client) CancelJobRequest(input *types.CancelJobInput) CancelJobRequest {
 	op := &aws.Operation{
 		Name:       opCancelJob,
 		HTTPMethod: "POST",
@@ -75,10 +34,10 @@ func (c *Client) CancelJobRequest(input *CancelJobInput) CancelJobRequest {
 	}
 
 	if input == nil {
-		input = &CancelJobInput{}
+		input = &types.CancelJobInput{}
 	}
 
-	req := c.newRequest(op, input, &CancelJobOutput{})
+	req := c.newRequest(op, input, &types.CancelJobOutput{})
 	return CancelJobRequest{Request: req, Input: input, Copy: c.CancelJobRequest}
 }
 
@@ -86,8 +45,8 @@ func (c *Client) CancelJobRequest(input *CancelJobInput) CancelJobRequest {
 // CancelJob API operation.
 type CancelJobRequest struct {
 	*aws.Request
-	Input *CancelJobInput
-	Copy  func(*CancelJobInput) CancelJobRequest
+	Input *types.CancelJobInput
+	Copy  func(*types.CancelJobInput) CancelJobRequest
 }
 
 // Send marshals and sends the CancelJob API request.
@@ -99,7 +58,7 @@ func (r CancelJobRequest) Send(ctx context.Context) (*CancelJobResponse, error) 
 	}
 
 	resp := &CancelJobResponse{
-		CancelJobOutput: r.Request.Data.(*CancelJobOutput),
+		CancelJobOutput: r.Request.Data.(*types.CancelJobOutput),
 		response:        &aws.Response{Request: r.Request},
 	}
 
@@ -109,7 +68,7 @@ func (r CancelJobRequest) Send(ctx context.Context) (*CancelJobResponse, error) 
 // CancelJobResponse is the response type for the
 // CancelJob API operation.
 type CancelJobResponse struct {
-	*CancelJobOutput
+	*types.CancelJobOutput
 
 	response *aws.Response
 }

@@ -6,51 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
+	"github.com/aws/aws-sdk-go-v2/service/organizations/types"
 )
-
-type RemoveAccountFromOrganizationInput struct {
-	_ struct{} `type:"structure"`
-
-	// The unique identifier (ID) of the member account that you want to remove
-	// from the organization.
-	//
-	// The regex pattern (http://wikipedia.org/wiki/regex) for an account ID string
-	// requires exactly 12 digits.
-	//
-	// AccountId is a required field
-	AccountId *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s RemoveAccountFromOrganizationInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *RemoveAccountFromOrganizationInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "RemoveAccountFromOrganizationInput"}
-
-	if s.AccountId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("AccountId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type RemoveAccountFromOrganizationOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s RemoveAccountFromOrganizationOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opRemoveAccountFromOrganization = "RemoveAccountFromOrganization"
 
@@ -91,7 +50,7 @@ const opRemoveAccountFromOrganization = "RemoveAccountFromOrganization"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/RemoveAccountFromOrganization
-func (c *Client) RemoveAccountFromOrganizationRequest(input *RemoveAccountFromOrganizationInput) RemoveAccountFromOrganizationRequest {
+func (c *Client) RemoveAccountFromOrganizationRequest(input *types.RemoveAccountFromOrganizationInput) RemoveAccountFromOrganizationRequest {
 	op := &aws.Operation{
 		Name:       opRemoveAccountFromOrganization,
 		HTTPMethod: "POST",
@@ -99,10 +58,10 @@ func (c *Client) RemoveAccountFromOrganizationRequest(input *RemoveAccountFromOr
 	}
 
 	if input == nil {
-		input = &RemoveAccountFromOrganizationInput{}
+		input = &types.RemoveAccountFromOrganizationInput{}
 	}
 
-	req := c.newRequest(op, input, &RemoveAccountFromOrganizationOutput{})
+	req := c.newRequest(op, input, &types.RemoveAccountFromOrganizationOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return RemoveAccountFromOrganizationRequest{Request: req, Input: input, Copy: c.RemoveAccountFromOrganizationRequest}
@@ -112,8 +71,8 @@ func (c *Client) RemoveAccountFromOrganizationRequest(input *RemoveAccountFromOr
 // RemoveAccountFromOrganization API operation.
 type RemoveAccountFromOrganizationRequest struct {
 	*aws.Request
-	Input *RemoveAccountFromOrganizationInput
-	Copy  func(*RemoveAccountFromOrganizationInput) RemoveAccountFromOrganizationRequest
+	Input *types.RemoveAccountFromOrganizationInput
+	Copy  func(*types.RemoveAccountFromOrganizationInput) RemoveAccountFromOrganizationRequest
 }
 
 // Send marshals and sends the RemoveAccountFromOrganization API request.
@@ -125,7 +84,7 @@ func (r RemoveAccountFromOrganizationRequest) Send(ctx context.Context) (*Remove
 	}
 
 	resp := &RemoveAccountFromOrganizationResponse{
-		RemoveAccountFromOrganizationOutput: r.Request.Data.(*RemoveAccountFromOrganizationOutput),
+		RemoveAccountFromOrganizationOutput: r.Request.Data.(*types.RemoveAccountFromOrganizationOutput),
 		response:                            &aws.Response{Request: r.Request},
 	}
 
@@ -135,7 +94,7 @@ func (r RemoveAccountFromOrganizationRequest) Send(ctx context.Context) (*Remove
 // RemoveAccountFromOrganizationResponse is the response type for the
 // RemoveAccountFromOrganization API operation.
 type RemoveAccountFromOrganizationResponse struct {
-	*RemoveAccountFromOrganizationOutput
+	*types.RemoveAccountFromOrganizationOutput
 
 	response *aws.Response
 }

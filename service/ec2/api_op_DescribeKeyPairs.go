@@ -6,47 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-type DescribeKeyPairsInput struct {
-	_ struct{} `type:"structure"`
-
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have
-	// the required permissions, the error response is DryRunOperation. Otherwise,
-	// it is UnauthorizedOperation.
-	DryRun *bool `locationName:"dryRun" type:"boolean"`
-
-	// The filters.
-	//
-	//    * fingerprint - The fingerprint of the key pair.
-	//
-	//    * key-name - The name of the key pair.
-	Filters []Filter `locationName:"Filter" locationNameList:"Filter" type:"list"`
-
-	// The key pair names.
-	//
-	// Default: Describes all your key pairs.
-	KeyNames []string `locationName:"KeyName" locationNameList:"KeyName" type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeKeyPairsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type DescribeKeyPairsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Information about the key pairs.
-	KeyPairs []KeyPairInfo `locationName:"keySet" locationNameList:"item" type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeKeyPairsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeKeyPairs = "DescribeKeyPairs"
 
@@ -66,7 +27,7 @@ const opDescribeKeyPairs = "DescribeKeyPairs"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeKeyPairs
-func (c *Client) DescribeKeyPairsRequest(input *DescribeKeyPairsInput) DescribeKeyPairsRequest {
+func (c *Client) DescribeKeyPairsRequest(input *types.DescribeKeyPairsInput) DescribeKeyPairsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeKeyPairs,
 		HTTPMethod: "POST",
@@ -74,10 +35,10 @@ func (c *Client) DescribeKeyPairsRequest(input *DescribeKeyPairsInput) DescribeK
 	}
 
 	if input == nil {
-		input = &DescribeKeyPairsInput{}
+		input = &types.DescribeKeyPairsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeKeyPairsOutput{})
+	req := c.newRequest(op, input, &types.DescribeKeyPairsOutput{})
 	return DescribeKeyPairsRequest{Request: req, Input: input, Copy: c.DescribeKeyPairsRequest}
 }
 
@@ -85,8 +46,8 @@ func (c *Client) DescribeKeyPairsRequest(input *DescribeKeyPairsInput) DescribeK
 // DescribeKeyPairs API operation.
 type DescribeKeyPairsRequest struct {
 	*aws.Request
-	Input *DescribeKeyPairsInput
-	Copy  func(*DescribeKeyPairsInput) DescribeKeyPairsRequest
+	Input *types.DescribeKeyPairsInput
+	Copy  func(*types.DescribeKeyPairsInput) DescribeKeyPairsRequest
 }
 
 // Send marshals and sends the DescribeKeyPairs API request.
@@ -98,7 +59,7 @@ func (r DescribeKeyPairsRequest) Send(ctx context.Context) (*DescribeKeyPairsRes
 	}
 
 	resp := &DescribeKeyPairsResponse{
-		DescribeKeyPairsOutput: r.Request.Data.(*DescribeKeyPairsOutput),
+		DescribeKeyPairsOutput: r.Request.Data.(*types.DescribeKeyPairsOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -108,7 +69,7 @@ func (r DescribeKeyPairsRequest) Send(ctx context.Context) (*DescribeKeyPairsRes
 // DescribeKeyPairsResponse is the response type for the
 // DescribeKeyPairs API operation.
 type DescribeKeyPairsResponse struct {
-	*DescribeKeyPairsOutput
+	*types.DescribeKeyPairsOutput
 
 	response *aws.Response
 }

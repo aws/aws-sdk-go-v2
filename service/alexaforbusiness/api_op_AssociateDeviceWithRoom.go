@@ -6,32 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/alexaforbusiness/types"
 )
-
-type AssociateDeviceWithRoomInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ARN of the device to associate to a room. Required.
-	DeviceArn *string `type:"string"`
-
-	// The ARN of the room with which to associate the device. Required.
-	RoomArn *string `type:"string"`
-}
-
-// String returns the string representation
-func (s AssociateDeviceWithRoomInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type AssociateDeviceWithRoomOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s AssociateDeviceWithRoomOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opAssociateDeviceWithRoom = "AssociateDeviceWithRoom"
 
@@ -51,7 +27,7 @@ const opAssociateDeviceWithRoom = "AssociateDeviceWithRoom"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/AssociateDeviceWithRoom
-func (c *Client) AssociateDeviceWithRoomRequest(input *AssociateDeviceWithRoomInput) AssociateDeviceWithRoomRequest {
+func (c *Client) AssociateDeviceWithRoomRequest(input *types.AssociateDeviceWithRoomInput) AssociateDeviceWithRoomRequest {
 	op := &aws.Operation{
 		Name:       opAssociateDeviceWithRoom,
 		HTTPMethod: "POST",
@@ -59,10 +35,10 @@ func (c *Client) AssociateDeviceWithRoomRequest(input *AssociateDeviceWithRoomIn
 	}
 
 	if input == nil {
-		input = &AssociateDeviceWithRoomInput{}
+		input = &types.AssociateDeviceWithRoomInput{}
 	}
 
-	req := c.newRequest(op, input, &AssociateDeviceWithRoomOutput{})
+	req := c.newRequest(op, input, &types.AssociateDeviceWithRoomOutput{})
 	return AssociateDeviceWithRoomRequest{Request: req, Input: input, Copy: c.AssociateDeviceWithRoomRequest}
 }
 
@@ -70,8 +46,8 @@ func (c *Client) AssociateDeviceWithRoomRequest(input *AssociateDeviceWithRoomIn
 // AssociateDeviceWithRoom API operation.
 type AssociateDeviceWithRoomRequest struct {
 	*aws.Request
-	Input *AssociateDeviceWithRoomInput
-	Copy  func(*AssociateDeviceWithRoomInput) AssociateDeviceWithRoomRequest
+	Input *types.AssociateDeviceWithRoomInput
+	Copy  func(*types.AssociateDeviceWithRoomInput) AssociateDeviceWithRoomRequest
 }
 
 // Send marshals and sends the AssociateDeviceWithRoom API request.
@@ -83,7 +59,7 @@ func (r AssociateDeviceWithRoomRequest) Send(ctx context.Context) (*AssociateDev
 	}
 
 	resp := &AssociateDeviceWithRoomResponse{
-		AssociateDeviceWithRoomOutput: r.Request.Data.(*AssociateDeviceWithRoomOutput),
+		AssociateDeviceWithRoomOutput: r.Request.Data.(*types.AssociateDeviceWithRoomOutput),
 		response:                      &aws.Response{Request: r.Request},
 	}
 
@@ -93,7 +69,7 @@ func (r AssociateDeviceWithRoomRequest) Send(ctx context.Context) (*AssociateDev
 // AssociateDeviceWithRoomResponse is the response type for the
 // AssociateDeviceWithRoom API operation.
 type AssociateDeviceWithRoomResponse struct {
-	*AssociateDeviceWithRoomOutput
+	*types.AssociateDeviceWithRoomOutput
 
 	response *aws.Response
 }

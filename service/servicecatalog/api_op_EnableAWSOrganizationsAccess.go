@@ -6,26 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/types"
 )
-
-type EnableAWSOrganizationsAccessInput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s EnableAWSOrganizationsAccessInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type EnableAWSOrganizationsAccessOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s EnableAWSOrganizationsAccessOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opEnableAWSOrganizationsAccess = "EnableAWSOrganizationsAccess"
 
@@ -49,7 +31,7 @@ const opEnableAWSOrganizationsAccess = "EnableAWSOrganizationsAccess"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/EnableAWSOrganizationsAccess
-func (c *Client) EnableAWSOrganizationsAccessRequest(input *EnableAWSOrganizationsAccessInput) EnableAWSOrganizationsAccessRequest {
+func (c *Client) EnableAWSOrganizationsAccessRequest(input *types.EnableAWSOrganizationsAccessInput) EnableAWSOrganizationsAccessRequest {
 	op := &aws.Operation{
 		Name:       opEnableAWSOrganizationsAccess,
 		HTTPMethod: "POST",
@@ -57,10 +39,10 @@ func (c *Client) EnableAWSOrganizationsAccessRequest(input *EnableAWSOrganizatio
 	}
 
 	if input == nil {
-		input = &EnableAWSOrganizationsAccessInput{}
+		input = &types.EnableAWSOrganizationsAccessInput{}
 	}
 
-	req := c.newRequest(op, input, &EnableAWSOrganizationsAccessOutput{})
+	req := c.newRequest(op, input, &types.EnableAWSOrganizationsAccessOutput{})
 	return EnableAWSOrganizationsAccessRequest{Request: req, Input: input, Copy: c.EnableAWSOrganizationsAccessRequest}
 }
 
@@ -68,8 +50,8 @@ func (c *Client) EnableAWSOrganizationsAccessRequest(input *EnableAWSOrganizatio
 // EnableAWSOrganizationsAccess API operation.
 type EnableAWSOrganizationsAccessRequest struct {
 	*aws.Request
-	Input *EnableAWSOrganizationsAccessInput
-	Copy  func(*EnableAWSOrganizationsAccessInput) EnableAWSOrganizationsAccessRequest
+	Input *types.EnableAWSOrganizationsAccessInput
+	Copy  func(*types.EnableAWSOrganizationsAccessInput) EnableAWSOrganizationsAccessRequest
 }
 
 // Send marshals and sends the EnableAWSOrganizationsAccess API request.
@@ -81,7 +63,7 @@ func (r EnableAWSOrganizationsAccessRequest) Send(ctx context.Context) (*EnableA
 	}
 
 	resp := &EnableAWSOrganizationsAccessResponse{
-		EnableAWSOrganizationsAccessOutput: r.Request.Data.(*EnableAWSOrganizationsAccessOutput),
+		EnableAWSOrganizationsAccessOutput: r.Request.Data.(*types.EnableAWSOrganizationsAccessOutput),
 		response:                           &aws.Response{Request: r.Request},
 	}
 
@@ -91,7 +73,7 @@ func (r EnableAWSOrganizationsAccessRequest) Send(ctx context.Context) (*EnableA
 // EnableAWSOrganizationsAccessResponse is the response type for the
 // EnableAWSOrganizationsAccess API operation.
 type EnableAWSOrganizationsAccessResponse struct {
-	*EnableAWSOrganizationsAccessOutput
+	*types.EnableAWSOrganizationsAccessOutput
 
 	response *aws.Response
 }

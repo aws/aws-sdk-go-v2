@@ -6,215 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/medialive/types"
 )
-
-type DescribeInputInput struct {
-	_ struct{} `type:"structure"`
-
-	// InputId is a required field
-	InputId *string `location:"uri" locationName:"inputId" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeInputInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeInputInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeInputInput"}
-
-	if s.InputId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("InputId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DescribeInputInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.InputId != nil {
-		v := *s.InputId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "inputId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type DescribeInputOutput struct {
-	_ struct{} `type:"structure"`
-
-	Arn *string `locationName:"arn" type:"string"`
-
-	AttachedChannels []string `locationName:"attachedChannels" type:"list"`
-
-	Destinations []InputDestination `locationName:"destinations" type:"list"`
-
-	Id *string `locationName:"id" type:"string"`
-
-	// A standard input has two sources and a single pipeline input only has one.
-	InputClass InputClass `locationName:"inputClass" type:"string" enum:"true"`
-
-	// There are two types of input sources, static and dynamic. If an input source
-	// is dynamic you canchange the source url of the input dynamically using an
-	// input switch action. However, the only input typeto support a dynamic url
-	// at this time is MP4_FILE. By default all input sources are static.
-	InputSourceType InputSourceType `locationName:"inputSourceType" type:"string" enum:"true"`
-
-	MediaConnectFlows []MediaConnectFlow `locationName:"mediaConnectFlows" type:"list"`
-
-	Name *string `locationName:"name" type:"string"`
-
-	RoleArn *string `locationName:"roleArn" type:"string"`
-
-	SecurityGroups []string `locationName:"securityGroups" type:"list"`
-
-	Sources []InputSource `locationName:"sources" type:"list"`
-
-	State InputState `locationName:"state" type:"string" enum:"true"`
-
-	Tags map[string]string `locationName:"tags" type:"map"`
-
-	Type InputType `locationName:"type" type:"string" enum:"true"`
-}
-
-// String returns the string representation
-func (s DescribeInputOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DescribeInputOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.Arn != nil {
-		v := *s.Arn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "arn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.AttachedChannels != nil {
-		v := s.AttachedChannels
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "attachedChannels", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
-		}
-		ls0.End()
-
-	}
-	if s.Destinations != nil {
-		v := s.Destinations
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "destinations", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	if s.Id != nil {
-		v := *s.Id
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "id", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if len(s.InputClass) > 0 {
-		v := s.InputClass
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "inputClass", protocol.QuotedValue{ValueMarshaler: v}, metadata)
-	}
-	if len(s.InputSourceType) > 0 {
-		v := s.InputSourceType
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "inputSourceType", protocol.QuotedValue{ValueMarshaler: v}, metadata)
-	}
-	if s.MediaConnectFlows != nil {
-		v := s.MediaConnectFlows
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "mediaConnectFlows", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	if s.Name != nil {
-		v := *s.Name
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.RoleArn != nil {
-		v := *s.RoleArn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "roleArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.SecurityGroups != nil {
-		v := s.SecurityGroups
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "securityGroups", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
-		}
-		ls0.End()
-
-	}
-	if s.Sources != nil {
-		v := s.Sources
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "sources", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	if len(s.State) > 0 {
-		v := s.State
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "state", protocol.QuotedValue{ValueMarshaler: v}, metadata)
-	}
-	if s.Tags != nil {
-		v := s.Tags
-
-		metadata := protocol.Metadata{}
-		ms0 := e.Map(protocol.BodyTarget, "tags", metadata)
-		ms0.Start()
-		for k1, v1 := range v {
-			ms0.MapSetValue(k1, protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
-		}
-		ms0.End()
-
-	}
-	if len(s.Type) > 0 {
-		v := s.Type
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "type", protocol.QuotedValue{ValueMarshaler: v}, metadata)
-	}
-	return nil
-}
 
 const opDescribeInput = "DescribeInput"
 
@@ -231,7 +24,7 @@ const opDescribeInput = "DescribeInput"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/DescribeInput
-func (c *Client) DescribeInputRequest(input *DescribeInputInput) DescribeInputRequest {
+func (c *Client) DescribeInputRequest(input *types.DescribeInputInput) DescribeInputRequest {
 	op := &aws.Operation{
 		Name:       opDescribeInput,
 		HTTPMethod: "GET",
@@ -239,10 +32,10 @@ func (c *Client) DescribeInputRequest(input *DescribeInputInput) DescribeInputRe
 	}
 
 	if input == nil {
-		input = &DescribeInputInput{}
+		input = &types.DescribeInputInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeInputOutput{})
+	req := c.newRequest(op, input, &types.DescribeInputOutput{})
 	return DescribeInputRequest{Request: req, Input: input, Copy: c.DescribeInputRequest}
 }
 
@@ -250,8 +43,8 @@ func (c *Client) DescribeInputRequest(input *DescribeInputInput) DescribeInputRe
 // DescribeInput API operation.
 type DescribeInputRequest struct {
 	*aws.Request
-	Input *DescribeInputInput
-	Copy  func(*DescribeInputInput) DescribeInputRequest
+	Input *types.DescribeInputInput
+	Copy  func(*types.DescribeInputInput) DescribeInputRequest
 }
 
 // Send marshals and sends the DescribeInput API request.
@@ -263,7 +56,7 @@ func (r DescribeInputRequest) Send(ctx context.Context) (*DescribeInputResponse,
 	}
 
 	resp := &DescribeInputResponse{
-		DescribeInputOutput: r.Request.Data.(*DescribeInputOutput),
+		DescribeInputOutput: r.Request.Data.(*types.DescribeInputOutput),
 		response:            &aws.Response{Request: r.Request},
 	}
 
@@ -273,7 +66,7 @@ func (r DescribeInputRequest) Send(ctx context.Context) (*DescribeInputResponse,
 // DescribeInputResponse is the response type for the
 // DescribeInput API operation.
 type DescribeInputResponse struct {
-	*DescribeInputOutput
+	*types.DescribeInputOutput
 
 	response *aws.Response
 }

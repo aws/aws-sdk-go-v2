@@ -13,6 +13,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws/awserr"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting/integration"
 	"github.com/aws/aws-sdk-go-v2/service/elasticache"
+	"github.com/aws/aws-sdk-go-v2/service/elasticache/types"
 )
 
 var _ aws.Config
@@ -24,7 +25,7 @@ func TestInteg_00_DescribeEvents(t *testing.T) {
 
 	cfg := integration.ConfigWithDefaultRegion("us-west-2")
 	svc := elasticache.New(cfg)
-	params := &elasticache.DescribeEventsInput{}
+	params := &types.DescribeEventsInput{}
 
 	req := svc.DescribeEventsRequest(params)
 
@@ -39,7 +40,7 @@ func TestInteg_01_DescribeCacheClusters(t *testing.T) {
 
 	cfg := integration.ConfigWithDefaultRegion("us-west-2")
 	svc := elasticache.New(cfg)
-	params := &elasticache.DescribeCacheClustersInput{
+	params := &types.DescribeCacheClustersInput{
 		CacheClusterId: aws.String("fake_cluster"),
 	}
 

@@ -6,71 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/kms/types"
 )
-
-type DecryptInput struct {
-	_ struct{} `type:"structure"`
-
-	// Ciphertext to be decrypted. The blob includes metadata.
-	//
-	// CiphertextBlob is automatically base64 encoded/decoded by the SDK.
-	//
-	// CiphertextBlob is a required field
-	CiphertextBlob []byte `min:"1" type:"blob" required:"true"`
-
-	// The encryption context. If this was specified in the Encrypt function, it
-	// must be specified here or the decryption operation will fail. For more information,
-	// see Encryption Context (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#encrypt_context).
-	EncryptionContext map[string]string `type:"map"`
-
-	// A list of grant tokens.
-	//
-	// For more information, see Grant Tokens (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#grant_token)
-	// in the AWS Key Management Service Developer Guide.
-	GrantTokens []string `type:"list"`
-}
-
-// String returns the string representation
-func (s DecryptInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DecryptInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DecryptInput"}
-
-	if s.CiphertextBlob == nil {
-		invalidParams.Add(aws.NewErrParamRequired("CiphertextBlob"))
-	}
-	if s.CiphertextBlob != nil && len(s.CiphertextBlob) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("CiphertextBlob", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DecryptOutput struct {
-	_ struct{} `type:"structure"`
-
-	// ARN of the key used to perform the decryption. This value is returned if
-	// no errors are encountered during the operation.
-	KeyId *string `min:"1" type:"string"`
-
-	// Decrypted plaintext data. When you use the HTTP API or the AWS CLI, the value
-	// is Base64-encoded. Otherwise, it is not encoded.
-	//
-	// Plaintext is automatically base64 encoded/decoded by the SDK.
-	Plaintext []byte `min:"1" type:"blob" sensitive:"true"`
-}
-
-// String returns the string representation
-func (s DecryptOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDecrypt = "Decrypt"
 
@@ -106,7 +43,7 @@ const opDecrypt = "Decrypt"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/Decrypt
-func (c *Client) DecryptRequest(input *DecryptInput) DecryptRequest {
+func (c *Client) DecryptRequest(input *types.DecryptInput) DecryptRequest {
 	op := &aws.Operation{
 		Name:       opDecrypt,
 		HTTPMethod: "POST",
@@ -114,10 +51,10 @@ func (c *Client) DecryptRequest(input *DecryptInput) DecryptRequest {
 	}
 
 	if input == nil {
-		input = &DecryptInput{}
+		input = &types.DecryptInput{}
 	}
 
-	req := c.newRequest(op, input, &DecryptOutput{})
+	req := c.newRequest(op, input, &types.DecryptOutput{})
 	return DecryptRequest{Request: req, Input: input, Copy: c.DecryptRequest}
 }
 
@@ -125,8 +62,8 @@ func (c *Client) DecryptRequest(input *DecryptInput) DecryptRequest {
 // Decrypt API operation.
 type DecryptRequest struct {
 	*aws.Request
-	Input *DecryptInput
-	Copy  func(*DecryptInput) DecryptRequest
+	Input *types.DecryptInput
+	Copy  func(*types.DecryptInput) DecryptRequest
 }
 
 // Send marshals and sends the Decrypt API request.
@@ -138,7 +75,7 @@ func (r DecryptRequest) Send(ctx context.Context) (*DecryptResponse, error) {
 	}
 
 	resp := &DecryptResponse{
-		DecryptOutput: r.Request.Data.(*DecryptOutput),
+		DecryptOutput: r.Request.Data.(*types.DecryptOutput),
 		response:      &aws.Response{Request: r.Request},
 	}
 
@@ -148,7 +85,7 @@ func (r DecryptRequest) Send(ctx context.Context) (*DecryptResponse, error) {
 // DecryptResponse is the response type for the
 // Decrypt API operation.
 type DecryptResponse struct {
-	*DecryptOutput
+	*types.DecryptOutput
 
 	response *aws.Response
 }

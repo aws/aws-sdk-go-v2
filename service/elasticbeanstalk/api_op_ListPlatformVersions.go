@@ -6,57 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/elasticbeanstalk/types"
 )
-
-type ListPlatformVersionsInput struct {
-	_ struct{} `type:"structure"`
-
-	// List only the platforms where the platform member value relates to one of
-	// the supplied values.
-	Filters []PlatformFilter `type:"list"`
-
-	// The maximum number of platform values returned in one call.
-	MaxRecords *int64 `min:"1" type:"integer"`
-
-	// The starting index into the remaining list of platforms. Use the NextToken
-	// value from a previous ListPlatformVersion call.
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s ListPlatformVersionsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListPlatformVersionsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListPlatformVersionsInput"}
-	if s.MaxRecords != nil && *s.MaxRecords < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxRecords", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ListPlatformVersionsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The starting index into the remaining list of platforms. if this value is
-	// not null, you can use it in a subsequent ListPlatformVersion call.
-	NextToken *string `type:"string"`
-
-	// Detailed information about the platforms.
-	PlatformSummaryList []PlatformSummary `type:"list"`
-}
-
-// String returns the string representation
-func (s ListPlatformVersionsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListPlatformVersions = "ListPlatformVersions"
 
@@ -73,7 +24,7 @@ const opListPlatformVersions = "ListPlatformVersions"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/ListPlatformVersions
-func (c *Client) ListPlatformVersionsRequest(input *ListPlatformVersionsInput) ListPlatformVersionsRequest {
+func (c *Client) ListPlatformVersionsRequest(input *types.ListPlatformVersionsInput) ListPlatformVersionsRequest {
 	op := &aws.Operation{
 		Name:       opListPlatformVersions,
 		HTTPMethod: "POST",
@@ -81,10 +32,10 @@ func (c *Client) ListPlatformVersionsRequest(input *ListPlatformVersionsInput) L
 	}
 
 	if input == nil {
-		input = &ListPlatformVersionsInput{}
+		input = &types.ListPlatformVersionsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListPlatformVersionsOutput{})
+	req := c.newRequest(op, input, &types.ListPlatformVersionsOutput{})
 	return ListPlatformVersionsRequest{Request: req, Input: input, Copy: c.ListPlatformVersionsRequest}
 }
 
@@ -92,8 +43,8 @@ func (c *Client) ListPlatformVersionsRequest(input *ListPlatformVersionsInput) L
 // ListPlatformVersions API operation.
 type ListPlatformVersionsRequest struct {
 	*aws.Request
-	Input *ListPlatformVersionsInput
-	Copy  func(*ListPlatformVersionsInput) ListPlatformVersionsRequest
+	Input *types.ListPlatformVersionsInput
+	Copy  func(*types.ListPlatformVersionsInput) ListPlatformVersionsRequest
 }
 
 // Send marshals and sends the ListPlatformVersions API request.
@@ -105,7 +56,7 @@ func (r ListPlatformVersionsRequest) Send(ctx context.Context) (*ListPlatformVer
 	}
 
 	resp := &ListPlatformVersionsResponse{
-		ListPlatformVersionsOutput: r.Request.Data.(*ListPlatformVersionsOutput),
+		ListPlatformVersionsOutput: r.Request.Data.(*types.ListPlatformVersionsOutput),
 		response:                   &aws.Response{Request: r.Request},
 	}
 
@@ -115,7 +66,7 @@ func (r ListPlatformVersionsRequest) Send(ctx context.Context) (*ListPlatformVer
 // ListPlatformVersionsResponse is the response type for the
 // ListPlatformVersions API operation.
 type ListPlatformVersionsResponse struct {
-	*ListPlatformVersionsOutput
+	*types.ListPlatformVersionsOutput
 
 	response *aws.Response
 }

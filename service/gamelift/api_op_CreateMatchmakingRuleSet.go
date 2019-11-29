@@ -6,67 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/gamelift/types"
 )
-
-// Represents the input for a request action.
-type CreateMatchmakingRuleSetInput struct {
-	_ struct{} `type:"structure"`
-
-	// Unique identifier for a matchmaking rule set. A matchmaking configuration
-	// identifies the rule set it uses by this name value. (Note: The rule set name
-	// is different from the optional "name" field in the rule set body.)
-	//
-	// Name is a required field
-	Name *string `type:"string" required:"true"`
-
-	// Collection of matchmaking rules, formatted as a JSON string. Comments are
-	// not allowed in JSON, but most elements support a description field.
-	//
-	// RuleSetBody is a required field
-	RuleSetBody *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s CreateMatchmakingRuleSetInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateMatchmakingRuleSetInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateMatchmakingRuleSetInput"}
-
-	if s.Name == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Name"))
-	}
-
-	if s.RuleSetBody == nil {
-		invalidParams.Add(aws.NewErrParamRequired("RuleSetBody"))
-	}
-	if s.RuleSetBody != nil && len(*s.RuleSetBody) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("RuleSetBody", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Represents the returned data in response to a request action.
-type CreateMatchmakingRuleSetOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Object that describes the newly created matchmaking rule set.
-	//
-	// RuleSet is a required field
-	RuleSet *MatchmakingRuleSet `type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s CreateMatchmakingRuleSetOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCreateMatchmakingRuleSet = "CreateMatchmakingRuleSet"
 
@@ -120,7 +61,7 @@ const opCreateMatchmakingRuleSet = "CreateMatchmakingRuleSet"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/CreateMatchmakingRuleSet
-func (c *Client) CreateMatchmakingRuleSetRequest(input *CreateMatchmakingRuleSetInput) CreateMatchmakingRuleSetRequest {
+func (c *Client) CreateMatchmakingRuleSetRequest(input *types.CreateMatchmakingRuleSetInput) CreateMatchmakingRuleSetRequest {
 	op := &aws.Operation{
 		Name:       opCreateMatchmakingRuleSet,
 		HTTPMethod: "POST",
@@ -128,10 +69,10 @@ func (c *Client) CreateMatchmakingRuleSetRequest(input *CreateMatchmakingRuleSet
 	}
 
 	if input == nil {
-		input = &CreateMatchmakingRuleSetInput{}
+		input = &types.CreateMatchmakingRuleSetInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateMatchmakingRuleSetOutput{})
+	req := c.newRequest(op, input, &types.CreateMatchmakingRuleSetOutput{})
 	return CreateMatchmakingRuleSetRequest{Request: req, Input: input, Copy: c.CreateMatchmakingRuleSetRequest}
 }
 
@@ -139,8 +80,8 @@ func (c *Client) CreateMatchmakingRuleSetRequest(input *CreateMatchmakingRuleSet
 // CreateMatchmakingRuleSet API operation.
 type CreateMatchmakingRuleSetRequest struct {
 	*aws.Request
-	Input *CreateMatchmakingRuleSetInput
-	Copy  func(*CreateMatchmakingRuleSetInput) CreateMatchmakingRuleSetRequest
+	Input *types.CreateMatchmakingRuleSetInput
+	Copy  func(*types.CreateMatchmakingRuleSetInput) CreateMatchmakingRuleSetRequest
 }
 
 // Send marshals and sends the CreateMatchmakingRuleSet API request.
@@ -152,7 +93,7 @@ func (r CreateMatchmakingRuleSetRequest) Send(ctx context.Context) (*CreateMatch
 	}
 
 	resp := &CreateMatchmakingRuleSetResponse{
-		CreateMatchmakingRuleSetOutput: r.Request.Data.(*CreateMatchmakingRuleSetOutput),
+		CreateMatchmakingRuleSetOutput: r.Request.Data.(*types.CreateMatchmakingRuleSetOutput),
 		response:                       &aws.Response{Request: r.Request},
 	}
 
@@ -162,7 +103,7 @@ func (r CreateMatchmakingRuleSetRequest) Send(ctx context.Context) (*CreateMatch
 // CreateMatchmakingRuleSetResponse is the response type for the
 // CreateMatchmakingRuleSet API operation.
 type CreateMatchmakingRuleSetResponse struct {
-	*CreateMatchmakingRuleSetOutput
+	*types.CreateMatchmakingRuleSetOutput
 
 	response *aws.Response
 }

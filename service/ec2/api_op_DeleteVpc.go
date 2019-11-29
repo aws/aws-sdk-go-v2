@@ -6,53 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/ec2query"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-type DeleteVpcInput struct {
-	_ struct{} `type:"structure"`
-
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have
-	// the required permissions, the error response is DryRunOperation. Otherwise,
-	// it is UnauthorizedOperation.
-	DryRun *bool `locationName:"dryRun" type:"boolean"`
-
-	// The ID of the VPC.
-	//
-	// VpcId is a required field
-	VpcId *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteVpcInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteVpcInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteVpcInput"}
-
-	if s.VpcId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("VpcId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteVpcOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteVpcOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteVpc = "DeleteVpc"
 
@@ -73,7 +30,7 @@ const opDeleteVpc = "DeleteVpc"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteVpc
-func (c *Client) DeleteVpcRequest(input *DeleteVpcInput) DeleteVpcRequest {
+func (c *Client) DeleteVpcRequest(input *types.DeleteVpcInput) DeleteVpcRequest {
 	op := &aws.Operation{
 		Name:       opDeleteVpc,
 		HTTPMethod: "POST",
@@ -81,10 +38,10 @@ func (c *Client) DeleteVpcRequest(input *DeleteVpcInput) DeleteVpcRequest {
 	}
 
 	if input == nil {
-		input = &DeleteVpcInput{}
+		input = &types.DeleteVpcInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteVpcOutput{})
+	req := c.newRequest(op, input, &types.DeleteVpcOutput{})
 	req.Handlers.Unmarshal.Remove(ec2query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return DeleteVpcRequest{Request: req, Input: input, Copy: c.DeleteVpcRequest}
@@ -94,8 +51,8 @@ func (c *Client) DeleteVpcRequest(input *DeleteVpcInput) DeleteVpcRequest {
 // DeleteVpc API operation.
 type DeleteVpcRequest struct {
 	*aws.Request
-	Input *DeleteVpcInput
-	Copy  func(*DeleteVpcInput) DeleteVpcRequest
+	Input *types.DeleteVpcInput
+	Copy  func(*types.DeleteVpcInput) DeleteVpcRequest
 }
 
 // Send marshals and sends the DeleteVpc API request.
@@ -107,7 +64,7 @@ func (r DeleteVpcRequest) Send(ctx context.Context) (*DeleteVpcResponse, error) 
 	}
 
 	resp := &DeleteVpcResponse{
-		DeleteVpcOutput: r.Request.Data.(*DeleteVpcOutput),
+		DeleteVpcOutput: r.Request.Data.(*types.DeleteVpcOutput),
 		response:        &aws.Response{Request: r.Request},
 	}
 
@@ -117,7 +74,7 @@ func (r DeleteVpcRequest) Send(ctx context.Context) (*DeleteVpcResponse, error) 
 // DeleteVpcResponse is the response type for the
 // DeleteVpc API operation.
 type DeleteVpcResponse struct {
-	*DeleteVpcOutput
+	*types.DeleteVpcOutput
 
 	response *aws.Response
 }

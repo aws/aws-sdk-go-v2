@@ -6,76 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/restjson"
+	"github.com/aws/aws-sdk-go-v2/service/apigatewayv2/types"
 )
-
-type DeleteAuthorizerInput struct {
-	_ struct{} `type:"structure"`
-
-	// ApiId is a required field
-	ApiId *string `location:"uri" locationName:"apiId" type:"string" required:"true"`
-
-	// AuthorizerId is a required field
-	AuthorizerId *string `location:"uri" locationName:"authorizerId" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteAuthorizerInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteAuthorizerInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteAuthorizerInput"}
-
-	if s.ApiId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ApiId"))
-	}
-
-	if s.AuthorizerId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("AuthorizerId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteAuthorizerInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.ApiId != nil {
-		v := *s.ApiId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "apiId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.AuthorizerId != nil {
-		v := *s.AuthorizerId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "authorizerId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type DeleteAuthorizerOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteAuthorizerOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteAuthorizerOutput) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
 
 const opDeleteAuthorizer = "DeleteAuthorizer"
 
@@ -92,7 +26,7 @@ const opDeleteAuthorizer = "DeleteAuthorizer"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/apigatewayv2-2018-11-29/DeleteAuthorizer
-func (c *Client) DeleteAuthorizerRequest(input *DeleteAuthorizerInput) DeleteAuthorizerRequest {
+func (c *Client) DeleteAuthorizerRequest(input *types.DeleteAuthorizerInput) DeleteAuthorizerRequest {
 	op := &aws.Operation{
 		Name:       opDeleteAuthorizer,
 		HTTPMethod: "DELETE",
@@ -100,10 +34,10 @@ func (c *Client) DeleteAuthorizerRequest(input *DeleteAuthorizerInput) DeleteAut
 	}
 
 	if input == nil {
-		input = &DeleteAuthorizerInput{}
+		input = &types.DeleteAuthorizerInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteAuthorizerOutput{})
+	req := c.newRequest(op, input, &types.DeleteAuthorizerOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return DeleteAuthorizerRequest{Request: req, Input: input, Copy: c.DeleteAuthorizerRequest}
@@ -113,8 +47,8 @@ func (c *Client) DeleteAuthorizerRequest(input *DeleteAuthorizerInput) DeleteAut
 // DeleteAuthorizer API operation.
 type DeleteAuthorizerRequest struct {
 	*aws.Request
-	Input *DeleteAuthorizerInput
-	Copy  func(*DeleteAuthorizerInput) DeleteAuthorizerRequest
+	Input *types.DeleteAuthorizerInput
+	Copy  func(*types.DeleteAuthorizerInput) DeleteAuthorizerRequest
 }
 
 // Send marshals and sends the DeleteAuthorizer API request.
@@ -126,7 +60,7 @@ func (r DeleteAuthorizerRequest) Send(ctx context.Context) (*DeleteAuthorizerRes
 	}
 
 	resp := &DeleteAuthorizerResponse{
-		DeleteAuthorizerOutput: r.Request.Data.(*DeleteAuthorizerOutput),
+		DeleteAuthorizerOutput: r.Request.Data.(*types.DeleteAuthorizerOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -136,7 +70,7 @@ func (r DeleteAuthorizerRequest) Send(ctx context.Context) (*DeleteAuthorizerRes
 // DeleteAuthorizerResponse is the response type for the
 // DeleteAuthorizer API operation.
 type DeleteAuthorizerResponse struct {
-	*DeleteAuthorizerOutput
+	*types.DeleteAuthorizerOutput
 
 	response *aws.Response
 }

@@ -6,95 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/iam/types"
 )
-
-type ListUserTagsInput struct {
-	_ struct{} `type:"structure"`
-
-	// Use this parameter only when paginating results and only after you receive
-	// a response indicating that the results are truncated. Set it to the value
-	// of the Marker element in the response that you received to indicate where
-	// the next call should start.
-	Marker *string `min:"1" type:"string"`
-
-	// (Optional) Use this only when paginating results to indicate the maximum
-	// number of items that you want in the response. If additional items exist
-	// beyond the maximum that you specify, the IsTruncated response element is
-	// true.
-	//
-	// If you do not include this parameter, it defaults to 100. Note that IAM might
-	// return fewer results, even when more results are available. In that case,
-	// the IsTruncated response element returns true, and Marker contains a value
-	// to include in the subsequent call that tells the service where to continue
-	// from.
-	MaxItems *int64 `min:"1" type:"integer"`
-
-	// The name of the IAM user whose tags you want to see.
-	//
-	// This parameter accepts (through its regex pattern (http://wikipedia.org/wiki/regex))
-	// a string of characters that consist of upper and lowercase alphanumeric characters
-	// with no spaces. You can also include any of the following characters: =,.@-
-	//
-	// UserName is a required field
-	UserName *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s ListUserTagsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListUserTagsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListUserTagsInput"}
-	if s.Marker != nil && len(*s.Marker) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Marker", 1))
-	}
-	if s.MaxItems != nil && *s.MaxItems < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxItems", 1))
-	}
-
-	if s.UserName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("UserName"))
-	}
-	if s.UserName != nil && len(*s.UserName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("UserName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ListUserTagsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A flag that indicates whether there are more items to return. If your results
-	// were truncated, you can use the Marker request parameter to make a subsequent
-	// pagination request that retrieves more items. Note that IAM might return
-	// fewer than the MaxItems number of results even when more results are available.
-	// Check IsTruncated after every call to ensure that you receive all of your
-	// results.
-	IsTruncated *bool `type:"boolean"`
-
-	// When IsTruncated is true, this element is present and contains the value
-	// to use for the Marker parameter in a subsequent pagination request.
-	Marker *string `type:"string"`
-
-	// The list of tags that are currently attached to the user. Each tag consists
-	// of a key name and an associated value. If no tags are attached to the specified
-	// user, the response contains an empty list.
-	//
-	// Tags is a required field
-	Tags []Tag `type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s ListUserTagsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListUserTags = "ListUserTags"
 
@@ -114,7 +27,7 @@ const opListUserTags = "ListUserTags"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListUserTags
-func (c *Client) ListUserTagsRequest(input *ListUserTagsInput) ListUserTagsRequest {
+func (c *Client) ListUserTagsRequest(input *types.ListUserTagsInput) ListUserTagsRequest {
 	op := &aws.Operation{
 		Name:       opListUserTags,
 		HTTPMethod: "POST",
@@ -122,10 +35,10 @@ func (c *Client) ListUserTagsRequest(input *ListUserTagsInput) ListUserTagsReque
 	}
 
 	if input == nil {
-		input = &ListUserTagsInput{}
+		input = &types.ListUserTagsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListUserTagsOutput{})
+	req := c.newRequest(op, input, &types.ListUserTagsOutput{})
 	return ListUserTagsRequest{Request: req, Input: input, Copy: c.ListUserTagsRequest}
 }
 
@@ -133,8 +46,8 @@ func (c *Client) ListUserTagsRequest(input *ListUserTagsInput) ListUserTagsReque
 // ListUserTags API operation.
 type ListUserTagsRequest struct {
 	*aws.Request
-	Input *ListUserTagsInput
-	Copy  func(*ListUserTagsInput) ListUserTagsRequest
+	Input *types.ListUserTagsInput
+	Copy  func(*types.ListUserTagsInput) ListUserTagsRequest
 }
 
 // Send marshals and sends the ListUserTags API request.
@@ -146,7 +59,7 @@ func (r ListUserTagsRequest) Send(ctx context.Context) (*ListUserTagsResponse, e
 	}
 
 	resp := &ListUserTagsResponse{
-		ListUserTagsOutput: r.Request.Data.(*ListUserTagsOutput),
+		ListUserTagsOutput: r.Request.Data.(*types.ListUserTagsOutput),
 		response:           &aws.Response{Request: r.Request},
 	}
 
@@ -156,7 +69,7 @@ func (r ListUserTagsRequest) Send(ctx context.Context) (*ListUserTagsResponse, e
 // ListUserTagsResponse is the response type for the
 // ListUserTags API operation.
 type ListUserTagsResponse struct {
-	*ListUserTagsOutput
+	*types.ListUserTagsOutput
 
 	response *aws.Response
 }

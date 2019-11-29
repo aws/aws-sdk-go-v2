@@ -6,51 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
 )
-
-type DeleteModelPackageInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the model package. The name must have 1 to 63 characters. Valid
-	// characters are a-z, A-Z, 0-9, and - (hyphen).
-	//
-	// ModelPackageName is a required field
-	ModelPackageName *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteModelPackageInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteModelPackageInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteModelPackageInput"}
-
-	if s.ModelPackageName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ModelPackageName"))
-	}
-	if s.ModelPackageName != nil && len(*s.ModelPackageName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ModelPackageName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteModelPackageOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteModelPackageOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteModelPackage = "DeleteModelPackage"
 
@@ -71,7 +30,7 @@ const opDeleteModelPackage = "DeleteModelPackage"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DeleteModelPackage
-func (c *Client) DeleteModelPackageRequest(input *DeleteModelPackageInput) DeleteModelPackageRequest {
+func (c *Client) DeleteModelPackageRequest(input *types.DeleteModelPackageInput) DeleteModelPackageRequest {
 	op := &aws.Operation{
 		Name:       opDeleteModelPackage,
 		HTTPMethod: "POST",
@@ -79,10 +38,10 @@ func (c *Client) DeleteModelPackageRequest(input *DeleteModelPackageInput) Delet
 	}
 
 	if input == nil {
-		input = &DeleteModelPackageInput{}
+		input = &types.DeleteModelPackageInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteModelPackageOutput{})
+	req := c.newRequest(op, input, &types.DeleteModelPackageOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return DeleteModelPackageRequest{Request: req, Input: input, Copy: c.DeleteModelPackageRequest}
@@ -92,8 +51,8 @@ func (c *Client) DeleteModelPackageRequest(input *DeleteModelPackageInput) Delet
 // DeleteModelPackage API operation.
 type DeleteModelPackageRequest struct {
 	*aws.Request
-	Input *DeleteModelPackageInput
-	Copy  func(*DeleteModelPackageInput) DeleteModelPackageRequest
+	Input *types.DeleteModelPackageInput
+	Copy  func(*types.DeleteModelPackageInput) DeleteModelPackageRequest
 }
 
 // Send marshals and sends the DeleteModelPackage API request.
@@ -105,7 +64,7 @@ func (r DeleteModelPackageRequest) Send(ctx context.Context) (*DeleteModelPackag
 	}
 
 	resp := &DeleteModelPackageResponse{
-		DeleteModelPackageOutput: r.Request.Data.(*DeleteModelPackageOutput),
+		DeleteModelPackageOutput: r.Request.Data.(*types.DeleteModelPackageOutput),
 		response:                 &aws.Response{Request: r.Request},
 	}
 
@@ -115,7 +74,7 @@ func (r DeleteModelPackageRequest) Send(ctx context.Context) (*DeleteModelPackag
 // DeleteModelPackageResponse is the response type for the
 // DeleteModelPackage API operation.
 type DeleteModelPackageResponse struct {
-	*DeleteModelPackageOutput
+	*types.DeleteModelPackageOutput
 
 	response *aws.Response
 }

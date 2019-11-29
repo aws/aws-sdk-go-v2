@@ -6,110 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/mediaconvert/types"
 )
-
-// Modify a preset by sending a request with the preset name and any of the
-// following that you wish to change: description, category, and transcoding
-// settings.
-type UpdatePresetInput struct {
-	_ struct{} `type:"structure"`
-
-	// The new category for the preset, if you are changing it.
-	Category *string `locationName:"category" type:"string"`
-
-	// The new description for the preset, if you are changing it.
-	Description *string `locationName:"description" type:"string"`
-
-	// The name of the preset you are modifying.
-	//
-	// Name is a required field
-	Name *string `location:"uri" locationName:"name" type:"string" required:"true"`
-
-	// Settings for preset
-	Settings *PresetSettings `locationName:"settings" type:"structure"`
-}
-
-// String returns the string representation
-func (s UpdatePresetInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdatePresetInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdatePresetInput"}
-
-	if s.Name == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Name"))
-	}
-	if s.Settings != nil {
-		if err := s.Settings.Validate(); err != nil {
-			invalidParams.AddNested("Settings", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s UpdatePresetInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.Category != nil {
-		v := *s.Category
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "category", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Description != nil {
-		v := *s.Description
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "description", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Settings != nil {
-		v := s.Settings
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "settings", v, metadata)
-	}
-	if s.Name != nil {
-		v := *s.Name
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-// Successful update preset requests will return the new preset JSON.
-type UpdatePresetOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A preset is a collection of preconfigured media conversion settings that
-	// you want MediaConvert to apply to the output during the conversion process.
-	Preset *Preset `locationName:"preset" type:"structure"`
-}
-
-// String returns the string representation
-func (s UpdatePresetOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s UpdatePresetOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.Preset != nil {
-		v := s.Preset
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "preset", v, metadata)
-	}
-	return nil
-}
 
 const opUpdatePreset = "UpdatePreset"
 
@@ -126,7 +24,7 @@ const opUpdatePreset = "UpdatePreset"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/UpdatePreset
-func (c *Client) UpdatePresetRequest(input *UpdatePresetInput) UpdatePresetRequest {
+func (c *Client) UpdatePresetRequest(input *types.UpdatePresetInput) UpdatePresetRequest {
 	op := &aws.Operation{
 		Name:       opUpdatePreset,
 		HTTPMethod: "PUT",
@@ -134,10 +32,10 @@ func (c *Client) UpdatePresetRequest(input *UpdatePresetInput) UpdatePresetReque
 	}
 
 	if input == nil {
-		input = &UpdatePresetInput{}
+		input = &types.UpdatePresetInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdatePresetOutput{})
+	req := c.newRequest(op, input, &types.UpdatePresetOutput{})
 	return UpdatePresetRequest{Request: req, Input: input, Copy: c.UpdatePresetRequest}
 }
 
@@ -145,8 +43,8 @@ func (c *Client) UpdatePresetRequest(input *UpdatePresetInput) UpdatePresetReque
 // UpdatePreset API operation.
 type UpdatePresetRequest struct {
 	*aws.Request
-	Input *UpdatePresetInput
-	Copy  func(*UpdatePresetInput) UpdatePresetRequest
+	Input *types.UpdatePresetInput
+	Copy  func(*types.UpdatePresetInput) UpdatePresetRequest
 }
 
 // Send marshals and sends the UpdatePreset API request.
@@ -158,7 +56,7 @@ func (r UpdatePresetRequest) Send(ctx context.Context) (*UpdatePresetResponse, e
 	}
 
 	resp := &UpdatePresetResponse{
-		UpdatePresetOutput: r.Request.Data.(*UpdatePresetOutput),
+		UpdatePresetOutput: r.Request.Data.(*types.UpdatePresetOutput),
 		response:           &aws.Response{Request: r.Request},
 	}
 
@@ -168,7 +66,7 @@ func (r UpdatePresetRequest) Send(ctx context.Context) (*UpdatePresetResponse, e
 // UpdatePresetResponse is the response type for the
 // UpdatePreset API operation.
 type UpdatePresetResponse struct {
-	*UpdatePresetOutput
+	*types.UpdatePresetOutput
 
 	response *aws.Response
 }

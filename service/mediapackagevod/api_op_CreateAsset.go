@@ -6,171 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/mediapackagevod/types"
 )
-
-type CreateAssetInput struct {
-	_ struct{} `type:"structure"`
-
-	// Id is a required field
-	Id *string `locationName:"id" type:"string" required:"true"`
-
-	// PackagingGroupId is a required field
-	PackagingGroupId *string `locationName:"packagingGroupId" type:"string" required:"true"`
-
-	ResourceId *string `locationName:"resourceId" type:"string"`
-
-	// SourceArn is a required field
-	SourceArn *string `locationName:"sourceArn" type:"string" required:"true"`
-
-	// SourceRoleArn is a required field
-	SourceRoleArn *string `locationName:"sourceRoleArn" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s CreateAssetInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateAssetInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateAssetInput"}
-
-	if s.Id == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Id"))
-	}
-
-	if s.PackagingGroupId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("PackagingGroupId"))
-	}
-
-	if s.SourceArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("SourceArn"))
-	}
-
-	if s.SourceRoleArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("SourceRoleArn"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s CreateAssetInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.Id != nil {
-		v := *s.Id
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "id", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.PackagingGroupId != nil {
-		v := *s.PackagingGroupId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "packagingGroupId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.ResourceId != nil {
-		v := *s.ResourceId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "resourceId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.SourceArn != nil {
-		v := *s.SourceArn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "sourceArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.SourceRoleArn != nil {
-		v := *s.SourceRoleArn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "sourceRoleArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type CreateAssetOutput struct {
-	_ struct{} `type:"structure"`
-
-	Arn *string `locationName:"arn" type:"string"`
-
-	EgressEndpoints []EgressEndpoint `locationName:"egressEndpoints" type:"list"`
-
-	Id *string `locationName:"id" type:"string"`
-
-	PackagingGroupId *string `locationName:"packagingGroupId" type:"string"`
-
-	ResourceId *string `locationName:"resourceId" type:"string"`
-
-	SourceArn *string `locationName:"sourceArn" type:"string"`
-
-	SourceRoleArn *string `locationName:"sourceRoleArn" type:"string"`
-}
-
-// String returns the string representation
-func (s CreateAssetOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s CreateAssetOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.Arn != nil {
-		v := *s.Arn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "arn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.EgressEndpoints != nil {
-		v := s.EgressEndpoints
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "egressEndpoints", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	if s.Id != nil {
-		v := *s.Id
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "id", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.PackagingGroupId != nil {
-		v := *s.PackagingGroupId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "packagingGroupId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.ResourceId != nil {
-		v := *s.ResourceId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "resourceId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.SourceArn != nil {
-		v := *s.SourceArn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "sourceArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.SourceRoleArn != nil {
-		v := *s.SourceRoleArn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "sourceRoleArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opCreateAsset = "CreateAsset"
 
@@ -187,7 +24,7 @@ const opCreateAsset = "CreateAsset"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mediapackage-vod-2018-11-07/CreateAsset
-func (c *Client) CreateAssetRequest(input *CreateAssetInput) CreateAssetRequest {
+func (c *Client) CreateAssetRequest(input *types.CreateAssetInput) CreateAssetRequest {
 	op := &aws.Operation{
 		Name:       opCreateAsset,
 		HTTPMethod: "POST",
@@ -195,10 +32,10 @@ func (c *Client) CreateAssetRequest(input *CreateAssetInput) CreateAssetRequest 
 	}
 
 	if input == nil {
-		input = &CreateAssetInput{}
+		input = &types.CreateAssetInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateAssetOutput{})
+	req := c.newRequest(op, input, &types.CreateAssetOutput{})
 	return CreateAssetRequest{Request: req, Input: input, Copy: c.CreateAssetRequest}
 }
 
@@ -206,8 +43,8 @@ func (c *Client) CreateAssetRequest(input *CreateAssetInput) CreateAssetRequest 
 // CreateAsset API operation.
 type CreateAssetRequest struct {
 	*aws.Request
-	Input *CreateAssetInput
-	Copy  func(*CreateAssetInput) CreateAssetRequest
+	Input *types.CreateAssetInput
+	Copy  func(*types.CreateAssetInput) CreateAssetRequest
 }
 
 // Send marshals and sends the CreateAsset API request.
@@ -219,7 +56,7 @@ func (r CreateAssetRequest) Send(ctx context.Context) (*CreateAssetResponse, err
 	}
 
 	resp := &CreateAssetResponse{
-		CreateAssetOutput: r.Request.Data.(*CreateAssetOutput),
+		CreateAssetOutput: r.Request.Data.(*types.CreateAssetOutput),
 		response:          &aws.Response{Request: r.Request},
 	}
 
@@ -229,7 +66,7 @@ func (r CreateAssetRequest) Send(ctx context.Context) (*CreateAssetResponse, err
 // CreateAssetResponse is the response type for the
 // CreateAsset API operation.
 type CreateAssetResponse struct {
-	*CreateAssetOutput
+	*types.CreateAssetOutput
 
 	response *aws.Response
 }

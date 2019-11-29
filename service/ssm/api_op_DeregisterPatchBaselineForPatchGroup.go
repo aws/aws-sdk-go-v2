@@ -6,66 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ssm/types"
 )
-
-type DeregisterPatchBaselineForPatchGroupInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the patch baseline to deregister the patch group from.
-	//
-	// BaselineId is a required field
-	BaselineId *string `min:"20" type:"string" required:"true"`
-
-	// The name of the patch group that should be deregistered from the patch baseline.
-	//
-	// PatchGroup is a required field
-	PatchGroup *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeregisterPatchBaselineForPatchGroupInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeregisterPatchBaselineForPatchGroupInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeregisterPatchBaselineForPatchGroupInput"}
-
-	if s.BaselineId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("BaselineId"))
-	}
-	if s.BaselineId != nil && len(*s.BaselineId) < 20 {
-		invalidParams.Add(aws.NewErrParamMinLen("BaselineId", 20))
-	}
-
-	if s.PatchGroup == nil {
-		invalidParams.Add(aws.NewErrParamRequired("PatchGroup"))
-	}
-	if s.PatchGroup != nil && len(*s.PatchGroup) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("PatchGroup", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeregisterPatchBaselineForPatchGroupOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the patch baseline the patch group was deregistered from.
-	BaselineId *string `min:"20" type:"string"`
-
-	// The name of the patch group deregistered from the patch baseline.
-	PatchGroup *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s DeregisterPatchBaselineForPatchGroupOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeregisterPatchBaselineForPatchGroup = "DeregisterPatchBaselineForPatchGroup"
 
@@ -82,7 +24,7 @@ const opDeregisterPatchBaselineForPatchGroup = "DeregisterPatchBaselineForPatchG
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DeregisterPatchBaselineForPatchGroup
-func (c *Client) DeregisterPatchBaselineForPatchGroupRequest(input *DeregisterPatchBaselineForPatchGroupInput) DeregisterPatchBaselineForPatchGroupRequest {
+func (c *Client) DeregisterPatchBaselineForPatchGroupRequest(input *types.DeregisterPatchBaselineForPatchGroupInput) DeregisterPatchBaselineForPatchGroupRequest {
 	op := &aws.Operation{
 		Name:       opDeregisterPatchBaselineForPatchGroup,
 		HTTPMethod: "POST",
@@ -90,10 +32,10 @@ func (c *Client) DeregisterPatchBaselineForPatchGroupRequest(input *DeregisterPa
 	}
 
 	if input == nil {
-		input = &DeregisterPatchBaselineForPatchGroupInput{}
+		input = &types.DeregisterPatchBaselineForPatchGroupInput{}
 	}
 
-	req := c.newRequest(op, input, &DeregisterPatchBaselineForPatchGroupOutput{})
+	req := c.newRequest(op, input, &types.DeregisterPatchBaselineForPatchGroupOutput{})
 	return DeregisterPatchBaselineForPatchGroupRequest{Request: req, Input: input, Copy: c.DeregisterPatchBaselineForPatchGroupRequest}
 }
 
@@ -101,8 +43,8 @@ func (c *Client) DeregisterPatchBaselineForPatchGroupRequest(input *DeregisterPa
 // DeregisterPatchBaselineForPatchGroup API operation.
 type DeregisterPatchBaselineForPatchGroupRequest struct {
 	*aws.Request
-	Input *DeregisterPatchBaselineForPatchGroupInput
-	Copy  func(*DeregisterPatchBaselineForPatchGroupInput) DeregisterPatchBaselineForPatchGroupRequest
+	Input *types.DeregisterPatchBaselineForPatchGroupInput
+	Copy  func(*types.DeregisterPatchBaselineForPatchGroupInput) DeregisterPatchBaselineForPatchGroupRequest
 }
 
 // Send marshals and sends the DeregisterPatchBaselineForPatchGroup API request.
@@ -114,7 +56,7 @@ func (r DeregisterPatchBaselineForPatchGroupRequest) Send(ctx context.Context) (
 	}
 
 	resp := &DeregisterPatchBaselineForPatchGroupResponse{
-		DeregisterPatchBaselineForPatchGroupOutput: r.Request.Data.(*DeregisterPatchBaselineForPatchGroupOutput),
+		DeregisterPatchBaselineForPatchGroupOutput: r.Request.Data.(*types.DeregisterPatchBaselineForPatchGroupOutput),
 		response: &aws.Response{Request: r.Request},
 	}
 
@@ -124,7 +66,7 @@ func (r DeregisterPatchBaselineForPatchGroupRequest) Send(ctx context.Context) (
 // DeregisterPatchBaselineForPatchGroupResponse is the response type for the
 // DeregisterPatchBaselineForPatchGroup API operation.
 type DeregisterPatchBaselineForPatchGroupResponse struct {
-	*DeregisterPatchBaselineForPatchGroupOutput
+	*types.DeregisterPatchBaselineForPatchGroupOutput
 
 	response *aws.Response
 }

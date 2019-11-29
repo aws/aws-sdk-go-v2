@@ -6,93 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/iam/types"
 )
-
-type GetAccountAuthorizationDetailsInput struct {
-	_ struct{} `type:"structure"`
-
-	// A list of entity types used to filter the results. Only the entities that
-	// match the types you specify are included in the output. Use the value LocalManagedPolicy
-	// to include customer managed policies.
-	//
-	// The format for this parameter is a comma-separated (if more than one) list
-	// of strings. Each string value in the list must be one of the valid values
-	// listed below.
-	Filter []EntityType `type:"list"`
-
-	// Use this parameter only when paginating results and only after you receive
-	// a response indicating that the results are truncated. Set it to the value
-	// of the Marker element in the response that you received to indicate where
-	// the next call should start.
-	Marker *string `min:"1" type:"string"`
-
-	// Use this only when paginating results to indicate the maximum number of items
-	// you want in the response. If additional items exist beyond the maximum you
-	// specify, the IsTruncated response element is true.
-	//
-	// If you do not include this parameter, the number of items defaults to 100.
-	// Note that IAM might return fewer results, even when there are more results
-	// available. In that case, the IsTruncated response element returns true, and
-	// Marker contains a value to include in the subsequent call that tells the
-	// service where to continue from.
-	MaxItems *int64 `min:"1" type:"integer"`
-}
-
-// String returns the string representation
-func (s GetAccountAuthorizationDetailsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetAccountAuthorizationDetailsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetAccountAuthorizationDetailsInput"}
-	if s.Marker != nil && len(*s.Marker) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Marker", 1))
-	}
-	if s.MaxItems != nil && *s.MaxItems < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxItems", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Contains the response to a successful GetAccountAuthorizationDetails request.
-type GetAccountAuthorizationDetailsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A list containing information about IAM groups.
-	GroupDetailList []GroupDetail `type:"list"`
-
-	// A flag that indicates whether there are more items to return. If your results
-	// were truncated, you can make a subsequent pagination request using the Marker
-	// request parameter to retrieve more items. Note that IAM might return fewer
-	// than the MaxItems number of results even when there are more results available.
-	// We recommend that you check IsTruncated after every call to ensure that you
-	// receive all your results.
-	IsTruncated *bool `type:"boolean"`
-
-	// When IsTruncated is true, this element is present and contains the value
-	// to use for the Marker parameter in a subsequent pagination request.
-	Marker *string `type:"string"`
-
-	// A list containing information about managed policies.
-	Policies []ManagedPolicyDetail `type:"list"`
-
-	// A list containing information about IAM roles.
-	RoleDetailList []RoleDetail `type:"list"`
-
-	// A list containing information about IAM users.
-	UserDetailList []UserDetail `type:"list"`
-}
-
-// String returns the string representation
-func (s GetAccountAuthorizationDetailsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetAccountAuthorizationDetails = "GetAccountAuthorizationDetails"
 
@@ -121,7 +36,7 @@ const opGetAccountAuthorizationDetails = "GetAccountAuthorizationDetails"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetAccountAuthorizationDetails
-func (c *Client) GetAccountAuthorizationDetailsRequest(input *GetAccountAuthorizationDetailsInput) GetAccountAuthorizationDetailsRequest {
+func (c *Client) GetAccountAuthorizationDetailsRequest(input *types.GetAccountAuthorizationDetailsInput) GetAccountAuthorizationDetailsRequest {
 	op := &aws.Operation{
 		Name:       opGetAccountAuthorizationDetails,
 		HTTPMethod: "POST",
@@ -135,10 +50,10 @@ func (c *Client) GetAccountAuthorizationDetailsRequest(input *GetAccountAuthoriz
 	}
 
 	if input == nil {
-		input = &GetAccountAuthorizationDetailsInput{}
+		input = &types.GetAccountAuthorizationDetailsInput{}
 	}
 
-	req := c.newRequest(op, input, &GetAccountAuthorizationDetailsOutput{})
+	req := c.newRequest(op, input, &types.GetAccountAuthorizationDetailsOutput{})
 	return GetAccountAuthorizationDetailsRequest{Request: req, Input: input, Copy: c.GetAccountAuthorizationDetailsRequest}
 }
 
@@ -146,8 +61,8 @@ func (c *Client) GetAccountAuthorizationDetailsRequest(input *GetAccountAuthoriz
 // GetAccountAuthorizationDetails API operation.
 type GetAccountAuthorizationDetailsRequest struct {
 	*aws.Request
-	Input *GetAccountAuthorizationDetailsInput
-	Copy  func(*GetAccountAuthorizationDetailsInput) GetAccountAuthorizationDetailsRequest
+	Input *types.GetAccountAuthorizationDetailsInput
+	Copy  func(*types.GetAccountAuthorizationDetailsInput) GetAccountAuthorizationDetailsRequest
 }
 
 // Send marshals and sends the GetAccountAuthorizationDetails API request.
@@ -159,7 +74,7 @@ func (r GetAccountAuthorizationDetailsRequest) Send(ctx context.Context) (*GetAc
 	}
 
 	resp := &GetAccountAuthorizationDetailsResponse{
-		GetAccountAuthorizationDetailsOutput: r.Request.Data.(*GetAccountAuthorizationDetailsOutput),
+		GetAccountAuthorizationDetailsOutput: r.Request.Data.(*types.GetAccountAuthorizationDetailsOutput),
 		response:                             &aws.Response{Request: r.Request},
 	}
 
@@ -189,7 +104,7 @@ func NewGetAccountAuthorizationDetailsPaginator(req GetAccountAuthorizationDetai
 	return GetAccountAuthorizationDetailsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *GetAccountAuthorizationDetailsInput
+				var inCpy *types.GetAccountAuthorizationDetailsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -209,14 +124,14 @@ type GetAccountAuthorizationDetailsPaginator struct {
 	aws.Pager
 }
 
-func (p *GetAccountAuthorizationDetailsPaginator) CurrentPage() *GetAccountAuthorizationDetailsOutput {
-	return p.Pager.CurrentPage().(*GetAccountAuthorizationDetailsOutput)
+func (p *GetAccountAuthorizationDetailsPaginator) CurrentPage() *types.GetAccountAuthorizationDetailsOutput {
+	return p.Pager.CurrentPage().(*types.GetAccountAuthorizationDetailsOutput)
 }
 
 // GetAccountAuthorizationDetailsResponse is the response type for the
 // GetAccountAuthorizationDetails API operation.
 type GetAccountAuthorizationDetailsResponse struct {
-	*GetAccountAuthorizationDetailsOutput
+	*types.GetAccountAuthorizationDetailsOutput
 
 	response *aws.Response
 }

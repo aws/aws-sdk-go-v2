@@ -7,6 +7,7 @@ import (
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
+	"github.com/aws/aws-sdk-go-v2/service/s3/types"
 )
 
 // WaitUntilBucketExists uses the Amazon S3 API operation
@@ -18,7 +19,7 @@ import (
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Client) WaitUntilBucketExists(ctx context.Context, input *HeadBucketInput, opts ...aws.WaiterOption) error {
+func (c *Client) WaitUntilBucketExists(ctx context.Context, input *types.HeadBucketInput, opts ...aws.WaiterOption) error {
 	w := aws.Waiter{
 		Name:        "WaitUntilBucketExists",
 		MaxAttempts: 20,
@@ -47,7 +48,7 @@ func (c *Client) WaitUntilBucketExists(ctx context.Context, input *HeadBucketInp
 		},
 		Logger: c.Config.Logger,
 		NewRequest: func(opts []aws.Option) (*aws.Request, error) {
-			var inCpy *HeadBucketInput
+			var inCpy *types.HeadBucketInput
 			if input != nil {
 				tmp := *input
 				inCpy = &tmp
@@ -72,7 +73,7 @@ func (c *Client) WaitUntilBucketExists(ctx context.Context, input *HeadBucketInp
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Client) WaitUntilBucketNotExists(ctx context.Context, input *HeadBucketInput, opts ...aws.WaiterOption) error {
+func (c *Client) WaitUntilBucketNotExists(ctx context.Context, input *types.HeadBucketInput, opts ...aws.WaiterOption) error {
 	w := aws.Waiter{
 		Name:        "WaitUntilBucketNotExists",
 		MaxAttempts: 20,
@@ -86,7 +87,7 @@ func (c *Client) WaitUntilBucketNotExists(ctx context.Context, input *HeadBucket
 		},
 		Logger: c.Config.Logger,
 		NewRequest: func(opts []aws.Option) (*aws.Request, error) {
-			var inCpy *HeadBucketInput
+			var inCpy *types.HeadBucketInput
 			if input != nil {
 				tmp := *input
 				inCpy = &tmp
@@ -111,7 +112,7 @@ func (c *Client) WaitUntilBucketNotExists(ctx context.Context, input *HeadBucket
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Client) WaitUntilObjectExists(ctx context.Context, input *HeadObjectInput, opts ...aws.WaiterOption) error {
+func (c *Client) WaitUntilObjectExists(ctx context.Context, input *types.HeadObjectInput, opts ...aws.WaiterOption) error {
 	w := aws.Waiter{
 		Name:        "WaitUntilObjectExists",
 		MaxAttempts: 20,
@@ -130,7 +131,7 @@ func (c *Client) WaitUntilObjectExists(ctx context.Context, input *HeadObjectInp
 		},
 		Logger: c.Config.Logger,
 		NewRequest: func(opts []aws.Option) (*aws.Request, error) {
-			var inCpy *HeadObjectInput
+			var inCpy *types.HeadObjectInput
 			if input != nil {
 				tmp := *input
 				inCpy = &tmp
@@ -155,7 +156,7 @@ func (c *Client) WaitUntilObjectExists(ctx context.Context, input *HeadObjectInp
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Client) WaitUntilObjectNotExists(ctx context.Context, input *HeadObjectInput, opts ...aws.WaiterOption) error {
+func (c *Client) WaitUntilObjectNotExists(ctx context.Context, input *types.HeadObjectInput, opts ...aws.WaiterOption) error {
 	w := aws.Waiter{
 		Name:        "WaitUntilObjectNotExists",
 		MaxAttempts: 20,
@@ -169,7 +170,7 @@ func (c *Client) WaitUntilObjectNotExists(ctx context.Context, input *HeadObject
 		},
 		Logger: c.Config.Logger,
 		NewRequest: func(opts []aws.Option) (*aws.Request, error) {
-			var inCpy *HeadObjectInput
+			var inCpy *types.HeadObjectInput
 			if input != nil {
 				tmp := *input
 				inCpy = &tmp

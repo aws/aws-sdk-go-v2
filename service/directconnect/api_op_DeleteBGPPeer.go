@@ -6,41 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/directconnect/types"
 )
-
-type DeleteBGPPeerInput struct {
-	_ struct{} `type:"structure"`
-
-	// The autonomous system (AS) number for Border Gateway Protocol (BGP) configuration.
-	Asn *int64 `locationName:"asn" type:"integer"`
-
-	// The ID of the BGP peer.
-	BgpPeerId *string `locationName:"bgpPeerId" type:"string"`
-
-	// The IP address assigned to the customer interface.
-	CustomerAddress *string `locationName:"customerAddress" type:"string"`
-
-	// The ID of the virtual interface.
-	VirtualInterfaceId *string `locationName:"virtualInterfaceId" type:"string"`
-}
-
-// String returns the string representation
-func (s DeleteBGPPeerInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type DeleteBGPPeerOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The virtual interface.
-	VirtualInterface *VirtualInterface `locationName:"virtualInterface" type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteBGPPeerOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteBGPPeer = "DeleteBGPPeer"
 
@@ -60,7 +27,7 @@ const opDeleteBGPPeer = "DeleteBGPPeer"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DeleteBGPPeer
-func (c *Client) DeleteBGPPeerRequest(input *DeleteBGPPeerInput) DeleteBGPPeerRequest {
+func (c *Client) DeleteBGPPeerRequest(input *types.DeleteBGPPeerInput) DeleteBGPPeerRequest {
 	op := &aws.Operation{
 		Name:       opDeleteBGPPeer,
 		HTTPMethod: "POST",
@@ -68,10 +35,10 @@ func (c *Client) DeleteBGPPeerRequest(input *DeleteBGPPeerInput) DeleteBGPPeerRe
 	}
 
 	if input == nil {
-		input = &DeleteBGPPeerInput{}
+		input = &types.DeleteBGPPeerInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteBGPPeerOutput{})
+	req := c.newRequest(op, input, &types.DeleteBGPPeerOutput{})
 	return DeleteBGPPeerRequest{Request: req, Input: input, Copy: c.DeleteBGPPeerRequest}
 }
 
@@ -79,8 +46,8 @@ func (c *Client) DeleteBGPPeerRequest(input *DeleteBGPPeerInput) DeleteBGPPeerRe
 // DeleteBGPPeer API operation.
 type DeleteBGPPeerRequest struct {
 	*aws.Request
-	Input *DeleteBGPPeerInput
-	Copy  func(*DeleteBGPPeerInput) DeleteBGPPeerRequest
+	Input *types.DeleteBGPPeerInput
+	Copy  func(*types.DeleteBGPPeerInput) DeleteBGPPeerRequest
 }
 
 // Send marshals and sends the DeleteBGPPeer API request.
@@ -92,7 +59,7 @@ func (r DeleteBGPPeerRequest) Send(ctx context.Context) (*DeleteBGPPeerResponse,
 	}
 
 	resp := &DeleteBGPPeerResponse{
-		DeleteBGPPeerOutput: r.Request.Data.(*DeleteBGPPeerOutput),
+		DeleteBGPPeerOutput: r.Request.Data.(*types.DeleteBGPPeerOutput),
 		response:            &aws.Response{Request: r.Request},
 	}
 
@@ -102,7 +69,7 @@ func (r DeleteBGPPeerRequest) Send(ctx context.Context) (*DeleteBGPPeerResponse,
 // DeleteBGPPeerResponse is the response type for the
 // DeleteBGPPeer API operation.
 type DeleteBGPPeerResponse struct {
-	*DeleteBGPPeerOutput
+	*types.DeleteBGPPeerOutput
 
 	response *aws.Response
 }

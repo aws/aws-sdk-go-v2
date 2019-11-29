@@ -6,114 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/route53/types"
 )
-
-// A complex type that contains information about the request to create a hosted
-// zone.
-type GetHostedZoneLimitInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the hosted zone that you want to get a limit for.
-	//
-	// HostedZoneId is a required field
-	HostedZoneId *string `location:"uri" locationName:"Id" type:"string" required:"true"`
-
-	// The limit that you want to get. Valid values include the following:
-	//
-	//    * MAX_RRSETS_BY_ZONE: The maximum number of records that you can create
-	//    in the specified hosted zone.
-	//
-	//    * MAX_VPCS_ASSOCIATED_BY_ZONE: The maximum number of Amazon VPCs that
-	//    you can associate with the specified private hosted zone.
-	//
-	// Type is a required field
-	Type HostedZoneLimitType `location:"uri" locationName:"Type" type:"string" required:"true" enum:"true"`
-}
-
-// String returns the string representation
-func (s GetHostedZoneLimitInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetHostedZoneLimitInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetHostedZoneLimitInput"}
-
-	if s.HostedZoneId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("HostedZoneId"))
-	}
-	if len(s.Type) == 0 {
-		invalidParams.Add(aws.NewErrParamRequired("Type"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetHostedZoneLimitInput) MarshalFields(e protocol.FieldEncoder) error {
-
-	if s.HostedZoneId != nil {
-		v := *s.HostedZoneId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "Id", protocol.StringValue(v), metadata)
-	}
-	if len(s.Type) > 0 {
-		v := s.Type
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "Type", v, metadata)
-	}
-	return nil
-}
-
-// A complex type that contains the requested limit.
-type GetHostedZoneLimitOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The current number of entities that you have created of the specified type.
-	// For example, if you specified MAX_RRSETS_BY_ZONE for the value of Type in
-	// the request, the value of Count is the current number of records that you
-	// have created in the specified hosted zone.
-	//
-	// Count is a required field
-	Count *int64 `type:"long" required:"true"`
-
-	// The current setting for the specified limit. For example, if you specified
-	// MAX_RRSETS_BY_ZONE for the value of Type in the request, the value of Limit
-	// is the maximum number of records that you can create in the specified hosted
-	// zone.
-	//
-	// Limit is a required field
-	Limit *HostedZoneLimit `type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s GetHostedZoneLimitOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetHostedZoneLimitOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.Count != nil {
-		v := *s.Count
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "Count", protocol.Int64Value(v), metadata)
-	}
-	if s.Limit != nil {
-		v := s.Limit
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "Limit", v, metadata)
-	}
-	return nil
-}
 
 const opGetHostedZoneLimit = "GetHostedZoneLimit"
 
@@ -135,7 +29,7 @@ const opGetHostedZoneLimit = "GetHostedZoneLimit"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/GetHostedZoneLimit
-func (c *Client) GetHostedZoneLimitRequest(input *GetHostedZoneLimitInput) GetHostedZoneLimitRequest {
+func (c *Client) GetHostedZoneLimitRequest(input *types.GetHostedZoneLimitInput) GetHostedZoneLimitRequest {
 	op := &aws.Operation{
 		Name:       opGetHostedZoneLimit,
 		HTTPMethod: "GET",
@@ -143,10 +37,10 @@ func (c *Client) GetHostedZoneLimitRequest(input *GetHostedZoneLimitInput) GetHo
 	}
 
 	if input == nil {
-		input = &GetHostedZoneLimitInput{}
+		input = &types.GetHostedZoneLimitInput{}
 	}
 
-	req := c.newRequest(op, input, &GetHostedZoneLimitOutput{})
+	req := c.newRequest(op, input, &types.GetHostedZoneLimitOutput{})
 	return GetHostedZoneLimitRequest{Request: req, Input: input, Copy: c.GetHostedZoneLimitRequest}
 }
 
@@ -154,8 +48,8 @@ func (c *Client) GetHostedZoneLimitRequest(input *GetHostedZoneLimitInput) GetHo
 // GetHostedZoneLimit API operation.
 type GetHostedZoneLimitRequest struct {
 	*aws.Request
-	Input *GetHostedZoneLimitInput
-	Copy  func(*GetHostedZoneLimitInput) GetHostedZoneLimitRequest
+	Input *types.GetHostedZoneLimitInput
+	Copy  func(*types.GetHostedZoneLimitInput) GetHostedZoneLimitRequest
 }
 
 // Send marshals and sends the GetHostedZoneLimit API request.
@@ -167,7 +61,7 @@ func (r GetHostedZoneLimitRequest) Send(ctx context.Context) (*GetHostedZoneLimi
 	}
 
 	resp := &GetHostedZoneLimitResponse{
-		GetHostedZoneLimitOutput: r.Request.Data.(*GetHostedZoneLimitOutput),
+		GetHostedZoneLimitOutput: r.Request.Data.(*types.GetHostedZoneLimitOutput),
 		response:                 &aws.Response{Request: r.Request},
 	}
 
@@ -177,7 +71,7 @@ func (r GetHostedZoneLimitRequest) Send(ctx context.Context) (*GetHostedZoneLimi
 // GetHostedZoneLimitResponse is the response type for the
 // GetHostedZoneLimit API operation.
 type GetHostedZoneLimitResponse struct {
-	*GetHostedZoneLimitOutput
+	*types.GetHostedZoneLimitOutput
 
 	response *aws.Response
 }

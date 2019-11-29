@@ -6,106 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/forecast/types"
 )
-
-type CreateDatasetInput struct {
-	_ struct{} `type:"structure"`
-
-	// The frequency of data collection.
-	//
-	// Valid intervals are Y (Year), M (Month), W (Week), D (Day), H (Hour), 30min
-	// (30 minutes), 15min (15 minutes), 10min (10 minutes), 5min (5 minutes), and
-	// 1min (1 minute). For example, "D" indicates every day and "15min" indicates
-	// every 15 minutes.
-	DataFrequency *string `type:"string"`
-
-	// A name for the dataset.
-	//
-	// DatasetName is a required field
-	DatasetName *string `min:"1" type:"string" required:"true"`
-
-	// The dataset type. Valid values depend on the chosen Domain.
-	//
-	// DatasetType is a required field
-	DatasetType DatasetType `type:"string" required:"true" enum:"true"`
-
-	// The domain associated with the dataset. The Domain and DatasetType that you
-	// choose determine the fields that must be present in the training data that
-	// you import to the dataset. For example, if you choose the RETAIL domain and
-	// TARGET_TIME_SERIES as the DatasetType, Amazon Forecast requires item_id,
-	// timestamp, and demand fields to be present in your data. For more information,
-	// see howitworks-datasets-groups.
-	//
-	// Domain is a required field
-	Domain Domain `type:"string" required:"true" enum:"true"`
-
-	// An AWS Key Management Service (KMS) key and the AWS Identity and Access Management
-	// (IAM) role that Amazon Forecast can assume to access the key.
-	EncryptionConfig *EncryptionConfig `type:"structure"`
-
-	// The schema for the dataset. The schema attributes and their order must match
-	// the fields in your data. The dataset Domain and DatasetType that you choose
-	// determine the minimum required fields in your training data. For information
-	// about the required fields for a specific dataset domain and type, see howitworks-domains-ds-types.
-	//
-	// Schema is a required field
-	Schema *Schema `type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s CreateDatasetInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateDatasetInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateDatasetInput"}
-
-	if s.DatasetName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DatasetName"))
-	}
-	if s.DatasetName != nil && len(*s.DatasetName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("DatasetName", 1))
-	}
-	if len(s.DatasetType) == 0 {
-		invalidParams.Add(aws.NewErrParamRequired("DatasetType"))
-	}
-	if len(s.Domain) == 0 {
-		invalidParams.Add(aws.NewErrParamRequired("Domain"))
-	}
-
-	if s.Schema == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Schema"))
-	}
-	if s.EncryptionConfig != nil {
-		if err := s.EncryptionConfig.Validate(); err != nil {
-			invalidParams.AddNested("EncryptionConfig", err.(aws.ErrInvalidParams))
-		}
-	}
-	if s.Schema != nil {
-		if err := s.Schema.Validate(); err != nil {
-			invalidParams.AddNested("Schema", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type CreateDatasetOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the dataset.
-	DatasetArn *string `type:"string"`
-}
-
-// String returns the string representation
-func (s CreateDatasetOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCreateDataset = "CreateDataset"
 
@@ -146,7 +48,7 @@ const opCreateDataset = "CreateDataset"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/CreateDataset
-func (c *Client) CreateDatasetRequest(input *CreateDatasetInput) CreateDatasetRequest {
+func (c *Client) CreateDatasetRequest(input *types.CreateDatasetInput) CreateDatasetRequest {
 	op := &aws.Operation{
 		Name:       opCreateDataset,
 		HTTPMethod: "POST",
@@ -154,10 +56,10 @@ func (c *Client) CreateDatasetRequest(input *CreateDatasetInput) CreateDatasetRe
 	}
 
 	if input == nil {
-		input = &CreateDatasetInput{}
+		input = &types.CreateDatasetInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateDatasetOutput{})
+	req := c.newRequest(op, input, &types.CreateDatasetOutput{})
 	return CreateDatasetRequest{Request: req, Input: input, Copy: c.CreateDatasetRequest}
 }
 
@@ -165,8 +67,8 @@ func (c *Client) CreateDatasetRequest(input *CreateDatasetInput) CreateDatasetRe
 // CreateDataset API operation.
 type CreateDatasetRequest struct {
 	*aws.Request
-	Input *CreateDatasetInput
-	Copy  func(*CreateDatasetInput) CreateDatasetRequest
+	Input *types.CreateDatasetInput
+	Copy  func(*types.CreateDatasetInput) CreateDatasetRequest
 }
 
 // Send marshals and sends the CreateDataset API request.
@@ -178,7 +80,7 @@ func (r CreateDatasetRequest) Send(ctx context.Context) (*CreateDatasetResponse,
 	}
 
 	resp := &CreateDatasetResponse{
-		CreateDatasetOutput: r.Request.Data.(*CreateDatasetOutput),
+		CreateDatasetOutput: r.Request.Data.(*types.CreateDatasetOutput),
 		response:            &aws.Response{Request: r.Request},
 	}
 
@@ -188,7 +90,7 @@ func (r CreateDatasetRequest) Send(ctx context.Context) (*CreateDatasetResponse,
 // CreateDatasetResponse is the response type for the
 // CreateDataset API operation.
 type CreateDatasetResponse struct {
-	*CreateDatasetOutput
+	*types.CreateDatasetOutput
 
 	response *aws.Response
 }

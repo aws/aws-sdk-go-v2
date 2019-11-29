@@ -6,77 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/inspector/types"
 )
-
-type GetAssessmentReportInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ARN that specifies the assessment run for which you want to generate
-	// a report.
-	//
-	// AssessmentRunArn is a required field
-	AssessmentRunArn *string `locationName:"assessmentRunArn" min:"1" type:"string" required:"true"`
-
-	// Specifies the file format (html or pdf) of the assessment report that you
-	// want to generate.
-	//
-	// ReportFileFormat is a required field
-	ReportFileFormat ReportFileFormat `locationName:"reportFileFormat" type:"string" required:"true" enum:"true"`
-
-	// Specifies the type of the assessment report that you want to generate. There
-	// are two types of assessment reports: a finding report and a full report.
-	// For more information, see Assessment Reports (https://docs.aws.amazon.com/inspector/latest/userguide/inspector_reports.html).
-	//
-	// ReportType is a required field
-	ReportType ReportType `locationName:"reportType" type:"string" required:"true" enum:"true"`
-}
-
-// String returns the string representation
-func (s GetAssessmentReportInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetAssessmentReportInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetAssessmentReportInput"}
-
-	if s.AssessmentRunArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("AssessmentRunArn"))
-	}
-	if s.AssessmentRunArn != nil && len(*s.AssessmentRunArn) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("AssessmentRunArn", 1))
-	}
-	if len(s.ReportFileFormat) == 0 {
-		invalidParams.Add(aws.NewErrParamRequired("ReportFileFormat"))
-	}
-	if len(s.ReportType) == 0 {
-		invalidParams.Add(aws.NewErrParamRequired("ReportType"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type GetAssessmentReportOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Specifies the status of the request to generate an assessment report.
-	//
-	// Status is a required field
-	Status ReportStatus `locationName:"status" type:"string" required:"true" enum:"true"`
-
-	// Specifies the URL where you can find the generated assessment report. This
-	// parameter is only returned if the report is successfully generated.
-	Url *string `locationName:"url" type:"string"`
-}
-
-// String returns the string representation
-func (s GetAssessmentReportOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetAssessmentReport = "GetAssessmentReport"
 
@@ -94,7 +25,7 @@ const opGetAssessmentReport = "GetAssessmentReport"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/GetAssessmentReport
-func (c *Client) GetAssessmentReportRequest(input *GetAssessmentReportInput) GetAssessmentReportRequest {
+func (c *Client) GetAssessmentReportRequest(input *types.GetAssessmentReportInput) GetAssessmentReportRequest {
 	op := &aws.Operation{
 		Name:       opGetAssessmentReport,
 		HTTPMethod: "POST",
@@ -102,10 +33,10 @@ func (c *Client) GetAssessmentReportRequest(input *GetAssessmentReportInput) Get
 	}
 
 	if input == nil {
-		input = &GetAssessmentReportInput{}
+		input = &types.GetAssessmentReportInput{}
 	}
 
-	req := c.newRequest(op, input, &GetAssessmentReportOutput{})
+	req := c.newRequest(op, input, &types.GetAssessmentReportOutput{})
 	return GetAssessmentReportRequest{Request: req, Input: input, Copy: c.GetAssessmentReportRequest}
 }
 
@@ -113,8 +44,8 @@ func (c *Client) GetAssessmentReportRequest(input *GetAssessmentReportInput) Get
 // GetAssessmentReport API operation.
 type GetAssessmentReportRequest struct {
 	*aws.Request
-	Input *GetAssessmentReportInput
-	Copy  func(*GetAssessmentReportInput) GetAssessmentReportRequest
+	Input *types.GetAssessmentReportInput
+	Copy  func(*types.GetAssessmentReportInput) GetAssessmentReportRequest
 }
 
 // Send marshals and sends the GetAssessmentReport API request.
@@ -126,7 +57,7 @@ func (r GetAssessmentReportRequest) Send(ctx context.Context) (*GetAssessmentRep
 	}
 
 	resp := &GetAssessmentReportResponse{
-		GetAssessmentReportOutput: r.Request.Data.(*GetAssessmentReportOutput),
+		GetAssessmentReportOutput: r.Request.Data.(*types.GetAssessmentReportOutput),
 		response:                  &aws.Response{Request: r.Request},
 	}
 
@@ -136,7 +67,7 @@ func (r GetAssessmentReportRequest) Send(ctx context.Context) (*GetAssessmentRep
 // GetAssessmentReportResponse is the response type for the
 // GetAssessmentReport API operation.
 type GetAssessmentReportResponse struct {
-	*GetAssessmentReportOutput
+	*types.GetAssessmentReportOutput
 
 	response *aws.Response
 }

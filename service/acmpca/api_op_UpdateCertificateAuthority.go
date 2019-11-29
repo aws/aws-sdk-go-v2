@@ -6,64 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
+	"github.com/aws/aws-sdk-go-v2/service/acmpca/types"
 )
-
-type UpdateCertificateAuthorityInput struct {
-	_ struct{} `type:"structure"`
-
-	// Amazon Resource Name (ARN) of the private CA that issued the certificate
-	// to be revoked. This must be of the form:
-	//
-	// arn:aws:acm-pca:region:account:certificate-authority/12345678-1234-1234-1234-123456789012
-	//
-	// CertificateAuthorityArn is a required field
-	CertificateAuthorityArn *string `min:"5" type:"string" required:"true"`
-
-	// Revocation information for your private CA.
-	RevocationConfiguration *RevocationConfiguration `type:"structure"`
-
-	// Status of your private CA.
-	Status CertificateAuthorityStatus `type:"string" enum:"true"`
-}
-
-// String returns the string representation
-func (s UpdateCertificateAuthorityInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateCertificateAuthorityInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateCertificateAuthorityInput"}
-
-	if s.CertificateAuthorityArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("CertificateAuthorityArn"))
-	}
-	if s.CertificateAuthorityArn != nil && len(*s.CertificateAuthorityArn) < 5 {
-		invalidParams.Add(aws.NewErrParamMinLen("CertificateAuthorityArn", 5))
-	}
-	if s.RevocationConfiguration != nil {
-		if err := s.RevocationConfiguration.Validate(); err != nil {
-			invalidParams.AddNested("RevocationConfiguration", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type UpdateCertificateAuthorityOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s UpdateCertificateAuthorityOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opUpdateCertificateAuthority = "UpdateCertificateAuthority"
 
@@ -83,7 +29,7 @@ const opUpdateCertificateAuthority = "UpdateCertificateAuthority"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/acm-pca-2017-08-22/UpdateCertificateAuthority
-func (c *Client) UpdateCertificateAuthorityRequest(input *UpdateCertificateAuthorityInput) UpdateCertificateAuthorityRequest {
+func (c *Client) UpdateCertificateAuthorityRequest(input *types.UpdateCertificateAuthorityInput) UpdateCertificateAuthorityRequest {
 	op := &aws.Operation{
 		Name:       opUpdateCertificateAuthority,
 		HTTPMethod: "POST",
@@ -91,10 +37,10 @@ func (c *Client) UpdateCertificateAuthorityRequest(input *UpdateCertificateAutho
 	}
 
 	if input == nil {
-		input = &UpdateCertificateAuthorityInput{}
+		input = &types.UpdateCertificateAuthorityInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateCertificateAuthorityOutput{})
+	req := c.newRequest(op, input, &types.UpdateCertificateAuthorityOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return UpdateCertificateAuthorityRequest{Request: req, Input: input, Copy: c.UpdateCertificateAuthorityRequest}
@@ -104,8 +50,8 @@ func (c *Client) UpdateCertificateAuthorityRequest(input *UpdateCertificateAutho
 // UpdateCertificateAuthority API operation.
 type UpdateCertificateAuthorityRequest struct {
 	*aws.Request
-	Input *UpdateCertificateAuthorityInput
-	Copy  func(*UpdateCertificateAuthorityInput) UpdateCertificateAuthorityRequest
+	Input *types.UpdateCertificateAuthorityInput
+	Copy  func(*types.UpdateCertificateAuthorityInput) UpdateCertificateAuthorityRequest
 }
 
 // Send marshals and sends the UpdateCertificateAuthority API request.
@@ -117,7 +63,7 @@ func (r UpdateCertificateAuthorityRequest) Send(ctx context.Context) (*UpdateCer
 	}
 
 	resp := &UpdateCertificateAuthorityResponse{
-		UpdateCertificateAuthorityOutput: r.Request.Data.(*UpdateCertificateAuthorityOutput),
+		UpdateCertificateAuthorityOutput: r.Request.Data.(*types.UpdateCertificateAuthorityOutput),
 		response:                         &aws.Response{Request: r.Request},
 	}
 
@@ -127,7 +73,7 @@ func (r UpdateCertificateAuthorityRequest) Send(ctx context.Context) (*UpdateCer
 // UpdateCertificateAuthorityResponse is the response type for the
 // UpdateCertificateAuthority API operation.
 type UpdateCertificateAuthorityResponse struct {
-	*UpdateCertificateAuthorityOutput
+	*types.UpdateCertificateAuthorityOutput
 
 	response *aws.Response
 }

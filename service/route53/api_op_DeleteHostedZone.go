@@ -6,77 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/route53/types"
 )
-
-// A request to delete a hosted zone.
-type DeleteHostedZoneInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the hosted zone you want to delete.
-	//
-	// Id is a required field
-	Id *string `location:"uri" locationName:"Id" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteHostedZoneInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteHostedZoneInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteHostedZoneInput"}
-
-	if s.Id == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Id"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteHostedZoneInput) MarshalFields(e protocol.FieldEncoder) error {
-
-	if s.Id != nil {
-		v := *s.Id
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "Id", protocol.StringValue(v), metadata)
-	}
-	return nil
-}
-
-// A complex type that contains the response to a DeleteHostedZone request.
-type DeleteHostedZoneOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A complex type that contains the ID, the status, and the date and time of
-	// a request to delete a hosted zone.
-	//
-	// ChangeInfo is a required field
-	ChangeInfo *ChangeInfo `type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteHostedZoneOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteHostedZoneOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.ChangeInfo != nil {
-		v := s.ChangeInfo
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "ChangeInfo", v, metadata)
-	}
-	return nil
-}
 
 const opDeleteHostedZone = "DeleteHostedZone"
 
@@ -138,7 +69,7 @@ const opDeleteHostedZone = "DeleteHostedZone"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/DeleteHostedZone
-func (c *Client) DeleteHostedZoneRequest(input *DeleteHostedZoneInput) DeleteHostedZoneRequest {
+func (c *Client) DeleteHostedZoneRequest(input *types.DeleteHostedZoneInput) DeleteHostedZoneRequest {
 	op := &aws.Operation{
 		Name:       opDeleteHostedZone,
 		HTTPMethod: "DELETE",
@@ -146,10 +77,10 @@ func (c *Client) DeleteHostedZoneRequest(input *DeleteHostedZoneInput) DeleteHos
 	}
 
 	if input == nil {
-		input = &DeleteHostedZoneInput{}
+		input = &types.DeleteHostedZoneInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteHostedZoneOutput{})
+	req := c.newRequest(op, input, &types.DeleteHostedZoneOutput{})
 	return DeleteHostedZoneRequest{Request: req, Input: input, Copy: c.DeleteHostedZoneRequest}
 }
 
@@ -157,8 +88,8 @@ func (c *Client) DeleteHostedZoneRequest(input *DeleteHostedZoneInput) DeleteHos
 // DeleteHostedZone API operation.
 type DeleteHostedZoneRequest struct {
 	*aws.Request
-	Input *DeleteHostedZoneInput
-	Copy  func(*DeleteHostedZoneInput) DeleteHostedZoneRequest
+	Input *types.DeleteHostedZoneInput
+	Copy  func(*types.DeleteHostedZoneInput) DeleteHostedZoneRequest
 }
 
 // Send marshals and sends the DeleteHostedZone API request.
@@ -170,7 +101,7 @@ func (r DeleteHostedZoneRequest) Send(ctx context.Context) (*DeleteHostedZoneRes
 	}
 
 	resp := &DeleteHostedZoneResponse{
-		DeleteHostedZoneOutput: r.Request.Data.(*DeleteHostedZoneOutput),
+		DeleteHostedZoneOutput: r.Request.Data.(*types.DeleteHostedZoneOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -180,7 +111,7 @@ func (r DeleteHostedZoneRequest) Send(ctx context.Context) (*DeleteHostedZoneRes
 // DeleteHostedZoneResponse is the response type for the
 // DeleteHostedZone API operation.
 type DeleteHostedZoneResponse struct {
-	*DeleteHostedZoneOutput
+	*types.DeleteHostedZoneOutput
 
 	response *aws.Response
 }

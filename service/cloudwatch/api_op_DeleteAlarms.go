@@ -6,47 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/query"
+	"github.com/aws/aws-sdk-go-v2/service/cloudwatch/types"
 )
-
-type DeleteAlarmsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The alarms to be deleted.
-	//
-	// AlarmNames is a required field
-	AlarmNames []string `type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteAlarmsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteAlarmsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteAlarmsInput"}
-
-	if s.AlarmNames == nil {
-		invalidParams.Add(aws.NewErrParamRequired("AlarmNames"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteAlarmsOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteAlarmsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteAlarms = "DeleteAlarms"
 
@@ -64,7 +27,7 @@ const opDeleteAlarms = "DeleteAlarms"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/DeleteAlarms
-func (c *Client) DeleteAlarmsRequest(input *DeleteAlarmsInput) DeleteAlarmsRequest {
+func (c *Client) DeleteAlarmsRequest(input *types.DeleteAlarmsInput) DeleteAlarmsRequest {
 	op := &aws.Operation{
 		Name:       opDeleteAlarms,
 		HTTPMethod: "POST",
@@ -72,10 +35,10 @@ func (c *Client) DeleteAlarmsRequest(input *DeleteAlarmsInput) DeleteAlarmsReque
 	}
 
 	if input == nil {
-		input = &DeleteAlarmsInput{}
+		input = &types.DeleteAlarmsInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteAlarmsOutput{})
+	req := c.newRequest(op, input, &types.DeleteAlarmsOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return DeleteAlarmsRequest{Request: req, Input: input, Copy: c.DeleteAlarmsRequest}
@@ -85,8 +48,8 @@ func (c *Client) DeleteAlarmsRequest(input *DeleteAlarmsInput) DeleteAlarmsReque
 // DeleteAlarms API operation.
 type DeleteAlarmsRequest struct {
 	*aws.Request
-	Input *DeleteAlarmsInput
-	Copy  func(*DeleteAlarmsInput) DeleteAlarmsRequest
+	Input *types.DeleteAlarmsInput
+	Copy  func(*types.DeleteAlarmsInput) DeleteAlarmsRequest
 }
 
 // Send marshals and sends the DeleteAlarms API request.
@@ -98,7 +61,7 @@ func (r DeleteAlarmsRequest) Send(ctx context.Context) (*DeleteAlarmsResponse, e
 	}
 
 	resp := &DeleteAlarmsResponse{
-		DeleteAlarmsOutput: r.Request.Data.(*DeleteAlarmsOutput),
+		DeleteAlarmsOutput: r.Request.Data.(*types.DeleteAlarmsOutput),
 		response:           &aws.Response{Request: r.Request},
 	}
 
@@ -108,7 +71,7 @@ func (r DeleteAlarmsRequest) Send(ctx context.Context) (*DeleteAlarmsResponse, e
 // DeleteAlarmsResponse is the response type for the
 // DeleteAlarms API operation.
 type DeleteAlarmsResponse struct {
-	*DeleteAlarmsOutput
+	*types.DeleteAlarmsOutput
 
 	response *aws.Response
 }

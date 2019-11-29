@@ -6,103 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/route53/types"
 )
-
-// A request to get information about a specified hosted zone.
-type GetHostedZoneInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the hosted zone that you want to get information about.
-	//
-	// Id is a required field
-	Id *string `location:"uri" locationName:"Id" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetHostedZoneInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetHostedZoneInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetHostedZoneInput"}
-
-	if s.Id == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Id"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetHostedZoneInput) MarshalFields(e protocol.FieldEncoder) error {
-
-	if s.Id != nil {
-		v := *s.Id
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "Id", protocol.StringValue(v), metadata)
-	}
-	return nil
-}
-
-// A complex type that contain the response to a GetHostedZone request.
-type GetHostedZoneOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A complex type that lists the Amazon Route 53 name servers for the specified
-	// hosted zone.
-	DelegationSet *DelegationSet `type:"structure"`
-
-	// A complex type that contains general information about the specified hosted
-	// zone.
-	//
-	// HostedZone is a required field
-	HostedZone *HostedZone `type:"structure" required:"true"`
-
-	// A complex type that contains information about the VPCs that are associated
-	// with the specified hosted zone.
-	VPCs []VPC `locationNameList:"VPC" min:"1" type:"list"`
-}
-
-// String returns the string representation
-func (s GetHostedZoneOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetHostedZoneOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.DelegationSet != nil {
-		v := s.DelegationSet
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "DelegationSet", v, metadata)
-	}
-	if s.HostedZone != nil {
-		v := s.HostedZone
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "HostedZone", v, metadata)
-	}
-	if s.VPCs != nil {
-		v := s.VPCs
-
-		metadata := protocol.Metadata{ListLocationName: "VPC"}
-		ls0 := e.List(protocol.BodyTarget, "VPCs", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	return nil
-}
 
 const opGetHostedZone = "GetHostedZone"
 
@@ -120,7 +25,7 @@ const opGetHostedZone = "GetHostedZone"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/GetHostedZone
-func (c *Client) GetHostedZoneRequest(input *GetHostedZoneInput) GetHostedZoneRequest {
+func (c *Client) GetHostedZoneRequest(input *types.GetHostedZoneInput) GetHostedZoneRequest {
 	op := &aws.Operation{
 		Name:       opGetHostedZone,
 		HTTPMethod: "GET",
@@ -128,10 +33,10 @@ func (c *Client) GetHostedZoneRequest(input *GetHostedZoneInput) GetHostedZoneRe
 	}
 
 	if input == nil {
-		input = &GetHostedZoneInput{}
+		input = &types.GetHostedZoneInput{}
 	}
 
-	req := c.newRequest(op, input, &GetHostedZoneOutput{})
+	req := c.newRequest(op, input, &types.GetHostedZoneOutput{})
 	return GetHostedZoneRequest{Request: req, Input: input, Copy: c.GetHostedZoneRequest}
 }
 
@@ -139,8 +44,8 @@ func (c *Client) GetHostedZoneRequest(input *GetHostedZoneInput) GetHostedZoneRe
 // GetHostedZone API operation.
 type GetHostedZoneRequest struct {
 	*aws.Request
-	Input *GetHostedZoneInput
-	Copy  func(*GetHostedZoneInput) GetHostedZoneRequest
+	Input *types.GetHostedZoneInput
+	Copy  func(*types.GetHostedZoneInput) GetHostedZoneRequest
 }
 
 // Send marshals and sends the GetHostedZone API request.
@@ -152,7 +57,7 @@ func (r GetHostedZoneRequest) Send(ctx context.Context) (*GetHostedZoneResponse,
 	}
 
 	resp := &GetHostedZoneResponse{
-		GetHostedZoneOutput: r.Request.Data.(*GetHostedZoneOutput),
+		GetHostedZoneOutput: r.Request.Data.(*types.GetHostedZoneOutput),
 		response:            &aws.Response{Request: r.Request},
 	}
 
@@ -162,7 +67,7 @@ func (r GetHostedZoneRequest) Send(ctx context.Context) (*GetHostedZoneResponse,
 // GetHostedZoneResponse is the response type for the
 // GetHostedZone API operation.
 type GetHostedZoneResponse struct {
-	*GetHostedZoneOutput
+	*types.GetHostedZoneOutput
 
 	response *aws.Response
 }

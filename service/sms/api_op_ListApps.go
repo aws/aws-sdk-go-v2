@@ -6,43 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/sms/types"
 )
-
-type ListAppsInput struct {
-	_ struct{} `type:"structure"`
-
-	AppIds []string `locationName:"appIds" type:"list"`
-
-	// The maximum number of results to return in a single call. The default value
-	// is 50. To retrieve the remaining results, make another call with the returned
-	// NextToken value.
-	MaxResults *int64 `locationName:"maxResults" type:"integer"`
-
-	// The token for the next set of results.
-	NextToken *string `locationName:"nextToken" type:"string"`
-}
-
-// String returns the string representation
-func (s ListAppsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type ListAppsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A list of application summaries.
-	Apps []AppSummary `locationName:"apps" type:"list"`
-
-	// The token required to retrieve the next set of results. This value is null
-	// when there are no more results to return.
-	NextToken *string `locationName:"nextToken" type:"string"`
-}
-
-// String returns the string representation
-func (s ListAppsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListApps = "ListApps"
 
@@ -59,7 +24,7 @@ const opListApps = "ListApps"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sms-2016-10-24/ListApps
-func (c *Client) ListAppsRequest(input *ListAppsInput) ListAppsRequest {
+func (c *Client) ListAppsRequest(input *types.ListAppsInput) ListAppsRequest {
 	op := &aws.Operation{
 		Name:       opListApps,
 		HTTPMethod: "POST",
@@ -67,10 +32,10 @@ func (c *Client) ListAppsRequest(input *ListAppsInput) ListAppsRequest {
 	}
 
 	if input == nil {
-		input = &ListAppsInput{}
+		input = &types.ListAppsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListAppsOutput{})
+	req := c.newRequest(op, input, &types.ListAppsOutput{})
 	return ListAppsRequest{Request: req, Input: input, Copy: c.ListAppsRequest}
 }
 
@@ -78,8 +43,8 @@ func (c *Client) ListAppsRequest(input *ListAppsInput) ListAppsRequest {
 // ListApps API operation.
 type ListAppsRequest struct {
 	*aws.Request
-	Input *ListAppsInput
-	Copy  func(*ListAppsInput) ListAppsRequest
+	Input *types.ListAppsInput
+	Copy  func(*types.ListAppsInput) ListAppsRequest
 }
 
 // Send marshals and sends the ListApps API request.
@@ -91,7 +56,7 @@ func (r ListAppsRequest) Send(ctx context.Context) (*ListAppsResponse, error) {
 	}
 
 	resp := &ListAppsResponse{
-		ListAppsOutput: r.Request.Data.(*ListAppsOutput),
+		ListAppsOutput: r.Request.Data.(*types.ListAppsOutput),
 		response:       &aws.Response{Request: r.Request},
 	}
 
@@ -101,7 +66,7 @@ func (r ListAppsRequest) Send(ctx context.Context) (*ListAppsResponse, error) {
 // ListAppsResponse is the response type for the
 // ListApps API operation.
 type ListAppsResponse struct {
-	*ListAppsOutput
+	*types.ListAppsOutput
 
 	response *aws.Response
 }

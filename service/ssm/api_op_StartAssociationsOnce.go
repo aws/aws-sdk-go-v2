@@ -6,48 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ssm/types"
 )
-
-type StartAssociationsOnceInput struct {
-	_ struct{} `type:"structure"`
-
-	// The association IDs that you want to run immediately and only one time.
-	//
-	// AssociationIds is a required field
-	AssociationIds []string `min:"1" type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s StartAssociationsOnceInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *StartAssociationsOnceInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "StartAssociationsOnceInput"}
-
-	if s.AssociationIds == nil {
-		invalidParams.Add(aws.NewErrParamRequired("AssociationIds"))
-	}
-	if s.AssociationIds != nil && len(s.AssociationIds) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("AssociationIds", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type StartAssociationsOnceOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s StartAssociationsOnceOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opStartAssociationsOnce = "StartAssociationsOnce"
 
@@ -65,7 +25,7 @@ const opStartAssociationsOnce = "StartAssociationsOnce"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/StartAssociationsOnce
-func (c *Client) StartAssociationsOnceRequest(input *StartAssociationsOnceInput) StartAssociationsOnceRequest {
+func (c *Client) StartAssociationsOnceRequest(input *types.StartAssociationsOnceInput) StartAssociationsOnceRequest {
 	op := &aws.Operation{
 		Name:       opStartAssociationsOnce,
 		HTTPMethod: "POST",
@@ -73,10 +33,10 @@ func (c *Client) StartAssociationsOnceRequest(input *StartAssociationsOnceInput)
 	}
 
 	if input == nil {
-		input = &StartAssociationsOnceInput{}
+		input = &types.StartAssociationsOnceInput{}
 	}
 
-	req := c.newRequest(op, input, &StartAssociationsOnceOutput{})
+	req := c.newRequest(op, input, &types.StartAssociationsOnceOutput{})
 	return StartAssociationsOnceRequest{Request: req, Input: input, Copy: c.StartAssociationsOnceRequest}
 }
 
@@ -84,8 +44,8 @@ func (c *Client) StartAssociationsOnceRequest(input *StartAssociationsOnceInput)
 // StartAssociationsOnce API operation.
 type StartAssociationsOnceRequest struct {
 	*aws.Request
-	Input *StartAssociationsOnceInput
-	Copy  func(*StartAssociationsOnceInput) StartAssociationsOnceRequest
+	Input *types.StartAssociationsOnceInput
+	Copy  func(*types.StartAssociationsOnceInput) StartAssociationsOnceRequest
 }
 
 // Send marshals and sends the StartAssociationsOnce API request.
@@ -97,7 +57,7 @@ func (r StartAssociationsOnceRequest) Send(ctx context.Context) (*StartAssociati
 	}
 
 	resp := &StartAssociationsOnceResponse{
-		StartAssociationsOnceOutput: r.Request.Data.(*StartAssociationsOnceOutput),
+		StartAssociationsOnceOutput: r.Request.Data.(*types.StartAssociationsOnceOutput),
 		response:                    &aws.Response{Request: r.Request},
 	}
 
@@ -107,7 +67,7 @@ func (r StartAssociationsOnceRequest) Send(ctx context.Context) (*StartAssociati
 // StartAssociationsOnceResponse is the response type for the
 // StartAssociationsOnce API operation.
 type StartAssociationsOnceResponse struct {
-	*StartAssociationsOnceOutput
+	*types.StartAssociationsOnceOutput
 
 	response *aws.Response
 }

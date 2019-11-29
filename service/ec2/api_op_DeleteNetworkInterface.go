@@ -6,54 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/ec2query"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-// Contains the parameters for DeleteNetworkInterface.
-type DeleteNetworkInterfaceInput struct {
-	_ struct{} `type:"structure"`
-
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have
-	// the required permissions, the error response is DryRunOperation. Otherwise,
-	// it is UnauthorizedOperation.
-	DryRun *bool `locationName:"dryRun" type:"boolean"`
-
-	// The ID of the network interface.
-	//
-	// NetworkInterfaceId is a required field
-	NetworkInterfaceId *string `locationName:"networkInterfaceId" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteNetworkInterfaceInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteNetworkInterfaceInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteNetworkInterfaceInput"}
-
-	if s.NetworkInterfaceId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("NetworkInterfaceId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteNetworkInterfaceOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteNetworkInterfaceOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteNetworkInterface = "DeleteNetworkInterface"
 
@@ -71,7 +27,7 @@ const opDeleteNetworkInterface = "DeleteNetworkInterface"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteNetworkInterface
-func (c *Client) DeleteNetworkInterfaceRequest(input *DeleteNetworkInterfaceInput) DeleteNetworkInterfaceRequest {
+func (c *Client) DeleteNetworkInterfaceRequest(input *types.DeleteNetworkInterfaceInput) DeleteNetworkInterfaceRequest {
 	op := &aws.Operation{
 		Name:       opDeleteNetworkInterface,
 		HTTPMethod: "POST",
@@ -79,10 +35,10 @@ func (c *Client) DeleteNetworkInterfaceRequest(input *DeleteNetworkInterfaceInpu
 	}
 
 	if input == nil {
-		input = &DeleteNetworkInterfaceInput{}
+		input = &types.DeleteNetworkInterfaceInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteNetworkInterfaceOutput{})
+	req := c.newRequest(op, input, &types.DeleteNetworkInterfaceOutput{})
 	req.Handlers.Unmarshal.Remove(ec2query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return DeleteNetworkInterfaceRequest{Request: req, Input: input, Copy: c.DeleteNetworkInterfaceRequest}
@@ -92,8 +48,8 @@ func (c *Client) DeleteNetworkInterfaceRequest(input *DeleteNetworkInterfaceInpu
 // DeleteNetworkInterface API operation.
 type DeleteNetworkInterfaceRequest struct {
 	*aws.Request
-	Input *DeleteNetworkInterfaceInput
-	Copy  func(*DeleteNetworkInterfaceInput) DeleteNetworkInterfaceRequest
+	Input *types.DeleteNetworkInterfaceInput
+	Copy  func(*types.DeleteNetworkInterfaceInput) DeleteNetworkInterfaceRequest
 }
 
 // Send marshals and sends the DeleteNetworkInterface API request.
@@ -105,7 +61,7 @@ func (r DeleteNetworkInterfaceRequest) Send(ctx context.Context) (*DeleteNetwork
 	}
 
 	resp := &DeleteNetworkInterfaceResponse{
-		DeleteNetworkInterfaceOutput: r.Request.Data.(*DeleteNetworkInterfaceOutput),
+		DeleteNetworkInterfaceOutput: r.Request.Data.(*types.DeleteNetworkInterfaceOutput),
 		response:                     &aws.Response{Request: r.Request},
 	}
 
@@ -115,7 +71,7 @@ func (r DeleteNetworkInterfaceRequest) Send(ctx context.Context) (*DeleteNetwork
 // DeleteNetworkInterfaceResponse is the response type for the
 // DeleteNetworkInterface API operation.
 type DeleteNetworkInterfaceResponse struct {
-	*DeleteNetworkInterfaceOutput
+	*types.DeleteNetworkInterfaceOutput
 
 	response *aws.Response
 }

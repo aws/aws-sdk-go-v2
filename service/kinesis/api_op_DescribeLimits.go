@@ -6,36 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/kinesis/types"
 )
-
-type DescribeLimitsInput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DescribeLimitsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type DescribeLimitsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The number of open shards.
-	//
-	// OpenShardCount is a required field
-	OpenShardCount *int64 `type:"integer" required:"true"`
-
-	// The maximum number of shards.
-	//
-	// ShardLimit is a required field
-	ShardLimit *int64 `type:"integer" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeLimitsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeLimits = "DescribeLimits"
 
@@ -57,7 +29,7 @@ const opDescribeLimits = "DescribeLimits"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/DescribeLimits
-func (c *Client) DescribeLimitsRequest(input *DescribeLimitsInput) DescribeLimitsRequest {
+func (c *Client) DescribeLimitsRequest(input *types.DescribeLimitsInput) DescribeLimitsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeLimits,
 		HTTPMethod: "POST",
@@ -65,10 +37,10 @@ func (c *Client) DescribeLimitsRequest(input *DescribeLimitsInput) DescribeLimit
 	}
 
 	if input == nil {
-		input = &DescribeLimitsInput{}
+		input = &types.DescribeLimitsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeLimitsOutput{})
+	req := c.newRequest(op, input, &types.DescribeLimitsOutput{})
 	return DescribeLimitsRequest{Request: req, Input: input, Copy: c.DescribeLimitsRequest}
 }
 
@@ -76,8 +48,8 @@ func (c *Client) DescribeLimitsRequest(input *DescribeLimitsInput) DescribeLimit
 // DescribeLimits API operation.
 type DescribeLimitsRequest struct {
 	*aws.Request
-	Input *DescribeLimitsInput
-	Copy  func(*DescribeLimitsInput) DescribeLimitsRequest
+	Input *types.DescribeLimitsInput
+	Copy  func(*types.DescribeLimitsInput) DescribeLimitsRequest
 }
 
 // Send marshals and sends the DescribeLimits API request.
@@ -89,7 +61,7 @@ func (r DescribeLimitsRequest) Send(ctx context.Context) (*DescribeLimitsRespons
 	}
 
 	resp := &DescribeLimitsResponse{
-		DescribeLimitsOutput: r.Request.Data.(*DescribeLimitsOutput),
+		DescribeLimitsOutput: r.Request.Data.(*types.DescribeLimitsOutput),
 		response:             &aws.Response{Request: r.Request},
 	}
 
@@ -99,7 +71,7 @@ func (r DescribeLimitsRequest) Send(ctx context.Context) (*DescribeLimitsRespons
 // DescribeLimitsResponse is the response type for the
 // DescribeLimits API operation.
 type DescribeLimitsResponse struct {
-	*DescribeLimitsOutput
+	*types.DescribeLimitsOutput
 
 	response *aws.Response
 }

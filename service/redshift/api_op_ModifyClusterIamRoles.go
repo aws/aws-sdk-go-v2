@@ -6,58 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/redshift/types"
 )
-
-type ModifyClusterIamRolesInput struct {
-	_ struct{} `type:"structure"`
-
-	// Zero or more IAM roles to associate with the cluster. The roles must be in
-	// their Amazon Resource Name (ARN) format. You can associate up to 10 IAM roles
-	// with a single cluster in a single request.
-	AddIamRoles []string `locationNameList:"IamRoleArn" type:"list"`
-
-	// The unique identifier of the cluster for which you want to associate or disassociate
-	// IAM roles.
-	//
-	// ClusterIdentifier is a required field
-	ClusterIdentifier *string `type:"string" required:"true"`
-
-	// Zero or more IAM roles in ARN format to disassociate from the cluster. You
-	// can disassociate up to 10 IAM roles from a single cluster in a single request.
-	RemoveIamRoles []string `locationNameList:"IamRoleArn" type:"list"`
-}
-
-// String returns the string representation
-func (s ModifyClusterIamRolesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ModifyClusterIamRolesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ModifyClusterIamRolesInput"}
-
-	if s.ClusterIdentifier == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ClusterIdentifier"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ModifyClusterIamRolesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Describes a cluster.
-	Cluster *Cluster `type:"structure"`
-}
-
-// String returns the string representation
-func (s ModifyClusterIamRolesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opModifyClusterIamRoles = "ModifyClusterIamRoles"
 
@@ -77,7 +27,7 @@ const opModifyClusterIamRoles = "ModifyClusterIamRoles"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ModifyClusterIamRoles
-func (c *Client) ModifyClusterIamRolesRequest(input *ModifyClusterIamRolesInput) ModifyClusterIamRolesRequest {
+func (c *Client) ModifyClusterIamRolesRequest(input *types.ModifyClusterIamRolesInput) ModifyClusterIamRolesRequest {
 	op := &aws.Operation{
 		Name:       opModifyClusterIamRoles,
 		HTTPMethod: "POST",
@@ -85,10 +35,10 @@ func (c *Client) ModifyClusterIamRolesRequest(input *ModifyClusterIamRolesInput)
 	}
 
 	if input == nil {
-		input = &ModifyClusterIamRolesInput{}
+		input = &types.ModifyClusterIamRolesInput{}
 	}
 
-	req := c.newRequest(op, input, &ModifyClusterIamRolesOutput{})
+	req := c.newRequest(op, input, &types.ModifyClusterIamRolesOutput{})
 	return ModifyClusterIamRolesRequest{Request: req, Input: input, Copy: c.ModifyClusterIamRolesRequest}
 }
 
@@ -96,8 +46,8 @@ func (c *Client) ModifyClusterIamRolesRequest(input *ModifyClusterIamRolesInput)
 // ModifyClusterIamRoles API operation.
 type ModifyClusterIamRolesRequest struct {
 	*aws.Request
-	Input *ModifyClusterIamRolesInput
-	Copy  func(*ModifyClusterIamRolesInput) ModifyClusterIamRolesRequest
+	Input *types.ModifyClusterIamRolesInput
+	Copy  func(*types.ModifyClusterIamRolesInput) ModifyClusterIamRolesRequest
 }
 
 // Send marshals and sends the ModifyClusterIamRoles API request.
@@ -109,7 +59,7 @@ func (r ModifyClusterIamRolesRequest) Send(ctx context.Context) (*ModifyClusterI
 	}
 
 	resp := &ModifyClusterIamRolesResponse{
-		ModifyClusterIamRolesOutput: r.Request.Data.(*ModifyClusterIamRolesOutput),
+		ModifyClusterIamRolesOutput: r.Request.Data.(*types.ModifyClusterIamRolesOutput),
 		response:                    &aws.Response{Request: r.Request},
 	}
 
@@ -119,7 +69,7 @@ func (r ModifyClusterIamRolesRequest) Send(ctx context.Context) (*ModifyClusterI
 // ModifyClusterIamRolesResponse is the response type for the
 // ModifyClusterIamRoles API operation.
 type ModifyClusterIamRolesResponse struct {
-	*ModifyClusterIamRolesOutput
+	*types.ModifyClusterIamRolesOutput
 
 	response *aws.Response
 }

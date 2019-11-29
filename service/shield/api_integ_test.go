@@ -13,6 +13,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws/awserr"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting/integration"
 	"github.com/aws/aws-sdk-go-v2/service/shield"
+	"github.com/aws/aws-sdk-go-v2/service/shield/types"
 )
 
 var _ aws.Config
@@ -24,7 +25,7 @@ func TestInteg_00_ListAttacks(t *testing.T) {
 
 	cfg := integration.ConfigWithDefaultRegion("us-east-1")
 	svc := shield.New(cfg)
-	params := &shield.ListAttacksInput{}
+	params := &types.ListAttacksInput{}
 
 	req := svc.ListAttacksRequest(params)
 

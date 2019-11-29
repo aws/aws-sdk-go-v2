@@ -6,85 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/xray/types"
 )
-
-type GetGroupsInput struct {
-	_ struct{} `type:"structure"`
-
-	// Pagination token. Not used.
-	NextToken *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s GetGroupsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetGroupsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetGroupsInput"}
-	if s.NextToken != nil && len(*s.NextToken) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetGroupsInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type GetGroupsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The collection of all active groups.
-	Groups []GroupSummary `type:"list"`
-
-	// Pagination token. Not used.
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s GetGroupsOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetGroupsOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.Groups != nil {
-		v := s.Groups
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "Groups", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opGetGroups = "GetGroups"
 
@@ -101,7 +24,7 @@ const opGetGroups = "GetGroups"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/GetGroups
-func (c *Client) GetGroupsRequest(input *GetGroupsInput) GetGroupsRequest {
+func (c *Client) GetGroupsRequest(input *types.GetGroupsInput) GetGroupsRequest {
 	op := &aws.Operation{
 		Name:       opGetGroups,
 		HTTPMethod: "POST",
@@ -115,10 +38,10 @@ func (c *Client) GetGroupsRequest(input *GetGroupsInput) GetGroupsRequest {
 	}
 
 	if input == nil {
-		input = &GetGroupsInput{}
+		input = &types.GetGroupsInput{}
 	}
 
-	req := c.newRequest(op, input, &GetGroupsOutput{})
+	req := c.newRequest(op, input, &types.GetGroupsOutput{})
 	return GetGroupsRequest{Request: req, Input: input, Copy: c.GetGroupsRequest}
 }
 
@@ -126,8 +49,8 @@ func (c *Client) GetGroupsRequest(input *GetGroupsInput) GetGroupsRequest {
 // GetGroups API operation.
 type GetGroupsRequest struct {
 	*aws.Request
-	Input *GetGroupsInput
-	Copy  func(*GetGroupsInput) GetGroupsRequest
+	Input *types.GetGroupsInput
+	Copy  func(*types.GetGroupsInput) GetGroupsRequest
 }
 
 // Send marshals and sends the GetGroups API request.
@@ -139,7 +62,7 @@ func (r GetGroupsRequest) Send(ctx context.Context) (*GetGroupsResponse, error) 
 	}
 
 	resp := &GetGroupsResponse{
-		GetGroupsOutput: r.Request.Data.(*GetGroupsOutput),
+		GetGroupsOutput: r.Request.Data.(*types.GetGroupsOutput),
 		response:        &aws.Response{Request: r.Request},
 	}
 
@@ -169,7 +92,7 @@ func NewGetGroupsPaginator(req GetGroupsRequest) GetGroupsPaginator {
 	return GetGroupsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *GetGroupsInput
+				var inCpy *types.GetGroupsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -189,14 +112,14 @@ type GetGroupsPaginator struct {
 	aws.Pager
 }
 
-func (p *GetGroupsPaginator) CurrentPage() *GetGroupsOutput {
-	return p.Pager.CurrentPage().(*GetGroupsOutput)
+func (p *GetGroupsPaginator) CurrentPage() *types.GetGroupsOutput {
+	return p.Pager.CurrentPage().(*types.GetGroupsOutput)
 }
 
 // GetGroupsResponse is the response type for the
 // GetGroups API operation.
 type GetGroupsResponse struct {
-	*GetGroupsOutput
+	*types.GetGroupsOutput
 
 	response *aws.Response
 }

@@ -6,67 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/lightsail/types"
 )
-
-type CreateDiskSnapshotInput struct {
-	_ struct{} `type:"structure"`
-
-	// The unique name of the source disk (e.g., Disk-Virginia-1).
-	//
-	// This parameter cannot be defined together with the instance name parameter.
-	// The disk name and instance name parameters are mutually exclusive.
-	DiskName *string `locationName:"diskName" type:"string"`
-
-	// The name of the destination disk snapshot (e.g., my-disk-snapshot) based
-	// on the source disk.
-	//
-	// DiskSnapshotName is a required field
-	DiskSnapshotName *string `locationName:"diskSnapshotName" type:"string" required:"true"`
-
-	// The unique name of the source instance (e.g., Amazon_Linux-512MB-Virginia-1).
-	// When this is defined, a snapshot of the instance's system volume is created.
-	//
-	// This parameter cannot be defined together with the disk name parameter. The
-	// instance name and disk name parameters are mutually exclusive.
-	InstanceName *string `locationName:"instanceName" type:"string"`
-
-	// The tag keys and optional values to add to the resource during create.
-	//
-	// To tag a resource after it has been created, see the tag resource operation.
-	Tags []Tag `locationName:"tags" type:"list"`
-}
-
-// String returns the string representation
-func (s CreateDiskSnapshotInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateDiskSnapshotInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateDiskSnapshotInput"}
-
-	if s.DiskSnapshotName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DiskSnapshotName"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type CreateDiskSnapshotOutput struct {
-	_ struct{} `type:"structure"`
-
-	// An object describing the API operations.
-	Operations []Operation `locationName:"operations" type:"list"`
-}
-
-// String returns the string representation
-func (s CreateDiskSnapshotOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCreateDiskSnapshot = "CreateDiskSnapshot"
 
@@ -109,7 +50,7 @@ const opCreateDiskSnapshot = "CreateDiskSnapshot"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/CreateDiskSnapshot
-func (c *Client) CreateDiskSnapshotRequest(input *CreateDiskSnapshotInput) CreateDiskSnapshotRequest {
+func (c *Client) CreateDiskSnapshotRequest(input *types.CreateDiskSnapshotInput) CreateDiskSnapshotRequest {
 	op := &aws.Operation{
 		Name:       opCreateDiskSnapshot,
 		HTTPMethod: "POST",
@@ -117,10 +58,10 @@ func (c *Client) CreateDiskSnapshotRequest(input *CreateDiskSnapshotInput) Creat
 	}
 
 	if input == nil {
-		input = &CreateDiskSnapshotInput{}
+		input = &types.CreateDiskSnapshotInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateDiskSnapshotOutput{})
+	req := c.newRequest(op, input, &types.CreateDiskSnapshotOutput{})
 	return CreateDiskSnapshotRequest{Request: req, Input: input, Copy: c.CreateDiskSnapshotRequest}
 }
 
@@ -128,8 +69,8 @@ func (c *Client) CreateDiskSnapshotRequest(input *CreateDiskSnapshotInput) Creat
 // CreateDiskSnapshot API operation.
 type CreateDiskSnapshotRequest struct {
 	*aws.Request
-	Input *CreateDiskSnapshotInput
-	Copy  func(*CreateDiskSnapshotInput) CreateDiskSnapshotRequest
+	Input *types.CreateDiskSnapshotInput
+	Copy  func(*types.CreateDiskSnapshotInput) CreateDiskSnapshotRequest
 }
 
 // Send marshals and sends the CreateDiskSnapshot API request.
@@ -141,7 +82,7 @@ func (r CreateDiskSnapshotRequest) Send(ctx context.Context) (*CreateDiskSnapsho
 	}
 
 	resp := &CreateDiskSnapshotResponse{
-		CreateDiskSnapshotOutput: r.Request.Data.(*CreateDiskSnapshotOutput),
+		CreateDiskSnapshotOutput: r.Request.Data.(*types.CreateDiskSnapshotOutput),
 		response:                 &aws.Response{Request: r.Request},
 	}
 
@@ -151,7 +92,7 @@ func (r CreateDiskSnapshotRequest) Send(ctx context.Context) (*CreateDiskSnapsho
 // CreateDiskSnapshotResponse is the response type for the
 // CreateDiskSnapshot API operation.
 type CreateDiskSnapshotResponse struct {
-	*CreateDiskSnapshotOutput
+	*types.CreateDiskSnapshotOutput
 
 	response *aws.Response
 }

@@ -6,98 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/mediapackagevod/types"
 )
-
-type ListAssetsInput struct {
-	_ struct{} `type:"structure"`
-
-	MaxResults *int64 `location:"querystring" locationName:"maxResults" min:"1" type:"integer"`
-
-	NextToken *string `location:"querystring" locationName:"nextToken" type:"string"`
-
-	PackagingGroupId *string `location:"querystring" locationName:"packagingGroupId" type:"string"`
-}
-
-// String returns the string representation
-func (s ListAssetsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListAssetsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListAssetsInput"}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListAssetsInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.MaxResults != nil {
-		v := *s.MaxResults
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "maxResults", protocol.Int64Value(v), metadata)
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.PackagingGroupId != nil {
-		v := *s.PackagingGroupId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "packagingGroupId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type ListAssetsOutput struct {
-	_ struct{} `type:"structure"`
-
-	Assets []AssetShallow `locationName:"assets" type:"list"`
-
-	NextToken *string `locationName:"nextToken" type:"string"`
-}
-
-// String returns the string representation
-func (s ListAssetsOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListAssetsOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.Assets != nil {
-		v := s.Assets
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "assets", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opListAssets = "ListAssets"
 
@@ -114,7 +24,7 @@ const opListAssets = "ListAssets"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mediapackage-vod-2018-11-07/ListAssets
-func (c *Client) ListAssetsRequest(input *ListAssetsInput) ListAssetsRequest {
+func (c *Client) ListAssetsRequest(input *types.ListAssetsInput) ListAssetsRequest {
 	op := &aws.Operation{
 		Name:       opListAssets,
 		HTTPMethod: "GET",
@@ -128,10 +38,10 @@ func (c *Client) ListAssetsRequest(input *ListAssetsInput) ListAssetsRequest {
 	}
 
 	if input == nil {
-		input = &ListAssetsInput{}
+		input = &types.ListAssetsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListAssetsOutput{})
+	req := c.newRequest(op, input, &types.ListAssetsOutput{})
 	return ListAssetsRequest{Request: req, Input: input, Copy: c.ListAssetsRequest}
 }
 
@@ -139,8 +49,8 @@ func (c *Client) ListAssetsRequest(input *ListAssetsInput) ListAssetsRequest {
 // ListAssets API operation.
 type ListAssetsRequest struct {
 	*aws.Request
-	Input *ListAssetsInput
-	Copy  func(*ListAssetsInput) ListAssetsRequest
+	Input *types.ListAssetsInput
+	Copy  func(*types.ListAssetsInput) ListAssetsRequest
 }
 
 // Send marshals and sends the ListAssets API request.
@@ -152,7 +62,7 @@ func (r ListAssetsRequest) Send(ctx context.Context) (*ListAssetsResponse, error
 	}
 
 	resp := &ListAssetsResponse{
-		ListAssetsOutput: r.Request.Data.(*ListAssetsOutput),
+		ListAssetsOutput: r.Request.Data.(*types.ListAssetsOutput),
 		response:         &aws.Response{Request: r.Request},
 	}
 
@@ -182,7 +92,7 @@ func NewListAssetsPaginator(req ListAssetsRequest) ListAssetsPaginator {
 	return ListAssetsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListAssetsInput
+				var inCpy *types.ListAssetsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -202,14 +112,14 @@ type ListAssetsPaginator struct {
 	aws.Pager
 }
 
-func (p *ListAssetsPaginator) CurrentPage() *ListAssetsOutput {
-	return p.Pager.CurrentPage().(*ListAssetsOutput)
+func (p *ListAssetsPaginator) CurrentPage() *types.ListAssetsOutput {
+	return p.Pager.CurrentPage().(*types.ListAssetsOutput)
 }
 
 // ListAssetsResponse is the response type for the
 // ListAssets API operation.
 type ListAssetsResponse struct {
-	*ListAssetsOutput
+	*types.ListAssetsOutput
 
 	response *aws.Response
 }

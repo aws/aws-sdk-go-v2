@@ -6,60 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/kinesisanalyticsv2/types"
 )
-
-type CreateApplicationSnapshotInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of an existing application
-	//
-	// ApplicationName is a required field
-	ApplicationName *string `min:"1" type:"string" required:"true"`
-
-	// An identifier for the application snapshot.
-	//
-	// SnapshotName is a required field
-	SnapshotName *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s CreateApplicationSnapshotInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateApplicationSnapshotInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateApplicationSnapshotInput"}
-
-	if s.ApplicationName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ApplicationName"))
-	}
-	if s.ApplicationName != nil && len(*s.ApplicationName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ApplicationName", 1))
-	}
-
-	if s.SnapshotName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("SnapshotName"))
-	}
-	if s.SnapshotName != nil && len(*s.SnapshotName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("SnapshotName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type CreateApplicationSnapshotOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s CreateApplicationSnapshotOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCreateApplicationSnapshot = "CreateApplicationSnapshot"
 
@@ -76,7 +24,7 @@ const opCreateApplicationSnapshot = "CreateApplicationSnapshot"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/CreateApplicationSnapshot
-func (c *Client) CreateApplicationSnapshotRequest(input *CreateApplicationSnapshotInput) CreateApplicationSnapshotRequest {
+func (c *Client) CreateApplicationSnapshotRequest(input *types.CreateApplicationSnapshotInput) CreateApplicationSnapshotRequest {
 	op := &aws.Operation{
 		Name:       opCreateApplicationSnapshot,
 		HTTPMethod: "POST",
@@ -84,10 +32,10 @@ func (c *Client) CreateApplicationSnapshotRequest(input *CreateApplicationSnapsh
 	}
 
 	if input == nil {
-		input = &CreateApplicationSnapshotInput{}
+		input = &types.CreateApplicationSnapshotInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateApplicationSnapshotOutput{})
+	req := c.newRequest(op, input, &types.CreateApplicationSnapshotOutput{})
 	return CreateApplicationSnapshotRequest{Request: req, Input: input, Copy: c.CreateApplicationSnapshotRequest}
 }
 
@@ -95,8 +43,8 @@ func (c *Client) CreateApplicationSnapshotRequest(input *CreateApplicationSnapsh
 // CreateApplicationSnapshot API operation.
 type CreateApplicationSnapshotRequest struct {
 	*aws.Request
-	Input *CreateApplicationSnapshotInput
-	Copy  func(*CreateApplicationSnapshotInput) CreateApplicationSnapshotRequest
+	Input *types.CreateApplicationSnapshotInput
+	Copy  func(*types.CreateApplicationSnapshotInput) CreateApplicationSnapshotRequest
 }
 
 // Send marshals and sends the CreateApplicationSnapshot API request.
@@ -108,7 +56,7 @@ func (r CreateApplicationSnapshotRequest) Send(ctx context.Context) (*CreateAppl
 	}
 
 	resp := &CreateApplicationSnapshotResponse{
-		CreateApplicationSnapshotOutput: r.Request.Data.(*CreateApplicationSnapshotOutput),
+		CreateApplicationSnapshotOutput: r.Request.Data.(*types.CreateApplicationSnapshotOutput),
 		response:                        &aws.Response{Request: r.Request},
 	}
 
@@ -118,7 +66,7 @@ func (r CreateApplicationSnapshotRequest) Send(ctx context.Context) (*CreateAppl
 // CreateApplicationSnapshotResponse is the response type for the
 // CreateApplicationSnapshot API operation.
 type CreateApplicationSnapshotResponse struct {
-	*CreateApplicationSnapshotOutput
+	*types.CreateApplicationSnapshotOutput
 
 	response *aws.Response
 }

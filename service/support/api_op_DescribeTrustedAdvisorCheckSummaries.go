@@ -6,52 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/support/types"
 )
-
-type DescribeTrustedAdvisorCheckSummariesInput struct {
-	_ struct{} `type:"structure"`
-
-	// The IDs of the Trusted Advisor checks.
-	//
-	// CheckIds is a required field
-	CheckIds []string `locationName:"checkIds" type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeTrustedAdvisorCheckSummariesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeTrustedAdvisorCheckSummariesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeTrustedAdvisorCheckSummariesInput"}
-
-	if s.CheckIds == nil {
-		invalidParams.Add(aws.NewErrParamRequired("CheckIds"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// The summaries of the Trusted Advisor checks returned by the DescribeTrustedAdvisorCheckSummaries
-// operation.
-type DescribeTrustedAdvisorCheckSummariesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The summary information for the requested Trusted Advisor checks.
-	//
-	// Summaries is a required field
-	Summaries []TrustedAdvisorCheckSummary `locationName:"summaries" type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeTrustedAdvisorCheckSummariesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeTrustedAdvisorCheckSummaries = "DescribeTrustedAdvisorCheckSummaries"
 
@@ -71,7 +27,7 @@ const opDescribeTrustedAdvisorCheckSummaries = "DescribeTrustedAdvisorCheckSumma
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/support-2013-04-15/DescribeTrustedAdvisorCheckSummaries
-func (c *Client) DescribeTrustedAdvisorCheckSummariesRequest(input *DescribeTrustedAdvisorCheckSummariesInput) DescribeTrustedAdvisorCheckSummariesRequest {
+func (c *Client) DescribeTrustedAdvisorCheckSummariesRequest(input *types.DescribeTrustedAdvisorCheckSummariesInput) DescribeTrustedAdvisorCheckSummariesRequest {
 	op := &aws.Operation{
 		Name:       opDescribeTrustedAdvisorCheckSummaries,
 		HTTPMethod: "POST",
@@ -79,10 +35,10 @@ func (c *Client) DescribeTrustedAdvisorCheckSummariesRequest(input *DescribeTrus
 	}
 
 	if input == nil {
-		input = &DescribeTrustedAdvisorCheckSummariesInput{}
+		input = &types.DescribeTrustedAdvisorCheckSummariesInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeTrustedAdvisorCheckSummariesOutput{})
+	req := c.newRequest(op, input, &types.DescribeTrustedAdvisorCheckSummariesOutput{})
 	return DescribeTrustedAdvisorCheckSummariesRequest{Request: req, Input: input, Copy: c.DescribeTrustedAdvisorCheckSummariesRequest}
 }
 
@@ -90,8 +46,8 @@ func (c *Client) DescribeTrustedAdvisorCheckSummariesRequest(input *DescribeTrus
 // DescribeTrustedAdvisorCheckSummaries API operation.
 type DescribeTrustedAdvisorCheckSummariesRequest struct {
 	*aws.Request
-	Input *DescribeTrustedAdvisorCheckSummariesInput
-	Copy  func(*DescribeTrustedAdvisorCheckSummariesInput) DescribeTrustedAdvisorCheckSummariesRequest
+	Input *types.DescribeTrustedAdvisorCheckSummariesInput
+	Copy  func(*types.DescribeTrustedAdvisorCheckSummariesInput) DescribeTrustedAdvisorCheckSummariesRequest
 }
 
 // Send marshals and sends the DescribeTrustedAdvisorCheckSummaries API request.
@@ -103,7 +59,7 @@ func (r DescribeTrustedAdvisorCheckSummariesRequest) Send(ctx context.Context) (
 	}
 
 	resp := &DescribeTrustedAdvisorCheckSummariesResponse{
-		DescribeTrustedAdvisorCheckSummariesOutput: r.Request.Data.(*DescribeTrustedAdvisorCheckSummariesOutput),
+		DescribeTrustedAdvisorCheckSummariesOutput: r.Request.Data.(*types.DescribeTrustedAdvisorCheckSummariesOutput),
 		response: &aws.Response{Request: r.Request},
 	}
 
@@ -113,7 +69,7 @@ func (r DescribeTrustedAdvisorCheckSummariesRequest) Send(ctx context.Context) (
 // DescribeTrustedAdvisorCheckSummariesResponse is the response type for the
 // DescribeTrustedAdvisorCheckSummaries API operation.
 type DescribeTrustedAdvisorCheckSummariesResponse struct {
-	*DescribeTrustedAdvisorCheckSummariesOutput
+	*types.DescribeTrustedAdvisorCheckSummariesOutput
 
 	response *aws.Response
 }

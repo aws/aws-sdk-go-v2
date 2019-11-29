@@ -6,67 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/guardduty/types"
 )
-
-type DisassociateFromMasterAccountInput struct {
-	_ struct{} `type:"structure"`
-
-	// The unique ID of the detector of the GuardDuty member account.
-	//
-	// DetectorId is a required field
-	DetectorId *string `location:"uri" locationName:"detectorId" min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DisassociateFromMasterAccountInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DisassociateFromMasterAccountInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DisassociateFromMasterAccountInput"}
-
-	if s.DetectorId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DetectorId"))
-	}
-	if s.DetectorId != nil && len(*s.DetectorId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("DetectorId", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DisassociateFromMasterAccountInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.DetectorId != nil {
-		v := *s.DetectorId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "detectorId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type DisassociateFromMasterAccountOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DisassociateFromMasterAccountOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DisassociateFromMasterAccountOutput) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
 
 const opDisassociateFromMasterAccount = "DisassociateFromMasterAccount"
 
@@ -83,7 +24,7 @@ const opDisassociateFromMasterAccount = "DisassociateFromMasterAccount"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DisassociateFromMasterAccount
-func (c *Client) DisassociateFromMasterAccountRequest(input *DisassociateFromMasterAccountInput) DisassociateFromMasterAccountRequest {
+func (c *Client) DisassociateFromMasterAccountRequest(input *types.DisassociateFromMasterAccountInput) DisassociateFromMasterAccountRequest {
 	op := &aws.Operation{
 		Name:       opDisassociateFromMasterAccount,
 		HTTPMethod: "POST",
@@ -91,10 +32,10 @@ func (c *Client) DisassociateFromMasterAccountRequest(input *DisassociateFromMas
 	}
 
 	if input == nil {
-		input = &DisassociateFromMasterAccountInput{}
+		input = &types.DisassociateFromMasterAccountInput{}
 	}
 
-	req := c.newRequest(op, input, &DisassociateFromMasterAccountOutput{})
+	req := c.newRequest(op, input, &types.DisassociateFromMasterAccountOutput{})
 	return DisassociateFromMasterAccountRequest{Request: req, Input: input, Copy: c.DisassociateFromMasterAccountRequest}
 }
 
@@ -102,8 +43,8 @@ func (c *Client) DisassociateFromMasterAccountRequest(input *DisassociateFromMas
 // DisassociateFromMasterAccount API operation.
 type DisassociateFromMasterAccountRequest struct {
 	*aws.Request
-	Input *DisassociateFromMasterAccountInput
-	Copy  func(*DisassociateFromMasterAccountInput) DisassociateFromMasterAccountRequest
+	Input *types.DisassociateFromMasterAccountInput
+	Copy  func(*types.DisassociateFromMasterAccountInput) DisassociateFromMasterAccountRequest
 }
 
 // Send marshals and sends the DisassociateFromMasterAccount API request.
@@ -115,7 +56,7 @@ func (r DisassociateFromMasterAccountRequest) Send(ctx context.Context) (*Disass
 	}
 
 	resp := &DisassociateFromMasterAccountResponse{
-		DisassociateFromMasterAccountOutput: r.Request.Data.(*DisassociateFromMasterAccountOutput),
+		DisassociateFromMasterAccountOutput: r.Request.Data.(*types.DisassociateFromMasterAccountOutput),
 		response:                            &aws.Response{Request: r.Request},
 	}
 
@@ -125,7 +66,7 @@ func (r DisassociateFromMasterAccountRequest) Send(ctx context.Context) (*Disass
 // DisassociateFromMasterAccountResponse is the response type for the
 // DisassociateFromMasterAccount API operation.
 type DisassociateFromMasterAccountResponse struct {
-	*DisassociateFromMasterAccountOutput
+	*types.DisassociateFromMasterAccountOutput
 
 	response *aws.Response
 }

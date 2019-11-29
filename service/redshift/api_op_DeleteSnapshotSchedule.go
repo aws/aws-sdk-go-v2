@@ -6,47 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/query"
+	"github.com/aws/aws-sdk-go-v2/service/redshift/types"
 )
-
-type DeleteSnapshotScheduleInput struct {
-	_ struct{} `type:"structure"`
-
-	// A unique identifier of the snapshot schedule to delete.
-	//
-	// ScheduleIdentifier is a required field
-	ScheduleIdentifier *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteSnapshotScheduleInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteSnapshotScheduleInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteSnapshotScheduleInput"}
-
-	if s.ScheduleIdentifier == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ScheduleIdentifier"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteSnapshotScheduleOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteSnapshotScheduleOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteSnapshotSchedule = "DeleteSnapshotSchedule"
 
@@ -63,7 +26,7 @@ const opDeleteSnapshotSchedule = "DeleteSnapshotSchedule"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DeleteSnapshotSchedule
-func (c *Client) DeleteSnapshotScheduleRequest(input *DeleteSnapshotScheduleInput) DeleteSnapshotScheduleRequest {
+func (c *Client) DeleteSnapshotScheduleRequest(input *types.DeleteSnapshotScheduleInput) DeleteSnapshotScheduleRequest {
 	op := &aws.Operation{
 		Name:       opDeleteSnapshotSchedule,
 		HTTPMethod: "POST",
@@ -71,10 +34,10 @@ func (c *Client) DeleteSnapshotScheduleRequest(input *DeleteSnapshotScheduleInpu
 	}
 
 	if input == nil {
-		input = &DeleteSnapshotScheduleInput{}
+		input = &types.DeleteSnapshotScheduleInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteSnapshotScheduleOutput{})
+	req := c.newRequest(op, input, &types.DeleteSnapshotScheduleOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return DeleteSnapshotScheduleRequest{Request: req, Input: input, Copy: c.DeleteSnapshotScheduleRequest}
@@ -84,8 +47,8 @@ func (c *Client) DeleteSnapshotScheduleRequest(input *DeleteSnapshotScheduleInpu
 // DeleteSnapshotSchedule API operation.
 type DeleteSnapshotScheduleRequest struct {
 	*aws.Request
-	Input *DeleteSnapshotScheduleInput
-	Copy  func(*DeleteSnapshotScheduleInput) DeleteSnapshotScheduleRequest
+	Input *types.DeleteSnapshotScheduleInput
+	Copy  func(*types.DeleteSnapshotScheduleInput) DeleteSnapshotScheduleRequest
 }
 
 // Send marshals and sends the DeleteSnapshotSchedule API request.
@@ -97,7 +60,7 @@ func (r DeleteSnapshotScheduleRequest) Send(ctx context.Context) (*DeleteSnapsho
 	}
 
 	resp := &DeleteSnapshotScheduleResponse{
-		DeleteSnapshotScheduleOutput: r.Request.Data.(*DeleteSnapshotScheduleOutput),
+		DeleteSnapshotScheduleOutput: r.Request.Data.(*types.DeleteSnapshotScheduleOutput),
 		response:                     &aws.Response{Request: r.Request},
 	}
 
@@ -107,7 +70,7 @@ func (r DeleteSnapshotScheduleRequest) Send(ctx context.Context) (*DeleteSnapsho
 // DeleteSnapshotScheduleResponse is the response type for the
 // DeleteSnapshotSchedule API operation.
 type DeleteSnapshotScheduleResponse struct {
-	*DeleteSnapshotScheduleOutput
+	*types.DeleteSnapshotScheduleOutput
 
 	response *aws.Response
 }

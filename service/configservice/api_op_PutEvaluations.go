@@ -4,73 +4,10 @@ package configservice
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/configservice/types"
 )
-
-type PutEvaluationsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The assessments that the AWS Lambda function performs. Each evaluation identifies
-	// an AWS resource and indicates whether it complies with the AWS Config rule
-	// that invokes the AWS Lambda function.
-	Evaluations []Evaluation `type:"list"`
-
-	// An encrypted token that associates an evaluation with an AWS Config rule.
-	// Identifies the rule and the event that triggered the evaluation.
-	//
-	// ResultToken is a required field
-	ResultToken *string `type:"string" required:"true"`
-
-	// Use this parameter to specify a test run for PutEvaluations. You can verify
-	// whether your AWS Lambda function will deliver evaluation results to AWS Config.
-	// No updates occur to your existing evaluations, and evaluation results are
-	// not sent to AWS Config.
-	//
-	// When TestMode is true, PutEvaluations doesn't require a valid value for the
-	// ResultToken parameter, but the value cannot be null.
-	TestMode *bool `type:"boolean"`
-}
-
-// String returns the string representation
-func (s PutEvaluationsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *PutEvaluationsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "PutEvaluationsInput"}
-
-	if s.ResultToken == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ResultToken"))
-	}
-	if s.Evaluations != nil {
-		for i, v := range s.Evaluations {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Evaluations", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type PutEvaluationsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Requests that failed because of a client or server error.
-	FailedEvaluations []Evaluation `type:"list"`
-}
-
-// String returns the string representation
-func (s PutEvaluationsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opPutEvaluations = "PutEvaluations"
 
@@ -89,7 +26,7 @@ const opPutEvaluations = "PutEvaluations"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/PutEvaluations
-func (c *Client) PutEvaluationsRequest(input *PutEvaluationsInput) PutEvaluationsRequest {
+func (c *Client) PutEvaluationsRequest(input *types.PutEvaluationsInput) PutEvaluationsRequest {
 	op := &aws.Operation{
 		Name:       opPutEvaluations,
 		HTTPMethod: "POST",
@@ -97,10 +34,10 @@ func (c *Client) PutEvaluationsRequest(input *PutEvaluationsInput) PutEvaluation
 	}
 
 	if input == nil {
-		input = &PutEvaluationsInput{}
+		input = &types.PutEvaluationsInput{}
 	}
 
-	req := c.newRequest(op, input, &PutEvaluationsOutput{})
+	req := c.newRequest(op, input, &types.PutEvaluationsOutput{})
 	return PutEvaluationsRequest{Request: req, Input: input, Copy: c.PutEvaluationsRequest}
 }
 
@@ -108,8 +45,8 @@ func (c *Client) PutEvaluationsRequest(input *PutEvaluationsInput) PutEvaluation
 // PutEvaluations API operation.
 type PutEvaluationsRequest struct {
 	*aws.Request
-	Input *PutEvaluationsInput
-	Copy  func(*PutEvaluationsInput) PutEvaluationsRequest
+	Input *types.PutEvaluationsInput
+	Copy  func(*types.PutEvaluationsInput) PutEvaluationsRequest
 }
 
 // Send marshals and sends the PutEvaluations API request.
@@ -121,7 +58,7 @@ func (r PutEvaluationsRequest) Send(ctx context.Context) (*PutEvaluationsRespons
 	}
 
 	resp := &PutEvaluationsResponse{
-		PutEvaluationsOutput: r.Request.Data.(*PutEvaluationsOutput),
+		PutEvaluationsOutput: r.Request.Data.(*types.PutEvaluationsOutput),
 		response:             &aws.Response{Request: r.Request},
 	}
 
@@ -131,7 +68,7 @@ func (r PutEvaluationsRequest) Send(ctx context.Context) (*PutEvaluationsRespons
 // PutEvaluationsResponse is the response type for the
 // PutEvaluations API operation.
 type PutEvaluationsResponse struct {
-	*PutEvaluationsOutput
+	*types.PutEvaluationsOutput
 
 	response *aws.Response
 }

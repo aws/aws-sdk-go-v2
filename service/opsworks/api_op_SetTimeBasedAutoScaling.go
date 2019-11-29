@@ -6,50 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
+	"github.com/aws/aws-sdk-go-v2/service/opsworks/types"
 )
-
-type SetTimeBasedAutoScalingInput struct {
-	_ struct{} `type:"structure"`
-
-	// An AutoScalingSchedule with the instance schedule.
-	AutoScalingSchedule *WeeklyAutoScalingSchedule `type:"structure"`
-
-	// The instance ID.
-	//
-	// InstanceId is a required field
-	InstanceId *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s SetTimeBasedAutoScalingInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *SetTimeBasedAutoScalingInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "SetTimeBasedAutoScalingInput"}
-
-	if s.InstanceId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("InstanceId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type SetTimeBasedAutoScalingOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s SetTimeBasedAutoScalingOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opSetTimeBasedAutoScaling = "SetTimeBasedAutoScaling"
 
@@ -73,7 +33,7 @@ const opSetTimeBasedAutoScaling = "SetTimeBasedAutoScaling"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/SetTimeBasedAutoScaling
-func (c *Client) SetTimeBasedAutoScalingRequest(input *SetTimeBasedAutoScalingInput) SetTimeBasedAutoScalingRequest {
+func (c *Client) SetTimeBasedAutoScalingRequest(input *types.SetTimeBasedAutoScalingInput) SetTimeBasedAutoScalingRequest {
 	op := &aws.Operation{
 		Name:       opSetTimeBasedAutoScaling,
 		HTTPMethod: "POST",
@@ -81,10 +41,10 @@ func (c *Client) SetTimeBasedAutoScalingRequest(input *SetTimeBasedAutoScalingIn
 	}
 
 	if input == nil {
-		input = &SetTimeBasedAutoScalingInput{}
+		input = &types.SetTimeBasedAutoScalingInput{}
 	}
 
-	req := c.newRequest(op, input, &SetTimeBasedAutoScalingOutput{})
+	req := c.newRequest(op, input, &types.SetTimeBasedAutoScalingOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return SetTimeBasedAutoScalingRequest{Request: req, Input: input, Copy: c.SetTimeBasedAutoScalingRequest}
@@ -94,8 +54,8 @@ func (c *Client) SetTimeBasedAutoScalingRequest(input *SetTimeBasedAutoScalingIn
 // SetTimeBasedAutoScaling API operation.
 type SetTimeBasedAutoScalingRequest struct {
 	*aws.Request
-	Input *SetTimeBasedAutoScalingInput
-	Copy  func(*SetTimeBasedAutoScalingInput) SetTimeBasedAutoScalingRequest
+	Input *types.SetTimeBasedAutoScalingInput
+	Copy  func(*types.SetTimeBasedAutoScalingInput) SetTimeBasedAutoScalingRequest
 }
 
 // Send marshals and sends the SetTimeBasedAutoScaling API request.
@@ -107,7 +67,7 @@ func (r SetTimeBasedAutoScalingRequest) Send(ctx context.Context) (*SetTimeBased
 	}
 
 	resp := &SetTimeBasedAutoScalingResponse{
-		SetTimeBasedAutoScalingOutput: r.Request.Data.(*SetTimeBasedAutoScalingOutput),
+		SetTimeBasedAutoScalingOutput: r.Request.Data.(*types.SetTimeBasedAutoScalingOutput),
 		response:                      &aws.Response{Request: r.Request},
 	}
 
@@ -117,7 +77,7 @@ func (r SetTimeBasedAutoScalingRequest) Send(ctx context.Context) (*SetTimeBased
 // SetTimeBasedAutoScalingResponse is the response type for the
 // SetTimeBasedAutoScaling API operation.
 type SetTimeBasedAutoScalingResponse struct {
-	*SetTimeBasedAutoScalingOutput
+	*types.SetTimeBasedAutoScalingOutput
 
 	response *aws.Response
 }

@@ -6,79 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
+	"github.com/aws/aws-sdk-go-v2/service/secretsmanager/types"
 )
-
-type UntagResourceInput struct {
-	_ struct{} `type:"structure"`
-
-	// The identifier for the secret that you want to remove tags from. You can
-	// specify either the Amazon Resource Name (ARN) or the friendly name of the
-	// secret.
-	//
-	// If you specify an ARN, we generally recommend that you specify a complete
-	// ARN. You can specify a partial ARN too—for example, if you don’t include
-	// the final hyphen and six random characters that Secrets Manager adds at the
-	// end of the ARN when you created the secret. A partial ARN match can work
-	// as long as it uniquely matches only one secret. However, if your secret has
-	// a name that ends in a hyphen followed by six characters (before Secrets Manager
-	// adds the hyphen and six characters to the ARN) and you try to use that as
-	// a partial ARN, then those characters cause Secrets Manager to assume that
-	// you’re specifying a complete ARN. This confusion can cause unexpected results.
-	// To avoid this situation, we recommend that you don’t create secret names
-	// that end with a hyphen followed by six characters.
-	//
-	// SecretId is a required field
-	SecretId *string `min:"1" type:"string" required:"true"`
-
-	// A list of tag key names to remove from the secret. You don't specify the
-	// value. Both the key and its associated value are removed.
-	//
-	// This parameter to the API requires a JSON text string argument. For information
-	// on how to format a JSON parameter for the various command line tool environments,
-	// see Using JSON for Parameters (https://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#cli-using-param-json)
-	// in the AWS CLI User Guide.
-	//
-	// TagKeys is a required field
-	TagKeys []string `type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s UntagResourceInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UntagResourceInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UntagResourceInput"}
-
-	if s.SecretId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("SecretId"))
-	}
-	if s.SecretId != nil && len(*s.SecretId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("SecretId", 1))
-	}
-
-	if s.TagKeys == nil {
-		invalidParams.Add(aws.NewErrParamRequired("TagKeys"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type UntagResourceOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s UntagResourceOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opUntagResource = "UntagResource"
 
@@ -116,7 +47,7 @@ const opUntagResource = "UntagResource"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/secretsmanager-2017-10-17/UntagResource
-func (c *Client) UntagResourceRequest(input *UntagResourceInput) UntagResourceRequest {
+func (c *Client) UntagResourceRequest(input *types.UntagResourceInput) UntagResourceRequest {
 	op := &aws.Operation{
 		Name:       opUntagResource,
 		HTTPMethod: "POST",
@@ -124,10 +55,10 @@ func (c *Client) UntagResourceRequest(input *UntagResourceInput) UntagResourceRe
 	}
 
 	if input == nil {
-		input = &UntagResourceInput{}
+		input = &types.UntagResourceInput{}
 	}
 
-	req := c.newRequest(op, input, &UntagResourceOutput{})
+	req := c.newRequest(op, input, &types.UntagResourceOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return UntagResourceRequest{Request: req, Input: input, Copy: c.UntagResourceRequest}
@@ -137,8 +68,8 @@ func (c *Client) UntagResourceRequest(input *UntagResourceInput) UntagResourceRe
 // UntagResource API operation.
 type UntagResourceRequest struct {
 	*aws.Request
-	Input *UntagResourceInput
-	Copy  func(*UntagResourceInput) UntagResourceRequest
+	Input *types.UntagResourceInput
+	Copy  func(*types.UntagResourceInput) UntagResourceRequest
 }
 
 // Send marshals and sends the UntagResource API request.
@@ -150,7 +81,7 @@ func (r UntagResourceRequest) Send(ctx context.Context) (*UntagResourceResponse,
 	}
 
 	resp := &UntagResourceResponse{
-		UntagResourceOutput: r.Request.Data.(*UntagResourceOutput),
+		UntagResourceOutput: r.Request.Data.(*types.UntagResourceOutput),
 		response:            &aws.Response{Request: r.Request},
 	}
 
@@ -160,7 +91,7 @@ func (r UntagResourceRequest) Send(ctx context.Context) (*UntagResourceResponse,
 // UntagResourceResponse is the response type for the
 // UntagResource API operation.
 type UntagResourceResponse struct {
-	*UntagResourceOutput
+	*types.UntagResourceOutput
 
 	response *aws.Response
 }

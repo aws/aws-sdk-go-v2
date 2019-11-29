@@ -6,93 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-type DescribeVolumeStatusInput struct {
-	_ struct{} `type:"structure"`
-
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have
-	// the required permissions, the error response is DryRunOperation. Otherwise,
-	// it is UnauthorizedOperation.
-	DryRun *bool `locationName:"dryRun" type:"boolean"`
-
-	// The filters.
-	//
-	//    * action.code - The action code for the event (for example, enable-volume-io).
-	//
-	//    * action.description - A description of the action.
-	//
-	//    * action.event-id - The event ID associated with the action.
-	//
-	//    * availability-zone - The Availability Zone of the instance.
-	//
-	//    * event.description - A description of the event.
-	//
-	//    * event.event-id - The event ID.
-	//
-	//    * event.event-type - The event type (for io-enabled: passed | failed;
-	//    for io-performance: io-performance:degraded | io-performance:severely-degraded
-	//    | io-performance:stalled).
-	//
-	//    * event.not-after - The latest end time for the event.
-	//
-	//    * event.not-before - The earliest start time for the event.
-	//
-	//    * volume-status.details-name - The cause for volume-status.status (io-enabled
-	//    | io-performance).
-	//
-	//    * volume-status.details-status - The status of volume-status.details-name
-	//    (for io-enabled: passed | failed; for io-performance: normal | degraded
-	//    | severely-degraded | stalled).
-	//
-	//    * volume-status.status - The status of the volume (ok | impaired | warning
-	//    | insufficient-data).
-	Filters []Filter `locationName:"Filter" locationNameList:"Filter" type:"list"`
-
-	// The maximum number of volume results returned by DescribeVolumeStatus in
-	// paginated output. When this parameter is used, the request only returns MaxResults
-	// results in a single page along with a NextToken response element. The remaining
-	// results of the initial request can be seen by sending another request with
-	// the returned NextToken value. This value can be between 5 and 1000; if MaxResults
-	// is given a value larger than 1000, only 1000 results are returned. If this
-	// parameter is not used, then DescribeVolumeStatus returns all results. You
-	// cannot specify this parameter and the volume IDs parameter in the same request.
-	MaxResults *int64 `type:"integer"`
-
-	// The NextToken value to include in a future DescribeVolumeStatus request.
-	// When the results of the request exceed MaxResults, this value can be used
-	// to retrieve the next page of results. This value is null when there are no
-	// more results to return.
-	NextToken *string `type:"string"`
-
-	// The IDs of the volumes.
-	//
-	// Default: Describes all your volumes.
-	VolumeIds []string `locationName:"VolumeId" locationNameList:"VolumeId" type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeVolumeStatusInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type DescribeVolumeStatusOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The token to use to retrieve the next page of results. This value is null
-	// when there are no more results to return.
-	NextToken *string `locationName:"nextToken" type:"string"`
-
-	// Information about the status of the volumes.
-	VolumeStatuses []VolumeStatusItem `locationName:"volumeStatusSet" locationNameList:"item" type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeVolumeStatusOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeVolumeStatus = "DescribeVolumeStatus"
 
@@ -144,7 +59,7 @@ const opDescribeVolumeStatus = "DescribeVolumeStatus"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeVolumeStatus
-func (c *Client) DescribeVolumeStatusRequest(input *DescribeVolumeStatusInput) DescribeVolumeStatusRequest {
+func (c *Client) DescribeVolumeStatusRequest(input *types.DescribeVolumeStatusInput) DescribeVolumeStatusRequest {
 	op := &aws.Operation{
 		Name:       opDescribeVolumeStatus,
 		HTTPMethod: "POST",
@@ -158,10 +73,10 @@ func (c *Client) DescribeVolumeStatusRequest(input *DescribeVolumeStatusInput) D
 	}
 
 	if input == nil {
-		input = &DescribeVolumeStatusInput{}
+		input = &types.DescribeVolumeStatusInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeVolumeStatusOutput{})
+	req := c.newRequest(op, input, &types.DescribeVolumeStatusOutput{})
 	return DescribeVolumeStatusRequest{Request: req, Input: input, Copy: c.DescribeVolumeStatusRequest}
 }
 
@@ -169,8 +84,8 @@ func (c *Client) DescribeVolumeStatusRequest(input *DescribeVolumeStatusInput) D
 // DescribeVolumeStatus API operation.
 type DescribeVolumeStatusRequest struct {
 	*aws.Request
-	Input *DescribeVolumeStatusInput
-	Copy  func(*DescribeVolumeStatusInput) DescribeVolumeStatusRequest
+	Input *types.DescribeVolumeStatusInput
+	Copy  func(*types.DescribeVolumeStatusInput) DescribeVolumeStatusRequest
 }
 
 // Send marshals and sends the DescribeVolumeStatus API request.
@@ -182,7 +97,7 @@ func (r DescribeVolumeStatusRequest) Send(ctx context.Context) (*DescribeVolumeS
 	}
 
 	resp := &DescribeVolumeStatusResponse{
-		DescribeVolumeStatusOutput: r.Request.Data.(*DescribeVolumeStatusOutput),
+		DescribeVolumeStatusOutput: r.Request.Data.(*types.DescribeVolumeStatusOutput),
 		response:                   &aws.Response{Request: r.Request},
 	}
 
@@ -212,7 +127,7 @@ func NewDescribeVolumeStatusPaginator(req DescribeVolumeStatusRequest) DescribeV
 	return DescribeVolumeStatusPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *DescribeVolumeStatusInput
+				var inCpy *types.DescribeVolumeStatusInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -232,14 +147,14 @@ type DescribeVolumeStatusPaginator struct {
 	aws.Pager
 }
 
-func (p *DescribeVolumeStatusPaginator) CurrentPage() *DescribeVolumeStatusOutput {
-	return p.Pager.CurrentPage().(*DescribeVolumeStatusOutput)
+func (p *DescribeVolumeStatusPaginator) CurrentPage() *types.DescribeVolumeStatusOutput {
+	return p.Pager.CurrentPage().(*types.DescribeVolumeStatusOutput)
 }
 
 // DescribeVolumeStatusResponse is the response type for the
 // DescribeVolumeStatus API operation.
 type DescribeVolumeStatusResponse struct {
-	*DescribeVolumeStatusOutput
+	*types.DescribeVolumeStatusOutput
 
 	response *aws.Response
 }

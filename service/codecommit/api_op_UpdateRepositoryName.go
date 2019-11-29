@@ -6,63 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
+	"github.com/aws/aws-sdk-go-v2/service/codecommit/types"
 )
-
-// Represents the input of an update repository description operation.
-type UpdateRepositoryNameInput struct {
-	_ struct{} `type:"structure"`
-
-	// The new name for the repository.
-	//
-	// NewName is a required field
-	NewName *string `locationName:"newName" min:"1" type:"string" required:"true"`
-
-	// The existing name of the repository.
-	//
-	// OldName is a required field
-	OldName *string `locationName:"oldName" min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s UpdateRepositoryNameInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateRepositoryNameInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateRepositoryNameInput"}
-
-	if s.NewName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("NewName"))
-	}
-	if s.NewName != nil && len(*s.NewName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("NewName", 1))
-	}
-
-	if s.OldName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("OldName"))
-	}
-	if s.OldName != nil && len(*s.OldName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("OldName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type UpdateRepositoryNameOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s UpdateRepositoryNameOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opUpdateRepositoryName = "UpdateRepositoryName"
 
@@ -70,10 +17,10 @@ const opUpdateRepositoryName = "UpdateRepositoryName"
 // AWS CodeCommit.
 //
 // Renames a repository. The repository name must be unique across the calling
-// AWS account. In addition, repository names are limited to 100 alphanumeric,
-// dash, and underscore characters, and cannot include certain characters. The
-// suffix ".git" is prohibited. For a full description of the limits on repository
-// names, see Limits (https://docs.aws.amazon.com/codecommit/latest/userguide/limits.html)
+// AWS account. Repository names are limited to 100 alphanumeric, dash, and
+// underscore characters, and cannot include certain characters. The suffix
+// .git is prohibited. For more information about the limits on repository names,
+// see Limits (https://docs.aws.amazon.com/codecommit/latest/userguide/limits.html)
 // in the AWS CodeCommit User Guide.
 //
 //    // Example sending a request using UpdateRepositoryNameRequest.
@@ -84,7 +31,7 @@ const opUpdateRepositoryName = "UpdateRepositoryName"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/UpdateRepositoryName
-func (c *Client) UpdateRepositoryNameRequest(input *UpdateRepositoryNameInput) UpdateRepositoryNameRequest {
+func (c *Client) UpdateRepositoryNameRequest(input *types.UpdateRepositoryNameInput) UpdateRepositoryNameRequest {
 	op := &aws.Operation{
 		Name:       opUpdateRepositoryName,
 		HTTPMethod: "POST",
@@ -92,10 +39,10 @@ func (c *Client) UpdateRepositoryNameRequest(input *UpdateRepositoryNameInput) U
 	}
 
 	if input == nil {
-		input = &UpdateRepositoryNameInput{}
+		input = &types.UpdateRepositoryNameInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateRepositoryNameOutput{})
+	req := c.newRequest(op, input, &types.UpdateRepositoryNameOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return UpdateRepositoryNameRequest{Request: req, Input: input, Copy: c.UpdateRepositoryNameRequest}
@@ -105,8 +52,8 @@ func (c *Client) UpdateRepositoryNameRequest(input *UpdateRepositoryNameInput) U
 // UpdateRepositoryName API operation.
 type UpdateRepositoryNameRequest struct {
 	*aws.Request
-	Input *UpdateRepositoryNameInput
-	Copy  func(*UpdateRepositoryNameInput) UpdateRepositoryNameRequest
+	Input *types.UpdateRepositoryNameInput
+	Copy  func(*types.UpdateRepositoryNameInput) UpdateRepositoryNameRequest
 }
 
 // Send marshals and sends the UpdateRepositoryName API request.
@@ -118,7 +65,7 @@ func (r UpdateRepositoryNameRequest) Send(ctx context.Context) (*UpdateRepositor
 	}
 
 	resp := &UpdateRepositoryNameResponse{
-		UpdateRepositoryNameOutput: r.Request.Data.(*UpdateRepositoryNameOutput),
+		UpdateRepositoryNameOutput: r.Request.Data.(*types.UpdateRepositoryNameOutput),
 		response:                   &aws.Response{Request: r.Request},
 	}
 
@@ -128,7 +75,7 @@ func (r UpdateRepositoryNameRequest) Send(ctx context.Context) (*UpdateRepositor
 // UpdateRepositoryNameResponse is the response type for the
 // UpdateRepositoryName API operation.
 type UpdateRepositoryNameResponse struct {
-	*UpdateRepositoryNameOutput
+	*types.UpdateRepositoryNameOutput
 
 	response *aws.Response
 }

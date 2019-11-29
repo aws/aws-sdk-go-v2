@@ -4,133 +4,10 @@ package appstream
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/appstream/types"
 )
-
-type CreateImageBuilderInput struct {
-	_ struct{} `type:"structure"`
-
-	// The list of interface VPC endpoint (interface endpoint) objects. Administrators
-	// can connect to the image builder only through the specified endpoints.
-	AccessEndpoints []AccessEndpoint `min:"1" type:"list"`
-
-	// The version of the AppStream 2.0 agent to use for this image builder. To
-	// use the latest version of the AppStream 2.0 agent, specify [LATEST].
-	AppstreamAgentVersion *string `min:"1" type:"string"`
-
-	// The description to display.
-	Description *string `type:"string"`
-
-	// The image builder name to display.
-	DisplayName *string `type:"string"`
-
-	// The name of the directory and organizational unit (OU) to use to join the
-	// image builder to a Microsoft Active Directory domain.
-	DomainJoinInfo *DomainJoinInfo `type:"structure"`
-
-	// Enables or disables default internet access for the image builder.
-	EnableDefaultInternetAccess *bool `type:"boolean"`
-
-	// The Amazon Resource Name (ARN) of the IAM role to apply to the image builder.
-	// To assume a role, the image builder calls the AWS Security Token Service
-	// (STS) AssumeRole API operation and passes the ARN of the role to use. The
-	// operation creates a new session with temporary credentials.
-	IamRoleArn *string `type:"string"`
-
-	// The ARN of the public, private, or shared image to use.
-	ImageArn *string `type:"string"`
-
-	// The name of the image used to create the image builder.
-	ImageName *string `min:"1" type:"string"`
-
-	// The instance type to use when launching the image builder.
-	//
-	// InstanceType is a required field
-	InstanceType *string `min:"1" type:"string" required:"true"`
-
-	// A unique name for the image builder.
-	//
-	// Name is a required field
-	Name *string `type:"string" required:"true"`
-
-	// The tags to associate with the image builder. A tag is a key-value pair,
-	// and the value is optional. For example, Environment=Test. If you do not specify
-	// a value, Environment=.
-	//
-	// Generally allowed characters are: letters, numbers, and spaces representable
-	// in UTF-8, and the following special characters:
-	//
-	// _ . : / = + \ - @
-	//
-	// If you do not specify a value, the value is set to an empty string.
-	//
-	// For more information about tags, see Tagging Your Resources (https://docs.aws.amazon.com/appstream2/latest/developerguide/tagging-basic.html)
-	// in the Amazon AppStream 2.0 Administration Guide.
-	Tags map[string]string `min:"1" type:"map"`
-
-	// The VPC configuration for the image builder. You can specify only one subnet.
-	VpcConfig *VpcConfig `type:"structure"`
-}
-
-// String returns the string representation
-func (s CreateImageBuilderInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateImageBuilderInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateImageBuilderInput"}
-	if s.AccessEndpoints != nil && len(s.AccessEndpoints) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("AccessEndpoints", 1))
-	}
-	if s.AppstreamAgentVersion != nil && len(*s.AppstreamAgentVersion) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("AppstreamAgentVersion", 1))
-	}
-	if s.ImageName != nil && len(*s.ImageName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ImageName", 1))
-	}
-
-	if s.InstanceType == nil {
-		invalidParams.Add(aws.NewErrParamRequired("InstanceType"))
-	}
-	if s.InstanceType != nil && len(*s.InstanceType) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("InstanceType", 1))
-	}
-
-	if s.Name == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Name"))
-	}
-	if s.Tags != nil && len(s.Tags) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Tags", 1))
-	}
-	if s.AccessEndpoints != nil {
-		for i, v := range s.AccessEndpoints {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "AccessEndpoints", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type CreateImageBuilderOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Information about the image builder.
-	ImageBuilder *ImageBuilder `type:"structure"`
-}
-
-// String returns the string representation
-func (s CreateImageBuilderOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCreateImageBuilder = "CreateImageBuilder"
 
@@ -151,7 +28,7 @@ const opCreateImageBuilder = "CreateImageBuilder"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/CreateImageBuilder
-func (c *Client) CreateImageBuilderRequest(input *CreateImageBuilderInput) CreateImageBuilderRequest {
+func (c *Client) CreateImageBuilderRequest(input *types.CreateImageBuilderInput) CreateImageBuilderRequest {
 	op := &aws.Operation{
 		Name:       opCreateImageBuilder,
 		HTTPMethod: "POST",
@@ -159,10 +36,10 @@ func (c *Client) CreateImageBuilderRequest(input *CreateImageBuilderInput) Creat
 	}
 
 	if input == nil {
-		input = &CreateImageBuilderInput{}
+		input = &types.CreateImageBuilderInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateImageBuilderOutput{})
+	req := c.newRequest(op, input, &types.CreateImageBuilderOutput{})
 	return CreateImageBuilderRequest{Request: req, Input: input, Copy: c.CreateImageBuilderRequest}
 }
 
@@ -170,8 +47,8 @@ func (c *Client) CreateImageBuilderRequest(input *CreateImageBuilderInput) Creat
 // CreateImageBuilder API operation.
 type CreateImageBuilderRequest struct {
 	*aws.Request
-	Input *CreateImageBuilderInput
-	Copy  func(*CreateImageBuilderInput) CreateImageBuilderRequest
+	Input *types.CreateImageBuilderInput
+	Copy  func(*types.CreateImageBuilderInput) CreateImageBuilderRequest
 }
 
 // Send marshals and sends the CreateImageBuilder API request.
@@ -183,7 +60,7 @@ func (r CreateImageBuilderRequest) Send(ctx context.Context) (*CreateImageBuilde
 	}
 
 	resp := &CreateImageBuilderResponse{
-		CreateImageBuilderOutput: r.Request.Data.(*CreateImageBuilderOutput),
+		CreateImageBuilderOutput: r.Request.Data.(*types.CreateImageBuilderOutput),
 		response:                 &aws.Response{Request: r.Request},
 	}
 
@@ -193,7 +70,7 @@ func (r CreateImageBuilderRequest) Send(ctx context.Context) (*CreateImageBuilde
 // CreateImageBuilderResponse is the response type for the
 // CreateImageBuilder API operation.
 type CreateImageBuilderResponse struct {
-	*CreateImageBuilderOutput
+	*types.CreateImageBuilderOutput
 
 	response *aws.Response
 }

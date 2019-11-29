@@ -6,32 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/iam/types"
 )
-
-type GetAccountPasswordPolicyInput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s GetAccountPasswordPolicyInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Contains the response to a successful GetAccountPasswordPolicy request.
-type GetAccountPasswordPolicyOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A structure that contains details about the account's password policy.
-	//
-	// PasswordPolicy is a required field
-	PasswordPolicy *PasswordPolicy `type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s GetAccountPasswordPolicyOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetAccountPasswordPolicy = "GetAccountPasswordPolicy"
 
@@ -49,7 +25,7 @@ const opGetAccountPasswordPolicy = "GetAccountPasswordPolicy"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetAccountPasswordPolicy
-func (c *Client) GetAccountPasswordPolicyRequest(input *GetAccountPasswordPolicyInput) GetAccountPasswordPolicyRequest {
+func (c *Client) GetAccountPasswordPolicyRequest(input *types.GetAccountPasswordPolicyInput) GetAccountPasswordPolicyRequest {
 	op := &aws.Operation{
 		Name:       opGetAccountPasswordPolicy,
 		HTTPMethod: "POST",
@@ -57,10 +33,10 @@ func (c *Client) GetAccountPasswordPolicyRequest(input *GetAccountPasswordPolicy
 	}
 
 	if input == nil {
-		input = &GetAccountPasswordPolicyInput{}
+		input = &types.GetAccountPasswordPolicyInput{}
 	}
 
-	req := c.newRequest(op, input, &GetAccountPasswordPolicyOutput{})
+	req := c.newRequest(op, input, &types.GetAccountPasswordPolicyOutput{})
 	return GetAccountPasswordPolicyRequest{Request: req, Input: input, Copy: c.GetAccountPasswordPolicyRequest}
 }
 
@@ -68,8 +44,8 @@ func (c *Client) GetAccountPasswordPolicyRequest(input *GetAccountPasswordPolicy
 // GetAccountPasswordPolicy API operation.
 type GetAccountPasswordPolicyRequest struct {
 	*aws.Request
-	Input *GetAccountPasswordPolicyInput
-	Copy  func(*GetAccountPasswordPolicyInput) GetAccountPasswordPolicyRequest
+	Input *types.GetAccountPasswordPolicyInput
+	Copy  func(*types.GetAccountPasswordPolicyInput) GetAccountPasswordPolicyRequest
 }
 
 // Send marshals and sends the GetAccountPasswordPolicy API request.
@@ -81,7 +57,7 @@ func (r GetAccountPasswordPolicyRequest) Send(ctx context.Context) (*GetAccountP
 	}
 
 	resp := &GetAccountPasswordPolicyResponse{
-		GetAccountPasswordPolicyOutput: r.Request.Data.(*GetAccountPasswordPolicyOutput),
+		GetAccountPasswordPolicyOutput: r.Request.Data.(*types.GetAccountPasswordPolicyOutput),
 		response:                       &aws.Response{Request: r.Request},
 	}
 
@@ -91,7 +67,7 @@ func (r GetAccountPasswordPolicyRequest) Send(ctx context.Context) (*GetAccountP
 // GetAccountPasswordPolicyResponse is the response type for the
 // GetAccountPasswordPolicy API operation.
 type GetAccountPasswordPolicyResponse struct {
-	*GetAccountPasswordPolicyOutput
+	*types.GetAccountPasswordPolicyOutput
 
 	response *aws.Response
 }

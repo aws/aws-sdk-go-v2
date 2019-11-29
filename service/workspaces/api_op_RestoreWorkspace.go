@@ -6,45 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/workspaces/types"
 )
-
-type RestoreWorkspaceInput struct {
-	_ struct{} `type:"structure"`
-
-	// The identifier of the WorkSpace.
-	//
-	// WorkspaceId is a required field
-	WorkspaceId *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s RestoreWorkspaceInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *RestoreWorkspaceInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "RestoreWorkspaceInput"}
-
-	if s.WorkspaceId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("WorkspaceId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type RestoreWorkspaceOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s RestoreWorkspaceOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opRestoreWorkspace = "RestoreWorkspace"
 
@@ -69,7 +32,7 @@ const opRestoreWorkspace = "RestoreWorkspace"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/RestoreWorkspace
-func (c *Client) RestoreWorkspaceRequest(input *RestoreWorkspaceInput) RestoreWorkspaceRequest {
+func (c *Client) RestoreWorkspaceRequest(input *types.RestoreWorkspaceInput) RestoreWorkspaceRequest {
 	op := &aws.Operation{
 		Name:       opRestoreWorkspace,
 		HTTPMethod: "POST",
@@ -77,10 +40,10 @@ func (c *Client) RestoreWorkspaceRequest(input *RestoreWorkspaceInput) RestoreWo
 	}
 
 	if input == nil {
-		input = &RestoreWorkspaceInput{}
+		input = &types.RestoreWorkspaceInput{}
 	}
 
-	req := c.newRequest(op, input, &RestoreWorkspaceOutput{})
+	req := c.newRequest(op, input, &types.RestoreWorkspaceOutput{})
 	return RestoreWorkspaceRequest{Request: req, Input: input, Copy: c.RestoreWorkspaceRequest}
 }
 
@@ -88,8 +51,8 @@ func (c *Client) RestoreWorkspaceRequest(input *RestoreWorkspaceInput) RestoreWo
 // RestoreWorkspace API operation.
 type RestoreWorkspaceRequest struct {
 	*aws.Request
-	Input *RestoreWorkspaceInput
-	Copy  func(*RestoreWorkspaceInput) RestoreWorkspaceRequest
+	Input *types.RestoreWorkspaceInput
+	Copy  func(*types.RestoreWorkspaceInput) RestoreWorkspaceRequest
 }
 
 // Send marshals and sends the RestoreWorkspace API request.
@@ -101,7 +64,7 @@ func (r RestoreWorkspaceRequest) Send(ctx context.Context) (*RestoreWorkspaceRes
 	}
 
 	resp := &RestoreWorkspaceResponse{
-		RestoreWorkspaceOutput: r.Request.Data.(*RestoreWorkspaceOutput),
+		RestoreWorkspaceOutput: r.Request.Data.(*types.RestoreWorkspaceOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -111,7 +74,7 @@ func (r RestoreWorkspaceRequest) Send(ctx context.Context) (*RestoreWorkspaceRes
 // RestoreWorkspaceResponse is the response type for the
 // RestoreWorkspace API operation.
 type RestoreWorkspaceResponse struct {
-	*RestoreWorkspaceOutput
+	*types.RestoreWorkspaceOutput
 
 	response *aws.Response
 }

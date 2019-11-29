@@ -13,6 +13,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws/awserr"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting/integration"
 	"github.com/aws/aws-sdk-go-v2/service/elasticloadbalancingv2"
+	"github.com/aws/aws-sdk-go-v2/service/elasticloadbalancingv2/types"
 )
 
 var _ aws.Config
@@ -24,7 +25,7 @@ func TestInteg_00_DescribeLoadBalancers(t *testing.T) {
 
 	cfg := integration.ConfigWithDefaultRegion("us-west-2")
 	svc := elasticloadbalancingv2.New(cfg)
-	params := &elasticloadbalancingv2.DescribeLoadBalancersInput{}
+	params := &types.DescribeLoadBalancersInput{}
 
 	req := svc.DescribeLoadBalancersRequest(params)
 
@@ -39,7 +40,7 @@ func TestInteg_01_DescribeLoadBalancers(t *testing.T) {
 
 	cfg := integration.ConfigWithDefaultRegion("us-west-2")
 	svc := elasticloadbalancingv2.New(cfg)
-	params := &elasticloadbalancingv2.DescribeLoadBalancersInput{
+	params := &types.DescribeLoadBalancersInput{
 		LoadBalancerArns: []string{
 			"fake_load_balancer",
 		},

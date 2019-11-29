@@ -6,75 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
+	"github.com/aws/aws-sdk-go-v2/service/organizations/types"
 )
-
-type AttachPolicyInput struct {
-	_ struct{} `type:"structure"`
-
-	// The unique identifier (ID) of the policy that you want to attach to the target.
-	// You can get the ID for the policy by calling the ListPolicies operation.
-	//
-	// The regex pattern (http://wikipedia.org/wiki/regex) for a policy ID string
-	// requires "p-" followed by from 8 to 128 lower-case letters or digits.
-	//
-	// PolicyId is a required field
-	PolicyId *string `type:"string" required:"true"`
-
-	// The unique identifier (ID) of the root, OU, or account that you want to attach
-	// the policy to. You can get the ID by calling the ListRoots, ListOrganizationalUnitsForParent,
-	// or ListAccounts operations.
-	//
-	// The regex pattern (http://wikipedia.org/wiki/regex) for a target ID string
-	// requires one of the following:
-	//
-	//    * Root - A string that begins with "r-" followed by from 4 to 32 lower-case
-	//    letters or digits.
-	//
-	//    * Account - A string that consists of exactly 12 digits.
-	//
-	//    * Organizational unit (OU) - A string that begins with "ou-" followed
-	//    by from 4 to 32 lower-case letters or digits (the ID of the root that
-	//    the OU is in) followed by a second "-" dash and from 8 to 32 additional
-	//    lower-case letters or digits.
-	//
-	// TargetId is a required field
-	TargetId *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s AttachPolicyInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *AttachPolicyInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "AttachPolicyInput"}
-
-	if s.PolicyId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("PolicyId"))
-	}
-
-	if s.TargetId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("TargetId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type AttachPolicyOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s AttachPolicyOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opAttachPolicy = "AttachPolicy"
 
@@ -122,7 +57,7 @@ const opAttachPolicy = "AttachPolicy"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/AttachPolicy
-func (c *Client) AttachPolicyRequest(input *AttachPolicyInput) AttachPolicyRequest {
+func (c *Client) AttachPolicyRequest(input *types.AttachPolicyInput) AttachPolicyRequest {
 	op := &aws.Operation{
 		Name:       opAttachPolicy,
 		HTTPMethod: "POST",
@@ -130,10 +65,10 @@ func (c *Client) AttachPolicyRequest(input *AttachPolicyInput) AttachPolicyReque
 	}
 
 	if input == nil {
-		input = &AttachPolicyInput{}
+		input = &types.AttachPolicyInput{}
 	}
 
-	req := c.newRequest(op, input, &AttachPolicyOutput{})
+	req := c.newRequest(op, input, &types.AttachPolicyOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return AttachPolicyRequest{Request: req, Input: input, Copy: c.AttachPolicyRequest}
@@ -143,8 +78,8 @@ func (c *Client) AttachPolicyRequest(input *AttachPolicyInput) AttachPolicyReque
 // AttachPolicy API operation.
 type AttachPolicyRequest struct {
 	*aws.Request
-	Input *AttachPolicyInput
-	Copy  func(*AttachPolicyInput) AttachPolicyRequest
+	Input *types.AttachPolicyInput
+	Copy  func(*types.AttachPolicyInput) AttachPolicyRequest
 }
 
 // Send marshals and sends the AttachPolicy API request.
@@ -156,7 +91,7 @@ func (r AttachPolicyRequest) Send(ctx context.Context) (*AttachPolicyResponse, e
 	}
 
 	resp := &AttachPolicyResponse{
-		AttachPolicyOutput: r.Request.Data.(*AttachPolicyOutput),
+		AttachPolicyOutput: r.Request.Data.(*types.AttachPolicyOutput),
 		response:           &aws.Response{Request: r.Request},
 	}
 
@@ -166,7 +101,7 @@ func (r AttachPolicyRequest) Send(ctx context.Context) (*AttachPolicyResponse, e
 // AttachPolicyResponse is the response type for the
 // AttachPolicy API operation.
 type AttachPolicyResponse struct {
-	*AttachPolicyOutput
+	*types.AttachPolicyOutput
 
 	response *aws.Response
 }

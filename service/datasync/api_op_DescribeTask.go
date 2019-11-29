@@ -4,112 +4,10 @@ package datasync
 
 import (
 	"context"
-	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/datasync/types"
 )
-
-// DescribeTaskRequest
-type DescribeTaskInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the task to describe.
-	//
-	// TaskArn is a required field
-	TaskArn *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeTaskInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeTaskInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeTaskInput"}
-
-	if s.TaskArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("TaskArn"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// DescribeTaskResponse
-type DescribeTaskOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the Amazon CloudWatch log group that was
-	// used to monitor and log events in the task.
-	//
-	// For more information on these groups, see Working with Log Groups and Log
-	// Streams in the Amazon CloudWatch User Guide.
-	CloudWatchLogGroupArn *string `type:"string"`
-
-	// The time that the task was created.
-	CreationTime *time.Time `type:"timestamp"`
-
-	// The Amazon Resource Name (ARN) of the task execution that is syncing files.
-	CurrentTaskExecutionArn *string `type:"string"`
-
-	// The Amazon Resource Name (ARN) of the AWS storage resource's location.
-	DestinationLocationArn *string `type:"string"`
-
-	// The Amazon Resource Name (ARN) of the destination ENIs (Elastic Network Interface)
-	// that was created for your subnet.
-	DestinationNetworkInterfaceArns []string `type:"list"`
-
-	// Errors that AWS DataSync encountered during execution of the task. You can
-	// use this error code to help troubleshoot issues.
-	ErrorCode *string `type:"string"`
-
-	// Detailed description of an error that was encountered during the task execution.
-	// You can use this information to help troubleshoot issues.
-	ErrorDetail *string `type:"string"`
-
-	// A list of filter rules that determines which files to exclude from a task.
-	// The list should contain a single filter string that consists of the patterns
-	// to exclude. The patterns are delimited by "|" (that is, a pipe), for example:
-	// "/folder1|/folder2"
-	Excludes []FilterRule `type:"list"`
-
-	// The name of the task that was described.
-	Name *string `min:"1" type:"string"`
-
-	// The set of configuration options that control the behavior of a single execution
-	// of the task that occurs when you call StartTaskExecution. You can configure
-	// these options to preserve metadata such as user ID (UID) and group (GID),
-	// file permissions, data integrity verification, and so on.
-	//
-	// For each individual task execution, you can override these options by specifying
-	// the overriding OverrideOptions value to operation.
-	Options *Options `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the source file system's location.
-	SourceLocationArn *string `type:"string"`
-
-	// The Amazon Resource Name (ARN) of the source ENIs (Elastic Network Interface)
-	// that was created for your subnet.
-	SourceNetworkInterfaceArns []string `type:"list"`
-
-	// The status of the task that was described.
-	//
-	// For detailed information about task execution statuses, see Understanding
-	// Task Statuses in the AWS DataSync User Guide.
-	Status TaskStatus `type:"string" enum:"true"`
-
-	// The Amazon Resource Name (ARN) of the task that was described.
-	TaskArn *string `type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeTaskOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeTask = "DescribeTask"
 
@@ -126,7 +24,7 @@ const opDescribeTask = "DescribeTask"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/DescribeTask
-func (c *Client) DescribeTaskRequest(input *DescribeTaskInput) DescribeTaskRequest {
+func (c *Client) DescribeTaskRequest(input *types.DescribeTaskInput) DescribeTaskRequest {
 	op := &aws.Operation{
 		Name:       opDescribeTask,
 		HTTPMethod: "POST",
@@ -134,10 +32,10 @@ func (c *Client) DescribeTaskRequest(input *DescribeTaskInput) DescribeTaskReque
 	}
 
 	if input == nil {
-		input = &DescribeTaskInput{}
+		input = &types.DescribeTaskInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeTaskOutput{})
+	req := c.newRequest(op, input, &types.DescribeTaskOutput{})
 	return DescribeTaskRequest{Request: req, Input: input, Copy: c.DescribeTaskRequest}
 }
 
@@ -145,8 +43,8 @@ func (c *Client) DescribeTaskRequest(input *DescribeTaskInput) DescribeTaskReque
 // DescribeTask API operation.
 type DescribeTaskRequest struct {
 	*aws.Request
-	Input *DescribeTaskInput
-	Copy  func(*DescribeTaskInput) DescribeTaskRequest
+	Input *types.DescribeTaskInput
+	Copy  func(*types.DescribeTaskInput) DescribeTaskRequest
 }
 
 // Send marshals and sends the DescribeTask API request.
@@ -158,7 +56,7 @@ func (r DescribeTaskRequest) Send(ctx context.Context) (*DescribeTaskResponse, e
 	}
 
 	resp := &DescribeTaskResponse{
-		DescribeTaskOutput: r.Request.Data.(*DescribeTaskOutput),
+		DescribeTaskOutput: r.Request.Data.(*types.DescribeTaskOutput),
 		response:           &aws.Response{Request: r.Request},
 	}
 
@@ -168,7 +66,7 @@ func (r DescribeTaskRequest) Send(ctx context.Context) (*DescribeTaskResponse, e
 // DescribeTaskResponse is the response type for the
 // DescribeTask API operation.
 type DescribeTaskResponse struct {
-	*DescribeTaskOutput
+	*types.DescribeTaskOutput
 
 	response *aws.Response
 }

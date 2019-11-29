@@ -6,48 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/rekognition/types"
 )
-
-type StartStreamProcessorInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the stream processor to start processing.
-	//
-	// Name is a required field
-	Name *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s StartStreamProcessorInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *StartStreamProcessorInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "StartStreamProcessorInput"}
-
-	if s.Name == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Name"))
-	}
-	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type StartStreamProcessorOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s StartStreamProcessorOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opStartStreamProcessor = "StartStreamProcessor"
 
@@ -64,7 +24,7 @@ const opStartStreamProcessor = "StartStreamProcessor"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) StartStreamProcessorRequest(input *StartStreamProcessorInput) StartStreamProcessorRequest {
+func (c *Client) StartStreamProcessorRequest(input *types.StartStreamProcessorInput) StartStreamProcessorRequest {
 	op := &aws.Operation{
 		Name:       opStartStreamProcessor,
 		HTTPMethod: "POST",
@@ -72,10 +32,10 @@ func (c *Client) StartStreamProcessorRequest(input *StartStreamProcessorInput) S
 	}
 
 	if input == nil {
-		input = &StartStreamProcessorInput{}
+		input = &types.StartStreamProcessorInput{}
 	}
 
-	req := c.newRequest(op, input, &StartStreamProcessorOutput{})
+	req := c.newRequest(op, input, &types.StartStreamProcessorOutput{})
 	return StartStreamProcessorRequest{Request: req, Input: input, Copy: c.StartStreamProcessorRequest}
 }
 
@@ -83,8 +43,8 @@ func (c *Client) StartStreamProcessorRequest(input *StartStreamProcessorInput) S
 // StartStreamProcessor API operation.
 type StartStreamProcessorRequest struct {
 	*aws.Request
-	Input *StartStreamProcessorInput
-	Copy  func(*StartStreamProcessorInput) StartStreamProcessorRequest
+	Input *types.StartStreamProcessorInput
+	Copy  func(*types.StartStreamProcessorInput) StartStreamProcessorRequest
 }
 
 // Send marshals and sends the StartStreamProcessor API request.
@@ -96,7 +56,7 @@ func (r StartStreamProcessorRequest) Send(ctx context.Context) (*StartStreamProc
 	}
 
 	resp := &StartStreamProcessorResponse{
-		StartStreamProcessorOutput: r.Request.Data.(*StartStreamProcessorOutput),
+		StartStreamProcessorOutput: r.Request.Data.(*types.StartStreamProcessorOutput),
 		response:                   &aws.Response{Request: r.Request},
 	}
 
@@ -106,7 +66,7 @@ func (r StartStreamProcessorRequest) Send(ctx context.Context) (*StartStreamProc
 // StartStreamProcessorResponse is the response type for the
 // StartStreamProcessor API operation.
 type StartStreamProcessorResponse struct {
-	*StartStreamProcessorOutput
+	*types.StartStreamProcessorOutput
 
 	response *aws.Response
 }

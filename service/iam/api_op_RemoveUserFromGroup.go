@@ -6,70 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/query"
+	"github.com/aws/aws-sdk-go-v2/service/iam/types"
 )
-
-type RemoveUserFromGroupInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the group to update.
-	//
-	// This parameter allows (through its regex pattern (http://wikipedia.org/wiki/regex))
-	// a string of characters consisting of upper and lowercase alphanumeric characters
-	// with no spaces. You can also include any of the following characters: _+=,.@-
-	//
-	// GroupName is a required field
-	GroupName *string `min:"1" type:"string" required:"true"`
-
-	// The name of the user to remove.
-	//
-	// This parameter allows (through its regex pattern (http://wikipedia.org/wiki/regex))
-	// a string of characters consisting of upper and lowercase alphanumeric characters
-	// with no spaces. You can also include any of the following characters: _+=,.@-
-	//
-	// UserName is a required field
-	UserName *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s RemoveUserFromGroupInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *RemoveUserFromGroupInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "RemoveUserFromGroupInput"}
-
-	if s.GroupName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("GroupName"))
-	}
-	if s.GroupName != nil && len(*s.GroupName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("GroupName", 1))
-	}
-
-	if s.UserName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("UserName"))
-	}
-	if s.UserName != nil && len(*s.UserName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("UserName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type RemoveUserFromGroupOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s RemoveUserFromGroupOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opRemoveUserFromGroup = "RemoveUserFromGroup"
 
@@ -86,7 +26,7 @@ const opRemoveUserFromGroup = "RemoveUserFromGroup"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/RemoveUserFromGroup
-func (c *Client) RemoveUserFromGroupRequest(input *RemoveUserFromGroupInput) RemoveUserFromGroupRequest {
+func (c *Client) RemoveUserFromGroupRequest(input *types.RemoveUserFromGroupInput) RemoveUserFromGroupRequest {
 	op := &aws.Operation{
 		Name:       opRemoveUserFromGroup,
 		HTTPMethod: "POST",
@@ -94,10 +34,10 @@ func (c *Client) RemoveUserFromGroupRequest(input *RemoveUserFromGroupInput) Rem
 	}
 
 	if input == nil {
-		input = &RemoveUserFromGroupInput{}
+		input = &types.RemoveUserFromGroupInput{}
 	}
 
-	req := c.newRequest(op, input, &RemoveUserFromGroupOutput{})
+	req := c.newRequest(op, input, &types.RemoveUserFromGroupOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return RemoveUserFromGroupRequest{Request: req, Input: input, Copy: c.RemoveUserFromGroupRequest}
@@ -107,8 +47,8 @@ func (c *Client) RemoveUserFromGroupRequest(input *RemoveUserFromGroupInput) Rem
 // RemoveUserFromGroup API operation.
 type RemoveUserFromGroupRequest struct {
 	*aws.Request
-	Input *RemoveUserFromGroupInput
-	Copy  func(*RemoveUserFromGroupInput) RemoveUserFromGroupRequest
+	Input *types.RemoveUserFromGroupInput
+	Copy  func(*types.RemoveUserFromGroupInput) RemoveUserFromGroupRequest
 }
 
 // Send marshals and sends the RemoveUserFromGroup API request.
@@ -120,7 +60,7 @@ func (r RemoveUserFromGroupRequest) Send(ctx context.Context) (*RemoveUserFromGr
 	}
 
 	resp := &RemoveUserFromGroupResponse{
-		RemoveUserFromGroupOutput: r.Request.Data.(*RemoveUserFromGroupOutput),
+		RemoveUserFromGroupOutput: r.Request.Data.(*types.RemoveUserFromGroupOutput),
 		response:                  &aws.Response{Request: r.Request},
 	}
 
@@ -130,7 +70,7 @@ func (r RemoveUserFromGroupRequest) Send(ctx context.Context) (*RemoveUserFromGr
 // RemoveUserFromGroupResponse is the response type for the
 // RemoveUserFromGroup API operation.
 type RemoveUserFromGroupResponse struct {
-	*RemoveUserFromGroupOutput
+	*types.RemoveUserFromGroupOutput
 
 	response *aws.Response
 }

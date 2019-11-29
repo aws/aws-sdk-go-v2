@@ -13,6 +13,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws/awserr"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting/integration"
 	"github.com/aws/aws-sdk-go-v2/service/costandusagereportservice"
+	"github.com/aws/aws-sdk-go-v2/service/costandusagereportservice/types"
 )
 
 var _ aws.Config
@@ -24,7 +25,7 @@ func TestInteg_00_DescribeReportDefinitions(t *testing.T) {
 
 	cfg := integration.ConfigWithDefaultRegion("us-east-1")
 	svc := costandusagereportservice.New(cfg)
-	params := &costandusagereportservice.DescribeReportDefinitionsInput{}
+	params := &types.DescribeReportDefinitionsInput{}
 
 	req := svc.DescribeReportDefinitionsRequest(params)
 

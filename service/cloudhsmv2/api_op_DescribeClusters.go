@@ -6,67 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/cloudhsmv2/types"
 )
-
-type DescribeClustersInput struct {
-	_ struct{} `type:"structure"`
-
-	// One or more filters to limit the items returned in the response.
-	//
-	// Use the clusterIds filter to return only the specified clusters. Specify
-	// clusters by their cluster identifier (ID).
-	//
-	// Use the vpcIds filter to return only the clusters in the specified virtual
-	// private clouds (VPCs). Specify VPCs by their VPC identifier (ID).
-	//
-	// Use the states filter to return only clusters that match the specified state.
-	Filters map[string][]string `type:"map"`
-
-	// The maximum number of clusters to return in the response. When there are
-	// more clusters than the number you specify, the response contains a NextToken
-	// value.
-	MaxResults *int64 `min:"1" type:"integer"`
-
-	// The NextToken value that you received in the previous response. Use this
-	// value to get more clusters.
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeClustersInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeClustersInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeClustersInput"}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribeClustersOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A list of clusters.
-	Clusters []Cluster `type:"list"`
-
-	// An opaque string that indicates that the response contains only a subset
-	// of clusters. Use this value in a subsequent DescribeClusters request to get
-	// more clusters.
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeClustersOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeClusters = "DescribeClusters"
 
@@ -90,7 +31,7 @@ const opDescribeClusters = "DescribeClusters"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudhsmv2-2017-04-28/DescribeClusters
-func (c *Client) DescribeClustersRequest(input *DescribeClustersInput) DescribeClustersRequest {
+func (c *Client) DescribeClustersRequest(input *types.DescribeClustersInput) DescribeClustersRequest {
 	op := &aws.Operation{
 		Name:       opDescribeClusters,
 		HTTPMethod: "POST",
@@ -104,10 +45,10 @@ func (c *Client) DescribeClustersRequest(input *DescribeClustersInput) DescribeC
 	}
 
 	if input == nil {
-		input = &DescribeClustersInput{}
+		input = &types.DescribeClustersInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeClustersOutput{})
+	req := c.newRequest(op, input, &types.DescribeClustersOutput{})
 	return DescribeClustersRequest{Request: req, Input: input, Copy: c.DescribeClustersRequest}
 }
 
@@ -115,8 +56,8 @@ func (c *Client) DescribeClustersRequest(input *DescribeClustersInput) DescribeC
 // DescribeClusters API operation.
 type DescribeClustersRequest struct {
 	*aws.Request
-	Input *DescribeClustersInput
-	Copy  func(*DescribeClustersInput) DescribeClustersRequest
+	Input *types.DescribeClustersInput
+	Copy  func(*types.DescribeClustersInput) DescribeClustersRequest
 }
 
 // Send marshals and sends the DescribeClusters API request.
@@ -128,7 +69,7 @@ func (r DescribeClustersRequest) Send(ctx context.Context) (*DescribeClustersRes
 	}
 
 	resp := &DescribeClustersResponse{
-		DescribeClustersOutput: r.Request.Data.(*DescribeClustersOutput),
+		DescribeClustersOutput: r.Request.Data.(*types.DescribeClustersOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -158,7 +99,7 @@ func NewDescribeClustersPaginator(req DescribeClustersRequest) DescribeClustersP
 	return DescribeClustersPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *DescribeClustersInput
+				var inCpy *types.DescribeClustersInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -178,14 +119,14 @@ type DescribeClustersPaginator struct {
 	aws.Pager
 }
 
-func (p *DescribeClustersPaginator) CurrentPage() *DescribeClustersOutput {
-	return p.Pager.CurrentPage().(*DescribeClustersOutput)
+func (p *DescribeClustersPaginator) CurrentPage() *types.DescribeClustersOutput {
+	return p.Pager.CurrentPage().(*types.DescribeClustersOutput)
 }
 
 // DescribeClustersResponse is the response type for the
 // DescribeClusters API operation.
 type DescribeClustersResponse struct {
-	*DescribeClustersOutput
+	*types.DescribeClustersOutput
 
 	response *aws.Response
 }

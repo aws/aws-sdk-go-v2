@@ -6,61 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/personalize/types"
 )
-
-type CreateSolutionVersionInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the solution containing the training configuration
-	// information.
-	//
-	// SolutionArn is a required field
-	SolutionArn *string `locationName:"solutionArn" type:"string" required:"true"`
-
-	// The scope of training to be performed when creating the solution version.
-	// The FULL option trains the solution version based on the entirety of the
-	// input solution's training data, while the UPDATE option processes only the
-	// data that has changed in comparison to the input solution. Choose UPDATE
-	// when you want to incrementally update your solution version instead of creating
-	// an entirely new one.
-	//
-	// The UPDATE option can only be used when you already have an active solution
-	// version created from the input solution using the FULL option and the input
-	// solution was trained with the native-recipe-hrnn-coldstart recipe.
-	TrainingMode TrainingMode `locationName:"trainingMode" type:"string" enum:"true"`
-}
-
-// String returns the string representation
-func (s CreateSolutionVersionInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateSolutionVersionInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateSolutionVersionInput"}
-
-	if s.SolutionArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("SolutionArn"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type CreateSolutionVersionOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The ARN of the new solution version.
-	SolutionVersionArn *string `locationName:"solutionVersionArn" type:"string"`
-}
-
-// String returns the string representation
-func (s CreateSolutionVersionOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCreateSolutionVersion = "CreateSolutionVersion"
 
@@ -105,7 +52,7 @@ const opCreateSolutionVersion = "CreateSolutionVersion"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/CreateSolutionVersion
-func (c *Client) CreateSolutionVersionRequest(input *CreateSolutionVersionInput) CreateSolutionVersionRequest {
+func (c *Client) CreateSolutionVersionRequest(input *types.CreateSolutionVersionInput) CreateSolutionVersionRequest {
 	op := &aws.Operation{
 		Name:       opCreateSolutionVersion,
 		HTTPMethod: "POST",
@@ -113,10 +60,10 @@ func (c *Client) CreateSolutionVersionRequest(input *CreateSolutionVersionInput)
 	}
 
 	if input == nil {
-		input = &CreateSolutionVersionInput{}
+		input = &types.CreateSolutionVersionInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateSolutionVersionOutput{})
+	req := c.newRequest(op, input, &types.CreateSolutionVersionOutput{})
 	return CreateSolutionVersionRequest{Request: req, Input: input, Copy: c.CreateSolutionVersionRequest}
 }
 
@@ -124,8 +71,8 @@ func (c *Client) CreateSolutionVersionRequest(input *CreateSolutionVersionInput)
 // CreateSolutionVersion API operation.
 type CreateSolutionVersionRequest struct {
 	*aws.Request
-	Input *CreateSolutionVersionInput
-	Copy  func(*CreateSolutionVersionInput) CreateSolutionVersionRequest
+	Input *types.CreateSolutionVersionInput
+	Copy  func(*types.CreateSolutionVersionInput) CreateSolutionVersionRequest
 }
 
 // Send marshals and sends the CreateSolutionVersion API request.
@@ -137,7 +84,7 @@ func (r CreateSolutionVersionRequest) Send(ctx context.Context) (*CreateSolution
 	}
 
 	resp := &CreateSolutionVersionResponse{
-		CreateSolutionVersionOutput: r.Request.Data.(*CreateSolutionVersionOutput),
+		CreateSolutionVersionOutput: r.Request.Data.(*types.CreateSolutionVersionOutput),
 		response:                    &aws.Response{Request: r.Request},
 	}
 
@@ -147,7 +94,7 @@ func (r CreateSolutionVersionRequest) Send(ctx context.Context) (*CreateSolution
 // CreateSolutionVersionResponse is the response type for the
 // CreateSolutionVersion API operation.
 type CreateSolutionVersionResponse struct {
-	*CreateSolutionVersionOutput
+	*types.CreateSolutionVersionOutput
 
 	response *aws.Response
 }

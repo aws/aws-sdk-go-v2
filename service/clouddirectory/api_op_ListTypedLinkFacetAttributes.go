@@ -6,125 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/clouddirectory/types"
 )
-
-type ListTypedLinkFacetAttributesInput struct {
-	_ struct{} `type:"structure"`
-
-	// The maximum number of results to retrieve.
-	MaxResults *int64 `min:"1" type:"integer"`
-
-	// The unique name of the typed link facet.
-	//
-	// Name is a required field
-	Name *string `type:"string" required:"true"`
-
-	// The pagination token.
-	NextToken *string `type:"string"`
-
-	// The Amazon Resource Name (ARN) that is associated with the schema. For more
-	// information, see arns.
-	//
-	// SchemaArn is a required field
-	SchemaArn *string `location:"header" locationName:"x-amz-data-partition" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s ListTypedLinkFacetAttributesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListTypedLinkFacetAttributesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListTypedLinkFacetAttributesInput"}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-
-	if s.Name == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Name"))
-	}
-
-	if s.SchemaArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("SchemaArn"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListTypedLinkFacetAttributesInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.MaxResults != nil {
-		v := *s.MaxResults
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "MaxResults", protocol.Int64Value(v), metadata)
-	}
-	if s.Name != nil {
-		v := *s.Name
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "Name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.SchemaArn != nil {
-		v := *s.SchemaArn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "x-amz-data-partition", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type ListTypedLinkFacetAttributesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// An ordered set of attributes associate with the typed link.
-	Attributes []TypedLinkAttributeDefinition `type:"list"`
-
-	// The pagination token.
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s ListTypedLinkFacetAttributesOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListTypedLinkFacetAttributesOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.Attributes != nil {
-		v := s.Attributes
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "Attributes", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opListTypedLinkFacetAttributes = "ListTypedLinkFacetAttributes"
 
@@ -142,7 +25,7 @@ const opListTypedLinkFacetAttributes = "ListTypedLinkFacetAttributes"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/ListTypedLinkFacetAttributes
-func (c *Client) ListTypedLinkFacetAttributesRequest(input *ListTypedLinkFacetAttributesInput) ListTypedLinkFacetAttributesRequest {
+func (c *Client) ListTypedLinkFacetAttributesRequest(input *types.ListTypedLinkFacetAttributesInput) ListTypedLinkFacetAttributesRequest {
 	op := &aws.Operation{
 		Name:       opListTypedLinkFacetAttributes,
 		HTTPMethod: "POST",
@@ -156,10 +39,10 @@ func (c *Client) ListTypedLinkFacetAttributesRequest(input *ListTypedLinkFacetAt
 	}
 
 	if input == nil {
-		input = &ListTypedLinkFacetAttributesInput{}
+		input = &types.ListTypedLinkFacetAttributesInput{}
 	}
 
-	req := c.newRequest(op, input, &ListTypedLinkFacetAttributesOutput{})
+	req := c.newRequest(op, input, &types.ListTypedLinkFacetAttributesOutput{})
 	return ListTypedLinkFacetAttributesRequest{Request: req, Input: input, Copy: c.ListTypedLinkFacetAttributesRequest}
 }
 
@@ -167,8 +50,8 @@ func (c *Client) ListTypedLinkFacetAttributesRequest(input *ListTypedLinkFacetAt
 // ListTypedLinkFacetAttributes API operation.
 type ListTypedLinkFacetAttributesRequest struct {
 	*aws.Request
-	Input *ListTypedLinkFacetAttributesInput
-	Copy  func(*ListTypedLinkFacetAttributesInput) ListTypedLinkFacetAttributesRequest
+	Input *types.ListTypedLinkFacetAttributesInput
+	Copy  func(*types.ListTypedLinkFacetAttributesInput) ListTypedLinkFacetAttributesRequest
 }
 
 // Send marshals and sends the ListTypedLinkFacetAttributes API request.
@@ -180,7 +63,7 @@ func (r ListTypedLinkFacetAttributesRequest) Send(ctx context.Context) (*ListTyp
 	}
 
 	resp := &ListTypedLinkFacetAttributesResponse{
-		ListTypedLinkFacetAttributesOutput: r.Request.Data.(*ListTypedLinkFacetAttributesOutput),
+		ListTypedLinkFacetAttributesOutput: r.Request.Data.(*types.ListTypedLinkFacetAttributesOutput),
 		response:                           &aws.Response{Request: r.Request},
 	}
 
@@ -210,7 +93,7 @@ func NewListTypedLinkFacetAttributesPaginator(req ListTypedLinkFacetAttributesRe
 	return ListTypedLinkFacetAttributesPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListTypedLinkFacetAttributesInput
+				var inCpy *types.ListTypedLinkFacetAttributesInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -230,14 +113,14 @@ type ListTypedLinkFacetAttributesPaginator struct {
 	aws.Pager
 }
 
-func (p *ListTypedLinkFacetAttributesPaginator) CurrentPage() *ListTypedLinkFacetAttributesOutput {
-	return p.Pager.CurrentPage().(*ListTypedLinkFacetAttributesOutput)
+func (p *ListTypedLinkFacetAttributesPaginator) CurrentPage() *types.ListTypedLinkFacetAttributesOutput {
+	return p.Pager.CurrentPage().(*types.ListTypedLinkFacetAttributesOutput)
 }
 
 // ListTypedLinkFacetAttributesResponse is the response type for the
 // ListTypedLinkFacetAttributes API operation.
 type ListTypedLinkFacetAttributesResponse struct {
-	*ListTypedLinkFacetAttributesOutput
+	*types.ListTypedLinkFacetAttributesOutput
 
 	response *aws.Response
 }

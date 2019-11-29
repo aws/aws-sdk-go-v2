@@ -6,79 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/organizations/types"
 )
-
-type ListTargetsForPolicyInput struct {
-	_ struct{} `type:"structure"`
-
-	// (Optional) Use this to limit the number of results you want included per
-	// page in the response. If you do not include this parameter, it defaults to
-	// a value that is specific to the operation. If additional items exist beyond
-	// the maximum you specify, the NextToken response element is present and has
-	// a value (is not null). Include that value as the NextToken request parameter
-	// in the next call to the operation to get the next part of the results. Note
-	// that Organizations might return fewer results than the maximum even when
-	// there are more results available. You should check NextToken after every
-	// operation to ensure that you receive all of the results.
-	MaxResults *int64 `min:"1" type:"integer"`
-
-	// Use this parameter if you receive a NextToken response in a previous request
-	// that indicates that there is more output available. Set it to the value of
-	// the previous call's NextToken response to indicate where the output should
-	// continue from.
-	NextToken *string `type:"string"`
-
-	// The unique identifier (ID) of the policy whose attachments you want to know.
-	//
-	// The regex pattern (http://wikipedia.org/wiki/regex) for a policy ID string
-	// requires "p-" followed by from 8 to 128 lower-case letters or digits.
-	//
-	// PolicyId is a required field
-	PolicyId *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s ListTargetsForPolicyInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListTargetsForPolicyInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListTargetsForPolicyInput"}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-
-	if s.PolicyId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("PolicyId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ListTargetsForPolicyOutput struct {
-	_ struct{} `type:"structure"`
-
-	// If present, this value indicates that there is more output available than
-	// is included in the current response. Use this value in the NextToken request
-	// parameter in a subsequent call to the operation to get the next part of the
-	// output. You should repeat this until the NextToken response element comes
-	// back as null.
-	NextToken *string `type:"string"`
-
-	// A list of structures, each of which contains details about one of the entities
-	// to which the specified policy is attached.
-	Targets []PolicyTargetSummary `type:"list"`
-}
-
-// String returns the string representation
-func (s ListTargetsForPolicyOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListTargetsForPolicy = "ListTargetsForPolicy"
 
@@ -103,7 +32,7 @@ const opListTargetsForPolicy = "ListTargetsForPolicy"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListTargetsForPolicy
-func (c *Client) ListTargetsForPolicyRequest(input *ListTargetsForPolicyInput) ListTargetsForPolicyRequest {
+func (c *Client) ListTargetsForPolicyRequest(input *types.ListTargetsForPolicyInput) ListTargetsForPolicyRequest {
 	op := &aws.Operation{
 		Name:       opListTargetsForPolicy,
 		HTTPMethod: "POST",
@@ -117,10 +46,10 @@ func (c *Client) ListTargetsForPolicyRequest(input *ListTargetsForPolicyInput) L
 	}
 
 	if input == nil {
-		input = &ListTargetsForPolicyInput{}
+		input = &types.ListTargetsForPolicyInput{}
 	}
 
-	req := c.newRequest(op, input, &ListTargetsForPolicyOutput{})
+	req := c.newRequest(op, input, &types.ListTargetsForPolicyOutput{})
 	return ListTargetsForPolicyRequest{Request: req, Input: input, Copy: c.ListTargetsForPolicyRequest}
 }
 
@@ -128,8 +57,8 @@ func (c *Client) ListTargetsForPolicyRequest(input *ListTargetsForPolicyInput) L
 // ListTargetsForPolicy API operation.
 type ListTargetsForPolicyRequest struct {
 	*aws.Request
-	Input *ListTargetsForPolicyInput
-	Copy  func(*ListTargetsForPolicyInput) ListTargetsForPolicyRequest
+	Input *types.ListTargetsForPolicyInput
+	Copy  func(*types.ListTargetsForPolicyInput) ListTargetsForPolicyRequest
 }
 
 // Send marshals and sends the ListTargetsForPolicy API request.
@@ -141,7 +70,7 @@ func (r ListTargetsForPolicyRequest) Send(ctx context.Context) (*ListTargetsForP
 	}
 
 	resp := &ListTargetsForPolicyResponse{
-		ListTargetsForPolicyOutput: r.Request.Data.(*ListTargetsForPolicyOutput),
+		ListTargetsForPolicyOutput: r.Request.Data.(*types.ListTargetsForPolicyOutput),
 		response:                   &aws.Response{Request: r.Request},
 	}
 
@@ -171,7 +100,7 @@ func NewListTargetsForPolicyPaginator(req ListTargetsForPolicyRequest) ListTarge
 	return ListTargetsForPolicyPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListTargetsForPolicyInput
+				var inCpy *types.ListTargetsForPolicyInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -191,14 +120,14 @@ type ListTargetsForPolicyPaginator struct {
 	aws.Pager
 }
 
-func (p *ListTargetsForPolicyPaginator) CurrentPage() *ListTargetsForPolicyOutput {
-	return p.Pager.CurrentPage().(*ListTargetsForPolicyOutput)
+func (p *ListTargetsForPolicyPaginator) CurrentPage() *types.ListTargetsForPolicyOutput {
+	return p.Pager.CurrentPage().(*types.ListTargetsForPolicyOutput)
 }
 
 // ListTargetsForPolicyResponse is the response type for the
 // ListTargetsForPolicy API operation.
 type ListTargetsForPolicyResponse struct {
-	*ListTargetsForPolicyOutput
+	*types.ListTargetsForPolicyOutput
 
 	response *aws.Response
 }

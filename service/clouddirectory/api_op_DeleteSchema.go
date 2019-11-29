@@ -6,75 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/clouddirectory/types"
 )
-
-type DeleteSchemaInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the development schema. For more information,
-	// see arns.
-	//
-	// SchemaArn is a required field
-	SchemaArn *string `location:"header" locationName:"x-amz-data-partition" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteSchemaInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteSchemaInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteSchemaInput"}
-
-	if s.SchemaArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("SchemaArn"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteSchemaInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.SchemaArn != nil {
-		v := *s.SchemaArn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "x-amz-data-partition", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type DeleteSchemaOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The input ARN that is returned as part of the response. For more information,
-	// see arns.
-	SchemaArn *string `type:"string"`
-}
-
-// String returns the string representation
-func (s DeleteSchemaOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteSchemaOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.SchemaArn != nil {
-		v := *s.SchemaArn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "SchemaArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opDeleteSchema = "DeleteSchema"
 
@@ -92,7 +25,7 @@ const opDeleteSchema = "DeleteSchema"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/DeleteSchema
-func (c *Client) DeleteSchemaRequest(input *DeleteSchemaInput) DeleteSchemaRequest {
+func (c *Client) DeleteSchemaRequest(input *types.DeleteSchemaInput) DeleteSchemaRequest {
 	op := &aws.Operation{
 		Name:       opDeleteSchema,
 		HTTPMethod: "PUT",
@@ -100,10 +33,10 @@ func (c *Client) DeleteSchemaRequest(input *DeleteSchemaInput) DeleteSchemaReque
 	}
 
 	if input == nil {
-		input = &DeleteSchemaInput{}
+		input = &types.DeleteSchemaInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteSchemaOutput{})
+	req := c.newRequest(op, input, &types.DeleteSchemaOutput{})
 	return DeleteSchemaRequest{Request: req, Input: input, Copy: c.DeleteSchemaRequest}
 }
 
@@ -111,8 +44,8 @@ func (c *Client) DeleteSchemaRequest(input *DeleteSchemaInput) DeleteSchemaReque
 // DeleteSchema API operation.
 type DeleteSchemaRequest struct {
 	*aws.Request
-	Input *DeleteSchemaInput
-	Copy  func(*DeleteSchemaInput) DeleteSchemaRequest
+	Input *types.DeleteSchemaInput
+	Copy  func(*types.DeleteSchemaInput) DeleteSchemaRequest
 }
 
 // Send marshals and sends the DeleteSchema API request.
@@ -124,7 +57,7 @@ func (r DeleteSchemaRequest) Send(ctx context.Context) (*DeleteSchemaResponse, e
 	}
 
 	resp := &DeleteSchemaResponse{
-		DeleteSchemaOutput: r.Request.Data.(*DeleteSchemaOutput),
+		DeleteSchemaOutput: r.Request.Data.(*types.DeleteSchemaOutput),
 		response:           &aws.Response{Request: r.Request},
 	}
 
@@ -134,7 +67,7 @@ func (r DeleteSchemaRequest) Send(ctx context.Context) (*DeleteSchemaResponse, e
 // DeleteSchemaResponse is the response type for the
 // DeleteSchema API operation.
 type DeleteSchemaResponse struct {
-	*DeleteSchemaOutput
+	*types.DeleteSchemaOutput
 
 	response *aws.Response
 }

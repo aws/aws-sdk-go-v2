@@ -4,104 +4,10 @@ package ssm
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ssm/types"
 )
-
-type ListInventoryEntriesInput struct {
-	_ struct{} `type:"structure"`
-
-	// One or more filters. Use a filter to return a more specific list of results.
-	Filters []InventoryFilter `min:"1" type:"list"`
-
-	// The instance ID for which you want inventory information.
-	//
-	// InstanceId is a required field
-	InstanceId *string `type:"string" required:"true"`
-
-	// The maximum number of items to return for this call. The call also returns
-	// a token that you can specify in a subsequent call to get the next set of
-	// results.
-	MaxResults *int64 `min:"1" type:"integer"`
-
-	// The token for the next set of items to return. (You received this token from
-	// a previous call.)
-	NextToken *string `type:"string"`
-
-	// The type of inventory item for which you want information.
-	//
-	// TypeName is a required field
-	TypeName *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s ListInventoryEntriesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListInventoryEntriesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListInventoryEntriesInput"}
-	if s.Filters != nil && len(s.Filters) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Filters", 1))
-	}
-
-	if s.InstanceId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("InstanceId"))
-	}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-
-	if s.TypeName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("TypeName"))
-	}
-	if s.TypeName != nil && len(*s.TypeName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("TypeName", 1))
-	}
-	if s.Filters != nil {
-		for i, v := range s.Filters {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ListInventoryEntriesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The time that inventory information was collected for the instance(s).
-	CaptureTime *string `type:"string"`
-
-	// A list of inventory items on the instance(s).
-	Entries []map[string]string `type:"list"`
-
-	// The instance ID targeted by the request to query inventory information.
-	InstanceId *string `type:"string"`
-
-	// The token to use when requesting the next set of items. If there are no additional
-	// items to return, the string is empty.
-	NextToken *string `type:"string"`
-
-	// The inventory schema version used by the instance(s).
-	SchemaVersion *string `type:"string"`
-
-	// The type of inventory item returned by the request.
-	TypeName *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s ListInventoryEntriesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListInventoryEntries = "ListInventoryEntries"
 
@@ -118,7 +24,7 @@ const opListInventoryEntries = "ListInventoryEntries"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ListInventoryEntries
-func (c *Client) ListInventoryEntriesRequest(input *ListInventoryEntriesInput) ListInventoryEntriesRequest {
+func (c *Client) ListInventoryEntriesRequest(input *types.ListInventoryEntriesInput) ListInventoryEntriesRequest {
 	op := &aws.Operation{
 		Name:       opListInventoryEntries,
 		HTTPMethod: "POST",
@@ -126,10 +32,10 @@ func (c *Client) ListInventoryEntriesRequest(input *ListInventoryEntriesInput) L
 	}
 
 	if input == nil {
-		input = &ListInventoryEntriesInput{}
+		input = &types.ListInventoryEntriesInput{}
 	}
 
-	req := c.newRequest(op, input, &ListInventoryEntriesOutput{})
+	req := c.newRequest(op, input, &types.ListInventoryEntriesOutput{})
 	return ListInventoryEntriesRequest{Request: req, Input: input, Copy: c.ListInventoryEntriesRequest}
 }
 
@@ -137,8 +43,8 @@ func (c *Client) ListInventoryEntriesRequest(input *ListInventoryEntriesInput) L
 // ListInventoryEntries API operation.
 type ListInventoryEntriesRequest struct {
 	*aws.Request
-	Input *ListInventoryEntriesInput
-	Copy  func(*ListInventoryEntriesInput) ListInventoryEntriesRequest
+	Input *types.ListInventoryEntriesInput
+	Copy  func(*types.ListInventoryEntriesInput) ListInventoryEntriesRequest
 }
 
 // Send marshals and sends the ListInventoryEntries API request.
@@ -150,7 +56,7 @@ func (r ListInventoryEntriesRequest) Send(ctx context.Context) (*ListInventoryEn
 	}
 
 	resp := &ListInventoryEntriesResponse{
-		ListInventoryEntriesOutput: r.Request.Data.(*ListInventoryEntriesOutput),
+		ListInventoryEntriesOutput: r.Request.Data.(*types.ListInventoryEntriesOutput),
 		response:                   &aws.Response{Request: r.Request},
 	}
 
@@ -160,7 +66,7 @@ func (r ListInventoryEntriesRequest) Send(ctx context.Context) (*ListInventoryEn
 // ListInventoryEntriesResponse is the response type for the
 // ListInventoryEntries API operation.
 type ListInventoryEntriesResponse struct {
-	*ListInventoryEntriesOutput
+	*types.ListInventoryEntriesOutput
 
 	response *aws.Response
 }

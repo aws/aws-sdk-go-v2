@@ -6,136 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/clouddirectory/types"
 )
-
-type ListObjectPoliciesInput struct {
-	_ struct{} `type:"structure"`
-
-	// Represents the manner and timing in which the successful write or update
-	// of an object is reflected in a subsequent read operation of that same object.
-	ConsistencyLevel ConsistencyLevel `location:"header" locationName:"x-amz-consistency-level" type:"string" enum:"true"`
-
-	// The Amazon Resource Name (ARN) that is associated with the Directory where
-	// objects reside. For more information, see arns.
-	//
-	// DirectoryArn is a required field
-	DirectoryArn *string `location:"header" locationName:"x-amz-data-partition" type:"string" required:"true"`
-
-	// The maximum number of items to be retrieved in a single call. This is an
-	// approximate number.
-	MaxResults *int64 `min:"1" type:"integer"`
-
-	// The pagination token.
-	NextToken *string `type:"string"`
-
-	// Reference that identifies the object for which policies will be listed.
-	//
-	// ObjectReference is a required field
-	ObjectReference *ObjectReference `type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s ListObjectPoliciesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListObjectPoliciesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListObjectPoliciesInput"}
-
-	if s.DirectoryArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DirectoryArn"))
-	}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-
-	if s.ObjectReference == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ObjectReference"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListObjectPoliciesInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.MaxResults != nil {
-		v := *s.MaxResults
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "MaxResults", protocol.Int64Value(v), metadata)
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.ObjectReference != nil {
-		v := s.ObjectReference
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "ObjectReference", v, metadata)
-	}
-	if len(s.ConsistencyLevel) > 0 {
-		v := s.ConsistencyLevel
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "x-amz-consistency-level", protocol.QuotedValue{ValueMarshaler: v}, metadata)
-	}
-	if s.DirectoryArn != nil {
-		v := *s.DirectoryArn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "x-amz-data-partition", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type ListObjectPoliciesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A list of policy ObjectIdentifiers, that are attached to the object.
-	AttachedPolicyIds []string `type:"list"`
-
-	// The pagination token.
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s ListObjectPoliciesOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListObjectPoliciesOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.AttachedPolicyIds != nil {
-		v := s.AttachedPolicyIds
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "AttachedPolicyIds", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
-		}
-		ls0.End()
-
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opListObjectPolicies = "ListObjectPolicies"
 
@@ -152,7 +24,7 @@ const opListObjectPolicies = "ListObjectPolicies"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/ListObjectPolicies
-func (c *Client) ListObjectPoliciesRequest(input *ListObjectPoliciesInput) ListObjectPoliciesRequest {
+func (c *Client) ListObjectPoliciesRequest(input *types.ListObjectPoliciesInput) ListObjectPoliciesRequest {
 	op := &aws.Operation{
 		Name:       opListObjectPolicies,
 		HTTPMethod: "POST",
@@ -166,10 +38,10 @@ func (c *Client) ListObjectPoliciesRequest(input *ListObjectPoliciesInput) ListO
 	}
 
 	if input == nil {
-		input = &ListObjectPoliciesInput{}
+		input = &types.ListObjectPoliciesInput{}
 	}
 
-	req := c.newRequest(op, input, &ListObjectPoliciesOutput{})
+	req := c.newRequest(op, input, &types.ListObjectPoliciesOutput{})
 	return ListObjectPoliciesRequest{Request: req, Input: input, Copy: c.ListObjectPoliciesRequest}
 }
 
@@ -177,8 +49,8 @@ func (c *Client) ListObjectPoliciesRequest(input *ListObjectPoliciesInput) ListO
 // ListObjectPolicies API operation.
 type ListObjectPoliciesRequest struct {
 	*aws.Request
-	Input *ListObjectPoliciesInput
-	Copy  func(*ListObjectPoliciesInput) ListObjectPoliciesRequest
+	Input *types.ListObjectPoliciesInput
+	Copy  func(*types.ListObjectPoliciesInput) ListObjectPoliciesRequest
 }
 
 // Send marshals and sends the ListObjectPolicies API request.
@@ -190,7 +62,7 @@ func (r ListObjectPoliciesRequest) Send(ctx context.Context) (*ListObjectPolicie
 	}
 
 	resp := &ListObjectPoliciesResponse{
-		ListObjectPoliciesOutput: r.Request.Data.(*ListObjectPoliciesOutput),
+		ListObjectPoliciesOutput: r.Request.Data.(*types.ListObjectPoliciesOutput),
 		response:                 &aws.Response{Request: r.Request},
 	}
 
@@ -220,7 +92,7 @@ func NewListObjectPoliciesPaginator(req ListObjectPoliciesRequest) ListObjectPol
 	return ListObjectPoliciesPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListObjectPoliciesInput
+				var inCpy *types.ListObjectPoliciesInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -240,14 +112,14 @@ type ListObjectPoliciesPaginator struct {
 	aws.Pager
 }
 
-func (p *ListObjectPoliciesPaginator) CurrentPage() *ListObjectPoliciesOutput {
-	return p.Pager.CurrentPage().(*ListObjectPoliciesOutput)
+func (p *ListObjectPoliciesPaginator) CurrentPage() *types.ListObjectPoliciesOutput {
+	return p.Pager.CurrentPage().(*types.ListObjectPoliciesOutput)
 }
 
 // ListObjectPoliciesResponse is the response type for the
 // ListObjectPolicies API operation.
 type ListObjectPoliciesResponse struct {
-	*ListObjectPoliciesOutput
+	*types.ListObjectPoliciesOutput
 
 	response *aws.Response
 }

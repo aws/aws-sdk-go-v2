@@ -6,30 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/opsworks/types"
 )
-
-type DescribeMyUserProfileInput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DescribeMyUserProfileInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Contains the response to a DescribeMyUserProfile request.
-type DescribeMyUserProfileOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A UserProfile object that describes the user's SSH information.
-	UserProfile *SelfUserProfile `type:"structure"`
-}
-
-// String returns the string representation
-func (s DescribeMyUserProfileOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeMyUserProfile = "DescribeMyUserProfile"
 
@@ -50,7 +28,7 @@ const opDescribeMyUserProfile = "DescribeMyUserProfile"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DescribeMyUserProfile
-func (c *Client) DescribeMyUserProfileRequest(input *DescribeMyUserProfileInput) DescribeMyUserProfileRequest {
+func (c *Client) DescribeMyUserProfileRequest(input *types.DescribeMyUserProfileInput) DescribeMyUserProfileRequest {
 	op := &aws.Operation{
 		Name:       opDescribeMyUserProfile,
 		HTTPMethod: "POST",
@@ -58,10 +36,10 @@ func (c *Client) DescribeMyUserProfileRequest(input *DescribeMyUserProfileInput)
 	}
 
 	if input == nil {
-		input = &DescribeMyUserProfileInput{}
+		input = &types.DescribeMyUserProfileInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeMyUserProfileOutput{})
+	req := c.newRequest(op, input, &types.DescribeMyUserProfileOutput{})
 	return DescribeMyUserProfileRequest{Request: req, Input: input, Copy: c.DescribeMyUserProfileRequest}
 }
 
@@ -69,8 +47,8 @@ func (c *Client) DescribeMyUserProfileRequest(input *DescribeMyUserProfileInput)
 // DescribeMyUserProfile API operation.
 type DescribeMyUserProfileRequest struct {
 	*aws.Request
-	Input *DescribeMyUserProfileInput
-	Copy  func(*DescribeMyUserProfileInput) DescribeMyUserProfileRequest
+	Input *types.DescribeMyUserProfileInput
+	Copy  func(*types.DescribeMyUserProfileInput) DescribeMyUserProfileRequest
 }
 
 // Send marshals and sends the DescribeMyUserProfile API request.
@@ -82,7 +60,7 @@ func (r DescribeMyUserProfileRequest) Send(ctx context.Context) (*DescribeMyUser
 	}
 
 	resp := &DescribeMyUserProfileResponse{
-		DescribeMyUserProfileOutput: r.Request.Data.(*DescribeMyUserProfileOutput),
+		DescribeMyUserProfileOutput: r.Request.Data.(*types.DescribeMyUserProfileOutput),
 		response:                    &aws.Response{Request: r.Request},
 	}
 
@@ -92,7 +70,7 @@ func (r DescribeMyUserProfileRequest) Send(ctx context.Context) (*DescribeMyUser
 // DescribeMyUserProfileResponse is the response type for the
 // DescribeMyUserProfile API operation.
 type DescribeMyUserProfileResponse struct {
-	*DescribeMyUserProfileOutput
+	*types.DescribeMyUserProfileOutput
 
 	response *aws.Response
 }

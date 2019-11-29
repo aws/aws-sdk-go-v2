@@ -6,78 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/mediapackagevod/types"
 )
-
-type DescribePackagingGroupInput struct {
-	_ struct{} `type:"structure"`
-
-	// Id is a required field
-	Id *string `location:"uri" locationName:"id" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribePackagingGroupInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribePackagingGroupInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribePackagingGroupInput"}
-
-	if s.Id == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Id"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DescribePackagingGroupInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.Id != nil {
-		v := *s.Id
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "id", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type DescribePackagingGroupOutput struct {
-	_ struct{} `type:"structure"`
-
-	Arn *string `locationName:"arn" type:"string"`
-
-	Id *string `locationName:"id" type:"string"`
-}
-
-// String returns the string representation
-func (s DescribePackagingGroupOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DescribePackagingGroupOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.Arn != nil {
-		v := *s.Arn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "arn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Id != nil {
-		v := *s.Id
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "id", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opDescribePackagingGroup = "DescribePackagingGroup"
 
@@ -94,7 +24,7 @@ const opDescribePackagingGroup = "DescribePackagingGroup"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mediapackage-vod-2018-11-07/DescribePackagingGroup
-func (c *Client) DescribePackagingGroupRequest(input *DescribePackagingGroupInput) DescribePackagingGroupRequest {
+func (c *Client) DescribePackagingGroupRequest(input *types.DescribePackagingGroupInput) DescribePackagingGroupRequest {
 	op := &aws.Operation{
 		Name:       opDescribePackagingGroup,
 		HTTPMethod: "GET",
@@ -102,10 +32,10 @@ func (c *Client) DescribePackagingGroupRequest(input *DescribePackagingGroupInpu
 	}
 
 	if input == nil {
-		input = &DescribePackagingGroupInput{}
+		input = &types.DescribePackagingGroupInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribePackagingGroupOutput{})
+	req := c.newRequest(op, input, &types.DescribePackagingGroupOutput{})
 	return DescribePackagingGroupRequest{Request: req, Input: input, Copy: c.DescribePackagingGroupRequest}
 }
 
@@ -113,8 +43,8 @@ func (c *Client) DescribePackagingGroupRequest(input *DescribePackagingGroupInpu
 // DescribePackagingGroup API operation.
 type DescribePackagingGroupRequest struct {
 	*aws.Request
-	Input *DescribePackagingGroupInput
-	Copy  func(*DescribePackagingGroupInput) DescribePackagingGroupRequest
+	Input *types.DescribePackagingGroupInput
+	Copy  func(*types.DescribePackagingGroupInput) DescribePackagingGroupRequest
 }
 
 // Send marshals and sends the DescribePackagingGroup API request.
@@ -126,7 +56,7 @@ func (r DescribePackagingGroupRequest) Send(ctx context.Context) (*DescribePacka
 	}
 
 	resp := &DescribePackagingGroupResponse{
-		DescribePackagingGroupOutput: r.Request.Data.(*DescribePackagingGroupOutput),
+		DescribePackagingGroupOutput: r.Request.Data.(*types.DescribePackagingGroupOutput),
 		response:                     &aws.Response{Request: r.Request},
 	}
 
@@ -136,7 +66,7 @@ func (r DescribePackagingGroupRequest) Send(ctx context.Context) (*DescribePacka
 // DescribePackagingGroupResponse is the response type for the
 // DescribePackagingGroup API operation.
 type DescribePackagingGroupResponse struct {
-	*DescribePackagingGroupOutput
+	*types.DescribePackagingGroupOutput
 
 	response *aws.Response
 }

@@ -6,74 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
+	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/types"
 )
-
-type AdminAddUserToGroupInput struct {
-	_ struct{} `type:"structure"`
-
-	// The group name.
-	//
-	// GroupName is a required field
-	GroupName *string `min:"1" type:"string" required:"true"`
-
-	// The user pool ID for the user pool.
-	//
-	// UserPoolId is a required field
-	UserPoolId *string `min:"1" type:"string" required:"true"`
-
-	// The username for the user.
-	//
-	// Username is a required field
-	Username *string `min:"1" type:"string" required:"true" sensitive:"true"`
-}
-
-// String returns the string representation
-func (s AdminAddUserToGroupInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *AdminAddUserToGroupInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "AdminAddUserToGroupInput"}
-
-	if s.GroupName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("GroupName"))
-	}
-	if s.GroupName != nil && len(*s.GroupName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("GroupName", 1))
-	}
-
-	if s.UserPoolId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("UserPoolId"))
-	}
-	if s.UserPoolId != nil && len(*s.UserPoolId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("UserPoolId", 1))
-	}
-
-	if s.Username == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Username"))
-	}
-	if s.Username != nil && len(*s.Username) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Username", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type AdminAddUserToGroupOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s AdminAddUserToGroupOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opAdminAddUserToGroup = "AdminAddUserToGroup"
 
@@ -92,7 +28,7 @@ const opAdminAddUserToGroup = "AdminAddUserToGroup"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AdminAddUserToGroup
-func (c *Client) AdminAddUserToGroupRequest(input *AdminAddUserToGroupInput) AdminAddUserToGroupRequest {
+func (c *Client) AdminAddUserToGroupRequest(input *types.AdminAddUserToGroupInput) AdminAddUserToGroupRequest {
 	op := &aws.Operation{
 		Name:       opAdminAddUserToGroup,
 		HTTPMethod: "POST",
@@ -100,10 +36,10 @@ func (c *Client) AdminAddUserToGroupRequest(input *AdminAddUserToGroupInput) Adm
 	}
 
 	if input == nil {
-		input = &AdminAddUserToGroupInput{}
+		input = &types.AdminAddUserToGroupInput{}
 	}
 
-	req := c.newRequest(op, input, &AdminAddUserToGroupOutput{})
+	req := c.newRequest(op, input, &types.AdminAddUserToGroupOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return AdminAddUserToGroupRequest{Request: req, Input: input, Copy: c.AdminAddUserToGroupRequest}
@@ -113,8 +49,8 @@ func (c *Client) AdminAddUserToGroupRequest(input *AdminAddUserToGroupInput) Adm
 // AdminAddUserToGroup API operation.
 type AdminAddUserToGroupRequest struct {
 	*aws.Request
-	Input *AdminAddUserToGroupInput
-	Copy  func(*AdminAddUserToGroupInput) AdminAddUserToGroupRequest
+	Input *types.AdminAddUserToGroupInput
+	Copy  func(*types.AdminAddUserToGroupInput) AdminAddUserToGroupRequest
 }
 
 // Send marshals and sends the AdminAddUserToGroup API request.
@@ -126,7 +62,7 @@ func (r AdminAddUserToGroupRequest) Send(ctx context.Context) (*AdminAddUserToGr
 	}
 
 	resp := &AdminAddUserToGroupResponse{
-		AdminAddUserToGroupOutput: r.Request.Data.(*AdminAddUserToGroupOutput),
+		AdminAddUserToGroupOutput: r.Request.Data.(*types.AdminAddUserToGroupOutput),
 		response:                  &aws.Response{Request: r.Request},
 	}
 
@@ -136,7 +72,7 @@ func (r AdminAddUserToGroupRequest) Send(ctx context.Context) (*AdminAddUserToGr
 // AdminAddUserToGroupResponse is the response type for the
 // AdminAddUserToGroup API operation.
 type AdminAddUserToGroupResponse struct {
-	*AdminAddUserToGroupOutput
+	*types.AdminAddUserToGroupOutput
 
 	response *aws.Response
 }

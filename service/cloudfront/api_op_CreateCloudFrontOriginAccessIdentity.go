@@ -6,103 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/cloudfront/types"
 )
-
-// The request to create a new origin access identity (OAI). An origin access
-// identity is a special CloudFront user that you can associate with Amazon
-// S3 origins, so that you can secure all or just some of your Amazon S3 content.
-// For more information, see Restricting Access to Amazon S3 Content by Using
-// an Origin Access Identity (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/private-content-restricting-access-to-s3.html)
-// in the Amazon CloudFront Developer Guide.
-type CreateCloudFrontOriginAccessIdentityInput struct {
-	_ struct{} `type:"structure" payload:"CloudFrontOriginAccessIdentityConfig"`
-
-	// The current configuration information for the identity.
-	//
-	// CloudFrontOriginAccessIdentityConfig is a required field
-	CloudFrontOriginAccessIdentityConfig *CloudFrontOriginAccessIdentityConfig `locationName:"CloudFrontOriginAccessIdentityConfig" type:"structure" required:"true" xmlURI:"http://cloudfront.amazonaws.com/doc/2019-03-26/"`
-}
-
-// String returns the string representation
-func (s CreateCloudFrontOriginAccessIdentityInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateCloudFrontOriginAccessIdentityInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateCloudFrontOriginAccessIdentityInput"}
-
-	if s.CloudFrontOriginAccessIdentityConfig == nil {
-		invalidParams.Add(aws.NewErrParamRequired("CloudFrontOriginAccessIdentityConfig"))
-	}
-	if s.CloudFrontOriginAccessIdentityConfig != nil {
-		if err := s.CloudFrontOriginAccessIdentityConfig.Validate(); err != nil {
-			invalidParams.AddNested("CloudFrontOriginAccessIdentityConfig", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s CreateCloudFrontOriginAccessIdentityInput) MarshalFields(e protocol.FieldEncoder) error {
-
-	if s.CloudFrontOriginAccessIdentityConfig != nil {
-		v := s.CloudFrontOriginAccessIdentityConfig
-
-		metadata := protocol.Metadata{XMLNamespaceURI: "http://cloudfront.amazonaws.com/doc/2019-03-26/"}
-		e.SetFields(protocol.PayloadTarget, "CloudFrontOriginAccessIdentityConfig", v, metadata)
-	}
-	return nil
-}
-
-// The returned result of the corresponding request.
-type CreateCloudFrontOriginAccessIdentityOutput struct {
-	_ struct{} `type:"structure" payload:"CloudFrontOriginAccessIdentity"`
-
-	// The origin access identity's information.
-	CloudFrontOriginAccessIdentity *CloudFrontOriginAccessIdentity `type:"structure"`
-
-	// The current version of the origin access identity created.
-	ETag *string `location:"header" locationName:"ETag" type:"string"`
-
-	// The fully qualified URI of the new origin access identity just created. For
-	// example: https://cloudfront.amazonaws.com/2010-11-01/origin-access-identity/cloudfront/E74FTE3AJFJ256A.
-	Location *string `location:"header" locationName:"Location" type:"string"`
-}
-
-// String returns the string representation
-func (s CreateCloudFrontOriginAccessIdentityOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s CreateCloudFrontOriginAccessIdentityOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.ETag != nil {
-		v := *s.ETag
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "ETag", protocol.StringValue(v), metadata)
-	}
-	if s.Location != nil {
-		v := *s.Location
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "Location", protocol.StringValue(v), metadata)
-	}
-	if s.CloudFrontOriginAccessIdentity != nil {
-		v := s.CloudFrontOriginAccessIdentity
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.PayloadTarget, "CloudFrontOriginAccessIdentity", v, metadata)
-	}
-	return nil
-}
 
 const opCreateCloudFrontOriginAccessIdentity = "CreateCloudFrontOriginAccessIdentity2019_03_26"
 
@@ -124,7 +29,7 @@ const opCreateCloudFrontOriginAccessIdentity = "CreateCloudFrontOriginAccessIden
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/CreateCloudFrontOriginAccessIdentity
-func (c *Client) CreateCloudFrontOriginAccessIdentityRequest(input *CreateCloudFrontOriginAccessIdentityInput) CreateCloudFrontOriginAccessIdentityRequest {
+func (c *Client) CreateCloudFrontOriginAccessIdentityRequest(input *types.CreateCloudFrontOriginAccessIdentityInput) CreateCloudFrontOriginAccessIdentityRequest {
 	op := &aws.Operation{
 		Name:       opCreateCloudFrontOriginAccessIdentity,
 		HTTPMethod: "POST",
@@ -132,10 +37,10 @@ func (c *Client) CreateCloudFrontOriginAccessIdentityRequest(input *CreateCloudF
 	}
 
 	if input == nil {
-		input = &CreateCloudFrontOriginAccessIdentityInput{}
+		input = &types.CreateCloudFrontOriginAccessIdentityInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateCloudFrontOriginAccessIdentityOutput{})
+	req := c.newRequest(op, input, &types.CreateCloudFrontOriginAccessIdentityOutput{})
 	return CreateCloudFrontOriginAccessIdentityRequest{Request: req, Input: input, Copy: c.CreateCloudFrontOriginAccessIdentityRequest}
 }
 
@@ -143,8 +48,8 @@ func (c *Client) CreateCloudFrontOriginAccessIdentityRequest(input *CreateCloudF
 // CreateCloudFrontOriginAccessIdentity API operation.
 type CreateCloudFrontOriginAccessIdentityRequest struct {
 	*aws.Request
-	Input *CreateCloudFrontOriginAccessIdentityInput
-	Copy  func(*CreateCloudFrontOriginAccessIdentityInput) CreateCloudFrontOriginAccessIdentityRequest
+	Input *types.CreateCloudFrontOriginAccessIdentityInput
+	Copy  func(*types.CreateCloudFrontOriginAccessIdentityInput) CreateCloudFrontOriginAccessIdentityRequest
 }
 
 // Send marshals and sends the CreateCloudFrontOriginAccessIdentity API request.
@@ -156,7 +61,7 @@ func (r CreateCloudFrontOriginAccessIdentityRequest) Send(ctx context.Context) (
 	}
 
 	resp := &CreateCloudFrontOriginAccessIdentityResponse{
-		CreateCloudFrontOriginAccessIdentityOutput: r.Request.Data.(*CreateCloudFrontOriginAccessIdentityOutput),
+		CreateCloudFrontOriginAccessIdentityOutput: r.Request.Data.(*types.CreateCloudFrontOriginAccessIdentityOutput),
 		response: &aws.Response{Request: r.Request},
 	}
 
@@ -166,7 +71,7 @@ func (r CreateCloudFrontOriginAccessIdentityRequest) Send(ctx context.Context) (
 // CreateCloudFrontOriginAccessIdentityResponse is the response type for the
 // CreateCloudFrontOriginAccessIdentity API operation.
 type CreateCloudFrontOriginAccessIdentityResponse struct {
-	*CreateCloudFrontOriginAccessIdentityOutput
+	*types.CreateCloudFrontOriginAccessIdentityOutput
 
 	response *aws.Response
 }

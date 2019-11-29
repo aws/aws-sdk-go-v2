@@ -6,53 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-type DescribeRegionsInput struct {
-	_ struct{} `type:"structure"`
-
-	// Indicates whether to display all Regions, including Regions that are disabled
-	// for your account.
-	AllRegions *bool `type:"boolean"`
-
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have
-	// the required permissions, the error response is DryRunOperation. Otherwise,
-	// it is UnauthorizedOperation.
-	DryRun *bool `locationName:"dryRun" type:"boolean"`
-
-	// The filters.
-	//
-	//    * endpoint - The endpoint of the Region (for example, ec2.us-east-1.amazonaws.com).
-	//
-	//    * opt-in-status - The opt-in status of the Region (opt-in-not-required
-	//    | opted-in | not-opted-in).
-	//
-	//    * region-name - The name of the Region (for example, us-east-1).
-	Filters []Filter `locationName:"Filter" locationNameList:"Filter" type:"list"`
-
-	// The names of the Regions. You can specify any Regions, whether they are enabled
-	// and disabled for your account.
-	RegionNames []string `locationName:"RegionName" locationNameList:"RegionName" type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeRegionsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type DescribeRegionsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Information about the Regions.
-	Regions []Region `locationName:"regionInfo" locationNameList:"item" type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeRegionsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeRegions = "DescribeRegions"
 
@@ -76,7 +31,7 @@ const opDescribeRegions = "DescribeRegions"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeRegions
-func (c *Client) DescribeRegionsRequest(input *DescribeRegionsInput) DescribeRegionsRequest {
+func (c *Client) DescribeRegionsRequest(input *types.DescribeRegionsInput) DescribeRegionsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeRegions,
 		HTTPMethod: "POST",
@@ -84,10 +39,10 @@ func (c *Client) DescribeRegionsRequest(input *DescribeRegionsInput) DescribeReg
 	}
 
 	if input == nil {
-		input = &DescribeRegionsInput{}
+		input = &types.DescribeRegionsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeRegionsOutput{})
+	req := c.newRequest(op, input, &types.DescribeRegionsOutput{})
 	return DescribeRegionsRequest{Request: req, Input: input, Copy: c.DescribeRegionsRequest}
 }
 
@@ -95,8 +50,8 @@ func (c *Client) DescribeRegionsRequest(input *DescribeRegionsInput) DescribeReg
 // DescribeRegions API operation.
 type DescribeRegionsRequest struct {
 	*aws.Request
-	Input *DescribeRegionsInput
-	Copy  func(*DescribeRegionsInput) DescribeRegionsRequest
+	Input *types.DescribeRegionsInput
+	Copy  func(*types.DescribeRegionsInput) DescribeRegionsRequest
 }
 
 // Send marshals and sends the DescribeRegions API request.
@@ -108,7 +63,7 @@ func (r DescribeRegionsRequest) Send(ctx context.Context) (*DescribeRegionsRespo
 	}
 
 	resp := &DescribeRegionsResponse{
-		DescribeRegionsOutput: r.Request.Data.(*DescribeRegionsOutput),
+		DescribeRegionsOutput: r.Request.Data.(*types.DescribeRegionsOutput),
 		response:              &aws.Response{Request: r.Request},
 	}
 
@@ -118,7 +73,7 @@ func (r DescribeRegionsRequest) Send(ctx context.Context) (*DescribeRegionsRespo
 // DescribeRegionsResponse is the response type for the
 // DescribeRegions API operation.
 type DescribeRegionsResponse struct {
-	*DescribeRegionsOutput
+	*types.DescribeRegionsOutput
 
 	response *aws.Response
 }

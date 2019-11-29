@@ -6,71 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ecr/types"
 )
-
-type StartLifecyclePolicyPreviewInput struct {
-	_ struct{} `type:"structure"`
-
-	// The policy to be evaluated against. If you do not specify a policy, the current
-	// policy for the repository is used.
-	LifecyclePolicyText *string `locationName:"lifecyclePolicyText" min:"100" type:"string"`
-
-	// The AWS account ID associated with the registry that contains the repository.
-	// If you do not specify a registry, the default registry is assumed.
-	RegistryId *string `locationName:"registryId" type:"string"`
-
-	// The name of the repository to be evaluated.
-	//
-	// RepositoryName is a required field
-	RepositoryName *string `locationName:"repositoryName" min:"2" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s StartLifecyclePolicyPreviewInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *StartLifecyclePolicyPreviewInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "StartLifecyclePolicyPreviewInput"}
-	if s.LifecyclePolicyText != nil && len(*s.LifecyclePolicyText) < 100 {
-		invalidParams.Add(aws.NewErrParamMinLen("LifecyclePolicyText", 100))
-	}
-
-	if s.RepositoryName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("RepositoryName"))
-	}
-	if s.RepositoryName != nil && len(*s.RepositoryName) < 2 {
-		invalidParams.Add(aws.NewErrParamMinLen("RepositoryName", 2))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type StartLifecyclePolicyPreviewOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The JSON repository policy text.
-	LifecyclePolicyText *string `locationName:"lifecyclePolicyText" min:"100" type:"string"`
-
-	// The registry ID associated with the request.
-	RegistryId *string `locationName:"registryId" type:"string"`
-
-	// The repository name associated with the request.
-	RepositoryName *string `locationName:"repositoryName" min:"2" type:"string"`
-
-	// The status of the lifecycle policy preview request.
-	Status LifecyclePolicyPreviewStatus `locationName:"status" type:"string" enum:"true"`
-}
-
-// String returns the string representation
-func (s StartLifecyclePolicyPreviewOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opStartLifecyclePolicyPreview = "StartLifecyclePolicyPreview"
 
@@ -88,7 +25,7 @@ const opStartLifecyclePolicyPreview = "StartLifecyclePolicyPreview"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/StartLifecyclePolicyPreview
-func (c *Client) StartLifecyclePolicyPreviewRequest(input *StartLifecyclePolicyPreviewInput) StartLifecyclePolicyPreviewRequest {
+func (c *Client) StartLifecyclePolicyPreviewRequest(input *types.StartLifecyclePolicyPreviewInput) StartLifecyclePolicyPreviewRequest {
 	op := &aws.Operation{
 		Name:       opStartLifecyclePolicyPreview,
 		HTTPMethod: "POST",
@@ -96,10 +33,10 @@ func (c *Client) StartLifecyclePolicyPreviewRequest(input *StartLifecyclePolicyP
 	}
 
 	if input == nil {
-		input = &StartLifecyclePolicyPreviewInput{}
+		input = &types.StartLifecyclePolicyPreviewInput{}
 	}
 
-	req := c.newRequest(op, input, &StartLifecyclePolicyPreviewOutput{})
+	req := c.newRequest(op, input, &types.StartLifecyclePolicyPreviewOutput{})
 	return StartLifecyclePolicyPreviewRequest{Request: req, Input: input, Copy: c.StartLifecyclePolicyPreviewRequest}
 }
 
@@ -107,8 +44,8 @@ func (c *Client) StartLifecyclePolicyPreviewRequest(input *StartLifecyclePolicyP
 // StartLifecyclePolicyPreview API operation.
 type StartLifecyclePolicyPreviewRequest struct {
 	*aws.Request
-	Input *StartLifecyclePolicyPreviewInput
-	Copy  func(*StartLifecyclePolicyPreviewInput) StartLifecyclePolicyPreviewRequest
+	Input *types.StartLifecyclePolicyPreviewInput
+	Copy  func(*types.StartLifecyclePolicyPreviewInput) StartLifecyclePolicyPreviewRequest
 }
 
 // Send marshals and sends the StartLifecyclePolicyPreview API request.
@@ -120,7 +57,7 @@ func (r StartLifecyclePolicyPreviewRequest) Send(ctx context.Context) (*StartLif
 	}
 
 	resp := &StartLifecyclePolicyPreviewResponse{
-		StartLifecyclePolicyPreviewOutput: r.Request.Data.(*StartLifecyclePolicyPreviewOutput),
+		StartLifecyclePolicyPreviewOutput: r.Request.Data.(*types.StartLifecyclePolicyPreviewOutput),
 		response:                          &aws.Response{Request: r.Request},
 	}
 
@@ -130,7 +67,7 @@ func (r StartLifecyclePolicyPreviewRequest) Send(ctx context.Context) (*StartLif
 // StartLifecyclePolicyPreviewResponse is the response type for the
 // StartLifecyclePolicyPreview API operation.
 type StartLifecyclePolicyPreviewResponse struct {
-	*StartLifecyclePolicyPreviewOutput
+	*types.StartLifecyclePolicyPreviewOutput
 
 	response *aws.Response
 }

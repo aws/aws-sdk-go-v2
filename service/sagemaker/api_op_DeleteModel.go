@@ -6,47 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
 )
-
-type DeleteModelInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the model to delete.
-	//
-	// ModelName is a required field
-	ModelName *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteModelInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteModelInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteModelInput"}
-
-	if s.ModelName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ModelName"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteModelOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteModelOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteModel = "DeleteModel"
 
@@ -66,7 +29,7 @@ const opDeleteModel = "DeleteModel"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DeleteModel
-func (c *Client) DeleteModelRequest(input *DeleteModelInput) DeleteModelRequest {
+func (c *Client) DeleteModelRequest(input *types.DeleteModelInput) DeleteModelRequest {
 	op := &aws.Operation{
 		Name:       opDeleteModel,
 		HTTPMethod: "POST",
@@ -74,10 +37,10 @@ func (c *Client) DeleteModelRequest(input *DeleteModelInput) DeleteModelRequest 
 	}
 
 	if input == nil {
-		input = &DeleteModelInput{}
+		input = &types.DeleteModelInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteModelOutput{})
+	req := c.newRequest(op, input, &types.DeleteModelOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return DeleteModelRequest{Request: req, Input: input, Copy: c.DeleteModelRequest}
@@ -87,8 +50,8 @@ func (c *Client) DeleteModelRequest(input *DeleteModelInput) DeleteModelRequest 
 // DeleteModel API operation.
 type DeleteModelRequest struct {
 	*aws.Request
-	Input *DeleteModelInput
-	Copy  func(*DeleteModelInput) DeleteModelRequest
+	Input *types.DeleteModelInput
+	Copy  func(*types.DeleteModelInput) DeleteModelRequest
 }
 
 // Send marshals and sends the DeleteModel API request.
@@ -100,7 +63,7 @@ func (r DeleteModelRequest) Send(ctx context.Context) (*DeleteModelResponse, err
 	}
 
 	resp := &DeleteModelResponse{
-		DeleteModelOutput: r.Request.Data.(*DeleteModelOutput),
+		DeleteModelOutput: r.Request.Data.(*types.DeleteModelOutput),
 		response:          &aws.Response{Request: r.Request},
 	}
 
@@ -110,7 +73,7 @@ func (r DeleteModelRequest) Send(ctx context.Context) (*DeleteModelResponse, err
 // DeleteModelResponse is the response type for the
 // DeleteModel API operation.
 type DeleteModelResponse struct {
-	*DeleteModelOutput
+	*types.DeleteModelOutput
 
 	response *aws.Response
 }

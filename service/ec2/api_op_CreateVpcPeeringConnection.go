@@ -6,53 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-type CreateVpcPeeringConnectionInput struct {
-	_ struct{} `type:"structure"`
-
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have
-	// the required permissions, the error response is DryRunOperation. Otherwise,
-	// it is UnauthorizedOperation.
-	DryRun *bool `locationName:"dryRun" type:"boolean"`
-
-	// The AWS account ID of the owner of the accepter VPC.
-	//
-	// Default: Your AWS account ID
-	PeerOwnerId *string `locationName:"peerOwnerId" type:"string"`
-
-	// The Region code for the accepter VPC, if the accepter VPC is located in a
-	// Region other than the Region in which you make the request.
-	//
-	// Default: The Region in which you make the request.
-	PeerRegion *string `type:"string"`
-
-	// The ID of the VPC with which you are creating the VPC peering connection.
-	// You must specify this parameter in the request.
-	PeerVpcId *string `locationName:"peerVpcId" type:"string"`
-
-	// The ID of the requester VPC. You must specify this parameter in the request.
-	VpcId *string `locationName:"vpcId" type:"string"`
-}
-
-// String returns the string representation
-func (s CreateVpcPeeringConnectionInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type CreateVpcPeeringConnectionOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Information about the VPC peering connection.
-	VpcPeeringConnection *VpcPeeringConnection `locationName:"vpcPeeringConnection" type:"structure"`
-}
-
-// String returns the string representation
-func (s CreateVpcPeeringConnectionOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCreateVpcPeeringConnection = "CreateVpcPeeringConnection"
 
@@ -84,7 +39,7 @@ const opCreateVpcPeeringConnection = "CreateVpcPeeringConnection"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateVpcPeeringConnection
-func (c *Client) CreateVpcPeeringConnectionRequest(input *CreateVpcPeeringConnectionInput) CreateVpcPeeringConnectionRequest {
+func (c *Client) CreateVpcPeeringConnectionRequest(input *types.CreateVpcPeeringConnectionInput) CreateVpcPeeringConnectionRequest {
 	op := &aws.Operation{
 		Name:       opCreateVpcPeeringConnection,
 		HTTPMethod: "POST",
@@ -92,10 +47,10 @@ func (c *Client) CreateVpcPeeringConnectionRequest(input *CreateVpcPeeringConnec
 	}
 
 	if input == nil {
-		input = &CreateVpcPeeringConnectionInput{}
+		input = &types.CreateVpcPeeringConnectionInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateVpcPeeringConnectionOutput{})
+	req := c.newRequest(op, input, &types.CreateVpcPeeringConnectionOutput{})
 	return CreateVpcPeeringConnectionRequest{Request: req, Input: input, Copy: c.CreateVpcPeeringConnectionRequest}
 }
 
@@ -103,8 +58,8 @@ func (c *Client) CreateVpcPeeringConnectionRequest(input *CreateVpcPeeringConnec
 // CreateVpcPeeringConnection API operation.
 type CreateVpcPeeringConnectionRequest struct {
 	*aws.Request
-	Input *CreateVpcPeeringConnectionInput
-	Copy  func(*CreateVpcPeeringConnectionInput) CreateVpcPeeringConnectionRequest
+	Input *types.CreateVpcPeeringConnectionInput
+	Copy  func(*types.CreateVpcPeeringConnectionInput) CreateVpcPeeringConnectionRequest
 }
 
 // Send marshals and sends the CreateVpcPeeringConnection API request.
@@ -116,7 +71,7 @@ func (r CreateVpcPeeringConnectionRequest) Send(ctx context.Context) (*CreateVpc
 	}
 
 	resp := &CreateVpcPeeringConnectionResponse{
-		CreateVpcPeeringConnectionOutput: r.Request.Data.(*CreateVpcPeeringConnectionOutput),
+		CreateVpcPeeringConnectionOutput: r.Request.Data.(*types.CreateVpcPeeringConnectionOutput),
 		response:                         &aws.Response{Request: r.Request},
 	}
 
@@ -126,7 +81,7 @@ func (r CreateVpcPeeringConnectionRequest) Send(ctx context.Context) (*CreateVpc
 // CreateVpcPeeringConnectionResponse is the response type for the
 // CreateVpcPeeringConnection API operation.
 type CreateVpcPeeringConnectionResponse struct {
-	*CreateVpcPeeringConnectionOutput
+	*types.CreateVpcPeeringConnectionOutput
 
 	response *aws.Response
 }

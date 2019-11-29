@@ -4,99 +4,10 @@ package sagemaker
 
 import (
 	"context"
-	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
 )
-
-type ListCodeRepositoriesInput struct {
-	_ struct{} `type:"structure"`
-
-	// A filter that returns only Git repositories that were created after the specified
-	// time.
-	CreationTimeAfter *time.Time `type:"timestamp"`
-
-	// A filter that returns only Git repositories that were created before the
-	// specified time.
-	CreationTimeBefore *time.Time `type:"timestamp"`
-
-	// A filter that returns only Git repositories that were last modified after
-	// the specified time.
-	LastModifiedTimeAfter *time.Time `type:"timestamp"`
-
-	// A filter that returns only Git repositories that were last modified before
-	// the specified time.
-	LastModifiedTimeBefore *time.Time `type:"timestamp"`
-
-	// The maximum number of Git repositories to return in the response.
-	MaxResults *int64 `min:"1" type:"integer"`
-
-	// A string in the Git repositories name. This filter returns only repositories
-	// whose name contains the specified string.
-	NameContains *string `type:"string"`
-
-	// If the result of a ListCodeRepositoriesOutput request was truncated, the
-	// response includes a NextToken. To get the next set of Git repositories, use
-	// the token in the next request.
-	NextToken *string `type:"string"`
-
-	// The field to sort results by. The default is Name.
-	SortBy CodeRepositorySortBy `type:"string" enum:"true"`
-
-	// The sort order for results. The default is Ascending.
-	SortOrder CodeRepositorySortOrder `type:"string" enum:"true"`
-}
-
-// String returns the string representation
-func (s ListCodeRepositoriesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListCodeRepositoriesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListCodeRepositoriesInput"}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ListCodeRepositoriesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Gets a list of summaries of the Git repositories. Each summary specifies
-	// the following values for the repository:
-	//
-	//    * Name
-	//
-	//    * Amazon Resource Name (ARN)
-	//
-	//    * Creation time
-	//
-	//    * Last modified time
-	//
-	//    * Configuration information, including the URL location of the repository
-	//    and the ARN of the AWS Secrets Manager secret that contains the credentials
-	//    used to access the repository.
-	//
-	// CodeRepositorySummaryList is a required field
-	CodeRepositorySummaryList []CodeRepositorySummary `type:"list" required:"true"`
-
-	// If the result of a ListCodeRepositoriesOutput request was truncated, the
-	// response includes a NextToken. To get the next set of Git repositories, use
-	// the token in the next request.
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s ListCodeRepositoriesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListCodeRepositories = "ListCodeRepositories"
 
@@ -113,7 +24,7 @@ const opListCodeRepositories = "ListCodeRepositories"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListCodeRepositories
-func (c *Client) ListCodeRepositoriesRequest(input *ListCodeRepositoriesInput) ListCodeRepositoriesRequest {
+func (c *Client) ListCodeRepositoriesRequest(input *types.ListCodeRepositoriesInput) ListCodeRepositoriesRequest {
 	op := &aws.Operation{
 		Name:       opListCodeRepositories,
 		HTTPMethod: "POST",
@@ -121,10 +32,10 @@ func (c *Client) ListCodeRepositoriesRequest(input *ListCodeRepositoriesInput) L
 	}
 
 	if input == nil {
-		input = &ListCodeRepositoriesInput{}
+		input = &types.ListCodeRepositoriesInput{}
 	}
 
-	req := c.newRequest(op, input, &ListCodeRepositoriesOutput{})
+	req := c.newRequest(op, input, &types.ListCodeRepositoriesOutput{})
 	return ListCodeRepositoriesRequest{Request: req, Input: input, Copy: c.ListCodeRepositoriesRequest}
 }
 
@@ -132,8 +43,8 @@ func (c *Client) ListCodeRepositoriesRequest(input *ListCodeRepositoriesInput) L
 // ListCodeRepositories API operation.
 type ListCodeRepositoriesRequest struct {
 	*aws.Request
-	Input *ListCodeRepositoriesInput
-	Copy  func(*ListCodeRepositoriesInput) ListCodeRepositoriesRequest
+	Input *types.ListCodeRepositoriesInput
+	Copy  func(*types.ListCodeRepositoriesInput) ListCodeRepositoriesRequest
 }
 
 // Send marshals and sends the ListCodeRepositories API request.
@@ -145,7 +56,7 @@ func (r ListCodeRepositoriesRequest) Send(ctx context.Context) (*ListCodeReposit
 	}
 
 	resp := &ListCodeRepositoriesResponse{
-		ListCodeRepositoriesOutput: r.Request.Data.(*ListCodeRepositoriesOutput),
+		ListCodeRepositoriesOutput: r.Request.Data.(*types.ListCodeRepositoriesOutput),
 		response:                   &aws.Response{Request: r.Request},
 	}
 
@@ -155,7 +66,7 @@ func (r ListCodeRepositoriesRequest) Send(ctx context.Context) (*ListCodeReposit
 // ListCodeRepositoriesResponse is the response type for the
 // ListCodeRepositories API operation.
 type ListCodeRepositoriesResponse struct {
-	*ListCodeRepositoriesOutput
+	*types.ListCodeRepositoriesOutput
 
 	response *aws.Response
 }

@@ -4,81 +4,10 @@ package ssm
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ssm/types"
 )
-
-type ListCommandsInput struct {
-	_ struct{} `type:"structure"`
-
-	// (Optional) If provided, lists only the specified command.
-	CommandId *string `min:"36" type:"string"`
-
-	// (Optional) One or more filters. Use a filter to return a more specific list
-	// of results.
-	Filters []CommandFilter `min:"1" type:"list"`
-
-	// (Optional) Lists commands issued against this instance ID.
-	InstanceId *string `type:"string"`
-
-	// (Optional) The maximum number of items to return for this call. The call
-	// also returns a token that you can specify in a subsequent call to get the
-	// next set of results.
-	MaxResults *int64 `min:"1" type:"integer"`
-
-	// (Optional) The token for the next set of items to return. (You received this
-	// token from a previous call.)
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s ListCommandsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListCommandsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListCommandsInput"}
-	if s.CommandId != nil && len(*s.CommandId) < 36 {
-		invalidParams.Add(aws.NewErrParamMinLen("CommandId", 36))
-	}
-	if s.Filters != nil && len(s.Filters) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Filters", 1))
-	}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-	if s.Filters != nil {
-		for i, v := range s.Filters {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ListCommandsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// (Optional) The list of commands requested by the user.
-	Commands []Command `type:"list"`
-
-	// (Optional) The token for the next set of items to return. (You received this
-	// token from a previous call.)
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s ListCommandsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListCommands = "ListCommands"
 
@@ -95,7 +24,7 @@ const opListCommands = "ListCommands"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ListCommands
-func (c *Client) ListCommandsRequest(input *ListCommandsInput) ListCommandsRequest {
+func (c *Client) ListCommandsRequest(input *types.ListCommandsInput) ListCommandsRequest {
 	op := &aws.Operation{
 		Name:       opListCommands,
 		HTTPMethod: "POST",
@@ -109,10 +38,10 @@ func (c *Client) ListCommandsRequest(input *ListCommandsInput) ListCommandsReque
 	}
 
 	if input == nil {
-		input = &ListCommandsInput{}
+		input = &types.ListCommandsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListCommandsOutput{})
+	req := c.newRequest(op, input, &types.ListCommandsOutput{})
 	return ListCommandsRequest{Request: req, Input: input, Copy: c.ListCommandsRequest}
 }
 
@@ -120,8 +49,8 @@ func (c *Client) ListCommandsRequest(input *ListCommandsInput) ListCommandsReque
 // ListCommands API operation.
 type ListCommandsRequest struct {
 	*aws.Request
-	Input *ListCommandsInput
-	Copy  func(*ListCommandsInput) ListCommandsRequest
+	Input *types.ListCommandsInput
+	Copy  func(*types.ListCommandsInput) ListCommandsRequest
 }
 
 // Send marshals and sends the ListCommands API request.
@@ -133,7 +62,7 @@ func (r ListCommandsRequest) Send(ctx context.Context) (*ListCommandsResponse, e
 	}
 
 	resp := &ListCommandsResponse{
-		ListCommandsOutput: r.Request.Data.(*ListCommandsOutput),
+		ListCommandsOutput: r.Request.Data.(*types.ListCommandsOutput),
 		response:           &aws.Response{Request: r.Request},
 	}
 
@@ -163,7 +92,7 @@ func NewListCommandsPaginator(req ListCommandsRequest) ListCommandsPaginator {
 	return ListCommandsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListCommandsInput
+				var inCpy *types.ListCommandsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -183,14 +112,14 @@ type ListCommandsPaginator struct {
 	aws.Pager
 }
 
-func (p *ListCommandsPaginator) CurrentPage() *ListCommandsOutput {
-	return p.Pager.CurrentPage().(*ListCommandsOutput)
+func (p *ListCommandsPaginator) CurrentPage() *types.ListCommandsOutput {
+	return p.Pager.CurrentPage().(*types.ListCommandsOutput)
 }
 
 // ListCommandsResponse is the response type for the
 // ListCommands API operation.
 type ListCommandsResponse struct {
-	*ListCommandsOutput
+	*types.ListCommandsOutput
 
 	response *aws.Response
 }

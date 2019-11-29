@@ -4,78 +4,10 @@ package rds
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/rds/types"
 )
-
-type DescribeDBClusterParameterGroupsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of a specific DB cluster parameter group to return details for.
-	//
-	// Constraints:
-	//
-	//    * If supplied, must match the name of an existing DBClusterParameterGroup.
-	DBClusterParameterGroupName *string `type:"string"`
-
-	// This parameter is not currently supported.
-	Filters []Filter `locationNameList:"Filter" type:"list"`
-
-	// An optional pagination token provided by a previous DescribeDBClusterParameterGroups
-	// request. If this parameter is specified, the response includes only records
-	// beyond the marker, up to the value specified by MaxRecords.
-	Marker *string `type:"string"`
-
-	// The maximum number of records to include in the response. If more records
-	// exist than the specified MaxRecords value, a pagination token called a marker
-	// is included in the response so that you can retrieve the remaining results.
-	//
-	// Default: 100
-	//
-	// Constraints: Minimum 20, maximum 100.
-	MaxRecords *int64 `type:"integer"`
-}
-
-// String returns the string representation
-func (s DescribeDBClusterParameterGroupsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeDBClusterParameterGroupsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeDBClusterParameterGroupsInput"}
-	if s.Filters != nil {
-		for i, v := range s.Filters {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribeDBClusterParameterGroupsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A list of DB cluster parameter groups.
-	DBClusterParameterGroups []DBClusterParameterGroup `locationNameList:"DBClusterParameterGroup" type:"list"`
-
-	// An optional pagination token provided by a previous DescribeDBClusterParameterGroups
-	// request. If this parameter is specified, the response includes only records
-	// beyond the marker, up to the value specified by MaxRecords.
-	Marker *string `type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeDBClusterParameterGroupsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeDBClusterParameterGroups = "DescribeDBClusterParameterGroups"
 
@@ -99,7 +31,7 @@ const opDescribeDBClusterParameterGroups = "DescribeDBClusterParameterGroups"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeDBClusterParameterGroups
-func (c *Client) DescribeDBClusterParameterGroupsRequest(input *DescribeDBClusterParameterGroupsInput) DescribeDBClusterParameterGroupsRequest {
+func (c *Client) DescribeDBClusterParameterGroupsRequest(input *types.DescribeDBClusterParameterGroupsInput) DescribeDBClusterParameterGroupsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeDBClusterParameterGroups,
 		HTTPMethod: "POST",
@@ -107,10 +39,10 @@ func (c *Client) DescribeDBClusterParameterGroupsRequest(input *DescribeDBCluste
 	}
 
 	if input == nil {
-		input = &DescribeDBClusterParameterGroupsInput{}
+		input = &types.DescribeDBClusterParameterGroupsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeDBClusterParameterGroupsOutput{})
+	req := c.newRequest(op, input, &types.DescribeDBClusterParameterGroupsOutput{})
 	return DescribeDBClusterParameterGroupsRequest{Request: req, Input: input, Copy: c.DescribeDBClusterParameterGroupsRequest}
 }
 
@@ -118,8 +50,8 @@ func (c *Client) DescribeDBClusterParameterGroupsRequest(input *DescribeDBCluste
 // DescribeDBClusterParameterGroups API operation.
 type DescribeDBClusterParameterGroupsRequest struct {
 	*aws.Request
-	Input *DescribeDBClusterParameterGroupsInput
-	Copy  func(*DescribeDBClusterParameterGroupsInput) DescribeDBClusterParameterGroupsRequest
+	Input *types.DescribeDBClusterParameterGroupsInput
+	Copy  func(*types.DescribeDBClusterParameterGroupsInput) DescribeDBClusterParameterGroupsRequest
 }
 
 // Send marshals and sends the DescribeDBClusterParameterGroups API request.
@@ -131,7 +63,7 @@ func (r DescribeDBClusterParameterGroupsRequest) Send(ctx context.Context) (*Des
 	}
 
 	resp := &DescribeDBClusterParameterGroupsResponse{
-		DescribeDBClusterParameterGroupsOutput: r.Request.Data.(*DescribeDBClusterParameterGroupsOutput),
+		DescribeDBClusterParameterGroupsOutput: r.Request.Data.(*types.DescribeDBClusterParameterGroupsOutput),
 		response:                               &aws.Response{Request: r.Request},
 	}
 
@@ -141,7 +73,7 @@ func (r DescribeDBClusterParameterGroupsRequest) Send(ctx context.Context) (*Des
 // DescribeDBClusterParameterGroupsResponse is the response type for the
 // DescribeDBClusterParameterGroups API operation.
 type DescribeDBClusterParameterGroupsResponse struct {
-	*DescribeDBClusterParameterGroupsOutput
+	*types.DescribeDBClusterParameterGroupsOutput
 
 	response *aws.Response
 }

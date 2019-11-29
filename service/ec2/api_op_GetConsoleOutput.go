@@ -4,69 +4,10 @@ package ec2
 
 import (
 	"context"
-	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-type GetConsoleOutputInput struct {
-	_ struct{} `type:"structure"`
-
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have
-	// the required permissions, the error response is DryRunOperation. Otherwise,
-	// it is UnauthorizedOperation.
-	DryRun *bool `locationName:"dryRun" type:"boolean"`
-
-	// The ID of the instance.
-	//
-	// InstanceId is a required field
-	InstanceId *string `type:"string" required:"true"`
-
-	// When enabled, retrieves the latest console output for the instance.
-	//
-	// Default: disabled (false)
-	Latest *bool `type:"boolean"`
-}
-
-// String returns the string representation
-func (s GetConsoleOutputInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetConsoleOutputInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetConsoleOutputInput"}
-
-	if s.InstanceId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("InstanceId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type GetConsoleOutputOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the instance.
-	InstanceId *string `locationName:"instanceId" type:"string"`
-
-	// The console output, base64-encoded. If you are using a command line tool,
-	// the tool decodes the output for you.
-	Output *string `locationName:"output" type:"string"`
-
-	// The time at which the output was last updated.
-	Timestamp *time.Time `locationName:"timestamp" type:"timestamp"`
-}
-
-// String returns the string representation
-func (s GetConsoleOutputOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetConsoleOutput = "GetConsoleOutput"
 
@@ -99,7 +40,7 @@ const opGetConsoleOutput = "GetConsoleOutput"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetConsoleOutput
-func (c *Client) GetConsoleOutputRequest(input *GetConsoleOutputInput) GetConsoleOutputRequest {
+func (c *Client) GetConsoleOutputRequest(input *types.GetConsoleOutputInput) GetConsoleOutputRequest {
 	op := &aws.Operation{
 		Name:       opGetConsoleOutput,
 		HTTPMethod: "POST",
@@ -107,10 +48,10 @@ func (c *Client) GetConsoleOutputRequest(input *GetConsoleOutputInput) GetConsol
 	}
 
 	if input == nil {
-		input = &GetConsoleOutputInput{}
+		input = &types.GetConsoleOutputInput{}
 	}
 
-	req := c.newRequest(op, input, &GetConsoleOutputOutput{})
+	req := c.newRequest(op, input, &types.GetConsoleOutputOutput{})
 	return GetConsoleOutputRequest{Request: req, Input: input, Copy: c.GetConsoleOutputRequest}
 }
 
@@ -118,8 +59,8 @@ func (c *Client) GetConsoleOutputRequest(input *GetConsoleOutputInput) GetConsol
 // GetConsoleOutput API operation.
 type GetConsoleOutputRequest struct {
 	*aws.Request
-	Input *GetConsoleOutputInput
-	Copy  func(*GetConsoleOutputInput) GetConsoleOutputRequest
+	Input *types.GetConsoleOutputInput
+	Copy  func(*types.GetConsoleOutputInput) GetConsoleOutputRequest
 }
 
 // Send marshals and sends the GetConsoleOutput API request.
@@ -131,7 +72,7 @@ func (r GetConsoleOutputRequest) Send(ctx context.Context) (*GetConsoleOutputRes
 	}
 
 	resp := &GetConsoleOutputResponse{
-		GetConsoleOutputOutput: r.Request.Data.(*GetConsoleOutputOutput),
+		GetConsoleOutputOutput: r.Request.Data.(*types.GetConsoleOutputOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -141,7 +82,7 @@ func (r GetConsoleOutputRequest) Send(ctx context.Context) (*GetConsoleOutputRes
 // GetConsoleOutputResponse is the response type for the
 // GetConsoleOutput API operation.
 type GetConsoleOutputResponse struct {
-	*GetConsoleOutputOutput
+	*types.GetConsoleOutputOutput
 
 	response *aws.Response
 }

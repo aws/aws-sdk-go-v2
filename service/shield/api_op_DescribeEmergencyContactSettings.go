@@ -6,30 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/shield/types"
 )
-
-type DescribeEmergencyContactSettingsInput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DescribeEmergencyContactSettingsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type DescribeEmergencyContactSettingsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A list of email addresses that the DRT can use to contact you during a suspected
-	// attack.
-	EmergencyContactList []EmergencyContact `type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeEmergencyContactSettingsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeEmergencyContactSettings = "DescribeEmergencyContactSettings"
 
@@ -47,7 +25,7 @@ const opDescribeEmergencyContactSettings = "DescribeEmergencyContactSettings"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/DescribeEmergencyContactSettings
-func (c *Client) DescribeEmergencyContactSettingsRequest(input *DescribeEmergencyContactSettingsInput) DescribeEmergencyContactSettingsRequest {
+func (c *Client) DescribeEmergencyContactSettingsRequest(input *types.DescribeEmergencyContactSettingsInput) DescribeEmergencyContactSettingsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeEmergencyContactSettings,
 		HTTPMethod: "POST",
@@ -55,10 +33,10 @@ func (c *Client) DescribeEmergencyContactSettingsRequest(input *DescribeEmergenc
 	}
 
 	if input == nil {
-		input = &DescribeEmergencyContactSettingsInput{}
+		input = &types.DescribeEmergencyContactSettingsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeEmergencyContactSettingsOutput{})
+	req := c.newRequest(op, input, &types.DescribeEmergencyContactSettingsOutput{})
 	return DescribeEmergencyContactSettingsRequest{Request: req, Input: input, Copy: c.DescribeEmergencyContactSettingsRequest}
 }
 
@@ -66,8 +44,8 @@ func (c *Client) DescribeEmergencyContactSettingsRequest(input *DescribeEmergenc
 // DescribeEmergencyContactSettings API operation.
 type DescribeEmergencyContactSettingsRequest struct {
 	*aws.Request
-	Input *DescribeEmergencyContactSettingsInput
-	Copy  func(*DescribeEmergencyContactSettingsInput) DescribeEmergencyContactSettingsRequest
+	Input *types.DescribeEmergencyContactSettingsInput
+	Copy  func(*types.DescribeEmergencyContactSettingsInput) DescribeEmergencyContactSettingsRequest
 }
 
 // Send marshals and sends the DescribeEmergencyContactSettings API request.
@@ -79,7 +57,7 @@ func (r DescribeEmergencyContactSettingsRequest) Send(ctx context.Context) (*Des
 	}
 
 	resp := &DescribeEmergencyContactSettingsResponse{
-		DescribeEmergencyContactSettingsOutput: r.Request.Data.(*DescribeEmergencyContactSettingsOutput),
+		DescribeEmergencyContactSettingsOutput: r.Request.Data.(*types.DescribeEmergencyContactSettingsOutput),
 		response:                               &aws.Response{Request: r.Request},
 	}
 
@@ -89,7 +67,7 @@ func (r DescribeEmergencyContactSettingsRequest) Send(ctx context.Context) (*Des
 // DescribeEmergencyContactSettingsResponse is the response type for the
 // DescribeEmergencyContactSettings API operation.
 type DescribeEmergencyContactSettingsResponse struct {
-	*DescribeEmergencyContactSettingsOutput
+	*types.DescribeEmergencyContactSettingsOutput
 
 	response *aws.Response
 }

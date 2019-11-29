@@ -6,53 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/directoryservice/types"
 )
-
-// Contains the inputs for the CreateSnapshot operation.
-type CreateSnapshotInput struct {
-	_ struct{} `type:"structure"`
-
-	// The identifier of the directory of which to take a snapshot.
-	//
-	// DirectoryId is a required field
-	DirectoryId *string `type:"string" required:"true"`
-
-	// The descriptive name to apply to the snapshot.
-	Name *string `type:"string"`
-}
-
-// String returns the string representation
-func (s CreateSnapshotInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateSnapshotInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateSnapshotInput"}
-
-	if s.DirectoryId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DirectoryId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Contains the results of the CreateSnapshot operation.
-type CreateSnapshotOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The identifier of the snapshot that was created.
-	SnapshotId *string `type:"string"`
-}
-
-// String returns the string representation
-func (s CreateSnapshotOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCreateSnapshot = "CreateSnapshot"
 
@@ -71,7 +26,7 @@ const opCreateSnapshot = "CreateSnapshot"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/CreateSnapshot
-func (c *Client) CreateSnapshotRequest(input *CreateSnapshotInput) CreateSnapshotRequest {
+func (c *Client) CreateSnapshotRequest(input *types.CreateSnapshotInput) CreateSnapshotRequest {
 	op := &aws.Operation{
 		Name:       opCreateSnapshot,
 		HTTPMethod: "POST",
@@ -79,10 +34,10 @@ func (c *Client) CreateSnapshotRequest(input *CreateSnapshotInput) CreateSnapsho
 	}
 
 	if input == nil {
-		input = &CreateSnapshotInput{}
+		input = &types.CreateSnapshotInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateSnapshotOutput{})
+	req := c.newRequest(op, input, &types.CreateSnapshotOutput{})
 	return CreateSnapshotRequest{Request: req, Input: input, Copy: c.CreateSnapshotRequest}
 }
 
@@ -90,8 +45,8 @@ func (c *Client) CreateSnapshotRequest(input *CreateSnapshotInput) CreateSnapsho
 // CreateSnapshot API operation.
 type CreateSnapshotRequest struct {
 	*aws.Request
-	Input *CreateSnapshotInput
-	Copy  func(*CreateSnapshotInput) CreateSnapshotRequest
+	Input *types.CreateSnapshotInput
+	Copy  func(*types.CreateSnapshotInput) CreateSnapshotRequest
 }
 
 // Send marshals and sends the CreateSnapshot API request.
@@ -103,7 +58,7 @@ func (r CreateSnapshotRequest) Send(ctx context.Context) (*CreateSnapshotRespons
 	}
 
 	resp := &CreateSnapshotResponse{
-		CreateSnapshotOutput: r.Request.Data.(*CreateSnapshotOutput),
+		CreateSnapshotOutput: r.Request.Data.(*types.CreateSnapshotOutput),
 		response:             &aws.Response{Request: r.Request},
 	}
 
@@ -113,7 +68,7 @@ func (r CreateSnapshotRequest) Send(ctx context.Context) (*CreateSnapshotRespons
 // CreateSnapshotResponse is the response type for the
 // CreateSnapshot API operation.
 type CreateSnapshotResponse struct {
-	*CreateSnapshotOutput
+	*types.CreateSnapshotOutput
 
 	response *aws.Response
 }

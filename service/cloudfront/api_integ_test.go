@@ -13,6 +13,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws/awserr"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting/integration"
 	"github.com/aws/aws-sdk-go-v2/service/cloudfront"
+	"github.com/aws/aws-sdk-go-v2/service/cloudfront/types"
 )
 
 var _ aws.Config
@@ -24,7 +25,7 @@ func TestInteg_00_ListCloudFrontOriginAccessIdentities(t *testing.T) {
 
 	cfg := integration.ConfigWithDefaultRegion("us-east-1")
 	svc := cloudfront.New(cfg)
-	params := &cloudfront.ListCloudFrontOriginAccessIdentitiesInput{
+	params := &types.ListCloudFrontOriginAccessIdentitiesInput{
 		MaxItems: aws.Int64(1),
 	}
 
@@ -41,7 +42,7 @@ func TestInteg_01_GetDistribution(t *testing.T) {
 
 	cfg := integration.ConfigWithDefaultRegion("us-east-1")
 	svc := cloudfront.New(cfg)
-	params := &cloudfront.GetDistributionInput{
+	params := &types.GetDistributionInput{
 		Id: aws.String("fake-id"),
 	}
 

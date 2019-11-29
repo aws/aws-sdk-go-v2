@@ -6,73 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-// Contains the parameters for BundleInstance.
-type BundleInstanceInput struct {
-	_ struct{} `type:"structure"`
-
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have
-	// the required permissions, the error response is DryRunOperation. Otherwise,
-	// it is UnauthorizedOperation.
-	DryRun *bool `locationName:"dryRun" type:"boolean"`
-
-	// The ID of the instance to bundle.
-	//
-	// Type: String
-	//
-	// Default: None
-	//
-	// Required: Yes
-	//
-	// InstanceId is a required field
-	InstanceId *string `type:"string" required:"true"`
-
-	// The bucket in which to store the AMI. You can specify a bucket that you already
-	// own or a new bucket that Amazon EC2 creates on your behalf. If you specify
-	// a bucket that belongs to someone else, Amazon EC2 returns an error.
-	//
-	// Storage is a required field
-	Storage *Storage `type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s BundleInstanceInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *BundleInstanceInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "BundleInstanceInput"}
-
-	if s.InstanceId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("InstanceId"))
-	}
-
-	if s.Storage == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Storage"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Contains the output of BundleInstance.
-type BundleInstanceOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Information about the bundle task.
-	BundleTask *BundleTask `locationName:"bundleInstanceTask" type:"structure"`
-}
-
-// String returns the string representation
-func (s BundleInstanceOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opBundleInstance = "BundleInstance"
 
@@ -95,7 +30,7 @@ const opBundleInstance = "BundleInstance"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/BundleInstance
-func (c *Client) BundleInstanceRequest(input *BundleInstanceInput) BundleInstanceRequest {
+func (c *Client) BundleInstanceRequest(input *types.BundleInstanceInput) BundleInstanceRequest {
 	op := &aws.Operation{
 		Name:       opBundleInstance,
 		HTTPMethod: "POST",
@@ -103,10 +38,10 @@ func (c *Client) BundleInstanceRequest(input *BundleInstanceInput) BundleInstanc
 	}
 
 	if input == nil {
-		input = &BundleInstanceInput{}
+		input = &types.BundleInstanceInput{}
 	}
 
-	req := c.newRequest(op, input, &BundleInstanceOutput{})
+	req := c.newRequest(op, input, &types.BundleInstanceOutput{})
 	return BundleInstanceRequest{Request: req, Input: input, Copy: c.BundleInstanceRequest}
 }
 
@@ -114,8 +49,8 @@ func (c *Client) BundleInstanceRequest(input *BundleInstanceInput) BundleInstanc
 // BundleInstance API operation.
 type BundleInstanceRequest struct {
 	*aws.Request
-	Input *BundleInstanceInput
-	Copy  func(*BundleInstanceInput) BundleInstanceRequest
+	Input *types.BundleInstanceInput
+	Copy  func(*types.BundleInstanceInput) BundleInstanceRequest
 }
 
 // Send marshals and sends the BundleInstance API request.
@@ -127,7 +62,7 @@ func (r BundleInstanceRequest) Send(ctx context.Context) (*BundleInstanceRespons
 	}
 
 	resp := &BundleInstanceResponse{
-		BundleInstanceOutput: r.Request.Data.(*BundleInstanceOutput),
+		BundleInstanceOutput: r.Request.Data.(*types.BundleInstanceOutput),
 		response:             &aws.Response{Request: r.Request},
 	}
 
@@ -137,7 +72,7 @@ func (r BundleInstanceRequest) Send(ctx context.Context) (*BundleInstanceRespons
 // BundleInstanceResponse is the response type for the
 // BundleInstance API operation.
 type BundleInstanceResponse struct {
-	*BundleInstanceOutput
+	*types.BundleInstanceOutput
 
 	response *aws.Response
 }

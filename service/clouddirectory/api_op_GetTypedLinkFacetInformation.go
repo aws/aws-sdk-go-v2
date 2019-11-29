@@ -6,102 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/clouddirectory/types"
 )
-
-type GetTypedLinkFacetInformationInput struct {
-	_ struct{} `type:"structure"`
-
-	// The unique name of the typed link facet.
-	//
-	// Name is a required field
-	Name *string `type:"string" required:"true"`
-
-	// The Amazon Resource Name (ARN) that is associated with the schema. For more
-	// information, see arns.
-	//
-	// SchemaArn is a required field
-	SchemaArn *string `location:"header" locationName:"x-amz-data-partition" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetTypedLinkFacetInformationInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetTypedLinkFacetInformationInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetTypedLinkFacetInformationInput"}
-
-	if s.Name == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Name"))
-	}
-
-	if s.SchemaArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("SchemaArn"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetTypedLinkFacetInformationInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.Name != nil {
-		v := *s.Name
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "Name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.SchemaArn != nil {
-		v := *s.SchemaArn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "x-amz-data-partition", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type GetTypedLinkFacetInformationOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The order of identity attributes for the facet, from most significant to
-	// least significant. The ability to filter typed links considers the order
-	// that the attributes are defined on the typed link facet. When providing ranges
-	// to typed link selection, any inexact ranges must be specified at the end.
-	// Any attributes that do not have a range specified are presumed to match the
-	// entire range. Filters are interpreted in the order of the attributes on the
-	// typed link facet, not the order in which they are supplied to any API calls.
-	// For more information about identity attributes, see Typed Links (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/directory_objects_links.html#directory_objects_links_typedlink).
-	IdentityAttributeOrder []string `type:"list"`
-}
-
-// String returns the string representation
-func (s GetTypedLinkFacetInformationOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetTypedLinkFacetInformationOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.IdentityAttributeOrder != nil {
-		v := s.IdentityAttributeOrder
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "IdentityAttributeOrder", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
-		}
-		ls0.End()
-
-	}
-	return nil
-}
 
 const opGetTypedLinkFacetInformation = "GetTypedLinkFacetInformation"
 
@@ -119,7 +25,7 @@ const opGetTypedLinkFacetInformation = "GetTypedLinkFacetInformation"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/GetTypedLinkFacetInformation
-func (c *Client) GetTypedLinkFacetInformationRequest(input *GetTypedLinkFacetInformationInput) GetTypedLinkFacetInformationRequest {
+func (c *Client) GetTypedLinkFacetInformationRequest(input *types.GetTypedLinkFacetInformationInput) GetTypedLinkFacetInformationRequest {
 	op := &aws.Operation{
 		Name:       opGetTypedLinkFacetInformation,
 		HTTPMethod: "POST",
@@ -127,10 +33,10 @@ func (c *Client) GetTypedLinkFacetInformationRequest(input *GetTypedLinkFacetInf
 	}
 
 	if input == nil {
-		input = &GetTypedLinkFacetInformationInput{}
+		input = &types.GetTypedLinkFacetInformationInput{}
 	}
 
-	req := c.newRequest(op, input, &GetTypedLinkFacetInformationOutput{})
+	req := c.newRequest(op, input, &types.GetTypedLinkFacetInformationOutput{})
 	return GetTypedLinkFacetInformationRequest{Request: req, Input: input, Copy: c.GetTypedLinkFacetInformationRequest}
 }
 
@@ -138,8 +44,8 @@ func (c *Client) GetTypedLinkFacetInformationRequest(input *GetTypedLinkFacetInf
 // GetTypedLinkFacetInformation API operation.
 type GetTypedLinkFacetInformationRequest struct {
 	*aws.Request
-	Input *GetTypedLinkFacetInformationInput
-	Copy  func(*GetTypedLinkFacetInformationInput) GetTypedLinkFacetInformationRequest
+	Input *types.GetTypedLinkFacetInformationInput
+	Copy  func(*types.GetTypedLinkFacetInformationInput) GetTypedLinkFacetInformationRequest
 }
 
 // Send marshals and sends the GetTypedLinkFacetInformation API request.
@@ -151,7 +57,7 @@ func (r GetTypedLinkFacetInformationRequest) Send(ctx context.Context) (*GetType
 	}
 
 	resp := &GetTypedLinkFacetInformationResponse{
-		GetTypedLinkFacetInformationOutput: r.Request.Data.(*GetTypedLinkFacetInformationOutput),
+		GetTypedLinkFacetInformationOutput: r.Request.Data.(*types.GetTypedLinkFacetInformationOutput),
 		response:                           &aws.Response{Request: r.Request},
 	}
 
@@ -161,7 +67,7 @@ func (r GetTypedLinkFacetInformationRequest) Send(ctx context.Context) (*GetType
 // GetTypedLinkFacetInformationResponse is the response type for the
 // GetTypedLinkFacetInformation API operation.
 type GetTypedLinkFacetInformationResponse struct {
-	*GetTypedLinkFacetInformationOutput
+	*types.GetTypedLinkFacetInformationOutput
 
 	response *aws.Response
 }

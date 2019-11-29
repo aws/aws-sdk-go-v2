@@ -6,51 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/cloudtrail/types"
 )
-
-// The request to CloudTrail to start logging AWS API calls for an account.
-type StartLoggingInput struct {
-	_ struct{} `type:"structure"`
-
-	// Specifies the name or the CloudTrail ARN of the trail for which CloudTrail
-	// logs AWS API calls. The format of a trail ARN is:
-	//
-	// arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail
-	//
-	// Name is a required field
-	Name *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s StartLoggingInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *StartLoggingInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "StartLoggingInput"}
-
-	if s.Name == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Name"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Returns the objects or data listed below if successful. Otherwise, returns
-// an error.
-type StartLoggingOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s StartLoggingOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opStartLogging = "StartLogging"
 
@@ -71,7 +28,7 @@ const opStartLogging = "StartLogging"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/StartLogging
-func (c *Client) StartLoggingRequest(input *StartLoggingInput) StartLoggingRequest {
+func (c *Client) StartLoggingRequest(input *types.StartLoggingInput) StartLoggingRequest {
 	op := &aws.Operation{
 		Name:       opStartLogging,
 		HTTPMethod: "POST",
@@ -79,10 +36,10 @@ func (c *Client) StartLoggingRequest(input *StartLoggingInput) StartLoggingReque
 	}
 
 	if input == nil {
-		input = &StartLoggingInput{}
+		input = &types.StartLoggingInput{}
 	}
 
-	req := c.newRequest(op, input, &StartLoggingOutput{})
+	req := c.newRequest(op, input, &types.StartLoggingOutput{})
 	return StartLoggingRequest{Request: req, Input: input, Copy: c.StartLoggingRequest}
 }
 
@@ -90,8 +47,8 @@ func (c *Client) StartLoggingRequest(input *StartLoggingInput) StartLoggingReque
 // StartLogging API operation.
 type StartLoggingRequest struct {
 	*aws.Request
-	Input *StartLoggingInput
-	Copy  func(*StartLoggingInput) StartLoggingRequest
+	Input *types.StartLoggingInput
+	Copy  func(*types.StartLoggingInput) StartLoggingRequest
 }
 
 // Send marshals and sends the StartLogging API request.
@@ -103,7 +60,7 @@ func (r StartLoggingRequest) Send(ctx context.Context) (*StartLoggingResponse, e
 	}
 
 	resp := &StartLoggingResponse{
-		StartLoggingOutput: r.Request.Data.(*StartLoggingOutput),
+		StartLoggingOutput: r.Request.Data.(*types.StartLoggingOutput),
 		response:           &aws.Response{Request: r.Request},
 	}
 
@@ -113,7 +70,7 @@ func (r StartLoggingRequest) Send(ctx context.Context) (*StartLoggingResponse, e
 // StartLoggingResponse is the response type for the
 // StartLogging API operation.
 type StartLoggingResponse struct {
-	*StartLoggingOutput
+	*types.StartLoggingOutput
 
 	response *aws.Response
 }

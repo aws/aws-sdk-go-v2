@@ -6,63 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-type AcceptVpcEndpointConnectionsInput struct {
-	_ struct{} `type:"structure"`
-
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have
-	// the required permissions, the error response is DryRunOperation. Otherwise,
-	// it is UnauthorizedOperation.
-	DryRun *bool `type:"boolean"`
-
-	// The ID of the endpoint service.
-	//
-	// ServiceId is a required field
-	ServiceId *string `type:"string" required:"true"`
-
-	// The IDs of one or more interface VPC endpoints.
-	//
-	// VpcEndpointIds is a required field
-	VpcEndpointIds []string `locationName:"VpcEndpointId" locationNameList:"item" type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s AcceptVpcEndpointConnectionsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *AcceptVpcEndpointConnectionsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "AcceptVpcEndpointConnectionsInput"}
-
-	if s.ServiceId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ServiceId"))
-	}
-
-	if s.VpcEndpointIds == nil {
-		invalidParams.Add(aws.NewErrParamRequired("VpcEndpointIds"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type AcceptVpcEndpointConnectionsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Information about the interface endpoints that were not accepted, if applicable.
-	Unsuccessful []UnsuccessfulItem `locationName:"unsuccessful" locationNameList:"item" type:"list"`
-}
-
-// String returns the string representation
-func (s AcceptVpcEndpointConnectionsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opAcceptVpcEndpointConnections = "AcceptVpcEndpointConnections"
 
@@ -80,7 +25,7 @@ const opAcceptVpcEndpointConnections = "AcceptVpcEndpointConnections"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AcceptVpcEndpointConnections
-func (c *Client) AcceptVpcEndpointConnectionsRequest(input *AcceptVpcEndpointConnectionsInput) AcceptVpcEndpointConnectionsRequest {
+func (c *Client) AcceptVpcEndpointConnectionsRequest(input *types.AcceptVpcEndpointConnectionsInput) AcceptVpcEndpointConnectionsRequest {
 	op := &aws.Operation{
 		Name:       opAcceptVpcEndpointConnections,
 		HTTPMethod: "POST",
@@ -88,10 +33,10 @@ func (c *Client) AcceptVpcEndpointConnectionsRequest(input *AcceptVpcEndpointCon
 	}
 
 	if input == nil {
-		input = &AcceptVpcEndpointConnectionsInput{}
+		input = &types.AcceptVpcEndpointConnectionsInput{}
 	}
 
-	req := c.newRequest(op, input, &AcceptVpcEndpointConnectionsOutput{})
+	req := c.newRequest(op, input, &types.AcceptVpcEndpointConnectionsOutput{})
 	return AcceptVpcEndpointConnectionsRequest{Request: req, Input: input, Copy: c.AcceptVpcEndpointConnectionsRequest}
 }
 
@@ -99,8 +44,8 @@ func (c *Client) AcceptVpcEndpointConnectionsRequest(input *AcceptVpcEndpointCon
 // AcceptVpcEndpointConnections API operation.
 type AcceptVpcEndpointConnectionsRequest struct {
 	*aws.Request
-	Input *AcceptVpcEndpointConnectionsInput
-	Copy  func(*AcceptVpcEndpointConnectionsInput) AcceptVpcEndpointConnectionsRequest
+	Input *types.AcceptVpcEndpointConnectionsInput
+	Copy  func(*types.AcceptVpcEndpointConnectionsInput) AcceptVpcEndpointConnectionsRequest
 }
 
 // Send marshals and sends the AcceptVpcEndpointConnections API request.
@@ -112,7 +57,7 @@ func (r AcceptVpcEndpointConnectionsRequest) Send(ctx context.Context) (*AcceptV
 	}
 
 	resp := &AcceptVpcEndpointConnectionsResponse{
-		AcceptVpcEndpointConnectionsOutput: r.Request.Data.(*AcceptVpcEndpointConnectionsOutput),
+		AcceptVpcEndpointConnectionsOutput: r.Request.Data.(*types.AcceptVpcEndpointConnectionsOutput),
 		response:                           &aws.Response{Request: r.Request},
 	}
 
@@ -122,7 +67,7 @@ func (r AcceptVpcEndpointConnectionsRequest) Send(ctx context.Context) (*AcceptV
 // AcceptVpcEndpointConnectionsResponse is the response type for the
 // AcceptVpcEndpointConnections API operation.
 type AcceptVpcEndpointConnectionsResponse struct {
-	*AcceptVpcEndpointConnectionsOutput
+	*types.AcceptVpcEndpointConnectionsOutput
 
 	response *aws.Response
 }

@@ -6,53 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/configservice/types"
 )
-
-type PutRetentionConfigurationInput struct {
-	_ struct{} `type:"structure"`
-
-	// Number of days AWS Config stores your historical information.
-	//
-	// Currently, only applicable to the configuration item history.
-	//
-	// RetentionPeriodInDays is a required field
-	RetentionPeriodInDays *int64 `min:"30" type:"integer" required:"true"`
-}
-
-// String returns the string representation
-func (s PutRetentionConfigurationInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *PutRetentionConfigurationInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "PutRetentionConfigurationInput"}
-
-	if s.RetentionPeriodInDays == nil {
-		invalidParams.Add(aws.NewErrParamRequired("RetentionPeriodInDays"))
-	}
-	if s.RetentionPeriodInDays != nil && *s.RetentionPeriodInDays < 30 {
-		invalidParams.Add(aws.NewErrParamMinValue("RetentionPeriodInDays", 30))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type PutRetentionConfigurationOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Returns a retention configuration object.
-	RetentionConfiguration *RetentionConfiguration `type:"structure"`
-}
-
-// String returns the string representation
-func (s PutRetentionConfigurationOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opPutRetentionConfiguration = "PutRetentionConfiguration"
 
@@ -76,7 +31,7 @@ const opPutRetentionConfiguration = "PutRetentionConfiguration"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/PutRetentionConfiguration
-func (c *Client) PutRetentionConfigurationRequest(input *PutRetentionConfigurationInput) PutRetentionConfigurationRequest {
+func (c *Client) PutRetentionConfigurationRequest(input *types.PutRetentionConfigurationInput) PutRetentionConfigurationRequest {
 	op := &aws.Operation{
 		Name:       opPutRetentionConfiguration,
 		HTTPMethod: "POST",
@@ -84,10 +39,10 @@ func (c *Client) PutRetentionConfigurationRequest(input *PutRetentionConfigurati
 	}
 
 	if input == nil {
-		input = &PutRetentionConfigurationInput{}
+		input = &types.PutRetentionConfigurationInput{}
 	}
 
-	req := c.newRequest(op, input, &PutRetentionConfigurationOutput{})
+	req := c.newRequest(op, input, &types.PutRetentionConfigurationOutput{})
 	return PutRetentionConfigurationRequest{Request: req, Input: input, Copy: c.PutRetentionConfigurationRequest}
 }
 
@@ -95,8 +50,8 @@ func (c *Client) PutRetentionConfigurationRequest(input *PutRetentionConfigurati
 // PutRetentionConfiguration API operation.
 type PutRetentionConfigurationRequest struct {
 	*aws.Request
-	Input *PutRetentionConfigurationInput
-	Copy  func(*PutRetentionConfigurationInput) PutRetentionConfigurationRequest
+	Input *types.PutRetentionConfigurationInput
+	Copy  func(*types.PutRetentionConfigurationInput) PutRetentionConfigurationRequest
 }
 
 // Send marshals and sends the PutRetentionConfiguration API request.
@@ -108,7 +63,7 @@ func (r PutRetentionConfigurationRequest) Send(ctx context.Context) (*PutRetenti
 	}
 
 	resp := &PutRetentionConfigurationResponse{
-		PutRetentionConfigurationOutput: r.Request.Data.(*PutRetentionConfigurationOutput),
+		PutRetentionConfigurationOutput: r.Request.Data.(*types.PutRetentionConfigurationOutput),
 		response:                        &aws.Response{Request: r.Request},
 	}
 
@@ -118,7 +73,7 @@ func (r PutRetentionConfigurationRequest) Send(ctx context.Context) (*PutRetenti
 // PutRetentionConfigurationResponse is the response type for the
 // PutRetentionConfiguration API operation.
 type PutRetentionConfigurationResponse struct {
-	*PutRetentionConfigurationOutput
+	*types.PutRetentionConfigurationOutput
 
 	response *aws.Response
 }

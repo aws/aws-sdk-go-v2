@@ -13,6 +13,7 @@ import (
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/neptune"
+	"github.com/aws/aws-sdk-go-v2/service/neptune/types"
 )
 
 // ClientAPI provides an interface to enable mocking the
@@ -46,7 +47,7 @@ import (
 //    type mockClientClient struct {
 //        neptuneiface.ClientPI
 //    }
-//    func (m *mockClientClient) AddRoleToDBCluster(input *neptune.AddRoleToDBClusterInput) (*neptune.AddRoleToDBClusterOutput, error) {
+//    func (m *mockClientClient) AddRoleToDBCluster(input *types.AddRoleToDBClusterInput) (*types.AddRoleToDBClusterOutput, error) {
 //        // mock response/functionality
 //    }
 //
@@ -64,123 +65,123 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type ClientAPI interface {
-	AddRoleToDBClusterRequest(*neptune.AddRoleToDBClusterInput) neptune.AddRoleToDBClusterRequest
+	AddRoleToDBClusterRequest(*types.AddRoleToDBClusterInput) neptune.AddRoleToDBClusterRequest
 
-	AddSourceIdentifierToSubscriptionRequest(*neptune.AddSourceIdentifierToSubscriptionInput) neptune.AddSourceIdentifierToSubscriptionRequest
+	AddSourceIdentifierToSubscriptionRequest(*types.AddSourceIdentifierToSubscriptionInput) neptune.AddSourceIdentifierToSubscriptionRequest
 
-	AddTagsToResourceRequest(*neptune.AddTagsToResourceInput) neptune.AddTagsToResourceRequest
+	AddTagsToResourceRequest(*types.AddTagsToResourceInput) neptune.AddTagsToResourceRequest
 
-	ApplyPendingMaintenanceActionRequest(*neptune.ApplyPendingMaintenanceActionInput) neptune.ApplyPendingMaintenanceActionRequest
+	ApplyPendingMaintenanceActionRequest(*types.ApplyPendingMaintenanceActionInput) neptune.ApplyPendingMaintenanceActionRequest
 
-	CopyDBClusterParameterGroupRequest(*neptune.CopyDBClusterParameterGroupInput) neptune.CopyDBClusterParameterGroupRequest
+	CopyDBClusterParameterGroupRequest(*types.CopyDBClusterParameterGroupInput) neptune.CopyDBClusterParameterGroupRequest
 
-	CopyDBClusterSnapshotRequest(*neptune.CopyDBClusterSnapshotInput) neptune.CopyDBClusterSnapshotRequest
+	CopyDBClusterSnapshotRequest(*types.CopyDBClusterSnapshotInput) neptune.CopyDBClusterSnapshotRequest
 
-	CopyDBParameterGroupRequest(*neptune.CopyDBParameterGroupInput) neptune.CopyDBParameterGroupRequest
+	CopyDBParameterGroupRequest(*types.CopyDBParameterGroupInput) neptune.CopyDBParameterGroupRequest
 
-	CreateDBClusterRequest(*neptune.CreateDBClusterInput) neptune.CreateDBClusterRequest
+	CreateDBClusterRequest(*types.CreateDBClusterInput) neptune.CreateDBClusterRequest
 
-	CreateDBClusterParameterGroupRequest(*neptune.CreateDBClusterParameterGroupInput) neptune.CreateDBClusterParameterGroupRequest
+	CreateDBClusterParameterGroupRequest(*types.CreateDBClusterParameterGroupInput) neptune.CreateDBClusterParameterGroupRequest
 
-	CreateDBClusterSnapshotRequest(*neptune.CreateDBClusterSnapshotInput) neptune.CreateDBClusterSnapshotRequest
+	CreateDBClusterSnapshotRequest(*types.CreateDBClusterSnapshotInput) neptune.CreateDBClusterSnapshotRequest
 
-	CreateDBInstanceRequest(*neptune.CreateDBInstanceInput) neptune.CreateDBInstanceRequest
+	CreateDBInstanceRequest(*types.CreateDBInstanceInput) neptune.CreateDBInstanceRequest
 
-	CreateDBParameterGroupRequest(*neptune.CreateDBParameterGroupInput) neptune.CreateDBParameterGroupRequest
+	CreateDBParameterGroupRequest(*types.CreateDBParameterGroupInput) neptune.CreateDBParameterGroupRequest
 
-	CreateDBSubnetGroupRequest(*neptune.CreateDBSubnetGroupInput) neptune.CreateDBSubnetGroupRequest
+	CreateDBSubnetGroupRequest(*types.CreateDBSubnetGroupInput) neptune.CreateDBSubnetGroupRequest
 
-	CreateEventSubscriptionRequest(*neptune.CreateEventSubscriptionInput) neptune.CreateEventSubscriptionRequest
+	CreateEventSubscriptionRequest(*types.CreateEventSubscriptionInput) neptune.CreateEventSubscriptionRequest
 
-	DeleteDBClusterRequest(*neptune.DeleteDBClusterInput) neptune.DeleteDBClusterRequest
+	DeleteDBClusterRequest(*types.DeleteDBClusterInput) neptune.DeleteDBClusterRequest
 
-	DeleteDBClusterParameterGroupRequest(*neptune.DeleteDBClusterParameterGroupInput) neptune.DeleteDBClusterParameterGroupRequest
+	DeleteDBClusterParameterGroupRequest(*types.DeleteDBClusterParameterGroupInput) neptune.DeleteDBClusterParameterGroupRequest
 
-	DeleteDBClusterSnapshotRequest(*neptune.DeleteDBClusterSnapshotInput) neptune.DeleteDBClusterSnapshotRequest
+	DeleteDBClusterSnapshotRequest(*types.DeleteDBClusterSnapshotInput) neptune.DeleteDBClusterSnapshotRequest
 
-	DeleteDBInstanceRequest(*neptune.DeleteDBInstanceInput) neptune.DeleteDBInstanceRequest
+	DeleteDBInstanceRequest(*types.DeleteDBInstanceInput) neptune.DeleteDBInstanceRequest
 
-	DeleteDBParameterGroupRequest(*neptune.DeleteDBParameterGroupInput) neptune.DeleteDBParameterGroupRequest
+	DeleteDBParameterGroupRequest(*types.DeleteDBParameterGroupInput) neptune.DeleteDBParameterGroupRequest
 
-	DeleteDBSubnetGroupRequest(*neptune.DeleteDBSubnetGroupInput) neptune.DeleteDBSubnetGroupRequest
+	DeleteDBSubnetGroupRequest(*types.DeleteDBSubnetGroupInput) neptune.DeleteDBSubnetGroupRequest
 
-	DeleteEventSubscriptionRequest(*neptune.DeleteEventSubscriptionInput) neptune.DeleteEventSubscriptionRequest
+	DeleteEventSubscriptionRequest(*types.DeleteEventSubscriptionInput) neptune.DeleteEventSubscriptionRequest
 
-	DescribeDBClusterParameterGroupsRequest(*neptune.DescribeDBClusterParameterGroupsInput) neptune.DescribeDBClusterParameterGroupsRequest
+	DescribeDBClusterParameterGroupsRequest(*types.DescribeDBClusterParameterGroupsInput) neptune.DescribeDBClusterParameterGroupsRequest
 
-	DescribeDBClusterParametersRequest(*neptune.DescribeDBClusterParametersInput) neptune.DescribeDBClusterParametersRequest
+	DescribeDBClusterParametersRequest(*types.DescribeDBClusterParametersInput) neptune.DescribeDBClusterParametersRequest
 
-	DescribeDBClusterSnapshotAttributesRequest(*neptune.DescribeDBClusterSnapshotAttributesInput) neptune.DescribeDBClusterSnapshotAttributesRequest
+	DescribeDBClusterSnapshotAttributesRequest(*types.DescribeDBClusterSnapshotAttributesInput) neptune.DescribeDBClusterSnapshotAttributesRequest
 
-	DescribeDBClusterSnapshotsRequest(*neptune.DescribeDBClusterSnapshotsInput) neptune.DescribeDBClusterSnapshotsRequest
+	DescribeDBClusterSnapshotsRequest(*types.DescribeDBClusterSnapshotsInput) neptune.DescribeDBClusterSnapshotsRequest
 
-	DescribeDBClustersRequest(*neptune.DescribeDBClustersInput) neptune.DescribeDBClustersRequest
+	DescribeDBClustersRequest(*types.DescribeDBClustersInput) neptune.DescribeDBClustersRequest
 
-	DescribeDBEngineVersionsRequest(*neptune.DescribeDBEngineVersionsInput) neptune.DescribeDBEngineVersionsRequest
+	DescribeDBEngineVersionsRequest(*types.DescribeDBEngineVersionsInput) neptune.DescribeDBEngineVersionsRequest
 
-	DescribeDBInstancesRequest(*neptune.DescribeDBInstancesInput) neptune.DescribeDBInstancesRequest
+	DescribeDBInstancesRequest(*types.DescribeDBInstancesInput) neptune.DescribeDBInstancesRequest
 
-	DescribeDBParameterGroupsRequest(*neptune.DescribeDBParameterGroupsInput) neptune.DescribeDBParameterGroupsRequest
+	DescribeDBParameterGroupsRequest(*types.DescribeDBParameterGroupsInput) neptune.DescribeDBParameterGroupsRequest
 
-	DescribeDBParametersRequest(*neptune.DescribeDBParametersInput) neptune.DescribeDBParametersRequest
+	DescribeDBParametersRequest(*types.DescribeDBParametersInput) neptune.DescribeDBParametersRequest
 
-	DescribeDBSubnetGroupsRequest(*neptune.DescribeDBSubnetGroupsInput) neptune.DescribeDBSubnetGroupsRequest
+	DescribeDBSubnetGroupsRequest(*types.DescribeDBSubnetGroupsInput) neptune.DescribeDBSubnetGroupsRequest
 
-	DescribeEngineDefaultClusterParametersRequest(*neptune.DescribeEngineDefaultClusterParametersInput) neptune.DescribeEngineDefaultClusterParametersRequest
+	DescribeEngineDefaultClusterParametersRequest(*types.DescribeEngineDefaultClusterParametersInput) neptune.DescribeEngineDefaultClusterParametersRequest
 
-	DescribeEngineDefaultParametersRequest(*neptune.DescribeEngineDefaultParametersInput) neptune.DescribeEngineDefaultParametersRequest
+	DescribeEngineDefaultParametersRequest(*types.DescribeEngineDefaultParametersInput) neptune.DescribeEngineDefaultParametersRequest
 
-	DescribeEventCategoriesRequest(*neptune.DescribeEventCategoriesInput) neptune.DescribeEventCategoriesRequest
+	DescribeEventCategoriesRequest(*types.DescribeEventCategoriesInput) neptune.DescribeEventCategoriesRequest
 
-	DescribeEventSubscriptionsRequest(*neptune.DescribeEventSubscriptionsInput) neptune.DescribeEventSubscriptionsRequest
+	DescribeEventSubscriptionsRequest(*types.DescribeEventSubscriptionsInput) neptune.DescribeEventSubscriptionsRequest
 
-	DescribeEventsRequest(*neptune.DescribeEventsInput) neptune.DescribeEventsRequest
+	DescribeEventsRequest(*types.DescribeEventsInput) neptune.DescribeEventsRequest
 
-	DescribeOrderableDBInstanceOptionsRequest(*neptune.DescribeOrderableDBInstanceOptionsInput) neptune.DescribeOrderableDBInstanceOptionsRequest
+	DescribeOrderableDBInstanceOptionsRequest(*types.DescribeOrderableDBInstanceOptionsInput) neptune.DescribeOrderableDBInstanceOptionsRequest
 
-	DescribePendingMaintenanceActionsRequest(*neptune.DescribePendingMaintenanceActionsInput) neptune.DescribePendingMaintenanceActionsRequest
+	DescribePendingMaintenanceActionsRequest(*types.DescribePendingMaintenanceActionsInput) neptune.DescribePendingMaintenanceActionsRequest
 
-	DescribeValidDBInstanceModificationsRequest(*neptune.DescribeValidDBInstanceModificationsInput) neptune.DescribeValidDBInstanceModificationsRequest
+	DescribeValidDBInstanceModificationsRequest(*types.DescribeValidDBInstanceModificationsInput) neptune.DescribeValidDBInstanceModificationsRequest
 
-	FailoverDBClusterRequest(*neptune.FailoverDBClusterInput) neptune.FailoverDBClusterRequest
+	FailoverDBClusterRequest(*types.FailoverDBClusterInput) neptune.FailoverDBClusterRequest
 
-	ListTagsForResourceRequest(*neptune.ListTagsForResourceInput) neptune.ListTagsForResourceRequest
+	ListTagsForResourceRequest(*types.ListTagsForResourceInput) neptune.ListTagsForResourceRequest
 
-	ModifyDBClusterRequest(*neptune.ModifyDBClusterInput) neptune.ModifyDBClusterRequest
+	ModifyDBClusterRequest(*types.ModifyDBClusterInput) neptune.ModifyDBClusterRequest
 
-	ModifyDBClusterParameterGroupRequest(*neptune.ModifyDBClusterParameterGroupInput) neptune.ModifyDBClusterParameterGroupRequest
+	ModifyDBClusterParameterGroupRequest(*types.ModifyDBClusterParameterGroupInput) neptune.ModifyDBClusterParameterGroupRequest
 
-	ModifyDBClusterSnapshotAttributeRequest(*neptune.ModifyDBClusterSnapshotAttributeInput) neptune.ModifyDBClusterSnapshotAttributeRequest
+	ModifyDBClusterSnapshotAttributeRequest(*types.ModifyDBClusterSnapshotAttributeInput) neptune.ModifyDBClusterSnapshotAttributeRequest
 
-	ModifyDBInstanceRequest(*neptune.ModifyDBInstanceInput) neptune.ModifyDBInstanceRequest
+	ModifyDBInstanceRequest(*types.ModifyDBInstanceInput) neptune.ModifyDBInstanceRequest
 
-	ModifyDBParameterGroupRequest(*neptune.ModifyDBParameterGroupInput) neptune.ModifyDBParameterGroupRequest
+	ModifyDBParameterGroupRequest(*types.ModifyDBParameterGroupInput) neptune.ModifyDBParameterGroupRequest
 
-	ModifyDBSubnetGroupRequest(*neptune.ModifyDBSubnetGroupInput) neptune.ModifyDBSubnetGroupRequest
+	ModifyDBSubnetGroupRequest(*types.ModifyDBSubnetGroupInput) neptune.ModifyDBSubnetGroupRequest
 
-	ModifyEventSubscriptionRequest(*neptune.ModifyEventSubscriptionInput) neptune.ModifyEventSubscriptionRequest
+	ModifyEventSubscriptionRequest(*types.ModifyEventSubscriptionInput) neptune.ModifyEventSubscriptionRequest
 
-	PromoteReadReplicaDBClusterRequest(*neptune.PromoteReadReplicaDBClusterInput) neptune.PromoteReadReplicaDBClusterRequest
+	PromoteReadReplicaDBClusterRequest(*types.PromoteReadReplicaDBClusterInput) neptune.PromoteReadReplicaDBClusterRequest
 
-	RebootDBInstanceRequest(*neptune.RebootDBInstanceInput) neptune.RebootDBInstanceRequest
+	RebootDBInstanceRequest(*types.RebootDBInstanceInput) neptune.RebootDBInstanceRequest
 
-	RemoveRoleFromDBClusterRequest(*neptune.RemoveRoleFromDBClusterInput) neptune.RemoveRoleFromDBClusterRequest
+	RemoveRoleFromDBClusterRequest(*types.RemoveRoleFromDBClusterInput) neptune.RemoveRoleFromDBClusterRequest
 
-	RemoveSourceIdentifierFromSubscriptionRequest(*neptune.RemoveSourceIdentifierFromSubscriptionInput) neptune.RemoveSourceIdentifierFromSubscriptionRequest
+	RemoveSourceIdentifierFromSubscriptionRequest(*types.RemoveSourceIdentifierFromSubscriptionInput) neptune.RemoveSourceIdentifierFromSubscriptionRequest
 
-	RemoveTagsFromResourceRequest(*neptune.RemoveTagsFromResourceInput) neptune.RemoveTagsFromResourceRequest
+	RemoveTagsFromResourceRequest(*types.RemoveTagsFromResourceInput) neptune.RemoveTagsFromResourceRequest
 
-	ResetDBClusterParameterGroupRequest(*neptune.ResetDBClusterParameterGroupInput) neptune.ResetDBClusterParameterGroupRequest
+	ResetDBClusterParameterGroupRequest(*types.ResetDBClusterParameterGroupInput) neptune.ResetDBClusterParameterGroupRequest
 
-	ResetDBParameterGroupRequest(*neptune.ResetDBParameterGroupInput) neptune.ResetDBParameterGroupRequest
+	ResetDBParameterGroupRequest(*types.ResetDBParameterGroupInput) neptune.ResetDBParameterGroupRequest
 
-	RestoreDBClusterFromSnapshotRequest(*neptune.RestoreDBClusterFromSnapshotInput) neptune.RestoreDBClusterFromSnapshotRequest
+	RestoreDBClusterFromSnapshotRequest(*types.RestoreDBClusterFromSnapshotInput) neptune.RestoreDBClusterFromSnapshotRequest
 
-	RestoreDBClusterToPointInTimeRequest(*neptune.RestoreDBClusterToPointInTimeInput) neptune.RestoreDBClusterToPointInTimeRequest
+	RestoreDBClusterToPointInTimeRequest(*types.RestoreDBClusterToPointInTimeInput) neptune.RestoreDBClusterToPointInTimeRequest
 
-	WaitUntilDBInstanceAvailable(context.Context, *neptune.DescribeDBInstancesInput, ...aws.WaiterOption) error
+	WaitUntilDBInstanceAvailable(context.Context, *types.DescribeDBInstancesInput, ...aws.WaiterOption) error
 
-	WaitUntilDBInstanceDeleted(context.Context, *neptune.DescribeDBInstancesInput, ...aws.WaiterOption) error
+	WaitUntilDBInstanceDeleted(context.Context, *types.DescribeDBInstancesInput, ...aws.WaiterOption) error
 }
 
 var _ ClientAPI = (*neptune.Client)(nil)

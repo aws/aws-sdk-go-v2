@@ -4,71 +4,10 @@ package autoscaling
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/autoscaling/types"
 )
-
-type BatchPutScheduledUpdateGroupActionInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the Auto Scaling group.
-	//
-	// AutoScalingGroupName is a required field
-	AutoScalingGroupName *string `min:"1" type:"string" required:"true"`
-
-	// One or more scheduled actions. The maximum number allowed is 50.
-	//
-	// ScheduledUpdateGroupActions is a required field
-	ScheduledUpdateGroupActions []ScheduledUpdateGroupActionRequest `type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s BatchPutScheduledUpdateGroupActionInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *BatchPutScheduledUpdateGroupActionInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "BatchPutScheduledUpdateGroupActionInput"}
-
-	if s.AutoScalingGroupName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("AutoScalingGroupName"))
-	}
-	if s.AutoScalingGroupName != nil && len(*s.AutoScalingGroupName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("AutoScalingGroupName", 1))
-	}
-
-	if s.ScheduledUpdateGroupActions == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ScheduledUpdateGroupActions"))
-	}
-	if s.ScheduledUpdateGroupActions != nil {
-		for i, v := range s.ScheduledUpdateGroupActions {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "ScheduledUpdateGroupActions", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type BatchPutScheduledUpdateGroupActionOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The names of the scheduled actions that could not be created or updated,
-	// including an error message.
-	FailedScheduledUpdateGroupActions []FailedScheduledUpdateGroupActionRequest `type:"list"`
-}
-
-// String returns the string representation
-func (s BatchPutScheduledUpdateGroupActionOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opBatchPutScheduledUpdateGroupAction = "BatchPutScheduledUpdateGroupAction"
 
@@ -87,7 +26,7 @@ const opBatchPutScheduledUpdateGroupAction = "BatchPutScheduledUpdateGroupAction
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/BatchPutScheduledUpdateGroupAction
-func (c *Client) BatchPutScheduledUpdateGroupActionRequest(input *BatchPutScheduledUpdateGroupActionInput) BatchPutScheduledUpdateGroupActionRequest {
+func (c *Client) BatchPutScheduledUpdateGroupActionRequest(input *types.BatchPutScheduledUpdateGroupActionInput) BatchPutScheduledUpdateGroupActionRequest {
 	op := &aws.Operation{
 		Name:       opBatchPutScheduledUpdateGroupAction,
 		HTTPMethod: "POST",
@@ -95,10 +34,10 @@ func (c *Client) BatchPutScheduledUpdateGroupActionRequest(input *BatchPutSchedu
 	}
 
 	if input == nil {
-		input = &BatchPutScheduledUpdateGroupActionInput{}
+		input = &types.BatchPutScheduledUpdateGroupActionInput{}
 	}
 
-	req := c.newRequest(op, input, &BatchPutScheduledUpdateGroupActionOutput{})
+	req := c.newRequest(op, input, &types.BatchPutScheduledUpdateGroupActionOutput{})
 	return BatchPutScheduledUpdateGroupActionRequest{Request: req, Input: input, Copy: c.BatchPutScheduledUpdateGroupActionRequest}
 }
 
@@ -106,8 +45,8 @@ func (c *Client) BatchPutScheduledUpdateGroupActionRequest(input *BatchPutSchedu
 // BatchPutScheduledUpdateGroupAction API operation.
 type BatchPutScheduledUpdateGroupActionRequest struct {
 	*aws.Request
-	Input *BatchPutScheduledUpdateGroupActionInput
-	Copy  func(*BatchPutScheduledUpdateGroupActionInput) BatchPutScheduledUpdateGroupActionRequest
+	Input *types.BatchPutScheduledUpdateGroupActionInput
+	Copy  func(*types.BatchPutScheduledUpdateGroupActionInput) BatchPutScheduledUpdateGroupActionRequest
 }
 
 // Send marshals and sends the BatchPutScheduledUpdateGroupAction API request.
@@ -119,7 +58,7 @@ func (r BatchPutScheduledUpdateGroupActionRequest) Send(ctx context.Context) (*B
 	}
 
 	resp := &BatchPutScheduledUpdateGroupActionResponse{
-		BatchPutScheduledUpdateGroupActionOutput: r.Request.Data.(*BatchPutScheduledUpdateGroupActionOutput),
+		BatchPutScheduledUpdateGroupActionOutput: r.Request.Data.(*types.BatchPutScheduledUpdateGroupActionOutput),
 		response:                                 &aws.Response{Request: r.Request},
 	}
 
@@ -129,7 +68,7 @@ func (r BatchPutScheduledUpdateGroupActionRequest) Send(ctx context.Context) (*B
 // BatchPutScheduledUpdateGroupActionResponse is the response type for the
 // BatchPutScheduledUpdateGroupAction API operation.
 type BatchPutScheduledUpdateGroupActionResponse struct {
-	*BatchPutScheduledUpdateGroupActionOutput
+	*types.BatchPutScheduledUpdateGroupActionOutput
 
 	response *aws.Response
 }

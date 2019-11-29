@@ -6,48 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/glue/types"
 )
-
-type DeleteCrawlerInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the crawler to remove.
-	//
-	// Name is a required field
-	Name *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteCrawlerInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteCrawlerInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteCrawlerInput"}
-
-	if s.Name == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Name"))
-	}
-	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteCrawlerOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteCrawlerOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteCrawler = "DeleteCrawler"
 
@@ -65,7 +25,7 @@ const opDeleteCrawler = "DeleteCrawler"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DeleteCrawler
-func (c *Client) DeleteCrawlerRequest(input *DeleteCrawlerInput) DeleteCrawlerRequest {
+func (c *Client) DeleteCrawlerRequest(input *types.DeleteCrawlerInput) DeleteCrawlerRequest {
 	op := &aws.Operation{
 		Name:       opDeleteCrawler,
 		HTTPMethod: "POST",
@@ -73,10 +33,10 @@ func (c *Client) DeleteCrawlerRequest(input *DeleteCrawlerInput) DeleteCrawlerRe
 	}
 
 	if input == nil {
-		input = &DeleteCrawlerInput{}
+		input = &types.DeleteCrawlerInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteCrawlerOutput{})
+	req := c.newRequest(op, input, &types.DeleteCrawlerOutput{})
 	return DeleteCrawlerRequest{Request: req, Input: input, Copy: c.DeleteCrawlerRequest}
 }
 
@@ -84,8 +44,8 @@ func (c *Client) DeleteCrawlerRequest(input *DeleteCrawlerInput) DeleteCrawlerRe
 // DeleteCrawler API operation.
 type DeleteCrawlerRequest struct {
 	*aws.Request
-	Input *DeleteCrawlerInput
-	Copy  func(*DeleteCrawlerInput) DeleteCrawlerRequest
+	Input *types.DeleteCrawlerInput
+	Copy  func(*types.DeleteCrawlerInput) DeleteCrawlerRequest
 }
 
 // Send marshals and sends the DeleteCrawler API request.
@@ -97,7 +57,7 @@ func (r DeleteCrawlerRequest) Send(ctx context.Context) (*DeleteCrawlerResponse,
 	}
 
 	resp := &DeleteCrawlerResponse{
-		DeleteCrawlerOutput: r.Request.Data.(*DeleteCrawlerOutput),
+		DeleteCrawlerOutput: r.Request.Data.(*types.DeleteCrawlerOutput),
 		response:            &aws.Response{Request: r.Request},
 	}
 
@@ -107,7 +67,7 @@ func (r DeleteCrawlerRequest) Send(ctx context.Context) (*DeleteCrawlerResponse,
 // DeleteCrawlerResponse is the response type for the
 // DeleteCrawler API operation.
 type DeleteCrawlerResponse struct {
-	*DeleteCrawlerOutput
+	*types.DeleteCrawlerOutput
 
 	response *aws.Response
 }

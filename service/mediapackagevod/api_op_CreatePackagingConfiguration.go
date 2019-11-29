@@ -6,191 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/mediapackagevod/types"
 )
-
-type CreatePackagingConfigurationInput struct {
-	_ struct{} `type:"structure"`
-
-	// A CMAF packaging configuration.
-	CmafPackage *CmafPackage `locationName:"cmafPackage" type:"structure"`
-
-	// A Dynamic Adaptive Streaming over HTTP (DASH) packaging configuration.
-	DashPackage *DashPackage `locationName:"dashPackage" type:"structure"`
-
-	// An HTTP Live Streaming (HLS) packaging configuration.
-	HlsPackage *HlsPackage `locationName:"hlsPackage" type:"structure"`
-
-	// Id is a required field
-	Id *string `locationName:"id" type:"string" required:"true"`
-
-	// A Microsoft Smooth Streaming (MSS) PackagingConfiguration.
-	MssPackage *MssPackage `locationName:"mssPackage" type:"structure"`
-
-	// PackagingGroupId is a required field
-	PackagingGroupId *string `locationName:"packagingGroupId" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s CreatePackagingConfigurationInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreatePackagingConfigurationInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreatePackagingConfigurationInput"}
-
-	if s.Id == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Id"))
-	}
-
-	if s.PackagingGroupId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("PackagingGroupId"))
-	}
-	if s.CmafPackage != nil {
-		if err := s.CmafPackage.Validate(); err != nil {
-			invalidParams.AddNested("CmafPackage", err.(aws.ErrInvalidParams))
-		}
-	}
-	if s.DashPackage != nil {
-		if err := s.DashPackage.Validate(); err != nil {
-			invalidParams.AddNested("DashPackage", err.(aws.ErrInvalidParams))
-		}
-	}
-	if s.HlsPackage != nil {
-		if err := s.HlsPackage.Validate(); err != nil {
-			invalidParams.AddNested("HlsPackage", err.(aws.ErrInvalidParams))
-		}
-	}
-	if s.MssPackage != nil {
-		if err := s.MssPackage.Validate(); err != nil {
-			invalidParams.AddNested("MssPackage", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s CreatePackagingConfigurationInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.CmafPackage != nil {
-		v := s.CmafPackage
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "cmafPackage", v, metadata)
-	}
-	if s.DashPackage != nil {
-		v := s.DashPackage
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "dashPackage", v, metadata)
-	}
-	if s.HlsPackage != nil {
-		v := s.HlsPackage
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "hlsPackage", v, metadata)
-	}
-	if s.Id != nil {
-		v := *s.Id
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "id", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.MssPackage != nil {
-		v := s.MssPackage
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "mssPackage", v, metadata)
-	}
-	if s.PackagingGroupId != nil {
-		v := *s.PackagingGroupId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "packagingGroupId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type CreatePackagingConfigurationOutput struct {
-	_ struct{} `type:"structure"`
-
-	Arn *string `locationName:"arn" type:"string"`
-
-	// A CMAF packaging configuration.
-	CmafPackage *CmafPackage `locationName:"cmafPackage" type:"structure"`
-
-	// A Dynamic Adaptive Streaming over HTTP (DASH) packaging configuration.
-	DashPackage *DashPackage `locationName:"dashPackage" type:"structure"`
-
-	// An HTTP Live Streaming (HLS) packaging configuration.
-	HlsPackage *HlsPackage `locationName:"hlsPackage" type:"structure"`
-
-	Id *string `locationName:"id" type:"string"`
-
-	// A Microsoft Smooth Streaming (MSS) PackagingConfiguration.
-	MssPackage *MssPackage `locationName:"mssPackage" type:"structure"`
-
-	PackagingGroupId *string `locationName:"packagingGroupId" type:"string"`
-}
-
-// String returns the string representation
-func (s CreatePackagingConfigurationOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s CreatePackagingConfigurationOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.Arn != nil {
-		v := *s.Arn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "arn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.CmafPackage != nil {
-		v := s.CmafPackage
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "cmafPackage", v, metadata)
-	}
-	if s.DashPackage != nil {
-		v := s.DashPackage
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "dashPackage", v, metadata)
-	}
-	if s.HlsPackage != nil {
-		v := s.HlsPackage
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "hlsPackage", v, metadata)
-	}
-	if s.Id != nil {
-		v := *s.Id
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "id", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.MssPackage != nil {
-		v := s.MssPackage
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "mssPackage", v, metadata)
-	}
-	if s.PackagingGroupId != nil {
-		v := *s.PackagingGroupId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "packagingGroupId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opCreatePackagingConfiguration = "CreatePackagingConfiguration"
 
@@ -207,7 +24,7 @@ const opCreatePackagingConfiguration = "CreatePackagingConfiguration"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mediapackage-vod-2018-11-07/CreatePackagingConfiguration
-func (c *Client) CreatePackagingConfigurationRequest(input *CreatePackagingConfigurationInput) CreatePackagingConfigurationRequest {
+func (c *Client) CreatePackagingConfigurationRequest(input *types.CreatePackagingConfigurationInput) CreatePackagingConfigurationRequest {
 	op := &aws.Operation{
 		Name:       opCreatePackagingConfiguration,
 		HTTPMethod: "POST",
@@ -215,10 +32,10 @@ func (c *Client) CreatePackagingConfigurationRequest(input *CreatePackagingConfi
 	}
 
 	if input == nil {
-		input = &CreatePackagingConfigurationInput{}
+		input = &types.CreatePackagingConfigurationInput{}
 	}
 
-	req := c.newRequest(op, input, &CreatePackagingConfigurationOutput{})
+	req := c.newRequest(op, input, &types.CreatePackagingConfigurationOutput{})
 	return CreatePackagingConfigurationRequest{Request: req, Input: input, Copy: c.CreatePackagingConfigurationRequest}
 }
 
@@ -226,8 +43,8 @@ func (c *Client) CreatePackagingConfigurationRequest(input *CreatePackagingConfi
 // CreatePackagingConfiguration API operation.
 type CreatePackagingConfigurationRequest struct {
 	*aws.Request
-	Input *CreatePackagingConfigurationInput
-	Copy  func(*CreatePackagingConfigurationInput) CreatePackagingConfigurationRequest
+	Input *types.CreatePackagingConfigurationInput
+	Copy  func(*types.CreatePackagingConfigurationInput) CreatePackagingConfigurationRequest
 }
 
 // Send marshals and sends the CreatePackagingConfiguration API request.
@@ -239,7 +56,7 @@ func (r CreatePackagingConfigurationRequest) Send(ctx context.Context) (*CreateP
 	}
 
 	resp := &CreatePackagingConfigurationResponse{
-		CreatePackagingConfigurationOutput: r.Request.Data.(*CreatePackagingConfigurationOutput),
+		CreatePackagingConfigurationOutput: r.Request.Data.(*types.CreatePackagingConfigurationOutput),
 		response:                           &aws.Response{Request: r.Request},
 	}
 
@@ -249,7 +66,7 @@ func (r CreatePackagingConfigurationRequest) Send(ctx context.Context) (*CreateP
 // CreatePackagingConfigurationResponse is the response type for the
 // CreatePackagingConfiguration API operation.
 type CreatePackagingConfigurationResponse struct {
-	*CreatePackagingConfigurationOutput
+	*types.CreatePackagingConfigurationOutput
 
 	response *aws.Response
 }

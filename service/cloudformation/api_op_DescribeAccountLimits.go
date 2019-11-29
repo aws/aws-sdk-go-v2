@@ -6,52 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/cloudformation/types"
 )
-
-// The input for the DescribeAccountLimits action.
-type DescribeAccountLimitsInput struct {
-	_ struct{} `type:"structure"`
-
-	// A string that identifies the next page of limits that you want to retrieve.
-	NextToken *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeAccountLimitsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeAccountLimitsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeAccountLimitsInput"}
-	if s.NextToken != nil && len(*s.NextToken) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// The output for the DescribeAccountLimits action.
-type DescribeAccountLimitsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// An account limit structure that contain a list of AWS CloudFormation account
-	// limits and their values.
-	AccountLimits []AccountLimit `type:"list"`
-
-	// If the output exceeds 1 MB in size, a string that identifies the next page
-	// of limits. If no additional page exists, this value is null.
-	NextToken *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeAccountLimitsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeAccountLimits = "DescribeAccountLimits"
 
@@ -71,7 +27,7 @@ const opDescribeAccountLimits = "DescribeAccountLimits"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DescribeAccountLimits
-func (c *Client) DescribeAccountLimitsRequest(input *DescribeAccountLimitsInput) DescribeAccountLimitsRequest {
+func (c *Client) DescribeAccountLimitsRequest(input *types.DescribeAccountLimitsInput) DescribeAccountLimitsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeAccountLimits,
 		HTTPMethod: "POST",
@@ -79,10 +35,10 @@ func (c *Client) DescribeAccountLimitsRequest(input *DescribeAccountLimitsInput)
 	}
 
 	if input == nil {
-		input = &DescribeAccountLimitsInput{}
+		input = &types.DescribeAccountLimitsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeAccountLimitsOutput{})
+	req := c.newRequest(op, input, &types.DescribeAccountLimitsOutput{})
 	return DescribeAccountLimitsRequest{Request: req, Input: input, Copy: c.DescribeAccountLimitsRequest}
 }
 
@@ -90,8 +46,8 @@ func (c *Client) DescribeAccountLimitsRequest(input *DescribeAccountLimitsInput)
 // DescribeAccountLimits API operation.
 type DescribeAccountLimitsRequest struct {
 	*aws.Request
-	Input *DescribeAccountLimitsInput
-	Copy  func(*DescribeAccountLimitsInput) DescribeAccountLimitsRequest
+	Input *types.DescribeAccountLimitsInput
+	Copy  func(*types.DescribeAccountLimitsInput) DescribeAccountLimitsRequest
 }
 
 // Send marshals and sends the DescribeAccountLimits API request.
@@ -103,7 +59,7 @@ func (r DescribeAccountLimitsRequest) Send(ctx context.Context) (*DescribeAccoun
 	}
 
 	resp := &DescribeAccountLimitsResponse{
-		DescribeAccountLimitsOutput: r.Request.Data.(*DescribeAccountLimitsOutput),
+		DescribeAccountLimitsOutput: r.Request.Data.(*types.DescribeAccountLimitsOutput),
 		response:                    &aws.Response{Request: r.Request},
 	}
 
@@ -113,7 +69,7 @@ func (r DescribeAccountLimitsRequest) Send(ctx context.Context) (*DescribeAccoun
 // DescribeAccountLimitsResponse is the response type for the
 // DescribeAccountLimits API operation.
 type DescribeAccountLimitsResponse struct {
-	*DescribeAccountLimitsOutput
+	*types.DescribeAccountLimitsOutput
 
 	response *aws.Response
 }

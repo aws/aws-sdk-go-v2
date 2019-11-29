@@ -6,47 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/autoscaling/types"
 )
-
-type DescribeTagsInput struct {
-	_ struct{} `type:"structure"`
-
-	// One or more filters to scope the tags to return. The maximum number of filters
-	// per filter type (for example, auto-scaling-group) is 1000.
-	Filters []Filter `type:"list"`
-
-	// The maximum number of items to return with this call. The default value is
-	// 50 and the maximum value is 100.
-	MaxRecords *int64 `type:"integer"`
-
-	// The token for the next set of items to return. (You received this token from
-	// a previous call.)
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeTagsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type DescribeTagsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A string that indicates that the response contains more items than can be
-	// returned in a single response. To receive additional items, specify this
-	// string for the NextToken value when requesting the next set of items. This
-	// value is null when there are no more items to return.
-	NextToken *string `type:"string"`
-
-	// One or more tags.
-	Tags []TagDescription `type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeTagsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeTags = "DescribeTags"
 
@@ -72,7 +33,7 @@ const opDescribeTags = "DescribeTags"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DescribeTags
-func (c *Client) DescribeTagsRequest(input *DescribeTagsInput) DescribeTagsRequest {
+func (c *Client) DescribeTagsRequest(input *types.DescribeTagsInput) DescribeTagsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeTags,
 		HTTPMethod: "POST",
@@ -86,10 +47,10 @@ func (c *Client) DescribeTagsRequest(input *DescribeTagsInput) DescribeTagsReque
 	}
 
 	if input == nil {
-		input = &DescribeTagsInput{}
+		input = &types.DescribeTagsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeTagsOutput{})
+	req := c.newRequest(op, input, &types.DescribeTagsOutput{})
 	return DescribeTagsRequest{Request: req, Input: input, Copy: c.DescribeTagsRequest}
 }
 
@@ -97,8 +58,8 @@ func (c *Client) DescribeTagsRequest(input *DescribeTagsInput) DescribeTagsReque
 // DescribeTags API operation.
 type DescribeTagsRequest struct {
 	*aws.Request
-	Input *DescribeTagsInput
-	Copy  func(*DescribeTagsInput) DescribeTagsRequest
+	Input *types.DescribeTagsInput
+	Copy  func(*types.DescribeTagsInput) DescribeTagsRequest
 }
 
 // Send marshals and sends the DescribeTags API request.
@@ -110,7 +71,7 @@ func (r DescribeTagsRequest) Send(ctx context.Context) (*DescribeTagsResponse, e
 	}
 
 	resp := &DescribeTagsResponse{
-		DescribeTagsOutput: r.Request.Data.(*DescribeTagsOutput),
+		DescribeTagsOutput: r.Request.Data.(*types.DescribeTagsOutput),
 		response:           &aws.Response{Request: r.Request},
 	}
 
@@ -140,7 +101,7 @@ func NewDescribeTagsPaginator(req DescribeTagsRequest) DescribeTagsPaginator {
 	return DescribeTagsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *DescribeTagsInput
+				var inCpy *types.DescribeTagsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -160,14 +121,14 @@ type DescribeTagsPaginator struct {
 	aws.Pager
 }
 
-func (p *DescribeTagsPaginator) CurrentPage() *DescribeTagsOutput {
-	return p.Pager.CurrentPage().(*DescribeTagsOutput)
+func (p *DescribeTagsPaginator) CurrentPage() *types.DescribeTagsOutput {
+	return p.Pager.CurrentPage().(*types.DescribeTagsOutput)
 }
 
 // DescribeTagsResponse is the response type for the
 // DescribeTags API operation.
 type DescribeTagsResponse struct {
-	*DescribeTagsOutput
+	*types.DescribeTagsOutput
 
 	response *aws.Response
 }

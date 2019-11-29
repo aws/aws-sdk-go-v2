@@ -6,150 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/apigateway/types"
 )
-
-// Gets the documentation parts of an API. The result may be filtered by the
-// type, name, or path of API entities (targets).
-type GetDocumentationPartsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The maximum number of returned results per page. The default value is 25
-	// and the maximum value is 500.
-	Limit *int64 `location:"querystring" locationName:"limit" type:"integer"`
-
-	// The status of the API documentation parts to retrieve. Valid values are DOCUMENTED
-	// for retrieving DocumentationPart resources with content and UNDOCUMENTED
-	// for DocumentationPart resources without content.
-	LocationStatus LocationStatusType `location:"querystring" locationName:"locationStatus" type:"string" enum:"true"`
-
-	// The name of API entities of the to-be-retrieved documentation parts.
-	NameQuery *string `location:"querystring" locationName:"name" type:"string"`
-
-	// The path of API entities of the to-be-retrieved documentation parts.
-	Path *string `location:"querystring" locationName:"path" type:"string"`
-
-	// The current pagination position in the paged result set.
-	Position *string `location:"querystring" locationName:"position" type:"string"`
-
-	// [Required] The string identifier of the associated RestApi.
-	//
-	// RestApiId is a required field
-	RestApiId *string `location:"uri" locationName:"restapi_id" type:"string" required:"true"`
-
-	// The type of API entities of the to-be-retrieved documentation parts.
-	Type DocumentationPartType `location:"querystring" locationName:"type" type:"string" enum:"true"`
-}
-
-// String returns the string representation
-func (s GetDocumentationPartsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetDocumentationPartsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetDocumentationPartsInput"}
-
-	if s.RestApiId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("RestApiId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetDocumentationPartsInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.RestApiId != nil {
-		v := *s.RestApiId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "restapi_id", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Limit != nil {
-		v := *s.Limit
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "limit", protocol.Int64Value(v), metadata)
-	}
-	if len(s.LocationStatus) > 0 {
-		v := s.LocationStatus
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "locationStatus", protocol.QuotedValue{ValueMarshaler: v}, metadata)
-	}
-	if s.NameQuery != nil {
-		v := *s.NameQuery
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Path != nil {
-		v := *s.Path
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "path", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Position != nil {
-		v := *s.Position
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "position", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if len(s.Type) > 0 {
-		v := s.Type
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "type", protocol.QuotedValue{ValueMarshaler: v}, metadata)
-	}
-	return nil
-}
-
-// The collection of documentation parts of an API.
-//
-// Documenting an API (https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-documenting-api.html),
-// DocumentationPart
-type GetDocumentationPartsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The current page of elements from this collection.
-	Items []DocumentationPart `locationName:"item" type:"list"`
-
-	Position *string `locationName:"position" type:"string"`
-}
-
-// String returns the string representation
-func (s GetDocumentationPartsOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetDocumentationPartsOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.Items != nil {
-		v := s.Items
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "item", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	if s.Position != nil {
-		v := *s.Position
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "position", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opGetDocumentationParts = "GetDocumentationParts"
 
@@ -162,7 +20,7 @@ const opGetDocumentationParts = "GetDocumentationParts"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) GetDocumentationPartsRequest(input *GetDocumentationPartsInput) GetDocumentationPartsRequest {
+func (c *Client) GetDocumentationPartsRequest(input *types.GetDocumentationPartsInput) GetDocumentationPartsRequest {
 	op := &aws.Operation{
 		Name:       opGetDocumentationParts,
 		HTTPMethod: "GET",
@@ -170,10 +28,10 @@ func (c *Client) GetDocumentationPartsRequest(input *GetDocumentationPartsInput)
 	}
 
 	if input == nil {
-		input = &GetDocumentationPartsInput{}
+		input = &types.GetDocumentationPartsInput{}
 	}
 
-	req := c.newRequest(op, input, &GetDocumentationPartsOutput{})
+	req := c.newRequest(op, input, &types.GetDocumentationPartsOutput{})
 	return GetDocumentationPartsRequest{Request: req, Input: input, Copy: c.GetDocumentationPartsRequest}
 }
 
@@ -181,8 +39,8 @@ func (c *Client) GetDocumentationPartsRequest(input *GetDocumentationPartsInput)
 // GetDocumentationParts API operation.
 type GetDocumentationPartsRequest struct {
 	*aws.Request
-	Input *GetDocumentationPartsInput
-	Copy  func(*GetDocumentationPartsInput) GetDocumentationPartsRequest
+	Input *types.GetDocumentationPartsInput
+	Copy  func(*types.GetDocumentationPartsInput) GetDocumentationPartsRequest
 }
 
 // Send marshals and sends the GetDocumentationParts API request.
@@ -194,7 +52,7 @@ func (r GetDocumentationPartsRequest) Send(ctx context.Context) (*GetDocumentati
 	}
 
 	resp := &GetDocumentationPartsResponse{
-		GetDocumentationPartsOutput: r.Request.Data.(*GetDocumentationPartsOutput),
+		GetDocumentationPartsOutput: r.Request.Data.(*types.GetDocumentationPartsOutput),
 		response:                    &aws.Response{Request: r.Request},
 	}
 
@@ -204,7 +62,7 @@ func (r GetDocumentationPartsRequest) Send(ctx context.Context) (*GetDocumentati
 // GetDocumentationPartsResponse is the response type for the
 // GetDocumentationParts API operation.
 type GetDocumentationPartsResponse struct {
-	*GetDocumentationPartsOutput
+	*types.GetDocumentationPartsOutput
 
 	response *aws.Response
 }

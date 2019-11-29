@@ -6,64 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/batch/types"
 )
-
-type DeleteComputeEnvironmentInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name or Amazon Resource Name (ARN) of the compute environment to delete.
-	//
-	// ComputeEnvironment is a required field
-	ComputeEnvironment *string `locationName:"computeEnvironment" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteComputeEnvironmentInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteComputeEnvironmentInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteComputeEnvironmentInput"}
-
-	if s.ComputeEnvironment == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ComputeEnvironment"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteComputeEnvironmentInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.ComputeEnvironment != nil {
-		v := *s.ComputeEnvironment
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "computeEnvironment", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type DeleteComputeEnvironmentOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteComputeEnvironmentOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteComputeEnvironmentOutput) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
 
 const opDeleteComputeEnvironment = "DeleteComputeEnvironment"
 
@@ -84,7 +28,7 @@ const opDeleteComputeEnvironment = "DeleteComputeEnvironment"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/DeleteComputeEnvironment
-func (c *Client) DeleteComputeEnvironmentRequest(input *DeleteComputeEnvironmentInput) DeleteComputeEnvironmentRequest {
+func (c *Client) DeleteComputeEnvironmentRequest(input *types.DeleteComputeEnvironmentInput) DeleteComputeEnvironmentRequest {
 	op := &aws.Operation{
 		Name:       opDeleteComputeEnvironment,
 		HTTPMethod: "POST",
@@ -92,10 +36,10 @@ func (c *Client) DeleteComputeEnvironmentRequest(input *DeleteComputeEnvironment
 	}
 
 	if input == nil {
-		input = &DeleteComputeEnvironmentInput{}
+		input = &types.DeleteComputeEnvironmentInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteComputeEnvironmentOutput{})
+	req := c.newRequest(op, input, &types.DeleteComputeEnvironmentOutput{})
 	return DeleteComputeEnvironmentRequest{Request: req, Input: input, Copy: c.DeleteComputeEnvironmentRequest}
 }
 
@@ -103,8 +47,8 @@ func (c *Client) DeleteComputeEnvironmentRequest(input *DeleteComputeEnvironment
 // DeleteComputeEnvironment API operation.
 type DeleteComputeEnvironmentRequest struct {
 	*aws.Request
-	Input *DeleteComputeEnvironmentInput
-	Copy  func(*DeleteComputeEnvironmentInput) DeleteComputeEnvironmentRequest
+	Input *types.DeleteComputeEnvironmentInput
+	Copy  func(*types.DeleteComputeEnvironmentInput) DeleteComputeEnvironmentRequest
 }
 
 // Send marshals and sends the DeleteComputeEnvironment API request.
@@ -116,7 +60,7 @@ func (r DeleteComputeEnvironmentRequest) Send(ctx context.Context) (*DeleteCompu
 	}
 
 	resp := &DeleteComputeEnvironmentResponse{
-		DeleteComputeEnvironmentOutput: r.Request.Data.(*DeleteComputeEnvironmentOutput),
+		DeleteComputeEnvironmentOutput: r.Request.Data.(*types.DeleteComputeEnvironmentOutput),
 		response:                       &aws.Response{Request: r.Request},
 	}
 
@@ -126,7 +70,7 @@ func (r DeleteComputeEnvironmentRequest) Send(ctx context.Context) (*DeleteCompu
 // DeleteComputeEnvironmentResponse is the response type for the
 // DeleteComputeEnvironment API operation.
 type DeleteComputeEnvironmentResponse struct {
-	*DeleteComputeEnvironmentOutput
+	*types.DeleteComputeEnvironmentOutput
 
 	response *aws.Response
 }

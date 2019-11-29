@@ -6,69 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-// Contains the parameters for DescribeCustomerGateways.
-type DescribeCustomerGatewaysInput struct {
-	_ struct{} `type:"structure"`
-
-	// One or more customer gateway IDs.
-	//
-	// Default: Describes all your customer gateways.
-	CustomerGatewayIds []string `locationName:"CustomerGatewayId" locationNameList:"CustomerGatewayId" type:"list"`
-
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have
-	// the required permissions, the error response is DryRunOperation. Otherwise,
-	// it is UnauthorizedOperation.
-	DryRun *bool `locationName:"dryRun" type:"boolean"`
-
-	// One or more filters.
-	//
-	//    * bgp-asn - The customer gateway's Border Gateway Protocol (BGP) Autonomous
-	//    System Number (ASN).
-	//
-	//    * customer-gateway-id - The ID of the customer gateway.
-	//
-	//    * ip-address - The IP address of the customer gateway's Internet-routable
-	//    external interface.
-	//
-	//    * state - The state of the customer gateway (pending | available | deleting
-	//    | deleted).
-	//
-	//    * type - The type of customer gateway. Currently, the only supported type
-	//    is ipsec.1.
-	//
-	//    * tag:<key> - The key/value combination of a tag assigned to the resource.
-	//    Use the tag key in the filter name and the tag value as the filter value.
-	//    For example, to find all resources that have a tag with the key Owner
-	//    and the value TeamA, specify tag:Owner for the filter name and TeamA for
-	//    the filter value.
-	//
-	//    * tag-key - The key of a tag assigned to the resource. Use this filter
-	//    to find all resources assigned a tag with a specific key, regardless of
-	//    the tag value.
-	Filters []Filter `locationName:"Filter" locationNameList:"Filter" type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeCustomerGatewaysInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Contains the output of DescribeCustomerGateways.
-type DescribeCustomerGatewaysOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Information about one or more customer gateways.
-	CustomerGateways []CustomerGateway `locationName:"customerGatewaySet" locationNameList:"item" type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeCustomerGatewaysOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeCustomerGateways = "DescribeCustomerGateways"
 
@@ -88,7 +27,7 @@ const opDescribeCustomerGateways = "DescribeCustomerGateways"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeCustomerGateways
-func (c *Client) DescribeCustomerGatewaysRequest(input *DescribeCustomerGatewaysInput) DescribeCustomerGatewaysRequest {
+func (c *Client) DescribeCustomerGatewaysRequest(input *types.DescribeCustomerGatewaysInput) DescribeCustomerGatewaysRequest {
 	op := &aws.Operation{
 		Name:       opDescribeCustomerGateways,
 		HTTPMethod: "POST",
@@ -96,10 +35,10 @@ func (c *Client) DescribeCustomerGatewaysRequest(input *DescribeCustomerGateways
 	}
 
 	if input == nil {
-		input = &DescribeCustomerGatewaysInput{}
+		input = &types.DescribeCustomerGatewaysInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeCustomerGatewaysOutput{})
+	req := c.newRequest(op, input, &types.DescribeCustomerGatewaysOutput{})
 	return DescribeCustomerGatewaysRequest{Request: req, Input: input, Copy: c.DescribeCustomerGatewaysRequest}
 }
 
@@ -107,8 +46,8 @@ func (c *Client) DescribeCustomerGatewaysRequest(input *DescribeCustomerGateways
 // DescribeCustomerGateways API operation.
 type DescribeCustomerGatewaysRequest struct {
 	*aws.Request
-	Input *DescribeCustomerGatewaysInput
-	Copy  func(*DescribeCustomerGatewaysInput) DescribeCustomerGatewaysRequest
+	Input *types.DescribeCustomerGatewaysInput
+	Copy  func(*types.DescribeCustomerGatewaysInput) DescribeCustomerGatewaysRequest
 }
 
 // Send marshals and sends the DescribeCustomerGateways API request.
@@ -120,7 +59,7 @@ func (r DescribeCustomerGatewaysRequest) Send(ctx context.Context) (*DescribeCus
 	}
 
 	resp := &DescribeCustomerGatewaysResponse{
-		DescribeCustomerGatewaysOutput: r.Request.Data.(*DescribeCustomerGatewaysOutput),
+		DescribeCustomerGatewaysOutput: r.Request.Data.(*types.DescribeCustomerGatewaysOutput),
 		response:                       &aws.Response{Request: r.Request},
 	}
 
@@ -130,7 +69,7 @@ func (r DescribeCustomerGatewaysRequest) Send(ctx context.Context) (*DescribeCus
 // DescribeCustomerGatewaysResponse is the response type for the
 // DescribeCustomerGateways API operation.
 type DescribeCustomerGatewaysResponse struct {
-	*DescribeCustomerGatewaysOutput
+	*types.DescribeCustomerGatewaysOutput
 
 	response *aws.Response
 }

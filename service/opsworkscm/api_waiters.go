@@ -7,6 +7,7 @@ import (
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
+	"github.com/aws/aws-sdk-go-v2/service/opsworkscm/types"
 )
 
 // WaitUntilNodeAssociated uses the OpsWorksCM API operation
@@ -18,7 +19,7 @@ import (
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Client) WaitUntilNodeAssociated(ctx context.Context, input *DescribeNodeAssociationStatusInput, opts ...aws.WaiterOption) error {
+func (c *Client) WaitUntilNodeAssociated(ctx context.Context, input *types.DescribeNodeAssociationStatusInput, opts ...aws.WaiterOption) error {
 	w := aws.Waiter{
 		Name:        "WaitUntilNodeAssociated",
 		MaxAttempts: 15,
@@ -37,7 +38,7 @@ func (c *Client) WaitUntilNodeAssociated(ctx context.Context, input *DescribeNod
 		},
 		Logger: c.Config.Logger,
 		NewRequest: func(opts []aws.Option) (*aws.Request, error) {
-			var inCpy *DescribeNodeAssociationStatusInput
+			var inCpy *types.DescribeNodeAssociationStatusInput
 			if input != nil {
 				tmp := *input
 				inCpy = &tmp

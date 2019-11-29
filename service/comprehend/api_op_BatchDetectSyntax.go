@@ -6,74 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/comprehend/types"
 )
-
-type BatchDetectSyntaxInput struct {
-	_ struct{} `type:"structure"`
-
-	// The language of the input documents. You can specify any of the primary languages
-	// supported by Amazon Comprehend: German ("de"), English ("en"), Spanish ("es"),
-	// French ("fr"), Italian ("it"), or Portuguese ("pt"). All documents must be
-	// in the same language.
-	//
-	// LanguageCode is a required field
-	LanguageCode SyntaxLanguageCode `type:"string" required:"true" enum:"true"`
-
-	// A list containing the text of the input documents. The list can contain a
-	// maximum of 25 documents. Each document must contain fewer that 5,000 bytes
-	// of UTF-8 encoded characters.
-	//
-	// TextList is a required field
-	TextList []string `type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s BatchDetectSyntaxInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *BatchDetectSyntaxInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "BatchDetectSyntaxInput"}
-	if len(s.LanguageCode) == 0 {
-		invalidParams.Add(aws.NewErrParamRequired("LanguageCode"))
-	}
-
-	if s.TextList == nil {
-		invalidParams.Add(aws.NewErrParamRequired("TextList"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type BatchDetectSyntaxOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A list containing one object for each document that contained an error. The
-	// results are sorted in ascending order by the Index field and match the order
-	// of the documents in the input list. If there are no errors in the batch,
-	// the ErrorList is empty.
-	//
-	// ErrorList is a required field
-	ErrorList []BatchItemError `type:"list" required:"true"`
-
-	// A list of objects containing the results of the operation. The results are
-	// sorted in ascending order by the Index field and match the order of the documents
-	// in the input list. If all of the documents contain an error, the ResultList
-	// is empty.
-	//
-	// ResultList is a required field
-	ResultList []BatchDetectSyntaxItemResult `type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s BatchDetectSyntaxOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opBatchDetectSyntax = "BatchDetectSyntax"
 
@@ -92,7 +26,7 @@ const opBatchDetectSyntax = "BatchDetectSyntax"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/BatchDetectSyntax
-func (c *Client) BatchDetectSyntaxRequest(input *BatchDetectSyntaxInput) BatchDetectSyntaxRequest {
+func (c *Client) BatchDetectSyntaxRequest(input *types.BatchDetectSyntaxInput) BatchDetectSyntaxRequest {
 	op := &aws.Operation{
 		Name:       opBatchDetectSyntax,
 		HTTPMethod: "POST",
@@ -100,10 +34,10 @@ func (c *Client) BatchDetectSyntaxRequest(input *BatchDetectSyntaxInput) BatchDe
 	}
 
 	if input == nil {
-		input = &BatchDetectSyntaxInput{}
+		input = &types.BatchDetectSyntaxInput{}
 	}
 
-	req := c.newRequest(op, input, &BatchDetectSyntaxOutput{})
+	req := c.newRequest(op, input, &types.BatchDetectSyntaxOutput{})
 	return BatchDetectSyntaxRequest{Request: req, Input: input, Copy: c.BatchDetectSyntaxRequest}
 }
 
@@ -111,8 +45,8 @@ func (c *Client) BatchDetectSyntaxRequest(input *BatchDetectSyntaxInput) BatchDe
 // BatchDetectSyntax API operation.
 type BatchDetectSyntaxRequest struct {
 	*aws.Request
-	Input *BatchDetectSyntaxInput
-	Copy  func(*BatchDetectSyntaxInput) BatchDetectSyntaxRequest
+	Input *types.BatchDetectSyntaxInput
+	Copy  func(*types.BatchDetectSyntaxInput) BatchDetectSyntaxRequest
 }
 
 // Send marshals and sends the BatchDetectSyntax API request.
@@ -124,7 +58,7 @@ func (r BatchDetectSyntaxRequest) Send(ctx context.Context) (*BatchDetectSyntaxR
 	}
 
 	resp := &BatchDetectSyntaxResponse{
-		BatchDetectSyntaxOutput: r.Request.Data.(*BatchDetectSyntaxOutput),
+		BatchDetectSyntaxOutput: r.Request.Data.(*types.BatchDetectSyntaxOutput),
 		response:                &aws.Response{Request: r.Request},
 	}
 
@@ -134,7 +68,7 @@ func (r BatchDetectSyntaxRequest) Send(ctx context.Context) (*BatchDetectSyntaxR
 // BatchDetectSyntaxResponse is the response type for the
 // BatchDetectSyntax API operation.
 type BatchDetectSyntaxResponse struct {
-	*BatchDetectSyntaxOutput
+	*types.BatchDetectSyntaxOutput
 
 	response *aws.Response
 }

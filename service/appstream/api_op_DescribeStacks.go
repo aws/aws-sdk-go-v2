@@ -6,53 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/appstream/types"
 )
-
-type DescribeStacksInput struct {
-	_ struct{} `type:"structure"`
-
-	// The names of the stacks to describe.
-	Names []string `type:"list"`
-
-	// The pagination token to use to retrieve the next page of results for this
-	// operation. If this value is null, it retrieves the first page.
-	NextToken *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeStacksInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeStacksInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeStacksInput"}
-	if s.NextToken != nil && len(*s.NextToken) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribeStacksOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The pagination token to use to retrieve the next page of results for this
-	// operation. If there are no more pages, this value is null.
-	NextToken *string `min:"1" type:"string"`
-
-	// Information about the stacks.
-	Stacks []Stack `type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeStacksOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeStacks = "DescribeStacks"
 
@@ -70,7 +25,7 @@ const opDescribeStacks = "DescribeStacks"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DescribeStacks
-func (c *Client) DescribeStacksRequest(input *DescribeStacksInput) DescribeStacksRequest {
+func (c *Client) DescribeStacksRequest(input *types.DescribeStacksInput) DescribeStacksRequest {
 	op := &aws.Operation{
 		Name:       opDescribeStacks,
 		HTTPMethod: "POST",
@@ -78,10 +33,10 @@ func (c *Client) DescribeStacksRequest(input *DescribeStacksInput) DescribeStack
 	}
 
 	if input == nil {
-		input = &DescribeStacksInput{}
+		input = &types.DescribeStacksInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeStacksOutput{})
+	req := c.newRequest(op, input, &types.DescribeStacksOutput{})
 	return DescribeStacksRequest{Request: req, Input: input, Copy: c.DescribeStacksRequest}
 }
 
@@ -89,8 +44,8 @@ func (c *Client) DescribeStacksRequest(input *DescribeStacksInput) DescribeStack
 // DescribeStacks API operation.
 type DescribeStacksRequest struct {
 	*aws.Request
-	Input *DescribeStacksInput
-	Copy  func(*DescribeStacksInput) DescribeStacksRequest
+	Input *types.DescribeStacksInput
+	Copy  func(*types.DescribeStacksInput) DescribeStacksRequest
 }
 
 // Send marshals and sends the DescribeStacks API request.
@@ -102,7 +57,7 @@ func (r DescribeStacksRequest) Send(ctx context.Context) (*DescribeStacksRespons
 	}
 
 	resp := &DescribeStacksResponse{
-		DescribeStacksOutput: r.Request.Data.(*DescribeStacksOutput),
+		DescribeStacksOutput: r.Request.Data.(*types.DescribeStacksOutput),
 		response:             &aws.Response{Request: r.Request},
 	}
 
@@ -112,7 +67,7 @@ func (r DescribeStacksRequest) Send(ctx context.Context) (*DescribeStacksRespons
 // DescribeStacksResponse is the response type for the
 // DescribeStacks API operation.
 type DescribeStacksResponse struct {
-	*DescribeStacksOutput
+	*types.DescribeStacksOutput
 
 	response *aws.Response
 }

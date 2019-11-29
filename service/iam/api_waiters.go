@@ -7,6 +7,7 @@ import (
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
+	"github.com/aws/aws-sdk-go-v2/service/iam/types"
 )
 
 // WaitUntilInstanceProfileExists uses the IAM API operation
@@ -18,7 +19,7 @@ import (
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Client) WaitUntilInstanceProfileExists(ctx context.Context, input *GetInstanceProfileInput, opts ...aws.WaiterOption) error {
+func (c *Client) WaitUntilInstanceProfileExists(ctx context.Context, input *types.GetInstanceProfileInput, opts ...aws.WaiterOption) error {
 	w := aws.Waiter{
 		Name:        "WaitUntilInstanceProfileExists",
 		MaxAttempts: 40,
@@ -37,7 +38,7 @@ func (c *Client) WaitUntilInstanceProfileExists(ctx context.Context, input *GetI
 		},
 		Logger: c.Config.Logger,
 		NewRequest: func(opts []aws.Option) (*aws.Request, error) {
-			var inCpy *GetInstanceProfileInput
+			var inCpy *types.GetInstanceProfileInput
 			if input != nil {
 				tmp := *input
 				inCpy = &tmp
@@ -62,7 +63,7 @@ func (c *Client) WaitUntilInstanceProfileExists(ctx context.Context, input *GetI
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Client) WaitUntilPolicyExists(ctx context.Context, input *GetPolicyInput, opts ...aws.WaiterOption) error {
+func (c *Client) WaitUntilPolicyExists(ctx context.Context, input *types.GetPolicyInput, opts ...aws.WaiterOption) error {
 	w := aws.Waiter{
 		Name:        "WaitUntilPolicyExists",
 		MaxAttempts: 20,
@@ -81,7 +82,7 @@ func (c *Client) WaitUntilPolicyExists(ctx context.Context, input *GetPolicyInpu
 		},
 		Logger: c.Config.Logger,
 		NewRequest: func(opts []aws.Option) (*aws.Request, error) {
-			var inCpy *GetPolicyInput
+			var inCpy *types.GetPolicyInput
 			if input != nil {
 				tmp := *input
 				inCpy = &tmp
@@ -106,7 +107,7 @@ func (c *Client) WaitUntilPolicyExists(ctx context.Context, input *GetPolicyInpu
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Client) WaitUntilRoleExists(ctx context.Context, input *GetRoleInput, opts ...aws.WaiterOption) error {
+func (c *Client) WaitUntilRoleExists(ctx context.Context, input *types.GetRoleInput, opts ...aws.WaiterOption) error {
 	w := aws.Waiter{
 		Name:        "WaitUntilRoleExists",
 		MaxAttempts: 20,
@@ -125,7 +126,7 @@ func (c *Client) WaitUntilRoleExists(ctx context.Context, input *GetRoleInput, o
 		},
 		Logger: c.Config.Logger,
 		NewRequest: func(opts []aws.Option) (*aws.Request, error) {
-			var inCpy *GetRoleInput
+			var inCpy *types.GetRoleInput
 			if input != nil {
 				tmp := *input
 				inCpy = &tmp
@@ -150,7 +151,7 @@ func (c *Client) WaitUntilRoleExists(ctx context.Context, input *GetRoleInput, o
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Client) WaitUntilUserExists(ctx context.Context, input *GetUserInput, opts ...aws.WaiterOption) error {
+func (c *Client) WaitUntilUserExists(ctx context.Context, input *types.GetUserInput, opts ...aws.WaiterOption) error {
 	w := aws.Waiter{
 		Name:        "WaitUntilUserExists",
 		MaxAttempts: 20,
@@ -169,7 +170,7 @@ func (c *Client) WaitUntilUserExists(ctx context.Context, input *GetUserInput, o
 		},
 		Logger: c.Config.Logger,
 		NewRequest: func(opts []aws.Option) (*aws.Request, error) {
-			var inCpy *GetUserInput
+			var inCpy *types.GetUserInput
 			if input != nil {
 				tmp := *input
 				inCpy = &tmp

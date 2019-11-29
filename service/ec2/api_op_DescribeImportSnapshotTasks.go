@@ -6,53 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-type DescribeImportSnapshotTasksInput struct {
-	_ struct{} `type:"structure"`
-
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have
-	// the required permissions, the error response is DryRunOperation. Otherwise,
-	// it is UnauthorizedOperation.
-	DryRun *bool `type:"boolean"`
-
-	// The filters.
-	Filters []Filter `locationNameList:"Filter" type:"list"`
-
-	// A list of import snapshot task IDs.
-	ImportTaskIds []string `locationName:"ImportTaskId" locationNameList:"ImportTaskId" type:"list"`
-
-	// The maximum number of results to return in a single call. To retrieve the
-	// remaining results, make another call with the returned NextToken value.
-	MaxResults *int64 `type:"integer"`
-
-	// A token that indicates the next page of results.
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeImportSnapshotTasksInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type DescribeImportSnapshotTasksOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A list of zero or more import snapshot tasks that are currently active or
-	// were completed or canceled in the previous 7 days.
-	ImportSnapshotTasks []ImportSnapshotTask `locationName:"importSnapshotTaskSet" locationNameList:"item" type:"list"`
-
-	// The token to use to get the next page of results. This value is null when
-	// there are no more results to return.
-	NextToken *string `locationName:"nextToken" type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeImportSnapshotTasksOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeImportSnapshotTasks = "DescribeImportSnapshotTasks"
 
@@ -69,7 +24,7 @@ const opDescribeImportSnapshotTasks = "DescribeImportSnapshotTasks"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeImportSnapshotTasks
-func (c *Client) DescribeImportSnapshotTasksRequest(input *DescribeImportSnapshotTasksInput) DescribeImportSnapshotTasksRequest {
+func (c *Client) DescribeImportSnapshotTasksRequest(input *types.DescribeImportSnapshotTasksInput) DescribeImportSnapshotTasksRequest {
 	op := &aws.Operation{
 		Name:       opDescribeImportSnapshotTasks,
 		HTTPMethod: "POST",
@@ -83,10 +38,10 @@ func (c *Client) DescribeImportSnapshotTasksRequest(input *DescribeImportSnapsho
 	}
 
 	if input == nil {
-		input = &DescribeImportSnapshotTasksInput{}
+		input = &types.DescribeImportSnapshotTasksInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeImportSnapshotTasksOutput{})
+	req := c.newRequest(op, input, &types.DescribeImportSnapshotTasksOutput{})
 	return DescribeImportSnapshotTasksRequest{Request: req, Input: input, Copy: c.DescribeImportSnapshotTasksRequest}
 }
 
@@ -94,8 +49,8 @@ func (c *Client) DescribeImportSnapshotTasksRequest(input *DescribeImportSnapsho
 // DescribeImportSnapshotTasks API operation.
 type DescribeImportSnapshotTasksRequest struct {
 	*aws.Request
-	Input *DescribeImportSnapshotTasksInput
-	Copy  func(*DescribeImportSnapshotTasksInput) DescribeImportSnapshotTasksRequest
+	Input *types.DescribeImportSnapshotTasksInput
+	Copy  func(*types.DescribeImportSnapshotTasksInput) DescribeImportSnapshotTasksRequest
 }
 
 // Send marshals and sends the DescribeImportSnapshotTasks API request.
@@ -107,7 +62,7 @@ func (r DescribeImportSnapshotTasksRequest) Send(ctx context.Context) (*Describe
 	}
 
 	resp := &DescribeImportSnapshotTasksResponse{
-		DescribeImportSnapshotTasksOutput: r.Request.Data.(*DescribeImportSnapshotTasksOutput),
+		DescribeImportSnapshotTasksOutput: r.Request.Data.(*types.DescribeImportSnapshotTasksOutput),
 		response:                          &aws.Response{Request: r.Request},
 	}
 
@@ -137,7 +92,7 @@ func NewDescribeImportSnapshotTasksPaginator(req DescribeImportSnapshotTasksRequ
 	return DescribeImportSnapshotTasksPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *DescribeImportSnapshotTasksInput
+				var inCpy *types.DescribeImportSnapshotTasksInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -157,14 +112,14 @@ type DescribeImportSnapshotTasksPaginator struct {
 	aws.Pager
 }
 
-func (p *DescribeImportSnapshotTasksPaginator) CurrentPage() *DescribeImportSnapshotTasksOutput {
-	return p.Pager.CurrentPage().(*DescribeImportSnapshotTasksOutput)
+func (p *DescribeImportSnapshotTasksPaginator) CurrentPage() *types.DescribeImportSnapshotTasksOutput {
+	return p.Pager.CurrentPage().(*types.DescribeImportSnapshotTasksOutput)
 }
 
 // DescribeImportSnapshotTasksResponse is the response type for the
 // DescribeImportSnapshotTasks API operation.
 type DescribeImportSnapshotTasksResponse struct {
-	*DescribeImportSnapshotTasksOutput
+	*types.DescribeImportSnapshotTasksOutput
 
 	response *aws.Response
 }

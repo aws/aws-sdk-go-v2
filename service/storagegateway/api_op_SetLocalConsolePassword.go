@@ -6,66 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/storagegateway/types"
 )
-
-// SetLocalConsolePasswordInput
-type SetLocalConsolePasswordInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation
-	// to return a list of gateways for your account and AWS Region.
-	//
-	// GatewayARN is a required field
-	GatewayARN *string `min:"50" type:"string" required:"true"`
-
-	// The password you want to set for your VM local console.
-	//
-	// LocalConsolePassword is a required field
-	LocalConsolePassword *string `min:"6" type:"string" required:"true" sensitive:"true"`
-}
-
-// String returns the string representation
-func (s SetLocalConsolePasswordInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *SetLocalConsolePasswordInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "SetLocalConsolePasswordInput"}
-
-	if s.GatewayARN == nil {
-		invalidParams.Add(aws.NewErrParamRequired("GatewayARN"))
-	}
-	if s.GatewayARN != nil && len(*s.GatewayARN) < 50 {
-		invalidParams.Add(aws.NewErrParamMinLen("GatewayARN", 50))
-	}
-
-	if s.LocalConsolePassword == nil {
-		invalidParams.Add(aws.NewErrParamRequired("LocalConsolePassword"))
-	}
-	if s.LocalConsolePassword != nil && len(*s.LocalConsolePassword) < 6 {
-		invalidParams.Add(aws.NewErrParamMinLen("LocalConsolePassword", 6))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type SetLocalConsolePasswordOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation
-	// to return a list of gateways for your account and AWS Region.
-	GatewayARN *string `min:"50" type:"string"`
-}
-
-// String returns the string representation
-func (s SetLocalConsolePasswordOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opSetLocalConsolePassword = "SetLocalConsolePassword"
 
@@ -85,7 +27,7 @@ const opSetLocalConsolePassword = "SetLocalConsolePassword"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/SetLocalConsolePassword
-func (c *Client) SetLocalConsolePasswordRequest(input *SetLocalConsolePasswordInput) SetLocalConsolePasswordRequest {
+func (c *Client) SetLocalConsolePasswordRequest(input *types.SetLocalConsolePasswordInput) SetLocalConsolePasswordRequest {
 	op := &aws.Operation{
 		Name:       opSetLocalConsolePassword,
 		HTTPMethod: "POST",
@@ -93,10 +35,10 @@ func (c *Client) SetLocalConsolePasswordRequest(input *SetLocalConsolePasswordIn
 	}
 
 	if input == nil {
-		input = &SetLocalConsolePasswordInput{}
+		input = &types.SetLocalConsolePasswordInput{}
 	}
 
-	req := c.newRequest(op, input, &SetLocalConsolePasswordOutput{})
+	req := c.newRequest(op, input, &types.SetLocalConsolePasswordOutput{})
 	return SetLocalConsolePasswordRequest{Request: req, Input: input, Copy: c.SetLocalConsolePasswordRequest}
 }
 
@@ -104,8 +46,8 @@ func (c *Client) SetLocalConsolePasswordRequest(input *SetLocalConsolePasswordIn
 // SetLocalConsolePassword API operation.
 type SetLocalConsolePasswordRequest struct {
 	*aws.Request
-	Input *SetLocalConsolePasswordInput
-	Copy  func(*SetLocalConsolePasswordInput) SetLocalConsolePasswordRequest
+	Input *types.SetLocalConsolePasswordInput
+	Copy  func(*types.SetLocalConsolePasswordInput) SetLocalConsolePasswordRequest
 }
 
 // Send marshals and sends the SetLocalConsolePassword API request.
@@ -117,7 +59,7 @@ func (r SetLocalConsolePasswordRequest) Send(ctx context.Context) (*SetLocalCons
 	}
 
 	resp := &SetLocalConsolePasswordResponse{
-		SetLocalConsolePasswordOutput: r.Request.Data.(*SetLocalConsolePasswordOutput),
+		SetLocalConsolePasswordOutput: r.Request.Data.(*types.SetLocalConsolePasswordOutput),
 		response:                      &aws.Response{Request: r.Request},
 	}
 
@@ -127,7 +69,7 @@ func (r SetLocalConsolePasswordRequest) Send(ctx context.Context) (*SetLocalCons
 // SetLocalConsolePasswordResponse is the response type for the
 // SetLocalConsolePassword API operation.
 type SetLocalConsolePasswordResponse struct {
-	*SetLocalConsolePasswordOutput
+	*types.SetLocalConsolePasswordOutput
 
 	response *aws.Response
 }

@@ -6,58 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/wafregional/types"
 )
-
-type ListResourcesForWebACLInput struct {
-	_ struct{} `type:"structure"`
-
-	// The type of resource to list, either an application load balancer or Amazon
-	// API Gateway.
-	ResourceType ResourceType `type:"string" enum:"true"`
-
-	// The unique identifier (ID) of the web ACL for which to list the associated
-	// resources.
-	//
-	// WebACLId is a required field
-	WebACLId *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s ListResourcesForWebACLInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListResourcesForWebACLInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListResourcesForWebACLInput"}
-
-	if s.WebACLId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("WebACLId"))
-	}
-	if s.WebACLId != nil && len(*s.WebACLId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("WebACLId", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ListResourcesForWebACLOutput struct {
-	_ struct{} `type:"structure"`
-
-	// An array of ARNs (Amazon Resource Names) of the resources associated with
-	// the specified web ACL. An array with zero elements is returned if there are
-	// no resources associated with the web ACL.
-	ResourceArns []string `type:"list"`
-}
-
-// String returns the string representation
-func (s ListResourcesForWebACLOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListResourcesForWebACL = "ListResourcesForWebACL"
 
@@ -74,7 +24,7 @@ const opListResourcesForWebACL = "ListResourcesForWebACL"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/ListResourcesForWebACL
-func (c *Client) ListResourcesForWebACLRequest(input *ListResourcesForWebACLInput) ListResourcesForWebACLRequest {
+func (c *Client) ListResourcesForWebACLRequest(input *types.ListResourcesForWebACLInput) ListResourcesForWebACLRequest {
 	op := &aws.Operation{
 		Name:       opListResourcesForWebACL,
 		HTTPMethod: "POST",
@@ -82,10 +32,10 @@ func (c *Client) ListResourcesForWebACLRequest(input *ListResourcesForWebACLInpu
 	}
 
 	if input == nil {
-		input = &ListResourcesForWebACLInput{}
+		input = &types.ListResourcesForWebACLInput{}
 	}
 
-	req := c.newRequest(op, input, &ListResourcesForWebACLOutput{})
+	req := c.newRequest(op, input, &types.ListResourcesForWebACLOutput{})
 	return ListResourcesForWebACLRequest{Request: req, Input: input, Copy: c.ListResourcesForWebACLRequest}
 }
 
@@ -93,8 +43,8 @@ func (c *Client) ListResourcesForWebACLRequest(input *ListResourcesForWebACLInpu
 // ListResourcesForWebACL API operation.
 type ListResourcesForWebACLRequest struct {
 	*aws.Request
-	Input *ListResourcesForWebACLInput
-	Copy  func(*ListResourcesForWebACLInput) ListResourcesForWebACLRequest
+	Input *types.ListResourcesForWebACLInput
+	Copy  func(*types.ListResourcesForWebACLInput) ListResourcesForWebACLRequest
 }
 
 // Send marshals and sends the ListResourcesForWebACL API request.
@@ -106,7 +56,7 @@ func (r ListResourcesForWebACLRequest) Send(ctx context.Context) (*ListResources
 	}
 
 	resp := &ListResourcesForWebACLResponse{
-		ListResourcesForWebACLOutput: r.Request.Data.(*ListResourcesForWebACLOutput),
+		ListResourcesForWebACLOutput: r.Request.Data.(*types.ListResourcesForWebACLOutput),
 		response:                     &aws.Response{Request: r.Request},
 	}
 
@@ -116,7 +66,7 @@ func (r ListResourcesForWebACLRequest) Send(ctx context.Context) (*ListResources
 // ListResourcesForWebACLResponse is the response type for the
 // ListResourcesForWebACL API operation.
 type ListResourcesForWebACLResponse struct {
-	*ListResourcesForWebACLOutput
+	*types.ListResourcesForWebACLOutput
 
 	response *aws.Response
 }

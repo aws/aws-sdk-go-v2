@@ -6,103 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/medialive/types"
 )
-
-type DescribeScheduleInput struct {
-	_ struct{} `type:"structure"`
-
-	// ChannelId is a required field
-	ChannelId *string `location:"uri" locationName:"channelId" type:"string" required:"true"`
-
-	MaxResults *int64 `location:"querystring" locationName:"maxResults" min:"1" type:"integer"`
-
-	NextToken *string `location:"querystring" locationName:"nextToken" type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeScheduleInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeScheduleInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeScheduleInput"}
-
-	if s.ChannelId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ChannelId"))
-	}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DescribeScheduleInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.ChannelId != nil {
-		v := *s.ChannelId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "channelId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.MaxResults != nil {
-		v := *s.MaxResults
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "maxResults", protocol.Int64Value(v), metadata)
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type DescribeScheduleOutput struct {
-	_ struct{} `type:"structure"`
-
-	NextToken *string `locationName:"nextToken" type:"string"`
-
-	ScheduleActions []ScheduleAction `locationName:"scheduleActions" type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeScheduleOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DescribeScheduleOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.ScheduleActions != nil {
-		v := s.ScheduleActions
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "scheduleActions", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	return nil
-}
 
 const opDescribeSchedule = "DescribeSchedule"
 
@@ -119,7 +24,7 @@ const opDescribeSchedule = "DescribeSchedule"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/DescribeSchedule
-func (c *Client) DescribeScheduleRequest(input *DescribeScheduleInput) DescribeScheduleRequest {
+func (c *Client) DescribeScheduleRequest(input *types.DescribeScheduleInput) DescribeScheduleRequest {
 	op := &aws.Operation{
 		Name:       opDescribeSchedule,
 		HTTPMethod: "GET",
@@ -133,10 +38,10 @@ func (c *Client) DescribeScheduleRequest(input *DescribeScheduleInput) DescribeS
 	}
 
 	if input == nil {
-		input = &DescribeScheduleInput{}
+		input = &types.DescribeScheduleInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeScheduleOutput{})
+	req := c.newRequest(op, input, &types.DescribeScheduleOutput{})
 	return DescribeScheduleRequest{Request: req, Input: input, Copy: c.DescribeScheduleRequest}
 }
 
@@ -144,8 +49,8 @@ func (c *Client) DescribeScheduleRequest(input *DescribeScheduleInput) DescribeS
 // DescribeSchedule API operation.
 type DescribeScheduleRequest struct {
 	*aws.Request
-	Input *DescribeScheduleInput
-	Copy  func(*DescribeScheduleInput) DescribeScheduleRequest
+	Input *types.DescribeScheduleInput
+	Copy  func(*types.DescribeScheduleInput) DescribeScheduleRequest
 }
 
 // Send marshals and sends the DescribeSchedule API request.
@@ -157,7 +62,7 @@ func (r DescribeScheduleRequest) Send(ctx context.Context) (*DescribeScheduleRes
 	}
 
 	resp := &DescribeScheduleResponse{
-		DescribeScheduleOutput: r.Request.Data.(*DescribeScheduleOutput),
+		DescribeScheduleOutput: r.Request.Data.(*types.DescribeScheduleOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -187,7 +92,7 @@ func NewDescribeSchedulePaginator(req DescribeScheduleRequest) DescribeScheduleP
 	return DescribeSchedulePaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *DescribeScheduleInput
+				var inCpy *types.DescribeScheduleInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -207,14 +112,14 @@ type DescribeSchedulePaginator struct {
 	aws.Pager
 }
 
-func (p *DescribeSchedulePaginator) CurrentPage() *DescribeScheduleOutput {
-	return p.Pager.CurrentPage().(*DescribeScheduleOutput)
+func (p *DescribeSchedulePaginator) CurrentPage() *types.DescribeScheduleOutput {
+	return p.Pager.CurrentPage().(*types.DescribeScheduleOutput)
 }
 
 // DescribeScheduleResponse is the response type for the
 // DescribeSchedule API operation.
 type DescribeScheduleResponse struct {
-	*DescribeScheduleOutput
+	*types.DescribeScheduleOutput
 
 	response *aws.Response
 }

@@ -10,6 +10,7 @@ package organizationsiface
 
 import (
 	"github.com/aws/aws-sdk-go-v2/service/organizations"
+	"github.com/aws/aws-sdk-go-v2/service/organizations/types"
 )
 
 // ClientAPI provides an interface to enable mocking the
@@ -43,7 +44,7 @@ import (
 //    type mockClientClient struct {
 //        organizationsiface.ClientPI
 //    }
-//    func (m *mockClientClient) AcceptHandshake(input *organizations.AcceptHandshakeInput) (*organizations.AcceptHandshakeOutput, error) {
+//    func (m *mockClientClient) AcceptHandshake(input *types.AcceptHandshakeInput) (*types.AcceptHandshakeOutput, error) {
 //        // mock response/functionality
 //    }
 //
@@ -61,97 +62,97 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type ClientAPI interface {
-	AcceptHandshakeRequest(*organizations.AcceptHandshakeInput) organizations.AcceptHandshakeRequest
+	AcceptHandshakeRequest(*types.AcceptHandshakeInput) organizations.AcceptHandshakeRequest
 
-	AttachPolicyRequest(*organizations.AttachPolicyInput) organizations.AttachPolicyRequest
+	AttachPolicyRequest(*types.AttachPolicyInput) organizations.AttachPolicyRequest
 
-	CancelHandshakeRequest(*organizations.CancelHandshakeInput) organizations.CancelHandshakeRequest
+	CancelHandshakeRequest(*types.CancelHandshakeInput) organizations.CancelHandshakeRequest
 
-	CreateAccountRequest(*organizations.CreateAccountInput) organizations.CreateAccountRequest
+	CreateAccountRequest(*types.CreateAccountInput) organizations.CreateAccountRequest
 
-	CreateGovCloudAccountRequest(*organizations.CreateGovCloudAccountInput) organizations.CreateGovCloudAccountRequest
+	CreateGovCloudAccountRequest(*types.CreateGovCloudAccountInput) organizations.CreateGovCloudAccountRequest
 
-	CreateOrganizationRequest(*organizations.CreateOrganizationInput) organizations.CreateOrganizationRequest
+	CreateOrganizationRequest(*types.CreateOrganizationInput) organizations.CreateOrganizationRequest
 
-	CreateOrganizationalUnitRequest(*organizations.CreateOrganizationalUnitInput) organizations.CreateOrganizationalUnitRequest
+	CreateOrganizationalUnitRequest(*types.CreateOrganizationalUnitInput) organizations.CreateOrganizationalUnitRequest
 
-	CreatePolicyRequest(*organizations.CreatePolicyInput) organizations.CreatePolicyRequest
+	CreatePolicyRequest(*types.CreatePolicyInput) organizations.CreatePolicyRequest
 
-	DeclineHandshakeRequest(*organizations.DeclineHandshakeInput) organizations.DeclineHandshakeRequest
+	DeclineHandshakeRequest(*types.DeclineHandshakeInput) organizations.DeclineHandshakeRequest
 
-	DeleteOrganizationRequest(*organizations.DeleteOrganizationInput) organizations.DeleteOrganizationRequest
+	DeleteOrganizationRequest(*types.DeleteOrganizationInput) organizations.DeleteOrganizationRequest
 
-	DeleteOrganizationalUnitRequest(*organizations.DeleteOrganizationalUnitInput) organizations.DeleteOrganizationalUnitRequest
+	DeleteOrganizationalUnitRequest(*types.DeleteOrganizationalUnitInput) organizations.DeleteOrganizationalUnitRequest
 
-	DeletePolicyRequest(*organizations.DeletePolicyInput) organizations.DeletePolicyRequest
+	DeletePolicyRequest(*types.DeletePolicyInput) organizations.DeletePolicyRequest
 
-	DescribeAccountRequest(*organizations.DescribeAccountInput) organizations.DescribeAccountRequest
+	DescribeAccountRequest(*types.DescribeAccountInput) organizations.DescribeAccountRequest
 
-	DescribeCreateAccountStatusRequest(*organizations.DescribeCreateAccountStatusInput) organizations.DescribeCreateAccountStatusRequest
+	DescribeCreateAccountStatusRequest(*types.DescribeCreateAccountStatusInput) organizations.DescribeCreateAccountStatusRequest
 
-	DescribeHandshakeRequest(*organizations.DescribeHandshakeInput) organizations.DescribeHandshakeRequest
+	DescribeHandshakeRequest(*types.DescribeHandshakeInput) organizations.DescribeHandshakeRequest
 
-	DescribeOrganizationRequest(*organizations.DescribeOrganizationInput) organizations.DescribeOrganizationRequest
+	DescribeOrganizationRequest(*types.DescribeOrganizationInput) organizations.DescribeOrganizationRequest
 
-	DescribeOrganizationalUnitRequest(*organizations.DescribeOrganizationalUnitInput) organizations.DescribeOrganizationalUnitRequest
+	DescribeOrganizationalUnitRequest(*types.DescribeOrganizationalUnitInput) organizations.DescribeOrganizationalUnitRequest
 
-	DescribePolicyRequest(*organizations.DescribePolicyInput) organizations.DescribePolicyRequest
+	DescribePolicyRequest(*types.DescribePolicyInput) organizations.DescribePolicyRequest
 
-	DetachPolicyRequest(*organizations.DetachPolicyInput) organizations.DetachPolicyRequest
+	DetachPolicyRequest(*types.DetachPolicyInput) organizations.DetachPolicyRequest
 
-	DisableAWSServiceAccessRequest(*organizations.DisableAWSServiceAccessInput) organizations.DisableAWSServiceAccessRequest
+	DisableAWSServiceAccessRequest(*types.DisableAWSServiceAccessInput) organizations.DisableAWSServiceAccessRequest
 
-	DisablePolicyTypeRequest(*organizations.DisablePolicyTypeInput) organizations.DisablePolicyTypeRequest
+	DisablePolicyTypeRequest(*types.DisablePolicyTypeInput) organizations.DisablePolicyTypeRequest
 
-	EnableAWSServiceAccessRequest(*organizations.EnableAWSServiceAccessInput) organizations.EnableAWSServiceAccessRequest
+	EnableAWSServiceAccessRequest(*types.EnableAWSServiceAccessInput) organizations.EnableAWSServiceAccessRequest
 
-	EnableAllFeaturesRequest(*organizations.EnableAllFeaturesInput) organizations.EnableAllFeaturesRequest
+	EnableAllFeaturesRequest(*types.EnableAllFeaturesInput) organizations.EnableAllFeaturesRequest
 
-	EnablePolicyTypeRequest(*organizations.EnablePolicyTypeInput) organizations.EnablePolicyTypeRequest
+	EnablePolicyTypeRequest(*types.EnablePolicyTypeInput) organizations.EnablePolicyTypeRequest
 
-	InviteAccountToOrganizationRequest(*organizations.InviteAccountToOrganizationInput) organizations.InviteAccountToOrganizationRequest
+	InviteAccountToOrganizationRequest(*types.InviteAccountToOrganizationInput) organizations.InviteAccountToOrganizationRequest
 
-	LeaveOrganizationRequest(*organizations.LeaveOrganizationInput) organizations.LeaveOrganizationRequest
+	LeaveOrganizationRequest(*types.LeaveOrganizationInput) organizations.LeaveOrganizationRequest
 
-	ListAWSServiceAccessForOrganizationRequest(*organizations.ListAWSServiceAccessForOrganizationInput) organizations.ListAWSServiceAccessForOrganizationRequest
+	ListAWSServiceAccessForOrganizationRequest(*types.ListAWSServiceAccessForOrganizationInput) organizations.ListAWSServiceAccessForOrganizationRequest
 
-	ListAccountsRequest(*organizations.ListAccountsInput) organizations.ListAccountsRequest
+	ListAccountsRequest(*types.ListAccountsInput) organizations.ListAccountsRequest
 
-	ListAccountsForParentRequest(*organizations.ListAccountsForParentInput) organizations.ListAccountsForParentRequest
+	ListAccountsForParentRequest(*types.ListAccountsForParentInput) organizations.ListAccountsForParentRequest
 
-	ListChildrenRequest(*organizations.ListChildrenInput) organizations.ListChildrenRequest
+	ListChildrenRequest(*types.ListChildrenInput) organizations.ListChildrenRequest
 
-	ListCreateAccountStatusRequest(*organizations.ListCreateAccountStatusInput) organizations.ListCreateAccountStatusRequest
+	ListCreateAccountStatusRequest(*types.ListCreateAccountStatusInput) organizations.ListCreateAccountStatusRequest
 
-	ListHandshakesForAccountRequest(*organizations.ListHandshakesForAccountInput) organizations.ListHandshakesForAccountRequest
+	ListHandshakesForAccountRequest(*types.ListHandshakesForAccountInput) organizations.ListHandshakesForAccountRequest
 
-	ListHandshakesForOrganizationRequest(*organizations.ListHandshakesForOrganizationInput) organizations.ListHandshakesForOrganizationRequest
+	ListHandshakesForOrganizationRequest(*types.ListHandshakesForOrganizationInput) organizations.ListHandshakesForOrganizationRequest
 
-	ListOrganizationalUnitsForParentRequest(*organizations.ListOrganizationalUnitsForParentInput) organizations.ListOrganizationalUnitsForParentRequest
+	ListOrganizationalUnitsForParentRequest(*types.ListOrganizationalUnitsForParentInput) organizations.ListOrganizationalUnitsForParentRequest
 
-	ListParentsRequest(*organizations.ListParentsInput) organizations.ListParentsRequest
+	ListParentsRequest(*types.ListParentsInput) organizations.ListParentsRequest
 
-	ListPoliciesRequest(*organizations.ListPoliciesInput) organizations.ListPoliciesRequest
+	ListPoliciesRequest(*types.ListPoliciesInput) organizations.ListPoliciesRequest
 
-	ListPoliciesForTargetRequest(*organizations.ListPoliciesForTargetInput) organizations.ListPoliciesForTargetRequest
+	ListPoliciesForTargetRequest(*types.ListPoliciesForTargetInput) organizations.ListPoliciesForTargetRequest
 
-	ListRootsRequest(*organizations.ListRootsInput) organizations.ListRootsRequest
+	ListRootsRequest(*types.ListRootsInput) organizations.ListRootsRequest
 
-	ListTagsForResourceRequest(*organizations.ListTagsForResourceInput) organizations.ListTagsForResourceRequest
+	ListTagsForResourceRequest(*types.ListTagsForResourceInput) organizations.ListTagsForResourceRequest
 
-	ListTargetsForPolicyRequest(*organizations.ListTargetsForPolicyInput) organizations.ListTargetsForPolicyRequest
+	ListTargetsForPolicyRequest(*types.ListTargetsForPolicyInput) organizations.ListTargetsForPolicyRequest
 
-	MoveAccountRequest(*organizations.MoveAccountInput) organizations.MoveAccountRequest
+	MoveAccountRequest(*types.MoveAccountInput) organizations.MoveAccountRequest
 
-	RemoveAccountFromOrganizationRequest(*organizations.RemoveAccountFromOrganizationInput) organizations.RemoveAccountFromOrganizationRequest
+	RemoveAccountFromOrganizationRequest(*types.RemoveAccountFromOrganizationInput) organizations.RemoveAccountFromOrganizationRequest
 
-	TagResourceRequest(*organizations.TagResourceInput) organizations.TagResourceRequest
+	TagResourceRequest(*types.TagResourceInput) organizations.TagResourceRequest
 
-	UntagResourceRequest(*organizations.UntagResourceInput) organizations.UntagResourceRequest
+	UntagResourceRequest(*types.UntagResourceInput) organizations.UntagResourceRequest
 
-	UpdateOrganizationalUnitRequest(*organizations.UpdateOrganizationalUnitInput) organizations.UpdateOrganizationalUnitRequest
+	UpdateOrganizationalUnitRequest(*types.UpdateOrganizationalUnitInput) organizations.UpdateOrganizationalUnitRequest
 
-	UpdatePolicyRequest(*organizations.UpdatePolicyInput) organizations.UpdatePolicyRequest
+	UpdatePolicyRequest(*types.UpdatePolicyInput) organizations.UpdatePolicyRequest
 }
 
 var _ ClientAPI = (*organizations.Client)(nil)

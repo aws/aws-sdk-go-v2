@@ -6,96 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/cloudfront/types"
 )
-
-type CreatePublicKeyInput struct {
-	_ struct{} `type:"structure" payload:"PublicKeyConfig"`
-
-	// The request to add a public key to CloudFront.
-	//
-	// PublicKeyConfig is a required field
-	PublicKeyConfig *PublicKeyConfig `locationName:"PublicKeyConfig" type:"structure" required:"true" xmlURI:"http://cloudfront.amazonaws.com/doc/2019-03-26/"`
-}
-
-// String returns the string representation
-func (s CreatePublicKeyInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreatePublicKeyInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreatePublicKeyInput"}
-
-	if s.PublicKeyConfig == nil {
-		invalidParams.Add(aws.NewErrParamRequired("PublicKeyConfig"))
-	}
-	if s.PublicKeyConfig != nil {
-		if err := s.PublicKeyConfig.Validate(); err != nil {
-			invalidParams.AddNested("PublicKeyConfig", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s CreatePublicKeyInput) MarshalFields(e protocol.FieldEncoder) error {
-
-	if s.PublicKeyConfig != nil {
-		v := s.PublicKeyConfig
-
-		metadata := protocol.Metadata{XMLNamespaceURI: "http://cloudfront.amazonaws.com/doc/2019-03-26/"}
-		e.SetFields(protocol.PayloadTarget, "PublicKeyConfig", v, metadata)
-	}
-	return nil
-}
-
-type CreatePublicKeyOutput struct {
-	_ struct{} `type:"structure" payload:"PublicKey"`
-
-	// The current version of the public key. For example: E2QWRUHAPOMQZL.
-	ETag *string `location:"header" locationName:"ETag" type:"string"`
-
-	// The fully qualified URI of the new public key resource just created. For
-	// example: https://cloudfront.amazonaws.com/2010-11-01/cloudfront-public-key/EDFDVBD632BHDS5.
-	Location *string `location:"header" locationName:"Location" type:"string"`
-
-	// Returned when you add a public key.
-	PublicKey *PublicKey `type:"structure"`
-}
-
-// String returns the string representation
-func (s CreatePublicKeyOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s CreatePublicKeyOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.ETag != nil {
-		v := *s.ETag
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "ETag", protocol.StringValue(v), metadata)
-	}
-	if s.Location != nil {
-		v := *s.Location
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "Location", protocol.StringValue(v), metadata)
-	}
-	if s.PublicKey != nil {
-		v := s.PublicKey
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.PayloadTarget, "PublicKey", v, metadata)
-	}
-	return nil
-}
 
 const opCreatePublicKey = "CreatePublicKey2019_03_26"
 
@@ -113,7 +25,7 @@ const opCreatePublicKey = "CreatePublicKey2019_03_26"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/CreatePublicKey
-func (c *Client) CreatePublicKeyRequest(input *CreatePublicKeyInput) CreatePublicKeyRequest {
+func (c *Client) CreatePublicKeyRequest(input *types.CreatePublicKeyInput) CreatePublicKeyRequest {
 	op := &aws.Operation{
 		Name:       opCreatePublicKey,
 		HTTPMethod: "POST",
@@ -121,10 +33,10 @@ func (c *Client) CreatePublicKeyRequest(input *CreatePublicKeyInput) CreatePubli
 	}
 
 	if input == nil {
-		input = &CreatePublicKeyInput{}
+		input = &types.CreatePublicKeyInput{}
 	}
 
-	req := c.newRequest(op, input, &CreatePublicKeyOutput{})
+	req := c.newRequest(op, input, &types.CreatePublicKeyOutput{})
 	return CreatePublicKeyRequest{Request: req, Input: input, Copy: c.CreatePublicKeyRequest}
 }
 
@@ -132,8 +44,8 @@ func (c *Client) CreatePublicKeyRequest(input *CreatePublicKeyInput) CreatePubli
 // CreatePublicKey API operation.
 type CreatePublicKeyRequest struct {
 	*aws.Request
-	Input *CreatePublicKeyInput
-	Copy  func(*CreatePublicKeyInput) CreatePublicKeyRequest
+	Input *types.CreatePublicKeyInput
+	Copy  func(*types.CreatePublicKeyInput) CreatePublicKeyRequest
 }
 
 // Send marshals and sends the CreatePublicKey API request.
@@ -145,7 +57,7 @@ func (r CreatePublicKeyRequest) Send(ctx context.Context) (*CreatePublicKeyRespo
 	}
 
 	resp := &CreatePublicKeyResponse{
-		CreatePublicKeyOutput: r.Request.Data.(*CreatePublicKeyOutput),
+		CreatePublicKeyOutput: r.Request.Data.(*types.CreatePublicKeyOutput),
 		response:              &aws.Response{Request: r.Request},
 	}
 
@@ -155,7 +67,7 @@ func (r CreatePublicKeyRequest) Send(ctx context.Context) (*CreatePublicKeyRespo
 // CreatePublicKeyResponse is the response type for the
 // CreatePublicKey API operation.
 type CreatePublicKeyResponse struct {
-	*CreatePublicKeyOutput
+	*types.CreatePublicKeyOutput
 
 	response *aws.Response
 }

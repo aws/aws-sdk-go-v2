@@ -6,65 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-type DescribeBundleTasksInput struct {
-	_ struct{} `type:"structure"`
-
-	// The bundle task IDs.
-	//
-	// Default: Describes all your bundle tasks.
-	BundleIds []string `locationName:"BundleId" locationNameList:"BundleId" type:"list"`
-
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have
-	// the required permissions, the error response is DryRunOperation. Otherwise,
-	// it is UnauthorizedOperation.
-	DryRun *bool `locationName:"dryRun" type:"boolean"`
-
-	// The filters.
-	//
-	//    * bundle-id - The ID of the bundle task.
-	//
-	//    * error-code - If the task failed, the error code returned.
-	//
-	//    * error-message - If the task failed, the error message returned.
-	//
-	//    * instance-id - The ID of the instance.
-	//
-	//    * progress - The level of task completion, as a percentage (for example,
-	//    20%).
-	//
-	//    * s3-bucket - The Amazon S3 bucket to store the AMI.
-	//
-	//    * s3-prefix - The beginning of the AMI name.
-	//
-	//    * start-time - The time the task started (for example, 2013-09-15T17:15:20.000Z).
-	//
-	//    * state - The state of the task (pending | waiting-for-shutdown | bundling
-	//    | storing | cancelling | complete | failed).
-	//
-	//    * update-time - The time of the most recent update for the task.
-	Filters []Filter `locationName:"Filter" locationNameList:"Filter" type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeBundleTasksInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type DescribeBundleTasksOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Information about the bundle tasks.
-	BundleTasks []BundleTask `locationName:"bundleInstanceTasksSet" locationNameList:"item" type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeBundleTasksOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeBundleTasks = "DescribeBundleTasks"
 
@@ -86,7 +29,7 @@ const opDescribeBundleTasks = "DescribeBundleTasks"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeBundleTasks
-func (c *Client) DescribeBundleTasksRequest(input *DescribeBundleTasksInput) DescribeBundleTasksRequest {
+func (c *Client) DescribeBundleTasksRequest(input *types.DescribeBundleTasksInput) DescribeBundleTasksRequest {
 	op := &aws.Operation{
 		Name:       opDescribeBundleTasks,
 		HTTPMethod: "POST",
@@ -94,10 +37,10 @@ func (c *Client) DescribeBundleTasksRequest(input *DescribeBundleTasksInput) Des
 	}
 
 	if input == nil {
-		input = &DescribeBundleTasksInput{}
+		input = &types.DescribeBundleTasksInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeBundleTasksOutput{})
+	req := c.newRequest(op, input, &types.DescribeBundleTasksOutput{})
 	return DescribeBundleTasksRequest{Request: req, Input: input, Copy: c.DescribeBundleTasksRequest}
 }
 
@@ -105,8 +48,8 @@ func (c *Client) DescribeBundleTasksRequest(input *DescribeBundleTasksInput) Des
 // DescribeBundleTasks API operation.
 type DescribeBundleTasksRequest struct {
 	*aws.Request
-	Input *DescribeBundleTasksInput
-	Copy  func(*DescribeBundleTasksInput) DescribeBundleTasksRequest
+	Input *types.DescribeBundleTasksInput
+	Copy  func(*types.DescribeBundleTasksInput) DescribeBundleTasksRequest
 }
 
 // Send marshals and sends the DescribeBundleTasks API request.
@@ -118,7 +61,7 @@ func (r DescribeBundleTasksRequest) Send(ctx context.Context) (*DescribeBundleTa
 	}
 
 	resp := &DescribeBundleTasksResponse{
-		DescribeBundleTasksOutput: r.Request.Data.(*DescribeBundleTasksOutput),
+		DescribeBundleTasksOutput: r.Request.Data.(*types.DescribeBundleTasksOutput),
 		response:                  &aws.Response{Request: r.Request},
 	}
 
@@ -128,7 +71,7 @@ func (r DescribeBundleTasksRequest) Send(ctx context.Context) (*DescribeBundleTa
 // DescribeBundleTasksResponse is the response type for the
 // DescribeBundleTasks API operation.
 type DescribeBundleTasksResponse struct {
-	*DescribeBundleTasksOutput
+	*types.DescribeBundleTasksOutput
 
 	response *aws.Response
 }

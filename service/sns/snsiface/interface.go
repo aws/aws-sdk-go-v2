@@ -10,6 +10,7 @@ package snsiface
 
 import (
 	"github.com/aws/aws-sdk-go-v2/service/sns"
+	"github.com/aws/aws-sdk-go-v2/service/sns/types"
 )
 
 // ClientAPI provides an interface to enable mocking the
@@ -43,7 +44,7 @@ import (
 //    type mockClientClient struct {
 //        snsiface.ClientPI
 //    }
-//    func (m *mockClientClient) AddPermission(input *sns.AddPermissionInput) (*sns.AddPermissionOutput, error) {
+//    func (m *mockClientClient) AddPermission(input *types.AddPermissionInput) (*types.AddPermissionOutput, error) {
 //        // mock response/functionality
 //    }
 //
@@ -61,71 +62,71 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type ClientAPI interface {
-	AddPermissionRequest(*sns.AddPermissionInput) sns.AddPermissionRequest
+	AddPermissionRequest(*types.AddPermissionInput) sns.AddPermissionRequest
 
-	CheckIfPhoneNumberIsOptedOutRequest(*sns.CheckIfPhoneNumberIsOptedOutInput) sns.CheckIfPhoneNumberIsOptedOutRequest
+	CheckIfPhoneNumberIsOptedOutRequest(*types.CheckIfPhoneNumberIsOptedOutInput) sns.CheckIfPhoneNumberIsOptedOutRequest
 
-	ConfirmSubscriptionRequest(*sns.ConfirmSubscriptionInput) sns.ConfirmSubscriptionRequest
+	ConfirmSubscriptionRequest(*types.ConfirmSubscriptionInput) sns.ConfirmSubscriptionRequest
 
-	CreatePlatformApplicationRequest(*sns.CreatePlatformApplicationInput) sns.CreatePlatformApplicationRequest
+	CreatePlatformApplicationRequest(*types.CreatePlatformApplicationInput) sns.CreatePlatformApplicationRequest
 
-	CreatePlatformEndpointRequest(*sns.CreatePlatformEndpointInput) sns.CreatePlatformEndpointRequest
+	CreatePlatformEndpointRequest(*types.CreatePlatformEndpointInput) sns.CreatePlatformEndpointRequest
 
-	CreateTopicRequest(*sns.CreateTopicInput) sns.CreateTopicRequest
+	CreateTopicRequest(*types.CreateTopicInput) sns.CreateTopicRequest
 
-	DeleteEndpointRequest(*sns.DeleteEndpointInput) sns.DeleteEndpointRequest
+	DeleteEndpointRequest(*types.DeleteEndpointInput) sns.DeleteEndpointRequest
 
-	DeletePlatformApplicationRequest(*sns.DeletePlatformApplicationInput) sns.DeletePlatformApplicationRequest
+	DeletePlatformApplicationRequest(*types.DeletePlatformApplicationInput) sns.DeletePlatformApplicationRequest
 
-	DeleteTopicRequest(*sns.DeleteTopicInput) sns.DeleteTopicRequest
+	DeleteTopicRequest(*types.DeleteTopicInput) sns.DeleteTopicRequest
 
-	GetEndpointAttributesRequest(*sns.GetEndpointAttributesInput) sns.GetEndpointAttributesRequest
+	GetEndpointAttributesRequest(*types.GetEndpointAttributesInput) sns.GetEndpointAttributesRequest
 
-	GetPlatformApplicationAttributesRequest(*sns.GetPlatformApplicationAttributesInput) sns.GetPlatformApplicationAttributesRequest
+	GetPlatformApplicationAttributesRequest(*types.GetPlatformApplicationAttributesInput) sns.GetPlatformApplicationAttributesRequest
 
-	GetSMSAttributesRequest(*sns.GetSMSAttributesInput) sns.GetSMSAttributesRequest
+	GetSMSAttributesRequest(*types.GetSMSAttributesInput) sns.GetSMSAttributesRequest
 
-	GetSubscriptionAttributesRequest(*sns.GetSubscriptionAttributesInput) sns.GetSubscriptionAttributesRequest
+	GetSubscriptionAttributesRequest(*types.GetSubscriptionAttributesInput) sns.GetSubscriptionAttributesRequest
 
-	GetTopicAttributesRequest(*sns.GetTopicAttributesInput) sns.GetTopicAttributesRequest
+	GetTopicAttributesRequest(*types.GetTopicAttributesInput) sns.GetTopicAttributesRequest
 
-	ListEndpointsByPlatformApplicationRequest(*sns.ListEndpointsByPlatformApplicationInput) sns.ListEndpointsByPlatformApplicationRequest
+	ListEndpointsByPlatformApplicationRequest(*types.ListEndpointsByPlatformApplicationInput) sns.ListEndpointsByPlatformApplicationRequest
 
-	ListPhoneNumbersOptedOutRequest(*sns.ListPhoneNumbersOptedOutInput) sns.ListPhoneNumbersOptedOutRequest
+	ListPhoneNumbersOptedOutRequest(*types.ListPhoneNumbersOptedOutInput) sns.ListPhoneNumbersOptedOutRequest
 
-	ListPlatformApplicationsRequest(*sns.ListPlatformApplicationsInput) sns.ListPlatformApplicationsRequest
+	ListPlatformApplicationsRequest(*types.ListPlatformApplicationsInput) sns.ListPlatformApplicationsRequest
 
-	ListSubscriptionsRequest(*sns.ListSubscriptionsInput) sns.ListSubscriptionsRequest
+	ListSubscriptionsRequest(*types.ListSubscriptionsInput) sns.ListSubscriptionsRequest
 
-	ListSubscriptionsByTopicRequest(*sns.ListSubscriptionsByTopicInput) sns.ListSubscriptionsByTopicRequest
+	ListSubscriptionsByTopicRequest(*types.ListSubscriptionsByTopicInput) sns.ListSubscriptionsByTopicRequest
 
-	ListTagsForResourceRequest(*sns.ListTagsForResourceInput) sns.ListTagsForResourceRequest
+	ListTagsForResourceRequest(*types.ListTagsForResourceInput) sns.ListTagsForResourceRequest
 
-	ListTopicsRequest(*sns.ListTopicsInput) sns.ListTopicsRequest
+	ListTopicsRequest(*types.ListTopicsInput) sns.ListTopicsRequest
 
-	OptInPhoneNumberRequest(*sns.OptInPhoneNumberInput) sns.OptInPhoneNumberRequest
+	OptInPhoneNumberRequest(*types.OptInPhoneNumberInput) sns.OptInPhoneNumberRequest
 
-	PublishRequest(*sns.PublishInput) sns.PublishRequest
+	PublishRequest(*types.PublishInput) sns.PublishRequest
 
-	RemovePermissionRequest(*sns.RemovePermissionInput) sns.RemovePermissionRequest
+	RemovePermissionRequest(*types.RemovePermissionInput) sns.RemovePermissionRequest
 
-	SetEndpointAttributesRequest(*sns.SetEndpointAttributesInput) sns.SetEndpointAttributesRequest
+	SetEndpointAttributesRequest(*types.SetEndpointAttributesInput) sns.SetEndpointAttributesRequest
 
-	SetPlatformApplicationAttributesRequest(*sns.SetPlatformApplicationAttributesInput) sns.SetPlatformApplicationAttributesRequest
+	SetPlatformApplicationAttributesRequest(*types.SetPlatformApplicationAttributesInput) sns.SetPlatformApplicationAttributesRequest
 
-	SetSMSAttributesRequest(*sns.SetSMSAttributesInput) sns.SetSMSAttributesRequest
+	SetSMSAttributesRequest(*types.SetSMSAttributesInput) sns.SetSMSAttributesRequest
 
-	SetSubscriptionAttributesRequest(*sns.SetSubscriptionAttributesInput) sns.SetSubscriptionAttributesRequest
+	SetSubscriptionAttributesRequest(*types.SetSubscriptionAttributesInput) sns.SetSubscriptionAttributesRequest
 
-	SetTopicAttributesRequest(*sns.SetTopicAttributesInput) sns.SetTopicAttributesRequest
+	SetTopicAttributesRequest(*types.SetTopicAttributesInput) sns.SetTopicAttributesRequest
 
-	SubscribeRequest(*sns.SubscribeInput) sns.SubscribeRequest
+	SubscribeRequest(*types.SubscribeInput) sns.SubscribeRequest
 
-	TagResourceRequest(*sns.TagResourceInput) sns.TagResourceRequest
+	TagResourceRequest(*types.TagResourceInput) sns.TagResourceRequest
 
-	UnsubscribeRequest(*sns.UnsubscribeInput) sns.UnsubscribeRequest
+	UnsubscribeRequest(*types.UnsubscribeInput) sns.UnsubscribeRequest
 
-	UntagResourceRequest(*sns.UntagResourceInput) sns.UntagResourceRequest
+	UntagResourceRequest(*types.UntagResourceInput) sns.UntagResourceRequest
 }
 
 var _ ClientAPI = (*sns.Client)(nil)

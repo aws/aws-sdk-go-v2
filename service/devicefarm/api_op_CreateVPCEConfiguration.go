@@ -6,72 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/devicefarm/types"
 )
-
-type CreateVPCEConfigurationInput struct {
-	_ struct{} `type:"structure"`
-
-	// The DNS name of the service running in your VPC that you want Device Farm
-	// to test.
-	//
-	// ServiceDnsName is a required field
-	ServiceDnsName *string `locationName:"serviceDnsName" type:"string" required:"true"`
-
-	// An optional description, providing more details about your VPC endpoint configuration.
-	VpceConfigurationDescription *string `locationName:"vpceConfigurationDescription" type:"string"`
-
-	// The friendly name you give to your VPC endpoint configuration, to manage
-	// your configurations more easily.
-	//
-	// VpceConfigurationName is a required field
-	VpceConfigurationName *string `locationName:"vpceConfigurationName" type:"string" required:"true"`
-
-	// The name of the VPC endpoint service running inside your AWS account that
-	// you want Device Farm to test.
-	//
-	// VpceServiceName is a required field
-	VpceServiceName *string `locationName:"vpceServiceName" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s CreateVPCEConfigurationInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateVPCEConfigurationInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateVPCEConfigurationInput"}
-
-	if s.ServiceDnsName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ServiceDnsName"))
-	}
-
-	if s.VpceConfigurationName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("VpceConfigurationName"))
-	}
-
-	if s.VpceServiceName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("VpceServiceName"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type CreateVPCEConfigurationOutput struct {
-	_ struct{} `type:"structure"`
-
-	// An object containing information about your VPC endpoint configuration.
-	VpceConfiguration *VPCEConfiguration `locationName:"vpceConfiguration" type:"structure"`
-}
-
-// String returns the string representation
-func (s CreateVPCEConfigurationOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCreateVPCEConfiguration = "CreateVPCEConfiguration"
 
@@ -89,7 +25,7 @@ const opCreateVPCEConfiguration = "CreateVPCEConfiguration"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/CreateVPCEConfiguration
-func (c *Client) CreateVPCEConfigurationRequest(input *CreateVPCEConfigurationInput) CreateVPCEConfigurationRequest {
+func (c *Client) CreateVPCEConfigurationRequest(input *types.CreateVPCEConfigurationInput) CreateVPCEConfigurationRequest {
 	op := &aws.Operation{
 		Name:       opCreateVPCEConfiguration,
 		HTTPMethod: "POST",
@@ -97,10 +33,10 @@ func (c *Client) CreateVPCEConfigurationRequest(input *CreateVPCEConfigurationIn
 	}
 
 	if input == nil {
-		input = &CreateVPCEConfigurationInput{}
+		input = &types.CreateVPCEConfigurationInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateVPCEConfigurationOutput{})
+	req := c.newRequest(op, input, &types.CreateVPCEConfigurationOutput{})
 	return CreateVPCEConfigurationRequest{Request: req, Input: input, Copy: c.CreateVPCEConfigurationRequest}
 }
 
@@ -108,8 +44,8 @@ func (c *Client) CreateVPCEConfigurationRequest(input *CreateVPCEConfigurationIn
 // CreateVPCEConfiguration API operation.
 type CreateVPCEConfigurationRequest struct {
 	*aws.Request
-	Input *CreateVPCEConfigurationInput
-	Copy  func(*CreateVPCEConfigurationInput) CreateVPCEConfigurationRequest
+	Input *types.CreateVPCEConfigurationInput
+	Copy  func(*types.CreateVPCEConfigurationInput) CreateVPCEConfigurationRequest
 }
 
 // Send marshals and sends the CreateVPCEConfiguration API request.
@@ -121,7 +57,7 @@ func (r CreateVPCEConfigurationRequest) Send(ctx context.Context) (*CreateVPCECo
 	}
 
 	resp := &CreateVPCEConfigurationResponse{
-		CreateVPCEConfigurationOutput: r.Request.Data.(*CreateVPCEConfigurationOutput),
+		CreateVPCEConfigurationOutput: r.Request.Data.(*types.CreateVPCEConfigurationOutput),
 		response:                      &aws.Response{Request: r.Request},
 	}
 
@@ -131,7 +67,7 @@ func (r CreateVPCEConfigurationRequest) Send(ctx context.Context) (*CreateVPCECo
 // CreateVPCEConfigurationResponse is the response type for the
 // CreateVPCEConfiguration API operation.
 type CreateVPCEConfigurationResponse struct {
-	*CreateVPCEConfigurationOutput
+	*types.CreateVPCEConfigurationOutput
 
 	response *aws.Response
 }

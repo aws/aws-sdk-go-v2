@@ -6,186 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/lexmodelbuildingservice/types"
 )
-
-type GetExportInput struct {
-	_ struct{} `type:"structure"`
-
-	// The format of the exported data.
-	//
-	// ExportType is a required field
-	ExportType ExportType `location:"querystring" locationName:"exportType" type:"string" required:"true" enum:"true"`
-
-	// The name of the bot to export.
-	//
-	// Name is a required field
-	Name *string `location:"querystring" locationName:"name" min:"1" type:"string" required:"true"`
-
-	// The type of resource to export.
-	//
-	// ResourceType is a required field
-	ResourceType ResourceType `location:"querystring" locationName:"resourceType" type:"string" required:"true" enum:"true"`
-
-	// The version of the bot to export.
-	//
-	// Version is a required field
-	Version *string `location:"querystring" locationName:"version" min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetExportInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetExportInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetExportInput"}
-	if len(s.ExportType) == 0 {
-		invalidParams.Add(aws.NewErrParamRequired("ExportType"))
-	}
-
-	if s.Name == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Name"))
-	}
-	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
-	}
-	if len(s.ResourceType) == 0 {
-		invalidParams.Add(aws.NewErrParamRequired("ResourceType"))
-	}
-
-	if s.Version == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Version"))
-	}
-	if s.Version != nil && len(*s.Version) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Version", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetExportInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if len(s.ExportType) > 0 {
-		v := s.ExportType
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "exportType", protocol.QuotedValue{ValueMarshaler: v}, metadata)
-	}
-	if s.Name != nil {
-		v := *s.Name
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if len(s.ResourceType) > 0 {
-		v := s.ResourceType
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "resourceType", protocol.QuotedValue{ValueMarshaler: v}, metadata)
-	}
-	if s.Version != nil {
-		v := *s.Version
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "version", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type GetExportOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The status of the export.
-	//
-	//    * IN_PROGRESS - The export is in progress.
-	//
-	//    * READY - The export is complete.
-	//
-	//    * FAILED - The export could not be completed.
-	ExportStatus ExportStatus `locationName:"exportStatus" type:"string" enum:"true"`
-
-	// The format of the exported data.
-	ExportType ExportType `locationName:"exportType" type:"string" enum:"true"`
-
-	// If status is FAILED, Amazon Lex provides the reason that it failed to export
-	// the resource.
-	FailureReason *string `locationName:"failureReason" type:"string"`
-
-	// The name of the bot being exported.
-	Name *string `locationName:"name" min:"1" type:"string"`
-
-	// The type of the exported resource.
-	ResourceType ResourceType `locationName:"resourceType" type:"string" enum:"true"`
-
-	// An S3 pre-signed URL that provides the location of the exported resource.
-	// The exported resource is a ZIP archive that contains the exported resource
-	// in JSON format. The structure of the archive may change. Your code should
-	// not rely on the archive structure.
-	Url *string `locationName:"url" type:"string"`
-
-	// The version of the bot being exported.
-	Version *string `locationName:"version" min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s GetExportOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetExportOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.ExportStatus) > 0 {
-		v := s.ExportStatus
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "exportStatus", protocol.QuotedValue{ValueMarshaler: v}, metadata)
-	}
-	if len(s.ExportType) > 0 {
-		v := s.ExportType
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "exportType", protocol.QuotedValue{ValueMarshaler: v}, metadata)
-	}
-	if s.FailureReason != nil {
-		v := *s.FailureReason
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "failureReason", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Name != nil {
-		v := *s.Name
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if len(s.ResourceType) > 0 {
-		v := s.ResourceType
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "resourceType", protocol.QuotedValue{ValueMarshaler: v}, metadata)
-	}
-	if s.Url != nil {
-		v := *s.Url
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "url", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Version != nil {
-		v := *s.Version
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "version", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opGetExport = "GetExport"
 
@@ -202,7 +24,7 @@ const opGetExport = "GetExport"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/GetExport
-func (c *Client) GetExportRequest(input *GetExportInput) GetExportRequest {
+func (c *Client) GetExportRequest(input *types.GetExportInput) GetExportRequest {
 	op := &aws.Operation{
 		Name:       opGetExport,
 		HTTPMethod: "GET",
@@ -210,10 +32,10 @@ func (c *Client) GetExportRequest(input *GetExportInput) GetExportRequest {
 	}
 
 	if input == nil {
-		input = &GetExportInput{}
+		input = &types.GetExportInput{}
 	}
 
-	req := c.newRequest(op, input, &GetExportOutput{})
+	req := c.newRequest(op, input, &types.GetExportOutput{})
 	return GetExportRequest{Request: req, Input: input, Copy: c.GetExportRequest}
 }
 
@@ -221,8 +43,8 @@ func (c *Client) GetExportRequest(input *GetExportInput) GetExportRequest {
 // GetExport API operation.
 type GetExportRequest struct {
 	*aws.Request
-	Input *GetExportInput
-	Copy  func(*GetExportInput) GetExportRequest
+	Input *types.GetExportInput
+	Copy  func(*types.GetExportInput) GetExportRequest
 }
 
 // Send marshals and sends the GetExport API request.
@@ -234,7 +56,7 @@ func (r GetExportRequest) Send(ctx context.Context) (*GetExportResponse, error) 
 	}
 
 	resp := &GetExportResponse{
-		GetExportOutput: r.Request.Data.(*GetExportOutput),
+		GetExportOutput: r.Request.Data.(*types.GetExportOutput),
 		response:        &aws.Response{Request: r.Request},
 	}
 
@@ -244,7 +66,7 @@ func (r GetExportRequest) Send(ctx context.Context) (*GetExportResponse, error) 
 // GetExportResponse is the response type for the
 // GetExport API operation.
 type GetExportResponse struct {
-	*GetExportOutput
+	*types.GetExportOutput
 
 	response *aws.Response
 }

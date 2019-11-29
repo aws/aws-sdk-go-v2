@@ -6,53 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/devicefarm/types"
 )
-
-// Represents a request to the get suite operation.
-type GetSuiteInput struct {
-	_ struct{} `type:"structure"`
-
-	// The suite's ARN.
-	//
-	// Arn is a required field
-	Arn *string `locationName:"arn" min:"32" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetSuiteInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetSuiteInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetSuiteInput"}
-
-	if s.Arn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Arn"))
-	}
-	if s.Arn != nil && len(*s.Arn) < 32 {
-		invalidParams.Add(aws.NewErrParamMinLen("Arn", 32))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Represents the result of a get suite request.
-type GetSuiteOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A collection of one or more tests.
-	Suite *Suite `locationName:"suite" type:"structure"`
-}
-
-// String returns the string representation
-func (s GetSuiteOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetSuite = "GetSuite"
 
@@ -69,7 +24,7 @@ const opGetSuite = "GetSuite"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/GetSuite
-func (c *Client) GetSuiteRequest(input *GetSuiteInput) GetSuiteRequest {
+func (c *Client) GetSuiteRequest(input *types.GetSuiteInput) GetSuiteRequest {
 	op := &aws.Operation{
 		Name:       opGetSuite,
 		HTTPMethod: "POST",
@@ -77,10 +32,10 @@ func (c *Client) GetSuiteRequest(input *GetSuiteInput) GetSuiteRequest {
 	}
 
 	if input == nil {
-		input = &GetSuiteInput{}
+		input = &types.GetSuiteInput{}
 	}
 
-	req := c.newRequest(op, input, &GetSuiteOutput{})
+	req := c.newRequest(op, input, &types.GetSuiteOutput{})
 	return GetSuiteRequest{Request: req, Input: input, Copy: c.GetSuiteRequest}
 }
 
@@ -88,8 +43,8 @@ func (c *Client) GetSuiteRequest(input *GetSuiteInput) GetSuiteRequest {
 // GetSuite API operation.
 type GetSuiteRequest struct {
 	*aws.Request
-	Input *GetSuiteInput
-	Copy  func(*GetSuiteInput) GetSuiteRequest
+	Input *types.GetSuiteInput
+	Copy  func(*types.GetSuiteInput) GetSuiteRequest
 }
 
 // Send marshals and sends the GetSuite API request.
@@ -101,7 +56,7 @@ func (r GetSuiteRequest) Send(ctx context.Context) (*GetSuiteResponse, error) {
 	}
 
 	resp := &GetSuiteResponse{
-		GetSuiteOutput: r.Request.Data.(*GetSuiteOutput),
+		GetSuiteOutput: r.Request.Data.(*types.GetSuiteOutput),
 		response:       &aws.Response{Request: r.Request},
 	}
 
@@ -111,7 +66,7 @@ func (r GetSuiteRequest) Send(ctx context.Context) (*GetSuiteResponse, error) {
 // GetSuiteResponse is the response type for the
 // GetSuite API operation.
 type GetSuiteResponse struct {
-	*GetSuiteOutput
+	*types.GetSuiteOutput
 
 	response *aws.Response
 }

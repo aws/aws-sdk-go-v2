@@ -6,39 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/directconnect/types"
 )
-
-type UpdateDirectConnectGatewayAssociationInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon VPC prefixes to advertise to the Direct Connect gateway.
-	AddAllowedPrefixesToDirectConnectGateway []RouteFilterPrefix `locationName:"addAllowedPrefixesToDirectConnectGateway" type:"list"`
-
-	// The ID of the Direct Connect gateway association.
-	AssociationId *string `locationName:"associationId" type:"string"`
-
-	// The Amazon VPC prefixes to no longer advertise to the Direct Connect gateway.
-	RemoveAllowedPrefixesToDirectConnectGateway []RouteFilterPrefix `locationName:"removeAllowedPrefixesToDirectConnectGateway" type:"list"`
-}
-
-// String returns the string representation
-func (s UpdateDirectConnectGatewayAssociationInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type UpdateDirectConnectGatewayAssociationOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Information about an association between a Direct Connect gateway and a virtual
-	// private gateway or transit gateway.
-	DirectConnectGatewayAssociation *DirectConnectGatewayAssociation `locationName:"directConnectGatewayAssociation" type:"structure"`
-}
-
-// String returns the string representation
-func (s UpdateDirectConnectGatewayAssociationOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opUpdateDirectConnectGatewayAssociation = "UpdateDirectConnectGatewayAssociation"
 
@@ -57,7 +26,7 @@ const opUpdateDirectConnectGatewayAssociation = "UpdateDirectConnectGatewayAssoc
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/UpdateDirectConnectGatewayAssociation
-func (c *Client) UpdateDirectConnectGatewayAssociationRequest(input *UpdateDirectConnectGatewayAssociationInput) UpdateDirectConnectGatewayAssociationRequest {
+func (c *Client) UpdateDirectConnectGatewayAssociationRequest(input *types.UpdateDirectConnectGatewayAssociationInput) UpdateDirectConnectGatewayAssociationRequest {
 	op := &aws.Operation{
 		Name:       opUpdateDirectConnectGatewayAssociation,
 		HTTPMethod: "POST",
@@ -65,10 +34,10 @@ func (c *Client) UpdateDirectConnectGatewayAssociationRequest(input *UpdateDirec
 	}
 
 	if input == nil {
-		input = &UpdateDirectConnectGatewayAssociationInput{}
+		input = &types.UpdateDirectConnectGatewayAssociationInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateDirectConnectGatewayAssociationOutput{})
+	req := c.newRequest(op, input, &types.UpdateDirectConnectGatewayAssociationOutput{})
 	return UpdateDirectConnectGatewayAssociationRequest{Request: req, Input: input, Copy: c.UpdateDirectConnectGatewayAssociationRequest}
 }
 
@@ -76,8 +45,8 @@ func (c *Client) UpdateDirectConnectGatewayAssociationRequest(input *UpdateDirec
 // UpdateDirectConnectGatewayAssociation API operation.
 type UpdateDirectConnectGatewayAssociationRequest struct {
 	*aws.Request
-	Input *UpdateDirectConnectGatewayAssociationInput
-	Copy  func(*UpdateDirectConnectGatewayAssociationInput) UpdateDirectConnectGatewayAssociationRequest
+	Input *types.UpdateDirectConnectGatewayAssociationInput
+	Copy  func(*types.UpdateDirectConnectGatewayAssociationInput) UpdateDirectConnectGatewayAssociationRequest
 }
 
 // Send marshals and sends the UpdateDirectConnectGatewayAssociation API request.
@@ -89,7 +58,7 @@ func (r UpdateDirectConnectGatewayAssociationRequest) Send(ctx context.Context) 
 	}
 
 	resp := &UpdateDirectConnectGatewayAssociationResponse{
-		UpdateDirectConnectGatewayAssociationOutput: r.Request.Data.(*UpdateDirectConnectGatewayAssociationOutput),
+		UpdateDirectConnectGatewayAssociationOutput: r.Request.Data.(*types.UpdateDirectConnectGatewayAssociationOutput),
 		response: &aws.Response{Request: r.Request},
 	}
 
@@ -99,7 +68,7 @@ func (r UpdateDirectConnectGatewayAssociationRequest) Send(ctx context.Context) 
 // UpdateDirectConnectGatewayAssociationResponse is the response type for the
 // UpdateDirectConnectGatewayAssociation API operation.
 type UpdateDirectConnectGatewayAssociationResponse struct {
-	*UpdateDirectConnectGatewayAssociationOutput
+	*types.UpdateDirectConnectGatewayAssociationOutput
 
 	response *aws.Response
 }

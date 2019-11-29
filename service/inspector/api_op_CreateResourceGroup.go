@@ -4,65 +4,10 @@ package inspector
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/inspector/types"
 )
-
-type CreateResourceGroupInput struct {
-	_ struct{} `type:"structure"`
-
-	// A collection of keys and an array of possible values, '[{"key":"key1","values":["Value1","Value2"]},{"key":"Key2","values":["Value3"]}]'.
-	//
-	// For example,'[{"key":"Name","values":["TestEC2Instance"]}]'.
-	//
-	// ResourceGroupTags is a required field
-	ResourceGroupTags []ResourceGroupTag `locationName:"resourceGroupTags" min:"1" type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s CreateResourceGroupInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateResourceGroupInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateResourceGroupInput"}
-
-	if s.ResourceGroupTags == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ResourceGroupTags"))
-	}
-	if s.ResourceGroupTags != nil && len(s.ResourceGroupTags) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ResourceGroupTags", 1))
-	}
-	if s.ResourceGroupTags != nil {
-		for i, v := range s.ResourceGroupTags {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "ResourceGroupTags", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type CreateResourceGroupOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The ARN that specifies the resource group that is created.
-	//
-	// ResourceGroupArn is a required field
-	ResourceGroupArn *string `locationName:"resourceGroupArn" min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s CreateResourceGroupOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCreateResourceGroup = "CreateResourceGroup"
 
@@ -82,7 +27,7 @@ const opCreateResourceGroup = "CreateResourceGroup"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/CreateResourceGroup
-func (c *Client) CreateResourceGroupRequest(input *CreateResourceGroupInput) CreateResourceGroupRequest {
+func (c *Client) CreateResourceGroupRequest(input *types.CreateResourceGroupInput) CreateResourceGroupRequest {
 	op := &aws.Operation{
 		Name:       opCreateResourceGroup,
 		HTTPMethod: "POST",
@@ -90,10 +35,10 @@ func (c *Client) CreateResourceGroupRequest(input *CreateResourceGroupInput) Cre
 	}
 
 	if input == nil {
-		input = &CreateResourceGroupInput{}
+		input = &types.CreateResourceGroupInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateResourceGroupOutput{})
+	req := c.newRequest(op, input, &types.CreateResourceGroupOutput{})
 	return CreateResourceGroupRequest{Request: req, Input: input, Copy: c.CreateResourceGroupRequest}
 }
 
@@ -101,8 +46,8 @@ func (c *Client) CreateResourceGroupRequest(input *CreateResourceGroupInput) Cre
 // CreateResourceGroup API operation.
 type CreateResourceGroupRequest struct {
 	*aws.Request
-	Input *CreateResourceGroupInput
-	Copy  func(*CreateResourceGroupInput) CreateResourceGroupRequest
+	Input *types.CreateResourceGroupInput
+	Copy  func(*types.CreateResourceGroupInput) CreateResourceGroupRequest
 }
 
 // Send marshals and sends the CreateResourceGroup API request.
@@ -114,7 +59,7 @@ func (r CreateResourceGroupRequest) Send(ctx context.Context) (*CreateResourceGr
 	}
 
 	resp := &CreateResourceGroupResponse{
-		CreateResourceGroupOutput: r.Request.Data.(*CreateResourceGroupOutput),
+		CreateResourceGroupOutput: r.Request.Data.(*types.CreateResourceGroupOutput),
 		response:                  &aws.Response{Request: r.Request},
 	}
 
@@ -124,7 +69,7 @@ func (r CreateResourceGroupRequest) Send(ctx context.Context) (*CreateResourceGr
 // CreateResourceGroupResponse is the response type for the
 // CreateResourceGroup API operation.
 type CreateResourceGroupResponse struct {
-	*CreateResourceGroupOutput
+	*types.CreateResourceGroupOutput
 
 	response *aws.Response
 }

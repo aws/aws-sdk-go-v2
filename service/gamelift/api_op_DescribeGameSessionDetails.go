@@ -6,84 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/gamelift/types"
 )
-
-// Represents the input for a request action.
-type DescribeGameSessionDetailsInput struct {
-	_ struct{} `type:"structure"`
-
-	// Unique identifier for an alias associated with the fleet to retrieve all
-	// game sessions for.
-	AliasId *string `type:"string"`
-
-	// Unique identifier for a fleet to retrieve all game sessions active on the
-	// fleet.
-	FleetId *string `type:"string"`
-
-	// Unique identifier for the game session to retrieve.
-	GameSessionId *string `min:"1" type:"string"`
-
-	// Maximum number of results to return. Use this parameter with NextToken to
-	// get results as a set of sequential pages.
-	Limit *int64 `min:"1" type:"integer"`
-
-	// Token that indicates the start of the next sequential page of results. Use
-	// the token that is returned with a previous call to this action. To start
-	// at the beginning of the result set, do not specify a value.
-	NextToken *string `min:"1" type:"string"`
-
-	// Game session status to filter results on. Possible game session statuses
-	// include ACTIVE, TERMINATED, ACTIVATING and TERMINATING (the last two are
-	// transitory).
-	StatusFilter *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeGameSessionDetailsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeGameSessionDetailsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeGameSessionDetailsInput"}
-	if s.GameSessionId != nil && len(*s.GameSessionId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("GameSessionId", 1))
-	}
-	if s.Limit != nil && *s.Limit < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("Limit", 1))
-	}
-	if s.NextToken != nil && len(*s.NextToken) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
-	}
-	if s.StatusFilter != nil && len(*s.StatusFilter) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("StatusFilter", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Represents the returned data in response to a request action.
-type DescribeGameSessionDetailsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Collection of objects containing game session properties and the protection
-	// policy currently in force for each session matching the request.
-	GameSessionDetails []GameSessionDetail `type:"list"`
-
-	// Token that indicates where to resume retrieving results on the next call
-	// to this action. If no token is returned, these results represent the end
-	// of the list.
-	NextToken *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeGameSessionDetailsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeGameSessionDetails = "DescribeGameSessionDetails"
 
@@ -125,7 +49,7 @@ const opDescribeGameSessionDetails = "DescribeGameSessionDetails"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DescribeGameSessionDetails
-func (c *Client) DescribeGameSessionDetailsRequest(input *DescribeGameSessionDetailsInput) DescribeGameSessionDetailsRequest {
+func (c *Client) DescribeGameSessionDetailsRequest(input *types.DescribeGameSessionDetailsInput) DescribeGameSessionDetailsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeGameSessionDetails,
 		HTTPMethod: "POST",
@@ -133,10 +57,10 @@ func (c *Client) DescribeGameSessionDetailsRequest(input *DescribeGameSessionDet
 	}
 
 	if input == nil {
-		input = &DescribeGameSessionDetailsInput{}
+		input = &types.DescribeGameSessionDetailsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeGameSessionDetailsOutput{})
+	req := c.newRequest(op, input, &types.DescribeGameSessionDetailsOutput{})
 	return DescribeGameSessionDetailsRequest{Request: req, Input: input, Copy: c.DescribeGameSessionDetailsRequest}
 }
 
@@ -144,8 +68,8 @@ func (c *Client) DescribeGameSessionDetailsRequest(input *DescribeGameSessionDet
 // DescribeGameSessionDetails API operation.
 type DescribeGameSessionDetailsRequest struct {
 	*aws.Request
-	Input *DescribeGameSessionDetailsInput
-	Copy  func(*DescribeGameSessionDetailsInput) DescribeGameSessionDetailsRequest
+	Input *types.DescribeGameSessionDetailsInput
+	Copy  func(*types.DescribeGameSessionDetailsInput) DescribeGameSessionDetailsRequest
 }
 
 // Send marshals and sends the DescribeGameSessionDetails API request.
@@ -157,7 +81,7 @@ func (r DescribeGameSessionDetailsRequest) Send(ctx context.Context) (*DescribeG
 	}
 
 	resp := &DescribeGameSessionDetailsResponse{
-		DescribeGameSessionDetailsOutput: r.Request.Data.(*DescribeGameSessionDetailsOutput),
+		DescribeGameSessionDetailsOutput: r.Request.Data.(*types.DescribeGameSessionDetailsOutput),
 		response:                         &aws.Response{Request: r.Request},
 	}
 
@@ -167,7 +91,7 @@ func (r DescribeGameSessionDetailsRequest) Send(ctx context.Context) (*DescribeG
 // DescribeGameSessionDetailsResponse is the response type for the
 // DescribeGameSessionDetails API operation.
 type DescribeGameSessionDetailsResponse struct {
-	*DescribeGameSessionDetailsOutput
+	*types.DescribeGameSessionDetailsOutput
 
 	response *aws.Response
 }

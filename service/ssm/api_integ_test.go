@@ -13,6 +13,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws/awserr"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting/integration"
 	"github.com/aws/aws-sdk-go-v2/service/ssm"
+	"github.com/aws/aws-sdk-go-v2/service/ssm/types"
 )
 
 var _ aws.Config
@@ -24,7 +25,7 @@ func TestInteg_00_ListDocuments(t *testing.T) {
 
 	cfg := integration.ConfigWithDefaultRegion("us-west-2")
 	svc := ssm.New(cfg)
-	params := &ssm.ListDocumentsInput{}
+	params := &types.ListDocumentsInput{}
 
 	req := svc.ListDocumentsRequest(params)
 
@@ -39,7 +40,7 @@ func TestInteg_01_GetDocument(t *testing.T) {
 
 	cfg := integration.ConfigWithDefaultRegion("us-west-2")
 	svc := ssm.New(cfg)
-	params := &ssm.GetDocumentInput{
+	params := &types.GetDocumentInput{
 		Name: aws.String("'fake-name'"),
 	}
 

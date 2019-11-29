@@ -6,65 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/types"
 )
-
-type DescribeResourceServerInput struct {
-	_ struct{} `type:"structure"`
-
-	// The identifier for the resource server
-	//
-	// Identifier is a required field
-	Identifier *string `min:"1" type:"string" required:"true"`
-
-	// The user pool ID for the user pool that hosts the resource server.
-	//
-	// UserPoolId is a required field
-	UserPoolId *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeResourceServerInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeResourceServerInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeResourceServerInput"}
-
-	if s.Identifier == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Identifier"))
-	}
-	if s.Identifier != nil && len(*s.Identifier) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Identifier", 1))
-	}
-
-	if s.UserPoolId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("UserPoolId"))
-	}
-	if s.UserPoolId != nil && len(*s.UserPoolId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("UserPoolId", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribeResourceServerOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The resource server.
-	//
-	// ResourceServer is a required field
-	ResourceServer *ResourceServerType `type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeResourceServerOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeResourceServer = "DescribeResourceServer"
 
@@ -81,7 +24,7 @@ const opDescribeResourceServer = "DescribeResourceServer"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/DescribeResourceServer
-func (c *Client) DescribeResourceServerRequest(input *DescribeResourceServerInput) DescribeResourceServerRequest {
+func (c *Client) DescribeResourceServerRequest(input *types.DescribeResourceServerInput) DescribeResourceServerRequest {
 	op := &aws.Operation{
 		Name:       opDescribeResourceServer,
 		HTTPMethod: "POST",
@@ -89,10 +32,10 @@ func (c *Client) DescribeResourceServerRequest(input *DescribeResourceServerInpu
 	}
 
 	if input == nil {
-		input = &DescribeResourceServerInput{}
+		input = &types.DescribeResourceServerInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeResourceServerOutput{})
+	req := c.newRequest(op, input, &types.DescribeResourceServerOutput{})
 	return DescribeResourceServerRequest{Request: req, Input: input, Copy: c.DescribeResourceServerRequest}
 }
 
@@ -100,8 +43,8 @@ func (c *Client) DescribeResourceServerRequest(input *DescribeResourceServerInpu
 // DescribeResourceServer API operation.
 type DescribeResourceServerRequest struct {
 	*aws.Request
-	Input *DescribeResourceServerInput
-	Copy  func(*DescribeResourceServerInput) DescribeResourceServerRequest
+	Input *types.DescribeResourceServerInput
+	Copy  func(*types.DescribeResourceServerInput) DescribeResourceServerRequest
 }
 
 // Send marshals and sends the DescribeResourceServer API request.
@@ -113,7 +56,7 @@ func (r DescribeResourceServerRequest) Send(ctx context.Context) (*DescribeResou
 	}
 
 	resp := &DescribeResourceServerResponse{
-		DescribeResourceServerOutput: r.Request.Data.(*DescribeResourceServerOutput),
+		DescribeResourceServerOutput: r.Request.Data.(*types.DescribeResourceServerOutput),
 		response:                     &aws.Response{Request: r.Request},
 	}
 
@@ -123,7 +66,7 @@ func (r DescribeResourceServerRequest) Send(ctx context.Context) (*DescribeResou
 // DescribeResourceServerResponse is the response type for the
 // DescribeResourceServer API operation.
 type DescribeResourceServerResponse struct {
-	*DescribeResourceServerOutput
+	*types.DescribeResourceServerOutput
 
 	response *aws.Response
 }

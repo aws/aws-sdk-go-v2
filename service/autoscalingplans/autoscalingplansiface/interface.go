@@ -10,6 +10,7 @@ package autoscalingplansiface
 
 import (
 	"github.com/aws/aws-sdk-go-v2/service/autoscalingplans"
+	"github.com/aws/aws-sdk-go-v2/service/autoscalingplans/types"
 )
 
 // ClientAPI provides an interface to enable mocking the
@@ -43,7 +44,7 @@ import (
 //    type mockClientClient struct {
 //        autoscalingplansiface.ClientPI
 //    }
-//    func (m *mockClientClient) CreateScalingPlan(input *autoscalingplans.CreateScalingPlanInput) (*autoscalingplans.CreateScalingPlanOutput, error) {
+//    func (m *mockClientClient) CreateScalingPlan(input *types.CreateScalingPlanInput) (*types.CreateScalingPlanOutput, error) {
 //        // mock response/functionality
 //    }
 //
@@ -61,17 +62,17 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type ClientAPI interface {
-	CreateScalingPlanRequest(*autoscalingplans.CreateScalingPlanInput) autoscalingplans.CreateScalingPlanRequest
+	CreateScalingPlanRequest(*types.CreateScalingPlanInput) autoscalingplans.CreateScalingPlanRequest
 
-	DeleteScalingPlanRequest(*autoscalingplans.DeleteScalingPlanInput) autoscalingplans.DeleteScalingPlanRequest
+	DeleteScalingPlanRequest(*types.DeleteScalingPlanInput) autoscalingplans.DeleteScalingPlanRequest
 
-	DescribeScalingPlanResourcesRequest(*autoscalingplans.DescribeScalingPlanResourcesInput) autoscalingplans.DescribeScalingPlanResourcesRequest
+	DescribeScalingPlanResourcesRequest(*types.DescribeScalingPlanResourcesInput) autoscalingplans.DescribeScalingPlanResourcesRequest
 
-	DescribeScalingPlansRequest(*autoscalingplans.DescribeScalingPlansInput) autoscalingplans.DescribeScalingPlansRequest
+	DescribeScalingPlansRequest(*types.DescribeScalingPlansInput) autoscalingplans.DescribeScalingPlansRequest
 
-	GetScalingPlanResourceForecastDataRequest(*autoscalingplans.GetScalingPlanResourceForecastDataInput) autoscalingplans.GetScalingPlanResourceForecastDataRequest
+	GetScalingPlanResourceForecastDataRequest(*types.GetScalingPlanResourceForecastDataInput) autoscalingplans.GetScalingPlanResourceForecastDataRequest
 
-	UpdateScalingPlanRequest(*autoscalingplans.UpdateScalingPlanInput) autoscalingplans.UpdateScalingPlanRequest
+	UpdateScalingPlanRequest(*types.UpdateScalingPlanInput) autoscalingplans.UpdateScalingPlanRequest
 }
 
 var _ ClientAPI = (*autoscalingplans.Client)(nil)

@@ -8,7 +8,7 @@ import (
 	"testing"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/service/dynamodb"
+	"github.com/aws/aws-sdk-go-v2/service/dynamodb/types"
 )
 
 // opeErrorMode will help with error cases and checking error types
@@ -52,7 +52,7 @@ func TestBuildOperand(t *testing.T) {
 			name:  "basic value",
 			input: Value(5),
 			expected: exprNode{
-				values: []dynamodb.AttributeValue{
+				values: []types.AttributeValue{
 					{
 						N: aws.String("5"),
 					},

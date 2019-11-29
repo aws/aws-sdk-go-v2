@@ -6,64 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/ec2query"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-type ResetInstanceAttributeInput struct {
-	_ struct{} `type:"structure"`
-
-	// The attribute to reset.
-	//
-	// You can only reset the following attributes: kernel | ramdisk | sourceDestCheck.
-	// To change an instance attribute, use ModifyInstanceAttribute.
-	//
-	// Attribute is a required field
-	Attribute InstanceAttributeName `locationName:"attribute" type:"string" required:"true" enum:"true"`
-
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have
-	// the required permissions, the error response is DryRunOperation. Otherwise,
-	// it is UnauthorizedOperation.
-	DryRun *bool `locationName:"dryRun" type:"boolean"`
-
-	// The ID of the instance.
-	//
-	// InstanceId is a required field
-	InstanceId *string `locationName:"instanceId" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s ResetInstanceAttributeInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ResetInstanceAttributeInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ResetInstanceAttributeInput"}
-	if len(s.Attribute) == 0 {
-		invalidParams.Add(aws.NewErrParamRequired("Attribute"))
-	}
-
-	if s.InstanceId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("InstanceId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ResetInstanceAttributeOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s ResetInstanceAttributeOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opResetInstanceAttribute = "ResetInstanceAttribute"
 
@@ -88,7 +34,7 @@ const opResetInstanceAttribute = "ResetInstanceAttribute"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ResetInstanceAttribute
-func (c *Client) ResetInstanceAttributeRequest(input *ResetInstanceAttributeInput) ResetInstanceAttributeRequest {
+func (c *Client) ResetInstanceAttributeRequest(input *types.ResetInstanceAttributeInput) ResetInstanceAttributeRequest {
 	op := &aws.Operation{
 		Name:       opResetInstanceAttribute,
 		HTTPMethod: "POST",
@@ -96,10 +42,10 @@ func (c *Client) ResetInstanceAttributeRequest(input *ResetInstanceAttributeInpu
 	}
 
 	if input == nil {
-		input = &ResetInstanceAttributeInput{}
+		input = &types.ResetInstanceAttributeInput{}
 	}
 
-	req := c.newRequest(op, input, &ResetInstanceAttributeOutput{})
+	req := c.newRequest(op, input, &types.ResetInstanceAttributeOutput{})
 	req.Handlers.Unmarshal.Remove(ec2query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return ResetInstanceAttributeRequest{Request: req, Input: input, Copy: c.ResetInstanceAttributeRequest}
@@ -109,8 +55,8 @@ func (c *Client) ResetInstanceAttributeRequest(input *ResetInstanceAttributeInpu
 // ResetInstanceAttribute API operation.
 type ResetInstanceAttributeRequest struct {
 	*aws.Request
-	Input *ResetInstanceAttributeInput
-	Copy  func(*ResetInstanceAttributeInput) ResetInstanceAttributeRequest
+	Input *types.ResetInstanceAttributeInput
+	Copy  func(*types.ResetInstanceAttributeInput) ResetInstanceAttributeRequest
 }
 
 // Send marshals and sends the ResetInstanceAttribute API request.
@@ -122,7 +68,7 @@ func (r ResetInstanceAttributeRequest) Send(ctx context.Context) (*ResetInstance
 	}
 
 	resp := &ResetInstanceAttributeResponse{
-		ResetInstanceAttributeOutput: r.Request.Data.(*ResetInstanceAttributeOutput),
+		ResetInstanceAttributeOutput: r.Request.Data.(*types.ResetInstanceAttributeOutput),
 		response:                     &aws.Response{Request: r.Request},
 	}
 
@@ -132,7 +78,7 @@ func (r ResetInstanceAttributeRequest) Send(ctx context.Context) (*ResetInstance
 // ResetInstanceAttributeResponse is the response type for the
 // ResetInstanceAttribute API operation.
 type ResetInstanceAttributeResponse struct {
-	*ResetInstanceAttributeOutput
+	*types.ResetInstanceAttributeOutput
 
 	response *aws.Response
 }

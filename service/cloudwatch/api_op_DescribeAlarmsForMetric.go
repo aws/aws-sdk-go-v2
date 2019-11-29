@@ -4,94 +4,10 @@ package cloudwatch
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/cloudwatch/types"
 )
-
-type DescribeAlarmsForMetricInput struct {
-	_ struct{} `type:"structure"`
-
-	// The dimensions associated with the metric. If the metric has any associated
-	// dimensions, you must specify them in order for the call to succeed.
-	Dimensions []Dimension `type:"list"`
-
-	// The percentile statistic for the metric. Specify a value between p0.0 and
-	// p100.
-	ExtendedStatistic *string `type:"string"`
-
-	// The name of the metric.
-	//
-	// MetricName is a required field
-	MetricName *string `min:"1" type:"string" required:"true"`
-
-	// The namespace of the metric.
-	//
-	// Namespace is a required field
-	Namespace *string `min:"1" type:"string" required:"true"`
-
-	// The period, in seconds, over which the statistic is applied.
-	Period *int64 `min:"1" type:"integer"`
-
-	// The statistic for the metric, other than percentiles. For percentile statistics,
-	// use ExtendedStatistics.
-	Statistic Statistic `type:"string" enum:"true"`
-
-	// The unit for the metric.
-	Unit StandardUnit `type:"string" enum:"true"`
-}
-
-// String returns the string representation
-func (s DescribeAlarmsForMetricInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeAlarmsForMetricInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeAlarmsForMetricInput"}
-
-	if s.MetricName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("MetricName"))
-	}
-	if s.MetricName != nil && len(*s.MetricName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("MetricName", 1))
-	}
-
-	if s.Namespace == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Namespace"))
-	}
-	if s.Namespace != nil && len(*s.Namespace) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Namespace", 1))
-	}
-	if s.Period != nil && *s.Period < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("Period", 1))
-	}
-	if s.Dimensions != nil {
-		for i, v := range s.Dimensions {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Dimensions", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribeAlarmsForMetricOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The information for each alarm with the specified metric.
-	MetricAlarms []MetricAlarm `type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeAlarmsForMetricOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeAlarmsForMetric = "DescribeAlarmsForMetric"
 
@@ -109,7 +25,7 @@ const opDescribeAlarmsForMetric = "DescribeAlarmsForMetric"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/DescribeAlarmsForMetric
-func (c *Client) DescribeAlarmsForMetricRequest(input *DescribeAlarmsForMetricInput) DescribeAlarmsForMetricRequest {
+func (c *Client) DescribeAlarmsForMetricRequest(input *types.DescribeAlarmsForMetricInput) DescribeAlarmsForMetricRequest {
 	op := &aws.Operation{
 		Name:       opDescribeAlarmsForMetric,
 		HTTPMethod: "POST",
@@ -117,10 +33,10 @@ func (c *Client) DescribeAlarmsForMetricRequest(input *DescribeAlarmsForMetricIn
 	}
 
 	if input == nil {
-		input = &DescribeAlarmsForMetricInput{}
+		input = &types.DescribeAlarmsForMetricInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeAlarmsForMetricOutput{})
+	req := c.newRequest(op, input, &types.DescribeAlarmsForMetricOutput{})
 	return DescribeAlarmsForMetricRequest{Request: req, Input: input, Copy: c.DescribeAlarmsForMetricRequest}
 }
 
@@ -128,8 +44,8 @@ func (c *Client) DescribeAlarmsForMetricRequest(input *DescribeAlarmsForMetricIn
 // DescribeAlarmsForMetric API operation.
 type DescribeAlarmsForMetricRequest struct {
 	*aws.Request
-	Input *DescribeAlarmsForMetricInput
-	Copy  func(*DescribeAlarmsForMetricInput) DescribeAlarmsForMetricRequest
+	Input *types.DescribeAlarmsForMetricInput
+	Copy  func(*types.DescribeAlarmsForMetricInput) DescribeAlarmsForMetricRequest
 }
 
 // Send marshals and sends the DescribeAlarmsForMetric API request.
@@ -141,7 +57,7 @@ func (r DescribeAlarmsForMetricRequest) Send(ctx context.Context) (*DescribeAlar
 	}
 
 	resp := &DescribeAlarmsForMetricResponse{
-		DescribeAlarmsForMetricOutput: r.Request.Data.(*DescribeAlarmsForMetricOutput),
+		DescribeAlarmsForMetricOutput: r.Request.Data.(*types.DescribeAlarmsForMetricOutput),
 		response:                      &aws.Response{Request: r.Request},
 	}
 
@@ -151,7 +67,7 @@ func (r DescribeAlarmsForMetricRequest) Send(ctx context.Context) (*DescribeAlar
 // DescribeAlarmsForMetricResponse is the response type for the
 // DescribeAlarmsForMetric API operation.
 type DescribeAlarmsForMetricResponse struct {
-	*DescribeAlarmsForMetricOutput
+	*types.DescribeAlarmsForMetricOutput
 
 	response *aws.Response
 }

@@ -6,67 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/inspector/types"
 )
-
-type ListEventSubscriptionsInput struct {
-	_ struct{} `type:"structure"`
-
-	// You can use this parameter to indicate the maximum number of items you want
-	// in the response. The default value is 10. The maximum value is 500.
-	MaxResults *int64 `locationName:"maxResults" type:"integer"`
-
-	// You can use this parameter when paginating results. Set the value of this
-	// parameter to null on your first call to the ListEventSubscriptions action.
-	// Subsequent calls to the action fill nextToken in the request with the value
-	// of NextToken from the previous response to continue listing data.
-	NextToken *string `locationName:"nextToken" min:"1" type:"string"`
-
-	// The ARN of the assessment template for which you want to list the existing
-	// event subscriptions.
-	ResourceArn *string `locationName:"resourceArn" min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s ListEventSubscriptionsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListEventSubscriptionsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListEventSubscriptionsInput"}
-	if s.NextToken != nil && len(*s.NextToken) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
-	}
-	if s.ResourceArn != nil && len(*s.ResourceArn) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ResourceArn", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ListEventSubscriptionsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// When a response is generated, if there is more data to be listed, this parameter
-	// is present in the response and contains the value to use for the nextToken
-	// parameter in a subsequent pagination request. If there is no more data to
-	// be listed, this parameter is set to null.
-	NextToken *string `locationName:"nextToken" min:"1" type:"string"`
-
-	// Details of the returned event subscriptions.
-	//
-	// Subscriptions is a required field
-	Subscriptions []Subscription `locationName:"subscriptions" type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s ListEventSubscriptionsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListEventSubscriptions = "ListEventSubscriptions"
 
@@ -85,7 +26,7 @@ const opListEventSubscriptions = "ListEventSubscriptions"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/ListEventSubscriptions
-func (c *Client) ListEventSubscriptionsRequest(input *ListEventSubscriptionsInput) ListEventSubscriptionsRequest {
+func (c *Client) ListEventSubscriptionsRequest(input *types.ListEventSubscriptionsInput) ListEventSubscriptionsRequest {
 	op := &aws.Operation{
 		Name:       opListEventSubscriptions,
 		HTTPMethod: "POST",
@@ -99,10 +40,10 @@ func (c *Client) ListEventSubscriptionsRequest(input *ListEventSubscriptionsInpu
 	}
 
 	if input == nil {
-		input = &ListEventSubscriptionsInput{}
+		input = &types.ListEventSubscriptionsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListEventSubscriptionsOutput{})
+	req := c.newRequest(op, input, &types.ListEventSubscriptionsOutput{})
 	return ListEventSubscriptionsRequest{Request: req, Input: input, Copy: c.ListEventSubscriptionsRequest}
 }
 
@@ -110,8 +51,8 @@ func (c *Client) ListEventSubscriptionsRequest(input *ListEventSubscriptionsInpu
 // ListEventSubscriptions API operation.
 type ListEventSubscriptionsRequest struct {
 	*aws.Request
-	Input *ListEventSubscriptionsInput
-	Copy  func(*ListEventSubscriptionsInput) ListEventSubscriptionsRequest
+	Input *types.ListEventSubscriptionsInput
+	Copy  func(*types.ListEventSubscriptionsInput) ListEventSubscriptionsRequest
 }
 
 // Send marshals and sends the ListEventSubscriptions API request.
@@ -123,7 +64,7 @@ func (r ListEventSubscriptionsRequest) Send(ctx context.Context) (*ListEventSubs
 	}
 
 	resp := &ListEventSubscriptionsResponse{
-		ListEventSubscriptionsOutput: r.Request.Data.(*ListEventSubscriptionsOutput),
+		ListEventSubscriptionsOutput: r.Request.Data.(*types.ListEventSubscriptionsOutput),
 		response:                     &aws.Response{Request: r.Request},
 	}
 
@@ -153,7 +94,7 @@ func NewListEventSubscriptionsPaginator(req ListEventSubscriptionsRequest) ListE
 	return ListEventSubscriptionsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListEventSubscriptionsInput
+				var inCpy *types.ListEventSubscriptionsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -173,14 +114,14 @@ type ListEventSubscriptionsPaginator struct {
 	aws.Pager
 }
 
-func (p *ListEventSubscriptionsPaginator) CurrentPage() *ListEventSubscriptionsOutput {
-	return p.Pager.CurrentPage().(*ListEventSubscriptionsOutput)
+func (p *ListEventSubscriptionsPaginator) CurrentPage() *types.ListEventSubscriptionsOutput {
+	return p.Pager.CurrentPage().(*types.ListEventSubscriptionsOutput)
 }
 
 // ListEventSubscriptionsResponse is the response type for the
 // ListEventSubscriptions API operation.
 type ListEventSubscriptionsResponse struct {
-	*ListEventSubscriptionsOutput
+	*types.ListEventSubscriptionsOutput
 
 	response *aws.Response
 }

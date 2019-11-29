@@ -6,47 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/emr/types"
 )
-
-type GetBlockPublicAccessConfigurationInput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s GetBlockPublicAccessConfigurationInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type GetBlockPublicAccessConfigurationOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A configuration for Amazon EMR block public access. The configuration applies
-	// to all clusters created in your account for the current Region. The configuration
-	// specifies whether block public access is enabled. If block public access
-	// is enabled, security groups associated with the cluster cannot have rules
-	// that allow inbound traffic from 0.0.0.0/0 or ::/0 on a port, unless the port
-	// is specified as an exception using PermittedPublicSecurityGroupRuleRanges
-	// in the BlockPublicAccessConfiguration. By default, Port 22 (SSH) is an exception,
-	// and public access is allowed on this port. You can change this by updating
-	// the block public access configuration to remove the exception.
-	//
-	// BlockPublicAccessConfiguration is a required field
-	BlockPublicAccessConfiguration *BlockPublicAccessConfiguration `type:"structure" required:"true"`
-
-	// Properties that describe the AWS principal that created the BlockPublicAccessConfiguration
-	// using the PutBlockPublicAccessConfiguration action as well as the date and
-	// time that the configuration was created. Each time a configuration for block
-	// public access is updated, Amazon EMR updates this metadata.
-	//
-	// BlockPublicAccessConfigurationMetadata is a required field
-	BlockPublicAccessConfigurationMetadata *BlockPublicAccessConfigurationMetadata `type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s GetBlockPublicAccessConfigurationOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetBlockPublicAccessConfiguration = "GetBlockPublicAccessConfiguration"
 
@@ -66,7 +27,7 @@ const opGetBlockPublicAccessConfiguration = "GetBlockPublicAccessConfiguration"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/GetBlockPublicAccessConfiguration
-func (c *Client) GetBlockPublicAccessConfigurationRequest(input *GetBlockPublicAccessConfigurationInput) GetBlockPublicAccessConfigurationRequest {
+func (c *Client) GetBlockPublicAccessConfigurationRequest(input *types.GetBlockPublicAccessConfigurationInput) GetBlockPublicAccessConfigurationRequest {
 	op := &aws.Operation{
 		Name:       opGetBlockPublicAccessConfiguration,
 		HTTPMethod: "POST",
@@ -74,10 +35,10 @@ func (c *Client) GetBlockPublicAccessConfigurationRequest(input *GetBlockPublicA
 	}
 
 	if input == nil {
-		input = &GetBlockPublicAccessConfigurationInput{}
+		input = &types.GetBlockPublicAccessConfigurationInput{}
 	}
 
-	req := c.newRequest(op, input, &GetBlockPublicAccessConfigurationOutput{})
+	req := c.newRequest(op, input, &types.GetBlockPublicAccessConfigurationOutput{})
 	return GetBlockPublicAccessConfigurationRequest{Request: req, Input: input, Copy: c.GetBlockPublicAccessConfigurationRequest}
 }
 
@@ -85,8 +46,8 @@ func (c *Client) GetBlockPublicAccessConfigurationRequest(input *GetBlockPublicA
 // GetBlockPublicAccessConfiguration API operation.
 type GetBlockPublicAccessConfigurationRequest struct {
 	*aws.Request
-	Input *GetBlockPublicAccessConfigurationInput
-	Copy  func(*GetBlockPublicAccessConfigurationInput) GetBlockPublicAccessConfigurationRequest
+	Input *types.GetBlockPublicAccessConfigurationInput
+	Copy  func(*types.GetBlockPublicAccessConfigurationInput) GetBlockPublicAccessConfigurationRequest
 }
 
 // Send marshals and sends the GetBlockPublicAccessConfiguration API request.
@@ -98,7 +59,7 @@ func (r GetBlockPublicAccessConfigurationRequest) Send(ctx context.Context) (*Ge
 	}
 
 	resp := &GetBlockPublicAccessConfigurationResponse{
-		GetBlockPublicAccessConfigurationOutput: r.Request.Data.(*GetBlockPublicAccessConfigurationOutput),
+		GetBlockPublicAccessConfigurationOutput: r.Request.Data.(*types.GetBlockPublicAccessConfigurationOutput),
 		response:                                &aws.Response{Request: r.Request},
 	}
 
@@ -108,7 +69,7 @@ func (r GetBlockPublicAccessConfigurationRequest) Send(ctx context.Context) (*Ge
 // GetBlockPublicAccessConfigurationResponse is the response type for the
 // GetBlockPublicAccessConfiguration API operation.
 type GetBlockPublicAccessConfigurationResponse struct {
-	*GetBlockPublicAccessConfigurationOutput
+	*types.GetBlockPublicAccessConfigurationOutput
 
 	response *aws.Response
 }

@@ -6,91 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/codecommit/types"
 )
-
-type GetDifferencesInput struct {
-	_ struct{} `type:"structure"`
-
-	// The branch, tag, HEAD, or other fully qualified reference used to identify
-	// a commit.
-	//
-	// AfterCommitSpecifier is a required field
-	AfterCommitSpecifier *string `locationName:"afterCommitSpecifier" type:"string" required:"true"`
-
-	// The file path in which to check differences. Limits the results to this path.
-	// Can also be used to specify the changed name of a directory or folder, if
-	// it has changed. If not specified, differences will be shown for all paths.
-	AfterPath *string `locationName:"afterPath" type:"string"`
-
-	// The branch, tag, HEAD, or other fully qualified reference used to identify
-	// a commit. For example, the full commit ID. Optional. If not specified, all
-	// changes prior to the afterCommitSpecifier value will be shown. If you do
-	// not use beforeCommitSpecifier in your request, consider limiting the results
-	// with maxResults.
-	BeforeCommitSpecifier *string `locationName:"beforeCommitSpecifier" type:"string"`
-
-	// The file path in which to check for differences. Limits the results to this
-	// path. Can also be used to specify the previous name of a directory or folder.
-	// If beforePath and afterPath are not specified, differences will be shown
-	// for all paths.
-	BeforePath *string `locationName:"beforePath" type:"string"`
-
-	// A non-negative integer used to limit the number of returned results.
-	MaxResults *int64 `type:"integer"`
-
-	// An enumeration token that when provided in a request, returns the next batch
-	// of the results.
-	NextToken *string `type:"string"`
-
-	// The name of the repository where you want to get differences.
-	//
-	// RepositoryName is a required field
-	RepositoryName *string `locationName:"repositoryName" min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetDifferencesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetDifferencesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetDifferencesInput"}
-
-	if s.AfterCommitSpecifier == nil {
-		invalidParams.Add(aws.NewErrParamRequired("AfterCommitSpecifier"))
-	}
-
-	if s.RepositoryName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("RepositoryName"))
-	}
-	if s.RepositoryName != nil && len(*s.RepositoryName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("RepositoryName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type GetDifferencesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A differences data type object that contains information about the differences,
-	// including whether the difference is added, modified, or deleted (A, D, M).
-	Differences []Difference `locationName:"differences" type:"list"`
-
-	// An enumeration token that can be used in a request to return the next batch
-	// of the results.
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s GetDifferencesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetDifferences = "GetDifferences"
 
@@ -98,7 +15,7 @@ const opGetDifferences = "GetDifferences"
 // AWS CodeCommit.
 //
 // Returns information about the differences in a valid commit specifier (such
-// as a branch, tag, HEAD, commit ID or other fully qualified reference). Results
+// as a branch, tag, HEAD, commit ID, or other fully qualified reference). Results
 // can be limited to a specified path.
 //
 //    // Example sending a request using GetDifferencesRequest.
@@ -109,7 +26,7 @@ const opGetDifferences = "GetDifferences"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/GetDifferences
-func (c *Client) GetDifferencesRequest(input *GetDifferencesInput) GetDifferencesRequest {
+func (c *Client) GetDifferencesRequest(input *types.GetDifferencesInput) GetDifferencesRequest {
 	op := &aws.Operation{
 		Name:       opGetDifferences,
 		HTTPMethod: "POST",
@@ -123,10 +40,10 @@ func (c *Client) GetDifferencesRequest(input *GetDifferencesInput) GetDifference
 	}
 
 	if input == nil {
-		input = &GetDifferencesInput{}
+		input = &types.GetDifferencesInput{}
 	}
 
-	req := c.newRequest(op, input, &GetDifferencesOutput{})
+	req := c.newRequest(op, input, &types.GetDifferencesOutput{})
 	return GetDifferencesRequest{Request: req, Input: input, Copy: c.GetDifferencesRequest}
 }
 
@@ -134,8 +51,8 @@ func (c *Client) GetDifferencesRequest(input *GetDifferencesInput) GetDifference
 // GetDifferences API operation.
 type GetDifferencesRequest struct {
 	*aws.Request
-	Input *GetDifferencesInput
-	Copy  func(*GetDifferencesInput) GetDifferencesRequest
+	Input *types.GetDifferencesInput
+	Copy  func(*types.GetDifferencesInput) GetDifferencesRequest
 }
 
 // Send marshals and sends the GetDifferences API request.
@@ -147,7 +64,7 @@ func (r GetDifferencesRequest) Send(ctx context.Context) (*GetDifferencesRespons
 	}
 
 	resp := &GetDifferencesResponse{
-		GetDifferencesOutput: r.Request.Data.(*GetDifferencesOutput),
+		GetDifferencesOutput: r.Request.Data.(*types.GetDifferencesOutput),
 		response:             &aws.Response{Request: r.Request},
 	}
 
@@ -177,7 +94,7 @@ func NewGetDifferencesPaginator(req GetDifferencesRequest) GetDifferencesPaginat
 	return GetDifferencesPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *GetDifferencesInput
+				var inCpy *types.GetDifferencesInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -197,14 +114,14 @@ type GetDifferencesPaginator struct {
 	aws.Pager
 }
 
-func (p *GetDifferencesPaginator) CurrentPage() *GetDifferencesOutput {
-	return p.Pager.CurrentPage().(*GetDifferencesOutput)
+func (p *GetDifferencesPaginator) CurrentPage() *types.GetDifferencesOutput {
+	return p.Pager.CurrentPage().(*types.GetDifferencesOutput)
 }
 
 // GetDifferencesResponse is the response type for the
 // GetDifferences API operation.
 type GetDifferencesResponse struct {
-	*GetDifferencesOutput
+	*types.GetDifferencesOutput
 
 	response *aws.Response
 }

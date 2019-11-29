@@ -6,71 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/cloudwatch/types"
 )
-
-type DescribeAlarmsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The action name prefix.
-	ActionPrefix *string `min:"1" type:"string"`
-
-	// The alarm name prefix. If this parameter is specified, you cannot specify
-	// AlarmNames.
-	AlarmNamePrefix *string `min:"1" type:"string"`
-
-	// The names of the alarms.
-	AlarmNames []string `type:"list"`
-
-	// The maximum number of alarm descriptions to retrieve.
-	MaxRecords *int64 `min:"1" type:"integer"`
-
-	// The token returned by a previous call to indicate that there is more data
-	// available.
-	NextToken *string `type:"string"`
-
-	// The state value to be used in matching alarms.
-	StateValue StateValue `type:"string" enum:"true"`
-}
-
-// String returns the string representation
-func (s DescribeAlarmsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeAlarmsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeAlarmsInput"}
-	if s.ActionPrefix != nil && len(*s.ActionPrefix) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ActionPrefix", 1))
-	}
-	if s.AlarmNamePrefix != nil && len(*s.AlarmNamePrefix) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("AlarmNamePrefix", 1))
-	}
-	if s.MaxRecords != nil && *s.MaxRecords < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxRecords", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribeAlarmsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The information for the specified alarms.
-	MetricAlarms []MetricAlarm `type:"list"`
-
-	// The token that marks the start of the next batch of returned results.
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeAlarmsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeAlarms = "DescribeAlarms"
 
@@ -89,7 +26,7 @@ const opDescribeAlarms = "DescribeAlarms"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/DescribeAlarms
-func (c *Client) DescribeAlarmsRequest(input *DescribeAlarmsInput) DescribeAlarmsRequest {
+func (c *Client) DescribeAlarmsRequest(input *types.DescribeAlarmsInput) DescribeAlarmsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeAlarms,
 		HTTPMethod: "POST",
@@ -103,10 +40,10 @@ func (c *Client) DescribeAlarmsRequest(input *DescribeAlarmsInput) DescribeAlarm
 	}
 
 	if input == nil {
-		input = &DescribeAlarmsInput{}
+		input = &types.DescribeAlarmsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeAlarmsOutput{})
+	req := c.newRequest(op, input, &types.DescribeAlarmsOutput{})
 	return DescribeAlarmsRequest{Request: req, Input: input, Copy: c.DescribeAlarmsRequest}
 }
 
@@ -114,8 +51,8 @@ func (c *Client) DescribeAlarmsRequest(input *DescribeAlarmsInput) DescribeAlarm
 // DescribeAlarms API operation.
 type DescribeAlarmsRequest struct {
 	*aws.Request
-	Input *DescribeAlarmsInput
-	Copy  func(*DescribeAlarmsInput) DescribeAlarmsRequest
+	Input *types.DescribeAlarmsInput
+	Copy  func(*types.DescribeAlarmsInput) DescribeAlarmsRequest
 }
 
 // Send marshals and sends the DescribeAlarms API request.
@@ -127,7 +64,7 @@ func (r DescribeAlarmsRequest) Send(ctx context.Context) (*DescribeAlarmsRespons
 	}
 
 	resp := &DescribeAlarmsResponse{
-		DescribeAlarmsOutput: r.Request.Data.(*DescribeAlarmsOutput),
+		DescribeAlarmsOutput: r.Request.Data.(*types.DescribeAlarmsOutput),
 		response:             &aws.Response{Request: r.Request},
 	}
 
@@ -157,7 +94,7 @@ func NewDescribeAlarmsPaginator(req DescribeAlarmsRequest) DescribeAlarmsPaginat
 	return DescribeAlarmsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *DescribeAlarmsInput
+				var inCpy *types.DescribeAlarmsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -177,14 +114,14 @@ type DescribeAlarmsPaginator struct {
 	aws.Pager
 }
 
-func (p *DescribeAlarmsPaginator) CurrentPage() *DescribeAlarmsOutput {
-	return p.Pager.CurrentPage().(*DescribeAlarmsOutput)
+func (p *DescribeAlarmsPaginator) CurrentPage() *types.DescribeAlarmsOutput {
+	return p.Pager.CurrentPage().(*types.DescribeAlarmsOutput)
 }
 
 // DescribeAlarmsResponse is the response type for the
 // DescribeAlarms API operation.
 type DescribeAlarmsResponse struct {
-	*DescribeAlarmsOutput
+	*types.DescribeAlarmsOutput
 
 	response *aws.Response
 }

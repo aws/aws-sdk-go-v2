@@ -6,68 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/types"
 )
-
-type ListResourceServersInput struct {
-	_ struct{} `type:"structure"`
-
-	// The maximum number of resource servers to return.
-	MaxResults *int64 `min:"1" type:"integer"`
-
-	// A pagination token.
-	NextToken *string `min:"1" type:"string"`
-
-	// The user pool ID for the user pool.
-	//
-	// UserPoolId is a required field
-	UserPoolId *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s ListResourceServersInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListResourceServersInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListResourceServersInput"}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-	if s.NextToken != nil && len(*s.NextToken) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
-	}
-
-	if s.UserPoolId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("UserPoolId"))
-	}
-	if s.UserPoolId != nil && len(*s.UserPoolId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("UserPoolId", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ListResourceServersOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A pagination token.
-	NextToken *string `min:"1" type:"string"`
-
-	// The resource servers.
-	//
-	// ResourceServers is a required field
-	ResourceServers []ResourceServerType `type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s ListResourceServersOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListResourceServers = "ListResourceServers"
 
@@ -84,7 +24,7 @@ const opListResourceServers = "ListResourceServers"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/ListResourceServers
-func (c *Client) ListResourceServersRequest(input *ListResourceServersInput) ListResourceServersRequest {
+func (c *Client) ListResourceServersRequest(input *types.ListResourceServersInput) ListResourceServersRequest {
 	op := &aws.Operation{
 		Name:       opListResourceServers,
 		HTTPMethod: "POST",
@@ -98,10 +38,10 @@ func (c *Client) ListResourceServersRequest(input *ListResourceServersInput) Lis
 	}
 
 	if input == nil {
-		input = &ListResourceServersInput{}
+		input = &types.ListResourceServersInput{}
 	}
 
-	req := c.newRequest(op, input, &ListResourceServersOutput{})
+	req := c.newRequest(op, input, &types.ListResourceServersOutput{})
 	return ListResourceServersRequest{Request: req, Input: input, Copy: c.ListResourceServersRequest}
 }
 
@@ -109,8 +49,8 @@ func (c *Client) ListResourceServersRequest(input *ListResourceServersInput) Lis
 // ListResourceServers API operation.
 type ListResourceServersRequest struct {
 	*aws.Request
-	Input *ListResourceServersInput
-	Copy  func(*ListResourceServersInput) ListResourceServersRequest
+	Input *types.ListResourceServersInput
+	Copy  func(*types.ListResourceServersInput) ListResourceServersRequest
 }
 
 // Send marshals and sends the ListResourceServers API request.
@@ -122,7 +62,7 @@ func (r ListResourceServersRequest) Send(ctx context.Context) (*ListResourceServ
 	}
 
 	resp := &ListResourceServersResponse{
-		ListResourceServersOutput: r.Request.Data.(*ListResourceServersOutput),
+		ListResourceServersOutput: r.Request.Data.(*types.ListResourceServersOutput),
 		response:                  &aws.Response{Request: r.Request},
 	}
 
@@ -152,7 +92,7 @@ func NewListResourceServersPaginator(req ListResourceServersRequest) ListResourc
 	return ListResourceServersPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListResourceServersInput
+				var inCpy *types.ListResourceServersInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -172,14 +112,14 @@ type ListResourceServersPaginator struct {
 	aws.Pager
 }
 
-func (p *ListResourceServersPaginator) CurrentPage() *ListResourceServersOutput {
-	return p.Pager.CurrentPage().(*ListResourceServersOutput)
+func (p *ListResourceServersPaginator) CurrentPage() *types.ListResourceServersOutput {
+	return p.Pager.CurrentPage().(*types.ListResourceServersOutput)
 }
 
 // ListResourceServersResponse is the response type for the
 // ListResourceServers API operation.
 type ListResourceServersResponse struct {
-	*ListResourceServersOutput
+	*types.ListResourceServersOutput
 
 	response *aws.Response
 }

@@ -6,108 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/clouddirectory/types"
 )
-
-type UpgradeAppliedSchemaInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ARN for the directory to which the upgraded schema will be applied.
-	//
-	// DirectoryArn is a required field
-	DirectoryArn *string `type:"string" required:"true"`
-
-	// Used for testing whether the major version schemas are backward compatible
-	// or not. If schema compatibility fails, an exception would be thrown else
-	// the call would succeed but no changes will be saved. This parameter is optional.
-	DryRun *bool `type:"boolean"`
-
-	// The revision of the published schema to upgrade the directory to.
-	//
-	// PublishedSchemaArn is a required field
-	PublishedSchemaArn *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s UpgradeAppliedSchemaInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpgradeAppliedSchemaInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpgradeAppliedSchemaInput"}
-
-	if s.DirectoryArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DirectoryArn"))
-	}
-
-	if s.PublishedSchemaArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("PublishedSchemaArn"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s UpgradeAppliedSchemaInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.DirectoryArn != nil {
-		v := *s.DirectoryArn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "DirectoryArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.DryRun != nil {
-		v := *s.DryRun
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "DryRun", protocol.BoolValue(v), metadata)
-	}
-	if s.PublishedSchemaArn != nil {
-		v := *s.PublishedSchemaArn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "PublishedSchemaArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type UpgradeAppliedSchemaOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The ARN of the directory that is returned as part of the response.
-	DirectoryArn *string `type:"string"`
-
-	// The ARN of the upgraded schema that is returned as part of the response.
-	UpgradedSchemaArn *string `type:"string"`
-}
-
-// String returns the string representation
-func (s UpgradeAppliedSchemaOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s UpgradeAppliedSchemaOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.DirectoryArn != nil {
-		v := *s.DirectoryArn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "DirectoryArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.UpgradedSchemaArn != nil {
-		v := *s.UpgradedSchemaArn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "UpgradedSchemaArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opUpgradeAppliedSchema = "UpgradeAppliedSchema"
 
@@ -129,7 +29,7 @@ const opUpgradeAppliedSchema = "UpgradeAppliedSchema"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/UpgradeAppliedSchema
-func (c *Client) UpgradeAppliedSchemaRequest(input *UpgradeAppliedSchemaInput) UpgradeAppliedSchemaRequest {
+func (c *Client) UpgradeAppliedSchemaRequest(input *types.UpgradeAppliedSchemaInput) UpgradeAppliedSchemaRequest {
 	op := &aws.Operation{
 		Name:       opUpgradeAppliedSchema,
 		HTTPMethod: "PUT",
@@ -137,10 +37,10 @@ func (c *Client) UpgradeAppliedSchemaRequest(input *UpgradeAppliedSchemaInput) U
 	}
 
 	if input == nil {
-		input = &UpgradeAppliedSchemaInput{}
+		input = &types.UpgradeAppliedSchemaInput{}
 	}
 
-	req := c.newRequest(op, input, &UpgradeAppliedSchemaOutput{})
+	req := c.newRequest(op, input, &types.UpgradeAppliedSchemaOutput{})
 	return UpgradeAppliedSchemaRequest{Request: req, Input: input, Copy: c.UpgradeAppliedSchemaRequest}
 }
 
@@ -148,8 +48,8 @@ func (c *Client) UpgradeAppliedSchemaRequest(input *UpgradeAppliedSchemaInput) U
 // UpgradeAppliedSchema API operation.
 type UpgradeAppliedSchemaRequest struct {
 	*aws.Request
-	Input *UpgradeAppliedSchemaInput
-	Copy  func(*UpgradeAppliedSchemaInput) UpgradeAppliedSchemaRequest
+	Input *types.UpgradeAppliedSchemaInput
+	Copy  func(*types.UpgradeAppliedSchemaInput) UpgradeAppliedSchemaRequest
 }
 
 // Send marshals and sends the UpgradeAppliedSchema API request.
@@ -161,7 +61,7 @@ func (r UpgradeAppliedSchemaRequest) Send(ctx context.Context) (*UpgradeAppliedS
 	}
 
 	resp := &UpgradeAppliedSchemaResponse{
-		UpgradeAppliedSchemaOutput: r.Request.Data.(*UpgradeAppliedSchemaOutput),
+		UpgradeAppliedSchemaOutput: r.Request.Data.(*types.UpgradeAppliedSchemaOutput),
 		response:                   &aws.Response{Request: r.Request},
 	}
 
@@ -171,7 +71,7 @@ func (r UpgradeAppliedSchemaRequest) Send(ctx context.Context) (*UpgradeAppliedS
 // UpgradeAppliedSchemaResponse is the response type for the
 // UpgradeAppliedSchema API operation.
 type UpgradeAppliedSchemaResponse struct {
-	*UpgradeAppliedSchemaOutput
+	*types.UpgradeAppliedSchemaOutput
 
 	response *aws.Response
 }

@@ -4,80 +4,10 @@ package rds
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/rds/types"
 )
-
-type DescribeDBParameterGroupsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of a specific DB parameter group to return details for.
-	//
-	// Constraints:
-	//
-	//    * If supplied, must match the name of an existing DBClusterParameterGroup.
-	DBParameterGroupName *string `type:"string"`
-
-	// This parameter is not currently supported.
-	Filters []Filter `locationNameList:"Filter" type:"list"`
-
-	// An optional pagination token provided by a previous DescribeDBParameterGroups
-	// request. If this parameter is specified, the response includes only records
-	// beyond the marker, up to the value specified by MaxRecords.
-	Marker *string `type:"string"`
-
-	// The maximum number of records to include in the response. If more records
-	// exist than the specified MaxRecords value, a pagination token called a marker
-	// is included in the response so that you can retrieve the remaining results.
-	//
-	// Default: 100
-	//
-	// Constraints: Minimum 20, maximum 100.
-	MaxRecords *int64 `type:"integer"`
-}
-
-// String returns the string representation
-func (s DescribeDBParameterGroupsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeDBParameterGroupsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeDBParameterGroupsInput"}
-	if s.Filters != nil {
-		for i, v := range s.Filters {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Contains the result of a successful invocation of the DescribeDBParameterGroups
-// action.
-type DescribeDBParameterGroupsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A list of DBParameterGroup instances.
-	DBParameterGroups []DBParameterGroup `locationNameList:"DBParameterGroup" type:"list"`
-
-	// An optional pagination token provided by a previous request. If this parameter
-	// is specified, the response includes only records beyond the marker, up to
-	// the value specified by MaxRecords.
-	Marker *string `type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeDBParameterGroupsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeDBParameterGroups = "DescribeDBParameterGroups"
 
@@ -96,7 +26,7 @@ const opDescribeDBParameterGroups = "DescribeDBParameterGroups"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeDBParameterGroups
-func (c *Client) DescribeDBParameterGroupsRequest(input *DescribeDBParameterGroupsInput) DescribeDBParameterGroupsRequest {
+func (c *Client) DescribeDBParameterGroupsRequest(input *types.DescribeDBParameterGroupsInput) DescribeDBParameterGroupsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeDBParameterGroups,
 		HTTPMethod: "POST",
@@ -110,10 +40,10 @@ func (c *Client) DescribeDBParameterGroupsRequest(input *DescribeDBParameterGrou
 	}
 
 	if input == nil {
-		input = &DescribeDBParameterGroupsInput{}
+		input = &types.DescribeDBParameterGroupsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeDBParameterGroupsOutput{})
+	req := c.newRequest(op, input, &types.DescribeDBParameterGroupsOutput{})
 	return DescribeDBParameterGroupsRequest{Request: req, Input: input, Copy: c.DescribeDBParameterGroupsRequest}
 }
 
@@ -121,8 +51,8 @@ func (c *Client) DescribeDBParameterGroupsRequest(input *DescribeDBParameterGrou
 // DescribeDBParameterGroups API operation.
 type DescribeDBParameterGroupsRequest struct {
 	*aws.Request
-	Input *DescribeDBParameterGroupsInput
-	Copy  func(*DescribeDBParameterGroupsInput) DescribeDBParameterGroupsRequest
+	Input *types.DescribeDBParameterGroupsInput
+	Copy  func(*types.DescribeDBParameterGroupsInput) DescribeDBParameterGroupsRequest
 }
 
 // Send marshals and sends the DescribeDBParameterGroups API request.
@@ -134,7 +64,7 @@ func (r DescribeDBParameterGroupsRequest) Send(ctx context.Context) (*DescribeDB
 	}
 
 	resp := &DescribeDBParameterGroupsResponse{
-		DescribeDBParameterGroupsOutput: r.Request.Data.(*DescribeDBParameterGroupsOutput),
+		DescribeDBParameterGroupsOutput: r.Request.Data.(*types.DescribeDBParameterGroupsOutput),
 		response:                        &aws.Response{Request: r.Request},
 	}
 
@@ -164,7 +94,7 @@ func NewDescribeDBParameterGroupsPaginator(req DescribeDBParameterGroupsRequest)
 	return DescribeDBParameterGroupsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *DescribeDBParameterGroupsInput
+				var inCpy *types.DescribeDBParameterGroupsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -184,14 +114,14 @@ type DescribeDBParameterGroupsPaginator struct {
 	aws.Pager
 }
 
-func (p *DescribeDBParameterGroupsPaginator) CurrentPage() *DescribeDBParameterGroupsOutput {
-	return p.Pager.CurrentPage().(*DescribeDBParameterGroupsOutput)
+func (p *DescribeDBParameterGroupsPaginator) CurrentPage() *types.DescribeDBParameterGroupsOutput {
+	return p.Pager.CurrentPage().(*types.DescribeDBParameterGroupsOutput)
 }
 
 // DescribeDBParameterGroupsResponse is the response type for the
 // DescribeDBParameterGroups API operation.
 type DescribeDBParameterGroupsResponse struct {
-	*DescribeDBParameterGroupsOutput
+	*types.DescribeDBParameterGroupsOutput
 
 	response *aws.Response
 }

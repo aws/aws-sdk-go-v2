@@ -6,75 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ecs/types"
 )
-
-type DeleteTaskSetInput struct {
-	_ struct{} `type:"structure"`
-
-	// The short name or full Amazon Resource Name (ARN) of the cluster that hosts
-	// the service that the task set exists in to delete.
-	//
-	// Cluster is a required field
-	Cluster *string `locationName:"cluster" type:"string" required:"true"`
-
-	// If true, this allows you to delete a task set even if it hasn't been scaled
-	// down to zero.
-	Force *bool `locationName:"force" type:"boolean"`
-
-	// The short name or full Amazon Resource Name (ARN) of the service that hosts
-	// the task set to delete.
-	//
-	// Service is a required field
-	Service *string `locationName:"service" type:"string" required:"true"`
-
-	// The task set ID or full Amazon Resource Name (ARN) of the task set to delete.
-	//
-	// TaskSet is a required field
-	TaskSet *string `locationName:"taskSet" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteTaskSetInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteTaskSetInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteTaskSetInput"}
-
-	if s.Cluster == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Cluster"))
-	}
-
-	if s.Service == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Service"))
-	}
-
-	if s.TaskSet == nil {
-		invalidParams.Add(aws.NewErrParamRequired("TaskSet"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteTaskSetOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Information about a set of Amazon ECS tasks in either an AWS CodeDeploy or
-	// an EXTERNAL deployment. An Amazon ECS task set includes details such as the
-	// desired number of tasks, how many tasks are running, and whether the task
-	// set serves production traffic.
-	TaskSet *TaskSet `locationName:"taskSet" type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteTaskSetOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteTaskSet = "DeleteTaskSet"
 
@@ -94,7 +27,7 @@ const opDeleteTaskSet = "DeleteTaskSet"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DeleteTaskSet
-func (c *Client) DeleteTaskSetRequest(input *DeleteTaskSetInput) DeleteTaskSetRequest {
+func (c *Client) DeleteTaskSetRequest(input *types.DeleteTaskSetInput) DeleteTaskSetRequest {
 	op := &aws.Operation{
 		Name:       opDeleteTaskSet,
 		HTTPMethod: "POST",
@@ -102,10 +35,10 @@ func (c *Client) DeleteTaskSetRequest(input *DeleteTaskSetInput) DeleteTaskSetRe
 	}
 
 	if input == nil {
-		input = &DeleteTaskSetInput{}
+		input = &types.DeleteTaskSetInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteTaskSetOutput{})
+	req := c.newRequest(op, input, &types.DeleteTaskSetOutput{})
 	return DeleteTaskSetRequest{Request: req, Input: input, Copy: c.DeleteTaskSetRequest}
 }
 
@@ -113,8 +46,8 @@ func (c *Client) DeleteTaskSetRequest(input *DeleteTaskSetInput) DeleteTaskSetRe
 // DeleteTaskSet API operation.
 type DeleteTaskSetRequest struct {
 	*aws.Request
-	Input *DeleteTaskSetInput
-	Copy  func(*DeleteTaskSetInput) DeleteTaskSetRequest
+	Input *types.DeleteTaskSetInput
+	Copy  func(*types.DeleteTaskSetInput) DeleteTaskSetRequest
 }
 
 // Send marshals and sends the DeleteTaskSet API request.
@@ -126,7 +59,7 @@ func (r DeleteTaskSetRequest) Send(ctx context.Context) (*DeleteTaskSetResponse,
 	}
 
 	resp := &DeleteTaskSetResponse{
-		DeleteTaskSetOutput: r.Request.Data.(*DeleteTaskSetOutput),
+		DeleteTaskSetOutput: r.Request.Data.(*types.DeleteTaskSetOutput),
 		response:            &aws.Response{Request: r.Request},
 	}
 
@@ -136,7 +69,7 @@ func (r DeleteTaskSetRequest) Send(ctx context.Context) (*DeleteTaskSetResponse,
 // DeleteTaskSetResponse is the response type for the
 // DeleteTaskSet API operation.
 type DeleteTaskSetResponse struct {
-	*DeleteTaskSetOutput
+	*types.DeleteTaskSetOutput
 
 	response *aws.Response
 }

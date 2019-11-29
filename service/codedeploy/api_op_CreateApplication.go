@@ -6,62 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/codedeploy/types"
 )
-
-// Represents the input of a CreateApplication operation.
-type CreateApplicationInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the application. This name must be unique with the applicable
-	// IAM user or AWS account.
-	//
-	// ApplicationName is a required field
-	ApplicationName *string `locationName:"applicationName" min:"1" type:"string" required:"true"`
-
-	// The destination platform type for the deployment (Lambda, Server, or ECS).
-	ComputePlatform ComputePlatform `locationName:"computePlatform" type:"string" enum:"true"`
-
-	// The metadata that you apply to CodeDeploy applications to help you organize
-	// and categorize them. Each tag consists of a key and an optional value, both
-	// of which you define.
-	Tags []Tag `locationName:"tags" type:"list"`
-}
-
-// String returns the string representation
-func (s CreateApplicationInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateApplicationInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateApplicationInput"}
-
-	if s.ApplicationName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ApplicationName"))
-	}
-	if s.ApplicationName != nil && len(*s.ApplicationName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ApplicationName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Represents the output of a CreateApplication operation.
-type CreateApplicationOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A unique application ID.
-	ApplicationId *string `locationName:"applicationId" type:"string"`
-}
-
-// String returns the string representation
-func (s CreateApplicationOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCreateApplication = "CreateApplication"
 
@@ -78,7 +24,7 @@ const opCreateApplication = "CreateApplication"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/CreateApplication
-func (c *Client) CreateApplicationRequest(input *CreateApplicationInput) CreateApplicationRequest {
+func (c *Client) CreateApplicationRequest(input *types.CreateApplicationInput) CreateApplicationRequest {
 	op := &aws.Operation{
 		Name:       opCreateApplication,
 		HTTPMethod: "POST",
@@ -86,10 +32,10 @@ func (c *Client) CreateApplicationRequest(input *CreateApplicationInput) CreateA
 	}
 
 	if input == nil {
-		input = &CreateApplicationInput{}
+		input = &types.CreateApplicationInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateApplicationOutput{})
+	req := c.newRequest(op, input, &types.CreateApplicationOutput{})
 	return CreateApplicationRequest{Request: req, Input: input, Copy: c.CreateApplicationRequest}
 }
 
@@ -97,8 +43,8 @@ func (c *Client) CreateApplicationRequest(input *CreateApplicationInput) CreateA
 // CreateApplication API operation.
 type CreateApplicationRequest struct {
 	*aws.Request
-	Input *CreateApplicationInput
-	Copy  func(*CreateApplicationInput) CreateApplicationRequest
+	Input *types.CreateApplicationInput
+	Copy  func(*types.CreateApplicationInput) CreateApplicationRequest
 }
 
 // Send marshals and sends the CreateApplication API request.
@@ -110,7 +56,7 @@ func (r CreateApplicationRequest) Send(ctx context.Context) (*CreateApplicationR
 	}
 
 	resp := &CreateApplicationResponse{
-		CreateApplicationOutput: r.Request.Data.(*CreateApplicationOutput),
+		CreateApplicationOutput: r.Request.Data.(*types.CreateApplicationOutput),
 		response:                &aws.Response{Request: r.Request},
 	}
 
@@ -120,7 +66,7 @@ func (r CreateApplicationRequest) Send(ctx context.Context) (*CreateApplicationR
 // CreateApplicationResponse is the response type for the
 // CreateApplication API operation.
 type CreateApplicationResponse struct {
-	*CreateApplicationOutput
+	*types.CreateApplicationOutput
 
 	response *aws.Response
 }

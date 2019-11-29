@@ -6,86 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/apigateway/types"
 )
-
-// The GET request to list existing RestApis defined for your collection.
-type GetRestApisInput struct {
-	_ struct{} `type:"structure"`
-
-	// The maximum number of returned results per page. The default value is 25
-	// and the maximum value is 500.
-	Limit *int64 `location:"querystring" locationName:"limit" type:"integer"`
-
-	// The current pagination position in the paged result set.
-	Position *string `location:"querystring" locationName:"position" type:"string"`
-}
-
-// String returns the string representation
-func (s GetRestApisInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetRestApisInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.Limit != nil {
-		v := *s.Limit
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "limit", protocol.Int64Value(v), metadata)
-	}
-	if s.Position != nil {
-		v := *s.Position
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "position", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-// Contains references to your APIs and links that guide you in how to interact
-// with your collection. A collection offers a paginated view of your APIs.
-//
-// Create an API (https://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-create-api.html)
-type GetRestApisOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The current page of elements from this collection.
-	Items []RestApi `locationName:"item" type:"list"`
-
-	Position *string `locationName:"position" type:"string"`
-}
-
-// String returns the string representation
-func (s GetRestApisOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetRestApisOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.Items != nil {
-		v := s.Items
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "item", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	if s.Position != nil {
-		v := *s.Position
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "position", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opGetRestApis = "GetRestApis"
 
@@ -100,7 +22,7 @@ const opGetRestApis = "GetRestApis"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) GetRestApisRequest(input *GetRestApisInput) GetRestApisRequest {
+func (c *Client) GetRestApisRequest(input *types.GetRestApisInput) GetRestApisRequest {
 	op := &aws.Operation{
 		Name:       opGetRestApis,
 		HTTPMethod: "GET",
@@ -114,10 +36,10 @@ func (c *Client) GetRestApisRequest(input *GetRestApisInput) GetRestApisRequest 
 	}
 
 	if input == nil {
-		input = &GetRestApisInput{}
+		input = &types.GetRestApisInput{}
 	}
 
-	req := c.newRequest(op, input, &GetRestApisOutput{})
+	req := c.newRequest(op, input, &types.GetRestApisOutput{})
 	return GetRestApisRequest{Request: req, Input: input, Copy: c.GetRestApisRequest}
 }
 
@@ -125,8 +47,8 @@ func (c *Client) GetRestApisRequest(input *GetRestApisInput) GetRestApisRequest 
 // GetRestApis API operation.
 type GetRestApisRequest struct {
 	*aws.Request
-	Input *GetRestApisInput
-	Copy  func(*GetRestApisInput) GetRestApisRequest
+	Input *types.GetRestApisInput
+	Copy  func(*types.GetRestApisInput) GetRestApisRequest
 }
 
 // Send marshals and sends the GetRestApis API request.
@@ -138,7 +60,7 @@ func (r GetRestApisRequest) Send(ctx context.Context) (*GetRestApisResponse, err
 	}
 
 	resp := &GetRestApisResponse{
-		GetRestApisOutput: r.Request.Data.(*GetRestApisOutput),
+		GetRestApisOutput: r.Request.Data.(*types.GetRestApisOutput),
 		response:          &aws.Response{Request: r.Request},
 	}
 
@@ -168,7 +90,7 @@ func NewGetRestApisPaginator(req GetRestApisRequest) GetRestApisPaginator {
 	return GetRestApisPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *GetRestApisInput
+				var inCpy *types.GetRestApisInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -188,14 +110,14 @@ type GetRestApisPaginator struct {
 	aws.Pager
 }
 
-func (p *GetRestApisPaginator) CurrentPage() *GetRestApisOutput {
-	return p.Pager.CurrentPage().(*GetRestApisOutput)
+func (p *GetRestApisPaginator) CurrentPage() *types.GetRestApisOutput {
+	return p.Pager.CurrentPage().(*types.GetRestApisOutput)
 }
 
 // GetRestApisResponse is the response type for the
 // GetRestApis API operation.
 type GetRestApisResponse struct {
-	*GetRestApisOutput
+	*types.GetRestApisOutput
 
 	response *aws.Response
 }

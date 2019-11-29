@@ -10,6 +10,7 @@ package pinpointiface
 
 import (
 	"github.com/aws/aws-sdk-go-v2/service/pinpoint"
+	"github.com/aws/aws-sdk-go-v2/service/pinpoint/types"
 )
 
 // ClientAPI provides an interface to enable mocking the
@@ -43,7 +44,7 @@ import (
 //    type mockClientClient struct {
 //        pinpointiface.ClientPI
 //    }
-//    func (m *mockClientClient) CreateApp(input *pinpoint.CreateAppInput) (*pinpoint.CreateAppOutput, error) {
+//    func (m *mockClientClient) CreateApp(input *types.CreateAppInput) (*types.CreateAppOutput, error) {
 //        // mock response/functionality
 //    }
 //
@@ -61,189 +62,215 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type ClientAPI interface {
-	CreateAppRequest(*pinpoint.CreateAppInput) pinpoint.CreateAppRequest
+	CreateAppRequest(*types.CreateAppInput) pinpoint.CreateAppRequest
 
-	CreateCampaignRequest(*pinpoint.CreateCampaignInput) pinpoint.CreateCampaignRequest
+	CreateCampaignRequest(*types.CreateCampaignInput) pinpoint.CreateCampaignRequest
 
-	CreateEmailTemplateRequest(*pinpoint.CreateEmailTemplateInput) pinpoint.CreateEmailTemplateRequest
+	CreateEmailTemplateRequest(*types.CreateEmailTemplateInput) pinpoint.CreateEmailTemplateRequest
 
-	CreateExportJobRequest(*pinpoint.CreateExportJobInput) pinpoint.CreateExportJobRequest
+	CreateExportJobRequest(*types.CreateExportJobInput) pinpoint.CreateExportJobRequest
 
-	CreateImportJobRequest(*pinpoint.CreateImportJobInput) pinpoint.CreateImportJobRequest
+	CreateImportJobRequest(*types.CreateImportJobInput) pinpoint.CreateImportJobRequest
 
-	CreatePushTemplateRequest(*pinpoint.CreatePushTemplateInput) pinpoint.CreatePushTemplateRequest
+	CreateJourneyRequest(*types.CreateJourneyInput) pinpoint.CreateJourneyRequest
 
-	CreateSegmentRequest(*pinpoint.CreateSegmentInput) pinpoint.CreateSegmentRequest
+	CreatePushTemplateRequest(*types.CreatePushTemplateInput) pinpoint.CreatePushTemplateRequest
 
-	CreateSmsTemplateRequest(*pinpoint.CreateSmsTemplateInput) pinpoint.CreateSmsTemplateRequest
+	CreateSegmentRequest(*types.CreateSegmentInput) pinpoint.CreateSegmentRequest
 
-	DeleteAdmChannelRequest(*pinpoint.DeleteAdmChannelInput) pinpoint.DeleteAdmChannelRequest
+	CreateSmsTemplateRequest(*types.CreateSmsTemplateInput) pinpoint.CreateSmsTemplateRequest
 
-	DeleteApnsChannelRequest(*pinpoint.DeleteApnsChannelInput) pinpoint.DeleteApnsChannelRequest
+	CreateVoiceTemplateRequest(*types.CreateVoiceTemplateInput) pinpoint.CreateVoiceTemplateRequest
 
-	DeleteApnsSandboxChannelRequest(*pinpoint.DeleteApnsSandboxChannelInput) pinpoint.DeleteApnsSandboxChannelRequest
+	DeleteAdmChannelRequest(*types.DeleteAdmChannelInput) pinpoint.DeleteAdmChannelRequest
 
-	DeleteApnsVoipChannelRequest(*pinpoint.DeleteApnsVoipChannelInput) pinpoint.DeleteApnsVoipChannelRequest
+	DeleteApnsChannelRequest(*types.DeleteApnsChannelInput) pinpoint.DeleteApnsChannelRequest
 
-	DeleteApnsVoipSandboxChannelRequest(*pinpoint.DeleteApnsVoipSandboxChannelInput) pinpoint.DeleteApnsVoipSandboxChannelRequest
+	DeleteApnsSandboxChannelRequest(*types.DeleteApnsSandboxChannelInput) pinpoint.DeleteApnsSandboxChannelRequest
 
-	DeleteAppRequest(*pinpoint.DeleteAppInput) pinpoint.DeleteAppRequest
+	DeleteApnsVoipChannelRequest(*types.DeleteApnsVoipChannelInput) pinpoint.DeleteApnsVoipChannelRequest
 
-	DeleteBaiduChannelRequest(*pinpoint.DeleteBaiduChannelInput) pinpoint.DeleteBaiduChannelRequest
+	DeleteApnsVoipSandboxChannelRequest(*types.DeleteApnsVoipSandboxChannelInput) pinpoint.DeleteApnsVoipSandboxChannelRequest
 
-	DeleteCampaignRequest(*pinpoint.DeleteCampaignInput) pinpoint.DeleteCampaignRequest
+	DeleteAppRequest(*types.DeleteAppInput) pinpoint.DeleteAppRequest
 
-	DeleteEmailChannelRequest(*pinpoint.DeleteEmailChannelInput) pinpoint.DeleteEmailChannelRequest
+	DeleteBaiduChannelRequest(*types.DeleteBaiduChannelInput) pinpoint.DeleteBaiduChannelRequest
 
-	DeleteEmailTemplateRequest(*pinpoint.DeleteEmailTemplateInput) pinpoint.DeleteEmailTemplateRequest
+	DeleteCampaignRequest(*types.DeleteCampaignInput) pinpoint.DeleteCampaignRequest
 
-	DeleteEndpointRequest(*pinpoint.DeleteEndpointInput) pinpoint.DeleteEndpointRequest
+	DeleteEmailChannelRequest(*types.DeleteEmailChannelInput) pinpoint.DeleteEmailChannelRequest
 
-	DeleteEventStreamRequest(*pinpoint.DeleteEventStreamInput) pinpoint.DeleteEventStreamRequest
+	DeleteEmailTemplateRequest(*types.DeleteEmailTemplateInput) pinpoint.DeleteEmailTemplateRequest
 
-	DeleteGcmChannelRequest(*pinpoint.DeleteGcmChannelInput) pinpoint.DeleteGcmChannelRequest
+	DeleteEndpointRequest(*types.DeleteEndpointInput) pinpoint.DeleteEndpointRequest
 
-	DeletePushTemplateRequest(*pinpoint.DeletePushTemplateInput) pinpoint.DeletePushTemplateRequest
+	DeleteEventStreamRequest(*types.DeleteEventStreamInput) pinpoint.DeleteEventStreamRequest
 
-	DeleteSegmentRequest(*pinpoint.DeleteSegmentInput) pinpoint.DeleteSegmentRequest
+	DeleteGcmChannelRequest(*types.DeleteGcmChannelInput) pinpoint.DeleteGcmChannelRequest
 
-	DeleteSmsChannelRequest(*pinpoint.DeleteSmsChannelInput) pinpoint.DeleteSmsChannelRequest
+	DeleteJourneyRequest(*types.DeleteJourneyInput) pinpoint.DeleteJourneyRequest
 
-	DeleteSmsTemplateRequest(*pinpoint.DeleteSmsTemplateInput) pinpoint.DeleteSmsTemplateRequest
+	DeletePushTemplateRequest(*types.DeletePushTemplateInput) pinpoint.DeletePushTemplateRequest
 
-	DeleteUserEndpointsRequest(*pinpoint.DeleteUserEndpointsInput) pinpoint.DeleteUserEndpointsRequest
+	DeleteSegmentRequest(*types.DeleteSegmentInput) pinpoint.DeleteSegmentRequest
 
-	DeleteVoiceChannelRequest(*pinpoint.DeleteVoiceChannelInput) pinpoint.DeleteVoiceChannelRequest
+	DeleteSmsChannelRequest(*types.DeleteSmsChannelInput) pinpoint.DeleteSmsChannelRequest
 
-	GetAdmChannelRequest(*pinpoint.GetAdmChannelInput) pinpoint.GetAdmChannelRequest
+	DeleteSmsTemplateRequest(*types.DeleteSmsTemplateInput) pinpoint.DeleteSmsTemplateRequest
 
-	GetApnsChannelRequest(*pinpoint.GetApnsChannelInput) pinpoint.GetApnsChannelRequest
+	DeleteUserEndpointsRequest(*types.DeleteUserEndpointsInput) pinpoint.DeleteUserEndpointsRequest
 
-	GetApnsSandboxChannelRequest(*pinpoint.GetApnsSandboxChannelInput) pinpoint.GetApnsSandboxChannelRequest
+	DeleteVoiceChannelRequest(*types.DeleteVoiceChannelInput) pinpoint.DeleteVoiceChannelRequest
 
-	GetApnsVoipChannelRequest(*pinpoint.GetApnsVoipChannelInput) pinpoint.GetApnsVoipChannelRequest
+	DeleteVoiceTemplateRequest(*types.DeleteVoiceTemplateInput) pinpoint.DeleteVoiceTemplateRequest
 
-	GetApnsVoipSandboxChannelRequest(*pinpoint.GetApnsVoipSandboxChannelInput) pinpoint.GetApnsVoipSandboxChannelRequest
+	GetAdmChannelRequest(*types.GetAdmChannelInput) pinpoint.GetAdmChannelRequest
 
-	GetAppRequest(*pinpoint.GetAppInput) pinpoint.GetAppRequest
+	GetApnsChannelRequest(*types.GetApnsChannelInput) pinpoint.GetApnsChannelRequest
 
-	GetApplicationDateRangeKpiRequest(*pinpoint.GetApplicationDateRangeKpiInput) pinpoint.GetApplicationDateRangeKpiRequest
+	GetApnsSandboxChannelRequest(*types.GetApnsSandboxChannelInput) pinpoint.GetApnsSandboxChannelRequest
 
-	GetApplicationSettingsRequest(*pinpoint.GetApplicationSettingsInput) pinpoint.GetApplicationSettingsRequest
+	GetApnsVoipChannelRequest(*types.GetApnsVoipChannelInput) pinpoint.GetApnsVoipChannelRequest
 
-	GetAppsRequest(*pinpoint.GetAppsInput) pinpoint.GetAppsRequest
+	GetApnsVoipSandboxChannelRequest(*types.GetApnsVoipSandboxChannelInput) pinpoint.GetApnsVoipSandboxChannelRequest
 
-	GetBaiduChannelRequest(*pinpoint.GetBaiduChannelInput) pinpoint.GetBaiduChannelRequest
+	GetAppRequest(*types.GetAppInput) pinpoint.GetAppRequest
 
-	GetCampaignRequest(*pinpoint.GetCampaignInput) pinpoint.GetCampaignRequest
+	GetApplicationDateRangeKpiRequest(*types.GetApplicationDateRangeKpiInput) pinpoint.GetApplicationDateRangeKpiRequest
 
-	GetCampaignActivitiesRequest(*pinpoint.GetCampaignActivitiesInput) pinpoint.GetCampaignActivitiesRequest
+	GetApplicationSettingsRequest(*types.GetApplicationSettingsInput) pinpoint.GetApplicationSettingsRequest
 
-	GetCampaignDateRangeKpiRequest(*pinpoint.GetCampaignDateRangeKpiInput) pinpoint.GetCampaignDateRangeKpiRequest
+	GetAppsRequest(*types.GetAppsInput) pinpoint.GetAppsRequest
 
-	GetCampaignVersionRequest(*pinpoint.GetCampaignVersionInput) pinpoint.GetCampaignVersionRequest
+	GetBaiduChannelRequest(*types.GetBaiduChannelInput) pinpoint.GetBaiduChannelRequest
 
-	GetCampaignVersionsRequest(*pinpoint.GetCampaignVersionsInput) pinpoint.GetCampaignVersionsRequest
+	GetCampaignRequest(*types.GetCampaignInput) pinpoint.GetCampaignRequest
 
-	GetCampaignsRequest(*pinpoint.GetCampaignsInput) pinpoint.GetCampaignsRequest
+	GetCampaignActivitiesRequest(*types.GetCampaignActivitiesInput) pinpoint.GetCampaignActivitiesRequest
 
-	GetChannelsRequest(*pinpoint.GetChannelsInput) pinpoint.GetChannelsRequest
+	GetCampaignDateRangeKpiRequest(*types.GetCampaignDateRangeKpiInput) pinpoint.GetCampaignDateRangeKpiRequest
 
-	GetEmailChannelRequest(*pinpoint.GetEmailChannelInput) pinpoint.GetEmailChannelRequest
+	GetCampaignVersionRequest(*types.GetCampaignVersionInput) pinpoint.GetCampaignVersionRequest
 
-	GetEmailTemplateRequest(*pinpoint.GetEmailTemplateInput) pinpoint.GetEmailTemplateRequest
+	GetCampaignVersionsRequest(*types.GetCampaignVersionsInput) pinpoint.GetCampaignVersionsRequest
 
-	GetEndpointRequest(*pinpoint.GetEndpointInput) pinpoint.GetEndpointRequest
+	GetCampaignsRequest(*types.GetCampaignsInput) pinpoint.GetCampaignsRequest
 
-	GetEventStreamRequest(*pinpoint.GetEventStreamInput) pinpoint.GetEventStreamRequest
+	GetChannelsRequest(*types.GetChannelsInput) pinpoint.GetChannelsRequest
 
-	GetExportJobRequest(*pinpoint.GetExportJobInput) pinpoint.GetExportJobRequest
+	GetEmailChannelRequest(*types.GetEmailChannelInput) pinpoint.GetEmailChannelRequest
 
-	GetExportJobsRequest(*pinpoint.GetExportJobsInput) pinpoint.GetExportJobsRequest
+	GetEmailTemplateRequest(*types.GetEmailTemplateInput) pinpoint.GetEmailTemplateRequest
 
-	GetGcmChannelRequest(*pinpoint.GetGcmChannelInput) pinpoint.GetGcmChannelRequest
+	GetEndpointRequest(*types.GetEndpointInput) pinpoint.GetEndpointRequest
 
-	GetImportJobRequest(*pinpoint.GetImportJobInput) pinpoint.GetImportJobRequest
+	GetEventStreamRequest(*types.GetEventStreamInput) pinpoint.GetEventStreamRequest
 
-	GetImportJobsRequest(*pinpoint.GetImportJobsInput) pinpoint.GetImportJobsRequest
+	GetExportJobRequest(*types.GetExportJobInput) pinpoint.GetExportJobRequest
 
-	GetPushTemplateRequest(*pinpoint.GetPushTemplateInput) pinpoint.GetPushTemplateRequest
+	GetExportJobsRequest(*types.GetExportJobsInput) pinpoint.GetExportJobsRequest
 
-	GetSegmentRequest(*pinpoint.GetSegmentInput) pinpoint.GetSegmentRequest
+	GetGcmChannelRequest(*types.GetGcmChannelInput) pinpoint.GetGcmChannelRequest
 
-	GetSegmentExportJobsRequest(*pinpoint.GetSegmentExportJobsInput) pinpoint.GetSegmentExportJobsRequest
+	GetImportJobRequest(*types.GetImportJobInput) pinpoint.GetImportJobRequest
 
-	GetSegmentImportJobsRequest(*pinpoint.GetSegmentImportJobsInput) pinpoint.GetSegmentImportJobsRequest
+	GetImportJobsRequest(*types.GetImportJobsInput) pinpoint.GetImportJobsRequest
 
-	GetSegmentVersionRequest(*pinpoint.GetSegmentVersionInput) pinpoint.GetSegmentVersionRequest
+	GetJourneyRequest(*types.GetJourneyInput) pinpoint.GetJourneyRequest
 
-	GetSegmentVersionsRequest(*pinpoint.GetSegmentVersionsInput) pinpoint.GetSegmentVersionsRequest
+	GetJourneyDateRangeKpiRequest(*types.GetJourneyDateRangeKpiInput) pinpoint.GetJourneyDateRangeKpiRequest
 
-	GetSegmentsRequest(*pinpoint.GetSegmentsInput) pinpoint.GetSegmentsRequest
+	GetJourneyExecutionActivityMetricsRequest(*types.GetJourneyExecutionActivityMetricsInput) pinpoint.GetJourneyExecutionActivityMetricsRequest
 
-	GetSmsChannelRequest(*pinpoint.GetSmsChannelInput) pinpoint.GetSmsChannelRequest
+	GetJourneyExecutionMetricsRequest(*types.GetJourneyExecutionMetricsInput) pinpoint.GetJourneyExecutionMetricsRequest
 
-	GetSmsTemplateRequest(*pinpoint.GetSmsTemplateInput) pinpoint.GetSmsTemplateRequest
+	GetPushTemplateRequest(*types.GetPushTemplateInput) pinpoint.GetPushTemplateRequest
 
-	GetUserEndpointsRequest(*pinpoint.GetUserEndpointsInput) pinpoint.GetUserEndpointsRequest
+	GetSegmentRequest(*types.GetSegmentInput) pinpoint.GetSegmentRequest
 
-	GetVoiceChannelRequest(*pinpoint.GetVoiceChannelInput) pinpoint.GetVoiceChannelRequest
+	GetSegmentExportJobsRequest(*types.GetSegmentExportJobsInput) pinpoint.GetSegmentExportJobsRequest
 
-	ListTagsForResourceRequest(*pinpoint.ListTagsForResourceInput) pinpoint.ListTagsForResourceRequest
+	GetSegmentImportJobsRequest(*types.GetSegmentImportJobsInput) pinpoint.GetSegmentImportJobsRequest
 
-	ListTemplatesRequest(*pinpoint.ListTemplatesInput) pinpoint.ListTemplatesRequest
+	GetSegmentVersionRequest(*types.GetSegmentVersionInput) pinpoint.GetSegmentVersionRequest
 
-	PhoneNumberValidateRequest(*pinpoint.PhoneNumberValidateInput) pinpoint.PhoneNumberValidateRequest
+	GetSegmentVersionsRequest(*types.GetSegmentVersionsInput) pinpoint.GetSegmentVersionsRequest
 
-	PutEventStreamRequest(*pinpoint.PutEventStreamInput) pinpoint.PutEventStreamRequest
+	GetSegmentsRequest(*types.GetSegmentsInput) pinpoint.GetSegmentsRequest
 
-	PutEventsRequest(*pinpoint.PutEventsInput) pinpoint.PutEventsRequest
+	GetSmsChannelRequest(*types.GetSmsChannelInput) pinpoint.GetSmsChannelRequest
 
-	RemoveAttributesRequest(*pinpoint.RemoveAttributesInput) pinpoint.RemoveAttributesRequest
+	GetSmsTemplateRequest(*types.GetSmsTemplateInput) pinpoint.GetSmsTemplateRequest
 
-	SendMessagesRequest(*pinpoint.SendMessagesInput) pinpoint.SendMessagesRequest
+	GetUserEndpointsRequest(*types.GetUserEndpointsInput) pinpoint.GetUserEndpointsRequest
 
-	SendUsersMessagesRequest(*pinpoint.SendUsersMessagesInput) pinpoint.SendUsersMessagesRequest
+	GetVoiceChannelRequest(*types.GetVoiceChannelInput) pinpoint.GetVoiceChannelRequest
 
-	TagResourceRequest(*pinpoint.TagResourceInput) pinpoint.TagResourceRequest
+	GetVoiceTemplateRequest(*types.GetVoiceTemplateInput) pinpoint.GetVoiceTemplateRequest
 
-	UntagResourceRequest(*pinpoint.UntagResourceInput) pinpoint.UntagResourceRequest
+	ListJourneysRequest(*types.ListJourneysInput) pinpoint.ListJourneysRequest
 
-	UpdateAdmChannelRequest(*pinpoint.UpdateAdmChannelInput) pinpoint.UpdateAdmChannelRequest
+	ListTagsForResourceRequest(*types.ListTagsForResourceInput) pinpoint.ListTagsForResourceRequest
 
-	UpdateApnsChannelRequest(*pinpoint.UpdateApnsChannelInput) pinpoint.UpdateApnsChannelRequest
+	ListTemplatesRequest(*types.ListTemplatesInput) pinpoint.ListTemplatesRequest
 
-	UpdateApnsSandboxChannelRequest(*pinpoint.UpdateApnsSandboxChannelInput) pinpoint.UpdateApnsSandboxChannelRequest
+	PhoneNumberValidateRequest(*types.PhoneNumberValidateInput) pinpoint.PhoneNumberValidateRequest
 
-	UpdateApnsVoipChannelRequest(*pinpoint.UpdateApnsVoipChannelInput) pinpoint.UpdateApnsVoipChannelRequest
+	PutEventStreamRequest(*types.PutEventStreamInput) pinpoint.PutEventStreamRequest
 
-	UpdateApnsVoipSandboxChannelRequest(*pinpoint.UpdateApnsVoipSandboxChannelInput) pinpoint.UpdateApnsVoipSandboxChannelRequest
+	PutEventsRequest(*types.PutEventsInput) pinpoint.PutEventsRequest
 
-	UpdateApplicationSettingsRequest(*pinpoint.UpdateApplicationSettingsInput) pinpoint.UpdateApplicationSettingsRequest
+	RemoveAttributesRequest(*types.RemoveAttributesInput) pinpoint.RemoveAttributesRequest
 
-	UpdateBaiduChannelRequest(*pinpoint.UpdateBaiduChannelInput) pinpoint.UpdateBaiduChannelRequest
+	SendMessagesRequest(*types.SendMessagesInput) pinpoint.SendMessagesRequest
 
-	UpdateCampaignRequest(*pinpoint.UpdateCampaignInput) pinpoint.UpdateCampaignRequest
+	SendUsersMessagesRequest(*types.SendUsersMessagesInput) pinpoint.SendUsersMessagesRequest
 
-	UpdateEmailChannelRequest(*pinpoint.UpdateEmailChannelInput) pinpoint.UpdateEmailChannelRequest
+	TagResourceRequest(*types.TagResourceInput) pinpoint.TagResourceRequest
 
-	UpdateEmailTemplateRequest(*pinpoint.UpdateEmailTemplateInput) pinpoint.UpdateEmailTemplateRequest
+	UntagResourceRequest(*types.UntagResourceInput) pinpoint.UntagResourceRequest
 
-	UpdateEndpointRequest(*pinpoint.UpdateEndpointInput) pinpoint.UpdateEndpointRequest
+	UpdateAdmChannelRequest(*types.UpdateAdmChannelInput) pinpoint.UpdateAdmChannelRequest
 
-	UpdateEndpointsBatchRequest(*pinpoint.UpdateEndpointsBatchInput) pinpoint.UpdateEndpointsBatchRequest
+	UpdateApnsChannelRequest(*types.UpdateApnsChannelInput) pinpoint.UpdateApnsChannelRequest
 
-	UpdateGcmChannelRequest(*pinpoint.UpdateGcmChannelInput) pinpoint.UpdateGcmChannelRequest
+	UpdateApnsSandboxChannelRequest(*types.UpdateApnsSandboxChannelInput) pinpoint.UpdateApnsSandboxChannelRequest
 
-	UpdatePushTemplateRequest(*pinpoint.UpdatePushTemplateInput) pinpoint.UpdatePushTemplateRequest
+	UpdateApnsVoipChannelRequest(*types.UpdateApnsVoipChannelInput) pinpoint.UpdateApnsVoipChannelRequest
 
-	UpdateSegmentRequest(*pinpoint.UpdateSegmentInput) pinpoint.UpdateSegmentRequest
+	UpdateApnsVoipSandboxChannelRequest(*types.UpdateApnsVoipSandboxChannelInput) pinpoint.UpdateApnsVoipSandboxChannelRequest
 
-	UpdateSmsChannelRequest(*pinpoint.UpdateSmsChannelInput) pinpoint.UpdateSmsChannelRequest
+	UpdateApplicationSettingsRequest(*types.UpdateApplicationSettingsInput) pinpoint.UpdateApplicationSettingsRequest
 
-	UpdateSmsTemplateRequest(*pinpoint.UpdateSmsTemplateInput) pinpoint.UpdateSmsTemplateRequest
+	UpdateBaiduChannelRequest(*types.UpdateBaiduChannelInput) pinpoint.UpdateBaiduChannelRequest
 
-	UpdateVoiceChannelRequest(*pinpoint.UpdateVoiceChannelInput) pinpoint.UpdateVoiceChannelRequest
+	UpdateCampaignRequest(*types.UpdateCampaignInput) pinpoint.UpdateCampaignRequest
+
+	UpdateEmailChannelRequest(*types.UpdateEmailChannelInput) pinpoint.UpdateEmailChannelRequest
+
+	UpdateEmailTemplateRequest(*types.UpdateEmailTemplateInput) pinpoint.UpdateEmailTemplateRequest
+
+	UpdateEndpointRequest(*types.UpdateEndpointInput) pinpoint.UpdateEndpointRequest
+
+	UpdateEndpointsBatchRequest(*types.UpdateEndpointsBatchInput) pinpoint.UpdateEndpointsBatchRequest
+
+	UpdateGcmChannelRequest(*types.UpdateGcmChannelInput) pinpoint.UpdateGcmChannelRequest
+
+	UpdateJourneyRequest(*types.UpdateJourneyInput) pinpoint.UpdateJourneyRequest
+
+	UpdateJourneyStateRequest(*types.UpdateJourneyStateInput) pinpoint.UpdateJourneyStateRequest
+
+	UpdatePushTemplateRequest(*types.UpdatePushTemplateInput) pinpoint.UpdatePushTemplateRequest
+
+	UpdateSegmentRequest(*types.UpdateSegmentInput) pinpoint.UpdateSegmentRequest
+
+	UpdateSmsChannelRequest(*types.UpdateSmsChannelInput) pinpoint.UpdateSmsChannelRequest
+
+	UpdateSmsTemplateRequest(*types.UpdateSmsTemplateInput) pinpoint.UpdateSmsTemplateRequest
+
+	UpdateVoiceChannelRequest(*types.UpdateVoiceChannelInput) pinpoint.UpdateVoiceChannelRequest
+
+	UpdateVoiceTemplateRequest(*types.UpdateVoiceTemplateInput) pinpoint.UpdateVoiceTemplateRequest
 }
 
 var _ ClientAPI = (*pinpoint.Client)(nil)

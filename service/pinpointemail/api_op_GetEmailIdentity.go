@@ -6,144 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/pinpointemail/types"
 )
-
-// A request to return details about an email identity.
-type GetEmailIdentityInput struct {
-	_ struct{} `type:"structure"`
-
-	// The email identity that you want to retrieve details for.
-	//
-	// EmailIdentity is a required field
-	EmailIdentity *string `location:"uri" locationName:"EmailIdentity" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetEmailIdentityInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetEmailIdentityInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetEmailIdentityInput"}
-
-	if s.EmailIdentity == nil {
-		invalidParams.Add(aws.NewErrParamRequired("EmailIdentity"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetEmailIdentityInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.EmailIdentity != nil {
-		v := *s.EmailIdentity
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "EmailIdentity", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-// Details about an email identity.
-type GetEmailIdentityOutput struct {
-	_ struct{} `type:"structure"`
-
-	// An object that contains information about the DKIM attributes for the identity.
-	// This object includes the tokens that you use to create the CNAME records
-	// that are required to complete the DKIM verification process.
-	DkimAttributes *DkimAttributes `type:"structure"`
-
-	// The feedback forwarding configuration for the identity.
-	//
-	// If the value is true, Amazon Pinpoint sends you email notifications when
-	// bounce or complaint events occur. Amazon Pinpoint sends this notification
-	// to the address that you specified in the Return-Path header of the original
-	// email.
-	//
-	// When you set this value to false, Amazon Pinpoint sends notifications through
-	// other mechanisms, such as by notifying an Amazon SNS topic or another event
-	// destination. You're required to have a method of tracking bounces and complaints.
-	// If you haven't set up another mechanism for receiving bounce or complaint
-	// notifications, Amazon Pinpoint sends an email notification when these events
-	// occur (even if this setting is disabled).
-	FeedbackForwardingStatus *bool `type:"boolean"`
-
-	// The email identity type.
-	IdentityType IdentityType `type:"string" enum:"true"`
-
-	// An object that contains information about the Mail-From attributes for the
-	// email identity.
-	MailFromAttributes *MailFromAttributes `type:"structure"`
-
-	// An array of objects that define the tags (keys and values) that are associated
-	// with the email identity.
-	Tags []Tag `type:"list"`
-
-	// Specifies whether or not the identity is verified. In Amazon Pinpoint, you
-	// can only send email from verified email addresses or domains. For more information
-	// about verifying identities, see the Amazon Pinpoint User Guide (https://docs.aws.amazon.com/pinpoint/latest/userguide/channels-email-manage-verify.html).
-	VerifiedForSendingStatus *bool `type:"boolean"`
-}
-
-// String returns the string representation
-func (s GetEmailIdentityOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetEmailIdentityOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.DkimAttributes != nil {
-		v := s.DkimAttributes
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "DkimAttributes", v, metadata)
-	}
-	if s.FeedbackForwardingStatus != nil {
-		v := *s.FeedbackForwardingStatus
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "FeedbackForwardingStatus", protocol.BoolValue(v), metadata)
-	}
-	if len(s.IdentityType) > 0 {
-		v := s.IdentityType
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "IdentityType", protocol.QuotedValue{ValueMarshaler: v}, metadata)
-	}
-	if s.MailFromAttributes != nil {
-		v := s.MailFromAttributes
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "MailFromAttributes", v, metadata)
-	}
-	if s.Tags != nil {
-		v := s.Tags
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "Tags", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	if s.VerifiedForSendingStatus != nil {
-		v := *s.VerifiedForSendingStatus
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "VerifiedForSendingStatus", protocol.BoolValue(v), metadata)
-	}
-	return nil
-}
 
 const opGetEmailIdentity = "GetEmailIdentity"
 
@@ -162,7 +26,7 @@ const opGetEmailIdentity = "GetEmailIdentity"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/GetEmailIdentity
-func (c *Client) GetEmailIdentityRequest(input *GetEmailIdentityInput) GetEmailIdentityRequest {
+func (c *Client) GetEmailIdentityRequest(input *types.GetEmailIdentityInput) GetEmailIdentityRequest {
 	op := &aws.Operation{
 		Name:       opGetEmailIdentity,
 		HTTPMethod: "GET",
@@ -170,10 +34,10 @@ func (c *Client) GetEmailIdentityRequest(input *GetEmailIdentityInput) GetEmailI
 	}
 
 	if input == nil {
-		input = &GetEmailIdentityInput{}
+		input = &types.GetEmailIdentityInput{}
 	}
 
-	req := c.newRequest(op, input, &GetEmailIdentityOutput{})
+	req := c.newRequest(op, input, &types.GetEmailIdentityOutput{})
 	return GetEmailIdentityRequest{Request: req, Input: input, Copy: c.GetEmailIdentityRequest}
 }
 
@@ -181,8 +45,8 @@ func (c *Client) GetEmailIdentityRequest(input *GetEmailIdentityInput) GetEmailI
 // GetEmailIdentity API operation.
 type GetEmailIdentityRequest struct {
 	*aws.Request
-	Input *GetEmailIdentityInput
-	Copy  func(*GetEmailIdentityInput) GetEmailIdentityRequest
+	Input *types.GetEmailIdentityInput
+	Copy  func(*types.GetEmailIdentityInput) GetEmailIdentityRequest
 }
 
 // Send marshals and sends the GetEmailIdentity API request.
@@ -194,7 +58,7 @@ func (r GetEmailIdentityRequest) Send(ctx context.Context) (*GetEmailIdentityRes
 	}
 
 	resp := &GetEmailIdentityResponse{
-		GetEmailIdentityOutput: r.Request.Data.(*GetEmailIdentityOutput),
+		GetEmailIdentityOutput: r.Request.Data.(*types.GetEmailIdentityOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -204,7 +68,7 @@ func (r GetEmailIdentityRequest) Send(ctx context.Context) (*GetEmailIdentityRes
 // GetEmailIdentityResponse is the response type for the
 // GetEmailIdentity API operation.
 type GetEmailIdentityResponse struct {
-	*GetEmailIdentityOutput
+	*types.GetEmailIdentityOutput
 
 	response *aws.Response
 }

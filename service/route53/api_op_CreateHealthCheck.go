@@ -6,132 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/route53/types"
 )
-
-// A complex type that contains the health check request information.
-type CreateHealthCheckInput struct {
-	_ struct{} `locationName:"CreateHealthCheckRequest" type:"structure" xmlURI:"https://route53.amazonaws.com/doc/2013-04-01/"`
-
-	// A unique string that identifies the request and that allows you to retry
-	// a failed CreateHealthCheck request without the risk of creating two identical
-	// health checks:
-	//
-	//    * If you send a CreateHealthCheck request with the same CallerReference
-	//    and settings as a previous request, and if the health check doesn't exist,
-	//    Amazon Route 53 creates the health check. If the health check does exist,
-	//    Route 53 returns the settings for the existing health check.
-	//
-	//    * If you send a CreateHealthCheck request with the same CallerReference
-	//    as a deleted health check, regardless of the settings, Route 53 returns
-	//    a HealthCheckAlreadyExists error.
-	//
-	//    * If you send a CreateHealthCheck request with the same CallerReference
-	//    as an existing health check but with different settings, Route 53 returns
-	//    a HealthCheckAlreadyExists error.
-	//
-	//    * If you send a CreateHealthCheck request with a unique CallerReference
-	//    but settings identical to an existing health check, Route 53 creates the
-	//    health check.
-	//
-	// CallerReference is a required field
-	CallerReference *string `min:"1" type:"string" required:"true"`
-
-	// A complex type that contains settings for a new health check.
-	//
-	// HealthCheckConfig is a required field
-	HealthCheckConfig *HealthCheckConfig `type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s CreateHealthCheckInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateHealthCheckInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateHealthCheckInput"}
-
-	if s.CallerReference == nil {
-		invalidParams.Add(aws.NewErrParamRequired("CallerReference"))
-	}
-	if s.CallerReference != nil && len(*s.CallerReference) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("CallerReference", 1))
-	}
-
-	if s.HealthCheckConfig == nil {
-		invalidParams.Add(aws.NewErrParamRequired("HealthCheckConfig"))
-	}
-	if s.HealthCheckConfig != nil {
-		if err := s.HealthCheckConfig.Validate(); err != nil {
-			invalidParams.AddNested("HealthCheckConfig", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s CreateHealthCheckInput) MarshalFields(e protocol.FieldEncoder) error {
-
-	e.SetFields(protocol.BodyTarget, "CreateHealthCheckRequest", protocol.FieldMarshalerFunc(func(e protocol.FieldEncoder) error {
-		if s.CallerReference != nil {
-			v := *s.CallerReference
-
-			metadata := protocol.Metadata{}
-			e.SetValue(protocol.BodyTarget, "CallerReference", protocol.StringValue(v), metadata)
-		}
-		if s.HealthCheckConfig != nil {
-			v := s.HealthCheckConfig
-
-			metadata := protocol.Metadata{}
-			e.SetFields(protocol.BodyTarget, "HealthCheckConfig", v, metadata)
-		}
-		return nil
-	}), protocol.Metadata{XMLNamespaceURI: "https://route53.amazonaws.com/doc/2013-04-01/"})
-	return nil
-}
-
-// A complex type containing the response information for the new health check.
-type CreateHealthCheckOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A complex type that contains identifying information about the health check.
-	//
-	// HealthCheck is a required field
-	HealthCheck *HealthCheck `type:"structure" required:"true"`
-
-	// The unique URL representing the new health check.
-	//
-	// Location is a required field
-	Location *string `location:"header" locationName:"Location" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s CreateHealthCheckOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s CreateHealthCheckOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.HealthCheck != nil {
-		v := s.HealthCheck
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "HealthCheck", v, metadata)
-	}
-	if s.Location != nil {
-		v := *s.Location
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "Location", protocol.StringValue(v), metadata)
-	}
-	return nil
-}
 
 const opCreateHealthCheck = "CreateHealthCheck"
 
@@ -180,7 +56,7 @@ const opCreateHealthCheck = "CreateHealthCheck"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/CreateHealthCheck
-func (c *Client) CreateHealthCheckRequest(input *CreateHealthCheckInput) CreateHealthCheckRequest {
+func (c *Client) CreateHealthCheckRequest(input *types.CreateHealthCheckInput) CreateHealthCheckRequest {
 	op := &aws.Operation{
 		Name:       opCreateHealthCheck,
 		HTTPMethod: "POST",
@@ -188,10 +64,10 @@ func (c *Client) CreateHealthCheckRequest(input *CreateHealthCheckInput) CreateH
 	}
 
 	if input == nil {
-		input = &CreateHealthCheckInput{}
+		input = &types.CreateHealthCheckInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateHealthCheckOutput{})
+	req := c.newRequest(op, input, &types.CreateHealthCheckOutput{})
 	return CreateHealthCheckRequest{Request: req, Input: input, Copy: c.CreateHealthCheckRequest}
 }
 
@@ -199,8 +75,8 @@ func (c *Client) CreateHealthCheckRequest(input *CreateHealthCheckInput) CreateH
 // CreateHealthCheck API operation.
 type CreateHealthCheckRequest struct {
 	*aws.Request
-	Input *CreateHealthCheckInput
-	Copy  func(*CreateHealthCheckInput) CreateHealthCheckRequest
+	Input *types.CreateHealthCheckInput
+	Copy  func(*types.CreateHealthCheckInput) CreateHealthCheckRequest
 }
 
 // Send marshals and sends the CreateHealthCheck API request.
@@ -212,7 +88,7 @@ func (r CreateHealthCheckRequest) Send(ctx context.Context) (*CreateHealthCheckR
 	}
 
 	resp := &CreateHealthCheckResponse{
-		CreateHealthCheckOutput: r.Request.Data.(*CreateHealthCheckOutput),
+		CreateHealthCheckOutput: r.Request.Data.(*types.CreateHealthCheckOutput),
 		response:                &aws.Response{Request: r.Request},
 	}
 
@@ -222,7 +98,7 @@ func (r CreateHealthCheckRequest) Send(ctx context.Context) (*CreateHealthCheckR
 // CreateHealthCheckResponse is the response type for the
 // CreateHealthCheck API operation.
 type CreateHealthCheckResponse struct {
-	*CreateHealthCheckOutput
+	*types.CreateHealthCheckOutput
 
 	response *aws.Response
 }

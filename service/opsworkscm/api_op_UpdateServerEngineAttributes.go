@@ -6,66 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/opsworkscm/types"
 )
-
-type UpdateServerEngineAttributesInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the engine attribute to update.
-	//
-	// AttributeName is a required field
-	AttributeName *string `min:"1" type:"string" required:"true"`
-
-	// The value to set for the attribute.
-	AttributeValue *string `type:"string"`
-
-	// The name of the server to update.
-	//
-	// ServerName is a required field
-	ServerName *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s UpdateServerEngineAttributesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateServerEngineAttributesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateServerEngineAttributesInput"}
-
-	if s.AttributeName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("AttributeName"))
-	}
-	if s.AttributeName != nil && len(*s.AttributeName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("AttributeName", 1))
-	}
-
-	if s.ServerName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ServerName"))
-	}
-	if s.ServerName != nil && len(*s.ServerName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ServerName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type UpdateServerEngineAttributesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Contains the response to an UpdateServerEngineAttributes request.
-	Server *Server `type:"structure"`
-}
-
-// String returns the string representation
-func (s UpdateServerEngineAttributesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opUpdateServerEngineAttributes = "UpdateServerEngineAttributes"
 
@@ -92,7 +34,7 @@ const opUpdateServerEngineAttributes = "UpdateServerEngineAttributes"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/UpdateServerEngineAttributes
-func (c *Client) UpdateServerEngineAttributesRequest(input *UpdateServerEngineAttributesInput) UpdateServerEngineAttributesRequest {
+func (c *Client) UpdateServerEngineAttributesRequest(input *types.UpdateServerEngineAttributesInput) UpdateServerEngineAttributesRequest {
 	op := &aws.Operation{
 		Name:       opUpdateServerEngineAttributes,
 		HTTPMethod: "POST",
@@ -100,10 +42,10 @@ func (c *Client) UpdateServerEngineAttributesRequest(input *UpdateServerEngineAt
 	}
 
 	if input == nil {
-		input = &UpdateServerEngineAttributesInput{}
+		input = &types.UpdateServerEngineAttributesInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateServerEngineAttributesOutput{})
+	req := c.newRequest(op, input, &types.UpdateServerEngineAttributesOutput{})
 	return UpdateServerEngineAttributesRequest{Request: req, Input: input, Copy: c.UpdateServerEngineAttributesRequest}
 }
 
@@ -111,8 +53,8 @@ func (c *Client) UpdateServerEngineAttributesRequest(input *UpdateServerEngineAt
 // UpdateServerEngineAttributes API operation.
 type UpdateServerEngineAttributesRequest struct {
 	*aws.Request
-	Input *UpdateServerEngineAttributesInput
-	Copy  func(*UpdateServerEngineAttributesInput) UpdateServerEngineAttributesRequest
+	Input *types.UpdateServerEngineAttributesInput
+	Copy  func(*types.UpdateServerEngineAttributesInput) UpdateServerEngineAttributesRequest
 }
 
 // Send marshals and sends the UpdateServerEngineAttributes API request.
@@ -124,7 +66,7 @@ func (r UpdateServerEngineAttributesRequest) Send(ctx context.Context) (*UpdateS
 	}
 
 	resp := &UpdateServerEngineAttributesResponse{
-		UpdateServerEngineAttributesOutput: r.Request.Data.(*UpdateServerEngineAttributesOutput),
+		UpdateServerEngineAttributesOutput: r.Request.Data.(*types.UpdateServerEngineAttributesOutput),
 		response:                           &aws.Response{Request: r.Request},
 	}
 
@@ -134,7 +76,7 @@ func (r UpdateServerEngineAttributesRequest) Send(ctx context.Context) (*UpdateS
 // UpdateServerEngineAttributesResponse is the response type for the
 // UpdateServerEngineAttributes API operation.
 type UpdateServerEngineAttributesResponse struct {
-	*UpdateServerEngineAttributesOutput
+	*types.UpdateServerEngineAttributesOutput
 
 	response *aws.Response
 }

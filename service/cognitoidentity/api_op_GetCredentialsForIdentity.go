@@ -6,77 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/cognitoidentity/types"
 )
-
-// Input to the GetCredentialsForIdentity action.
-type GetCredentialsForIdentityInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the role to be assumed when multiple roles
-	// were received in the token from the identity provider. For example, a SAML-based
-	// identity provider. This parameter is optional for identity providers that
-	// do not support role customization.
-	CustomRoleArn *string `min:"20" type:"string"`
-
-	// A unique identifier in the format REGION:GUID.
-	//
-	// IdentityId is a required field
-	IdentityId *string `min:"1" type:"string" required:"true"`
-
-	// A set of optional name-value pairs that map provider names to provider tokens.
-	// The name-value pair will follow the syntax "provider_name": "provider_user_identifier".
-	//
-	// Logins should not be specified when trying to get credentials for an unauthenticated
-	// identity.
-	//
-	// The Logins parameter is required when using identities associated with external
-	// identity providers such as FaceBook. For examples of Logins maps, see the
-	// code examples in the External Identity Providers (http://docs.aws.amazon.com/cognito/latest/developerguide/external-identity-providers.html)
-	// section of the Amazon Cognito Developer Guide.
-	Logins map[string]string `type:"map"`
-}
-
-// String returns the string representation
-func (s GetCredentialsForIdentityInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetCredentialsForIdentityInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetCredentialsForIdentityInput"}
-	if s.CustomRoleArn != nil && len(*s.CustomRoleArn) < 20 {
-		invalidParams.Add(aws.NewErrParamMinLen("CustomRoleArn", 20))
-	}
-
-	if s.IdentityId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("IdentityId"))
-	}
-	if s.IdentityId != nil && len(*s.IdentityId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("IdentityId", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Returned in response to a successful GetCredentialsForIdentity operation.
-type GetCredentialsForIdentityOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Credentials for the provided identity ID.
-	Credentials *Credentials `type:"structure"`
-
-	// A unique identifier in the format REGION:GUID.
-	IdentityId *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s GetCredentialsForIdentityOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetCredentialsForIdentity = "GetCredentialsForIdentity"
 
@@ -98,7 +29,7 @@ const opGetCredentialsForIdentity = "GetCredentialsForIdentity"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-identity-2014-06-30/GetCredentialsForIdentity
-func (c *Client) GetCredentialsForIdentityRequest(input *GetCredentialsForIdentityInput) GetCredentialsForIdentityRequest {
+func (c *Client) GetCredentialsForIdentityRequest(input *types.GetCredentialsForIdentityInput) GetCredentialsForIdentityRequest {
 	op := &aws.Operation{
 		Name:       opGetCredentialsForIdentity,
 		HTTPMethod: "POST",
@@ -106,10 +37,10 @@ func (c *Client) GetCredentialsForIdentityRequest(input *GetCredentialsForIdenti
 	}
 
 	if input == nil {
-		input = &GetCredentialsForIdentityInput{}
+		input = &types.GetCredentialsForIdentityInput{}
 	}
 
-	req := c.newRequest(op, input, &GetCredentialsForIdentityOutput{})
+	req := c.newRequest(op, input, &types.GetCredentialsForIdentityOutput{})
 	req.Config.Credentials = aws.AnonymousCredentials
 	return GetCredentialsForIdentityRequest{Request: req, Input: input, Copy: c.GetCredentialsForIdentityRequest}
 }
@@ -118,8 +49,8 @@ func (c *Client) GetCredentialsForIdentityRequest(input *GetCredentialsForIdenti
 // GetCredentialsForIdentity API operation.
 type GetCredentialsForIdentityRequest struct {
 	*aws.Request
-	Input *GetCredentialsForIdentityInput
-	Copy  func(*GetCredentialsForIdentityInput) GetCredentialsForIdentityRequest
+	Input *types.GetCredentialsForIdentityInput
+	Copy  func(*types.GetCredentialsForIdentityInput) GetCredentialsForIdentityRequest
 }
 
 // Send marshals and sends the GetCredentialsForIdentity API request.
@@ -131,7 +62,7 @@ func (r GetCredentialsForIdentityRequest) Send(ctx context.Context) (*GetCredent
 	}
 
 	resp := &GetCredentialsForIdentityResponse{
-		GetCredentialsForIdentityOutput: r.Request.Data.(*GetCredentialsForIdentityOutput),
+		GetCredentialsForIdentityOutput: r.Request.Data.(*types.GetCredentialsForIdentityOutput),
 		response:                        &aws.Response{Request: r.Request},
 	}
 
@@ -141,7 +72,7 @@ func (r GetCredentialsForIdentityRequest) Send(ctx context.Context) (*GetCredent
 // GetCredentialsForIdentityResponse is the response type for the
 // GetCredentialsForIdentity API operation.
 type GetCredentialsForIdentityResponse struct {
-	*GetCredentialsForIdentityOutput
+	*types.GetCredentialsForIdentityOutput
 
 	response *aws.Response
 }

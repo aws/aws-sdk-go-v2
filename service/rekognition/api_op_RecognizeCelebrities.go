@@ -6,76 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/rekognition/types"
 )
-
-type RecognizeCelebritiesInput struct {
-	_ struct{} `type:"structure"`
-
-	// The input image as base64-encoded bytes or an S3 object. If you use the AWS
-	// CLI to call Amazon Rekognition operations, passing base64-encoded image bytes
-	// is not supported.
-	//
-	// If you are using an AWS SDK to call Amazon Rekognition, you might not need
-	// to base64-encode image bytes passed using the Bytes field. For more information,
-	// see Images in the Amazon Rekognition developer guide.
-	//
-	// Image is a required field
-	Image *Image `type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s RecognizeCelebritiesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *RecognizeCelebritiesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "RecognizeCelebritiesInput"}
-
-	if s.Image == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Image"))
-	}
-	if s.Image != nil {
-		if err := s.Image.Validate(); err != nil {
-			invalidParams.AddNested("Image", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type RecognizeCelebritiesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Details about each celebrity found in the image. Amazon Rekognition can detect
-	// a maximum of 15 celebrities in an image.
-	CelebrityFaces []Celebrity `type:"list"`
-
-	// The orientation of the input image (counterclockwise direction). If your
-	// application displays the image, you can use this value to correct the orientation.
-	// The bounding box coordinates returned in CelebrityFaces and UnrecognizedFaces
-	// represent face locations before the image orientation is corrected.
-	//
-	// If the input image is in .jpeg format, it might contain exchangeable image
-	// (Exif) metadata that includes the image's orientation. If so, and the Exif
-	// metadata for the input image populates the orientation field, the value of
-	// OrientationCorrection is null. The CelebrityFaces and UnrecognizedFaces bounding
-	// box coordinates represent face locations after Exif metadata is used to correct
-	// the image orientation. Images in .png format don't contain Exif metadata.
-	OrientationCorrection OrientationCorrection `type:"string" enum:"true"`
-
-	// Details about each unrecognized face in the image.
-	UnrecognizedFaces []ComparedFace `type:"list"`
-}
-
-// String returns the string representation
-func (s RecognizeCelebritiesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opRecognizeCelebrities = "RecognizeCelebrities"
 
@@ -119,7 +51,7 @@ const opRecognizeCelebrities = "RecognizeCelebrities"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) RecognizeCelebritiesRequest(input *RecognizeCelebritiesInput) RecognizeCelebritiesRequest {
+func (c *Client) RecognizeCelebritiesRequest(input *types.RecognizeCelebritiesInput) RecognizeCelebritiesRequest {
 	op := &aws.Operation{
 		Name:       opRecognizeCelebrities,
 		HTTPMethod: "POST",
@@ -127,10 +59,10 @@ func (c *Client) RecognizeCelebritiesRequest(input *RecognizeCelebritiesInput) R
 	}
 
 	if input == nil {
-		input = &RecognizeCelebritiesInput{}
+		input = &types.RecognizeCelebritiesInput{}
 	}
 
-	req := c.newRequest(op, input, &RecognizeCelebritiesOutput{})
+	req := c.newRequest(op, input, &types.RecognizeCelebritiesOutput{})
 	return RecognizeCelebritiesRequest{Request: req, Input: input, Copy: c.RecognizeCelebritiesRequest}
 }
 
@@ -138,8 +70,8 @@ func (c *Client) RecognizeCelebritiesRequest(input *RecognizeCelebritiesInput) R
 // RecognizeCelebrities API operation.
 type RecognizeCelebritiesRequest struct {
 	*aws.Request
-	Input *RecognizeCelebritiesInput
-	Copy  func(*RecognizeCelebritiesInput) RecognizeCelebritiesRequest
+	Input *types.RecognizeCelebritiesInput
+	Copy  func(*types.RecognizeCelebritiesInput) RecognizeCelebritiesRequest
 }
 
 // Send marshals and sends the RecognizeCelebrities API request.
@@ -151,7 +83,7 @@ func (r RecognizeCelebritiesRequest) Send(ctx context.Context) (*RecognizeCelebr
 	}
 
 	resp := &RecognizeCelebritiesResponse{
-		RecognizeCelebritiesOutput: r.Request.Data.(*RecognizeCelebritiesOutput),
+		RecognizeCelebritiesOutput: r.Request.Data.(*types.RecognizeCelebritiesOutput),
 		response:                   &aws.Response{Request: r.Request},
 	}
 
@@ -161,7 +93,7 @@ func (r RecognizeCelebritiesRequest) Send(ctx context.Context) (*RecognizeCelebr
 // RecognizeCelebritiesResponse is the response type for the
 // RecognizeCelebrities API operation.
 type RecognizeCelebritiesResponse struct {
-	*RecognizeCelebritiesOutput
+	*types.RecognizeCelebritiesOutput
 
 	response *aws.Response
 }

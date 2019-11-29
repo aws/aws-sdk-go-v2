@@ -6,68 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-type DescribeFlowLogsInput struct {
-	_ struct{} `type:"structure"`
-
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have
-	// the required permissions, the error response is DryRunOperation. Otherwise,
-	// it is UnauthorizedOperation.
-	DryRun *bool `type:"boolean"`
-
-	// One or more filters.
-	//
-	//    * deliver-log-status - The status of the logs delivery (SUCCESS | FAILED).
-	//
-	//    * log-destination-type - The type of destination to which the flow log
-	//    publishes data. Possible destination types include cloud-watch-logs and
-	//    S3.
-	//
-	//    * flow-log-id - The ID of the flow log.
-	//
-	//    * log-group-name - The name of the log group.
-	//
-	//    * resource-id - The ID of the VPC, subnet, or network interface.
-	//
-	//    * traffic-type - The type of traffic (ACCEPT | REJECT | ALL).
-	Filter []Filter `locationNameList:"Filter" type:"list"`
-
-	// One or more flow log IDs.
-	//
-	// Constraint: Maximum of 1000 flow log IDs.
-	FlowLogIds []string `locationName:"FlowLogId" locationNameList:"item" type:"list"`
-
-	// The maximum number of results to return with a single call. To retrieve the
-	// remaining results, make another call with the returned nextToken value.
-	MaxResults *int64 `type:"integer"`
-
-	// The token for the next page of results.
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeFlowLogsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type DescribeFlowLogsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Information about the flow logs.
-	FlowLogs []FlowLog `locationName:"flowLogSet" locationNameList:"item" type:"list"`
-
-	// The token to use to retrieve the next page of results. This value is null
-	// when there are no more results to return.
-	NextToken *string `locationName:"nextToken" type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeFlowLogsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeFlowLogs = "DescribeFlowLogs"
 
@@ -86,7 +26,7 @@ const opDescribeFlowLogs = "DescribeFlowLogs"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeFlowLogs
-func (c *Client) DescribeFlowLogsRequest(input *DescribeFlowLogsInput) DescribeFlowLogsRequest {
+func (c *Client) DescribeFlowLogsRequest(input *types.DescribeFlowLogsInput) DescribeFlowLogsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeFlowLogs,
 		HTTPMethod: "POST",
@@ -100,10 +40,10 @@ func (c *Client) DescribeFlowLogsRequest(input *DescribeFlowLogsInput) DescribeF
 	}
 
 	if input == nil {
-		input = &DescribeFlowLogsInput{}
+		input = &types.DescribeFlowLogsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeFlowLogsOutput{})
+	req := c.newRequest(op, input, &types.DescribeFlowLogsOutput{})
 	return DescribeFlowLogsRequest{Request: req, Input: input, Copy: c.DescribeFlowLogsRequest}
 }
 
@@ -111,8 +51,8 @@ func (c *Client) DescribeFlowLogsRequest(input *DescribeFlowLogsInput) DescribeF
 // DescribeFlowLogs API operation.
 type DescribeFlowLogsRequest struct {
 	*aws.Request
-	Input *DescribeFlowLogsInput
-	Copy  func(*DescribeFlowLogsInput) DescribeFlowLogsRequest
+	Input *types.DescribeFlowLogsInput
+	Copy  func(*types.DescribeFlowLogsInput) DescribeFlowLogsRequest
 }
 
 // Send marshals and sends the DescribeFlowLogs API request.
@@ -124,7 +64,7 @@ func (r DescribeFlowLogsRequest) Send(ctx context.Context) (*DescribeFlowLogsRes
 	}
 
 	resp := &DescribeFlowLogsResponse{
-		DescribeFlowLogsOutput: r.Request.Data.(*DescribeFlowLogsOutput),
+		DescribeFlowLogsOutput: r.Request.Data.(*types.DescribeFlowLogsOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -154,7 +94,7 @@ func NewDescribeFlowLogsPaginator(req DescribeFlowLogsRequest) DescribeFlowLogsP
 	return DescribeFlowLogsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *DescribeFlowLogsInput
+				var inCpy *types.DescribeFlowLogsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -174,14 +114,14 @@ type DescribeFlowLogsPaginator struct {
 	aws.Pager
 }
 
-func (p *DescribeFlowLogsPaginator) CurrentPage() *DescribeFlowLogsOutput {
-	return p.Pager.CurrentPage().(*DescribeFlowLogsOutput)
+func (p *DescribeFlowLogsPaginator) CurrentPage() *types.DescribeFlowLogsOutput {
+	return p.Pager.CurrentPage().(*types.DescribeFlowLogsOutput)
 }
 
 // DescribeFlowLogsResponse is the response type for the
 // DescribeFlowLogs API operation.
 type DescribeFlowLogsResponse struct {
-	*DescribeFlowLogsOutput
+	*types.DescribeFlowLogsOutput
 
 	response *aws.Response
 }

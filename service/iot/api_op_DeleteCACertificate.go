@@ -6,70 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/iot/types"
 )
-
-// Input for the DeleteCACertificate operation.
-type DeleteCACertificateInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the certificate to delete. (The last part of the certificate ARN
-	// contains the certificate ID.)
-	//
-	// CertificateId is a required field
-	CertificateId *string `location:"uri" locationName:"caCertificateId" min:"64" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteCACertificateInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteCACertificateInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteCACertificateInput"}
-
-	if s.CertificateId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("CertificateId"))
-	}
-	if s.CertificateId != nil && len(*s.CertificateId) < 64 {
-		invalidParams.Add(aws.NewErrParamMinLen("CertificateId", 64))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteCACertificateInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.CertificateId != nil {
-		v := *s.CertificateId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "caCertificateId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-// The output for the DeleteCACertificate operation.
-type DeleteCACertificateOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteCACertificateOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteCACertificateOutput) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
 
 const opDeleteCACertificate = "DeleteCACertificate"
 
@@ -84,7 +22,7 @@ const opDeleteCACertificate = "DeleteCACertificate"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) DeleteCACertificateRequest(input *DeleteCACertificateInput) DeleteCACertificateRequest {
+func (c *Client) DeleteCACertificateRequest(input *types.DeleteCACertificateInput) DeleteCACertificateRequest {
 	op := &aws.Operation{
 		Name:       opDeleteCACertificate,
 		HTTPMethod: "DELETE",
@@ -92,10 +30,10 @@ func (c *Client) DeleteCACertificateRequest(input *DeleteCACertificateInput) Del
 	}
 
 	if input == nil {
-		input = &DeleteCACertificateInput{}
+		input = &types.DeleteCACertificateInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteCACertificateOutput{})
+	req := c.newRequest(op, input, &types.DeleteCACertificateOutput{})
 	return DeleteCACertificateRequest{Request: req, Input: input, Copy: c.DeleteCACertificateRequest}
 }
 
@@ -103,8 +41,8 @@ func (c *Client) DeleteCACertificateRequest(input *DeleteCACertificateInput) Del
 // DeleteCACertificate API operation.
 type DeleteCACertificateRequest struct {
 	*aws.Request
-	Input *DeleteCACertificateInput
-	Copy  func(*DeleteCACertificateInput) DeleteCACertificateRequest
+	Input *types.DeleteCACertificateInput
+	Copy  func(*types.DeleteCACertificateInput) DeleteCACertificateRequest
 }
 
 // Send marshals and sends the DeleteCACertificate API request.
@@ -116,7 +54,7 @@ func (r DeleteCACertificateRequest) Send(ctx context.Context) (*DeleteCACertific
 	}
 
 	resp := &DeleteCACertificateResponse{
-		DeleteCACertificateOutput: r.Request.Data.(*DeleteCACertificateOutput),
+		DeleteCACertificateOutput: r.Request.Data.(*types.DeleteCACertificateOutput),
 		response:                  &aws.Response{Request: r.Request},
 	}
 
@@ -126,7 +64,7 @@ func (r DeleteCACertificateRequest) Send(ctx context.Context) (*DeleteCACertific
 // DeleteCACertificateResponse is the response type for the
 // DeleteCACertificate API operation.
 type DeleteCACertificateResponse struct {
-	*DeleteCACertificateOutput
+	*types.DeleteCACertificateOutput
 
 	response *aws.Response
 }

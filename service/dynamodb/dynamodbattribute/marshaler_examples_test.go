@@ -5,8 +5,8 @@ import (
 	"reflect"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/service/dynamodb"
 	"github.com/aws/aws-sdk-go-v2/service/dynamodb/dynamodbattribute"
+	"github.com/aws/aws-sdk-go-v2/service/dynamodb/types"
 )
 
 func ExampleMarshal() {
@@ -80,14 +80,14 @@ func ExampleUnmarshal() {
 		A2Num:   map[string]int{"a": 1, "b": 2, "c": 3},
 	}
 
-	av := &dynamodb.AttributeValue{
-		M: map[string]dynamodb.AttributeValue{
+	av := &types.AttributeValue{
+		M: map[string]types.AttributeValue{
 			"Bytes":   {B: []byte{48, 49}},
 			"MyField": {S: aws.String("MyFieldValue")},
-			"Letters": {L: []dynamodb.AttributeValue{
+			"Letters": {L: []types.AttributeValue{
 				{S: aws.String("a")}, {S: aws.String("b")}, {S: aws.String("c")}, {S: aws.String("d")},
 			}},
-			"A2Num": {M: map[string]dynamodb.AttributeValue{
+			"A2Num": {M: map[string]types.AttributeValue{
 				"a": {N: aws.String("1")},
 				"b": {N: aws.String("2")},
 				"c": {N: aws.String("3")},

@@ -6,53 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/directconnect/types"
 )
-
-type DescribeDirectConnectGatewayAssociationsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the associated gateway.
-	AssociatedGatewayId *string `locationName:"associatedGatewayId" type:"string"`
-
-	// The ID of the Direct Connect gateway association.
-	AssociationId *string `locationName:"associationId" type:"string"`
-
-	// The ID of the Direct Connect gateway.
-	DirectConnectGatewayId *string `locationName:"directConnectGatewayId" type:"string"`
-
-	// The maximum number of results to return with a single call. To retrieve the
-	// remaining results, make another call with the returned nextToken value.
-	//
-	// If MaxResults is given a value larger than 100, only 100 results are returned.
-	MaxResults *int64 `locationName:"maxResults" type:"integer"`
-
-	// The token provided in the previous call to retrieve the next page.
-	NextToken *string `locationName:"nextToken" type:"string"`
-
-	// The ID of the virtual private gateway.
-	VirtualGatewayId *string `locationName:"virtualGatewayId" type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeDirectConnectGatewayAssociationsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type DescribeDirectConnectGatewayAssociationsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Information about the associations.
-	DirectConnectGatewayAssociations []DirectConnectGatewayAssociation `locationName:"directConnectGatewayAssociations" type:"list"`
-
-	// The token to retrieve the next page.
-	NextToken *string `locationName:"nextToken" type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeDirectConnectGatewayAssociationsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeDirectConnectGatewayAssociations = "DescribeDirectConnectGatewayAssociations"
 
@@ -76,7 +31,7 @@ const opDescribeDirectConnectGatewayAssociations = "DescribeDirectConnectGateway
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DescribeDirectConnectGatewayAssociations
-func (c *Client) DescribeDirectConnectGatewayAssociationsRequest(input *DescribeDirectConnectGatewayAssociationsInput) DescribeDirectConnectGatewayAssociationsRequest {
+func (c *Client) DescribeDirectConnectGatewayAssociationsRequest(input *types.DescribeDirectConnectGatewayAssociationsInput) DescribeDirectConnectGatewayAssociationsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeDirectConnectGatewayAssociations,
 		HTTPMethod: "POST",
@@ -84,10 +39,10 @@ func (c *Client) DescribeDirectConnectGatewayAssociationsRequest(input *Describe
 	}
 
 	if input == nil {
-		input = &DescribeDirectConnectGatewayAssociationsInput{}
+		input = &types.DescribeDirectConnectGatewayAssociationsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeDirectConnectGatewayAssociationsOutput{})
+	req := c.newRequest(op, input, &types.DescribeDirectConnectGatewayAssociationsOutput{})
 	return DescribeDirectConnectGatewayAssociationsRequest{Request: req, Input: input, Copy: c.DescribeDirectConnectGatewayAssociationsRequest}
 }
 
@@ -95,8 +50,8 @@ func (c *Client) DescribeDirectConnectGatewayAssociationsRequest(input *Describe
 // DescribeDirectConnectGatewayAssociations API operation.
 type DescribeDirectConnectGatewayAssociationsRequest struct {
 	*aws.Request
-	Input *DescribeDirectConnectGatewayAssociationsInput
-	Copy  func(*DescribeDirectConnectGatewayAssociationsInput) DescribeDirectConnectGatewayAssociationsRequest
+	Input *types.DescribeDirectConnectGatewayAssociationsInput
+	Copy  func(*types.DescribeDirectConnectGatewayAssociationsInput) DescribeDirectConnectGatewayAssociationsRequest
 }
 
 // Send marshals and sends the DescribeDirectConnectGatewayAssociations API request.
@@ -108,7 +63,7 @@ func (r DescribeDirectConnectGatewayAssociationsRequest) Send(ctx context.Contex
 	}
 
 	resp := &DescribeDirectConnectGatewayAssociationsResponse{
-		DescribeDirectConnectGatewayAssociationsOutput: r.Request.Data.(*DescribeDirectConnectGatewayAssociationsOutput),
+		DescribeDirectConnectGatewayAssociationsOutput: r.Request.Data.(*types.DescribeDirectConnectGatewayAssociationsOutput),
 		response: &aws.Response{Request: r.Request},
 	}
 
@@ -118,7 +73,7 @@ func (r DescribeDirectConnectGatewayAssociationsRequest) Send(ctx context.Contex
 // DescribeDirectConnectGatewayAssociationsResponse is the response type for the
 // DescribeDirectConnectGatewayAssociations API operation.
 type DescribeDirectConnectGatewayAssociationsResponse struct {
-	*DescribeDirectConnectGatewayAssociationsOutput
+	*types.DescribeDirectConnectGatewayAssociationsOutput
 
 	response *aws.Response
 }

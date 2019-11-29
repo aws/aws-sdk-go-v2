@@ -6,59 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/cloudwatch/types"
 )
-
-type UntagResourceInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ARN of the CloudWatch resource that you're removing tags from. For more
-	// information on ARN format, see Example ARNs (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-cloudwatch)
-	// in the Amazon Web Services General Reference.
-	//
-	// ResourceARN is a required field
-	ResourceARN *string `min:"1" type:"string" required:"true"`
-
-	// The list of tag keys to remove from the resource.
-	//
-	// TagKeys is a required field
-	TagKeys []string `type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s UntagResourceInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UntagResourceInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UntagResourceInput"}
-
-	if s.ResourceARN == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ResourceARN"))
-	}
-	if s.ResourceARN != nil && len(*s.ResourceARN) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ResourceARN", 1))
-	}
-
-	if s.TagKeys == nil {
-		invalidParams.Add(aws.NewErrParamRequired("TagKeys"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type UntagResourceOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s UntagResourceOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opUntagResource = "UntagResource"
 
@@ -75,7 +24,7 @@ const opUntagResource = "UntagResource"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/UntagResource
-func (c *Client) UntagResourceRequest(input *UntagResourceInput) UntagResourceRequest {
+func (c *Client) UntagResourceRequest(input *types.UntagResourceInput) UntagResourceRequest {
 	op := &aws.Operation{
 		Name:       opUntagResource,
 		HTTPMethod: "POST",
@@ -83,10 +32,10 @@ func (c *Client) UntagResourceRequest(input *UntagResourceInput) UntagResourceRe
 	}
 
 	if input == nil {
-		input = &UntagResourceInput{}
+		input = &types.UntagResourceInput{}
 	}
 
-	req := c.newRequest(op, input, &UntagResourceOutput{})
+	req := c.newRequest(op, input, &types.UntagResourceOutput{})
 	return UntagResourceRequest{Request: req, Input: input, Copy: c.UntagResourceRequest}
 }
 
@@ -94,8 +43,8 @@ func (c *Client) UntagResourceRequest(input *UntagResourceInput) UntagResourceRe
 // UntagResource API operation.
 type UntagResourceRequest struct {
 	*aws.Request
-	Input *UntagResourceInput
-	Copy  func(*UntagResourceInput) UntagResourceRequest
+	Input *types.UntagResourceInput
+	Copy  func(*types.UntagResourceInput) UntagResourceRequest
 }
 
 // Send marshals and sends the UntagResource API request.
@@ -107,7 +56,7 @@ func (r UntagResourceRequest) Send(ctx context.Context) (*UntagResourceResponse,
 	}
 
 	resp := &UntagResourceResponse{
-		UntagResourceOutput: r.Request.Data.(*UntagResourceOutput),
+		UntagResourceOutput: r.Request.Data.(*types.UntagResourceOutput),
 		response:            &aws.Response{Request: r.Request},
 	}
 
@@ -117,7 +66,7 @@ func (r UntagResourceRequest) Send(ctx context.Context) (*UntagResourceResponse,
 // UntagResourceResponse is the response type for the
 // UntagResource API operation.
 type UntagResourceResponse struct {
-	*UntagResourceOutput
+	*types.UntagResourceOutput
 
 	response *aws.Response
 }

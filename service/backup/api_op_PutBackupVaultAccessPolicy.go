@@ -6,77 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/restjson"
+	"github.com/aws/aws-sdk-go-v2/service/backup/types"
 )
-
-type PutBackupVaultAccessPolicyInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of a logical container where backups are stored. Backup vaults are
-	// identified by names that are unique to the account used to create them and
-	// the AWS Region where they are created. They consist of lowercase letters,
-	// numbers, and hyphens.
-	//
-	// BackupVaultName is a required field
-	BackupVaultName *string `location:"uri" locationName:"backupVaultName" type:"string" required:"true"`
-
-	// The backup vault access policy document in JSON format.
-	Policy *string `type:"string"`
-}
-
-// String returns the string representation
-func (s PutBackupVaultAccessPolicyInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *PutBackupVaultAccessPolicyInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "PutBackupVaultAccessPolicyInput"}
-
-	if s.BackupVaultName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("BackupVaultName"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s PutBackupVaultAccessPolicyInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.Policy != nil {
-		v := *s.Policy
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "Policy", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.BackupVaultName != nil {
-		v := *s.BackupVaultName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "backupVaultName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type PutBackupVaultAccessPolicyOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s PutBackupVaultAccessPolicyOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s PutBackupVaultAccessPolicyOutput) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
 
 const opPutBackupVaultAccessPolicy = "PutBackupVaultAccessPolicy"
 
@@ -95,7 +28,7 @@ const opPutBackupVaultAccessPolicy = "PutBackupVaultAccessPolicy"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/PutBackupVaultAccessPolicy
-func (c *Client) PutBackupVaultAccessPolicyRequest(input *PutBackupVaultAccessPolicyInput) PutBackupVaultAccessPolicyRequest {
+func (c *Client) PutBackupVaultAccessPolicyRequest(input *types.PutBackupVaultAccessPolicyInput) PutBackupVaultAccessPolicyRequest {
 	op := &aws.Operation{
 		Name:       opPutBackupVaultAccessPolicy,
 		HTTPMethod: "PUT",
@@ -103,10 +36,10 @@ func (c *Client) PutBackupVaultAccessPolicyRequest(input *PutBackupVaultAccessPo
 	}
 
 	if input == nil {
-		input = &PutBackupVaultAccessPolicyInput{}
+		input = &types.PutBackupVaultAccessPolicyInput{}
 	}
 
-	req := c.newRequest(op, input, &PutBackupVaultAccessPolicyOutput{})
+	req := c.newRequest(op, input, &types.PutBackupVaultAccessPolicyOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return PutBackupVaultAccessPolicyRequest{Request: req, Input: input, Copy: c.PutBackupVaultAccessPolicyRequest}
@@ -116,8 +49,8 @@ func (c *Client) PutBackupVaultAccessPolicyRequest(input *PutBackupVaultAccessPo
 // PutBackupVaultAccessPolicy API operation.
 type PutBackupVaultAccessPolicyRequest struct {
 	*aws.Request
-	Input *PutBackupVaultAccessPolicyInput
-	Copy  func(*PutBackupVaultAccessPolicyInput) PutBackupVaultAccessPolicyRequest
+	Input *types.PutBackupVaultAccessPolicyInput
+	Copy  func(*types.PutBackupVaultAccessPolicyInput) PutBackupVaultAccessPolicyRequest
 }
 
 // Send marshals and sends the PutBackupVaultAccessPolicy API request.
@@ -129,7 +62,7 @@ func (r PutBackupVaultAccessPolicyRequest) Send(ctx context.Context) (*PutBackup
 	}
 
 	resp := &PutBackupVaultAccessPolicyResponse{
-		PutBackupVaultAccessPolicyOutput: r.Request.Data.(*PutBackupVaultAccessPolicyOutput),
+		PutBackupVaultAccessPolicyOutput: r.Request.Data.(*types.PutBackupVaultAccessPolicyOutput),
 		response:                         &aws.Response{Request: r.Request},
 	}
 
@@ -139,7 +72,7 @@ func (r PutBackupVaultAccessPolicyRequest) Send(ctx context.Context) (*PutBackup
 // PutBackupVaultAccessPolicyResponse is the response type for the
 // PutBackupVaultAccessPolicy API operation.
 type PutBackupVaultAccessPolicyResponse struct {
-	*PutBackupVaultAccessPolicyOutput
+	*types.PutBackupVaultAccessPolicyOutput
 
 	response *aws.Response
 }

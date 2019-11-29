@@ -6,45 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/alexaforbusiness/types"
 )
-
-type UpdateDeviceInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ARN of the device to update. Required.
-	DeviceArn *string `type:"string"`
-
-	// The updated device name. Required.
-	DeviceName *string `min:"2" type:"string"`
-}
-
-// String returns the string representation
-func (s UpdateDeviceInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateDeviceInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateDeviceInput"}
-	if s.DeviceName != nil && len(*s.DeviceName) < 2 {
-		invalidParams.Add(aws.NewErrParamMinLen("DeviceName", 2))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type UpdateDeviceOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s UpdateDeviceOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opUpdateDevice = "UpdateDevice"
 
@@ -61,7 +24,7 @@ const opUpdateDevice = "UpdateDevice"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/UpdateDevice
-func (c *Client) UpdateDeviceRequest(input *UpdateDeviceInput) UpdateDeviceRequest {
+func (c *Client) UpdateDeviceRequest(input *types.UpdateDeviceInput) UpdateDeviceRequest {
 	op := &aws.Operation{
 		Name:       opUpdateDevice,
 		HTTPMethod: "POST",
@@ -69,10 +32,10 @@ func (c *Client) UpdateDeviceRequest(input *UpdateDeviceInput) UpdateDeviceReque
 	}
 
 	if input == nil {
-		input = &UpdateDeviceInput{}
+		input = &types.UpdateDeviceInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateDeviceOutput{})
+	req := c.newRequest(op, input, &types.UpdateDeviceOutput{})
 	return UpdateDeviceRequest{Request: req, Input: input, Copy: c.UpdateDeviceRequest}
 }
 
@@ -80,8 +43,8 @@ func (c *Client) UpdateDeviceRequest(input *UpdateDeviceInput) UpdateDeviceReque
 // UpdateDevice API operation.
 type UpdateDeviceRequest struct {
 	*aws.Request
-	Input *UpdateDeviceInput
-	Copy  func(*UpdateDeviceInput) UpdateDeviceRequest
+	Input *types.UpdateDeviceInput
+	Copy  func(*types.UpdateDeviceInput) UpdateDeviceRequest
 }
 
 // Send marshals and sends the UpdateDevice API request.
@@ -93,7 +56,7 @@ func (r UpdateDeviceRequest) Send(ctx context.Context) (*UpdateDeviceResponse, e
 	}
 
 	resp := &UpdateDeviceResponse{
-		UpdateDeviceOutput: r.Request.Data.(*UpdateDeviceOutput),
+		UpdateDeviceOutput: r.Request.Data.(*types.UpdateDeviceOutput),
 		response:           &aws.Response{Request: r.Request},
 	}
 
@@ -103,7 +66,7 @@ func (r UpdateDeviceRequest) Send(ctx context.Context) (*UpdateDeviceResponse, e
 // UpdateDeviceResponse is the response type for the
 // UpdateDevice API operation.
 type UpdateDeviceResponse struct {
-	*UpdateDeviceOutput
+	*types.UpdateDeviceOutput
 
 	response *aws.Response
 }

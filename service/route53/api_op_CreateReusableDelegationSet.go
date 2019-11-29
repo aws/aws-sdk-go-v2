@@ -6,105 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/route53/types"
 )
-
-type CreateReusableDelegationSetInput struct {
-	_ struct{} `locationName:"CreateReusableDelegationSetRequest" type:"structure" xmlURI:"https://route53.amazonaws.com/doc/2013-04-01/"`
-
-	// A unique string that identifies the request, and that allows you to retry
-	// failed CreateReusableDelegationSet requests without the risk of executing
-	// the operation twice. You must use a unique CallerReference string every time
-	// you submit a CreateReusableDelegationSet request. CallerReference can be
-	// any unique string, for example a date/time stamp.
-	//
-	// CallerReference is a required field
-	CallerReference *string `min:"1" type:"string" required:"true"`
-
-	// If you want to mark the delegation set for an existing hosted zone as reusable,
-	// the ID for that hosted zone.
-	HostedZoneId *string `type:"string"`
-}
-
-// String returns the string representation
-func (s CreateReusableDelegationSetInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateReusableDelegationSetInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateReusableDelegationSetInput"}
-
-	if s.CallerReference == nil {
-		invalidParams.Add(aws.NewErrParamRequired("CallerReference"))
-	}
-	if s.CallerReference != nil && len(*s.CallerReference) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("CallerReference", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s CreateReusableDelegationSetInput) MarshalFields(e protocol.FieldEncoder) error {
-
-	e.SetFields(protocol.BodyTarget, "CreateReusableDelegationSetRequest", protocol.FieldMarshalerFunc(func(e protocol.FieldEncoder) error {
-		if s.CallerReference != nil {
-			v := *s.CallerReference
-
-			metadata := protocol.Metadata{}
-			e.SetValue(protocol.BodyTarget, "CallerReference", protocol.StringValue(v), metadata)
-		}
-		if s.HostedZoneId != nil {
-			v := *s.HostedZoneId
-
-			metadata := protocol.Metadata{}
-			e.SetValue(protocol.BodyTarget, "HostedZoneId", protocol.StringValue(v), metadata)
-		}
-		return nil
-	}), protocol.Metadata{XMLNamespaceURI: "https://route53.amazonaws.com/doc/2013-04-01/"})
-	return nil
-}
-
-type CreateReusableDelegationSetOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A complex type that contains name server information.
-	//
-	// DelegationSet is a required field
-	DelegationSet *DelegationSet `type:"structure" required:"true"`
-
-	// The unique URL representing the new reusable delegation set.
-	//
-	// Location is a required field
-	Location *string `location:"header" locationName:"Location" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s CreateReusableDelegationSetOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s CreateReusableDelegationSetOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.DelegationSet != nil {
-		v := s.DelegationSet
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "DelegationSet", v, metadata)
-	}
-	if s.Location != nil {
-		v := *s.Location
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "Location", protocol.StringValue(v), metadata)
-	}
-	return nil
-}
 
 const opCreateReusableDelegationSet = "CreateReusableDelegationSet"
 
@@ -164,7 +67,7 @@ const opCreateReusableDelegationSet = "CreateReusableDelegationSet"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/CreateReusableDelegationSet
-func (c *Client) CreateReusableDelegationSetRequest(input *CreateReusableDelegationSetInput) CreateReusableDelegationSetRequest {
+func (c *Client) CreateReusableDelegationSetRequest(input *types.CreateReusableDelegationSetInput) CreateReusableDelegationSetRequest {
 	op := &aws.Operation{
 		Name:       opCreateReusableDelegationSet,
 		HTTPMethod: "POST",
@@ -172,10 +75,10 @@ func (c *Client) CreateReusableDelegationSetRequest(input *CreateReusableDelegat
 	}
 
 	if input == nil {
-		input = &CreateReusableDelegationSetInput{}
+		input = &types.CreateReusableDelegationSetInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateReusableDelegationSetOutput{})
+	req := c.newRequest(op, input, &types.CreateReusableDelegationSetOutput{})
 	return CreateReusableDelegationSetRequest{Request: req, Input: input, Copy: c.CreateReusableDelegationSetRequest}
 }
 
@@ -183,8 +86,8 @@ func (c *Client) CreateReusableDelegationSetRequest(input *CreateReusableDelegat
 // CreateReusableDelegationSet API operation.
 type CreateReusableDelegationSetRequest struct {
 	*aws.Request
-	Input *CreateReusableDelegationSetInput
-	Copy  func(*CreateReusableDelegationSetInput) CreateReusableDelegationSetRequest
+	Input *types.CreateReusableDelegationSetInput
+	Copy  func(*types.CreateReusableDelegationSetInput) CreateReusableDelegationSetRequest
 }
 
 // Send marshals and sends the CreateReusableDelegationSet API request.
@@ -196,7 +99,7 @@ func (r CreateReusableDelegationSetRequest) Send(ctx context.Context) (*CreateRe
 	}
 
 	resp := &CreateReusableDelegationSetResponse{
-		CreateReusableDelegationSetOutput: r.Request.Data.(*CreateReusableDelegationSetOutput),
+		CreateReusableDelegationSetOutput: r.Request.Data.(*types.CreateReusableDelegationSetOutput),
 		response:                          &aws.Response{Request: r.Request},
 	}
 
@@ -206,7 +109,7 @@ func (r CreateReusableDelegationSetRequest) Send(ctx context.Context) (*CreateRe
 // CreateReusableDelegationSetResponse is the response type for the
 // CreateReusableDelegationSet API operation.
 type CreateReusableDelegationSetResponse struct {
-	*CreateReusableDelegationSetOutput
+	*types.CreateReusableDelegationSetOutput
 
 	response *aws.Response
 }

@@ -6,103 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ecr/types"
 )
-
-type UploadLayerPartInput struct {
-	_ struct{} `type:"structure"`
-
-	// The base64-encoded layer part payload.
-	//
-	// LayerPartBlob is automatically base64 encoded/decoded by the SDK.
-	//
-	// LayerPartBlob is a required field
-	LayerPartBlob []byte `locationName:"layerPartBlob" type:"blob" required:"true"`
-
-	// The integer value of the first byte of the layer part.
-	//
-	// PartFirstByte is a required field
-	PartFirstByte *int64 `locationName:"partFirstByte" type:"long" required:"true"`
-
-	// The integer value of the last byte of the layer part.
-	//
-	// PartLastByte is a required field
-	PartLastByte *int64 `locationName:"partLastByte" type:"long" required:"true"`
-
-	// The AWS account ID associated with the registry to which you are uploading
-	// layer parts. If you do not specify a registry, the default registry is assumed.
-	RegistryId *string `locationName:"registryId" type:"string"`
-
-	// The name of the repository to which you are uploading layer parts.
-	//
-	// RepositoryName is a required field
-	RepositoryName *string `locationName:"repositoryName" min:"2" type:"string" required:"true"`
-
-	// The upload ID from a previous InitiateLayerUpload operation to associate
-	// with the layer part upload.
-	//
-	// UploadId is a required field
-	UploadId *string `locationName:"uploadId" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s UploadLayerPartInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UploadLayerPartInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UploadLayerPartInput"}
-
-	if s.LayerPartBlob == nil {
-		invalidParams.Add(aws.NewErrParamRequired("LayerPartBlob"))
-	}
-
-	if s.PartFirstByte == nil {
-		invalidParams.Add(aws.NewErrParamRequired("PartFirstByte"))
-	}
-
-	if s.PartLastByte == nil {
-		invalidParams.Add(aws.NewErrParamRequired("PartLastByte"))
-	}
-
-	if s.RepositoryName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("RepositoryName"))
-	}
-	if s.RepositoryName != nil && len(*s.RepositoryName) < 2 {
-		invalidParams.Add(aws.NewErrParamMinLen("RepositoryName", 2))
-	}
-
-	if s.UploadId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("UploadId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type UploadLayerPartOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The integer value of the last byte received in the request.
-	LastByteReceived *int64 `locationName:"lastByteReceived" type:"long"`
-
-	// The registry ID associated with the request.
-	RegistryId *string `locationName:"registryId" type:"string"`
-
-	// The repository name associated with the request.
-	RepositoryName *string `locationName:"repositoryName" min:"2" type:"string"`
-
-	// The upload ID associated with the request.
-	UploadId *string `locationName:"uploadId" type:"string"`
-}
-
-// String returns the string representation
-func (s UploadLayerPartOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opUploadLayerPart = "UploadLayerPart"
 
@@ -123,7 +28,7 @@ const opUploadLayerPart = "UploadLayerPart"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/UploadLayerPart
-func (c *Client) UploadLayerPartRequest(input *UploadLayerPartInput) UploadLayerPartRequest {
+func (c *Client) UploadLayerPartRequest(input *types.UploadLayerPartInput) UploadLayerPartRequest {
 	op := &aws.Operation{
 		Name:       opUploadLayerPart,
 		HTTPMethod: "POST",
@@ -131,10 +36,10 @@ func (c *Client) UploadLayerPartRequest(input *UploadLayerPartInput) UploadLayer
 	}
 
 	if input == nil {
-		input = &UploadLayerPartInput{}
+		input = &types.UploadLayerPartInput{}
 	}
 
-	req := c.newRequest(op, input, &UploadLayerPartOutput{})
+	req := c.newRequest(op, input, &types.UploadLayerPartOutput{})
 	return UploadLayerPartRequest{Request: req, Input: input, Copy: c.UploadLayerPartRequest}
 }
 
@@ -142,8 +47,8 @@ func (c *Client) UploadLayerPartRequest(input *UploadLayerPartInput) UploadLayer
 // UploadLayerPart API operation.
 type UploadLayerPartRequest struct {
 	*aws.Request
-	Input *UploadLayerPartInput
-	Copy  func(*UploadLayerPartInput) UploadLayerPartRequest
+	Input *types.UploadLayerPartInput
+	Copy  func(*types.UploadLayerPartInput) UploadLayerPartRequest
 }
 
 // Send marshals and sends the UploadLayerPart API request.
@@ -155,7 +60,7 @@ func (r UploadLayerPartRequest) Send(ctx context.Context) (*UploadLayerPartRespo
 	}
 
 	resp := &UploadLayerPartResponse{
-		UploadLayerPartOutput: r.Request.Data.(*UploadLayerPartOutput),
+		UploadLayerPartOutput: r.Request.Data.(*types.UploadLayerPartOutput),
 		response:              &aws.Response{Request: r.Request},
 	}
 
@@ -165,7 +70,7 @@ func (r UploadLayerPartRequest) Send(ctx context.Context) (*UploadLayerPartRespo
 // UploadLayerPartResponse is the response type for the
 // UploadLayerPart API operation.
 type UploadLayerPartResponse struct {
-	*UploadLayerPartOutput
+	*types.UploadLayerPartOutput
 
 	response *aws.Response
 }

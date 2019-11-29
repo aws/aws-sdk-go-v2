@@ -6,62 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/lightsail/types"
 )
-
-type EnableAddOnInput struct {
-	_ struct{} `type:"structure"`
-
-	// An array of strings representing the add-on to enable or modify.
-	//
-	// AddOnRequest is a required field
-	AddOnRequest *AddOnRequest `locationName:"addOnRequest" type:"structure" required:"true"`
-
-	// The name of the source resource for which to enable or modify the add-on.
-	//
-	// ResourceName is a required field
-	ResourceName *string `locationName:"resourceName" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s EnableAddOnInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *EnableAddOnInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "EnableAddOnInput"}
-
-	if s.AddOnRequest == nil {
-		invalidParams.Add(aws.NewErrParamRequired("AddOnRequest"))
-	}
-
-	if s.ResourceName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ResourceName"))
-	}
-	if s.AddOnRequest != nil {
-		if err := s.AddOnRequest.Validate(); err != nil {
-			invalidParams.AddNested("AddOnRequest", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type EnableAddOnOutput struct {
-	_ struct{} `type:"structure"`
-
-	// An array of objects that describe the result of your request.
-	Operations []Operation `locationName:"operations" type:"list"`
-}
-
-// String returns the string representation
-func (s EnableAddOnOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opEnableAddOn = "EnableAddOn"
 
@@ -79,7 +25,7 @@ const opEnableAddOn = "EnableAddOn"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/EnableAddOn
-func (c *Client) EnableAddOnRequest(input *EnableAddOnInput) EnableAddOnRequest {
+func (c *Client) EnableAddOnRequest(input *types.EnableAddOnInput) EnableAddOnRequest {
 	op := &aws.Operation{
 		Name:       opEnableAddOn,
 		HTTPMethod: "POST",
@@ -87,10 +33,10 @@ func (c *Client) EnableAddOnRequest(input *EnableAddOnInput) EnableAddOnRequest 
 	}
 
 	if input == nil {
-		input = &EnableAddOnInput{}
+		input = &types.EnableAddOnInput{}
 	}
 
-	req := c.newRequest(op, input, &EnableAddOnOutput{})
+	req := c.newRequest(op, input, &types.EnableAddOnOutput{})
 	return EnableAddOnRequest{Request: req, Input: input, Copy: c.EnableAddOnRequest}
 }
 
@@ -98,8 +44,8 @@ func (c *Client) EnableAddOnRequest(input *EnableAddOnInput) EnableAddOnRequest 
 // EnableAddOn API operation.
 type EnableAddOnRequest struct {
 	*aws.Request
-	Input *EnableAddOnInput
-	Copy  func(*EnableAddOnInput) EnableAddOnRequest
+	Input *types.EnableAddOnInput
+	Copy  func(*types.EnableAddOnInput) EnableAddOnRequest
 }
 
 // Send marshals and sends the EnableAddOn API request.
@@ -111,7 +57,7 @@ func (r EnableAddOnRequest) Send(ctx context.Context) (*EnableAddOnResponse, err
 	}
 
 	resp := &EnableAddOnResponse{
-		EnableAddOnOutput: r.Request.Data.(*EnableAddOnOutput),
+		EnableAddOnOutput: r.Request.Data.(*types.EnableAddOnOutput),
 		response:          &aws.Response{Request: r.Request},
 	}
 
@@ -121,7 +67,7 @@ func (r EnableAddOnRequest) Send(ctx context.Context) (*EnableAddOnResponse, err
 // EnableAddOnResponse is the response type for the
 // EnableAddOn API operation.
 type EnableAddOnResponse struct {
-	*EnableAddOnOutput
+	*types.EnableAddOnOutput
 
 	response *aws.Response
 }

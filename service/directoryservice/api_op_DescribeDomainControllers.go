@@ -6,64 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/directoryservice/types"
 )
-
-type DescribeDomainControllersInput struct {
-	_ struct{} `type:"structure"`
-
-	// Identifier of the directory for which to retrieve the domain controller information.
-	//
-	// DirectoryId is a required field
-	DirectoryId *string `type:"string" required:"true"`
-
-	// A list of identifiers for the domain controllers whose information will be
-	// provided.
-	DomainControllerIds []string `type:"list"`
-
-	// The maximum number of items to return.
-	Limit *int64 `type:"integer"`
-
-	// The DescribeDomainControllers.NextToken value from a previous call to DescribeDomainControllers.
-	// Pass null if this is the first call.
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeDomainControllersInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeDomainControllersInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeDomainControllersInput"}
-
-	if s.DirectoryId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DirectoryId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribeDomainControllersOutput struct {
-	_ struct{} `type:"structure"`
-
-	// List of the DomainController objects that were retrieved.
-	DomainControllers []DomainController `type:"list"`
-
-	// If not null, more results are available. Pass this value for the NextToken
-	// parameter in a subsequent call to DescribeDomainControllers retrieve the
-	// next set of items.
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeDomainControllersOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeDomainControllers = "DescribeDomainControllers"
 
@@ -80,7 +24,7 @@ const opDescribeDomainControllers = "DescribeDomainControllers"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DescribeDomainControllers
-func (c *Client) DescribeDomainControllersRequest(input *DescribeDomainControllersInput) DescribeDomainControllersRequest {
+func (c *Client) DescribeDomainControllersRequest(input *types.DescribeDomainControllersInput) DescribeDomainControllersRequest {
 	op := &aws.Operation{
 		Name:       opDescribeDomainControllers,
 		HTTPMethod: "POST",
@@ -94,10 +38,10 @@ func (c *Client) DescribeDomainControllersRequest(input *DescribeDomainControlle
 	}
 
 	if input == nil {
-		input = &DescribeDomainControllersInput{}
+		input = &types.DescribeDomainControllersInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeDomainControllersOutput{})
+	req := c.newRequest(op, input, &types.DescribeDomainControllersOutput{})
 	return DescribeDomainControllersRequest{Request: req, Input: input, Copy: c.DescribeDomainControllersRequest}
 }
 
@@ -105,8 +49,8 @@ func (c *Client) DescribeDomainControllersRequest(input *DescribeDomainControlle
 // DescribeDomainControllers API operation.
 type DescribeDomainControllersRequest struct {
 	*aws.Request
-	Input *DescribeDomainControllersInput
-	Copy  func(*DescribeDomainControllersInput) DescribeDomainControllersRequest
+	Input *types.DescribeDomainControllersInput
+	Copy  func(*types.DescribeDomainControllersInput) DescribeDomainControllersRequest
 }
 
 // Send marshals and sends the DescribeDomainControllers API request.
@@ -118,7 +62,7 @@ func (r DescribeDomainControllersRequest) Send(ctx context.Context) (*DescribeDo
 	}
 
 	resp := &DescribeDomainControllersResponse{
-		DescribeDomainControllersOutput: r.Request.Data.(*DescribeDomainControllersOutput),
+		DescribeDomainControllersOutput: r.Request.Data.(*types.DescribeDomainControllersOutput),
 		response:                        &aws.Response{Request: r.Request},
 	}
 
@@ -148,7 +92,7 @@ func NewDescribeDomainControllersPaginator(req DescribeDomainControllersRequest)
 	return DescribeDomainControllersPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *DescribeDomainControllersInput
+				var inCpy *types.DescribeDomainControllersInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -168,14 +112,14 @@ type DescribeDomainControllersPaginator struct {
 	aws.Pager
 }
 
-func (p *DescribeDomainControllersPaginator) CurrentPage() *DescribeDomainControllersOutput {
-	return p.Pager.CurrentPage().(*DescribeDomainControllersOutput)
+func (p *DescribeDomainControllersPaginator) CurrentPage() *types.DescribeDomainControllersOutput {
+	return p.Pager.CurrentPage().(*types.DescribeDomainControllersOutput)
 }
 
 // DescribeDomainControllersResponse is the response type for the
 // DescribeDomainControllers API operation.
 type DescribeDomainControllersResponse struct {
-	*DescribeDomainControllersOutput
+	*types.DescribeDomainControllersOutput
 
 	response *aws.Response
 }

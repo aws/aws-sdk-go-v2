@@ -6,76 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/worklink/types"
 )
-
-type DescribeAuditStreamConfigurationInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ARN of the fleet.
-	//
-	// FleetArn is a required field
-	FleetArn *string `min:"20" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeAuditStreamConfigurationInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeAuditStreamConfigurationInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeAuditStreamConfigurationInput"}
-
-	if s.FleetArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("FleetArn"))
-	}
-	if s.FleetArn != nil && len(*s.FleetArn) < 20 {
-		invalidParams.Add(aws.NewErrParamMinLen("FleetArn", 20))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DescribeAuditStreamConfigurationInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.FleetArn != nil {
-		v := *s.FleetArn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "FleetArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type DescribeAuditStreamConfigurationOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The ARN of the Amazon Kinesis data stream that will receive the audit events.
-	AuditStreamArn *string `type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeAuditStreamConfigurationOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DescribeAuditStreamConfigurationOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.AuditStreamArn != nil {
-		v := *s.AuditStreamArn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "AuditStreamArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opDescribeAuditStreamConfiguration = "DescribeAuditStreamConfiguration"
 
@@ -93,7 +25,7 @@ const opDescribeAuditStreamConfiguration = "DescribeAuditStreamConfiguration"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/worklink-2018-09-25/DescribeAuditStreamConfiguration
-func (c *Client) DescribeAuditStreamConfigurationRequest(input *DescribeAuditStreamConfigurationInput) DescribeAuditStreamConfigurationRequest {
+func (c *Client) DescribeAuditStreamConfigurationRequest(input *types.DescribeAuditStreamConfigurationInput) DescribeAuditStreamConfigurationRequest {
 	op := &aws.Operation{
 		Name:       opDescribeAuditStreamConfiguration,
 		HTTPMethod: "POST",
@@ -101,10 +33,10 @@ func (c *Client) DescribeAuditStreamConfigurationRequest(input *DescribeAuditStr
 	}
 
 	if input == nil {
-		input = &DescribeAuditStreamConfigurationInput{}
+		input = &types.DescribeAuditStreamConfigurationInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeAuditStreamConfigurationOutput{})
+	req := c.newRequest(op, input, &types.DescribeAuditStreamConfigurationOutput{})
 	return DescribeAuditStreamConfigurationRequest{Request: req, Input: input, Copy: c.DescribeAuditStreamConfigurationRequest}
 }
 
@@ -112,8 +44,8 @@ func (c *Client) DescribeAuditStreamConfigurationRequest(input *DescribeAuditStr
 // DescribeAuditStreamConfiguration API operation.
 type DescribeAuditStreamConfigurationRequest struct {
 	*aws.Request
-	Input *DescribeAuditStreamConfigurationInput
-	Copy  func(*DescribeAuditStreamConfigurationInput) DescribeAuditStreamConfigurationRequest
+	Input *types.DescribeAuditStreamConfigurationInput
+	Copy  func(*types.DescribeAuditStreamConfigurationInput) DescribeAuditStreamConfigurationRequest
 }
 
 // Send marshals and sends the DescribeAuditStreamConfiguration API request.
@@ -125,7 +57,7 @@ func (r DescribeAuditStreamConfigurationRequest) Send(ctx context.Context) (*Des
 	}
 
 	resp := &DescribeAuditStreamConfigurationResponse{
-		DescribeAuditStreamConfigurationOutput: r.Request.Data.(*DescribeAuditStreamConfigurationOutput),
+		DescribeAuditStreamConfigurationOutput: r.Request.Data.(*types.DescribeAuditStreamConfigurationOutput),
 		response:                               &aws.Response{Request: r.Request},
 	}
 
@@ -135,7 +67,7 @@ func (r DescribeAuditStreamConfigurationRequest) Send(ctx context.Context) (*Des
 // DescribeAuditStreamConfigurationResponse is the response type for the
 // DescribeAuditStreamConfiguration API operation.
 type DescribeAuditStreamConfigurationResponse struct {
-	*DescribeAuditStreamConfigurationOutput
+	*types.DescribeAuditStreamConfigurationOutput
 
 	response *aws.Response
 }

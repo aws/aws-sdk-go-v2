@@ -6,69 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/glue/types"
 )
-
-type UpdateConnectionInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the Data Catalog in which the connection resides. If none is provided,
-	// the AWS account ID is used by default.
-	CatalogId *string `min:"1" type:"string"`
-
-	// A ConnectionInput object that redefines the connection in question.
-	//
-	// ConnectionInput is a required field
-	ConnectionInput *ConnectionInput `type:"structure" required:"true"`
-
-	// The name of the connection definition to update.
-	//
-	// Name is a required field
-	Name *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s UpdateConnectionInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateConnectionInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateConnectionInput"}
-	if s.CatalogId != nil && len(*s.CatalogId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("CatalogId", 1))
-	}
-
-	if s.ConnectionInput == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ConnectionInput"))
-	}
-
-	if s.Name == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Name"))
-	}
-	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
-	}
-	if s.ConnectionInput != nil {
-		if err := s.ConnectionInput.Validate(); err != nil {
-			invalidParams.AddNested("ConnectionInput", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type UpdateConnectionOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s UpdateConnectionOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opUpdateConnection = "UpdateConnection"
 
@@ -85,7 +24,7 @@ const opUpdateConnection = "UpdateConnection"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/UpdateConnection
-func (c *Client) UpdateConnectionRequest(input *UpdateConnectionInput) UpdateConnectionRequest {
+func (c *Client) UpdateConnectionRequest(input *types.UpdateConnectionInput) UpdateConnectionRequest {
 	op := &aws.Operation{
 		Name:       opUpdateConnection,
 		HTTPMethod: "POST",
@@ -93,10 +32,10 @@ func (c *Client) UpdateConnectionRequest(input *UpdateConnectionInput) UpdateCon
 	}
 
 	if input == nil {
-		input = &UpdateConnectionInput{}
+		input = &types.UpdateConnectionInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateConnectionOutput{})
+	req := c.newRequest(op, input, &types.UpdateConnectionOutput{})
 	return UpdateConnectionRequest{Request: req, Input: input, Copy: c.UpdateConnectionRequest}
 }
 
@@ -104,8 +43,8 @@ func (c *Client) UpdateConnectionRequest(input *UpdateConnectionInput) UpdateCon
 // UpdateConnection API operation.
 type UpdateConnectionRequest struct {
 	*aws.Request
-	Input *UpdateConnectionInput
-	Copy  func(*UpdateConnectionInput) UpdateConnectionRequest
+	Input *types.UpdateConnectionInput
+	Copy  func(*types.UpdateConnectionInput) UpdateConnectionRequest
 }
 
 // Send marshals and sends the UpdateConnection API request.
@@ -117,7 +56,7 @@ func (r UpdateConnectionRequest) Send(ctx context.Context) (*UpdateConnectionRes
 	}
 
 	resp := &UpdateConnectionResponse{
-		UpdateConnectionOutput: r.Request.Data.(*UpdateConnectionOutput),
+		UpdateConnectionOutput: r.Request.Data.(*types.UpdateConnectionOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -127,7 +66,7 @@ func (r UpdateConnectionRequest) Send(ctx context.Context) (*UpdateConnectionRes
 // UpdateConnectionResponse is the response type for the
 // UpdateConnection API operation.
 type UpdateConnectionResponse struct {
-	*UpdateConnectionOutput
+	*types.UpdateConnectionOutput
 
 	response *aws.Response
 }

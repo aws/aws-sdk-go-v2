@@ -6,66 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/types"
 )
-
-type DescribeCopyProductStatusInput struct {
-	_ struct{} `type:"structure"`
-
-	// The language code.
-	//
-	//    * en - English (default)
-	//
-	//    * jp - Japanese
-	//
-	//    * zh - Chinese
-	AcceptLanguage *string `type:"string"`
-
-	// The token for the copy product operation. This token is returned by CopyProduct.
-	//
-	// CopyProductToken is a required field
-	CopyProductToken *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeCopyProductStatusInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeCopyProductStatusInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeCopyProductStatusInput"}
-
-	if s.CopyProductToken == nil {
-		invalidParams.Add(aws.NewErrParamRequired("CopyProductToken"))
-	}
-	if s.CopyProductToken != nil && len(*s.CopyProductToken) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("CopyProductToken", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribeCopyProductStatusOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The status of the copy product operation.
-	CopyProductStatus CopyProductStatus `type:"string" enum:"true"`
-
-	// The status message.
-	StatusDetail *string `type:"string"`
-
-	// The identifier of the copied product.
-	TargetProductId *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeCopyProductStatusOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeCopyProductStatus = "DescribeCopyProductStatus"
 
@@ -82,7 +24,7 @@ const opDescribeCopyProductStatus = "DescribeCopyProductStatus"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DescribeCopyProductStatus
-func (c *Client) DescribeCopyProductStatusRequest(input *DescribeCopyProductStatusInput) DescribeCopyProductStatusRequest {
+func (c *Client) DescribeCopyProductStatusRequest(input *types.DescribeCopyProductStatusInput) DescribeCopyProductStatusRequest {
 	op := &aws.Operation{
 		Name:       opDescribeCopyProductStatus,
 		HTTPMethod: "POST",
@@ -90,10 +32,10 @@ func (c *Client) DescribeCopyProductStatusRequest(input *DescribeCopyProductStat
 	}
 
 	if input == nil {
-		input = &DescribeCopyProductStatusInput{}
+		input = &types.DescribeCopyProductStatusInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeCopyProductStatusOutput{})
+	req := c.newRequest(op, input, &types.DescribeCopyProductStatusOutput{})
 	return DescribeCopyProductStatusRequest{Request: req, Input: input, Copy: c.DescribeCopyProductStatusRequest}
 }
 
@@ -101,8 +43,8 @@ func (c *Client) DescribeCopyProductStatusRequest(input *DescribeCopyProductStat
 // DescribeCopyProductStatus API operation.
 type DescribeCopyProductStatusRequest struct {
 	*aws.Request
-	Input *DescribeCopyProductStatusInput
-	Copy  func(*DescribeCopyProductStatusInput) DescribeCopyProductStatusRequest
+	Input *types.DescribeCopyProductStatusInput
+	Copy  func(*types.DescribeCopyProductStatusInput) DescribeCopyProductStatusRequest
 }
 
 // Send marshals and sends the DescribeCopyProductStatus API request.
@@ -114,7 +56,7 @@ func (r DescribeCopyProductStatusRequest) Send(ctx context.Context) (*DescribeCo
 	}
 
 	resp := &DescribeCopyProductStatusResponse{
-		DescribeCopyProductStatusOutput: r.Request.Data.(*DescribeCopyProductStatusOutput),
+		DescribeCopyProductStatusOutput: r.Request.Data.(*types.DescribeCopyProductStatusOutput),
 		response:                        &aws.Response{Request: r.Request},
 	}
 
@@ -124,7 +66,7 @@ func (r DescribeCopyProductStatusRequest) Send(ctx context.Context) (*DescribeCo
 // DescribeCopyProductStatusResponse is the response type for the
 // DescribeCopyProductStatus API operation.
 type DescribeCopyProductStatusResponse struct {
-	*DescribeCopyProductStatusOutput
+	*types.DescribeCopyProductStatusOutput
 
 	response *aws.Response
 }

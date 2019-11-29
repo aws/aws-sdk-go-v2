@@ -6,48 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/glue/types"
 )
-
-type DeleteClassifierInput struct {
-	_ struct{} `type:"structure"`
-
-	// Name of the classifier to remove.
-	//
-	// Name is a required field
-	Name *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteClassifierInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteClassifierInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteClassifierInput"}
-
-	if s.Name == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Name"))
-	}
-	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteClassifierOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteClassifierOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteClassifier = "DeleteClassifier"
 
@@ -64,7 +24,7 @@ const opDeleteClassifier = "DeleteClassifier"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DeleteClassifier
-func (c *Client) DeleteClassifierRequest(input *DeleteClassifierInput) DeleteClassifierRequest {
+func (c *Client) DeleteClassifierRequest(input *types.DeleteClassifierInput) DeleteClassifierRequest {
 	op := &aws.Operation{
 		Name:       opDeleteClassifier,
 		HTTPMethod: "POST",
@@ -72,10 +32,10 @@ func (c *Client) DeleteClassifierRequest(input *DeleteClassifierInput) DeleteCla
 	}
 
 	if input == nil {
-		input = &DeleteClassifierInput{}
+		input = &types.DeleteClassifierInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteClassifierOutput{})
+	req := c.newRequest(op, input, &types.DeleteClassifierOutput{})
 	return DeleteClassifierRequest{Request: req, Input: input, Copy: c.DeleteClassifierRequest}
 }
 
@@ -83,8 +43,8 @@ func (c *Client) DeleteClassifierRequest(input *DeleteClassifierInput) DeleteCla
 // DeleteClassifier API operation.
 type DeleteClassifierRequest struct {
 	*aws.Request
-	Input *DeleteClassifierInput
-	Copy  func(*DeleteClassifierInput) DeleteClassifierRequest
+	Input *types.DeleteClassifierInput
+	Copy  func(*types.DeleteClassifierInput) DeleteClassifierRequest
 }
 
 // Send marshals and sends the DeleteClassifier API request.
@@ -96,7 +56,7 @@ func (r DeleteClassifierRequest) Send(ctx context.Context) (*DeleteClassifierRes
 	}
 
 	resp := &DeleteClassifierResponse{
-		DeleteClassifierOutput: r.Request.Data.(*DeleteClassifierOutput),
+		DeleteClassifierOutput: r.Request.Data.(*types.DeleteClassifierOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -106,7 +66,7 @@ func (r DeleteClassifierRequest) Send(ctx context.Context) (*DeleteClassifierRes
 // DeleteClassifierResponse is the response type for the
 // DeleteClassifier API operation.
 type DeleteClassifierResponse struct {
-	*DeleteClassifierOutput
+	*types.DeleteClassifierOutput
 
 	response *aws.Response
 }

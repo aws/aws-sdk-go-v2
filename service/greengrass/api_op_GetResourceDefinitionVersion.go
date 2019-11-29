@@ -6,122 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/greengrass/types"
 )
-
-type GetResourceDefinitionVersionInput struct {
-	_ struct{} `type:"structure"`
-
-	// ResourceDefinitionId is a required field
-	ResourceDefinitionId *string `location:"uri" locationName:"ResourceDefinitionId" type:"string" required:"true"`
-
-	// ResourceDefinitionVersionId is a required field
-	ResourceDefinitionVersionId *string `location:"uri" locationName:"ResourceDefinitionVersionId" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetResourceDefinitionVersionInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetResourceDefinitionVersionInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetResourceDefinitionVersionInput"}
-
-	if s.ResourceDefinitionId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ResourceDefinitionId"))
-	}
-
-	if s.ResourceDefinitionVersionId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ResourceDefinitionVersionId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetResourceDefinitionVersionInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.ResourceDefinitionId != nil {
-		v := *s.ResourceDefinitionId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "ResourceDefinitionId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.ResourceDefinitionVersionId != nil {
-		v := *s.ResourceDefinitionVersionId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "ResourceDefinitionVersionId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-// Information about a resource definition version.
-type GetResourceDefinitionVersionOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Arn of the resource definition version.
-	Arn *string `type:"string"`
-
-	// The time, in milliseconds since the epoch, when the resource definition version
-	// was created.
-	CreationTimestamp *string `type:"string"`
-
-	// Information about the definition.
-	Definition *ResourceDefinitionVersion `type:"structure"`
-
-	// The ID of the resource definition version.
-	Id *string `type:"string"`
-
-	// The version of the resource definition version.
-	Version *string `type:"string"`
-}
-
-// String returns the string representation
-func (s GetResourceDefinitionVersionOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetResourceDefinitionVersionOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.Arn != nil {
-		v := *s.Arn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "Arn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.CreationTimestamp != nil {
-		v := *s.CreationTimestamp
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "CreationTimestamp", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Definition != nil {
-		v := s.Definition
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "Definition", v, metadata)
-	}
-	if s.Id != nil {
-		v := *s.Id
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "Id", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Version != nil {
-		v := *s.Version
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "Version", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opGetResourceDefinitionVersion = "GetResourceDefinitionVersion"
 
@@ -139,7 +25,7 @@ const opGetResourceDefinitionVersion = "GetResourceDefinitionVersion"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GetResourceDefinitionVersion
-func (c *Client) GetResourceDefinitionVersionRequest(input *GetResourceDefinitionVersionInput) GetResourceDefinitionVersionRequest {
+func (c *Client) GetResourceDefinitionVersionRequest(input *types.GetResourceDefinitionVersionInput) GetResourceDefinitionVersionRequest {
 	op := &aws.Operation{
 		Name:       opGetResourceDefinitionVersion,
 		HTTPMethod: "GET",
@@ -147,10 +33,10 @@ func (c *Client) GetResourceDefinitionVersionRequest(input *GetResourceDefinitio
 	}
 
 	if input == nil {
-		input = &GetResourceDefinitionVersionInput{}
+		input = &types.GetResourceDefinitionVersionInput{}
 	}
 
-	req := c.newRequest(op, input, &GetResourceDefinitionVersionOutput{})
+	req := c.newRequest(op, input, &types.GetResourceDefinitionVersionOutput{})
 	return GetResourceDefinitionVersionRequest{Request: req, Input: input, Copy: c.GetResourceDefinitionVersionRequest}
 }
 
@@ -158,8 +44,8 @@ func (c *Client) GetResourceDefinitionVersionRequest(input *GetResourceDefinitio
 // GetResourceDefinitionVersion API operation.
 type GetResourceDefinitionVersionRequest struct {
 	*aws.Request
-	Input *GetResourceDefinitionVersionInput
-	Copy  func(*GetResourceDefinitionVersionInput) GetResourceDefinitionVersionRequest
+	Input *types.GetResourceDefinitionVersionInput
+	Copy  func(*types.GetResourceDefinitionVersionInput) GetResourceDefinitionVersionRequest
 }
 
 // Send marshals and sends the GetResourceDefinitionVersion API request.
@@ -171,7 +57,7 @@ func (r GetResourceDefinitionVersionRequest) Send(ctx context.Context) (*GetReso
 	}
 
 	resp := &GetResourceDefinitionVersionResponse{
-		GetResourceDefinitionVersionOutput: r.Request.Data.(*GetResourceDefinitionVersionOutput),
+		GetResourceDefinitionVersionOutput: r.Request.Data.(*types.GetResourceDefinitionVersionOutput),
 		response:                           &aws.Response{Request: r.Request},
 	}
 
@@ -181,7 +67,7 @@ func (r GetResourceDefinitionVersionRequest) Send(ctx context.Context) (*GetReso
 // GetResourceDefinitionVersionResponse is the response type for the
 // GetResourceDefinitionVersion API operation.
 type GetResourceDefinitionVersionResponse struct {
-	*GetResourceDefinitionVersionOutput
+	*types.GetResourceDefinitionVersionOutput
 
 	response *aws.Response
 }

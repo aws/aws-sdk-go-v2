@@ -6,63 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-type ModifyVpcPeeringConnectionOptionsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The VPC peering connection options for the accepter VPC.
-	AccepterPeeringConnectionOptions *PeeringConnectionOptionsRequest `type:"structure"`
-
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have
-	// the required permissions, the error response is DryRunOperation. Otherwise,
-	// it is UnauthorizedOperation.
-	DryRun *bool `type:"boolean"`
-
-	// The VPC peering connection options for the requester VPC.
-	RequesterPeeringConnectionOptions *PeeringConnectionOptionsRequest `type:"structure"`
-
-	// The ID of the VPC peering connection.
-	//
-	// VpcPeeringConnectionId is a required field
-	VpcPeeringConnectionId *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s ModifyVpcPeeringConnectionOptionsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ModifyVpcPeeringConnectionOptionsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ModifyVpcPeeringConnectionOptionsInput"}
-
-	if s.VpcPeeringConnectionId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("VpcPeeringConnectionId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ModifyVpcPeeringConnectionOptionsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Information about the VPC peering connection options for the accepter VPC.
-	AccepterPeeringConnectionOptions *PeeringConnectionOptions `locationName:"accepterPeeringConnectionOptions" type:"structure"`
-
-	// Information about the VPC peering connection options for the requester VPC.
-	RequesterPeeringConnectionOptions *PeeringConnectionOptions `locationName:"requesterPeeringConnectionOptions" type:"structure"`
-}
-
-// String returns the string representation
-func (s ModifyVpcPeeringConnectionOptionsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opModifyVpcPeeringConnectionOptions = "ModifyVpcPeeringConnectionOptions"
 
@@ -102,7 +47,7 @@ const opModifyVpcPeeringConnectionOptions = "ModifyVpcPeeringConnectionOptions"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyVpcPeeringConnectionOptions
-func (c *Client) ModifyVpcPeeringConnectionOptionsRequest(input *ModifyVpcPeeringConnectionOptionsInput) ModifyVpcPeeringConnectionOptionsRequest {
+func (c *Client) ModifyVpcPeeringConnectionOptionsRequest(input *types.ModifyVpcPeeringConnectionOptionsInput) ModifyVpcPeeringConnectionOptionsRequest {
 	op := &aws.Operation{
 		Name:       opModifyVpcPeeringConnectionOptions,
 		HTTPMethod: "POST",
@@ -110,10 +55,10 @@ func (c *Client) ModifyVpcPeeringConnectionOptionsRequest(input *ModifyVpcPeerin
 	}
 
 	if input == nil {
-		input = &ModifyVpcPeeringConnectionOptionsInput{}
+		input = &types.ModifyVpcPeeringConnectionOptionsInput{}
 	}
 
-	req := c.newRequest(op, input, &ModifyVpcPeeringConnectionOptionsOutput{})
+	req := c.newRequest(op, input, &types.ModifyVpcPeeringConnectionOptionsOutput{})
 	return ModifyVpcPeeringConnectionOptionsRequest{Request: req, Input: input, Copy: c.ModifyVpcPeeringConnectionOptionsRequest}
 }
 
@@ -121,8 +66,8 @@ func (c *Client) ModifyVpcPeeringConnectionOptionsRequest(input *ModifyVpcPeerin
 // ModifyVpcPeeringConnectionOptions API operation.
 type ModifyVpcPeeringConnectionOptionsRequest struct {
 	*aws.Request
-	Input *ModifyVpcPeeringConnectionOptionsInput
-	Copy  func(*ModifyVpcPeeringConnectionOptionsInput) ModifyVpcPeeringConnectionOptionsRequest
+	Input *types.ModifyVpcPeeringConnectionOptionsInput
+	Copy  func(*types.ModifyVpcPeeringConnectionOptionsInput) ModifyVpcPeeringConnectionOptionsRequest
 }
 
 // Send marshals and sends the ModifyVpcPeeringConnectionOptions API request.
@@ -134,7 +79,7 @@ func (r ModifyVpcPeeringConnectionOptionsRequest) Send(ctx context.Context) (*Mo
 	}
 
 	resp := &ModifyVpcPeeringConnectionOptionsResponse{
-		ModifyVpcPeeringConnectionOptionsOutput: r.Request.Data.(*ModifyVpcPeeringConnectionOptionsOutput),
+		ModifyVpcPeeringConnectionOptionsOutput: r.Request.Data.(*types.ModifyVpcPeeringConnectionOptionsOutput),
 		response:                                &aws.Response{Request: r.Request},
 	}
 
@@ -144,7 +89,7 @@ func (r ModifyVpcPeeringConnectionOptionsRequest) Send(ctx context.Context) (*Mo
 // ModifyVpcPeeringConnectionOptionsResponse is the response type for the
 // ModifyVpcPeeringConnectionOptions API operation.
 type ModifyVpcPeeringConnectionOptionsResponse struct {
-	*ModifyVpcPeeringConnectionOptionsOutput
+	*types.ModifyVpcPeeringConnectionOptionsOutput
 
 	response *aws.Response
 }

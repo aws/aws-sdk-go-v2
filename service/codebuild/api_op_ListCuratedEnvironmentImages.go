@@ -6,30 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/codebuild/types"
 )
-
-type ListCuratedEnvironmentImagesInput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s ListCuratedEnvironmentImagesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type ListCuratedEnvironmentImagesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Information about supported platforms for Docker images that are managed
-	// by AWS CodeBuild.
-	Platforms []EnvironmentPlatform `locationName:"platforms" type:"list"`
-}
-
-// String returns the string representation
-func (s ListCuratedEnvironmentImagesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListCuratedEnvironmentImages = "ListCuratedEnvironmentImages"
 
@@ -46,7 +24,7 @@ const opListCuratedEnvironmentImages = "ListCuratedEnvironmentImages"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/ListCuratedEnvironmentImages
-func (c *Client) ListCuratedEnvironmentImagesRequest(input *ListCuratedEnvironmentImagesInput) ListCuratedEnvironmentImagesRequest {
+func (c *Client) ListCuratedEnvironmentImagesRequest(input *types.ListCuratedEnvironmentImagesInput) ListCuratedEnvironmentImagesRequest {
 	op := &aws.Operation{
 		Name:       opListCuratedEnvironmentImages,
 		HTTPMethod: "POST",
@@ -54,10 +32,10 @@ func (c *Client) ListCuratedEnvironmentImagesRequest(input *ListCuratedEnvironme
 	}
 
 	if input == nil {
-		input = &ListCuratedEnvironmentImagesInput{}
+		input = &types.ListCuratedEnvironmentImagesInput{}
 	}
 
-	req := c.newRequest(op, input, &ListCuratedEnvironmentImagesOutput{})
+	req := c.newRequest(op, input, &types.ListCuratedEnvironmentImagesOutput{})
 	return ListCuratedEnvironmentImagesRequest{Request: req, Input: input, Copy: c.ListCuratedEnvironmentImagesRequest}
 }
 
@@ -65,8 +43,8 @@ func (c *Client) ListCuratedEnvironmentImagesRequest(input *ListCuratedEnvironme
 // ListCuratedEnvironmentImages API operation.
 type ListCuratedEnvironmentImagesRequest struct {
 	*aws.Request
-	Input *ListCuratedEnvironmentImagesInput
-	Copy  func(*ListCuratedEnvironmentImagesInput) ListCuratedEnvironmentImagesRequest
+	Input *types.ListCuratedEnvironmentImagesInput
+	Copy  func(*types.ListCuratedEnvironmentImagesInput) ListCuratedEnvironmentImagesRequest
 }
 
 // Send marshals and sends the ListCuratedEnvironmentImages API request.
@@ -78,7 +56,7 @@ func (r ListCuratedEnvironmentImagesRequest) Send(ctx context.Context) (*ListCur
 	}
 
 	resp := &ListCuratedEnvironmentImagesResponse{
-		ListCuratedEnvironmentImagesOutput: r.Request.Data.(*ListCuratedEnvironmentImagesOutput),
+		ListCuratedEnvironmentImagesOutput: r.Request.Data.(*types.ListCuratedEnvironmentImagesOutput),
 		response:                           &aws.Response{Request: r.Request},
 	}
 
@@ -88,7 +66,7 @@ func (r ListCuratedEnvironmentImagesRequest) Send(ctx context.Context) (*ListCur
 // ListCuratedEnvironmentImagesResponse is the response type for the
 // ListCuratedEnvironmentImages API operation.
 type ListCuratedEnvironmentImagesResponse struct {
-	*ListCuratedEnvironmentImagesOutput
+	*types.ListCuratedEnvironmentImagesOutput
 
 	response *aws.Response
 }

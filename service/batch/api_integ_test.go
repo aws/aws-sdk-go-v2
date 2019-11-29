@@ -13,6 +13,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws/awserr"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting/integration"
 	"github.com/aws/aws-sdk-go-v2/service/batch"
+	"github.com/aws/aws-sdk-go-v2/service/batch/types"
 )
 
 var _ aws.Config
@@ -24,7 +25,7 @@ func TestInteg_00_DescribeComputeEnvironments(t *testing.T) {
 
 	cfg := integration.ConfigWithDefaultRegion("us-west-2")
 	svc := batch.New(cfg)
-	params := &batch.DescribeComputeEnvironmentsInput{}
+	params := &types.DescribeComputeEnvironmentsInput{}
 
 	req := svc.DescribeComputeEnvironmentsRequest(params)
 

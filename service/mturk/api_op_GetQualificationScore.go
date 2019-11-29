@@ -6,64 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/mturk/types"
 )
-
-type GetQualificationScoreInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the QualificationType.
-	//
-	// QualificationTypeId is a required field
-	QualificationTypeId *string `min:"1" type:"string" required:"true"`
-
-	// The ID of the Worker whose Qualification is being updated.
-	//
-	// WorkerId is a required field
-	WorkerId *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetQualificationScoreInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetQualificationScoreInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetQualificationScoreInput"}
-
-	if s.QualificationTypeId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("QualificationTypeId"))
-	}
-	if s.QualificationTypeId != nil && len(*s.QualificationTypeId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("QualificationTypeId", 1))
-	}
-
-	if s.WorkerId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("WorkerId"))
-	}
-	if s.WorkerId != nil && len(*s.WorkerId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("WorkerId", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type GetQualificationScoreOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The Qualification data structure of the Qualification assigned to a user,
-	// including the Qualification type and the value (score).
-	Qualification *Qualification `type:"structure"`
-}
-
-// String returns the string representation
-func (s GetQualificationScoreOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetQualificationScore = "GetQualificationScore"
 
@@ -88,7 +32,7 @@ const opGetQualificationScore = "GetQualificationScore"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/GetQualificationScore
-func (c *Client) GetQualificationScoreRequest(input *GetQualificationScoreInput) GetQualificationScoreRequest {
+func (c *Client) GetQualificationScoreRequest(input *types.GetQualificationScoreInput) GetQualificationScoreRequest {
 	op := &aws.Operation{
 		Name:       opGetQualificationScore,
 		HTTPMethod: "POST",
@@ -96,10 +40,10 @@ func (c *Client) GetQualificationScoreRequest(input *GetQualificationScoreInput)
 	}
 
 	if input == nil {
-		input = &GetQualificationScoreInput{}
+		input = &types.GetQualificationScoreInput{}
 	}
 
-	req := c.newRequest(op, input, &GetQualificationScoreOutput{})
+	req := c.newRequest(op, input, &types.GetQualificationScoreOutput{})
 	return GetQualificationScoreRequest{Request: req, Input: input, Copy: c.GetQualificationScoreRequest}
 }
 
@@ -107,8 +51,8 @@ func (c *Client) GetQualificationScoreRequest(input *GetQualificationScoreInput)
 // GetQualificationScore API operation.
 type GetQualificationScoreRequest struct {
 	*aws.Request
-	Input *GetQualificationScoreInput
-	Copy  func(*GetQualificationScoreInput) GetQualificationScoreRequest
+	Input *types.GetQualificationScoreInput
+	Copy  func(*types.GetQualificationScoreInput) GetQualificationScoreRequest
 }
 
 // Send marshals and sends the GetQualificationScore API request.
@@ -120,7 +64,7 @@ func (r GetQualificationScoreRequest) Send(ctx context.Context) (*GetQualificati
 	}
 
 	resp := &GetQualificationScoreResponse{
-		GetQualificationScoreOutput: r.Request.Data.(*GetQualificationScoreOutput),
+		GetQualificationScoreOutput: r.Request.Data.(*types.GetQualificationScoreOutput),
 		response:                    &aws.Response{Request: r.Request},
 	}
 
@@ -130,7 +74,7 @@ func (r GetQualificationScoreRequest) Send(ctx context.Context) (*GetQualificati
 // GetQualificationScoreResponse is the response type for the
 // GetQualificationScore API operation.
 type GetQualificationScoreResponse struct {
-	*GetQualificationScoreOutput
+	*types.GetQualificationScoreOutput
 
 	response *aws.Response
 }

@@ -6,75 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/configservice/types"
 )
-
-type DescribeConfigurationAggregatorSourcesStatusInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the configuration aggregator.
-	//
-	// ConfigurationAggregatorName is a required field
-	ConfigurationAggregatorName *string `min:"1" type:"string" required:"true"`
-
-	// The maximum number of AggregatorSourceStatus returned on each page. The default
-	// is maximum. If you specify 0, AWS Config uses the default.
-	Limit *int64 `type:"integer"`
-
-	// The nextToken string returned on a previous page that you use to get the
-	// next page of results in a paginated response.
-	NextToken *string `type:"string"`
-
-	// Filters the status type.
-	//
-	//    * Valid value FAILED indicates errors while moving data.
-	//
-	//    * Valid value SUCCEEDED indicates the data was successfully moved.
-	//
-	//    * Valid value OUTDATED indicates the data is not the most recent.
-	UpdateStatus []AggregatedSourceStatusType `min:"1" type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeConfigurationAggregatorSourcesStatusInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeConfigurationAggregatorSourcesStatusInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeConfigurationAggregatorSourcesStatusInput"}
-
-	if s.ConfigurationAggregatorName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ConfigurationAggregatorName"))
-	}
-	if s.ConfigurationAggregatorName != nil && len(*s.ConfigurationAggregatorName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ConfigurationAggregatorName", 1))
-	}
-	if s.UpdateStatus != nil && len(s.UpdateStatus) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("UpdateStatus", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribeConfigurationAggregatorSourcesStatusOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Returns an AggregatedSourceStatus object.
-	AggregatedSourceStatusList []AggregatedSourceStatus `type:"list"`
-
-	// The nextToken string returned on a previous page that you use to get the
-	// next page of results in a paginated response.
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeConfigurationAggregatorSourcesStatusOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeConfigurationAggregatorSourcesStatus = "DescribeConfigurationAggregatorSourcesStatus"
 
@@ -94,7 +27,7 @@ const opDescribeConfigurationAggregatorSourcesStatus = "DescribeConfigurationAgg
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DescribeConfigurationAggregatorSourcesStatus
-func (c *Client) DescribeConfigurationAggregatorSourcesStatusRequest(input *DescribeConfigurationAggregatorSourcesStatusInput) DescribeConfigurationAggregatorSourcesStatusRequest {
+func (c *Client) DescribeConfigurationAggregatorSourcesStatusRequest(input *types.DescribeConfigurationAggregatorSourcesStatusInput) DescribeConfigurationAggregatorSourcesStatusRequest {
 	op := &aws.Operation{
 		Name:       opDescribeConfigurationAggregatorSourcesStatus,
 		HTTPMethod: "POST",
@@ -102,10 +35,10 @@ func (c *Client) DescribeConfigurationAggregatorSourcesStatusRequest(input *Desc
 	}
 
 	if input == nil {
-		input = &DescribeConfigurationAggregatorSourcesStatusInput{}
+		input = &types.DescribeConfigurationAggregatorSourcesStatusInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeConfigurationAggregatorSourcesStatusOutput{})
+	req := c.newRequest(op, input, &types.DescribeConfigurationAggregatorSourcesStatusOutput{})
 	return DescribeConfigurationAggregatorSourcesStatusRequest{Request: req, Input: input, Copy: c.DescribeConfigurationAggregatorSourcesStatusRequest}
 }
 
@@ -113,8 +46,8 @@ func (c *Client) DescribeConfigurationAggregatorSourcesStatusRequest(input *Desc
 // DescribeConfigurationAggregatorSourcesStatus API operation.
 type DescribeConfigurationAggregatorSourcesStatusRequest struct {
 	*aws.Request
-	Input *DescribeConfigurationAggregatorSourcesStatusInput
-	Copy  func(*DescribeConfigurationAggregatorSourcesStatusInput) DescribeConfigurationAggregatorSourcesStatusRequest
+	Input *types.DescribeConfigurationAggregatorSourcesStatusInput
+	Copy  func(*types.DescribeConfigurationAggregatorSourcesStatusInput) DescribeConfigurationAggregatorSourcesStatusRequest
 }
 
 // Send marshals and sends the DescribeConfigurationAggregatorSourcesStatus API request.
@@ -126,7 +59,7 @@ func (r DescribeConfigurationAggregatorSourcesStatusRequest) Send(ctx context.Co
 	}
 
 	resp := &DescribeConfigurationAggregatorSourcesStatusResponse{
-		DescribeConfigurationAggregatorSourcesStatusOutput: r.Request.Data.(*DescribeConfigurationAggregatorSourcesStatusOutput),
+		DescribeConfigurationAggregatorSourcesStatusOutput: r.Request.Data.(*types.DescribeConfigurationAggregatorSourcesStatusOutput),
 		response: &aws.Response{Request: r.Request},
 	}
 
@@ -136,7 +69,7 @@ func (r DescribeConfigurationAggregatorSourcesStatusRequest) Send(ctx context.Co
 // DescribeConfigurationAggregatorSourcesStatusResponse is the response type for the
 // DescribeConfigurationAggregatorSourcesStatus API operation.
 type DescribeConfigurationAggregatorSourcesStatusResponse struct {
-	*DescribeConfigurationAggregatorSourcesStatusOutput
+	*types.DescribeConfigurationAggregatorSourcesStatusOutput
 
 	response *aws.Response
 }

@@ -6,64 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/iot/types"
 )
-
-type StopThingRegistrationTaskInput struct {
-	_ struct{} `type:"structure"`
-
-	// The bulk thing provisioning task ID.
-	//
-	// TaskId is a required field
-	TaskId *string `location:"uri" locationName:"taskId" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s StopThingRegistrationTaskInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *StopThingRegistrationTaskInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "StopThingRegistrationTaskInput"}
-
-	if s.TaskId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("TaskId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s StopThingRegistrationTaskInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.TaskId != nil {
-		v := *s.TaskId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "taskId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type StopThingRegistrationTaskOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s StopThingRegistrationTaskOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s StopThingRegistrationTaskOutput) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
 
 const opStopThingRegistrationTask = "StopThingRegistrationTask"
 
@@ -78,7 +22,7 @@ const opStopThingRegistrationTask = "StopThingRegistrationTask"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) StopThingRegistrationTaskRequest(input *StopThingRegistrationTaskInput) StopThingRegistrationTaskRequest {
+func (c *Client) StopThingRegistrationTaskRequest(input *types.StopThingRegistrationTaskInput) StopThingRegistrationTaskRequest {
 	op := &aws.Operation{
 		Name:       opStopThingRegistrationTask,
 		HTTPMethod: "PUT",
@@ -86,10 +30,10 @@ func (c *Client) StopThingRegistrationTaskRequest(input *StopThingRegistrationTa
 	}
 
 	if input == nil {
-		input = &StopThingRegistrationTaskInput{}
+		input = &types.StopThingRegistrationTaskInput{}
 	}
 
-	req := c.newRequest(op, input, &StopThingRegistrationTaskOutput{})
+	req := c.newRequest(op, input, &types.StopThingRegistrationTaskOutput{})
 	return StopThingRegistrationTaskRequest{Request: req, Input: input, Copy: c.StopThingRegistrationTaskRequest}
 }
 
@@ -97,8 +41,8 @@ func (c *Client) StopThingRegistrationTaskRequest(input *StopThingRegistrationTa
 // StopThingRegistrationTask API operation.
 type StopThingRegistrationTaskRequest struct {
 	*aws.Request
-	Input *StopThingRegistrationTaskInput
-	Copy  func(*StopThingRegistrationTaskInput) StopThingRegistrationTaskRequest
+	Input *types.StopThingRegistrationTaskInput
+	Copy  func(*types.StopThingRegistrationTaskInput) StopThingRegistrationTaskRequest
 }
 
 // Send marshals and sends the StopThingRegistrationTask API request.
@@ -110,7 +54,7 @@ func (r StopThingRegistrationTaskRequest) Send(ctx context.Context) (*StopThingR
 	}
 
 	resp := &StopThingRegistrationTaskResponse{
-		StopThingRegistrationTaskOutput: r.Request.Data.(*StopThingRegistrationTaskOutput),
+		StopThingRegistrationTaskOutput: r.Request.Data.(*types.StopThingRegistrationTaskOutput),
 		response:                        &aws.Response{Request: r.Request},
 	}
 
@@ -120,7 +64,7 @@ func (r StopThingRegistrationTaskRequest) Send(ctx context.Context) (*StopThingR
 // StopThingRegistrationTaskResponse is the response type for the
 // StopThingRegistrationTask API operation.
 type StopThingRegistrationTaskResponse struct {
-	*StopThingRegistrationTaskOutput
+	*types.StopThingRegistrationTaskOutput
 
 	response *aws.Response
 }

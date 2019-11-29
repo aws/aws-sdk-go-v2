@@ -6,47 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
+	"github.com/aws/aws-sdk-go-v2/service/forecast/types"
 )
-
-type DeleteForecastExportJobInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the forecast export job to delete.
-	//
-	// ForecastExportJobArn is a required field
-	ForecastExportJobArn *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteForecastExportJobInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteForecastExportJobInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteForecastExportJobInput"}
-
-	if s.ForecastExportJobArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ForecastExportJobArn"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteForecastExportJobOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteForecastExportJobOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteForecastExportJob = "DeleteForecastExportJob"
 
@@ -65,7 +28,7 @@ const opDeleteForecastExportJob = "DeleteForecastExportJob"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/DeleteForecastExportJob
-func (c *Client) DeleteForecastExportJobRequest(input *DeleteForecastExportJobInput) DeleteForecastExportJobRequest {
+func (c *Client) DeleteForecastExportJobRequest(input *types.DeleteForecastExportJobInput) DeleteForecastExportJobRequest {
 	op := &aws.Operation{
 		Name:       opDeleteForecastExportJob,
 		HTTPMethod: "POST",
@@ -73,10 +36,10 @@ func (c *Client) DeleteForecastExportJobRequest(input *DeleteForecastExportJobIn
 	}
 
 	if input == nil {
-		input = &DeleteForecastExportJobInput{}
+		input = &types.DeleteForecastExportJobInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteForecastExportJobOutput{})
+	req := c.newRequest(op, input, &types.DeleteForecastExportJobOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return DeleteForecastExportJobRequest{Request: req, Input: input, Copy: c.DeleteForecastExportJobRequest}
@@ -86,8 +49,8 @@ func (c *Client) DeleteForecastExportJobRequest(input *DeleteForecastExportJobIn
 // DeleteForecastExportJob API operation.
 type DeleteForecastExportJobRequest struct {
 	*aws.Request
-	Input *DeleteForecastExportJobInput
-	Copy  func(*DeleteForecastExportJobInput) DeleteForecastExportJobRequest
+	Input *types.DeleteForecastExportJobInput
+	Copy  func(*types.DeleteForecastExportJobInput) DeleteForecastExportJobRequest
 }
 
 // Send marshals and sends the DeleteForecastExportJob API request.
@@ -99,7 +62,7 @@ func (r DeleteForecastExportJobRequest) Send(ctx context.Context) (*DeleteForeca
 	}
 
 	resp := &DeleteForecastExportJobResponse{
-		DeleteForecastExportJobOutput: r.Request.Data.(*DeleteForecastExportJobOutput),
+		DeleteForecastExportJobOutput: r.Request.Data.(*types.DeleteForecastExportJobOutput),
 		response:                      &aws.Response{Request: r.Request},
 	}
 
@@ -109,7 +72,7 @@ func (r DeleteForecastExportJobRequest) Send(ctx context.Context) (*DeleteForeca
 // DeleteForecastExportJobResponse is the response type for the
 // DeleteForecastExportJob API operation.
 type DeleteForecastExportJobResponse struct {
-	*DeleteForecastExportJobOutput
+	*types.DeleteForecastExportJobOutput
 
 	response *aws.Response
 }

@@ -6,38 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/sns/types"
 )
-
-// Input for ListSubscriptions action.
-type ListSubscriptionsInput struct {
-	_ struct{} `type:"structure"`
-
-	// Token returned by the previous ListSubscriptions request.
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s ListSubscriptionsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Response for ListSubscriptions action
-type ListSubscriptionsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Token to pass along to the next ListSubscriptions request. This element is
-	// returned if there are more subscriptions to retrieve.
-	NextToken *string `type:"string"`
-
-	// A list of subscriptions.
-	Subscriptions []Subscription `type:"list"`
-}
-
-// String returns the string representation
-func (s ListSubscriptionsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListSubscriptions = "ListSubscriptions"
 
@@ -59,7 +29,7 @@ const opListSubscriptions = "ListSubscriptions"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/ListSubscriptions
-func (c *Client) ListSubscriptionsRequest(input *ListSubscriptionsInput) ListSubscriptionsRequest {
+func (c *Client) ListSubscriptionsRequest(input *types.ListSubscriptionsInput) ListSubscriptionsRequest {
 	op := &aws.Operation{
 		Name:       opListSubscriptions,
 		HTTPMethod: "POST",
@@ -73,10 +43,10 @@ func (c *Client) ListSubscriptionsRequest(input *ListSubscriptionsInput) ListSub
 	}
 
 	if input == nil {
-		input = &ListSubscriptionsInput{}
+		input = &types.ListSubscriptionsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListSubscriptionsOutput{})
+	req := c.newRequest(op, input, &types.ListSubscriptionsOutput{})
 	return ListSubscriptionsRequest{Request: req, Input: input, Copy: c.ListSubscriptionsRequest}
 }
 
@@ -84,8 +54,8 @@ func (c *Client) ListSubscriptionsRequest(input *ListSubscriptionsInput) ListSub
 // ListSubscriptions API operation.
 type ListSubscriptionsRequest struct {
 	*aws.Request
-	Input *ListSubscriptionsInput
-	Copy  func(*ListSubscriptionsInput) ListSubscriptionsRequest
+	Input *types.ListSubscriptionsInput
+	Copy  func(*types.ListSubscriptionsInput) ListSubscriptionsRequest
 }
 
 // Send marshals and sends the ListSubscriptions API request.
@@ -97,7 +67,7 @@ func (r ListSubscriptionsRequest) Send(ctx context.Context) (*ListSubscriptionsR
 	}
 
 	resp := &ListSubscriptionsResponse{
-		ListSubscriptionsOutput: r.Request.Data.(*ListSubscriptionsOutput),
+		ListSubscriptionsOutput: r.Request.Data.(*types.ListSubscriptionsOutput),
 		response:                &aws.Response{Request: r.Request},
 	}
 
@@ -127,7 +97,7 @@ func NewListSubscriptionsPaginator(req ListSubscriptionsRequest) ListSubscriptio
 	return ListSubscriptionsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListSubscriptionsInput
+				var inCpy *types.ListSubscriptionsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -147,14 +117,14 @@ type ListSubscriptionsPaginator struct {
 	aws.Pager
 }
 
-func (p *ListSubscriptionsPaginator) CurrentPage() *ListSubscriptionsOutput {
-	return p.Pager.CurrentPage().(*ListSubscriptionsOutput)
+func (p *ListSubscriptionsPaginator) CurrentPage() *types.ListSubscriptionsOutput {
+	return p.Pager.CurrentPage().(*types.ListSubscriptionsOutput)
 }
 
 // ListSubscriptionsResponse is the response type for the
 // ListSubscriptions API operation.
 type ListSubscriptionsResponse struct {
-	*ListSubscriptionsOutput
+	*types.ListSubscriptionsOutput
 
 	response *aws.Response
 }

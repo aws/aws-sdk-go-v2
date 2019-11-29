@@ -6,122 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/appsync/types"
 )
-
-type ListResolversByFunctionInput struct {
-	_ struct{} `type:"structure"`
-
-	// The API ID.
-	//
-	// ApiId is a required field
-	ApiId *string `location:"uri" locationName:"apiId" type:"string" required:"true"`
-
-	// The Function ID.
-	//
-	// FunctionId is a required field
-	FunctionId *string `location:"uri" locationName:"functionId" type:"string" required:"true"`
-
-	// The maximum number of results you want the request to return.
-	MaxResults *int64 `location:"querystring" locationName:"maxResults" type:"integer"`
-
-	// An identifier that was returned from the previous call to this operation,
-	// which you can use to return the next set of items in the list.
-	NextToken *string `location:"querystring" locationName:"nextToken" type:"string"`
-}
-
-// String returns the string representation
-func (s ListResolversByFunctionInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListResolversByFunctionInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListResolversByFunctionInput"}
-
-	if s.ApiId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ApiId"))
-	}
-
-	if s.FunctionId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("FunctionId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListResolversByFunctionInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.ApiId != nil {
-		v := *s.ApiId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "apiId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.FunctionId != nil {
-		v := *s.FunctionId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "functionId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.MaxResults != nil {
-		v := *s.MaxResults
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "maxResults", protocol.Int64Value(v), metadata)
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type ListResolversByFunctionOutput struct {
-	_ struct{} `type:"structure"`
-
-	// An identifier that can be used to return the next set of items in the list.
-	NextToken *string `locationName:"nextToken" type:"string"`
-
-	// The list of resolvers.
-	Resolvers []Resolver `locationName:"resolvers" type:"list"`
-}
-
-// String returns the string representation
-func (s ListResolversByFunctionOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListResolversByFunctionOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Resolvers != nil {
-		v := s.Resolvers
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "resolvers", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	return nil
-}
 
 const opListResolversByFunction = "ListResolversByFunction"
 
@@ -138,7 +24,7 @@ const opListResolversByFunction = "ListResolversByFunction"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/ListResolversByFunction
-func (c *Client) ListResolversByFunctionRequest(input *ListResolversByFunctionInput) ListResolversByFunctionRequest {
+func (c *Client) ListResolversByFunctionRequest(input *types.ListResolversByFunctionInput) ListResolversByFunctionRequest {
 	op := &aws.Operation{
 		Name:       opListResolversByFunction,
 		HTTPMethod: "GET",
@@ -146,10 +32,10 @@ func (c *Client) ListResolversByFunctionRequest(input *ListResolversByFunctionIn
 	}
 
 	if input == nil {
-		input = &ListResolversByFunctionInput{}
+		input = &types.ListResolversByFunctionInput{}
 	}
 
-	req := c.newRequest(op, input, &ListResolversByFunctionOutput{})
+	req := c.newRequest(op, input, &types.ListResolversByFunctionOutput{})
 	return ListResolversByFunctionRequest{Request: req, Input: input, Copy: c.ListResolversByFunctionRequest}
 }
 
@@ -157,8 +43,8 @@ func (c *Client) ListResolversByFunctionRequest(input *ListResolversByFunctionIn
 // ListResolversByFunction API operation.
 type ListResolversByFunctionRequest struct {
 	*aws.Request
-	Input *ListResolversByFunctionInput
-	Copy  func(*ListResolversByFunctionInput) ListResolversByFunctionRequest
+	Input *types.ListResolversByFunctionInput
+	Copy  func(*types.ListResolversByFunctionInput) ListResolversByFunctionRequest
 }
 
 // Send marshals and sends the ListResolversByFunction API request.
@@ -170,7 +56,7 @@ func (r ListResolversByFunctionRequest) Send(ctx context.Context) (*ListResolver
 	}
 
 	resp := &ListResolversByFunctionResponse{
-		ListResolversByFunctionOutput: r.Request.Data.(*ListResolversByFunctionOutput),
+		ListResolversByFunctionOutput: r.Request.Data.(*types.ListResolversByFunctionOutput),
 		response:                      &aws.Response{Request: r.Request},
 	}
 
@@ -180,7 +66,7 @@ func (r ListResolversByFunctionRequest) Send(ctx context.Context) (*ListResolver
 // ListResolversByFunctionResponse is the response type for the
 // ListResolversByFunction API operation.
 type ListResolversByFunctionResponse struct {
-	*ListResolversByFunctionOutput
+	*types.ListResolversByFunctionOutput
 
 	response *aws.Response
 }

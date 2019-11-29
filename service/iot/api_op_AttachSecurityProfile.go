@@ -6,82 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/iot/types"
 )
-
-type AttachSecurityProfileInput struct {
-	_ struct{} `type:"structure"`
-
-	// The security profile that is attached.
-	//
-	// SecurityProfileName is a required field
-	SecurityProfileName *string `location:"uri" locationName:"securityProfileName" min:"1" type:"string" required:"true"`
-
-	// The ARN of the target (thing group) to which the security profile is attached.
-	//
-	// SecurityProfileTargetArn is a required field
-	SecurityProfileTargetArn *string `location:"querystring" locationName:"securityProfileTargetArn" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s AttachSecurityProfileInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *AttachSecurityProfileInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "AttachSecurityProfileInput"}
-
-	if s.SecurityProfileName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("SecurityProfileName"))
-	}
-	if s.SecurityProfileName != nil && len(*s.SecurityProfileName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("SecurityProfileName", 1))
-	}
-
-	if s.SecurityProfileTargetArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("SecurityProfileTargetArn"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s AttachSecurityProfileInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.SecurityProfileName != nil {
-		v := *s.SecurityProfileName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "securityProfileName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.SecurityProfileTargetArn != nil {
-		v := *s.SecurityProfileTargetArn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "securityProfileTargetArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type AttachSecurityProfileOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s AttachSecurityProfileOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s AttachSecurityProfileOutput) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
 
 const opAttachSecurityProfile = "AttachSecurityProfile"
 
@@ -98,7 +24,7 @@ const opAttachSecurityProfile = "AttachSecurityProfile"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) AttachSecurityProfileRequest(input *AttachSecurityProfileInput) AttachSecurityProfileRequest {
+func (c *Client) AttachSecurityProfileRequest(input *types.AttachSecurityProfileInput) AttachSecurityProfileRequest {
 	op := &aws.Operation{
 		Name:       opAttachSecurityProfile,
 		HTTPMethod: "PUT",
@@ -106,10 +32,10 @@ func (c *Client) AttachSecurityProfileRequest(input *AttachSecurityProfileInput)
 	}
 
 	if input == nil {
-		input = &AttachSecurityProfileInput{}
+		input = &types.AttachSecurityProfileInput{}
 	}
 
-	req := c.newRequest(op, input, &AttachSecurityProfileOutput{})
+	req := c.newRequest(op, input, &types.AttachSecurityProfileOutput{})
 	return AttachSecurityProfileRequest{Request: req, Input: input, Copy: c.AttachSecurityProfileRequest}
 }
 
@@ -117,8 +43,8 @@ func (c *Client) AttachSecurityProfileRequest(input *AttachSecurityProfileInput)
 // AttachSecurityProfile API operation.
 type AttachSecurityProfileRequest struct {
 	*aws.Request
-	Input *AttachSecurityProfileInput
-	Copy  func(*AttachSecurityProfileInput) AttachSecurityProfileRequest
+	Input *types.AttachSecurityProfileInput
+	Copy  func(*types.AttachSecurityProfileInput) AttachSecurityProfileRequest
 }
 
 // Send marshals and sends the AttachSecurityProfile API request.
@@ -130,7 +56,7 @@ func (r AttachSecurityProfileRequest) Send(ctx context.Context) (*AttachSecurity
 	}
 
 	resp := &AttachSecurityProfileResponse{
-		AttachSecurityProfileOutput: r.Request.Data.(*AttachSecurityProfileOutput),
+		AttachSecurityProfileOutput: r.Request.Data.(*types.AttachSecurityProfileOutput),
 		response:                    &aws.Response{Request: r.Request},
 	}
 
@@ -140,7 +66,7 @@ func (r AttachSecurityProfileRequest) Send(ctx context.Context) (*AttachSecurity
 // AttachSecurityProfileResponse is the response type for the
 // AttachSecurityProfile API operation.
 type AttachSecurityProfileResponse struct {
-	*AttachSecurityProfileOutput
+	*types.AttachSecurityProfileOutput
 
 	response *aws.Response
 }

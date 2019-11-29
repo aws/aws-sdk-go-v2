@@ -6,75 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/restxml"
+	"github.com/aws/aws-sdk-go-v2/service/s3control/types"
 )
-
-type PutPublicAccessBlockInput struct {
-	_ struct{} `type:"structure" payload:"PublicAccessBlockConfiguration"`
-
-	// AccountId is a required field
-	AccountId *string `location:"header" locationName:"x-amz-account-id" type:"string" required:"true"`
-
-	// PublicAccessBlockConfiguration is a required field
-	PublicAccessBlockConfiguration *PublicAccessBlockConfiguration `locationName:"PublicAccessBlockConfiguration" type:"structure" required:"true" xmlURI:"http://awss3control.amazonaws.com/doc/2018-08-20/"`
-}
-
-// String returns the string representation
-func (s PutPublicAccessBlockInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *PutPublicAccessBlockInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "PutPublicAccessBlockInput"}
-
-	if s.AccountId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("AccountId"))
-	}
-
-	if s.PublicAccessBlockConfiguration == nil {
-		invalidParams.Add(aws.NewErrParamRequired("PublicAccessBlockConfiguration"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s PutPublicAccessBlockInput) MarshalFields(e protocol.FieldEncoder) error {
-
-	if s.AccountId != nil {
-		v := *s.AccountId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "x-amz-account-id", protocol.StringValue(v), metadata)
-	}
-	if s.PublicAccessBlockConfiguration != nil {
-		v := s.PublicAccessBlockConfiguration
-
-		metadata := protocol.Metadata{XMLNamespaceURI: "http://awss3control.amazonaws.com/doc/2018-08-20/"}
-		e.SetFields(protocol.PayloadTarget, "PublicAccessBlockConfiguration", v, metadata)
-	}
-	return nil
-}
-
-type PutPublicAccessBlockOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s PutPublicAccessBlockOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s PutPublicAccessBlockOutput) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
 
 const opPutPublicAccessBlock = "PutPublicAccessBlock"
 
@@ -89,7 +24,7 @@ const opPutPublicAccessBlock = "PutPublicAccessBlock"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/PutPublicAccessBlock
-func (c *Client) PutPublicAccessBlockRequest(input *PutPublicAccessBlockInput) PutPublicAccessBlockRequest {
+func (c *Client) PutPublicAccessBlockRequest(input *types.PutPublicAccessBlockInput) PutPublicAccessBlockRequest {
 	op := &aws.Operation{
 		Name:       opPutPublicAccessBlock,
 		HTTPMethod: "PUT",
@@ -97,10 +32,10 @@ func (c *Client) PutPublicAccessBlockRequest(input *PutPublicAccessBlockInput) P
 	}
 
 	if input == nil {
-		input = &PutPublicAccessBlockInput{}
+		input = &types.PutPublicAccessBlockInput{}
 	}
 
-	req := c.newRequest(op, input, &PutPublicAccessBlockOutput{})
+	req := c.newRequest(op, input, &types.PutPublicAccessBlockOutput{})
 	req.Handlers.Unmarshal.Remove(restxml.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	req.Handlers.Build.PushBackNamed(buildPrefixHostHandler("AccountID", aws.StringValue(input.AccountId)))
@@ -112,8 +47,8 @@ func (c *Client) PutPublicAccessBlockRequest(input *PutPublicAccessBlockInput) P
 // PutPublicAccessBlock API operation.
 type PutPublicAccessBlockRequest struct {
 	*aws.Request
-	Input *PutPublicAccessBlockInput
-	Copy  func(*PutPublicAccessBlockInput) PutPublicAccessBlockRequest
+	Input *types.PutPublicAccessBlockInput
+	Copy  func(*types.PutPublicAccessBlockInput) PutPublicAccessBlockRequest
 }
 
 // Send marshals and sends the PutPublicAccessBlock API request.
@@ -125,7 +60,7 @@ func (r PutPublicAccessBlockRequest) Send(ctx context.Context) (*PutPublicAccess
 	}
 
 	resp := &PutPublicAccessBlockResponse{
-		PutPublicAccessBlockOutput: r.Request.Data.(*PutPublicAccessBlockOutput),
+		PutPublicAccessBlockOutput: r.Request.Data.(*types.PutPublicAccessBlockOutput),
 		response:                   &aws.Response{Request: r.Request},
 	}
 
@@ -135,7 +70,7 @@ func (r PutPublicAccessBlockRequest) Send(ctx context.Context) (*PutPublicAccess
 // PutPublicAccessBlockResponse is the response type for the
 // PutPublicAccessBlock API operation.
 type PutPublicAccessBlockResponse struct {
-	*PutPublicAccessBlockOutput
+	*types.PutPublicAccessBlockOutput
 
 	response *aws.Response
 }

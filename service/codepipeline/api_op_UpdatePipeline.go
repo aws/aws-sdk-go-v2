@@ -6,55 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/codepipeline/types"
 )
-
-// Represents the input of an UpdatePipeline action.
-type UpdatePipelineInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the pipeline to be updated.
-	//
-	// Pipeline is a required field
-	Pipeline *PipelineDeclaration `locationName:"pipeline" type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s UpdatePipelineInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdatePipelineInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdatePipelineInput"}
-
-	if s.Pipeline == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Pipeline"))
-	}
-	if s.Pipeline != nil {
-		if err := s.Pipeline.Validate(); err != nil {
-			invalidParams.AddNested("Pipeline", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Represents the output of an UpdatePipeline action.
-type UpdatePipelineOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The structure of the updated pipeline.
-	Pipeline *PipelineDeclaration `locationName:"pipeline" type:"structure"`
-}
-
-// String returns the string representation
-func (s UpdatePipelineOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opUpdatePipeline = "UpdatePipeline"
 
@@ -74,7 +27,7 @@ const opUpdatePipeline = "UpdatePipeline"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/UpdatePipeline
-func (c *Client) UpdatePipelineRequest(input *UpdatePipelineInput) UpdatePipelineRequest {
+func (c *Client) UpdatePipelineRequest(input *types.UpdatePipelineInput) UpdatePipelineRequest {
 	op := &aws.Operation{
 		Name:       opUpdatePipeline,
 		HTTPMethod: "POST",
@@ -82,10 +35,10 @@ func (c *Client) UpdatePipelineRequest(input *UpdatePipelineInput) UpdatePipelin
 	}
 
 	if input == nil {
-		input = &UpdatePipelineInput{}
+		input = &types.UpdatePipelineInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdatePipelineOutput{})
+	req := c.newRequest(op, input, &types.UpdatePipelineOutput{})
 	return UpdatePipelineRequest{Request: req, Input: input, Copy: c.UpdatePipelineRequest}
 }
 
@@ -93,8 +46,8 @@ func (c *Client) UpdatePipelineRequest(input *UpdatePipelineInput) UpdatePipelin
 // UpdatePipeline API operation.
 type UpdatePipelineRequest struct {
 	*aws.Request
-	Input *UpdatePipelineInput
-	Copy  func(*UpdatePipelineInput) UpdatePipelineRequest
+	Input *types.UpdatePipelineInput
+	Copy  func(*types.UpdatePipelineInput) UpdatePipelineRequest
 }
 
 // Send marshals and sends the UpdatePipeline API request.
@@ -106,7 +59,7 @@ func (r UpdatePipelineRequest) Send(ctx context.Context) (*UpdatePipelineRespons
 	}
 
 	resp := &UpdatePipelineResponse{
-		UpdatePipelineOutput: r.Request.Data.(*UpdatePipelineOutput),
+		UpdatePipelineOutput: r.Request.Data.(*types.UpdatePipelineOutput),
 		response:             &aws.Response{Request: r.Request},
 	}
 
@@ -116,7 +69,7 @@ func (r UpdatePipelineRequest) Send(ctx context.Context) (*UpdatePipelineRespons
 // UpdatePipelineResponse is the response type for the
 // UpdatePipeline API operation.
 type UpdatePipelineResponse struct {
-	*UpdatePipelineOutput
+	*types.UpdatePipelineOutput
 
 	response *aws.Response
 }

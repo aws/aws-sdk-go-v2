@@ -6,72 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/redshift/types"
 )
-
-type CreateClusterSecurityGroupInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name for the security group. Amazon Redshift stores the value as a lowercase
-	// string.
-	//
-	// Constraints:
-	//
-	//    * Must contain no more than 255 alphanumeric characters or hyphens.
-	//
-	//    * Must not be "Default".
-	//
-	//    * Must be unique for all security groups that are created by your AWS
-	//    account.
-	//
-	// Example: examplesecuritygroup
-	//
-	// ClusterSecurityGroupName is a required field
-	ClusterSecurityGroupName *string `type:"string" required:"true"`
-
-	// A description for the security group.
-	//
-	// Description is a required field
-	Description *string `type:"string" required:"true"`
-
-	// A list of tag instances.
-	Tags []Tag `locationNameList:"Tag" type:"list"`
-}
-
-// String returns the string representation
-func (s CreateClusterSecurityGroupInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateClusterSecurityGroupInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateClusterSecurityGroupInput"}
-
-	if s.ClusterSecurityGroupName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ClusterSecurityGroupName"))
-	}
-
-	if s.Description == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Description"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type CreateClusterSecurityGroupOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Describes a security group.
-	ClusterSecurityGroup *ClusterSecurityGroup `type:"structure"`
-}
-
-// String returns the string representation
-func (s CreateClusterSecurityGroupOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCreateClusterSecurityGroup = "CreateClusterSecurityGroup"
 
@@ -93,7 +29,7 @@ const opCreateClusterSecurityGroup = "CreateClusterSecurityGroup"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/CreateClusterSecurityGroup
-func (c *Client) CreateClusterSecurityGroupRequest(input *CreateClusterSecurityGroupInput) CreateClusterSecurityGroupRequest {
+func (c *Client) CreateClusterSecurityGroupRequest(input *types.CreateClusterSecurityGroupInput) CreateClusterSecurityGroupRequest {
 	op := &aws.Operation{
 		Name:       opCreateClusterSecurityGroup,
 		HTTPMethod: "POST",
@@ -101,10 +37,10 @@ func (c *Client) CreateClusterSecurityGroupRequest(input *CreateClusterSecurityG
 	}
 
 	if input == nil {
-		input = &CreateClusterSecurityGroupInput{}
+		input = &types.CreateClusterSecurityGroupInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateClusterSecurityGroupOutput{})
+	req := c.newRequest(op, input, &types.CreateClusterSecurityGroupOutput{})
 	return CreateClusterSecurityGroupRequest{Request: req, Input: input, Copy: c.CreateClusterSecurityGroupRequest}
 }
 
@@ -112,8 +48,8 @@ func (c *Client) CreateClusterSecurityGroupRequest(input *CreateClusterSecurityG
 // CreateClusterSecurityGroup API operation.
 type CreateClusterSecurityGroupRequest struct {
 	*aws.Request
-	Input *CreateClusterSecurityGroupInput
-	Copy  func(*CreateClusterSecurityGroupInput) CreateClusterSecurityGroupRequest
+	Input *types.CreateClusterSecurityGroupInput
+	Copy  func(*types.CreateClusterSecurityGroupInput) CreateClusterSecurityGroupRequest
 }
 
 // Send marshals and sends the CreateClusterSecurityGroup API request.
@@ -125,7 +61,7 @@ func (r CreateClusterSecurityGroupRequest) Send(ctx context.Context) (*CreateClu
 	}
 
 	resp := &CreateClusterSecurityGroupResponse{
-		CreateClusterSecurityGroupOutput: r.Request.Data.(*CreateClusterSecurityGroupOutput),
+		CreateClusterSecurityGroupOutput: r.Request.Data.(*types.CreateClusterSecurityGroupOutput),
 		response:                         &aws.Response{Request: r.Request},
 	}
 
@@ -135,7 +71,7 @@ func (r CreateClusterSecurityGroupRequest) Send(ctx context.Context) (*CreateClu
 // CreateClusterSecurityGroupResponse is the response type for the
 // CreateClusterSecurityGroup API operation.
 type CreateClusterSecurityGroupResponse struct {
-	*CreateClusterSecurityGroupOutput
+	*types.CreateClusterSecurityGroupOutput
 
 	response *aws.Response
 }

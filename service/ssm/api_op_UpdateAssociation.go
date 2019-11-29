@@ -4,152 +4,10 @@ package ssm
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ssm/types"
 )
-
-type UpdateAssociationInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the association you want to update.
-	//
-	// AssociationId is a required field
-	AssociationId *string `type:"string" required:"true"`
-
-	// The name of the association that you want to update.
-	AssociationName *string `type:"string"`
-
-	// This parameter is provided for concurrency control purposes. You must specify
-	// the latest association version in the service. If you want to ensure that
-	// this request succeeds, either specify $LATEST, or omit this parameter.
-	AssociationVersion *string `type:"string"`
-
-	// Specify the target for the association. This target is required for associations
-	// that use an Automation document and target resources by using rate controls.
-	AutomationTargetParameterName *string `min:"1" type:"string"`
-
-	// The severity level to assign to the association.
-	ComplianceSeverity AssociationComplianceSeverity `type:"string" enum:"true"`
-
-	// The document version you want update for the association.
-	DocumentVersion *string `type:"string"`
-
-	// The maximum number of targets allowed to run the association at the same
-	// time. You can specify a number, for example 10, or a percentage of the target
-	// set, for example 10%. The default value is 100%, which means all targets
-	// run the association at the same time.
-	//
-	// If a new instance starts and attempts to run an association while Systems
-	// Manager is running MaxConcurrency associations, the association is allowed
-	// to run. During the next association interval, the new instance will process
-	// its association within the limit specified for MaxConcurrency.
-	MaxConcurrency *string `min:"1" type:"string"`
-
-	// The number of errors that are allowed before the system stops sending requests
-	// to run the association on additional targets. You can specify either an absolute
-	// number of errors, for example 10, or a percentage of the target set, for
-	// example 10%. If you specify 3, for example, the system stops sending requests
-	// when the fourth error is received. If you specify 0, then the system stops
-	// sending requests after the first error is returned. If you run an association
-	// on 50 instances and set MaxError to 10%, then the system stops sending the
-	// request when the sixth error is received.
-	//
-	// Executions that are already running an association when MaxErrors is reached
-	// are allowed to complete, but some of these executions may fail as well. If
-	// you need to ensure that there won't be more than max-errors failed executions,
-	// set MaxConcurrency to 1 so that executions proceed one at a time.
-	MaxErrors *string `min:"1" type:"string"`
-
-	// The name of the SSM document that contains the configuration information
-	// for the instance. You can specify Command or Automation documents.
-	//
-	// You can specify AWS-predefined documents, documents you created, or a document
-	// that is shared with you from another account.
-	//
-	// For SSM documents that are shared with you from other AWS accounts, you must
-	// specify the complete SSM document ARN, in the following format:
-	//
-	// arn:aws:ssm:region:account-id:document/document-name
-	//
-	// For example:
-	//
-	// arn:aws:ssm:us-east-2:12345678912:document/My-Shared-Document
-	//
-	// For AWS-predefined documents and SSM documents you created in your account,
-	// you only need to specify the document name. For example, AWS-ApplyPatchBaseline
-	// or My-Document.
-	Name *string `type:"string"`
-
-	// An Amazon S3 bucket where you want to store the results of this request.
-	OutputLocation *InstanceAssociationOutputLocation `type:"structure"`
-
-	// The parameters you want to update for the association. If you create a parameter
-	// using Parameter Store, you can reference the parameter using {{ssm:parameter-name}}
-	Parameters map[string][]string `type:"map"`
-
-	// The cron expression used to schedule the association that you want to update.
-	ScheduleExpression *string `min:"1" type:"string"`
-
-	// The targets of the association.
-	Targets []Target `type:"list"`
-}
-
-// String returns the string representation
-func (s UpdateAssociationInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateAssociationInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateAssociationInput"}
-
-	if s.AssociationId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("AssociationId"))
-	}
-	if s.AutomationTargetParameterName != nil && len(*s.AutomationTargetParameterName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("AutomationTargetParameterName", 1))
-	}
-	if s.MaxConcurrency != nil && len(*s.MaxConcurrency) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("MaxConcurrency", 1))
-	}
-	if s.MaxErrors != nil && len(*s.MaxErrors) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("MaxErrors", 1))
-	}
-	if s.ScheduleExpression != nil && len(*s.ScheduleExpression) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ScheduleExpression", 1))
-	}
-	if s.OutputLocation != nil {
-		if err := s.OutputLocation.Validate(); err != nil {
-			invalidParams.AddNested("OutputLocation", err.(aws.ErrInvalidParams))
-		}
-	}
-	if s.Targets != nil {
-		for i, v := range s.Targets {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Targets", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type UpdateAssociationOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The description of the association that was updated.
-	AssociationDescription *AssociationDescription `type:"structure"`
-}
-
-// String returns the string representation
-func (s UpdateAssociationOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opUpdateAssociation = "UpdateAssociation"
 
@@ -177,7 +35,7 @@ const opUpdateAssociation = "UpdateAssociation"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/UpdateAssociation
-func (c *Client) UpdateAssociationRequest(input *UpdateAssociationInput) UpdateAssociationRequest {
+func (c *Client) UpdateAssociationRequest(input *types.UpdateAssociationInput) UpdateAssociationRequest {
 	op := &aws.Operation{
 		Name:       opUpdateAssociation,
 		HTTPMethod: "POST",
@@ -185,10 +43,10 @@ func (c *Client) UpdateAssociationRequest(input *UpdateAssociationInput) UpdateA
 	}
 
 	if input == nil {
-		input = &UpdateAssociationInput{}
+		input = &types.UpdateAssociationInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateAssociationOutput{})
+	req := c.newRequest(op, input, &types.UpdateAssociationOutput{})
 	return UpdateAssociationRequest{Request: req, Input: input, Copy: c.UpdateAssociationRequest}
 }
 
@@ -196,8 +54,8 @@ func (c *Client) UpdateAssociationRequest(input *UpdateAssociationInput) UpdateA
 // UpdateAssociation API operation.
 type UpdateAssociationRequest struct {
 	*aws.Request
-	Input *UpdateAssociationInput
-	Copy  func(*UpdateAssociationInput) UpdateAssociationRequest
+	Input *types.UpdateAssociationInput
+	Copy  func(*types.UpdateAssociationInput) UpdateAssociationRequest
 }
 
 // Send marshals and sends the UpdateAssociation API request.
@@ -209,7 +67,7 @@ func (r UpdateAssociationRequest) Send(ctx context.Context) (*UpdateAssociationR
 	}
 
 	resp := &UpdateAssociationResponse{
-		UpdateAssociationOutput: r.Request.Data.(*UpdateAssociationOutput),
+		UpdateAssociationOutput: r.Request.Data.(*types.UpdateAssociationOutput),
 		response:                &aws.Response{Request: r.Request},
 	}
 
@@ -219,7 +77,7 @@ func (r UpdateAssociationRequest) Send(ctx context.Context) (*UpdateAssociationR
 // UpdateAssociationResponse is the response type for the
 // UpdateAssociation API operation.
 type UpdateAssociationResponse struct {
-	*UpdateAssociationOutput
+	*types.UpdateAssociationOutput
 
 	response *aws.Response
 }

@@ -6,84 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/types"
 )
-
-type SetRiskConfigurationInput struct {
-	_ struct{} `type:"structure"`
-
-	// The account takeover risk configuration.
-	AccountTakeoverRiskConfiguration *AccountTakeoverRiskConfigurationType `type:"structure"`
-
-	// The app client ID. If ClientId is null, then the risk configuration is mapped
-	// to userPoolId. When the client ID is null, the same risk configuration is
-	// applied to all the clients in the userPool.
-	//
-	// Otherwise, ClientId is mapped to the client. When the client ID is not null,
-	// the user pool configuration is overridden and the risk configuration for
-	// the client is used instead.
-	ClientId *string `min:"1" type:"string" sensitive:"true"`
-
-	// The compromised credentials risk configuration.
-	CompromisedCredentialsRiskConfiguration *CompromisedCredentialsRiskConfigurationType `type:"structure"`
-
-	// The configuration to override the risk decision.
-	RiskExceptionConfiguration *RiskExceptionConfigurationType `type:"structure"`
-
-	// The user pool ID.
-	//
-	// UserPoolId is a required field
-	UserPoolId *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s SetRiskConfigurationInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *SetRiskConfigurationInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "SetRiskConfigurationInput"}
-	if s.ClientId != nil && len(*s.ClientId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ClientId", 1))
-	}
-
-	if s.UserPoolId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("UserPoolId"))
-	}
-	if s.UserPoolId != nil && len(*s.UserPoolId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("UserPoolId", 1))
-	}
-	if s.AccountTakeoverRiskConfiguration != nil {
-		if err := s.AccountTakeoverRiskConfiguration.Validate(); err != nil {
-			invalidParams.AddNested("AccountTakeoverRiskConfiguration", err.(aws.ErrInvalidParams))
-		}
-	}
-	if s.CompromisedCredentialsRiskConfiguration != nil {
-		if err := s.CompromisedCredentialsRiskConfiguration.Validate(); err != nil {
-			invalidParams.AddNested("CompromisedCredentialsRiskConfiguration", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type SetRiskConfigurationOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The risk configuration.
-	//
-	// RiskConfiguration is a required field
-	RiskConfiguration *RiskConfigurationType `type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s SetRiskConfigurationOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opSetRiskConfiguration = "SetRiskConfiguration"
 
@@ -106,7 +30,7 @@ const opSetRiskConfiguration = "SetRiskConfiguration"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/SetRiskConfiguration
-func (c *Client) SetRiskConfigurationRequest(input *SetRiskConfigurationInput) SetRiskConfigurationRequest {
+func (c *Client) SetRiskConfigurationRequest(input *types.SetRiskConfigurationInput) SetRiskConfigurationRequest {
 	op := &aws.Operation{
 		Name:       opSetRiskConfiguration,
 		HTTPMethod: "POST",
@@ -114,10 +38,10 @@ func (c *Client) SetRiskConfigurationRequest(input *SetRiskConfigurationInput) S
 	}
 
 	if input == nil {
-		input = &SetRiskConfigurationInput{}
+		input = &types.SetRiskConfigurationInput{}
 	}
 
-	req := c.newRequest(op, input, &SetRiskConfigurationOutput{})
+	req := c.newRequest(op, input, &types.SetRiskConfigurationOutput{})
 	return SetRiskConfigurationRequest{Request: req, Input: input, Copy: c.SetRiskConfigurationRequest}
 }
 
@@ -125,8 +49,8 @@ func (c *Client) SetRiskConfigurationRequest(input *SetRiskConfigurationInput) S
 // SetRiskConfiguration API operation.
 type SetRiskConfigurationRequest struct {
 	*aws.Request
-	Input *SetRiskConfigurationInput
-	Copy  func(*SetRiskConfigurationInput) SetRiskConfigurationRequest
+	Input *types.SetRiskConfigurationInput
+	Copy  func(*types.SetRiskConfigurationInput) SetRiskConfigurationRequest
 }
 
 // Send marshals and sends the SetRiskConfiguration API request.
@@ -138,7 +62,7 @@ func (r SetRiskConfigurationRequest) Send(ctx context.Context) (*SetRiskConfigur
 	}
 
 	resp := &SetRiskConfigurationResponse{
-		SetRiskConfigurationOutput: r.Request.Data.(*SetRiskConfigurationOutput),
+		SetRiskConfigurationOutput: r.Request.Data.(*types.SetRiskConfigurationOutput),
 		response:                   &aws.Response{Request: r.Request},
 	}
 
@@ -148,7 +72,7 @@ func (r SetRiskConfigurationRequest) Send(ctx context.Context) (*SetRiskConfigur
 // SetRiskConfigurationResponse is the response type for the
 // SetRiskConfiguration API operation.
 type SetRiskConfigurationResponse struct {
-	*SetRiskConfigurationOutput
+	*types.SetRiskConfigurationOutput
 
 	response *aws.Response
 }

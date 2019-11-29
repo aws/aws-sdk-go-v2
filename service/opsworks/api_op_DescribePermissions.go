@@ -6,47 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/opsworks/types"
 )
-
-type DescribePermissionsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The user's IAM ARN. This can also be a federated user's ARN. For more information
-	// about IAM ARNs, see Using Identifiers (https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html).
-	IamUserArn *string `type:"string"`
-
-	// The stack ID.
-	StackId *string `type:"string"`
-}
-
-// String returns the string representation
-func (s DescribePermissionsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Contains the response to a DescribePermissions request.
-type DescribePermissionsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// An array of Permission objects that describe the stack permissions.
-	//
-	//    * If the request object contains only a stack ID, the array contains a
-	//    Permission object with permissions for each of the stack IAM ARNs.
-	//
-	//    * If the request object contains only an IAM ARN, the array contains a
-	//    Permission object with permissions for each of the user's stack IDs.
-	//
-	//    * If the request contains a stack ID and an IAM ARN, the array contains
-	//    a single Permission object with permissions for the specified stack and
-	//    IAM ARN.
-	Permissions []Permission `type:"list"`
-}
-
-// String returns the string representation
-func (s DescribePermissionsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribePermissions = "DescribePermissions"
 
@@ -68,7 +29,7 @@ const opDescribePermissions = "DescribePermissions"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DescribePermissions
-func (c *Client) DescribePermissionsRequest(input *DescribePermissionsInput) DescribePermissionsRequest {
+func (c *Client) DescribePermissionsRequest(input *types.DescribePermissionsInput) DescribePermissionsRequest {
 	op := &aws.Operation{
 		Name:       opDescribePermissions,
 		HTTPMethod: "POST",
@@ -76,10 +37,10 @@ func (c *Client) DescribePermissionsRequest(input *DescribePermissionsInput) Des
 	}
 
 	if input == nil {
-		input = &DescribePermissionsInput{}
+		input = &types.DescribePermissionsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribePermissionsOutput{})
+	req := c.newRequest(op, input, &types.DescribePermissionsOutput{})
 	return DescribePermissionsRequest{Request: req, Input: input, Copy: c.DescribePermissionsRequest}
 }
 
@@ -87,8 +48,8 @@ func (c *Client) DescribePermissionsRequest(input *DescribePermissionsInput) Des
 // DescribePermissions API operation.
 type DescribePermissionsRequest struct {
 	*aws.Request
-	Input *DescribePermissionsInput
-	Copy  func(*DescribePermissionsInput) DescribePermissionsRequest
+	Input *types.DescribePermissionsInput
+	Copy  func(*types.DescribePermissionsInput) DescribePermissionsRequest
 }
 
 // Send marshals and sends the DescribePermissions API request.
@@ -100,7 +61,7 @@ func (r DescribePermissionsRequest) Send(ctx context.Context) (*DescribePermissi
 	}
 
 	resp := &DescribePermissionsResponse{
-		DescribePermissionsOutput: r.Request.Data.(*DescribePermissionsOutput),
+		DescribePermissionsOutput: r.Request.Data.(*types.DescribePermissionsOutput),
 		response:                  &aws.Response{Request: r.Request},
 	}
 
@@ -110,7 +71,7 @@ func (r DescribePermissionsRequest) Send(ctx context.Context) (*DescribePermissi
 // DescribePermissionsResponse is the response type for the
 // DescribePermissions API operation.
 type DescribePermissionsResponse struct {
-	*DescribePermissionsOutput
+	*types.DescribePermissionsOutput
 
 	response *aws.Response
 }

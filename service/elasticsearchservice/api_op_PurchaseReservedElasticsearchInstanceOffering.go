@@ -6,115 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/elasticsearchservice/types"
 )
-
-// Container for parameters to PurchaseReservedElasticsearchInstanceOffering
-type PurchaseReservedElasticsearchInstanceOfferingInput struct {
-	_ struct{} `type:"structure"`
-
-	// The number of Elasticsearch instances to reserve.
-	InstanceCount *int64 `min:"1" type:"integer"`
-
-	// A customer-specified identifier to track this reservation.
-	//
-	// ReservationName is a required field
-	ReservationName *string `min:"5" type:"string" required:"true"`
-
-	// The ID of the reserved Elasticsearch instance offering to purchase.
-	//
-	// ReservedElasticsearchInstanceOfferingId is a required field
-	ReservedElasticsearchInstanceOfferingId *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s PurchaseReservedElasticsearchInstanceOfferingInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *PurchaseReservedElasticsearchInstanceOfferingInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "PurchaseReservedElasticsearchInstanceOfferingInput"}
-	if s.InstanceCount != nil && *s.InstanceCount < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("InstanceCount", 1))
-	}
-
-	if s.ReservationName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ReservationName"))
-	}
-	if s.ReservationName != nil && len(*s.ReservationName) < 5 {
-		invalidParams.Add(aws.NewErrParamMinLen("ReservationName", 5))
-	}
-
-	if s.ReservedElasticsearchInstanceOfferingId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ReservedElasticsearchInstanceOfferingId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s PurchaseReservedElasticsearchInstanceOfferingInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.InstanceCount != nil {
-		v := *s.InstanceCount
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "InstanceCount", protocol.Int64Value(v), metadata)
-	}
-	if s.ReservationName != nil {
-		v := *s.ReservationName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "ReservationName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.ReservedElasticsearchInstanceOfferingId != nil {
-		v := *s.ReservedElasticsearchInstanceOfferingId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "ReservedElasticsearchInstanceOfferingId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-// Represents the output of a PurchaseReservedElasticsearchInstanceOffering
-// operation.
-type PurchaseReservedElasticsearchInstanceOfferingOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The customer-specified identifier used to track this reservation.
-	ReservationName *string `min:"5" type:"string"`
-
-	// Details of the reserved Elasticsearch instance which was purchased.
-	ReservedElasticsearchInstanceId *string `type:"string"`
-}
-
-// String returns the string representation
-func (s PurchaseReservedElasticsearchInstanceOfferingOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s PurchaseReservedElasticsearchInstanceOfferingOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.ReservationName != nil {
-		v := *s.ReservationName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "ReservationName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.ReservedElasticsearchInstanceId != nil {
-		v := *s.ReservedElasticsearchInstanceId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "ReservedElasticsearchInstanceId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opPurchaseReservedElasticsearchInstanceOffering = "PurchaseReservedElasticsearchInstanceOffering"
 
@@ -129,7 +22,7 @@ const opPurchaseReservedElasticsearchInstanceOffering = "PurchaseReservedElastic
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) PurchaseReservedElasticsearchInstanceOfferingRequest(input *PurchaseReservedElasticsearchInstanceOfferingInput) PurchaseReservedElasticsearchInstanceOfferingRequest {
+func (c *Client) PurchaseReservedElasticsearchInstanceOfferingRequest(input *types.PurchaseReservedElasticsearchInstanceOfferingInput) PurchaseReservedElasticsearchInstanceOfferingRequest {
 	op := &aws.Operation{
 		Name:       opPurchaseReservedElasticsearchInstanceOffering,
 		HTTPMethod: "POST",
@@ -137,10 +30,10 @@ func (c *Client) PurchaseReservedElasticsearchInstanceOfferingRequest(input *Pur
 	}
 
 	if input == nil {
-		input = &PurchaseReservedElasticsearchInstanceOfferingInput{}
+		input = &types.PurchaseReservedElasticsearchInstanceOfferingInput{}
 	}
 
-	req := c.newRequest(op, input, &PurchaseReservedElasticsearchInstanceOfferingOutput{})
+	req := c.newRequest(op, input, &types.PurchaseReservedElasticsearchInstanceOfferingOutput{})
 	return PurchaseReservedElasticsearchInstanceOfferingRequest{Request: req, Input: input, Copy: c.PurchaseReservedElasticsearchInstanceOfferingRequest}
 }
 
@@ -148,8 +41,8 @@ func (c *Client) PurchaseReservedElasticsearchInstanceOfferingRequest(input *Pur
 // PurchaseReservedElasticsearchInstanceOffering API operation.
 type PurchaseReservedElasticsearchInstanceOfferingRequest struct {
 	*aws.Request
-	Input *PurchaseReservedElasticsearchInstanceOfferingInput
-	Copy  func(*PurchaseReservedElasticsearchInstanceOfferingInput) PurchaseReservedElasticsearchInstanceOfferingRequest
+	Input *types.PurchaseReservedElasticsearchInstanceOfferingInput
+	Copy  func(*types.PurchaseReservedElasticsearchInstanceOfferingInput) PurchaseReservedElasticsearchInstanceOfferingRequest
 }
 
 // Send marshals and sends the PurchaseReservedElasticsearchInstanceOffering API request.
@@ -161,7 +54,7 @@ func (r PurchaseReservedElasticsearchInstanceOfferingRequest) Send(ctx context.C
 	}
 
 	resp := &PurchaseReservedElasticsearchInstanceOfferingResponse{
-		PurchaseReservedElasticsearchInstanceOfferingOutput: r.Request.Data.(*PurchaseReservedElasticsearchInstanceOfferingOutput),
+		PurchaseReservedElasticsearchInstanceOfferingOutput: r.Request.Data.(*types.PurchaseReservedElasticsearchInstanceOfferingOutput),
 		response: &aws.Response{Request: r.Request},
 	}
 
@@ -171,7 +64,7 @@ func (r PurchaseReservedElasticsearchInstanceOfferingRequest) Send(ctx context.C
 // PurchaseReservedElasticsearchInstanceOfferingResponse is the response type for the
 // PurchaseReservedElasticsearchInstanceOffering API operation.
 type PurchaseReservedElasticsearchInstanceOfferingResponse struct {
-	*PurchaseReservedElasticsearchInstanceOfferingOutput
+	*types.PurchaseReservedElasticsearchInstanceOfferingOutput
 
 	response *aws.Response
 }

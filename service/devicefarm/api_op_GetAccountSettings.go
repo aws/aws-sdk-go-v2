@@ -6,32 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/devicefarm/types"
 )
-
-// Represents the request sent to retrieve the account settings.
-type GetAccountSettingsInput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s GetAccountSettingsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Represents the account settings return values from the GetAccountSettings
-// request.
-type GetAccountSettingsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The account settings.
-	AccountSettings *AccountSettings `locationName:"accountSettings" type:"structure"`
-}
-
-// String returns the string representation
-func (s GetAccountSettingsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetAccountSettings = "GetAccountSettings"
 
@@ -49,7 +25,7 @@ const opGetAccountSettings = "GetAccountSettings"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/GetAccountSettings
-func (c *Client) GetAccountSettingsRequest(input *GetAccountSettingsInput) GetAccountSettingsRequest {
+func (c *Client) GetAccountSettingsRequest(input *types.GetAccountSettingsInput) GetAccountSettingsRequest {
 	op := &aws.Operation{
 		Name:       opGetAccountSettings,
 		HTTPMethod: "POST",
@@ -57,10 +33,10 @@ func (c *Client) GetAccountSettingsRequest(input *GetAccountSettingsInput) GetAc
 	}
 
 	if input == nil {
-		input = &GetAccountSettingsInput{}
+		input = &types.GetAccountSettingsInput{}
 	}
 
-	req := c.newRequest(op, input, &GetAccountSettingsOutput{})
+	req := c.newRequest(op, input, &types.GetAccountSettingsOutput{})
 	return GetAccountSettingsRequest{Request: req, Input: input, Copy: c.GetAccountSettingsRequest}
 }
 
@@ -68,8 +44,8 @@ func (c *Client) GetAccountSettingsRequest(input *GetAccountSettingsInput) GetAc
 // GetAccountSettings API operation.
 type GetAccountSettingsRequest struct {
 	*aws.Request
-	Input *GetAccountSettingsInput
-	Copy  func(*GetAccountSettingsInput) GetAccountSettingsRequest
+	Input *types.GetAccountSettingsInput
+	Copy  func(*types.GetAccountSettingsInput) GetAccountSettingsRequest
 }
 
 // Send marshals and sends the GetAccountSettings API request.
@@ -81,7 +57,7 @@ func (r GetAccountSettingsRequest) Send(ctx context.Context) (*GetAccountSetting
 	}
 
 	resp := &GetAccountSettingsResponse{
-		GetAccountSettingsOutput: r.Request.Data.(*GetAccountSettingsOutput),
+		GetAccountSettingsOutput: r.Request.Data.(*types.GetAccountSettingsOutput),
 		response:                 &aws.Response{Request: r.Request},
 	}
 
@@ -91,7 +67,7 @@ func (r GetAccountSettingsRequest) Send(ctx context.Context) (*GetAccountSetting
 // GetAccountSettingsResponse is the response type for the
 // GetAccountSettings API operation.
 type GetAccountSettingsResponse struct {
-	*GetAccountSettingsOutput
+	*types.GetAccountSettingsOutput
 
 	response *aws.Response
 }

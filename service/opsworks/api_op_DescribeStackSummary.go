@@ -6,49 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/opsworks/types"
 )
-
-type DescribeStackSummaryInput struct {
-	_ struct{} `type:"structure"`
-
-	// The stack ID.
-	//
-	// StackId is a required field
-	StackId *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeStackSummaryInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeStackSummaryInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeStackSummaryInput"}
-
-	if s.StackId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("StackId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Contains the response to a DescribeStackSummary request.
-type DescribeStackSummaryOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A StackSummary object that contains the results.
-	StackSummary *StackSummary `type:"structure"`
-}
-
-// String returns the string representation
-func (s DescribeStackSummaryOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeStackSummary = "DescribeStackSummary"
 
@@ -71,7 +30,7 @@ const opDescribeStackSummary = "DescribeStackSummary"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DescribeStackSummary
-func (c *Client) DescribeStackSummaryRequest(input *DescribeStackSummaryInput) DescribeStackSummaryRequest {
+func (c *Client) DescribeStackSummaryRequest(input *types.DescribeStackSummaryInput) DescribeStackSummaryRequest {
 	op := &aws.Operation{
 		Name:       opDescribeStackSummary,
 		HTTPMethod: "POST",
@@ -79,10 +38,10 @@ func (c *Client) DescribeStackSummaryRequest(input *DescribeStackSummaryInput) D
 	}
 
 	if input == nil {
-		input = &DescribeStackSummaryInput{}
+		input = &types.DescribeStackSummaryInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeStackSummaryOutput{})
+	req := c.newRequest(op, input, &types.DescribeStackSummaryOutput{})
 	return DescribeStackSummaryRequest{Request: req, Input: input, Copy: c.DescribeStackSummaryRequest}
 }
 
@@ -90,8 +49,8 @@ func (c *Client) DescribeStackSummaryRequest(input *DescribeStackSummaryInput) D
 // DescribeStackSummary API operation.
 type DescribeStackSummaryRequest struct {
 	*aws.Request
-	Input *DescribeStackSummaryInput
-	Copy  func(*DescribeStackSummaryInput) DescribeStackSummaryRequest
+	Input *types.DescribeStackSummaryInput
+	Copy  func(*types.DescribeStackSummaryInput) DescribeStackSummaryRequest
 }
 
 // Send marshals and sends the DescribeStackSummary API request.
@@ -103,7 +62,7 @@ func (r DescribeStackSummaryRequest) Send(ctx context.Context) (*DescribeStackSu
 	}
 
 	resp := &DescribeStackSummaryResponse{
-		DescribeStackSummaryOutput: r.Request.Data.(*DescribeStackSummaryOutput),
+		DescribeStackSummaryOutput: r.Request.Data.(*types.DescribeStackSummaryOutput),
 		response:                   &aws.Response{Request: r.Request},
 	}
 
@@ -113,7 +72,7 @@ func (r DescribeStackSummaryRequest) Send(ctx context.Context) (*DescribeStackSu
 // DescribeStackSummaryResponse is the response type for the
 // DescribeStackSummary API operation.
 type DescribeStackSummaryResponse struct {
-	*DescribeStackSummaryOutput
+	*types.DescribeStackSummaryOutput
 
 	response *aws.Response
 }

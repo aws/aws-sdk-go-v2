@@ -6,119 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
 )
-
-type CreateAlgorithmInput struct {
-	_ struct{} `type:"structure"`
-
-	// A description of the algorithm.
-	AlgorithmDescription *string `type:"string"`
-
-	// The name of the algorithm.
-	//
-	// AlgorithmName is a required field
-	AlgorithmName *string `min:"1" type:"string" required:"true"`
-
-	// Whether to certify the algorithm so that it can be listed in AWS Marketplace.
-	CertifyForMarketplace *bool `type:"boolean"`
-
-	// Specifies details about inference jobs that the algorithm runs, including
-	// the following:
-	//
-	//    * The Amazon ECR paths of containers that contain the inference code and
-	//    model artifacts.
-	//
-	//    * The instance types that the algorithm supports for transform jobs and
-	//    real-time endpoints used for inference.
-	//
-	//    * The input and output content formats that the algorithm supports for
-	//    inference.
-	InferenceSpecification *InferenceSpecification `type:"structure"`
-
-	// Specifies details about training jobs run by this algorithm, including the
-	// following:
-	//
-	//    * The Amazon ECR path of the container and the version digest of the algorithm.
-	//
-	//    * The hyperparameters that the algorithm supports.
-	//
-	//    * The instance types that the algorithm supports for training.
-	//
-	//    * Whether the algorithm supports distributed training.
-	//
-	//    * The metrics that the algorithm emits to Amazon CloudWatch.
-	//
-	//    * Which metrics that the algorithm emits can be used as the objective
-	//    metric for hyperparameter tuning jobs.
-	//
-	//    * The input channels that the algorithm supports for training data. For
-	//    example, an algorithm might support train, validation, and test channels.
-	//
-	// TrainingSpecification is a required field
-	TrainingSpecification *TrainingSpecification `type:"structure" required:"true"`
-
-	// Specifies configurations for one or more training jobs and that Amazon SageMaker
-	// runs to test the algorithm's training code and, optionally, one or more batch
-	// transform jobs that Amazon SageMaker runs to test the algorithm's inference
-	// code.
-	ValidationSpecification *AlgorithmValidationSpecification `type:"structure"`
-}
-
-// String returns the string representation
-func (s CreateAlgorithmInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateAlgorithmInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateAlgorithmInput"}
-
-	if s.AlgorithmName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("AlgorithmName"))
-	}
-	if s.AlgorithmName != nil && len(*s.AlgorithmName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("AlgorithmName", 1))
-	}
-
-	if s.TrainingSpecification == nil {
-		invalidParams.Add(aws.NewErrParamRequired("TrainingSpecification"))
-	}
-	if s.InferenceSpecification != nil {
-		if err := s.InferenceSpecification.Validate(); err != nil {
-			invalidParams.AddNested("InferenceSpecification", err.(aws.ErrInvalidParams))
-		}
-	}
-	if s.TrainingSpecification != nil {
-		if err := s.TrainingSpecification.Validate(); err != nil {
-			invalidParams.AddNested("TrainingSpecification", err.(aws.ErrInvalidParams))
-		}
-	}
-	if s.ValidationSpecification != nil {
-		if err := s.ValidationSpecification.Validate(); err != nil {
-			invalidParams.AddNested("ValidationSpecification", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type CreateAlgorithmOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the new algorithm.
-	//
-	// AlgorithmArn is a required field
-	AlgorithmArn *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s CreateAlgorithmOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCreateAlgorithm = "CreateAlgorithm"
 
@@ -136,7 +25,7 @@ const opCreateAlgorithm = "CreateAlgorithm"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateAlgorithm
-func (c *Client) CreateAlgorithmRequest(input *CreateAlgorithmInput) CreateAlgorithmRequest {
+func (c *Client) CreateAlgorithmRequest(input *types.CreateAlgorithmInput) CreateAlgorithmRequest {
 	op := &aws.Operation{
 		Name:       opCreateAlgorithm,
 		HTTPMethod: "POST",
@@ -144,10 +33,10 @@ func (c *Client) CreateAlgorithmRequest(input *CreateAlgorithmInput) CreateAlgor
 	}
 
 	if input == nil {
-		input = &CreateAlgorithmInput{}
+		input = &types.CreateAlgorithmInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateAlgorithmOutput{})
+	req := c.newRequest(op, input, &types.CreateAlgorithmOutput{})
 	return CreateAlgorithmRequest{Request: req, Input: input, Copy: c.CreateAlgorithmRequest}
 }
 
@@ -155,8 +44,8 @@ func (c *Client) CreateAlgorithmRequest(input *CreateAlgorithmInput) CreateAlgor
 // CreateAlgorithm API operation.
 type CreateAlgorithmRequest struct {
 	*aws.Request
-	Input *CreateAlgorithmInput
-	Copy  func(*CreateAlgorithmInput) CreateAlgorithmRequest
+	Input *types.CreateAlgorithmInput
+	Copy  func(*types.CreateAlgorithmInput) CreateAlgorithmRequest
 }
 
 // Send marshals and sends the CreateAlgorithm API request.
@@ -168,7 +57,7 @@ func (r CreateAlgorithmRequest) Send(ctx context.Context) (*CreateAlgorithmRespo
 	}
 
 	resp := &CreateAlgorithmResponse{
-		CreateAlgorithmOutput: r.Request.Data.(*CreateAlgorithmOutput),
+		CreateAlgorithmOutput: r.Request.Data.(*types.CreateAlgorithmOutput),
 		response:              &aws.Response{Request: r.Request},
 	}
 
@@ -178,7 +67,7 @@ func (r CreateAlgorithmRequest) Send(ctx context.Context) (*CreateAlgorithmRespo
 // CreateAlgorithmResponse is the response type for the
 // CreateAlgorithm API operation.
 type CreateAlgorithmResponse struct {
-	*CreateAlgorithmOutput
+	*types.CreateAlgorithmOutput
 
 	response *aws.Response
 }

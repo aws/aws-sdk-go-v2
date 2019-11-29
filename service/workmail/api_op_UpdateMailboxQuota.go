@@ -6,70 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/workmail/types"
 )
-
-type UpdateMailboxQuotaInput struct {
-	_ struct{} `type:"structure"`
-
-	// The updated mailbox quota, in MB, for the specified user.
-	//
-	// MailboxQuota is a required field
-	MailboxQuota *int64 `min:"1" type:"integer" required:"true"`
-
-	// The identifier for the organization that contains the user for whom to update
-	// the mailbox quota.
-	//
-	// OrganizationId is a required field
-	OrganizationId *string `type:"string" required:"true"`
-
-	// The identifer for the user for whom to update the mailbox quota.
-	//
-	// UserId is a required field
-	UserId *string `min:"12" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s UpdateMailboxQuotaInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateMailboxQuotaInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateMailboxQuotaInput"}
-
-	if s.MailboxQuota == nil {
-		invalidParams.Add(aws.NewErrParamRequired("MailboxQuota"))
-	}
-	if s.MailboxQuota != nil && *s.MailboxQuota < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MailboxQuota", 1))
-	}
-
-	if s.OrganizationId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("OrganizationId"))
-	}
-
-	if s.UserId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("UserId"))
-	}
-	if s.UserId != nil && len(*s.UserId) < 12 {
-		invalidParams.Add(aws.NewErrParamMinLen("UserId", 12))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type UpdateMailboxQuotaOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s UpdateMailboxQuotaOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opUpdateMailboxQuota = "UpdateMailboxQuota"
 
@@ -86,7 +24,7 @@ const opUpdateMailboxQuota = "UpdateMailboxQuota"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/UpdateMailboxQuota
-func (c *Client) UpdateMailboxQuotaRequest(input *UpdateMailboxQuotaInput) UpdateMailboxQuotaRequest {
+func (c *Client) UpdateMailboxQuotaRequest(input *types.UpdateMailboxQuotaInput) UpdateMailboxQuotaRequest {
 	op := &aws.Operation{
 		Name:       opUpdateMailboxQuota,
 		HTTPMethod: "POST",
@@ -94,10 +32,10 @@ func (c *Client) UpdateMailboxQuotaRequest(input *UpdateMailboxQuotaInput) Updat
 	}
 
 	if input == nil {
-		input = &UpdateMailboxQuotaInput{}
+		input = &types.UpdateMailboxQuotaInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateMailboxQuotaOutput{})
+	req := c.newRequest(op, input, &types.UpdateMailboxQuotaOutput{})
 	return UpdateMailboxQuotaRequest{Request: req, Input: input, Copy: c.UpdateMailboxQuotaRequest}
 }
 
@@ -105,8 +43,8 @@ func (c *Client) UpdateMailboxQuotaRequest(input *UpdateMailboxQuotaInput) Updat
 // UpdateMailboxQuota API operation.
 type UpdateMailboxQuotaRequest struct {
 	*aws.Request
-	Input *UpdateMailboxQuotaInput
-	Copy  func(*UpdateMailboxQuotaInput) UpdateMailboxQuotaRequest
+	Input *types.UpdateMailboxQuotaInput
+	Copy  func(*types.UpdateMailboxQuotaInput) UpdateMailboxQuotaRequest
 }
 
 // Send marshals and sends the UpdateMailboxQuota API request.
@@ -118,7 +56,7 @@ func (r UpdateMailboxQuotaRequest) Send(ctx context.Context) (*UpdateMailboxQuot
 	}
 
 	resp := &UpdateMailboxQuotaResponse{
-		UpdateMailboxQuotaOutput: r.Request.Data.(*UpdateMailboxQuotaOutput),
+		UpdateMailboxQuotaOutput: r.Request.Data.(*types.UpdateMailboxQuotaOutput),
 		response:                 &aws.Response{Request: r.Request},
 	}
 
@@ -128,7 +66,7 @@ func (r UpdateMailboxQuotaRequest) Send(ctx context.Context) (*UpdateMailboxQuot
 // UpdateMailboxQuotaResponse is the response type for the
 // UpdateMailboxQuota API operation.
 type UpdateMailboxQuotaResponse struct {
-	*UpdateMailboxQuotaOutput
+	*types.UpdateMailboxQuotaOutput
 
 	response *aws.Response
 }

@@ -6,62 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/opsworkscm/types"
 )
-
-type DescribeServersInput struct {
-	_ struct{} `type:"structure"`
-
-	// This is not currently implemented for DescribeServers requests.
-	MaxResults *int64 `min:"1" type:"integer"`
-
-	// This is not currently implemented for DescribeServers requests.
-	NextToken *string `type:"string"`
-
-	// Describes the server with the specified ServerName.
-	ServerName *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeServersInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeServersInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeServersInput"}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-	if s.ServerName != nil && len(*s.ServerName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ServerName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribeServersOutput struct {
-	_ struct{} `type:"structure"`
-
-	// This is not currently implemented for DescribeServers requests.
-	NextToken *string `type:"string"`
-
-	// Contains the response to a DescribeServers request.
-	//
-	// For Puppet Server: DescribeServersResponse$Servers$EngineAttributes contains
-	// PUPPET_API_CA_CERT. This is the PEM-encoded CA certificate that is used by
-	// the Puppet API over TCP port number 8140. The CA certificate is also used
-	// to sign node certificates.
-	Servers []Server `type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeServersOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeServers = "DescribeServers"
 
@@ -85,7 +31,7 @@ const opDescribeServers = "DescribeServers"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/DescribeServers
-func (c *Client) DescribeServersRequest(input *DescribeServersInput) DescribeServersRequest {
+func (c *Client) DescribeServersRequest(input *types.DescribeServersInput) DescribeServersRequest {
 	op := &aws.Operation{
 		Name:       opDescribeServers,
 		HTTPMethod: "POST",
@@ -93,10 +39,10 @@ func (c *Client) DescribeServersRequest(input *DescribeServersInput) DescribeSer
 	}
 
 	if input == nil {
-		input = &DescribeServersInput{}
+		input = &types.DescribeServersInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeServersOutput{})
+	req := c.newRequest(op, input, &types.DescribeServersOutput{})
 	return DescribeServersRequest{Request: req, Input: input, Copy: c.DescribeServersRequest}
 }
 
@@ -104,8 +50,8 @@ func (c *Client) DescribeServersRequest(input *DescribeServersInput) DescribeSer
 // DescribeServers API operation.
 type DescribeServersRequest struct {
 	*aws.Request
-	Input *DescribeServersInput
-	Copy  func(*DescribeServersInput) DescribeServersRequest
+	Input *types.DescribeServersInput
+	Copy  func(*types.DescribeServersInput) DescribeServersRequest
 }
 
 // Send marshals and sends the DescribeServers API request.
@@ -117,7 +63,7 @@ func (r DescribeServersRequest) Send(ctx context.Context) (*DescribeServersRespo
 	}
 
 	resp := &DescribeServersResponse{
-		DescribeServersOutput: r.Request.Data.(*DescribeServersOutput),
+		DescribeServersOutput: r.Request.Data.(*types.DescribeServersOutput),
 		response:              &aws.Response{Request: r.Request},
 	}
 
@@ -127,7 +73,7 @@ func (r DescribeServersRequest) Send(ctx context.Context) (*DescribeServersRespo
 // DescribeServersResponse is the response type for the
 // DescribeServers API operation.
 type DescribeServersResponse struct {
-	*DescribeServersOutput
+	*types.DescribeServersOutput
 
 	response *aws.Response
 }

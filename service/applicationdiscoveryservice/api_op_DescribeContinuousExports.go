@@ -6,55 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/applicationdiscoveryservice/types"
 )
-
-type DescribeContinuousExportsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The unique IDs assigned to the exports.
-	ExportIds []string `locationName:"exportIds" type:"list"`
-
-	// A number between 1 and 100 specifying the maximum number of continuous export
-	// descriptions returned.
-	MaxResults *int64 `locationName:"maxResults" min:"1" type:"integer"`
-
-	// The token from the previous call to DescribeExportTasks.
-	NextToken *string `locationName:"nextToken" type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeContinuousExportsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeContinuousExportsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeContinuousExportsInput"}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribeContinuousExportsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A list of continuous export descriptions.
-	Descriptions []ContinuousExportDescription `locationName:"descriptions" type:"list"`
-
-	// The token from the previous call to DescribeExportTasks.
-	NextToken *string `locationName:"nextToken" type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeContinuousExportsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeContinuousExports = "DescribeContinuousExports"
 
@@ -73,7 +26,7 @@ const opDescribeContinuousExports = "DescribeContinuousExports"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/discovery-2015-11-01/DescribeContinuousExports
-func (c *Client) DescribeContinuousExportsRequest(input *DescribeContinuousExportsInput) DescribeContinuousExportsRequest {
+func (c *Client) DescribeContinuousExportsRequest(input *types.DescribeContinuousExportsInput) DescribeContinuousExportsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeContinuousExports,
 		HTTPMethod: "POST",
@@ -87,10 +40,10 @@ func (c *Client) DescribeContinuousExportsRequest(input *DescribeContinuousExpor
 	}
 
 	if input == nil {
-		input = &DescribeContinuousExportsInput{}
+		input = &types.DescribeContinuousExportsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeContinuousExportsOutput{})
+	req := c.newRequest(op, input, &types.DescribeContinuousExportsOutput{})
 	return DescribeContinuousExportsRequest{Request: req, Input: input, Copy: c.DescribeContinuousExportsRequest}
 }
 
@@ -98,8 +51,8 @@ func (c *Client) DescribeContinuousExportsRequest(input *DescribeContinuousExpor
 // DescribeContinuousExports API operation.
 type DescribeContinuousExportsRequest struct {
 	*aws.Request
-	Input *DescribeContinuousExportsInput
-	Copy  func(*DescribeContinuousExportsInput) DescribeContinuousExportsRequest
+	Input *types.DescribeContinuousExportsInput
+	Copy  func(*types.DescribeContinuousExportsInput) DescribeContinuousExportsRequest
 }
 
 // Send marshals and sends the DescribeContinuousExports API request.
@@ -111,7 +64,7 @@ func (r DescribeContinuousExportsRequest) Send(ctx context.Context) (*DescribeCo
 	}
 
 	resp := &DescribeContinuousExportsResponse{
-		DescribeContinuousExportsOutput: r.Request.Data.(*DescribeContinuousExportsOutput),
+		DescribeContinuousExportsOutput: r.Request.Data.(*types.DescribeContinuousExportsOutput),
 		response:                        &aws.Response{Request: r.Request},
 	}
 
@@ -141,7 +94,7 @@ func NewDescribeContinuousExportsPaginator(req DescribeContinuousExportsRequest)
 	return DescribeContinuousExportsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *DescribeContinuousExportsInput
+				var inCpy *types.DescribeContinuousExportsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -161,14 +114,14 @@ type DescribeContinuousExportsPaginator struct {
 	aws.Pager
 }
 
-func (p *DescribeContinuousExportsPaginator) CurrentPage() *DescribeContinuousExportsOutput {
-	return p.Pager.CurrentPage().(*DescribeContinuousExportsOutput)
+func (p *DescribeContinuousExportsPaginator) CurrentPage() *types.DescribeContinuousExportsOutput {
+	return p.Pager.CurrentPage().(*types.DescribeContinuousExportsOutput)
 }
 
 // DescribeContinuousExportsResponse is the response type for the
 // DescribeContinuousExports API operation.
 type DescribeContinuousExportsResponse struct {
-	*DescribeContinuousExportsOutput
+	*types.DescribeContinuousExportsOutput
 
 	response *aws.Response
 }

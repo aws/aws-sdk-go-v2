@@ -6,95 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/iot/types"
 )
-
-type ListSecurityProfilesInput struct {
-	_ struct{} `type:"structure"`
-
-	// The maximum number of results to return at one time.
-	MaxResults *int64 `location:"querystring" locationName:"maxResults" min:"1" type:"integer"`
-
-	// The token for the next set of results.
-	NextToken *string `location:"querystring" locationName:"nextToken" type:"string"`
-}
-
-// String returns the string representation
-func (s ListSecurityProfilesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListSecurityProfilesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListSecurityProfilesInput"}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListSecurityProfilesInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.MaxResults != nil {
-		v := *s.MaxResults
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "maxResults", protocol.Int64Value(v), metadata)
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type ListSecurityProfilesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A token that can be used to retrieve the next set of results, or null if
-	// there are no additional results.
-	NextToken *string `locationName:"nextToken" type:"string"`
-
-	// A list of security profile identifiers (names and ARNs).
-	SecurityProfileIdentifiers []SecurityProfileIdentifier `locationName:"securityProfileIdentifiers" type:"list"`
-}
-
-// String returns the string representation
-func (s ListSecurityProfilesOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListSecurityProfilesOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.SecurityProfileIdentifiers != nil {
-		v := s.SecurityProfileIdentifiers
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "securityProfileIdentifiers", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	return nil
-}
 
 const opListSecurityProfiles = "ListSecurityProfiles"
 
@@ -111,7 +24,7 @@ const opListSecurityProfiles = "ListSecurityProfiles"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) ListSecurityProfilesRequest(input *ListSecurityProfilesInput) ListSecurityProfilesRequest {
+func (c *Client) ListSecurityProfilesRequest(input *types.ListSecurityProfilesInput) ListSecurityProfilesRequest {
 	op := &aws.Operation{
 		Name:       opListSecurityProfiles,
 		HTTPMethod: "GET",
@@ -119,10 +32,10 @@ func (c *Client) ListSecurityProfilesRequest(input *ListSecurityProfilesInput) L
 	}
 
 	if input == nil {
-		input = &ListSecurityProfilesInput{}
+		input = &types.ListSecurityProfilesInput{}
 	}
 
-	req := c.newRequest(op, input, &ListSecurityProfilesOutput{})
+	req := c.newRequest(op, input, &types.ListSecurityProfilesOutput{})
 	return ListSecurityProfilesRequest{Request: req, Input: input, Copy: c.ListSecurityProfilesRequest}
 }
 
@@ -130,8 +43,8 @@ func (c *Client) ListSecurityProfilesRequest(input *ListSecurityProfilesInput) L
 // ListSecurityProfiles API operation.
 type ListSecurityProfilesRequest struct {
 	*aws.Request
-	Input *ListSecurityProfilesInput
-	Copy  func(*ListSecurityProfilesInput) ListSecurityProfilesRequest
+	Input *types.ListSecurityProfilesInput
+	Copy  func(*types.ListSecurityProfilesInput) ListSecurityProfilesRequest
 }
 
 // Send marshals and sends the ListSecurityProfiles API request.
@@ -143,7 +56,7 @@ func (r ListSecurityProfilesRequest) Send(ctx context.Context) (*ListSecurityPro
 	}
 
 	resp := &ListSecurityProfilesResponse{
-		ListSecurityProfilesOutput: r.Request.Data.(*ListSecurityProfilesOutput),
+		ListSecurityProfilesOutput: r.Request.Data.(*types.ListSecurityProfilesOutput),
 		response:                   &aws.Response{Request: r.Request},
 	}
 
@@ -153,7 +66,7 @@ func (r ListSecurityProfilesRequest) Send(ctx context.Context) (*ListSecurityPro
 // ListSecurityProfilesResponse is the response type for the
 // ListSecurityProfiles API operation.
 type ListSecurityProfilesResponse struct {
-	*ListSecurityProfilesOutput
+	*types.ListSecurityProfilesOutput
 
 	response *aws.Response
 }

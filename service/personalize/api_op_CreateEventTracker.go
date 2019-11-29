@@ -6,66 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/personalize/types"
 )
-
-type CreateEventTrackerInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the dataset group that receives the event
-	// data.
-	//
-	// DatasetGroupArn is a required field
-	DatasetGroupArn *string `locationName:"datasetGroupArn" type:"string" required:"true"`
-
-	// The name for the event tracker.
-	//
-	// Name is a required field
-	Name *string `locationName:"name" min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s CreateEventTrackerInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateEventTrackerInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateEventTrackerInput"}
-
-	if s.DatasetGroupArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DatasetGroupArn"))
-	}
-
-	if s.Name == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Name"))
-	}
-	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type CreateEventTrackerOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The ARN of the event tracker.
-	EventTrackerArn *string `locationName:"eventTrackerArn" type:"string"`
-
-	// The ID of the event tracker. Include this ID in requests to the PutEvents
-	// (https://docs.aws.amazon.com/personalize/latest/dg/API_UBS_PutEvents.html)
-	// API.
-	TrackingId *string `locationName:"trackingId" type:"string"`
-}
-
-// String returns the string representation
-func (s CreateEventTrackerOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCreateEventTracker = "CreateEventTracker"
 
@@ -114,7 +56,7 @@ const opCreateEventTracker = "CreateEventTracker"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/CreateEventTracker
-func (c *Client) CreateEventTrackerRequest(input *CreateEventTrackerInput) CreateEventTrackerRequest {
+func (c *Client) CreateEventTrackerRequest(input *types.CreateEventTrackerInput) CreateEventTrackerRequest {
 	op := &aws.Operation{
 		Name:       opCreateEventTracker,
 		HTTPMethod: "POST",
@@ -122,10 +64,10 @@ func (c *Client) CreateEventTrackerRequest(input *CreateEventTrackerInput) Creat
 	}
 
 	if input == nil {
-		input = &CreateEventTrackerInput{}
+		input = &types.CreateEventTrackerInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateEventTrackerOutput{})
+	req := c.newRequest(op, input, &types.CreateEventTrackerOutput{})
 	return CreateEventTrackerRequest{Request: req, Input: input, Copy: c.CreateEventTrackerRequest}
 }
 
@@ -133,8 +75,8 @@ func (c *Client) CreateEventTrackerRequest(input *CreateEventTrackerInput) Creat
 // CreateEventTracker API operation.
 type CreateEventTrackerRequest struct {
 	*aws.Request
-	Input *CreateEventTrackerInput
-	Copy  func(*CreateEventTrackerInput) CreateEventTrackerRequest
+	Input *types.CreateEventTrackerInput
+	Copy  func(*types.CreateEventTrackerInput) CreateEventTrackerRequest
 }
 
 // Send marshals and sends the CreateEventTracker API request.
@@ -146,7 +88,7 @@ func (r CreateEventTrackerRequest) Send(ctx context.Context) (*CreateEventTracke
 	}
 
 	resp := &CreateEventTrackerResponse{
-		CreateEventTrackerOutput: r.Request.Data.(*CreateEventTrackerOutput),
+		CreateEventTrackerOutput: r.Request.Data.(*types.CreateEventTrackerOutput),
 		response:                 &aws.Response{Request: r.Request},
 	}
 
@@ -156,7 +98,7 @@ func (r CreateEventTrackerRequest) Send(ctx context.Context) (*CreateEventTracke
 // CreateEventTrackerResponse is the response type for the
 // CreateEventTracker API operation.
 type CreateEventTrackerResponse struct {
-	*CreateEventTrackerOutput
+	*types.CreateEventTrackerOutput
 
 	response *aws.Response
 }

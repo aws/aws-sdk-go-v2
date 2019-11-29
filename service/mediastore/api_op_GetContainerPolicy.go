@@ -6,53 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/mediastore/types"
 )
-
-type GetContainerPolicyInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the container.
-	//
-	// ContainerName is a required field
-	ContainerName *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetContainerPolicyInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetContainerPolicyInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetContainerPolicyInput"}
-
-	if s.ContainerName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ContainerName"))
-	}
-	if s.ContainerName != nil && len(*s.ContainerName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ContainerName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type GetContainerPolicyOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The contents of the access policy.
-	//
-	// Policy is a required field
-	Policy *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetContainerPolicyOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetContainerPolicy = "GetContainerPolicy"
 
@@ -71,7 +26,7 @@ const opGetContainerPolicy = "GetContainerPolicy"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mediastore-2017-09-01/GetContainerPolicy
-func (c *Client) GetContainerPolicyRequest(input *GetContainerPolicyInput) GetContainerPolicyRequest {
+func (c *Client) GetContainerPolicyRequest(input *types.GetContainerPolicyInput) GetContainerPolicyRequest {
 	op := &aws.Operation{
 		Name:       opGetContainerPolicy,
 		HTTPMethod: "POST",
@@ -79,10 +34,10 @@ func (c *Client) GetContainerPolicyRequest(input *GetContainerPolicyInput) GetCo
 	}
 
 	if input == nil {
-		input = &GetContainerPolicyInput{}
+		input = &types.GetContainerPolicyInput{}
 	}
 
-	req := c.newRequest(op, input, &GetContainerPolicyOutput{})
+	req := c.newRequest(op, input, &types.GetContainerPolicyOutput{})
 	return GetContainerPolicyRequest{Request: req, Input: input, Copy: c.GetContainerPolicyRequest}
 }
 
@@ -90,8 +45,8 @@ func (c *Client) GetContainerPolicyRequest(input *GetContainerPolicyInput) GetCo
 // GetContainerPolicy API operation.
 type GetContainerPolicyRequest struct {
 	*aws.Request
-	Input *GetContainerPolicyInput
-	Copy  func(*GetContainerPolicyInput) GetContainerPolicyRequest
+	Input *types.GetContainerPolicyInput
+	Copy  func(*types.GetContainerPolicyInput) GetContainerPolicyRequest
 }
 
 // Send marshals and sends the GetContainerPolicy API request.
@@ -103,7 +58,7 @@ func (r GetContainerPolicyRequest) Send(ctx context.Context) (*GetContainerPolic
 	}
 
 	resp := &GetContainerPolicyResponse{
-		GetContainerPolicyOutput: r.Request.Data.(*GetContainerPolicyOutput),
+		GetContainerPolicyOutput: r.Request.Data.(*types.GetContainerPolicyOutput),
 		response:                 &aws.Response{Request: r.Request},
 	}
 
@@ -113,7 +68,7 @@ func (r GetContainerPolicyRequest) Send(ctx context.Context) (*GetContainerPolic
 // GetContainerPolicyResponse is the response type for the
 // GetContainerPolicy API operation.
 type GetContainerPolicyResponse struct {
-	*GetContainerPolicyOutput
+	*types.GetContainerPolicyOutput
 
 	response *aws.Response
 }

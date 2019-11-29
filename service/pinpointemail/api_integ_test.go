@@ -13,6 +13,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws/awserr"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting/integration"
 	"github.com/aws/aws-sdk-go-v2/service/pinpointemail"
+	"github.com/aws/aws-sdk-go-v2/service/pinpointemail/types"
 )
 
 var _ aws.Config
@@ -24,7 +25,7 @@ func TestInteg_00_ListConfigurationSets(t *testing.T) {
 
 	cfg := integration.ConfigWithDefaultRegion("us-west-2")
 	svc := pinpointemail.New(cfg)
-	params := &pinpointemail.ListConfigurationSetsInput{}
+	params := &types.ListConfigurationSetsInput{}
 
 	req := svc.ListConfigurationSetsRequest(params)
 
@@ -39,7 +40,7 @@ func TestInteg_01_PutConfigurationSetTrackingOptions(t *testing.T) {
 
 	cfg := integration.ConfigWithDefaultRegion("us-west-2")
 	svc := pinpointemail.New(cfg)
-	params := &pinpointemail.PutConfigurationSetTrackingOptionsInput{
+	params := &types.PutConfigurationSetTrackingOptionsInput{
 		ConfigurationSetName: aws.String("config-set-name-not-exists"),
 	}
 

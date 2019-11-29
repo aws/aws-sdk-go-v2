@@ -4,64 +4,10 @@ package cloudtrail
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/cloudtrail/types"
 )
-
-// Specifies the tags to remove from a trail.
-type RemoveTagsInput struct {
-	_ struct{} `type:"structure"`
-
-	// Specifies the ARN of the trail from which tags should be removed. The format
-	// of a trail ARN is:
-	//
-	// arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail
-	//
-	// ResourceId is a required field
-	ResourceId *string `type:"string" required:"true"`
-
-	// Specifies a list of tags to be removed.
-	TagsList []Tag `type:"list"`
-}
-
-// String returns the string representation
-func (s RemoveTagsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *RemoveTagsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "RemoveTagsInput"}
-
-	if s.ResourceId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ResourceId"))
-	}
-	if s.TagsList != nil {
-		for i, v := range s.TagsList {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "TagsList", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Returns the objects or data listed below if successful. Otherwise, returns
-// an error.
-type RemoveTagsOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s RemoveTagsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opRemoveTags = "RemoveTags"
 
@@ -78,7 +24,7 @@ const opRemoveTags = "RemoveTags"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/RemoveTags
-func (c *Client) RemoveTagsRequest(input *RemoveTagsInput) RemoveTagsRequest {
+func (c *Client) RemoveTagsRequest(input *types.RemoveTagsInput) RemoveTagsRequest {
 	op := &aws.Operation{
 		Name:       opRemoveTags,
 		HTTPMethod: "POST",
@@ -86,10 +32,10 @@ func (c *Client) RemoveTagsRequest(input *RemoveTagsInput) RemoveTagsRequest {
 	}
 
 	if input == nil {
-		input = &RemoveTagsInput{}
+		input = &types.RemoveTagsInput{}
 	}
 
-	req := c.newRequest(op, input, &RemoveTagsOutput{})
+	req := c.newRequest(op, input, &types.RemoveTagsOutput{})
 	return RemoveTagsRequest{Request: req, Input: input, Copy: c.RemoveTagsRequest}
 }
 
@@ -97,8 +43,8 @@ func (c *Client) RemoveTagsRequest(input *RemoveTagsInput) RemoveTagsRequest {
 // RemoveTags API operation.
 type RemoveTagsRequest struct {
 	*aws.Request
-	Input *RemoveTagsInput
-	Copy  func(*RemoveTagsInput) RemoveTagsRequest
+	Input *types.RemoveTagsInput
+	Copy  func(*types.RemoveTagsInput) RemoveTagsRequest
 }
 
 // Send marshals and sends the RemoveTags API request.
@@ -110,7 +56,7 @@ func (r RemoveTagsRequest) Send(ctx context.Context) (*RemoveTagsResponse, error
 	}
 
 	resp := &RemoveTagsResponse{
-		RemoveTagsOutput: r.Request.Data.(*RemoveTagsOutput),
+		RemoveTagsOutput: r.Request.Data.(*types.RemoveTagsOutput),
 		response:         &aws.Response{Request: r.Request},
 	}
 
@@ -120,7 +66,7 @@ func (r RemoveTagsRequest) Send(ctx context.Context) (*RemoveTagsResponse, error
 // RemoveTagsResponse is the response type for the
 // RemoveTags API operation.
 type RemoveTagsResponse struct {
-	*RemoveTagsOutput
+	*types.RemoveTagsOutput
 
 	response *aws.Response
 }

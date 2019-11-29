@@ -6,78 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/codepipeline/types"
 )
-
-type ListActionExecutionsInput struct {
-	_ struct{} `type:"structure"`
-
-	// Input information used to filter action execution history.
-	Filter *ActionExecutionFilter `locationName:"filter" type:"structure"`
-
-	// The maximum number of results to return in a single call. To retrieve the
-	// remaining results, make another call with the returned nextToken value. Action
-	// execution history is retained for up to 12 months, based on action execution
-	// start times. Default value is 100.
-	//
-	// Detailed execution history is available for executions run on or after February
-	// 21, 2019.
-	MaxResults *int64 `locationName:"maxResults" min:"1" type:"integer"`
-
-	// The token that was returned from the previous ListActionExecutions call,
-	// which can be used to return the next set of action executions in the list.
-	NextToken *string `locationName:"nextToken" min:"1" type:"string"`
-
-	// The name of the pipeline for which you want to list action execution history.
-	//
-	// PipelineName is a required field
-	PipelineName *string `locationName:"pipelineName" min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s ListActionExecutionsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListActionExecutionsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListActionExecutionsInput"}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-	if s.NextToken != nil && len(*s.NextToken) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
-	}
-
-	if s.PipelineName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("PipelineName"))
-	}
-	if s.PipelineName != nil && len(*s.PipelineName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("PipelineName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ListActionExecutionsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The details for a list of recent executions, such as action execution ID.
-	ActionExecutionDetails []ActionExecutionDetail `locationName:"actionExecutionDetails" type:"list"`
-
-	// If the amount of returned information is significantly large, an identifier
-	// is also returned and can be used in a subsequent ListActionExecutions call
-	// to return the next set of action executions in the list.
-	NextToken *string `locationName:"nextToken" min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s ListActionExecutionsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListActionExecutions = "ListActionExecutions"
 
@@ -94,7 +24,7 @@ const opListActionExecutions = "ListActionExecutions"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/ListActionExecutions
-func (c *Client) ListActionExecutionsRequest(input *ListActionExecutionsInput) ListActionExecutionsRequest {
+func (c *Client) ListActionExecutionsRequest(input *types.ListActionExecutionsInput) ListActionExecutionsRequest {
 	op := &aws.Operation{
 		Name:       opListActionExecutions,
 		HTTPMethod: "POST",
@@ -108,10 +38,10 @@ func (c *Client) ListActionExecutionsRequest(input *ListActionExecutionsInput) L
 	}
 
 	if input == nil {
-		input = &ListActionExecutionsInput{}
+		input = &types.ListActionExecutionsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListActionExecutionsOutput{})
+	req := c.newRequest(op, input, &types.ListActionExecutionsOutput{})
 	return ListActionExecutionsRequest{Request: req, Input: input, Copy: c.ListActionExecutionsRequest}
 }
 
@@ -119,8 +49,8 @@ func (c *Client) ListActionExecutionsRequest(input *ListActionExecutionsInput) L
 // ListActionExecutions API operation.
 type ListActionExecutionsRequest struct {
 	*aws.Request
-	Input *ListActionExecutionsInput
-	Copy  func(*ListActionExecutionsInput) ListActionExecutionsRequest
+	Input *types.ListActionExecutionsInput
+	Copy  func(*types.ListActionExecutionsInput) ListActionExecutionsRequest
 }
 
 // Send marshals and sends the ListActionExecutions API request.
@@ -132,7 +62,7 @@ func (r ListActionExecutionsRequest) Send(ctx context.Context) (*ListActionExecu
 	}
 
 	resp := &ListActionExecutionsResponse{
-		ListActionExecutionsOutput: r.Request.Data.(*ListActionExecutionsOutput),
+		ListActionExecutionsOutput: r.Request.Data.(*types.ListActionExecutionsOutput),
 		response:                   &aws.Response{Request: r.Request},
 	}
 
@@ -162,7 +92,7 @@ func NewListActionExecutionsPaginator(req ListActionExecutionsRequest) ListActio
 	return ListActionExecutionsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListActionExecutionsInput
+				var inCpy *types.ListActionExecutionsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -182,14 +112,14 @@ type ListActionExecutionsPaginator struct {
 	aws.Pager
 }
 
-func (p *ListActionExecutionsPaginator) CurrentPage() *ListActionExecutionsOutput {
-	return p.Pager.CurrentPage().(*ListActionExecutionsOutput)
+func (p *ListActionExecutionsPaginator) CurrentPage() *types.ListActionExecutionsOutput {
+	return p.Pager.CurrentPage().(*types.ListActionExecutionsOutput)
 }
 
 // ListActionExecutionsResponse is the response type for the
 // ListActionExecutions API operation.
 type ListActionExecutionsResponse struct {
-	*ListActionExecutionsOutput
+	*types.ListActionExecutionsOutput
 
 	response *aws.Response
 }

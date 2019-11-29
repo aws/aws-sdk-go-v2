@@ -6,94 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/worklink/types"
 )
-
-type UpdateDomainMetadataInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name to display.
-	DisplayName *string `type:"string"`
-
-	// The name of the domain.
-	//
-	// DomainName is a required field
-	DomainName *string `min:"1" type:"string" required:"true"`
-
-	// The ARN of the fleet.
-	//
-	// FleetArn is a required field
-	FleetArn *string `min:"20" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s UpdateDomainMetadataInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateDomainMetadataInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateDomainMetadataInput"}
-
-	if s.DomainName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DomainName"))
-	}
-	if s.DomainName != nil && len(*s.DomainName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("DomainName", 1))
-	}
-
-	if s.FleetArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("FleetArn"))
-	}
-	if s.FleetArn != nil && len(*s.FleetArn) < 20 {
-		invalidParams.Add(aws.NewErrParamMinLen("FleetArn", 20))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s UpdateDomainMetadataInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.DisplayName != nil {
-		v := *s.DisplayName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "DisplayName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.DomainName != nil {
-		v := *s.DomainName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "DomainName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.FleetArn != nil {
-		v := *s.FleetArn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "FleetArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type UpdateDomainMetadataOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s UpdateDomainMetadataOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s UpdateDomainMetadataOutput) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
 
 const opUpdateDomainMetadata = "UpdateDomainMetadata"
 
@@ -110,7 +24,7 @@ const opUpdateDomainMetadata = "UpdateDomainMetadata"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/worklink-2018-09-25/UpdateDomainMetadata
-func (c *Client) UpdateDomainMetadataRequest(input *UpdateDomainMetadataInput) UpdateDomainMetadataRequest {
+func (c *Client) UpdateDomainMetadataRequest(input *types.UpdateDomainMetadataInput) UpdateDomainMetadataRequest {
 	op := &aws.Operation{
 		Name:       opUpdateDomainMetadata,
 		HTTPMethod: "POST",
@@ -118,10 +32,10 @@ func (c *Client) UpdateDomainMetadataRequest(input *UpdateDomainMetadataInput) U
 	}
 
 	if input == nil {
-		input = &UpdateDomainMetadataInput{}
+		input = &types.UpdateDomainMetadataInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateDomainMetadataOutput{})
+	req := c.newRequest(op, input, &types.UpdateDomainMetadataOutput{})
 	return UpdateDomainMetadataRequest{Request: req, Input: input, Copy: c.UpdateDomainMetadataRequest}
 }
 
@@ -129,8 +43,8 @@ func (c *Client) UpdateDomainMetadataRequest(input *UpdateDomainMetadataInput) U
 // UpdateDomainMetadata API operation.
 type UpdateDomainMetadataRequest struct {
 	*aws.Request
-	Input *UpdateDomainMetadataInput
-	Copy  func(*UpdateDomainMetadataInput) UpdateDomainMetadataRequest
+	Input *types.UpdateDomainMetadataInput
+	Copy  func(*types.UpdateDomainMetadataInput) UpdateDomainMetadataRequest
 }
 
 // Send marshals and sends the UpdateDomainMetadata API request.
@@ -142,7 +56,7 @@ func (r UpdateDomainMetadataRequest) Send(ctx context.Context) (*UpdateDomainMet
 	}
 
 	resp := &UpdateDomainMetadataResponse{
-		UpdateDomainMetadataOutput: r.Request.Data.(*UpdateDomainMetadataOutput),
+		UpdateDomainMetadataOutput: r.Request.Data.(*types.UpdateDomainMetadataOutput),
 		response:                   &aws.Response{Request: r.Request},
 	}
 
@@ -152,7 +66,7 @@ func (r UpdateDomainMetadataRequest) Send(ctx context.Context) (*UpdateDomainMet
 // UpdateDomainMetadataResponse is the response type for the
 // UpdateDomainMetadata API operation.
 type UpdateDomainMetadataResponse struct {
-	*UpdateDomainMetadataOutput
+	*types.UpdateDomainMetadataOutput
 
 	response *aws.Response
 }

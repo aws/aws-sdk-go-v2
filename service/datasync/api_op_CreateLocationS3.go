@@ -4,95 +4,10 @@ package datasync
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/datasync/types"
 )
-
-// CreateLocationS3Request
-type CreateLocationS3Input struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the Amazon S3 bucket.
-	//
-	// S3BucketArn is a required field
-	S3BucketArn *string `type:"string" required:"true"`
-
-	// The Amazon Resource Name (ARN) of the AWS Identity and Access Management
-	// (IAM) role that is used to access an Amazon S3 bucket.
-	//
-	// For detailed information about using such a role, see Creating a Location
-	// for Amazon S3 in the AWS DataSync User Guide.
-	//
-	// S3Config is a required field
-	S3Config *S3Config `type:"structure" required:"true"`
-
-	// The Amazon S3 storage class that you want to store your files in when this
-	// location is used as a task destination. For more information about S3 storage
-	// classes, see Amazon S3 Storage Classes (https://aws.amazon.com/s3/storage-classes/)
-	// in the Amazon Simple Storage Service Developer Guide. Some storage classes
-	// have behaviors that can affect your S3 storage cost. For detailed information,
-	// see using-storage-classes.
-	S3StorageClass S3StorageClass `type:"string" enum:"true"`
-
-	// A subdirectory in the Amazon S3 bucket. This subdirectory in Amazon S3 is
-	// used to read data from the S3 source location or write data to the S3 destination.
-	Subdirectory *string `type:"string"`
-
-	// The key-value pair that represents the tag that you want to add to the location.
-	// The value can be an empty string. We recommend using tags to name your resources.
-	Tags []TagListEntry `type:"list"`
-}
-
-// String returns the string representation
-func (s CreateLocationS3Input) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateLocationS3Input) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateLocationS3Input"}
-
-	if s.S3BucketArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("S3BucketArn"))
-	}
-
-	if s.S3Config == nil {
-		invalidParams.Add(aws.NewErrParamRequired("S3Config"))
-	}
-	if s.S3Config != nil {
-		if err := s.S3Config.Validate(); err != nil {
-			invalidParams.AddNested("S3Config", err.(aws.ErrInvalidParams))
-		}
-	}
-	if s.Tags != nil {
-		for i, v := range s.Tags {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// CreateLocationS3Response
-type CreateLocationS3Output struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the source Amazon S3 bucket location that
-	// is created.
-	LocationArn *string `type:"string"`
-}
-
-// String returns the string representation
-func (s CreateLocationS3Output) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCreateLocationS3 = "CreateLocationS3"
 
@@ -118,7 +33,7 @@ const opCreateLocationS3 = "CreateLocationS3"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/CreateLocationS3
-func (c *Client) CreateLocationS3Request(input *CreateLocationS3Input) CreateLocationS3Request {
+func (c *Client) CreateLocationS3Request(input *types.CreateLocationS3Input) CreateLocationS3Request {
 	op := &aws.Operation{
 		Name:       opCreateLocationS3,
 		HTTPMethod: "POST",
@@ -126,10 +41,10 @@ func (c *Client) CreateLocationS3Request(input *CreateLocationS3Input) CreateLoc
 	}
 
 	if input == nil {
-		input = &CreateLocationS3Input{}
+		input = &types.CreateLocationS3Input{}
 	}
 
-	req := c.newRequest(op, input, &CreateLocationS3Output{})
+	req := c.newRequest(op, input, &types.CreateLocationS3Output{})
 	return CreateLocationS3Request{Request: req, Input: input, Copy: c.CreateLocationS3Request}
 }
 
@@ -137,8 +52,8 @@ func (c *Client) CreateLocationS3Request(input *CreateLocationS3Input) CreateLoc
 // CreateLocationS3 API operation.
 type CreateLocationS3Request struct {
 	*aws.Request
-	Input *CreateLocationS3Input
-	Copy  func(*CreateLocationS3Input) CreateLocationS3Request
+	Input *types.CreateLocationS3Input
+	Copy  func(*types.CreateLocationS3Input) CreateLocationS3Request
 }
 
 // Send marshals and sends the CreateLocationS3 API request.
@@ -150,7 +65,7 @@ func (r CreateLocationS3Request) Send(ctx context.Context) (*CreateLocationS3Res
 	}
 
 	resp := &CreateLocationS3Response{
-		CreateLocationS3Output: r.Request.Data.(*CreateLocationS3Output),
+		CreateLocationS3Output: r.Request.Data.(*types.CreateLocationS3Output),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -160,7 +75,7 @@ func (r CreateLocationS3Request) Send(ctx context.Context) (*CreateLocationS3Res
 // CreateLocationS3Response is the response type for the
 // CreateLocationS3 API operation.
 type CreateLocationS3Response struct {
-	*CreateLocationS3Output
+	*types.CreateLocationS3Output
 
 	response *aws.Response
 }

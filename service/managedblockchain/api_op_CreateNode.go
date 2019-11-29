@@ -6,142 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/managedblockchain/types"
 )
-
-type CreateNodeInput struct {
-	_ struct{} `type:"structure"`
-
-	// A unique, case-sensitive identifier that you provide to ensure the idempotency
-	// of the operation. An idempotent operation completes no more than one time.
-	// This identifier is required only if you make a service request directly using
-	// an HTTP client. It is generated automatically if you use an AWS SDK or the
-	// AWS CLI.
-	//
-	// ClientRequestToken is a required field
-	ClientRequestToken *string `min:"1" type:"string" required:"true" idempotencyToken:"true"`
-
-	// The unique identifier of the member that owns this node.
-	//
-	// MemberId is a required field
-	MemberId *string `location:"uri" locationName:"memberId" min:"1" type:"string" required:"true"`
-
-	// The unique identifier of the network in which this node runs.
-	//
-	// NetworkId is a required field
-	NetworkId *string `location:"uri" locationName:"networkId" min:"1" type:"string" required:"true"`
-
-	// The properties of a node configuration.
-	//
-	// NodeConfiguration is a required field
-	NodeConfiguration *NodeConfiguration `type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s CreateNodeInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateNodeInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateNodeInput"}
-
-	if s.ClientRequestToken == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ClientRequestToken"))
-	}
-	if s.ClientRequestToken != nil && len(*s.ClientRequestToken) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ClientRequestToken", 1))
-	}
-
-	if s.MemberId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("MemberId"))
-	}
-	if s.MemberId != nil && len(*s.MemberId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("MemberId", 1))
-	}
-
-	if s.NetworkId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("NetworkId"))
-	}
-	if s.NetworkId != nil && len(*s.NetworkId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("NetworkId", 1))
-	}
-
-	if s.NodeConfiguration == nil {
-		invalidParams.Add(aws.NewErrParamRequired("NodeConfiguration"))
-	}
-	if s.NodeConfiguration != nil {
-		if err := s.NodeConfiguration.Validate(); err != nil {
-			invalidParams.AddNested("NodeConfiguration", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s CreateNodeInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	var ClientRequestToken string
-	if s.ClientRequestToken != nil {
-		ClientRequestToken = *s.ClientRequestToken
-	} else {
-		ClientRequestToken = protocol.GetIdempotencyToken()
-	}
-	{
-		v := ClientRequestToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "ClientRequestToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.NodeConfiguration != nil {
-		v := s.NodeConfiguration
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "NodeConfiguration", v, metadata)
-	}
-	if s.MemberId != nil {
-		v := *s.MemberId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "memberId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.NetworkId != nil {
-		v := *s.NetworkId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "networkId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type CreateNodeOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The unique identifier of the node.
-	NodeId *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s CreateNodeOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s CreateNodeOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.NodeId != nil {
-		v := *s.NodeId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "NodeId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opCreateNode = "CreateNode"
 
@@ -158,7 +24,7 @@ const opCreateNode = "CreateNode"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/managedblockchain-2018-09-24/CreateNode
-func (c *Client) CreateNodeRequest(input *CreateNodeInput) CreateNodeRequest {
+func (c *Client) CreateNodeRequest(input *types.CreateNodeInput) CreateNodeRequest {
 	op := &aws.Operation{
 		Name:       opCreateNode,
 		HTTPMethod: "POST",
@@ -166,10 +32,10 @@ func (c *Client) CreateNodeRequest(input *CreateNodeInput) CreateNodeRequest {
 	}
 
 	if input == nil {
-		input = &CreateNodeInput{}
+		input = &types.CreateNodeInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateNodeOutput{})
+	req := c.newRequest(op, input, &types.CreateNodeOutput{})
 	return CreateNodeRequest{Request: req, Input: input, Copy: c.CreateNodeRequest}
 }
 
@@ -177,8 +43,8 @@ func (c *Client) CreateNodeRequest(input *CreateNodeInput) CreateNodeRequest {
 // CreateNode API operation.
 type CreateNodeRequest struct {
 	*aws.Request
-	Input *CreateNodeInput
-	Copy  func(*CreateNodeInput) CreateNodeRequest
+	Input *types.CreateNodeInput
+	Copy  func(*types.CreateNodeInput) CreateNodeRequest
 }
 
 // Send marshals and sends the CreateNode API request.
@@ -190,7 +56,7 @@ func (r CreateNodeRequest) Send(ctx context.Context) (*CreateNodeResponse, error
 	}
 
 	resp := &CreateNodeResponse{
-		CreateNodeOutput: r.Request.Data.(*CreateNodeOutput),
+		CreateNodeOutput: r.Request.Data.(*types.CreateNodeOutput),
 		response:         &aws.Response{Request: r.Request},
 	}
 
@@ -200,7 +66,7 @@ func (r CreateNodeRequest) Send(ctx context.Context) (*CreateNodeResponse, error
 // CreateNodeResponse is the response type for the
 // CreateNode API operation.
 type CreateNodeResponse struct {
-	*CreateNodeOutput
+	*types.CreateNodeOutput
 
 	response *aws.Response
 }

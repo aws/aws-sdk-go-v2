@@ -6,47 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/sns/types"
 )
-
-// Input for the OptInPhoneNumber action.
-type OptInPhoneNumberInput struct {
-	_ struct{} `type:"structure"`
-
-	// The phone number to opt in.
-	//
-	// PhoneNumber is a required field
-	PhoneNumber *string `locationName:"phoneNumber" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s OptInPhoneNumberInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *OptInPhoneNumberInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "OptInPhoneNumberInput"}
-
-	if s.PhoneNumber == nil {
-		invalidParams.Add(aws.NewErrParamRequired("PhoneNumber"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// The response for the OptInPhoneNumber action.
-type OptInPhoneNumberOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s OptInPhoneNumberOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opOptInPhoneNumber = "OptInPhoneNumber"
 
@@ -66,7 +27,7 @@ const opOptInPhoneNumber = "OptInPhoneNumber"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/OptInPhoneNumber
-func (c *Client) OptInPhoneNumberRequest(input *OptInPhoneNumberInput) OptInPhoneNumberRequest {
+func (c *Client) OptInPhoneNumberRequest(input *types.OptInPhoneNumberInput) OptInPhoneNumberRequest {
 	op := &aws.Operation{
 		Name:       opOptInPhoneNumber,
 		HTTPMethod: "POST",
@@ -74,10 +35,10 @@ func (c *Client) OptInPhoneNumberRequest(input *OptInPhoneNumberInput) OptInPhon
 	}
 
 	if input == nil {
-		input = &OptInPhoneNumberInput{}
+		input = &types.OptInPhoneNumberInput{}
 	}
 
-	req := c.newRequest(op, input, &OptInPhoneNumberOutput{})
+	req := c.newRequest(op, input, &types.OptInPhoneNumberOutput{})
 	return OptInPhoneNumberRequest{Request: req, Input: input, Copy: c.OptInPhoneNumberRequest}
 }
 
@@ -85,8 +46,8 @@ func (c *Client) OptInPhoneNumberRequest(input *OptInPhoneNumberInput) OptInPhon
 // OptInPhoneNumber API operation.
 type OptInPhoneNumberRequest struct {
 	*aws.Request
-	Input *OptInPhoneNumberInput
-	Copy  func(*OptInPhoneNumberInput) OptInPhoneNumberRequest
+	Input *types.OptInPhoneNumberInput
+	Copy  func(*types.OptInPhoneNumberInput) OptInPhoneNumberRequest
 }
 
 // Send marshals and sends the OptInPhoneNumber API request.
@@ -98,7 +59,7 @@ func (r OptInPhoneNumberRequest) Send(ctx context.Context) (*OptInPhoneNumberRes
 	}
 
 	resp := &OptInPhoneNumberResponse{
-		OptInPhoneNumberOutput: r.Request.Data.(*OptInPhoneNumberOutput),
+		OptInPhoneNumberOutput: r.Request.Data.(*types.OptInPhoneNumberOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -108,7 +69,7 @@ func (r OptInPhoneNumberRequest) Send(ctx context.Context) (*OptInPhoneNumberRes
 // OptInPhoneNumberResponse is the response type for the
 // OptInPhoneNumber API operation.
 type OptInPhoneNumberResponse struct {
-	*OptInPhoneNumberOutput
+	*types.OptInPhoneNumberOutput
 
 	response *aws.Response
 }

@@ -4,71 +4,10 @@ package codepipeline
 
 import (
 	"context"
-	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/codepipeline/types"
 )
-
-// Represents the input of a GetPipelineState action.
-type GetPipelineStateInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the pipeline about which you want to get information.
-	//
-	// Name is a required field
-	Name *string `locationName:"name" min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetPipelineStateInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetPipelineStateInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetPipelineStateInput"}
-
-	if s.Name == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Name"))
-	}
-	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Represents the output of a GetPipelineState action.
-type GetPipelineStateOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The date and time the pipeline was created, in timestamp format.
-	Created *time.Time `locationName:"created" type:"timestamp"`
-
-	// The name of the pipeline for which you want to get the state.
-	PipelineName *string `locationName:"pipelineName" min:"1" type:"string"`
-
-	// The version number of the pipeline.
-	//
-	// A newly created pipeline is always assigned a version number of 1.
-	PipelineVersion *int64 `locationName:"pipelineVersion" min:"1" type:"integer"`
-
-	// A list of the pipeline stage output information, including stage name, state,
-	// most recent run details, whether the stage is disabled, and other data.
-	StageStates []StageState `locationName:"stageStates" type:"list"`
-
-	// The date and time the pipeline was last updated, in timestamp format.
-	Updated *time.Time `locationName:"updated" type:"timestamp"`
-}
-
-// String returns the string representation
-func (s GetPipelineStateOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetPipelineState = "GetPipelineState"
 
@@ -89,7 +28,7 @@ const opGetPipelineState = "GetPipelineState"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/GetPipelineState
-func (c *Client) GetPipelineStateRequest(input *GetPipelineStateInput) GetPipelineStateRequest {
+func (c *Client) GetPipelineStateRequest(input *types.GetPipelineStateInput) GetPipelineStateRequest {
 	op := &aws.Operation{
 		Name:       opGetPipelineState,
 		HTTPMethod: "POST",
@@ -97,10 +36,10 @@ func (c *Client) GetPipelineStateRequest(input *GetPipelineStateInput) GetPipeli
 	}
 
 	if input == nil {
-		input = &GetPipelineStateInput{}
+		input = &types.GetPipelineStateInput{}
 	}
 
-	req := c.newRequest(op, input, &GetPipelineStateOutput{})
+	req := c.newRequest(op, input, &types.GetPipelineStateOutput{})
 	return GetPipelineStateRequest{Request: req, Input: input, Copy: c.GetPipelineStateRequest}
 }
 
@@ -108,8 +47,8 @@ func (c *Client) GetPipelineStateRequest(input *GetPipelineStateInput) GetPipeli
 // GetPipelineState API operation.
 type GetPipelineStateRequest struct {
 	*aws.Request
-	Input *GetPipelineStateInput
-	Copy  func(*GetPipelineStateInput) GetPipelineStateRequest
+	Input *types.GetPipelineStateInput
+	Copy  func(*types.GetPipelineStateInput) GetPipelineStateRequest
 }
 
 // Send marshals and sends the GetPipelineState API request.
@@ -121,7 +60,7 @@ func (r GetPipelineStateRequest) Send(ctx context.Context) (*GetPipelineStateRes
 	}
 
 	resp := &GetPipelineStateResponse{
-		GetPipelineStateOutput: r.Request.Data.(*GetPipelineStateOutput),
+		GetPipelineStateOutput: r.Request.Data.(*types.GetPipelineStateOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -131,7 +70,7 @@ func (r GetPipelineStateRequest) Send(ctx context.Context) (*GetPipelineStateRes
 // GetPipelineStateResponse is the response type for the
 // GetPipelineState API operation.
 type GetPipelineStateResponse struct {
-	*GetPipelineStateOutput
+	*types.GetPipelineStateOutput
 
 	response *aws.Response
 }

@@ -6,67 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/elasticache/types"
 )
-
-type DescribeUpdateActionsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The cache cluster IDs
-	CacheClusterIds []string `type:"list"`
-
-	// The Elasticache engine to which the update applies. Either Redis or Memcached
-	Engine *string `type:"string"`
-
-	// An optional marker returned from a prior request. Use this marker for pagination
-	// of results from this operation. If this parameter is specified, the response
-	// includes only records beyond the marker, up to the value specified by MaxRecords.
-	Marker *string `type:"string"`
-
-	// The maximum number of records to include in the response
-	MaxRecords *int64 `type:"integer"`
-
-	// The replication group IDs
-	ReplicationGroupIds []string `type:"list"`
-
-	// The unique ID of the service update
-	ServiceUpdateName *string `type:"string"`
-
-	// The status of the service update
-	ServiceUpdateStatus []ServiceUpdateStatus `type:"list"`
-
-	// The range of time specified to search for service updates that are in available
-	// status
-	ServiceUpdateTimeRange *TimeRangeFilter `type:"structure"`
-
-	// Dictates whether to include node level update status in the response
-	ShowNodeLevelUpdateStatus *bool `type:"boolean"`
-
-	// The status of the update action.
-	UpdateActionStatus []UpdateActionStatus `type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeUpdateActionsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type DescribeUpdateActionsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// An optional marker returned from a prior request. Use this marker for pagination
-	// of results from this operation. If this parameter is specified, the response
-	// includes only records beyond the marker, up to the value specified by MaxRecords.
-	Marker *string `type:"string"`
-
-	// Returns a list of update actions
-	UpdateActions []UpdateAction `locationNameList:"UpdateAction" type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeUpdateActionsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeUpdateActions = "DescribeUpdateActions"
 
@@ -83,7 +24,7 @@ const opDescribeUpdateActions = "DescribeUpdateActions"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DescribeUpdateActions
-func (c *Client) DescribeUpdateActionsRequest(input *DescribeUpdateActionsInput) DescribeUpdateActionsRequest {
+func (c *Client) DescribeUpdateActionsRequest(input *types.DescribeUpdateActionsInput) DescribeUpdateActionsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeUpdateActions,
 		HTTPMethod: "POST",
@@ -97,10 +38,10 @@ func (c *Client) DescribeUpdateActionsRequest(input *DescribeUpdateActionsInput)
 	}
 
 	if input == nil {
-		input = &DescribeUpdateActionsInput{}
+		input = &types.DescribeUpdateActionsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeUpdateActionsOutput{})
+	req := c.newRequest(op, input, &types.DescribeUpdateActionsOutput{})
 	return DescribeUpdateActionsRequest{Request: req, Input: input, Copy: c.DescribeUpdateActionsRequest}
 }
 
@@ -108,8 +49,8 @@ func (c *Client) DescribeUpdateActionsRequest(input *DescribeUpdateActionsInput)
 // DescribeUpdateActions API operation.
 type DescribeUpdateActionsRequest struct {
 	*aws.Request
-	Input *DescribeUpdateActionsInput
-	Copy  func(*DescribeUpdateActionsInput) DescribeUpdateActionsRequest
+	Input *types.DescribeUpdateActionsInput
+	Copy  func(*types.DescribeUpdateActionsInput) DescribeUpdateActionsRequest
 }
 
 // Send marshals and sends the DescribeUpdateActions API request.
@@ -121,7 +62,7 @@ func (r DescribeUpdateActionsRequest) Send(ctx context.Context) (*DescribeUpdate
 	}
 
 	resp := &DescribeUpdateActionsResponse{
-		DescribeUpdateActionsOutput: r.Request.Data.(*DescribeUpdateActionsOutput),
+		DescribeUpdateActionsOutput: r.Request.Data.(*types.DescribeUpdateActionsOutput),
 		response:                    &aws.Response{Request: r.Request},
 	}
 
@@ -151,7 +92,7 @@ func NewDescribeUpdateActionsPaginator(req DescribeUpdateActionsRequest) Describ
 	return DescribeUpdateActionsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *DescribeUpdateActionsInput
+				var inCpy *types.DescribeUpdateActionsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -171,14 +112,14 @@ type DescribeUpdateActionsPaginator struct {
 	aws.Pager
 }
 
-func (p *DescribeUpdateActionsPaginator) CurrentPage() *DescribeUpdateActionsOutput {
-	return p.Pager.CurrentPage().(*DescribeUpdateActionsOutput)
+func (p *DescribeUpdateActionsPaginator) CurrentPage() *types.DescribeUpdateActionsOutput {
+	return p.Pager.CurrentPage().(*types.DescribeUpdateActionsOutput)
 }
 
 // DescribeUpdateActionsResponse is the response type for the
 // DescribeUpdateActions API operation.
 type DescribeUpdateActionsResponse struct {
-	*DescribeUpdateActionsOutput
+	*types.DescribeUpdateActionsOutput
 
 	response *aws.Response
 }

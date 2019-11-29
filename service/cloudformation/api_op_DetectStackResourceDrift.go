@@ -6,64 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/cloudformation/types"
 )
-
-type DetectStackResourceDriftInput struct {
-	_ struct{} `type:"structure"`
-
-	// The logical name of the resource for which to return drift information.
-	//
-	// LogicalResourceId is a required field
-	LogicalResourceId *string `type:"string" required:"true"`
-
-	// The name of the stack to which the resource belongs.
-	//
-	// StackName is a required field
-	StackName *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DetectStackResourceDriftInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DetectStackResourceDriftInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DetectStackResourceDriftInput"}
-
-	if s.LogicalResourceId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("LogicalResourceId"))
-	}
-
-	if s.StackName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("StackName"))
-	}
-	if s.StackName != nil && len(*s.StackName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("StackName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DetectStackResourceDriftOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Information about whether the resource's actual configuration has drifted
-	// from its expected template configuration, including actual and expected property
-	// values and any differences detected.
-	//
-	// StackResourceDrift is a required field
-	StackResourceDrift *StackResourceDrift `type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s DetectStackResourceDriftOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDetectStackResourceDrift = "DetectStackResourceDrift"
 
@@ -94,7 +38,7 @@ const opDetectStackResourceDrift = "DetectStackResourceDrift"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DetectStackResourceDrift
-func (c *Client) DetectStackResourceDriftRequest(input *DetectStackResourceDriftInput) DetectStackResourceDriftRequest {
+func (c *Client) DetectStackResourceDriftRequest(input *types.DetectStackResourceDriftInput) DetectStackResourceDriftRequest {
 	op := &aws.Operation{
 		Name:       opDetectStackResourceDrift,
 		HTTPMethod: "POST",
@@ -102,10 +46,10 @@ func (c *Client) DetectStackResourceDriftRequest(input *DetectStackResourceDrift
 	}
 
 	if input == nil {
-		input = &DetectStackResourceDriftInput{}
+		input = &types.DetectStackResourceDriftInput{}
 	}
 
-	req := c.newRequest(op, input, &DetectStackResourceDriftOutput{})
+	req := c.newRequest(op, input, &types.DetectStackResourceDriftOutput{})
 	return DetectStackResourceDriftRequest{Request: req, Input: input, Copy: c.DetectStackResourceDriftRequest}
 }
 
@@ -113,8 +57,8 @@ func (c *Client) DetectStackResourceDriftRequest(input *DetectStackResourceDrift
 // DetectStackResourceDrift API operation.
 type DetectStackResourceDriftRequest struct {
 	*aws.Request
-	Input *DetectStackResourceDriftInput
-	Copy  func(*DetectStackResourceDriftInput) DetectStackResourceDriftRequest
+	Input *types.DetectStackResourceDriftInput
+	Copy  func(*types.DetectStackResourceDriftInput) DetectStackResourceDriftRequest
 }
 
 // Send marshals and sends the DetectStackResourceDrift API request.
@@ -126,7 +70,7 @@ func (r DetectStackResourceDriftRequest) Send(ctx context.Context) (*DetectStack
 	}
 
 	resp := &DetectStackResourceDriftResponse{
-		DetectStackResourceDriftOutput: r.Request.Data.(*DetectStackResourceDriftOutput),
+		DetectStackResourceDriftOutput: r.Request.Data.(*types.DetectStackResourceDriftOutput),
 		response:                       &aws.Response{Request: r.Request},
 	}
 
@@ -136,7 +80,7 @@ func (r DetectStackResourceDriftRequest) Send(ctx context.Context) (*DetectStack
 // DetectStackResourceDriftResponse is the response type for the
 // DetectStackResourceDrift API operation.
 type DetectStackResourceDriftResponse struct {
-	*DetectStackResourceDriftOutput
+	*types.DetectStackResourceDriftOutput
 
 	response *aws.Response
 }

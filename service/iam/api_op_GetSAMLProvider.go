@@ -4,66 +4,10 @@ package iam
 
 import (
 	"context"
-	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/iam/types"
 )
-
-type GetSAMLProviderInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the SAML provider resource object in IAM
-	// to get information about.
-	//
-	// For more information about ARNs, see Amazon Resource Names (ARNs) and AWS
-	// Service Namespaces (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
-	// in the AWS General Reference.
-	//
-	// SAMLProviderArn is a required field
-	SAMLProviderArn *string `min:"20" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetSAMLProviderInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetSAMLProviderInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetSAMLProviderInput"}
-
-	if s.SAMLProviderArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("SAMLProviderArn"))
-	}
-	if s.SAMLProviderArn != nil && len(*s.SAMLProviderArn) < 20 {
-		invalidParams.Add(aws.NewErrParamMinLen("SAMLProviderArn", 20))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Contains the response to a successful GetSAMLProvider request.
-type GetSAMLProviderOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The date and time when the SAML provider was created.
-	CreateDate *time.Time `type:"timestamp"`
-
-	// The XML metadata document that includes information about an identity provider.
-	SAMLMetadataDocument *string `min:"1000" type:"string"`
-
-	// The expiration date and time for the SAML provider.
-	ValidUntil *time.Time `type:"timestamp"`
-}
-
-// String returns the string representation
-func (s GetSAMLProviderOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetSAMLProvider = "GetSAMLProvider"
 
@@ -83,7 +27,7 @@ const opGetSAMLProvider = "GetSAMLProvider"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetSAMLProvider
-func (c *Client) GetSAMLProviderRequest(input *GetSAMLProviderInput) GetSAMLProviderRequest {
+func (c *Client) GetSAMLProviderRequest(input *types.GetSAMLProviderInput) GetSAMLProviderRequest {
 	op := &aws.Operation{
 		Name:       opGetSAMLProvider,
 		HTTPMethod: "POST",
@@ -91,10 +35,10 @@ func (c *Client) GetSAMLProviderRequest(input *GetSAMLProviderInput) GetSAMLProv
 	}
 
 	if input == nil {
-		input = &GetSAMLProviderInput{}
+		input = &types.GetSAMLProviderInput{}
 	}
 
-	req := c.newRequest(op, input, &GetSAMLProviderOutput{})
+	req := c.newRequest(op, input, &types.GetSAMLProviderOutput{})
 	return GetSAMLProviderRequest{Request: req, Input: input, Copy: c.GetSAMLProviderRequest}
 }
 
@@ -102,8 +46,8 @@ func (c *Client) GetSAMLProviderRequest(input *GetSAMLProviderInput) GetSAMLProv
 // GetSAMLProvider API operation.
 type GetSAMLProviderRequest struct {
 	*aws.Request
-	Input *GetSAMLProviderInput
-	Copy  func(*GetSAMLProviderInput) GetSAMLProviderRequest
+	Input *types.GetSAMLProviderInput
+	Copy  func(*types.GetSAMLProviderInput) GetSAMLProviderRequest
 }
 
 // Send marshals and sends the GetSAMLProvider API request.
@@ -115,7 +59,7 @@ func (r GetSAMLProviderRequest) Send(ctx context.Context) (*GetSAMLProviderRespo
 	}
 
 	resp := &GetSAMLProviderResponse{
-		GetSAMLProviderOutput: r.Request.Data.(*GetSAMLProviderOutput),
+		GetSAMLProviderOutput: r.Request.Data.(*types.GetSAMLProviderOutput),
 		response:              &aws.Response{Request: r.Request},
 	}
 
@@ -125,7 +69,7 @@ func (r GetSAMLProviderRequest) Send(ctx context.Context) (*GetSAMLProviderRespo
 // GetSAMLProviderResponse is the response type for the
 // GetSAMLProvider API operation.
 type GetSAMLProviderResponse struct {
-	*GetSAMLProviderOutput
+	*types.GetSAMLProviderOutput
 
 	response *aws.Response
 }

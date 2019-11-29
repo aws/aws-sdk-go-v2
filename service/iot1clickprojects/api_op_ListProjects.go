@@ -6,101 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/iot1clickprojects/types"
 )
-
-type ListProjectsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The maximum number of results to return per request. If not set, a default
-	// value of 100 is used.
-	MaxResults *int64 `location:"querystring" locationName:"maxResults" min:"1" type:"integer"`
-
-	// The token to retrieve the next set of results.
-	NextToken *string `location:"querystring" locationName:"nextToken" min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s ListProjectsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListProjectsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListProjectsInput"}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-	if s.NextToken != nil && len(*s.NextToken) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListProjectsInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.MaxResults != nil {
-		v := *s.MaxResults
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "maxResults", protocol.Int64Value(v), metadata)
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type ListProjectsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The token used to retrieve the next set of results - will be effectively
-	// empty if there are no further results.
-	NextToken *string `locationName:"nextToken" min:"1" type:"string"`
-
-	// An object containing the list of projects.
-	//
-	// Projects is a required field
-	Projects []ProjectSummary `locationName:"projects" type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s ListProjectsOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListProjectsOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Projects != nil {
-		v := s.Projects
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "projects", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	return nil
-}
 
 const opListProjects = "ListProjects"
 
@@ -118,7 +25,7 @@ const opListProjects = "ListProjects"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iot1click-projects-2018-05-14/ListProjects
-func (c *Client) ListProjectsRequest(input *ListProjectsInput) ListProjectsRequest {
+func (c *Client) ListProjectsRequest(input *types.ListProjectsInput) ListProjectsRequest {
 	op := &aws.Operation{
 		Name:       opListProjects,
 		HTTPMethod: "GET",
@@ -132,10 +39,10 @@ func (c *Client) ListProjectsRequest(input *ListProjectsInput) ListProjectsReque
 	}
 
 	if input == nil {
-		input = &ListProjectsInput{}
+		input = &types.ListProjectsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListProjectsOutput{})
+	req := c.newRequest(op, input, &types.ListProjectsOutput{})
 	return ListProjectsRequest{Request: req, Input: input, Copy: c.ListProjectsRequest}
 }
 
@@ -143,8 +50,8 @@ func (c *Client) ListProjectsRequest(input *ListProjectsInput) ListProjectsReque
 // ListProjects API operation.
 type ListProjectsRequest struct {
 	*aws.Request
-	Input *ListProjectsInput
-	Copy  func(*ListProjectsInput) ListProjectsRequest
+	Input *types.ListProjectsInput
+	Copy  func(*types.ListProjectsInput) ListProjectsRequest
 }
 
 // Send marshals and sends the ListProjects API request.
@@ -156,7 +63,7 @@ func (r ListProjectsRequest) Send(ctx context.Context) (*ListProjectsResponse, e
 	}
 
 	resp := &ListProjectsResponse{
-		ListProjectsOutput: r.Request.Data.(*ListProjectsOutput),
+		ListProjectsOutput: r.Request.Data.(*types.ListProjectsOutput),
 		response:           &aws.Response{Request: r.Request},
 	}
 
@@ -186,7 +93,7 @@ func NewListProjectsPaginator(req ListProjectsRequest) ListProjectsPaginator {
 	return ListProjectsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListProjectsInput
+				var inCpy *types.ListProjectsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -206,14 +113,14 @@ type ListProjectsPaginator struct {
 	aws.Pager
 }
 
-func (p *ListProjectsPaginator) CurrentPage() *ListProjectsOutput {
-	return p.Pager.CurrentPage().(*ListProjectsOutput)
+func (p *ListProjectsPaginator) CurrentPage() *types.ListProjectsOutput {
+	return p.Pager.CurrentPage().(*types.ListProjectsOutput)
 }
 
 // ListProjectsResponse is the response type for the
 // ListProjects API operation.
 type ListProjectsResponse struct {
-	*ListProjectsOutput
+	*types.ListProjectsOutput
 
 	response *aws.Response
 }

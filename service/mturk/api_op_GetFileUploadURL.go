@@ -6,61 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/mturk/types"
 )
-
-type GetFileUploadURLInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the assignment that contains the question with a FileUploadAnswer.
-	//
-	// AssignmentId is a required field
-	AssignmentId *string `min:"1" type:"string" required:"true"`
-
-	// The identifier of the question with a FileUploadAnswer, as specified in the
-	// QuestionForm of the HIT.
-	//
-	// QuestionIdentifier is a required field
-	QuestionIdentifier *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetFileUploadURLInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetFileUploadURLInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetFileUploadURLInput"}
-
-	if s.AssignmentId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("AssignmentId"))
-	}
-	if s.AssignmentId != nil && len(*s.AssignmentId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("AssignmentId", 1))
-	}
-
-	if s.QuestionIdentifier == nil {
-		invalidParams.Add(aws.NewErrParamRequired("QuestionIdentifier"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type GetFileUploadURLOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A temporary URL for the file that the Worker uploaded for the answer.
-	FileUploadURL *string `type:"string"`
-}
-
-// String returns the string representation
-func (s GetFileUploadURLOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetFileUploadURL = "GetFileUploadURL"
 
@@ -87,7 +34,7 @@ const opGetFileUploadURL = "GetFileUploadURL"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/GetFileUploadURL
-func (c *Client) GetFileUploadURLRequest(input *GetFileUploadURLInput) GetFileUploadURLRequest {
+func (c *Client) GetFileUploadURLRequest(input *types.GetFileUploadURLInput) GetFileUploadURLRequest {
 	op := &aws.Operation{
 		Name:       opGetFileUploadURL,
 		HTTPMethod: "POST",
@@ -95,10 +42,10 @@ func (c *Client) GetFileUploadURLRequest(input *GetFileUploadURLInput) GetFileUp
 	}
 
 	if input == nil {
-		input = &GetFileUploadURLInput{}
+		input = &types.GetFileUploadURLInput{}
 	}
 
-	req := c.newRequest(op, input, &GetFileUploadURLOutput{})
+	req := c.newRequest(op, input, &types.GetFileUploadURLOutput{})
 	return GetFileUploadURLRequest{Request: req, Input: input, Copy: c.GetFileUploadURLRequest}
 }
 
@@ -106,8 +53,8 @@ func (c *Client) GetFileUploadURLRequest(input *GetFileUploadURLInput) GetFileUp
 // GetFileUploadURL API operation.
 type GetFileUploadURLRequest struct {
 	*aws.Request
-	Input *GetFileUploadURLInput
-	Copy  func(*GetFileUploadURLInput) GetFileUploadURLRequest
+	Input *types.GetFileUploadURLInput
+	Copy  func(*types.GetFileUploadURLInput) GetFileUploadURLRequest
 }
 
 // Send marshals and sends the GetFileUploadURL API request.
@@ -119,7 +66,7 @@ func (r GetFileUploadURLRequest) Send(ctx context.Context) (*GetFileUploadURLRes
 	}
 
 	resp := &GetFileUploadURLResponse{
-		GetFileUploadURLOutput: r.Request.Data.(*GetFileUploadURLOutput),
+		GetFileUploadURLOutput: r.Request.Data.(*types.GetFileUploadURLOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -129,7 +76,7 @@ func (r GetFileUploadURLRequest) Send(ctx context.Context) (*GetFileUploadURLRes
 // GetFileUploadURLResponse is the response type for the
 // GetFileUploadURL API operation.
 type GetFileUploadURLResponse struct {
-	*GetFileUploadURLOutput
+	*types.GetFileUploadURLOutput
 
 	response *aws.Response
 }

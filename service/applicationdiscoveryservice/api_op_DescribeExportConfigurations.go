@@ -6,41 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/applicationdiscoveryservice/types"
 )
-
-type DescribeExportConfigurationsInput struct {
-	_ struct{} `type:"structure"`
-
-	// A list of continuous export ids to search for.
-	ExportIds []string `locationName:"exportIds" type:"list"`
-
-	// A number between 1 and 100 specifying the maximum number of continuous export
-	// descriptions returned.
-	MaxResults *int64 `locationName:"maxResults" type:"integer"`
-
-	// The token from the previous call to describe-export-tasks.
-	NextToken *string `locationName:"nextToken" type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeExportConfigurationsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type DescribeExportConfigurationsOutput struct {
-	_ struct{} `type:"structure"`
-
-	ExportsInfo []ExportInfo `locationName:"exportsInfo" type:"list"`
-
-	// The token from the previous call to describe-export-tasks.
-	NextToken *string `locationName:"nextToken" type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeExportConfigurationsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeExportConfigurations = "DescribeExportConfigurations"
 
@@ -58,7 +25,7 @@ const opDescribeExportConfigurations = "DescribeExportConfigurations"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/discovery-2015-11-01/DescribeExportConfigurations
-func (c *Client) DescribeExportConfigurationsRequest(input *DescribeExportConfigurationsInput) DescribeExportConfigurationsRequest {
+func (c *Client) DescribeExportConfigurationsRequest(input *types.DescribeExportConfigurationsInput) DescribeExportConfigurationsRequest {
 	if c.Client.Config.Logger != nil {
 		c.Client.Config.Logger.Log("This operation, DescribeExportConfigurations, has been deprecated")
 	}
@@ -69,10 +36,10 @@ func (c *Client) DescribeExportConfigurationsRequest(input *DescribeExportConfig
 	}
 
 	if input == nil {
-		input = &DescribeExportConfigurationsInput{}
+		input = &types.DescribeExportConfigurationsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeExportConfigurationsOutput{})
+	req := c.newRequest(op, input, &types.DescribeExportConfigurationsOutput{})
 	return DescribeExportConfigurationsRequest{Request: req, Input: input, Copy: c.DescribeExportConfigurationsRequest}
 }
 
@@ -80,8 +47,8 @@ func (c *Client) DescribeExportConfigurationsRequest(input *DescribeExportConfig
 // DescribeExportConfigurations API operation.
 type DescribeExportConfigurationsRequest struct {
 	*aws.Request
-	Input *DescribeExportConfigurationsInput
-	Copy  func(*DescribeExportConfigurationsInput) DescribeExportConfigurationsRequest
+	Input *types.DescribeExportConfigurationsInput
+	Copy  func(*types.DescribeExportConfigurationsInput) DescribeExportConfigurationsRequest
 }
 
 // Send marshals and sends the DescribeExportConfigurations API request.
@@ -93,7 +60,7 @@ func (r DescribeExportConfigurationsRequest) Send(ctx context.Context) (*Describ
 	}
 
 	resp := &DescribeExportConfigurationsResponse{
-		DescribeExportConfigurationsOutput: r.Request.Data.(*DescribeExportConfigurationsOutput),
+		DescribeExportConfigurationsOutput: r.Request.Data.(*types.DescribeExportConfigurationsOutput),
 		response:                           &aws.Response{Request: r.Request},
 	}
 
@@ -103,7 +70,7 @@ func (r DescribeExportConfigurationsRequest) Send(ctx context.Context) (*Describ
 // DescribeExportConfigurationsResponse is the response type for the
 // DescribeExportConfigurations API operation.
 type DescribeExportConfigurationsResponse struct {
-	*DescribeExportConfigurationsOutput
+	*types.DescribeExportConfigurationsOutput
 
 	response *aws.Response
 }

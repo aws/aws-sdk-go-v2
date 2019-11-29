@@ -4,68 +4,10 @@ package elasticloadbalancingv2
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/elasticloadbalancingv2/types"
 )
-
-type RegisterTargetsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the target group.
-	//
-	// TargetGroupArn is a required field
-	TargetGroupArn *string `type:"string" required:"true"`
-
-	// The targets.
-	//
-	// To register a target by instance ID, specify the instance ID. To register
-	// a target by IP address, specify the IP address. To register a Lambda function,
-	// specify the ARN of the Lambda function.
-	//
-	// Targets is a required field
-	Targets []TargetDescription `type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s RegisterTargetsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *RegisterTargetsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "RegisterTargetsInput"}
-
-	if s.TargetGroupArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("TargetGroupArn"))
-	}
-
-	if s.Targets == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Targets"))
-	}
-	if s.Targets != nil {
-		for i, v := range s.Targets {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Targets", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type RegisterTargetsOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s RegisterTargetsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opRegisterTargets = "RegisterTargets"
 
@@ -97,7 +39,7 @@ const opRegisterTargets = "RegisterTargets"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/RegisterTargets
-func (c *Client) RegisterTargetsRequest(input *RegisterTargetsInput) RegisterTargetsRequest {
+func (c *Client) RegisterTargetsRequest(input *types.RegisterTargetsInput) RegisterTargetsRequest {
 	op := &aws.Operation{
 		Name:       opRegisterTargets,
 		HTTPMethod: "POST",
@@ -105,10 +47,10 @@ func (c *Client) RegisterTargetsRequest(input *RegisterTargetsInput) RegisterTar
 	}
 
 	if input == nil {
-		input = &RegisterTargetsInput{}
+		input = &types.RegisterTargetsInput{}
 	}
 
-	req := c.newRequest(op, input, &RegisterTargetsOutput{})
+	req := c.newRequest(op, input, &types.RegisterTargetsOutput{})
 	return RegisterTargetsRequest{Request: req, Input: input, Copy: c.RegisterTargetsRequest}
 }
 
@@ -116,8 +58,8 @@ func (c *Client) RegisterTargetsRequest(input *RegisterTargetsInput) RegisterTar
 // RegisterTargets API operation.
 type RegisterTargetsRequest struct {
 	*aws.Request
-	Input *RegisterTargetsInput
-	Copy  func(*RegisterTargetsInput) RegisterTargetsRequest
+	Input *types.RegisterTargetsInput
+	Copy  func(*types.RegisterTargetsInput) RegisterTargetsRequest
 }
 
 // Send marshals and sends the RegisterTargets API request.
@@ -129,7 +71,7 @@ func (r RegisterTargetsRequest) Send(ctx context.Context) (*RegisterTargetsRespo
 	}
 
 	resp := &RegisterTargetsResponse{
-		RegisterTargetsOutput: r.Request.Data.(*RegisterTargetsOutput),
+		RegisterTargetsOutput: r.Request.Data.(*types.RegisterTargetsOutput),
 		response:              &aws.Response{Request: r.Request},
 	}
 
@@ -139,7 +81,7 @@ func (r RegisterTargetsRequest) Send(ctx context.Context) (*RegisterTargetsRespo
 // RegisterTargetsResponse is the response type for the
 // RegisterTargets API operation.
 type RegisterTargetsResponse struct {
-	*RegisterTargetsOutput
+	*types.RegisterTargetsOutput
 
 	response *aws.Response
 }

@@ -6,29 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/alexaforbusiness/types"
 )
-
-type DisassociateDeviceFromRoomInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ARN of the device to disassociate from a room. Required.
-	DeviceArn *string `type:"string"`
-}
-
-// String returns the string representation
-func (s DisassociateDeviceFromRoomInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type DisassociateDeviceFromRoomOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DisassociateDeviceFromRoomOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDisassociateDeviceFromRoom = "DisassociateDeviceFromRoom"
 
@@ -47,7 +26,7 @@ const opDisassociateDeviceFromRoom = "DisassociateDeviceFromRoom"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/DisassociateDeviceFromRoom
-func (c *Client) DisassociateDeviceFromRoomRequest(input *DisassociateDeviceFromRoomInput) DisassociateDeviceFromRoomRequest {
+func (c *Client) DisassociateDeviceFromRoomRequest(input *types.DisassociateDeviceFromRoomInput) DisassociateDeviceFromRoomRequest {
 	op := &aws.Operation{
 		Name:       opDisassociateDeviceFromRoom,
 		HTTPMethod: "POST",
@@ -55,10 +34,10 @@ func (c *Client) DisassociateDeviceFromRoomRequest(input *DisassociateDeviceFrom
 	}
 
 	if input == nil {
-		input = &DisassociateDeviceFromRoomInput{}
+		input = &types.DisassociateDeviceFromRoomInput{}
 	}
 
-	req := c.newRequest(op, input, &DisassociateDeviceFromRoomOutput{})
+	req := c.newRequest(op, input, &types.DisassociateDeviceFromRoomOutput{})
 	return DisassociateDeviceFromRoomRequest{Request: req, Input: input, Copy: c.DisassociateDeviceFromRoomRequest}
 }
 
@@ -66,8 +45,8 @@ func (c *Client) DisassociateDeviceFromRoomRequest(input *DisassociateDeviceFrom
 // DisassociateDeviceFromRoom API operation.
 type DisassociateDeviceFromRoomRequest struct {
 	*aws.Request
-	Input *DisassociateDeviceFromRoomInput
-	Copy  func(*DisassociateDeviceFromRoomInput) DisassociateDeviceFromRoomRequest
+	Input *types.DisassociateDeviceFromRoomInput
+	Copy  func(*types.DisassociateDeviceFromRoomInput) DisassociateDeviceFromRoomRequest
 }
 
 // Send marshals and sends the DisassociateDeviceFromRoom API request.
@@ -79,7 +58,7 @@ func (r DisassociateDeviceFromRoomRequest) Send(ctx context.Context) (*Disassoci
 	}
 
 	resp := &DisassociateDeviceFromRoomResponse{
-		DisassociateDeviceFromRoomOutput: r.Request.Data.(*DisassociateDeviceFromRoomOutput),
+		DisassociateDeviceFromRoomOutput: r.Request.Data.(*types.DisassociateDeviceFromRoomOutput),
 		response:                         &aws.Response{Request: r.Request},
 	}
 
@@ -89,7 +68,7 @@ func (r DisassociateDeviceFromRoomRequest) Send(ctx context.Context) (*Disassoci
 // DisassociateDeviceFromRoomResponse is the response type for the
 // DisassociateDeviceFromRoom API operation.
 type DisassociateDeviceFromRoomResponse struct {
-	*DisassociateDeviceFromRoomOutput
+	*types.DisassociateDeviceFromRoomOutput
 
 	response *aws.Response
 }

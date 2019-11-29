@@ -4,101 +4,10 @@ package lambda
 
 import (
 	"context"
-	"io"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/lambda/types"
 )
-
-type InvokeAsyncInput struct {
-	_ struct{} `deprecated:"true" type:"structure" payload:"InvokeArgs"`
-
-	// The name of the Lambda function.
-	//
-	// Name formats
-	//
-	//    * Function name - my-function.
-	//
-	//    * Function ARN - arn:aws:lambda:us-west-2:123456789012:function:my-function.
-	//
-	//    * Partial ARN - 123456789012:function:my-function.
-	//
-	// The length constraint applies only to the full ARN. If you specify only the
-	// function name, it is limited to 64 characters in length.
-	//
-	// FunctionName is a required field
-	FunctionName *string `location:"uri" locationName:"FunctionName" min:"1" type:"string" required:"true"`
-
-	// The JSON that you want to provide to your Lambda function as input.
-	//
-	// InvokeArgs is a required field
-	InvokeArgs io.ReadSeeker `type:"blob" required:"true"`
-}
-
-// String returns the string representation
-func (s InvokeAsyncInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *InvokeAsyncInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "InvokeAsyncInput"}
-
-	if s.FunctionName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("FunctionName"))
-	}
-	if s.FunctionName != nil && len(*s.FunctionName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("FunctionName", 1))
-	}
-
-	if s.InvokeArgs == nil {
-		invalidParams.Add(aws.NewErrParamRequired("InvokeArgs"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s InvokeAsyncInput) MarshalFields(e protocol.FieldEncoder) error {
-
-	if s.FunctionName != nil {
-		v := *s.FunctionName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "FunctionName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.InvokeArgs != nil {
-		v := s.InvokeArgs
-
-		metadata := protocol.Metadata{}
-		e.SetStream(protocol.PayloadTarget, "InvokeArgs", protocol.ReadSeekerStream{V: v}, metadata)
-	}
-	return nil
-}
-
-// A success response (202 Accepted) indicates that the request is queued for
-// invocation.
-type InvokeAsyncOutput struct {
-	_ struct{} `deprecated:"true" type:"structure"`
-
-	// The status code.
-	Status *int64 `location:"statusCode" type:"integer"`
-}
-
-// String returns the string representation
-func (s InvokeAsyncOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s InvokeAsyncOutput) MarshalFields(e protocol.FieldEncoder) error {
-	// ignoring invalid encode state, StatusCode. Status
-	return nil
-}
 
 const opInvokeAsync = "InvokeAsync"
 
@@ -118,7 +27,7 @@ const opInvokeAsync = "InvokeAsync"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/InvokeAsync
-func (c *Client) InvokeAsyncRequest(input *InvokeAsyncInput) InvokeAsyncRequest {
+func (c *Client) InvokeAsyncRequest(input *types.InvokeAsyncInput) InvokeAsyncRequest {
 	if c.Client.Config.Logger != nil {
 		c.Client.Config.Logger.Log("This operation, InvokeAsync, has been deprecated")
 	}
@@ -129,10 +38,10 @@ func (c *Client) InvokeAsyncRequest(input *InvokeAsyncInput) InvokeAsyncRequest 
 	}
 
 	if input == nil {
-		input = &InvokeAsyncInput{}
+		input = &types.InvokeAsyncInput{}
 	}
 
-	req := c.newRequest(op, input, &InvokeAsyncOutput{})
+	req := c.newRequest(op, input, &types.InvokeAsyncOutput{})
 	return InvokeAsyncRequest{Request: req, Input: input, Copy: c.InvokeAsyncRequest}
 }
 
@@ -140,8 +49,8 @@ func (c *Client) InvokeAsyncRequest(input *InvokeAsyncInput) InvokeAsyncRequest 
 // InvokeAsync API operation.
 type InvokeAsyncRequest struct {
 	*aws.Request
-	Input *InvokeAsyncInput
-	Copy  func(*InvokeAsyncInput) InvokeAsyncRequest
+	Input *types.InvokeAsyncInput
+	Copy  func(*types.InvokeAsyncInput) InvokeAsyncRequest
 }
 
 // Send marshals and sends the InvokeAsync API request.
@@ -153,7 +62,7 @@ func (r InvokeAsyncRequest) Send(ctx context.Context) (*InvokeAsyncResponse, err
 	}
 
 	resp := &InvokeAsyncResponse{
-		InvokeAsyncOutput: r.Request.Data.(*InvokeAsyncOutput),
+		InvokeAsyncOutput: r.Request.Data.(*types.InvokeAsyncOutput),
 		response:          &aws.Response{Request: r.Request},
 	}
 
@@ -163,7 +72,7 @@ func (r InvokeAsyncRequest) Send(ctx context.Context) (*InvokeAsyncResponse, err
 // InvokeAsyncResponse is the response type for the
 // InvokeAsync API operation.
 type InvokeAsyncResponse struct {
-	*InvokeAsyncOutput
+	*types.InvokeAsyncOutput
 
 	response *aws.Response
 }

@@ -6,161 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-// Contains the parameters for DescribeSpotInstanceRequests.
-type DescribeSpotInstanceRequestsInput struct {
-	_ struct{} `type:"structure"`
-
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have
-	// the required permissions, the error response is DryRunOperation. Otherwise,
-	// it is UnauthorizedOperation.
-	DryRun *bool `locationName:"dryRun" type:"boolean"`
-
-	// One or more filters.
-	//
-	//    * availability-zone-group - The Availability Zone group.
-	//
-	//    * create-time - The time stamp when the Spot Instance request was created.
-	//
-	//    * fault-code - The fault code related to the request.
-	//
-	//    * fault-message - The fault message related to the request.
-	//
-	//    * instance-id - The ID of the instance that fulfilled the request.
-	//
-	//    * launch-group - The Spot Instance launch group.
-	//
-	//    * launch.block-device-mapping.delete-on-termination - Indicates whether
-	//    the EBS volume is deleted on instance termination.
-	//
-	//    * launch.block-device-mapping.device-name - The device name for the volume
-	//    in the block device mapping (for example, /dev/sdh or xvdh).
-	//
-	//    * launch.block-device-mapping.snapshot-id - The ID of the snapshot for
-	//    the EBS volume.
-	//
-	//    * launch.block-device-mapping.volume-size - The size of the EBS volume,
-	//    in GiB.
-	//
-	//    * launch.block-device-mapping.volume-type - The type of EBS volume: gp2
-	//    for General Purpose SSD, io1 for Provisioned IOPS SSD, st1 for Throughput
-	//    Optimized HDD, sc1for Cold HDD, or standard for Magnetic.
-	//
-	//    * launch.group-id - The ID of the security group for the instance.
-	//
-	//    * launch.group-name - The name of the security group for the instance.
-	//
-	//    * launch.image-id - The ID of the AMI.
-	//
-	//    * launch.instance-type - The type of instance (for example, m3.medium).
-	//
-	//    * launch.kernel-id - The kernel ID.
-	//
-	//    * launch.key-name - The name of the key pair the instance launched with.
-	//
-	//    * launch.monitoring-enabled - Whether detailed monitoring is enabled for
-	//    the Spot Instance.
-	//
-	//    * launch.ramdisk-id - The RAM disk ID.
-	//
-	//    * launched-availability-zone - The Availability Zone in which the request
-	//    is launched.
-	//
-	//    * network-interface.addresses.primary - Indicates whether the IP address
-	//    is the primary private IP address.
-	//
-	//    * network-interface.delete-on-termination - Indicates whether the network
-	//    interface is deleted when the instance is terminated.
-	//
-	//    * network-interface.description - A description of the network interface.
-	//
-	//    * network-interface.device-index - The index of the device for the network
-	//    interface attachment on the instance.
-	//
-	//    * network-interface.group-id - The ID of the security group associated
-	//    with the network interface.
-	//
-	//    * network-interface.network-interface-id - The ID of the network interface.
-	//
-	//    * network-interface.private-ip-address - The primary private IP address
-	//    of the network interface.
-	//
-	//    * network-interface.subnet-id - The ID of the subnet for the instance.
-	//
-	//    * product-description - The product description associated with the instance
-	//    (Linux/UNIX | Windows).
-	//
-	//    * spot-instance-request-id - The Spot Instance request ID.
-	//
-	//    * spot-price - The maximum hourly price for any Spot Instance launched
-	//    to fulfill the request.
-	//
-	//    * state - The state of the Spot Instance request (open | active | closed
-	//    | cancelled | failed). Spot request status information can help you track
-	//    your Amazon EC2 Spot Instance requests. For more information, see Spot
-	//    Request Status (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-bid-status.html)
-	//    in the Amazon EC2 User Guide for Linux Instances.
-	//
-	//    * status-code - The short code describing the most recent evaluation of
-	//    your Spot Instance request.
-	//
-	//    * status-message - The message explaining the status of the Spot Instance
-	//    request.
-	//
-	//    * tag:<key> - The key/value combination of a tag assigned to the resource.
-	//    Use the tag key in the filter name and the tag value as the filter value.
-	//    For example, to find all resources that have a tag with the key Owner
-	//    and the value TeamA, specify tag:Owner for the filter name and TeamA for
-	//    the filter value.
-	//
-	//    * tag-key - The key of a tag assigned to the resource. Use this filter
-	//    to find all resources assigned a tag with a specific key, regardless of
-	//    the tag value.
-	//
-	//    * type - The type of Spot Instance request (one-time | persistent).
-	//
-	//    * valid-from - The start date of the request.
-	//
-	//    * valid-until - The end date of the request.
-	Filters []Filter `locationName:"Filter" locationNameList:"Filter" type:"list"`
-
-	// The maximum number of results to return in a single call. Specify a value
-	// between 5 and 1000. To retrieve the remaining results, make another call
-	// with the returned NextToken value.
-	MaxResults *int64 `type:"integer"`
-
-	// The token to request the next set of results. This value is null when there
-	// are no more results to return.
-	NextToken *string `type:"string"`
-
-	// One or more Spot Instance request IDs.
-	SpotInstanceRequestIds []string `locationName:"SpotInstanceRequestId" locationNameList:"SpotInstanceRequestId" type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeSpotInstanceRequestsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Contains the output of DescribeSpotInstanceRequests.
-type DescribeSpotInstanceRequestsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The token to use to retrieve the next set of results. This value is null
-	// when there are no more results to return.
-	NextToken *string `locationName:"nextToken" type:"string"`
-
-	// One or more Spot Instance requests.
-	SpotInstanceRequests []SpotInstanceRequest `locationName:"spotInstanceRequestSet" locationNameList:"item" type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeSpotInstanceRequestsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeSpotInstanceRequests = "DescribeSpotInstanceRequests"
 
@@ -193,7 +40,7 @@ const opDescribeSpotInstanceRequests = "DescribeSpotInstanceRequests"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeSpotInstanceRequests
-func (c *Client) DescribeSpotInstanceRequestsRequest(input *DescribeSpotInstanceRequestsInput) DescribeSpotInstanceRequestsRequest {
+func (c *Client) DescribeSpotInstanceRequestsRequest(input *types.DescribeSpotInstanceRequestsInput) DescribeSpotInstanceRequestsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeSpotInstanceRequests,
 		HTTPMethod: "POST",
@@ -207,10 +54,10 @@ func (c *Client) DescribeSpotInstanceRequestsRequest(input *DescribeSpotInstance
 	}
 
 	if input == nil {
-		input = &DescribeSpotInstanceRequestsInput{}
+		input = &types.DescribeSpotInstanceRequestsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeSpotInstanceRequestsOutput{})
+	req := c.newRequest(op, input, &types.DescribeSpotInstanceRequestsOutput{})
 	return DescribeSpotInstanceRequestsRequest{Request: req, Input: input, Copy: c.DescribeSpotInstanceRequestsRequest}
 }
 
@@ -218,8 +65,8 @@ func (c *Client) DescribeSpotInstanceRequestsRequest(input *DescribeSpotInstance
 // DescribeSpotInstanceRequests API operation.
 type DescribeSpotInstanceRequestsRequest struct {
 	*aws.Request
-	Input *DescribeSpotInstanceRequestsInput
-	Copy  func(*DescribeSpotInstanceRequestsInput) DescribeSpotInstanceRequestsRequest
+	Input *types.DescribeSpotInstanceRequestsInput
+	Copy  func(*types.DescribeSpotInstanceRequestsInput) DescribeSpotInstanceRequestsRequest
 }
 
 // Send marshals and sends the DescribeSpotInstanceRequests API request.
@@ -231,7 +78,7 @@ func (r DescribeSpotInstanceRequestsRequest) Send(ctx context.Context) (*Describ
 	}
 
 	resp := &DescribeSpotInstanceRequestsResponse{
-		DescribeSpotInstanceRequestsOutput: r.Request.Data.(*DescribeSpotInstanceRequestsOutput),
+		DescribeSpotInstanceRequestsOutput: r.Request.Data.(*types.DescribeSpotInstanceRequestsOutput),
 		response:                           &aws.Response{Request: r.Request},
 	}
 
@@ -261,7 +108,7 @@ func NewDescribeSpotInstanceRequestsPaginator(req DescribeSpotInstanceRequestsRe
 	return DescribeSpotInstanceRequestsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *DescribeSpotInstanceRequestsInput
+				var inCpy *types.DescribeSpotInstanceRequestsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -281,14 +128,14 @@ type DescribeSpotInstanceRequestsPaginator struct {
 	aws.Pager
 }
 
-func (p *DescribeSpotInstanceRequestsPaginator) CurrentPage() *DescribeSpotInstanceRequestsOutput {
-	return p.Pager.CurrentPage().(*DescribeSpotInstanceRequestsOutput)
+func (p *DescribeSpotInstanceRequestsPaginator) CurrentPage() *types.DescribeSpotInstanceRequestsOutput {
+	return p.Pager.CurrentPage().(*types.DescribeSpotInstanceRequestsOutput)
 }
 
 // DescribeSpotInstanceRequestsResponse is the response type for the
 // DescribeSpotInstanceRequests API operation.
 type DescribeSpotInstanceRequestsResponse struct {
-	*DescribeSpotInstanceRequestsOutput
+	*types.DescribeSpotInstanceRequestsOutput
 
 	response *aws.Response
 }

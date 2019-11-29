@@ -6,66 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-type DisassociateClientVpnTargetNetworkInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the target network association.
-	//
-	// AssociationId is a required field
-	AssociationId *string `type:"string" required:"true"`
-
-	// The ID of the Client VPN endpoint from which to disassociate the target network.
-	//
-	// ClientVpnEndpointId is a required field
-	ClientVpnEndpointId *string `type:"string" required:"true"`
-
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have
-	// the required permissions, the error response is DryRunOperation. Otherwise,
-	// it is UnauthorizedOperation.
-	DryRun *bool `type:"boolean"`
-}
-
-// String returns the string representation
-func (s DisassociateClientVpnTargetNetworkInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DisassociateClientVpnTargetNetworkInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DisassociateClientVpnTargetNetworkInput"}
-
-	if s.AssociationId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("AssociationId"))
-	}
-
-	if s.ClientVpnEndpointId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ClientVpnEndpointId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DisassociateClientVpnTargetNetworkOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the target network association.
-	AssociationId *string `locationName:"associationId" type:"string"`
-
-	// The current state of the target network association.
-	Status *AssociationStatus `locationName:"status" type:"structure"`
-}
-
-// String returns the string representation
-func (s DisassociateClientVpnTargetNetworkOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDisassociateClientVpnTargetNetwork = "DisassociateClientVpnTargetNetwork"
 
@@ -92,7 +34,7 @@ const opDisassociateClientVpnTargetNetwork = "DisassociateClientVpnTargetNetwork
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DisassociateClientVpnTargetNetwork
-func (c *Client) DisassociateClientVpnTargetNetworkRequest(input *DisassociateClientVpnTargetNetworkInput) DisassociateClientVpnTargetNetworkRequest {
+func (c *Client) DisassociateClientVpnTargetNetworkRequest(input *types.DisassociateClientVpnTargetNetworkInput) DisassociateClientVpnTargetNetworkRequest {
 	op := &aws.Operation{
 		Name:       opDisassociateClientVpnTargetNetwork,
 		HTTPMethod: "POST",
@@ -100,10 +42,10 @@ func (c *Client) DisassociateClientVpnTargetNetworkRequest(input *DisassociateCl
 	}
 
 	if input == nil {
-		input = &DisassociateClientVpnTargetNetworkInput{}
+		input = &types.DisassociateClientVpnTargetNetworkInput{}
 	}
 
-	req := c.newRequest(op, input, &DisassociateClientVpnTargetNetworkOutput{})
+	req := c.newRequest(op, input, &types.DisassociateClientVpnTargetNetworkOutput{})
 	return DisassociateClientVpnTargetNetworkRequest{Request: req, Input: input, Copy: c.DisassociateClientVpnTargetNetworkRequest}
 }
 
@@ -111,8 +53,8 @@ func (c *Client) DisassociateClientVpnTargetNetworkRequest(input *DisassociateCl
 // DisassociateClientVpnTargetNetwork API operation.
 type DisassociateClientVpnTargetNetworkRequest struct {
 	*aws.Request
-	Input *DisassociateClientVpnTargetNetworkInput
-	Copy  func(*DisassociateClientVpnTargetNetworkInput) DisassociateClientVpnTargetNetworkRequest
+	Input *types.DisassociateClientVpnTargetNetworkInput
+	Copy  func(*types.DisassociateClientVpnTargetNetworkInput) DisassociateClientVpnTargetNetworkRequest
 }
 
 // Send marshals and sends the DisassociateClientVpnTargetNetwork API request.
@@ -124,7 +66,7 @@ func (r DisassociateClientVpnTargetNetworkRequest) Send(ctx context.Context) (*D
 	}
 
 	resp := &DisassociateClientVpnTargetNetworkResponse{
-		DisassociateClientVpnTargetNetworkOutput: r.Request.Data.(*DisassociateClientVpnTargetNetworkOutput),
+		DisassociateClientVpnTargetNetworkOutput: r.Request.Data.(*types.DisassociateClientVpnTargetNetworkOutput),
 		response:                                 &aws.Response{Request: r.Request},
 	}
 
@@ -134,7 +76,7 @@ func (r DisassociateClientVpnTargetNetworkRequest) Send(ctx context.Context) (*D
 // DisassociateClientVpnTargetNetworkResponse is the response type for the
 // DisassociateClientVpnTargetNetwork API operation.
 type DisassociateClientVpnTargetNetworkResponse struct {
-	*DisassociateClientVpnTargetNetworkOutput
+	*types.DisassociateClientVpnTargetNetworkOutput
 
 	response *aws.Response
 }

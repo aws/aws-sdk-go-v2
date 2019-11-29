@@ -6,63 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/dynamodb/types"
 )
-
-type RestoreTableFromBackupInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) associated with the backup.
-	//
-	// BackupArn is a required field
-	BackupArn *string `min:"37" type:"string" required:"true"`
-
-	// The name of the new table to which the backup must be restored.
-	//
-	// TargetTableName is a required field
-	TargetTableName *string `min:"3" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s RestoreTableFromBackupInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *RestoreTableFromBackupInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "RestoreTableFromBackupInput"}
-
-	if s.BackupArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("BackupArn"))
-	}
-	if s.BackupArn != nil && len(*s.BackupArn) < 37 {
-		invalidParams.Add(aws.NewErrParamMinLen("BackupArn", 37))
-	}
-
-	if s.TargetTableName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("TargetTableName"))
-	}
-	if s.TargetTableName != nil && len(*s.TargetTableName) < 3 {
-		invalidParams.Add(aws.NewErrParamMinLen("TargetTableName", 3))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type RestoreTableFromBackupOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The description of the table created from an existing backup.
-	TableDescription *TableDescription `type:"structure"`
-}
-
-// String returns the string representation
-func (s RestoreTableFromBackupOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opRestoreTableFromBackup = "RestoreTableFromBackup"
 
@@ -96,7 +41,7 @@ const opRestoreTableFromBackup = "RestoreTableFromBackup"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/RestoreTableFromBackup
-func (c *Client) RestoreTableFromBackupRequest(input *RestoreTableFromBackupInput) RestoreTableFromBackupRequest {
+func (c *Client) RestoreTableFromBackupRequest(input *types.RestoreTableFromBackupInput) RestoreTableFromBackupRequest {
 	op := &aws.Operation{
 		Name:       opRestoreTableFromBackup,
 		HTTPMethod: "POST",
@@ -104,10 +49,10 @@ func (c *Client) RestoreTableFromBackupRequest(input *RestoreTableFromBackupInpu
 	}
 
 	if input == nil {
-		input = &RestoreTableFromBackupInput{}
+		input = &types.RestoreTableFromBackupInput{}
 	}
 
-	req := c.newRequest(op, input, &RestoreTableFromBackupOutput{})
+	req := c.newRequest(op, input, &types.RestoreTableFromBackupOutput{})
 	return RestoreTableFromBackupRequest{Request: req, Input: input, Copy: c.RestoreTableFromBackupRequest}
 }
 
@@ -115,8 +60,8 @@ func (c *Client) RestoreTableFromBackupRequest(input *RestoreTableFromBackupInpu
 // RestoreTableFromBackup API operation.
 type RestoreTableFromBackupRequest struct {
 	*aws.Request
-	Input *RestoreTableFromBackupInput
-	Copy  func(*RestoreTableFromBackupInput) RestoreTableFromBackupRequest
+	Input *types.RestoreTableFromBackupInput
+	Copy  func(*types.RestoreTableFromBackupInput) RestoreTableFromBackupRequest
 }
 
 // Send marshals and sends the RestoreTableFromBackup API request.
@@ -128,7 +73,7 @@ func (r RestoreTableFromBackupRequest) Send(ctx context.Context) (*RestoreTableF
 	}
 
 	resp := &RestoreTableFromBackupResponse{
-		RestoreTableFromBackupOutput: r.Request.Data.(*RestoreTableFromBackupOutput),
+		RestoreTableFromBackupOutput: r.Request.Data.(*types.RestoreTableFromBackupOutput),
 		response:                     &aws.Response{Request: r.Request},
 	}
 
@@ -138,7 +83,7 @@ func (r RestoreTableFromBackupRequest) Send(ctx context.Context) (*RestoreTableF
 // RestoreTableFromBackupResponse is the response type for the
 // RestoreTableFromBackup API operation.
 type RestoreTableFromBackupResponse struct {
-	*RestoreTableFromBackupOutput
+	*types.RestoreTableFromBackupOutput
 
 	response *aws.Response
 }

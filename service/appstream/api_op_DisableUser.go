@@ -6,58 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/appstream/types"
 )
-
-type DisableUserInput struct {
-	_ struct{} `type:"structure"`
-
-	// The authentication type for the user. You must specify USERPOOL.
-	//
-	// AuthenticationType is a required field
-	AuthenticationType AuthenticationType `type:"string" required:"true" enum:"true"`
-
-	// The email address of the user.
-	//
-	// Users' email addresses are case-sensitive.
-	//
-	// UserName is a required field
-	UserName *string `min:"1" type:"string" required:"true" sensitive:"true"`
-}
-
-// String returns the string representation
-func (s DisableUserInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DisableUserInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DisableUserInput"}
-	if len(s.AuthenticationType) == 0 {
-		invalidParams.Add(aws.NewErrParamRequired("AuthenticationType"))
-	}
-
-	if s.UserName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("UserName"))
-	}
-	if s.UserName != nil && len(*s.UserName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("UserName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DisableUserOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DisableUserOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDisableUser = "DisableUser"
 
@@ -75,7 +25,7 @@ const opDisableUser = "DisableUser"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DisableUser
-func (c *Client) DisableUserRequest(input *DisableUserInput) DisableUserRequest {
+func (c *Client) DisableUserRequest(input *types.DisableUserInput) DisableUserRequest {
 	op := &aws.Operation{
 		Name:       opDisableUser,
 		HTTPMethod: "POST",
@@ -83,10 +33,10 @@ func (c *Client) DisableUserRequest(input *DisableUserInput) DisableUserRequest 
 	}
 
 	if input == nil {
-		input = &DisableUserInput{}
+		input = &types.DisableUserInput{}
 	}
 
-	req := c.newRequest(op, input, &DisableUserOutput{})
+	req := c.newRequest(op, input, &types.DisableUserOutput{})
 	return DisableUserRequest{Request: req, Input: input, Copy: c.DisableUserRequest}
 }
 
@@ -94,8 +44,8 @@ func (c *Client) DisableUserRequest(input *DisableUserInput) DisableUserRequest 
 // DisableUser API operation.
 type DisableUserRequest struct {
 	*aws.Request
-	Input *DisableUserInput
-	Copy  func(*DisableUserInput) DisableUserRequest
+	Input *types.DisableUserInput
+	Copy  func(*types.DisableUserInput) DisableUserRequest
 }
 
 // Send marshals and sends the DisableUser API request.
@@ -107,7 +57,7 @@ func (r DisableUserRequest) Send(ctx context.Context) (*DisableUserResponse, err
 	}
 
 	resp := &DisableUserResponse{
-		DisableUserOutput: r.Request.Data.(*DisableUserOutput),
+		DisableUserOutput: r.Request.Data.(*types.DisableUserOutput),
 		response:          &aws.Response{Request: r.Request},
 	}
 
@@ -117,7 +67,7 @@ func (r DisableUserRequest) Send(ctx context.Context) (*DisableUserResponse, err
 // DisableUserResponse is the response type for the
 // DisableUser API operation.
 type DisableUserResponse struct {
-	*DisableUserOutput
+	*types.DisableUserOutput
 
 	response *aws.Response
 }

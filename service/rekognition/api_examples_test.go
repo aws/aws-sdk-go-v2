@@ -12,6 +12,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws/awserr"
 	"github.com/aws/aws-sdk-go-v2/aws/external"
 	"github.com/aws/aws-sdk-go-v2/service/rekognition"
+	"github.com/aws/aws-sdk-go-v2/service/rekognition/types"
 )
 
 var _ time.Duration
@@ -37,16 +38,16 @@ func ExampleClient_CompareFacesRequest_shared00() {
 	}
 
 	svc := rekognition.New(cfg)
-	input := &rekognition.CompareFacesInput{
+	input := &types.CompareFacesInput{
 		SimilarityThreshold: aws.Float64(90.000000),
-		SourceImage: &rekognition.Image{
-			S3Object: &rekognition.S3Object{
+		SourceImage: &types.Image{
+			S3Object: &types.S3Object{
 				Bucket: aws.String("mybucket"),
 				Name:   aws.String("mysourceimage"),
 			},
 		},
-		TargetImage: &rekognition.Image{
-			S3Object: &rekognition.S3Object{
+		TargetImage: &types.Image{
+			S3Object: &types.S3Object{
 				Bucket: aws.String("mybucket"),
 				Name:   aws.String("mytargetimage"),
 			},
@@ -98,7 +99,7 @@ func ExampleClient_CreateCollectionRequest_shared00() {
 	}
 
 	svc := rekognition.New(cfg)
-	input := &rekognition.CreateCollectionInput{
+	input := &types.CreateCollectionInput{
 		CollectionId: aws.String("myphotos"),
 	}
 
@@ -143,7 +144,7 @@ func ExampleClient_DeleteCollectionRequest_shared00() {
 	}
 
 	svc := rekognition.New(cfg)
-	input := &rekognition.DeleteCollectionInput{
+	input := &types.DeleteCollectionInput{
 		CollectionId: aws.String("myphotos"),
 	}
 
@@ -188,7 +189,7 @@ func ExampleClient_DeleteFacesRequest_shared00() {
 	}
 
 	svc := rekognition.New(cfg)
-	input := &rekognition.DeleteFacesInput{
+	input := &types.DeleteFacesInput{
 		CollectionId: aws.String("myphotos"),
 		FaceIds: []string{
 			"ff43d742-0c13-5d16-a3e8-03d3f58e980b",
@@ -236,9 +237,9 @@ func ExampleClient_DetectFacesRequest_shared00() {
 	}
 
 	svc := rekognition.New(cfg)
-	input := &rekognition.DetectFacesInput{
-		Image: &rekognition.Image{
-			S3Object: &rekognition.S3Object{
+	input := &types.DetectFacesInput{
+		Image: &types.Image{
+			S3Object: &types.S3Object{
 				Bucket: aws.String("mybucket"),
 				Name:   aws.String("myphoto"),
 			},
@@ -290,9 +291,9 @@ func ExampleClient_DetectLabelsRequest_shared00() {
 	}
 
 	svc := rekognition.New(cfg)
-	input := &rekognition.DetectLabelsInput{
-		Image: &rekognition.Image{
-			S3Object: &rekognition.S3Object{
+	input := &types.DetectLabelsInput{
+		Image: &types.Image{
+			S3Object: &types.S3Object{
 				Bucket: aws.String("mybucket"),
 				Name:   aws.String("myphoto"),
 			},
@@ -347,11 +348,11 @@ func ExampleClient_IndexFacesRequest_shared00() {
 	}
 
 	svc := rekognition.New(cfg)
-	input := &rekognition.IndexFacesInput{
+	input := &types.IndexFacesInput{
 		CollectionId:    aws.String("myphotos"),
 		ExternalImageId: aws.String("myphotoid"),
-		Image: &rekognition.Image{
-			S3Object: &rekognition.S3Object{
+		Image: &types.Image{
+			S3Object: &types.S3Object{
 				Bucket: aws.String("mybucket"),
 				Name:   aws.String("myphoto"),
 			},
@@ -405,7 +406,7 @@ func ExampleClient_ListCollectionsRequest_shared00() {
 	}
 
 	svc := rekognition.New(cfg)
-	input := &rekognition.ListCollectionsInput{}
+	input := &types.ListCollectionsInput{}
 
 	req := svc.ListCollectionsRequest(input)
 	result, err := req.Send(context.Background())
@@ -450,7 +451,7 @@ func ExampleClient_ListFacesRequest_shared00() {
 	}
 
 	svc := rekognition.New(cfg)
-	input := &rekognition.ListFacesInput{
+	input := &types.ListFacesInput{
 		CollectionId: aws.String("myphotos"),
 		MaxResults:   aws.Int64(20),
 	}
@@ -499,7 +500,7 @@ func ExampleClient_SearchFacesRequest_shared00() {
 	}
 
 	svc := rekognition.New(cfg)
-	input := &rekognition.SearchFacesInput{
+	input := &types.SearchFacesInput{
 		CollectionId:       aws.String("myphotos"),
 		FaceId:             aws.String("70008e50-75e4-55d0-8e80-363fb73b3a14"),
 		FaceMatchThreshold: aws.Float64(90.000000),
@@ -548,11 +549,11 @@ func ExampleClient_SearchFacesByImageRequest_shared00() {
 	}
 
 	svc := rekognition.New(cfg)
-	input := &rekognition.SearchFacesByImageInput{
+	input := &types.SearchFacesByImageInput{
 		CollectionId:       aws.String("myphotos"),
 		FaceMatchThreshold: aws.Float64(95.000000),
-		Image: &rekognition.Image{
-			S3Object: &rekognition.S3Object{
+		Image: &types.Image{
+			S3Object: &types.S3Object{
 				Bucket: aws.String("mybucket"),
 				Name:   aws.String("myphoto"),
 			},

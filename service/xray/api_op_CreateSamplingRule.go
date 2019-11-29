@@ -6,78 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/xray/types"
 )
-
-type CreateSamplingRuleInput struct {
-	_ struct{} `type:"structure"`
-
-	// The rule definition.
-	//
-	// SamplingRule is a required field
-	SamplingRule *SamplingRule `type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s CreateSamplingRuleInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateSamplingRuleInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateSamplingRuleInput"}
-
-	if s.SamplingRule == nil {
-		invalidParams.Add(aws.NewErrParamRequired("SamplingRule"))
-	}
-	if s.SamplingRule != nil {
-		if err := s.SamplingRule.Validate(); err != nil {
-			invalidParams.AddNested("SamplingRule", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s CreateSamplingRuleInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.SamplingRule != nil {
-		v := s.SamplingRule
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "SamplingRule", v, metadata)
-	}
-	return nil
-}
-
-type CreateSamplingRuleOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The saved rule definition and metadata.
-	SamplingRuleRecord *SamplingRuleRecord `type:"structure"`
-}
-
-// String returns the string representation
-func (s CreateSamplingRuleOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s CreateSamplingRuleOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.SamplingRuleRecord != nil {
-		v := s.SamplingRuleRecord
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "SamplingRuleRecord", v, metadata)
-	}
-	return nil
-}
 
 const opCreateSamplingRule = "CreateSamplingRule"
 
@@ -100,7 +30,7 @@ const opCreateSamplingRule = "CreateSamplingRule"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/CreateSamplingRule
-func (c *Client) CreateSamplingRuleRequest(input *CreateSamplingRuleInput) CreateSamplingRuleRequest {
+func (c *Client) CreateSamplingRuleRequest(input *types.CreateSamplingRuleInput) CreateSamplingRuleRequest {
 	op := &aws.Operation{
 		Name:       opCreateSamplingRule,
 		HTTPMethod: "POST",
@@ -108,10 +38,10 @@ func (c *Client) CreateSamplingRuleRequest(input *CreateSamplingRuleInput) Creat
 	}
 
 	if input == nil {
-		input = &CreateSamplingRuleInput{}
+		input = &types.CreateSamplingRuleInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateSamplingRuleOutput{})
+	req := c.newRequest(op, input, &types.CreateSamplingRuleOutput{})
 	return CreateSamplingRuleRequest{Request: req, Input: input, Copy: c.CreateSamplingRuleRequest}
 }
 
@@ -119,8 +49,8 @@ func (c *Client) CreateSamplingRuleRequest(input *CreateSamplingRuleInput) Creat
 // CreateSamplingRule API operation.
 type CreateSamplingRuleRequest struct {
 	*aws.Request
-	Input *CreateSamplingRuleInput
-	Copy  func(*CreateSamplingRuleInput) CreateSamplingRuleRequest
+	Input *types.CreateSamplingRuleInput
+	Copy  func(*types.CreateSamplingRuleInput) CreateSamplingRuleRequest
 }
 
 // Send marshals and sends the CreateSamplingRule API request.
@@ -132,7 +62,7 @@ func (r CreateSamplingRuleRequest) Send(ctx context.Context) (*CreateSamplingRul
 	}
 
 	resp := &CreateSamplingRuleResponse{
-		CreateSamplingRuleOutput: r.Request.Data.(*CreateSamplingRuleOutput),
+		CreateSamplingRuleOutput: r.Request.Data.(*types.CreateSamplingRuleOutput),
 		response:                 &aws.Response{Request: r.Request},
 	}
 
@@ -142,7 +72,7 @@ func (r CreateSamplingRuleRequest) Send(ctx context.Context) (*CreateSamplingRul
 // CreateSamplingRuleResponse is the response type for the
 // CreateSamplingRule API operation.
 type CreateSamplingRuleResponse struct {
-	*CreateSamplingRuleOutput
+	*types.CreateSamplingRuleOutput
 
 	response *aws.Response
 }

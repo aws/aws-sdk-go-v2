@@ -6,52 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-type ReleaseHostsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The IDs of the Dedicated Hosts to release.
-	//
-	// HostIds is a required field
-	HostIds []string `locationName:"hostId" locationNameList:"item" type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s ReleaseHostsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ReleaseHostsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ReleaseHostsInput"}
-
-	if s.HostIds == nil {
-		invalidParams.Add(aws.NewErrParamRequired("HostIds"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ReleaseHostsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The IDs of the Dedicated Hosts that were successfully released.
-	Successful []string `locationName:"successful" locationNameList:"item" type:"list"`
-
-	// The IDs of the Dedicated Hosts that could not be released, including an error
-	// message.
-	Unsuccessful []UnsuccessfulItem `locationName:"unsuccessful" locationNameList:"item" type:"list"`
-}
-
-// String returns the string representation
-func (s ReleaseHostsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opReleaseHosts = "ReleaseHosts"
 
@@ -78,7 +34,7 @@ const opReleaseHosts = "ReleaseHosts"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ReleaseHosts
-func (c *Client) ReleaseHostsRequest(input *ReleaseHostsInput) ReleaseHostsRequest {
+func (c *Client) ReleaseHostsRequest(input *types.ReleaseHostsInput) ReleaseHostsRequest {
 	op := &aws.Operation{
 		Name:       opReleaseHosts,
 		HTTPMethod: "POST",
@@ -86,10 +42,10 @@ func (c *Client) ReleaseHostsRequest(input *ReleaseHostsInput) ReleaseHostsReque
 	}
 
 	if input == nil {
-		input = &ReleaseHostsInput{}
+		input = &types.ReleaseHostsInput{}
 	}
 
-	req := c.newRequest(op, input, &ReleaseHostsOutput{})
+	req := c.newRequest(op, input, &types.ReleaseHostsOutput{})
 	return ReleaseHostsRequest{Request: req, Input: input, Copy: c.ReleaseHostsRequest}
 }
 
@@ -97,8 +53,8 @@ func (c *Client) ReleaseHostsRequest(input *ReleaseHostsInput) ReleaseHostsReque
 // ReleaseHosts API operation.
 type ReleaseHostsRequest struct {
 	*aws.Request
-	Input *ReleaseHostsInput
-	Copy  func(*ReleaseHostsInput) ReleaseHostsRequest
+	Input *types.ReleaseHostsInput
+	Copy  func(*types.ReleaseHostsInput) ReleaseHostsRequest
 }
 
 // Send marshals and sends the ReleaseHosts API request.
@@ -110,7 +66,7 @@ func (r ReleaseHostsRequest) Send(ctx context.Context) (*ReleaseHostsResponse, e
 	}
 
 	resp := &ReleaseHostsResponse{
-		ReleaseHostsOutput: r.Request.Data.(*ReleaseHostsOutput),
+		ReleaseHostsOutput: r.Request.Data.(*types.ReleaseHostsOutput),
 		response:           &aws.Response{Request: r.Request},
 	}
 
@@ -120,7 +76,7 @@ func (r ReleaseHostsRequest) Send(ctx context.Context) (*ReleaseHostsResponse, e
 // ReleaseHostsResponse is the response type for the
 // ReleaseHosts API operation.
 type ReleaseHostsResponse struct {
-	*ReleaseHostsOutput
+	*types.ReleaseHostsOutput
 
 	response *aws.Response
 }

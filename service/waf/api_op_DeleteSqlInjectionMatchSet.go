@@ -6,68 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/waf/types"
 )
-
-// A request to delete a SqlInjectionMatchSet from AWS WAF.
-type DeleteSqlInjectionMatchSetInput struct {
-	_ struct{} `type:"structure"`
-
-	// The value returned by the most recent call to GetChangeToken.
-	//
-	// ChangeToken is a required field
-	ChangeToken *string `min:"1" type:"string" required:"true"`
-
-	// The SqlInjectionMatchSetId of the SqlInjectionMatchSet that you want to delete.
-	// SqlInjectionMatchSetId is returned by CreateSqlInjectionMatchSet and by ListSqlInjectionMatchSets.
-	//
-	// SqlInjectionMatchSetId is a required field
-	SqlInjectionMatchSetId *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteSqlInjectionMatchSetInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteSqlInjectionMatchSetInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteSqlInjectionMatchSetInput"}
-
-	if s.ChangeToken == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ChangeToken"))
-	}
-	if s.ChangeToken != nil && len(*s.ChangeToken) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ChangeToken", 1))
-	}
-
-	if s.SqlInjectionMatchSetId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("SqlInjectionMatchSetId"))
-	}
-	if s.SqlInjectionMatchSetId != nil && len(*s.SqlInjectionMatchSetId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("SqlInjectionMatchSetId", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// The response to a request to delete a SqlInjectionMatchSet from AWS WAF.
-type DeleteSqlInjectionMatchSetOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The ChangeToken that you used to submit the DeleteSqlInjectionMatchSet request.
-	// You can also use this value to query the status of the request. For more
-	// information, see GetChangeTokenStatus.
-	ChangeToken *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s DeleteSqlInjectionMatchSetOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteSqlInjectionMatchSet = "DeleteSqlInjectionMatchSet"
 
@@ -99,7 +39,7 @@ const opDeleteSqlInjectionMatchSet = "DeleteSqlInjectionMatchSet"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/DeleteSqlInjectionMatchSet
-func (c *Client) DeleteSqlInjectionMatchSetRequest(input *DeleteSqlInjectionMatchSetInput) DeleteSqlInjectionMatchSetRequest {
+func (c *Client) DeleteSqlInjectionMatchSetRequest(input *types.DeleteSqlInjectionMatchSetInput) DeleteSqlInjectionMatchSetRequest {
 	op := &aws.Operation{
 		Name:       opDeleteSqlInjectionMatchSet,
 		HTTPMethod: "POST",
@@ -107,10 +47,10 @@ func (c *Client) DeleteSqlInjectionMatchSetRequest(input *DeleteSqlInjectionMatc
 	}
 
 	if input == nil {
-		input = &DeleteSqlInjectionMatchSetInput{}
+		input = &types.DeleteSqlInjectionMatchSetInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteSqlInjectionMatchSetOutput{})
+	req := c.newRequest(op, input, &types.DeleteSqlInjectionMatchSetOutput{})
 	return DeleteSqlInjectionMatchSetRequest{Request: req, Input: input, Copy: c.DeleteSqlInjectionMatchSetRequest}
 }
 
@@ -118,8 +58,8 @@ func (c *Client) DeleteSqlInjectionMatchSetRequest(input *DeleteSqlInjectionMatc
 // DeleteSqlInjectionMatchSet API operation.
 type DeleteSqlInjectionMatchSetRequest struct {
 	*aws.Request
-	Input *DeleteSqlInjectionMatchSetInput
-	Copy  func(*DeleteSqlInjectionMatchSetInput) DeleteSqlInjectionMatchSetRequest
+	Input *types.DeleteSqlInjectionMatchSetInput
+	Copy  func(*types.DeleteSqlInjectionMatchSetInput) DeleteSqlInjectionMatchSetRequest
 }
 
 // Send marshals and sends the DeleteSqlInjectionMatchSet API request.
@@ -131,7 +71,7 @@ func (r DeleteSqlInjectionMatchSetRequest) Send(ctx context.Context) (*DeleteSql
 	}
 
 	resp := &DeleteSqlInjectionMatchSetResponse{
-		DeleteSqlInjectionMatchSetOutput: r.Request.Data.(*DeleteSqlInjectionMatchSetOutput),
+		DeleteSqlInjectionMatchSetOutput: r.Request.Data.(*types.DeleteSqlInjectionMatchSetOutput),
 		response:                         &aws.Response{Request: r.Request},
 	}
 
@@ -141,7 +81,7 @@ func (r DeleteSqlInjectionMatchSetRequest) Send(ctx context.Context) (*DeleteSql
 // DeleteSqlInjectionMatchSetResponse is the response type for the
 // DeleteSqlInjectionMatchSet API operation.
 type DeleteSqlInjectionMatchSetResponse struct {
-	*DeleteSqlInjectionMatchSetOutput
+	*types.DeleteSqlInjectionMatchSetOutput
 
 	response *aws.Response
 }

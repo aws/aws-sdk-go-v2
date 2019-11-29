@@ -6,98 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/pinpoint/types"
 )
-
-type UpdateGcmChannelInput struct {
-	_ struct{} `type:"structure" payload:"GCMChannelRequest"`
-
-	// ApplicationId is a required field
-	ApplicationId *string `location:"uri" locationName:"application-id" type:"string" required:"true"`
-
-	// Specifies the status and settings of the GCM channel for an application.
-	// This channel enables Amazon Pinpoint to send push notifications through the
-	// Firebase Cloud Messaging (FCM), formerly Google Cloud Messaging (GCM), service.
-	//
-	// GCMChannelRequest is a required field
-	GCMChannelRequest *GCMChannelRequest `type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s UpdateGcmChannelInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateGcmChannelInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateGcmChannelInput"}
-
-	if s.ApplicationId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ApplicationId"))
-	}
-
-	if s.GCMChannelRequest == nil {
-		invalidParams.Add(aws.NewErrParamRequired("GCMChannelRequest"))
-	}
-	if s.GCMChannelRequest != nil {
-		if err := s.GCMChannelRequest.Validate(); err != nil {
-			invalidParams.AddNested("GCMChannelRequest", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s UpdateGcmChannelInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.ApplicationId != nil {
-		v := *s.ApplicationId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "application-id", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.GCMChannelRequest != nil {
-		v := s.GCMChannelRequest
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.PayloadTarget, "GCMChannelRequest", v, metadata)
-	}
-	return nil
-}
-
-type UpdateGcmChannelOutput struct {
-	_ struct{} `type:"structure" payload:"GCMChannelResponse"`
-
-	// Provides information about the status and settings of the GCM channel for
-	// an application. The GCM channel enables Amazon Pinpoint to send push notifications
-	// through the Firebase Cloud Messaging (FCM), formerly Google Cloud Messaging
-	// (GCM), service.
-	//
-	// GCMChannelResponse is a required field
-	GCMChannelResponse *GCMChannelResponse `type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s UpdateGcmChannelOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s UpdateGcmChannelOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.GCMChannelResponse != nil {
-		v := s.GCMChannelResponse
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.PayloadTarget, "GCMChannelResponse", v, metadata)
-	}
-	return nil
-}
 
 const opUpdateGcmChannel = "UpdateGcmChannel"
 
@@ -115,7 +25,7 @@ const opUpdateGcmChannel = "UpdateGcmChannel"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/UpdateGcmChannel
-func (c *Client) UpdateGcmChannelRequest(input *UpdateGcmChannelInput) UpdateGcmChannelRequest {
+func (c *Client) UpdateGcmChannelRequest(input *types.UpdateGcmChannelInput) UpdateGcmChannelRequest {
 	op := &aws.Operation{
 		Name:       opUpdateGcmChannel,
 		HTTPMethod: "PUT",
@@ -123,10 +33,10 @@ func (c *Client) UpdateGcmChannelRequest(input *UpdateGcmChannelInput) UpdateGcm
 	}
 
 	if input == nil {
-		input = &UpdateGcmChannelInput{}
+		input = &types.UpdateGcmChannelInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateGcmChannelOutput{})
+	req := c.newRequest(op, input, &types.UpdateGcmChannelOutput{})
 	return UpdateGcmChannelRequest{Request: req, Input: input, Copy: c.UpdateGcmChannelRequest}
 }
 
@@ -134,8 +44,8 @@ func (c *Client) UpdateGcmChannelRequest(input *UpdateGcmChannelInput) UpdateGcm
 // UpdateGcmChannel API operation.
 type UpdateGcmChannelRequest struct {
 	*aws.Request
-	Input *UpdateGcmChannelInput
-	Copy  func(*UpdateGcmChannelInput) UpdateGcmChannelRequest
+	Input *types.UpdateGcmChannelInput
+	Copy  func(*types.UpdateGcmChannelInput) UpdateGcmChannelRequest
 }
 
 // Send marshals and sends the UpdateGcmChannel API request.
@@ -147,7 +57,7 @@ func (r UpdateGcmChannelRequest) Send(ctx context.Context) (*UpdateGcmChannelRes
 	}
 
 	resp := &UpdateGcmChannelResponse{
-		UpdateGcmChannelOutput: r.Request.Data.(*UpdateGcmChannelOutput),
+		UpdateGcmChannelOutput: r.Request.Data.(*types.UpdateGcmChannelOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -157,7 +67,7 @@ func (r UpdateGcmChannelRequest) Send(ctx context.Context) (*UpdateGcmChannelRes
 // UpdateGcmChannelResponse is the response type for the
 // UpdateGcmChannel API operation.
 type UpdateGcmChannelResponse struct {
-	*UpdateGcmChannelOutput
+	*types.UpdateGcmChannelOutput
 
 	response *aws.Response
 }

@@ -6,54 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/support/types"
 )
-
-type DescribeTrustedAdvisorCheckRefreshStatusesInput struct {
-	_ struct{} `type:"structure"`
-
-	// The IDs of the Trusted Advisor checks to get the status of. Note: Specifying
-	// the check ID of a check that is automatically refreshed causes an InvalidParameterValue
-	// error.
-	//
-	// CheckIds is a required field
-	CheckIds []string `locationName:"checkIds" type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeTrustedAdvisorCheckRefreshStatusesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeTrustedAdvisorCheckRefreshStatusesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeTrustedAdvisorCheckRefreshStatusesInput"}
-
-	if s.CheckIds == nil {
-		invalidParams.Add(aws.NewErrParamRequired("CheckIds"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// The statuses of the Trusted Advisor checks returned by the DescribeTrustedAdvisorCheckRefreshStatuses
-// operation.
-type DescribeTrustedAdvisorCheckRefreshStatusesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The refresh status of the specified Trusted Advisor checks.
-	//
-	// Statuses is a required field
-	Statuses []TrustedAdvisorCheckRefreshStatus `locationName:"statuses" type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeTrustedAdvisorCheckRefreshStatusesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeTrustedAdvisorCheckRefreshStatuses = "DescribeTrustedAdvisorCheckRefreshStatuses"
 
@@ -75,7 +29,7 @@ const opDescribeTrustedAdvisorCheckRefreshStatuses = "DescribeTrustedAdvisorChec
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/support-2013-04-15/DescribeTrustedAdvisorCheckRefreshStatuses
-func (c *Client) DescribeTrustedAdvisorCheckRefreshStatusesRequest(input *DescribeTrustedAdvisorCheckRefreshStatusesInput) DescribeTrustedAdvisorCheckRefreshStatusesRequest {
+func (c *Client) DescribeTrustedAdvisorCheckRefreshStatusesRequest(input *types.DescribeTrustedAdvisorCheckRefreshStatusesInput) DescribeTrustedAdvisorCheckRefreshStatusesRequest {
 	op := &aws.Operation{
 		Name:       opDescribeTrustedAdvisorCheckRefreshStatuses,
 		HTTPMethod: "POST",
@@ -83,10 +37,10 @@ func (c *Client) DescribeTrustedAdvisorCheckRefreshStatusesRequest(input *Descri
 	}
 
 	if input == nil {
-		input = &DescribeTrustedAdvisorCheckRefreshStatusesInput{}
+		input = &types.DescribeTrustedAdvisorCheckRefreshStatusesInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeTrustedAdvisorCheckRefreshStatusesOutput{})
+	req := c.newRequest(op, input, &types.DescribeTrustedAdvisorCheckRefreshStatusesOutput{})
 	return DescribeTrustedAdvisorCheckRefreshStatusesRequest{Request: req, Input: input, Copy: c.DescribeTrustedAdvisorCheckRefreshStatusesRequest}
 }
 
@@ -94,8 +48,8 @@ func (c *Client) DescribeTrustedAdvisorCheckRefreshStatusesRequest(input *Descri
 // DescribeTrustedAdvisorCheckRefreshStatuses API operation.
 type DescribeTrustedAdvisorCheckRefreshStatusesRequest struct {
 	*aws.Request
-	Input *DescribeTrustedAdvisorCheckRefreshStatusesInput
-	Copy  func(*DescribeTrustedAdvisorCheckRefreshStatusesInput) DescribeTrustedAdvisorCheckRefreshStatusesRequest
+	Input *types.DescribeTrustedAdvisorCheckRefreshStatusesInput
+	Copy  func(*types.DescribeTrustedAdvisorCheckRefreshStatusesInput) DescribeTrustedAdvisorCheckRefreshStatusesRequest
 }
 
 // Send marshals and sends the DescribeTrustedAdvisorCheckRefreshStatuses API request.
@@ -107,7 +61,7 @@ func (r DescribeTrustedAdvisorCheckRefreshStatusesRequest) Send(ctx context.Cont
 	}
 
 	resp := &DescribeTrustedAdvisorCheckRefreshStatusesResponse{
-		DescribeTrustedAdvisorCheckRefreshStatusesOutput: r.Request.Data.(*DescribeTrustedAdvisorCheckRefreshStatusesOutput),
+		DescribeTrustedAdvisorCheckRefreshStatusesOutput: r.Request.Data.(*types.DescribeTrustedAdvisorCheckRefreshStatusesOutput),
 		response: &aws.Response{Request: r.Request},
 	}
 
@@ -117,7 +71,7 @@ func (r DescribeTrustedAdvisorCheckRefreshStatusesRequest) Send(ctx context.Cont
 // DescribeTrustedAdvisorCheckRefreshStatusesResponse is the response type for the
 // DescribeTrustedAdvisorCheckRefreshStatuses API operation.
 type DescribeTrustedAdvisorCheckRefreshStatusesResponse struct {
-	*DescribeTrustedAdvisorCheckRefreshStatusesOutput
+	*types.DescribeTrustedAdvisorCheckRefreshStatusesOutput
 
 	response *aws.Response
 }

@@ -6,84 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/cognitosync/types"
 )
-
-// A request for a list of the configured Cognito Events
-type GetCognitoEventsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Cognito Identity Pool ID for the request
-	//
-	// IdentityPoolId is a required field
-	IdentityPoolId *string `location:"uri" locationName:"IdentityPoolId" min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetCognitoEventsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetCognitoEventsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetCognitoEventsInput"}
-
-	if s.IdentityPoolId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("IdentityPoolId"))
-	}
-	if s.IdentityPoolId != nil && len(*s.IdentityPoolId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("IdentityPoolId", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetCognitoEventsInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.IdentityPoolId != nil {
-		v := *s.IdentityPoolId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "IdentityPoolId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-// The response from the GetCognitoEvents request
-type GetCognitoEventsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The Cognito Events returned from the GetCognitoEvents request
-	Events map[string]string `type:"map"`
-}
-
-// String returns the string representation
-func (s GetCognitoEventsOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetCognitoEventsOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.Events != nil {
-		v := s.Events
-
-		metadata := protocol.Metadata{}
-		ms0 := e.Map(protocol.BodyTarget, "Events", metadata)
-		ms0.Start()
-		for k1, v1 := range v {
-			ms0.MapSetValue(k1, protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
-		}
-		ms0.End()
-
-	}
-	return nil
-}
 
 const opGetCognitoEvents = "GetCognitoEvents"
 
@@ -104,7 +28,7 @@ const opGetCognitoEvents = "GetCognitoEvents"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-sync-2014-06-30/GetCognitoEvents
-func (c *Client) GetCognitoEventsRequest(input *GetCognitoEventsInput) GetCognitoEventsRequest {
+func (c *Client) GetCognitoEventsRequest(input *types.GetCognitoEventsInput) GetCognitoEventsRequest {
 	op := &aws.Operation{
 		Name:       opGetCognitoEvents,
 		HTTPMethod: "GET",
@@ -112,10 +36,10 @@ func (c *Client) GetCognitoEventsRequest(input *GetCognitoEventsInput) GetCognit
 	}
 
 	if input == nil {
-		input = &GetCognitoEventsInput{}
+		input = &types.GetCognitoEventsInput{}
 	}
 
-	req := c.newRequest(op, input, &GetCognitoEventsOutput{})
+	req := c.newRequest(op, input, &types.GetCognitoEventsOutput{})
 	return GetCognitoEventsRequest{Request: req, Input: input, Copy: c.GetCognitoEventsRequest}
 }
 
@@ -123,8 +47,8 @@ func (c *Client) GetCognitoEventsRequest(input *GetCognitoEventsInput) GetCognit
 // GetCognitoEvents API operation.
 type GetCognitoEventsRequest struct {
 	*aws.Request
-	Input *GetCognitoEventsInput
-	Copy  func(*GetCognitoEventsInput) GetCognitoEventsRequest
+	Input *types.GetCognitoEventsInput
+	Copy  func(*types.GetCognitoEventsInput) GetCognitoEventsRequest
 }
 
 // Send marshals and sends the GetCognitoEvents API request.
@@ -136,7 +60,7 @@ func (r GetCognitoEventsRequest) Send(ctx context.Context) (*GetCognitoEventsRes
 	}
 
 	resp := &GetCognitoEventsResponse{
-		GetCognitoEventsOutput: r.Request.Data.(*GetCognitoEventsOutput),
+		GetCognitoEventsOutput: r.Request.Data.(*types.GetCognitoEventsOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -146,7 +70,7 @@ func (r GetCognitoEventsRequest) Send(ctx context.Context) (*GetCognitoEventsRes
 // GetCognitoEventsResponse is the response type for the
 // GetCognitoEvents API operation.
 type GetCognitoEventsResponse struct {
-	*GetCognitoEventsOutput
+	*types.GetCognitoEventsOutput
 
 	response *aws.Response
 }

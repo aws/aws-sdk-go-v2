@@ -6,82 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/kinesisanalyticsv2/types"
 )
-
-type DeleteApplicationInputProcessingConfigurationInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the application.
-	//
-	// ApplicationName is a required field
-	ApplicationName *string `min:"1" type:"string" required:"true"`
-
-	// The application version. You can use the DescribeApplication operation to
-	// get the current application version. If the version specified is not the
-	// current version, the ConcurrentModificationException is returned.
-	//
-	// CurrentApplicationVersionId is a required field
-	CurrentApplicationVersionId *int64 `min:"1" type:"long" required:"true"`
-
-	// The ID of the input configuration from which to delete the input processing
-	// configuration. You can get a list of the input IDs for an application by
-	// using the DescribeApplication operation.
-	//
-	// InputId is a required field
-	InputId *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteApplicationInputProcessingConfigurationInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteApplicationInputProcessingConfigurationInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteApplicationInputProcessingConfigurationInput"}
-
-	if s.ApplicationName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ApplicationName"))
-	}
-	if s.ApplicationName != nil && len(*s.ApplicationName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ApplicationName", 1))
-	}
-
-	if s.CurrentApplicationVersionId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("CurrentApplicationVersionId"))
-	}
-	if s.CurrentApplicationVersionId != nil && *s.CurrentApplicationVersionId < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("CurrentApplicationVersionId", 1))
-	}
-
-	if s.InputId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("InputId"))
-	}
-	if s.InputId != nil && len(*s.InputId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("InputId", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteApplicationInputProcessingConfigurationOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the application.
-	ApplicationARN *string `min:"1" type:"string"`
-
-	// The current application version ID.
-	ApplicationVersionId *int64 `min:"1" type:"long"`
-}
-
-// String returns the string representation
-func (s DeleteApplicationInputProcessingConfigurationOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteApplicationInputProcessingConfiguration = "DeleteApplicationInputProcessingConfiguration"
 
@@ -98,7 +24,7 @@ const opDeleteApplicationInputProcessingConfiguration = "DeleteApplicationInputP
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/DeleteApplicationInputProcessingConfiguration
-func (c *Client) DeleteApplicationInputProcessingConfigurationRequest(input *DeleteApplicationInputProcessingConfigurationInput) DeleteApplicationInputProcessingConfigurationRequest {
+func (c *Client) DeleteApplicationInputProcessingConfigurationRequest(input *types.DeleteApplicationInputProcessingConfigurationInput) DeleteApplicationInputProcessingConfigurationRequest {
 	op := &aws.Operation{
 		Name:       opDeleteApplicationInputProcessingConfiguration,
 		HTTPMethod: "POST",
@@ -106,10 +32,10 @@ func (c *Client) DeleteApplicationInputProcessingConfigurationRequest(input *Del
 	}
 
 	if input == nil {
-		input = &DeleteApplicationInputProcessingConfigurationInput{}
+		input = &types.DeleteApplicationInputProcessingConfigurationInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteApplicationInputProcessingConfigurationOutput{})
+	req := c.newRequest(op, input, &types.DeleteApplicationInputProcessingConfigurationOutput{})
 	return DeleteApplicationInputProcessingConfigurationRequest{Request: req, Input: input, Copy: c.DeleteApplicationInputProcessingConfigurationRequest}
 }
 
@@ -117,8 +43,8 @@ func (c *Client) DeleteApplicationInputProcessingConfigurationRequest(input *Del
 // DeleteApplicationInputProcessingConfiguration API operation.
 type DeleteApplicationInputProcessingConfigurationRequest struct {
 	*aws.Request
-	Input *DeleteApplicationInputProcessingConfigurationInput
-	Copy  func(*DeleteApplicationInputProcessingConfigurationInput) DeleteApplicationInputProcessingConfigurationRequest
+	Input *types.DeleteApplicationInputProcessingConfigurationInput
+	Copy  func(*types.DeleteApplicationInputProcessingConfigurationInput) DeleteApplicationInputProcessingConfigurationRequest
 }
 
 // Send marshals and sends the DeleteApplicationInputProcessingConfiguration API request.
@@ -130,7 +56,7 @@ func (r DeleteApplicationInputProcessingConfigurationRequest) Send(ctx context.C
 	}
 
 	resp := &DeleteApplicationInputProcessingConfigurationResponse{
-		DeleteApplicationInputProcessingConfigurationOutput: r.Request.Data.(*DeleteApplicationInputProcessingConfigurationOutput),
+		DeleteApplicationInputProcessingConfigurationOutput: r.Request.Data.(*types.DeleteApplicationInputProcessingConfigurationOutput),
 		response: &aws.Response{Request: r.Request},
 	}
 
@@ -140,7 +66,7 @@ func (r DeleteApplicationInputProcessingConfigurationRequest) Send(ctx context.C
 // DeleteApplicationInputProcessingConfigurationResponse is the response type for the
 // DeleteApplicationInputProcessingConfiguration API operation.
 type DeleteApplicationInputProcessingConfigurationResponse struct {
-	*DeleteApplicationInputProcessingConfigurationOutput
+	*types.DeleteApplicationInputProcessingConfigurationOutput
 
 	response *aws.Response
 }

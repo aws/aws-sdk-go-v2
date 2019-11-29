@@ -6,66 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/simpledb/types"
 )
-
-type DomainMetadataInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the domain for which to display the metadata of.
-	//
-	// DomainName is a required field
-	DomainName *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DomainMetadataInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DomainMetadataInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DomainMetadataInput"}
-
-	if s.DomainName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DomainName"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DomainMetadataOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The number of unique attribute names in the domain.
-	AttributeNameCount *int64 `type:"integer"`
-
-	// The total size of all unique attribute names in the domain, in bytes.
-	AttributeNamesSizeBytes *int64 `type:"long"`
-
-	// The number of all attribute name/value pairs in the domain.
-	AttributeValueCount *int64 `type:"integer"`
-
-	// The total size of all attribute values in the domain, in bytes.
-	AttributeValuesSizeBytes *int64 `type:"long"`
-
-	// The number of all items in the domain.
-	ItemCount *int64 `type:"integer"`
-
-	// The total size of all item names in the domain, in bytes.
-	ItemNamesSizeBytes *int64 `type:"long"`
-
-	// The data and time when metadata was calculated, in Epoch (UNIX) seconds.
-	Timestamp *int64 `type:"integer"`
-}
-
-// String returns the string representation
-func (s DomainMetadataOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDomainMetadata = "DomainMetadata"
 
@@ -82,7 +24,7 @@ const opDomainMetadata = "DomainMetadata"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) DomainMetadataRequest(input *DomainMetadataInput) DomainMetadataRequest {
+func (c *Client) DomainMetadataRequest(input *types.DomainMetadataInput) DomainMetadataRequest {
 	op := &aws.Operation{
 		Name:       opDomainMetadata,
 		HTTPMethod: "POST",
@@ -90,10 +32,10 @@ func (c *Client) DomainMetadataRequest(input *DomainMetadataInput) DomainMetadat
 	}
 
 	if input == nil {
-		input = &DomainMetadataInput{}
+		input = &types.DomainMetadataInput{}
 	}
 
-	req := c.newRequest(op, input, &DomainMetadataOutput{})
+	req := c.newRequest(op, input, &types.DomainMetadataOutput{})
 	return DomainMetadataRequest{Request: req, Input: input, Copy: c.DomainMetadataRequest}
 }
 
@@ -101,8 +43,8 @@ func (c *Client) DomainMetadataRequest(input *DomainMetadataInput) DomainMetadat
 // DomainMetadata API operation.
 type DomainMetadataRequest struct {
 	*aws.Request
-	Input *DomainMetadataInput
-	Copy  func(*DomainMetadataInput) DomainMetadataRequest
+	Input *types.DomainMetadataInput
+	Copy  func(*types.DomainMetadataInput) DomainMetadataRequest
 }
 
 // Send marshals and sends the DomainMetadata API request.
@@ -114,7 +56,7 @@ func (r DomainMetadataRequest) Send(ctx context.Context) (*DomainMetadataRespons
 	}
 
 	resp := &DomainMetadataResponse{
-		DomainMetadataOutput: r.Request.Data.(*DomainMetadataOutput),
+		DomainMetadataOutput: r.Request.Data.(*types.DomainMetadataOutput),
 		response:             &aws.Response{Request: r.Request},
 	}
 
@@ -124,7 +66,7 @@ func (r DomainMetadataRequest) Send(ctx context.Context) (*DomainMetadataRespons
 // DomainMetadataResponse is the response type for the
 // DomainMetadata API operation.
 type DomainMetadataResponse struct {
-	*DomainMetadataOutput
+	*types.DomainMetadataOutput
 
 	response *aws.Response
 }

@@ -6,60 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
+	"github.com/aws/aws-sdk-go-v2/service/kms/types"
 )
-
-type DisableKeyInput struct {
-	_ struct{} `type:"structure"`
-
-	// A unique identifier for the customer master key (CMK).
-	//
-	// Specify the key ID or the Amazon Resource Name (ARN) of the CMK.
-	//
-	// For example:
-	//
-	//    * Key ID: 1234abcd-12ab-34cd-56ef-1234567890ab
-	//
-	//    * Key ARN: arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab
-	//
-	// To get the key ID and key ARN for a CMK, use ListKeys or DescribeKey.
-	//
-	// KeyId is a required field
-	KeyId *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DisableKeyInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DisableKeyInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DisableKeyInput"}
-
-	if s.KeyId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("KeyId"))
-	}
-	if s.KeyId != nil && len(*s.KeyId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("KeyId", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DisableKeyOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DisableKeyOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDisableKey = "DisableKey"
 
@@ -86,7 +36,7 @@ const opDisableKey = "DisableKey"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/DisableKey
-func (c *Client) DisableKeyRequest(input *DisableKeyInput) DisableKeyRequest {
+func (c *Client) DisableKeyRequest(input *types.DisableKeyInput) DisableKeyRequest {
 	op := &aws.Operation{
 		Name:       opDisableKey,
 		HTTPMethod: "POST",
@@ -94,10 +44,10 @@ func (c *Client) DisableKeyRequest(input *DisableKeyInput) DisableKeyRequest {
 	}
 
 	if input == nil {
-		input = &DisableKeyInput{}
+		input = &types.DisableKeyInput{}
 	}
 
-	req := c.newRequest(op, input, &DisableKeyOutput{})
+	req := c.newRequest(op, input, &types.DisableKeyOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return DisableKeyRequest{Request: req, Input: input, Copy: c.DisableKeyRequest}
@@ -107,8 +57,8 @@ func (c *Client) DisableKeyRequest(input *DisableKeyInput) DisableKeyRequest {
 // DisableKey API operation.
 type DisableKeyRequest struct {
 	*aws.Request
-	Input *DisableKeyInput
-	Copy  func(*DisableKeyInput) DisableKeyRequest
+	Input *types.DisableKeyInput
+	Copy  func(*types.DisableKeyInput) DisableKeyRequest
 }
 
 // Send marshals and sends the DisableKey API request.
@@ -120,7 +70,7 @@ func (r DisableKeyRequest) Send(ctx context.Context) (*DisableKeyResponse, error
 	}
 
 	resp := &DisableKeyResponse{
-		DisableKeyOutput: r.Request.Data.(*DisableKeyOutput),
+		DisableKeyOutput: r.Request.Data.(*types.DisableKeyOutput),
 		response:         &aws.Response{Request: r.Request},
 	}
 
@@ -130,7 +80,7 @@ func (r DisableKeyRequest) Send(ctx context.Context) (*DisableKeyResponse, error
 // DisableKeyResponse is the response type for the
 // DisableKey API operation.
 type DisableKeyResponse struct {
-	*DisableKeyOutput
+	*types.DisableKeyOutput
 
 	response *aws.Response
 }

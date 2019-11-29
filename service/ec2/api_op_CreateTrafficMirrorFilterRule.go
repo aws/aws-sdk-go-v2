@@ -6,129 +6,15 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-type CreateTrafficMirrorFilterRuleInput struct {
-	_ struct{} `type:"structure"`
-
-	// Unique, case-sensitive identifier that you provide to ensure the idempotency
-	// of the request. For more information, see How to Ensure Idempotency (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html).
-	ClientToken *string `type:"string" idempotencyToken:"true"`
-
-	// The description of the Traffic Mirror rule.
-	Description *string `type:"string"`
-
-	// The destination CIDR block to assign to the Traffic Mirror rule.
-	//
-	// DestinationCidrBlock is a required field
-	DestinationCidrBlock *string `type:"string" required:"true"`
-
-	// The destination port range.
-	DestinationPortRange *TrafficMirrorPortRangeRequest `type:"structure"`
-
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have
-	// the required permissions, the error response is DryRunOperation. Otherwise,
-	// it is UnauthorizedOperation.
-	DryRun *bool `type:"boolean"`
-
-	// The protocol, for example UDP, to assign to the Traffic Mirror rule.
-	//
-	// For information about the protocol value, see Protocol Numbers (https://www.iana.org/assignments/protocol-numbers/protocol-numbers.xhtml)
-	// on the Internet Assigned Numbers Authority (IANA) website.
-	Protocol *int64 `type:"integer"`
-
-	// The action to take (accept | reject) on the filtered traffic.
-	//
-	// RuleAction is a required field
-	RuleAction TrafficMirrorRuleAction `type:"string" required:"true" enum:"true"`
-
-	// The number of the Traffic Mirror rule. This number must be unique for each
-	// Traffic Mirror rule in a given direction. The rules are processed in ascending
-	// order by rule number.
-	//
-	// RuleNumber is a required field
-	RuleNumber *int64 `type:"integer" required:"true"`
-
-	// The source CIDR block to assign to the Traffic Mirror rule.
-	//
-	// SourceCidrBlock is a required field
-	SourceCidrBlock *string `type:"string" required:"true"`
-
-	// The source port range.
-	SourcePortRange *TrafficMirrorPortRangeRequest `type:"structure"`
-
-	// The type of traffic (ingress | egress).
-	//
-	// TrafficDirection is a required field
-	TrafficDirection TrafficDirection `type:"string" required:"true" enum:"true"`
-
-	// The ID of the filter that this rule is associated with.
-	//
-	// TrafficMirrorFilterId is a required field
-	TrafficMirrorFilterId *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s CreateTrafficMirrorFilterRuleInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateTrafficMirrorFilterRuleInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateTrafficMirrorFilterRuleInput"}
-
-	if s.DestinationCidrBlock == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DestinationCidrBlock"))
-	}
-	if len(s.RuleAction) == 0 {
-		invalidParams.Add(aws.NewErrParamRequired("RuleAction"))
-	}
-
-	if s.RuleNumber == nil {
-		invalidParams.Add(aws.NewErrParamRequired("RuleNumber"))
-	}
-
-	if s.SourceCidrBlock == nil {
-		invalidParams.Add(aws.NewErrParamRequired("SourceCidrBlock"))
-	}
-	if len(s.TrafficDirection) == 0 {
-		invalidParams.Add(aws.NewErrParamRequired("TrafficDirection"))
-	}
-
-	if s.TrafficMirrorFilterId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("TrafficMirrorFilterId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type CreateTrafficMirrorFilterRuleOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Unique, case-sensitive identifier that you provide to ensure the idempotency
-	// of the request. For more information, see How to Ensure Idempotency (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html).
-	ClientToken *string `locationName:"clientToken" type:"string"`
-
-	// The Traffic Mirror rule.
-	TrafficMirrorFilterRule *TrafficMirrorFilterRule `locationName:"trafficMirrorFilterRule" type:"structure"`
-}
-
-// String returns the string representation
-func (s CreateTrafficMirrorFilterRuleOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCreateTrafficMirrorFilterRule = "CreateTrafficMirrorFilterRule"
 
 // CreateTrafficMirrorFilterRuleRequest returns a request value for making API operation for
 // Amazon Elastic Compute Cloud.
 //
-// Creates a Traffic Mirror rule.
+// Creates a Traffic Mirror filter rule.
 //
 // A Traffic Mirror rule defines the Traffic Mirror source traffic to mirror.
 //
@@ -142,7 +28,7 @@ const opCreateTrafficMirrorFilterRule = "CreateTrafficMirrorFilterRule"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateTrafficMirrorFilterRule
-func (c *Client) CreateTrafficMirrorFilterRuleRequest(input *CreateTrafficMirrorFilterRuleInput) CreateTrafficMirrorFilterRuleRequest {
+func (c *Client) CreateTrafficMirrorFilterRuleRequest(input *types.CreateTrafficMirrorFilterRuleInput) CreateTrafficMirrorFilterRuleRequest {
 	op := &aws.Operation{
 		Name:       opCreateTrafficMirrorFilterRule,
 		HTTPMethod: "POST",
@@ -150,10 +36,10 @@ func (c *Client) CreateTrafficMirrorFilterRuleRequest(input *CreateTrafficMirror
 	}
 
 	if input == nil {
-		input = &CreateTrafficMirrorFilterRuleInput{}
+		input = &types.CreateTrafficMirrorFilterRuleInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateTrafficMirrorFilterRuleOutput{})
+	req := c.newRequest(op, input, &types.CreateTrafficMirrorFilterRuleOutput{})
 	return CreateTrafficMirrorFilterRuleRequest{Request: req, Input: input, Copy: c.CreateTrafficMirrorFilterRuleRequest}
 }
 
@@ -161,8 +47,8 @@ func (c *Client) CreateTrafficMirrorFilterRuleRequest(input *CreateTrafficMirror
 // CreateTrafficMirrorFilterRule API operation.
 type CreateTrafficMirrorFilterRuleRequest struct {
 	*aws.Request
-	Input *CreateTrafficMirrorFilterRuleInput
-	Copy  func(*CreateTrafficMirrorFilterRuleInput) CreateTrafficMirrorFilterRuleRequest
+	Input *types.CreateTrafficMirrorFilterRuleInput
+	Copy  func(*types.CreateTrafficMirrorFilterRuleInput) CreateTrafficMirrorFilterRuleRequest
 }
 
 // Send marshals and sends the CreateTrafficMirrorFilterRule API request.
@@ -174,7 +60,7 @@ func (r CreateTrafficMirrorFilterRuleRequest) Send(ctx context.Context) (*Create
 	}
 
 	resp := &CreateTrafficMirrorFilterRuleResponse{
-		CreateTrafficMirrorFilterRuleOutput: r.Request.Data.(*CreateTrafficMirrorFilterRuleOutput),
+		CreateTrafficMirrorFilterRuleOutput: r.Request.Data.(*types.CreateTrafficMirrorFilterRuleOutput),
 		response:                            &aws.Response{Request: r.Request},
 	}
 
@@ -184,7 +70,7 @@ func (r CreateTrafficMirrorFilterRuleRequest) Send(ctx context.Context) (*Create
 // CreateTrafficMirrorFilterRuleResponse is the response type for the
 // CreateTrafficMirrorFilterRule API operation.
 type CreateTrafficMirrorFilterRuleResponse struct {
-	*CreateTrafficMirrorFilterRuleOutput
+	*types.CreateTrafficMirrorFilterRuleOutput
 
 	response *aws.Response
 }

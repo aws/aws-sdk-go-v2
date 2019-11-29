@@ -6,60 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/migrationhub/types"
 )
-
-type NotifyApplicationStateInput struct {
-	_ struct{} `type:"structure"`
-
-	// The configurationId in ADS that uniquely identifies the grouped application.
-	//
-	// ApplicationId is a required field
-	ApplicationId *string `min:"1" type:"string" required:"true"`
-
-	// Optional boolean flag to indicate whether any effect should take place. Used
-	// to test if the caller has permission to make the call.
-	DryRun *bool `type:"boolean"`
-
-	// Status of the application - Not Started, In-Progress, Complete.
-	//
-	// Status is a required field
-	Status ApplicationStatus `type:"string" required:"true" enum:"true"`
-}
-
-// String returns the string representation
-func (s NotifyApplicationStateInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *NotifyApplicationStateInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "NotifyApplicationStateInput"}
-
-	if s.ApplicationId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ApplicationId"))
-	}
-	if s.ApplicationId != nil && len(*s.ApplicationId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ApplicationId", 1))
-	}
-	if len(s.Status) == 0 {
-		invalidParams.Add(aws.NewErrParamRequired("Status"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type NotifyApplicationStateOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s NotifyApplicationStateOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opNotifyApplicationState = "NotifyApplicationState"
 
@@ -78,7 +26,7 @@ const opNotifyApplicationState = "NotifyApplicationState"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/NotifyApplicationState
-func (c *Client) NotifyApplicationStateRequest(input *NotifyApplicationStateInput) NotifyApplicationStateRequest {
+func (c *Client) NotifyApplicationStateRequest(input *types.NotifyApplicationStateInput) NotifyApplicationStateRequest {
 	op := &aws.Operation{
 		Name:       opNotifyApplicationState,
 		HTTPMethod: "POST",
@@ -86,10 +34,10 @@ func (c *Client) NotifyApplicationStateRequest(input *NotifyApplicationStateInpu
 	}
 
 	if input == nil {
-		input = &NotifyApplicationStateInput{}
+		input = &types.NotifyApplicationStateInput{}
 	}
 
-	req := c.newRequest(op, input, &NotifyApplicationStateOutput{})
+	req := c.newRequest(op, input, &types.NotifyApplicationStateOutput{})
 	return NotifyApplicationStateRequest{Request: req, Input: input, Copy: c.NotifyApplicationStateRequest}
 }
 
@@ -97,8 +45,8 @@ func (c *Client) NotifyApplicationStateRequest(input *NotifyApplicationStateInpu
 // NotifyApplicationState API operation.
 type NotifyApplicationStateRequest struct {
 	*aws.Request
-	Input *NotifyApplicationStateInput
-	Copy  func(*NotifyApplicationStateInput) NotifyApplicationStateRequest
+	Input *types.NotifyApplicationStateInput
+	Copy  func(*types.NotifyApplicationStateInput) NotifyApplicationStateRequest
 }
 
 // Send marshals and sends the NotifyApplicationState API request.
@@ -110,7 +58,7 @@ func (r NotifyApplicationStateRequest) Send(ctx context.Context) (*NotifyApplica
 	}
 
 	resp := &NotifyApplicationStateResponse{
-		NotifyApplicationStateOutput: r.Request.Data.(*NotifyApplicationStateOutput),
+		NotifyApplicationStateOutput: r.Request.Data.(*types.NotifyApplicationStateOutput),
 		response:                     &aws.Response{Request: r.Request},
 	}
 
@@ -120,7 +68,7 @@ func (r NotifyApplicationStateRequest) Send(ctx context.Context) (*NotifyApplica
 // NotifyApplicationStateResponse is the response type for the
 // NotifyApplicationState API operation.
 type NotifyApplicationStateResponse struct {
-	*NotifyApplicationStateOutput
+	*types.NotifyApplicationStateOutput
 
 	response *aws.Response
 }

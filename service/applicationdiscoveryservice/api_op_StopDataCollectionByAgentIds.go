@@ -6,50 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/applicationdiscoveryservice/types"
 )
-
-type StopDataCollectionByAgentIdsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The IDs of the agents or connectors from which to stop collecting data.
-	//
-	// AgentIds is a required field
-	AgentIds []string `locationName:"agentIds" type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s StopDataCollectionByAgentIdsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *StopDataCollectionByAgentIdsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "StopDataCollectionByAgentIdsInput"}
-
-	if s.AgentIds == nil {
-		invalidParams.Add(aws.NewErrParamRequired("AgentIds"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type StopDataCollectionByAgentIdsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Information about the agents or connector that were instructed to stop collecting
-	// data. Information includes the agent/connector ID, a description of the operation
-	// performed, and whether the agent/connector configuration was updated.
-	AgentsConfigurationStatus []AgentConfigurationStatus `locationName:"agentsConfigurationStatus" type:"list"`
-}
-
-// String returns the string representation
-func (s StopDataCollectionByAgentIdsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opStopDataCollectionByAgentIds = "StopDataCollectionByAgentIds"
 
@@ -66,7 +24,7 @@ const opStopDataCollectionByAgentIds = "StopDataCollectionByAgentIds"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/discovery-2015-11-01/StopDataCollectionByAgentIds
-func (c *Client) StopDataCollectionByAgentIdsRequest(input *StopDataCollectionByAgentIdsInput) StopDataCollectionByAgentIdsRequest {
+func (c *Client) StopDataCollectionByAgentIdsRequest(input *types.StopDataCollectionByAgentIdsInput) StopDataCollectionByAgentIdsRequest {
 	op := &aws.Operation{
 		Name:       opStopDataCollectionByAgentIds,
 		HTTPMethod: "POST",
@@ -74,10 +32,10 @@ func (c *Client) StopDataCollectionByAgentIdsRequest(input *StopDataCollectionBy
 	}
 
 	if input == nil {
-		input = &StopDataCollectionByAgentIdsInput{}
+		input = &types.StopDataCollectionByAgentIdsInput{}
 	}
 
-	req := c.newRequest(op, input, &StopDataCollectionByAgentIdsOutput{})
+	req := c.newRequest(op, input, &types.StopDataCollectionByAgentIdsOutput{})
 	return StopDataCollectionByAgentIdsRequest{Request: req, Input: input, Copy: c.StopDataCollectionByAgentIdsRequest}
 }
 
@@ -85,8 +43,8 @@ func (c *Client) StopDataCollectionByAgentIdsRequest(input *StopDataCollectionBy
 // StopDataCollectionByAgentIds API operation.
 type StopDataCollectionByAgentIdsRequest struct {
 	*aws.Request
-	Input *StopDataCollectionByAgentIdsInput
-	Copy  func(*StopDataCollectionByAgentIdsInput) StopDataCollectionByAgentIdsRequest
+	Input *types.StopDataCollectionByAgentIdsInput
+	Copy  func(*types.StopDataCollectionByAgentIdsInput) StopDataCollectionByAgentIdsRequest
 }
 
 // Send marshals and sends the StopDataCollectionByAgentIds API request.
@@ -98,7 +56,7 @@ func (r StopDataCollectionByAgentIdsRequest) Send(ctx context.Context) (*StopDat
 	}
 
 	resp := &StopDataCollectionByAgentIdsResponse{
-		StopDataCollectionByAgentIdsOutput: r.Request.Data.(*StopDataCollectionByAgentIdsOutput),
+		StopDataCollectionByAgentIdsOutput: r.Request.Data.(*types.StopDataCollectionByAgentIdsOutput),
 		response:                           &aws.Response{Request: r.Request},
 	}
 
@@ -108,7 +66,7 @@ func (r StopDataCollectionByAgentIdsRequest) Send(ctx context.Context) (*StopDat
 // StopDataCollectionByAgentIdsResponse is the response type for the
 // StopDataCollectionByAgentIds API operation.
 type StopDataCollectionByAgentIdsResponse struct {
-	*StopDataCollectionByAgentIdsOutput
+	*types.StopDataCollectionByAgentIdsOutput
 
 	response *aws.Response
 }

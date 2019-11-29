@@ -6,53 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/elasticloadbalancingv2/types"
 )
-
-type DescribeAccountLimitsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The marker for the next set of results. (You received this marker from a
-	// previous call.)
-	Marker *string `type:"string"`
-
-	// The maximum number of results to return with this call.
-	PageSize *int64 `min:"1" type:"integer"`
-}
-
-// String returns the string representation
-func (s DescribeAccountLimitsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeAccountLimitsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeAccountLimitsInput"}
-	if s.PageSize != nil && *s.PageSize < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("PageSize", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribeAccountLimitsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Information about the limits.
-	Limits []Limit `type:"list"`
-
-	// If there are additional results, this is the marker for the next set of results.
-	// Otherwise, this is null.
-	NextMarker *string `type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeAccountLimitsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeAccountLimits = "DescribeAccountLimits"
 
@@ -75,7 +30,7 @@ const opDescribeAccountLimits = "DescribeAccountLimits"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/DescribeAccountLimits
-func (c *Client) DescribeAccountLimitsRequest(input *DescribeAccountLimitsInput) DescribeAccountLimitsRequest {
+func (c *Client) DescribeAccountLimitsRequest(input *types.DescribeAccountLimitsInput) DescribeAccountLimitsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeAccountLimits,
 		HTTPMethod: "POST",
@@ -83,10 +38,10 @@ func (c *Client) DescribeAccountLimitsRequest(input *DescribeAccountLimitsInput)
 	}
 
 	if input == nil {
-		input = &DescribeAccountLimitsInput{}
+		input = &types.DescribeAccountLimitsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeAccountLimitsOutput{})
+	req := c.newRequest(op, input, &types.DescribeAccountLimitsOutput{})
 	return DescribeAccountLimitsRequest{Request: req, Input: input, Copy: c.DescribeAccountLimitsRequest}
 }
 
@@ -94,8 +49,8 @@ func (c *Client) DescribeAccountLimitsRequest(input *DescribeAccountLimitsInput)
 // DescribeAccountLimits API operation.
 type DescribeAccountLimitsRequest struct {
 	*aws.Request
-	Input *DescribeAccountLimitsInput
-	Copy  func(*DescribeAccountLimitsInput) DescribeAccountLimitsRequest
+	Input *types.DescribeAccountLimitsInput
+	Copy  func(*types.DescribeAccountLimitsInput) DescribeAccountLimitsRequest
 }
 
 // Send marshals and sends the DescribeAccountLimits API request.
@@ -107,7 +62,7 @@ func (r DescribeAccountLimitsRequest) Send(ctx context.Context) (*DescribeAccoun
 	}
 
 	resp := &DescribeAccountLimitsResponse{
-		DescribeAccountLimitsOutput: r.Request.Data.(*DescribeAccountLimitsOutput),
+		DescribeAccountLimitsOutput: r.Request.Data.(*types.DescribeAccountLimitsOutput),
 		response:                    &aws.Response{Request: r.Request},
 	}
 
@@ -117,7 +72,7 @@ func (r DescribeAccountLimitsRequest) Send(ctx context.Context) (*DescribeAccoun
 // DescribeAccountLimitsResponse is the response type for the
 // DescribeAccountLimits API operation.
 type DescribeAccountLimitsResponse struct {
-	*DescribeAccountLimitsOutput
+	*types.DescribeAccountLimitsOutput
 
 	response *aws.Response
 }

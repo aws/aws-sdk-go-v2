@@ -10,6 +10,7 @@ package marketplacecommerceanalyticsiface
 
 import (
 	"github.com/aws/aws-sdk-go-v2/service/marketplacecommerceanalytics"
+	"github.com/aws/aws-sdk-go-v2/service/marketplacecommerceanalytics/types"
 )
 
 // ClientAPI provides an interface to enable mocking the
@@ -43,7 +44,7 @@ import (
 //    type mockClientClient struct {
 //        marketplacecommerceanalyticsiface.ClientPI
 //    }
-//    func (m *mockClientClient) GenerateDataSet(input *marketplacecommerceanalytics.GenerateDataSetInput) (*marketplacecommerceanalytics.GenerateDataSetOutput, error) {
+//    func (m *mockClientClient) GenerateDataSet(input *types.GenerateDataSetInput) (*types.GenerateDataSetOutput, error) {
 //        // mock response/functionality
 //    }
 //
@@ -61,9 +62,9 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type ClientAPI interface {
-	GenerateDataSetRequest(*marketplacecommerceanalytics.GenerateDataSetInput) marketplacecommerceanalytics.GenerateDataSetRequest
+	GenerateDataSetRequest(*types.GenerateDataSetInput) marketplacecommerceanalytics.GenerateDataSetRequest
 
-	StartSupportDataExportRequest(*marketplacecommerceanalytics.StartSupportDataExportInput) marketplacecommerceanalytics.StartSupportDataExportRequest
+	StartSupportDataExportRequest(*types.StartSupportDataExportInput) marketplacecommerceanalytics.StartSupportDataExportRequest
 }
 
 var _ ClientAPI = (*marketplacecommerceanalytics.Client)(nil)

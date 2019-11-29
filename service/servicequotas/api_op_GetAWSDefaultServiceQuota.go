@@ -6,63 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/servicequotas/types"
 )
-
-type GetAWSDefaultServiceQuotaInput struct {
-	_ struct{} `type:"structure"`
-
-	// Identifies the service quota you want to select.
-	//
-	// QuotaCode is a required field
-	QuotaCode *string `min:"1" type:"string" required:"true"`
-
-	// Specifies the service that you want to use.
-	//
-	// ServiceCode is a required field
-	ServiceCode *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetAWSDefaultServiceQuotaInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetAWSDefaultServiceQuotaInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetAWSDefaultServiceQuotaInput"}
-
-	if s.QuotaCode == nil {
-		invalidParams.Add(aws.NewErrParamRequired("QuotaCode"))
-	}
-	if s.QuotaCode != nil && len(*s.QuotaCode) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("QuotaCode", 1))
-	}
-
-	if s.ServiceCode == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ServiceCode"))
-	}
-	if s.ServiceCode != nil && len(*s.ServiceCode) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ServiceCode", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type GetAWSDefaultServiceQuotaOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Returns the ServiceQuota object which contains all values for a quota.
-	Quota *ServiceQuota `type:"structure"`
-}
-
-// String returns the string representation
-func (s GetAWSDefaultServiceQuotaOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetAWSDefaultServiceQuota = "GetAWSDefaultServiceQuota"
 
@@ -80,7 +25,7 @@ const opGetAWSDefaultServiceQuota = "GetAWSDefaultServiceQuota"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/service-quotas-2019-06-24/GetAWSDefaultServiceQuota
-func (c *Client) GetAWSDefaultServiceQuotaRequest(input *GetAWSDefaultServiceQuotaInput) GetAWSDefaultServiceQuotaRequest {
+func (c *Client) GetAWSDefaultServiceQuotaRequest(input *types.GetAWSDefaultServiceQuotaInput) GetAWSDefaultServiceQuotaRequest {
 	op := &aws.Operation{
 		Name:       opGetAWSDefaultServiceQuota,
 		HTTPMethod: "POST",
@@ -88,10 +33,10 @@ func (c *Client) GetAWSDefaultServiceQuotaRequest(input *GetAWSDefaultServiceQuo
 	}
 
 	if input == nil {
-		input = &GetAWSDefaultServiceQuotaInput{}
+		input = &types.GetAWSDefaultServiceQuotaInput{}
 	}
 
-	req := c.newRequest(op, input, &GetAWSDefaultServiceQuotaOutput{})
+	req := c.newRequest(op, input, &types.GetAWSDefaultServiceQuotaOutput{})
 	return GetAWSDefaultServiceQuotaRequest{Request: req, Input: input, Copy: c.GetAWSDefaultServiceQuotaRequest}
 }
 
@@ -99,8 +44,8 @@ func (c *Client) GetAWSDefaultServiceQuotaRequest(input *GetAWSDefaultServiceQuo
 // GetAWSDefaultServiceQuota API operation.
 type GetAWSDefaultServiceQuotaRequest struct {
 	*aws.Request
-	Input *GetAWSDefaultServiceQuotaInput
-	Copy  func(*GetAWSDefaultServiceQuotaInput) GetAWSDefaultServiceQuotaRequest
+	Input *types.GetAWSDefaultServiceQuotaInput
+	Copy  func(*types.GetAWSDefaultServiceQuotaInput) GetAWSDefaultServiceQuotaRequest
 }
 
 // Send marshals and sends the GetAWSDefaultServiceQuota API request.
@@ -112,7 +57,7 @@ func (r GetAWSDefaultServiceQuotaRequest) Send(ctx context.Context) (*GetAWSDefa
 	}
 
 	resp := &GetAWSDefaultServiceQuotaResponse{
-		GetAWSDefaultServiceQuotaOutput: r.Request.Data.(*GetAWSDefaultServiceQuotaOutput),
+		GetAWSDefaultServiceQuotaOutput: r.Request.Data.(*types.GetAWSDefaultServiceQuotaOutput),
 		response:                        &aws.Response{Request: r.Request},
 	}
 
@@ -122,7 +67,7 @@ func (r GetAWSDefaultServiceQuotaRequest) Send(ctx context.Context) (*GetAWSDefa
 // GetAWSDefaultServiceQuotaResponse is the response type for the
 // GetAWSDefaultServiceQuota API operation.
 type GetAWSDefaultServiceQuotaResponse struct {
-	*GetAWSDefaultServiceQuotaOutput
+	*types.GetAWSDefaultServiceQuotaOutput
 
 	response *aws.Response
 }

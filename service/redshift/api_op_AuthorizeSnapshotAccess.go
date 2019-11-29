@@ -6,65 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/redshift/types"
 )
-
-type AuthorizeSnapshotAccessInput struct {
-	_ struct{} `type:"structure"`
-
-	// The identifier of the AWS customer account authorized to restore the specified
-	// snapshot.
-	//
-	// To share a snapshot with AWS support, specify amazon-redshift-support.
-	//
-	// AccountWithRestoreAccess is a required field
-	AccountWithRestoreAccess *string `type:"string" required:"true"`
-
-	// The identifier of the cluster the snapshot was created from. This parameter
-	// is required if your IAM user has a policy containing a snapshot resource
-	// element that specifies anything other than * for the cluster name.
-	SnapshotClusterIdentifier *string `type:"string"`
-
-	// The identifier of the snapshot the account is authorized to restore.
-	//
-	// SnapshotIdentifier is a required field
-	SnapshotIdentifier *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s AuthorizeSnapshotAccessInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *AuthorizeSnapshotAccessInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "AuthorizeSnapshotAccessInput"}
-
-	if s.AccountWithRestoreAccess == nil {
-		invalidParams.Add(aws.NewErrParamRequired("AccountWithRestoreAccess"))
-	}
-
-	if s.SnapshotIdentifier == nil {
-		invalidParams.Add(aws.NewErrParamRequired("SnapshotIdentifier"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type AuthorizeSnapshotAccessOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Describes a snapshot.
-	Snapshot *Snapshot `type:"structure"`
-}
-
-// String returns the string representation
-func (s AuthorizeSnapshotAccessOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opAuthorizeSnapshotAccess = "AuthorizeSnapshotAccess"
 
@@ -85,7 +28,7 @@ const opAuthorizeSnapshotAccess = "AuthorizeSnapshotAccess"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/AuthorizeSnapshotAccess
-func (c *Client) AuthorizeSnapshotAccessRequest(input *AuthorizeSnapshotAccessInput) AuthorizeSnapshotAccessRequest {
+func (c *Client) AuthorizeSnapshotAccessRequest(input *types.AuthorizeSnapshotAccessInput) AuthorizeSnapshotAccessRequest {
 	op := &aws.Operation{
 		Name:       opAuthorizeSnapshotAccess,
 		HTTPMethod: "POST",
@@ -93,10 +36,10 @@ func (c *Client) AuthorizeSnapshotAccessRequest(input *AuthorizeSnapshotAccessIn
 	}
 
 	if input == nil {
-		input = &AuthorizeSnapshotAccessInput{}
+		input = &types.AuthorizeSnapshotAccessInput{}
 	}
 
-	req := c.newRequest(op, input, &AuthorizeSnapshotAccessOutput{})
+	req := c.newRequest(op, input, &types.AuthorizeSnapshotAccessOutput{})
 	return AuthorizeSnapshotAccessRequest{Request: req, Input: input, Copy: c.AuthorizeSnapshotAccessRequest}
 }
 
@@ -104,8 +47,8 @@ func (c *Client) AuthorizeSnapshotAccessRequest(input *AuthorizeSnapshotAccessIn
 // AuthorizeSnapshotAccess API operation.
 type AuthorizeSnapshotAccessRequest struct {
 	*aws.Request
-	Input *AuthorizeSnapshotAccessInput
-	Copy  func(*AuthorizeSnapshotAccessInput) AuthorizeSnapshotAccessRequest
+	Input *types.AuthorizeSnapshotAccessInput
+	Copy  func(*types.AuthorizeSnapshotAccessInput) AuthorizeSnapshotAccessRequest
 }
 
 // Send marshals and sends the AuthorizeSnapshotAccess API request.
@@ -117,7 +60,7 @@ func (r AuthorizeSnapshotAccessRequest) Send(ctx context.Context) (*AuthorizeSna
 	}
 
 	resp := &AuthorizeSnapshotAccessResponse{
-		AuthorizeSnapshotAccessOutput: r.Request.Data.(*AuthorizeSnapshotAccessOutput),
+		AuthorizeSnapshotAccessOutput: r.Request.Data.(*types.AuthorizeSnapshotAccessOutput),
 		response:                      &aws.Response{Request: r.Request},
 	}
 
@@ -127,7 +70,7 @@ func (r AuthorizeSnapshotAccessRequest) Send(ctx context.Context) (*AuthorizeSna
 // AuthorizeSnapshotAccessResponse is the response type for the
 // AuthorizeSnapshotAccess API operation.
 type AuthorizeSnapshotAccessResponse struct {
-	*AuthorizeSnapshotAccessOutput
+	*types.AuthorizeSnapshotAccessOutput
 
 	response *aws.Response
 }

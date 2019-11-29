@@ -6,122 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/iot/types"
 )
-
-type ListThingsInThingGroupInput struct {
-	_ struct{} `type:"structure"`
-
-	// The maximum number of results to return at one time.
-	MaxResults *int64 `location:"querystring" locationName:"maxResults" min:"1" type:"integer"`
-
-	// The token to retrieve the next set of results.
-	NextToken *string `location:"querystring" locationName:"nextToken" type:"string"`
-
-	// When true, list things in this thing group and in all child groups as well.
-	Recursive *bool `location:"querystring" locationName:"recursive" type:"boolean"`
-
-	// The thing group name.
-	//
-	// ThingGroupName is a required field
-	ThingGroupName *string `location:"uri" locationName:"thingGroupName" min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s ListThingsInThingGroupInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListThingsInThingGroupInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListThingsInThingGroupInput"}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-
-	if s.ThingGroupName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ThingGroupName"))
-	}
-	if s.ThingGroupName != nil && len(*s.ThingGroupName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ThingGroupName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListThingsInThingGroupInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.ThingGroupName != nil {
-		v := *s.ThingGroupName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "thingGroupName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.MaxResults != nil {
-		v := *s.MaxResults
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "maxResults", protocol.Int64Value(v), metadata)
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Recursive != nil {
-		v := *s.Recursive
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "recursive", protocol.BoolValue(v), metadata)
-	}
-	return nil
-}
-
-type ListThingsInThingGroupOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The token used to get the next set of results, or null if there are no additional
-	// results.
-	NextToken *string `locationName:"nextToken" type:"string"`
-
-	// The things in the specified thing group.
-	Things []string `locationName:"things" type:"list"`
-}
-
-// String returns the string representation
-func (s ListThingsInThingGroupOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListThingsInThingGroupOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Things != nil {
-		v := s.Things
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "things", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
-		}
-		ls0.End()
-
-	}
-	return nil
-}
 
 const opListThingsInThingGroup = "ListThingsInThingGroup"
 
@@ -136,7 +22,7 @@ const opListThingsInThingGroup = "ListThingsInThingGroup"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) ListThingsInThingGroupRequest(input *ListThingsInThingGroupInput) ListThingsInThingGroupRequest {
+func (c *Client) ListThingsInThingGroupRequest(input *types.ListThingsInThingGroupInput) ListThingsInThingGroupRequest {
 	op := &aws.Operation{
 		Name:       opListThingsInThingGroup,
 		HTTPMethod: "GET",
@@ -144,10 +30,10 @@ func (c *Client) ListThingsInThingGroupRequest(input *ListThingsInThingGroupInpu
 	}
 
 	if input == nil {
-		input = &ListThingsInThingGroupInput{}
+		input = &types.ListThingsInThingGroupInput{}
 	}
 
-	req := c.newRequest(op, input, &ListThingsInThingGroupOutput{})
+	req := c.newRequest(op, input, &types.ListThingsInThingGroupOutput{})
 	return ListThingsInThingGroupRequest{Request: req, Input: input, Copy: c.ListThingsInThingGroupRequest}
 }
 
@@ -155,8 +41,8 @@ func (c *Client) ListThingsInThingGroupRequest(input *ListThingsInThingGroupInpu
 // ListThingsInThingGroup API operation.
 type ListThingsInThingGroupRequest struct {
 	*aws.Request
-	Input *ListThingsInThingGroupInput
-	Copy  func(*ListThingsInThingGroupInput) ListThingsInThingGroupRequest
+	Input *types.ListThingsInThingGroupInput
+	Copy  func(*types.ListThingsInThingGroupInput) ListThingsInThingGroupRequest
 }
 
 // Send marshals and sends the ListThingsInThingGroup API request.
@@ -168,7 +54,7 @@ func (r ListThingsInThingGroupRequest) Send(ctx context.Context) (*ListThingsInT
 	}
 
 	resp := &ListThingsInThingGroupResponse{
-		ListThingsInThingGroupOutput: r.Request.Data.(*ListThingsInThingGroupOutput),
+		ListThingsInThingGroupOutput: r.Request.Data.(*types.ListThingsInThingGroupOutput),
 		response:                     &aws.Response{Request: r.Request},
 	}
 
@@ -178,7 +64,7 @@ func (r ListThingsInThingGroupRequest) Send(ctx context.Context) (*ListThingsInT
 // ListThingsInThingGroupResponse is the response type for the
 // ListThingsInThingGroup API operation.
 type ListThingsInThingGroupResponse struct {
-	*ListThingsInThingGroupOutput
+	*types.ListThingsInThingGroupOutput
 
 	response *aws.Response
 }

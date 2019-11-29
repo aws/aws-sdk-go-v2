@@ -6,29 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/alexaforbusiness/types"
 )
-
-type GetConferencePreferenceInput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s GetConferencePreferenceInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type GetConferencePreferenceOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The conference preference.
-	Preference *ConferencePreference `type:"structure"`
-}
-
-// String returns the string representation
-func (s GetConferencePreferenceOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetConferencePreference = "GetConferencePreference"
 
@@ -45,7 +24,7 @@ const opGetConferencePreference = "GetConferencePreference"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/GetConferencePreference
-func (c *Client) GetConferencePreferenceRequest(input *GetConferencePreferenceInput) GetConferencePreferenceRequest {
+func (c *Client) GetConferencePreferenceRequest(input *types.GetConferencePreferenceInput) GetConferencePreferenceRequest {
 	op := &aws.Operation{
 		Name:       opGetConferencePreference,
 		HTTPMethod: "POST",
@@ -53,10 +32,10 @@ func (c *Client) GetConferencePreferenceRequest(input *GetConferencePreferenceIn
 	}
 
 	if input == nil {
-		input = &GetConferencePreferenceInput{}
+		input = &types.GetConferencePreferenceInput{}
 	}
 
-	req := c.newRequest(op, input, &GetConferencePreferenceOutput{})
+	req := c.newRequest(op, input, &types.GetConferencePreferenceOutput{})
 	return GetConferencePreferenceRequest{Request: req, Input: input, Copy: c.GetConferencePreferenceRequest}
 }
 
@@ -64,8 +43,8 @@ func (c *Client) GetConferencePreferenceRequest(input *GetConferencePreferenceIn
 // GetConferencePreference API operation.
 type GetConferencePreferenceRequest struct {
 	*aws.Request
-	Input *GetConferencePreferenceInput
-	Copy  func(*GetConferencePreferenceInput) GetConferencePreferenceRequest
+	Input *types.GetConferencePreferenceInput
+	Copy  func(*types.GetConferencePreferenceInput) GetConferencePreferenceRequest
 }
 
 // Send marshals and sends the GetConferencePreference API request.
@@ -77,7 +56,7 @@ func (r GetConferencePreferenceRequest) Send(ctx context.Context) (*GetConferenc
 	}
 
 	resp := &GetConferencePreferenceResponse{
-		GetConferencePreferenceOutput: r.Request.Data.(*GetConferencePreferenceOutput),
+		GetConferencePreferenceOutput: r.Request.Data.(*types.GetConferencePreferenceOutput),
 		response:                      &aws.Response{Request: r.Request},
 	}
 
@@ -87,7 +66,7 @@ func (r GetConferencePreferenceRequest) Send(ctx context.Context) (*GetConferenc
 // GetConferencePreferenceResponse is the response type for the
 // GetConferencePreference API operation.
 type GetConferencePreferenceResponse struct {
-	*GetConferencePreferenceOutput
+	*types.GetConferencePreferenceOutput
 
 	response *aws.Response
 }

@@ -6,96 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/rds/types"
 )
-
-type DeleteDBClusterEndpointInput struct {
-	_ struct{} `type:"structure"`
-
-	// The identifier associated with the custom endpoint. This parameter is stored
-	// as a lowercase string.
-	//
-	// DBClusterEndpointIdentifier is a required field
-	DBClusterEndpointIdentifier *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteDBClusterEndpointInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteDBClusterEndpointInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteDBClusterEndpointInput"}
-
-	if s.DBClusterEndpointIdentifier == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DBClusterEndpointIdentifier"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// This data type represents the information you need to connect to an Amazon
-// Aurora DB cluster. This data type is used as a response element in the following
-// actions:
-//
-//    * CreateDBClusterEndpoint
-//
-//    * DescribeDBClusterEndpoints
-//
-//    * ModifyDBClusterEndpoint
-//
-//    * DeleteDBClusterEndpoint
-//
-// For the data structure that represents Amazon RDS DB instance endpoints,
-// see Endpoint.
-type DeleteDBClusterEndpointOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The type associated with a custom endpoint. One of: READER, WRITER, ANY.
-	CustomEndpointType *string `type:"string"`
-
-	// The Amazon Resource Name (ARN) for the endpoint.
-	DBClusterEndpointArn *string `type:"string"`
-
-	// The identifier associated with the endpoint. This parameter is stored as
-	// a lowercase string.
-	DBClusterEndpointIdentifier *string `type:"string"`
-
-	// A unique system-generated identifier for an endpoint. It remains the same
-	// for the whole life of the endpoint.
-	DBClusterEndpointResourceIdentifier *string `type:"string"`
-
-	// The DB cluster identifier of the DB cluster associated with the endpoint.
-	// This parameter is stored as a lowercase string.
-	DBClusterIdentifier *string `type:"string"`
-
-	// The DNS address of the endpoint.
-	Endpoint *string `type:"string"`
-
-	// The type of the endpoint. One of: READER, WRITER, CUSTOM.
-	EndpointType *string `type:"string"`
-
-	// List of DB instance identifiers that aren't part of the custom endpoint group.
-	// All other eligible instances are reachable through the custom endpoint. Only
-	// relevant if the list of static members is empty.
-	ExcludedMembers []string `type:"list"`
-
-	// List of DB instance identifiers that are part of the custom endpoint group.
-	StaticMembers []string `type:"list"`
-
-	// The current status of the endpoint. One of: creating, available, deleting,
-	// modifying.
-	Status *string `type:"string"`
-}
-
-// String returns the string representation
-func (s DeleteDBClusterEndpointOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteDBClusterEndpoint = "DeleteDBClusterEndpoint"
 
@@ -114,7 +26,7 @@ const opDeleteDBClusterEndpoint = "DeleteDBClusterEndpoint"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteDBClusterEndpoint
-func (c *Client) DeleteDBClusterEndpointRequest(input *DeleteDBClusterEndpointInput) DeleteDBClusterEndpointRequest {
+func (c *Client) DeleteDBClusterEndpointRequest(input *types.DeleteDBClusterEndpointInput) DeleteDBClusterEndpointRequest {
 	op := &aws.Operation{
 		Name:       opDeleteDBClusterEndpoint,
 		HTTPMethod: "POST",
@@ -122,10 +34,10 @@ func (c *Client) DeleteDBClusterEndpointRequest(input *DeleteDBClusterEndpointIn
 	}
 
 	if input == nil {
-		input = &DeleteDBClusterEndpointInput{}
+		input = &types.DeleteDBClusterEndpointInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteDBClusterEndpointOutput{})
+	req := c.newRequest(op, input, &types.DeleteDBClusterEndpointOutput{})
 	return DeleteDBClusterEndpointRequest{Request: req, Input: input, Copy: c.DeleteDBClusterEndpointRequest}
 }
 
@@ -133,8 +45,8 @@ func (c *Client) DeleteDBClusterEndpointRequest(input *DeleteDBClusterEndpointIn
 // DeleteDBClusterEndpoint API operation.
 type DeleteDBClusterEndpointRequest struct {
 	*aws.Request
-	Input *DeleteDBClusterEndpointInput
-	Copy  func(*DeleteDBClusterEndpointInput) DeleteDBClusterEndpointRequest
+	Input *types.DeleteDBClusterEndpointInput
+	Copy  func(*types.DeleteDBClusterEndpointInput) DeleteDBClusterEndpointRequest
 }
 
 // Send marshals and sends the DeleteDBClusterEndpoint API request.
@@ -146,7 +58,7 @@ func (r DeleteDBClusterEndpointRequest) Send(ctx context.Context) (*DeleteDBClus
 	}
 
 	resp := &DeleteDBClusterEndpointResponse{
-		DeleteDBClusterEndpointOutput: r.Request.Data.(*DeleteDBClusterEndpointOutput),
+		DeleteDBClusterEndpointOutput: r.Request.Data.(*types.DeleteDBClusterEndpointOutput),
 		response:                      &aws.Response{Request: r.Request},
 	}
 
@@ -156,7 +68,7 @@ func (r DeleteDBClusterEndpointRequest) Send(ctx context.Context) (*DeleteDBClus
 // DeleteDBClusterEndpointResponse is the response type for the
 // DeleteDBClusterEndpoint API operation.
 type DeleteDBClusterEndpointResponse struct {
-	*DeleteDBClusterEndpointOutput
+	*types.DeleteDBClusterEndpointOutput
 
 	response *aws.Response
 }

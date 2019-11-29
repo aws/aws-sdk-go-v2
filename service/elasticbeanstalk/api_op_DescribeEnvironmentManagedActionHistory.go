@@ -6,60 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/elasticbeanstalk/types"
 )
-
-// Request to list completed and failed managed actions.
-type DescribeEnvironmentManagedActionHistoryInput struct {
-	_ struct{} `type:"structure"`
-
-	// The environment ID of the target environment.
-	EnvironmentId *string `type:"string"`
-
-	// The name of the target environment.
-	EnvironmentName *string `min:"4" type:"string"`
-
-	// The maximum number of items to return for a single request.
-	MaxItems *int64 `type:"integer"`
-
-	// The pagination token returned by a previous request.
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeEnvironmentManagedActionHistoryInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeEnvironmentManagedActionHistoryInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeEnvironmentManagedActionHistoryInput"}
-	if s.EnvironmentName != nil && len(*s.EnvironmentName) < 4 {
-		invalidParams.Add(aws.NewErrParamMinLen("EnvironmentName", 4))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// A result message containing a list of completed and failed managed actions.
-type DescribeEnvironmentManagedActionHistoryOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A list of completed and failed managed actions.
-	ManagedActionHistoryItems []ManagedActionHistoryItem `min:"1" type:"list"`
-
-	// A pagination token that you pass to DescribeEnvironmentManagedActionHistory
-	// to get the next page of results.
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeEnvironmentManagedActionHistoryOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeEnvironmentManagedActionHistory = "DescribeEnvironmentManagedActionHistory"
 
@@ -76,7 +24,7 @@ const opDescribeEnvironmentManagedActionHistory = "DescribeEnvironmentManagedAct
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/DescribeEnvironmentManagedActionHistory
-func (c *Client) DescribeEnvironmentManagedActionHistoryRequest(input *DescribeEnvironmentManagedActionHistoryInput) DescribeEnvironmentManagedActionHistoryRequest {
+func (c *Client) DescribeEnvironmentManagedActionHistoryRequest(input *types.DescribeEnvironmentManagedActionHistoryInput) DescribeEnvironmentManagedActionHistoryRequest {
 	op := &aws.Operation{
 		Name:       opDescribeEnvironmentManagedActionHistory,
 		HTTPMethod: "POST",
@@ -84,10 +32,10 @@ func (c *Client) DescribeEnvironmentManagedActionHistoryRequest(input *DescribeE
 	}
 
 	if input == nil {
-		input = &DescribeEnvironmentManagedActionHistoryInput{}
+		input = &types.DescribeEnvironmentManagedActionHistoryInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeEnvironmentManagedActionHistoryOutput{})
+	req := c.newRequest(op, input, &types.DescribeEnvironmentManagedActionHistoryOutput{})
 	return DescribeEnvironmentManagedActionHistoryRequest{Request: req, Input: input, Copy: c.DescribeEnvironmentManagedActionHistoryRequest}
 }
 
@@ -95,8 +43,8 @@ func (c *Client) DescribeEnvironmentManagedActionHistoryRequest(input *DescribeE
 // DescribeEnvironmentManagedActionHistory API operation.
 type DescribeEnvironmentManagedActionHistoryRequest struct {
 	*aws.Request
-	Input *DescribeEnvironmentManagedActionHistoryInput
-	Copy  func(*DescribeEnvironmentManagedActionHistoryInput) DescribeEnvironmentManagedActionHistoryRequest
+	Input *types.DescribeEnvironmentManagedActionHistoryInput
+	Copy  func(*types.DescribeEnvironmentManagedActionHistoryInput) DescribeEnvironmentManagedActionHistoryRequest
 }
 
 // Send marshals and sends the DescribeEnvironmentManagedActionHistory API request.
@@ -108,7 +56,7 @@ func (r DescribeEnvironmentManagedActionHistoryRequest) Send(ctx context.Context
 	}
 
 	resp := &DescribeEnvironmentManagedActionHistoryResponse{
-		DescribeEnvironmentManagedActionHistoryOutput: r.Request.Data.(*DescribeEnvironmentManagedActionHistoryOutput),
+		DescribeEnvironmentManagedActionHistoryOutput: r.Request.Data.(*types.DescribeEnvironmentManagedActionHistoryOutput),
 		response: &aws.Response{Request: r.Request},
 	}
 
@@ -118,7 +66,7 @@ func (r DescribeEnvironmentManagedActionHistoryRequest) Send(ctx context.Context
 // DescribeEnvironmentManagedActionHistoryResponse is the response type for the
 // DescribeEnvironmentManagedActionHistory API operation.
 type DescribeEnvironmentManagedActionHistoryResponse struct {
-	*DescribeEnvironmentManagedActionHistoryOutput
+	*types.DescribeEnvironmentManagedActionHistoryOutput
 
 	response *aws.Response
 }

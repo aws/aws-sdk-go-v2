@@ -6,50 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
+	"github.com/aws/aws-sdk-go-v2/service/opsworks/types"
 )
-
-type UpdateElasticIpInput struct {
-	_ struct{} `type:"structure"`
-
-	// The IP address for which you want to update the name.
-	//
-	// ElasticIp is a required field
-	ElasticIp *string `type:"string" required:"true"`
-
-	// The new name.
-	Name *string `type:"string"`
-}
-
-// String returns the string representation
-func (s UpdateElasticIpInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateElasticIpInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateElasticIpInput"}
-
-	if s.ElasticIp == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ElasticIp"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type UpdateElasticIpOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s UpdateElasticIpOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opUpdateElasticIp = "UpdateElasticIp"
 
@@ -72,7 +32,7 @@ const opUpdateElasticIp = "UpdateElasticIp"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/UpdateElasticIp
-func (c *Client) UpdateElasticIpRequest(input *UpdateElasticIpInput) UpdateElasticIpRequest {
+func (c *Client) UpdateElasticIpRequest(input *types.UpdateElasticIpInput) UpdateElasticIpRequest {
 	op := &aws.Operation{
 		Name:       opUpdateElasticIp,
 		HTTPMethod: "POST",
@@ -80,10 +40,10 @@ func (c *Client) UpdateElasticIpRequest(input *UpdateElasticIpInput) UpdateElast
 	}
 
 	if input == nil {
-		input = &UpdateElasticIpInput{}
+		input = &types.UpdateElasticIpInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateElasticIpOutput{})
+	req := c.newRequest(op, input, &types.UpdateElasticIpOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return UpdateElasticIpRequest{Request: req, Input: input, Copy: c.UpdateElasticIpRequest}
@@ -93,8 +53,8 @@ func (c *Client) UpdateElasticIpRequest(input *UpdateElasticIpInput) UpdateElast
 // UpdateElasticIp API operation.
 type UpdateElasticIpRequest struct {
 	*aws.Request
-	Input *UpdateElasticIpInput
-	Copy  func(*UpdateElasticIpInput) UpdateElasticIpRequest
+	Input *types.UpdateElasticIpInput
+	Copy  func(*types.UpdateElasticIpInput) UpdateElasticIpRequest
 }
 
 // Send marshals and sends the UpdateElasticIp API request.
@@ -106,7 +66,7 @@ func (r UpdateElasticIpRequest) Send(ctx context.Context) (*UpdateElasticIpRespo
 	}
 
 	resp := &UpdateElasticIpResponse{
-		UpdateElasticIpOutput: r.Request.Data.(*UpdateElasticIpOutput),
+		UpdateElasticIpOutput: r.Request.Data.(*types.UpdateElasticIpOutput),
 		response:              &aws.Response{Request: r.Request},
 	}
 
@@ -116,7 +76,7 @@ func (r UpdateElasticIpRequest) Send(ctx context.Context) (*UpdateElasticIpRespo
 // UpdateElasticIpResponse is the response type for the
 // UpdateElasticIp API operation.
 type UpdateElasticIpResponse struct {
-	*UpdateElasticIpOutput
+	*types.UpdateElasticIpOutput
 
 	response *aws.Response
 }

@@ -6,79 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
+	"github.com/aws/aws-sdk-go-v2/service/acmpca/types"
 )
-
-type ImportCertificateAuthorityCertificateInput struct {
-	_ struct{} `type:"structure"`
-
-	// The PEM-encoded certificate for a private CA. This may be a self-signed certificate
-	// in the case of a root CA, or it may be signed by another CA that you control.
-	//
-	// Certificate is automatically base64 encoded/decoded by the SDK.
-	//
-	// Certificate is a required field
-	Certificate []byte `min:"1" type:"blob" required:"true"`
-
-	// The Amazon Resource Name (ARN) that was returned when you called CreateCertificateAuthority.
-	// This must be of the form:
-	//
-	// arn:aws:acm-pca:region:account:certificate-authority/12345678-1234-1234-1234-123456789012
-	//
-	// CertificateAuthorityArn is a required field
-	CertificateAuthorityArn *string `min:"5" type:"string" required:"true"`
-
-	// A PEM-encoded file that contains all of your certificates, other than the
-	// certificate you're importing, chaining up to your root CA. Your ACM Private
-	// CA-hosted or on-premises root certificate is the last in the chain, and each
-	// certificate in the chain signs the one preceding.
-	//
-	// This parameter must be supplied when you import a subordinate CA. When you
-	// import a root CA, there is no chain.
-	//
-	// CertificateChain is automatically base64 encoded/decoded by the SDK.
-	CertificateChain []byte `type:"blob"`
-}
-
-// String returns the string representation
-func (s ImportCertificateAuthorityCertificateInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ImportCertificateAuthorityCertificateInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ImportCertificateAuthorityCertificateInput"}
-
-	if s.Certificate == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Certificate"))
-	}
-	if s.Certificate != nil && len(s.Certificate) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Certificate", 1))
-	}
-
-	if s.CertificateAuthorityArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("CertificateAuthorityArn"))
-	}
-	if s.CertificateAuthorityArn != nil && len(*s.CertificateAuthorityArn) < 5 {
-		invalidParams.Add(aws.NewErrParamMinLen("CertificateAuthorityArn", 5))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ImportCertificateAuthorityCertificateOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s ImportCertificateAuthorityCertificateOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opImportCertificateAuthorityCertificate = "ImportCertificateAuthorityCertificate"
 
@@ -128,7 +59,7 @@ const opImportCertificateAuthorityCertificate = "ImportCertificateAuthorityCerti
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/acm-pca-2017-08-22/ImportCertificateAuthorityCertificate
-func (c *Client) ImportCertificateAuthorityCertificateRequest(input *ImportCertificateAuthorityCertificateInput) ImportCertificateAuthorityCertificateRequest {
+func (c *Client) ImportCertificateAuthorityCertificateRequest(input *types.ImportCertificateAuthorityCertificateInput) ImportCertificateAuthorityCertificateRequest {
 	op := &aws.Operation{
 		Name:       opImportCertificateAuthorityCertificate,
 		HTTPMethod: "POST",
@@ -136,10 +67,10 @@ func (c *Client) ImportCertificateAuthorityCertificateRequest(input *ImportCerti
 	}
 
 	if input == nil {
-		input = &ImportCertificateAuthorityCertificateInput{}
+		input = &types.ImportCertificateAuthorityCertificateInput{}
 	}
 
-	req := c.newRequest(op, input, &ImportCertificateAuthorityCertificateOutput{})
+	req := c.newRequest(op, input, &types.ImportCertificateAuthorityCertificateOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return ImportCertificateAuthorityCertificateRequest{Request: req, Input: input, Copy: c.ImportCertificateAuthorityCertificateRequest}
@@ -149,8 +80,8 @@ func (c *Client) ImportCertificateAuthorityCertificateRequest(input *ImportCerti
 // ImportCertificateAuthorityCertificate API operation.
 type ImportCertificateAuthorityCertificateRequest struct {
 	*aws.Request
-	Input *ImportCertificateAuthorityCertificateInput
-	Copy  func(*ImportCertificateAuthorityCertificateInput) ImportCertificateAuthorityCertificateRequest
+	Input *types.ImportCertificateAuthorityCertificateInput
+	Copy  func(*types.ImportCertificateAuthorityCertificateInput) ImportCertificateAuthorityCertificateRequest
 }
 
 // Send marshals and sends the ImportCertificateAuthorityCertificate API request.
@@ -162,7 +93,7 @@ func (r ImportCertificateAuthorityCertificateRequest) Send(ctx context.Context) 
 	}
 
 	resp := &ImportCertificateAuthorityCertificateResponse{
-		ImportCertificateAuthorityCertificateOutput: r.Request.Data.(*ImportCertificateAuthorityCertificateOutput),
+		ImportCertificateAuthorityCertificateOutput: r.Request.Data.(*types.ImportCertificateAuthorityCertificateOutput),
 		response: &aws.Response{Request: r.Request},
 	}
 
@@ -172,7 +103,7 @@ func (r ImportCertificateAuthorityCertificateRequest) Send(ctx context.Context) 
 // ImportCertificateAuthorityCertificateResponse is the response type for the
 // ImportCertificateAuthorityCertificate API operation.
 type ImportCertificateAuthorityCertificateResponse struct {
-	*ImportCertificateAuthorityCertificateOutput
+	*types.ImportCertificateAuthorityCertificateOutput
 
 	response *aws.Response
 }

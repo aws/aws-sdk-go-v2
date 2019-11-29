@@ -6,50 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
 )
-
-type StopTransformJobInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the transform job to stop.
-	//
-	// TransformJobName is a required field
-	TransformJobName *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s StopTransformJobInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *StopTransformJobInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "StopTransformJobInput"}
-
-	if s.TransformJobName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("TransformJobName"))
-	}
-	if s.TransformJobName != nil && len(*s.TransformJobName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("TransformJobName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type StopTransformJobOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s StopTransformJobOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opStopTransformJob = "StopTransformJob"
 
@@ -71,7 +31,7 @@ const opStopTransformJob = "StopTransformJob"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/StopTransformJob
-func (c *Client) StopTransformJobRequest(input *StopTransformJobInput) StopTransformJobRequest {
+func (c *Client) StopTransformJobRequest(input *types.StopTransformJobInput) StopTransformJobRequest {
 	op := &aws.Operation{
 		Name:       opStopTransformJob,
 		HTTPMethod: "POST",
@@ -79,10 +39,10 @@ func (c *Client) StopTransformJobRequest(input *StopTransformJobInput) StopTrans
 	}
 
 	if input == nil {
-		input = &StopTransformJobInput{}
+		input = &types.StopTransformJobInput{}
 	}
 
-	req := c.newRequest(op, input, &StopTransformJobOutput{})
+	req := c.newRequest(op, input, &types.StopTransformJobOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return StopTransformJobRequest{Request: req, Input: input, Copy: c.StopTransformJobRequest}
@@ -92,8 +52,8 @@ func (c *Client) StopTransformJobRequest(input *StopTransformJobInput) StopTrans
 // StopTransformJob API operation.
 type StopTransformJobRequest struct {
 	*aws.Request
-	Input *StopTransformJobInput
-	Copy  func(*StopTransformJobInput) StopTransformJobRequest
+	Input *types.StopTransformJobInput
+	Copy  func(*types.StopTransformJobInput) StopTransformJobRequest
 }
 
 // Send marshals and sends the StopTransformJob API request.
@@ -105,7 +65,7 @@ func (r StopTransformJobRequest) Send(ctx context.Context) (*StopTransformJobRes
 	}
 
 	resp := &StopTransformJobResponse{
-		StopTransformJobOutput: r.Request.Data.(*StopTransformJobOutput),
+		StopTransformJobOutput: r.Request.Data.(*types.StopTransformJobOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -115,7 +75,7 @@ func (r StopTransformJobRequest) Send(ctx context.Context) (*StopTransformJobRes
 // StopTransformJobResponse is the response type for the
 // StopTransformJob API operation.
 type StopTransformJobResponse struct {
-	*StopTransformJobOutput
+	*types.StopTransformJobOutput
 
 	response *aws.Response
 }

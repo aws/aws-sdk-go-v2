@@ -6,129 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/glacier/types"
 )
-
-// Provides options for initiating a multipart upload to an Amazon S3 Glacier
-// vault.
-type InitiateMultipartUploadInput struct {
-	_ struct{} `type:"structure"`
-
-	// The AccountId value is the AWS account ID of the account that owns the vault.
-	// You can either specify an AWS account ID or optionally a single '-' (hyphen),
-	// in which case Amazon S3 Glacier uses the AWS account ID associated with the
-	// credentials used to sign the request. If you use an account ID, do not include
-	// any hyphens ('-') in the ID.
-	//
-	// AccountId is a required field
-	AccountId *string `location:"uri" locationName:"accountId" type:"string" required:"true"`
-
-	// The archive description that you are uploading in parts.
-	//
-	// The part size must be a megabyte (1024 KB) multiplied by a power of 2, for
-	// example 1048576 (1 MB), 2097152 (2 MB), 4194304 (4 MB), 8388608 (8 MB), and
-	// so on. The minimum allowable part size is 1 MB, and the maximum is 4 GB (4096
-	// MB).
-	ArchiveDescription *string `location:"header" locationName:"x-amz-archive-description" type:"string"`
-
-	// The size of each part except the last, in bytes. The last part can be smaller
-	// than this part size.
-	PartSize *string `location:"header" locationName:"x-amz-part-size" type:"string"`
-
-	// The name of the vault.
-	//
-	// VaultName is a required field
-	VaultName *string `location:"uri" locationName:"vaultName" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s InitiateMultipartUploadInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *InitiateMultipartUploadInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "InitiateMultipartUploadInput"}
-
-	if s.AccountId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("AccountId"))
-	}
-
-	if s.VaultName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("VaultName"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s InitiateMultipartUploadInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.ArchiveDescription != nil {
-		v := *s.ArchiveDescription
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "x-amz-archive-description", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.PartSize != nil {
-		v := *s.PartSize
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "x-amz-part-size", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.AccountId != nil {
-		v := *s.AccountId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "accountId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.VaultName != nil {
-		v := *s.VaultName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "vaultName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-// The Amazon S3 Glacier response to your request.
-type InitiateMultipartUploadOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The relative URI path of the multipart upload ID Amazon S3 Glacier created.
-	Location *string `location:"header" locationName:"Location" type:"string"`
-
-	// The ID of the multipart upload. This value is also included as part of the
-	// location.
-	UploadId *string `location:"header" locationName:"x-amz-multipart-upload-id" type:"string"`
-}
-
-// String returns the string representation
-func (s InitiateMultipartUploadOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s InitiateMultipartUploadOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.Location != nil {
-		v := *s.Location
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "Location", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.UploadId != nil {
-		v := *s.UploadId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "x-amz-multipart-upload-id", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opInitiateMultipartUpload = "InitiateMultipartUpload"
 
@@ -178,7 +57,7 @@ const opInitiateMultipartUpload = "InitiateMultipartUpload"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) InitiateMultipartUploadRequest(input *InitiateMultipartUploadInput) InitiateMultipartUploadRequest {
+func (c *Client) InitiateMultipartUploadRequest(input *types.InitiateMultipartUploadInput) InitiateMultipartUploadRequest {
 	op := &aws.Operation{
 		Name:       opInitiateMultipartUpload,
 		HTTPMethod: "POST",
@@ -186,10 +65,10 @@ func (c *Client) InitiateMultipartUploadRequest(input *InitiateMultipartUploadIn
 	}
 
 	if input == nil {
-		input = &InitiateMultipartUploadInput{}
+		input = &types.InitiateMultipartUploadInput{}
 	}
 
-	req := c.newRequest(op, input, &InitiateMultipartUploadOutput{})
+	req := c.newRequest(op, input, &types.InitiateMultipartUploadOutput{})
 	return InitiateMultipartUploadRequest{Request: req, Input: input, Copy: c.InitiateMultipartUploadRequest}
 }
 
@@ -197,8 +76,8 @@ func (c *Client) InitiateMultipartUploadRequest(input *InitiateMultipartUploadIn
 // InitiateMultipartUpload API operation.
 type InitiateMultipartUploadRequest struct {
 	*aws.Request
-	Input *InitiateMultipartUploadInput
-	Copy  func(*InitiateMultipartUploadInput) InitiateMultipartUploadRequest
+	Input *types.InitiateMultipartUploadInput
+	Copy  func(*types.InitiateMultipartUploadInput) InitiateMultipartUploadRequest
 }
 
 // Send marshals and sends the InitiateMultipartUpload API request.
@@ -210,7 +89,7 @@ func (r InitiateMultipartUploadRequest) Send(ctx context.Context) (*InitiateMult
 	}
 
 	resp := &InitiateMultipartUploadResponse{
-		InitiateMultipartUploadOutput: r.Request.Data.(*InitiateMultipartUploadOutput),
+		InitiateMultipartUploadOutput: r.Request.Data.(*types.InitiateMultipartUploadOutput),
 		response:                      &aws.Response{Request: r.Request},
 	}
 
@@ -220,7 +99,7 @@ func (r InitiateMultipartUploadRequest) Send(ctx context.Context) (*InitiateMult
 // InitiateMultipartUploadResponse is the response type for the
 // InitiateMultipartUpload API operation.
 type InitiateMultipartUploadResponse struct {
-	*InitiateMultipartUploadOutput
+	*types.InitiateMultipartUploadOutput
 
 	response *aws.Response
 }

@@ -6,100 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/greengrass/types"
 )
-
-type ListSubscriptionDefinitionVersionsInput struct {
-	_ struct{} `type:"structure"`
-
-	MaxResults *string `location:"querystring" locationName:"MaxResults" type:"string"`
-
-	NextToken *string `location:"querystring" locationName:"NextToken" type:"string"`
-
-	// SubscriptionDefinitionId is a required field
-	SubscriptionDefinitionId *string `location:"uri" locationName:"SubscriptionDefinitionId" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s ListSubscriptionDefinitionVersionsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListSubscriptionDefinitionVersionsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListSubscriptionDefinitionVersionsInput"}
-
-	if s.SubscriptionDefinitionId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("SubscriptionDefinitionId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListSubscriptionDefinitionVersionsInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.SubscriptionDefinitionId != nil {
-		v := *s.SubscriptionDefinitionId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "SubscriptionDefinitionId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.MaxResults != nil {
-		v := *s.MaxResults
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "MaxResults", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type ListSubscriptionDefinitionVersionsOutput struct {
-	_ struct{} `type:"structure"`
-
-	NextToken *string `type:"string"`
-
-	Versions []VersionInformation `type:"list"`
-}
-
-// String returns the string representation
-func (s ListSubscriptionDefinitionVersionsOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListSubscriptionDefinitionVersionsOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Versions != nil {
-		v := s.Versions
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "Versions", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	return nil
-}
 
 const opListSubscriptionDefinitionVersions = "ListSubscriptionDefinitionVersions"
 
@@ -116,7 +24,7 @@ const opListSubscriptionDefinitionVersions = "ListSubscriptionDefinitionVersions
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/ListSubscriptionDefinitionVersions
-func (c *Client) ListSubscriptionDefinitionVersionsRequest(input *ListSubscriptionDefinitionVersionsInput) ListSubscriptionDefinitionVersionsRequest {
+func (c *Client) ListSubscriptionDefinitionVersionsRequest(input *types.ListSubscriptionDefinitionVersionsInput) ListSubscriptionDefinitionVersionsRequest {
 	op := &aws.Operation{
 		Name:       opListSubscriptionDefinitionVersions,
 		HTTPMethod: "GET",
@@ -124,10 +32,10 @@ func (c *Client) ListSubscriptionDefinitionVersionsRequest(input *ListSubscripti
 	}
 
 	if input == nil {
-		input = &ListSubscriptionDefinitionVersionsInput{}
+		input = &types.ListSubscriptionDefinitionVersionsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListSubscriptionDefinitionVersionsOutput{})
+	req := c.newRequest(op, input, &types.ListSubscriptionDefinitionVersionsOutput{})
 	return ListSubscriptionDefinitionVersionsRequest{Request: req, Input: input, Copy: c.ListSubscriptionDefinitionVersionsRequest}
 }
 
@@ -135,8 +43,8 @@ func (c *Client) ListSubscriptionDefinitionVersionsRequest(input *ListSubscripti
 // ListSubscriptionDefinitionVersions API operation.
 type ListSubscriptionDefinitionVersionsRequest struct {
 	*aws.Request
-	Input *ListSubscriptionDefinitionVersionsInput
-	Copy  func(*ListSubscriptionDefinitionVersionsInput) ListSubscriptionDefinitionVersionsRequest
+	Input *types.ListSubscriptionDefinitionVersionsInput
+	Copy  func(*types.ListSubscriptionDefinitionVersionsInput) ListSubscriptionDefinitionVersionsRequest
 }
 
 // Send marshals and sends the ListSubscriptionDefinitionVersions API request.
@@ -148,7 +56,7 @@ func (r ListSubscriptionDefinitionVersionsRequest) Send(ctx context.Context) (*L
 	}
 
 	resp := &ListSubscriptionDefinitionVersionsResponse{
-		ListSubscriptionDefinitionVersionsOutput: r.Request.Data.(*ListSubscriptionDefinitionVersionsOutput),
+		ListSubscriptionDefinitionVersionsOutput: r.Request.Data.(*types.ListSubscriptionDefinitionVersionsOutput),
 		response:                                 &aws.Response{Request: r.Request},
 	}
 
@@ -158,7 +66,7 @@ func (r ListSubscriptionDefinitionVersionsRequest) Send(ctx context.Context) (*L
 // ListSubscriptionDefinitionVersionsResponse is the response type for the
 // ListSubscriptionDefinitionVersions API operation.
 type ListSubscriptionDefinitionVersionsResponse struct {
-	*ListSubscriptionDefinitionVersionsOutput
+	*types.ListSubscriptionDefinitionVersionsOutput
 
 	response *aws.Response
 }

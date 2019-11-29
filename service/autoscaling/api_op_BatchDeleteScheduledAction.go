@@ -6,62 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/autoscaling/types"
 )
-
-type BatchDeleteScheduledActionInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the Auto Scaling group.
-	//
-	// AutoScalingGroupName is a required field
-	AutoScalingGroupName *string `min:"1" type:"string" required:"true"`
-
-	// The names of the scheduled actions to delete. The maximum number allowed
-	// is 50.
-	//
-	// ScheduledActionNames is a required field
-	ScheduledActionNames []string `type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s BatchDeleteScheduledActionInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *BatchDeleteScheduledActionInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "BatchDeleteScheduledActionInput"}
-
-	if s.AutoScalingGroupName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("AutoScalingGroupName"))
-	}
-	if s.AutoScalingGroupName != nil && len(*s.AutoScalingGroupName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("AutoScalingGroupName", 1))
-	}
-
-	if s.ScheduledActionNames == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ScheduledActionNames"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type BatchDeleteScheduledActionOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The names of the scheduled actions that could not be deleted, including an
-	// error message.
-	FailedScheduledActions []FailedScheduledUpdateGroupActionRequest `type:"list"`
-}
-
-// String returns the string representation
-func (s BatchDeleteScheduledActionOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opBatchDeleteScheduledAction = "BatchDeleteScheduledAction"
 
@@ -78,7 +24,7 @@ const opBatchDeleteScheduledAction = "BatchDeleteScheduledAction"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/BatchDeleteScheduledAction
-func (c *Client) BatchDeleteScheduledActionRequest(input *BatchDeleteScheduledActionInput) BatchDeleteScheduledActionRequest {
+func (c *Client) BatchDeleteScheduledActionRequest(input *types.BatchDeleteScheduledActionInput) BatchDeleteScheduledActionRequest {
 	op := &aws.Operation{
 		Name:       opBatchDeleteScheduledAction,
 		HTTPMethod: "POST",
@@ -86,10 +32,10 @@ func (c *Client) BatchDeleteScheduledActionRequest(input *BatchDeleteScheduledAc
 	}
 
 	if input == nil {
-		input = &BatchDeleteScheduledActionInput{}
+		input = &types.BatchDeleteScheduledActionInput{}
 	}
 
-	req := c.newRequest(op, input, &BatchDeleteScheduledActionOutput{})
+	req := c.newRequest(op, input, &types.BatchDeleteScheduledActionOutput{})
 	return BatchDeleteScheduledActionRequest{Request: req, Input: input, Copy: c.BatchDeleteScheduledActionRequest}
 }
 
@@ -97,8 +43,8 @@ func (c *Client) BatchDeleteScheduledActionRequest(input *BatchDeleteScheduledAc
 // BatchDeleteScheduledAction API operation.
 type BatchDeleteScheduledActionRequest struct {
 	*aws.Request
-	Input *BatchDeleteScheduledActionInput
-	Copy  func(*BatchDeleteScheduledActionInput) BatchDeleteScheduledActionRequest
+	Input *types.BatchDeleteScheduledActionInput
+	Copy  func(*types.BatchDeleteScheduledActionInput) BatchDeleteScheduledActionRequest
 }
 
 // Send marshals and sends the BatchDeleteScheduledAction API request.
@@ -110,7 +56,7 @@ func (r BatchDeleteScheduledActionRequest) Send(ctx context.Context) (*BatchDele
 	}
 
 	resp := &BatchDeleteScheduledActionResponse{
-		BatchDeleteScheduledActionOutput: r.Request.Data.(*BatchDeleteScheduledActionOutput),
+		BatchDeleteScheduledActionOutput: r.Request.Data.(*types.BatchDeleteScheduledActionOutput),
 		response:                         &aws.Response{Request: r.Request},
 	}
 
@@ -120,7 +66,7 @@ func (r BatchDeleteScheduledActionRequest) Send(ctx context.Context) (*BatchDele
 // BatchDeleteScheduledActionResponse is the response type for the
 // BatchDeleteScheduledAction API operation.
 type BatchDeleteScheduledActionResponse struct {
-	*BatchDeleteScheduledActionOutput
+	*types.BatchDeleteScheduledActionOutput
 
 	response *aws.Response
 }

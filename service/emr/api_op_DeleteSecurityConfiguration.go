@@ -6,45 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/emr/types"
 )
-
-type DeleteSecurityConfigurationInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the security configuration.
-	//
-	// Name is a required field
-	Name *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteSecurityConfigurationInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteSecurityConfigurationInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteSecurityConfigurationInput"}
-
-	if s.Name == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Name"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteSecurityConfigurationOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteSecurityConfigurationOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteSecurityConfiguration = "DeleteSecurityConfiguration"
 
@@ -61,7 +24,7 @@ const opDeleteSecurityConfiguration = "DeleteSecurityConfiguration"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/DeleteSecurityConfiguration
-func (c *Client) DeleteSecurityConfigurationRequest(input *DeleteSecurityConfigurationInput) DeleteSecurityConfigurationRequest {
+func (c *Client) DeleteSecurityConfigurationRequest(input *types.DeleteSecurityConfigurationInput) DeleteSecurityConfigurationRequest {
 	op := &aws.Operation{
 		Name:       opDeleteSecurityConfiguration,
 		HTTPMethod: "POST",
@@ -69,10 +32,10 @@ func (c *Client) DeleteSecurityConfigurationRequest(input *DeleteSecurityConfigu
 	}
 
 	if input == nil {
-		input = &DeleteSecurityConfigurationInput{}
+		input = &types.DeleteSecurityConfigurationInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteSecurityConfigurationOutput{})
+	req := c.newRequest(op, input, &types.DeleteSecurityConfigurationOutput{})
 	return DeleteSecurityConfigurationRequest{Request: req, Input: input, Copy: c.DeleteSecurityConfigurationRequest}
 }
 
@@ -80,8 +43,8 @@ func (c *Client) DeleteSecurityConfigurationRequest(input *DeleteSecurityConfigu
 // DeleteSecurityConfiguration API operation.
 type DeleteSecurityConfigurationRequest struct {
 	*aws.Request
-	Input *DeleteSecurityConfigurationInput
-	Copy  func(*DeleteSecurityConfigurationInput) DeleteSecurityConfigurationRequest
+	Input *types.DeleteSecurityConfigurationInput
+	Copy  func(*types.DeleteSecurityConfigurationInput) DeleteSecurityConfigurationRequest
 }
 
 // Send marshals and sends the DeleteSecurityConfiguration API request.
@@ -93,7 +56,7 @@ func (r DeleteSecurityConfigurationRequest) Send(ctx context.Context) (*DeleteSe
 	}
 
 	resp := &DeleteSecurityConfigurationResponse{
-		DeleteSecurityConfigurationOutput: r.Request.Data.(*DeleteSecurityConfigurationOutput),
+		DeleteSecurityConfigurationOutput: r.Request.Data.(*types.DeleteSecurityConfigurationOutput),
 		response:                          &aws.Response{Request: r.Request},
 	}
 
@@ -103,7 +66,7 @@ func (r DeleteSecurityConfigurationRequest) Send(ctx context.Context) (*DeleteSe
 // DeleteSecurityConfigurationResponse is the response type for the
 // DeleteSecurityConfiguration API operation.
 type DeleteSecurityConfigurationResponse struct {
-	*DeleteSecurityConfigurationOutput
+	*types.DeleteSecurityConfigurationOutput
 
 	response *aws.Response
 }

@@ -6,53 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/eventbridge/types"
 )
-
-type DescribeEventBusInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the event bus to show details for. If you omit this, the default
-	// event bus is displayed.
-	Name *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeEventBusInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeEventBusInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeEventBusInput"}
-	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribeEventBusOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the account permitted to write events to
-	// the current account.
-	Arn *string `type:"string"`
-
-	// The name of the event bus. Currently, this is always default.
-	Name *string `type:"string"`
-
-	// The policy that enables the external account to send events to your account.
-	Policy *string `type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeEventBusOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeEventBus = "DescribeEventBus"
 
@@ -77,7 +32,7 @@ const opDescribeEventBus = "DescribeEventBus"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/DescribeEventBus
-func (c *Client) DescribeEventBusRequest(input *DescribeEventBusInput) DescribeEventBusRequest {
+func (c *Client) DescribeEventBusRequest(input *types.DescribeEventBusInput) DescribeEventBusRequest {
 	op := &aws.Operation{
 		Name:       opDescribeEventBus,
 		HTTPMethod: "POST",
@@ -85,10 +40,10 @@ func (c *Client) DescribeEventBusRequest(input *DescribeEventBusInput) DescribeE
 	}
 
 	if input == nil {
-		input = &DescribeEventBusInput{}
+		input = &types.DescribeEventBusInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeEventBusOutput{})
+	req := c.newRequest(op, input, &types.DescribeEventBusOutput{})
 	return DescribeEventBusRequest{Request: req, Input: input, Copy: c.DescribeEventBusRequest}
 }
 
@@ -96,8 +51,8 @@ func (c *Client) DescribeEventBusRequest(input *DescribeEventBusInput) DescribeE
 // DescribeEventBus API operation.
 type DescribeEventBusRequest struct {
 	*aws.Request
-	Input *DescribeEventBusInput
-	Copy  func(*DescribeEventBusInput) DescribeEventBusRequest
+	Input *types.DescribeEventBusInput
+	Copy  func(*types.DescribeEventBusInput) DescribeEventBusRequest
 }
 
 // Send marshals and sends the DescribeEventBus API request.
@@ -109,7 +64,7 @@ func (r DescribeEventBusRequest) Send(ctx context.Context) (*DescribeEventBusRes
 	}
 
 	resp := &DescribeEventBusResponse{
-		DescribeEventBusOutput: r.Request.Data.(*DescribeEventBusOutput),
+		DescribeEventBusOutput: r.Request.Data.(*types.DescribeEventBusOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -119,7 +74,7 @@ func (r DescribeEventBusRequest) Send(ctx context.Context) (*DescribeEventBusRes
 // DescribeEventBusResponse is the response type for the
 // DescribeEventBus API operation.
 type DescribeEventBusResponse struct {
-	*DescribeEventBusOutput
+	*types.DescribeEventBusOutput
 
 	response *aws.Response
 }

@@ -4,177 +4,10 @@ package iot
 
 import (
 	"context"
-	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/iot/types"
 )
-
-type DescribeThingRegistrationTaskInput struct {
-	_ struct{} `type:"structure"`
-
-	// The task ID.
-	//
-	// TaskId is a required field
-	TaskId *string `location:"uri" locationName:"taskId" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeThingRegistrationTaskInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeThingRegistrationTaskInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeThingRegistrationTaskInput"}
-
-	if s.TaskId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("TaskId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DescribeThingRegistrationTaskInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.TaskId != nil {
-		v := *s.TaskId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "taskId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type DescribeThingRegistrationTaskOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The task creation date.
-	CreationDate *time.Time `locationName:"creationDate" type:"timestamp"`
-
-	// The number of things that failed to be provisioned.
-	FailureCount *int64 `locationName:"failureCount" type:"integer"`
-
-	// The S3 bucket that contains the input file.
-	InputFileBucket *string `locationName:"inputFileBucket" min:"3" type:"string"`
-
-	// The input file key.
-	InputFileKey *string `locationName:"inputFileKey" min:"1" type:"string"`
-
-	// The date when the task was last modified.
-	LastModifiedDate *time.Time `locationName:"lastModifiedDate" type:"timestamp"`
-
-	// The message.
-	Message *string `locationName:"message" type:"string"`
-
-	// The progress of the bulk provisioning task expressed as a percentage.
-	PercentageProgress *int64 `locationName:"percentageProgress" type:"integer"`
-
-	// The role ARN that grants access to the input file bucket.
-	RoleArn *string `locationName:"roleArn" min:"20" type:"string"`
-
-	// The status of the bulk thing provisioning task.
-	Status Status `locationName:"status" type:"string" enum:"true"`
-
-	// The number of things successfully provisioned.
-	SuccessCount *int64 `locationName:"successCount" type:"integer"`
-
-	// The task ID.
-	TaskId *string `locationName:"taskId" type:"string"`
-
-	// The task's template.
-	TemplateBody *string `locationName:"templateBody" type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeThingRegistrationTaskOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DescribeThingRegistrationTaskOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.CreationDate != nil {
-		v := *s.CreationDate
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "creationDate",
-			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
-	}
-	if s.FailureCount != nil {
-		v := *s.FailureCount
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "failureCount", protocol.Int64Value(v), metadata)
-	}
-	if s.InputFileBucket != nil {
-		v := *s.InputFileBucket
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "inputFileBucket", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.InputFileKey != nil {
-		v := *s.InputFileKey
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "inputFileKey", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.LastModifiedDate != nil {
-		v := *s.LastModifiedDate
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "lastModifiedDate",
-			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
-	}
-	if s.Message != nil {
-		v := *s.Message
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "message", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.PercentageProgress != nil {
-		v := *s.PercentageProgress
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "percentageProgress", protocol.Int64Value(v), metadata)
-	}
-	if s.RoleArn != nil {
-		v := *s.RoleArn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "roleArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if len(s.Status) > 0 {
-		v := s.Status
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "status", protocol.QuotedValue{ValueMarshaler: v}, metadata)
-	}
-	if s.SuccessCount != nil {
-		v := *s.SuccessCount
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "successCount", protocol.Int64Value(v), metadata)
-	}
-	if s.TaskId != nil {
-		v := *s.TaskId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "taskId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.TemplateBody != nil {
-		v := *s.TemplateBody
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "templateBody", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opDescribeThingRegistrationTask = "DescribeThingRegistrationTask"
 
@@ -189,7 +22,7 @@ const opDescribeThingRegistrationTask = "DescribeThingRegistrationTask"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) DescribeThingRegistrationTaskRequest(input *DescribeThingRegistrationTaskInput) DescribeThingRegistrationTaskRequest {
+func (c *Client) DescribeThingRegistrationTaskRequest(input *types.DescribeThingRegistrationTaskInput) DescribeThingRegistrationTaskRequest {
 	op := &aws.Operation{
 		Name:       opDescribeThingRegistrationTask,
 		HTTPMethod: "GET",
@@ -197,10 +30,10 @@ func (c *Client) DescribeThingRegistrationTaskRequest(input *DescribeThingRegist
 	}
 
 	if input == nil {
-		input = &DescribeThingRegistrationTaskInput{}
+		input = &types.DescribeThingRegistrationTaskInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeThingRegistrationTaskOutput{})
+	req := c.newRequest(op, input, &types.DescribeThingRegistrationTaskOutput{})
 	return DescribeThingRegistrationTaskRequest{Request: req, Input: input, Copy: c.DescribeThingRegistrationTaskRequest}
 }
 
@@ -208,8 +41,8 @@ func (c *Client) DescribeThingRegistrationTaskRequest(input *DescribeThingRegist
 // DescribeThingRegistrationTask API operation.
 type DescribeThingRegistrationTaskRequest struct {
 	*aws.Request
-	Input *DescribeThingRegistrationTaskInput
-	Copy  func(*DescribeThingRegistrationTaskInput) DescribeThingRegistrationTaskRequest
+	Input *types.DescribeThingRegistrationTaskInput
+	Copy  func(*types.DescribeThingRegistrationTaskInput) DescribeThingRegistrationTaskRequest
 }
 
 // Send marshals and sends the DescribeThingRegistrationTask API request.
@@ -221,7 +54,7 @@ func (r DescribeThingRegistrationTaskRequest) Send(ctx context.Context) (*Descri
 	}
 
 	resp := &DescribeThingRegistrationTaskResponse{
-		DescribeThingRegistrationTaskOutput: r.Request.Data.(*DescribeThingRegistrationTaskOutput),
+		DescribeThingRegistrationTaskOutput: r.Request.Data.(*types.DescribeThingRegistrationTaskOutput),
 		response:                            &aws.Response{Request: r.Request},
 	}
 
@@ -231,7 +64,7 @@ func (r DescribeThingRegistrationTaskRequest) Send(ctx context.Context) (*Descri
 // DescribeThingRegistrationTaskResponse is the response type for the
 // DescribeThingRegistrationTask API operation.
 type DescribeThingRegistrationTaskResponse struct {
-	*DescribeThingRegistrationTaskOutput
+	*types.DescribeThingRegistrationTaskOutput
 
 	response *aws.Response
 }

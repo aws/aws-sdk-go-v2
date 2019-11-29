@@ -6,57 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/autoscaling/types"
 )
-
-type DetachLoadBalancersInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the Auto Scaling group.
-	//
-	// AutoScalingGroupName is a required field
-	AutoScalingGroupName *string `min:"1" type:"string" required:"true"`
-
-	// The names of the load balancers. You can specify up to 10 load balancers.
-	//
-	// LoadBalancerNames is a required field
-	LoadBalancerNames []string `type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s DetachLoadBalancersInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DetachLoadBalancersInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DetachLoadBalancersInput"}
-
-	if s.AutoScalingGroupName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("AutoScalingGroupName"))
-	}
-	if s.AutoScalingGroupName != nil && len(*s.AutoScalingGroupName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("AutoScalingGroupName", 1))
-	}
-
-	if s.LoadBalancerNames == nil {
-		invalidParams.Add(aws.NewErrParamRequired("LoadBalancerNames"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DetachLoadBalancersOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DetachLoadBalancersOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDetachLoadBalancers = "DetachLoadBalancers"
 
@@ -83,7 +34,7 @@ const opDetachLoadBalancers = "DetachLoadBalancers"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DetachLoadBalancers
-func (c *Client) DetachLoadBalancersRequest(input *DetachLoadBalancersInput) DetachLoadBalancersRequest {
+func (c *Client) DetachLoadBalancersRequest(input *types.DetachLoadBalancersInput) DetachLoadBalancersRequest {
 	op := &aws.Operation{
 		Name:       opDetachLoadBalancers,
 		HTTPMethod: "POST",
@@ -91,10 +42,10 @@ func (c *Client) DetachLoadBalancersRequest(input *DetachLoadBalancersInput) Det
 	}
 
 	if input == nil {
-		input = &DetachLoadBalancersInput{}
+		input = &types.DetachLoadBalancersInput{}
 	}
 
-	req := c.newRequest(op, input, &DetachLoadBalancersOutput{})
+	req := c.newRequest(op, input, &types.DetachLoadBalancersOutput{})
 	return DetachLoadBalancersRequest{Request: req, Input: input, Copy: c.DetachLoadBalancersRequest}
 }
 
@@ -102,8 +53,8 @@ func (c *Client) DetachLoadBalancersRequest(input *DetachLoadBalancersInput) Det
 // DetachLoadBalancers API operation.
 type DetachLoadBalancersRequest struct {
 	*aws.Request
-	Input *DetachLoadBalancersInput
-	Copy  func(*DetachLoadBalancersInput) DetachLoadBalancersRequest
+	Input *types.DetachLoadBalancersInput
+	Copy  func(*types.DetachLoadBalancersInput) DetachLoadBalancersRequest
 }
 
 // Send marshals and sends the DetachLoadBalancers API request.
@@ -115,7 +66,7 @@ func (r DetachLoadBalancersRequest) Send(ctx context.Context) (*DetachLoadBalanc
 	}
 
 	resp := &DetachLoadBalancersResponse{
-		DetachLoadBalancersOutput: r.Request.Data.(*DetachLoadBalancersOutput),
+		DetachLoadBalancersOutput: r.Request.Data.(*types.DetachLoadBalancersOutput),
 		response:                  &aws.Response{Request: r.Request},
 	}
 
@@ -125,7 +76,7 @@ func (r DetachLoadBalancersRequest) Send(ctx context.Context) (*DetachLoadBalanc
 // DetachLoadBalancersResponse is the response type for the
 // DetachLoadBalancers API operation.
 type DetachLoadBalancersResponse struct {
-	*DetachLoadBalancersOutput
+	*types.DetachLoadBalancersOutput
 
 	response *aws.Response
 }

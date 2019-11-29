@@ -6,64 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/types"
 )
-
-type ListPortfolioAccessInput struct {
-	_ struct{} `type:"structure"`
-
-	// The language code.
-	//
-	//    * en - English (default)
-	//
-	//    * jp - Japanese
-	//
-	//    * zh - Chinese
-	AcceptLanguage *string `type:"string"`
-
-	// The portfolio identifier.
-	//
-	// PortfolioId is a required field
-	PortfolioId *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s ListPortfolioAccessInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListPortfolioAccessInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListPortfolioAccessInput"}
-
-	if s.PortfolioId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("PortfolioId"))
-	}
-	if s.PortfolioId != nil && len(*s.PortfolioId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("PortfolioId", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ListPortfolioAccessOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Information about the AWS accounts with access to the portfolio.
-	AccountIds []string `type:"list"`
-
-	// The page token to use to retrieve the next set of results. If there are no
-	// additional results, this value is null.
-	NextPageToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s ListPortfolioAccessOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListPortfolioAccess = "ListPortfolioAccess"
 
@@ -80,7 +24,7 @@ const opListPortfolioAccess = "ListPortfolioAccess"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ListPortfolioAccess
-func (c *Client) ListPortfolioAccessRequest(input *ListPortfolioAccessInput) ListPortfolioAccessRequest {
+func (c *Client) ListPortfolioAccessRequest(input *types.ListPortfolioAccessInput) ListPortfolioAccessRequest {
 	op := &aws.Operation{
 		Name:       opListPortfolioAccess,
 		HTTPMethod: "POST",
@@ -88,10 +32,10 @@ func (c *Client) ListPortfolioAccessRequest(input *ListPortfolioAccessInput) Lis
 	}
 
 	if input == nil {
-		input = &ListPortfolioAccessInput{}
+		input = &types.ListPortfolioAccessInput{}
 	}
 
-	req := c.newRequest(op, input, &ListPortfolioAccessOutput{})
+	req := c.newRequest(op, input, &types.ListPortfolioAccessOutput{})
 	return ListPortfolioAccessRequest{Request: req, Input: input, Copy: c.ListPortfolioAccessRequest}
 }
 
@@ -99,8 +43,8 @@ func (c *Client) ListPortfolioAccessRequest(input *ListPortfolioAccessInput) Lis
 // ListPortfolioAccess API operation.
 type ListPortfolioAccessRequest struct {
 	*aws.Request
-	Input *ListPortfolioAccessInput
-	Copy  func(*ListPortfolioAccessInput) ListPortfolioAccessRequest
+	Input *types.ListPortfolioAccessInput
+	Copy  func(*types.ListPortfolioAccessInput) ListPortfolioAccessRequest
 }
 
 // Send marshals and sends the ListPortfolioAccess API request.
@@ -112,7 +56,7 @@ func (r ListPortfolioAccessRequest) Send(ctx context.Context) (*ListPortfolioAcc
 	}
 
 	resp := &ListPortfolioAccessResponse{
-		ListPortfolioAccessOutput: r.Request.Data.(*ListPortfolioAccessOutput),
+		ListPortfolioAccessOutput: r.Request.Data.(*types.ListPortfolioAccessOutput),
 		response:                  &aws.Response{Request: r.Request},
 	}
 
@@ -122,7 +66,7 @@ func (r ListPortfolioAccessRequest) Send(ctx context.Context) (*ListPortfolioAcc
 // ListPortfolioAccessResponse is the response type for the
 // ListPortfolioAccess API operation.
 type ListPortfolioAccessResponse struct {
-	*ListPortfolioAccessOutput
+	*types.ListPortfolioAccessOutput
 
 	response *aws.Response
 }

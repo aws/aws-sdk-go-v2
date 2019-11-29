@@ -6,137 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/signer/types"
 )
-
-type GetSigningPlatformInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the target signing platform.
-	//
-	// PlatformId is a required field
-	PlatformId *string `location:"uri" locationName:"platformId" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetSigningPlatformInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetSigningPlatformInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetSigningPlatformInput"}
-
-	if s.PlatformId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("PlatformId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetSigningPlatformInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.PlatformId != nil {
-		v := *s.PlatformId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "platformId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type GetSigningPlatformOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The category type of the target signing platform.
-	Category Category `locationName:"category" type:"string" enum:"true"`
-
-	// The display name of the target signing platform.
-	DisplayName *string `locationName:"displayName" type:"string"`
-
-	// The maximum size (in MB) of the payload that can be signed by the target
-	// platform.
-	MaxSizeInMB *int64 `locationName:"maxSizeInMB" type:"integer"`
-
-	// A list of partner entities that use the target signing platform.
-	Partner *string `locationName:"partner" type:"string"`
-
-	// The ID of the target signing platform.
-	PlatformId *string `locationName:"platformId" type:"string"`
-
-	// A list of configurations applied to the target platform at signing.
-	SigningConfiguration *SigningConfiguration `locationName:"signingConfiguration" type:"structure"`
-
-	// The format of the target platform's signing image.
-	SigningImageFormat *SigningImageFormat `locationName:"signingImageFormat" type:"structure"`
-
-	// The validation template that is used by the target signing platform.
-	Target *string `locationName:"target" type:"string"`
-}
-
-// String returns the string representation
-func (s GetSigningPlatformOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetSigningPlatformOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.Category) > 0 {
-		v := s.Category
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "category", protocol.QuotedValue{ValueMarshaler: v}, metadata)
-	}
-	if s.DisplayName != nil {
-		v := *s.DisplayName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "displayName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.MaxSizeInMB != nil {
-		v := *s.MaxSizeInMB
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "maxSizeInMB", protocol.Int64Value(v), metadata)
-	}
-	if s.Partner != nil {
-		v := *s.Partner
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "partner", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.PlatformId != nil {
-		v := *s.PlatformId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "platformId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.SigningConfiguration != nil {
-		v := s.SigningConfiguration
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "signingConfiguration", v, metadata)
-	}
-	if s.SigningImageFormat != nil {
-		v := s.SigningImageFormat
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "signingImageFormat", v, metadata)
-	}
-	if s.Target != nil {
-		v := *s.Target
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "target", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opGetSigningPlatform = "GetSigningPlatform"
 
@@ -153,7 +24,7 @@ const opGetSigningPlatform = "GetSigningPlatform"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/signer-2017-08-25/GetSigningPlatform
-func (c *Client) GetSigningPlatformRequest(input *GetSigningPlatformInput) GetSigningPlatformRequest {
+func (c *Client) GetSigningPlatformRequest(input *types.GetSigningPlatformInput) GetSigningPlatformRequest {
 	op := &aws.Operation{
 		Name:       opGetSigningPlatform,
 		HTTPMethod: "GET",
@@ -161,10 +32,10 @@ func (c *Client) GetSigningPlatformRequest(input *GetSigningPlatformInput) GetSi
 	}
 
 	if input == nil {
-		input = &GetSigningPlatformInput{}
+		input = &types.GetSigningPlatformInput{}
 	}
 
-	req := c.newRequest(op, input, &GetSigningPlatformOutput{})
+	req := c.newRequest(op, input, &types.GetSigningPlatformOutput{})
 	return GetSigningPlatformRequest{Request: req, Input: input, Copy: c.GetSigningPlatformRequest}
 }
 
@@ -172,8 +43,8 @@ func (c *Client) GetSigningPlatformRequest(input *GetSigningPlatformInput) GetSi
 // GetSigningPlatform API operation.
 type GetSigningPlatformRequest struct {
 	*aws.Request
-	Input *GetSigningPlatformInput
-	Copy  func(*GetSigningPlatformInput) GetSigningPlatformRequest
+	Input *types.GetSigningPlatformInput
+	Copy  func(*types.GetSigningPlatformInput) GetSigningPlatformRequest
 }
 
 // Send marshals and sends the GetSigningPlatform API request.
@@ -185,7 +56,7 @@ func (r GetSigningPlatformRequest) Send(ctx context.Context) (*GetSigningPlatfor
 	}
 
 	resp := &GetSigningPlatformResponse{
-		GetSigningPlatformOutput: r.Request.Data.(*GetSigningPlatformOutput),
+		GetSigningPlatformOutput: r.Request.Data.(*types.GetSigningPlatformOutput),
 		response:                 &aws.Response{Request: r.Request},
 	}
 
@@ -195,7 +66,7 @@ func (r GetSigningPlatformRequest) Send(ctx context.Context) (*GetSigningPlatfor
 // GetSigningPlatformResponse is the response type for the
 // GetSigningPlatform API operation.
 type GetSigningPlatformResponse struct {
-	*GetSigningPlatformOutput
+	*types.GetSigningPlatformOutput
 
 	response *aws.Response
 }

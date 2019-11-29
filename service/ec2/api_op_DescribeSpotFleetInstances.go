@@ -6,75 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-// Contains the parameters for DescribeSpotFleetInstances.
-type DescribeSpotFleetInstancesInput struct {
-	_ struct{} `type:"structure"`
-
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have
-	// the required permissions, the error response is DryRunOperation. Otherwise,
-	// it is UnauthorizedOperation.
-	DryRun *bool `locationName:"dryRun" type:"boolean"`
-
-	// The maximum number of results to return in a single call. Specify a value
-	// between 1 and 1000. The default value is 1000. To retrieve the remaining
-	// results, make another call with the returned NextToken value.
-	MaxResults *int64 `locationName:"maxResults" min:"1" type:"integer"`
-
-	// The token for the next set of results.
-	NextToken *string `locationName:"nextToken" type:"string"`
-
-	// The ID of the Spot Fleet request.
-	//
-	// SpotFleetRequestId is a required field
-	SpotFleetRequestId *string `locationName:"spotFleetRequestId" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeSpotFleetInstancesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeSpotFleetInstancesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeSpotFleetInstancesInput"}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-
-	if s.SpotFleetRequestId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("SpotFleetRequestId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Contains the output of DescribeSpotFleetInstances.
-type DescribeSpotFleetInstancesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The running instances. This list is refreshed periodically and might be out
-	// of date.
-	ActiveInstances []ActiveInstance `locationName:"activeInstanceSet" locationNameList:"item" type:"list"`
-
-	// The token required to retrieve the next set of results. This value is null
-	// when there are no more results to return.
-	NextToken *string `locationName:"nextToken" type:"string"`
-
-	// The ID of the Spot Fleet request.
-	SpotFleetRequestId *string `locationName:"spotFleetRequestId" type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeSpotFleetInstancesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeSpotFleetInstances = "DescribeSpotFleetInstances"
 
@@ -91,7 +24,7 @@ const opDescribeSpotFleetInstances = "DescribeSpotFleetInstances"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeSpotFleetInstances
-func (c *Client) DescribeSpotFleetInstancesRequest(input *DescribeSpotFleetInstancesInput) DescribeSpotFleetInstancesRequest {
+func (c *Client) DescribeSpotFleetInstancesRequest(input *types.DescribeSpotFleetInstancesInput) DescribeSpotFleetInstancesRequest {
 	op := &aws.Operation{
 		Name:       opDescribeSpotFleetInstances,
 		HTTPMethod: "POST",
@@ -99,10 +32,10 @@ func (c *Client) DescribeSpotFleetInstancesRequest(input *DescribeSpotFleetInsta
 	}
 
 	if input == nil {
-		input = &DescribeSpotFleetInstancesInput{}
+		input = &types.DescribeSpotFleetInstancesInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeSpotFleetInstancesOutput{})
+	req := c.newRequest(op, input, &types.DescribeSpotFleetInstancesOutput{})
 	return DescribeSpotFleetInstancesRequest{Request: req, Input: input, Copy: c.DescribeSpotFleetInstancesRequest}
 }
 
@@ -110,8 +43,8 @@ func (c *Client) DescribeSpotFleetInstancesRequest(input *DescribeSpotFleetInsta
 // DescribeSpotFleetInstances API operation.
 type DescribeSpotFleetInstancesRequest struct {
 	*aws.Request
-	Input *DescribeSpotFleetInstancesInput
-	Copy  func(*DescribeSpotFleetInstancesInput) DescribeSpotFleetInstancesRequest
+	Input *types.DescribeSpotFleetInstancesInput
+	Copy  func(*types.DescribeSpotFleetInstancesInput) DescribeSpotFleetInstancesRequest
 }
 
 // Send marshals and sends the DescribeSpotFleetInstances API request.
@@ -123,7 +56,7 @@ func (r DescribeSpotFleetInstancesRequest) Send(ctx context.Context) (*DescribeS
 	}
 
 	resp := &DescribeSpotFleetInstancesResponse{
-		DescribeSpotFleetInstancesOutput: r.Request.Data.(*DescribeSpotFleetInstancesOutput),
+		DescribeSpotFleetInstancesOutput: r.Request.Data.(*types.DescribeSpotFleetInstancesOutput),
 		response:                         &aws.Response{Request: r.Request},
 	}
 
@@ -133,7 +66,7 @@ func (r DescribeSpotFleetInstancesRequest) Send(ctx context.Context) (*DescribeS
 // DescribeSpotFleetInstancesResponse is the response type for the
 // DescribeSpotFleetInstances API operation.
 type DescribeSpotFleetInstancesResponse struct {
-	*DescribeSpotFleetInstancesOutput
+	*types.DescribeSpotFleetInstancesOutput
 
 	response *aws.Response
 }

@@ -6,85 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/iot/types"
 )
-
-type SetDefaultAuthorizerInput struct {
-	_ struct{} `type:"structure"`
-
-	// The authorizer name.
-	//
-	// AuthorizerName is a required field
-	AuthorizerName *string `locationName:"authorizerName" min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s SetDefaultAuthorizerInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *SetDefaultAuthorizerInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "SetDefaultAuthorizerInput"}
-
-	if s.AuthorizerName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("AuthorizerName"))
-	}
-	if s.AuthorizerName != nil && len(*s.AuthorizerName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("AuthorizerName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s SetDefaultAuthorizerInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.AuthorizerName != nil {
-		v := *s.AuthorizerName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "authorizerName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type SetDefaultAuthorizerOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The authorizer ARN.
-	AuthorizerArn *string `locationName:"authorizerArn" type:"string"`
-
-	// The authorizer name.
-	AuthorizerName *string `locationName:"authorizerName" min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s SetDefaultAuthorizerOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s SetDefaultAuthorizerOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.AuthorizerArn != nil {
-		v := *s.AuthorizerArn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "authorizerArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.AuthorizerName != nil {
-		v := *s.AuthorizerName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "authorizerName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opSetDefaultAuthorizer = "SetDefaultAuthorizer"
 
@@ -100,7 +23,7 @@ const opSetDefaultAuthorizer = "SetDefaultAuthorizer"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) SetDefaultAuthorizerRequest(input *SetDefaultAuthorizerInput) SetDefaultAuthorizerRequest {
+func (c *Client) SetDefaultAuthorizerRequest(input *types.SetDefaultAuthorizerInput) SetDefaultAuthorizerRequest {
 	op := &aws.Operation{
 		Name:       opSetDefaultAuthorizer,
 		HTTPMethod: "POST",
@@ -108,10 +31,10 @@ func (c *Client) SetDefaultAuthorizerRequest(input *SetDefaultAuthorizerInput) S
 	}
 
 	if input == nil {
-		input = &SetDefaultAuthorizerInput{}
+		input = &types.SetDefaultAuthorizerInput{}
 	}
 
-	req := c.newRequest(op, input, &SetDefaultAuthorizerOutput{})
+	req := c.newRequest(op, input, &types.SetDefaultAuthorizerOutput{})
 	return SetDefaultAuthorizerRequest{Request: req, Input: input, Copy: c.SetDefaultAuthorizerRequest}
 }
 
@@ -119,8 +42,8 @@ func (c *Client) SetDefaultAuthorizerRequest(input *SetDefaultAuthorizerInput) S
 // SetDefaultAuthorizer API operation.
 type SetDefaultAuthorizerRequest struct {
 	*aws.Request
-	Input *SetDefaultAuthorizerInput
-	Copy  func(*SetDefaultAuthorizerInput) SetDefaultAuthorizerRequest
+	Input *types.SetDefaultAuthorizerInput
+	Copy  func(*types.SetDefaultAuthorizerInput) SetDefaultAuthorizerRequest
 }
 
 // Send marshals and sends the SetDefaultAuthorizer API request.
@@ -132,7 +55,7 @@ func (r SetDefaultAuthorizerRequest) Send(ctx context.Context) (*SetDefaultAutho
 	}
 
 	resp := &SetDefaultAuthorizerResponse{
-		SetDefaultAuthorizerOutput: r.Request.Data.(*SetDefaultAuthorizerOutput),
+		SetDefaultAuthorizerOutput: r.Request.Data.(*types.SetDefaultAuthorizerOutput),
 		response:                   &aws.Response{Request: r.Request},
 	}
 
@@ -142,7 +65,7 @@ func (r SetDefaultAuthorizerRequest) Send(ctx context.Context) (*SetDefaultAutho
 // SetDefaultAuthorizerResponse is the response type for the
 // SetDefaultAuthorizer API operation.
 type SetDefaultAuthorizerResponse struct {
-	*SetDefaultAuthorizerOutput
+	*types.SetDefaultAuthorizerOutput
 
 	response *aws.Response
 }

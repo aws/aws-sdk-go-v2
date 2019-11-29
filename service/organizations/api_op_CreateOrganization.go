@@ -6,45 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/organizations/types"
 )
-
-type CreateOrganizationInput struct {
-	_ struct{} `type:"structure"`
-
-	// Specifies the feature set supported by the new organization. Each feature
-	// set supports different levels of functionality.
-	//
-	//    * CONSOLIDATED_BILLING: All member accounts have their bills consolidated
-	//    to and paid by the master account. For more information, see Consolidated
-	//    billing (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_getting-started_concepts.html#feature-set-cb-only)
-	//    in the AWS Organizations User Guide. The consolidated billing feature
-	//    subset isn't available for organizations in the AWS GovCloud (US) Region.
-	//
-	//    * ALL: In addition to all the features supported by the consolidated billing
-	//    feature set, the master account can also apply any policy type to any
-	//    member account in the organization. For more information, see All features
-	//    (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_getting-started_concepts.html#feature-set-all)
-	//    in the AWS Organizations User Guide.
-	FeatureSet OrganizationFeatureSet `type:"string" enum:"true"`
-}
-
-// String returns the string representation
-func (s CreateOrganizationInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type CreateOrganizationOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A structure that contains details about the newly created organization.
-	Organization *Organization `type:"structure"`
-}
-
-// String returns the string representation
-func (s CreateOrganizationOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCreateOrganization = "CreateOrganization"
 
@@ -74,7 +37,7 @@ const opCreateOrganization = "CreateOrganization"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/CreateOrganization
-func (c *Client) CreateOrganizationRequest(input *CreateOrganizationInput) CreateOrganizationRequest {
+func (c *Client) CreateOrganizationRequest(input *types.CreateOrganizationInput) CreateOrganizationRequest {
 	op := &aws.Operation{
 		Name:       opCreateOrganization,
 		HTTPMethod: "POST",
@@ -82,10 +45,10 @@ func (c *Client) CreateOrganizationRequest(input *CreateOrganizationInput) Creat
 	}
 
 	if input == nil {
-		input = &CreateOrganizationInput{}
+		input = &types.CreateOrganizationInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateOrganizationOutput{})
+	req := c.newRequest(op, input, &types.CreateOrganizationOutput{})
 	return CreateOrganizationRequest{Request: req, Input: input, Copy: c.CreateOrganizationRequest}
 }
 
@@ -93,8 +56,8 @@ func (c *Client) CreateOrganizationRequest(input *CreateOrganizationInput) Creat
 // CreateOrganization API operation.
 type CreateOrganizationRequest struct {
 	*aws.Request
-	Input *CreateOrganizationInput
-	Copy  func(*CreateOrganizationInput) CreateOrganizationRequest
+	Input *types.CreateOrganizationInput
+	Copy  func(*types.CreateOrganizationInput) CreateOrganizationRequest
 }
 
 // Send marshals and sends the CreateOrganization API request.
@@ -106,7 +69,7 @@ func (r CreateOrganizationRequest) Send(ctx context.Context) (*CreateOrganizatio
 	}
 
 	resp := &CreateOrganizationResponse{
-		CreateOrganizationOutput: r.Request.Data.(*CreateOrganizationOutput),
+		CreateOrganizationOutput: r.Request.Data.(*types.CreateOrganizationOutput),
 		response:                 &aws.Response{Request: r.Request},
 	}
 
@@ -116,7 +79,7 @@ func (r CreateOrganizationRequest) Send(ctx context.Context) (*CreateOrganizatio
 // CreateOrganizationResponse is the response type for the
 // CreateOrganization API operation.
 type CreateOrganizationResponse struct {
-	*CreateOrganizationOutput
+	*types.CreateOrganizationOutput
 
 	response *aws.Response
 }

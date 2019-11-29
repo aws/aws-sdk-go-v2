@@ -6,54 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-type DeleteEgressOnlyInternetGatewayInput struct {
-	_ struct{} `type:"structure"`
-
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have
-	// the required permissions, the error response is DryRunOperation. Otherwise,
-	// it is UnauthorizedOperation.
-	DryRun *bool `type:"boolean"`
-
-	// The ID of the egress-only internet gateway.
-	//
-	// EgressOnlyInternetGatewayId is a required field
-	EgressOnlyInternetGatewayId *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteEgressOnlyInternetGatewayInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteEgressOnlyInternetGatewayInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteEgressOnlyInternetGatewayInput"}
-
-	if s.EgressOnlyInternetGatewayId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("EgressOnlyInternetGatewayId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteEgressOnlyInternetGatewayOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Returns true if the request succeeds; otherwise, it returns an error.
-	ReturnCode *bool `locationName:"returnCode" type:"boolean"`
-}
-
-// String returns the string representation
-func (s DeleteEgressOnlyInternetGatewayOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteEgressOnlyInternetGateway = "DeleteEgressOnlyInternetGateway"
 
@@ -70,7 +24,7 @@ const opDeleteEgressOnlyInternetGateway = "DeleteEgressOnlyInternetGateway"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteEgressOnlyInternetGateway
-func (c *Client) DeleteEgressOnlyInternetGatewayRequest(input *DeleteEgressOnlyInternetGatewayInput) DeleteEgressOnlyInternetGatewayRequest {
+func (c *Client) DeleteEgressOnlyInternetGatewayRequest(input *types.DeleteEgressOnlyInternetGatewayInput) DeleteEgressOnlyInternetGatewayRequest {
 	op := &aws.Operation{
 		Name:       opDeleteEgressOnlyInternetGateway,
 		HTTPMethod: "POST",
@@ -78,10 +32,10 @@ func (c *Client) DeleteEgressOnlyInternetGatewayRequest(input *DeleteEgressOnlyI
 	}
 
 	if input == nil {
-		input = &DeleteEgressOnlyInternetGatewayInput{}
+		input = &types.DeleteEgressOnlyInternetGatewayInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteEgressOnlyInternetGatewayOutput{})
+	req := c.newRequest(op, input, &types.DeleteEgressOnlyInternetGatewayOutput{})
 	return DeleteEgressOnlyInternetGatewayRequest{Request: req, Input: input, Copy: c.DeleteEgressOnlyInternetGatewayRequest}
 }
 
@@ -89,8 +43,8 @@ func (c *Client) DeleteEgressOnlyInternetGatewayRequest(input *DeleteEgressOnlyI
 // DeleteEgressOnlyInternetGateway API operation.
 type DeleteEgressOnlyInternetGatewayRequest struct {
 	*aws.Request
-	Input *DeleteEgressOnlyInternetGatewayInput
-	Copy  func(*DeleteEgressOnlyInternetGatewayInput) DeleteEgressOnlyInternetGatewayRequest
+	Input *types.DeleteEgressOnlyInternetGatewayInput
+	Copy  func(*types.DeleteEgressOnlyInternetGatewayInput) DeleteEgressOnlyInternetGatewayRequest
 }
 
 // Send marshals and sends the DeleteEgressOnlyInternetGateway API request.
@@ -102,7 +56,7 @@ func (r DeleteEgressOnlyInternetGatewayRequest) Send(ctx context.Context) (*Dele
 	}
 
 	resp := &DeleteEgressOnlyInternetGatewayResponse{
-		DeleteEgressOnlyInternetGatewayOutput: r.Request.Data.(*DeleteEgressOnlyInternetGatewayOutput),
+		DeleteEgressOnlyInternetGatewayOutput: r.Request.Data.(*types.DeleteEgressOnlyInternetGatewayOutput),
 		response:                              &aws.Response{Request: r.Request},
 	}
 
@@ -112,7 +66,7 @@ func (r DeleteEgressOnlyInternetGatewayRequest) Send(ctx context.Context) (*Dele
 // DeleteEgressOnlyInternetGatewayResponse is the response type for the
 // DeleteEgressOnlyInternetGateway API operation.
 type DeleteEgressOnlyInternetGatewayResponse struct {
-	*DeleteEgressOnlyInternetGatewayOutput
+	*types.DeleteEgressOnlyInternetGatewayOutput
 
 	response *aws.Response
 }

@@ -6,63 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ecs/types"
 )
-
-type UpdateClusterSettingsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the cluster to modify the settings for.
-	//
-	// Cluster is a required field
-	Cluster *string `locationName:"cluster" type:"string" required:"true"`
-
-	// The setting to use by default for a cluster. This parameter is used to enable
-	// CloudWatch Container Insights for a cluster. If this value is specified,
-	// it will override the containerInsights value set with PutAccountSetting or
-	// PutAccountSettingDefault.
-	//
-	// Settings is a required field
-	Settings []ClusterSetting `locationName:"settings" type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s UpdateClusterSettingsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateClusterSettingsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateClusterSettingsInput"}
-
-	if s.Cluster == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Cluster"))
-	}
-
-	if s.Settings == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Settings"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type UpdateClusterSettingsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A regional grouping of one or more container instances on which you can run
-	// task requests. Each account receives a default cluster the first time you
-	// use the Amazon ECS service, but you may also create other clusters. Clusters
-	// may contain more than one instance type simultaneously.
-	Cluster *Cluster `locationName:"cluster" type:"structure"`
-}
-
-// String returns the string representation
-func (s UpdateClusterSettingsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opUpdateClusterSettings = "UpdateClusterSettings"
 
@@ -79,7 +24,7 @@ const opUpdateClusterSettings = "UpdateClusterSettings"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/UpdateClusterSettings
-func (c *Client) UpdateClusterSettingsRequest(input *UpdateClusterSettingsInput) UpdateClusterSettingsRequest {
+func (c *Client) UpdateClusterSettingsRequest(input *types.UpdateClusterSettingsInput) UpdateClusterSettingsRequest {
 	op := &aws.Operation{
 		Name:       opUpdateClusterSettings,
 		HTTPMethod: "POST",
@@ -87,10 +32,10 @@ func (c *Client) UpdateClusterSettingsRequest(input *UpdateClusterSettingsInput)
 	}
 
 	if input == nil {
-		input = &UpdateClusterSettingsInput{}
+		input = &types.UpdateClusterSettingsInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateClusterSettingsOutput{})
+	req := c.newRequest(op, input, &types.UpdateClusterSettingsOutput{})
 	return UpdateClusterSettingsRequest{Request: req, Input: input, Copy: c.UpdateClusterSettingsRequest}
 }
 
@@ -98,8 +43,8 @@ func (c *Client) UpdateClusterSettingsRequest(input *UpdateClusterSettingsInput)
 // UpdateClusterSettings API operation.
 type UpdateClusterSettingsRequest struct {
 	*aws.Request
-	Input *UpdateClusterSettingsInput
-	Copy  func(*UpdateClusterSettingsInput) UpdateClusterSettingsRequest
+	Input *types.UpdateClusterSettingsInput
+	Copy  func(*types.UpdateClusterSettingsInput) UpdateClusterSettingsRequest
 }
 
 // Send marshals and sends the UpdateClusterSettings API request.
@@ -111,7 +56,7 @@ func (r UpdateClusterSettingsRequest) Send(ctx context.Context) (*UpdateClusterS
 	}
 
 	resp := &UpdateClusterSettingsResponse{
-		UpdateClusterSettingsOutput: r.Request.Data.(*UpdateClusterSettingsOutput),
+		UpdateClusterSettingsOutput: r.Request.Data.(*types.UpdateClusterSettingsOutput),
 		response:                    &aws.Response{Request: r.Request},
 	}
 
@@ -121,7 +66,7 @@ func (r UpdateClusterSettingsRequest) Send(ctx context.Context) (*UpdateClusterS
 // UpdateClusterSettingsResponse is the response type for the
 // UpdateClusterSettings API operation.
 type UpdateClusterSettingsResponse struct {
-	*UpdateClusterSettingsOutput
+	*types.UpdateClusterSettingsOutput
 
 	response *aws.Response
 }

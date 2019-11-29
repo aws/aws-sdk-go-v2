@@ -6,48 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/alexaforbusiness/types"
 )
-
-type GetConferenceProviderInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ARN of the newly created conference provider.
-	//
-	// ConferenceProviderArn is a required field
-	ConferenceProviderArn *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetConferenceProviderInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetConferenceProviderInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetConferenceProviderInput"}
-
-	if s.ConferenceProviderArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ConferenceProviderArn"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type GetConferenceProviderOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The conference provider.
-	ConferenceProvider *ConferenceProvider `type:"structure"`
-}
-
-// String returns the string representation
-func (s GetConferenceProviderOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetConferenceProvider = "GetConferenceProvider"
 
@@ -64,7 +24,7 @@ const opGetConferenceProvider = "GetConferenceProvider"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/GetConferenceProvider
-func (c *Client) GetConferenceProviderRequest(input *GetConferenceProviderInput) GetConferenceProviderRequest {
+func (c *Client) GetConferenceProviderRequest(input *types.GetConferenceProviderInput) GetConferenceProviderRequest {
 	op := &aws.Operation{
 		Name:       opGetConferenceProvider,
 		HTTPMethod: "POST",
@@ -72,10 +32,10 @@ func (c *Client) GetConferenceProviderRequest(input *GetConferenceProviderInput)
 	}
 
 	if input == nil {
-		input = &GetConferenceProviderInput{}
+		input = &types.GetConferenceProviderInput{}
 	}
 
-	req := c.newRequest(op, input, &GetConferenceProviderOutput{})
+	req := c.newRequest(op, input, &types.GetConferenceProviderOutput{})
 	return GetConferenceProviderRequest{Request: req, Input: input, Copy: c.GetConferenceProviderRequest}
 }
 
@@ -83,8 +43,8 @@ func (c *Client) GetConferenceProviderRequest(input *GetConferenceProviderInput)
 // GetConferenceProvider API operation.
 type GetConferenceProviderRequest struct {
 	*aws.Request
-	Input *GetConferenceProviderInput
-	Copy  func(*GetConferenceProviderInput) GetConferenceProviderRequest
+	Input *types.GetConferenceProviderInput
+	Copy  func(*types.GetConferenceProviderInput) GetConferenceProviderRequest
 }
 
 // Send marshals and sends the GetConferenceProvider API request.
@@ -96,7 +56,7 @@ func (r GetConferenceProviderRequest) Send(ctx context.Context) (*GetConferenceP
 	}
 
 	resp := &GetConferenceProviderResponse{
-		GetConferenceProviderOutput: r.Request.Data.(*GetConferenceProviderOutput),
+		GetConferenceProviderOutput: r.Request.Data.(*types.GetConferenceProviderOutput),
 		response:                    &aws.Response{Request: r.Request},
 	}
 
@@ -106,7 +66,7 @@ func (r GetConferenceProviderRequest) Send(ctx context.Context) (*GetConferenceP
 // GetConferenceProviderResponse is the response type for the
 // GetConferenceProvider API operation.
 type GetConferenceProviderResponse struct {
-	*GetConferenceProviderOutput
+	*types.GetConferenceProviderOutput
 
 	response *aws.Response
 }

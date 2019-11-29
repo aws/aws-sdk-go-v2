@@ -6,50 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
 )
-
-type StopCompilationJobInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the model compilation job to stop.
-	//
-	// CompilationJobName is a required field
-	CompilationJobName *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s StopCompilationJobInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *StopCompilationJobInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "StopCompilationJobInput"}
-
-	if s.CompilationJobName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("CompilationJobName"))
-	}
-	if s.CompilationJobName != nil && len(*s.CompilationJobName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("CompilationJobName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type StopCompilationJobOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s StopCompilationJobOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opStopCompilationJob = "StopCompilationJob"
 
@@ -75,7 +35,7 @@ const opStopCompilationJob = "StopCompilationJob"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/StopCompilationJob
-func (c *Client) StopCompilationJobRequest(input *StopCompilationJobInput) StopCompilationJobRequest {
+func (c *Client) StopCompilationJobRequest(input *types.StopCompilationJobInput) StopCompilationJobRequest {
 	op := &aws.Operation{
 		Name:       opStopCompilationJob,
 		HTTPMethod: "POST",
@@ -83,10 +43,10 @@ func (c *Client) StopCompilationJobRequest(input *StopCompilationJobInput) StopC
 	}
 
 	if input == nil {
-		input = &StopCompilationJobInput{}
+		input = &types.StopCompilationJobInput{}
 	}
 
-	req := c.newRequest(op, input, &StopCompilationJobOutput{})
+	req := c.newRequest(op, input, &types.StopCompilationJobOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return StopCompilationJobRequest{Request: req, Input: input, Copy: c.StopCompilationJobRequest}
@@ -96,8 +56,8 @@ func (c *Client) StopCompilationJobRequest(input *StopCompilationJobInput) StopC
 // StopCompilationJob API operation.
 type StopCompilationJobRequest struct {
 	*aws.Request
-	Input *StopCompilationJobInput
-	Copy  func(*StopCompilationJobInput) StopCompilationJobRequest
+	Input *types.StopCompilationJobInput
+	Copy  func(*types.StopCompilationJobInput) StopCompilationJobRequest
 }
 
 // Send marshals and sends the StopCompilationJob API request.
@@ -109,7 +69,7 @@ func (r StopCompilationJobRequest) Send(ctx context.Context) (*StopCompilationJo
 	}
 
 	resp := &StopCompilationJobResponse{
-		StopCompilationJobOutput: r.Request.Data.(*StopCompilationJobOutput),
+		StopCompilationJobOutput: r.Request.Data.(*types.StopCompilationJobOutput),
 		response:                 &aws.Response{Request: r.Request},
 	}
 
@@ -119,7 +79,7 @@ func (r StopCompilationJobRequest) Send(ctx context.Context) (*StopCompilationJo
 // StopCompilationJobResponse is the response type for the
 // StopCompilationJob API operation.
 type StopCompilationJobResponse struct {
-	*StopCompilationJobOutput
+	*types.StopCompilationJobOutput
 
 	response *aws.Response
 }

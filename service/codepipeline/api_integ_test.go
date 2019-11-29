@@ -13,6 +13,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws/awserr"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting/integration"
 	"github.com/aws/aws-sdk-go-v2/service/codepipeline"
+	"github.com/aws/aws-sdk-go-v2/service/codepipeline/types"
 )
 
 var _ aws.Config
@@ -24,7 +25,7 @@ func TestInteg_00_ListPipelines(t *testing.T) {
 
 	cfg := integration.ConfigWithDefaultRegion("us-west-2")
 	svc := codepipeline.New(cfg)
-	params := &codepipeline.ListPipelinesInput{}
+	params := &types.ListPipelinesInput{}
 
 	req := svc.ListPipelinesRequest(params)
 
@@ -39,7 +40,7 @@ func TestInteg_01_GetPipeline(t *testing.T) {
 
 	cfg := integration.ConfigWithDefaultRegion("us-west-2")
 	svc := codepipeline.New(cfg)
-	params := &codepipeline.GetPipelineInput{
+	params := &types.GetPipelineInput{
 		Name: aws.String("fake-pipeline"),
 	}
 

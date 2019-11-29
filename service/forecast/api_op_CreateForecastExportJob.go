@@ -6,76 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/forecast/types"
 )
-
-type CreateForecastExportJobInput struct {
-	_ struct{} `type:"structure"`
-
-	// The path to the Amazon S3 bucket where you want to save the forecast and
-	// an AWS Identity and Access Management (IAM) role that Amazon Forecast can
-	// assume to access the bucket.
-	//
-	// Destination is a required field
-	Destination *DataDestination `type:"structure" required:"true"`
-
-	// The Amazon Resource Name (ARN) of the forecast that you want to export.
-	//
-	// ForecastArn is a required field
-	ForecastArn *string `type:"string" required:"true"`
-
-	// The name for the forecast export job.
-	//
-	// ForecastExportJobName is a required field
-	ForecastExportJobName *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s CreateForecastExportJobInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateForecastExportJobInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateForecastExportJobInput"}
-
-	if s.Destination == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Destination"))
-	}
-
-	if s.ForecastArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ForecastArn"))
-	}
-
-	if s.ForecastExportJobName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ForecastExportJobName"))
-	}
-	if s.ForecastExportJobName != nil && len(*s.ForecastExportJobName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ForecastExportJobName", 1))
-	}
-	if s.Destination != nil {
-		if err := s.Destination.Validate(); err != nil {
-			invalidParams.AddNested("Destination", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type CreateForecastExportJobOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the export job.
-	ForecastExportJobArn *string `type:"string"`
-}
-
-// String returns the string representation
-func (s CreateForecastExportJobOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCreateForecastExportJob = "CreateForecastExportJob"
 
@@ -106,7 +38,7 @@ const opCreateForecastExportJob = "CreateForecastExportJob"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/CreateForecastExportJob
-func (c *Client) CreateForecastExportJobRequest(input *CreateForecastExportJobInput) CreateForecastExportJobRequest {
+func (c *Client) CreateForecastExportJobRequest(input *types.CreateForecastExportJobInput) CreateForecastExportJobRequest {
 	op := &aws.Operation{
 		Name:       opCreateForecastExportJob,
 		HTTPMethod: "POST",
@@ -114,10 +46,10 @@ func (c *Client) CreateForecastExportJobRequest(input *CreateForecastExportJobIn
 	}
 
 	if input == nil {
-		input = &CreateForecastExportJobInput{}
+		input = &types.CreateForecastExportJobInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateForecastExportJobOutput{})
+	req := c.newRequest(op, input, &types.CreateForecastExportJobOutput{})
 	return CreateForecastExportJobRequest{Request: req, Input: input, Copy: c.CreateForecastExportJobRequest}
 }
 
@@ -125,8 +57,8 @@ func (c *Client) CreateForecastExportJobRequest(input *CreateForecastExportJobIn
 // CreateForecastExportJob API operation.
 type CreateForecastExportJobRequest struct {
 	*aws.Request
-	Input *CreateForecastExportJobInput
-	Copy  func(*CreateForecastExportJobInput) CreateForecastExportJobRequest
+	Input *types.CreateForecastExportJobInput
+	Copy  func(*types.CreateForecastExportJobInput) CreateForecastExportJobRequest
 }
 
 // Send marshals and sends the CreateForecastExportJob API request.
@@ -138,7 +70,7 @@ func (r CreateForecastExportJobRequest) Send(ctx context.Context) (*CreateForeca
 	}
 
 	resp := &CreateForecastExportJobResponse{
-		CreateForecastExportJobOutput: r.Request.Data.(*CreateForecastExportJobOutput),
+		CreateForecastExportJobOutput: r.Request.Data.(*types.CreateForecastExportJobOutput),
 		response:                      &aws.Response{Request: r.Request},
 	}
 
@@ -148,7 +80,7 @@ func (r CreateForecastExportJobRequest) Send(ctx context.Context) (*CreateForeca
 // CreateForecastExportJobResponse is the response type for the
 // CreateForecastExportJob API operation.
 type CreateForecastExportJobResponse struct {
-	*CreateForecastExportJobOutput
+	*types.CreateForecastExportJobOutput
 
 	response *aws.Response
 }

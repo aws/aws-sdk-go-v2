@@ -6,70 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/support/types"
 )
-
-type DescribeCommunicationsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The start date for a filtered date search on support case communications.
-	// Case communications are available for 12 months after creation.
-	AfterTime *string `locationName:"afterTime" type:"string"`
-
-	// The end date for a filtered date search on support case communications. Case
-	// communications are available for 12 months after creation.
-	BeforeTime *string `locationName:"beforeTime" type:"string"`
-
-	// The AWS Support case ID requested or returned in the call. The case ID is
-	// an alphanumeric string formatted as shown in this example: case-12345678910-2013-c4c1d2bf33c5cf47
-	//
-	// CaseId is a required field
-	CaseId *string `locationName:"caseId" type:"string" required:"true"`
-
-	// The maximum number of results to return before paginating.
-	MaxResults *int64 `locationName:"maxResults" min:"10" type:"integer"`
-
-	// A resumption point for pagination.
-	NextToken *string `locationName:"nextToken" type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeCommunicationsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeCommunicationsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeCommunicationsInput"}
-
-	if s.CaseId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("CaseId"))
-	}
-	if s.MaxResults != nil && *s.MaxResults < 10 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 10))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// The communications returned by the DescribeCommunications operation.
-type DescribeCommunicationsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The communications for the case.
-	Communications []Communication `locationName:"communications" type:"list"`
-
-	// A resumption point for pagination.
-	NextToken *string `locationName:"nextToken" type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeCommunicationsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeCommunications = "DescribeCommunications"
 
@@ -95,7 +33,7 @@ const opDescribeCommunications = "DescribeCommunications"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/support-2013-04-15/DescribeCommunications
-func (c *Client) DescribeCommunicationsRequest(input *DescribeCommunicationsInput) DescribeCommunicationsRequest {
+func (c *Client) DescribeCommunicationsRequest(input *types.DescribeCommunicationsInput) DescribeCommunicationsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeCommunications,
 		HTTPMethod: "POST",
@@ -109,10 +47,10 @@ func (c *Client) DescribeCommunicationsRequest(input *DescribeCommunicationsInpu
 	}
 
 	if input == nil {
-		input = &DescribeCommunicationsInput{}
+		input = &types.DescribeCommunicationsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeCommunicationsOutput{})
+	req := c.newRequest(op, input, &types.DescribeCommunicationsOutput{})
 	return DescribeCommunicationsRequest{Request: req, Input: input, Copy: c.DescribeCommunicationsRequest}
 }
 
@@ -120,8 +58,8 @@ func (c *Client) DescribeCommunicationsRequest(input *DescribeCommunicationsInpu
 // DescribeCommunications API operation.
 type DescribeCommunicationsRequest struct {
 	*aws.Request
-	Input *DescribeCommunicationsInput
-	Copy  func(*DescribeCommunicationsInput) DescribeCommunicationsRequest
+	Input *types.DescribeCommunicationsInput
+	Copy  func(*types.DescribeCommunicationsInput) DescribeCommunicationsRequest
 }
 
 // Send marshals and sends the DescribeCommunications API request.
@@ -133,7 +71,7 @@ func (r DescribeCommunicationsRequest) Send(ctx context.Context) (*DescribeCommu
 	}
 
 	resp := &DescribeCommunicationsResponse{
-		DescribeCommunicationsOutput: r.Request.Data.(*DescribeCommunicationsOutput),
+		DescribeCommunicationsOutput: r.Request.Data.(*types.DescribeCommunicationsOutput),
 		response:                     &aws.Response{Request: r.Request},
 	}
 
@@ -163,7 +101,7 @@ func NewDescribeCommunicationsPaginator(req DescribeCommunicationsRequest) Descr
 	return DescribeCommunicationsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *DescribeCommunicationsInput
+				var inCpy *types.DescribeCommunicationsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -183,14 +121,14 @@ type DescribeCommunicationsPaginator struct {
 	aws.Pager
 }
 
-func (p *DescribeCommunicationsPaginator) CurrentPage() *DescribeCommunicationsOutput {
-	return p.Pager.CurrentPage().(*DescribeCommunicationsOutput)
+func (p *DescribeCommunicationsPaginator) CurrentPage() *types.DescribeCommunicationsOutput {
+	return p.Pager.CurrentPage().(*types.DescribeCommunicationsOutput)
 }
 
 // DescribeCommunicationsResponse is the response type for the
 // DescribeCommunications API operation.
 type DescribeCommunicationsResponse struct {
-	*DescribeCommunicationsOutput
+	*types.DescribeCommunicationsOutput
 
 	response *aws.Response
 }

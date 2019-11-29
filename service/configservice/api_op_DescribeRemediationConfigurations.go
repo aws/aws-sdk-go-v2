@@ -6,49 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/configservice/types"
 )
-
-type DescribeRemediationConfigurationsInput struct {
-	_ struct{} `type:"structure"`
-
-	// A list of AWS Config rule names of remediation configurations for which you
-	// want details.
-	//
-	// ConfigRuleNames is a required field
-	ConfigRuleNames []string `type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeRemediationConfigurationsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeRemediationConfigurationsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeRemediationConfigurationsInput"}
-
-	if s.ConfigRuleNames == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ConfigRuleNames"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribeRemediationConfigurationsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Returns a remediation configuration object.
-	RemediationConfigurations []RemediationConfiguration `type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeRemediationConfigurationsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeRemediationConfigurations = "DescribeRemediationConfigurations"
 
@@ -65,7 +24,7 @@ const opDescribeRemediationConfigurations = "DescribeRemediationConfigurations"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DescribeRemediationConfigurations
-func (c *Client) DescribeRemediationConfigurationsRequest(input *DescribeRemediationConfigurationsInput) DescribeRemediationConfigurationsRequest {
+func (c *Client) DescribeRemediationConfigurationsRequest(input *types.DescribeRemediationConfigurationsInput) DescribeRemediationConfigurationsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeRemediationConfigurations,
 		HTTPMethod: "POST",
@@ -73,10 +32,10 @@ func (c *Client) DescribeRemediationConfigurationsRequest(input *DescribeRemedia
 	}
 
 	if input == nil {
-		input = &DescribeRemediationConfigurationsInput{}
+		input = &types.DescribeRemediationConfigurationsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeRemediationConfigurationsOutput{})
+	req := c.newRequest(op, input, &types.DescribeRemediationConfigurationsOutput{})
 	return DescribeRemediationConfigurationsRequest{Request: req, Input: input, Copy: c.DescribeRemediationConfigurationsRequest}
 }
 
@@ -84,8 +43,8 @@ func (c *Client) DescribeRemediationConfigurationsRequest(input *DescribeRemedia
 // DescribeRemediationConfigurations API operation.
 type DescribeRemediationConfigurationsRequest struct {
 	*aws.Request
-	Input *DescribeRemediationConfigurationsInput
-	Copy  func(*DescribeRemediationConfigurationsInput) DescribeRemediationConfigurationsRequest
+	Input *types.DescribeRemediationConfigurationsInput
+	Copy  func(*types.DescribeRemediationConfigurationsInput) DescribeRemediationConfigurationsRequest
 }
 
 // Send marshals and sends the DescribeRemediationConfigurations API request.
@@ -97,7 +56,7 @@ func (r DescribeRemediationConfigurationsRequest) Send(ctx context.Context) (*De
 	}
 
 	resp := &DescribeRemediationConfigurationsResponse{
-		DescribeRemediationConfigurationsOutput: r.Request.Data.(*DescribeRemediationConfigurationsOutput),
+		DescribeRemediationConfigurationsOutput: r.Request.Data.(*types.DescribeRemediationConfigurationsOutput),
 		response:                                &aws.Response{Request: r.Request},
 	}
 
@@ -107,7 +66,7 @@ func (r DescribeRemediationConfigurationsRequest) Send(ctx context.Context) (*De
 // DescribeRemediationConfigurationsResponse is the response type for the
 // DescribeRemediationConfigurations API operation.
 type DescribeRemediationConfigurationsResponse struct {
-	*DescribeRemediationConfigurationsOutput
+	*types.DescribeRemediationConfigurationsOutput
 
 	response *aws.Response
 }

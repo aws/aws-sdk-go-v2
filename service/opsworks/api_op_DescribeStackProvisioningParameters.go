@@ -6,52 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/opsworks/types"
 )
-
-type DescribeStackProvisioningParametersInput struct {
-	_ struct{} `type:"structure"`
-
-	// The stack ID.
-	//
-	// StackId is a required field
-	StackId *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeStackProvisioningParametersInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeStackProvisioningParametersInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeStackProvisioningParametersInput"}
-
-	if s.StackId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("StackId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Contains the response to a DescribeStackProvisioningParameters request.
-type DescribeStackProvisioningParametersOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The AWS OpsWorks Stacks agent installer's URL.
-	AgentInstallerUrl *string `type:"string"`
-
-	// An embedded object that contains the provisioning parameters.
-	Parameters map[string]string `type:"map"`
-}
-
-// String returns the string representation
-func (s DescribeStackProvisioningParametersOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeStackProvisioningParameters = "DescribeStackProvisioningParameters"
 
@@ -73,7 +29,7 @@ const opDescribeStackProvisioningParameters = "DescribeStackProvisioningParamete
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DescribeStackProvisioningParameters
-func (c *Client) DescribeStackProvisioningParametersRequest(input *DescribeStackProvisioningParametersInput) DescribeStackProvisioningParametersRequest {
+func (c *Client) DescribeStackProvisioningParametersRequest(input *types.DescribeStackProvisioningParametersInput) DescribeStackProvisioningParametersRequest {
 	op := &aws.Operation{
 		Name:       opDescribeStackProvisioningParameters,
 		HTTPMethod: "POST",
@@ -81,10 +37,10 @@ func (c *Client) DescribeStackProvisioningParametersRequest(input *DescribeStack
 	}
 
 	if input == nil {
-		input = &DescribeStackProvisioningParametersInput{}
+		input = &types.DescribeStackProvisioningParametersInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeStackProvisioningParametersOutput{})
+	req := c.newRequest(op, input, &types.DescribeStackProvisioningParametersOutput{})
 	return DescribeStackProvisioningParametersRequest{Request: req, Input: input, Copy: c.DescribeStackProvisioningParametersRequest}
 }
 
@@ -92,8 +48,8 @@ func (c *Client) DescribeStackProvisioningParametersRequest(input *DescribeStack
 // DescribeStackProvisioningParameters API operation.
 type DescribeStackProvisioningParametersRequest struct {
 	*aws.Request
-	Input *DescribeStackProvisioningParametersInput
-	Copy  func(*DescribeStackProvisioningParametersInput) DescribeStackProvisioningParametersRequest
+	Input *types.DescribeStackProvisioningParametersInput
+	Copy  func(*types.DescribeStackProvisioningParametersInput) DescribeStackProvisioningParametersRequest
 }
 
 // Send marshals and sends the DescribeStackProvisioningParameters API request.
@@ -105,7 +61,7 @@ func (r DescribeStackProvisioningParametersRequest) Send(ctx context.Context) (*
 	}
 
 	resp := &DescribeStackProvisioningParametersResponse{
-		DescribeStackProvisioningParametersOutput: r.Request.Data.(*DescribeStackProvisioningParametersOutput),
+		DescribeStackProvisioningParametersOutput: r.Request.Data.(*types.DescribeStackProvisioningParametersOutput),
 		response: &aws.Response{Request: r.Request},
 	}
 
@@ -115,7 +71,7 @@ func (r DescribeStackProvisioningParametersRequest) Send(ctx context.Context) (*
 // DescribeStackProvisioningParametersResponse is the response type for the
 // DescribeStackProvisioningParameters API operation.
 type DescribeStackProvisioningParametersResponse struct {
-	*DescribeStackProvisioningParametersOutput
+	*types.DescribeStackProvisioningParametersOutput
 
 	response *aws.Response
 }

@@ -6,66 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/wafregional/types"
 )
-
-type DeleteByteMatchSetInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ByteMatchSetId of the ByteMatchSet that you want to delete. ByteMatchSetId
-	// is returned by CreateByteMatchSet and by ListByteMatchSets.
-	//
-	// ByteMatchSetId is a required field
-	ByteMatchSetId *string `min:"1" type:"string" required:"true"`
-
-	// The value returned by the most recent call to GetChangeToken.
-	//
-	// ChangeToken is a required field
-	ChangeToken *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteByteMatchSetInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteByteMatchSetInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteByteMatchSetInput"}
-
-	if s.ByteMatchSetId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ByteMatchSetId"))
-	}
-	if s.ByteMatchSetId != nil && len(*s.ByteMatchSetId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ByteMatchSetId", 1))
-	}
-
-	if s.ChangeToken == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ChangeToken"))
-	}
-	if s.ChangeToken != nil && len(*s.ChangeToken) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ChangeToken", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteByteMatchSetOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The ChangeToken that you used to submit the DeleteByteMatchSet request. You
-	// can also use this value to query the status of the request. For more information,
-	// see GetChangeTokenStatus.
-	ChangeToken *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s DeleteByteMatchSetOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteByteMatchSet = "DeleteByteMatchSet"
 
@@ -96,7 +38,7 @@ const opDeleteByteMatchSet = "DeleteByteMatchSet"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/DeleteByteMatchSet
-func (c *Client) DeleteByteMatchSetRequest(input *DeleteByteMatchSetInput) DeleteByteMatchSetRequest {
+func (c *Client) DeleteByteMatchSetRequest(input *types.DeleteByteMatchSetInput) DeleteByteMatchSetRequest {
 	op := &aws.Operation{
 		Name:       opDeleteByteMatchSet,
 		HTTPMethod: "POST",
@@ -104,10 +46,10 @@ func (c *Client) DeleteByteMatchSetRequest(input *DeleteByteMatchSetInput) Delet
 	}
 
 	if input == nil {
-		input = &DeleteByteMatchSetInput{}
+		input = &types.DeleteByteMatchSetInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteByteMatchSetOutput{})
+	req := c.newRequest(op, input, &types.DeleteByteMatchSetOutput{})
 	return DeleteByteMatchSetRequest{Request: req, Input: input, Copy: c.DeleteByteMatchSetRequest}
 }
 
@@ -115,8 +57,8 @@ func (c *Client) DeleteByteMatchSetRequest(input *DeleteByteMatchSetInput) Delet
 // DeleteByteMatchSet API operation.
 type DeleteByteMatchSetRequest struct {
 	*aws.Request
-	Input *DeleteByteMatchSetInput
-	Copy  func(*DeleteByteMatchSetInput) DeleteByteMatchSetRequest
+	Input *types.DeleteByteMatchSetInput
+	Copy  func(*types.DeleteByteMatchSetInput) DeleteByteMatchSetRequest
 }
 
 // Send marshals and sends the DeleteByteMatchSet API request.
@@ -128,7 +70,7 @@ func (r DeleteByteMatchSetRequest) Send(ctx context.Context) (*DeleteByteMatchSe
 	}
 
 	resp := &DeleteByteMatchSetResponse{
-		DeleteByteMatchSetOutput: r.Request.Data.(*DeleteByteMatchSetOutput),
+		DeleteByteMatchSetOutput: r.Request.Data.(*types.DeleteByteMatchSetOutput),
 		response:                 &aws.Response{Request: r.Request},
 	}
 
@@ -138,7 +80,7 @@ func (r DeleteByteMatchSetRequest) Send(ctx context.Context) (*DeleteByteMatchSe
 // DeleteByteMatchSetResponse is the response type for the
 // DeleteByteMatchSet API operation.
 type DeleteByteMatchSetResponse struct {
-	*DeleteByteMatchSetOutput
+	*types.DeleteByteMatchSetOutput
 
 	response *aws.Response
 }

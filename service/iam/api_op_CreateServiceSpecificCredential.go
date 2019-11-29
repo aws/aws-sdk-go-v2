@@ -6,72 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/iam/types"
 )
-
-type CreateServiceSpecificCredentialInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the AWS service that is to be associated with the credentials.
-	// The service you specify here is the only service that can be accessed using
-	// these credentials.
-	//
-	// ServiceName is a required field
-	ServiceName *string `type:"string" required:"true"`
-
-	// The name of the IAM user that is to be associated with the credentials. The
-	// new service-specific credentials have the same permissions as the associated
-	// user except that they can be used only to access the specified service.
-	//
-	// This parameter allows (through its regex pattern (http://wikipedia.org/wiki/regex))
-	// a string of characters consisting of upper and lowercase alphanumeric characters
-	// with no spaces. You can also include any of the following characters: _+=,.@-
-	//
-	// UserName is a required field
-	UserName *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s CreateServiceSpecificCredentialInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateServiceSpecificCredentialInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateServiceSpecificCredentialInput"}
-
-	if s.ServiceName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ServiceName"))
-	}
-
-	if s.UserName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("UserName"))
-	}
-	if s.UserName != nil && len(*s.UserName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("UserName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type CreateServiceSpecificCredentialOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A structure that contains information about the newly created service-specific
-	// credential.
-	//
-	// This is the only time that the password for this credential set is available.
-	// It cannot be recovered later. Instead, you must reset the password with ResetServiceSpecificCredential.
-	ServiceSpecificCredential *ServiceSpecificCredential `type:"structure"`
-}
-
-// String returns the string representation
-func (s CreateServiceSpecificCredentialOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCreateServiceSpecificCredential = "CreateServiceSpecificCredential"
 
@@ -101,7 +37,7 @@ const opCreateServiceSpecificCredential = "CreateServiceSpecificCredential"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/CreateServiceSpecificCredential
-func (c *Client) CreateServiceSpecificCredentialRequest(input *CreateServiceSpecificCredentialInput) CreateServiceSpecificCredentialRequest {
+func (c *Client) CreateServiceSpecificCredentialRequest(input *types.CreateServiceSpecificCredentialInput) CreateServiceSpecificCredentialRequest {
 	op := &aws.Operation{
 		Name:       opCreateServiceSpecificCredential,
 		HTTPMethod: "POST",
@@ -109,10 +45,10 @@ func (c *Client) CreateServiceSpecificCredentialRequest(input *CreateServiceSpec
 	}
 
 	if input == nil {
-		input = &CreateServiceSpecificCredentialInput{}
+		input = &types.CreateServiceSpecificCredentialInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateServiceSpecificCredentialOutput{})
+	req := c.newRequest(op, input, &types.CreateServiceSpecificCredentialOutput{})
 	return CreateServiceSpecificCredentialRequest{Request: req, Input: input, Copy: c.CreateServiceSpecificCredentialRequest}
 }
 
@@ -120,8 +56,8 @@ func (c *Client) CreateServiceSpecificCredentialRequest(input *CreateServiceSpec
 // CreateServiceSpecificCredential API operation.
 type CreateServiceSpecificCredentialRequest struct {
 	*aws.Request
-	Input *CreateServiceSpecificCredentialInput
-	Copy  func(*CreateServiceSpecificCredentialInput) CreateServiceSpecificCredentialRequest
+	Input *types.CreateServiceSpecificCredentialInput
+	Copy  func(*types.CreateServiceSpecificCredentialInput) CreateServiceSpecificCredentialRequest
 }
 
 // Send marshals and sends the CreateServiceSpecificCredential API request.
@@ -133,7 +69,7 @@ func (r CreateServiceSpecificCredentialRequest) Send(ctx context.Context) (*Crea
 	}
 
 	resp := &CreateServiceSpecificCredentialResponse{
-		CreateServiceSpecificCredentialOutput: r.Request.Data.(*CreateServiceSpecificCredentialOutput),
+		CreateServiceSpecificCredentialOutput: r.Request.Data.(*types.CreateServiceSpecificCredentialOutput),
 		response:                              &aws.Response{Request: r.Request},
 	}
 
@@ -143,7 +79,7 @@ func (r CreateServiceSpecificCredentialRequest) Send(ctx context.Context) (*Crea
 // CreateServiceSpecificCredentialResponse is the response type for the
 // CreateServiceSpecificCredential API operation.
 type CreateServiceSpecificCredentialResponse struct {
-	*CreateServiceSpecificCredentialOutput
+	*types.CreateServiceSpecificCredentialOutput
 
 	response *aws.Response
 }

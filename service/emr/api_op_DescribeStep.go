@@ -6,59 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/emr/types"
 )
-
-// This input determines which step to describe.
-type DescribeStepInput struct {
-	_ struct{} `type:"structure"`
-
-	// The identifier of the cluster with steps to describe.
-	//
-	// ClusterId is a required field
-	ClusterId *string `type:"string" required:"true"`
-
-	// The identifier of the step to describe.
-	//
-	// StepId is a required field
-	StepId *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeStepInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeStepInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeStepInput"}
-
-	if s.ClusterId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ClusterId"))
-	}
-
-	if s.StepId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("StepId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// This output contains the description of the cluster step.
-type DescribeStepOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The step details for the requested step identifier.
-	Step *Step `type:"structure"`
-}
-
-// String returns the string representation
-func (s DescribeStepOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeStep = "DescribeStep"
 
@@ -75,7 +24,7 @@ const opDescribeStep = "DescribeStep"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/DescribeStep
-func (c *Client) DescribeStepRequest(input *DescribeStepInput) DescribeStepRequest {
+func (c *Client) DescribeStepRequest(input *types.DescribeStepInput) DescribeStepRequest {
 	op := &aws.Operation{
 		Name:       opDescribeStep,
 		HTTPMethod: "POST",
@@ -83,10 +32,10 @@ func (c *Client) DescribeStepRequest(input *DescribeStepInput) DescribeStepReque
 	}
 
 	if input == nil {
-		input = &DescribeStepInput{}
+		input = &types.DescribeStepInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeStepOutput{})
+	req := c.newRequest(op, input, &types.DescribeStepOutput{})
 	return DescribeStepRequest{Request: req, Input: input, Copy: c.DescribeStepRequest}
 }
 
@@ -94,8 +43,8 @@ func (c *Client) DescribeStepRequest(input *DescribeStepInput) DescribeStepReque
 // DescribeStep API operation.
 type DescribeStepRequest struct {
 	*aws.Request
-	Input *DescribeStepInput
-	Copy  func(*DescribeStepInput) DescribeStepRequest
+	Input *types.DescribeStepInput
+	Copy  func(*types.DescribeStepInput) DescribeStepRequest
 }
 
 // Send marshals and sends the DescribeStep API request.
@@ -107,7 +56,7 @@ func (r DescribeStepRequest) Send(ctx context.Context) (*DescribeStepResponse, e
 	}
 
 	resp := &DescribeStepResponse{
-		DescribeStepOutput: r.Request.Data.(*DescribeStepOutput),
+		DescribeStepOutput: r.Request.Data.(*types.DescribeStepOutput),
 		response:           &aws.Response{Request: r.Request},
 	}
 
@@ -117,7 +66,7 @@ func (r DescribeStepRequest) Send(ctx context.Context) (*DescribeStepResponse, e
 // DescribeStepResponse is the response type for the
 // DescribeStep API operation.
 type DescribeStepResponse struct {
-	*DescribeStepOutput
+	*types.DescribeStepOutput
 
 	response *aws.Response
 }

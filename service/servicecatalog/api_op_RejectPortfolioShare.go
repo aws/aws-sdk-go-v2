@@ -6,71 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/types"
 )
-
-type RejectPortfolioShareInput struct {
-	_ struct{} `type:"structure"`
-
-	// The language code.
-	//
-	//    * en - English (default)
-	//
-	//    * jp - Japanese
-	//
-	//    * zh - Chinese
-	AcceptLanguage *string `type:"string"`
-
-	// The portfolio identifier.
-	//
-	// PortfolioId is a required field
-	PortfolioId *string `min:"1" type:"string" required:"true"`
-
-	// The type of shared portfolios to reject. The default is to reject imported
-	// portfolios.
-	//
-	//    * AWS_ORGANIZATIONS - Reject portfolios shared by the master account of
-	//    your organization.
-	//
-	//    * IMPORTED - Reject imported portfolios.
-	//
-	//    * AWS_SERVICECATALOG - Not supported. (Throws ResourceNotFoundException.)
-	//
-	// For example, aws servicecatalog reject-portfolio-share --portfolio-id "port-2qwzkwxt3y5fk"
-	// --portfolio-share-type AWS_ORGANIZATIONS
-	PortfolioShareType PortfolioShareType `type:"string" enum:"true"`
-}
-
-// String returns the string representation
-func (s RejectPortfolioShareInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *RejectPortfolioShareInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "RejectPortfolioShareInput"}
-
-	if s.PortfolioId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("PortfolioId"))
-	}
-	if s.PortfolioId != nil && len(*s.PortfolioId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("PortfolioId", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type RejectPortfolioShareOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s RejectPortfolioShareOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opRejectPortfolioShare = "RejectPortfolioShare"
 
@@ -87,7 +24,7 @@ const opRejectPortfolioShare = "RejectPortfolioShare"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/RejectPortfolioShare
-func (c *Client) RejectPortfolioShareRequest(input *RejectPortfolioShareInput) RejectPortfolioShareRequest {
+func (c *Client) RejectPortfolioShareRequest(input *types.RejectPortfolioShareInput) RejectPortfolioShareRequest {
 	op := &aws.Operation{
 		Name:       opRejectPortfolioShare,
 		HTTPMethod: "POST",
@@ -95,10 +32,10 @@ func (c *Client) RejectPortfolioShareRequest(input *RejectPortfolioShareInput) R
 	}
 
 	if input == nil {
-		input = &RejectPortfolioShareInput{}
+		input = &types.RejectPortfolioShareInput{}
 	}
 
-	req := c.newRequest(op, input, &RejectPortfolioShareOutput{})
+	req := c.newRequest(op, input, &types.RejectPortfolioShareOutput{})
 	return RejectPortfolioShareRequest{Request: req, Input: input, Copy: c.RejectPortfolioShareRequest}
 }
 
@@ -106,8 +43,8 @@ func (c *Client) RejectPortfolioShareRequest(input *RejectPortfolioShareInput) R
 // RejectPortfolioShare API operation.
 type RejectPortfolioShareRequest struct {
 	*aws.Request
-	Input *RejectPortfolioShareInput
-	Copy  func(*RejectPortfolioShareInput) RejectPortfolioShareRequest
+	Input *types.RejectPortfolioShareInput
+	Copy  func(*types.RejectPortfolioShareInput) RejectPortfolioShareRequest
 }
 
 // Send marshals and sends the RejectPortfolioShare API request.
@@ -119,7 +56,7 @@ func (r RejectPortfolioShareRequest) Send(ctx context.Context) (*RejectPortfolio
 	}
 
 	resp := &RejectPortfolioShareResponse{
-		RejectPortfolioShareOutput: r.Request.Data.(*RejectPortfolioShareOutput),
+		RejectPortfolioShareOutput: r.Request.Data.(*types.RejectPortfolioShareOutput),
 		response:                   &aws.Response{Request: r.Request},
 	}
 
@@ -129,7 +66,7 @@ func (r RejectPortfolioShareRequest) Send(ctx context.Context) (*RejectPortfolio
 // RejectPortfolioShareResponse is the response type for the
 // RejectPortfolioShare API operation.
 type RejectPortfolioShareResponse struct {
-	*RejectPortfolioShareOutput
+	*types.RejectPortfolioShareOutput
 
 	response *aws.Response
 }

@@ -6,74 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/restxml"
+	"github.com/aws/aws-sdk-go-v2/service/cloudfront/types"
 )
-
-type DeletePublicKeyInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the public key you want to remove from CloudFront.
-	//
-	// Id is a required field
-	Id *string `location:"uri" locationName:"Id" type:"string" required:"true"`
-
-	// The value of the ETag header that you received when retrieving the public
-	// key identity to delete. For example: E2QWRUHAPOMQZL.
-	IfMatch *string `location:"header" locationName:"If-Match" type:"string"`
-}
-
-// String returns the string representation
-func (s DeletePublicKeyInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeletePublicKeyInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeletePublicKeyInput"}
-
-	if s.Id == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Id"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeletePublicKeyInput) MarshalFields(e protocol.FieldEncoder) error {
-
-	if s.IfMatch != nil {
-		v := *s.IfMatch
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "If-Match", protocol.StringValue(v), metadata)
-	}
-	if s.Id != nil {
-		v := *s.Id
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "Id", protocol.StringValue(v), metadata)
-	}
-	return nil
-}
-
-type DeletePublicKeyOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeletePublicKeyOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeletePublicKeyOutput) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
 
 const opDeletePublicKey = "DeletePublicKey2019_03_26"
 
@@ -90,7 +26,7 @@ const opDeletePublicKey = "DeletePublicKey2019_03_26"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/DeletePublicKey
-func (c *Client) DeletePublicKeyRequest(input *DeletePublicKeyInput) DeletePublicKeyRequest {
+func (c *Client) DeletePublicKeyRequest(input *types.DeletePublicKeyInput) DeletePublicKeyRequest {
 	op := &aws.Operation{
 		Name:       opDeletePublicKey,
 		HTTPMethod: "DELETE",
@@ -98,10 +34,10 @@ func (c *Client) DeletePublicKeyRequest(input *DeletePublicKeyInput) DeletePubli
 	}
 
 	if input == nil {
-		input = &DeletePublicKeyInput{}
+		input = &types.DeletePublicKeyInput{}
 	}
 
-	req := c.newRequest(op, input, &DeletePublicKeyOutput{})
+	req := c.newRequest(op, input, &types.DeletePublicKeyOutput{})
 	req.Handlers.Unmarshal.Remove(restxml.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return DeletePublicKeyRequest{Request: req, Input: input, Copy: c.DeletePublicKeyRequest}
@@ -111,8 +47,8 @@ func (c *Client) DeletePublicKeyRequest(input *DeletePublicKeyInput) DeletePubli
 // DeletePublicKey API operation.
 type DeletePublicKeyRequest struct {
 	*aws.Request
-	Input *DeletePublicKeyInput
-	Copy  func(*DeletePublicKeyInput) DeletePublicKeyRequest
+	Input *types.DeletePublicKeyInput
+	Copy  func(*types.DeletePublicKeyInput) DeletePublicKeyRequest
 }
 
 // Send marshals and sends the DeletePublicKey API request.
@@ -124,7 +60,7 @@ func (r DeletePublicKeyRequest) Send(ctx context.Context) (*DeletePublicKeyRespo
 	}
 
 	resp := &DeletePublicKeyResponse{
-		DeletePublicKeyOutput: r.Request.Data.(*DeletePublicKeyOutput),
+		DeletePublicKeyOutput: r.Request.Data.(*types.DeletePublicKeyOutput),
 		response:              &aws.Response{Request: r.Request},
 	}
 
@@ -134,7 +70,7 @@ func (r DeletePublicKeyRequest) Send(ctx context.Context) (*DeletePublicKeyRespo
 // DeletePublicKeyResponse is the response type for the
 // DeletePublicKey API operation.
 type DeletePublicKeyResponse struct {
-	*DeletePublicKeyOutput
+	*types.DeletePublicKeyOutput
 
 	response *aws.Response
 }

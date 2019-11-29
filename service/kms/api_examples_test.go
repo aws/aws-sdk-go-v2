@@ -12,6 +12,8 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws/awserr"
 	"github.com/aws/aws-sdk-go-v2/aws/external"
 	"github.com/aws/aws-sdk-go-v2/service/kms"
+	"github.com/aws/aws-sdk-go-v2/service/kms/enums"
+	"github.com/aws/aws-sdk-go-v2/service/kms/types"
 )
 
 var _ time.Duration
@@ -36,7 +38,7 @@ func ExampleClient_CancelKeyDeletionRequest_shared00() {
 	}
 
 	svc := kms.New(cfg)
-	input := &kms.CancelKeyDeletionInput{
+	input := &types.CancelKeyDeletionInput{
 		KeyId: aws.String("1234abcd-12ab-34cd-56ef-1234567890ab"),
 	}
 
@@ -79,7 +81,7 @@ func ExampleClient_CreateAliasRequest_shared00() {
 	}
 
 	svc := kms.New(cfg)
-	input := &kms.CreateAliasInput{
+	input := &types.CreateAliasInput{
 		AliasName:   aws.String("alias/ExampleAlias"),
 		TargetKeyId: aws.String("1234abcd-12ab-34cd-56ef-1234567890ab"),
 	}
@@ -128,12 +130,12 @@ func ExampleClient_CreateGrantRequest_shared00() {
 	}
 
 	svc := kms.New(cfg)
-	input := &kms.CreateGrantInput{
+	input := &types.CreateGrantInput{
 		GranteePrincipal: aws.String("arn:aws:iam::111122223333:role/ExampleRole"),
 		KeyId:            aws.String("arn:aws:kms:us-east-2:444455556666:key/1234abcd-12ab-34cd-56ef-1234567890ab"),
-		Operations: []kms.GrantOperation{
-			kms.GrantOperation("Encrypt"),
-			kms.GrantOperation("Decrypt"),
+		Operations: []enums.GrantOperation{
+			enums.GrantOperation("Encrypt"),
+			enums.GrantOperation("Decrypt"),
 		},
 	}
 
@@ -182,8 +184,8 @@ func ExampleClient_CreateKeyRequest_shared00() {
 	}
 
 	svc := kms.New(cfg)
-	input := &kms.CreateKeyInput{
-		Tags: []kms.Tag{
+	input := &types.CreateKeyInput{
+		Tags: []types.Tag{
 			{
 				TagKey:   aws.String("CreatedBy"),
 				TagValue: aws.String("ExampleUser"),
@@ -241,7 +243,7 @@ func ExampleClient_DecryptRequest_shared00() {
 	}
 
 	svc := kms.New(cfg)
-	input := &kms.DecryptInput{
+	input := &types.DecryptInput{
 		CiphertextBlob: []byte("<binary data>"),
 	}
 
@@ -290,7 +292,7 @@ func ExampleClient_DeleteAliasRequest_shared00() {
 	}
 
 	svc := kms.New(cfg)
-	input := &kms.DeleteAliasInput{
+	input := &types.DeleteAliasInput{
 		AliasName: aws.String("alias/ExampleAlias"),
 	}
 
@@ -332,7 +334,7 @@ func ExampleClient_DeleteImportedKeyMaterialRequest_shared00() {
 	}
 
 	svc := kms.New(cfg)
-	input := &kms.DeleteImportedKeyMaterialInput{
+	input := &types.DeleteImportedKeyMaterialInput{
 		KeyId: aws.String("1234abcd-12ab-34cd-56ef-1234567890ab"),
 	}
 
@@ -377,7 +379,7 @@ func ExampleClient_DescribeKeyRequest_shared00() {
 	}
 
 	svc := kms.New(cfg)
-	input := &kms.DescribeKeyInput{
+	input := &types.DescribeKeyInput{
 		KeyId: aws.String("1234abcd-12ab-34cd-56ef-1234567890ab"),
 	}
 
@@ -418,7 +420,7 @@ func ExampleClient_DisableKeyRequest_shared00() {
 	}
 
 	svc := kms.New(cfg)
-	input := &kms.DisableKeyInput{
+	input := &types.DisableKeyInput{
 		KeyId: aws.String("1234abcd-12ab-34cd-56ef-1234567890ab"),
 	}
 
@@ -462,7 +464,7 @@ func ExampleClient_DisableKeyRotationRequest_shared00() {
 	}
 
 	svc := kms.New(cfg)
-	input := &kms.DisableKeyRotationInput{
+	input := &types.DisableKeyRotationInput{
 		KeyId: aws.String("1234abcd-12ab-34cd-56ef-1234567890ab"),
 	}
 
@@ -509,7 +511,7 @@ func ExampleClient_EnableKeyRequest_shared00() {
 	}
 
 	svc := kms.New(cfg)
-	input := &kms.EnableKeyInput{
+	input := &types.EnableKeyInput{
 		KeyId: aws.String("1234abcd-12ab-34cd-56ef-1234567890ab"),
 	}
 
@@ -555,7 +557,7 @@ func ExampleClient_EnableKeyRotationRequest_shared00() {
 	}
 
 	svc := kms.New(cfg)
-	input := &kms.EnableKeyRotationInput{
+	input := &types.EnableKeyRotationInput{
 		KeyId: aws.String("1234abcd-12ab-34cd-56ef-1234567890ab"),
 	}
 
@@ -602,7 +604,7 @@ func ExampleClient_EncryptRequest_shared00() {
 	}
 
 	svc := kms.New(cfg)
-	input := &kms.EncryptInput{
+	input := &types.EncryptInput{
 		KeyId:     aws.String("1234abcd-12ab-34cd-56ef-1234567890ab"),
 		Plaintext: []byte("<binary data>"),
 	}
@@ -654,9 +656,9 @@ func ExampleClient_GenerateDataKeyRequest_shared00() {
 	}
 
 	svc := kms.New(cfg)
-	input := &kms.GenerateDataKeyInput{
+	input := &types.GenerateDataKeyInput{
 		KeyId:   aws.String("alias/ExampleAlias"),
-		KeySpec: kms.DataKeySpecAes256,
+		KeySpec: enums.DataKeySpecAes256,
 	}
 
 	req := svc.GenerateDataKeyRequest(input)
@@ -706,9 +708,9 @@ func ExampleClient_GenerateDataKeyWithoutPlaintextRequest_shared00() {
 	}
 
 	svc := kms.New(cfg)
-	input := &kms.GenerateDataKeyWithoutPlaintextInput{
+	input := &types.GenerateDataKeyWithoutPlaintextInput{
 		KeyId:   aws.String("alias/ExampleAlias"),
-		KeySpec: kms.DataKeySpecAes256,
+		KeySpec: enums.DataKeySpecAes256,
 	}
 
 	req := svc.GenerateDataKeyWithoutPlaintextRequest(input)
@@ -756,7 +758,7 @@ func ExampleClient_GenerateRandomRequest_shared00() {
 	}
 
 	svc := kms.New(cfg)
-	input := &kms.GenerateRandomInput{
+	input := &types.GenerateRandomInput{
 		NumberOfBytes: aws.Int64(32),
 	}
 
@@ -798,7 +800,7 @@ func ExampleClient_GetKeyPolicyRequest_shared00() {
 	}
 
 	svc := kms.New(cfg)
-	input := &kms.GetKeyPolicyInput{
+	input := &types.GetKeyPolicyInput{
 		KeyId:      aws.String("1234abcd-12ab-34cd-56ef-1234567890ab"),
 		PolicyName: aws.String("default"),
 	}
@@ -843,7 +845,7 @@ func ExampleClient_GetKeyRotationStatusRequest_shared00() {
 	}
 
 	svc := kms.New(cfg)
-	input := &kms.GetKeyRotationStatusInput{
+	input := &types.GetKeyRotationStatusInput{
 		KeyId: aws.String("1234abcd-12ab-34cd-56ef-1234567890ab"),
 	}
 
@@ -889,10 +891,10 @@ func ExampleClient_GetParametersForImportRequest_shared00() {
 	}
 
 	svc := kms.New(cfg)
-	input := &kms.GetParametersForImportInput{
+	input := &types.GetParametersForImportInput{
 		KeyId:             aws.String("1234abcd-12ab-34cd-56ef-1234567890ab"),
-		WrappingAlgorithm: kms.AlgorithmSpecRsaesOaepSha1,
-		WrappingKeySpec:   kms.WrappingKeySpecRsa2048,
+		WrappingAlgorithm: enums.AlgorithmSpecRsaesOaepSha1,
+		WrappingKeySpec:   enums.WrappingKeySpecRsa2048,
 	}
 
 	req := svc.GetParametersForImportRequest(input)
@@ -936,9 +938,9 @@ func ExampleClient_ImportKeyMaterialRequest_shared00() {
 	}
 
 	svc := kms.New(cfg)
-	input := &kms.ImportKeyMaterialInput{
+	input := &types.ImportKeyMaterialInput{
 		EncryptedKeyMaterial: []byte("<binary data>"),
-		ExpirationModel:      kms.ExpirationModelTypeKeyMaterialDoesNotExpire,
+		ExpirationModel:      enums.ExpirationModelTypeKeyMaterialDoesNotExpire,
 		ImportToken:          []byte("<binary data>"),
 		KeyId:                aws.String("1234abcd-12ab-34cd-56ef-1234567890ab"),
 	}
@@ -992,7 +994,7 @@ func ExampleClient_ListAliasesRequest_shared00() {
 	}
 
 	svc := kms.New(cfg)
-	input := &kms.ListAliasesInput{}
+	input := &types.ListAliasesInput{}
 
 	req := svc.ListAliasesRequest(input)
 	result, err := req.Send(context.Background())
@@ -1033,7 +1035,7 @@ func ExampleClient_ListGrantsRequest_shared00() {
 	}
 
 	svc := kms.New(cfg)
-	input := &kms.ListGrantsInput{
+	input := &types.ListGrantsInput{
 		KeyId: aws.String("1234abcd-12ab-34cd-56ef-1234567890ab"),
 	}
 
@@ -1078,7 +1080,7 @@ func ExampleClient_ListKeyPoliciesRequest_shared00() {
 	}
 
 	svc := kms.New(cfg)
-	input := &kms.ListKeyPoliciesInput{
+	input := &types.ListKeyPoliciesInput{
 		KeyId: aws.String("1234abcd-12ab-34cd-56ef-1234567890ab"),
 	}
 
@@ -1121,7 +1123,7 @@ func ExampleClient_ListKeysRequest_shared00() {
 	}
 
 	svc := kms.New(cfg)
-	input := &kms.ListKeysInput{}
+	input := &types.ListKeysInput{}
 
 	req := svc.ListKeysRequest(input)
 	result, err := req.Send(context.Background())
@@ -1158,7 +1160,7 @@ func ExampleClient_ListResourceTagsRequest_shared00() {
 	}
 
 	svc := kms.New(cfg)
-	input := &kms.ListResourceTagsInput{
+	input := &types.ListResourceTagsInput{
 		KeyId: aws.String("1234abcd-12ab-34cd-56ef-1234567890ab"),
 	}
 
@@ -1200,7 +1202,7 @@ func ExampleClient_ListRetirableGrantsRequest_shared00() {
 	}
 
 	svc := kms.New(cfg)
-	input := &kms.ListRetirableGrantsInput{
+	input := &types.ListRetirableGrantsInput{
 		RetiringPrincipal: aws.String("arn:aws:iam::111122223333:role/ExampleRole"),
 	}
 
@@ -1243,7 +1245,7 @@ func ExampleClient_PutKeyPolicyRequest_shared00() {
 	}
 
 	svc := kms.New(cfg)
-	input := &kms.PutKeyPolicyInput{
+	input := &types.PutKeyPolicyInput{
 		KeyId:      aws.String("1234abcd-12ab-34cd-56ef-1234567890ab"),
 		Policy:     aws.String("{\n    \"Version\": \"2012-10-17\",\n    \"Id\": \"custom-policy-2016-12-07\",\n    \"Statement\": [\n        {\n            \"Sid\": \"Enable IAM User Permissions\",\n            \"Effect\": \"Allow\",\n            \"Principal\": {\n                \"AWS\": \"arn:aws:iam::111122223333:root\"\n            },\n            \"Action\": \"kms:*\",\n            \"Resource\": \"*\"\n        },\n        {\n            \"Sid\": \"Allow access for Key Administrators\",\n            \"Effect\": \"Allow\",\n            \"Principal\": {\n                \"AWS\": [\n                    \"arn:aws:iam::111122223333:user/ExampleAdminUser\",\n                    \"arn:aws:iam::111122223333:role/ExampleAdminRole\"\n                ]\n            },\n            \"Action\": [\n                \"kms:Create*\",\n                \"kms:Describe*\",\n                \"kms:Enable*\",\n                \"kms:List*\",\n                \"kms:Put*\",\n                \"kms:Update*\",\n                \"kms:Revoke*\",\n                \"kms:Disable*\",\n                \"kms:Get*\",\n                \"kms:Delete*\",\n                \"kms:ScheduleKeyDeletion\",\n                \"kms:CancelKeyDeletion\"\n            ],\n            \"Resource\": \"*\"\n        },\n        {\n            \"Sid\": \"Allow use of the key\",\n            \"Effect\": \"Allow\",\n            \"Principal\": {\n                \"AWS\": \"arn:aws:iam::111122223333:role/ExamplePowerUserRole\"\n            },\n            \"Action\": [\n                \"kms:Encrypt\",\n                \"kms:Decrypt\",\n                \"kms:ReEncrypt*\",\n                \"kms:GenerateDataKey*\",\n                \"kms:DescribeKey\"\n            ],\n            \"Resource\": \"*\"\n        },\n        {\n            \"Sid\": \"Allow attachment of persistent resources\",\n            \"Effect\": \"Allow\",\n            \"Principal\": {\n                \"AWS\": \"arn:aws:iam::111122223333:role/ExamplePowerUserRole\"\n            },\n            \"Action\": [\n                \"kms:CreateGrant\",\n                \"kms:ListGrants\",\n                \"kms:RevokeGrant\"\n            ],\n            \"Resource\": \"*\",\n            \"Condition\": {\n                \"Bool\": {\n                    \"kms:GrantIsForAWSResource\": \"true\"\n                }\n            }\n        }\n    ]\n}\n"),
 		PolicyName: aws.String("default"),
@@ -1294,7 +1296,7 @@ func ExampleClient_ReEncryptRequest_shared00() {
 	}
 
 	svc := kms.New(cfg)
-	input := &kms.ReEncryptInput{
+	input := &types.ReEncryptInput{
 		CiphertextBlob:   []byte("<binary data>"),
 		DestinationKeyId: aws.String("0987dcba-09fe-87dc-65ba-ab0987654321"),
 	}
@@ -1346,7 +1348,7 @@ func ExampleClient_RetireGrantRequest_shared00() {
 	}
 
 	svc := kms.New(cfg)
-	input := &kms.RetireGrantInput{
+	input := &types.RetireGrantInput{
 		GrantId: aws.String("0c237476b39f8bc44e45212e08498fbe3151305030726c0590dd8d3e9f3d6a60"),
 		KeyId:   aws.String("arn:aws:kms:us-east-2:444455556666:key/1234abcd-12ab-34cd-56ef-1234567890ab"),
 	}
@@ -1394,7 +1396,7 @@ func ExampleClient_RevokeGrantRequest_shared00() {
 	}
 
 	svc := kms.New(cfg)
-	input := &kms.RevokeGrantInput{
+	input := &types.RevokeGrantInput{
 		GrantId: aws.String("0c237476b39f8bc44e45212e08498fbe3151305030726c0590dd8d3e9f3d6a60"),
 		KeyId:   aws.String("1234abcd-12ab-34cd-56ef-1234567890ab"),
 	}
@@ -1440,7 +1442,7 @@ func ExampleClient_ScheduleKeyDeletionRequest_shared00() {
 	}
 
 	svc := kms.New(cfg)
-	input := &kms.ScheduleKeyDeletionInput{
+	input := &types.ScheduleKeyDeletionInput{
 		KeyId:               aws.String("1234abcd-12ab-34cd-56ef-1234567890ab"),
 		PendingWindowInDays: aws.Int64(7),
 	}
@@ -1484,9 +1486,9 @@ func ExampleClient_TagResourceRequest_shared00() {
 	}
 
 	svc := kms.New(cfg)
-	input := &kms.TagResourceInput{
+	input := &types.TagResourceInput{
 		KeyId: aws.String("1234abcd-12ab-34cd-56ef-1234567890ab"),
-		Tags: []kms.Tag{
+		Tags: []types.Tag{
 			{
 				TagKey:   aws.String("Purpose"),
 				TagValue: aws.String("Test"),
@@ -1535,7 +1537,7 @@ func ExampleClient_UntagResourceRequest_shared00() {
 	}
 
 	svc := kms.New(cfg)
-	input := &kms.UntagResourceInput{
+	input := &types.UntagResourceInput{
 		KeyId: aws.String("1234abcd-12ab-34cd-56ef-1234567890ab"),
 		TagKeys: []string{
 			"Purpose",
@@ -1583,7 +1585,7 @@ func ExampleClient_UpdateAliasRequest_shared00() {
 	}
 
 	svc := kms.New(cfg)
-	input := &kms.UpdateAliasInput{
+	input := &types.UpdateAliasInput{
 		AliasName:   aws.String("alias/ExampleAlias"),
 		TargetKeyId: aws.String("1234abcd-12ab-34cd-56ef-1234567890ab"),
 	}
@@ -1625,7 +1627,7 @@ func ExampleClient_UpdateKeyDescriptionRequest_shared00() {
 	}
 
 	svc := kms.New(cfg)
-	input := &kms.UpdateKeyDescriptionInput{
+	input := &types.UpdateKeyDescriptionInput{
 		Description: aws.String("Example description that indicates the intended use of this CMK."),
 		KeyId:       aws.String("1234abcd-12ab-34cd-56ef-1234567890ab"),
 	}

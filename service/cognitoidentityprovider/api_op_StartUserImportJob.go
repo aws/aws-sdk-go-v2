@@ -6,66 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/types"
 )
-
-// Represents the request to start the user import job.
-type StartUserImportJobInput struct {
-	_ struct{} `type:"structure"`
-
-	// The job ID for the user import job.
-	//
-	// JobId is a required field
-	JobId *string `min:"1" type:"string" required:"true"`
-
-	// The user pool ID for the user pool that the users are being imported into.
-	//
-	// UserPoolId is a required field
-	UserPoolId *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s StartUserImportJobInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *StartUserImportJobInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "StartUserImportJobInput"}
-
-	if s.JobId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("JobId"))
-	}
-	if s.JobId != nil && len(*s.JobId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("JobId", 1))
-	}
-
-	if s.UserPoolId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("UserPoolId"))
-	}
-	if s.UserPoolId != nil && len(*s.UserPoolId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("UserPoolId", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Represents the response from the server to the request to start the user
-// import job.
-type StartUserImportJobOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The job object that represents the user import job.
-	UserImportJob *UserImportJobType `type:"structure"`
-}
-
-// String returns the string representation
-func (s StartUserImportJobOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opStartUserImportJob = "StartUserImportJob"
 
@@ -82,7 +24,7 @@ const opStartUserImportJob = "StartUserImportJob"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/StartUserImportJob
-func (c *Client) StartUserImportJobRequest(input *StartUserImportJobInput) StartUserImportJobRequest {
+func (c *Client) StartUserImportJobRequest(input *types.StartUserImportJobInput) StartUserImportJobRequest {
 	op := &aws.Operation{
 		Name:       opStartUserImportJob,
 		HTTPMethod: "POST",
@@ -90,10 +32,10 @@ func (c *Client) StartUserImportJobRequest(input *StartUserImportJobInput) Start
 	}
 
 	if input == nil {
-		input = &StartUserImportJobInput{}
+		input = &types.StartUserImportJobInput{}
 	}
 
-	req := c.newRequest(op, input, &StartUserImportJobOutput{})
+	req := c.newRequest(op, input, &types.StartUserImportJobOutput{})
 	return StartUserImportJobRequest{Request: req, Input: input, Copy: c.StartUserImportJobRequest}
 }
 
@@ -101,8 +43,8 @@ func (c *Client) StartUserImportJobRequest(input *StartUserImportJobInput) Start
 // StartUserImportJob API operation.
 type StartUserImportJobRequest struct {
 	*aws.Request
-	Input *StartUserImportJobInput
-	Copy  func(*StartUserImportJobInput) StartUserImportJobRequest
+	Input *types.StartUserImportJobInput
+	Copy  func(*types.StartUserImportJobInput) StartUserImportJobRequest
 }
 
 // Send marshals and sends the StartUserImportJob API request.
@@ -114,7 +56,7 @@ func (r StartUserImportJobRequest) Send(ctx context.Context) (*StartUserImportJo
 	}
 
 	resp := &StartUserImportJobResponse{
-		StartUserImportJobOutput: r.Request.Data.(*StartUserImportJobOutput),
+		StartUserImportJobOutput: r.Request.Data.(*types.StartUserImportJobOutput),
 		response:                 &aws.Response{Request: r.Request},
 	}
 
@@ -124,7 +66,7 @@ func (r StartUserImportJobRequest) Send(ctx context.Context) (*StartUserImportJo
 // StartUserImportJobResponse is the response type for the
 // StartUserImportJob API operation.
 type StartUserImportJobResponse struct {
-	*StartUserImportJobOutput
+	*types.StartUserImportJobOutput
 
 	response *aws.Response
 }

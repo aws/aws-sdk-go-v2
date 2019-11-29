@@ -6,85 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/apigateway/types"
 )
-
-// A request to get information about a collection of ClientCertificate resources.
-type GetClientCertificatesInput struct {
-	_ struct{} `type:"structure"`
-
-	// The maximum number of returned results per page. The default value is 25
-	// and the maximum value is 500.
-	Limit *int64 `location:"querystring" locationName:"limit" type:"integer"`
-
-	// The current pagination position in the paged result set.
-	Position *string `location:"querystring" locationName:"position" type:"string"`
-}
-
-// String returns the string representation
-func (s GetClientCertificatesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetClientCertificatesInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.Limit != nil {
-		v := *s.Limit
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "limit", protocol.Int64Value(v), metadata)
-	}
-	if s.Position != nil {
-		v := *s.Position
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "position", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-// Represents a collection of ClientCertificate resources.
-//
-// Use Client-Side Certificate (https://docs.aws.amazon.com/apigateway/latest/developerguide/getting-started-client-side-ssl-authentication.html)
-type GetClientCertificatesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The current page of elements from this collection.
-	Items []Certificate `locationName:"item" type:"list"`
-
-	Position *string `locationName:"position" type:"string"`
-}
-
-// String returns the string representation
-func (s GetClientCertificatesOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetClientCertificatesOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.Items != nil {
-		v := s.Items
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "item", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	if s.Position != nil {
-		v := *s.Position
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "position", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opGetClientCertificates = "GetClientCertificates"
 
@@ -99,7 +22,7 @@ const opGetClientCertificates = "GetClientCertificates"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) GetClientCertificatesRequest(input *GetClientCertificatesInput) GetClientCertificatesRequest {
+func (c *Client) GetClientCertificatesRequest(input *types.GetClientCertificatesInput) GetClientCertificatesRequest {
 	op := &aws.Operation{
 		Name:       opGetClientCertificates,
 		HTTPMethod: "GET",
@@ -113,10 +36,10 @@ func (c *Client) GetClientCertificatesRequest(input *GetClientCertificatesInput)
 	}
 
 	if input == nil {
-		input = &GetClientCertificatesInput{}
+		input = &types.GetClientCertificatesInput{}
 	}
 
-	req := c.newRequest(op, input, &GetClientCertificatesOutput{})
+	req := c.newRequest(op, input, &types.GetClientCertificatesOutput{})
 	return GetClientCertificatesRequest{Request: req, Input: input, Copy: c.GetClientCertificatesRequest}
 }
 
@@ -124,8 +47,8 @@ func (c *Client) GetClientCertificatesRequest(input *GetClientCertificatesInput)
 // GetClientCertificates API operation.
 type GetClientCertificatesRequest struct {
 	*aws.Request
-	Input *GetClientCertificatesInput
-	Copy  func(*GetClientCertificatesInput) GetClientCertificatesRequest
+	Input *types.GetClientCertificatesInput
+	Copy  func(*types.GetClientCertificatesInput) GetClientCertificatesRequest
 }
 
 // Send marshals and sends the GetClientCertificates API request.
@@ -137,7 +60,7 @@ func (r GetClientCertificatesRequest) Send(ctx context.Context) (*GetClientCerti
 	}
 
 	resp := &GetClientCertificatesResponse{
-		GetClientCertificatesOutput: r.Request.Data.(*GetClientCertificatesOutput),
+		GetClientCertificatesOutput: r.Request.Data.(*types.GetClientCertificatesOutput),
 		response:                    &aws.Response{Request: r.Request},
 	}
 
@@ -167,7 +90,7 @@ func NewGetClientCertificatesPaginator(req GetClientCertificatesRequest) GetClie
 	return GetClientCertificatesPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *GetClientCertificatesInput
+				var inCpy *types.GetClientCertificatesInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -187,14 +110,14 @@ type GetClientCertificatesPaginator struct {
 	aws.Pager
 }
 
-func (p *GetClientCertificatesPaginator) CurrentPage() *GetClientCertificatesOutput {
-	return p.Pager.CurrentPage().(*GetClientCertificatesOutput)
+func (p *GetClientCertificatesPaginator) CurrentPage() *types.GetClientCertificatesOutput {
+	return p.Pager.CurrentPage().(*types.GetClientCertificatesOutput)
 }
 
 // GetClientCertificatesResponse is the response type for the
 // GetClientCertificates API operation.
 type GetClientCertificatesResponse struct {
-	*GetClientCertificatesOutput
+	*types.GetClientCertificatesOutput
 
 	response *aws.Response
 }

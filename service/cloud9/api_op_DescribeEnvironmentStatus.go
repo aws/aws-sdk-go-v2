@@ -6,65 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/cloud9/types"
 )
-
-type DescribeEnvironmentStatusInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the environment to get status information about.
-	//
-	// EnvironmentId is a required field
-	EnvironmentId *string `locationName:"environmentId" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeEnvironmentStatusInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeEnvironmentStatusInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeEnvironmentStatusInput"}
-
-	if s.EnvironmentId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("EnvironmentId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribeEnvironmentStatusOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Any informational message about the status of the environment.
-	Message *string `locationName:"message" type:"string"`
-
-	// The status of the environment. Available values include:
-	//
-	//    * connecting: The environment is connecting.
-	//
-	//    * creating: The environment is being created.
-	//
-	//    * deleting: The environment is being deleted.
-	//
-	//    * error: The environment is in an error state.
-	//
-	//    * ready: The environment is ready.
-	//
-	//    * stopped: The environment is stopped.
-	//
-	//    * stopping: The environment is stopping.
-	Status EnvironmentStatus `locationName:"status" type:"string" enum:"true"`
-}
-
-// String returns the string representation
-func (s DescribeEnvironmentStatusOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeEnvironmentStatus = "DescribeEnvironmentStatus"
 
@@ -81,7 +24,7 @@ const opDescribeEnvironmentStatus = "DescribeEnvironmentStatus"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloud9-2017-09-23/DescribeEnvironmentStatus
-func (c *Client) DescribeEnvironmentStatusRequest(input *DescribeEnvironmentStatusInput) DescribeEnvironmentStatusRequest {
+func (c *Client) DescribeEnvironmentStatusRequest(input *types.DescribeEnvironmentStatusInput) DescribeEnvironmentStatusRequest {
 	op := &aws.Operation{
 		Name:       opDescribeEnvironmentStatus,
 		HTTPMethod: "POST",
@@ -89,10 +32,10 @@ func (c *Client) DescribeEnvironmentStatusRequest(input *DescribeEnvironmentStat
 	}
 
 	if input == nil {
-		input = &DescribeEnvironmentStatusInput{}
+		input = &types.DescribeEnvironmentStatusInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeEnvironmentStatusOutput{})
+	req := c.newRequest(op, input, &types.DescribeEnvironmentStatusOutput{})
 	return DescribeEnvironmentStatusRequest{Request: req, Input: input, Copy: c.DescribeEnvironmentStatusRequest}
 }
 
@@ -100,8 +43,8 @@ func (c *Client) DescribeEnvironmentStatusRequest(input *DescribeEnvironmentStat
 // DescribeEnvironmentStatus API operation.
 type DescribeEnvironmentStatusRequest struct {
 	*aws.Request
-	Input *DescribeEnvironmentStatusInput
-	Copy  func(*DescribeEnvironmentStatusInput) DescribeEnvironmentStatusRequest
+	Input *types.DescribeEnvironmentStatusInput
+	Copy  func(*types.DescribeEnvironmentStatusInput) DescribeEnvironmentStatusRequest
 }
 
 // Send marshals and sends the DescribeEnvironmentStatus API request.
@@ -113,7 +56,7 @@ func (r DescribeEnvironmentStatusRequest) Send(ctx context.Context) (*DescribeEn
 	}
 
 	resp := &DescribeEnvironmentStatusResponse{
-		DescribeEnvironmentStatusOutput: r.Request.Data.(*DescribeEnvironmentStatusOutput),
+		DescribeEnvironmentStatusOutput: r.Request.Data.(*types.DescribeEnvironmentStatusOutput),
 		response:                        &aws.Response{Request: r.Request},
 	}
 
@@ -123,7 +66,7 @@ func (r DescribeEnvironmentStatusRequest) Send(ctx context.Context) (*DescribeEn
 // DescribeEnvironmentStatusResponse is the response type for the
 // DescribeEnvironmentStatus API operation.
 type DescribeEnvironmentStatusResponse struct {
-	*DescribeEnvironmentStatusOutput
+	*types.DescribeEnvironmentStatusOutput
 
 	response *aws.Response
 }

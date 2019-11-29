@@ -12,6 +12,8 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws/awserr"
 	"github.com/aws/aws-sdk-go-v2/aws/external"
 	"github.com/aws/aws-sdk-go-v2/service/pricing"
+	"github.com/aws/aws-sdk-go-v2/service/pricing/enums"
+	"github.com/aws/aws-sdk-go-v2/service/pricing/types"
 )
 
 var _ time.Duration
@@ -36,7 +38,7 @@ func ExampleClient_DescribeServicesRequest_shared00() {
 	}
 
 	svc := pricing.New(cfg)
-	input := &pricing.DescribeServicesInput{
+	input := &types.DescribeServicesInput{
 		FormatVersion: aws.String("aws_v1"),
 		MaxResults:    aws.Int64(1),
 		ServiceCode:   aws.String("AmazonEC2"),
@@ -81,7 +83,7 @@ func ExampleClient_GetAttributeValuesRequest_shared00() {
 	}
 
 	svc := pricing.New(cfg)
-	input := &pricing.GetAttributeValuesInput{
+	input := &types.GetAttributeValuesInput{
 		AttributeName: aws.String("volumeType"),
 		MaxResults:    aws.Int64(2),
 		ServiceCode:   aws.String("AmazonEC2"),
@@ -126,16 +128,16 @@ func ExampleClient_GetProductsRequest_shared00() {
 	}
 
 	svc := pricing.New(cfg)
-	input := &pricing.GetProductsInput{
-		Filters: []pricing.Filter{
+	input := &types.GetProductsInput{
+		Filters: []types.Filter{
 			{
 				Field: aws.String("ServiceCode"),
-				Type:  pricing.FilterTypeTermMatch,
+				Type:  enums.FilterTypeTermMatch,
 				Value: aws.String("AmazonEC2"),
 			},
 			{
 				Field: aws.String("volumeType"),
-				Type:  pricing.FilterTypeTermMatch,
+				Type:  enums.FilterTypeTermMatch,
 				Value: aws.String("Provisioned IOPS"),
 			},
 		},

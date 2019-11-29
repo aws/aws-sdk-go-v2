@@ -10,6 +10,7 @@ package ecriface
 
 import (
 	"github.com/aws/aws-sdk-go-v2/service/ecr"
+	"github.com/aws/aws-sdk-go-v2/service/ecr/types"
 )
 
 // ClientAPI provides an interface to enable mocking the
@@ -43,7 +44,7 @@ import (
 //    type mockClientClient struct {
 //        ecriface.ClientPI
 //    }
-//    func (m *mockClientClient) BatchCheckLayerAvailability(input *ecr.BatchCheckLayerAvailabilityInput) (*ecr.BatchCheckLayerAvailabilityOutput, error) {
+//    func (m *mockClientClient) BatchCheckLayerAvailability(input *types.BatchCheckLayerAvailabilityInput) (*types.BatchCheckLayerAvailabilityOutput, error) {
 //        // mock response/functionality
 //    }
 //
@@ -61,57 +62,63 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type ClientAPI interface {
-	BatchCheckLayerAvailabilityRequest(*ecr.BatchCheckLayerAvailabilityInput) ecr.BatchCheckLayerAvailabilityRequest
+	BatchCheckLayerAvailabilityRequest(*types.BatchCheckLayerAvailabilityInput) ecr.BatchCheckLayerAvailabilityRequest
 
-	BatchDeleteImageRequest(*ecr.BatchDeleteImageInput) ecr.BatchDeleteImageRequest
+	BatchDeleteImageRequest(*types.BatchDeleteImageInput) ecr.BatchDeleteImageRequest
 
-	BatchGetImageRequest(*ecr.BatchGetImageInput) ecr.BatchGetImageRequest
+	BatchGetImageRequest(*types.BatchGetImageInput) ecr.BatchGetImageRequest
 
-	CompleteLayerUploadRequest(*ecr.CompleteLayerUploadInput) ecr.CompleteLayerUploadRequest
+	CompleteLayerUploadRequest(*types.CompleteLayerUploadInput) ecr.CompleteLayerUploadRequest
 
-	CreateRepositoryRequest(*ecr.CreateRepositoryInput) ecr.CreateRepositoryRequest
+	CreateRepositoryRequest(*types.CreateRepositoryInput) ecr.CreateRepositoryRequest
 
-	DeleteLifecyclePolicyRequest(*ecr.DeleteLifecyclePolicyInput) ecr.DeleteLifecyclePolicyRequest
+	DeleteLifecyclePolicyRequest(*types.DeleteLifecyclePolicyInput) ecr.DeleteLifecyclePolicyRequest
 
-	DeleteRepositoryRequest(*ecr.DeleteRepositoryInput) ecr.DeleteRepositoryRequest
+	DeleteRepositoryRequest(*types.DeleteRepositoryInput) ecr.DeleteRepositoryRequest
 
-	DeleteRepositoryPolicyRequest(*ecr.DeleteRepositoryPolicyInput) ecr.DeleteRepositoryPolicyRequest
+	DeleteRepositoryPolicyRequest(*types.DeleteRepositoryPolicyInput) ecr.DeleteRepositoryPolicyRequest
 
-	DescribeImagesRequest(*ecr.DescribeImagesInput) ecr.DescribeImagesRequest
+	DescribeImageScanFindingsRequest(*types.DescribeImageScanFindingsInput) ecr.DescribeImageScanFindingsRequest
 
-	DescribeRepositoriesRequest(*ecr.DescribeRepositoriesInput) ecr.DescribeRepositoriesRequest
+	DescribeImagesRequest(*types.DescribeImagesInput) ecr.DescribeImagesRequest
 
-	GetAuthorizationTokenRequest(*ecr.GetAuthorizationTokenInput) ecr.GetAuthorizationTokenRequest
+	DescribeRepositoriesRequest(*types.DescribeRepositoriesInput) ecr.DescribeRepositoriesRequest
 
-	GetDownloadUrlForLayerRequest(*ecr.GetDownloadUrlForLayerInput) ecr.GetDownloadUrlForLayerRequest
+	GetAuthorizationTokenRequest(*types.GetAuthorizationTokenInput) ecr.GetAuthorizationTokenRequest
 
-	GetLifecyclePolicyRequest(*ecr.GetLifecyclePolicyInput) ecr.GetLifecyclePolicyRequest
+	GetDownloadUrlForLayerRequest(*types.GetDownloadUrlForLayerInput) ecr.GetDownloadUrlForLayerRequest
 
-	GetLifecyclePolicyPreviewRequest(*ecr.GetLifecyclePolicyPreviewInput) ecr.GetLifecyclePolicyPreviewRequest
+	GetLifecyclePolicyRequest(*types.GetLifecyclePolicyInput) ecr.GetLifecyclePolicyRequest
 
-	GetRepositoryPolicyRequest(*ecr.GetRepositoryPolicyInput) ecr.GetRepositoryPolicyRequest
+	GetLifecyclePolicyPreviewRequest(*types.GetLifecyclePolicyPreviewInput) ecr.GetLifecyclePolicyPreviewRequest
 
-	InitiateLayerUploadRequest(*ecr.InitiateLayerUploadInput) ecr.InitiateLayerUploadRequest
+	GetRepositoryPolicyRequest(*types.GetRepositoryPolicyInput) ecr.GetRepositoryPolicyRequest
 
-	ListImagesRequest(*ecr.ListImagesInput) ecr.ListImagesRequest
+	InitiateLayerUploadRequest(*types.InitiateLayerUploadInput) ecr.InitiateLayerUploadRequest
 
-	ListTagsForResourceRequest(*ecr.ListTagsForResourceInput) ecr.ListTagsForResourceRequest
+	ListImagesRequest(*types.ListImagesInput) ecr.ListImagesRequest
 
-	PutImageRequest(*ecr.PutImageInput) ecr.PutImageRequest
+	ListTagsForResourceRequest(*types.ListTagsForResourceInput) ecr.ListTagsForResourceRequest
 
-	PutImageTagMutabilityRequest(*ecr.PutImageTagMutabilityInput) ecr.PutImageTagMutabilityRequest
+	PutImageRequest(*types.PutImageInput) ecr.PutImageRequest
 
-	PutLifecyclePolicyRequest(*ecr.PutLifecyclePolicyInput) ecr.PutLifecyclePolicyRequest
+	PutImageScanningConfigurationRequest(*types.PutImageScanningConfigurationInput) ecr.PutImageScanningConfigurationRequest
 
-	SetRepositoryPolicyRequest(*ecr.SetRepositoryPolicyInput) ecr.SetRepositoryPolicyRequest
+	PutImageTagMutabilityRequest(*types.PutImageTagMutabilityInput) ecr.PutImageTagMutabilityRequest
 
-	StartLifecyclePolicyPreviewRequest(*ecr.StartLifecyclePolicyPreviewInput) ecr.StartLifecyclePolicyPreviewRequest
+	PutLifecyclePolicyRequest(*types.PutLifecyclePolicyInput) ecr.PutLifecyclePolicyRequest
 
-	TagResourceRequest(*ecr.TagResourceInput) ecr.TagResourceRequest
+	SetRepositoryPolicyRequest(*types.SetRepositoryPolicyInput) ecr.SetRepositoryPolicyRequest
 
-	UntagResourceRequest(*ecr.UntagResourceInput) ecr.UntagResourceRequest
+	StartImageScanRequest(*types.StartImageScanInput) ecr.StartImageScanRequest
 
-	UploadLayerPartRequest(*ecr.UploadLayerPartInput) ecr.UploadLayerPartRequest
+	StartLifecyclePolicyPreviewRequest(*types.StartLifecyclePolicyPreviewInput) ecr.StartLifecyclePolicyPreviewRequest
+
+	TagResourceRequest(*types.TagResourceInput) ecr.TagResourceRequest
+
+	UntagResourceRequest(*types.UntagResourceInput) ecr.UntagResourceRequest
+
+	UploadLayerPartRequest(*types.UploadLayerPartInput) ecr.UploadLayerPartRequest
 }
 
 var _ ClientAPI = (*ecr.Client)(nil)

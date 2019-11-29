@@ -6,113 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/neptune/types"
 )
-
-type CopyDBClusterSnapshotInput struct {
-	_ struct{} `type:"structure"`
-
-	// True to copy all tags from the source DB cluster snapshot to the target DB
-	// cluster snapshot, and otherwise false. The default is false.
-	CopyTags *bool `type:"boolean"`
-
-	// The AWS AWS KMS key ID for an encrypted DB cluster snapshot. The KMS key
-	// ID is the Amazon Resource Name (ARN), KMS key identifier, or the KMS key
-	// alias for the KMS encryption key.
-	//
-	// If you copy an unencrypted DB cluster snapshot and specify a value for the
-	// KmsKeyId parameter, Amazon Neptune encrypts the target DB cluster snapshot
-	// using the specified KMS encryption key.
-	//
-	// If you copy an encrypted DB cluster snapshot from your AWS account, you can
-	// specify a value for KmsKeyId to encrypt the copy with a new KMS encryption
-	// key. If you don't specify a value for KmsKeyId, then the copy of the DB cluster
-	// snapshot is encrypted with the same KMS key as the source DB cluster snapshot.
-	//
-	// If you copy an encrypted DB cluster snapshot that is shared from another
-	// AWS account, then you must specify a value for KmsKeyId.
-	//
-	// KMS encryption keys are specific to the AWS Region that they are created
-	// in, and you can't use encryption keys from one AWS Region in another AWS
-	// Region.
-	KmsKeyId *string `type:"string"`
-
-	// Not currently supported.
-	PreSignedUrl *string `type:"string"`
-
-	// The identifier of the DB cluster snapshot to copy. This parameter is not
-	// case-sensitive.
-	//
-	// You can't copy from one AWS Region to another.
-	//
-	// Constraints:
-	//
-	//    * Must specify a valid system snapshot in the "available" state.
-	//
-	//    * Specify a valid DB snapshot identifier.
-	//
-	// Example: my-cluster-snapshot1
-	//
-	// SourceDBClusterSnapshotIdentifier is a required field
-	SourceDBClusterSnapshotIdentifier *string `type:"string" required:"true"`
-
-	// The tags to assign to the new DB cluster snapshot copy.
-	Tags []Tag `locationNameList:"Tag" type:"list"`
-
-	// The identifier of the new DB cluster snapshot to create from the source DB
-	// cluster snapshot. This parameter is not case-sensitive.
-	//
-	// Constraints:
-	//
-	//    * Must contain from 1 to 63 letters, numbers, or hyphens.
-	//
-	//    * First character must be a letter.
-	//
-	//    * Cannot end with a hyphen or contain two consecutive hyphens.
-	//
-	// Example: my-cluster-snapshot2
-	//
-	// TargetDBClusterSnapshotIdentifier is a required field
-	TargetDBClusterSnapshotIdentifier *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s CopyDBClusterSnapshotInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CopyDBClusterSnapshotInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CopyDBClusterSnapshotInput"}
-
-	if s.SourceDBClusterSnapshotIdentifier == nil {
-		invalidParams.Add(aws.NewErrParamRequired("SourceDBClusterSnapshotIdentifier"))
-	}
-
-	if s.TargetDBClusterSnapshotIdentifier == nil {
-		invalidParams.Add(aws.NewErrParamRequired("TargetDBClusterSnapshotIdentifier"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type CopyDBClusterSnapshotOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Contains the details for an Amazon Neptune DB cluster snapshot
-	//
-	// This data type is used as a response element in the DescribeDBClusterSnapshots
-	// action.
-	DBClusterSnapshot *DBClusterSnapshot `type:"structure"`
-}
-
-// String returns the string representation
-func (s CopyDBClusterSnapshotOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCopyDBClusterSnapshot = "CopyDBClusterSnapshot"
 
@@ -134,7 +29,7 @@ const opCopyDBClusterSnapshot = "CopyDBClusterSnapshot"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/CopyDBClusterSnapshot
-func (c *Client) CopyDBClusterSnapshotRequest(input *CopyDBClusterSnapshotInput) CopyDBClusterSnapshotRequest {
+func (c *Client) CopyDBClusterSnapshotRequest(input *types.CopyDBClusterSnapshotInput) CopyDBClusterSnapshotRequest {
 	op := &aws.Operation{
 		Name:       opCopyDBClusterSnapshot,
 		HTTPMethod: "POST",
@@ -142,10 +37,10 @@ func (c *Client) CopyDBClusterSnapshotRequest(input *CopyDBClusterSnapshotInput)
 	}
 
 	if input == nil {
-		input = &CopyDBClusterSnapshotInput{}
+		input = &types.CopyDBClusterSnapshotInput{}
 	}
 
-	req := c.newRequest(op, input, &CopyDBClusterSnapshotOutput{})
+	req := c.newRequest(op, input, &types.CopyDBClusterSnapshotOutput{})
 	return CopyDBClusterSnapshotRequest{Request: req, Input: input, Copy: c.CopyDBClusterSnapshotRequest}
 }
 
@@ -153,8 +48,8 @@ func (c *Client) CopyDBClusterSnapshotRequest(input *CopyDBClusterSnapshotInput)
 // CopyDBClusterSnapshot API operation.
 type CopyDBClusterSnapshotRequest struct {
 	*aws.Request
-	Input *CopyDBClusterSnapshotInput
-	Copy  func(*CopyDBClusterSnapshotInput) CopyDBClusterSnapshotRequest
+	Input *types.CopyDBClusterSnapshotInput
+	Copy  func(*types.CopyDBClusterSnapshotInput) CopyDBClusterSnapshotRequest
 }
 
 // Send marshals and sends the CopyDBClusterSnapshot API request.
@@ -166,7 +61,7 @@ func (r CopyDBClusterSnapshotRequest) Send(ctx context.Context) (*CopyDBClusterS
 	}
 
 	resp := &CopyDBClusterSnapshotResponse{
-		CopyDBClusterSnapshotOutput: r.Request.Data.(*CopyDBClusterSnapshotOutput),
+		CopyDBClusterSnapshotOutput: r.Request.Data.(*types.CopyDBClusterSnapshotOutput),
 		response:                    &aws.Response{Request: r.Request},
 	}
 
@@ -176,7 +71,7 @@ func (r CopyDBClusterSnapshotRequest) Send(ctx context.Context) (*CopyDBClusterS
 // CopyDBClusterSnapshotResponse is the response type for the
 // CopyDBClusterSnapshot API operation.
 type CopyDBClusterSnapshotResponse struct {
-	*CopyDBClusterSnapshotOutput
+	*types.CopyDBClusterSnapshotOutput
 
 	response *aws.Response
 }

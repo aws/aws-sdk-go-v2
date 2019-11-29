@@ -6,73 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/query"
+	"github.com/aws/aws-sdk-go-v2/service/autoscaling/types"
 )
-
-type PutNotificationConfigurationInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the Auto Scaling group.
-	//
-	// AutoScalingGroupName is a required field
-	AutoScalingGroupName *string `min:"1" type:"string" required:"true"`
-
-	// The type of event that causes the notification to be sent. For more information
-	// about notification types supported by Amazon EC2 Auto Scaling, see DescribeAutoScalingNotificationTypes.
-	//
-	// NotificationTypes is a required field
-	NotificationTypes []string `type:"list" required:"true"`
-
-	// The Amazon Resource Name (ARN) of the Amazon Simple Notification Service
-	// (Amazon SNS) topic.
-	//
-	// TopicARN is a required field
-	TopicARN *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s PutNotificationConfigurationInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *PutNotificationConfigurationInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "PutNotificationConfigurationInput"}
-
-	if s.AutoScalingGroupName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("AutoScalingGroupName"))
-	}
-	if s.AutoScalingGroupName != nil && len(*s.AutoScalingGroupName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("AutoScalingGroupName", 1))
-	}
-
-	if s.NotificationTypes == nil {
-		invalidParams.Add(aws.NewErrParamRequired("NotificationTypes"))
-	}
-
-	if s.TopicARN == nil {
-		invalidParams.Add(aws.NewErrParamRequired("TopicARN"))
-	}
-	if s.TopicARN != nil && len(*s.TopicARN) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("TopicARN", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type PutNotificationConfigurationOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s PutNotificationConfigurationOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opPutNotificationConfiguration = "PutNotificationConfiguration"
 
@@ -97,7 +34,7 @@ const opPutNotificationConfiguration = "PutNotificationConfiguration"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/PutNotificationConfiguration
-func (c *Client) PutNotificationConfigurationRequest(input *PutNotificationConfigurationInput) PutNotificationConfigurationRequest {
+func (c *Client) PutNotificationConfigurationRequest(input *types.PutNotificationConfigurationInput) PutNotificationConfigurationRequest {
 	op := &aws.Operation{
 		Name:       opPutNotificationConfiguration,
 		HTTPMethod: "POST",
@@ -105,10 +42,10 @@ func (c *Client) PutNotificationConfigurationRequest(input *PutNotificationConfi
 	}
 
 	if input == nil {
-		input = &PutNotificationConfigurationInput{}
+		input = &types.PutNotificationConfigurationInput{}
 	}
 
-	req := c.newRequest(op, input, &PutNotificationConfigurationOutput{})
+	req := c.newRequest(op, input, &types.PutNotificationConfigurationOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return PutNotificationConfigurationRequest{Request: req, Input: input, Copy: c.PutNotificationConfigurationRequest}
@@ -118,8 +55,8 @@ func (c *Client) PutNotificationConfigurationRequest(input *PutNotificationConfi
 // PutNotificationConfiguration API operation.
 type PutNotificationConfigurationRequest struct {
 	*aws.Request
-	Input *PutNotificationConfigurationInput
-	Copy  func(*PutNotificationConfigurationInput) PutNotificationConfigurationRequest
+	Input *types.PutNotificationConfigurationInput
+	Copy  func(*types.PutNotificationConfigurationInput) PutNotificationConfigurationRequest
 }
 
 // Send marshals and sends the PutNotificationConfiguration API request.
@@ -131,7 +68,7 @@ func (r PutNotificationConfigurationRequest) Send(ctx context.Context) (*PutNoti
 	}
 
 	resp := &PutNotificationConfigurationResponse{
-		PutNotificationConfigurationOutput: r.Request.Data.(*PutNotificationConfigurationOutput),
+		PutNotificationConfigurationOutput: r.Request.Data.(*types.PutNotificationConfigurationOutput),
 		response:                           &aws.Response{Request: r.Request},
 	}
 
@@ -141,7 +78,7 @@ func (r PutNotificationConfigurationRequest) Send(ctx context.Context) (*PutNoti
 // PutNotificationConfigurationResponse is the response type for the
 // PutNotificationConfiguration API operation.
 type PutNotificationConfigurationResponse struct {
-	*PutNotificationConfigurationOutput
+	*types.PutNotificationConfigurationOutput
 
 	response *aws.Response
 }

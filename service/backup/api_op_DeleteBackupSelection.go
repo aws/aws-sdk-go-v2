@@ -6,81 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/restjson"
+	"github.com/aws/aws-sdk-go-v2/service/backup/types"
 )
-
-type DeleteBackupSelectionInput struct {
-	_ struct{} `type:"structure"`
-
-	// Uniquely identifies a backup plan.
-	//
-	// BackupPlanId is a required field
-	BackupPlanId *string `location:"uri" locationName:"backupPlanId" type:"string" required:"true"`
-
-	// Uniquely identifies the body of a request to assign a set of resources to
-	// a backup plan.
-	//
-	// SelectionId is a required field
-	SelectionId *string `location:"uri" locationName:"selectionId" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteBackupSelectionInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteBackupSelectionInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteBackupSelectionInput"}
-
-	if s.BackupPlanId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("BackupPlanId"))
-	}
-
-	if s.SelectionId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("SelectionId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteBackupSelectionInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.BackupPlanId != nil {
-		v := *s.BackupPlanId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "backupPlanId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.SelectionId != nil {
-		v := *s.SelectionId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "selectionId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type DeleteBackupSelectionOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteBackupSelectionOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteBackupSelectionOutput) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
 
 const opDeleteBackupSelection = "DeleteBackupSelection"
 
@@ -98,7 +27,7 @@ const opDeleteBackupSelection = "DeleteBackupSelection"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/DeleteBackupSelection
-func (c *Client) DeleteBackupSelectionRequest(input *DeleteBackupSelectionInput) DeleteBackupSelectionRequest {
+func (c *Client) DeleteBackupSelectionRequest(input *types.DeleteBackupSelectionInput) DeleteBackupSelectionRequest {
 	op := &aws.Operation{
 		Name:       opDeleteBackupSelection,
 		HTTPMethod: "DELETE",
@@ -106,10 +35,10 @@ func (c *Client) DeleteBackupSelectionRequest(input *DeleteBackupSelectionInput)
 	}
 
 	if input == nil {
-		input = &DeleteBackupSelectionInput{}
+		input = &types.DeleteBackupSelectionInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteBackupSelectionOutput{})
+	req := c.newRequest(op, input, &types.DeleteBackupSelectionOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return DeleteBackupSelectionRequest{Request: req, Input: input, Copy: c.DeleteBackupSelectionRequest}
@@ -119,8 +48,8 @@ func (c *Client) DeleteBackupSelectionRequest(input *DeleteBackupSelectionInput)
 // DeleteBackupSelection API operation.
 type DeleteBackupSelectionRequest struct {
 	*aws.Request
-	Input *DeleteBackupSelectionInput
-	Copy  func(*DeleteBackupSelectionInput) DeleteBackupSelectionRequest
+	Input *types.DeleteBackupSelectionInput
+	Copy  func(*types.DeleteBackupSelectionInput) DeleteBackupSelectionRequest
 }
 
 // Send marshals and sends the DeleteBackupSelection API request.
@@ -132,7 +61,7 @@ func (r DeleteBackupSelectionRequest) Send(ctx context.Context) (*DeleteBackupSe
 	}
 
 	resp := &DeleteBackupSelectionResponse{
-		DeleteBackupSelectionOutput: r.Request.Data.(*DeleteBackupSelectionOutput),
+		DeleteBackupSelectionOutput: r.Request.Data.(*types.DeleteBackupSelectionOutput),
 		response:                    &aws.Response{Request: r.Request},
 	}
 
@@ -142,7 +71,7 @@ func (r DeleteBackupSelectionRequest) Send(ctx context.Context) (*DeleteBackupSe
 // DeleteBackupSelectionResponse is the response type for the
 // DeleteBackupSelection API operation.
 type DeleteBackupSelectionResponse struct {
-	*DeleteBackupSelectionOutput
+	*types.DeleteBackupSelectionOutput
 
 	response *aws.Response
 }

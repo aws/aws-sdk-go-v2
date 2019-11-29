@@ -4,70 +4,10 @@ package kinesisanalytics
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/kinesisanalytics/types"
 )
-
-type StartApplicationInput struct {
-	_ struct{} `type:"structure"`
-
-	// Name of the application.
-	//
-	// ApplicationName is a required field
-	ApplicationName *string `min:"1" type:"string" required:"true"`
-
-	// Identifies the specific input, by ID, that the application starts consuming.
-	// Amazon Kinesis Analytics starts reading the streaming source associated with
-	// the input. You can also specify where in the streaming source you want Amazon
-	// Kinesis Analytics to start reading.
-	//
-	// InputConfigurations is a required field
-	InputConfigurations []InputConfiguration `type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s StartApplicationInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *StartApplicationInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "StartApplicationInput"}
-
-	if s.ApplicationName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ApplicationName"))
-	}
-	if s.ApplicationName != nil && len(*s.ApplicationName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ApplicationName", 1))
-	}
-
-	if s.InputConfigurations == nil {
-		invalidParams.Add(aws.NewErrParamRequired("InputConfigurations"))
-	}
-	if s.InputConfigurations != nil {
-		for i, v := range s.InputConfigurations {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "InputConfigurations", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type StartApplicationOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s StartApplicationOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opStartApplication = "StartApplication"
 
@@ -106,7 +46,7 @@ const opStartApplication = "StartApplication"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/StartApplication
-func (c *Client) StartApplicationRequest(input *StartApplicationInput) StartApplicationRequest {
+func (c *Client) StartApplicationRequest(input *types.StartApplicationInput) StartApplicationRequest {
 	op := &aws.Operation{
 		Name:       opStartApplication,
 		HTTPMethod: "POST",
@@ -114,10 +54,10 @@ func (c *Client) StartApplicationRequest(input *StartApplicationInput) StartAppl
 	}
 
 	if input == nil {
-		input = &StartApplicationInput{}
+		input = &types.StartApplicationInput{}
 	}
 
-	req := c.newRequest(op, input, &StartApplicationOutput{})
+	req := c.newRequest(op, input, &types.StartApplicationOutput{})
 	return StartApplicationRequest{Request: req, Input: input, Copy: c.StartApplicationRequest}
 }
 
@@ -125,8 +65,8 @@ func (c *Client) StartApplicationRequest(input *StartApplicationInput) StartAppl
 // StartApplication API operation.
 type StartApplicationRequest struct {
 	*aws.Request
-	Input *StartApplicationInput
-	Copy  func(*StartApplicationInput) StartApplicationRequest
+	Input *types.StartApplicationInput
+	Copy  func(*types.StartApplicationInput) StartApplicationRequest
 }
 
 // Send marshals and sends the StartApplication API request.
@@ -138,7 +78,7 @@ func (r StartApplicationRequest) Send(ctx context.Context) (*StartApplicationRes
 	}
 
 	resp := &StartApplicationResponse{
-		StartApplicationOutput: r.Request.Data.(*StartApplicationOutput),
+		StartApplicationOutput: r.Request.Data.(*types.StartApplicationOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -148,7 +88,7 @@ func (r StartApplicationRequest) Send(ctx context.Context) (*StartApplicationRes
 // StartApplicationResponse is the response type for the
 // StartApplication API operation.
 type StartApplicationResponse struct {
-	*StartApplicationOutput
+	*types.StartApplicationOutput
 
 	response *aws.Response
 }

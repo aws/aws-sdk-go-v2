@@ -7,6 +7,7 @@ import (
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
+	"github.com/aws/aws-sdk-go-v2/service/cloudwatch/types"
 )
 
 // WaitUntilAlarmExists uses the CloudWatch API operation
@@ -18,7 +19,7 @@ import (
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Client) WaitUntilAlarmExists(ctx context.Context, input *DescribeAlarmsInput, opts ...aws.WaiterOption) error {
+func (c *Client) WaitUntilAlarmExists(ctx context.Context, input *types.DescribeAlarmsInput, opts ...aws.WaiterOption) error {
 	w := aws.Waiter{
 		Name:        "WaitUntilAlarmExists",
 		MaxAttempts: 40,
@@ -32,7 +33,7 @@ func (c *Client) WaitUntilAlarmExists(ctx context.Context, input *DescribeAlarms
 		},
 		Logger: c.Config.Logger,
 		NewRequest: func(opts []aws.Option) (*aws.Request, error) {
-			var inCpy *DescribeAlarmsInput
+			var inCpy *types.DescribeAlarmsInput
 			if input != nil {
 				tmp := *input
 				inCpy = &tmp

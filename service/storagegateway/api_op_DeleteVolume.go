@@ -6,55 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/storagegateway/types"
 )
-
-// A JSON object containing the DeleteVolumeInput$VolumeARN to delete.
-type DeleteVolumeInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the volume. Use the ListVolumes operation
-	// to return a list of gateway volumes.
-	//
-	// VolumeARN is a required field
-	VolumeARN *string `min:"50" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteVolumeInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteVolumeInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteVolumeInput"}
-
-	if s.VolumeARN == nil {
-		invalidParams.Add(aws.NewErrParamRequired("VolumeARN"))
-	}
-	if s.VolumeARN != nil && len(*s.VolumeARN) < 50 {
-		invalidParams.Add(aws.NewErrParamMinLen("VolumeARN", 50))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// A JSON object containing the of the storage volume that was deleted
-type DeleteVolumeOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the storage volume that was deleted. It
-	// is the same ARN you provided in the request.
-	VolumeARN *string `min:"50" type:"string"`
-}
-
-// String returns the string representation
-func (s DeleteVolumeOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteVolume = "DeleteVolume"
 
@@ -85,7 +38,7 @@ const opDeleteVolume = "DeleteVolume"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DeleteVolume
-func (c *Client) DeleteVolumeRequest(input *DeleteVolumeInput) DeleteVolumeRequest {
+func (c *Client) DeleteVolumeRequest(input *types.DeleteVolumeInput) DeleteVolumeRequest {
 	op := &aws.Operation{
 		Name:       opDeleteVolume,
 		HTTPMethod: "POST",
@@ -93,10 +46,10 @@ func (c *Client) DeleteVolumeRequest(input *DeleteVolumeInput) DeleteVolumeReque
 	}
 
 	if input == nil {
-		input = &DeleteVolumeInput{}
+		input = &types.DeleteVolumeInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteVolumeOutput{})
+	req := c.newRequest(op, input, &types.DeleteVolumeOutput{})
 	return DeleteVolumeRequest{Request: req, Input: input, Copy: c.DeleteVolumeRequest}
 }
 
@@ -104,8 +57,8 @@ func (c *Client) DeleteVolumeRequest(input *DeleteVolumeInput) DeleteVolumeReque
 // DeleteVolume API operation.
 type DeleteVolumeRequest struct {
 	*aws.Request
-	Input *DeleteVolumeInput
-	Copy  func(*DeleteVolumeInput) DeleteVolumeRequest
+	Input *types.DeleteVolumeInput
+	Copy  func(*types.DeleteVolumeInput) DeleteVolumeRequest
 }
 
 // Send marshals and sends the DeleteVolume API request.
@@ -117,7 +70,7 @@ func (r DeleteVolumeRequest) Send(ctx context.Context) (*DeleteVolumeResponse, e
 	}
 
 	resp := &DeleteVolumeResponse{
-		DeleteVolumeOutput: r.Request.Data.(*DeleteVolumeOutput),
+		DeleteVolumeOutput: r.Request.Data.(*types.DeleteVolumeOutput),
 		response:           &aws.Response{Request: r.Request},
 	}
 
@@ -127,7 +80,7 @@ func (r DeleteVolumeRequest) Send(ctx context.Context) (*DeleteVolumeResponse, e
 // DeleteVolumeResponse is the response type for the
 // DeleteVolume API operation.
 type DeleteVolumeResponse struct {
-	*DeleteVolumeOutput
+	*types.DeleteVolumeOutput
 
 	response *aws.Response
 }

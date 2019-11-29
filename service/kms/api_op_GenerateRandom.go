@@ -6,56 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/kms/types"
 )
-
-type GenerateRandomInput struct {
-	_ struct{} `type:"structure"`
-
-	// Generates the random byte string in the AWS CloudHSM cluster that is associated
-	// with the specified custom key store (https://docs.aws.amazon.com/kms/latest/developerguide/custom-key-store-overview.html).
-	// To find the ID of a custom key store, use the DescribeCustomKeyStores operation.
-	CustomKeyStoreId *string `min:"1" type:"string"`
-
-	// The length of the byte string.
-	NumberOfBytes *int64 `min:"1" type:"integer"`
-}
-
-// String returns the string representation
-func (s GenerateRandomInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GenerateRandomInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GenerateRandomInput"}
-	if s.CustomKeyStoreId != nil && len(*s.CustomKeyStoreId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("CustomKeyStoreId", 1))
-	}
-	if s.NumberOfBytes != nil && *s.NumberOfBytes < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("NumberOfBytes", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type GenerateRandomOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The random byte string. When you use the HTTP API or the AWS CLI, the value
-	// is Base64-encoded. Otherwise, it is not encoded.
-	//
-	// Plaintext is automatically base64 encoded/decoded by the SDK.
-	Plaintext []byte `min:"1" type:"blob" sensitive:"true"`
-}
-
-// String returns the string representation
-func (s GenerateRandomOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGenerateRandom = "GenerateRandom"
 
@@ -81,7 +33,7 @@ const opGenerateRandom = "GenerateRandom"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/GenerateRandom
-func (c *Client) GenerateRandomRequest(input *GenerateRandomInput) GenerateRandomRequest {
+func (c *Client) GenerateRandomRequest(input *types.GenerateRandomInput) GenerateRandomRequest {
 	op := &aws.Operation{
 		Name:       opGenerateRandom,
 		HTTPMethod: "POST",
@@ -89,10 +41,10 @@ func (c *Client) GenerateRandomRequest(input *GenerateRandomInput) GenerateRando
 	}
 
 	if input == nil {
-		input = &GenerateRandomInput{}
+		input = &types.GenerateRandomInput{}
 	}
 
-	req := c.newRequest(op, input, &GenerateRandomOutput{})
+	req := c.newRequest(op, input, &types.GenerateRandomOutput{})
 	return GenerateRandomRequest{Request: req, Input: input, Copy: c.GenerateRandomRequest}
 }
 
@@ -100,8 +52,8 @@ func (c *Client) GenerateRandomRequest(input *GenerateRandomInput) GenerateRando
 // GenerateRandom API operation.
 type GenerateRandomRequest struct {
 	*aws.Request
-	Input *GenerateRandomInput
-	Copy  func(*GenerateRandomInput) GenerateRandomRequest
+	Input *types.GenerateRandomInput
+	Copy  func(*types.GenerateRandomInput) GenerateRandomRequest
 }
 
 // Send marshals and sends the GenerateRandom API request.
@@ -113,7 +65,7 @@ func (r GenerateRandomRequest) Send(ctx context.Context) (*GenerateRandomRespons
 	}
 
 	resp := &GenerateRandomResponse{
-		GenerateRandomOutput: r.Request.Data.(*GenerateRandomOutput),
+		GenerateRandomOutput: r.Request.Data.(*types.GenerateRandomOutput),
 		response:             &aws.Response{Request: r.Request},
 	}
 
@@ -123,7 +75,7 @@ func (r GenerateRandomRequest) Send(ctx context.Context) (*GenerateRandomRespons
 // GenerateRandomResponse is the response type for the
 // GenerateRandom API operation.
 type GenerateRandomResponse struct {
-	*GenerateRandomOutput
+	*types.GenerateRandomOutput
 
 	response *aws.Response
 }

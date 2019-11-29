@@ -6,55 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/storagegateway/types"
 )
-
-// ListVolumeInitiatorsInput
-type ListVolumeInitiatorsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the volume. Use the ListVolumes operation
-	// to return a list of gateway volumes for the gateway.
-	//
-	// VolumeARN is a required field
-	VolumeARN *string `min:"50" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s ListVolumeInitiatorsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListVolumeInitiatorsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListVolumeInitiatorsInput"}
-
-	if s.VolumeARN == nil {
-		invalidParams.Add(aws.NewErrParamRequired("VolumeARN"))
-	}
-	if s.VolumeARN != nil && len(*s.VolumeARN) < 50 {
-		invalidParams.Add(aws.NewErrParamMinLen("VolumeARN", 50))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// ListVolumeInitiatorsOutput
-type ListVolumeInitiatorsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The host names and port numbers of all iSCSI initiators that are connected
-	// to the gateway.
-	Initiators []string `type:"list"`
-}
-
-// String returns the string representation
-func (s ListVolumeInitiatorsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListVolumeInitiators = "ListVolumeInitiators"
 
@@ -73,7 +26,7 @@ const opListVolumeInitiators = "ListVolumeInitiators"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/ListVolumeInitiators
-func (c *Client) ListVolumeInitiatorsRequest(input *ListVolumeInitiatorsInput) ListVolumeInitiatorsRequest {
+func (c *Client) ListVolumeInitiatorsRequest(input *types.ListVolumeInitiatorsInput) ListVolumeInitiatorsRequest {
 	op := &aws.Operation{
 		Name:       opListVolumeInitiators,
 		HTTPMethod: "POST",
@@ -81,10 +34,10 @@ func (c *Client) ListVolumeInitiatorsRequest(input *ListVolumeInitiatorsInput) L
 	}
 
 	if input == nil {
-		input = &ListVolumeInitiatorsInput{}
+		input = &types.ListVolumeInitiatorsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListVolumeInitiatorsOutput{})
+	req := c.newRequest(op, input, &types.ListVolumeInitiatorsOutput{})
 	return ListVolumeInitiatorsRequest{Request: req, Input: input, Copy: c.ListVolumeInitiatorsRequest}
 }
 
@@ -92,8 +45,8 @@ func (c *Client) ListVolumeInitiatorsRequest(input *ListVolumeInitiatorsInput) L
 // ListVolumeInitiators API operation.
 type ListVolumeInitiatorsRequest struct {
 	*aws.Request
-	Input *ListVolumeInitiatorsInput
-	Copy  func(*ListVolumeInitiatorsInput) ListVolumeInitiatorsRequest
+	Input *types.ListVolumeInitiatorsInput
+	Copy  func(*types.ListVolumeInitiatorsInput) ListVolumeInitiatorsRequest
 }
 
 // Send marshals and sends the ListVolumeInitiators API request.
@@ -105,7 +58,7 @@ func (r ListVolumeInitiatorsRequest) Send(ctx context.Context) (*ListVolumeIniti
 	}
 
 	resp := &ListVolumeInitiatorsResponse{
-		ListVolumeInitiatorsOutput: r.Request.Data.(*ListVolumeInitiatorsOutput),
+		ListVolumeInitiatorsOutput: r.Request.Data.(*types.ListVolumeInitiatorsOutput),
 		response:                   &aws.Response{Request: r.Request},
 	}
 
@@ -115,7 +68,7 @@ func (r ListVolumeInitiatorsRequest) Send(ctx context.Context) (*ListVolumeIniti
 // ListVolumeInitiatorsResponse is the response type for the
 // ListVolumeInitiators API operation.
 type ListVolumeInitiatorsResponse struct {
-	*ListVolumeInitiatorsOutput
+	*types.ListVolumeInitiatorsOutput
 
 	response *aws.Response
 }

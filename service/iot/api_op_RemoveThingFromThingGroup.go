@@ -6,91 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/iot/types"
 )
-
-type RemoveThingFromThingGroupInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ARN of the thing to remove from the group.
-	ThingArn *string `locationName:"thingArn" type:"string"`
-
-	// The group ARN.
-	ThingGroupArn *string `locationName:"thingGroupArn" type:"string"`
-
-	// The group name.
-	ThingGroupName *string `locationName:"thingGroupName" min:"1" type:"string"`
-
-	// The name of the thing to remove from the group.
-	ThingName *string `locationName:"thingName" min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s RemoveThingFromThingGroupInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *RemoveThingFromThingGroupInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "RemoveThingFromThingGroupInput"}
-	if s.ThingGroupName != nil && len(*s.ThingGroupName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ThingGroupName", 1))
-	}
-	if s.ThingName != nil && len(*s.ThingName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ThingName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s RemoveThingFromThingGroupInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.ThingArn != nil {
-		v := *s.ThingArn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "thingArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.ThingGroupArn != nil {
-		v := *s.ThingGroupArn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "thingGroupArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.ThingGroupName != nil {
-		v := *s.ThingGroupName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "thingGroupName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.ThingName != nil {
-		v := *s.ThingName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "thingName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type RemoveThingFromThingGroupOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s RemoveThingFromThingGroupOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s RemoveThingFromThingGroupOutput) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
 
 const opRemoveThingFromThingGroup = "RemoveThingFromThingGroup"
 
@@ -105,7 +22,7 @@ const opRemoveThingFromThingGroup = "RemoveThingFromThingGroup"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) RemoveThingFromThingGroupRequest(input *RemoveThingFromThingGroupInput) RemoveThingFromThingGroupRequest {
+func (c *Client) RemoveThingFromThingGroupRequest(input *types.RemoveThingFromThingGroupInput) RemoveThingFromThingGroupRequest {
 	op := &aws.Operation{
 		Name:       opRemoveThingFromThingGroup,
 		HTTPMethod: "PUT",
@@ -113,10 +30,10 @@ func (c *Client) RemoveThingFromThingGroupRequest(input *RemoveThingFromThingGro
 	}
 
 	if input == nil {
-		input = &RemoveThingFromThingGroupInput{}
+		input = &types.RemoveThingFromThingGroupInput{}
 	}
 
-	req := c.newRequest(op, input, &RemoveThingFromThingGroupOutput{})
+	req := c.newRequest(op, input, &types.RemoveThingFromThingGroupOutput{})
 	return RemoveThingFromThingGroupRequest{Request: req, Input: input, Copy: c.RemoveThingFromThingGroupRequest}
 }
 
@@ -124,8 +41,8 @@ func (c *Client) RemoveThingFromThingGroupRequest(input *RemoveThingFromThingGro
 // RemoveThingFromThingGroup API operation.
 type RemoveThingFromThingGroupRequest struct {
 	*aws.Request
-	Input *RemoveThingFromThingGroupInput
-	Copy  func(*RemoveThingFromThingGroupInput) RemoveThingFromThingGroupRequest
+	Input *types.RemoveThingFromThingGroupInput
+	Copy  func(*types.RemoveThingFromThingGroupInput) RemoveThingFromThingGroupRequest
 }
 
 // Send marshals and sends the RemoveThingFromThingGroup API request.
@@ -137,7 +54,7 @@ func (r RemoveThingFromThingGroupRequest) Send(ctx context.Context) (*RemoveThin
 	}
 
 	resp := &RemoveThingFromThingGroupResponse{
-		RemoveThingFromThingGroupOutput: r.Request.Data.(*RemoveThingFromThingGroupOutput),
+		RemoveThingFromThingGroupOutput: r.Request.Data.(*types.RemoveThingFromThingGroupOutput),
 		response:                        &aws.Response{Request: r.Request},
 	}
 
@@ -147,7 +64,7 @@ func (r RemoveThingFromThingGroupRequest) Send(ctx context.Context) (*RemoveThin
 // RemoveThingFromThingGroupResponse is the response type for the
 // RemoveThingFromThingGroup API operation.
 type RemoveThingFromThingGroupResponse struct {
-	*RemoveThingFromThingGroupOutput
+	*types.RemoveThingFromThingGroupOutput
 
 	response *aws.Response
 }

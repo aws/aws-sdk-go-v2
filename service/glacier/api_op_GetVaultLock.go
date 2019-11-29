@@ -6,123 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/glacier/types"
 )
-
-// The input values for GetVaultLock.
-type GetVaultLockInput struct {
-	_ struct{} `type:"structure"`
-
-	// The AccountId value is the AWS account ID of the account that owns the vault.
-	// You can either specify an AWS account ID or optionally a single '-' (hyphen),
-	// in which case Amazon S3 Glacier uses the AWS account ID associated with the
-	// credentials used to sign the request. If you use an account ID, do not include
-	// any hyphens ('-') in the ID.
-	//
-	// AccountId is a required field
-	AccountId *string `location:"uri" locationName:"accountId" type:"string" required:"true"`
-
-	// The name of the vault.
-	//
-	// VaultName is a required field
-	VaultName *string `location:"uri" locationName:"vaultName" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetVaultLockInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetVaultLockInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetVaultLockInput"}
-
-	if s.AccountId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("AccountId"))
-	}
-
-	if s.VaultName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("VaultName"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetVaultLockInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.AccountId != nil {
-		v := *s.AccountId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "accountId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.VaultName != nil {
-		v := *s.VaultName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "vaultName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-// Contains the Amazon S3 Glacier response to your request.
-type GetVaultLockOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The UTC date and time at which the vault lock was put into the InProgress
-	// state.
-	CreationDate *string `type:"string"`
-
-	// The UTC date and time at which the lock ID expires. This value can be null
-	// if the vault lock is in a Locked state.
-	ExpirationDate *string `type:"string"`
-
-	// The vault lock policy as a JSON string, which uses "\" as an escape character.
-	Policy *string `type:"string"`
-
-	// The state of the vault lock. InProgress or Locked.
-	State *string `type:"string"`
-}
-
-// String returns the string representation
-func (s GetVaultLockOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetVaultLockOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.CreationDate != nil {
-		v := *s.CreationDate
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "CreationDate", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.ExpirationDate != nil {
-		v := *s.ExpirationDate
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "ExpirationDate", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Policy != nil {
-		v := *s.Policy
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "Policy", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.State != nil {
-		v := *s.State
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "State", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opGetVaultLock = "GetVaultLock"
 
@@ -156,7 +41,7 @@ const opGetVaultLock = "GetVaultLock"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) GetVaultLockRequest(input *GetVaultLockInput) GetVaultLockRequest {
+func (c *Client) GetVaultLockRequest(input *types.GetVaultLockInput) GetVaultLockRequest {
 	op := &aws.Operation{
 		Name:       opGetVaultLock,
 		HTTPMethod: "GET",
@@ -164,10 +49,10 @@ func (c *Client) GetVaultLockRequest(input *GetVaultLockInput) GetVaultLockReque
 	}
 
 	if input == nil {
-		input = &GetVaultLockInput{}
+		input = &types.GetVaultLockInput{}
 	}
 
-	req := c.newRequest(op, input, &GetVaultLockOutput{})
+	req := c.newRequest(op, input, &types.GetVaultLockOutput{})
 	return GetVaultLockRequest{Request: req, Input: input, Copy: c.GetVaultLockRequest}
 }
 
@@ -175,8 +60,8 @@ func (c *Client) GetVaultLockRequest(input *GetVaultLockInput) GetVaultLockReque
 // GetVaultLock API operation.
 type GetVaultLockRequest struct {
 	*aws.Request
-	Input *GetVaultLockInput
-	Copy  func(*GetVaultLockInput) GetVaultLockRequest
+	Input *types.GetVaultLockInput
+	Copy  func(*types.GetVaultLockInput) GetVaultLockRequest
 }
 
 // Send marshals and sends the GetVaultLock API request.
@@ -188,7 +73,7 @@ func (r GetVaultLockRequest) Send(ctx context.Context) (*GetVaultLockResponse, e
 	}
 
 	resp := &GetVaultLockResponse{
-		GetVaultLockOutput: r.Request.Data.(*GetVaultLockOutput),
+		GetVaultLockOutput: r.Request.Data.(*types.GetVaultLockOutput),
 		response:           &aws.Response{Request: r.Request},
 	}
 
@@ -198,7 +83,7 @@ func (r GetVaultLockRequest) Send(ctx context.Context) (*GetVaultLockResponse, e
 // GetVaultLockResponse is the response type for the
 // GetVaultLock API operation.
 type GetVaultLockResponse struct {
-	*GetVaultLockOutput
+	*types.GetVaultLockOutput
 
 	response *aws.Response
 }

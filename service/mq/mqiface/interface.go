@@ -10,6 +10,7 @@ package mqiface
 
 import (
 	"github.com/aws/aws-sdk-go-v2/service/mq"
+	"github.com/aws/aws-sdk-go-v2/service/mq/types"
 )
 
 // ClientAPI provides an interface to enable mocking the
@@ -43,7 +44,7 @@ import (
 //    type mockClientClient struct {
 //        mqiface.ClientPI
 //    }
-//    func (m *mockClientClient) CreateBroker(input *mq.CreateBrokerInput) (*mq.CreateBrokerOutput, error) {
+//    func (m *mockClientClient) CreateBroker(input *types.CreateBrokerInput) (*types.CreateBrokerOutput, error) {
 //        // mock response/functionality
 //    }
 //
@@ -61,49 +62,49 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type ClientAPI interface {
-	CreateBrokerRequest(*mq.CreateBrokerInput) mq.CreateBrokerRequest
+	CreateBrokerRequest(*types.CreateBrokerInput) mq.CreateBrokerRequest
 
-	CreateConfigurationRequest(*mq.CreateConfigurationInput) mq.CreateConfigurationRequest
+	CreateConfigurationRequest(*types.CreateConfigurationInput) mq.CreateConfigurationRequest
 
-	CreateTagsRequest(*mq.CreateTagsInput) mq.CreateTagsRequest
+	CreateTagsRequest(*types.CreateTagsInput) mq.CreateTagsRequest
 
-	CreateUserRequest(*mq.CreateUserInput) mq.CreateUserRequest
+	CreateUserRequest(*types.CreateUserInput) mq.CreateUserRequest
 
-	DeleteBrokerRequest(*mq.DeleteBrokerInput) mq.DeleteBrokerRequest
+	DeleteBrokerRequest(*types.DeleteBrokerInput) mq.DeleteBrokerRequest
 
-	DeleteTagsRequest(*mq.DeleteTagsInput) mq.DeleteTagsRequest
+	DeleteTagsRequest(*types.DeleteTagsInput) mq.DeleteTagsRequest
 
-	DeleteUserRequest(*mq.DeleteUserInput) mq.DeleteUserRequest
+	DeleteUserRequest(*types.DeleteUserInput) mq.DeleteUserRequest
 
-	DescribeBrokerRequest(*mq.DescribeBrokerInput) mq.DescribeBrokerRequest
+	DescribeBrokerRequest(*types.DescribeBrokerInput) mq.DescribeBrokerRequest
 
-	DescribeBrokerEngineTypesRequest(*mq.DescribeBrokerEngineTypesInput) mq.DescribeBrokerEngineTypesRequest
+	DescribeBrokerEngineTypesRequest(*types.DescribeBrokerEngineTypesInput) mq.DescribeBrokerEngineTypesRequest
 
-	DescribeBrokerInstanceOptionsRequest(*mq.DescribeBrokerInstanceOptionsInput) mq.DescribeBrokerInstanceOptionsRequest
+	DescribeBrokerInstanceOptionsRequest(*types.DescribeBrokerInstanceOptionsInput) mq.DescribeBrokerInstanceOptionsRequest
 
-	DescribeConfigurationRequest(*mq.DescribeConfigurationInput) mq.DescribeConfigurationRequest
+	DescribeConfigurationRequest(*types.DescribeConfigurationInput) mq.DescribeConfigurationRequest
 
-	DescribeConfigurationRevisionRequest(*mq.DescribeConfigurationRevisionInput) mq.DescribeConfigurationRevisionRequest
+	DescribeConfigurationRevisionRequest(*types.DescribeConfigurationRevisionInput) mq.DescribeConfigurationRevisionRequest
 
-	DescribeUserRequest(*mq.DescribeUserInput) mq.DescribeUserRequest
+	DescribeUserRequest(*types.DescribeUserInput) mq.DescribeUserRequest
 
-	ListBrokersRequest(*mq.ListBrokersInput) mq.ListBrokersRequest
+	ListBrokersRequest(*types.ListBrokersInput) mq.ListBrokersRequest
 
-	ListConfigurationRevisionsRequest(*mq.ListConfigurationRevisionsInput) mq.ListConfigurationRevisionsRequest
+	ListConfigurationRevisionsRequest(*types.ListConfigurationRevisionsInput) mq.ListConfigurationRevisionsRequest
 
-	ListConfigurationsRequest(*mq.ListConfigurationsInput) mq.ListConfigurationsRequest
+	ListConfigurationsRequest(*types.ListConfigurationsInput) mq.ListConfigurationsRequest
 
-	ListTagsRequest(*mq.ListTagsInput) mq.ListTagsRequest
+	ListTagsRequest(*types.ListTagsInput) mq.ListTagsRequest
 
-	ListUsersRequest(*mq.ListUsersInput) mq.ListUsersRequest
+	ListUsersRequest(*types.ListUsersInput) mq.ListUsersRequest
 
-	RebootBrokerRequest(*mq.RebootBrokerInput) mq.RebootBrokerRequest
+	RebootBrokerRequest(*types.RebootBrokerInput) mq.RebootBrokerRequest
 
-	UpdateBrokerRequest(*mq.UpdateBrokerInput) mq.UpdateBrokerRequest
+	UpdateBrokerRequest(*types.UpdateBrokerInput) mq.UpdateBrokerRequest
 
-	UpdateConfigurationRequest(*mq.UpdateConfigurationInput) mq.UpdateConfigurationRequest
+	UpdateConfigurationRequest(*types.UpdateConfigurationInput) mq.UpdateConfigurationRequest
 
-	UpdateUserRequest(*mq.UpdateUserInput) mq.UpdateUserRequest
+	UpdateUserRequest(*types.UpdateUserInput) mq.UpdateUserRequest
 }
 
 var _ ClientAPI = (*mq.Client)(nil)

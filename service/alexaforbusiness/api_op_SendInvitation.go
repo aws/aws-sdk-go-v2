@@ -6,29 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/alexaforbusiness/types"
 )
-
-type SendInvitationInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ARN of the user to whom to send an invitation. Required.
-	UserArn *string `type:"string"`
-}
-
-// String returns the string representation
-func (s SendInvitationInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type SendInvitationOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s SendInvitationOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opSendInvitation = "SendInvitation"
 
@@ -46,7 +25,7 @@ const opSendInvitation = "SendInvitation"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/SendInvitation
-func (c *Client) SendInvitationRequest(input *SendInvitationInput) SendInvitationRequest {
+func (c *Client) SendInvitationRequest(input *types.SendInvitationInput) SendInvitationRequest {
 	op := &aws.Operation{
 		Name:       opSendInvitation,
 		HTTPMethod: "POST",
@@ -54,10 +33,10 @@ func (c *Client) SendInvitationRequest(input *SendInvitationInput) SendInvitatio
 	}
 
 	if input == nil {
-		input = &SendInvitationInput{}
+		input = &types.SendInvitationInput{}
 	}
 
-	req := c.newRequest(op, input, &SendInvitationOutput{})
+	req := c.newRequest(op, input, &types.SendInvitationOutput{})
 	return SendInvitationRequest{Request: req, Input: input, Copy: c.SendInvitationRequest}
 }
 
@@ -65,8 +44,8 @@ func (c *Client) SendInvitationRequest(input *SendInvitationInput) SendInvitatio
 // SendInvitation API operation.
 type SendInvitationRequest struct {
 	*aws.Request
-	Input *SendInvitationInput
-	Copy  func(*SendInvitationInput) SendInvitationRequest
+	Input *types.SendInvitationInput
+	Copy  func(*types.SendInvitationInput) SendInvitationRequest
 }
 
 // Send marshals and sends the SendInvitation API request.
@@ -78,7 +57,7 @@ func (r SendInvitationRequest) Send(ctx context.Context) (*SendInvitationRespons
 	}
 
 	resp := &SendInvitationResponse{
-		SendInvitationOutput: r.Request.Data.(*SendInvitationOutput),
+		SendInvitationOutput: r.Request.Data.(*types.SendInvitationOutput),
 		response:             &aws.Response{Request: r.Request},
 	}
 
@@ -88,7 +67,7 @@ func (r SendInvitationRequest) Send(ctx context.Context) (*SendInvitationRespons
 // SendInvitationResponse is the response type for the
 // SendInvitation API operation.
 type SendInvitationResponse struct {
-	*SendInvitationOutput
+	*types.SendInvitationOutput
 
 	response *aws.Response
 }

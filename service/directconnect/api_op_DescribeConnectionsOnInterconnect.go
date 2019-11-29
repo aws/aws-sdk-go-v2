@@ -6,48 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/directconnect/types"
 )
-
-type DescribeConnectionsOnInterconnectInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the interconnect.
-	//
-	// InterconnectId is a required field
-	InterconnectId *string `locationName:"interconnectId" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeConnectionsOnInterconnectInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeConnectionsOnInterconnectInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeConnectionsOnInterconnectInput"}
-
-	if s.InterconnectId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("InterconnectId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribeConnectionsOnInterconnectOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The connections.
-	Connections []Connection `locationName:"connections" type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeConnectionsOnInterconnectOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeConnectionsOnInterconnect = "DescribeConnectionsOnInterconnect"
 
@@ -68,7 +28,7 @@ const opDescribeConnectionsOnInterconnect = "DescribeConnectionsOnInterconnect"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DescribeConnectionsOnInterconnect
-func (c *Client) DescribeConnectionsOnInterconnectRequest(input *DescribeConnectionsOnInterconnectInput) DescribeConnectionsOnInterconnectRequest {
+func (c *Client) DescribeConnectionsOnInterconnectRequest(input *types.DescribeConnectionsOnInterconnectInput) DescribeConnectionsOnInterconnectRequest {
 	if c.Client.Config.Logger != nil {
 		c.Client.Config.Logger.Log("This operation, DescribeConnectionsOnInterconnect, has been deprecated")
 	}
@@ -79,10 +39,10 @@ func (c *Client) DescribeConnectionsOnInterconnectRequest(input *DescribeConnect
 	}
 
 	if input == nil {
-		input = &DescribeConnectionsOnInterconnectInput{}
+		input = &types.DescribeConnectionsOnInterconnectInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeConnectionsOnInterconnectOutput{})
+	req := c.newRequest(op, input, &types.DescribeConnectionsOnInterconnectOutput{})
 	return DescribeConnectionsOnInterconnectRequest{Request: req, Input: input, Copy: c.DescribeConnectionsOnInterconnectRequest}
 }
 
@@ -90,8 +50,8 @@ func (c *Client) DescribeConnectionsOnInterconnectRequest(input *DescribeConnect
 // DescribeConnectionsOnInterconnect API operation.
 type DescribeConnectionsOnInterconnectRequest struct {
 	*aws.Request
-	Input *DescribeConnectionsOnInterconnectInput
-	Copy  func(*DescribeConnectionsOnInterconnectInput) DescribeConnectionsOnInterconnectRequest
+	Input *types.DescribeConnectionsOnInterconnectInput
+	Copy  func(*types.DescribeConnectionsOnInterconnectInput) DescribeConnectionsOnInterconnectRequest
 }
 
 // Send marshals and sends the DescribeConnectionsOnInterconnect API request.
@@ -103,7 +63,7 @@ func (r DescribeConnectionsOnInterconnectRequest) Send(ctx context.Context) (*De
 	}
 
 	resp := &DescribeConnectionsOnInterconnectResponse{
-		DescribeConnectionsOnInterconnectOutput: r.Request.Data.(*DescribeConnectionsOnInterconnectOutput),
+		DescribeConnectionsOnInterconnectOutput: r.Request.Data.(*types.DescribeConnectionsOnInterconnectOutput),
 		response:                                &aws.Response{Request: r.Request},
 	}
 
@@ -113,7 +73,7 @@ func (r DescribeConnectionsOnInterconnectRequest) Send(ctx context.Context) (*De
 // DescribeConnectionsOnInterconnectResponse is the response type for the
 // DescribeConnectionsOnInterconnect API operation.
 type DescribeConnectionsOnInterconnectResponse struct {
-	*DescribeConnectionsOnInterconnectOutput
+	*types.DescribeConnectionsOnInterconnectOutput
 
 	response *aws.Response
 }

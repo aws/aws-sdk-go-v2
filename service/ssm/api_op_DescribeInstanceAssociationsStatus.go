@@ -6,64 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ssm/types"
 )
-
-type DescribeInstanceAssociationsStatusInput struct {
-	_ struct{} `type:"structure"`
-
-	// The instance IDs for which you want association status information.
-	//
-	// InstanceId is a required field
-	InstanceId *string `type:"string" required:"true"`
-
-	// The maximum number of items to return for this call. The call also returns
-	// a token that you can specify in a subsequent call to get the next set of
-	// results.
-	MaxResults *int64 `min:"1" type:"integer"`
-
-	// The token for the next set of items to return. (You received this token from
-	// a previous call.)
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeInstanceAssociationsStatusInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeInstanceAssociationsStatusInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeInstanceAssociationsStatusInput"}
-
-	if s.InstanceId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("InstanceId"))
-	}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribeInstanceAssociationsStatusOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Status information about the association.
-	InstanceAssociationStatusInfos []InstanceAssociationStatusInfo `type:"list"`
-
-	// The token to use when requesting the next set of items. If there are no additional
-	// items to return, the string is empty.
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeInstanceAssociationsStatusOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeInstanceAssociationsStatus = "DescribeInstanceAssociationsStatus"
 
@@ -80,7 +24,7 @@ const opDescribeInstanceAssociationsStatus = "DescribeInstanceAssociationsStatus
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeInstanceAssociationsStatus
-func (c *Client) DescribeInstanceAssociationsStatusRequest(input *DescribeInstanceAssociationsStatusInput) DescribeInstanceAssociationsStatusRequest {
+func (c *Client) DescribeInstanceAssociationsStatusRequest(input *types.DescribeInstanceAssociationsStatusInput) DescribeInstanceAssociationsStatusRequest {
 	op := &aws.Operation{
 		Name:       opDescribeInstanceAssociationsStatus,
 		HTTPMethod: "POST",
@@ -88,10 +32,10 @@ func (c *Client) DescribeInstanceAssociationsStatusRequest(input *DescribeInstan
 	}
 
 	if input == nil {
-		input = &DescribeInstanceAssociationsStatusInput{}
+		input = &types.DescribeInstanceAssociationsStatusInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeInstanceAssociationsStatusOutput{})
+	req := c.newRequest(op, input, &types.DescribeInstanceAssociationsStatusOutput{})
 	return DescribeInstanceAssociationsStatusRequest{Request: req, Input: input, Copy: c.DescribeInstanceAssociationsStatusRequest}
 }
 
@@ -99,8 +43,8 @@ func (c *Client) DescribeInstanceAssociationsStatusRequest(input *DescribeInstan
 // DescribeInstanceAssociationsStatus API operation.
 type DescribeInstanceAssociationsStatusRequest struct {
 	*aws.Request
-	Input *DescribeInstanceAssociationsStatusInput
-	Copy  func(*DescribeInstanceAssociationsStatusInput) DescribeInstanceAssociationsStatusRequest
+	Input *types.DescribeInstanceAssociationsStatusInput
+	Copy  func(*types.DescribeInstanceAssociationsStatusInput) DescribeInstanceAssociationsStatusRequest
 }
 
 // Send marshals and sends the DescribeInstanceAssociationsStatus API request.
@@ -112,7 +56,7 @@ func (r DescribeInstanceAssociationsStatusRequest) Send(ctx context.Context) (*D
 	}
 
 	resp := &DescribeInstanceAssociationsStatusResponse{
-		DescribeInstanceAssociationsStatusOutput: r.Request.Data.(*DescribeInstanceAssociationsStatusOutput),
+		DescribeInstanceAssociationsStatusOutput: r.Request.Data.(*types.DescribeInstanceAssociationsStatusOutput),
 		response:                                 &aws.Response{Request: r.Request},
 	}
 
@@ -122,7 +66,7 @@ func (r DescribeInstanceAssociationsStatusRequest) Send(ctx context.Context) (*D
 // DescribeInstanceAssociationsStatusResponse is the response type for the
 // DescribeInstanceAssociationsStatus API operation.
 type DescribeInstanceAssociationsStatusResponse struct {
-	*DescribeInstanceAssociationsStatusOutput
+	*types.DescribeInstanceAssociationsStatusOutput
 
 	response *aws.Response
 }

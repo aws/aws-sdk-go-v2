@@ -6,56 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/databasemigrationservice/types"
 )
-
-type DescribeReplicationTaskAssessmentResultsInput struct {
-	_ struct{} `type:"structure"`
-
-	// An optional pagination token provided by a previous request. If this parameter
-	// is specified, the response includes only records beyond the marker, up to
-	// the value specified by MaxRecords.
-	Marker *string `type:"string"`
-
-	// The maximum number of records to include in the response. If more records
-	// exist than the specified MaxRecords value, a pagination token called a marker
-	// is included in the response so that the remaining results can be retrieved.
-	//
-	// Default: 100
-	//
-	// Constraints: Minimum 20, maximum 100.
-	MaxRecords *int64 `type:"integer"`
-
-	// - The Amazon Resource Name (ARN) string that uniquely identifies the task.
-	// When this input parameter is specified the API will return only one result
-	// and ignore the values of the max-records and marker parameters.
-	ReplicationTaskArn *string `type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeReplicationTaskAssessmentResultsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type DescribeReplicationTaskAssessmentResultsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// - The Amazon S3 bucket where the task assessment report is located.
-	BucketName *string `type:"string"`
-
-	// An optional pagination token provided by a previous request. If this parameter
-	// is specified, the response includes only records beyond the marker, up to
-	// the value specified by MaxRecords.
-	Marker *string `type:"string"`
-
-	// The task assessment report.
-	ReplicationTaskAssessmentResults []ReplicationTaskAssessmentResult `type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeReplicationTaskAssessmentResultsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeReplicationTaskAssessmentResults = "DescribeReplicationTaskAssessmentResults"
 
@@ -73,7 +25,7 @@ const opDescribeReplicationTaskAssessmentResults = "DescribeReplicationTaskAsses
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeReplicationTaskAssessmentResults
-func (c *Client) DescribeReplicationTaskAssessmentResultsRequest(input *DescribeReplicationTaskAssessmentResultsInput) DescribeReplicationTaskAssessmentResultsRequest {
+func (c *Client) DescribeReplicationTaskAssessmentResultsRequest(input *types.DescribeReplicationTaskAssessmentResultsInput) DescribeReplicationTaskAssessmentResultsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeReplicationTaskAssessmentResults,
 		HTTPMethod: "POST",
@@ -87,10 +39,10 @@ func (c *Client) DescribeReplicationTaskAssessmentResultsRequest(input *Describe
 	}
 
 	if input == nil {
-		input = &DescribeReplicationTaskAssessmentResultsInput{}
+		input = &types.DescribeReplicationTaskAssessmentResultsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeReplicationTaskAssessmentResultsOutput{})
+	req := c.newRequest(op, input, &types.DescribeReplicationTaskAssessmentResultsOutput{})
 	return DescribeReplicationTaskAssessmentResultsRequest{Request: req, Input: input, Copy: c.DescribeReplicationTaskAssessmentResultsRequest}
 }
 
@@ -98,8 +50,8 @@ func (c *Client) DescribeReplicationTaskAssessmentResultsRequest(input *Describe
 // DescribeReplicationTaskAssessmentResults API operation.
 type DescribeReplicationTaskAssessmentResultsRequest struct {
 	*aws.Request
-	Input *DescribeReplicationTaskAssessmentResultsInput
-	Copy  func(*DescribeReplicationTaskAssessmentResultsInput) DescribeReplicationTaskAssessmentResultsRequest
+	Input *types.DescribeReplicationTaskAssessmentResultsInput
+	Copy  func(*types.DescribeReplicationTaskAssessmentResultsInput) DescribeReplicationTaskAssessmentResultsRequest
 }
 
 // Send marshals and sends the DescribeReplicationTaskAssessmentResults API request.
@@ -111,7 +63,7 @@ func (r DescribeReplicationTaskAssessmentResultsRequest) Send(ctx context.Contex
 	}
 
 	resp := &DescribeReplicationTaskAssessmentResultsResponse{
-		DescribeReplicationTaskAssessmentResultsOutput: r.Request.Data.(*DescribeReplicationTaskAssessmentResultsOutput),
+		DescribeReplicationTaskAssessmentResultsOutput: r.Request.Data.(*types.DescribeReplicationTaskAssessmentResultsOutput),
 		response: &aws.Response{Request: r.Request},
 	}
 
@@ -141,7 +93,7 @@ func NewDescribeReplicationTaskAssessmentResultsPaginator(req DescribeReplicatio
 	return DescribeReplicationTaskAssessmentResultsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *DescribeReplicationTaskAssessmentResultsInput
+				var inCpy *types.DescribeReplicationTaskAssessmentResultsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -161,14 +113,14 @@ type DescribeReplicationTaskAssessmentResultsPaginator struct {
 	aws.Pager
 }
 
-func (p *DescribeReplicationTaskAssessmentResultsPaginator) CurrentPage() *DescribeReplicationTaskAssessmentResultsOutput {
-	return p.Pager.CurrentPage().(*DescribeReplicationTaskAssessmentResultsOutput)
+func (p *DescribeReplicationTaskAssessmentResultsPaginator) CurrentPage() *types.DescribeReplicationTaskAssessmentResultsOutput {
+	return p.Pager.CurrentPage().(*types.DescribeReplicationTaskAssessmentResultsOutput)
 }
 
 // DescribeReplicationTaskAssessmentResultsResponse is the response type for the
 // DescribeReplicationTaskAssessmentResults API operation.
 type DescribeReplicationTaskAssessmentResultsResponse struct {
-	*DescribeReplicationTaskAssessmentResultsOutput
+	*types.DescribeReplicationTaskAssessmentResultsOutput
 
 	response *aws.Response
 }

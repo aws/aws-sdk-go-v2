@@ -6,91 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/restjson"
+	"github.com/aws/aws-sdk-go-v2/service/elasticsearchservice/types"
 )
-
-// Container for the parameters to the RemoveTags operation. Specify the ARN
-// for the Elasticsearch domain from which you want to remove the specified
-// TagKey.
-type RemoveTagsInput struct {
-	_ struct{} `type:"structure"`
-
-	// Specifies the ARN for the Elasticsearch domain from which you want to delete
-	// the specified tags.
-	//
-	// ARN is a required field
-	ARN *string `type:"string" required:"true"`
-
-	// Specifies the TagKey list which you want to remove from the Elasticsearch
-	// domain.
-	//
-	// TagKeys is a required field
-	TagKeys []string `type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s RemoveTagsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *RemoveTagsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "RemoveTagsInput"}
-
-	if s.ARN == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ARN"))
-	}
-
-	if s.TagKeys == nil {
-		invalidParams.Add(aws.NewErrParamRequired("TagKeys"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s RemoveTagsInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.ARN != nil {
-		v := *s.ARN
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "ARN", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.TagKeys != nil {
-		v := s.TagKeys
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "TagKeys", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
-		}
-		ls0.End()
-
-	}
-	return nil
-}
-
-type RemoveTagsOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s RemoveTagsOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s RemoveTagsOutput) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
 
 const opRemoveTags = "RemoveTags"
 
@@ -105,7 +24,7 @@ const opRemoveTags = "RemoveTags"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) RemoveTagsRequest(input *RemoveTagsInput) RemoveTagsRequest {
+func (c *Client) RemoveTagsRequest(input *types.RemoveTagsInput) RemoveTagsRequest {
 	op := &aws.Operation{
 		Name:       opRemoveTags,
 		HTTPMethod: "POST",
@@ -113,10 +32,10 @@ func (c *Client) RemoveTagsRequest(input *RemoveTagsInput) RemoveTagsRequest {
 	}
 
 	if input == nil {
-		input = &RemoveTagsInput{}
+		input = &types.RemoveTagsInput{}
 	}
 
-	req := c.newRequest(op, input, &RemoveTagsOutput{})
+	req := c.newRequest(op, input, &types.RemoveTagsOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return RemoveTagsRequest{Request: req, Input: input, Copy: c.RemoveTagsRequest}
@@ -126,8 +45,8 @@ func (c *Client) RemoveTagsRequest(input *RemoveTagsInput) RemoveTagsRequest {
 // RemoveTags API operation.
 type RemoveTagsRequest struct {
 	*aws.Request
-	Input *RemoveTagsInput
-	Copy  func(*RemoveTagsInput) RemoveTagsRequest
+	Input *types.RemoveTagsInput
+	Copy  func(*types.RemoveTagsInput) RemoveTagsRequest
 }
 
 // Send marshals and sends the RemoveTags API request.
@@ -139,7 +58,7 @@ func (r RemoveTagsRequest) Send(ctx context.Context) (*RemoveTagsResponse, error
 	}
 
 	resp := &RemoveTagsResponse{
-		RemoveTagsOutput: r.Request.Data.(*RemoveTagsOutput),
+		RemoveTagsOutput: r.Request.Data.(*types.RemoveTagsOutput),
 		response:         &aws.Response{Request: r.Request},
 	}
 
@@ -149,7 +68,7 @@ func (r RemoveTagsRequest) Send(ctx context.Context) (*RemoveTagsResponse, error
 // RemoveTagsResponse is the response type for the
 // RemoveTags API operation.
 type RemoveTagsResponse struct {
-	*RemoveTagsOutput
+	*types.RemoveTagsOutput
 
 	response *aws.Response
 }

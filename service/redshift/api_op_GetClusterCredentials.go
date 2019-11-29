@@ -4,151 +4,10 @@ package redshift
 
 import (
 	"context"
-	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/redshift/types"
 )
-
-// The request parameters to get cluster credentials.
-type GetClusterCredentialsInput struct {
-	_ struct{} `type:"structure"`
-
-	// Create a database user with the name specified for the user named in DbUser
-	// if one does not exist.
-	AutoCreate *bool `type:"boolean"`
-
-	// The unique identifier of the cluster that contains the database for which
-	// your are requesting credentials. This parameter is case sensitive.
-	//
-	// ClusterIdentifier is a required field
-	ClusterIdentifier *string `type:"string" required:"true"`
-
-	// A list of the names of existing database groups that the user named in DbUser
-	// will join for the current session, in addition to any group memberships for
-	// an existing user. If not specified, a new user is added only to PUBLIC.
-	//
-	// Database group name constraints
-	//
-	//    * Must be 1 to 64 alphanumeric characters or hyphens
-	//
-	//    * Must contain only lowercase letters, numbers, underscore, plus sign,
-	//    period (dot), at symbol (@), or hyphen.
-	//
-	//    * First character must be a letter.
-	//
-	//    * Must not contain a colon ( : ) or slash ( / ).
-	//
-	//    * Cannot be a reserved word. A list of reserved words can be found in
-	//    Reserved Words (http://docs.aws.amazon.com/redshift/latest/dg/r_pg_keywords.html)
-	//    in the Amazon Redshift Database Developer Guide.
-	DbGroups []string `locationNameList:"DbGroup" type:"list"`
-
-	// The name of a database that DbUser is authorized to log on to. If DbName
-	// is not specified, DbUser can log on to any existing database.
-	//
-	// Constraints:
-	//
-	//    * Must be 1 to 64 alphanumeric characters or hyphens
-	//
-	//    * Must contain only lowercase letters, numbers, underscore, plus sign,
-	//    period (dot), at symbol (@), or hyphen.
-	//
-	//    * First character must be a letter.
-	//
-	//    * Must not contain a colon ( : ) or slash ( / ).
-	//
-	//    * Cannot be a reserved word. A list of reserved words can be found in
-	//    Reserved Words (http://docs.aws.amazon.com/redshift/latest/dg/r_pg_keywords.html)
-	//    in the Amazon Redshift Database Developer Guide.
-	DbName *string `type:"string"`
-
-	// The name of a database user. If a user name matching DbUser exists in the
-	// database, the temporary user credentials have the same permissions as the
-	// existing user. If DbUser doesn't exist in the database and Autocreate is
-	// True, a new user is created using the value for DbUser with PUBLIC permissions.
-	// If a database user matching the value for DbUser doesn't exist and Autocreate
-	// is False, then the command succeeds but the connection attempt will fail
-	// because the user doesn't exist in the database.
-	//
-	// For more information, see CREATE USER (https://docs.aws.amazon.com/redshift/latest/dg/r_CREATE_USER.html)
-	// in the Amazon Redshift Database Developer Guide.
-	//
-	// Constraints:
-	//
-	//    * Must be 1 to 64 alphanumeric characters or hyphens. The user name can't
-	//    be PUBLIC.
-	//
-	//    * Must contain only lowercase letters, numbers, underscore, plus sign,
-	//    period (dot), at symbol (@), or hyphen.
-	//
-	//    * First character must be a letter.
-	//
-	//    * Must not contain a colon ( : ) or slash ( / ).
-	//
-	//    * Cannot be a reserved word. A list of reserved words can be found in
-	//    Reserved Words (http://docs.aws.amazon.com/redshift/latest/dg/r_pg_keywords.html)
-	//    in the Amazon Redshift Database Developer Guide.
-	//
-	// DbUser is a required field
-	DbUser *string `type:"string" required:"true"`
-
-	// The number of seconds until the returned temporary password expires.
-	//
-	// Constraint: minimum 900, maximum 3600.
-	//
-	// Default: 900
-	DurationSeconds *int64 `type:"integer"`
-}
-
-// String returns the string representation
-func (s GetClusterCredentialsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetClusterCredentialsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetClusterCredentialsInput"}
-
-	if s.ClusterIdentifier == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ClusterIdentifier"))
-	}
-
-	if s.DbUser == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DbUser"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Temporary credentials with authorization to log on to an Amazon Redshift
-// database.
-type GetClusterCredentialsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A temporary password that authorizes the user name returned by DbUser to
-	// log on to the database DbName.
-	DbPassword *string `type:"string" sensitive:"true"`
-
-	// A database user name that is authorized to log on to the database DbName
-	// using the password DbPassword. If the specified DbUser exists in the database,
-	// the new user name has the same database privileges as the the user named
-	// in DbUser. By default, the user is added to PUBLIC. If the DbGroups parameter
-	// is specifed, DbUser is added to the listed groups for any sessions created
-	// using these credentials.
-	DbUser *string `type:"string"`
-
-	// The date and time the password in DbPassword expires.
-	Expiration *time.Time `type:"timestamp"`
-}
-
-// String returns the string representation
-func (s GetClusterCredentialsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetClusterCredentials = "GetClusterCredentials"
 
@@ -188,7 +47,7 @@ const opGetClusterCredentials = "GetClusterCredentials"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/GetClusterCredentials
-func (c *Client) GetClusterCredentialsRequest(input *GetClusterCredentialsInput) GetClusterCredentialsRequest {
+func (c *Client) GetClusterCredentialsRequest(input *types.GetClusterCredentialsInput) GetClusterCredentialsRequest {
 	op := &aws.Operation{
 		Name:       opGetClusterCredentials,
 		HTTPMethod: "POST",
@@ -196,10 +55,10 @@ func (c *Client) GetClusterCredentialsRequest(input *GetClusterCredentialsInput)
 	}
 
 	if input == nil {
-		input = &GetClusterCredentialsInput{}
+		input = &types.GetClusterCredentialsInput{}
 	}
 
-	req := c.newRequest(op, input, &GetClusterCredentialsOutput{})
+	req := c.newRequest(op, input, &types.GetClusterCredentialsOutput{})
 	return GetClusterCredentialsRequest{Request: req, Input: input, Copy: c.GetClusterCredentialsRequest}
 }
 
@@ -207,8 +66,8 @@ func (c *Client) GetClusterCredentialsRequest(input *GetClusterCredentialsInput)
 // GetClusterCredentials API operation.
 type GetClusterCredentialsRequest struct {
 	*aws.Request
-	Input *GetClusterCredentialsInput
-	Copy  func(*GetClusterCredentialsInput) GetClusterCredentialsRequest
+	Input *types.GetClusterCredentialsInput
+	Copy  func(*types.GetClusterCredentialsInput) GetClusterCredentialsRequest
 }
 
 // Send marshals and sends the GetClusterCredentials API request.
@@ -220,7 +79,7 @@ func (r GetClusterCredentialsRequest) Send(ctx context.Context) (*GetClusterCred
 	}
 
 	resp := &GetClusterCredentialsResponse{
-		GetClusterCredentialsOutput: r.Request.Data.(*GetClusterCredentialsOutput),
+		GetClusterCredentialsOutput: r.Request.Data.(*types.GetClusterCredentialsOutput),
 		response:                    &aws.Response{Request: r.Request},
 	}
 
@@ -230,7 +89,7 @@ func (r GetClusterCredentialsRequest) Send(ctx context.Context) (*GetClusterCred
 // GetClusterCredentialsResponse is the response type for the
 // GetClusterCredentials API operation.
 type GetClusterCredentialsResponse struct {
-	*GetClusterCredentialsOutput
+	*types.GetClusterCredentialsOutput
 
 	response *aws.Response
 }

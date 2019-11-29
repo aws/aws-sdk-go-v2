@@ -10,6 +10,7 @@ package datasynciface
 
 import (
 	"github.com/aws/aws-sdk-go-v2/service/datasync"
+	"github.com/aws/aws-sdk-go-v2/service/datasync/types"
 )
 
 // ClientAPI provides an interface to enable mocking the
@@ -43,7 +44,7 @@ import (
 //    type mockClientClient struct {
 //        datasynciface.ClientPI
 //    }
-//    func (m *mockClientClient) CancelTaskExecution(input *datasync.CancelTaskExecutionInput) (*datasync.CancelTaskExecutionOutput, error) {
+//    func (m *mockClientClient) CancelTaskExecution(input *types.CancelTaskExecutionInput) (*types.CancelTaskExecutionOutput, error) {
 //        // mock response/functionality
 //    }
 //
@@ -61,59 +62,59 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type ClientAPI interface {
-	CancelTaskExecutionRequest(*datasync.CancelTaskExecutionInput) datasync.CancelTaskExecutionRequest
+	CancelTaskExecutionRequest(*types.CancelTaskExecutionInput) datasync.CancelTaskExecutionRequest
 
-	CreateAgentRequest(*datasync.CreateAgentInput) datasync.CreateAgentRequest
+	CreateAgentRequest(*types.CreateAgentInput) datasync.CreateAgentRequest
 
-	CreateLocationEfsRequest(*datasync.CreateLocationEfsInput) datasync.CreateLocationEfsRequest
+	CreateLocationEfsRequest(*types.CreateLocationEfsInput) datasync.CreateLocationEfsRequest
 
-	CreateLocationNfsRequest(*datasync.CreateLocationNfsInput) datasync.CreateLocationNfsRequest
+	CreateLocationNfsRequest(*types.CreateLocationNfsInput) datasync.CreateLocationNfsRequest
 
-	CreateLocationS3Request(*datasync.CreateLocationS3Input) datasync.CreateLocationS3Request
+	CreateLocationS3Request(*types.CreateLocationS3Input) datasync.CreateLocationS3Request
 
-	CreateLocationSmbRequest(*datasync.CreateLocationSmbInput) datasync.CreateLocationSmbRequest
+	CreateLocationSmbRequest(*types.CreateLocationSmbInput) datasync.CreateLocationSmbRequest
 
-	CreateTaskRequest(*datasync.CreateTaskInput) datasync.CreateTaskRequest
+	CreateTaskRequest(*types.CreateTaskInput) datasync.CreateTaskRequest
 
-	DeleteAgentRequest(*datasync.DeleteAgentInput) datasync.DeleteAgentRequest
+	DeleteAgentRequest(*types.DeleteAgentInput) datasync.DeleteAgentRequest
 
-	DeleteLocationRequest(*datasync.DeleteLocationInput) datasync.DeleteLocationRequest
+	DeleteLocationRequest(*types.DeleteLocationInput) datasync.DeleteLocationRequest
 
-	DeleteTaskRequest(*datasync.DeleteTaskInput) datasync.DeleteTaskRequest
+	DeleteTaskRequest(*types.DeleteTaskInput) datasync.DeleteTaskRequest
 
-	DescribeAgentRequest(*datasync.DescribeAgentInput) datasync.DescribeAgentRequest
+	DescribeAgentRequest(*types.DescribeAgentInput) datasync.DescribeAgentRequest
 
-	DescribeLocationEfsRequest(*datasync.DescribeLocationEfsInput) datasync.DescribeLocationEfsRequest
+	DescribeLocationEfsRequest(*types.DescribeLocationEfsInput) datasync.DescribeLocationEfsRequest
 
-	DescribeLocationNfsRequest(*datasync.DescribeLocationNfsInput) datasync.DescribeLocationNfsRequest
+	DescribeLocationNfsRequest(*types.DescribeLocationNfsInput) datasync.DescribeLocationNfsRequest
 
-	DescribeLocationS3Request(*datasync.DescribeLocationS3Input) datasync.DescribeLocationS3Request
+	DescribeLocationS3Request(*types.DescribeLocationS3Input) datasync.DescribeLocationS3Request
 
-	DescribeLocationSmbRequest(*datasync.DescribeLocationSmbInput) datasync.DescribeLocationSmbRequest
+	DescribeLocationSmbRequest(*types.DescribeLocationSmbInput) datasync.DescribeLocationSmbRequest
 
-	DescribeTaskRequest(*datasync.DescribeTaskInput) datasync.DescribeTaskRequest
+	DescribeTaskRequest(*types.DescribeTaskInput) datasync.DescribeTaskRequest
 
-	DescribeTaskExecutionRequest(*datasync.DescribeTaskExecutionInput) datasync.DescribeTaskExecutionRequest
+	DescribeTaskExecutionRequest(*types.DescribeTaskExecutionInput) datasync.DescribeTaskExecutionRequest
 
-	ListAgentsRequest(*datasync.ListAgentsInput) datasync.ListAgentsRequest
+	ListAgentsRequest(*types.ListAgentsInput) datasync.ListAgentsRequest
 
-	ListLocationsRequest(*datasync.ListLocationsInput) datasync.ListLocationsRequest
+	ListLocationsRequest(*types.ListLocationsInput) datasync.ListLocationsRequest
 
-	ListTagsForResourceRequest(*datasync.ListTagsForResourceInput) datasync.ListTagsForResourceRequest
+	ListTagsForResourceRequest(*types.ListTagsForResourceInput) datasync.ListTagsForResourceRequest
 
-	ListTaskExecutionsRequest(*datasync.ListTaskExecutionsInput) datasync.ListTaskExecutionsRequest
+	ListTaskExecutionsRequest(*types.ListTaskExecutionsInput) datasync.ListTaskExecutionsRequest
 
-	ListTasksRequest(*datasync.ListTasksInput) datasync.ListTasksRequest
+	ListTasksRequest(*types.ListTasksInput) datasync.ListTasksRequest
 
-	StartTaskExecutionRequest(*datasync.StartTaskExecutionInput) datasync.StartTaskExecutionRequest
+	StartTaskExecutionRequest(*types.StartTaskExecutionInput) datasync.StartTaskExecutionRequest
 
-	TagResourceRequest(*datasync.TagResourceInput) datasync.TagResourceRequest
+	TagResourceRequest(*types.TagResourceInput) datasync.TagResourceRequest
 
-	UntagResourceRequest(*datasync.UntagResourceInput) datasync.UntagResourceRequest
+	UntagResourceRequest(*types.UntagResourceInput) datasync.UntagResourceRequest
 
-	UpdateAgentRequest(*datasync.UpdateAgentInput) datasync.UpdateAgentRequest
+	UpdateAgentRequest(*types.UpdateAgentInput) datasync.UpdateAgentRequest
 
-	UpdateTaskRequest(*datasync.UpdateTaskInput) datasync.UpdateTaskRequest
+	UpdateTaskRequest(*types.UpdateTaskInput) datasync.UpdateTaskRequest
 }
 
 var _ ClientAPI = (*datasync.Client)(nil)

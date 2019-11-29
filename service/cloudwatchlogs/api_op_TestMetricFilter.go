@@ -6,63 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/cloudwatchlogs/types"
 )
-
-type TestMetricFilterInput struct {
-	_ struct{} `type:"structure"`
-
-	// A symbolic description of how CloudWatch Logs should interpret the data in
-	// each log event. For example, a log event may contain timestamps, IP addresses,
-	// strings, and so on. You use the filter pattern to specify what to look for
-	// in the log event message.
-	//
-	// FilterPattern is a required field
-	FilterPattern *string `locationName:"filterPattern" type:"string" required:"true"`
-
-	// The log event messages to test.
-	//
-	// LogEventMessages is a required field
-	LogEventMessages []string `locationName:"logEventMessages" min:"1" type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s TestMetricFilterInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *TestMetricFilterInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "TestMetricFilterInput"}
-
-	if s.FilterPattern == nil {
-		invalidParams.Add(aws.NewErrParamRequired("FilterPattern"))
-	}
-
-	if s.LogEventMessages == nil {
-		invalidParams.Add(aws.NewErrParamRequired("LogEventMessages"))
-	}
-	if s.LogEventMessages != nil && len(s.LogEventMessages) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("LogEventMessages", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type TestMetricFilterOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The matched events.
-	Matches []MetricFilterMatchRecord `locationName:"matches" type:"list"`
-}
-
-// String returns the string representation
-func (s TestMetricFilterOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opTestMetricFilter = "TestMetricFilter"
 
@@ -81,7 +26,7 @@ const opTestMetricFilter = "TestMetricFilter"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/TestMetricFilter
-func (c *Client) TestMetricFilterRequest(input *TestMetricFilterInput) TestMetricFilterRequest {
+func (c *Client) TestMetricFilterRequest(input *types.TestMetricFilterInput) TestMetricFilterRequest {
 	op := &aws.Operation{
 		Name:       opTestMetricFilter,
 		HTTPMethod: "POST",
@@ -89,10 +34,10 @@ func (c *Client) TestMetricFilterRequest(input *TestMetricFilterInput) TestMetri
 	}
 
 	if input == nil {
-		input = &TestMetricFilterInput{}
+		input = &types.TestMetricFilterInput{}
 	}
 
-	req := c.newRequest(op, input, &TestMetricFilterOutput{})
+	req := c.newRequest(op, input, &types.TestMetricFilterOutput{})
 	return TestMetricFilterRequest{Request: req, Input: input, Copy: c.TestMetricFilterRequest}
 }
 
@@ -100,8 +45,8 @@ func (c *Client) TestMetricFilterRequest(input *TestMetricFilterInput) TestMetri
 // TestMetricFilter API operation.
 type TestMetricFilterRequest struct {
 	*aws.Request
-	Input *TestMetricFilterInput
-	Copy  func(*TestMetricFilterInput) TestMetricFilterRequest
+	Input *types.TestMetricFilterInput
+	Copy  func(*types.TestMetricFilterInput) TestMetricFilterRequest
 }
 
 // Send marshals and sends the TestMetricFilter API request.
@@ -113,7 +58,7 @@ func (r TestMetricFilterRequest) Send(ctx context.Context) (*TestMetricFilterRes
 	}
 
 	resp := &TestMetricFilterResponse{
-		TestMetricFilterOutput: r.Request.Data.(*TestMetricFilterOutput),
+		TestMetricFilterOutput: r.Request.Data.(*types.TestMetricFilterOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -123,7 +68,7 @@ func (r TestMetricFilterRequest) Send(ctx context.Context) (*TestMetricFilterRes
 // TestMetricFilterResponse is the response type for the
 // TestMetricFilter API operation.
 type TestMetricFilterResponse struct {
-	*TestMetricFilterOutput
+	*types.TestMetricFilterOutput
 
 	response *aws.Response
 }

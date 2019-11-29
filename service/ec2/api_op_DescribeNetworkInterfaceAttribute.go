@@ -6,71 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-// Contains the parameters for DescribeNetworkInterfaceAttribute.
-type DescribeNetworkInterfaceAttributeInput struct {
-	_ struct{} `type:"structure"`
-
-	// The attribute of the network interface. This parameter is required.
-	Attribute NetworkInterfaceAttribute `locationName:"attribute" type:"string" enum:"true"`
-
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have
-	// the required permissions, the error response is DryRunOperation. Otherwise,
-	// it is UnauthorizedOperation.
-	DryRun *bool `locationName:"dryRun" type:"boolean"`
-
-	// The ID of the network interface.
-	//
-	// NetworkInterfaceId is a required field
-	NetworkInterfaceId *string `locationName:"networkInterfaceId" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeNetworkInterfaceAttributeInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeNetworkInterfaceAttributeInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeNetworkInterfaceAttributeInput"}
-
-	if s.NetworkInterfaceId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("NetworkInterfaceId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Contains the output of DescribeNetworkInterfaceAttribute.
-type DescribeNetworkInterfaceAttributeOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The attachment (if any) of the network interface.
-	Attachment *NetworkInterfaceAttachment `locationName:"attachment" type:"structure"`
-
-	// The description of the network interface.
-	Description *AttributeValue `locationName:"description" type:"structure"`
-
-	// The security groups associated with the network interface.
-	Groups []GroupIdentifier `locationName:"groupSet" locationNameList:"item" type:"list"`
-
-	// The ID of the network interface.
-	NetworkInterfaceId *string `locationName:"networkInterfaceId" type:"string"`
-
-	// Indicates whether source/destination checking is enabled.
-	SourceDestCheck *AttributeBooleanValue `locationName:"sourceDestCheck" type:"structure"`
-}
-
-// String returns the string representation
-func (s DescribeNetworkInterfaceAttributeOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeNetworkInterfaceAttribute = "DescribeNetworkInterfaceAttribute"
 
@@ -88,7 +25,7 @@ const opDescribeNetworkInterfaceAttribute = "DescribeNetworkInterfaceAttribute"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeNetworkInterfaceAttribute
-func (c *Client) DescribeNetworkInterfaceAttributeRequest(input *DescribeNetworkInterfaceAttributeInput) DescribeNetworkInterfaceAttributeRequest {
+func (c *Client) DescribeNetworkInterfaceAttributeRequest(input *types.DescribeNetworkInterfaceAttributeInput) DescribeNetworkInterfaceAttributeRequest {
 	op := &aws.Operation{
 		Name:       opDescribeNetworkInterfaceAttribute,
 		HTTPMethod: "POST",
@@ -96,10 +33,10 @@ func (c *Client) DescribeNetworkInterfaceAttributeRequest(input *DescribeNetwork
 	}
 
 	if input == nil {
-		input = &DescribeNetworkInterfaceAttributeInput{}
+		input = &types.DescribeNetworkInterfaceAttributeInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeNetworkInterfaceAttributeOutput{})
+	req := c.newRequest(op, input, &types.DescribeNetworkInterfaceAttributeOutput{})
 	return DescribeNetworkInterfaceAttributeRequest{Request: req, Input: input, Copy: c.DescribeNetworkInterfaceAttributeRequest}
 }
 
@@ -107,8 +44,8 @@ func (c *Client) DescribeNetworkInterfaceAttributeRequest(input *DescribeNetwork
 // DescribeNetworkInterfaceAttribute API operation.
 type DescribeNetworkInterfaceAttributeRequest struct {
 	*aws.Request
-	Input *DescribeNetworkInterfaceAttributeInput
-	Copy  func(*DescribeNetworkInterfaceAttributeInput) DescribeNetworkInterfaceAttributeRequest
+	Input *types.DescribeNetworkInterfaceAttributeInput
+	Copy  func(*types.DescribeNetworkInterfaceAttributeInput) DescribeNetworkInterfaceAttributeRequest
 }
 
 // Send marshals and sends the DescribeNetworkInterfaceAttribute API request.
@@ -120,7 +57,7 @@ func (r DescribeNetworkInterfaceAttributeRequest) Send(ctx context.Context) (*De
 	}
 
 	resp := &DescribeNetworkInterfaceAttributeResponse{
-		DescribeNetworkInterfaceAttributeOutput: r.Request.Data.(*DescribeNetworkInterfaceAttributeOutput),
+		DescribeNetworkInterfaceAttributeOutput: r.Request.Data.(*types.DescribeNetworkInterfaceAttributeOutput),
 		response:                                &aws.Response{Request: r.Request},
 	}
 
@@ -130,7 +67,7 @@ func (r DescribeNetworkInterfaceAttributeRequest) Send(ctx context.Context) (*De
 // DescribeNetworkInterfaceAttributeResponse is the response type for the
 // DescribeNetworkInterfaceAttribute API operation.
 type DescribeNetworkInterfaceAttributeResponse struct {
-	*DescribeNetworkInterfaceAttributeOutput
+	*types.DescribeNetworkInterfaceAttributeOutput
 
 	response *aws.Response
 }

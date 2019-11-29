@@ -6,32 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ses/types"
 )
-
-type GetAccountSendingEnabledInput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s GetAccountSendingEnabledInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Represents a request to return the email sending status for your Amazon SES
-// account in the current AWS Region.
-type GetAccountSendingEnabledOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Describes whether email sending is enabled or disabled for your Amazon SES
-	// account in the current AWS Region.
-	Enabled *bool `type:"boolean"`
-}
-
-// String returns the string representation
-func (s GetAccountSendingEnabledOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetAccountSendingEnabled = "GetAccountSendingEnabled"
 
@@ -51,7 +27,7 @@ const opGetAccountSendingEnabled = "GetAccountSendingEnabled"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/GetAccountSendingEnabled
-func (c *Client) GetAccountSendingEnabledRequest(input *GetAccountSendingEnabledInput) GetAccountSendingEnabledRequest {
+func (c *Client) GetAccountSendingEnabledRequest(input *types.GetAccountSendingEnabledInput) GetAccountSendingEnabledRequest {
 	op := &aws.Operation{
 		Name:       opGetAccountSendingEnabled,
 		HTTPMethod: "POST",
@@ -59,10 +35,10 @@ func (c *Client) GetAccountSendingEnabledRequest(input *GetAccountSendingEnabled
 	}
 
 	if input == nil {
-		input = &GetAccountSendingEnabledInput{}
+		input = &types.GetAccountSendingEnabledInput{}
 	}
 
-	req := c.newRequest(op, input, &GetAccountSendingEnabledOutput{})
+	req := c.newRequest(op, input, &types.GetAccountSendingEnabledOutput{})
 	return GetAccountSendingEnabledRequest{Request: req, Input: input, Copy: c.GetAccountSendingEnabledRequest}
 }
 
@@ -70,8 +46,8 @@ func (c *Client) GetAccountSendingEnabledRequest(input *GetAccountSendingEnabled
 // GetAccountSendingEnabled API operation.
 type GetAccountSendingEnabledRequest struct {
 	*aws.Request
-	Input *GetAccountSendingEnabledInput
-	Copy  func(*GetAccountSendingEnabledInput) GetAccountSendingEnabledRequest
+	Input *types.GetAccountSendingEnabledInput
+	Copy  func(*types.GetAccountSendingEnabledInput) GetAccountSendingEnabledRequest
 }
 
 // Send marshals and sends the GetAccountSendingEnabled API request.
@@ -83,7 +59,7 @@ func (r GetAccountSendingEnabledRequest) Send(ctx context.Context) (*GetAccountS
 	}
 
 	resp := &GetAccountSendingEnabledResponse{
-		GetAccountSendingEnabledOutput: r.Request.Data.(*GetAccountSendingEnabledOutput),
+		GetAccountSendingEnabledOutput: r.Request.Data.(*types.GetAccountSendingEnabledOutput),
 		response:                       &aws.Response{Request: r.Request},
 	}
 
@@ -93,7 +69,7 @@ func (r GetAccountSendingEnabledRequest) Send(ctx context.Context) (*GetAccountS
 // GetAccountSendingEnabledResponse is the response type for the
 // GetAccountSendingEnabled API operation.
 type GetAccountSendingEnabledResponse struct {
-	*GetAccountSendingEnabledOutput
+	*types.GetAccountSendingEnabledOutput
 
 	response *aws.Response
 }

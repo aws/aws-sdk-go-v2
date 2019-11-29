@@ -6,75 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/redshift/types"
 )
-
-// The result of the CreateSnapshotCopyGrant action.
-type CreateSnapshotCopyGrantInput struct {
-	_ struct{} `type:"structure"`
-
-	// The unique identifier of the customer master key (CMK) to which to grant
-	// Amazon Redshift permission. If no key is specified, the default key is used.
-	KmsKeyId *string `type:"string"`
-
-	// The name of the snapshot copy grant. This name must be unique in the region
-	// for the AWS account.
-	//
-	// Constraints:
-	//
-	//    * Must contain from 1 to 63 alphanumeric characters or hyphens.
-	//
-	//    * Alphabetic characters must be lowercase.
-	//
-	//    * First character must be a letter.
-	//
-	//    * Cannot end with a hyphen or contain two consecutive hyphens.
-	//
-	//    * Must be unique for all clusters within an AWS account.
-	//
-	// SnapshotCopyGrantName is a required field
-	SnapshotCopyGrantName *string `type:"string" required:"true"`
-
-	// A list of tag instances.
-	Tags []Tag `locationNameList:"Tag" type:"list"`
-}
-
-// String returns the string representation
-func (s CreateSnapshotCopyGrantInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateSnapshotCopyGrantInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateSnapshotCopyGrantInput"}
-
-	if s.SnapshotCopyGrantName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("SnapshotCopyGrantName"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type CreateSnapshotCopyGrantOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The snapshot copy grant that grants Amazon Redshift permission to encrypt
-	// copied snapshots with the specified customer master key (CMK) from AWS KMS
-	// in the destination region.
-	//
-	// For more information about managing snapshot copy grants, go to Amazon Redshift
-	// Database Encryption (https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-db-encryption.html)
-	// in the Amazon Redshift Cluster Management Guide.
-	SnapshotCopyGrant *SnapshotCopyGrant `type:"structure"`
-}
-
-// String returns the string representation
-func (s CreateSnapshotCopyGrantOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCreateSnapshotCopyGrant = "CreateSnapshotCopyGrant"
 
@@ -97,7 +30,7 @@ const opCreateSnapshotCopyGrant = "CreateSnapshotCopyGrant"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/CreateSnapshotCopyGrant
-func (c *Client) CreateSnapshotCopyGrantRequest(input *CreateSnapshotCopyGrantInput) CreateSnapshotCopyGrantRequest {
+func (c *Client) CreateSnapshotCopyGrantRequest(input *types.CreateSnapshotCopyGrantInput) CreateSnapshotCopyGrantRequest {
 	op := &aws.Operation{
 		Name:       opCreateSnapshotCopyGrant,
 		HTTPMethod: "POST",
@@ -105,10 +38,10 @@ func (c *Client) CreateSnapshotCopyGrantRequest(input *CreateSnapshotCopyGrantIn
 	}
 
 	if input == nil {
-		input = &CreateSnapshotCopyGrantInput{}
+		input = &types.CreateSnapshotCopyGrantInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateSnapshotCopyGrantOutput{})
+	req := c.newRequest(op, input, &types.CreateSnapshotCopyGrantOutput{})
 	return CreateSnapshotCopyGrantRequest{Request: req, Input: input, Copy: c.CreateSnapshotCopyGrantRequest}
 }
 
@@ -116,8 +49,8 @@ func (c *Client) CreateSnapshotCopyGrantRequest(input *CreateSnapshotCopyGrantIn
 // CreateSnapshotCopyGrant API operation.
 type CreateSnapshotCopyGrantRequest struct {
 	*aws.Request
-	Input *CreateSnapshotCopyGrantInput
-	Copy  func(*CreateSnapshotCopyGrantInput) CreateSnapshotCopyGrantRequest
+	Input *types.CreateSnapshotCopyGrantInput
+	Copy  func(*types.CreateSnapshotCopyGrantInput) CreateSnapshotCopyGrantRequest
 }
 
 // Send marshals and sends the CreateSnapshotCopyGrant API request.
@@ -129,7 +62,7 @@ func (r CreateSnapshotCopyGrantRequest) Send(ctx context.Context) (*CreateSnapsh
 	}
 
 	resp := &CreateSnapshotCopyGrantResponse{
-		CreateSnapshotCopyGrantOutput: r.Request.Data.(*CreateSnapshotCopyGrantOutput),
+		CreateSnapshotCopyGrantOutput: r.Request.Data.(*types.CreateSnapshotCopyGrantOutput),
 		response:                      &aws.Response{Request: r.Request},
 	}
 
@@ -139,7 +72,7 @@ func (r CreateSnapshotCopyGrantRequest) Send(ctx context.Context) (*CreateSnapsh
 // CreateSnapshotCopyGrantResponse is the response type for the
 // CreateSnapshotCopyGrant API operation.
 type CreateSnapshotCopyGrantResponse struct {
-	*CreateSnapshotCopyGrantOutput
+	*types.CreateSnapshotCopyGrantOutput
 
 	response *aws.Response
 }

@@ -6,102 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/securityhub/types"
 )
-
-type GetMembersInput struct {
-	_ struct{} `type:"structure"`
-
-	// A list of account IDs for the Security Hub member accounts that you want
-	// to return the details for.
-	//
-	// AccountIds is a required field
-	AccountIds []string `type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s GetMembersInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetMembersInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetMembersInput"}
-
-	if s.AccountIds == nil {
-		invalidParams.Add(aws.NewErrParamRequired("AccountIds"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetMembersInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.AccountIds != nil {
-		v := s.AccountIds
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "AccountIds", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
-		}
-		ls0.End()
-
-	}
-	return nil
-}
-
-type GetMembersOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A list of details about the Security Hub member accounts.
-	Members []Member `type:"list"`
-
-	// A list of account ID and email address pairs of the AWS accounts that couldn't
-	// be processed.
-	UnprocessedAccounts []Result `type:"list"`
-}
-
-// String returns the string representation
-func (s GetMembersOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetMembersOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.Members != nil {
-		v := s.Members
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "Members", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	if s.UnprocessedAccounts != nil {
-		v := s.UnprocessedAccounts
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "UnprocessedAccounts", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	return nil
-}
 
 const opGetMembers = "GetMembers"
 
@@ -119,7 +25,7 @@ const opGetMembers = "GetMembers"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/GetMembers
-func (c *Client) GetMembersRequest(input *GetMembersInput) GetMembersRequest {
+func (c *Client) GetMembersRequest(input *types.GetMembersInput) GetMembersRequest {
 	op := &aws.Operation{
 		Name:       opGetMembers,
 		HTTPMethod: "POST",
@@ -127,10 +33,10 @@ func (c *Client) GetMembersRequest(input *GetMembersInput) GetMembersRequest {
 	}
 
 	if input == nil {
-		input = &GetMembersInput{}
+		input = &types.GetMembersInput{}
 	}
 
-	req := c.newRequest(op, input, &GetMembersOutput{})
+	req := c.newRequest(op, input, &types.GetMembersOutput{})
 	return GetMembersRequest{Request: req, Input: input, Copy: c.GetMembersRequest}
 }
 
@@ -138,8 +44,8 @@ func (c *Client) GetMembersRequest(input *GetMembersInput) GetMembersRequest {
 // GetMembers API operation.
 type GetMembersRequest struct {
 	*aws.Request
-	Input *GetMembersInput
-	Copy  func(*GetMembersInput) GetMembersRequest
+	Input *types.GetMembersInput
+	Copy  func(*types.GetMembersInput) GetMembersRequest
 }
 
 // Send marshals and sends the GetMembers API request.
@@ -151,7 +57,7 @@ func (r GetMembersRequest) Send(ctx context.Context) (*GetMembersResponse, error
 	}
 
 	resp := &GetMembersResponse{
-		GetMembersOutput: r.Request.Data.(*GetMembersOutput),
+		GetMembersOutput: r.Request.Data.(*types.GetMembersOutput),
 		response:         &aws.Response{Request: r.Request},
 	}
 
@@ -161,7 +67,7 @@ func (r GetMembersRequest) Send(ctx context.Context) (*GetMembersResponse, error
 // GetMembersResponse is the response type for the
 // GetMembers API operation.
 type GetMembersResponse struct {
-	*GetMembersOutput
+	*types.GetMembersOutput
 
 	response *aws.Response
 }

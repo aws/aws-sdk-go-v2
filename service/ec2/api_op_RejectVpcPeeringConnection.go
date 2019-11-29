@@ -6,54 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-type RejectVpcPeeringConnectionInput struct {
-	_ struct{} `type:"structure"`
-
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have
-	// the required permissions, the error response is DryRunOperation. Otherwise,
-	// it is UnauthorizedOperation.
-	DryRun *bool `locationName:"dryRun" type:"boolean"`
-
-	// The ID of the VPC peering connection.
-	//
-	// VpcPeeringConnectionId is a required field
-	VpcPeeringConnectionId *string `locationName:"vpcPeeringConnectionId" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s RejectVpcPeeringConnectionInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *RejectVpcPeeringConnectionInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "RejectVpcPeeringConnectionInput"}
-
-	if s.VpcPeeringConnectionId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("VpcPeeringConnectionId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type RejectVpcPeeringConnectionOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Returns true if the request succeeds; otherwise, it returns an error.
-	Return *bool `locationName:"return" type:"boolean"`
-}
-
-// String returns the string representation
-func (s RejectVpcPeeringConnectionOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opRejectVpcPeeringConnection = "RejectVpcPeeringConnection"
 
@@ -74,7 +28,7 @@ const opRejectVpcPeeringConnection = "RejectVpcPeeringConnection"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/RejectVpcPeeringConnection
-func (c *Client) RejectVpcPeeringConnectionRequest(input *RejectVpcPeeringConnectionInput) RejectVpcPeeringConnectionRequest {
+func (c *Client) RejectVpcPeeringConnectionRequest(input *types.RejectVpcPeeringConnectionInput) RejectVpcPeeringConnectionRequest {
 	op := &aws.Operation{
 		Name:       opRejectVpcPeeringConnection,
 		HTTPMethod: "POST",
@@ -82,10 +36,10 @@ func (c *Client) RejectVpcPeeringConnectionRequest(input *RejectVpcPeeringConnec
 	}
 
 	if input == nil {
-		input = &RejectVpcPeeringConnectionInput{}
+		input = &types.RejectVpcPeeringConnectionInput{}
 	}
 
-	req := c.newRequest(op, input, &RejectVpcPeeringConnectionOutput{})
+	req := c.newRequest(op, input, &types.RejectVpcPeeringConnectionOutput{})
 	return RejectVpcPeeringConnectionRequest{Request: req, Input: input, Copy: c.RejectVpcPeeringConnectionRequest}
 }
 
@@ -93,8 +47,8 @@ func (c *Client) RejectVpcPeeringConnectionRequest(input *RejectVpcPeeringConnec
 // RejectVpcPeeringConnection API operation.
 type RejectVpcPeeringConnectionRequest struct {
 	*aws.Request
-	Input *RejectVpcPeeringConnectionInput
-	Copy  func(*RejectVpcPeeringConnectionInput) RejectVpcPeeringConnectionRequest
+	Input *types.RejectVpcPeeringConnectionInput
+	Copy  func(*types.RejectVpcPeeringConnectionInput) RejectVpcPeeringConnectionRequest
 }
 
 // Send marshals and sends the RejectVpcPeeringConnection API request.
@@ -106,7 +60,7 @@ func (r RejectVpcPeeringConnectionRequest) Send(ctx context.Context) (*RejectVpc
 	}
 
 	resp := &RejectVpcPeeringConnectionResponse{
-		RejectVpcPeeringConnectionOutput: r.Request.Data.(*RejectVpcPeeringConnectionOutput),
+		RejectVpcPeeringConnectionOutput: r.Request.Data.(*types.RejectVpcPeeringConnectionOutput),
 		response:                         &aws.Response{Request: r.Request},
 	}
 
@@ -116,7 +70,7 @@ func (r RejectVpcPeeringConnectionRequest) Send(ctx context.Context) (*RejectVpc
 // RejectVpcPeeringConnectionResponse is the response type for the
 // RejectVpcPeeringConnection API operation.
 type RejectVpcPeeringConnectionResponse struct {
-	*RejectVpcPeeringConnectionOutput
+	*types.RejectVpcPeeringConnectionOutput
 
 	response *aws.Response
 }

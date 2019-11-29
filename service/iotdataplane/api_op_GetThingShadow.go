@@ -6,78 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/iotdataplane/types"
 )
-
-// The input for the GetThingShadow operation.
-type GetThingShadowInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the thing.
-	//
-	// ThingName is a required field
-	ThingName *string `location:"uri" locationName:"thingName" min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetThingShadowInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetThingShadowInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetThingShadowInput"}
-
-	if s.ThingName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ThingName"))
-	}
-	if s.ThingName != nil && len(*s.ThingName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ThingName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetThingShadowInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.ThingName != nil {
-		v := *s.ThingName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "thingName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-// The output from the GetThingShadow operation.
-type GetThingShadowOutput struct {
-	_ struct{} `type:"structure" payload:"Payload"`
-
-	// The state information, in JSON format.
-	Payload []byte `locationName:"payload" type:"blob"`
-}
-
-// String returns the string representation
-func (s GetThingShadowOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetThingShadowOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.Payload != nil {
-		v := s.Payload
-
-		metadata := protocol.Metadata{}
-		e.SetStream(protocol.PayloadTarget, "payload", protocol.BytesStream(v), metadata)
-	}
-	return nil
-}
 
 const opGetThingShadow = "GetThingShadow"
 
@@ -95,7 +25,7 @@ const opGetThingShadow = "GetThingShadow"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) GetThingShadowRequest(input *GetThingShadowInput) GetThingShadowRequest {
+func (c *Client) GetThingShadowRequest(input *types.GetThingShadowInput) GetThingShadowRequest {
 	op := &aws.Operation{
 		Name:       opGetThingShadow,
 		HTTPMethod: "GET",
@@ -103,10 +33,10 @@ func (c *Client) GetThingShadowRequest(input *GetThingShadowInput) GetThingShado
 	}
 
 	if input == nil {
-		input = &GetThingShadowInput{}
+		input = &types.GetThingShadowInput{}
 	}
 
-	req := c.newRequest(op, input, &GetThingShadowOutput{})
+	req := c.newRequest(op, input, &types.GetThingShadowOutput{})
 	return GetThingShadowRequest{Request: req, Input: input, Copy: c.GetThingShadowRequest}
 }
 
@@ -114,8 +44,8 @@ func (c *Client) GetThingShadowRequest(input *GetThingShadowInput) GetThingShado
 // GetThingShadow API operation.
 type GetThingShadowRequest struct {
 	*aws.Request
-	Input *GetThingShadowInput
-	Copy  func(*GetThingShadowInput) GetThingShadowRequest
+	Input *types.GetThingShadowInput
+	Copy  func(*types.GetThingShadowInput) GetThingShadowRequest
 }
 
 // Send marshals and sends the GetThingShadow API request.
@@ -127,7 +57,7 @@ func (r GetThingShadowRequest) Send(ctx context.Context) (*GetThingShadowRespons
 	}
 
 	resp := &GetThingShadowResponse{
-		GetThingShadowOutput: r.Request.Data.(*GetThingShadowOutput),
+		GetThingShadowOutput: r.Request.Data.(*types.GetThingShadowOutput),
 		response:             &aws.Response{Request: r.Request},
 	}
 
@@ -137,7 +67,7 @@ func (r GetThingShadowRequest) Send(ctx context.Context) (*GetThingShadowRespons
 // GetThingShadowResponse is the response type for the
 // GetThingShadow API operation.
 type GetThingShadowResponse struct {
-	*GetThingShadowOutput
+	*types.GetThingShadowOutput
 
 	response *aws.Response
 }

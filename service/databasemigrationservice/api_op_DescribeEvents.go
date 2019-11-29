@@ -4,92 +4,10 @@ package databasemigrationservice
 
 import (
 	"context"
-	"fmt"
-	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/databasemigrationservice/types"
 )
-
-type DescribeEventsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The duration of the events to be listed.
-	Duration *int64 `type:"integer"`
-
-	// The end time for the events to be listed.
-	EndTime *time.Time `type:"timestamp"`
-
-	// A list of event categories for the source type that you've chosen.
-	EventCategories []string `type:"list"`
-
-	// Filters applied to the action.
-	Filters []Filter `type:"list"`
-
-	// An optional pagination token provided by a previous request. If this parameter
-	// is specified, the response includes only records beyond the marker, up to
-	// the value specified by MaxRecords.
-	Marker *string `type:"string"`
-
-	// The maximum number of records to include in the response. If more records
-	// exist than the specified MaxRecords value, a pagination token called a marker
-	// is included in the response so that the remaining results can be retrieved.
-	//
-	// Default: 100
-	//
-	// Constraints: Minimum 20, maximum 100.
-	MaxRecords *int64 `type:"integer"`
-
-	// The identifier of an event source.
-	SourceIdentifier *string `type:"string"`
-
-	// The type of AWS DMS resource that generates events.
-	//
-	// Valid values: replication-instance | replication-task
-	SourceType SourceType `type:"string" enum:"true"`
-
-	// The start time for the events to be listed.
-	StartTime *time.Time `type:"timestamp"`
-}
-
-// String returns the string representation
-func (s DescribeEventsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeEventsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeEventsInput"}
-	if s.Filters != nil {
-		for i, v := range s.Filters {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribeEventsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The events described.
-	Events []Event `type:"list"`
-
-	// An optional pagination token provided by a previous request. If this parameter
-	// is specified, the response includes only records beyond the marker, up to
-	// the value specified by MaxRecords.
-	Marker *string `type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeEventsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeEvents = "DescribeEvents"
 
@@ -109,7 +27,7 @@ const opDescribeEvents = "DescribeEvents"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeEvents
-func (c *Client) DescribeEventsRequest(input *DescribeEventsInput) DescribeEventsRequest {
+func (c *Client) DescribeEventsRequest(input *types.DescribeEventsInput) DescribeEventsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeEvents,
 		HTTPMethod: "POST",
@@ -123,10 +41,10 @@ func (c *Client) DescribeEventsRequest(input *DescribeEventsInput) DescribeEvent
 	}
 
 	if input == nil {
-		input = &DescribeEventsInput{}
+		input = &types.DescribeEventsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeEventsOutput{})
+	req := c.newRequest(op, input, &types.DescribeEventsOutput{})
 	return DescribeEventsRequest{Request: req, Input: input, Copy: c.DescribeEventsRequest}
 }
 
@@ -134,8 +52,8 @@ func (c *Client) DescribeEventsRequest(input *DescribeEventsInput) DescribeEvent
 // DescribeEvents API operation.
 type DescribeEventsRequest struct {
 	*aws.Request
-	Input *DescribeEventsInput
-	Copy  func(*DescribeEventsInput) DescribeEventsRequest
+	Input *types.DescribeEventsInput
+	Copy  func(*types.DescribeEventsInput) DescribeEventsRequest
 }
 
 // Send marshals and sends the DescribeEvents API request.
@@ -147,7 +65,7 @@ func (r DescribeEventsRequest) Send(ctx context.Context) (*DescribeEventsRespons
 	}
 
 	resp := &DescribeEventsResponse{
-		DescribeEventsOutput: r.Request.Data.(*DescribeEventsOutput),
+		DescribeEventsOutput: r.Request.Data.(*types.DescribeEventsOutput),
 		response:             &aws.Response{Request: r.Request},
 	}
 
@@ -177,7 +95,7 @@ func NewDescribeEventsPaginator(req DescribeEventsRequest) DescribeEventsPaginat
 	return DescribeEventsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *DescribeEventsInput
+				var inCpy *types.DescribeEventsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -197,14 +115,14 @@ type DescribeEventsPaginator struct {
 	aws.Pager
 }
 
-func (p *DescribeEventsPaginator) CurrentPage() *DescribeEventsOutput {
-	return p.Pager.CurrentPage().(*DescribeEventsOutput)
+func (p *DescribeEventsPaginator) CurrentPage() *types.DescribeEventsOutput {
+	return p.Pager.CurrentPage().(*types.DescribeEventsOutput)
 }
 
 // DescribeEventsResponse is the response type for the
 // DescribeEvents API operation.
 type DescribeEventsResponse struct {
-	*DescribeEventsOutput
+	*types.DescribeEventsOutput
 
 	response *aws.Response
 }

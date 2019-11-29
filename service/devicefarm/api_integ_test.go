@@ -13,6 +13,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws/awserr"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting/integration"
 	"github.com/aws/aws-sdk-go-v2/service/devicefarm"
+	"github.com/aws/aws-sdk-go-v2/service/devicefarm/types"
 )
 
 var _ aws.Config
@@ -24,7 +25,7 @@ func TestInteg_00_ListDevices(t *testing.T) {
 
 	cfg := integration.ConfigWithDefaultRegion("us-west-2")
 	svc := devicefarm.New(cfg)
-	params := &devicefarm.ListDevicesInput{}
+	params := &types.ListDevicesInput{}
 
 	req := svc.ListDevicesRequest(params)
 
@@ -39,7 +40,7 @@ func TestInteg_01_GetDevice(t *testing.T) {
 
 	cfg := integration.ConfigWithDefaultRegion("us-west-2")
 	svc := devicefarm.New(cfg)
-	params := &devicefarm.GetDeviceInput{
+	params := &types.GetDeviceInput{
 		Arn: aws.String("arn:aws:devicefarm:us-west-2::device:000000000000000000000000fake-arn"),
 	}
 

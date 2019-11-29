@@ -10,6 +10,7 @@ package lexmodelbuildingserviceiface
 
 import (
 	"github.com/aws/aws-sdk-go-v2/service/lexmodelbuildingservice"
+	"github.com/aws/aws-sdk-go-v2/service/lexmodelbuildingservice/types"
 )
 
 // ClientAPI provides an interface to enable mocking the
@@ -43,7 +44,7 @@ import (
 //    type mockClientClient struct {
 //        lexmodelbuildingserviceiface.ClientPI
 //    }
-//    func (m *mockClientClient) CreateBotVersion(input *lexmodelbuildingservice.CreateBotVersionInput) (*lexmodelbuildingservice.CreateBotVersionOutput, error) {
+//    func (m *mockClientClient) CreateBotVersion(input *types.CreateBotVersionInput) (*types.CreateBotVersionOutput, error) {
 //        // mock response/functionality
 //    }
 //
@@ -61,77 +62,77 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type ClientAPI interface {
-	CreateBotVersionRequest(*lexmodelbuildingservice.CreateBotVersionInput) lexmodelbuildingservice.CreateBotVersionRequest
+	CreateBotVersionRequest(*types.CreateBotVersionInput) lexmodelbuildingservice.CreateBotVersionRequest
 
-	CreateIntentVersionRequest(*lexmodelbuildingservice.CreateIntentVersionInput) lexmodelbuildingservice.CreateIntentVersionRequest
+	CreateIntentVersionRequest(*types.CreateIntentVersionInput) lexmodelbuildingservice.CreateIntentVersionRequest
 
-	CreateSlotTypeVersionRequest(*lexmodelbuildingservice.CreateSlotTypeVersionInput) lexmodelbuildingservice.CreateSlotTypeVersionRequest
+	CreateSlotTypeVersionRequest(*types.CreateSlotTypeVersionInput) lexmodelbuildingservice.CreateSlotTypeVersionRequest
 
-	DeleteBotRequest(*lexmodelbuildingservice.DeleteBotInput) lexmodelbuildingservice.DeleteBotRequest
+	DeleteBotRequest(*types.DeleteBotInput) lexmodelbuildingservice.DeleteBotRequest
 
-	DeleteBotAliasRequest(*lexmodelbuildingservice.DeleteBotAliasInput) lexmodelbuildingservice.DeleteBotAliasRequest
+	DeleteBotAliasRequest(*types.DeleteBotAliasInput) lexmodelbuildingservice.DeleteBotAliasRequest
 
-	DeleteBotChannelAssociationRequest(*lexmodelbuildingservice.DeleteBotChannelAssociationInput) lexmodelbuildingservice.DeleteBotChannelAssociationRequest
+	DeleteBotChannelAssociationRequest(*types.DeleteBotChannelAssociationInput) lexmodelbuildingservice.DeleteBotChannelAssociationRequest
 
-	DeleteBotVersionRequest(*lexmodelbuildingservice.DeleteBotVersionInput) lexmodelbuildingservice.DeleteBotVersionRequest
+	DeleteBotVersionRequest(*types.DeleteBotVersionInput) lexmodelbuildingservice.DeleteBotVersionRequest
 
-	DeleteIntentRequest(*lexmodelbuildingservice.DeleteIntentInput) lexmodelbuildingservice.DeleteIntentRequest
+	DeleteIntentRequest(*types.DeleteIntentInput) lexmodelbuildingservice.DeleteIntentRequest
 
-	DeleteIntentVersionRequest(*lexmodelbuildingservice.DeleteIntentVersionInput) lexmodelbuildingservice.DeleteIntentVersionRequest
+	DeleteIntentVersionRequest(*types.DeleteIntentVersionInput) lexmodelbuildingservice.DeleteIntentVersionRequest
 
-	DeleteSlotTypeRequest(*lexmodelbuildingservice.DeleteSlotTypeInput) lexmodelbuildingservice.DeleteSlotTypeRequest
+	DeleteSlotTypeRequest(*types.DeleteSlotTypeInput) lexmodelbuildingservice.DeleteSlotTypeRequest
 
-	DeleteSlotTypeVersionRequest(*lexmodelbuildingservice.DeleteSlotTypeVersionInput) lexmodelbuildingservice.DeleteSlotTypeVersionRequest
+	DeleteSlotTypeVersionRequest(*types.DeleteSlotTypeVersionInput) lexmodelbuildingservice.DeleteSlotTypeVersionRequest
 
-	DeleteUtterancesRequest(*lexmodelbuildingservice.DeleteUtterancesInput) lexmodelbuildingservice.DeleteUtterancesRequest
+	DeleteUtterancesRequest(*types.DeleteUtterancesInput) lexmodelbuildingservice.DeleteUtterancesRequest
 
-	GetBotRequest(*lexmodelbuildingservice.GetBotInput) lexmodelbuildingservice.GetBotRequest
+	GetBotRequest(*types.GetBotInput) lexmodelbuildingservice.GetBotRequest
 
-	GetBotAliasRequest(*lexmodelbuildingservice.GetBotAliasInput) lexmodelbuildingservice.GetBotAliasRequest
+	GetBotAliasRequest(*types.GetBotAliasInput) lexmodelbuildingservice.GetBotAliasRequest
 
-	GetBotAliasesRequest(*lexmodelbuildingservice.GetBotAliasesInput) lexmodelbuildingservice.GetBotAliasesRequest
+	GetBotAliasesRequest(*types.GetBotAliasesInput) lexmodelbuildingservice.GetBotAliasesRequest
 
-	GetBotChannelAssociationRequest(*lexmodelbuildingservice.GetBotChannelAssociationInput) lexmodelbuildingservice.GetBotChannelAssociationRequest
+	GetBotChannelAssociationRequest(*types.GetBotChannelAssociationInput) lexmodelbuildingservice.GetBotChannelAssociationRequest
 
-	GetBotChannelAssociationsRequest(*lexmodelbuildingservice.GetBotChannelAssociationsInput) lexmodelbuildingservice.GetBotChannelAssociationsRequest
+	GetBotChannelAssociationsRequest(*types.GetBotChannelAssociationsInput) lexmodelbuildingservice.GetBotChannelAssociationsRequest
 
-	GetBotVersionsRequest(*lexmodelbuildingservice.GetBotVersionsInput) lexmodelbuildingservice.GetBotVersionsRequest
+	GetBotVersionsRequest(*types.GetBotVersionsInput) lexmodelbuildingservice.GetBotVersionsRequest
 
-	GetBotsRequest(*lexmodelbuildingservice.GetBotsInput) lexmodelbuildingservice.GetBotsRequest
+	GetBotsRequest(*types.GetBotsInput) lexmodelbuildingservice.GetBotsRequest
 
-	GetBuiltinIntentRequest(*lexmodelbuildingservice.GetBuiltinIntentInput) lexmodelbuildingservice.GetBuiltinIntentRequest
+	GetBuiltinIntentRequest(*types.GetBuiltinIntentInput) lexmodelbuildingservice.GetBuiltinIntentRequest
 
-	GetBuiltinIntentsRequest(*lexmodelbuildingservice.GetBuiltinIntentsInput) lexmodelbuildingservice.GetBuiltinIntentsRequest
+	GetBuiltinIntentsRequest(*types.GetBuiltinIntentsInput) lexmodelbuildingservice.GetBuiltinIntentsRequest
 
-	GetBuiltinSlotTypesRequest(*lexmodelbuildingservice.GetBuiltinSlotTypesInput) lexmodelbuildingservice.GetBuiltinSlotTypesRequest
+	GetBuiltinSlotTypesRequest(*types.GetBuiltinSlotTypesInput) lexmodelbuildingservice.GetBuiltinSlotTypesRequest
 
-	GetExportRequest(*lexmodelbuildingservice.GetExportInput) lexmodelbuildingservice.GetExportRequest
+	GetExportRequest(*types.GetExportInput) lexmodelbuildingservice.GetExportRequest
 
-	GetImportRequest(*lexmodelbuildingservice.GetImportInput) lexmodelbuildingservice.GetImportRequest
+	GetImportRequest(*types.GetImportInput) lexmodelbuildingservice.GetImportRequest
 
-	GetIntentRequest(*lexmodelbuildingservice.GetIntentInput) lexmodelbuildingservice.GetIntentRequest
+	GetIntentRequest(*types.GetIntentInput) lexmodelbuildingservice.GetIntentRequest
 
-	GetIntentVersionsRequest(*lexmodelbuildingservice.GetIntentVersionsInput) lexmodelbuildingservice.GetIntentVersionsRequest
+	GetIntentVersionsRequest(*types.GetIntentVersionsInput) lexmodelbuildingservice.GetIntentVersionsRequest
 
-	GetIntentsRequest(*lexmodelbuildingservice.GetIntentsInput) lexmodelbuildingservice.GetIntentsRequest
+	GetIntentsRequest(*types.GetIntentsInput) lexmodelbuildingservice.GetIntentsRequest
 
-	GetSlotTypeRequest(*lexmodelbuildingservice.GetSlotTypeInput) lexmodelbuildingservice.GetSlotTypeRequest
+	GetSlotTypeRequest(*types.GetSlotTypeInput) lexmodelbuildingservice.GetSlotTypeRequest
 
-	GetSlotTypeVersionsRequest(*lexmodelbuildingservice.GetSlotTypeVersionsInput) lexmodelbuildingservice.GetSlotTypeVersionsRequest
+	GetSlotTypeVersionsRequest(*types.GetSlotTypeVersionsInput) lexmodelbuildingservice.GetSlotTypeVersionsRequest
 
-	GetSlotTypesRequest(*lexmodelbuildingservice.GetSlotTypesInput) lexmodelbuildingservice.GetSlotTypesRequest
+	GetSlotTypesRequest(*types.GetSlotTypesInput) lexmodelbuildingservice.GetSlotTypesRequest
 
-	GetUtterancesViewRequest(*lexmodelbuildingservice.GetUtterancesViewInput) lexmodelbuildingservice.GetUtterancesViewRequest
+	GetUtterancesViewRequest(*types.GetUtterancesViewInput) lexmodelbuildingservice.GetUtterancesViewRequest
 
-	PutBotRequest(*lexmodelbuildingservice.PutBotInput) lexmodelbuildingservice.PutBotRequest
+	PutBotRequest(*types.PutBotInput) lexmodelbuildingservice.PutBotRequest
 
-	PutBotAliasRequest(*lexmodelbuildingservice.PutBotAliasInput) lexmodelbuildingservice.PutBotAliasRequest
+	PutBotAliasRequest(*types.PutBotAliasInput) lexmodelbuildingservice.PutBotAliasRequest
 
-	PutIntentRequest(*lexmodelbuildingservice.PutIntentInput) lexmodelbuildingservice.PutIntentRequest
+	PutIntentRequest(*types.PutIntentInput) lexmodelbuildingservice.PutIntentRequest
 
-	PutSlotTypeRequest(*lexmodelbuildingservice.PutSlotTypeInput) lexmodelbuildingservice.PutSlotTypeRequest
+	PutSlotTypeRequest(*types.PutSlotTypeInput) lexmodelbuildingservice.PutSlotTypeRequest
 
-	StartImportRequest(*lexmodelbuildingservice.StartImportInput) lexmodelbuildingservice.StartImportRequest
+	StartImportRequest(*types.StartImportInput) lexmodelbuildingservice.StartImportRequest
 }
 
 var _ ClientAPI = (*lexmodelbuildingservice.Client)(nil)

@@ -6,56 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/appstream/types"
 )
-
-type DescribeImageBuildersInput struct {
-	_ struct{} `type:"structure"`
-
-	// The maximum size of each page of results.
-	MaxResults *int64 `type:"integer"`
-
-	// The names of the image builders to describe.
-	Names []string `type:"list"`
-
-	// The pagination token to use to retrieve the next page of results for this
-	// operation. If this value is null, it retrieves the first page.
-	NextToken *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeImageBuildersInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeImageBuildersInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeImageBuildersInput"}
-	if s.NextToken != nil && len(*s.NextToken) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribeImageBuildersOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Information about the image builders.
-	ImageBuilders []ImageBuilder `type:"list"`
-
-	// The pagination token to use to retrieve the next page of results for this
-	// operation. If there are no more pages, this value is null.
-	NextToken *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeImageBuildersOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeImageBuilders = "DescribeImageBuilders"
 
@@ -74,7 +26,7 @@ const opDescribeImageBuilders = "DescribeImageBuilders"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DescribeImageBuilders
-func (c *Client) DescribeImageBuildersRequest(input *DescribeImageBuildersInput) DescribeImageBuildersRequest {
+func (c *Client) DescribeImageBuildersRequest(input *types.DescribeImageBuildersInput) DescribeImageBuildersRequest {
 	op := &aws.Operation{
 		Name:       opDescribeImageBuilders,
 		HTTPMethod: "POST",
@@ -82,10 +34,10 @@ func (c *Client) DescribeImageBuildersRequest(input *DescribeImageBuildersInput)
 	}
 
 	if input == nil {
-		input = &DescribeImageBuildersInput{}
+		input = &types.DescribeImageBuildersInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeImageBuildersOutput{})
+	req := c.newRequest(op, input, &types.DescribeImageBuildersOutput{})
 	return DescribeImageBuildersRequest{Request: req, Input: input, Copy: c.DescribeImageBuildersRequest}
 }
 
@@ -93,8 +45,8 @@ func (c *Client) DescribeImageBuildersRequest(input *DescribeImageBuildersInput)
 // DescribeImageBuilders API operation.
 type DescribeImageBuildersRequest struct {
 	*aws.Request
-	Input *DescribeImageBuildersInput
-	Copy  func(*DescribeImageBuildersInput) DescribeImageBuildersRequest
+	Input *types.DescribeImageBuildersInput
+	Copy  func(*types.DescribeImageBuildersInput) DescribeImageBuildersRequest
 }
 
 // Send marshals and sends the DescribeImageBuilders API request.
@@ -106,7 +58,7 @@ func (r DescribeImageBuildersRequest) Send(ctx context.Context) (*DescribeImageB
 	}
 
 	resp := &DescribeImageBuildersResponse{
-		DescribeImageBuildersOutput: r.Request.Data.(*DescribeImageBuildersOutput),
+		DescribeImageBuildersOutput: r.Request.Data.(*types.DescribeImageBuildersOutput),
 		response:                    &aws.Response{Request: r.Request},
 	}
 
@@ -116,7 +68,7 @@ func (r DescribeImageBuildersRequest) Send(ctx context.Context) (*DescribeImageB
 // DescribeImageBuildersResponse is the response type for the
 // DescribeImageBuilders API operation.
 type DescribeImageBuildersResponse struct {
-	*DescribeImageBuildersOutput
+	*types.DescribeImageBuildersOutput
 
 	response *aws.Response
 }

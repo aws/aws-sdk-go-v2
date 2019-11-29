@@ -6,86 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/rds/types"
 )
-
-type ModifyDBClusterSnapshotAttributeInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the DB cluster snapshot attribute to modify.
-	//
-	// To manage authorization for other AWS accounts to copy or restore a manual
-	// DB cluster snapshot, set this value to restore.
-	//
-	// AttributeName is a required field
-	AttributeName *string `type:"string" required:"true"`
-
-	// The identifier for the DB cluster snapshot to modify the attributes for.
-	//
-	// DBClusterSnapshotIdentifier is a required field
-	DBClusterSnapshotIdentifier *string `type:"string" required:"true"`
-
-	// A list of DB cluster snapshot attributes to add to the attribute specified
-	// by AttributeName.
-	//
-	// To authorize other AWS accounts to copy or restore a manual DB cluster snapshot,
-	// set this list to include one or more AWS account IDs, or all to make the
-	// manual DB cluster snapshot restorable by any AWS account. Do not add the
-	// all value for any manual DB cluster snapshots that contain private information
-	// that you don't want available to all AWS accounts.
-	ValuesToAdd []string `locationNameList:"AttributeValue" type:"list"`
-
-	// A list of DB cluster snapshot attributes to remove from the attribute specified
-	// by AttributeName.
-	//
-	// To remove authorization for other AWS accounts to copy or restore a manual
-	// DB cluster snapshot, set this list to include one or more AWS account identifiers,
-	// or all to remove authorization for any AWS account to copy or restore the
-	// DB cluster snapshot. If you specify all, an AWS account whose account ID
-	// is explicitly added to the restore attribute can still copy or restore a
-	// manual DB cluster snapshot.
-	ValuesToRemove []string `locationNameList:"AttributeValue" type:"list"`
-}
-
-// String returns the string representation
-func (s ModifyDBClusterSnapshotAttributeInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ModifyDBClusterSnapshotAttributeInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ModifyDBClusterSnapshotAttributeInput"}
-
-	if s.AttributeName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("AttributeName"))
-	}
-
-	if s.DBClusterSnapshotIdentifier == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DBClusterSnapshotIdentifier"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ModifyDBClusterSnapshotAttributeOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Contains the results of a successful call to the DescribeDBClusterSnapshotAttributes
-	// API action.
-	//
-	// Manual DB cluster snapshot attributes are used to authorize other AWS accounts
-	// to copy or restore a manual DB cluster snapshot. For more information, see
-	// the ModifyDBClusterSnapshotAttribute API action.
-	DBClusterSnapshotAttributesResult *DBClusterSnapshotAttributesResult `type:"structure"`
-}
-
-// String returns the string representation
-func (s ModifyDBClusterSnapshotAttributeOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opModifyDBClusterSnapshotAttribute = "ModifyDBClusterSnapshotAttribute"
 
@@ -120,7 +42,7 @@ const opModifyDBClusterSnapshotAttribute = "ModifyDBClusterSnapshotAttribute"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyDBClusterSnapshotAttribute
-func (c *Client) ModifyDBClusterSnapshotAttributeRequest(input *ModifyDBClusterSnapshotAttributeInput) ModifyDBClusterSnapshotAttributeRequest {
+func (c *Client) ModifyDBClusterSnapshotAttributeRequest(input *types.ModifyDBClusterSnapshotAttributeInput) ModifyDBClusterSnapshotAttributeRequest {
 	op := &aws.Operation{
 		Name:       opModifyDBClusterSnapshotAttribute,
 		HTTPMethod: "POST",
@@ -128,10 +50,10 @@ func (c *Client) ModifyDBClusterSnapshotAttributeRequest(input *ModifyDBClusterS
 	}
 
 	if input == nil {
-		input = &ModifyDBClusterSnapshotAttributeInput{}
+		input = &types.ModifyDBClusterSnapshotAttributeInput{}
 	}
 
-	req := c.newRequest(op, input, &ModifyDBClusterSnapshotAttributeOutput{})
+	req := c.newRequest(op, input, &types.ModifyDBClusterSnapshotAttributeOutput{})
 	return ModifyDBClusterSnapshotAttributeRequest{Request: req, Input: input, Copy: c.ModifyDBClusterSnapshotAttributeRequest}
 }
 
@@ -139,8 +61,8 @@ func (c *Client) ModifyDBClusterSnapshotAttributeRequest(input *ModifyDBClusterS
 // ModifyDBClusterSnapshotAttribute API operation.
 type ModifyDBClusterSnapshotAttributeRequest struct {
 	*aws.Request
-	Input *ModifyDBClusterSnapshotAttributeInput
-	Copy  func(*ModifyDBClusterSnapshotAttributeInput) ModifyDBClusterSnapshotAttributeRequest
+	Input *types.ModifyDBClusterSnapshotAttributeInput
+	Copy  func(*types.ModifyDBClusterSnapshotAttributeInput) ModifyDBClusterSnapshotAttributeRequest
 }
 
 // Send marshals and sends the ModifyDBClusterSnapshotAttribute API request.
@@ -152,7 +74,7 @@ func (r ModifyDBClusterSnapshotAttributeRequest) Send(ctx context.Context) (*Mod
 	}
 
 	resp := &ModifyDBClusterSnapshotAttributeResponse{
-		ModifyDBClusterSnapshotAttributeOutput: r.Request.Data.(*ModifyDBClusterSnapshotAttributeOutput),
+		ModifyDBClusterSnapshotAttributeOutput: r.Request.Data.(*types.ModifyDBClusterSnapshotAttributeOutput),
 		response:                               &aws.Response{Request: r.Request},
 	}
 
@@ -162,7 +84,7 @@ func (r ModifyDBClusterSnapshotAttributeRequest) Send(ctx context.Context) (*Mod
 // ModifyDBClusterSnapshotAttributeResponse is the response type for the
 // ModifyDBClusterSnapshotAttribute API operation.
 type ModifyDBClusterSnapshotAttributeResponse struct {
-	*ModifyDBClusterSnapshotAttributeOutput
+	*types.ModifyDBClusterSnapshotAttributeOutput
 
 	response *aws.Response
 }

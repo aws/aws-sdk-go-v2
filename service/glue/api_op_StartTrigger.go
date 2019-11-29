@@ -6,51 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/glue/types"
 )
-
-type StartTriggerInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the trigger to start.
-	//
-	// Name is a required field
-	Name *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s StartTriggerInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *StartTriggerInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "StartTriggerInput"}
-
-	if s.Name == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Name"))
-	}
-	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type StartTriggerOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the trigger that was started.
-	Name *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s StartTriggerOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opStartTrigger = "StartTrigger"
 
@@ -68,7 +25,7 @@ const opStartTrigger = "StartTrigger"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/StartTrigger
-func (c *Client) StartTriggerRequest(input *StartTriggerInput) StartTriggerRequest {
+func (c *Client) StartTriggerRequest(input *types.StartTriggerInput) StartTriggerRequest {
 	op := &aws.Operation{
 		Name:       opStartTrigger,
 		HTTPMethod: "POST",
@@ -76,10 +33,10 @@ func (c *Client) StartTriggerRequest(input *StartTriggerInput) StartTriggerReque
 	}
 
 	if input == nil {
-		input = &StartTriggerInput{}
+		input = &types.StartTriggerInput{}
 	}
 
-	req := c.newRequest(op, input, &StartTriggerOutput{})
+	req := c.newRequest(op, input, &types.StartTriggerOutput{})
 	return StartTriggerRequest{Request: req, Input: input, Copy: c.StartTriggerRequest}
 }
 
@@ -87,8 +44,8 @@ func (c *Client) StartTriggerRequest(input *StartTriggerInput) StartTriggerReque
 // StartTrigger API operation.
 type StartTriggerRequest struct {
 	*aws.Request
-	Input *StartTriggerInput
-	Copy  func(*StartTriggerInput) StartTriggerRequest
+	Input *types.StartTriggerInput
+	Copy  func(*types.StartTriggerInput) StartTriggerRequest
 }
 
 // Send marshals and sends the StartTrigger API request.
@@ -100,7 +57,7 @@ func (r StartTriggerRequest) Send(ctx context.Context) (*StartTriggerResponse, e
 	}
 
 	resp := &StartTriggerResponse{
-		StartTriggerOutput: r.Request.Data.(*StartTriggerOutput),
+		StartTriggerOutput: r.Request.Data.(*types.StartTriggerOutput),
 		response:           &aws.Response{Request: r.Request},
 	}
 
@@ -110,7 +67,7 @@ func (r StartTriggerRequest) Send(ctx context.Context) (*StartTriggerResponse, e
 // StartTriggerResponse is the response type for the
 // StartTrigger API operation.
 type StartTriggerResponse struct {
-	*StartTriggerOutput
+	*types.StartTriggerOutput
 
 	response *aws.Response
 }

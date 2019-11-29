@@ -6,51 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/redshift/types"
 )
-
-type DescribeTableRestoreStatusInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Redshift cluster that the table is being restored to.
-	ClusterIdentifier *string `type:"string"`
-
-	// An optional pagination token provided by a previous DescribeTableRestoreStatus
-	// request. If this parameter is specified, the response includes only records
-	// beyond the marker, up to the value specified by the MaxRecords parameter.
-	Marker *string `type:"string"`
-
-	// The maximum number of records to include in the response. If more records
-	// exist than the specified MaxRecords value, a pagination token called a marker
-	// is included in the response so that the remaining results can be retrieved.
-	MaxRecords *int64 `type:"integer"`
-
-	// The identifier of the table restore request to return status for. If you
-	// don't specify a TableRestoreRequestId value, then DescribeTableRestoreStatus
-	// returns the status of all in-progress table restore requests.
-	TableRestoreRequestId *string `type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeTableRestoreStatusInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type DescribeTableRestoreStatusOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A pagination token that can be used in a subsequent DescribeTableRestoreStatus
-	// request.
-	Marker *string `type:"string"`
-
-	// A list of status details for one or more table restore requests.
-	TableRestoreStatusDetails []TableRestoreStatus `locationNameList:"TableRestoreStatus" type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeTableRestoreStatusOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeTableRestoreStatus = "DescribeTableRestoreStatus"
 
@@ -71,7 +28,7 @@ const opDescribeTableRestoreStatus = "DescribeTableRestoreStatus"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeTableRestoreStatus
-func (c *Client) DescribeTableRestoreStatusRequest(input *DescribeTableRestoreStatusInput) DescribeTableRestoreStatusRequest {
+func (c *Client) DescribeTableRestoreStatusRequest(input *types.DescribeTableRestoreStatusInput) DescribeTableRestoreStatusRequest {
 	op := &aws.Operation{
 		Name:       opDescribeTableRestoreStatus,
 		HTTPMethod: "POST",
@@ -79,10 +36,10 @@ func (c *Client) DescribeTableRestoreStatusRequest(input *DescribeTableRestoreSt
 	}
 
 	if input == nil {
-		input = &DescribeTableRestoreStatusInput{}
+		input = &types.DescribeTableRestoreStatusInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeTableRestoreStatusOutput{})
+	req := c.newRequest(op, input, &types.DescribeTableRestoreStatusOutput{})
 	return DescribeTableRestoreStatusRequest{Request: req, Input: input, Copy: c.DescribeTableRestoreStatusRequest}
 }
 
@@ -90,8 +47,8 @@ func (c *Client) DescribeTableRestoreStatusRequest(input *DescribeTableRestoreSt
 // DescribeTableRestoreStatus API operation.
 type DescribeTableRestoreStatusRequest struct {
 	*aws.Request
-	Input *DescribeTableRestoreStatusInput
-	Copy  func(*DescribeTableRestoreStatusInput) DescribeTableRestoreStatusRequest
+	Input *types.DescribeTableRestoreStatusInput
+	Copy  func(*types.DescribeTableRestoreStatusInput) DescribeTableRestoreStatusRequest
 }
 
 // Send marshals and sends the DescribeTableRestoreStatus API request.
@@ -103,7 +60,7 @@ func (r DescribeTableRestoreStatusRequest) Send(ctx context.Context) (*DescribeT
 	}
 
 	resp := &DescribeTableRestoreStatusResponse{
-		DescribeTableRestoreStatusOutput: r.Request.Data.(*DescribeTableRestoreStatusOutput),
+		DescribeTableRestoreStatusOutput: r.Request.Data.(*types.DescribeTableRestoreStatusOutput),
 		response:                         &aws.Response{Request: r.Request},
 	}
 
@@ -113,7 +70,7 @@ func (r DescribeTableRestoreStatusRequest) Send(ctx context.Context) (*DescribeT
 // DescribeTableRestoreStatusResponse is the response type for the
 // DescribeTableRestoreStatus API operation.
 type DescribeTableRestoreStatusResponse struct {
-	*DescribeTableRestoreStatusOutput
+	*types.DescribeTableRestoreStatusOutput
 
 	response *aws.Response
 }

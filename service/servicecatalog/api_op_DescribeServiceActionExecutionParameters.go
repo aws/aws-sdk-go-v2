@@ -6,60 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/types"
 )
-
-type DescribeServiceActionExecutionParametersInput struct {
-	_ struct{} `type:"structure"`
-
-	AcceptLanguage *string `type:"string"`
-
-	// ProvisionedProductId is a required field
-	ProvisionedProductId *string `min:"1" type:"string" required:"true"`
-
-	// ServiceActionId is a required field
-	ServiceActionId *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeServiceActionExecutionParametersInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeServiceActionExecutionParametersInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeServiceActionExecutionParametersInput"}
-
-	if s.ProvisionedProductId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ProvisionedProductId"))
-	}
-	if s.ProvisionedProductId != nil && len(*s.ProvisionedProductId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ProvisionedProductId", 1))
-	}
-
-	if s.ServiceActionId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ServiceActionId"))
-	}
-	if s.ServiceActionId != nil && len(*s.ServiceActionId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ServiceActionId", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribeServiceActionExecutionParametersOutput struct {
-	_ struct{} `type:"structure"`
-
-	ServiceActionParameters []ExecutionParameter `type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeServiceActionExecutionParametersOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeServiceActionExecutionParameters = "DescribeServiceActionExecutionParameters"
 
@@ -74,7 +22,7 @@ const opDescribeServiceActionExecutionParameters = "DescribeServiceActionExecuti
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DescribeServiceActionExecutionParameters
-func (c *Client) DescribeServiceActionExecutionParametersRequest(input *DescribeServiceActionExecutionParametersInput) DescribeServiceActionExecutionParametersRequest {
+func (c *Client) DescribeServiceActionExecutionParametersRequest(input *types.DescribeServiceActionExecutionParametersInput) DescribeServiceActionExecutionParametersRequest {
 	op := &aws.Operation{
 		Name:       opDescribeServiceActionExecutionParameters,
 		HTTPMethod: "POST",
@@ -82,10 +30,10 @@ func (c *Client) DescribeServiceActionExecutionParametersRequest(input *Describe
 	}
 
 	if input == nil {
-		input = &DescribeServiceActionExecutionParametersInput{}
+		input = &types.DescribeServiceActionExecutionParametersInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeServiceActionExecutionParametersOutput{})
+	req := c.newRequest(op, input, &types.DescribeServiceActionExecutionParametersOutput{})
 	return DescribeServiceActionExecutionParametersRequest{Request: req, Input: input, Copy: c.DescribeServiceActionExecutionParametersRequest}
 }
 
@@ -93,8 +41,8 @@ func (c *Client) DescribeServiceActionExecutionParametersRequest(input *Describe
 // DescribeServiceActionExecutionParameters API operation.
 type DescribeServiceActionExecutionParametersRequest struct {
 	*aws.Request
-	Input *DescribeServiceActionExecutionParametersInput
-	Copy  func(*DescribeServiceActionExecutionParametersInput) DescribeServiceActionExecutionParametersRequest
+	Input *types.DescribeServiceActionExecutionParametersInput
+	Copy  func(*types.DescribeServiceActionExecutionParametersInput) DescribeServiceActionExecutionParametersRequest
 }
 
 // Send marshals and sends the DescribeServiceActionExecutionParameters API request.
@@ -106,7 +54,7 @@ func (r DescribeServiceActionExecutionParametersRequest) Send(ctx context.Contex
 	}
 
 	resp := &DescribeServiceActionExecutionParametersResponse{
-		DescribeServiceActionExecutionParametersOutput: r.Request.Data.(*DescribeServiceActionExecutionParametersOutput),
+		DescribeServiceActionExecutionParametersOutput: r.Request.Data.(*types.DescribeServiceActionExecutionParametersOutput),
 		response: &aws.Response{Request: r.Request},
 	}
 
@@ -116,7 +64,7 @@ func (r DescribeServiceActionExecutionParametersRequest) Send(ctx context.Contex
 // DescribeServiceActionExecutionParametersResponse is the response type for the
 // DescribeServiceActionExecutionParameters API operation.
 type DescribeServiceActionExecutionParametersResponse struct {
-	*DescribeServiceActionExecutionParametersOutput
+	*types.DescribeServiceActionExecutionParametersOutput
 
 	response *aws.Response
 }

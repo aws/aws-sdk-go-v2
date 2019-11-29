@@ -6,145 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/apigatewayv2/types"
 )
-
-type CreateApiMappingInput struct {
-	_ struct{} `type:"structure"`
-
-	// The identifier.
-	//
-	// ApiId is a required field
-	ApiId *string `locationName:"apiId" type:"string" required:"true"`
-
-	// After evaulating a selection expression, the result is compared against one
-	// or more selection keys to find a matching key. See Selection Expressions
-	// (https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html#apigateway-websocket-api-apikey-selection-expressions)
-	// for a list of expressions and each expression's associated selection key
-	// type.
-	ApiMappingKey *string `locationName:"apiMappingKey" type:"string"`
-
-	// DomainName is a required field
-	DomainName *string `location:"uri" locationName:"domainName" type:"string" required:"true"`
-
-	// A string with a length between [1-128].
-	//
-	// Stage is a required field
-	Stage *string `locationName:"stage" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s CreateApiMappingInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateApiMappingInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateApiMappingInput"}
-
-	if s.ApiId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ApiId"))
-	}
-
-	if s.DomainName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DomainName"))
-	}
-
-	if s.Stage == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Stage"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s CreateApiMappingInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.ApiId != nil {
-		v := *s.ApiId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "apiId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.ApiMappingKey != nil {
-		v := *s.ApiMappingKey
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "apiMappingKey", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Stage != nil {
-		v := *s.Stage
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "stage", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.DomainName != nil {
-		v := *s.DomainName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "domainName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type CreateApiMappingOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The identifier.
-	ApiId *string `locationName:"apiId" type:"string"`
-
-	// The identifier.
-	ApiMappingId *string `locationName:"apiMappingId" type:"string"`
-
-	// After evaulating a selection expression, the result is compared against one
-	// or more selection keys to find a matching key. See Selection Expressions
-	// (https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html#apigateway-websocket-api-apikey-selection-expressions)
-	// for a list of expressions and each expression's associated selection key
-	// type.
-	ApiMappingKey *string `locationName:"apiMappingKey" type:"string"`
-
-	// A string with a length between [1-128].
-	Stage *string `locationName:"stage" type:"string"`
-}
-
-// String returns the string representation
-func (s CreateApiMappingOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s CreateApiMappingOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.ApiId != nil {
-		v := *s.ApiId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "apiId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.ApiMappingId != nil {
-		v := *s.ApiMappingId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "apiMappingId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.ApiMappingKey != nil {
-		v := *s.ApiMappingKey
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "apiMappingKey", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Stage != nil {
-		v := *s.Stage
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "stage", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opCreateApiMapping = "CreateApiMapping"
 
@@ -161,7 +24,7 @@ const opCreateApiMapping = "CreateApiMapping"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/apigatewayv2-2018-11-29/CreateApiMapping
-func (c *Client) CreateApiMappingRequest(input *CreateApiMappingInput) CreateApiMappingRequest {
+func (c *Client) CreateApiMappingRequest(input *types.CreateApiMappingInput) CreateApiMappingRequest {
 	op := &aws.Operation{
 		Name:       opCreateApiMapping,
 		HTTPMethod: "POST",
@@ -169,10 +32,10 @@ func (c *Client) CreateApiMappingRequest(input *CreateApiMappingInput) CreateApi
 	}
 
 	if input == nil {
-		input = &CreateApiMappingInput{}
+		input = &types.CreateApiMappingInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateApiMappingOutput{})
+	req := c.newRequest(op, input, &types.CreateApiMappingOutput{})
 	return CreateApiMappingRequest{Request: req, Input: input, Copy: c.CreateApiMappingRequest}
 }
 
@@ -180,8 +43,8 @@ func (c *Client) CreateApiMappingRequest(input *CreateApiMappingInput) CreateApi
 // CreateApiMapping API operation.
 type CreateApiMappingRequest struct {
 	*aws.Request
-	Input *CreateApiMappingInput
-	Copy  func(*CreateApiMappingInput) CreateApiMappingRequest
+	Input *types.CreateApiMappingInput
+	Copy  func(*types.CreateApiMappingInput) CreateApiMappingRequest
 }
 
 // Send marshals and sends the CreateApiMapping API request.
@@ -193,7 +56,7 @@ func (r CreateApiMappingRequest) Send(ctx context.Context) (*CreateApiMappingRes
 	}
 
 	resp := &CreateApiMappingResponse{
-		CreateApiMappingOutput: r.Request.Data.(*CreateApiMappingOutput),
+		CreateApiMappingOutput: r.Request.Data.(*types.CreateApiMappingOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -203,7 +66,7 @@ func (r CreateApiMappingRequest) Send(ctx context.Context) (*CreateApiMappingRes
 // CreateApiMappingResponse is the response type for the
 // CreateApiMapping API operation.
 type CreateApiMappingResponse struct {
-	*CreateApiMappingOutput
+	*types.CreateApiMappingOutput
 
 	response *aws.Response
 }

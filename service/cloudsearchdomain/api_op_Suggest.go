@@ -6,109 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/cloudsearchdomain/types"
 )
-
-// Container for the parameters to the Suggest request.
-type SuggestInput struct {
-	_ struct{} `type:"structure"`
-
-	// Specifies the string for which you want to get suggestions.
-	//
-	// Query is a required field
-	Query *string `location:"querystring" locationName:"q" type:"string" required:"true"`
-
-	// Specifies the maximum number of suggestions to return.
-	Size *int64 `location:"querystring" locationName:"size" type:"long"`
-
-	// Specifies the name of the suggester to use to find suggested matches.
-	//
-	// Suggester is a required field
-	Suggester *string `location:"querystring" locationName:"suggester" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s SuggestInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *SuggestInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "SuggestInput"}
-
-	if s.Query == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Query"))
-	}
-
-	if s.Suggester == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Suggester"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s SuggestInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.Query != nil {
-		v := *s.Query
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "q", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Size != nil {
-		v := *s.Size
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "size", protocol.Int64Value(v), metadata)
-	}
-	if s.Suggester != nil {
-		v := *s.Suggester
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "suggester", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-// Contains the response to a Suggest request.
-type SuggestOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The status of a SuggestRequest. Contains the resource ID (rid) and how long
-	// it took to process the request (timems).
-	Status *SuggestStatus `locationName:"status" type:"structure"`
-
-	// Container for the matching search suggestion information.
-	Suggest *SuggestModel `locationName:"suggest" type:"structure"`
-}
-
-// String returns the string representation
-func (s SuggestOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s SuggestOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.Status != nil {
-		v := s.Status
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "status", v, metadata)
-	}
-	if s.Suggest != nil {
-		v := s.Suggest
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "suggest", v, metadata)
-	}
-	return nil
-}
 
 const opSuggest = "Suggest"
 
@@ -139,7 +38,7 @@ const opSuggest = "Suggest"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) SuggestRequest(input *SuggestInput) SuggestRequest {
+func (c *Client) SuggestRequest(input *types.SuggestInput) SuggestRequest {
 	op := &aws.Operation{
 		Name:       opSuggest,
 		HTTPMethod: "GET",
@@ -147,10 +46,10 @@ func (c *Client) SuggestRequest(input *SuggestInput) SuggestRequest {
 	}
 
 	if input == nil {
-		input = &SuggestInput{}
+		input = &types.SuggestInput{}
 	}
 
-	req := c.newRequest(op, input, &SuggestOutput{})
+	req := c.newRequest(op, input, &types.SuggestOutput{})
 	return SuggestRequest{Request: req, Input: input, Copy: c.SuggestRequest}
 }
 
@@ -158,8 +57,8 @@ func (c *Client) SuggestRequest(input *SuggestInput) SuggestRequest {
 // Suggest API operation.
 type SuggestRequest struct {
 	*aws.Request
-	Input *SuggestInput
-	Copy  func(*SuggestInput) SuggestRequest
+	Input *types.SuggestInput
+	Copy  func(*types.SuggestInput) SuggestRequest
 }
 
 // Send marshals and sends the Suggest API request.
@@ -171,7 +70,7 @@ func (r SuggestRequest) Send(ctx context.Context) (*SuggestResponse, error) {
 	}
 
 	resp := &SuggestResponse{
-		SuggestOutput: r.Request.Data.(*SuggestOutput),
+		SuggestOutput: r.Request.Data.(*types.SuggestOutput),
 		response:      &aws.Response{Request: r.Request},
 	}
 
@@ -181,7 +80,7 @@ func (r SuggestRequest) Send(ctx context.Context) (*SuggestResponse, error) {
 // SuggestResponse is the response type for the
 // Suggest API operation.
 type SuggestResponse struct {
-	*SuggestOutput
+	*types.SuggestOutput
 
 	response *aws.Response
 }

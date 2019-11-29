@@ -6,79 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/servicequotas/types"
 )
-
-type ListServiceQuotaIncreaseRequestsInTemplateInput struct {
-	_ struct{} `type:"structure"`
-
-	// Specifies the AWS Region for the quota that you want to use.
-	AwsRegion *string `min:"1" type:"string"`
-
-	// (Optional) Limits the number of results that you want to include in the response.
-	// If you don't include this parameter, the response defaults to a value that's
-	// specific to the operation. If additional items exist beyond the specified
-	// maximum, the NextToken element is present and has a value (isn't null). Include
-	// that value as the NextToken request parameter in the call to the operation
-	// to get the next part of the results. You should check NextToken after every
-	// operation to ensure that you receive all of the results.
-	MaxResults *int64 `min:"1" type:"integer"`
-
-	// (Optional) Use this parameter in a request if you receive a NextToken response
-	// in a previous request that indicates that there's more output available.
-	// In a subsequent call, set it to the value of the previous call's NextToken
-	// response to indicate where the output should continue from.
-	NextToken *string `type:"string"`
-
-	// The identifier for a service. When performing an operation, use the ServiceCode
-	// to specify a particular service.
-	ServiceCode *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s ListServiceQuotaIncreaseRequestsInTemplateInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListServiceQuotaIncreaseRequestsInTemplateInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListServiceQuotaIncreaseRequestsInTemplateInput"}
-	if s.AwsRegion != nil && len(*s.AwsRegion) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("AwsRegion", 1))
-	}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-	if s.ServiceCode != nil && len(*s.ServiceCode) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ServiceCode", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ListServiceQuotaIncreaseRequestsInTemplateOutput struct {
-	_ struct{} `type:"structure"`
-
-	// If present in the response, this value indicates there's more output available
-	// that what's included in the current response. This can occur even when the
-	// response includes no values at all, such as when you ask for a filtered view
-	// of a very long list. Use this value in the NextToken request parameter in
-	// a subsequent call to the operation to continue processing and get the next
-	// part of the output. You should repeat this until the NextToken response element
-	// comes back empty (as null).
-	NextToken *string `type:"string"`
-
-	// Returns the list of values of the quota increase request in the template.
-	ServiceQuotaIncreaseRequestInTemplateList []ServiceQuotaIncreaseRequestInTemplate `type:"list"`
-}
-
-// String returns the string representation
-func (s ListServiceQuotaIncreaseRequestsInTemplateOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListServiceQuotaIncreaseRequestsInTemplate = "ListServiceQuotaIncreaseRequestsInTemplate"
 
@@ -95,7 +24,7 @@ const opListServiceQuotaIncreaseRequestsInTemplate = "ListServiceQuotaIncreaseRe
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/service-quotas-2019-06-24/ListServiceQuotaIncreaseRequestsInTemplate
-func (c *Client) ListServiceQuotaIncreaseRequestsInTemplateRequest(input *ListServiceQuotaIncreaseRequestsInTemplateInput) ListServiceQuotaIncreaseRequestsInTemplateRequest {
+func (c *Client) ListServiceQuotaIncreaseRequestsInTemplateRequest(input *types.ListServiceQuotaIncreaseRequestsInTemplateInput) ListServiceQuotaIncreaseRequestsInTemplateRequest {
 	op := &aws.Operation{
 		Name:       opListServiceQuotaIncreaseRequestsInTemplate,
 		HTTPMethod: "POST",
@@ -109,10 +38,10 @@ func (c *Client) ListServiceQuotaIncreaseRequestsInTemplateRequest(input *ListSe
 	}
 
 	if input == nil {
-		input = &ListServiceQuotaIncreaseRequestsInTemplateInput{}
+		input = &types.ListServiceQuotaIncreaseRequestsInTemplateInput{}
 	}
 
-	req := c.newRequest(op, input, &ListServiceQuotaIncreaseRequestsInTemplateOutput{})
+	req := c.newRequest(op, input, &types.ListServiceQuotaIncreaseRequestsInTemplateOutput{})
 	return ListServiceQuotaIncreaseRequestsInTemplateRequest{Request: req, Input: input, Copy: c.ListServiceQuotaIncreaseRequestsInTemplateRequest}
 }
 
@@ -120,8 +49,8 @@ func (c *Client) ListServiceQuotaIncreaseRequestsInTemplateRequest(input *ListSe
 // ListServiceQuotaIncreaseRequestsInTemplate API operation.
 type ListServiceQuotaIncreaseRequestsInTemplateRequest struct {
 	*aws.Request
-	Input *ListServiceQuotaIncreaseRequestsInTemplateInput
-	Copy  func(*ListServiceQuotaIncreaseRequestsInTemplateInput) ListServiceQuotaIncreaseRequestsInTemplateRequest
+	Input *types.ListServiceQuotaIncreaseRequestsInTemplateInput
+	Copy  func(*types.ListServiceQuotaIncreaseRequestsInTemplateInput) ListServiceQuotaIncreaseRequestsInTemplateRequest
 }
 
 // Send marshals and sends the ListServiceQuotaIncreaseRequestsInTemplate API request.
@@ -133,7 +62,7 @@ func (r ListServiceQuotaIncreaseRequestsInTemplateRequest) Send(ctx context.Cont
 	}
 
 	resp := &ListServiceQuotaIncreaseRequestsInTemplateResponse{
-		ListServiceQuotaIncreaseRequestsInTemplateOutput: r.Request.Data.(*ListServiceQuotaIncreaseRequestsInTemplateOutput),
+		ListServiceQuotaIncreaseRequestsInTemplateOutput: r.Request.Data.(*types.ListServiceQuotaIncreaseRequestsInTemplateOutput),
 		response: &aws.Response{Request: r.Request},
 	}
 
@@ -163,7 +92,7 @@ func NewListServiceQuotaIncreaseRequestsInTemplatePaginator(req ListServiceQuota
 	return ListServiceQuotaIncreaseRequestsInTemplatePaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListServiceQuotaIncreaseRequestsInTemplateInput
+				var inCpy *types.ListServiceQuotaIncreaseRequestsInTemplateInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -183,14 +112,14 @@ type ListServiceQuotaIncreaseRequestsInTemplatePaginator struct {
 	aws.Pager
 }
 
-func (p *ListServiceQuotaIncreaseRequestsInTemplatePaginator) CurrentPage() *ListServiceQuotaIncreaseRequestsInTemplateOutput {
-	return p.Pager.CurrentPage().(*ListServiceQuotaIncreaseRequestsInTemplateOutput)
+func (p *ListServiceQuotaIncreaseRequestsInTemplatePaginator) CurrentPage() *types.ListServiceQuotaIncreaseRequestsInTemplateOutput {
+	return p.Pager.CurrentPage().(*types.ListServiceQuotaIncreaseRequestsInTemplateOutput)
 }
 
 // ListServiceQuotaIncreaseRequestsInTemplateResponse is the response type for the
 // ListServiceQuotaIncreaseRequestsInTemplate API operation.
 type ListServiceQuotaIncreaseRequestsInTemplateResponse struct {
-	*ListServiceQuotaIncreaseRequestsInTemplateOutput
+	*types.ListServiceQuotaIncreaseRequestsInTemplateOutput
 
 	response *aws.Response
 }

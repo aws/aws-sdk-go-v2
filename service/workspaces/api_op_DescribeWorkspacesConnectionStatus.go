@@ -6,56 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/workspaces/types"
 )
-
-type DescribeWorkspacesConnectionStatusInput struct {
-	_ struct{} `type:"structure"`
-
-	// If you received a NextToken from a previous call that was paginated, provide
-	// this token to receive the next set of results.
-	NextToken *string `min:"1" type:"string"`
-
-	// The identifiers of the WorkSpaces. You can specify up to 25 WorkSpaces.
-	WorkspaceIds []string `min:"1" type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeWorkspacesConnectionStatusInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeWorkspacesConnectionStatusInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeWorkspacesConnectionStatusInput"}
-	if s.NextToken != nil && len(*s.NextToken) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
-	}
-	if s.WorkspaceIds != nil && len(s.WorkspaceIds) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("WorkspaceIds", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribeWorkspacesConnectionStatusOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The token to use to retrieve the next set of results, or null if no more
-	// results are available.
-	NextToken *string `min:"1" type:"string"`
-
-	// Information about the connection status of the WorkSpace.
-	WorkspacesConnectionStatus []WorkspaceConnectionStatus `type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeWorkspacesConnectionStatusOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeWorkspacesConnectionStatus = "DescribeWorkspacesConnectionStatus"
 
@@ -72,7 +24,7 @@ const opDescribeWorkspacesConnectionStatus = "DescribeWorkspacesConnectionStatus
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DescribeWorkspacesConnectionStatus
-func (c *Client) DescribeWorkspacesConnectionStatusRequest(input *DescribeWorkspacesConnectionStatusInput) DescribeWorkspacesConnectionStatusRequest {
+func (c *Client) DescribeWorkspacesConnectionStatusRequest(input *types.DescribeWorkspacesConnectionStatusInput) DescribeWorkspacesConnectionStatusRequest {
 	op := &aws.Operation{
 		Name:       opDescribeWorkspacesConnectionStatus,
 		HTTPMethod: "POST",
@@ -80,10 +32,10 @@ func (c *Client) DescribeWorkspacesConnectionStatusRequest(input *DescribeWorksp
 	}
 
 	if input == nil {
-		input = &DescribeWorkspacesConnectionStatusInput{}
+		input = &types.DescribeWorkspacesConnectionStatusInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeWorkspacesConnectionStatusOutput{})
+	req := c.newRequest(op, input, &types.DescribeWorkspacesConnectionStatusOutput{})
 	return DescribeWorkspacesConnectionStatusRequest{Request: req, Input: input, Copy: c.DescribeWorkspacesConnectionStatusRequest}
 }
 
@@ -91,8 +43,8 @@ func (c *Client) DescribeWorkspacesConnectionStatusRequest(input *DescribeWorksp
 // DescribeWorkspacesConnectionStatus API operation.
 type DescribeWorkspacesConnectionStatusRequest struct {
 	*aws.Request
-	Input *DescribeWorkspacesConnectionStatusInput
-	Copy  func(*DescribeWorkspacesConnectionStatusInput) DescribeWorkspacesConnectionStatusRequest
+	Input *types.DescribeWorkspacesConnectionStatusInput
+	Copy  func(*types.DescribeWorkspacesConnectionStatusInput) DescribeWorkspacesConnectionStatusRequest
 }
 
 // Send marshals and sends the DescribeWorkspacesConnectionStatus API request.
@@ -104,7 +56,7 @@ func (r DescribeWorkspacesConnectionStatusRequest) Send(ctx context.Context) (*D
 	}
 
 	resp := &DescribeWorkspacesConnectionStatusResponse{
-		DescribeWorkspacesConnectionStatusOutput: r.Request.Data.(*DescribeWorkspacesConnectionStatusOutput),
+		DescribeWorkspacesConnectionStatusOutput: r.Request.Data.(*types.DescribeWorkspacesConnectionStatusOutput),
 		response:                                 &aws.Response{Request: r.Request},
 	}
 
@@ -114,7 +66,7 @@ func (r DescribeWorkspacesConnectionStatusRequest) Send(ctx context.Context) (*D
 // DescribeWorkspacesConnectionStatusResponse is the response type for the
 // DescribeWorkspacesConnectionStatus API operation.
 type DescribeWorkspacesConnectionStatusResponse struct {
-	*DescribeWorkspacesConnectionStatusOutput
+	*types.DescribeWorkspacesConnectionStatusOutput
 
 	response *aws.Response
 }

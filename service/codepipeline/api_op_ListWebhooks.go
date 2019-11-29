@@ -6,59 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/codepipeline/types"
 )
-
-type ListWebhooksInput struct {
-	_ struct{} `type:"structure"`
-
-	// The maximum number of results to return in a single call. To retrieve the
-	// remaining results, make another call with the returned nextToken value.
-	MaxResults *int64 `min:"1" type:"integer"`
-
-	// The token that was returned from the previous ListWebhooks call, which can
-	// be used to return the next set of webhooks in the list.
-	NextToken *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s ListWebhooksInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListWebhooksInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListWebhooksInput"}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-	if s.NextToken != nil && len(*s.NextToken) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ListWebhooksOutput struct {
-	_ struct{} `type:"structure"`
-
-	// If the amount of returned information is significantly large, an identifier
-	// is also returned and can be used in a subsequent ListWebhooks call to return
-	// the next set of webhooks in the list.
-	NextToken *string `min:"1" type:"string"`
-
-	// The JSON detail returned for each webhook in the list output for the ListWebhooks
-	// call.
-	Webhooks []ListWebhookItem `locationName:"webhooks" type:"list"`
-}
-
-// String returns the string representation
-func (s ListWebhooksOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListWebhooks = "ListWebhooks"
 
@@ -77,7 +26,7 @@ const opListWebhooks = "ListWebhooks"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/ListWebhooks
-func (c *Client) ListWebhooksRequest(input *ListWebhooksInput) ListWebhooksRequest {
+func (c *Client) ListWebhooksRequest(input *types.ListWebhooksInput) ListWebhooksRequest {
 	op := &aws.Operation{
 		Name:       opListWebhooks,
 		HTTPMethod: "POST",
@@ -91,10 +40,10 @@ func (c *Client) ListWebhooksRequest(input *ListWebhooksInput) ListWebhooksReque
 	}
 
 	if input == nil {
-		input = &ListWebhooksInput{}
+		input = &types.ListWebhooksInput{}
 	}
 
-	req := c.newRequest(op, input, &ListWebhooksOutput{})
+	req := c.newRequest(op, input, &types.ListWebhooksOutput{})
 	return ListWebhooksRequest{Request: req, Input: input, Copy: c.ListWebhooksRequest}
 }
 
@@ -102,8 +51,8 @@ func (c *Client) ListWebhooksRequest(input *ListWebhooksInput) ListWebhooksReque
 // ListWebhooks API operation.
 type ListWebhooksRequest struct {
 	*aws.Request
-	Input *ListWebhooksInput
-	Copy  func(*ListWebhooksInput) ListWebhooksRequest
+	Input *types.ListWebhooksInput
+	Copy  func(*types.ListWebhooksInput) ListWebhooksRequest
 }
 
 // Send marshals and sends the ListWebhooks API request.
@@ -115,7 +64,7 @@ func (r ListWebhooksRequest) Send(ctx context.Context) (*ListWebhooksResponse, e
 	}
 
 	resp := &ListWebhooksResponse{
-		ListWebhooksOutput: r.Request.Data.(*ListWebhooksOutput),
+		ListWebhooksOutput: r.Request.Data.(*types.ListWebhooksOutput),
 		response:           &aws.Response{Request: r.Request},
 	}
 
@@ -145,7 +94,7 @@ func NewListWebhooksPaginator(req ListWebhooksRequest) ListWebhooksPaginator {
 	return ListWebhooksPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListWebhooksInput
+				var inCpy *types.ListWebhooksInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -165,14 +114,14 @@ type ListWebhooksPaginator struct {
 	aws.Pager
 }
 
-func (p *ListWebhooksPaginator) CurrentPage() *ListWebhooksOutput {
-	return p.Pager.CurrentPage().(*ListWebhooksOutput)
+func (p *ListWebhooksPaginator) CurrentPage() *types.ListWebhooksOutput {
+	return p.Pager.CurrentPage().(*types.ListWebhooksOutput)
 }
 
 // ListWebhooksResponse is the response type for the
 // ListWebhooks API operation.
 type ListWebhooksResponse struct {
-	*ListWebhooksOutput
+	*types.ListWebhooksOutput
 
 	response *aws.Response
 }

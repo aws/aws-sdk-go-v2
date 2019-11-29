@@ -6,60 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/directoryservice/types"
 )
-
-// Registers a new event topic.
-type RegisterEventTopicInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Directory ID that will publish status messages to the SNS topic.
-	//
-	// DirectoryId is a required field
-	DirectoryId *string `type:"string" required:"true"`
-
-	// The SNS topic name to which the directory will publish status messages. This
-	// SNS topic must be in the same region as the specified Directory ID.
-	//
-	// TopicName is a required field
-	TopicName *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s RegisterEventTopicInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *RegisterEventTopicInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "RegisterEventTopicInput"}
-
-	if s.DirectoryId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DirectoryId"))
-	}
-
-	if s.TopicName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("TopicName"))
-	}
-	if s.TopicName != nil && len(*s.TopicName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("TopicName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// The result of a RegisterEventTopic request.
-type RegisterEventTopicOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s RegisterEventTopicOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opRegisterEventTopic = "RegisterEventTopic"
 
@@ -81,7 +29,7 @@ const opRegisterEventTopic = "RegisterEventTopic"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/RegisterEventTopic
-func (c *Client) RegisterEventTopicRequest(input *RegisterEventTopicInput) RegisterEventTopicRequest {
+func (c *Client) RegisterEventTopicRequest(input *types.RegisterEventTopicInput) RegisterEventTopicRequest {
 	op := &aws.Operation{
 		Name:       opRegisterEventTopic,
 		HTTPMethod: "POST",
@@ -89,10 +37,10 @@ func (c *Client) RegisterEventTopicRequest(input *RegisterEventTopicInput) Regis
 	}
 
 	if input == nil {
-		input = &RegisterEventTopicInput{}
+		input = &types.RegisterEventTopicInput{}
 	}
 
-	req := c.newRequest(op, input, &RegisterEventTopicOutput{})
+	req := c.newRequest(op, input, &types.RegisterEventTopicOutput{})
 	return RegisterEventTopicRequest{Request: req, Input: input, Copy: c.RegisterEventTopicRequest}
 }
 
@@ -100,8 +48,8 @@ func (c *Client) RegisterEventTopicRequest(input *RegisterEventTopicInput) Regis
 // RegisterEventTopic API operation.
 type RegisterEventTopicRequest struct {
 	*aws.Request
-	Input *RegisterEventTopicInput
-	Copy  func(*RegisterEventTopicInput) RegisterEventTopicRequest
+	Input *types.RegisterEventTopicInput
+	Copy  func(*types.RegisterEventTopicInput) RegisterEventTopicRequest
 }
 
 // Send marshals and sends the RegisterEventTopic API request.
@@ -113,7 +61,7 @@ func (r RegisterEventTopicRequest) Send(ctx context.Context) (*RegisterEventTopi
 	}
 
 	resp := &RegisterEventTopicResponse{
-		RegisterEventTopicOutput: r.Request.Data.(*RegisterEventTopicOutput),
+		RegisterEventTopicOutput: r.Request.Data.(*types.RegisterEventTopicOutput),
 		response:                 &aws.Response{Request: r.Request},
 	}
 
@@ -123,7 +71,7 @@ func (r RegisterEventTopicRequest) Send(ctx context.Context) (*RegisterEventTopi
 // RegisterEventTopicResponse is the response type for the
 // RegisterEventTopic API operation.
 type RegisterEventTopicResponse struct {
-	*RegisterEventTopicOutput
+	*types.RegisterEventTopicOutput
 
 	response *aws.Response
 }

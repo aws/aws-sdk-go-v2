@@ -6,66 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/codedeploy/types"
 )
-
-// Represents the input of a ListDeploymentGroups operation.
-type ListDeploymentGroupsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of an AWS CodeDeploy application associated with the IAM user or
-	// AWS account.
-	//
-	// ApplicationName is a required field
-	ApplicationName *string `locationName:"applicationName" min:"1" type:"string" required:"true"`
-
-	// An identifier returned from the previous list deployment groups call. It
-	// can be used to return the next set of deployment groups in the list.
-	NextToken *string `locationName:"nextToken" type:"string"`
-}
-
-// String returns the string representation
-func (s ListDeploymentGroupsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListDeploymentGroupsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListDeploymentGroupsInput"}
-
-	if s.ApplicationName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ApplicationName"))
-	}
-	if s.ApplicationName != nil && len(*s.ApplicationName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ApplicationName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Represents the output of a ListDeploymentGroups operation.
-type ListDeploymentGroupsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The application name.
-	ApplicationName *string `locationName:"applicationName" min:"1" type:"string"`
-
-	// A list of deployment group names.
-	DeploymentGroups []string `locationName:"deploymentGroups" type:"list"`
-
-	// If a large amount of information is returned, an identifier is also returned.
-	// It can be used in a subsequent list deployment groups call to return the
-	// next set of deployment groups in the list.
-	NextToken *string `locationName:"nextToken" type:"string"`
-}
-
-// String returns the string representation
-func (s ListDeploymentGroupsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListDeploymentGroups = "ListDeploymentGroups"
 
@@ -83,7 +25,7 @@ const opListDeploymentGroups = "ListDeploymentGroups"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/ListDeploymentGroups
-func (c *Client) ListDeploymentGroupsRequest(input *ListDeploymentGroupsInput) ListDeploymentGroupsRequest {
+func (c *Client) ListDeploymentGroupsRequest(input *types.ListDeploymentGroupsInput) ListDeploymentGroupsRequest {
 	op := &aws.Operation{
 		Name:       opListDeploymentGroups,
 		HTTPMethod: "POST",
@@ -97,10 +39,10 @@ func (c *Client) ListDeploymentGroupsRequest(input *ListDeploymentGroupsInput) L
 	}
 
 	if input == nil {
-		input = &ListDeploymentGroupsInput{}
+		input = &types.ListDeploymentGroupsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListDeploymentGroupsOutput{})
+	req := c.newRequest(op, input, &types.ListDeploymentGroupsOutput{})
 	return ListDeploymentGroupsRequest{Request: req, Input: input, Copy: c.ListDeploymentGroupsRequest}
 }
 
@@ -108,8 +50,8 @@ func (c *Client) ListDeploymentGroupsRequest(input *ListDeploymentGroupsInput) L
 // ListDeploymentGroups API operation.
 type ListDeploymentGroupsRequest struct {
 	*aws.Request
-	Input *ListDeploymentGroupsInput
-	Copy  func(*ListDeploymentGroupsInput) ListDeploymentGroupsRequest
+	Input *types.ListDeploymentGroupsInput
+	Copy  func(*types.ListDeploymentGroupsInput) ListDeploymentGroupsRequest
 }
 
 // Send marshals and sends the ListDeploymentGroups API request.
@@ -121,7 +63,7 @@ func (r ListDeploymentGroupsRequest) Send(ctx context.Context) (*ListDeploymentG
 	}
 
 	resp := &ListDeploymentGroupsResponse{
-		ListDeploymentGroupsOutput: r.Request.Data.(*ListDeploymentGroupsOutput),
+		ListDeploymentGroupsOutput: r.Request.Data.(*types.ListDeploymentGroupsOutput),
 		response:                   &aws.Response{Request: r.Request},
 	}
 
@@ -151,7 +93,7 @@ func NewListDeploymentGroupsPaginator(req ListDeploymentGroupsRequest) ListDeplo
 	return ListDeploymentGroupsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListDeploymentGroupsInput
+				var inCpy *types.ListDeploymentGroupsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -171,14 +113,14 @@ type ListDeploymentGroupsPaginator struct {
 	aws.Pager
 }
 
-func (p *ListDeploymentGroupsPaginator) CurrentPage() *ListDeploymentGroupsOutput {
-	return p.Pager.CurrentPage().(*ListDeploymentGroupsOutput)
+func (p *ListDeploymentGroupsPaginator) CurrentPage() *types.ListDeploymentGroupsOutput {
+	return p.Pager.CurrentPage().(*types.ListDeploymentGroupsOutput)
 }
 
 // ListDeploymentGroupsResponse is the response type for the
 // ListDeploymentGroups API operation.
 type ListDeploymentGroupsResponse struct {
-	*ListDeploymentGroupsOutput
+	*types.ListDeploymentGroupsOutput
 
 	response *aws.Response
 }

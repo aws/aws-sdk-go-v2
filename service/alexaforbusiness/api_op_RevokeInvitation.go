@@ -6,32 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/alexaforbusiness/types"
 )
-
-type RevokeInvitationInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ARN of the enrollment invitation to revoke. Required.
-	EnrollmentId *string `type:"string"`
-
-	// The ARN of the user for whom to revoke an enrollment invitation. Required.
-	UserArn *string `type:"string"`
-}
-
-// String returns the string representation
-func (s RevokeInvitationInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type RevokeInvitationOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s RevokeInvitationOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opRevokeInvitation = "RevokeInvitation"
 
@@ -48,7 +24,7 @@ const opRevokeInvitation = "RevokeInvitation"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/RevokeInvitation
-func (c *Client) RevokeInvitationRequest(input *RevokeInvitationInput) RevokeInvitationRequest {
+func (c *Client) RevokeInvitationRequest(input *types.RevokeInvitationInput) RevokeInvitationRequest {
 	op := &aws.Operation{
 		Name:       opRevokeInvitation,
 		HTTPMethod: "POST",
@@ -56,10 +32,10 @@ func (c *Client) RevokeInvitationRequest(input *RevokeInvitationInput) RevokeInv
 	}
 
 	if input == nil {
-		input = &RevokeInvitationInput{}
+		input = &types.RevokeInvitationInput{}
 	}
 
-	req := c.newRequest(op, input, &RevokeInvitationOutput{})
+	req := c.newRequest(op, input, &types.RevokeInvitationOutput{})
 	return RevokeInvitationRequest{Request: req, Input: input, Copy: c.RevokeInvitationRequest}
 }
 
@@ -67,8 +43,8 @@ func (c *Client) RevokeInvitationRequest(input *RevokeInvitationInput) RevokeInv
 // RevokeInvitation API operation.
 type RevokeInvitationRequest struct {
 	*aws.Request
-	Input *RevokeInvitationInput
-	Copy  func(*RevokeInvitationInput) RevokeInvitationRequest
+	Input *types.RevokeInvitationInput
+	Copy  func(*types.RevokeInvitationInput) RevokeInvitationRequest
 }
 
 // Send marshals and sends the RevokeInvitation API request.
@@ -80,7 +56,7 @@ func (r RevokeInvitationRequest) Send(ctx context.Context) (*RevokeInvitationRes
 	}
 
 	resp := &RevokeInvitationResponse{
-		RevokeInvitationOutput: r.Request.Data.(*RevokeInvitationOutput),
+		RevokeInvitationOutput: r.Request.Data.(*types.RevokeInvitationOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -90,7 +66,7 @@ func (r RevokeInvitationRequest) Send(ctx context.Context) (*RevokeInvitationRes
 // RevokeInvitationResponse is the response type for the
 // RevokeInvitation API operation.
 type RevokeInvitationResponse struct {
-	*RevokeInvitationOutput
+	*types.RevokeInvitationOutput
 
 	response *aws.Response
 }

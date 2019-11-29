@@ -6,114 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/mq/types"
 )
-
-type DescribeBrokerInstanceOptionsInput struct {
-	_ struct{} `type:"structure"`
-
-	EngineType *string `location:"querystring" locationName:"engineType" type:"string"`
-
-	HostInstanceType *string `location:"querystring" locationName:"hostInstanceType" type:"string"`
-
-	MaxResults *int64 `location:"querystring" locationName:"maxResults" min:"1" type:"integer"`
-
-	NextToken *string `location:"querystring" locationName:"nextToken" type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeBrokerInstanceOptionsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeBrokerInstanceOptionsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeBrokerInstanceOptionsInput"}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DescribeBrokerInstanceOptionsInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.EngineType != nil {
-		v := *s.EngineType
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "engineType", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.HostInstanceType != nil {
-		v := *s.HostInstanceType
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "hostInstanceType", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.MaxResults != nil {
-		v := *s.MaxResults
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "maxResults", protocol.Int64Value(v), metadata)
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type DescribeBrokerInstanceOptionsOutput struct {
-	_ struct{} `type:"structure"`
-
-	BrokerInstanceOptions []BrokerInstanceOption `locationName:"brokerInstanceOptions" type:"list"`
-
-	MaxResults *int64 `locationName:"maxResults" min:"5" type:"integer"`
-
-	NextToken *string `locationName:"nextToken" type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeBrokerInstanceOptionsOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DescribeBrokerInstanceOptionsOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.BrokerInstanceOptions != nil {
-		v := s.BrokerInstanceOptions
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "brokerInstanceOptions", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	if s.MaxResults != nil {
-		v := *s.MaxResults
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "maxResults", protocol.Int64Value(v), metadata)
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opDescribeBrokerInstanceOptions = "DescribeBrokerInstanceOptions"
 
@@ -130,7 +24,7 @@ const opDescribeBrokerInstanceOptions = "DescribeBrokerInstanceOptions"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/DescribeBrokerInstanceOptions
-func (c *Client) DescribeBrokerInstanceOptionsRequest(input *DescribeBrokerInstanceOptionsInput) DescribeBrokerInstanceOptionsRequest {
+func (c *Client) DescribeBrokerInstanceOptionsRequest(input *types.DescribeBrokerInstanceOptionsInput) DescribeBrokerInstanceOptionsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeBrokerInstanceOptions,
 		HTTPMethod: "GET",
@@ -138,10 +32,10 @@ func (c *Client) DescribeBrokerInstanceOptionsRequest(input *DescribeBrokerInsta
 	}
 
 	if input == nil {
-		input = &DescribeBrokerInstanceOptionsInput{}
+		input = &types.DescribeBrokerInstanceOptionsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeBrokerInstanceOptionsOutput{})
+	req := c.newRequest(op, input, &types.DescribeBrokerInstanceOptionsOutput{})
 	return DescribeBrokerInstanceOptionsRequest{Request: req, Input: input, Copy: c.DescribeBrokerInstanceOptionsRequest}
 }
 
@@ -149,8 +43,8 @@ func (c *Client) DescribeBrokerInstanceOptionsRequest(input *DescribeBrokerInsta
 // DescribeBrokerInstanceOptions API operation.
 type DescribeBrokerInstanceOptionsRequest struct {
 	*aws.Request
-	Input *DescribeBrokerInstanceOptionsInput
-	Copy  func(*DescribeBrokerInstanceOptionsInput) DescribeBrokerInstanceOptionsRequest
+	Input *types.DescribeBrokerInstanceOptionsInput
+	Copy  func(*types.DescribeBrokerInstanceOptionsInput) DescribeBrokerInstanceOptionsRequest
 }
 
 // Send marshals and sends the DescribeBrokerInstanceOptions API request.
@@ -162,7 +56,7 @@ func (r DescribeBrokerInstanceOptionsRequest) Send(ctx context.Context) (*Descri
 	}
 
 	resp := &DescribeBrokerInstanceOptionsResponse{
-		DescribeBrokerInstanceOptionsOutput: r.Request.Data.(*DescribeBrokerInstanceOptionsOutput),
+		DescribeBrokerInstanceOptionsOutput: r.Request.Data.(*types.DescribeBrokerInstanceOptionsOutput),
 		response:                            &aws.Response{Request: r.Request},
 	}
 
@@ -172,7 +66,7 @@ func (r DescribeBrokerInstanceOptionsRequest) Send(ctx context.Context) (*Descri
 // DescribeBrokerInstanceOptionsResponse is the response type for the
 // DescribeBrokerInstanceOptions API operation.
 type DescribeBrokerInstanceOptionsResponse struct {
-	*DescribeBrokerInstanceOptionsOutput
+	*types.DescribeBrokerInstanceOptionsOutput
 
 	response *aws.Response
 }

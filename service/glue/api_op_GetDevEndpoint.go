@@ -6,48 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/glue/types"
 )
-
-type GetDevEndpointInput struct {
-	_ struct{} `type:"structure"`
-
-	// Name of the DevEndpoint to retrieve information for.
-	//
-	// EndpointName is a required field
-	EndpointName *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetDevEndpointInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetDevEndpointInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetDevEndpointInput"}
-
-	if s.EndpointName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("EndpointName"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type GetDevEndpointOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A DevEndpoint definition.
-	DevEndpoint *DevEndpoint `type:"structure"`
-}
-
-// String returns the string representation
-func (s GetDevEndpointOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetDevEndpoint = "GetDevEndpoint"
 
@@ -69,7 +29,7 @@ const opGetDevEndpoint = "GetDevEndpoint"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetDevEndpoint
-func (c *Client) GetDevEndpointRequest(input *GetDevEndpointInput) GetDevEndpointRequest {
+func (c *Client) GetDevEndpointRequest(input *types.GetDevEndpointInput) GetDevEndpointRequest {
 	op := &aws.Operation{
 		Name:       opGetDevEndpoint,
 		HTTPMethod: "POST",
@@ -77,10 +37,10 @@ func (c *Client) GetDevEndpointRequest(input *GetDevEndpointInput) GetDevEndpoin
 	}
 
 	if input == nil {
-		input = &GetDevEndpointInput{}
+		input = &types.GetDevEndpointInput{}
 	}
 
-	req := c.newRequest(op, input, &GetDevEndpointOutput{})
+	req := c.newRequest(op, input, &types.GetDevEndpointOutput{})
 	return GetDevEndpointRequest{Request: req, Input: input, Copy: c.GetDevEndpointRequest}
 }
 
@@ -88,8 +48,8 @@ func (c *Client) GetDevEndpointRequest(input *GetDevEndpointInput) GetDevEndpoin
 // GetDevEndpoint API operation.
 type GetDevEndpointRequest struct {
 	*aws.Request
-	Input *GetDevEndpointInput
-	Copy  func(*GetDevEndpointInput) GetDevEndpointRequest
+	Input *types.GetDevEndpointInput
+	Copy  func(*types.GetDevEndpointInput) GetDevEndpointRequest
 }
 
 // Send marshals and sends the GetDevEndpoint API request.
@@ -101,7 +61,7 @@ func (r GetDevEndpointRequest) Send(ctx context.Context) (*GetDevEndpointRespons
 	}
 
 	resp := &GetDevEndpointResponse{
-		GetDevEndpointOutput: r.Request.Data.(*GetDevEndpointOutput),
+		GetDevEndpointOutput: r.Request.Data.(*types.GetDevEndpointOutput),
 		response:             &aws.Response{Request: r.Request},
 	}
 
@@ -111,7 +71,7 @@ func (r GetDevEndpointRequest) Send(ctx context.Context) (*GetDevEndpointRespons
 // GetDevEndpointResponse is the response type for the
 // GetDevEndpoint API operation.
 type GetDevEndpointResponse struct {
-	*GetDevEndpointOutput
+	*types.GetDevEndpointOutput
 
 	response *aws.Response
 }

@@ -6,47 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/query"
+	"github.com/aws/aws-sdk-go-v2/service/simpledb/types"
 )
-
-type DeleteDomainInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the domain to delete.
-	//
-	// DomainName is a required field
-	DomainName *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteDomainInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteDomainInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteDomainInput"}
-
-	if s.DomainName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DomainName"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteDomainOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteDomainOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteDomain = "DeleteDomain"
 
@@ -67,7 +30,7 @@ const opDeleteDomain = "DeleteDomain"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) DeleteDomainRequest(input *DeleteDomainInput) DeleteDomainRequest {
+func (c *Client) DeleteDomainRequest(input *types.DeleteDomainInput) DeleteDomainRequest {
 	op := &aws.Operation{
 		Name:       opDeleteDomain,
 		HTTPMethod: "POST",
@@ -75,10 +38,10 @@ func (c *Client) DeleteDomainRequest(input *DeleteDomainInput) DeleteDomainReque
 	}
 
 	if input == nil {
-		input = &DeleteDomainInput{}
+		input = &types.DeleteDomainInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteDomainOutput{})
+	req := c.newRequest(op, input, &types.DeleteDomainOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return DeleteDomainRequest{Request: req, Input: input, Copy: c.DeleteDomainRequest}
@@ -88,8 +51,8 @@ func (c *Client) DeleteDomainRequest(input *DeleteDomainInput) DeleteDomainReque
 // DeleteDomain API operation.
 type DeleteDomainRequest struct {
 	*aws.Request
-	Input *DeleteDomainInput
-	Copy  func(*DeleteDomainInput) DeleteDomainRequest
+	Input *types.DeleteDomainInput
+	Copy  func(*types.DeleteDomainInput) DeleteDomainRequest
 }
 
 // Send marshals and sends the DeleteDomain API request.
@@ -101,7 +64,7 @@ func (r DeleteDomainRequest) Send(ctx context.Context) (*DeleteDomainResponse, e
 	}
 
 	resp := &DeleteDomainResponse{
-		DeleteDomainOutput: r.Request.Data.(*DeleteDomainOutput),
+		DeleteDomainOutput: r.Request.Data.(*types.DeleteDomainOutput),
 		response:           &aws.Response{Request: r.Request},
 	}
 
@@ -111,7 +74,7 @@ func (r DeleteDomainRequest) Send(ctx context.Context) (*DeleteDomainResponse, e
 // DeleteDomainResponse is the response type for the
 // DeleteDomain API operation.
 type DeleteDomainResponse struct {
-	*DeleteDomainOutput
+	*types.DeleteDomainOutput
 
 	response *aws.Response
 }

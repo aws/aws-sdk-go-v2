@@ -6,36 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/configservice/types"
 )
-
-// The input for the DescribeConfigurationRecorderStatus action.
-type DescribeConfigurationRecorderStatusInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name(s) of the configuration recorder. If the name is not specified,
-	// the action returns the current status of all the configuration recorders
-	// associated with the account.
-	ConfigurationRecorderNames []string `type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeConfigurationRecorderStatusInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// The output for the DescribeConfigurationRecorderStatus action, in JSON format.
-type DescribeConfigurationRecorderStatusOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A list that contains status of the specified recorders.
-	ConfigurationRecordersStatus []ConfigurationRecorderStatus `type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeConfigurationRecorderStatusOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeConfigurationRecorderStatus = "DescribeConfigurationRecorderStatus"
 
@@ -57,7 +29,7 @@ const opDescribeConfigurationRecorderStatus = "DescribeConfigurationRecorderStat
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DescribeConfigurationRecorderStatus
-func (c *Client) DescribeConfigurationRecorderStatusRequest(input *DescribeConfigurationRecorderStatusInput) DescribeConfigurationRecorderStatusRequest {
+func (c *Client) DescribeConfigurationRecorderStatusRequest(input *types.DescribeConfigurationRecorderStatusInput) DescribeConfigurationRecorderStatusRequest {
 	op := &aws.Operation{
 		Name:       opDescribeConfigurationRecorderStatus,
 		HTTPMethod: "POST",
@@ -65,10 +37,10 @@ func (c *Client) DescribeConfigurationRecorderStatusRequest(input *DescribeConfi
 	}
 
 	if input == nil {
-		input = &DescribeConfigurationRecorderStatusInput{}
+		input = &types.DescribeConfigurationRecorderStatusInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeConfigurationRecorderStatusOutput{})
+	req := c.newRequest(op, input, &types.DescribeConfigurationRecorderStatusOutput{})
 	return DescribeConfigurationRecorderStatusRequest{Request: req, Input: input, Copy: c.DescribeConfigurationRecorderStatusRequest}
 }
 
@@ -76,8 +48,8 @@ func (c *Client) DescribeConfigurationRecorderStatusRequest(input *DescribeConfi
 // DescribeConfigurationRecorderStatus API operation.
 type DescribeConfigurationRecorderStatusRequest struct {
 	*aws.Request
-	Input *DescribeConfigurationRecorderStatusInput
-	Copy  func(*DescribeConfigurationRecorderStatusInput) DescribeConfigurationRecorderStatusRequest
+	Input *types.DescribeConfigurationRecorderStatusInput
+	Copy  func(*types.DescribeConfigurationRecorderStatusInput) DescribeConfigurationRecorderStatusRequest
 }
 
 // Send marshals and sends the DescribeConfigurationRecorderStatus API request.
@@ -89,7 +61,7 @@ func (r DescribeConfigurationRecorderStatusRequest) Send(ctx context.Context) (*
 	}
 
 	resp := &DescribeConfigurationRecorderStatusResponse{
-		DescribeConfigurationRecorderStatusOutput: r.Request.Data.(*DescribeConfigurationRecorderStatusOutput),
+		DescribeConfigurationRecorderStatusOutput: r.Request.Data.(*types.DescribeConfigurationRecorderStatusOutput),
 		response: &aws.Response{Request: r.Request},
 	}
 
@@ -99,7 +71,7 @@ func (r DescribeConfigurationRecorderStatusRequest) Send(ctx context.Context) (*
 // DescribeConfigurationRecorderStatusResponse is the response type for the
 // DescribeConfigurationRecorderStatus API operation.
 type DescribeConfigurationRecorderStatusResponse struct {
-	*DescribeConfigurationRecorderStatusOutput
+	*types.DescribeConfigurationRecorderStatusOutput
 
 	response *aws.Response
 }

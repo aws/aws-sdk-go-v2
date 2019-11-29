@@ -4,72 +4,10 @@ package sagemaker
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
 )
-
-type UpdateEndpointWeightsAndCapacitiesInput struct {
-	_ struct{} `type:"structure"`
-
-	// An object that provides new capacity and weight values for a variant.
-	//
-	// DesiredWeightsAndCapacities is a required field
-	DesiredWeightsAndCapacities []DesiredWeightAndCapacity `min:"1" type:"list" required:"true"`
-
-	// The name of an existing Amazon SageMaker endpoint.
-	//
-	// EndpointName is a required field
-	EndpointName *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s UpdateEndpointWeightsAndCapacitiesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateEndpointWeightsAndCapacitiesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateEndpointWeightsAndCapacitiesInput"}
-
-	if s.DesiredWeightsAndCapacities == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DesiredWeightsAndCapacities"))
-	}
-	if s.DesiredWeightsAndCapacities != nil && len(s.DesiredWeightsAndCapacities) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("DesiredWeightsAndCapacities", 1))
-	}
-
-	if s.EndpointName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("EndpointName"))
-	}
-	if s.DesiredWeightsAndCapacities != nil {
-		for i, v := range s.DesiredWeightsAndCapacities {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "DesiredWeightsAndCapacities", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type UpdateEndpointWeightsAndCapacitiesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the updated endpoint.
-	//
-	// EndpointArn is a required field
-	EndpointArn *string `min:"20" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s UpdateEndpointWeightsAndCapacitiesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opUpdateEndpointWeightsAndCapacities = "UpdateEndpointWeightsAndCapacities"
 
@@ -91,7 +29,7 @@ const opUpdateEndpointWeightsAndCapacities = "UpdateEndpointWeightsAndCapacities
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/UpdateEndpointWeightsAndCapacities
-func (c *Client) UpdateEndpointWeightsAndCapacitiesRequest(input *UpdateEndpointWeightsAndCapacitiesInput) UpdateEndpointWeightsAndCapacitiesRequest {
+func (c *Client) UpdateEndpointWeightsAndCapacitiesRequest(input *types.UpdateEndpointWeightsAndCapacitiesInput) UpdateEndpointWeightsAndCapacitiesRequest {
 	op := &aws.Operation{
 		Name:       opUpdateEndpointWeightsAndCapacities,
 		HTTPMethod: "POST",
@@ -99,10 +37,10 @@ func (c *Client) UpdateEndpointWeightsAndCapacitiesRequest(input *UpdateEndpoint
 	}
 
 	if input == nil {
-		input = &UpdateEndpointWeightsAndCapacitiesInput{}
+		input = &types.UpdateEndpointWeightsAndCapacitiesInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateEndpointWeightsAndCapacitiesOutput{})
+	req := c.newRequest(op, input, &types.UpdateEndpointWeightsAndCapacitiesOutput{})
 	return UpdateEndpointWeightsAndCapacitiesRequest{Request: req, Input: input, Copy: c.UpdateEndpointWeightsAndCapacitiesRequest}
 }
 
@@ -110,8 +48,8 @@ func (c *Client) UpdateEndpointWeightsAndCapacitiesRequest(input *UpdateEndpoint
 // UpdateEndpointWeightsAndCapacities API operation.
 type UpdateEndpointWeightsAndCapacitiesRequest struct {
 	*aws.Request
-	Input *UpdateEndpointWeightsAndCapacitiesInput
-	Copy  func(*UpdateEndpointWeightsAndCapacitiesInput) UpdateEndpointWeightsAndCapacitiesRequest
+	Input *types.UpdateEndpointWeightsAndCapacitiesInput
+	Copy  func(*types.UpdateEndpointWeightsAndCapacitiesInput) UpdateEndpointWeightsAndCapacitiesRequest
 }
 
 // Send marshals and sends the UpdateEndpointWeightsAndCapacities API request.
@@ -123,7 +61,7 @@ func (r UpdateEndpointWeightsAndCapacitiesRequest) Send(ctx context.Context) (*U
 	}
 
 	resp := &UpdateEndpointWeightsAndCapacitiesResponse{
-		UpdateEndpointWeightsAndCapacitiesOutput: r.Request.Data.(*UpdateEndpointWeightsAndCapacitiesOutput),
+		UpdateEndpointWeightsAndCapacitiesOutput: r.Request.Data.(*types.UpdateEndpointWeightsAndCapacitiesOutput),
 		response:                                 &aws.Response{Request: r.Request},
 	}
 
@@ -133,7 +71,7 @@ func (r UpdateEndpointWeightsAndCapacitiesRequest) Send(ctx context.Context) (*U
 // UpdateEndpointWeightsAndCapacitiesResponse is the response type for the
 // UpdateEndpointWeightsAndCapacities API operation.
 type UpdateEndpointWeightsAndCapacitiesResponse struct {
-	*UpdateEndpointWeightsAndCapacitiesOutput
+	*types.UpdateEndpointWeightsAndCapacitiesOutput
 
 	response *aws.Response
 }

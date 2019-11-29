@@ -6,62 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/greengrass/types"
 )
-
-type DeleteSubscriptionDefinitionInput struct {
-	_ struct{} `type:"structure"`
-
-	// SubscriptionDefinitionId is a required field
-	SubscriptionDefinitionId *string `location:"uri" locationName:"SubscriptionDefinitionId" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteSubscriptionDefinitionInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteSubscriptionDefinitionInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteSubscriptionDefinitionInput"}
-
-	if s.SubscriptionDefinitionId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("SubscriptionDefinitionId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteSubscriptionDefinitionInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.SubscriptionDefinitionId != nil {
-		v := *s.SubscriptionDefinitionId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "SubscriptionDefinitionId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type DeleteSubscriptionDefinitionOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteSubscriptionDefinitionOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteSubscriptionDefinitionOutput) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
 
 const opDeleteSubscriptionDefinition = "DeleteSubscriptionDefinition"
 
@@ -78,7 +24,7 @@ const opDeleteSubscriptionDefinition = "DeleteSubscriptionDefinition"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/DeleteSubscriptionDefinition
-func (c *Client) DeleteSubscriptionDefinitionRequest(input *DeleteSubscriptionDefinitionInput) DeleteSubscriptionDefinitionRequest {
+func (c *Client) DeleteSubscriptionDefinitionRequest(input *types.DeleteSubscriptionDefinitionInput) DeleteSubscriptionDefinitionRequest {
 	op := &aws.Operation{
 		Name:       opDeleteSubscriptionDefinition,
 		HTTPMethod: "DELETE",
@@ -86,10 +32,10 @@ func (c *Client) DeleteSubscriptionDefinitionRequest(input *DeleteSubscriptionDe
 	}
 
 	if input == nil {
-		input = &DeleteSubscriptionDefinitionInput{}
+		input = &types.DeleteSubscriptionDefinitionInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteSubscriptionDefinitionOutput{})
+	req := c.newRequest(op, input, &types.DeleteSubscriptionDefinitionOutput{})
 	return DeleteSubscriptionDefinitionRequest{Request: req, Input: input, Copy: c.DeleteSubscriptionDefinitionRequest}
 }
 
@@ -97,8 +43,8 @@ func (c *Client) DeleteSubscriptionDefinitionRequest(input *DeleteSubscriptionDe
 // DeleteSubscriptionDefinition API operation.
 type DeleteSubscriptionDefinitionRequest struct {
 	*aws.Request
-	Input *DeleteSubscriptionDefinitionInput
-	Copy  func(*DeleteSubscriptionDefinitionInput) DeleteSubscriptionDefinitionRequest
+	Input *types.DeleteSubscriptionDefinitionInput
+	Copy  func(*types.DeleteSubscriptionDefinitionInput) DeleteSubscriptionDefinitionRequest
 }
 
 // Send marshals and sends the DeleteSubscriptionDefinition API request.
@@ -110,7 +56,7 @@ func (r DeleteSubscriptionDefinitionRequest) Send(ctx context.Context) (*DeleteS
 	}
 
 	resp := &DeleteSubscriptionDefinitionResponse{
-		DeleteSubscriptionDefinitionOutput: r.Request.Data.(*DeleteSubscriptionDefinitionOutput),
+		DeleteSubscriptionDefinitionOutput: r.Request.Data.(*types.DeleteSubscriptionDefinitionOutput),
 		response:                           &aws.Response{Request: r.Request},
 	}
 
@@ -120,7 +66,7 @@ func (r DeleteSubscriptionDefinitionRequest) Send(ctx context.Context) (*DeleteS
 // DeleteSubscriptionDefinitionResponse is the response type for the
 // DeleteSubscriptionDefinition API operation.
 type DeleteSubscriptionDefinitionResponse struct {
-	*DeleteSubscriptionDefinitionOutput
+	*types.DeleteSubscriptionDefinitionOutput
 
 	response *aws.Response
 }

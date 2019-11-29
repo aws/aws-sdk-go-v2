@@ -6,87 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/pinpoint/types"
 )
-
-type GetSegmentInput struct {
-	_ struct{} `type:"structure"`
-
-	// ApplicationId is a required field
-	ApplicationId *string `location:"uri" locationName:"application-id" type:"string" required:"true"`
-
-	// SegmentId is a required field
-	SegmentId *string `location:"uri" locationName:"segment-id" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetSegmentInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetSegmentInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetSegmentInput"}
-
-	if s.ApplicationId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ApplicationId"))
-	}
-
-	if s.SegmentId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("SegmentId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetSegmentInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.ApplicationId != nil {
-		v := *s.ApplicationId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "application-id", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.SegmentId != nil {
-		v := *s.SegmentId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "segment-id", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type GetSegmentOutput struct {
-	_ struct{} `type:"structure" payload:"SegmentResponse"`
-
-	// Provides information about the configuration, dimension, and other settings
-	// for a segment.
-	//
-	// SegmentResponse is a required field
-	SegmentResponse *SegmentResponse `type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s GetSegmentOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetSegmentOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.SegmentResponse != nil {
-		v := s.SegmentResponse
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.PayloadTarget, "SegmentResponse", v, metadata)
-	}
-	return nil
-}
 
 const opGetSegment = "GetSegment"
 
@@ -104,7 +25,7 @@ const opGetSegment = "GetSegment"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetSegment
-func (c *Client) GetSegmentRequest(input *GetSegmentInput) GetSegmentRequest {
+func (c *Client) GetSegmentRequest(input *types.GetSegmentInput) GetSegmentRequest {
 	op := &aws.Operation{
 		Name:       opGetSegment,
 		HTTPMethod: "GET",
@@ -112,10 +33,10 @@ func (c *Client) GetSegmentRequest(input *GetSegmentInput) GetSegmentRequest {
 	}
 
 	if input == nil {
-		input = &GetSegmentInput{}
+		input = &types.GetSegmentInput{}
 	}
 
-	req := c.newRequest(op, input, &GetSegmentOutput{})
+	req := c.newRequest(op, input, &types.GetSegmentOutput{})
 	return GetSegmentRequest{Request: req, Input: input, Copy: c.GetSegmentRequest}
 }
 
@@ -123,8 +44,8 @@ func (c *Client) GetSegmentRequest(input *GetSegmentInput) GetSegmentRequest {
 // GetSegment API operation.
 type GetSegmentRequest struct {
 	*aws.Request
-	Input *GetSegmentInput
-	Copy  func(*GetSegmentInput) GetSegmentRequest
+	Input *types.GetSegmentInput
+	Copy  func(*types.GetSegmentInput) GetSegmentRequest
 }
 
 // Send marshals and sends the GetSegment API request.
@@ -136,7 +57,7 @@ func (r GetSegmentRequest) Send(ctx context.Context) (*GetSegmentResponse, error
 	}
 
 	resp := &GetSegmentResponse{
-		GetSegmentOutput: r.Request.Data.(*GetSegmentOutput),
+		GetSegmentOutput: r.Request.Data.(*types.GetSegmentOutput),
 		response:         &aws.Response{Request: r.Request},
 	}
 
@@ -146,7 +67,7 @@ func (r GetSegmentRequest) Send(ctx context.Context) (*GetSegmentResponse, error
 // GetSegmentResponse is the response type for the
 // GetSegment API operation.
 type GetSegmentResponse struct {
-	*GetSegmentOutput
+	*types.GetSegmentOutput
 
 	response *aws.Response
 }

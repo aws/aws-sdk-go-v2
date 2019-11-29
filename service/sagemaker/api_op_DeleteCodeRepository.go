@@ -6,50 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
 )
-
-type DeleteCodeRepositoryInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the Git repository to delete.
-	//
-	// CodeRepositoryName is a required field
-	CodeRepositoryName *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteCodeRepositoryInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteCodeRepositoryInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteCodeRepositoryInput"}
-
-	if s.CodeRepositoryName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("CodeRepositoryName"))
-	}
-	if s.CodeRepositoryName != nil && len(*s.CodeRepositoryName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("CodeRepositoryName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteCodeRepositoryOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteCodeRepositoryOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteCodeRepository = "DeleteCodeRepository"
 
@@ -66,7 +26,7 @@ const opDeleteCodeRepository = "DeleteCodeRepository"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DeleteCodeRepository
-func (c *Client) DeleteCodeRepositoryRequest(input *DeleteCodeRepositoryInput) DeleteCodeRepositoryRequest {
+func (c *Client) DeleteCodeRepositoryRequest(input *types.DeleteCodeRepositoryInput) DeleteCodeRepositoryRequest {
 	op := &aws.Operation{
 		Name:       opDeleteCodeRepository,
 		HTTPMethod: "POST",
@@ -74,10 +34,10 @@ func (c *Client) DeleteCodeRepositoryRequest(input *DeleteCodeRepositoryInput) D
 	}
 
 	if input == nil {
-		input = &DeleteCodeRepositoryInput{}
+		input = &types.DeleteCodeRepositoryInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteCodeRepositoryOutput{})
+	req := c.newRequest(op, input, &types.DeleteCodeRepositoryOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return DeleteCodeRepositoryRequest{Request: req, Input: input, Copy: c.DeleteCodeRepositoryRequest}
@@ -87,8 +47,8 @@ func (c *Client) DeleteCodeRepositoryRequest(input *DeleteCodeRepositoryInput) D
 // DeleteCodeRepository API operation.
 type DeleteCodeRepositoryRequest struct {
 	*aws.Request
-	Input *DeleteCodeRepositoryInput
-	Copy  func(*DeleteCodeRepositoryInput) DeleteCodeRepositoryRequest
+	Input *types.DeleteCodeRepositoryInput
+	Copy  func(*types.DeleteCodeRepositoryInput) DeleteCodeRepositoryRequest
 }
 
 // Send marshals and sends the DeleteCodeRepository API request.
@@ -100,7 +60,7 @@ func (r DeleteCodeRepositoryRequest) Send(ctx context.Context) (*DeleteCodeRepos
 	}
 
 	resp := &DeleteCodeRepositoryResponse{
-		DeleteCodeRepositoryOutput: r.Request.Data.(*DeleteCodeRepositoryOutput),
+		DeleteCodeRepositoryOutput: r.Request.Data.(*types.DeleteCodeRepositoryOutput),
 		response:                   &aws.Response{Request: r.Request},
 	}
 
@@ -110,7 +70,7 @@ func (r DeleteCodeRepositoryRequest) Send(ctx context.Context) (*DeleteCodeRepos
 // DeleteCodeRepositoryResponse is the response type for the
 // DeleteCodeRepository API operation.
 type DeleteCodeRepositoryResponse struct {
-	*DeleteCodeRepositoryOutput
+	*types.DeleteCodeRepositoryOutput
 
 	response *aws.Response
 }

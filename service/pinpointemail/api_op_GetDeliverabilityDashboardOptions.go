@@ -4,124 +4,10 @@ package pinpointemail
 
 import (
 	"context"
-	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/pinpointemail/types"
 )
-
-// Retrieve information about the status of the Deliverability dashboard for
-// your Amazon Pinpoint account. When the Deliverability dashboard is enabled,
-// you gain access to reputation, deliverability, and other metrics for the
-// domains that you use to send email using Amazon Pinpoint. You also gain the
-// ability to perform predictive inbox placement tests.
-//
-// When you use the Deliverability dashboard, you pay a monthly subscription
-// charge, in addition to any other fees that you accrue by using Amazon Pinpoint.
-// For more information about the features and cost of a Deliverability dashboard
-// subscription, see Amazon Pinpoint Pricing (http://aws.amazon.com/pinpoint/pricing/).
-type GetDeliverabilityDashboardOptionsInput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s GetDeliverabilityDashboardOptionsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetDeliverabilityDashboardOptionsInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	return nil
-}
-
-// An object that shows the status of the Deliverability dashboard for your
-// Amazon Pinpoint account.
-type GetDeliverabilityDashboardOptionsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The current status of your Deliverability dashboard subscription. If this
-	// value is PENDING_EXPIRATION, your subscription is scheduled to expire at
-	// the end of the current calendar month.
-	AccountStatus DeliverabilityDashboardAccountStatus `type:"string" enum:"true"`
-
-	// An array of objects, one for each verified domain that you use to send email
-	// and currently has an active Deliverability dashboard subscription that isn’t
-	// scheduled to expire at the end of the current calendar month.
-	ActiveSubscribedDomains []DomainDeliverabilityTrackingOption `type:"list"`
-
-	// Specifies whether the Deliverability dashboard is enabled for your Amazon
-	// Pinpoint account. If this value is true, the dashboard is enabled.
-	//
-	// DashboardEnabled is a required field
-	DashboardEnabled *bool `type:"boolean" required:"true"`
-
-	// An array of objects, one for each verified domain that you use to send email
-	// and currently has an active Deliverability dashboard subscription that's
-	// scheduled to expire at the end of the current calendar month.
-	PendingExpirationSubscribedDomains []DomainDeliverabilityTrackingOption `type:"list"`
-
-	// The date, in Unix time format, when your current subscription to the Deliverability
-	// dashboard is scheduled to expire, if your subscription is scheduled to expire
-	// at the end of the current calendar month. This value is null if you have
-	// an active subscription that isn’t due to expire at the end of the month.
-	SubscriptionExpiryDate *time.Time `type:"timestamp"`
-}
-
-// String returns the string representation
-func (s GetDeliverabilityDashboardOptionsOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetDeliverabilityDashboardOptionsOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.AccountStatus) > 0 {
-		v := s.AccountStatus
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "AccountStatus", protocol.QuotedValue{ValueMarshaler: v}, metadata)
-	}
-	if s.ActiveSubscribedDomains != nil {
-		v := s.ActiveSubscribedDomains
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "ActiveSubscribedDomains", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	if s.DashboardEnabled != nil {
-		v := *s.DashboardEnabled
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "DashboardEnabled", protocol.BoolValue(v), metadata)
-	}
-	if s.PendingExpirationSubscribedDomains != nil {
-		v := s.PendingExpirationSubscribedDomains
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "PendingExpirationSubscribedDomains", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	if s.SubscriptionExpiryDate != nil {
-		v := *s.SubscriptionExpiryDate
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "SubscriptionExpiryDate",
-			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
-	}
-	return nil
-}
 
 const opGetDeliverabilityDashboardOptions = "GetDeliverabilityDashboardOptions"
 
@@ -147,7 +33,7 @@ const opGetDeliverabilityDashboardOptions = "GetDeliverabilityDashboardOptions"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/GetDeliverabilityDashboardOptions
-func (c *Client) GetDeliverabilityDashboardOptionsRequest(input *GetDeliverabilityDashboardOptionsInput) GetDeliverabilityDashboardOptionsRequest {
+func (c *Client) GetDeliverabilityDashboardOptionsRequest(input *types.GetDeliverabilityDashboardOptionsInput) GetDeliverabilityDashboardOptionsRequest {
 	op := &aws.Operation{
 		Name:       opGetDeliverabilityDashboardOptions,
 		HTTPMethod: "GET",
@@ -155,10 +41,10 @@ func (c *Client) GetDeliverabilityDashboardOptionsRequest(input *GetDeliverabili
 	}
 
 	if input == nil {
-		input = &GetDeliverabilityDashboardOptionsInput{}
+		input = &types.GetDeliverabilityDashboardOptionsInput{}
 	}
 
-	req := c.newRequest(op, input, &GetDeliverabilityDashboardOptionsOutput{})
+	req := c.newRequest(op, input, &types.GetDeliverabilityDashboardOptionsOutput{})
 	return GetDeliverabilityDashboardOptionsRequest{Request: req, Input: input, Copy: c.GetDeliverabilityDashboardOptionsRequest}
 }
 
@@ -166,8 +52,8 @@ func (c *Client) GetDeliverabilityDashboardOptionsRequest(input *GetDeliverabili
 // GetDeliverabilityDashboardOptions API operation.
 type GetDeliverabilityDashboardOptionsRequest struct {
 	*aws.Request
-	Input *GetDeliverabilityDashboardOptionsInput
-	Copy  func(*GetDeliverabilityDashboardOptionsInput) GetDeliverabilityDashboardOptionsRequest
+	Input *types.GetDeliverabilityDashboardOptionsInput
+	Copy  func(*types.GetDeliverabilityDashboardOptionsInput) GetDeliverabilityDashboardOptionsRequest
 }
 
 // Send marshals and sends the GetDeliverabilityDashboardOptions API request.
@@ -179,7 +65,7 @@ func (r GetDeliverabilityDashboardOptionsRequest) Send(ctx context.Context) (*Ge
 	}
 
 	resp := &GetDeliverabilityDashboardOptionsResponse{
-		GetDeliverabilityDashboardOptionsOutput: r.Request.Data.(*GetDeliverabilityDashboardOptionsOutput),
+		GetDeliverabilityDashboardOptionsOutput: r.Request.Data.(*types.GetDeliverabilityDashboardOptionsOutput),
 		response:                                &aws.Response{Request: r.Request},
 	}
 
@@ -189,7 +75,7 @@ func (r GetDeliverabilityDashboardOptionsRequest) Send(ctx context.Context) (*Ge
 // GetDeliverabilityDashboardOptionsResponse is the response type for the
 // GetDeliverabilityDashboardOptions API operation.
 type GetDeliverabilityDashboardOptionsResponse struct {
-	*GetDeliverabilityDashboardOptionsOutput
+	*types.GetDeliverabilityDashboardOptionsOutput
 
 	response *aws.Response
 }

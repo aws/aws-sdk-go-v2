@@ -10,6 +10,7 @@ package mturkiface
 
 import (
 	"github.com/aws/aws-sdk-go-v2/service/mturk"
+	"github.com/aws/aws-sdk-go-v2/service/mturk/types"
 )
 
 // ClientAPI provides an interface to enable mocking the
@@ -43,7 +44,7 @@ import (
 //    type mockClientClient struct {
 //        mturkiface.ClientPI
 //    }
-//    func (m *mockClientClient) AcceptQualificationRequest(input *mturk.AcceptQualificationRequestInput) (*mturk.AcceptQualificationRequestOutput, error) {
+//    func (m *mockClientClient) AcceptQualificationRequest(input *types.AcceptQualificationRequestInput) (*types.AcceptQualificationRequestOutput, error) {
 //        // mock response/functionality
 //    }
 //
@@ -61,83 +62,83 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type ClientAPI interface {
-	AcceptQualificationRequestRequest(*mturk.AcceptQualificationRequestInput) mturk.AcceptQualificationRequestRequest
+	AcceptQualificationRequestRequest(*types.AcceptQualificationRequestInput) mturk.AcceptQualificationRequestRequest
 
-	ApproveAssignmentRequest(*mturk.ApproveAssignmentInput) mturk.ApproveAssignmentRequest
+	ApproveAssignmentRequest(*types.ApproveAssignmentInput) mturk.ApproveAssignmentRequest
 
-	AssociateQualificationWithWorkerRequest(*mturk.AssociateQualificationWithWorkerInput) mturk.AssociateQualificationWithWorkerRequest
+	AssociateQualificationWithWorkerRequest(*types.AssociateQualificationWithWorkerInput) mturk.AssociateQualificationWithWorkerRequest
 
-	CreateAdditionalAssignmentsForHITRequest(*mturk.CreateAdditionalAssignmentsForHITInput) mturk.CreateAdditionalAssignmentsForHITRequest
+	CreateAdditionalAssignmentsForHITRequest(*types.CreateAdditionalAssignmentsForHITInput) mturk.CreateAdditionalAssignmentsForHITRequest
 
-	CreateHITRequest(*mturk.CreateHITInput) mturk.CreateHITRequest
+	CreateHITRequest(*types.CreateHITInput) mturk.CreateHITRequest
 
-	CreateHITTypeRequest(*mturk.CreateHITTypeInput) mturk.CreateHITTypeRequest
+	CreateHITTypeRequest(*types.CreateHITTypeInput) mturk.CreateHITTypeRequest
 
-	CreateHITWithHITTypeRequest(*mturk.CreateHITWithHITTypeInput) mturk.CreateHITWithHITTypeRequest
+	CreateHITWithHITTypeRequest(*types.CreateHITWithHITTypeInput) mturk.CreateHITWithHITTypeRequest
 
-	CreateQualificationTypeRequest(*mturk.CreateQualificationTypeInput) mturk.CreateQualificationTypeRequest
+	CreateQualificationTypeRequest(*types.CreateQualificationTypeInput) mturk.CreateQualificationTypeRequest
 
-	CreateWorkerBlockRequest(*mturk.CreateWorkerBlockInput) mturk.CreateWorkerBlockRequest
+	CreateWorkerBlockRequest(*types.CreateWorkerBlockInput) mturk.CreateWorkerBlockRequest
 
-	DeleteHITRequest(*mturk.DeleteHITInput) mturk.DeleteHITRequest
+	DeleteHITRequest(*types.DeleteHITInput) mturk.DeleteHITRequest
 
-	DeleteQualificationTypeRequest(*mturk.DeleteQualificationTypeInput) mturk.DeleteQualificationTypeRequest
+	DeleteQualificationTypeRequest(*types.DeleteQualificationTypeInput) mturk.DeleteQualificationTypeRequest
 
-	DeleteWorkerBlockRequest(*mturk.DeleteWorkerBlockInput) mturk.DeleteWorkerBlockRequest
+	DeleteWorkerBlockRequest(*types.DeleteWorkerBlockInput) mturk.DeleteWorkerBlockRequest
 
-	DisassociateQualificationFromWorkerRequest(*mturk.DisassociateQualificationFromWorkerInput) mturk.DisassociateQualificationFromWorkerRequest
+	DisassociateQualificationFromWorkerRequest(*types.DisassociateQualificationFromWorkerInput) mturk.DisassociateQualificationFromWorkerRequest
 
-	GetAccountBalanceRequest(*mturk.GetAccountBalanceInput) mturk.GetAccountBalanceRequest
+	GetAccountBalanceRequest(*types.GetAccountBalanceInput) mturk.GetAccountBalanceRequest
 
-	GetAssignmentRequest(*mturk.GetAssignmentInput) mturk.GetAssignmentRequest
+	GetAssignmentRequest(*types.GetAssignmentInput) mturk.GetAssignmentRequest
 
-	GetFileUploadURLRequest(*mturk.GetFileUploadURLInput) mturk.GetFileUploadURLRequest
+	GetFileUploadURLRequest(*types.GetFileUploadURLInput) mturk.GetFileUploadURLRequest
 
-	GetHITRequest(*mturk.GetHITInput) mturk.GetHITRequest
+	GetHITRequest(*types.GetHITInput) mturk.GetHITRequest
 
-	GetQualificationScoreRequest(*mturk.GetQualificationScoreInput) mturk.GetQualificationScoreRequest
+	GetQualificationScoreRequest(*types.GetQualificationScoreInput) mturk.GetQualificationScoreRequest
 
-	GetQualificationTypeRequest(*mturk.GetQualificationTypeInput) mturk.GetQualificationTypeRequest
+	GetQualificationTypeRequest(*types.GetQualificationTypeInput) mturk.GetQualificationTypeRequest
 
-	ListAssignmentsForHITRequest(*mturk.ListAssignmentsForHITInput) mturk.ListAssignmentsForHITRequest
+	ListAssignmentsForHITRequest(*types.ListAssignmentsForHITInput) mturk.ListAssignmentsForHITRequest
 
-	ListBonusPaymentsRequest(*mturk.ListBonusPaymentsInput) mturk.ListBonusPaymentsRequest
+	ListBonusPaymentsRequest(*types.ListBonusPaymentsInput) mturk.ListBonusPaymentsRequest
 
-	ListHITsRequest(*mturk.ListHITsInput) mturk.ListHITsRequest
+	ListHITsRequest(*types.ListHITsInput) mturk.ListHITsRequest
 
-	ListHITsForQualificationTypeRequest(*mturk.ListHITsForQualificationTypeInput) mturk.ListHITsForQualificationTypeRequest
+	ListHITsForQualificationTypeRequest(*types.ListHITsForQualificationTypeInput) mturk.ListHITsForQualificationTypeRequest
 
-	ListQualificationRequestsRequest(*mturk.ListQualificationRequestsInput) mturk.ListQualificationRequestsRequest
+	ListQualificationRequestsRequest(*types.ListQualificationRequestsInput) mturk.ListQualificationRequestsRequest
 
-	ListQualificationTypesRequest(*mturk.ListQualificationTypesInput) mturk.ListQualificationTypesRequest
+	ListQualificationTypesRequest(*types.ListQualificationTypesInput) mturk.ListQualificationTypesRequest
 
-	ListReviewPolicyResultsForHITRequest(*mturk.ListReviewPolicyResultsForHITInput) mturk.ListReviewPolicyResultsForHITRequest
+	ListReviewPolicyResultsForHITRequest(*types.ListReviewPolicyResultsForHITInput) mturk.ListReviewPolicyResultsForHITRequest
 
-	ListReviewableHITsRequest(*mturk.ListReviewableHITsInput) mturk.ListReviewableHITsRequest
+	ListReviewableHITsRequest(*types.ListReviewableHITsInput) mturk.ListReviewableHITsRequest
 
-	ListWorkerBlocksRequest(*mturk.ListWorkerBlocksInput) mturk.ListWorkerBlocksRequest
+	ListWorkerBlocksRequest(*types.ListWorkerBlocksInput) mturk.ListWorkerBlocksRequest
 
-	ListWorkersWithQualificationTypeRequest(*mturk.ListWorkersWithQualificationTypeInput) mturk.ListWorkersWithQualificationTypeRequest
+	ListWorkersWithQualificationTypeRequest(*types.ListWorkersWithQualificationTypeInput) mturk.ListWorkersWithQualificationTypeRequest
 
-	NotifyWorkersRequest(*mturk.NotifyWorkersInput) mturk.NotifyWorkersRequest
+	NotifyWorkersRequest(*types.NotifyWorkersInput) mturk.NotifyWorkersRequest
 
-	RejectAssignmentRequest(*mturk.RejectAssignmentInput) mturk.RejectAssignmentRequest
+	RejectAssignmentRequest(*types.RejectAssignmentInput) mturk.RejectAssignmentRequest
 
-	RejectQualificationRequestRequest(*mturk.RejectQualificationRequestInput) mturk.RejectQualificationRequestRequest
+	RejectQualificationRequestRequest(*types.RejectQualificationRequestInput) mturk.RejectQualificationRequestRequest
 
-	SendBonusRequest(*mturk.SendBonusInput) mturk.SendBonusRequest
+	SendBonusRequest(*types.SendBonusInput) mturk.SendBonusRequest
 
-	SendTestEventNotificationRequest(*mturk.SendTestEventNotificationInput) mturk.SendTestEventNotificationRequest
+	SendTestEventNotificationRequest(*types.SendTestEventNotificationInput) mturk.SendTestEventNotificationRequest
 
-	UpdateExpirationForHITRequest(*mturk.UpdateExpirationForHITInput) mturk.UpdateExpirationForHITRequest
+	UpdateExpirationForHITRequest(*types.UpdateExpirationForHITInput) mturk.UpdateExpirationForHITRequest
 
-	UpdateHITReviewStatusRequest(*mturk.UpdateHITReviewStatusInput) mturk.UpdateHITReviewStatusRequest
+	UpdateHITReviewStatusRequest(*types.UpdateHITReviewStatusInput) mturk.UpdateHITReviewStatusRequest
 
-	UpdateHITTypeOfHITRequest(*mturk.UpdateHITTypeOfHITInput) mturk.UpdateHITTypeOfHITRequest
+	UpdateHITTypeOfHITRequest(*types.UpdateHITTypeOfHITInput) mturk.UpdateHITTypeOfHITRequest
 
-	UpdateNotificationSettingsRequest(*mturk.UpdateNotificationSettingsInput) mturk.UpdateNotificationSettingsRequest
+	UpdateNotificationSettingsRequest(*types.UpdateNotificationSettingsInput) mturk.UpdateNotificationSettingsRequest
 
-	UpdateQualificationTypeRequest(*mturk.UpdateQualificationTypeInput) mturk.UpdateQualificationTypeRequest
+	UpdateQualificationTypeRequest(*types.UpdateQualificationTypeInput) mturk.UpdateQualificationTypeRequest
 }
 
 var _ ClientAPI = (*mturk.Client)(nil)

@@ -6,59 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/elasticloadbalancingv2/types"
 )
-
-type DescribeListenersInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Names (ARN) of the listeners.
-	ListenerArns []string `type:"list"`
-
-	// The Amazon Resource Name (ARN) of the load balancer.
-	LoadBalancerArn *string `type:"string"`
-
-	// The marker for the next set of results. (You received this marker from a
-	// previous call.)
-	Marker *string `type:"string"`
-
-	// The maximum number of results to return with this call.
-	PageSize *int64 `min:"1" type:"integer"`
-}
-
-// String returns the string representation
-func (s DescribeListenersInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeListenersInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeListenersInput"}
-	if s.PageSize != nil && *s.PageSize < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("PageSize", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribeListenersOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Information about the listeners.
-	Listeners []Listener `type:"list"`
-
-	// If there are additional results, this is the marker for the next set of results.
-	// Otherwise, this is null.
-	NextMarker *string `type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeListenersOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeListeners = "DescribeListeners"
 
@@ -81,7 +30,7 @@ const opDescribeListeners = "DescribeListeners"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/DescribeListeners
-func (c *Client) DescribeListenersRequest(input *DescribeListenersInput) DescribeListenersRequest {
+func (c *Client) DescribeListenersRequest(input *types.DescribeListenersInput) DescribeListenersRequest {
 	op := &aws.Operation{
 		Name:       opDescribeListeners,
 		HTTPMethod: "POST",
@@ -95,10 +44,10 @@ func (c *Client) DescribeListenersRequest(input *DescribeListenersInput) Describ
 	}
 
 	if input == nil {
-		input = &DescribeListenersInput{}
+		input = &types.DescribeListenersInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeListenersOutput{})
+	req := c.newRequest(op, input, &types.DescribeListenersOutput{})
 	return DescribeListenersRequest{Request: req, Input: input, Copy: c.DescribeListenersRequest}
 }
 
@@ -106,8 +55,8 @@ func (c *Client) DescribeListenersRequest(input *DescribeListenersInput) Describ
 // DescribeListeners API operation.
 type DescribeListenersRequest struct {
 	*aws.Request
-	Input *DescribeListenersInput
-	Copy  func(*DescribeListenersInput) DescribeListenersRequest
+	Input *types.DescribeListenersInput
+	Copy  func(*types.DescribeListenersInput) DescribeListenersRequest
 }
 
 // Send marshals and sends the DescribeListeners API request.
@@ -119,7 +68,7 @@ func (r DescribeListenersRequest) Send(ctx context.Context) (*DescribeListenersR
 	}
 
 	resp := &DescribeListenersResponse{
-		DescribeListenersOutput: r.Request.Data.(*DescribeListenersOutput),
+		DescribeListenersOutput: r.Request.Data.(*types.DescribeListenersOutput),
 		response:                &aws.Response{Request: r.Request},
 	}
 
@@ -149,7 +98,7 @@ func NewDescribeListenersPaginator(req DescribeListenersRequest) DescribeListene
 	return DescribeListenersPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *DescribeListenersInput
+				var inCpy *types.DescribeListenersInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -169,14 +118,14 @@ type DescribeListenersPaginator struct {
 	aws.Pager
 }
 
-func (p *DescribeListenersPaginator) CurrentPage() *DescribeListenersOutput {
-	return p.Pager.CurrentPage().(*DescribeListenersOutput)
+func (p *DescribeListenersPaginator) CurrentPage() *types.DescribeListenersOutput {
+	return p.Pager.CurrentPage().(*types.DescribeListenersOutput)
 }
 
 // DescribeListenersResponse is the response type for the
 // DescribeListeners API operation.
 type DescribeListenersResponse struct {
-	*DescribeListenersOutput
+	*types.DescribeListenersOutput
 
 	response *aws.Response
 }

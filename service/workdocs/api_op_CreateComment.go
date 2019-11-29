@@ -6,170 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/workdocs/types"
 )
-
-type CreateCommentInput struct {
-	_ struct{} `type:"structure"`
-
-	// Amazon WorkDocs authentication token. Do not set this field when using administrative
-	// API actions, as in accessing the API using AWS credentials.
-	AuthenticationToken *string `location:"header" locationName:"Authentication" min:"1" type:"string" sensitive:"true"`
-
-	// The ID of the document.
-	//
-	// DocumentId is a required field
-	DocumentId *string `location:"uri" locationName:"DocumentId" min:"1" type:"string" required:"true"`
-
-	// Set this parameter to TRUE to send an email out to the document collaborators
-	// after the comment is created.
-	NotifyCollaborators *bool `type:"boolean"`
-
-	// The ID of the parent comment.
-	ParentId *string `min:"1" type:"string"`
-
-	// The text of the comment.
-	//
-	// Text is a required field
-	Text *string `min:"1" type:"string" required:"true" sensitive:"true"`
-
-	// The ID of the root comment in the thread.
-	ThreadId *string `min:"1" type:"string"`
-
-	// The ID of the document version.
-	//
-	// VersionId is a required field
-	VersionId *string `location:"uri" locationName:"VersionId" min:"1" type:"string" required:"true"`
-
-	// The visibility of the comment. Options are either PRIVATE, where the comment
-	// is visible only to the comment author and document owner and co-owners, or
-	// PUBLIC, where the comment is visible to document owners, co-owners, and contributors.
-	Visibility CommentVisibilityType `type:"string" enum:"true"`
-}
-
-// String returns the string representation
-func (s CreateCommentInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateCommentInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateCommentInput"}
-	if s.AuthenticationToken != nil && len(*s.AuthenticationToken) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("AuthenticationToken", 1))
-	}
-
-	if s.DocumentId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DocumentId"))
-	}
-	if s.DocumentId != nil && len(*s.DocumentId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("DocumentId", 1))
-	}
-	if s.ParentId != nil && len(*s.ParentId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ParentId", 1))
-	}
-
-	if s.Text == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Text"))
-	}
-	if s.Text != nil && len(*s.Text) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Text", 1))
-	}
-	if s.ThreadId != nil && len(*s.ThreadId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ThreadId", 1))
-	}
-
-	if s.VersionId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("VersionId"))
-	}
-	if s.VersionId != nil && len(*s.VersionId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("VersionId", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s CreateCommentInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.NotifyCollaborators != nil {
-		v := *s.NotifyCollaborators
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "NotifyCollaborators", protocol.BoolValue(v), metadata)
-	}
-	if s.ParentId != nil {
-		v := *s.ParentId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "ParentId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Text != nil {
-		v := *s.Text
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "Text", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.ThreadId != nil {
-		v := *s.ThreadId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "ThreadId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if len(s.Visibility) > 0 {
-		v := s.Visibility
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "Visibility", protocol.QuotedValue{ValueMarshaler: v}, metadata)
-	}
-	if s.AuthenticationToken != nil {
-		v := *s.AuthenticationToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "Authentication", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.DocumentId != nil {
-		v := *s.DocumentId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "DocumentId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.VersionId != nil {
-		v := *s.VersionId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "VersionId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type CreateCommentOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The comment that has been created.
-	Comment *Comment `type:"structure"`
-}
-
-// String returns the string representation
-func (s CreateCommentOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s CreateCommentOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.Comment != nil {
-		v := s.Comment
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "Comment", v, metadata)
-	}
-	return nil
-}
 
 const opCreateComment = "CreateComment"
 
@@ -186,7 +24,7 @@ const opCreateComment = "CreateComment"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/CreateComment
-func (c *Client) CreateCommentRequest(input *CreateCommentInput) CreateCommentRequest {
+func (c *Client) CreateCommentRequest(input *types.CreateCommentInput) CreateCommentRequest {
 	op := &aws.Operation{
 		Name:       opCreateComment,
 		HTTPMethod: "POST",
@@ -194,10 +32,10 @@ func (c *Client) CreateCommentRequest(input *CreateCommentInput) CreateCommentRe
 	}
 
 	if input == nil {
-		input = &CreateCommentInput{}
+		input = &types.CreateCommentInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateCommentOutput{})
+	req := c.newRequest(op, input, &types.CreateCommentOutput{})
 	return CreateCommentRequest{Request: req, Input: input, Copy: c.CreateCommentRequest}
 }
 
@@ -205,8 +43,8 @@ func (c *Client) CreateCommentRequest(input *CreateCommentInput) CreateCommentRe
 // CreateComment API operation.
 type CreateCommentRequest struct {
 	*aws.Request
-	Input *CreateCommentInput
-	Copy  func(*CreateCommentInput) CreateCommentRequest
+	Input *types.CreateCommentInput
+	Copy  func(*types.CreateCommentInput) CreateCommentRequest
 }
 
 // Send marshals and sends the CreateComment API request.
@@ -218,7 +56,7 @@ func (r CreateCommentRequest) Send(ctx context.Context) (*CreateCommentResponse,
 	}
 
 	resp := &CreateCommentResponse{
-		CreateCommentOutput: r.Request.Data.(*CreateCommentOutput),
+		CreateCommentOutput: r.Request.Data.(*types.CreateCommentOutput),
 		response:            &aws.Response{Request: r.Request},
 	}
 
@@ -228,7 +66,7 @@ func (r CreateCommentRequest) Send(ctx context.Context) (*CreateCommentResponse,
 // CreateCommentResponse is the response type for the
 // CreateComment API operation.
 type CreateCommentResponse struct {
-	*CreateCommentOutput
+	*types.CreateCommentOutput
 
 	response *aws.Response
 }

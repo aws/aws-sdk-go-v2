@@ -6,148 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/workdocs/types"
 )
-
-type DescribeCommentsInput struct {
-	_ struct{} `type:"structure"`
-
-	// Amazon WorkDocs authentication token. Do not set this field when using administrative
-	// API actions, as in accessing the API using AWS credentials.
-	AuthenticationToken *string `location:"header" locationName:"Authentication" min:"1" type:"string" sensitive:"true"`
-
-	// The ID of the document.
-	//
-	// DocumentId is a required field
-	DocumentId *string `location:"uri" locationName:"DocumentId" min:"1" type:"string" required:"true"`
-
-	// The maximum number of items to return.
-	Limit *int64 `location:"querystring" locationName:"limit" min:"1" type:"integer"`
-
-	// The marker for the next set of results. This marker was received from a previous
-	// call.
-	Marker *string `location:"querystring" locationName:"marker" min:"1" type:"string"`
-
-	// The ID of the document version.
-	//
-	// VersionId is a required field
-	VersionId *string `location:"uri" locationName:"VersionId" min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeCommentsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeCommentsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeCommentsInput"}
-	if s.AuthenticationToken != nil && len(*s.AuthenticationToken) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("AuthenticationToken", 1))
-	}
-
-	if s.DocumentId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DocumentId"))
-	}
-	if s.DocumentId != nil && len(*s.DocumentId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("DocumentId", 1))
-	}
-	if s.Limit != nil && *s.Limit < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("Limit", 1))
-	}
-	if s.Marker != nil && len(*s.Marker) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Marker", 1))
-	}
-
-	if s.VersionId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("VersionId"))
-	}
-	if s.VersionId != nil && len(*s.VersionId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("VersionId", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DescribeCommentsInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.AuthenticationToken != nil {
-		v := *s.AuthenticationToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "Authentication", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.DocumentId != nil {
-		v := *s.DocumentId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "DocumentId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.VersionId != nil {
-		v := *s.VersionId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "VersionId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Limit != nil {
-		v := *s.Limit
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "limit", protocol.Int64Value(v), metadata)
-	}
-	if s.Marker != nil {
-		v := *s.Marker
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "marker", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type DescribeCommentsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The list of comments for the specified document version.
-	Comments []Comment `type:"list"`
-
-	// The marker for the next set of results. This marker was received from a previous
-	// call.
-	Marker *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeCommentsOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DescribeCommentsOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.Comments != nil {
-		v := s.Comments
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "Comments", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	if s.Marker != nil {
-		v := *s.Marker
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "Marker", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opDescribeComments = "DescribeComments"
 
@@ -164,7 +24,7 @@ const opDescribeComments = "DescribeComments"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/DescribeComments
-func (c *Client) DescribeCommentsRequest(input *DescribeCommentsInput) DescribeCommentsRequest {
+func (c *Client) DescribeCommentsRequest(input *types.DescribeCommentsInput) DescribeCommentsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeComments,
 		HTTPMethod: "GET",
@@ -172,10 +32,10 @@ func (c *Client) DescribeCommentsRequest(input *DescribeCommentsInput) DescribeC
 	}
 
 	if input == nil {
-		input = &DescribeCommentsInput{}
+		input = &types.DescribeCommentsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeCommentsOutput{})
+	req := c.newRequest(op, input, &types.DescribeCommentsOutput{})
 	return DescribeCommentsRequest{Request: req, Input: input, Copy: c.DescribeCommentsRequest}
 }
 
@@ -183,8 +43,8 @@ func (c *Client) DescribeCommentsRequest(input *DescribeCommentsInput) DescribeC
 // DescribeComments API operation.
 type DescribeCommentsRequest struct {
 	*aws.Request
-	Input *DescribeCommentsInput
-	Copy  func(*DescribeCommentsInput) DescribeCommentsRequest
+	Input *types.DescribeCommentsInput
+	Copy  func(*types.DescribeCommentsInput) DescribeCommentsRequest
 }
 
 // Send marshals and sends the DescribeComments API request.
@@ -196,7 +56,7 @@ func (r DescribeCommentsRequest) Send(ctx context.Context) (*DescribeCommentsRes
 	}
 
 	resp := &DescribeCommentsResponse{
-		DescribeCommentsOutput: r.Request.Data.(*DescribeCommentsOutput),
+		DescribeCommentsOutput: r.Request.Data.(*types.DescribeCommentsOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -206,7 +66,7 @@ func (r DescribeCommentsRequest) Send(ctx context.Context) (*DescribeCommentsRes
 // DescribeCommentsResponse is the response type for the
 // DescribeComments API operation.
 type DescribeCommentsResponse struct {
-	*DescribeCommentsOutput
+	*types.DescribeCommentsOutput
 
 	response *aws.Response
 }

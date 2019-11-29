@@ -6,66 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/machinelearning/types"
 )
-
-type DescribeTagsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the ML object. For example, exampleModelId.
-	//
-	// ResourceId is a required field
-	ResourceId *string `min:"1" type:"string" required:"true"`
-
-	// The type of the ML object.
-	//
-	// ResourceType is a required field
-	ResourceType TaggableResourceType `type:"string" required:"true" enum:"true"`
-}
-
-// String returns the string representation
-func (s DescribeTagsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeTagsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeTagsInput"}
-
-	if s.ResourceId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ResourceId"))
-	}
-	if s.ResourceId != nil && len(*s.ResourceId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ResourceId", 1))
-	}
-	if len(s.ResourceType) == 0 {
-		invalidParams.Add(aws.NewErrParamRequired("ResourceType"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Amazon ML returns the following elements.
-type DescribeTagsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the tagged ML object.
-	ResourceId *string `min:"1" type:"string"`
-
-	// The type of the tagged ML object.
-	ResourceType TaggableResourceType `type:"string" enum:"true"`
-
-	// A list of tags associated with the ML object.
-	Tags []Tag `type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeTagsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeTags = "DescribeTags"
 
@@ -80,7 +22,7 @@ const opDescribeTags = "DescribeTags"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) DescribeTagsRequest(input *DescribeTagsInput) DescribeTagsRequest {
+func (c *Client) DescribeTagsRequest(input *types.DescribeTagsInput) DescribeTagsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeTags,
 		HTTPMethod: "POST",
@@ -88,10 +30,10 @@ func (c *Client) DescribeTagsRequest(input *DescribeTagsInput) DescribeTagsReque
 	}
 
 	if input == nil {
-		input = &DescribeTagsInput{}
+		input = &types.DescribeTagsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeTagsOutput{})
+	req := c.newRequest(op, input, &types.DescribeTagsOutput{})
 	return DescribeTagsRequest{Request: req, Input: input, Copy: c.DescribeTagsRequest}
 }
 
@@ -99,8 +41,8 @@ func (c *Client) DescribeTagsRequest(input *DescribeTagsInput) DescribeTagsReque
 // DescribeTags API operation.
 type DescribeTagsRequest struct {
 	*aws.Request
-	Input *DescribeTagsInput
-	Copy  func(*DescribeTagsInput) DescribeTagsRequest
+	Input *types.DescribeTagsInput
+	Copy  func(*types.DescribeTagsInput) DescribeTagsRequest
 }
 
 // Send marshals and sends the DescribeTags API request.
@@ -112,7 +54,7 @@ func (r DescribeTagsRequest) Send(ctx context.Context) (*DescribeTagsResponse, e
 	}
 
 	resp := &DescribeTagsResponse{
-		DescribeTagsOutput: r.Request.Data.(*DescribeTagsOutput),
+		DescribeTagsOutput: r.Request.Data.(*types.DescribeTagsOutput),
 		response:           &aws.Response{Request: r.Request},
 	}
 
@@ -122,7 +64,7 @@ func (r DescribeTagsRequest) Send(ctx context.Context) (*DescribeTagsResponse, e
 // DescribeTagsResponse is the response type for the
 // DescribeTags API operation.
 type DescribeTagsResponse struct {
-	*DescribeTagsOutput
+	*types.DescribeTagsOutput
 
 	response *aws.Response
 }

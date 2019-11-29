@@ -6,50 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
+	"github.com/aws/aws-sdk-go-v2/service/configservice/types"
 )
-
-type DeleteConfigRuleInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the AWS Config rule that you want to delete.
-	//
-	// ConfigRuleName is a required field
-	ConfigRuleName *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteConfigRuleInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteConfigRuleInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteConfigRuleInput"}
-
-	if s.ConfigRuleName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ConfigRuleName"))
-	}
-	if s.ConfigRuleName != nil && len(*s.ConfigRuleName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ConfigRuleName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteConfigRuleOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteConfigRuleOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteConfigRule = "DeleteConfigRule"
 
@@ -72,7 +32,7 @@ const opDeleteConfigRule = "DeleteConfigRule"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DeleteConfigRule
-func (c *Client) DeleteConfigRuleRequest(input *DeleteConfigRuleInput) DeleteConfigRuleRequest {
+func (c *Client) DeleteConfigRuleRequest(input *types.DeleteConfigRuleInput) DeleteConfigRuleRequest {
 	op := &aws.Operation{
 		Name:       opDeleteConfigRule,
 		HTTPMethod: "POST",
@@ -80,10 +40,10 @@ func (c *Client) DeleteConfigRuleRequest(input *DeleteConfigRuleInput) DeleteCon
 	}
 
 	if input == nil {
-		input = &DeleteConfigRuleInput{}
+		input = &types.DeleteConfigRuleInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteConfigRuleOutput{})
+	req := c.newRequest(op, input, &types.DeleteConfigRuleOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return DeleteConfigRuleRequest{Request: req, Input: input, Copy: c.DeleteConfigRuleRequest}
@@ -93,8 +53,8 @@ func (c *Client) DeleteConfigRuleRequest(input *DeleteConfigRuleInput) DeleteCon
 // DeleteConfigRule API operation.
 type DeleteConfigRuleRequest struct {
 	*aws.Request
-	Input *DeleteConfigRuleInput
-	Copy  func(*DeleteConfigRuleInput) DeleteConfigRuleRequest
+	Input *types.DeleteConfigRuleInput
+	Copy  func(*types.DeleteConfigRuleInput) DeleteConfigRuleRequest
 }
 
 // Send marshals and sends the DeleteConfigRule API request.
@@ -106,7 +66,7 @@ func (r DeleteConfigRuleRequest) Send(ctx context.Context) (*DeleteConfigRuleRes
 	}
 
 	resp := &DeleteConfigRuleResponse{
-		DeleteConfigRuleOutput: r.Request.Data.(*DeleteConfigRuleOutput),
+		DeleteConfigRuleOutput: r.Request.Data.(*types.DeleteConfigRuleOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -116,7 +76,7 @@ func (r DeleteConfigRuleRequest) Send(ctx context.Context) (*DeleteConfigRuleRes
 // DeleteConfigRuleResponse is the response type for the
 // DeleteConfigRule API operation.
 type DeleteConfigRuleResponse struct {
-	*DeleteConfigRuleOutput
+	*types.DeleteConfigRuleOutput
 
 	response *aws.Response
 }

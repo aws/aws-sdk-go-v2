@@ -6,35 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/elasticbeanstalk/types"
 )
-
-// Request to describe one or more applications.
-type DescribeApplicationsInput struct {
-	_ struct{} `type:"structure"`
-
-	// If specified, AWS Elastic Beanstalk restricts the returned descriptions to
-	// only include those with the specified names.
-	ApplicationNames []string `type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeApplicationsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Result message containing a list of application descriptions.
-type DescribeApplicationsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// This parameter contains a list of ApplicationDescription.
-	Applications []ApplicationDescription `type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeApplicationsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeApplications = "DescribeApplications"
 
@@ -51,7 +24,7 @@ const opDescribeApplications = "DescribeApplications"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/DescribeApplications
-func (c *Client) DescribeApplicationsRequest(input *DescribeApplicationsInput) DescribeApplicationsRequest {
+func (c *Client) DescribeApplicationsRequest(input *types.DescribeApplicationsInput) DescribeApplicationsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeApplications,
 		HTTPMethod: "POST",
@@ -59,10 +32,10 @@ func (c *Client) DescribeApplicationsRequest(input *DescribeApplicationsInput) D
 	}
 
 	if input == nil {
-		input = &DescribeApplicationsInput{}
+		input = &types.DescribeApplicationsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeApplicationsOutput{})
+	req := c.newRequest(op, input, &types.DescribeApplicationsOutput{})
 	return DescribeApplicationsRequest{Request: req, Input: input, Copy: c.DescribeApplicationsRequest}
 }
 
@@ -70,8 +43,8 @@ func (c *Client) DescribeApplicationsRequest(input *DescribeApplicationsInput) D
 // DescribeApplications API operation.
 type DescribeApplicationsRequest struct {
 	*aws.Request
-	Input *DescribeApplicationsInput
-	Copy  func(*DescribeApplicationsInput) DescribeApplicationsRequest
+	Input *types.DescribeApplicationsInput
+	Copy  func(*types.DescribeApplicationsInput) DescribeApplicationsRequest
 }
 
 // Send marshals and sends the DescribeApplications API request.
@@ -83,7 +56,7 @@ func (r DescribeApplicationsRequest) Send(ctx context.Context) (*DescribeApplica
 	}
 
 	resp := &DescribeApplicationsResponse{
-		DescribeApplicationsOutput: r.Request.Data.(*DescribeApplicationsOutput),
+		DescribeApplicationsOutput: r.Request.Data.(*types.DescribeApplicationsOutput),
 		response:                   &aws.Response{Request: r.Request},
 	}
 
@@ -93,7 +66,7 @@ func (r DescribeApplicationsRequest) Send(ctx context.Context) (*DescribeApplica
 // DescribeApplicationsResponse is the response type for the
 // DescribeApplications API operation.
 type DescribeApplicationsResponse struct {
-	*DescribeApplicationsOutput
+	*types.DescribeApplicationsOutput
 
 	response *aws.Response
 }

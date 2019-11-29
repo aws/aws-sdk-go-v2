@@ -6,83 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ecs/types"
 )
-
-type DescribeTaskDefinitionInput struct {
-	_ struct{} `type:"structure"`
-
-	// Specifies whether to see the resource tags for the task definition. If TAGS
-	// is specified, the tags are included in the response. If this field is omitted,
-	// tags are not included in the response.
-	Include []TaskDefinitionField `locationName:"include" type:"list"`
-
-	// The family for the latest ACTIVE revision, family and revision (family:revision)
-	// for a specific revision in the family, or full Amazon Resource Name (ARN)
-	// of the task definition to describe.
-	//
-	// TaskDefinition is a required field
-	TaskDefinition *string `locationName:"taskDefinition" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeTaskDefinitionInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeTaskDefinitionInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeTaskDefinitionInput"}
-
-	if s.TaskDefinition == nil {
-		invalidParams.Add(aws.NewErrParamRequired("TaskDefinition"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribeTaskDefinitionOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The metadata that is applied to the task definition to help you categorize
-	// and organize them. Each tag consists of a key and an optional value, both
-	// of which you define.
-	//
-	// The following basic restrictions apply to tags:
-	//
-	//    * Maximum number of tags per resource - 50
-	//
-	//    * For each resource, each tag key must be unique, and each tag key can
-	//    have only one value.
-	//
-	//    * Maximum key length - 128 Unicode characters in UTF-8
-	//
-	//    * Maximum value length - 256 Unicode characters in UTF-8
-	//
-	//    * If your tagging schema is used across multiple services and resources,
-	//    remember that other services may have restrictions on allowed characters.
-	//    Generally allowed characters are: letters, numbers, and spaces representable
-	//    in UTF-8, and the following characters: + - = . _ : / @.
-	//
-	//    * Tag keys and values are case-sensitive.
-	//
-	//    * Do not use aws:, AWS:, or any upper or lowercase combination of such
-	//    as a prefix for either keys or values as it is reserved for AWS use. You
-	//    cannot edit or delete tag keys or values with this prefix. Tags with this
-	//    prefix do not count against your tags per resource limit.
-	Tags []Tag `locationName:"tags" type:"list"`
-
-	// The full task definition description.
-	TaskDefinition *TaskDefinition `locationName:"taskDefinition" type:"structure"`
-}
-
-// String returns the string representation
-func (s DescribeTaskDefinitionOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeTaskDefinition = "DescribeTaskDefinition"
 
@@ -104,7 +29,7 @@ const opDescribeTaskDefinition = "DescribeTaskDefinition"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DescribeTaskDefinition
-func (c *Client) DescribeTaskDefinitionRequest(input *DescribeTaskDefinitionInput) DescribeTaskDefinitionRequest {
+func (c *Client) DescribeTaskDefinitionRequest(input *types.DescribeTaskDefinitionInput) DescribeTaskDefinitionRequest {
 	op := &aws.Operation{
 		Name:       opDescribeTaskDefinition,
 		HTTPMethod: "POST",
@@ -112,10 +37,10 @@ func (c *Client) DescribeTaskDefinitionRequest(input *DescribeTaskDefinitionInpu
 	}
 
 	if input == nil {
-		input = &DescribeTaskDefinitionInput{}
+		input = &types.DescribeTaskDefinitionInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeTaskDefinitionOutput{})
+	req := c.newRequest(op, input, &types.DescribeTaskDefinitionOutput{})
 	return DescribeTaskDefinitionRequest{Request: req, Input: input, Copy: c.DescribeTaskDefinitionRequest}
 }
 
@@ -123,8 +48,8 @@ func (c *Client) DescribeTaskDefinitionRequest(input *DescribeTaskDefinitionInpu
 // DescribeTaskDefinition API operation.
 type DescribeTaskDefinitionRequest struct {
 	*aws.Request
-	Input *DescribeTaskDefinitionInput
-	Copy  func(*DescribeTaskDefinitionInput) DescribeTaskDefinitionRequest
+	Input *types.DescribeTaskDefinitionInput
+	Copy  func(*types.DescribeTaskDefinitionInput) DescribeTaskDefinitionRequest
 }
 
 // Send marshals and sends the DescribeTaskDefinition API request.
@@ -136,7 +61,7 @@ func (r DescribeTaskDefinitionRequest) Send(ctx context.Context) (*DescribeTaskD
 	}
 
 	resp := &DescribeTaskDefinitionResponse{
-		DescribeTaskDefinitionOutput: r.Request.Data.(*DescribeTaskDefinitionOutput),
+		DescribeTaskDefinitionOutput: r.Request.Data.(*types.DescribeTaskDefinitionOutput),
 		response:                     &aws.Response{Request: r.Request},
 	}
 
@@ -146,7 +71,7 @@ func (r DescribeTaskDefinitionRequest) Send(ctx context.Context) (*DescribeTaskD
 // DescribeTaskDefinitionResponse is the response type for the
 // DescribeTaskDefinition API operation.
 type DescribeTaskDefinitionResponse struct {
-	*DescribeTaskDefinitionOutput
+	*types.DescribeTaskDefinitionOutput
 
 	response *aws.Response
 }

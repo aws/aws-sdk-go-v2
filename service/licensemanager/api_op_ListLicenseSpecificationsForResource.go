@@ -6,58 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/licensemanager/types"
 )
-
-type ListLicenseSpecificationsForResourceInput struct {
-	_ struct{} `type:"structure"`
-
-	// Maximum number of results to return in a single call. To retrieve the remaining
-	// results, make another call with the returned NextToken value.
-	MaxResults *int64 `type:"integer"`
-
-	// Token for the next set of results.
-	NextToken *string `type:"string"`
-
-	// ARN of an AMI or Amazon EC2 instance that has an associated license configuration.
-	//
-	// ResourceArn is a required field
-	ResourceArn *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s ListLicenseSpecificationsForResourceInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListLicenseSpecificationsForResourceInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListLicenseSpecificationsForResourceInput"}
-
-	if s.ResourceArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ResourceArn"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ListLicenseSpecificationsForResourceOutput struct {
-	_ struct{} `type:"structure"`
-
-	// License configurations associated with a resource.
-	LicenseSpecifications []LicenseSpecification `type:"list"`
-
-	// Token for the next set of results.
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s ListLicenseSpecificationsForResourceOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListLicenseSpecificationsForResource = "ListLicenseSpecificationsForResource"
 
@@ -74,7 +24,7 @@ const opListLicenseSpecificationsForResource = "ListLicenseSpecificationsForReso
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/license-manager-2018-08-01/ListLicenseSpecificationsForResource
-func (c *Client) ListLicenseSpecificationsForResourceRequest(input *ListLicenseSpecificationsForResourceInput) ListLicenseSpecificationsForResourceRequest {
+func (c *Client) ListLicenseSpecificationsForResourceRequest(input *types.ListLicenseSpecificationsForResourceInput) ListLicenseSpecificationsForResourceRequest {
 	op := &aws.Operation{
 		Name:       opListLicenseSpecificationsForResource,
 		HTTPMethod: "POST",
@@ -82,10 +32,10 @@ func (c *Client) ListLicenseSpecificationsForResourceRequest(input *ListLicenseS
 	}
 
 	if input == nil {
-		input = &ListLicenseSpecificationsForResourceInput{}
+		input = &types.ListLicenseSpecificationsForResourceInput{}
 	}
 
-	req := c.newRequest(op, input, &ListLicenseSpecificationsForResourceOutput{})
+	req := c.newRequest(op, input, &types.ListLicenseSpecificationsForResourceOutput{})
 	return ListLicenseSpecificationsForResourceRequest{Request: req, Input: input, Copy: c.ListLicenseSpecificationsForResourceRequest}
 }
 
@@ -93,8 +43,8 @@ func (c *Client) ListLicenseSpecificationsForResourceRequest(input *ListLicenseS
 // ListLicenseSpecificationsForResource API operation.
 type ListLicenseSpecificationsForResourceRequest struct {
 	*aws.Request
-	Input *ListLicenseSpecificationsForResourceInput
-	Copy  func(*ListLicenseSpecificationsForResourceInput) ListLicenseSpecificationsForResourceRequest
+	Input *types.ListLicenseSpecificationsForResourceInput
+	Copy  func(*types.ListLicenseSpecificationsForResourceInput) ListLicenseSpecificationsForResourceRequest
 }
 
 // Send marshals and sends the ListLicenseSpecificationsForResource API request.
@@ -106,7 +56,7 @@ func (r ListLicenseSpecificationsForResourceRequest) Send(ctx context.Context) (
 	}
 
 	resp := &ListLicenseSpecificationsForResourceResponse{
-		ListLicenseSpecificationsForResourceOutput: r.Request.Data.(*ListLicenseSpecificationsForResourceOutput),
+		ListLicenseSpecificationsForResourceOutput: r.Request.Data.(*types.ListLicenseSpecificationsForResourceOutput),
 		response: &aws.Response{Request: r.Request},
 	}
 
@@ -116,7 +66,7 @@ func (r ListLicenseSpecificationsForResourceRequest) Send(ctx context.Context) (
 // ListLicenseSpecificationsForResourceResponse is the response type for the
 // ListLicenseSpecificationsForResource API operation.
 type ListLicenseSpecificationsForResourceResponse struct {
-	*ListLicenseSpecificationsForResourceOutput
+	*types.ListLicenseSpecificationsForResourceOutput
 
 	response *aws.Response
 }

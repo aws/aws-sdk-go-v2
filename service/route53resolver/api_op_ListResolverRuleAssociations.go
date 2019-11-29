@@ -4,82 +4,10 @@ package route53resolver
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/route53resolver/types"
 )
-
-type ListResolverRuleAssociationsInput struct {
-	_ struct{} `type:"structure"`
-
-	// An optional specification to return a subset of resolver rules, such as resolver
-	// rules that are associated with the same VPC ID.
-	//
-	// If you submit a second or subsequent ListResolverRuleAssociations request
-	// and specify the NextToken parameter, you must use the same values for Filters,
-	// if any, as in the previous request.
-	Filters []Filter `type:"list"`
-
-	// The maximum number of rule associations that you want to return in the response
-	// to a ListResolverRuleAssociations request. If you don't specify a value for
-	// MaxResults, Resolver returns up to 100 rule associations.
-	MaxResults *int64 `min:"1" type:"integer"`
-
-	// For the first ListResolverRuleAssociation request, omit this value.
-	//
-	// If you have more than MaxResults rule associations, you can submit another
-	// ListResolverRuleAssociation request to get the next group of rule associations.
-	// In the next request, specify the value of NextToken from the previous response.
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s ListResolverRuleAssociationsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListResolverRuleAssociationsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListResolverRuleAssociationsInput"}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-	if s.Filters != nil {
-		for i, v := range s.Filters {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ListResolverRuleAssociationsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The value that you specified for MaxResults in the request.
-	MaxResults *int64 `min:"1" type:"integer"`
-
-	// If more than MaxResults rule associations match the specified criteria, you
-	// can submit another ListResolverRuleAssociation request to get the next group
-	// of results. In the next request, specify the value of NextToken from the
-	// previous response.
-	NextToken *string `type:"string"`
-
-	// The associations that were created between resolver rules and VPCs using
-	// the current AWS account, and that match the specified filters, if any.
-	ResolverRuleAssociations []ResolverRuleAssociation `type:"list"`
-}
-
-// String returns the string representation
-func (s ListResolverRuleAssociationsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListResolverRuleAssociations = "ListResolverRuleAssociations"
 
@@ -97,7 +25,7 @@ const opListResolverRuleAssociations = "ListResolverRuleAssociations"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/ListResolverRuleAssociations
-func (c *Client) ListResolverRuleAssociationsRequest(input *ListResolverRuleAssociationsInput) ListResolverRuleAssociationsRequest {
+func (c *Client) ListResolverRuleAssociationsRequest(input *types.ListResolverRuleAssociationsInput) ListResolverRuleAssociationsRequest {
 	op := &aws.Operation{
 		Name:       opListResolverRuleAssociations,
 		HTTPMethod: "POST",
@@ -111,10 +39,10 @@ func (c *Client) ListResolverRuleAssociationsRequest(input *ListResolverRuleAsso
 	}
 
 	if input == nil {
-		input = &ListResolverRuleAssociationsInput{}
+		input = &types.ListResolverRuleAssociationsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListResolverRuleAssociationsOutput{})
+	req := c.newRequest(op, input, &types.ListResolverRuleAssociationsOutput{})
 	return ListResolverRuleAssociationsRequest{Request: req, Input: input, Copy: c.ListResolverRuleAssociationsRequest}
 }
 
@@ -122,8 +50,8 @@ func (c *Client) ListResolverRuleAssociationsRequest(input *ListResolverRuleAsso
 // ListResolverRuleAssociations API operation.
 type ListResolverRuleAssociationsRequest struct {
 	*aws.Request
-	Input *ListResolverRuleAssociationsInput
-	Copy  func(*ListResolverRuleAssociationsInput) ListResolverRuleAssociationsRequest
+	Input *types.ListResolverRuleAssociationsInput
+	Copy  func(*types.ListResolverRuleAssociationsInput) ListResolverRuleAssociationsRequest
 }
 
 // Send marshals and sends the ListResolverRuleAssociations API request.
@@ -135,7 +63,7 @@ func (r ListResolverRuleAssociationsRequest) Send(ctx context.Context) (*ListRes
 	}
 
 	resp := &ListResolverRuleAssociationsResponse{
-		ListResolverRuleAssociationsOutput: r.Request.Data.(*ListResolverRuleAssociationsOutput),
+		ListResolverRuleAssociationsOutput: r.Request.Data.(*types.ListResolverRuleAssociationsOutput),
 		response:                           &aws.Response{Request: r.Request},
 	}
 
@@ -165,7 +93,7 @@ func NewListResolverRuleAssociationsPaginator(req ListResolverRuleAssociationsRe
 	return ListResolverRuleAssociationsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListResolverRuleAssociationsInput
+				var inCpy *types.ListResolverRuleAssociationsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -185,14 +113,14 @@ type ListResolverRuleAssociationsPaginator struct {
 	aws.Pager
 }
 
-func (p *ListResolverRuleAssociationsPaginator) CurrentPage() *ListResolverRuleAssociationsOutput {
-	return p.Pager.CurrentPage().(*ListResolverRuleAssociationsOutput)
+func (p *ListResolverRuleAssociationsPaginator) CurrentPage() *types.ListResolverRuleAssociationsOutput {
+	return p.Pager.CurrentPage().(*types.ListResolverRuleAssociationsOutput)
 }
 
 // ListResolverRuleAssociationsResponse is the response type for the
 // ListResolverRuleAssociations API operation.
 type ListResolverRuleAssociationsResponse struct {
-	*ListResolverRuleAssociationsOutput
+	*types.ListResolverRuleAssociationsOutput
 
 	response *aws.Response
 }

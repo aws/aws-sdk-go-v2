@@ -4,55 +4,10 @@ package applicationdiscoveryservice
 
 import (
 	"context"
-	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/applicationdiscoveryservice/types"
 )
-
-type StopContinuousExportInput struct {
-	_ struct{} `type:"structure"`
-
-	// The unique ID assigned to this export.
-	//
-	// ExportId is a required field
-	ExportId *string `locationName:"exportId" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s StopContinuousExportInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *StopContinuousExportInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "StopContinuousExportInput"}
-
-	if s.ExportId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ExportId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type StopContinuousExportOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Timestamp that represents when this continuous export started collecting
-	// data.
-	StartTime *time.Time `locationName:"startTime" type:"timestamp"`
-
-	// Timestamp that represents when this continuous export was stopped.
-	StopTime *time.Time `locationName:"stopTime" type:"timestamp"`
-}
-
-// String returns the string representation
-func (s StopContinuousExportOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opStopContinuousExport = "StopContinuousExport"
 
@@ -69,7 +24,7 @@ const opStopContinuousExport = "StopContinuousExport"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/discovery-2015-11-01/StopContinuousExport
-func (c *Client) StopContinuousExportRequest(input *StopContinuousExportInput) StopContinuousExportRequest {
+func (c *Client) StopContinuousExportRequest(input *types.StopContinuousExportInput) StopContinuousExportRequest {
 	op := &aws.Operation{
 		Name:       opStopContinuousExport,
 		HTTPMethod: "POST",
@@ -77,10 +32,10 @@ func (c *Client) StopContinuousExportRequest(input *StopContinuousExportInput) S
 	}
 
 	if input == nil {
-		input = &StopContinuousExportInput{}
+		input = &types.StopContinuousExportInput{}
 	}
 
-	req := c.newRequest(op, input, &StopContinuousExportOutput{})
+	req := c.newRequest(op, input, &types.StopContinuousExportOutput{})
 	return StopContinuousExportRequest{Request: req, Input: input, Copy: c.StopContinuousExportRequest}
 }
 
@@ -88,8 +43,8 @@ func (c *Client) StopContinuousExportRequest(input *StopContinuousExportInput) S
 // StopContinuousExport API operation.
 type StopContinuousExportRequest struct {
 	*aws.Request
-	Input *StopContinuousExportInput
-	Copy  func(*StopContinuousExportInput) StopContinuousExportRequest
+	Input *types.StopContinuousExportInput
+	Copy  func(*types.StopContinuousExportInput) StopContinuousExportRequest
 }
 
 // Send marshals and sends the StopContinuousExport API request.
@@ -101,7 +56,7 @@ func (r StopContinuousExportRequest) Send(ctx context.Context) (*StopContinuousE
 	}
 
 	resp := &StopContinuousExportResponse{
-		StopContinuousExportOutput: r.Request.Data.(*StopContinuousExportOutput),
+		StopContinuousExportOutput: r.Request.Data.(*types.StopContinuousExportOutput),
 		response:                   &aws.Response{Request: r.Request},
 	}
 
@@ -111,7 +66,7 @@ func (r StopContinuousExportRequest) Send(ctx context.Context) (*StopContinuousE
 // StopContinuousExportResponse is the response type for the
 // StopContinuousExport API operation.
 type StopContinuousExportResponse struct {
-	*StopContinuousExportOutput
+	*types.StopContinuousExportOutput
 
 	response *aws.Response
 }

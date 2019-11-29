@@ -6,76 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
+	"github.com/aws/aws-sdk-go-v2/service/kms/types"
 )
-
-type UpdateAliasInput struct {
-	_ struct{} `type:"structure"`
-
-	// Specifies the name of the alias to change. This value must begin with alias/
-	// followed by the alias name, such as alias/ExampleAlias.
-	//
-	// AliasName is a required field
-	AliasName *string `min:"1" type:"string" required:"true"`
-
-	// Unique identifier of the customer master key (CMK) to be mapped to the alias.
-	// When the update operation completes, the alias will point to this CMK.
-	//
-	// Specify the key ID or the Amazon Resource Name (ARN) of the CMK.
-	//
-	// For example:
-	//
-	//    * Key ID: 1234abcd-12ab-34cd-56ef-1234567890ab
-	//
-	//    * Key ARN: arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab
-	//
-	// To get the key ID and key ARN for a CMK, use ListKeys or DescribeKey.
-	//
-	// To verify that the alias is mapped to the correct CMK, use ListAliases.
-	//
-	// TargetKeyId is a required field
-	TargetKeyId *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s UpdateAliasInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateAliasInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateAliasInput"}
-
-	if s.AliasName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("AliasName"))
-	}
-	if s.AliasName != nil && len(*s.AliasName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("AliasName", 1))
-	}
-
-	if s.TargetKeyId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("TargetKeyId"))
-	}
-	if s.TargetKeyId != nil && len(*s.TargetKeyId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("TargetKeyId", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type UpdateAliasOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s UpdateAliasOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opUpdateAlias = "UpdateAlias"
 
@@ -113,7 +47,7 @@ const opUpdateAlias = "UpdateAlias"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/UpdateAlias
-func (c *Client) UpdateAliasRequest(input *UpdateAliasInput) UpdateAliasRequest {
+func (c *Client) UpdateAliasRequest(input *types.UpdateAliasInput) UpdateAliasRequest {
 	op := &aws.Operation{
 		Name:       opUpdateAlias,
 		HTTPMethod: "POST",
@@ -121,10 +55,10 @@ func (c *Client) UpdateAliasRequest(input *UpdateAliasInput) UpdateAliasRequest 
 	}
 
 	if input == nil {
-		input = &UpdateAliasInput{}
+		input = &types.UpdateAliasInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateAliasOutput{})
+	req := c.newRequest(op, input, &types.UpdateAliasOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return UpdateAliasRequest{Request: req, Input: input, Copy: c.UpdateAliasRequest}
@@ -134,8 +68,8 @@ func (c *Client) UpdateAliasRequest(input *UpdateAliasInput) UpdateAliasRequest 
 // UpdateAlias API operation.
 type UpdateAliasRequest struct {
 	*aws.Request
-	Input *UpdateAliasInput
-	Copy  func(*UpdateAliasInput) UpdateAliasRequest
+	Input *types.UpdateAliasInput
+	Copy  func(*types.UpdateAliasInput) UpdateAliasRequest
 }
 
 // Send marshals and sends the UpdateAlias API request.
@@ -147,7 +81,7 @@ func (r UpdateAliasRequest) Send(ctx context.Context) (*UpdateAliasResponse, err
 	}
 
 	resp := &UpdateAliasResponse{
-		UpdateAliasOutput: r.Request.Data.(*UpdateAliasOutput),
+		UpdateAliasOutput: r.Request.Data.(*types.UpdateAliasOutput),
 		response:          &aws.Response{Request: r.Request},
 	}
 
@@ -157,7 +91,7 @@ func (r UpdateAliasRequest) Send(ctx context.Context) (*UpdateAliasResponse, err
 // UpdateAliasResponse is the response type for the
 // UpdateAlias API operation.
 type UpdateAliasResponse struct {
-	*UpdateAliasOutput
+	*types.UpdateAliasOutput
 
 	response *aws.Response
 }

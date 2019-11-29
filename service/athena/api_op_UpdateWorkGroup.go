@@ -6,59 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/athena/types"
 )
-
-type UpdateWorkGroupInput struct {
-	_ struct{} `type:"structure"`
-
-	// The workgroup configuration that will be updated for the given workgroup.
-	ConfigurationUpdates *WorkGroupConfigurationUpdates `type:"structure"`
-
-	// The workgroup description.
-	Description *string `type:"string"`
-
-	// The workgroup state that will be updated for the given workgroup.
-	State WorkGroupState `type:"string" enum:"true"`
-
-	// The specified workgroup that will be updated.
-	//
-	// WorkGroup is a required field
-	WorkGroup *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s UpdateWorkGroupInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateWorkGroupInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateWorkGroupInput"}
-
-	if s.WorkGroup == nil {
-		invalidParams.Add(aws.NewErrParamRequired("WorkGroup"))
-	}
-	if s.ConfigurationUpdates != nil {
-		if err := s.ConfigurationUpdates.Validate(); err != nil {
-			invalidParams.AddNested("ConfigurationUpdates", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type UpdateWorkGroupOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s UpdateWorkGroupOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opUpdateWorkGroup = "UpdateWorkGroup"
 
@@ -76,7 +25,7 @@ const opUpdateWorkGroup = "UpdateWorkGroup"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/UpdateWorkGroup
-func (c *Client) UpdateWorkGroupRequest(input *UpdateWorkGroupInput) UpdateWorkGroupRequest {
+func (c *Client) UpdateWorkGroupRequest(input *types.UpdateWorkGroupInput) UpdateWorkGroupRequest {
 	op := &aws.Operation{
 		Name:       opUpdateWorkGroup,
 		HTTPMethod: "POST",
@@ -84,10 +33,10 @@ func (c *Client) UpdateWorkGroupRequest(input *UpdateWorkGroupInput) UpdateWorkG
 	}
 
 	if input == nil {
-		input = &UpdateWorkGroupInput{}
+		input = &types.UpdateWorkGroupInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateWorkGroupOutput{})
+	req := c.newRequest(op, input, &types.UpdateWorkGroupOutput{})
 	return UpdateWorkGroupRequest{Request: req, Input: input, Copy: c.UpdateWorkGroupRequest}
 }
 
@@ -95,8 +44,8 @@ func (c *Client) UpdateWorkGroupRequest(input *UpdateWorkGroupInput) UpdateWorkG
 // UpdateWorkGroup API operation.
 type UpdateWorkGroupRequest struct {
 	*aws.Request
-	Input *UpdateWorkGroupInput
-	Copy  func(*UpdateWorkGroupInput) UpdateWorkGroupRequest
+	Input *types.UpdateWorkGroupInput
+	Copy  func(*types.UpdateWorkGroupInput) UpdateWorkGroupRequest
 }
 
 // Send marshals and sends the UpdateWorkGroup API request.
@@ -108,7 +57,7 @@ func (r UpdateWorkGroupRequest) Send(ctx context.Context) (*UpdateWorkGroupRespo
 	}
 
 	resp := &UpdateWorkGroupResponse{
-		UpdateWorkGroupOutput: r.Request.Data.(*UpdateWorkGroupOutput),
+		UpdateWorkGroupOutput: r.Request.Data.(*types.UpdateWorkGroupOutput),
 		response:              &aws.Response{Request: r.Request},
 	}
 
@@ -118,7 +67,7 @@ func (r UpdateWorkGroupRequest) Send(ctx context.Context) (*UpdateWorkGroupRespo
 // UpdateWorkGroupResponse is the response type for the
 // UpdateWorkGroup API operation.
 type UpdateWorkGroupResponse struct {
-	*UpdateWorkGroupOutput
+	*types.UpdateWorkGroupOutput
 
 	response *aws.Response
 }

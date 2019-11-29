@@ -4,66 +4,12 @@ package simpledb
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/query"
+	"github.com/aws/aws-sdk-go-v2/service/simpledb/types"
 )
-
-type BatchDeleteAttributesInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the domain in which the attributes are being deleted.
-	//
-	// DomainName is a required field
-	DomainName *string `type:"string" required:"true"`
-
-	// A list of items on which to perform the operation.
-	//
-	// Items is a required field
-	Items []DeletableItem `locationNameList:"Item" type:"list" flattened:"true" required:"true"`
-}
-
-// String returns the string representation
-func (s BatchDeleteAttributesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *BatchDeleteAttributesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "BatchDeleteAttributesInput"}
-
-	if s.DomainName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DomainName"))
-	}
-
-	if s.Items == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Items"))
-	}
-	if s.Items != nil {
-		for i, v := range s.Items {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Items", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type BatchDeleteAttributesOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s BatchDeleteAttributesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opBatchDeleteAttributes = "BatchDeleteAttributes"
 
@@ -102,7 +48,7 @@ const opBatchDeleteAttributes = "BatchDeleteAttributes"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) BatchDeleteAttributesRequest(input *BatchDeleteAttributesInput) BatchDeleteAttributesRequest {
+func (c *Client) BatchDeleteAttributesRequest(input *types.BatchDeleteAttributesInput) BatchDeleteAttributesRequest {
 	op := &aws.Operation{
 		Name:       opBatchDeleteAttributes,
 		HTTPMethod: "POST",
@@ -110,10 +56,10 @@ func (c *Client) BatchDeleteAttributesRequest(input *BatchDeleteAttributesInput)
 	}
 
 	if input == nil {
-		input = &BatchDeleteAttributesInput{}
+		input = &types.BatchDeleteAttributesInput{}
 	}
 
-	req := c.newRequest(op, input, &BatchDeleteAttributesOutput{})
+	req := c.newRequest(op, input, &types.BatchDeleteAttributesOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return BatchDeleteAttributesRequest{Request: req, Input: input, Copy: c.BatchDeleteAttributesRequest}
@@ -123,8 +69,8 @@ func (c *Client) BatchDeleteAttributesRequest(input *BatchDeleteAttributesInput)
 // BatchDeleteAttributes API operation.
 type BatchDeleteAttributesRequest struct {
 	*aws.Request
-	Input *BatchDeleteAttributesInput
-	Copy  func(*BatchDeleteAttributesInput) BatchDeleteAttributesRequest
+	Input *types.BatchDeleteAttributesInput
+	Copy  func(*types.BatchDeleteAttributesInput) BatchDeleteAttributesRequest
 }
 
 // Send marshals and sends the BatchDeleteAttributes API request.
@@ -136,7 +82,7 @@ func (r BatchDeleteAttributesRequest) Send(ctx context.Context) (*BatchDeleteAtt
 	}
 
 	resp := &BatchDeleteAttributesResponse{
-		BatchDeleteAttributesOutput: r.Request.Data.(*BatchDeleteAttributesOutput),
+		BatchDeleteAttributesOutput: r.Request.Data.(*types.BatchDeleteAttributesOutput),
 		response:                    &aws.Response{Request: r.Request},
 	}
 
@@ -146,7 +92,7 @@ func (r BatchDeleteAttributesRequest) Send(ctx context.Context) (*BatchDeleteAtt
 // BatchDeleteAttributesResponse is the response type for the
 // BatchDeleteAttributes API operation.
 type BatchDeleteAttributesResponse struct {
-	*BatchDeleteAttributesOutput
+	*types.BatchDeleteAttributesOutput
 
 	response *aws.Response
 }

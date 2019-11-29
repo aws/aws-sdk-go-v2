@@ -6,61 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
+	"github.com/aws/aws-sdk-go-v2/service/gamelift/types"
 )
-
-// Represents the input for a request action.
-type DeleteScalingPolicyInput struct {
-	_ struct{} `type:"structure"`
-
-	// Unique identifier for a fleet to be deleted.
-	//
-	// FleetId is a required field
-	FleetId *string `type:"string" required:"true"`
-
-	// Descriptive label that is associated with a scaling policy. Policy names
-	// do not need to be unique.
-	//
-	// Name is a required field
-	Name *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteScalingPolicyInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteScalingPolicyInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteScalingPolicyInput"}
-
-	if s.FleetId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("FleetId"))
-	}
-
-	if s.Name == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Name"))
-	}
-	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteScalingPolicyOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteScalingPolicyOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteScalingPolicy = "DeleteScalingPolicy"
 
@@ -93,7 +42,7 @@ const opDeleteScalingPolicy = "DeleteScalingPolicy"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DeleteScalingPolicy
-func (c *Client) DeleteScalingPolicyRequest(input *DeleteScalingPolicyInput) DeleteScalingPolicyRequest {
+func (c *Client) DeleteScalingPolicyRequest(input *types.DeleteScalingPolicyInput) DeleteScalingPolicyRequest {
 	op := &aws.Operation{
 		Name:       opDeleteScalingPolicy,
 		HTTPMethod: "POST",
@@ -101,10 +50,10 @@ func (c *Client) DeleteScalingPolicyRequest(input *DeleteScalingPolicyInput) Del
 	}
 
 	if input == nil {
-		input = &DeleteScalingPolicyInput{}
+		input = &types.DeleteScalingPolicyInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteScalingPolicyOutput{})
+	req := c.newRequest(op, input, &types.DeleteScalingPolicyOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return DeleteScalingPolicyRequest{Request: req, Input: input, Copy: c.DeleteScalingPolicyRequest}
@@ -114,8 +63,8 @@ func (c *Client) DeleteScalingPolicyRequest(input *DeleteScalingPolicyInput) Del
 // DeleteScalingPolicy API operation.
 type DeleteScalingPolicyRequest struct {
 	*aws.Request
-	Input *DeleteScalingPolicyInput
-	Copy  func(*DeleteScalingPolicyInput) DeleteScalingPolicyRequest
+	Input *types.DeleteScalingPolicyInput
+	Copy  func(*types.DeleteScalingPolicyInput) DeleteScalingPolicyRequest
 }
 
 // Send marshals and sends the DeleteScalingPolicy API request.
@@ -127,7 +76,7 @@ func (r DeleteScalingPolicyRequest) Send(ctx context.Context) (*DeleteScalingPol
 	}
 
 	resp := &DeleteScalingPolicyResponse{
-		DeleteScalingPolicyOutput: r.Request.Data.(*DeleteScalingPolicyOutput),
+		DeleteScalingPolicyOutput: r.Request.Data.(*types.DeleteScalingPolicyOutput),
 		response:                  &aws.Response{Request: r.Request},
 	}
 
@@ -137,7 +86,7 @@ func (r DeleteScalingPolicyRequest) Send(ctx context.Context) (*DeleteScalingPol
 // DeleteScalingPolicyResponse is the response type for the
 // DeleteScalingPolicy API operation.
 type DeleteScalingPolicyResponse struct {
-	*DeleteScalingPolicyOutput
+	*types.DeleteScalingPolicyOutput
 
 	response *aws.Response
 }

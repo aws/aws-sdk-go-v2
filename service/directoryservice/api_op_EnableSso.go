@@ -6,69 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/directoryservice/types"
 )
-
-// Contains the inputs for the EnableSso operation.
-type EnableSsoInput struct {
-	_ struct{} `type:"structure"`
-
-	// The identifier of the directory for which to enable single-sign on.
-	//
-	// DirectoryId is a required field
-	DirectoryId *string `type:"string" required:"true"`
-
-	// The password of an alternate account to use to enable single-sign on. This
-	// is only used for AD Connector directories. For more information, see the
-	// UserName parameter.
-	Password *string `min:"1" type:"string" sensitive:"true"`
-
-	// The username of an alternate account to use to enable single-sign on. This
-	// is only used for AD Connector directories. This account must have privileges
-	// to add a service principal name.
-	//
-	// If the AD Connector service account does not have privileges to add a service
-	// principal name, you can specify an alternate account with the UserName and
-	// Password parameters. These credentials are only used to enable single sign-on
-	// and are not stored by the service. The AD Connector service account is not
-	// changed.
-	UserName *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s EnableSsoInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *EnableSsoInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "EnableSsoInput"}
-
-	if s.DirectoryId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DirectoryId"))
-	}
-	if s.Password != nil && len(*s.Password) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Password", 1))
-	}
-	if s.UserName != nil && len(*s.UserName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("UserName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Contains the results of the EnableSso operation.
-type EnableSsoOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s EnableSsoOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opEnableSso = "EnableSso"
 
@@ -85,7 +24,7 @@ const opEnableSso = "EnableSso"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/EnableSso
-func (c *Client) EnableSsoRequest(input *EnableSsoInput) EnableSsoRequest {
+func (c *Client) EnableSsoRequest(input *types.EnableSsoInput) EnableSsoRequest {
 	op := &aws.Operation{
 		Name:       opEnableSso,
 		HTTPMethod: "POST",
@@ -93,10 +32,10 @@ func (c *Client) EnableSsoRequest(input *EnableSsoInput) EnableSsoRequest {
 	}
 
 	if input == nil {
-		input = &EnableSsoInput{}
+		input = &types.EnableSsoInput{}
 	}
 
-	req := c.newRequest(op, input, &EnableSsoOutput{})
+	req := c.newRequest(op, input, &types.EnableSsoOutput{})
 	return EnableSsoRequest{Request: req, Input: input, Copy: c.EnableSsoRequest}
 }
 
@@ -104,8 +43,8 @@ func (c *Client) EnableSsoRequest(input *EnableSsoInput) EnableSsoRequest {
 // EnableSso API operation.
 type EnableSsoRequest struct {
 	*aws.Request
-	Input *EnableSsoInput
-	Copy  func(*EnableSsoInput) EnableSsoRequest
+	Input *types.EnableSsoInput
+	Copy  func(*types.EnableSsoInput) EnableSsoRequest
 }
 
 // Send marshals and sends the EnableSso API request.
@@ -117,7 +56,7 @@ func (r EnableSsoRequest) Send(ctx context.Context) (*EnableSsoResponse, error) 
 	}
 
 	resp := &EnableSsoResponse{
-		EnableSsoOutput: r.Request.Data.(*EnableSsoOutput),
+		EnableSsoOutput: r.Request.Data.(*types.EnableSsoOutput),
 		response:        &aws.Response{Request: r.Request},
 	}
 
@@ -127,7 +66,7 @@ func (r EnableSsoRequest) Send(ctx context.Context) (*EnableSsoResponse, error) 
 // EnableSsoResponse is the response type for the
 // EnableSso API operation.
 type EnableSsoResponse struct {
-	*EnableSsoOutput
+	*types.EnableSsoOutput
 
 	response *aws.Response
 }

@@ -4,81 +4,10 @@ package ssm
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ssm/types"
 )
-
-type ListDocumentsInput struct {
-	_ struct{} `type:"structure"`
-
-	// One or more filters. Use a filter to return a more specific list of results.
-	DocumentFilterList []DocumentFilter `min:"1" type:"list"`
-
-	// One or more filters. Use a filter to return a more specific list of results.
-	Filters []DocumentKeyValuesFilter `type:"list"`
-
-	// The maximum number of items to return for this call. The call also returns
-	// a token that you can specify in a subsequent call to get the next set of
-	// results.
-	MaxResults *int64 `min:"1" type:"integer"`
-
-	// The token for the next set of items to return. (You received this token from
-	// a previous call.)
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s ListDocumentsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListDocumentsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListDocumentsInput"}
-	if s.DocumentFilterList != nil && len(s.DocumentFilterList) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("DocumentFilterList", 1))
-	}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-	if s.DocumentFilterList != nil {
-		for i, v := range s.DocumentFilterList {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "DocumentFilterList", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-	if s.Filters != nil {
-		for i, v := range s.Filters {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ListDocumentsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The names of the Systems Manager documents.
-	DocumentIdentifiers []DocumentIdentifier `type:"list"`
-
-	// The token to use when requesting the next set of items. If there are no additional
-	// items to return, the string is empty.
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s ListDocumentsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListDocuments = "ListDocuments"
 
@@ -95,7 +24,7 @@ const opListDocuments = "ListDocuments"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ListDocuments
-func (c *Client) ListDocumentsRequest(input *ListDocumentsInput) ListDocumentsRequest {
+func (c *Client) ListDocumentsRequest(input *types.ListDocumentsInput) ListDocumentsRequest {
 	op := &aws.Operation{
 		Name:       opListDocuments,
 		HTTPMethod: "POST",
@@ -109,10 +38,10 @@ func (c *Client) ListDocumentsRequest(input *ListDocumentsInput) ListDocumentsRe
 	}
 
 	if input == nil {
-		input = &ListDocumentsInput{}
+		input = &types.ListDocumentsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListDocumentsOutput{})
+	req := c.newRequest(op, input, &types.ListDocumentsOutput{})
 	return ListDocumentsRequest{Request: req, Input: input, Copy: c.ListDocumentsRequest}
 }
 
@@ -120,8 +49,8 @@ func (c *Client) ListDocumentsRequest(input *ListDocumentsInput) ListDocumentsRe
 // ListDocuments API operation.
 type ListDocumentsRequest struct {
 	*aws.Request
-	Input *ListDocumentsInput
-	Copy  func(*ListDocumentsInput) ListDocumentsRequest
+	Input *types.ListDocumentsInput
+	Copy  func(*types.ListDocumentsInput) ListDocumentsRequest
 }
 
 // Send marshals and sends the ListDocuments API request.
@@ -133,7 +62,7 @@ func (r ListDocumentsRequest) Send(ctx context.Context) (*ListDocumentsResponse,
 	}
 
 	resp := &ListDocumentsResponse{
-		ListDocumentsOutput: r.Request.Data.(*ListDocumentsOutput),
+		ListDocumentsOutput: r.Request.Data.(*types.ListDocumentsOutput),
 		response:            &aws.Response{Request: r.Request},
 	}
 
@@ -163,7 +92,7 @@ func NewListDocumentsPaginator(req ListDocumentsRequest) ListDocumentsPaginator 
 	return ListDocumentsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListDocumentsInput
+				var inCpy *types.ListDocumentsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -183,14 +112,14 @@ type ListDocumentsPaginator struct {
 	aws.Pager
 }
 
-func (p *ListDocumentsPaginator) CurrentPage() *ListDocumentsOutput {
-	return p.Pager.CurrentPage().(*ListDocumentsOutput)
+func (p *ListDocumentsPaginator) CurrentPage() *types.ListDocumentsOutput {
+	return p.Pager.CurrentPage().(*types.ListDocumentsOutput)
 }
 
 // ListDocumentsResponse is the response type for the
 // ListDocuments API operation.
 type ListDocumentsResponse struct {
-	*ListDocumentsOutput
+	*types.ListDocumentsOutput
 
 	response *aws.Response
 }

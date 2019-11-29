@@ -6,50 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
+	"github.com/aws/aws-sdk-go-v2/service/opsworks/types"
 )
-
-type AssociateElasticIpInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Elastic IP address.
-	//
-	// ElasticIp is a required field
-	ElasticIp *string `type:"string" required:"true"`
-
-	// The instance ID.
-	InstanceId *string `type:"string"`
-}
-
-// String returns the string representation
-func (s AssociateElasticIpInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *AssociateElasticIpInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "AssociateElasticIpInput"}
-
-	if s.ElasticIp == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ElasticIp"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type AssociateElasticIpOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s AssociateElasticIpOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opAssociateElasticIp = "AssociateElasticIp"
 
@@ -73,7 +33,7 @@ const opAssociateElasticIp = "AssociateElasticIp"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/AssociateElasticIp
-func (c *Client) AssociateElasticIpRequest(input *AssociateElasticIpInput) AssociateElasticIpRequest {
+func (c *Client) AssociateElasticIpRequest(input *types.AssociateElasticIpInput) AssociateElasticIpRequest {
 	op := &aws.Operation{
 		Name:       opAssociateElasticIp,
 		HTTPMethod: "POST",
@@ -81,10 +41,10 @@ func (c *Client) AssociateElasticIpRequest(input *AssociateElasticIpInput) Assoc
 	}
 
 	if input == nil {
-		input = &AssociateElasticIpInput{}
+		input = &types.AssociateElasticIpInput{}
 	}
 
-	req := c.newRequest(op, input, &AssociateElasticIpOutput{})
+	req := c.newRequest(op, input, &types.AssociateElasticIpOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return AssociateElasticIpRequest{Request: req, Input: input, Copy: c.AssociateElasticIpRequest}
@@ -94,8 +54,8 @@ func (c *Client) AssociateElasticIpRequest(input *AssociateElasticIpInput) Assoc
 // AssociateElasticIp API operation.
 type AssociateElasticIpRequest struct {
 	*aws.Request
-	Input *AssociateElasticIpInput
-	Copy  func(*AssociateElasticIpInput) AssociateElasticIpRequest
+	Input *types.AssociateElasticIpInput
+	Copy  func(*types.AssociateElasticIpInput) AssociateElasticIpRequest
 }
 
 // Send marshals and sends the AssociateElasticIp API request.
@@ -107,7 +67,7 @@ func (r AssociateElasticIpRequest) Send(ctx context.Context) (*AssociateElasticI
 	}
 
 	resp := &AssociateElasticIpResponse{
-		AssociateElasticIpOutput: r.Request.Data.(*AssociateElasticIpOutput),
+		AssociateElasticIpOutput: r.Request.Data.(*types.AssociateElasticIpOutput),
 		response:                 &aws.Response{Request: r.Request},
 	}
 
@@ -117,7 +77,7 @@ func (r AssociateElasticIpRequest) Send(ctx context.Context) (*AssociateElasticI
 // AssociateElasticIpResponse is the response type for the
 // AssociateElasticIp API operation.
 type AssociateElasticIpResponse struct {
-	*AssociateElasticIpOutput
+	*types.AssociateElasticIpOutput
 
 	response *aws.Response
 }

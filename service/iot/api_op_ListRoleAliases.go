@@ -6,103 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/iot/types"
 )
-
-type ListRoleAliasesInput struct {
-	_ struct{} `type:"structure"`
-
-	// Return the list of role aliases in ascending alphabetical order.
-	AscendingOrder *bool `location:"querystring" locationName:"isAscendingOrder" type:"boolean"`
-
-	// A marker used to get the next set of results.
-	Marker *string `location:"querystring" locationName:"marker" type:"string"`
-
-	// The maximum number of results to return at one time.
-	PageSize *int64 `location:"querystring" locationName:"pageSize" min:"1" type:"integer"`
-}
-
-// String returns the string representation
-func (s ListRoleAliasesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListRoleAliasesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListRoleAliasesInput"}
-	if s.PageSize != nil && *s.PageSize < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("PageSize", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListRoleAliasesInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.AscendingOrder != nil {
-		v := *s.AscendingOrder
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "isAscendingOrder", protocol.BoolValue(v), metadata)
-	}
-	if s.Marker != nil {
-		v := *s.Marker
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "marker", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.PageSize != nil {
-		v := *s.PageSize
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "pageSize", protocol.Int64Value(v), metadata)
-	}
-	return nil
-}
-
-type ListRoleAliasesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A marker used to get the next set of results.
-	NextMarker *string `locationName:"nextMarker" type:"string"`
-
-	// The role aliases.
-	RoleAliases []string `locationName:"roleAliases" type:"list"`
-}
-
-// String returns the string representation
-func (s ListRoleAliasesOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListRoleAliasesOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.NextMarker != nil {
-		v := *s.NextMarker
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "nextMarker", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.RoleAliases != nil {
-		v := s.RoleAliases
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "roleAliases", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
-		}
-		ls0.End()
-
-	}
-	return nil
-}
 
 const opListRoleAliases = "ListRoleAliases"
 
@@ -117,7 +22,7 @@ const opListRoleAliases = "ListRoleAliases"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) ListRoleAliasesRequest(input *ListRoleAliasesInput) ListRoleAliasesRequest {
+func (c *Client) ListRoleAliasesRequest(input *types.ListRoleAliasesInput) ListRoleAliasesRequest {
 	op := &aws.Operation{
 		Name:       opListRoleAliases,
 		HTTPMethod: "GET",
@@ -125,10 +30,10 @@ func (c *Client) ListRoleAliasesRequest(input *ListRoleAliasesInput) ListRoleAli
 	}
 
 	if input == nil {
-		input = &ListRoleAliasesInput{}
+		input = &types.ListRoleAliasesInput{}
 	}
 
-	req := c.newRequest(op, input, &ListRoleAliasesOutput{})
+	req := c.newRequest(op, input, &types.ListRoleAliasesOutput{})
 	return ListRoleAliasesRequest{Request: req, Input: input, Copy: c.ListRoleAliasesRequest}
 }
 
@@ -136,8 +41,8 @@ func (c *Client) ListRoleAliasesRequest(input *ListRoleAliasesInput) ListRoleAli
 // ListRoleAliases API operation.
 type ListRoleAliasesRequest struct {
 	*aws.Request
-	Input *ListRoleAliasesInput
-	Copy  func(*ListRoleAliasesInput) ListRoleAliasesRequest
+	Input *types.ListRoleAliasesInput
+	Copy  func(*types.ListRoleAliasesInput) ListRoleAliasesRequest
 }
 
 // Send marshals and sends the ListRoleAliases API request.
@@ -149,7 +54,7 @@ func (r ListRoleAliasesRequest) Send(ctx context.Context) (*ListRoleAliasesRespo
 	}
 
 	resp := &ListRoleAliasesResponse{
-		ListRoleAliasesOutput: r.Request.Data.(*ListRoleAliasesOutput),
+		ListRoleAliasesOutput: r.Request.Data.(*types.ListRoleAliasesOutput),
 		response:              &aws.Response{Request: r.Request},
 	}
 
@@ -159,7 +64,7 @@ func (r ListRoleAliasesRequest) Send(ctx context.Context) (*ListRoleAliasesRespo
 // ListRoleAliasesResponse is the response type for the
 // ListRoleAliases API operation.
 type ListRoleAliasesResponse struct {
-	*ListRoleAliasesOutput
+	*types.ListRoleAliasesOutput
 
 	response *aws.Response
 }

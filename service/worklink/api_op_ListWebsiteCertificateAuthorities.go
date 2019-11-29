@@ -6,117 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/worklink/types"
 )
-
-type ListWebsiteCertificateAuthoritiesInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ARN of the fleet.
-	//
-	// FleetArn is a required field
-	FleetArn *string `min:"20" type:"string" required:"true"`
-
-	// The maximum number of results to be included in the next page.
-	MaxResults *int64 `min:"1" type:"integer"`
-
-	// The pagination token used to retrieve the next page of results for this operation.
-	// If this value is null, it retrieves the first page.
-	NextToken *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s ListWebsiteCertificateAuthoritiesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListWebsiteCertificateAuthoritiesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListWebsiteCertificateAuthoritiesInput"}
-
-	if s.FleetArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("FleetArn"))
-	}
-	if s.FleetArn != nil && len(*s.FleetArn) < 20 {
-		invalidParams.Add(aws.NewErrParamMinLen("FleetArn", 20))
-	}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-	if s.NextToken != nil && len(*s.NextToken) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListWebsiteCertificateAuthoritiesInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.FleetArn != nil {
-		v := *s.FleetArn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "FleetArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.MaxResults != nil {
-		v := *s.MaxResults
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "MaxResults", protocol.Int64Value(v), metadata)
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type ListWebsiteCertificateAuthoritiesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The pagination token used to retrieve the next page of results for this operation.
-	// If there are no more pages, this value is null.
-	NextToken *string `min:"1" type:"string"`
-
-	// Information about the certificates.
-	WebsiteCertificateAuthorities []WebsiteCaSummary `type:"list"`
-}
-
-// String returns the string representation
-func (s ListWebsiteCertificateAuthoritiesOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListWebsiteCertificateAuthoritiesOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.WebsiteCertificateAuthorities != nil {
-		v := s.WebsiteCertificateAuthorities
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "WebsiteCertificateAuthorities", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	return nil
-}
 
 const opListWebsiteCertificateAuthorities = "ListWebsiteCertificateAuthorities"
 
@@ -134,7 +25,7 @@ const opListWebsiteCertificateAuthorities = "ListWebsiteCertificateAuthorities"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/worklink-2018-09-25/ListWebsiteCertificateAuthorities
-func (c *Client) ListWebsiteCertificateAuthoritiesRequest(input *ListWebsiteCertificateAuthoritiesInput) ListWebsiteCertificateAuthoritiesRequest {
+func (c *Client) ListWebsiteCertificateAuthoritiesRequest(input *types.ListWebsiteCertificateAuthoritiesInput) ListWebsiteCertificateAuthoritiesRequest {
 	op := &aws.Operation{
 		Name:       opListWebsiteCertificateAuthorities,
 		HTTPMethod: "POST",
@@ -148,10 +39,10 @@ func (c *Client) ListWebsiteCertificateAuthoritiesRequest(input *ListWebsiteCert
 	}
 
 	if input == nil {
-		input = &ListWebsiteCertificateAuthoritiesInput{}
+		input = &types.ListWebsiteCertificateAuthoritiesInput{}
 	}
 
-	req := c.newRequest(op, input, &ListWebsiteCertificateAuthoritiesOutput{})
+	req := c.newRequest(op, input, &types.ListWebsiteCertificateAuthoritiesOutput{})
 	return ListWebsiteCertificateAuthoritiesRequest{Request: req, Input: input, Copy: c.ListWebsiteCertificateAuthoritiesRequest}
 }
 
@@ -159,8 +50,8 @@ func (c *Client) ListWebsiteCertificateAuthoritiesRequest(input *ListWebsiteCert
 // ListWebsiteCertificateAuthorities API operation.
 type ListWebsiteCertificateAuthoritiesRequest struct {
 	*aws.Request
-	Input *ListWebsiteCertificateAuthoritiesInput
-	Copy  func(*ListWebsiteCertificateAuthoritiesInput) ListWebsiteCertificateAuthoritiesRequest
+	Input *types.ListWebsiteCertificateAuthoritiesInput
+	Copy  func(*types.ListWebsiteCertificateAuthoritiesInput) ListWebsiteCertificateAuthoritiesRequest
 }
 
 // Send marshals and sends the ListWebsiteCertificateAuthorities API request.
@@ -172,7 +63,7 @@ func (r ListWebsiteCertificateAuthoritiesRequest) Send(ctx context.Context) (*Li
 	}
 
 	resp := &ListWebsiteCertificateAuthoritiesResponse{
-		ListWebsiteCertificateAuthoritiesOutput: r.Request.Data.(*ListWebsiteCertificateAuthoritiesOutput),
+		ListWebsiteCertificateAuthoritiesOutput: r.Request.Data.(*types.ListWebsiteCertificateAuthoritiesOutput),
 		response:                                &aws.Response{Request: r.Request},
 	}
 
@@ -202,7 +93,7 @@ func NewListWebsiteCertificateAuthoritiesPaginator(req ListWebsiteCertificateAut
 	return ListWebsiteCertificateAuthoritiesPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListWebsiteCertificateAuthoritiesInput
+				var inCpy *types.ListWebsiteCertificateAuthoritiesInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -222,14 +113,14 @@ type ListWebsiteCertificateAuthoritiesPaginator struct {
 	aws.Pager
 }
 
-func (p *ListWebsiteCertificateAuthoritiesPaginator) CurrentPage() *ListWebsiteCertificateAuthoritiesOutput {
-	return p.Pager.CurrentPage().(*ListWebsiteCertificateAuthoritiesOutput)
+func (p *ListWebsiteCertificateAuthoritiesPaginator) CurrentPage() *types.ListWebsiteCertificateAuthoritiesOutput {
+	return p.Pager.CurrentPage().(*types.ListWebsiteCertificateAuthoritiesOutput)
 }
 
 // ListWebsiteCertificateAuthoritiesResponse is the response type for the
 // ListWebsiteCertificateAuthorities API operation.
 type ListWebsiteCertificateAuthoritiesResponse struct {
-	*ListWebsiteCertificateAuthoritiesOutput
+	*types.ListWebsiteCertificateAuthoritiesOutput
 
 	response *aws.Response
 }

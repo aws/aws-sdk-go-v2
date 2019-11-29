@@ -13,6 +13,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws/awserr"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting/integration"
 	"github.com/aws/aws-sdk-go-v2/service/acm"
+	"github.com/aws/aws-sdk-go-v2/service/acm/types"
 )
 
 var _ aws.Config
@@ -24,7 +25,7 @@ func TestInteg_00_ListCertificates(t *testing.T) {
 
 	cfg := integration.ConfigWithDefaultRegion("us-west-2")
 	svc := acm.New(cfg)
-	params := &acm.ListCertificatesInput{}
+	params := &types.ListCertificatesInput{}
 
 	req := svc.ListCertificatesRequest(params)
 
@@ -39,7 +40,7 @@ func TestInteg_01_GetCertificate(t *testing.T) {
 
 	cfg := integration.ConfigWithDefaultRegion("us-west-2")
 	svc := acm.New(cfg)
-	params := &acm.GetCertificateInput{
+	params := &types.GetCertificateInput{
 		CertificateArn: aws.String("arn:aws:acm:region:123456789012:certificate/12345678-1234-1234-1234-123456789012"),
 	}
 

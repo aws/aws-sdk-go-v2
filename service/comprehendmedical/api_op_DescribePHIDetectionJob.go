@@ -6,52 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/comprehendmedical/types"
 )
-
-type DescribePHIDetectionJobInput struct {
-	_ struct{} `type:"structure"`
-
-	// The identifier that Amazon Comprehend Medical generated for the job. The
-	// StartPHIDetectionJob operation returns this identifier in its response.
-	//
-	// JobId is a required field
-	JobId *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribePHIDetectionJobInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribePHIDetectionJobInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribePHIDetectionJobInput"}
-
-	if s.JobId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("JobId"))
-	}
-	if s.JobId != nil && len(*s.JobId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("JobId", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribePHIDetectionJobOutput struct {
-	_ struct{} `type:"structure"`
-
-	// An object that contains the properties associated with a detection job.
-	ComprehendMedicalAsyncJobProperties *ComprehendMedicalAsyncJobProperties `type:"structure"`
-}
-
-// String returns the string representation
-func (s DescribePHIDetectionJobOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribePHIDetectionJob = "DescribePHIDetectionJob"
 
@@ -69,7 +25,7 @@ const opDescribePHIDetectionJob = "DescribePHIDetectionJob"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/comprehendmedical-2018-10-30/DescribePHIDetectionJob
-func (c *Client) DescribePHIDetectionJobRequest(input *DescribePHIDetectionJobInput) DescribePHIDetectionJobRequest {
+func (c *Client) DescribePHIDetectionJobRequest(input *types.DescribePHIDetectionJobInput) DescribePHIDetectionJobRequest {
 	op := &aws.Operation{
 		Name:       opDescribePHIDetectionJob,
 		HTTPMethod: "POST",
@@ -77,10 +33,10 @@ func (c *Client) DescribePHIDetectionJobRequest(input *DescribePHIDetectionJobIn
 	}
 
 	if input == nil {
-		input = &DescribePHIDetectionJobInput{}
+		input = &types.DescribePHIDetectionJobInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribePHIDetectionJobOutput{})
+	req := c.newRequest(op, input, &types.DescribePHIDetectionJobOutput{})
 	return DescribePHIDetectionJobRequest{Request: req, Input: input, Copy: c.DescribePHIDetectionJobRequest}
 }
 
@@ -88,8 +44,8 @@ func (c *Client) DescribePHIDetectionJobRequest(input *DescribePHIDetectionJobIn
 // DescribePHIDetectionJob API operation.
 type DescribePHIDetectionJobRequest struct {
 	*aws.Request
-	Input *DescribePHIDetectionJobInput
-	Copy  func(*DescribePHIDetectionJobInput) DescribePHIDetectionJobRequest
+	Input *types.DescribePHIDetectionJobInput
+	Copy  func(*types.DescribePHIDetectionJobInput) DescribePHIDetectionJobRequest
 }
 
 // Send marshals and sends the DescribePHIDetectionJob API request.
@@ -101,7 +57,7 @@ func (r DescribePHIDetectionJobRequest) Send(ctx context.Context) (*DescribePHID
 	}
 
 	resp := &DescribePHIDetectionJobResponse{
-		DescribePHIDetectionJobOutput: r.Request.Data.(*DescribePHIDetectionJobOutput),
+		DescribePHIDetectionJobOutput: r.Request.Data.(*types.DescribePHIDetectionJobOutput),
 		response:                      &aws.Response{Request: r.Request},
 	}
 
@@ -111,7 +67,7 @@ func (r DescribePHIDetectionJobRequest) Send(ctx context.Context) (*DescribePHID
 // DescribePHIDetectionJobResponse is the response type for the
 // DescribePHIDetectionJob API operation.
 type DescribePHIDetectionJobResponse struct {
-	*DescribePHIDetectionJobOutput
+	*types.DescribePHIDetectionJobOutput
 
 	response *aws.Response
 }

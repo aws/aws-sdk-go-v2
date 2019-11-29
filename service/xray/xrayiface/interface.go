@@ -10,6 +10,7 @@ package xrayiface
 
 import (
 	"github.com/aws/aws-sdk-go-v2/service/xray"
+	"github.com/aws/aws-sdk-go-v2/service/xray/types"
 )
 
 // ClientAPI provides an interface to enable mocking the
@@ -43,7 +44,7 @@ import (
 //    type mockClientClient struct {
 //        xrayiface.ClientPI
 //    }
-//    func (m *mockClientClient) BatchGetTraces(input *xray.BatchGetTracesInput) (*xray.BatchGetTracesOutput, error) {
+//    func (m *mockClientClient) BatchGetTraces(input *types.BatchGetTracesInput) (*types.BatchGetTracesOutput, error) {
 //        // mock response/functionality
 //    }
 //
@@ -61,45 +62,45 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type ClientAPI interface {
-	BatchGetTracesRequest(*xray.BatchGetTracesInput) xray.BatchGetTracesRequest
+	BatchGetTracesRequest(*types.BatchGetTracesInput) xray.BatchGetTracesRequest
 
-	CreateGroupRequest(*xray.CreateGroupInput) xray.CreateGroupRequest
+	CreateGroupRequest(*types.CreateGroupInput) xray.CreateGroupRequest
 
-	CreateSamplingRuleRequest(*xray.CreateSamplingRuleInput) xray.CreateSamplingRuleRequest
+	CreateSamplingRuleRequest(*types.CreateSamplingRuleInput) xray.CreateSamplingRuleRequest
 
-	DeleteGroupRequest(*xray.DeleteGroupInput) xray.DeleteGroupRequest
+	DeleteGroupRequest(*types.DeleteGroupInput) xray.DeleteGroupRequest
 
-	DeleteSamplingRuleRequest(*xray.DeleteSamplingRuleInput) xray.DeleteSamplingRuleRequest
+	DeleteSamplingRuleRequest(*types.DeleteSamplingRuleInput) xray.DeleteSamplingRuleRequest
 
-	GetEncryptionConfigRequest(*xray.GetEncryptionConfigInput) xray.GetEncryptionConfigRequest
+	GetEncryptionConfigRequest(*types.GetEncryptionConfigInput) xray.GetEncryptionConfigRequest
 
-	GetGroupRequest(*xray.GetGroupInput) xray.GetGroupRequest
+	GetGroupRequest(*types.GetGroupInput) xray.GetGroupRequest
 
-	GetGroupsRequest(*xray.GetGroupsInput) xray.GetGroupsRequest
+	GetGroupsRequest(*types.GetGroupsInput) xray.GetGroupsRequest
 
-	GetSamplingRulesRequest(*xray.GetSamplingRulesInput) xray.GetSamplingRulesRequest
+	GetSamplingRulesRequest(*types.GetSamplingRulesInput) xray.GetSamplingRulesRequest
 
-	GetSamplingStatisticSummariesRequest(*xray.GetSamplingStatisticSummariesInput) xray.GetSamplingStatisticSummariesRequest
+	GetSamplingStatisticSummariesRequest(*types.GetSamplingStatisticSummariesInput) xray.GetSamplingStatisticSummariesRequest
 
-	GetSamplingTargetsRequest(*xray.GetSamplingTargetsInput) xray.GetSamplingTargetsRequest
+	GetSamplingTargetsRequest(*types.GetSamplingTargetsInput) xray.GetSamplingTargetsRequest
 
-	GetServiceGraphRequest(*xray.GetServiceGraphInput) xray.GetServiceGraphRequest
+	GetServiceGraphRequest(*types.GetServiceGraphInput) xray.GetServiceGraphRequest
 
-	GetTimeSeriesServiceStatisticsRequest(*xray.GetTimeSeriesServiceStatisticsInput) xray.GetTimeSeriesServiceStatisticsRequest
+	GetTimeSeriesServiceStatisticsRequest(*types.GetTimeSeriesServiceStatisticsInput) xray.GetTimeSeriesServiceStatisticsRequest
 
-	GetTraceGraphRequest(*xray.GetTraceGraphInput) xray.GetTraceGraphRequest
+	GetTraceGraphRequest(*types.GetTraceGraphInput) xray.GetTraceGraphRequest
 
-	GetTraceSummariesRequest(*xray.GetTraceSummariesInput) xray.GetTraceSummariesRequest
+	GetTraceSummariesRequest(*types.GetTraceSummariesInput) xray.GetTraceSummariesRequest
 
-	PutEncryptionConfigRequest(*xray.PutEncryptionConfigInput) xray.PutEncryptionConfigRequest
+	PutEncryptionConfigRequest(*types.PutEncryptionConfigInput) xray.PutEncryptionConfigRequest
 
-	PutTelemetryRecordsRequest(*xray.PutTelemetryRecordsInput) xray.PutTelemetryRecordsRequest
+	PutTelemetryRecordsRequest(*types.PutTelemetryRecordsInput) xray.PutTelemetryRecordsRequest
 
-	PutTraceSegmentsRequest(*xray.PutTraceSegmentsInput) xray.PutTraceSegmentsRequest
+	PutTraceSegmentsRequest(*types.PutTraceSegmentsInput) xray.PutTraceSegmentsRequest
 
-	UpdateGroupRequest(*xray.UpdateGroupInput) xray.UpdateGroupRequest
+	UpdateGroupRequest(*types.UpdateGroupInput) xray.UpdateGroupRequest
 
-	UpdateSamplingRuleRequest(*xray.UpdateSamplingRuleInput) xray.UpdateSamplingRuleRequest
+	UpdateSamplingRuleRequest(*types.UpdateSamplingRuleInput) xray.UpdateSamplingRuleRequest
 }
 
 var _ ClientAPI = (*xray.Client)(nil)

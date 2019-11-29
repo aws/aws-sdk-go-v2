@@ -6,85 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/kinesisanalyticsv2/types"
 )
-
-type AddApplicationInputInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of your existing application to which you want to add the streaming
-	// source.
-	//
-	// ApplicationName is a required field
-	ApplicationName *string `min:"1" type:"string" required:"true"`
-
-	// The current version of your application. You can use the DescribeApplication
-	// operation to find the current application version.
-	//
-	// CurrentApplicationVersionId is a required field
-	CurrentApplicationVersionId *int64 `min:"1" type:"long" required:"true"`
-
-	// The Input to add.
-	//
-	// Input is a required field
-	Input *Input `type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s AddApplicationInputInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *AddApplicationInputInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "AddApplicationInputInput"}
-
-	if s.ApplicationName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ApplicationName"))
-	}
-	if s.ApplicationName != nil && len(*s.ApplicationName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ApplicationName", 1))
-	}
-
-	if s.CurrentApplicationVersionId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("CurrentApplicationVersionId"))
-	}
-	if s.CurrentApplicationVersionId != nil && *s.CurrentApplicationVersionId < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("CurrentApplicationVersionId", 1))
-	}
-
-	if s.Input == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Input"))
-	}
-	if s.Input != nil {
-		if err := s.Input.Validate(); err != nil {
-			invalidParams.AddNested("Input", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type AddApplicationInputOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the application.
-	ApplicationARN *string `min:"1" type:"string"`
-
-	// Provides the current application version.
-	ApplicationVersionId *int64 `min:"1" type:"long"`
-
-	// Describes the application input configuration.
-	InputDescriptions []InputDescription `type:"list"`
-}
-
-// String returns the string representation
-func (s AddApplicationInputOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opAddApplicationInput = "AddApplicationInput"
 
@@ -109,7 +32,7 @@ const opAddApplicationInput = "AddApplicationInput"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/AddApplicationInput
-func (c *Client) AddApplicationInputRequest(input *AddApplicationInputInput) AddApplicationInputRequest {
+func (c *Client) AddApplicationInputRequest(input *types.AddApplicationInputInput) AddApplicationInputRequest {
 	op := &aws.Operation{
 		Name:       opAddApplicationInput,
 		HTTPMethod: "POST",
@@ -117,10 +40,10 @@ func (c *Client) AddApplicationInputRequest(input *AddApplicationInputInput) Add
 	}
 
 	if input == nil {
-		input = &AddApplicationInputInput{}
+		input = &types.AddApplicationInputInput{}
 	}
 
-	req := c.newRequest(op, input, &AddApplicationInputOutput{})
+	req := c.newRequest(op, input, &types.AddApplicationInputOutput{})
 	return AddApplicationInputRequest{Request: req, Input: input, Copy: c.AddApplicationInputRequest}
 }
 
@@ -128,8 +51,8 @@ func (c *Client) AddApplicationInputRequest(input *AddApplicationInputInput) Add
 // AddApplicationInput API operation.
 type AddApplicationInputRequest struct {
 	*aws.Request
-	Input *AddApplicationInputInput
-	Copy  func(*AddApplicationInputInput) AddApplicationInputRequest
+	Input *types.AddApplicationInputInput
+	Copy  func(*types.AddApplicationInputInput) AddApplicationInputRequest
 }
 
 // Send marshals and sends the AddApplicationInput API request.
@@ -141,7 +64,7 @@ func (r AddApplicationInputRequest) Send(ctx context.Context) (*AddApplicationIn
 	}
 
 	resp := &AddApplicationInputResponse{
-		AddApplicationInputOutput: r.Request.Data.(*AddApplicationInputOutput),
+		AddApplicationInputOutput: r.Request.Data.(*types.AddApplicationInputOutput),
 		response:                  &aws.Response{Request: r.Request},
 	}
 
@@ -151,7 +74,7 @@ func (r AddApplicationInputRequest) Send(ctx context.Context) (*AddApplicationIn
 // AddApplicationInputResponse is the response type for the
 // AddApplicationInput API operation.
 type AddApplicationInputResponse struct {
-	*AddApplicationInputOutput
+	*types.AddApplicationInputOutput
 
 	response *aws.Response
 }

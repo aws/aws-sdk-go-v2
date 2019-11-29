@@ -6,51 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/cloudwatchlogs/types"
 )
-
-type GetLogRecordInput struct {
-	_ struct{} `type:"structure"`
-
-	// The pointer corresponding to the log event record you want to retrieve. You
-	// get this from the response of a GetQueryResults operation. In that response,
-	// the value of the @ptr field for a log event is the value to use as logRecordPointer
-	// to retrieve that complete log event record.
-	//
-	// LogRecordPointer is a required field
-	LogRecordPointer *string `locationName:"logRecordPointer" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetLogRecordInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetLogRecordInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetLogRecordInput"}
-
-	if s.LogRecordPointer == nil {
-		invalidParams.Add(aws.NewErrParamRequired("LogRecordPointer"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type GetLogRecordOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The requested log event, as a JSON string.
-	LogRecord map[string]string `locationName:"logRecord" type:"map"`
-}
-
-// String returns the string representation
-func (s GetLogRecordOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetLogRecord = "GetLogRecord"
 
@@ -72,7 +29,7 @@ const opGetLogRecord = "GetLogRecord"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/GetLogRecord
-func (c *Client) GetLogRecordRequest(input *GetLogRecordInput) GetLogRecordRequest {
+func (c *Client) GetLogRecordRequest(input *types.GetLogRecordInput) GetLogRecordRequest {
 	op := &aws.Operation{
 		Name:       opGetLogRecord,
 		HTTPMethod: "POST",
@@ -80,10 +37,10 @@ func (c *Client) GetLogRecordRequest(input *GetLogRecordInput) GetLogRecordReque
 	}
 
 	if input == nil {
-		input = &GetLogRecordInput{}
+		input = &types.GetLogRecordInput{}
 	}
 
-	req := c.newRequest(op, input, &GetLogRecordOutput{})
+	req := c.newRequest(op, input, &types.GetLogRecordOutput{})
 	return GetLogRecordRequest{Request: req, Input: input, Copy: c.GetLogRecordRequest}
 }
 
@@ -91,8 +48,8 @@ func (c *Client) GetLogRecordRequest(input *GetLogRecordInput) GetLogRecordReque
 // GetLogRecord API operation.
 type GetLogRecordRequest struct {
 	*aws.Request
-	Input *GetLogRecordInput
-	Copy  func(*GetLogRecordInput) GetLogRecordRequest
+	Input *types.GetLogRecordInput
+	Copy  func(*types.GetLogRecordInput) GetLogRecordRequest
 }
 
 // Send marshals and sends the GetLogRecord API request.
@@ -104,7 +61,7 @@ func (r GetLogRecordRequest) Send(ctx context.Context) (*GetLogRecordResponse, e
 	}
 
 	resp := &GetLogRecordResponse{
-		GetLogRecordOutput: r.Request.Data.(*GetLogRecordOutput),
+		GetLogRecordOutput: r.Request.Data.(*types.GetLogRecordOutput),
 		response:           &aws.Response{Request: r.Request},
 	}
 
@@ -114,7 +71,7 @@ func (r GetLogRecordRequest) Send(ctx context.Context) (*GetLogRecordResponse, e
 // GetLogRecordResponse is the response type for the
 // GetLogRecord API operation.
 type GetLogRecordResponse struct {
-	*GetLogRecordOutput
+	*types.GetLogRecordOutput
 
 	response *aws.Response
 }

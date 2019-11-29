@@ -6,39 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/cloudsearch/types"
 )
-
-// Container for the parameters to the DescribeDomains operation. By default
-// shows the status of all domains. To restrict the response to particular domains,
-// specify the names of the domains you want to describe.
-type DescribeDomainsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The names of the domains you want to include in the response.
-	DomainNames []string `type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeDomainsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// The result of a DescribeDomains request. Contains the status of the domains
-// specified in the request or all domains owned by the account.
-type DescribeDomainsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A list that contains the status of each requested domain.
-	//
-	// DomainStatusList is a required field
-	DomainStatusList []DomainStatus `type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeDomainsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeDomains = "DescribeDomains"
 
@@ -58,7 +27,7 @@ const opDescribeDomains = "DescribeDomains"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) DescribeDomainsRequest(input *DescribeDomainsInput) DescribeDomainsRequest {
+func (c *Client) DescribeDomainsRequest(input *types.DescribeDomainsInput) DescribeDomainsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeDomains,
 		HTTPMethod: "POST",
@@ -66,10 +35,10 @@ func (c *Client) DescribeDomainsRequest(input *DescribeDomainsInput) DescribeDom
 	}
 
 	if input == nil {
-		input = &DescribeDomainsInput{}
+		input = &types.DescribeDomainsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeDomainsOutput{})
+	req := c.newRequest(op, input, &types.DescribeDomainsOutput{})
 	return DescribeDomainsRequest{Request: req, Input: input, Copy: c.DescribeDomainsRequest}
 }
 
@@ -77,8 +46,8 @@ func (c *Client) DescribeDomainsRequest(input *DescribeDomainsInput) DescribeDom
 // DescribeDomains API operation.
 type DescribeDomainsRequest struct {
 	*aws.Request
-	Input *DescribeDomainsInput
-	Copy  func(*DescribeDomainsInput) DescribeDomainsRequest
+	Input *types.DescribeDomainsInput
+	Copy  func(*types.DescribeDomainsInput) DescribeDomainsRequest
 }
 
 // Send marshals and sends the DescribeDomains API request.
@@ -90,7 +59,7 @@ func (r DescribeDomainsRequest) Send(ctx context.Context) (*DescribeDomainsRespo
 	}
 
 	resp := &DescribeDomainsResponse{
-		DescribeDomainsOutput: r.Request.Data.(*DescribeDomainsOutput),
+		DescribeDomainsOutput: r.Request.Data.(*types.DescribeDomainsOutput),
 		response:              &aws.Response{Request: r.Request},
 	}
 
@@ -100,7 +69,7 @@ func (r DescribeDomainsRequest) Send(ctx context.Context) (*DescribeDomainsRespo
 // DescribeDomainsResponse is the response type for the
 // DescribeDomains API operation.
 type DescribeDomainsResponse struct {
-	*DescribeDomainsOutput
+	*types.DescribeDomainsOutput
 
 	response *aws.Response
 }

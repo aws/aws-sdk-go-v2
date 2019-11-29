@@ -6,62 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/budgets/types"
 )
-
-// Request of DeleteBudget
-type DeleteBudgetInput struct {
-	_ struct{} `type:"structure"`
-
-	// The accountId that is associated with the budget that you want to delete.
-	//
-	// AccountId is a required field
-	AccountId *string `min:"12" type:"string" required:"true"`
-
-	// The name of the budget that you want to delete.
-	//
-	// BudgetName is a required field
-	BudgetName *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteBudgetInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteBudgetInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteBudgetInput"}
-
-	if s.AccountId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("AccountId"))
-	}
-	if s.AccountId != nil && len(*s.AccountId) < 12 {
-		invalidParams.Add(aws.NewErrParamMinLen("AccountId", 12))
-	}
-
-	if s.BudgetName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("BudgetName"))
-	}
-	if s.BudgetName != nil && len(*s.BudgetName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("BudgetName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Response of DeleteBudget
-type DeleteBudgetOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteBudgetOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteBudget = "DeleteBudget"
 
@@ -79,7 +25,7 @@ const opDeleteBudget = "DeleteBudget"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) DeleteBudgetRequest(input *DeleteBudgetInput) DeleteBudgetRequest {
+func (c *Client) DeleteBudgetRequest(input *types.DeleteBudgetInput) DeleteBudgetRequest {
 	op := &aws.Operation{
 		Name:       opDeleteBudget,
 		HTTPMethod: "POST",
@@ -87,10 +33,10 @@ func (c *Client) DeleteBudgetRequest(input *DeleteBudgetInput) DeleteBudgetReque
 	}
 
 	if input == nil {
-		input = &DeleteBudgetInput{}
+		input = &types.DeleteBudgetInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteBudgetOutput{})
+	req := c.newRequest(op, input, &types.DeleteBudgetOutput{})
 	return DeleteBudgetRequest{Request: req, Input: input, Copy: c.DeleteBudgetRequest}
 }
 
@@ -98,8 +44,8 @@ func (c *Client) DeleteBudgetRequest(input *DeleteBudgetInput) DeleteBudgetReque
 // DeleteBudget API operation.
 type DeleteBudgetRequest struct {
 	*aws.Request
-	Input *DeleteBudgetInput
-	Copy  func(*DeleteBudgetInput) DeleteBudgetRequest
+	Input *types.DeleteBudgetInput
+	Copy  func(*types.DeleteBudgetInput) DeleteBudgetRequest
 }
 
 // Send marshals and sends the DeleteBudget API request.
@@ -111,7 +57,7 @@ func (r DeleteBudgetRequest) Send(ctx context.Context) (*DeleteBudgetResponse, e
 	}
 
 	resp := &DeleteBudgetResponse{
-		DeleteBudgetOutput: r.Request.Data.(*DeleteBudgetOutput),
+		DeleteBudgetOutput: r.Request.Data.(*types.DeleteBudgetOutput),
 		response:           &aws.Response{Request: r.Request},
 	}
 
@@ -121,7 +67,7 @@ func (r DeleteBudgetRequest) Send(ctx context.Context) (*DeleteBudgetResponse, e
 // DeleteBudgetResponse is the response type for the
 // DeleteBudget API operation.
 type DeleteBudgetResponse struct {
-	*DeleteBudgetOutput
+	*types.DeleteBudgetOutput
 
 	response *aws.Response
 }

@@ -6,72 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/route53/types"
 )
-
-// A request to delete a specified traffic policy instance.
-type DeleteTrafficPolicyInstanceInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the traffic policy instance that you want to delete.
-	//
-	// When you delete a traffic policy instance, Amazon Route 53 also deletes all
-	// of the resource record sets that were created when you created the traffic
-	// policy instance.
-	//
-	// Id is a required field
-	Id *string `location:"uri" locationName:"Id" min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteTrafficPolicyInstanceInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteTrafficPolicyInstanceInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteTrafficPolicyInstanceInput"}
-
-	if s.Id == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Id"))
-	}
-	if s.Id != nil && len(*s.Id) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Id", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteTrafficPolicyInstanceInput) MarshalFields(e protocol.FieldEncoder) error {
-
-	if s.Id != nil {
-		v := *s.Id
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "Id", protocol.StringValue(v), metadata)
-	}
-	return nil
-}
-
-// An empty element.
-type DeleteTrafficPolicyInstanceOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteTrafficPolicyInstanceOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteTrafficPolicyInstanceOutput) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
 
 const opDeleteTrafficPolicyInstance = "DeleteTrafficPolicyInstance"
 
@@ -91,7 +27,7 @@ const opDeleteTrafficPolicyInstance = "DeleteTrafficPolicyInstance"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/DeleteTrafficPolicyInstance
-func (c *Client) DeleteTrafficPolicyInstanceRequest(input *DeleteTrafficPolicyInstanceInput) DeleteTrafficPolicyInstanceRequest {
+func (c *Client) DeleteTrafficPolicyInstanceRequest(input *types.DeleteTrafficPolicyInstanceInput) DeleteTrafficPolicyInstanceRequest {
 	op := &aws.Operation{
 		Name:       opDeleteTrafficPolicyInstance,
 		HTTPMethod: "DELETE",
@@ -99,10 +35,10 @@ func (c *Client) DeleteTrafficPolicyInstanceRequest(input *DeleteTrafficPolicyIn
 	}
 
 	if input == nil {
-		input = &DeleteTrafficPolicyInstanceInput{}
+		input = &types.DeleteTrafficPolicyInstanceInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteTrafficPolicyInstanceOutput{})
+	req := c.newRequest(op, input, &types.DeleteTrafficPolicyInstanceOutput{})
 	return DeleteTrafficPolicyInstanceRequest{Request: req, Input: input, Copy: c.DeleteTrafficPolicyInstanceRequest}
 }
 
@@ -110,8 +46,8 @@ func (c *Client) DeleteTrafficPolicyInstanceRequest(input *DeleteTrafficPolicyIn
 // DeleteTrafficPolicyInstance API operation.
 type DeleteTrafficPolicyInstanceRequest struct {
 	*aws.Request
-	Input *DeleteTrafficPolicyInstanceInput
-	Copy  func(*DeleteTrafficPolicyInstanceInput) DeleteTrafficPolicyInstanceRequest
+	Input *types.DeleteTrafficPolicyInstanceInput
+	Copy  func(*types.DeleteTrafficPolicyInstanceInput) DeleteTrafficPolicyInstanceRequest
 }
 
 // Send marshals and sends the DeleteTrafficPolicyInstance API request.
@@ -123,7 +59,7 @@ func (r DeleteTrafficPolicyInstanceRequest) Send(ctx context.Context) (*DeleteTr
 	}
 
 	resp := &DeleteTrafficPolicyInstanceResponse{
-		DeleteTrafficPolicyInstanceOutput: r.Request.Data.(*DeleteTrafficPolicyInstanceOutput),
+		DeleteTrafficPolicyInstanceOutput: r.Request.Data.(*types.DeleteTrafficPolicyInstanceOutput),
 		response:                          &aws.Response{Request: r.Request},
 	}
 
@@ -133,7 +69,7 @@ func (r DeleteTrafficPolicyInstanceRequest) Send(ctx context.Context) (*DeleteTr
 // DeleteTrafficPolicyInstanceResponse is the response type for the
 // DeleteTrafficPolicyInstance API operation.
 type DeleteTrafficPolicyInstanceResponse struct {
-	*DeleteTrafficPolicyInstanceOutput
+	*types.DeleteTrafficPolicyInstanceOutput
 
 	response *aws.Response
 }

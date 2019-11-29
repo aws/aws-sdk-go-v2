@@ -6,87 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/forecastquery/types"
 )
-
-type QueryForecastInput struct {
-	_ struct{} `type:"structure"`
-
-	// The end date for the forecast. Specify the date using this format: yyyy-MM-dd'T'HH:mm:ss'Z'
-	// (ISO 8601 format). For example, "1970-01-01T00:00:00Z."
-	EndDate *string `type:"string"`
-
-	// The filtering criteria to apply when retrieving the forecast. For example:
-	//
-	//    * To get a forecast for a specific item specify the following: {"item_id"
-	//    : "client_1"}
-	//
-	//    * To get a forecast for a specific item sold in a specific location, specify
-	//    the following: {"item_id" : "client_1", "location" : "ny"}
-	//
-	//    * To get a forecast for all blue items sold in a specific location, specify
-	//    the following: { "location" : "ny", "color":"blue"}
-	//
-	// To get the full forecast, use the operation.
-	//
-	// Filters is a required field
-	Filters map[string]string `min:"1" type:"map" required:"true"`
-
-	// The Amazon Resource Name (ARN) of the forecast to query.
-	//
-	// ForecastArn is a required field
-	ForecastArn *string `type:"string" required:"true"`
-
-	// If the result of the previous request was truncated, the response includes
-	// a NextToken. To retrieve the next set of results, use the token in the next
-	// request. Tokens expire after 24 hours.
-	NextToken *string `min:"1" type:"string"`
-
-	// The start date for the forecast. Specify the date using this format: yyyy-MM-dd'T'HH:mm:ss'Z'
-	// (ISO 8601 format) For example, "1970-01-01T00:00:00Z."
-	StartDate *string `type:"string"`
-}
-
-// String returns the string representation
-func (s QueryForecastInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *QueryForecastInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "QueryForecastInput"}
-
-	if s.Filters == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Filters"))
-	}
-	if s.Filters != nil && len(s.Filters) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Filters", 1))
-	}
-
-	if s.ForecastArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ForecastArn"))
-	}
-	if s.NextToken != nil && len(*s.NextToken) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type QueryForecastOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The forecast.
-	Forecast *Forecast `type:"structure"`
-}
-
-// String returns the string representation
-func (s QueryForecastOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opQueryForecast = "QueryForecast"
 
@@ -114,7 +35,7 @@ const opQueryForecast = "QueryForecast"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/forecastquery-2018-06-26/QueryForecast
-func (c *Client) QueryForecastRequest(input *QueryForecastInput) QueryForecastRequest {
+func (c *Client) QueryForecastRequest(input *types.QueryForecastInput) QueryForecastRequest {
 	op := &aws.Operation{
 		Name:       opQueryForecast,
 		HTTPMethod: "POST",
@@ -122,10 +43,10 @@ func (c *Client) QueryForecastRequest(input *QueryForecastInput) QueryForecastRe
 	}
 
 	if input == nil {
-		input = &QueryForecastInput{}
+		input = &types.QueryForecastInput{}
 	}
 
-	req := c.newRequest(op, input, &QueryForecastOutput{})
+	req := c.newRequest(op, input, &types.QueryForecastOutput{})
 	return QueryForecastRequest{Request: req, Input: input, Copy: c.QueryForecastRequest}
 }
 
@@ -133,8 +54,8 @@ func (c *Client) QueryForecastRequest(input *QueryForecastInput) QueryForecastRe
 // QueryForecast API operation.
 type QueryForecastRequest struct {
 	*aws.Request
-	Input *QueryForecastInput
-	Copy  func(*QueryForecastInput) QueryForecastRequest
+	Input *types.QueryForecastInput
+	Copy  func(*types.QueryForecastInput) QueryForecastRequest
 }
 
 // Send marshals and sends the QueryForecast API request.
@@ -146,7 +67,7 @@ func (r QueryForecastRequest) Send(ctx context.Context) (*QueryForecastResponse,
 	}
 
 	resp := &QueryForecastResponse{
-		QueryForecastOutput: r.Request.Data.(*QueryForecastOutput),
+		QueryForecastOutput: r.Request.Data.(*types.QueryForecastOutput),
 		response:            &aws.Response{Request: r.Request},
 	}
 
@@ -156,7 +77,7 @@ func (r QueryForecastRequest) Send(ctx context.Context) (*QueryForecastResponse,
 // QueryForecastResponse is the response type for the
 // QueryForecast API operation.
 type QueryForecastResponse struct {
-	*QueryForecastOutput
+	*types.QueryForecastOutput
 
 	response *aws.Response
 }

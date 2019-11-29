@@ -6,53 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/codecommit/types"
 )
-
-// Represents the input of a delete repository operation.
-type DeleteRepositoryInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the repository to delete.
-	//
-	// RepositoryName is a required field
-	RepositoryName *string `locationName:"repositoryName" min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteRepositoryInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteRepositoryInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteRepositoryInput"}
-
-	if s.RepositoryName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("RepositoryName"))
-	}
-	if s.RepositoryName != nil && len(*s.RepositoryName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("RepositoryName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Represents the output of a delete repository operation.
-type DeleteRepositoryOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the repository that was deleted.
-	RepositoryId *string `locationName:"repositoryId" type:"string"`
-}
-
-// String returns the string representation
-func (s DeleteRepositoryOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteRepository = "DeleteRepository"
 
@@ -60,11 +15,11 @@ const opDeleteRepository = "DeleteRepository"
 // AWS CodeCommit.
 //
 // Deletes a repository. If a specified repository was already deleted, a null
-// repository ID will be returned.
+// repository ID is returned.
 //
 // Deleting a repository also deletes all associated objects and metadata. After
 // a repository is deleted, all future push calls to the deleted repository
-// will fail.
+// fail.
 //
 //    // Example sending a request using DeleteRepositoryRequest.
 //    req := client.DeleteRepositoryRequest(params)
@@ -74,7 +29,7 @@ const opDeleteRepository = "DeleteRepository"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/DeleteRepository
-func (c *Client) DeleteRepositoryRequest(input *DeleteRepositoryInput) DeleteRepositoryRequest {
+func (c *Client) DeleteRepositoryRequest(input *types.DeleteRepositoryInput) DeleteRepositoryRequest {
 	op := &aws.Operation{
 		Name:       opDeleteRepository,
 		HTTPMethod: "POST",
@@ -82,10 +37,10 @@ func (c *Client) DeleteRepositoryRequest(input *DeleteRepositoryInput) DeleteRep
 	}
 
 	if input == nil {
-		input = &DeleteRepositoryInput{}
+		input = &types.DeleteRepositoryInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteRepositoryOutput{})
+	req := c.newRequest(op, input, &types.DeleteRepositoryOutput{})
 	return DeleteRepositoryRequest{Request: req, Input: input, Copy: c.DeleteRepositoryRequest}
 }
 
@@ -93,8 +48,8 @@ func (c *Client) DeleteRepositoryRequest(input *DeleteRepositoryInput) DeleteRep
 // DeleteRepository API operation.
 type DeleteRepositoryRequest struct {
 	*aws.Request
-	Input *DeleteRepositoryInput
-	Copy  func(*DeleteRepositoryInput) DeleteRepositoryRequest
+	Input *types.DeleteRepositoryInput
+	Copy  func(*types.DeleteRepositoryInput) DeleteRepositoryRequest
 }
 
 // Send marshals and sends the DeleteRepository API request.
@@ -106,7 +61,7 @@ func (r DeleteRepositoryRequest) Send(ctx context.Context) (*DeleteRepositoryRes
 	}
 
 	resp := &DeleteRepositoryResponse{
-		DeleteRepositoryOutput: r.Request.Data.(*DeleteRepositoryOutput),
+		DeleteRepositoryOutput: r.Request.Data.(*types.DeleteRepositoryOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -116,7 +71,7 @@ func (r DeleteRepositoryRequest) Send(ctx context.Context) (*DeleteRepositoryRes
 // DeleteRepositoryResponse is the response type for the
 // DeleteRepository API operation.
 type DeleteRepositoryResponse struct {
-	*DeleteRepositoryOutput
+	*types.DeleteRepositoryOutput
 
 	response *aws.Response
 }

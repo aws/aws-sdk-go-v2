@@ -6,51 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-type DisassociateSubnetCidrBlockInput struct {
-	_ struct{} `type:"structure"`
-
-	// The association ID for the CIDR block.
-	//
-	// AssociationId is a required field
-	AssociationId *string `locationName:"associationId" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DisassociateSubnetCidrBlockInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DisassociateSubnetCidrBlockInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DisassociateSubnetCidrBlockInput"}
-
-	if s.AssociationId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("AssociationId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DisassociateSubnetCidrBlockOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Information about the IPv6 CIDR block association.
-	Ipv6CidrBlockAssociation *SubnetIpv6CidrBlockAssociation `locationName:"ipv6CidrBlockAssociation" type:"structure"`
-
-	// The ID of the subnet.
-	SubnetId *string `locationName:"subnetId" type:"string"`
-}
-
-// String returns the string representation
-func (s DisassociateSubnetCidrBlockOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDisassociateSubnetCidrBlock = "DisassociateSubnetCidrBlock"
 
@@ -69,7 +26,7 @@ const opDisassociateSubnetCidrBlock = "DisassociateSubnetCidrBlock"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DisassociateSubnetCidrBlock
-func (c *Client) DisassociateSubnetCidrBlockRequest(input *DisassociateSubnetCidrBlockInput) DisassociateSubnetCidrBlockRequest {
+func (c *Client) DisassociateSubnetCidrBlockRequest(input *types.DisassociateSubnetCidrBlockInput) DisassociateSubnetCidrBlockRequest {
 	op := &aws.Operation{
 		Name:       opDisassociateSubnetCidrBlock,
 		HTTPMethod: "POST",
@@ -77,10 +34,10 @@ func (c *Client) DisassociateSubnetCidrBlockRequest(input *DisassociateSubnetCid
 	}
 
 	if input == nil {
-		input = &DisassociateSubnetCidrBlockInput{}
+		input = &types.DisassociateSubnetCidrBlockInput{}
 	}
 
-	req := c.newRequest(op, input, &DisassociateSubnetCidrBlockOutput{})
+	req := c.newRequest(op, input, &types.DisassociateSubnetCidrBlockOutput{})
 	return DisassociateSubnetCidrBlockRequest{Request: req, Input: input, Copy: c.DisassociateSubnetCidrBlockRequest}
 }
 
@@ -88,8 +45,8 @@ func (c *Client) DisassociateSubnetCidrBlockRequest(input *DisassociateSubnetCid
 // DisassociateSubnetCidrBlock API operation.
 type DisassociateSubnetCidrBlockRequest struct {
 	*aws.Request
-	Input *DisassociateSubnetCidrBlockInput
-	Copy  func(*DisassociateSubnetCidrBlockInput) DisassociateSubnetCidrBlockRequest
+	Input *types.DisassociateSubnetCidrBlockInput
+	Copy  func(*types.DisassociateSubnetCidrBlockInput) DisassociateSubnetCidrBlockRequest
 }
 
 // Send marshals and sends the DisassociateSubnetCidrBlock API request.
@@ -101,7 +58,7 @@ func (r DisassociateSubnetCidrBlockRequest) Send(ctx context.Context) (*Disassoc
 	}
 
 	resp := &DisassociateSubnetCidrBlockResponse{
-		DisassociateSubnetCidrBlockOutput: r.Request.Data.(*DisassociateSubnetCidrBlockOutput),
+		DisassociateSubnetCidrBlockOutput: r.Request.Data.(*types.DisassociateSubnetCidrBlockOutput),
 		response:                          &aws.Response{Request: r.Request},
 	}
 
@@ -111,7 +68,7 @@ func (r DisassociateSubnetCidrBlockRequest) Send(ctx context.Context) (*Disassoc
 // DisassociateSubnetCidrBlockResponse is the response type for the
 // DisassociateSubnetCidrBlock API operation.
 type DisassociateSubnetCidrBlockResponse struct {
-	*DisassociateSubnetCidrBlockOutput
+	*types.DisassociateSubnetCidrBlockOutput
 
 	response *aws.Response
 }

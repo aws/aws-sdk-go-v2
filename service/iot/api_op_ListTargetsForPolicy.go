@@ -6,112 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/iot/types"
 )
-
-type ListTargetsForPolicyInput struct {
-	_ struct{} `type:"structure"`
-
-	// A marker used to get the next set of results.
-	Marker *string `location:"querystring" locationName:"marker" type:"string"`
-
-	// The maximum number of results to return at one time.
-	PageSize *int64 `location:"querystring" locationName:"pageSize" min:"1" type:"integer"`
-
-	// The policy name.
-	//
-	// PolicyName is a required field
-	PolicyName *string `location:"uri" locationName:"policyName" min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s ListTargetsForPolicyInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListTargetsForPolicyInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListTargetsForPolicyInput"}
-	if s.PageSize != nil && *s.PageSize < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("PageSize", 1))
-	}
-
-	if s.PolicyName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("PolicyName"))
-	}
-	if s.PolicyName != nil && len(*s.PolicyName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("PolicyName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListTargetsForPolicyInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.PolicyName != nil {
-		v := *s.PolicyName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "policyName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Marker != nil {
-		v := *s.Marker
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "marker", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.PageSize != nil {
-		v := *s.PageSize
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "pageSize", protocol.Int64Value(v), metadata)
-	}
-	return nil
-}
-
-type ListTargetsForPolicyOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A marker used to get the next set of results.
-	NextMarker *string `locationName:"nextMarker" type:"string"`
-
-	// The policy targets.
-	Targets []string `locationName:"targets" type:"list"`
-}
-
-// String returns the string representation
-func (s ListTargetsForPolicyOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListTargetsForPolicyOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.NextMarker != nil {
-		v := *s.NextMarker
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "nextMarker", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Targets != nil {
-		v := s.Targets
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "targets", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
-		}
-		ls0.End()
-
-	}
-	return nil
-}
 
 const opListTargetsForPolicy = "ListTargetsForPolicy"
 
@@ -126,7 +22,7 @@ const opListTargetsForPolicy = "ListTargetsForPolicy"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) ListTargetsForPolicyRequest(input *ListTargetsForPolicyInput) ListTargetsForPolicyRequest {
+func (c *Client) ListTargetsForPolicyRequest(input *types.ListTargetsForPolicyInput) ListTargetsForPolicyRequest {
 	op := &aws.Operation{
 		Name:       opListTargetsForPolicy,
 		HTTPMethod: "POST",
@@ -134,10 +30,10 @@ func (c *Client) ListTargetsForPolicyRequest(input *ListTargetsForPolicyInput) L
 	}
 
 	if input == nil {
-		input = &ListTargetsForPolicyInput{}
+		input = &types.ListTargetsForPolicyInput{}
 	}
 
-	req := c.newRequest(op, input, &ListTargetsForPolicyOutput{})
+	req := c.newRequest(op, input, &types.ListTargetsForPolicyOutput{})
 	return ListTargetsForPolicyRequest{Request: req, Input: input, Copy: c.ListTargetsForPolicyRequest}
 }
 
@@ -145,8 +41,8 @@ func (c *Client) ListTargetsForPolicyRequest(input *ListTargetsForPolicyInput) L
 // ListTargetsForPolicy API operation.
 type ListTargetsForPolicyRequest struct {
 	*aws.Request
-	Input *ListTargetsForPolicyInput
-	Copy  func(*ListTargetsForPolicyInput) ListTargetsForPolicyRequest
+	Input *types.ListTargetsForPolicyInput
+	Copy  func(*types.ListTargetsForPolicyInput) ListTargetsForPolicyRequest
 }
 
 // Send marshals and sends the ListTargetsForPolicy API request.
@@ -158,7 +54,7 @@ func (r ListTargetsForPolicyRequest) Send(ctx context.Context) (*ListTargetsForP
 	}
 
 	resp := &ListTargetsForPolicyResponse{
-		ListTargetsForPolicyOutput: r.Request.Data.(*ListTargetsForPolicyOutput),
+		ListTargetsForPolicyOutput: r.Request.Data.(*types.ListTargetsForPolicyOutput),
 		response:                   &aws.Response{Request: r.Request},
 	}
 
@@ -168,7 +64,7 @@ func (r ListTargetsForPolicyRequest) Send(ctx context.Context) (*ListTargetsForP
 // ListTargetsForPolicyResponse is the response type for the
 // ListTargetsForPolicy API operation.
 type ListTargetsForPolicyResponse struct {
-	*ListTargetsForPolicyOutput
+	*types.ListTargetsForPolicyOutput
 
 	response *aws.Response
 }

@@ -4,86 +4,10 @@ package ssm
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ssm/types"
 )
-
-type DescribeInstanceInformationInput struct {
-	_ struct{} `type:"structure"`
-
-	// One or more filters. Use a filter to return a more specific list of instances.
-	// You can filter on Amazon EC2 tag. Specify tags by using a key-value mapping.
-	Filters []InstanceInformationStringFilter `type:"list"`
-
-	// This is a legacy method. We recommend that you don't use this method. Instead,
-	// use the InstanceInformationFilter action. The InstanceInformationFilter action
-	// enables you to return instance information by using tags that are specified
-	// as a key-value mapping.
-	//
-	// If you do use this method, then you can't use the InstanceInformationFilter
-	// action. Using this method and the InstanceInformationFilter action causes
-	// an exception error.
-	InstanceInformationFilterList []InstanceInformationFilter `type:"list"`
-
-	// The maximum number of items to return for this call. The call also returns
-	// a token that you can specify in a subsequent call to get the next set of
-	// results.
-	MaxResults *int64 `min:"5" type:"integer"`
-
-	// The token for the next set of items to return. (You received this token from
-	// a previous call.)
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeInstanceInformationInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeInstanceInformationInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeInstanceInformationInput"}
-	if s.MaxResults != nil && *s.MaxResults < 5 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 5))
-	}
-	if s.Filters != nil {
-		for i, v := range s.Filters {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-	if s.InstanceInformationFilterList != nil {
-		for i, v := range s.InstanceInformationFilterList {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "InstanceInformationFilterList", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribeInstanceInformationOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The instance information list.
-	InstanceInformationList []InstanceInformation `type:"list"`
-
-	// The token to use when requesting the next set of items. If there are no additional
-	// items to return, the string is empty.
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeInstanceInformationOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeInstanceInformation = "DescribeInstanceInformation"
 
@@ -109,7 +33,7 @@ const opDescribeInstanceInformation = "DescribeInstanceInformation"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeInstanceInformation
-func (c *Client) DescribeInstanceInformationRequest(input *DescribeInstanceInformationInput) DescribeInstanceInformationRequest {
+func (c *Client) DescribeInstanceInformationRequest(input *types.DescribeInstanceInformationInput) DescribeInstanceInformationRequest {
 	op := &aws.Operation{
 		Name:       opDescribeInstanceInformation,
 		HTTPMethod: "POST",
@@ -123,10 +47,10 @@ func (c *Client) DescribeInstanceInformationRequest(input *DescribeInstanceInfor
 	}
 
 	if input == nil {
-		input = &DescribeInstanceInformationInput{}
+		input = &types.DescribeInstanceInformationInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeInstanceInformationOutput{})
+	req := c.newRequest(op, input, &types.DescribeInstanceInformationOutput{})
 	return DescribeInstanceInformationRequest{Request: req, Input: input, Copy: c.DescribeInstanceInformationRequest}
 }
 
@@ -134,8 +58,8 @@ func (c *Client) DescribeInstanceInformationRequest(input *DescribeInstanceInfor
 // DescribeInstanceInformation API operation.
 type DescribeInstanceInformationRequest struct {
 	*aws.Request
-	Input *DescribeInstanceInformationInput
-	Copy  func(*DescribeInstanceInformationInput) DescribeInstanceInformationRequest
+	Input *types.DescribeInstanceInformationInput
+	Copy  func(*types.DescribeInstanceInformationInput) DescribeInstanceInformationRequest
 }
 
 // Send marshals and sends the DescribeInstanceInformation API request.
@@ -147,7 +71,7 @@ func (r DescribeInstanceInformationRequest) Send(ctx context.Context) (*Describe
 	}
 
 	resp := &DescribeInstanceInformationResponse{
-		DescribeInstanceInformationOutput: r.Request.Data.(*DescribeInstanceInformationOutput),
+		DescribeInstanceInformationOutput: r.Request.Data.(*types.DescribeInstanceInformationOutput),
 		response:                          &aws.Response{Request: r.Request},
 	}
 
@@ -177,7 +101,7 @@ func NewDescribeInstanceInformationPaginator(req DescribeInstanceInformationRequ
 	return DescribeInstanceInformationPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *DescribeInstanceInformationInput
+				var inCpy *types.DescribeInstanceInformationInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -197,14 +121,14 @@ type DescribeInstanceInformationPaginator struct {
 	aws.Pager
 }
 
-func (p *DescribeInstanceInformationPaginator) CurrentPage() *DescribeInstanceInformationOutput {
-	return p.Pager.CurrentPage().(*DescribeInstanceInformationOutput)
+func (p *DescribeInstanceInformationPaginator) CurrentPage() *types.DescribeInstanceInformationOutput {
+	return p.Pager.CurrentPage().(*types.DescribeInstanceInformationOutput)
 }
 
 // DescribeInstanceInformationResponse is the response type for the
 // DescribeInstanceInformation API operation.
 type DescribeInstanceInformationResponse struct {
-	*DescribeInstanceInformationOutput
+	*types.DescribeInstanceInformationOutput
 
 	response *aws.Response
 }

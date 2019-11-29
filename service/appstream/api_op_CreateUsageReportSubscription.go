@@ -6,39 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/appstream/types"
 )
-
-type CreateUsageReportSubscriptionInput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s CreateUsageReportSubscriptionInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type CreateUsageReportSubscriptionOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon S3 bucket where generated reports are stored.
-	//
-	// If you enabled on-instance session scripts and Amazon S3 logging for your
-	// session script configuration, AppStream 2.0 created an S3 bucket to store
-	// the script output. The bucket is unique to your account and Region. When
-	// you enable usage reporting in this case, AppStream 2.0 uses the same bucket
-	// to store your usage reports. If you haven't already enabled on-instance session
-	// scripts, when you enable usage reports, AppStream 2.0 creates a new S3 bucket.
-	S3BucketName *string `min:"1" type:"string"`
-
-	// The schedule for generating usage reports.
-	Schedule UsageReportSchedule `type:"string" enum:"true"`
-}
-
-// String returns the string representation
-func (s CreateUsageReportSubscriptionOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCreateUsageReportSubscription = "CreateUsageReportSubscription"
 
@@ -55,7 +24,7 @@ const opCreateUsageReportSubscription = "CreateUsageReportSubscription"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/CreateUsageReportSubscription
-func (c *Client) CreateUsageReportSubscriptionRequest(input *CreateUsageReportSubscriptionInput) CreateUsageReportSubscriptionRequest {
+func (c *Client) CreateUsageReportSubscriptionRequest(input *types.CreateUsageReportSubscriptionInput) CreateUsageReportSubscriptionRequest {
 	op := &aws.Operation{
 		Name:       opCreateUsageReportSubscription,
 		HTTPMethod: "POST",
@@ -63,10 +32,10 @@ func (c *Client) CreateUsageReportSubscriptionRequest(input *CreateUsageReportSu
 	}
 
 	if input == nil {
-		input = &CreateUsageReportSubscriptionInput{}
+		input = &types.CreateUsageReportSubscriptionInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateUsageReportSubscriptionOutput{})
+	req := c.newRequest(op, input, &types.CreateUsageReportSubscriptionOutput{})
 	return CreateUsageReportSubscriptionRequest{Request: req, Input: input, Copy: c.CreateUsageReportSubscriptionRequest}
 }
 
@@ -74,8 +43,8 @@ func (c *Client) CreateUsageReportSubscriptionRequest(input *CreateUsageReportSu
 // CreateUsageReportSubscription API operation.
 type CreateUsageReportSubscriptionRequest struct {
 	*aws.Request
-	Input *CreateUsageReportSubscriptionInput
-	Copy  func(*CreateUsageReportSubscriptionInput) CreateUsageReportSubscriptionRequest
+	Input *types.CreateUsageReportSubscriptionInput
+	Copy  func(*types.CreateUsageReportSubscriptionInput) CreateUsageReportSubscriptionRequest
 }
 
 // Send marshals and sends the CreateUsageReportSubscription API request.
@@ -87,7 +56,7 @@ func (r CreateUsageReportSubscriptionRequest) Send(ctx context.Context) (*Create
 	}
 
 	resp := &CreateUsageReportSubscriptionResponse{
-		CreateUsageReportSubscriptionOutput: r.Request.Data.(*CreateUsageReportSubscriptionOutput),
+		CreateUsageReportSubscriptionOutput: r.Request.Data.(*types.CreateUsageReportSubscriptionOutput),
 		response:                            &aws.Response{Request: r.Request},
 	}
 
@@ -97,7 +66,7 @@ func (r CreateUsageReportSubscriptionRequest) Send(ctx context.Context) (*Create
 // CreateUsageReportSubscriptionResponse is the response type for the
 // CreateUsageReportSubscription API operation.
 type CreateUsageReportSubscriptionResponse struct {
-	*CreateUsageReportSubscriptionOutput
+	*types.CreateUsageReportSubscriptionOutput
 
 	response *aws.Response
 }

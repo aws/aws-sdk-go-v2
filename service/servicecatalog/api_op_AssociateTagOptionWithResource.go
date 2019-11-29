@@ -6,57 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/types"
 )
-
-type AssociateTagOptionWithResourceInput struct {
-	_ struct{} `type:"structure"`
-
-	// The resource identifier.
-	//
-	// ResourceId is a required field
-	ResourceId *string `type:"string" required:"true"`
-
-	// The TagOption identifier.
-	//
-	// TagOptionId is a required field
-	TagOptionId *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s AssociateTagOptionWithResourceInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *AssociateTagOptionWithResourceInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "AssociateTagOptionWithResourceInput"}
-
-	if s.ResourceId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ResourceId"))
-	}
-
-	if s.TagOptionId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("TagOptionId"))
-	}
-	if s.TagOptionId != nil && len(*s.TagOptionId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("TagOptionId", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type AssociateTagOptionWithResourceOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s AssociateTagOptionWithResourceOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opAssociateTagOptionWithResource = "AssociateTagOptionWithResource"
 
@@ -73,7 +24,7 @@ const opAssociateTagOptionWithResource = "AssociateTagOptionWithResource"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/AssociateTagOptionWithResource
-func (c *Client) AssociateTagOptionWithResourceRequest(input *AssociateTagOptionWithResourceInput) AssociateTagOptionWithResourceRequest {
+func (c *Client) AssociateTagOptionWithResourceRequest(input *types.AssociateTagOptionWithResourceInput) AssociateTagOptionWithResourceRequest {
 	op := &aws.Operation{
 		Name:       opAssociateTagOptionWithResource,
 		HTTPMethod: "POST",
@@ -81,10 +32,10 @@ func (c *Client) AssociateTagOptionWithResourceRequest(input *AssociateTagOption
 	}
 
 	if input == nil {
-		input = &AssociateTagOptionWithResourceInput{}
+		input = &types.AssociateTagOptionWithResourceInput{}
 	}
 
-	req := c.newRequest(op, input, &AssociateTagOptionWithResourceOutput{})
+	req := c.newRequest(op, input, &types.AssociateTagOptionWithResourceOutput{})
 	return AssociateTagOptionWithResourceRequest{Request: req, Input: input, Copy: c.AssociateTagOptionWithResourceRequest}
 }
 
@@ -92,8 +43,8 @@ func (c *Client) AssociateTagOptionWithResourceRequest(input *AssociateTagOption
 // AssociateTagOptionWithResource API operation.
 type AssociateTagOptionWithResourceRequest struct {
 	*aws.Request
-	Input *AssociateTagOptionWithResourceInput
-	Copy  func(*AssociateTagOptionWithResourceInput) AssociateTagOptionWithResourceRequest
+	Input *types.AssociateTagOptionWithResourceInput
+	Copy  func(*types.AssociateTagOptionWithResourceInput) AssociateTagOptionWithResourceRequest
 }
 
 // Send marshals and sends the AssociateTagOptionWithResource API request.
@@ -105,7 +56,7 @@ func (r AssociateTagOptionWithResourceRequest) Send(ctx context.Context) (*Assoc
 	}
 
 	resp := &AssociateTagOptionWithResourceResponse{
-		AssociateTagOptionWithResourceOutput: r.Request.Data.(*AssociateTagOptionWithResourceOutput),
+		AssociateTagOptionWithResourceOutput: r.Request.Data.(*types.AssociateTagOptionWithResourceOutput),
 		response:                             &aws.Response{Request: r.Request},
 	}
 
@@ -115,7 +66,7 @@ func (r AssociateTagOptionWithResourceRequest) Send(ctx context.Context) (*Assoc
 // AssociateTagOptionWithResourceResponse is the response type for the
 // AssociateTagOptionWithResource API operation.
 type AssociateTagOptionWithResourceResponse struct {
-	*AssociateTagOptionWithResourceOutput
+	*types.AssociateTagOptionWithResourceOutput
 
 	response *aws.Response
 }

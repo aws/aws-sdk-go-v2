@@ -6,76 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/resourcegroups/types"
 )
-
-type GetGroupQueryInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the resource group.
-	//
-	// GroupName is a required field
-	GroupName *string `location:"uri" locationName:"GroupName" min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetGroupQueryInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetGroupQueryInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetGroupQueryInput"}
-
-	if s.GroupName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("GroupName"))
-	}
-	if s.GroupName != nil && len(*s.GroupName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("GroupName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetGroupQueryInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.GroupName != nil {
-		v := *s.GroupName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "GroupName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type GetGroupQueryOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The resource query associated with the specified group.
-	GroupQuery *GroupQuery `type:"structure"`
-}
-
-// String returns the string representation
-func (s GetGroupQueryOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetGroupQueryOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.GroupQuery != nil {
-		v := s.GroupQuery
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "GroupQuery", v, metadata)
-	}
-	return nil
-}
 
 const opGetGroupQuery = "GetGroupQuery"
 
@@ -92,7 +24,7 @@ const opGetGroupQuery = "GetGroupQuery"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/resource-groups-2017-11-27/GetGroupQuery
-func (c *Client) GetGroupQueryRequest(input *GetGroupQueryInput) GetGroupQueryRequest {
+func (c *Client) GetGroupQueryRequest(input *types.GetGroupQueryInput) GetGroupQueryRequest {
 	op := &aws.Operation{
 		Name:       opGetGroupQuery,
 		HTTPMethod: "GET",
@@ -100,10 +32,10 @@ func (c *Client) GetGroupQueryRequest(input *GetGroupQueryInput) GetGroupQueryRe
 	}
 
 	if input == nil {
-		input = &GetGroupQueryInput{}
+		input = &types.GetGroupQueryInput{}
 	}
 
-	req := c.newRequest(op, input, &GetGroupQueryOutput{})
+	req := c.newRequest(op, input, &types.GetGroupQueryOutput{})
 	return GetGroupQueryRequest{Request: req, Input: input, Copy: c.GetGroupQueryRequest}
 }
 
@@ -111,8 +43,8 @@ func (c *Client) GetGroupQueryRequest(input *GetGroupQueryInput) GetGroupQueryRe
 // GetGroupQuery API operation.
 type GetGroupQueryRequest struct {
 	*aws.Request
-	Input *GetGroupQueryInput
-	Copy  func(*GetGroupQueryInput) GetGroupQueryRequest
+	Input *types.GetGroupQueryInput
+	Copy  func(*types.GetGroupQueryInput) GetGroupQueryRequest
 }
 
 // Send marshals and sends the GetGroupQuery API request.
@@ -124,7 +56,7 @@ func (r GetGroupQueryRequest) Send(ctx context.Context) (*GetGroupQueryResponse,
 	}
 
 	resp := &GetGroupQueryResponse{
-		GetGroupQueryOutput: r.Request.Data.(*GetGroupQueryOutput),
+		GetGroupQueryOutput: r.Request.Data.(*types.GetGroupQueryOutput),
 		response:            &aws.Response{Request: r.Request},
 	}
 
@@ -134,7 +66,7 @@ func (r GetGroupQueryRequest) Send(ctx context.Context) (*GetGroupQueryResponse,
 // GetGroupQueryResponse is the response type for the
 // GetGroupQuery API operation.
 type GetGroupQueryResponse struct {
-	*GetGroupQueryOutput
+	*types.GetGroupQueryOutput
 
 	response *aws.Response
 }

@@ -6,48 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/lakeformation/types"
 )
-
-type GetDataLakeSettingsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The identifier for the Data Catalog. By default, the account ID. The Data
-	// Catalog is the persistent metadata store. It contains database definitions,
-	// table definitions, and other control information to manage your AWS Lake
-	// Formation environment.
-	CatalogId *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s GetDataLakeSettingsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetDataLakeSettingsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetDataLakeSettingsInput"}
-	if s.CatalogId != nil && len(*s.CatalogId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("CatalogId", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type GetDataLakeSettingsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A list of AWS Lake Formation principals.
-	DataLakeSettings *DataLakeSettings `type:"structure"`
-}
-
-// String returns the string representation
-func (s GetDataLakeSettingsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetDataLakeSettings = "GetDataLakeSettings"
 
@@ -64,7 +24,7 @@ const opGetDataLakeSettings = "GetDataLakeSettings"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/GetDataLakeSettings
-func (c *Client) GetDataLakeSettingsRequest(input *GetDataLakeSettingsInput) GetDataLakeSettingsRequest {
+func (c *Client) GetDataLakeSettingsRequest(input *types.GetDataLakeSettingsInput) GetDataLakeSettingsRequest {
 	op := &aws.Operation{
 		Name:       opGetDataLakeSettings,
 		HTTPMethod: "POST",
@@ -72,10 +32,10 @@ func (c *Client) GetDataLakeSettingsRequest(input *GetDataLakeSettingsInput) Get
 	}
 
 	if input == nil {
-		input = &GetDataLakeSettingsInput{}
+		input = &types.GetDataLakeSettingsInput{}
 	}
 
-	req := c.newRequest(op, input, &GetDataLakeSettingsOutput{})
+	req := c.newRequest(op, input, &types.GetDataLakeSettingsOutput{})
 	return GetDataLakeSettingsRequest{Request: req, Input: input, Copy: c.GetDataLakeSettingsRequest}
 }
 
@@ -83,8 +43,8 @@ func (c *Client) GetDataLakeSettingsRequest(input *GetDataLakeSettingsInput) Get
 // GetDataLakeSettings API operation.
 type GetDataLakeSettingsRequest struct {
 	*aws.Request
-	Input *GetDataLakeSettingsInput
-	Copy  func(*GetDataLakeSettingsInput) GetDataLakeSettingsRequest
+	Input *types.GetDataLakeSettingsInput
+	Copy  func(*types.GetDataLakeSettingsInput) GetDataLakeSettingsRequest
 }
 
 // Send marshals and sends the GetDataLakeSettings API request.
@@ -96,7 +56,7 @@ func (r GetDataLakeSettingsRequest) Send(ctx context.Context) (*GetDataLakeSetti
 	}
 
 	resp := &GetDataLakeSettingsResponse{
-		GetDataLakeSettingsOutput: r.Request.Data.(*GetDataLakeSettingsOutput),
+		GetDataLakeSettingsOutput: r.Request.Data.(*types.GetDataLakeSettingsOutput),
 		response:                  &aws.Response{Request: r.Request},
 	}
 
@@ -106,7 +66,7 @@ func (r GetDataLakeSettingsRequest) Send(ctx context.Context) (*GetDataLakeSetti
 // GetDataLakeSettingsResponse is the response type for the
 // GetDataLakeSettings API operation.
 type GetDataLakeSettingsResponse struct {
-	*GetDataLakeSettingsOutput
+	*types.GetDataLakeSettingsOutput
 
 	response *aws.Response
 }

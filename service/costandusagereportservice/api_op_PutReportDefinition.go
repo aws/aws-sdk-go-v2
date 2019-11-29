@@ -6,54 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/costandusagereportservice/types"
 )
-
-// Creates a Cost and Usage Report.
-type PutReportDefinitionInput struct {
-	_ struct{} `type:"structure"`
-
-	// Represents the output of the PutReportDefinition operation. The content consists
-	// of the detailed metadata and data file information.
-	//
-	// ReportDefinition is a required field
-	ReportDefinition *ReportDefinition `type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s PutReportDefinitionInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *PutReportDefinitionInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "PutReportDefinitionInput"}
-
-	if s.ReportDefinition == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ReportDefinition"))
-	}
-	if s.ReportDefinition != nil {
-		if err := s.ReportDefinition.Validate(); err != nil {
-			invalidParams.AddNested("ReportDefinition", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// If the action is successful, the service sends back an HTTP 200 response
-// with an empty HTTP body.
-type PutReportDefinitionOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s PutReportDefinitionOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opPutReportDefinition = "PutReportDefinition"
 
@@ -70,7 +24,7 @@ const opPutReportDefinition = "PutReportDefinition"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cur-2017-01-06/PutReportDefinition
-func (c *Client) PutReportDefinitionRequest(input *PutReportDefinitionInput) PutReportDefinitionRequest {
+func (c *Client) PutReportDefinitionRequest(input *types.PutReportDefinitionInput) PutReportDefinitionRequest {
 	op := &aws.Operation{
 		Name:       opPutReportDefinition,
 		HTTPMethod: "POST",
@@ -78,10 +32,10 @@ func (c *Client) PutReportDefinitionRequest(input *PutReportDefinitionInput) Put
 	}
 
 	if input == nil {
-		input = &PutReportDefinitionInput{}
+		input = &types.PutReportDefinitionInput{}
 	}
 
-	req := c.newRequest(op, input, &PutReportDefinitionOutput{})
+	req := c.newRequest(op, input, &types.PutReportDefinitionOutput{})
 	return PutReportDefinitionRequest{Request: req, Input: input, Copy: c.PutReportDefinitionRequest}
 }
 
@@ -89,8 +43,8 @@ func (c *Client) PutReportDefinitionRequest(input *PutReportDefinitionInput) Put
 // PutReportDefinition API operation.
 type PutReportDefinitionRequest struct {
 	*aws.Request
-	Input *PutReportDefinitionInput
-	Copy  func(*PutReportDefinitionInput) PutReportDefinitionRequest
+	Input *types.PutReportDefinitionInput
+	Copy  func(*types.PutReportDefinitionInput) PutReportDefinitionRequest
 }
 
 // Send marshals and sends the PutReportDefinition API request.
@@ -102,7 +56,7 @@ func (r PutReportDefinitionRequest) Send(ctx context.Context) (*PutReportDefinit
 	}
 
 	resp := &PutReportDefinitionResponse{
-		PutReportDefinitionOutput: r.Request.Data.(*PutReportDefinitionOutput),
+		PutReportDefinitionOutput: r.Request.Data.(*types.PutReportDefinitionOutput),
 		response:                  &aws.Response{Request: r.Request},
 	}
 
@@ -112,7 +66,7 @@ func (r PutReportDefinitionRequest) Send(ctx context.Context) (*PutReportDefinit
 // PutReportDefinitionResponse is the response type for the
 // PutReportDefinition API operation.
 type PutReportDefinitionResponse struct {
-	*PutReportDefinitionOutput
+	*types.PutReportDefinitionOutput
 
 	response *aws.Response
 }

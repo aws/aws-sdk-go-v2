@@ -4,88 +4,10 @@ package databasemigrationservice
 
 import (
 	"context"
-	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/databasemigrationservice/types"
 )
-
-type StartReplicationTaskInput struct {
-	_ struct{} `type:"structure"`
-
-	// Indicates when you want a change data capture (CDC) operation to start. Use
-	// either CdcStartPosition or CdcStartTime to specify when you want a CDC operation
-	// to start. Specifying both values results in an error.
-	//
-	// The value can be in date, checkpoint, or LSN/SCN format.
-	//
-	// Date Example: --cdc-start-position “2018-03-08T12:12:12”
-	//
-	// Checkpoint Example: --cdc-start-position "checkpoint:V1#27#mysql-bin-changelog.157832:1975:-1:2002:677883278264080:mysql-bin-changelog.157832:1876#0#0#*#0#93"
-	//
-	// LSN Example: --cdc-start-position “mysql-bin-changelog.000024:373”
-	CdcStartPosition *string `type:"string"`
-
-	// Indicates the start time for a change data capture (CDC) operation. Use either
-	// CdcStartTime or CdcStartPosition to specify when you want a CDC operation
-	// to start. Specifying both values results in an error.
-	//
-	// Timestamp Example: --cdc-start-time “2018-03-08T12:12:12”
-	CdcStartTime *time.Time `type:"timestamp"`
-
-	// Indicates when you want a change data capture (CDC) operation to stop. The
-	// value can be either server time or commit time.
-	//
-	// Server time example: --cdc-stop-position “server_time:3018-02-09T12:12:12”
-	//
-	// Commit time example: --cdc-stop-position “commit_time: 3018-02-09T12:12:12
-	// “
-	CdcStopPosition *string `type:"string"`
-
-	// The Amazon Resource Name (ARN) of the replication task to be started.
-	//
-	// ReplicationTaskArn is a required field
-	ReplicationTaskArn *string `type:"string" required:"true"`
-
-	// The type of replication task.
-	//
-	// StartReplicationTaskType is a required field
-	StartReplicationTaskType StartReplicationTaskTypeValue `type:"string" required:"true" enum:"true"`
-}
-
-// String returns the string representation
-func (s StartReplicationTaskInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *StartReplicationTaskInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "StartReplicationTaskInput"}
-
-	if s.ReplicationTaskArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ReplicationTaskArn"))
-	}
-	if len(s.StartReplicationTaskType) == 0 {
-		invalidParams.Add(aws.NewErrParamRequired("StartReplicationTaskType"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type StartReplicationTaskOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The replication task started.
-	ReplicationTask *ReplicationTask `type:"structure"`
-}
-
-// String returns the string representation
-func (s StartReplicationTaskOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opStartReplicationTask = "StartReplicationTask"
 
@@ -106,7 +28,7 @@ const opStartReplicationTask = "StartReplicationTask"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/StartReplicationTask
-func (c *Client) StartReplicationTaskRequest(input *StartReplicationTaskInput) StartReplicationTaskRequest {
+func (c *Client) StartReplicationTaskRequest(input *types.StartReplicationTaskInput) StartReplicationTaskRequest {
 	op := &aws.Operation{
 		Name:       opStartReplicationTask,
 		HTTPMethod: "POST",
@@ -114,10 +36,10 @@ func (c *Client) StartReplicationTaskRequest(input *StartReplicationTaskInput) S
 	}
 
 	if input == nil {
-		input = &StartReplicationTaskInput{}
+		input = &types.StartReplicationTaskInput{}
 	}
 
-	req := c.newRequest(op, input, &StartReplicationTaskOutput{})
+	req := c.newRequest(op, input, &types.StartReplicationTaskOutput{})
 	return StartReplicationTaskRequest{Request: req, Input: input, Copy: c.StartReplicationTaskRequest}
 }
 
@@ -125,8 +47,8 @@ func (c *Client) StartReplicationTaskRequest(input *StartReplicationTaskInput) S
 // StartReplicationTask API operation.
 type StartReplicationTaskRequest struct {
 	*aws.Request
-	Input *StartReplicationTaskInput
-	Copy  func(*StartReplicationTaskInput) StartReplicationTaskRequest
+	Input *types.StartReplicationTaskInput
+	Copy  func(*types.StartReplicationTaskInput) StartReplicationTaskRequest
 }
 
 // Send marshals and sends the StartReplicationTask API request.
@@ -138,7 +60,7 @@ func (r StartReplicationTaskRequest) Send(ctx context.Context) (*StartReplicatio
 	}
 
 	resp := &StartReplicationTaskResponse{
-		StartReplicationTaskOutput: r.Request.Data.(*StartReplicationTaskOutput),
+		StartReplicationTaskOutput: r.Request.Data.(*types.StartReplicationTaskOutput),
 		response:                   &aws.Response{Request: r.Request},
 	}
 
@@ -148,7 +70,7 @@ func (r StartReplicationTaskRequest) Send(ctx context.Context) (*StartReplicatio
 // StartReplicationTaskResponse is the response type for the
 // StartReplicationTask API operation.
 type StartReplicationTaskResponse struct {
-	*StartReplicationTaskOutput
+	*types.StartReplicationTaskOutput
 
 	response *aws.Response
 }

@@ -6,90 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/types"
 )
-
-type ExecuteProvisionedProductServiceActionInput struct {
-	_ struct{} `type:"structure"`
-
-	// The language code.
-	//
-	//    * en - English (default)
-	//
-	//    * jp - Japanese
-	//
-	//    * zh - Chinese
-	AcceptLanguage *string `type:"string"`
-
-	// An idempotency token that uniquely identifies the execute request.
-	//
-	// ExecuteToken is a required field
-	ExecuteToken *string `min:"1" type:"string" required:"true" idempotencyToken:"true"`
-
-	Parameters map[string][]string `min:"1" type:"map"`
-
-	// The identifier of the provisioned product.
-	//
-	// ProvisionedProductId is a required field
-	ProvisionedProductId *string `min:"1" type:"string" required:"true"`
-
-	// The self-service action identifier. For example, act-fs7abcd89wxyz.
-	//
-	// ServiceActionId is a required field
-	ServiceActionId *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s ExecuteProvisionedProductServiceActionInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ExecuteProvisionedProductServiceActionInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ExecuteProvisionedProductServiceActionInput"}
-
-	if s.ExecuteToken == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ExecuteToken"))
-	}
-	if s.ExecuteToken != nil && len(*s.ExecuteToken) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ExecuteToken", 1))
-	}
-	if s.Parameters != nil && len(s.Parameters) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Parameters", 1))
-	}
-
-	if s.ProvisionedProductId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ProvisionedProductId"))
-	}
-	if s.ProvisionedProductId != nil && len(*s.ProvisionedProductId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ProvisionedProductId", 1))
-	}
-
-	if s.ServiceActionId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ServiceActionId"))
-	}
-	if s.ServiceActionId != nil && len(*s.ServiceActionId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ServiceActionId", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ExecuteProvisionedProductServiceActionOutput struct {
-	_ struct{} `type:"structure"`
-
-	// An object containing detailed information about the result of provisioning
-	// the product.
-	RecordDetail *RecordDetail `type:"structure"`
-}
-
-// String returns the string representation
-func (s ExecuteProvisionedProductServiceActionOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opExecuteProvisionedProductServiceAction = "ExecuteProvisionedProductServiceAction"
 
@@ -106,7 +24,7 @@ const opExecuteProvisionedProductServiceAction = "ExecuteProvisionedProductServi
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ExecuteProvisionedProductServiceAction
-func (c *Client) ExecuteProvisionedProductServiceActionRequest(input *ExecuteProvisionedProductServiceActionInput) ExecuteProvisionedProductServiceActionRequest {
+func (c *Client) ExecuteProvisionedProductServiceActionRequest(input *types.ExecuteProvisionedProductServiceActionInput) ExecuteProvisionedProductServiceActionRequest {
 	op := &aws.Operation{
 		Name:       opExecuteProvisionedProductServiceAction,
 		HTTPMethod: "POST",
@@ -114,10 +32,10 @@ func (c *Client) ExecuteProvisionedProductServiceActionRequest(input *ExecutePro
 	}
 
 	if input == nil {
-		input = &ExecuteProvisionedProductServiceActionInput{}
+		input = &types.ExecuteProvisionedProductServiceActionInput{}
 	}
 
-	req := c.newRequest(op, input, &ExecuteProvisionedProductServiceActionOutput{})
+	req := c.newRequest(op, input, &types.ExecuteProvisionedProductServiceActionOutput{})
 	return ExecuteProvisionedProductServiceActionRequest{Request: req, Input: input, Copy: c.ExecuteProvisionedProductServiceActionRequest}
 }
 
@@ -125,8 +43,8 @@ func (c *Client) ExecuteProvisionedProductServiceActionRequest(input *ExecutePro
 // ExecuteProvisionedProductServiceAction API operation.
 type ExecuteProvisionedProductServiceActionRequest struct {
 	*aws.Request
-	Input *ExecuteProvisionedProductServiceActionInput
-	Copy  func(*ExecuteProvisionedProductServiceActionInput) ExecuteProvisionedProductServiceActionRequest
+	Input *types.ExecuteProvisionedProductServiceActionInput
+	Copy  func(*types.ExecuteProvisionedProductServiceActionInput) ExecuteProvisionedProductServiceActionRequest
 }
 
 // Send marshals and sends the ExecuteProvisionedProductServiceAction API request.
@@ -138,7 +56,7 @@ func (r ExecuteProvisionedProductServiceActionRequest) Send(ctx context.Context)
 	}
 
 	resp := &ExecuteProvisionedProductServiceActionResponse{
-		ExecuteProvisionedProductServiceActionOutput: r.Request.Data.(*ExecuteProvisionedProductServiceActionOutput),
+		ExecuteProvisionedProductServiceActionOutput: r.Request.Data.(*types.ExecuteProvisionedProductServiceActionOutput),
 		response: &aws.Response{Request: r.Request},
 	}
 
@@ -148,7 +66,7 @@ func (r ExecuteProvisionedProductServiceActionRequest) Send(ctx context.Context)
 // ExecuteProvisionedProductServiceActionResponse is the response type for the
 // ExecuteProvisionedProductServiceAction API operation.
 type ExecuteProvisionedProductServiceActionResponse struct {
-	*ExecuteProvisionedProductServiceActionOutput
+	*types.ExecuteProvisionedProductServiceActionOutput
 
 	response *aws.Response
 }

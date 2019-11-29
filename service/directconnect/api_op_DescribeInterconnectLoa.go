@@ -6,57 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/directconnect/types"
 )
-
-type DescribeInterconnectLoaInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the interconnect.
-	//
-	// InterconnectId is a required field
-	InterconnectId *string `locationName:"interconnectId" type:"string" required:"true"`
-
-	// The standard media type for the LOA-CFA document. The only supported value
-	// is application/pdf.
-	LoaContentType LoaContentType `locationName:"loaContentType" type:"string" enum:"true"`
-
-	// The name of the service provider who establishes connectivity on your behalf.
-	// If you supply this parameter, the LOA-CFA lists the provider name alongside
-	// your company name as the requester of the cross connect.
-	ProviderName *string `locationName:"providerName" type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeInterconnectLoaInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeInterconnectLoaInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeInterconnectLoaInput"}
-
-	if s.InterconnectId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("InterconnectId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribeInterconnectLoaOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The Letter of Authorization - Connecting Facility Assignment (LOA-CFA).
-	Loa *Loa `locationName:"loa" type:"structure"`
-}
-
-// String returns the string representation
-func (s DescribeInterconnectLoaOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeInterconnectLoa = "DescribeInterconnectLoa"
 
@@ -81,7 +32,7 @@ const opDescribeInterconnectLoa = "DescribeInterconnectLoa"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DescribeInterconnectLoa
-func (c *Client) DescribeInterconnectLoaRequest(input *DescribeInterconnectLoaInput) DescribeInterconnectLoaRequest {
+func (c *Client) DescribeInterconnectLoaRequest(input *types.DescribeInterconnectLoaInput) DescribeInterconnectLoaRequest {
 	if c.Client.Config.Logger != nil {
 		c.Client.Config.Logger.Log("This operation, DescribeInterconnectLoa, has been deprecated")
 	}
@@ -92,10 +43,10 @@ func (c *Client) DescribeInterconnectLoaRequest(input *DescribeInterconnectLoaIn
 	}
 
 	if input == nil {
-		input = &DescribeInterconnectLoaInput{}
+		input = &types.DescribeInterconnectLoaInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeInterconnectLoaOutput{})
+	req := c.newRequest(op, input, &types.DescribeInterconnectLoaOutput{})
 	return DescribeInterconnectLoaRequest{Request: req, Input: input, Copy: c.DescribeInterconnectLoaRequest}
 }
 
@@ -103,8 +54,8 @@ func (c *Client) DescribeInterconnectLoaRequest(input *DescribeInterconnectLoaIn
 // DescribeInterconnectLoa API operation.
 type DescribeInterconnectLoaRequest struct {
 	*aws.Request
-	Input *DescribeInterconnectLoaInput
-	Copy  func(*DescribeInterconnectLoaInput) DescribeInterconnectLoaRequest
+	Input *types.DescribeInterconnectLoaInput
+	Copy  func(*types.DescribeInterconnectLoaInput) DescribeInterconnectLoaRequest
 }
 
 // Send marshals and sends the DescribeInterconnectLoa API request.
@@ -116,7 +67,7 @@ func (r DescribeInterconnectLoaRequest) Send(ctx context.Context) (*DescribeInte
 	}
 
 	resp := &DescribeInterconnectLoaResponse{
-		DescribeInterconnectLoaOutput: r.Request.Data.(*DescribeInterconnectLoaOutput),
+		DescribeInterconnectLoaOutput: r.Request.Data.(*types.DescribeInterconnectLoaOutput),
 		response:                      &aws.Response{Request: r.Request},
 	}
 
@@ -126,7 +77,7 @@ func (r DescribeInterconnectLoaRequest) Send(ctx context.Context) (*DescribeInte
 // DescribeInterconnectLoaResponse is the response type for the
 // DescribeInterconnectLoa API operation.
 type DescribeInterconnectLoaResponse struct {
-	*DescribeInterconnectLoaOutput
+	*types.DescribeInterconnectLoaOutput
 
 	response *aws.Response
 }

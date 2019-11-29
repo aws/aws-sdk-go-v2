@@ -6,54 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/cognitoidentity/types"
 )
-
-// Input to the DeleteIdentities action.
-type DeleteIdentitiesInput struct {
-	_ struct{} `type:"structure"`
-
-	// A list of 1-60 identities that you want to delete.
-	//
-	// IdentityIdsToDelete is a required field
-	IdentityIdsToDelete []string `min:"1" type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteIdentitiesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteIdentitiesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteIdentitiesInput"}
-
-	if s.IdentityIdsToDelete == nil {
-		invalidParams.Add(aws.NewErrParamRequired("IdentityIdsToDelete"))
-	}
-	if s.IdentityIdsToDelete != nil && len(s.IdentityIdsToDelete) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("IdentityIdsToDelete", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Returned in response to a successful DeleteIdentities operation.
-type DeleteIdentitiesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// An array of UnprocessedIdentityId objects, each of which contains an ErrorCode
-	// and IdentityId.
-	UnprocessedIdentityIds []UnprocessedIdentityId `type:"list"`
-}
-
-// String returns the string representation
-func (s DeleteIdentitiesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteIdentities = "DeleteIdentities"
 
@@ -73,7 +27,7 @@ const opDeleteIdentities = "DeleteIdentities"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-identity-2014-06-30/DeleteIdentities
-func (c *Client) DeleteIdentitiesRequest(input *DeleteIdentitiesInput) DeleteIdentitiesRequest {
+func (c *Client) DeleteIdentitiesRequest(input *types.DeleteIdentitiesInput) DeleteIdentitiesRequest {
 	op := &aws.Operation{
 		Name:       opDeleteIdentities,
 		HTTPMethod: "POST",
@@ -81,10 +35,10 @@ func (c *Client) DeleteIdentitiesRequest(input *DeleteIdentitiesInput) DeleteIde
 	}
 
 	if input == nil {
-		input = &DeleteIdentitiesInput{}
+		input = &types.DeleteIdentitiesInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteIdentitiesOutput{})
+	req := c.newRequest(op, input, &types.DeleteIdentitiesOutput{})
 	return DeleteIdentitiesRequest{Request: req, Input: input, Copy: c.DeleteIdentitiesRequest}
 }
 
@@ -92,8 +46,8 @@ func (c *Client) DeleteIdentitiesRequest(input *DeleteIdentitiesInput) DeleteIde
 // DeleteIdentities API operation.
 type DeleteIdentitiesRequest struct {
 	*aws.Request
-	Input *DeleteIdentitiesInput
-	Copy  func(*DeleteIdentitiesInput) DeleteIdentitiesRequest
+	Input *types.DeleteIdentitiesInput
+	Copy  func(*types.DeleteIdentitiesInput) DeleteIdentitiesRequest
 }
 
 // Send marshals and sends the DeleteIdentities API request.
@@ -105,7 +59,7 @@ func (r DeleteIdentitiesRequest) Send(ctx context.Context) (*DeleteIdentitiesRes
 	}
 
 	resp := &DeleteIdentitiesResponse{
-		DeleteIdentitiesOutput: r.Request.Data.(*DeleteIdentitiesOutput),
+		DeleteIdentitiesOutput: r.Request.Data.(*types.DeleteIdentitiesOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -115,7 +69,7 @@ func (r DeleteIdentitiesRequest) Send(ctx context.Context) (*DeleteIdentitiesRes
 // DeleteIdentitiesResponse is the response type for the
 // DeleteIdentities API operation.
 type DeleteIdentitiesResponse struct {
-	*DeleteIdentitiesOutput
+	*types.DeleteIdentitiesOutput
 
 	response *aws.Response
 }

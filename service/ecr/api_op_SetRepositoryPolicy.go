@@ -6,77 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ecr/types"
 )
-
-type SetRepositoryPolicyInput struct {
-	_ struct{} `type:"structure"`
-
-	// If the policy you are attempting to set on a repository policy would prevent
-	// you from setting another policy in the future, you must force the SetRepositoryPolicy
-	// operation. This is intended to prevent accidental repository lock outs.
-	Force *bool `locationName:"force" type:"boolean"`
-
-	// The JSON repository policy text to apply to the repository. For more information,
-	// see Amazon ECR Repository Policy Examples (https://docs.aws.amazon.com/AmazonECR/latest/userguide/RepositoryPolicyExamples.html)
-	// in the Amazon Elastic Container Registry User Guide.
-	//
-	// PolicyText is a required field
-	PolicyText *string `locationName:"policyText" type:"string" required:"true"`
-
-	// The AWS account ID associated with the registry that contains the repository.
-	// If you do not specify a registry, the default registry is assumed.
-	RegistryId *string `locationName:"registryId" type:"string"`
-
-	// The name of the repository to receive the policy.
-	//
-	// RepositoryName is a required field
-	RepositoryName *string `locationName:"repositoryName" min:"2" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s SetRepositoryPolicyInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *SetRepositoryPolicyInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "SetRepositoryPolicyInput"}
-
-	if s.PolicyText == nil {
-		invalidParams.Add(aws.NewErrParamRequired("PolicyText"))
-	}
-
-	if s.RepositoryName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("RepositoryName"))
-	}
-	if s.RepositoryName != nil && len(*s.RepositoryName) < 2 {
-		invalidParams.Add(aws.NewErrParamMinLen("RepositoryName", 2))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type SetRepositoryPolicyOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The JSON repository policy text applied to the repository.
-	PolicyText *string `locationName:"policyText" type:"string"`
-
-	// The registry ID associated with the request.
-	RegistryId *string `locationName:"registryId" type:"string"`
-
-	// The repository name associated with the request.
-	RepositoryName *string `locationName:"repositoryName" min:"2" type:"string"`
-}
-
-// String returns the string representation
-func (s SetRepositoryPolicyOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opSetRepositoryPolicy = "SetRepositoryPolicy"
 
@@ -95,7 +26,7 @@ const opSetRepositoryPolicy = "SetRepositoryPolicy"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/SetRepositoryPolicy
-func (c *Client) SetRepositoryPolicyRequest(input *SetRepositoryPolicyInput) SetRepositoryPolicyRequest {
+func (c *Client) SetRepositoryPolicyRequest(input *types.SetRepositoryPolicyInput) SetRepositoryPolicyRequest {
 	op := &aws.Operation{
 		Name:       opSetRepositoryPolicy,
 		HTTPMethod: "POST",
@@ -103,10 +34,10 @@ func (c *Client) SetRepositoryPolicyRequest(input *SetRepositoryPolicyInput) Set
 	}
 
 	if input == nil {
-		input = &SetRepositoryPolicyInput{}
+		input = &types.SetRepositoryPolicyInput{}
 	}
 
-	req := c.newRequest(op, input, &SetRepositoryPolicyOutput{})
+	req := c.newRequest(op, input, &types.SetRepositoryPolicyOutput{})
 	return SetRepositoryPolicyRequest{Request: req, Input: input, Copy: c.SetRepositoryPolicyRequest}
 }
 
@@ -114,8 +45,8 @@ func (c *Client) SetRepositoryPolicyRequest(input *SetRepositoryPolicyInput) Set
 // SetRepositoryPolicy API operation.
 type SetRepositoryPolicyRequest struct {
 	*aws.Request
-	Input *SetRepositoryPolicyInput
-	Copy  func(*SetRepositoryPolicyInput) SetRepositoryPolicyRequest
+	Input *types.SetRepositoryPolicyInput
+	Copy  func(*types.SetRepositoryPolicyInput) SetRepositoryPolicyRequest
 }
 
 // Send marshals and sends the SetRepositoryPolicy API request.
@@ -127,7 +58,7 @@ func (r SetRepositoryPolicyRequest) Send(ctx context.Context) (*SetRepositoryPol
 	}
 
 	resp := &SetRepositoryPolicyResponse{
-		SetRepositoryPolicyOutput: r.Request.Data.(*SetRepositoryPolicyOutput),
+		SetRepositoryPolicyOutput: r.Request.Data.(*types.SetRepositoryPolicyOutput),
 		response:                  &aws.Response{Request: r.Request},
 	}
 
@@ -137,7 +68,7 @@ func (r SetRepositoryPolicyRequest) Send(ctx context.Context) (*SetRepositoryPol
 // SetRepositoryPolicyResponse is the response type for the
 // SetRepositoryPolicy API operation.
 type SetRepositoryPolicyResponse struct {
-	*SetRepositoryPolicyOutput
+	*types.SetRepositoryPolicyOutput
 
 	response *aws.Response
 }

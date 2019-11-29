@@ -6,99 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-// Contains the parameters for DescribeReservedInstances.
-type DescribeReservedInstancesInput struct {
-	_ struct{} `type:"structure"`
-
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have
-	// the required permissions, the error response is DryRunOperation. Otherwise,
-	// it is UnauthorizedOperation.
-	DryRun *bool `locationName:"dryRun" type:"boolean"`
-
-	// One or more filters.
-	//
-	//    * availability-zone - The Availability Zone where the Reserved Instance
-	//    can be used.
-	//
-	//    * duration - The duration of the Reserved Instance (one year or three
-	//    years), in seconds (31536000 | 94608000).
-	//
-	//    * end - The time when the Reserved Instance expires (for example, 2015-08-07T11:54:42.000Z).
-	//
-	//    * fixed-price - The purchase price of the Reserved Instance (for example,
-	//    9800.0).
-	//
-	//    * instance-type - The instance type that is covered by the reservation.
-	//
-	//    * scope - The scope of the Reserved Instance (Region or Availability Zone).
-	//
-	//    * product-description - The Reserved Instance product platform description.
-	//    Instances that include (Amazon VPC) in the product platform description
-	//    will only be displayed to EC2-Classic account holders and are for use
-	//    with Amazon VPC (Linux/UNIX | Linux/UNIX (Amazon VPC) | SUSE Linux | SUSE
-	//    Linux (Amazon VPC) | Red Hat Enterprise Linux | Red Hat Enterprise Linux
-	//    (Amazon VPC) | Windows | Windows (Amazon VPC) | Windows with SQL Server
-	//    Standard | Windows with SQL Server Standard (Amazon VPC) | Windows with
-	//    SQL Server Web | Windows with SQL Server Web (Amazon VPC) | Windows with
-	//    SQL Server Enterprise | Windows with SQL Server Enterprise (Amazon VPC)).
-	//
-	//    * reserved-instances-id - The ID of the Reserved Instance.
-	//
-	//    * start - The time at which the Reserved Instance purchase request was
-	//    placed (for example, 2014-08-07T11:54:42.000Z).
-	//
-	//    * state - The state of the Reserved Instance (payment-pending | active
-	//    | payment-failed | retired).
-	//
-	//    * tag:<key> - The key/value combination of a tag assigned to the resource.
-	//    Use the tag key in the filter name and the tag value as the filter value.
-	//    For example, to find all resources that have a tag with the key Owner
-	//    and the value TeamA, specify tag:Owner for the filter name and TeamA for
-	//    the filter value.
-	//
-	//    * tag-key - The key of a tag assigned to the resource. Use this filter
-	//    to find all resources assigned a tag with a specific key, regardless of
-	//    the tag value.
-	//
-	//    * usage-price - The usage price of the Reserved Instance, per hour (for
-	//    example, 0.84).
-	Filters []Filter `locationName:"Filter" locationNameList:"Filter" type:"list"`
-
-	// Describes whether the Reserved Instance is Standard or Convertible.
-	OfferingClass OfferingClassType `type:"string" enum:"true"`
-
-	// The Reserved Instance offering type. If you are using tools that predate
-	// the 2011-11-01 API version, you only have access to the Medium Utilization
-	// Reserved Instance offering type.
-	OfferingType OfferingTypeValues `locationName:"offeringType" type:"string" enum:"true"`
-
-	// One or more Reserved Instance IDs.
-	//
-	// Default: Describes all your Reserved Instances, or only those otherwise specified.
-	ReservedInstancesIds []string `locationName:"ReservedInstancesId" locationNameList:"ReservedInstancesId" type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeReservedInstancesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Contains the output for DescribeReservedInstances.
-type DescribeReservedInstancesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A list of Reserved Instances.
-	ReservedInstances []ReservedInstances `locationName:"reservedInstancesSet" locationNameList:"item" type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeReservedInstancesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeReservedInstances = "DescribeReservedInstances"
 
@@ -118,7 +27,7 @@ const opDescribeReservedInstances = "DescribeReservedInstances"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeReservedInstances
-func (c *Client) DescribeReservedInstancesRequest(input *DescribeReservedInstancesInput) DescribeReservedInstancesRequest {
+func (c *Client) DescribeReservedInstancesRequest(input *types.DescribeReservedInstancesInput) DescribeReservedInstancesRequest {
 	op := &aws.Operation{
 		Name:       opDescribeReservedInstances,
 		HTTPMethod: "POST",
@@ -126,10 +35,10 @@ func (c *Client) DescribeReservedInstancesRequest(input *DescribeReservedInstanc
 	}
 
 	if input == nil {
-		input = &DescribeReservedInstancesInput{}
+		input = &types.DescribeReservedInstancesInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeReservedInstancesOutput{})
+	req := c.newRequest(op, input, &types.DescribeReservedInstancesOutput{})
 	return DescribeReservedInstancesRequest{Request: req, Input: input, Copy: c.DescribeReservedInstancesRequest}
 }
 
@@ -137,8 +46,8 @@ func (c *Client) DescribeReservedInstancesRequest(input *DescribeReservedInstanc
 // DescribeReservedInstances API operation.
 type DescribeReservedInstancesRequest struct {
 	*aws.Request
-	Input *DescribeReservedInstancesInput
-	Copy  func(*DescribeReservedInstancesInput) DescribeReservedInstancesRequest
+	Input *types.DescribeReservedInstancesInput
+	Copy  func(*types.DescribeReservedInstancesInput) DescribeReservedInstancesRequest
 }
 
 // Send marshals and sends the DescribeReservedInstances API request.
@@ -150,7 +59,7 @@ func (r DescribeReservedInstancesRequest) Send(ctx context.Context) (*DescribeRe
 	}
 
 	resp := &DescribeReservedInstancesResponse{
-		DescribeReservedInstancesOutput: r.Request.Data.(*DescribeReservedInstancesOutput),
+		DescribeReservedInstancesOutput: r.Request.Data.(*types.DescribeReservedInstancesOutput),
 		response:                        &aws.Response{Request: r.Request},
 	}
 
@@ -160,7 +69,7 @@ func (r DescribeReservedInstancesRequest) Send(ctx context.Context) (*DescribeRe
 // DescribeReservedInstancesResponse is the response type for the
 // DescribeReservedInstances API operation.
 type DescribeReservedInstancesResponse struct {
-	*DescribeReservedInstancesOutput
+	*types.DescribeReservedInstancesOutput
 
 	response *aws.Response
 }

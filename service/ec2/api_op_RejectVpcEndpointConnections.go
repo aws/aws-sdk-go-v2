@@ -6,63 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-type RejectVpcEndpointConnectionsInput struct {
-	_ struct{} `type:"structure"`
-
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have
-	// the required permissions, the error response is DryRunOperation. Otherwise,
-	// it is UnauthorizedOperation.
-	DryRun *bool `type:"boolean"`
-
-	// The ID of the service.
-	//
-	// ServiceId is a required field
-	ServiceId *string `type:"string" required:"true"`
-
-	// The IDs of one or more VPC endpoints.
-	//
-	// VpcEndpointIds is a required field
-	VpcEndpointIds []string `locationName:"VpcEndpointId" locationNameList:"item" type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s RejectVpcEndpointConnectionsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *RejectVpcEndpointConnectionsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "RejectVpcEndpointConnectionsInput"}
-
-	if s.ServiceId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ServiceId"))
-	}
-
-	if s.VpcEndpointIds == nil {
-		invalidParams.Add(aws.NewErrParamRequired("VpcEndpointIds"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type RejectVpcEndpointConnectionsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Information about the endpoints that were not rejected, if applicable.
-	Unsuccessful []UnsuccessfulItem `locationName:"unsuccessful" locationNameList:"item" type:"list"`
-}
-
-// String returns the string representation
-func (s RejectVpcEndpointConnectionsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opRejectVpcEndpointConnections = "RejectVpcEndpointConnections"
 
@@ -80,7 +25,7 @@ const opRejectVpcEndpointConnections = "RejectVpcEndpointConnections"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/RejectVpcEndpointConnections
-func (c *Client) RejectVpcEndpointConnectionsRequest(input *RejectVpcEndpointConnectionsInput) RejectVpcEndpointConnectionsRequest {
+func (c *Client) RejectVpcEndpointConnectionsRequest(input *types.RejectVpcEndpointConnectionsInput) RejectVpcEndpointConnectionsRequest {
 	op := &aws.Operation{
 		Name:       opRejectVpcEndpointConnections,
 		HTTPMethod: "POST",
@@ -88,10 +33,10 @@ func (c *Client) RejectVpcEndpointConnectionsRequest(input *RejectVpcEndpointCon
 	}
 
 	if input == nil {
-		input = &RejectVpcEndpointConnectionsInput{}
+		input = &types.RejectVpcEndpointConnectionsInput{}
 	}
 
-	req := c.newRequest(op, input, &RejectVpcEndpointConnectionsOutput{})
+	req := c.newRequest(op, input, &types.RejectVpcEndpointConnectionsOutput{})
 	return RejectVpcEndpointConnectionsRequest{Request: req, Input: input, Copy: c.RejectVpcEndpointConnectionsRequest}
 }
 
@@ -99,8 +44,8 @@ func (c *Client) RejectVpcEndpointConnectionsRequest(input *RejectVpcEndpointCon
 // RejectVpcEndpointConnections API operation.
 type RejectVpcEndpointConnectionsRequest struct {
 	*aws.Request
-	Input *RejectVpcEndpointConnectionsInput
-	Copy  func(*RejectVpcEndpointConnectionsInput) RejectVpcEndpointConnectionsRequest
+	Input *types.RejectVpcEndpointConnectionsInput
+	Copy  func(*types.RejectVpcEndpointConnectionsInput) RejectVpcEndpointConnectionsRequest
 }
 
 // Send marshals and sends the RejectVpcEndpointConnections API request.
@@ -112,7 +57,7 @@ func (r RejectVpcEndpointConnectionsRequest) Send(ctx context.Context) (*RejectV
 	}
 
 	resp := &RejectVpcEndpointConnectionsResponse{
-		RejectVpcEndpointConnectionsOutput: r.Request.Data.(*RejectVpcEndpointConnectionsOutput),
+		RejectVpcEndpointConnectionsOutput: r.Request.Data.(*types.RejectVpcEndpointConnectionsOutput),
 		response:                           &aws.Response{Request: r.Request},
 	}
 
@@ -122,7 +67,7 @@ func (r RejectVpcEndpointConnectionsRequest) Send(ctx context.Context) (*RejectV
 // RejectVpcEndpointConnectionsResponse is the response type for the
 // RejectVpcEndpointConnections API operation.
 type RejectVpcEndpointConnectionsResponse struct {
-	*RejectVpcEndpointConnectionsOutput
+	*types.RejectVpcEndpointConnectionsOutput
 
 	response *aws.Response
 }

@@ -6,62 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
+	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/types"
 )
-
-type DeleteResourceServerInput struct {
-	_ struct{} `type:"structure"`
-
-	// The identifier for the resource server.
-	//
-	// Identifier is a required field
-	Identifier *string `min:"1" type:"string" required:"true"`
-
-	// The user pool ID for the user pool that hosts the resource server.
-	//
-	// UserPoolId is a required field
-	UserPoolId *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteResourceServerInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteResourceServerInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteResourceServerInput"}
-
-	if s.Identifier == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Identifier"))
-	}
-	if s.Identifier != nil && len(*s.Identifier) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Identifier", 1))
-	}
-
-	if s.UserPoolId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("UserPoolId"))
-	}
-	if s.UserPoolId != nil && len(*s.UserPoolId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("UserPoolId", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteResourceServerOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteResourceServerOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteResourceServer = "DeleteResourceServer"
 
@@ -78,7 +26,7 @@ const opDeleteResourceServer = "DeleteResourceServer"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/DeleteResourceServer
-func (c *Client) DeleteResourceServerRequest(input *DeleteResourceServerInput) DeleteResourceServerRequest {
+func (c *Client) DeleteResourceServerRequest(input *types.DeleteResourceServerInput) DeleteResourceServerRequest {
 	op := &aws.Operation{
 		Name:       opDeleteResourceServer,
 		HTTPMethod: "POST",
@@ -86,10 +34,10 @@ func (c *Client) DeleteResourceServerRequest(input *DeleteResourceServerInput) D
 	}
 
 	if input == nil {
-		input = &DeleteResourceServerInput{}
+		input = &types.DeleteResourceServerInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteResourceServerOutput{})
+	req := c.newRequest(op, input, &types.DeleteResourceServerOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return DeleteResourceServerRequest{Request: req, Input: input, Copy: c.DeleteResourceServerRequest}
@@ -99,8 +47,8 @@ func (c *Client) DeleteResourceServerRequest(input *DeleteResourceServerInput) D
 // DeleteResourceServer API operation.
 type DeleteResourceServerRequest struct {
 	*aws.Request
-	Input *DeleteResourceServerInput
-	Copy  func(*DeleteResourceServerInput) DeleteResourceServerRequest
+	Input *types.DeleteResourceServerInput
+	Copy  func(*types.DeleteResourceServerInput) DeleteResourceServerRequest
 }
 
 // Send marshals and sends the DeleteResourceServer API request.
@@ -112,7 +60,7 @@ func (r DeleteResourceServerRequest) Send(ctx context.Context) (*DeleteResourceS
 	}
 
 	resp := &DeleteResourceServerResponse{
-		DeleteResourceServerOutput: r.Request.Data.(*DeleteResourceServerOutput),
+		DeleteResourceServerOutput: r.Request.Data.(*types.DeleteResourceServerOutput),
 		response:                   &aws.Response{Request: r.Request},
 	}
 
@@ -122,7 +70,7 @@ func (r DeleteResourceServerRequest) Send(ctx context.Context) (*DeleteResourceS
 // DeleteResourceServerResponse is the response type for the
 // DeleteResourceServer API operation.
 type DeleteResourceServerResponse struct {
-	*DeleteResourceServerOutput
+	*types.DeleteResourceServerOutput
 
 	response *aws.Response
 }

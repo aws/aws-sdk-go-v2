@@ -6,32 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/elasticbeanstalk/types"
 )
-
-type DescribePlatformVersionInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ARN of the version of the platform.
-	PlatformArn *string `type:"string"`
-}
-
-// String returns the string representation
-func (s DescribePlatformVersionInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type DescribePlatformVersionOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Detailed information about the version of the platform.
-	PlatformDescription *PlatformDescription `type:"structure"`
-}
-
-// String returns the string representation
-func (s DescribePlatformVersionOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribePlatformVersion = "DescribePlatformVersion"
 
@@ -48,7 +24,7 @@ const opDescribePlatformVersion = "DescribePlatformVersion"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/DescribePlatformVersion
-func (c *Client) DescribePlatformVersionRequest(input *DescribePlatformVersionInput) DescribePlatformVersionRequest {
+func (c *Client) DescribePlatformVersionRequest(input *types.DescribePlatformVersionInput) DescribePlatformVersionRequest {
 	op := &aws.Operation{
 		Name:       opDescribePlatformVersion,
 		HTTPMethod: "POST",
@@ -56,10 +32,10 @@ func (c *Client) DescribePlatformVersionRequest(input *DescribePlatformVersionIn
 	}
 
 	if input == nil {
-		input = &DescribePlatformVersionInput{}
+		input = &types.DescribePlatformVersionInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribePlatformVersionOutput{})
+	req := c.newRequest(op, input, &types.DescribePlatformVersionOutput{})
 	return DescribePlatformVersionRequest{Request: req, Input: input, Copy: c.DescribePlatformVersionRequest}
 }
 
@@ -67,8 +43,8 @@ func (c *Client) DescribePlatformVersionRequest(input *DescribePlatformVersionIn
 // DescribePlatformVersion API operation.
 type DescribePlatformVersionRequest struct {
 	*aws.Request
-	Input *DescribePlatformVersionInput
-	Copy  func(*DescribePlatformVersionInput) DescribePlatformVersionRequest
+	Input *types.DescribePlatformVersionInput
+	Copy  func(*types.DescribePlatformVersionInput) DescribePlatformVersionRequest
 }
 
 // Send marshals and sends the DescribePlatformVersion API request.
@@ -80,7 +56,7 @@ func (r DescribePlatformVersionRequest) Send(ctx context.Context) (*DescribePlat
 	}
 
 	resp := &DescribePlatformVersionResponse{
-		DescribePlatformVersionOutput: r.Request.Data.(*DescribePlatformVersionOutput),
+		DescribePlatformVersionOutput: r.Request.Data.(*types.DescribePlatformVersionOutput),
 		response:                      &aws.Response{Request: r.Request},
 	}
 
@@ -90,7 +66,7 @@ func (r DescribePlatformVersionRequest) Send(ctx context.Context) (*DescribePlat
 // DescribePlatformVersionResponse is the response type for the
 // DescribePlatformVersion API operation.
 type DescribePlatformVersionResponse struct {
-	*DescribePlatformVersionOutput
+	*types.DescribePlatformVersionOutput
 
 	response *aws.Response
 }

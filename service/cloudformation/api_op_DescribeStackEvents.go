@@ -6,62 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/cloudformation/types"
 )
-
-// The input for DescribeStackEvents action.
-type DescribeStackEventsInput struct {
-	_ struct{} `type:"structure"`
-
-	// A string that identifies the next page of events that you want to retrieve.
-	NextToken *string `min:"1" type:"string"`
-
-	// The name or the unique stack ID that is associated with the stack, which
-	// are not always interchangeable:
-	//
-	//    * Running stacks: You can specify either the stack's name or its unique
-	//    stack ID.
-	//
-	//    * Deleted stacks: You must specify the unique stack ID.
-	//
-	// Default: There is no default value.
-	StackName *string `type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeStackEventsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeStackEventsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeStackEventsInput"}
-	if s.NextToken != nil && len(*s.NextToken) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// The output for a DescribeStackEvents action.
-type DescribeStackEventsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// If the output exceeds 1 MB in size, a string that identifies the next page
-	// of events. If no additional page exists, this value is null.
-	NextToken *string `min:"1" type:"string"`
-
-	// A list of StackEvents structures.
-	StackEvents []StackEvent `type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeStackEventsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeStackEvents = "DescribeStackEvents"
 
@@ -83,7 +29,7 @@ const opDescribeStackEvents = "DescribeStackEvents"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DescribeStackEvents
-func (c *Client) DescribeStackEventsRequest(input *DescribeStackEventsInput) DescribeStackEventsRequest {
+func (c *Client) DescribeStackEventsRequest(input *types.DescribeStackEventsInput) DescribeStackEventsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeStackEvents,
 		HTTPMethod: "POST",
@@ -97,10 +43,10 @@ func (c *Client) DescribeStackEventsRequest(input *DescribeStackEventsInput) Des
 	}
 
 	if input == nil {
-		input = &DescribeStackEventsInput{}
+		input = &types.DescribeStackEventsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeStackEventsOutput{})
+	req := c.newRequest(op, input, &types.DescribeStackEventsOutput{})
 	return DescribeStackEventsRequest{Request: req, Input: input, Copy: c.DescribeStackEventsRequest}
 }
 
@@ -108,8 +54,8 @@ func (c *Client) DescribeStackEventsRequest(input *DescribeStackEventsInput) Des
 // DescribeStackEvents API operation.
 type DescribeStackEventsRequest struct {
 	*aws.Request
-	Input *DescribeStackEventsInput
-	Copy  func(*DescribeStackEventsInput) DescribeStackEventsRequest
+	Input *types.DescribeStackEventsInput
+	Copy  func(*types.DescribeStackEventsInput) DescribeStackEventsRequest
 }
 
 // Send marshals and sends the DescribeStackEvents API request.
@@ -121,7 +67,7 @@ func (r DescribeStackEventsRequest) Send(ctx context.Context) (*DescribeStackEve
 	}
 
 	resp := &DescribeStackEventsResponse{
-		DescribeStackEventsOutput: r.Request.Data.(*DescribeStackEventsOutput),
+		DescribeStackEventsOutput: r.Request.Data.(*types.DescribeStackEventsOutput),
 		response:                  &aws.Response{Request: r.Request},
 	}
 
@@ -151,7 +97,7 @@ func NewDescribeStackEventsPaginator(req DescribeStackEventsRequest) DescribeSta
 	return DescribeStackEventsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *DescribeStackEventsInput
+				var inCpy *types.DescribeStackEventsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -171,14 +117,14 @@ type DescribeStackEventsPaginator struct {
 	aws.Pager
 }
 
-func (p *DescribeStackEventsPaginator) CurrentPage() *DescribeStackEventsOutput {
-	return p.Pager.CurrentPage().(*DescribeStackEventsOutput)
+func (p *DescribeStackEventsPaginator) CurrentPage() *types.DescribeStackEventsOutput {
+	return p.Pager.CurrentPage().(*types.DescribeStackEventsOutput)
 }
 
 // DescribeStackEventsResponse is the response type for the
 // DescribeStackEvents API operation.
 type DescribeStackEventsResponse struct {
-	*DescribeStackEventsOutput
+	*types.DescribeStackEventsOutput
 
 	response *aws.Response
 }

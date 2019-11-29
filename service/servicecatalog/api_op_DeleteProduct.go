@@ -6,57 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/types"
 )
-
-type DeleteProductInput struct {
-	_ struct{} `type:"structure"`
-
-	// The language code.
-	//
-	//    * en - English (default)
-	//
-	//    * jp - Japanese
-	//
-	//    * zh - Chinese
-	AcceptLanguage *string `type:"string"`
-
-	// The product identifier.
-	//
-	// Id is a required field
-	Id *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteProductInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteProductInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteProductInput"}
-
-	if s.Id == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Id"))
-	}
-	if s.Id != nil && len(*s.Id) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Id", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteProductOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteProductOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteProduct = "DeleteProduct"
 
@@ -76,7 +27,7 @@ const opDeleteProduct = "DeleteProduct"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DeleteProduct
-func (c *Client) DeleteProductRequest(input *DeleteProductInput) DeleteProductRequest {
+func (c *Client) DeleteProductRequest(input *types.DeleteProductInput) DeleteProductRequest {
 	op := &aws.Operation{
 		Name:       opDeleteProduct,
 		HTTPMethod: "POST",
@@ -84,10 +35,10 @@ func (c *Client) DeleteProductRequest(input *DeleteProductInput) DeleteProductRe
 	}
 
 	if input == nil {
-		input = &DeleteProductInput{}
+		input = &types.DeleteProductInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteProductOutput{})
+	req := c.newRequest(op, input, &types.DeleteProductOutput{})
 	return DeleteProductRequest{Request: req, Input: input, Copy: c.DeleteProductRequest}
 }
 
@@ -95,8 +46,8 @@ func (c *Client) DeleteProductRequest(input *DeleteProductInput) DeleteProductRe
 // DeleteProduct API operation.
 type DeleteProductRequest struct {
 	*aws.Request
-	Input *DeleteProductInput
-	Copy  func(*DeleteProductInput) DeleteProductRequest
+	Input *types.DeleteProductInput
+	Copy  func(*types.DeleteProductInput) DeleteProductRequest
 }
 
 // Send marshals and sends the DeleteProduct API request.
@@ -108,7 +59,7 @@ func (r DeleteProductRequest) Send(ctx context.Context) (*DeleteProductResponse,
 	}
 
 	resp := &DeleteProductResponse{
-		DeleteProductOutput: r.Request.Data.(*DeleteProductOutput),
+		DeleteProductOutput: r.Request.Data.(*types.DeleteProductOutput),
 		response:            &aws.Response{Request: r.Request},
 	}
 
@@ -118,7 +69,7 @@ func (r DeleteProductRequest) Send(ctx context.Context) (*DeleteProductResponse,
 // DeleteProductResponse is the response type for the
 // DeleteProduct API operation.
 type DeleteProductResponse struct {
-	*DeleteProductOutput
+	*types.DeleteProductOutput
 
 	response *aws.Response
 }

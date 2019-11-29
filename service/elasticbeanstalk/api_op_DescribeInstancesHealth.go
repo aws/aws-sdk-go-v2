@@ -4,74 +4,10 @@ package elasticbeanstalk
 
 import (
 	"context"
-	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/elasticbeanstalk/types"
 )
-
-// Parameters for a call to DescribeInstancesHealth.
-type DescribeInstancesHealthInput struct {
-	_ struct{} `type:"structure"`
-
-	// Specifies the response elements you wish to receive. To retrieve all attributes,
-	// set to All. If no attribute names are specified, returns a list of instances.
-	AttributeNames []InstancesHealthAttribute `type:"list"`
-
-	// Specify the AWS Elastic Beanstalk environment by ID.
-	EnvironmentId *string `type:"string"`
-
-	// Specify the AWS Elastic Beanstalk environment by name.
-	EnvironmentName *string `min:"4" type:"string"`
-
-	// Specify the pagination token returned by a previous call.
-	NextToken *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeInstancesHealthInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeInstancesHealthInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeInstancesHealthInput"}
-	if s.EnvironmentName != nil && len(*s.EnvironmentName) < 4 {
-		invalidParams.Add(aws.NewErrParamMinLen("EnvironmentName", 4))
-	}
-	if s.NextToken != nil && len(*s.NextToken) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Detailed health information about the Amazon EC2 instances in an AWS Elastic
-// Beanstalk environment.
-type DescribeInstancesHealthOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Detailed health information about each instance.
-	//
-	// The output differs slightly between Linux and Windows environments. There
-	// is a difference in the members that are supported under the <CPUUtilization>
-	// type.
-	InstanceHealthList []SingleInstanceHealth `type:"list"`
-
-	// Pagination token for the next page of results, if available.
-	NextToken *string `min:"1" type:"string"`
-
-	// The date and time that the health information was retrieved.
-	RefreshedAt *time.Time `type:"timestamp"`
-}
-
-// String returns the string representation
-func (s DescribeInstancesHealthOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeInstancesHealth = "DescribeInstancesHealth"
 
@@ -89,7 +25,7 @@ const opDescribeInstancesHealth = "DescribeInstancesHealth"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/DescribeInstancesHealth
-func (c *Client) DescribeInstancesHealthRequest(input *DescribeInstancesHealthInput) DescribeInstancesHealthRequest {
+func (c *Client) DescribeInstancesHealthRequest(input *types.DescribeInstancesHealthInput) DescribeInstancesHealthRequest {
 	op := &aws.Operation{
 		Name:       opDescribeInstancesHealth,
 		HTTPMethod: "POST",
@@ -97,10 +33,10 @@ func (c *Client) DescribeInstancesHealthRequest(input *DescribeInstancesHealthIn
 	}
 
 	if input == nil {
-		input = &DescribeInstancesHealthInput{}
+		input = &types.DescribeInstancesHealthInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeInstancesHealthOutput{})
+	req := c.newRequest(op, input, &types.DescribeInstancesHealthOutput{})
 	return DescribeInstancesHealthRequest{Request: req, Input: input, Copy: c.DescribeInstancesHealthRequest}
 }
 
@@ -108,8 +44,8 @@ func (c *Client) DescribeInstancesHealthRequest(input *DescribeInstancesHealthIn
 // DescribeInstancesHealth API operation.
 type DescribeInstancesHealthRequest struct {
 	*aws.Request
-	Input *DescribeInstancesHealthInput
-	Copy  func(*DescribeInstancesHealthInput) DescribeInstancesHealthRequest
+	Input *types.DescribeInstancesHealthInput
+	Copy  func(*types.DescribeInstancesHealthInput) DescribeInstancesHealthRequest
 }
 
 // Send marshals and sends the DescribeInstancesHealth API request.
@@ -121,7 +57,7 @@ func (r DescribeInstancesHealthRequest) Send(ctx context.Context) (*DescribeInst
 	}
 
 	resp := &DescribeInstancesHealthResponse{
-		DescribeInstancesHealthOutput: r.Request.Data.(*DescribeInstancesHealthOutput),
+		DescribeInstancesHealthOutput: r.Request.Data.(*types.DescribeInstancesHealthOutput),
 		response:                      &aws.Response{Request: r.Request},
 	}
 
@@ -131,7 +67,7 @@ func (r DescribeInstancesHealthRequest) Send(ctx context.Context) (*DescribeInst
 // DescribeInstancesHealthResponse is the response type for the
 // DescribeInstancesHealth API operation.
 type DescribeInstancesHealthResponse struct {
-	*DescribeInstancesHealthOutput
+	*types.DescribeInstancesHealthOutput
 
 	response *aws.Response
 }

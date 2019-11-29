@@ -6,48 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/docdb/types"
 )
-
-type StartDBClusterInput struct {
-	_ struct{} `type:"structure"`
-
-	// The identifier of the cluster to restart. Example: docdb-2019-05-28-15-24-52
-	//
-	// DBClusterIdentifier is a required field
-	DBClusterIdentifier *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s StartDBClusterInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *StartDBClusterInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "StartDBClusterInput"}
-
-	if s.DBClusterIdentifier == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DBClusterIdentifier"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type StartDBClusterOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Detailed information about a DB cluster.
-	DBCluster *DBCluster `type:"structure"`
-}
-
-// String returns the string representation
-func (s StartDBClusterOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opStartDBCluster = "StartDBCluster"
 
@@ -66,7 +26,7 @@ const opStartDBCluster = "StartDBCluster"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/StartDBCluster
-func (c *Client) StartDBClusterRequest(input *StartDBClusterInput) StartDBClusterRequest {
+func (c *Client) StartDBClusterRequest(input *types.StartDBClusterInput) StartDBClusterRequest {
 	op := &aws.Operation{
 		Name:       opStartDBCluster,
 		HTTPMethod: "POST",
@@ -74,10 +34,10 @@ func (c *Client) StartDBClusterRequest(input *StartDBClusterInput) StartDBCluste
 	}
 
 	if input == nil {
-		input = &StartDBClusterInput{}
+		input = &types.StartDBClusterInput{}
 	}
 
-	req := c.newRequest(op, input, &StartDBClusterOutput{})
+	req := c.newRequest(op, input, &types.StartDBClusterOutput{})
 	return StartDBClusterRequest{Request: req, Input: input, Copy: c.StartDBClusterRequest}
 }
 
@@ -85,8 +45,8 @@ func (c *Client) StartDBClusterRequest(input *StartDBClusterInput) StartDBCluste
 // StartDBCluster API operation.
 type StartDBClusterRequest struct {
 	*aws.Request
-	Input *StartDBClusterInput
-	Copy  func(*StartDBClusterInput) StartDBClusterRequest
+	Input *types.StartDBClusterInput
+	Copy  func(*types.StartDBClusterInput) StartDBClusterRequest
 }
 
 // Send marshals and sends the StartDBCluster API request.
@@ -98,7 +58,7 @@ func (r StartDBClusterRequest) Send(ctx context.Context) (*StartDBClusterRespons
 	}
 
 	resp := &StartDBClusterResponse{
-		StartDBClusterOutput: r.Request.Data.(*StartDBClusterOutput),
+		StartDBClusterOutput: r.Request.Data.(*types.StartDBClusterOutput),
 		response:             &aws.Response{Request: r.Request},
 	}
 
@@ -108,7 +68,7 @@ func (r StartDBClusterRequest) Send(ctx context.Context) (*StartDBClusterRespons
 // StartDBClusterResponse is the response type for the
 // StartDBCluster API operation.
 type StartDBClusterResponse struct {
-	*StartDBClusterOutput
+	*types.StartDBClusterOutput
 
 	response *aws.Response
 }

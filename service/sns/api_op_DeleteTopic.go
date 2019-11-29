@@ -6,47 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/query"
+	"github.com/aws/aws-sdk-go-v2/service/sns/types"
 )
-
-type DeleteTopicInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ARN of the topic you want to delete.
-	//
-	// TopicArn is a required field
-	TopicArn *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteTopicInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteTopicInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteTopicInput"}
-
-	if s.TopicArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("TopicArn"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteTopicOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteTopicOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteTopic = "DeleteTopic"
 
@@ -66,7 +29,7 @@ const opDeleteTopic = "DeleteTopic"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/DeleteTopic
-func (c *Client) DeleteTopicRequest(input *DeleteTopicInput) DeleteTopicRequest {
+func (c *Client) DeleteTopicRequest(input *types.DeleteTopicInput) DeleteTopicRequest {
 	op := &aws.Operation{
 		Name:       opDeleteTopic,
 		HTTPMethod: "POST",
@@ -74,10 +37,10 @@ func (c *Client) DeleteTopicRequest(input *DeleteTopicInput) DeleteTopicRequest 
 	}
 
 	if input == nil {
-		input = &DeleteTopicInput{}
+		input = &types.DeleteTopicInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteTopicOutput{})
+	req := c.newRequest(op, input, &types.DeleteTopicOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return DeleteTopicRequest{Request: req, Input: input, Copy: c.DeleteTopicRequest}
@@ -87,8 +50,8 @@ func (c *Client) DeleteTopicRequest(input *DeleteTopicInput) DeleteTopicRequest 
 // DeleteTopic API operation.
 type DeleteTopicRequest struct {
 	*aws.Request
-	Input *DeleteTopicInput
-	Copy  func(*DeleteTopicInput) DeleteTopicRequest
+	Input *types.DeleteTopicInput
+	Copy  func(*types.DeleteTopicInput) DeleteTopicRequest
 }
 
 // Send marshals and sends the DeleteTopic API request.
@@ -100,7 +63,7 @@ func (r DeleteTopicRequest) Send(ctx context.Context) (*DeleteTopicResponse, err
 	}
 
 	resp := &DeleteTopicResponse{
-		DeleteTopicOutput: r.Request.Data.(*DeleteTopicOutput),
+		DeleteTopicOutput: r.Request.Data.(*types.DeleteTopicOutput),
 		response:          &aws.Response{Request: r.Request},
 	}
 
@@ -110,7 +73,7 @@ func (r DeleteTopicRequest) Send(ctx context.Context) (*DeleteTopicResponse, err
 // DeleteTopicResponse is the response type for the
 // DeleteTopic API operation.
 type DeleteTopicResponse struct {
-	*DeleteTopicOutput
+	*types.DeleteTopicOutput
 
 	response *aws.Response
 }

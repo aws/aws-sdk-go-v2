@@ -6,65 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/route53/types"
 )
-
-// This action deletes a health check.
-type DeleteHealthCheckInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the health check that you want to delete.
-	//
-	// HealthCheckId is a required field
-	HealthCheckId *string `location:"uri" locationName:"HealthCheckId" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteHealthCheckInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteHealthCheckInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteHealthCheckInput"}
-
-	if s.HealthCheckId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("HealthCheckId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteHealthCheckInput) MarshalFields(e protocol.FieldEncoder) error {
-
-	if s.HealthCheckId != nil {
-		v := *s.HealthCheckId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "HealthCheckId", protocol.StringValue(v), metadata)
-	}
-	return nil
-}
-
-// An empty element.
-type DeleteHealthCheckOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteHealthCheckOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteHealthCheckOutput) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
 
 const opDeleteHealthCheck = "DeleteHealthCheck"
 
@@ -89,7 +32,7 @@ const opDeleteHealthCheck = "DeleteHealthCheck"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/DeleteHealthCheck
-func (c *Client) DeleteHealthCheckRequest(input *DeleteHealthCheckInput) DeleteHealthCheckRequest {
+func (c *Client) DeleteHealthCheckRequest(input *types.DeleteHealthCheckInput) DeleteHealthCheckRequest {
 	op := &aws.Operation{
 		Name:       opDeleteHealthCheck,
 		HTTPMethod: "DELETE",
@@ -97,10 +40,10 @@ func (c *Client) DeleteHealthCheckRequest(input *DeleteHealthCheckInput) DeleteH
 	}
 
 	if input == nil {
-		input = &DeleteHealthCheckInput{}
+		input = &types.DeleteHealthCheckInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteHealthCheckOutput{})
+	req := c.newRequest(op, input, &types.DeleteHealthCheckOutput{})
 	return DeleteHealthCheckRequest{Request: req, Input: input, Copy: c.DeleteHealthCheckRequest}
 }
 
@@ -108,8 +51,8 @@ func (c *Client) DeleteHealthCheckRequest(input *DeleteHealthCheckInput) DeleteH
 // DeleteHealthCheck API operation.
 type DeleteHealthCheckRequest struct {
 	*aws.Request
-	Input *DeleteHealthCheckInput
-	Copy  func(*DeleteHealthCheckInput) DeleteHealthCheckRequest
+	Input *types.DeleteHealthCheckInput
+	Copy  func(*types.DeleteHealthCheckInput) DeleteHealthCheckRequest
 }
 
 // Send marshals and sends the DeleteHealthCheck API request.
@@ -121,7 +64,7 @@ func (r DeleteHealthCheckRequest) Send(ctx context.Context) (*DeleteHealthCheckR
 	}
 
 	resp := &DeleteHealthCheckResponse{
-		DeleteHealthCheckOutput: r.Request.Data.(*DeleteHealthCheckOutput),
+		DeleteHealthCheckOutput: r.Request.Data.(*types.DeleteHealthCheckOutput),
 		response:                &aws.Response{Request: r.Request},
 	}
 
@@ -131,7 +74,7 @@ func (r DeleteHealthCheckRequest) Send(ctx context.Context) (*DeleteHealthCheckR
 // DeleteHealthCheckResponse is the response type for the
 // DeleteHealthCheck API operation.
 type DeleteHealthCheckResponse struct {
-	*DeleteHealthCheckOutput
+	*types.DeleteHealthCheckOutput
 
 	response *aws.Response
 }

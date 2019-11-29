@@ -6,64 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/iam/types"
 )
-
-type GetContextKeysForCustomPolicyInput struct {
-	_ struct{} `type:"structure"`
-
-	// A list of policies for which you want the list of context keys referenced
-	// in those policies. Each document is specified as a string containing the
-	// complete, valid JSON text of an IAM policy.
-	//
-	// The regex pattern (http://wikipedia.org/wiki/regex) used to validate this
-	// parameter is a string of characters consisting of the following:
-	//
-	//    * Any printable ASCII character ranging from the space character (\u0020)
-	//    through the end of the ASCII character range
-	//
-	//    * The printable characters in the Basic Latin and Latin-1 Supplement character
-	//    set (through \u00FF)
-	//
-	//    * The special characters tab (\u0009), line feed (\u000A), and carriage
-	//    return (\u000D)
-	//
-	// PolicyInputList is a required field
-	PolicyInputList []string `type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s GetContextKeysForCustomPolicyInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetContextKeysForCustomPolicyInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetContextKeysForCustomPolicyInput"}
-
-	if s.PolicyInputList == nil {
-		invalidParams.Add(aws.NewErrParamRequired("PolicyInputList"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Contains the response to a successful GetContextKeysForPrincipalPolicy or
-// GetContextKeysForCustomPolicy request.
-type GetContextKeysForCustomPolicyOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The list of context keys that are referenced in the input policies.
-	ContextKeyNames []string `type:"list"`
-}
-
-// String returns the string representation
-func (s GetContextKeysForCustomPolicyOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetContextKeysForCustomPolicy = "GetContextKeysForCustomPolicy"
 
@@ -89,7 +33,7 @@ const opGetContextKeysForCustomPolicy = "GetContextKeysForCustomPolicy"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetContextKeysForCustomPolicy
-func (c *Client) GetContextKeysForCustomPolicyRequest(input *GetContextKeysForCustomPolicyInput) GetContextKeysForCustomPolicyRequest {
+func (c *Client) GetContextKeysForCustomPolicyRequest(input *types.GetContextKeysForCustomPolicyInput) GetContextKeysForCustomPolicyRequest {
 	op := &aws.Operation{
 		Name:       opGetContextKeysForCustomPolicy,
 		HTTPMethod: "POST",
@@ -97,10 +41,10 @@ func (c *Client) GetContextKeysForCustomPolicyRequest(input *GetContextKeysForCu
 	}
 
 	if input == nil {
-		input = &GetContextKeysForCustomPolicyInput{}
+		input = &types.GetContextKeysForCustomPolicyInput{}
 	}
 
-	req := c.newRequest(op, input, &GetContextKeysForCustomPolicyOutput{})
+	req := c.newRequest(op, input, &types.GetContextKeysForCustomPolicyOutput{})
 	return GetContextKeysForCustomPolicyRequest{Request: req, Input: input, Copy: c.GetContextKeysForCustomPolicyRequest}
 }
 
@@ -108,8 +52,8 @@ func (c *Client) GetContextKeysForCustomPolicyRequest(input *GetContextKeysForCu
 // GetContextKeysForCustomPolicy API operation.
 type GetContextKeysForCustomPolicyRequest struct {
 	*aws.Request
-	Input *GetContextKeysForCustomPolicyInput
-	Copy  func(*GetContextKeysForCustomPolicyInput) GetContextKeysForCustomPolicyRequest
+	Input *types.GetContextKeysForCustomPolicyInput
+	Copy  func(*types.GetContextKeysForCustomPolicyInput) GetContextKeysForCustomPolicyRequest
 }
 
 // Send marshals and sends the GetContextKeysForCustomPolicy API request.
@@ -121,7 +65,7 @@ func (r GetContextKeysForCustomPolicyRequest) Send(ctx context.Context) (*GetCon
 	}
 
 	resp := &GetContextKeysForCustomPolicyResponse{
-		GetContextKeysForCustomPolicyOutput: r.Request.Data.(*GetContextKeysForCustomPolicyOutput),
+		GetContextKeysForCustomPolicyOutput: r.Request.Data.(*types.GetContextKeysForCustomPolicyOutput),
 		response:                            &aws.Response{Request: r.Request},
 	}
 
@@ -131,7 +75,7 @@ func (r GetContextKeysForCustomPolicyRequest) Send(ctx context.Context) (*GetCon
 // GetContextKeysForCustomPolicyResponse is the response type for the
 // GetContextKeysForCustomPolicy API operation.
 type GetContextKeysForCustomPolicyResponse struct {
-	*GetContextKeysForCustomPolicyOutput
+	*types.GetContextKeysForCustomPolicyOutput
 
 	response *aws.Response
 }

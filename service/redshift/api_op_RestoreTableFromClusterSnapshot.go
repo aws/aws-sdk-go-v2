@@ -6,96 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/redshift/types"
 )
-
-type RestoreTableFromClusterSnapshotInput struct {
-	_ struct{} `type:"structure"`
-
-	// The identifier of the Amazon Redshift cluster to restore the table to.
-	//
-	// ClusterIdentifier is a required field
-	ClusterIdentifier *string `type:"string" required:"true"`
-
-	// The name of the table to create as a result of the current request.
-	//
-	// NewTableName is a required field
-	NewTableName *string `type:"string" required:"true"`
-
-	// The identifier of the snapshot to restore the table from. This snapshot must
-	// have been created from the Amazon Redshift cluster specified by the ClusterIdentifier
-	// parameter.
-	//
-	// SnapshotIdentifier is a required field
-	SnapshotIdentifier *string `type:"string" required:"true"`
-
-	// The name of the source database that contains the table to restore from.
-	//
-	// SourceDatabaseName is a required field
-	SourceDatabaseName *string `type:"string" required:"true"`
-
-	// The name of the source schema that contains the table to restore from. If
-	// you do not specify a SourceSchemaName value, the default is public.
-	SourceSchemaName *string `type:"string"`
-
-	// The name of the source table to restore from.
-	//
-	// SourceTableName is a required field
-	SourceTableName *string `type:"string" required:"true"`
-
-	// The name of the database to restore the table to.
-	TargetDatabaseName *string `type:"string"`
-
-	// The name of the schema to restore the table to.
-	TargetSchemaName *string `type:"string"`
-}
-
-// String returns the string representation
-func (s RestoreTableFromClusterSnapshotInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *RestoreTableFromClusterSnapshotInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "RestoreTableFromClusterSnapshotInput"}
-
-	if s.ClusterIdentifier == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ClusterIdentifier"))
-	}
-
-	if s.NewTableName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("NewTableName"))
-	}
-
-	if s.SnapshotIdentifier == nil {
-		invalidParams.Add(aws.NewErrParamRequired("SnapshotIdentifier"))
-	}
-
-	if s.SourceDatabaseName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("SourceDatabaseName"))
-	}
-
-	if s.SourceTableName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("SourceTableName"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type RestoreTableFromClusterSnapshotOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Describes the status of a RestoreTableFromClusterSnapshot operation.
-	TableRestoreStatus *TableRestoreStatus `type:"structure"`
-}
-
-// String returns the string representation
-func (s RestoreTableFromClusterSnapshotOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opRestoreTableFromClusterSnapshot = "RestoreTableFromClusterSnapshot"
 
@@ -124,7 +36,7 @@ const opRestoreTableFromClusterSnapshot = "RestoreTableFromClusterSnapshot"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/RestoreTableFromClusterSnapshot
-func (c *Client) RestoreTableFromClusterSnapshotRequest(input *RestoreTableFromClusterSnapshotInput) RestoreTableFromClusterSnapshotRequest {
+func (c *Client) RestoreTableFromClusterSnapshotRequest(input *types.RestoreTableFromClusterSnapshotInput) RestoreTableFromClusterSnapshotRequest {
 	op := &aws.Operation{
 		Name:       opRestoreTableFromClusterSnapshot,
 		HTTPMethod: "POST",
@@ -132,10 +44,10 @@ func (c *Client) RestoreTableFromClusterSnapshotRequest(input *RestoreTableFromC
 	}
 
 	if input == nil {
-		input = &RestoreTableFromClusterSnapshotInput{}
+		input = &types.RestoreTableFromClusterSnapshotInput{}
 	}
 
-	req := c.newRequest(op, input, &RestoreTableFromClusterSnapshotOutput{})
+	req := c.newRequest(op, input, &types.RestoreTableFromClusterSnapshotOutput{})
 	return RestoreTableFromClusterSnapshotRequest{Request: req, Input: input, Copy: c.RestoreTableFromClusterSnapshotRequest}
 }
 
@@ -143,8 +55,8 @@ func (c *Client) RestoreTableFromClusterSnapshotRequest(input *RestoreTableFromC
 // RestoreTableFromClusterSnapshot API operation.
 type RestoreTableFromClusterSnapshotRequest struct {
 	*aws.Request
-	Input *RestoreTableFromClusterSnapshotInput
-	Copy  func(*RestoreTableFromClusterSnapshotInput) RestoreTableFromClusterSnapshotRequest
+	Input *types.RestoreTableFromClusterSnapshotInput
+	Copy  func(*types.RestoreTableFromClusterSnapshotInput) RestoreTableFromClusterSnapshotRequest
 }
 
 // Send marshals and sends the RestoreTableFromClusterSnapshot API request.
@@ -156,7 +68,7 @@ func (r RestoreTableFromClusterSnapshotRequest) Send(ctx context.Context) (*Rest
 	}
 
 	resp := &RestoreTableFromClusterSnapshotResponse{
-		RestoreTableFromClusterSnapshotOutput: r.Request.Data.(*RestoreTableFromClusterSnapshotOutput),
+		RestoreTableFromClusterSnapshotOutput: r.Request.Data.(*types.RestoreTableFromClusterSnapshotOutput),
 		response:                              &aws.Response{Request: r.Request},
 	}
 
@@ -166,7 +78,7 @@ func (r RestoreTableFromClusterSnapshotRequest) Send(ctx context.Context) (*Rest
 // RestoreTableFromClusterSnapshotResponse is the response type for the
 // RestoreTableFromClusterSnapshot API operation.
 type RestoreTableFromClusterSnapshotResponse struct {
-	*RestoreTableFromClusterSnapshotOutput
+	*types.RestoreTableFromClusterSnapshotOutput
 
 	response *aws.Response
 }

@@ -6,51 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoice/types"
 )
-
-// A request to create a new configuration set.
-type CreateConfigurationSetInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name that you want to give the configuration set.
-	ConfigurationSetName *string `type:"string"`
-}
-
-// String returns the string representation
-func (s CreateConfigurationSetInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s CreateConfigurationSetInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.ConfigurationSetName != nil {
-		v := *s.ConfigurationSetName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "ConfigurationSetName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-// An empty object that indicates that the configuration set was successfully
-// created.
-type CreateConfigurationSetOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s CreateConfigurationSetOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s CreateConfigurationSetOutput) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
 
 const opCreateConfigurationSet = "CreateConfigurationSet"
 
@@ -68,7 +25,7 @@ const opCreateConfigurationSet = "CreateConfigurationSet"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-2018-09-05/CreateConfigurationSet
-func (c *Client) CreateConfigurationSetRequest(input *CreateConfigurationSetInput) CreateConfigurationSetRequest {
+func (c *Client) CreateConfigurationSetRequest(input *types.CreateConfigurationSetInput) CreateConfigurationSetRequest {
 	op := &aws.Operation{
 		Name:       opCreateConfigurationSet,
 		HTTPMethod: "POST",
@@ -76,10 +33,10 @@ func (c *Client) CreateConfigurationSetRequest(input *CreateConfigurationSetInpu
 	}
 
 	if input == nil {
-		input = &CreateConfigurationSetInput{}
+		input = &types.CreateConfigurationSetInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateConfigurationSetOutput{})
+	req := c.newRequest(op, input, &types.CreateConfigurationSetOutput{})
 	return CreateConfigurationSetRequest{Request: req, Input: input, Copy: c.CreateConfigurationSetRequest}
 }
 
@@ -87,8 +44,8 @@ func (c *Client) CreateConfigurationSetRequest(input *CreateConfigurationSetInpu
 // CreateConfigurationSet API operation.
 type CreateConfigurationSetRequest struct {
 	*aws.Request
-	Input *CreateConfigurationSetInput
-	Copy  func(*CreateConfigurationSetInput) CreateConfigurationSetRequest
+	Input *types.CreateConfigurationSetInput
+	Copy  func(*types.CreateConfigurationSetInput) CreateConfigurationSetRequest
 }
 
 // Send marshals and sends the CreateConfigurationSet API request.
@@ -100,7 +57,7 @@ func (r CreateConfigurationSetRequest) Send(ctx context.Context) (*CreateConfigu
 	}
 
 	resp := &CreateConfigurationSetResponse{
-		CreateConfigurationSetOutput: r.Request.Data.(*CreateConfigurationSetOutput),
+		CreateConfigurationSetOutput: r.Request.Data.(*types.CreateConfigurationSetOutput),
 		response:                     &aws.Response{Request: r.Request},
 	}
 
@@ -110,7 +67,7 @@ func (r CreateConfigurationSetRequest) Send(ctx context.Context) (*CreateConfigu
 // CreateConfigurationSetResponse is the response type for the
 // CreateConfigurationSet API operation.
 type CreateConfigurationSetResponse struct {
-	*CreateConfigurationSetOutput
+	*types.CreateConfigurationSetOutput
 
 	response *aws.Response
 }

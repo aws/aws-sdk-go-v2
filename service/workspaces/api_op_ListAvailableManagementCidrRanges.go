@@ -6,67 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/workspaces/types"
 )
-
-type ListAvailableManagementCidrRangesInput struct {
-	_ struct{} `type:"structure"`
-
-	// The IP address range to search. Specify an IP address range that is compatible
-	// with your network and in CIDR notation (that is, specify the range as an
-	// IPv4 CIDR block).
-	//
-	// ManagementCidrRangeConstraint is a required field
-	ManagementCidrRangeConstraint *string `type:"string" required:"true"`
-
-	// The maximum number of items to return.
-	MaxResults *int64 `min:"1" type:"integer"`
-
-	// If you received a NextToken from a previous call that was paginated, provide
-	// this token to receive the next set of results.
-	NextToken *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s ListAvailableManagementCidrRangesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListAvailableManagementCidrRangesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListAvailableManagementCidrRangesInput"}
-
-	if s.ManagementCidrRangeConstraint == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ManagementCidrRangeConstraint"))
-	}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-	if s.NextToken != nil && len(*s.NextToken) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ListAvailableManagementCidrRangesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The list of available IP address ranges, specified as IPv4 CIDR blocks.
-	ManagementCidrRanges []string `type:"list"`
-
-	// The token to use to retrieve the next set of results, or null if no more
-	// results are available.
-	NextToken *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s ListAvailableManagementCidrRangesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListAvailableManagementCidrRanges = "ListAvailableManagementCidrRanges"
 
@@ -74,8 +15,8 @@ const opListAvailableManagementCidrRanges = "ListAvailableManagementCidrRanges"
 // Amazon WorkSpaces.
 //
 // Retrieves a list of IP address ranges, specified as IPv4 CIDR blocks, that
-// you can use for the network management interface when you enable bring your
-// own license (BYOL).
+// you can use for the network management interface when you enable Bring Your
+// Own License (BYOL).
 //
 // The management network interface is connected to a secure Amazon WorkSpaces
 // management network. It is used for interactive streaming of the WorkSpace
@@ -90,7 +31,7 @@ const opListAvailableManagementCidrRanges = "ListAvailableManagementCidrRanges"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/ListAvailableManagementCidrRanges
-func (c *Client) ListAvailableManagementCidrRangesRequest(input *ListAvailableManagementCidrRangesInput) ListAvailableManagementCidrRangesRequest {
+func (c *Client) ListAvailableManagementCidrRangesRequest(input *types.ListAvailableManagementCidrRangesInput) ListAvailableManagementCidrRangesRequest {
 	op := &aws.Operation{
 		Name:       opListAvailableManagementCidrRanges,
 		HTTPMethod: "POST",
@@ -98,10 +39,10 @@ func (c *Client) ListAvailableManagementCidrRangesRequest(input *ListAvailableMa
 	}
 
 	if input == nil {
-		input = &ListAvailableManagementCidrRangesInput{}
+		input = &types.ListAvailableManagementCidrRangesInput{}
 	}
 
-	req := c.newRequest(op, input, &ListAvailableManagementCidrRangesOutput{})
+	req := c.newRequest(op, input, &types.ListAvailableManagementCidrRangesOutput{})
 	return ListAvailableManagementCidrRangesRequest{Request: req, Input: input, Copy: c.ListAvailableManagementCidrRangesRequest}
 }
 
@@ -109,8 +50,8 @@ func (c *Client) ListAvailableManagementCidrRangesRequest(input *ListAvailableMa
 // ListAvailableManagementCidrRanges API operation.
 type ListAvailableManagementCidrRangesRequest struct {
 	*aws.Request
-	Input *ListAvailableManagementCidrRangesInput
-	Copy  func(*ListAvailableManagementCidrRangesInput) ListAvailableManagementCidrRangesRequest
+	Input *types.ListAvailableManagementCidrRangesInput
+	Copy  func(*types.ListAvailableManagementCidrRangesInput) ListAvailableManagementCidrRangesRequest
 }
 
 // Send marshals and sends the ListAvailableManagementCidrRanges API request.
@@ -122,7 +63,7 @@ func (r ListAvailableManagementCidrRangesRequest) Send(ctx context.Context) (*Li
 	}
 
 	resp := &ListAvailableManagementCidrRangesResponse{
-		ListAvailableManagementCidrRangesOutput: r.Request.Data.(*ListAvailableManagementCidrRangesOutput),
+		ListAvailableManagementCidrRangesOutput: r.Request.Data.(*types.ListAvailableManagementCidrRangesOutput),
 		response:                                &aws.Response{Request: r.Request},
 	}
 
@@ -132,7 +73,7 @@ func (r ListAvailableManagementCidrRangesRequest) Send(ctx context.Context) (*Li
 // ListAvailableManagementCidrRangesResponse is the response type for the
 // ListAvailableManagementCidrRanges API operation.
 type ListAvailableManagementCidrRangesResponse struct {
-	*ListAvailableManagementCidrRangesOutput
+	*types.ListAvailableManagementCidrRangesOutput
 
 	response *aws.Response
 }

@@ -6,56 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-type DescribePublicIpv4PoolsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The maximum number of results to return with a single call. To retrieve the
-	// remaining results, make another call with the returned nextToken value.
-	MaxResults *int64 `min:"1" type:"integer"`
-
-	// The token for the next page of results.
-	NextToken *string `type:"string"`
-
-	// The IDs of the address pools.
-	PoolIds []string `locationName:"PoolId" locationNameList:"item" type:"list"`
-}
-
-// String returns the string representation
-func (s DescribePublicIpv4PoolsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribePublicIpv4PoolsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribePublicIpv4PoolsInput"}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribePublicIpv4PoolsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The token to use to retrieve the next page of results. This value is null
-	// when there are no more results to return.
-	NextToken *string `locationName:"nextToken" type:"string"`
-
-	// Information about the address pools.
-	PublicIpv4Pools []PublicIpv4Pool `locationName:"publicIpv4PoolSet" locationNameList:"item" type:"list"`
-}
-
-// String returns the string representation
-func (s DescribePublicIpv4PoolsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribePublicIpv4Pools = "DescribePublicIpv4Pools"
 
@@ -72,7 +24,7 @@ const opDescribePublicIpv4Pools = "DescribePublicIpv4Pools"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribePublicIpv4Pools
-func (c *Client) DescribePublicIpv4PoolsRequest(input *DescribePublicIpv4PoolsInput) DescribePublicIpv4PoolsRequest {
+func (c *Client) DescribePublicIpv4PoolsRequest(input *types.DescribePublicIpv4PoolsInput) DescribePublicIpv4PoolsRequest {
 	op := &aws.Operation{
 		Name:       opDescribePublicIpv4Pools,
 		HTTPMethod: "POST",
@@ -86,10 +38,10 @@ func (c *Client) DescribePublicIpv4PoolsRequest(input *DescribePublicIpv4PoolsIn
 	}
 
 	if input == nil {
-		input = &DescribePublicIpv4PoolsInput{}
+		input = &types.DescribePublicIpv4PoolsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribePublicIpv4PoolsOutput{})
+	req := c.newRequest(op, input, &types.DescribePublicIpv4PoolsOutput{})
 	return DescribePublicIpv4PoolsRequest{Request: req, Input: input, Copy: c.DescribePublicIpv4PoolsRequest}
 }
 
@@ -97,8 +49,8 @@ func (c *Client) DescribePublicIpv4PoolsRequest(input *DescribePublicIpv4PoolsIn
 // DescribePublicIpv4Pools API operation.
 type DescribePublicIpv4PoolsRequest struct {
 	*aws.Request
-	Input *DescribePublicIpv4PoolsInput
-	Copy  func(*DescribePublicIpv4PoolsInput) DescribePublicIpv4PoolsRequest
+	Input *types.DescribePublicIpv4PoolsInput
+	Copy  func(*types.DescribePublicIpv4PoolsInput) DescribePublicIpv4PoolsRequest
 }
 
 // Send marshals and sends the DescribePublicIpv4Pools API request.
@@ -110,7 +62,7 @@ func (r DescribePublicIpv4PoolsRequest) Send(ctx context.Context) (*DescribePubl
 	}
 
 	resp := &DescribePublicIpv4PoolsResponse{
-		DescribePublicIpv4PoolsOutput: r.Request.Data.(*DescribePublicIpv4PoolsOutput),
+		DescribePublicIpv4PoolsOutput: r.Request.Data.(*types.DescribePublicIpv4PoolsOutput),
 		response:                      &aws.Response{Request: r.Request},
 	}
 
@@ -140,7 +92,7 @@ func NewDescribePublicIpv4PoolsPaginator(req DescribePublicIpv4PoolsRequest) Des
 	return DescribePublicIpv4PoolsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *DescribePublicIpv4PoolsInput
+				var inCpy *types.DescribePublicIpv4PoolsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -160,14 +112,14 @@ type DescribePublicIpv4PoolsPaginator struct {
 	aws.Pager
 }
 
-func (p *DescribePublicIpv4PoolsPaginator) CurrentPage() *DescribePublicIpv4PoolsOutput {
-	return p.Pager.CurrentPage().(*DescribePublicIpv4PoolsOutput)
+func (p *DescribePublicIpv4PoolsPaginator) CurrentPage() *types.DescribePublicIpv4PoolsOutput {
+	return p.Pager.CurrentPage().(*types.DescribePublicIpv4PoolsOutput)
 }
 
 // DescribePublicIpv4PoolsResponse is the response type for the
 // DescribePublicIpv4Pools API operation.
 type DescribePublicIpv4PoolsResponse struct {
-	*DescribePublicIpv4PoolsOutput
+	*types.DescribePublicIpv4PoolsOutput
 
 	response *aws.Response
 }

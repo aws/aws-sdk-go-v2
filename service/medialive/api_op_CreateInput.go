@@ -6,182 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/medialive/types"
 )
-
-type CreateInputInput struct {
-	_ struct{} `type:"structure"`
-
-	Destinations []InputDestinationRequest `locationName:"destinations" type:"list"`
-
-	InputSecurityGroups []string `locationName:"inputSecurityGroups" type:"list"`
-
-	MediaConnectFlows []MediaConnectFlowRequest `locationName:"mediaConnectFlows" type:"list"`
-
-	Name *string `locationName:"name" type:"string"`
-
-	RequestId *string `locationName:"requestId" type:"string" idempotencyToken:"true"`
-
-	RoleArn *string `locationName:"roleArn" type:"string"`
-
-	Sources []InputSourceRequest `locationName:"sources" type:"list"`
-
-	Tags map[string]string `locationName:"tags" type:"map"`
-
-	Type InputType `locationName:"type" type:"string" enum:"true"`
-
-	// Settings for a private VPC Input.When this property is specified, the input
-	// destination addresses will be created in a VPC rather than with public Internet
-	// addresses.This property requires setting the roleArn property on Input creation.Not
-	// compatible with the inputSecurityGroups property.
-	Vpc *InputVpcRequest `locationName:"vpc" type:"structure"`
-}
-
-// String returns the string representation
-func (s CreateInputInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateInputInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateInputInput"}
-	if s.Vpc != nil {
-		if err := s.Vpc.Validate(); err != nil {
-			invalidParams.AddNested("Vpc", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s CreateInputInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.Destinations != nil {
-		v := s.Destinations
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "destinations", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	if s.InputSecurityGroups != nil {
-		v := s.InputSecurityGroups
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "inputSecurityGroups", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
-		}
-		ls0.End()
-
-	}
-	if s.MediaConnectFlows != nil {
-		v := s.MediaConnectFlows
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "mediaConnectFlows", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	if s.Name != nil {
-		v := *s.Name
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	var RequestId string
-	if s.RequestId != nil {
-		RequestId = *s.RequestId
-	} else {
-		RequestId = protocol.GetIdempotencyToken()
-	}
-	{
-		v := RequestId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "requestId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.RoleArn != nil {
-		v := *s.RoleArn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "roleArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Sources != nil {
-		v := s.Sources
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "sources", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	if s.Tags != nil {
-		v := s.Tags
-
-		metadata := protocol.Metadata{}
-		ms0 := e.Map(protocol.BodyTarget, "tags", metadata)
-		ms0.Start()
-		for k1, v1 := range v {
-			ms0.MapSetValue(k1, protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
-		}
-		ms0.End()
-
-	}
-	if len(s.Type) > 0 {
-		v := s.Type
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "type", protocol.QuotedValue{ValueMarshaler: v}, metadata)
-	}
-	if s.Vpc != nil {
-		v := s.Vpc
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "vpc", v, metadata)
-	}
-	return nil
-}
-
-type CreateInputOutput struct {
-	_ struct{} `type:"structure"`
-
-	Input *Input `locationName:"input" type:"structure"`
-}
-
-// String returns the string representation
-func (s CreateInputOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s CreateInputOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.Input != nil {
-		v := s.Input
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "input", v, metadata)
-	}
-	return nil
-}
 
 const opCreateInput = "CreateInput"
 
@@ -198,7 +24,7 @@ const opCreateInput = "CreateInput"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/CreateInput
-func (c *Client) CreateInputRequest(input *CreateInputInput) CreateInputRequest {
+func (c *Client) CreateInputRequest(input *types.CreateInputInput) CreateInputRequest {
 	op := &aws.Operation{
 		Name:       opCreateInput,
 		HTTPMethod: "POST",
@@ -206,10 +32,10 @@ func (c *Client) CreateInputRequest(input *CreateInputInput) CreateInputRequest 
 	}
 
 	if input == nil {
-		input = &CreateInputInput{}
+		input = &types.CreateInputInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateInputOutput{})
+	req := c.newRequest(op, input, &types.CreateInputOutput{})
 	return CreateInputRequest{Request: req, Input: input, Copy: c.CreateInputRequest}
 }
 
@@ -217,8 +43,8 @@ func (c *Client) CreateInputRequest(input *CreateInputInput) CreateInputRequest 
 // CreateInput API operation.
 type CreateInputRequest struct {
 	*aws.Request
-	Input *CreateInputInput
-	Copy  func(*CreateInputInput) CreateInputRequest
+	Input *types.CreateInputInput
+	Copy  func(*types.CreateInputInput) CreateInputRequest
 }
 
 // Send marshals and sends the CreateInput API request.
@@ -230,7 +56,7 @@ func (r CreateInputRequest) Send(ctx context.Context) (*CreateInputResponse, err
 	}
 
 	resp := &CreateInputResponse{
-		CreateInputOutput: r.Request.Data.(*CreateInputOutput),
+		CreateInputOutput: r.Request.Data.(*types.CreateInputOutput),
 		response:          &aws.Response{Request: r.Request},
 	}
 
@@ -240,7 +66,7 @@ func (r CreateInputRequest) Send(ctx context.Context) (*CreateInputResponse, err
 // CreateInputResponse is the response type for the
 // CreateInput API operation.
 type CreateInputResponse struct {
-	*CreateInputOutput
+	*types.CreateInputOutput
 
 	response *aws.Response
 }

@@ -6,87 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/rds/types"
 )
-
-type StartActivityStreamInput struct {
-	_ struct{} `type:"structure"`
-
-	// Specifies whether or not the database activity stream is to start as soon
-	// as possible, regardless of the maintenance window for the database.
-	ApplyImmediately *bool `type:"boolean"`
-
-	// The AWS KMS key identifier for encrypting messages in the database activity
-	// stream. The key identifier can be either a key ID, a key ARN, or a key alias.
-	//
-	// KmsKeyId is a required field
-	KmsKeyId *string `type:"string" required:"true"`
-
-	// Specifies the mode of the database activity stream. Database events such
-	// as a change or access generate an activity stream event. The database session
-	// can handle these events either synchronously or asynchronously.
-	//
-	// Mode is a required field
-	Mode ActivityStreamMode `type:"string" required:"true" enum:"true"`
-
-	// The Amazon Resource Name (ARN) of the DB cluster, for example arn:aws:rds:us-east-1:12345667890:cluster:das-cluster.
-	//
-	// ResourceArn is a required field
-	ResourceArn *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s StartActivityStreamInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *StartActivityStreamInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "StartActivityStreamInput"}
-
-	if s.KmsKeyId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("KmsKeyId"))
-	}
-	if len(s.Mode) == 0 {
-		invalidParams.Add(aws.NewErrParamRequired("Mode"))
-	}
-
-	if s.ResourceArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ResourceArn"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type StartActivityStreamOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Indicates whether or not the database activity stream will start as soon
-	// as possible, regardless of the maintenance window for the database.
-	ApplyImmediately *bool `type:"boolean"`
-
-	// The name of the Amazon Kinesis data stream to be used for the database activity
-	// stream.
-	KinesisStreamName *string `type:"string"`
-
-	// The AWS KMS key identifier for encryption of messages in the database activity
-	// stream.
-	KmsKeyId *string `type:"string"`
-
-	// The mode of the database activity stream.
-	Mode ActivityStreamMode `type:"string" enum:"true"`
-
-	// The status of the database activity stream.
-	Status ActivityStreamStatus `type:"string" enum:"true"`
-}
-
-// String returns the string representation
-func (s StartActivityStreamOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opStartActivityStream = "StartActivityStream"
 
@@ -105,7 +26,7 @@ const opStartActivityStream = "StartActivityStream"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/StartActivityStream
-func (c *Client) StartActivityStreamRequest(input *StartActivityStreamInput) StartActivityStreamRequest {
+func (c *Client) StartActivityStreamRequest(input *types.StartActivityStreamInput) StartActivityStreamRequest {
 	op := &aws.Operation{
 		Name:       opStartActivityStream,
 		HTTPMethod: "POST",
@@ -113,10 +34,10 @@ func (c *Client) StartActivityStreamRequest(input *StartActivityStreamInput) Sta
 	}
 
 	if input == nil {
-		input = &StartActivityStreamInput{}
+		input = &types.StartActivityStreamInput{}
 	}
 
-	req := c.newRequest(op, input, &StartActivityStreamOutput{})
+	req := c.newRequest(op, input, &types.StartActivityStreamOutput{})
 	return StartActivityStreamRequest{Request: req, Input: input, Copy: c.StartActivityStreamRequest}
 }
 
@@ -124,8 +45,8 @@ func (c *Client) StartActivityStreamRequest(input *StartActivityStreamInput) Sta
 // StartActivityStream API operation.
 type StartActivityStreamRequest struct {
 	*aws.Request
-	Input *StartActivityStreamInput
-	Copy  func(*StartActivityStreamInput) StartActivityStreamRequest
+	Input *types.StartActivityStreamInput
+	Copy  func(*types.StartActivityStreamInput) StartActivityStreamRequest
 }
 
 // Send marshals and sends the StartActivityStream API request.
@@ -137,7 +58,7 @@ func (r StartActivityStreamRequest) Send(ctx context.Context) (*StartActivityStr
 	}
 
 	resp := &StartActivityStreamResponse{
-		StartActivityStreamOutput: r.Request.Data.(*StartActivityStreamOutput),
+		StartActivityStreamOutput: r.Request.Data.(*types.StartActivityStreamOutput),
 		response:                  &aws.Response{Request: r.Request},
 	}
 
@@ -147,7 +68,7 @@ func (r StartActivityStreamRequest) Send(ctx context.Context) (*StartActivityStr
 // StartActivityStreamResponse is the response type for the
 // StartActivityStream API operation.
 type StartActivityStreamResponse struct {
-	*StartActivityStreamOutput
+	*types.StartActivityStreamOutput
 
 	response *aws.Response
 }

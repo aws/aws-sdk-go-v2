@@ -6,73 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/chime/types"
 )
-
-type GetVoiceConnectorTerminationInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Chime Voice Connector ID.
-	//
-	// VoiceConnectorId is a required field
-	VoiceConnectorId *string `location:"uri" locationName:"voiceConnectorId" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetVoiceConnectorTerminationInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetVoiceConnectorTerminationInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetVoiceConnectorTerminationInput"}
-
-	if s.VoiceConnectorId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("VoiceConnectorId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetVoiceConnectorTerminationInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.VoiceConnectorId != nil {
-		v := *s.VoiceConnectorId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "voiceConnectorId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type GetVoiceConnectorTerminationOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The termination setting details.
-	Termination *Termination `type:"structure"`
-}
-
-// String returns the string representation
-func (s GetVoiceConnectorTerminationOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetVoiceConnectorTerminationOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.Termination != nil {
-		v := s.Termination
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "Termination", v, metadata)
-	}
-	return nil
-}
 
 const opGetVoiceConnectorTermination = "GetVoiceConnectorTermination"
 
@@ -90,7 +25,7 @@ const opGetVoiceConnectorTermination = "GetVoiceConnectorTermination"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/GetVoiceConnectorTermination
-func (c *Client) GetVoiceConnectorTerminationRequest(input *GetVoiceConnectorTerminationInput) GetVoiceConnectorTerminationRequest {
+func (c *Client) GetVoiceConnectorTerminationRequest(input *types.GetVoiceConnectorTerminationInput) GetVoiceConnectorTerminationRequest {
 	op := &aws.Operation{
 		Name:       opGetVoiceConnectorTermination,
 		HTTPMethod: "GET",
@@ -98,10 +33,10 @@ func (c *Client) GetVoiceConnectorTerminationRequest(input *GetVoiceConnectorTer
 	}
 
 	if input == nil {
-		input = &GetVoiceConnectorTerminationInput{}
+		input = &types.GetVoiceConnectorTerminationInput{}
 	}
 
-	req := c.newRequest(op, input, &GetVoiceConnectorTerminationOutput{})
+	req := c.newRequest(op, input, &types.GetVoiceConnectorTerminationOutput{})
 	return GetVoiceConnectorTerminationRequest{Request: req, Input: input, Copy: c.GetVoiceConnectorTerminationRequest}
 }
 
@@ -109,8 +44,8 @@ func (c *Client) GetVoiceConnectorTerminationRequest(input *GetVoiceConnectorTer
 // GetVoiceConnectorTermination API operation.
 type GetVoiceConnectorTerminationRequest struct {
 	*aws.Request
-	Input *GetVoiceConnectorTerminationInput
-	Copy  func(*GetVoiceConnectorTerminationInput) GetVoiceConnectorTerminationRequest
+	Input *types.GetVoiceConnectorTerminationInput
+	Copy  func(*types.GetVoiceConnectorTerminationInput) GetVoiceConnectorTerminationRequest
 }
 
 // Send marshals and sends the GetVoiceConnectorTermination API request.
@@ -122,7 +57,7 @@ func (r GetVoiceConnectorTerminationRequest) Send(ctx context.Context) (*GetVoic
 	}
 
 	resp := &GetVoiceConnectorTerminationResponse{
-		GetVoiceConnectorTerminationOutput: r.Request.Data.(*GetVoiceConnectorTerminationOutput),
+		GetVoiceConnectorTerminationOutput: r.Request.Data.(*types.GetVoiceConnectorTerminationOutput),
 		response:                           &aws.Response{Request: r.Request},
 	}
 
@@ -132,7 +67,7 @@ func (r GetVoiceConnectorTerminationRequest) Send(ctx context.Context) (*GetVoic
 // GetVoiceConnectorTerminationResponse is the response type for the
 // GetVoiceConnectorTermination API operation.
 type GetVoiceConnectorTerminationResponse struct {
-	*GetVoiceConnectorTerminationOutput
+	*types.GetVoiceConnectorTerminationOutput
 
 	response *aws.Response
 }

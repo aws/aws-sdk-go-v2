@@ -6,51 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
+	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/types"
 )
-
-// Represents the request to delete a user pool.
-type DeleteUserPoolInput struct {
-	_ struct{} `type:"structure"`
-
-	// The user pool ID for the user pool you want to delete.
-	//
-	// UserPoolId is a required field
-	UserPoolId *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteUserPoolInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteUserPoolInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteUserPoolInput"}
-
-	if s.UserPoolId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("UserPoolId"))
-	}
-	if s.UserPoolId != nil && len(*s.UserPoolId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("UserPoolId", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteUserPoolOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteUserPoolOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteUserPool = "DeleteUserPool"
 
@@ -67,7 +26,7 @@ const opDeleteUserPool = "DeleteUserPool"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/DeleteUserPool
-func (c *Client) DeleteUserPoolRequest(input *DeleteUserPoolInput) DeleteUserPoolRequest {
+func (c *Client) DeleteUserPoolRequest(input *types.DeleteUserPoolInput) DeleteUserPoolRequest {
 	op := &aws.Operation{
 		Name:       opDeleteUserPool,
 		HTTPMethod: "POST",
@@ -75,10 +34,10 @@ func (c *Client) DeleteUserPoolRequest(input *DeleteUserPoolInput) DeleteUserPoo
 	}
 
 	if input == nil {
-		input = &DeleteUserPoolInput{}
+		input = &types.DeleteUserPoolInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteUserPoolOutput{})
+	req := c.newRequest(op, input, &types.DeleteUserPoolOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return DeleteUserPoolRequest{Request: req, Input: input, Copy: c.DeleteUserPoolRequest}
@@ -88,8 +47,8 @@ func (c *Client) DeleteUserPoolRequest(input *DeleteUserPoolInput) DeleteUserPoo
 // DeleteUserPool API operation.
 type DeleteUserPoolRequest struct {
 	*aws.Request
-	Input *DeleteUserPoolInput
-	Copy  func(*DeleteUserPoolInput) DeleteUserPoolRequest
+	Input *types.DeleteUserPoolInput
+	Copy  func(*types.DeleteUserPoolInput) DeleteUserPoolRequest
 }
 
 // Send marshals and sends the DeleteUserPool API request.
@@ -101,7 +60,7 @@ func (r DeleteUserPoolRequest) Send(ctx context.Context) (*DeleteUserPoolRespons
 	}
 
 	resp := &DeleteUserPoolResponse{
-		DeleteUserPoolOutput: r.Request.Data.(*DeleteUserPoolOutput),
+		DeleteUserPoolOutput: r.Request.Data.(*types.DeleteUserPoolOutput),
 		response:             &aws.Response{Request: r.Request},
 	}
 
@@ -111,7 +70,7 @@ func (r DeleteUserPoolRequest) Send(ctx context.Context) (*DeleteUserPoolRespons
 // DeleteUserPoolResponse is the response type for the
 // DeleteUserPool API operation.
 type DeleteUserPoolResponse struct {
-	*DeleteUserPoolOutput
+	*types.DeleteUserPoolOutput
 
 	response *aws.Response
 }

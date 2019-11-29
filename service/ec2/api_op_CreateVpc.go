@@ -6,71 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-type CreateVpcInput struct {
-	_ struct{} `type:"structure"`
-
-	// Requests an Amazon-provided IPv6 CIDR block with a /56 prefix length for
-	// the VPC. You cannot specify the range of IP addresses, or the size of the
-	// CIDR block.
-	AmazonProvidedIpv6CidrBlock *bool `locationName:"amazonProvidedIpv6CidrBlock" type:"boolean"`
-
-	// The IPv4 network range for the VPC, in CIDR notation. For example, 10.0.0.0/16.
-	//
-	// CidrBlock is a required field
-	CidrBlock *string `type:"string" required:"true"`
-
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have
-	// the required permissions, the error response is DryRunOperation. Otherwise,
-	// it is UnauthorizedOperation.
-	DryRun *bool `locationName:"dryRun" type:"boolean"`
-
-	// The tenancy options for instances launched into the VPC. For default, instances
-	// are launched with shared tenancy by default. You can launch instances with
-	// any tenancy into a shared tenancy VPC. For dedicated, instances are launched
-	// as dedicated tenancy instances by default. You can only launch instances
-	// with a tenancy of dedicated or host into a dedicated tenancy VPC.
-	//
-	// Important: The host value cannot be used with this parameter. Use the default
-	// or dedicated values only.
-	//
-	// Default: default
-	InstanceTenancy Tenancy `locationName:"instanceTenancy" type:"string" enum:"true"`
-}
-
-// String returns the string representation
-func (s CreateVpcInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateVpcInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateVpcInput"}
-
-	if s.CidrBlock == nil {
-		invalidParams.Add(aws.NewErrParamRequired("CidrBlock"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type CreateVpcOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Information about the VPC.
-	Vpc *Vpc `locationName:"vpc" type:"structure"`
-}
-
-// String returns the string representation
-func (s CreateVpcOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCreateVpc = "CreateVpc"
 
@@ -105,7 +42,7 @@ const opCreateVpc = "CreateVpc"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateVpc
-func (c *Client) CreateVpcRequest(input *CreateVpcInput) CreateVpcRequest {
+func (c *Client) CreateVpcRequest(input *types.CreateVpcInput) CreateVpcRequest {
 	op := &aws.Operation{
 		Name:       opCreateVpc,
 		HTTPMethod: "POST",
@@ -113,10 +50,10 @@ func (c *Client) CreateVpcRequest(input *CreateVpcInput) CreateVpcRequest {
 	}
 
 	if input == nil {
-		input = &CreateVpcInput{}
+		input = &types.CreateVpcInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateVpcOutput{})
+	req := c.newRequest(op, input, &types.CreateVpcOutput{})
 	return CreateVpcRequest{Request: req, Input: input, Copy: c.CreateVpcRequest}
 }
 
@@ -124,8 +61,8 @@ func (c *Client) CreateVpcRequest(input *CreateVpcInput) CreateVpcRequest {
 // CreateVpc API operation.
 type CreateVpcRequest struct {
 	*aws.Request
-	Input *CreateVpcInput
-	Copy  func(*CreateVpcInput) CreateVpcRequest
+	Input *types.CreateVpcInput
+	Copy  func(*types.CreateVpcInput) CreateVpcRequest
 }
 
 // Send marshals and sends the CreateVpc API request.
@@ -137,7 +74,7 @@ func (r CreateVpcRequest) Send(ctx context.Context) (*CreateVpcResponse, error) 
 	}
 
 	resp := &CreateVpcResponse{
-		CreateVpcOutput: r.Request.Data.(*CreateVpcOutput),
+		CreateVpcOutput: r.Request.Data.(*types.CreateVpcOutput),
 		response:        &aws.Response{Request: r.Request},
 	}
 
@@ -147,7 +84,7 @@ func (r CreateVpcRequest) Send(ctx context.Context) (*CreateVpcResponse, error) 
 // CreateVpcResponse is the response type for the
 // CreateVpc API operation.
 type CreateVpcResponse struct {
-	*CreateVpcOutput
+	*types.CreateVpcOutput
 
 	response *aws.Response
 }

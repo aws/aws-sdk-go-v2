@@ -6,49 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/lightsail/types"
 )
-
-type GetRelationalDatabaseLogStreamsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of your database for which to get log streams.
-	//
-	// RelationalDatabaseName is a required field
-	RelationalDatabaseName *string `locationName:"relationalDatabaseName" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetRelationalDatabaseLogStreamsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetRelationalDatabaseLogStreamsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetRelationalDatabaseLogStreamsInput"}
-
-	if s.RelationalDatabaseName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("RelationalDatabaseName"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type GetRelationalDatabaseLogStreamsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// An object describing the result of your get relational database log streams
-	// request.
-	LogStreams []string `locationName:"logStreams" type:"list"`
-}
-
-// String returns the string representation
-func (s GetRelationalDatabaseLogStreamsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetRelationalDatabaseLogStreams = "GetRelationalDatabaseLogStreams"
 
@@ -66,7 +25,7 @@ const opGetRelationalDatabaseLogStreams = "GetRelationalDatabaseLogStreams"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetRelationalDatabaseLogStreams
-func (c *Client) GetRelationalDatabaseLogStreamsRequest(input *GetRelationalDatabaseLogStreamsInput) GetRelationalDatabaseLogStreamsRequest {
+func (c *Client) GetRelationalDatabaseLogStreamsRequest(input *types.GetRelationalDatabaseLogStreamsInput) GetRelationalDatabaseLogStreamsRequest {
 	op := &aws.Operation{
 		Name:       opGetRelationalDatabaseLogStreams,
 		HTTPMethod: "POST",
@@ -74,10 +33,10 @@ func (c *Client) GetRelationalDatabaseLogStreamsRequest(input *GetRelationalData
 	}
 
 	if input == nil {
-		input = &GetRelationalDatabaseLogStreamsInput{}
+		input = &types.GetRelationalDatabaseLogStreamsInput{}
 	}
 
-	req := c.newRequest(op, input, &GetRelationalDatabaseLogStreamsOutput{})
+	req := c.newRequest(op, input, &types.GetRelationalDatabaseLogStreamsOutput{})
 	return GetRelationalDatabaseLogStreamsRequest{Request: req, Input: input, Copy: c.GetRelationalDatabaseLogStreamsRequest}
 }
 
@@ -85,8 +44,8 @@ func (c *Client) GetRelationalDatabaseLogStreamsRequest(input *GetRelationalData
 // GetRelationalDatabaseLogStreams API operation.
 type GetRelationalDatabaseLogStreamsRequest struct {
 	*aws.Request
-	Input *GetRelationalDatabaseLogStreamsInput
-	Copy  func(*GetRelationalDatabaseLogStreamsInput) GetRelationalDatabaseLogStreamsRequest
+	Input *types.GetRelationalDatabaseLogStreamsInput
+	Copy  func(*types.GetRelationalDatabaseLogStreamsInput) GetRelationalDatabaseLogStreamsRequest
 }
 
 // Send marshals and sends the GetRelationalDatabaseLogStreams API request.
@@ -98,7 +57,7 @@ func (r GetRelationalDatabaseLogStreamsRequest) Send(ctx context.Context) (*GetR
 	}
 
 	resp := &GetRelationalDatabaseLogStreamsResponse{
-		GetRelationalDatabaseLogStreamsOutput: r.Request.Data.(*GetRelationalDatabaseLogStreamsOutput),
+		GetRelationalDatabaseLogStreamsOutput: r.Request.Data.(*types.GetRelationalDatabaseLogStreamsOutput),
 		response:                              &aws.Response{Request: r.Request},
 	}
 
@@ -108,7 +67,7 @@ func (r GetRelationalDatabaseLogStreamsRequest) Send(ctx context.Context) (*GetR
 // GetRelationalDatabaseLogStreamsResponse is the response type for the
 // GetRelationalDatabaseLogStreams API operation.
 type GetRelationalDatabaseLogStreamsResponse struct {
-	*GetRelationalDatabaseLogStreamsOutput
+	*types.GetRelationalDatabaseLogStreamsOutput
 
 	response *aws.Response
 }

@@ -6,53 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/snowball/types"
 )
-
-type GetJobManifestInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID for a job that you want to get the manifest file for, for example
-	// JID123e4567-e89b-12d3-a456-426655440000.
-	//
-	// JobId is a required field
-	JobId *string `min:"39" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetJobManifestInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetJobManifestInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetJobManifestInput"}
-
-	if s.JobId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("JobId"))
-	}
-	if s.JobId != nil && len(*s.JobId) < 39 {
-		invalidParams.Add(aws.NewErrParamMinLen("JobId", 39))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type GetJobManifestOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon S3 presigned URL for the manifest file associated with the specified
-	// JobId value.
-	ManifestURI *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s GetJobManifestOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetJobManifest = "GetJobManifest"
 
@@ -86,7 +41,7 @@ const opGetJobManifest = "GetJobManifest"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/GetJobManifest
-func (c *Client) GetJobManifestRequest(input *GetJobManifestInput) GetJobManifestRequest {
+func (c *Client) GetJobManifestRequest(input *types.GetJobManifestInput) GetJobManifestRequest {
 	op := &aws.Operation{
 		Name:       opGetJobManifest,
 		HTTPMethod: "POST",
@@ -94,10 +49,10 @@ func (c *Client) GetJobManifestRequest(input *GetJobManifestInput) GetJobManifes
 	}
 
 	if input == nil {
-		input = &GetJobManifestInput{}
+		input = &types.GetJobManifestInput{}
 	}
 
-	req := c.newRequest(op, input, &GetJobManifestOutput{})
+	req := c.newRequest(op, input, &types.GetJobManifestOutput{})
 	return GetJobManifestRequest{Request: req, Input: input, Copy: c.GetJobManifestRequest}
 }
 
@@ -105,8 +60,8 @@ func (c *Client) GetJobManifestRequest(input *GetJobManifestInput) GetJobManifes
 // GetJobManifest API operation.
 type GetJobManifestRequest struct {
 	*aws.Request
-	Input *GetJobManifestInput
-	Copy  func(*GetJobManifestInput) GetJobManifestRequest
+	Input *types.GetJobManifestInput
+	Copy  func(*types.GetJobManifestInput) GetJobManifestRequest
 }
 
 // Send marshals and sends the GetJobManifest API request.
@@ -118,7 +73,7 @@ func (r GetJobManifestRequest) Send(ctx context.Context) (*GetJobManifestRespons
 	}
 
 	resp := &GetJobManifestResponse{
-		GetJobManifestOutput: r.Request.Data.(*GetJobManifestOutput),
+		GetJobManifestOutput: r.Request.Data.(*types.GetJobManifestOutput),
 		response:             &aws.Response{Request: r.Request},
 	}
 
@@ -128,7 +83,7 @@ func (r GetJobManifestRequest) Send(ctx context.Context) (*GetJobManifestRespons
 // GetJobManifestResponse is the response type for the
 // GetJobManifest API operation.
 type GetJobManifestResponse struct {
-	*GetJobManifestOutput
+	*types.GetJobManifestOutput
 
 	response *aws.Response
 }

@@ -6,102 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/chime/types"
 )
-
-type BatchUnsuspendUserInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Chime account ID.
-	//
-	// AccountId is a required field
-	AccountId *string `location:"uri" locationName:"accountId" type:"string" required:"true"`
-
-	// The request containing the user IDs to unsuspend.
-	//
-	// UserIdList is a required field
-	UserIdList []string `type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s BatchUnsuspendUserInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *BatchUnsuspendUserInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "BatchUnsuspendUserInput"}
-
-	if s.AccountId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("AccountId"))
-	}
-
-	if s.UserIdList == nil {
-		invalidParams.Add(aws.NewErrParamRequired("UserIdList"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s BatchUnsuspendUserInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.UserIdList != nil {
-		v := s.UserIdList
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "UserIdList", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
-		}
-		ls0.End()
-
-	}
-	if s.AccountId != nil {
-		v := *s.AccountId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "accountId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type BatchUnsuspendUserOutput struct {
-	_ struct{} `type:"structure"`
-
-	// If the BatchUnsuspendUser action fails for one or more of the user IDs in
-	// the request, a list of the user IDs is returned, along with error codes and
-	// error messages.
-	UserErrors []UserError `type:"list"`
-}
-
-// String returns the string representation
-func (s BatchUnsuspendUserOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s BatchUnsuspendUserOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.UserErrors != nil {
-		v := s.UserErrors
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "UserErrors", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	return nil
-}
 
 const opBatchUnsuspendUser = "BatchUnsuspendUser"
 
@@ -125,7 +31,7 @@ const opBatchUnsuspendUser = "BatchUnsuspendUser"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/BatchUnsuspendUser
-func (c *Client) BatchUnsuspendUserRequest(input *BatchUnsuspendUserInput) BatchUnsuspendUserRequest {
+func (c *Client) BatchUnsuspendUserRequest(input *types.BatchUnsuspendUserInput) BatchUnsuspendUserRequest {
 	op := &aws.Operation{
 		Name:       opBatchUnsuspendUser,
 		HTTPMethod: "POST",
@@ -133,10 +39,10 @@ func (c *Client) BatchUnsuspendUserRequest(input *BatchUnsuspendUserInput) Batch
 	}
 
 	if input == nil {
-		input = &BatchUnsuspendUserInput{}
+		input = &types.BatchUnsuspendUserInput{}
 	}
 
-	req := c.newRequest(op, input, &BatchUnsuspendUserOutput{})
+	req := c.newRequest(op, input, &types.BatchUnsuspendUserOutput{})
 	return BatchUnsuspendUserRequest{Request: req, Input: input, Copy: c.BatchUnsuspendUserRequest}
 }
 
@@ -144,8 +50,8 @@ func (c *Client) BatchUnsuspendUserRequest(input *BatchUnsuspendUserInput) Batch
 // BatchUnsuspendUser API operation.
 type BatchUnsuspendUserRequest struct {
 	*aws.Request
-	Input *BatchUnsuspendUserInput
-	Copy  func(*BatchUnsuspendUserInput) BatchUnsuspendUserRequest
+	Input *types.BatchUnsuspendUserInput
+	Copy  func(*types.BatchUnsuspendUserInput) BatchUnsuspendUserRequest
 }
 
 // Send marshals and sends the BatchUnsuspendUser API request.
@@ -157,7 +63,7 @@ func (r BatchUnsuspendUserRequest) Send(ctx context.Context) (*BatchUnsuspendUse
 	}
 
 	resp := &BatchUnsuspendUserResponse{
-		BatchUnsuspendUserOutput: r.Request.Data.(*BatchUnsuspendUserOutput),
+		BatchUnsuspendUserOutput: r.Request.Data.(*types.BatchUnsuspendUserOutput),
 		response:                 &aws.Response{Request: r.Request},
 	}
 
@@ -167,7 +73,7 @@ func (r BatchUnsuspendUserRequest) Send(ctx context.Context) (*BatchUnsuspendUse
 // BatchUnsuspendUserResponse is the response type for the
 // BatchUnsuspendUser API operation.
 type BatchUnsuspendUserResponse struct {
-	*BatchUnsuspendUserOutput
+	*types.BatchUnsuspendUserOutput
 
 	response *aws.Response
 }

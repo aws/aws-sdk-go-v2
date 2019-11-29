@@ -6,63 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/directoryservice/types"
 )
-
-type DescribeSharedDirectoriesInput struct {
-	_ struct{} `type:"structure"`
-
-	// The number of shared directories to return in the response object.
-	Limit *int64 `type:"integer"`
-
-	// The DescribeSharedDirectoriesResult.NextToken value from a previous call
-	// to DescribeSharedDirectories. Pass null if this is the first call.
-	NextToken *string `type:"string"`
-
-	// Returns the identifier of the directory in the directory owner account.
-	//
-	// OwnerDirectoryId is a required field
-	OwnerDirectoryId *string `type:"string" required:"true"`
-
-	// A list of identifiers of all shared directories in your account.
-	SharedDirectoryIds []string `type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeSharedDirectoriesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeSharedDirectoriesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeSharedDirectoriesInput"}
-
-	if s.OwnerDirectoryId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("OwnerDirectoryId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribeSharedDirectoriesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// If not null, token that indicates that more results are available. Pass this
-	// value for the NextToken parameter in a subsequent call to DescribeSharedDirectories
-	// to retrieve the next set of items.
-	NextToken *string `type:"string"`
-
-	// A list of all shared directories in your account.
-	SharedDirectories []SharedDirectory `type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeSharedDirectoriesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeSharedDirectories = "DescribeSharedDirectories"
 
@@ -79,7 +24,7 @@ const opDescribeSharedDirectories = "DescribeSharedDirectories"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DescribeSharedDirectories
-func (c *Client) DescribeSharedDirectoriesRequest(input *DescribeSharedDirectoriesInput) DescribeSharedDirectoriesRequest {
+func (c *Client) DescribeSharedDirectoriesRequest(input *types.DescribeSharedDirectoriesInput) DescribeSharedDirectoriesRequest {
 	op := &aws.Operation{
 		Name:       opDescribeSharedDirectories,
 		HTTPMethod: "POST",
@@ -87,10 +32,10 @@ func (c *Client) DescribeSharedDirectoriesRequest(input *DescribeSharedDirectori
 	}
 
 	if input == nil {
-		input = &DescribeSharedDirectoriesInput{}
+		input = &types.DescribeSharedDirectoriesInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeSharedDirectoriesOutput{})
+	req := c.newRequest(op, input, &types.DescribeSharedDirectoriesOutput{})
 	return DescribeSharedDirectoriesRequest{Request: req, Input: input, Copy: c.DescribeSharedDirectoriesRequest}
 }
 
@@ -98,8 +43,8 @@ func (c *Client) DescribeSharedDirectoriesRequest(input *DescribeSharedDirectori
 // DescribeSharedDirectories API operation.
 type DescribeSharedDirectoriesRequest struct {
 	*aws.Request
-	Input *DescribeSharedDirectoriesInput
-	Copy  func(*DescribeSharedDirectoriesInput) DescribeSharedDirectoriesRequest
+	Input *types.DescribeSharedDirectoriesInput
+	Copy  func(*types.DescribeSharedDirectoriesInput) DescribeSharedDirectoriesRequest
 }
 
 // Send marshals and sends the DescribeSharedDirectories API request.
@@ -111,7 +56,7 @@ func (r DescribeSharedDirectoriesRequest) Send(ctx context.Context) (*DescribeSh
 	}
 
 	resp := &DescribeSharedDirectoriesResponse{
-		DescribeSharedDirectoriesOutput: r.Request.Data.(*DescribeSharedDirectoriesOutput),
+		DescribeSharedDirectoriesOutput: r.Request.Data.(*types.DescribeSharedDirectoriesOutput),
 		response:                        &aws.Response{Request: r.Request},
 	}
 
@@ -121,7 +66,7 @@ func (r DescribeSharedDirectoriesRequest) Send(ctx context.Context) (*DescribeSh
 // DescribeSharedDirectoriesResponse is the response type for the
 // DescribeSharedDirectories API operation.
 type DescribeSharedDirectoriesResponse struct {
-	*DescribeSharedDirectoriesOutput
+	*types.DescribeSharedDirectoriesOutput
 
 	response *aws.Response
 }

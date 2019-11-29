@@ -6,53 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
+	"github.com/aws/aws-sdk-go-v2/service/opsworks/types"
 )
-
-type UpdateVolumeInput struct {
-	_ struct{} `type:"structure"`
-
-	// The new mount point.
-	MountPoint *string `type:"string"`
-
-	// The new name.
-	Name *string `type:"string"`
-
-	// The volume ID.
-	//
-	// VolumeId is a required field
-	VolumeId *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s UpdateVolumeInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateVolumeInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateVolumeInput"}
-
-	if s.VolumeId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("VolumeId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type UpdateVolumeOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s UpdateVolumeOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opUpdateVolume = "UpdateVolume"
 
@@ -75,7 +32,7 @@ const opUpdateVolume = "UpdateVolume"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/UpdateVolume
-func (c *Client) UpdateVolumeRequest(input *UpdateVolumeInput) UpdateVolumeRequest {
+func (c *Client) UpdateVolumeRequest(input *types.UpdateVolumeInput) UpdateVolumeRequest {
 	op := &aws.Operation{
 		Name:       opUpdateVolume,
 		HTTPMethod: "POST",
@@ -83,10 +40,10 @@ func (c *Client) UpdateVolumeRequest(input *UpdateVolumeInput) UpdateVolumeReque
 	}
 
 	if input == nil {
-		input = &UpdateVolumeInput{}
+		input = &types.UpdateVolumeInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateVolumeOutput{})
+	req := c.newRequest(op, input, &types.UpdateVolumeOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return UpdateVolumeRequest{Request: req, Input: input, Copy: c.UpdateVolumeRequest}
@@ -96,8 +53,8 @@ func (c *Client) UpdateVolumeRequest(input *UpdateVolumeInput) UpdateVolumeReque
 // UpdateVolume API operation.
 type UpdateVolumeRequest struct {
 	*aws.Request
-	Input *UpdateVolumeInput
-	Copy  func(*UpdateVolumeInput) UpdateVolumeRequest
+	Input *types.UpdateVolumeInput
+	Copy  func(*types.UpdateVolumeInput) UpdateVolumeRequest
 }
 
 // Send marshals and sends the UpdateVolume API request.
@@ -109,7 +66,7 @@ func (r UpdateVolumeRequest) Send(ctx context.Context) (*UpdateVolumeResponse, e
 	}
 
 	resp := &UpdateVolumeResponse{
-		UpdateVolumeOutput: r.Request.Data.(*UpdateVolumeOutput),
+		UpdateVolumeOutput: r.Request.Data.(*types.UpdateVolumeOutput),
 		response:           &aws.Response{Request: r.Request},
 	}
 
@@ -119,7 +76,7 @@ func (r UpdateVolumeRequest) Send(ctx context.Context) (*UpdateVolumeResponse, e
 // UpdateVolumeResponse is the response type for the
 // UpdateVolume API operation.
 type UpdateVolumeResponse struct {
-	*UpdateVolumeOutput
+	*types.UpdateVolumeOutput
 
 	response *aws.Response
 }

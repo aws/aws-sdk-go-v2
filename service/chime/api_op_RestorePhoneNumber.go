@@ -6,73 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/chime/types"
 )
-
-type RestorePhoneNumberInput struct {
-	_ struct{} `type:"structure"`
-
-	// The phone number.
-	//
-	// PhoneNumberId is a required field
-	PhoneNumberId *string `location:"uri" locationName:"phoneNumberId" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s RestorePhoneNumberInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *RestorePhoneNumberInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "RestorePhoneNumberInput"}
-
-	if s.PhoneNumberId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("PhoneNumberId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s RestorePhoneNumberInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.PhoneNumberId != nil {
-		v := *s.PhoneNumberId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "phoneNumberId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type RestorePhoneNumberOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The phone number details.
-	PhoneNumber *PhoneNumber `type:"structure"`
-}
-
-// String returns the string representation
-func (s RestorePhoneNumberOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s RestorePhoneNumberOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.PhoneNumber != nil {
-		v := s.PhoneNumber
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "PhoneNumber", v, metadata)
-	}
-	return nil
-}
 
 const opRestorePhoneNumber = "RestorePhoneNumber"
 
@@ -89,7 +24,7 @@ const opRestorePhoneNumber = "RestorePhoneNumber"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/RestorePhoneNumber
-func (c *Client) RestorePhoneNumberRequest(input *RestorePhoneNumberInput) RestorePhoneNumberRequest {
+func (c *Client) RestorePhoneNumberRequest(input *types.RestorePhoneNumberInput) RestorePhoneNumberRequest {
 	op := &aws.Operation{
 		Name:       opRestorePhoneNumber,
 		HTTPMethod: "POST",
@@ -97,10 +32,10 @@ func (c *Client) RestorePhoneNumberRequest(input *RestorePhoneNumberInput) Resto
 	}
 
 	if input == nil {
-		input = &RestorePhoneNumberInput{}
+		input = &types.RestorePhoneNumberInput{}
 	}
 
-	req := c.newRequest(op, input, &RestorePhoneNumberOutput{})
+	req := c.newRequest(op, input, &types.RestorePhoneNumberOutput{})
 	return RestorePhoneNumberRequest{Request: req, Input: input, Copy: c.RestorePhoneNumberRequest}
 }
 
@@ -108,8 +43,8 @@ func (c *Client) RestorePhoneNumberRequest(input *RestorePhoneNumberInput) Resto
 // RestorePhoneNumber API operation.
 type RestorePhoneNumberRequest struct {
 	*aws.Request
-	Input *RestorePhoneNumberInput
-	Copy  func(*RestorePhoneNumberInput) RestorePhoneNumberRequest
+	Input *types.RestorePhoneNumberInput
+	Copy  func(*types.RestorePhoneNumberInput) RestorePhoneNumberRequest
 }
 
 // Send marshals and sends the RestorePhoneNumber API request.
@@ -121,7 +56,7 @@ func (r RestorePhoneNumberRequest) Send(ctx context.Context) (*RestorePhoneNumbe
 	}
 
 	resp := &RestorePhoneNumberResponse{
-		RestorePhoneNumberOutput: r.Request.Data.(*RestorePhoneNumberOutput),
+		RestorePhoneNumberOutput: r.Request.Data.(*types.RestorePhoneNumberOutput),
 		response:                 &aws.Response{Request: r.Request},
 	}
 
@@ -131,7 +66,7 @@ func (r RestorePhoneNumberRequest) Send(ctx context.Context) (*RestorePhoneNumbe
 // RestorePhoneNumberResponse is the response type for the
 // RestorePhoneNumber API operation.
 type RestorePhoneNumberResponse struct {
-	*RestorePhoneNumberOutput
+	*types.RestorePhoneNumberOutput
 
 	response *aws.Response
 }

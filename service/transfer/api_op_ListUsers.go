@@ -6,77 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/transfer/types"
 )
-
-type ListUsersInput struct {
-	_ struct{} `type:"structure"`
-
-	// Specifies the number of users to return as a response to the ListUsers request.
-	MaxResults *int64 `min:"1" type:"integer"`
-
-	// When you can get additional results from the ListUsers call, a NextToken
-	// parameter is returned in the output. You can then pass in a subsequent command
-	// to the NextToken parameter to continue listing additional users.
-	NextToken *string `min:"1" type:"string"`
-
-	// A system-assigned unique identifier for a Secure File Transfer Protocol (SFTP)
-	// server that has users assigned to it.
-	//
-	// ServerId is a required field
-	ServerId *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s ListUsersInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListUsersInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListUsersInput"}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-	if s.NextToken != nil && len(*s.NextToken) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
-	}
-
-	if s.ServerId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ServerId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ListUsersOutput struct {
-	_ struct{} `type:"structure"`
-
-	// When you can get additional results from the ListUsers call, a NextToken
-	// parameter is returned in the output. You can then pass in a subsequent command
-	// to the NextToken parameter to continue listing additional users.
-	NextToken *string `min:"1" type:"string"`
-
-	// A system-assigned unique identifier for an SFTP server that the users are
-	// assigned to.
-	//
-	// ServerId is a required field
-	ServerId *string `type:"string" required:"true"`
-
-	// Returns the user accounts and their properties for the ServerId value that
-	// you specify.
-	//
-	// Users is a required field
-	Users []ListedUser `type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s ListUsersOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListUsers = "ListUsers"
 
@@ -93,7 +24,7 @@ const opListUsers = "ListUsers"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/ListUsers
-func (c *Client) ListUsersRequest(input *ListUsersInput) ListUsersRequest {
+func (c *Client) ListUsersRequest(input *types.ListUsersInput) ListUsersRequest {
 	op := &aws.Operation{
 		Name:       opListUsers,
 		HTTPMethod: "POST",
@@ -107,10 +38,10 @@ func (c *Client) ListUsersRequest(input *ListUsersInput) ListUsersRequest {
 	}
 
 	if input == nil {
-		input = &ListUsersInput{}
+		input = &types.ListUsersInput{}
 	}
 
-	req := c.newRequest(op, input, &ListUsersOutput{})
+	req := c.newRequest(op, input, &types.ListUsersOutput{})
 	return ListUsersRequest{Request: req, Input: input, Copy: c.ListUsersRequest}
 }
 
@@ -118,8 +49,8 @@ func (c *Client) ListUsersRequest(input *ListUsersInput) ListUsersRequest {
 // ListUsers API operation.
 type ListUsersRequest struct {
 	*aws.Request
-	Input *ListUsersInput
-	Copy  func(*ListUsersInput) ListUsersRequest
+	Input *types.ListUsersInput
+	Copy  func(*types.ListUsersInput) ListUsersRequest
 }
 
 // Send marshals and sends the ListUsers API request.
@@ -131,7 +62,7 @@ func (r ListUsersRequest) Send(ctx context.Context) (*ListUsersResponse, error) 
 	}
 
 	resp := &ListUsersResponse{
-		ListUsersOutput: r.Request.Data.(*ListUsersOutput),
+		ListUsersOutput: r.Request.Data.(*types.ListUsersOutput),
 		response:        &aws.Response{Request: r.Request},
 	}
 
@@ -161,7 +92,7 @@ func NewListUsersPaginator(req ListUsersRequest) ListUsersPaginator {
 	return ListUsersPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListUsersInput
+				var inCpy *types.ListUsersInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -181,14 +112,14 @@ type ListUsersPaginator struct {
 	aws.Pager
 }
 
-func (p *ListUsersPaginator) CurrentPage() *ListUsersOutput {
-	return p.Pager.CurrentPage().(*ListUsersOutput)
+func (p *ListUsersPaginator) CurrentPage() *types.ListUsersOutput {
+	return p.Pager.CurrentPage().(*types.ListUsersOutput)
 }
 
 // ListUsersResponse is the response type for the
 // ListUsers API operation.
 type ListUsersResponse struct {
-	*ListUsersOutput
+	*types.ListUsersOutput
 
 	response *aws.Response
 }

@@ -6,82 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/iotanalytics/types"
 )
-
-type CancelPipelineReprocessingInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of pipeline for which data reprocessing is canceled.
-	//
-	// PipelineName is a required field
-	PipelineName *string `location:"uri" locationName:"pipelineName" min:"1" type:"string" required:"true"`
-
-	// The ID of the reprocessing task (returned by "StartPipelineReprocessing").
-	//
-	// ReprocessingId is a required field
-	ReprocessingId *string `location:"uri" locationName:"reprocessingId" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s CancelPipelineReprocessingInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CancelPipelineReprocessingInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CancelPipelineReprocessingInput"}
-
-	if s.PipelineName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("PipelineName"))
-	}
-	if s.PipelineName != nil && len(*s.PipelineName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("PipelineName", 1))
-	}
-
-	if s.ReprocessingId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ReprocessingId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s CancelPipelineReprocessingInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.PipelineName != nil {
-		v := *s.PipelineName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "pipelineName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.ReprocessingId != nil {
-		v := *s.ReprocessingId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "reprocessingId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type CancelPipelineReprocessingOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s CancelPipelineReprocessingOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s CancelPipelineReprocessingOutput) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
 
 const opCancelPipelineReprocessing = "CancelPipelineReprocessing"
 
@@ -98,7 +24,7 @@ const opCancelPipelineReprocessing = "CancelPipelineReprocessing"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iotanalytics-2017-11-27/CancelPipelineReprocessing
-func (c *Client) CancelPipelineReprocessingRequest(input *CancelPipelineReprocessingInput) CancelPipelineReprocessingRequest {
+func (c *Client) CancelPipelineReprocessingRequest(input *types.CancelPipelineReprocessingInput) CancelPipelineReprocessingRequest {
 	op := &aws.Operation{
 		Name:       opCancelPipelineReprocessing,
 		HTTPMethod: "DELETE",
@@ -106,10 +32,10 @@ func (c *Client) CancelPipelineReprocessingRequest(input *CancelPipelineReproces
 	}
 
 	if input == nil {
-		input = &CancelPipelineReprocessingInput{}
+		input = &types.CancelPipelineReprocessingInput{}
 	}
 
-	req := c.newRequest(op, input, &CancelPipelineReprocessingOutput{})
+	req := c.newRequest(op, input, &types.CancelPipelineReprocessingOutput{})
 	return CancelPipelineReprocessingRequest{Request: req, Input: input, Copy: c.CancelPipelineReprocessingRequest}
 }
 
@@ -117,8 +43,8 @@ func (c *Client) CancelPipelineReprocessingRequest(input *CancelPipelineReproces
 // CancelPipelineReprocessing API operation.
 type CancelPipelineReprocessingRequest struct {
 	*aws.Request
-	Input *CancelPipelineReprocessingInput
-	Copy  func(*CancelPipelineReprocessingInput) CancelPipelineReprocessingRequest
+	Input *types.CancelPipelineReprocessingInput
+	Copy  func(*types.CancelPipelineReprocessingInput) CancelPipelineReprocessingRequest
 }
 
 // Send marshals and sends the CancelPipelineReprocessing API request.
@@ -130,7 +56,7 @@ func (r CancelPipelineReprocessingRequest) Send(ctx context.Context) (*CancelPip
 	}
 
 	resp := &CancelPipelineReprocessingResponse{
-		CancelPipelineReprocessingOutput: r.Request.Data.(*CancelPipelineReprocessingOutput),
+		CancelPipelineReprocessingOutput: r.Request.Data.(*types.CancelPipelineReprocessingOutput),
 		response:                         &aws.Response{Request: r.Request},
 	}
 
@@ -140,7 +66,7 @@ func (r CancelPipelineReprocessingRequest) Send(ctx context.Context) (*CancelPip
 // CancelPipelineReprocessingResponse is the response type for the
 // CancelPipelineReprocessing API operation.
 type CancelPipelineReprocessingResponse struct {
-	*CancelPipelineReprocessingOutput
+	*types.CancelPipelineReprocessingOutput
 
 	response *aws.Response
 }

@@ -4,85 +4,10 @@ package ssm
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ssm/types"
 )
-
-type ListCommandInvocationsInput struct {
-	_ struct{} `type:"structure"`
-
-	// (Optional) The invocations for a specific command ID.
-	CommandId *string `min:"36" type:"string"`
-
-	// (Optional) If set this returns the response of the command executions and
-	// any command output. By default this is set to False.
-	Details *bool `type:"boolean"`
-
-	// (Optional) One or more filters. Use a filter to return a more specific list
-	// of results.
-	Filters []CommandFilter `min:"1" type:"list"`
-
-	// (Optional) The command execution details for a specific instance ID.
-	InstanceId *string `type:"string"`
-
-	// (Optional) The maximum number of items to return for this call. The call
-	// also returns a token that you can specify in a subsequent call to get the
-	// next set of results.
-	MaxResults *int64 `min:"1" type:"integer"`
-
-	// (Optional) The token for the next set of items to return. (You received this
-	// token from a previous call.)
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s ListCommandInvocationsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListCommandInvocationsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListCommandInvocationsInput"}
-	if s.CommandId != nil && len(*s.CommandId) < 36 {
-		invalidParams.Add(aws.NewErrParamMinLen("CommandId", 36))
-	}
-	if s.Filters != nil && len(s.Filters) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Filters", 1))
-	}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-	if s.Filters != nil {
-		for i, v := range s.Filters {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ListCommandInvocationsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// (Optional) A list of all invocations.
-	CommandInvocations []CommandInvocation `type:"list"`
-
-	// (Optional) The token for the next set of items to return. (You received this
-	// token from a previous call.)
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s ListCommandInvocationsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListCommandInvocations = "ListCommandInvocations"
 
@@ -103,7 +28,7 @@ const opListCommandInvocations = "ListCommandInvocations"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ListCommandInvocations
-func (c *Client) ListCommandInvocationsRequest(input *ListCommandInvocationsInput) ListCommandInvocationsRequest {
+func (c *Client) ListCommandInvocationsRequest(input *types.ListCommandInvocationsInput) ListCommandInvocationsRequest {
 	op := &aws.Operation{
 		Name:       opListCommandInvocations,
 		HTTPMethod: "POST",
@@ -117,10 +42,10 @@ func (c *Client) ListCommandInvocationsRequest(input *ListCommandInvocationsInpu
 	}
 
 	if input == nil {
-		input = &ListCommandInvocationsInput{}
+		input = &types.ListCommandInvocationsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListCommandInvocationsOutput{})
+	req := c.newRequest(op, input, &types.ListCommandInvocationsOutput{})
 	return ListCommandInvocationsRequest{Request: req, Input: input, Copy: c.ListCommandInvocationsRequest}
 }
 
@@ -128,8 +53,8 @@ func (c *Client) ListCommandInvocationsRequest(input *ListCommandInvocationsInpu
 // ListCommandInvocations API operation.
 type ListCommandInvocationsRequest struct {
 	*aws.Request
-	Input *ListCommandInvocationsInput
-	Copy  func(*ListCommandInvocationsInput) ListCommandInvocationsRequest
+	Input *types.ListCommandInvocationsInput
+	Copy  func(*types.ListCommandInvocationsInput) ListCommandInvocationsRequest
 }
 
 // Send marshals and sends the ListCommandInvocations API request.
@@ -141,7 +66,7 @@ func (r ListCommandInvocationsRequest) Send(ctx context.Context) (*ListCommandIn
 	}
 
 	resp := &ListCommandInvocationsResponse{
-		ListCommandInvocationsOutput: r.Request.Data.(*ListCommandInvocationsOutput),
+		ListCommandInvocationsOutput: r.Request.Data.(*types.ListCommandInvocationsOutput),
 		response:                     &aws.Response{Request: r.Request},
 	}
 
@@ -171,7 +96,7 @@ func NewListCommandInvocationsPaginator(req ListCommandInvocationsRequest) ListC
 	return ListCommandInvocationsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListCommandInvocationsInput
+				var inCpy *types.ListCommandInvocationsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -191,14 +116,14 @@ type ListCommandInvocationsPaginator struct {
 	aws.Pager
 }
 
-func (p *ListCommandInvocationsPaginator) CurrentPage() *ListCommandInvocationsOutput {
-	return p.Pager.CurrentPage().(*ListCommandInvocationsOutput)
+func (p *ListCommandInvocationsPaginator) CurrentPage() *types.ListCommandInvocationsOutput {
+	return p.Pager.CurrentPage().(*types.ListCommandInvocationsOutput)
 }
 
 // ListCommandInvocationsResponse is the response type for the
 // ListCommandInvocations API operation.
 type ListCommandInvocationsResponse struct {
-	*ListCommandInvocationsOutput
+	*types.ListCommandInvocationsOutput
 
 	response *aws.Response
 }

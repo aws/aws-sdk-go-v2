@@ -6,242 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/kinesisvideoarchivedmedia/types"
 )
-
-type GetDASHStreamingSessionURLInput struct {
-	_ struct{} `type:"structure"`
-
-	// The time range of the requested fragment and the source of the timestamps.
-	//
-	// This parameter is required if PlaybackMode is ON_DEMAND or LIVE_REPLAY. This
-	// parameter is optional if PlaybackMode is LIVE. If PlaybackMode is LIVE, the
-	// FragmentSelectorType can be set, but the TimestampRange should not be set.
-	// If PlaybackMode is ON_DEMAND or LIVE_REPLAY, both FragmentSelectorType and
-	// TimestampRange must be set.
-	DASHFragmentSelector *DASHFragmentSelector `type:"structure"`
-
-	// Fragments are identified in the manifest file based on their sequence number
-	// in the session. If DisplayFragmentNumber is set to ALWAYS, the Kinesis Video
-	// Streams fragment number is added to each S element in the manifest file with
-	// the attribute name “kvs:fn”. These fragment numbers can be used for logging
-	// or for use with other APIs (e.g. GetMedia and GetMediaForFragmentList). A
-	// custom MPEG-DASH media player is necessary to leverage these this custom
-	// attribute.
-	//
-	// The default value is NEVER.
-	DisplayFragmentNumber DASHDisplayFragmentNumber `type:"string" enum:"true"`
-
-	// Per the MPEG-DASH specification, the wall-clock time of fragments in the
-	// manifest file can be derived using attributes in the manifest itself. However,
-	// typically, MPEG-DASH compatible media players do not properly handle gaps
-	// in the media timeline. Kinesis Video Streams adjusts the media timeline in
-	// the manifest file to enable playback of media with discontinuities. Therefore,
-	// the wall-clock time derived from the manifest file may be inaccurate. If
-	// DisplayFragmentTimestamp is set to ALWAYS, the accurate fragment timestamp
-	// is added to each S element in the manifest file with the attribute name “kvs:ts”.
-	// A custom MPEG-DASH media player is necessary to leverage this custom attribute.
-	//
-	// The default value is NEVER. When DASHFragmentSelector is SERVER_TIMESTAMP,
-	// the timestamps will be the server start timestamps. Similarly, when DASHFragmentSelector
-	// is PRODUCER_TIMESTAMP, the timestamps will be the producer start timestamps.
-	DisplayFragmentTimestamp DASHDisplayFragmentTimestamp `type:"string" enum:"true"`
-
-	// The time in seconds until the requested session expires. This value can be
-	// between 300 (5 minutes) and 43200 (12 hours).
-	//
-	// When a session expires, no new calls to GetDashManifest, GetMP4InitFragment,
-	// or GetMP4MediaFragment can be made for that session.
-	//
-	// The default is 300 (5 minutes).
-	Expires *int64 `min:"300" type:"integer"`
-
-	// The maximum number of fragments that are returned in the MPEG-DASH manifest.
-	//
-	// When the PlaybackMode is LIVE, the most recent fragments are returned up
-	// to this value. When the PlaybackMode is ON_DEMAND, the oldest fragments are
-	// returned, up to this maximum number.
-	//
-	// When there are a higher number of fragments available in a live MPEG-DASH
-	// manifest, video players often buffer content before starting playback. Increasing
-	// the buffer size increases the playback latency, but it decreases the likelihood
-	// that rebuffering will occur during playback. We recommend that a live MPEG-DASH
-	// manifest have a minimum of 3 fragments and a maximum of 10 fragments.
-	//
-	// The default is 5 fragments if PlaybackMode is LIVE or LIVE_REPLAY, and 1,000
-	// if PlaybackMode is ON_DEMAND.
-	//
-	// The maximum value of 1,000 fragments corresponds to more than 16 minutes
-	// of video on streams with 1-second fragments, and more than 2 1/2 hours of
-	// video on streams with 10-second fragments.
-	MaxManifestFragmentResults *int64 `min:"1" type:"long"`
-
-	// Whether to retrieve live, live replay, or archived, on-demand data.
-	//
-	// Features of the three types of sessions include the following:
-	//
-	//    * LIVE : For sessions of this type, the MPEG-DASH manifest is continually
-	//    updated with the latest fragments as they become available. We recommend
-	//    that the media player retrieve a new manifest on a one-second interval.
-	//    When this type of session is played in a media player, the user interface
-	//    typically displays a "live" notification, with no scrubber control for
-	//    choosing the position in the playback window to display. In LIVE mode,
-	//    the newest available fragments are included in an MPEG-DASH manifest,
-	//    even if there is a gap between fragments (that is, if a fragment is missing).
-	//    A gap like this might cause a media player to halt or cause a jump in
-	//    playback. In this mode, fragments are not added to the MPEG-DASH manifest
-	//    if they are older than the newest fragment in the playlist. If the missing
-	//    fragment becomes available after a subsequent fragment is added to the
-	//    manifest, the older fragment is not added, and the gap is not filled.
-	//
-	//    * LIVE_REPLAY : For sessions of this type, the MPEG-DASH manifest is updated
-	//    similarly to how it is updated for LIVE mode except that it starts by
-	//    including fragments from a given start time. Instead of fragments being
-	//    added as they are ingested, fragments are added as the duration of the
-	//    next fragment elapses. For example, if the fragments in the session are
-	//    two seconds long, then a new fragment is added to the manifest every two
-	//    seconds. This mode is useful to be able to start playback from when an
-	//    event is detected and continue live streaming media that has not yet been
-	//    ingested as of the time of the session creation. This mode is also useful
-	//    to stream previously archived media without being limited by the 1,000
-	//    fragment limit in the ON_DEMAND mode.
-	//
-	//    * ON_DEMAND : For sessions of this type, the MPEG-DASH manifest contains
-	//    all the fragments for the session, up to the number that is specified
-	//    in MaxMediaPlaylistFragmentResults. The manifest must be retrieved only
-	//    once for each session. When this type of session is played in a media
-	//    player, the user interface typically displays a scrubber control for choosing
-	//    the position in the playback window to display.
-	//
-	// In all playback modes, if FragmentSelectorType is PRODUCER_TIMESTAMP, and
-	// if there are multiple fragments with the same start timestamp, the fragment
-	// that has the larger fragment number (that is, the newer fragment) is included
-	// in the MPEG-DASH manifest. The other fragments are not included. Fragments
-	// that have different timestamps but have overlapping durations are still included
-	// in the MPEG-DASH manifest. This can lead to unexpected behavior in the media
-	// player.
-	//
-	// The default is LIVE.
-	PlaybackMode DASHPlaybackMode `type:"string" enum:"true"`
-
-	// The Amazon Resource Name (ARN) of the stream for which to retrieve the MPEG-DASH
-	// manifest URL.
-	//
-	// You must specify either the StreamName or the StreamARN.
-	StreamARN *string `min:"1" type:"string"`
-
-	// The name of the stream for which to retrieve the MPEG-DASH manifest URL.
-	//
-	// You must specify either the StreamName or the StreamARN.
-	StreamName *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s GetDASHStreamingSessionURLInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetDASHStreamingSessionURLInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetDASHStreamingSessionURLInput"}
-	if s.Expires != nil && *s.Expires < 300 {
-		invalidParams.Add(aws.NewErrParamMinValue("Expires", 300))
-	}
-	if s.MaxManifestFragmentResults != nil && *s.MaxManifestFragmentResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxManifestFragmentResults", 1))
-	}
-	if s.StreamARN != nil && len(*s.StreamARN) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("StreamARN", 1))
-	}
-	if s.StreamName != nil && len(*s.StreamName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("StreamName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetDASHStreamingSessionURLInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.DASHFragmentSelector != nil {
-		v := s.DASHFragmentSelector
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "DASHFragmentSelector", v, metadata)
-	}
-	if len(s.DisplayFragmentNumber) > 0 {
-		v := s.DisplayFragmentNumber
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "DisplayFragmentNumber", protocol.QuotedValue{ValueMarshaler: v}, metadata)
-	}
-	if len(s.DisplayFragmentTimestamp) > 0 {
-		v := s.DisplayFragmentTimestamp
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "DisplayFragmentTimestamp", protocol.QuotedValue{ValueMarshaler: v}, metadata)
-	}
-	if s.Expires != nil {
-		v := *s.Expires
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "Expires", protocol.Int64Value(v), metadata)
-	}
-	if s.MaxManifestFragmentResults != nil {
-		v := *s.MaxManifestFragmentResults
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "MaxManifestFragmentResults", protocol.Int64Value(v), metadata)
-	}
-	if len(s.PlaybackMode) > 0 {
-		v := s.PlaybackMode
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "PlaybackMode", protocol.QuotedValue{ValueMarshaler: v}, metadata)
-	}
-	if s.StreamARN != nil {
-		v := *s.StreamARN
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "StreamARN", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.StreamName != nil {
-		v := *s.StreamName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "StreamName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type GetDASHStreamingSessionURLOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The URL (containing the session token) that a media player can use to retrieve
-	// the MPEG-DASH manifest.
-	DASHStreamingSessionURL *string `type:"string"`
-}
-
-// String returns the string representation
-func (s GetDASHStreamingSessionURLOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetDASHStreamingSessionURLOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.DASHStreamingSessionURL != nil {
-		v := *s.DASHStreamingSessionURL
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "DASHStreamingSessionURL", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opGetDASHStreamingSessionURL = "GetDASHStreamingSessionURL"
 
@@ -381,7 +147,7 @@ const opGetDASHStreamingSessionURL = "GetDASHStreamingSessionURL"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesis-video-archived-media-2017-09-30/GetDASHStreamingSessionURL
-func (c *Client) GetDASHStreamingSessionURLRequest(input *GetDASHStreamingSessionURLInput) GetDASHStreamingSessionURLRequest {
+func (c *Client) GetDASHStreamingSessionURLRequest(input *types.GetDASHStreamingSessionURLInput) GetDASHStreamingSessionURLRequest {
 	op := &aws.Operation{
 		Name:       opGetDASHStreamingSessionURL,
 		HTTPMethod: "POST",
@@ -389,10 +155,10 @@ func (c *Client) GetDASHStreamingSessionURLRequest(input *GetDASHStreamingSessio
 	}
 
 	if input == nil {
-		input = &GetDASHStreamingSessionURLInput{}
+		input = &types.GetDASHStreamingSessionURLInput{}
 	}
 
-	req := c.newRequest(op, input, &GetDASHStreamingSessionURLOutput{})
+	req := c.newRequest(op, input, &types.GetDASHStreamingSessionURLOutput{})
 	return GetDASHStreamingSessionURLRequest{Request: req, Input: input, Copy: c.GetDASHStreamingSessionURLRequest}
 }
 
@@ -400,8 +166,8 @@ func (c *Client) GetDASHStreamingSessionURLRequest(input *GetDASHStreamingSessio
 // GetDASHStreamingSessionURL API operation.
 type GetDASHStreamingSessionURLRequest struct {
 	*aws.Request
-	Input *GetDASHStreamingSessionURLInput
-	Copy  func(*GetDASHStreamingSessionURLInput) GetDASHStreamingSessionURLRequest
+	Input *types.GetDASHStreamingSessionURLInput
+	Copy  func(*types.GetDASHStreamingSessionURLInput) GetDASHStreamingSessionURLRequest
 }
 
 // Send marshals and sends the GetDASHStreamingSessionURL API request.
@@ -413,7 +179,7 @@ func (r GetDASHStreamingSessionURLRequest) Send(ctx context.Context) (*GetDASHSt
 	}
 
 	resp := &GetDASHStreamingSessionURLResponse{
-		GetDASHStreamingSessionURLOutput: r.Request.Data.(*GetDASHStreamingSessionURLOutput),
+		GetDASHStreamingSessionURLOutput: r.Request.Data.(*types.GetDASHStreamingSessionURLOutput),
 		response:                         &aws.Response{Request: r.Request},
 	}
 
@@ -423,7 +189,7 @@ func (r GetDASHStreamingSessionURLRequest) Send(ctx context.Context) (*GetDASHSt
 // GetDASHStreamingSessionURLResponse is the response type for the
 // GetDASHStreamingSessionURL API operation.
 type GetDASHStreamingSessionURLResponse struct {
-	*GetDASHStreamingSessionURLOutput
+	*types.GetDASHStreamingSessionURLOutput
 
 	response *aws.Response
 }

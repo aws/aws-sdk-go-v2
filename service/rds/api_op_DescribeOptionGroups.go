@@ -4,85 +4,10 @@ package rds
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/rds/types"
 )
-
-type DescribeOptionGroupsInput struct {
-	_ struct{} `type:"structure"`
-
-	// Filters the list of option groups to only include groups associated with
-	// a specific database engine.
-	EngineName *string `type:"string"`
-
-	// This parameter is not currently supported.
-	Filters []Filter `locationNameList:"Filter" type:"list"`
-
-	// Filters the list of option groups to only include groups associated with
-	// a specific database engine version. If specified, then EngineName must also
-	// be specified.
-	MajorEngineVersion *string `type:"string"`
-
-	// An optional pagination token provided by a previous DescribeOptionGroups
-	// request. If this parameter is specified, the response includes only records
-	// beyond the marker, up to the value specified by MaxRecords.
-	Marker *string `type:"string"`
-
-	// The maximum number of records to include in the response. If more records
-	// exist than the specified MaxRecords value, a pagination token called a marker
-	// is included in the response so that you can retrieve the remaining results.
-	//
-	// Default: 100
-	//
-	// Constraints: Minimum 20, maximum 100.
-	MaxRecords *int64 `type:"integer"`
-
-	// The name of the option group to describe. Can't be supplied together with
-	// EngineName or MajorEngineVersion.
-	OptionGroupName *string `type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeOptionGroupsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeOptionGroupsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeOptionGroupsInput"}
-	if s.Filters != nil {
-		for i, v := range s.Filters {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// List of option groups.
-type DescribeOptionGroupsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// An optional pagination token provided by a previous request. If this parameter
-	// is specified, the response includes only records beyond the marker, up to
-	// the value specified by MaxRecords.
-	Marker *string `type:"string"`
-
-	// List of option groups.
-	OptionGroupsList []OptionGroup `locationNameList:"OptionGroup" type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeOptionGroupsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeOptionGroups = "DescribeOptionGroups"
 
@@ -99,7 +24,7 @@ const opDescribeOptionGroups = "DescribeOptionGroups"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeOptionGroups
-func (c *Client) DescribeOptionGroupsRequest(input *DescribeOptionGroupsInput) DescribeOptionGroupsRequest {
+func (c *Client) DescribeOptionGroupsRequest(input *types.DescribeOptionGroupsInput) DescribeOptionGroupsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeOptionGroups,
 		HTTPMethod: "POST",
@@ -113,10 +38,10 @@ func (c *Client) DescribeOptionGroupsRequest(input *DescribeOptionGroupsInput) D
 	}
 
 	if input == nil {
-		input = &DescribeOptionGroupsInput{}
+		input = &types.DescribeOptionGroupsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeOptionGroupsOutput{})
+	req := c.newRequest(op, input, &types.DescribeOptionGroupsOutput{})
 	return DescribeOptionGroupsRequest{Request: req, Input: input, Copy: c.DescribeOptionGroupsRequest}
 }
 
@@ -124,8 +49,8 @@ func (c *Client) DescribeOptionGroupsRequest(input *DescribeOptionGroupsInput) D
 // DescribeOptionGroups API operation.
 type DescribeOptionGroupsRequest struct {
 	*aws.Request
-	Input *DescribeOptionGroupsInput
-	Copy  func(*DescribeOptionGroupsInput) DescribeOptionGroupsRequest
+	Input *types.DescribeOptionGroupsInput
+	Copy  func(*types.DescribeOptionGroupsInput) DescribeOptionGroupsRequest
 }
 
 // Send marshals and sends the DescribeOptionGroups API request.
@@ -137,7 +62,7 @@ func (r DescribeOptionGroupsRequest) Send(ctx context.Context) (*DescribeOptionG
 	}
 
 	resp := &DescribeOptionGroupsResponse{
-		DescribeOptionGroupsOutput: r.Request.Data.(*DescribeOptionGroupsOutput),
+		DescribeOptionGroupsOutput: r.Request.Data.(*types.DescribeOptionGroupsOutput),
 		response:                   &aws.Response{Request: r.Request},
 	}
 
@@ -167,7 +92,7 @@ func NewDescribeOptionGroupsPaginator(req DescribeOptionGroupsRequest) DescribeO
 	return DescribeOptionGroupsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *DescribeOptionGroupsInput
+				var inCpy *types.DescribeOptionGroupsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -187,14 +112,14 @@ type DescribeOptionGroupsPaginator struct {
 	aws.Pager
 }
 
-func (p *DescribeOptionGroupsPaginator) CurrentPage() *DescribeOptionGroupsOutput {
-	return p.Pager.CurrentPage().(*DescribeOptionGroupsOutput)
+func (p *DescribeOptionGroupsPaginator) CurrentPage() *types.DescribeOptionGroupsOutput {
+	return p.Pager.CurrentPage().(*types.DescribeOptionGroupsOutput)
 }
 
 // DescribeOptionGroupsResponse is the response type for the
 // DescribeOptionGroups API operation.
 type DescribeOptionGroupsResponse struct {
-	*DescribeOptionGroupsOutput
+	*types.DescribeOptionGroupsOutput
 
 	response *aws.Response
 }

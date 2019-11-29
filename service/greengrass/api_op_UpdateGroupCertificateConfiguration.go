@@ -6,95 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/greengrass/types"
 )
-
-type UpdateGroupCertificateConfigurationInput struct {
-	_ struct{} `type:"structure"`
-
-	// The amount of time remaining before the certificate expires, in milliseconds.
-	CertificateExpiryInMilliseconds *string `type:"string"`
-
-	// GroupId is a required field
-	GroupId *string `location:"uri" locationName:"GroupId" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s UpdateGroupCertificateConfigurationInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateGroupCertificateConfigurationInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateGroupCertificateConfigurationInput"}
-
-	if s.GroupId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("GroupId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s UpdateGroupCertificateConfigurationInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.CertificateExpiryInMilliseconds != nil {
-		v := *s.CertificateExpiryInMilliseconds
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "CertificateExpiryInMilliseconds", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.GroupId != nil {
-		v := *s.GroupId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "GroupId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type UpdateGroupCertificateConfigurationOutput struct {
-	_ struct{} `type:"structure"`
-
-	CertificateAuthorityExpiryInMilliseconds *string `type:"string"`
-
-	CertificateExpiryInMilliseconds *string `type:"string"`
-
-	GroupId *string `type:"string"`
-}
-
-// String returns the string representation
-func (s UpdateGroupCertificateConfigurationOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s UpdateGroupCertificateConfigurationOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.CertificateAuthorityExpiryInMilliseconds != nil {
-		v := *s.CertificateAuthorityExpiryInMilliseconds
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "CertificateAuthorityExpiryInMilliseconds", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.CertificateExpiryInMilliseconds != nil {
-		v := *s.CertificateExpiryInMilliseconds
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "CertificateExpiryInMilliseconds", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.GroupId != nil {
-		v := *s.GroupId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "GroupId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opUpdateGroupCertificateConfiguration = "UpdateGroupCertificateConfiguration"
 
@@ -111,7 +24,7 @@ const opUpdateGroupCertificateConfiguration = "UpdateGroupCertificateConfigurati
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/UpdateGroupCertificateConfiguration
-func (c *Client) UpdateGroupCertificateConfigurationRequest(input *UpdateGroupCertificateConfigurationInput) UpdateGroupCertificateConfigurationRequest {
+func (c *Client) UpdateGroupCertificateConfigurationRequest(input *types.UpdateGroupCertificateConfigurationInput) UpdateGroupCertificateConfigurationRequest {
 	op := &aws.Operation{
 		Name:       opUpdateGroupCertificateConfiguration,
 		HTTPMethod: "PUT",
@@ -119,10 +32,10 @@ func (c *Client) UpdateGroupCertificateConfigurationRequest(input *UpdateGroupCe
 	}
 
 	if input == nil {
-		input = &UpdateGroupCertificateConfigurationInput{}
+		input = &types.UpdateGroupCertificateConfigurationInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateGroupCertificateConfigurationOutput{})
+	req := c.newRequest(op, input, &types.UpdateGroupCertificateConfigurationOutput{})
 	return UpdateGroupCertificateConfigurationRequest{Request: req, Input: input, Copy: c.UpdateGroupCertificateConfigurationRequest}
 }
 
@@ -130,8 +43,8 @@ func (c *Client) UpdateGroupCertificateConfigurationRequest(input *UpdateGroupCe
 // UpdateGroupCertificateConfiguration API operation.
 type UpdateGroupCertificateConfigurationRequest struct {
 	*aws.Request
-	Input *UpdateGroupCertificateConfigurationInput
-	Copy  func(*UpdateGroupCertificateConfigurationInput) UpdateGroupCertificateConfigurationRequest
+	Input *types.UpdateGroupCertificateConfigurationInput
+	Copy  func(*types.UpdateGroupCertificateConfigurationInput) UpdateGroupCertificateConfigurationRequest
 }
 
 // Send marshals and sends the UpdateGroupCertificateConfiguration API request.
@@ -143,7 +56,7 @@ func (r UpdateGroupCertificateConfigurationRequest) Send(ctx context.Context) (*
 	}
 
 	resp := &UpdateGroupCertificateConfigurationResponse{
-		UpdateGroupCertificateConfigurationOutput: r.Request.Data.(*UpdateGroupCertificateConfigurationOutput),
+		UpdateGroupCertificateConfigurationOutput: r.Request.Data.(*types.UpdateGroupCertificateConfigurationOutput),
 		response: &aws.Response{Request: r.Request},
 	}
 
@@ -153,7 +66,7 @@ func (r UpdateGroupCertificateConfigurationRequest) Send(ctx context.Context) (*
 // UpdateGroupCertificateConfigurationResponse is the response type for the
 // UpdateGroupCertificateConfiguration API operation.
 type UpdateGroupCertificateConfigurationResponse struct {
-	*UpdateGroupCertificateConfigurationOutput
+	*types.UpdateGroupCertificateConfigurationOutput
 
 	response *aws.Response
 }

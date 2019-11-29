@@ -6,46 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/gamelift/types"
 )
-
-// Represents the input for a request action.
-type DeleteMatchmakingConfigurationInput struct {
-	_ struct{} `type:"structure"`
-
-	// Unique identifier for a matchmaking configuration
-	//
-	// Name is a required field
-	Name *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteMatchmakingConfigurationInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteMatchmakingConfigurationInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteMatchmakingConfigurationInput"}
-
-	if s.Name == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Name"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteMatchmakingConfigurationOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteMatchmakingConfigurationOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteMatchmakingConfiguration = "DeleteMatchmakingConfiguration"
 
@@ -82,7 +44,7 @@ const opDeleteMatchmakingConfiguration = "DeleteMatchmakingConfiguration"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DeleteMatchmakingConfiguration
-func (c *Client) DeleteMatchmakingConfigurationRequest(input *DeleteMatchmakingConfigurationInput) DeleteMatchmakingConfigurationRequest {
+func (c *Client) DeleteMatchmakingConfigurationRequest(input *types.DeleteMatchmakingConfigurationInput) DeleteMatchmakingConfigurationRequest {
 	op := &aws.Operation{
 		Name:       opDeleteMatchmakingConfiguration,
 		HTTPMethod: "POST",
@@ -90,10 +52,10 @@ func (c *Client) DeleteMatchmakingConfigurationRequest(input *DeleteMatchmakingC
 	}
 
 	if input == nil {
-		input = &DeleteMatchmakingConfigurationInput{}
+		input = &types.DeleteMatchmakingConfigurationInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteMatchmakingConfigurationOutput{})
+	req := c.newRequest(op, input, &types.DeleteMatchmakingConfigurationOutput{})
 	return DeleteMatchmakingConfigurationRequest{Request: req, Input: input, Copy: c.DeleteMatchmakingConfigurationRequest}
 }
 
@@ -101,8 +63,8 @@ func (c *Client) DeleteMatchmakingConfigurationRequest(input *DeleteMatchmakingC
 // DeleteMatchmakingConfiguration API operation.
 type DeleteMatchmakingConfigurationRequest struct {
 	*aws.Request
-	Input *DeleteMatchmakingConfigurationInput
-	Copy  func(*DeleteMatchmakingConfigurationInput) DeleteMatchmakingConfigurationRequest
+	Input *types.DeleteMatchmakingConfigurationInput
+	Copy  func(*types.DeleteMatchmakingConfigurationInput) DeleteMatchmakingConfigurationRequest
 }
 
 // Send marshals and sends the DeleteMatchmakingConfiguration API request.
@@ -114,7 +76,7 @@ func (r DeleteMatchmakingConfigurationRequest) Send(ctx context.Context) (*Delet
 	}
 
 	resp := &DeleteMatchmakingConfigurationResponse{
-		DeleteMatchmakingConfigurationOutput: r.Request.Data.(*DeleteMatchmakingConfigurationOutput),
+		DeleteMatchmakingConfigurationOutput: r.Request.Data.(*types.DeleteMatchmakingConfigurationOutput),
 		response:                             &aws.Response{Request: r.Request},
 	}
 
@@ -124,7 +86,7 @@ func (r DeleteMatchmakingConfigurationRequest) Send(ctx context.Context) (*Delet
 // DeleteMatchmakingConfigurationResponse is the response type for the
 // DeleteMatchmakingConfiguration API operation.
 type DeleteMatchmakingConfigurationResponse struct {
-	*DeleteMatchmakingConfigurationOutput
+	*types.DeleteMatchmakingConfigurationOutput
 
 	response *aws.Response
 }

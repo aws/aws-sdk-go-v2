@@ -6,64 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/gamelift/types"
 )
-
-// Represents the input for a request action.
-type UpdateBuildInput struct {
-	_ struct{} `type:"structure"`
-
-	// Unique identifier for a build to update.
-	//
-	// BuildId is a required field
-	BuildId *string `type:"string" required:"true"`
-
-	// Descriptive label that is associated with a build. Build names do not need
-	// to be unique.
-	Name *string `min:"1" type:"string"`
-
-	// Version that is associated with a build or script. Version strings do not
-	// need to be unique.
-	Version *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s UpdateBuildInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateBuildInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateBuildInput"}
-
-	if s.BuildId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("BuildId"))
-	}
-	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
-	}
-	if s.Version != nil && len(*s.Version) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Version", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Represents the returned data in response to a request action.
-type UpdateBuildOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Object that contains the updated build record.
-	Build *Build `type:"structure"`
-}
-
-// String returns the string representation
-func (s UpdateBuildOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opUpdateBuild = "UpdateBuild"
 
@@ -99,7 +43,7 @@ const opUpdateBuild = "UpdateBuild"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/UpdateBuild
-func (c *Client) UpdateBuildRequest(input *UpdateBuildInput) UpdateBuildRequest {
+func (c *Client) UpdateBuildRequest(input *types.UpdateBuildInput) UpdateBuildRequest {
 	op := &aws.Operation{
 		Name:       opUpdateBuild,
 		HTTPMethod: "POST",
@@ -107,10 +51,10 @@ func (c *Client) UpdateBuildRequest(input *UpdateBuildInput) UpdateBuildRequest 
 	}
 
 	if input == nil {
-		input = &UpdateBuildInput{}
+		input = &types.UpdateBuildInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateBuildOutput{})
+	req := c.newRequest(op, input, &types.UpdateBuildOutput{})
 	return UpdateBuildRequest{Request: req, Input: input, Copy: c.UpdateBuildRequest}
 }
 
@@ -118,8 +62,8 @@ func (c *Client) UpdateBuildRequest(input *UpdateBuildInput) UpdateBuildRequest 
 // UpdateBuild API operation.
 type UpdateBuildRequest struct {
 	*aws.Request
-	Input *UpdateBuildInput
-	Copy  func(*UpdateBuildInput) UpdateBuildRequest
+	Input *types.UpdateBuildInput
+	Copy  func(*types.UpdateBuildInput) UpdateBuildRequest
 }
 
 // Send marshals and sends the UpdateBuild API request.
@@ -131,7 +75,7 @@ func (r UpdateBuildRequest) Send(ctx context.Context) (*UpdateBuildResponse, err
 	}
 
 	resp := &UpdateBuildResponse{
-		UpdateBuildOutput: r.Request.Data.(*UpdateBuildOutput),
+		UpdateBuildOutput: r.Request.Data.(*types.UpdateBuildOutput),
 		response:          &aws.Response{Request: r.Request},
 	}
 
@@ -141,7 +85,7 @@ func (r UpdateBuildRequest) Send(ctx context.Context) (*UpdateBuildResponse, err
 // UpdateBuildResponse is the response type for the
 // UpdateBuild API operation.
 type UpdateBuildResponse struct {
-	*UpdateBuildOutput
+	*types.UpdateBuildOutput
 
 	response *aws.Response
 }

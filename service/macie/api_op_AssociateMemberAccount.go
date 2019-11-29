@@ -6,48 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
+	"github.com/aws/aws-sdk-go-v2/service/macie/types"
 )
-
-type AssociateMemberAccountInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the AWS account that you want to associate with Amazon Macie as
-	// a member account.
-	//
-	// MemberAccountId is a required field
-	MemberAccountId *string `locationName:"memberAccountId" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s AssociateMemberAccountInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *AssociateMemberAccountInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "AssociateMemberAccountInput"}
-
-	if s.MemberAccountId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("MemberAccountId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type AssociateMemberAccountOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s AssociateMemberAccountOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opAssociateMemberAccount = "AssociateMemberAccount"
 
@@ -64,7 +26,7 @@ const opAssociateMemberAccount = "AssociateMemberAccount"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/macie-2017-12-19/AssociateMemberAccount
-func (c *Client) AssociateMemberAccountRequest(input *AssociateMemberAccountInput) AssociateMemberAccountRequest {
+func (c *Client) AssociateMemberAccountRequest(input *types.AssociateMemberAccountInput) AssociateMemberAccountRequest {
 	op := &aws.Operation{
 		Name:       opAssociateMemberAccount,
 		HTTPMethod: "POST",
@@ -72,10 +34,10 @@ func (c *Client) AssociateMemberAccountRequest(input *AssociateMemberAccountInpu
 	}
 
 	if input == nil {
-		input = &AssociateMemberAccountInput{}
+		input = &types.AssociateMemberAccountInput{}
 	}
 
-	req := c.newRequest(op, input, &AssociateMemberAccountOutput{})
+	req := c.newRequest(op, input, &types.AssociateMemberAccountOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return AssociateMemberAccountRequest{Request: req, Input: input, Copy: c.AssociateMemberAccountRequest}
@@ -85,8 +47,8 @@ func (c *Client) AssociateMemberAccountRequest(input *AssociateMemberAccountInpu
 // AssociateMemberAccount API operation.
 type AssociateMemberAccountRequest struct {
 	*aws.Request
-	Input *AssociateMemberAccountInput
-	Copy  func(*AssociateMemberAccountInput) AssociateMemberAccountRequest
+	Input *types.AssociateMemberAccountInput
+	Copy  func(*types.AssociateMemberAccountInput) AssociateMemberAccountRequest
 }
 
 // Send marshals and sends the AssociateMemberAccount API request.
@@ -98,7 +60,7 @@ func (r AssociateMemberAccountRequest) Send(ctx context.Context) (*AssociateMemb
 	}
 
 	resp := &AssociateMemberAccountResponse{
-		AssociateMemberAccountOutput: r.Request.Data.(*AssociateMemberAccountOutput),
+		AssociateMemberAccountOutput: r.Request.Data.(*types.AssociateMemberAccountOutput),
 		response:                     &aws.Response{Request: r.Request},
 	}
 
@@ -108,7 +70,7 @@ func (r AssociateMemberAccountRequest) Send(ctx context.Context) (*AssociateMemb
 // AssociateMemberAccountResponse is the response type for the
 // AssociateMemberAccount API operation.
 type AssociateMemberAccountResponse struct {
-	*AssociateMemberAccountOutput
+	*types.AssociateMemberAccountOutput
 
 	response *aws.Response
 }

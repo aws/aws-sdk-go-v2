@@ -6,86 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/apigateway/types"
 )
-
-// Gets the VpcLinks collection under the caller's account in a selected region.
-type GetVpcLinksInput struct {
-	_ struct{} `type:"structure"`
-
-	// The maximum number of returned results per page. The default value is 25
-	// and the maximum value is 500.
-	Limit *int64 `location:"querystring" locationName:"limit" type:"integer"`
-
-	// The current pagination position in the paged result set.
-	Position *string `location:"querystring" locationName:"position" type:"string"`
-}
-
-// String returns the string representation
-func (s GetVpcLinksInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetVpcLinksInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.Limit != nil {
-		v := *s.Limit
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "limit", protocol.Int64Value(v), metadata)
-	}
-	if s.Position != nil {
-		v := *s.Position
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "position", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-// The collection of VPC links under the caller's account in a region.
-//
-// Getting Started with Private Integrations (https://docs.aws.amazon.com/apigateway/latest/developerguide/getting-started-with-private-integration.html),
-// Set up Private Integrations (https://docs.aws.amazon.com/apigateway/latest/developerguide/set-up-private-integration.html)
-type GetVpcLinksOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The current page of elements from this collection.
-	Items []VpcLink `locationName:"item" type:"list"`
-
-	Position *string `locationName:"position" type:"string"`
-}
-
-// String returns the string representation
-func (s GetVpcLinksOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetVpcLinksOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.Items != nil {
-		v := s.Items
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "item", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	if s.Position != nil {
-		v := *s.Position
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "position", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opGetVpcLinks = "GetVpcLinks"
 
@@ -100,7 +22,7 @@ const opGetVpcLinks = "GetVpcLinks"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) GetVpcLinksRequest(input *GetVpcLinksInput) GetVpcLinksRequest {
+func (c *Client) GetVpcLinksRequest(input *types.GetVpcLinksInput) GetVpcLinksRequest {
 	op := &aws.Operation{
 		Name:       opGetVpcLinks,
 		HTTPMethod: "GET",
@@ -114,10 +36,10 @@ func (c *Client) GetVpcLinksRequest(input *GetVpcLinksInput) GetVpcLinksRequest 
 	}
 
 	if input == nil {
-		input = &GetVpcLinksInput{}
+		input = &types.GetVpcLinksInput{}
 	}
 
-	req := c.newRequest(op, input, &GetVpcLinksOutput{})
+	req := c.newRequest(op, input, &types.GetVpcLinksOutput{})
 	return GetVpcLinksRequest{Request: req, Input: input, Copy: c.GetVpcLinksRequest}
 }
 
@@ -125,8 +47,8 @@ func (c *Client) GetVpcLinksRequest(input *GetVpcLinksInput) GetVpcLinksRequest 
 // GetVpcLinks API operation.
 type GetVpcLinksRequest struct {
 	*aws.Request
-	Input *GetVpcLinksInput
-	Copy  func(*GetVpcLinksInput) GetVpcLinksRequest
+	Input *types.GetVpcLinksInput
+	Copy  func(*types.GetVpcLinksInput) GetVpcLinksRequest
 }
 
 // Send marshals and sends the GetVpcLinks API request.
@@ -138,7 +60,7 @@ func (r GetVpcLinksRequest) Send(ctx context.Context) (*GetVpcLinksResponse, err
 	}
 
 	resp := &GetVpcLinksResponse{
-		GetVpcLinksOutput: r.Request.Data.(*GetVpcLinksOutput),
+		GetVpcLinksOutput: r.Request.Data.(*types.GetVpcLinksOutput),
 		response:          &aws.Response{Request: r.Request},
 	}
 
@@ -168,7 +90,7 @@ func NewGetVpcLinksPaginator(req GetVpcLinksRequest) GetVpcLinksPaginator {
 	return GetVpcLinksPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *GetVpcLinksInput
+				var inCpy *types.GetVpcLinksInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -188,14 +110,14 @@ type GetVpcLinksPaginator struct {
 	aws.Pager
 }
 
-func (p *GetVpcLinksPaginator) CurrentPage() *GetVpcLinksOutput {
-	return p.Pager.CurrentPage().(*GetVpcLinksOutput)
+func (p *GetVpcLinksPaginator) CurrentPage() *types.GetVpcLinksOutput {
+	return p.Pager.CurrentPage().(*types.GetVpcLinksOutput)
 }
 
 // GetVpcLinksResponse is the response type for the
 // GetVpcLinks API operation.
 type GetVpcLinksResponse struct {
-	*GetVpcLinksOutput
+	*types.GetVpcLinksOutput
 
 	response *aws.Response
 }

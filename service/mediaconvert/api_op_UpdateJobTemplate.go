@@ -6,166 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/mediaconvert/types"
 )
-
-// Modify a job template by sending a request with the job template name and
-// any of the following that you wish to change: description, category, and
-// queue.
-type UpdateJobTemplateInput struct {
-	_ struct{} `type:"structure"`
-
-	// Accelerated transcoding can significantly speed up jobs with long, visually
-	// complex content. Outputs that use this feature incur pro-tier pricing. For
-	// information about feature limitations, see the AWS Elemental MediaConvert
-	// User Guide.
-	AccelerationSettings *AccelerationSettings `locationName:"accelerationSettings" type:"structure"`
-
-	// The new category for the job template, if you are changing it.
-	Category *string `locationName:"category" type:"string"`
-
-	// The new description for the job template, if you are changing it.
-	Description *string `locationName:"description" type:"string"`
-
-	// The name of the job template you are modifying
-	//
-	// Name is a required field
-	Name *string `location:"uri" locationName:"name" type:"string" required:"true"`
-
-	// Specify the relative priority for this job. In any given queue, the service
-	// begins processing the job with the highest value first. When more than one
-	// job has the same priority, the service begins processing the job that you
-	// submitted first. If you don't specify a priority, the service uses the default
-	// value 0.
-	Priority *int64 `locationName:"priority" type:"integer"`
-
-	// The new queue for the job template, if you are changing it.
-	Queue *string `locationName:"queue" type:"string"`
-
-	// JobTemplateSettings contains all the transcode settings saved in the template
-	// that will be applied to jobs created from it.
-	Settings *JobTemplateSettings `locationName:"settings" type:"structure"`
-
-	// Specify how often MediaConvert sends STATUS_UPDATE events to Amazon CloudWatch
-	// Events. Set the interval, in seconds, between status updates. MediaConvert
-	// sends an update at this interval from the time the service begins processing
-	// your job to the time it completes the transcode or encounters an error.
-	StatusUpdateInterval StatusUpdateInterval `locationName:"statusUpdateInterval" type:"string" enum:"true"`
-}
-
-// String returns the string representation
-func (s UpdateJobTemplateInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateJobTemplateInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateJobTemplateInput"}
-
-	if s.Name == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Name"))
-	}
-	if s.Priority != nil && *s.Priority < -50 {
-		invalidParams.Add(aws.NewErrParamMinValue("Priority", -50))
-	}
-	if s.AccelerationSettings != nil {
-		if err := s.AccelerationSettings.Validate(); err != nil {
-			invalidParams.AddNested("AccelerationSettings", err.(aws.ErrInvalidParams))
-		}
-	}
-	if s.Settings != nil {
-		if err := s.Settings.Validate(); err != nil {
-			invalidParams.AddNested("Settings", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s UpdateJobTemplateInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.AccelerationSettings != nil {
-		v := s.AccelerationSettings
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "accelerationSettings", v, metadata)
-	}
-	if s.Category != nil {
-		v := *s.Category
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "category", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Description != nil {
-		v := *s.Description
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "description", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Priority != nil {
-		v := *s.Priority
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "priority", protocol.Int64Value(v), metadata)
-	}
-	if s.Queue != nil {
-		v := *s.Queue
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "queue", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Settings != nil {
-		v := s.Settings
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "settings", v, metadata)
-	}
-	if len(s.StatusUpdateInterval) > 0 {
-		v := s.StatusUpdateInterval
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "statusUpdateInterval", protocol.QuotedValue{ValueMarshaler: v}, metadata)
-	}
-	if s.Name != nil {
-		v := *s.Name
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-// Successful update job template requests will return the new job template
-// JSON.
-type UpdateJobTemplateOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A job template is a pre-made set of encoding instructions that you can use
-	// to quickly create a job.
-	JobTemplate *JobTemplate `locationName:"jobTemplate" type:"structure"`
-}
-
-// String returns the string representation
-func (s UpdateJobTemplateOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s UpdateJobTemplateOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.JobTemplate != nil {
-		v := s.JobTemplate
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "jobTemplate", v, metadata)
-	}
-	return nil
-}
 
 const opUpdateJobTemplate = "UpdateJobTemplate"
 
@@ -182,7 +24,7 @@ const opUpdateJobTemplate = "UpdateJobTemplate"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/UpdateJobTemplate
-func (c *Client) UpdateJobTemplateRequest(input *UpdateJobTemplateInput) UpdateJobTemplateRequest {
+func (c *Client) UpdateJobTemplateRequest(input *types.UpdateJobTemplateInput) UpdateJobTemplateRequest {
 	op := &aws.Operation{
 		Name:       opUpdateJobTemplate,
 		HTTPMethod: "PUT",
@@ -190,10 +32,10 @@ func (c *Client) UpdateJobTemplateRequest(input *UpdateJobTemplateInput) UpdateJ
 	}
 
 	if input == nil {
-		input = &UpdateJobTemplateInput{}
+		input = &types.UpdateJobTemplateInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateJobTemplateOutput{})
+	req := c.newRequest(op, input, &types.UpdateJobTemplateOutput{})
 	return UpdateJobTemplateRequest{Request: req, Input: input, Copy: c.UpdateJobTemplateRequest}
 }
 
@@ -201,8 +43,8 @@ func (c *Client) UpdateJobTemplateRequest(input *UpdateJobTemplateInput) UpdateJ
 // UpdateJobTemplate API operation.
 type UpdateJobTemplateRequest struct {
 	*aws.Request
-	Input *UpdateJobTemplateInput
-	Copy  func(*UpdateJobTemplateInput) UpdateJobTemplateRequest
+	Input *types.UpdateJobTemplateInput
+	Copy  func(*types.UpdateJobTemplateInput) UpdateJobTemplateRequest
 }
 
 // Send marshals and sends the UpdateJobTemplate API request.
@@ -214,7 +56,7 @@ func (r UpdateJobTemplateRequest) Send(ctx context.Context) (*UpdateJobTemplateR
 	}
 
 	resp := &UpdateJobTemplateResponse{
-		UpdateJobTemplateOutput: r.Request.Data.(*UpdateJobTemplateOutput),
+		UpdateJobTemplateOutput: r.Request.Data.(*types.UpdateJobTemplateOutput),
 		response:                &aws.Response{Request: r.Request},
 	}
 
@@ -224,7 +66,7 @@ func (r UpdateJobTemplateRequest) Send(ctx context.Context) (*UpdateJobTemplateR
 // UpdateJobTemplateResponse is the response type for the
 // UpdateJobTemplate API operation.
 type UpdateJobTemplateResponse struct {
-	*UpdateJobTemplateOutput
+	*types.UpdateJobTemplateOutput
 
 	response *aws.Response
 }

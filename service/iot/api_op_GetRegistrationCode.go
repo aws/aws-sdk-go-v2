@@ -6,50 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/iot/types"
 )
-
-// The input to the GetRegistrationCode operation.
-type GetRegistrationCodeInput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s GetRegistrationCodeInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetRegistrationCodeInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	return nil
-}
-
-// The output from the GetRegistrationCode operation.
-type GetRegistrationCodeOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The CA certificate registration code.
-	RegistrationCode *string `locationName:"registrationCode" min:"64" type:"string"`
-}
-
-// String returns the string representation
-func (s GetRegistrationCodeOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetRegistrationCodeOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.RegistrationCode != nil {
-		v := *s.RegistrationCode
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "registrationCode", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opGetRegistrationCode = "GetRegistrationCode"
 
@@ -64,7 +22,7 @@ const opGetRegistrationCode = "GetRegistrationCode"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) GetRegistrationCodeRequest(input *GetRegistrationCodeInput) GetRegistrationCodeRequest {
+func (c *Client) GetRegistrationCodeRequest(input *types.GetRegistrationCodeInput) GetRegistrationCodeRequest {
 	op := &aws.Operation{
 		Name:       opGetRegistrationCode,
 		HTTPMethod: "GET",
@@ -72,10 +30,10 @@ func (c *Client) GetRegistrationCodeRequest(input *GetRegistrationCodeInput) Get
 	}
 
 	if input == nil {
-		input = &GetRegistrationCodeInput{}
+		input = &types.GetRegistrationCodeInput{}
 	}
 
-	req := c.newRequest(op, input, &GetRegistrationCodeOutput{})
+	req := c.newRequest(op, input, &types.GetRegistrationCodeOutput{})
 	return GetRegistrationCodeRequest{Request: req, Input: input, Copy: c.GetRegistrationCodeRequest}
 }
 
@@ -83,8 +41,8 @@ func (c *Client) GetRegistrationCodeRequest(input *GetRegistrationCodeInput) Get
 // GetRegistrationCode API operation.
 type GetRegistrationCodeRequest struct {
 	*aws.Request
-	Input *GetRegistrationCodeInput
-	Copy  func(*GetRegistrationCodeInput) GetRegistrationCodeRequest
+	Input *types.GetRegistrationCodeInput
+	Copy  func(*types.GetRegistrationCodeInput) GetRegistrationCodeRequest
 }
 
 // Send marshals and sends the GetRegistrationCode API request.
@@ -96,7 +54,7 @@ func (r GetRegistrationCodeRequest) Send(ctx context.Context) (*GetRegistrationC
 	}
 
 	resp := &GetRegistrationCodeResponse{
-		GetRegistrationCodeOutput: r.Request.Data.(*GetRegistrationCodeOutput),
+		GetRegistrationCodeOutput: r.Request.Data.(*types.GetRegistrationCodeOutput),
 		response:                  &aws.Response{Request: r.Request},
 	}
 
@@ -106,7 +64,7 @@ func (r GetRegistrationCodeRequest) Send(ctx context.Context) (*GetRegistrationC
 // GetRegistrationCodeResponse is the response type for the
 // GetRegistrationCode API operation.
 type GetRegistrationCodeResponse struct {
-	*GetRegistrationCodeOutput
+	*types.GetRegistrationCodeOutput
 
 	response *aws.Response
 }

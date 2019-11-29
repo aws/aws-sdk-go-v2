@@ -6,63 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/cloudwatchlogs/types"
 )
-
-type DescribeDestinationsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The prefix to match. If you don't specify a value, no prefix filter is applied.
-	DestinationNamePrefix *string `min:"1" type:"string"`
-
-	// The maximum number of items returned. If you don't specify a value, the default
-	// is up to 50 items.
-	Limit *int64 `locationName:"limit" min:"1" type:"integer"`
-
-	// The token for the next set of items to return. (You received this token from
-	// a previous call.)
-	NextToken *string `locationName:"nextToken" min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeDestinationsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeDestinationsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeDestinationsInput"}
-	if s.DestinationNamePrefix != nil && len(*s.DestinationNamePrefix) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("DestinationNamePrefix", 1))
-	}
-	if s.Limit != nil && *s.Limit < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("Limit", 1))
-	}
-	if s.NextToken != nil && len(*s.NextToken) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribeDestinationsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The destinations.
-	Destinations []Destination `locationName:"destinations" type:"list"`
-
-	// The token for the next set of items to return. The token expires after 24
-	// hours.
-	NextToken *string `locationName:"nextToken" min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeDestinationsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeDestinations = "DescribeDestinations"
 
@@ -80,7 +25,7 @@ const opDescribeDestinations = "DescribeDestinations"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/DescribeDestinations
-func (c *Client) DescribeDestinationsRequest(input *DescribeDestinationsInput) DescribeDestinationsRequest {
+func (c *Client) DescribeDestinationsRequest(input *types.DescribeDestinationsInput) DescribeDestinationsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeDestinations,
 		HTTPMethod: "POST",
@@ -94,10 +39,10 @@ func (c *Client) DescribeDestinationsRequest(input *DescribeDestinationsInput) D
 	}
 
 	if input == nil {
-		input = &DescribeDestinationsInput{}
+		input = &types.DescribeDestinationsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeDestinationsOutput{})
+	req := c.newRequest(op, input, &types.DescribeDestinationsOutput{})
 	return DescribeDestinationsRequest{Request: req, Input: input, Copy: c.DescribeDestinationsRequest}
 }
 
@@ -105,8 +50,8 @@ func (c *Client) DescribeDestinationsRequest(input *DescribeDestinationsInput) D
 // DescribeDestinations API operation.
 type DescribeDestinationsRequest struct {
 	*aws.Request
-	Input *DescribeDestinationsInput
-	Copy  func(*DescribeDestinationsInput) DescribeDestinationsRequest
+	Input *types.DescribeDestinationsInput
+	Copy  func(*types.DescribeDestinationsInput) DescribeDestinationsRequest
 }
 
 // Send marshals and sends the DescribeDestinations API request.
@@ -118,7 +63,7 @@ func (r DescribeDestinationsRequest) Send(ctx context.Context) (*DescribeDestina
 	}
 
 	resp := &DescribeDestinationsResponse{
-		DescribeDestinationsOutput: r.Request.Data.(*DescribeDestinationsOutput),
+		DescribeDestinationsOutput: r.Request.Data.(*types.DescribeDestinationsOutput),
 		response:                   &aws.Response{Request: r.Request},
 	}
 
@@ -148,7 +93,7 @@ func NewDescribeDestinationsPaginator(req DescribeDestinationsRequest) DescribeD
 	return DescribeDestinationsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *DescribeDestinationsInput
+				var inCpy *types.DescribeDestinationsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -168,14 +113,14 @@ type DescribeDestinationsPaginator struct {
 	aws.Pager
 }
 
-func (p *DescribeDestinationsPaginator) CurrentPage() *DescribeDestinationsOutput {
-	return p.Pager.CurrentPage().(*DescribeDestinationsOutput)
+func (p *DescribeDestinationsPaginator) CurrentPage() *types.DescribeDestinationsOutput {
+	return p.Pager.CurrentPage().(*types.DescribeDestinationsOutput)
 }
 
 // DescribeDestinationsResponse is the response type for the
 // DescribeDestinations API operation.
 type DescribeDestinationsResponse struct {
-	*DescribeDestinationsOutput
+	*types.DescribeDestinationsOutput
 
 	response *aws.Response
 }

@@ -6,48 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/ram/types"
 )
-
-type EnableSharingWithAwsOrganizationInput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s EnableSharingWithAwsOrganizationInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s EnableSharingWithAwsOrganizationInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	return nil
-}
-
-type EnableSharingWithAwsOrganizationOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Indicates whether the request succeeded.
-	ReturnValue *bool `locationName:"returnValue" type:"boolean"`
-}
-
-// String returns the string representation
-func (s EnableSharingWithAwsOrganizationOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s EnableSharingWithAwsOrganizationOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.ReturnValue != nil {
-		v := *s.ReturnValue
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "returnValue", protocol.BoolValue(v), metadata)
-	}
-	return nil
-}
 
 const opEnableSharingWithAwsOrganization = "EnableSharingWithAwsOrganization"
 
@@ -66,7 +26,7 @@ const opEnableSharingWithAwsOrganization = "EnableSharingWithAwsOrganization"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/EnableSharingWithAwsOrganization
-func (c *Client) EnableSharingWithAwsOrganizationRequest(input *EnableSharingWithAwsOrganizationInput) EnableSharingWithAwsOrganizationRequest {
+func (c *Client) EnableSharingWithAwsOrganizationRequest(input *types.EnableSharingWithAwsOrganizationInput) EnableSharingWithAwsOrganizationRequest {
 	op := &aws.Operation{
 		Name:       opEnableSharingWithAwsOrganization,
 		HTTPMethod: "POST",
@@ -74,10 +34,10 @@ func (c *Client) EnableSharingWithAwsOrganizationRequest(input *EnableSharingWit
 	}
 
 	if input == nil {
-		input = &EnableSharingWithAwsOrganizationInput{}
+		input = &types.EnableSharingWithAwsOrganizationInput{}
 	}
 
-	req := c.newRequest(op, input, &EnableSharingWithAwsOrganizationOutput{})
+	req := c.newRequest(op, input, &types.EnableSharingWithAwsOrganizationOutput{})
 	return EnableSharingWithAwsOrganizationRequest{Request: req, Input: input, Copy: c.EnableSharingWithAwsOrganizationRequest}
 }
 
@@ -85,8 +45,8 @@ func (c *Client) EnableSharingWithAwsOrganizationRequest(input *EnableSharingWit
 // EnableSharingWithAwsOrganization API operation.
 type EnableSharingWithAwsOrganizationRequest struct {
 	*aws.Request
-	Input *EnableSharingWithAwsOrganizationInput
-	Copy  func(*EnableSharingWithAwsOrganizationInput) EnableSharingWithAwsOrganizationRequest
+	Input *types.EnableSharingWithAwsOrganizationInput
+	Copy  func(*types.EnableSharingWithAwsOrganizationInput) EnableSharingWithAwsOrganizationRequest
 }
 
 // Send marshals and sends the EnableSharingWithAwsOrganization API request.
@@ -98,7 +58,7 @@ func (r EnableSharingWithAwsOrganizationRequest) Send(ctx context.Context) (*Ena
 	}
 
 	resp := &EnableSharingWithAwsOrganizationResponse{
-		EnableSharingWithAwsOrganizationOutput: r.Request.Data.(*EnableSharingWithAwsOrganizationOutput),
+		EnableSharingWithAwsOrganizationOutput: r.Request.Data.(*types.EnableSharingWithAwsOrganizationOutput),
 		response:                               &aws.Response{Request: r.Request},
 	}
 
@@ -108,7 +68,7 @@ func (r EnableSharingWithAwsOrganizationRequest) Send(ctx context.Context) (*Ena
 // EnableSharingWithAwsOrganizationResponse is the response type for the
 // EnableSharingWithAwsOrganization API operation.
 type EnableSharingWithAwsOrganizationResponse struct {
-	*EnableSharingWithAwsOrganizationOutput
+	*types.EnableSharingWithAwsOrganizationOutput
 
 	response *aws.Response
 }

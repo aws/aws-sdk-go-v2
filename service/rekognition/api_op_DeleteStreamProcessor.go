@@ -6,48 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/rekognition/types"
 )
-
-type DeleteStreamProcessorInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the stream processor you want to delete.
-	//
-	// Name is a required field
-	Name *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteStreamProcessorInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteStreamProcessorInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteStreamProcessorInput"}
-
-	if s.Name == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Name"))
-	}
-	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteStreamProcessorOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteStreamProcessorOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteStreamProcessor = "DeleteStreamProcessor"
 
@@ -65,7 +25,7 @@ const opDeleteStreamProcessor = "DeleteStreamProcessor"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) DeleteStreamProcessorRequest(input *DeleteStreamProcessorInput) DeleteStreamProcessorRequest {
+func (c *Client) DeleteStreamProcessorRequest(input *types.DeleteStreamProcessorInput) DeleteStreamProcessorRequest {
 	op := &aws.Operation{
 		Name:       opDeleteStreamProcessor,
 		HTTPMethod: "POST",
@@ -73,10 +33,10 @@ func (c *Client) DeleteStreamProcessorRequest(input *DeleteStreamProcessorInput)
 	}
 
 	if input == nil {
-		input = &DeleteStreamProcessorInput{}
+		input = &types.DeleteStreamProcessorInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteStreamProcessorOutput{})
+	req := c.newRequest(op, input, &types.DeleteStreamProcessorOutput{})
 	return DeleteStreamProcessorRequest{Request: req, Input: input, Copy: c.DeleteStreamProcessorRequest}
 }
 
@@ -84,8 +44,8 @@ func (c *Client) DeleteStreamProcessorRequest(input *DeleteStreamProcessorInput)
 // DeleteStreamProcessor API operation.
 type DeleteStreamProcessorRequest struct {
 	*aws.Request
-	Input *DeleteStreamProcessorInput
-	Copy  func(*DeleteStreamProcessorInput) DeleteStreamProcessorRequest
+	Input *types.DeleteStreamProcessorInput
+	Copy  func(*types.DeleteStreamProcessorInput) DeleteStreamProcessorRequest
 }
 
 // Send marshals and sends the DeleteStreamProcessor API request.
@@ -97,7 +57,7 @@ func (r DeleteStreamProcessorRequest) Send(ctx context.Context) (*DeleteStreamPr
 	}
 
 	resp := &DeleteStreamProcessorResponse{
-		DeleteStreamProcessorOutput: r.Request.Data.(*DeleteStreamProcessorOutput),
+		DeleteStreamProcessorOutput: r.Request.Data.(*types.DeleteStreamProcessorOutput),
 		response:                    &aws.Response{Request: r.Request},
 	}
 
@@ -107,7 +67,7 @@ func (r DeleteStreamProcessorRequest) Send(ctx context.Context) (*DeleteStreamPr
 // DeleteStreamProcessorResponse is the response type for the
 // DeleteStreamProcessor API operation.
 type DeleteStreamProcessorResponse struct {
-	*DeleteStreamProcessorOutput
+	*types.DeleteStreamProcessorOutput
 
 	response *aws.Response
 }

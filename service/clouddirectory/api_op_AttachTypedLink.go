@@ -4,155 +4,10 @@ package clouddirectory
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/clouddirectory/types"
 )
-
-type AttachTypedLinkInput struct {
-	_ struct{} `type:"structure"`
-
-	// A set of attributes that are associated with the typed link.
-	//
-	// Attributes is a required field
-	Attributes []AttributeNameAndValue `type:"list" required:"true"`
-
-	// The Amazon Resource Name (ARN) of the directory where you want to attach
-	// the typed link.
-	//
-	// DirectoryArn is a required field
-	DirectoryArn *string `location:"header" locationName:"x-amz-data-partition" type:"string" required:"true"`
-
-	// Identifies the source object that the typed link will attach to.
-	//
-	// SourceObjectReference is a required field
-	SourceObjectReference *ObjectReference `type:"structure" required:"true"`
-
-	// Identifies the target object that the typed link will attach to.
-	//
-	// TargetObjectReference is a required field
-	TargetObjectReference *ObjectReference `type:"structure" required:"true"`
-
-	// Identifies the typed link facet that is associated with the typed link.
-	//
-	// TypedLinkFacet is a required field
-	TypedLinkFacet *TypedLinkSchemaAndFacetName `type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s AttachTypedLinkInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *AttachTypedLinkInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "AttachTypedLinkInput"}
-
-	if s.Attributes == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Attributes"))
-	}
-
-	if s.DirectoryArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DirectoryArn"))
-	}
-
-	if s.SourceObjectReference == nil {
-		invalidParams.Add(aws.NewErrParamRequired("SourceObjectReference"))
-	}
-
-	if s.TargetObjectReference == nil {
-		invalidParams.Add(aws.NewErrParamRequired("TargetObjectReference"))
-	}
-
-	if s.TypedLinkFacet == nil {
-		invalidParams.Add(aws.NewErrParamRequired("TypedLinkFacet"))
-	}
-	if s.Attributes != nil {
-		for i, v := range s.Attributes {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Attributes", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-	if s.TypedLinkFacet != nil {
-		if err := s.TypedLinkFacet.Validate(); err != nil {
-			invalidParams.AddNested("TypedLinkFacet", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s AttachTypedLinkInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.Attributes != nil {
-		v := s.Attributes
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "Attributes", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	if s.SourceObjectReference != nil {
-		v := s.SourceObjectReference
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "SourceObjectReference", v, metadata)
-	}
-	if s.TargetObjectReference != nil {
-		v := s.TargetObjectReference
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "TargetObjectReference", v, metadata)
-	}
-	if s.TypedLinkFacet != nil {
-		v := s.TypedLinkFacet
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "TypedLinkFacet", v, metadata)
-	}
-	if s.DirectoryArn != nil {
-		v := *s.DirectoryArn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "x-amz-data-partition", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type AttachTypedLinkOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Returns a typed link specifier as output.
-	TypedLinkSpecifier *TypedLinkSpecifier `type:"structure"`
-}
-
-// String returns the string representation
-func (s AttachTypedLinkOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s AttachTypedLinkOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.TypedLinkSpecifier != nil {
-		v := s.TypedLinkSpecifier
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "TypedLinkSpecifier", v, metadata)
-	}
-	return nil
-}
 
 const opAttachTypedLink = "AttachTypedLink"
 
@@ -170,7 +25,7 @@ const opAttachTypedLink = "AttachTypedLink"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/AttachTypedLink
-func (c *Client) AttachTypedLinkRequest(input *AttachTypedLinkInput) AttachTypedLinkRequest {
+func (c *Client) AttachTypedLinkRequest(input *types.AttachTypedLinkInput) AttachTypedLinkRequest {
 	op := &aws.Operation{
 		Name:       opAttachTypedLink,
 		HTTPMethod: "PUT",
@@ -178,10 +33,10 @@ func (c *Client) AttachTypedLinkRequest(input *AttachTypedLinkInput) AttachTyped
 	}
 
 	if input == nil {
-		input = &AttachTypedLinkInput{}
+		input = &types.AttachTypedLinkInput{}
 	}
 
-	req := c.newRequest(op, input, &AttachTypedLinkOutput{})
+	req := c.newRequest(op, input, &types.AttachTypedLinkOutput{})
 	return AttachTypedLinkRequest{Request: req, Input: input, Copy: c.AttachTypedLinkRequest}
 }
 
@@ -189,8 +44,8 @@ func (c *Client) AttachTypedLinkRequest(input *AttachTypedLinkInput) AttachTyped
 // AttachTypedLink API operation.
 type AttachTypedLinkRequest struct {
 	*aws.Request
-	Input *AttachTypedLinkInput
-	Copy  func(*AttachTypedLinkInput) AttachTypedLinkRequest
+	Input *types.AttachTypedLinkInput
+	Copy  func(*types.AttachTypedLinkInput) AttachTypedLinkRequest
 }
 
 // Send marshals and sends the AttachTypedLink API request.
@@ -202,7 +57,7 @@ func (r AttachTypedLinkRequest) Send(ctx context.Context) (*AttachTypedLinkRespo
 	}
 
 	resp := &AttachTypedLinkResponse{
-		AttachTypedLinkOutput: r.Request.Data.(*AttachTypedLinkOutput),
+		AttachTypedLinkOutput: r.Request.Data.(*types.AttachTypedLinkOutput),
 		response:              &aws.Response{Request: r.Request},
 	}
 
@@ -212,7 +67,7 @@ func (r AttachTypedLinkRequest) Send(ctx context.Context) (*AttachTypedLinkRespo
 // AttachTypedLinkResponse is the response type for the
 // AttachTypedLink API operation.
 type AttachTypedLinkResponse struct {
-	*AttachTypedLinkOutput
+	*types.AttachTypedLinkOutput
 
 	response *aws.Response
 }

@@ -6,56 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/elasticloadbalancing/types"
 )
-
-// Contains the parameters for DeleteLoadBalancerPolicy.
-type DeleteLoadBalancerPolicyInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the load balancer.
-	//
-	// LoadBalancerName is a required field
-	LoadBalancerName *string `type:"string" required:"true"`
-
-	// The name of the policy.
-	//
-	// PolicyName is a required field
-	PolicyName *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteLoadBalancerPolicyInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteLoadBalancerPolicyInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteLoadBalancerPolicyInput"}
-
-	if s.LoadBalancerName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("LoadBalancerName"))
-	}
-
-	if s.PolicyName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("PolicyName"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Contains the output of DeleteLoadBalancerPolicy.
-type DeleteLoadBalancerPolicyOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteLoadBalancerPolicyOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteLoadBalancerPolicy = "DeleteLoadBalancerPolicy"
 
@@ -73,7 +25,7 @@ const opDeleteLoadBalancerPolicy = "DeleteLoadBalancerPolicy"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/DeleteLoadBalancerPolicy
-func (c *Client) DeleteLoadBalancerPolicyRequest(input *DeleteLoadBalancerPolicyInput) DeleteLoadBalancerPolicyRequest {
+func (c *Client) DeleteLoadBalancerPolicyRequest(input *types.DeleteLoadBalancerPolicyInput) DeleteLoadBalancerPolicyRequest {
 	op := &aws.Operation{
 		Name:       opDeleteLoadBalancerPolicy,
 		HTTPMethod: "POST",
@@ -81,10 +33,10 @@ func (c *Client) DeleteLoadBalancerPolicyRequest(input *DeleteLoadBalancerPolicy
 	}
 
 	if input == nil {
-		input = &DeleteLoadBalancerPolicyInput{}
+		input = &types.DeleteLoadBalancerPolicyInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteLoadBalancerPolicyOutput{})
+	req := c.newRequest(op, input, &types.DeleteLoadBalancerPolicyOutput{})
 	return DeleteLoadBalancerPolicyRequest{Request: req, Input: input, Copy: c.DeleteLoadBalancerPolicyRequest}
 }
 
@@ -92,8 +44,8 @@ func (c *Client) DeleteLoadBalancerPolicyRequest(input *DeleteLoadBalancerPolicy
 // DeleteLoadBalancerPolicy API operation.
 type DeleteLoadBalancerPolicyRequest struct {
 	*aws.Request
-	Input *DeleteLoadBalancerPolicyInput
-	Copy  func(*DeleteLoadBalancerPolicyInput) DeleteLoadBalancerPolicyRequest
+	Input *types.DeleteLoadBalancerPolicyInput
+	Copy  func(*types.DeleteLoadBalancerPolicyInput) DeleteLoadBalancerPolicyRequest
 }
 
 // Send marshals and sends the DeleteLoadBalancerPolicy API request.
@@ -105,7 +57,7 @@ func (r DeleteLoadBalancerPolicyRequest) Send(ctx context.Context) (*DeleteLoadB
 	}
 
 	resp := &DeleteLoadBalancerPolicyResponse{
-		DeleteLoadBalancerPolicyOutput: r.Request.Data.(*DeleteLoadBalancerPolicyOutput),
+		DeleteLoadBalancerPolicyOutput: r.Request.Data.(*types.DeleteLoadBalancerPolicyOutput),
 		response:                       &aws.Response{Request: r.Request},
 	}
 
@@ -115,7 +67,7 @@ func (r DeleteLoadBalancerPolicyRequest) Send(ctx context.Context) (*DeleteLoadB
 // DeleteLoadBalancerPolicyResponse is the response type for the
 // DeleteLoadBalancerPolicy API operation.
 type DeleteLoadBalancerPolicyResponse struct {
-	*DeleteLoadBalancerPolicyOutput
+	*types.DeleteLoadBalancerPolicyOutput
 
 	response *aws.Response
 }

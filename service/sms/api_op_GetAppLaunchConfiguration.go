@@ -6,39 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/sms/types"
 )
-
-type GetAppLaunchConfigurationInput struct {
-	_ struct{} `type:"structure"`
-
-	// ID of the application launch configuration.
-	AppId *string `locationName:"appId" type:"string"`
-}
-
-// String returns the string representation
-func (s GetAppLaunchConfigurationInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type GetAppLaunchConfigurationOutput struct {
-	_ struct{} `type:"structure"`
-
-	// ID of the application associated with the launch configuration.
-	AppId *string `locationName:"appId" type:"string"`
-
-	// Name of the service role in the customer's account that Amazon CloudFormation
-	// uses to launch the application.
-	RoleName *string `locationName:"roleName" type:"string"`
-
-	// List of launch configurations for server groups in this application.
-	ServerGroupLaunchConfigurations []ServerGroupLaunchConfiguration `locationName:"serverGroupLaunchConfigurations" type:"list"`
-}
-
-// String returns the string representation
-func (s GetAppLaunchConfigurationOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetAppLaunchConfiguration = "GetAppLaunchConfiguration"
 
@@ -55,7 +24,7 @@ const opGetAppLaunchConfiguration = "GetAppLaunchConfiguration"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sms-2016-10-24/GetAppLaunchConfiguration
-func (c *Client) GetAppLaunchConfigurationRequest(input *GetAppLaunchConfigurationInput) GetAppLaunchConfigurationRequest {
+func (c *Client) GetAppLaunchConfigurationRequest(input *types.GetAppLaunchConfigurationInput) GetAppLaunchConfigurationRequest {
 	op := &aws.Operation{
 		Name:       opGetAppLaunchConfiguration,
 		HTTPMethod: "POST",
@@ -63,10 +32,10 @@ func (c *Client) GetAppLaunchConfigurationRequest(input *GetAppLaunchConfigurati
 	}
 
 	if input == nil {
-		input = &GetAppLaunchConfigurationInput{}
+		input = &types.GetAppLaunchConfigurationInput{}
 	}
 
-	req := c.newRequest(op, input, &GetAppLaunchConfigurationOutput{})
+	req := c.newRequest(op, input, &types.GetAppLaunchConfigurationOutput{})
 	return GetAppLaunchConfigurationRequest{Request: req, Input: input, Copy: c.GetAppLaunchConfigurationRequest}
 }
 
@@ -74,8 +43,8 @@ func (c *Client) GetAppLaunchConfigurationRequest(input *GetAppLaunchConfigurati
 // GetAppLaunchConfiguration API operation.
 type GetAppLaunchConfigurationRequest struct {
 	*aws.Request
-	Input *GetAppLaunchConfigurationInput
-	Copy  func(*GetAppLaunchConfigurationInput) GetAppLaunchConfigurationRequest
+	Input *types.GetAppLaunchConfigurationInput
+	Copy  func(*types.GetAppLaunchConfigurationInput) GetAppLaunchConfigurationRequest
 }
 
 // Send marshals and sends the GetAppLaunchConfiguration API request.
@@ -87,7 +56,7 @@ func (r GetAppLaunchConfigurationRequest) Send(ctx context.Context) (*GetAppLaun
 	}
 
 	resp := &GetAppLaunchConfigurationResponse{
-		GetAppLaunchConfigurationOutput: r.Request.Data.(*GetAppLaunchConfigurationOutput),
+		GetAppLaunchConfigurationOutput: r.Request.Data.(*types.GetAppLaunchConfigurationOutput),
 		response:                        &aws.Response{Request: r.Request},
 	}
 
@@ -97,7 +66,7 @@ func (r GetAppLaunchConfigurationRequest) Send(ctx context.Context) (*GetAppLaun
 // GetAppLaunchConfigurationResponse is the response type for the
 // GetAppLaunchConfiguration API operation.
 type GetAppLaunchConfigurationResponse struct {
-	*GetAppLaunchConfigurationOutput
+	*types.GetAppLaunchConfigurationOutput
 
 	response *aws.Response
 }

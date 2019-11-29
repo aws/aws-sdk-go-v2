@@ -6,55 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/athena/types"
 )
-
-type ListQueryExecutionsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The maximum number of query executions to return in this request.
-	MaxResults *int64 `type:"integer"`
-
-	// The token that specifies where to start pagination if a previous request
-	// was truncated.
-	NextToken *string `min:"1" type:"string"`
-
-	// The name of the workgroup from which queries are being returned.
-	WorkGroup *string `type:"string"`
-}
-
-// String returns the string representation
-func (s ListQueryExecutionsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListQueryExecutionsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListQueryExecutionsInput"}
-	if s.NextToken != nil && len(*s.NextToken) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ListQueryExecutionsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A token to be used by the next request if this request is truncated.
-	NextToken *string `min:"1" type:"string"`
-
-	// The unique IDs of each query execution as an array of strings.
-	QueryExecutionIds []string `min:"1" type:"list"`
-}
-
-// String returns the string representation
-func (s ListQueryExecutionsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListQueryExecutions = "ListQueryExecutions"
 
@@ -77,7 +30,7 @@ const opListQueryExecutions = "ListQueryExecutions"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/ListQueryExecutions
-func (c *Client) ListQueryExecutionsRequest(input *ListQueryExecutionsInput) ListQueryExecutionsRequest {
+func (c *Client) ListQueryExecutionsRequest(input *types.ListQueryExecutionsInput) ListQueryExecutionsRequest {
 	op := &aws.Operation{
 		Name:       opListQueryExecutions,
 		HTTPMethod: "POST",
@@ -91,10 +44,10 @@ func (c *Client) ListQueryExecutionsRequest(input *ListQueryExecutionsInput) Lis
 	}
 
 	if input == nil {
-		input = &ListQueryExecutionsInput{}
+		input = &types.ListQueryExecutionsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListQueryExecutionsOutput{})
+	req := c.newRequest(op, input, &types.ListQueryExecutionsOutput{})
 	return ListQueryExecutionsRequest{Request: req, Input: input, Copy: c.ListQueryExecutionsRequest}
 }
 
@@ -102,8 +55,8 @@ func (c *Client) ListQueryExecutionsRequest(input *ListQueryExecutionsInput) Lis
 // ListQueryExecutions API operation.
 type ListQueryExecutionsRequest struct {
 	*aws.Request
-	Input *ListQueryExecutionsInput
-	Copy  func(*ListQueryExecutionsInput) ListQueryExecutionsRequest
+	Input *types.ListQueryExecutionsInput
+	Copy  func(*types.ListQueryExecutionsInput) ListQueryExecutionsRequest
 }
 
 // Send marshals and sends the ListQueryExecutions API request.
@@ -115,7 +68,7 @@ func (r ListQueryExecutionsRequest) Send(ctx context.Context) (*ListQueryExecuti
 	}
 
 	resp := &ListQueryExecutionsResponse{
-		ListQueryExecutionsOutput: r.Request.Data.(*ListQueryExecutionsOutput),
+		ListQueryExecutionsOutput: r.Request.Data.(*types.ListQueryExecutionsOutput),
 		response:                  &aws.Response{Request: r.Request},
 	}
 
@@ -145,7 +98,7 @@ func NewListQueryExecutionsPaginator(req ListQueryExecutionsRequest) ListQueryEx
 	return ListQueryExecutionsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListQueryExecutionsInput
+				var inCpy *types.ListQueryExecutionsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -165,14 +118,14 @@ type ListQueryExecutionsPaginator struct {
 	aws.Pager
 }
 
-func (p *ListQueryExecutionsPaginator) CurrentPage() *ListQueryExecutionsOutput {
-	return p.Pager.CurrentPage().(*ListQueryExecutionsOutput)
+func (p *ListQueryExecutionsPaginator) CurrentPage() *types.ListQueryExecutionsOutput {
+	return p.Pager.CurrentPage().(*types.ListQueryExecutionsOutput)
 }
 
 // ListQueryExecutionsResponse is the response type for the
 // ListQueryExecutions API operation.
 type ListQueryExecutionsResponse struct {
-	*ListQueryExecutionsOutput
+	*types.ListQueryExecutionsOutput
 
 	response *aws.Response
 }

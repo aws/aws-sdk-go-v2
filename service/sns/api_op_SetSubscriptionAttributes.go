@@ -6,75 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/query"
+	"github.com/aws/aws-sdk-go-v2/service/sns/types"
 )
-
-// Input for SetSubscriptionAttributes action.
-type SetSubscriptionAttributesInput struct {
-	_ struct{} `type:"structure"`
-
-	// A map of attributes with their corresponding values.
-	//
-	// The following lists the names, descriptions, and values of the special request
-	// parameters that the SetTopicAttributes action uses:
-	//
-	//    * DeliveryPolicy – The policy that defines how Amazon SNS retries failed
-	//    deliveries to HTTP/S endpoints.
-	//
-	//    * FilterPolicy – The simple JSON object that lets your subscriber receive
-	//    only a subset of messages, rather than receiving every message published
-	//    to the topic.
-	//
-	//    * RawMessageDelivery – When set to true, enables raw message delivery
-	//    to Amazon SQS or HTTP/S endpoints. This eliminates the need for the endpoints
-	//    to process JSON formatting, which is otherwise created for Amazon SNS
-	//    metadata.
-	//
-	// AttributeName is a required field
-	AttributeName *string `type:"string" required:"true"`
-
-	// The new value for the attribute in JSON format.
-	AttributeValue *string `type:"string"`
-
-	// The ARN of the subscription to modify.
-	//
-	// SubscriptionArn is a required field
-	SubscriptionArn *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s SetSubscriptionAttributesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *SetSubscriptionAttributesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "SetSubscriptionAttributesInput"}
-
-	if s.AttributeName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("AttributeName"))
-	}
-
-	if s.SubscriptionArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("SubscriptionArn"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type SetSubscriptionAttributesOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s SetSubscriptionAttributesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opSetSubscriptionAttributes = "SetSubscriptionAttributes"
 
@@ -92,7 +27,7 @@ const opSetSubscriptionAttributes = "SetSubscriptionAttributes"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/SetSubscriptionAttributes
-func (c *Client) SetSubscriptionAttributesRequest(input *SetSubscriptionAttributesInput) SetSubscriptionAttributesRequest {
+func (c *Client) SetSubscriptionAttributesRequest(input *types.SetSubscriptionAttributesInput) SetSubscriptionAttributesRequest {
 	op := &aws.Operation{
 		Name:       opSetSubscriptionAttributes,
 		HTTPMethod: "POST",
@@ -100,10 +35,10 @@ func (c *Client) SetSubscriptionAttributesRequest(input *SetSubscriptionAttribut
 	}
 
 	if input == nil {
-		input = &SetSubscriptionAttributesInput{}
+		input = &types.SetSubscriptionAttributesInput{}
 	}
 
-	req := c.newRequest(op, input, &SetSubscriptionAttributesOutput{})
+	req := c.newRequest(op, input, &types.SetSubscriptionAttributesOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return SetSubscriptionAttributesRequest{Request: req, Input: input, Copy: c.SetSubscriptionAttributesRequest}
@@ -113,8 +48,8 @@ func (c *Client) SetSubscriptionAttributesRequest(input *SetSubscriptionAttribut
 // SetSubscriptionAttributes API operation.
 type SetSubscriptionAttributesRequest struct {
 	*aws.Request
-	Input *SetSubscriptionAttributesInput
-	Copy  func(*SetSubscriptionAttributesInput) SetSubscriptionAttributesRequest
+	Input *types.SetSubscriptionAttributesInput
+	Copy  func(*types.SetSubscriptionAttributesInput) SetSubscriptionAttributesRequest
 }
 
 // Send marshals and sends the SetSubscriptionAttributes API request.
@@ -126,7 +61,7 @@ func (r SetSubscriptionAttributesRequest) Send(ctx context.Context) (*SetSubscri
 	}
 
 	resp := &SetSubscriptionAttributesResponse{
-		SetSubscriptionAttributesOutput: r.Request.Data.(*SetSubscriptionAttributesOutput),
+		SetSubscriptionAttributesOutput: r.Request.Data.(*types.SetSubscriptionAttributesOutput),
 		response:                        &aws.Response{Request: r.Request},
 	}
 
@@ -136,7 +71,7 @@ func (r SetSubscriptionAttributesRequest) Send(ctx context.Context) (*SetSubscri
 // SetSubscriptionAttributesResponse is the response type for the
 // SetSubscriptionAttributes API operation.
 type SetSubscriptionAttributesResponse struct {
-	*SetSubscriptionAttributesOutput
+	*types.SetSubscriptionAttributesOutput
 
 	response *aws.Response
 }

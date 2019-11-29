@@ -6,86 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-type DescribeInternetGatewaysInput struct {
-	_ struct{} `type:"structure"`
-
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have
-	// the required permissions, the error response is DryRunOperation. Otherwise,
-	// it is UnauthorizedOperation.
-	DryRun *bool `locationName:"dryRun" type:"boolean"`
-
-	// One or more filters.
-	//
-	//    * attachment.state - The current state of the attachment between the gateway
-	//    and the VPC (available). Present only if a VPC is attached.
-	//
-	//    * attachment.vpc-id - The ID of an attached VPC.
-	//
-	//    * internet-gateway-id - The ID of the Internet gateway.
-	//
-	//    * owner-id - The ID of the AWS account that owns the internet gateway.
-	//
-	//    * tag:<key> - The key/value combination of a tag assigned to the resource.
-	//    Use the tag key in the filter name and the tag value as the filter value.
-	//    For example, to find all resources that have a tag with the key Owner
-	//    and the value TeamA, specify tag:Owner for the filter name and TeamA for
-	//    the filter value.
-	//
-	//    * tag-key - The key of a tag assigned to the resource. Use this filter
-	//    to find all resources assigned a tag with a specific key, regardless of
-	//    the tag value.
-	Filters []Filter `locationName:"Filter" locationNameList:"Filter" type:"list"`
-
-	// One or more internet gateway IDs.
-	//
-	// Default: Describes all your internet gateways.
-	InternetGatewayIds []string `locationName:"internetGatewayId" locationNameList:"item" type:"list"`
-
-	// The maximum number of results to return with a single call. To retrieve the
-	// remaining results, make another call with the returned nextToken value.
-	MaxResults *int64 `min:"5" type:"integer"`
-
-	// The token for the next page of results.
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeInternetGatewaysInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeInternetGatewaysInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeInternetGatewaysInput"}
-	if s.MaxResults != nil && *s.MaxResults < 5 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 5))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribeInternetGatewaysOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Information about one or more internet gateways.
-	InternetGateways []InternetGateway `locationName:"internetGatewaySet" locationNameList:"item" type:"list"`
-
-	// The token to use to retrieve the next page of results. This value is null
-	// when there are no more results to return.
-	NextToken *string `locationName:"nextToken" type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeInternetGatewaysOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeInternetGateways = "DescribeInternetGateways"
 
@@ -102,7 +24,7 @@ const opDescribeInternetGateways = "DescribeInternetGateways"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeInternetGateways
-func (c *Client) DescribeInternetGatewaysRequest(input *DescribeInternetGatewaysInput) DescribeInternetGatewaysRequest {
+func (c *Client) DescribeInternetGatewaysRequest(input *types.DescribeInternetGatewaysInput) DescribeInternetGatewaysRequest {
 	op := &aws.Operation{
 		Name:       opDescribeInternetGateways,
 		HTTPMethod: "POST",
@@ -116,10 +38,10 @@ func (c *Client) DescribeInternetGatewaysRequest(input *DescribeInternetGateways
 	}
 
 	if input == nil {
-		input = &DescribeInternetGatewaysInput{}
+		input = &types.DescribeInternetGatewaysInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeInternetGatewaysOutput{})
+	req := c.newRequest(op, input, &types.DescribeInternetGatewaysOutput{})
 	return DescribeInternetGatewaysRequest{Request: req, Input: input, Copy: c.DescribeInternetGatewaysRequest}
 }
 
@@ -127,8 +49,8 @@ func (c *Client) DescribeInternetGatewaysRequest(input *DescribeInternetGateways
 // DescribeInternetGateways API operation.
 type DescribeInternetGatewaysRequest struct {
 	*aws.Request
-	Input *DescribeInternetGatewaysInput
-	Copy  func(*DescribeInternetGatewaysInput) DescribeInternetGatewaysRequest
+	Input *types.DescribeInternetGatewaysInput
+	Copy  func(*types.DescribeInternetGatewaysInput) DescribeInternetGatewaysRequest
 }
 
 // Send marshals and sends the DescribeInternetGateways API request.
@@ -140,7 +62,7 @@ func (r DescribeInternetGatewaysRequest) Send(ctx context.Context) (*DescribeInt
 	}
 
 	resp := &DescribeInternetGatewaysResponse{
-		DescribeInternetGatewaysOutput: r.Request.Data.(*DescribeInternetGatewaysOutput),
+		DescribeInternetGatewaysOutput: r.Request.Data.(*types.DescribeInternetGatewaysOutput),
 		response:                       &aws.Response{Request: r.Request},
 	}
 
@@ -170,7 +92,7 @@ func NewDescribeInternetGatewaysPaginator(req DescribeInternetGatewaysRequest) D
 	return DescribeInternetGatewaysPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *DescribeInternetGatewaysInput
+				var inCpy *types.DescribeInternetGatewaysInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -190,14 +112,14 @@ type DescribeInternetGatewaysPaginator struct {
 	aws.Pager
 }
 
-func (p *DescribeInternetGatewaysPaginator) CurrentPage() *DescribeInternetGatewaysOutput {
-	return p.Pager.CurrentPage().(*DescribeInternetGatewaysOutput)
+func (p *DescribeInternetGatewaysPaginator) CurrentPage() *types.DescribeInternetGatewaysOutput {
+	return p.Pager.CurrentPage().(*types.DescribeInternetGatewaysOutput)
 }
 
 // DescribeInternetGatewaysResponse is the response type for the
 // DescribeInternetGateways API operation.
 type DescribeInternetGatewaysResponse struct {
-	*DescribeInternetGatewaysOutput
+	*types.DescribeInternetGatewaysOutput
 
 	response *aws.Response
 }

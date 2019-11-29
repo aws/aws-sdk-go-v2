@@ -6,124 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/mediapackagevod/types"
 )
-
-type DescribeAssetInput struct {
-	_ struct{} `type:"structure"`
-
-	// Id is a required field
-	Id *string `location:"uri" locationName:"id" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeAssetInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeAssetInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeAssetInput"}
-
-	if s.Id == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Id"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DescribeAssetInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.Id != nil {
-		v := *s.Id
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "id", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type DescribeAssetOutput struct {
-	_ struct{} `type:"structure"`
-
-	Arn *string `locationName:"arn" type:"string"`
-
-	EgressEndpoints []EgressEndpoint `locationName:"egressEndpoints" type:"list"`
-
-	Id *string `locationName:"id" type:"string"`
-
-	PackagingGroupId *string `locationName:"packagingGroupId" type:"string"`
-
-	ResourceId *string `locationName:"resourceId" type:"string"`
-
-	SourceArn *string `locationName:"sourceArn" type:"string"`
-
-	SourceRoleArn *string `locationName:"sourceRoleArn" type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeAssetOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DescribeAssetOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.Arn != nil {
-		v := *s.Arn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "arn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.EgressEndpoints != nil {
-		v := s.EgressEndpoints
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "egressEndpoints", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	if s.Id != nil {
-		v := *s.Id
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "id", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.PackagingGroupId != nil {
-		v := *s.PackagingGroupId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "packagingGroupId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.ResourceId != nil {
-		v := *s.ResourceId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "resourceId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.SourceArn != nil {
-		v := *s.SourceArn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "sourceArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.SourceRoleArn != nil {
-		v := *s.SourceRoleArn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "sourceRoleArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opDescribeAsset = "DescribeAsset"
 
@@ -140,7 +24,7 @@ const opDescribeAsset = "DescribeAsset"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mediapackage-vod-2018-11-07/DescribeAsset
-func (c *Client) DescribeAssetRequest(input *DescribeAssetInput) DescribeAssetRequest {
+func (c *Client) DescribeAssetRequest(input *types.DescribeAssetInput) DescribeAssetRequest {
 	op := &aws.Operation{
 		Name:       opDescribeAsset,
 		HTTPMethod: "GET",
@@ -148,10 +32,10 @@ func (c *Client) DescribeAssetRequest(input *DescribeAssetInput) DescribeAssetRe
 	}
 
 	if input == nil {
-		input = &DescribeAssetInput{}
+		input = &types.DescribeAssetInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeAssetOutput{})
+	req := c.newRequest(op, input, &types.DescribeAssetOutput{})
 	return DescribeAssetRequest{Request: req, Input: input, Copy: c.DescribeAssetRequest}
 }
 
@@ -159,8 +43,8 @@ func (c *Client) DescribeAssetRequest(input *DescribeAssetInput) DescribeAssetRe
 // DescribeAsset API operation.
 type DescribeAssetRequest struct {
 	*aws.Request
-	Input *DescribeAssetInput
-	Copy  func(*DescribeAssetInput) DescribeAssetRequest
+	Input *types.DescribeAssetInput
+	Copy  func(*types.DescribeAssetInput) DescribeAssetRequest
 }
 
 // Send marshals and sends the DescribeAsset API request.
@@ -172,7 +56,7 @@ func (r DescribeAssetRequest) Send(ctx context.Context) (*DescribeAssetResponse,
 	}
 
 	resp := &DescribeAssetResponse{
-		DescribeAssetOutput: r.Request.Data.(*DescribeAssetOutput),
+		DescribeAssetOutput: r.Request.Data.(*types.DescribeAssetOutput),
 		response:            &aws.Response{Request: r.Request},
 	}
 
@@ -182,7 +66,7 @@ func (r DescribeAssetRequest) Send(ctx context.Context) (*DescribeAssetResponse,
 // DescribeAssetResponse is the response type for the
 // DescribeAsset API operation.
 type DescribeAssetResponse struct {
-	*DescribeAssetOutput
+	*types.DescribeAssetOutput
 
 	response *aws.Response
 }

@@ -7,6 +7,7 @@ import (
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
+	"github.com/aws/aws-sdk-go-v2/service/glacier/types"
 )
 
 // WaitUntilVaultExists uses the Amazon Glacier API operation
@@ -18,7 +19,7 @@ import (
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Client) WaitUntilVaultExists(ctx context.Context, input *DescribeVaultInput, opts ...aws.WaiterOption) error {
+func (c *Client) WaitUntilVaultExists(ctx context.Context, input *types.DescribeVaultInput, opts ...aws.WaiterOption) error {
 	w := aws.Waiter{
 		Name:        "WaitUntilVaultExists",
 		MaxAttempts: 15,
@@ -37,7 +38,7 @@ func (c *Client) WaitUntilVaultExists(ctx context.Context, input *DescribeVaultI
 		},
 		Logger: c.Config.Logger,
 		NewRequest: func(opts []aws.Option) (*aws.Request, error) {
-			var inCpy *DescribeVaultInput
+			var inCpy *types.DescribeVaultInput
 			if input != nil {
 				tmp := *input
 				inCpy = &tmp
@@ -62,7 +63,7 @@ func (c *Client) WaitUntilVaultExists(ctx context.Context, input *DescribeVaultI
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Client) WaitUntilVaultNotExists(ctx context.Context, input *DescribeVaultInput, opts ...aws.WaiterOption) error {
+func (c *Client) WaitUntilVaultNotExists(ctx context.Context, input *types.DescribeVaultInput, opts ...aws.WaiterOption) error {
 	w := aws.Waiter{
 		Name:        "WaitUntilVaultNotExists",
 		MaxAttempts: 15,
@@ -81,7 +82,7 @@ func (c *Client) WaitUntilVaultNotExists(ctx context.Context, input *DescribeVau
 		},
 		Logger: c.Config.Logger,
 		NewRequest: func(opts []aws.Option) (*aws.Request, error) {
-			var inCpy *DescribeVaultInput
+			var inCpy *types.DescribeVaultInput
 			if input != nil {
 				tmp := *input
 				inCpy = &tmp

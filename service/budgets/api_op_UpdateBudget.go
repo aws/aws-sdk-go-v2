@@ -6,64 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/budgets/types"
 )
-
-// Request of UpdateBudget
-type UpdateBudgetInput struct {
-	_ struct{} `type:"structure"`
-
-	// The accountId that is associated with the budget that you want to update.
-	//
-	// AccountId is a required field
-	AccountId *string `min:"12" type:"string" required:"true"`
-
-	// The budget that you want to update your budget to.
-	//
-	// NewBudget is a required field
-	NewBudget *Budget `type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s UpdateBudgetInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateBudgetInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateBudgetInput"}
-
-	if s.AccountId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("AccountId"))
-	}
-	if s.AccountId != nil && len(*s.AccountId) < 12 {
-		invalidParams.Add(aws.NewErrParamMinLen("AccountId", 12))
-	}
-
-	if s.NewBudget == nil {
-		invalidParams.Add(aws.NewErrParamRequired("NewBudget"))
-	}
-	if s.NewBudget != nil {
-		if err := s.NewBudget.Validate(); err != nil {
-			invalidParams.AddNested("NewBudget", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Response of UpdateBudget
-type UpdateBudgetOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s UpdateBudgetOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opUpdateBudget = "UpdateBudget"
 
@@ -85,7 +29,7 @@ const opUpdateBudget = "UpdateBudget"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) UpdateBudgetRequest(input *UpdateBudgetInput) UpdateBudgetRequest {
+func (c *Client) UpdateBudgetRequest(input *types.UpdateBudgetInput) UpdateBudgetRequest {
 	op := &aws.Operation{
 		Name:       opUpdateBudget,
 		HTTPMethod: "POST",
@@ -93,10 +37,10 @@ func (c *Client) UpdateBudgetRequest(input *UpdateBudgetInput) UpdateBudgetReque
 	}
 
 	if input == nil {
-		input = &UpdateBudgetInput{}
+		input = &types.UpdateBudgetInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateBudgetOutput{})
+	req := c.newRequest(op, input, &types.UpdateBudgetOutput{})
 	return UpdateBudgetRequest{Request: req, Input: input, Copy: c.UpdateBudgetRequest}
 }
 
@@ -104,8 +48,8 @@ func (c *Client) UpdateBudgetRequest(input *UpdateBudgetInput) UpdateBudgetReque
 // UpdateBudget API operation.
 type UpdateBudgetRequest struct {
 	*aws.Request
-	Input *UpdateBudgetInput
-	Copy  func(*UpdateBudgetInput) UpdateBudgetRequest
+	Input *types.UpdateBudgetInput
+	Copy  func(*types.UpdateBudgetInput) UpdateBudgetRequest
 }
 
 // Send marshals and sends the UpdateBudget API request.
@@ -117,7 +61,7 @@ func (r UpdateBudgetRequest) Send(ctx context.Context) (*UpdateBudgetResponse, e
 	}
 
 	resp := &UpdateBudgetResponse{
-		UpdateBudgetOutput: r.Request.Data.(*UpdateBudgetOutput),
+		UpdateBudgetOutput: r.Request.Data.(*types.UpdateBudgetOutput),
 		response:           &aws.Response{Request: r.Request},
 	}
 
@@ -127,7 +71,7 @@ func (r UpdateBudgetRequest) Send(ctx context.Context) (*UpdateBudgetResponse, e
 // UpdateBudgetResponse is the response type for the
 // UpdateBudget API operation.
 type UpdateBudgetResponse struct {
-	*UpdateBudgetOutput
+	*types.UpdateBudgetOutput
 
 	response *aws.Response
 }

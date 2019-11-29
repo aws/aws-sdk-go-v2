@@ -6,49 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/snowball/types"
 )
-
-type CancelClusterInput struct {
-	_ struct{} `type:"structure"`
-
-	// The 39-character ID for the cluster that you want to cancel, for example
-	// CID123e4567-e89b-12d3-a456-426655440000.
-	//
-	// ClusterId is a required field
-	ClusterId *string `min:"39" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s CancelClusterInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CancelClusterInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CancelClusterInput"}
-
-	if s.ClusterId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ClusterId"))
-	}
-	if s.ClusterId != nil && len(*s.ClusterId) < 39 {
-		invalidParams.Add(aws.NewErrParamMinLen("ClusterId", 39))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type CancelClusterOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s CancelClusterOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCancelCluster = "CancelCluster"
 
@@ -67,7 +26,7 @@ const opCancelCluster = "CancelCluster"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/CancelCluster
-func (c *Client) CancelClusterRequest(input *CancelClusterInput) CancelClusterRequest {
+func (c *Client) CancelClusterRequest(input *types.CancelClusterInput) CancelClusterRequest {
 	op := &aws.Operation{
 		Name:       opCancelCluster,
 		HTTPMethod: "POST",
@@ -75,10 +34,10 @@ func (c *Client) CancelClusterRequest(input *CancelClusterInput) CancelClusterRe
 	}
 
 	if input == nil {
-		input = &CancelClusterInput{}
+		input = &types.CancelClusterInput{}
 	}
 
-	req := c.newRequest(op, input, &CancelClusterOutput{})
+	req := c.newRequest(op, input, &types.CancelClusterOutput{})
 	return CancelClusterRequest{Request: req, Input: input, Copy: c.CancelClusterRequest}
 }
 
@@ -86,8 +45,8 @@ func (c *Client) CancelClusterRequest(input *CancelClusterInput) CancelClusterRe
 // CancelCluster API operation.
 type CancelClusterRequest struct {
 	*aws.Request
-	Input *CancelClusterInput
-	Copy  func(*CancelClusterInput) CancelClusterRequest
+	Input *types.CancelClusterInput
+	Copy  func(*types.CancelClusterInput) CancelClusterRequest
 }
 
 // Send marshals and sends the CancelCluster API request.
@@ -99,7 +58,7 @@ func (r CancelClusterRequest) Send(ctx context.Context) (*CancelClusterResponse,
 	}
 
 	resp := &CancelClusterResponse{
-		CancelClusterOutput: r.Request.Data.(*CancelClusterOutput),
+		CancelClusterOutput: r.Request.Data.(*types.CancelClusterOutput),
 		response:            &aws.Response{Request: r.Request},
 	}
 
@@ -109,7 +68,7 @@ func (r CancelClusterRequest) Send(ctx context.Context) (*CancelClusterResponse,
 // CancelClusterResponse is the response type for the
 // CancelCluster API operation.
 type CancelClusterResponse struct {
-	*CancelClusterOutput
+	*types.CancelClusterOutput
 
 	response *aws.Response
 }

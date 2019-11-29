@@ -6,137 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/resourcegroups/types"
 )
-
-type SearchResourcesInput struct {
-	_ struct{} `type:"structure"`
-
-	// The maximum number of group member ARNs returned by SearchResources in paginated
-	// output. By default, this number is 50.
-	MaxResults *int64 `min:"1" type:"integer"`
-
-	// The NextToken value that is returned in a paginated SearchResources request.
-	// To get the next page of results, run the call again, add the NextToken parameter,
-	// and specify the NextToken value.
-	NextToken *string `type:"string"`
-
-	// The search query, using the same formats that are supported for resource
-	// group definition.
-	//
-	// ResourceQuery is a required field
-	ResourceQuery *ResourceQuery `type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s SearchResourcesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *SearchResourcesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "SearchResourcesInput"}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-
-	if s.ResourceQuery == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ResourceQuery"))
-	}
-	if s.ResourceQuery != nil {
-		if err := s.ResourceQuery.Validate(); err != nil {
-			invalidParams.AddNested("ResourceQuery", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s SearchResourcesInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.MaxResults != nil {
-		v := *s.MaxResults
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "MaxResults", protocol.Int64Value(v), metadata)
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.ResourceQuery != nil {
-		v := s.ResourceQuery
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "ResourceQuery", v, metadata)
-	}
-	return nil
-}
-
-type SearchResourcesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The NextToken value to include in a subsequent SearchResources request, to
-	// get more results.
-	NextToken *string `type:"string"`
-
-	// A list of QueryError objects. Each error is an object that contains ErrorCode
-	// and Message structures. Possible values for ErrorCode are CLOUDFORMATION_STACK_INACTIVE
-	// and CLOUDFORMATION_STACK_NOT_EXISTING.
-	QueryErrors []QueryError `type:"list"`
-
-	// The ARNs and resource types of resources that are members of the group that
-	// you specified.
-	ResourceIdentifiers []ResourceIdentifier `type:"list"`
-}
-
-// String returns the string representation
-func (s SearchResourcesOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s SearchResourcesOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.QueryErrors != nil {
-		v := s.QueryErrors
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "QueryErrors", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	if s.ResourceIdentifiers != nil {
-		v := s.ResourceIdentifiers
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "ResourceIdentifiers", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	return nil
-}
 
 const opSearchResources = "SearchResources"
 
@@ -155,7 +26,7 @@ const opSearchResources = "SearchResources"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/resource-groups-2017-11-27/SearchResources
-func (c *Client) SearchResourcesRequest(input *SearchResourcesInput) SearchResourcesRequest {
+func (c *Client) SearchResourcesRequest(input *types.SearchResourcesInput) SearchResourcesRequest {
 	op := &aws.Operation{
 		Name:       opSearchResources,
 		HTTPMethod: "POST",
@@ -169,10 +40,10 @@ func (c *Client) SearchResourcesRequest(input *SearchResourcesInput) SearchResou
 	}
 
 	if input == nil {
-		input = &SearchResourcesInput{}
+		input = &types.SearchResourcesInput{}
 	}
 
-	req := c.newRequest(op, input, &SearchResourcesOutput{})
+	req := c.newRequest(op, input, &types.SearchResourcesOutput{})
 	return SearchResourcesRequest{Request: req, Input: input, Copy: c.SearchResourcesRequest}
 }
 
@@ -180,8 +51,8 @@ func (c *Client) SearchResourcesRequest(input *SearchResourcesInput) SearchResou
 // SearchResources API operation.
 type SearchResourcesRequest struct {
 	*aws.Request
-	Input *SearchResourcesInput
-	Copy  func(*SearchResourcesInput) SearchResourcesRequest
+	Input *types.SearchResourcesInput
+	Copy  func(*types.SearchResourcesInput) SearchResourcesRequest
 }
 
 // Send marshals and sends the SearchResources API request.
@@ -193,7 +64,7 @@ func (r SearchResourcesRequest) Send(ctx context.Context) (*SearchResourcesRespo
 	}
 
 	resp := &SearchResourcesResponse{
-		SearchResourcesOutput: r.Request.Data.(*SearchResourcesOutput),
+		SearchResourcesOutput: r.Request.Data.(*types.SearchResourcesOutput),
 		response:              &aws.Response{Request: r.Request},
 	}
 
@@ -223,7 +94,7 @@ func NewSearchResourcesPaginator(req SearchResourcesRequest) SearchResourcesPagi
 	return SearchResourcesPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *SearchResourcesInput
+				var inCpy *types.SearchResourcesInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -243,14 +114,14 @@ type SearchResourcesPaginator struct {
 	aws.Pager
 }
 
-func (p *SearchResourcesPaginator) CurrentPage() *SearchResourcesOutput {
-	return p.Pager.CurrentPage().(*SearchResourcesOutput)
+func (p *SearchResourcesPaginator) CurrentPage() *types.SearchResourcesOutput {
+	return p.Pager.CurrentPage().(*types.SearchResourcesOutput)
 }
 
 // SearchResourcesResponse is the response type for the
 // SearchResources API operation.
 type SearchResourcesResponse struct {
-	*SearchResourcesOutput
+	*types.SearchResourcesOutput
 
 	response *aws.Response
 }

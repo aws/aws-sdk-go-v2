@@ -6,49 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/devicefarm/types"
 )
-
-type DeleteVPCEConfigurationInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the VPC endpoint configuration you want
-	// to delete.
-	//
-	// Arn is a required field
-	Arn *string `locationName:"arn" min:"32" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteVPCEConfigurationInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteVPCEConfigurationInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteVPCEConfigurationInput"}
-
-	if s.Arn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Arn"))
-	}
-	if s.Arn != nil && len(*s.Arn) < 32 {
-		invalidParams.Add(aws.NewErrParamMinLen("Arn", 32))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteVPCEConfigurationOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteVPCEConfigurationOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteVPCEConfiguration = "DeleteVPCEConfiguration"
 
@@ -65,7 +24,7 @@ const opDeleteVPCEConfiguration = "DeleteVPCEConfiguration"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/DeleteVPCEConfiguration
-func (c *Client) DeleteVPCEConfigurationRequest(input *DeleteVPCEConfigurationInput) DeleteVPCEConfigurationRequest {
+func (c *Client) DeleteVPCEConfigurationRequest(input *types.DeleteVPCEConfigurationInput) DeleteVPCEConfigurationRequest {
 	op := &aws.Operation{
 		Name:       opDeleteVPCEConfiguration,
 		HTTPMethod: "POST",
@@ -73,10 +32,10 @@ func (c *Client) DeleteVPCEConfigurationRequest(input *DeleteVPCEConfigurationIn
 	}
 
 	if input == nil {
-		input = &DeleteVPCEConfigurationInput{}
+		input = &types.DeleteVPCEConfigurationInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteVPCEConfigurationOutput{})
+	req := c.newRequest(op, input, &types.DeleteVPCEConfigurationOutput{})
 	return DeleteVPCEConfigurationRequest{Request: req, Input: input, Copy: c.DeleteVPCEConfigurationRequest}
 }
 
@@ -84,8 +43,8 @@ func (c *Client) DeleteVPCEConfigurationRequest(input *DeleteVPCEConfigurationIn
 // DeleteVPCEConfiguration API operation.
 type DeleteVPCEConfigurationRequest struct {
 	*aws.Request
-	Input *DeleteVPCEConfigurationInput
-	Copy  func(*DeleteVPCEConfigurationInput) DeleteVPCEConfigurationRequest
+	Input *types.DeleteVPCEConfigurationInput
+	Copy  func(*types.DeleteVPCEConfigurationInput) DeleteVPCEConfigurationRequest
 }
 
 // Send marshals and sends the DeleteVPCEConfiguration API request.
@@ -97,7 +56,7 @@ func (r DeleteVPCEConfigurationRequest) Send(ctx context.Context) (*DeleteVPCECo
 	}
 
 	resp := &DeleteVPCEConfigurationResponse{
-		DeleteVPCEConfigurationOutput: r.Request.Data.(*DeleteVPCEConfigurationOutput),
+		DeleteVPCEConfigurationOutput: r.Request.Data.(*types.DeleteVPCEConfigurationOutput),
 		response:                      &aws.Response{Request: r.Request},
 	}
 
@@ -107,7 +66,7 @@ func (r DeleteVPCEConfigurationRequest) Send(ctx context.Context) (*DeleteVPCECo
 // DeleteVPCEConfigurationResponse is the response type for the
 // DeleteVPCEConfiguration API operation.
 type DeleteVPCEConfigurationResponse struct {
-	*DeleteVPCEConfigurationOutput
+	*types.DeleteVPCEConfigurationOutput
 
 	response *aws.Response
 }

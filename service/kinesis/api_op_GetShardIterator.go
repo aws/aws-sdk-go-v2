@@ -4,109 +4,10 @@ package kinesis
 
 import (
 	"context"
-	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/kinesis/types"
 )
-
-// Represents the input for GetShardIterator.
-type GetShardIteratorInput struct {
-	_ struct{} `type:"structure"`
-
-	// The shard ID of the Kinesis Data Streams shard to get the iterator for.
-	//
-	// ShardId is a required field
-	ShardId *string `min:"1" type:"string" required:"true"`
-
-	// Determines how the shard iterator is used to start reading data records from
-	// the shard.
-	//
-	// The following are the valid Amazon Kinesis shard iterator types:
-	//
-	//    * AT_SEQUENCE_NUMBER - Start reading from the position denoted by a specific
-	//    sequence number, provided in the value StartingSequenceNumber.
-	//
-	//    * AFTER_SEQUENCE_NUMBER - Start reading right after the position denoted
-	//    by a specific sequence number, provided in the value StartingSequenceNumber.
-	//
-	//    * AT_TIMESTAMP - Start reading from the position denoted by a specific
-	//    time stamp, provided in the value Timestamp.
-	//
-	//    * TRIM_HORIZON - Start reading at the last untrimmed record in the shard
-	//    in the system, which is the oldest data record in the shard.
-	//
-	//    * LATEST - Start reading just after the most recent record in the shard,
-	//    so that you always read the most recent data in the shard.
-	//
-	// ShardIteratorType is a required field
-	ShardIteratorType ShardIteratorType `type:"string" required:"true" enum:"true"`
-
-	// The sequence number of the data record in the shard from which to start reading.
-	// Used with shard iterator type AT_SEQUENCE_NUMBER and AFTER_SEQUENCE_NUMBER.
-	StartingSequenceNumber *string `type:"string"`
-
-	// The name of the Amazon Kinesis data stream.
-	//
-	// StreamName is a required field
-	StreamName *string `min:"1" type:"string" required:"true"`
-
-	// The time stamp of the data record from which to start reading. Used with
-	// shard iterator type AT_TIMESTAMP. A time stamp is the Unix epoch date with
-	// precision in milliseconds. For example, 2016-04-04T19:58:46.480-00:00 or
-	// 1459799926.480. If a record with this exact time stamp does not exist, the
-	// iterator returned is for the next (later) record. If the time stamp is older
-	// than the current trim horizon, the iterator returned is for the oldest untrimmed
-	// data record (TRIM_HORIZON).
-	Timestamp *time.Time `type:"timestamp"`
-}
-
-// String returns the string representation
-func (s GetShardIteratorInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetShardIteratorInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetShardIteratorInput"}
-
-	if s.ShardId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ShardId"))
-	}
-	if s.ShardId != nil && len(*s.ShardId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ShardId", 1))
-	}
-	if len(s.ShardIteratorType) == 0 {
-		invalidParams.Add(aws.NewErrParamRequired("ShardIteratorType"))
-	}
-
-	if s.StreamName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("StreamName"))
-	}
-	if s.StreamName != nil && len(*s.StreamName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("StreamName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Represents the output for GetShardIterator.
-type GetShardIteratorOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The position in the shard from which to start reading data records sequentially.
-	// A shard iterator specifies this position using the sequence number of a data
-	// record in a shard.
-	ShardIterator *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s GetShardIteratorOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetShardIterator = "GetShardIterator"
 
@@ -161,7 +62,7 @@ const opGetShardIterator = "GetShardIterator"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/GetShardIterator
-func (c *Client) GetShardIteratorRequest(input *GetShardIteratorInput) GetShardIteratorRequest {
+func (c *Client) GetShardIteratorRequest(input *types.GetShardIteratorInput) GetShardIteratorRequest {
 	op := &aws.Operation{
 		Name:       opGetShardIterator,
 		HTTPMethod: "POST",
@@ -169,10 +70,10 @@ func (c *Client) GetShardIteratorRequest(input *GetShardIteratorInput) GetShardI
 	}
 
 	if input == nil {
-		input = &GetShardIteratorInput{}
+		input = &types.GetShardIteratorInput{}
 	}
 
-	req := c.newRequest(op, input, &GetShardIteratorOutput{})
+	req := c.newRequest(op, input, &types.GetShardIteratorOutput{})
 	return GetShardIteratorRequest{Request: req, Input: input, Copy: c.GetShardIteratorRequest}
 }
 
@@ -180,8 +81,8 @@ func (c *Client) GetShardIteratorRequest(input *GetShardIteratorInput) GetShardI
 // GetShardIterator API operation.
 type GetShardIteratorRequest struct {
 	*aws.Request
-	Input *GetShardIteratorInput
-	Copy  func(*GetShardIteratorInput) GetShardIteratorRequest
+	Input *types.GetShardIteratorInput
+	Copy  func(*types.GetShardIteratorInput) GetShardIteratorRequest
 }
 
 // Send marshals and sends the GetShardIterator API request.
@@ -193,7 +94,7 @@ func (r GetShardIteratorRequest) Send(ctx context.Context) (*GetShardIteratorRes
 	}
 
 	resp := &GetShardIteratorResponse{
-		GetShardIteratorOutput: r.Request.Data.(*GetShardIteratorOutput),
+		GetShardIteratorOutput: r.Request.Data.(*types.GetShardIteratorOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -203,7 +104,7 @@ func (r GetShardIteratorRequest) Send(ctx context.Context) (*GetShardIteratorRes
 // GetShardIteratorResponse is the response type for the
 // GetShardIterator API operation.
 type GetShardIteratorResponse struct {
-	*GetShardIteratorOutput
+	*types.GetShardIteratorOutput
 
 	response *aws.Response
 }

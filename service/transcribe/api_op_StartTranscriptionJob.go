@@ -6,119 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/transcribe/types"
 )
-
-type StartTranscriptionJobInput struct {
-	_ struct{} `type:"structure"`
-
-	// The language code for the language used in the input media file.
-	//
-	// LanguageCode is a required field
-	LanguageCode LanguageCode `type:"string" required:"true" enum:"true"`
-
-	// An object that describes the input media for a transcription job.
-	//
-	// Media is a required field
-	Media *Media `type:"structure" required:"true"`
-
-	// The format of the input media file.
-	MediaFormat MediaFormat `type:"string" enum:"true"`
-
-	// The sample rate, in Hertz, of the audio track in the input media file.
-	//
-	// If you do not specify the media sample rate, Amazon Transcribe determines
-	// the sample rate. If you specify the sample rate, it must match the sample
-	// rate detected by Amazon Transcribe. In most cases, you should leave the MediaSampleRateHertz
-	// field blank and let Amazon Transcribe determine the sample rate.
-	MediaSampleRateHertz *int64 `min:"8000" type:"integer"`
-
-	// The location where the transcription is stored.
-	//
-	// If you set the OutputBucketName, Amazon Transcribe puts the transcription
-	// in the specified S3 bucket. When you call the GetTranscriptionJob operation,
-	// the operation returns this location in the TranscriptFileUri field. The S3
-	// bucket must have permissions that allow Amazon Transcribe to put files in
-	// the bucket. For more information, see Permissions Required for IAM User Roles
-	// (https://docs.aws.amazon.com/transcribe/latest/dg/security_iam_id-based-policy-examples.html#auth-role-iam-user).
-	//
-	// Amazon Transcribe uses the default Amazon S3 key for server-side encryption
-	// of transcripts that are placed in your S3 bucket. You can't specify your
-	// own encryption key.
-	//
-	// If you don't set the OutputBucketName, Amazon Transcribe generates a pre-signed
-	// URL, a shareable URL that provides secure access to your transcription, and
-	// returns it in the TranscriptFileUri field. Use this URL to download the transcription.
-	OutputBucketName *string `type:"string"`
-
-	OutputEncryptionKMSKeyId *string `min:"1" type:"string"`
-
-	// A Settings object that provides optional settings for a transcription job.
-	Settings *Settings `type:"structure"`
-
-	// The name of the job. Note that you can't use the strings "." or ".." by themselves
-	// as the job name. The name must also be unique within an AWS account.
-	//
-	// TranscriptionJobName is a required field
-	TranscriptionJobName *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s StartTranscriptionJobInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *StartTranscriptionJobInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "StartTranscriptionJobInput"}
-	if len(s.LanguageCode) == 0 {
-		invalidParams.Add(aws.NewErrParamRequired("LanguageCode"))
-	}
-
-	if s.Media == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Media"))
-	}
-	if s.MediaSampleRateHertz != nil && *s.MediaSampleRateHertz < 8000 {
-		invalidParams.Add(aws.NewErrParamMinValue("MediaSampleRateHertz", 8000))
-	}
-	if s.OutputEncryptionKMSKeyId != nil && len(*s.OutputEncryptionKMSKeyId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("OutputEncryptionKMSKeyId", 1))
-	}
-
-	if s.TranscriptionJobName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("TranscriptionJobName"))
-	}
-	if s.TranscriptionJobName != nil && len(*s.TranscriptionJobName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("TranscriptionJobName", 1))
-	}
-	if s.Media != nil {
-		if err := s.Media.Validate(); err != nil {
-			invalidParams.AddNested("Media", err.(aws.ErrInvalidParams))
-		}
-	}
-	if s.Settings != nil {
-		if err := s.Settings.Validate(); err != nil {
-			invalidParams.AddNested("Settings", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type StartTranscriptionJobOutput struct {
-	_ struct{} `type:"structure"`
-
-	// An object containing details of the asynchronous transcription job.
-	TranscriptionJob *TranscriptionJob `type:"structure"`
-}
-
-// String returns the string representation
-func (s StartTranscriptionJobOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opStartTranscriptionJob = "StartTranscriptionJob"
 
@@ -135,7 +24,7 @@ const opStartTranscriptionJob = "StartTranscriptionJob"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/StartTranscriptionJob
-func (c *Client) StartTranscriptionJobRequest(input *StartTranscriptionJobInput) StartTranscriptionJobRequest {
+func (c *Client) StartTranscriptionJobRequest(input *types.StartTranscriptionJobInput) StartTranscriptionJobRequest {
 	op := &aws.Operation{
 		Name:       opStartTranscriptionJob,
 		HTTPMethod: "POST",
@@ -143,10 +32,10 @@ func (c *Client) StartTranscriptionJobRequest(input *StartTranscriptionJobInput)
 	}
 
 	if input == nil {
-		input = &StartTranscriptionJobInput{}
+		input = &types.StartTranscriptionJobInput{}
 	}
 
-	req := c.newRequest(op, input, &StartTranscriptionJobOutput{})
+	req := c.newRequest(op, input, &types.StartTranscriptionJobOutput{})
 	return StartTranscriptionJobRequest{Request: req, Input: input, Copy: c.StartTranscriptionJobRequest}
 }
 
@@ -154,8 +43,8 @@ func (c *Client) StartTranscriptionJobRequest(input *StartTranscriptionJobInput)
 // StartTranscriptionJob API operation.
 type StartTranscriptionJobRequest struct {
 	*aws.Request
-	Input *StartTranscriptionJobInput
-	Copy  func(*StartTranscriptionJobInput) StartTranscriptionJobRequest
+	Input *types.StartTranscriptionJobInput
+	Copy  func(*types.StartTranscriptionJobInput) StartTranscriptionJobRequest
 }
 
 // Send marshals and sends the StartTranscriptionJob API request.
@@ -167,7 +56,7 @@ func (r StartTranscriptionJobRequest) Send(ctx context.Context) (*StartTranscrip
 	}
 
 	resp := &StartTranscriptionJobResponse{
-		StartTranscriptionJobOutput: r.Request.Data.(*StartTranscriptionJobOutput),
+		StartTranscriptionJobOutput: r.Request.Data.(*types.StartTranscriptionJobOutput),
 		response:                    &aws.Response{Request: r.Request},
 	}
 
@@ -177,7 +66,7 @@ func (r StartTranscriptionJobRequest) Send(ctx context.Context) (*StartTranscrip
 // StartTranscriptionJobResponse is the response type for the
 // StartTranscriptionJob API operation.
 type StartTranscriptionJobResponse struct {
-	*StartTranscriptionJobOutput
+	*types.StartTranscriptionJobOutput
 
 	response *aws.Response
 }

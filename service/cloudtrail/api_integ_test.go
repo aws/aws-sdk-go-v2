@@ -13,6 +13,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws/awserr"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting/integration"
 	"github.com/aws/aws-sdk-go-v2/service/cloudtrail"
+	"github.com/aws/aws-sdk-go-v2/service/cloudtrail/types"
 )
 
 var _ aws.Config
@@ -24,7 +25,7 @@ func TestInteg_00_DescribeTrails(t *testing.T) {
 
 	cfg := integration.ConfigWithDefaultRegion("us-west-2")
 	svc := cloudtrail.New(cfg)
-	params := &cloudtrail.DescribeTrailsInput{}
+	params := &types.DescribeTrailsInput{}
 
 	req := svc.DescribeTrailsRequest(params)
 
@@ -39,7 +40,7 @@ func TestInteg_01_DeleteTrail(t *testing.T) {
 
 	cfg := integration.ConfigWithDefaultRegion("us-west-2")
 	svc := cloudtrail.New(cfg)
-	params := &cloudtrail.DeleteTrailInput{
+	params := &types.DeleteTrailInput{
 		Name: aws.String("faketrail"),
 	}
 

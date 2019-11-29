@@ -6,61 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/cloudformation/types"
 )
-
-type UpdateTerminationProtectionInput struct {
-	_ struct{} `type:"structure"`
-
-	// Whether to enable termination protection on the specified stack.
-	//
-	// EnableTerminationProtection is a required field
-	EnableTerminationProtection *bool `type:"boolean" required:"true"`
-
-	// The name or unique ID of the stack for which you want to set termination
-	// protection.
-	//
-	// StackName is a required field
-	StackName *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s UpdateTerminationProtectionInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateTerminationProtectionInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateTerminationProtectionInput"}
-
-	if s.EnableTerminationProtection == nil {
-		invalidParams.Add(aws.NewErrParamRequired("EnableTerminationProtection"))
-	}
-
-	if s.StackName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("StackName"))
-	}
-	if s.StackName != nil && len(*s.StackName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("StackName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type UpdateTerminationProtectionOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The unique ID of the stack.
-	StackId *string `type:"string"`
-}
-
-// String returns the string representation
-func (s UpdateTerminationProtectionOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opUpdateTerminationProtection = "UpdateTerminationProtection"
 
@@ -70,10 +17,10 @@ const opUpdateTerminationProtection = "UpdateTerminationProtection"
 // Updates termination protection for the specified stack. If a user attempts
 // to delete a stack with termination protection enabled, the operation fails
 // and the stack remains unchanged. For more information, see Protecting a Stack
-// From Being Deleted (AWSCloudFormation/latest/UserGuide/using-cfn-protect-stacks.html)
+// From Being Deleted (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-protect-stacks.html)
 // in the AWS CloudFormation User Guide.
 //
-// For nested stacks (AWSCloudFormation/latest/UserGuide/using-cfn-nested-stacks.html),
+// For nested stacks (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-nested-stacks.html),
 // termination protection is set on the root stack and cannot be changed directly
 // on the nested stack.
 //
@@ -85,7 +32,7 @@ const opUpdateTerminationProtection = "UpdateTerminationProtection"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/UpdateTerminationProtection
-func (c *Client) UpdateTerminationProtectionRequest(input *UpdateTerminationProtectionInput) UpdateTerminationProtectionRequest {
+func (c *Client) UpdateTerminationProtectionRequest(input *types.UpdateTerminationProtectionInput) UpdateTerminationProtectionRequest {
 	op := &aws.Operation{
 		Name:       opUpdateTerminationProtection,
 		HTTPMethod: "POST",
@@ -93,10 +40,10 @@ func (c *Client) UpdateTerminationProtectionRequest(input *UpdateTerminationProt
 	}
 
 	if input == nil {
-		input = &UpdateTerminationProtectionInput{}
+		input = &types.UpdateTerminationProtectionInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateTerminationProtectionOutput{})
+	req := c.newRequest(op, input, &types.UpdateTerminationProtectionOutput{})
 	return UpdateTerminationProtectionRequest{Request: req, Input: input, Copy: c.UpdateTerminationProtectionRequest}
 }
 
@@ -104,8 +51,8 @@ func (c *Client) UpdateTerminationProtectionRequest(input *UpdateTerminationProt
 // UpdateTerminationProtection API operation.
 type UpdateTerminationProtectionRequest struct {
 	*aws.Request
-	Input *UpdateTerminationProtectionInput
-	Copy  func(*UpdateTerminationProtectionInput) UpdateTerminationProtectionRequest
+	Input *types.UpdateTerminationProtectionInput
+	Copy  func(*types.UpdateTerminationProtectionInput) UpdateTerminationProtectionRequest
 }
 
 // Send marshals and sends the UpdateTerminationProtection API request.
@@ -117,7 +64,7 @@ func (r UpdateTerminationProtectionRequest) Send(ctx context.Context) (*UpdateTe
 	}
 
 	resp := &UpdateTerminationProtectionResponse{
-		UpdateTerminationProtectionOutput: r.Request.Data.(*UpdateTerminationProtectionOutput),
+		UpdateTerminationProtectionOutput: r.Request.Data.(*types.UpdateTerminationProtectionOutput),
 		response:                          &aws.Response{Request: r.Request},
 	}
 
@@ -127,7 +74,7 @@ func (r UpdateTerminationProtectionRequest) Send(ctx context.Context) (*UpdateTe
 // UpdateTerminationProtectionResponse is the response type for the
 // UpdateTerminationProtection API operation.
 type UpdateTerminationProtectionResponse struct {
-	*UpdateTerminationProtectionOutput
+	*types.UpdateTerminationProtectionOutput
 
 	response *aws.Response
 }

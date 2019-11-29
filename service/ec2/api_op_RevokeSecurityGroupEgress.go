@@ -6,78 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/ec2query"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-type RevokeSecurityGroupEgressInput struct {
-	_ struct{} `type:"structure"`
-
-	// Not supported. Use a set of IP permissions to specify the CIDR.
-	CidrIp *string `locationName:"cidrIp" type:"string"`
-
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have
-	// the required permissions, the error response is DryRunOperation. Otherwise,
-	// it is UnauthorizedOperation.
-	DryRun *bool `locationName:"dryRun" type:"boolean"`
-
-	// Not supported. Use a set of IP permissions to specify the port.
-	FromPort *int64 `locationName:"fromPort" type:"integer"`
-
-	// The ID of the security group.
-	//
-	// GroupId is a required field
-	GroupId *string `locationName:"groupId" type:"string" required:"true"`
-
-	// The sets of IP permissions. You can't specify a destination security group
-	// and a CIDR IP address range in the same set of permissions.
-	IpPermissions []IpPermission `locationName:"ipPermissions" locationNameList:"item" type:"list"`
-
-	// Not supported. Use a set of IP permissions to specify the protocol name or
-	// number.
-	IpProtocol *string `locationName:"ipProtocol" type:"string"`
-
-	// Not supported. Use a set of IP permissions to specify a destination security
-	// group.
-	SourceSecurityGroupName *string `locationName:"sourceSecurityGroupName" type:"string"`
-
-	// Not supported. Use a set of IP permissions to specify a destination security
-	// group.
-	SourceSecurityGroupOwnerId *string `locationName:"sourceSecurityGroupOwnerId" type:"string"`
-
-	// Not supported. Use a set of IP permissions to specify the port.
-	ToPort *int64 `locationName:"toPort" type:"integer"`
-}
-
-// String returns the string representation
-func (s RevokeSecurityGroupEgressInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *RevokeSecurityGroupEgressInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "RevokeSecurityGroupEgressInput"}
-
-	if s.GroupId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("GroupId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type RevokeSecurityGroupEgressOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s RevokeSecurityGroupEgressOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opRevokeSecurityGroupEgress = "RevokeSecurityGroupEgress"
 
@@ -106,7 +38,7 @@ const opRevokeSecurityGroupEgress = "RevokeSecurityGroupEgress"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/RevokeSecurityGroupEgress
-func (c *Client) RevokeSecurityGroupEgressRequest(input *RevokeSecurityGroupEgressInput) RevokeSecurityGroupEgressRequest {
+func (c *Client) RevokeSecurityGroupEgressRequest(input *types.RevokeSecurityGroupEgressInput) RevokeSecurityGroupEgressRequest {
 	op := &aws.Operation{
 		Name:       opRevokeSecurityGroupEgress,
 		HTTPMethod: "POST",
@@ -114,10 +46,10 @@ func (c *Client) RevokeSecurityGroupEgressRequest(input *RevokeSecurityGroupEgre
 	}
 
 	if input == nil {
-		input = &RevokeSecurityGroupEgressInput{}
+		input = &types.RevokeSecurityGroupEgressInput{}
 	}
 
-	req := c.newRequest(op, input, &RevokeSecurityGroupEgressOutput{})
+	req := c.newRequest(op, input, &types.RevokeSecurityGroupEgressOutput{})
 	req.Handlers.Unmarshal.Remove(ec2query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return RevokeSecurityGroupEgressRequest{Request: req, Input: input, Copy: c.RevokeSecurityGroupEgressRequest}
@@ -127,8 +59,8 @@ func (c *Client) RevokeSecurityGroupEgressRequest(input *RevokeSecurityGroupEgre
 // RevokeSecurityGroupEgress API operation.
 type RevokeSecurityGroupEgressRequest struct {
 	*aws.Request
-	Input *RevokeSecurityGroupEgressInput
-	Copy  func(*RevokeSecurityGroupEgressInput) RevokeSecurityGroupEgressRequest
+	Input *types.RevokeSecurityGroupEgressInput
+	Copy  func(*types.RevokeSecurityGroupEgressInput) RevokeSecurityGroupEgressRequest
 }
 
 // Send marshals and sends the RevokeSecurityGroupEgress API request.
@@ -140,7 +72,7 @@ func (r RevokeSecurityGroupEgressRequest) Send(ctx context.Context) (*RevokeSecu
 	}
 
 	resp := &RevokeSecurityGroupEgressResponse{
-		RevokeSecurityGroupEgressOutput: r.Request.Data.(*RevokeSecurityGroupEgressOutput),
+		RevokeSecurityGroupEgressOutput: r.Request.Data.(*types.RevokeSecurityGroupEgressOutput),
 		response:                        &aws.Response{Request: r.Request},
 	}
 
@@ -150,7 +82,7 @@ func (r RevokeSecurityGroupEgressRequest) Send(ctx context.Context) (*RevokeSecu
 // RevokeSecurityGroupEgressResponse is the response type for the
 // RevokeSecurityGroupEgress API operation.
 type RevokeSecurityGroupEgressResponse struct {
-	*RevokeSecurityGroupEgressOutput
+	*types.RevokeSecurityGroupEgressOutput
 
 	response *aws.Response
 }

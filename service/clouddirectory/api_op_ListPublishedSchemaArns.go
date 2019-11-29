@@ -6,104 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/clouddirectory/types"
 )
-
-type ListPublishedSchemaArnsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The maximum number of results to retrieve.
-	MaxResults *int64 `min:"1" type:"integer"`
-
-	// The pagination token.
-	NextToken *string `type:"string"`
-
-	// The response for ListPublishedSchemaArns when this parameter is used will
-	// list all minor version ARNs for a major version.
-	SchemaArn *string `type:"string"`
-}
-
-// String returns the string representation
-func (s ListPublishedSchemaArnsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListPublishedSchemaArnsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListPublishedSchemaArnsInput"}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListPublishedSchemaArnsInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.MaxResults != nil {
-		v := *s.MaxResults
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "MaxResults", protocol.Int64Value(v), metadata)
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.SchemaArn != nil {
-		v := *s.SchemaArn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "SchemaArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type ListPublishedSchemaArnsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The pagination token.
-	NextToken *string `type:"string"`
-
-	// The ARNs of published schemas.
-	SchemaArns []string `type:"list"`
-}
-
-// String returns the string representation
-func (s ListPublishedSchemaArnsOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListPublishedSchemaArnsOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.SchemaArns != nil {
-		v := s.SchemaArns
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "SchemaArns", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
-		}
-		ls0.End()
-
-	}
-	return nil
-}
 
 const opListPublishedSchemaArns = "ListPublishedSchemaArns"
 
@@ -122,7 +26,7 @@ const opListPublishedSchemaArns = "ListPublishedSchemaArns"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/ListPublishedSchemaArns
-func (c *Client) ListPublishedSchemaArnsRequest(input *ListPublishedSchemaArnsInput) ListPublishedSchemaArnsRequest {
+func (c *Client) ListPublishedSchemaArnsRequest(input *types.ListPublishedSchemaArnsInput) ListPublishedSchemaArnsRequest {
 	op := &aws.Operation{
 		Name:       opListPublishedSchemaArns,
 		HTTPMethod: "POST",
@@ -136,10 +40,10 @@ func (c *Client) ListPublishedSchemaArnsRequest(input *ListPublishedSchemaArnsIn
 	}
 
 	if input == nil {
-		input = &ListPublishedSchemaArnsInput{}
+		input = &types.ListPublishedSchemaArnsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListPublishedSchemaArnsOutput{})
+	req := c.newRequest(op, input, &types.ListPublishedSchemaArnsOutput{})
 	return ListPublishedSchemaArnsRequest{Request: req, Input: input, Copy: c.ListPublishedSchemaArnsRequest}
 }
 
@@ -147,8 +51,8 @@ func (c *Client) ListPublishedSchemaArnsRequest(input *ListPublishedSchemaArnsIn
 // ListPublishedSchemaArns API operation.
 type ListPublishedSchemaArnsRequest struct {
 	*aws.Request
-	Input *ListPublishedSchemaArnsInput
-	Copy  func(*ListPublishedSchemaArnsInput) ListPublishedSchemaArnsRequest
+	Input *types.ListPublishedSchemaArnsInput
+	Copy  func(*types.ListPublishedSchemaArnsInput) ListPublishedSchemaArnsRequest
 }
 
 // Send marshals and sends the ListPublishedSchemaArns API request.
@@ -160,7 +64,7 @@ func (r ListPublishedSchemaArnsRequest) Send(ctx context.Context) (*ListPublishe
 	}
 
 	resp := &ListPublishedSchemaArnsResponse{
-		ListPublishedSchemaArnsOutput: r.Request.Data.(*ListPublishedSchemaArnsOutput),
+		ListPublishedSchemaArnsOutput: r.Request.Data.(*types.ListPublishedSchemaArnsOutput),
 		response:                      &aws.Response{Request: r.Request},
 	}
 
@@ -190,7 +94,7 @@ func NewListPublishedSchemaArnsPaginator(req ListPublishedSchemaArnsRequest) Lis
 	return ListPublishedSchemaArnsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListPublishedSchemaArnsInput
+				var inCpy *types.ListPublishedSchemaArnsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -210,14 +114,14 @@ type ListPublishedSchemaArnsPaginator struct {
 	aws.Pager
 }
 
-func (p *ListPublishedSchemaArnsPaginator) CurrentPage() *ListPublishedSchemaArnsOutput {
-	return p.Pager.CurrentPage().(*ListPublishedSchemaArnsOutput)
+func (p *ListPublishedSchemaArnsPaginator) CurrentPage() *types.ListPublishedSchemaArnsOutput {
+	return p.Pager.CurrentPage().(*types.ListPublishedSchemaArnsOutput)
 }
 
 // ListPublishedSchemaArnsResponse is the response type for the
 // ListPublishedSchemaArns API operation.
 type ListPublishedSchemaArnsResponse struct {
-	*ListPublishedSchemaArnsOutput
+	*types.ListPublishedSchemaArnsOutput
 
 	response *aws.Response
 }

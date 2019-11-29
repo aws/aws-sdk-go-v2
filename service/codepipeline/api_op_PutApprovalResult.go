@@ -4,106 +4,10 @@ package codepipeline
 
 import (
 	"context"
-	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/codepipeline/types"
 )
-
-// Represents the input of a PutApprovalResult action.
-type PutApprovalResultInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the action for which approval is requested.
-	//
-	// ActionName is a required field
-	ActionName *string `locationName:"actionName" min:"1" type:"string" required:"true"`
-
-	// The name of the pipeline that contains the action.
-	//
-	// PipelineName is a required field
-	PipelineName *string `locationName:"pipelineName" min:"1" type:"string" required:"true"`
-
-	// Represents information about the result of the approval request.
-	//
-	// Result is a required field
-	Result *ApprovalResult `locationName:"result" type:"structure" required:"true"`
-
-	// The name of the stage that contains the action.
-	//
-	// StageName is a required field
-	StageName *string `locationName:"stageName" min:"1" type:"string" required:"true"`
-
-	// The system-generated token used to identify a unique approval request. The
-	// token for each open approval request can be obtained using the GetPipelineState
-	// action. It is used to validate that the approval request corresponding to
-	// this token is still valid.
-	//
-	// Token is a required field
-	Token *string `locationName:"token" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s PutApprovalResultInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *PutApprovalResultInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "PutApprovalResultInput"}
-
-	if s.ActionName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ActionName"))
-	}
-	if s.ActionName != nil && len(*s.ActionName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ActionName", 1))
-	}
-
-	if s.PipelineName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("PipelineName"))
-	}
-	if s.PipelineName != nil && len(*s.PipelineName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("PipelineName", 1))
-	}
-
-	if s.Result == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Result"))
-	}
-
-	if s.StageName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("StageName"))
-	}
-	if s.StageName != nil && len(*s.StageName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("StageName", 1))
-	}
-
-	if s.Token == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Token"))
-	}
-	if s.Result != nil {
-		if err := s.Result.Validate(); err != nil {
-			invalidParams.AddNested("Result", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Represents the output of a PutApprovalResult action.
-type PutApprovalResultOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The timestamp showing when the approval or rejection was submitted.
-	ApprovedAt *time.Time `locationName:"approvedAt" type:"timestamp"`
-}
-
-// String returns the string representation
-func (s PutApprovalResultOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opPutApprovalResult = "PutApprovalResult"
 
@@ -121,7 +25,7 @@ const opPutApprovalResult = "PutApprovalResult"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/PutApprovalResult
-func (c *Client) PutApprovalResultRequest(input *PutApprovalResultInput) PutApprovalResultRequest {
+func (c *Client) PutApprovalResultRequest(input *types.PutApprovalResultInput) PutApprovalResultRequest {
 	op := &aws.Operation{
 		Name:       opPutApprovalResult,
 		HTTPMethod: "POST",
@@ -129,10 +33,10 @@ func (c *Client) PutApprovalResultRequest(input *PutApprovalResultInput) PutAppr
 	}
 
 	if input == nil {
-		input = &PutApprovalResultInput{}
+		input = &types.PutApprovalResultInput{}
 	}
 
-	req := c.newRequest(op, input, &PutApprovalResultOutput{})
+	req := c.newRequest(op, input, &types.PutApprovalResultOutput{})
 	return PutApprovalResultRequest{Request: req, Input: input, Copy: c.PutApprovalResultRequest}
 }
 
@@ -140,8 +44,8 @@ func (c *Client) PutApprovalResultRequest(input *PutApprovalResultInput) PutAppr
 // PutApprovalResult API operation.
 type PutApprovalResultRequest struct {
 	*aws.Request
-	Input *PutApprovalResultInput
-	Copy  func(*PutApprovalResultInput) PutApprovalResultRequest
+	Input *types.PutApprovalResultInput
+	Copy  func(*types.PutApprovalResultInput) PutApprovalResultRequest
 }
 
 // Send marshals and sends the PutApprovalResult API request.
@@ -153,7 +57,7 @@ func (r PutApprovalResultRequest) Send(ctx context.Context) (*PutApprovalResultR
 	}
 
 	resp := &PutApprovalResultResponse{
-		PutApprovalResultOutput: r.Request.Data.(*PutApprovalResultOutput),
+		PutApprovalResultOutput: r.Request.Data.(*types.PutApprovalResultOutput),
 		response:                &aws.Response{Request: r.Request},
 	}
 
@@ -163,7 +67,7 @@ func (r PutApprovalResultRequest) Send(ctx context.Context) (*PutApprovalResultR
 // PutApprovalResultResponse is the response type for the
 // PutApprovalResult API operation.
 type PutApprovalResultResponse struct {
-	*PutApprovalResultOutput
+	*types.PutApprovalResultOutput
 
 	response *aws.Response
 }

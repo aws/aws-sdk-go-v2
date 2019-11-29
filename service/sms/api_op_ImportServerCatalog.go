@@ -6,26 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/sms/types"
 )
-
-type ImportServerCatalogInput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s ImportServerCatalogInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type ImportServerCatalogOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s ImportServerCatalogOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opImportServerCatalog = "ImportServerCatalog"
 
@@ -46,7 +28,7 @@ const opImportServerCatalog = "ImportServerCatalog"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sms-2016-10-24/ImportServerCatalog
-func (c *Client) ImportServerCatalogRequest(input *ImportServerCatalogInput) ImportServerCatalogRequest {
+func (c *Client) ImportServerCatalogRequest(input *types.ImportServerCatalogInput) ImportServerCatalogRequest {
 	op := &aws.Operation{
 		Name:       opImportServerCatalog,
 		HTTPMethod: "POST",
@@ -54,10 +36,10 @@ func (c *Client) ImportServerCatalogRequest(input *ImportServerCatalogInput) Imp
 	}
 
 	if input == nil {
-		input = &ImportServerCatalogInput{}
+		input = &types.ImportServerCatalogInput{}
 	}
 
-	req := c.newRequest(op, input, &ImportServerCatalogOutput{})
+	req := c.newRequest(op, input, &types.ImportServerCatalogOutput{})
 	return ImportServerCatalogRequest{Request: req, Input: input, Copy: c.ImportServerCatalogRequest}
 }
 
@@ -65,8 +47,8 @@ func (c *Client) ImportServerCatalogRequest(input *ImportServerCatalogInput) Imp
 // ImportServerCatalog API operation.
 type ImportServerCatalogRequest struct {
 	*aws.Request
-	Input *ImportServerCatalogInput
-	Copy  func(*ImportServerCatalogInput) ImportServerCatalogRequest
+	Input *types.ImportServerCatalogInput
+	Copy  func(*types.ImportServerCatalogInput) ImportServerCatalogRequest
 }
 
 // Send marshals and sends the ImportServerCatalog API request.
@@ -78,7 +60,7 @@ func (r ImportServerCatalogRequest) Send(ctx context.Context) (*ImportServerCata
 	}
 
 	resp := &ImportServerCatalogResponse{
-		ImportServerCatalogOutput: r.Request.Data.(*ImportServerCatalogOutput),
+		ImportServerCatalogOutput: r.Request.Data.(*types.ImportServerCatalogOutput),
 		response:                  &aws.Response{Request: r.Request},
 	}
 
@@ -88,7 +70,7 @@ func (r ImportServerCatalogRequest) Send(ctx context.Context) (*ImportServerCata
 // ImportServerCatalogResponse is the response type for the
 // ImportServerCatalog API operation.
 type ImportServerCatalogResponse struct {
-	*ImportServerCatalogOutput
+	*types.ImportServerCatalogOutput
 
 	response *aws.Response
 }

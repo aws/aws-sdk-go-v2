@@ -6,77 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/inspector/types"
 )
-
-type ListAssessmentTemplatesInput struct {
-	_ struct{} `type:"structure"`
-
-	// A list of ARNs that specifies the assessment targets whose assessment templates
-	// you want to list.
-	AssessmentTargetArns []string `locationName:"assessmentTargetArns" type:"list"`
-
-	// You can use this parameter to specify a subset of data to be included in
-	// the action's response.
-	//
-	// For a record to match a filter, all specified filter attributes must match.
-	// When multiple values are specified for a filter attribute, any of the values
-	// can match.
-	Filter *AssessmentTemplateFilter `locationName:"filter" type:"structure"`
-
-	// You can use this parameter to indicate the maximum number of items you want
-	// in the response. The default value is 10. The maximum value is 500.
-	MaxResults *int64 `locationName:"maxResults" type:"integer"`
-
-	// You can use this parameter when paginating results. Set the value of this
-	// parameter to null on your first call to the ListAssessmentTemplates action.
-	// Subsequent calls to the action fill nextToken in the request with the value
-	// of NextToken from the previous response to continue listing data.
-	NextToken *string `locationName:"nextToken" min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s ListAssessmentTemplatesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListAssessmentTemplatesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListAssessmentTemplatesInput"}
-	if s.NextToken != nil && len(*s.NextToken) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
-	}
-	if s.Filter != nil {
-		if err := s.Filter.Validate(); err != nil {
-			invalidParams.AddNested("Filter", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ListAssessmentTemplatesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A list of ARNs that specifies the assessment templates returned by the action.
-	//
-	// AssessmentTemplateArns is a required field
-	AssessmentTemplateArns []string `locationName:"assessmentTemplateArns" type:"list" required:"true"`
-
-	// When a response is generated, if there is more data to be listed, this parameter
-	// is present in the response and contains the value to use for the nextToken
-	// parameter in a subsequent pagination request. If there is no more data to
-	// be listed, this parameter is set to null.
-	NextToken *string `locationName:"nextToken" min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s ListAssessmentTemplatesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListAssessmentTemplates = "ListAssessmentTemplates"
 
@@ -94,7 +25,7 @@ const opListAssessmentTemplates = "ListAssessmentTemplates"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/ListAssessmentTemplates
-func (c *Client) ListAssessmentTemplatesRequest(input *ListAssessmentTemplatesInput) ListAssessmentTemplatesRequest {
+func (c *Client) ListAssessmentTemplatesRequest(input *types.ListAssessmentTemplatesInput) ListAssessmentTemplatesRequest {
 	op := &aws.Operation{
 		Name:       opListAssessmentTemplates,
 		HTTPMethod: "POST",
@@ -108,10 +39,10 @@ func (c *Client) ListAssessmentTemplatesRequest(input *ListAssessmentTemplatesIn
 	}
 
 	if input == nil {
-		input = &ListAssessmentTemplatesInput{}
+		input = &types.ListAssessmentTemplatesInput{}
 	}
 
-	req := c.newRequest(op, input, &ListAssessmentTemplatesOutput{})
+	req := c.newRequest(op, input, &types.ListAssessmentTemplatesOutput{})
 	return ListAssessmentTemplatesRequest{Request: req, Input: input, Copy: c.ListAssessmentTemplatesRequest}
 }
 
@@ -119,8 +50,8 @@ func (c *Client) ListAssessmentTemplatesRequest(input *ListAssessmentTemplatesIn
 // ListAssessmentTemplates API operation.
 type ListAssessmentTemplatesRequest struct {
 	*aws.Request
-	Input *ListAssessmentTemplatesInput
-	Copy  func(*ListAssessmentTemplatesInput) ListAssessmentTemplatesRequest
+	Input *types.ListAssessmentTemplatesInput
+	Copy  func(*types.ListAssessmentTemplatesInput) ListAssessmentTemplatesRequest
 }
 
 // Send marshals and sends the ListAssessmentTemplates API request.
@@ -132,7 +63,7 @@ func (r ListAssessmentTemplatesRequest) Send(ctx context.Context) (*ListAssessme
 	}
 
 	resp := &ListAssessmentTemplatesResponse{
-		ListAssessmentTemplatesOutput: r.Request.Data.(*ListAssessmentTemplatesOutput),
+		ListAssessmentTemplatesOutput: r.Request.Data.(*types.ListAssessmentTemplatesOutput),
 		response:                      &aws.Response{Request: r.Request},
 	}
 
@@ -162,7 +93,7 @@ func NewListAssessmentTemplatesPaginator(req ListAssessmentTemplatesRequest) Lis
 	return ListAssessmentTemplatesPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListAssessmentTemplatesInput
+				var inCpy *types.ListAssessmentTemplatesInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -182,14 +113,14 @@ type ListAssessmentTemplatesPaginator struct {
 	aws.Pager
 }
 
-func (p *ListAssessmentTemplatesPaginator) CurrentPage() *ListAssessmentTemplatesOutput {
-	return p.Pager.CurrentPage().(*ListAssessmentTemplatesOutput)
+func (p *ListAssessmentTemplatesPaginator) CurrentPage() *types.ListAssessmentTemplatesOutput {
+	return p.Pager.CurrentPage().(*types.ListAssessmentTemplatesOutput)
 }
 
 // ListAssessmentTemplatesResponse is the response type for the
 // ListAssessmentTemplates API operation.
 type ListAssessmentTemplatesResponse struct {
-	*ListAssessmentTemplatesOutput
+	*types.ListAssessmentTemplatesOutput
 
 	response *aws.Response
 }

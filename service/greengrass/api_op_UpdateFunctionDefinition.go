@@ -6,70 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/greengrass/types"
 )
-
-type UpdateFunctionDefinitionInput struct {
-	_ struct{} `type:"structure"`
-
-	// FunctionDefinitionId is a required field
-	FunctionDefinitionId *string `location:"uri" locationName:"FunctionDefinitionId" type:"string" required:"true"`
-
-	Name *string `type:"string"`
-}
-
-// String returns the string representation
-func (s UpdateFunctionDefinitionInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateFunctionDefinitionInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateFunctionDefinitionInput"}
-
-	if s.FunctionDefinitionId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("FunctionDefinitionId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s UpdateFunctionDefinitionInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.Name != nil {
-		v := *s.Name
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "Name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.FunctionDefinitionId != nil {
-		v := *s.FunctionDefinitionId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "FunctionDefinitionId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type UpdateFunctionDefinitionOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s UpdateFunctionDefinitionOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s UpdateFunctionDefinitionOutput) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
 
 const opUpdateFunctionDefinition = "UpdateFunctionDefinition"
 
@@ -86,7 +24,7 @@ const opUpdateFunctionDefinition = "UpdateFunctionDefinition"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/UpdateFunctionDefinition
-func (c *Client) UpdateFunctionDefinitionRequest(input *UpdateFunctionDefinitionInput) UpdateFunctionDefinitionRequest {
+func (c *Client) UpdateFunctionDefinitionRequest(input *types.UpdateFunctionDefinitionInput) UpdateFunctionDefinitionRequest {
 	op := &aws.Operation{
 		Name:       opUpdateFunctionDefinition,
 		HTTPMethod: "PUT",
@@ -94,10 +32,10 @@ func (c *Client) UpdateFunctionDefinitionRequest(input *UpdateFunctionDefinition
 	}
 
 	if input == nil {
-		input = &UpdateFunctionDefinitionInput{}
+		input = &types.UpdateFunctionDefinitionInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateFunctionDefinitionOutput{})
+	req := c.newRequest(op, input, &types.UpdateFunctionDefinitionOutput{})
 	return UpdateFunctionDefinitionRequest{Request: req, Input: input, Copy: c.UpdateFunctionDefinitionRequest}
 }
 
@@ -105,8 +43,8 @@ func (c *Client) UpdateFunctionDefinitionRequest(input *UpdateFunctionDefinition
 // UpdateFunctionDefinition API operation.
 type UpdateFunctionDefinitionRequest struct {
 	*aws.Request
-	Input *UpdateFunctionDefinitionInput
-	Copy  func(*UpdateFunctionDefinitionInput) UpdateFunctionDefinitionRequest
+	Input *types.UpdateFunctionDefinitionInput
+	Copy  func(*types.UpdateFunctionDefinitionInput) UpdateFunctionDefinitionRequest
 }
 
 // Send marshals and sends the UpdateFunctionDefinition API request.
@@ -118,7 +56,7 @@ func (r UpdateFunctionDefinitionRequest) Send(ctx context.Context) (*UpdateFunct
 	}
 
 	resp := &UpdateFunctionDefinitionResponse{
-		UpdateFunctionDefinitionOutput: r.Request.Data.(*UpdateFunctionDefinitionOutput),
+		UpdateFunctionDefinitionOutput: r.Request.Data.(*types.UpdateFunctionDefinitionOutput),
 		response:                       &aws.Response{Request: r.Request},
 	}
 
@@ -128,7 +66,7 @@ func (r UpdateFunctionDefinitionRequest) Send(ctx context.Context) (*UpdateFunct
 // UpdateFunctionDefinitionResponse is the response type for the
 // UpdateFunctionDefinition API operation.
 type UpdateFunctionDefinitionResponse struct {
-	*UpdateFunctionDefinitionOutput
+	*types.UpdateFunctionDefinitionOutput
 
 	response *aws.Response
 }

@@ -6,57 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/autoscaling/types"
 )
-
-type AttachLoadBalancersInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the Auto Scaling group.
-	//
-	// AutoScalingGroupName is a required field
-	AutoScalingGroupName *string `min:"1" type:"string" required:"true"`
-
-	// The names of the load balancers. You can specify up to 10 load balancers.
-	//
-	// LoadBalancerNames is a required field
-	LoadBalancerNames []string `type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s AttachLoadBalancersInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *AttachLoadBalancersInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "AttachLoadBalancersInput"}
-
-	if s.AutoScalingGroupName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("AutoScalingGroupName"))
-	}
-	if s.AutoScalingGroupName != nil && len(*s.AutoScalingGroupName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("AutoScalingGroupName", 1))
-	}
-
-	if s.LoadBalancerNames == nil {
-		invalidParams.Add(aws.NewErrParamRequired("LoadBalancerNames"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type AttachLoadBalancersOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s AttachLoadBalancersOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opAttachLoadBalancers = "AttachLoadBalancers"
 
@@ -84,7 +35,7 @@ const opAttachLoadBalancers = "AttachLoadBalancers"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/AttachLoadBalancers
-func (c *Client) AttachLoadBalancersRequest(input *AttachLoadBalancersInput) AttachLoadBalancersRequest {
+func (c *Client) AttachLoadBalancersRequest(input *types.AttachLoadBalancersInput) AttachLoadBalancersRequest {
 	op := &aws.Operation{
 		Name:       opAttachLoadBalancers,
 		HTTPMethod: "POST",
@@ -92,10 +43,10 @@ func (c *Client) AttachLoadBalancersRequest(input *AttachLoadBalancersInput) Att
 	}
 
 	if input == nil {
-		input = &AttachLoadBalancersInput{}
+		input = &types.AttachLoadBalancersInput{}
 	}
 
-	req := c.newRequest(op, input, &AttachLoadBalancersOutput{})
+	req := c.newRequest(op, input, &types.AttachLoadBalancersOutput{})
 	return AttachLoadBalancersRequest{Request: req, Input: input, Copy: c.AttachLoadBalancersRequest}
 }
 
@@ -103,8 +54,8 @@ func (c *Client) AttachLoadBalancersRequest(input *AttachLoadBalancersInput) Att
 // AttachLoadBalancers API operation.
 type AttachLoadBalancersRequest struct {
 	*aws.Request
-	Input *AttachLoadBalancersInput
-	Copy  func(*AttachLoadBalancersInput) AttachLoadBalancersRequest
+	Input *types.AttachLoadBalancersInput
+	Copy  func(*types.AttachLoadBalancersInput) AttachLoadBalancersRequest
 }
 
 // Send marshals and sends the AttachLoadBalancers API request.
@@ -116,7 +67,7 @@ func (r AttachLoadBalancersRequest) Send(ctx context.Context) (*AttachLoadBalanc
 	}
 
 	resp := &AttachLoadBalancersResponse{
-		AttachLoadBalancersOutput: r.Request.Data.(*AttachLoadBalancersOutput),
+		AttachLoadBalancersOutput: r.Request.Data.(*types.AttachLoadBalancersOutput),
 		response:                  &aws.Response{Request: r.Request},
 	}
 
@@ -126,7 +77,7 @@ func (r AttachLoadBalancersRequest) Send(ctx context.Context) (*AttachLoadBalanc
 // AttachLoadBalancersResponse is the response type for the
 // AttachLoadBalancers API operation.
 type AttachLoadBalancersResponse struct {
-	*AttachLoadBalancersOutput
+	*types.AttachLoadBalancersOutput
 
 	response *aws.Response
 }

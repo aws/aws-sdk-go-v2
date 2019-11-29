@@ -6,71 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/types"
 )
-
-type ListPortfoliosForProductInput struct {
-	_ struct{} `type:"structure"`
-
-	// The language code.
-	//
-	//    * en - English (default)
-	//
-	//    * jp - Japanese
-	//
-	//    * zh - Chinese
-	AcceptLanguage *string `type:"string"`
-
-	// The maximum number of items to return with this call.
-	PageSize *int64 `type:"integer"`
-
-	// The page token for the next set of results. To retrieve the first set of
-	// results, use null.
-	PageToken *string `type:"string"`
-
-	// The product identifier.
-	//
-	// ProductId is a required field
-	ProductId *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s ListPortfoliosForProductInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListPortfoliosForProductInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListPortfoliosForProductInput"}
-
-	if s.ProductId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ProductId"))
-	}
-	if s.ProductId != nil && len(*s.ProductId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ProductId", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ListPortfoliosForProductOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The page token to use to retrieve the next set of results. If there are no
-	// additional results, this value is null.
-	NextPageToken *string `type:"string"`
-
-	// Information about the portfolios.
-	PortfolioDetails []PortfolioDetail `type:"list"`
-}
-
-// String returns the string representation
-func (s ListPortfoliosForProductOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListPortfoliosForProduct = "ListPortfoliosForProduct"
 
@@ -87,7 +24,7 @@ const opListPortfoliosForProduct = "ListPortfoliosForProduct"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ListPortfoliosForProduct
-func (c *Client) ListPortfoliosForProductRequest(input *ListPortfoliosForProductInput) ListPortfoliosForProductRequest {
+func (c *Client) ListPortfoliosForProductRequest(input *types.ListPortfoliosForProductInput) ListPortfoliosForProductRequest {
 	op := &aws.Operation{
 		Name:       opListPortfoliosForProduct,
 		HTTPMethod: "POST",
@@ -101,10 +38,10 @@ func (c *Client) ListPortfoliosForProductRequest(input *ListPortfoliosForProduct
 	}
 
 	if input == nil {
-		input = &ListPortfoliosForProductInput{}
+		input = &types.ListPortfoliosForProductInput{}
 	}
 
-	req := c.newRequest(op, input, &ListPortfoliosForProductOutput{})
+	req := c.newRequest(op, input, &types.ListPortfoliosForProductOutput{})
 	return ListPortfoliosForProductRequest{Request: req, Input: input, Copy: c.ListPortfoliosForProductRequest}
 }
 
@@ -112,8 +49,8 @@ func (c *Client) ListPortfoliosForProductRequest(input *ListPortfoliosForProduct
 // ListPortfoliosForProduct API operation.
 type ListPortfoliosForProductRequest struct {
 	*aws.Request
-	Input *ListPortfoliosForProductInput
-	Copy  func(*ListPortfoliosForProductInput) ListPortfoliosForProductRequest
+	Input *types.ListPortfoliosForProductInput
+	Copy  func(*types.ListPortfoliosForProductInput) ListPortfoliosForProductRequest
 }
 
 // Send marshals and sends the ListPortfoliosForProduct API request.
@@ -125,7 +62,7 @@ func (r ListPortfoliosForProductRequest) Send(ctx context.Context) (*ListPortfol
 	}
 
 	resp := &ListPortfoliosForProductResponse{
-		ListPortfoliosForProductOutput: r.Request.Data.(*ListPortfoliosForProductOutput),
+		ListPortfoliosForProductOutput: r.Request.Data.(*types.ListPortfoliosForProductOutput),
 		response:                       &aws.Response{Request: r.Request},
 	}
 
@@ -155,7 +92,7 @@ func NewListPortfoliosForProductPaginator(req ListPortfoliosForProductRequest) L
 	return ListPortfoliosForProductPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListPortfoliosForProductInput
+				var inCpy *types.ListPortfoliosForProductInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -175,14 +112,14 @@ type ListPortfoliosForProductPaginator struct {
 	aws.Pager
 }
 
-func (p *ListPortfoliosForProductPaginator) CurrentPage() *ListPortfoliosForProductOutput {
-	return p.Pager.CurrentPage().(*ListPortfoliosForProductOutput)
+func (p *ListPortfoliosForProductPaginator) CurrentPage() *types.ListPortfoliosForProductOutput {
+	return p.Pager.CurrentPage().(*types.ListPortfoliosForProductOutput)
 }
 
 // ListPortfoliosForProductResponse is the response type for the
 // ListPortfoliosForProduct API operation.
 type ListPortfoliosForProductResponse struct {
-	*ListPortfoliosForProductOutput
+	*types.ListPortfoliosForProductOutput
 
 	response *aws.Response
 }

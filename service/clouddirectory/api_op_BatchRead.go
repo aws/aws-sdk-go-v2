@@ -4,121 +4,10 @@ package clouddirectory
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/clouddirectory/types"
 )
-
-type BatchReadInput struct {
-	_ struct{} `type:"structure"`
-
-	// Represents the manner and timing in which the successful write or update
-	// of an object is reflected in a subsequent read operation of that same object.
-	ConsistencyLevel ConsistencyLevel `location:"header" locationName:"x-amz-consistency-level" type:"string" enum:"true"`
-
-	// The Amazon Resource Name (ARN) that is associated with the Directory. For
-	// more information, see arns.
-	//
-	// DirectoryArn is a required field
-	DirectoryArn *string `location:"header" locationName:"x-amz-data-partition" type:"string" required:"true"`
-
-	// A list of operations that are part of the batch.
-	//
-	// Operations is a required field
-	Operations []BatchReadOperation `type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s BatchReadInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *BatchReadInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "BatchReadInput"}
-
-	if s.DirectoryArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DirectoryArn"))
-	}
-
-	if s.Operations == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Operations"))
-	}
-	if s.Operations != nil {
-		for i, v := range s.Operations {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Operations", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s BatchReadInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.Operations != nil {
-		v := s.Operations
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "Operations", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	if len(s.ConsistencyLevel) > 0 {
-		v := s.ConsistencyLevel
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "x-amz-consistency-level", protocol.QuotedValue{ValueMarshaler: v}, metadata)
-	}
-	if s.DirectoryArn != nil {
-		v := *s.DirectoryArn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "x-amz-data-partition", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type BatchReadOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A list of all the responses for each batch read.
-	Responses []BatchReadOperationResponse `type:"list"`
-}
-
-// String returns the string representation
-func (s BatchReadOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s BatchReadOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.Responses != nil {
-		v := s.Responses
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "Responses", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	return nil
-}
 
 const opBatchRead = "BatchRead"
 
@@ -135,7 +24,7 @@ const opBatchRead = "BatchRead"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/BatchRead
-func (c *Client) BatchReadRequest(input *BatchReadInput) BatchReadRequest {
+func (c *Client) BatchReadRequest(input *types.BatchReadInput) BatchReadRequest {
 	op := &aws.Operation{
 		Name:       opBatchRead,
 		HTTPMethod: "POST",
@@ -143,10 +32,10 @@ func (c *Client) BatchReadRequest(input *BatchReadInput) BatchReadRequest {
 	}
 
 	if input == nil {
-		input = &BatchReadInput{}
+		input = &types.BatchReadInput{}
 	}
 
-	req := c.newRequest(op, input, &BatchReadOutput{})
+	req := c.newRequest(op, input, &types.BatchReadOutput{})
 	return BatchReadRequest{Request: req, Input: input, Copy: c.BatchReadRequest}
 }
 
@@ -154,8 +43,8 @@ func (c *Client) BatchReadRequest(input *BatchReadInput) BatchReadRequest {
 // BatchRead API operation.
 type BatchReadRequest struct {
 	*aws.Request
-	Input *BatchReadInput
-	Copy  func(*BatchReadInput) BatchReadRequest
+	Input *types.BatchReadInput
+	Copy  func(*types.BatchReadInput) BatchReadRequest
 }
 
 // Send marshals and sends the BatchRead API request.
@@ -167,7 +56,7 @@ func (r BatchReadRequest) Send(ctx context.Context) (*BatchReadResponse, error) 
 	}
 
 	resp := &BatchReadResponse{
-		BatchReadOutput: r.Request.Data.(*BatchReadOutput),
+		BatchReadOutput: r.Request.Data.(*types.BatchReadOutput),
 		response:        &aws.Response{Request: r.Request},
 	}
 
@@ -177,7 +66,7 @@ func (r BatchReadRequest) Send(ctx context.Context) (*BatchReadResponse, error) 
 // BatchReadResponse is the response type for the
 // BatchRead API operation.
 type BatchReadResponse struct {
-	*BatchReadOutput
+	*types.BatchReadOutput
 
 	response *aws.Response
 }

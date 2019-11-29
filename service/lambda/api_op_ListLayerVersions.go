@@ -6,121 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/lambda/types"
 )
-
-type ListLayerVersionsInput struct {
-	_ struct{} `type:"structure"`
-
-	// A runtime identifier. For example, go1.x.
-	CompatibleRuntime Runtime `location:"querystring" locationName:"CompatibleRuntime" type:"string" enum:"true"`
-
-	// The name or Amazon Resource Name (ARN) of the layer.
-	//
-	// LayerName is a required field
-	LayerName *string `location:"uri" locationName:"LayerName" min:"1" type:"string" required:"true"`
-
-	// A pagination token returned by a previous call.
-	Marker *string `location:"querystring" locationName:"Marker" type:"string"`
-
-	// The maximum number of versions to return.
-	MaxItems *int64 `location:"querystring" locationName:"MaxItems" min:"1" type:"integer"`
-}
-
-// String returns the string representation
-func (s ListLayerVersionsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListLayerVersionsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListLayerVersionsInput"}
-
-	if s.LayerName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("LayerName"))
-	}
-	if s.LayerName != nil && len(*s.LayerName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("LayerName", 1))
-	}
-	if s.MaxItems != nil && *s.MaxItems < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxItems", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListLayerVersionsInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.LayerName != nil {
-		v := *s.LayerName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "LayerName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if len(s.CompatibleRuntime) > 0 {
-		v := s.CompatibleRuntime
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "CompatibleRuntime", protocol.QuotedValue{ValueMarshaler: v}, metadata)
-	}
-	if s.Marker != nil {
-		v := *s.Marker
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "Marker", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.MaxItems != nil {
-		v := *s.MaxItems
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "MaxItems", protocol.Int64Value(v), metadata)
-	}
-	return nil
-}
-
-type ListLayerVersionsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A list of versions.
-	LayerVersions []LayerVersionsListItem `type:"list"`
-
-	// A pagination token returned when the response doesn't contain all versions.
-	NextMarker *string `type:"string"`
-}
-
-// String returns the string representation
-func (s ListLayerVersionsOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListLayerVersionsOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.LayerVersions != nil {
-		v := s.LayerVersions
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "LayerVersions", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	if s.NextMarker != nil {
-		v := *s.NextMarker
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "NextMarker", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opListLayerVersions = "ListLayerVersions"
 
@@ -140,7 +27,7 @@ const opListLayerVersions = "ListLayerVersions"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/ListLayerVersions
-func (c *Client) ListLayerVersionsRequest(input *ListLayerVersionsInput) ListLayerVersionsRequest {
+func (c *Client) ListLayerVersionsRequest(input *types.ListLayerVersionsInput) ListLayerVersionsRequest {
 	op := &aws.Operation{
 		Name:       opListLayerVersions,
 		HTTPMethod: "GET",
@@ -154,10 +41,10 @@ func (c *Client) ListLayerVersionsRequest(input *ListLayerVersionsInput) ListLay
 	}
 
 	if input == nil {
-		input = &ListLayerVersionsInput{}
+		input = &types.ListLayerVersionsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListLayerVersionsOutput{})
+	req := c.newRequest(op, input, &types.ListLayerVersionsOutput{})
 	return ListLayerVersionsRequest{Request: req, Input: input, Copy: c.ListLayerVersionsRequest}
 }
 
@@ -165,8 +52,8 @@ func (c *Client) ListLayerVersionsRequest(input *ListLayerVersionsInput) ListLay
 // ListLayerVersions API operation.
 type ListLayerVersionsRequest struct {
 	*aws.Request
-	Input *ListLayerVersionsInput
-	Copy  func(*ListLayerVersionsInput) ListLayerVersionsRequest
+	Input *types.ListLayerVersionsInput
+	Copy  func(*types.ListLayerVersionsInput) ListLayerVersionsRequest
 }
 
 // Send marshals and sends the ListLayerVersions API request.
@@ -178,7 +65,7 @@ func (r ListLayerVersionsRequest) Send(ctx context.Context) (*ListLayerVersionsR
 	}
 
 	resp := &ListLayerVersionsResponse{
-		ListLayerVersionsOutput: r.Request.Data.(*ListLayerVersionsOutput),
+		ListLayerVersionsOutput: r.Request.Data.(*types.ListLayerVersionsOutput),
 		response:                &aws.Response{Request: r.Request},
 	}
 
@@ -208,7 +95,7 @@ func NewListLayerVersionsPaginator(req ListLayerVersionsRequest) ListLayerVersio
 	return ListLayerVersionsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListLayerVersionsInput
+				var inCpy *types.ListLayerVersionsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -228,14 +115,14 @@ type ListLayerVersionsPaginator struct {
 	aws.Pager
 }
 
-func (p *ListLayerVersionsPaginator) CurrentPage() *ListLayerVersionsOutput {
-	return p.Pager.CurrentPage().(*ListLayerVersionsOutput)
+func (p *ListLayerVersionsPaginator) CurrentPage() *types.ListLayerVersionsOutput {
+	return p.Pager.CurrentPage().(*types.ListLayerVersionsOutput)
 }
 
 // ListLayerVersionsResponse is the response type for the
 // ListLayerVersions API operation.
 type ListLayerVersionsResponse struct {
-	*ListLayerVersionsOutput
+	*types.ListLayerVersionsOutput
 
 	response *aws.Response
 }

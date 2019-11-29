@@ -4,109 +4,10 @@ package sagemaker
 
 import (
 	"context"
-	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
 )
-
-type ListNotebookInstancesInput struct {
-	_ struct{} `type:"structure"`
-
-	// A filter that returns only notebook instances with associated with the specified
-	// git repository.
-	AdditionalCodeRepositoryEquals *string `min:"1" type:"string"`
-
-	// A filter that returns only notebook instances that were created after the
-	// specified time (timestamp).
-	CreationTimeAfter *time.Time `type:"timestamp"`
-
-	// A filter that returns only notebook instances that were created before the
-	// specified time (timestamp).
-	CreationTimeBefore *time.Time `type:"timestamp"`
-
-	// A string in the name or URL of a Git repository associated with this notebook
-	// instance. This filter returns only notebook instances associated with a git
-	// repository with a name that contains the specified string.
-	DefaultCodeRepositoryContains *string `type:"string"`
-
-	// A filter that returns only notebook instances that were modified after the
-	// specified time (timestamp).
-	LastModifiedTimeAfter *time.Time `type:"timestamp"`
-
-	// A filter that returns only notebook instances that were modified before the
-	// specified time (timestamp).
-	LastModifiedTimeBefore *time.Time `type:"timestamp"`
-
-	// The maximum number of notebook instances to return.
-	MaxResults *int64 `min:"1" type:"integer"`
-
-	// A string in the notebook instances' name. This filter returns only notebook
-	// instances whose name contains the specified string.
-	NameContains *string `type:"string"`
-
-	// If the previous call to the ListNotebookInstances is truncated, the response
-	// includes a NextToken. You can use this token in your subsequent ListNotebookInstances
-	// request to fetch the next set of notebook instances.
-	//
-	// You might specify a filter or a sort order in your request. When response
-	// is truncated, you must use the same values for the filer and sort order in
-	// the next request.
-	NextToken *string `type:"string"`
-
-	// A string in the name of a notebook instances lifecycle configuration associated
-	// with this notebook instance. This filter returns only notebook instances
-	// associated with a lifecycle configuration with a name that contains the specified
-	// string.
-	NotebookInstanceLifecycleConfigNameContains *string `type:"string"`
-
-	// The field to sort results by. The default is Name.
-	SortBy NotebookInstanceSortKey `type:"string" enum:"true"`
-
-	// The sort order for results.
-	SortOrder NotebookInstanceSortOrder `type:"string" enum:"true"`
-
-	// A filter that returns only notebook instances with the specified status.
-	StatusEquals NotebookInstanceStatus `type:"string" enum:"true"`
-}
-
-// String returns the string representation
-func (s ListNotebookInstancesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListNotebookInstancesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListNotebookInstancesInput"}
-	if s.AdditionalCodeRepositoryEquals != nil && len(*s.AdditionalCodeRepositoryEquals) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("AdditionalCodeRepositoryEquals", 1))
-	}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ListNotebookInstancesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// If the response to the previous ListNotebookInstances request was truncated,
-	// Amazon SageMaker returns this token. To retrieve the next set of notebook
-	// instances, use the token in the next request.
-	NextToken *string `type:"string"`
-
-	// An array of NotebookInstanceSummary objects, one for each notebook instance.
-	NotebookInstances []NotebookInstanceSummary `type:"list"`
-}
-
-// String returns the string representation
-func (s ListNotebookInstancesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListNotebookInstances = "ListNotebookInstances"
 
@@ -124,7 +25,7 @@ const opListNotebookInstances = "ListNotebookInstances"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListNotebookInstances
-func (c *Client) ListNotebookInstancesRequest(input *ListNotebookInstancesInput) ListNotebookInstancesRequest {
+func (c *Client) ListNotebookInstancesRequest(input *types.ListNotebookInstancesInput) ListNotebookInstancesRequest {
 	op := &aws.Operation{
 		Name:       opListNotebookInstances,
 		HTTPMethod: "POST",
@@ -138,10 +39,10 @@ func (c *Client) ListNotebookInstancesRequest(input *ListNotebookInstancesInput)
 	}
 
 	if input == nil {
-		input = &ListNotebookInstancesInput{}
+		input = &types.ListNotebookInstancesInput{}
 	}
 
-	req := c.newRequest(op, input, &ListNotebookInstancesOutput{})
+	req := c.newRequest(op, input, &types.ListNotebookInstancesOutput{})
 	return ListNotebookInstancesRequest{Request: req, Input: input, Copy: c.ListNotebookInstancesRequest}
 }
 
@@ -149,8 +50,8 @@ func (c *Client) ListNotebookInstancesRequest(input *ListNotebookInstancesInput)
 // ListNotebookInstances API operation.
 type ListNotebookInstancesRequest struct {
 	*aws.Request
-	Input *ListNotebookInstancesInput
-	Copy  func(*ListNotebookInstancesInput) ListNotebookInstancesRequest
+	Input *types.ListNotebookInstancesInput
+	Copy  func(*types.ListNotebookInstancesInput) ListNotebookInstancesRequest
 }
 
 // Send marshals and sends the ListNotebookInstances API request.
@@ -162,7 +63,7 @@ func (r ListNotebookInstancesRequest) Send(ctx context.Context) (*ListNotebookIn
 	}
 
 	resp := &ListNotebookInstancesResponse{
-		ListNotebookInstancesOutput: r.Request.Data.(*ListNotebookInstancesOutput),
+		ListNotebookInstancesOutput: r.Request.Data.(*types.ListNotebookInstancesOutput),
 		response:                    &aws.Response{Request: r.Request},
 	}
 
@@ -192,7 +93,7 @@ func NewListNotebookInstancesPaginator(req ListNotebookInstancesRequest) ListNot
 	return ListNotebookInstancesPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListNotebookInstancesInput
+				var inCpy *types.ListNotebookInstancesInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -212,14 +113,14 @@ type ListNotebookInstancesPaginator struct {
 	aws.Pager
 }
 
-func (p *ListNotebookInstancesPaginator) CurrentPage() *ListNotebookInstancesOutput {
-	return p.Pager.CurrentPage().(*ListNotebookInstancesOutput)
+func (p *ListNotebookInstancesPaginator) CurrentPage() *types.ListNotebookInstancesOutput {
+	return p.Pager.CurrentPage().(*types.ListNotebookInstancesOutput)
 }
 
 // ListNotebookInstancesResponse is the response type for the
 // ListNotebookInstances API operation.
 type ListNotebookInstancesResponse struct {
-	*ListNotebookInstancesOutput
+	*types.ListNotebookInstancesOutput
 
 	response *aws.Response
 }

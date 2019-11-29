@@ -4,91 +4,10 @@ package ssm
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ssm/types"
 )
-
-type DescribeInstancePatchesInput struct {
-	_ struct{} `type:"structure"`
-
-	// An array of structures. Each entry in the array is a structure containing
-	// a Key, Value combination. Valid values for Key are Classification | KBId
-	// | Severity | State.
-	Filters []PatchOrchestratorFilter `type:"list"`
-
-	// The ID of the instance whose patch state information should be retrieved.
-	//
-	// InstanceId is a required field
-	InstanceId *string `type:"string" required:"true"`
-
-	// The maximum number of patches to return (per page).
-	MaxResults *int64 `min:"10" type:"integer"`
-
-	// The token for the next set of items to return. (You received this token from
-	// a previous call.)
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeInstancePatchesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeInstancePatchesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeInstancePatchesInput"}
-
-	if s.InstanceId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("InstanceId"))
-	}
-	if s.MaxResults != nil && *s.MaxResults < 10 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 10))
-	}
-	if s.Filters != nil {
-		for i, v := range s.Filters {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribeInstancePatchesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The token to use when requesting the next set of items. If there are no additional
-	// items to return, the string is empty.
-	NextToken *string `type:"string"`
-
-	// Each entry in the array is a structure containing:
-	//
-	// Title (string)
-	//
-	// KBId (string)
-	//
-	// Classification (string)
-	//
-	// Severity (string)
-	//
-	// State (string, such as "INSTALLED" or "FAILED")
-	//
-	// InstalledTime (DateTime)
-	//
-	// InstalledBy (string)
-	Patches []PatchComplianceData `type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeInstancePatchesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeInstancePatches = "DescribeInstancePatches"
 
@@ -106,7 +25,7 @@ const opDescribeInstancePatches = "DescribeInstancePatches"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeInstancePatches
-func (c *Client) DescribeInstancePatchesRequest(input *DescribeInstancePatchesInput) DescribeInstancePatchesRequest {
+func (c *Client) DescribeInstancePatchesRequest(input *types.DescribeInstancePatchesInput) DescribeInstancePatchesRequest {
 	op := &aws.Operation{
 		Name:       opDescribeInstancePatches,
 		HTTPMethod: "POST",
@@ -114,10 +33,10 @@ func (c *Client) DescribeInstancePatchesRequest(input *DescribeInstancePatchesIn
 	}
 
 	if input == nil {
-		input = &DescribeInstancePatchesInput{}
+		input = &types.DescribeInstancePatchesInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeInstancePatchesOutput{})
+	req := c.newRequest(op, input, &types.DescribeInstancePatchesOutput{})
 	return DescribeInstancePatchesRequest{Request: req, Input: input, Copy: c.DescribeInstancePatchesRequest}
 }
 
@@ -125,8 +44,8 @@ func (c *Client) DescribeInstancePatchesRequest(input *DescribeInstancePatchesIn
 // DescribeInstancePatches API operation.
 type DescribeInstancePatchesRequest struct {
 	*aws.Request
-	Input *DescribeInstancePatchesInput
-	Copy  func(*DescribeInstancePatchesInput) DescribeInstancePatchesRequest
+	Input *types.DescribeInstancePatchesInput
+	Copy  func(*types.DescribeInstancePatchesInput) DescribeInstancePatchesRequest
 }
 
 // Send marshals and sends the DescribeInstancePatches API request.
@@ -138,7 +57,7 @@ func (r DescribeInstancePatchesRequest) Send(ctx context.Context) (*DescribeInst
 	}
 
 	resp := &DescribeInstancePatchesResponse{
-		DescribeInstancePatchesOutput: r.Request.Data.(*DescribeInstancePatchesOutput),
+		DescribeInstancePatchesOutput: r.Request.Data.(*types.DescribeInstancePatchesOutput),
 		response:                      &aws.Response{Request: r.Request},
 	}
 
@@ -148,7 +67,7 @@ func (r DescribeInstancePatchesRequest) Send(ctx context.Context) (*DescribeInst
 // DescribeInstancePatchesResponse is the response type for the
 // DescribeInstancePatches API operation.
 type DescribeInstancePatchesResponse struct {
-	*DescribeInstancePatchesOutput
+	*types.DescribeInstancePatchesOutput
 
 	response *aws.Response
 }

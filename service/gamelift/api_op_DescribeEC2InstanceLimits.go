@@ -6,40 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/gamelift/types"
 )
-
-// Represents the input for a request action.
-type DescribeEC2InstanceLimitsInput struct {
-	_ struct{} `type:"structure"`
-
-	// Name of an EC2 instance type that is supported in Amazon GameLift. A fleet
-	// instance type determines the computing resources of each instance in the
-	// fleet, including CPU, memory, storage, and networking capacity. Amazon GameLift
-	// supports the following EC2 instance types. See Amazon EC2 Instance Types
-	// (http://aws.amazon.com/ec2/instance-types/) for detailed descriptions. Leave
-	// this parameter blank to retrieve limits for all types.
-	EC2InstanceType EC2InstanceType `type:"string" enum:"true"`
-}
-
-// String returns the string representation
-func (s DescribeEC2InstanceLimitsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Represents the returned data in response to a request action.
-type DescribeEC2InstanceLimitsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Object that contains the maximum number of instances for the specified instance
-	// type.
-	EC2InstanceLimits []EC2InstanceLimit `type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeEC2InstanceLimitsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeEC2InstanceLimits = "DescribeEC2InstanceLimits"
 
@@ -85,7 +53,7 @@ const opDescribeEC2InstanceLimits = "DescribeEC2InstanceLimits"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DescribeEC2InstanceLimits
-func (c *Client) DescribeEC2InstanceLimitsRequest(input *DescribeEC2InstanceLimitsInput) DescribeEC2InstanceLimitsRequest {
+func (c *Client) DescribeEC2InstanceLimitsRequest(input *types.DescribeEC2InstanceLimitsInput) DescribeEC2InstanceLimitsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeEC2InstanceLimits,
 		HTTPMethod: "POST",
@@ -93,10 +61,10 @@ func (c *Client) DescribeEC2InstanceLimitsRequest(input *DescribeEC2InstanceLimi
 	}
 
 	if input == nil {
-		input = &DescribeEC2InstanceLimitsInput{}
+		input = &types.DescribeEC2InstanceLimitsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeEC2InstanceLimitsOutput{})
+	req := c.newRequest(op, input, &types.DescribeEC2InstanceLimitsOutput{})
 	return DescribeEC2InstanceLimitsRequest{Request: req, Input: input, Copy: c.DescribeEC2InstanceLimitsRequest}
 }
 
@@ -104,8 +72,8 @@ func (c *Client) DescribeEC2InstanceLimitsRequest(input *DescribeEC2InstanceLimi
 // DescribeEC2InstanceLimits API operation.
 type DescribeEC2InstanceLimitsRequest struct {
 	*aws.Request
-	Input *DescribeEC2InstanceLimitsInput
-	Copy  func(*DescribeEC2InstanceLimitsInput) DescribeEC2InstanceLimitsRequest
+	Input *types.DescribeEC2InstanceLimitsInput
+	Copy  func(*types.DescribeEC2InstanceLimitsInput) DescribeEC2InstanceLimitsRequest
 }
 
 // Send marshals and sends the DescribeEC2InstanceLimits API request.
@@ -117,7 +85,7 @@ func (r DescribeEC2InstanceLimitsRequest) Send(ctx context.Context) (*DescribeEC
 	}
 
 	resp := &DescribeEC2InstanceLimitsResponse{
-		DescribeEC2InstanceLimitsOutput: r.Request.Data.(*DescribeEC2InstanceLimitsOutput),
+		DescribeEC2InstanceLimitsOutput: r.Request.Data.(*types.DescribeEC2InstanceLimitsOutput),
 		response:                        &aws.Response{Request: r.Request},
 	}
 
@@ -127,7 +95,7 @@ func (r DescribeEC2InstanceLimitsRequest) Send(ctx context.Context) (*DescribeEC
 // DescribeEC2InstanceLimitsResponse is the response type for the
 // DescribeEC2InstanceLimits API operation.
 type DescribeEC2InstanceLimitsResponse struct {
-	*DescribeEC2InstanceLimitsOutput
+	*types.DescribeEC2InstanceLimitsOutput
 
 	response *aws.Response
 }

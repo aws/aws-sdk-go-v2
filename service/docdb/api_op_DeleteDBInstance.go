@@ -6,54 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/docdb/types"
 )
-
-// Represents the input to DeleteDBInstance.
-type DeleteDBInstanceInput struct {
-	_ struct{} `type:"structure"`
-
-	// The DB instance identifier for the DB instance to be deleted. This parameter
-	// isn't case sensitive.
-	//
-	// Constraints:
-	//
-	//    * Must match the name of an existing DB instance.
-	//
-	// DBInstanceIdentifier is a required field
-	DBInstanceIdentifier *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteDBInstanceInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteDBInstanceInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteDBInstanceInput"}
-
-	if s.DBInstanceIdentifier == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DBInstanceIdentifier"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteDBInstanceOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Detailed information about a DB instance.
-	DBInstance *DBInstance `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteDBInstanceOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteDBInstance = "DeleteDBInstance"
 
@@ -70,7 +24,7 @@ const opDeleteDBInstance = "DeleteDBInstance"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/DeleteDBInstance
-func (c *Client) DeleteDBInstanceRequest(input *DeleteDBInstanceInput) DeleteDBInstanceRequest {
+func (c *Client) DeleteDBInstanceRequest(input *types.DeleteDBInstanceInput) DeleteDBInstanceRequest {
 	op := &aws.Operation{
 		Name:       opDeleteDBInstance,
 		HTTPMethod: "POST",
@@ -78,10 +32,10 @@ func (c *Client) DeleteDBInstanceRequest(input *DeleteDBInstanceInput) DeleteDBI
 	}
 
 	if input == nil {
-		input = &DeleteDBInstanceInput{}
+		input = &types.DeleteDBInstanceInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteDBInstanceOutput{})
+	req := c.newRequest(op, input, &types.DeleteDBInstanceOutput{})
 	return DeleteDBInstanceRequest{Request: req, Input: input, Copy: c.DeleteDBInstanceRequest}
 }
 
@@ -89,8 +43,8 @@ func (c *Client) DeleteDBInstanceRequest(input *DeleteDBInstanceInput) DeleteDBI
 // DeleteDBInstance API operation.
 type DeleteDBInstanceRequest struct {
 	*aws.Request
-	Input *DeleteDBInstanceInput
-	Copy  func(*DeleteDBInstanceInput) DeleteDBInstanceRequest
+	Input *types.DeleteDBInstanceInput
+	Copy  func(*types.DeleteDBInstanceInput) DeleteDBInstanceRequest
 }
 
 // Send marshals and sends the DeleteDBInstance API request.
@@ -102,7 +56,7 @@ func (r DeleteDBInstanceRequest) Send(ctx context.Context) (*DeleteDBInstanceRes
 	}
 
 	resp := &DeleteDBInstanceResponse{
-		DeleteDBInstanceOutput: r.Request.Data.(*DeleteDBInstanceOutput),
+		DeleteDBInstanceOutput: r.Request.Data.(*types.DeleteDBInstanceOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -112,7 +66,7 @@ func (r DeleteDBInstanceRequest) Send(ctx context.Context) (*DeleteDBInstanceRes
 // DeleteDBInstanceResponse is the response type for the
 // DeleteDBInstance API operation.
 type DeleteDBInstanceResponse struct {
-	*DeleteDBInstanceOutput
+	*types.DeleteDBInstanceOutput
 
 	response *aws.Response
 }

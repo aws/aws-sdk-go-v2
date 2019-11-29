@@ -6,61 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-type ModifyVpcEndpointConnectionNotificationInput struct {
-	_ struct{} `type:"structure"`
-
-	// One or more events for the endpoint. Valid values are Accept, Connect, Delete,
-	// and Reject.
-	ConnectionEvents []string `locationNameList:"item" type:"list"`
-
-	// The ARN for the SNS topic for the notification.
-	ConnectionNotificationArn *string `type:"string"`
-
-	// The ID of the notification.
-	//
-	// ConnectionNotificationId is a required field
-	ConnectionNotificationId *string `type:"string" required:"true"`
-
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have
-	// the required permissions, the error response is DryRunOperation. Otherwise,
-	// it is UnauthorizedOperation.
-	DryRun *bool `type:"boolean"`
-}
-
-// String returns the string representation
-func (s ModifyVpcEndpointConnectionNotificationInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ModifyVpcEndpointConnectionNotificationInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ModifyVpcEndpointConnectionNotificationInput"}
-
-	if s.ConnectionNotificationId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ConnectionNotificationId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ModifyVpcEndpointConnectionNotificationOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Returns true if the request succeeds; otherwise, it returns an error.
-	ReturnValue *bool `locationName:"return" type:"boolean"`
-}
-
-// String returns the string representation
-func (s ModifyVpcEndpointConnectionNotificationOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opModifyVpcEndpointConnectionNotification = "ModifyVpcEndpointConnectionNotification"
 
@@ -79,7 +26,7 @@ const opModifyVpcEndpointConnectionNotification = "ModifyVpcEndpointConnectionNo
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyVpcEndpointConnectionNotification
-func (c *Client) ModifyVpcEndpointConnectionNotificationRequest(input *ModifyVpcEndpointConnectionNotificationInput) ModifyVpcEndpointConnectionNotificationRequest {
+func (c *Client) ModifyVpcEndpointConnectionNotificationRequest(input *types.ModifyVpcEndpointConnectionNotificationInput) ModifyVpcEndpointConnectionNotificationRequest {
 	op := &aws.Operation{
 		Name:       opModifyVpcEndpointConnectionNotification,
 		HTTPMethod: "POST",
@@ -87,10 +34,10 @@ func (c *Client) ModifyVpcEndpointConnectionNotificationRequest(input *ModifyVpc
 	}
 
 	if input == nil {
-		input = &ModifyVpcEndpointConnectionNotificationInput{}
+		input = &types.ModifyVpcEndpointConnectionNotificationInput{}
 	}
 
-	req := c.newRequest(op, input, &ModifyVpcEndpointConnectionNotificationOutput{})
+	req := c.newRequest(op, input, &types.ModifyVpcEndpointConnectionNotificationOutput{})
 	return ModifyVpcEndpointConnectionNotificationRequest{Request: req, Input: input, Copy: c.ModifyVpcEndpointConnectionNotificationRequest}
 }
 
@@ -98,8 +45,8 @@ func (c *Client) ModifyVpcEndpointConnectionNotificationRequest(input *ModifyVpc
 // ModifyVpcEndpointConnectionNotification API operation.
 type ModifyVpcEndpointConnectionNotificationRequest struct {
 	*aws.Request
-	Input *ModifyVpcEndpointConnectionNotificationInput
-	Copy  func(*ModifyVpcEndpointConnectionNotificationInput) ModifyVpcEndpointConnectionNotificationRequest
+	Input *types.ModifyVpcEndpointConnectionNotificationInput
+	Copy  func(*types.ModifyVpcEndpointConnectionNotificationInput) ModifyVpcEndpointConnectionNotificationRequest
 }
 
 // Send marshals and sends the ModifyVpcEndpointConnectionNotification API request.
@@ -111,7 +58,7 @@ func (r ModifyVpcEndpointConnectionNotificationRequest) Send(ctx context.Context
 	}
 
 	resp := &ModifyVpcEndpointConnectionNotificationResponse{
-		ModifyVpcEndpointConnectionNotificationOutput: r.Request.Data.(*ModifyVpcEndpointConnectionNotificationOutput),
+		ModifyVpcEndpointConnectionNotificationOutput: r.Request.Data.(*types.ModifyVpcEndpointConnectionNotificationOutput),
 		response: &aws.Response{Request: r.Request},
 	}
 
@@ -121,7 +68,7 @@ func (r ModifyVpcEndpointConnectionNotificationRequest) Send(ctx context.Context
 // ModifyVpcEndpointConnectionNotificationResponse is the response type for the
 // ModifyVpcEndpointConnectionNotification API operation.
 type ModifyVpcEndpointConnectionNotificationResponse struct {
-	*ModifyVpcEndpointConnectionNotificationOutput
+	*types.ModifyVpcEndpointConnectionNotificationOutput
 
 	response *aws.Response
 }

@@ -4,98 +4,10 @@ package cloudwatchlogs
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/cloudwatchlogs/types"
 )
-
-type PutLogEventsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The log events.
-	//
-	// LogEvents is a required field
-	LogEvents []InputLogEvent `locationName:"logEvents" min:"1" type:"list" required:"true"`
-
-	// The name of the log group.
-	//
-	// LogGroupName is a required field
-	LogGroupName *string `locationName:"logGroupName" min:"1" type:"string" required:"true"`
-
-	// The name of the log stream.
-	//
-	// LogStreamName is a required field
-	LogStreamName *string `locationName:"logStreamName" min:"1" type:"string" required:"true"`
-
-	// The sequence token obtained from the response of the previous PutLogEvents
-	// call. An upload in a newly created log stream does not require a sequence
-	// token. You can also get the sequence token using DescribeLogStreams. If you
-	// call PutLogEvents twice within a narrow time period using the same value
-	// for sequenceToken, both calls may be successful, or one may be rejected.
-	SequenceToken *string `locationName:"sequenceToken" min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s PutLogEventsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *PutLogEventsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "PutLogEventsInput"}
-
-	if s.LogEvents == nil {
-		invalidParams.Add(aws.NewErrParamRequired("LogEvents"))
-	}
-	if s.LogEvents != nil && len(s.LogEvents) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("LogEvents", 1))
-	}
-
-	if s.LogGroupName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("LogGroupName"))
-	}
-	if s.LogGroupName != nil && len(*s.LogGroupName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("LogGroupName", 1))
-	}
-
-	if s.LogStreamName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("LogStreamName"))
-	}
-	if s.LogStreamName != nil && len(*s.LogStreamName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("LogStreamName", 1))
-	}
-	if s.SequenceToken != nil && len(*s.SequenceToken) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("SequenceToken", 1))
-	}
-	if s.LogEvents != nil {
-		for i, v := range s.LogEvents {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "LogEvents", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type PutLogEventsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The next sequence token.
-	NextSequenceToken *string `locationName:"nextSequenceToken" min:"1" type:"string"`
-
-	// The rejected events.
-	RejectedLogEventsInfo *RejectedLogEventsInfo `locationName:"rejectedLogEventsInfo" type:"structure"`
-}
-
-// String returns the string representation
-func (s PutLogEventsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opPutLogEvents = "PutLogEvents"
 
@@ -144,7 +56,7 @@ const opPutLogEvents = "PutLogEvents"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/PutLogEvents
-func (c *Client) PutLogEventsRequest(input *PutLogEventsInput) PutLogEventsRequest {
+func (c *Client) PutLogEventsRequest(input *types.PutLogEventsInput) PutLogEventsRequest {
 	op := &aws.Operation{
 		Name:       opPutLogEvents,
 		HTTPMethod: "POST",
@@ -152,10 +64,10 @@ func (c *Client) PutLogEventsRequest(input *PutLogEventsInput) PutLogEventsReque
 	}
 
 	if input == nil {
-		input = &PutLogEventsInput{}
+		input = &types.PutLogEventsInput{}
 	}
 
-	req := c.newRequest(op, input, &PutLogEventsOutput{})
+	req := c.newRequest(op, input, &types.PutLogEventsOutput{})
 	return PutLogEventsRequest{Request: req, Input: input, Copy: c.PutLogEventsRequest}
 }
 
@@ -163,8 +75,8 @@ func (c *Client) PutLogEventsRequest(input *PutLogEventsInput) PutLogEventsReque
 // PutLogEvents API operation.
 type PutLogEventsRequest struct {
 	*aws.Request
-	Input *PutLogEventsInput
-	Copy  func(*PutLogEventsInput) PutLogEventsRequest
+	Input *types.PutLogEventsInput
+	Copy  func(*types.PutLogEventsInput) PutLogEventsRequest
 }
 
 // Send marshals and sends the PutLogEvents API request.
@@ -176,7 +88,7 @@ func (r PutLogEventsRequest) Send(ctx context.Context) (*PutLogEventsResponse, e
 	}
 
 	resp := &PutLogEventsResponse{
-		PutLogEventsOutput: r.Request.Data.(*PutLogEventsOutput),
+		PutLogEventsOutput: r.Request.Data.(*types.PutLogEventsOutput),
 		response:           &aws.Response{Request: r.Request},
 	}
 
@@ -186,7 +98,7 @@ func (r PutLogEventsRequest) Send(ctx context.Context) (*PutLogEventsResponse, e
 // PutLogEventsResponse is the response type for the
 // PutLogEvents API operation.
 type PutLogEventsResponse struct {
-	*PutLogEventsOutput
+	*types.PutLogEventsOutput
 
 	response *aws.Response
 }

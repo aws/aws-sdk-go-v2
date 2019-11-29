@@ -6,83 +6,25 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/s3/types"
 )
-
-type GetBucketLocationInput struct {
-	_ struct{} `type:"structure"`
-
-	// Bucket is a required field
-	Bucket *string `location:"uri" locationName:"Bucket" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetBucketLocationInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetBucketLocationInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetBucketLocationInput"}
-
-	if s.Bucket == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Bucket"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-func (s *GetBucketLocationInput) getBucket() (v string) {
-	if s.Bucket == nil {
-		return v
-	}
-	return *s.Bucket
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetBucketLocationInput) MarshalFields(e protocol.FieldEncoder) error {
-
-	if s.Bucket != nil {
-		v := *s.Bucket
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "Bucket", protocol.StringValue(v), metadata)
-	}
-	return nil
-}
-
-type GetBucketLocationOutput struct {
-	_ struct{} `type:"structure"`
-
-	LocationConstraint BucketLocationConstraint `type:"string" enum:"true"`
-}
-
-// String returns the string representation
-func (s GetBucketLocationOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetBucketLocationOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.LocationConstraint) > 0 {
-		v := s.LocationConstraint
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "LocationConstraint", v, metadata)
-	}
-	return nil
-}
 
 const opGetBucketLocation = "GetBucketLocation"
 
 // GetBucketLocationRequest returns a request value for making API operation for
 // Amazon Simple Storage Service.
 //
-// Returns the region the bucket resides in.
+// Returns the region the bucket resides in. You set the bucket's region using
+// the LocationConstraint request parameter in a CreateBucket request. For more
+// information, see CreateBucket.
+//
+// To use this implementation of the operation, you must be the bucket owner.
+//
+// The following operations are related to GetBucketLocation:
+//
+//    * GetObject
+//
+//    * CreateBucket
 //
 //    // Example sending a request using GetBucketLocationRequest.
 //    req := client.GetBucketLocationRequest(params)
@@ -92,7 +34,7 @@ const opGetBucketLocation = "GetBucketLocation"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetBucketLocation
-func (c *Client) GetBucketLocationRequest(input *GetBucketLocationInput) GetBucketLocationRequest {
+func (c *Client) GetBucketLocationRequest(input *types.GetBucketLocationInput) GetBucketLocationRequest {
 	op := &aws.Operation{
 		Name:       opGetBucketLocation,
 		HTTPMethod: "GET",
@@ -100,10 +42,10 @@ func (c *Client) GetBucketLocationRequest(input *GetBucketLocationInput) GetBuck
 	}
 
 	if input == nil {
-		input = &GetBucketLocationInput{}
+		input = &types.GetBucketLocationInput{}
 	}
 
-	req := c.newRequest(op, input, &GetBucketLocationOutput{})
+	req := c.newRequest(op, input, &types.GetBucketLocationOutput{})
 	return GetBucketLocationRequest{Request: req, Input: input, Copy: c.GetBucketLocationRequest}
 }
 
@@ -111,8 +53,8 @@ func (c *Client) GetBucketLocationRequest(input *GetBucketLocationInput) GetBuck
 // GetBucketLocation API operation.
 type GetBucketLocationRequest struct {
 	*aws.Request
-	Input *GetBucketLocationInput
-	Copy  func(*GetBucketLocationInput) GetBucketLocationRequest
+	Input *types.GetBucketLocationInput
+	Copy  func(*types.GetBucketLocationInput) GetBucketLocationRequest
 }
 
 // Send marshals and sends the GetBucketLocation API request.
@@ -124,7 +66,7 @@ func (r GetBucketLocationRequest) Send(ctx context.Context) (*GetBucketLocationR
 	}
 
 	resp := &GetBucketLocationResponse{
-		GetBucketLocationOutput: r.Request.Data.(*GetBucketLocationOutput),
+		GetBucketLocationOutput: r.Request.Data.(*types.GetBucketLocationOutput),
 		response:                &aws.Response{Request: r.Request},
 	}
 
@@ -134,7 +76,7 @@ func (r GetBucketLocationRequest) Send(ctx context.Context) (*GetBucketLocationR
 // GetBucketLocationResponse is the response type for the
 // GetBucketLocation API operation.
 type GetBucketLocationResponse struct {
-	*GetBucketLocationOutput
+	*types.GetBucketLocationOutput
 
 	response *aws.Response
 }

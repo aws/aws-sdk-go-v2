@@ -6,95 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/iam/types"
 )
-
-type ListPolicyVersionsInput struct {
-	_ struct{} `type:"structure"`
-
-	// Use this parameter only when paginating results and only after you receive
-	// a response indicating that the results are truncated. Set it to the value
-	// of the Marker element in the response that you received to indicate where
-	// the next call should start.
-	Marker *string `min:"1" type:"string"`
-
-	// Use this only when paginating results to indicate the maximum number of items
-	// you want in the response. If additional items exist beyond the maximum you
-	// specify, the IsTruncated response element is true.
-	//
-	// If you do not include this parameter, the number of items defaults to 100.
-	// Note that IAM might return fewer results, even when there are more results
-	// available. In that case, the IsTruncated response element returns true, and
-	// Marker contains a value to include in the subsequent call that tells the
-	// service where to continue from.
-	MaxItems *int64 `min:"1" type:"integer"`
-
-	// The Amazon Resource Name (ARN) of the IAM policy for which you want the versions.
-	//
-	// For more information about ARNs, see Amazon Resource Names (ARNs) and AWS
-	// Service Namespaces (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
-	// in the AWS General Reference.
-	//
-	// PolicyArn is a required field
-	PolicyArn *string `min:"20" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s ListPolicyVersionsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListPolicyVersionsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListPolicyVersionsInput"}
-	if s.Marker != nil && len(*s.Marker) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Marker", 1))
-	}
-	if s.MaxItems != nil && *s.MaxItems < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxItems", 1))
-	}
-
-	if s.PolicyArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("PolicyArn"))
-	}
-	if s.PolicyArn != nil && len(*s.PolicyArn) < 20 {
-		invalidParams.Add(aws.NewErrParamMinLen("PolicyArn", 20))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Contains the response to a successful ListPolicyVersions request.
-type ListPolicyVersionsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A flag that indicates whether there are more items to return. If your results
-	// were truncated, you can make a subsequent pagination request using the Marker
-	// request parameter to retrieve more items. Note that IAM might return fewer
-	// than the MaxItems number of results even when there are more results available.
-	// We recommend that you check IsTruncated after every call to ensure that you
-	// receive all your results.
-	IsTruncated *bool `type:"boolean"`
-
-	// When IsTruncated is true, this element is present and contains the value
-	// to use for the Marker parameter in a subsequent pagination request.
-	Marker *string `type:"string"`
-
-	// A list of policy versions.
-	//
-	// For more information about managed policy versions, see Versioning for Managed
-	// Policies (https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-versions.html)
-	// in the IAM User Guide.
-	Versions []PolicyVersion `type:"list"`
-}
-
-// String returns the string representation
-func (s ListPolicyVersionsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListPolicyVersions = "ListPolicyVersions"
 
@@ -116,7 +29,7 @@ const opListPolicyVersions = "ListPolicyVersions"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListPolicyVersions
-func (c *Client) ListPolicyVersionsRequest(input *ListPolicyVersionsInput) ListPolicyVersionsRequest {
+func (c *Client) ListPolicyVersionsRequest(input *types.ListPolicyVersionsInput) ListPolicyVersionsRequest {
 	op := &aws.Operation{
 		Name:       opListPolicyVersions,
 		HTTPMethod: "POST",
@@ -130,10 +43,10 @@ func (c *Client) ListPolicyVersionsRequest(input *ListPolicyVersionsInput) ListP
 	}
 
 	if input == nil {
-		input = &ListPolicyVersionsInput{}
+		input = &types.ListPolicyVersionsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListPolicyVersionsOutput{})
+	req := c.newRequest(op, input, &types.ListPolicyVersionsOutput{})
 	return ListPolicyVersionsRequest{Request: req, Input: input, Copy: c.ListPolicyVersionsRequest}
 }
 
@@ -141,8 +54,8 @@ func (c *Client) ListPolicyVersionsRequest(input *ListPolicyVersionsInput) ListP
 // ListPolicyVersions API operation.
 type ListPolicyVersionsRequest struct {
 	*aws.Request
-	Input *ListPolicyVersionsInput
-	Copy  func(*ListPolicyVersionsInput) ListPolicyVersionsRequest
+	Input *types.ListPolicyVersionsInput
+	Copy  func(*types.ListPolicyVersionsInput) ListPolicyVersionsRequest
 }
 
 // Send marshals and sends the ListPolicyVersions API request.
@@ -154,7 +67,7 @@ func (r ListPolicyVersionsRequest) Send(ctx context.Context) (*ListPolicyVersion
 	}
 
 	resp := &ListPolicyVersionsResponse{
-		ListPolicyVersionsOutput: r.Request.Data.(*ListPolicyVersionsOutput),
+		ListPolicyVersionsOutput: r.Request.Data.(*types.ListPolicyVersionsOutput),
 		response:                 &aws.Response{Request: r.Request},
 	}
 
@@ -184,7 +97,7 @@ func NewListPolicyVersionsPaginator(req ListPolicyVersionsRequest) ListPolicyVer
 	return ListPolicyVersionsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListPolicyVersionsInput
+				var inCpy *types.ListPolicyVersionsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -204,14 +117,14 @@ type ListPolicyVersionsPaginator struct {
 	aws.Pager
 }
 
-func (p *ListPolicyVersionsPaginator) CurrentPage() *ListPolicyVersionsOutput {
-	return p.Pager.CurrentPage().(*ListPolicyVersionsOutput)
+func (p *ListPolicyVersionsPaginator) CurrentPage() *types.ListPolicyVersionsOutput {
+	return p.Pager.CurrentPage().(*types.ListPolicyVersionsOutput)
 }
 
 // ListPolicyVersionsResponse is the response type for the
 // ListPolicyVersions API operation.
 type ListPolicyVersionsResponse struct {
-	*ListPolicyVersionsOutput
+	*types.ListPolicyVersionsOutput
 
 	response *aws.Response
 }

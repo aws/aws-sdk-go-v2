@@ -6,89 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/types"
 )
-
-type CreateIdentityProviderInput struct {
-	_ struct{} `type:"structure"`
-
-	// A mapping of identity provider attributes to standard and custom user pool
-	// attributes.
-	AttributeMapping map[string]string `type:"map"`
-
-	// A list of identity provider identifiers.
-	IdpIdentifiers []string `type:"list"`
-
-	// The identity provider details, such as MetadataURL and MetadataFile.
-	//
-	// ProviderDetails is a required field
-	ProviderDetails map[string]string `type:"map" required:"true"`
-
-	// The identity provider name.
-	//
-	// ProviderName is a required field
-	ProviderName *string `min:"1" type:"string" required:"true"`
-
-	// The identity provider type.
-	//
-	// ProviderType is a required field
-	ProviderType IdentityProviderTypeType `type:"string" required:"true" enum:"true"`
-
-	// The user pool ID.
-	//
-	// UserPoolId is a required field
-	UserPoolId *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s CreateIdentityProviderInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateIdentityProviderInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateIdentityProviderInput"}
-
-	if s.ProviderDetails == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ProviderDetails"))
-	}
-
-	if s.ProviderName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ProviderName"))
-	}
-	if s.ProviderName != nil && len(*s.ProviderName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ProviderName", 1))
-	}
-	if len(s.ProviderType) == 0 {
-		invalidParams.Add(aws.NewErrParamRequired("ProviderType"))
-	}
-
-	if s.UserPoolId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("UserPoolId"))
-	}
-	if s.UserPoolId != nil && len(*s.UserPoolId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("UserPoolId", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type CreateIdentityProviderOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The newly created identity provider object.
-	//
-	// IdentityProvider is a required field
-	IdentityProvider *IdentityProviderType `type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s CreateIdentityProviderOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCreateIdentityProvider = "CreateIdentityProvider"
 
@@ -105,7 +24,7 @@ const opCreateIdentityProvider = "CreateIdentityProvider"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/CreateIdentityProvider
-func (c *Client) CreateIdentityProviderRequest(input *CreateIdentityProviderInput) CreateIdentityProviderRequest {
+func (c *Client) CreateIdentityProviderRequest(input *types.CreateIdentityProviderInput) CreateIdentityProviderRequest {
 	op := &aws.Operation{
 		Name:       opCreateIdentityProvider,
 		HTTPMethod: "POST",
@@ -113,10 +32,10 @@ func (c *Client) CreateIdentityProviderRequest(input *CreateIdentityProviderInpu
 	}
 
 	if input == nil {
-		input = &CreateIdentityProviderInput{}
+		input = &types.CreateIdentityProviderInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateIdentityProviderOutput{})
+	req := c.newRequest(op, input, &types.CreateIdentityProviderOutput{})
 	return CreateIdentityProviderRequest{Request: req, Input: input, Copy: c.CreateIdentityProviderRequest}
 }
 
@@ -124,8 +43,8 @@ func (c *Client) CreateIdentityProviderRequest(input *CreateIdentityProviderInpu
 // CreateIdentityProvider API operation.
 type CreateIdentityProviderRequest struct {
 	*aws.Request
-	Input *CreateIdentityProviderInput
-	Copy  func(*CreateIdentityProviderInput) CreateIdentityProviderRequest
+	Input *types.CreateIdentityProviderInput
+	Copy  func(*types.CreateIdentityProviderInput) CreateIdentityProviderRequest
 }
 
 // Send marshals and sends the CreateIdentityProvider API request.
@@ -137,7 +56,7 @@ func (r CreateIdentityProviderRequest) Send(ctx context.Context) (*CreateIdentit
 	}
 
 	resp := &CreateIdentityProviderResponse{
-		CreateIdentityProviderOutput: r.Request.Data.(*CreateIdentityProviderOutput),
+		CreateIdentityProviderOutput: r.Request.Data.(*types.CreateIdentityProviderOutput),
 		response:                     &aws.Response{Request: r.Request},
 	}
 
@@ -147,7 +66,7 @@ func (r CreateIdentityProviderRequest) Send(ctx context.Context) (*CreateIdentit
 // CreateIdentityProviderResponse is the response type for the
 // CreateIdentityProvider API operation.
 type CreateIdentityProviderResponse struct {
-	*CreateIdentityProviderOutput
+	*types.CreateIdentityProviderOutput
 
 	response *aws.Response
 }

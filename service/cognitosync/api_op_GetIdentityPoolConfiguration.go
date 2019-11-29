@@ -6,99 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/cognitosync/types"
 )
-
-// The input for the GetIdentityPoolConfiguration operation.
-type GetIdentityPoolConfigurationInput struct {
-	_ struct{} `type:"structure"`
-
-	// A name-spaced GUID (for example, us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE)
-	// created by Amazon Cognito. This is the ID of the pool for which to return
-	// a configuration.
-	//
-	// IdentityPoolId is a required field
-	IdentityPoolId *string `location:"uri" locationName:"IdentityPoolId" min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetIdentityPoolConfigurationInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetIdentityPoolConfigurationInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetIdentityPoolConfigurationInput"}
-
-	if s.IdentityPoolId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("IdentityPoolId"))
-	}
-	if s.IdentityPoolId != nil && len(*s.IdentityPoolId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("IdentityPoolId", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetIdentityPoolConfigurationInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.IdentityPoolId != nil {
-		v := *s.IdentityPoolId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "IdentityPoolId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-// The output for the GetIdentityPoolConfiguration operation.
-type GetIdentityPoolConfigurationOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Options to apply to this identity pool for Amazon Cognito streams.
-	CognitoStreams *CognitoStreams `type:"structure"`
-
-	// A name-spaced GUID (for example, us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE)
-	// created by Amazon Cognito.
-	IdentityPoolId *string `min:"1" type:"string"`
-
-	// Options to apply to this identity pool for push synchronization.
-	PushSync *PushSync `type:"structure"`
-}
-
-// String returns the string representation
-func (s GetIdentityPoolConfigurationOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetIdentityPoolConfigurationOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.CognitoStreams != nil {
-		v := s.CognitoStreams
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "CognitoStreams", v, metadata)
-	}
-	if s.IdentityPoolId != nil {
-		v := *s.IdentityPoolId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "IdentityPoolId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.PushSync != nil {
-		v := s.PushSync
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "PushSync", v, metadata)
-	}
-	return nil
-}
 
 const opGetIdentityPoolConfiguration = "GetIdentityPoolConfiguration"
 
@@ -118,7 +27,7 @@ const opGetIdentityPoolConfiguration = "GetIdentityPoolConfiguration"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-sync-2014-06-30/GetIdentityPoolConfiguration
-func (c *Client) GetIdentityPoolConfigurationRequest(input *GetIdentityPoolConfigurationInput) GetIdentityPoolConfigurationRequest {
+func (c *Client) GetIdentityPoolConfigurationRequest(input *types.GetIdentityPoolConfigurationInput) GetIdentityPoolConfigurationRequest {
 	op := &aws.Operation{
 		Name:       opGetIdentityPoolConfiguration,
 		HTTPMethod: "GET",
@@ -126,10 +35,10 @@ func (c *Client) GetIdentityPoolConfigurationRequest(input *GetIdentityPoolConfi
 	}
 
 	if input == nil {
-		input = &GetIdentityPoolConfigurationInput{}
+		input = &types.GetIdentityPoolConfigurationInput{}
 	}
 
-	req := c.newRequest(op, input, &GetIdentityPoolConfigurationOutput{})
+	req := c.newRequest(op, input, &types.GetIdentityPoolConfigurationOutput{})
 	return GetIdentityPoolConfigurationRequest{Request: req, Input: input, Copy: c.GetIdentityPoolConfigurationRequest}
 }
 
@@ -137,8 +46,8 @@ func (c *Client) GetIdentityPoolConfigurationRequest(input *GetIdentityPoolConfi
 // GetIdentityPoolConfiguration API operation.
 type GetIdentityPoolConfigurationRequest struct {
 	*aws.Request
-	Input *GetIdentityPoolConfigurationInput
-	Copy  func(*GetIdentityPoolConfigurationInput) GetIdentityPoolConfigurationRequest
+	Input *types.GetIdentityPoolConfigurationInput
+	Copy  func(*types.GetIdentityPoolConfigurationInput) GetIdentityPoolConfigurationRequest
 }
 
 // Send marshals and sends the GetIdentityPoolConfiguration API request.
@@ -150,7 +59,7 @@ func (r GetIdentityPoolConfigurationRequest) Send(ctx context.Context) (*GetIden
 	}
 
 	resp := &GetIdentityPoolConfigurationResponse{
-		GetIdentityPoolConfigurationOutput: r.Request.Data.(*GetIdentityPoolConfigurationOutput),
+		GetIdentityPoolConfigurationOutput: r.Request.Data.(*types.GetIdentityPoolConfigurationOutput),
 		response:                           &aws.Response{Request: r.Request},
 	}
 
@@ -160,7 +69,7 @@ func (r GetIdentityPoolConfigurationRequest) Send(ctx context.Context) (*GetIden
 // GetIdentityPoolConfigurationResponse is the response type for the
 // GetIdentityPoolConfiguration API operation.
 type GetIdentityPoolConfigurationResponse struct {
-	*GetIdentityPoolConfigurationOutput
+	*types.GetIdentityPoolConfigurationOutput
 
 	response *aws.Response
 }

@@ -6,57 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/workspaces/types"
 )
-
-type ModifyClientPropertiesInput struct {
-	_ struct{} `type:"structure"`
-
-	// Information about the Amazon WorkSpaces client.
-	//
-	// ClientProperties is a required field
-	ClientProperties *Properties `type:"structure" required:"true"`
-
-	// The resource identifiers, in the form of directory IDs.
-	//
-	// ResourceId is a required field
-	ResourceId *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s ModifyClientPropertiesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ModifyClientPropertiesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ModifyClientPropertiesInput"}
-
-	if s.ClientProperties == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ClientProperties"))
-	}
-
-	if s.ResourceId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ResourceId"))
-	}
-	if s.ResourceId != nil && len(*s.ResourceId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ResourceId", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ModifyClientPropertiesOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s ModifyClientPropertiesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opModifyClientProperties = "ModifyClientProperties"
 
@@ -73,7 +24,7 @@ const opModifyClientProperties = "ModifyClientProperties"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/ModifyClientProperties
-func (c *Client) ModifyClientPropertiesRequest(input *ModifyClientPropertiesInput) ModifyClientPropertiesRequest {
+func (c *Client) ModifyClientPropertiesRequest(input *types.ModifyClientPropertiesInput) ModifyClientPropertiesRequest {
 	op := &aws.Operation{
 		Name:       opModifyClientProperties,
 		HTTPMethod: "POST",
@@ -81,10 +32,10 @@ func (c *Client) ModifyClientPropertiesRequest(input *ModifyClientPropertiesInpu
 	}
 
 	if input == nil {
-		input = &ModifyClientPropertiesInput{}
+		input = &types.ModifyClientPropertiesInput{}
 	}
 
-	req := c.newRequest(op, input, &ModifyClientPropertiesOutput{})
+	req := c.newRequest(op, input, &types.ModifyClientPropertiesOutput{})
 	return ModifyClientPropertiesRequest{Request: req, Input: input, Copy: c.ModifyClientPropertiesRequest}
 }
 
@@ -92,8 +43,8 @@ func (c *Client) ModifyClientPropertiesRequest(input *ModifyClientPropertiesInpu
 // ModifyClientProperties API operation.
 type ModifyClientPropertiesRequest struct {
 	*aws.Request
-	Input *ModifyClientPropertiesInput
-	Copy  func(*ModifyClientPropertiesInput) ModifyClientPropertiesRequest
+	Input *types.ModifyClientPropertiesInput
+	Copy  func(*types.ModifyClientPropertiesInput) ModifyClientPropertiesRequest
 }
 
 // Send marshals and sends the ModifyClientProperties API request.
@@ -105,7 +56,7 @@ func (r ModifyClientPropertiesRequest) Send(ctx context.Context) (*ModifyClientP
 	}
 
 	resp := &ModifyClientPropertiesResponse{
-		ModifyClientPropertiesOutput: r.Request.Data.(*ModifyClientPropertiesOutput),
+		ModifyClientPropertiesOutput: r.Request.Data.(*types.ModifyClientPropertiesOutput),
 		response:                     &aws.Response{Request: r.Request},
 	}
 
@@ -115,7 +66,7 @@ func (r ModifyClientPropertiesRequest) Send(ctx context.Context) (*ModifyClientP
 // ModifyClientPropertiesResponse is the response type for the
 // ModifyClientProperties API operation.
 type ModifyClientPropertiesResponse struct {
-	*ModifyClientPropertiesOutput
+	*types.ModifyClientPropertiesOutput
 
 	response *aws.Response
 }

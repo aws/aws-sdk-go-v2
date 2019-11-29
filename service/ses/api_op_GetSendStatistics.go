@@ -6,31 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ses/types"
 )
-
-type GetSendStatisticsInput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s GetSendStatisticsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Represents a list of data points. This list contains aggregated data from
-// the previous two weeks of your sending activity with Amazon SES.
-type GetSendStatisticsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A list of data points, each of which represents 15 minutes of activity.
-	SendDataPoints []SendDataPoint `type:"list"`
-}
-
-// String returns the string representation
-func (s GetSendStatisticsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetSendStatistics = "GetSendStatistics"
 
@@ -51,7 +28,7 @@ const opGetSendStatistics = "GetSendStatistics"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/GetSendStatistics
-func (c *Client) GetSendStatisticsRequest(input *GetSendStatisticsInput) GetSendStatisticsRequest {
+func (c *Client) GetSendStatisticsRequest(input *types.GetSendStatisticsInput) GetSendStatisticsRequest {
 	op := &aws.Operation{
 		Name:       opGetSendStatistics,
 		HTTPMethod: "POST",
@@ -59,10 +36,10 @@ func (c *Client) GetSendStatisticsRequest(input *GetSendStatisticsInput) GetSend
 	}
 
 	if input == nil {
-		input = &GetSendStatisticsInput{}
+		input = &types.GetSendStatisticsInput{}
 	}
 
-	req := c.newRequest(op, input, &GetSendStatisticsOutput{})
+	req := c.newRequest(op, input, &types.GetSendStatisticsOutput{})
 	return GetSendStatisticsRequest{Request: req, Input: input, Copy: c.GetSendStatisticsRequest}
 }
 
@@ -70,8 +47,8 @@ func (c *Client) GetSendStatisticsRequest(input *GetSendStatisticsInput) GetSend
 // GetSendStatistics API operation.
 type GetSendStatisticsRequest struct {
 	*aws.Request
-	Input *GetSendStatisticsInput
-	Copy  func(*GetSendStatisticsInput) GetSendStatisticsRequest
+	Input *types.GetSendStatisticsInput
+	Copy  func(*types.GetSendStatisticsInput) GetSendStatisticsRequest
 }
 
 // Send marshals and sends the GetSendStatistics API request.
@@ -83,7 +60,7 @@ func (r GetSendStatisticsRequest) Send(ctx context.Context) (*GetSendStatisticsR
 	}
 
 	resp := &GetSendStatisticsResponse{
-		GetSendStatisticsOutput: r.Request.Data.(*GetSendStatisticsOutput),
+		GetSendStatisticsOutput: r.Request.Data.(*types.GetSendStatisticsOutput),
 		response:                &aws.Response{Request: r.Request},
 	}
 
@@ -93,7 +70,7 @@ func (r GetSendStatisticsRequest) Send(ctx context.Context) (*GetSendStatisticsR
 // GetSendStatisticsResponse is the response type for the
 // GetSendStatistics API operation.
 type GetSendStatisticsResponse struct {
-	*GetSendStatisticsOutput
+	*types.GetSendStatisticsOutput
 
 	response *aws.Response
 }

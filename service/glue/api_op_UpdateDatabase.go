@@ -6,71 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/glue/types"
 )
-
-type UpdateDatabaseInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the Data Catalog in which the metadata database resides. If none
-	// is provided, the AWS account ID is used by default.
-	CatalogId *string `min:"1" type:"string"`
-
-	// A DatabaseInput object specifying the new definition of the metadata database
-	// in the catalog.
-	//
-	// DatabaseInput is a required field
-	DatabaseInput *DatabaseInput `type:"structure" required:"true"`
-
-	// The name of the database to update in the catalog. For Hive compatibility,
-	// this is folded to lowercase.
-	//
-	// Name is a required field
-	Name *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s UpdateDatabaseInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateDatabaseInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateDatabaseInput"}
-	if s.CatalogId != nil && len(*s.CatalogId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("CatalogId", 1))
-	}
-
-	if s.DatabaseInput == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DatabaseInput"))
-	}
-
-	if s.Name == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Name"))
-	}
-	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
-	}
-	if s.DatabaseInput != nil {
-		if err := s.DatabaseInput.Validate(); err != nil {
-			invalidParams.AddNested("DatabaseInput", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type UpdateDatabaseOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s UpdateDatabaseOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opUpdateDatabase = "UpdateDatabase"
 
@@ -87,7 +24,7 @@ const opUpdateDatabase = "UpdateDatabase"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/UpdateDatabase
-func (c *Client) UpdateDatabaseRequest(input *UpdateDatabaseInput) UpdateDatabaseRequest {
+func (c *Client) UpdateDatabaseRequest(input *types.UpdateDatabaseInput) UpdateDatabaseRequest {
 	op := &aws.Operation{
 		Name:       opUpdateDatabase,
 		HTTPMethod: "POST",
@@ -95,10 +32,10 @@ func (c *Client) UpdateDatabaseRequest(input *UpdateDatabaseInput) UpdateDatabas
 	}
 
 	if input == nil {
-		input = &UpdateDatabaseInput{}
+		input = &types.UpdateDatabaseInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateDatabaseOutput{})
+	req := c.newRequest(op, input, &types.UpdateDatabaseOutput{})
 	return UpdateDatabaseRequest{Request: req, Input: input, Copy: c.UpdateDatabaseRequest}
 }
 
@@ -106,8 +43,8 @@ func (c *Client) UpdateDatabaseRequest(input *UpdateDatabaseInput) UpdateDatabas
 // UpdateDatabase API operation.
 type UpdateDatabaseRequest struct {
 	*aws.Request
-	Input *UpdateDatabaseInput
-	Copy  func(*UpdateDatabaseInput) UpdateDatabaseRequest
+	Input *types.UpdateDatabaseInput
+	Copy  func(*types.UpdateDatabaseInput) UpdateDatabaseRequest
 }
 
 // Send marshals and sends the UpdateDatabase API request.
@@ -119,7 +56,7 @@ func (r UpdateDatabaseRequest) Send(ctx context.Context) (*UpdateDatabaseRespons
 	}
 
 	resp := &UpdateDatabaseResponse{
-		UpdateDatabaseOutput: r.Request.Data.(*UpdateDatabaseOutput),
+		UpdateDatabaseOutput: r.Request.Data.(*types.UpdateDatabaseOutput),
 		response:             &aws.Response{Request: r.Request},
 	}
 
@@ -129,7 +66,7 @@ func (r UpdateDatabaseRequest) Send(ctx context.Context) (*UpdateDatabaseRespons
 // UpdateDatabaseResponse is the response type for the
 // UpdateDatabase API operation.
 type UpdateDatabaseResponse struct {
-	*UpdateDatabaseOutput
+	*types.UpdateDatabaseOutput
 
 	response *aws.Response
 }

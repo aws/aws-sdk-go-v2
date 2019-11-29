@@ -6,47 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
+	"github.com/aws/aws-sdk-go-v2/service/opsworks/types"
 )
-
-type DeregisterRdsDbInstanceInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon RDS instance's ARN.
-	//
-	// RdsDbInstanceArn is a required field
-	RdsDbInstanceArn *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeregisterRdsDbInstanceInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeregisterRdsDbInstanceInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeregisterRdsDbInstanceInput"}
-
-	if s.RdsDbInstanceArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("RdsDbInstanceArn"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeregisterRdsDbInstanceOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeregisterRdsDbInstanceOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeregisterRdsDbInstance = "DeregisterRdsDbInstance"
 
@@ -68,7 +31,7 @@ const opDeregisterRdsDbInstance = "DeregisterRdsDbInstance"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DeregisterRdsDbInstance
-func (c *Client) DeregisterRdsDbInstanceRequest(input *DeregisterRdsDbInstanceInput) DeregisterRdsDbInstanceRequest {
+func (c *Client) DeregisterRdsDbInstanceRequest(input *types.DeregisterRdsDbInstanceInput) DeregisterRdsDbInstanceRequest {
 	op := &aws.Operation{
 		Name:       opDeregisterRdsDbInstance,
 		HTTPMethod: "POST",
@@ -76,10 +39,10 @@ func (c *Client) DeregisterRdsDbInstanceRequest(input *DeregisterRdsDbInstanceIn
 	}
 
 	if input == nil {
-		input = &DeregisterRdsDbInstanceInput{}
+		input = &types.DeregisterRdsDbInstanceInput{}
 	}
 
-	req := c.newRequest(op, input, &DeregisterRdsDbInstanceOutput{})
+	req := c.newRequest(op, input, &types.DeregisterRdsDbInstanceOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return DeregisterRdsDbInstanceRequest{Request: req, Input: input, Copy: c.DeregisterRdsDbInstanceRequest}
@@ -89,8 +52,8 @@ func (c *Client) DeregisterRdsDbInstanceRequest(input *DeregisterRdsDbInstanceIn
 // DeregisterRdsDbInstance API operation.
 type DeregisterRdsDbInstanceRequest struct {
 	*aws.Request
-	Input *DeregisterRdsDbInstanceInput
-	Copy  func(*DeregisterRdsDbInstanceInput) DeregisterRdsDbInstanceRequest
+	Input *types.DeregisterRdsDbInstanceInput
+	Copy  func(*types.DeregisterRdsDbInstanceInput) DeregisterRdsDbInstanceRequest
 }
 
 // Send marshals and sends the DeregisterRdsDbInstance API request.
@@ -102,7 +65,7 @@ func (r DeregisterRdsDbInstanceRequest) Send(ctx context.Context) (*DeregisterRd
 	}
 
 	resp := &DeregisterRdsDbInstanceResponse{
-		DeregisterRdsDbInstanceOutput: r.Request.Data.(*DeregisterRdsDbInstanceOutput),
+		DeregisterRdsDbInstanceOutput: r.Request.Data.(*types.DeregisterRdsDbInstanceOutput),
 		response:                      &aws.Response{Request: r.Request},
 	}
 
@@ -112,7 +75,7 @@ func (r DeregisterRdsDbInstanceRequest) Send(ctx context.Context) (*DeregisterRd
 // DeregisterRdsDbInstanceResponse is the response type for the
 // DeregisterRdsDbInstance API operation.
 type DeregisterRdsDbInstanceResponse struct {
-	*DeregisterRdsDbInstanceOutput
+	*types.DeregisterRdsDbInstanceOutput
 
 	response *aws.Response
 }

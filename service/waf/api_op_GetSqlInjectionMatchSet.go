@@ -6,63 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/waf/types"
 )
-
-// A request to get a SqlInjectionMatchSet.
-type GetSqlInjectionMatchSetInput struct {
-	_ struct{} `type:"structure"`
-
-	// The SqlInjectionMatchSetId of the SqlInjectionMatchSet that you want to get.
-	// SqlInjectionMatchSetId is returned by CreateSqlInjectionMatchSet and by ListSqlInjectionMatchSets.
-	//
-	// SqlInjectionMatchSetId is a required field
-	SqlInjectionMatchSetId *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetSqlInjectionMatchSetInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetSqlInjectionMatchSetInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetSqlInjectionMatchSetInput"}
-
-	if s.SqlInjectionMatchSetId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("SqlInjectionMatchSetId"))
-	}
-	if s.SqlInjectionMatchSetId != nil && len(*s.SqlInjectionMatchSetId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("SqlInjectionMatchSetId", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// The response to a GetSqlInjectionMatchSet request.
-type GetSqlInjectionMatchSetOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Information about the SqlInjectionMatchSet that you specified in the GetSqlInjectionMatchSet
-	// request. For more information, see the following topics:
-	//
-	//    * SqlInjectionMatchSet: Contains Name, SqlInjectionMatchSetId, and an
-	//    array of SqlInjectionMatchTuple objects
-	//
-	//    * SqlInjectionMatchTuple: Each SqlInjectionMatchTuple object contains
-	//    FieldToMatch and TextTransformation
-	//
-	//    * FieldToMatch: Contains Data and Type
-	SqlInjectionMatchSet *SqlInjectionMatchSet `type:"structure"`
-}
-
-// String returns the string representation
-func (s GetSqlInjectionMatchSetOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetSqlInjectionMatchSet = "GetSqlInjectionMatchSet"
 
@@ -79,7 +24,7 @@ const opGetSqlInjectionMatchSet = "GetSqlInjectionMatchSet"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/GetSqlInjectionMatchSet
-func (c *Client) GetSqlInjectionMatchSetRequest(input *GetSqlInjectionMatchSetInput) GetSqlInjectionMatchSetRequest {
+func (c *Client) GetSqlInjectionMatchSetRequest(input *types.GetSqlInjectionMatchSetInput) GetSqlInjectionMatchSetRequest {
 	op := &aws.Operation{
 		Name:       opGetSqlInjectionMatchSet,
 		HTTPMethod: "POST",
@@ -87,10 +32,10 @@ func (c *Client) GetSqlInjectionMatchSetRequest(input *GetSqlInjectionMatchSetIn
 	}
 
 	if input == nil {
-		input = &GetSqlInjectionMatchSetInput{}
+		input = &types.GetSqlInjectionMatchSetInput{}
 	}
 
-	req := c.newRequest(op, input, &GetSqlInjectionMatchSetOutput{})
+	req := c.newRequest(op, input, &types.GetSqlInjectionMatchSetOutput{})
 	return GetSqlInjectionMatchSetRequest{Request: req, Input: input, Copy: c.GetSqlInjectionMatchSetRequest}
 }
 
@@ -98,8 +43,8 @@ func (c *Client) GetSqlInjectionMatchSetRequest(input *GetSqlInjectionMatchSetIn
 // GetSqlInjectionMatchSet API operation.
 type GetSqlInjectionMatchSetRequest struct {
 	*aws.Request
-	Input *GetSqlInjectionMatchSetInput
-	Copy  func(*GetSqlInjectionMatchSetInput) GetSqlInjectionMatchSetRequest
+	Input *types.GetSqlInjectionMatchSetInput
+	Copy  func(*types.GetSqlInjectionMatchSetInput) GetSqlInjectionMatchSetRequest
 }
 
 // Send marshals and sends the GetSqlInjectionMatchSet API request.
@@ -111,7 +56,7 @@ func (r GetSqlInjectionMatchSetRequest) Send(ctx context.Context) (*GetSqlInject
 	}
 
 	resp := &GetSqlInjectionMatchSetResponse{
-		GetSqlInjectionMatchSetOutput: r.Request.Data.(*GetSqlInjectionMatchSetOutput),
+		GetSqlInjectionMatchSetOutput: r.Request.Data.(*types.GetSqlInjectionMatchSetOutput),
 		response:                      &aws.Response{Request: r.Request},
 	}
 
@@ -121,7 +66,7 @@ func (r GetSqlInjectionMatchSetRequest) Send(ctx context.Context) (*GetSqlInject
 // GetSqlInjectionMatchSetResponse is the response type for the
 // GetSqlInjectionMatchSet API operation.
 type GetSqlInjectionMatchSetResponse struct {
-	*GetSqlInjectionMatchSetOutput
+	*types.GetSqlInjectionMatchSetOutput
 
 	response *aws.Response
 }

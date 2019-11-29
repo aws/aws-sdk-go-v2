@@ -6,53 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/elasticloadbalancing/types"
 )
-
-// Contains the parameters for DescribeInstanceHealth.
-type DescribeInstanceHealthInput struct {
-	_ struct{} `type:"structure"`
-
-	// The IDs of the instances.
-	Instances []Instance `type:"list"`
-
-	// The name of the load balancer.
-	//
-	// LoadBalancerName is a required field
-	LoadBalancerName *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeInstanceHealthInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeInstanceHealthInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeInstanceHealthInput"}
-
-	if s.LoadBalancerName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("LoadBalancerName"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Contains the output for DescribeInstanceHealth.
-type DescribeInstanceHealthOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Information about the health of the instances.
-	InstanceStates []InstanceState `type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeInstanceHealthOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeInstanceHealth = "DescribeInstanceHealth"
 
@@ -74,7 +29,7 @@ const opDescribeInstanceHealth = "DescribeInstanceHealth"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/DescribeInstanceHealth
-func (c *Client) DescribeInstanceHealthRequest(input *DescribeInstanceHealthInput) DescribeInstanceHealthRequest {
+func (c *Client) DescribeInstanceHealthRequest(input *types.DescribeInstanceHealthInput) DescribeInstanceHealthRequest {
 	op := &aws.Operation{
 		Name:       opDescribeInstanceHealth,
 		HTTPMethod: "POST",
@@ -82,10 +37,10 @@ func (c *Client) DescribeInstanceHealthRequest(input *DescribeInstanceHealthInpu
 	}
 
 	if input == nil {
-		input = &DescribeInstanceHealthInput{}
+		input = &types.DescribeInstanceHealthInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeInstanceHealthOutput{})
+	req := c.newRequest(op, input, &types.DescribeInstanceHealthOutput{})
 	return DescribeInstanceHealthRequest{Request: req, Input: input, Copy: c.DescribeInstanceHealthRequest}
 }
 
@@ -93,8 +48,8 @@ func (c *Client) DescribeInstanceHealthRequest(input *DescribeInstanceHealthInpu
 // DescribeInstanceHealth API operation.
 type DescribeInstanceHealthRequest struct {
 	*aws.Request
-	Input *DescribeInstanceHealthInput
-	Copy  func(*DescribeInstanceHealthInput) DescribeInstanceHealthRequest
+	Input *types.DescribeInstanceHealthInput
+	Copy  func(*types.DescribeInstanceHealthInput) DescribeInstanceHealthRequest
 }
 
 // Send marshals and sends the DescribeInstanceHealth API request.
@@ -106,7 +61,7 @@ func (r DescribeInstanceHealthRequest) Send(ctx context.Context) (*DescribeInsta
 	}
 
 	resp := &DescribeInstanceHealthResponse{
-		DescribeInstanceHealthOutput: r.Request.Data.(*DescribeInstanceHealthOutput),
+		DescribeInstanceHealthOutput: r.Request.Data.(*types.DescribeInstanceHealthOutput),
 		response:                     &aws.Response{Request: r.Request},
 	}
 
@@ -116,7 +71,7 @@ func (r DescribeInstanceHealthRequest) Send(ctx context.Context) (*DescribeInsta
 // DescribeInstanceHealthResponse is the response type for the
 // DescribeInstanceHealth API operation.
 type DescribeInstanceHealthResponse struct {
-	*DescribeInstanceHealthOutput
+	*types.DescribeInstanceHealthOutput
 
 	response *aws.Response
 }

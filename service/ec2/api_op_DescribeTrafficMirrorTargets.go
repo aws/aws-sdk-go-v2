@@ -6,76 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-type DescribeTrafficMirrorTargetsInput struct {
-	_ struct{} `type:"structure"`
-
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have
-	// the required permissions, the error response is DryRunOperation. Otherwise,
-	// it is UnauthorizedOperation.
-	DryRun *bool `type:"boolean"`
-
-	// One or more filters. The possible values are:
-	//
-	//    * description: The Traffic Mirror target description.
-	//
-	//    * network-interface-id: The ID of the Traffic Mirror session network interface.
-	//
-	//    * network-load-balancer-arn: The Amazon Resource Name (ARN) of the Network
-	//    Load Balancer that is associated with the session.
-	//
-	//    * owner-id: The ID of the account that owns the Traffic Mirror session.
-	//
-	//    * traffic-mirror-target-id: The ID of the Traffic Mirror target.
-	Filters []Filter `locationName:"Filter" locationNameList:"Filter" type:"list"`
-
-	// The maximum number of results to return with a single call. To retrieve the
-	// remaining results, make another call with the returned nextToken value.
-	MaxResults *int64 `min:"5" type:"integer"`
-
-	// The token for the next page of results.
-	NextToken *string `type:"string"`
-
-	// The ID of the Traffic Mirror targets.
-	TrafficMirrorTargetIds []string `locationName:"TrafficMirrorTargetId" locationNameList:"item" type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeTrafficMirrorTargetsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeTrafficMirrorTargetsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeTrafficMirrorTargetsInput"}
-	if s.MaxResults != nil && *s.MaxResults < 5 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 5))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribeTrafficMirrorTargetsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The token to use to retrieve the next page of results. The value is null
-	// when there are no more results to return.
-	NextToken *string `locationName:"nextToken" type:"string"`
-
-	// Information about one or more Traffic Mirror targets.
-	TrafficMirrorTargets []TrafficMirrorTarget `locationName:"trafficMirrorTargetSet" locationNameList:"item" type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeTrafficMirrorTargetsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeTrafficMirrorTargets = "DescribeTrafficMirrorTargets"
 
@@ -92,7 +24,7 @@ const opDescribeTrafficMirrorTargets = "DescribeTrafficMirrorTargets"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeTrafficMirrorTargets
-func (c *Client) DescribeTrafficMirrorTargetsRequest(input *DescribeTrafficMirrorTargetsInput) DescribeTrafficMirrorTargetsRequest {
+func (c *Client) DescribeTrafficMirrorTargetsRequest(input *types.DescribeTrafficMirrorTargetsInput) DescribeTrafficMirrorTargetsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeTrafficMirrorTargets,
 		HTTPMethod: "POST",
@@ -106,10 +38,10 @@ func (c *Client) DescribeTrafficMirrorTargetsRequest(input *DescribeTrafficMirro
 	}
 
 	if input == nil {
-		input = &DescribeTrafficMirrorTargetsInput{}
+		input = &types.DescribeTrafficMirrorTargetsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeTrafficMirrorTargetsOutput{})
+	req := c.newRequest(op, input, &types.DescribeTrafficMirrorTargetsOutput{})
 	return DescribeTrafficMirrorTargetsRequest{Request: req, Input: input, Copy: c.DescribeTrafficMirrorTargetsRequest}
 }
 
@@ -117,8 +49,8 @@ func (c *Client) DescribeTrafficMirrorTargetsRequest(input *DescribeTrafficMirro
 // DescribeTrafficMirrorTargets API operation.
 type DescribeTrafficMirrorTargetsRequest struct {
 	*aws.Request
-	Input *DescribeTrafficMirrorTargetsInput
-	Copy  func(*DescribeTrafficMirrorTargetsInput) DescribeTrafficMirrorTargetsRequest
+	Input *types.DescribeTrafficMirrorTargetsInput
+	Copy  func(*types.DescribeTrafficMirrorTargetsInput) DescribeTrafficMirrorTargetsRequest
 }
 
 // Send marshals and sends the DescribeTrafficMirrorTargets API request.
@@ -130,7 +62,7 @@ func (r DescribeTrafficMirrorTargetsRequest) Send(ctx context.Context) (*Describ
 	}
 
 	resp := &DescribeTrafficMirrorTargetsResponse{
-		DescribeTrafficMirrorTargetsOutput: r.Request.Data.(*DescribeTrafficMirrorTargetsOutput),
+		DescribeTrafficMirrorTargetsOutput: r.Request.Data.(*types.DescribeTrafficMirrorTargetsOutput),
 		response:                           &aws.Response{Request: r.Request},
 	}
 
@@ -160,7 +92,7 @@ func NewDescribeTrafficMirrorTargetsPaginator(req DescribeTrafficMirrorTargetsRe
 	return DescribeTrafficMirrorTargetsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *DescribeTrafficMirrorTargetsInput
+				var inCpy *types.DescribeTrafficMirrorTargetsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -180,14 +112,14 @@ type DescribeTrafficMirrorTargetsPaginator struct {
 	aws.Pager
 }
 
-func (p *DescribeTrafficMirrorTargetsPaginator) CurrentPage() *DescribeTrafficMirrorTargetsOutput {
-	return p.Pager.CurrentPage().(*DescribeTrafficMirrorTargetsOutput)
+func (p *DescribeTrafficMirrorTargetsPaginator) CurrentPage() *types.DescribeTrafficMirrorTargetsOutput {
+	return p.Pager.CurrentPage().(*types.DescribeTrafficMirrorTargetsOutput)
 }
 
 // DescribeTrafficMirrorTargetsResponse is the response type for the
 // DescribeTrafficMirrorTargets API operation.
 type DescribeTrafficMirrorTargetsResponse struct {
-	*DescribeTrafficMirrorTargetsOutput
+	*types.DescribeTrafficMirrorTargetsOutput
 
 	response *aws.Response
 }

@@ -6,65 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/workmail/types"
 )
-
-type ListUsersInput struct {
-	_ struct{} `type:"structure"`
-
-	// The maximum number of results to return in a single call.
-	MaxResults *int64 `min:"1" type:"integer"`
-
-	// The token to use to retrieve the next page of results. The first call does
-	// not contain any tokens.
-	NextToken *string `min:"1" type:"string"`
-
-	// The identifier for the organization under which the users exist.
-	//
-	// OrganizationId is a required field
-	OrganizationId *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s ListUsersInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListUsersInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListUsersInput"}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-	if s.NextToken != nil && len(*s.NextToken) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
-	}
-
-	if s.OrganizationId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("OrganizationId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ListUsersOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The token to use to retrieve the next page of results. This value is `null`
-	// when there are no more results to return.
-	NextToken *string `min:"1" type:"string"`
-
-	// The overview of users for an organization.
-	Users []User `type:"list"`
-}
-
-// String returns the string representation
-func (s ListUsersOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListUsers = "ListUsers"
 
@@ -81,7 +24,7 @@ const opListUsers = "ListUsers"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/ListUsers
-func (c *Client) ListUsersRequest(input *ListUsersInput) ListUsersRequest {
+func (c *Client) ListUsersRequest(input *types.ListUsersInput) ListUsersRequest {
 	op := &aws.Operation{
 		Name:       opListUsers,
 		HTTPMethod: "POST",
@@ -95,10 +38,10 @@ func (c *Client) ListUsersRequest(input *ListUsersInput) ListUsersRequest {
 	}
 
 	if input == nil {
-		input = &ListUsersInput{}
+		input = &types.ListUsersInput{}
 	}
 
-	req := c.newRequest(op, input, &ListUsersOutput{})
+	req := c.newRequest(op, input, &types.ListUsersOutput{})
 	return ListUsersRequest{Request: req, Input: input, Copy: c.ListUsersRequest}
 }
 
@@ -106,8 +49,8 @@ func (c *Client) ListUsersRequest(input *ListUsersInput) ListUsersRequest {
 // ListUsers API operation.
 type ListUsersRequest struct {
 	*aws.Request
-	Input *ListUsersInput
-	Copy  func(*ListUsersInput) ListUsersRequest
+	Input *types.ListUsersInput
+	Copy  func(*types.ListUsersInput) ListUsersRequest
 }
 
 // Send marshals and sends the ListUsers API request.
@@ -119,7 +62,7 @@ func (r ListUsersRequest) Send(ctx context.Context) (*ListUsersResponse, error) 
 	}
 
 	resp := &ListUsersResponse{
-		ListUsersOutput: r.Request.Data.(*ListUsersOutput),
+		ListUsersOutput: r.Request.Data.(*types.ListUsersOutput),
 		response:        &aws.Response{Request: r.Request},
 	}
 
@@ -149,7 +92,7 @@ func NewListUsersPaginator(req ListUsersRequest) ListUsersPaginator {
 	return ListUsersPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListUsersInput
+				var inCpy *types.ListUsersInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -169,14 +112,14 @@ type ListUsersPaginator struct {
 	aws.Pager
 }
 
-func (p *ListUsersPaginator) CurrentPage() *ListUsersOutput {
-	return p.Pager.CurrentPage().(*ListUsersOutput)
+func (p *ListUsersPaginator) CurrentPage() *types.ListUsersOutput {
+	return p.Pager.CurrentPage().(*types.ListUsersOutput)
 }
 
 // ListUsersResponse is the response type for the
 // ListUsers API operation.
 type ListUsersResponse struct {
-	*ListUsersOutput
+	*types.ListUsersOutput
 
 	response *aws.Response
 }

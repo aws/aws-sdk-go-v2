@@ -6,51 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/comprehend/types"
 )
-
-type DescribeTopicsDetectionJobInput struct {
-	_ struct{} `type:"structure"`
-
-	// The identifier assigned by the user to the detection job.
-	//
-	// JobId is a required field
-	JobId *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeTopicsDetectionJobInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeTopicsDetectionJobInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeTopicsDetectionJobInput"}
-
-	if s.JobId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("JobId"))
-	}
-	if s.JobId != nil && len(*s.JobId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("JobId", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribeTopicsDetectionJobOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The list of properties for the requested job.
-	TopicsDetectionJobProperties *TopicsDetectionJobProperties `type:"structure"`
-}
-
-// String returns the string representation
-func (s DescribeTopicsDetectionJobOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeTopicsDetectionJob = "DescribeTopicsDetectionJob"
 
@@ -68,7 +25,7 @@ const opDescribeTopicsDetectionJob = "DescribeTopicsDetectionJob"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/DescribeTopicsDetectionJob
-func (c *Client) DescribeTopicsDetectionJobRequest(input *DescribeTopicsDetectionJobInput) DescribeTopicsDetectionJobRequest {
+func (c *Client) DescribeTopicsDetectionJobRequest(input *types.DescribeTopicsDetectionJobInput) DescribeTopicsDetectionJobRequest {
 	op := &aws.Operation{
 		Name:       opDescribeTopicsDetectionJob,
 		HTTPMethod: "POST",
@@ -76,10 +33,10 @@ func (c *Client) DescribeTopicsDetectionJobRequest(input *DescribeTopicsDetectio
 	}
 
 	if input == nil {
-		input = &DescribeTopicsDetectionJobInput{}
+		input = &types.DescribeTopicsDetectionJobInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeTopicsDetectionJobOutput{})
+	req := c.newRequest(op, input, &types.DescribeTopicsDetectionJobOutput{})
 	return DescribeTopicsDetectionJobRequest{Request: req, Input: input, Copy: c.DescribeTopicsDetectionJobRequest}
 }
 
@@ -87,8 +44,8 @@ func (c *Client) DescribeTopicsDetectionJobRequest(input *DescribeTopicsDetectio
 // DescribeTopicsDetectionJob API operation.
 type DescribeTopicsDetectionJobRequest struct {
 	*aws.Request
-	Input *DescribeTopicsDetectionJobInput
-	Copy  func(*DescribeTopicsDetectionJobInput) DescribeTopicsDetectionJobRequest
+	Input *types.DescribeTopicsDetectionJobInput
+	Copy  func(*types.DescribeTopicsDetectionJobInput) DescribeTopicsDetectionJobRequest
 }
 
 // Send marshals and sends the DescribeTopicsDetectionJob API request.
@@ -100,7 +57,7 @@ func (r DescribeTopicsDetectionJobRequest) Send(ctx context.Context) (*DescribeT
 	}
 
 	resp := &DescribeTopicsDetectionJobResponse{
-		DescribeTopicsDetectionJobOutput: r.Request.Data.(*DescribeTopicsDetectionJobOutput),
+		DescribeTopicsDetectionJobOutput: r.Request.Data.(*types.DescribeTopicsDetectionJobOutput),
 		response:                         &aws.Response{Request: r.Request},
 	}
 
@@ -110,7 +67,7 @@ func (r DescribeTopicsDetectionJobRequest) Send(ctx context.Context) (*DescribeT
 // DescribeTopicsDetectionJobResponse is the response type for the
 // DescribeTopicsDetectionJob API operation.
 type DescribeTopicsDetectionJobResponse struct {
-	*DescribeTopicsDetectionJobOutput
+	*types.DescribeTopicsDetectionJobOutput
 
 	response *aws.Response
 }

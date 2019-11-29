@@ -4,82 +4,10 @@ package configservice
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/configservice/types"
 )
-
-type PutConfigurationAggregatorInput struct {
-	_ struct{} `type:"structure"`
-
-	// A list of AccountAggregationSource object.
-	AccountAggregationSources []AccountAggregationSource `type:"list"`
-
-	// The name of the configuration aggregator.
-	//
-	// ConfigurationAggregatorName is a required field
-	ConfigurationAggregatorName *string `min:"1" type:"string" required:"true"`
-
-	// An OrganizationAggregationSource object.
-	OrganizationAggregationSource *OrganizationAggregationSource `type:"structure"`
-
-	// An array of tag object.
-	Tags []Tag `type:"list"`
-}
-
-// String returns the string representation
-func (s PutConfigurationAggregatorInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *PutConfigurationAggregatorInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "PutConfigurationAggregatorInput"}
-
-	if s.ConfigurationAggregatorName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ConfigurationAggregatorName"))
-	}
-	if s.ConfigurationAggregatorName != nil && len(*s.ConfigurationAggregatorName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ConfigurationAggregatorName", 1))
-	}
-	if s.AccountAggregationSources != nil {
-		for i, v := range s.AccountAggregationSources {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "AccountAggregationSources", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-	if s.OrganizationAggregationSource != nil {
-		if err := s.OrganizationAggregationSource.Validate(); err != nil {
-			invalidParams.AddNested("OrganizationAggregationSource", err.(aws.ErrInvalidParams))
-		}
-	}
-	if s.Tags != nil {
-		for i, v := range s.Tags {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type PutConfigurationAggregatorOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Returns a ConfigurationAggregator object.
-	ConfigurationAggregator *ConfigurationAggregator `type:"structure"`
-}
-
-// String returns the string representation
-func (s PutConfigurationAggregatorOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opPutConfigurationAggregator = "PutConfigurationAggregator"
 
@@ -105,7 +33,7 @@ const opPutConfigurationAggregator = "PutConfigurationAggregator"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/PutConfigurationAggregator
-func (c *Client) PutConfigurationAggregatorRequest(input *PutConfigurationAggregatorInput) PutConfigurationAggregatorRequest {
+func (c *Client) PutConfigurationAggregatorRequest(input *types.PutConfigurationAggregatorInput) PutConfigurationAggregatorRequest {
 	op := &aws.Operation{
 		Name:       opPutConfigurationAggregator,
 		HTTPMethod: "POST",
@@ -113,10 +41,10 @@ func (c *Client) PutConfigurationAggregatorRequest(input *PutConfigurationAggreg
 	}
 
 	if input == nil {
-		input = &PutConfigurationAggregatorInput{}
+		input = &types.PutConfigurationAggregatorInput{}
 	}
 
-	req := c.newRequest(op, input, &PutConfigurationAggregatorOutput{})
+	req := c.newRequest(op, input, &types.PutConfigurationAggregatorOutput{})
 	return PutConfigurationAggregatorRequest{Request: req, Input: input, Copy: c.PutConfigurationAggregatorRequest}
 }
 
@@ -124,8 +52,8 @@ func (c *Client) PutConfigurationAggregatorRequest(input *PutConfigurationAggreg
 // PutConfigurationAggregator API operation.
 type PutConfigurationAggregatorRequest struct {
 	*aws.Request
-	Input *PutConfigurationAggregatorInput
-	Copy  func(*PutConfigurationAggregatorInput) PutConfigurationAggregatorRequest
+	Input *types.PutConfigurationAggregatorInput
+	Copy  func(*types.PutConfigurationAggregatorInput) PutConfigurationAggregatorRequest
 }
 
 // Send marshals and sends the PutConfigurationAggregator API request.
@@ -137,7 +65,7 @@ func (r PutConfigurationAggregatorRequest) Send(ctx context.Context) (*PutConfig
 	}
 
 	resp := &PutConfigurationAggregatorResponse{
-		PutConfigurationAggregatorOutput: r.Request.Data.(*PutConfigurationAggregatorOutput),
+		PutConfigurationAggregatorOutput: r.Request.Data.(*types.PutConfigurationAggregatorOutput),
 		response:                         &aws.Response{Request: r.Request},
 	}
 
@@ -147,7 +75,7 @@ func (r PutConfigurationAggregatorRequest) Send(ctx context.Context) (*PutConfig
 // PutConfigurationAggregatorResponse is the response type for the
 // PutConfigurationAggregator API operation.
 type PutConfigurationAggregatorResponse struct {
-	*PutConfigurationAggregatorOutput
+	*types.PutConfigurationAggregatorOutput
 
 	response *aws.Response
 }

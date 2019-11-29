@@ -13,6 +13,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws/awserr"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting/integration"
 	"github.com/aws/aws-sdk-go-v2/service/route53"
+	"github.com/aws/aws-sdk-go-v2/service/route53/types"
 )
 
 var _ aws.Config
@@ -24,7 +25,7 @@ func TestInteg_00_ListHostedZones(t *testing.T) {
 
 	cfg := integration.ConfigWithDefaultRegion("us-east-1")
 	svc := route53.New(cfg)
-	params := &route53.ListHostedZonesInput{}
+	params := &types.ListHostedZonesInput{}
 
 	req := svc.ListHostedZonesRequest(params)
 
@@ -39,7 +40,7 @@ func TestInteg_01_GetHostedZone(t *testing.T) {
 
 	cfg := integration.ConfigWithDefaultRegion("us-east-1")
 	svc := route53.New(cfg)
-	params := &route53.GetHostedZoneInput{
+	params := &types.GetHostedZoneInput{
 		Id: aws.String("fake-zone"),
 	}
 

@@ -6,53 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
+	"github.com/aws/aws-sdk-go-v2/service/acmpca/types"
 )
-
-type RestoreCertificateAuthorityInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) that was returned when you called the CreateCertificateAuthority
-	// action. This must be of the form:
-	//
-	// arn:aws:acm-pca:region:account:certificate-authority/12345678-1234-1234-1234-123456789012
-	//
-	// CertificateAuthorityArn is a required field
-	CertificateAuthorityArn *string `min:"5" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s RestoreCertificateAuthorityInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *RestoreCertificateAuthorityInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "RestoreCertificateAuthorityInput"}
-
-	if s.CertificateAuthorityArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("CertificateAuthorityArn"))
-	}
-	if s.CertificateAuthorityArn != nil && len(*s.CertificateAuthorityArn) < 5 {
-		invalidParams.Add(aws.NewErrParamMinLen("CertificateAuthorityArn", 5))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type RestoreCertificateAuthorityOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s RestoreCertificateAuthorityOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opRestoreCertificateAuthority = "RestoreCertificateAuthority"
 
@@ -81,7 +38,7 @@ const opRestoreCertificateAuthority = "RestoreCertificateAuthority"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/acm-pca-2017-08-22/RestoreCertificateAuthority
-func (c *Client) RestoreCertificateAuthorityRequest(input *RestoreCertificateAuthorityInput) RestoreCertificateAuthorityRequest {
+func (c *Client) RestoreCertificateAuthorityRequest(input *types.RestoreCertificateAuthorityInput) RestoreCertificateAuthorityRequest {
 	op := &aws.Operation{
 		Name:       opRestoreCertificateAuthority,
 		HTTPMethod: "POST",
@@ -89,10 +46,10 @@ func (c *Client) RestoreCertificateAuthorityRequest(input *RestoreCertificateAut
 	}
 
 	if input == nil {
-		input = &RestoreCertificateAuthorityInput{}
+		input = &types.RestoreCertificateAuthorityInput{}
 	}
 
-	req := c.newRequest(op, input, &RestoreCertificateAuthorityOutput{})
+	req := c.newRequest(op, input, &types.RestoreCertificateAuthorityOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return RestoreCertificateAuthorityRequest{Request: req, Input: input, Copy: c.RestoreCertificateAuthorityRequest}
@@ -102,8 +59,8 @@ func (c *Client) RestoreCertificateAuthorityRequest(input *RestoreCertificateAut
 // RestoreCertificateAuthority API operation.
 type RestoreCertificateAuthorityRequest struct {
 	*aws.Request
-	Input *RestoreCertificateAuthorityInput
-	Copy  func(*RestoreCertificateAuthorityInput) RestoreCertificateAuthorityRequest
+	Input *types.RestoreCertificateAuthorityInput
+	Copy  func(*types.RestoreCertificateAuthorityInput) RestoreCertificateAuthorityRequest
 }
 
 // Send marshals and sends the RestoreCertificateAuthority API request.
@@ -115,7 +72,7 @@ func (r RestoreCertificateAuthorityRequest) Send(ctx context.Context) (*RestoreC
 	}
 
 	resp := &RestoreCertificateAuthorityResponse{
-		RestoreCertificateAuthorityOutput: r.Request.Data.(*RestoreCertificateAuthorityOutput),
+		RestoreCertificateAuthorityOutput: r.Request.Data.(*types.RestoreCertificateAuthorityOutput),
 		response:                          &aws.Response{Request: r.Request},
 	}
 
@@ -125,7 +82,7 @@ func (r RestoreCertificateAuthorityRequest) Send(ctx context.Context) (*RestoreC
 // RestoreCertificateAuthorityResponse is the response type for the
 // RestoreCertificateAuthority API operation.
 type RestoreCertificateAuthorityResponse struct {
-	*RestoreCertificateAuthorityOutput
+	*types.RestoreCertificateAuthorityOutput
 
 	response *aws.Response
 }

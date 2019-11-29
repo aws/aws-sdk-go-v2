@@ -6,94 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/apigateway/types"
 )
-
-// The GET request to get all the usage plans of the caller's account.
-type GetUsagePlansInput struct {
-	_ struct{} `type:"structure"`
-
-	// The identifier of the API key associated with the usage plans.
-	KeyId *string `location:"querystring" locationName:"keyId" type:"string"`
-
-	// The maximum number of returned results per page. The default value is 25
-	// and the maximum value is 500.
-	Limit *int64 `location:"querystring" locationName:"limit" type:"integer"`
-
-	// The current pagination position in the paged result set.
-	Position *string `location:"querystring" locationName:"position" type:"string"`
-}
-
-// String returns the string representation
-func (s GetUsagePlansInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetUsagePlansInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.KeyId != nil {
-		v := *s.KeyId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "keyId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Limit != nil {
-		v := *s.Limit
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "limit", protocol.Int64Value(v), metadata)
-	}
-	if s.Position != nil {
-		v := *s.Position
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "position", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-// Represents a collection of usage plans for an AWS account.
-//
-// Create and Use Usage Plans (https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-api-usage-plans.html)
-type GetUsagePlansOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The current page of elements from this collection.
-	Items []UsagePlan `locationName:"item" type:"list"`
-
-	Position *string `locationName:"position" type:"string"`
-}
-
-// String returns the string representation
-func (s GetUsagePlansOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetUsagePlansOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.Items != nil {
-		v := s.Items
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "item", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	if s.Position != nil {
-		v := *s.Position
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "position", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opGetUsagePlans = "GetUsagePlans"
 
@@ -108,7 +22,7 @@ const opGetUsagePlans = "GetUsagePlans"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) GetUsagePlansRequest(input *GetUsagePlansInput) GetUsagePlansRequest {
+func (c *Client) GetUsagePlansRequest(input *types.GetUsagePlansInput) GetUsagePlansRequest {
 	op := &aws.Operation{
 		Name:       opGetUsagePlans,
 		HTTPMethod: "GET",
@@ -122,10 +36,10 @@ func (c *Client) GetUsagePlansRequest(input *GetUsagePlansInput) GetUsagePlansRe
 	}
 
 	if input == nil {
-		input = &GetUsagePlansInput{}
+		input = &types.GetUsagePlansInput{}
 	}
 
-	req := c.newRequest(op, input, &GetUsagePlansOutput{})
+	req := c.newRequest(op, input, &types.GetUsagePlansOutput{})
 	return GetUsagePlansRequest{Request: req, Input: input, Copy: c.GetUsagePlansRequest}
 }
 
@@ -133,8 +47,8 @@ func (c *Client) GetUsagePlansRequest(input *GetUsagePlansInput) GetUsagePlansRe
 // GetUsagePlans API operation.
 type GetUsagePlansRequest struct {
 	*aws.Request
-	Input *GetUsagePlansInput
-	Copy  func(*GetUsagePlansInput) GetUsagePlansRequest
+	Input *types.GetUsagePlansInput
+	Copy  func(*types.GetUsagePlansInput) GetUsagePlansRequest
 }
 
 // Send marshals and sends the GetUsagePlans API request.
@@ -146,7 +60,7 @@ func (r GetUsagePlansRequest) Send(ctx context.Context) (*GetUsagePlansResponse,
 	}
 
 	resp := &GetUsagePlansResponse{
-		GetUsagePlansOutput: r.Request.Data.(*GetUsagePlansOutput),
+		GetUsagePlansOutput: r.Request.Data.(*types.GetUsagePlansOutput),
 		response:            &aws.Response{Request: r.Request},
 	}
 
@@ -176,7 +90,7 @@ func NewGetUsagePlansPaginator(req GetUsagePlansRequest) GetUsagePlansPaginator 
 	return GetUsagePlansPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *GetUsagePlansInput
+				var inCpy *types.GetUsagePlansInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -196,14 +110,14 @@ type GetUsagePlansPaginator struct {
 	aws.Pager
 }
 
-func (p *GetUsagePlansPaginator) CurrentPage() *GetUsagePlansOutput {
-	return p.Pager.CurrentPage().(*GetUsagePlansOutput)
+func (p *GetUsagePlansPaginator) CurrentPage() *types.GetUsagePlansOutput {
+	return p.Pager.CurrentPage().(*types.GetUsagePlansOutput)
 }
 
 // GetUsagePlansResponse is the response type for the
 // GetUsagePlans API operation.
 type GetUsagePlansResponse struct {
-	*GetUsagePlansOutput
+	*types.GetUsagePlansOutput
 
 	response *aws.Response
 }

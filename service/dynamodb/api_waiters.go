@@ -7,6 +7,7 @@ import (
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
+	"github.com/aws/aws-sdk-go-v2/service/dynamodb/types"
 )
 
 // WaitUntilTableExists uses the DynamoDB API operation
@@ -18,7 +19,7 @@ import (
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Client) WaitUntilTableExists(ctx context.Context, input *DescribeTableInput, opts ...aws.WaiterOption) error {
+func (c *Client) WaitUntilTableExists(ctx context.Context, input *types.DescribeTableInput, opts ...aws.WaiterOption) error {
 	w := aws.Waiter{
 		Name:        "WaitUntilTableExists",
 		MaxAttempts: 25,
@@ -37,7 +38,7 @@ func (c *Client) WaitUntilTableExists(ctx context.Context, input *DescribeTableI
 		},
 		Logger: c.Config.Logger,
 		NewRequest: func(opts []aws.Option) (*aws.Request, error) {
-			var inCpy *DescribeTableInput
+			var inCpy *types.DescribeTableInput
 			if input != nil {
 				tmp := *input
 				inCpy = &tmp
@@ -62,7 +63,7 @@ func (c *Client) WaitUntilTableExists(ctx context.Context, input *DescribeTableI
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Client) WaitUntilTableNotExists(ctx context.Context, input *DescribeTableInput, opts ...aws.WaiterOption) error {
+func (c *Client) WaitUntilTableNotExists(ctx context.Context, input *types.DescribeTableInput, opts ...aws.WaiterOption) error {
 	w := aws.Waiter{
 		Name:        "WaitUntilTableNotExists",
 		MaxAttempts: 25,
@@ -76,7 +77,7 @@ func (c *Client) WaitUntilTableNotExists(ctx context.Context, input *DescribeTab
 		},
 		Logger: c.Config.Logger,
 		NewRequest: func(opts []aws.Option) (*aws.Request, error) {
-			var inCpy *DescribeTableInput
+			var inCpy *types.DescribeTableInput
 			if input != nil {
 				tmp := *input
 				inCpy = &tmp

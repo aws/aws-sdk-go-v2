@@ -4,88 +4,10 @@ package sagemaker
 
 import (
 	"context"
-	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
 )
-
-type ListTrainingJobsInput struct {
-	_ struct{} `type:"structure"`
-
-	// A filter that returns only training jobs created after the specified time
-	// (timestamp).
-	CreationTimeAfter *time.Time `type:"timestamp"`
-
-	// A filter that returns only training jobs created before the specified time
-	// (timestamp).
-	CreationTimeBefore *time.Time `type:"timestamp"`
-
-	// A filter that returns only training jobs modified after the specified time
-	// (timestamp).
-	LastModifiedTimeAfter *time.Time `type:"timestamp"`
-
-	// A filter that returns only training jobs modified before the specified time
-	// (timestamp).
-	LastModifiedTimeBefore *time.Time `type:"timestamp"`
-
-	// The maximum number of training jobs to return in the response.
-	MaxResults *int64 `min:"1" type:"integer"`
-
-	// A string in the training job name. This filter returns only training jobs
-	// whose name contains the specified string.
-	NameContains *string `type:"string"`
-
-	// If the result of the previous ListTrainingJobs request was truncated, the
-	// response includes a NextToken. To retrieve the next set of training jobs,
-	// use the token in the next request.
-	NextToken *string `type:"string"`
-
-	// The field to sort results by. The default is CreationTime.
-	SortBy SortBy `type:"string" enum:"true"`
-
-	// The sort order for results. The default is Ascending.
-	SortOrder SortOrder `type:"string" enum:"true"`
-
-	// A filter that retrieves only training jobs with a specific status.
-	StatusEquals TrainingJobStatus `type:"string" enum:"true"`
-}
-
-// String returns the string representation
-func (s ListTrainingJobsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListTrainingJobsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListTrainingJobsInput"}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ListTrainingJobsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// If the response is truncated, Amazon SageMaker returns this token. To retrieve
-	// the next set of training jobs, use it in the subsequent request.
-	NextToken *string `type:"string"`
-
-	// An array of TrainingJobSummary objects, each listing a training job.
-	//
-	// TrainingJobSummaries is a required field
-	TrainingJobSummaries []TrainingJobSummary `type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s ListTrainingJobsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListTrainingJobs = "ListTrainingJobs"
 
@@ -102,7 +24,7 @@ const opListTrainingJobs = "ListTrainingJobs"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListTrainingJobs
-func (c *Client) ListTrainingJobsRequest(input *ListTrainingJobsInput) ListTrainingJobsRequest {
+func (c *Client) ListTrainingJobsRequest(input *types.ListTrainingJobsInput) ListTrainingJobsRequest {
 	op := &aws.Operation{
 		Name:       opListTrainingJobs,
 		HTTPMethod: "POST",
@@ -116,10 +38,10 @@ func (c *Client) ListTrainingJobsRequest(input *ListTrainingJobsInput) ListTrain
 	}
 
 	if input == nil {
-		input = &ListTrainingJobsInput{}
+		input = &types.ListTrainingJobsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListTrainingJobsOutput{})
+	req := c.newRequest(op, input, &types.ListTrainingJobsOutput{})
 	return ListTrainingJobsRequest{Request: req, Input: input, Copy: c.ListTrainingJobsRequest}
 }
 
@@ -127,8 +49,8 @@ func (c *Client) ListTrainingJobsRequest(input *ListTrainingJobsInput) ListTrain
 // ListTrainingJobs API operation.
 type ListTrainingJobsRequest struct {
 	*aws.Request
-	Input *ListTrainingJobsInput
-	Copy  func(*ListTrainingJobsInput) ListTrainingJobsRequest
+	Input *types.ListTrainingJobsInput
+	Copy  func(*types.ListTrainingJobsInput) ListTrainingJobsRequest
 }
 
 // Send marshals and sends the ListTrainingJobs API request.
@@ -140,7 +62,7 @@ func (r ListTrainingJobsRequest) Send(ctx context.Context) (*ListTrainingJobsRes
 	}
 
 	resp := &ListTrainingJobsResponse{
-		ListTrainingJobsOutput: r.Request.Data.(*ListTrainingJobsOutput),
+		ListTrainingJobsOutput: r.Request.Data.(*types.ListTrainingJobsOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -170,7 +92,7 @@ func NewListTrainingJobsPaginator(req ListTrainingJobsRequest) ListTrainingJobsP
 	return ListTrainingJobsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListTrainingJobsInput
+				var inCpy *types.ListTrainingJobsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -190,14 +112,14 @@ type ListTrainingJobsPaginator struct {
 	aws.Pager
 }
 
-func (p *ListTrainingJobsPaginator) CurrentPage() *ListTrainingJobsOutput {
-	return p.Pager.CurrentPage().(*ListTrainingJobsOutput)
+func (p *ListTrainingJobsPaginator) CurrentPage() *types.ListTrainingJobsOutput {
+	return p.Pager.CurrentPage().(*types.ListTrainingJobsOutput)
 }
 
 // ListTrainingJobsResponse is the response type for the
 // ListTrainingJobs API operation.
 type ListTrainingJobsResponse struct {
-	*ListTrainingJobsOutput
+	*types.ListTrainingJobsOutput
 
 	response *aws.Response
 }

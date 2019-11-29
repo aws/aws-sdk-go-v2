@@ -6,54 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/directoryservice/types"
 )
-
-type RemoveIpRoutesInput struct {
-	_ struct{} `type:"structure"`
-
-	// IP address blocks that you want to remove.
-	//
-	// CidrIps is a required field
-	CidrIps []string `type:"list" required:"true"`
-
-	// Identifier (ID) of the directory from which you want to remove the IP addresses.
-	//
-	// DirectoryId is a required field
-	DirectoryId *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s RemoveIpRoutesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *RemoveIpRoutesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "RemoveIpRoutesInput"}
-
-	if s.CidrIps == nil {
-		invalidParams.Add(aws.NewErrParamRequired("CidrIps"))
-	}
-
-	if s.DirectoryId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DirectoryId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type RemoveIpRoutesOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s RemoveIpRoutesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opRemoveIpRoutes = "RemoveIpRoutes"
 
@@ -70,7 +24,7 @@ const opRemoveIpRoutes = "RemoveIpRoutes"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/RemoveIpRoutes
-func (c *Client) RemoveIpRoutesRequest(input *RemoveIpRoutesInput) RemoveIpRoutesRequest {
+func (c *Client) RemoveIpRoutesRequest(input *types.RemoveIpRoutesInput) RemoveIpRoutesRequest {
 	op := &aws.Operation{
 		Name:       opRemoveIpRoutes,
 		HTTPMethod: "POST",
@@ -78,10 +32,10 @@ func (c *Client) RemoveIpRoutesRequest(input *RemoveIpRoutesInput) RemoveIpRoute
 	}
 
 	if input == nil {
-		input = &RemoveIpRoutesInput{}
+		input = &types.RemoveIpRoutesInput{}
 	}
 
-	req := c.newRequest(op, input, &RemoveIpRoutesOutput{})
+	req := c.newRequest(op, input, &types.RemoveIpRoutesOutput{})
 	return RemoveIpRoutesRequest{Request: req, Input: input, Copy: c.RemoveIpRoutesRequest}
 }
 
@@ -89,8 +43,8 @@ func (c *Client) RemoveIpRoutesRequest(input *RemoveIpRoutesInput) RemoveIpRoute
 // RemoveIpRoutes API operation.
 type RemoveIpRoutesRequest struct {
 	*aws.Request
-	Input *RemoveIpRoutesInput
-	Copy  func(*RemoveIpRoutesInput) RemoveIpRoutesRequest
+	Input *types.RemoveIpRoutesInput
+	Copy  func(*types.RemoveIpRoutesInput) RemoveIpRoutesRequest
 }
 
 // Send marshals and sends the RemoveIpRoutes API request.
@@ -102,7 +56,7 @@ func (r RemoveIpRoutesRequest) Send(ctx context.Context) (*RemoveIpRoutesRespons
 	}
 
 	resp := &RemoveIpRoutesResponse{
-		RemoveIpRoutesOutput: r.Request.Data.(*RemoveIpRoutesOutput),
+		RemoveIpRoutesOutput: r.Request.Data.(*types.RemoveIpRoutesOutput),
 		response:             &aws.Response{Request: r.Request},
 	}
 
@@ -112,7 +66,7 @@ func (r RemoveIpRoutesRequest) Send(ctx context.Context) (*RemoveIpRoutesRespons
 // RemoveIpRoutesResponse is the response type for the
 // RemoveIpRoutes API operation.
 type RemoveIpRoutesResponse struct {
-	*RemoveIpRoutesOutput
+	*types.RemoveIpRoutesOutput
 
 	response *aws.Response
 }

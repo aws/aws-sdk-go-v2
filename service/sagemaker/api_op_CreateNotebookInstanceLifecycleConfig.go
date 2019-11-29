@@ -4,74 +4,10 @@ package sagemaker
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
 )
-
-type CreateNotebookInstanceLifecycleConfigInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the lifecycle configuration.
-	//
-	// NotebookInstanceLifecycleConfigName is a required field
-	NotebookInstanceLifecycleConfigName *string `type:"string" required:"true"`
-
-	// A shell script that runs only once, when you create a notebook instance.
-	// The shell script must be a base64-encoded string.
-	OnCreate []NotebookInstanceLifecycleHook `type:"list"`
-
-	// A shell script that runs every time you start a notebook instance, including
-	// when you create the notebook instance. The shell script must be a base64-encoded
-	// string.
-	OnStart []NotebookInstanceLifecycleHook `type:"list"`
-}
-
-// String returns the string representation
-func (s CreateNotebookInstanceLifecycleConfigInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateNotebookInstanceLifecycleConfigInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateNotebookInstanceLifecycleConfigInput"}
-
-	if s.NotebookInstanceLifecycleConfigName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("NotebookInstanceLifecycleConfigName"))
-	}
-	if s.OnCreate != nil {
-		for i, v := range s.OnCreate {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "OnCreate", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-	if s.OnStart != nil {
-		for i, v := range s.OnStart {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "OnStart", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type CreateNotebookInstanceLifecycleConfigOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the lifecycle configuration.
-	NotebookInstanceLifecycleConfigArn *string `type:"string"`
-}
-
-// String returns the string representation
-func (s CreateNotebookInstanceLifecycleConfigOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCreateNotebookInstanceLifecycleConfig = "CreateNotebookInstanceLifecycleConfig"
 
@@ -105,7 +41,7 @@ const opCreateNotebookInstanceLifecycleConfig = "CreateNotebookInstanceLifecycle
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateNotebookInstanceLifecycleConfig
-func (c *Client) CreateNotebookInstanceLifecycleConfigRequest(input *CreateNotebookInstanceLifecycleConfigInput) CreateNotebookInstanceLifecycleConfigRequest {
+func (c *Client) CreateNotebookInstanceLifecycleConfigRequest(input *types.CreateNotebookInstanceLifecycleConfigInput) CreateNotebookInstanceLifecycleConfigRequest {
 	op := &aws.Operation{
 		Name:       opCreateNotebookInstanceLifecycleConfig,
 		HTTPMethod: "POST",
@@ -113,10 +49,10 @@ func (c *Client) CreateNotebookInstanceLifecycleConfigRequest(input *CreateNoteb
 	}
 
 	if input == nil {
-		input = &CreateNotebookInstanceLifecycleConfigInput{}
+		input = &types.CreateNotebookInstanceLifecycleConfigInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateNotebookInstanceLifecycleConfigOutput{})
+	req := c.newRequest(op, input, &types.CreateNotebookInstanceLifecycleConfigOutput{})
 	return CreateNotebookInstanceLifecycleConfigRequest{Request: req, Input: input, Copy: c.CreateNotebookInstanceLifecycleConfigRequest}
 }
 
@@ -124,8 +60,8 @@ func (c *Client) CreateNotebookInstanceLifecycleConfigRequest(input *CreateNoteb
 // CreateNotebookInstanceLifecycleConfig API operation.
 type CreateNotebookInstanceLifecycleConfigRequest struct {
 	*aws.Request
-	Input *CreateNotebookInstanceLifecycleConfigInput
-	Copy  func(*CreateNotebookInstanceLifecycleConfigInput) CreateNotebookInstanceLifecycleConfigRequest
+	Input *types.CreateNotebookInstanceLifecycleConfigInput
+	Copy  func(*types.CreateNotebookInstanceLifecycleConfigInput) CreateNotebookInstanceLifecycleConfigRequest
 }
 
 // Send marshals and sends the CreateNotebookInstanceLifecycleConfig API request.
@@ -137,7 +73,7 @@ func (r CreateNotebookInstanceLifecycleConfigRequest) Send(ctx context.Context) 
 	}
 
 	resp := &CreateNotebookInstanceLifecycleConfigResponse{
-		CreateNotebookInstanceLifecycleConfigOutput: r.Request.Data.(*CreateNotebookInstanceLifecycleConfigOutput),
+		CreateNotebookInstanceLifecycleConfigOutput: r.Request.Data.(*types.CreateNotebookInstanceLifecycleConfigOutput),
 		response: &aws.Response{Request: r.Request},
 	}
 
@@ -147,7 +83,7 @@ func (r CreateNotebookInstanceLifecycleConfigRequest) Send(ctx context.Context) 
 // CreateNotebookInstanceLifecycleConfigResponse is the response type for the
 // CreateNotebookInstanceLifecycleConfig API operation.
 type CreateNotebookInstanceLifecycleConfigResponse struct {
-	*CreateNotebookInstanceLifecycleConfigOutput
+	*types.CreateNotebookInstanceLifecycleConfigOutput
 
 	response *aws.Response
 }

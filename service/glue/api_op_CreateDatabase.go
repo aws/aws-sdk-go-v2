@@ -6,57 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/glue/types"
 )
-
-type CreateDatabaseInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the Data Catalog in which to create the database. If none is provided,
-	// the AWS account ID is used by default.
-	CatalogId *string `min:"1" type:"string"`
-
-	// The metadata for the database.
-	//
-	// DatabaseInput is a required field
-	DatabaseInput *DatabaseInput `type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s CreateDatabaseInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateDatabaseInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateDatabaseInput"}
-	if s.CatalogId != nil && len(*s.CatalogId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("CatalogId", 1))
-	}
-
-	if s.DatabaseInput == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DatabaseInput"))
-	}
-	if s.DatabaseInput != nil {
-		if err := s.DatabaseInput.Validate(); err != nil {
-			invalidParams.AddNested("DatabaseInput", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type CreateDatabaseOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s CreateDatabaseOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCreateDatabase = "CreateDatabase"
 
@@ -73,7 +24,7 @@ const opCreateDatabase = "CreateDatabase"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CreateDatabase
-func (c *Client) CreateDatabaseRequest(input *CreateDatabaseInput) CreateDatabaseRequest {
+func (c *Client) CreateDatabaseRequest(input *types.CreateDatabaseInput) CreateDatabaseRequest {
 	op := &aws.Operation{
 		Name:       opCreateDatabase,
 		HTTPMethod: "POST",
@@ -81,10 +32,10 @@ func (c *Client) CreateDatabaseRequest(input *CreateDatabaseInput) CreateDatabas
 	}
 
 	if input == nil {
-		input = &CreateDatabaseInput{}
+		input = &types.CreateDatabaseInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateDatabaseOutput{})
+	req := c.newRequest(op, input, &types.CreateDatabaseOutput{})
 	return CreateDatabaseRequest{Request: req, Input: input, Copy: c.CreateDatabaseRequest}
 }
 
@@ -92,8 +43,8 @@ func (c *Client) CreateDatabaseRequest(input *CreateDatabaseInput) CreateDatabas
 // CreateDatabase API operation.
 type CreateDatabaseRequest struct {
 	*aws.Request
-	Input *CreateDatabaseInput
-	Copy  func(*CreateDatabaseInput) CreateDatabaseRequest
+	Input *types.CreateDatabaseInput
+	Copy  func(*types.CreateDatabaseInput) CreateDatabaseRequest
 }
 
 // Send marshals and sends the CreateDatabase API request.
@@ -105,7 +56,7 @@ func (r CreateDatabaseRequest) Send(ctx context.Context) (*CreateDatabaseRespons
 	}
 
 	resp := &CreateDatabaseResponse{
-		CreateDatabaseOutput: r.Request.Data.(*CreateDatabaseOutput),
+		CreateDatabaseOutput: r.Request.Data.(*types.CreateDatabaseOutput),
 		response:             &aws.Response{Request: r.Request},
 	}
 
@@ -115,7 +66,7 @@ func (r CreateDatabaseRequest) Send(ctx context.Context) (*CreateDatabaseRespons
 // CreateDatabaseResponse is the response type for the
 // CreateDatabase API operation.
 type CreateDatabaseResponse struct {
-	*CreateDatabaseOutput
+	*types.CreateDatabaseOutput
 
 	response *aws.Response
 }

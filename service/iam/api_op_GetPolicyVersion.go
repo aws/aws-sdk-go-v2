@@ -6,71 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/iam/types"
 )
-
-type GetPolicyVersionInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the managed policy that you want information
-	// about.
-	//
-	// For more information about ARNs, see Amazon Resource Names (ARNs) and AWS
-	// Service Namespaces (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
-	// in the AWS General Reference.
-	//
-	// PolicyArn is a required field
-	PolicyArn *string `min:"20" type:"string" required:"true"`
-
-	// Identifies the policy version to retrieve.
-	//
-	// This parameter allows (through its regex pattern (http://wikipedia.org/wiki/regex))
-	// a string of characters that consists of the lowercase letter 'v' followed
-	// by one or two digits, and optionally followed by a period '.' and a string
-	// of letters and digits.
-	//
-	// VersionId is a required field
-	VersionId *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetPolicyVersionInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetPolicyVersionInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetPolicyVersionInput"}
-
-	if s.PolicyArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("PolicyArn"))
-	}
-	if s.PolicyArn != nil && len(*s.PolicyArn) < 20 {
-		invalidParams.Add(aws.NewErrParamMinLen("PolicyArn", 20))
-	}
-
-	if s.VersionId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("VersionId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Contains the response to a successful GetPolicyVersion request.
-type GetPolicyVersionOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A structure containing details about the policy version.
-	PolicyVersion *PolicyVersion `type:"structure"`
-}
-
-// String returns the string representation
-func (s GetPolicyVersionOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetPolicyVersion = "GetPolicyVersion"
 
@@ -108,7 +45,7 @@ const opGetPolicyVersion = "GetPolicyVersion"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetPolicyVersion
-func (c *Client) GetPolicyVersionRequest(input *GetPolicyVersionInput) GetPolicyVersionRequest {
+func (c *Client) GetPolicyVersionRequest(input *types.GetPolicyVersionInput) GetPolicyVersionRequest {
 	op := &aws.Operation{
 		Name:       opGetPolicyVersion,
 		HTTPMethod: "POST",
@@ -116,10 +53,10 @@ func (c *Client) GetPolicyVersionRequest(input *GetPolicyVersionInput) GetPolicy
 	}
 
 	if input == nil {
-		input = &GetPolicyVersionInput{}
+		input = &types.GetPolicyVersionInput{}
 	}
 
-	req := c.newRequest(op, input, &GetPolicyVersionOutput{})
+	req := c.newRequest(op, input, &types.GetPolicyVersionOutput{})
 	return GetPolicyVersionRequest{Request: req, Input: input, Copy: c.GetPolicyVersionRequest}
 }
 
@@ -127,8 +64,8 @@ func (c *Client) GetPolicyVersionRequest(input *GetPolicyVersionInput) GetPolicy
 // GetPolicyVersion API operation.
 type GetPolicyVersionRequest struct {
 	*aws.Request
-	Input *GetPolicyVersionInput
-	Copy  func(*GetPolicyVersionInput) GetPolicyVersionRequest
+	Input *types.GetPolicyVersionInput
+	Copy  func(*types.GetPolicyVersionInput) GetPolicyVersionRequest
 }
 
 // Send marshals and sends the GetPolicyVersion API request.
@@ -140,7 +77,7 @@ func (r GetPolicyVersionRequest) Send(ctx context.Context) (*GetPolicyVersionRes
 	}
 
 	resp := &GetPolicyVersionResponse{
-		GetPolicyVersionOutput: r.Request.Data.(*GetPolicyVersionOutput),
+		GetPolicyVersionOutput: r.Request.Data.(*types.GetPolicyVersionOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -150,7 +87,7 @@ func (r GetPolicyVersionRequest) Send(ctx context.Context) (*GetPolicyVersionRes
 // GetPolicyVersionResponse is the response type for the
 // GetPolicyVersion API operation.
 type GetPolicyVersionResponse struct {
-	*GetPolicyVersionOutput
+	*types.GetPolicyVersionOutput
 
 	response *aws.Response
 }

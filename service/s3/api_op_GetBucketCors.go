@@ -6,89 +6,28 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/s3/types"
 )
-
-type GetBucketCorsInput struct {
-	_ struct{} `type:"structure"`
-
-	// Bucket is a required field
-	Bucket *string `location:"uri" locationName:"Bucket" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetBucketCorsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetBucketCorsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetBucketCorsInput"}
-
-	if s.Bucket == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Bucket"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-func (s *GetBucketCorsInput) getBucket() (v string) {
-	if s.Bucket == nil {
-		return v
-	}
-	return *s.Bucket
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetBucketCorsInput) MarshalFields(e protocol.FieldEncoder) error {
-
-	if s.Bucket != nil {
-		v := *s.Bucket
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "Bucket", protocol.StringValue(v), metadata)
-	}
-	return nil
-}
-
-type GetBucketCorsOutput struct {
-	_ struct{} `type:"structure"`
-
-	CORSRules []CORSRule `locationName:"CORSRule" type:"list" flattened:"true"`
-}
-
-// String returns the string representation
-func (s GetBucketCorsOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetBucketCorsOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.CORSRules != nil {
-		v := s.CORSRules
-
-		metadata := protocol.Metadata{Flatten: true}
-		ls0 := e.List(protocol.BodyTarget, "CORSRule", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	return nil
-}
 
 const opGetBucketCors = "GetBucketCors"
 
 // GetBucketCorsRequest returns a request value for making API operation for
 // Amazon Simple Storage Service.
 //
-// Returns the CORS configuration for the bucket.
+// Returns the cors configuration information set for the bucket.
+//
+// To use this operation, you must have permission to perform the s3:GetBucketCORS
+// action. By default, the bucket owner has this permission and can grant it
+// to others.
+//
+// To learn more cors, see Enabling Cross-Origin Resource Sharing (https://docs.aws.amazon.com/AmazonS3/latest/dev/cors.html)Enabling
+// Cross-Origin Resource Sharing.
+//
+// The following operations are related to GetBucketCors:
+//
+//    * PutBucketCors
+//
+//    * DeleteBucketCors
 //
 //    // Example sending a request using GetBucketCorsRequest.
 //    req := client.GetBucketCorsRequest(params)
@@ -98,7 +37,7 @@ const opGetBucketCors = "GetBucketCors"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetBucketCors
-func (c *Client) GetBucketCorsRequest(input *GetBucketCorsInput) GetBucketCorsRequest {
+func (c *Client) GetBucketCorsRequest(input *types.GetBucketCorsInput) GetBucketCorsRequest {
 	op := &aws.Operation{
 		Name:       opGetBucketCors,
 		HTTPMethod: "GET",
@@ -106,10 +45,10 @@ func (c *Client) GetBucketCorsRequest(input *GetBucketCorsInput) GetBucketCorsRe
 	}
 
 	if input == nil {
-		input = &GetBucketCorsInput{}
+		input = &types.GetBucketCorsInput{}
 	}
 
-	req := c.newRequest(op, input, &GetBucketCorsOutput{})
+	req := c.newRequest(op, input, &types.GetBucketCorsOutput{})
 	return GetBucketCorsRequest{Request: req, Input: input, Copy: c.GetBucketCorsRequest}
 }
 
@@ -117,8 +56,8 @@ func (c *Client) GetBucketCorsRequest(input *GetBucketCorsInput) GetBucketCorsRe
 // GetBucketCors API operation.
 type GetBucketCorsRequest struct {
 	*aws.Request
-	Input *GetBucketCorsInput
-	Copy  func(*GetBucketCorsInput) GetBucketCorsRequest
+	Input *types.GetBucketCorsInput
+	Copy  func(*types.GetBucketCorsInput) GetBucketCorsRequest
 }
 
 // Send marshals and sends the GetBucketCors API request.
@@ -130,7 +69,7 @@ func (r GetBucketCorsRequest) Send(ctx context.Context) (*GetBucketCorsResponse,
 	}
 
 	resp := &GetBucketCorsResponse{
-		GetBucketCorsOutput: r.Request.Data.(*GetBucketCorsOutput),
+		GetBucketCorsOutput: r.Request.Data.(*types.GetBucketCorsOutput),
 		response:            &aws.Response{Request: r.Request},
 	}
 
@@ -140,7 +79,7 @@ func (r GetBucketCorsRequest) Send(ctx context.Context) (*GetBucketCorsResponse,
 // GetBucketCorsResponse is the response type for the
 // GetBucketCors API operation.
 type GetBucketCorsResponse struct {
-	*GetBucketCorsOutput
+	*types.GetBucketCorsOutput
 
 	response *aws.Response
 }

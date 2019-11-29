@@ -4,70 +4,10 @@ package ssm
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ssm/types"
 )
-
-type PutInventoryInput struct {
-	_ struct{} `type:"structure"`
-
-	// One or more instance IDs where you want to add or update inventory items.
-	//
-	// InstanceId is a required field
-	InstanceId *string `type:"string" required:"true"`
-
-	// The inventory items that you want to add or update on instances.
-	//
-	// Items is a required field
-	Items []InventoryItem `min:"1" type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s PutInventoryInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *PutInventoryInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "PutInventoryInput"}
-
-	if s.InstanceId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("InstanceId"))
-	}
-
-	if s.Items == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Items"))
-	}
-	if s.Items != nil && len(s.Items) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Items", 1))
-	}
-	if s.Items != nil {
-		for i, v := range s.Items {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Items", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type PutInventoryOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Information about the request.
-	Message *string `type:"string"`
-}
-
-// String returns the string representation
-func (s PutInventoryOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opPutInventory = "PutInventory"
 
@@ -86,7 +26,7 @@ const opPutInventory = "PutInventory"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/PutInventory
-func (c *Client) PutInventoryRequest(input *PutInventoryInput) PutInventoryRequest {
+func (c *Client) PutInventoryRequest(input *types.PutInventoryInput) PutInventoryRequest {
 	op := &aws.Operation{
 		Name:       opPutInventory,
 		HTTPMethod: "POST",
@@ -94,10 +34,10 @@ func (c *Client) PutInventoryRequest(input *PutInventoryInput) PutInventoryReque
 	}
 
 	if input == nil {
-		input = &PutInventoryInput{}
+		input = &types.PutInventoryInput{}
 	}
 
-	req := c.newRequest(op, input, &PutInventoryOutput{})
+	req := c.newRequest(op, input, &types.PutInventoryOutput{})
 	return PutInventoryRequest{Request: req, Input: input, Copy: c.PutInventoryRequest}
 }
 
@@ -105,8 +45,8 @@ func (c *Client) PutInventoryRequest(input *PutInventoryInput) PutInventoryReque
 // PutInventory API operation.
 type PutInventoryRequest struct {
 	*aws.Request
-	Input *PutInventoryInput
-	Copy  func(*PutInventoryInput) PutInventoryRequest
+	Input *types.PutInventoryInput
+	Copy  func(*types.PutInventoryInput) PutInventoryRequest
 }
 
 // Send marshals and sends the PutInventory API request.
@@ -118,7 +58,7 @@ func (r PutInventoryRequest) Send(ctx context.Context) (*PutInventoryResponse, e
 	}
 
 	resp := &PutInventoryResponse{
-		PutInventoryOutput: r.Request.Data.(*PutInventoryOutput),
+		PutInventoryOutput: r.Request.Data.(*types.PutInventoryOutput),
 		response:           &aws.Response{Request: r.Request},
 	}
 
@@ -128,7 +68,7 @@ func (r PutInventoryRequest) Send(ctx context.Context) (*PutInventoryResponse, e
 // PutInventoryResponse is the response type for the
 // PutInventory API operation.
 type PutInventoryResponse struct {
-	*PutInventoryOutput
+	*types.PutInventoryOutput
 
 	response *aws.Response
 }

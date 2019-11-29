@@ -12,6 +12,8 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws/awserr"
 	"github.com/aws/aws-sdk-go-v2/aws/external"
 	"github.com/aws/aws-sdk-go-v2/service/efs"
+	"github.com/aws/aws-sdk-go-v2/service/efs/enums"
+	"github.com/aws/aws-sdk-go-v2/service/efs/types"
 )
 
 var _ time.Duration
@@ -37,10 +39,10 @@ func ExampleClient_CreateFileSystemRequest_shared00() {
 	}
 
 	svc := efs.New(cfg)
-	input := &efs.CreateFileSystemInput{
+	input := &types.CreateFileSystemInput{
 		CreationToken:   aws.String("tokenstring"),
-		PerformanceMode: efs.PerformanceModeGeneralPurpose,
-		Tags: []efs.Tag{
+		PerformanceMode: enums.PerformanceModeGeneralPurpose,
+		Tags: []types.Tag{
 			{
 				Key:   aws.String("Name"),
 				Value: aws.String("MyFileSystem"),
@@ -89,7 +91,7 @@ func ExampleClient_CreateMountTargetRequest_shared00() {
 	}
 
 	svc := efs.New(cfg)
-	input := &efs.CreateMountTargetInput{
+	input := &types.CreateMountTargetInput{
 		FileSystemId: aws.String("fs-01234567"),
 		SubnetId:     aws.String("subnet-1234abcd"),
 	}
@@ -147,9 +149,9 @@ func ExampleClient_CreateTagsRequest_shared00() {
 	}
 
 	svc := efs.New(cfg)
-	input := &efs.CreateTagsInput{
+	input := &types.CreateTagsInput{
 		FileSystemId: aws.String("fs-01234567"),
-		Tags: []efs.Tag{
+		Tags: []types.Tag{
 			{
 				Key:   aws.String("Name"),
 				Value: aws.String("MyFileSystem"),
@@ -192,7 +194,7 @@ func ExampleClient_DeleteFileSystemRequest_shared00() {
 	}
 
 	svc := efs.New(cfg)
-	input := &efs.DeleteFileSystemInput{
+	input := &types.DeleteFileSystemInput{
 		FileSystemId: aws.String("fs-01234567"),
 	}
 
@@ -233,7 +235,7 @@ func ExampleClient_DeleteMountTargetRequest_shared00() {
 	}
 
 	svc := efs.New(cfg)
-	input := &efs.DeleteMountTargetInput{
+	input := &types.DeleteMountTargetInput{
 		MountTargetId: aws.String("fsmt-12340abc"),
 	}
 
@@ -274,7 +276,7 @@ func ExampleClient_DeleteTagsRequest_shared00() {
 	}
 
 	svc := efs.New(cfg)
-	input := &efs.DeleteTagsInput{
+	input := &types.DeleteTagsInput{
 		FileSystemId: aws.String("fs-01234567"),
 		TagKeys: []string{
 			"Name",
@@ -316,7 +318,7 @@ func ExampleClient_DescribeFileSystemsRequest_shared00() {
 	}
 
 	svc := efs.New(cfg)
-	input := &efs.DescribeFileSystemsInput{}
+	input := &types.DescribeFileSystemsInput{}
 
 	req := svc.DescribeFileSystemsRequest(input)
 	result, err := req.Send(context.Background())
@@ -355,7 +357,7 @@ func ExampleClient_DescribeLifecycleConfigurationRequest_shared00() {
 	}
 
 	svc := efs.New(cfg)
-	input := &efs.DescribeLifecycleConfigurationInput{
+	input := &types.DescribeLifecycleConfigurationInput{
 		FileSystemId: aws.String("fs-01234567"),
 	}
 
@@ -394,7 +396,7 @@ func ExampleClient_DescribeMountTargetSecurityGroupsRequest_shared00() {
 	}
 
 	svc := efs.New(cfg)
-	input := &efs.DescribeMountTargetSecurityGroupsInput{
+	input := &types.DescribeMountTargetSecurityGroupsInput{
 		MountTargetId: aws.String("fsmt-12340abc"),
 	}
 
@@ -435,7 +437,7 @@ func ExampleClient_DescribeMountTargetsRequest_shared00() {
 	}
 
 	svc := efs.New(cfg)
-	input := &efs.DescribeMountTargetsInput{
+	input := &types.DescribeMountTargetsInput{
 		FileSystemId: aws.String("fs-01234567"),
 	}
 
@@ -476,7 +478,7 @@ func ExampleClient_DescribeTagsRequest_shared00() {
 	}
 
 	svc := efs.New(cfg)
-	input := &efs.DescribeTagsInput{
+	input := &types.DescribeTagsInput{
 		FileSystemId: aws.String("fs-01234567"),
 	}
 
@@ -516,7 +518,7 @@ func ExampleClient_ModifyMountTargetSecurityGroupsRequest_shared00() {
 	}
 
 	svc := efs.New(cfg)
-	input := &efs.ModifyMountTargetSecurityGroupsInput{
+	input := &types.ModifyMountTargetSecurityGroupsInput{
 		MountTargetId: aws.String("fsmt-12340abc"),
 		SecurityGroups: []string{
 			"sg-abcd1234",
@@ -567,11 +569,11 @@ func ExampleClient_PutLifecycleConfigurationRequest_shared00() {
 	}
 
 	svc := efs.New(cfg)
-	input := &efs.PutLifecycleConfigurationInput{
+	input := &types.PutLifecycleConfigurationInput{
 		FileSystemId: aws.String("fs-01234567"),
-		LifecyclePolicies: []efs.LifecyclePolicy{
+		LifecyclePolicies: []types.LifecyclePolicy{
 			{
-				TransitionToIA: efs.TransitionToIARulesAfter30Days,
+				TransitionToIA: enums.TransitionToIARulesAfter30Days,
 			},
 		},
 	}

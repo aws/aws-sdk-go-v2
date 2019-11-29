@@ -6,101 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/guardduty/types"
 )
-
-type ListDetectorsInput struct {
-	_ struct{} `type:"structure"`
-
-	// You can use this parameter to indicate the maximum number of items you want
-	// in the response. The default value is 50. The maximum value is 50.
-	MaxResults *int64 `location:"querystring" locationName:"maxResults" min:"1" type:"integer"`
-
-	// You can use this parameter when paginating results. Set the value of this
-	// parameter to null on your first call to the list action. For subsequent calls
-	// to the action fill nextToken in the request with the value of NextToken from
-	// the previous response to continue listing data.
-	NextToken *string `location:"querystring" locationName:"nextToken" type:"string"`
-}
-
-// String returns the string representation
-func (s ListDetectorsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListDetectorsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListDetectorsInput"}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListDetectorsInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.MaxResults != nil {
-		v := *s.MaxResults
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "maxResults", protocol.Int64Value(v), metadata)
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type ListDetectorsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A list of detector Ids.
-	//
-	// DetectorIds is a required field
-	DetectorIds []string `locationName:"detectorIds" type:"list" required:"true"`
-
-	// Pagination parameter to be used on the next list operation to retrieve more
-	// items.
-	NextToken *string `locationName:"nextToken" type:"string"`
-}
-
-// String returns the string representation
-func (s ListDetectorsOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListDetectorsOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.DetectorIds != nil {
-		v := s.DetectorIds
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "detectorIds", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
-		}
-		ls0.End()
-
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opListDetectors = "ListDetectors"
 
@@ -117,7 +24,7 @@ const opListDetectors = "ListDetectors"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/ListDetectors
-func (c *Client) ListDetectorsRequest(input *ListDetectorsInput) ListDetectorsRequest {
+func (c *Client) ListDetectorsRequest(input *types.ListDetectorsInput) ListDetectorsRequest {
 	op := &aws.Operation{
 		Name:       opListDetectors,
 		HTTPMethod: "GET",
@@ -131,10 +38,10 @@ func (c *Client) ListDetectorsRequest(input *ListDetectorsInput) ListDetectorsRe
 	}
 
 	if input == nil {
-		input = &ListDetectorsInput{}
+		input = &types.ListDetectorsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListDetectorsOutput{})
+	req := c.newRequest(op, input, &types.ListDetectorsOutput{})
 	return ListDetectorsRequest{Request: req, Input: input, Copy: c.ListDetectorsRequest}
 }
 
@@ -142,8 +49,8 @@ func (c *Client) ListDetectorsRequest(input *ListDetectorsInput) ListDetectorsRe
 // ListDetectors API operation.
 type ListDetectorsRequest struct {
 	*aws.Request
-	Input *ListDetectorsInput
-	Copy  func(*ListDetectorsInput) ListDetectorsRequest
+	Input *types.ListDetectorsInput
+	Copy  func(*types.ListDetectorsInput) ListDetectorsRequest
 }
 
 // Send marshals and sends the ListDetectors API request.
@@ -155,7 +62,7 @@ func (r ListDetectorsRequest) Send(ctx context.Context) (*ListDetectorsResponse,
 	}
 
 	resp := &ListDetectorsResponse{
-		ListDetectorsOutput: r.Request.Data.(*ListDetectorsOutput),
+		ListDetectorsOutput: r.Request.Data.(*types.ListDetectorsOutput),
 		response:            &aws.Response{Request: r.Request},
 	}
 
@@ -185,7 +92,7 @@ func NewListDetectorsPaginator(req ListDetectorsRequest) ListDetectorsPaginator 
 	return ListDetectorsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListDetectorsInput
+				var inCpy *types.ListDetectorsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -205,14 +112,14 @@ type ListDetectorsPaginator struct {
 	aws.Pager
 }
 
-func (p *ListDetectorsPaginator) CurrentPage() *ListDetectorsOutput {
-	return p.Pager.CurrentPage().(*ListDetectorsOutput)
+func (p *ListDetectorsPaginator) CurrentPage() *types.ListDetectorsOutput {
+	return p.Pager.CurrentPage().(*types.ListDetectorsOutput)
 }
 
 // ListDetectorsResponse is the response type for the
 // ListDetectors API operation.
 type ListDetectorsResponse struct {
-	*ListDetectorsOutput
+	*types.ListDetectorsOutput
 
 	response *aws.Response
 }

@@ -6,66 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/fms/types"
 )
-
-type GetComplianceDetailInput struct {
-	_ struct{} `type:"structure"`
-
-	// The AWS account that owns the resources that you want to get the details
-	// for.
-	//
-	// MemberAccount is a required field
-	MemberAccount *string `min:"1" type:"string" required:"true"`
-
-	// The ID of the policy that you want to get the details for. PolicyId is returned
-	// by PutPolicy and by ListPolicies.
-	//
-	// PolicyId is a required field
-	PolicyId *string `min:"36" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetComplianceDetailInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetComplianceDetailInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetComplianceDetailInput"}
-
-	if s.MemberAccount == nil {
-		invalidParams.Add(aws.NewErrParamRequired("MemberAccount"))
-	}
-	if s.MemberAccount != nil && len(*s.MemberAccount) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("MemberAccount", 1))
-	}
-
-	if s.PolicyId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("PolicyId"))
-	}
-	if s.PolicyId != nil && len(*s.PolicyId) < 36 {
-		invalidParams.Add(aws.NewErrParamMinLen("PolicyId", 36))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type GetComplianceDetailOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Information about the resources and the policy that you specified in the
-	// GetComplianceDetail request.
-	PolicyComplianceDetail *PolicyComplianceDetail `type:"structure"`
-}
-
-// String returns the string representation
-func (s GetComplianceDetailOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetComplianceDetail = "GetComplianceDetail"
 
@@ -88,7 +30,7 @@ const opGetComplianceDetail = "GetComplianceDetail"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/GetComplianceDetail
-func (c *Client) GetComplianceDetailRequest(input *GetComplianceDetailInput) GetComplianceDetailRequest {
+func (c *Client) GetComplianceDetailRequest(input *types.GetComplianceDetailInput) GetComplianceDetailRequest {
 	op := &aws.Operation{
 		Name:       opGetComplianceDetail,
 		HTTPMethod: "POST",
@@ -96,10 +38,10 @@ func (c *Client) GetComplianceDetailRequest(input *GetComplianceDetailInput) Get
 	}
 
 	if input == nil {
-		input = &GetComplianceDetailInput{}
+		input = &types.GetComplianceDetailInput{}
 	}
 
-	req := c.newRequest(op, input, &GetComplianceDetailOutput{})
+	req := c.newRequest(op, input, &types.GetComplianceDetailOutput{})
 	return GetComplianceDetailRequest{Request: req, Input: input, Copy: c.GetComplianceDetailRequest}
 }
 
@@ -107,8 +49,8 @@ func (c *Client) GetComplianceDetailRequest(input *GetComplianceDetailInput) Get
 // GetComplianceDetail API operation.
 type GetComplianceDetailRequest struct {
 	*aws.Request
-	Input *GetComplianceDetailInput
-	Copy  func(*GetComplianceDetailInput) GetComplianceDetailRequest
+	Input *types.GetComplianceDetailInput
+	Copy  func(*types.GetComplianceDetailInput) GetComplianceDetailRequest
 }
 
 // Send marshals and sends the GetComplianceDetail API request.
@@ -120,7 +62,7 @@ func (r GetComplianceDetailRequest) Send(ctx context.Context) (*GetComplianceDet
 	}
 
 	resp := &GetComplianceDetailResponse{
-		GetComplianceDetailOutput: r.Request.Data.(*GetComplianceDetailOutput),
+		GetComplianceDetailOutput: r.Request.Data.(*types.GetComplianceDetailOutput),
 		response:                  &aws.Response{Request: r.Request},
 	}
 
@@ -130,7 +72,7 @@ func (r GetComplianceDetailRequest) Send(ctx context.Context) (*GetComplianceDet
 // GetComplianceDetailResponse is the response type for the
 // GetComplianceDetail API operation.
 type GetComplianceDetailResponse struct {
-	*GetComplianceDetailOutput
+	*types.GetComplianceDetailOutput
 
 	response *aws.Response
 }

@@ -6,75 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/licensemanager/types"
 )
-
-type CreateLicenseConfigurationInput struct {
-	_ struct{} `type:"structure"`
-
-	// Human-friendly description of the license configuration.
-	Description *string `type:"string"`
-
-	// Number of licenses managed by the license configuration.
-	LicenseCount *int64 `type:"long"`
-
-	// Flag indicating whether hard or soft license enforcement is used. Exceeding
-	// a hard limit results in the blocked deployment of new instances.
-	LicenseCountHardLimit *bool `type:"boolean"`
-
-	// Dimension to use to track the license inventory.
-	//
-	// LicenseCountingType is a required field
-	LicenseCountingType LicenseCountingType `type:"string" required:"true" enum:"true"`
-
-	// Array of configured License Manager rules.
-	LicenseRules []string `type:"list"`
-
-	// Name of the license configuration.
-	//
-	// Name is a required field
-	Name *string `type:"string" required:"true"`
-
-	// The tags to apply to the resources during launch. You can only tag instances
-	// and volumes on launch. The specified tags are applied to all instances or
-	// volumes that are created during launch. To tag a resource after it has been
-	// created, see CreateTags .
-	Tags []Tag `type:"list"`
-}
-
-// String returns the string representation
-func (s CreateLicenseConfigurationInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateLicenseConfigurationInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateLicenseConfigurationInput"}
-	if len(s.LicenseCountingType) == 0 {
-		invalidParams.Add(aws.NewErrParamRequired("LicenseCountingType"))
-	}
-
-	if s.Name == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Name"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type CreateLicenseConfigurationOutput struct {
-	_ struct{} `type:"structure"`
-
-	// ARN of the license configuration object after its creation.
-	LicenseConfigurationArn *string `type:"string"`
-}
-
-// String returns the string representation
-func (s CreateLicenseConfigurationOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCreateLicenseConfiguration = "CreateLicenseConfiguration"
 
@@ -97,7 +30,7 @@ const opCreateLicenseConfiguration = "CreateLicenseConfiguration"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/license-manager-2018-08-01/CreateLicenseConfiguration
-func (c *Client) CreateLicenseConfigurationRequest(input *CreateLicenseConfigurationInput) CreateLicenseConfigurationRequest {
+func (c *Client) CreateLicenseConfigurationRequest(input *types.CreateLicenseConfigurationInput) CreateLicenseConfigurationRequest {
 	op := &aws.Operation{
 		Name:       opCreateLicenseConfiguration,
 		HTTPMethod: "POST",
@@ -105,10 +38,10 @@ func (c *Client) CreateLicenseConfigurationRequest(input *CreateLicenseConfigura
 	}
 
 	if input == nil {
-		input = &CreateLicenseConfigurationInput{}
+		input = &types.CreateLicenseConfigurationInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateLicenseConfigurationOutput{})
+	req := c.newRequest(op, input, &types.CreateLicenseConfigurationOutput{})
 	return CreateLicenseConfigurationRequest{Request: req, Input: input, Copy: c.CreateLicenseConfigurationRequest}
 }
 
@@ -116,8 +49,8 @@ func (c *Client) CreateLicenseConfigurationRequest(input *CreateLicenseConfigura
 // CreateLicenseConfiguration API operation.
 type CreateLicenseConfigurationRequest struct {
 	*aws.Request
-	Input *CreateLicenseConfigurationInput
-	Copy  func(*CreateLicenseConfigurationInput) CreateLicenseConfigurationRequest
+	Input *types.CreateLicenseConfigurationInput
+	Copy  func(*types.CreateLicenseConfigurationInput) CreateLicenseConfigurationRequest
 }
 
 // Send marshals and sends the CreateLicenseConfiguration API request.
@@ -129,7 +62,7 @@ func (r CreateLicenseConfigurationRequest) Send(ctx context.Context) (*CreateLic
 	}
 
 	resp := &CreateLicenseConfigurationResponse{
-		CreateLicenseConfigurationOutput: r.Request.Data.(*CreateLicenseConfigurationOutput),
+		CreateLicenseConfigurationOutput: r.Request.Data.(*types.CreateLicenseConfigurationOutput),
 		response:                         &aws.Response{Request: r.Request},
 	}
 
@@ -139,7 +72,7 @@ func (r CreateLicenseConfigurationRequest) Send(ctx context.Context) (*CreateLic
 // CreateLicenseConfigurationResponse is the response type for the
 // CreateLicenseConfiguration API operation.
 type CreateLicenseConfigurationResponse struct {
-	*CreateLicenseConfigurationOutput
+	*types.CreateLicenseConfigurationOutput
 
 	response *aws.Response
 }

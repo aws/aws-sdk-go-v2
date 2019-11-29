@@ -6,54 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-type DeleteTransitGatewayInput struct {
-	_ struct{} `type:"structure"`
-
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have
-	// the required permissions, the error response is DryRunOperation. Otherwise,
-	// it is UnauthorizedOperation.
-	DryRun *bool `type:"boolean"`
-
-	// The ID of the transit gateway.
-	//
-	// TransitGatewayId is a required field
-	TransitGatewayId *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteTransitGatewayInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteTransitGatewayInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteTransitGatewayInput"}
-
-	if s.TransitGatewayId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("TransitGatewayId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteTransitGatewayOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Information about the deleted transit gateway.
-	TransitGateway *TransitGateway `locationName:"transitGateway" type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteTransitGatewayOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteTransitGateway = "DeleteTransitGateway"
 
@@ -70,7 +24,7 @@ const opDeleteTransitGateway = "DeleteTransitGateway"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteTransitGateway
-func (c *Client) DeleteTransitGatewayRequest(input *DeleteTransitGatewayInput) DeleteTransitGatewayRequest {
+func (c *Client) DeleteTransitGatewayRequest(input *types.DeleteTransitGatewayInput) DeleteTransitGatewayRequest {
 	op := &aws.Operation{
 		Name:       opDeleteTransitGateway,
 		HTTPMethod: "POST",
@@ -78,10 +32,10 @@ func (c *Client) DeleteTransitGatewayRequest(input *DeleteTransitGatewayInput) D
 	}
 
 	if input == nil {
-		input = &DeleteTransitGatewayInput{}
+		input = &types.DeleteTransitGatewayInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteTransitGatewayOutput{})
+	req := c.newRequest(op, input, &types.DeleteTransitGatewayOutput{})
 	return DeleteTransitGatewayRequest{Request: req, Input: input, Copy: c.DeleteTransitGatewayRequest}
 }
 
@@ -89,8 +43,8 @@ func (c *Client) DeleteTransitGatewayRequest(input *DeleteTransitGatewayInput) D
 // DeleteTransitGateway API operation.
 type DeleteTransitGatewayRequest struct {
 	*aws.Request
-	Input *DeleteTransitGatewayInput
-	Copy  func(*DeleteTransitGatewayInput) DeleteTransitGatewayRequest
+	Input *types.DeleteTransitGatewayInput
+	Copy  func(*types.DeleteTransitGatewayInput) DeleteTransitGatewayRequest
 }
 
 // Send marshals and sends the DeleteTransitGateway API request.
@@ -102,7 +56,7 @@ func (r DeleteTransitGatewayRequest) Send(ctx context.Context) (*DeleteTransitGa
 	}
 
 	resp := &DeleteTransitGatewayResponse{
-		DeleteTransitGatewayOutput: r.Request.Data.(*DeleteTransitGatewayOutput),
+		DeleteTransitGatewayOutput: r.Request.Data.(*types.DeleteTransitGatewayOutput),
 		response:                   &aws.Response{Request: r.Request},
 	}
 
@@ -112,7 +66,7 @@ func (r DeleteTransitGatewayRequest) Send(ctx context.Context) (*DeleteTransitGa
 // DeleteTransitGatewayResponse is the response type for the
 // DeleteTransitGateway API operation.
 type DeleteTransitGatewayResponse struct {
-	*DeleteTransitGatewayOutput
+	*types.DeleteTransitGatewayOutput
 
 	response *aws.Response
 }

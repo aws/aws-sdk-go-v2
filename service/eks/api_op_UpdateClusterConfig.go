@@ -6,115 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/eks/types"
 )
-
-type UpdateClusterConfigInput struct {
-	_ struct{} `type:"structure"`
-
-	// Unique, case-sensitive identifier that you provide to ensure the idempotency
-	// of the request.
-	ClientRequestToken *string `locationName:"clientRequestToken" type:"string" idempotencyToken:"true"`
-
-	// Enable or disable exporting the Kubernetes control plane logs for your cluster
-	// to CloudWatch Logs. By default, cluster control plane logs aren't exported
-	// to CloudWatch Logs. For more information, see Amazon EKS Cluster Control
-	// Plane Logs (https://docs.aws.amazon.com/eks/latest/userguide/control-plane-logs.html)
-	// in the Amazon EKS User Guide .
-	//
-	// CloudWatch Logs ingestion, archive storage, and data scanning rates apply
-	// to exported control plane logs. For more information, see Amazon CloudWatch
-	// Pricing (http://aws.amazon.com/cloudwatch/pricing/).
-	Logging *Logging `locationName:"logging" type:"structure"`
-
-	// The name of the Amazon EKS cluster to update.
-	//
-	// Name is a required field
-	Name *string `location:"uri" locationName:"name" type:"string" required:"true"`
-
-	// An object representing the VPC configuration to use for an Amazon EKS cluster.
-	ResourcesVpcConfig *VpcConfigRequest `locationName:"resourcesVpcConfig" type:"structure"`
-}
-
-// String returns the string representation
-func (s UpdateClusterConfigInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateClusterConfigInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateClusterConfigInput"}
-
-	if s.Name == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Name"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s UpdateClusterConfigInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	var ClientRequestToken string
-	if s.ClientRequestToken != nil {
-		ClientRequestToken = *s.ClientRequestToken
-	} else {
-		ClientRequestToken = protocol.GetIdempotencyToken()
-	}
-	{
-		v := ClientRequestToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "clientRequestToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Logging != nil {
-		v := s.Logging
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "logging", v, metadata)
-	}
-	if s.ResourcesVpcConfig != nil {
-		v := s.ResourcesVpcConfig
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "resourcesVpcConfig", v, metadata)
-	}
-	if s.Name != nil {
-		v := *s.Name
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type UpdateClusterConfigOutput struct {
-	_ struct{} `type:"structure"`
-
-	// An object representing an asynchronous update.
-	Update *Update `locationName:"update" type:"structure"`
-}
-
-// String returns the string representation
-func (s UpdateClusterConfigOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s UpdateClusterConfigOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.Update != nil {
-		v := s.Update
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "update", v, metadata)
-	}
-	return nil
-}
 
 const opUpdateClusterConfig = "UpdateClusterConfig"
 
@@ -158,7 +51,7 @@ const opUpdateClusterConfig = "UpdateClusterConfig"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/UpdateClusterConfig
-func (c *Client) UpdateClusterConfigRequest(input *UpdateClusterConfigInput) UpdateClusterConfigRequest {
+func (c *Client) UpdateClusterConfigRequest(input *types.UpdateClusterConfigInput) UpdateClusterConfigRequest {
 	op := &aws.Operation{
 		Name:       opUpdateClusterConfig,
 		HTTPMethod: "POST",
@@ -166,10 +59,10 @@ func (c *Client) UpdateClusterConfigRequest(input *UpdateClusterConfigInput) Upd
 	}
 
 	if input == nil {
-		input = &UpdateClusterConfigInput{}
+		input = &types.UpdateClusterConfigInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateClusterConfigOutput{})
+	req := c.newRequest(op, input, &types.UpdateClusterConfigOutput{})
 	return UpdateClusterConfigRequest{Request: req, Input: input, Copy: c.UpdateClusterConfigRequest}
 }
 
@@ -177,8 +70,8 @@ func (c *Client) UpdateClusterConfigRequest(input *UpdateClusterConfigInput) Upd
 // UpdateClusterConfig API operation.
 type UpdateClusterConfigRequest struct {
 	*aws.Request
-	Input *UpdateClusterConfigInput
-	Copy  func(*UpdateClusterConfigInput) UpdateClusterConfigRequest
+	Input *types.UpdateClusterConfigInput
+	Copy  func(*types.UpdateClusterConfigInput) UpdateClusterConfigRequest
 }
 
 // Send marshals and sends the UpdateClusterConfig API request.
@@ -190,7 +83,7 @@ func (r UpdateClusterConfigRequest) Send(ctx context.Context) (*UpdateClusterCon
 	}
 
 	resp := &UpdateClusterConfigResponse{
-		UpdateClusterConfigOutput: r.Request.Data.(*UpdateClusterConfigOutput),
+		UpdateClusterConfigOutput: r.Request.Data.(*types.UpdateClusterConfigOutput),
 		response:                  &aws.Response{Request: r.Request},
 	}
 
@@ -200,7 +93,7 @@ func (r UpdateClusterConfigRequest) Send(ctx context.Context) (*UpdateClusterCon
 // UpdateClusterConfigResponse is the response type for the
 // UpdateClusterConfig API operation.
 type UpdateClusterConfigResponse struct {
-	*UpdateClusterConfigOutput
+	*types.UpdateClusterConfigOutput
 
 	response *aws.Response
 }

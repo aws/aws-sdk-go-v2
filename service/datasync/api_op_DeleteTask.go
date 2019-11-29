@@ -6,46 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/datasync/types"
 )
-
-// DeleteTask
-type DeleteTaskInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the task to delete.
-	//
-	// TaskArn is a required field
-	TaskArn *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteTaskInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteTaskInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteTaskInput"}
-
-	if s.TaskArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("TaskArn"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteTaskOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteTaskOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteTask = "DeleteTask"
 
@@ -62,7 +24,7 @@ const opDeleteTask = "DeleteTask"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/DeleteTask
-func (c *Client) DeleteTaskRequest(input *DeleteTaskInput) DeleteTaskRequest {
+func (c *Client) DeleteTaskRequest(input *types.DeleteTaskInput) DeleteTaskRequest {
 	op := &aws.Operation{
 		Name:       opDeleteTask,
 		HTTPMethod: "POST",
@@ -70,10 +32,10 @@ func (c *Client) DeleteTaskRequest(input *DeleteTaskInput) DeleteTaskRequest {
 	}
 
 	if input == nil {
-		input = &DeleteTaskInput{}
+		input = &types.DeleteTaskInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteTaskOutput{})
+	req := c.newRequest(op, input, &types.DeleteTaskOutput{})
 	return DeleteTaskRequest{Request: req, Input: input, Copy: c.DeleteTaskRequest}
 }
 
@@ -81,8 +43,8 @@ func (c *Client) DeleteTaskRequest(input *DeleteTaskInput) DeleteTaskRequest {
 // DeleteTask API operation.
 type DeleteTaskRequest struct {
 	*aws.Request
-	Input *DeleteTaskInput
-	Copy  func(*DeleteTaskInput) DeleteTaskRequest
+	Input *types.DeleteTaskInput
+	Copy  func(*types.DeleteTaskInput) DeleteTaskRequest
 }
 
 // Send marshals and sends the DeleteTask API request.
@@ -94,7 +56,7 @@ func (r DeleteTaskRequest) Send(ctx context.Context) (*DeleteTaskResponse, error
 	}
 
 	resp := &DeleteTaskResponse{
-		DeleteTaskOutput: r.Request.Data.(*DeleteTaskOutput),
+		DeleteTaskOutput: r.Request.Data.(*types.DeleteTaskOutput),
 		response:         &aws.Response{Request: r.Request},
 	}
 
@@ -104,7 +66,7 @@ func (r DeleteTaskRequest) Send(ctx context.Context) (*DeleteTaskResponse, error
 // DeleteTaskResponse is the response type for the
 // DeleteTask API operation.
 type DeleteTaskResponse struct {
-	*DeleteTaskOutput
+	*types.DeleteTaskOutput
 
 	response *aws.Response
 }

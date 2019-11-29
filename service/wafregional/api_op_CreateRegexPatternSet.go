@@ -6,70 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/service/waf"
+	"github.com/aws/aws-sdk-go-v2/service/wafregional/types"
 )
-
-type CreateRegexPatternSetInput struct {
-	_ struct{} `type:"structure"`
-
-	// The value returned by the most recent call to GetChangeToken.
-	//
-	// ChangeToken is a required field
-	ChangeToken *string `min:"1" type:"string" required:"true"`
-
-	// A friendly name or description of the RegexPatternSet. You can't change Name
-	// after you create a RegexPatternSet.
-	//
-	// Name is a required field
-	Name *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s CreateRegexPatternSetInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateRegexPatternSetInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateRegexPatternSetInput"}
-
-	if s.ChangeToken == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ChangeToken"))
-	}
-	if s.ChangeToken != nil && len(*s.ChangeToken) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ChangeToken", 1))
-	}
-
-	if s.Name == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Name"))
-	}
-	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type CreateRegexPatternSetOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The ChangeToken that you used to submit the CreateRegexPatternSet request.
-	// You can also use this value to query the status of the request. For more
-	// information, see GetChangeTokenStatus.
-	ChangeToken *string `min:"1" type:"string"`
-
-	// A RegexPatternSet that contains no objects.
-	RegexPatternSet *waf.RegexPatternSet `type:"structure"`
-}
-
-// String returns the string representation
-func (s CreateRegexPatternSetOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCreateRegexPatternSet = "CreateRegexPatternSet"
 
@@ -104,7 +42,7 @@ const opCreateRegexPatternSet = "CreateRegexPatternSet"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/CreateRegexPatternSet
-func (c *Client) CreateRegexPatternSetRequest(input *CreateRegexPatternSetInput) CreateRegexPatternSetRequest {
+func (c *Client) CreateRegexPatternSetRequest(input *types.CreateRegexPatternSetInput) CreateRegexPatternSetRequest {
 	op := &aws.Operation{
 		Name:       opCreateRegexPatternSet,
 		HTTPMethod: "POST",
@@ -112,10 +50,10 @@ func (c *Client) CreateRegexPatternSetRequest(input *CreateRegexPatternSetInput)
 	}
 
 	if input == nil {
-		input = &CreateRegexPatternSetInput{}
+		input = &types.CreateRegexPatternSetInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateRegexPatternSetOutput{})
+	req := c.newRequest(op, input, &types.CreateRegexPatternSetOutput{})
 	return CreateRegexPatternSetRequest{Request: req, Input: input, Copy: c.CreateRegexPatternSetRequest}
 }
 
@@ -123,8 +61,8 @@ func (c *Client) CreateRegexPatternSetRequest(input *CreateRegexPatternSetInput)
 // CreateRegexPatternSet API operation.
 type CreateRegexPatternSetRequest struct {
 	*aws.Request
-	Input *CreateRegexPatternSetInput
-	Copy  func(*CreateRegexPatternSetInput) CreateRegexPatternSetRequest
+	Input *types.CreateRegexPatternSetInput
+	Copy  func(*types.CreateRegexPatternSetInput) CreateRegexPatternSetRequest
 }
 
 // Send marshals and sends the CreateRegexPatternSet API request.
@@ -136,7 +74,7 @@ func (r CreateRegexPatternSetRequest) Send(ctx context.Context) (*CreateRegexPat
 	}
 
 	resp := &CreateRegexPatternSetResponse{
-		CreateRegexPatternSetOutput: r.Request.Data.(*CreateRegexPatternSetOutput),
+		CreateRegexPatternSetOutput: r.Request.Data.(*types.CreateRegexPatternSetOutput),
 		response:                    &aws.Response{Request: r.Request},
 	}
 
@@ -146,7 +84,7 @@ func (r CreateRegexPatternSetRequest) Send(ctx context.Context) (*CreateRegexPat
 // CreateRegexPatternSetResponse is the response type for the
 // CreateRegexPatternSet API operation.
 type CreateRegexPatternSetResponse struct {
-	*CreateRegexPatternSetOutput
+	*types.CreateRegexPatternSetOutput
 
 	response *aws.Response
 }

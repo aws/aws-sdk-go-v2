@@ -6,41 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/iotthingsgraph/types"
 )
-
-type GetNamespaceDeletionStatusInput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s GetNamespaceDeletionStatusInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type GetNamespaceDeletionStatusOutput struct {
-	_ struct{} `type:"structure"`
-
-	// An error code returned by the namespace deletion task.
-	ErrorCode NamespaceDeletionStatusErrorCodes `locationName:"errorCode" type:"string" enum:"true"`
-
-	// An error code returned by the namespace deletion task.
-	ErrorMessage *string `locationName:"errorMessage" type:"string"`
-
-	// The ARN of the namespace that is being deleted.
-	NamespaceArn *string `locationName:"namespaceArn" type:"string"`
-
-	// The name of the namespace that is being deleted.
-	NamespaceName *string `locationName:"namespaceName" type:"string"`
-
-	// The status of the deletion request.
-	Status NamespaceDeletionStatus `locationName:"status" type:"string" enum:"true"`
-}
-
-// String returns the string representation
-func (s GetNamespaceDeletionStatusOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetNamespaceDeletionStatus = "GetNamespaceDeletionStatus"
 
@@ -57,7 +24,7 @@ const opGetNamespaceDeletionStatus = "GetNamespaceDeletionStatus"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iotthingsgraph-2018-09-06/GetNamespaceDeletionStatus
-func (c *Client) GetNamespaceDeletionStatusRequest(input *GetNamespaceDeletionStatusInput) GetNamespaceDeletionStatusRequest {
+func (c *Client) GetNamespaceDeletionStatusRequest(input *types.GetNamespaceDeletionStatusInput) GetNamespaceDeletionStatusRequest {
 	op := &aws.Operation{
 		Name:       opGetNamespaceDeletionStatus,
 		HTTPMethod: "POST",
@@ -65,10 +32,10 @@ func (c *Client) GetNamespaceDeletionStatusRequest(input *GetNamespaceDeletionSt
 	}
 
 	if input == nil {
-		input = &GetNamespaceDeletionStatusInput{}
+		input = &types.GetNamespaceDeletionStatusInput{}
 	}
 
-	req := c.newRequest(op, input, &GetNamespaceDeletionStatusOutput{})
+	req := c.newRequest(op, input, &types.GetNamespaceDeletionStatusOutput{})
 	return GetNamespaceDeletionStatusRequest{Request: req, Input: input, Copy: c.GetNamespaceDeletionStatusRequest}
 }
 
@@ -76,8 +43,8 @@ func (c *Client) GetNamespaceDeletionStatusRequest(input *GetNamespaceDeletionSt
 // GetNamespaceDeletionStatus API operation.
 type GetNamespaceDeletionStatusRequest struct {
 	*aws.Request
-	Input *GetNamespaceDeletionStatusInput
-	Copy  func(*GetNamespaceDeletionStatusInput) GetNamespaceDeletionStatusRequest
+	Input *types.GetNamespaceDeletionStatusInput
+	Copy  func(*types.GetNamespaceDeletionStatusInput) GetNamespaceDeletionStatusRequest
 }
 
 // Send marshals and sends the GetNamespaceDeletionStatus API request.
@@ -89,7 +56,7 @@ func (r GetNamespaceDeletionStatusRequest) Send(ctx context.Context) (*GetNamesp
 	}
 
 	resp := &GetNamespaceDeletionStatusResponse{
-		GetNamespaceDeletionStatusOutput: r.Request.Data.(*GetNamespaceDeletionStatusOutput),
+		GetNamespaceDeletionStatusOutput: r.Request.Data.(*types.GetNamespaceDeletionStatusOutput),
 		response:                         &aws.Response{Request: r.Request},
 	}
 
@@ -99,7 +66,7 @@ func (r GetNamespaceDeletionStatusRequest) Send(ctx context.Context) (*GetNamesp
 // GetNamespaceDeletionStatusResponse is the response type for the
 // GetNamespaceDeletionStatus API operation.
 type GetNamespaceDeletionStatusResponse struct {
-	*GetNamespaceDeletionStatusOutput
+	*types.GetNamespaceDeletionStatusOutput
 
 	response *aws.Response
 }

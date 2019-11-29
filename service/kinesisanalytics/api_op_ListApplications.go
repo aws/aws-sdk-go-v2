@@ -6,61 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/kinesisanalytics/types"
 )
-
-type ListApplicationsInput struct {
-	_ struct{} `type:"structure"`
-
-	// Name of the application to start the list with. When using pagination to
-	// retrieve the list, you don't need to specify this parameter in the first
-	// request. However, in subsequent requests, you add the last application name
-	// from the previous response to get the next page of applications.
-	ExclusiveStartApplicationName *string `min:"1" type:"string"`
-
-	// Maximum number of applications to list.
-	Limit *int64 `min:"1" type:"integer"`
-}
-
-// String returns the string representation
-func (s ListApplicationsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListApplicationsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListApplicationsInput"}
-	if s.ExclusiveStartApplicationName != nil && len(*s.ExclusiveStartApplicationName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ExclusiveStartApplicationName", 1))
-	}
-	if s.Limit != nil && *s.Limit < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("Limit", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ListApplicationsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// List of ApplicationSummary objects.
-	//
-	// ApplicationSummaries is a required field
-	ApplicationSummaries []ApplicationSummary `type:"list" required:"true"`
-
-	// Returns true if there are more applications to retrieve.
-	//
-	// HasMoreApplications is a required field
-	HasMoreApplications *bool `type:"boolean" required:"true"`
-}
-
-// String returns the string representation
-func (s ListApplicationsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListApplications = "ListApplications"
 
@@ -94,7 +41,7 @@ const opListApplications = "ListApplications"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/ListApplications
-func (c *Client) ListApplicationsRequest(input *ListApplicationsInput) ListApplicationsRequest {
+func (c *Client) ListApplicationsRequest(input *types.ListApplicationsInput) ListApplicationsRequest {
 	op := &aws.Operation{
 		Name:       opListApplications,
 		HTTPMethod: "POST",
@@ -102,10 +49,10 @@ func (c *Client) ListApplicationsRequest(input *ListApplicationsInput) ListAppli
 	}
 
 	if input == nil {
-		input = &ListApplicationsInput{}
+		input = &types.ListApplicationsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListApplicationsOutput{})
+	req := c.newRequest(op, input, &types.ListApplicationsOutput{})
 	return ListApplicationsRequest{Request: req, Input: input, Copy: c.ListApplicationsRequest}
 }
 
@@ -113,8 +60,8 @@ func (c *Client) ListApplicationsRequest(input *ListApplicationsInput) ListAppli
 // ListApplications API operation.
 type ListApplicationsRequest struct {
 	*aws.Request
-	Input *ListApplicationsInput
-	Copy  func(*ListApplicationsInput) ListApplicationsRequest
+	Input *types.ListApplicationsInput
+	Copy  func(*types.ListApplicationsInput) ListApplicationsRequest
 }
 
 // Send marshals and sends the ListApplications API request.
@@ -126,7 +73,7 @@ func (r ListApplicationsRequest) Send(ctx context.Context) (*ListApplicationsRes
 	}
 
 	resp := &ListApplicationsResponse{
-		ListApplicationsOutput: r.Request.Data.(*ListApplicationsOutput),
+		ListApplicationsOutput: r.Request.Data.(*types.ListApplicationsOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -136,7 +83,7 @@ func (r ListApplicationsRequest) Send(ctx context.Context) (*ListApplicationsRes
 // ListApplicationsResponse is the response type for the
 // ListApplications API operation.
 type ListApplicationsResponse struct {
-	*ListApplicationsOutput
+	*types.ListApplicationsOutput
 
 	response *aws.Response
 }

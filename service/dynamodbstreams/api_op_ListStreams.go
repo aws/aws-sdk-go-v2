@@ -6,74 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/dynamodbstreams/types"
 )
-
-// Represents the input of a ListStreams operation.
-type ListStreamsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ARN (Amazon Resource Name) of the first item that this operation will
-	// evaluate. Use the value that was returned for LastEvaluatedStreamArn in the
-	// previous operation.
-	ExclusiveStartStreamArn *string `min:"37" type:"string"`
-
-	// The maximum number of streams to return. The upper limit is 100.
-	Limit *int64 `min:"1" type:"integer"`
-
-	// If this parameter is provided, then only the streams associated with this
-	// table name are returned.
-	TableName *string `min:"3" type:"string"`
-}
-
-// String returns the string representation
-func (s ListStreamsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListStreamsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListStreamsInput"}
-	if s.ExclusiveStartStreamArn != nil && len(*s.ExclusiveStartStreamArn) < 37 {
-		invalidParams.Add(aws.NewErrParamMinLen("ExclusiveStartStreamArn", 37))
-	}
-	if s.Limit != nil && *s.Limit < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("Limit", 1))
-	}
-	if s.TableName != nil && len(*s.TableName) < 3 {
-		invalidParams.Add(aws.NewErrParamMinLen("TableName", 3))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Represents the output of a ListStreams operation.
-type ListStreamsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The stream ARN of the item where the operation stopped, inclusive of the
-	// previous result set. Use this value to start a new operation, excluding this
-	// value in the new request.
-	//
-	// If LastEvaluatedStreamArn is empty, then the "last page" of results has been
-	// processed and there is no more data to be retrieved.
-	//
-	// If LastEvaluatedStreamArn is not empty, it does not necessarily mean that
-	// there is more data in the result set. The only way to know when you have
-	// reached the end of the result set is when LastEvaluatedStreamArn is empty.
-	LastEvaluatedStreamArn *string `min:"37" type:"string"`
-
-	// A list of stream descriptors associated with the current account and endpoint.
-	Streams []Stream `type:"list"`
-}
-
-// String returns the string representation
-func (s ListStreamsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListStreams = "ListStreams"
 
@@ -94,7 +28,7 @@ const opListStreams = "ListStreams"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/streams-dynamodb-2012-08-10/ListStreams
-func (c *Client) ListStreamsRequest(input *ListStreamsInput) ListStreamsRequest {
+func (c *Client) ListStreamsRequest(input *types.ListStreamsInput) ListStreamsRequest {
 	op := &aws.Operation{
 		Name:       opListStreams,
 		HTTPMethod: "POST",
@@ -102,10 +36,10 @@ func (c *Client) ListStreamsRequest(input *ListStreamsInput) ListStreamsRequest 
 	}
 
 	if input == nil {
-		input = &ListStreamsInput{}
+		input = &types.ListStreamsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListStreamsOutput{})
+	req := c.newRequest(op, input, &types.ListStreamsOutput{})
 	return ListStreamsRequest{Request: req, Input: input, Copy: c.ListStreamsRequest}
 }
 
@@ -113,8 +47,8 @@ func (c *Client) ListStreamsRequest(input *ListStreamsInput) ListStreamsRequest 
 // ListStreams API operation.
 type ListStreamsRequest struct {
 	*aws.Request
-	Input *ListStreamsInput
-	Copy  func(*ListStreamsInput) ListStreamsRequest
+	Input *types.ListStreamsInput
+	Copy  func(*types.ListStreamsInput) ListStreamsRequest
 }
 
 // Send marshals and sends the ListStreams API request.
@@ -126,7 +60,7 @@ func (r ListStreamsRequest) Send(ctx context.Context) (*ListStreamsResponse, err
 	}
 
 	resp := &ListStreamsResponse{
-		ListStreamsOutput: r.Request.Data.(*ListStreamsOutput),
+		ListStreamsOutput: r.Request.Data.(*types.ListStreamsOutput),
 		response:          &aws.Response{Request: r.Request},
 	}
 
@@ -136,7 +70,7 @@ func (r ListStreamsRequest) Send(ctx context.Context) (*ListStreamsResponse, err
 // ListStreamsResponse is the response type for the
 // ListStreams API operation.
 type ListStreamsResponse struct {
-	*ListStreamsOutput
+	*types.ListStreamsOutput
 
 	response *aws.Response
 }

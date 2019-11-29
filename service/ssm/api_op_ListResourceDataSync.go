@@ -6,54 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ssm/types"
 )
-
-type ListResourceDataSyncInput struct {
-	_ struct{} `type:"structure"`
-
-	// The maximum number of items to return for this call. The call also returns
-	// a token that you can specify in a subsequent call to get the next set of
-	// results.
-	MaxResults *int64 `min:"1" type:"integer"`
-
-	// A token to start the list. Use this token to get the next set of results.
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s ListResourceDataSyncInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListResourceDataSyncInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListResourceDataSyncInput"}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ListResourceDataSyncOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The token for the next set of items to return. Use this token to get the
-	// next set of results.
-	NextToken *string `type:"string"`
-
-	// A list of your current Resource Data Sync configurations and their statuses.
-	ResourceDataSyncItems []ResourceDataSyncItem `type:"list"`
-}
-
-// String returns the string representation
-func (s ListResourceDataSyncOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListResourceDataSync = "ListResourceDataSync"
 
@@ -79,7 +33,7 @@ const opListResourceDataSync = "ListResourceDataSync"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ListResourceDataSync
-func (c *Client) ListResourceDataSyncRequest(input *ListResourceDataSyncInput) ListResourceDataSyncRequest {
+func (c *Client) ListResourceDataSyncRequest(input *types.ListResourceDataSyncInput) ListResourceDataSyncRequest {
 	op := &aws.Operation{
 		Name:       opListResourceDataSync,
 		HTTPMethod: "POST",
@@ -87,10 +41,10 @@ func (c *Client) ListResourceDataSyncRequest(input *ListResourceDataSyncInput) L
 	}
 
 	if input == nil {
-		input = &ListResourceDataSyncInput{}
+		input = &types.ListResourceDataSyncInput{}
 	}
 
-	req := c.newRequest(op, input, &ListResourceDataSyncOutput{})
+	req := c.newRequest(op, input, &types.ListResourceDataSyncOutput{})
 	return ListResourceDataSyncRequest{Request: req, Input: input, Copy: c.ListResourceDataSyncRequest}
 }
 
@@ -98,8 +52,8 @@ func (c *Client) ListResourceDataSyncRequest(input *ListResourceDataSyncInput) L
 // ListResourceDataSync API operation.
 type ListResourceDataSyncRequest struct {
 	*aws.Request
-	Input *ListResourceDataSyncInput
-	Copy  func(*ListResourceDataSyncInput) ListResourceDataSyncRequest
+	Input *types.ListResourceDataSyncInput
+	Copy  func(*types.ListResourceDataSyncInput) ListResourceDataSyncRequest
 }
 
 // Send marshals and sends the ListResourceDataSync API request.
@@ -111,7 +65,7 @@ func (r ListResourceDataSyncRequest) Send(ctx context.Context) (*ListResourceDat
 	}
 
 	resp := &ListResourceDataSyncResponse{
-		ListResourceDataSyncOutput: r.Request.Data.(*ListResourceDataSyncOutput),
+		ListResourceDataSyncOutput: r.Request.Data.(*types.ListResourceDataSyncOutput),
 		response:                   &aws.Response{Request: r.Request},
 	}
 
@@ -121,7 +75,7 @@ func (r ListResourceDataSyncRequest) Send(ctx context.Context) (*ListResourceDat
 // ListResourceDataSyncResponse is the response type for the
 // ListResourceDataSync API operation.
 type ListResourceDataSyncResponse struct {
-	*ListResourceDataSyncOutput
+	*types.ListResourceDataSyncOutput
 
 	response *aws.Response
 }

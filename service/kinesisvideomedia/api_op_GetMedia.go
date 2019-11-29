@@ -4,157 +4,10 @@ package kinesisvideomedia
 
 import (
 	"context"
-	"io"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/kinesisvideomedia/types"
 )
-
-type GetMediaInput struct {
-	_ struct{} `type:"structure"`
-
-	// Identifies the starting chunk to get from the specified stream.
-	//
-	// StartSelector is a required field
-	StartSelector *StartSelector `type:"structure" required:"true"`
-
-	// The ARN of the stream from where you want to get the media content. If you
-	// don't specify the streamARN, you must specify the streamName.
-	StreamARN *string `min:"1" type:"string"`
-
-	// The Kinesis video stream name from where you want to get the media content.
-	// If you don't specify the streamName, you must specify the streamARN.
-	StreamName *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s GetMediaInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetMediaInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetMediaInput"}
-
-	if s.StartSelector == nil {
-		invalidParams.Add(aws.NewErrParamRequired("StartSelector"))
-	}
-	if s.StreamARN != nil && len(*s.StreamARN) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("StreamARN", 1))
-	}
-	if s.StreamName != nil && len(*s.StreamName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("StreamName", 1))
-	}
-	if s.StartSelector != nil {
-		if err := s.StartSelector.Validate(); err != nil {
-			invalidParams.AddNested("StartSelector", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetMediaInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.StartSelector != nil {
-		v := s.StartSelector
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "StartSelector", v, metadata)
-	}
-	if s.StreamARN != nil {
-		v := *s.StreamARN
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "StreamARN", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.StreamName != nil {
-		v := *s.StreamName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "StreamName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type GetMediaOutput struct {
-	_ struct{} `type:"structure" payload:"Payload"`
-
-	// The content type of the requested media.
-	ContentType *string `location:"header" locationName:"Content-Type" min:"1" type:"string"`
-
-	// The payload Kinesis Video Streams returns is a sequence of chunks from the
-	// specified stream. For information about the chunks, see . The chunks that
-	// Kinesis Video Streams returns in the GetMedia call also include the following
-	// additional Matroska (MKV) tags:
-	//
-	//    * AWS_KINESISVIDEO_CONTINUATION_TOKEN (UTF-8 string) - In the event your
-	//    GetMedia call terminates, you can use this continuation token in your
-	//    next request to get the next chunk where the last request terminated.
-	//
-	//    * AWS_KINESISVIDEO_MILLIS_BEHIND_NOW (UTF-8 string) - Client applications
-	//    can use this tag value to determine how far behind the chunk returned
-	//    in the response is from the latest chunk on the stream.
-	//
-	//    * AWS_KINESISVIDEO_FRAGMENT_NUMBER - Fragment number returned in the chunk.
-	//
-	//    * AWS_KINESISVIDEO_SERVER_TIMESTAMP - Server timestamp of the fragment.
-	//
-	//    * AWS_KINESISVIDEO_PRODUCER_TIMESTAMP - Producer timestamp of the fragment.
-	//
-	// The following tags will be present if an error occurs:
-	//
-	//    * AWS_KINESISVIDEO_ERROR_CODE - String description of an error that caused
-	//    GetMedia to stop.
-	//
-	//    * AWS_KINESISVIDEO_ERROR_ID: Integer code of the error.
-	//
-	// The error codes are as follows:
-	//
-	//    * 3002 - Error writing to the stream
-	//
-	//    * 4000 - Requested fragment is not found
-	//
-	//    * 4500 - Access denied for the stream's KMS key
-	//
-	//    * 4501 - Stream's KMS key is disabled
-	//
-	//    * 4502 - Validation error on the stream's KMS key
-	//
-	//    * 4503 - KMS key specified in the stream is unavailable
-	//
-	//    * 4504 - Invalid usage of the KMS key specified in the stream
-	//
-	//    * 4505 - Invalid state of the KMS key specified in the stream
-	//
-	//    * 4506 - Unable to find the KMS key specified in the stream
-	//
-	//    * 5000 - Internal error
-	Payload io.ReadCloser `type:"blob"`
-}
-
-// String returns the string representation
-func (s GetMediaOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetMediaOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.ContentType != nil {
-		v := *s.ContentType
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	// Skipping Payload Output type's body not valid.
-	return nil
-}
 
 const opGetMedia = "GetMedia"
 
@@ -210,7 +63,7 @@ const opGetMedia = "GetMedia"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesis-video-media-2017-09-30/GetMedia
-func (c *Client) GetMediaRequest(input *GetMediaInput) GetMediaRequest {
+func (c *Client) GetMediaRequest(input *types.GetMediaInput) GetMediaRequest {
 	op := &aws.Operation{
 		Name:       opGetMedia,
 		HTTPMethod: "POST",
@@ -218,10 +71,10 @@ func (c *Client) GetMediaRequest(input *GetMediaInput) GetMediaRequest {
 	}
 
 	if input == nil {
-		input = &GetMediaInput{}
+		input = &types.GetMediaInput{}
 	}
 
-	req := c.newRequest(op, input, &GetMediaOutput{})
+	req := c.newRequest(op, input, &types.GetMediaOutput{})
 	return GetMediaRequest{Request: req, Input: input, Copy: c.GetMediaRequest}
 }
 
@@ -229,8 +82,8 @@ func (c *Client) GetMediaRequest(input *GetMediaInput) GetMediaRequest {
 // GetMedia API operation.
 type GetMediaRequest struct {
 	*aws.Request
-	Input *GetMediaInput
-	Copy  func(*GetMediaInput) GetMediaRequest
+	Input *types.GetMediaInput
+	Copy  func(*types.GetMediaInput) GetMediaRequest
 }
 
 // Send marshals and sends the GetMedia API request.
@@ -242,7 +95,7 @@ func (r GetMediaRequest) Send(ctx context.Context) (*GetMediaResponse, error) {
 	}
 
 	resp := &GetMediaResponse{
-		GetMediaOutput: r.Request.Data.(*GetMediaOutput),
+		GetMediaOutput: r.Request.Data.(*types.GetMediaOutput),
 		response:       &aws.Response{Request: r.Request},
 	}
 
@@ -252,7 +105,7 @@ func (r GetMediaRequest) Send(ctx context.Context) (*GetMediaResponse, error) {
 // GetMediaResponse is the response type for the
 // GetMedia API operation.
 type GetMediaResponse struct {
-	*GetMediaOutput
+	*types.GetMediaOutput
 
 	response *aws.Response
 }

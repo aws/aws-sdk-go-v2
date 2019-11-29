@@ -4,165 +4,10 @@ package iotevents
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/iotevents/types"
 )
-
-type CreateDetectorModelInput struct {
-	_ struct{} `type:"structure"`
-
-	// Information that defines how the detectors operate.
-	//
-	// DetectorModelDefinition is a required field
-	DetectorModelDefinition *DetectorModelDefinition `locationName:"detectorModelDefinition" type:"structure" required:"true"`
-
-	// A brief description of the detector model.
-	DetectorModelDescription *string `locationName:"detectorModelDescription" type:"string"`
-
-	// The name of the detector model.
-	//
-	// DetectorModelName is a required field
-	DetectorModelName *string `locationName:"detectorModelName" min:"1" type:"string" required:"true"`
-
-	// The input attribute key used to identify a device or system in order to create
-	// a detector (an instance of the detector model) and then to route each input
-	// received to the appropriate detector (instance). This parameter uses a JSON-path
-	// expression to specify the attribute-value pair in the message payload of
-	// each input that is used to identify the device associated with the input.
-	Key *string `locationName:"key" min:"1" type:"string"`
-
-	// The ARN of the role that grants permission to AWS IoT Events to perform its
-	// operations.
-	//
-	// RoleArn is a required field
-	RoleArn *string `locationName:"roleArn" min:"1" type:"string" required:"true"`
-
-	// Metadata that can be used to manage the detector model.
-	Tags []Tag `locationName:"tags" type:"list"`
-}
-
-// String returns the string representation
-func (s CreateDetectorModelInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateDetectorModelInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateDetectorModelInput"}
-
-	if s.DetectorModelDefinition == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DetectorModelDefinition"))
-	}
-
-	if s.DetectorModelName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DetectorModelName"))
-	}
-	if s.DetectorModelName != nil && len(*s.DetectorModelName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("DetectorModelName", 1))
-	}
-	if s.Key != nil && len(*s.Key) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Key", 1))
-	}
-
-	if s.RoleArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("RoleArn"))
-	}
-	if s.RoleArn != nil && len(*s.RoleArn) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("RoleArn", 1))
-	}
-	if s.DetectorModelDefinition != nil {
-		if err := s.DetectorModelDefinition.Validate(); err != nil {
-			invalidParams.AddNested("DetectorModelDefinition", err.(aws.ErrInvalidParams))
-		}
-	}
-	if s.Tags != nil {
-		for i, v := range s.Tags {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s CreateDetectorModelInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.DetectorModelDefinition != nil {
-		v := s.DetectorModelDefinition
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "detectorModelDefinition", v, metadata)
-	}
-	if s.DetectorModelDescription != nil {
-		v := *s.DetectorModelDescription
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "detectorModelDescription", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.DetectorModelName != nil {
-		v := *s.DetectorModelName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "detectorModelName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Key != nil {
-		v := *s.Key
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "key", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.RoleArn != nil {
-		v := *s.RoleArn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "roleArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Tags != nil {
-		v := s.Tags
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "tags", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	return nil
-}
-
-type CreateDetectorModelOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Information about how the detector model is configured.
-	DetectorModelConfiguration *DetectorModelConfiguration `locationName:"detectorModelConfiguration" type:"structure"`
-}
-
-// String returns the string representation
-func (s CreateDetectorModelOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s CreateDetectorModelOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.DetectorModelConfiguration != nil {
-		v := s.DetectorModelConfiguration
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "detectorModelConfiguration", v, metadata)
-	}
-	return nil
-}
 
 const opCreateDetectorModel = "CreateDetectorModel"
 
@@ -179,7 +24,7 @@ const opCreateDetectorModel = "CreateDetectorModel"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iotevents-2018-07-27/CreateDetectorModel
-func (c *Client) CreateDetectorModelRequest(input *CreateDetectorModelInput) CreateDetectorModelRequest {
+func (c *Client) CreateDetectorModelRequest(input *types.CreateDetectorModelInput) CreateDetectorModelRequest {
 	op := &aws.Operation{
 		Name:       opCreateDetectorModel,
 		HTTPMethod: "POST",
@@ -187,10 +32,10 @@ func (c *Client) CreateDetectorModelRequest(input *CreateDetectorModelInput) Cre
 	}
 
 	if input == nil {
-		input = &CreateDetectorModelInput{}
+		input = &types.CreateDetectorModelInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateDetectorModelOutput{})
+	req := c.newRequest(op, input, &types.CreateDetectorModelOutput{})
 	return CreateDetectorModelRequest{Request: req, Input: input, Copy: c.CreateDetectorModelRequest}
 }
 
@@ -198,8 +43,8 @@ func (c *Client) CreateDetectorModelRequest(input *CreateDetectorModelInput) Cre
 // CreateDetectorModel API operation.
 type CreateDetectorModelRequest struct {
 	*aws.Request
-	Input *CreateDetectorModelInput
-	Copy  func(*CreateDetectorModelInput) CreateDetectorModelRequest
+	Input *types.CreateDetectorModelInput
+	Copy  func(*types.CreateDetectorModelInput) CreateDetectorModelRequest
 }
 
 // Send marshals and sends the CreateDetectorModel API request.
@@ -211,7 +56,7 @@ func (r CreateDetectorModelRequest) Send(ctx context.Context) (*CreateDetectorMo
 	}
 
 	resp := &CreateDetectorModelResponse{
-		CreateDetectorModelOutput: r.Request.Data.(*CreateDetectorModelOutput),
+		CreateDetectorModelOutput: r.Request.Data.(*types.CreateDetectorModelOutput),
 		response:                  &aws.Response{Request: r.Request},
 	}
 
@@ -221,7 +66,7 @@ func (r CreateDetectorModelRequest) Send(ctx context.Context) (*CreateDetectorMo
 // CreateDetectorModelResponse is the response type for the
 // CreateDetectorModel API operation.
 type CreateDetectorModelResponse struct {
-	*CreateDetectorModelOutput
+	*types.CreateDetectorModelOutput
 
 	response *aws.Response
 }

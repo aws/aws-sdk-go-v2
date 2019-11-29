@@ -6,49 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/directoryservice/types"
 )
-
-type RejectSharedDirectoryInput struct {
-	_ struct{} `type:"structure"`
-
-	// Identifier of the shared directory in the directory consumer account. This
-	// identifier is different for each directory owner account.
-	//
-	// SharedDirectoryId is a required field
-	SharedDirectoryId *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s RejectSharedDirectoryInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *RejectSharedDirectoryInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "RejectSharedDirectoryInput"}
-
-	if s.SharedDirectoryId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("SharedDirectoryId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type RejectSharedDirectoryOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Identifier of the shared directory in the directory consumer account.
-	SharedDirectoryId *string `type:"string"`
-}
-
-// String returns the string representation
-func (s RejectSharedDirectoryOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opRejectSharedDirectory = "RejectSharedDirectory"
 
@@ -66,7 +25,7 @@ const opRejectSharedDirectory = "RejectSharedDirectory"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/RejectSharedDirectory
-func (c *Client) RejectSharedDirectoryRequest(input *RejectSharedDirectoryInput) RejectSharedDirectoryRequest {
+func (c *Client) RejectSharedDirectoryRequest(input *types.RejectSharedDirectoryInput) RejectSharedDirectoryRequest {
 	op := &aws.Operation{
 		Name:       opRejectSharedDirectory,
 		HTTPMethod: "POST",
@@ -74,10 +33,10 @@ func (c *Client) RejectSharedDirectoryRequest(input *RejectSharedDirectoryInput)
 	}
 
 	if input == nil {
-		input = &RejectSharedDirectoryInput{}
+		input = &types.RejectSharedDirectoryInput{}
 	}
 
-	req := c.newRequest(op, input, &RejectSharedDirectoryOutput{})
+	req := c.newRequest(op, input, &types.RejectSharedDirectoryOutput{})
 	return RejectSharedDirectoryRequest{Request: req, Input: input, Copy: c.RejectSharedDirectoryRequest}
 }
 
@@ -85,8 +44,8 @@ func (c *Client) RejectSharedDirectoryRequest(input *RejectSharedDirectoryInput)
 // RejectSharedDirectory API operation.
 type RejectSharedDirectoryRequest struct {
 	*aws.Request
-	Input *RejectSharedDirectoryInput
-	Copy  func(*RejectSharedDirectoryInput) RejectSharedDirectoryRequest
+	Input *types.RejectSharedDirectoryInput
+	Copy  func(*types.RejectSharedDirectoryInput) RejectSharedDirectoryRequest
 }
 
 // Send marshals and sends the RejectSharedDirectory API request.
@@ -98,7 +57,7 @@ func (r RejectSharedDirectoryRequest) Send(ctx context.Context) (*RejectSharedDi
 	}
 
 	resp := &RejectSharedDirectoryResponse{
-		RejectSharedDirectoryOutput: r.Request.Data.(*RejectSharedDirectoryOutput),
+		RejectSharedDirectoryOutput: r.Request.Data.(*types.RejectSharedDirectoryOutput),
 		response:                    &aws.Response{Request: r.Request},
 	}
 
@@ -108,7 +67,7 @@ func (r RejectSharedDirectoryRequest) Send(ctx context.Context) (*RejectSharedDi
 // RejectSharedDirectoryResponse is the response type for the
 // RejectSharedDirectory API operation.
 type RejectSharedDirectoryResponse struct {
-	*RejectSharedDirectoryOutput
+	*types.RejectSharedDirectoryOutput
 
 	response *aws.Response
 }

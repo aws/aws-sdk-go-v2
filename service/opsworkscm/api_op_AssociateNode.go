@@ -6,83 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/opsworkscm/types"
 )
-
-type AssociateNodeInput struct {
-	_ struct{} `type:"structure"`
-
-	// Engine attributes used for associating the node.
-	//
-	// Attributes accepted in a AssociateNode request for Chef
-	//
-	//    * CHEF_ORGANIZATION: The Chef organization with which the node is associated.
-	//    By default only one organization named default can exist.
-	//
-	//    * CHEF_NODE_PUBLIC_KEY: A PEM-formatted public key. This key is required
-	//    for the chef-client agent to access the Chef API.
-	//
-	// Attributes accepted in a AssociateNode request for Puppet
-	//
-	//    * PUPPET_NODE_CSR: A PEM-formatted certificate-signing request (CSR) that
-	//    is created by the node.
-	//
-	// EngineAttributes is a required field
-	EngineAttributes []EngineAttribute `type:"list" required:"true"`
-
-	// The name of the node.
-	//
-	// NodeName is a required field
-	NodeName *string `type:"string" required:"true"`
-
-	// The name of the server with which to associate the node.
-	//
-	// ServerName is a required field
-	ServerName *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s AssociateNodeInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *AssociateNodeInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "AssociateNodeInput"}
-
-	if s.EngineAttributes == nil {
-		invalidParams.Add(aws.NewErrParamRequired("EngineAttributes"))
-	}
-
-	if s.NodeName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("NodeName"))
-	}
-
-	if s.ServerName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ServerName"))
-	}
-	if s.ServerName != nil && len(*s.ServerName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ServerName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type AssociateNodeOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Contains a token which can be passed to the DescribeNodeAssociationStatus
-	// API call to get the status of the association request.
-	NodeAssociationStatusToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s AssociateNodeOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opAssociateNode = "AssociateNode"
 
@@ -119,7 +44,7 @@ const opAssociateNode = "AssociateNode"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/AssociateNode
-func (c *Client) AssociateNodeRequest(input *AssociateNodeInput) AssociateNodeRequest {
+func (c *Client) AssociateNodeRequest(input *types.AssociateNodeInput) AssociateNodeRequest {
 	op := &aws.Operation{
 		Name:       opAssociateNode,
 		HTTPMethod: "POST",
@@ -127,10 +52,10 @@ func (c *Client) AssociateNodeRequest(input *AssociateNodeInput) AssociateNodeRe
 	}
 
 	if input == nil {
-		input = &AssociateNodeInput{}
+		input = &types.AssociateNodeInput{}
 	}
 
-	req := c.newRequest(op, input, &AssociateNodeOutput{})
+	req := c.newRequest(op, input, &types.AssociateNodeOutput{})
 	return AssociateNodeRequest{Request: req, Input: input, Copy: c.AssociateNodeRequest}
 }
 
@@ -138,8 +63,8 @@ func (c *Client) AssociateNodeRequest(input *AssociateNodeInput) AssociateNodeRe
 // AssociateNode API operation.
 type AssociateNodeRequest struct {
 	*aws.Request
-	Input *AssociateNodeInput
-	Copy  func(*AssociateNodeInput) AssociateNodeRequest
+	Input *types.AssociateNodeInput
+	Copy  func(*types.AssociateNodeInput) AssociateNodeRequest
 }
 
 // Send marshals and sends the AssociateNode API request.
@@ -151,7 +76,7 @@ func (r AssociateNodeRequest) Send(ctx context.Context) (*AssociateNodeResponse,
 	}
 
 	resp := &AssociateNodeResponse{
-		AssociateNodeOutput: r.Request.Data.(*AssociateNodeOutput),
+		AssociateNodeOutput: r.Request.Data.(*types.AssociateNodeOutput),
 		response:            &aws.Response{Request: r.Request},
 	}
 
@@ -161,7 +86,7 @@ func (r AssociateNodeRequest) Send(ctx context.Context) (*AssociateNodeResponse,
 // AssociateNodeResponse is the response type for the
 // AssociateNode API operation.
 type AssociateNodeResponse struct {
-	*AssociateNodeOutput
+	*types.AssociateNodeOutput
 
 	response *aws.Response
 }

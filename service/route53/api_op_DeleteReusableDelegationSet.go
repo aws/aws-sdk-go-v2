@@ -6,65 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/route53/types"
 )
-
-// A request to delete a reusable delegation set.
-type DeleteReusableDelegationSetInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the reusable delegation set that you want to delete.
-	//
-	// Id is a required field
-	Id *string `location:"uri" locationName:"Id" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteReusableDelegationSetInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteReusableDelegationSetInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteReusableDelegationSetInput"}
-
-	if s.Id == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Id"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteReusableDelegationSetInput) MarshalFields(e protocol.FieldEncoder) error {
-
-	if s.Id != nil {
-		v := *s.Id
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "Id", protocol.StringValue(v), metadata)
-	}
-	return nil
-}
-
-// An empty element.
-type DeleteReusableDelegationSetOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteReusableDelegationSetOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteReusableDelegationSetOutput) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
 
 const opDeleteReusableDelegationSet = "DeleteReusableDelegationSet"
 
@@ -89,7 +32,7 @@ const opDeleteReusableDelegationSet = "DeleteReusableDelegationSet"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/DeleteReusableDelegationSet
-func (c *Client) DeleteReusableDelegationSetRequest(input *DeleteReusableDelegationSetInput) DeleteReusableDelegationSetRequest {
+func (c *Client) DeleteReusableDelegationSetRequest(input *types.DeleteReusableDelegationSetInput) DeleteReusableDelegationSetRequest {
 	op := &aws.Operation{
 		Name:       opDeleteReusableDelegationSet,
 		HTTPMethod: "DELETE",
@@ -97,10 +40,10 @@ func (c *Client) DeleteReusableDelegationSetRequest(input *DeleteReusableDelegat
 	}
 
 	if input == nil {
-		input = &DeleteReusableDelegationSetInput{}
+		input = &types.DeleteReusableDelegationSetInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteReusableDelegationSetOutput{})
+	req := c.newRequest(op, input, &types.DeleteReusableDelegationSetOutput{})
 	return DeleteReusableDelegationSetRequest{Request: req, Input: input, Copy: c.DeleteReusableDelegationSetRequest}
 }
 
@@ -108,8 +51,8 @@ func (c *Client) DeleteReusableDelegationSetRequest(input *DeleteReusableDelegat
 // DeleteReusableDelegationSet API operation.
 type DeleteReusableDelegationSetRequest struct {
 	*aws.Request
-	Input *DeleteReusableDelegationSetInput
-	Copy  func(*DeleteReusableDelegationSetInput) DeleteReusableDelegationSetRequest
+	Input *types.DeleteReusableDelegationSetInput
+	Copy  func(*types.DeleteReusableDelegationSetInput) DeleteReusableDelegationSetRequest
 }
 
 // Send marshals and sends the DeleteReusableDelegationSet API request.
@@ -121,7 +64,7 @@ func (r DeleteReusableDelegationSetRequest) Send(ctx context.Context) (*DeleteRe
 	}
 
 	resp := &DeleteReusableDelegationSetResponse{
-		DeleteReusableDelegationSetOutput: r.Request.Data.(*DeleteReusableDelegationSetOutput),
+		DeleteReusableDelegationSetOutput: r.Request.Data.(*types.DeleteReusableDelegationSetOutput),
 		response:                          &aws.Response{Request: r.Request},
 	}
 
@@ -131,7 +74,7 @@ func (r DeleteReusableDelegationSetRequest) Send(ctx context.Context) (*DeleteRe
 // DeleteReusableDelegationSetResponse is the response type for the
 // DeleteReusableDelegationSet API operation.
 type DeleteReusableDelegationSetResponse struct {
-	*DeleteReusableDelegationSetOutput
+	*types.DeleteReusableDelegationSetOutput
 
 	response *aws.Response
 }

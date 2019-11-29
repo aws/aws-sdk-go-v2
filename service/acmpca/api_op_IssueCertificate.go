@@ -6,142 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/acmpca/types"
 )
-
-type IssueCertificateInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) that was returned when you called CreateCertificateAuthority.
-	// This must be of the form:
-	//
-	// arn:aws:acm-pca:region:account:certificate-authority/12345678-1234-1234-1234-123456789012
-	//
-	// CertificateAuthorityArn is a required field
-	CertificateAuthorityArn *string `min:"5" type:"string" required:"true"`
-
-	// The certificate signing request (CSR) for the certificate you want to issue.
-	// You can use the following OpenSSL command to create the CSR and a 2048 bit
-	// RSA private key.
-	//
-	// openssl req -new -newkey rsa:2048 -days 365 -keyout private/test_cert_priv_key.pem
-	// -out csr/test_cert_.csr
-	//
-	// If you have a configuration file, you can use the following OpenSSL command.
-	// The usr_cert block in the configuration file contains your X509 version 3
-	// extensions.
-	//
-	// openssl req -new -config openssl_rsa.cnf -extensions usr_cert -newkey rsa:2048
-	// -days -365 -keyout private/test_cert_priv_key.pem -out csr/test_cert_.csr
-	//
-	// Csr is automatically base64 encoded/decoded by the SDK.
-	//
-	// Csr is a required field
-	Csr []byte `min:"1" type:"blob" required:"true"`
-
-	// Custom string that can be used to distinguish between calls to the IssueCertificate
-	// action. Idempotency tokens time out after one hour. Therefore, if you call
-	// IssueCertificate multiple times with the same idempotency token within 5
-	// minutes, ACM Private CA recognizes that you are requesting only one certificate
-	// and will issue only one. If you change the idempotency token for each call,
-	// PCA recognizes that you are requesting multiple certificates.
-	IdempotencyToken *string `min:"1" type:"string"`
-
-	// The name of the algorithm that will be used to sign the certificate to be
-	// issued.
-	//
-	// SigningAlgorithm is a required field
-	SigningAlgorithm SigningAlgorithm `type:"string" required:"true" enum:"true"`
-
-	// Specifies a custom configuration template to use when issuing a certificate.
-	// If this parameter is not provided, ACM Private CA defaults to the EndEntityCertificate/V1
-	// template.
-	//
-	// The following service-owned TemplateArn values are supported by ACM Private
-	// CA:
-	//
-	//    * arn:aws:acm-pca:::template/EndEntityCertificate/V1
-	//
-	//    * arn:aws:acm-pca:::template/SubordinateCACertificate_PathLen0/V1
-	//
-	//    * arn:aws:acm-pca:::template/SubordinateCACertificate_PathLen1/V1
-	//
-	//    * arn:aws:acm-pca:::template/SubordinateCACertificate_PathLen2/V1
-	//
-	//    * arn:aws:acm-pca:::template/SubordinateCACertificate_PathLen3/V1
-	//
-	//    * arn:aws:acm-pca:::template/RootCACertificate/V1
-	//
-	// For more information, see Using Templates (https://docs.aws.amazon.com/acm-pca/latest/userguide/UsingTemplates.html).
-	TemplateArn *string `min:"5" type:"string"`
-
-	// The type of the validity period.
-	//
-	// Validity is a required field
-	Validity *Validity `type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s IssueCertificateInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *IssueCertificateInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "IssueCertificateInput"}
-
-	if s.CertificateAuthorityArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("CertificateAuthorityArn"))
-	}
-	if s.CertificateAuthorityArn != nil && len(*s.CertificateAuthorityArn) < 5 {
-		invalidParams.Add(aws.NewErrParamMinLen("CertificateAuthorityArn", 5))
-	}
-
-	if s.Csr == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Csr"))
-	}
-	if s.Csr != nil && len(s.Csr) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Csr", 1))
-	}
-	if s.IdempotencyToken != nil && len(*s.IdempotencyToken) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("IdempotencyToken", 1))
-	}
-	if len(s.SigningAlgorithm) == 0 {
-		invalidParams.Add(aws.NewErrParamRequired("SigningAlgorithm"))
-	}
-	if s.TemplateArn != nil && len(*s.TemplateArn) < 5 {
-		invalidParams.Add(aws.NewErrParamMinLen("TemplateArn", 5))
-	}
-
-	if s.Validity == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Validity"))
-	}
-	if s.Validity != nil {
-		if err := s.Validity.Validate(); err != nil {
-			invalidParams.AddNested("Validity", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type IssueCertificateOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the issued certificate and the certificate
-	// serial number. This is of the form:
-	//
-	// arn:aws:acm-pca:region:account:certificate-authority/12345678-1234-1234-1234-123456789012/certificate/286535153982981100925020015808220737245
-	CertificateArn *string `min:"5" type:"string"`
-}
-
-// String returns the string representation
-func (s IssueCertificateOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opIssueCertificate = "IssueCertificate"
 
@@ -164,7 +30,7 @@ const opIssueCertificate = "IssueCertificate"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/acm-pca-2017-08-22/IssueCertificate
-func (c *Client) IssueCertificateRequest(input *IssueCertificateInput) IssueCertificateRequest {
+func (c *Client) IssueCertificateRequest(input *types.IssueCertificateInput) IssueCertificateRequest {
 	op := &aws.Operation{
 		Name:       opIssueCertificate,
 		HTTPMethod: "POST",
@@ -172,10 +38,10 @@ func (c *Client) IssueCertificateRequest(input *IssueCertificateInput) IssueCert
 	}
 
 	if input == nil {
-		input = &IssueCertificateInput{}
+		input = &types.IssueCertificateInput{}
 	}
 
-	req := c.newRequest(op, input, &IssueCertificateOutput{})
+	req := c.newRequest(op, input, &types.IssueCertificateOutput{})
 	return IssueCertificateRequest{Request: req, Input: input, Copy: c.IssueCertificateRequest}
 }
 
@@ -183,8 +49,8 @@ func (c *Client) IssueCertificateRequest(input *IssueCertificateInput) IssueCert
 // IssueCertificate API operation.
 type IssueCertificateRequest struct {
 	*aws.Request
-	Input *IssueCertificateInput
-	Copy  func(*IssueCertificateInput) IssueCertificateRequest
+	Input *types.IssueCertificateInput
+	Copy  func(*types.IssueCertificateInput) IssueCertificateRequest
 }
 
 // Send marshals and sends the IssueCertificate API request.
@@ -196,7 +62,7 @@ func (r IssueCertificateRequest) Send(ctx context.Context) (*IssueCertificateRes
 	}
 
 	resp := &IssueCertificateResponse{
-		IssueCertificateOutput: r.Request.Data.(*IssueCertificateOutput),
+		IssueCertificateOutput: r.Request.Data.(*types.IssueCertificateOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -206,7 +72,7 @@ func (r IssueCertificateRequest) Send(ctx context.Context) (*IssueCertificateRes
 // IssueCertificateResponse is the response type for the
 // IssueCertificate API operation.
 type IssueCertificateResponse struct {
-	*IssueCertificateOutput
+	*types.IssueCertificateOutput
 
 	response *aws.Response
 }

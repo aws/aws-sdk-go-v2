@@ -6,47 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
+	"github.com/aws/aws-sdk-go-v2/service/opsworks/types"
 )
-
-type DeregisterEcsClusterInput struct {
-	_ struct{} `type:"structure"`
-
-	// The cluster's Amazon Resource Number (ARN).
-	//
-	// EcsClusterArn is a required field
-	EcsClusterArn *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeregisterEcsClusterInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeregisterEcsClusterInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeregisterEcsClusterInput"}
-
-	if s.EcsClusterArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("EcsClusterArn"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeregisterEcsClusterOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeregisterEcsClusterOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeregisterEcsCluster = "DeregisterEcsCluster"
 
@@ -69,7 +32,7 @@ const opDeregisterEcsCluster = "DeregisterEcsCluster"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DeregisterEcsCluster
-func (c *Client) DeregisterEcsClusterRequest(input *DeregisterEcsClusterInput) DeregisterEcsClusterRequest {
+func (c *Client) DeregisterEcsClusterRequest(input *types.DeregisterEcsClusterInput) DeregisterEcsClusterRequest {
 	op := &aws.Operation{
 		Name:       opDeregisterEcsCluster,
 		HTTPMethod: "POST",
@@ -77,10 +40,10 @@ func (c *Client) DeregisterEcsClusterRequest(input *DeregisterEcsClusterInput) D
 	}
 
 	if input == nil {
-		input = &DeregisterEcsClusterInput{}
+		input = &types.DeregisterEcsClusterInput{}
 	}
 
-	req := c.newRequest(op, input, &DeregisterEcsClusterOutput{})
+	req := c.newRequest(op, input, &types.DeregisterEcsClusterOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return DeregisterEcsClusterRequest{Request: req, Input: input, Copy: c.DeregisterEcsClusterRequest}
@@ -90,8 +53,8 @@ func (c *Client) DeregisterEcsClusterRequest(input *DeregisterEcsClusterInput) D
 // DeregisterEcsCluster API operation.
 type DeregisterEcsClusterRequest struct {
 	*aws.Request
-	Input *DeregisterEcsClusterInput
-	Copy  func(*DeregisterEcsClusterInput) DeregisterEcsClusterRequest
+	Input *types.DeregisterEcsClusterInput
+	Copy  func(*types.DeregisterEcsClusterInput) DeregisterEcsClusterRequest
 }
 
 // Send marshals and sends the DeregisterEcsCluster API request.
@@ -103,7 +66,7 @@ func (r DeregisterEcsClusterRequest) Send(ctx context.Context) (*DeregisterEcsCl
 	}
 
 	resp := &DeregisterEcsClusterResponse{
-		DeregisterEcsClusterOutput: r.Request.Data.(*DeregisterEcsClusterOutput),
+		DeregisterEcsClusterOutput: r.Request.Data.(*types.DeregisterEcsClusterOutput),
 		response:                   &aws.Response{Request: r.Request},
 	}
 
@@ -113,7 +76,7 @@ func (r DeregisterEcsClusterRequest) Send(ctx context.Context) (*DeregisterEcsCl
 // DeregisterEcsClusterResponse is the response type for the
 // DeregisterEcsCluster API operation.
 type DeregisterEcsClusterResponse struct {
-	*DeregisterEcsClusterOutput
+	*types.DeregisterEcsClusterOutput
 
 	response *aws.Response
 }

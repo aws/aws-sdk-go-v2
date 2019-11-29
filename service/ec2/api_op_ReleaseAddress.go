@@ -6,40 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/ec2query"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-type ReleaseAddressInput struct {
-	_ struct{} `type:"structure"`
-
-	// [EC2-VPC] The allocation ID. Required for EC2-VPC.
-	AllocationId *string `type:"string"`
-
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have
-	// the required permissions, the error response is DryRunOperation. Otherwise,
-	// it is UnauthorizedOperation.
-	DryRun *bool `locationName:"dryRun" type:"boolean"`
-
-	// [EC2-Classic] The Elastic IP address. Required for EC2-Classic.
-	PublicIp *string `type:"string"`
-}
-
-// String returns the string representation
-func (s ReleaseAddressInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type ReleaseAddressOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s ReleaseAddressOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opReleaseAddress = "ReleaseAddress"
 
@@ -73,7 +43,7 @@ const opReleaseAddress = "ReleaseAddress"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ReleaseAddress
-func (c *Client) ReleaseAddressRequest(input *ReleaseAddressInput) ReleaseAddressRequest {
+func (c *Client) ReleaseAddressRequest(input *types.ReleaseAddressInput) ReleaseAddressRequest {
 	op := &aws.Operation{
 		Name:       opReleaseAddress,
 		HTTPMethod: "POST",
@@ -81,10 +51,10 @@ func (c *Client) ReleaseAddressRequest(input *ReleaseAddressInput) ReleaseAddres
 	}
 
 	if input == nil {
-		input = &ReleaseAddressInput{}
+		input = &types.ReleaseAddressInput{}
 	}
 
-	req := c.newRequest(op, input, &ReleaseAddressOutput{})
+	req := c.newRequest(op, input, &types.ReleaseAddressOutput{})
 	req.Handlers.Unmarshal.Remove(ec2query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return ReleaseAddressRequest{Request: req, Input: input, Copy: c.ReleaseAddressRequest}
@@ -94,8 +64,8 @@ func (c *Client) ReleaseAddressRequest(input *ReleaseAddressInput) ReleaseAddres
 // ReleaseAddress API operation.
 type ReleaseAddressRequest struct {
 	*aws.Request
-	Input *ReleaseAddressInput
-	Copy  func(*ReleaseAddressInput) ReleaseAddressRequest
+	Input *types.ReleaseAddressInput
+	Copy  func(*types.ReleaseAddressInput) ReleaseAddressRequest
 }
 
 // Send marshals and sends the ReleaseAddress API request.
@@ -107,7 +77,7 @@ func (r ReleaseAddressRequest) Send(ctx context.Context) (*ReleaseAddressRespons
 	}
 
 	resp := &ReleaseAddressResponse{
-		ReleaseAddressOutput: r.Request.Data.(*ReleaseAddressOutput),
+		ReleaseAddressOutput: r.Request.Data.(*types.ReleaseAddressOutput),
 		response:             &aws.Response{Request: r.Request},
 	}
 
@@ -117,7 +87,7 @@ func (r ReleaseAddressRequest) Send(ctx context.Context) (*ReleaseAddressRespons
 // ReleaseAddressResponse is the response type for the
 // ReleaseAddress API operation.
 type ReleaseAddressResponse struct {
-	*ReleaseAddressOutput
+	*types.ReleaseAddressOutput
 
 	response *aws.Response
 }

@@ -10,6 +10,7 @@ package swfiface
 
 import (
 	"github.com/aws/aws-sdk-go-v2/service/swf"
+	"github.com/aws/aws-sdk-go-v2/service/swf/types"
 )
 
 // ClientAPI provides an interface to enable mocking the
@@ -43,7 +44,7 @@ import (
 //    type mockClientClient struct {
 //        swfiface.ClientPI
 //    }
-//    func (m *mockClientClient) CountClosedWorkflowExecutions(input *swf.CountClosedWorkflowExecutionsInput) (*swf.CountClosedWorkflowExecutionsOutput, error) {
+//    func (m *mockClientClient) CountClosedWorkflowExecutions(input *types.CountClosedWorkflowExecutionsInput) (*types.CountClosedWorkflowExecutionsOutput, error) {
 //        // mock response/functionality
 //    }
 //
@@ -61,79 +62,79 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type ClientAPI interface {
-	CountClosedWorkflowExecutionsRequest(*swf.CountClosedWorkflowExecutionsInput) swf.CountClosedWorkflowExecutionsRequest
+	CountClosedWorkflowExecutionsRequest(*types.CountClosedWorkflowExecutionsInput) swf.CountClosedWorkflowExecutionsRequest
 
-	CountOpenWorkflowExecutionsRequest(*swf.CountOpenWorkflowExecutionsInput) swf.CountOpenWorkflowExecutionsRequest
+	CountOpenWorkflowExecutionsRequest(*types.CountOpenWorkflowExecutionsInput) swf.CountOpenWorkflowExecutionsRequest
 
-	CountPendingActivityTasksRequest(*swf.CountPendingActivityTasksInput) swf.CountPendingActivityTasksRequest
+	CountPendingActivityTasksRequest(*types.CountPendingActivityTasksInput) swf.CountPendingActivityTasksRequest
 
-	CountPendingDecisionTasksRequest(*swf.CountPendingDecisionTasksInput) swf.CountPendingDecisionTasksRequest
+	CountPendingDecisionTasksRequest(*types.CountPendingDecisionTasksInput) swf.CountPendingDecisionTasksRequest
 
-	DeprecateActivityTypeRequest(*swf.DeprecateActivityTypeInput) swf.DeprecateActivityTypeRequest
+	DeprecateActivityTypeRequest(*types.DeprecateActivityTypeInput) swf.DeprecateActivityTypeRequest
 
-	DeprecateDomainRequest(*swf.DeprecateDomainInput) swf.DeprecateDomainRequest
+	DeprecateDomainRequest(*types.DeprecateDomainInput) swf.DeprecateDomainRequest
 
-	DeprecateWorkflowTypeRequest(*swf.DeprecateWorkflowTypeInput) swf.DeprecateWorkflowTypeRequest
+	DeprecateWorkflowTypeRequest(*types.DeprecateWorkflowTypeInput) swf.DeprecateWorkflowTypeRequest
 
-	DescribeActivityTypeRequest(*swf.DescribeActivityTypeInput) swf.DescribeActivityTypeRequest
+	DescribeActivityTypeRequest(*types.DescribeActivityTypeInput) swf.DescribeActivityTypeRequest
 
-	DescribeDomainRequest(*swf.DescribeDomainInput) swf.DescribeDomainRequest
+	DescribeDomainRequest(*types.DescribeDomainInput) swf.DescribeDomainRequest
 
-	DescribeWorkflowExecutionRequest(*swf.DescribeWorkflowExecutionInput) swf.DescribeWorkflowExecutionRequest
+	DescribeWorkflowExecutionRequest(*types.DescribeWorkflowExecutionInput) swf.DescribeWorkflowExecutionRequest
 
-	DescribeWorkflowTypeRequest(*swf.DescribeWorkflowTypeInput) swf.DescribeWorkflowTypeRequest
+	DescribeWorkflowTypeRequest(*types.DescribeWorkflowTypeInput) swf.DescribeWorkflowTypeRequest
 
-	GetWorkflowExecutionHistoryRequest(*swf.GetWorkflowExecutionHistoryInput) swf.GetWorkflowExecutionHistoryRequest
+	GetWorkflowExecutionHistoryRequest(*types.GetWorkflowExecutionHistoryInput) swf.GetWorkflowExecutionHistoryRequest
 
-	ListActivityTypesRequest(*swf.ListActivityTypesInput) swf.ListActivityTypesRequest
+	ListActivityTypesRequest(*types.ListActivityTypesInput) swf.ListActivityTypesRequest
 
-	ListClosedWorkflowExecutionsRequest(*swf.ListClosedWorkflowExecutionsInput) swf.ListClosedWorkflowExecutionsRequest
+	ListClosedWorkflowExecutionsRequest(*types.ListClosedWorkflowExecutionsInput) swf.ListClosedWorkflowExecutionsRequest
 
-	ListDomainsRequest(*swf.ListDomainsInput) swf.ListDomainsRequest
+	ListDomainsRequest(*types.ListDomainsInput) swf.ListDomainsRequest
 
-	ListOpenWorkflowExecutionsRequest(*swf.ListOpenWorkflowExecutionsInput) swf.ListOpenWorkflowExecutionsRequest
+	ListOpenWorkflowExecutionsRequest(*types.ListOpenWorkflowExecutionsInput) swf.ListOpenWorkflowExecutionsRequest
 
-	ListTagsForResourceRequest(*swf.ListTagsForResourceInput) swf.ListTagsForResourceRequest
+	ListTagsForResourceRequest(*types.ListTagsForResourceInput) swf.ListTagsForResourceRequest
 
-	ListWorkflowTypesRequest(*swf.ListWorkflowTypesInput) swf.ListWorkflowTypesRequest
+	ListWorkflowTypesRequest(*types.ListWorkflowTypesInput) swf.ListWorkflowTypesRequest
 
-	PollForActivityTaskRequest(*swf.PollForActivityTaskInput) swf.PollForActivityTaskRequest
+	PollForActivityTaskRequest(*types.PollForActivityTaskInput) swf.PollForActivityTaskRequest
 
-	PollForDecisionTaskRequest(*swf.PollForDecisionTaskInput) swf.PollForDecisionTaskRequest
+	PollForDecisionTaskRequest(*types.PollForDecisionTaskInput) swf.PollForDecisionTaskRequest
 
-	RecordActivityTaskHeartbeatRequest(*swf.RecordActivityTaskHeartbeatInput) swf.RecordActivityTaskHeartbeatRequest
+	RecordActivityTaskHeartbeatRequest(*types.RecordActivityTaskHeartbeatInput) swf.RecordActivityTaskHeartbeatRequest
 
-	RegisterActivityTypeRequest(*swf.RegisterActivityTypeInput) swf.RegisterActivityTypeRequest
+	RegisterActivityTypeRequest(*types.RegisterActivityTypeInput) swf.RegisterActivityTypeRequest
 
-	RegisterDomainRequest(*swf.RegisterDomainInput) swf.RegisterDomainRequest
+	RegisterDomainRequest(*types.RegisterDomainInput) swf.RegisterDomainRequest
 
-	RegisterWorkflowTypeRequest(*swf.RegisterWorkflowTypeInput) swf.RegisterWorkflowTypeRequest
+	RegisterWorkflowTypeRequest(*types.RegisterWorkflowTypeInput) swf.RegisterWorkflowTypeRequest
 
-	RequestCancelWorkflowExecutionRequest(*swf.RequestCancelWorkflowExecutionInput) swf.RequestCancelWorkflowExecutionRequest
+	RequestCancelWorkflowExecutionRequest(*types.RequestCancelWorkflowExecutionInput) swf.RequestCancelWorkflowExecutionRequest
 
-	RespondActivityTaskCanceledRequest(*swf.RespondActivityTaskCanceledInput) swf.RespondActivityTaskCanceledRequest
+	RespondActivityTaskCanceledRequest(*types.RespondActivityTaskCanceledInput) swf.RespondActivityTaskCanceledRequest
 
-	RespondActivityTaskCompletedRequest(*swf.RespondActivityTaskCompletedInput) swf.RespondActivityTaskCompletedRequest
+	RespondActivityTaskCompletedRequest(*types.RespondActivityTaskCompletedInput) swf.RespondActivityTaskCompletedRequest
 
-	RespondActivityTaskFailedRequest(*swf.RespondActivityTaskFailedInput) swf.RespondActivityTaskFailedRequest
+	RespondActivityTaskFailedRequest(*types.RespondActivityTaskFailedInput) swf.RespondActivityTaskFailedRequest
 
-	RespondDecisionTaskCompletedRequest(*swf.RespondDecisionTaskCompletedInput) swf.RespondDecisionTaskCompletedRequest
+	RespondDecisionTaskCompletedRequest(*types.RespondDecisionTaskCompletedInput) swf.RespondDecisionTaskCompletedRequest
 
-	SignalWorkflowExecutionRequest(*swf.SignalWorkflowExecutionInput) swf.SignalWorkflowExecutionRequest
+	SignalWorkflowExecutionRequest(*types.SignalWorkflowExecutionInput) swf.SignalWorkflowExecutionRequest
 
-	StartWorkflowExecutionRequest(*swf.StartWorkflowExecutionInput) swf.StartWorkflowExecutionRequest
+	StartWorkflowExecutionRequest(*types.StartWorkflowExecutionInput) swf.StartWorkflowExecutionRequest
 
-	TagResourceRequest(*swf.TagResourceInput) swf.TagResourceRequest
+	TagResourceRequest(*types.TagResourceInput) swf.TagResourceRequest
 
-	TerminateWorkflowExecutionRequest(*swf.TerminateWorkflowExecutionInput) swf.TerminateWorkflowExecutionRequest
+	TerminateWorkflowExecutionRequest(*types.TerminateWorkflowExecutionInput) swf.TerminateWorkflowExecutionRequest
 
-	UndeprecateActivityTypeRequest(*swf.UndeprecateActivityTypeInput) swf.UndeprecateActivityTypeRequest
+	UndeprecateActivityTypeRequest(*types.UndeprecateActivityTypeInput) swf.UndeprecateActivityTypeRequest
 
-	UndeprecateDomainRequest(*swf.UndeprecateDomainInput) swf.UndeprecateDomainRequest
+	UndeprecateDomainRequest(*types.UndeprecateDomainInput) swf.UndeprecateDomainRequest
 
-	UndeprecateWorkflowTypeRequest(*swf.UndeprecateWorkflowTypeInput) swf.UndeprecateWorkflowTypeRequest
+	UndeprecateWorkflowTypeRequest(*types.UndeprecateWorkflowTypeInput) swf.UndeprecateWorkflowTypeRequest
 
-	UntagResourceRequest(*swf.UntagResourceInput) swf.UntagResourceRequest
+	UntagResourceRequest(*types.UntagResourceInput) swf.UntagResourceRequest
 }
 
 var _ ClientAPI = (*swf.Client)(nil)

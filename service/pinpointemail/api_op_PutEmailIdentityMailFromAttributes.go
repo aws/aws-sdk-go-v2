@@ -6,101 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/pinpointemail/types"
 )
-
-// A request to configure the custom MAIL FROM domain for a verified identity.
-type PutEmailIdentityMailFromAttributesInput struct {
-	_ struct{} `type:"structure"`
-
-	// The action that you want Amazon Pinpoint to take if it can't read the required
-	// MX record when you send an email. When you set this value to UseDefaultValue,
-	// Amazon Pinpoint uses amazonses.com as the MAIL FROM domain. When you set
-	// this value to RejectMessage, Amazon Pinpoint returns a MailFromDomainNotVerified
-	// error, and doesn't attempt to deliver the email.
-	//
-	// These behaviors are taken when the custom MAIL FROM domain configuration
-	// is in the Pending, Failed, and TemporaryFailure states.
-	BehaviorOnMxFailure BehaviorOnMxFailure `type:"string" enum:"true"`
-
-	// The verified email identity that you want to set up the custom MAIL FROM
-	// domain for.
-	//
-	// EmailIdentity is a required field
-	EmailIdentity *string `location:"uri" locationName:"EmailIdentity" type:"string" required:"true"`
-
-	// The custom MAIL FROM domain that you want the verified identity to use. The
-	// MAIL FROM domain must meet the following criteria:
-	//
-	//    * It has to be a subdomain of the verified identity.
-	//
-	//    * It can't be used to receive email.
-	//
-	//    * It can't be used in a "From" address if the MAIL FROM domain is a destination
-	//    for feedback forwarding emails.
-	MailFromDomain *string `type:"string"`
-}
-
-// String returns the string representation
-func (s PutEmailIdentityMailFromAttributesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *PutEmailIdentityMailFromAttributesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "PutEmailIdentityMailFromAttributesInput"}
-
-	if s.EmailIdentity == nil {
-		invalidParams.Add(aws.NewErrParamRequired("EmailIdentity"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s PutEmailIdentityMailFromAttributesInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if len(s.BehaviorOnMxFailure) > 0 {
-		v := s.BehaviorOnMxFailure
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "BehaviorOnMxFailure", protocol.QuotedValue{ValueMarshaler: v}, metadata)
-	}
-	if s.MailFromDomain != nil {
-		v := *s.MailFromDomain
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "MailFromDomain", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.EmailIdentity != nil {
-		v := *s.EmailIdentity
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "EmailIdentity", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-// An HTTP 200 response if the request succeeds, or an error message if the
-// request fails.
-type PutEmailIdentityMailFromAttributesOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s PutEmailIdentityMailFromAttributesOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s PutEmailIdentityMailFromAttributesOutput) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
 
 const opPutEmailIdentityMailFromAttributes = "PutEmailIdentityMailFromAttributes"
 
@@ -118,7 +25,7 @@ const opPutEmailIdentityMailFromAttributes = "PutEmailIdentityMailFromAttributes
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/PutEmailIdentityMailFromAttributes
-func (c *Client) PutEmailIdentityMailFromAttributesRequest(input *PutEmailIdentityMailFromAttributesInput) PutEmailIdentityMailFromAttributesRequest {
+func (c *Client) PutEmailIdentityMailFromAttributesRequest(input *types.PutEmailIdentityMailFromAttributesInput) PutEmailIdentityMailFromAttributesRequest {
 	op := &aws.Operation{
 		Name:       opPutEmailIdentityMailFromAttributes,
 		HTTPMethod: "PUT",
@@ -126,10 +33,10 @@ func (c *Client) PutEmailIdentityMailFromAttributesRequest(input *PutEmailIdenti
 	}
 
 	if input == nil {
-		input = &PutEmailIdentityMailFromAttributesInput{}
+		input = &types.PutEmailIdentityMailFromAttributesInput{}
 	}
 
-	req := c.newRequest(op, input, &PutEmailIdentityMailFromAttributesOutput{})
+	req := c.newRequest(op, input, &types.PutEmailIdentityMailFromAttributesOutput{})
 	return PutEmailIdentityMailFromAttributesRequest{Request: req, Input: input, Copy: c.PutEmailIdentityMailFromAttributesRequest}
 }
 
@@ -137,8 +44,8 @@ func (c *Client) PutEmailIdentityMailFromAttributesRequest(input *PutEmailIdenti
 // PutEmailIdentityMailFromAttributes API operation.
 type PutEmailIdentityMailFromAttributesRequest struct {
 	*aws.Request
-	Input *PutEmailIdentityMailFromAttributesInput
-	Copy  func(*PutEmailIdentityMailFromAttributesInput) PutEmailIdentityMailFromAttributesRequest
+	Input *types.PutEmailIdentityMailFromAttributesInput
+	Copy  func(*types.PutEmailIdentityMailFromAttributesInput) PutEmailIdentityMailFromAttributesRequest
 }
 
 // Send marshals and sends the PutEmailIdentityMailFromAttributes API request.
@@ -150,7 +57,7 @@ func (r PutEmailIdentityMailFromAttributesRequest) Send(ctx context.Context) (*P
 	}
 
 	resp := &PutEmailIdentityMailFromAttributesResponse{
-		PutEmailIdentityMailFromAttributesOutput: r.Request.Data.(*PutEmailIdentityMailFromAttributesOutput),
+		PutEmailIdentityMailFromAttributesOutput: r.Request.Data.(*types.PutEmailIdentityMailFromAttributesOutput),
 		response:                                 &aws.Response{Request: r.Request},
 	}
 
@@ -160,7 +67,7 @@ func (r PutEmailIdentityMailFromAttributesRequest) Send(ctx context.Context) (*P
 // PutEmailIdentityMailFromAttributesResponse is the response type for the
 // PutEmailIdentityMailFromAttributes API operation.
 type PutEmailIdentityMailFromAttributesResponse struct {
-	*PutEmailIdentityMailFromAttributesOutput
+	*types.PutEmailIdentityMailFromAttributesOutput
 
 	response *aws.Response
 }

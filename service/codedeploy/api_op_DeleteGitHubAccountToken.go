@@ -6,34 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/codedeploy/types"
 )
-
-// Represents the input of a DeleteGitHubAccount operation.
-type DeleteGitHubAccountTokenInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the GitHub account connection to delete.
-	TokenName *string `locationName:"tokenName" type:"string"`
-}
-
-// String returns the string representation
-func (s DeleteGitHubAccountTokenInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Represents the output of a DeleteGitHubAccountToken operation.
-type DeleteGitHubAccountTokenOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the GitHub account connection that was deleted.
-	TokenName *string `locationName:"tokenName" type:"string"`
-}
-
-// String returns the string representation
-func (s DeleteGitHubAccountTokenOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteGitHubAccountToken = "DeleteGitHubAccountToken"
 
@@ -50,7 +24,7 @@ const opDeleteGitHubAccountToken = "DeleteGitHubAccountToken"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/DeleteGitHubAccountToken
-func (c *Client) DeleteGitHubAccountTokenRequest(input *DeleteGitHubAccountTokenInput) DeleteGitHubAccountTokenRequest {
+func (c *Client) DeleteGitHubAccountTokenRequest(input *types.DeleteGitHubAccountTokenInput) DeleteGitHubAccountTokenRequest {
 	op := &aws.Operation{
 		Name:       opDeleteGitHubAccountToken,
 		HTTPMethod: "POST",
@@ -58,10 +32,10 @@ func (c *Client) DeleteGitHubAccountTokenRequest(input *DeleteGitHubAccountToken
 	}
 
 	if input == nil {
-		input = &DeleteGitHubAccountTokenInput{}
+		input = &types.DeleteGitHubAccountTokenInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteGitHubAccountTokenOutput{})
+	req := c.newRequest(op, input, &types.DeleteGitHubAccountTokenOutput{})
 	return DeleteGitHubAccountTokenRequest{Request: req, Input: input, Copy: c.DeleteGitHubAccountTokenRequest}
 }
 
@@ -69,8 +43,8 @@ func (c *Client) DeleteGitHubAccountTokenRequest(input *DeleteGitHubAccountToken
 // DeleteGitHubAccountToken API operation.
 type DeleteGitHubAccountTokenRequest struct {
 	*aws.Request
-	Input *DeleteGitHubAccountTokenInput
-	Copy  func(*DeleteGitHubAccountTokenInput) DeleteGitHubAccountTokenRequest
+	Input *types.DeleteGitHubAccountTokenInput
+	Copy  func(*types.DeleteGitHubAccountTokenInput) DeleteGitHubAccountTokenRequest
 }
 
 // Send marshals and sends the DeleteGitHubAccountToken API request.
@@ -82,7 +56,7 @@ func (r DeleteGitHubAccountTokenRequest) Send(ctx context.Context) (*DeleteGitHu
 	}
 
 	resp := &DeleteGitHubAccountTokenResponse{
-		DeleteGitHubAccountTokenOutput: r.Request.Data.(*DeleteGitHubAccountTokenOutput),
+		DeleteGitHubAccountTokenOutput: r.Request.Data.(*types.DeleteGitHubAccountTokenOutput),
 		response:                       &aws.Response{Request: r.Request},
 	}
 
@@ -92,7 +66,7 @@ func (r DeleteGitHubAccountTokenRequest) Send(ctx context.Context) (*DeleteGitHu
 // DeleteGitHubAccountTokenResponse is the response type for the
 // DeleteGitHubAccountToken API operation.
 type DeleteGitHubAccountTokenResponse struct {
-	*DeleteGitHubAccountTokenOutput
+	*types.DeleteGitHubAccountTokenOutput
 
 	response *aws.Response
 }

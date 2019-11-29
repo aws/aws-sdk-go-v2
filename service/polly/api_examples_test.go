@@ -12,6 +12,8 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws/awserr"
 	"github.com/aws/aws-sdk-go-v2/aws/external"
 	"github.com/aws/aws-sdk-go-v2/service/polly"
+	"github.com/aws/aws-sdk-go-v2/service/polly/enums"
+	"github.com/aws/aws-sdk-go-v2/service/polly/types"
 )
 
 var _ time.Duration
@@ -36,7 +38,7 @@ func ExampleClient_DeleteLexiconRequest_shared00() {
 	}
 
 	svc := polly.New(cfg)
-	input := &polly.DeleteLexiconInput{
+	input := &types.DeleteLexiconInput{
 		Name: aws.String("example"),
 	}
 
@@ -75,8 +77,8 @@ func ExampleClient_DescribeVoicesRequest_shared00() {
 	}
 
 	svc := polly.New(cfg)
-	input := &polly.DescribeVoicesInput{
-		LanguageCode: polly.LanguageCodeEnGb,
+	input := &types.DescribeVoicesInput{
+		LanguageCode: enums.LanguageCodeEnGb,
 	}
 
 	req := svc.DescribeVoicesRequest(input)
@@ -112,7 +114,7 @@ func ExampleClient_GetLexiconRequest_shared00() {
 	}
 
 	svc := polly.New(cfg)
-	input := &polly.GetLexiconInput{
+	input := &types.GetLexiconInput{
 		Name: aws.String(""),
 	}
 
@@ -149,7 +151,7 @@ func ExampleClient_ListLexiconsRequest_shared00() {
 	}
 
 	svc := polly.New(cfg)
-	input := &polly.ListLexiconsInput{}
+	input := &types.ListLexiconsInput{}
 
 	req := svc.ListLexiconsRequest(input)
 	result, err := req.Send(context.Background())
@@ -184,7 +186,7 @@ func ExampleClient_PutLexiconRequest_shared00() {
 	}
 
 	svc := polly.New(cfg)
-	input := &polly.PutLexiconInput{
+	input := &types.PutLexiconInput{
 		Content: aws.String("file://example.pls"),
 		Name:    aws.String("W3C"),
 	}
@@ -232,15 +234,15 @@ func ExampleClient_SynthesizeSpeechRequest_shared00() {
 	}
 
 	svc := polly.New(cfg)
-	input := &polly.SynthesizeSpeechInput{
+	input := &types.SynthesizeSpeechInput{
 		LexiconNames: []string{
 			"example",
 		},
-		OutputFormat: polly.OutputFormatMp3,
+		OutputFormat: enums.OutputFormatMp3,
 		SampleRate:   aws.String("8000"),
 		Text:         aws.String("All Gaul is divided into three parts"),
-		TextType:     polly.TextTypeText,
-		VoiceId:      polly.VoiceIdJoanna,
+		TextType:     enums.TextTypeText,
+		VoiceId:      enums.VoiceIdJoanna,
 	}
 
 	req := svc.SynthesizeSpeechRequest(input)

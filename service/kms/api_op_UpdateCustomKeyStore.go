@@ -6,83 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/kms/types"
 )
-
-type UpdateCustomKeyStoreInput struct {
-	_ struct{} `type:"structure"`
-
-	// Associates the custom key store with a related AWS CloudHSM cluster.
-	//
-	// Enter the cluster ID of the cluster that you used to create the custom key
-	// store or a cluster that shares a backup history and has the same cluster
-	// certificate as the original cluster. You cannot use this parameter to associate
-	// a custom key store with an unrelated cluster. In addition, the replacement
-	// cluster must fulfill the requirements (https://docs.aws.amazon.com/kms/latest/developerguide/create-keystore.html#before-keystore)
-	// for a cluster associated with a custom key store. To view the cluster certificate
-	// of a cluster, use the DescribeClusters (https://docs.aws.amazon.com/cloudhsm/latest/APIReference/API_DescribeClusters.html)
-	// operation.
-	CloudHsmClusterId *string `min:"19" type:"string"`
-
-	// Identifies the custom key store that you want to update. Enter the ID of
-	// the custom key store. To find the ID of a custom key store, use the DescribeCustomKeyStores
-	// operation.
-	//
-	// CustomKeyStoreId is a required field
-	CustomKeyStoreId *string `min:"1" type:"string" required:"true"`
-
-	// Enter the current password of the kmsuser crypto user (CU) in the AWS CloudHSM
-	// cluster that is associated with the custom key store.
-	//
-	// This parameter tells AWS KMS the current password of the kmsuser crypto user
-	// (CU). It does not set or change the password of any users in the AWS CloudHSM
-	// cluster.
-	KeyStorePassword *string `min:"1" type:"string" sensitive:"true"`
-
-	// Changes the friendly name of the custom key store to the value that you specify.
-	// The custom key store name must be unique in the AWS account.
-	NewCustomKeyStoreName *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s UpdateCustomKeyStoreInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateCustomKeyStoreInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateCustomKeyStoreInput"}
-	if s.CloudHsmClusterId != nil && len(*s.CloudHsmClusterId) < 19 {
-		invalidParams.Add(aws.NewErrParamMinLen("CloudHsmClusterId", 19))
-	}
-
-	if s.CustomKeyStoreId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("CustomKeyStoreId"))
-	}
-	if s.CustomKeyStoreId != nil && len(*s.CustomKeyStoreId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("CustomKeyStoreId", 1))
-	}
-	if s.KeyStorePassword != nil && len(*s.KeyStorePassword) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("KeyStorePassword", 1))
-	}
-	if s.NewCustomKeyStoreName != nil && len(*s.NewCustomKeyStoreName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("NewCustomKeyStoreName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type UpdateCustomKeyStoreOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s UpdateCustomKeyStoreOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opUpdateCustomKeyStore = "UpdateCustomKeyStore"
 
@@ -132,7 +57,7 @@ const opUpdateCustomKeyStore = "UpdateCustomKeyStore"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/UpdateCustomKeyStore
-func (c *Client) UpdateCustomKeyStoreRequest(input *UpdateCustomKeyStoreInput) UpdateCustomKeyStoreRequest {
+func (c *Client) UpdateCustomKeyStoreRequest(input *types.UpdateCustomKeyStoreInput) UpdateCustomKeyStoreRequest {
 	op := &aws.Operation{
 		Name:       opUpdateCustomKeyStore,
 		HTTPMethod: "POST",
@@ -140,10 +65,10 @@ func (c *Client) UpdateCustomKeyStoreRequest(input *UpdateCustomKeyStoreInput) U
 	}
 
 	if input == nil {
-		input = &UpdateCustomKeyStoreInput{}
+		input = &types.UpdateCustomKeyStoreInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateCustomKeyStoreOutput{})
+	req := c.newRequest(op, input, &types.UpdateCustomKeyStoreOutput{})
 	return UpdateCustomKeyStoreRequest{Request: req, Input: input, Copy: c.UpdateCustomKeyStoreRequest}
 }
 
@@ -151,8 +76,8 @@ func (c *Client) UpdateCustomKeyStoreRequest(input *UpdateCustomKeyStoreInput) U
 // UpdateCustomKeyStore API operation.
 type UpdateCustomKeyStoreRequest struct {
 	*aws.Request
-	Input *UpdateCustomKeyStoreInput
-	Copy  func(*UpdateCustomKeyStoreInput) UpdateCustomKeyStoreRequest
+	Input *types.UpdateCustomKeyStoreInput
+	Copy  func(*types.UpdateCustomKeyStoreInput) UpdateCustomKeyStoreRequest
 }
 
 // Send marshals and sends the UpdateCustomKeyStore API request.
@@ -164,7 +89,7 @@ func (r UpdateCustomKeyStoreRequest) Send(ctx context.Context) (*UpdateCustomKey
 	}
 
 	resp := &UpdateCustomKeyStoreResponse{
-		UpdateCustomKeyStoreOutput: r.Request.Data.(*UpdateCustomKeyStoreOutput),
+		UpdateCustomKeyStoreOutput: r.Request.Data.(*types.UpdateCustomKeyStoreOutput),
 		response:                   &aws.Response{Request: r.Request},
 	}
 
@@ -174,7 +99,7 @@ func (r UpdateCustomKeyStoreRequest) Send(ctx context.Context) (*UpdateCustomKey
 // UpdateCustomKeyStoreResponse is the response type for the
 // UpdateCustomKeyStore API operation.
 type UpdateCustomKeyStoreResponse struct {
-	*UpdateCustomKeyStoreOutput
+	*types.UpdateCustomKeyStoreOutput
 
 	response *aws.Response
 }

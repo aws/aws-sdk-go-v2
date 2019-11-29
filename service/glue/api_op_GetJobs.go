@@ -6,51 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/glue/types"
 )
-
-type GetJobsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The maximum size of the response.
-	MaxResults *int64 `min:"1" type:"integer"`
-
-	// A continuation token, if this is a continuation call.
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s GetJobsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetJobsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetJobsInput"}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type GetJobsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A list of job definitions.
-	Jobs []Job `type:"list"`
-
-	// A continuation token, if not all job definitions have yet been returned.
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s GetJobsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetJobs = "GetJobs"
 
@@ -67,7 +24,7 @@ const opGetJobs = "GetJobs"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetJobs
-func (c *Client) GetJobsRequest(input *GetJobsInput) GetJobsRequest {
+func (c *Client) GetJobsRequest(input *types.GetJobsInput) GetJobsRequest {
 	op := &aws.Operation{
 		Name:       opGetJobs,
 		HTTPMethod: "POST",
@@ -81,10 +38,10 @@ func (c *Client) GetJobsRequest(input *GetJobsInput) GetJobsRequest {
 	}
 
 	if input == nil {
-		input = &GetJobsInput{}
+		input = &types.GetJobsInput{}
 	}
 
-	req := c.newRequest(op, input, &GetJobsOutput{})
+	req := c.newRequest(op, input, &types.GetJobsOutput{})
 	return GetJobsRequest{Request: req, Input: input, Copy: c.GetJobsRequest}
 }
 
@@ -92,8 +49,8 @@ func (c *Client) GetJobsRequest(input *GetJobsInput) GetJobsRequest {
 // GetJobs API operation.
 type GetJobsRequest struct {
 	*aws.Request
-	Input *GetJobsInput
-	Copy  func(*GetJobsInput) GetJobsRequest
+	Input *types.GetJobsInput
+	Copy  func(*types.GetJobsInput) GetJobsRequest
 }
 
 // Send marshals and sends the GetJobs API request.
@@ -105,7 +62,7 @@ func (r GetJobsRequest) Send(ctx context.Context) (*GetJobsResponse, error) {
 	}
 
 	resp := &GetJobsResponse{
-		GetJobsOutput: r.Request.Data.(*GetJobsOutput),
+		GetJobsOutput: r.Request.Data.(*types.GetJobsOutput),
 		response:      &aws.Response{Request: r.Request},
 	}
 
@@ -135,7 +92,7 @@ func NewGetJobsPaginator(req GetJobsRequest) GetJobsPaginator {
 	return GetJobsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *GetJobsInput
+				var inCpy *types.GetJobsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -155,14 +112,14 @@ type GetJobsPaginator struct {
 	aws.Pager
 }
 
-func (p *GetJobsPaginator) CurrentPage() *GetJobsOutput {
-	return p.Pager.CurrentPage().(*GetJobsOutput)
+func (p *GetJobsPaginator) CurrentPage() *types.GetJobsOutput {
+	return p.Pager.CurrentPage().(*types.GetJobsOutput)
 }
 
 // GetJobsResponse is the response type for the
 // GetJobs API operation.
 type GetJobsResponse struct {
-	*GetJobsOutput
+	*types.GetJobsOutput
 
 	response *aws.Response
 }

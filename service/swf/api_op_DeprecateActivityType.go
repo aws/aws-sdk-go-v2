@@ -6,64 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
+	"github.com/aws/aws-sdk-go-v2/service/swf/types"
 )
-
-type DeprecateActivityTypeInput struct {
-	_ struct{} `type:"structure"`
-
-	// The activity type to deprecate.
-	//
-	// ActivityType is a required field
-	ActivityType *ActivityType `locationName:"activityType" type:"structure" required:"true"`
-
-	// The name of the domain in which the activity type is registered.
-	//
-	// Domain is a required field
-	Domain *string `locationName:"domain" min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeprecateActivityTypeInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeprecateActivityTypeInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeprecateActivityTypeInput"}
-
-	if s.ActivityType == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ActivityType"))
-	}
-
-	if s.Domain == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Domain"))
-	}
-	if s.Domain != nil && len(*s.Domain) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Domain", 1))
-	}
-	if s.ActivityType != nil {
-		if err := s.ActivityType.Validate(); err != nil {
-			invalidParams.AddNested("ActivityType", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeprecateActivityTypeOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeprecateActivityTypeOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeprecateActivityType = "DeprecateActivityType"
 
@@ -105,7 +51,7 @@ const opDeprecateActivityType = "DeprecateActivityType"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) DeprecateActivityTypeRequest(input *DeprecateActivityTypeInput) DeprecateActivityTypeRequest {
+func (c *Client) DeprecateActivityTypeRequest(input *types.DeprecateActivityTypeInput) DeprecateActivityTypeRequest {
 	op := &aws.Operation{
 		Name:       opDeprecateActivityType,
 		HTTPMethod: "POST",
@@ -113,10 +59,10 @@ func (c *Client) DeprecateActivityTypeRequest(input *DeprecateActivityTypeInput)
 	}
 
 	if input == nil {
-		input = &DeprecateActivityTypeInput{}
+		input = &types.DeprecateActivityTypeInput{}
 	}
 
-	req := c.newRequest(op, input, &DeprecateActivityTypeOutput{})
+	req := c.newRequest(op, input, &types.DeprecateActivityTypeOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return DeprecateActivityTypeRequest{Request: req, Input: input, Copy: c.DeprecateActivityTypeRequest}
@@ -126,8 +72,8 @@ func (c *Client) DeprecateActivityTypeRequest(input *DeprecateActivityTypeInput)
 // DeprecateActivityType API operation.
 type DeprecateActivityTypeRequest struct {
 	*aws.Request
-	Input *DeprecateActivityTypeInput
-	Copy  func(*DeprecateActivityTypeInput) DeprecateActivityTypeRequest
+	Input *types.DeprecateActivityTypeInput
+	Copy  func(*types.DeprecateActivityTypeInput) DeprecateActivityTypeRequest
 }
 
 // Send marshals and sends the DeprecateActivityType API request.
@@ -139,7 +85,7 @@ func (r DeprecateActivityTypeRequest) Send(ctx context.Context) (*DeprecateActiv
 	}
 
 	resp := &DeprecateActivityTypeResponse{
-		DeprecateActivityTypeOutput: r.Request.Data.(*DeprecateActivityTypeOutput),
+		DeprecateActivityTypeOutput: r.Request.Data.(*types.DeprecateActivityTypeOutput),
 		response:                    &aws.Response{Request: r.Request},
 	}
 
@@ -149,7 +95,7 @@ func (r DeprecateActivityTypeRequest) Send(ctx context.Context) (*DeprecateActiv
 // DeprecateActivityTypeResponse is the response type for the
 // DeprecateActivityType API operation.
 type DeprecateActivityTypeResponse struct {
-	*DeprecateActivityTypeOutput
+	*types.DeprecateActivityTypeOutput
 
 	response *aws.Response
 }

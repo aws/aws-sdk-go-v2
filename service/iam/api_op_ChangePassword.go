@@ -6,72 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/query"
+	"github.com/aws/aws-sdk-go-v2/service/iam/types"
 )
-
-type ChangePasswordInput struct {
-	_ struct{} `type:"structure"`
-
-	// The new password. The new password must conform to the AWS account's password
-	// policy, if one exists.
-	//
-	// The regex pattern (http://wikipedia.org/wiki/regex) that is used to validate
-	// this parameter is a string of characters. That string can include almost
-	// any printable ASCII character from the space (\u0020) through the end of
-	// the ASCII character range (\u00FF). You can also include the tab (\u0009),
-	// line feed (\u000A), and carriage return (\u000D) characters. Any of these
-	// characters are valid in a password. However, many tools, such as the AWS
-	// Management Console, might restrict the ability to type certain characters
-	// because they have special meaning within that tool.
-	//
-	// NewPassword is a required field
-	NewPassword *string `min:"1" type:"string" required:"true" sensitive:"true"`
-
-	// The IAM user's current password.
-	//
-	// OldPassword is a required field
-	OldPassword *string `min:"1" type:"string" required:"true" sensitive:"true"`
-}
-
-// String returns the string representation
-func (s ChangePasswordInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ChangePasswordInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ChangePasswordInput"}
-
-	if s.NewPassword == nil {
-		invalidParams.Add(aws.NewErrParamRequired("NewPassword"))
-	}
-	if s.NewPassword != nil && len(*s.NewPassword) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("NewPassword", 1))
-	}
-
-	if s.OldPassword == nil {
-		invalidParams.Add(aws.NewErrParamRequired("OldPassword"))
-	}
-	if s.OldPassword != nil && len(*s.OldPassword) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("OldPassword", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ChangePasswordOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s ChangePasswordOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opChangePassword = "ChangePassword"
 
@@ -93,7 +31,7 @@ const opChangePassword = "ChangePassword"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ChangePassword
-func (c *Client) ChangePasswordRequest(input *ChangePasswordInput) ChangePasswordRequest {
+func (c *Client) ChangePasswordRequest(input *types.ChangePasswordInput) ChangePasswordRequest {
 	op := &aws.Operation{
 		Name:       opChangePassword,
 		HTTPMethod: "POST",
@@ -101,10 +39,10 @@ func (c *Client) ChangePasswordRequest(input *ChangePasswordInput) ChangePasswor
 	}
 
 	if input == nil {
-		input = &ChangePasswordInput{}
+		input = &types.ChangePasswordInput{}
 	}
 
-	req := c.newRequest(op, input, &ChangePasswordOutput{})
+	req := c.newRequest(op, input, &types.ChangePasswordOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return ChangePasswordRequest{Request: req, Input: input, Copy: c.ChangePasswordRequest}
@@ -114,8 +52,8 @@ func (c *Client) ChangePasswordRequest(input *ChangePasswordInput) ChangePasswor
 // ChangePassword API operation.
 type ChangePasswordRequest struct {
 	*aws.Request
-	Input *ChangePasswordInput
-	Copy  func(*ChangePasswordInput) ChangePasswordRequest
+	Input *types.ChangePasswordInput
+	Copy  func(*types.ChangePasswordInput) ChangePasswordRequest
 }
 
 // Send marshals and sends the ChangePassword API request.
@@ -127,7 +65,7 @@ func (r ChangePasswordRequest) Send(ctx context.Context) (*ChangePasswordRespons
 	}
 
 	resp := &ChangePasswordResponse{
-		ChangePasswordOutput: r.Request.Data.(*ChangePasswordOutput),
+		ChangePasswordOutput: r.Request.Data.(*types.ChangePasswordOutput),
 		response:             &aws.Response{Request: r.Request},
 	}
 
@@ -137,7 +75,7 @@ func (r ChangePasswordRequest) Send(ctx context.Context) (*ChangePasswordRespons
 // ChangePasswordResponse is the response type for the
 // ChangePassword API operation.
 type ChangePasswordResponse struct {
-	*ChangePasswordOutput
+	*types.ChangePasswordOutput
 
 	response *aws.Response
 }

@@ -6,85 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/gamelift/types"
 )
-
-// Represents the input for a request action.
-type CreateBuildInput struct {
-	_ struct{} `type:"structure"`
-
-	// Descriptive label that is associated with a build. Build names do not need
-	// to be unique. You can use UpdateBuild to change this value later.
-	Name *string `min:"1" type:"string"`
-
-	// Operating system that the game server binaries are built to run on. This
-	// value determines the type of fleet resources that you can use for this build.
-	// If your game build contains multiple executables, they all must run on the
-	// same operating system. If an operating system is not specified when creating
-	// a build, Amazon GameLift uses the default value (WINDOWS_2012). This value
-	// cannot be changed later.
-	OperatingSystem OperatingSystem `type:"string" enum:"true"`
-
-	// Information indicating where your game build files are stored. Use this parameter
-	// only when creating a build with files stored in an Amazon S3 bucket that
-	// you own. The storage location must specify an Amazon S3 bucket name and key,
-	// as well as a the ARN for a role that you set up to allow Amazon GameLift
-	// to access your Amazon S3 bucket. The S3 bucket must be in the same region
-	// that you want to create a new build in.
-	StorageLocation *S3Location `type:"structure"`
-
-	// Version that is associated with a build or script. Version strings do not
-	// need to be unique. You can use UpdateBuild to change this value later.
-	Version *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s CreateBuildInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateBuildInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateBuildInput"}
-	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
-	}
-	if s.Version != nil && len(*s.Version) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Version", 1))
-	}
-	if s.StorageLocation != nil {
-		if err := s.StorageLocation.Validate(); err != nil {
-			invalidParams.AddNested("StorageLocation", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Represents the returned data in response to a request action.
-type CreateBuildOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The newly created build record, including a unique build ID and status.
-	Build *Build `type:"structure"`
-
-	// Amazon S3 location for your game build file, including bucket name and key.
-	StorageLocation *S3Location `type:"structure"`
-
-	// This element is returned only when the operation is called without a storage
-	// location. It contains credentials to use when you are uploading a build file
-	// to an Amazon S3 bucket that is owned by Amazon GameLift. Credentials have
-	// a limited life span. To refresh these credentials, call RequestUploadCredentials.
-	UploadCredentials *AwsCredentials `type:"structure" sensitive:"true"`
-}
-
-// String returns the string representation
-func (s CreateBuildOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCreateBuild = "CreateBuild"
 
@@ -151,7 +74,7 @@ const opCreateBuild = "CreateBuild"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/CreateBuild
-func (c *Client) CreateBuildRequest(input *CreateBuildInput) CreateBuildRequest {
+func (c *Client) CreateBuildRequest(input *types.CreateBuildInput) CreateBuildRequest {
 	op := &aws.Operation{
 		Name:       opCreateBuild,
 		HTTPMethod: "POST",
@@ -159,10 +82,10 @@ func (c *Client) CreateBuildRequest(input *CreateBuildInput) CreateBuildRequest 
 	}
 
 	if input == nil {
-		input = &CreateBuildInput{}
+		input = &types.CreateBuildInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateBuildOutput{})
+	req := c.newRequest(op, input, &types.CreateBuildOutput{})
 	return CreateBuildRequest{Request: req, Input: input, Copy: c.CreateBuildRequest}
 }
 
@@ -170,8 +93,8 @@ func (c *Client) CreateBuildRequest(input *CreateBuildInput) CreateBuildRequest 
 // CreateBuild API operation.
 type CreateBuildRequest struct {
 	*aws.Request
-	Input *CreateBuildInput
-	Copy  func(*CreateBuildInput) CreateBuildRequest
+	Input *types.CreateBuildInput
+	Copy  func(*types.CreateBuildInput) CreateBuildRequest
 }
 
 // Send marshals and sends the CreateBuild API request.
@@ -183,7 +106,7 @@ func (r CreateBuildRequest) Send(ctx context.Context) (*CreateBuildResponse, err
 	}
 
 	resp := &CreateBuildResponse{
-		CreateBuildOutput: r.Request.Data.(*CreateBuildOutput),
+		CreateBuildOutput: r.Request.Data.(*types.CreateBuildOutput),
 		response:          &aws.Response{Request: r.Request},
 	}
 
@@ -193,7 +116,7 @@ func (r CreateBuildRequest) Send(ctx context.Context) (*CreateBuildResponse, err
 // CreateBuildResponse is the response type for the
 // CreateBuild API operation.
 type CreateBuildResponse struct {
-	*CreateBuildOutput
+	*types.CreateBuildOutput
 
 	response *aws.Response
 }

@@ -6,78 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-type DescribeNatGatewaysInput struct {
-	_ struct{} `type:"structure"`
-
-	// One or more filters.
-	//
-	//    * nat-gateway-id - The ID of the NAT gateway.
-	//
-	//    * state - The state of the NAT gateway (pending | failed | available |
-	//    deleting | deleted).
-	//
-	//    * subnet-id - The ID of the subnet in which the NAT gateway resides.
-	//
-	//    * tag:<key> - The key/value combination of a tag assigned to the resource.
-	//    Use the tag key in the filter name and the tag value as the filter value.
-	//    For example, to find all resources that have a tag with the key Owner
-	//    and the value TeamA, specify tag:Owner for the filter name and TeamA for
-	//    the filter value.
-	//
-	//    * tag-key - The key of a tag assigned to the resource. Use this filter
-	//    to find all resources assigned a tag with a specific key, regardless of
-	//    the tag value.
-	//
-	//    * vpc-id - The ID of the VPC in which the NAT gateway resides.
-	Filter []Filter `locationNameList:"Filter" type:"list"`
-
-	// The maximum number of results to return with a single call. To retrieve the
-	// remaining results, make another call with the returned nextToken value.
-	MaxResults *int64 `min:"5" type:"integer"`
-
-	// One or more NAT gateway IDs.
-	NatGatewayIds []string `locationName:"NatGatewayId" locationNameList:"item" type:"list"`
-
-	// The token for the next page of results.
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeNatGatewaysInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeNatGatewaysInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeNatGatewaysInput"}
-	if s.MaxResults != nil && *s.MaxResults < 5 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 5))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribeNatGatewaysOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Information about the NAT gateways.
-	NatGateways []NatGateway `locationName:"natGatewaySet" locationNameList:"item" type:"list"`
-
-	// The token to use to retrieve the next page of results. This value is null
-	// when there are no more results to return.
-	NextToken *string `locationName:"nextToken" type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeNatGatewaysOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeNatGateways = "DescribeNatGateways"
 
@@ -94,7 +24,7 @@ const opDescribeNatGateways = "DescribeNatGateways"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeNatGateways
-func (c *Client) DescribeNatGatewaysRequest(input *DescribeNatGatewaysInput) DescribeNatGatewaysRequest {
+func (c *Client) DescribeNatGatewaysRequest(input *types.DescribeNatGatewaysInput) DescribeNatGatewaysRequest {
 	op := &aws.Operation{
 		Name:       opDescribeNatGateways,
 		HTTPMethod: "POST",
@@ -108,10 +38,10 @@ func (c *Client) DescribeNatGatewaysRequest(input *DescribeNatGatewaysInput) Des
 	}
 
 	if input == nil {
-		input = &DescribeNatGatewaysInput{}
+		input = &types.DescribeNatGatewaysInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeNatGatewaysOutput{})
+	req := c.newRequest(op, input, &types.DescribeNatGatewaysOutput{})
 	return DescribeNatGatewaysRequest{Request: req, Input: input, Copy: c.DescribeNatGatewaysRequest}
 }
 
@@ -119,8 +49,8 @@ func (c *Client) DescribeNatGatewaysRequest(input *DescribeNatGatewaysInput) Des
 // DescribeNatGateways API operation.
 type DescribeNatGatewaysRequest struct {
 	*aws.Request
-	Input *DescribeNatGatewaysInput
-	Copy  func(*DescribeNatGatewaysInput) DescribeNatGatewaysRequest
+	Input *types.DescribeNatGatewaysInput
+	Copy  func(*types.DescribeNatGatewaysInput) DescribeNatGatewaysRequest
 }
 
 // Send marshals and sends the DescribeNatGateways API request.
@@ -132,7 +62,7 @@ func (r DescribeNatGatewaysRequest) Send(ctx context.Context) (*DescribeNatGatew
 	}
 
 	resp := &DescribeNatGatewaysResponse{
-		DescribeNatGatewaysOutput: r.Request.Data.(*DescribeNatGatewaysOutput),
+		DescribeNatGatewaysOutput: r.Request.Data.(*types.DescribeNatGatewaysOutput),
 		response:                  &aws.Response{Request: r.Request},
 	}
 
@@ -162,7 +92,7 @@ func NewDescribeNatGatewaysPaginator(req DescribeNatGatewaysRequest) DescribeNat
 	return DescribeNatGatewaysPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *DescribeNatGatewaysInput
+				var inCpy *types.DescribeNatGatewaysInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -182,14 +112,14 @@ type DescribeNatGatewaysPaginator struct {
 	aws.Pager
 }
 
-func (p *DescribeNatGatewaysPaginator) CurrentPage() *DescribeNatGatewaysOutput {
-	return p.Pager.CurrentPage().(*DescribeNatGatewaysOutput)
+func (p *DescribeNatGatewaysPaginator) CurrentPage() *types.DescribeNatGatewaysOutput {
+	return p.Pager.CurrentPage().(*types.DescribeNatGatewaysOutput)
 }
 
 // DescribeNatGatewaysResponse is the response type for the
 // DescribeNatGateways API operation.
 type DescribeNatGatewaysResponse struct {
-	*DescribeNatGatewaysOutput
+	*types.DescribeNatGatewaysOutput
 
 	response *aws.Response
 }

@@ -6,60 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/personalize/types"
 )
-
-type CreateSchemaInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name for the schema.
-	//
-	// Name is a required field
-	Name *string `locationName:"name" min:"1" type:"string" required:"true"`
-
-	// A schema in Avro JSON format.
-	//
-	// Schema is a required field
-	Schema *string `locationName:"schema" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s CreateSchemaInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateSchemaInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateSchemaInput"}
-
-	if s.Name == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Name"))
-	}
-	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
-	}
-
-	if s.Schema == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Schema"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type CreateSchemaOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the created schema.
-	SchemaArn *string `locationName:"schemaArn" type:"string"`
-}
-
-// String returns the string representation
-func (s CreateSchemaOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCreateSchema = "CreateSchema"
 
@@ -89,7 +37,7 @@ const opCreateSchema = "CreateSchema"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/CreateSchema
-func (c *Client) CreateSchemaRequest(input *CreateSchemaInput) CreateSchemaRequest {
+func (c *Client) CreateSchemaRequest(input *types.CreateSchemaInput) CreateSchemaRequest {
 	op := &aws.Operation{
 		Name:       opCreateSchema,
 		HTTPMethod: "POST",
@@ -97,10 +45,10 @@ func (c *Client) CreateSchemaRequest(input *CreateSchemaInput) CreateSchemaReque
 	}
 
 	if input == nil {
-		input = &CreateSchemaInput{}
+		input = &types.CreateSchemaInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateSchemaOutput{})
+	req := c.newRequest(op, input, &types.CreateSchemaOutput{})
 	return CreateSchemaRequest{Request: req, Input: input, Copy: c.CreateSchemaRequest}
 }
 
@@ -108,8 +56,8 @@ func (c *Client) CreateSchemaRequest(input *CreateSchemaInput) CreateSchemaReque
 // CreateSchema API operation.
 type CreateSchemaRequest struct {
 	*aws.Request
-	Input *CreateSchemaInput
-	Copy  func(*CreateSchemaInput) CreateSchemaRequest
+	Input *types.CreateSchemaInput
+	Copy  func(*types.CreateSchemaInput) CreateSchemaRequest
 }
 
 // Send marshals and sends the CreateSchema API request.
@@ -121,7 +69,7 @@ func (r CreateSchemaRequest) Send(ctx context.Context) (*CreateSchemaResponse, e
 	}
 
 	resp := &CreateSchemaResponse{
-		CreateSchemaOutput: r.Request.Data.(*CreateSchemaOutput),
+		CreateSchemaOutput: r.Request.Data.(*types.CreateSchemaOutput),
 		response:           &aws.Response{Request: r.Request},
 	}
 
@@ -131,7 +79,7 @@ func (r CreateSchemaRequest) Send(ctx context.Context) (*CreateSchemaResponse, e
 // CreateSchemaResponse is the response type for the
 // CreateSchema API operation.
 type CreateSchemaResponse struct {
-	*CreateSchemaOutput
+	*types.CreateSchemaOutput
 
 	response *aws.Response
 }

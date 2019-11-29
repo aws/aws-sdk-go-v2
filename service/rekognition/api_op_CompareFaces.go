@@ -6,123 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/rekognition/types"
 )
-
-type CompareFacesInput struct {
-	_ struct{} `type:"structure"`
-
-	// The minimum level of confidence in the face matches that a match must meet
-	// to be included in the FaceMatches array.
-	SimilarityThreshold *float64 `type:"float"`
-
-	// The input image as base64-encoded bytes or an S3 object. If you use the AWS
-	// CLI to call Amazon Rekognition operations, passing base64-encoded image bytes
-	// is not supported.
-	//
-	// If you are using an AWS SDK to call Amazon Rekognition, you might not need
-	// to base64-encode image bytes passed using the Bytes field. For more information,
-	// see Images in the Amazon Rekognition developer guide.
-	//
-	// SourceImage is a required field
-	SourceImage *Image `type:"structure" required:"true"`
-
-	// The target image as base64-encoded bytes or an S3 object. If you use the
-	// AWS CLI to call Amazon Rekognition operations, passing base64-encoded image
-	// bytes is not supported.
-	//
-	// If you are using an AWS SDK to call Amazon Rekognition, you might not need
-	// to base64-encode image bytes passed using the Bytes field. For more information,
-	// see Images in the Amazon Rekognition developer guide.
-	//
-	// TargetImage is a required field
-	TargetImage *Image `type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s CompareFacesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CompareFacesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CompareFacesInput"}
-
-	if s.SourceImage == nil {
-		invalidParams.Add(aws.NewErrParamRequired("SourceImage"))
-	}
-
-	if s.TargetImage == nil {
-		invalidParams.Add(aws.NewErrParamRequired("TargetImage"))
-	}
-	if s.SourceImage != nil {
-		if err := s.SourceImage.Validate(); err != nil {
-			invalidParams.AddNested("SourceImage", err.(aws.ErrInvalidParams))
-		}
-	}
-	if s.TargetImage != nil {
-		if err := s.TargetImage.Validate(); err != nil {
-			invalidParams.AddNested("TargetImage", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type CompareFacesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// An array of faces in the target image that match the source image face. Each
-	// CompareFacesMatch object provides the bounding box, the confidence level
-	// that the bounding box contains a face, and the similarity score for the face
-	// in the bounding box and the face in the source image.
-	FaceMatches []CompareFacesMatch `type:"list"`
-
-	// The face in the source image that was used for comparison.
-	SourceImageFace *ComparedSourceImageFace `type:"structure"`
-
-	// The value of SourceImageOrientationCorrection is always null.
-	//
-	// If the input image is in .jpeg format, it might contain exchangeable image
-	// file format (Exif) metadata that includes the image's orientation. Amazon
-	// Rekognition uses this orientation information to perform image correction.
-	// The bounding box coordinates are translated to represent object locations
-	// after the orientation information in the Exif metadata is used to correct
-	// the image orientation. Images in .png format don't contain Exif metadata.
-	//
-	// Amazon Rekognition doesn’t perform image correction for images in .png
-	// format and .jpeg images without orientation information in the image Exif
-	// metadata. The bounding box coordinates aren't translated and represent the
-	// object locations before the image is rotated.
-	SourceImageOrientationCorrection OrientationCorrection `type:"string" enum:"true"`
-
-	// The value of TargetImageOrientationCorrection is always null.
-	//
-	// If the input image is in .jpeg format, it might contain exchangeable image
-	// file format (Exif) metadata that includes the image's orientation. Amazon
-	// Rekognition uses this orientation information to perform image correction.
-	// The bounding box coordinates are translated to represent object locations
-	// after the orientation information in the Exif metadata is used to correct
-	// the image orientation. Images in .png format don't contain Exif metadata.
-	//
-	// Amazon Rekognition doesn’t perform image correction for images in .png
-	// format and .jpeg images without orientation information in the image Exif
-	// metadata. The bounding box coordinates aren't translated and represent the
-	// object locations before the image is rotated.
-	TargetImageOrientationCorrection OrientationCorrection `type:"string" enum:"true"`
-
-	// An array of faces in the target image that did not match the source image
-	// face.
-	UnmatchedFaces []ComparedFace `type:"list"`
-}
-
-// String returns the string representation
-func (s CompareFacesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCompareFaces = "CompareFaces"
 
@@ -179,7 +64,7 @@ const opCompareFaces = "CompareFaces"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) CompareFacesRequest(input *CompareFacesInput) CompareFacesRequest {
+func (c *Client) CompareFacesRequest(input *types.CompareFacesInput) CompareFacesRequest {
 	op := &aws.Operation{
 		Name:       opCompareFaces,
 		HTTPMethod: "POST",
@@ -187,10 +72,10 @@ func (c *Client) CompareFacesRequest(input *CompareFacesInput) CompareFacesReque
 	}
 
 	if input == nil {
-		input = &CompareFacesInput{}
+		input = &types.CompareFacesInput{}
 	}
 
-	req := c.newRequest(op, input, &CompareFacesOutput{})
+	req := c.newRequest(op, input, &types.CompareFacesOutput{})
 	return CompareFacesRequest{Request: req, Input: input, Copy: c.CompareFacesRequest}
 }
 
@@ -198,8 +83,8 @@ func (c *Client) CompareFacesRequest(input *CompareFacesInput) CompareFacesReque
 // CompareFaces API operation.
 type CompareFacesRequest struct {
 	*aws.Request
-	Input *CompareFacesInput
-	Copy  func(*CompareFacesInput) CompareFacesRequest
+	Input *types.CompareFacesInput
+	Copy  func(*types.CompareFacesInput) CompareFacesRequest
 }
 
 // Send marshals and sends the CompareFaces API request.
@@ -211,7 +96,7 @@ func (r CompareFacesRequest) Send(ctx context.Context) (*CompareFacesResponse, e
 	}
 
 	resp := &CompareFacesResponse{
-		CompareFacesOutput: r.Request.Data.(*CompareFacesOutput),
+		CompareFacesOutput: r.Request.Data.(*types.CompareFacesOutput),
 		response:           &aws.Response{Request: r.Request},
 	}
 
@@ -221,7 +106,7 @@ func (r CompareFacesRequest) Send(ctx context.Context) (*CompareFacesResponse, e
 // CompareFacesResponse is the response type for the
 // CompareFaces API operation.
 type CompareFacesResponse struct {
-	*CompareFacesOutput
+	*types.CompareFacesOutput
 
 	response *aws.Response
 }

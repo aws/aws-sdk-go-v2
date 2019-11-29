@@ -6,45 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/alexaforbusiness/types"
 )
-
-type DeleteGatewayGroupInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ARN of the gateway group to delete.
-	//
-	// GatewayGroupArn is a required field
-	GatewayGroupArn *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteGatewayGroupInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteGatewayGroupInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteGatewayGroupInput"}
-
-	if s.GatewayGroupArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("GatewayGroupArn"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteGatewayGroupOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteGatewayGroupOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteGatewayGroup = "DeleteGatewayGroup"
 
@@ -61,7 +24,7 @@ const opDeleteGatewayGroup = "DeleteGatewayGroup"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/DeleteGatewayGroup
-func (c *Client) DeleteGatewayGroupRequest(input *DeleteGatewayGroupInput) DeleteGatewayGroupRequest {
+func (c *Client) DeleteGatewayGroupRequest(input *types.DeleteGatewayGroupInput) DeleteGatewayGroupRequest {
 	op := &aws.Operation{
 		Name:       opDeleteGatewayGroup,
 		HTTPMethod: "POST",
@@ -69,10 +32,10 @@ func (c *Client) DeleteGatewayGroupRequest(input *DeleteGatewayGroupInput) Delet
 	}
 
 	if input == nil {
-		input = &DeleteGatewayGroupInput{}
+		input = &types.DeleteGatewayGroupInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteGatewayGroupOutput{})
+	req := c.newRequest(op, input, &types.DeleteGatewayGroupOutput{})
 	return DeleteGatewayGroupRequest{Request: req, Input: input, Copy: c.DeleteGatewayGroupRequest}
 }
 
@@ -80,8 +43,8 @@ func (c *Client) DeleteGatewayGroupRequest(input *DeleteGatewayGroupInput) Delet
 // DeleteGatewayGroup API operation.
 type DeleteGatewayGroupRequest struct {
 	*aws.Request
-	Input *DeleteGatewayGroupInput
-	Copy  func(*DeleteGatewayGroupInput) DeleteGatewayGroupRequest
+	Input *types.DeleteGatewayGroupInput
+	Copy  func(*types.DeleteGatewayGroupInput) DeleteGatewayGroupRequest
 }
 
 // Send marshals and sends the DeleteGatewayGroup API request.
@@ -93,7 +56,7 @@ func (r DeleteGatewayGroupRequest) Send(ctx context.Context) (*DeleteGatewayGrou
 	}
 
 	resp := &DeleteGatewayGroupResponse{
-		DeleteGatewayGroupOutput: r.Request.Data.(*DeleteGatewayGroupOutput),
+		DeleteGatewayGroupOutput: r.Request.Data.(*types.DeleteGatewayGroupOutput),
 		response:                 &aws.Response{Request: r.Request},
 	}
 
@@ -103,7 +66,7 @@ func (r DeleteGatewayGroupRequest) Send(ctx context.Context) (*DeleteGatewayGrou
 // DeleteGatewayGroupResponse is the response type for the
 // DeleteGatewayGroup API operation.
 type DeleteGatewayGroupResponse struct {
-	*DeleteGatewayGroupOutput
+	*types.DeleteGatewayGroupOutput
 
 	response *aws.Response
 }

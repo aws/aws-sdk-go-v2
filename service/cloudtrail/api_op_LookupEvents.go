@@ -4,89 +4,10 @@ package cloudtrail
 
 import (
 	"context"
-	"fmt"
-	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/cloudtrail/types"
 )
-
-// Contains a request for LookupEvents.
-type LookupEventsInput struct {
-	_ struct{} `type:"structure"`
-
-	// Specifies that only events that occur before or at the specified time are
-	// returned. If the specified end time is before the specified start time, an
-	// error is returned.
-	EndTime *time.Time `type:"timestamp"`
-
-	// Contains a list of lookup attributes. Currently the list can contain only
-	// one item.
-	LookupAttributes []LookupAttribute `type:"list"`
-
-	// The number of events to return. Possible values are 1 through 50. The default
-	// is 50.
-	MaxResults *int64 `min:"1" type:"integer"`
-
-	// The token to use to get the next page of results after a previous API call.
-	// This token must be passed in with the same parameters that were specified
-	// in the the original call. For example, if the original call specified an
-	// AttributeKey of 'Username' with a value of 'root', the call with NextToken
-	// should include those same parameters.
-	NextToken *string `type:"string"`
-
-	// Specifies that only events that occur after or at the specified time are
-	// returned. If the specified start time is after the specified end time, an
-	// error is returned.
-	StartTime *time.Time `type:"timestamp"`
-}
-
-// String returns the string representation
-func (s LookupEventsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *LookupEventsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "LookupEventsInput"}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-	if s.LookupAttributes != nil {
-		for i, v := range s.LookupAttributes {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "LookupAttributes", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Contains a response to a LookupEvents action.
-type LookupEventsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A list of events returned based on the lookup attributes specified and the
-	// CloudTrail event. The events list is sorted by time. The most recent event
-	// is listed first.
-	Events []Event `type:"list"`
-
-	// The token to use to get the next page of results after a previous API call.
-	// If the token does not appear, there are no more results to return. The token
-	// must be passed in with the same parameters as the previous call. For example,
-	// if the original call specified an AttributeKey of 'Username' with a value
-	// of 'root', the call with NextToken should include those same parameters.
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s LookupEventsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opLookupEvents = "LookupEvents"
 
@@ -94,8 +15,10 @@ const opLookupEvents = "LookupEvents"
 // AWS CloudTrail.
 //
 // Looks up management events (https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-concepts.html#cloudtrail-concepts-management-events)
-// captured by CloudTrail. Events for a region can be looked up in that region
-// during the last 90 days. Lookup supports the following attributes:
+// or CloudTrail Insights events (https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-concepts.html#cloudtrail-concepts-insights-events)
+// that are captured by CloudTrail. You can look up events that occurred in
+// a region within the last 90 days. Lookup supports the following attributes
+// for management events:
 //
 //    * AWS access key
 //
@@ -113,15 +36,20 @@ const opLookupEvents = "LookupEvents"
 //
 //    * User name
 //
+// Lookup supports the following attributes for Insights events:
+//
+//    * Event ID
+//
+//    * Event name
+//
+//    * Event source
+//
 // All attributes are optional. The default number of results returned is 50,
 // with a maximum of 50 possible. The response includes a token that you can
 // use to get the next page of results.
 //
-// The rate of lookup requests is limited to one per second per account. If
+// The rate of lookup requests is limited to two per second per account. If
 // this limit is exceeded, a throttling error occurs.
-//
-// Events that occurred during the selected time range will not be available
-// for lookup if CloudTrail logging was not enabled when the events occurred.
 //
 //    // Example sending a request using LookupEventsRequest.
 //    req := client.LookupEventsRequest(params)
@@ -131,7 +59,7 @@ const opLookupEvents = "LookupEvents"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/LookupEvents
-func (c *Client) LookupEventsRequest(input *LookupEventsInput) LookupEventsRequest {
+func (c *Client) LookupEventsRequest(input *types.LookupEventsInput) LookupEventsRequest {
 	op := &aws.Operation{
 		Name:       opLookupEvents,
 		HTTPMethod: "POST",
@@ -145,10 +73,10 @@ func (c *Client) LookupEventsRequest(input *LookupEventsInput) LookupEventsReque
 	}
 
 	if input == nil {
-		input = &LookupEventsInput{}
+		input = &types.LookupEventsInput{}
 	}
 
-	req := c.newRequest(op, input, &LookupEventsOutput{})
+	req := c.newRequest(op, input, &types.LookupEventsOutput{})
 	return LookupEventsRequest{Request: req, Input: input, Copy: c.LookupEventsRequest}
 }
 
@@ -156,8 +84,8 @@ func (c *Client) LookupEventsRequest(input *LookupEventsInput) LookupEventsReque
 // LookupEvents API operation.
 type LookupEventsRequest struct {
 	*aws.Request
-	Input *LookupEventsInput
-	Copy  func(*LookupEventsInput) LookupEventsRequest
+	Input *types.LookupEventsInput
+	Copy  func(*types.LookupEventsInput) LookupEventsRequest
 }
 
 // Send marshals and sends the LookupEvents API request.
@@ -169,7 +97,7 @@ func (r LookupEventsRequest) Send(ctx context.Context) (*LookupEventsResponse, e
 	}
 
 	resp := &LookupEventsResponse{
-		LookupEventsOutput: r.Request.Data.(*LookupEventsOutput),
+		LookupEventsOutput: r.Request.Data.(*types.LookupEventsOutput),
 		response:           &aws.Response{Request: r.Request},
 	}
 
@@ -199,7 +127,7 @@ func NewLookupEventsPaginator(req LookupEventsRequest) LookupEventsPaginator {
 	return LookupEventsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *LookupEventsInput
+				var inCpy *types.LookupEventsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -219,14 +147,14 @@ type LookupEventsPaginator struct {
 	aws.Pager
 }
 
-func (p *LookupEventsPaginator) CurrentPage() *LookupEventsOutput {
-	return p.Pager.CurrentPage().(*LookupEventsOutput)
+func (p *LookupEventsPaginator) CurrentPage() *types.LookupEventsOutput {
+	return p.Pager.CurrentPage().(*types.LookupEventsOutput)
 }
 
 // LookupEventsResponse is the response type for the
 // LookupEvents API operation.
 type LookupEventsResponse struct {
-	*LookupEventsOutput
+	*types.LookupEventsOutput
 
 	response *aws.Response
 }

@@ -6,105 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/iot/types"
 )
-
-type ListV2LoggingLevelsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The maximum number of results to return at one time.
-	MaxResults *int64 `location:"querystring" locationName:"maxResults" min:"1" type:"integer"`
-
-	// The token used to get the next set of results, or null if there are no additional
-	// results.
-	NextToken *string `location:"querystring" locationName:"nextToken" type:"string"`
-
-	// The type of resource for which you are configuring logging. Must be THING_Group.
-	TargetType LogTargetType `location:"querystring" locationName:"targetType" type:"string" enum:"true"`
-}
-
-// String returns the string representation
-func (s ListV2LoggingLevelsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListV2LoggingLevelsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListV2LoggingLevelsInput"}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListV2LoggingLevelsInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.MaxResults != nil {
-		v := *s.MaxResults
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "maxResults", protocol.Int64Value(v), metadata)
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if len(s.TargetType) > 0 {
-		v := s.TargetType
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "targetType", protocol.QuotedValue{ValueMarshaler: v}, metadata)
-	}
-	return nil
-}
-
-type ListV2LoggingLevelsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The logging configuration for a target.
-	LogTargetConfigurations []LogTargetConfiguration `locationName:"logTargetConfigurations" type:"list"`
-
-	// The token used to get the next set of results, or null if there are no additional
-	// results.
-	NextToken *string `locationName:"nextToken" type:"string"`
-}
-
-// String returns the string representation
-func (s ListV2LoggingLevelsOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListV2LoggingLevelsOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.LogTargetConfigurations != nil {
-		v := s.LogTargetConfigurations
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "logTargetConfigurations", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opListV2LoggingLevels = "ListV2LoggingLevels"
 
@@ -119,7 +22,7 @@ const opListV2LoggingLevels = "ListV2LoggingLevels"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) ListV2LoggingLevelsRequest(input *ListV2LoggingLevelsInput) ListV2LoggingLevelsRequest {
+func (c *Client) ListV2LoggingLevelsRequest(input *types.ListV2LoggingLevelsInput) ListV2LoggingLevelsRequest {
 	op := &aws.Operation{
 		Name:       opListV2LoggingLevels,
 		HTTPMethod: "GET",
@@ -127,10 +30,10 @@ func (c *Client) ListV2LoggingLevelsRequest(input *ListV2LoggingLevelsInput) Lis
 	}
 
 	if input == nil {
-		input = &ListV2LoggingLevelsInput{}
+		input = &types.ListV2LoggingLevelsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListV2LoggingLevelsOutput{})
+	req := c.newRequest(op, input, &types.ListV2LoggingLevelsOutput{})
 	return ListV2LoggingLevelsRequest{Request: req, Input: input, Copy: c.ListV2LoggingLevelsRequest}
 }
 
@@ -138,8 +41,8 @@ func (c *Client) ListV2LoggingLevelsRequest(input *ListV2LoggingLevelsInput) Lis
 // ListV2LoggingLevels API operation.
 type ListV2LoggingLevelsRequest struct {
 	*aws.Request
-	Input *ListV2LoggingLevelsInput
-	Copy  func(*ListV2LoggingLevelsInput) ListV2LoggingLevelsRequest
+	Input *types.ListV2LoggingLevelsInput
+	Copy  func(*types.ListV2LoggingLevelsInput) ListV2LoggingLevelsRequest
 }
 
 // Send marshals and sends the ListV2LoggingLevels API request.
@@ -151,7 +54,7 @@ func (r ListV2LoggingLevelsRequest) Send(ctx context.Context) (*ListV2LoggingLev
 	}
 
 	resp := &ListV2LoggingLevelsResponse{
-		ListV2LoggingLevelsOutput: r.Request.Data.(*ListV2LoggingLevelsOutput),
+		ListV2LoggingLevelsOutput: r.Request.Data.(*types.ListV2LoggingLevelsOutput),
 		response:                  &aws.Response{Request: r.Request},
 	}
 
@@ -161,7 +64,7 @@ func (r ListV2LoggingLevelsRequest) Send(ctx context.Context) (*ListV2LoggingLev
 // ListV2LoggingLevelsResponse is the response type for the
 // ListV2LoggingLevels API operation.
 type ListV2LoggingLevelsResponse struct {
-	*ListV2LoggingLevelsOutput
+	*types.ListV2LoggingLevelsOutput
 
 	response *aws.Response
 }

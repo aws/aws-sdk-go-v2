@@ -6,75 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/types"
 )
-
-// Represents the request to delete user attributes as an administrator.
-type AdminDeleteUserAttributesInput struct {
-	_ struct{} `type:"structure"`
-
-	// An array of strings representing the user attribute names you wish to delete.
-	//
-	// For custom attributes, you must prepend the custom: prefix to the attribute
-	// name.
-	//
-	// UserAttributeNames is a required field
-	UserAttributeNames []string `type:"list" required:"true"`
-
-	// The user pool ID for the user pool where you want to delete user attributes.
-	//
-	// UserPoolId is a required field
-	UserPoolId *string `min:"1" type:"string" required:"true"`
-
-	// The user name of the user from which you would like to delete attributes.
-	//
-	// Username is a required field
-	Username *string `min:"1" type:"string" required:"true" sensitive:"true"`
-}
-
-// String returns the string representation
-func (s AdminDeleteUserAttributesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *AdminDeleteUserAttributesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "AdminDeleteUserAttributesInput"}
-
-	if s.UserAttributeNames == nil {
-		invalidParams.Add(aws.NewErrParamRequired("UserAttributeNames"))
-	}
-
-	if s.UserPoolId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("UserPoolId"))
-	}
-	if s.UserPoolId != nil && len(*s.UserPoolId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("UserPoolId", 1))
-	}
-
-	if s.Username == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Username"))
-	}
-	if s.Username != nil && len(*s.Username) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Username", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Represents the response received from the server for a request to delete
-// user attributes.
-type AdminDeleteUserAttributesOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s AdminDeleteUserAttributesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opAdminDeleteUserAttributes = "AdminDeleteUserAttributes"
 
@@ -94,7 +27,7 @@ const opAdminDeleteUserAttributes = "AdminDeleteUserAttributes"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AdminDeleteUserAttributes
-func (c *Client) AdminDeleteUserAttributesRequest(input *AdminDeleteUserAttributesInput) AdminDeleteUserAttributesRequest {
+func (c *Client) AdminDeleteUserAttributesRequest(input *types.AdminDeleteUserAttributesInput) AdminDeleteUserAttributesRequest {
 	op := &aws.Operation{
 		Name:       opAdminDeleteUserAttributes,
 		HTTPMethod: "POST",
@@ -102,10 +35,10 @@ func (c *Client) AdminDeleteUserAttributesRequest(input *AdminDeleteUserAttribut
 	}
 
 	if input == nil {
-		input = &AdminDeleteUserAttributesInput{}
+		input = &types.AdminDeleteUserAttributesInput{}
 	}
 
-	req := c.newRequest(op, input, &AdminDeleteUserAttributesOutput{})
+	req := c.newRequest(op, input, &types.AdminDeleteUserAttributesOutput{})
 	return AdminDeleteUserAttributesRequest{Request: req, Input: input, Copy: c.AdminDeleteUserAttributesRequest}
 }
 
@@ -113,8 +46,8 @@ func (c *Client) AdminDeleteUserAttributesRequest(input *AdminDeleteUserAttribut
 // AdminDeleteUserAttributes API operation.
 type AdminDeleteUserAttributesRequest struct {
 	*aws.Request
-	Input *AdminDeleteUserAttributesInput
-	Copy  func(*AdminDeleteUserAttributesInput) AdminDeleteUserAttributesRequest
+	Input *types.AdminDeleteUserAttributesInput
+	Copy  func(*types.AdminDeleteUserAttributesInput) AdminDeleteUserAttributesRequest
 }
 
 // Send marshals and sends the AdminDeleteUserAttributes API request.
@@ -126,7 +59,7 @@ func (r AdminDeleteUserAttributesRequest) Send(ctx context.Context) (*AdminDelet
 	}
 
 	resp := &AdminDeleteUserAttributesResponse{
-		AdminDeleteUserAttributesOutput: r.Request.Data.(*AdminDeleteUserAttributesOutput),
+		AdminDeleteUserAttributesOutput: r.Request.Data.(*types.AdminDeleteUserAttributesOutput),
 		response:                        &aws.Response{Request: r.Request},
 	}
 
@@ -136,7 +69,7 @@ func (r AdminDeleteUserAttributesRequest) Send(ctx context.Context) (*AdminDelet
 // AdminDeleteUserAttributesResponse is the response type for the
 // AdminDeleteUserAttributes API operation.
 type AdminDeleteUserAttributesResponse struct {
-	*AdminDeleteUserAttributesOutput
+	*types.AdminDeleteUserAttributesOutput
 
 	response *aws.Response
 }

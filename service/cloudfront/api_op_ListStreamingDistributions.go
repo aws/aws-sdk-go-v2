@@ -6,67 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/cloudfront/types"
 )
-
-// The request to list your streaming distributions.
-type ListStreamingDistributionsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The value that you provided for the Marker request parameter.
-	Marker *string `location:"querystring" locationName:"Marker" type:"string"`
-
-	// The value that you provided for the MaxItems request parameter.
-	MaxItems *int64 `location:"querystring" locationName:"MaxItems" type:"integer"`
-}
-
-// String returns the string representation
-func (s ListStreamingDistributionsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListStreamingDistributionsInput) MarshalFields(e protocol.FieldEncoder) error {
-
-	if s.Marker != nil {
-		v := *s.Marker
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "Marker", protocol.StringValue(v), metadata)
-	}
-	if s.MaxItems != nil {
-		v := *s.MaxItems
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "MaxItems", protocol.Int64Value(v), metadata)
-	}
-	return nil
-}
-
-// The returned result of the corresponding request.
-type ListStreamingDistributionsOutput struct {
-	_ struct{} `type:"structure" payload:"StreamingDistributionList"`
-
-	// The StreamingDistributionList type.
-	StreamingDistributionList *StreamingDistributionList `type:"structure"`
-}
-
-// String returns the string representation
-func (s ListStreamingDistributionsOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListStreamingDistributionsOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.StreamingDistributionList != nil {
-		v := s.StreamingDistributionList
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.PayloadTarget, "StreamingDistributionList", v, metadata)
-	}
-	return nil
-}
 
 const opListStreamingDistributions = "ListStreamingDistributions2019_03_26"
 
@@ -83,7 +24,7 @@ const opListStreamingDistributions = "ListStreamingDistributions2019_03_26"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/ListStreamingDistributions
-func (c *Client) ListStreamingDistributionsRequest(input *ListStreamingDistributionsInput) ListStreamingDistributionsRequest {
+func (c *Client) ListStreamingDistributionsRequest(input *types.ListStreamingDistributionsInput) ListStreamingDistributionsRequest {
 	op := &aws.Operation{
 		Name:       opListStreamingDistributions,
 		HTTPMethod: "GET",
@@ -97,10 +38,10 @@ func (c *Client) ListStreamingDistributionsRequest(input *ListStreamingDistribut
 	}
 
 	if input == nil {
-		input = &ListStreamingDistributionsInput{}
+		input = &types.ListStreamingDistributionsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListStreamingDistributionsOutput{})
+	req := c.newRequest(op, input, &types.ListStreamingDistributionsOutput{})
 	return ListStreamingDistributionsRequest{Request: req, Input: input, Copy: c.ListStreamingDistributionsRequest}
 }
 
@@ -108,8 +49,8 @@ func (c *Client) ListStreamingDistributionsRequest(input *ListStreamingDistribut
 // ListStreamingDistributions API operation.
 type ListStreamingDistributionsRequest struct {
 	*aws.Request
-	Input *ListStreamingDistributionsInput
-	Copy  func(*ListStreamingDistributionsInput) ListStreamingDistributionsRequest
+	Input *types.ListStreamingDistributionsInput
+	Copy  func(*types.ListStreamingDistributionsInput) ListStreamingDistributionsRequest
 }
 
 // Send marshals and sends the ListStreamingDistributions API request.
@@ -121,7 +62,7 @@ func (r ListStreamingDistributionsRequest) Send(ctx context.Context) (*ListStrea
 	}
 
 	resp := &ListStreamingDistributionsResponse{
-		ListStreamingDistributionsOutput: r.Request.Data.(*ListStreamingDistributionsOutput),
+		ListStreamingDistributionsOutput: r.Request.Data.(*types.ListStreamingDistributionsOutput),
 		response:                         &aws.Response{Request: r.Request},
 	}
 
@@ -151,7 +92,7 @@ func NewListStreamingDistributionsPaginator(req ListStreamingDistributionsReques
 	return ListStreamingDistributionsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListStreamingDistributionsInput
+				var inCpy *types.ListStreamingDistributionsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -171,14 +112,14 @@ type ListStreamingDistributionsPaginator struct {
 	aws.Pager
 }
 
-func (p *ListStreamingDistributionsPaginator) CurrentPage() *ListStreamingDistributionsOutput {
-	return p.Pager.CurrentPage().(*ListStreamingDistributionsOutput)
+func (p *ListStreamingDistributionsPaginator) CurrentPage() *types.ListStreamingDistributionsOutput {
+	return p.Pager.CurrentPage().(*types.ListStreamingDistributionsOutput)
 }
 
 // ListStreamingDistributionsResponse is the response type for the
 // ListStreamingDistributions API operation.
 type ListStreamingDistributionsResponse struct {
-	*ListStreamingDistributionsOutput
+	*types.ListStreamingDistributionsOutput
 
 	response *aws.Response
 }

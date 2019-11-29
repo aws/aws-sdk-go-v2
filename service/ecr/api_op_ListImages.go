@@ -6,86 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ecr/types"
 )
-
-type ListImagesInput struct {
-	_ struct{} `type:"structure"`
-
-	// The filter key and value with which to filter your ListImages results.
-	Filter *ListImagesFilter `locationName:"filter" type:"structure"`
-
-	// The maximum number of image results returned by ListImages in paginated output.
-	// When this parameter is used, ListImages only returns maxResults results in
-	// a single page along with a nextToken response element. The remaining results
-	// of the initial request can be seen by sending another ListImages request
-	// with the returned nextToken value. This value can be between 1 and 1000.
-	// If this parameter is not used, then ListImages returns up to 100 results
-	// and a nextToken value, if applicable.
-	MaxResults *int64 `locationName:"maxResults" min:"1" type:"integer"`
-
-	// The nextToken value returned from a previous paginated ListImages request
-	// where maxResults was used and the results exceeded the value of that parameter.
-	// Pagination continues from the end of the previous results that returned the
-	// nextToken value. This value is null when there are no more results to return.
-	//
-	// This token should be treated as an opaque identifier that is only used to
-	// retrieve the next items in a list and not for other programmatic purposes.
-	NextToken *string `locationName:"nextToken" type:"string"`
-
-	// The AWS account ID associated with the registry that contains the repository
-	// in which to list images. If you do not specify a registry, the default registry
-	// is assumed.
-	RegistryId *string `locationName:"registryId" type:"string"`
-
-	// The repository with image IDs to be listed.
-	//
-	// RepositoryName is a required field
-	RepositoryName *string `locationName:"repositoryName" min:"2" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s ListImagesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListImagesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListImagesInput"}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-
-	if s.RepositoryName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("RepositoryName"))
-	}
-	if s.RepositoryName != nil && len(*s.RepositoryName) < 2 {
-		invalidParams.Add(aws.NewErrParamMinLen("RepositoryName", 2))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ListImagesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The list of image IDs for the requested repository.
-	ImageIds []ImageIdentifier `locationName:"imageIds" min:"1" type:"list"`
-
-	// The nextToken value to include in a future ListImages request. When the results
-	// of a ListImages request exceed maxResults, this value can be used to retrieve
-	// the next page of results. This value is null when there are no more results
-	// to return.
-	NextToken *string `locationName:"nextToken" type:"string"`
-}
-
-// String returns the string representation
-func (s ListImagesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListImages = "ListImages"
 
@@ -108,7 +30,7 @@ const opListImages = "ListImages"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/ListImages
-func (c *Client) ListImagesRequest(input *ListImagesInput) ListImagesRequest {
+func (c *Client) ListImagesRequest(input *types.ListImagesInput) ListImagesRequest {
 	op := &aws.Operation{
 		Name:       opListImages,
 		HTTPMethod: "POST",
@@ -122,10 +44,10 @@ func (c *Client) ListImagesRequest(input *ListImagesInput) ListImagesRequest {
 	}
 
 	if input == nil {
-		input = &ListImagesInput{}
+		input = &types.ListImagesInput{}
 	}
 
-	req := c.newRequest(op, input, &ListImagesOutput{})
+	req := c.newRequest(op, input, &types.ListImagesOutput{})
 	return ListImagesRequest{Request: req, Input: input, Copy: c.ListImagesRequest}
 }
 
@@ -133,8 +55,8 @@ func (c *Client) ListImagesRequest(input *ListImagesInput) ListImagesRequest {
 // ListImages API operation.
 type ListImagesRequest struct {
 	*aws.Request
-	Input *ListImagesInput
-	Copy  func(*ListImagesInput) ListImagesRequest
+	Input *types.ListImagesInput
+	Copy  func(*types.ListImagesInput) ListImagesRequest
 }
 
 // Send marshals and sends the ListImages API request.
@@ -146,7 +68,7 @@ func (r ListImagesRequest) Send(ctx context.Context) (*ListImagesResponse, error
 	}
 
 	resp := &ListImagesResponse{
-		ListImagesOutput: r.Request.Data.(*ListImagesOutput),
+		ListImagesOutput: r.Request.Data.(*types.ListImagesOutput),
 		response:         &aws.Response{Request: r.Request},
 	}
 
@@ -176,7 +98,7 @@ func NewListImagesPaginator(req ListImagesRequest) ListImagesPaginator {
 	return ListImagesPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListImagesInput
+				var inCpy *types.ListImagesInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -196,14 +118,14 @@ type ListImagesPaginator struct {
 	aws.Pager
 }
 
-func (p *ListImagesPaginator) CurrentPage() *ListImagesOutput {
-	return p.Pager.CurrentPage().(*ListImagesOutput)
+func (p *ListImagesPaginator) CurrentPage() *types.ListImagesOutput {
+	return p.Pager.CurrentPage().(*types.ListImagesOutput)
 }
 
 // ListImagesResponse is the response type for the
 // ListImages API operation.
 type ListImagesResponse struct {
-	*ListImagesOutput
+	*types.ListImagesOutput
 
 	response *aws.Response
 }

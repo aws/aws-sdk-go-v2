@@ -6,48 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/databasemigrationservice/types"
 )
-
-type DeleteCertificateInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the deleted certificate.
-	//
-	// CertificateArn is a required field
-	CertificateArn *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteCertificateInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteCertificateInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteCertificateInput"}
-
-	if s.CertificateArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("CertificateArn"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteCertificateOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The Secure Sockets Layer (SSL) certificate.
-	Certificate *Certificate `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteCertificateOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteCertificate = "DeleteCertificate"
 
@@ -64,7 +24,7 @@ const opDeleteCertificate = "DeleteCertificate"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DeleteCertificate
-func (c *Client) DeleteCertificateRequest(input *DeleteCertificateInput) DeleteCertificateRequest {
+func (c *Client) DeleteCertificateRequest(input *types.DeleteCertificateInput) DeleteCertificateRequest {
 	op := &aws.Operation{
 		Name:       opDeleteCertificate,
 		HTTPMethod: "POST",
@@ -72,10 +32,10 @@ func (c *Client) DeleteCertificateRequest(input *DeleteCertificateInput) DeleteC
 	}
 
 	if input == nil {
-		input = &DeleteCertificateInput{}
+		input = &types.DeleteCertificateInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteCertificateOutput{})
+	req := c.newRequest(op, input, &types.DeleteCertificateOutput{})
 	return DeleteCertificateRequest{Request: req, Input: input, Copy: c.DeleteCertificateRequest}
 }
 
@@ -83,8 +43,8 @@ func (c *Client) DeleteCertificateRequest(input *DeleteCertificateInput) DeleteC
 // DeleteCertificate API operation.
 type DeleteCertificateRequest struct {
 	*aws.Request
-	Input *DeleteCertificateInput
-	Copy  func(*DeleteCertificateInput) DeleteCertificateRequest
+	Input *types.DeleteCertificateInput
+	Copy  func(*types.DeleteCertificateInput) DeleteCertificateRequest
 }
 
 // Send marshals and sends the DeleteCertificate API request.
@@ -96,7 +56,7 @@ func (r DeleteCertificateRequest) Send(ctx context.Context) (*DeleteCertificateR
 	}
 
 	resp := &DeleteCertificateResponse{
-		DeleteCertificateOutput: r.Request.Data.(*DeleteCertificateOutput),
+		DeleteCertificateOutput: r.Request.Data.(*types.DeleteCertificateOutput),
 		response:                &aws.Response{Request: r.Request},
 	}
 
@@ -106,7 +66,7 @@ func (r DeleteCertificateRequest) Send(ctx context.Context) (*DeleteCertificateR
 // DeleteCertificateResponse is the response type for the
 // DeleteCertificate API operation.
 type DeleteCertificateResponse struct {
-	*DeleteCertificateOutput
+	*types.DeleteCertificateOutput
 
 	response *aws.Response
 }

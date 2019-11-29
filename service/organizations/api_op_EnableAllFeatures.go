@@ -6,30 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/organizations/types"
 )
-
-type EnableAllFeaturesInput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s EnableAllFeaturesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type EnableAllFeaturesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A structure that contains details about the handshake created to support
-	// this request to enable all features in the organization.
-	Handshake *Handshake `type:"structure"`
-}
-
-// String returns the string representation
-func (s EnableAllFeaturesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opEnableAllFeatures = "EnableAllFeatures"
 
@@ -75,7 +53,7 @@ const opEnableAllFeatures = "EnableAllFeatures"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/EnableAllFeatures
-func (c *Client) EnableAllFeaturesRequest(input *EnableAllFeaturesInput) EnableAllFeaturesRequest {
+func (c *Client) EnableAllFeaturesRequest(input *types.EnableAllFeaturesInput) EnableAllFeaturesRequest {
 	op := &aws.Operation{
 		Name:       opEnableAllFeatures,
 		HTTPMethod: "POST",
@@ -83,10 +61,10 @@ func (c *Client) EnableAllFeaturesRequest(input *EnableAllFeaturesInput) EnableA
 	}
 
 	if input == nil {
-		input = &EnableAllFeaturesInput{}
+		input = &types.EnableAllFeaturesInput{}
 	}
 
-	req := c.newRequest(op, input, &EnableAllFeaturesOutput{})
+	req := c.newRequest(op, input, &types.EnableAllFeaturesOutput{})
 	return EnableAllFeaturesRequest{Request: req, Input: input, Copy: c.EnableAllFeaturesRequest}
 }
 
@@ -94,8 +72,8 @@ func (c *Client) EnableAllFeaturesRequest(input *EnableAllFeaturesInput) EnableA
 // EnableAllFeatures API operation.
 type EnableAllFeaturesRequest struct {
 	*aws.Request
-	Input *EnableAllFeaturesInput
-	Copy  func(*EnableAllFeaturesInput) EnableAllFeaturesRequest
+	Input *types.EnableAllFeaturesInput
+	Copy  func(*types.EnableAllFeaturesInput) EnableAllFeaturesRequest
 }
 
 // Send marshals and sends the EnableAllFeatures API request.
@@ -107,7 +85,7 @@ func (r EnableAllFeaturesRequest) Send(ctx context.Context) (*EnableAllFeaturesR
 	}
 
 	resp := &EnableAllFeaturesResponse{
-		EnableAllFeaturesOutput: r.Request.Data.(*EnableAllFeaturesOutput),
+		EnableAllFeaturesOutput: r.Request.Data.(*types.EnableAllFeaturesOutput),
 		response:                &aws.Response{Request: r.Request},
 	}
 
@@ -117,7 +95,7 @@ func (r EnableAllFeaturesRequest) Send(ctx context.Context) (*EnableAllFeaturesR
 // EnableAllFeaturesResponse is the response type for the
 // EnableAllFeatures API operation.
 type EnableAllFeaturesResponse struct {
-	*EnableAllFeaturesOutput
+	*types.EnableAllFeaturesOutput
 
 	response *aws.Response
 }

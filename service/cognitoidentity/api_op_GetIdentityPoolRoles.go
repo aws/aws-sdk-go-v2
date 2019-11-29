@@ -6,62 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/cognitoidentity/types"
 )
-
-// Input to the GetIdentityPoolRoles action.
-type GetIdentityPoolRolesInput struct {
-	_ struct{} `type:"structure"`
-
-	// An identity pool ID in the format REGION:GUID.
-	//
-	// IdentityPoolId is a required field
-	IdentityPoolId *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetIdentityPoolRolesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetIdentityPoolRolesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetIdentityPoolRolesInput"}
-
-	if s.IdentityPoolId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("IdentityPoolId"))
-	}
-	if s.IdentityPoolId != nil && len(*s.IdentityPoolId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("IdentityPoolId", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Returned in response to a successful GetIdentityPoolRoles operation.
-type GetIdentityPoolRolesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// An identity pool ID in the format REGION:GUID.
-	IdentityPoolId *string `min:"1" type:"string"`
-
-	// How users for a specific identity provider are to mapped to roles. This is
-	// a String-to-RoleMapping object map. The string identifies the identity provider,
-	// for example, "graph.facebook.com" or "cognito-idp.us-east-1.amazonaws.com/us-east-1_abcdefghi:app_client_id".
-	RoleMappings map[string]RoleMapping `type:"map"`
-
-	// The map of roles associated with this pool. Currently only authenticated
-	// and unauthenticated roles are supported.
-	Roles map[string]string `type:"map"`
-}
-
-// String returns the string representation
-func (s GetIdentityPoolRolesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetIdentityPoolRoles = "GetIdentityPoolRoles"
 
@@ -80,7 +26,7 @@ const opGetIdentityPoolRoles = "GetIdentityPoolRoles"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-identity-2014-06-30/GetIdentityPoolRoles
-func (c *Client) GetIdentityPoolRolesRequest(input *GetIdentityPoolRolesInput) GetIdentityPoolRolesRequest {
+func (c *Client) GetIdentityPoolRolesRequest(input *types.GetIdentityPoolRolesInput) GetIdentityPoolRolesRequest {
 	op := &aws.Operation{
 		Name:       opGetIdentityPoolRoles,
 		HTTPMethod: "POST",
@@ -88,10 +34,10 @@ func (c *Client) GetIdentityPoolRolesRequest(input *GetIdentityPoolRolesInput) G
 	}
 
 	if input == nil {
-		input = &GetIdentityPoolRolesInput{}
+		input = &types.GetIdentityPoolRolesInput{}
 	}
 
-	req := c.newRequest(op, input, &GetIdentityPoolRolesOutput{})
+	req := c.newRequest(op, input, &types.GetIdentityPoolRolesOutput{})
 	return GetIdentityPoolRolesRequest{Request: req, Input: input, Copy: c.GetIdentityPoolRolesRequest}
 }
 
@@ -99,8 +45,8 @@ func (c *Client) GetIdentityPoolRolesRequest(input *GetIdentityPoolRolesInput) G
 // GetIdentityPoolRoles API operation.
 type GetIdentityPoolRolesRequest struct {
 	*aws.Request
-	Input *GetIdentityPoolRolesInput
-	Copy  func(*GetIdentityPoolRolesInput) GetIdentityPoolRolesRequest
+	Input *types.GetIdentityPoolRolesInput
+	Copy  func(*types.GetIdentityPoolRolesInput) GetIdentityPoolRolesRequest
 }
 
 // Send marshals and sends the GetIdentityPoolRoles API request.
@@ -112,7 +58,7 @@ func (r GetIdentityPoolRolesRequest) Send(ctx context.Context) (*GetIdentityPool
 	}
 
 	resp := &GetIdentityPoolRolesResponse{
-		GetIdentityPoolRolesOutput: r.Request.Data.(*GetIdentityPoolRolesOutput),
+		GetIdentityPoolRolesOutput: r.Request.Data.(*types.GetIdentityPoolRolesOutput),
 		response:                   &aws.Response{Request: r.Request},
 	}
 
@@ -122,7 +68,7 @@ func (r GetIdentityPoolRolesRequest) Send(ctx context.Context) (*GetIdentityPool
 // GetIdentityPoolRolesResponse is the response type for the
 // GetIdentityPoolRoles API operation.
 type GetIdentityPoolRolesResponse struct {
-	*GetIdentityPoolRolesOutput
+	*types.GetIdentityPoolRolesOutput
 
 	response *aws.Response
 }

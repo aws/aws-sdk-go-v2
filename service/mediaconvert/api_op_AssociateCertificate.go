@@ -6,69 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/mediaconvert/types"
 )
-
-// Associates the Amazon Resource Name (ARN) of an AWS Certificate Manager (ACM)
-// certificate with an AWS Elemental MediaConvert resource.
-type AssociateCertificateInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ARN of the ACM certificate that you want to associate with your MediaConvert
-	// resource.
-	//
-	// Arn is a required field
-	Arn *string `locationName:"arn" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s AssociateCertificateInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *AssociateCertificateInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "AssociateCertificateInput"}
-
-	if s.Arn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Arn"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s AssociateCertificateInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.Arn != nil {
-		v := *s.Arn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "arn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-// Successful association of Certificate Manager Amazon Resource Name (ARN)
-// with Mediaconvert returns an OK message.
-type AssociateCertificateOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s AssociateCertificateOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s AssociateCertificateOutput) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
 
 const opAssociateCertificate = "AssociateCertificate"
 
@@ -86,7 +25,7 @@ const opAssociateCertificate = "AssociateCertificate"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/AssociateCertificate
-func (c *Client) AssociateCertificateRequest(input *AssociateCertificateInput) AssociateCertificateRequest {
+func (c *Client) AssociateCertificateRequest(input *types.AssociateCertificateInput) AssociateCertificateRequest {
 	op := &aws.Operation{
 		Name:       opAssociateCertificate,
 		HTTPMethod: "POST",
@@ -94,10 +33,10 @@ func (c *Client) AssociateCertificateRequest(input *AssociateCertificateInput) A
 	}
 
 	if input == nil {
-		input = &AssociateCertificateInput{}
+		input = &types.AssociateCertificateInput{}
 	}
 
-	req := c.newRequest(op, input, &AssociateCertificateOutput{})
+	req := c.newRequest(op, input, &types.AssociateCertificateOutput{})
 	return AssociateCertificateRequest{Request: req, Input: input, Copy: c.AssociateCertificateRequest}
 }
 
@@ -105,8 +44,8 @@ func (c *Client) AssociateCertificateRequest(input *AssociateCertificateInput) A
 // AssociateCertificate API operation.
 type AssociateCertificateRequest struct {
 	*aws.Request
-	Input *AssociateCertificateInput
-	Copy  func(*AssociateCertificateInput) AssociateCertificateRequest
+	Input *types.AssociateCertificateInput
+	Copy  func(*types.AssociateCertificateInput) AssociateCertificateRequest
 }
 
 // Send marshals and sends the AssociateCertificate API request.
@@ -118,7 +57,7 @@ func (r AssociateCertificateRequest) Send(ctx context.Context) (*AssociateCertif
 	}
 
 	resp := &AssociateCertificateResponse{
-		AssociateCertificateOutput: r.Request.Data.(*AssociateCertificateOutput),
+		AssociateCertificateOutput: r.Request.Data.(*types.AssociateCertificateOutput),
 		response:                   &aws.Response{Request: r.Request},
 	}
 
@@ -128,7 +67,7 @@ func (r AssociateCertificateRequest) Send(ctx context.Context) (*AssociateCertif
 // AssociateCertificateResponse is the response type for the
 // AssociateCertificate API operation.
 type AssociateCertificateResponse struct {
-	*AssociateCertificateOutput
+	*types.AssociateCertificateOutput
 
 	response *aws.Response
 }

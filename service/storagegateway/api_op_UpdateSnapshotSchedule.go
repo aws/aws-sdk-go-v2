@@ -4,111 +4,10 @@ package storagegateway
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/storagegateway/types"
 )
-
-// A JSON object containing one or more of the following fields:
-//
-//    * UpdateSnapshotScheduleInput$Description
-//
-//    * UpdateSnapshotScheduleInput$RecurrenceInHours
-//
-//    * UpdateSnapshotScheduleInput$StartAt
-//
-//    * UpdateSnapshotScheduleInput$VolumeARN
-type UpdateSnapshotScheduleInput struct {
-	_ struct{} `type:"structure"`
-
-	// Optional description of the snapshot that overwrites the existing description.
-	Description *string `min:"1" type:"string"`
-
-	// Frequency of snapshots. Specify the number of hours between snapshots.
-	//
-	// RecurrenceInHours is a required field
-	RecurrenceInHours *int64 `min:"1" type:"integer" required:"true"`
-
-	// The hour of the day at which the snapshot schedule begins represented as
-	// hh, where hh is the hour (0 to 23). The hour of the day is in the time zone
-	// of the gateway.
-	//
-	// StartAt is a required field
-	StartAt *int64 `type:"integer" required:"true"`
-
-	// A list of up to 50 tags that can be assigned to a snapshot. Each tag is a
-	// key-value pair.
-	//
-	// Valid characters for key and value are letters, spaces, and numbers representable
-	// in UTF-8 format, and the following special characters: + - = . _ : / @. The
-	// maximum length of a tag's key is 128 characters, and the maximum length for
-	// a tag's value is 256.
-	Tags []Tag `type:"list"`
-
-	// The Amazon Resource Name (ARN) of the volume. Use the ListVolumes operation
-	// to return a list of gateway volumes.
-	//
-	// VolumeARN is a required field
-	VolumeARN *string `min:"50" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s UpdateSnapshotScheduleInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateSnapshotScheduleInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateSnapshotScheduleInput"}
-	if s.Description != nil && len(*s.Description) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Description", 1))
-	}
-
-	if s.RecurrenceInHours == nil {
-		invalidParams.Add(aws.NewErrParamRequired("RecurrenceInHours"))
-	}
-	if s.RecurrenceInHours != nil && *s.RecurrenceInHours < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("RecurrenceInHours", 1))
-	}
-
-	if s.StartAt == nil {
-		invalidParams.Add(aws.NewErrParamRequired("StartAt"))
-	}
-
-	if s.VolumeARN == nil {
-		invalidParams.Add(aws.NewErrParamRequired("VolumeARN"))
-	}
-	if s.VolumeARN != nil && len(*s.VolumeARN) < 50 {
-		invalidParams.Add(aws.NewErrParamMinLen("VolumeARN", 50))
-	}
-	if s.Tags != nil {
-		for i, v := range s.Tags {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// A JSON object containing the of the updated storage volume.
-type UpdateSnapshotScheduleOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the volume. Use the ListVolumes operation
-	// to return a list of gateway volumes.
-	VolumeARN *string `min:"50" type:"string"`
-}
-
-// String returns the string representation
-func (s UpdateSnapshotScheduleOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opUpdateSnapshotSchedule = "UpdateSnapshotSchedule"
 
@@ -134,7 +33,7 @@ const opUpdateSnapshotSchedule = "UpdateSnapshotSchedule"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/UpdateSnapshotSchedule
-func (c *Client) UpdateSnapshotScheduleRequest(input *UpdateSnapshotScheduleInput) UpdateSnapshotScheduleRequest {
+func (c *Client) UpdateSnapshotScheduleRequest(input *types.UpdateSnapshotScheduleInput) UpdateSnapshotScheduleRequest {
 	op := &aws.Operation{
 		Name:       opUpdateSnapshotSchedule,
 		HTTPMethod: "POST",
@@ -142,10 +41,10 @@ func (c *Client) UpdateSnapshotScheduleRequest(input *UpdateSnapshotScheduleInpu
 	}
 
 	if input == nil {
-		input = &UpdateSnapshotScheduleInput{}
+		input = &types.UpdateSnapshotScheduleInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateSnapshotScheduleOutput{})
+	req := c.newRequest(op, input, &types.UpdateSnapshotScheduleOutput{})
 	return UpdateSnapshotScheduleRequest{Request: req, Input: input, Copy: c.UpdateSnapshotScheduleRequest}
 }
 
@@ -153,8 +52,8 @@ func (c *Client) UpdateSnapshotScheduleRequest(input *UpdateSnapshotScheduleInpu
 // UpdateSnapshotSchedule API operation.
 type UpdateSnapshotScheduleRequest struct {
 	*aws.Request
-	Input *UpdateSnapshotScheduleInput
-	Copy  func(*UpdateSnapshotScheduleInput) UpdateSnapshotScheduleRequest
+	Input *types.UpdateSnapshotScheduleInput
+	Copy  func(*types.UpdateSnapshotScheduleInput) UpdateSnapshotScheduleRequest
 }
 
 // Send marshals and sends the UpdateSnapshotSchedule API request.
@@ -166,7 +65,7 @@ func (r UpdateSnapshotScheduleRequest) Send(ctx context.Context) (*UpdateSnapsho
 	}
 
 	resp := &UpdateSnapshotScheduleResponse{
-		UpdateSnapshotScheduleOutput: r.Request.Data.(*UpdateSnapshotScheduleOutput),
+		UpdateSnapshotScheduleOutput: r.Request.Data.(*types.UpdateSnapshotScheduleOutput),
 		response:                     &aws.Response{Request: r.Request},
 	}
 
@@ -176,7 +75,7 @@ func (r UpdateSnapshotScheduleRequest) Send(ctx context.Context) (*UpdateSnapsho
 // UpdateSnapshotScheduleResponse is the response type for the
 // UpdateSnapshotSchedule API operation.
 type UpdateSnapshotScheduleResponse struct {
-	*UpdateSnapshotScheduleOutput
+	*types.UpdateSnapshotScheduleOutput
 
 	response *aws.Response
 }

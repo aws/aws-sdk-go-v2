@@ -6,79 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/types"
 )
-
-// Represents the request to get the device, as an administrator.
-type AdminGetDeviceInput struct {
-	_ struct{} `type:"structure"`
-
-	// The device key.
-	//
-	// DeviceKey is a required field
-	DeviceKey *string `min:"1" type:"string" required:"true"`
-
-	// The user pool ID.
-	//
-	// UserPoolId is a required field
-	UserPoolId *string `min:"1" type:"string" required:"true"`
-
-	// The user name.
-	//
-	// Username is a required field
-	Username *string `min:"1" type:"string" required:"true" sensitive:"true"`
-}
-
-// String returns the string representation
-func (s AdminGetDeviceInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *AdminGetDeviceInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "AdminGetDeviceInput"}
-
-	if s.DeviceKey == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DeviceKey"))
-	}
-	if s.DeviceKey != nil && len(*s.DeviceKey) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("DeviceKey", 1))
-	}
-
-	if s.UserPoolId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("UserPoolId"))
-	}
-	if s.UserPoolId != nil && len(*s.UserPoolId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("UserPoolId", 1))
-	}
-
-	if s.Username == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Username"))
-	}
-	if s.Username != nil && len(*s.Username) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Username", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Gets the device response, as an administrator.
-type AdminGetDeviceOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The device.
-	//
-	// Device is a required field
-	Device *DeviceType `type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s AdminGetDeviceOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opAdminGetDevice = "AdminGetDevice"
 
@@ -97,7 +26,7 @@ const opAdminGetDevice = "AdminGetDevice"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AdminGetDevice
-func (c *Client) AdminGetDeviceRequest(input *AdminGetDeviceInput) AdminGetDeviceRequest {
+func (c *Client) AdminGetDeviceRequest(input *types.AdminGetDeviceInput) AdminGetDeviceRequest {
 	op := &aws.Operation{
 		Name:       opAdminGetDevice,
 		HTTPMethod: "POST",
@@ -105,10 +34,10 @@ func (c *Client) AdminGetDeviceRequest(input *AdminGetDeviceInput) AdminGetDevic
 	}
 
 	if input == nil {
-		input = &AdminGetDeviceInput{}
+		input = &types.AdminGetDeviceInput{}
 	}
 
-	req := c.newRequest(op, input, &AdminGetDeviceOutput{})
+	req := c.newRequest(op, input, &types.AdminGetDeviceOutput{})
 	return AdminGetDeviceRequest{Request: req, Input: input, Copy: c.AdminGetDeviceRequest}
 }
 
@@ -116,8 +45,8 @@ func (c *Client) AdminGetDeviceRequest(input *AdminGetDeviceInput) AdminGetDevic
 // AdminGetDevice API operation.
 type AdminGetDeviceRequest struct {
 	*aws.Request
-	Input *AdminGetDeviceInput
-	Copy  func(*AdminGetDeviceInput) AdminGetDeviceRequest
+	Input *types.AdminGetDeviceInput
+	Copy  func(*types.AdminGetDeviceInput) AdminGetDeviceRequest
 }
 
 // Send marshals and sends the AdminGetDevice API request.
@@ -129,7 +58,7 @@ func (r AdminGetDeviceRequest) Send(ctx context.Context) (*AdminGetDeviceRespons
 	}
 
 	resp := &AdminGetDeviceResponse{
-		AdminGetDeviceOutput: r.Request.Data.(*AdminGetDeviceOutput),
+		AdminGetDeviceOutput: r.Request.Data.(*types.AdminGetDeviceOutput),
 		response:             &aws.Response{Request: r.Request},
 	}
 
@@ -139,7 +68,7 @@ func (r AdminGetDeviceRequest) Send(ctx context.Context) (*AdminGetDeviceRespons
 // AdminGetDeviceResponse is the response type for the
 // AdminGetDevice API operation.
 type AdminGetDeviceResponse struct {
-	*AdminGetDeviceOutput
+	*types.AdminGetDeviceOutput
 
 	response *aws.Response
 }

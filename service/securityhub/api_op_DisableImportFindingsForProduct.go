@@ -6,64 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/securityhub/types"
 )
-
-type DisableImportFindingsForProductInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ARN of the integrated product to disable the integration for.
-	//
-	// ProductSubscriptionArn is a required field
-	ProductSubscriptionArn *string `location:"uri" locationName:"ProductSubscriptionArn" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DisableImportFindingsForProductInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DisableImportFindingsForProductInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DisableImportFindingsForProductInput"}
-
-	if s.ProductSubscriptionArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ProductSubscriptionArn"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DisableImportFindingsForProductInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.ProductSubscriptionArn != nil {
-		v := *s.ProductSubscriptionArn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "ProductSubscriptionArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type DisableImportFindingsForProductOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DisableImportFindingsForProductOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DisableImportFindingsForProductOutput) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
 
 const opDisableImportFindingsForProduct = "DisableImportFindingsForProduct"
 
@@ -82,7 +26,7 @@ const opDisableImportFindingsForProduct = "DisableImportFindingsForProduct"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/DisableImportFindingsForProduct
-func (c *Client) DisableImportFindingsForProductRequest(input *DisableImportFindingsForProductInput) DisableImportFindingsForProductRequest {
+func (c *Client) DisableImportFindingsForProductRequest(input *types.DisableImportFindingsForProductInput) DisableImportFindingsForProductRequest {
 	op := &aws.Operation{
 		Name:       opDisableImportFindingsForProduct,
 		HTTPMethod: "DELETE",
@@ -90,10 +34,10 @@ func (c *Client) DisableImportFindingsForProductRequest(input *DisableImportFind
 	}
 
 	if input == nil {
-		input = &DisableImportFindingsForProductInput{}
+		input = &types.DisableImportFindingsForProductInput{}
 	}
 
-	req := c.newRequest(op, input, &DisableImportFindingsForProductOutput{})
+	req := c.newRequest(op, input, &types.DisableImportFindingsForProductOutput{})
 	return DisableImportFindingsForProductRequest{Request: req, Input: input, Copy: c.DisableImportFindingsForProductRequest}
 }
 
@@ -101,8 +45,8 @@ func (c *Client) DisableImportFindingsForProductRequest(input *DisableImportFind
 // DisableImportFindingsForProduct API operation.
 type DisableImportFindingsForProductRequest struct {
 	*aws.Request
-	Input *DisableImportFindingsForProductInput
-	Copy  func(*DisableImportFindingsForProductInput) DisableImportFindingsForProductRequest
+	Input *types.DisableImportFindingsForProductInput
+	Copy  func(*types.DisableImportFindingsForProductInput) DisableImportFindingsForProductRequest
 }
 
 // Send marshals and sends the DisableImportFindingsForProduct API request.
@@ -114,7 +58,7 @@ func (r DisableImportFindingsForProductRequest) Send(ctx context.Context) (*Disa
 	}
 
 	resp := &DisableImportFindingsForProductResponse{
-		DisableImportFindingsForProductOutput: r.Request.Data.(*DisableImportFindingsForProductOutput),
+		DisableImportFindingsForProductOutput: r.Request.Data.(*types.DisableImportFindingsForProductOutput),
 		response:                              &aws.Response{Request: r.Request},
 	}
 
@@ -124,7 +68,7 @@ func (r DisableImportFindingsForProductRequest) Send(ctx context.Context) (*Disa
 // DisableImportFindingsForProductResponse is the response type for the
 // DisableImportFindingsForProduct API operation.
 type DisableImportFindingsForProductResponse struct {
-	*DisableImportFindingsForProductOutput
+	*types.DisableImportFindingsForProductOutput
 
 	response *aws.Response
 }

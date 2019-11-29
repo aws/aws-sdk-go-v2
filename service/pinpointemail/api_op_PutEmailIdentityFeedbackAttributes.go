@@ -6,90 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/pinpointemail/types"
 )
-
-// A request to set the attributes that control how bounce and complaint events
-// are processed.
-type PutEmailIdentityFeedbackAttributesInput struct {
-	_ struct{} `type:"structure"`
-
-	// Sets the feedback forwarding configuration for the identity.
-	//
-	// If the value is true, Amazon Pinpoint sends you email notifications when
-	// bounce or complaint events occur. Amazon Pinpoint sends this notification
-	// to the address that you specified in the Return-Path header of the original
-	// email.
-	//
-	// When you set this value to false, Amazon Pinpoint sends notifications through
-	// other mechanisms, such as by notifying an Amazon SNS topic or another event
-	// destination. You're required to have a method of tracking bounces and complaints.
-	// If you haven't set up another mechanism for receiving bounce or complaint
-	// notifications, Amazon Pinpoint sends an email notification when these events
-	// occur (even if this setting is disabled).
-	EmailForwardingEnabled *bool `type:"boolean"`
-
-	// The email identity that you want to configure bounce and complaint feedback
-	// forwarding for.
-	//
-	// EmailIdentity is a required field
-	EmailIdentity *string `location:"uri" locationName:"EmailIdentity" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s PutEmailIdentityFeedbackAttributesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *PutEmailIdentityFeedbackAttributesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "PutEmailIdentityFeedbackAttributesInput"}
-
-	if s.EmailIdentity == nil {
-		invalidParams.Add(aws.NewErrParamRequired("EmailIdentity"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s PutEmailIdentityFeedbackAttributesInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.EmailForwardingEnabled != nil {
-		v := *s.EmailForwardingEnabled
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "EmailForwardingEnabled", protocol.BoolValue(v), metadata)
-	}
-	if s.EmailIdentity != nil {
-		v := *s.EmailIdentity
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "EmailIdentity", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-// An HTTP 200 response if the request succeeds, or an error message if the
-// request fails.
-type PutEmailIdentityFeedbackAttributesOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s PutEmailIdentityFeedbackAttributesOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s PutEmailIdentityFeedbackAttributesOutput) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
 
 const opPutEmailIdentityFeedbackAttributes = "PutEmailIdentityFeedbackAttributes"
 
@@ -120,7 +38,7 @@ const opPutEmailIdentityFeedbackAttributes = "PutEmailIdentityFeedbackAttributes
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/PutEmailIdentityFeedbackAttributes
-func (c *Client) PutEmailIdentityFeedbackAttributesRequest(input *PutEmailIdentityFeedbackAttributesInput) PutEmailIdentityFeedbackAttributesRequest {
+func (c *Client) PutEmailIdentityFeedbackAttributesRequest(input *types.PutEmailIdentityFeedbackAttributesInput) PutEmailIdentityFeedbackAttributesRequest {
 	op := &aws.Operation{
 		Name:       opPutEmailIdentityFeedbackAttributes,
 		HTTPMethod: "PUT",
@@ -128,10 +46,10 @@ func (c *Client) PutEmailIdentityFeedbackAttributesRequest(input *PutEmailIdenti
 	}
 
 	if input == nil {
-		input = &PutEmailIdentityFeedbackAttributesInput{}
+		input = &types.PutEmailIdentityFeedbackAttributesInput{}
 	}
 
-	req := c.newRequest(op, input, &PutEmailIdentityFeedbackAttributesOutput{})
+	req := c.newRequest(op, input, &types.PutEmailIdentityFeedbackAttributesOutput{})
 	return PutEmailIdentityFeedbackAttributesRequest{Request: req, Input: input, Copy: c.PutEmailIdentityFeedbackAttributesRequest}
 }
 
@@ -139,8 +57,8 @@ func (c *Client) PutEmailIdentityFeedbackAttributesRequest(input *PutEmailIdenti
 // PutEmailIdentityFeedbackAttributes API operation.
 type PutEmailIdentityFeedbackAttributesRequest struct {
 	*aws.Request
-	Input *PutEmailIdentityFeedbackAttributesInput
-	Copy  func(*PutEmailIdentityFeedbackAttributesInput) PutEmailIdentityFeedbackAttributesRequest
+	Input *types.PutEmailIdentityFeedbackAttributesInput
+	Copy  func(*types.PutEmailIdentityFeedbackAttributesInput) PutEmailIdentityFeedbackAttributesRequest
 }
 
 // Send marshals and sends the PutEmailIdentityFeedbackAttributes API request.
@@ -152,7 +70,7 @@ func (r PutEmailIdentityFeedbackAttributesRequest) Send(ctx context.Context) (*P
 	}
 
 	resp := &PutEmailIdentityFeedbackAttributesResponse{
-		PutEmailIdentityFeedbackAttributesOutput: r.Request.Data.(*PutEmailIdentityFeedbackAttributesOutput),
+		PutEmailIdentityFeedbackAttributesOutput: r.Request.Data.(*types.PutEmailIdentityFeedbackAttributesOutput),
 		response:                                 &aws.Response{Request: r.Request},
 	}
 
@@ -162,7 +80,7 @@ func (r PutEmailIdentityFeedbackAttributesRequest) Send(ctx context.Context) (*P
 // PutEmailIdentityFeedbackAttributesResponse is the response type for the
 // PutEmailIdentityFeedbackAttributes API operation.
 type PutEmailIdentityFeedbackAttributesResponse struct {
-	*PutEmailIdentityFeedbackAttributesOutput
+	*types.PutEmailIdentityFeedbackAttributesOutput
 
 	response *aws.Response
 }

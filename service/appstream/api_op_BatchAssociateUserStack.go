@@ -4,61 +4,10 @@ package appstream
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/appstream/types"
 )
-
-type BatchAssociateUserStackInput struct {
-	_ struct{} `type:"structure"`
-
-	// The list of UserStackAssociation objects.
-	//
-	// UserStackAssociations is a required field
-	UserStackAssociations []UserStackAssociation `min:"1" type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s BatchAssociateUserStackInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *BatchAssociateUserStackInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "BatchAssociateUserStackInput"}
-
-	if s.UserStackAssociations == nil {
-		invalidParams.Add(aws.NewErrParamRequired("UserStackAssociations"))
-	}
-	if s.UserStackAssociations != nil && len(s.UserStackAssociations) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("UserStackAssociations", 1))
-	}
-	if s.UserStackAssociations != nil {
-		for i, v := range s.UserStackAssociations {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "UserStackAssociations", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type BatchAssociateUserStackOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The list of UserStackAssociationError objects.
-	Errors []UserStackAssociationError `locationName:"errors" type:"list"`
-}
-
-// String returns the string representation
-func (s BatchAssociateUserStackOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opBatchAssociateUserStack = "BatchAssociateUserStack"
 
@@ -77,7 +26,7 @@ const opBatchAssociateUserStack = "BatchAssociateUserStack"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/BatchAssociateUserStack
-func (c *Client) BatchAssociateUserStackRequest(input *BatchAssociateUserStackInput) BatchAssociateUserStackRequest {
+func (c *Client) BatchAssociateUserStackRequest(input *types.BatchAssociateUserStackInput) BatchAssociateUserStackRequest {
 	op := &aws.Operation{
 		Name:       opBatchAssociateUserStack,
 		HTTPMethod: "POST",
@@ -85,10 +34,10 @@ func (c *Client) BatchAssociateUserStackRequest(input *BatchAssociateUserStackIn
 	}
 
 	if input == nil {
-		input = &BatchAssociateUserStackInput{}
+		input = &types.BatchAssociateUserStackInput{}
 	}
 
-	req := c.newRequest(op, input, &BatchAssociateUserStackOutput{})
+	req := c.newRequest(op, input, &types.BatchAssociateUserStackOutput{})
 	return BatchAssociateUserStackRequest{Request: req, Input: input, Copy: c.BatchAssociateUserStackRequest}
 }
 
@@ -96,8 +45,8 @@ func (c *Client) BatchAssociateUserStackRequest(input *BatchAssociateUserStackIn
 // BatchAssociateUserStack API operation.
 type BatchAssociateUserStackRequest struct {
 	*aws.Request
-	Input *BatchAssociateUserStackInput
-	Copy  func(*BatchAssociateUserStackInput) BatchAssociateUserStackRequest
+	Input *types.BatchAssociateUserStackInput
+	Copy  func(*types.BatchAssociateUserStackInput) BatchAssociateUserStackRequest
 }
 
 // Send marshals and sends the BatchAssociateUserStack API request.
@@ -109,7 +58,7 @@ func (r BatchAssociateUserStackRequest) Send(ctx context.Context) (*BatchAssocia
 	}
 
 	resp := &BatchAssociateUserStackResponse{
-		BatchAssociateUserStackOutput: r.Request.Data.(*BatchAssociateUserStackOutput),
+		BatchAssociateUserStackOutput: r.Request.Data.(*types.BatchAssociateUserStackOutput),
 		response:                      &aws.Response{Request: r.Request},
 	}
 
@@ -119,7 +68,7 @@ func (r BatchAssociateUserStackRequest) Send(ctx context.Context) (*BatchAssocia
 // BatchAssociateUserStackResponse is the response type for the
 // BatchAssociateUserStack API operation.
 type BatchAssociateUserStackResponse struct {
-	*BatchAssociateUserStackOutput
+	*types.BatchAssociateUserStackOutput
 
 	response *aws.Response
 }

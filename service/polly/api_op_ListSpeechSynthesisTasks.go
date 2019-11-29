@@ -6,107 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/polly/types"
 )
-
-type ListSpeechSynthesisTasksInput struct {
-	_ struct{} `type:"structure"`
-
-	// Maximum number of speech synthesis tasks returned in a List operation.
-	MaxResults *int64 `location:"querystring" locationName:"MaxResults" min:"1" type:"integer"`
-
-	// The pagination token to use in the next request to continue the listing of
-	// speech synthesis tasks.
-	NextToken *string `location:"querystring" locationName:"NextToken" type:"string"`
-
-	// Status of the speech synthesis tasks returned in a List operation
-	Status TaskStatus `location:"querystring" locationName:"Status" type:"string" enum:"true"`
-}
-
-// String returns the string representation
-func (s ListSpeechSynthesisTasksInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListSpeechSynthesisTasksInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListSpeechSynthesisTasksInput"}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListSpeechSynthesisTasksInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.MaxResults != nil {
-		v := *s.MaxResults
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "MaxResults", protocol.Int64Value(v), metadata)
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if len(s.Status) > 0 {
-		v := s.Status
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "Status", protocol.QuotedValue{ValueMarshaler: v}, metadata)
-	}
-	return nil
-}
-
-type ListSpeechSynthesisTasksOutput struct {
-	_ struct{} `type:"structure"`
-
-	// An opaque pagination token returned from the previous List operation in this
-	// request. If present, this indicates where to continue the listing.
-	NextToken *string `type:"string"`
-
-	// List of SynthesisTask objects that provides information from the specified
-	// task in the list request, including output format, creation time, task status,
-	// and so on.
-	SynthesisTasks []SynthesisTask `type:"list"`
-}
-
-// String returns the string representation
-func (s ListSpeechSynthesisTasksOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListSpeechSynthesisTasksOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.SynthesisTasks != nil {
-		v := s.SynthesisTasks
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "SynthesisTasks", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	return nil
-}
 
 const opListSpeechSynthesisTasks = "ListSpeechSynthesisTasks"
 
@@ -125,7 +26,7 @@ const opListSpeechSynthesisTasks = "ListSpeechSynthesisTasks"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/polly-2016-06-10/ListSpeechSynthesisTasks
-func (c *Client) ListSpeechSynthesisTasksRequest(input *ListSpeechSynthesisTasksInput) ListSpeechSynthesisTasksRequest {
+func (c *Client) ListSpeechSynthesisTasksRequest(input *types.ListSpeechSynthesisTasksInput) ListSpeechSynthesisTasksRequest {
 	op := &aws.Operation{
 		Name:       opListSpeechSynthesisTasks,
 		HTTPMethod: "GET",
@@ -139,10 +40,10 @@ func (c *Client) ListSpeechSynthesisTasksRequest(input *ListSpeechSynthesisTasks
 	}
 
 	if input == nil {
-		input = &ListSpeechSynthesisTasksInput{}
+		input = &types.ListSpeechSynthesisTasksInput{}
 	}
 
-	req := c.newRequest(op, input, &ListSpeechSynthesisTasksOutput{})
+	req := c.newRequest(op, input, &types.ListSpeechSynthesisTasksOutput{})
 	return ListSpeechSynthesisTasksRequest{Request: req, Input: input, Copy: c.ListSpeechSynthesisTasksRequest}
 }
 
@@ -150,8 +51,8 @@ func (c *Client) ListSpeechSynthesisTasksRequest(input *ListSpeechSynthesisTasks
 // ListSpeechSynthesisTasks API operation.
 type ListSpeechSynthesisTasksRequest struct {
 	*aws.Request
-	Input *ListSpeechSynthesisTasksInput
-	Copy  func(*ListSpeechSynthesisTasksInput) ListSpeechSynthesisTasksRequest
+	Input *types.ListSpeechSynthesisTasksInput
+	Copy  func(*types.ListSpeechSynthesisTasksInput) ListSpeechSynthesisTasksRequest
 }
 
 // Send marshals and sends the ListSpeechSynthesisTasks API request.
@@ -163,7 +64,7 @@ func (r ListSpeechSynthesisTasksRequest) Send(ctx context.Context) (*ListSpeechS
 	}
 
 	resp := &ListSpeechSynthesisTasksResponse{
-		ListSpeechSynthesisTasksOutput: r.Request.Data.(*ListSpeechSynthesisTasksOutput),
+		ListSpeechSynthesisTasksOutput: r.Request.Data.(*types.ListSpeechSynthesisTasksOutput),
 		response:                       &aws.Response{Request: r.Request},
 	}
 
@@ -193,7 +94,7 @@ func NewListSpeechSynthesisTasksPaginator(req ListSpeechSynthesisTasksRequest) L
 	return ListSpeechSynthesisTasksPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListSpeechSynthesisTasksInput
+				var inCpy *types.ListSpeechSynthesisTasksInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -213,14 +114,14 @@ type ListSpeechSynthesisTasksPaginator struct {
 	aws.Pager
 }
 
-func (p *ListSpeechSynthesisTasksPaginator) CurrentPage() *ListSpeechSynthesisTasksOutput {
-	return p.Pager.CurrentPage().(*ListSpeechSynthesisTasksOutput)
+func (p *ListSpeechSynthesisTasksPaginator) CurrentPage() *types.ListSpeechSynthesisTasksOutput {
+	return p.Pager.CurrentPage().(*types.ListSpeechSynthesisTasksOutput)
 }
 
 // ListSpeechSynthesisTasksResponse is the response type for the
 // ListSpeechSynthesisTasks API operation.
 type ListSpeechSynthesisTasksResponse struct {
-	*ListSpeechSynthesisTasksOutput
+	*types.ListSpeechSynthesisTasksOutput
 
 	response *aws.Response
 }

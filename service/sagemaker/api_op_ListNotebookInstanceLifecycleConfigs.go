@@ -4,84 +4,10 @@ package sagemaker
 
 import (
 	"context"
-	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
 )
-
-type ListNotebookInstanceLifecycleConfigsInput struct {
-	_ struct{} `type:"structure"`
-
-	// A filter that returns only lifecycle configurations that were created after
-	// the specified time (timestamp).
-	CreationTimeAfter *time.Time `type:"timestamp"`
-
-	// A filter that returns only lifecycle configurations that were created before
-	// the specified time (timestamp).
-	CreationTimeBefore *time.Time `type:"timestamp"`
-
-	// A filter that returns only lifecycle configurations that were modified after
-	// the specified time (timestamp).
-	LastModifiedTimeAfter *time.Time `type:"timestamp"`
-
-	// A filter that returns only lifecycle configurations that were modified before
-	// the specified time (timestamp).
-	LastModifiedTimeBefore *time.Time `type:"timestamp"`
-
-	// The maximum number of lifecycle configurations to return in the response.
-	MaxResults *int64 `min:"1" type:"integer"`
-
-	// A string in the lifecycle configuration name. This filter returns only lifecycle
-	// configurations whose name contains the specified string.
-	NameContains *string `type:"string"`
-
-	// If the result of a ListNotebookInstanceLifecycleConfigs request was truncated,
-	// the response includes a NextToken. To get the next set of lifecycle configurations,
-	// use the token in the next request.
-	NextToken *string `type:"string"`
-
-	// Sorts the list of results. The default is CreationTime.
-	SortBy NotebookInstanceLifecycleConfigSortKey `type:"string" enum:"true"`
-
-	// The sort order for results.
-	SortOrder NotebookInstanceLifecycleConfigSortOrder `type:"string" enum:"true"`
-}
-
-// String returns the string representation
-func (s ListNotebookInstanceLifecycleConfigsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListNotebookInstanceLifecycleConfigsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListNotebookInstanceLifecycleConfigsInput"}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ListNotebookInstanceLifecycleConfigsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// If the response is truncated, Amazon SageMaker returns this token. To get
-	// the next set of lifecycle configurations, use it in the next request.
-	NextToken *string `type:"string"`
-
-	// An array of NotebookInstanceLifecycleConfiguration objects, each listing
-	// a lifecycle configuration.
-	NotebookInstanceLifecycleConfigs []NotebookInstanceLifecycleConfigSummary `type:"list"`
-}
-
-// String returns the string representation
-func (s ListNotebookInstanceLifecycleConfigsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListNotebookInstanceLifecycleConfigs = "ListNotebookInstanceLifecycleConfigs"
 
@@ -99,7 +25,7 @@ const opListNotebookInstanceLifecycleConfigs = "ListNotebookInstanceLifecycleCon
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListNotebookInstanceLifecycleConfigs
-func (c *Client) ListNotebookInstanceLifecycleConfigsRequest(input *ListNotebookInstanceLifecycleConfigsInput) ListNotebookInstanceLifecycleConfigsRequest {
+func (c *Client) ListNotebookInstanceLifecycleConfigsRequest(input *types.ListNotebookInstanceLifecycleConfigsInput) ListNotebookInstanceLifecycleConfigsRequest {
 	op := &aws.Operation{
 		Name:       opListNotebookInstanceLifecycleConfigs,
 		HTTPMethod: "POST",
@@ -113,10 +39,10 @@ func (c *Client) ListNotebookInstanceLifecycleConfigsRequest(input *ListNotebook
 	}
 
 	if input == nil {
-		input = &ListNotebookInstanceLifecycleConfigsInput{}
+		input = &types.ListNotebookInstanceLifecycleConfigsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListNotebookInstanceLifecycleConfigsOutput{})
+	req := c.newRequest(op, input, &types.ListNotebookInstanceLifecycleConfigsOutput{})
 	return ListNotebookInstanceLifecycleConfigsRequest{Request: req, Input: input, Copy: c.ListNotebookInstanceLifecycleConfigsRequest}
 }
 
@@ -124,8 +50,8 @@ func (c *Client) ListNotebookInstanceLifecycleConfigsRequest(input *ListNotebook
 // ListNotebookInstanceLifecycleConfigs API operation.
 type ListNotebookInstanceLifecycleConfigsRequest struct {
 	*aws.Request
-	Input *ListNotebookInstanceLifecycleConfigsInput
-	Copy  func(*ListNotebookInstanceLifecycleConfigsInput) ListNotebookInstanceLifecycleConfigsRequest
+	Input *types.ListNotebookInstanceLifecycleConfigsInput
+	Copy  func(*types.ListNotebookInstanceLifecycleConfigsInput) ListNotebookInstanceLifecycleConfigsRequest
 }
 
 // Send marshals and sends the ListNotebookInstanceLifecycleConfigs API request.
@@ -137,7 +63,7 @@ func (r ListNotebookInstanceLifecycleConfigsRequest) Send(ctx context.Context) (
 	}
 
 	resp := &ListNotebookInstanceLifecycleConfigsResponse{
-		ListNotebookInstanceLifecycleConfigsOutput: r.Request.Data.(*ListNotebookInstanceLifecycleConfigsOutput),
+		ListNotebookInstanceLifecycleConfigsOutput: r.Request.Data.(*types.ListNotebookInstanceLifecycleConfigsOutput),
 		response: &aws.Response{Request: r.Request},
 	}
 
@@ -167,7 +93,7 @@ func NewListNotebookInstanceLifecycleConfigsPaginator(req ListNotebookInstanceLi
 	return ListNotebookInstanceLifecycleConfigsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListNotebookInstanceLifecycleConfigsInput
+				var inCpy *types.ListNotebookInstanceLifecycleConfigsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -187,14 +113,14 @@ type ListNotebookInstanceLifecycleConfigsPaginator struct {
 	aws.Pager
 }
 
-func (p *ListNotebookInstanceLifecycleConfigsPaginator) CurrentPage() *ListNotebookInstanceLifecycleConfigsOutput {
-	return p.Pager.CurrentPage().(*ListNotebookInstanceLifecycleConfigsOutput)
+func (p *ListNotebookInstanceLifecycleConfigsPaginator) CurrentPage() *types.ListNotebookInstanceLifecycleConfigsOutput {
+	return p.Pager.CurrentPage().(*types.ListNotebookInstanceLifecycleConfigsOutput)
 }
 
 // ListNotebookInstanceLifecycleConfigsResponse is the response type for the
 // ListNotebookInstanceLifecycleConfigs API operation.
 type ListNotebookInstanceLifecycleConfigsResponse struct {
-	*ListNotebookInstanceLifecycleConfigsOutput
+	*types.ListNotebookInstanceLifecycleConfigsOutput
 
 	response *aws.Response
 }

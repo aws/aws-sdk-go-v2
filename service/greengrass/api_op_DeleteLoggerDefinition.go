@@ -6,62 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/greengrass/types"
 )
-
-type DeleteLoggerDefinitionInput struct {
-	_ struct{} `type:"structure"`
-
-	// LoggerDefinitionId is a required field
-	LoggerDefinitionId *string `location:"uri" locationName:"LoggerDefinitionId" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteLoggerDefinitionInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteLoggerDefinitionInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteLoggerDefinitionInput"}
-
-	if s.LoggerDefinitionId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("LoggerDefinitionId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteLoggerDefinitionInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.LoggerDefinitionId != nil {
-		v := *s.LoggerDefinitionId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "LoggerDefinitionId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type DeleteLoggerDefinitionOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteLoggerDefinitionOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteLoggerDefinitionOutput) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
 
 const opDeleteLoggerDefinition = "DeleteLoggerDefinition"
 
@@ -78,7 +24,7 @@ const opDeleteLoggerDefinition = "DeleteLoggerDefinition"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/DeleteLoggerDefinition
-func (c *Client) DeleteLoggerDefinitionRequest(input *DeleteLoggerDefinitionInput) DeleteLoggerDefinitionRequest {
+func (c *Client) DeleteLoggerDefinitionRequest(input *types.DeleteLoggerDefinitionInput) DeleteLoggerDefinitionRequest {
 	op := &aws.Operation{
 		Name:       opDeleteLoggerDefinition,
 		HTTPMethod: "DELETE",
@@ -86,10 +32,10 @@ func (c *Client) DeleteLoggerDefinitionRequest(input *DeleteLoggerDefinitionInpu
 	}
 
 	if input == nil {
-		input = &DeleteLoggerDefinitionInput{}
+		input = &types.DeleteLoggerDefinitionInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteLoggerDefinitionOutput{})
+	req := c.newRequest(op, input, &types.DeleteLoggerDefinitionOutput{})
 	return DeleteLoggerDefinitionRequest{Request: req, Input: input, Copy: c.DeleteLoggerDefinitionRequest}
 }
 
@@ -97,8 +43,8 @@ func (c *Client) DeleteLoggerDefinitionRequest(input *DeleteLoggerDefinitionInpu
 // DeleteLoggerDefinition API operation.
 type DeleteLoggerDefinitionRequest struct {
 	*aws.Request
-	Input *DeleteLoggerDefinitionInput
-	Copy  func(*DeleteLoggerDefinitionInput) DeleteLoggerDefinitionRequest
+	Input *types.DeleteLoggerDefinitionInput
+	Copy  func(*types.DeleteLoggerDefinitionInput) DeleteLoggerDefinitionRequest
 }
 
 // Send marshals and sends the DeleteLoggerDefinition API request.
@@ -110,7 +56,7 @@ func (r DeleteLoggerDefinitionRequest) Send(ctx context.Context) (*DeleteLoggerD
 	}
 
 	resp := &DeleteLoggerDefinitionResponse{
-		DeleteLoggerDefinitionOutput: r.Request.Data.(*DeleteLoggerDefinitionOutput),
+		DeleteLoggerDefinitionOutput: r.Request.Data.(*types.DeleteLoggerDefinitionOutput),
 		response:                     &aws.Response{Request: r.Request},
 	}
 
@@ -120,7 +66,7 @@ func (r DeleteLoggerDefinitionRequest) Send(ctx context.Context) (*DeleteLoggerD
 // DeleteLoggerDefinitionResponse is the response type for the
 // DeleteLoggerDefinition API operation.
 type DeleteLoggerDefinitionResponse struct {
-	*DeleteLoggerDefinitionOutput
+	*types.DeleteLoggerDefinitionOutput
 
 	response *aws.Response
 }

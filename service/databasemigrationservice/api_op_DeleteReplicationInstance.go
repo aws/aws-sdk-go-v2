@@ -6,48 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/databasemigrationservice/types"
 )
-
-type DeleteReplicationInstanceInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the replication instance to be deleted.
-	//
-	// ReplicationInstanceArn is a required field
-	ReplicationInstanceArn *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteReplicationInstanceInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteReplicationInstanceInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteReplicationInstanceInput"}
-
-	if s.ReplicationInstanceArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ReplicationInstanceArn"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteReplicationInstanceOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The replication instance that was deleted.
-	ReplicationInstance *ReplicationInstance `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteReplicationInstanceOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteReplicationInstance = "DeleteReplicationInstance"
 
@@ -67,7 +27,7 @@ const opDeleteReplicationInstance = "DeleteReplicationInstance"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DeleteReplicationInstance
-func (c *Client) DeleteReplicationInstanceRequest(input *DeleteReplicationInstanceInput) DeleteReplicationInstanceRequest {
+func (c *Client) DeleteReplicationInstanceRequest(input *types.DeleteReplicationInstanceInput) DeleteReplicationInstanceRequest {
 	op := &aws.Operation{
 		Name:       opDeleteReplicationInstance,
 		HTTPMethod: "POST",
@@ -75,10 +35,10 @@ func (c *Client) DeleteReplicationInstanceRequest(input *DeleteReplicationInstan
 	}
 
 	if input == nil {
-		input = &DeleteReplicationInstanceInput{}
+		input = &types.DeleteReplicationInstanceInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteReplicationInstanceOutput{})
+	req := c.newRequest(op, input, &types.DeleteReplicationInstanceOutput{})
 	return DeleteReplicationInstanceRequest{Request: req, Input: input, Copy: c.DeleteReplicationInstanceRequest}
 }
 
@@ -86,8 +46,8 @@ func (c *Client) DeleteReplicationInstanceRequest(input *DeleteReplicationInstan
 // DeleteReplicationInstance API operation.
 type DeleteReplicationInstanceRequest struct {
 	*aws.Request
-	Input *DeleteReplicationInstanceInput
-	Copy  func(*DeleteReplicationInstanceInput) DeleteReplicationInstanceRequest
+	Input *types.DeleteReplicationInstanceInput
+	Copy  func(*types.DeleteReplicationInstanceInput) DeleteReplicationInstanceRequest
 }
 
 // Send marshals and sends the DeleteReplicationInstance API request.
@@ -99,7 +59,7 @@ func (r DeleteReplicationInstanceRequest) Send(ctx context.Context) (*DeleteRepl
 	}
 
 	resp := &DeleteReplicationInstanceResponse{
-		DeleteReplicationInstanceOutput: r.Request.Data.(*DeleteReplicationInstanceOutput),
+		DeleteReplicationInstanceOutput: r.Request.Data.(*types.DeleteReplicationInstanceOutput),
 		response:                        &aws.Response{Request: r.Request},
 	}
 
@@ -109,7 +69,7 @@ func (r DeleteReplicationInstanceRequest) Send(ctx context.Context) (*DeleteRepl
 // DeleteReplicationInstanceResponse is the response type for the
 // DeleteReplicationInstance API operation.
 type DeleteReplicationInstanceResponse struct {
-	*DeleteReplicationInstanceOutput
+	*types.DeleteReplicationInstanceOutput
 
 	response *aws.Response
 }

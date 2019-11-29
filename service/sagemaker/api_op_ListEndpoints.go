@@ -4,88 +4,10 @@ package sagemaker
 
 import (
 	"context"
-	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
 )
-
-type ListEndpointsInput struct {
-	_ struct{} `type:"structure"`
-
-	// A filter that returns only endpoints with a creation time greater than or
-	// equal to the specified time (timestamp).
-	CreationTimeAfter *time.Time `type:"timestamp"`
-
-	// A filter that returns only endpoints that were created before the specified
-	// time (timestamp).
-	CreationTimeBefore *time.Time `type:"timestamp"`
-
-	// A filter that returns only endpoints that were modified after the specified
-	// timestamp.
-	LastModifiedTimeAfter *time.Time `type:"timestamp"`
-
-	// A filter that returns only endpoints that were modified before the specified
-	// timestamp.
-	LastModifiedTimeBefore *time.Time `type:"timestamp"`
-
-	// The maximum number of endpoints to return in the response.
-	MaxResults *int64 `min:"1" type:"integer"`
-
-	// A string in endpoint names. This filter returns only endpoints whose name
-	// contains the specified string.
-	NameContains *string `type:"string"`
-
-	// If the result of a ListEndpoints request was truncated, the response includes
-	// a NextToken. To retrieve the next set of endpoints, use the token in the
-	// next request.
-	NextToken *string `type:"string"`
-
-	// Sorts the list of results. The default is CreationTime.
-	SortBy EndpointSortKey `type:"string" enum:"true"`
-
-	// The sort order for results. The default is Descending.
-	SortOrder OrderKey `type:"string" enum:"true"`
-
-	// A filter that returns only endpoints with the specified status.
-	StatusEquals EndpointStatus `type:"string" enum:"true"`
-}
-
-// String returns the string representation
-func (s ListEndpointsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListEndpointsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListEndpointsInput"}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ListEndpointsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// An array or endpoint objects.
-	//
-	// Endpoints is a required field
-	Endpoints []EndpointSummary `type:"list" required:"true"`
-
-	// If the response is truncated, Amazon SageMaker returns this token. To retrieve
-	// the next set of training jobs, use it in the subsequent request.
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s ListEndpointsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListEndpoints = "ListEndpoints"
 
@@ -102,7 +24,7 @@ const opListEndpoints = "ListEndpoints"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListEndpoints
-func (c *Client) ListEndpointsRequest(input *ListEndpointsInput) ListEndpointsRequest {
+func (c *Client) ListEndpointsRequest(input *types.ListEndpointsInput) ListEndpointsRequest {
 	op := &aws.Operation{
 		Name:       opListEndpoints,
 		HTTPMethod: "POST",
@@ -116,10 +38,10 @@ func (c *Client) ListEndpointsRequest(input *ListEndpointsInput) ListEndpointsRe
 	}
 
 	if input == nil {
-		input = &ListEndpointsInput{}
+		input = &types.ListEndpointsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListEndpointsOutput{})
+	req := c.newRequest(op, input, &types.ListEndpointsOutput{})
 	return ListEndpointsRequest{Request: req, Input: input, Copy: c.ListEndpointsRequest}
 }
 
@@ -127,8 +49,8 @@ func (c *Client) ListEndpointsRequest(input *ListEndpointsInput) ListEndpointsRe
 // ListEndpoints API operation.
 type ListEndpointsRequest struct {
 	*aws.Request
-	Input *ListEndpointsInput
-	Copy  func(*ListEndpointsInput) ListEndpointsRequest
+	Input *types.ListEndpointsInput
+	Copy  func(*types.ListEndpointsInput) ListEndpointsRequest
 }
 
 // Send marshals and sends the ListEndpoints API request.
@@ -140,7 +62,7 @@ func (r ListEndpointsRequest) Send(ctx context.Context) (*ListEndpointsResponse,
 	}
 
 	resp := &ListEndpointsResponse{
-		ListEndpointsOutput: r.Request.Data.(*ListEndpointsOutput),
+		ListEndpointsOutput: r.Request.Data.(*types.ListEndpointsOutput),
 		response:            &aws.Response{Request: r.Request},
 	}
 
@@ -170,7 +92,7 @@ func NewListEndpointsPaginator(req ListEndpointsRequest) ListEndpointsPaginator 
 	return ListEndpointsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListEndpointsInput
+				var inCpy *types.ListEndpointsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -190,14 +112,14 @@ type ListEndpointsPaginator struct {
 	aws.Pager
 }
 
-func (p *ListEndpointsPaginator) CurrentPage() *ListEndpointsOutput {
-	return p.Pager.CurrentPage().(*ListEndpointsOutput)
+func (p *ListEndpointsPaginator) CurrentPage() *types.ListEndpointsOutput {
+	return p.Pager.CurrentPage().(*types.ListEndpointsOutput)
 }
 
 // ListEndpointsResponse is the response type for the
 // ListEndpoints API operation.
 type ListEndpointsResponse struct {
-	*ListEndpointsOutput
+	*types.ListEndpointsOutput
 
 	response *aws.Response
 }

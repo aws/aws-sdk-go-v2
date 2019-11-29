@@ -6,67 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/shield/types"
 )
-
-type ListProtectionsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The maximum number of Protection objects to be returned. If this is left
-	// blank the first 20 results will be returned.
-	//
-	// This is a maximum value; it is possible that AWS WAF will return the results
-	// in smaller batches. That is, the number of Protection objects returned could
-	// be less than MaxResults, even if there are still more Protection objects
-	// yet to return. If there are more Protection objects to return, AWS WAF will
-	// always also return a NextToken.
-	MaxResults *int64 `type:"integer"`
-
-	// The ListProtectionsRequest.NextToken value from a previous call to ListProtections.
-	// Pass null if this is the first call.
-	NextToken *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s ListProtectionsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListProtectionsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListProtectionsInput"}
-	if s.NextToken != nil && len(*s.NextToken) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ListProtectionsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// If you specify a value for MaxResults and you have more Protections than
-	// the value of MaxResults, AWS Shield Advanced returns a NextToken value in
-	// the response that allows you to list another group of Protections. For the
-	// second and subsequent ListProtections requests, specify the value of NextToken
-	// from the previous response to get information about another batch of Protections.
-	//
-	// AWS WAF might return the list of Protection objects in batches smaller than
-	// the number specified by MaxResults. If there are more Protection objects
-	// to return, AWS WAF will always also return a NextToken.
-	NextToken *string `min:"1" type:"string"`
-
-	// The array of enabled Protection objects.
-	Protections []Protection `type:"list"`
-}
-
-// String returns the string representation
-func (s ListProtectionsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListProtections = "ListProtections"
 
@@ -83,7 +24,7 @@ const opListProtections = "ListProtections"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/ListProtections
-func (c *Client) ListProtectionsRequest(input *ListProtectionsInput) ListProtectionsRequest {
+func (c *Client) ListProtectionsRequest(input *types.ListProtectionsInput) ListProtectionsRequest {
 	op := &aws.Operation{
 		Name:       opListProtections,
 		HTTPMethod: "POST",
@@ -91,10 +32,10 @@ func (c *Client) ListProtectionsRequest(input *ListProtectionsInput) ListProtect
 	}
 
 	if input == nil {
-		input = &ListProtectionsInput{}
+		input = &types.ListProtectionsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListProtectionsOutput{})
+	req := c.newRequest(op, input, &types.ListProtectionsOutput{})
 	return ListProtectionsRequest{Request: req, Input: input, Copy: c.ListProtectionsRequest}
 }
 
@@ -102,8 +43,8 @@ func (c *Client) ListProtectionsRequest(input *ListProtectionsInput) ListProtect
 // ListProtections API operation.
 type ListProtectionsRequest struct {
 	*aws.Request
-	Input *ListProtectionsInput
-	Copy  func(*ListProtectionsInput) ListProtectionsRequest
+	Input *types.ListProtectionsInput
+	Copy  func(*types.ListProtectionsInput) ListProtectionsRequest
 }
 
 // Send marshals and sends the ListProtections API request.
@@ -115,7 +56,7 @@ func (r ListProtectionsRequest) Send(ctx context.Context) (*ListProtectionsRespo
 	}
 
 	resp := &ListProtectionsResponse{
-		ListProtectionsOutput: r.Request.Data.(*ListProtectionsOutput),
+		ListProtectionsOutput: r.Request.Data.(*types.ListProtectionsOutput),
 		response:              &aws.Response{Request: r.Request},
 	}
 
@@ -125,7 +66,7 @@ func (r ListProtectionsRequest) Send(ctx context.Context) (*ListProtectionsRespo
 // ListProtectionsResponse is the response type for the
 // ListProtections API operation.
 type ListProtectionsResponse struct {
-	*ListProtectionsOutput
+	*types.ListProtectionsOutput
 
 	response *aws.Response
 }

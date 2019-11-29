@@ -4,95 +4,10 @@ package sfn
 
 import (
 	"context"
-	"fmt"
-	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/sfn/types"
 )
-
-type CreateActivityInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the activity to create. This name must be unique for your AWS
-	// account and region for 90 days. For more information, see Limits Related
-	// to State Machine Executions (https://docs.aws.amazon.com/step-functions/latest/dg/limits.html#service-limits-state-machine-executions)
-	// in the AWS Step Functions Developer Guide.
-	//
-	// A name must not contain:
-	//
-	//    * white space
-	//
-	//    * brackets < > { } [ ]
-	//
-	//    * wildcard characters ? *
-	//
-	//    * special characters " # % \ ^ | ~ ` $ & , ; : /
-	//
-	//    * control characters (U+0000-001F, U+007F-009F)
-	//
-	// Name is a required field
-	Name *string `locationName:"name" min:"1" type:"string" required:"true"`
-
-	// The list of tags to add to a resource.
-	//
-	// An array of key-value pairs. For more information, see Using Cost Allocation
-	// Tags (https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html)
-	// in the AWS Billing and Cost Management User Guide, and Controlling Access
-	// Using IAM Tags (https://docs.aws.amazon.com/IAM/latest/UserGuide/access_iam-tags.html).
-	//
-	// Tags may only contain Unicode letters, digits, white space, or these symbols:
-	// _ . : / = + - @.
-	Tags []Tag `locationName:"tags" type:"list"`
-}
-
-// String returns the string representation
-func (s CreateActivityInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateActivityInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateActivityInput"}
-
-	if s.Name == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Name"))
-	}
-	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
-	}
-	if s.Tags != nil {
-		for i, v := range s.Tags {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type CreateActivityOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) that identifies the created activity.
-	//
-	// ActivityArn is a required field
-	ActivityArn *string `locationName:"activityArn" min:"1" type:"string" required:"true"`
-
-	// The date the activity is created.
-	//
-	// CreationDate is a required field
-	CreationDate *time.Time `locationName:"creationDate" type:"timestamp" required:"true"`
-}
-
-// String returns the string representation
-func (s CreateActivityOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCreateActivity = "CreateActivity"
 
@@ -124,7 +39,7 @@ const opCreateActivity = "CreateActivity"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/CreateActivity
-func (c *Client) CreateActivityRequest(input *CreateActivityInput) CreateActivityRequest {
+func (c *Client) CreateActivityRequest(input *types.CreateActivityInput) CreateActivityRequest {
 	op := &aws.Operation{
 		Name:       opCreateActivity,
 		HTTPMethod: "POST",
@@ -132,10 +47,10 @@ func (c *Client) CreateActivityRequest(input *CreateActivityInput) CreateActivit
 	}
 
 	if input == nil {
-		input = &CreateActivityInput{}
+		input = &types.CreateActivityInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateActivityOutput{})
+	req := c.newRequest(op, input, &types.CreateActivityOutput{})
 	return CreateActivityRequest{Request: req, Input: input, Copy: c.CreateActivityRequest}
 }
 
@@ -143,8 +58,8 @@ func (c *Client) CreateActivityRequest(input *CreateActivityInput) CreateActivit
 // CreateActivity API operation.
 type CreateActivityRequest struct {
 	*aws.Request
-	Input *CreateActivityInput
-	Copy  func(*CreateActivityInput) CreateActivityRequest
+	Input *types.CreateActivityInput
+	Copy  func(*types.CreateActivityInput) CreateActivityRequest
 }
 
 // Send marshals and sends the CreateActivity API request.
@@ -156,7 +71,7 @@ func (r CreateActivityRequest) Send(ctx context.Context) (*CreateActivityRespons
 	}
 
 	resp := &CreateActivityResponse{
-		CreateActivityOutput: r.Request.Data.(*CreateActivityOutput),
+		CreateActivityOutput: r.Request.Data.(*types.CreateActivityOutput),
 		response:             &aws.Response{Request: r.Request},
 	}
 
@@ -166,7 +81,7 @@ func (r CreateActivityRequest) Send(ctx context.Context) (*CreateActivityRespons
 // CreateActivityResponse is the response type for the
 // CreateActivity API operation.
 type CreateActivityResponse struct {
-	*CreateActivityOutput
+	*types.CreateActivityOutput
 
 	response *aws.Response
 }

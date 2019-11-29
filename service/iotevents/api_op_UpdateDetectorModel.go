@@ -6,124 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/iotevents/types"
 )
-
-type UpdateDetectorModelInput struct {
-	_ struct{} `type:"structure"`
-
-	// Information that defines how a detector operates.
-	//
-	// DetectorModelDefinition is a required field
-	DetectorModelDefinition *DetectorModelDefinition `locationName:"detectorModelDefinition" type:"structure" required:"true"`
-
-	// A brief description of the detector model.
-	DetectorModelDescription *string `locationName:"detectorModelDescription" type:"string"`
-
-	// The name of the detector model that is updated.
-	//
-	// DetectorModelName is a required field
-	DetectorModelName *string `location:"uri" locationName:"detectorModelName" min:"1" type:"string" required:"true"`
-
-	// The ARN of the role that grants permission to AWS IoT Events to perform its
-	// operations.
-	//
-	// RoleArn is a required field
-	RoleArn *string `locationName:"roleArn" min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s UpdateDetectorModelInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateDetectorModelInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateDetectorModelInput"}
-
-	if s.DetectorModelDefinition == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DetectorModelDefinition"))
-	}
-
-	if s.DetectorModelName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DetectorModelName"))
-	}
-	if s.DetectorModelName != nil && len(*s.DetectorModelName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("DetectorModelName", 1))
-	}
-
-	if s.RoleArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("RoleArn"))
-	}
-	if s.RoleArn != nil && len(*s.RoleArn) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("RoleArn", 1))
-	}
-	if s.DetectorModelDefinition != nil {
-		if err := s.DetectorModelDefinition.Validate(); err != nil {
-			invalidParams.AddNested("DetectorModelDefinition", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s UpdateDetectorModelInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.DetectorModelDefinition != nil {
-		v := s.DetectorModelDefinition
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "detectorModelDefinition", v, metadata)
-	}
-	if s.DetectorModelDescription != nil {
-		v := *s.DetectorModelDescription
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "detectorModelDescription", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.RoleArn != nil {
-		v := *s.RoleArn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "roleArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.DetectorModelName != nil {
-		v := *s.DetectorModelName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "detectorModelName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type UpdateDetectorModelOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Information about how the detector model is configured.
-	DetectorModelConfiguration *DetectorModelConfiguration `locationName:"detectorModelConfiguration" type:"structure"`
-}
-
-// String returns the string representation
-func (s UpdateDetectorModelOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s UpdateDetectorModelOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.DetectorModelConfiguration != nil {
-		v := s.DetectorModelConfiguration
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "detectorModelConfiguration", v, metadata)
-	}
-	return nil
-}
 
 const opUpdateDetectorModel = "UpdateDetectorModel"
 
@@ -141,7 +25,7 @@ const opUpdateDetectorModel = "UpdateDetectorModel"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iotevents-2018-07-27/UpdateDetectorModel
-func (c *Client) UpdateDetectorModelRequest(input *UpdateDetectorModelInput) UpdateDetectorModelRequest {
+func (c *Client) UpdateDetectorModelRequest(input *types.UpdateDetectorModelInput) UpdateDetectorModelRequest {
 	op := &aws.Operation{
 		Name:       opUpdateDetectorModel,
 		HTTPMethod: "POST",
@@ -149,10 +33,10 @@ func (c *Client) UpdateDetectorModelRequest(input *UpdateDetectorModelInput) Upd
 	}
 
 	if input == nil {
-		input = &UpdateDetectorModelInput{}
+		input = &types.UpdateDetectorModelInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateDetectorModelOutput{})
+	req := c.newRequest(op, input, &types.UpdateDetectorModelOutput{})
 	return UpdateDetectorModelRequest{Request: req, Input: input, Copy: c.UpdateDetectorModelRequest}
 }
 
@@ -160,8 +44,8 @@ func (c *Client) UpdateDetectorModelRequest(input *UpdateDetectorModelInput) Upd
 // UpdateDetectorModel API operation.
 type UpdateDetectorModelRequest struct {
 	*aws.Request
-	Input *UpdateDetectorModelInput
-	Copy  func(*UpdateDetectorModelInput) UpdateDetectorModelRequest
+	Input *types.UpdateDetectorModelInput
+	Copy  func(*types.UpdateDetectorModelInput) UpdateDetectorModelRequest
 }
 
 // Send marshals and sends the UpdateDetectorModel API request.
@@ -173,7 +57,7 @@ func (r UpdateDetectorModelRequest) Send(ctx context.Context) (*UpdateDetectorMo
 	}
 
 	resp := &UpdateDetectorModelResponse{
-		UpdateDetectorModelOutput: r.Request.Data.(*UpdateDetectorModelOutput),
+		UpdateDetectorModelOutput: r.Request.Data.(*types.UpdateDetectorModelOutput),
 		response:                  &aws.Response{Request: r.Request},
 	}
 
@@ -183,7 +67,7 @@ func (r UpdateDetectorModelRequest) Send(ctx context.Context) (*UpdateDetectorMo
 // UpdateDetectorModelResponse is the response type for the
 // UpdateDetectorModel API operation.
 type UpdateDetectorModelResponse struct {
-	*UpdateDetectorModelOutput
+	*types.UpdateDetectorModelOutput
 
 	response *aws.Response
 }

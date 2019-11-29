@@ -6,37 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/elasticloadbalancing/types"
 )
-
-// Contains the parameters for DescribeLoadBalancerPolicies.
-type DescribeLoadBalancerPoliciesInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the load balancer.
-	LoadBalancerName *string `type:"string"`
-
-	// The names of the policies.
-	PolicyNames []string `type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeLoadBalancerPoliciesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Contains the output of DescribeLoadBalancerPolicies.
-type DescribeLoadBalancerPoliciesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Information about the policies.
-	PolicyDescriptions []PolicyDescription `type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeLoadBalancerPoliciesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeLoadBalancerPolicies = "DescribeLoadBalancerPolicies"
 
@@ -60,7 +31,7 @@ const opDescribeLoadBalancerPolicies = "DescribeLoadBalancerPolicies"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/DescribeLoadBalancerPolicies
-func (c *Client) DescribeLoadBalancerPoliciesRequest(input *DescribeLoadBalancerPoliciesInput) DescribeLoadBalancerPoliciesRequest {
+func (c *Client) DescribeLoadBalancerPoliciesRequest(input *types.DescribeLoadBalancerPoliciesInput) DescribeLoadBalancerPoliciesRequest {
 	op := &aws.Operation{
 		Name:       opDescribeLoadBalancerPolicies,
 		HTTPMethod: "POST",
@@ -68,10 +39,10 @@ func (c *Client) DescribeLoadBalancerPoliciesRequest(input *DescribeLoadBalancer
 	}
 
 	if input == nil {
-		input = &DescribeLoadBalancerPoliciesInput{}
+		input = &types.DescribeLoadBalancerPoliciesInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeLoadBalancerPoliciesOutput{})
+	req := c.newRequest(op, input, &types.DescribeLoadBalancerPoliciesOutput{})
 	return DescribeLoadBalancerPoliciesRequest{Request: req, Input: input, Copy: c.DescribeLoadBalancerPoliciesRequest}
 }
 
@@ -79,8 +50,8 @@ func (c *Client) DescribeLoadBalancerPoliciesRequest(input *DescribeLoadBalancer
 // DescribeLoadBalancerPolicies API operation.
 type DescribeLoadBalancerPoliciesRequest struct {
 	*aws.Request
-	Input *DescribeLoadBalancerPoliciesInput
-	Copy  func(*DescribeLoadBalancerPoliciesInput) DescribeLoadBalancerPoliciesRequest
+	Input *types.DescribeLoadBalancerPoliciesInput
+	Copy  func(*types.DescribeLoadBalancerPoliciesInput) DescribeLoadBalancerPoliciesRequest
 }
 
 // Send marshals and sends the DescribeLoadBalancerPolicies API request.
@@ -92,7 +63,7 @@ func (r DescribeLoadBalancerPoliciesRequest) Send(ctx context.Context) (*Describ
 	}
 
 	resp := &DescribeLoadBalancerPoliciesResponse{
-		DescribeLoadBalancerPoliciesOutput: r.Request.Data.(*DescribeLoadBalancerPoliciesOutput),
+		DescribeLoadBalancerPoliciesOutput: r.Request.Data.(*types.DescribeLoadBalancerPoliciesOutput),
 		response:                           &aws.Response{Request: r.Request},
 	}
 
@@ -102,7 +73,7 @@ func (r DescribeLoadBalancerPoliciesRequest) Send(ctx context.Context) (*Describ
 // DescribeLoadBalancerPoliciesResponse is the response type for the
 // DescribeLoadBalancerPolicies API operation.
 type DescribeLoadBalancerPoliciesResponse struct {
-	*DescribeLoadBalancerPoliciesOutput
+	*types.DescribeLoadBalancerPoliciesOutput
 
 	response *aws.Response
 }

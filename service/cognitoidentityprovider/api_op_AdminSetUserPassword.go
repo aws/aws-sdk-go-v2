@@ -6,75 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/types"
 )
-
-type AdminSetUserPasswordInput struct {
-	_ struct{} `type:"structure"`
-
-	// The password for the user.
-	//
-	// Password is a required field
-	Password *string `min:"6" type:"string" required:"true" sensitive:"true"`
-
-	// True if the password is permanent, False if it is temporary.
-	Permanent *bool `type:"boolean"`
-
-	// The user pool ID for the user pool where you want to set the user's password.
-	//
-	// UserPoolId is a required field
-	UserPoolId *string `min:"1" type:"string" required:"true"`
-
-	// The user name of the user whose password you wish to set.
-	//
-	// Username is a required field
-	Username *string `min:"1" type:"string" required:"true" sensitive:"true"`
-}
-
-// String returns the string representation
-func (s AdminSetUserPasswordInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *AdminSetUserPasswordInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "AdminSetUserPasswordInput"}
-
-	if s.Password == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Password"))
-	}
-	if s.Password != nil && len(*s.Password) < 6 {
-		invalidParams.Add(aws.NewErrParamMinLen("Password", 6))
-	}
-
-	if s.UserPoolId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("UserPoolId"))
-	}
-	if s.UserPoolId != nil && len(*s.UserPoolId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("UserPoolId", 1))
-	}
-
-	if s.Username == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Username"))
-	}
-	if s.Username != nil && len(*s.Username) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Username", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type AdminSetUserPasswordOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s AdminSetUserPasswordOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opAdminSetUserPassword = "AdminSetUserPassword"
 
@@ -102,7 +35,7 @@ const opAdminSetUserPassword = "AdminSetUserPassword"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AdminSetUserPassword
-func (c *Client) AdminSetUserPasswordRequest(input *AdminSetUserPasswordInput) AdminSetUserPasswordRequest {
+func (c *Client) AdminSetUserPasswordRequest(input *types.AdminSetUserPasswordInput) AdminSetUserPasswordRequest {
 	op := &aws.Operation{
 		Name:       opAdminSetUserPassword,
 		HTTPMethod: "POST",
@@ -110,10 +43,10 @@ func (c *Client) AdminSetUserPasswordRequest(input *AdminSetUserPasswordInput) A
 	}
 
 	if input == nil {
-		input = &AdminSetUserPasswordInput{}
+		input = &types.AdminSetUserPasswordInput{}
 	}
 
-	req := c.newRequest(op, input, &AdminSetUserPasswordOutput{})
+	req := c.newRequest(op, input, &types.AdminSetUserPasswordOutput{})
 	return AdminSetUserPasswordRequest{Request: req, Input: input, Copy: c.AdminSetUserPasswordRequest}
 }
 
@@ -121,8 +54,8 @@ func (c *Client) AdminSetUserPasswordRequest(input *AdminSetUserPasswordInput) A
 // AdminSetUserPassword API operation.
 type AdminSetUserPasswordRequest struct {
 	*aws.Request
-	Input *AdminSetUserPasswordInput
-	Copy  func(*AdminSetUserPasswordInput) AdminSetUserPasswordRequest
+	Input *types.AdminSetUserPasswordInput
+	Copy  func(*types.AdminSetUserPasswordInput) AdminSetUserPasswordRequest
 }
 
 // Send marshals and sends the AdminSetUserPassword API request.
@@ -134,7 +67,7 @@ func (r AdminSetUserPasswordRequest) Send(ctx context.Context) (*AdminSetUserPas
 	}
 
 	resp := &AdminSetUserPasswordResponse{
-		AdminSetUserPasswordOutput: r.Request.Data.(*AdminSetUserPasswordOutput),
+		AdminSetUserPasswordOutput: r.Request.Data.(*types.AdminSetUserPasswordOutput),
 		response:                   &aws.Response{Request: r.Request},
 	}
 
@@ -144,7 +77,7 @@ func (r AdminSetUserPasswordRequest) Send(ctx context.Context) (*AdminSetUserPas
 // AdminSetUserPasswordResponse is the response type for the
 // AdminSetUserPassword API operation.
 type AdminSetUserPasswordResponse struct {
-	*AdminSetUserPasswordOutput
+	*types.AdminSetUserPasswordOutput
 
 	response *aws.Response
 }

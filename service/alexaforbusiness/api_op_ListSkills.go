@@ -6,69 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/alexaforbusiness/types"
 )
-
-type ListSkillsInput struct {
-	_ struct{} `type:"structure"`
-
-	// Whether the skill is enabled under the user's account, or if it requires
-	// linking to be used.
-	EnablementType EnablementTypeFilter `type:"string" enum:"true"`
-
-	// The maximum number of results to include in the response. If more results
-	// exist than the specified MaxResults value, a token is included in the response
-	// so that the remaining results can be retrieved. Required.
-	MaxResults *int64 `min:"1" type:"integer"`
-
-	// An optional token returned from a prior request. Use this token for pagination
-	// of results from this action. If this parameter is specified, the response
-	// includes only results beyond the token, up to the value specified by MaxResults.
-	// Required.
-	NextToken *string `min:"1" type:"string"`
-
-	// The ARN of the skill group for which to list enabled skills. Required.
-	SkillGroupArn *string `type:"string"`
-
-	// Whether the skill is publicly available or is a private skill.
-	SkillType SkillTypeFilter `type:"string" enum:"true"`
-}
-
-// String returns the string representation
-func (s ListSkillsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListSkillsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListSkillsInput"}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-	if s.NextToken != nil && len(*s.NextToken) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ListSkillsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The token returned to indicate that there is more data available.
-	NextToken *string `min:"1" type:"string"`
-
-	// The list of enabled skills requested. Required.
-	SkillSummaries []SkillSummary `type:"list"`
-}
-
-// String returns the string representation
-func (s ListSkillsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListSkills = "ListSkills"
 
@@ -85,7 +24,7 @@ const opListSkills = "ListSkills"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/ListSkills
-func (c *Client) ListSkillsRequest(input *ListSkillsInput) ListSkillsRequest {
+func (c *Client) ListSkillsRequest(input *types.ListSkillsInput) ListSkillsRequest {
 	op := &aws.Operation{
 		Name:       opListSkills,
 		HTTPMethod: "POST",
@@ -99,10 +38,10 @@ func (c *Client) ListSkillsRequest(input *ListSkillsInput) ListSkillsRequest {
 	}
 
 	if input == nil {
-		input = &ListSkillsInput{}
+		input = &types.ListSkillsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListSkillsOutput{})
+	req := c.newRequest(op, input, &types.ListSkillsOutput{})
 	return ListSkillsRequest{Request: req, Input: input, Copy: c.ListSkillsRequest}
 }
 
@@ -110,8 +49,8 @@ func (c *Client) ListSkillsRequest(input *ListSkillsInput) ListSkillsRequest {
 // ListSkills API operation.
 type ListSkillsRequest struct {
 	*aws.Request
-	Input *ListSkillsInput
-	Copy  func(*ListSkillsInput) ListSkillsRequest
+	Input *types.ListSkillsInput
+	Copy  func(*types.ListSkillsInput) ListSkillsRequest
 }
 
 // Send marshals and sends the ListSkills API request.
@@ -123,7 +62,7 @@ func (r ListSkillsRequest) Send(ctx context.Context) (*ListSkillsResponse, error
 	}
 
 	resp := &ListSkillsResponse{
-		ListSkillsOutput: r.Request.Data.(*ListSkillsOutput),
+		ListSkillsOutput: r.Request.Data.(*types.ListSkillsOutput),
 		response:         &aws.Response{Request: r.Request},
 	}
 
@@ -153,7 +92,7 @@ func NewListSkillsPaginator(req ListSkillsRequest) ListSkillsPaginator {
 	return ListSkillsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListSkillsInput
+				var inCpy *types.ListSkillsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -173,14 +112,14 @@ type ListSkillsPaginator struct {
 	aws.Pager
 }
 
-func (p *ListSkillsPaginator) CurrentPage() *ListSkillsOutput {
-	return p.Pager.CurrentPage().(*ListSkillsOutput)
+func (p *ListSkillsPaginator) CurrentPage() *types.ListSkillsOutput {
+	return p.Pager.CurrentPage().(*types.ListSkillsOutput)
 }
 
 // ListSkillsResponse is the response type for the
 // ListSkills API operation.
 type ListSkillsResponse struct {
-	*ListSkillsOutput
+	*types.ListSkillsOutput
 
 	response *aws.Response
 }

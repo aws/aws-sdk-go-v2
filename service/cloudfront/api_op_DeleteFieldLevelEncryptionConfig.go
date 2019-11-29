@@ -6,74 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/restxml"
+	"github.com/aws/aws-sdk-go-v2/service/cloudfront/types"
 )
-
-type DeleteFieldLevelEncryptionConfigInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the configuration you want to delete from CloudFront.
-	//
-	// Id is a required field
-	Id *string `location:"uri" locationName:"Id" type:"string" required:"true"`
-
-	// The value of the ETag header that you received when retrieving the configuration
-	// identity to delete. For example: E2QWRUHAPOMQZL.
-	IfMatch *string `location:"header" locationName:"If-Match" type:"string"`
-}
-
-// String returns the string representation
-func (s DeleteFieldLevelEncryptionConfigInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteFieldLevelEncryptionConfigInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteFieldLevelEncryptionConfigInput"}
-
-	if s.Id == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Id"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteFieldLevelEncryptionConfigInput) MarshalFields(e protocol.FieldEncoder) error {
-
-	if s.IfMatch != nil {
-		v := *s.IfMatch
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "If-Match", protocol.StringValue(v), metadata)
-	}
-	if s.Id != nil {
-		v := *s.Id
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "Id", protocol.StringValue(v), metadata)
-	}
-	return nil
-}
-
-type DeleteFieldLevelEncryptionConfigOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteFieldLevelEncryptionConfigOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteFieldLevelEncryptionConfigOutput) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
 
 const opDeleteFieldLevelEncryptionConfig = "DeleteFieldLevelEncryptionConfig2019_03_26"
 
@@ -90,7 +26,7 @@ const opDeleteFieldLevelEncryptionConfig = "DeleteFieldLevelEncryptionConfig2019
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/DeleteFieldLevelEncryptionConfig
-func (c *Client) DeleteFieldLevelEncryptionConfigRequest(input *DeleteFieldLevelEncryptionConfigInput) DeleteFieldLevelEncryptionConfigRequest {
+func (c *Client) DeleteFieldLevelEncryptionConfigRequest(input *types.DeleteFieldLevelEncryptionConfigInput) DeleteFieldLevelEncryptionConfigRequest {
 	op := &aws.Operation{
 		Name:       opDeleteFieldLevelEncryptionConfig,
 		HTTPMethod: "DELETE",
@@ -98,10 +34,10 @@ func (c *Client) DeleteFieldLevelEncryptionConfigRequest(input *DeleteFieldLevel
 	}
 
 	if input == nil {
-		input = &DeleteFieldLevelEncryptionConfigInput{}
+		input = &types.DeleteFieldLevelEncryptionConfigInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteFieldLevelEncryptionConfigOutput{})
+	req := c.newRequest(op, input, &types.DeleteFieldLevelEncryptionConfigOutput{})
 	req.Handlers.Unmarshal.Remove(restxml.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return DeleteFieldLevelEncryptionConfigRequest{Request: req, Input: input, Copy: c.DeleteFieldLevelEncryptionConfigRequest}
@@ -111,8 +47,8 @@ func (c *Client) DeleteFieldLevelEncryptionConfigRequest(input *DeleteFieldLevel
 // DeleteFieldLevelEncryptionConfig API operation.
 type DeleteFieldLevelEncryptionConfigRequest struct {
 	*aws.Request
-	Input *DeleteFieldLevelEncryptionConfigInput
-	Copy  func(*DeleteFieldLevelEncryptionConfigInput) DeleteFieldLevelEncryptionConfigRequest
+	Input *types.DeleteFieldLevelEncryptionConfigInput
+	Copy  func(*types.DeleteFieldLevelEncryptionConfigInput) DeleteFieldLevelEncryptionConfigRequest
 }
 
 // Send marshals and sends the DeleteFieldLevelEncryptionConfig API request.
@@ -124,7 +60,7 @@ func (r DeleteFieldLevelEncryptionConfigRequest) Send(ctx context.Context) (*Del
 	}
 
 	resp := &DeleteFieldLevelEncryptionConfigResponse{
-		DeleteFieldLevelEncryptionConfigOutput: r.Request.Data.(*DeleteFieldLevelEncryptionConfigOutput),
+		DeleteFieldLevelEncryptionConfigOutput: r.Request.Data.(*types.DeleteFieldLevelEncryptionConfigOutput),
 		response:                               &aws.Response{Request: r.Request},
 	}
 
@@ -134,7 +70,7 @@ func (r DeleteFieldLevelEncryptionConfigRequest) Send(ctx context.Context) (*Del
 // DeleteFieldLevelEncryptionConfigResponse is the response type for the
 // DeleteFieldLevelEncryptionConfig API operation.
 type DeleteFieldLevelEncryptionConfigResponse struct {
-	*DeleteFieldLevelEncryptionConfigOutput
+	*types.DeleteFieldLevelEncryptionConfigOutput
 
 	response *aws.Response
 }

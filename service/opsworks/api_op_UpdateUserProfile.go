@@ -6,61 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
+	"github.com/aws/aws-sdk-go-v2/service/opsworks/types"
 )
-
-type UpdateUserProfileInput struct {
-	_ struct{} `type:"structure"`
-
-	// Whether users can specify their own SSH public key through the My Settings
-	// page. For more information, see Managing User Permissions (https://docs.aws.amazon.com/opsworks/latest/userguide/security-settingsshkey.html).
-	AllowSelfManagement *bool `type:"boolean"`
-
-	// The user IAM ARN. This can also be a federated user's ARN.
-	//
-	// IamUserArn is a required field
-	IamUserArn *string `type:"string" required:"true"`
-
-	// The user's new SSH public key.
-	SshPublicKey *string `type:"string"`
-
-	// The user's SSH user name. The allowable characters are [a-z], [A-Z], [0-9],
-	// '-', and '_'. If the specified name includes other punctuation marks, AWS
-	// OpsWorks Stacks removes them. For example, my.name will be changed to myname.
-	// If you do not specify an SSH user name, AWS OpsWorks Stacks generates one
-	// from the IAM user name.
-	SshUsername *string `type:"string"`
-}
-
-// String returns the string representation
-func (s UpdateUserProfileInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateUserProfileInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateUserProfileInput"}
-
-	if s.IamUserArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("IamUserArn"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type UpdateUserProfileOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s UpdateUserProfileOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opUpdateUserProfile = "UpdateUserProfile"
 
@@ -81,7 +30,7 @@ const opUpdateUserProfile = "UpdateUserProfile"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/UpdateUserProfile
-func (c *Client) UpdateUserProfileRequest(input *UpdateUserProfileInput) UpdateUserProfileRequest {
+func (c *Client) UpdateUserProfileRequest(input *types.UpdateUserProfileInput) UpdateUserProfileRequest {
 	op := &aws.Operation{
 		Name:       opUpdateUserProfile,
 		HTTPMethod: "POST",
@@ -89,10 +38,10 @@ func (c *Client) UpdateUserProfileRequest(input *UpdateUserProfileInput) UpdateU
 	}
 
 	if input == nil {
-		input = &UpdateUserProfileInput{}
+		input = &types.UpdateUserProfileInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateUserProfileOutput{})
+	req := c.newRequest(op, input, &types.UpdateUserProfileOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return UpdateUserProfileRequest{Request: req, Input: input, Copy: c.UpdateUserProfileRequest}
@@ -102,8 +51,8 @@ func (c *Client) UpdateUserProfileRequest(input *UpdateUserProfileInput) UpdateU
 // UpdateUserProfile API operation.
 type UpdateUserProfileRequest struct {
 	*aws.Request
-	Input *UpdateUserProfileInput
-	Copy  func(*UpdateUserProfileInput) UpdateUserProfileRequest
+	Input *types.UpdateUserProfileInput
+	Copy  func(*types.UpdateUserProfileInput) UpdateUserProfileRequest
 }
 
 // Send marshals and sends the UpdateUserProfile API request.
@@ -115,7 +64,7 @@ func (r UpdateUserProfileRequest) Send(ctx context.Context) (*UpdateUserProfileR
 	}
 
 	resp := &UpdateUserProfileResponse{
-		UpdateUserProfileOutput: r.Request.Data.(*UpdateUserProfileOutput),
+		UpdateUserProfileOutput: r.Request.Data.(*types.UpdateUserProfileOutput),
 		response:                &aws.Response{Request: r.Request},
 	}
 
@@ -125,7 +74,7 @@ func (r UpdateUserProfileRequest) Send(ctx context.Context) (*UpdateUserProfileR
 // UpdateUserProfileResponse is the response type for the
 // UpdateUserProfile API operation.
 type UpdateUserProfileResponse struct {
-	*UpdateUserProfileOutput
+	*types.UpdateUserProfileOutput
 
 	response *aws.Response
 }

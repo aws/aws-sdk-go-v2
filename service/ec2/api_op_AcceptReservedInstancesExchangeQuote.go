@@ -4,71 +4,10 @@ package ec2
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-// Contains the parameters for accepting the quote.
-type AcceptReservedInstancesExchangeQuoteInput struct {
-	_ struct{} `type:"structure"`
-
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have
-	// the required permissions, the error response is DryRunOperation. Otherwise,
-	// it is UnauthorizedOperation.
-	DryRun *bool `type:"boolean"`
-
-	// The IDs of the Convertible Reserved Instances to exchange for another Convertible
-	// Reserved Instance of the same or higher value.
-	//
-	// ReservedInstanceIds is a required field
-	ReservedInstanceIds []string `locationName:"ReservedInstanceId" locationNameList:"ReservedInstanceId" type:"list" required:"true"`
-
-	// The configuration of the target Convertible Reserved Instance to exchange
-	// for your current Convertible Reserved Instances.
-	TargetConfigurations []TargetConfigurationRequest `locationName:"TargetConfiguration" locationNameList:"TargetConfigurationRequest" type:"list"`
-}
-
-// String returns the string representation
-func (s AcceptReservedInstancesExchangeQuoteInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *AcceptReservedInstancesExchangeQuoteInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "AcceptReservedInstancesExchangeQuoteInput"}
-
-	if s.ReservedInstanceIds == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ReservedInstanceIds"))
-	}
-	if s.TargetConfigurations != nil {
-		for i, v := range s.TargetConfigurations {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "TargetConfigurations", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// The result of the exchange and whether it was successful.
-type AcceptReservedInstancesExchangeQuoteOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the successful exchange.
-	ExchangeId *string `locationName:"exchangeId" type:"string"`
-}
-
-// String returns the string representation
-func (s AcceptReservedInstancesExchangeQuoteOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opAcceptReservedInstancesExchangeQuote = "AcceptReservedInstancesExchangeQuote"
 
@@ -86,7 +25,7 @@ const opAcceptReservedInstancesExchangeQuote = "AcceptReservedInstancesExchangeQ
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AcceptReservedInstancesExchangeQuote
-func (c *Client) AcceptReservedInstancesExchangeQuoteRequest(input *AcceptReservedInstancesExchangeQuoteInput) AcceptReservedInstancesExchangeQuoteRequest {
+func (c *Client) AcceptReservedInstancesExchangeQuoteRequest(input *types.AcceptReservedInstancesExchangeQuoteInput) AcceptReservedInstancesExchangeQuoteRequest {
 	op := &aws.Operation{
 		Name:       opAcceptReservedInstancesExchangeQuote,
 		HTTPMethod: "POST",
@@ -94,10 +33,10 @@ func (c *Client) AcceptReservedInstancesExchangeQuoteRequest(input *AcceptReserv
 	}
 
 	if input == nil {
-		input = &AcceptReservedInstancesExchangeQuoteInput{}
+		input = &types.AcceptReservedInstancesExchangeQuoteInput{}
 	}
 
-	req := c.newRequest(op, input, &AcceptReservedInstancesExchangeQuoteOutput{})
+	req := c.newRequest(op, input, &types.AcceptReservedInstancesExchangeQuoteOutput{})
 	return AcceptReservedInstancesExchangeQuoteRequest{Request: req, Input: input, Copy: c.AcceptReservedInstancesExchangeQuoteRequest}
 }
 
@@ -105,8 +44,8 @@ func (c *Client) AcceptReservedInstancesExchangeQuoteRequest(input *AcceptReserv
 // AcceptReservedInstancesExchangeQuote API operation.
 type AcceptReservedInstancesExchangeQuoteRequest struct {
 	*aws.Request
-	Input *AcceptReservedInstancesExchangeQuoteInput
-	Copy  func(*AcceptReservedInstancesExchangeQuoteInput) AcceptReservedInstancesExchangeQuoteRequest
+	Input *types.AcceptReservedInstancesExchangeQuoteInput
+	Copy  func(*types.AcceptReservedInstancesExchangeQuoteInput) AcceptReservedInstancesExchangeQuoteRequest
 }
 
 // Send marshals and sends the AcceptReservedInstancesExchangeQuote API request.
@@ -118,7 +57,7 @@ func (r AcceptReservedInstancesExchangeQuoteRequest) Send(ctx context.Context) (
 	}
 
 	resp := &AcceptReservedInstancesExchangeQuoteResponse{
-		AcceptReservedInstancesExchangeQuoteOutput: r.Request.Data.(*AcceptReservedInstancesExchangeQuoteOutput),
+		AcceptReservedInstancesExchangeQuoteOutput: r.Request.Data.(*types.AcceptReservedInstancesExchangeQuoteOutput),
 		response: &aws.Response{Request: r.Request},
 	}
 
@@ -128,7 +67,7 @@ func (r AcceptReservedInstancesExchangeQuoteRequest) Send(ctx context.Context) (
 // AcceptReservedInstancesExchangeQuoteResponse is the response type for the
 // AcceptReservedInstancesExchangeQuote API operation.
 type AcceptReservedInstancesExchangeQuoteResponse struct {
-	*AcceptReservedInstancesExchangeQuoteOutput
+	*types.AcceptReservedInstancesExchangeQuoteOutput
 
 	response *aws.Response
 }

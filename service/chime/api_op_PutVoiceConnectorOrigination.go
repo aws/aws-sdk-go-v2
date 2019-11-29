@@ -6,93 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/chime/types"
 )
-
-type PutVoiceConnectorOriginationInput struct {
-	_ struct{} `type:"structure"`
-
-	// The origination setting details to add.
-	//
-	// Origination is a required field
-	Origination *Origination `type:"structure" required:"true"`
-
-	// The Amazon Chime Voice Connector ID.
-	//
-	// VoiceConnectorId is a required field
-	VoiceConnectorId *string `location:"uri" locationName:"voiceConnectorId" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s PutVoiceConnectorOriginationInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *PutVoiceConnectorOriginationInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "PutVoiceConnectorOriginationInput"}
-
-	if s.Origination == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Origination"))
-	}
-
-	if s.VoiceConnectorId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("VoiceConnectorId"))
-	}
-	if s.Origination != nil {
-		if err := s.Origination.Validate(); err != nil {
-			invalidParams.AddNested("Origination", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s PutVoiceConnectorOriginationInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.Origination != nil {
-		v := s.Origination
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "Origination", v, metadata)
-	}
-	if s.VoiceConnectorId != nil {
-		v := *s.VoiceConnectorId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "voiceConnectorId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type PutVoiceConnectorOriginationOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The updated origination setting details.
-	Origination *Origination `type:"structure"`
-}
-
-// String returns the string representation
-func (s PutVoiceConnectorOriginationOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s PutVoiceConnectorOriginationOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.Origination != nil {
-		v := s.Origination
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "Origination", v, metadata)
-	}
-	return nil
-}
 
 const opPutVoiceConnectorOrigination = "PutVoiceConnectorOrigination"
 
@@ -109,7 +24,7 @@ const opPutVoiceConnectorOrigination = "PutVoiceConnectorOrigination"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/PutVoiceConnectorOrigination
-func (c *Client) PutVoiceConnectorOriginationRequest(input *PutVoiceConnectorOriginationInput) PutVoiceConnectorOriginationRequest {
+func (c *Client) PutVoiceConnectorOriginationRequest(input *types.PutVoiceConnectorOriginationInput) PutVoiceConnectorOriginationRequest {
 	op := &aws.Operation{
 		Name:       opPutVoiceConnectorOrigination,
 		HTTPMethod: "PUT",
@@ -117,10 +32,10 @@ func (c *Client) PutVoiceConnectorOriginationRequest(input *PutVoiceConnectorOri
 	}
 
 	if input == nil {
-		input = &PutVoiceConnectorOriginationInput{}
+		input = &types.PutVoiceConnectorOriginationInput{}
 	}
 
-	req := c.newRequest(op, input, &PutVoiceConnectorOriginationOutput{})
+	req := c.newRequest(op, input, &types.PutVoiceConnectorOriginationOutput{})
 	return PutVoiceConnectorOriginationRequest{Request: req, Input: input, Copy: c.PutVoiceConnectorOriginationRequest}
 }
 
@@ -128,8 +43,8 @@ func (c *Client) PutVoiceConnectorOriginationRequest(input *PutVoiceConnectorOri
 // PutVoiceConnectorOrigination API operation.
 type PutVoiceConnectorOriginationRequest struct {
 	*aws.Request
-	Input *PutVoiceConnectorOriginationInput
-	Copy  func(*PutVoiceConnectorOriginationInput) PutVoiceConnectorOriginationRequest
+	Input *types.PutVoiceConnectorOriginationInput
+	Copy  func(*types.PutVoiceConnectorOriginationInput) PutVoiceConnectorOriginationRequest
 }
 
 // Send marshals and sends the PutVoiceConnectorOrigination API request.
@@ -141,7 +56,7 @@ func (r PutVoiceConnectorOriginationRequest) Send(ctx context.Context) (*PutVoic
 	}
 
 	resp := &PutVoiceConnectorOriginationResponse{
-		PutVoiceConnectorOriginationOutput: r.Request.Data.(*PutVoiceConnectorOriginationOutput),
+		PutVoiceConnectorOriginationOutput: r.Request.Data.(*types.PutVoiceConnectorOriginationOutput),
 		response:                           &aws.Response{Request: r.Request},
 	}
 
@@ -151,7 +66,7 @@ func (r PutVoiceConnectorOriginationRequest) Send(ctx context.Context) (*PutVoic
 // PutVoiceConnectorOriginationResponse is the response type for the
 // PutVoiceConnectorOrigination API operation.
 type PutVoiceConnectorOriginationResponse struct {
-	*PutVoiceConnectorOriginationOutput
+	*types.PutVoiceConnectorOriginationOutput
 
 	response *aws.Response
 }

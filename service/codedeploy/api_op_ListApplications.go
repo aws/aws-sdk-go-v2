@@ -6,40 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/codedeploy/types"
 )
-
-// Represents the input of a ListApplications operation.
-type ListApplicationsInput struct {
-	_ struct{} `type:"structure"`
-
-	// An identifier returned from the previous list applications call. It can be
-	// used to return the next set of applications in the list.
-	NextToken *string `locationName:"nextToken" type:"string"`
-}
-
-// String returns the string representation
-func (s ListApplicationsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Represents the output of a ListApplications operation.
-type ListApplicationsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A list of application names.
-	Applications []string `locationName:"applications" type:"list"`
-
-	// If a large amount of information is returned, an identifier is also returned.
-	// It can be used in a subsequent list applications call to return the next
-	// set of applications in the list.
-	NextToken *string `locationName:"nextToken" type:"string"`
-}
-
-// String returns the string representation
-func (s ListApplicationsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListApplications = "ListApplications"
 
@@ -56,7 +24,7 @@ const opListApplications = "ListApplications"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/ListApplications
-func (c *Client) ListApplicationsRequest(input *ListApplicationsInput) ListApplicationsRequest {
+func (c *Client) ListApplicationsRequest(input *types.ListApplicationsInput) ListApplicationsRequest {
 	op := &aws.Operation{
 		Name:       opListApplications,
 		HTTPMethod: "POST",
@@ -70,10 +38,10 @@ func (c *Client) ListApplicationsRequest(input *ListApplicationsInput) ListAppli
 	}
 
 	if input == nil {
-		input = &ListApplicationsInput{}
+		input = &types.ListApplicationsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListApplicationsOutput{})
+	req := c.newRequest(op, input, &types.ListApplicationsOutput{})
 	return ListApplicationsRequest{Request: req, Input: input, Copy: c.ListApplicationsRequest}
 }
 
@@ -81,8 +49,8 @@ func (c *Client) ListApplicationsRequest(input *ListApplicationsInput) ListAppli
 // ListApplications API operation.
 type ListApplicationsRequest struct {
 	*aws.Request
-	Input *ListApplicationsInput
-	Copy  func(*ListApplicationsInput) ListApplicationsRequest
+	Input *types.ListApplicationsInput
+	Copy  func(*types.ListApplicationsInput) ListApplicationsRequest
 }
 
 // Send marshals and sends the ListApplications API request.
@@ -94,7 +62,7 @@ func (r ListApplicationsRequest) Send(ctx context.Context) (*ListApplicationsRes
 	}
 
 	resp := &ListApplicationsResponse{
-		ListApplicationsOutput: r.Request.Data.(*ListApplicationsOutput),
+		ListApplicationsOutput: r.Request.Data.(*types.ListApplicationsOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -124,7 +92,7 @@ func NewListApplicationsPaginator(req ListApplicationsRequest) ListApplicationsP
 	return ListApplicationsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListApplicationsInput
+				var inCpy *types.ListApplicationsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -144,14 +112,14 @@ type ListApplicationsPaginator struct {
 	aws.Pager
 }
 
-func (p *ListApplicationsPaginator) CurrentPage() *ListApplicationsOutput {
-	return p.Pager.CurrentPage().(*ListApplicationsOutput)
+func (p *ListApplicationsPaginator) CurrentPage() *types.ListApplicationsOutput {
+	return p.Pager.CurrentPage().(*types.ListApplicationsOutput)
 }
 
 // ListApplicationsResponse is the response type for the
 // ListApplications API operation.
 type ListApplicationsResponse struct {
-	*ListApplicationsOutput
+	*types.ListApplicationsOutput
 
 	response *aws.Response
 }

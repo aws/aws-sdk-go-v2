@@ -6,33 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/elasticbeanstalk/types"
 )
-
-type ListAvailableSolutionStacksInput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s ListAvailableSolutionStacksInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// A list of available AWS Elastic Beanstalk solution stacks.
-type ListAvailableSolutionStacksOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A list of available solution stacks and their SolutionStackDescription.
-	SolutionStackDetails []SolutionStackDescription `type:"list"`
-
-	// A list of available solution stacks.
-	SolutionStacks []string `type:"list"`
-}
-
-// String returns the string representation
-func (s ListAvailableSolutionStacksOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListAvailableSolutionStacks = "ListAvailableSolutionStacks"
 
@@ -50,7 +25,7 @@ const opListAvailableSolutionStacks = "ListAvailableSolutionStacks"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/ListAvailableSolutionStacks
-func (c *Client) ListAvailableSolutionStacksRequest(input *ListAvailableSolutionStacksInput) ListAvailableSolutionStacksRequest {
+func (c *Client) ListAvailableSolutionStacksRequest(input *types.ListAvailableSolutionStacksInput) ListAvailableSolutionStacksRequest {
 	op := &aws.Operation{
 		Name:       opListAvailableSolutionStacks,
 		HTTPMethod: "POST",
@@ -58,10 +33,10 @@ func (c *Client) ListAvailableSolutionStacksRequest(input *ListAvailableSolution
 	}
 
 	if input == nil {
-		input = &ListAvailableSolutionStacksInput{}
+		input = &types.ListAvailableSolutionStacksInput{}
 	}
 
-	req := c.newRequest(op, input, &ListAvailableSolutionStacksOutput{})
+	req := c.newRequest(op, input, &types.ListAvailableSolutionStacksOutput{})
 	return ListAvailableSolutionStacksRequest{Request: req, Input: input, Copy: c.ListAvailableSolutionStacksRequest}
 }
 
@@ -69,8 +44,8 @@ func (c *Client) ListAvailableSolutionStacksRequest(input *ListAvailableSolution
 // ListAvailableSolutionStacks API operation.
 type ListAvailableSolutionStacksRequest struct {
 	*aws.Request
-	Input *ListAvailableSolutionStacksInput
-	Copy  func(*ListAvailableSolutionStacksInput) ListAvailableSolutionStacksRequest
+	Input *types.ListAvailableSolutionStacksInput
+	Copy  func(*types.ListAvailableSolutionStacksInput) ListAvailableSolutionStacksRequest
 }
 
 // Send marshals and sends the ListAvailableSolutionStacks API request.
@@ -82,7 +57,7 @@ func (r ListAvailableSolutionStacksRequest) Send(ctx context.Context) (*ListAvai
 	}
 
 	resp := &ListAvailableSolutionStacksResponse{
-		ListAvailableSolutionStacksOutput: r.Request.Data.(*ListAvailableSolutionStacksOutput),
+		ListAvailableSolutionStacksOutput: r.Request.Data.(*types.ListAvailableSolutionStacksOutput),
 		response:                          &aws.Response{Request: r.Request},
 	}
 
@@ -92,7 +67,7 @@ func (r ListAvailableSolutionStacksRequest) Send(ctx context.Context) (*ListAvai
 // ListAvailableSolutionStacksResponse is the response type for the
 // ListAvailableSolutionStacks API operation.
 type ListAvailableSolutionStacksResponse struct {
-	*ListAvailableSolutionStacksOutput
+	*types.ListAvailableSolutionStacksOutput
 
 	response *aws.Response
 }

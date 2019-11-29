@@ -13,6 +13,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws/awserr"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting/integration"
 	"github.com/aws/aws-sdk-go-v2/service/glacier"
+	"github.com/aws/aws-sdk-go-v2/service/glacier/types"
 )
 
 var _ aws.Config
@@ -24,7 +25,7 @@ func TestInteg_00_ListVaults(t *testing.T) {
 
 	cfg := integration.ConfigWithDefaultRegion("us-west-2")
 	svc := glacier.New(cfg)
-	params := &glacier.ListVaultsInput{}
+	params := &types.ListVaultsInput{}
 
 	req := svc.ListVaultsRequest(params)
 
@@ -39,7 +40,7 @@ func TestInteg_01_ListVaults(t *testing.T) {
 
 	cfg := integration.ConfigWithDefaultRegion("us-west-2")
 	svc := glacier.New(cfg)
-	params := &glacier.ListVaultsInput{
+	params := &types.ListVaultsInput{
 		AccountId: aws.String("abcmnoxyz"),
 	}
 

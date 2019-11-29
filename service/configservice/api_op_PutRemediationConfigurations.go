@@ -4,58 +4,10 @@ package configservice
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/configservice/types"
 )
-
-type PutRemediationConfigurationsInput struct {
-	_ struct{} `type:"structure"`
-
-	// A list of remediation configuration objects.
-	//
-	// RemediationConfigurations is a required field
-	RemediationConfigurations []RemediationConfiguration `type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s PutRemediationConfigurationsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *PutRemediationConfigurationsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "PutRemediationConfigurationsInput"}
-
-	if s.RemediationConfigurations == nil {
-		invalidParams.Add(aws.NewErrParamRequired("RemediationConfigurations"))
-	}
-	if s.RemediationConfigurations != nil {
-		for i, v := range s.RemediationConfigurations {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "RemediationConfigurations", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type PutRemediationConfigurationsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Returns a list of failed remediation batch objects.
-	FailedBatches []FailedRemediationBatch `type:"list"`
-}
-
-// String returns the string representation
-func (s PutRemediationConfigurationsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opPutRemediationConfigurations = "PutRemediationConfigurations"
 
@@ -76,7 +28,7 @@ const opPutRemediationConfigurations = "PutRemediationConfigurations"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/PutRemediationConfigurations
-func (c *Client) PutRemediationConfigurationsRequest(input *PutRemediationConfigurationsInput) PutRemediationConfigurationsRequest {
+func (c *Client) PutRemediationConfigurationsRequest(input *types.PutRemediationConfigurationsInput) PutRemediationConfigurationsRequest {
 	op := &aws.Operation{
 		Name:       opPutRemediationConfigurations,
 		HTTPMethod: "POST",
@@ -84,10 +36,10 @@ func (c *Client) PutRemediationConfigurationsRequest(input *PutRemediationConfig
 	}
 
 	if input == nil {
-		input = &PutRemediationConfigurationsInput{}
+		input = &types.PutRemediationConfigurationsInput{}
 	}
 
-	req := c.newRequest(op, input, &PutRemediationConfigurationsOutput{})
+	req := c.newRequest(op, input, &types.PutRemediationConfigurationsOutput{})
 	return PutRemediationConfigurationsRequest{Request: req, Input: input, Copy: c.PutRemediationConfigurationsRequest}
 }
 
@@ -95,8 +47,8 @@ func (c *Client) PutRemediationConfigurationsRequest(input *PutRemediationConfig
 // PutRemediationConfigurations API operation.
 type PutRemediationConfigurationsRequest struct {
 	*aws.Request
-	Input *PutRemediationConfigurationsInput
-	Copy  func(*PutRemediationConfigurationsInput) PutRemediationConfigurationsRequest
+	Input *types.PutRemediationConfigurationsInput
+	Copy  func(*types.PutRemediationConfigurationsInput) PutRemediationConfigurationsRequest
 }
 
 // Send marshals and sends the PutRemediationConfigurations API request.
@@ -108,7 +60,7 @@ func (r PutRemediationConfigurationsRequest) Send(ctx context.Context) (*PutReme
 	}
 
 	resp := &PutRemediationConfigurationsResponse{
-		PutRemediationConfigurationsOutput: r.Request.Data.(*PutRemediationConfigurationsOutput),
+		PutRemediationConfigurationsOutput: r.Request.Data.(*types.PutRemediationConfigurationsOutput),
 		response:                           &aws.Response{Request: r.Request},
 	}
 
@@ -118,7 +70,7 @@ func (r PutRemediationConfigurationsRequest) Send(ctx context.Context) (*PutReme
 // PutRemediationConfigurationsResponse is the response type for the
 // PutRemediationConfigurations API operation.
 type PutRemediationConfigurationsResponse struct {
-	*PutRemediationConfigurationsOutput
+	*types.PutRemediationConfigurationsOutput
 
 	response *aws.Response
 }

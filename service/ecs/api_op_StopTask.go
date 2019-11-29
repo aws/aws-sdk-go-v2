@@ -6,59 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ecs/types"
 )
-
-type StopTaskInput struct {
-	_ struct{} `type:"structure"`
-
-	// The short name or full Amazon Resource Name (ARN) of the cluster that hosts
-	// the task to stop. If you do not specify a cluster, the default cluster is
-	// assumed.
-	Cluster *string `locationName:"cluster" type:"string"`
-
-	// An optional message specified when a task is stopped. For example, if you
-	// are using a custom scheduler, you can use this parameter to specify the reason
-	// for stopping the task here, and the message appears in subsequent DescribeTasks
-	// API operations on this task. Up to 255 characters are allowed in this message.
-	Reason *string `locationName:"reason" type:"string"`
-
-	// The task ID or full Amazon Resource Name (ARN) of the task to stop.
-	//
-	// Task is a required field
-	Task *string `locationName:"task" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s StopTaskInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *StopTaskInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "StopTaskInput"}
-
-	if s.Task == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Task"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type StopTaskOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The task that was stopped.
-	Task *Task `locationName:"task" type:"structure"`
-}
-
-// String returns the string representation
-func (s StopTaskOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opStopTask = "StopTask"
 
@@ -87,7 +36,7 @@ const opStopTask = "StopTask"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/StopTask
-func (c *Client) StopTaskRequest(input *StopTaskInput) StopTaskRequest {
+func (c *Client) StopTaskRequest(input *types.StopTaskInput) StopTaskRequest {
 	op := &aws.Operation{
 		Name:       opStopTask,
 		HTTPMethod: "POST",
@@ -95,10 +44,10 @@ func (c *Client) StopTaskRequest(input *StopTaskInput) StopTaskRequest {
 	}
 
 	if input == nil {
-		input = &StopTaskInput{}
+		input = &types.StopTaskInput{}
 	}
 
-	req := c.newRequest(op, input, &StopTaskOutput{})
+	req := c.newRequest(op, input, &types.StopTaskOutput{})
 	return StopTaskRequest{Request: req, Input: input, Copy: c.StopTaskRequest}
 }
 
@@ -106,8 +55,8 @@ func (c *Client) StopTaskRequest(input *StopTaskInput) StopTaskRequest {
 // StopTask API operation.
 type StopTaskRequest struct {
 	*aws.Request
-	Input *StopTaskInput
-	Copy  func(*StopTaskInput) StopTaskRequest
+	Input *types.StopTaskInput
+	Copy  func(*types.StopTaskInput) StopTaskRequest
 }
 
 // Send marshals and sends the StopTask API request.
@@ -119,7 +68,7 @@ func (r StopTaskRequest) Send(ctx context.Context) (*StopTaskResponse, error) {
 	}
 
 	resp := &StopTaskResponse{
-		StopTaskOutput: r.Request.Data.(*StopTaskOutput),
+		StopTaskOutput: r.Request.Data.(*types.StopTaskOutput),
 		response:       &aws.Response{Request: r.Request},
 	}
 
@@ -129,7 +78,7 @@ func (r StopTaskRequest) Send(ctx context.Context) (*StopTaskResponse, error) {
 // StopTaskResponse is the response type for the
 // StopTask API operation.
 type StopTaskResponse struct {
-	*StopTaskOutput
+	*types.StopTaskOutput
 
 	response *aws.Response
 }

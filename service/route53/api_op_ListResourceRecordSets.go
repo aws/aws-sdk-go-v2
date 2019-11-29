@@ -6,218 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/route53/types"
 )
-
-// A request for the resource record sets that are associated with a specified
-// hosted zone.
-type ListResourceRecordSetsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the hosted zone that contains the resource record sets that you
-	// want to list.
-	//
-	// HostedZoneId is a required field
-	HostedZoneId *string `location:"uri" locationName:"Id" type:"string" required:"true"`
-
-	// (Optional) The maximum number of resource records sets to include in the
-	// response body for this request. If the response includes more than maxitems
-	// resource record sets, the value of the IsTruncated element in the response
-	// is true, and the values of the NextRecordName and NextRecordType elements
-	// in the response identify the first resource record set in the next group
-	// of maxitems resource record sets.
-	MaxItems *string `location:"querystring" locationName:"maxitems" type:"string"`
-
-	// Resource record sets that have a routing policy other than simple: If results
-	// were truncated for a given DNS name and type, specify the value of NextRecordIdentifier
-	// from the previous response to get the next resource record set that has the
-	// current DNS name and type.
-	StartRecordIdentifier *string `location:"querystring" locationName:"identifier" min:"1" type:"string"`
-
-	// The first name in the lexicographic ordering of resource record sets that
-	// you want to list.
-	StartRecordName *string `location:"querystring" locationName:"name" type:"string"`
-
-	// The type of resource record set to begin the record listing from.
-	//
-	// Valid values for basic resource record sets: A | AAAA | CAA | CNAME | MX
-	// | NAPTR | NS | PTR | SOA | SPF | SRV | TXT
-	//
-	// Values for weighted, latency, geolocation, and failover resource record sets:
-	// A | AAAA | CAA | CNAME | MX | NAPTR | PTR | SPF | SRV | TXT
-	//
-	// Values for alias resource record sets:
-	//
-	//    * API Gateway custom regional API or edge-optimized API: A
-	//
-	//    * CloudFront distribution: A or AAAA
-	//
-	//    * Elastic Beanstalk environment that has a regionalized subdomain: A
-	//
-	//    * Elastic Load Balancing load balancer: A | AAAA
-	//
-	//    * Amazon S3 bucket: A
-	//
-	//    * Amazon VPC interface VPC endpoint: A
-	//
-	//    * Another resource record set in this hosted zone: The type of the resource
-	//    record set that the alias references.
-	//
-	// Constraint: Specifying type without specifying name returns an InvalidInput
-	// error.
-	StartRecordType RRType `location:"querystring" locationName:"type" type:"string" enum:"true"`
-}
-
-// String returns the string representation
-func (s ListResourceRecordSetsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListResourceRecordSetsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListResourceRecordSetsInput"}
-
-	if s.HostedZoneId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("HostedZoneId"))
-	}
-	if s.StartRecordIdentifier != nil && len(*s.StartRecordIdentifier) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("StartRecordIdentifier", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListResourceRecordSetsInput) MarshalFields(e protocol.FieldEncoder) error {
-
-	if s.HostedZoneId != nil {
-		v := *s.HostedZoneId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "Id", protocol.StringValue(v), metadata)
-	}
-	if s.MaxItems != nil {
-		v := *s.MaxItems
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "maxitems", protocol.StringValue(v), metadata)
-	}
-	if s.StartRecordIdentifier != nil {
-		v := *s.StartRecordIdentifier
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "identifier", protocol.StringValue(v), metadata)
-	}
-	if s.StartRecordName != nil {
-		v := *s.StartRecordName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "name", protocol.StringValue(v), metadata)
-	}
-	if len(s.StartRecordType) > 0 {
-		v := s.StartRecordType
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "type", v, metadata)
-	}
-	return nil
-}
-
-// A complex type that contains list information for the resource record set.
-type ListResourceRecordSetsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A flag that indicates whether more resource record sets remain to be listed.
-	// If your results were truncated, you can make a follow-up pagination request
-	// by using the NextRecordName element.
-	//
-	// IsTruncated is a required field
-	IsTruncated *bool `type:"boolean" required:"true"`
-
-	// The maximum number of records you requested.
-	//
-	// MaxItems is a required field
-	MaxItems *string `type:"string" required:"true"`
-
-	// Resource record sets that have a routing policy other than simple: If results
-	// were truncated for a given DNS name and type, the value of SetIdentifier
-	// for the next resource record set that has the current DNS name and type.
-	//
-	// For information about routing policies, see Choosing a Routing Policy (https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/routing-policy.html)
-	// in the Amazon Route 53 Developer Guide.
-	NextRecordIdentifier *string `min:"1" type:"string"`
-
-	// If the results were truncated, the name of the next record in the list.
-	//
-	// This element is present only if IsTruncated is true.
-	NextRecordName *string `type:"string"`
-
-	// If the results were truncated, the type of the next record in the list.
-	//
-	// This element is present only if IsTruncated is true.
-	NextRecordType RRType `type:"string" enum:"true"`
-
-	// Information about multiple resource record sets.
-	//
-	// ResourceRecordSets is a required field
-	ResourceRecordSets []ResourceRecordSet `locationNameList:"ResourceRecordSet" type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s ListResourceRecordSetsOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListResourceRecordSetsOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.IsTruncated != nil {
-		v := *s.IsTruncated
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "IsTruncated", protocol.BoolValue(v), metadata)
-	}
-	if s.MaxItems != nil {
-		v := *s.MaxItems
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "MaxItems", protocol.StringValue(v), metadata)
-	}
-	if s.NextRecordIdentifier != nil {
-		v := *s.NextRecordIdentifier
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "NextRecordIdentifier", protocol.StringValue(v), metadata)
-	}
-	if s.NextRecordName != nil {
-		v := *s.NextRecordName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "NextRecordName", protocol.StringValue(v), metadata)
-	}
-	if len(s.NextRecordType) > 0 {
-		v := s.NextRecordType
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "NextRecordType", v, metadata)
-	}
-	if s.ResourceRecordSets != nil {
-		v := s.ResourceRecordSets
-
-		metadata := protocol.Metadata{ListLocationName: "ResourceRecordSet"}
-		ls0 := e.List(protocol.BodyTarget, "ResourceRecordSets", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	return nil
-}
 
 const opListResourceRecordSets = "ListResourceRecordSets"
 
@@ -298,7 +88,7 @@ const opListResourceRecordSets = "ListResourceRecordSets"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/ListResourceRecordSets
-func (c *Client) ListResourceRecordSetsRequest(input *ListResourceRecordSetsInput) ListResourceRecordSetsRequest {
+func (c *Client) ListResourceRecordSetsRequest(input *types.ListResourceRecordSetsInput) ListResourceRecordSetsRequest {
 	op := &aws.Operation{
 		Name:       opListResourceRecordSets,
 		HTTPMethod: "GET",
@@ -312,10 +102,10 @@ func (c *Client) ListResourceRecordSetsRequest(input *ListResourceRecordSetsInpu
 	}
 
 	if input == nil {
-		input = &ListResourceRecordSetsInput{}
+		input = &types.ListResourceRecordSetsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListResourceRecordSetsOutput{})
+	req := c.newRequest(op, input, &types.ListResourceRecordSetsOutput{})
 	return ListResourceRecordSetsRequest{Request: req, Input: input, Copy: c.ListResourceRecordSetsRequest}
 }
 
@@ -323,8 +113,8 @@ func (c *Client) ListResourceRecordSetsRequest(input *ListResourceRecordSetsInpu
 // ListResourceRecordSets API operation.
 type ListResourceRecordSetsRequest struct {
 	*aws.Request
-	Input *ListResourceRecordSetsInput
-	Copy  func(*ListResourceRecordSetsInput) ListResourceRecordSetsRequest
+	Input *types.ListResourceRecordSetsInput
+	Copy  func(*types.ListResourceRecordSetsInput) ListResourceRecordSetsRequest
 }
 
 // Send marshals and sends the ListResourceRecordSets API request.
@@ -336,7 +126,7 @@ func (r ListResourceRecordSetsRequest) Send(ctx context.Context) (*ListResourceR
 	}
 
 	resp := &ListResourceRecordSetsResponse{
-		ListResourceRecordSetsOutput: r.Request.Data.(*ListResourceRecordSetsOutput),
+		ListResourceRecordSetsOutput: r.Request.Data.(*types.ListResourceRecordSetsOutput),
 		response:                     &aws.Response{Request: r.Request},
 	}
 
@@ -366,7 +156,7 @@ func NewListResourceRecordSetsPaginator(req ListResourceRecordSetsRequest) ListR
 	return ListResourceRecordSetsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListResourceRecordSetsInput
+				var inCpy *types.ListResourceRecordSetsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -386,14 +176,14 @@ type ListResourceRecordSetsPaginator struct {
 	aws.Pager
 }
 
-func (p *ListResourceRecordSetsPaginator) CurrentPage() *ListResourceRecordSetsOutput {
-	return p.Pager.CurrentPage().(*ListResourceRecordSetsOutput)
+func (p *ListResourceRecordSetsPaginator) CurrentPage() *types.ListResourceRecordSetsOutput {
+	return p.Pager.CurrentPage().(*types.ListResourceRecordSetsOutput)
 }
 
 // ListResourceRecordSetsResponse is the response type for the
 // ListResourceRecordSets API operation.
 type ListResourceRecordSetsResponse struct {
-	*ListResourceRecordSetsOutput
+	*types.ListResourceRecordSetsOutput
 
 	response *aws.Response
 }

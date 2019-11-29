@@ -6,55 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
+	"github.com/aws/aws-sdk-go-v2/service/kinesis/types"
 )
-
-// Represents the input for DeleteStream.
-type DeleteStreamInput struct {
-	_ struct{} `type:"structure"`
-
-	// If this parameter is unset (null) or if you set it to false, and the stream
-	// has registered consumers, the call to DeleteStream fails with a ResourceInUseException.
-	EnforceConsumerDeletion *bool `type:"boolean"`
-
-	// The name of the stream to delete.
-	//
-	// StreamName is a required field
-	StreamName *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteStreamInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteStreamInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteStreamInput"}
-
-	if s.StreamName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("StreamName"))
-	}
-	if s.StreamName != nil && len(*s.StreamName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("StreamName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteStreamOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteStreamOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteStream = "DeleteStream"
 
@@ -90,7 +45,7 @@ const opDeleteStream = "DeleteStream"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/DeleteStream
-func (c *Client) DeleteStreamRequest(input *DeleteStreamInput) DeleteStreamRequest {
+func (c *Client) DeleteStreamRequest(input *types.DeleteStreamInput) DeleteStreamRequest {
 	op := &aws.Operation{
 		Name:       opDeleteStream,
 		HTTPMethod: "POST",
@@ -98,10 +53,10 @@ func (c *Client) DeleteStreamRequest(input *DeleteStreamInput) DeleteStreamReque
 	}
 
 	if input == nil {
-		input = &DeleteStreamInput{}
+		input = &types.DeleteStreamInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteStreamOutput{})
+	req := c.newRequest(op, input, &types.DeleteStreamOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return DeleteStreamRequest{Request: req, Input: input, Copy: c.DeleteStreamRequest}
@@ -111,8 +66,8 @@ func (c *Client) DeleteStreamRequest(input *DeleteStreamInput) DeleteStreamReque
 // DeleteStream API operation.
 type DeleteStreamRequest struct {
 	*aws.Request
-	Input *DeleteStreamInput
-	Copy  func(*DeleteStreamInput) DeleteStreamRequest
+	Input *types.DeleteStreamInput
+	Copy  func(*types.DeleteStreamInput) DeleteStreamRequest
 }
 
 // Send marshals and sends the DeleteStream API request.
@@ -124,7 +79,7 @@ func (r DeleteStreamRequest) Send(ctx context.Context) (*DeleteStreamResponse, e
 	}
 
 	resp := &DeleteStreamResponse{
-		DeleteStreamOutput: r.Request.Data.(*DeleteStreamOutput),
+		DeleteStreamOutput: r.Request.Data.(*types.DeleteStreamOutput),
 		response:           &aws.Response{Request: r.Request},
 	}
 
@@ -134,7 +89,7 @@ func (r DeleteStreamRequest) Send(ctx context.Context) (*DeleteStreamResponse, e
 // DeleteStreamResponse is the response type for the
 // DeleteStream API operation.
 type DeleteStreamResponse struct {
-	*DeleteStreamOutput
+	*types.DeleteStreamOutput
 
 	response *aws.Response
 }

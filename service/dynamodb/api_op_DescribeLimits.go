@@ -6,46 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/dynamodb/types"
 )
-
-// Represents the input of a DescribeLimits operation. Has no content.
-type DescribeLimitsInput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DescribeLimitsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Represents the output of a DescribeLimits operation.
-type DescribeLimitsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The maximum total read capacity units that your account allows you to provision
-	// across all of your tables in this Region.
-	AccountMaxReadCapacityUnits *int64 `min:"1" type:"long"`
-
-	// The maximum total write capacity units that your account allows you to provision
-	// across all of your tables in this Region.
-	AccountMaxWriteCapacityUnits *int64 `min:"1" type:"long"`
-
-	// The maximum read capacity units that your account allows you to provision
-	// for a new table that you are creating in this Region, including the read
-	// capacity units provisioned for its global secondary indexes (GSIs).
-	TableMaxReadCapacityUnits *int64 `min:"1" type:"long"`
-
-	// The maximum write capacity units that your account allows you to provision
-	// for a new table that you are creating in this Region, including the write
-	// capacity units provisioned for its global secondary indexes (GSIs).
-	TableMaxWriteCapacityUnits *int64 `min:"1" type:"long"`
-}
-
-// String returns the string representation
-func (s DescribeLimitsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeLimits = "DescribeLimits"
 
@@ -119,7 +81,7 @@ const opDescribeLimits = "DescribeLimits"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/DescribeLimits
-func (c *Client) DescribeLimitsRequest(input *DescribeLimitsInput) DescribeLimitsRequest {
+func (c *Client) DescribeLimitsRequest(input *types.DescribeLimitsInput) DescribeLimitsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeLimits,
 		HTTPMethod: "POST",
@@ -127,10 +89,10 @@ func (c *Client) DescribeLimitsRequest(input *DescribeLimitsInput) DescribeLimit
 	}
 
 	if input == nil {
-		input = &DescribeLimitsInput{}
+		input = &types.DescribeLimitsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeLimitsOutput{})
+	req := c.newRequest(op, input, &types.DescribeLimitsOutput{})
 	return DescribeLimitsRequest{Request: req, Input: input, Copy: c.DescribeLimitsRequest}
 }
 
@@ -138,8 +100,8 @@ func (c *Client) DescribeLimitsRequest(input *DescribeLimitsInput) DescribeLimit
 // DescribeLimits API operation.
 type DescribeLimitsRequest struct {
 	*aws.Request
-	Input *DescribeLimitsInput
-	Copy  func(*DescribeLimitsInput) DescribeLimitsRequest
+	Input *types.DescribeLimitsInput
+	Copy  func(*types.DescribeLimitsInput) DescribeLimitsRequest
 }
 
 // Send marshals and sends the DescribeLimits API request.
@@ -151,7 +113,7 @@ func (r DescribeLimitsRequest) Send(ctx context.Context) (*DescribeLimitsRespons
 	}
 
 	resp := &DescribeLimitsResponse{
-		DescribeLimitsOutput: r.Request.Data.(*DescribeLimitsOutput),
+		DescribeLimitsOutput: r.Request.Data.(*types.DescribeLimitsOutput),
 		response:             &aws.Response{Request: r.Request},
 	}
 
@@ -161,7 +123,7 @@ func (r DescribeLimitsRequest) Send(ctx context.Context) (*DescribeLimitsRespons
 // DescribeLimitsResponse is the response type for the
 // DescribeLimits API operation.
 type DescribeLimitsResponse struct {
-	*DescribeLimitsOutput
+	*types.DescribeLimitsOutput
 
 	response *aws.Response
 }

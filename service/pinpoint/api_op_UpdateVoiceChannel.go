@@ -6,89 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/pinpoint/types"
 )
-
-type UpdateVoiceChannelInput struct {
-	_ struct{} `type:"structure" payload:"VoiceChannelRequest"`
-
-	// ApplicationId is a required field
-	ApplicationId *string `location:"uri" locationName:"application-id" type:"string" required:"true"`
-
-	// Specifies the status and settings of the voice channel for an application.
-	//
-	// VoiceChannelRequest is a required field
-	VoiceChannelRequest *VoiceChannelRequest `type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s UpdateVoiceChannelInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateVoiceChannelInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateVoiceChannelInput"}
-
-	if s.ApplicationId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ApplicationId"))
-	}
-
-	if s.VoiceChannelRequest == nil {
-		invalidParams.Add(aws.NewErrParamRequired("VoiceChannelRequest"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s UpdateVoiceChannelInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.ApplicationId != nil {
-		v := *s.ApplicationId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "application-id", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.VoiceChannelRequest != nil {
-		v := s.VoiceChannelRequest
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.PayloadTarget, "VoiceChannelRequest", v, metadata)
-	}
-	return nil
-}
-
-type UpdateVoiceChannelOutput struct {
-	_ struct{} `type:"structure" payload:"VoiceChannelResponse"`
-
-	// Provides information about the status and settings of the voice channel for
-	// an application.
-	//
-	// VoiceChannelResponse is a required field
-	VoiceChannelResponse *VoiceChannelResponse `type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s UpdateVoiceChannelOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s UpdateVoiceChannelOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.VoiceChannelResponse != nil {
-		v := s.VoiceChannelResponse
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.PayloadTarget, "VoiceChannelResponse", v, metadata)
-	}
-	return nil
-}
 
 const opUpdateVoiceChannel = "UpdateVoiceChannel"
 
@@ -106,7 +25,7 @@ const opUpdateVoiceChannel = "UpdateVoiceChannel"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/UpdateVoiceChannel
-func (c *Client) UpdateVoiceChannelRequest(input *UpdateVoiceChannelInput) UpdateVoiceChannelRequest {
+func (c *Client) UpdateVoiceChannelRequest(input *types.UpdateVoiceChannelInput) UpdateVoiceChannelRequest {
 	op := &aws.Operation{
 		Name:       opUpdateVoiceChannel,
 		HTTPMethod: "PUT",
@@ -114,10 +33,10 @@ func (c *Client) UpdateVoiceChannelRequest(input *UpdateVoiceChannelInput) Updat
 	}
 
 	if input == nil {
-		input = &UpdateVoiceChannelInput{}
+		input = &types.UpdateVoiceChannelInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateVoiceChannelOutput{})
+	req := c.newRequest(op, input, &types.UpdateVoiceChannelOutput{})
 	return UpdateVoiceChannelRequest{Request: req, Input: input, Copy: c.UpdateVoiceChannelRequest}
 }
 
@@ -125,8 +44,8 @@ func (c *Client) UpdateVoiceChannelRequest(input *UpdateVoiceChannelInput) Updat
 // UpdateVoiceChannel API operation.
 type UpdateVoiceChannelRequest struct {
 	*aws.Request
-	Input *UpdateVoiceChannelInput
-	Copy  func(*UpdateVoiceChannelInput) UpdateVoiceChannelRequest
+	Input *types.UpdateVoiceChannelInput
+	Copy  func(*types.UpdateVoiceChannelInput) UpdateVoiceChannelRequest
 }
 
 // Send marshals and sends the UpdateVoiceChannel API request.
@@ -138,7 +57,7 @@ func (r UpdateVoiceChannelRequest) Send(ctx context.Context) (*UpdateVoiceChanne
 	}
 
 	resp := &UpdateVoiceChannelResponse{
-		UpdateVoiceChannelOutput: r.Request.Data.(*UpdateVoiceChannelOutput),
+		UpdateVoiceChannelOutput: r.Request.Data.(*types.UpdateVoiceChannelOutput),
 		response:                 &aws.Response{Request: r.Request},
 	}
 
@@ -148,7 +67,7 @@ func (r UpdateVoiceChannelRequest) Send(ctx context.Context) (*UpdateVoiceChanne
 // UpdateVoiceChannelResponse is the response type for the
 // UpdateVoiceChannel API operation.
 type UpdateVoiceChannelResponse struct {
-	*UpdateVoiceChannelOutput
+	*types.UpdateVoiceChannelOutput
 
 	response *aws.Response
 }

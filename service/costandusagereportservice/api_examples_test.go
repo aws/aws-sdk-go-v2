@@ -12,6 +12,8 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws/awserr"
 	"github.com/aws/aws-sdk-go-v2/aws/external"
 	"github.com/aws/aws-sdk-go-v2/service/costandusagereportservice"
+	"github.com/aws/aws-sdk-go-v2/service/costandusagereportservice/enums"
+	"github.com/aws/aws-sdk-go-v2/service/costandusagereportservice/types"
 )
 
 var _ time.Duration
@@ -36,7 +38,7 @@ func ExampleClient_DeleteReportDefinitionRequest_shared00() {
 	}
 
 	svc := costandusagereportservice.New(cfg)
-	input := &costandusagereportservice.DeleteReportDefinitionInput{
+	input := &types.DeleteReportDefinitionInput{
 		ReportName: aws.String("ExampleReport"),
 	}
 
@@ -73,7 +75,7 @@ func ExampleClient_DescribeReportDefinitionsRequest_shared00() {
 	}
 
 	svc := costandusagereportservice.New(cfg)
-	input := &costandusagereportservice.DescribeReportDefinitionsInput{
+	input := &types.DescribeReportDefinitionsInput{
 		MaxResults: aws.Int64(5),
 	}
 
@@ -108,22 +110,22 @@ func ExampleClient_PutReportDefinitionRequest_shared00() {
 	}
 
 	svc := costandusagereportservice.New(cfg)
-	input := &costandusagereportservice.PutReportDefinitionInput{
-		ReportDefinition: &costandusagereportservice.ReportDefinition{
-			AdditionalArtifacts: []costandusagereportservice.AdditionalArtifact{
-				costandusagereportservice.AdditionalArtifact("REDSHIFT"),
-				costandusagereportservice.AdditionalArtifact("QUICKSIGHT"),
+	input := &types.PutReportDefinitionInput{
+		ReportDefinition: &types.ReportDefinition{
+			AdditionalArtifacts: []enums.AdditionalArtifact{
+				enums.AdditionalArtifact("REDSHIFT"),
+				enums.AdditionalArtifact("QUICKSIGHT"),
 			},
-			AdditionalSchemaElements: []costandusagereportservice.SchemaElement{
-				costandusagereportservice.SchemaElement("RESOURCES"),
+			AdditionalSchemaElements: []enums.SchemaElement{
+				enums.SchemaElement("RESOURCES"),
 			},
-			Compression: costandusagereportservice.CompressionFormatZip,
-			Format:      costandusagereportservice.ReportFormatTextOrcsv,
+			Compression: enums.CompressionFormatZip,
+			Format:      enums.ReportFormatTextOrcsv,
 			ReportName:  aws.String("ExampleReport"),
 			S3Bucket:    aws.String("example-s3-bucket"),
 			S3Prefix:    aws.String("exampleprefix"),
-			S3Region:    costandusagereportservice.AWSRegionUsEast1,
-			TimeUnit:    costandusagereportservice.TimeUnitDaily,
+			S3Region:    enums.AWSRegionUsEast1,
+			TimeUnit:    enums.TimeUnitDaily,
 		},
 	}
 

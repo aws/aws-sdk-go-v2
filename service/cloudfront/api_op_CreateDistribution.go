@@ -6,98 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/cloudfront/types"
 )
-
-// The request to create a new distribution.
-type CreateDistributionInput struct {
-	_ struct{} `type:"structure" payload:"DistributionConfig"`
-
-	// The distribution's configuration information.
-	//
-	// DistributionConfig is a required field
-	DistributionConfig *DistributionConfig `locationName:"DistributionConfig" type:"structure" required:"true" xmlURI:"http://cloudfront.amazonaws.com/doc/2019-03-26/"`
-}
-
-// String returns the string representation
-func (s CreateDistributionInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateDistributionInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateDistributionInput"}
-
-	if s.DistributionConfig == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DistributionConfig"))
-	}
-	if s.DistributionConfig != nil {
-		if err := s.DistributionConfig.Validate(); err != nil {
-			invalidParams.AddNested("DistributionConfig", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s CreateDistributionInput) MarshalFields(e protocol.FieldEncoder) error {
-
-	if s.DistributionConfig != nil {
-		v := s.DistributionConfig
-
-		metadata := protocol.Metadata{XMLNamespaceURI: "http://cloudfront.amazonaws.com/doc/2019-03-26/"}
-		e.SetFields(protocol.PayloadTarget, "DistributionConfig", v, metadata)
-	}
-	return nil
-}
-
-// The returned result of the corresponding request.
-type CreateDistributionOutput struct {
-	_ struct{} `type:"structure" payload:"Distribution"`
-
-	// The distribution's information.
-	Distribution *Distribution `type:"structure"`
-
-	// The current version of the distribution created.
-	ETag *string `location:"header" locationName:"ETag" type:"string"`
-
-	// The fully qualified URI of the new distribution resource just created. For
-	// example: https://cloudfront.amazonaws.com/2010-11-01/distribution/EDFDVBD632BHDS5.
-	Location *string `location:"header" locationName:"Location" type:"string"`
-}
-
-// String returns the string representation
-func (s CreateDistributionOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s CreateDistributionOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.ETag != nil {
-		v := *s.ETag
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "ETag", protocol.StringValue(v), metadata)
-	}
-	if s.Location != nil {
-		v := *s.Location
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "Location", protocol.StringValue(v), metadata)
-	}
-	if s.Distribution != nil {
-		v := s.Distribution
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.PayloadTarget, "Distribution", v, metadata)
-	}
-	return nil
-}
 
 const opCreateDistribution = "CreateDistribution2019_03_26"
 
@@ -126,7 +36,7 @@ const opCreateDistribution = "CreateDistribution2019_03_26"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/CreateDistribution
-func (c *Client) CreateDistributionRequest(input *CreateDistributionInput) CreateDistributionRequest {
+func (c *Client) CreateDistributionRequest(input *types.CreateDistributionInput) CreateDistributionRequest {
 	op := &aws.Operation{
 		Name:       opCreateDistribution,
 		HTTPMethod: "POST",
@@ -134,10 +44,10 @@ func (c *Client) CreateDistributionRequest(input *CreateDistributionInput) Creat
 	}
 
 	if input == nil {
-		input = &CreateDistributionInput{}
+		input = &types.CreateDistributionInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateDistributionOutput{})
+	req := c.newRequest(op, input, &types.CreateDistributionOutput{})
 	return CreateDistributionRequest{Request: req, Input: input, Copy: c.CreateDistributionRequest}
 }
 
@@ -145,8 +55,8 @@ func (c *Client) CreateDistributionRequest(input *CreateDistributionInput) Creat
 // CreateDistribution API operation.
 type CreateDistributionRequest struct {
 	*aws.Request
-	Input *CreateDistributionInput
-	Copy  func(*CreateDistributionInput) CreateDistributionRequest
+	Input *types.CreateDistributionInput
+	Copy  func(*types.CreateDistributionInput) CreateDistributionRequest
 }
 
 // Send marshals and sends the CreateDistribution API request.
@@ -158,7 +68,7 @@ func (r CreateDistributionRequest) Send(ctx context.Context) (*CreateDistributio
 	}
 
 	resp := &CreateDistributionResponse{
-		CreateDistributionOutput: r.Request.Data.(*CreateDistributionOutput),
+		CreateDistributionOutput: r.Request.Data.(*types.CreateDistributionOutput),
 		response:                 &aws.Response{Request: r.Request},
 	}
 
@@ -168,7 +78,7 @@ func (r CreateDistributionRequest) Send(ctx context.Context) (*CreateDistributio
 // CreateDistributionResponse is the response type for the
 // CreateDistribution API operation.
 type CreateDistributionResponse struct {
-	*CreateDistributionOutput
+	*types.CreateDistributionOutput
 
 	response *aws.Response
 }

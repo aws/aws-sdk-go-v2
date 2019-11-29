@@ -6,75 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/configservice/types"
 )
-
-type ListDiscoveredResourcesInput struct {
-	_ struct{} `type:"structure"`
-
-	// Specifies whether AWS Config includes deleted resources in the results. By
-	// default, deleted resources are not included.
-	IncludeDeletedResources *bool `locationName:"includeDeletedResources" type:"boolean"`
-
-	// The maximum number of resource identifiers returned on each page. The default
-	// is 100. You cannot specify a number greater than 100. If you specify 0, AWS
-	// Config uses the default.
-	Limit *int64 `locationName:"limit" type:"integer"`
-
-	// The nextToken string returned on a previous page that you use to get the
-	// next page of results in a paginated response.
-	NextToken *string `locationName:"nextToken" type:"string"`
-
-	// The IDs of only those resources that you want AWS Config to list in the response.
-	// If you do not specify this parameter, AWS Config lists all resources of the
-	// specified type that it has discovered.
-	ResourceIds []string `locationName:"resourceIds" type:"list"`
-
-	// The custom name of only those resources that you want AWS Config to list
-	// in the response. If you do not specify this parameter, AWS Config lists all
-	// resources of the specified type that it has discovered.
-	ResourceName *string `locationName:"resourceName" type:"string"`
-
-	// The type of resources that you want AWS Config to list in the response.
-	//
-	// ResourceType is a required field
-	ResourceType ResourceType `locationName:"resourceType" type:"string" required:"true" enum:"true"`
-}
-
-// String returns the string representation
-func (s ListDiscoveredResourcesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListDiscoveredResourcesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListDiscoveredResourcesInput"}
-	if len(s.ResourceType) == 0 {
-		invalidParams.Add(aws.NewErrParamRequired("ResourceType"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ListDiscoveredResourcesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The string that you use in a subsequent request to get the next page of results
-	// in a paginated response.
-	NextToken *string `locationName:"nextToken" type:"string"`
-
-	// The details that identify a resource that is discovered by AWS Config, including
-	// the resource type, ID, and (if available) the custom resource name.
-	ResourceIdentifiers []ResourceIdentifier `locationName:"resourceIdentifiers" type:"list"`
-}
-
-// String returns the string representation
-func (s ListDiscoveredResourcesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListDiscoveredResources = "ListDiscoveredResources"
 
@@ -104,7 +37,7 @@ const opListDiscoveredResources = "ListDiscoveredResources"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/ListDiscoveredResources
-func (c *Client) ListDiscoveredResourcesRequest(input *ListDiscoveredResourcesInput) ListDiscoveredResourcesRequest {
+func (c *Client) ListDiscoveredResourcesRequest(input *types.ListDiscoveredResourcesInput) ListDiscoveredResourcesRequest {
 	op := &aws.Operation{
 		Name:       opListDiscoveredResources,
 		HTTPMethod: "POST",
@@ -112,10 +45,10 @@ func (c *Client) ListDiscoveredResourcesRequest(input *ListDiscoveredResourcesIn
 	}
 
 	if input == nil {
-		input = &ListDiscoveredResourcesInput{}
+		input = &types.ListDiscoveredResourcesInput{}
 	}
 
-	req := c.newRequest(op, input, &ListDiscoveredResourcesOutput{})
+	req := c.newRequest(op, input, &types.ListDiscoveredResourcesOutput{})
 	return ListDiscoveredResourcesRequest{Request: req, Input: input, Copy: c.ListDiscoveredResourcesRequest}
 }
 
@@ -123,8 +56,8 @@ func (c *Client) ListDiscoveredResourcesRequest(input *ListDiscoveredResourcesIn
 // ListDiscoveredResources API operation.
 type ListDiscoveredResourcesRequest struct {
 	*aws.Request
-	Input *ListDiscoveredResourcesInput
-	Copy  func(*ListDiscoveredResourcesInput) ListDiscoveredResourcesRequest
+	Input *types.ListDiscoveredResourcesInput
+	Copy  func(*types.ListDiscoveredResourcesInput) ListDiscoveredResourcesRequest
 }
 
 // Send marshals and sends the ListDiscoveredResources API request.
@@ -136,7 +69,7 @@ func (r ListDiscoveredResourcesRequest) Send(ctx context.Context) (*ListDiscover
 	}
 
 	resp := &ListDiscoveredResourcesResponse{
-		ListDiscoveredResourcesOutput: r.Request.Data.(*ListDiscoveredResourcesOutput),
+		ListDiscoveredResourcesOutput: r.Request.Data.(*types.ListDiscoveredResourcesOutput),
 		response:                      &aws.Response{Request: r.Request},
 	}
 
@@ -146,7 +79,7 @@ func (r ListDiscoveredResourcesRequest) Send(ctx context.Context) (*ListDiscover
 // ListDiscoveredResourcesResponse is the response type for the
 // ListDiscoveredResources API operation.
 type ListDiscoveredResourcesResponse struct {
-	*ListDiscoveredResourcesOutput
+	*types.ListDiscoveredResourcesOutput
 
 	response *aws.Response
 }

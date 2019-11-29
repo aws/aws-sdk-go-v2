@@ -10,6 +10,7 @@ package textractiface
 
 import (
 	"github.com/aws/aws-sdk-go-v2/service/textract"
+	"github.com/aws/aws-sdk-go-v2/service/textract/types"
 )
 
 // ClientAPI provides an interface to enable mocking the
@@ -43,7 +44,7 @@ import (
 //    type mockClientClient struct {
 //        textractiface.ClientPI
 //    }
-//    func (m *mockClientClient) AnalyzeDocument(input *textract.AnalyzeDocumentInput) (*textract.AnalyzeDocumentOutput, error) {
+//    func (m *mockClientClient) AnalyzeDocument(input *types.AnalyzeDocumentInput) (*types.AnalyzeDocumentOutput, error) {
 //        // mock response/functionality
 //    }
 //
@@ -61,17 +62,17 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type ClientAPI interface {
-	AnalyzeDocumentRequest(*textract.AnalyzeDocumentInput) textract.AnalyzeDocumentRequest
+	AnalyzeDocumentRequest(*types.AnalyzeDocumentInput) textract.AnalyzeDocumentRequest
 
-	DetectDocumentTextRequest(*textract.DetectDocumentTextInput) textract.DetectDocumentTextRequest
+	DetectDocumentTextRequest(*types.DetectDocumentTextInput) textract.DetectDocumentTextRequest
 
-	GetDocumentAnalysisRequest(*textract.GetDocumentAnalysisInput) textract.GetDocumentAnalysisRequest
+	GetDocumentAnalysisRequest(*types.GetDocumentAnalysisInput) textract.GetDocumentAnalysisRequest
 
-	GetDocumentTextDetectionRequest(*textract.GetDocumentTextDetectionInput) textract.GetDocumentTextDetectionRequest
+	GetDocumentTextDetectionRequest(*types.GetDocumentTextDetectionInput) textract.GetDocumentTextDetectionRequest
 
-	StartDocumentAnalysisRequest(*textract.StartDocumentAnalysisInput) textract.StartDocumentAnalysisRequest
+	StartDocumentAnalysisRequest(*types.StartDocumentAnalysisInput) textract.StartDocumentAnalysisRequest
 
-	StartDocumentTextDetectionRequest(*textract.StartDocumentTextDetectionInput) textract.StartDocumentTextDetectionRequest
+	StartDocumentTextDetectionRequest(*types.StartDocumentTextDetectionInput) textract.StartDocumentTextDetectionRequest
 }
 
 var _ ClientAPI = (*textract.Client)(nil)

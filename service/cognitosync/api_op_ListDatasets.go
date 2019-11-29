@@ -6,140 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/cognitosync/types"
 )
-
-// Request for a list of datasets for an identity.
-type ListDatasetsInput struct {
-	_ struct{} `type:"structure"`
-
-	// A name-spaced GUID (for example, us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE)
-	// created by Amazon Cognito. GUID generation is unique within a region.
-	//
-	// IdentityId is a required field
-	IdentityId *string `location:"uri" locationName:"IdentityId" min:"1" type:"string" required:"true"`
-
-	// A name-spaced GUID (for example, us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE)
-	// created by Amazon Cognito. GUID generation is unique within a region.
-	//
-	// IdentityPoolId is a required field
-	IdentityPoolId *string `location:"uri" locationName:"IdentityPoolId" min:"1" type:"string" required:"true"`
-
-	// The maximum number of results to be returned.
-	MaxResults *int64 `location:"querystring" locationName:"maxResults" type:"integer"`
-
-	// A pagination token for obtaining the next page of results.
-	NextToken *string `location:"querystring" locationName:"nextToken" type:"string"`
-}
-
-// String returns the string representation
-func (s ListDatasetsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListDatasetsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListDatasetsInput"}
-
-	if s.IdentityId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("IdentityId"))
-	}
-	if s.IdentityId != nil && len(*s.IdentityId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("IdentityId", 1))
-	}
-
-	if s.IdentityPoolId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("IdentityPoolId"))
-	}
-	if s.IdentityPoolId != nil && len(*s.IdentityPoolId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("IdentityPoolId", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListDatasetsInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.IdentityId != nil {
-		v := *s.IdentityId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "IdentityId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.IdentityPoolId != nil {
-		v := *s.IdentityPoolId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "IdentityPoolId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.MaxResults != nil {
-		v := *s.MaxResults
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "maxResults", protocol.Int64Value(v), metadata)
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-// Returned for a successful ListDatasets request.
-type ListDatasetsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Number of datasets returned.
-	Count *int64 `type:"integer"`
-
-	// A set of datasets.
-	Datasets []Dataset `type:"list"`
-
-	// A pagination token for obtaining the next page of results.
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s ListDatasetsOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListDatasetsOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.Count != nil {
-		v := *s.Count
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "Count", protocol.Int64Value(v), metadata)
-	}
-	if s.Datasets != nil {
-		v := s.Datasets
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "Datasets", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opListDatasets = "ListDatasets"
 
@@ -162,7 +30,7 @@ const opListDatasets = "ListDatasets"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-sync-2014-06-30/ListDatasets
-func (c *Client) ListDatasetsRequest(input *ListDatasetsInput) ListDatasetsRequest {
+func (c *Client) ListDatasetsRequest(input *types.ListDatasetsInput) ListDatasetsRequest {
 	op := &aws.Operation{
 		Name:       opListDatasets,
 		HTTPMethod: "GET",
@@ -170,10 +38,10 @@ func (c *Client) ListDatasetsRequest(input *ListDatasetsInput) ListDatasetsReque
 	}
 
 	if input == nil {
-		input = &ListDatasetsInput{}
+		input = &types.ListDatasetsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListDatasetsOutput{})
+	req := c.newRequest(op, input, &types.ListDatasetsOutput{})
 	return ListDatasetsRequest{Request: req, Input: input, Copy: c.ListDatasetsRequest}
 }
 
@@ -181,8 +49,8 @@ func (c *Client) ListDatasetsRequest(input *ListDatasetsInput) ListDatasetsReque
 // ListDatasets API operation.
 type ListDatasetsRequest struct {
 	*aws.Request
-	Input *ListDatasetsInput
-	Copy  func(*ListDatasetsInput) ListDatasetsRequest
+	Input *types.ListDatasetsInput
+	Copy  func(*types.ListDatasetsInput) ListDatasetsRequest
 }
 
 // Send marshals and sends the ListDatasets API request.
@@ -194,7 +62,7 @@ func (r ListDatasetsRequest) Send(ctx context.Context) (*ListDatasetsResponse, e
 	}
 
 	resp := &ListDatasetsResponse{
-		ListDatasetsOutput: r.Request.Data.(*ListDatasetsOutput),
+		ListDatasetsOutput: r.Request.Data.(*types.ListDatasetsOutput),
 		response:           &aws.Response{Request: r.Request},
 	}
 
@@ -204,7 +72,7 @@ func (r ListDatasetsRequest) Send(ctx context.Context) (*ListDatasetsResponse, e
 // ListDatasetsResponse is the response type for the
 // ListDatasets API operation.
 type ListDatasetsResponse struct {
-	*ListDatasetsOutput
+	*types.ListDatasetsOutput
 
 	response *aws.Response
 }

@@ -6,30 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/configservice/types"
 )
-
-type GetComplianceSummaryByConfigRuleInput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s GetComplianceSummaryByConfigRuleInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type GetComplianceSummaryByConfigRuleOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The number of AWS Config rules that are compliant and the number that are
-	// noncompliant, up to a maximum of 25 for each.
-	ComplianceSummary *ComplianceSummary `type:"structure"`
-}
-
-// String returns the string representation
-func (s GetComplianceSummaryByConfigRuleOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetComplianceSummaryByConfigRule = "GetComplianceSummaryByConfigRule"
 
@@ -47,7 +25,7 @@ const opGetComplianceSummaryByConfigRule = "GetComplianceSummaryByConfigRule"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/GetComplianceSummaryByConfigRule
-func (c *Client) GetComplianceSummaryByConfigRuleRequest(input *GetComplianceSummaryByConfigRuleInput) GetComplianceSummaryByConfigRuleRequest {
+func (c *Client) GetComplianceSummaryByConfigRuleRequest(input *types.GetComplianceSummaryByConfigRuleInput) GetComplianceSummaryByConfigRuleRequest {
 	op := &aws.Operation{
 		Name:       opGetComplianceSummaryByConfigRule,
 		HTTPMethod: "POST",
@@ -55,10 +33,10 @@ func (c *Client) GetComplianceSummaryByConfigRuleRequest(input *GetComplianceSum
 	}
 
 	if input == nil {
-		input = &GetComplianceSummaryByConfigRuleInput{}
+		input = &types.GetComplianceSummaryByConfigRuleInput{}
 	}
 
-	req := c.newRequest(op, input, &GetComplianceSummaryByConfigRuleOutput{})
+	req := c.newRequest(op, input, &types.GetComplianceSummaryByConfigRuleOutput{})
 	return GetComplianceSummaryByConfigRuleRequest{Request: req, Input: input, Copy: c.GetComplianceSummaryByConfigRuleRequest}
 }
 
@@ -66,8 +44,8 @@ func (c *Client) GetComplianceSummaryByConfigRuleRequest(input *GetComplianceSum
 // GetComplianceSummaryByConfigRule API operation.
 type GetComplianceSummaryByConfigRuleRequest struct {
 	*aws.Request
-	Input *GetComplianceSummaryByConfigRuleInput
-	Copy  func(*GetComplianceSummaryByConfigRuleInput) GetComplianceSummaryByConfigRuleRequest
+	Input *types.GetComplianceSummaryByConfigRuleInput
+	Copy  func(*types.GetComplianceSummaryByConfigRuleInput) GetComplianceSummaryByConfigRuleRequest
 }
 
 // Send marshals and sends the GetComplianceSummaryByConfigRule API request.
@@ -79,7 +57,7 @@ func (r GetComplianceSummaryByConfigRuleRequest) Send(ctx context.Context) (*Get
 	}
 
 	resp := &GetComplianceSummaryByConfigRuleResponse{
-		GetComplianceSummaryByConfigRuleOutput: r.Request.Data.(*GetComplianceSummaryByConfigRuleOutput),
+		GetComplianceSummaryByConfigRuleOutput: r.Request.Data.(*types.GetComplianceSummaryByConfigRuleOutput),
 		response:                               &aws.Response{Request: r.Request},
 	}
 
@@ -89,7 +67,7 @@ func (r GetComplianceSummaryByConfigRuleRequest) Send(ctx context.Context) (*Get
 // GetComplianceSummaryByConfigRuleResponse is the response type for the
 // GetComplianceSummaryByConfigRule API operation.
 type GetComplianceSummaryByConfigRuleResponse struct {
-	*GetComplianceSummaryByConfigRuleOutput
+	*types.GetComplianceSummaryByConfigRuleOutput
 
 	response *aws.Response
 }

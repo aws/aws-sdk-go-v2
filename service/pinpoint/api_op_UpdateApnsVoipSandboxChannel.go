@@ -6,90 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/pinpoint/types"
 )
-
-type UpdateApnsVoipSandboxChannelInput struct {
-	_ struct{} `type:"structure" payload:"APNSVoipSandboxChannelRequest"`
-
-	// Specifies the status and settings of the APNs (Apple Push Notification service)
-	// VoIP sandbox channel for an application.
-	//
-	// APNSVoipSandboxChannelRequest is a required field
-	APNSVoipSandboxChannelRequest *APNSVoipSandboxChannelRequest `type:"structure" required:"true"`
-
-	// ApplicationId is a required field
-	ApplicationId *string `location:"uri" locationName:"application-id" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s UpdateApnsVoipSandboxChannelInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateApnsVoipSandboxChannelInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateApnsVoipSandboxChannelInput"}
-
-	if s.APNSVoipSandboxChannelRequest == nil {
-		invalidParams.Add(aws.NewErrParamRequired("APNSVoipSandboxChannelRequest"))
-	}
-
-	if s.ApplicationId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ApplicationId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s UpdateApnsVoipSandboxChannelInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.ApplicationId != nil {
-		v := *s.ApplicationId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "application-id", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.APNSVoipSandboxChannelRequest != nil {
-		v := s.APNSVoipSandboxChannelRequest
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.PayloadTarget, "APNSVoipSandboxChannelRequest", v, metadata)
-	}
-	return nil
-}
-
-type UpdateApnsVoipSandboxChannelOutput struct {
-	_ struct{} `type:"structure" payload:"APNSVoipSandboxChannelResponse"`
-
-	// Provides information about the status and settings of the APNs (Apple Push
-	// Notification service) VoIP sandbox channel for an application.
-	//
-	// APNSVoipSandboxChannelResponse is a required field
-	APNSVoipSandboxChannelResponse *APNSVoipSandboxChannelResponse `type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s UpdateApnsVoipSandboxChannelOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s UpdateApnsVoipSandboxChannelOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.APNSVoipSandboxChannelResponse != nil {
-		v := s.APNSVoipSandboxChannelResponse
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.PayloadTarget, "APNSVoipSandboxChannelResponse", v, metadata)
-	}
-	return nil
-}
 
 const opUpdateApnsVoipSandboxChannel = "UpdateApnsVoipSandboxChannel"
 
@@ -107,7 +25,7 @@ const opUpdateApnsVoipSandboxChannel = "UpdateApnsVoipSandboxChannel"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/UpdateApnsVoipSandboxChannel
-func (c *Client) UpdateApnsVoipSandboxChannelRequest(input *UpdateApnsVoipSandboxChannelInput) UpdateApnsVoipSandboxChannelRequest {
+func (c *Client) UpdateApnsVoipSandboxChannelRequest(input *types.UpdateApnsVoipSandboxChannelInput) UpdateApnsVoipSandboxChannelRequest {
 	op := &aws.Operation{
 		Name:       opUpdateApnsVoipSandboxChannel,
 		HTTPMethod: "PUT",
@@ -115,10 +33,10 @@ func (c *Client) UpdateApnsVoipSandboxChannelRequest(input *UpdateApnsVoipSandbo
 	}
 
 	if input == nil {
-		input = &UpdateApnsVoipSandboxChannelInput{}
+		input = &types.UpdateApnsVoipSandboxChannelInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateApnsVoipSandboxChannelOutput{})
+	req := c.newRequest(op, input, &types.UpdateApnsVoipSandboxChannelOutput{})
 	return UpdateApnsVoipSandboxChannelRequest{Request: req, Input: input, Copy: c.UpdateApnsVoipSandboxChannelRequest}
 }
 
@@ -126,8 +44,8 @@ func (c *Client) UpdateApnsVoipSandboxChannelRequest(input *UpdateApnsVoipSandbo
 // UpdateApnsVoipSandboxChannel API operation.
 type UpdateApnsVoipSandboxChannelRequest struct {
 	*aws.Request
-	Input *UpdateApnsVoipSandboxChannelInput
-	Copy  func(*UpdateApnsVoipSandboxChannelInput) UpdateApnsVoipSandboxChannelRequest
+	Input *types.UpdateApnsVoipSandboxChannelInput
+	Copy  func(*types.UpdateApnsVoipSandboxChannelInput) UpdateApnsVoipSandboxChannelRequest
 }
 
 // Send marshals and sends the UpdateApnsVoipSandboxChannel API request.
@@ -139,7 +57,7 @@ func (r UpdateApnsVoipSandboxChannelRequest) Send(ctx context.Context) (*UpdateA
 	}
 
 	resp := &UpdateApnsVoipSandboxChannelResponse{
-		UpdateApnsVoipSandboxChannelOutput: r.Request.Data.(*UpdateApnsVoipSandboxChannelOutput),
+		UpdateApnsVoipSandboxChannelOutput: r.Request.Data.(*types.UpdateApnsVoipSandboxChannelOutput),
 		response:                           &aws.Response{Request: r.Request},
 	}
 
@@ -149,7 +67,7 @@ func (r UpdateApnsVoipSandboxChannelRequest) Send(ctx context.Context) (*UpdateA
 // UpdateApnsVoipSandboxChannelResponse is the response type for the
 // UpdateApnsVoipSandboxChannel API operation.
 type UpdateApnsVoipSandboxChannelResponse struct {
-	*UpdateApnsVoipSandboxChannelOutput
+	*types.UpdateApnsVoipSandboxChannelOutput
 
 	response *aws.Response
 }

@@ -6,71 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/types"
 )
-
-// Represents the request to change a user password.
-type ChangePasswordInput struct {
-	_ struct{} `type:"structure"`
-
-	// The access token.
-	//
-	// AccessToken is a required field
-	AccessToken *string `type:"string" required:"true" sensitive:"true"`
-
-	// The old password.
-	//
-	// PreviousPassword is a required field
-	PreviousPassword *string `min:"6" type:"string" required:"true" sensitive:"true"`
-
-	// The new password.
-	//
-	// ProposedPassword is a required field
-	ProposedPassword *string `min:"6" type:"string" required:"true" sensitive:"true"`
-}
-
-// String returns the string representation
-func (s ChangePasswordInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ChangePasswordInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ChangePasswordInput"}
-
-	if s.AccessToken == nil {
-		invalidParams.Add(aws.NewErrParamRequired("AccessToken"))
-	}
-
-	if s.PreviousPassword == nil {
-		invalidParams.Add(aws.NewErrParamRequired("PreviousPassword"))
-	}
-	if s.PreviousPassword != nil && len(*s.PreviousPassword) < 6 {
-		invalidParams.Add(aws.NewErrParamMinLen("PreviousPassword", 6))
-	}
-
-	if s.ProposedPassword == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ProposedPassword"))
-	}
-	if s.ProposedPassword != nil && len(*s.ProposedPassword) < 6 {
-		invalidParams.Add(aws.NewErrParamMinLen("ProposedPassword", 6))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// The response from the server to the change password request.
-type ChangePasswordOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s ChangePasswordOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opChangePassword = "ChangePassword"
 
@@ -87,7 +24,7 @@ const opChangePassword = "ChangePassword"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/ChangePassword
-func (c *Client) ChangePasswordRequest(input *ChangePasswordInput) ChangePasswordRequest {
+func (c *Client) ChangePasswordRequest(input *types.ChangePasswordInput) ChangePasswordRequest {
 	op := &aws.Operation{
 		Name:       opChangePassword,
 		HTTPMethod: "POST",
@@ -95,10 +32,10 @@ func (c *Client) ChangePasswordRequest(input *ChangePasswordInput) ChangePasswor
 	}
 
 	if input == nil {
-		input = &ChangePasswordInput{}
+		input = &types.ChangePasswordInput{}
 	}
 
-	req := c.newRequest(op, input, &ChangePasswordOutput{})
+	req := c.newRequest(op, input, &types.ChangePasswordOutput{})
 	req.Config.Credentials = aws.AnonymousCredentials
 	return ChangePasswordRequest{Request: req, Input: input, Copy: c.ChangePasswordRequest}
 }
@@ -107,8 +44,8 @@ func (c *Client) ChangePasswordRequest(input *ChangePasswordInput) ChangePasswor
 // ChangePassword API operation.
 type ChangePasswordRequest struct {
 	*aws.Request
-	Input *ChangePasswordInput
-	Copy  func(*ChangePasswordInput) ChangePasswordRequest
+	Input *types.ChangePasswordInput
+	Copy  func(*types.ChangePasswordInput) ChangePasswordRequest
 }
 
 // Send marshals and sends the ChangePassword API request.
@@ -120,7 +57,7 @@ func (r ChangePasswordRequest) Send(ctx context.Context) (*ChangePasswordRespons
 	}
 
 	resp := &ChangePasswordResponse{
-		ChangePasswordOutput: r.Request.Data.(*ChangePasswordOutput),
+		ChangePasswordOutput: r.Request.Data.(*types.ChangePasswordOutput),
 		response:             &aws.Response{Request: r.Request},
 	}
 
@@ -130,7 +67,7 @@ func (r ChangePasswordRequest) Send(ctx context.Context) (*ChangePasswordRespons
 // ChangePasswordResponse is the response type for the
 // ChangePassword API operation.
 type ChangePasswordResponse struct {
-	*ChangePasswordOutput
+	*types.ChangePasswordOutput
 
 	response *aws.Response
 }

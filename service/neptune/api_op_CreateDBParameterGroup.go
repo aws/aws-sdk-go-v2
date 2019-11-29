@@ -6,85 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/neptune/types"
 )
-
-type CreateDBParameterGroupInput struct {
-	_ struct{} `type:"structure"`
-
-	// The DB parameter group family name. A DB parameter group can be associated
-	// with one and only one DB parameter group family, and can be applied only
-	// to a DB instance running a database engine and engine version compatible
-	// with that DB parameter group family.
-	//
-	// DBParameterGroupFamily is a required field
-	DBParameterGroupFamily *string `type:"string" required:"true"`
-
-	// The name of the DB parameter group.
-	//
-	// Constraints:
-	//
-	//    * Must be 1 to 255 letters, numbers, or hyphens.
-	//
-	//    * First character must be a letter
-	//
-	//    * Cannot end with a hyphen or contain two consecutive hyphens
-	//
-	// This value is stored as a lowercase string.
-	//
-	// DBParameterGroupName is a required field
-	DBParameterGroupName *string `type:"string" required:"true"`
-
-	// The description for the DB parameter group.
-	//
-	// Description is a required field
-	Description *string `type:"string" required:"true"`
-
-	// The tags to be assigned to the new DB parameter group.
-	Tags []Tag `locationNameList:"Tag" type:"list"`
-}
-
-// String returns the string representation
-func (s CreateDBParameterGroupInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateDBParameterGroupInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateDBParameterGroupInput"}
-
-	if s.DBParameterGroupFamily == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DBParameterGroupFamily"))
-	}
-
-	if s.DBParameterGroupName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DBParameterGroupName"))
-	}
-
-	if s.Description == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Description"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type CreateDBParameterGroupOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Contains the details of an Amazon Neptune DB parameter group.
-	//
-	// This data type is used as a response element in the DescribeDBParameterGroups
-	// action.
-	DBParameterGroup *DBParameterGroup `type:"structure"`
-}
-
-// String returns the string representation
-func (s CreateDBParameterGroupOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCreateDBParameterGroup = "CreateDBParameterGroup"
 
@@ -121,7 +44,7 @@ const opCreateDBParameterGroup = "CreateDBParameterGroup"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/CreateDBParameterGroup
-func (c *Client) CreateDBParameterGroupRequest(input *CreateDBParameterGroupInput) CreateDBParameterGroupRequest {
+func (c *Client) CreateDBParameterGroupRequest(input *types.CreateDBParameterGroupInput) CreateDBParameterGroupRequest {
 	op := &aws.Operation{
 		Name:       opCreateDBParameterGroup,
 		HTTPMethod: "POST",
@@ -129,10 +52,10 @@ func (c *Client) CreateDBParameterGroupRequest(input *CreateDBParameterGroupInpu
 	}
 
 	if input == nil {
-		input = &CreateDBParameterGroupInput{}
+		input = &types.CreateDBParameterGroupInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateDBParameterGroupOutput{})
+	req := c.newRequest(op, input, &types.CreateDBParameterGroupOutput{})
 	return CreateDBParameterGroupRequest{Request: req, Input: input, Copy: c.CreateDBParameterGroupRequest}
 }
 
@@ -140,8 +63,8 @@ func (c *Client) CreateDBParameterGroupRequest(input *CreateDBParameterGroupInpu
 // CreateDBParameterGroup API operation.
 type CreateDBParameterGroupRequest struct {
 	*aws.Request
-	Input *CreateDBParameterGroupInput
-	Copy  func(*CreateDBParameterGroupInput) CreateDBParameterGroupRequest
+	Input *types.CreateDBParameterGroupInput
+	Copy  func(*types.CreateDBParameterGroupInput) CreateDBParameterGroupRequest
 }
 
 // Send marshals and sends the CreateDBParameterGroup API request.
@@ -153,7 +76,7 @@ func (r CreateDBParameterGroupRequest) Send(ctx context.Context) (*CreateDBParam
 	}
 
 	resp := &CreateDBParameterGroupResponse{
-		CreateDBParameterGroupOutput: r.Request.Data.(*CreateDBParameterGroupOutput),
+		CreateDBParameterGroupOutput: r.Request.Data.(*types.CreateDBParameterGroupOutput),
 		response:                     &aws.Response{Request: r.Request},
 	}
 
@@ -163,7 +86,7 @@ func (r CreateDBParameterGroupRequest) Send(ctx context.Context) (*CreateDBParam
 // CreateDBParameterGroupResponse is the response type for the
 // CreateDBParameterGroup API operation.
 type CreateDBParameterGroupResponse struct {
-	*CreateDBParameterGroupOutput
+	*types.CreateDBParameterGroupOutput
 
 	response *aws.Response
 }

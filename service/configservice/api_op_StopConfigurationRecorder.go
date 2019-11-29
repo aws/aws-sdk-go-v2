@@ -6,52 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
+	"github.com/aws/aws-sdk-go-v2/service/configservice/types"
 )
-
-// The input for the StopConfigurationRecorder action.
-type StopConfigurationRecorderInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the recorder object that records each configuration change made
-	// to the resources.
-	//
-	// ConfigurationRecorderName is a required field
-	ConfigurationRecorderName *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s StopConfigurationRecorderInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *StopConfigurationRecorderInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "StopConfigurationRecorderInput"}
-
-	if s.ConfigurationRecorderName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ConfigurationRecorderName"))
-	}
-	if s.ConfigurationRecorderName != nil && len(*s.ConfigurationRecorderName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ConfigurationRecorderName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type StopConfigurationRecorderOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s StopConfigurationRecorderOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opStopConfigurationRecorder = "StopConfigurationRecorder"
 
@@ -69,7 +27,7 @@ const opStopConfigurationRecorder = "StopConfigurationRecorder"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/StopConfigurationRecorder
-func (c *Client) StopConfigurationRecorderRequest(input *StopConfigurationRecorderInput) StopConfigurationRecorderRequest {
+func (c *Client) StopConfigurationRecorderRequest(input *types.StopConfigurationRecorderInput) StopConfigurationRecorderRequest {
 	op := &aws.Operation{
 		Name:       opStopConfigurationRecorder,
 		HTTPMethod: "POST",
@@ -77,10 +35,10 @@ func (c *Client) StopConfigurationRecorderRequest(input *StopConfigurationRecord
 	}
 
 	if input == nil {
-		input = &StopConfigurationRecorderInput{}
+		input = &types.StopConfigurationRecorderInput{}
 	}
 
-	req := c.newRequest(op, input, &StopConfigurationRecorderOutput{})
+	req := c.newRequest(op, input, &types.StopConfigurationRecorderOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return StopConfigurationRecorderRequest{Request: req, Input: input, Copy: c.StopConfigurationRecorderRequest}
@@ -90,8 +48,8 @@ func (c *Client) StopConfigurationRecorderRequest(input *StopConfigurationRecord
 // StopConfigurationRecorder API operation.
 type StopConfigurationRecorderRequest struct {
 	*aws.Request
-	Input *StopConfigurationRecorderInput
-	Copy  func(*StopConfigurationRecorderInput) StopConfigurationRecorderRequest
+	Input *types.StopConfigurationRecorderInput
+	Copy  func(*types.StopConfigurationRecorderInput) StopConfigurationRecorderRequest
 }
 
 // Send marshals and sends the StopConfigurationRecorder API request.
@@ -103,7 +61,7 @@ func (r StopConfigurationRecorderRequest) Send(ctx context.Context) (*StopConfig
 	}
 
 	resp := &StopConfigurationRecorderResponse{
-		StopConfigurationRecorderOutput: r.Request.Data.(*StopConfigurationRecorderOutput),
+		StopConfigurationRecorderOutput: r.Request.Data.(*types.StopConfigurationRecorderOutput),
 		response:                        &aws.Response{Request: r.Request},
 	}
 
@@ -113,7 +71,7 @@ func (r StopConfigurationRecorderRequest) Send(ctx context.Context) (*StopConfig
 // StopConfigurationRecorderResponse is the response type for the
 // StopConfigurationRecorder API operation.
 type StopConfigurationRecorderResponse struct {
-	*StopConfigurationRecorderOutput
+	*types.StopConfigurationRecorderOutput
 
 	response *aws.Response
 }

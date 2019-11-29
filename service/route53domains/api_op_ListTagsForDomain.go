@@ -6,52 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/route53domains/types"
 )
-
-// The ListTagsForDomainRequest includes the following elements.
-type ListTagsForDomainInput struct {
-	_ struct{} `type:"structure"`
-
-	// The domain for which you want to get a list of tags.
-	//
-	// DomainName is a required field
-	DomainName *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s ListTagsForDomainInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListTagsForDomainInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListTagsForDomainInput"}
-
-	if s.DomainName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DomainName"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// The ListTagsForDomain response includes the following elements.
-type ListTagsForDomainOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A list of the tags that are associated with the specified domain.
-	//
-	// TagList is a required field
-	TagList []Tag `type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s ListTagsForDomainOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListTagsForDomain = "ListTagsForDomain"
 
@@ -72,7 +28,7 @@ const opListTagsForDomain = "ListTagsForDomain"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/ListTagsForDomain
-func (c *Client) ListTagsForDomainRequest(input *ListTagsForDomainInput) ListTagsForDomainRequest {
+func (c *Client) ListTagsForDomainRequest(input *types.ListTagsForDomainInput) ListTagsForDomainRequest {
 	op := &aws.Operation{
 		Name:       opListTagsForDomain,
 		HTTPMethod: "POST",
@@ -80,10 +36,10 @@ func (c *Client) ListTagsForDomainRequest(input *ListTagsForDomainInput) ListTag
 	}
 
 	if input == nil {
-		input = &ListTagsForDomainInput{}
+		input = &types.ListTagsForDomainInput{}
 	}
 
-	req := c.newRequest(op, input, &ListTagsForDomainOutput{})
+	req := c.newRequest(op, input, &types.ListTagsForDomainOutput{})
 	return ListTagsForDomainRequest{Request: req, Input: input, Copy: c.ListTagsForDomainRequest}
 }
 
@@ -91,8 +47,8 @@ func (c *Client) ListTagsForDomainRequest(input *ListTagsForDomainInput) ListTag
 // ListTagsForDomain API operation.
 type ListTagsForDomainRequest struct {
 	*aws.Request
-	Input *ListTagsForDomainInput
-	Copy  func(*ListTagsForDomainInput) ListTagsForDomainRequest
+	Input *types.ListTagsForDomainInput
+	Copy  func(*types.ListTagsForDomainInput) ListTagsForDomainRequest
 }
 
 // Send marshals and sends the ListTagsForDomain API request.
@@ -104,7 +60,7 @@ func (r ListTagsForDomainRequest) Send(ctx context.Context) (*ListTagsForDomainR
 	}
 
 	resp := &ListTagsForDomainResponse{
-		ListTagsForDomainOutput: r.Request.Data.(*ListTagsForDomainOutput),
+		ListTagsForDomainOutput: r.Request.Data.(*types.ListTagsForDomainOutput),
 		response:                &aws.Response{Request: r.Request},
 	}
 
@@ -114,7 +70,7 @@ func (r ListTagsForDomainRequest) Send(ctx context.Context) (*ListTagsForDomainR
 // ListTagsForDomainResponse is the response type for the
 // ListTagsForDomain API operation.
 type ListTagsForDomainResponse struct {
-	*ListTagsForDomainOutput
+	*types.ListTagsForDomainOutput
 
 	response *aws.Response
 }

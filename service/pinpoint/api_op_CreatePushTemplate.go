@@ -6,89 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/pinpoint/types"
 )
-
-type CreatePushTemplateInput struct {
-	_ struct{} `type:"structure" payload:"PushNotificationTemplateRequest"`
-
-	// Specifies the content and settings for a message template that can be used
-	// in messages that are sent through a push notification channel.
-	//
-	// PushNotificationTemplateRequest is a required field
-	PushNotificationTemplateRequest *PushNotificationTemplateRequest `type:"structure" required:"true"`
-
-	// TemplateName is a required field
-	TemplateName *string `location:"uri" locationName:"template-name" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s CreatePushTemplateInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreatePushTemplateInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreatePushTemplateInput"}
-
-	if s.PushNotificationTemplateRequest == nil {
-		invalidParams.Add(aws.NewErrParamRequired("PushNotificationTemplateRequest"))
-	}
-
-	if s.TemplateName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("TemplateName"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s CreatePushTemplateInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.TemplateName != nil {
-		v := *s.TemplateName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "template-name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.PushNotificationTemplateRequest != nil {
-		v := s.PushNotificationTemplateRequest
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.PayloadTarget, "PushNotificationTemplateRequest", v, metadata)
-	}
-	return nil
-}
-
-type CreatePushTemplateOutput struct {
-	_ struct{} `type:"structure" payload:"CreateTemplateMessageBody"`
-
-	// Provides information about an API request or response.
-	//
-	// CreateTemplateMessageBody is a required field
-	CreateTemplateMessageBody *CreateTemplateMessageBody `type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s CreatePushTemplateOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s CreatePushTemplateOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.CreateTemplateMessageBody != nil {
-		v := s.CreateTemplateMessageBody
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.PayloadTarget, "CreateTemplateMessageBody", v, metadata)
-	}
-	return nil
-}
 
 const opCreatePushTemplate = "CreatePushTemplate"
 
@@ -106,7 +25,7 @@ const opCreatePushTemplate = "CreatePushTemplate"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/CreatePushTemplate
-func (c *Client) CreatePushTemplateRequest(input *CreatePushTemplateInput) CreatePushTemplateRequest {
+func (c *Client) CreatePushTemplateRequest(input *types.CreatePushTemplateInput) CreatePushTemplateRequest {
 	op := &aws.Operation{
 		Name:       opCreatePushTemplate,
 		HTTPMethod: "POST",
@@ -114,10 +33,10 @@ func (c *Client) CreatePushTemplateRequest(input *CreatePushTemplateInput) Creat
 	}
 
 	if input == nil {
-		input = &CreatePushTemplateInput{}
+		input = &types.CreatePushTemplateInput{}
 	}
 
-	req := c.newRequest(op, input, &CreatePushTemplateOutput{})
+	req := c.newRequest(op, input, &types.CreatePushTemplateOutput{})
 	return CreatePushTemplateRequest{Request: req, Input: input, Copy: c.CreatePushTemplateRequest}
 }
 
@@ -125,8 +44,8 @@ func (c *Client) CreatePushTemplateRequest(input *CreatePushTemplateInput) Creat
 // CreatePushTemplate API operation.
 type CreatePushTemplateRequest struct {
 	*aws.Request
-	Input *CreatePushTemplateInput
-	Copy  func(*CreatePushTemplateInput) CreatePushTemplateRequest
+	Input *types.CreatePushTemplateInput
+	Copy  func(*types.CreatePushTemplateInput) CreatePushTemplateRequest
 }
 
 // Send marshals and sends the CreatePushTemplate API request.
@@ -138,7 +57,7 @@ func (r CreatePushTemplateRequest) Send(ctx context.Context) (*CreatePushTemplat
 	}
 
 	resp := &CreatePushTemplateResponse{
-		CreatePushTemplateOutput: r.Request.Data.(*CreatePushTemplateOutput),
+		CreatePushTemplateOutput: r.Request.Data.(*types.CreatePushTemplateOutput),
 		response:                 &aws.Response{Request: r.Request},
 	}
 
@@ -148,7 +67,7 @@ func (r CreatePushTemplateRequest) Send(ctx context.Context) (*CreatePushTemplat
 // CreatePushTemplateResponse is the response type for the
 // CreatePushTemplate API operation.
 type CreatePushTemplateResponse struct {
-	*CreatePushTemplateOutput
+	*types.CreatePushTemplateOutput
 
 	response *aws.Response
 }

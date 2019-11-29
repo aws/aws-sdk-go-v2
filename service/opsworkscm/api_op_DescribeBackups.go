@@ -6,60 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/opsworkscm/types"
 )
-
-type DescribeBackupsInput struct {
-	_ struct{} `type:"structure"`
-
-	// Describes a single backup.
-	BackupId *string `type:"string"`
-
-	// This is not currently implemented for DescribeBackups requests.
-	MaxResults *int64 `min:"1" type:"integer"`
-
-	// This is not currently implemented for DescribeBackups requests.
-	NextToken *string `type:"string"`
-
-	// Returns backups for the server with the specified ServerName.
-	ServerName *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeBackupsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeBackupsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeBackupsInput"}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-	if s.ServerName != nil && len(*s.ServerName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ServerName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribeBackupsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Contains the response to a DescribeBackups request.
-	Backups []Backup `type:"list"`
-
-	// This is not currently implemented for DescribeBackups requests.
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeBackupsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeBackups = "DescribeBackups"
 
@@ -82,7 +30,7 @@ const opDescribeBackups = "DescribeBackups"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/DescribeBackups
-func (c *Client) DescribeBackupsRequest(input *DescribeBackupsInput) DescribeBackupsRequest {
+func (c *Client) DescribeBackupsRequest(input *types.DescribeBackupsInput) DescribeBackupsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeBackups,
 		HTTPMethod: "POST",
@@ -90,10 +38,10 @@ func (c *Client) DescribeBackupsRequest(input *DescribeBackupsInput) DescribeBac
 	}
 
 	if input == nil {
-		input = &DescribeBackupsInput{}
+		input = &types.DescribeBackupsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeBackupsOutput{})
+	req := c.newRequest(op, input, &types.DescribeBackupsOutput{})
 	return DescribeBackupsRequest{Request: req, Input: input, Copy: c.DescribeBackupsRequest}
 }
 
@@ -101,8 +49,8 @@ func (c *Client) DescribeBackupsRequest(input *DescribeBackupsInput) DescribeBac
 // DescribeBackups API operation.
 type DescribeBackupsRequest struct {
 	*aws.Request
-	Input *DescribeBackupsInput
-	Copy  func(*DescribeBackupsInput) DescribeBackupsRequest
+	Input *types.DescribeBackupsInput
+	Copy  func(*types.DescribeBackupsInput) DescribeBackupsRequest
 }
 
 // Send marshals and sends the DescribeBackups API request.
@@ -114,7 +62,7 @@ func (r DescribeBackupsRequest) Send(ctx context.Context) (*DescribeBackupsRespo
 	}
 
 	resp := &DescribeBackupsResponse{
-		DescribeBackupsOutput: r.Request.Data.(*DescribeBackupsOutput),
+		DescribeBackupsOutput: r.Request.Data.(*types.DescribeBackupsOutput),
 		response:              &aws.Response{Request: r.Request},
 	}
 
@@ -124,7 +72,7 @@ func (r DescribeBackupsRequest) Send(ctx context.Context) (*DescribeBackupsRespo
 // DescribeBackupsResponse is the response type for the
 // DescribeBackups API operation.
 type DescribeBackupsResponse struct {
-	*DescribeBackupsOutput
+	*types.DescribeBackupsOutput
 
 	response *aws.Response
 }

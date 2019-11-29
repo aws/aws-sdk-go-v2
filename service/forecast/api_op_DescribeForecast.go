@@ -4,84 +4,10 @@ package forecast
 
 import (
 	"context"
-	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/forecast/types"
 )
-
-type DescribeForecastInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the forecast.
-	//
-	// ForecastArn is a required field
-	ForecastArn *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeForecastInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeForecastInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeForecastInput"}
-
-	if s.ForecastArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ForecastArn"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribeForecastOutput struct {
-	_ struct{} `type:"structure"`
-
-	// When the forecast creation task was created.
-	CreationTime *time.Time `type:"timestamp"`
-
-	// The ARN of the dataset group that provided the data used to train the predictor.
-	DatasetGroupArn *string `type:"string"`
-
-	// The same forecast ARN as given in the request.
-	ForecastArn *string `type:"string"`
-
-	// The name of the forecast.
-	ForecastName *string `min:"1" type:"string"`
-
-	// Initially, the same as CreationTime (status is CREATE_PENDING). Updated when
-	// inference (creating the forecast) starts (status changed to CREATE_IN_PROGRESS),
-	// and when inference is complete (status changed to ACTIVE) or fails (status
-	// changed to CREATE_FAILED).
-	LastModificationTime *time.Time `type:"timestamp"`
-
-	// If an error occurred, an informational message about the error.
-	Message *string `type:"string"`
-
-	// The ARN of the predictor used to generate the forecast.
-	PredictorArn *string `type:"string"`
-
-	// The status of the forecast. States include:
-	//
-	//    * ACTIVE
-	//
-	//    * CREATE_PENDING, CREATE_IN_PROGRESS, CREATE_FAILED
-	//
-	//    * DELETE_PENDING, DELETE_IN_PROGRESS, DELETE_FAILED
-	//
-	// The Status of the forecast must be ACTIVE before you can query or export
-	// the forecast.
-	Status *string `type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeForecastOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeForecast = "DescribeForecast"
 
@@ -111,7 +37,7 @@ const opDescribeForecast = "DescribeForecast"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/DescribeForecast
-func (c *Client) DescribeForecastRequest(input *DescribeForecastInput) DescribeForecastRequest {
+func (c *Client) DescribeForecastRequest(input *types.DescribeForecastInput) DescribeForecastRequest {
 	op := &aws.Operation{
 		Name:       opDescribeForecast,
 		HTTPMethod: "POST",
@@ -119,10 +45,10 @@ func (c *Client) DescribeForecastRequest(input *DescribeForecastInput) DescribeF
 	}
 
 	if input == nil {
-		input = &DescribeForecastInput{}
+		input = &types.DescribeForecastInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeForecastOutput{})
+	req := c.newRequest(op, input, &types.DescribeForecastOutput{})
 	return DescribeForecastRequest{Request: req, Input: input, Copy: c.DescribeForecastRequest}
 }
 
@@ -130,8 +56,8 @@ func (c *Client) DescribeForecastRequest(input *DescribeForecastInput) DescribeF
 // DescribeForecast API operation.
 type DescribeForecastRequest struct {
 	*aws.Request
-	Input *DescribeForecastInput
-	Copy  func(*DescribeForecastInput) DescribeForecastRequest
+	Input *types.DescribeForecastInput
+	Copy  func(*types.DescribeForecastInput) DescribeForecastRequest
 }
 
 // Send marshals and sends the DescribeForecast API request.
@@ -143,7 +69,7 @@ func (r DescribeForecastRequest) Send(ctx context.Context) (*DescribeForecastRes
 	}
 
 	resp := &DescribeForecastResponse{
-		DescribeForecastOutput: r.Request.Data.(*DescribeForecastOutput),
+		DescribeForecastOutput: r.Request.Data.(*types.DescribeForecastOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -153,7 +79,7 @@ func (r DescribeForecastRequest) Send(ctx context.Context) (*DescribeForecastRes
 // DescribeForecastResponse is the response type for the
 // DescribeForecast API operation.
 type DescribeForecastResponse struct {
-	*DescribeForecastOutput
+	*types.DescribeForecastOutput
 
 	response *aws.Response
 }

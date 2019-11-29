@@ -7,6 +7,7 @@ import (
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
+	"github.com/aws/aws-sdk-go-v2/service/redshift/types"
 )
 
 // WaitUntilClusterAvailable uses the Amazon Redshift API operation
@@ -18,7 +19,7 @@ import (
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Client) WaitUntilClusterAvailable(ctx context.Context, input *DescribeClustersInput, opts ...aws.WaiterOption) error {
+func (c *Client) WaitUntilClusterAvailable(ctx context.Context, input *types.DescribeClustersInput, opts ...aws.WaiterOption) error {
 	w := aws.Waiter{
 		Name:        "WaitUntilClusterAvailable",
 		MaxAttempts: 30,
@@ -42,7 +43,7 @@ func (c *Client) WaitUntilClusterAvailable(ctx context.Context, input *DescribeC
 		},
 		Logger: c.Config.Logger,
 		NewRequest: func(opts []aws.Option) (*aws.Request, error) {
-			var inCpy *DescribeClustersInput
+			var inCpy *types.DescribeClustersInput
 			if input != nil {
 				tmp := *input
 				inCpy = &tmp
@@ -67,7 +68,7 @@ func (c *Client) WaitUntilClusterAvailable(ctx context.Context, input *DescribeC
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Client) WaitUntilClusterDeleted(ctx context.Context, input *DescribeClustersInput, opts ...aws.WaiterOption) error {
+func (c *Client) WaitUntilClusterDeleted(ctx context.Context, input *types.DescribeClustersInput, opts ...aws.WaiterOption) error {
 	w := aws.Waiter{
 		Name:        "WaitUntilClusterDeleted",
 		MaxAttempts: 30,
@@ -91,7 +92,7 @@ func (c *Client) WaitUntilClusterDeleted(ctx context.Context, input *DescribeClu
 		},
 		Logger: c.Config.Logger,
 		NewRequest: func(opts []aws.Option) (*aws.Request, error) {
-			var inCpy *DescribeClustersInput
+			var inCpy *types.DescribeClustersInput
 			if input != nil {
 				tmp := *input
 				inCpy = &tmp
@@ -116,7 +117,7 @@ func (c *Client) WaitUntilClusterDeleted(ctx context.Context, input *DescribeClu
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Client) WaitUntilClusterRestored(ctx context.Context, input *DescribeClustersInput, opts ...aws.WaiterOption) error {
+func (c *Client) WaitUntilClusterRestored(ctx context.Context, input *types.DescribeClustersInput, opts ...aws.WaiterOption) error {
 	w := aws.Waiter{
 		Name:        "WaitUntilClusterRestored",
 		MaxAttempts: 30,
@@ -135,7 +136,7 @@ func (c *Client) WaitUntilClusterRestored(ctx context.Context, input *DescribeCl
 		},
 		Logger: c.Config.Logger,
 		NewRequest: func(opts []aws.Option) (*aws.Request, error) {
-			var inCpy *DescribeClustersInput
+			var inCpy *types.DescribeClustersInput
 			if input != nil {
 				tmp := *input
 				inCpy = &tmp
@@ -160,7 +161,7 @@ func (c *Client) WaitUntilClusterRestored(ctx context.Context, input *DescribeCl
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Client) WaitUntilSnapshotAvailable(ctx context.Context, input *DescribeClusterSnapshotsInput, opts ...aws.WaiterOption) error {
+func (c *Client) WaitUntilSnapshotAvailable(ctx context.Context, input *types.DescribeClusterSnapshotsInput, opts ...aws.WaiterOption) error {
 	w := aws.Waiter{
 		Name:        "WaitUntilSnapshotAvailable",
 		MaxAttempts: 20,
@@ -184,7 +185,7 @@ func (c *Client) WaitUntilSnapshotAvailable(ctx context.Context, input *Describe
 		},
 		Logger: c.Config.Logger,
 		NewRequest: func(opts []aws.Option) (*aws.Request, error) {
-			var inCpy *DescribeClusterSnapshotsInput
+			var inCpy *types.DescribeClusterSnapshotsInput
 			if input != nil {
 				tmp := *input
 				inCpy = &tmp

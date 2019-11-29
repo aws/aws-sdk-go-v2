@@ -6,77 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/groundstation/types"
 )
-
-type ListDataflowEndpointGroupsInput struct {
-	_ struct{} `type:"structure"`
-
-	MaxResults *int64 `location:"querystring" locationName:"maxResults" type:"integer"`
-
-	NextToken *string `location:"querystring" locationName:"nextToken" type:"string"`
-}
-
-// String returns the string representation
-func (s ListDataflowEndpointGroupsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListDataflowEndpointGroupsInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.MaxResults != nil {
-		v := *s.MaxResults
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "maxResults", protocol.Int64Value(v), metadata)
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type ListDataflowEndpointGroupsOutput struct {
-	_ struct{} `type:"structure"`
-
-	DataflowEndpointGroupList []DataflowEndpointListItem `locationName:"dataflowEndpointGroupList" type:"list"`
-
-	NextToken *string `locationName:"nextToken" type:"string"`
-}
-
-// String returns the string representation
-func (s ListDataflowEndpointGroupsOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListDataflowEndpointGroupsOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.DataflowEndpointGroupList != nil {
-		v := s.DataflowEndpointGroupList
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "dataflowEndpointGroupList", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opListDataflowEndpointGroups = "ListDataflowEndpointGroups"
 
@@ -93,7 +24,7 @@ const opListDataflowEndpointGroups = "ListDataflowEndpointGroups"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/groundstation-2019-05-23/ListDataflowEndpointGroups
-func (c *Client) ListDataflowEndpointGroupsRequest(input *ListDataflowEndpointGroupsInput) ListDataflowEndpointGroupsRequest {
+func (c *Client) ListDataflowEndpointGroupsRequest(input *types.ListDataflowEndpointGroupsInput) ListDataflowEndpointGroupsRequest {
 	op := &aws.Operation{
 		Name:       opListDataflowEndpointGroups,
 		HTTPMethod: "GET",
@@ -107,10 +38,10 @@ func (c *Client) ListDataflowEndpointGroupsRequest(input *ListDataflowEndpointGr
 	}
 
 	if input == nil {
-		input = &ListDataflowEndpointGroupsInput{}
+		input = &types.ListDataflowEndpointGroupsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListDataflowEndpointGroupsOutput{})
+	req := c.newRequest(op, input, &types.ListDataflowEndpointGroupsOutput{})
 	return ListDataflowEndpointGroupsRequest{Request: req, Input: input, Copy: c.ListDataflowEndpointGroupsRequest}
 }
 
@@ -118,8 +49,8 @@ func (c *Client) ListDataflowEndpointGroupsRequest(input *ListDataflowEndpointGr
 // ListDataflowEndpointGroups API operation.
 type ListDataflowEndpointGroupsRequest struct {
 	*aws.Request
-	Input *ListDataflowEndpointGroupsInput
-	Copy  func(*ListDataflowEndpointGroupsInput) ListDataflowEndpointGroupsRequest
+	Input *types.ListDataflowEndpointGroupsInput
+	Copy  func(*types.ListDataflowEndpointGroupsInput) ListDataflowEndpointGroupsRequest
 }
 
 // Send marshals and sends the ListDataflowEndpointGroups API request.
@@ -131,7 +62,7 @@ func (r ListDataflowEndpointGroupsRequest) Send(ctx context.Context) (*ListDataf
 	}
 
 	resp := &ListDataflowEndpointGroupsResponse{
-		ListDataflowEndpointGroupsOutput: r.Request.Data.(*ListDataflowEndpointGroupsOutput),
+		ListDataflowEndpointGroupsOutput: r.Request.Data.(*types.ListDataflowEndpointGroupsOutput),
 		response:                         &aws.Response{Request: r.Request},
 	}
 
@@ -161,7 +92,7 @@ func NewListDataflowEndpointGroupsPaginator(req ListDataflowEndpointGroupsReques
 	return ListDataflowEndpointGroupsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListDataflowEndpointGroupsInput
+				var inCpy *types.ListDataflowEndpointGroupsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -181,14 +112,14 @@ type ListDataflowEndpointGroupsPaginator struct {
 	aws.Pager
 }
 
-func (p *ListDataflowEndpointGroupsPaginator) CurrentPage() *ListDataflowEndpointGroupsOutput {
-	return p.Pager.CurrentPage().(*ListDataflowEndpointGroupsOutput)
+func (p *ListDataflowEndpointGroupsPaginator) CurrentPage() *types.ListDataflowEndpointGroupsOutput {
+	return p.Pager.CurrentPage().(*types.ListDataflowEndpointGroupsOutput)
 }
 
 // ListDataflowEndpointGroupsResponse is the response type for the
 // ListDataflowEndpointGroups API operation.
 type ListDataflowEndpointGroupsResponse struct {
-	*ListDataflowEndpointGroupsOutput
+	*types.ListDataflowEndpointGroupsOutput
 
 	response *aws.Response
 }

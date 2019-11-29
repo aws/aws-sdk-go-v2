@@ -6,76 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/iam/types"
 )
-
-type CreateGroupInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the group to create. Do not include the path in this value.
-	//
-	// IAM user, group, role, and policy names must be unique within the account.
-	// Names are not distinguished by case. For example, you cannot create resources
-	// named both "MyResource" and "myresource".
-	//
-	// GroupName is a required field
-	GroupName *string `min:"1" type:"string" required:"true"`
-
-	// The path to the group. For more information about paths, see IAM Identifiers
-	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html)
-	// in the IAM User Guide.
-	//
-	// This parameter is optional. If it is not included, it defaults to a slash
-	// (/).
-	//
-	// This parameter allows (through its regex pattern (http://wikipedia.org/wiki/regex))
-	// a string of characters consisting of either a forward slash (/) by itself
-	// or a string that must begin and end with forward slashes. In addition, it
-	// can contain any ASCII character from the ! (\u0021) through the DEL character
-	// (\u007F), including most punctuation characters, digits, and upper and lowercased
-	// letters.
-	Path *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s CreateGroupInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateGroupInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateGroupInput"}
-
-	if s.GroupName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("GroupName"))
-	}
-	if s.GroupName != nil && len(*s.GroupName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("GroupName", 1))
-	}
-	if s.Path != nil && len(*s.Path) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Path", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Contains the response to a successful CreateGroup request.
-type CreateGroupOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A structure containing details about the new group.
-	//
-	// Group is a required field
-	Group *Group `type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s CreateGroupOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCreateGroup = "CreateGroup"
 
@@ -96,7 +28,7 @@ const opCreateGroup = "CreateGroup"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/CreateGroup
-func (c *Client) CreateGroupRequest(input *CreateGroupInput) CreateGroupRequest {
+func (c *Client) CreateGroupRequest(input *types.CreateGroupInput) CreateGroupRequest {
 	op := &aws.Operation{
 		Name:       opCreateGroup,
 		HTTPMethod: "POST",
@@ -104,10 +36,10 @@ func (c *Client) CreateGroupRequest(input *CreateGroupInput) CreateGroupRequest 
 	}
 
 	if input == nil {
-		input = &CreateGroupInput{}
+		input = &types.CreateGroupInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateGroupOutput{})
+	req := c.newRequest(op, input, &types.CreateGroupOutput{})
 	return CreateGroupRequest{Request: req, Input: input, Copy: c.CreateGroupRequest}
 }
 
@@ -115,8 +47,8 @@ func (c *Client) CreateGroupRequest(input *CreateGroupInput) CreateGroupRequest 
 // CreateGroup API operation.
 type CreateGroupRequest struct {
 	*aws.Request
-	Input *CreateGroupInput
-	Copy  func(*CreateGroupInput) CreateGroupRequest
+	Input *types.CreateGroupInput
+	Copy  func(*types.CreateGroupInput) CreateGroupRequest
 }
 
 // Send marshals and sends the CreateGroup API request.
@@ -128,7 +60,7 @@ func (r CreateGroupRequest) Send(ctx context.Context) (*CreateGroupResponse, err
 	}
 
 	resp := &CreateGroupResponse{
-		CreateGroupOutput: r.Request.Data.(*CreateGroupOutput),
+		CreateGroupOutput: r.Request.Data.(*types.CreateGroupOutput),
 		response:          &aws.Response{Request: r.Request},
 	}
 
@@ -138,7 +70,7 @@ func (r CreateGroupRequest) Send(ctx context.Context) (*CreateGroupResponse, err
 // CreateGroupResponse is the response type for the
 // CreateGroup API operation.
 type CreateGroupResponse struct {
-	*CreateGroupOutput
+	*types.CreateGroupOutput
 
 	response *aws.Response
 }

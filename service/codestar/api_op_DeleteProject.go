@@ -6,68 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/codestar/types"
 )
-
-type DeleteProjectInput struct {
-	_ struct{} `type:"structure"`
-
-	// A user- or system-generated token that identifies the entity that requested
-	// project deletion. This token can be used to repeat the request.
-	ClientRequestToken *string `locationName:"clientRequestToken" min:"1" type:"string"`
-
-	// Whether to send a delete request for the primary stack in AWS CloudFormation
-	// originally used to generate the project and its resources. This option will
-	// delete all AWS resources for the project (except for any buckets in Amazon
-	// S3) as well as deleting the project itself. Recommended for most use cases.
-	DeleteStack *bool `locationName:"deleteStack" type:"boolean"`
-
-	// The ID of the project to be deleted in AWS CodeStar.
-	//
-	// Id is a required field
-	Id *string `locationName:"id" min:"2" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteProjectInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteProjectInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteProjectInput"}
-	if s.ClientRequestToken != nil && len(*s.ClientRequestToken) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ClientRequestToken", 1))
-	}
-
-	if s.Id == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Id"))
-	}
-	if s.Id != nil && len(*s.Id) < 2 {
-		invalidParams.Add(aws.NewErrParamMinLen("Id", 2))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteProjectOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the deleted project.
-	ProjectArn *string `locationName:"projectArn" type:"string"`
-
-	// The ID of the primary stack in AWS CloudFormation that will be deleted as
-	// part of deleting the project and its resources.
-	StackId *string `locationName:"stackId" type:"string"`
-}
-
-// String returns the string representation
-func (s DeleteProjectOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteProject = "DeleteProject"
 
@@ -86,7 +26,7 @@ const opDeleteProject = "DeleteProject"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codestar-2017-04-19/DeleteProject
-func (c *Client) DeleteProjectRequest(input *DeleteProjectInput) DeleteProjectRequest {
+func (c *Client) DeleteProjectRequest(input *types.DeleteProjectInput) DeleteProjectRequest {
 	op := &aws.Operation{
 		Name:       opDeleteProject,
 		HTTPMethod: "POST",
@@ -94,10 +34,10 @@ func (c *Client) DeleteProjectRequest(input *DeleteProjectInput) DeleteProjectRe
 	}
 
 	if input == nil {
-		input = &DeleteProjectInput{}
+		input = &types.DeleteProjectInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteProjectOutput{})
+	req := c.newRequest(op, input, &types.DeleteProjectOutput{})
 	return DeleteProjectRequest{Request: req, Input: input, Copy: c.DeleteProjectRequest}
 }
 
@@ -105,8 +45,8 @@ func (c *Client) DeleteProjectRequest(input *DeleteProjectInput) DeleteProjectRe
 // DeleteProject API operation.
 type DeleteProjectRequest struct {
 	*aws.Request
-	Input *DeleteProjectInput
-	Copy  func(*DeleteProjectInput) DeleteProjectRequest
+	Input *types.DeleteProjectInput
+	Copy  func(*types.DeleteProjectInput) DeleteProjectRequest
 }
 
 // Send marshals and sends the DeleteProject API request.
@@ -118,7 +58,7 @@ func (r DeleteProjectRequest) Send(ctx context.Context) (*DeleteProjectResponse,
 	}
 
 	resp := &DeleteProjectResponse{
-		DeleteProjectOutput: r.Request.Data.(*DeleteProjectOutput),
+		DeleteProjectOutput: r.Request.Data.(*types.DeleteProjectOutput),
 		response:            &aws.Response{Request: r.Request},
 	}
 
@@ -128,7 +68,7 @@ func (r DeleteProjectRequest) Send(ctx context.Context) (*DeleteProjectResponse,
 // DeleteProjectResponse is the response type for the
 // DeleteProject API operation.
 type DeleteProjectResponse struct {
-	*DeleteProjectOutput
+	*types.DeleteProjectOutput
 
 	response *aws.Response
 }

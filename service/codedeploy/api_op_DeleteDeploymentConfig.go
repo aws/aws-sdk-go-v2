@@ -6,52 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
+	"github.com/aws/aws-sdk-go-v2/service/codedeploy/types"
 )
-
-// Represents the input of a DeleteDeploymentConfig operation.
-type DeleteDeploymentConfigInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of a deployment configuration associated with the IAM user or AWS
-	// account.
-	//
-	// DeploymentConfigName is a required field
-	DeploymentConfigName *string `locationName:"deploymentConfigName" min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteDeploymentConfigInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteDeploymentConfigInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteDeploymentConfigInput"}
-
-	if s.DeploymentConfigName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DeploymentConfigName"))
-	}
-	if s.DeploymentConfigName != nil && len(*s.DeploymentConfigName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("DeploymentConfigName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteDeploymentConfigOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteDeploymentConfigOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteDeploymentConfig = "DeleteDeploymentConfig"
 
@@ -71,7 +29,7 @@ const opDeleteDeploymentConfig = "DeleteDeploymentConfig"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/DeleteDeploymentConfig
-func (c *Client) DeleteDeploymentConfigRequest(input *DeleteDeploymentConfigInput) DeleteDeploymentConfigRequest {
+func (c *Client) DeleteDeploymentConfigRequest(input *types.DeleteDeploymentConfigInput) DeleteDeploymentConfigRequest {
 	op := &aws.Operation{
 		Name:       opDeleteDeploymentConfig,
 		HTTPMethod: "POST",
@@ -79,10 +37,10 @@ func (c *Client) DeleteDeploymentConfigRequest(input *DeleteDeploymentConfigInpu
 	}
 
 	if input == nil {
-		input = &DeleteDeploymentConfigInput{}
+		input = &types.DeleteDeploymentConfigInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteDeploymentConfigOutput{})
+	req := c.newRequest(op, input, &types.DeleteDeploymentConfigOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return DeleteDeploymentConfigRequest{Request: req, Input: input, Copy: c.DeleteDeploymentConfigRequest}
@@ -92,8 +50,8 @@ func (c *Client) DeleteDeploymentConfigRequest(input *DeleteDeploymentConfigInpu
 // DeleteDeploymentConfig API operation.
 type DeleteDeploymentConfigRequest struct {
 	*aws.Request
-	Input *DeleteDeploymentConfigInput
-	Copy  func(*DeleteDeploymentConfigInput) DeleteDeploymentConfigRequest
+	Input *types.DeleteDeploymentConfigInput
+	Copy  func(*types.DeleteDeploymentConfigInput) DeleteDeploymentConfigRequest
 }
 
 // Send marshals and sends the DeleteDeploymentConfig API request.
@@ -105,7 +63,7 @@ func (r DeleteDeploymentConfigRequest) Send(ctx context.Context) (*DeleteDeploym
 	}
 
 	resp := &DeleteDeploymentConfigResponse{
-		DeleteDeploymentConfigOutput: r.Request.Data.(*DeleteDeploymentConfigOutput),
+		DeleteDeploymentConfigOutput: r.Request.Data.(*types.DeleteDeploymentConfigOutput),
 		response:                     &aws.Response{Request: r.Request},
 	}
 
@@ -115,7 +73,7 @@ func (r DeleteDeploymentConfigRequest) Send(ctx context.Context) (*DeleteDeploym
 // DeleteDeploymentConfigResponse is the response type for the
 // DeleteDeploymentConfig API operation.
 type DeleteDeploymentConfigResponse struct {
-	*DeleteDeploymentConfigOutput
+	*types.DeleteDeploymentConfigOutput
 
 	response *aws.Response
 }

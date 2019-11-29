@@ -6,87 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/personalize/types"
 )
-
-type CreateDatasetInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the dataset group to add the dataset to.
-	//
-	// DatasetGroupArn is a required field
-	DatasetGroupArn *string `locationName:"datasetGroupArn" type:"string" required:"true"`
-
-	// The type of dataset.
-	//
-	// One of the following (case insensitive) values:
-	//
-	//    * Interactions
-	//
-	//    * Items
-	//
-	//    * Users
-	//
-	// DatasetType is a required field
-	DatasetType *string `locationName:"datasetType" type:"string" required:"true"`
-
-	// The name for the dataset.
-	//
-	// Name is a required field
-	Name *string `locationName:"name" min:"1" type:"string" required:"true"`
-
-	// The ARN of the schema to associate with the dataset. The schema defines the
-	// dataset fields.
-	//
-	// SchemaArn is a required field
-	SchemaArn *string `locationName:"schemaArn" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s CreateDatasetInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateDatasetInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateDatasetInput"}
-
-	if s.DatasetGroupArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DatasetGroupArn"))
-	}
-
-	if s.DatasetType == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DatasetType"))
-	}
-
-	if s.Name == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Name"))
-	}
-	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
-	}
-
-	if s.SchemaArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("SchemaArn"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type CreateDatasetOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The ARN of the dataset.
-	DatasetArn *string `locationName:"datasetArn" type:"string"`
-}
-
-// String returns the string representation
-func (s CreateDatasetOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCreateDataset = "CreateDataset"
 
@@ -134,7 +55,7 @@ const opCreateDataset = "CreateDataset"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/CreateDataset
-func (c *Client) CreateDatasetRequest(input *CreateDatasetInput) CreateDatasetRequest {
+func (c *Client) CreateDatasetRequest(input *types.CreateDatasetInput) CreateDatasetRequest {
 	op := &aws.Operation{
 		Name:       opCreateDataset,
 		HTTPMethod: "POST",
@@ -142,10 +63,10 @@ func (c *Client) CreateDatasetRequest(input *CreateDatasetInput) CreateDatasetRe
 	}
 
 	if input == nil {
-		input = &CreateDatasetInput{}
+		input = &types.CreateDatasetInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateDatasetOutput{})
+	req := c.newRequest(op, input, &types.CreateDatasetOutput{})
 	return CreateDatasetRequest{Request: req, Input: input, Copy: c.CreateDatasetRequest}
 }
 
@@ -153,8 +74,8 @@ func (c *Client) CreateDatasetRequest(input *CreateDatasetInput) CreateDatasetRe
 // CreateDataset API operation.
 type CreateDatasetRequest struct {
 	*aws.Request
-	Input *CreateDatasetInput
-	Copy  func(*CreateDatasetInput) CreateDatasetRequest
+	Input *types.CreateDatasetInput
+	Copy  func(*types.CreateDatasetInput) CreateDatasetRequest
 }
 
 // Send marshals and sends the CreateDataset API request.
@@ -166,7 +87,7 @@ func (r CreateDatasetRequest) Send(ctx context.Context) (*CreateDatasetResponse,
 	}
 
 	resp := &CreateDatasetResponse{
-		CreateDatasetOutput: r.Request.Data.(*CreateDatasetOutput),
+		CreateDatasetOutput: r.Request.Data.(*types.CreateDatasetOutput),
 		response:            &aws.Response{Request: r.Request},
 	}
 
@@ -176,7 +97,7 @@ func (r CreateDatasetRequest) Send(ctx context.Context) (*CreateDatasetResponse,
 // CreateDatasetResponse is the response type for the
 // CreateDataset API operation.
 type CreateDatasetResponse struct {
-	*CreateDatasetOutput
+	*types.CreateDatasetOutput
 
 	response *aws.Response
 }

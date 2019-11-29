@@ -6,51 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/glue/types"
 )
-
-type GetSecurityConfigurationsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The maximum number of results to return.
-	MaxResults *int64 `min:"1" type:"integer"`
-
-	// A continuation token, if this is a continuation call.
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s GetSecurityConfigurationsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetSecurityConfigurationsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetSecurityConfigurationsInput"}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type GetSecurityConfigurationsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A continuation token, if there are more security configurations to return.
-	NextToken *string `type:"string"`
-
-	// A list of security configurations.
-	SecurityConfigurations []SecurityConfiguration `type:"list"`
-}
-
-// String returns the string representation
-func (s GetSecurityConfigurationsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetSecurityConfigurations = "GetSecurityConfigurations"
 
@@ -67,7 +24,7 @@ const opGetSecurityConfigurations = "GetSecurityConfigurations"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetSecurityConfigurations
-func (c *Client) GetSecurityConfigurationsRequest(input *GetSecurityConfigurationsInput) GetSecurityConfigurationsRequest {
+func (c *Client) GetSecurityConfigurationsRequest(input *types.GetSecurityConfigurationsInput) GetSecurityConfigurationsRequest {
 	op := &aws.Operation{
 		Name:       opGetSecurityConfigurations,
 		HTTPMethod: "POST",
@@ -81,10 +38,10 @@ func (c *Client) GetSecurityConfigurationsRequest(input *GetSecurityConfiguratio
 	}
 
 	if input == nil {
-		input = &GetSecurityConfigurationsInput{}
+		input = &types.GetSecurityConfigurationsInput{}
 	}
 
-	req := c.newRequest(op, input, &GetSecurityConfigurationsOutput{})
+	req := c.newRequest(op, input, &types.GetSecurityConfigurationsOutput{})
 	return GetSecurityConfigurationsRequest{Request: req, Input: input, Copy: c.GetSecurityConfigurationsRequest}
 }
 
@@ -92,8 +49,8 @@ func (c *Client) GetSecurityConfigurationsRequest(input *GetSecurityConfiguratio
 // GetSecurityConfigurations API operation.
 type GetSecurityConfigurationsRequest struct {
 	*aws.Request
-	Input *GetSecurityConfigurationsInput
-	Copy  func(*GetSecurityConfigurationsInput) GetSecurityConfigurationsRequest
+	Input *types.GetSecurityConfigurationsInput
+	Copy  func(*types.GetSecurityConfigurationsInput) GetSecurityConfigurationsRequest
 }
 
 // Send marshals and sends the GetSecurityConfigurations API request.
@@ -105,7 +62,7 @@ func (r GetSecurityConfigurationsRequest) Send(ctx context.Context) (*GetSecurit
 	}
 
 	resp := &GetSecurityConfigurationsResponse{
-		GetSecurityConfigurationsOutput: r.Request.Data.(*GetSecurityConfigurationsOutput),
+		GetSecurityConfigurationsOutput: r.Request.Data.(*types.GetSecurityConfigurationsOutput),
 		response:                        &aws.Response{Request: r.Request},
 	}
 
@@ -135,7 +92,7 @@ func NewGetSecurityConfigurationsPaginator(req GetSecurityConfigurationsRequest)
 	return GetSecurityConfigurationsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *GetSecurityConfigurationsInput
+				var inCpy *types.GetSecurityConfigurationsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -155,14 +112,14 @@ type GetSecurityConfigurationsPaginator struct {
 	aws.Pager
 }
 
-func (p *GetSecurityConfigurationsPaginator) CurrentPage() *GetSecurityConfigurationsOutput {
-	return p.Pager.CurrentPage().(*GetSecurityConfigurationsOutput)
+func (p *GetSecurityConfigurationsPaginator) CurrentPage() *types.GetSecurityConfigurationsOutput {
+	return p.Pager.CurrentPage().(*types.GetSecurityConfigurationsOutput)
 }
 
 // GetSecurityConfigurationsResponse is the response type for the
 // GetSecurityConfigurations API operation.
 type GetSecurityConfigurationsResponse struct {
-	*GetSecurityConfigurationsOutput
+	*types.GetSecurityConfigurationsOutput
 
 	response *aws.Response
 }

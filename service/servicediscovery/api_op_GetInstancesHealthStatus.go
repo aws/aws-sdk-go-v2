@@ -6,82 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/servicediscovery/types"
 )
-
-type GetInstancesHealthStatusInput struct {
-	_ struct{} `type:"structure"`
-
-	// An array that contains the IDs of all the instances that you want to get
-	// the health status for.
-	//
-	// If you omit Instances, AWS Cloud Map returns the health status for all the
-	// instances that are associated with the specified service.
-	//
-	// To get the IDs for the instances that you've registered by using a specified
-	// service, submit a ListInstances request.
-	Instances []string `min:"1" type:"list"`
-
-	// The maximum number of instances that you want AWS Cloud Map to return in
-	// the response to a GetInstancesHealthStatus request. If you don't specify
-	// a value for MaxResults, AWS Cloud Map returns up to 100 instances.
-	MaxResults *int64 `min:"1" type:"integer"`
-
-	// For the first GetInstancesHealthStatus request, omit this value.
-	//
-	// If more than MaxResults instances match the specified criteria, you can submit
-	// another GetInstancesHealthStatus request to get the next group of results.
-	// Specify the value of NextToken from the previous response in the next request.
-	NextToken *string `type:"string"`
-
-	// The ID of the service that the instance is associated with.
-	//
-	// ServiceId is a required field
-	ServiceId *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetInstancesHealthStatusInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetInstancesHealthStatusInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetInstancesHealthStatusInput"}
-	if s.Instances != nil && len(s.Instances) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Instances", 1))
-	}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-
-	if s.ServiceId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ServiceId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type GetInstancesHealthStatusOutput struct {
-	_ struct{} `type:"structure"`
-
-	// If more than MaxResults instances match the specified criteria, you can submit
-	// another GetInstancesHealthStatus request to get the next group of results.
-	// Specify the value of NextToken from the previous response in the next request.
-	NextToken *string `type:"string"`
-
-	// A complex type that contains the IDs and the health status of the instances
-	// that you specified in the GetInstancesHealthStatus request.
-	Status map[string]HealthStatus `type:"map"`
-}
-
-// String returns the string representation
-func (s GetInstancesHealthStatusOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetInstancesHealthStatus = "GetInstancesHealthStatus"
 
@@ -102,7 +28,7 @@ const opGetInstancesHealthStatus = "GetInstancesHealthStatus"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicediscovery-2017-03-14/GetInstancesHealthStatus
-func (c *Client) GetInstancesHealthStatusRequest(input *GetInstancesHealthStatusInput) GetInstancesHealthStatusRequest {
+func (c *Client) GetInstancesHealthStatusRequest(input *types.GetInstancesHealthStatusInput) GetInstancesHealthStatusRequest {
 	op := &aws.Operation{
 		Name:       opGetInstancesHealthStatus,
 		HTTPMethod: "POST",
@@ -116,10 +42,10 @@ func (c *Client) GetInstancesHealthStatusRequest(input *GetInstancesHealthStatus
 	}
 
 	if input == nil {
-		input = &GetInstancesHealthStatusInput{}
+		input = &types.GetInstancesHealthStatusInput{}
 	}
 
-	req := c.newRequest(op, input, &GetInstancesHealthStatusOutput{})
+	req := c.newRequest(op, input, &types.GetInstancesHealthStatusOutput{})
 	return GetInstancesHealthStatusRequest{Request: req, Input: input, Copy: c.GetInstancesHealthStatusRequest}
 }
 
@@ -127,8 +53,8 @@ func (c *Client) GetInstancesHealthStatusRequest(input *GetInstancesHealthStatus
 // GetInstancesHealthStatus API operation.
 type GetInstancesHealthStatusRequest struct {
 	*aws.Request
-	Input *GetInstancesHealthStatusInput
-	Copy  func(*GetInstancesHealthStatusInput) GetInstancesHealthStatusRequest
+	Input *types.GetInstancesHealthStatusInput
+	Copy  func(*types.GetInstancesHealthStatusInput) GetInstancesHealthStatusRequest
 }
 
 // Send marshals and sends the GetInstancesHealthStatus API request.
@@ -140,7 +66,7 @@ func (r GetInstancesHealthStatusRequest) Send(ctx context.Context) (*GetInstance
 	}
 
 	resp := &GetInstancesHealthStatusResponse{
-		GetInstancesHealthStatusOutput: r.Request.Data.(*GetInstancesHealthStatusOutput),
+		GetInstancesHealthStatusOutput: r.Request.Data.(*types.GetInstancesHealthStatusOutput),
 		response:                       &aws.Response{Request: r.Request},
 	}
 
@@ -170,7 +96,7 @@ func NewGetInstancesHealthStatusPaginator(req GetInstancesHealthStatusRequest) G
 	return GetInstancesHealthStatusPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *GetInstancesHealthStatusInput
+				var inCpy *types.GetInstancesHealthStatusInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -190,14 +116,14 @@ type GetInstancesHealthStatusPaginator struct {
 	aws.Pager
 }
 
-func (p *GetInstancesHealthStatusPaginator) CurrentPage() *GetInstancesHealthStatusOutput {
-	return p.Pager.CurrentPage().(*GetInstancesHealthStatusOutput)
+func (p *GetInstancesHealthStatusPaginator) CurrentPage() *types.GetInstancesHealthStatusOutput {
+	return p.Pager.CurrentPage().(*types.GetInstancesHealthStatusOutput)
 }
 
 // GetInstancesHealthStatusResponse is the response type for the
 // GetInstancesHealthStatus API operation.
 type GetInstancesHealthStatusResponse struct {
-	*GetInstancesHealthStatusOutput
+	*types.GetInstancesHealthStatusOutput
 
 	response *aws.Response
 }

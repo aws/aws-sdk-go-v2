@@ -6,55 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/devicefarm/types"
 )
-
-type ListVPCEConfigurationsInput struct {
-	_ struct{} `type:"structure"`
-
-	// An integer specifying the maximum number of items you want to return in the
-	// API response.
-	MaxResults *int64 `locationName:"maxResults" type:"integer"`
-
-	// An identifier that was returned from the previous call to this operation,
-	// which can be used to return the next set of items in the list.
-	NextToken *string `locationName:"nextToken" min:"4" type:"string"`
-}
-
-// String returns the string representation
-func (s ListVPCEConfigurationsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListVPCEConfigurationsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListVPCEConfigurationsInput"}
-	if s.NextToken != nil && len(*s.NextToken) < 4 {
-		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 4))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ListVPCEConfigurationsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// An identifier that was returned from the previous call to this operation,
-	// which can be used to return the next set of items in the list.
-	NextToken *string `locationName:"nextToken" min:"4" type:"string"`
-
-	// An array of VPCEConfiguration objects containing information about your VPC
-	// endpoint configuration.
-	VpceConfigurations []VPCEConfiguration `locationName:"vpceConfigurations" type:"list"`
-}
-
-// String returns the string representation
-func (s ListVPCEConfigurationsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListVPCEConfigurations = "ListVPCEConfigurations"
 
@@ -72,7 +25,7 @@ const opListVPCEConfigurations = "ListVPCEConfigurations"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ListVPCEConfigurations
-func (c *Client) ListVPCEConfigurationsRequest(input *ListVPCEConfigurationsInput) ListVPCEConfigurationsRequest {
+func (c *Client) ListVPCEConfigurationsRequest(input *types.ListVPCEConfigurationsInput) ListVPCEConfigurationsRequest {
 	op := &aws.Operation{
 		Name:       opListVPCEConfigurations,
 		HTTPMethod: "POST",
@@ -80,10 +33,10 @@ func (c *Client) ListVPCEConfigurationsRequest(input *ListVPCEConfigurationsInpu
 	}
 
 	if input == nil {
-		input = &ListVPCEConfigurationsInput{}
+		input = &types.ListVPCEConfigurationsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListVPCEConfigurationsOutput{})
+	req := c.newRequest(op, input, &types.ListVPCEConfigurationsOutput{})
 	return ListVPCEConfigurationsRequest{Request: req, Input: input, Copy: c.ListVPCEConfigurationsRequest}
 }
 
@@ -91,8 +44,8 @@ func (c *Client) ListVPCEConfigurationsRequest(input *ListVPCEConfigurationsInpu
 // ListVPCEConfigurations API operation.
 type ListVPCEConfigurationsRequest struct {
 	*aws.Request
-	Input *ListVPCEConfigurationsInput
-	Copy  func(*ListVPCEConfigurationsInput) ListVPCEConfigurationsRequest
+	Input *types.ListVPCEConfigurationsInput
+	Copy  func(*types.ListVPCEConfigurationsInput) ListVPCEConfigurationsRequest
 }
 
 // Send marshals and sends the ListVPCEConfigurations API request.
@@ -104,7 +57,7 @@ func (r ListVPCEConfigurationsRequest) Send(ctx context.Context) (*ListVPCEConfi
 	}
 
 	resp := &ListVPCEConfigurationsResponse{
-		ListVPCEConfigurationsOutput: r.Request.Data.(*ListVPCEConfigurationsOutput),
+		ListVPCEConfigurationsOutput: r.Request.Data.(*types.ListVPCEConfigurationsOutput),
 		response:                     &aws.Response{Request: r.Request},
 	}
 
@@ -114,7 +67,7 @@ func (r ListVPCEConfigurationsRequest) Send(ctx context.Context) (*ListVPCEConfi
 // ListVPCEConfigurationsResponse is the response type for the
 // ListVPCEConfigurations API operation.
 type ListVPCEConfigurationsResponse struct {
-	*ListVPCEConfigurationsOutput
+	*types.ListVPCEConfigurationsOutput
 
 	response *aws.Response
 }

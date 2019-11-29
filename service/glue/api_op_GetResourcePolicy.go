@@ -4,41 +4,10 @@ package glue
 
 import (
 	"context"
-	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/glue/types"
 )
-
-type GetResourcePolicyInput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s GetResourcePolicyInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type GetResourcePolicyOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The date and time at which the policy was created.
-	CreateTime *time.Time `type:"timestamp"`
-
-	// Contains the hash value associated with this policy.
-	PolicyHash *string `min:"1" type:"string"`
-
-	// Contains the requested policy document, in JSON format.
-	PolicyInJson *string `min:"2" type:"string"`
-
-	// The date and time at which the policy was last updated.
-	UpdateTime *time.Time `type:"timestamp"`
-}
-
-// String returns the string representation
-func (s GetResourcePolicyOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetResourcePolicy = "GetResourcePolicy"
 
@@ -55,7 +24,7 @@ const opGetResourcePolicy = "GetResourcePolicy"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetResourcePolicy
-func (c *Client) GetResourcePolicyRequest(input *GetResourcePolicyInput) GetResourcePolicyRequest {
+func (c *Client) GetResourcePolicyRequest(input *types.GetResourcePolicyInput) GetResourcePolicyRequest {
 	op := &aws.Operation{
 		Name:       opGetResourcePolicy,
 		HTTPMethod: "POST",
@@ -63,10 +32,10 @@ func (c *Client) GetResourcePolicyRequest(input *GetResourcePolicyInput) GetReso
 	}
 
 	if input == nil {
-		input = &GetResourcePolicyInput{}
+		input = &types.GetResourcePolicyInput{}
 	}
 
-	req := c.newRequest(op, input, &GetResourcePolicyOutput{})
+	req := c.newRequest(op, input, &types.GetResourcePolicyOutput{})
 	return GetResourcePolicyRequest{Request: req, Input: input, Copy: c.GetResourcePolicyRequest}
 }
 
@@ -74,8 +43,8 @@ func (c *Client) GetResourcePolicyRequest(input *GetResourcePolicyInput) GetReso
 // GetResourcePolicy API operation.
 type GetResourcePolicyRequest struct {
 	*aws.Request
-	Input *GetResourcePolicyInput
-	Copy  func(*GetResourcePolicyInput) GetResourcePolicyRequest
+	Input *types.GetResourcePolicyInput
+	Copy  func(*types.GetResourcePolicyInput) GetResourcePolicyRequest
 }
 
 // Send marshals and sends the GetResourcePolicy API request.
@@ -87,7 +56,7 @@ func (r GetResourcePolicyRequest) Send(ctx context.Context) (*GetResourcePolicyR
 	}
 
 	resp := &GetResourcePolicyResponse{
-		GetResourcePolicyOutput: r.Request.Data.(*GetResourcePolicyOutput),
+		GetResourcePolicyOutput: r.Request.Data.(*types.GetResourcePolicyOutput),
 		response:                &aws.Response{Request: r.Request},
 	}
 
@@ -97,7 +66,7 @@ func (r GetResourcePolicyRequest) Send(ctx context.Context) (*GetResourcePolicyR
 // GetResourcePolicyResponse is the response type for the
 // GetResourcePolicy API operation.
 type GetResourcePolicyResponse struct {
-	*GetResourcePolicyOutput
+	*types.GetResourcePolicyOutput
 
 	response *aws.Response
 }

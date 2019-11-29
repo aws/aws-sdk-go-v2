@@ -6,57 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/elasticache/types"
 )
-
-type BatchStopUpdateActionInput struct {
-	_ struct{} `type:"structure"`
-
-	// The cache cluster IDs
-	CacheClusterIds []string `type:"list"`
-
-	// The replication group IDs
-	ReplicationGroupIds []string `type:"list"`
-
-	// The unique ID of the service update
-	//
-	// ServiceUpdateName is a required field
-	ServiceUpdateName *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s BatchStopUpdateActionInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *BatchStopUpdateActionInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "BatchStopUpdateActionInput"}
-
-	if s.ServiceUpdateName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ServiceUpdateName"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type BatchStopUpdateActionOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Update actions that have been processed successfully
-	ProcessedUpdateActions []ProcessedUpdateAction `locationNameList:"ProcessedUpdateAction" type:"list"`
-
-	// Update actions that haven't been processed successfully
-	UnprocessedUpdateActions []UnprocessedUpdateAction `locationNameList:"UnprocessedUpdateAction" type:"list"`
-}
-
-// String returns the string representation
-func (s BatchStopUpdateActionOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opBatchStopUpdateAction = "BatchStopUpdateAction"
 
@@ -74,7 +25,7 @@ const opBatchStopUpdateAction = "BatchStopUpdateAction"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/BatchStopUpdateAction
-func (c *Client) BatchStopUpdateActionRequest(input *BatchStopUpdateActionInput) BatchStopUpdateActionRequest {
+func (c *Client) BatchStopUpdateActionRequest(input *types.BatchStopUpdateActionInput) BatchStopUpdateActionRequest {
 	op := &aws.Operation{
 		Name:       opBatchStopUpdateAction,
 		HTTPMethod: "POST",
@@ -82,10 +33,10 @@ func (c *Client) BatchStopUpdateActionRequest(input *BatchStopUpdateActionInput)
 	}
 
 	if input == nil {
-		input = &BatchStopUpdateActionInput{}
+		input = &types.BatchStopUpdateActionInput{}
 	}
 
-	req := c.newRequest(op, input, &BatchStopUpdateActionOutput{})
+	req := c.newRequest(op, input, &types.BatchStopUpdateActionOutput{})
 	return BatchStopUpdateActionRequest{Request: req, Input: input, Copy: c.BatchStopUpdateActionRequest}
 }
 
@@ -93,8 +44,8 @@ func (c *Client) BatchStopUpdateActionRequest(input *BatchStopUpdateActionInput)
 // BatchStopUpdateAction API operation.
 type BatchStopUpdateActionRequest struct {
 	*aws.Request
-	Input *BatchStopUpdateActionInput
-	Copy  func(*BatchStopUpdateActionInput) BatchStopUpdateActionRequest
+	Input *types.BatchStopUpdateActionInput
+	Copy  func(*types.BatchStopUpdateActionInput) BatchStopUpdateActionRequest
 }
 
 // Send marshals and sends the BatchStopUpdateAction API request.
@@ -106,7 +57,7 @@ func (r BatchStopUpdateActionRequest) Send(ctx context.Context) (*BatchStopUpdat
 	}
 
 	resp := &BatchStopUpdateActionResponse{
-		BatchStopUpdateActionOutput: r.Request.Data.(*BatchStopUpdateActionOutput),
+		BatchStopUpdateActionOutput: r.Request.Data.(*types.BatchStopUpdateActionOutput),
 		response:                    &aws.Response{Request: r.Request},
 	}
 
@@ -116,7 +67,7 @@ func (r BatchStopUpdateActionRequest) Send(ctx context.Context) (*BatchStopUpdat
 // BatchStopUpdateActionResponse is the response type for the
 // BatchStopUpdateAction API operation.
 type BatchStopUpdateActionResponse struct {
-	*BatchStopUpdateActionOutput
+	*types.BatchStopUpdateActionOutput
 
 	response *aws.Response
 }

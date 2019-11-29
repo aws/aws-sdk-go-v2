@@ -6,60 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/directoryservice/types"
 )
-
-// Removes the specified directory as a publisher to the specified SNS topic.
-type DeregisterEventTopicInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Directory ID to remove as a publisher. This directory will no longer
-	// send messages to the specified SNS topic.
-	//
-	// DirectoryId is a required field
-	DirectoryId *string `type:"string" required:"true"`
-
-	// The name of the SNS topic from which to remove the directory as a publisher.
-	//
-	// TopicName is a required field
-	TopicName *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeregisterEventTopicInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeregisterEventTopicInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeregisterEventTopicInput"}
-
-	if s.DirectoryId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DirectoryId"))
-	}
-
-	if s.TopicName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("TopicName"))
-	}
-	if s.TopicName != nil && len(*s.TopicName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("TopicName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// The result of a DeregisterEventTopic request.
-type DeregisterEventTopicOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeregisterEventTopicOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeregisterEventTopic = "DeregisterEventTopic"
 
@@ -76,7 +24,7 @@ const opDeregisterEventTopic = "DeregisterEventTopic"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DeregisterEventTopic
-func (c *Client) DeregisterEventTopicRequest(input *DeregisterEventTopicInput) DeregisterEventTopicRequest {
+func (c *Client) DeregisterEventTopicRequest(input *types.DeregisterEventTopicInput) DeregisterEventTopicRequest {
 	op := &aws.Operation{
 		Name:       opDeregisterEventTopic,
 		HTTPMethod: "POST",
@@ -84,10 +32,10 @@ func (c *Client) DeregisterEventTopicRequest(input *DeregisterEventTopicInput) D
 	}
 
 	if input == nil {
-		input = &DeregisterEventTopicInput{}
+		input = &types.DeregisterEventTopicInput{}
 	}
 
-	req := c.newRequest(op, input, &DeregisterEventTopicOutput{})
+	req := c.newRequest(op, input, &types.DeregisterEventTopicOutput{})
 	return DeregisterEventTopicRequest{Request: req, Input: input, Copy: c.DeregisterEventTopicRequest}
 }
 
@@ -95,8 +43,8 @@ func (c *Client) DeregisterEventTopicRequest(input *DeregisterEventTopicInput) D
 // DeregisterEventTopic API operation.
 type DeregisterEventTopicRequest struct {
 	*aws.Request
-	Input *DeregisterEventTopicInput
-	Copy  func(*DeregisterEventTopicInput) DeregisterEventTopicRequest
+	Input *types.DeregisterEventTopicInput
+	Copy  func(*types.DeregisterEventTopicInput) DeregisterEventTopicRequest
 }
 
 // Send marshals and sends the DeregisterEventTopic API request.
@@ -108,7 +56,7 @@ func (r DeregisterEventTopicRequest) Send(ctx context.Context) (*DeregisterEvent
 	}
 
 	resp := &DeregisterEventTopicResponse{
-		DeregisterEventTopicOutput: r.Request.Data.(*DeregisterEventTopicOutput),
+		DeregisterEventTopicOutput: r.Request.Data.(*types.DeregisterEventTopicOutput),
 		response:                   &aws.Response{Request: r.Request},
 	}
 
@@ -118,7 +66,7 @@ func (r DeregisterEventTopicRequest) Send(ctx context.Context) (*DeregisterEvent
 // DeregisterEventTopicResponse is the response type for the
 // DeregisterEventTopic API operation.
 type DeregisterEventTopicResponse struct {
-	*DeregisterEventTopicOutput
+	*types.DeregisterEventTopicOutput
 
 	response *aws.Response
 }

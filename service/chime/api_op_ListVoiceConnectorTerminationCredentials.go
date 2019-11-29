@@ -6,79 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/chime/types"
 )
-
-type ListVoiceConnectorTerminationCredentialsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Chime Voice Connector ID.
-	//
-	// VoiceConnectorId is a required field
-	VoiceConnectorId *string `location:"uri" locationName:"voiceConnectorId" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s ListVoiceConnectorTerminationCredentialsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListVoiceConnectorTerminationCredentialsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListVoiceConnectorTerminationCredentialsInput"}
-
-	if s.VoiceConnectorId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("VoiceConnectorId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListVoiceConnectorTerminationCredentialsInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.VoiceConnectorId != nil {
-		v := *s.VoiceConnectorId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "voiceConnectorId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type ListVoiceConnectorTerminationCredentialsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A list of user names.
-	Usernames []string `type:"list"`
-}
-
-// String returns the string representation
-func (s ListVoiceConnectorTerminationCredentialsOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListVoiceConnectorTerminationCredentialsOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.Usernames != nil {
-		v := s.Usernames
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "Usernames", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
-		}
-		ls0.End()
-
-	}
-	return nil
-}
 
 const opListVoiceConnectorTerminationCredentials = "ListVoiceConnectorTerminationCredentials"
 
@@ -95,7 +24,7 @@ const opListVoiceConnectorTerminationCredentials = "ListVoiceConnectorTerminatio
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/ListVoiceConnectorTerminationCredentials
-func (c *Client) ListVoiceConnectorTerminationCredentialsRequest(input *ListVoiceConnectorTerminationCredentialsInput) ListVoiceConnectorTerminationCredentialsRequest {
+func (c *Client) ListVoiceConnectorTerminationCredentialsRequest(input *types.ListVoiceConnectorTerminationCredentialsInput) ListVoiceConnectorTerminationCredentialsRequest {
 	op := &aws.Operation{
 		Name:       opListVoiceConnectorTerminationCredentials,
 		HTTPMethod: "GET",
@@ -103,10 +32,10 @@ func (c *Client) ListVoiceConnectorTerminationCredentialsRequest(input *ListVoic
 	}
 
 	if input == nil {
-		input = &ListVoiceConnectorTerminationCredentialsInput{}
+		input = &types.ListVoiceConnectorTerminationCredentialsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListVoiceConnectorTerminationCredentialsOutput{})
+	req := c.newRequest(op, input, &types.ListVoiceConnectorTerminationCredentialsOutput{})
 	return ListVoiceConnectorTerminationCredentialsRequest{Request: req, Input: input, Copy: c.ListVoiceConnectorTerminationCredentialsRequest}
 }
 
@@ -114,8 +43,8 @@ func (c *Client) ListVoiceConnectorTerminationCredentialsRequest(input *ListVoic
 // ListVoiceConnectorTerminationCredentials API operation.
 type ListVoiceConnectorTerminationCredentialsRequest struct {
 	*aws.Request
-	Input *ListVoiceConnectorTerminationCredentialsInput
-	Copy  func(*ListVoiceConnectorTerminationCredentialsInput) ListVoiceConnectorTerminationCredentialsRequest
+	Input *types.ListVoiceConnectorTerminationCredentialsInput
+	Copy  func(*types.ListVoiceConnectorTerminationCredentialsInput) ListVoiceConnectorTerminationCredentialsRequest
 }
 
 // Send marshals and sends the ListVoiceConnectorTerminationCredentials API request.
@@ -127,7 +56,7 @@ func (r ListVoiceConnectorTerminationCredentialsRequest) Send(ctx context.Contex
 	}
 
 	resp := &ListVoiceConnectorTerminationCredentialsResponse{
-		ListVoiceConnectorTerminationCredentialsOutput: r.Request.Data.(*ListVoiceConnectorTerminationCredentialsOutput),
+		ListVoiceConnectorTerminationCredentialsOutput: r.Request.Data.(*types.ListVoiceConnectorTerminationCredentialsOutput),
 		response: &aws.Response{Request: r.Request},
 	}
 
@@ -137,7 +66,7 @@ func (r ListVoiceConnectorTerminationCredentialsRequest) Send(ctx context.Contex
 // ListVoiceConnectorTerminationCredentialsResponse is the response type for the
 // ListVoiceConnectorTerminationCredentials API operation.
 type ListVoiceConnectorTerminationCredentialsResponse struct {
-	*ListVoiceConnectorTerminationCredentialsOutput
+	*types.ListVoiceConnectorTerminationCredentialsOutput
 
 	response *aws.Response
 }

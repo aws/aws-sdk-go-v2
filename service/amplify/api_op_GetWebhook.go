@@ -6,77 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/amplify/types"
 )
-
-// Request structure for the get webhook request.
-type GetWebhookInput struct {
-	_ struct{} `type:"structure"`
-
-	// Unique Id for a webhook.
-	//
-	// WebhookId is a required field
-	WebhookId *string `location:"uri" locationName:"webhookId" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetWebhookInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetWebhookInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetWebhookInput"}
-
-	if s.WebhookId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("WebhookId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetWebhookInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.WebhookId != nil {
-		v := *s.WebhookId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "webhookId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-// Result structure for the get webhook request.
-type GetWebhookOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Webhook structure.
-	//
-	// Webhook is a required field
-	Webhook *Webhook `locationName:"webhook" type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s GetWebhookOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetWebhookOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.Webhook != nil {
-		v := s.Webhook
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "webhook", v, metadata)
-	}
-	return nil
-}
 
 const opGetWebhook = "GetWebhook"
 
@@ -93,7 +24,7 @@ const opGetWebhook = "GetWebhook"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/GetWebhook
-func (c *Client) GetWebhookRequest(input *GetWebhookInput) GetWebhookRequest {
+func (c *Client) GetWebhookRequest(input *types.GetWebhookInput) GetWebhookRequest {
 	op := &aws.Operation{
 		Name:       opGetWebhook,
 		HTTPMethod: "GET",
@@ -101,10 +32,10 @@ func (c *Client) GetWebhookRequest(input *GetWebhookInput) GetWebhookRequest {
 	}
 
 	if input == nil {
-		input = &GetWebhookInput{}
+		input = &types.GetWebhookInput{}
 	}
 
-	req := c.newRequest(op, input, &GetWebhookOutput{})
+	req := c.newRequest(op, input, &types.GetWebhookOutput{})
 	return GetWebhookRequest{Request: req, Input: input, Copy: c.GetWebhookRequest}
 }
 
@@ -112,8 +43,8 @@ func (c *Client) GetWebhookRequest(input *GetWebhookInput) GetWebhookRequest {
 // GetWebhook API operation.
 type GetWebhookRequest struct {
 	*aws.Request
-	Input *GetWebhookInput
-	Copy  func(*GetWebhookInput) GetWebhookRequest
+	Input *types.GetWebhookInput
+	Copy  func(*types.GetWebhookInput) GetWebhookRequest
 }
 
 // Send marshals and sends the GetWebhook API request.
@@ -125,7 +56,7 @@ func (r GetWebhookRequest) Send(ctx context.Context) (*GetWebhookResponse, error
 	}
 
 	resp := &GetWebhookResponse{
-		GetWebhookOutput: r.Request.Data.(*GetWebhookOutput),
+		GetWebhookOutput: r.Request.Data.(*types.GetWebhookOutput),
 		response:         &aws.Response{Request: r.Request},
 	}
 
@@ -135,7 +66,7 @@ func (r GetWebhookRequest) Send(ctx context.Context) (*GetWebhookResponse, error
 // GetWebhookResponse is the response type for the
 // GetWebhook API operation.
 type GetWebhookResponse struct {
-	*GetWebhookOutput
+	*types.GetWebhookOutput
 
 	response *aws.Response
 }

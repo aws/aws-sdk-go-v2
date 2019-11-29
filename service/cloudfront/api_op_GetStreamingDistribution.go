@@ -6,84 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/cloudfront/types"
 )
-
-// The request to get a streaming distribution's information.
-type GetStreamingDistributionInput struct {
-	_ struct{} `type:"structure"`
-
-	// The streaming distribution's ID.
-	//
-	// Id is a required field
-	Id *string `location:"uri" locationName:"Id" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetStreamingDistributionInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetStreamingDistributionInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetStreamingDistributionInput"}
-
-	if s.Id == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Id"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetStreamingDistributionInput) MarshalFields(e protocol.FieldEncoder) error {
-
-	if s.Id != nil {
-		v := *s.Id
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "Id", protocol.StringValue(v), metadata)
-	}
-	return nil
-}
-
-// The returned result of the corresponding request.
-type GetStreamingDistributionOutput struct {
-	_ struct{} `type:"structure" payload:"StreamingDistribution"`
-
-	// The current version of the streaming distribution's information. For example:
-	// E2QWRUHAPOMQZL.
-	ETag *string `location:"header" locationName:"ETag" type:"string"`
-
-	// The streaming distribution's information.
-	StreamingDistribution *StreamingDistribution `type:"structure"`
-}
-
-// String returns the string representation
-func (s GetStreamingDistributionOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetStreamingDistributionOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.ETag != nil {
-		v := *s.ETag
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "ETag", protocol.StringValue(v), metadata)
-	}
-	if s.StreamingDistribution != nil {
-		v := s.StreamingDistribution
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.PayloadTarget, "StreamingDistribution", v, metadata)
-	}
-	return nil
-}
 
 const opGetStreamingDistribution = "GetStreamingDistribution2019_03_26"
 
@@ -101,7 +25,7 @@ const opGetStreamingDistribution = "GetStreamingDistribution2019_03_26"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/GetStreamingDistribution
-func (c *Client) GetStreamingDistributionRequest(input *GetStreamingDistributionInput) GetStreamingDistributionRequest {
+func (c *Client) GetStreamingDistributionRequest(input *types.GetStreamingDistributionInput) GetStreamingDistributionRequest {
 	op := &aws.Operation{
 		Name:       opGetStreamingDistribution,
 		HTTPMethod: "GET",
@@ -109,10 +33,10 @@ func (c *Client) GetStreamingDistributionRequest(input *GetStreamingDistribution
 	}
 
 	if input == nil {
-		input = &GetStreamingDistributionInput{}
+		input = &types.GetStreamingDistributionInput{}
 	}
 
-	req := c.newRequest(op, input, &GetStreamingDistributionOutput{})
+	req := c.newRequest(op, input, &types.GetStreamingDistributionOutput{})
 	return GetStreamingDistributionRequest{Request: req, Input: input, Copy: c.GetStreamingDistributionRequest}
 }
 
@@ -120,8 +44,8 @@ func (c *Client) GetStreamingDistributionRequest(input *GetStreamingDistribution
 // GetStreamingDistribution API operation.
 type GetStreamingDistributionRequest struct {
 	*aws.Request
-	Input *GetStreamingDistributionInput
-	Copy  func(*GetStreamingDistributionInput) GetStreamingDistributionRequest
+	Input *types.GetStreamingDistributionInput
+	Copy  func(*types.GetStreamingDistributionInput) GetStreamingDistributionRequest
 }
 
 // Send marshals and sends the GetStreamingDistribution API request.
@@ -133,7 +57,7 @@ func (r GetStreamingDistributionRequest) Send(ctx context.Context) (*GetStreamin
 	}
 
 	resp := &GetStreamingDistributionResponse{
-		GetStreamingDistributionOutput: r.Request.Data.(*GetStreamingDistributionOutput),
+		GetStreamingDistributionOutput: r.Request.Data.(*types.GetStreamingDistributionOutput),
 		response:                       &aws.Response{Request: r.Request},
 	}
 
@@ -143,7 +67,7 @@ func (r GetStreamingDistributionRequest) Send(ctx context.Context) (*GetStreamin
 // GetStreamingDistributionResponse is the response type for the
 // GetStreamingDistribution API operation.
 type GetStreamingDistributionResponse struct {
-	*GetStreamingDistributionOutput
+	*types.GetStreamingDistributionOutput
 
 	response *aws.Response
 }

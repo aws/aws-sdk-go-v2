@@ -6,47 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
+	"github.com/aws/aws-sdk-go-v2/service/opsworks/types"
 )
-
-type DeregisterElasticIpInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Elastic IP address.
-	//
-	// ElasticIp is a required field
-	ElasticIp *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeregisterElasticIpInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeregisterElasticIpInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeregisterElasticIpInput"}
-
-	if s.ElasticIp == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ElasticIp"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeregisterElasticIpOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeregisterElasticIpOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeregisterElasticIp = "DeregisterElasticIp"
 
@@ -69,7 +32,7 @@ const opDeregisterElasticIp = "DeregisterElasticIp"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DeregisterElasticIp
-func (c *Client) DeregisterElasticIpRequest(input *DeregisterElasticIpInput) DeregisterElasticIpRequest {
+func (c *Client) DeregisterElasticIpRequest(input *types.DeregisterElasticIpInput) DeregisterElasticIpRequest {
 	op := &aws.Operation{
 		Name:       opDeregisterElasticIp,
 		HTTPMethod: "POST",
@@ -77,10 +40,10 @@ func (c *Client) DeregisterElasticIpRequest(input *DeregisterElasticIpInput) Der
 	}
 
 	if input == nil {
-		input = &DeregisterElasticIpInput{}
+		input = &types.DeregisterElasticIpInput{}
 	}
 
-	req := c.newRequest(op, input, &DeregisterElasticIpOutput{})
+	req := c.newRequest(op, input, &types.DeregisterElasticIpOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return DeregisterElasticIpRequest{Request: req, Input: input, Copy: c.DeregisterElasticIpRequest}
@@ -90,8 +53,8 @@ func (c *Client) DeregisterElasticIpRequest(input *DeregisterElasticIpInput) Der
 // DeregisterElasticIp API operation.
 type DeregisterElasticIpRequest struct {
 	*aws.Request
-	Input *DeregisterElasticIpInput
-	Copy  func(*DeregisterElasticIpInput) DeregisterElasticIpRequest
+	Input *types.DeregisterElasticIpInput
+	Copy  func(*types.DeregisterElasticIpInput) DeregisterElasticIpRequest
 }
 
 // Send marshals and sends the DeregisterElasticIp API request.
@@ -103,7 +66,7 @@ func (r DeregisterElasticIpRequest) Send(ctx context.Context) (*DeregisterElasti
 	}
 
 	resp := &DeregisterElasticIpResponse{
-		DeregisterElasticIpOutput: r.Request.Data.(*DeregisterElasticIpOutput),
+		DeregisterElasticIpOutput: r.Request.Data.(*types.DeregisterElasticIpOutput),
 		response:                  &aws.Response{Request: r.Request},
 	}
 
@@ -113,7 +76,7 @@ func (r DeregisterElasticIpRequest) Send(ctx context.Context) (*DeregisterElasti
 // DeregisterElasticIpResponse is the response type for the
 // DeregisterElasticIp API operation.
 type DeregisterElasticIpResponse struct {
-	*DeregisterElasticIpOutput
+	*types.DeregisterElasticIpOutput
 
 	response *aws.Response
 }

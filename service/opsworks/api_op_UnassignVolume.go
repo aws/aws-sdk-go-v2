@@ -6,47 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
+	"github.com/aws/aws-sdk-go-v2/service/opsworks/types"
 )
-
-type UnassignVolumeInput struct {
-	_ struct{} `type:"structure"`
-
-	// The volume ID.
-	//
-	// VolumeId is a required field
-	VolumeId *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s UnassignVolumeInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UnassignVolumeInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UnassignVolumeInput"}
-
-	if s.VolumeId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("VolumeId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type UnassignVolumeOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s UnassignVolumeOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opUnassignVolume = "UnassignVolume"
 
@@ -69,7 +32,7 @@ const opUnassignVolume = "UnassignVolume"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/UnassignVolume
-func (c *Client) UnassignVolumeRequest(input *UnassignVolumeInput) UnassignVolumeRequest {
+func (c *Client) UnassignVolumeRequest(input *types.UnassignVolumeInput) UnassignVolumeRequest {
 	op := &aws.Operation{
 		Name:       opUnassignVolume,
 		HTTPMethod: "POST",
@@ -77,10 +40,10 @@ func (c *Client) UnassignVolumeRequest(input *UnassignVolumeInput) UnassignVolum
 	}
 
 	if input == nil {
-		input = &UnassignVolumeInput{}
+		input = &types.UnassignVolumeInput{}
 	}
 
-	req := c.newRequest(op, input, &UnassignVolumeOutput{})
+	req := c.newRequest(op, input, &types.UnassignVolumeOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return UnassignVolumeRequest{Request: req, Input: input, Copy: c.UnassignVolumeRequest}
@@ -90,8 +53,8 @@ func (c *Client) UnassignVolumeRequest(input *UnassignVolumeInput) UnassignVolum
 // UnassignVolume API operation.
 type UnassignVolumeRequest struct {
 	*aws.Request
-	Input *UnassignVolumeInput
-	Copy  func(*UnassignVolumeInput) UnassignVolumeRequest
+	Input *types.UnassignVolumeInput
+	Copy  func(*types.UnassignVolumeInput) UnassignVolumeRequest
 }
 
 // Send marshals and sends the UnassignVolume API request.
@@ -103,7 +66,7 @@ func (r UnassignVolumeRequest) Send(ctx context.Context) (*UnassignVolumeRespons
 	}
 
 	resp := &UnassignVolumeResponse{
-		UnassignVolumeOutput: r.Request.Data.(*UnassignVolumeOutput),
+		UnassignVolumeOutput: r.Request.Data.(*types.UnassignVolumeOutput),
 		response:             &aws.Response{Request: r.Request},
 	}
 
@@ -113,7 +76,7 @@ func (r UnassignVolumeRequest) Send(ctx context.Context) (*UnassignVolumeRespons
 // UnassignVolumeResponse is the response type for the
 // UnassignVolume API operation.
 type UnassignVolumeResponse struct {
-	*UnassignVolumeOutput
+	*types.UnassignVolumeOutput
 
 	response *aws.Response
 }

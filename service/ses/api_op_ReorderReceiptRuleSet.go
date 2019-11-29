@@ -6,59 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ses/types"
 )
-
-// Represents a request to reorder the receipt rules within a receipt rule set.
-// You use receipt rule sets to receive email with Amazon SES. For more information,
-// see the Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-concepts.html).
-type ReorderReceiptRuleSetInput struct {
-	_ struct{} `type:"structure"`
-
-	// A list of the specified receipt rule set's receipt rules in the order that
-	// you want to put them.
-	//
-	// RuleNames is a required field
-	RuleNames []string `type:"list" required:"true"`
-
-	// The name of the receipt rule set to reorder.
-	//
-	// RuleSetName is a required field
-	RuleSetName *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s ReorderReceiptRuleSetInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ReorderReceiptRuleSetInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ReorderReceiptRuleSetInput"}
-
-	if s.RuleNames == nil {
-		invalidParams.Add(aws.NewErrParamRequired("RuleNames"))
-	}
-
-	if s.RuleSetName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("RuleSetName"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// An empty element returned on a successful request.
-type ReorderReceiptRuleSetOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s ReorderReceiptRuleSetOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opReorderReceiptRuleSet = "ReorderReceiptRuleSet"
 
@@ -84,7 +33,7 @@ const opReorderReceiptRuleSet = "ReorderReceiptRuleSet"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/ReorderReceiptRuleSet
-func (c *Client) ReorderReceiptRuleSetRequest(input *ReorderReceiptRuleSetInput) ReorderReceiptRuleSetRequest {
+func (c *Client) ReorderReceiptRuleSetRequest(input *types.ReorderReceiptRuleSetInput) ReorderReceiptRuleSetRequest {
 	op := &aws.Operation{
 		Name:       opReorderReceiptRuleSet,
 		HTTPMethod: "POST",
@@ -92,10 +41,10 @@ func (c *Client) ReorderReceiptRuleSetRequest(input *ReorderReceiptRuleSetInput)
 	}
 
 	if input == nil {
-		input = &ReorderReceiptRuleSetInput{}
+		input = &types.ReorderReceiptRuleSetInput{}
 	}
 
-	req := c.newRequest(op, input, &ReorderReceiptRuleSetOutput{})
+	req := c.newRequest(op, input, &types.ReorderReceiptRuleSetOutput{})
 	return ReorderReceiptRuleSetRequest{Request: req, Input: input, Copy: c.ReorderReceiptRuleSetRequest}
 }
 
@@ -103,8 +52,8 @@ func (c *Client) ReorderReceiptRuleSetRequest(input *ReorderReceiptRuleSetInput)
 // ReorderReceiptRuleSet API operation.
 type ReorderReceiptRuleSetRequest struct {
 	*aws.Request
-	Input *ReorderReceiptRuleSetInput
-	Copy  func(*ReorderReceiptRuleSetInput) ReorderReceiptRuleSetRequest
+	Input *types.ReorderReceiptRuleSetInput
+	Copy  func(*types.ReorderReceiptRuleSetInput) ReorderReceiptRuleSetRequest
 }
 
 // Send marshals and sends the ReorderReceiptRuleSet API request.
@@ -116,7 +65,7 @@ func (r ReorderReceiptRuleSetRequest) Send(ctx context.Context) (*ReorderReceipt
 	}
 
 	resp := &ReorderReceiptRuleSetResponse{
-		ReorderReceiptRuleSetOutput: r.Request.Data.(*ReorderReceiptRuleSetOutput),
+		ReorderReceiptRuleSetOutput: r.Request.Data.(*types.ReorderReceiptRuleSetOutput),
 		response:                    &aws.Response{Request: r.Request},
 	}
 
@@ -126,7 +75,7 @@ func (r ReorderReceiptRuleSetRequest) Send(ctx context.Context) (*ReorderReceipt
 // ReorderReceiptRuleSetResponse is the response type for the
 // ReorderReceiptRuleSet API operation.
 type ReorderReceiptRuleSetResponse struct {
-	*ReorderReceiptRuleSetOutput
+	*types.ReorderReceiptRuleSetOutput
 
 	response *aws.Response
 }

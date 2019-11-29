@@ -6,96 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/elasticsearchservice/types"
 )
-
-// Container for parameters to DescribeReservedElasticsearchInstances
-type DescribeReservedElasticsearchInstancesInput struct {
-	_ struct{} `type:"structure"`
-
-	// Set this value to limit the number of results returned. If not specified,
-	// defaults to 100.
-	MaxResults *int64 `location:"querystring" locationName:"maxResults" type:"integer"`
-
-	// NextToken should be sent in case if earlier API call produced result containing
-	// NextToken. It is used for pagination.
-	NextToken *string `location:"querystring" locationName:"nextToken" type:"string"`
-
-	// The reserved instance identifier filter value. Use this parameter to show
-	// only the reservation that matches the specified reserved Elasticsearch instance
-	// ID.
-	ReservedElasticsearchInstanceId *string `location:"querystring" locationName:"reservationId" type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeReservedElasticsearchInstancesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DescribeReservedElasticsearchInstancesInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.MaxResults != nil {
-		v := *s.MaxResults
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "maxResults", protocol.Int64Value(v), metadata)
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.ReservedElasticsearchInstanceId != nil {
-		v := *s.ReservedElasticsearchInstanceId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "reservationId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-// Container for results from DescribeReservedElasticsearchInstances
-type DescribeReservedElasticsearchInstancesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Provides an identifier to allow retrieval of paginated results.
-	NextToken *string `type:"string"`
-
-	// List of reserved Elasticsearch instances.
-	ReservedElasticsearchInstances []ReservedElasticsearchInstance `type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeReservedElasticsearchInstancesOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DescribeReservedElasticsearchInstancesOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.ReservedElasticsearchInstances != nil {
-		v := s.ReservedElasticsearchInstances
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "ReservedElasticsearchInstances", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	return nil
-}
 
 const opDescribeReservedElasticsearchInstances = "DescribeReservedElasticsearchInstances"
 
@@ -110,7 +22,7 @@ const opDescribeReservedElasticsearchInstances = "DescribeReservedElasticsearchI
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) DescribeReservedElasticsearchInstancesRequest(input *DescribeReservedElasticsearchInstancesInput) DescribeReservedElasticsearchInstancesRequest {
+func (c *Client) DescribeReservedElasticsearchInstancesRequest(input *types.DescribeReservedElasticsearchInstancesInput) DescribeReservedElasticsearchInstancesRequest {
 	op := &aws.Operation{
 		Name:       opDescribeReservedElasticsearchInstances,
 		HTTPMethod: "GET",
@@ -124,10 +36,10 @@ func (c *Client) DescribeReservedElasticsearchInstancesRequest(input *DescribeRe
 	}
 
 	if input == nil {
-		input = &DescribeReservedElasticsearchInstancesInput{}
+		input = &types.DescribeReservedElasticsearchInstancesInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeReservedElasticsearchInstancesOutput{})
+	req := c.newRequest(op, input, &types.DescribeReservedElasticsearchInstancesOutput{})
 	return DescribeReservedElasticsearchInstancesRequest{Request: req, Input: input, Copy: c.DescribeReservedElasticsearchInstancesRequest}
 }
 
@@ -135,8 +47,8 @@ func (c *Client) DescribeReservedElasticsearchInstancesRequest(input *DescribeRe
 // DescribeReservedElasticsearchInstances API operation.
 type DescribeReservedElasticsearchInstancesRequest struct {
 	*aws.Request
-	Input *DescribeReservedElasticsearchInstancesInput
-	Copy  func(*DescribeReservedElasticsearchInstancesInput) DescribeReservedElasticsearchInstancesRequest
+	Input *types.DescribeReservedElasticsearchInstancesInput
+	Copy  func(*types.DescribeReservedElasticsearchInstancesInput) DescribeReservedElasticsearchInstancesRequest
 }
 
 // Send marshals and sends the DescribeReservedElasticsearchInstances API request.
@@ -148,7 +60,7 @@ func (r DescribeReservedElasticsearchInstancesRequest) Send(ctx context.Context)
 	}
 
 	resp := &DescribeReservedElasticsearchInstancesResponse{
-		DescribeReservedElasticsearchInstancesOutput: r.Request.Data.(*DescribeReservedElasticsearchInstancesOutput),
+		DescribeReservedElasticsearchInstancesOutput: r.Request.Data.(*types.DescribeReservedElasticsearchInstancesOutput),
 		response: &aws.Response{Request: r.Request},
 	}
 
@@ -178,7 +90,7 @@ func NewDescribeReservedElasticsearchInstancesPaginator(req DescribeReservedElas
 	return DescribeReservedElasticsearchInstancesPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *DescribeReservedElasticsearchInstancesInput
+				var inCpy *types.DescribeReservedElasticsearchInstancesInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -198,14 +110,14 @@ type DescribeReservedElasticsearchInstancesPaginator struct {
 	aws.Pager
 }
 
-func (p *DescribeReservedElasticsearchInstancesPaginator) CurrentPage() *DescribeReservedElasticsearchInstancesOutput {
-	return p.Pager.CurrentPage().(*DescribeReservedElasticsearchInstancesOutput)
+func (p *DescribeReservedElasticsearchInstancesPaginator) CurrentPage() *types.DescribeReservedElasticsearchInstancesOutput {
+	return p.Pager.CurrentPage().(*types.DescribeReservedElasticsearchInstancesOutput)
 }
 
 // DescribeReservedElasticsearchInstancesResponse is the response type for the
 // DescribeReservedElasticsearchInstances API operation.
 type DescribeReservedElasticsearchInstancesResponse struct {
-	*DescribeReservedElasticsearchInstancesOutput
+	*types.DescribeReservedElasticsearchInstancesOutput
 
 	response *aws.Response
 }

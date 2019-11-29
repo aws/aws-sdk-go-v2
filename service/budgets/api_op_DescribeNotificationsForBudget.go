@@ -6,81 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/budgets/types"
 )
-
-// Request of DescribeNotificationsForBudget
-type DescribeNotificationsForBudgetInput struct {
-	_ struct{} `type:"structure"`
-
-	// The accountId that is associated with the budget whose notifications you
-	// want descriptions of.
-	//
-	// AccountId is a required field
-	AccountId *string `min:"12" type:"string" required:"true"`
-
-	// The name of the budget whose notifications you want descriptions of.
-	//
-	// BudgetName is a required field
-	BudgetName *string `min:"1" type:"string" required:"true"`
-
-	// An optional integer that represents how many entries a paginated response
-	// contains. The maximum is 100.
-	MaxResults *int64 `min:"1" type:"integer"`
-
-	// The pagination token that you include in your request to indicate the next
-	// set of results that you want to retrieve.
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeNotificationsForBudgetInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeNotificationsForBudgetInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeNotificationsForBudgetInput"}
-
-	if s.AccountId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("AccountId"))
-	}
-	if s.AccountId != nil && len(*s.AccountId) < 12 {
-		invalidParams.Add(aws.NewErrParamMinLen("AccountId", 12))
-	}
-
-	if s.BudgetName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("BudgetName"))
-	}
-	if s.BudgetName != nil && len(*s.BudgetName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("BudgetName", 1))
-	}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Response of GetNotificationsForBudget
-type DescribeNotificationsForBudgetOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The pagination token in the service response that indicates the next set
-	// of results that you can retrieve.
-	NextToken *string `type:"string"`
-
-	// A list of notifications that are associated with a budget.
-	Notifications []Notification `type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeNotificationsForBudgetOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeNotificationsForBudget = "DescribeNotificationsForBudget"
 
@@ -95,7 +22,7 @@ const opDescribeNotificationsForBudget = "DescribeNotificationsForBudget"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) DescribeNotificationsForBudgetRequest(input *DescribeNotificationsForBudgetInput) DescribeNotificationsForBudgetRequest {
+func (c *Client) DescribeNotificationsForBudgetRequest(input *types.DescribeNotificationsForBudgetInput) DescribeNotificationsForBudgetRequest {
 	op := &aws.Operation{
 		Name:       opDescribeNotificationsForBudget,
 		HTTPMethod: "POST",
@@ -103,10 +30,10 @@ func (c *Client) DescribeNotificationsForBudgetRequest(input *DescribeNotificati
 	}
 
 	if input == nil {
-		input = &DescribeNotificationsForBudgetInput{}
+		input = &types.DescribeNotificationsForBudgetInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeNotificationsForBudgetOutput{})
+	req := c.newRequest(op, input, &types.DescribeNotificationsForBudgetOutput{})
 	return DescribeNotificationsForBudgetRequest{Request: req, Input: input, Copy: c.DescribeNotificationsForBudgetRequest}
 }
 
@@ -114,8 +41,8 @@ func (c *Client) DescribeNotificationsForBudgetRequest(input *DescribeNotificati
 // DescribeNotificationsForBudget API operation.
 type DescribeNotificationsForBudgetRequest struct {
 	*aws.Request
-	Input *DescribeNotificationsForBudgetInput
-	Copy  func(*DescribeNotificationsForBudgetInput) DescribeNotificationsForBudgetRequest
+	Input *types.DescribeNotificationsForBudgetInput
+	Copy  func(*types.DescribeNotificationsForBudgetInput) DescribeNotificationsForBudgetRequest
 }
 
 // Send marshals and sends the DescribeNotificationsForBudget API request.
@@ -127,7 +54,7 @@ func (r DescribeNotificationsForBudgetRequest) Send(ctx context.Context) (*Descr
 	}
 
 	resp := &DescribeNotificationsForBudgetResponse{
-		DescribeNotificationsForBudgetOutput: r.Request.Data.(*DescribeNotificationsForBudgetOutput),
+		DescribeNotificationsForBudgetOutput: r.Request.Data.(*types.DescribeNotificationsForBudgetOutput),
 		response:                             &aws.Response{Request: r.Request},
 	}
 
@@ -137,7 +64,7 @@ func (r DescribeNotificationsForBudgetRequest) Send(ctx context.Context) (*Descr
 // DescribeNotificationsForBudgetResponse is the response type for the
 // DescribeNotificationsForBudget API operation.
 type DescribeNotificationsForBudgetResponse struct {
-	*DescribeNotificationsForBudgetOutput
+	*types.DescribeNotificationsForBudgetOutput
 
 	response *aws.Response
 }

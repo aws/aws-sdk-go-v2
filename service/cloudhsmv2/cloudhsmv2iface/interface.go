@@ -10,6 +10,7 @@ package cloudhsmv2iface
 
 import (
 	"github.com/aws/aws-sdk-go-v2/service/cloudhsmv2"
+	"github.com/aws/aws-sdk-go-v2/service/cloudhsmv2/types"
 )
 
 // ClientAPI provides an interface to enable mocking the
@@ -43,7 +44,7 @@ import (
 //    type mockClientClient struct {
 //        cloudhsmv2iface.ClientPI
 //    }
-//    func (m *mockClientClient) CopyBackupToRegion(input *cloudhsmv2.CopyBackupToRegionInput) (*cloudhsmv2.CopyBackupToRegionOutput, error) {
+//    func (m *mockClientClient) CopyBackupToRegion(input *types.CopyBackupToRegionInput) (*types.CopyBackupToRegionOutput, error) {
 //        // mock response/functionality
 //    }
 //
@@ -61,31 +62,31 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type ClientAPI interface {
-	CopyBackupToRegionRequest(*cloudhsmv2.CopyBackupToRegionInput) cloudhsmv2.CopyBackupToRegionRequest
+	CopyBackupToRegionRequest(*types.CopyBackupToRegionInput) cloudhsmv2.CopyBackupToRegionRequest
 
-	CreateClusterRequest(*cloudhsmv2.CreateClusterInput) cloudhsmv2.CreateClusterRequest
+	CreateClusterRequest(*types.CreateClusterInput) cloudhsmv2.CreateClusterRequest
 
-	CreateHsmRequest(*cloudhsmv2.CreateHsmInput) cloudhsmv2.CreateHsmRequest
+	CreateHsmRequest(*types.CreateHsmInput) cloudhsmv2.CreateHsmRequest
 
-	DeleteBackupRequest(*cloudhsmv2.DeleteBackupInput) cloudhsmv2.DeleteBackupRequest
+	DeleteBackupRequest(*types.DeleteBackupInput) cloudhsmv2.DeleteBackupRequest
 
-	DeleteClusterRequest(*cloudhsmv2.DeleteClusterInput) cloudhsmv2.DeleteClusterRequest
+	DeleteClusterRequest(*types.DeleteClusterInput) cloudhsmv2.DeleteClusterRequest
 
-	DeleteHsmRequest(*cloudhsmv2.DeleteHsmInput) cloudhsmv2.DeleteHsmRequest
+	DeleteHsmRequest(*types.DeleteHsmInput) cloudhsmv2.DeleteHsmRequest
 
-	DescribeBackupsRequest(*cloudhsmv2.DescribeBackupsInput) cloudhsmv2.DescribeBackupsRequest
+	DescribeBackupsRequest(*types.DescribeBackupsInput) cloudhsmv2.DescribeBackupsRequest
 
-	DescribeClustersRequest(*cloudhsmv2.DescribeClustersInput) cloudhsmv2.DescribeClustersRequest
+	DescribeClustersRequest(*types.DescribeClustersInput) cloudhsmv2.DescribeClustersRequest
 
-	InitializeClusterRequest(*cloudhsmv2.InitializeClusterInput) cloudhsmv2.InitializeClusterRequest
+	InitializeClusterRequest(*types.InitializeClusterInput) cloudhsmv2.InitializeClusterRequest
 
-	ListTagsRequest(*cloudhsmv2.ListTagsInput) cloudhsmv2.ListTagsRequest
+	ListTagsRequest(*types.ListTagsInput) cloudhsmv2.ListTagsRequest
 
-	RestoreBackupRequest(*cloudhsmv2.RestoreBackupInput) cloudhsmv2.RestoreBackupRequest
+	RestoreBackupRequest(*types.RestoreBackupInput) cloudhsmv2.RestoreBackupRequest
 
-	TagResourceRequest(*cloudhsmv2.TagResourceInput) cloudhsmv2.TagResourceRequest
+	TagResourceRequest(*types.TagResourceInput) cloudhsmv2.TagResourceRequest
 
-	UntagResourceRequest(*cloudhsmv2.UntagResourceInput) cloudhsmv2.UntagResourceRequest
+	UntagResourceRequest(*types.UntagResourceInput) cloudhsmv2.UntagResourceRequest
 }
 
 var _ ClientAPI = (*cloudhsmv2.Client)(nil)

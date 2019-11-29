@@ -6,106 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/route53/types"
 )
-
-// A complex type that contains information about the request to create a hosted
-// zone.
-type GetReusableDelegationSetLimitInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the delegation set that you want to get the limit for.
-	//
-	// DelegationSetId is a required field
-	DelegationSetId *string `location:"uri" locationName:"Id" type:"string" required:"true"`
-
-	// Specify MAX_ZONES_BY_REUSABLE_DELEGATION_SET to get the maximum number of
-	// hosted zones that you can associate with the specified reusable delegation
-	// set.
-	//
-	// Type is a required field
-	Type ReusableDelegationSetLimitType `location:"uri" locationName:"Type" type:"string" required:"true" enum:"true"`
-}
-
-// String returns the string representation
-func (s GetReusableDelegationSetLimitInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetReusableDelegationSetLimitInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetReusableDelegationSetLimitInput"}
-
-	if s.DelegationSetId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DelegationSetId"))
-	}
-	if len(s.Type) == 0 {
-		invalidParams.Add(aws.NewErrParamRequired("Type"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetReusableDelegationSetLimitInput) MarshalFields(e protocol.FieldEncoder) error {
-
-	if s.DelegationSetId != nil {
-		v := *s.DelegationSetId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "Id", protocol.StringValue(v), metadata)
-	}
-	if len(s.Type) > 0 {
-		v := s.Type
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "Type", v, metadata)
-	}
-	return nil
-}
-
-// A complex type that contains the requested limit.
-type GetReusableDelegationSetLimitOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The current number of hosted zones that you can associate with the specified
-	// reusable delegation set.
-	//
-	// Count is a required field
-	Count *int64 `type:"long" required:"true"`
-
-	// The current setting for the limit on hosted zones that you can associate
-	// with the specified reusable delegation set.
-	//
-	// Limit is a required field
-	Limit *ReusableDelegationSetLimit `type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s GetReusableDelegationSetLimitOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetReusableDelegationSetLimitOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.Count != nil {
-		v := *s.Count
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "Count", protocol.Int64Value(v), metadata)
-	}
-	if s.Limit != nil {
-		v := s.Limit
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "Limit", v, metadata)
-	}
-	return nil
-}
 
 const opGetReusableDelegationSetLimit = "GetReusableDelegationSetLimit"
 
@@ -127,7 +29,7 @@ const opGetReusableDelegationSetLimit = "GetReusableDelegationSetLimit"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/GetReusableDelegationSetLimit
-func (c *Client) GetReusableDelegationSetLimitRequest(input *GetReusableDelegationSetLimitInput) GetReusableDelegationSetLimitRequest {
+func (c *Client) GetReusableDelegationSetLimitRequest(input *types.GetReusableDelegationSetLimitInput) GetReusableDelegationSetLimitRequest {
 	op := &aws.Operation{
 		Name:       opGetReusableDelegationSetLimit,
 		HTTPMethod: "GET",
@@ -135,10 +37,10 @@ func (c *Client) GetReusableDelegationSetLimitRequest(input *GetReusableDelegati
 	}
 
 	if input == nil {
-		input = &GetReusableDelegationSetLimitInput{}
+		input = &types.GetReusableDelegationSetLimitInput{}
 	}
 
-	req := c.newRequest(op, input, &GetReusableDelegationSetLimitOutput{})
+	req := c.newRequest(op, input, &types.GetReusableDelegationSetLimitOutput{})
 	return GetReusableDelegationSetLimitRequest{Request: req, Input: input, Copy: c.GetReusableDelegationSetLimitRequest}
 }
 
@@ -146,8 +48,8 @@ func (c *Client) GetReusableDelegationSetLimitRequest(input *GetReusableDelegati
 // GetReusableDelegationSetLimit API operation.
 type GetReusableDelegationSetLimitRequest struct {
 	*aws.Request
-	Input *GetReusableDelegationSetLimitInput
-	Copy  func(*GetReusableDelegationSetLimitInput) GetReusableDelegationSetLimitRequest
+	Input *types.GetReusableDelegationSetLimitInput
+	Copy  func(*types.GetReusableDelegationSetLimitInput) GetReusableDelegationSetLimitRequest
 }
 
 // Send marshals and sends the GetReusableDelegationSetLimit API request.
@@ -159,7 +61,7 @@ func (r GetReusableDelegationSetLimitRequest) Send(ctx context.Context) (*GetReu
 	}
 
 	resp := &GetReusableDelegationSetLimitResponse{
-		GetReusableDelegationSetLimitOutput: r.Request.Data.(*GetReusableDelegationSetLimitOutput),
+		GetReusableDelegationSetLimitOutput: r.Request.Data.(*types.GetReusableDelegationSetLimitOutput),
 		response:                            &aws.Response{Request: r.Request},
 	}
 
@@ -169,7 +71,7 @@ func (r GetReusableDelegationSetLimitRequest) Send(ctx context.Context) (*GetReu
 // GetReusableDelegationSetLimitResponse is the response type for the
 // GetReusableDelegationSetLimit API operation.
 type GetReusableDelegationSetLimitResponse struct {
-	*GetReusableDelegationSetLimitOutput
+	*types.GetReusableDelegationSetLimitOutput
 
 	response *aws.Response
 }

@@ -6,59 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/mturk/types"
 )
-
-type ListHITsInput struct {
-	_ struct{} `type:"structure"`
-
-	MaxResults *int64 `min:"1" type:"integer"`
-
-	// Pagination token
-	NextToken *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s ListHITsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListHITsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListHITsInput"}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-	if s.NextToken != nil && len(*s.NextToken) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ListHITsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The list of HIT elements returned by the query.
-	HITs []HIT `type:"list"`
-
-	// If the previous response was incomplete (because there is more data to retrieve),
-	// Amazon Mechanical Turk returns a pagination token in the response. You can
-	// use this pagination token to retrieve the next set of results.
-	NextToken *string `min:"1" type:"string"`
-
-	// The number of HITs on this page in the filtered results list, equivalent
-	// to the number of HITs being returned by this call.
-	NumResults *int64 `type:"integer"`
-}
-
-// String returns the string representation
-func (s ListHITsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListHITs = "ListHITs"
 
@@ -77,7 +26,7 @@ const opListHITs = "ListHITs"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/ListHITs
-func (c *Client) ListHITsRequest(input *ListHITsInput) ListHITsRequest {
+func (c *Client) ListHITsRequest(input *types.ListHITsInput) ListHITsRequest {
 	op := &aws.Operation{
 		Name:       opListHITs,
 		HTTPMethod: "POST",
@@ -91,10 +40,10 @@ func (c *Client) ListHITsRequest(input *ListHITsInput) ListHITsRequest {
 	}
 
 	if input == nil {
-		input = &ListHITsInput{}
+		input = &types.ListHITsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListHITsOutput{})
+	req := c.newRequest(op, input, &types.ListHITsOutput{})
 	return ListHITsRequest{Request: req, Input: input, Copy: c.ListHITsRequest}
 }
 
@@ -102,8 +51,8 @@ func (c *Client) ListHITsRequest(input *ListHITsInput) ListHITsRequest {
 // ListHITs API operation.
 type ListHITsRequest struct {
 	*aws.Request
-	Input *ListHITsInput
-	Copy  func(*ListHITsInput) ListHITsRequest
+	Input *types.ListHITsInput
+	Copy  func(*types.ListHITsInput) ListHITsRequest
 }
 
 // Send marshals and sends the ListHITs API request.
@@ -115,7 +64,7 @@ func (r ListHITsRequest) Send(ctx context.Context) (*ListHITsResponse, error) {
 	}
 
 	resp := &ListHITsResponse{
-		ListHITsOutput: r.Request.Data.(*ListHITsOutput),
+		ListHITsOutput: r.Request.Data.(*types.ListHITsOutput),
 		response:       &aws.Response{Request: r.Request},
 	}
 
@@ -145,7 +94,7 @@ func NewListHITsPaginator(req ListHITsRequest) ListHITsPaginator {
 	return ListHITsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListHITsInput
+				var inCpy *types.ListHITsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -165,14 +114,14 @@ type ListHITsPaginator struct {
 	aws.Pager
 }
 
-func (p *ListHITsPaginator) CurrentPage() *ListHITsOutput {
-	return p.Pager.CurrentPage().(*ListHITsOutput)
+func (p *ListHITsPaginator) CurrentPage() *types.ListHITsOutput {
+	return p.Pager.CurrentPage().(*types.ListHITsOutput)
 }
 
 // ListHITsResponse is the response type for the
 // ListHITs API operation.
 type ListHITsResponse struct {
-	*ListHITsOutput
+	*types.ListHITsOutput
 
 	response *aws.Response
 }

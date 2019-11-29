@@ -6,88 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/mobile/types"
 )
-
-// Request structure used to request a project be created.
-type CreateProjectInput struct {
-	_ struct{} `type:"structure" payload:"Contents"`
-
-	// ZIP or YAML file which contains configuration settings to be used when creating
-	// the project. This may be the contents of the file downloaded from the URL
-	// provided in an export project operation.
-	Contents []byte `locationName:"contents" type:"blob"`
-
-	// Name of the project.
-	Name *string `location:"querystring" locationName:"name" type:"string"`
-
-	// Default region where project resources should be created.
-	Region *string `location:"querystring" locationName:"region" type:"string"`
-
-	// Unique identifier for an exported snapshot of project configuration. This
-	// snapshot identifier is included in the share URL when a project is exported.
-	SnapshotId *string `location:"querystring" locationName:"snapshotId" type:"string"`
-}
-
-// String returns the string representation
-func (s CreateProjectInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s CreateProjectInput) MarshalFields(e protocol.FieldEncoder) error {
-
-	if s.Contents != nil {
-		v := s.Contents
-
-		metadata := protocol.Metadata{}
-		e.SetStream(protocol.PayloadTarget, "contents", protocol.BytesStream(v), metadata)
-	}
-	if s.Name != nil {
-		v := *s.Name
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Region != nil {
-		v := *s.Region
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "region", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.SnapshotId != nil {
-		v := *s.SnapshotId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "snapshotId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-// Result structure used in response to a request to create a project.
-type CreateProjectOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Detailed information about the created AWS Mobile Hub project.
-	Details *ProjectDetails `locationName:"details" type:"structure"`
-}
-
-// String returns the string representation
-func (s CreateProjectOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s CreateProjectOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.Details != nil {
-		v := s.Details
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "details", v, metadata)
-	}
-	return nil
-}
 
 const opCreateProject = "CreateProject"
 
@@ -104,7 +24,7 @@ const opCreateProject = "CreateProject"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mobile-2017-07-01/CreateProject
-func (c *Client) CreateProjectRequest(input *CreateProjectInput) CreateProjectRequest {
+func (c *Client) CreateProjectRequest(input *types.CreateProjectInput) CreateProjectRequest {
 	op := &aws.Operation{
 		Name:       opCreateProject,
 		HTTPMethod: "POST",
@@ -112,10 +32,10 @@ func (c *Client) CreateProjectRequest(input *CreateProjectInput) CreateProjectRe
 	}
 
 	if input == nil {
-		input = &CreateProjectInput{}
+		input = &types.CreateProjectInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateProjectOutput{})
+	req := c.newRequest(op, input, &types.CreateProjectOutput{})
 	return CreateProjectRequest{Request: req, Input: input, Copy: c.CreateProjectRequest}
 }
 
@@ -123,8 +43,8 @@ func (c *Client) CreateProjectRequest(input *CreateProjectInput) CreateProjectRe
 // CreateProject API operation.
 type CreateProjectRequest struct {
 	*aws.Request
-	Input *CreateProjectInput
-	Copy  func(*CreateProjectInput) CreateProjectRequest
+	Input *types.CreateProjectInput
+	Copy  func(*types.CreateProjectInput) CreateProjectRequest
 }
 
 // Send marshals and sends the CreateProject API request.
@@ -136,7 +56,7 @@ func (r CreateProjectRequest) Send(ctx context.Context) (*CreateProjectResponse,
 	}
 
 	resp := &CreateProjectResponse{
-		CreateProjectOutput: r.Request.Data.(*CreateProjectOutput),
+		CreateProjectOutput: r.Request.Data.(*types.CreateProjectOutput),
 		response:            &aws.Response{Request: r.Request},
 	}
 
@@ -146,7 +66,7 @@ func (r CreateProjectRequest) Send(ctx context.Context) (*CreateProjectResponse,
 // CreateProjectResponse is the response type for the
 // CreateProject API operation.
 type CreateProjectResponse struct {
-	*CreateProjectOutput
+	*types.CreateProjectOutput
 
 	response *aws.Response
 }

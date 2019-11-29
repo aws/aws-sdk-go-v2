@@ -6,45 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/rekognition/types"
 )
-
-type ListCollectionsInput struct {
-	_ struct{} `type:"structure"`
-
-	// Maximum number of collection IDs to return.
-	MaxResults *int64 `type:"integer"`
-
-	// Pagination token from the previous response.
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s ListCollectionsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type ListCollectionsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// An array of collection IDs.
-	CollectionIds []string `type:"list"`
-
-	// Version numbers of the face detection models associated with the collections
-	// in the array CollectionIds. For example, the value of FaceModelVersions[2]
-	// is the version number for the face detection model used by the collection
-	// in CollectionId[2].
-	FaceModelVersions []string `type:"list"`
-
-	// If the result is truncated, the response provides a NextToken that you can
-	// use in the subsequent request to fetch the next set of collection IDs.
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s ListCollectionsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListCollections = "ListCollections"
 
@@ -67,7 +30,7 @@ const opListCollections = "ListCollections"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) ListCollectionsRequest(input *ListCollectionsInput) ListCollectionsRequest {
+func (c *Client) ListCollectionsRequest(input *types.ListCollectionsInput) ListCollectionsRequest {
 	op := &aws.Operation{
 		Name:       opListCollections,
 		HTTPMethod: "POST",
@@ -81,10 +44,10 @@ func (c *Client) ListCollectionsRequest(input *ListCollectionsInput) ListCollect
 	}
 
 	if input == nil {
-		input = &ListCollectionsInput{}
+		input = &types.ListCollectionsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListCollectionsOutput{})
+	req := c.newRequest(op, input, &types.ListCollectionsOutput{})
 	return ListCollectionsRequest{Request: req, Input: input, Copy: c.ListCollectionsRequest}
 }
 
@@ -92,8 +55,8 @@ func (c *Client) ListCollectionsRequest(input *ListCollectionsInput) ListCollect
 // ListCollections API operation.
 type ListCollectionsRequest struct {
 	*aws.Request
-	Input *ListCollectionsInput
-	Copy  func(*ListCollectionsInput) ListCollectionsRequest
+	Input *types.ListCollectionsInput
+	Copy  func(*types.ListCollectionsInput) ListCollectionsRequest
 }
 
 // Send marshals and sends the ListCollections API request.
@@ -105,7 +68,7 @@ func (r ListCollectionsRequest) Send(ctx context.Context) (*ListCollectionsRespo
 	}
 
 	resp := &ListCollectionsResponse{
-		ListCollectionsOutput: r.Request.Data.(*ListCollectionsOutput),
+		ListCollectionsOutput: r.Request.Data.(*types.ListCollectionsOutput),
 		response:              &aws.Response{Request: r.Request},
 	}
 
@@ -135,7 +98,7 @@ func NewListCollectionsPaginator(req ListCollectionsRequest) ListCollectionsPagi
 	return ListCollectionsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListCollectionsInput
+				var inCpy *types.ListCollectionsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -155,14 +118,14 @@ type ListCollectionsPaginator struct {
 	aws.Pager
 }
 
-func (p *ListCollectionsPaginator) CurrentPage() *ListCollectionsOutput {
-	return p.Pager.CurrentPage().(*ListCollectionsOutput)
+func (p *ListCollectionsPaginator) CurrentPage() *types.ListCollectionsOutput {
+	return p.Pager.CurrentPage().(*types.ListCollectionsOutput)
 }
 
 // ListCollectionsResponse is the response type for the
 // ListCollections API operation.
 type ListCollectionsResponse struct {
-	*ListCollectionsOutput
+	*types.ListCollectionsOutput
 
 	response *aws.Response
 }

@@ -6,70 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/query"
+	"github.com/aws/aws-sdk-go-v2/service/autoscaling/types"
 )
-
-type SuspendProcessesInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the Auto Scaling group.
-	//
-	// AutoScalingGroupName is a required field
-	AutoScalingGroupName *string `min:"1" type:"string" required:"true"`
-
-	// One or more of the following processes. If you omit this parameter, all processes
-	// are specified.
-	//
-	//    * Launch
-	//
-	//    * Terminate
-	//
-	//    * HealthCheck
-	//
-	//    * ReplaceUnhealthy
-	//
-	//    * AZRebalance
-	//
-	//    * AlarmNotification
-	//
-	//    * ScheduledActions
-	//
-	//    * AddToLoadBalancer
-	ScalingProcesses []string `type:"list"`
-}
-
-// String returns the string representation
-func (s SuspendProcessesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *SuspendProcessesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "SuspendProcessesInput"}
-
-	if s.AutoScalingGroupName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("AutoScalingGroupName"))
-	}
-	if s.AutoScalingGroupName != nil && len(*s.AutoScalingGroupName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("AutoScalingGroupName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type SuspendProcessesOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s SuspendProcessesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opSuspendProcesses = "SuspendProcesses"
 
@@ -95,7 +35,7 @@ const opSuspendProcesses = "SuspendProcesses"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/SuspendProcesses
-func (c *Client) SuspendProcessesRequest(input *SuspendProcessesInput) SuspendProcessesRequest {
+func (c *Client) SuspendProcessesRequest(input *types.SuspendProcessesInput) SuspendProcessesRequest {
 	op := &aws.Operation{
 		Name:       opSuspendProcesses,
 		HTTPMethod: "POST",
@@ -103,10 +43,10 @@ func (c *Client) SuspendProcessesRequest(input *SuspendProcessesInput) SuspendPr
 	}
 
 	if input == nil {
-		input = &SuspendProcessesInput{}
+		input = &types.SuspendProcessesInput{}
 	}
 
-	req := c.newRequest(op, input, &SuspendProcessesOutput{})
+	req := c.newRequest(op, input, &types.SuspendProcessesOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return SuspendProcessesRequest{Request: req, Input: input, Copy: c.SuspendProcessesRequest}
@@ -116,8 +56,8 @@ func (c *Client) SuspendProcessesRequest(input *SuspendProcessesInput) SuspendPr
 // SuspendProcesses API operation.
 type SuspendProcessesRequest struct {
 	*aws.Request
-	Input *SuspendProcessesInput
-	Copy  func(*SuspendProcessesInput) SuspendProcessesRequest
+	Input *types.SuspendProcessesInput
+	Copy  func(*types.SuspendProcessesInput) SuspendProcessesRequest
 }
 
 // Send marshals and sends the SuspendProcesses API request.
@@ -129,7 +69,7 @@ func (r SuspendProcessesRequest) Send(ctx context.Context) (*SuspendProcessesRes
 	}
 
 	resp := &SuspendProcessesResponse{
-		SuspendProcessesOutput: r.Request.Data.(*SuspendProcessesOutput),
+		SuspendProcessesOutput: r.Request.Data.(*types.SuspendProcessesOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -139,7 +79,7 @@ func (r SuspendProcessesRequest) Send(ctx context.Context) (*SuspendProcessesRes
 // SuspendProcessesResponse is the response type for the
 // SuspendProcesses API operation.
 type SuspendProcessesResponse struct {
-	*SuspendProcessesOutput
+	*types.SuspendProcessesOutput
 
 	response *aws.Response
 }

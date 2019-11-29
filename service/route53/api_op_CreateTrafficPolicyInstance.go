@@ -6,164 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/route53/types"
 )
-
-// A complex type that contains information about the resource record sets that
-// you want to create based on a specified traffic policy.
-type CreateTrafficPolicyInstanceInput struct {
-	_ struct{} `locationName:"CreateTrafficPolicyInstanceRequest" type:"structure" xmlURI:"https://route53.amazonaws.com/doc/2013-04-01/"`
-
-	// The ID of the hosted zone that you want Amazon Route 53 to create resource
-	// record sets in by using the configuration in a traffic policy.
-	//
-	// HostedZoneId is a required field
-	HostedZoneId *string `type:"string" required:"true"`
-
-	// The domain name (such as example.com) or subdomain name (such as www.example.com)
-	// for which Amazon Route 53 responds to DNS queries by using the resource record
-	// sets that Route 53 creates for this traffic policy instance.
-	//
-	// Name is a required field
-	Name *string `type:"string" required:"true"`
-
-	// (Optional) The TTL that you want Amazon Route 53 to assign to all of the
-	// resource record sets that it creates in the specified hosted zone.
-	//
-	// TTL is a required field
-	TTL *int64 `type:"long" required:"true"`
-
-	// The ID of the traffic policy that you want to use to create resource record
-	// sets in the specified hosted zone.
-	//
-	// TrafficPolicyId is a required field
-	TrafficPolicyId *string `min:"1" type:"string" required:"true"`
-
-	// The version of the traffic policy that you want to use to create resource
-	// record sets in the specified hosted zone.
-	//
-	// TrafficPolicyVersion is a required field
-	TrafficPolicyVersion *int64 `min:"1" type:"integer" required:"true"`
-}
-
-// String returns the string representation
-func (s CreateTrafficPolicyInstanceInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateTrafficPolicyInstanceInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateTrafficPolicyInstanceInput"}
-
-	if s.HostedZoneId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("HostedZoneId"))
-	}
-
-	if s.Name == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Name"))
-	}
-
-	if s.TTL == nil {
-		invalidParams.Add(aws.NewErrParamRequired("TTL"))
-	}
-
-	if s.TrafficPolicyId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("TrafficPolicyId"))
-	}
-	if s.TrafficPolicyId != nil && len(*s.TrafficPolicyId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("TrafficPolicyId", 1))
-	}
-
-	if s.TrafficPolicyVersion == nil {
-		invalidParams.Add(aws.NewErrParamRequired("TrafficPolicyVersion"))
-	}
-	if s.TrafficPolicyVersion != nil && *s.TrafficPolicyVersion < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("TrafficPolicyVersion", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s CreateTrafficPolicyInstanceInput) MarshalFields(e protocol.FieldEncoder) error {
-
-	e.SetFields(protocol.BodyTarget, "CreateTrafficPolicyInstanceRequest", protocol.FieldMarshalerFunc(func(e protocol.FieldEncoder) error {
-		if s.HostedZoneId != nil {
-			v := *s.HostedZoneId
-
-			metadata := protocol.Metadata{}
-			e.SetValue(protocol.BodyTarget, "HostedZoneId", protocol.StringValue(v), metadata)
-		}
-		if s.Name != nil {
-			v := *s.Name
-
-			metadata := protocol.Metadata{}
-			e.SetValue(protocol.BodyTarget, "Name", protocol.StringValue(v), metadata)
-		}
-		if s.TTL != nil {
-			v := *s.TTL
-
-			metadata := protocol.Metadata{}
-			e.SetValue(protocol.BodyTarget, "TTL", protocol.Int64Value(v), metadata)
-		}
-		if s.TrafficPolicyId != nil {
-			v := *s.TrafficPolicyId
-
-			metadata := protocol.Metadata{}
-			e.SetValue(protocol.BodyTarget, "TrafficPolicyId", protocol.StringValue(v), metadata)
-		}
-		if s.TrafficPolicyVersion != nil {
-			v := *s.TrafficPolicyVersion
-
-			metadata := protocol.Metadata{}
-			e.SetValue(protocol.BodyTarget, "TrafficPolicyVersion", protocol.Int64Value(v), metadata)
-		}
-		return nil
-	}), protocol.Metadata{XMLNamespaceURI: "https://route53.amazonaws.com/doc/2013-04-01/"})
-	return nil
-}
-
-// A complex type that contains the response information for the CreateTrafficPolicyInstance
-// request.
-type CreateTrafficPolicyInstanceOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A unique URL that represents a new traffic policy instance.
-	//
-	// Location is a required field
-	Location *string `location:"header" locationName:"Location" type:"string" required:"true"`
-
-	// A complex type that contains settings for the new traffic policy instance.
-	//
-	// TrafficPolicyInstance is a required field
-	TrafficPolicyInstance *TrafficPolicyInstance `type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s CreateTrafficPolicyInstanceOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s CreateTrafficPolicyInstanceOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.TrafficPolicyInstance != nil {
-		v := s.TrafficPolicyInstance
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "TrafficPolicyInstance", v, metadata)
-	}
-	if s.Location != nil {
-		v := *s.Location
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "Location", protocol.StringValue(v), metadata)
-	}
-	return nil
-}
 
 const opCreateTrafficPolicyInstance = "CreateTrafficPolicyInstance"
 
@@ -185,7 +29,7 @@ const opCreateTrafficPolicyInstance = "CreateTrafficPolicyInstance"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/CreateTrafficPolicyInstance
-func (c *Client) CreateTrafficPolicyInstanceRequest(input *CreateTrafficPolicyInstanceInput) CreateTrafficPolicyInstanceRequest {
+func (c *Client) CreateTrafficPolicyInstanceRequest(input *types.CreateTrafficPolicyInstanceInput) CreateTrafficPolicyInstanceRequest {
 	op := &aws.Operation{
 		Name:       opCreateTrafficPolicyInstance,
 		HTTPMethod: "POST",
@@ -193,10 +37,10 @@ func (c *Client) CreateTrafficPolicyInstanceRequest(input *CreateTrafficPolicyIn
 	}
 
 	if input == nil {
-		input = &CreateTrafficPolicyInstanceInput{}
+		input = &types.CreateTrafficPolicyInstanceInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateTrafficPolicyInstanceOutput{})
+	req := c.newRequest(op, input, &types.CreateTrafficPolicyInstanceOutput{})
 	return CreateTrafficPolicyInstanceRequest{Request: req, Input: input, Copy: c.CreateTrafficPolicyInstanceRequest}
 }
 
@@ -204,8 +48,8 @@ func (c *Client) CreateTrafficPolicyInstanceRequest(input *CreateTrafficPolicyIn
 // CreateTrafficPolicyInstance API operation.
 type CreateTrafficPolicyInstanceRequest struct {
 	*aws.Request
-	Input *CreateTrafficPolicyInstanceInput
-	Copy  func(*CreateTrafficPolicyInstanceInput) CreateTrafficPolicyInstanceRequest
+	Input *types.CreateTrafficPolicyInstanceInput
+	Copy  func(*types.CreateTrafficPolicyInstanceInput) CreateTrafficPolicyInstanceRequest
 }
 
 // Send marshals and sends the CreateTrafficPolicyInstance API request.
@@ -217,7 +61,7 @@ func (r CreateTrafficPolicyInstanceRequest) Send(ctx context.Context) (*CreateTr
 	}
 
 	resp := &CreateTrafficPolicyInstanceResponse{
-		CreateTrafficPolicyInstanceOutput: r.Request.Data.(*CreateTrafficPolicyInstanceOutput),
+		CreateTrafficPolicyInstanceOutput: r.Request.Data.(*types.CreateTrafficPolicyInstanceOutput),
 		response:                          &aws.Response{Request: r.Request},
 	}
 
@@ -227,7 +71,7 @@ func (r CreateTrafficPolicyInstanceRequest) Send(ctx context.Context) (*CreateTr
 // CreateTrafficPolicyInstanceResponse is the response type for the
 // CreateTrafficPolicyInstance API operation.
 type CreateTrafficPolicyInstanceResponse struct {
-	*CreateTrafficPolicyInstanceOutput
+	*types.CreateTrafficPolicyInstanceOutput
 
 	response *aws.Response
 }

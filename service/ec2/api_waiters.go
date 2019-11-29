@@ -7,6 +7,7 @@ import (
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
 
 // WaitUntilBundleTaskComplete uses the Amazon EC2 API operation
@@ -18,7 +19,7 @@ import (
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Client) WaitUntilBundleTaskComplete(ctx context.Context, input *DescribeBundleTasksInput, opts ...aws.WaiterOption) error {
+func (c *Client) WaitUntilBundleTaskComplete(ctx context.Context, input *types.DescribeBundleTasksInput, opts ...aws.WaiterOption) error {
 	w := aws.Waiter{
 		Name:        "WaitUntilBundleTaskComplete",
 		MaxAttempts: 40,
@@ -37,7 +38,7 @@ func (c *Client) WaitUntilBundleTaskComplete(ctx context.Context, input *Describ
 		},
 		Logger: c.Config.Logger,
 		NewRequest: func(opts []aws.Option) (*aws.Request, error) {
-			var inCpy *DescribeBundleTasksInput
+			var inCpy *types.DescribeBundleTasksInput
 			if input != nil {
 				tmp := *input
 				inCpy = &tmp
@@ -62,7 +63,7 @@ func (c *Client) WaitUntilBundleTaskComplete(ctx context.Context, input *Describ
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Client) WaitUntilConversionTaskCancelled(ctx context.Context, input *DescribeConversionTasksInput, opts ...aws.WaiterOption) error {
+func (c *Client) WaitUntilConversionTaskCancelled(ctx context.Context, input *types.DescribeConversionTasksInput, opts ...aws.WaiterOption) error {
 	w := aws.Waiter{
 		Name:        "WaitUntilConversionTaskCancelled",
 		MaxAttempts: 40,
@@ -76,7 +77,7 @@ func (c *Client) WaitUntilConversionTaskCancelled(ctx context.Context, input *De
 		},
 		Logger: c.Config.Logger,
 		NewRequest: func(opts []aws.Option) (*aws.Request, error) {
-			var inCpy *DescribeConversionTasksInput
+			var inCpy *types.DescribeConversionTasksInput
 			if input != nil {
 				tmp := *input
 				inCpy = &tmp
@@ -101,7 +102,7 @@ func (c *Client) WaitUntilConversionTaskCancelled(ctx context.Context, input *De
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Client) WaitUntilConversionTaskCompleted(ctx context.Context, input *DescribeConversionTasksInput, opts ...aws.WaiterOption) error {
+func (c *Client) WaitUntilConversionTaskCompleted(ctx context.Context, input *types.DescribeConversionTasksInput, opts ...aws.WaiterOption) error {
 	w := aws.Waiter{
 		Name:        "WaitUntilConversionTaskCompleted",
 		MaxAttempts: 40,
@@ -125,7 +126,7 @@ func (c *Client) WaitUntilConversionTaskCompleted(ctx context.Context, input *De
 		},
 		Logger: c.Config.Logger,
 		NewRequest: func(opts []aws.Option) (*aws.Request, error) {
-			var inCpy *DescribeConversionTasksInput
+			var inCpy *types.DescribeConversionTasksInput
 			if input != nil {
 				tmp := *input
 				inCpy = &tmp
@@ -150,7 +151,7 @@ func (c *Client) WaitUntilConversionTaskCompleted(ctx context.Context, input *De
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Client) WaitUntilConversionTaskDeleted(ctx context.Context, input *DescribeConversionTasksInput, opts ...aws.WaiterOption) error {
+func (c *Client) WaitUntilConversionTaskDeleted(ctx context.Context, input *types.DescribeConversionTasksInput, opts ...aws.WaiterOption) error {
 	w := aws.Waiter{
 		Name:        "WaitUntilConversionTaskDeleted",
 		MaxAttempts: 40,
@@ -164,7 +165,7 @@ func (c *Client) WaitUntilConversionTaskDeleted(ctx context.Context, input *Desc
 		},
 		Logger: c.Config.Logger,
 		NewRequest: func(opts []aws.Option) (*aws.Request, error) {
-			var inCpy *DescribeConversionTasksInput
+			var inCpy *types.DescribeConversionTasksInput
 			if input != nil {
 				tmp := *input
 				inCpy = &tmp
@@ -189,7 +190,7 @@ func (c *Client) WaitUntilConversionTaskDeleted(ctx context.Context, input *Desc
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Client) WaitUntilCustomerGatewayAvailable(ctx context.Context, input *DescribeCustomerGatewaysInput, opts ...aws.WaiterOption) error {
+func (c *Client) WaitUntilCustomerGatewayAvailable(ctx context.Context, input *types.DescribeCustomerGatewaysInput, opts ...aws.WaiterOption) error {
 	w := aws.Waiter{
 		Name:        "WaitUntilCustomerGatewayAvailable",
 		MaxAttempts: 40,
@@ -213,7 +214,7 @@ func (c *Client) WaitUntilCustomerGatewayAvailable(ctx context.Context, input *D
 		},
 		Logger: c.Config.Logger,
 		NewRequest: func(opts []aws.Option) (*aws.Request, error) {
-			var inCpy *DescribeCustomerGatewaysInput
+			var inCpy *types.DescribeCustomerGatewaysInput
 			if input != nil {
 				tmp := *input
 				inCpy = &tmp
@@ -238,7 +239,7 @@ func (c *Client) WaitUntilCustomerGatewayAvailable(ctx context.Context, input *D
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Client) WaitUntilExportTaskCancelled(ctx context.Context, input *DescribeExportTasksInput, opts ...aws.WaiterOption) error {
+func (c *Client) WaitUntilExportTaskCancelled(ctx context.Context, input *types.DescribeExportTasksInput, opts ...aws.WaiterOption) error {
 	w := aws.Waiter{
 		Name:        "WaitUntilExportTaskCancelled",
 		MaxAttempts: 40,
@@ -252,7 +253,7 @@ func (c *Client) WaitUntilExportTaskCancelled(ctx context.Context, input *Descri
 		},
 		Logger: c.Config.Logger,
 		NewRequest: func(opts []aws.Option) (*aws.Request, error) {
-			var inCpy *DescribeExportTasksInput
+			var inCpy *types.DescribeExportTasksInput
 			if input != nil {
 				tmp := *input
 				inCpy = &tmp
@@ -277,7 +278,7 @@ func (c *Client) WaitUntilExportTaskCancelled(ctx context.Context, input *Descri
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Client) WaitUntilExportTaskCompleted(ctx context.Context, input *DescribeExportTasksInput, opts ...aws.WaiterOption) error {
+func (c *Client) WaitUntilExportTaskCompleted(ctx context.Context, input *types.DescribeExportTasksInput, opts ...aws.WaiterOption) error {
 	w := aws.Waiter{
 		Name:        "WaitUntilExportTaskCompleted",
 		MaxAttempts: 40,
@@ -291,7 +292,7 @@ func (c *Client) WaitUntilExportTaskCompleted(ctx context.Context, input *Descri
 		},
 		Logger: c.Config.Logger,
 		NewRequest: func(opts []aws.Option) (*aws.Request, error) {
-			var inCpy *DescribeExportTasksInput
+			var inCpy *types.DescribeExportTasksInput
 			if input != nil {
 				tmp := *input
 				inCpy = &tmp
@@ -316,7 +317,7 @@ func (c *Client) WaitUntilExportTaskCompleted(ctx context.Context, input *Descri
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Client) WaitUntilImageAvailable(ctx context.Context, input *DescribeImagesInput, opts ...aws.WaiterOption) error {
+func (c *Client) WaitUntilImageAvailable(ctx context.Context, input *types.DescribeImagesInput, opts ...aws.WaiterOption) error {
 	w := aws.Waiter{
 		Name:        "WaitUntilImageAvailable",
 		MaxAttempts: 40,
@@ -335,7 +336,7 @@ func (c *Client) WaitUntilImageAvailable(ctx context.Context, input *DescribeIma
 		},
 		Logger: c.Config.Logger,
 		NewRequest: func(opts []aws.Option) (*aws.Request, error) {
-			var inCpy *DescribeImagesInput
+			var inCpy *types.DescribeImagesInput
 			if input != nil {
 				tmp := *input
 				inCpy = &tmp
@@ -360,7 +361,7 @@ func (c *Client) WaitUntilImageAvailable(ctx context.Context, input *DescribeIma
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Client) WaitUntilImageExists(ctx context.Context, input *DescribeImagesInput, opts ...aws.WaiterOption) error {
+func (c *Client) WaitUntilImageExists(ctx context.Context, input *types.DescribeImagesInput, opts ...aws.WaiterOption) error {
 	w := aws.Waiter{
 		Name:        "WaitUntilImageExists",
 		MaxAttempts: 40,
@@ -379,7 +380,7 @@ func (c *Client) WaitUntilImageExists(ctx context.Context, input *DescribeImages
 		},
 		Logger: c.Config.Logger,
 		NewRequest: func(opts []aws.Option) (*aws.Request, error) {
-			var inCpy *DescribeImagesInput
+			var inCpy *types.DescribeImagesInput
 			if input != nil {
 				tmp := *input
 				inCpy = &tmp
@@ -404,7 +405,7 @@ func (c *Client) WaitUntilImageExists(ctx context.Context, input *DescribeImages
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Client) WaitUntilInstanceExists(ctx context.Context, input *DescribeInstancesInput, opts ...aws.WaiterOption) error {
+func (c *Client) WaitUntilInstanceExists(ctx context.Context, input *types.DescribeInstancesInput, opts ...aws.WaiterOption) error {
 	w := aws.Waiter{
 		Name:        "WaitUntilInstanceExists",
 		MaxAttempts: 40,
@@ -423,7 +424,7 @@ func (c *Client) WaitUntilInstanceExists(ctx context.Context, input *DescribeIns
 		},
 		Logger: c.Config.Logger,
 		NewRequest: func(opts []aws.Option) (*aws.Request, error) {
-			var inCpy *DescribeInstancesInput
+			var inCpy *types.DescribeInstancesInput
 			if input != nil {
 				tmp := *input
 				inCpy = &tmp
@@ -448,7 +449,7 @@ func (c *Client) WaitUntilInstanceExists(ctx context.Context, input *DescribeIns
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Client) WaitUntilInstanceRunning(ctx context.Context, input *DescribeInstancesInput, opts ...aws.WaiterOption) error {
+func (c *Client) WaitUntilInstanceRunning(ctx context.Context, input *types.DescribeInstancesInput, opts ...aws.WaiterOption) error {
 	w := aws.Waiter{
 		Name:        "WaitUntilInstanceRunning",
 		MaxAttempts: 40,
@@ -482,7 +483,7 @@ func (c *Client) WaitUntilInstanceRunning(ctx context.Context, input *DescribeIn
 		},
 		Logger: c.Config.Logger,
 		NewRequest: func(opts []aws.Option) (*aws.Request, error) {
-			var inCpy *DescribeInstancesInput
+			var inCpy *types.DescribeInstancesInput
 			if input != nil {
 				tmp := *input
 				inCpy = &tmp
@@ -507,7 +508,7 @@ func (c *Client) WaitUntilInstanceRunning(ctx context.Context, input *DescribeIn
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Client) WaitUntilInstanceStatusOk(ctx context.Context, input *DescribeInstanceStatusInput, opts ...aws.WaiterOption) error {
+func (c *Client) WaitUntilInstanceStatusOk(ctx context.Context, input *types.DescribeInstanceStatusInput, opts ...aws.WaiterOption) error {
 	w := aws.Waiter{
 		Name:        "WaitUntilInstanceStatusOk",
 		MaxAttempts: 40,
@@ -526,7 +527,7 @@ func (c *Client) WaitUntilInstanceStatusOk(ctx context.Context, input *DescribeI
 		},
 		Logger: c.Config.Logger,
 		NewRequest: func(opts []aws.Option) (*aws.Request, error) {
-			var inCpy *DescribeInstanceStatusInput
+			var inCpy *types.DescribeInstanceStatusInput
 			if input != nil {
 				tmp := *input
 				inCpy = &tmp
@@ -551,7 +552,7 @@ func (c *Client) WaitUntilInstanceStatusOk(ctx context.Context, input *DescribeI
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Client) WaitUntilInstanceStopped(ctx context.Context, input *DescribeInstancesInput, opts ...aws.WaiterOption) error {
+func (c *Client) WaitUntilInstanceStopped(ctx context.Context, input *types.DescribeInstancesInput, opts ...aws.WaiterOption) error {
 	w := aws.Waiter{
 		Name:        "WaitUntilInstanceStopped",
 		MaxAttempts: 40,
@@ -575,7 +576,7 @@ func (c *Client) WaitUntilInstanceStopped(ctx context.Context, input *DescribeIn
 		},
 		Logger: c.Config.Logger,
 		NewRequest: func(opts []aws.Option) (*aws.Request, error) {
-			var inCpy *DescribeInstancesInput
+			var inCpy *types.DescribeInstancesInput
 			if input != nil {
 				tmp := *input
 				inCpy = &tmp
@@ -600,7 +601,7 @@ func (c *Client) WaitUntilInstanceStopped(ctx context.Context, input *DescribeIn
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Client) WaitUntilInstanceTerminated(ctx context.Context, input *DescribeInstancesInput, opts ...aws.WaiterOption) error {
+func (c *Client) WaitUntilInstanceTerminated(ctx context.Context, input *types.DescribeInstancesInput, opts ...aws.WaiterOption) error {
 	w := aws.Waiter{
 		Name:        "WaitUntilInstanceTerminated",
 		MaxAttempts: 40,
@@ -624,7 +625,7 @@ func (c *Client) WaitUntilInstanceTerminated(ctx context.Context, input *Describ
 		},
 		Logger: c.Config.Logger,
 		NewRequest: func(opts []aws.Option) (*aws.Request, error) {
-			var inCpy *DescribeInstancesInput
+			var inCpy *types.DescribeInstancesInput
 			if input != nil {
 				tmp := *input
 				inCpy = &tmp
@@ -649,7 +650,7 @@ func (c *Client) WaitUntilInstanceTerminated(ctx context.Context, input *Describ
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Client) WaitUntilKeyPairExists(ctx context.Context, input *DescribeKeyPairsInput, opts ...aws.WaiterOption) error {
+func (c *Client) WaitUntilKeyPairExists(ctx context.Context, input *types.DescribeKeyPairsInput, opts ...aws.WaiterOption) error {
 	w := aws.Waiter{
 		Name:        "WaitUntilKeyPairExists",
 		MaxAttempts: 6,
@@ -668,7 +669,7 @@ func (c *Client) WaitUntilKeyPairExists(ctx context.Context, input *DescribeKeyP
 		},
 		Logger: c.Config.Logger,
 		NewRequest: func(opts []aws.Option) (*aws.Request, error) {
-			var inCpy *DescribeKeyPairsInput
+			var inCpy *types.DescribeKeyPairsInput
 			if input != nil {
 				tmp := *input
 				inCpy = &tmp
@@ -693,7 +694,7 @@ func (c *Client) WaitUntilKeyPairExists(ctx context.Context, input *DescribeKeyP
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Client) WaitUntilNatGatewayAvailable(ctx context.Context, input *DescribeNatGatewaysInput, opts ...aws.WaiterOption) error {
+func (c *Client) WaitUntilNatGatewayAvailable(ctx context.Context, input *types.DescribeNatGatewaysInput, opts ...aws.WaiterOption) error {
 	w := aws.Waiter{
 		Name:        "WaitUntilNatGatewayAvailable",
 		MaxAttempts: 40,
@@ -727,7 +728,7 @@ func (c *Client) WaitUntilNatGatewayAvailable(ctx context.Context, input *Descri
 		},
 		Logger: c.Config.Logger,
 		NewRequest: func(opts []aws.Option) (*aws.Request, error) {
-			var inCpy *DescribeNatGatewaysInput
+			var inCpy *types.DescribeNatGatewaysInput
 			if input != nil {
 				tmp := *input
 				inCpy = &tmp
@@ -752,7 +753,7 @@ func (c *Client) WaitUntilNatGatewayAvailable(ctx context.Context, input *Descri
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Client) WaitUntilNetworkInterfaceAvailable(ctx context.Context, input *DescribeNetworkInterfacesInput, opts ...aws.WaiterOption) error {
+func (c *Client) WaitUntilNetworkInterfaceAvailable(ctx context.Context, input *types.DescribeNetworkInterfacesInput, opts ...aws.WaiterOption) error {
 	w := aws.Waiter{
 		Name:        "WaitUntilNetworkInterfaceAvailable",
 		MaxAttempts: 10,
@@ -771,7 +772,7 @@ func (c *Client) WaitUntilNetworkInterfaceAvailable(ctx context.Context, input *
 		},
 		Logger: c.Config.Logger,
 		NewRequest: func(opts []aws.Option) (*aws.Request, error) {
-			var inCpy *DescribeNetworkInterfacesInput
+			var inCpy *types.DescribeNetworkInterfacesInput
 			if input != nil {
 				tmp := *input
 				inCpy = &tmp
@@ -796,7 +797,7 @@ func (c *Client) WaitUntilNetworkInterfaceAvailable(ctx context.Context, input *
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Client) WaitUntilPasswordDataAvailable(ctx context.Context, input *GetPasswordDataInput, opts ...aws.WaiterOption) error {
+func (c *Client) WaitUntilPasswordDataAvailable(ctx context.Context, input *types.GetPasswordDataInput, opts ...aws.WaiterOption) error {
 	w := aws.Waiter{
 		Name:        "WaitUntilPasswordDataAvailable",
 		MaxAttempts: 40,
@@ -810,12 +811,56 @@ func (c *Client) WaitUntilPasswordDataAvailable(ctx context.Context, input *GetP
 		},
 		Logger: c.Config.Logger,
 		NewRequest: func(opts []aws.Option) (*aws.Request, error) {
-			var inCpy *GetPasswordDataInput
+			var inCpy *types.GetPasswordDataInput
 			if input != nil {
 				tmp := *input
 				inCpy = &tmp
 			}
 			req := c.GetPasswordDataRequest(inCpy)
+			req.SetContext(ctx)
+			req.ApplyOptions(opts...)
+			return req.Request, nil
+		},
+	}
+	w.ApplyOptions(opts...)
+
+	return w.Wait(ctx)
+}
+
+// WaitUntilSecurityGroupExists uses the Amazon EC2 API operation
+// DescribeSecurityGroups to wait for a condition to be met before returning.
+// If the condition is not met within the max attempt window, an error will
+// be returned.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *Client) WaitUntilSecurityGroupExists(ctx context.Context, input *types.DescribeSecurityGroupsInput, opts ...aws.WaiterOption) error {
+	w := aws.Waiter{
+		Name:        "WaitUntilSecurityGroupExists",
+		MaxAttempts: 6,
+		Delay:       aws.ConstantWaiterDelay(5 * time.Second),
+		Acceptors: []aws.WaiterAcceptor{
+			{
+				State:   aws.SuccessWaiterState,
+				Matcher: aws.PathWaiterMatch, Argument: "length(SecurityGroups[].GroupId) > `0`",
+				Expected: true,
+			},
+			{
+				State:    aws.RetryWaiterState,
+				Matcher:  aws.ErrorWaiterMatch,
+				Expected: "InvalidGroupNotFound",
+			},
+		},
+		Logger: c.Config.Logger,
+		NewRequest: func(opts []aws.Option) (*aws.Request, error) {
+			var inCpy *types.DescribeSecurityGroupsInput
+			if input != nil {
+				tmp := *input
+				inCpy = &tmp
+			}
+			req := c.DescribeSecurityGroupsRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
 			return req.Request, nil
@@ -835,7 +880,7 @@ func (c *Client) WaitUntilPasswordDataAvailable(ctx context.Context, input *GetP
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Client) WaitUntilSnapshotCompleted(ctx context.Context, input *DescribeSnapshotsInput, opts ...aws.WaiterOption) error {
+func (c *Client) WaitUntilSnapshotCompleted(ctx context.Context, input *types.DescribeSnapshotsInput, opts ...aws.WaiterOption) error {
 	w := aws.Waiter{
 		Name:        "WaitUntilSnapshotCompleted",
 		MaxAttempts: 40,
@@ -849,7 +894,7 @@ func (c *Client) WaitUntilSnapshotCompleted(ctx context.Context, input *Describe
 		},
 		Logger: c.Config.Logger,
 		NewRequest: func(opts []aws.Option) (*aws.Request, error) {
-			var inCpy *DescribeSnapshotsInput
+			var inCpy *types.DescribeSnapshotsInput
 			if input != nil {
 				tmp := *input
 				inCpy = &tmp
@@ -874,7 +919,7 @@ func (c *Client) WaitUntilSnapshotCompleted(ctx context.Context, input *Describe
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Client) WaitUntilSpotInstanceRequestFulfilled(ctx context.Context, input *DescribeSpotInstanceRequestsInput, opts ...aws.WaiterOption) error {
+func (c *Client) WaitUntilSpotInstanceRequestFulfilled(ctx context.Context, input *types.DescribeSpotInstanceRequestsInput, opts ...aws.WaiterOption) error {
 	w := aws.Waiter{
 		Name:        "WaitUntilSpotInstanceRequestFulfilled",
 		MaxAttempts: 40,
@@ -918,7 +963,7 @@ func (c *Client) WaitUntilSpotInstanceRequestFulfilled(ctx context.Context, inpu
 		},
 		Logger: c.Config.Logger,
 		NewRequest: func(opts []aws.Option) (*aws.Request, error) {
-			var inCpy *DescribeSpotInstanceRequestsInput
+			var inCpy *types.DescribeSpotInstanceRequestsInput
 			if input != nil {
 				tmp := *input
 				inCpy = &tmp
@@ -943,7 +988,7 @@ func (c *Client) WaitUntilSpotInstanceRequestFulfilled(ctx context.Context, inpu
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Client) WaitUntilSubnetAvailable(ctx context.Context, input *DescribeSubnetsInput, opts ...aws.WaiterOption) error {
+func (c *Client) WaitUntilSubnetAvailable(ctx context.Context, input *types.DescribeSubnetsInput, opts ...aws.WaiterOption) error {
 	w := aws.Waiter{
 		Name:        "WaitUntilSubnetAvailable",
 		MaxAttempts: 40,
@@ -957,7 +1002,7 @@ func (c *Client) WaitUntilSubnetAvailable(ctx context.Context, input *DescribeSu
 		},
 		Logger: c.Config.Logger,
 		NewRequest: func(opts []aws.Option) (*aws.Request, error) {
-			var inCpy *DescribeSubnetsInput
+			var inCpy *types.DescribeSubnetsInput
 			if input != nil {
 				tmp := *input
 				inCpy = &tmp
@@ -982,7 +1027,7 @@ func (c *Client) WaitUntilSubnetAvailable(ctx context.Context, input *DescribeSu
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Client) WaitUntilSystemStatusOk(ctx context.Context, input *DescribeInstanceStatusInput, opts ...aws.WaiterOption) error {
+func (c *Client) WaitUntilSystemStatusOk(ctx context.Context, input *types.DescribeInstanceStatusInput, opts ...aws.WaiterOption) error {
 	w := aws.Waiter{
 		Name:        "WaitUntilSystemStatusOk",
 		MaxAttempts: 40,
@@ -996,7 +1041,7 @@ func (c *Client) WaitUntilSystemStatusOk(ctx context.Context, input *DescribeIns
 		},
 		Logger: c.Config.Logger,
 		NewRequest: func(opts []aws.Option) (*aws.Request, error) {
-			var inCpy *DescribeInstanceStatusInput
+			var inCpy *types.DescribeInstanceStatusInput
 			if input != nil {
 				tmp := *input
 				inCpy = &tmp
@@ -1021,7 +1066,7 @@ func (c *Client) WaitUntilSystemStatusOk(ctx context.Context, input *DescribeIns
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Client) WaitUntilVolumeAvailable(ctx context.Context, input *DescribeVolumesInput, opts ...aws.WaiterOption) error {
+func (c *Client) WaitUntilVolumeAvailable(ctx context.Context, input *types.DescribeVolumesInput, opts ...aws.WaiterOption) error {
 	w := aws.Waiter{
 		Name:        "WaitUntilVolumeAvailable",
 		MaxAttempts: 40,
@@ -1040,7 +1085,7 @@ func (c *Client) WaitUntilVolumeAvailable(ctx context.Context, input *DescribeVo
 		},
 		Logger: c.Config.Logger,
 		NewRequest: func(opts []aws.Option) (*aws.Request, error) {
-			var inCpy *DescribeVolumesInput
+			var inCpy *types.DescribeVolumesInput
 			if input != nil {
 				tmp := *input
 				inCpy = &tmp
@@ -1065,7 +1110,7 @@ func (c *Client) WaitUntilVolumeAvailable(ctx context.Context, input *DescribeVo
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Client) WaitUntilVolumeDeleted(ctx context.Context, input *DescribeVolumesInput, opts ...aws.WaiterOption) error {
+func (c *Client) WaitUntilVolumeDeleted(ctx context.Context, input *types.DescribeVolumesInput, opts ...aws.WaiterOption) error {
 	w := aws.Waiter{
 		Name:        "WaitUntilVolumeDeleted",
 		MaxAttempts: 40,
@@ -1084,7 +1129,7 @@ func (c *Client) WaitUntilVolumeDeleted(ctx context.Context, input *DescribeVolu
 		},
 		Logger: c.Config.Logger,
 		NewRequest: func(opts []aws.Option) (*aws.Request, error) {
-			var inCpy *DescribeVolumesInput
+			var inCpy *types.DescribeVolumesInput
 			if input != nil {
 				tmp := *input
 				inCpy = &tmp
@@ -1109,7 +1154,7 @@ func (c *Client) WaitUntilVolumeDeleted(ctx context.Context, input *DescribeVolu
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Client) WaitUntilVolumeInUse(ctx context.Context, input *DescribeVolumesInput, opts ...aws.WaiterOption) error {
+func (c *Client) WaitUntilVolumeInUse(ctx context.Context, input *types.DescribeVolumesInput, opts ...aws.WaiterOption) error {
 	w := aws.Waiter{
 		Name:        "WaitUntilVolumeInUse",
 		MaxAttempts: 40,
@@ -1128,7 +1173,7 @@ func (c *Client) WaitUntilVolumeInUse(ctx context.Context, input *DescribeVolume
 		},
 		Logger: c.Config.Logger,
 		NewRequest: func(opts []aws.Option) (*aws.Request, error) {
-			var inCpy *DescribeVolumesInput
+			var inCpy *types.DescribeVolumesInput
 			if input != nil {
 				tmp := *input
 				inCpy = &tmp
@@ -1153,7 +1198,7 @@ func (c *Client) WaitUntilVolumeInUse(ctx context.Context, input *DescribeVolume
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Client) WaitUntilVpcAvailable(ctx context.Context, input *DescribeVpcsInput, opts ...aws.WaiterOption) error {
+func (c *Client) WaitUntilVpcAvailable(ctx context.Context, input *types.DescribeVpcsInput, opts ...aws.WaiterOption) error {
 	w := aws.Waiter{
 		Name:        "WaitUntilVpcAvailable",
 		MaxAttempts: 40,
@@ -1167,7 +1212,7 @@ func (c *Client) WaitUntilVpcAvailable(ctx context.Context, input *DescribeVpcsI
 		},
 		Logger: c.Config.Logger,
 		NewRequest: func(opts []aws.Option) (*aws.Request, error) {
-			var inCpy *DescribeVpcsInput
+			var inCpy *types.DescribeVpcsInput
 			if input != nil {
 				tmp := *input
 				inCpy = &tmp
@@ -1192,7 +1237,7 @@ func (c *Client) WaitUntilVpcAvailable(ctx context.Context, input *DescribeVpcsI
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Client) WaitUntilVpcExists(ctx context.Context, input *DescribeVpcsInput, opts ...aws.WaiterOption) error {
+func (c *Client) WaitUntilVpcExists(ctx context.Context, input *types.DescribeVpcsInput, opts ...aws.WaiterOption) error {
 	w := aws.Waiter{
 		Name:        "WaitUntilVpcExists",
 		MaxAttempts: 5,
@@ -1211,7 +1256,7 @@ func (c *Client) WaitUntilVpcExists(ctx context.Context, input *DescribeVpcsInpu
 		},
 		Logger: c.Config.Logger,
 		NewRequest: func(opts []aws.Option) (*aws.Request, error) {
-			var inCpy *DescribeVpcsInput
+			var inCpy *types.DescribeVpcsInput
 			if input != nil {
 				tmp := *input
 				inCpy = &tmp
@@ -1236,7 +1281,7 @@ func (c *Client) WaitUntilVpcExists(ctx context.Context, input *DescribeVpcsInpu
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Client) WaitUntilVpcPeeringConnectionDeleted(ctx context.Context, input *DescribeVpcPeeringConnectionsInput, opts ...aws.WaiterOption) error {
+func (c *Client) WaitUntilVpcPeeringConnectionDeleted(ctx context.Context, input *types.DescribeVpcPeeringConnectionsInput, opts ...aws.WaiterOption) error {
 	w := aws.Waiter{
 		Name:        "WaitUntilVpcPeeringConnectionDeleted",
 		MaxAttempts: 40,
@@ -1255,7 +1300,7 @@ func (c *Client) WaitUntilVpcPeeringConnectionDeleted(ctx context.Context, input
 		},
 		Logger: c.Config.Logger,
 		NewRequest: func(opts []aws.Option) (*aws.Request, error) {
-			var inCpy *DescribeVpcPeeringConnectionsInput
+			var inCpy *types.DescribeVpcPeeringConnectionsInput
 			if input != nil {
 				tmp := *input
 				inCpy = &tmp
@@ -1280,7 +1325,7 @@ func (c *Client) WaitUntilVpcPeeringConnectionDeleted(ctx context.Context, input
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Client) WaitUntilVpcPeeringConnectionExists(ctx context.Context, input *DescribeVpcPeeringConnectionsInput, opts ...aws.WaiterOption) error {
+func (c *Client) WaitUntilVpcPeeringConnectionExists(ctx context.Context, input *types.DescribeVpcPeeringConnectionsInput, opts ...aws.WaiterOption) error {
 	w := aws.Waiter{
 		Name:        "WaitUntilVpcPeeringConnectionExists",
 		MaxAttempts: 40,
@@ -1299,7 +1344,7 @@ func (c *Client) WaitUntilVpcPeeringConnectionExists(ctx context.Context, input 
 		},
 		Logger: c.Config.Logger,
 		NewRequest: func(opts []aws.Option) (*aws.Request, error) {
-			var inCpy *DescribeVpcPeeringConnectionsInput
+			var inCpy *types.DescribeVpcPeeringConnectionsInput
 			if input != nil {
 				tmp := *input
 				inCpy = &tmp
@@ -1324,7 +1369,7 @@ func (c *Client) WaitUntilVpcPeeringConnectionExists(ctx context.Context, input 
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Client) WaitUntilVpnConnectionAvailable(ctx context.Context, input *DescribeVpnConnectionsInput, opts ...aws.WaiterOption) error {
+func (c *Client) WaitUntilVpnConnectionAvailable(ctx context.Context, input *types.DescribeVpnConnectionsInput, opts ...aws.WaiterOption) error {
 	w := aws.Waiter{
 		Name:        "WaitUntilVpnConnectionAvailable",
 		MaxAttempts: 40,
@@ -1348,7 +1393,7 @@ func (c *Client) WaitUntilVpnConnectionAvailable(ctx context.Context, input *Des
 		},
 		Logger: c.Config.Logger,
 		NewRequest: func(opts []aws.Option) (*aws.Request, error) {
-			var inCpy *DescribeVpnConnectionsInput
+			var inCpy *types.DescribeVpnConnectionsInput
 			if input != nil {
 				tmp := *input
 				inCpy = &tmp
@@ -1373,7 +1418,7 @@ func (c *Client) WaitUntilVpnConnectionAvailable(ctx context.Context, input *Des
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Client) WaitUntilVpnConnectionDeleted(ctx context.Context, input *DescribeVpnConnectionsInput, opts ...aws.WaiterOption) error {
+func (c *Client) WaitUntilVpnConnectionDeleted(ctx context.Context, input *types.DescribeVpnConnectionsInput, opts ...aws.WaiterOption) error {
 	w := aws.Waiter{
 		Name:        "WaitUntilVpnConnectionDeleted",
 		MaxAttempts: 40,
@@ -1392,7 +1437,7 @@ func (c *Client) WaitUntilVpnConnectionDeleted(ctx context.Context, input *Descr
 		},
 		Logger: c.Config.Logger,
 		NewRequest: func(opts []aws.Option) (*aws.Request, error) {
-			var inCpy *DescribeVpnConnectionsInput
+			var inCpy *types.DescribeVpnConnectionsInput
 			if input != nil {
 				tmp := *input
 				inCpy = &tmp

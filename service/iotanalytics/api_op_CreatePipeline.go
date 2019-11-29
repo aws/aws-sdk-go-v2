@@ -4,155 +4,10 @@ package iotanalytics
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/iotanalytics/types"
 )
-
-type CreatePipelineInput struct {
-	_ struct{} `type:"structure"`
-
-	// A list of "PipelineActivity" objects. Activities perform transformations
-	// on your messages, such as removing, renaming or adding message attributes;
-	// filtering messages based on attribute values; invoking your Lambda functions
-	// on messages for advanced processing; or performing mathematical transformations
-	// to normalize device data.
-	//
-	// The list can be 2-25 PipelineActivity objects and must contain both a channel
-	// and a datastore activity. Each entry in the list must contain only one activity,
-	// for example:
-	//
-	// pipelineActivities = [ { "channel": { ... } }, { "lambda": { ... } }, ...
-	// ]
-	//
-	// PipelineActivities is a required field
-	PipelineActivities []PipelineActivity `locationName:"pipelineActivities" min:"1" type:"list" required:"true"`
-
-	// The name of the pipeline.
-	//
-	// PipelineName is a required field
-	PipelineName *string `locationName:"pipelineName" min:"1" type:"string" required:"true"`
-
-	// Metadata which can be used to manage the pipeline.
-	Tags []Tag `locationName:"tags" min:"1" type:"list"`
-}
-
-// String returns the string representation
-func (s CreatePipelineInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreatePipelineInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreatePipelineInput"}
-
-	if s.PipelineActivities == nil {
-		invalidParams.Add(aws.NewErrParamRequired("PipelineActivities"))
-	}
-	if s.PipelineActivities != nil && len(s.PipelineActivities) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("PipelineActivities", 1))
-	}
-
-	if s.PipelineName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("PipelineName"))
-	}
-	if s.PipelineName != nil && len(*s.PipelineName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("PipelineName", 1))
-	}
-	if s.Tags != nil && len(s.Tags) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Tags", 1))
-	}
-	if s.PipelineActivities != nil {
-		for i, v := range s.PipelineActivities {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "PipelineActivities", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-	if s.Tags != nil {
-		for i, v := range s.Tags {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s CreatePipelineInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.PipelineActivities != nil {
-		v := s.PipelineActivities
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "pipelineActivities", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	if s.PipelineName != nil {
-		v := *s.PipelineName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "pipelineName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Tags != nil {
-		v := s.Tags
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "tags", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	return nil
-}
-
-type CreatePipelineOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The ARN of the pipeline.
-	PipelineArn *string `locationName:"pipelineArn" type:"string"`
-
-	// The name of the pipeline.
-	PipelineName *string `locationName:"pipelineName" min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s CreatePipelineOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s CreatePipelineOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.PipelineArn != nil {
-		v := *s.PipelineArn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "pipelineArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.PipelineName != nil {
-		v := *s.PipelineName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "pipelineName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opCreatePipeline = "CreatePipeline"
 
@@ -172,7 +27,7 @@ const opCreatePipeline = "CreatePipeline"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iotanalytics-2017-11-27/CreatePipeline
-func (c *Client) CreatePipelineRequest(input *CreatePipelineInput) CreatePipelineRequest {
+func (c *Client) CreatePipelineRequest(input *types.CreatePipelineInput) CreatePipelineRequest {
 	op := &aws.Operation{
 		Name:       opCreatePipeline,
 		HTTPMethod: "POST",
@@ -180,10 +35,10 @@ func (c *Client) CreatePipelineRequest(input *CreatePipelineInput) CreatePipelin
 	}
 
 	if input == nil {
-		input = &CreatePipelineInput{}
+		input = &types.CreatePipelineInput{}
 	}
 
-	req := c.newRequest(op, input, &CreatePipelineOutput{})
+	req := c.newRequest(op, input, &types.CreatePipelineOutput{})
 	return CreatePipelineRequest{Request: req, Input: input, Copy: c.CreatePipelineRequest}
 }
 
@@ -191,8 +46,8 @@ func (c *Client) CreatePipelineRequest(input *CreatePipelineInput) CreatePipelin
 // CreatePipeline API operation.
 type CreatePipelineRequest struct {
 	*aws.Request
-	Input *CreatePipelineInput
-	Copy  func(*CreatePipelineInput) CreatePipelineRequest
+	Input *types.CreatePipelineInput
+	Copy  func(*types.CreatePipelineInput) CreatePipelineRequest
 }
 
 // Send marshals and sends the CreatePipeline API request.
@@ -204,7 +59,7 @@ func (r CreatePipelineRequest) Send(ctx context.Context) (*CreatePipelineRespons
 	}
 
 	resp := &CreatePipelineResponse{
-		CreatePipelineOutput: r.Request.Data.(*CreatePipelineOutput),
+		CreatePipelineOutput: r.Request.Data.(*types.CreatePipelineOutput),
 		response:             &aws.Response{Request: r.Request},
 	}
 
@@ -214,7 +69,7 @@ func (r CreatePipelineRequest) Send(ctx context.Context) (*CreatePipelineRespons
 // CreatePipelineResponse is the response type for the
 // CreatePipeline API operation.
 type CreatePipelineResponse struct {
-	*CreatePipelineOutput
+	*types.CreatePipelineOutput
 
 	response *aws.Response
 }

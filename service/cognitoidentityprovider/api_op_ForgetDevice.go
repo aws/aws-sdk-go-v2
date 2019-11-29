@@ -6,54 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
+	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/types"
 )
-
-// Represents the request to forget the device.
-type ForgetDeviceInput struct {
-	_ struct{} `type:"structure"`
-
-	// The access token for the forgotten device request.
-	AccessToken *string `type:"string" sensitive:"true"`
-
-	// The device key.
-	//
-	// DeviceKey is a required field
-	DeviceKey *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s ForgetDeviceInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ForgetDeviceInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ForgetDeviceInput"}
-
-	if s.DeviceKey == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DeviceKey"))
-	}
-	if s.DeviceKey != nil && len(*s.DeviceKey) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("DeviceKey", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ForgetDeviceOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s ForgetDeviceOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opForgetDevice = "ForgetDevice"
 
@@ -70,7 +26,7 @@ const opForgetDevice = "ForgetDevice"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/ForgetDevice
-func (c *Client) ForgetDeviceRequest(input *ForgetDeviceInput) ForgetDeviceRequest {
+func (c *Client) ForgetDeviceRequest(input *types.ForgetDeviceInput) ForgetDeviceRequest {
 	op := &aws.Operation{
 		Name:       opForgetDevice,
 		HTTPMethod: "POST",
@@ -78,10 +34,10 @@ func (c *Client) ForgetDeviceRequest(input *ForgetDeviceInput) ForgetDeviceReque
 	}
 
 	if input == nil {
-		input = &ForgetDeviceInput{}
+		input = &types.ForgetDeviceInput{}
 	}
 
-	req := c.newRequest(op, input, &ForgetDeviceOutput{})
+	req := c.newRequest(op, input, &types.ForgetDeviceOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return ForgetDeviceRequest{Request: req, Input: input, Copy: c.ForgetDeviceRequest}
@@ -91,8 +47,8 @@ func (c *Client) ForgetDeviceRequest(input *ForgetDeviceInput) ForgetDeviceReque
 // ForgetDevice API operation.
 type ForgetDeviceRequest struct {
 	*aws.Request
-	Input *ForgetDeviceInput
-	Copy  func(*ForgetDeviceInput) ForgetDeviceRequest
+	Input *types.ForgetDeviceInput
+	Copy  func(*types.ForgetDeviceInput) ForgetDeviceRequest
 }
 
 // Send marshals and sends the ForgetDevice API request.
@@ -104,7 +60,7 @@ func (r ForgetDeviceRequest) Send(ctx context.Context) (*ForgetDeviceResponse, e
 	}
 
 	resp := &ForgetDeviceResponse{
-		ForgetDeviceOutput: r.Request.Data.(*ForgetDeviceOutput),
+		ForgetDeviceOutput: r.Request.Data.(*types.ForgetDeviceOutput),
 		response:           &aws.Response{Request: r.Request},
 	}
 
@@ -114,7 +70,7 @@ func (r ForgetDeviceRequest) Send(ctx context.Context) (*ForgetDeviceResponse, e
 // ForgetDeviceResponse is the response type for the
 // ForgetDevice API operation.
 type ForgetDeviceResponse struct {
-	*ForgetDeviceOutput
+	*types.ForgetDeviceOutput
 
 	response *aws.Response
 }

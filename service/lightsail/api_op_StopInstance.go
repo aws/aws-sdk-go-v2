@@ -6,56 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/lightsail/types"
 )
-
-type StopInstanceInput struct {
-	_ struct{} `type:"structure"`
-
-	// When set to True, forces a Lightsail instance that is stuck in a stopping
-	// state to stop.
-	//
-	// Only use the force parameter if your instance is stuck in the stopping state.
-	// In any other state, your instance should stop normally without adding this
-	// parameter to your API request.
-	Force *bool `locationName:"force" type:"boolean"`
-
-	// The name of the instance (a virtual private server) to stop.
-	//
-	// InstanceName is a required field
-	InstanceName *string `locationName:"instanceName" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s StopInstanceInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *StopInstanceInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "StopInstanceInput"}
-
-	if s.InstanceName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("InstanceName"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type StopInstanceOutput struct {
-	_ struct{} `type:"structure"`
-
-	// An array of key-value pairs containing information about the request operation.
-	Operations []Operation `locationName:"operations" type:"list"`
-}
-
-// String returns the string representation
-func (s StopInstanceOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opStopInstance = "StopInstance"
 
@@ -81,7 +33,7 @@ const opStopInstance = "StopInstance"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/StopInstance
-func (c *Client) StopInstanceRequest(input *StopInstanceInput) StopInstanceRequest {
+func (c *Client) StopInstanceRequest(input *types.StopInstanceInput) StopInstanceRequest {
 	op := &aws.Operation{
 		Name:       opStopInstance,
 		HTTPMethod: "POST",
@@ -89,10 +41,10 @@ func (c *Client) StopInstanceRequest(input *StopInstanceInput) StopInstanceReque
 	}
 
 	if input == nil {
-		input = &StopInstanceInput{}
+		input = &types.StopInstanceInput{}
 	}
 
-	req := c.newRequest(op, input, &StopInstanceOutput{})
+	req := c.newRequest(op, input, &types.StopInstanceOutput{})
 	return StopInstanceRequest{Request: req, Input: input, Copy: c.StopInstanceRequest}
 }
 
@@ -100,8 +52,8 @@ func (c *Client) StopInstanceRequest(input *StopInstanceInput) StopInstanceReque
 // StopInstance API operation.
 type StopInstanceRequest struct {
 	*aws.Request
-	Input *StopInstanceInput
-	Copy  func(*StopInstanceInput) StopInstanceRequest
+	Input *types.StopInstanceInput
+	Copy  func(*types.StopInstanceInput) StopInstanceRequest
 }
 
 // Send marshals and sends the StopInstance API request.
@@ -113,7 +65,7 @@ func (r StopInstanceRequest) Send(ctx context.Context) (*StopInstanceResponse, e
 	}
 
 	resp := &StopInstanceResponse{
-		StopInstanceOutput: r.Request.Data.(*StopInstanceOutput),
+		StopInstanceOutput: r.Request.Data.(*types.StopInstanceOutput),
 		response:           &aws.Response{Request: r.Request},
 	}
 
@@ -123,7 +75,7 @@ func (r StopInstanceRequest) Send(ctx context.Context) (*StopInstanceResponse, e
 // StopInstanceResponse is the response type for the
 // StopInstance API operation.
 type StopInstanceResponse struct {
-	*StopInstanceOutput
+	*types.StopInstanceOutput
 
 	response *aws.Response
 }

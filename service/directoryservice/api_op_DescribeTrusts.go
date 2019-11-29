@@ -6,61 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/directoryservice/types"
 )
-
-// Describes the trust relationships for a particular AWS Managed Microsoft
-// AD directory. If no input parameters are are provided, such as directory
-// ID or trust ID, this request describes all the trust relationships.
-type DescribeTrustsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Directory ID of the AWS directory that is a part of the requested trust
-	// relationship.
-	DirectoryId *string `type:"string"`
-
-	// The maximum number of objects to return.
-	Limit *int64 `type:"integer"`
-
-	// The DescribeTrustsResult.NextToken value from a previous call to DescribeTrusts.
-	// Pass null if this is the first call.
-	NextToken *string `type:"string"`
-
-	// A list of identifiers of the trust relationships for which to obtain the
-	// information. If this member is null, all trust relationships that belong
-	// to the current account are returned.
-	//
-	// An empty list results in an InvalidParameterException being thrown.
-	TrustIds []string `type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeTrustsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// The result of a DescribeTrust request.
-type DescribeTrustsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// If not null, more results are available. Pass this value for the NextToken
-	// parameter in a subsequent call to DescribeTrusts to retrieve the next set
-	// of items.
-	NextToken *string `type:"string"`
-
-	// The list of Trust objects that were retrieved.
-	//
-	// It is possible that this list contains less than the number of items specified
-	// in the Limit member of the request. This occurs if there are less than the
-	// requested number of items left to retrieve, or if the limitations of the
-	// operation have been exceeded.
-	Trusts []Trust `type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeTrustsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeTrusts = "DescribeTrusts"
 
@@ -80,7 +27,7 @@ const opDescribeTrusts = "DescribeTrusts"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DescribeTrusts
-func (c *Client) DescribeTrustsRequest(input *DescribeTrustsInput) DescribeTrustsRequest {
+func (c *Client) DescribeTrustsRequest(input *types.DescribeTrustsInput) DescribeTrustsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeTrusts,
 		HTTPMethod: "POST",
@@ -88,10 +35,10 @@ func (c *Client) DescribeTrustsRequest(input *DescribeTrustsInput) DescribeTrust
 	}
 
 	if input == nil {
-		input = &DescribeTrustsInput{}
+		input = &types.DescribeTrustsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeTrustsOutput{})
+	req := c.newRequest(op, input, &types.DescribeTrustsOutput{})
 	return DescribeTrustsRequest{Request: req, Input: input, Copy: c.DescribeTrustsRequest}
 }
 
@@ -99,8 +46,8 @@ func (c *Client) DescribeTrustsRequest(input *DescribeTrustsInput) DescribeTrust
 // DescribeTrusts API operation.
 type DescribeTrustsRequest struct {
 	*aws.Request
-	Input *DescribeTrustsInput
-	Copy  func(*DescribeTrustsInput) DescribeTrustsRequest
+	Input *types.DescribeTrustsInput
+	Copy  func(*types.DescribeTrustsInput) DescribeTrustsRequest
 }
 
 // Send marshals and sends the DescribeTrusts API request.
@@ -112,7 +59,7 @@ func (r DescribeTrustsRequest) Send(ctx context.Context) (*DescribeTrustsRespons
 	}
 
 	resp := &DescribeTrustsResponse{
-		DescribeTrustsOutput: r.Request.Data.(*DescribeTrustsOutput),
+		DescribeTrustsOutput: r.Request.Data.(*types.DescribeTrustsOutput),
 		response:             &aws.Response{Request: r.Request},
 	}
 
@@ -122,7 +69,7 @@ func (r DescribeTrustsRequest) Send(ctx context.Context) (*DescribeTrustsRespons
 // DescribeTrustsResponse is the response type for the
 // DescribeTrusts API operation.
 type DescribeTrustsResponse struct {
-	*DescribeTrustsOutput
+	*types.DescribeTrustsOutput
 
 	response *aws.Response
 }

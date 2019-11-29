@@ -6,49 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/cloudhsmv2/types"
 )
-
-type DeleteClusterInput struct {
-	_ struct{} `type:"structure"`
-
-	// The identifier (ID) of the cluster that you are deleting. To find the cluster
-	// ID, use DescribeClusters.
-	//
-	// ClusterId is a required field
-	ClusterId *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteClusterInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteClusterInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteClusterInput"}
-
-	if s.ClusterId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ClusterId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteClusterOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Information about the cluster that was deleted.
-	Cluster *Cluster `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteClusterOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteCluster = "DeleteCluster"
 
@@ -67,7 +26,7 @@ const opDeleteCluster = "DeleteCluster"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudhsmv2-2017-04-28/DeleteCluster
-func (c *Client) DeleteClusterRequest(input *DeleteClusterInput) DeleteClusterRequest {
+func (c *Client) DeleteClusterRequest(input *types.DeleteClusterInput) DeleteClusterRequest {
 	op := &aws.Operation{
 		Name:       opDeleteCluster,
 		HTTPMethod: "POST",
@@ -75,10 +34,10 @@ func (c *Client) DeleteClusterRequest(input *DeleteClusterInput) DeleteClusterRe
 	}
 
 	if input == nil {
-		input = &DeleteClusterInput{}
+		input = &types.DeleteClusterInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteClusterOutput{})
+	req := c.newRequest(op, input, &types.DeleteClusterOutput{})
 	return DeleteClusterRequest{Request: req, Input: input, Copy: c.DeleteClusterRequest}
 }
 
@@ -86,8 +45,8 @@ func (c *Client) DeleteClusterRequest(input *DeleteClusterInput) DeleteClusterRe
 // DeleteCluster API operation.
 type DeleteClusterRequest struct {
 	*aws.Request
-	Input *DeleteClusterInput
-	Copy  func(*DeleteClusterInput) DeleteClusterRequest
+	Input *types.DeleteClusterInput
+	Copy  func(*types.DeleteClusterInput) DeleteClusterRequest
 }
 
 // Send marshals and sends the DeleteCluster API request.
@@ -99,7 +58,7 @@ func (r DeleteClusterRequest) Send(ctx context.Context) (*DeleteClusterResponse,
 	}
 
 	resp := &DeleteClusterResponse{
-		DeleteClusterOutput: r.Request.Data.(*DeleteClusterOutput),
+		DeleteClusterOutput: r.Request.Data.(*types.DeleteClusterOutput),
 		response:            &aws.Response{Request: r.Request},
 	}
 
@@ -109,7 +68,7 @@ func (r DeleteClusterRequest) Send(ctx context.Context) (*DeleteClusterResponse,
 // DeleteClusterResponse is the response type for the
 // DeleteCluster API operation.
 type DeleteClusterResponse struct {
-	*DeleteClusterOutput
+	*types.DeleteClusterOutput
 
 	response *aws.Response
 }

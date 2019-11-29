@@ -6,49 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/codecommit/types"
 )
-
-type GetCommentInput struct {
-	_ struct{} `type:"structure"`
-
-	// The unique, system-generated ID of the comment. To get this ID, use GetCommentsForComparedCommit
-	// or GetCommentsForPullRequest.
-	//
-	// CommentId is a required field
-	CommentId *string `locationName:"commentId" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetCommentInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetCommentInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetCommentInput"}
-
-	if s.CommentId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("CommentId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type GetCommentOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The contents of the comment.
-	Comment *Comment `locationName:"comment" type:"structure"`
-}
-
-// String returns the string representation
-func (s GetCommentOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetComment = "GetComment"
 
@@ -65,7 +24,7 @@ const opGetComment = "GetComment"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/GetComment
-func (c *Client) GetCommentRequest(input *GetCommentInput) GetCommentRequest {
+func (c *Client) GetCommentRequest(input *types.GetCommentInput) GetCommentRequest {
 	op := &aws.Operation{
 		Name:       opGetComment,
 		HTTPMethod: "POST",
@@ -73,10 +32,10 @@ func (c *Client) GetCommentRequest(input *GetCommentInput) GetCommentRequest {
 	}
 
 	if input == nil {
-		input = &GetCommentInput{}
+		input = &types.GetCommentInput{}
 	}
 
-	req := c.newRequest(op, input, &GetCommentOutput{})
+	req := c.newRequest(op, input, &types.GetCommentOutput{})
 	return GetCommentRequest{Request: req, Input: input, Copy: c.GetCommentRequest}
 }
 
@@ -84,8 +43,8 @@ func (c *Client) GetCommentRequest(input *GetCommentInput) GetCommentRequest {
 // GetComment API operation.
 type GetCommentRequest struct {
 	*aws.Request
-	Input *GetCommentInput
-	Copy  func(*GetCommentInput) GetCommentRequest
+	Input *types.GetCommentInput
+	Copy  func(*types.GetCommentInput) GetCommentRequest
 }
 
 // Send marshals and sends the GetComment API request.
@@ -97,7 +56,7 @@ func (r GetCommentRequest) Send(ctx context.Context) (*GetCommentResponse, error
 	}
 
 	resp := &GetCommentResponse{
-		GetCommentOutput: r.Request.Data.(*GetCommentOutput),
+		GetCommentOutput: r.Request.Data.(*types.GetCommentOutput),
 		response:         &aws.Response{Request: r.Request},
 	}
 
@@ -107,7 +66,7 @@ func (r GetCommentRequest) Send(ctx context.Context) (*GetCommentResponse, error
 // GetCommentResponse is the response type for the
 // GetComment API operation.
 type GetCommentResponse struct {
-	*GetCommentOutput
+	*types.GetCommentOutput
 
 	response *aws.Response
 }

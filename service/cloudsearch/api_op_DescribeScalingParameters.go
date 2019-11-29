@@ -6,60 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/cloudsearch/types"
 )
-
-// Container for the parameters to the DescribeScalingParameters operation.
-// Specifies the name of the domain you want to describe.
-type DescribeScalingParametersInput struct {
-	_ struct{} `type:"structure"`
-
-	// A string that represents the name of a domain. Domain names are unique across
-	// the domains owned by an account within an AWS region. Domain names start
-	// with a letter or number and can contain the following characters: a-z (lowercase),
-	// 0-9, and - (hyphen).
-	//
-	// DomainName is a required field
-	DomainName *string `min:"3" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeScalingParametersInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeScalingParametersInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeScalingParametersInput"}
-
-	if s.DomainName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DomainName"))
-	}
-	if s.DomainName != nil && len(*s.DomainName) < 3 {
-		invalidParams.Add(aws.NewErrParamMinLen("DomainName", 3))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// The result of a DescribeScalingParameters request. Contains the scaling parameters
-// configured for the domain specified in the request.
-type DescribeScalingParametersOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The status and configuration of a search domain's scaling parameters.
-	//
-	// ScalingParameters is a required field
-	ScalingParameters *ScalingParametersStatus `type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeScalingParametersOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeScalingParameters = "DescribeScalingParameters"
 
@@ -77,7 +25,7 @@ const opDescribeScalingParameters = "DescribeScalingParameters"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) DescribeScalingParametersRequest(input *DescribeScalingParametersInput) DescribeScalingParametersRequest {
+func (c *Client) DescribeScalingParametersRequest(input *types.DescribeScalingParametersInput) DescribeScalingParametersRequest {
 	op := &aws.Operation{
 		Name:       opDescribeScalingParameters,
 		HTTPMethod: "POST",
@@ -85,10 +33,10 @@ func (c *Client) DescribeScalingParametersRequest(input *DescribeScalingParamete
 	}
 
 	if input == nil {
-		input = &DescribeScalingParametersInput{}
+		input = &types.DescribeScalingParametersInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeScalingParametersOutput{})
+	req := c.newRequest(op, input, &types.DescribeScalingParametersOutput{})
 	return DescribeScalingParametersRequest{Request: req, Input: input, Copy: c.DescribeScalingParametersRequest}
 }
 
@@ -96,8 +44,8 @@ func (c *Client) DescribeScalingParametersRequest(input *DescribeScalingParamete
 // DescribeScalingParameters API operation.
 type DescribeScalingParametersRequest struct {
 	*aws.Request
-	Input *DescribeScalingParametersInput
-	Copy  func(*DescribeScalingParametersInput) DescribeScalingParametersRequest
+	Input *types.DescribeScalingParametersInput
+	Copy  func(*types.DescribeScalingParametersInput) DescribeScalingParametersRequest
 }
 
 // Send marshals and sends the DescribeScalingParameters API request.
@@ -109,7 +57,7 @@ func (r DescribeScalingParametersRequest) Send(ctx context.Context) (*DescribeSc
 	}
 
 	resp := &DescribeScalingParametersResponse{
-		DescribeScalingParametersOutput: r.Request.Data.(*DescribeScalingParametersOutput),
+		DescribeScalingParametersOutput: r.Request.Data.(*types.DescribeScalingParametersOutput),
 		response:                        &aws.Response{Request: r.Request},
 	}
 
@@ -119,7 +67,7 @@ func (r DescribeScalingParametersRequest) Send(ctx context.Context) (*DescribeSc
 // DescribeScalingParametersResponse is the response type for the
 // DescribeScalingParameters API operation.
 type DescribeScalingParametersResponse struct {
-	*DescribeScalingParametersOutput
+	*types.DescribeScalingParametersOutput
 
 	response *aws.Response
 }

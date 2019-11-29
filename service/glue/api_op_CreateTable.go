@@ -6,70 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/glue/types"
 )
-
-type CreateTableInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the Data Catalog in which to create the Table. If none is supplied,
-	// the AWS account ID is used by default.
-	CatalogId *string `min:"1" type:"string"`
-
-	// The catalog database in which to create the new table. For Hive compatibility,
-	// this name is entirely lowercase.
-	//
-	// DatabaseName is a required field
-	DatabaseName *string `min:"1" type:"string" required:"true"`
-
-	// The TableInput object that defines the metadata table to create in the catalog.
-	//
-	// TableInput is a required field
-	TableInput *TableInput `type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s CreateTableInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateTableInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateTableInput"}
-	if s.CatalogId != nil && len(*s.CatalogId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("CatalogId", 1))
-	}
-
-	if s.DatabaseName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DatabaseName"))
-	}
-	if s.DatabaseName != nil && len(*s.DatabaseName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("DatabaseName", 1))
-	}
-
-	if s.TableInput == nil {
-		invalidParams.Add(aws.NewErrParamRequired("TableInput"))
-	}
-	if s.TableInput != nil {
-		if err := s.TableInput.Validate(); err != nil {
-			invalidParams.AddNested("TableInput", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type CreateTableOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s CreateTableOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCreateTable = "CreateTable"
 
@@ -86,7 +24,7 @@ const opCreateTable = "CreateTable"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CreateTable
-func (c *Client) CreateTableRequest(input *CreateTableInput) CreateTableRequest {
+func (c *Client) CreateTableRequest(input *types.CreateTableInput) CreateTableRequest {
 	op := &aws.Operation{
 		Name:       opCreateTable,
 		HTTPMethod: "POST",
@@ -94,10 +32,10 @@ func (c *Client) CreateTableRequest(input *CreateTableInput) CreateTableRequest 
 	}
 
 	if input == nil {
-		input = &CreateTableInput{}
+		input = &types.CreateTableInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateTableOutput{})
+	req := c.newRequest(op, input, &types.CreateTableOutput{})
 	return CreateTableRequest{Request: req, Input: input, Copy: c.CreateTableRequest}
 }
 
@@ -105,8 +43,8 @@ func (c *Client) CreateTableRequest(input *CreateTableInput) CreateTableRequest 
 // CreateTable API operation.
 type CreateTableRequest struct {
 	*aws.Request
-	Input *CreateTableInput
-	Copy  func(*CreateTableInput) CreateTableRequest
+	Input *types.CreateTableInput
+	Copy  func(*types.CreateTableInput) CreateTableRequest
 }
 
 // Send marshals and sends the CreateTable API request.
@@ -118,7 +56,7 @@ func (r CreateTableRequest) Send(ctx context.Context) (*CreateTableResponse, err
 	}
 
 	resp := &CreateTableResponse{
-		CreateTableOutput: r.Request.Data.(*CreateTableOutput),
+		CreateTableOutput: r.Request.Data.(*types.CreateTableOutput),
 		response:          &aws.Response{Request: r.Request},
 	}
 
@@ -128,7 +66,7 @@ func (r CreateTableRequest) Send(ctx context.Context) (*CreateTableResponse, err
 // CreateTableResponse is the response type for the
 // CreateTable API operation.
 type CreateTableResponse struct {
-	*CreateTableOutput
+	*types.CreateTableOutput
 
 	response *aws.Response
 }

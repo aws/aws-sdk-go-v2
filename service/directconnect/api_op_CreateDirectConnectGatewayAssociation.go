@@ -6,62 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/directconnect/types"
 )
-
-type CreateDirectConnectGatewayAssociationInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon VPC prefixes to advertise to the Direct Connect gateway
-	//
-	// This parameter is required when you create an association to a transit gateway.
-	//
-	// For information about how to set the prefixes, see Allowed Prefixes (https://docs.aws.amazon.com/directconnect/latest/UserGuide/multi-account-associate-vgw.html#allowed-prefixes)
-	// in the AWS Direct Connect User Guide.
-	AddAllowedPrefixesToDirectConnectGateway []RouteFilterPrefix `locationName:"addAllowedPrefixesToDirectConnectGateway" type:"list"`
-
-	// The ID of the Direct Connect gateway.
-	//
-	// DirectConnectGatewayId is a required field
-	DirectConnectGatewayId *string `locationName:"directConnectGatewayId" type:"string" required:"true"`
-
-	// The ID of the virtual private gateway or transit gateway.
-	GatewayId *string `locationName:"gatewayId" type:"string"`
-
-	// The ID of the virtual private gateway.
-	VirtualGatewayId *string `locationName:"virtualGatewayId" type:"string"`
-}
-
-// String returns the string representation
-func (s CreateDirectConnectGatewayAssociationInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateDirectConnectGatewayAssociationInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateDirectConnectGatewayAssociationInput"}
-
-	if s.DirectConnectGatewayId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DirectConnectGatewayId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type CreateDirectConnectGatewayAssociationOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The association to be created.
-	DirectConnectGatewayAssociation *DirectConnectGatewayAssociation `locationName:"directConnectGatewayAssociation" type:"structure"`
-}
-
-// String returns the string representation
-func (s CreateDirectConnectGatewayAssociationOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCreateDirectConnectGatewayAssociation = "CreateDirectConnectGatewayAssociation"
 
@@ -80,7 +26,7 @@ const opCreateDirectConnectGatewayAssociation = "CreateDirectConnectGatewayAssoc
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/CreateDirectConnectGatewayAssociation
-func (c *Client) CreateDirectConnectGatewayAssociationRequest(input *CreateDirectConnectGatewayAssociationInput) CreateDirectConnectGatewayAssociationRequest {
+func (c *Client) CreateDirectConnectGatewayAssociationRequest(input *types.CreateDirectConnectGatewayAssociationInput) CreateDirectConnectGatewayAssociationRequest {
 	op := &aws.Operation{
 		Name:       opCreateDirectConnectGatewayAssociation,
 		HTTPMethod: "POST",
@@ -88,10 +34,10 @@ func (c *Client) CreateDirectConnectGatewayAssociationRequest(input *CreateDirec
 	}
 
 	if input == nil {
-		input = &CreateDirectConnectGatewayAssociationInput{}
+		input = &types.CreateDirectConnectGatewayAssociationInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateDirectConnectGatewayAssociationOutput{})
+	req := c.newRequest(op, input, &types.CreateDirectConnectGatewayAssociationOutput{})
 	return CreateDirectConnectGatewayAssociationRequest{Request: req, Input: input, Copy: c.CreateDirectConnectGatewayAssociationRequest}
 }
 
@@ -99,8 +45,8 @@ func (c *Client) CreateDirectConnectGatewayAssociationRequest(input *CreateDirec
 // CreateDirectConnectGatewayAssociation API operation.
 type CreateDirectConnectGatewayAssociationRequest struct {
 	*aws.Request
-	Input *CreateDirectConnectGatewayAssociationInput
-	Copy  func(*CreateDirectConnectGatewayAssociationInput) CreateDirectConnectGatewayAssociationRequest
+	Input *types.CreateDirectConnectGatewayAssociationInput
+	Copy  func(*types.CreateDirectConnectGatewayAssociationInput) CreateDirectConnectGatewayAssociationRequest
 }
 
 // Send marshals and sends the CreateDirectConnectGatewayAssociation API request.
@@ -112,7 +58,7 @@ func (r CreateDirectConnectGatewayAssociationRequest) Send(ctx context.Context) 
 	}
 
 	resp := &CreateDirectConnectGatewayAssociationResponse{
-		CreateDirectConnectGatewayAssociationOutput: r.Request.Data.(*CreateDirectConnectGatewayAssociationOutput),
+		CreateDirectConnectGatewayAssociationOutput: r.Request.Data.(*types.CreateDirectConnectGatewayAssociationOutput),
 		response: &aws.Response{Request: r.Request},
 	}
 
@@ -122,7 +68,7 @@ func (r CreateDirectConnectGatewayAssociationRequest) Send(ctx context.Context) 
 // CreateDirectConnectGatewayAssociationResponse is the response type for the
 // CreateDirectConnectGatewayAssociation API operation.
 type CreateDirectConnectGatewayAssociationResponse struct {
-	*CreateDirectConnectGatewayAssociationOutput
+	*types.CreateDirectConnectGatewayAssociationOutput
 
 	response *aws.Response
 }

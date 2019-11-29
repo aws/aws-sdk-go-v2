@@ -6,53 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/route53domains/types"
 )
-
-// A request to set the transfer lock for the specified domain.
-type EnableDomainTransferLockInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the domain that you want to set the transfer lock for.
-	//
-	// DomainName is a required field
-	DomainName *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s EnableDomainTransferLockInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *EnableDomainTransferLockInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "EnableDomainTransferLockInput"}
-
-	if s.DomainName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DomainName"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// The EnableDomainTransferLock response includes the following elements.
-type EnableDomainTransferLockOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Identifier for tracking the progress of the request. To use this ID to query
-	// the operation status, use GetOperationDetail.
-	//
-	// OperationId is a required field
-	OperationId *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s EnableDomainTransferLockOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opEnableDomainTransferLock = "EnableDomainTransferLock"
 
@@ -73,7 +28,7 @@ const opEnableDomainTransferLock = "EnableDomainTransferLock"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/EnableDomainTransferLock
-func (c *Client) EnableDomainTransferLockRequest(input *EnableDomainTransferLockInput) EnableDomainTransferLockRequest {
+func (c *Client) EnableDomainTransferLockRequest(input *types.EnableDomainTransferLockInput) EnableDomainTransferLockRequest {
 	op := &aws.Operation{
 		Name:       opEnableDomainTransferLock,
 		HTTPMethod: "POST",
@@ -81,10 +36,10 @@ func (c *Client) EnableDomainTransferLockRequest(input *EnableDomainTransferLock
 	}
 
 	if input == nil {
-		input = &EnableDomainTransferLockInput{}
+		input = &types.EnableDomainTransferLockInput{}
 	}
 
-	req := c.newRequest(op, input, &EnableDomainTransferLockOutput{})
+	req := c.newRequest(op, input, &types.EnableDomainTransferLockOutput{})
 	return EnableDomainTransferLockRequest{Request: req, Input: input, Copy: c.EnableDomainTransferLockRequest}
 }
 
@@ -92,8 +47,8 @@ func (c *Client) EnableDomainTransferLockRequest(input *EnableDomainTransferLock
 // EnableDomainTransferLock API operation.
 type EnableDomainTransferLockRequest struct {
 	*aws.Request
-	Input *EnableDomainTransferLockInput
-	Copy  func(*EnableDomainTransferLockInput) EnableDomainTransferLockRequest
+	Input *types.EnableDomainTransferLockInput
+	Copy  func(*types.EnableDomainTransferLockInput) EnableDomainTransferLockRequest
 }
 
 // Send marshals and sends the EnableDomainTransferLock API request.
@@ -105,7 +60,7 @@ func (r EnableDomainTransferLockRequest) Send(ctx context.Context) (*EnableDomai
 	}
 
 	resp := &EnableDomainTransferLockResponse{
-		EnableDomainTransferLockOutput: r.Request.Data.(*EnableDomainTransferLockOutput),
+		EnableDomainTransferLockOutput: r.Request.Data.(*types.EnableDomainTransferLockOutput),
 		response:                       &aws.Response{Request: r.Request},
 	}
 
@@ -115,7 +70,7 @@ func (r EnableDomainTransferLockRequest) Send(ctx context.Context) (*EnableDomai
 // EnableDomainTransferLockResponse is the response type for the
 // EnableDomainTransferLock API operation.
 type EnableDomainTransferLockResponse struct {
-	*EnableDomainTransferLockOutput
+	*types.EnableDomainTransferLockOutput
 
 	response *aws.Response
 }

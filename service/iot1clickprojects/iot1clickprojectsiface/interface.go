@@ -10,6 +10,7 @@ package iot1clickprojectsiface
 
 import (
 	"github.com/aws/aws-sdk-go-v2/service/iot1clickprojects"
+	"github.com/aws/aws-sdk-go-v2/service/iot1clickprojects/types"
 )
 
 // ClientAPI provides an interface to enable mocking the
@@ -43,7 +44,7 @@ import (
 //    type mockClientClient struct {
 //        iot1clickprojectsiface.ClientPI
 //    }
-//    func (m *mockClientClient) AssociateDeviceWithPlacement(input *iot1clickprojects.AssociateDeviceWithPlacementInput) (*iot1clickprojects.AssociateDeviceWithPlacementOutput, error) {
+//    func (m *mockClientClient) AssociateDeviceWithPlacement(input *types.AssociateDeviceWithPlacementInput) (*types.AssociateDeviceWithPlacementOutput, error) {
 //        // mock response/functionality
 //    }
 //
@@ -61,37 +62,37 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type ClientAPI interface {
-	AssociateDeviceWithPlacementRequest(*iot1clickprojects.AssociateDeviceWithPlacementInput) iot1clickprojects.AssociateDeviceWithPlacementRequest
+	AssociateDeviceWithPlacementRequest(*types.AssociateDeviceWithPlacementInput) iot1clickprojects.AssociateDeviceWithPlacementRequest
 
-	CreatePlacementRequest(*iot1clickprojects.CreatePlacementInput) iot1clickprojects.CreatePlacementRequest
+	CreatePlacementRequest(*types.CreatePlacementInput) iot1clickprojects.CreatePlacementRequest
 
-	CreateProjectRequest(*iot1clickprojects.CreateProjectInput) iot1clickprojects.CreateProjectRequest
+	CreateProjectRequest(*types.CreateProjectInput) iot1clickprojects.CreateProjectRequest
 
-	DeletePlacementRequest(*iot1clickprojects.DeletePlacementInput) iot1clickprojects.DeletePlacementRequest
+	DeletePlacementRequest(*types.DeletePlacementInput) iot1clickprojects.DeletePlacementRequest
 
-	DeleteProjectRequest(*iot1clickprojects.DeleteProjectInput) iot1clickprojects.DeleteProjectRequest
+	DeleteProjectRequest(*types.DeleteProjectInput) iot1clickprojects.DeleteProjectRequest
 
-	DescribePlacementRequest(*iot1clickprojects.DescribePlacementInput) iot1clickprojects.DescribePlacementRequest
+	DescribePlacementRequest(*types.DescribePlacementInput) iot1clickprojects.DescribePlacementRequest
 
-	DescribeProjectRequest(*iot1clickprojects.DescribeProjectInput) iot1clickprojects.DescribeProjectRequest
+	DescribeProjectRequest(*types.DescribeProjectInput) iot1clickprojects.DescribeProjectRequest
 
-	DisassociateDeviceFromPlacementRequest(*iot1clickprojects.DisassociateDeviceFromPlacementInput) iot1clickprojects.DisassociateDeviceFromPlacementRequest
+	DisassociateDeviceFromPlacementRequest(*types.DisassociateDeviceFromPlacementInput) iot1clickprojects.DisassociateDeviceFromPlacementRequest
 
-	GetDevicesInPlacementRequest(*iot1clickprojects.GetDevicesInPlacementInput) iot1clickprojects.GetDevicesInPlacementRequest
+	GetDevicesInPlacementRequest(*types.GetDevicesInPlacementInput) iot1clickprojects.GetDevicesInPlacementRequest
 
-	ListPlacementsRequest(*iot1clickprojects.ListPlacementsInput) iot1clickprojects.ListPlacementsRequest
+	ListPlacementsRequest(*types.ListPlacementsInput) iot1clickprojects.ListPlacementsRequest
 
-	ListProjectsRequest(*iot1clickprojects.ListProjectsInput) iot1clickprojects.ListProjectsRequest
+	ListProjectsRequest(*types.ListProjectsInput) iot1clickprojects.ListProjectsRequest
 
-	ListTagsForResourceRequest(*iot1clickprojects.ListTagsForResourceInput) iot1clickprojects.ListTagsForResourceRequest
+	ListTagsForResourceRequest(*types.ListTagsForResourceInput) iot1clickprojects.ListTagsForResourceRequest
 
-	TagResourceRequest(*iot1clickprojects.TagResourceInput) iot1clickprojects.TagResourceRequest
+	TagResourceRequest(*types.TagResourceInput) iot1clickprojects.TagResourceRequest
 
-	UntagResourceRequest(*iot1clickprojects.UntagResourceInput) iot1clickprojects.UntagResourceRequest
+	UntagResourceRequest(*types.UntagResourceInput) iot1clickprojects.UntagResourceRequest
 
-	UpdatePlacementRequest(*iot1clickprojects.UpdatePlacementInput) iot1clickprojects.UpdatePlacementRequest
+	UpdatePlacementRequest(*types.UpdatePlacementInput) iot1clickprojects.UpdatePlacementRequest
 
-	UpdateProjectRequest(*iot1clickprojects.UpdateProjectInput) iot1clickprojects.UpdateProjectRequest
+	UpdateProjectRequest(*types.UpdateProjectInput) iot1clickprojects.UpdateProjectRequest
 }
 
 var _ ClientAPI = (*iot1clickprojects.Client)(nil)

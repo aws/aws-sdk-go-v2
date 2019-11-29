@@ -6,47 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/configservice/types"
 )
-
-type DescribeOrganizationConfigRuleStatusesInput struct {
-	_ struct{} `type:"structure"`
-
-	// The maximum number of OrganizationConfigRuleStatuses returned on each page.
-	// If you do no specify a number, AWS Config uses the default. The default is
-	// 100.
-	Limit *int64 `type:"integer"`
-
-	// The nextToken string returned on a previous page that you use to get the
-	// next page of results in a paginated response.
-	NextToken *string `type:"string"`
-
-	// The names of organization config rules for which you want status details.
-	// If you do not specify any names, AWS Config returns details for all your
-	// organization AWS Confg rules.
-	OrganizationConfigRuleNames []string `type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeOrganizationConfigRuleStatusesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type DescribeOrganizationConfigRuleStatusesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The nextToken string returned on a previous page that you use to get the
-	// next page of results in a paginated response.
-	NextToken *string `type:"string"`
-
-	// A list of OrganizationConfigRuleStatus objects.
-	OrganizationConfigRuleStatuses []OrganizationConfigRuleStatus `type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeOrganizationConfigRuleStatusesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeOrganizationConfigRuleStatuses = "DescribeOrganizationConfigRuleStatuses"
 
@@ -74,7 +35,7 @@ const opDescribeOrganizationConfigRuleStatuses = "DescribeOrganizationConfigRule
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DescribeOrganizationConfigRuleStatuses
-func (c *Client) DescribeOrganizationConfigRuleStatusesRequest(input *DescribeOrganizationConfigRuleStatusesInput) DescribeOrganizationConfigRuleStatusesRequest {
+func (c *Client) DescribeOrganizationConfigRuleStatusesRequest(input *types.DescribeOrganizationConfigRuleStatusesInput) DescribeOrganizationConfigRuleStatusesRequest {
 	op := &aws.Operation{
 		Name:       opDescribeOrganizationConfigRuleStatuses,
 		HTTPMethod: "POST",
@@ -82,10 +43,10 @@ func (c *Client) DescribeOrganizationConfigRuleStatusesRequest(input *DescribeOr
 	}
 
 	if input == nil {
-		input = &DescribeOrganizationConfigRuleStatusesInput{}
+		input = &types.DescribeOrganizationConfigRuleStatusesInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeOrganizationConfigRuleStatusesOutput{})
+	req := c.newRequest(op, input, &types.DescribeOrganizationConfigRuleStatusesOutput{})
 	return DescribeOrganizationConfigRuleStatusesRequest{Request: req, Input: input, Copy: c.DescribeOrganizationConfigRuleStatusesRequest}
 }
 
@@ -93,8 +54,8 @@ func (c *Client) DescribeOrganizationConfigRuleStatusesRequest(input *DescribeOr
 // DescribeOrganizationConfigRuleStatuses API operation.
 type DescribeOrganizationConfigRuleStatusesRequest struct {
 	*aws.Request
-	Input *DescribeOrganizationConfigRuleStatusesInput
-	Copy  func(*DescribeOrganizationConfigRuleStatusesInput) DescribeOrganizationConfigRuleStatusesRequest
+	Input *types.DescribeOrganizationConfigRuleStatusesInput
+	Copy  func(*types.DescribeOrganizationConfigRuleStatusesInput) DescribeOrganizationConfigRuleStatusesRequest
 }
 
 // Send marshals and sends the DescribeOrganizationConfigRuleStatuses API request.
@@ -106,7 +67,7 @@ func (r DescribeOrganizationConfigRuleStatusesRequest) Send(ctx context.Context)
 	}
 
 	resp := &DescribeOrganizationConfigRuleStatusesResponse{
-		DescribeOrganizationConfigRuleStatusesOutput: r.Request.Data.(*DescribeOrganizationConfigRuleStatusesOutput),
+		DescribeOrganizationConfigRuleStatusesOutput: r.Request.Data.(*types.DescribeOrganizationConfigRuleStatusesOutput),
 		response: &aws.Response{Request: r.Request},
 	}
 
@@ -116,7 +77,7 @@ func (r DescribeOrganizationConfigRuleStatusesRequest) Send(ctx context.Context)
 // DescribeOrganizationConfigRuleStatusesResponse is the response type for the
 // DescribeOrganizationConfigRuleStatuses API operation.
 type DescribeOrganizationConfigRuleStatusesResponse struct {
-	*DescribeOrganizationConfigRuleStatusesOutput
+	*types.DescribeOrganizationConfigRuleStatusesOutput
 
 	response *aws.Response
 }

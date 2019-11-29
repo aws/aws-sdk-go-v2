@@ -6,71 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/service/waf"
+	"github.com/aws/aws-sdk-go-v2/service/wafregional/types"
 )
-
-type CreateGeoMatchSetInput struct {
-	_ struct{} `type:"structure"`
-
-	// The value returned by the most recent call to GetChangeToken.
-	//
-	// ChangeToken is a required field
-	ChangeToken *string `min:"1" type:"string" required:"true"`
-
-	// A friendly name or description of the GeoMatchSet. You can't change Name
-	// after you create the GeoMatchSet.
-	//
-	// Name is a required field
-	Name *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s CreateGeoMatchSetInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateGeoMatchSetInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateGeoMatchSetInput"}
-
-	if s.ChangeToken == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ChangeToken"))
-	}
-	if s.ChangeToken != nil && len(*s.ChangeToken) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ChangeToken", 1))
-	}
-
-	if s.Name == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Name"))
-	}
-	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type CreateGeoMatchSetOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The ChangeToken that you used to submit the CreateGeoMatchSet request. You
-	// can also use this value to query the status of the request. For more information,
-	// see GetChangeTokenStatus.
-	ChangeToken *string `min:"1" type:"string"`
-
-	// The GeoMatchSet returned in the CreateGeoMatchSet response. The GeoMatchSet
-	// contains no GeoMatchConstraints.
-	GeoMatchSet *waf.GeoMatchSet `type:"structure"`
-}
-
-// String returns the string representation
-func (s CreateGeoMatchSetOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCreateGeoMatchSet = "CreateGeoMatchSet"
 
@@ -107,7 +44,7 @@ const opCreateGeoMatchSet = "CreateGeoMatchSet"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/CreateGeoMatchSet
-func (c *Client) CreateGeoMatchSetRequest(input *CreateGeoMatchSetInput) CreateGeoMatchSetRequest {
+func (c *Client) CreateGeoMatchSetRequest(input *types.CreateGeoMatchSetInput) CreateGeoMatchSetRequest {
 	op := &aws.Operation{
 		Name:       opCreateGeoMatchSet,
 		HTTPMethod: "POST",
@@ -115,10 +52,10 @@ func (c *Client) CreateGeoMatchSetRequest(input *CreateGeoMatchSetInput) CreateG
 	}
 
 	if input == nil {
-		input = &CreateGeoMatchSetInput{}
+		input = &types.CreateGeoMatchSetInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateGeoMatchSetOutput{})
+	req := c.newRequest(op, input, &types.CreateGeoMatchSetOutput{})
 	return CreateGeoMatchSetRequest{Request: req, Input: input, Copy: c.CreateGeoMatchSetRequest}
 }
 
@@ -126,8 +63,8 @@ func (c *Client) CreateGeoMatchSetRequest(input *CreateGeoMatchSetInput) CreateG
 // CreateGeoMatchSet API operation.
 type CreateGeoMatchSetRequest struct {
 	*aws.Request
-	Input *CreateGeoMatchSetInput
-	Copy  func(*CreateGeoMatchSetInput) CreateGeoMatchSetRequest
+	Input *types.CreateGeoMatchSetInput
+	Copy  func(*types.CreateGeoMatchSetInput) CreateGeoMatchSetRequest
 }
 
 // Send marshals and sends the CreateGeoMatchSet API request.
@@ -139,7 +76,7 @@ func (r CreateGeoMatchSetRequest) Send(ctx context.Context) (*CreateGeoMatchSetR
 	}
 
 	resp := &CreateGeoMatchSetResponse{
-		CreateGeoMatchSetOutput: r.Request.Data.(*CreateGeoMatchSetOutput),
+		CreateGeoMatchSetOutput: r.Request.Data.(*types.CreateGeoMatchSetOutput),
 		response:                &aws.Response{Request: r.Request},
 	}
 
@@ -149,7 +86,7 @@ func (r CreateGeoMatchSetRequest) Send(ctx context.Context) (*CreateGeoMatchSetR
 // CreateGeoMatchSetResponse is the response type for the
 // CreateGeoMatchSet API operation.
 type CreateGeoMatchSetResponse struct {
-	*CreateGeoMatchSetOutput
+	*types.CreateGeoMatchSetOutput
 
 	response *aws.Response
 }

@@ -6,54 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/opsworkscm/types"
 )
-
-type CreateBackupInput struct {
-	_ struct{} `type:"structure"`
-
-	// A user-defined description of the backup.
-	Description *string `type:"string"`
-
-	// The name of the server that you want to back up.
-	//
-	// ServerName is a required field
-	ServerName *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s CreateBackupInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateBackupInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateBackupInput"}
-
-	if s.ServerName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ServerName"))
-	}
-	if s.ServerName != nil && len(*s.ServerName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ServerName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type CreateBackupOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Backup created by request.
-	Backup *Backup `type:"structure"`
-}
-
-// String returns the string representation
-func (s CreateBackupOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCreateBackup = "CreateBackup"
 
@@ -83,7 +37,7 @@ const opCreateBackup = "CreateBackup"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/CreateBackup
-func (c *Client) CreateBackupRequest(input *CreateBackupInput) CreateBackupRequest {
+func (c *Client) CreateBackupRequest(input *types.CreateBackupInput) CreateBackupRequest {
 	op := &aws.Operation{
 		Name:       opCreateBackup,
 		HTTPMethod: "POST",
@@ -91,10 +45,10 @@ func (c *Client) CreateBackupRequest(input *CreateBackupInput) CreateBackupReque
 	}
 
 	if input == nil {
-		input = &CreateBackupInput{}
+		input = &types.CreateBackupInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateBackupOutput{})
+	req := c.newRequest(op, input, &types.CreateBackupOutput{})
 	return CreateBackupRequest{Request: req, Input: input, Copy: c.CreateBackupRequest}
 }
 
@@ -102,8 +56,8 @@ func (c *Client) CreateBackupRequest(input *CreateBackupInput) CreateBackupReque
 // CreateBackup API operation.
 type CreateBackupRequest struct {
 	*aws.Request
-	Input *CreateBackupInput
-	Copy  func(*CreateBackupInput) CreateBackupRequest
+	Input *types.CreateBackupInput
+	Copy  func(*types.CreateBackupInput) CreateBackupRequest
 }
 
 // Send marshals and sends the CreateBackup API request.
@@ -115,7 +69,7 @@ func (r CreateBackupRequest) Send(ctx context.Context) (*CreateBackupResponse, e
 	}
 
 	resp := &CreateBackupResponse{
-		CreateBackupOutput: r.Request.Data.(*CreateBackupOutput),
+		CreateBackupOutput: r.Request.Data.(*types.CreateBackupOutput),
 		response:           &aws.Response{Request: r.Request},
 	}
 
@@ -125,7 +79,7 @@ func (r CreateBackupRequest) Send(ctx context.Context) (*CreateBackupResponse, e
 // CreateBackupResponse is the response type for the
 // CreateBackup API operation.
 type CreateBackupResponse struct {
-	*CreateBackupOutput
+	*types.CreateBackupOutput
 
 	response *aws.Response
 }

@@ -6,57 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/ec2query"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-// Contains the parameters for DeleteVpnConnectionRoute.
-type DeleteVpnConnectionRouteInput struct {
-	_ struct{} `type:"structure"`
-
-	// The CIDR block associated with the local subnet of the customer network.
-	//
-	// DestinationCidrBlock is a required field
-	DestinationCidrBlock *string `type:"string" required:"true"`
-
-	// The ID of the VPN connection.
-	//
-	// VpnConnectionId is a required field
-	VpnConnectionId *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteVpnConnectionRouteInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteVpnConnectionRouteInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteVpnConnectionRouteInput"}
-
-	if s.DestinationCidrBlock == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DestinationCidrBlock"))
-	}
-
-	if s.VpnConnectionId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("VpnConnectionId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteVpnConnectionRouteOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteVpnConnectionRouteOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteVpnConnectionRoute = "DeleteVpnConnectionRoute"
 
@@ -76,7 +29,7 @@ const opDeleteVpnConnectionRoute = "DeleteVpnConnectionRoute"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteVpnConnectionRoute
-func (c *Client) DeleteVpnConnectionRouteRequest(input *DeleteVpnConnectionRouteInput) DeleteVpnConnectionRouteRequest {
+func (c *Client) DeleteVpnConnectionRouteRequest(input *types.DeleteVpnConnectionRouteInput) DeleteVpnConnectionRouteRequest {
 	op := &aws.Operation{
 		Name:       opDeleteVpnConnectionRoute,
 		HTTPMethod: "POST",
@@ -84,10 +37,10 @@ func (c *Client) DeleteVpnConnectionRouteRequest(input *DeleteVpnConnectionRoute
 	}
 
 	if input == nil {
-		input = &DeleteVpnConnectionRouteInput{}
+		input = &types.DeleteVpnConnectionRouteInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteVpnConnectionRouteOutput{})
+	req := c.newRequest(op, input, &types.DeleteVpnConnectionRouteOutput{})
 	req.Handlers.Unmarshal.Remove(ec2query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return DeleteVpnConnectionRouteRequest{Request: req, Input: input, Copy: c.DeleteVpnConnectionRouteRequest}
@@ -97,8 +50,8 @@ func (c *Client) DeleteVpnConnectionRouteRequest(input *DeleteVpnConnectionRoute
 // DeleteVpnConnectionRoute API operation.
 type DeleteVpnConnectionRouteRequest struct {
 	*aws.Request
-	Input *DeleteVpnConnectionRouteInput
-	Copy  func(*DeleteVpnConnectionRouteInput) DeleteVpnConnectionRouteRequest
+	Input *types.DeleteVpnConnectionRouteInput
+	Copy  func(*types.DeleteVpnConnectionRouteInput) DeleteVpnConnectionRouteRequest
 }
 
 // Send marshals and sends the DeleteVpnConnectionRoute API request.
@@ -110,7 +63,7 @@ func (r DeleteVpnConnectionRouteRequest) Send(ctx context.Context) (*DeleteVpnCo
 	}
 
 	resp := &DeleteVpnConnectionRouteResponse{
-		DeleteVpnConnectionRouteOutput: r.Request.Data.(*DeleteVpnConnectionRouteOutput),
+		DeleteVpnConnectionRouteOutput: r.Request.Data.(*types.DeleteVpnConnectionRouteOutput),
 		response:                       &aws.Response{Request: r.Request},
 	}
 
@@ -120,7 +73,7 @@ func (r DeleteVpnConnectionRouteRequest) Send(ctx context.Context) (*DeleteVpnCo
 // DeleteVpnConnectionRouteResponse is the response type for the
 // DeleteVpnConnectionRoute API operation.
 type DeleteVpnConnectionRouteResponse struct {
-	*DeleteVpnConnectionRouteOutput
+	*types.DeleteVpnConnectionRouteOutput
 
 	response *aws.Response
 }

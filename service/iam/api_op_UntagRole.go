@@ -6,64 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/query"
+	"github.com/aws/aws-sdk-go-v2/service/iam/types"
 )
-
-type UntagRoleInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the IAM role from which you want to remove tags.
-	//
-	// This parameter accepts (through its regex pattern (http://wikipedia.org/wiki/regex))
-	// a string of characters that consist of upper and lowercase alphanumeric characters
-	// with no spaces. You can also include any of the following characters: _+=,.@-
-	//
-	// RoleName is a required field
-	RoleName *string `min:"1" type:"string" required:"true"`
-
-	// A list of key names as a simple array of strings. The tags with matching
-	// keys are removed from the specified role.
-	//
-	// TagKeys is a required field
-	TagKeys []string `type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s UntagRoleInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UntagRoleInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UntagRoleInput"}
-
-	if s.RoleName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("RoleName"))
-	}
-	if s.RoleName != nil && len(*s.RoleName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("RoleName", 1))
-	}
-
-	if s.TagKeys == nil {
-		invalidParams.Add(aws.NewErrParamRequired("TagKeys"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type UntagRoleOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s UntagRoleOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opUntagRole = "UntagRole"
 
@@ -82,7 +28,7 @@ const opUntagRole = "UntagRole"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/UntagRole
-func (c *Client) UntagRoleRequest(input *UntagRoleInput) UntagRoleRequest {
+func (c *Client) UntagRoleRequest(input *types.UntagRoleInput) UntagRoleRequest {
 	op := &aws.Operation{
 		Name:       opUntagRole,
 		HTTPMethod: "POST",
@@ -90,10 +36,10 @@ func (c *Client) UntagRoleRequest(input *UntagRoleInput) UntagRoleRequest {
 	}
 
 	if input == nil {
-		input = &UntagRoleInput{}
+		input = &types.UntagRoleInput{}
 	}
 
-	req := c.newRequest(op, input, &UntagRoleOutput{})
+	req := c.newRequest(op, input, &types.UntagRoleOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return UntagRoleRequest{Request: req, Input: input, Copy: c.UntagRoleRequest}
@@ -103,8 +49,8 @@ func (c *Client) UntagRoleRequest(input *UntagRoleInput) UntagRoleRequest {
 // UntagRole API operation.
 type UntagRoleRequest struct {
 	*aws.Request
-	Input *UntagRoleInput
-	Copy  func(*UntagRoleInput) UntagRoleRequest
+	Input *types.UntagRoleInput
+	Copy  func(*types.UntagRoleInput) UntagRoleRequest
 }
 
 // Send marshals and sends the UntagRole API request.
@@ -116,7 +62,7 @@ func (r UntagRoleRequest) Send(ctx context.Context) (*UntagRoleResponse, error) 
 	}
 
 	resp := &UntagRoleResponse{
-		UntagRoleOutput: r.Request.Data.(*UntagRoleOutput),
+		UntagRoleOutput: r.Request.Data.(*types.UntagRoleOutput),
 		response:        &aws.Response{Request: r.Request},
 	}
 
@@ -126,7 +72,7 @@ func (r UntagRoleRequest) Send(ctx context.Context) (*UntagRoleResponse, error) 
 // UntagRoleResponse is the response type for the
 // UntagRole API operation.
 type UntagRoleResponse struct {
-	*UntagRoleOutput
+	*types.UntagRoleOutput
 
 	response *aws.Response
 }

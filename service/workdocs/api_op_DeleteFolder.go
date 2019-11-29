@@ -6,81 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/restjson"
+	"github.com/aws/aws-sdk-go-v2/service/workdocs/types"
 )
-
-type DeleteFolderInput struct {
-	_ struct{} `type:"structure"`
-
-	// Amazon WorkDocs authentication token. Do not set this field when using administrative
-	// API actions, as in accessing the API using AWS credentials.
-	AuthenticationToken *string `location:"header" locationName:"Authentication" min:"1" type:"string" sensitive:"true"`
-
-	// The ID of the folder.
-	//
-	// FolderId is a required field
-	FolderId *string `location:"uri" locationName:"FolderId" min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteFolderInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteFolderInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteFolderInput"}
-	if s.AuthenticationToken != nil && len(*s.AuthenticationToken) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("AuthenticationToken", 1))
-	}
-
-	if s.FolderId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("FolderId"))
-	}
-	if s.FolderId != nil && len(*s.FolderId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("FolderId", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteFolderInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.AuthenticationToken != nil {
-		v := *s.AuthenticationToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "Authentication", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.FolderId != nil {
-		v := *s.FolderId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "FolderId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type DeleteFolderOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteFolderOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteFolderOutput) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
 
 const opDeleteFolder = "DeleteFolder"
 
@@ -97,7 +26,7 @@ const opDeleteFolder = "DeleteFolder"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/DeleteFolder
-func (c *Client) DeleteFolderRequest(input *DeleteFolderInput) DeleteFolderRequest {
+func (c *Client) DeleteFolderRequest(input *types.DeleteFolderInput) DeleteFolderRequest {
 	op := &aws.Operation{
 		Name:       opDeleteFolder,
 		HTTPMethod: "DELETE",
@@ -105,10 +34,10 @@ func (c *Client) DeleteFolderRequest(input *DeleteFolderInput) DeleteFolderReque
 	}
 
 	if input == nil {
-		input = &DeleteFolderInput{}
+		input = &types.DeleteFolderInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteFolderOutput{})
+	req := c.newRequest(op, input, &types.DeleteFolderOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return DeleteFolderRequest{Request: req, Input: input, Copy: c.DeleteFolderRequest}
@@ -118,8 +47,8 @@ func (c *Client) DeleteFolderRequest(input *DeleteFolderInput) DeleteFolderReque
 // DeleteFolder API operation.
 type DeleteFolderRequest struct {
 	*aws.Request
-	Input *DeleteFolderInput
-	Copy  func(*DeleteFolderInput) DeleteFolderRequest
+	Input *types.DeleteFolderInput
+	Copy  func(*types.DeleteFolderInput) DeleteFolderRequest
 }
 
 // Send marshals and sends the DeleteFolder API request.
@@ -131,7 +60,7 @@ func (r DeleteFolderRequest) Send(ctx context.Context) (*DeleteFolderResponse, e
 	}
 
 	resp := &DeleteFolderResponse{
-		DeleteFolderOutput: r.Request.Data.(*DeleteFolderOutput),
+		DeleteFolderOutput: r.Request.Data.(*types.DeleteFolderOutput),
 		response:           &aws.Response{Request: r.Request},
 	}
 
@@ -141,7 +70,7 @@ func (r DeleteFolderRequest) Send(ctx context.Context) (*DeleteFolderResponse, e
 // DeleteFolderResponse is the response type for the
 // DeleteFolder API operation.
 type DeleteFolderResponse struct {
-	*DeleteFolderOutput
+	*types.DeleteFolderOutput
 
 	response *aws.Response
 }

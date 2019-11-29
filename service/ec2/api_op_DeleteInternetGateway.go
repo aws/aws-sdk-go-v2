@@ -6,53 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/ec2query"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-type DeleteInternetGatewayInput struct {
-	_ struct{} `type:"structure"`
-
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have
-	// the required permissions, the error response is DryRunOperation. Otherwise,
-	// it is UnauthorizedOperation.
-	DryRun *bool `locationName:"dryRun" type:"boolean"`
-
-	// The ID of the internet gateway.
-	//
-	// InternetGatewayId is a required field
-	InternetGatewayId *string `locationName:"internetGatewayId" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteInternetGatewayInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteInternetGatewayInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteInternetGatewayInput"}
-
-	if s.InternetGatewayId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("InternetGatewayId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteInternetGatewayOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteInternetGatewayOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteInternetGateway = "DeleteInternetGateway"
 
@@ -70,7 +27,7 @@ const opDeleteInternetGateway = "DeleteInternetGateway"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteInternetGateway
-func (c *Client) DeleteInternetGatewayRequest(input *DeleteInternetGatewayInput) DeleteInternetGatewayRequest {
+func (c *Client) DeleteInternetGatewayRequest(input *types.DeleteInternetGatewayInput) DeleteInternetGatewayRequest {
 	op := &aws.Operation{
 		Name:       opDeleteInternetGateway,
 		HTTPMethod: "POST",
@@ -78,10 +35,10 @@ func (c *Client) DeleteInternetGatewayRequest(input *DeleteInternetGatewayInput)
 	}
 
 	if input == nil {
-		input = &DeleteInternetGatewayInput{}
+		input = &types.DeleteInternetGatewayInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteInternetGatewayOutput{})
+	req := c.newRequest(op, input, &types.DeleteInternetGatewayOutput{})
 	req.Handlers.Unmarshal.Remove(ec2query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return DeleteInternetGatewayRequest{Request: req, Input: input, Copy: c.DeleteInternetGatewayRequest}
@@ -91,8 +48,8 @@ func (c *Client) DeleteInternetGatewayRequest(input *DeleteInternetGatewayInput)
 // DeleteInternetGateway API operation.
 type DeleteInternetGatewayRequest struct {
 	*aws.Request
-	Input *DeleteInternetGatewayInput
-	Copy  func(*DeleteInternetGatewayInput) DeleteInternetGatewayRequest
+	Input *types.DeleteInternetGatewayInput
+	Copy  func(*types.DeleteInternetGatewayInput) DeleteInternetGatewayRequest
 }
 
 // Send marshals and sends the DeleteInternetGateway API request.
@@ -104,7 +61,7 @@ func (r DeleteInternetGatewayRequest) Send(ctx context.Context) (*DeleteInternet
 	}
 
 	resp := &DeleteInternetGatewayResponse{
-		DeleteInternetGatewayOutput: r.Request.Data.(*DeleteInternetGatewayOutput),
+		DeleteInternetGatewayOutput: r.Request.Data.(*types.DeleteInternetGatewayOutput),
 		response:                    &aws.Response{Request: r.Request},
 	}
 
@@ -114,7 +71,7 @@ func (r DeleteInternetGatewayRequest) Send(ctx context.Context) (*DeleteInternet
 // DeleteInternetGatewayResponse is the response type for the
 // DeleteInternetGateway API operation.
 type DeleteInternetGatewayResponse struct {
-	*DeleteInternetGatewayOutput
+	*types.DeleteInternetGatewayOutput
 
 	response *aws.Response
 }

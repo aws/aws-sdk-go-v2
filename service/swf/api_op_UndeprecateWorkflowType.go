@@ -6,64 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
+	"github.com/aws/aws-sdk-go-v2/service/swf/types"
 )
-
-type UndeprecateWorkflowTypeInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the domain of the deprecated workflow type.
-	//
-	// Domain is a required field
-	Domain *string `locationName:"domain" min:"1" type:"string" required:"true"`
-
-	// The name of the domain of the deprecated workflow type.
-	//
-	// WorkflowType is a required field
-	WorkflowType *WorkflowType `locationName:"workflowType" type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s UndeprecateWorkflowTypeInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UndeprecateWorkflowTypeInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UndeprecateWorkflowTypeInput"}
-
-	if s.Domain == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Domain"))
-	}
-	if s.Domain != nil && len(*s.Domain) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Domain", 1))
-	}
-
-	if s.WorkflowType == nil {
-		invalidParams.Add(aws.NewErrParamRequired("WorkflowType"))
-	}
-	if s.WorkflowType != nil {
-		if err := s.WorkflowType.Validate(); err != nil {
-			invalidParams.AddNested("WorkflowType", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type UndeprecateWorkflowTypeOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s UndeprecateWorkflowTypeOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opUndeprecateWorkflowType = "UndeprecateWorkflowType"
 
@@ -104,7 +50,7 @@ const opUndeprecateWorkflowType = "UndeprecateWorkflowType"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) UndeprecateWorkflowTypeRequest(input *UndeprecateWorkflowTypeInput) UndeprecateWorkflowTypeRequest {
+func (c *Client) UndeprecateWorkflowTypeRequest(input *types.UndeprecateWorkflowTypeInput) UndeprecateWorkflowTypeRequest {
 	op := &aws.Operation{
 		Name:       opUndeprecateWorkflowType,
 		HTTPMethod: "POST",
@@ -112,10 +58,10 @@ func (c *Client) UndeprecateWorkflowTypeRequest(input *UndeprecateWorkflowTypeIn
 	}
 
 	if input == nil {
-		input = &UndeprecateWorkflowTypeInput{}
+		input = &types.UndeprecateWorkflowTypeInput{}
 	}
 
-	req := c.newRequest(op, input, &UndeprecateWorkflowTypeOutput{})
+	req := c.newRequest(op, input, &types.UndeprecateWorkflowTypeOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return UndeprecateWorkflowTypeRequest{Request: req, Input: input, Copy: c.UndeprecateWorkflowTypeRequest}
@@ -125,8 +71,8 @@ func (c *Client) UndeprecateWorkflowTypeRequest(input *UndeprecateWorkflowTypeIn
 // UndeprecateWorkflowType API operation.
 type UndeprecateWorkflowTypeRequest struct {
 	*aws.Request
-	Input *UndeprecateWorkflowTypeInput
-	Copy  func(*UndeprecateWorkflowTypeInput) UndeprecateWorkflowTypeRequest
+	Input *types.UndeprecateWorkflowTypeInput
+	Copy  func(*types.UndeprecateWorkflowTypeInput) UndeprecateWorkflowTypeRequest
 }
 
 // Send marshals and sends the UndeprecateWorkflowType API request.
@@ -138,7 +84,7 @@ func (r UndeprecateWorkflowTypeRequest) Send(ctx context.Context) (*UndeprecateW
 	}
 
 	resp := &UndeprecateWorkflowTypeResponse{
-		UndeprecateWorkflowTypeOutput: r.Request.Data.(*UndeprecateWorkflowTypeOutput),
+		UndeprecateWorkflowTypeOutput: r.Request.Data.(*types.UndeprecateWorkflowTypeOutput),
 		response:                      &aws.Response{Request: r.Request},
 	}
 
@@ -148,7 +94,7 @@ func (r UndeprecateWorkflowTypeRequest) Send(ctx context.Context) (*UndeprecateW
 // UndeprecateWorkflowTypeResponse is the response type for the
 // UndeprecateWorkflowType API operation.
 type UndeprecateWorkflowTypeResponse struct {
-	*UndeprecateWorkflowTypeOutput
+	*types.UndeprecateWorkflowTypeOutput
 
 	response *aws.Response
 }

@@ -6,118 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/chime/types"
 )
-
-type ListUsersInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Chime account ID.
-	//
-	// AccountId is a required field
-	AccountId *string `location:"uri" locationName:"accountId" type:"string" required:"true"`
-
-	// The maximum number of results to return in a single call. Defaults to 100.
-	MaxResults *int64 `location:"querystring" locationName:"max-results" min:"1" type:"integer"`
-
-	// The token to use to retrieve the next page of results.
-	NextToken *string `location:"querystring" locationName:"next-token" type:"string"`
-
-	// Optional. The user email address used to filter results. Maximum 1.
-	UserEmail *string `location:"querystring" locationName:"user-email" type:"string" sensitive:"true"`
-}
-
-// String returns the string representation
-func (s ListUsersInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListUsersInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListUsersInput"}
-
-	if s.AccountId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("AccountId"))
-	}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListUsersInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.AccountId != nil {
-		v := *s.AccountId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "accountId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.MaxResults != nil {
-		v := *s.MaxResults
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "max-results", protocol.Int64Value(v), metadata)
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "next-token", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.UserEmail != nil {
-		v := *s.UserEmail
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "user-email", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type ListUsersOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The token to use to retrieve the next page of results.
-	NextToken *string `type:"string"`
-
-	// List of users and user details.
-	Users []User `type:"list"`
-}
-
-// String returns the string representation
-func (s ListUsersOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListUsersOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Users != nil {
-		v := s.Users
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "Users", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	return nil
-}
 
 const opListUsers = "ListUsers"
 
@@ -136,7 +26,7 @@ const opListUsers = "ListUsers"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/ListUsers
-func (c *Client) ListUsersRequest(input *ListUsersInput) ListUsersRequest {
+func (c *Client) ListUsersRequest(input *types.ListUsersInput) ListUsersRequest {
 	op := &aws.Operation{
 		Name:       opListUsers,
 		HTTPMethod: "GET",
@@ -150,10 +40,10 @@ func (c *Client) ListUsersRequest(input *ListUsersInput) ListUsersRequest {
 	}
 
 	if input == nil {
-		input = &ListUsersInput{}
+		input = &types.ListUsersInput{}
 	}
 
-	req := c.newRequest(op, input, &ListUsersOutput{})
+	req := c.newRequest(op, input, &types.ListUsersOutput{})
 	return ListUsersRequest{Request: req, Input: input, Copy: c.ListUsersRequest}
 }
 
@@ -161,8 +51,8 @@ func (c *Client) ListUsersRequest(input *ListUsersInput) ListUsersRequest {
 // ListUsers API operation.
 type ListUsersRequest struct {
 	*aws.Request
-	Input *ListUsersInput
-	Copy  func(*ListUsersInput) ListUsersRequest
+	Input *types.ListUsersInput
+	Copy  func(*types.ListUsersInput) ListUsersRequest
 }
 
 // Send marshals and sends the ListUsers API request.
@@ -174,7 +64,7 @@ func (r ListUsersRequest) Send(ctx context.Context) (*ListUsersResponse, error) 
 	}
 
 	resp := &ListUsersResponse{
-		ListUsersOutput: r.Request.Data.(*ListUsersOutput),
+		ListUsersOutput: r.Request.Data.(*types.ListUsersOutput),
 		response:        &aws.Response{Request: r.Request},
 	}
 
@@ -204,7 +94,7 @@ func NewListUsersPaginator(req ListUsersRequest) ListUsersPaginator {
 	return ListUsersPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListUsersInput
+				var inCpy *types.ListUsersInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -224,14 +114,14 @@ type ListUsersPaginator struct {
 	aws.Pager
 }
 
-func (p *ListUsersPaginator) CurrentPage() *ListUsersOutput {
-	return p.Pager.CurrentPage().(*ListUsersOutput)
+func (p *ListUsersPaginator) CurrentPage() *types.ListUsersOutput {
+	return p.Pager.CurrentPage().(*types.ListUsersOutput)
 }
 
 // ListUsersResponse is the response type for the
 // ListUsers API operation.
 type ListUsersResponse struct {
-	*ListUsersOutput
+	*types.ListUsersOutput
 
 	response *aws.Response
 }

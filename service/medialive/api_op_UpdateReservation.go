@@ -6,79 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/medialive/types"
 )
-
-type UpdateReservationInput struct {
-	_ struct{} `type:"structure"`
-
-	Name *string `locationName:"name" type:"string"`
-
-	// ReservationId is a required field
-	ReservationId *string `location:"uri" locationName:"reservationId" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s UpdateReservationInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateReservationInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateReservationInput"}
-
-	if s.ReservationId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ReservationId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s UpdateReservationInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.Name != nil {
-		v := *s.Name
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.ReservationId != nil {
-		v := *s.ReservationId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "reservationId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type UpdateReservationOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Reserved resources available to use
-	Reservation *Reservation `locationName:"reservation" type:"structure"`
-}
-
-// String returns the string representation
-func (s UpdateReservationOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s UpdateReservationOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.Reservation != nil {
-		v := s.Reservation
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "reservation", v, metadata)
-	}
-	return nil
-}
 
 const opUpdateReservation = "UpdateReservation"
 
@@ -95,7 +24,7 @@ const opUpdateReservation = "UpdateReservation"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/UpdateReservation
-func (c *Client) UpdateReservationRequest(input *UpdateReservationInput) UpdateReservationRequest {
+func (c *Client) UpdateReservationRequest(input *types.UpdateReservationInput) UpdateReservationRequest {
 	op := &aws.Operation{
 		Name:       opUpdateReservation,
 		HTTPMethod: "PUT",
@@ -103,10 +32,10 @@ func (c *Client) UpdateReservationRequest(input *UpdateReservationInput) UpdateR
 	}
 
 	if input == nil {
-		input = &UpdateReservationInput{}
+		input = &types.UpdateReservationInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateReservationOutput{})
+	req := c.newRequest(op, input, &types.UpdateReservationOutput{})
 	return UpdateReservationRequest{Request: req, Input: input, Copy: c.UpdateReservationRequest}
 }
 
@@ -114,8 +43,8 @@ func (c *Client) UpdateReservationRequest(input *UpdateReservationInput) UpdateR
 // UpdateReservation API operation.
 type UpdateReservationRequest struct {
 	*aws.Request
-	Input *UpdateReservationInput
-	Copy  func(*UpdateReservationInput) UpdateReservationRequest
+	Input *types.UpdateReservationInput
+	Copy  func(*types.UpdateReservationInput) UpdateReservationRequest
 }
 
 // Send marshals and sends the UpdateReservation API request.
@@ -127,7 +56,7 @@ func (r UpdateReservationRequest) Send(ctx context.Context) (*UpdateReservationR
 	}
 
 	resp := &UpdateReservationResponse{
-		UpdateReservationOutput: r.Request.Data.(*UpdateReservationOutput),
+		UpdateReservationOutput: r.Request.Data.(*types.UpdateReservationOutput),
 		response:                &aws.Response{Request: r.Request},
 	}
 
@@ -137,7 +66,7 @@ func (r UpdateReservationRequest) Send(ctx context.Context) (*UpdateReservationR
 // UpdateReservationResponse is the response type for the
 // UpdateReservation API operation.
 type UpdateReservationResponse struct {
-	*UpdateReservationOutput
+	*types.UpdateReservationOutput
 
 	response *aws.Response
 }

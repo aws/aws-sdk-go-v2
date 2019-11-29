@@ -6,238 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/apigatewayv2/types"
 )
-
-type CreateIntegrationResponseInput struct {
-	_ struct{} `type:"structure"`
-
-	// ApiId is a required field
-	ApiId *string `location:"uri" locationName:"apiId" type:"string" required:"true"`
-
-	// Specifies how to handle response payload content type conversions.
-	ContentHandlingStrategy ContentHandlingStrategy `locationName:"contentHandlingStrategy" type:"string" enum:"true"`
-
-	// IntegrationId is a required field
-	IntegrationId *string `location:"uri" locationName:"integrationId" type:"string" required:"true"`
-
-	// After evaulating a selection expression, the result is compared against one
-	// or more selection keys to find a matching key. See Selection Expressions
-	// (https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html#apigateway-websocket-api-apikey-selection-expressions)
-	// for a list of expressions and each expression's associated selection key
-	// type.
-	//
-	// IntegrationResponseKey is a required field
-	IntegrationResponseKey *string `locationName:"integrationResponseKey" type:"string" required:"true"`
-
-	// A key-value map specifying response parameters that are passed to the method
-	// response from the backend. The key is a method response header parameter
-	// name and the mapped value is an integration response header value, a static
-	// value enclosed within a pair of single quotes, or a JSON expression from
-	// the integration response body. The mapping key must match the pattern of
-	// method.response.header.{name}, where name is a valid and unique header name.
-	// The mapped non-static value must match the pattern of integration.response.header.{name}
-	// or integration.response.body.{JSON-expression}, where name is a valid and
-	// unique response header name and JSON-expression is a valid JSON expression
-	// without the $ prefix.
-	ResponseParameters map[string]string `locationName:"responseParameters" type:"map"`
-
-	// A mapping of identifier keys to templates. The value is an actual template
-	// script. The key is typically a SelectionKey which is chosen based on evaluating
-	// a selection expression.
-	ResponseTemplates map[string]string `locationName:"responseTemplates" type:"map"`
-
-	// An expression used to extract information at runtime. See Selection Expressions
-	// (https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html#apigateway-websocket-api-apikey-selection-expressions)
-	// for more information.
-	TemplateSelectionExpression *string `locationName:"templateSelectionExpression" type:"string"`
-}
-
-// String returns the string representation
-func (s CreateIntegrationResponseInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateIntegrationResponseInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateIntegrationResponseInput"}
-
-	if s.ApiId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ApiId"))
-	}
-
-	if s.IntegrationId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("IntegrationId"))
-	}
-
-	if s.IntegrationResponseKey == nil {
-		invalidParams.Add(aws.NewErrParamRequired("IntegrationResponseKey"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s CreateIntegrationResponseInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if len(s.ContentHandlingStrategy) > 0 {
-		v := s.ContentHandlingStrategy
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "contentHandlingStrategy", protocol.QuotedValue{ValueMarshaler: v}, metadata)
-	}
-	if s.IntegrationResponseKey != nil {
-		v := *s.IntegrationResponseKey
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "integrationResponseKey", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.ResponseParameters != nil {
-		v := s.ResponseParameters
-
-		metadata := protocol.Metadata{}
-		ms0 := e.Map(protocol.BodyTarget, "responseParameters", metadata)
-		ms0.Start()
-		for k1, v1 := range v {
-			ms0.MapSetValue(k1, protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
-		}
-		ms0.End()
-
-	}
-	if s.ResponseTemplates != nil {
-		v := s.ResponseTemplates
-
-		metadata := protocol.Metadata{}
-		ms0 := e.Map(protocol.BodyTarget, "responseTemplates", metadata)
-		ms0.Start()
-		for k1, v1 := range v {
-			ms0.MapSetValue(k1, protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
-		}
-		ms0.End()
-
-	}
-	if s.TemplateSelectionExpression != nil {
-		v := *s.TemplateSelectionExpression
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "templateSelectionExpression", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.ApiId != nil {
-		v := *s.ApiId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "apiId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.IntegrationId != nil {
-		v := *s.IntegrationId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "integrationId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type CreateIntegrationResponseOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Specifies how to handle response payload content type conversions.
-	ContentHandlingStrategy ContentHandlingStrategy `locationName:"contentHandlingStrategy" type:"string" enum:"true"`
-
-	// The identifier.
-	IntegrationResponseId *string `locationName:"integrationResponseId" type:"string"`
-
-	// After evaulating a selection expression, the result is compared against one
-	// or more selection keys to find a matching key. See Selection Expressions
-	// (https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html#apigateway-websocket-api-apikey-selection-expressions)
-	// for a list of expressions and each expression's associated selection key
-	// type.
-	IntegrationResponseKey *string `locationName:"integrationResponseKey" type:"string"`
-
-	// A key-value map specifying response parameters that are passed to the method
-	// response from the backend. The key is a method response header parameter
-	// name and the mapped value is an integration response header value, a static
-	// value enclosed within a pair of single quotes, or a JSON expression from
-	// the integration response body. The mapping key must match the pattern of
-	// method.response.header.{name}, where name is a valid and unique header name.
-	// The mapped non-static value must match the pattern of integration.response.header.{name}
-	// or integration.response.body.{JSON-expression}, where name is a valid and
-	// unique response header name and JSON-expression is a valid JSON expression
-	// without the $ prefix.
-	ResponseParameters map[string]string `locationName:"responseParameters" type:"map"`
-
-	// A mapping of identifier keys to templates. The value is an actual template
-	// script. The key is typically a SelectionKey which is chosen based on evaluating
-	// a selection expression.
-	ResponseTemplates map[string]string `locationName:"responseTemplates" type:"map"`
-
-	// An expression used to extract information at runtime. See Selection Expressions
-	// (https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html#apigateway-websocket-api-apikey-selection-expressions)
-	// for more information.
-	TemplateSelectionExpression *string `locationName:"templateSelectionExpression" type:"string"`
-}
-
-// String returns the string representation
-func (s CreateIntegrationResponseOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s CreateIntegrationResponseOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.ContentHandlingStrategy) > 0 {
-		v := s.ContentHandlingStrategy
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "contentHandlingStrategy", protocol.QuotedValue{ValueMarshaler: v}, metadata)
-	}
-	if s.IntegrationResponseId != nil {
-		v := *s.IntegrationResponseId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "integrationResponseId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.IntegrationResponseKey != nil {
-		v := *s.IntegrationResponseKey
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "integrationResponseKey", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.ResponseParameters != nil {
-		v := s.ResponseParameters
-
-		metadata := protocol.Metadata{}
-		ms0 := e.Map(protocol.BodyTarget, "responseParameters", metadata)
-		ms0.Start()
-		for k1, v1 := range v {
-			ms0.MapSetValue(k1, protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
-		}
-		ms0.End()
-
-	}
-	if s.ResponseTemplates != nil {
-		v := s.ResponseTemplates
-
-		metadata := protocol.Metadata{}
-		ms0 := e.Map(protocol.BodyTarget, "responseTemplates", metadata)
-		ms0.Start()
-		for k1, v1 := range v {
-			ms0.MapSetValue(k1, protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
-		}
-		ms0.End()
-
-	}
-	if s.TemplateSelectionExpression != nil {
-		v := *s.TemplateSelectionExpression
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "templateSelectionExpression", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opCreateIntegrationResponse = "CreateIntegrationResponse"
 
@@ -254,7 +24,7 @@ const opCreateIntegrationResponse = "CreateIntegrationResponse"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/apigatewayv2-2018-11-29/CreateIntegrationResponse
-func (c *Client) CreateIntegrationResponseRequest(input *CreateIntegrationResponseInput) CreateIntegrationResponseRequest {
+func (c *Client) CreateIntegrationResponseRequest(input *types.CreateIntegrationResponseInput) CreateIntegrationResponseRequest {
 	op := &aws.Operation{
 		Name:       opCreateIntegrationResponse,
 		HTTPMethod: "POST",
@@ -262,10 +32,10 @@ func (c *Client) CreateIntegrationResponseRequest(input *CreateIntegrationRespon
 	}
 
 	if input == nil {
-		input = &CreateIntegrationResponseInput{}
+		input = &types.CreateIntegrationResponseInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateIntegrationResponseOutput{})
+	req := c.newRequest(op, input, &types.CreateIntegrationResponseOutput{})
 	return CreateIntegrationResponseRequest{Request: req, Input: input, Copy: c.CreateIntegrationResponseRequest}
 }
 
@@ -273,8 +43,8 @@ func (c *Client) CreateIntegrationResponseRequest(input *CreateIntegrationRespon
 // CreateIntegrationResponse API operation.
 type CreateIntegrationResponseRequest struct {
 	*aws.Request
-	Input *CreateIntegrationResponseInput
-	Copy  func(*CreateIntegrationResponseInput) CreateIntegrationResponseRequest
+	Input *types.CreateIntegrationResponseInput
+	Copy  func(*types.CreateIntegrationResponseInput) CreateIntegrationResponseRequest
 }
 
 // Send marshals and sends the CreateIntegrationResponse API request.
@@ -286,7 +56,7 @@ func (r CreateIntegrationResponseRequest) Send(ctx context.Context) (*CreateInte
 	}
 
 	resp := &CreateIntegrationResponseResponse{
-		CreateIntegrationResponseOutput: r.Request.Data.(*CreateIntegrationResponseOutput),
+		CreateIntegrationResponseOutput: r.Request.Data.(*types.CreateIntegrationResponseOutput),
 		response:                        &aws.Response{Request: r.Request},
 	}
 
@@ -296,7 +66,7 @@ func (r CreateIntegrationResponseRequest) Send(ctx context.Context) (*CreateInte
 // CreateIntegrationResponseResponse is the response type for the
 // CreateIntegrationResponse API operation.
 type CreateIntegrationResponseResponse struct {
-	*CreateIntegrationResponseOutput
+	*types.CreateIntegrationResponseOutput
 
 	response *aws.Response
 }

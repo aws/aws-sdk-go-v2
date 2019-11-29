@@ -6,71 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ecr/types"
 )
-
-type BatchCheckLayerAvailabilityInput struct {
-	_ struct{} `type:"structure"`
-
-	// The digests of the image layers to check.
-	//
-	// LayerDigests is a required field
-	LayerDigests []string `locationName:"layerDigests" min:"1" type:"list" required:"true"`
-
-	// The AWS account ID associated with the registry that contains the image layers
-	// to check. If you do not specify a registry, the default registry is assumed.
-	RegistryId *string `locationName:"registryId" type:"string"`
-
-	// The name of the repository that is associated with the image layers to check.
-	//
-	// RepositoryName is a required field
-	RepositoryName *string `locationName:"repositoryName" min:"2" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s BatchCheckLayerAvailabilityInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *BatchCheckLayerAvailabilityInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "BatchCheckLayerAvailabilityInput"}
-
-	if s.LayerDigests == nil {
-		invalidParams.Add(aws.NewErrParamRequired("LayerDigests"))
-	}
-	if s.LayerDigests != nil && len(s.LayerDigests) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("LayerDigests", 1))
-	}
-
-	if s.RepositoryName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("RepositoryName"))
-	}
-	if s.RepositoryName != nil && len(*s.RepositoryName) < 2 {
-		invalidParams.Add(aws.NewErrParamMinLen("RepositoryName", 2))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type BatchCheckLayerAvailabilityOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Any failures associated with the call.
-	Failures []LayerFailure `locationName:"failures" type:"list"`
-
-	// A list of image layer objects corresponding to the image layer references
-	// in the request.
-	Layers []Layer `locationName:"layers" type:"list"`
-}
-
-// String returns the string representation
-func (s BatchCheckLayerAvailabilityOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opBatchCheckLayerAvailability = "BatchCheckLayerAvailability"
 
@@ -92,7 +29,7 @@ const opBatchCheckLayerAvailability = "BatchCheckLayerAvailability"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/BatchCheckLayerAvailability
-func (c *Client) BatchCheckLayerAvailabilityRequest(input *BatchCheckLayerAvailabilityInput) BatchCheckLayerAvailabilityRequest {
+func (c *Client) BatchCheckLayerAvailabilityRequest(input *types.BatchCheckLayerAvailabilityInput) BatchCheckLayerAvailabilityRequest {
 	op := &aws.Operation{
 		Name:       opBatchCheckLayerAvailability,
 		HTTPMethod: "POST",
@@ -100,10 +37,10 @@ func (c *Client) BatchCheckLayerAvailabilityRequest(input *BatchCheckLayerAvaila
 	}
 
 	if input == nil {
-		input = &BatchCheckLayerAvailabilityInput{}
+		input = &types.BatchCheckLayerAvailabilityInput{}
 	}
 
-	req := c.newRequest(op, input, &BatchCheckLayerAvailabilityOutput{})
+	req := c.newRequest(op, input, &types.BatchCheckLayerAvailabilityOutput{})
 	return BatchCheckLayerAvailabilityRequest{Request: req, Input: input, Copy: c.BatchCheckLayerAvailabilityRequest}
 }
 
@@ -111,8 +48,8 @@ func (c *Client) BatchCheckLayerAvailabilityRequest(input *BatchCheckLayerAvaila
 // BatchCheckLayerAvailability API operation.
 type BatchCheckLayerAvailabilityRequest struct {
 	*aws.Request
-	Input *BatchCheckLayerAvailabilityInput
-	Copy  func(*BatchCheckLayerAvailabilityInput) BatchCheckLayerAvailabilityRequest
+	Input *types.BatchCheckLayerAvailabilityInput
+	Copy  func(*types.BatchCheckLayerAvailabilityInput) BatchCheckLayerAvailabilityRequest
 }
 
 // Send marshals and sends the BatchCheckLayerAvailability API request.
@@ -124,7 +61,7 @@ func (r BatchCheckLayerAvailabilityRequest) Send(ctx context.Context) (*BatchChe
 	}
 
 	resp := &BatchCheckLayerAvailabilityResponse{
-		BatchCheckLayerAvailabilityOutput: r.Request.Data.(*BatchCheckLayerAvailabilityOutput),
+		BatchCheckLayerAvailabilityOutput: r.Request.Data.(*types.BatchCheckLayerAvailabilityOutput),
 		response:                          &aws.Response{Request: r.Request},
 	}
 
@@ -134,7 +71,7 @@ func (r BatchCheckLayerAvailabilityRequest) Send(ctx context.Context) (*BatchChe
 // BatchCheckLayerAvailabilityResponse is the response type for the
 // BatchCheckLayerAvailability API operation.
 type BatchCheckLayerAvailabilityResponse struct {
-	*BatchCheckLayerAvailabilityOutput
+	*types.BatchCheckLayerAvailabilityOutput
 
 	response *aws.Response
 }

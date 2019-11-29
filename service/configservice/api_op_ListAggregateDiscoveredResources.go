@@ -6,80 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/configservice/types"
 )
-
-type ListAggregateDiscoveredResourcesInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the configuration aggregator.
-	//
-	// ConfigurationAggregatorName is a required field
-	ConfigurationAggregatorName *string `min:"1" type:"string" required:"true"`
-
-	// Filters the results based on the ResourceFilters object.
-	Filters *ResourceFilters `type:"structure"`
-
-	// The maximum number of resource identifiers returned on each page. The default
-	// is 100. You cannot specify a number greater than 100. If you specify 0, AWS
-	// Config uses the default.
-	Limit *int64 `type:"integer"`
-
-	// The nextToken string returned on a previous page that you use to get the
-	// next page of results in a paginated response.
-	NextToken *string `type:"string"`
-
-	// The type of resources that you want AWS Config to list in the response.
-	//
-	// ResourceType is a required field
-	ResourceType ResourceType `type:"string" required:"true" enum:"true"`
-}
-
-// String returns the string representation
-func (s ListAggregateDiscoveredResourcesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListAggregateDiscoveredResourcesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListAggregateDiscoveredResourcesInput"}
-
-	if s.ConfigurationAggregatorName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ConfigurationAggregatorName"))
-	}
-	if s.ConfigurationAggregatorName != nil && len(*s.ConfigurationAggregatorName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ConfigurationAggregatorName", 1))
-	}
-	if len(s.ResourceType) == 0 {
-		invalidParams.Add(aws.NewErrParamRequired("ResourceType"))
-	}
-	if s.Filters != nil {
-		if err := s.Filters.Validate(); err != nil {
-			invalidParams.AddNested("Filters", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ListAggregateDiscoveredResourcesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The nextToken string returned on a previous page that you use to get the
-	// next page of results in a paginated response.
-	NextToken *string `type:"string"`
-
-	// Returns a list of ResourceIdentifiers objects.
-	ResourceIdentifiers []AggregateResourceIdentifier `type:"list"`
-}
-
-// String returns the string representation
-func (s ListAggregateDiscoveredResourcesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListAggregateDiscoveredResources = "ListAggregateDiscoveredResources"
 
@@ -105,7 +33,7 @@ const opListAggregateDiscoveredResources = "ListAggregateDiscoveredResources"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/ListAggregateDiscoveredResources
-func (c *Client) ListAggregateDiscoveredResourcesRequest(input *ListAggregateDiscoveredResourcesInput) ListAggregateDiscoveredResourcesRequest {
+func (c *Client) ListAggregateDiscoveredResourcesRequest(input *types.ListAggregateDiscoveredResourcesInput) ListAggregateDiscoveredResourcesRequest {
 	op := &aws.Operation{
 		Name:       opListAggregateDiscoveredResources,
 		HTTPMethod: "POST",
@@ -113,10 +41,10 @@ func (c *Client) ListAggregateDiscoveredResourcesRequest(input *ListAggregateDis
 	}
 
 	if input == nil {
-		input = &ListAggregateDiscoveredResourcesInput{}
+		input = &types.ListAggregateDiscoveredResourcesInput{}
 	}
 
-	req := c.newRequest(op, input, &ListAggregateDiscoveredResourcesOutput{})
+	req := c.newRequest(op, input, &types.ListAggregateDiscoveredResourcesOutput{})
 	return ListAggregateDiscoveredResourcesRequest{Request: req, Input: input, Copy: c.ListAggregateDiscoveredResourcesRequest}
 }
 
@@ -124,8 +52,8 @@ func (c *Client) ListAggregateDiscoveredResourcesRequest(input *ListAggregateDis
 // ListAggregateDiscoveredResources API operation.
 type ListAggregateDiscoveredResourcesRequest struct {
 	*aws.Request
-	Input *ListAggregateDiscoveredResourcesInput
-	Copy  func(*ListAggregateDiscoveredResourcesInput) ListAggregateDiscoveredResourcesRequest
+	Input *types.ListAggregateDiscoveredResourcesInput
+	Copy  func(*types.ListAggregateDiscoveredResourcesInput) ListAggregateDiscoveredResourcesRequest
 }
 
 // Send marshals and sends the ListAggregateDiscoveredResources API request.
@@ -137,7 +65,7 @@ func (r ListAggregateDiscoveredResourcesRequest) Send(ctx context.Context) (*Lis
 	}
 
 	resp := &ListAggregateDiscoveredResourcesResponse{
-		ListAggregateDiscoveredResourcesOutput: r.Request.Data.(*ListAggregateDiscoveredResourcesOutput),
+		ListAggregateDiscoveredResourcesOutput: r.Request.Data.(*types.ListAggregateDiscoveredResourcesOutput),
 		response:                               &aws.Response{Request: r.Request},
 	}
 
@@ -147,7 +75,7 @@ func (r ListAggregateDiscoveredResourcesRequest) Send(ctx context.Context) (*Lis
 // ListAggregateDiscoveredResourcesResponse is the response type for the
 // ListAggregateDiscoveredResources API operation.
 type ListAggregateDiscoveredResourcesResponse struct {
-	*ListAggregateDiscoveredResourcesOutput
+	*types.ListAggregateDiscoveredResourcesOutput
 
 	response *aws.Response
 }

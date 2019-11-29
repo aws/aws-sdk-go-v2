@@ -6,80 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/directoryservice/types"
 )
-
-type ShareDirectoryInput struct {
-	_ struct{} `type:"structure"`
-
-	// Identifier of the AWS Managed Microsoft AD directory that you want to share
-	// with other AWS accounts.
-	//
-	// DirectoryId is a required field
-	DirectoryId *string `type:"string" required:"true"`
-
-	// The method used when sharing a directory to determine whether the directory
-	// should be shared within your AWS organization (ORGANIZATIONS) or with any
-	// AWS account by sending a directory sharing request (HANDSHAKE).
-	//
-	// ShareMethod is a required field
-	ShareMethod ShareMethod `type:"string" required:"true" enum:"true"`
-
-	// A directory share request that is sent by the directory owner to the directory
-	// consumer. The request includes a typed message to help the directory consumer
-	// administrator determine whether to approve or reject the share invitation.
-	ShareNotes *string `type:"string" sensitive:"true"`
-
-	// Identifier for the directory consumer account with whom the directory is
-	// to be shared.
-	//
-	// ShareTarget is a required field
-	ShareTarget *ShareTarget `type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s ShareDirectoryInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ShareDirectoryInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ShareDirectoryInput"}
-
-	if s.DirectoryId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DirectoryId"))
-	}
-	if len(s.ShareMethod) == 0 {
-		invalidParams.Add(aws.NewErrParamRequired("ShareMethod"))
-	}
-
-	if s.ShareTarget == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ShareTarget"))
-	}
-	if s.ShareTarget != nil {
-		if err := s.ShareTarget.Validate(); err != nil {
-			invalidParams.AddNested("ShareTarget", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ShareDirectoryOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Identifier of the directory that is stored in the directory consumer account
-	// that is shared from the specified directory (DirectoryId).
-	SharedDirectoryId *string `type:"string"`
-}
-
-// String returns the string representation
-func (s ShareDirectoryOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opShareDirectory = "ShareDirectory"
 
@@ -113,7 +41,7 @@ const opShareDirectory = "ShareDirectory"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/ShareDirectory
-func (c *Client) ShareDirectoryRequest(input *ShareDirectoryInput) ShareDirectoryRequest {
+func (c *Client) ShareDirectoryRequest(input *types.ShareDirectoryInput) ShareDirectoryRequest {
 	op := &aws.Operation{
 		Name:       opShareDirectory,
 		HTTPMethod: "POST",
@@ -121,10 +49,10 @@ func (c *Client) ShareDirectoryRequest(input *ShareDirectoryInput) ShareDirector
 	}
 
 	if input == nil {
-		input = &ShareDirectoryInput{}
+		input = &types.ShareDirectoryInput{}
 	}
 
-	req := c.newRequest(op, input, &ShareDirectoryOutput{})
+	req := c.newRequest(op, input, &types.ShareDirectoryOutput{})
 	return ShareDirectoryRequest{Request: req, Input: input, Copy: c.ShareDirectoryRequest}
 }
 
@@ -132,8 +60,8 @@ func (c *Client) ShareDirectoryRequest(input *ShareDirectoryInput) ShareDirector
 // ShareDirectory API operation.
 type ShareDirectoryRequest struct {
 	*aws.Request
-	Input *ShareDirectoryInput
-	Copy  func(*ShareDirectoryInput) ShareDirectoryRequest
+	Input *types.ShareDirectoryInput
+	Copy  func(*types.ShareDirectoryInput) ShareDirectoryRequest
 }
 
 // Send marshals and sends the ShareDirectory API request.
@@ -145,7 +73,7 @@ func (r ShareDirectoryRequest) Send(ctx context.Context) (*ShareDirectoryRespons
 	}
 
 	resp := &ShareDirectoryResponse{
-		ShareDirectoryOutput: r.Request.Data.(*ShareDirectoryOutput),
+		ShareDirectoryOutput: r.Request.Data.(*types.ShareDirectoryOutput),
 		response:             &aws.Response{Request: r.Request},
 	}
 
@@ -155,7 +83,7 @@ func (r ShareDirectoryRequest) Send(ctx context.Context) (*ShareDirectoryRespons
 // ShareDirectoryResponse is the response type for the
 // ShareDirectory API operation.
 type ShareDirectoryResponse struct {
-	*ShareDirectoryOutput
+	*types.ShareDirectoryOutput
 
 	response *aws.Response
 }

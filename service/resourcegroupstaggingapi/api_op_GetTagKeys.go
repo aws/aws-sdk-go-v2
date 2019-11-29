@@ -6,39 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/resourcegroupstaggingapi/types"
 )
-
-type GetTagKeysInput struct {
-	_ struct{} `type:"structure"`
-
-	// A string that indicates that additional data is available. Leave this value
-	// empty for your initial request. If the response includes a PaginationToken,
-	// use that string for this value to request an additional page of data.
-	PaginationToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s GetTagKeysInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type GetTagKeysOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A string that indicates that the response contains more data than can be
-	// returned in a single response. To receive additional data, specify this string
-	// for the PaginationToken value in a subsequent request.
-	PaginationToken *string `type:"string"`
-
-	// A list of all tag keys in the AWS account.
-	TagKeys []string `type:"list"`
-}
-
-// String returns the string representation
-func (s GetTagKeysOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetTagKeys = "GetTagKeys"
 
@@ -55,7 +24,7 @@ const opGetTagKeys = "GetTagKeys"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/resourcegroupstaggingapi-2017-01-26/GetTagKeys
-func (c *Client) GetTagKeysRequest(input *GetTagKeysInput) GetTagKeysRequest {
+func (c *Client) GetTagKeysRequest(input *types.GetTagKeysInput) GetTagKeysRequest {
 	op := &aws.Operation{
 		Name:       opGetTagKeys,
 		HTTPMethod: "POST",
@@ -69,10 +38,10 @@ func (c *Client) GetTagKeysRequest(input *GetTagKeysInput) GetTagKeysRequest {
 	}
 
 	if input == nil {
-		input = &GetTagKeysInput{}
+		input = &types.GetTagKeysInput{}
 	}
 
-	req := c.newRequest(op, input, &GetTagKeysOutput{})
+	req := c.newRequest(op, input, &types.GetTagKeysOutput{})
 	return GetTagKeysRequest{Request: req, Input: input, Copy: c.GetTagKeysRequest}
 }
 
@@ -80,8 +49,8 @@ func (c *Client) GetTagKeysRequest(input *GetTagKeysInput) GetTagKeysRequest {
 // GetTagKeys API operation.
 type GetTagKeysRequest struct {
 	*aws.Request
-	Input *GetTagKeysInput
-	Copy  func(*GetTagKeysInput) GetTagKeysRequest
+	Input *types.GetTagKeysInput
+	Copy  func(*types.GetTagKeysInput) GetTagKeysRequest
 }
 
 // Send marshals and sends the GetTagKeys API request.
@@ -93,7 +62,7 @@ func (r GetTagKeysRequest) Send(ctx context.Context) (*GetTagKeysResponse, error
 	}
 
 	resp := &GetTagKeysResponse{
-		GetTagKeysOutput: r.Request.Data.(*GetTagKeysOutput),
+		GetTagKeysOutput: r.Request.Data.(*types.GetTagKeysOutput),
 		response:         &aws.Response{Request: r.Request},
 	}
 
@@ -123,7 +92,7 @@ func NewGetTagKeysPaginator(req GetTagKeysRequest) GetTagKeysPaginator {
 	return GetTagKeysPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *GetTagKeysInput
+				var inCpy *types.GetTagKeysInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -143,14 +112,14 @@ type GetTagKeysPaginator struct {
 	aws.Pager
 }
 
-func (p *GetTagKeysPaginator) CurrentPage() *GetTagKeysOutput {
-	return p.Pager.CurrentPage().(*GetTagKeysOutput)
+func (p *GetTagKeysPaginator) CurrentPage() *types.GetTagKeysOutput {
+	return p.Pager.CurrentPage().(*types.GetTagKeysOutput)
 }
 
 // GetTagKeysResponse is the response type for the
 // GetTagKeys API operation.
 type GetTagKeysResponse struct {
-	*GetTagKeysOutput
+	*types.GetTagKeysOutput
 
 	response *aws.Response
 }

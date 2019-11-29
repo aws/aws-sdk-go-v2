@@ -6,84 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/restjson"
+	"github.com/aws/aws-sdk-go-v2/service/iot/types"
 )
-
-// The input for the SetDefaultPolicyVersion operation.
-type SetDefaultPolicyVersionInput struct {
-	_ struct{} `type:"structure"`
-
-	// The policy name.
-	//
-	// PolicyName is a required field
-	PolicyName *string `location:"uri" locationName:"policyName" min:"1" type:"string" required:"true"`
-
-	// The policy version ID.
-	//
-	// PolicyVersionId is a required field
-	PolicyVersionId *string `location:"uri" locationName:"policyVersionId" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s SetDefaultPolicyVersionInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *SetDefaultPolicyVersionInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "SetDefaultPolicyVersionInput"}
-
-	if s.PolicyName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("PolicyName"))
-	}
-	if s.PolicyName != nil && len(*s.PolicyName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("PolicyName", 1))
-	}
-
-	if s.PolicyVersionId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("PolicyVersionId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s SetDefaultPolicyVersionInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.PolicyName != nil {
-		v := *s.PolicyName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "policyName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.PolicyVersionId != nil {
-		v := *s.PolicyVersionId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "policyVersionId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type SetDefaultPolicyVersionOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s SetDefaultPolicyVersionOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s SetDefaultPolicyVersionOutput) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
 
 const opSetDefaultPolicyVersion = "SetDefaultPolicyVersion"
 
@@ -101,7 +27,7 @@ const opSetDefaultPolicyVersion = "SetDefaultPolicyVersion"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) SetDefaultPolicyVersionRequest(input *SetDefaultPolicyVersionInput) SetDefaultPolicyVersionRequest {
+func (c *Client) SetDefaultPolicyVersionRequest(input *types.SetDefaultPolicyVersionInput) SetDefaultPolicyVersionRequest {
 	op := &aws.Operation{
 		Name:       opSetDefaultPolicyVersion,
 		HTTPMethod: "PATCH",
@@ -109,10 +35,10 @@ func (c *Client) SetDefaultPolicyVersionRequest(input *SetDefaultPolicyVersionIn
 	}
 
 	if input == nil {
-		input = &SetDefaultPolicyVersionInput{}
+		input = &types.SetDefaultPolicyVersionInput{}
 	}
 
-	req := c.newRequest(op, input, &SetDefaultPolicyVersionOutput{})
+	req := c.newRequest(op, input, &types.SetDefaultPolicyVersionOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return SetDefaultPolicyVersionRequest{Request: req, Input: input, Copy: c.SetDefaultPolicyVersionRequest}
@@ -122,8 +48,8 @@ func (c *Client) SetDefaultPolicyVersionRequest(input *SetDefaultPolicyVersionIn
 // SetDefaultPolicyVersion API operation.
 type SetDefaultPolicyVersionRequest struct {
 	*aws.Request
-	Input *SetDefaultPolicyVersionInput
-	Copy  func(*SetDefaultPolicyVersionInput) SetDefaultPolicyVersionRequest
+	Input *types.SetDefaultPolicyVersionInput
+	Copy  func(*types.SetDefaultPolicyVersionInput) SetDefaultPolicyVersionRequest
 }
 
 // Send marshals and sends the SetDefaultPolicyVersion API request.
@@ -135,7 +61,7 @@ func (r SetDefaultPolicyVersionRequest) Send(ctx context.Context) (*SetDefaultPo
 	}
 
 	resp := &SetDefaultPolicyVersionResponse{
-		SetDefaultPolicyVersionOutput: r.Request.Data.(*SetDefaultPolicyVersionOutput),
+		SetDefaultPolicyVersionOutput: r.Request.Data.(*types.SetDefaultPolicyVersionOutput),
 		response:                      &aws.Response{Request: r.Request},
 	}
 
@@ -145,7 +71,7 @@ func (r SetDefaultPolicyVersionRequest) Send(ctx context.Context) (*SetDefaultPo
 // SetDefaultPolicyVersionResponse is the response type for the
 // SetDefaultPolicyVersion API operation.
 type SetDefaultPolicyVersionResponse struct {
-	*SetDefaultPolicyVersionOutput
+	*types.SetDefaultPolicyVersionOutput
 
 	response *aws.Response
 }

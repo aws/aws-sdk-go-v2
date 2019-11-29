@@ -6,80 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/pinpointemail/types"
 )
-
-// A request to enable or disable tracking of reputation metrics for a configuration
-// set.
-type PutConfigurationSetReputationOptionsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the configuration set that you want to enable or disable reputation
-	// metric tracking for.
-	//
-	// ConfigurationSetName is a required field
-	ConfigurationSetName *string `location:"uri" locationName:"ConfigurationSetName" type:"string" required:"true"`
-
-	// If true, tracking of reputation metrics is enabled for the configuration
-	// set. If false, tracking of reputation metrics is disabled for the configuration
-	// set.
-	ReputationMetricsEnabled *bool `type:"boolean"`
-}
-
-// String returns the string representation
-func (s PutConfigurationSetReputationOptionsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *PutConfigurationSetReputationOptionsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "PutConfigurationSetReputationOptionsInput"}
-
-	if s.ConfigurationSetName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ConfigurationSetName"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s PutConfigurationSetReputationOptionsInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.ReputationMetricsEnabled != nil {
-		v := *s.ReputationMetricsEnabled
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "ReputationMetricsEnabled", protocol.BoolValue(v), metadata)
-	}
-	if s.ConfigurationSetName != nil {
-		v := *s.ConfigurationSetName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "ConfigurationSetName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-// An HTTP 200 response if the request succeeds, or an error message if the
-// request fails.
-type PutConfigurationSetReputationOptionsOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s PutConfigurationSetReputationOptionsOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s PutConfigurationSetReputationOptionsOutput) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
 
 const opPutConfigurationSetReputationOptions = "PutConfigurationSetReputationOptions"
 
@@ -97,7 +25,7 @@ const opPutConfigurationSetReputationOptions = "PutConfigurationSetReputationOpt
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/PutConfigurationSetReputationOptions
-func (c *Client) PutConfigurationSetReputationOptionsRequest(input *PutConfigurationSetReputationOptionsInput) PutConfigurationSetReputationOptionsRequest {
+func (c *Client) PutConfigurationSetReputationOptionsRequest(input *types.PutConfigurationSetReputationOptionsInput) PutConfigurationSetReputationOptionsRequest {
 	op := &aws.Operation{
 		Name:       opPutConfigurationSetReputationOptions,
 		HTTPMethod: "PUT",
@@ -105,10 +33,10 @@ func (c *Client) PutConfigurationSetReputationOptionsRequest(input *PutConfigura
 	}
 
 	if input == nil {
-		input = &PutConfigurationSetReputationOptionsInput{}
+		input = &types.PutConfigurationSetReputationOptionsInput{}
 	}
 
-	req := c.newRequest(op, input, &PutConfigurationSetReputationOptionsOutput{})
+	req := c.newRequest(op, input, &types.PutConfigurationSetReputationOptionsOutput{})
 	return PutConfigurationSetReputationOptionsRequest{Request: req, Input: input, Copy: c.PutConfigurationSetReputationOptionsRequest}
 }
 
@@ -116,8 +44,8 @@ func (c *Client) PutConfigurationSetReputationOptionsRequest(input *PutConfigura
 // PutConfigurationSetReputationOptions API operation.
 type PutConfigurationSetReputationOptionsRequest struct {
 	*aws.Request
-	Input *PutConfigurationSetReputationOptionsInput
-	Copy  func(*PutConfigurationSetReputationOptionsInput) PutConfigurationSetReputationOptionsRequest
+	Input *types.PutConfigurationSetReputationOptionsInput
+	Copy  func(*types.PutConfigurationSetReputationOptionsInput) PutConfigurationSetReputationOptionsRequest
 }
 
 // Send marshals and sends the PutConfigurationSetReputationOptions API request.
@@ -129,7 +57,7 @@ func (r PutConfigurationSetReputationOptionsRequest) Send(ctx context.Context) (
 	}
 
 	resp := &PutConfigurationSetReputationOptionsResponse{
-		PutConfigurationSetReputationOptionsOutput: r.Request.Data.(*PutConfigurationSetReputationOptionsOutput),
+		PutConfigurationSetReputationOptionsOutput: r.Request.Data.(*types.PutConfigurationSetReputationOptionsOutput),
 		response: &aws.Response{Request: r.Request},
 	}
 
@@ -139,7 +67,7 @@ func (r PutConfigurationSetReputationOptionsRequest) Send(ctx context.Context) (
 // PutConfigurationSetReputationOptionsResponse is the response type for the
 // PutConfigurationSetReputationOptions API operation.
 type PutConfigurationSetReputationOptionsResponse struct {
-	*PutConfigurationSetReputationOptionsOutput
+	*types.PutConfigurationSetReputationOptionsOutput
 
 	response *aws.Response
 }

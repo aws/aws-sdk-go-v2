@@ -6,56 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/emr/types"
 )
-
-// This input determines which instance groups to retrieve.
-type ListInstanceGroupsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The identifier of the cluster for which to list the instance groups.
-	//
-	// ClusterId is a required field
-	ClusterId *string `type:"string" required:"true"`
-
-	// The pagination token that indicates the next set of results to retrieve.
-	Marker *string `type:"string"`
-}
-
-// String returns the string representation
-func (s ListInstanceGroupsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListInstanceGroupsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListInstanceGroupsInput"}
-
-	if s.ClusterId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ClusterId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// This input determines which instance groups to retrieve.
-type ListInstanceGroupsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The list of instance groups for the cluster and given filters.
-	InstanceGroups []InstanceGroup `type:"list"`
-
-	// The pagination token that indicates the next set of results to retrieve.
-	Marker *string `type:"string"`
-}
-
-// String returns the string representation
-func (s ListInstanceGroupsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListInstanceGroups = "ListInstanceGroups"
 
@@ -72,7 +24,7 @@ const opListInstanceGroups = "ListInstanceGroups"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/ListInstanceGroups
-func (c *Client) ListInstanceGroupsRequest(input *ListInstanceGroupsInput) ListInstanceGroupsRequest {
+func (c *Client) ListInstanceGroupsRequest(input *types.ListInstanceGroupsInput) ListInstanceGroupsRequest {
 	op := &aws.Operation{
 		Name:       opListInstanceGroups,
 		HTTPMethod: "POST",
@@ -86,10 +38,10 @@ func (c *Client) ListInstanceGroupsRequest(input *ListInstanceGroupsInput) ListI
 	}
 
 	if input == nil {
-		input = &ListInstanceGroupsInput{}
+		input = &types.ListInstanceGroupsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListInstanceGroupsOutput{})
+	req := c.newRequest(op, input, &types.ListInstanceGroupsOutput{})
 	return ListInstanceGroupsRequest{Request: req, Input: input, Copy: c.ListInstanceGroupsRequest}
 }
 
@@ -97,8 +49,8 @@ func (c *Client) ListInstanceGroupsRequest(input *ListInstanceGroupsInput) ListI
 // ListInstanceGroups API operation.
 type ListInstanceGroupsRequest struct {
 	*aws.Request
-	Input *ListInstanceGroupsInput
-	Copy  func(*ListInstanceGroupsInput) ListInstanceGroupsRequest
+	Input *types.ListInstanceGroupsInput
+	Copy  func(*types.ListInstanceGroupsInput) ListInstanceGroupsRequest
 }
 
 // Send marshals and sends the ListInstanceGroups API request.
@@ -110,7 +62,7 @@ func (r ListInstanceGroupsRequest) Send(ctx context.Context) (*ListInstanceGroup
 	}
 
 	resp := &ListInstanceGroupsResponse{
-		ListInstanceGroupsOutput: r.Request.Data.(*ListInstanceGroupsOutput),
+		ListInstanceGroupsOutput: r.Request.Data.(*types.ListInstanceGroupsOutput),
 		response:                 &aws.Response{Request: r.Request},
 	}
 
@@ -140,7 +92,7 @@ func NewListInstanceGroupsPaginator(req ListInstanceGroupsRequest) ListInstanceG
 	return ListInstanceGroupsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListInstanceGroupsInput
+				var inCpy *types.ListInstanceGroupsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -160,14 +112,14 @@ type ListInstanceGroupsPaginator struct {
 	aws.Pager
 }
 
-func (p *ListInstanceGroupsPaginator) CurrentPage() *ListInstanceGroupsOutput {
-	return p.Pager.CurrentPage().(*ListInstanceGroupsOutput)
+func (p *ListInstanceGroupsPaginator) CurrentPage() *types.ListInstanceGroupsOutput {
+	return p.Pager.CurrentPage().(*types.ListInstanceGroupsOutput)
 }
 
 // ListInstanceGroupsResponse is the response type for the
 // ListInstanceGroups API operation.
 type ListInstanceGroupsResponse struct {
-	*ListInstanceGroupsOutput
+	*types.ListInstanceGroupsOutput
 
 	response *aws.Response
 }

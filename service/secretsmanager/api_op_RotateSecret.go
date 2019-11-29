@@ -6,105 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/secretsmanager/types"
 )
-
-type RotateSecretInput struct {
-	_ struct{} `type:"structure"`
-
-	// (Optional) Specifies a unique identifier for the new version of the secret
-	// that helps ensure idempotency.
-	//
-	// If you use the AWS CLI or one of the AWS SDK to call this operation, then
-	// you can leave this parameter empty. The CLI or SDK generates a random UUID
-	// for you and includes that in the request for this parameter. If you don't
-	// use the SDK and instead generate a raw HTTP request to the Secrets Manager
-	// service endpoint, then you must generate a ClientRequestToken yourself for
-	// new versions and include that value in the request.
-	//
-	// You only need to specify your own value if you are implementing your own
-	// retry logic and want to ensure that a given secret is not created twice.
-	// We recommend that you generate a UUID-type (https://wikipedia.org/wiki/Universally_unique_identifier)
-	// value to ensure uniqueness within the specified secret.
-	//
-	// Secrets Manager uses this value to prevent the accidental creation of duplicate
-	// versions if there are failures and retries during the function's processing.
-	// This value becomes the VersionId of the new version.
-	ClientRequestToken *string `min:"32" type:"string" idempotencyToken:"true"`
-
-	// (Optional) Specifies the ARN of the Lambda function that can rotate the secret.
-	RotationLambdaARN *string `type:"string"`
-
-	// A structure that defines the rotation configuration for this secret.
-	RotationRules *RotationRulesType `type:"structure"`
-
-	// Specifies the secret that you want to rotate. You can specify either the
-	// Amazon Resource Name (ARN) or the friendly name of the secret.
-	//
-	// If you specify an ARN, we generally recommend that you specify a complete
-	// ARN. You can specify a partial ARN too—for example, if you don’t include
-	// the final hyphen and six random characters that Secrets Manager adds at the
-	// end of the ARN when you created the secret. A partial ARN match can work
-	// as long as it uniquely matches only one secret. However, if your secret has
-	// a name that ends in a hyphen followed by six characters (before Secrets Manager
-	// adds the hyphen and six characters to the ARN) and you try to use that as
-	// a partial ARN, then those characters cause Secrets Manager to assume that
-	// you’re specifying a complete ARN. This confusion can cause unexpected results.
-	// To avoid this situation, we recommend that you don’t create secret names
-	// that end with a hyphen followed by six characters.
-	//
-	// SecretId is a required field
-	SecretId *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s RotateSecretInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *RotateSecretInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "RotateSecretInput"}
-	if s.ClientRequestToken != nil && len(*s.ClientRequestToken) < 32 {
-		invalidParams.Add(aws.NewErrParamMinLen("ClientRequestToken", 32))
-	}
-
-	if s.SecretId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("SecretId"))
-	}
-	if s.SecretId != nil && len(*s.SecretId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("SecretId", 1))
-	}
-	if s.RotationRules != nil {
-		if err := s.RotationRules.Validate(); err != nil {
-			invalidParams.AddNested("RotationRules", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type RotateSecretOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The ARN of the secret.
-	ARN *string `min:"20" type:"string"`
-
-	// The friendly name of the secret.
-	Name *string `min:"1" type:"string"`
-
-	// The ID of the new version of the secret created by the rotation started by
-	// this request.
-	VersionId *string `min:"32" type:"string"`
-}
-
-// String returns the string representation
-func (s RotateSecretOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opRotateSecret = "RotateSecret"
 
@@ -176,7 +79,7 @@ const opRotateSecret = "RotateSecret"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/secretsmanager-2017-10-17/RotateSecret
-func (c *Client) RotateSecretRequest(input *RotateSecretInput) RotateSecretRequest {
+func (c *Client) RotateSecretRequest(input *types.RotateSecretInput) RotateSecretRequest {
 	op := &aws.Operation{
 		Name:       opRotateSecret,
 		HTTPMethod: "POST",
@@ -184,10 +87,10 @@ func (c *Client) RotateSecretRequest(input *RotateSecretInput) RotateSecretReque
 	}
 
 	if input == nil {
-		input = &RotateSecretInput{}
+		input = &types.RotateSecretInput{}
 	}
 
-	req := c.newRequest(op, input, &RotateSecretOutput{})
+	req := c.newRequest(op, input, &types.RotateSecretOutput{})
 	return RotateSecretRequest{Request: req, Input: input, Copy: c.RotateSecretRequest}
 }
 
@@ -195,8 +98,8 @@ func (c *Client) RotateSecretRequest(input *RotateSecretInput) RotateSecretReque
 // RotateSecret API operation.
 type RotateSecretRequest struct {
 	*aws.Request
-	Input *RotateSecretInput
-	Copy  func(*RotateSecretInput) RotateSecretRequest
+	Input *types.RotateSecretInput
+	Copy  func(*types.RotateSecretInput) RotateSecretRequest
 }
 
 // Send marshals and sends the RotateSecret API request.
@@ -208,7 +111,7 @@ func (r RotateSecretRequest) Send(ctx context.Context) (*RotateSecretResponse, e
 	}
 
 	resp := &RotateSecretResponse{
-		RotateSecretOutput: r.Request.Data.(*RotateSecretOutput),
+		RotateSecretOutput: r.Request.Data.(*types.RotateSecretOutput),
 		response:           &aws.Response{Request: r.Request},
 	}
 
@@ -218,7 +121,7 @@ func (r RotateSecretRequest) Send(ctx context.Context) (*RotateSecretResponse, e
 // RotateSecretResponse is the response type for the
 // RotateSecret API operation.
 type RotateSecretResponse struct {
-	*RotateSecretOutput
+	*types.RotateSecretOutput
 
 	response *aws.Response
 }

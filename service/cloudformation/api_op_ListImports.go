@@ -6,60 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/cloudformation/types"
 )
-
-type ListImportsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the exported output value. AWS CloudFormation returns the stack
-	// names that are importing this value.
-	//
-	// ExportName is a required field
-	ExportName *string `type:"string" required:"true"`
-
-	// A string (provided by the ListImports response output) that identifies the
-	// next page of stacks that are importing the specified exported output value.
-	NextToken *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s ListImportsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListImportsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListImportsInput"}
-
-	if s.ExportName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ExportName"))
-	}
-	if s.NextToken != nil && len(*s.NextToken) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ListImportsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A list of stack names that are importing the specified exported output value.
-	Imports []string `type:"list"`
-
-	// A string that identifies the next page of exports. If there is no additional
-	// page, this value is null.
-	NextToken *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s ListImportsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListImports = "ListImports"
 
@@ -82,7 +30,7 @@ const opListImports = "ListImports"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ListImports
-func (c *Client) ListImportsRequest(input *ListImportsInput) ListImportsRequest {
+func (c *Client) ListImportsRequest(input *types.ListImportsInput) ListImportsRequest {
 	op := &aws.Operation{
 		Name:       opListImports,
 		HTTPMethod: "POST",
@@ -96,10 +44,10 @@ func (c *Client) ListImportsRequest(input *ListImportsInput) ListImportsRequest 
 	}
 
 	if input == nil {
-		input = &ListImportsInput{}
+		input = &types.ListImportsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListImportsOutput{})
+	req := c.newRequest(op, input, &types.ListImportsOutput{})
 	return ListImportsRequest{Request: req, Input: input, Copy: c.ListImportsRequest}
 }
 
@@ -107,8 +55,8 @@ func (c *Client) ListImportsRequest(input *ListImportsInput) ListImportsRequest 
 // ListImports API operation.
 type ListImportsRequest struct {
 	*aws.Request
-	Input *ListImportsInput
-	Copy  func(*ListImportsInput) ListImportsRequest
+	Input *types.ListImportsInput
+	Copy  func(*types.ListImportsInput) ListImportsRequest
 }
 
 // Send marshals and sends the ListImports API request.
@@ -120,7 +68,7 @@ func (r ListImportsRequest) Send(ctx context.Context) (*ListImportsResponse, err
 	}
 
 	resp := &ListImportsResponse{
-		ListImportsOutput: r.Request.Data.(*ListImportsOutput),
+		ListImportsOutput: r.Request.Data.(*types.ListImportsOutput),
 		response:          &aws.Response{Request: r.Request},
 	}
 
@@ -150,7 +98,7 @@ func NewListImportsPaginator(req ListImportsRequest) ListImportsPaginator {
 	return ListImportsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListImportsInput
+				var inCpy *types.ListImportsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -170,14 +118,14 @@ type ListImportsPaginator struct {
 	aws.Pager
 }
 
-func (p *ListImportsPaginator) CurrentPage() *ListImportsOutput {
-	return p.Pager.CurrentPage().(*ListImportsOutput)
+func (p *ListImportsPaginator) CurrentPage() *types.ListImportsOutput {
+	return p.Pager.CurrentPage().(*types.ListImportsOutput)
 }
 
 // ListImportsResponse is the response type for the
 // ListImports API operation.
 type ListImportsResponse struct {
-	*ListImportsOutput
+	*types.ListImportsOutput
 
 	response *aws.Response
 }

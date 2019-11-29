@@ -4,116 +4,10 @@ package amplify
 
 import (
 	"context"
-	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/amplify/types"
 )
-
-// Request structure for the generate access logs request.
-type GenerateAccessLogsInput struct {
-	_ struct{} `type:"structure"`
-
-	// Unique Id for an Amplify App.
-	//
-	// AppId is a required field
-	AppId *string `location:"uri" locationName:"appId" min:"1" type:"string" required:"true"`
-
-	// Name of the domain.
-	//
-	// DomainName is a required field
-	DomainName *string `locationName:"domainName" type:"string" required:"true"`
-
-	// The time at which the logs should end, inclusive.
-	EndTime *time.Time `locationName:"endTime" type:"timestamp"`
-
-	// The time at which the logs should start, inclusive.
-	StartTime *time.Time `locationName:"startTime" type:"timestamp"`
-}
-
-// String returns the string representation
-func (s GenerateAccessLogsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GenerateAccessLogsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GenerateAccessLogsInput"}
-
-	if s.AppId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("AppId"))
-	}
-	if s.AppId != nil && len(*s.AppId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("AppId", 1))
-	}
-
-	if s.DomainName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DomainName"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GenerateAccessLogsInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.DomainName != nil {
-		v := *s.DomainName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "domainName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.EndTime != nil {
-		v := *s.EndTime
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "endTime",
-			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
-	}
-	if s.StartTime != nil {
-		v := *s.StartTime
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "startTime",
-			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
-	}
-	if s.AppId != nil {
-		v := *s.AppId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "appId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-// Result structure for the generate access logs request.
-type GenerateAccessLogsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Pre-signed URL for the requested access logs.
-	LogUrl *string `locationName:"logUrl" type:"string"`
-}
-
-// String returns the string representation
-func (s GenerateAccessLogsOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GenerateAccessLogsOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.LogUrl != nil {
-		v := *s.LogUrl
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "logUrl", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opGenerateAccessLogs = "GenerateAccessLogs"
 
@@ -121,7 +15,6 @@ const opGenerateAccessLogs = "GenerateAccessLogs"
 // AWS Amplify.
 //
 // Retrieve website access logs for a specific time range via a pre-signed URL.
-// Optionally, deliver the logs to a given S3 bucket.
 //
 //    // Example sending a request using GenerateAccessLogsRequest.
 //    req := client.GenerateAccessLogsRequest(params)
@@ -131,7 +24,7 @@ const opGenerateAccessLogs = "GenerateAccessLogs"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/GenerateAccessLogs
-func (c *Client) GenerateAccessLogsRequest(input *GenerateAccessLogsInput) GenerateAccessLogsRequest {
+func (c *Client) GenerateAccessLogsRequest(input *types.GenerateAccessLogsInput) GenerateAccessLogsRequest {
 	op := &aws.Operation{
 		Name:       opGenerateAccessLogs,
 		HTTPMethod: "POST",
@@ -139,10 +32,10 @@ func (c *Client) GenerateAccessLogsRequest(input *GenerateAccessLogsInput) Gener
 	}
 
 	if input == nil {
-		input = &GenerateAccessLogsInput{}
+		input = &types.GenerateAccessLogsInput{}
 	}
 
-	req := c.newRequest(op, input, &GenerateAccessLogsOutput{})
+	req := c.newRequest(op, input, &types.GenerateAccessLogsOutput{})
 	return GenerateAccessLogsRequest{Request: req, Input: input, Copy: c.GenerateAccessLogsRequest}
 }
 
@@ -150,8 +43,8 @@ func (c *Client) GenerateAccessLogsRequest(input *GenerateAccessLogsInput) Gener
 // GenerateAccessLogs API operation.
 type GenerateAccessLogsRequest struct {
 	*aws.Request
-	Input *GenerateAccessLogsInput
-	Copy  func(*GenerateAccessLogsInput) GenerateAccessLogsRequest
+	Input *types.GenerateAccessLogsInput
+	Copy  func(*types.GenerateAccessLogsInput) GenerateAccessLogsRequest
 }
 
 // Send marshals and sends the GenerateAccessLogs API request.
@@ -163,7 +56,7 @@ func (r GenerateAccessLogsRequest) Send(ctx context.Context) (*GenerateAccessLog
 	}
 
 	resp := &GenerateAccessLogsResponse{
-		GenerateAccessLogsOutput: r.Request.Data.(*GenerateAccessLogsOutput),
+		GenerateAccessLogsOutput: r.Request.Data.(*types.GenerateAccessLogsOutput),
 		response:                 &aws.Response{Request: r.Request},
 	}
 
@@ -173,7 +66,7 @@ func (r GenerateAccessLogsRequest) Send(ctx context.Context) (*GenerateAccessLog
 // GenerateAccessLogsResponse is the response type for the
 // GenerateAccessLogs API operation.
 type GenerateAccessLogsResponse struct {
-	*GenerateAccessLogsOutput
+	*types.GenerateAccessLogsOutput
 
 	response *aws.Response
 }

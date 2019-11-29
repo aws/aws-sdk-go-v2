@@ -6,68 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/comprehendmedical/types"
 )
-
-type DetectPHIInput struct {
-	_ struct{} `type:"structure"`
-
-	// A UTF-8 text string containing the clinical content being examined for PHI
-	// entities. Each string must contain fewer than 20,000 bytes of characters.
-	//
-	// Text is a required field
-	Text *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DetectPHIInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DetectPHIInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DetectPHIInput"}
-
-	if s.Text == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Text"))
-	}
-	if s.Text != nil && len(*s.Text) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Text", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DetectPHIOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The collection of PHI entities extracted from the input text and their associated
-	// information. For each entity, the response provides the entity text, the
-	// entity category, where the entity text begins and ends, and the level of
-	// confidence that Amazon Comprehend Medical has in its detection.
-	//
-	// Entities is a required field
-	Entities []Entity `type:"list" required:"true"`
-
-	// The version of the model used to analyze the documents. The version number
-	// looks like X.X.X. You can use this information to track the model used for
-	// a particular batch of documents.
-	//
-	// ModelVersion is a required field
-	ModelVersion *string `min:"1" type:"string" required:"true"`
-
-	// If the result of the previous request to DetectPHI was truncated, include
-	// the PaginationToken to fetch the next page of PHI entities.
-	PaginationToken *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s DetectPHIOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDetectPHI = "DetectPHI"
 
@@ -85,7 +25,7 @@ const opDetectPHI = "DetectPHI"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/comprehendmedical-2018-10-30/DetectPHI
-func (c *Client) DetectPHIRequest(input *DetectPHIInput) DetectPHIRequest {
+func (c *Client) DetectPHIRequest(input *types.DetectPHIInput) DetectPHIRequest {
 	op := &aws.Operation{
 		Name:       opDetectPHI,
 		HTTPMethod: "POST",
@@ -93,10 +33,10 @@ func (c *Client) DetectPHIRequest(input *DetectPHIInput) DetectPHIRequest {
 	}
 
 	if input == nil {
-		input = &DetectPHIInput{}
+		input = &types.DetectPHIInput{}
 	}
 
-	req := c.newRequest(op, input, &DetectPHIOutput{})
+	req := c.newRequest(op, input, &types.DetectPHIOutput{})
 	return DetectPHIRequest{Request: req, Input: input, Copy: c.DetectPHIRequest}
 }
 
@@ -104,8 +44,8 @@ func (c *Client) DetectPHIRequest(input *DetectPHIInput) DetectPHIRequest {
 // DetectPHI API operation.
 type DetectPHIRequest struct {
 	*aws.Request
-	Input *DetectPHIInput
-	Copy  func(*DetectPHIInput) DetectPHIRequest
+	Input *types.DetectPHIInput
+	Copy  func(*types.DetectPHIInput) DetectPHIRequest
 }
 
 // Send marshals and sends the DetectPHI API request.
@@ -117,7 +57,7 @@ func (r DetectPHIRequest) Send(ctx context.Context) (*DetectPHIResponse, error) 
 	}
 
 	resp := &DetectPHIResponse{
-		DetectPHIOutput: r.Request.Data.(*DetectPHIOutput),
+		DetectPHIOutput: r.Request.Data.(*types.DetectPHIOutput),
 		response:        &aws.Response{Request: r.Request},
 	}
 
@@ -127,7 +67,7 @@ func (r DetectPHIRequest) Send(ctx context.Context) (*DetectPHIResponse, error) 
 // DetectPHIResponse is the response type for the
 // DetectPHI API operation.
 type DetectPHIResponse struct {
-	*DetectPHIOutput
+	*types.DetectPHIOutput
 
 	response *aws.Response
 }

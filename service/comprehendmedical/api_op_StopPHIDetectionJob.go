@@ -6,51 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/comprehendmedical/types"
 )
-
-type StopPHIDetectionJobInput struct {
-	_ struct{} `type:"structure"`
-
-	// The identifier of the PHI detection job to stop.
-	//
-	// JobId is a required field
-	JobId *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s StopPHIDetectionJobInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *StopPHIDetectionJobInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "StopPHIDetectionJobInput"}
-
-	if s.JobId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("JobId"))
-	}
-	if s.JobId != nil && len(*s.JobId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("JobId", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type StopPHIDetectionJobOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The identifier of the PHI detection job that was stopped.
-	JobId *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s StopPHIDetectionJobOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opStopPHIDetectionJob = "StopPHIDetectionJob"
 
@@ -67,7 +24,7 @@ const opStopPHIDetectionJob = "StopPHIDetectionJob"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/comprehendmedical-2018-10-30/StopPHIDetectionJob
-func (c *Client) StopPHIDetectionJobRequest(input *StopPHIDetectionJobInput) StopPHIDetectionJobRequest {
+func (c *Client) StopPHIDetectionJobRequest(input *types.StopPHIDetectionJobInput) StopPHIDetectionJobRequest {
 	op := &aws.Operation{
 		Name:       opStopPHIDetectionJob,
 		HTTPMethod: "POST",
@@ -75,10 +32,10 @@ func (c *Client) StopPHIDetectionJobRequest(input *StopPHIDetectionJobInput) Sto
 	}
 
 	if input == nil {
-		input = &StopPHIDetectionJobInput{}
+		input = &types.StopPHIDetectionJobInput{}
 	}
 
-	req := c.newRequest(op, input, &StopPHIDetectionJobOutput{})
+	req := c.newRequest(op, input, &types.StopPHIDetectionJobOutput{})
 	return StopPHIDetectionJobRequest{Request: req, Input: input, Copy: c.StopPHIDetectionJobRequest}
 }
 
@@ -86,8 +43,8 @@ func (c *Client) StopPHIDetectionJobRequest(input *StopPHIDetectionJobInput) Sto
 // StopPHIDetectionJob API operation.
 type StopPHIDetectionJobRequest struct {
 	*aws.Request
-	Input *StopPHIDetectionJobInput
-	Copy  func(*StopPHIDetectionJobInput) StopPHIDetectionJobRequest
+	Input *types.StopPHIDetectionJobInput
+	Copy  func(*types.StopPHIDetectionJobInput) StopPHIDetectionJobRequest
 }
 
 // Send marshals and sends the StopPHIDetectionJob API request.
@@ -99,7 +56,7 @@ func (r StopPHIDetectionJobRequest) Send(ctx context.Context) (*StopPHIDetection
 	}
 
 	resp := &StopPHIDetectionJobResponse{
-		StopPHIDetectionJobOutput: r.Request.Data.(*StopPHIDetectionJobOutput),
+		StopPHIDetectionJobOutput: r.Request.Data.(*types.StopPHIDetectionJobOutput),
 		response:                  &aws.Response{Request: r.Request},
 	}
 
@@ -109,7 +66,7 @@ func (r StopPHIDetectionJobRequest) Send(ctx context.Context) (*StopPHIDetection
 // StopPHIDetectionJobResponse is the response type for the
 // StopPHIDetectionJob API operation.
 type StopPHIDetectionJobResponse struct {
-	*StopPHIDetectionJobOutput
+	*types.StopPHIDetectionJobOutput
 
 	response *aws.Response
 }

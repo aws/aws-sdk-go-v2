@@ -6,48 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/applicationinsights/types"
 )
-
-type DescribeApplicationInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the resource group.
-	//
-	// ResourceGroupName is a required field
-	ResourceGroupName *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeApplicationInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeApplicationInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeApplicationInput"}
-
-	if s.ResourceGroupName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ResourceGroupName"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribeApplicationOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Information about the application.
-	ApplicationInfo *ApplicationInfo `type:"structure"`
-}
-
-// String returns the string representation
-func (s DescribeApplicationOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeApplication = "DescribeApplication"
 
@@ -64,7 +24,7 @@ const opDescribeApplication = "DescribeApplication"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/application-insights-2018-11-25/DescribeApplication
-func (c *Client) DescribeApplicationRequest(input *DescribeApplicationInput) DescribeApplicationRequest {
+func (c *Client) DescribeApplicationRequest(input *types.DescribeApplicationInput) DescribeApplicationRequest {
 	op := &aws.Operation{
 		Name:       opDescribeApplication,
 		HTTPMethod: "POST",
@@ -72,10 +32,10 @@ func (c *Client) DescribeApplicationRequest(input *DescribeApplicationInput) Des
 	}
 
 	if input == nil {
-		input = &DescribeApplicationInput{}
+		input = &types.DescribeApplicationInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeApplicationOutput{})
+	req := c.newRequest(op, input, &types.DescribeApplicationOutput{})
 	return DescribeApplicationRequest{Request: req, Input: input, Copy: c.DescribeApplicationRequest}
 }
 
@@ -83,8 +43,8 @@ func (c *Client) DescribeApplicationRequest(input *DescribeApplicationInput) Des
 // DescribeApplication API operation.
 type DescribeApplicationRequest struct {
 	*aws.Request
-	Input *DescribeApplicationInput
-	Copy  func(*DescribeApplicationInput) DescribeApplicationRequest
+	Input *types.DescribeApplicationInput
+	Copy  func(*types.DescribeApplicationInput) DescribeApplicationRequest
 }
 
 // Send marshals and sends the DescribeApplication API request.
@@ -96,7 +56,7 @@ func (r DescribeApplicationRequest) Send(ctx context.Context) (*DescribeApplicat
 	}
 
 	resp := &DescribeApplicationResponse{
-		DescribeApplicationOutput: r.Request.Data.(*DescribeApplicationOutput),
+		DescribeApplicationOutput: r.Request.Data.(*types.DescribeApplicationOutput),
 		response:                  &aws.Response{Request: r.Request},
 	}
 
@@ -106,7 +66,7 @@ func (r DescribeApplicationRequest) Send(ctx context.Context) (*DescribeApplicat
 // DescribeApplicationResponse is the response type for the
 // DescribeApplication API operation.
 type DescribeApplicationResponse struct {
-	*DescribeApplicationOutput
+	*types.DescribeApplicationOutput
 
 	response *aws.Response
 }

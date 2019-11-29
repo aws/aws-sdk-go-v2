@@ -13,6 +13,7 @@ import (
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/redshift"
+	"github.com/aws/aws-sdk-go-v2/service/redshift/types"
 )
 
 // ClientAPI provides an interface to enable mocking the
@@ -46,7 +47,7 @@ import (
 //    type mockClientClient struct {
 //        redshiftiface.ClientPI
 //    }
-//    func (m *mockClientClient) AcceptReservedNodeExchange(input *redshift.AcceptReservedNodeExchangeInput) (*redshift.AcceptReservedNodeExchangeOutput, error) {
+//    func (m *mockClientClient) AcceptReservedNodeExchange(input *types.AcceptReservedNodeExchangeInput) (*types.AcceptReservedNodeExchangeOutput, error) {
 //        // mock response/functionality
 //    }
 //
@@ -64,177 +65,177 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type ClientAPI interface {
-	AcceptReservedNodeExchangeRequest(*redshift.AcceptReservedNodeExchangeInput) redshift.AcceptReservedNodeExchangeRequest
+	AcceptReservedNodeExchangeRequest(*types.AcceptReservedNodeExchangeInput) redshift.AcceptReservedNodeExchangeRequest
 
-	AuthorizeClusterSecurityGroupIngressRequest(*redshift.AuthorizeClusterSecurityGroupIngressInput) redshift.AuthorizeClusterSecurityGroupIngressRequest
+	AuthorizeClusterSecurityGroupIngressRequest(*types.AuthorizeClusterSecurityGroupIngressInput) redshift.AuthorizeClusterSecurityGroupIngressRequest
 
-	AuthorizeSnapshotAccessRequest(*redshift.AuthorizeSnapshotAccessInput) redshift.AuthorizeSnapshotAccessRequest
+	AuthorizeSnapshotAccessRequest(*types.AuthorizeSnapshotAccessInput) redshift.AuthorizeSnapshotAccessRequest
 
-	BatchDeleteClusterSnapshotsRequest(*redshift.BatchDeleteClusterSnapshotsInput) redshift.BatchDeleteClusterSnapshotsRequest
+	BatchDeleteClusterSnapshotsRequest(*types.BatchDeleteClusterSnapshotsInput) redshift.BatchDeleteClusterSnapshotsRequest
 
-	BatchModifyClusterSnapshotsRequest(*redshift.BatchModifyClusterSnapshotsInput) redshift.BatchModifyClusterSnapshotsRequest
+	BatchModifyClusterSnapshotsRequest(*types.BatchModifyClusterSnapshotsInput) redshift.BatchModifyClusterSnapshotsRequest
 
-	CancelResizeRequest(*redshift.CancelResizeInput) redshift.CancelResizeRequest
+	CancelResizeRequest(*types.CancelResizeInput) redshift.CancelResizeRequest
 
-	CopyClusterSnapshotRequest(*redshift.CopyClusterSnapshotInput) redshift.CopyClusterSnapshotRequest
+	CopyClusterSnapshotRequest(*types.CopyClusterSnapshotInput) redshift.CopyClusterSnapshotRequest
 
-	CreateClusterRequest(*redshift.CreateClusterInput) redshift.CreateClusterRequest
+	CreateClusterRequest(*types.CreateClusterInput) redshift.CreateClusterRequest
 
-	CreateClusterParameterGroupRequest(*redshift.CreateClusterParameterGroupInput) redshift.CreateClusterParameterGroupRequest
+	CreateClusterParameterGroupRequest(*types.CreateClusterParameterGroupInput) redshift.CreateClusterParameterGroupRequest
 
-	CreateClusterSecurityGroupRequest(*redshift.CreateClusterSecurityGroupInput) redshift.CreateClusterSecurityGroupRequest
+	CreateClusterSecurityGroupRequest(*types.CreateClusterSecurityGroupInput) redshift.CreateClusterSecurityGroupRequest
 
-	CreateClusterSnapshotRequest(*redshift.CreateClusterSnapshotInput) redshift.CreateClusterSnapshotRequest
+	CreateClusterSnapshotRequest(*types.CreateClusterSnapshotInput) redshift.CreateClusterSnapshotRequest
 
-	CreateClusterSubnetGroupRequest(*redshift.CreateClusterSubnetGroupInput) redshift.CreateClusterSubnetGroupRequest
+	CreateClusterSubnetGroupRequest(*types.CreateClusterSubnetGroupInput) redshift.CreateClusterSubnetGroupRequest
 
-	CreateEventSubscriptionRequest(*redshift.CreateEventSubscriptionInput) redshift.CreateEventSubscriptionRequest
+	CreateEventSubscriptionRequest(*types.CreateEventSubscriptionInput) redshift.CreateEventSubscriptionRequest
 
-	CreateHsmClientCertificateRequest(*redshift.CreateHsmClientCertificateInput) redshift.CreateHsmClientCertificateRequest
+	CreateHsmClientCertificateRequest(*types.CreateHsmClientCertificateInput) redshift.CreateHsmClientCertificateRequest
 
-	CreateHsmConfigurationRequest(*redshift.CreateHsmConfigurationInput) redshift.CreateHsmConfigurationRequest
+	CreateHsmConfigurationRequest(*types.CreateHsmConfigurationInput) redshift.CreateHsmConfigurationRequest
 
-	CreateSnapshotCopyGrantRequest(*redshift.CreateSnapshotCopyGrantInput) redshift.CreateSnapshotCopyGrantRequest
+	CreateSnapshotCopyGrantRequest(*types.CreateSnapshotCopyGrantInput) redshift.CreateSnapshotCopyGrantRequest
 
-	CreateSnapshotScheduleRequest(*redshift.CreateSnapshotScheduleInput) redshift.CreateSnapshotScheduleRequest
+	CreateSnapshotScheduleRequest(*types.CreateSnapshotScheduleInput) redshift.CreateSnapshotScheduleRequest
 
-	CreateTagsRequest(*redshift.CreateTagsInput) redshift.CreateTagsRequest
+	CreateTagsRequest(*types.CreateTagsInput) redshift.CreateTagsRequest
 
-	DeleteClusterRequest(*redshift.DeleteClusterInput) redshift.DeleteClusterRequest
+	DeleteClusterRequest(*types.DeleteClusterInput) redshift.DeleteClusterRequest
 
-	DeleteClusterParameterGroupRequest(*redshift.DeleteClusterParameterGroupInput) redshift.DeleteClusterParameterGroupRequest
+	DeleteClusterParameterGroupRequest(*types.DeleteClusterParameterGroupInput) redshift.DeleteClusterParameterGroupRequest
 
-	DeleteClusterSecurityGroupRequest(*redshift.DeleteClusterSecurityGroupInput) redshift.DeleteClusterSecurityGroupRequest
+	DeleteClusterSecurityGroupRequest(*types.DeleteClusterSecurityGroupInput) redshift.DeleteClusterSecurityGroupRequest
 
-	DeleteClusterSnapshotRequest(*redshift.DeleteClusterSnapshotInput) redshift.DeleteClusterSnapshotRequest
+	DeleteClusterSnapshotRequest(*types.DeleteClusterSnapshotInput) redshift.DeleteClusterSnapshotRequest
 
-	DeleteClusterSubnetGroupRequest(*redshift.DeleteClusterSubnetGroupInput) redshift.DeleteClusterSubnetGroupRequest
+	DeleteClusterSubnetGroupRequest(*types.DeleteClusterSubnetGroupInput) redshift.DeleteClusterSubnetGroupRequest
 
-	DeleteEventSubscriptionRequest(*redshift.DeleteEventSubscriptionInput) redshift.DeleteEventSubscriptionRequest
+	DeleteEventSubscriptionRequest(*types.DeleteEventSubscriptionInput) redshift.DeleteEventSubscriptionRequest
 
-	DeleteHsmClientCertificateRequest(*redshift.DeleteHsmClientCertificateInput) redshift.DeleteHsmClientCertificateRequest
+	DeleteHsmClientCertificateRequest(*types.DeleteHsmClientCertificateInput) redshift.DeleteHsmClientCertificateRequest
 
-	DeleteHsmConfigurationRequest(*redshift.DeleteHsmConfigurationInput) redshift.DeleteHsmConfigurationRequest
+	DeleteHsmConfigurationRequest(*types.DeleteHsmConfigurationInput) redshift.DeleteHsmConfigurationRequest
 
-	DeleteSnapshotCopyGrantRequest(*redshift.DeleteSnapshotCopyGrantInput) redshift.DeleteSnapshotCopyGrantRequest
+	DeleteSnapshotCopyGrantRequest(*types.DeleteSnapshotCopyGrantInput) redshift.DeleteSnapshotCopyGrantRequest
 
-	DeleteSnapshotScheduleRequest(*redshift.DeleteSnapshotScheduleInput) redshift.DeleteSnapshotScheduleRequest
+	DeleteSnapshotScheduleRequest(*types.DeleteSnapshotScheduleInput) redshift.DeleteSnapshotScheduleRequest
 
-	DeleteTagsRequest(*redshift.DeleteTagsInput) redshift.DeleteTagsRequest
+	DeleteTagsRequest(*types.DeleteTagsInput) redshift.DeleteTagsRequest
 
-	DescribeAccountAttributesRequest(*redshift.DescribeAccountAttributesInput) redshift.DescribeAccountAttributesRequest
+	DescribeAccountAttributesRequest(*types.DescribeAccountAttributesInput) redshift.DescribeAccountAttributesRequest
 
-	DescribeClusterDbRevisionsRequest(*redshift.DescribeClusterDbRevisionsInput) redshift.DescribeClusterDbRevisionsRequest
+	DescribeClusterDbRevisionsRequest(*types.DescribeClusterDbRevisionsInput) redshift.DescribeClusterDbRevisionsRequest
 
-	DescribeClusterParameterGroupsRequest(*redshift.DescribeClusterParameterGroupsInput) redshift.DescribeClusterParameterGroupsRequest
+	DescribeClusterParameterGroupsRequest(*types.DescribeClusterParameterGroupsInput) redshift.DescribeClusterParameterGroupsRequest
 
-	DescribeClusterParametersRequest(*redshift.DescribeClusterParametersInput) redshift.DescribeClusterParametersRequest
+	DescribeClusterParametersRequest(*types.DescribeClusterParametersInput) redshift.DescribeClusterParametersRequest
 
-	DescribeClusterSecurityGroupsRequest(*redshift.DescribeClusterSecurityGroupsInput) redshift.DescribeClusterSecurityGroupsRequest
+	DescribeClusterSecurityGroupsRequest(*types.DescribeClusterSecurityGroupsInput) redshift.DescribeClusterSecurityGroupsRequest
 
-	DescribeClusterSnapshotsRequest(*redshift.DescribeClusterSnapshotsInput) redshift.DescribeClusterSnapshotsRequest
+	DescribeClusterSnapshotsRequest(*types.DescribeClusterSnapshotsInput) redshift.DescribeClusterSnapshotsRequest
 
-	DescribeClusterSubnetGroupsRequest(*redshift.DescribeClusterSubnetGroupsInput) redshift.DescribeClusterSubnetGroupsRequest
+	DescribeClusterSubnetGroupsRequest(*types.DescribeClusterSubnetGroupsInput) redshift.DescribeClusterSubnetGroupsRequest
 
-	DescribeClusterTracksRequest(*redshift.DescribeClusterTracksInput) redshift.DescribeClusterTracksRequest
+	DescribeClusterTracksRequest(*types.DescribeClusterTracksInput) redshift.DescribeClusterTracksRequest
 
-	DescribeClusterVersionsRequest(*redshift.DescribeClusterVersionsInput) redshift.DescribeClusterVersionsRequest
+	DescribeClusterVersionsRequest(*types.DescribeClusterVersionsInput) redshift.DescribeClusterVersionsRequest
 
-	DescribeClustersRequest(*redshift.DescribeClustersInput) redshift.DescribeClustersRequest
+	DescribeClustersRequest(*types.DescribeClustersInput) redshift.DescribeClustersRequest
 
-	DescribeDefaultClusterParametersRequest(*redshift.DescribeDefaultClusterParametersInput) redshift.DescribeDefaultClusterParametersRequest
+	DescribeDefaultClusterParametersRequest(*types.DescribeDefaultClusterParametersInput) redshift.DescribeDefaultClusterParametersRequest
 
-	DescribeEventCategoriesRequest(*redshift.DescribeEventCategoriesInput) redshift.DescribeEventCategoriesRequest
+	DescribeEventCategoriesRequest(*types.DescribeEventCategoriesInput) redshift.DescribeEventCategoriesRequest
 
-	DescribeEventSubscriptionsRequest(*redshift.DescribeEventSubscriptionsInput) redshift.DescribeEventSubscriptionsRequest
+	DescribeEventSubscriptionsRequest(*types.DescribeEventSubscriptionsInput) redshift.DescribeEventSubscriptionsRequest
 
-	DescribeEventsRequest(*redshift.DescribeEventsInput) redshift.DescribeEventsRequest
+	DescribeEventsRequest(*types.DescribeEventsInput) redshift.DescribeEventsRequest
 
-	DescribeHsmClientCertificatesRequest(*redshift.DescribeHsmClientCertificatesInput) redshift.DescribeHsmClientCertificatesRequest
+	DescribeHsmClientCertificatesRequest(*types.DescribeHsmClientCertificatesInput) redshift.DescribeHsmClientCertificatesRequest
 
-	DescribeHsmConfigurationsRequest(*redshift.DescribeHsmConfigurationsInput) redshift.DescribeHsmConfigurationsRequest
+	DescribeHsmConfigurationsRequest(*types.DescribeHsmConfigurationsInput) redshift.DescribeHsmConfigurationsRequest
 
-	DescribeLoggingStatusRequest(*redshift.DescribeLoggingStatusInput) redshift.DescribeLoggingStatusRequest
+	DescribeLoggingStatusRequest(*types.DescribeLoggingStatusInput) redshift.DescribeLoggingStatusRequest
 
-	DescribeNodeConfigurationOptionsRequest(*redshift.DescribeNodeConfigurationOptionsInput) redshift.DescribeNodeConfigurationOptionsRequest
+	DescribeNodeConfigurationOptionsRequest(*types.DescribeNodeConfigurationOptionsInput) redshift.DescribeNodeConfigurationOptionsRequest
 
-	DescribeOrderableClusterOptionsRequest(*redshift.DescribeOrderableClusterOptionsInput) redshift.DescribeOrderableClusterOptionsRequest
+	DescribeOrderableClusterOptionsRequest(*types.DescribeOrderableClusterOptionsInput) redshift.DescribeOrderableClusterOptionsRequest
 
-	DescribeReservedNodeOfferingsRequest(*redshift.DescribeReservedNodeOfferingsInput) redshift.DescribeReservedNodeOfferingsRequest
+	DescribeReservedNodeOfferingsRequest(*types.DescribeReservedNodeOfferingsInput) redshift.DescribeReservedNodeOfferingsRequest
 
-	DescribeReservedNodesRequest(*redshift.DescribeReservedNodesInput) redshift.DescribeReservedNodesRequest
+	DescribeReservedNodesRequest(*types.DescribeReservedNodesInput) redshift.DescribeReservedNodesRequest
 
-	DescribeResizeRequest(*redshift.DescribeResizeInput) redshift.DescribeResizeRequest
+	DescribeResizeRequest(*types.DescribeResizeInput) redshift.DescribeResizeRequest
 
-	DescribeSnapshotCopyGrantsRequest(*redshift.DescribeSnapshotCopyGrantsInput) redshift.DescribeSnapshotCopyGrantsRequest
+	DescribeSnapshotCopyGrantsRequest(*types.DescribeSnapshotCopyGrantsInput) redshift.DescribeSnapshotCopyGrantsRequest
 
-	DescribeSnapshotSchedulesRequest(*redshift.DescribeSnapshotSchedulesInput) redshift.DescribeSnapshotSchedulesRequest
+	DescribeSnapshotSchedulesRequest(*types.DescribeSnapshotSchedulesInput) redshift.DescribeSnapshotSchedulesRequest
 
-	DescribeStorageRequest(*redshift.DescribeStorageInput) redshift.DescribeStorageRequest
+	DescribeStorageRequest(*types.DescribeStorageInput) redshift.DescribeStorageRequest
 
-	DescribeTableRestoreStatusRequest(*redshift.DescribeTableRestoreStatusInput) redshift.DescribeTableRestoreStatusRequest
+	DescribeTableRestoreStatusRequest(*types.DescribeTableRestoreStatusInput) redshift.DescribeTableRestoreStatusRequest
 
-	DescribeTagsRequest(*redshift.DescribeTagsInput) redshift.DescribeTagsRequest
+	DescribeTagsRequest(*types.DescribeTagsInput) redshift.DescribeTagsRequest
 
-	DisableLoggingRequest(*redshift.DisableLoggingInput) redshift.DisableLoggingRequest
+	DisableLoggingRequest(*types.DisableLoggingInput) redshift.DisableLoggingRequest
 
-	DisableSnapshotCopyRequest(*redshift.DisableSnapshotCopyInput) redshift.DisableSnapshotCopyRequest
+	DisableSnapshotCopyRequest(*types.DisableSnapshotCopyInput) redshift.DisableSnapshotCopyRequest
 
-	EnableLoggingRequest(*redshift.EnableLoggingInput) redshift.EnableLoggingRequest
+	EnableLoggingRequest(*types.EnableLoggingInput) redshift.EnableLoggingRequest
 
-	EnableSnapshotCopyRequest(*redshift.EnableSnapshotCopyInput) redshift.EnableSnapshotCopyRequest
+	EnableSnapshotCopyRequest(*types.EnableSnapshotCopyInput) redshift.EnableSnapshotCopyRequest
 
-	GetClusterCredentialsRequest(*redshift.GetClusterCredentialsInput) redshift.GetClusterCredentialsRequest
+	GetClusterCredentialsRequest(*types.GetClusterCredentialsInput) redshift.GetClusterCredentialsRequest
 
-	GetReservedNodeExchangeOfferingsRequest(*redshift.GetReservedNodeExchangeOfferingsInput) redshift.GetReservedNodeExchangeOfferingsRequest
+	GetReservedNodeExchangeOfferingsRequest(*types.GetReservedNodeExchangeOfferingsInput) redshift.GetReservedNodeExchangeOfferingsRequest
 
-	ModifyClusterRequest(*redshift.ModifyClusterInput) redshift.ModifyClusterRequest
+	ModifyClusterRequest(*types.ModifyClusterInput) redshift.ModifyClusterRequest
 
-	ModifyClusterDbRevisionRequest(*redshift.ModifyClusterDbRevisionInput) redshift.ModifyClusterDbRevisionRequest
+	ModifyClusterDbRevisionRequest(*types.ModifyClusterDbRevisionInput) redshift.ModifyClusterDbRevisionRequest
 
-	ModifyClusterIamRolesRequest(*redshift.ModifyClusterIamRolesInput) redshift.ModifyClusterIamRolesRequest
+	ModifyClusterIamRolesRequest(*types.ModifyClusterIamRolesInput) redshift.ModifyClusterIamRolesRequest
 
-	ModifyClusterMaintenanceRequest(*redshift.ModifyClusterMaintenanceInput) redshift.ModifyClusterMaintenanceRequest
+	ModifyClusterMaintenanceRequest(*types.ModifyClusterMaintenanceInput) redshift.ModifyClusterMaintenanceRequest
 
-	ModifyClusterParameterGroupRequest(*redshift.ModifyClusterParameterGroupInput) redshift.ModifyClusterParameterGroupRequest
+	ModifyClusterParameterGroupRequest(*types.ModifyClusterParameterGroupInput) redshift.ModifyClusterParameterGroupRequest
 
-	ModifyClusterSnapshotRequest(*redshift.ModifyClusterSnapshotInput) redshift.ModifyClusterSnapshotRequest
+	ModifyClusterSnapshotRequest(*types.ModifyClusterSnapshotInput) redshift.ModifyClusterSnapshotRequest
 
-	ModifyClusterSnapshotScheduleRequest(*redshift.ModifyClusterSnapshotScheduleInput) redshift.ModifyClusterSnapshotScheduleRequest
+	ModifyClusterSnapshotScheduleRequest(*types.ModifyClusterSnapshotScheduleInput) redshift.ModifyClusterSnapshotScheduleRequest
 
-	ModifyClusterSubnetGroupRequest(*redshift.ModifyClusterSubnetGroupInput) redshift.ModifyClusterSubnetGroupRequest
+	ModifyClusterSubnetGroupRequest(*types.ModifyClusterSubnetGroupInput) redshift.ModifyClusterSubnetGroupRequest
 
-	ModifyEventSubscriptionRequest(*redshift.ModifyEventSubscriptionInput) redshift.ModifyEventSubscriptionRequest
+	ModifyEventSubscriptionRequest(*types.ModifyEventSubscriptionInput) redshift.ModifyEventSubscriptionRequest
 
-	ModifySnapshotCopyRetentionPeriodRequest(*redshift.ModifySnapshotCopyRetentionPeriodInput) redshift.ModifySnapshotCopyRetentionPeriodRequest
+	ModifySnapshotCopyRetentionPeriodRequest(*types.ModifySnapshotCopyRetentionPeriodInput) redshift.ModifySnapshotCopyRetentionPeriodRequest
 
-	ModifySnapshotScheduleRequest(*redshift.ModifySnapshotScheduleInput) redshift.ModifySnapshotScheduleRequest
+	ModifySnapshotScheduleRequest(*types.ModifySnapshotScheduleInput) redshift.ModifySnapshotScheduleRequest
 
-	PurchaseReservedNodeOfferingRequest(*redshift.PurchaseReservedNodeOfferingInput) redshift.PurchaseReservedNodeOfferingRequest
+	PurchaseReservedNodeOfferingRequest(*types.PurchaseReservedNodeOfferingInput) redshift.PurchaseReservedNodeOfferingRequest
 
-	RebootClusterRequest(*redshift.RebootClusterInput) redshift.RebootClusterRequest
+	RebootClusterRequest(*types.RebootClusterInput) redshift.RebootClusterRequest
 
-	ResetClusterParameterGroupRequest(*redshift.ResetClusterParameterGroupInput) redshift.ResetClusterParameterGroupRequest
+	ResetClusterParameterGroupRequest(*types.ResetClusterParameterGroupInput) redshift.ResetClusterParameterGroupRequest
 
-	ResizeClusterRequest(*redshift.ResizeClusterInput) redshift.ResizeClusterRequest
+	ResizeClusterRequest(*types.ResizeClusterInput) redshift.ResizeClusterRequest
 
-	RestoreFromClusterSnapshotRequest(*redshift.RestoreFromClusterSnapshotInput) redshift.RestoreFromClusterSnapshotRequest
+	RestoreFromClusterSnapshotRequest(*types.RestoreFromClusterSnapshotInput) redshift.RestoreFromClusterSnapshotRequest
 
-	RestoreTableFromClusterSnapshotRequest(*redshift.RestoreTableFromClusterSnapshotInput) redshift.RestoreTableFromClusterSnapshotRequest
+	RestoreTableFromClusterSnapshotRequest(*types.RestoreTableFromClusterSnapshotInput) redshift.RestoreTableFromClusterSnapshotRequest
 
-	RevokeClusterSecurityGroupIngressRequest(*redshift.RevokeClusterSecurityGroupIngressInput) redshift.RevokeClusterSecurityGroupIngressRequest
+	RevokeClusterSecurityGroupIngressRequest(*types.RevokeClusterSecurityGroupIngressInput) redshift.RevokeClusterSecurityGroupIngressRequest
 
-	RevokeSnapshotAccessRequest(*redshift.RevokeSnapshotAccessInput) redshift.RevokeSnapshotAccessRequest
+	RevokeSnapshotAccessRequest(*types.RevokeSnapshotAccessInput) redshift.RevokeSnapshotAccessRequest
 
-	RotateEncryptionKeyRequest(*redshift.RotateEncryptionKeyInput) redshift.RotateEncryptionKeyRequest
+	RotateEncryptionKeyRequest(*types.RotateEncryptionKeyInput) redshift.RotateEncryptionKeyRequest
 
-	WaitUntilClusterAvailable(context.Context, *redshift.DescribeClustersInput, ...aws.WaiterOption) error
+	WaitUntilClusterAvailable(context.Context, *types.DescribeClustersInput, ...aws.WaiterOption) error
 
-	WaitUntilClusterDeleted(context.Context, *redshift.DescribeClustersInput, ...aws.WaiterOption) error
+	WaitUntilClusterDeleted(context.Context, *types.DescribeClustersInput, ...aws.WaiterOption) error
 
-	WaitUntilClusterRestored(context.Context, *redshift.DescribeClustersInput, ...aws.WaiterOption) error
+	WaitUntilClusterRestored(context.Context, *types.DescribeClustersInput, ...aws.WaiterOption) error
 
-	WaitUntilSnapshotAvailable(context.Context, *redshift.DescribeClusterSnapshotsInput, ...aws.WaiterOption) error
+	WaitUntilSnapshotAvailable(context.Context, *types.DescribeClusterSnapshotsInput, ...aws.WaiterOption) error
 }
 
 var _ ClientAPI = (*redshift.Client)(nil)

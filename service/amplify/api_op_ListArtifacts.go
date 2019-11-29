@@ -6,161 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/amplify/types"
 )
-
-// Request structure for the list artifacts request.
-type ListArtifactsInput struct {
-	_ struct{} `type:"structure"`
-
-	// Unique Id for an Amplify App.
-	//
-	// AppId is a required field
-	AppId *string `location:"uri" locationName:"appId" min:"1" type:"string" required:"true"`
-
-	// Type for an artifact.
-	ArtifactType ArtifactType `locationName:"artifactType" type:"string" enum:"true"`
-
-	// Name for a branch, part of an Amplify App.
-	//
-	// BranchName is a required field
-	BranchName *string `location:"uri" locationName:"branchName" min:"1" type:"string" required:"true"`
-
-	// Unique Id for an Job.
-	//
-	// JobId is a required field
-	JobId *string `location:"uri" locationName:"jobId" type:"string" required:"true"`
-
-	// Maximum number of records to list in a single response.
-	MaxResults *int64 `location:"querystring" locationName:"maxResults" min:"1" type:"integer"`
-
-	// Pagination token. Set to null to start listing artifacts from start. If non-null
-	// pagination token is returned in a result, then pass its value in here to
-	// list more artifacts.
-	NextToken *string `location:"querystring" locationName:"nextToken" type:"string"`
-}
-
-// String returns the string representation
-func (s ListArtifactsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListArtifactsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListArtifactsInput"}
-
-	if s.AppId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("AppId"))
-	}
-	if s.AppId != nil && len(*s.AppId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("AppId", 1))
-	}
-
-	if s.BranchName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("BranchName"))
-	}
-	if s.BranchName != nil && len(*s.BranchName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("BranchName", 1))
-	}
-
-	if s.JobId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("JobId"))
-	}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListArtifactsInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if len(s.ArtifactType) > 0 {
-		v := s.ArtifactType
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "artifactType", protocol.QuotedValue{ValueMarshaler: v}, metadata)
-	}
-	if s.AppId != nil {
-		v := *s.AppId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "appId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.BranchName != nil {
-		v := *s.BranchName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "branchName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.JobId != nil {
-		v := *s.JobId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "jobId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.MaxResults != nil {
-		v := *s.MaxResults
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "maxResults", protocol.Int64Value(v), metadata)
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-// Result structure for the list artifacts request.
-type ListArtifactsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// List of artifacts.
-	//
-	// Artifacts is a required field
-	Artifacts []Artifact `locationName:"artifacts" type:"list" required:"true"`
-
-	// Pagination token. If non-null pagination token is returned in a result, then
-	// pass its value in another request to fetch more entries.
-	NextToken *string `locationName:"nextToken" type:"string"`
-}
-
-// String returns the string representation
-func (s ListArtifactsOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListArtifactsOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.Artifacts != nil {
-		v := s.Artifacts
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "artifacts", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opListArtifacts = "ListArtifacts"
 
@@ -177,7 +24,7 @@ const opListArtifacts = "ListArtifacts"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/ListArtifacts
-func (c *Client) ListArtifactsRequest(input *ListArtifactsInput) ListArtifactsRequest {
+func (c *Client) ListArtifactsRequest(input *types.ListArtifactsInput) ListArtifactsRequest {
 	op := &aws.Operation{
 		Name:       opListArtifacts,
 		HTTPMethod: "GET",
@@ -185,10 +32,10 @@ func (c *Client) ListArtifactsRequest(input *ListArtifactsInput) ListArtifactsRe
 	}
 
 	if input == nil {
-		input = &ListArtifactsInput{}
+		input = &types.ListArtifactsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListArtifactsOutput{})
+	req := c.newRequest(op, input, &types.ListArtifactsOutput{})
 	return ListArtifactsRequest{Request: req, Input: input, Copy: c.ListArtifactsRequest}
 }
 
@@ -196,8 +43,8 @@ func (c *Client) ListArtifactsRequest(input *ListArtifactsInput) ListArtifactsRe
 // ListArtifacts API operation.
 type ListArtifactsRequest struct {
 	*aws.Request
-	Input *ListArtifactsInput
-	Copy  func(*ListArtifactsInput) ListArtifactsRequest
+	Input *types.ListArtifactsInput
+	Copy  func(*types.ListArtifactsInput) ListArtifactsRequest
 }
 
 // Send marshals and sends the ListArtifacts API request.
@@ -209,7 +56,7 @@ func (r ListArtifactsRequest) Send(ctx context.Context) (*ListArtifactsResponse,
 	}
 
 	resp := &ListArtifactsResponse{
-		ListArtifactsOutput: r.Request.Data.(*ListArtifactsOutput),
+		ListArtifactsOutput: r.Request.Data.(*types.ListArtifactsOutput),
 		response:            &aws.Response{Request: r.Request},
 	}
 
@@ -219,7 +66,7 @@ func (r ListArtifactsRequest) Send(ctx context.Context) (*ListArtifactsResponse,
 // ListArtifactsResponse is the response type for the
 // ListArtifacts API operation.
 type ListArtifactsResponse struct {
-	*ListArtifactsOutput
+	*types.ListArtifactsOutput
 
 	response *aws.Response
 }

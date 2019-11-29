@@ -6,71 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-type CreateFpgaImageInput struct {
-	_ struct{} `type:"structure"`
-
-	// Unique, case-sensitive identifier that you provide to ensure the idempotency
-	// of the request. For more information, see Ensuring Idempotency (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Run_Instance_Idempotency.html).
-	ClientToken *string `type:"string"`
-
-	// A description for the AFI.
-	Description *string `type:"string"`
-
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have
-	// the required permissions, the error response is DryRunOperation. Otherwise,
-	// it is UnauthorizedOperation.
-	DryRun *bool `type:"boolean"`
-
-	// The location of the encrypted design checkpoint in Amazon S3. The input must
-	// be a tarball.
-	//
-	// InputStorageLocation is a required field
-	InputStorageLocation *StorageLocation `type:"structure" required:"true"`
-
-	// The location in Amazon S3 for the output logs.
-	LogsStorageLocation *StorageLocation `type:"structure"`
-
-	// A name for the AFI.
-	Name *string `type:"string"`
-}
-
-// String returns the string representation
-func (s CreateFpgaImageInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateFpgaImageInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateFpgaImageInput"}
-
-	if s.InputStorageLocation == nil {
-		invalidParams.Add(aws.NewErrParamRequired("InputStorageLocation"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type CreateFpgaImageOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The global FPGA image identifier (AGFI ID).
-	FpgaImageGlobalId *string `locationName:"fpgaImageGlobalId" type:"string"`
-
-	// The FPGA image identifier (AFI ID).
-	FpgaImageId *string `locationName:"fpgaImageId" type:"string"`
-}
-
-// String returns the string representation
-func (s CreateFpgaImageOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCreateFpgaImage = "CreateFpgaImage"
 
@@ -94,7 +31,7 @@ const opCreateFpgaImage = "CreateFpgaImage"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateFpgaImage
-func (c *Client) CreateFpgaImageRequest(input *CreateFpgaImageInput) CreateFpgaImageRequest {
+func (c *Client) CreateFpgaImageRequest(input *types.CreateFpgaImageInput) CreateFpgaImageRequest {
 	op := &aws.Operation{
 		Name:       opCreateFpgaImage,
 		HTTPMethod: "POST",
@@ -102,10 +39,10 @@ func (c *Client) CreateFpgaImageRequest(input *CreateFpgaImageInput) CreateFpgaI
 	}
 
 	if input == nil {
-		input = &CreateFpgaImageInput{}
+		input = &types.CreateFpgaImageInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateFpgaImageOutput{})
+	req := c.newRequest(op, input, &types.CreateFpgaImageOutput{})
 	return CreateFpgaImageRequest{Request: req, Input: input, Copy: c.CreateFpgaImageRequest}
 }
 
@@ -113,8 +50,8 @@ func (c *Client) CreateFpgaImageRequest(input *CreateFpgaImageInput) CreateFpgaI
 // CreateFpgaImage API operation.
 type CreateFpgaImageRequest struct {
 	*aws.Request
-	Input *CreateFpgaImageInput
-	Copy  func(*CreateFpgaImageInput) CreateFpgaImageRequest
+	Input *types.CreateFpgaImageInput
+	Copy  func(*types.CreateFpgaImageInput) CreateFpgaImageRequest
 }
 
 // Send marshals and sends the CreateFpgaImage API request.
@@ -126,7 +63,7 @@ func (r CreateFpgaImageRequest) Send(ctx context.Context) (*CreateFpgaImageRespo
 	}
 
 	resp := &CreateFpgaImageResponse{
-		CreateFpgaImageOutput: r.Request.Data.(*CreateFpgaImageOutput),
+		CreateFpgaImageOutput: r.Request.Data.(*types.CreateFpgaImageOutput),
 		response:              &aws.Response{Request: r.Request},
 	}
 
@@ -136,7 +73,7 @@ func (r CreateFpgaImageRequest) Send(ctx context.Context) (*CreateFpgaImageRespo
 // CreateFpgaImageResponse is the response type for the
 // CreateFpgaImage API operation.
 type CreateFpgaImageResponse struct {
-	*CreateFpgaImageOutput
+	*types.CreateFpgaImageOutput
 
 	response *aws.Response
 }

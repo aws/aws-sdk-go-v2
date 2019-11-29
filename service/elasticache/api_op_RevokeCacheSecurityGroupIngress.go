@@ -6,75 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/elasticache/types"
 )
-
-// Represents the input of a RevokeCacheSecurityGroupIngress operation.
-type RevokeCacheSecurityGroupIngressInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the cache security group to revoke ingress from.
-	//
-	// CacheSecurityGroupName is a required field
-	CacheSecurityGroupName *string `type:"string" required:"true"`
-
-	// The name of the Amazon EC2 security group to revoke access from.
-	//
-	// EC2SecurityGroupName is a required field
-	EC2SecurityGroupName *string `type:"string" required:"true"`
-
-	// The AWS account number of the Amazon EC2 security group owner. Note that
-	// this is not the same thing as an AWS access key ID - you must provide a valid
-	// AWS account number for this parameter.
-	//
-	// EC2SecurityGroupOwnerId is a required field
-	EC2SecurityGroupOwnerId *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s RevokeCacheSecurityGroupIngressInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *RevokeCacheSecurityGroupIngressInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "RevokeCacheSecurityGroupIngressInput"}
-
-	if s.CacheSecurityGroupName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("CacheSecurityGroupName"))
-	}
-
-	if s.EC2SecurityGroupName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("EC2SecurityGroupName"))
-	}
-
-	if s.EC2SecurityGroupOwnerId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("EC2SecurityGroupOwnerId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type RevokeCacheSecurityGroupIngressOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Represents the output of one of the following operations:
-	//
-	//    * AuthorizeCacheSecurityGroupIngress
-	//
-	//    * CreateCacheSecurityGroup
-	//
-	//    * RevokeCacheSecurityGroupIngress
-	CacheSecurityGroup *CacheSecurityGroup `type:"structure"`
-}
-
-// String returns the string representation
-func (s RevokeCacheSecurityGroupIngressOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opRevokeCacheSecurityGroupIngress = "RevokeCacheSecurityGroupIngress"
 
@@ -92,7 +25,7 @@ const opRevokeCacheSecurityGroupIngress = "RevokeCacheSecurityGroupIngress"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/RevokeCacheSecurityGroupIngress
-func (c *Client) RevokeCacheSecurityGroupIngressRequest(input *RevokeCacheSecurityGroupIngressInput) RevokeCacheSecurityGroupIngressRequest {
+func (c *Client) RevokeCacheSecurityGroupIngressRequest(input *types.RevokeCacheSecurityGroupIngressInput) RevokeCacheSecurityGroupIngressRequest {
 	op := &aws.Operation{
 		Name:       opRevokeCacheSecurityGroupIngress,
 		HTTPMethod: "POST",
@@ -100,10 +33,10 @@ func (c *Client) RevokeCacheSecurityGroupIngressRequest(input *RevokeCacheSecuri
 	}
 
 	if input == nil {
-		input = &RevokeCacheSecurityGroupIngressInput{}
+		input = &types.RevokeCacheSecurityGroupIngressInput{}
 	}
 
-	req := c.newRequest(op, input, &RevokeCacheSecurityGroupIngressOutput{})
+	req := c.newRequest(op, input, &types.RevokeCacheSecurityGroupIngressOutput{})
 	return RevokeCacheSecurityGroupIngressRequest{Request: req, Input: input, Copy: c.RevokeCacheSecurityGroupIngressRequest}
 }
 
@@ -111,8 +44,8 @@ func (c *Client) RevokeCacheSecurityGroupIngressRequest(input *RevokeCacheSecuri
 // RevokeCacheSecurityGroupIngress API operation.
 type RevokeCacheSecurityGroupIngressRequest struct {
 	*aws.Request
-	Input *RevokeCacheSecurityGroupIngressInput
-	Copy  func(*RevokeCacheSecurityGroupIngressInput) RevokeCacheSecurityGroupIngressRequest
+	Input *types.RevokeCacheSecurityGroupIngressInput
+	Copy  func(*types.RevokeCacheSecurityGroupIngressInput) RevokeCacheSecurityGroupIngressRequest
 }
 
 // Send marshals and sends the RevokeCacheSecurityGroupIngress API request.
@@ -124,7 +57,7 @@ func (r RevokeCacheSecurityGroupIngressRequest) Send(ctx context.Context) (*Revo
 	}
 
 	resp := &RevokeCacheSecurityGroupIngressResponse{
-		RevokeCacheSecurityGroupIngressOutput: r.Request.Data.(*RevokeCacheSecurityGroupIngressOutput),
+		RevokeCacheSecurityGroupIngressOutput: r.Request.Data.(*types.RevokeCacheSecurityGroupIngressOutput),
 		response:                              &aws.Response{Request: r.Request},
 	}
 
@@ -134,7 +67,7 @@ func (r RevokeCacheSecurityGroupIngressRequest) Send(ctx context.Context) (*Revo
 // RevokeCacheSecurityGroupIngressResponse is the response type for the
 // RevokeCacheSecurityGroupIngress API operation.
 type RevokeCacheSecurityGroupIngressResponse struct {
-	*RevokeCacheSecurityGroupIngressOutput
+	*types.RevokeCacheSecurityGroupIngressOutput
 
 	response *aws.Response
 }

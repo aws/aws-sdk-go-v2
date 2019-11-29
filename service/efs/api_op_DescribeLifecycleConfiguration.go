@@ -6,81 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/efs/types"
 )
-
-type DescribeLifecycleConfigurationInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the file system whose LifecycleConfiguration object you want to
-	// retrieve (String).
-	//
-	// FileSystemId is a required field
-	FileSystemId *string `location:"uri" locationName:"FileSystemId" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeLifecycleConfigurationInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeLifecycleConfigurationInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeLifecycleConfigurationInput"}
-
-	if s.FileSystemId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("FileSystemId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DescribeLifecycleConfigurationInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.FileSystemId != nil {
-		v := *s.FileSystemId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "FileSystemId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type DescribeLifecycleConfigurationOutput struct {
-	_ struct{} `type:"structure"`
-
-	// An array of lifecycle management policies. Currently, EFS supports a maximum
-	// of one policy per file system.
-	LifecyclePolicies []LifecyclePolicy `type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeLifecycleConfigurationOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DescribeLifecycleConfigurationOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.LifecyclePolicies != nil {
-		v := s.LifecyclePolicies
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "LifecyclePolicies", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	return nil
-}
 
 const opDescribeLifecycleConfiguration = "DescribeLifecycleConfiguration"
 
@@ -104,7 +31,7 @@ const opDescribeLifecycleConfiguration = "DescribeLifecycleConfiguration"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/DescribeLifecycleConfiguration
-func (c *Client) DescribeLifecycleConfigurationRequest(input *DescribeLifecycleConfigurationInput) DescribeLifecycleConfigurationRequest {
+func (c *Client) DescribeLifecycleConfigurationRequest(input *types.DescribeLifecycleConfigurationInput) DescribeLifecycleConfigurationRequest {
 	op := &aws.Operation{
 		Name:       opDescribeLifecycleConfiguration,
 		HTTPMethod: "GET",
@@ -112,10 +39,10 @@ func (c *Client) DescribeLifecycleConfigurationRequest(input *DescribeLifecycleC
 	}
 
 	if input == nil {
-		input = &DescribeLifecycleConfigurationInput{}
+		input = &types.DescribeLifecycleConfigurationInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeLifecycleConfigurationOutput{})
+	req := c.newRequest(op, input, &types.DescribeLifecycleConfigurationOutput{})
 	return DescribeLifecycleConfigurationRequest{Request: req, Input: input, Copy: c.DescribeLifecycleConfigurationRequest}
 }
 
@@ -123,8 +50,8 @@ func (c *Client) DescribeLifecycleConfigurationRequest(input *DescribeLifecycleC
 // DescribeLifecycleConfiguration API operation.
 type DescribeLifecycleConfigurationRequest struct {
 	*aws.Request
-	Input *DescribeLifecycleConfigurationInput
-	Copy  func(*DescribeLifecycleConfigurationInput) DescribeLifecycleConfigurationRequest
+	Input *types.DescribeLifecycleConfigurationInput
+	Copy  func(*types.DescribeLifecycleConfigurationInput) DescribeLifecycleConfigurationRequest
 }
 
 // Send marshals and sends the DescribeLifecycleConfiguration API request.
@@ -136,7 +63,7 @@ func (r DescribeLifecycleConfigurationRequest) Send(ctx context.Context) (*Descr
 	}
 
 	resp := &DescribeLifecycleConfigurationResponse{
-		DescribeLifecycleConfigurationOutput: r.Request.Data.(*DescribeLifecycleConfigurationOutput),
+		DescribeLifecycleConfigurationOutput: r.Request.Data.(*types.DescribeLifecycleConfigurationOutput),
 		response:                             &aws.Response{Request: r.Request},
 	}
 
@@ -146,7 +73,7 @@ func (r DescribeLifecycleConfigurationRequest) Send(ctx context.Context) (*Descr
 // DescribeLifecycleConfigurationResponse is the response type for the
 // DescribeLifecycleConfiguration API operation.
 type DescribeLifecycleConfigurationResponse struct {
-	*DescribeLifecycleConfigurationOutput
+	*types.DescribeLifecycleConfigurationOutput
 
 	response *aws.Response
 }

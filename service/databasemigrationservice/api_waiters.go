@@ -7,6 +7,7 @@ import (
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
+	"github.com/aws/aws-sdk-go-v2/service/databasemigrationservice/types"
 )
 
 // WaitUntilEndpointDeleted uses the AWS Database Migration Service API operation
@@ -18,7 +19,7 @@ import (
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Client) WaitUntilEndpointDeleted(ctx context.Context, input *DescribeEndpointsInput, opts ...aws.WaiterOption) error {
+func (c *Client) WaitUntilEndpointDeleted(ctx context.Context, input *types.DescribeEndpointsInput, opts ...aws.WaiterOption) error {
 	w := aws.Waiter{
 		Name:        "WaitUntilEndpointDeleted",
 		MaxAttempts: 60,
@@ -42,7 +43,7 @@ func (c *Client) WaitUntilEndpointDeleted(ctx context.Context, input *DescribeEn
 		},
 		Logger: c.Config.Logger,
 		NewRequest: func(opts []aws.Option) (*aws.Request, error) {
-			var inCpy *DescribeEndpointsInput
+			var inCpy *types.DescribeEndpointsInput
 			if input != nil {
 				tmp := *input
 				inCpy = &tmp
@@ -67,7 +68,7 @@ func (c *Client) WaitUntilEndpointDeleted(ctx context.Context, input *DescribeEn
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Client) WaitUntilReplicationInstanceAvailable(ctx context.Context, input *DescribeReplicationInstancesInput, opts ...aws.WaiterOption) error {
+func (c *Client) WaitUntilReplicationInstanceAvailable(ctx context.Context, input *types.DescribeReplicationInstancesInput, opts ...aws.WaiterOption) error {
 	w := aws.Waiter{
 		Name:        "WaitUntilReplicationInstanceAvailable",
 		MaxAttempts: 60,
@@ -101,7 +102,7 @@ func (c *Client) WaitUntilReplicationInstanceAvailable(ctx context.Context, inpu
 		},
 		Logger: c.Config.Logger,
 		NewRequest: func(opts []aws.Option) (*aws.Request, error) {
-			var inCpy *DescribeReplicationInstancesInput
+			var inCpy *types.DescribeReplicationInstancesInput
 			if input != nil {
 				tmp := *input
 				inCpy = &tmp
@@ -126,7 +127,7 @@ func (c *Client) WaitUntilReplicationInstanceAvailable(ctx context.Context, inpu
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Client) WaitUntilReplicationInstanceDeleted(ctx context.Context, input *DescribeReplicationInstancesInput, opts ...aws.WaiterOption) error {
+func (c *Client) WaitUntilReplicationInstanceDeleted(ctx context.Context, input *types.DescribeReplicationInstancesInput, opts ...aws.WaiterOption) error {
 	w := aws.Waiter{
 		Name:        "WaitUntilReplicationInstanceDeleted",
 		MaxAttempts: 60,
@@ -145,7 +146,7 @@ func (c *Client) WaitUntilReplicationInstanceDeleted(ctx context.Context, input 
 		},
 		Logger: c.Config.Logger,
 		NewRequest: func(opts []aws.Option) (*aws.Request, error) {
-			var inCpy *DescribeReplicationInstancesInput
+			var inCpy *types.DescribeReplicationInstancesInput
 			if input != nil {
 				tmp := *input
 				inCpy = &tmp
@@ -170,7 +171,7 @@ func (c *Client) WaitUntilReplicationInstanceDeleted(ctx context.Context, input 
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Client) WaitUntilReplicationTaskDeleted(ctx context.Context, input *DescribeReplicationTasksInput, opts ...aws.WaiterOption) error {
+func (c *Client) WaitUntilReplicationTaskDeleted(ctx context.Context, input *types.DescribeReplicationTasksInput, opts ...aws.WaiterOption) error {
 	w := aws.Waiter{
 		Name:        "WaitUntilReplicationTaskDeleted",
 		MaxAttempts: 60,
@@ -209,7 +210,7 @@ func (c *Client) WaitUntilReplicationTaskDeleted(ctx context.Context, input *Des
 		},
 		Logger: c.Config.Logger,
 		NewRequest: func(opts []aws.Option) (*aws.Request, error) {
-			var inCpy *DescribeReplicationTasksInput
+			var inCpy *types.DescribeReplicationTasksInput
 			if input != nil {
 				tmp := *input
 				inCpy = &tmp
@@ -234,7 +235,7 @@ func (c *Client) WaitUntilReplicationTaskDeleted(ctx context.Context, input *Des
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Client) WaitUntilReplicationTaskReady(ctx context.Context, input *DescribeReplicationTasksInput, opts ...aws.WaiterOption) error {
+func (c *Client) WaitUntilReplicationTaskReady(ctx context.Context, input *types.DescribeReplicationTasksInput, opts ...aws.WaiterOption) error {
 	w := aws.Waiter{
 		Name:        "WaitUntilReplicationTaskReady",
 		MaxAttempts: 60,
@@ -288,7 +289,7 @@ func (c *Client) WaitUntilReplicationTaskReady(ctx context.Context, input *Descr
 		},
 		Logger: c.Config.Logger,
 		NewRequest: func(opts []aws.Option) (*aws.Request, error) {
-			var inCpy *DescribeReplicationTasksInput
+			var inCpy *types.DescribeReplicationTasksInput
 			if input != nil {
 				tmp := *input
 				inCpy = &tmp
@@ -313,7 +314,7 @@ func (c *Client) WaitUntilReplicationTaskReady(ctx context.Context, input *Descr
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Client) WaitUntilReplicationTaskRunning(ctx context.Context, input *DescribeReplicationTasksInput, opts ...aws.WaiterOption) error {
+func (c *Client) WaitUntilReplicationTaskRunning(ctx context.Context, input *types.DescribeReplicationTasksInput, opts ...aws.WaiterOption) error {
 	w := aws.Waiter{
 		Name:        "WaitUntilReplicationTaskRunning",
 		MaxAttempts: 60,
@@ -367,7 +368,7 @@ func (c *Client) WaitUntilReplicationTaskRunning(ctx context.Context, input *Des
 		},
 		Logger: c.Config.Logger,
 		NewRequest: func(opts []aws.Option) (*aws.Request, error) {
-			var inCpy *DescribeReplicationTasksInput
+			var inCpy *types.DescribeReplicationTasksInput
 			if input != nil {
 				tmp := *input
 				inCpy = &tmp
@@ -392,7 +393,7 @@ func (c *Client) WaitUntilReplicationTaskRunning(ctx context.Context, input *Des
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Client) WaitUntilReplicationTaskStopped(ctx context.Context, input *DescribeReplicationTasksInput, opts ...aws.WaiterOption) error {
+func (c *Client) WaitUntilReplicationTaskStopped(ctx context.Context, input *types.DescribeReplicationTasksInput, opts ...aws.WaiterOption) error {
 	w := aws.Waiter{
 		Name:        "WaitUntilReplicationTaskStopped",
 		MaxAttempts: 60,
@@ -446,7 +447,7 @@ func (c *Client) WaitUntilReplicationTaskStopped(ctx context.Context, input *Des
 		},
 		Logger: c.Config.Logger,
 		NewRequest: func(opts []aws.Option) (*aws.Request, error) {
-			var inCpy *DescribeReplicationTasksInput
+			var inCpy *types.DescribeReplicationTasksInput
 			if input != nil {
 				tmp := *input
 				inCpy = &tmp
@@ -471,7 +472,7 @@ func (c *Client) WaitUntilReplicationTaskStopped(ctx context.Context, input *Des
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Client) WaitUntilTestConnectionSucceeds(ctx context.Context, input *DescribeConnectionsInput, opts ...aws.WaiterOption) error {
+func (c *Client) WaitUntilTestConnectionSucceeds(ctx context.Context, input *types.DescribeConnectionsInput, opts ...aws.WaiterOption) error {
 	w := aws.Waiter{
 		Name:        "WaitUntilTestConnectionSucceeds",
 		MaxAttempts: 60,
@@ -490,7 +491,7 @@ func (c *Client) WaitUntilTestConnectionSucceeds(ctx context.Context, input *Des
 		},
 		Logger: c.Config.Logger,
 		NewRequest: func(opts []aws.Option) (*aws.Request, error) {
-			var inCpy *DescribeConnectionsInput
+			var inCpy *types.DescribeConnectionsInput
 			if input != nil {
 				tmp := *input
 				inCpy = &tmp

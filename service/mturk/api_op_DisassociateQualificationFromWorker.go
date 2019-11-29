@@ -6,64 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/mturk/types"
 )
-
-type DisassociateQualificationFromWorkerInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the Qualification type of the Qualification to be revoked.
-	//
-	// QualificationTypeId is a required field
-	QualificationTypeId *string `min:"1" type:"string" required:"true"`
-
-	// A text message that explains why the Qualification was revoked. The user
-	// who had the Qualification sees this message.
-	Reason *string `type:"string"`
-
-	// The ID of the Worker who possesses the Qualification to be revoked.
-	//
-	// WorkerId is a required field
-	WorkerId *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DisassociateQualificationFromWorkerInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DisassociateQualificationFromWorkerInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DisassociateQualificationFromWorkerInput"}
-
-	if s.QualificationTypeId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("QualificationTypeId"))
-	}
-	if s.QualificationTypeId != nil && len(*s.QualificationTypeId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("QualificationTypeId", 1))
-	}
-
-	if s.WorkerId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("WorkerId"))
-	}
-	if s.WorkerId != nil && len(*s.WorkerId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("WorkerId", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DisassociateQualificationFromWorkerOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DisassociateQualificationFromWorkerOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDisassociateQualificationFromWorker = "DisassociateQualificationFromWorker"
 
@@ -84,7 +28,7 @@ const opDisassociateQualificationFromWorker = "DisassociateQualificationFromWork
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/DisassociateQualificationFromWorker
-func (c *Client) DisassociateQualificationFromWorkerRequest(input *DisassociateQualificationFromWorkerInput) DisassociateQualificationFromWorkerRequest {
+func (c *Client) DisassociateQualificationFromWorkerRequest(input *types.DisassociateQualificationFromWorkerInput) DisassociateQualificationFromWorkerRequest {
 	op := &aws.Operation{
 		Name:       opDisassociateQualificationFromWorker,
 		HTTPMethod: "POST",
@@ -92,10 +36,10 @@ func (c *Client) DisassociateQualificationFromWorkerRequest(input *DisassociateQ
 	}
 
 	if input == nil {
-		input = &DisassociateQualificationFromWorkerInput{}
+		input = &types.DisassociateQualificationFromWorkerInput{}
 	}
 
-	req := c.newRequest(op, input, &DisassociateQualificationFromWorkerOutput{})
+	req := c.newRequest(op, input, &types.DisassociateQualificationFromWorkerOutput{})
 	return DisassociateQualificationFromWorkerRequest{Request: req, Input: input, Copy: c.DisassociateQualificationFromWorkerRequest}
 }
 
@@ -103,8 +47,8 @@ func (c *Client) DisassociateQualificationFromWorkerRequest(input *DisassociateQ
 // DisassociateQualificationFromWorker API operation.
 type DisassociateQualificationFromWorkerRequest struct {
 	*aws.Request
-	Input *DisassociateQualificationFromWorkerInput
-	Copy  func(*DisassociateQualificationFromWorkerInput) DisassociateQualificationFromWorkerRequest
+	Input *types.DisassociateQualificationFromWorkerInput
+	Copy  func(*types.DisassociateQualificationFromWorkerInput) DisassociateQualificationFromWorkerRequest
 }
 
 // Send marshals and sends the DisassociateQualificationFromWorker API request.
@@ -116,7 +60,7 @@ func (r DisassociateQualificationFromWorkerRequest) Send(ctx context.Context) (*
 	}
 
 	resp := &DisassociateQualificationFromWorkerResponse{
-		DisassociateQualificationFromWorkerOutput: r.Request.Data.(*DisassociateQualificationFromWorkerOutput),
+		DisassociateQualificationFromWorkerOutput: r.Request.Data.(*types.DisassociateQualificationFromWorkerOutput),
 		response: &aws.Response{Request: r.Request},
 	}
 
@@ -126,7 +70,7 @@ func (r DisassociateQualificationFromWorkerRequest) Send(ctx context.Context) (*
 // DisassociateQualificationFromWorkerResponse is the response type for the
 // DisassociateQualificationFromWorker API operation.
 type DisassociateQualificationFromWorkerResponse struct {
-	*DisassociateQualificationFromWorkerOutput
+	*types.DisassociateQualificationFromWorkerOutput
 
 	response *aws.Response
 }

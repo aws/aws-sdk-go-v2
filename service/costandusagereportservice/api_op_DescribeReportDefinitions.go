@@ -6,53 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/costandusagereportservice/types"
 )
-
-// Requests a list of AWS Cost and Usage reports owned by the account.
-type DescribeReportDefinitionsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The maximum number of results that AWS returns for the operation.
-	MaxResults *int64 `min:"5" type:"integer"`
-
-	// A generic string.
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeReportDefinitionsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeReportDefinitionsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeReportDefinitionsInput"}
-	if s.MaxResults != nil && *s.MaxResults < 5 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 5))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// If the action is successful, the service sends back an HTTP 200 response.
-type DescribeReportDefinitionsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A generic string.
-	NextToken *string `type:"string"`
-
-	// A list of AWS Cost and Usage reports owned by the account.
-	ReportDefinitions []ReportDefinition `type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeReportDefinitionsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeReportDefinitions = "DescribeReportDefinitions"
 
@@ -69,7 +24,7 @@ const opDescribeReportDefinitions = "DescribeReportDefinitions"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cur-2017-01-06/DescribeReportDefinitions
-func (c *Client) DescribeReportDefinitionsRequest(input *DescribeReportDefinitionsInput) DescribeReportDefinitionsRequest {
+func (c *Client) DescribeReportDefinitionsRequest(input *types.DescribeReportDefinitionsInput) DescribeReportDefinitionsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeReportDefinitions,
 		HTTPMethod: "POST",
@@ -83,10 +38,10 @@ func (c *Client) DescribeReportDefinitionsRequest(input *DescribeReportDefinitio
 	}
 
 	if input == nil {
-		input = &DescribeReportDefinitionsInput{}
+		input = &types.DescribeReportDefinitionsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeReportDefinitionsOutput{})
+	req := c.newRequest(op, input, &types.DescribeReportDefinitionsOutput{})
 	return DescribeReportDefinitionsRequest{Request: req, Input: input, Copy: c.DescribeReportDefinitionsRequest}
 }
 
@@ -94,8 +49,8 @@ func (c *Client) DescribeReportDefinitionsRequest(input *DescribeReportDefinitio
 // DescribeReportDefinitions API operation.
 type DescribeReportDefinitionsRequest struct {
 	*aws.Request
-	Input *DescribeReportDefinitionsInput
-	Copy  func(*DescribeReportDefinitionsInput) DescribeReportDefinitionsRequest
+	Input *types.DescribeReportDefinitionsInput
+	Copy  func(*types.DescribeReportDefinitionsInput) DescribeReportDefinitionsRequest
 }
 
 // Send marshals and sends the DescribeReportDefinitions API request.
@@ -107,7 +62,7 @@ func (r DescribeReportDefinitionsRequest) Send(ctx context.Context) (*DescribeRe
 	}
 
 	resp := &DescribeReportDefinitionsResponse{
-		DescribeReportDefinitionsOutput: r.Request.Data.(*DescribeReportDefinitionsOutput),
+		DescribeReportDefinitionsOutput: r.Request.Data.(*types.DescribeReportDefinitionsOutput),
 		response:                        &aws.Response{Request: r.Request},
 	}
 
@@ -137,7 +92,7 @@ func NewDescribeReportDefinitionsPaginator(req DescribeReportDefinitionsRequest)
 	return DescribeReportDefinitionsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *DescribeReportDefinitionsInput
+				var inCpy *types.DescribeReportDefinitionsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -157,14 +112,14 @@ type DescribeReportDefinitionsPaginator struct {
 	aws.Pager
 }
 
-func (p *DescribeReportDefinitionsPaginator) CurrentPage() *DescribeReportDefinitionsOutput {
-	return p.Pager.CurrentPage().(*DescribeReportDefinitionsOutput)
+func (p *DescribeReportDefinitionsPaginator) CurrentPage() *types.DescribeReportDefinitionsOutput {
+	return p.Pager.CurrentPage().(*types.DescribeReportDefinitionsOutput)
 }
 
 // DescribeReportDefinitionsResponse is the response type for the
 // DescribeReportDefinitions API operation.
 type DescribeReportDefinitionsResponse struct {
-	*DescribeReportDefinitionsOutput
+	*types.DescribeReportDefinitionsOutput
 
 	response *aws.Response
 }

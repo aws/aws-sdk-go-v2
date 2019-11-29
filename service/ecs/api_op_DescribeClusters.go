@@ -6,56 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ecs/types"
 )
-
-type DescribeClustersInput struct {
-	_ struct{} `type:"structure"`
-
-	// A list of up to 100 cluster names or full cluster Amazon Resource Name (ARN)
-	// entries. If you do not specify a cluster, the default cluster is assumed.
-	Clusters []string `locationName:"clusters" type:"list"`
-
-	// Additional information about your clusters to be separated by launch type,
-	// including:
-	//
-	//    * runningEC2TasksCount
-	//
-	//    * runningFargateTasksCount
-	//
-	//    * pendingEC2TasksCount
-	//
-	//    * pendingFargateTasksCount
-	//
-	//    * activeEC2ServiceCount
-	//
-	//    * activeFargateServiceCount
-	//
-	//    * drainingEC2ServiceCount
-	//
-	//    * drainingFargateServiceCount
-	Include []ClusterField `locationName:"include" type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeClustersInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type DescribeClustersOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The list of clusters.
-	Clusters []Cluster `locationName:"clusters" type:"list"`
-
-	// Any failures associated with the call.
-	Failures []Failure `locationName:"failures" type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeClustersOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeClusters = "DescribeClusters"
 
@@ -72,7 +24,7 @@ const opDescribeClusters = "DescribeClusters"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DescribeClusters
-func (c *Client) DescribeClustersRequest(input *DescribeClustersInput) DescribeClustersRequest {
+func (c *Client) DescribeClustersRequest(input *types.DescribeClustersInput) DescribeClustersRequest {
 	op := &aws.Operation{
 		Name:       opDescribeClusters,
 		HTTPMethod: "POST",
@@ -80,10 +32,10 @@ func (c *Client) DescribeClustersRequest(input *DescribeClustersInput) DescribeC
 	}
 
 	if input == nil {
-		input = &DescribeClustersInput{}
+		input = &types.DescribeClustersInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeClustersOutput{})
+	req := c.newRequest(op, input, &types.DescribeClustersOutput{})
 	return DescribeClustersRequest{Request: req, Input: input, Copy: c.DescribeClustersRequest}
 }
 
@@ -91,8 +43,8 @@ func (c *Client) DescribeClustersRequest(input *DescribeClustersInput) DescribeC
 // DescribeClusters API operation.
 type DescribeClustersRequest struct {
 	*aws.Request
-	Input *DescribeClustersInput
-	Copy  func(*DescribeClustersInput) DescribeClustersRequest
+	Input *types.DescribeClustersInput
+	Copy  func(*types.DescribeClustersInput) DescribeClustersRequest
 }
 
 // Send marshals and sends the DescribeClusters API request.
@@ -104,7 +56,7 @@ func (r DescribeClustersRequest) Send(ctx context.Context) (*DescribeClustersRes
 	}
 
 	resp := &DescribeClustersResponse{
-		DescribeClustersOutput: r.Request.Data.(*DescribeClustersOutput),
+		DescribeClustersOutput: r.Request.Data.(*types.DescribeClustersOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -114,7 +66,7 @@ func (r DescribeClustersRequest) Send(ctx context.Context) (*DescribeClustersRes
 // DescribeClustersResponse is the response type for the
 // DescribeClusters API operation.
 type DescribeClustersResponse struct {
-	*DescribeClustersOutput
+	*types.DescribeClustersOutput
 
 	response *aws.Response
 }

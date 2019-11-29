@@ -6,63 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/support/types"
 )
-
-type AddAttachmentsToSetInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the attachment set. If an attachmentSetId is not specified, a new
-	// attachment set is created, and the ID of the set is returned in the response.
-	// If an attachmentSetId is specified, the attachments are added to the specified
-	// set, if it exists.
-	AttachmentSetId *string `locationName:"attachmentSetId" type:"string"`
-
-	// One or more attachments to add to the set. The limit is 3 attachments per
-	// set, and the size limit is 5 MB per attachment.
-	//
-	// Attachments is a required field
-	Attachments []Attachment `locationName:"attachments" type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s AddAttachmentsToSetInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *AddAttachmentsToSetInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "AddAttachmentsToSetInput"}
-
-	if s.Attachments == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Attachments"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// The ID and expiry time of the attachment set returned by the AddAttachmentsToSet
-// operation.
-type AddAttachmentsToSetOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the attachment set. If an attachmentSetId was not specified, a
-	// new attachment set is created, and the ID of the set is returned in the response.
-	// If an attachmentSetId was specified, the attachments are added to the specified
-	// set, if it exists.
-	AttachmentSetId *string `locationName:"attachmentSetId" type:"string"`
-
-	// The time and date when the attachment set expires.
-	ExpiryTime *string `locationName:"expiryTime" type:"string"`
-}
-
-// String returns the string representation
-func (s AddAttachmentsToSetOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opAddAttachmentsToSet = "AddAttachmentsToSet"
 
@@ -88,7 +33,7 @@ const opAddAttachmentsToSet = "AddAttachmentsToSet"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/support-2013-04-15/AddAttachmentsToSet
-func (c *Client) AddAttachmentsToSetRequest(input *AddAttachmentsToSetInput) AddAttachmentsToSetRequest {
+func (c *Client) AddAttachmentsToSetRequest(input *types.AddAttachmentsToSetInput) AddAttachmentsToSetRequest {
 	op := &aws.Operation{
 		Name:       opAddAttachmentsToSet,
 		HTTPMethod: "POST",
@@ -96,10 +41,10 @@ func (c *Client) AddAttachmentsToSetRequest(input *AddAttachmentsToSetInput) Add
 	}
 
 	if input == nil {
-		input = &AddAttachmentsToSetInput{}
+		input = &types.AddAttachmentsToSetInput{}
 	}
 
-	req := c.newRequest(op, input, &AddAttachmentsToSetOutput{})
+	req := c.newRequest(op, input, &types.AddAttachmentsToSetOutput{})
 	return AddAttachmentsToSetRequest{Request: req, Input: input, Copy: c.AddAttachmentsToSetRequest}
 }
 
@@ -107,8 +52,8 @@ func (c *Client) AddAttachmentsToSetRequest(input *AddAttachmentsToSetInput) Add
 // AddAttachmentsToSet API operation.
 type AddAttachmentsToSetRequest struct {
 	*aws.Request
-	Input *AddAttachmentsToSetInput
-	Copy  func(*AddAttachmentsToSetInput) AddAttachmentsToSetRequest
+	Input *types.AddAttachmentsToSetInput
+	Copy  func(*types.AddAttachmentsToSetInput) AddAttachmentsToSetRequest
 }
 
 // Send marshals and sends the AddAttachmentsToSet API request.
@@ -120,7 +65,7 @@ func (r AddAttachmentsToSetRequest) Send(ctx context.Context) (*AddAttachmentsTo
 	}
 
 	resp := &AddAttachmentsToSetResponse{
-		AddAttachmentsToSetOutput: r.Request.Data.(*AddAttachmentsToSetOutput),
+		AddAttachmentsToSetOutput: r.Request.Data.(*types.AddAttachmentsToSetOutput),
 		response:                  &aws.Response{Request: r.Request},
 	}
 
@@ -130,7 +75,7 @@ func (r AddAttachmentsToSetRequest) Send(ctx context.Context) (*AddAttachmentsTo
 // AddAttachmentsToSetResponse is the response type for the
 // AddAttachmentsToSet API operation.
 type AddAttachmentsToSetResponse struct {
-	*AddAttachmentsToSetOutput
+	*types.AddAttachmentsToSetOutput
 
 	response *aws.Response
 }

@@ -6,50 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/cloudhsm/types"
 )
-
-// Contains the inputs for the CreateHapgRequest action.
-type CreateHapgInput struct {
-	_ struct{} `type:"structure"`
-
-	// The label of the new high-availability partition group.
-	//
-	// Label is a required field
-	Label *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s CreateHapgInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateHapgInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateHapgInput"}
-
-	if s.Label == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Label"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Contains the output of the CreateHAPartitionGroup action.
-type CreateHapgOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The ARN of the high-availability partition group.
-	HapgArn *string `type:"string"`
-}
-
-// String returns the string representation
-func (s CreateHapgOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCreateHapg = "CreateHapg"
 
@@ -76,7 +34,7 @@ const opCreateHapg = "CreateHapg"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/CreateHapg
-func (c *Client) CreateHapgRequest(input *CreateHapgInput) CreateHapgRequest {
+func (c *Client) CreateHapgRequest(input *types.CreateHapgInput) CreateHapgRequest {
 	op := &aws.Operation{
 		Name:       opCreateHapg,
 		HTTPMethod: "POST",
@@ -84,10 +42,10 @@ func (c *Client) CreateHapgRequest(input *CreateHapgInput) CreateHapgRequest {
 	}
 
 	if input == nil {
-		input = &CreateHapgInput{}
+		input = &types.CreateHapgInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateHapgOutput{})
+	req := c.newRequest(op, input, &types.CreateHapgOutput{})
 	return CreateHapgRequest{Request: req, Input: input, Copy: c.CreateHapgRequest}
 }
 
@@ -95,8 +53,8 @@ func (c *Client) CreateHapgRequest(input *CreateHapgInput) CreateHapgRequest {
 // CreateHapg API operation.
 type CreateHapgRequest struct {
 	*aws.Request
-	Input *CreateHapgInput
-	Copy  func(*CreateHapgInput) CreateHapgRequest
+	Input *types.CreateHapgInput
+	Copy  func(*types.CreateHapgInput) CreateHapgRequest
 }
 
 // Send marshals and sends the CreateHapg API request.
@@ -108,7 +66,7 @@ func (r CreateHapgRequest) Send(ctx context.Context) (*CreateHapgResponse, error
 	}
 
 	resp := &CreateHapgResponse{
-		CreateHapgOutput: r.Request.Data.(*CreateHapgOutput),
+		CreateHapgOutput: r.Request.Data.(*types.CreateHapgOutput),
 		response:         &aws.Response{Request: r.Request},
 	}
 
@@ -118,7 +76,7 @@ func (r CreateHapgRequest) Send(ctx context.Context) (*CreateHapgResponse, error
 // CreateHapgResponse is the response type for the
 // CreateHapg API operation.
 type CreateHapgResponse struct {
-	*CreateHapgOutput
+	*types.CreateHapgOutput
 
 	response *aws.Response
 }

@@ -6,89 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/gamelift/types"
 )
-
-// Represents the input for a request action.
-type DescribeScalingPoliciesInput struct {
-	_ struct{} `type:"structure"`
-
-	// Unique identifier for a fleet to retrieve scaling policies for.
-	//
-	// FleetId is a required field
-	FleetId *string `type:"string" required:"true"`
-
-	// Maximum number of results to return. Use this parameter with NextToken to
-	// get results as a set of sequential pages.
-	Limit *int64 `min:"1" type:"integer"`
-
-	// Token that indicates the start of the next sequential page of results. Use
-	// the token that is returned with a previous call to this action. To start
-	// at the beginning of the result set, do not specify a value.
-	NextToken *string `min:"1" type:"string"`
-
-	// Scaling policy status to filter results on. A scaling policy is only in force
-	// when in an ACTIVE status.
-	//
-	//    * ACTIVE -- The scaling policy is currently in force.
-	//
-	//    * UPDATEREQUESTED -- A request to update the scaling policy has been received.
-	//
-	//    * UPDATING -- A change is being made to the scaling policy.
-	//
-	//    * DELETEREQUESTED -- A request to delete the scaling policy has been received.
-	//
-	//    * DELETING -- The scaling policy is being deleted.
-	//
-	//    * DELETED -- The scaling policy has been deleted.
-	//
-	//    * ERROR -- An error occurred in creating the policy. It should be removed
-	//    and recreated.
-	StatusFilter ScalingStatusType `type:"string" enum:"true"`
-}
-
-// String returns the string representation
-func (s DescribeScalingPoliciesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeScalingPoliciesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeScalingPoliciesInput"}
-
-	if s.FleetId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("FleetId"))
-	}
-	if s.Limit != nil && *s.Limit < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("Limit", 1))
-	}
-	if s.NextToken != nil && len(*s.NextToken) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Represents the returned data in response to a request action.
-type DescribeScalingPoliciesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Token that indicates where to resume retrieving results on the next call
-	// to this action. If no token is returned, these results represent the end
-	// of the list.
-	NextToken *string `min:"1" type:"string"`
-
-	// Collection of objects containing the scaling policies matching the request.
-	ScalingPolicies []ScalingPolicy `type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeScalingPoliciesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeScalingPolicies = "DescribeScalingPolicies"
 
@@ -126,7 +45,7 @@ const opDescribeScalingPolicies = "DescribeScalingPolicies"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DescribeScalingPolicies
-func (c *Client) DescribeScalingPoliciesRequest(input *DescribeScalingPoliciesInput) DescribeScalingPoliciesRequest {
+func (c *Client) DescribeScalingPoliciesRequest(input *types.DescribeScalingPoliciesInput) DescribeScalingPoliciesRequest {
 	op := &aws.Operation{
 		Name:       opDescribeScalingPolicies,
 		HTTPMethod: "POST",
@@ -134,10 +53,10 @@ func (c *Client) DescribeScalingPoliciesRequest(input *DescribeScalingPoliciesIn
 	}
 
 	if input == nil {
-		input = &DescribeScalingPoliciesInput{}
+		input = &types.DescribeScalingPoliciesInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeScalingPoliciesOutput{})
+	req := c.newRequest(op, input, &types.DescribeScalingPoliciesOutput{})
 	return DescribeScalingPoliciesRequest{Request: req, Input: input, Copy: c.DescribeScalingPoliciesRequest}
 }
 
@@ -145,8 +64,8 @@ func (c *Client) DescribeScalingPoliciesRequest(input *DescribeScalingPoliciesIn
 // DescribeScalingPolicies API operation.
 type DescribeScalingPoliciesRequest struct {
 	*aws.Request
-	Input *DescribeScalingPoliciesInput
-	Copy  func(*DescribeScalingPoliciesInput) DescribeScalingPoliciesRequest
+	Input *types.DescribeScalingPoliciesInput
+	Copy  func(*types.DescribeScalingPoliciesInput) DescribeScalingPoliciesRequest
 }
 
 // Send marshals and sends the DescribeScalingPolicies API request.
@@ -158,7 +77,7 @@ func (r DescribeScalingPoliciesRequest) Send(ctx context.Context) (*DescribeScal
 	}
 
 	resp := &DescribeScalingPoliciesResponse{
-		DescribeScalingPoliciesOutput: r.Request.Data.(*DescribeScalingPoliciesOutput),
+		DescribeScalingPoliciesOutput: r.Request.Data.(*types.DescribeScalingPoliciesOutput),
 		response:                      &aws.Response{Request: r.Request},
 	}
 
@@ -168,7 +87,7 @@ func (r DescribeScalingPoliciesRequest) Send(ctx context.Context) (*DescribeScal
 // DescribeScalingPoliciesResponse is the response type for the
 // DescribeScalingPolicies API operation.
 type DescribeScalingPoliciesResponse struct {
-	*DescribeScalingPoliciesOutput
+	*types.DescribeScalingPoliciesOutput
 
 	response *aws.Response
 }

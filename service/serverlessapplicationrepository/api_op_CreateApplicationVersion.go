@@ -6,191 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/serverlessapplicationrepository/types"
 )
-
-type CreateApplicationVersionInput struct {
-	_ struct{} `type:"structure"`
-
-	// ApplicationId is a required field
-	ApplicationId *string `location:"uri" locationName:"applicationId" type:"string" required:"true"`
-
-	// SemanticVersion is a required field
-	SemanticVersion *string `location:"uri" locationName:"semanticVersion" type:"string" required:"true"`
-
-	SourceCodeArchiveUrl *string `locationName:"sourceCodeArchiveUrl" type:"string"`
-
-	SourceCodeUrl *string `locationName:"sourceCodeUrl" type:"string"`
-
-	TemplateBody *string `locationName:"templateBody" type:"string"`
-
-	TemplateUrl *string `locationName:"templateUrl" type:"string"`
-}
-
-// String returns the string representation
-func (s CreateApplicationVersionInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateApplicationVersionInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateApplicationVersionInput"}
-
-	if s.ApplicationId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ApplicationId"))
-	}
-
-	if s.SemanticVersion == nil {
-		invalidParams.Add(aws.NewErrParamRequired("SemanticVersion"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s CreateApplicationVersionInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.SourceCodeArchiveUrl != nil {
-		v := *s.SourceCodeArchiveUrl
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "sourceCodeArchiveUrl", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.SourceCodeUrl != nil {
-		v := *s.SourceCodeUrl
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "sourceCodeUrl", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.TemplateBody != nil {
-		v := *s.TemplateBody
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "templateBody", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.TemplateUrl != nil {
-		v := *s.TemplateUrl
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "templateUrl", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.ApplicationId != nil {
-		v := *s.ApplicationId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "applicationId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.SemanticVersion != nil {
-		v := *s.SemanticVersion
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "semanticVersion", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type CreateApplicationVersionOutput struct {
-	_ struct{} `type:"structure"`
-
-	ApplicationId *string `locationName:"applicationId" type:"string"`
-
-	CreationTime *string `locationName:"creationTime" type:"string"`
-
-	ParameterDefinitions []ParameterDefinition `locationName:"parameterDefinitions" type:"list"`
-
-	RequiredCapabilities []Capability `locationName:"requiredCapabilities" type:"list"`
-
-	ResourcesSupported *bool `locationName:"resourcesSupported" type:"boolean"`
-
-	SemanticVersion *string `locationName:"semanticVersion" type:"string"`
-
-	SourceCodeArchiveUrl *string `locationName:"sourceCodeArchiveUrl" type:"string"`
-
-	SourceCodeUrl *string `locationName:"sourceCodeUrl" type:"string"`
-
-	TemplateUrl *string `locationName:"templateUrl" type:"string"`
-}
-
-// String returns the string representation
-func (s CreateApplicationVersionOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s CreateApplicationVersionOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.ApplicationId != nil {
-		v := *s.ApplicationId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "applicationId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.CreationTime != nil {
-		v := *s.CreationTime
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "creationTime", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.ParameterDefinitions != nil {
-		v := s.ParameterDefinitions
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "parameterDefinitions", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	if s.RequiredCapabilities != nil {
-		v := s.RequiredCapabilities
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "requiredCapabilities", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
-		}
-		ls0.End()
-
-	}
-	if s.ResourcesSupported != nil {
-		v := *s.ResourcesSupported
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "resourcesSupported", protocol.BoolValue(v), metadata)
-	}
-	if s.SemanticVersion != nil {
-		v := *s.SemanticVersion
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "semanticVersion", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.SourceCodeArchiveUrl != nil {
-		v := *s.SourceCodeArchiveUrl
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "sourceCodeArchiveUrl", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.SourceCodeUrl != nil {
-		v := *s.SourceCodeUrl
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "sourceCodeUrl", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.TemplateUrl != nil {
-		v := *s.TemplateUrl
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "templateUrl", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opCreateApplicationVersion = "CreateApplicationVersion"
 
@@ -207,7 +24,7 @@ const opCreateApplicationVersion = "CreateApplicationVersion"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/serverlessrepo-2017-09-08/CreateApplicationVersion
-func (c *Client) CreateApplicationVersionRequest(input *CreateApplicationVersionInput) CreateApplicationVersionRequest {
+func (c *Client) CreateApplicationVersionRequest(input *types.CreateApplicationVersionInput) CreateApplicationVersionRequest {
 	op := &aws.Operation{
 		Name:       opCreateApplicationVersion,
 		HTTPMethod: "PUT",
@@ -215,10 +32,10 @@ func (c *Client) CreateApplicationVersionRequest(input *CreateApplicationVersion
 	}
 
 	if input == nil {
-		input = &CreateApplicationVersionInput{}
+		input = &types.CreateApplicationVersionInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateApplicationVersionOutput{})
+	req := c.newRequest(op, input, &types.CreateApplicationVersionOutput{})
 	return CreateApplicationVersionRequest{Request: req, Input: input, Copy: c.CreateApplicationVersionRequest}
 }
 
@@ -226,8 +43,8 @@ func (c *Client) CreateApplicationVersionRequest(input *CreateApplicationVersion
 // CreateApplicationVersion API operation.
 type CreateApplicationVersionRequest struct {
 	*aws.Request
-	Input *CreateApplicationVersionInput
-	Copy  func(*CreateApplicationVersionInput) CreateApplicationVersionRequest
+	Input *types.CreateApplicationVersionInput
+	Copy  func(*types.CreateApplicationVersionInput) CreateApplicationVersionRequest
 }
 
 // Send marshals and sends the CreateApplicationVersion API request.
@@ -239,7 +56,7 @@ func (r CreateApplicationVersionRequest) Send(ctx context.Context) (*CreateAppli
 	}
 
 	resp := &CreateApplicationVersionResponse{
-		CreateApplicationVersionOutput: r.Request.Data.(*CreateApplicationVersionOutput),
+		CreateApplicationVersionOutput: r.Request.Data.(*types.CreateApplicationVersionOutput),
 		response:                       &aws.Response{Request: r.Request},
 	}
 
@@ -249,7 +66,7 @@ func (r CreateApplicationVersionRequest) Send(ctx context.Context) (*CreateAppli
 // CreateApplicationVersionResponse is the response type for the
 // CreateApplicationVersion API operation.
 type CreateApplicationVersionResponse struct {
-	*CreateApplicationVersionOutput
+	*types.CreateApplicationVersionOutput
 
 	response *aws.Response
 }

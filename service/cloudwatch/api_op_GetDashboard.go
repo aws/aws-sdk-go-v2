@@ -6,56 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/cloudwatch/types"
 )
-
-type GetDashboardInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the dashboard to be described.
-	//
-	// DashboardName is a required field
-	DashboardName *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetDashboardInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetDashboardInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetDashboardInput"}
-
-	if s.DashboardName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DashboardName"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type GetDashboardOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the dashboard.
-	DashboardArn *string `type:"string"`
-
-	// The detailed information about the dashboard, including what widgets are
-	// included and their location on the dashboard. For more information about
-	// the DashboardBody syntax, see CloudWatch-Dashboard-Body-Structure.
-	DashboardBody *string `type:"string"`
-
-	// The name of the dashboard.
-	DashboardName *string `type:"string"`
-}
-
-// String returns the string representation
-func (s GetDashboardOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetDashboard = "GetDashboard"
 
@@ -76,7 +28,7 @@ const opGetDashboard = "GetDashboard"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/GetDashboard
-func (c *Client) GetDashboardRequest(input *GetDashboardInput) GetDashboardRequest {
+func (c *Client) GetDashboardRequest(input *types.GetDashboardInput) GetDashboardRequest {
 	op := &aws.Operation{
 		Name:       opGetDashboard,
 		HTTPMethod: "POST",
@@ -84,10 +36,10 @@ func (c *Client) GetDashboardRequest(input *GetDashboardInput) GetDashboardReque
 	}
 
 	if input == nil {
-		input = &GetDashboardInput{}
+		input = &types.GetDashboardInput{}
 	}
 
-	req := c.newRequest(op, input, &GetDashboardOutput{})
+	req := c.newRequest(op, input, &types.GetDashboardOutput{})
 	return GetDashboardRequest{Request: req, Input: input, Copy: c.GetDashboardRequest}
 }
 
@@ -95,8 +47,8 @@ func (c *Client) GetDashboardRequest(input *GetDashboardInput) GetDashboardReque
 // GetDashboard API operation.
 type GetDashboardRequest struct {
 	*aws.Request
-	Input *GetDashboardInput
-	Copy  func(*GetDashboardInput) GetDashboardRequest
+	Input *types.GetDashboardInput
+	Copy  func(*types.GetDashboardInput) GetDashboardRequest
 }
 
 // Send marshals and sends the GetDashboard API request.
@@ -108,7 +60,7 @@ func (r GetDashboardRequest) Send(ctx context.Context) (*GetDashboardResponse, e
 	}
 
 	resp := &GetDashboardResponse{
-		GetDashboardOutput: r.Request.Data.(*GetDashboardOutput),
+		GetDashboardOutput: r.Request.Data.(*types.GetDashboardOutput),
 		response:           &aws.Response{Request: r.Request},
 	}
 
@@ -118,7 +70,7 @@ func (r GetDashboardRequest) Send(ctx context.Context) (*GetDashboardResponse, e
 // GetDashboardResponse is the response type for the
 // GetDashboard API operation.
 type GetDashboardResponse struct {
-	*GetDashboardOutput
+	*types.GetDashboardOutput
 
 	response *aws.Response
 }

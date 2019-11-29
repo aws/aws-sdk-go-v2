@@ -6,58 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/query"
+	"github.com/aws/aws-sdk-go-v2/service/cloudformation/types"
 )
-
-// The input for the CancelUpdateStack action.
-type CancelUpdateStackInput struct {
-	_ struct{} `type:"structure"`
-
-	// A unique identifier for this CancelUpdateStack request. Specify this token
-	// if you plan to retry requests so that AWS CloudFormation knows that you're
-	// not attempting to cancel an update on a stack with the same name. You might
-	// retry CancelUpdateStack requests to ensure that AWS CloudFormation successfully
-	// received them.
-	ClientRequestToken *string `min:"1" type:"string"`
-
-	// The name or the unique stack ID that is associated with the stack.
-	//
-	// StackName is a required field
-	StackName *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s CancelUpdateStackInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CancelUpdateStackInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CancelUpdateStackInput"}
-	if s.ClientRequestToken != nil && len(*s.ClientRequestToken) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ClientRequestToken", 1))
-	}
-
-	if s.StackName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("StackName"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type CancelUpdateStackOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s CancelUpdateStackOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCancelUpdateStack = "CancelUpdateStack"
 
@@ -77,7 +29,7 @@ const opCancelUpdateStack = "CancelUpdateStack"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/CancelUpdateStack
-func (c *Client) CancelUpdateStackRequest(input *CancelUpdateStackInput) CancelUpdateStackRequest {
+func (c *Client) CancelUpdateStackRequest(input *types.CancelUpdateStackInput) CancelUpdateStackRequest {
 	op := &aws.Operation{
 		Name:       opCancelUpdateStack,
 		HTTPMethod: "POST",
@@ -85,10 +37,10 @@ func (c *Client) CancelUpdateStackRequest(input *CancelUpdateStackInput) CancelU
 	}
 
 	if input == nil {
-		input = &CancelUpdateStackInput{}
+		input = &types.CancelUpdateStackInput{}
 	}
 
-	req := c.newRequest(op, input, &CancelUpdateStackOutput{})
+	req := c.newRequest(op, input, &types.CancelUpdateStackOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return CancelUpdateStackRequest{Request: req, Input: input, Copy: c.CancelUpdateStackRequest}
@@ -98,8 +50,8 @@ func (c *Client) CancelUpdateStackRequest(input *CancelUpdateStackInput) CancelU
 // CancelUpdateStack API operation.
 type CancelUpdateStackRequest struct {
 	*aws.Request
-	Input *CancelUpdateStackInput
-	Copy  func(*CancelUpdateStackInput) CancelUpdateStackRequest
+	Input *types.CancelUpdateStackInput
+	Copy  func(*types.CancelUpdateStackInput) CancelUpdateStackRequest
 }
 
 // Send marshals and sends the CancelUpdateStack API request.
@@ -111,7 +63,7 @@ func (r CancelUpdateStackRequest) Send(ctx context.Context) (*CancelUpdateStackR
 	}
 
 	resp := &CancelUpdateStackResponse{
-		CancelUpdateStackOutput: r.Request.Data.(*CancelUpdateStackOutput),
+		CancelUpdateStackOutput: r.Request.Data.(*types.CancelUpdateStackOutput),
 		response:                &aws.Response{Request: r.Request},
 	}
 
@@ -121,7 +73,7 @@ func (r CancelUpdateStackRequest) Send(ctx context.Context) (*CancelUpdateStackR
 // CancelUpdateStackResponse is the response type for the
 // CancelUpdateStack API operation.
 type CancelUpdateStackResponse struct {
-	*CancelUpdateStackOutput
+	*types.CancelUpdateStackOutput
 
 	response *aws.Response
 }

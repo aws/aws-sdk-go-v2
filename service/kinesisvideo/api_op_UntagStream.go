@@ -6,98 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/kinesisvideo/types"
 )
-
-type UntagStreamInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the stream that you want to remove tags
-	// from.
-	StreamARN *string `min:"1" type:"string"`
-
-	// The name of the stream that you want to remove tags from.
-	StreamName *string `min:"1" type:"string"`
-
-	// A list of the keys of the tags that you want to remove.
-	//
-	// TagKeyList is a required field
-	TagKeyList []string `min:"1" type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s UntagStreamInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UntagStreamInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UntagStreamInput"}
-	if s.StreamARN != nil && len(*s.StreamARN) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("StreamARN", 1))
-	}
-	if s.StreamName != nil && len(*s.StreamName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("StreamName", 1))
-	}
-
-	if s.TagKeyList == nil {
-		invalidParams.Add(aws.NewErrParamRequired("TagKeyList"))
-	}
-	if s.TagKeyList != nil && len(s.TagKeyList) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("TagKeyList", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s UntagStreamInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.StreamARN != nil {
-		v := *s.StreamARN
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "StreamARN", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.StreamName != nil {
-		v := *s.StreamName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "StreamName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.TagKeyList != nil {
-		v := s.TagKeyList
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "TagKeyList", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
-		}
-		ls0.End()
-
-	}
-	return nil
-}
-
-type UntagStreamOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s UntagStreamOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s UntagStreamOutput) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
 
 const opUntagStream = "UntagStream"
 
@@ -118,7 +28,7 @@ const opUntagStream = "UntagStream"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesisvideo-2017-09-30/UntagStream
-func (c *Client) UntagStreamRequest(input *UntagStreamInput) UntagStreamRequest {
+func (c *Client) UntagStreamRequest(input *types.UntagStreamInput) UntagStreamRequest {
 	op := &aws.Operation{
 		Name:       opUntagStream,
 		HTTPMethod: "POST",
@@ -126,10 +36,10 @@ func (c *Client) UntagStreamRequest(input *UntagStreamInput) UntagStreamRequest 
 	}
 
 	if input == nil {
-		input = &UntagStreamInput{}
+		input = &types.UntagStreamInput{}
 	}
 
-	req := c.newRequest(op, input, &UntagStreamOutput{})
+	req := c.newRequest(op, input, &types.UntagStreamOutput{})
 	return UntagStreamRequest{Request: req, Input: input, Copy: c.UntagStreamRequest}
 }
 
@@ -137,8 +47,8 @@ func (c *Client) UntagStreamRequest(input *UntagStreamInput) UntagStreamRequest 
 // UntagStream API operation.
 type UntagStreamRequest struct {
 	*aws.Request
-	Input *UntagStreamInput
-	Copy  func(*UntagStreamInput) UntagStreamRequest
+	Input *types.UntagStreamInput
+	Copy  func(*types.UntagStreamInput) UntagStreamRequest
 }
 
 // Send marshals and sends the UntagStream API request.
@@ -150,7 +60,7 @@ func (r UntagStreamRequest) Send(ctx context.Context) (*UntagStreamResponse, err
 	}
 
 	resp := &UntagStreamResponse{
-		UntagStreamOutput: r.Request.Data.(*UntagStreamOutput),
+		UntagStreamOutput: r.Request.Data.(*types.UntagStreamOutput),
 		response:          &aws.Response{Request: r.Request},
 	}
 
@@ -160,7 +70,7 @@ func (r UntagStreamRequest) Send(ctx context.Context) (*UntagStreamResponse, err
 // UntagStreamResponse is the response type for the
 // UntagStream API operation.
 type UntagStreamResponse struct {
-	*UntagStreamOutput
+	*types.UntagStreamOutput
 
 	response *aws.Response
 }

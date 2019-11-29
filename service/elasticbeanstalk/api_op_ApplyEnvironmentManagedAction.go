@@ -6,65 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/elasticbeanstalk/types"
 )
-
-// Request to execute a scheduled managed action immediately.
-type ApplyEnvironmentManagedActionInput struct {
-	_ struct{} `type:"structure"`
-
-	// The action ID of the scheduled managed action to execute.
-	//
-	// ActionId is a required field
-	ActionId *string `type:"string" required:"true"`
-
-	// The environment ID of the target environment.
-	EnvironmentId *string `type:"string"`
-
-	// The name of the target environment.
-	EnvironmentName *string `type:"string"`
-}
-
-// String returns the string representation
-func (s ApplyEnvironmentManagedActionInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ApplyEnvironmentManagedActionInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ApplyEnvironmentManagedActionInput"}
-
-	if s.ActionId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ActionId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// The result message containing information about the managed action.
-type ApplyEnvironmentManagedActionOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A description of the managed action.
-	ActionDescription *string `type:"string"`
-
-	// The action ID of the managed action.
-	ActionId *string `type:"string"`
-
-	// The type of managed action.
-	ActionType ActionType `type:"string" enum:"true"`
-
-	// The status of the managed action.
-	Status *string `type:"string"`
-}
-
-// String returns the string representation
-func (s ApplyEnvironmentManagedActionOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opApplyEnvironmentManagedAction = "ApplyEnvironmentManagedAction"
 
@@ -83,7 +26,7 @@ const opApplyEnvironmentManagedAction = "ApplyEnvironmentManagedAction"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/ApplyEnvironmentManagedAction
-func (c *Client) ApplyEnvironmentManagedActionRequest(input *ApplyEnvironmentManagedActionInput) ApplyEnvironmentManagedActionRequest {
+func (c *Client) ApplyEnvironmentManagedActionRequest(input *types.ApplyEnvironmentManagedActionInput) ApplyEnvironmentManagedActionRequest {
 	op := &aws.Operation{
 		Name:       opApplyEnvironmentManagedAction,
 		HTTPMethod: "POST",
@@ -91,10 +34,10 @@ func (c *Client) ApplyEnvironmentManagedActionRequest(input *ApplyEnvironmentMan
 	}
 
 	if input == nil {
-		input = &ApplyEnvironmentManagedActionInput{}
+		input = &types.ApplyEnvironmentManagedActionInput{}
 	}
 
-	req := c.newRequest(op, input, &ApplyEnvironmentManagedActionOutput{})
+	req := c.newRequest(op, input, &types.ApplyEnvironmentManagedActionOutput{})
 	return ApplyEnvironmentManagedActionRequest{Request: req, Input: input, Copy: c.ApplyEnvironmentManagedActionRequest}
 }
 
@@ -102,8 +45,8 @@ func (c *Client) ApplyEnvironmentManagedActionRequest(input *ApplyEnvironmentMan
 // ApplyEnvironmentManagedAction API operation.
 type ApplyEnvironmentManagedActionRequest struct {
 	*aws.Request
-	Input *ApplyEnvironmentManagedActionInput
-	Copy  func(*ApplyEnvironmentManagedActionInput) ApplyEnvironmentManagedActionRequest
+	Input *types.ApplyEnvironmentManagedActionInput
+	Copy  func(*types.ApplyEnvironmentManagedActionInput) ApplyEnvironmentManagedActionRequest
 }
 
 // Send marshals and sends the ApplyEnvironmentManagedAction API request.
@@ -115,7 +58,7 @@ func (r ApplyEnvironmentManagedActionRequest) Send(ctx context.Context) (*ApplyE
 	}
 
 	resp := &ApplyEnvironmentManagedActionResponse{
-		ApplyEnvironmentManagedActionOutput: r.Request.Data.(*ApplyEnvironmentManagedActionOutput),
+		ApplyEnvironmentManagedActionOutput: r.Request.Data.(*types.ApplyEnvironmentManagedActionOutput),
 		response:                            &aws.Response{Request: r.Request},
 	}
 
@@ -125,7 +68,7 @@ func (r ApplyEnvironmentManagedActionRequest) Send(ctx context.Context) (*ApplyE
 // ApplyEnvironmentManagedActionResponse is the response type for the
 // ApplyEnvironmentManagedAction API operation.
 type ApplyEnvironmentManagedActionResponse struct {
-	*ApplyEnvironmentManagedActionOutput
+	*types.ApplyEnvironmentManagedActionOutput
 
 	response *aws.Response
 }

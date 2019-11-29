@@ -6,103 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/iot/types"
 )
-
-type AddThingToThingGroupInput struct {
-	_ struct{} `type:"structure"`
-
-	// Override dynamic thing groups with static thing groups when 10-group limit
-	// is reached. If a thing belongs to 10 thing groups, and one or more of those
-	// groups are dynamic thing groups, adding a thing to a static group removes
-	// the thing from the last dynamic group.
-	OverrideDynamicGroups *bool `locationName:"overrideDynamicGroups" type:"boolean"`
-
-	// The ARN of the thing to add to a group.
-	ThingArn *string `locationName:"thingArn" type:"string"`
-
-	// The ARN of the group to which you are adding a thing.
-	ThingGroupArn *string `locationName:"thingGroupArn" type:"string"`
-
-	// The name of the group to which you are adding a thing.
-	ThingGroupName *string `locationName:"thingGroupName" min:"1" type:"string"`
-
-	// The name of the thing to add to a group.
-	ThingName *string `locationName:"thingName" min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s AddThingToThingGroupInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *AddThingToThingGroupInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "AddThingToThingGroupInput"}
-	if s.ThingGroupName != nil && len(*s.ThingGroupName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ThingGroupName", 1))
-	}
-	if s.ThingName != nil && len(*s.ThingName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ThingName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s AddThingToThingGroupInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.OverrideDynamicGroups != nil {
-		v := *s.OverrideDynamicGroups
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "overrideDynamicGroups", protocol.BoolValue(v), metadata)
-	}
-	if s.ThingArn != nil {
-		v := *s.ThingArn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "thingArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.ThingGroupArn != nil {
-		v := *s.ThingGroupArn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "thingGroupArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.ThingGroupName != nil {
-		v := *s.ThingGroupName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "thingGroupName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.ThingName != nil {
-		v := *s.ThingName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "thingName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type AddThingToThingGroupOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s AddThingToThingGroupOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s AddThingToThingGroupOutput) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
 
 const opAddThingToThingGroup = "AddThingToThingGroup"
 
@@ -117,7 +22,7 @@ const opAddThingToThingGroup = "AddThingToThingGroup"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) AddThingToThingGroupRequest(input *AddThingToThingGroupInput) AddThingToThingGroupRequest {
+func (c *Client) AddThingToThingGroupRequest(input *types.AddThingToThingGroupInput) AddThingToThingGroupRequest {
 	op := &aws.Operation{
 		Name:       opAddThingToThingGroup,
 		HTTPMethod: "PUT",
@@ -125,10 +30,10 @@ func (c *Client) AddThingToThingGroupRequest(input *AddThingToThingGroupInput) A
 	}
 
 	if input == nil {
-		input = &AddThingToThingGroupInput{}
+		input = &types.AddThingToThingGroupInput{}
 	}
 
-	req := c.newRequest(op, input, &AddThingToThingGroupOutput{})
+	req := c.newRequest(op, input, &types.AddThingToThingGroupOutput{})
 	return AddThingToThingGroupRequest{Request: req, Input: input, Copy: c.AddThingToThingGroupRequest}
 }
 
@@ -136,8 +41,8 @@ func (c *Client) AddThingToThingGroupRequest(input *AddThingToThingGroupInput) A
 // AddThingToThingGroup API operation.
 type AddThingToThingGroupRequest struct {
 	*aws.Request
-	Input *AddThingToThingGroupInput
-	Copy  func(*AddThingToThingGroupInput) AddThingToThingGroupRequest
+	Input *types.AddThingToThingGroupInput
+	Copy  func(*types.AddThingToThingGroupInput) AddThingToThingGroupRequest
 }
 
 // Send marshals and sends the AddThingToThingGroup API request.
@@ -149,7 +54,7 @@ func (r AddThingToThingGroupRequest) Send(ctx context.Context) (*AddThingToThing
 	}
 
 	resp := &AddThingToThingGroupResponse{
-		AddThingToThingGroupOutput: r.Request.Data.(*AddThingToThingGroupOutput),
+		AddThingToThingGroupOutput: r.Request.Data.(*types.AddThingToThingGroupOutput),
 		response:                   &aws.Response{Request: r.Request},
 	}
 
@@ -159,7 +64,7 @@ func (r AddThingToThingGroupRequest) Send(ctx context.Context) (*AddThingToThing
 // AddThingToThingGroupResponse is the response type for the
 // AddThingToThingGroup API operation.
 type AddThingToThingGroupResponse struct {
-	*AddThingToThingGroupOutput
+	*types.AddThingToThingGroupOutput
 
 	response *aws.Response
 }

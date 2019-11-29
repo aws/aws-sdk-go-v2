@@ -6,55 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/storagegateway/types"
 )
-
-// A JSON object containing the of the gateway to update.
-type UpdateGatewaySoftwareNowInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation
-	// to return a list of gateways for your account and AWS Region.
-	//
-	// GatewayARN is a required field
-	GatewayARN *string `min:"50" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s UpdateGatewaySoftwareNowInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateGatewaySoftwareNowInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateGatewaySoftwareNowInput"}
-
-	if s.GatewayARN == nil {
-		invalidParams.Add(aws.NewErrParamRequired("GatewayARN"))
-	}
-	if s.GatewayARN != nil && len(*s.GatewayARN) < 50 {
-		invalidParams.Add(aws.NewErrParamMinLen("GatewayARN", 50))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// A JSON object containing the of the gateway that was updated.
-type UpdateGatewaySoftwareNowOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation
-	// to return a list of gateways for your account and AWS Region.
-	GatewayARN *string `min:"50" type:"string"`
-}
-
-// String returns the string representation
-func (s UpdateGatewaySoftwareNowOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opUpdateGatewaySoftwareNow = "UpdateGatewaySoftwareNow"
 
@@ -85,7 +38,7 @@ const opUpdateGatewaySoftwareNow = "UpdateGatewaySoftwareNow"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/UpdateGatewaySoftwareNow
-func (c *Client) UpdateGatewaySoftwareNowRequest(input *UpdateGatewaySoftwareNowInput) UpdateGatewaySoftwareNowRequest {
+func (c *Client) UpdateGatewaySoftwareNowRequest(input *types.UpdateGatewaySoftwareNowInput) UpdateGatewaySoftwareNowRequest {
 	op := &aws.Operation{
 		Name:       opUpdateGatewaySoftwareNow,
 		HTTPMethod: "POST",
@@ -93,10 +46,10 @@ func (c *Client) UpdateGatewaySoftwareNowRequest(input *UpdateGatewaySoftwareNow
 	}
 
 	if input == nil {
-		input = &UpdateGatewaySoftwareNowInput{}
+		input = &types.UpdateGatewaySoftwareNowInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateGatewaySoftwareNowOutput{})
+	req := c.newRequest(op, input, &types.UpdateGatewaySoftwareNowOutput{})
 	return UpdateGatewaySoftwareNowRequest{Request: req, Input: input, Copy: c.UpdateGatewaySoftwareNowRequest}
 }
 
@@ -104,8 +57,8 @@ func (c *Client) UpdateGatewaySoftwareNowRequest(input *UpdateGatewaySoftwareNow
 // UpdateGatewaySoftwareNow API operation.
 type UpdateGatewaySoftwareNowRequest struct {
 	*aws.Request
-	Input *UpdateGatewaySoftwareNowInput
-	Copy  func(*UpdateGatewaySoftwareNowInput) UpdateGatewaySoftwareNowRequest
+	Input *types.UpdateGatewaySoftwareNowInput
+	Copy  func(*types.UpdateGatewaySoftwareNowInput) UpdateGatewaySoftwareNowRequest
 }
 
 // Send marshals and sends the UpdateGatewaySoftwareNow API request.
@@ -117,7 +70,7 @@ func (r UpdateGatewaySoftwareNowRequest) Send(ctx context.Context) (*UpdateGatew
 	}
 
 	resp := &UpdateGatewaySoftwareNowResponse{
-		UpdateGatewaySoftwareNowOutput: r.Request.Data.(*UpdateGatewaySoftwareNowOutput),
+		UpdateGatewaySoftwareNowOutput: r.Request.Data.(*types.UpdateGatewaySoftwareNowOutput),
 		response:                       &aws.Response{Request: r.Request},
 	}
 
@@ -127,7 +80,7 @@ func (r UpdateGatewaySoftwareNowRequest) Send(ctx context.Context) (*UpdateGatew
 // UpdateGatewaySoftwareNowResponse is the response type for the
 // UpdateGatewaySoftwareNow API operation.
 type UpdateGatewaySoftwareNowResponse struct {
-	*UpdateGatewaySoftwareNowOutput
+	*types.UpdateGatewaySoftwareNowOutput
 
 	response *aws.Response
 }

@@ -6,104 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/pinpoint/types"
 )
-
-type GetSegmentExportJobsInput struct {
-	_ struct{} `type:"structure"`
-
-	// ApplicationId is a required field
-	ApplicationId *string `location:"uri" locationName:"application-id" type:"string" required:"true"`
-
-	PageSize *string `location:"querystring" locationName:"page-size" type:"string"`
-
-	// SegmentId is a required field
-	SegmentId *string `location:"uri" locationName:"segment-id" type:"string" required:"true"`
-
-	Token *string `location:"querystring" locationName:"token" type:"string"`
-}
-
-// String returns the string representation
-func (s GetSegmentExportJobsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetSegmentExportJobsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetSegmentExportJobsInput"}
-
-	if s.ApplicationId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ApplicationId"))
-	}
-
-	if s.SegmentId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("SegmentId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetSegmentExportJobsInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.ApplicationId != nil {
-		v := *s.ApplicationId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "application-id", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.SegmentId != nil {
-		v := *s.SegmentId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "segment-id", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.PageSize != nil {
-		v := *s.PageSize
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "page-size", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Token != nil {
-		v := *s.Token
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "token", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type GetSegmentExportJobsOutput struct {
-	_ struct{} `type:"structure" payload:"ExportJobsResponse"`
-
-	// Provides information about all the export jobs that are associated with an
-	// application or segment. An export job is a job that exports endpoint definitions
-	// to a file.
-	//
-	// ExportJobsResponse is a required field
-	ExportJobsResponse *ExportJobsResponse `type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s GetSegmentExportJobsOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetSegmentExportJobsOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.ExportJobsResponse != nil {
-		v := s.ExportJobsResponse
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.PayloadTarget, "ExportJobsResponse", v, metadata)
-	}
-	return nil
-}
 
 const opGetSegmentExportJobs = "GetSegmentExportJobs"
 
@@ -121,7 +25,7 @@ const opGetSegmentExportJobs = "GetSegmentExportJobs"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetSegmentExportJobs
-func (c *Client) GetSegmentExportJobsRequest(input *GetSegmentExportJobsInput) GetSegmentExportJobsRequest {
+func (c *Client) GetSegmentExportJobsRequest(input *types.GetSegmentExportJobsInput) GetSegmentExportJobsRequest {
 	op := &aws.Operation{
 		Name:       opGetSegmentExportJobs,
 		HTTPMethod: "GET",
@@ -129,10 +33,10 @@ func (c *Client) GetSegmentExportJobsRequest(input *GetSegmentExportJobsInput) G
 	}
 
 	if input == nil {
-		input = &GetSegmentExportJobsInput{}
+		input = &types.GetSegmentExportJobsInput{}
 	}
 
-	req := c.newRequest(op, input, &GetSegmentExportJobsOutput{})
+	req := c.newRequest(op, input, &types.GetSegmentExportJobsOutput{})
 	return GetSegmentExportJobsRequest{Request: req, Input: input, Copy: c.GetSegmentExportJobsRequest}
 }
 
@@ -140,8 +44,8 @@ func (c *Client) GetSegmentExportJobsRequest(input *GetSegmentExportJobsInput) G
 // GetSegmentExportJobs API operation.
 type GetSegmentExportJobsRequest struct {
 	*aws.Request
-	Input *GetSegmentExportJobsInput
-	Copy  func(*GetSegmentExportJobsInput) GetSegmentExportJobsRequest
+	Input *types.GetSegmentExportJobsInput
+	Copy  func(*types.GetSegmentExportJobsInput) GetSegmentExportJobsRequest
 }
 
 // Send marshals and sends the GetSegmentExportJobs API request.
@@ -153,7 +57,7 @@ func (r GetSegmentExportJobsRequest) Send(ctx context.Context) (*GetSegmentExpor
 	}
 
 	resp := &GetSegmentExportJobsResponse{
-		GetSegmentExportJobsOutput: r.Request.Data.(*GetSegmentExportJobsOutput),
+		GetSegmentExportJobsOutput: r.Request.Data.(*types.GetSegmentExportJobsOutput),
 		response:                   &aws.Response{Request: r.Request},
 	}
 
@@ -163,7 +67,7 @@ func (r GetSegmentExportJobsRequest) Send(ctx context.Context) (*GetSegmentExpor
 // GetSegmentExportJobsResponse is the response type for the
 // GetSegmentExportJobs API operation.
 type GetSegmentExportJobsResponse struct {
-	*GetSegmentExportJobsOutput
+	*types.GetSegmentExportJobsOutput
 
 	response *aws.Response
 }

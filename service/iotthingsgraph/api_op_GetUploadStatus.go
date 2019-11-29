@@ -4,81 +4,10 @@ package iotthingsgraph
 
 import (
 	"context"
-	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/iotthingsgraph/types"
 )
-
-type GetUploadStatusInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the upload. This value is returned by the UploadEntityDefinitions
-	// action.
-	//
-	// UploadId is a required field
-	UploadId *string `locationName:"uploadId" min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetUploadStatusInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetUploadStatusInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetUploadStatusInput"}
-
-	if s.UploadId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("UploadId"))
-	}
-	if s.UploadId != nil && len(*s.UploadId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("UploadId", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type GetUploadStatusOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The date at which the upload was created.
-	//
-	// CreatedDate is a required field
-	CreatedDate *time.Time `locationName:"createdDate" type:"timestamp" required:"true"`
-
-	// The reason for an upload failure.
-	FailureReason []string `locationName:"failureReason" type:"list"`
-
-	// The ARN of the upload.
-	NamespaceArn *string `locationName:"namespaceArn" type:"string"`
-
-	// The name of the upload's namespace.
-	NamespaceName *string `locationName:"namespaceName" type:"string"`
-
-	// The version of the user's namespace. Defaults to the latest version of the
-	// user's namespace.
-	NamespaceVersion *int64 `locationName:"namespaceVersion" type:"long"`
-
-	// The ID of the upload.
-	//
-	// UploadId is a required field
-	UploadId *string `locationName:"uploadId" min:"1" type:"string" required:"true"`
-
-	// The status of the upload. The initial status is IN_PROGRESS. The response
-	// show all validation failures if the upload fails.
-	//
-	// UploadStatus is a required field
-	UploadStatus UploadStatus `locationName:"uploadStatus" type:"string" required:"true" enum:"true"`
-}
-
-// String returns the string representation
-func (s GetUploadStatusOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetUploadStatus = "GetUploadStatus"
 
@@ -95,7 +24,7 @@ const opGetUploadStatus = "GetUploadStatus"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iotthingsgraph-2018-09-06/GetUploadStatus
-func (c *Client) GetUploadStatusRequest(input *GetUploadStatusInput) GetUploadStatusRequest {
+func (c *Client) GetUploadStatusRequest(input *types.GetUploadStatusInput) GetUploadStatusRequest {
 	op := &aws.Operation{
 		Name:       opGetUploadStatus,
 		HTTPMethod: "POST",
@@ -103,10 +32,10 @@ func (c *Client) GetUploadStatusRequest(input *GetUploadStatusInput) GetUploadSt
 	}
 
 	if input == nil {
-		input = &GetUploadStatusInput{}
+		input = &types.GetUploadStatusInput{}
 	}
 
-	req := c.newRequest(op, input, &GetUploadStatusOutput{})
+	req := c.newRequest(op, input, &types.GetUploadStatusOutput{})
 	return GetUploadStatusRequest{Request: req, Input: input, Copy: c.GetUploadStatusRequest}
 }
 
@@ -114,8 +43,8 @@ func (c *Client) GetUploadStatusRequest(input *GetUploadStatusInput) GetUploadSt
 // GetUploadStatus API operation.
 type GetUploadStatusRequest struct {
 	*aws.Request
-	Input *GetUploadStatusInput
-	Copy  func(*GetUploadStatusInput) GetUploadStatusRequest
+	Input *types.GetUploadStatusInput
+	Copy  func(*types.GetUploadStatusInput) GetUploadStatusRequest
 }
 
 // Send marshals and sends the GetUploadStatus API request.
@@ -127,7 +56,7 @@ func (r GetUploadStatusRequest) Send(ctx context.Context) (*GetUploadStatusRespo
 	}
 
 	resp := &GetUploadStatusResponse{
-		GetUploadStatusOutput: r.Request.Data.(*GetUploadStatusOutput),
+		GetUploadStatusOutput: r.Request.Data.(*types.GetUploadStatusOutput),
 		response:              &aws.Response{Request: r.Request},
 	}
 
@@ -137,7 +66,7 @@ func (r GetUploadStatusRequest) Send(ctx context.Context) (*GetUploadStatusRespo
 // GetUploadStatusResponse is the response type for the
 // GetUploadStatus API operation.
 type GetUploadStatusResponse struct {
-	*GetUploadStatusOutput
+	*types.GetUploadStatusOutput
 
 	response *aws.Response
 }

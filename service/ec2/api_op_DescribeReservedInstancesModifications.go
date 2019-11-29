@@ -6,77 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-// Contains the parameters for DescribeReservedInstancesModifications.
-type DescribeReservedInstancesModificationsInput struct {
-	_ struct{} `type:"structure"`
-
-	// One or more filters.
-	//
-	//    * client-token - The idempotency token for the modification request.
-	//
-	//    * create-date - The time when the modification request was created.
-	//
-	//    * effective-date - The time when the modification becomes effective.
-	//
-	//    * modification-result.reserved-instances-id - The ID for the Reserved
-	//    Instances created as part of the modification request. This ID is only
-	//    available when the status of the modification is fulfilled.
-	//
-	//    * modification-result.target-configuration.availability-zone - The Availability
-	//    Zone for the new Reserved Instances.
-	//
-	//    * modification-result.target-configuration.instance-count - The number
-	//    of new Reserved Instances.
-	//
-	//    * modification-result.target-configuration.instance-type - The instance
-	//    type of the new Reserved Instances.
-	//
-	//    * modification-result.target-configuration.platform - The network platform
-	//    of the new Reserved Instances (EC2-Classic | EC2-VPC).
-	//
-	//    * reserved-instances-id - The ID of the Reserved Instances modified.
-	//
-	//    * reserved-instances-modification-id - The ID of the modification request.
-	//
-	//    * status - The status of the Reserved Instances modification request (processing
-	//    | fulfilled | failed).
-	//
-	//    * status-message - The reason for the status.
-	//
-	//    * update-date - The time when the modification request was last updated.
-	Filters []Filter `locationName:"Filter" locationNameList:"Filter" type:"list"`
-
-	// The token to retrieve the next page of results.
-	NextToken *string `locationName:"nextToken" type:"string"`
-
-	// IDs for the submitted modification request.
-	ReservedInstancesModificationIds []string `locationName:"ReservedInstancesModificationId" locationNameList:"ReservedInstancesModificationId" type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeReservedInstancesModificationsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Contains the output of DescribeReservedInstancesModifications.
-type DescribeReservedInstancesModificationsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The token to use to retrieve the next page of results. This value is null
-	// when there are no more results to return.
-	NextToken *string `locationName:"nextToken" type:"string"`
-
-	// The Reserved Instance modification information.
-	ReservedInstancesModifications []ReservedInstancesModification `locationName:"reservedInstancesModificationsSet" locationNameList:"item" type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeReservedInstancesModificationsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeReservedInstancesModifications = "DescribeReservedInstancesModifications"
 
@@ -99,7 +30,7 @@ const opDescribeReservedInstancesModifications = "DescribeReservedInstancesModif
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeReservedInstancesModifications
-func (c *Client) DescribeReservedInstancesModificationsRequest(input *DescribeReservedInstancesModificationsInput) DescribeReservedInstancesModificationsRequest {
+func (c *Client) DescribeReservedInstancesModificationsRequest(input *types.DescribeReservedInstancesModificationsInput) DescribeReservedInstancesModificationsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeReservedInstancesModifications,
 		HTTPMethod: "POST",
@@ -113,10 +44,10 @@ func (c *Client) DescribeReservedInstancesModificationsRequest(input *DescribeRe
 	}
 
 	if input == nil {
-		input = &DescribeReservedInstancesModificationsInput{}
+		input = &types.DescribeReservedInstancesModificationsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeReservedInstancesModificationsOutput{})
+	req := c.newRequest(op, input, &types.DescribeReservedInstancesModificationsOutput{})
 	return DescribeReservedInstancesModificationsRequest{Request: req, Input: input, Copy: c.DescribeReservedInstancesModificationsRequest}
 }
 
@@ -124,8 +55,8 @@ func (c *Client) DescribeReservedInstancesModificationsRequest(input *DescribeRe
 // DescribeReservedInstancesModifications API operation.
 type DescribeReservedInstancesModificationsRequest struct {
 	*aws.Request
-	Input *DescribeReservedInstancesModificationsInput
-	Copy  func(*DescribeReservedInstancesModificationsInput) DescribeReservedInstancesModificationsRequest
+	Input *types.DescribeReservedInstancesModificationsInput
+	Copy  func(*types.DescribeReservedInstancesModificationsInput) DescribeReservedInstancesModificationsRequest
 }
 
 // Send marshals and sends the DescribeReservedInstancesModifications API request.
@@ -137,7 +68,7 @@ func (r DescribeReservedInstancesModificationsRequest) Send(ctx context.Context)
 	}
 
 	resp := &DescribeReservedInstancesModificationsResponse{
-		DescribeReservedInstancesModificationsOutput: r.Request.Data.(*DescribeReservedInstancesModificationsOutput),
+		DescribeReservedInstancesModificationsOutput: r.Request.Data.(*types.DescribeReservedInstancesModificationsOutput),
 		response: &aws.Response{Request: r.Request},
 	}
 
@@ -167,7 +98,7 @@ func NewDescribeReservedInstancesModificationsPaginator(req DescribeReservedInst
 	return DescribeReservedInstancesModificationsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *DescribeReservedInstancesModificationsInput
+				var inCpy *types.DescribeReservedInstancesModificationsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -187,14 +118,14 @@ type DescribeReservedInstancesModificationsPaginator struct {
 	aws.Pager
 }
 
-func (p *DescribeReservedInstancesModificationsPaginator) CurrentPage() *DescribeReservedInstancesModificationsOutput {
-	return p.Pager.CurrentPage().(*DescribeReservedInstancesModificationsOutput)
+func (p *DescribeReservedInstancesModificationsPaginator) CurrentPage() *types.DescribeReservedInstancesModificationsOutput {
+	return p.Pager.CurrentPage().(*types.DescribeReservedInstancesModificationsOutput)
 }
 
 // DescribeReservedInstancesModificationsResponse is the response type for the
 // DescribeReservedInstancesModifications API operation.
 type DescribeReservedInstancesModificationsResponse struct {
-	*DescribeReservedInstancesModificationsOutput
+	*types.DescribeReservedInstancesModificationsOutput
 
 	response *aws.Response
 }

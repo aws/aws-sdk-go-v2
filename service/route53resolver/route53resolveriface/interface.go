@@ -10,6 +10,7 @@ package route53resolveriface
 
 import (
 	"github.com/aws/aws-sdk-go-v2/service/route53resolver"
+	"github.com/aws/aws-sdk-go-v2/service/route53resolver/types"
 )
 
 // ClientAPI provides an interface to enable mocking the
@@ -43,7 +44,7 @@ import (
 //    type mockClientClient struct {
 //        route53resolveriface.ClientPI
 //    }
-//    func (m *mockClientClient) AssociateResolverEndpointIpAddress(input *route53resolver.AssociateResolverEndpointIpAddressInput) (*route53resolver.AssociateResolverEndpointIpAddressOutput, error) {
+//    func (m *mockClientClient) AssociateResolverEndpointIpAddress(input *types.AssociateResolverEndpointIpAddressInput) (*types.AssociateResolverEndpointIpAddressOutput, error) {
 //        // mock response/functionality
 //    }
 //
@@ -61,49 +62,49 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type ClientAPI interface {
-	AssociateResolverEndpointIpAddressRequest(*route53resolver.AssociateResolverEndpointIpAddressInput) route53resolver.AssociateResolverEndpointIpAddressRequest
+	AssociateResolverEndpointIpAddressRequest(*types.AssociateResolverEndpointIpAddressInput) route53resolver.AssociateResolverEndpointIpAddressRequest
 
-	AssociateResolverRuleRequest(*route53resolver.AssociateResolverRuleInput) route53resolver.AssociateResolverRuleRequest
+	AssociateResolverRuleRequest(*types.AssociateResolverRuleInput) route53resolver.AssociateResolverRuleRequest
 
-	CreateResolverEndpointRequest(*route53resolver.CreateResolverEndpointInput) route53resolver.CreateResolverEndpointRequest
+	CreateResolverEndpointRequest(*types.CreateResolverEndpointInput) route53resolver.CreateResolverEndpointRequest
 
-	CreateResolverRuleRequest(*route53resolver.CreateResolverRuleInput) route53resolver.CreateResolverRuleRequest
+	CreateResolverRuleRequest(*types.CreateResolverRuleInput) route53resolver.CreateResolverRuleRequest
 
-	DeleteResolverEndpointRequest(*route53resolver.DeleteResolverEndpointInput) route53resolver.DeleteResolverEndpointRequest
+	DeleteResolverEndpointRequest(*types.DeleteResolverEndpointInput) route53resolver.DeleteResolverEndpointRequest
 
-	DeleteResolverRuleRequest(*route53resolver.DeleteResolverRuleInput) route53resolver.DeleteResolverRuleRequest
+	DeleteResolverRuleRequest(*types.DeleteResolverRuleInput) route53resolver.DeleteResolverRuleRequest
 
-	DisassociateResolverEndpointIpAddressRequest(*route53resolver.DisassociateResolverEndpointIpAddressInput) route53resolver.DisassociateResolverEndpointIpAddressRequest
+	DisassociateResolverEndpointIpAddressRequest(*types.DisassociateResolverEndpointIpAddressInput) route53resolver.DisassociateResolverEndpointIpAddressRequest
 
-	DisassociateResolverRuleRequest(*route53resolver.DisassociateResolverRuleInput) route53resolver.DisassociateResolverRuleRequest
+	DisassociateResolverRuleRequest(*types.DisassociateResolverRuleInput) route53resolver.DisassociateResolverRuleRequest
 
-	GetResolverEndpointRequest(*route53resolver.GetResolverEndpointInput) route53resolver.GetResolverEndpointRequest
+	GetResolverEndpointRequest(*types.GetResolverEndpointInput) route53resolver.GetResolverEndpointRequest
 
-	GetResolverRuleRequest(*route53resolver.GetResolverRuleInput) route53resolver.GetResolverRuleRequest
+	GetResolverRuleRequest(*types.GetResolverRuleInput) route53resolver.GetResolverRuleRequest
 
-	GetResolverRuleAssociationRequest(*route53resolver.GetResolverRuleAssociationInput) route53resolver.GetResolverRuleAssociationRequest
+	GetResolverRuleAssociationRequest(*types.GetResolverRuleAssociationInput) route53resolver.GetResolverRuleAssociationRequest
 
-	GetResolverRulePolicyRequest(*route53resolver.GetResolverRulePolicyInput) route53resolver.GetResolverRulePolicyRequest
+	GetResolverRulePolicyRequest(*types.GetResolverRulePolicyInput) route53resolver.GetResolverRulePolicyRequest
 
-	ListResolverEndpointIpAddressesRequest(*route53resolver.ListResolverEndpointIpAddressesInput) route53resolver.ListResolverEndpointIpAddressesRequest
+	ListResolverEndpointIpAddressesRequest(*types.ListResolverEndpointIpAddressesInput) route53resolver.ListResolverEndpointIpAddressesRequest
 
-	ListResolverEndpointsRequest(*route53resolver.ListResolverEndpointsInput) route53resolver.ListResolverEndpointsRequest
+	ListResolverEndpointsRequest(*types.ListResolverEndpointsInput) route53resolver.ListResolverEndpointsRequest
 
-	ListResolverRuleAssociationsRequest(*route53resolver.ListResolverRuleAssociationsInput) route53resolver.ListResolverRuleAssociationsRequest
+	ListResolverRuleAssociationsRequest(*types.ListResolverRuleAssociationsInput) route53resolver.ListResolverRuleAssociationsRequest
 
-	ListResolverRulesRequest(*route53resolver.ListResolverRulesInput) route53resolver.ListResolverRulesRequest
+	ListResolverRulesRequest(*types.ListResolverRulesInput) route53resolver.ListResolverRulesRequest
 
-	ListTagsForResourceRequest(*route53resolver.ListTagsForResourceInput) route53resolver.ListTagsForResourceRequest
+	ListTagsForResourceRequest(*types.ListTagsForResourceInput) route53resolver.ListTagsForResourceRequest
 
-	PutResolverRulePolicyRequest(*route53resolver.PutResolverRulePolicyInput) route53resolver.PutResolverRulePolicyRequest
+	PutResolverRulePolicyRequest(*types.PutResolverRulePolicyInput) route53resolver.PutResolverRulePolicyRequest
 
-	TagResourceRequest(*route53resolver.TagResourceInput) route53resolver.TagResourceRequest
+	TagResourceRequest(*types.TagResourceInput) route53resolver.TagResourceRequest
 
-	UntagResourceRequest(*route53resolver.UntagResourceInput) route53resolver.UntagResourceRequest
+	UntagResourceRequest(*types.UntagResourceInput) route53resolver.UntagResourceRequest
 
-	UpdateResolverEndpointRequest(*route53resolver.UpdateResolverEndpointInput) route53resolver.UpdateResolverEndpointRequest
+	UpdateResolverEndpointRequest(*types.UpdateResolverEndpointInput) route53resolver.UpdateResolverEndpointRequest
 
-	UpdateResolverRuleRequest(*route53resolver.UpdateResolverRuleInput) route53resolver.UpdateResolverRuleRequest
+	UpdateResolverRuleRequest(*types.UpdateResolverRuleInput) route53resolver.UpdateResolverRuleRequest
 }
 
 var _ ClientAPI = (*route53resolver.Client)(nil)

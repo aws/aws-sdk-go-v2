@@ -6,66 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/fms/types"
 )
-
-type ListPoliciesInput struct {
-	_ struct{} `type:"structure"`
-
-	// Specifies the number of PolicySummary objects that you want AWS Firewall
-	// Manager to return for this request. If you have more PolicySummary objects
-	// than the number that you specify for MaxResults, the response includes a
-	// NextToken value that you can use to get another batch of PolicySummary objects.
-	MaxResults *int64 `min:"1" type:"integer"`
-
-	// If you specify a value for MaxResults and you have more PolicySummary objects
-	// than the number that you specify for MaxResults, AWS Firewall Manager returns
-	// a NextToken value in the response that allows you to list another group of
-	// PolicySummary objects. For the second and subsequent ListPolicies requests,
-	// specify the value of NextToken from the previous response to get information
-	// about another batch of PolicySummary objects.
-	NextToken *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s ListPoliciesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListPoliciesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListPoliciesInput"}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-	if s.NextToken != nil && len(*s.NextToken) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ListPoliciesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// If you have more PolicySummary objects than the number that you specified
-	// for MaxResults in the request, the response includes a NextToken value. To
-	// list more PolicySummary objects, submit another ListPolicies request, and
-	// specify the NextToken value from the response in the NextToken value in the
-	// next request.
-	NextToken *string `min:"1" type:"string"`
-
-	// An array of PolicySummary objects.
-	PolicyList []PolicySummary `type:"list"`
-}
-
-// String returns the string representation
-func (s ListPoliciesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListPolicies = "ListPolicies"
 
@@ -82,7 +24,7 @@ const opListPolicies = "ListPolicies"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/ListPolicies
-func (c *Client) ListPoliciesRequest(input *ListPoliciesInput) ListPoliciesRequest {
+func (c *Client) ListPoliciesRequest(input *types.ListPoliciesInput) ListPoliciesRequest {
 	op := &aws.Operation{
 		Name:       opListPolicies,
 		HTTPMethod: "POST",
@@ -96,10 +38,10 @@ func (c *Client) ListPoliciesRequest(input *ListPoliciesInput) ListPoliciesReque
 	}
 
 	if input == nil {
-		input = &ListPoliciesInput{}
+		input = &types.ListPoliciesInput{}
 	}
 
-	req := c.newRequest(op, input, &ListPoliciesOutput{})
+	req := c.newRequest(op, input, &types.ListPoliciesOutput{})
 	return ListPoliciesRequest{Request: req, Input: input, Copy: c.ListPoliciesRequest}
 }
 
@@ -107,8 +49,8 @@ func (c *Client) ListPoliciesRequest(input *ListPoliciesInput) ListPoliciesReque
 // ListPolicies API operation.
 type ListPoliciesRequest struct {
 	*aws.Request
-	Input *ListPoliciesInput
-	Copy  func(*ListPoliciesInput) ListPoliciesRequest
+	Input *types.ListPoliciesInput
+	Copy  func(*types.ListPoliciesInput) ListPoliciesRequest
 }
 
 // Send marshals and sends the ListPolicies API request.
@@ -120,7 +62,7 @@ func (r ListPoliciesRequest) Send(ctx context.Context) (*ListPoliciesResponse, e
 	}
 
 	resp := &ListPoliciesResponse{
-		ListPoliciesOutput: r.Request.Data.(*ListPoliciesOutput),
+		ListPoliciesOutput: r.Request.Data.(*types.ListPoliciesOutput),
 		response:           &aws.Response{Request: r.Request},
 	}
 
@@ -150,7 +92,7 @@ func NewListPoliciesPaginator(req ListPoliciesRequest) ListPoliciesPaginator {
 	return ListPoliciesPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListPoliciesInput
+				var inCpy *types.ListPoliciesInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -170,14 +112,14 @@ type ListPoliciesPaginator struct {
 	aws.Pager
 }
 
-func (p *ListPoliciesPaginator) CurrentPage() *ListPoliciesOutput {
-	return p.Pager.CurrentPage().(*ListPoliciesOutput)
+func (p *ListPoliciesPaginator) CurrentPage() *types.ListPoliciesOutput {
+	return p.Pager.CurrentPage().(*types.ListPoliciesOutput)
 }
 
 // ListPoliciesResponse is the response type for the
 // ListPolicies API operation.
 type ListPoliciesResponse struct {
-	*ListPoliciesOutput
+	*types.ListPoliciesOutput
 
 	response *aws.Response
 }

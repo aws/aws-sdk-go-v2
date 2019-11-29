@@ -4,77 +4,10 @@ package sagemaker
 
 import (
 	"context"
-	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
 )
-
-type ListModelPackagesInput struct {
-	_ struct{} `type:"structure"`
-
-	// A filter that returns only model packages created after the specified time
-	// (timestamp).
-	CreationTimeAfter *time.Time `type:"timestamp"`
-
-	// A filter that returns only model packages created before the specified time
-	// (timestamp).
-	CreationTimeBefore *time.Time `type:"timestamp"`
-
-	// The maximum number of model packages to return in the response.
-	MaxResults *int64 `min:"1" type:"integer"`
-
-	// A string in the model package name. This filter returns only model packages
-	// whose name contains the specified string.
-	NameContains *string `type:"string"`
-
-	// If the response to a previous ListModelPackages request was truncated, the
-	// response includes a NextToken. To retrieve the next set of model packages,
-	// use the token in the next request.
-	NextToken *string `type:"string"`
-
-	// The parameter by which to sort the results. The default is CreationTime.
-	SortBy ModelPackageSortBy `type:"string" enum:"true"`
-
-	// The sort order for the results. The default is Ascending.
-	SortOrder SortOrder `type:"string" enum:"true"`
-}
-
-// String returns the string representation
-func (s ListModelPackagesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListModelPackagesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListModelPackagesInput"}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ListModelPackagesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// An array of ModelPackageSummary objects, each of which lists a model package.
-	//
-	// ModelPackageSummaryList is a required field
-	ModelPackageSummaryList []ModelPackageSummary `type:"list" required:"true"`
-
-	// If the response is truncated, Amazon SageMaker returns this token. To retrieve
-	// the next set of model packages, use it in the subsequent request.
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s ListModelPackagesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListModelPackages = "ListModelPackages"
 
@@ -91,7 +24,7 @@ const opListModelPackages = "ListModelPackages"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListModelPackages
-func (c *Client) ListModelPackagesRequest(input *ListModelPackagesInput) ListModelPackagesRequest {
+func (c *Client) ListModelPackagesRequest(input *types.ListModelPackagesInput) ListModelPackagesRequest {
 	op := &aws.Operation{
 		Name:       opListModelPackages,
 		HTTPMethod: "POST",
@@ -99,10 +32,10 @@ func (c *Client) ListModelPackagesRequest(input *ListModelPackagesInput) ListMod
 	}
 
 	if input == nil {
-		input = &ListModelPackagesInput{}
+		input = &types.ListModelPackagesInput{}
 	}
 
-	req := c.newRequest(op, input, &ListModelPackagesOutput{})
+	req := c.newRequest(op, input, &types.ListModelPackagesOutput{})
 	return ListModelPackagesRequest{Request: req, Input: input, Copy: c.ListModelPackagesRequest}
 }
 
@@ -110,8 +43,8 @@ func (c *Client) ListModelPackagesRequest(input *ListModelPackagesInput) ListMod
 // ListModelPackages API operation.
 type ListModelPackagesRequest struct {
 	*aws.Request
-	Input *ListModelPackagesInput
-	Copy  func(*ListModelPackagesInput) ListModelPackagesRequest
+	Input *types.ListModelPackagesInput
+	Copy  func(*types.ListModelPackagesInput) ListModelPackagesRequest
 }
 
 // Send marshals and sends the ListModelPackages API request.
@@ -123,7 +56,7 @@ func (r ListModelPackagesRequest) Send(ctx context.Context) (*ListModelPackagesR
 	}
 
 	resp := &ListModelPackagesResponse{
-		ListModelPackagesOutput: r.Request.Data.(*ListModelPackagesOutput),
+		ListModelPackagesOutput: r.Request.Data.(*types.ListModelPackagesOutput),
 		response:                &aws.Response{Request: r.Request},
 	}
 
@@ -133,7 +66,7 @@ func (r ListModelPackagesRequest) Send(ctx context.Context) (*ListModelPackagesR
 // ListModelPackagesResponse is the response type for the
 // ListModelPackages API operation.
 type ListModelPackagesResponse struct {
-	*ListModelPackagesOutput
+	*types.ListModelPackagesOutput
 
 	response *aws.Response
 }

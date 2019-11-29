@@ -6,46 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/glue/types"
 )
-
-type GetCatalogImportStatusInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the catalog to migrate. Currently, this should be the AWS account
-	// ID.
-	CatalogId *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s GetCatalogImportStatusInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetCatalogImportStatusInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetCatalogImportStatusInput"}
-	if s.CatalogId != nil && len(*s.CatalogId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("CatalogId", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type GetCatalogImportStatusOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The status of the specified catalog migration.
-	ImportStatus *CatalogImportStatus `type:"structure"`
-}
-
-// String returns the string representation
-func (s GetCatalogImportStatusOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetCatalogImportStatus = "GetCatalogImportStatus"
 
@@ -62,7 +24,7 @@ const opGetCatalogImportStatus = "GetCatalogImportStatus"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetCatalogImportStatus
-func (c *Client) GetCatalogImportStatusRequest(input *GetCatalogImportStatusInput) GetCatalogImportStatusRequest {
+func (c *Client) GetCatalogImportStatusRequest(input *types.GetCatalogImportStatusInput) GetCatalogImportStatusRequest {
 	op := &aws.Operation{
 		Name:       opGetCatalogImportStatus,
 		HTTPMethod: "POST",
@@ -70,10 +32,10 @@ func (c *Client) GetCatalogImportStatusRequest(input *GetCatalogImportStatusInpu
 	}
 
 	if input == nil {
-		input = &GetCatalogImportStatusInput{}
+		input = &types.GetCatalogImportStatusInput{}
 	}
 
-	req := c.newRequest(op, input, &GetCatalogImportStatusOutput{})
+	req := c.newRequest(op, input, &types.GetCatalogImportStatusOutput{})
 	return GetCatalogImportStatusRequest{Request: req, Input: input, Copy: c.GetCatalogImportStatusRequest}
 }
 
@@ -81,8 +43,8 @@ func (c *Client) GetCatalogImportStatusRequest(input *GetCatalogImportStatusInpu
 // GetCatalogImportStatus API operation.
 type GetCatalogImportStatusRequest struct {
 	*aws.Request
-	Input *GetCatalogImportStatusInput
-	Copy  func(*GetCatalogImportStatusInput) GetCatalogImportStatusRequest
+	Input *types.GetCatalogImportStatusInput
+	Copy  func(*types.GetCatalogImportStatusInput) GetCatalogImportStatusRequest
 }
 
 // Send marshals and sends the GetCatalogImportStatus API request.
@@ -94,7 +56,7 @@ func (r GetCatalogImportStatusRequest) Send(ctx context.Context) (*GetCatalogImp
 	}
 
 	resp := &GetCatalogImportStatusResponse{
-		GetCatalogImportStatusOutput: r.Request.Data.(*GetCatalogImportStatusOutput),
+		GetCatalogImportStatusOutput: r.Request.Data.(*types.GetCatalogImportStatusOutput),
 		response:                     &aws.Response{Request: r.Request},
 	}
 
@@ -104,7 +66,7 @@ func (r GetCatalogImportStatusRequest) Send(ctx context.Context) (*GetCatalogImp
 // GetCatalogImportStatusResponse is the response type for the
 // GetCatalogImportStatus API operation.
 type GetCatalogImportStatusResponse struct {
-	*GetCatalogImportStatusOutput
+	*types.GetCatalogImportStatusOutput
 
 	response *aws.Response
 }

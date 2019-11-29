@@ -6,50 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/gamelift/types"
 )
-
-// Represents the input for a request action.
-type ResolveAliasInput struct {
-	_ struct{} `type:"structure"`
-
-	// Unique identifier for the alias you want to resolve.
-	//
-	// AliasId is a required field
-	AliasId *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s ResolveAliasInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ResolveAliasInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ResolveAliasInput"}
-
-	if s.AliasId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("AliasId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Represents the returned data in response to a request action.
-type ResolveAliasOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Fleet identifier that is associated with the requested alias.
-	FleetId *string `type:"string"`
-}
-
-// String returns the string representation
-func (s ResolveAliasOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opResolveAlias = "ResolveAlias"
 
@@ -78,7 +36,7 @@ const opResolveAlias = "ResolveAlias"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/ResolveAlias
-func (c *Client) ResolveAliasRequest(input *ResolveAliasInput) ResolveAliasRequest {
+func (c *Client) ResolveAliasRequest(input *types.ResolveAliasInput) ResolveAliasRequest {
 	op := &aws.Operation{
 		Name:       opResolveAlias,
 		HTTPMethod: "POST",
@@ -86,10 +44,10 @@ func (c *Client) ResolveAliasRequest(input *ResolveAliasInput) ResolveAliasReque
 	}
 
 	if input == nil {
-		input = &ResolveAliasInput{}
+		input = &types.ResolveAliasInput{}
 	}
 
-	req := c.newRequest(op, input, &ResolveAliasOutput{})
+	req := c.newRequest(op, input, &types.ResolveAliasOutput{})
 	return ResolveAliasRequest{Request: req, Input: input, Copy: c.ResolveAliasRequest}
 }
 
@@ -97,8 +55,8 @@ func (c *Client) ResolveAliasRequest(input *ResolveAliasInput) ResolveAliasReque
 // ResolveAlias API operation.
 type ResolveAliasRequest struct {
 	*aws.Request
-	Input *ResolveAliasInput
-	Copy  func(*ResolveAliasInput) ResolveAliasRequest
+	Input *types.ResolveAliasInput
+	Copy  func(*types.ResolveAliasInput) ResolveAliasRequest
 }
 
 // Send marshals and sends the ResolveAlias API request.
@@ -110,7 +68,7 @@ func (r ResolveAliasRequest) Send(ctx context.Context) (*ResolveAliasResponse, e
 	}
 
 	resp := &ResolveAliasResponse{
-		ResolveAliasOutput: r.Request.Data.(*ResolveAliasOutput),
+		ResolveAliasOutput: r.Request.Data.(*types.ResolveAliasOutput),
 		response:           &aws.Response{Request: r.Request},
 	}
 
@@ -120,7 +78,7 @@ func (r ResolveAliasRequest) Send(ctx context.Context) (*ResolveAliasResponse, e
 // ResolveAliasResponse is the response type for the
 // ResolveAlias API operation.
 type ResolveAliasResponse struct {
-	*ResolveAliasOutput
+	*types.ResolveAliasOutput
 
 	response *aws.Response
 }

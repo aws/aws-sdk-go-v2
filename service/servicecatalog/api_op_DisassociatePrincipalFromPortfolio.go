@@ -6,69 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/types"
 )
-
-type DisassociatePrincipalFromPortfolioInput struct {
-	_ struct{} `type:"structure"`
-
-	// The language code.
-	//
-	//    * en - English (default)
-	//
-	//    * jp - Japanese
-	//
-	//    * zh - Chinese
-	AcceptLanguage *string `type:"string"`
-
-	// The portfolio identifier.
-	//
-	// PortfolioId is a required field
-	PortfolioId *string `min:"1" type:"string" required:"true"`
-
-	// The ARN of the principal (IAM user, role, or group).
-	//
-	// PrincipalARN is a required field
-	PrincipalARN *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DisassociatePrincipalFromPortfolioInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DisassociatePrincipalFromPortfolioInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DisassociatePrincipalFromPortfolioInput"}
-
-	if s.PortfolioId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("PortfolioId"))
-	}
-	if s.PortfolioId != nil && len(*s.PortfolioId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("PortfolioId", 1))
-	}
-
-	if s.PrincipalARN == nil {
-		invalidParams.Add(aws.NewErrParamRequired("PrincipalARN"))
-	}
-	if s.PrincipalARN != nil && len(*s.PrincipalARN) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("PrincipalARN", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DisassociatePrincipalFromPortfolioOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DisassociatePrincipalFromPortfolioOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDisassociatePrincipalFromPortfolio = "DisassociatePrincipalFromPortfolio"
 
@@ -85,7 +24,7 @@ const opDisassociatePrincipalFromPortfolio = "DisassociatePrincipalFromPortfolio
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DisassociatePrincipalFromPortfolio
-func (c *Client) DisassociatePrincipalFromPortfolioRequest(input *DisassociatePrincipalFromPortfolioInput) DisassociatePrincipalFromPortfolioRequest {
+func (c *Client) DisassociatePrincipalFromPortfolioRequest(input *types.DisassociatePrincipalFromPortfolioInput) DisassociatePrincipalFromPortfolioRequest {
 	op := &aws.Operation{
 		Name:       opDisassociatePrincipalFromPortfolio,
 		HTTPMethod: "POST",
@@ -93,10 +32,10 @@ func (c *Client) DisassociatePrincipalFromPortfolioRequest(input *DisassociatePr
 	}
 
 	if input == nil {
-		input = &DisassociatePrincipalFromPortfolioInput{}
+		input = &types.DisassociatePrincipalFromPortfolioInput{}
 	}
 
-	req := c.newRequest(op, input, &DisassociatePrincipalFromPortfolioOutput{})
+	req := c.newRequest(op, input, &types.DisassociatePrincipalFromPortfolioOutput{})
 	return DisassociatePrincipalFromPortfolioRequest{Request: req, Input: input, Copy: c.DisassociatePrincipalFromPortfolioRequest}
 }
 
@@ -104,8 +43,8 @@ func (c *Client) DisassociatePrincipalFromPortfolioRequest(input *DisassociatePr
 // DisassociatePrincipalFromPortfolio API operation.
 type DisassociatePrincipalFromPortfolioRequest struct {
 	*aws.Request
-	Input *DisassociatePrincipalFromPortfolioInput
-	Copy  func(*DisassociatePrincipalFromPortfolioInput) DisassociatePrincipalFromPortfolioRequest
+	Input *types.DisassociatePrincipalFromPortfolioInput
+	Copy  func(*types.DisassociatePrincipalFromPortfolioInput) DisassociatePrincipalFromPortfolioRequest
 }
 
 // Send marshals and sends the DisassociatePrincipalFromPortfolio API request.
@@ -117,7 +56,7 @@ func (r DisassociatePrincipalFromPortfolioRequest) Send(ctx context.Context) (*D
 	}
 
 	resp := &DisassociatePrincipalFromPortfolioResponse{
-		DisassociatePrincipalFromPortfolioOutput: r.Request.Data.(*DisassociatePrincipalFromPortfolioOutput),
+		DisassociatePrincipalFromPortfolioOutput: r.Request.Data.(*types.DisassociatePrincipalFromPortfolioOutput),
 		response:                                 &aws.Response{Request: r.Request},
 	}
 
@@ -127,7 +66,7 @@ func (r DisassociatePrincipalFromPortfolioRequest) Send(ctx context.Context) (*D
 // DisassociatePrincipalFromPortfolioResponse is the response type for the
 // DisassociatePrincipalFromPortfolio API operation.
 type DisassociatePrincipalFromPortfolioResponse struct {
-	*DisassociatePrincipalFromPortfolioOutput
+	*types.DisassociatePrincipalFromPortfolioOutput
 
 	response *aws.Response
 }

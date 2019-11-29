@@ -6,57 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
+	"github.com/aws/aws-sdk-go-v2/service/opsworks/types"
 )
-
-type AttachElasticLoadBalancerInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Elastic Load Balancing instance's name.
-	//
-	// ElasticLoadBalancerName is a required field
-	ElasticLoadBalancerName *string `type:"string" required:"true"`
-
-	// The ID of the layer to which the Elastic Load Balancing instance is to be
-	// attached.
-	//
-	// LayerId is a required field
-	LayerId *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s AttachElasticLoadBalancerInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *AttachElasticLoadBalancerInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "AttachElasticLoadBalancerInput"}
-
-	if s.ElasticLoadBalancerName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ElasticLoadBalancerName"))
-	}
-
-	if s.LayerId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("LayerId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type AttachElasticLoadBalancerOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s AttachElasticLoadBalancerOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opAttachElasticLoadBalancer = "AttachElasticLoadBalancer"
 
@@ -85,7 +38,7 @@ const opAttachElasticLoadBalancer = "AttachElasticLoadBalancer"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/AttachElasticLoadBalancer
-func (c *Client) AttachElasticLoadBalancerRequest(input *AttachElasticLoadBalancerInput) AttachElasticLoadBalancerRequest {
+func (c *Client) AttachElasticLoadBalancerRequest(input *types.AttachElasticLoadBalancerInput) AttachElasticLoadBalancerRequest {
 	op := &aws.Operation{
 		Name:       opAttachElasticLoadBalancer,
 		HTTPMethod: "POST",
@@ -93,10 +46,10 @@ func (c *Client) AttachElasticLoadBalancerRequest(input *AttachElasticLoadBalanc
 	}
 
 	if input == nil {
-		input = &AttachElasticLoadBalancerInput{}
+		input = &types.AttachElasticLoadBalancerInput{}
 	}
 
-	req := c.newRequest(op, input, &AttachElasticLoadBalancerOutput{})
+	req := c.newRequest(op, input, &types.AttachElasticLoadBalancerOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return AttachElasticLoadBalancerRequest{Request: req, Input: input, Copy: c.AttachElasticLoadBalancerRequest}
@@ -106,8 +59,8 @@ func (c *Client) AttachElasticLoadBalancerRequest(input *AttachElasticLoadBalanc
 // AttachElasticLoadBalancer API operation.
 type AttachElasticLoadBalancerRequest struct {
 	*aws.Request
-	Input *AttachElasticLoadBalancerInput
-	Copy  func(*AttachElasticLoadBalancerInput) AttachElasticLoadBalancerRequest
+	Input *types.AttachElasticLoadBalancerInput
+	Copy  func(*types.AttachElasticLoadBalancerInput) AttachElasticLoadBalancerRequest
 }
 
 // Send marshals and sends the AttachElasticLoadBalancer API request.
@@ -119,7 +72,7 @@ func (r AttachElasticLoadBalancerRequest) Send(ctx context.Context) (*AttachElas
 	}
 
 	resp := &AttachElasticLoadBalancerResponse{
-		AttachElasticLoadBalancerOutput: r.Request.Data.(*AttachElasticLoadBalancerOutput),
+		AttachElasticLoadBalancerOutput: r.Request.Data.(*types.AttachElasticLoadBalancerOutput),
 		response:                        &aws.Response{Request: r.Request},
 	}
 
@@ -129,7 +82,7 @@ func (r AttachElasticLoadBalancerRequest) Send(ctx context.Context) (*AttachElas
 // AttachElasticLoadBalancerResponse is the response type for the
 // AttachElasticLoadBalancer API operation.
 type AttachElasticLoadBalancerResponse struct {
-	*AttachElasticLoadBalancerOutput
+	*types.AttachElasticLoadBalancerOutput
 
 	response *aws.Response
 }

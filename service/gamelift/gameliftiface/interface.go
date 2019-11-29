@@ -10,6 +10,7 @@ package gameliftiface
 
 import (
 	"github.com/aws/aws-sdk-go-v2/service/gamelift"
+	"github.com/aws/aws-sdk-go-v2/service/gamelift/types"
 )
 
 // ClientAPI provides an interface to enable mocking the
@@ -43,7 +44,7 @@ import (
 //    type mockClientClient struct {
 //        gameliftiface.ClientPI
 //    }
-//    func (m *mockClientClient) AcceptMatch(input *gamelift.AcceptMatchInput) (*gamelift.AcceptMatchOutput, error) {
+//    func (m *mockClientClient) AcceptMatch(input *types.AcceptMatchInput) (*types.AcceptMatchOutput, error) {
 //        // mock response/functionality
 //    }
 //
@@ -61,151 +62,151 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type ClientAPI interface {
-	AcceptMatchRequest(*gamelift.AcceptMatchInput) gamelift.AcceptMatchRequest
+	AcceptMatchRequest(*types.AcceptMatchInput) gamelift.AcceptMatchRequest
 
-	CreateAliasRequest(*gamelift.CreateAliasInput) gamelift.CreateAliasRequest
+	CreateAliasRequest(*types.CreateAliasInput) gamelift.CreateAliasRequest
 
-	CreateBuildRequest(*gamelift.CreateBuildInput) gamelift.CreateBuildRequest
+	CreateBuildRequest(*types.CreateBuildInput) gamelift.CreateBuildRequest
 
-	CreateFleetRequest(*gamelift.CreateFleetInput) gamelift.CreateFleetRequest
+	CreateFleetRequest(*types.CreateFleetInput) gamelift.CreateFleetRequest
 
-	CreateGameSessionRequest(*gamelift.CreateGameSessionInput) gamelift.CreateGameSessionRequest
+	CreateGameSessionRequest(*types.CreateGameSessionInput) gamelift.CreateGameSessionRequest
 
-	CreateGameSessionQueueRequest(*gamelift.CreateGameSessionQueueInput) gamelift.CreateGameSessionQueueRequest
+	CreateGameSessionQueueRequest(*types.CreateGameSessionQueueInput) gamelift.CreateGameSessionQueueRequest
 
-	CreateMatchmakingConfigurationRequest(*gamelift.CreateMatchmakingConfigurationInput) gamelift.CreateMatchmakingConfigurationRequest
+	CreateMatchmakingConfigurationRequest(*types.CreateMatchmakingConfigurationInput) gamelift.CreateMatchmakingConfigurationRequest
 
-	CreateMatchmakingRuleSetRequest(*gamelift.CreateMatchmakingRuleSetInput) gamelift.CreateMatchmakingRuleSetRequest
+	CreateMatchmakingRuleSetRequest(*types.CreateMatchmakingRuleSetInput) gamelift.CreateMatchmakingRuleSetRequest
 
-	CreatePlayerSessionRequest(*gamelift.CreatePlayerSessionInput) gamelift.CreatePlayerSessionRequest
+	CreatePlayerSessionRequest(*types.CreatePlayerSessionInput) gamelift.CreatePlayerSessionRequest
 
-	CreatePlayerSessionsRequest(*gamelift.CreatePlayerSessionsInput) gamelift.CreatePlayerSessionsRequest
+	CreatePlayerSessionsRequest(*types.CreatePlayerSessionsInput) gamelift.CreatePlayerSessionsRequest
 
-	CreateScriptRequest(*gamelift.CreateScriptInput) gamelift.CreateScriptRequest
+	CreateScriptRequest(*types.CreateScriptInput) gamelift.CreateScriptRequest
 
-	CreateVpcPeeringAuthorizationRequest(*gamelift.CreateVpcPeeringAuthorizationInput) gamelift.CreateVpcPeeringAuthorizationRequest
+	CreateVpcPeeringAuthorizationRequest(*types.CreateVpcPeeringAuthorizationInput) gamelift.CreateVpcPeeringAuthorizationRequest
 
-	CreateVpcPeeringConnectionRequest(*gamelift.CreateVpcPeeringConnectionInput) gamelift.CreateVpcPeeringConnectionRequest
+	CreateVpcPeeringConnectionRequest(*types.CreateVpcPeeringConnectionInput) gamelift.CreateVpcPeeringConnectionRequest
 
-	DeleteAliasRequest(*gamelift.DeleteAliasInput) gamelift.DeleteAliasRequest
+	DeleteAliasRequest(*types.DeleteAliasInput) gamelift.DeleteAliasRequest
 
-	DeleteBuildRequest(*gamelift.DeleteBuildInput) gamelift.DeleteBuildRequest
+	DeleteBuildRequest(*types.DeleteBuildInput) gamelift.DeleteBuildRequest
 
-	DeleteFleetRequest(*gamelift.DeleteFleetInput) gamelift.DeleteFleetRequest
+	DeleteFleetRequest(*types.DeleteFleetInput) gamelift.DeleteFleetRequest
 
-	DeleteGameSessionQueueRequest(*gamelift.DeleteGameSessionQueueInput) gamelift.DeleteGameSessionQueueRequest
+	DeleteGameSessionQueueRequest(*types.DeleteGameSessionQueueInput) gamelift.DeleteGameSessionQueueRequest
 
-	DeleteMatchmakingConfigurationRequest(*gamelift.DeleteMatchmakingConfigurationInput) gamelift.DeleteMatchmakingConfigurationRequest
+	DeleteMatchmakingConfigurationRequest(*types.DeleteMatchmakingConfigurationInput) gamelift.DeleteMatchmakingConfigurationRequest
 
-	DeleteMatchmakingRuleSetRequest(*gamelift.DeleteMatchmakingRuleSetInput) gamelift.DeleteMatchmakingRuleSetRequest
+	DeleteMatchmakingRuleSetRequest(*types.DeleteMatchmakingRuleSetInput) gamelift.DeleteMatchmakingRuleSetRequest
 
-	DeleteScalingPolicyRequest(*gamelift.DeleteScalingPolicyInput) gamelift.DeleteScalingPolicyRequest
+	DeleteScalingPolicyRequest(*types.DeleteScalingPolicyInput) gamelift.DeleteScalingPolicyRequest
 
-	DeleteScriptRequest(*gamelift.DeleteScriptInput) gamelift.DeleteScriptRequest
+	DeleteScriptRequest(*types.DeleteScriptInput) gamelift.DeleteScriptRequest
 
-	DeleteVpcPeeringAuthorizationRequest(*gamelift.DeleteVpcPeeringAuthorizationInput) gamelift.DeleteVpcPeeringAuthorizationRequest
+	DeleteVpcPeeringAuthorizationRequest(*types.DeleteVpcPeeringAuthorizationInput) gamelift.DeleteVpcPeeringAuthorizationRequest
 
-	DeleteVpcPeeringConnectionRequest(*gamelift.DeleteVpcPeeringConnectionInput) gamelift.DeleteVpcPeeringConnectionRequest
+	DeleteVpcPeeringConnectionRequest(*types.DeleteVpcPeeringConnectionInput) gamelift.DeleteVpcPeeringConnectionRequest
 
-	DescribeAliasRequest(*gamelift.DescribeAliasInput) gamelift.DescribeAliasRequest
+	DescribeAliasRequest(*types.DescribeAliasInput) gamelift.DescribeAliasRequest
 
-	DescribeBuildRequest(*gamelift.DescribeBuildInput) gamelift.DescribeBuildRequest
+	DescribeBuildRequest(*types.DescribeBuildInput) gamelift.DescribeBuildRequest
 
-	DescribeEC2InstanceLimitsRequest(*gamelift.DescribeEC2InstanceLimitsInput) gamelift.DescribeEC2InstanceLimitsRequest
+	DescribeEC2InstanceLimitsRequest(*types.DescribeEC2InstanceLimitsInput) gamelift.DescribeEC2InstanceLimitsRequest
 
-	DescribeFleetAttributesRequest(*gamelift.DescribeFleetAttributesInput) gamelift.DescribeFleetAttributesRequest
+	DescribeFleetAttributesRequest(*types.DescribeFleetAttributesInput) gamelift.DescribeFleetAttributesRequest
 
-	DescribeFleetCapacityRequest(*gamelift.DescribeFleetCapacityInput) gamelift.DescribeFleetCapacityRequest
+	DescribeFleetCapacityRequest(*types.DescribeFleetCapacityInput) gamelift.DescribeFleetCapacityRequest
 
-	DescribeFleetEventsRequest(*gamelift.DescribeFleetEventsInput) gamelift.DescribeFleetEventsRequest
+	DescribeFleetEventsRequest(*types.DescribeFleetEventsInput) gamelift.DescribeFleetEventsRequest
 
-	DescribeFleetPortSettingsRequest(*gamelift.DescribeFleetPortSettingsInput) gamelift.DescribeFleetPortSettingsRequest
+	DescribeFleetPortSettingsRequest(*types.DescribeFleetPortSettingsInput) gamelift.DescribeFleetPortSettingsRequest
 
-	DescribeFleetUtilizationRequest(*gamelift.DescribeFleetUtilizationInput) gamelift.DescribeFleetUtilizationRequest
+	DescribeFleetUtilizationRequest(*types.DescribeFleetUtilizationInput) gamelift.DescribeFleetUtilizationRequest
 
-	DescribeGameSessionDetailsRequest(*gamelift.DescribeGameSessionDetailsInput) gamelift.DescribeGameSessionDetailsRequest
+	DescribeGameSessionDetailsRequest(*types.DescribeGameSessionDetailsInput) gamelift.DescribeGameSessionDetailsRequest
 
-	DescribeGameSessionPlacementRequest(*gamelift.DescribeGameSessionPlacementInput) gamelift.DescribeGameSessionPlacementRequest
+	DescribeGameSessionPlacementRequest(*types.DescribeGameSessionPlacementInput) gamelift.DescribeGameSessionPlacementRequest
 
-	DescribeGameSessionQueuesRequest(*gamelift.DescribeGameSessionQueuesInput) gamelift.DescribeGameSessionQueuesRequest
+	DescribeGameSessionQueuesRequest(*types.DescribeGameSessionQueuesInput) gamelift.DescribeGameSessionQueuesRequest
 
-	DescribeGameSessionsRequest(*gamelift.DescribeGameSessionsInput) gamelift.DescribeGameSessionsRequest
+	DescribeGameSessionsRequest(*types.DescribeGameSessionsInput) gamelift.DescribeGameSessionsRequest
 
-	DescribeInstancesRequest(*gamelift.DescribeInstancesInput) gamelift.DescribeInstancesRequest
+	DescribeInstancesRequest(*types.DescribeInstancesInput) gamelift.DescribeInstancesRequest
 
-	DescribeMatchmakingRequest(*gamelift.DescribeMatchmakingInput) gamelift.DescribeMatchmakingRequest
+	DescribeMatchmakingRequest(*types.DescribeMatchmakingInput) gamelift.DescribeMatchmakingRequest
 
-	DescribeMatchmakingConfigurationsRequest(*gamelift.DescribeMatchmakingConfigurationsInput) gamelift.DescribeMatchmakingConfigurationsRequest
+	DescribeMatchmakingConfigurationsRequest(*types.DescribeMatchmakingConfigurationsInput) gamelift.DescribeMatchmakingConfigurationsRequest
 
-	DescribeMatchmakingRuleSetsRequest(*gamelift.DescribeMatchmakingRuleSetsInput) gamelift.DescribeMatchmakingRuleSetsRequest
+	DescribeMatchmakingRuleSetsRequest(*types.DescribeMatchmakingRuleSetsInput) gamelift.DescribeMatchmakingRuleSetsRequest
 
-	DescribePlayerSessionsRequest(*gamelift.DescribePlayerSessionsInput) gamelift.DescribePlayerSessionsRequest
+	DescribePlayerSessionsRequest(*types.DescribePlayerSessionsInput) gamelift.DescribePlayerSessionsRequest
 
-	DescribeRuntimeConfigurationRequest(*gamelift.DescribeRuntimeConfigurationInput) gamelift.DescribeRuntimeConfigurationRequest
+	DescribeRuntimeConfigurationRequest(*types.DescribeRuntimeConfigurationInput) gamelift.DescribeRuntimeConfigurationRequest
 
-	DescribeScalingPoliciesRequest(*gamelift.DescribeScalingPoliciesInput) gamelift.DescribeScalingPoliciesRequest
+	DescribeScalingPoliciesRequest(*types.DescribeScalingPoliciesInput) gamelift.DescribeScalingPoliciesRequest
 
-	DescribeScriptRequest(*gamelift.DescribeScriptInput) gamelift.DescribeScriptRequest
+	DescribeScriptRequest(*types.DescribeScriptInput) gamelift.DescribeScriptRequest
 
-	DescribeVpcPeeringAuthorizationsRequest(*gamelift.DescribeVpcPeeringAuthorizationsInput) gamelift.DescribeVpcPeeringAuthorizationsRequest
+	DescribeVpcPeeringAuthorizationsRequest(*types.DescribeVpcPeeringAuthorizationsInput) gamelift.DescribeVpcPeeringAuthorizationsRequest
 
-	DescribeVpcPeeringConnectionsRequest(*gamelift.DescribeVpcPeeringConnectionsInput) gamelift.DescribeVpcPeeringConnectionsRequest
+	DescribeVpcPeeringConnectionsRequest(*types.DescribeVpcPeeringConnectionsInput) gamelift.DescribeVpcPeeringConnectionsRequest
 
-	GetGameSessionLogUrlRequest(*gamelift.GetGameSessionLogUrlInput) gamelift.GetGameSessionLogUrlRequest
+	GetGameSessionLogUrlRequest(*types.GetGameSessionLogUrlInput) gamelift.GetGameSessionLogUrlRequest
 
-	GetInstanceAccessRequest(*gamelift.GetInstanceAccessInput) gamelift.GetInstanceAccessRequest
+	GetInstanceAccessRequest(*types.GetInstanceAccessInput) gamelift.GetInstanceAccessRequest
 
-	ListAliasesRequest(*gamelift.ListAliasesInput) gamelift.ListAliasesRequest
+	ListAliasesRequest(*types.ListAliasesInput) gamelift.ListAliasesRequest
 
-	ListBuildsRequest(*gamelift.ListBuildsInput) gamelift.ListBuildsRequest
+	ListBuildsRequest(*types.ListBuildsInput) gamelift.ListBuildsRequest
 
-	ListFleetsRequest(*gamelift.ListFleetsInput) gamelift.ListFleetsRequest
+	ListFleetsRequest(*types.ListFleetsInput) gamelift.ListFleetsRequest
 
-	ListScriptsRequest(*gamelift.ListScriptsInput) gamelift.ListScriptsRequest
+	ListScriptsRequest(*types.ListScriptsInput) gamelift.ListScriptsRequest
 
-	PutScalingPolicyRequest(*gamelift.PutScalingPolicyInput) gamelift.PutScalingPolicyRequest
+	PutScalingPolicyRequest(*types.PutScalingPolicyInput) gamelift.PutScalingPolicyRequest
 
-	RequestUploadCredentialsRequest(*gamelift.RequestUploadCredentialsInput) gamelift.RequestUploadCredentialsRequest
+	RequestUploadCredentialsRequest(*types.RequestUploadCredentialsInput) gamelift.RequestUploadCredentialsRequest
 
-	ResolveAliasRequest(*gamelift.ResolveAliasInput) gamelift.ResolveAliasRequest
+	ResolveAliasRequest(*types.ResolveAliasInput) gamelift.ResolveAliasRequest
 
-	SearchGameSessionsRequest(*gamelift.SearchGameSessionsInput) gamelift.SearchGameSessionsRequest
+	SearchGameSessionsRequest(*types.SearchGameSessionsInput) gamelift.SearchGameSessionsRequest
 
-	StartFleetActionsRequest(*gamelift.StartFleetActionsInput) gamelift.StartFleetActionsRequest
+	StartFleetActionsRequest(*types.StartFleetActionsInput) gamelift.StartFleetActionsRequest
 
-	StartGameSessionPlacementRequest(*gamelift.StartGameSessionPlacementInput) gamelift.StartGameSessionPlacementRequest
+	StartGameSessionPlacementRequest(*types.StartGameSessionPlacementInput) gamelift.StartGameSessionPlacementRequest
 
-	StartMatchBackfillRequest(*gamelift.StartMatchBackfillInput) gamelift.StartMatchBackfillRequest
+	StartMatchBackfillRequest(*types.StartMatchBackfillInput) gamelift.StartMatchBackfillRequest
 
-	StartMatchmakingRequest(*gamelift.StartMatchmakingInput) gamelift.StartMatchmakingRequest
+	StartMatchmakingRequest(*types.StartMatchmakingInput) gamelift.StartMatchmakingRequest
 
-	StopFleetActionsRequest(*gamelift.StopFleetActionsInput) gamelift.StopFleetActionsRequest
+	StopFleetActionsRequest(*types.StopFleetActionsInput) gamelift.StopFleetActionsRequest
 
-	StopGameSessionPlacementRequest(*gamelift.StopGameSessionPlacementInput) gamelift.StopGameSessionPlacementRequest
+	StopGameSessionPlacementRequest(*types.StopGameSessionPlacementInput) gamelift.StopGameSessionPlacementRequest
 
-	StopMatchmakingRequest(*gamelift.StopMatchmakingInput) gamelift.StopMatchmakingRequest
+	StopMatchmakingRequest(*types.StopMatchmakingInput) gamelift.StopMatchmakingRequest
 
-	UpdateAliasRequest(*gamelift.UpdateAliasInput) gamelift.UpdateAliasRequest
+	UpdateAliasRequest(*types.UpdateAliasInput) gamelift.UpdateAliasRequest
 
-	UpdateBuildRequest(*gamelift.UpdateBuildInput) gamelift.UpdateBuildRequest
+	UpdateBuildRequest(*types.UpdateBuildInput) gamelift.UpdateBuildRequest
 
-	UpdateFleetAttributesRequest(*gamelift.UpdateFleetAttributesInput) gamelift.UpdateFleetAttributesRequest
+	UpdateFleetAttributesRequest(*types.UpdateFleetAttributesInput) gamelift.UpdateFleetAttributesRequest
 
-	UpdateFleetCapacityRequest(*gamelift.UpdateFleetCapacityInput) gamelift.UpdateFleetCapacityRequest
+	UpdateFleetCapacityRequest(*types.UpdateFleetCapacityInput) gamelift.UpdateFleetCapacityRequest
 
-	UpdateFleetPortSettingsRequest(*gamelift.UpdateFleetPortSettingsInput) gamelift.UpdateFleetPortSettingsRequest
+	UpdateFleetPortSettingsRequest(*types.UpdateFleetPortSettingsInput) gamelift.UpdateFleetPortSettingsRequest
 
-	UpdateGameSessionRequest(*gamelift.UpdateGameSessionInput) gamelift.UpdateGameSessionRequest
+	UpdateGameSessionRequest(*types.UpdateGameSessionInput) gamelift.UpdateGameSessionRequest
 
-	UpdateGameSessionQueueRequest(*gamelift.UpdateGameSessionQueueInput) gamelift.UpdateGameSessionQueueRequest
+	UpdateGameSessionQueueRequest(*types.UpdateGameSessionQueueInput) gamelift.UpdateGameSessionQueueRequest
 
-	UpdateMatchmakingConfigurationRequest(*gamelift.UpdateMatchmakingConfigurationInput) gamelift.UpdateMatchmakingConfigurationRequest
+	UpdateMatchmakingConfigurationRequest(*types.UpdateMatchmakingConfigurationInput) gamelift.UpdateMatchmakingConfigurationRequest
 
-	UpdateRuntimeConfigurationRequest(*gamelift.UpdateRuntimeConfigurationInput) gamelift.UpdateRuntimeConfigurationRequest
+	UpdateRuntimeConfigurationRequest(*types.UpdateRuntimeConfigurationInput) gamelift.UpdateRuntimeConfigurationRequest
 
-	UpdateScriptRequest(*gamelift.UpdateScriptInput) gamelift.UpdateScriptRequest
+	UpdateScriptRequest(*types.UpdateScriptInput) gamelift.UpdateScriptRequest
 
-	ValidateMatchmakingRuleSetRequest(*gamelift.ValidateMatchmakingRuleSetInput) gamelift.ValidateMatchmakingRuleSetRequest
+	ValidateMatchmakingRuleSetRequest(*types.ValidateMatchmakingRuleSetInput) gamelift.ValidateMatchmakingRuleSetRequest
 }
 
 var _ ClientAPI = (*gamelift.Client)(nil)

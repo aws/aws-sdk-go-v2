@@ -6,47 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/ec2query"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-type CancelExportTaskInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the export task. This is the ID returned by CreateInstanceExportTask.
-	//
-	// ExportTaskId is a required field
-	ExportTaskId *string `locationName:"exportTaskId" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s CancelExportTaskInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CancelExportTaskInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CancelExportTaskInput"}
-
-	if s.ExportTaskId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ExportTaskId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type CancelExportTaskOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s CancelExportTaskOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCancelExportTask = "CancelExportTask"
 
@@ -66,7 +29,7 @@ const opCancelExportTask = "CancelExportTask"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CancelExportTask
-func (c *Client) CancelExportTaskRequest(input *CancelExportTaskInput) CancelExportTaskRequest {
+func (c *Client) CancelExportTaskRequest(input *types.CancelExportTaskInput) CancelExportTaskRequest {
 	op := &aws.Operation{
 		Name:       opCancelExportTask,
 		HTTPMethod: "POST",
@@ -74,10 +37,10 @@ func (c *Client) CancelExportTaskRequest(input *CancelExportTaskInput) CancelExp
 	}
 
 	if input == nil {
-		input = &CancelExportTaskInput{}
+		input = &types.CancelExportTaskInput{}
 	}
 
-	req := c.newRequest(op, input, &CancelExportTaskOutput{})
+	req := c.newRequest(op, input, &types.CancelExportTaskOutput{})
 	req.Handlers.Unmarshal.Remove(ec2query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return CancelExportTaskRequest{Request: req, Input: input, Copy: c.CancelExportTaskRequest}
@@ -87,8 +50,8 @@ func (c *Client) CancelExportTaskRequest(input *CancelExportTaskInput) CancelExp
 // CancelExportTask API operation.
 type CancelExportTaskRequest struct {
 	*aws.Request
-	Input *CancelExportTaskInput
-	Copy  func(*CancelExportTaskInput) CancelExportTaskRequest
+	Input *types.CancelExportTaskInput
+	Copy  func(*types.CancelExportTaskInput) CancelExportTaskRequest
 }
 
 // Send marshals and sends the CancelExportTask API request.
@@ -100,7 +63,7 @@ func (r CancelExportTaskRequest) Send(ctx context.Context) (*CancelExportTaskRes
 	}
 
 	resp := &CancelExportTaskResponse{
-		CancelExportTaskOutput: r.Request.Data.(*CancelExportTaskOutput),
+		CancelExportTaskOutput: r.Request.Data.(*types.CancelExportTaskOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -110,7 +73,7 @@ func (r CancelExportTaskRequest) Send(ctx context.Context) (*CancelExportTaskRes
 // CancelExportTaskResponse is the response type for the
 // CancelExportTask API operation.
 type CancelExportTaskResponse struct {
-	*CancelExportTaskOutput
+	*types.CancelExportTaskOutput
 
 	response *aws.Response
 }

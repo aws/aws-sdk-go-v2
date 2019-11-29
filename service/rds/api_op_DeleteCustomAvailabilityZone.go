@@ -6,52 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/rds/types"
 )
-
-type DeleteCustomAvailabilityZoneInput struct {
-	_ struct{} `type:"structure"`
-
-	// The custom AZ identifier.
-	//
-	// CustomAvailabilityZoneId is a required field
-	CustomAvailabilityZoneId *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteCustomAvailabilityZoneInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteCustomAvailabilityZoneInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteCustomAvailabilityZoneInput"}
-
-	if s.CustomAvailabilityZoneId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("CustomAvailabilityZoneId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteCustomAvailabilityZoneOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A custom Availability Zone (AZ) is an on-premises AZ that is integrated with
-	// a VMware vSphere cluster.
-	//
-	// For more information about RDS on VMware, see the RDS on VMware User Guide.
-	// (https://docs.aws.amazon.com/AmazonRDS/latest/RDSonVMwareUserGuide/rds-on-vmware.html)
-	CustomAvailabilityZone *CustomAvailabilityZone `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteCustomAvailabilityZoneOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteCustomAvailabilityZone = "DeleteCustomAvailabilityZone"
 
@@ -74,7 +30,7 @@ const opDeleteCustomAvailabilityZone = "DeleteCustomAvailabilityZone"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteCustomAvailabilityZone
-func (c *Client) DeleteCustomAvailabilityZoneRequest(input *DeleteCustomAvailabilityZoneInput) DeleteCustomAvailabilityZoneRequest {
+func (c *Client) DeleteCustomAvailabilityZoneRequest(input *types.DeleteCustomAvailabilityZoneInput) DeleteCustomAvailabilityZoneRequest {
 	op := &aws.Operation{
 		Name:       opDeleteCustomAvailabilityZone,
 		HTTPMethod: "POST",
@@ -82,10 +38,10 @@ func (c *Client) DeleteCustomAvailabilityZoneRequest(input *DeleteCustomAvailabi
 	}
 
 	if input == nil {
-		input = &DeleteCustomAvailabilityZoneInput{}
+		input = &types.DeleteCustomAvailabilityZoneInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteCustomAvailabilityZoneOutput{})
+	req := c.newRequest(op, input, &types.DeleteCustomAvailabilityZoneOutput{})
 	return DeleteCustomAvailabilityZoneRequest{Request: req, Input: input, Copy: c.DeleteCustomAvailabilityZoneRequest}
 }
 
@@ -93,8 +49,8 @@ func (c *Client) DeleteCustomAvailabilityZoneRequest(input *DeleteCustomAvailabi
 // DeleteCustomAvailabilityZone API operation.
 type DeleteCustomAvailabilityZoneRequest struct {
 	*aws.Request
-	Input *DeleteCustomAvailabilityZoneInput
-	Copy  func(*DeleteCustomAvailabilityZoneInput) DeleteCustomAvailabilityZoneRequest
+	Input *types.DeleteCustomAvailabilityZoneInput
+	Copy  func(*types.DeleteCustomAvailabilityZoneInput) DeleteCustomAvailabilityZoneRequest
 }
 
 // Send marshals and sends the DeleteCustomAvailabilityZone API request.
@@ -106,7 +62,7 @@ func (r DeleteCustomAvailabilityZoneRequest) Send(ctx context.Context) (*DeleteC
 	}
 
 	resp := &DeleteCustomAvailabilityZoneResponse{
-		DeleteCustomAvailabilityZoneOutput: r.Request.Data.(*DeleteCustomAvailabilityZoneOutput),
+		DeleteCustomAvailabilityZoneOutput: r.Request.Data.(*types.DeleteCustomAvailabilityZoneOutput),
 		response:                           &aws.Response{Request: r.Request},
 	}
 
@@ -116,7 +72,7 @@ func (r DeleteCustomAvailabilityZoneRequest) Send(ctx context.Context) (*DeleteC
 // DeleteCustomAvailabilityZoneResponse is the response type for the
 // DeleteCustomAvailabilityZone API operation.
 type DeleteCustomAvailabilityZoneResponse struct {
-	*DeleteCustomAvailabilityZoneOutput
+	*types.DeleteCustomAvailabilityZoneOutput
 
 	response *aws.Response
 }

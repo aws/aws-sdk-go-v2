@@ -6,54 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-type DeleteFpgaImageInput struct {
-	_ struct{} `type:"structure"`
-
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have
-	// the required permissions, the error response is DryRunOperation. Otherwise,
-	// it is UnauthorizedOperation.
-	DryRun *bool `type:"boolean"`
-
-	// The ID of the AFI.
-	//
-	// FpgaImageId is a required field
-	FpgaImageId *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteFpgaImageInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteFpgaImageInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteFpgaImageInput"}
-
-	if s.FpgaImageId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("FpgaImageId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteFpgaImageOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Is true if the request succeeds, and an error otherwise.
-	Return *bool `locationName:"return" type:"boolean"`
-}
-
-// String returns the string representation
-func (s DeleteFpgaImageOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteFpgaImage = "DeleteFpgaImage"
 
@@ -70,7 +24,7 @@ const opDeleteFpgaImage = "DeleteFpgaImage"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteFpgaImage
-func (c *Client) DeleteFpgaImageRequest(input *DeleteFpgaImageInput) DeleteFpgaImageRequest {
+func (c *Client) DeleteFpgaImageRequest(input *types.DeleteFpgaImageInput) DeleteFpgaImageRequest {
 	op := &aws.Operation{
 		Name:       opDeleteFpgaImage,
 		HTTPMethod: "POST",
@@ -78,10 +32,10 @@ func (c *Client) DeleteFpgaImageRequest(input *DeleteFpgaImageInput) DeleteFpgaI
 	}
 
 	if input == nil {
-		input = &DeleteFpgaImageInput{}
+		input = &types.DeleteFpgaImageInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteFpgaImageOutput{})
+	req := c.newRequest(op, input, &types.DeleteFpgaImageOutput{})
 	return DeleteFpgaImageRequest{Request: req, Input: input, Copy: c.DeleteFpgaImageRequest}
 }
 
@@ -89,8 +43,8 @@ func (c *Client) DeleteFpgaImageRequest(input *DeleteFpgaImageInput) DeleteFpgaI
 // DeleteFpgaImage API operation.
 type DeleteFpgaImageRequest struct {
 	*aws.Request
-	Input *DeleteFpgaImageInput
-	Copy  func(*DeleteFpgaImageInput) DeleteFpgaImageRequest
+	Input *types.DeleteFpgaImageInput
+	Copy  func(*types.DeleteFpgaImageInput) DeleteFpgaImageRequest
 }
 
 // Send marshals and sends the DeleteFpgaImage API request.
@@ -102,7 +56,7 @@ func (r DeleteFpgaImageRequest) Send(ctx context.Context) (*DeleteFpgaImageRespo
 	}
 
 	resp := &DeleteFpgaImageResponse{
-		DeleteFpgaImageOutput: r.Request.Data.(*DeleteFpgaImageOutput),
+		DeleteFpgaImageOutput: r.Request.Data.(*types.DeleteFpgaImageOutput),
 		response:              &aws.Response{Request: r.Request},
 	}
 
@@ -112,7 +66,7 @@ func (r DeleteFpgaImageRequest) Send(ctx context.Context) (*DeleteFpgaImageRespo
 // DeleteFpgaImageResponse is the response type for the
 // DeleteFpgaImage API operation.
 type DeleteFpgaImageResponse struct {
-	*DeleteFpgaImageOutput
+	*types.DeleteFpgaImageOutput
 
 	response *aws.Response
 }

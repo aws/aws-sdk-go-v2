@@ -6,97 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/servicediscovery/types"
 )
-
-type CreateServiceInput struct {
-	_ struct{} `type:"structure"`
-
-	// A unique string that identifies the request and that allows failed CreateService
-	// requests to be retried without the risk of executing the operation twice.
-	// CreatorRequestId can be any unique string, for example, a date/time stamp.
-	CreatorRequestId *string `type:"string" idempotencyToken:"true"`
-
-	// A description for the service.
-	Description *string `type:"string"`
-
-	// A complex type that contains information about the Amazon Route 53 records
-	// that you want AWS Cloud Map to create when you register an instance.
-	DnsConfig *DnsConfig `type:"structure"`
-
-	// Public DNS namespaces only. A complex type that contains settings for an
-	// optional Route 53 health check. If you specify settings for a health check,
-	// AWS Cloud Map associates the health check with all the Route 53 DNS records
-	// that you specify in DnsConfig.
-	//
-	// If you specify a health check configuration, you can specify either HealthCheckCustomConfig
-	// or HealthCheckConfig but not both.
-	//
-	// For information about the charges for health checks, see AWS Cloud Map Pricing
-	// (http://aws.amazon.com/cloud-map/pricing/).
-	HealthCheckConfig *HealthCheckConfig `type:"structure"`
-
-	// A complex type that contains information about an optional custom health
-	// check.
-	//
-	// If you specify a health check configuration, you can specify either HealthCheckCustomConfig
-	// or HealthCheckConfig but not both.
-	HealthCheckCustomConfig *HealthCheckCustomConfig `type:"structure"`
-
-	// The name that you want to assign to the service.
-	//
-	// Name is a required field
-	Name *string `type:"string" required:"true"`
-
-	// The ID of the namespace that you want to use to create the service.
-	NamespaceId *string `type:"string"`
-}
-
-// String returns the string representation
-func (s CreateServiceInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateServiceInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateServiceInput"}
-
-	if s.Name == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Name"))
-	}
-	if s.DnsConfig != nil {
-		if err := s.DnsConfig.Validate(); err != nil {
-			invalidParams.AddNested("DnsConfig", err.(aws.ErrInvalidParams))
-		}
-	}
-	if s.HealthCheckConfig != nil {
-		if err := s.HealthCheckConfig.Validate(); err != nil {
-			invalidParams.AddNested("HealthCheckConfig", err.(aws.ErrInvalidParams))
-		}
-	}
-	if s.HealthCheckCustomConfig != nil {
-		if err := s.HealthCheckCustomConfig.Validate(); err != nil {
-			invalidParams.AddNested("HealthCheckCustomConfig", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type CreateServiceOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A complex type that contains information about the new service.
-	Service *Service `type:"structure"`
-}
-
-// String returns the string representation
-func (s CreateServiceOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCreateService = "CreateService"
 
@@ -126,7 +37,7 @@ const opCreateService = "CreateService"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicediscovery-2017-03-14/CreateService
-func (c *Client) CreateServiceRequest(input *CreateServiceInput) CreateServiceRequest {
+func (c *Client) CreateServiceRequest(input *types.CreateServiceInput) CreateServiceRequest {
 	op := &aws.Operation{
 		Name:       opCreateService,
 		HTTPMethod: "POST",
@@ -134,10 +45,10 @@ func (c *Client) CreateServiceRequest(input *CreateServiceInput) CreateServiceRe
 	}
 
 	if input == nil {
-		input = &CreateServiceInput{}
+		input = &types.CreateServiceInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateServiceOutput{})
+	req := c.newRequest(op, input, &types.CreateServiceOutput{})
 	return CreateServiceRequest{Request: req, Input: input, Copy: c.CreateServiceRequest}
 }
 
@@ -145,8 +56,8 @@ func (c *Client) CreateServiceRequest(input *CreateServiceInput) CreateServiceRe
 // CreateService API operation.
 type CreateServiceRequest struct {
 	*aws.Request
-	Input *CreateServiceInput
-	Copy  func(*CreateServiceInput) CreateServiceRequest
+	Input *types.CreateServiceInput
+	Copy  func(*types.CreateServiceInput) CreateServiceRequest
 }
 
 // Send marshals and sends the CreateService API request.
@@ -158,7 +69,7 @@ func (r CreateServiceRequest) Send(ctx context.Context) (*CreateServiceResponse,
 	}
 
 	resp := &CreateServiceResponse{
-		CreateServiceOutput: r.Request.Data.(*CreateServiceOutput),
+		CreateServiceOutput: r.Request.Data.(*types.CreateServiceOutput),
 		response:            &aws.Response{Request: r.Request},
 	}
 
@@ -168,7 +79,7 @@ func (r CreateServiceRequest) Send(ctx context.Context) (*CreateServiceResponse,
 // CreateServiceResponse is the response type for the
 // CreateService API operation.
 type CreateServiceResponse struct {
-	*CreateServiceOutput
+	*types.CreateServiceOutput
 
 	response *aws.Response
 }

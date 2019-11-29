@@ -6,119 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/amplify/types"
 )
-
-// Request structure for the list Domain Associations request.
-type ListDomainAssociationsInput struct {
-	_ struct{} `type:"structure"`
-
-	// Unique Id for an Amplify App.
-	//
-	// AppId is a required field
-	AppId *string `location:"uri" locationName:"appId" min:"1" type:"string" required:"true"`
-
-	// Maximum number of records to list in a single response.
-	MaxResults *int64 `location:"querystring" locationName:"maxResults" min:"1" type:"integer"`
-
-	// Pagination token. Set to null to start listing Apps from start. If non-null
-	// pagination token is returned in a result, then pass its value in here to
-	// list more projects.
-	NextToken *string `location:"querystring" locationName:"nextToken" type:"string"`
-}
-
-// String returns the string representation
-func (s ListDomainAssociationsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListDomainAssociationsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListDomainAssociationsInput"}
-
-	if s.AppId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("AppId"))
-	}
-	if s.AppId != nil && len(*s.AppId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("AppId", 1))
-	}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListDomainAssociationsInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.AppId != nil {
-		v := *s.AppId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "appId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.MaxResults != nil {
-		v := *s.MaxResults
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "maxResults", protocol.Int64Value(v), metadata)
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-// Result structure for the list Domain Association request.
-type ListDomainAssociationsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// List of Domain Associations.
-	//
-	// DomainAssociations is a required field
-	DomainAssociations []DomainAssociation `locationName:"domainAssociations" type:"list" required:"true"`
-
-	// Pagination token. If non-null pagination token is returned in a result, then
-	// pass its value in another request to fetch more entries.
-	NextToken *string `locationName:"nextToken" type:"string"`
-}
-
-// String returns the string representation
-func (s ListDomainAssociationsOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListDomainAssociationsOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.DomainAssociations != nil {
-		v := s.DomainAssociations
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "domainAssociations", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opListDomainAssociations = "ListDomainAssociations"
 
@@ -135,7 +24,7 @@ const opListDomainAssociations = "ListDomainAssociations"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/ListDomainAssociations
-func (c *Client) ListDomainAssociationsRequest(input *ListDomainAssociationsInput) ListDomainAssociationsRequest {
+func (c *Client) ListDomainAssociationsRequest(input *types.ListDomainAssociationsInput) ListDomainAssociationsRequest {
 	op := &aws.Operation{
 		Name:       opListDomainAssociations,
 		HTTPMethod: "GET",
@@ -143,10 +32,10 @@ func (c *Client) ListDomainAssociationsRequest(input *ListDomainAssociationsInpu
 	}
 
 	if input == nil {
-		input = &ListDomainAssociationsInput{}
+		input = &types.ListDomainAssociationsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListDomainAssociationsOutput{})
+	req := c.newRequest(op, input, &types.ListDomainAssociationsOutput{})
 	return ListDomainAssociationsRequest{Request: req, Input: input, Copy: c.ListDomainAssociationsRequest}
 }
 
@@ -154,8 +43,8 @@ func (c *Client) ListDomainAssociationsRequest(input *ListDomainAssociationsInpu
 // ListDomainAssociations API operation.
 type ListDomainAssociationsRequest struct {
 	*aws.Request
-	Input *ListDomainAssociationsInput
-	Copy  func(*ListDomainAssociationsInput) ListDomainAssociationsRequest
+	Input *types.ListDomainAssociationsInput
+	Copy  func(*types.ListDomainAssociationsInput) ListDomainAssociationsRequest
 }
 
 // Send marshals and sends the ListDomainAssociations API request.
@@ -167,7 +56,7 @@ func (r ListDomainAssociationsRequest) Send(ctx context.Context) (*ListDomainAss
 	}
 
 	resp := &ListDomainAssociationsResponse{
-		ListDomainAssociationsOutput: r.Request.Data.(*ListDomainAssociationsOutput),
+		ListDomainAssociationsOutput: r.Request.Data.(*types.ListDomainAssociationsOutput),
 		response:                     &aws.Response{Request: r.Request},
 	}
 
@@ -177,7 +66,7 @@ func (r ListDomainAssociationsRequest) Send(ctx context.Context) (*ListDomainAss
 // ListDomainAssociationsResponse is the response type for the
 // ListDomainAssociations API operation.
 type ListDomainAssociationsResponse struct {
-	*ListDomainAssociationsOutput
+	*types.ListDomainAssociationsOutput
 
 	response *aws.Response
 }

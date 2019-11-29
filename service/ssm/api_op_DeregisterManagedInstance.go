@@ -6,46 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ssm/types"
 )
-
-type DeregisterManagedInstanceInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID assigned to the managed instance when you registered it using the
-	// activation process.
-	//
-	// InstanceId is a required field
-	InstanceId *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeregisterManagedInstanceInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeregisterManagedInstanceInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeregisterManagedInstanceInput"}
-
-	if s.InstanceId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("InstanceId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeregisterManagedInstanceOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeregisterManagedInstanceOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeregisterManagedInstance = "DeregisterManagedInstance"
 
@@ -64,7 +26,7 @@ const opDeregisterManagedInstance = "DeregisterManagedInstance"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DeregisterManagedInstance
-func (c *Client) DeregisterManagedInstanceRequest(input *DeregisterManagedInstanceInput) DeregisterManagedInstanceRequest {
+func (c *Client) DeregisterManagedInstanceRequest(input *types.DeregisterManagedInstanceInput) DeregisterManagedInstanceRequest {
 	op := &aws.Operation{
 		Name:       opDeregisterManagedInstance,
 		HTTPMethod: "POST",
@@ -72,10 +34,10 @@ func (c *Client) DeregisterManagedInstanceRequest(input *DeregisterManagedInstan
 	}
 
 	if input == nil {
-		input = &DeregisterManagedInstanceInput{}
+		input = &types.DeregisterManagedInstanceInput{}
 	}
 
-	req := c.newRequest(op, input, &DeregisterManagedInstanceOutput{})
+	req := c.newRequest(op, input, &types.DeregisterManagedInstanceOutput{})
 	return DeregisterManagedInstanceRequest{Request: req, Input: input, Copy: c.DeregisterManagedInstanceRequest}
 }
 
@@ -83,8 +45,8 @@ func (c *Client) DeregisterManagedInstanceRequest(input *DeregisterManagedInstan
 // DeregisterManagedInstance API operation.
 type DeregisterManagedInstanceRequest struct {
 	*aws.Request
-	Input *DeregisterManagedInstanceInput
-	Copy  func(*DeregisterManagedInstanceInput) DeregisterManagedInstanceRequest
+	Input *types.DeregisterManagedInstanceInput
+	Copy  func(*types.DeregisterManagedInstanceInput) DeregisterManagedInstanceRequest
 }
 
 // Send marshals and sends the DeregisterManagedInstance API request.
@@ -96,7 +58,7 @@ func (r DeregisterManagedInstanceRequest) Send(ctx context.Context) (*Deregister
 	}
 
 	resp := &DeregisterManagedInstanceResponse{
-		DeregisterManagedInstanceOutput: r.Request.Data.(*DeregisterManagedInstanceOutput),
+		DeregisterManagedInstanceOutput: r.Request.Data.(*types.DeregisterManagedInstanceOutput),
 		response:                        &aws.Response{Request: r.Request},
 	}
 
@@ -106,7 +68,7 @@ func (r DeregisterManagedInstanceRequest) Send(ctx context.Context) (*Deregister
 // DeregisterManagedInstanceResponse is the response type for the
 // DeregisterManagedInstance API operation.
 type DeregisterManagedInstanceResponse struct {
-	*DeregisterManagedInstanceOutput
+	*types.DeregisterManagedInstanceOutput
 
 	response *aws.Response
 }

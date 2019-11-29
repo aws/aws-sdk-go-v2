@@ -6,62 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/elasticloadbalancingv2/types"
 )
-
-type DescribeTargetGroupsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the load balancer.
-	LoadBalancerArn *string `type:"string"`
-
-	// The marker for the next set of results. (You received this marker from a
-	// previous call.)
-	Marker *string `type:"string"`
-
-	// The names of the target groups.
-	Names []string `type:"list"`
-
-	// The maximum number of results to return with this call.
-	PageSize *int64 `min:"1" type:"integer"`
-
-	// The Amazon Resource Names (ARN) of the target groups.
-	TargetGroupArns []string `type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeTargetGroupsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeTargetGroupsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeTargetGroupsInput"}
-	if s.PageSize != nil && *s.PageSize < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("PageSize", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribeTargetGroupsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// If there are additional results, this is the marker for the next set of results.
-	// Otherwise, this is null.
-	NextMarker *string `type:"string"`
-
-	// Information about the target groups.
-	TargetGroups []TargetGroup `type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeTargetGroupsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeTargetGroups = "DescribeTargetGroups"
 
@@ -84,7 +30,7 @@ const opDescribeTargetGroups = "DescribeTargetGroups"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/DescribeTargetGroups
-func (c *Client) DescribeTargetGroupsRequest(input *DescribeTargetGroupsInput) DescribeTargetGroupsRequest {
+func (c *Client) DescribeTargetGroupsRequest(input *types.DescribeTargetGroupsInput) DescribeTargetGroupsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeTargetGroups,
 		HTTPMethod: "POST",
@@ -98,10 +44,10 @@ func (c *Client) DescribeTargetGroupsRequest(input *DescribeTargetGroupsInput) D
 	}
 
 	if input == nil {
-		input = &DescribeTargetGroupsInput{}
+		input = &types.DescribeTargetGroupsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeTargetGroupsOutput{})
+	req := c.newRequest(op, input, &types.DescribeTargetGroupsOutput{})
 	return DescribeTargetGroupsRequest{Request: req, Input: input, Copy: c.DescribeTargetGroupsRequest}
 }
 
@@ -109,8 +55,8 @@ func (c *Client) DescribeTargetGroupsRequest(input *DescribeTargetGroupsInput) D
 // DescribeTargetGroups API operation.
 type DescribeTargetGroupsRequest struct {
 	*aws.Request
-	Input *DescribeTargetGroupsInput
-	Copy  func(*DescribeTargetGroupsInput) DescribeTargetGroupsRequest
+	Input *types.DescribeTargetGroupsInput
+	Copy  func(*types.DescribeTargetGroupsInput) DescribeTargetGroupsRequest
 }
 
 // Send marshals and sends the DescribeTargetGroups API request.
@@ -122,7 +68,7 @@ func (r DescribeTargetGroupsRequest) Send(ctx context.Context) (*DescribeTargetG
 	}
 
 	resp := &DescribeTargetGroupsResponse{
-		DescribeTargetGroupsOutput: r.Request.Data.(*DescribeTargetGroupsOutput),
+		DescribeTargetGroupsOutput: r.Request.Data.(*types.DescribeTargetGroupsOutput),
 		response:                   &aws.Response{Request: r.Request},
 	}
 
@@ -152,7 +98,7 @@ func NewDescribeTargetGroupsPaginator(req DescribeTargetGroupsRequest) DescribeT
 	return DescribeTargetGroupsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *DescribeTargetGroupsInput
+				var inCpy *types.DescribeTargetGroupsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -172,14 +118,14 @@ type DescribeTargetGroupsPaginator struct {
 	aws.Pager
 }
 
-func (p *DescribeTargetGroupsPaginator) CurrentPage() *DescribeTargetGroupsOutput {
-	return p.Pager.CurrentPage().(*DescribeTargetGroupsOutput)
+func (p *DescribeTargetGroupsPaginator) CurrentPage() *types.DescribeTargetGroupsOutput {
+	return p.Pager.CurrentPage().(*types.DescribeTargetGroupsOutput)
 }
 
 // DescribeTargetGroupsResponse is the response type for the
 // DescribeTargetGroups API operation.
 type DescribeTargetGroupsResponse struct {
-	*DescribeTargetGroupsOutput
+	*types.DescribeTargetGroupsOutput
 
 	response *aws.Response
 }

@@ -6,94 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/route53/types"
 )
-
-// A complex type that contains information about the request to remove authorization
-// to associate a VPC that was created by one AWS account with a hosted zone
-// that was created with a different AWS account.
-type DeleteVPCAssociationAuthorizationInput struct {
-	_ struct{} `locationName:"DeleteVPCAssociationAuthorizationRequest" type:"structure" xmlURI:"https://route53.amazonaws.com/doc/2013-04-01/"`
-
-	// When removing authorization to associate a VPC that was created by one AWS
-	// account with a hosted zone that was created with a different AWS account,
-	// the ID of the hosted zone.
-	//
-	// HostedZoneId is a required field
-	HostedZoneId *string `location:"uri" locationName:"Id" type:"string" required:"true"`
-
-	// When removing authorization to associate a VPC that was created by one AWS
-	// account with a hosted zone that was created with a different AWS account,
-	// a complex type that includes the ID and region of the VPC.
-	//
-	// VPC is a required field
-	VPC *VPC `type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteVPCAssociationAuthorizationInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteVPCAssociationAuthorizationInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteVPCAssociationAuthorizationInput"}
-
-	if s.HostedZoneId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("HostedZoneId"))
-	}
-
-	if s.VPC == nil {
-		invalidParams.Add(aws.NewErrParamRequired("VPC"))
-	}
-	if s.VPC != nil {
-		if err := s.VPC.Validate(); err != nil {
-			invalidParams.AddNested("VPC", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteVPCAssociationAuthorizationInput) MarshalFields(e protocol.FieldEncoder) error {
-
-	e.SetFields(protocol.BodyTarget, "DeleteVPCAssociationAuthorizationRequest", protocol.FieldMarshalerFunc(func(e protocol.FieldEncoder) error {
-		if s.VPC != nil {
-			v := s.VPC
-
-			metadata := protocol.Metadata{}
-			e.SetFields(protocol.BodyTarget, "VPC", v, metadata)
-		}
-		return nil
-	}), protocol.Metadata{XMLNamespaceURI: "https://route53.amazonaws.com/doc/2013-04-01/"})
-	if s.HostedZoneId != nil {
-		v := *s.HostedZoneId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "Id", protocol.StringValue(v), metadata)
-	}
-	return nil
-}
-
-// Empty response for the request.
-type DeleteVPCAssociationAuthorizationOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteVPCAssociationAuthorizationOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteVPCAssociationAuthorizationOutput) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
 
 const opDeleteVPCAssociationAuthorization = "DeleteVPCAssociationAuthorization"
 
@@ -119,7 +33,7 @@ const opDeleteVPCAssociationAuthorization = "DeleteVPCAssociationAuthorization"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/DeleteVPCAssociationAuthorization
-func (c *Client) DeleteVPCAssociationAuthorizationRequest(input *DeleteVPCAssociationAuthorizationInput) DeleteVPCAssociationAuthorizationRequest {
+func (c *Client) DeleteVPCAssociationAuthorizationRequest(input *types.DeleteVPCAssociationAuthorizationInput) DeleteVPCAssociationAuthorizationRequest {
 	op := &aws.Operation{
 		Name:       opDeleteVPCAssociationAuthorization,
 		HTTPMethod: "POST",
@@ -127,10 +41,10 @@ func (c *Client) DeleteVPCAssociationAuthorizationRequest(input *DeleteVPCAssoci
 	}
 
 	if input == nil {
-		input = &DeleteVPCAssociationAuthorizationInput{}
+		input = &types.DeleteVPCAssociationAuthorizationInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteVPCAssociationAuthorizationOutput{})
+	req := c.newRequest(op, input, &types.DeleteVPCAssociationAuthorizationOutput{})
 	return DeleteVPCAssociationAuthorizationRequest{Request: req, Input: input, Copy: c.DeleteVPCAssociationAuthorizationRequest}
 }
 
@@ -138,8 +52,8 @@ func (c *Client) DeleteVPCAssociationAuthorizationRequest(input *DeleteVPCAssoci
 // DeleteVPCAssociationAuthorization API operation.
 type DeleteVPCAssociationAuthorizationRequest struct {
 	*aws.Request
-	Input *DeleteVPCAssociationAuthorizationInput
-	Copy  func(*DeleteVPCAssociationAuthorizationInput) DeleteVPCAssociationAuthorizationRequest
+	Input *types.DeleteVPCAssociationAuthorizationInput
+	Copy  func(*types.DeleteVPCAssociationAuthorizationInput) DeleteVPCAssociationAuthorizationRequest
 }
 
 // Send marshals and sends the DeleteVPCAssociationAuthorization API request.
@@ -151,7 +65,7 @@ func (r DeleteVPCAssociationAuthorizationRequest) Send(ctx context.Context) (*De
 	}
 
 	resp := &DeleteVPCAssociationAuthorizationResponse{
-		DeleteVPCAssociationAuthorizationOutput: r.Request.Data.(*DeleteVPCAssociationAuthorizationOutput),
+		DeleteVPCAssociationAuthorizationOutput: r.Request.Data.(*types.DeleteVPCAssociationAuthorizationOutput),
 		response:                                &aws.Response{Request: r.Request},
 	}
 
@@ -161,7 +75,7 @@ func (r DeleteVPCAssociationAuthorizationRequest) Send(ctx context.Context) (*De
 // DeleteVPCAssociationAuthorizationResponse is the response type for the
 // DeleteVPCAssociationAuthorization API operation.
 type DeleteVPCAssociationAuthorizationResponse struct {
-	*DeleteVPCAssociationAuthorizationOutput
+	*types.DeleteVPCAssociationAuthorizationOutput
 
 	response *aws.Response
 }

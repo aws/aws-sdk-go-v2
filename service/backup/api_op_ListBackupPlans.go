@@ -6,111 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/backup/types"
 )
-
-type ListBackupPlansInput struct {
-	_ struct{} `type:"structure"`
-
-	// A Boolean value with a default value of FALSE that returns deleted backup
-	// plans when set to TRUE.
-	IncludeDeleted *bool `location:"querystring" locationName:"includeDeleted" type:"boolean"`
-
-	// The maximum number of items to be returned.
-	MaxResults *int64 `location:"querystring" locationName:"maxResults" min:"1" type:"integer"`
-
-	// The next item following a partial list of returned items. For example, if
-	// a request is made to return maxResults number of items, NextToken allows
-	// you to return more items in your list starting at the location pointed to
-	// by the next token.
-	NextToken *string `location:"querystring" locationName:"nextToken" type:"string"`
-}
-
-// String returns the string representation
-func (s ListBackupPlansInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListBackupPlansInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListBackupPlansInput"}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListBackupPlansInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.IncludeDeleted != nil {
-		v := *s.IncludeDeleted
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "includeDeleted", protocol.BoolValue(v), metadata)
-	}
-	if s.MaxResults != nil {
-		v := *s.MaxResults
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "maxResults", protocol.Int64Value(v), metadata)
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type ListBackupPlansOutput struct {
-	_ struct{} `type:"structure"`
-
-	// An array of backup plan list items containing metadata about your saved backup
-	// plans.
-	BackupPlansList []BackupPlansListMember `type:"list"`
-
-	// The next item following a partial list of returned items. For example, if
-	// a request is made to return maxResults number of items, NextToken allows
-	// you to return more items in your list starting at the location pointed to
-	// by the next token.
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s ListBackupPlansOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListBackupPlansOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.BackupPlansList != nil {
-		v := s.BackupPlansList
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "BackupPlansList", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opListBackupPlans = "ListBackupPlans"
 
@@ -129,7 +26,7 @@ const opListBackupPlans = "ListBackupPlans"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/ListBackupPlans
-func (c *Client) ListBackupPlansRequest(input *ListBackupPlansInput) ListBackupPlansRequest {
+func (c *Client) ListBackupPlansRequest(input *types.ListBackupPlansInput) ListBackupPlansRequest {
 	op := &aws.Operation{
 		Name:       opListBackupPlans,
 		HTTPMethod: "GET",
@@ -143,10 +40,10 @@ func (c *Client) ListBackupPlansRequest(input *ListBackupPlansInput) ListBackupP
 	}
 
 	if input == nil {
-		input = &ListBackupPlansInput{}
+		input = &types.ListBackupPlansInput{}
 	}
 
-	req := c.newRequest(op, input, &ListBackupPlansOutput{})
+	req := c.newRequest(op, input, &types.ListBackupPlansOutput{})
 	return ListBackupPlansRequest{Request: req, Input: input, Copy: c.ListBackupPlansRequest}
 }
 
@@ -154,8 +51,8 @@ func (c *Client) ListBackupPlansRequest(input *ListBackupPlansInput) ListBackupP
 // ListBackupPlans API operation.
 type ListBackupPlansRequest struct {
 	*aws.Request
-	Input *ListBackupPlansInput
-	Copy  func(*ListBackupPlansInput) ListBackupPlansRequest
+	Input *types.ListBackupPlansInput
+	Copy  func(*types.ListBackupPlansInput) ListBackupPlansRequest
 }
 
 // Send marshals and sends the ListBackupPlans API request.
@@ -167,7 +64,7 @@ func (r ListBackupPlansRequest) Send(ctx context.Context) (*ListBackupPlansRespo
 	}
 
 	resp := &ListBackupPlansResponse{
-		ListBackupPlansOutput: r.Request.Data.(*ListBackupPlansOutput),
+		ListBackupPlansOutput: r.Request.Data.(*types.ListBackupPlansOutput),
 		response:              &aws.Response{Request: r.Request},
 	}
 
@@ -197,7 +94,7 @@ func NewListBackupPlansPaginator(req ListBackupPlansRequest) ListBackupPlansPagi
 	return ListBackupPlansPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListBackupPlansInput
+				var inCpy *types.ListBackupPlansInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -217,14 +114,14 @@ type ListBackupPlansPaginator struct {
 	aws.Pager
 }
 
-func (p *ListBackupPlansPaginator) CurrentPage() *ListBackupPlansOutput {
-	return p.Pager.CurrentPage().(*ListBackupPlansOutput)
+func (p *ListBackupPlansPaginator) CurrentPage() *types.ListBackupPlansOutput {
+	return p.Pager.CurrentPage().(*types.ListBackupPlansOutput)
 }
 
 // ListBackupPlansResponse is the response type for the
 // ListBackupPlans API operation.
 type ListBackupPlansResponse struct {
-	*ListBackupPlansOutput
+	*types.ListBackupPlansOutput
 
 	response *aws.Response
 }

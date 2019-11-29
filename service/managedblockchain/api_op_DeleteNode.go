@@ -6,103 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/managedblockchain/types"
 )
-
-type DeleteNodeInput struct {
-	_ struct{} `type:"structure"`
-
-	// The unique identifier of the member that owns this node.
-	//
-	// MemberId is a required field
-	MemberId *string `location:"uri" locationName:"memberId" min:"1" type:"string" required:"true"`
-
-	// The unique identifier of the network that the node belongs to.
-	//
-	// NetworkId is a required field
-	NetworkId *string `location:"uri" locationName:"networkId" min:"1" type:"string" required:"true"`
-
-	// The unique identifier of the node.
-	//
-	// NodeId is a required field
-	NodeId *string `location:"uri" locationName:"nodeId" min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteNodeInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteNodeInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteNodeInput"}
-
-	if s.MemberId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("MemberId"))
-	}
-	if s.MemberId != nil && len(*s.MemberId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("MemberId", 1))
-	}
-
-	if s.NetworkId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("NetworkId"))
-	}
-	if s.NetworkId != nil && len(*s.NetworkId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("NetworkId", 1))
-	}
-
-	if s.NodeId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("NodeId"))
-	}
-	if s.NodeId != nil && len(*s.NodeId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("NodeId", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteNodeInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.MemberId != nil {
-		v := *s.MemberId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "memberId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.NetworkId != nil {
-		v := *s.NetworkId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "networkId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.NodeId != nil {
-		v := *s.NodeId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "nodeId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type DeleteNodeOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteNodeOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteNodeOutput) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
 
 const opDeleteNode = "DeleteNode"
 
@@ -120,7 +25,7 @@ const opDeleteNode = "DeleteNode"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/managedblockchain-2018-09-24/DeleteNode
-func (c *Client) DeleteNodeRequest(input *DeleteNodeInput) DeleteNodeRequest {
+func (c *Client) DeleteNodeRequest(input *types.DeleteNodeInput) DeleteNodeRequest {
 	op := &aws.Operation{
 		Name:       opDeleteNode,
 		HTTPMethod: "DELETE",
@@ -128,10 +33,10 @@ func (c *Client) DeleteNodeRequest(input *DeleteNodeInput) DeleteNodeRequest {
 	}
 
 	if input == nil {
-		input = &DeleteNodeInput{}
+		input = &types.DeleteNodeInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteNodeOutput{})
+	req := c.newRequest(op, input, &types.DeleteNodeOutput{})
 	return DeleteNodeRequest{Request: req, Input: input, Copy: c.DeleteNodeRequest}
 }
 
@@ -139,8 +44,8 @@ func (c *Client) DeleteNodeRequest(input *DeleteNodeInput) DeleteNodeRequest {
 // DeleteNode API operation.
 type DeleteNodeRequest struct {
 	*aws.Request
-	Input *DeleteNodeInput
-	Copy  func(*DeleteNodeInput) DeleteNodeRequest
+	Input *types.DeleteNodeInput
+	Copy  func(*types.DeleteNodeInput) DeleteNodeRequest
 }
 
 // Send marshals and sends the DeleteNode API request.
@@ -152,7 +57,7 @@ func (r DeleteNodeRequest) Send(ctx context.Context) (*DeleteNodeResponse, error
 	}
 
 	resp := &DeleteNodeResponse{
-		DeleteNodeOutput: r.Request.Data.(*DeleteNodeOutput),
+		DeleteNodeOutput: r.Request.Data.(*types.DeleteNodeOutput),
 		response:         &aws.Response{Request: r.Request},
 	}
 
@@ -162,7 +67,7 @@ func (r DeleteNodeRequest) Send(ctx context.Context) (*DeleteNodeResponse, error
 // DeleteNodeResponse is the response type for the
 // DeleteNode API operation.
 type DeleteNodeResponse struct {
-	*DeleteNodeOutput
+	*types.DeleteNodeOutput
 
 	response *aws.Response
 }

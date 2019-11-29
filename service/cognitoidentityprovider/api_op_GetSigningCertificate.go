@@ -6,53 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/types"
 )
-
-// Request to get a signing certificate from Cognito.
-type GetSigningCertificateInput struct {
-	_ struct{} `type:"structure"`
-
-	// The user pool ID.
-	//
-	// UserPoolId is a required field
-	UserPoolId *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetSigningCertificateInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetSigningCertificateInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetSigningCertificateInput"}
-
-	if s.UserPoolId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("UserPoolId"))
-	}
-	if s.UserPoolId != nil && len(*s.UserPoolId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("UserPoolId", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Response from Cognito for a signing certificate request.
-type GetSigningCertificateOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The signing certificate.
-	Certificate *string `type:"string"`
-}
-
-// String returns the string representation
-func (s GetSigningCertificateOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetSigningCertificate = "GetSigningCertificate"
 
@@ -69,7 +24,7 @@ const opGetSigningCertificate = "GetSigningCertificate"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/GetSigningCertificate
-func (c *Client) GetSigningCertificateRequest(input *GetSigningCertificateInput) GetSigningCertificateRequest {
+func (c *Client) GetSigningCertificateRequest(input *types.GetSigningCertificateInput) GetSigningCertificateRequest {
 	op := &aws.Operation{
 		Name:       opGetSigningCertificate,
 		HTTPMethod: "POST",
@@ -77,10 +32,10 @@ func (c *Client) GetSigningCertificateRequest(input *GetSigningCertificateInput)
 	}
 
 	if input == nil {
-		input = &GetSigningCertificateInput{}
+		input = &types.GetSigningCertificateInput{}
 	}
 
-	req := c.newRequest(op, input, &GetSigningCertificateOutput{})
+	req := c.newRequest(op, input, &types.GetSigningCertificateOutput{})
 	return GetSigningCertificateRequest{Request: req, Input: input, Copy: c.GetSigningCertificateRequest}
 }
 
@@ -88,8 +43,8 @@ func (c *Client) GetSigningCertificateRequest(input *GetSigningCertificateInput)
 // GetSigningCertificate API operation.
 type GetSigningCertificateRequest struct {
 	*aws.Request
-	Input *GetSigningCertificateInput
-	Copy  func(*GetSigningCertificateInput) GetSigningCertificateRequest
+	Input *types.GetSigningCertificateInput
+	Copy  func(*types.GetSigningCertificateInput) GetSigningCertificateRequest
 }
 
 // Send marshals and sends the GetSigningCertificate API request.
@@ -101,7 +56,7 @@ func (r GetSigningCertificateRequest) Send(ctx context.Context) (*GetSigningCert
 	}
 
 	resp := &GetSigningCertificateResponse{
-		GetSigningCertificateOutput: r.Request.Data.(*GetSigningCertificateOutput),
+		GetSigningCertificateOutput: r.Request.Data.(*types.GetSigningCertificateOutput),
 		response:                    &aws.Response{Request: r.Request},
 	}
 
@@ -111,7 +66,7 @@ func (r GetSigningCertificateRequest) Send(ctx context.Context) (*GetSigningCert
 // GetSigningCertificateResponse is the response type for the
 // GetSigningCertificate API operation.
 type GetSigningCertificateResponse struct {
-	*GetSigningCertificateOutput
+	*types.GetSigningCertificateOutput
 
 	response *aws.Response
 }

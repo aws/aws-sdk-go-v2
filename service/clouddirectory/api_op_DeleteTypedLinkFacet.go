@@ -6,80 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/clouddirectory/types"
 )
-
-type DeleteTypedLinkFacetInput struct {
-	_ struct{} `type:"structure"`
-
-	// The unique name of the typed link facet.
-	//
-	// Name is a required field
-	Name *string `type:"string" required:"true"`
-
-	// The Amazon Resource Name (ARN) that is associated with the schema. For more
-	// information, see arns.
-	//
-	// SchemaArn is a required field
-	SchemaArn *string `location:"header" locationName:"x-amz-data-partition" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteTypedLinkFacetInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteTypedLinkFacetInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteTypedLinkFacetInput"}
-
-	if s.Name == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Name"))
-	}
-
-	if s.SchemaArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("SchemaArn"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteTypedLinkFacetInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.Name != nil {
-		v := *s.Name
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "Name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.SchemaArn != nil {
-		v := *s.SchemaArn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "x-amz-data-partition", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type DeleteTypedLinkFacetOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteTypedLinkFacetOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteTypedLinkFacetOutput) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
 
 const opDeleteTypedLinkFacet = "DeleteTypedLinkFacet"
 
@@ -96,7 +24,7 @@ const opDeleteTypedLinkFacet = "DeleteTypedLinkFacet"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/DeleteTypedLinkFacet
-func (c *Client) DeleteTypedLinkFacetRequest(input *DeleteTypedLinkFacetInput) DeleteTypedLinkFacetRequest {
+func (c *Client) DeleteTypedLinkFacetRequest(input *types.DeleteTypedLinkFacetInput) DeleteTypedLinkFacetRequest {
 	op := &aws.Operation{
 		Name:       opDeleteTypedLinkFacet,
 		HTTPMethod: "PUT",
@@ -104,10 +32,10 @@ func (c *Client) DeleteTypedLinkFacetRequest(input *DeleteTypedLinkFacetInput) D
 	}
 
 	if input == nil {
-		input = &DeleteTypedLinkFacetInput{}
+		input = &types.DeleteTypedLinkFacetInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteTypedLinkFacetOutput{})
+	req := c.newRequest(op, input, &types.DeleteTypedLinkFacetOutput{})
 	return DeleteTypedLinkFacetRequest{Request: req, Input: input, Copy: c.DeleteTypedLinkFacetRequest}
 }
 
@@ -115,8 +43,8 @@ func (c *Client) DeleteTypedLinkFacetRequest(input *DeleteTypedLinkFacetInput) D
 // DeleteTypedLinkFacet API operation.
 type DeleteTypedLinkFacetRequest struct {
 	*aws.Request
-	Input *DeleteTypedLinkFacetInput
-	Copy  func(*DeleteTypedLinkFacetInput) DeleteTypedLinkFacetRequest
+	Input *types.DeleteTypedLinkFacetInput
+	Copy  func(*types.DeleteTypedLinkFacetInput) DeleteTypedLinkFacetRequest
 }
 
 // Send marshals and sends the DeleteTypedLinkFacet API request.
@@ -128,7 +56,7 @@ func (r DeleteTypedLinkFacetRequest) Send(ctx context.Context) (*DeleteTypedLink
 	}
 
 	resp := &DeleteTypedLinkFacetResponse{
-		DeleteTypedLinkFacetOutput: r.Request.Data.(*DeleteTypedLinkFacetOutput),
+		DeleteTypedLinkFacetOutput: r.Request.Data.(*types.DeleteTypedLinkFacetOutput),
 		response:                   &aws.Response{Request: r.Request},
 	}
 
@@ -138,7 +66,7 @@ func (r DeleteTypedLinkFacetRequest) Send(ctx context.Context) (*DeleteTypedLink
 // DeleteTypedLinkFacetResponse is the response type for the
 // DeleteTypedLinkFacet API operation.
 type DeleteTypedLinkFacetResponse struct {
-	*DeleteTypedLinkFacetOutput
+	*types.DeleteTypedLinkFacetOutput
 
 	response *aws.Response
 }

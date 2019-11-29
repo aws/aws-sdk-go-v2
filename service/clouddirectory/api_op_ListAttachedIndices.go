@@ -6,133 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/clouddirectory/types"
 )
-
-type ListAttachedIndicesInput struct {
-	_ struct{} `type:"structure"`
-
-	// The consistency level to use for this operation.
-	ConsistencyLevel ConsistencyLevel `location:"header" locationName:"x-amz-consistency-level" type:"string" enum:"true"`
-
-	// The ARN of the directory.
-	//
-	// DirectoryArn is a required field
-	DirectoryArn *string `location:"header" locationName:"x-amz-data-partition" type:"string" required:"true"`
-
-	// The maximum number of results to retrieve.
-	MaxResults *int64 `min:"1" type:"integer"`
-
-	// The pagination token.
-	NextToken *string `type:"string"`
-
-	// A reference to the object that has indices attached.
-	//
-	// TargetReference is a required field
-	TargetReference *ObjectReference `type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s ListAttachedIndicesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListAttachedIndicesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListAttachedIndicesInput"}
-
-	if s.DirectoryArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DirectoryArn"))
-	}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-
-	if s.TargetReference == nil {
-		invalidParams.Add(aws.NewErrParamRequired("TargetReference"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListAttachedIndicesInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.MaxResults != nil {
-		v := *s.MaxResults
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "MaxResults", protocol.Int64Value(v), metadata)
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.TargetReference != nil {
-		v := s.TargetReference
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "TargetReference", v, metadata)
-	}
-	if len(s.ConsistencyLevel) > 0 {
-		v := s.ConsistencyLevel
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "x-amz-consistency-level", protocol.QuotedValue{ValueMarshaler: v}, metadata)
-	}
-	if s.DirectoryArn != nil {
-		v := *s.DirectoryArn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "x-amz-data-partition", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type ListAttachedIndicesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The indices attached to the specified object.
-	IndexAttachments []IndexAttachment `type:"list"`
-
-	// The pagination token.
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s ListAttachedIndicesOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListAttachedIndicesOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.IndexAttachments != nil {
-		v := s.IndexAttachments
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "IndexAttachments", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opListAttachedIndices = "ListAttachedIndices"
 
@@ -149,7 +24,7 @@ const opListAttachedIndices = "ListAttachedIndices"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/ListAttachedIndices
-func (c *Client) ListAttachedIndicesRequest(input *ListAttachedIndicesInput) ListAttachedIndicesRequest {
+func (c *Client) ListAttachedIndicesRequest(input *types.ListAttachedIndicesInput) ListAttachedIndicesRequest {
 	op := &aws.Operation{
 		Name:       opListAttachedIndices,
 		HTTPMethod: "POST",
@@ -163,10 +38,10 @@ func (c *Client) ListAttachedIndicesRequest(input *ListAttachedIndicesInput) Lis
 	}
 
 	if input == nil {
-		input = &ListAttachedIndicesInput{}
+		input = &types.ListAttachedIndicesInput{}
 	}
 
-	req := c.newRequest(op, input, &ListAttachedIndicesOutput{})
+	req := c.newRequest(op, input, &types.ListAttachedIndicesOutput{})
 	return ListAttachedIndicesRequest{Request: req, Input: input, Copy: c.ListAttachedIndicesRequest}
 }
 
@@ -174,8 +49,8 @@ func (c *Client) ListAttachedIndicesRequest(input *ListAttachedIndicesInput) Lis
 // ListAttachedIndices API operation.
 type ListAttachedIndicesRequest struct {
 	*aws.Request
-	Input *ListAttachedIndicesInput
-	Copy  func(*ListAttachedIndicesInput) ListAttachedIndicesRequest
+	Input *types.ListAttachedIndicesInput
+	Copy  func(*types.ListAttachedIndicesInput) ListAttachedIndicesRequest
 }
 
 // Send marshals and sends the ListAttachedIndices API request.
@@ -187,7 +62,7 @@ func (r ListAttachedIndicesRequest) Send(ctx context.Context) (*ListAttachedIndi
 	}
 
 	resp := &ListAttachedIndicesResponse{
-		ListAttachedIndicesOutput: r.Request.Data.(*ListAttachedIndicesOutput),
+		ListAttachedIndicesOutput: r.Request.Data.(*types.ListAttachedIndicesOutput),
 		response:                  &aws.Response{Request: r.Request},
 	}
 
@@ -217,7 +92,7 @@ func NewListAttachedIndicesPaginator(req ListAttachedIndicesRequest) ListAttache
 	return ListAttachedIndicesPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListAttachedIndicesInput
+				var inCpy *types.ListAttachedIndicesInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -237,14 +112,14 @@ type ListAttachedIndicesPaginator struct {
 	aws.Pager
 }
 
-func (p *ListAttachedIndicesPaginator) CurrentPage() *ListAttachedIndicesOutput {
-	return p.Pager.CurrentPage().(*ListAttachedIndicesOutput)
+func (p *ListAttachedIndicesPaginator) CurrentPage() *types.ListAttachedIndicesOutput {
+	return p.Pager.CurrentPage().(*types.ListAttachedIndicesOutput)
 }
 
 // ListAttachedIndicesResponse is the response type for the
 // ListAttachedIndices API operation.
 type ListAttachedIndicesResponse struct {
-	*ListAttachedIndicesOutput
+	*types.ListAttachedIndicesOutput
 
 	response *aws.Response
 }

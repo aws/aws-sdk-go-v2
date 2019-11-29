@@ -4,71 +4,10 @@ package datapipeline
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/datapipeline/types"
 )
-
-// Contains the parameters for ReportTaskProgress.
-type ReportTaskProgressInput struct {
-	_ struct{} `type:"structure"`
-
-	// Key-value pairs that define the properties of the ReportTaskProgressInput
-	// object.
-	Fields []Field `locationName:"fields" type:"list"`
-
-	// The ID of the task assigned to the task runner. This value is provided in
-	// the response for PollForTask.
-	//
-	// TaskId is a required field
-	TaskId *string `locationName:"taskId" min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s ReportTaskProgressInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ReportTaskProgressInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ReportTaskProgressInput"}
-
-	if s.TaskId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("TaskId"))
-	}
-	if s.TaskId != nil && len(*s.TaskId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("TaskId", 1))
-	}
-	if s.Fields != nil {
-		for i, v := range s.Fields {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Fields", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Contains the output of ReportTaskProgress.
-type ReportTaskProgressOutput struct {
-	_ struct{} `type:"structure"`
-
-	// If true, the calling task runner should cancel processing of the task. The
-	// task runner does not need to call SetTaskStatus for canceled tasks.
-	//
-	// Canceled is a required field
-	Canceled *bool `locationName:"canceled" type:"boolean" required:"true"`
-}
-
-// String returns the string representation
-func (s ReportTaskProgressOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opReportTaskProgress = "ReportTaskProgress"
 
@@ -96,7 +35,7 @@ const opReportTaskProgress = "ReportTaskProgress"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/datapipeline-2012-10-29/ReportTaskProgress
-func (c *Client) ReportTaskProgressRequest(input *ReportTaskProgressInput) ReportTaskProgressRequest {
+func (c *Client) ReportTaskProgressRequest(input *types.ReportTaskProgressInput) ReportTaskProgressRequest {
 	op := &aws.Operation{
 		Name:       opReportTaskProgress,
 		HTTPMethod: "POST",
@@ -104,10 +43,10 @@ func (c *Client) ReportTaskProgressRequest(input *ReportTaskProgressInput) Repor
 	}
 
 	if input == nil {
-		input = &ReportTaskProgressInput{}
+		input = &types.ReportTaskProgressInput{}
 	}
 
-	req := c.newRequest(op, input, &ReportTaskProgressOutput{})
+	req := c.newRequest(op, input, &types.ReportTaskProgressOutput{})
 	return ReportTaskProgressRequest{Request: req, Input: input, Copy: c.ReportTaskProgressRequest}
 }
 
@@ -115,8 +54,8 @@ func (c *Client) ReportTaskProgressRequest(input *ReportTaskProgressInput) Repor
 // ReportTaskProgress API operation.
 type ReportTaskProgressRequest struct {
 	*aws.Request
-	Input *ReportTaskProgressInput
-	Copy  func(*ReportTaskProgressInput) ReportTaskProgressRequest
+	Input *types.ReportTaskProgressInput
+	Copy  func(*types.ReportTaskProgressInput) ReportTaskProgressRequest
 }
 
 // Send marshals and sends the ReportTaskProgress API request.
@@ -128,7 +67,7 @@ func (r ReportTaskProgressRequest) Send(ctx context.Context) (*ReportTaskProgres
 	}
 
 	resp := &ReportTaskProgressResponse{
-		ReportTaskProgressOutput: r.Request.Data.(*ReportTaskProgressOutput),
+		ReportTaskProgressOutput: r.Request.Data.(*types.ReportTaskProgressOutput),
 		response:                 &aws.Response{Request: r.Request},
 	}
 
@@ -138,7 +77,7 @@ func (r ReportTaskProgressRequest) Send(ctx context.Context) (*ReportTaskProgres
 // ReportTaskProgressResponse is the response type for the
 // ReportTaskProgress API operation.
 type ReportTaskProgressResponse struct {
-	*ReportTaskProgressOutput
+	*types.ReportTaskProgressOutput
 
 	response *aws.Response
 }

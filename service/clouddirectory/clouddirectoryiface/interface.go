@@ -10,6 +10,7 @@ package clouddirectoryiface
 
 import (
 	"github.com/aws/aws-sdk-go-v2/service/clouddirectory"
+	"github.com/aws/aws-sdk-go-v2/service/clouddirectory/types"
 )
 
 // ClientAPI provides an interface to enable mocking the
@@ -43,7 +44,7 @@ import (
 //    type mockClientClient struct {
 //        clouddirectoryiface.ClientPI
 //    }
-//    func (m *mockClientClient) AddFacetToObject(input *clouddirectory.AddFacetToObjectInput) (*clouddirectory.AddFacetToObjectOutput, error) {
+//    func (m *mockClientClient) AddFacetToObject(input *types.AddFacetToObjectInput) (*types.AddFacetToObjectOutput, error) {
 //        // mock response/functionality
 //    }
 //
@@ -61,137 +62,137 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type ClientAPI interface {
-	AddFacetToObjectRequest(*clouddirectory.AddFacetToObjectInput) clouddirectory.AddFacetToObjectRequest
+	AddFacetToObjectRequest(*types.AddFacetToObjectInput) clouddirectory.AddFacetToObjectRequest
 
-	ApplySchemaRequest(*clouddirectory.ApplySchemaInput) clouddirectory.ApplySchemaRequest
+	ApplySchemaRequest(*types.ApplySchemaInput) clouddirectory.ApplySchemaRequest
 
-	AttachObjectRequest(*clouddirectory.AttachObjectInput) clouddirectory.AttachObjectRequest
+	AttachObjectRequest(*types.AttachObjectInput) clouddirectory.AttachObjectRequest
 
-	AttachPolicyRequest(*clouddirectory.AttachPolicyInput) clouddirectory.AttachPolicyRequest
+	AttachPolicyRequest(*types.AttachPolicyInput) clouddirectory.AttachPolicyRequest
 
-	AttachToIndexRequest(*clouddirectory.AttachToIndexInput) clouddirectory.AttachToIndexRequest
+	AttachToIndexRequest(*types.AttachToIndexInput) clouddirectory.AttachToIndexRequest
 
-	AttachTypedLinkRequest(*clouddirectory.AttachTypedLinkInput) clouddirectory.AttachTypedLinkRequest
+	AttachTypedLinkRequest(*types.AttachTypedLinkInput) clouddirectory.AttachTypedLinkRequest
 
-	BatchReadRequest(*clouddirectory.BatchReadInput) clouddirectory.BatchReadRequest
+	BatchReadRequest(*types.BatchReadInput) clouddirectory.BatchReadRequest
 
-	BatchWriteRequest(*clouddirectory.BatchWriteInput) clouddirectory.BatchWriteRequest
+	BatchWriteRequest(*types.BatchWriteInput) clouddirectory.BatchWriteRequest
 
-	CreateDirectoryRequest(*clouddirectory.CreateDirectoryInput) clouddirectory.CreateDirectoryRequest
+	CreateDirectoryRequest(*types.CreateDirectoryInput) clouddirectory.CreateDirectoryRequest
 
-	CreateFacetRequest(*clouddirectory.CreateFacetInput) clouddirectory.CreateFacetRequest
+	CreateFacetRequest(*types.CreateFacetInput) clouddirectory.CreateFacetRequest
 
-	CreateIndexRequest(*clouddirectory.CreateIndexInput) clouddirectory.CreateIndexRequest
+	CreateIndexRequest(*types.CreateIndexInput) clouddirectory.CreateIndexRequest
 
-	CreateObjectRequest(*clouddirectory.CreateObjectInput) clouddirectory.CreateObjectRequest
+	CreateObjectRequest(*types.CreateObjectInput) clouddirectory.CreateObjectRequest
 
-	CreateSchemaRequest(*clouddirectory.CreateSchemaInput) clouddirectory.CreateSchemaRequest
+	CreateSchemaRequest(*types.CreateSchemaInput) clouddirectory.CreateSchemaRequest
 
-	CreateTypedLinkFacetRequest(*clouddirectory.CreateTypedLinkFacetInput) clouddirectory.CreateTypedLinkFacetRequest
+	CreateTypedLinkFacetRequest(*types.CreateTypedLinkFacetInput) clouddirectory.CreateTypedLinkFacetRequest
 
-	DeleteDirectoryRequest(*clouddirectory.DeleteDirectoryInput) clouddirectory.DeleteDirectoryRequest
+	DeleteDirectoryRequest(*types.DeleteDirectoryInput) clouddirectory.DeleteDirectoryRequest
 
-	DeleteFacetRequest(*clouddirectory.DeleteFacetInput) clouddirectory.DeleteFacetRequest
+	DeleteFacetRequest(*types.DeleteFacetInput) clouddirectory.DeleteFacetRequest
 
-	DeleteObjectRequest(*clouddirectory.DeleteObjectInput) clouddirectory.DeleteObjectRequest
+	DeleteObjectRequest(*types.DeleteObjectInput) clouddirectory.DeleteObjectRequest
 
-	DeleteSchemaRequest(*clouddirectory.DeleteSchemaInput) clouddirectory.DeleteSchemaRequest
+	DeleteSchemaRequest(*types.DeleteSchemaInput) clouddirectory.DeleteSchemaRequest
 
-	DeleteTypedLinkFacetRequest(*clouddirectory.DeleteTypedLinkFacetInput) clouddirectory.DeleteTypedLinkFacetRequest
+	DeleteTypedLinkFacetRequest(*types.DeleteTypedLinkFacetInput) clouddirectory.DeleteTypedLinkFacetRequest
 
-	DetachFromIndexRequest(*clouddirectory.DetachFromIndexInput) clouddirectory.DetachFromIndexRequest
+	DetachFromIndexRequest(*types.DetachFromIndexInput) clouddirectory.DetachFromIndexRequest
 
-	DetachObjectRequest(*clouddirectory.DetachObjectInput) clouddirectory.DetachObjectRequest
+	DetachObjectRequest(*types.DetachObjectInput) clouddirectory.DetachObjectRequest
 
-	DetachPolicyRequest(*clouddirectory.DetachPolicyInput) clouddirectory.DetachPolicyRequest
+	DetachPolicyRequest(*types.DetachPolicyInput) clouddirectory.DetachPolicyRequest
 
-	DetachTypedLinkRequest(*clouddirectory.DetachTypedLinkInput) clouddirectory.DetachTypedLinkRequest
+	DetachTypedLinkRequest(*types.DetachTypedLinkInput) clouddirectory.DetachTypedLinkRequest
 
-	DisableDirectoryRequest(*clouddirectory.DisableDirectoryInput) clouddirectory.DisableDirectoryRequest
+	DisableDirectoryRequest(*types.DisableDirectoryInput) clouddirectory.DisableDirectoryRequest
 
-	EnableDirectoryRequest(*clouddirectory.EnableDirectoryInput) clouddirectory.EnableDirectoryRequest
+	EnableDirectoryRequest(*types.EnableDirectoryInput) clouddirectory.EnableDirectoryRequest
 
-	GetAppliedSchemaVersionRequest(*clouddirectory.GetAppliedSchemaVersionInput) clouddirectory.GetAppliedSchemaVersionRequest
+	GetAppliedSchemaVersionRequest(*types.GetAppliedSchemaVersionInput) clouddirectory.GetAppliedSchemaVersionRequest
 
-	GetDirectoryRequest(*clouddirectory.GetDirectoryInput) clouddirectory.GetDirectoryRequest
+	GetDirectoryRequest(*types.GetDirectoryInput) clouddirectory.GetDirectoryRequest
 
-	GetFacetRequest(*clouddirectory.GetFacetInput) clouddirectory.GetFacetRequest
+	GetFacetRequest(*types.GetFacetInput) clouddirectory.GetFacetRequest
 
-	GetLinkAttributesRequest(*clouddirectory.GetLinkAttributesInput) clouddirectory.GetLinkAttributesRequest
+	GetLinkAttributesRequest(*types.GetLinkAttributesInput) clouddirectory.GetLinkAttributesRequest
 
-	GetObjectAttributesRequest(*clouddirectory.GetObjectAttributesInput) clouddirectory.GetObjectAttributesRequest
+	GetObjectAttributesRequest(*types.GetObjectAttributesInput) clouddirectory.GetObjectAttributesRequest
 
-	GetObjectInformationRequest(*clouddirectory.GetObjectInformationInput) clouddirectory.GetObjectInformationRequest
+	GetObjectInformationRequest(*types.GetObjectInformationInput) clouddirectory.GetObjectInformationRequest
 
-	GetSchemaAsJsonRequest(*clouddirectory.GetSchemaAsJsonInput) clouddirectory.GetSchemaAsJsonRequest
+	GetSchemaAsJsonRequest(*types.GetSchemaAsJsonInput) clouddirectory.GetSchemaAsJsonRequest
 
-	GetTypedLinkFacetInformationRequest(*clouddirectory.GetTypedLinkFacetInformationInput) clouddirectory.GetTypedLinkFacetInformationRequest
+	GetTypedLinkFacetInformationRequest(*types.GetTypedLinkFacetInformationInput) clouddirectory.GetTypedLinkFacetInformationRequest
 
-	ListAppliedSchemaArnsRequest(*clouddirectory.ListAppliedSchemaArnsInput) clouddirectory.ListAppliedSchemaArnsRequest
+	ListAppliedSchemaArnsRequest(*types.ListAppliedSchemaArnsInput) clouddirectory.ListAppliedSchemaArnsRequest
 
-	ListAttachedIndicesRequest(*clouddirectory.ListAttachedIndicesInput) clouddirectory.ListAttachedIndicesRequest
+	ListAttachedIndicesRequest(*types.ListAttachedIndicesInput) clouddirectory.ListAttachedIndicesRequest
 
-	ListDevelopmentSchemaArnsRequest(*clouddirectory.ListDevelopmentSchemaArnsInput) clouddirectory.ListDevelopmentSchemaArnsRequest
+	ListDevelopmentSchemaArnsRequest(*types.ListDevelopmentSchemaArnsInput) clouddirectory.ListDevelopmentSchemaArnsRequest
 
-	ListDirectoriesRequest(*clouddirectory.ListDirectoriesInput) clouddirectory.ListDirectoriesRequest
+	ListDirectoriesRequest(*types.ListDirectoriesInput) clouddirectory.ListDirectoriesRequest
 
-	ListFacetAttributesRequest(*clouddirectory.ListFacetAttributesInput) clouddirectory.ListFacetAttributesRequest
+	ListFacetAttributesRequest(*types.ListFacetAttributesInput) clouddirectory.ListFacetAttributesRequest
 
-	ListFacetNamesRequest(*clouddirectory.ListFacetNamesInput) clouddirectory.ListFacetNamesRequest
+	ListFacetNamesRequest(*types.ListFacetNamesInput) clouddirectory.ListFacetNamesRequest
 
-	ListIncomingTypedLinksRequest(*clouddirectory.ListIncomingTypedLinksInput) clouddirectory.ListIncomingTypedLinksRequest
+	ListIncomingTypedLinksRequest(*types.ListIncomingTypedLinksInput) clouddirectory.ListIncomingTypedLinksRequest
 
-	ListIndexRequest(*clouddirectory.ListIndexInput) clouddirectory.ListIndexRequest
+	ListIndexRequest(*types.ListIndexInput) clouddirectory.ListIndexRequest
 
-	ListManagedSchemaArnsRequest(*clouddirectory.ListManagedSchemaArnsInput) clouddirectory.ListManagedSchemaArnsRequest
+	ListManagedSchemaArnsRequest(*types.ListManagedSchemaArnsInput) clouddirectory.ListManagedSchemaArnsRequest
 
-	ListObjectAttributesRequest(*clouddirectory.ListObjectAttributesInput) clouddirectory.ListObjectAttributesRequest
+	ListObjectAttributesRequest(*types.ListObjectAttributesInput) clouddirectory.ListObjectAttributesRequest
 
-	ListObjectChildrenRequest(*clouddirectory.ListObjectChildrenInput) clouddirectory.ListObjectChildrenRequest
+	ListObjectChildrenRequest(*types.ListObjectChildrenInput) clouddirectory.ListObjectChildrenRequest
 
-	ListObjectParentPathsRequest(*clouddirectory.ListObjectParentPathsInput) clouddirectory.ListObjectParentPathsRequest
+	ListObjectParentPathsRequest(*types.ListObjectParentPathsInput) clouddirectory.ListObjectParentPathsRequest
 
-	ListObjectParentsRequest(*clouddirectory.ListObjectParentsInput) clouddirectory.ListObjectParentsRequest
+	ListObjectParentsRequest(*types.ListObjectParentsInput) clouddirectory.ListObjectParentsRequest
 
-	ListObjectPoliciesRequest(*clouddirectory.ListObjectPoliciesInput) clouddirectory.ListObjectPoliciesRequest
+	ListObjectPoliciesRequest(*types.ListObjectPoliciesInput) clouddirectory.ListObjectPoliciesRequest
 
-	ListOutgoingTypedLinksRequest(*clouddirectory.ListOutgoingTypedLinksInput) clouddirectory.ListOutgoingTypedLinksRequest
+	ListOutgoingTypedLinksRequest(*types.ListOutgoingTypedLinksInput) clouddirectory.ListOutgoingTypedLinksRequest
 
-	ListPolicyAttachmentsRequest(*clouddirectory.ListPolicyAttachmentsInput) clouddirectory.ListPolicyAttachmentsRequest
+	ListPolicyAttachmentsRequest(*types.ListPolicyAttachmentsInput) clouddirectory.ListPolicyAttachmentsRequest
 
-	ListPublishedSchemaArnsRequest(*clouddirectory.ListPublishedSchemaArnsInput) clouddirectory.ListPublishedSchemaArnsRequest
+	ListPublishedSchemaArnsRequest(*types.ListPublishedSchemaArnsInput) clouddirectory.ListPublishedSchemaArnsRequest
 
-	ListTagsForResourceRequest(*clouddirectory.ListTagsForResourceInput) clouddirectory.ListTagsForResourceRequest
+	ListTagsForResourceRequest(*types.ListTagsForResourceInput) clouddirectory.ListTagsForResourceRequest
 
-	ListTypedLinkFacetAttributesRequest(*clouddirectory.ListTypedLinkFacetAttributesInput) clouddirectory.ListTypedLinkFacetAttributesRequest
+	ListTypedLinkFacetAttributesRequest(*types.ListTypedLinkFacetAttributesInput) clouddirectory.ListTypedLinkFacetAttributesRequest
 
-	ListTypedLinkFacetNamesRequest(*clouddirectory.ListTypedLinkFacetNamesInput) clouddirectory.ListTypedLinkFacetNamesRequest
+	ListTypedLinkFacetNamesRequest(*types.ListTypedLinkFacetNamesInput) clouddirectory.ListTypedLinkFacetNamesRequest
 
-	LookupPolicyRequest(*clouddirectory.LookupPolicyInput) clouddirectory.LookupPolicyRequest
+	LookupPolicyRequest(*types.LookupPolicyInput) clouddirectory.LookupPolicyRequest
 
-	PublishSchemaRequest(*clouddirectory.PublishSchemaInput) clouddirectory.PublishSchemaRequest
+	PublishSchemaRequest(*types.PublishSchemaInput) clouddirectory.PublishSchemaRequest
 
-	PutSchemaFromJsonRequest(*clouddirectory.PutSchemaFromJsonInput) clouddirectory.PutSchemaFromJsonRequest
+	PutSchemaFromJsonRequest(*types.PutSchemaFromJsonInput) clouddirectory.PutSchemaFromJsonRequest
 
-	RemoveFacetFromObjectRequest(*clouddirectory.RemoveFacetFromObjectInput) clouddirectory.RemoveFacetFromObjectRequest
+	RemoveFacetFromObjectRequest(*types.RemoveFacetFromObjectInput) clouddirectory.RemoveFacetFromObjectRequest
 
-	TagResourceRequest(*clouddirectory.TagResourceInput) clouddirectory.TagResourceRequest
+	TagResourceRequest(*types.TagResourceInput) clouddirectory.TagResourceRequest
 
-	UntagResourceRequest(*clouddirectory.UntagResourceInput) clouddirectory.UntagResourceRequest
+	UntagResourceRequest(*types.UntagResourceInput) clouddirectory.UntagResourceRequest
 
-	UpdateFacetRequest(*clouddirectory.UpdateFacetInput) clouddirectory.UpdateFacetRequest
+	UpdateFacetRequest(*types.UpdateFacetInput) clouddirectory.UpdateFacetRequest
 
-	UpdateLinkAttributesRequest(*clouddirectory.UpdateLinkAttributesInput) clouddirectory.UpdateLinkAttributesRequest
+	UpdateLinkAttributesRequest(*types.UpdateLinkAttributesInput) clouddirectory.UpdateLinkAttributesRequest
 
-	UpdateObjectAttributesRequest(*clouddirectory.UpdateObjectAttributesInput) clouddirectory.UpdateObjectAttributesRequest
+	UpdateObjectAttributesRequest(*types.UpdateObjectAttributesInput) clouddirectory.UpdateObjectAttributesRequest
 
-	UpdateSchemaRequest(*clouddirectory.UpdateSchemaInput) clouddirectory.UpdateSchemaRequest
+	UpdateSchemaRequest(*types.UpdateSchemaInput) clouddirectory.UpdateSchemaRequest
 
-	UpdateTypedLinkFacetRequest(*clouddirectory.UpdateTypedLinkFacetInput) clouddirectory.UpdateTypedLinkFacetRequest
+	UpdateTypedLinkFacetRequest(*types.UpdateTypedLinkFacetInput) clouddirectory.UpdateTypedLinkFacetRequest
 
-	UpgradeAppliedSchemaRequest(*clouddirectory.UpgradeAppliedSchemaInput) clouddirectory.UpgradeAppliedSchemaRequest
+	UpgradeAppliedSchemaRequest(*types.UpgradeAppliedSchemaInput) clouddirectory.UpgradeAppliedSchemaRequest
 
-	UpgradePublishedSchemaRequest(*clouddirectory.UpgradePublishedSchemaInput) clouddirectory.UpgradePublishedSchemaRequest
+	UpgradePublishedSchemaRequest(*types.UpgradePublishedSchemaInput) clouddirectory.UpgradePublishedSchemaRequest
 }
 
 var _ ClientAPI = (*clouddirectory.Client)(nil)

@@ -6,59 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/types"
 )
-
-type ListAcceptedPortfolioSharesInput struct {
-	_ struct{} `type:"structure"`
-
-	// The language code.
-	//
-	//    * en - English (default)
-	//
-	//    * jp - Japanese
-	//
-	//    * zh - Chinese
-	AcceptLanguage *string `type:"string"`
-
-	// The maximum number of items to return with this call.
-	PageSize *int64 `type:"integer"`
-
-	// The page token for the next set of results. To retrieve the first set of
-	// results, use null.
-	PageToken *string `type:"string"`
-
-	// The type of shared portfolios to list. The default is to list imported portfolios.
-	//
-	//    * AWS_ORGANIZATIONS - List portfolios shared by the master account of
-	//    your organization
-	//
-	//    * AWS_SERVICECATALOG - List default portfolios
-	//
-	//    * IMPORTED - List imported portfolios
-	PortfolioShareType PortfolioShareType `type:"string" enum:"true"`
-}
-
-// String returns the string representation
-func (s ListAcceptedPortfolioSharesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type ListAcceptedPortfolioSharesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The page token to use to retrieve the next set of results. If there are no
-	// additional results, this value is null.
-	NextPageToken *string `type:"string"`
-
-	// Information about the portfolios.
-	PortfolioDetails []PortfolioDetail `type:"list"`
-}
-
-// String returns the string representation
-func (s ListAcceptedPortfolioSharesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListAcceptedPortfolioShares = "ListAcceptedPortfolioShares"
 
@@ -75,7 +24,7 @@ const opListAcceptedPortfolioShares = "ListAcceptedPortfolioShares"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ListAcceptedPortfolioShares
-func (c *Client) ListAcceptedPortfolioSharesRequest(input *ListAcceptedPortfolioSharesInput) ListAcceptedPortfolioSharesRequest {
+func (c *Client) ListAcceptedPortfolioSharesRequest(input *types.ListAcceptedPortfolioSharesInput) ListAcceptedPortfolioSharesRequest {
 	op := &aws.Operation{
 		Name:       opListAcceptedPortfolioShares,
 		HTTPMethod: "POST",
@@ -89,10 +38,10 @@ func (c *Client) ListAcceptedPortfolioSharesRequest(input *ListAcceptedPortfolio
 	}
 
 	if input == nil {
-		input = &ListAcceptedPortfolioSharesInput{}
+		input = &types.ListAcceptedPortfolioSharesInput{}
 	}
 
-	req := c.newRequest(op, input, &ListAcceptedPortfolioSharesOutput{})
+	req := c.newRequest(op, input, &types.ListAcceptedPortfolioSharesOutput{})
 	return ListAcceptedPortfolioSharesRequest{Request: req, Input: input, Copy: c.ListAcceptedPortfolioSharesRequest}
 }
 
@@ -100,8 +49,8 @@ func (c *Client) ListAcceptedPortfolioSharesRequest(input *ListAcceptedPortfolio
 // ListAcceptedPortfolioShares API operation.
 type ListAcceptedPortfolioSharesRequest struct {
 	*aws.Request
-	Input *ListAcceptedPortfolioSharesInput
-	Copy  func(*ListAcceptedPortfolioSharesInput) ListAcceptedPortfolioSharesRequest
+	Input *types.ListAcceptedPortfolioSharesInput
+	Copy  func(*types.ListAcceptedPortfolioSharesInput) ListAcceptedPortfolioSharesRequest
 }
 
 // Send marshals and sends the ListAcceptedPortfolioShares API request.
@@ -113,7 +62,7 @@ func (r ListAcceptedPortfolioSharesRequest) Send(ctx context.Context) (*ListAcce
 	}
 
 	resp := &ListAcceptedPortfolioSharesResponse{
-		ListAcceptedPortfolioSharesOutput: r.Request.Data.(*ListAcceptedPortfolioSharesOutput),
+		ListAcceptedPortfolioSharesOutput: r.Request.Data.(*types.ListAcceptedPortfolioSharesOutput),
 		response:                          &aws.Response{Request: r.Request},
 	}
 
@@ -143,7 +92,7 @@ func NewListAcceptedPortfolioSharesPaginator(req ListAcceptedPortfolioSharesRequ
 	return ListAcceptedPortfolioSharesPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListAcceptedPortfolioSharesInput
+				var inCpy *types.ListAcceptedPortfolioSharesInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -163,14 +112,14 @@ type ListAcceptedPortfolioSharesPaginator struct {
 	aws.Pager
 }
 
-func (p *ListAcceptedPortfolioSharesPaginator) CurrentPage() *ListAcceptedPortfolioSharesOutput {
-	return p.Pager.CurrentPage().(*ListAcceptedPortfolioSharesOutput)
+func (p *ListAcceptedPortfolioSharesPaginator) CurrentPage() *types.ListAcceptedPortfolioSharesOutput {
+	return p.Pager.CurrentPage().(*types.ListAcceptedPortfolioSharesOutput)
 }
 
 // ListAcceptedPortfolioSharesResponse is the response type for the
 // ListAcceptedPortfolioShares API operation.
 type ListAcceptedPortfolioSharesResponse struct {
-	*ListAcceptedPortfolioSharesOutput
+	*types.ListAcceptedPortfolioSharesOutput
 
 	response *aws.Response
 }

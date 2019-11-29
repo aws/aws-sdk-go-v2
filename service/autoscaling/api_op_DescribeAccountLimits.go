@@ -6,40 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/autoscaling/types"
 )
-
-type DescribeAccountLimitsInput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DescribeAccountLimitsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type DescribeAccountLimitsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The maximum number of groups allowed for your AWS account. The default limit
-	// is 200 per AWS Region.
-	MaxNumberOfAutoScalingGroups *int64 `type:"integer"`
-
-	// The maximum number of launch configurations allowed for your AWS account.
-	// The default limit is 200 per AWS Region.
-	MaxNumberOfLaunchConfigurations *int64 `type:"integer"`
-
-	// The current number of groups for your AWS account.
-	NumberOfAutoScalingGroups *int64 `type:"integer"`
-
-	// The current number of launch configurations for your AWS account.
-	NumberOfLaunchConfigurations *int64 `type:"integer"`
-}
-
-// String returns the string representation
-func (s DescribeAccountLimitsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeAccountLimits = "DescribeAccountLimits"
 
@@ -61,7 +29,7 @@ const opDescribeAccountLimits = "DescribeAccountLimits"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DescribeAccountLimits
-func (c *Client) DescribeAccountLimitsRequest(input *DescribeAccountLimitsInput) DescribeAccountLimitsRequest {
+func (c *Client) DescribeAccountLimitsRequest(input *types.DescribeAccountLimitsInput) DescribeAccountLimitsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeAccountLimits,
 		HTTPMethod: "POST",
@@ -69,10 +37,10 @@ func (c *Client) DescribeAccountLimitsRequest(input *DescribeAccountLimitsInput)
 	}
 
 	if input == nil {
-		input = &DescribeAccountLimitsInput{}
+		input = &types.DescribeAccountLimitsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeAccountLimitsOutput{})
+	req := c.newRequest(op, input, &types.DescribeAccountLimitsOutput{})
 	return DescribeAccountLimitsRequest{Request: req, Input: input, Copy: c.DescribeAccountLimitsRequest}
 }
 
@@ -80,8 +48,8 @@ func (c *Client) DescribeAccountLimitsRequest(input *DescribeAccountLimitsInput)
 // DescribeAccountLimits API operation.
 type DescribeAccountLimitsRequest struct {
 	*aws.Request
-	Input *DescribeAccountLimitsInput
-	Copy  func(*DescribeAccountLimitsInput) DescribeAccountLimitsRequest
+	Input *types.DescribeAccountLimitsInput
+	Copy  func(*types.DescribeAccountLimitsInput) DescribeAccountLimitsRequest
 }
 
 // Send marshals and sends the DescribeAccountLimits API request.
@@ -93,7 +61,7 @@ func (r DescribeAccountLimitsRequest) Send(ctx context.Context) (*DescribeAccoun
 	}
 
 	resp := &DescribeAccountLimitsResponse{
-		DescribeAccountLimitsOutput: r.Request.Data.(*DescribeAccountLimitsOutput),
+		DescribeAccountLimitsOutput: r.Request.Data.(*types.DescribeAccountLimitsOutput),
 		response:                    &aws.Response{Request: r.Request},
 	}
 
@@ -103,7 +71,7 @@ func (r DescribeAccountLimitsRequest) Send(ctx context.Context) (*DescribeAccoun
 // DescribeAccountLimitsResponse is the response type for the
 // DescribeAccountLimits API operation.
 type DescribeAccountLimitsResponse struct {
-	*DescribeAccountLimitsOutput
+	*types.DescribeAccountLimitsOutput
 
 	response *aws.Response
 }

@@ -6,59 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/elasticloadbalancing/types"
 )
-
-// Contains the parameters for DeregisterInstancesFromLoadBalancer.
-type DeregisterInstancesFromLoadBalancerInput struct {
-	_ struct{} `type:"structure"`
-
-	// The IDs of the instances.
-	//
-	// Instances is a required field
-	Instances []Instance `type:"list" required:"true"`
-
-	// The name of the load balancer.
-	//
-	// LoadBalancerName is a required field
-	LoadBalancerName *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeregisterInstancesFromLoadBalancerInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeregisterInstancesFromLoadBalancerInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeregisterInstancesFromLoadBalancerInput"}
-
-	if s.Instances == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Instances"))
-	}
-
-	if s.LoadBalancerName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("LoadBalancerName"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Contains the output of DeregisterInstancesFromLoadBalancer.
-type DeregisterInstancesFromLoadBalancerOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The remaining instances registered with the load balancer.
-	Instances []Instance `type:"list"`
-}
-
-// String returns the string representation
-func (s DeregisterInstancesFromLoadBalancerOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeregisterInstancesFromLoadBalancer = "DeregisterInstancesFromLoadBalancer"
 
@@ -83,7 +32,7 @@ const opDeregisterInstancesFromLoadBalancer = "DeregisterInstancesFromLoadBalanc
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/DeregisterInstancesFromLoadBalancer
-func (c *Client) DeregisterInstancesFromLoadBalancerRequest(input *DeregisterInstancesFromLoadBalancerInput) DeregisterInstancesFromLoadBalancerRequest {
+func (c *Client) DeregisterInstancesFromLoadBalancerRequest(input *types.DeregisterInstancesFromLoadBalancerInput) DeregisterInstancesFromLoadBalancerRequest {
 	op := &aws.Operation{
 		Name:       opDeregisterInstancesFromLoadBalancer,
 		HTTPMethod: "POST",
@@ -91,10 +40,10 @@ func (c *Client) DeregisterInstancesFromLoadBalancerRequest(input *DeregisterIns
 	}
 
 	if input == nil {
-		input = &DeregisterInstancesFromLoadBalancerInput{}
+		input = &types.DeregisterInstancesFromLoadBalancerInput{}
 	}
 
-	req := c.newRequest(op, input, &DeregisterInstancesFromLoadBalancerOutput{})
+	req := c.newRequest(op, input, &types.DeregisterInstancesFromLoadBalancerOutput{})
 	return DeregisterInstancesFromLoadBalancerRequest{Request: req, Input: input, Copy: c.DeregisterInstancesFromLoadBalancerRequest}
 }
 
@@ -102,8 +51,8 @@ func (c *Client) DeregisterInstancesFromLoadBalancerRequest(input *DeregisterIns
 // DeregisterInstancesFromLoadBalancer API operation.
 type DeregisterInstancesFromLoadBalancerRequest struct {
 	*aws.Request
-	Input *DeregisterInstancesFromLoadBalancerInput
-	Copy  func(*DeregisterInstancesFromLoadBalancerInput) DeregisterInstancesFromLoadBalancerRequest
+	Input *types.DeregisterInstancesFromLoadBalancerInput
+	Copy  func(*types.DeregisterInstancesFromLoadBalancerInput) DeregisterInstancesFromLoadBalancerRequest
 }
 
 // Send marshals and sends the DeregisterInstancesFromLoadBalancer API request.
@@ -115,7 +64,7 @@ func (r DeregisterInstancesFromLoadBalancerRequest) Send(ctx context.Context) (*
 	}
 
 	resp := &DeregisterInstancesFromLoadBalancerResponse{
-		DeregisterInstancesFromLoadBalancerOutput: r.Request.Data.(*DeregisterInstancesFromLoadBalancerOutput),
+		DeregisterInstancesFromLoadBalancerOutput: r.Request.Data.(*types.DeregisterInstancesFromLoadBalancerOutput),
 		response: &aws.Response{Request: r.Request},
 	}
 
@@ -125,7 +74,7 @@ func (r DeregisterInstancesFromLoadBalancerRequest) Send(ctx context.Context) (*
 // DeregisterInstancesFromLoadBalancerResponse is the response type for the
 // DeregisterInstancesFromLoadBalancer API operation.
 type DeregisterInstancesFromLoadBalancerResponse struct {
-	*DeregisterInstancesFromLoadBalancerOutput
+	*types.DeregisterInstancesFromLoadBalancerOutput
 
 	response *aws.Response
 }

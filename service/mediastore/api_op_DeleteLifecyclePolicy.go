@@ -6,48 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/mediastore/types"
 )
-
-type DeleteLifecyclePolicyInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the container that holds the object lifecycle policy.
-	//
-	// ContainerName is a required field
-	ContainerName *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteLifecyclePolicyInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteLifecyclePolicyInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteLifecyclePolicyInput"}
-
-	if s.ContainerName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ContainerName"))
-	}
-	if s.ContainerName != nil && len(*s.ContainerName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ContainerName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteLifecyclePolicyOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteLifecyclePolicyOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteLifecyclePolicy = "DeleteLifecyclePolicy"
 
@@ -65,7 +25,7 @@ const opDeleteLifecyclePolicy = "DeleteLifecyclePolicy"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mediastore-2017-09-01/DeleteLifecyclePolicy
-func (c *Client) DeleteLifecyclePolicyRequest(input *DeleteLifecyclePolicyInput) DeleteLifecyclePolicyRequest {
+func (c *Client) DeleteLifecyclePolicyRequest(input *types.DeleteLifecyclePolicyInput) DeleteLifecyclePolicyRequest {
 	op := &aws.Operation{
 		Name:       opDeleteLifecyclePolicy,
 		HTTPMethod: "POST",
@@ -73,10 +33,10 @@ func (c *Client) DeleteLifecyclePolicyRequest(input *DeleteLifecyclePolicyInput)
 	}
 
 	if input == nil {
-		input = &DeleteLifecyclePolicyInput{}
+		input = &types.DeleteLifecyclePolicyInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteLifecyclePolicyOutput{})
+	req := c.newRequest(op, input, &types.DeleteLifecyclePolicyOutput{})
 	return DeleteLifecyclePolicyRequest{Request: req, Input: input, Copy: c.DeleteLifecyclePolicyRequest}
 }
 
@@ -84,8 +44,8 @@ func (c *Client) DeleteLifecyclePolicyRequest(input *DeleteLifecyclePolicyInput)
 // DeleteLifecyclePolicy API operation.
 type DeleteLifecyclePolicyRequest struct {
 	*aws.Request
-	Input *DeleteLifecyclePolicyInput
-	Copy  func(*DeleteLifecyclePolicyInput) DeleteLifecyclePolicyRequest
+	Input *types.DeleteLifecyclePolicyInput
+	Copy  func(*types.DeleteLifecyclePolicyInput) DeleteLifecyclePolicyRequest
 }
 
 // Send marshals and sends the DeleteLifecyclePolicy API request.
@@ -97,7 +57,7 @@ func (r DeleteLifecyclePolicyRequest) Send(ctx context.Context) (*DeleteLifecycl
 	}
 
 	resp := &DeleteLifecyclePolicyResponse{
-		DeleteLifecyclePolicyOutput: r.Request.Data.(*DeleteLifecyclePolicyOutput),
+		DeleteLifecyclePolicyOutput: r.Request.Data.(*types.DeleteLifecyclePolicyOutput),
 		response:                    &aws.Response{Request: r.Request},
 	}
 
@@ -107,7 +67,7 @@ func (r DeleteLifecyclePolicyRequest) Send(ctx context.Context) (*DeleteLifecycl
 // DeleteLifecyclePolicyResponse is the response type for the
 // DeleteLifecyclePolicy API operation.
 type DeleteLifecyclePolicyResponse struct {
-	*DeleteLifecyclePolicyOutput
+	*types.DeleteLifecyclePolicyOutput
 
 	response *aws.Response
 }

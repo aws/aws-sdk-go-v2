@@ -6,65 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/autoscaling/types"
 )
-
-type DescribeLoadBalancersInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the Auto Scaling group.
-	//
-	// AutoScalingGroupName is a required field
-	AutoScalingGroupName *string `min:"1" type:"string" required:"true"`
-
-	// The maximum number of items to return with this call. The default value is
-	// 100 and the maximum value is 100.
-	MaxRecords *int64 `type:"integer"`
-
-	// The token for the next set of items to return. (You received this token from
-	// a previous call.)
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeLoadBalancersInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeLoadBalancersInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeLoadBalancersInput"}
-
-	if s.AutoScalingGroupName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("AutoScalingGroupName"))
-	}
-	if s.AutoScalingGroupName != nil && len(*s.AutoScalingGroupName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("AutoScalingGroupName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribeLoadBalancersOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The load balancers.
-	LoadBalancers []LoadBalancerState `type:"list"`
-
-	// A string that indicates that the response contains more items than can be
-	// returned in a single response. To receive additional items, specify this
-	// string for the NextToken value when requesting the next set of items. This
-	// value is null when there are no more items to return.
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeLoadBalancersOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeLoadBalancers = "DescribeLoadBalancers"
 
@@ -85,7 +28,7 @@ const opDescribeLoadBalancers = "DescribeLoadBalancers"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DescribeLoadBalancers
-func (c *Client) DescribeLoadBalancersRequest(input *DescribeLoadBalancersInput) DescribeLoadBalancersRequest {
+func (c *Client) DescribeLoadBalancersRequest(input *types.DescribeLoadBalancersInput) DescribeLoadBalancersRequest {
 	op := &aws.Operation{
 		Name:       opDescribeLoadBalancers,
 		HTTPMethod: "POST",
@@ -93,10 +36,10 @@ func (c *Client) DescribeLoadBalancersRequest(input *DescribeLoadBalancersInput)
 	}
 
 	if input == nil {
-		input = &DescribeLoadBalancersInput{}
+		input = &types.DescribeLoadBalancersInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeLoadBalancersOutput{})
+	req := c.newRequest(op, input, &types.DescribeLoadBalancersOutput{})
 	return DescribeLoadBalancersRequest{Request: req, Input: input, Copy: c.DescribeLoadBalancersRequest}
 }
 
@@ -104,8 +47,8 @@ func (c *Client) DescribeLoadBalancersRequest(input *DescribeLoadBalancersInput)
 // DescribeLoadBalancers API operation.
 type DescribeLoadBalancersRequest struct {
 	*aws.Request
-	Input *DescribeLoadBalancersInput
-	Copy  func(*DescribeLoadBalancersInput) DescribeLoadBalancersRequest
+	Input *types.DescribeLoadBalancersInput
+	Copy  func(*types.DescribeLoadBalancersInput) DescribeLoadBalancersRequest
 }
 
 // Send marshals and sends the DescribeLoadBalancers API request.
@@ -117,7 +60,7 @@ func (r DescribeLoadBalancersRequest) Send(ctx context.Context) (*DescribeLoadBa
 	}
 
 	resp := &DescribeLoadBalancersResponse{
-		DescribeLoadBalancersOutput: r.Request.Data.(*DescribeLoadBalancersOutput),
+		DescribeLoadBalancersOutput: r.Request.Data.(*types.DescribeLoadBalancersOutput),
 		response:                    &aws.Response{Request: r.Request},
 	}
 
@@ -127,7 +70,7 @@ func (r DescribeLoadBalancersRequest) Send(ctx context.Context) (*DescribeLoadBa
 // DescribeLoadBalancersResponse is the response type for the
 // DescribeLoadBalancers API operation.
 type DescribeLoadBalancersResponse struct {
-	*DescribeLoadBalancersOutput
+	*types.DescribeLoadBalancersOutput
 
 	response *aws.Response
 }

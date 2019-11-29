@@ -6,64 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ecs/types"
 )
-
-type DescribeContainerInstancesInput struct {
-	_ struct{} `type:"structure"`
-
-	// The short name or full Amazon Resource Name (ARN) of the cluster that hosts
-	// the container instances to describe. If you do not specify a cluster, the
-	// default cluster is assumed. This parameter is required if the container instance
-	// or container instances you are describing were launched in any cluster other
-	// than the default cluster.
-	Cluster *string `locationName:"cluster" type:"string"`
-
-	// A list of up to 100 container instance IDs or full Amazon Resource Name (ARN)
-	// entries.
-	//
-	// ContainerInstances is a required field
-	ContainerInstances []string `locationName:"containerInstances" type:"list" required:"true"`
-
-	// Specifies whether you want to see the resource tags for the container instance.
-	// If TAGS is specified, the tags are included in the response. If this field
-	// is omitted, tags are not included in the response.
-	Include []ContainerInstanceField `locationName:"include" type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeContainerInstancesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeContainerInstancesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeContainerInstancesInput"}
-
-	if s.ContainerInstances == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ContainerInstances"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribeContainerInstancesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The list of container instances.
-	ContainerInstances []ContainerInstance `locationName:"containerInstances" type:"list"`
-
-	// Any failures associated with the call.
-	Failures []Failure `locationName:"failures" type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeContainerInstancesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeContainerInstances = "DescribeContainerInstances"
 
@@ -81,7 +25,7 @@ const opDescribeContainerInstances = "DescribeContainerInstances"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DescribeContainerInstances
-func (c *Client) DescribeContainerInstancesRequest(input *DescribeContainerInstancesInput) DescribeContainerInstancesRequest {
+func (c *Client) DescribeContainerInstancesRequest(input *types.DescribeContainerInstancesInput) DescribeContainerInstancesRequest {
 	op := &aws.Operation{
 		Name:       opDescribeContainerInstances,
 		HTTPMethod: "POST",
@@ -89,10 +33,10 @@ func (c *Client) DescribeContainerInstancesRequest(input *DescribeContainerInsta
 	}
 
 	if input == nil {
-		input = &DescribeContainerInstancesInput{}
+		input = &types.DescribeContainerInstancesInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeContainerInstancesOutput{})
+	req := c.newRequest(op, input, &types.DescribeContainerInstancesOutput{})
 	return DescribeContainerInstancesRequest{Request: req, Input: input, Copy: c.DescribeContainerInstancesRequest}
 }
 
@@ -100,8 +44,8 @@ func (c *Client) DescribeContainerInstancesRequest(input *DescribeContainerInsta
 // DescribeContainerInstances API operation.
 type DescribeContainerInstancesRequest struct {
 	*aws.Request
-	Input *DescribeContainerInstancesInput
-	Copy  func(*DescribeContainerInstancesInput) DescribeContainerInstancesRequest
+	Input *types.DescribeContainerInstancesInput
+	Copy  func(*types.DescribeContainerInstancesInput) DescribeContainerInstancesRequest
 }
 
 // Send marshals and sends the DescribeContainerInstances API request.
@@ -113,7 +57,7 @@ func (r DescribeContainerInstancesRequest) Send(ctx context.Context) (*DescribeC
 	}
 
 	resp := &DescribeContainerInstancesResponse{
-		DescribeContainerInstancesOutput: r.Request.Data.(*DescribeContainerInstancesOutput),
+		DescribeContainerInstancesOutput: r.Request.Data.(*types.DescribeContainerInstancesOutput),
 		response:                         &aws.Response{Request: r.Request},
 	}
 
@@ -123,7 +67,7 @@ func (r DescribeContainerInstancesRequest) Send(ctx context.Context) (*DescribeC
 // DescribeContainerInstancesResponse is the response type for the
 // DescribeContainerInstances API operation.
 type DescribeContainerInstancesResponse struct {
-	*DescribeContainerInstancesOutput
+	*types.DescribeContainerInstancesOutput
 
 	response *aws.Response
 }

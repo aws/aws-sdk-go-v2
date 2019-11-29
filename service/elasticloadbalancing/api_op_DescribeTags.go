@@ -6,53 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/elasticloadbalancing/types"
 )
-
-// Contains the parameters for DescribeTags.
-type DescribeTagsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The names of the load balancers.
-	//
-	// LoadBalancerNames is a required field
-	LoadBalancerNames []string `min:"1" type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeTagsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeTagsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeTagsInput"}
-
-	if s.LoadBalancerNames == nil {
-		invalidParams.Add(aws.NewErrParamRequired("LoadBalancerNames"))
-	}
-	if s.LoadBalancerNames != nil && len(s.LoadBalancerNames) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("LoadBalancerNames", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Contains the output for DescribeTags.
-type DescribeTagsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Information about the tags.
-	TagDescriptions []TagDescription `type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeTagsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeTags = "DescribeTags"
 
@@ -69,7 +24,7 @@ const opDescribeTags = "DescribeTags"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/DescribeTags
-func (c *Client) DescribeTagsRequest(input *DescribeTagsInput) DescribeTagsRequest {
+func (c *Client) DescribeTagsRequest(input *types.DescribeTagsInput) DescribeTagsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeTags,
 		HTTPMethod: "POST",
@@ -77,10 +32,10 @@ func (c *Client) DescribeTagsRequest(input *DescribeTagsInput) DescribeTagsReque
 	}
 
 	if input == nil {
-		input = &DescribeTagsInput{}
+		input = &types.DescribeTagsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeTagsOutput{})
+	req := c.newRequest(op, input, &types.DescribeTagsOutput{})
 	return DescribeTagsRequest{Request: req, Input: input, Copy: c.DescribeTagsRequest}
 }
 
@@ -88,8 +43,8 @@ func (c *Client) DescribeTagsRequest(input *DescribeTagsInput) DescribeTagsReque
 // DescribeTags API operation.
 type DescribeTagsRequest struct {
 	*aws.Request
-	Input *DescribeTagsInput
-	Copy  func(*DescribeTagsInput) DescribeTagsRequest
+	Input *types.DescribeTagsInput
+	Copy  func(*types.DescribeTagsInput) DescribeTagsRequest
 }
 
 // Send marshals and sends the DescribeTags API request.
@@ -101,7 +56,7 @@ func (r DescribeTagsRequest) Send(ctx context.Context) (*DescribeTagsResponse, e
 	}
 
 	resp := &DescribeTagsResponse{
-		DescribeTagsOutput: r.Request.Data.(*DescribeTagsOutput),
+		DescribeTagsOutput: r.Request.Data.(*types.DescribeTagsOutput),
 		response:           &aws.Response{Request: r.Request},
 	}
 
@@ -111,7 +66,7 @@ func (r DescribeTagsRequest) Send(ctx context.Context) (*DescribeTagsResponse, e
 // DescribeTagsResponse is the response type for the
 // DescribeTags API operation.
 type DescribeTagsResponse struct {
-	*DescribeTagsOutput
+	*types.DescribeTagsOutput
 
 	response *aws.Response
 }

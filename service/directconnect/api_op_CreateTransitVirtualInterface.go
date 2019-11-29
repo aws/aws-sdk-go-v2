@@ -6,62 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/directconnect/types"
 )
-
-type CreateTransitVirtualInterfaceInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the connection.
-	//
-	// ConnectionId is a required field
-	ConnectionId *string `locationName:"connectionId" type:"string" required:"true"`
-
-	// Information about the transit virtual interface.
-	//
-	// NewTransitVirtualInterface is a required field
-	NewTransitVirtualInterface *NewTransitVirtualInterface `locationName:"newTransitVirtualInterface" type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s CreateTransitVirtualInterfaceInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateTransitVirtualInterfaceInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateTransitVirtualInterfaceInput"}
-
-	if s.ConnectionId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ConnectionId"))
-	}
-
-	if s.NewTransitVirtualInterface == nil {
-		invalidParams.Add(aws.NewErrParamRequired("NewTransitVirtualInterface"))
-	}
-	if s.NewTransitVirtualInterface != nil {
-		if err := s.NewTransitVirtualInterface.Validate(); err != nil {
-			invalidParams.AddNested("NewTransitVirtualInterface", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type CreateTransitVirtualInterfaceOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Information about a virtual interface.
-	VirtualInterface *VirtualInterface `locationName:"virtualInterface" type:"structure"`
-}
-
-// String returns the string representation
-func (s CreateTransitVirtualInterfaceOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCreateTransitVirtualInterface = "CreateTransitVirtualInterface"
 
@@ -87,7 +33,7 @@ const opCreateTransitVirtualInterface = "CreateTransitVirtualInterface"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/CreateTransitVirtualInterface
-func (c *Client) CreateTransitVirtualInterfaceRequest(input *CreateTransitVirtualInterfaceInput) CreateTransitVirtualInterfaceRequest {
+func (c *Client) CreateTransitVirtualInterfaceRequest(input *types.CreateTransitVirtualInterfaceInput) CreateTransitVirtualInterfaceRequest {
 	op := &aws.Operation{
 		Name:       opCreateTransitVirtualInterface,
 		HTTPMethod: "POST",
@@ -95,10 +41,10 @@ func (c *Client) CreateTransitVirtualInterfaceRequest(input *CreateTransitVirtua
 	}
 
 	if input == nil {
-		input = &CreateTransitVirtualInterfaceInput{}
+		input = &types.CreateTransitVirtualInterfaceInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateTransitVirtualInterfaceOutput{})
+	req := c.newRequest(op, input, &types.CreateTransitVirtualInterfaceOutput{})
 	return CreateTransitVirtualInterfaceRequest{Request: req, Input: input, Copy: c.CreateTransitVirtualInterfaceRequest}
 }
 
@@ -106,8 +52,8 @@ func (c *Client) CreateTransitVirtualInterfaceRequest(input *CreateTransitVirtua
 // CreateTransitVirtualInterface API operation.
 type CreateTransitVirtualInterfaceRequest struct {
 	*aws.Request
-	Input *CreateTransitVirtualInterfaceInput
-	Copy  func(*CreateTransitVirtualInterfaceInput) CreateTransitVirtualInterfaceRequest
+	Input *types.CreateTransitVirtualInterfaceInput
+	Copy  func(*types.CreateTransitVirtualInterfaceInput) CreateTransitVirtualInterfaceRequest
 }
 
 // Send marshals and sends the CreateTransitVirtualInterface API request.
@@ -119,7 +65,7 @@ func (r CreateTransitVirtualInterfaceRequest) Send(ctx context.Context) (*Create
 	}
 
 	resp := &CreateTransitVirtualInterfaceResponse{
-		CreateTransitVirtualInterfaceOutput: r.Request.Data.(*CreateTransitVirtualInterfaceOutput),
+		CreateTransitVirtualInterfaceOutput: r.Request.Data.(*types.CreateTransitVirtualInterfaceOutput),
 		response:                            &aws.Response{Request: r.Request},
 	}
 
@@ -129,7 +75,7 @@ func (r CreateTransitVirtualInterfaceRequest) Send(ctx context.Context) (*Create
 // CreateTransitVirtualInterfaceResponse is the response type for the
 // CreateTransitVirtualInterface API operation.
 type CreateTransitVirtualInterfaceResponse struct {
-	*CreateTransitVirtualInterfaceOutput
+	*types.CreateTransitVirtualInterfaceOutput
 
 	response *aws.Response
 }

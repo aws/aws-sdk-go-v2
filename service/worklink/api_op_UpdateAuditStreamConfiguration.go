@@ -6,76 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/worklink/types"
 )
-
-type UpdateAuditStreamConfigurationInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ARN of the Amazon Kinesis data stream that receives the audit events.
-	AuditStreamArn *string `type:"string"`
-
-	// The ARN of the fleet.
-	//
-	// FleetArn is a required field
-	FleetArn *string `min:"20" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s UpdateAuditStreamConfigurationInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateAuditStreamConfigurationInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateAuditStreamConfigurationInput"}
-
-	if s.FleetArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("FleetArn"))
-	}
-	if s.FleetArn != nil && len(*s.FleetArn) < 20 {
-		invalidParams.Add(aws.NewErrParamMinLen("FleetArn", 20))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s UpdateAuditStreamConfigurationInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.AuditStreamArn != nil {
-		v := *s.AuditStreamArn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "AuditStreamArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.FleetArn != nil {
-		v := *s.FleetArn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "FleetArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type UpdateAuditStreamConfigurationOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s UpdateAuditStreamConfigurationOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s UpdateAuditStreamConfigurationOutput) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
 
 const opUpdateAuditStreamConfiguration = "UpdateAuditStreamConfiguration"
 
@@ -92,7 +24,7 @@ const opUpdateAuditStreamConfiguration = "UpdateAuditStreamConfiguration"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/worklink-2018-09-25/UpdateAuditStreamConfiguration
-func (c *Client) UpdateAuditStreamConfigurationRequest(input *UpdateAuditStreamConfigurationInput) UpdateAuditStreamConfigurationRequest {
+func (c *Client) UpdateAuditStreamConfigurationRequest(input *types.UpdateAuditStreamConfigurationInput) UpdateAuditStreamConfigurationRequest {
 	op := &aws.Operation{
 		Name:       opUpdateAuditStreamConfiguration,
 		HTTPMethod: "POST",
@@ -100,10 +32,10 @@ func (c *Client) UpdateAuditStreamConfigurationRequest(input *UpdateAuditStreamC
 	}
 
 	if input == nil {
-		input = &UpdateAuditStreamConfigurationInput{}
+		input = &types.UpdateAuditStreamConfigurationInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateAuditStreamConfigurationOutput{})
+	req := c.newRequest(op, input, &types.UpdateAuditStreamConfigurationOutput{})
 	return UpdateAuditStreamConfigurationRequest{Request: req, Input: input, Copy: c.UpdateAuditStreamConfigurationRequest}
 }
 
@@ -111,8 +43,8 @@ func (c *Client) UpdateAuditStreamConfigurationRequest(input *UpdateAuditStreamC
 // UpdateAuditStreamConfiguration API operation.
 type UpdateAuditStreamConfigurationRequest struct {
 	*aws.Request
-	Input *UpdateAuditStreamConfigurationInput
-	Copy  func(*UpdateAuditStreamConfigurationInput) UpdateAuditStreamConfigurationRequest
+	Input *types.UpdateAuditStreamConfigurationInput
+	Copy  func(*types.UpdateAuditStreamConfigurationInput) UpdateAuditStreamConfigurationRequest
 }
 
 // Send marshals and sends the UpdateAuditStreamConfiguration API request.
@@ -124,7 +56,7 @@ func (r UpdateAuditStreamConfigurationRequest) Send(ctx context.Context) (*Updat
 	}
 
 	resp := &UpdateAuditStreamConfigurationResponse{
-		UpdateAuditStreamConfigurationOutput: r.Request.Data.(*UpdateAuditStreamConfigurationOutput),
+		UpdateAuditStreamConfigurationOutput: r.Request.Data.(*types.UpdateAuditStreamConfigurationOutput),
 		response:                             &aws.Response{Request: r.Request},
 	}
 
@@ -134,7 +66,7 @@ func (r UpdateAuditStreamConfigurationRequest) Send(ctx context.Context) (*Updat
 // UpdateAuditStreamConfigurationResponse is the response type for the
 // UpdateAuditStreamConfiguration API operation.
 type UpdateAuditStreamConfigurationResponse struct {
-	*UpdateAuditStreamConfigurationOutput
+	*types.UpdateAuditStreamConfigurationOutput
 
 	response *aws.Response
 }

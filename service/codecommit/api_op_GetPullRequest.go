@@ -6,50 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/codecommit/types"
 )
-
-type GetPullRequestInput struct {
-	_ struct{} `type:"structure"`
-
-	// The system-generated ID of the pull request. To get this ID, use ListPullRequests.
-	//
-	// PullRequestId is a required field
-	PullRequestId *string `locationName:"pullRequestId" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetPullRequestInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetPullRequestInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetPullRequestInput"}
-
-	if s.PullRequestId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("PullRequestId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type GetPullRequestOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Information about the specified pull request.
-	//
-	// PullRequest is a required field
-	PullRequest *PullRequest `locationName:"pullRequest" type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s GetPullRequestOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetPullRequest = "GetPullRequest"
 
@@ -66,7 +24,7 @@ const opGetPullRequest = "GetPullRequest"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/GetPullRequest
-func (c *Client) GetPullRequestRequest(input *GetPullRequestInput) GetPullRequestRequest {
+func (c *Client) GetPullRequestRequest(input *types.GetPullRequestInput) GetPullRequestRequest {
 	op := &aws.Operation{
 		Name:       opGetPullRequest,
 		HTTPMethod: "POST",
@@ -74,10 +32,10 @@ func (c *Client) GetPullRequestRequest(input *GetPullRequestInput) GetPullReques
 	}
 
 	if input == nil {
-		input = &GetPullRequestInput{}
+		input = &types.GetPullRequestInput{}
 	}
 
-	req := c.newRequest(op, input, &GetPullRequestOutput{})
+	req := c.newRequest(op, input, &types.GetPullRequestOutput{})
 	return GetPullRequestRequest{Request: req, Input: input, Copy: c.GetPullRequestRequest}
 }
 
@@ -85,8 +43,8 @@ func (c *Client) GetPullRequestRequest(input *GetPullRequestInput) GetPullReques
 // GetPullRequest API operation.
 type GetPullRequestRequest struct {
 	*aws.Request
-	Input *GetPullRequestInput
-	Copy  func(*GetPullRequestInput) GetPullRequestRequest
+	Input *types.GetPullRequestInput
+	Copy  func(*types.GetPullRequestInput) GetPullRequestRequest
 }
 
 // Send marshals and sends the GetPullRequest API request.
@@ -98,7 +56,7 @@ func (r GetPullRequestRequest) Send(ctx context.Context) (*GetPullRequestRespons
 	}
 
 	resp := &GetPullRequestResponse{
-		GetPullRequestOutput: r.Request.Data.(*GetPullRequestOutput),
+		GetPullRequestOutput: r.Request.Data.(*types.GetPullRequestOutput),
 		response:             &aws.Response{Request: r.Request},
 	}
 
@@ -108,7 +66,7 @@ func (r GetPullRequestRequest) Send(ctx context.Context) (*GetPullRequestRespons
 // GetPullRequestResponse is the response type for the
 // GetPullRequest API operation.
 type GetPullRequestResponse struct {
-	*GetPullRequestOutput
+	*types.GetPullRequestOutput
 
 	response *aws.Response
 }

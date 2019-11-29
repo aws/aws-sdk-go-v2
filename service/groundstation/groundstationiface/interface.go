@@ -10,6 +10,7 @@ package groundstationiface
 
 import (
 	"github.com/aws/aws-sdk-go-v2/service/groundstation"
+	"github.com/aws/aws-sdk-go-v2/service/groundstation/types"
 )
 
 // ClientAPI provides an interface to enable mocking the
@@ -43,7 +44,7 @@ import (
 //    type mockClientClient struct {
 //        groundstationiface.ClientPI
 //    }
-//    func (m *mockClientClient) CancelContact(input *groundstation.CancelContactInput) (*groundstation.CancelContactOutput, error) {
+//    func (m *mockClientClient) CancelContact(input *types.CancelContactInput) (*types.CancelContactOutput, error) {
 //        // mock response/functionality
 //    }
 //
@@ -61,55 +62,55 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type ClientAPI interface {
-	CancelContactRequest(*groundstation.CancelContactInput) groundstation.CancelContactRequest
+	CancelContactRequest(*types.CancelContactInput) groundstation.CancelContactRequest
 
-	CreateConfigRequest(*groundstation.CreateConfigInput) groundstation.CreateConfigRequest
+	CreateConfigRequest(*types.CreateConfigInput) groundstation.CreateConfigRequest
 
-	CreateDataflowEndpointGroupRequest(*groundstation.CreateDataflowEndpointGroupInput) groundstation.CreateDataflowEndpointGroupRequest
+	CreateDataflowEndpointGroupRequest(*types.CreateDataflowEndpointGroupInput) groundstation.CreateDataflowEndpointGroupRequest
 
-	CreateMissionProfileRequest(*groundstation.CreateMissionProfileInput) groundstation.CreateMissionProfileRequest
+	CreateMissionProfileRequest(*types.CreateMissionProfileInput) groundstation.CreateMissionProfileRequest
 
-	DeleteConfigRequest(*groundstation.DeleteConfigInput) groundstation.DeleteConfigRequest
+	DeleteConfigRequest(*types.DeleteConfigInput) groundstation.DeleteConfigRequest
 
-	DeleteDataflowEndpointGroupRequest(*groundstation.DeleteDataflowEndpointGroupInput) groundstation.DeleteDataflowEndpointGroupRequest
+	DeleteDataflowEndpointGroupRequest(*types.DeleteDataflowEndpointGroupInput) groundstation.DeleteDataflowEndpointGroupRequest
 
-	DeleteMissionProfileRequest(*groundstation.DeleteMissionProfileInput) groundstation.DeleteMissionProfileRequest
+	DeleteMissionProfileRequest(*types.DeleteMissionProfileInput) groundstation.DeleteMissionProfileRequest
 
-	DescribeContactRequest(*groundstation.DescribeContactInput) groundstation.DescribeContactRequest
+	DescribeContactRequest(*types.DescribeContactInput) groundstation.DescribeContactRequest
 
-	GetConfigRequest(*groundstation.GetConfigInput) groundstation.GetConfigRequest
+	GetConfigRequest(*types.GetConfigInput) groundstation.GetConfigRequest
 
-	GetDataflowEndpointGroupRequest(*groundstation.GetDataflowEndpointGroupInput) groundstation.GetDataflowEndpointGroupRequest
+	GetDataflowEndpointGroupRequest(*types.GetDataflowEndpointGroupInput) groundstation.GetDataflowEndpointGroupRequest
 
-	GetMinuteUsageRequest(*groundstation.GetMinuteUsageInput) groundstation.GetMinuteUsageRequest
+	GetMinuteUsageRequest(*types.GetMinuteUsageInput) groundstation.GetMinuteUsageRequest
 
-	GetMissionProfileRequest(*groundstation.GetMissionProfileInput) groundstation.GetMissionProfileRequest
+	GetMissionProfileRequest(*types.GetMissionProfileInput) groundstation.GetMissionProfileRequest
 
-	GetSatelliteRequest(*groundstation.GetSatelliteInput) groundstation.GetSatelliteRequest
+	GetSatelliteRequest(*types.GetSatelliteInput) groundstation.GetSatelliteRequest
 
-	ListConfigsRequest(*groundstation.ListConfigsInput) groundstation.ListConfigsRequest
+	ListConfigsRequest(*types.ListConfigsInput) groundstation.ListConfigsRequest
 
-	ListContactsRequest(*groundstation.ListContactsInput) groundstation.ListContactsRequest
+	ListContactsRequest(*types.ListContactsInput) groundstation.ListContactsRequest
 
-	ListDataflowEndpointGroupsRequest(*groundstation.ListDataflowEndpointGroupsInput) groundstation.ListDataflowEndpointGroupsRequest
+	ListDataflowEndpointGroupsRequest(*types.ListDataflowEndpointGroupsInput) groundstation.ListDataflowEndpointGroupsRequest
 
-	ListGroundStationsRequest(*groundstation.ListGroundStationsInput) groundstation.ListGroundStationsRequest
+	ListGroundStationsRequest(*types.ListGroundStationsInput) groundstation.ListGroundStationsRequest
 
-	ListMissionProfilesRequest(*groundstation.ListMissionProfilesInput) groundstation.ListMissionProfilesRequest
+	ListMissionProfilesRequest(*types.ListMissionProfilesInput) groundstation.ListMissionProfilesRequest
 
-	ListSatellitesRequest(*groundstation.ListSatellitesInput) groundstation.ListSatellitesRequest
+	ListSatellitesRequest(*types.ListSatellitesInput) groundstation.ListSatellitesRequest
 
-	ListTagsForResourceRequest(*groundstation.ListTagsForResourceInput) groundstation.ListTagsForResourceRequest
+	ListTagsForResourceRequest(*types.ListTagsForResourceInput) groundstation.ListTagsForResourceRequest
 
-	ReserveContactRequest(*groundstation.ReserveContactInput) groundstation.ReserveContactRequest
+	ReserveContactRequest(*types.ReserveContactInput) groundstation.ReserveContactRequest
 
-	TagResourceRequest(*groundstation.TagResourceInput) groundstation.TagResourceRequest
+	TagResourceRequest(*types.TagResourceInput) groundstation.TagResourceRequest
 
-	UntagResourceRequest(*groundstation.UntagResourceInput) groundstation.UntagResourceRequest
+	UntagResourceRequest(*types.UntagResourceInput) groundstation.UntagResourceRequest
 
-	UpdateConfigRequest(*groundstation.UpdateConfigInput) groundstation.UpdateConfigRequest
+	UpdateConfigRequest(*types.UpdateConfigInput) groundstation.UpdateConfigRequest
 
-	UpdateMissionProfileRequest(*groundstation.UpdateMissionProfileInput) groundstation.UpdateMissionProfileRequest
+	UpdateMissionProfileRequest(*types.UpdateMissionProfileInput) groundstation.UpdateMissionProfileRequest
 }
 
 var _ ClientAPI = (*groundstation.Client)(nil)

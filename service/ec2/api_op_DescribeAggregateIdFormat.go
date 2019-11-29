@@ -6,40 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-type DescribeAggregateIdFormatInput struct {
-	_ struct{} `type:"structure"`
-
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have
-	// the required permissions, the error response is DryRunOperation. Otherwise,
-	// it is UnauthorizedOperation.
-	DryRun *bool `type:"boolean"`
-}
-
-// String returns the string representation
-func (s DescribeAggregateIdFormatInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type DescribeAggregateIdFormatOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Information about each resource's ID format.
-	Statuses []IdFormat `locationName:"statusSet" locationNameList:"item" type:"list"`
-
-	// Indicates whether all resource types in the Region are configured to use
-	// longer IDs. This value is only true if all users are configured to use longer
-	// IDs for all resources types in the Region.
-	UseLongIdsAggregated *bool `locationName:"useLongIdsAggregated" type:"boolean"`
-}
-
-// String returns the string representation
-func (s DescribeAggregateIdFormatOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeAggregateIdFormat = "DescribeAggregateIdFormat"
 
@@ -70,7 +38,7 @@ const opDescribeAggregateIdFormat = "DescribeAggregateIdFormat"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeAggregateIdFormat
-func (c *Client) DescribeAggregateIdFormatRequest(input *DescribeAggregateIdFormatInput) DescribeAggregateIdFormatRequest {
+func (c *Client) DescribeAggregateIdFormatRequest(input *types.DescribeAggregateIdFormatInput) DescribeAggregateIdFormatRequest {
 	op := &aws.Operation{
 		Name:       opDescribeAggregateIdFormat,
 		HTTPMethod: "POST",
@@ -78,10 +46,10 @@ func (c *Client) DescribeAggregateIdFormatRequest(input *DescribeAggregateIdForm
 	}
 
 	if input == nil {
-		input = &DescribeAggregateIdFormatInput{}
+		input = &types.DescribeAggregateIdFormatInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeAggregateIdFormatOutput{})
+	req := c.newRequest(op, input, &types.DescribeAggregateIdFormatOutput{})
 	return DescribeAggregateIdFormatRequest{Request: req, Input: input, Copy: c.DescribeAggregateIdFormatRequest}
 }
 
@@ -89,8 +57,8 @@ func (c *Client) DescribeAggregateIdFormatRequest(input *DescribeAggregateIdForm
 // DescribeAggregateIdFormat API operation.
 type DescribeAggregateIdFormatRequest struct {
 	*aws.Request
-	Input *DescribeAggregateIdFormatInput
-	Copy  func(*DescribeAggregateIdFormatInput) DescribeAggregateIdFormatRequest
+	Input *types.DescribeAggregateIdFormatInput
+	Copy  func(*types.DescribeAggregateIdFormatInput) DescribeAggregateIdFormatRequest
 }
 
 // Send marshals and sends the DescribeAggregateIdFormat API request.
@@ -102,7 +70,7 @@ func (r DescribeAggregateIdFormatRequest) Send(ctx context.Context) (*DescribeAg
 	}
 
 	resp := &DescribeAggregateIdFormatResponse{
-		DescribeAggregateIdFormatOutput: r.Request.Data.(*DescribeAggregateIdFormatOutput),
+		DescribeAggregateIdFormatOutput: r.Request.Data.(*types.DescribeAggregateIdFormatOutput),
 		response:                        &aws.Response{Request: r.Request},
 	}
 
@@ -112,7 +80,7 @@ func (r DescribeAggregateIdFormatRequest) Send(ctx context.Context) (*DescribeAg
 // DescribeAggregateIdFormatResponse is the response type for the
 // DescribeAggregateIdFormat API operation.
 type DescribeAggregateIdFormatResponse struct {
-	*DescribeAggregateIdFormatOutput
+	*types.DescribeAggregateIdFormatOutput
 
 	response *aws.Response
 }

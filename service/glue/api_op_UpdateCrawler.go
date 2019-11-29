@@ -6,91 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/glue/types"
 )
-
-type UpdateCrawlerInput struct {
-	_ struct{} `type:"structure"`
-
-	// A list of custom classifiers that the user has registered. By default, all
-	// built-in classifiers are included in a crawl, but these custom classifiers
-	// always override the default classifiers for a given classification.
-	Classifiers []string `type:"list"`
-
-	// The crawler configuration information. This versioned JSON string allows
-	// users to specify aspects of a crawler's behavior. For more information, see
-	// Configuring a Crawler (http://docs.aws.amazon.com/glue/latest/dg/crawler-configuration.html).
-	Configuration *string `type:"string"`
-
-	// The name of the SecurityConfiguration structure to be used by this crawler.
-	CrawlerSecurityConfiguration *string `type:"string"`
-
-	// The AWS Glue database where results are stored, such as: arn:aws:daylight:us-east-1::database/sometable/*.
-	DatabaseName *string `type:"string"`
-
-	// A description of the new crawler.
-	Description *string `type:"string"`
-
-	// Name of the new crawler.
-	//
-	// Name is a required field
-	Name *string `min:"1" type:"string" required:"true"`
-
-	// The IAM role or Amazon Resource Name (ARN) of an IAM role that is used by
-	// the new crawler to access customer resources.
-	Role *string `type:"string"`
-
-	// A cron expression used to specify the schedule. For more information, see
-	// Time-Based Schedules for Jobs and Crawlers (http://docs.aws.amazon.com/glue/latest/dg/monitor-data-warehouse-schedule.html).
-	// For example, to run something every day at 12:15 UTC, specify cron(15 12
-	// * * ? *).
-	Schedule *string `type:"string"`
-
-	// The policy for the crawler's update and deletion behavior.
-	SchemaChangePolicy *SchemaChangePolicy `type:"structure"`
-
-	// The table prefix used for catalog tables that are created.
-	TablePrefix *string `type:"string"`
-
-	// A list of targets to crawl.
-	Targets *CrawlerTargets `type:"structure"`
-}
-
-// String returns the string representation
-func (s UpdateCrawlerInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateCrawlerInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateCrawlerInput"}
-
-	if s.Name == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Name"))
-	}
-	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
-	}
-	if s.Targets != nil {
-		if err := s.Targets.Validate(); err != nil {
-			invalidParams.AddNested("Targets", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type UpdateCrawlerOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s UpdateCrawlerOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opUpdateCrawler = "UpdateCrawler"
 
@@ -108,7 +25,7 @@ const opUpdateCrawler = "UpdateCrawler"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/UpdateCrawler
-func (c *Client) UpdateCrawlerRequest(input *UpdateCrawlerInput) UpdateCrawlerRequest {
+func (c *Client) UpdateCrawlerRequest(input *types.UpdateCrawlerInput) UpdateCrawlerRequest {
 	op := &aws.Operation{
 		Name:       opUpdateCrawler,
 		HTTPMethod: "POST",
@@ -116,10 +33,10 @@ func (c *Client) UpdateCrawlerRequest(input *UpdateCrawlerInput) UpdateCrawlerRe
 	}
 
 	if input == nil {
-		input = &UpdateCrawlerInput{}
+		input = &types.UpdateCrawlerInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateCrawlerOutput{})
+	req := c.newRequest(op, input, &types.UpdateCrawlerOutput{})
 	return UpdateCrawlerRequest{Request: req, Input: input, Copy: c.UpdateCrawlerRequest}
 }
 
@@ -127,8 +44,8 @@ func (c *Client) UpdateCrawlerRequest(input *UpdateCrawlerInput) UpdateCrawlerRe
 // UpdateCrawler API operation.
 type UpdateCrawlerRequest struct {
 	*aws.Request
-	Input *UpdateCrawlerInput
-	Copy  func(*UpdateCrawlerInput) UpdateCrawlerRequest
+	Input *types.UpdateCrawlerInput
+	Copy  func(*types.UpdateCrawlerInput) UpdateCrawlerRequest
 }
 
 // Send marshals and sends the UpdateCrawler API request.
@@ -140,7 +57,7 @@ func (r UpdateCrawlerRequest) Send(ctx context.Context) (*UpdateCrawlerResponse,
 	}
 
 	resp := &UpdateCrawlerResponse{
-		UpdateCrawlerOutput: r.Request.Data.(*UpdateCrawlerOutput),
+		UpdateCrawlerOutput: r.Request.Data.(*types.UpdateCrawlerOutput),
 		response:            &aws.Response{Request: r.Request},
 	}
 
@@ -150,7 +67,7 @@ func (r UpdateCrawlerRequest) Send(ctx context.Context) (*UpdateCrawlerResponse,
 // UpdateCrawlerResponse is the response type for the
 // UpdateCrawler API operation.
 type UpdateCrawlerResponse struct {
-	*UpdateCrawlerOutput
+	*types.UpdateCrawlerOutput
 
 	response *aws.Response
 }

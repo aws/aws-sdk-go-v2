@@ -6,75 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/types"
 )
-
-type UpdateServiceActionInput struct {
-	_ struct{} `type:"structure"`
-
-	// The language code.
-	//
-	//    * en - English (default)
-	//
-	//    * jp - Japanese
-	//
-	//    * zh - Chinese
-	AcceptLanguage *string `type:"string"`
-
-	// A map that defines the self-service action.
-	Definition map[string]string `min:"1" type:"map"`
-
-	// The self-service action description.
-	Description *string `type:"string"`
-
-	// The self-service action identifier.
-	//
-	// Id is a required field
-	Id *string `min:"1" type:"string" required:"true"`
-
-	// The self-service action name.
-	Name *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s UpdateServiceActionInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateServiceActionInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateServiceActionInput"}
-	if s.Definition != nil && len(s.Definition) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Definition", 1))
-	}
-
-	if s.Id == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Id"))
-	}
-	if s.Id != nil && len(*s.Id) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Id", 1))
-	}
-	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type UpdateServiceActionOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Detailed information about the self-service action.
-	ServiceActionDetail *ServiceActionDetail `type:"structure"`
-}
-
-// String returns the string representation
-func (s UpdateServiceActionOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opUpdateServiceAction = "UpdateServiceAction"
 
@@ -91,7 +24,7 @@ const opUpdateServiceAction = "UpdateServiceAction"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/UpdateServiceAction
-func (c *Client) UpdateServiceActionRequest(input *UpdateServiceActionInput) UpdateServiceActionRequest {
+func (c *Client) UpdateServiceActionRequest(input *types.UpdateServiceActionInput) UpdateServiceActionRequest {
 	op := &aws.Operation{
 		Name:       opUpdateServiceAction,
 		HTTPMethod: "POST",
@@ -99,10 +32,10 @@ func (c *Client) UpdateServiceActionRequest(input *UpdateServiceActionInput) Upd
 	}
 
 	if input == nil {
-		input = &UpdateServiceActionInput{}
+		input = &types.UpdateServiceActionInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateServiceActionOutput{})
+	req := c.newRequest(op, input, &types.UpdateServiceActionOutput{})
 	return UpdateServiceActionRequest{Request: req, Input: input, Copy: c.UpdateServiceActionRequest}
 }
 
@@ -110,8 +43,8 @@ func (c *Client) UpdateServiceActionRequest(input *UpdateServiceActionInput) Upd
 // UpdateServiceAction API operation.
 type UpdateServiceActionRequest struct {
 	*aws.Request
-	Input *UpdateServiceActionInput
-	Copy  func(*UpdateServiceActionInput) UpdateServiceActionRequest
+	Input *types.UpdateServiceActionInput
+	Copy  func(*types.UpdateServiceActionInput) UpdateServiceActionRequest
 }
 
 // Send marshals and sends the UpdateServiceAction API request.
@@ -123,7 +56,7 @@ func (r UpdateServiceActionRequest) Send(ctx context.Context) (*UpdateServiceAct
 	}
 
 	resp := &UpdateServiceActionResponse{
-		UpdateServiceActionOutput: r.Request.Data.(*UpdateServiceActionOutput),
+		UpdateServiceActionOutput: r.Request.Data.(*types.UpdateServiceActionOutput),
 		response:                  &aws.Response{Request: r.Request},
 	}
 
@@ -133,7 +66,7 @@ func (r UpdateServiceActionRequest) Send(ctx context.Context) (*UpdateServiceAct
 // UpdateServiceActionResponse is the response type for the
 // UpdateServiceAction API operation.
 type UpdateServiceActionResponse struct {
-	*UpdateServiceActionOutput
+	*types.UpdateServiceActionOutput
 
 	response *aws.Response
 }

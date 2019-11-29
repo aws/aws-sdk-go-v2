@@ -6,65 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/restjson"
+	"github.com/aws/aws-sdk-go-v2/service/efs/types"
 )
-
-type DeleteMountTargetInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the mount target to delete (String).
-	//
-	// MountTargetId is a required field
-	MountTargetId *string `location:"uri" locationName:"MountTargetId" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteMountTargetInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteMountTargetInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteMountTargetInput"}
-
-	if s.MountTargetId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("MountTargetId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteMountTargetInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.MountTargetId != nil {
-		v := *s.MountTargetId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "MountTargetId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type DeleteMountTargetOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteMountTargetOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteMountTargetOutput) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
 
 const opDeleteMountTarget = "DeleteMountTarget"
 
@@ -105,7 +50,7 @@ const opDeleteMountTarget = "DeleteMountTarget"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/DeleteMountTarget
-func (c *Client) DeleteMountTargetRequest(input *DeleteMountTargetInput) DeleteMountTargetRequest {
+func (c *Client) DeleteMountTargetRequest(input *types.DeleteMountTargetInput) DeleteMountTargetRequest {
 	op := &aws.Operation{
 		Name:       opDeleteMountTarget,
 		HTTPMethod: "DELETE",
@@ -113,10 +58,10 @@ func (c *Client) DeleteMountTargetRequest(input *DeleteMountTargetInput) DeleteM
 	}
 
 	if input == nil {
-		input = &DeleteMountTargetInput{}
+		input = &types.DeleteMountTargetInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteMountTargetOutput{})
+	req := c.newRequest(op, input, &types.DeleteMountTargetOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return DeleteMountTargetRequest{Request: req, Input: input, Copy: c.DeleteMountTargetRequest}
@@ -126,8 +71,8 @@ func (c *Client) DeleteMountTargetRequest(input *DeleteMountTargetInput) DeleteM
 // DeleteMountTarget API operation.
 type DeleteMountTargetRequest struct {
 	*aws.Request
-	Input *DeleteMountTargetInput
-	Copy  func(*DeleteMountTargetInput) DeleteMountTargetRequest
+	Input *types.DeleteMountTargetInput
+	Copy  func(*types.DeleteMountTargetInput) DeleteMountTargetRequest
 }
 
 // Send marshals and sends the DeleteMountTarget API request.
@@ -139,7 +84,7 @@ func (r DeleteMountTargetRequest) Send(ctx context.Context) (*DeleteMountTargetR
 	}
 
 	resp := &DeleteMountTargetResponse{
-		DeleteMountTargetOutput: r.Request.Data.(*DeleteMountTargetOutput),
+		DeleteMountTargetOutput: r.Request.Data.(*types.DeleteMountTargetOutput),
 		response:                &aws.Response{Request: r.Request},
 	}
 
@@ -149,7 +94,7 @@ func (r DeleteMountTargetRequest) Send(ctx context.Context) (*DeleteMountTargetR
 // DeleteMountTargetResponse is the response type for the
 // DeleteMountTarget API operation.
 type DeleteMountTargetResponse struct {
-	*DeleteMountTargetOutput
+	*types.DeleteMountTargetOutput
 
 	response *aws.Response
 }

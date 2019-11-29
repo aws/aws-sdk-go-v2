@@ -6,49 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/securityhub/types"
 )
-
-type GetMasterAccountInput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s GetMasterAccountInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetMasterAccountInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	return nil
-}
-
-type GetMasterAccountOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A list of details about the Security Hub master account for the current member
-	// account.
-	Master *Invitation `type:"structure"`
-}
-
-// String returns the string representation
-func (s GetMasterAccountOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetMasterAccountOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.Master != nil {
-		v := s.Master
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "Master", v, metadata)
-	}
-	return nil
-}
 
 const opGetMasterAccount = "GetMasterAccount"
 
@@ -66,7 +25,7 @@ const opGetMasterAccount = "GetMasterAccount"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/GetMasterAccount
-func (c *Client) GetMasterAccountRequest(input *GetMasterAccountInput) GetMasterAccountRequest {
+func (c *Client) GetMasterAccountRequest(input *types.GetMasterAccountInput) GetMasterAccountRequest {
 	op := &aws.Operation{
 		Name:       opGetMasterAccount,
 		HTTPMethod: "GET",
@@ -74,10 +33,10 @@ func (c *Client) GetMasterAccountRequest(input *GetMasterAccountInput) GetMaster
 	}
 
 	if input == nil {
-		input = &GetMasterAccountInput{}
+		input = &types.GetMasterAccountInput{}
 	}
 
-	req := c.newRequest(op, input, &GetMasterAccountOutput{})
+	req := c.newRequest(op, input, &types.GetMasterAccountOutput{})
 	return GetMasterAccountRequest{Request: req, Input: input, Copy: c.GetMasterAccountRequest}
 }
 
@@ -85,8 +44,8 @@ func (c *Client) GetMasterAccountRequest(input *GetMasterAccountInput) GetMaster
 // GetMasterAccount API operation.
 type GetMasterAccountRequest struct {
 	*aws.Request
-	Input *GetMasterAccountInput
-	Copy  func(*GetMasterAccountInput) GetMasterAccountRequest
+	Input *types.GetMasterAccountInput
+	Copy  func(*types.GetMasterAccountInput) GetMasterAccountRequest
 }
 
 // Send marshals and sends the GetMasterAccount API request.
@@ -98,7 +57,7 @@ func (r GetMasterAccountRequest) Send(ctx context.Context) (*GetMasterAccountRes
 	}
 
 	resp := &GetMasterAccountResponse{
-		GetMasterAccountOutput: r.Request.Data.(*GetMasterAccountOutput),
+		GetMasterAccountOutput: r.Request.Data.(*types.GetMasterAccountOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -108,7 +67,7 @@ func (r GetMasterAccountRequest) Send(ctx context.Context) (*GetMasterAccountRes
 // GetMasterAccountResponse is the response type for the
 // GetMasterAccount API operation.
 type GetMasterAccountResponse struct {
-	*GetMasterAccountOutput
+	*types.GetMasterAccountOutput
 
 	response *aws.Response
 }

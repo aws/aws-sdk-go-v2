@@ -6,73 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/iotthingsgraph/types"
 )
-
-type UpdateFlowTemplateInput struct {
-	_ struct{} `type:"structure"`
-
-	// The version of the user's namespace.
-	//
-	// If no value is specified, the latest version is used by default. Use the
-	// GetFlowTemplateRevisions if you want to find earlier revisions of the flow
-	// to update.
-	CompatibleNamespaceVersion *int64 `locationName:"compatibleNamespaceVersion" type:"long"`
-
-	// The DefinitionDocument that contains the updated workflow definition.
-	//
-	// Definition is a required field
-	Definition *DefinitionDocument `locationName:"definition" type:"structure" required:"true"`
-
-	// The ID of the workflow to be updated.
-	//
-	// The ID should be in the following format.
-	//
-	// urn:tdm:REGION/ACCOUNT ID/default:workflow:WORKFLOWNAME
-	//
-	// Id is a required field
-	Id *string `locationName:"id" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s UpdateFlowTemplateInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateFlowTemplateInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateFlowTemplateInput"}
-
-	if s.Definition == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Definition"))
-	}
-
-	if s.Id == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Id"))
-	}
-	if s.Definition != nil {
-		if err := s.Definition.Validate(); err != nil {
-			invalidParams.AddNested("Definition", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type UpdateFlowTemplateOutput struct {
-	_ struct{} `type:"structure"`
-
-	// An object containing summary information about the updated workflow.
-	Summary *FlowTemplateSummary `locationName:"summary" type:"structure"`
-}
-
-// String returns the string representation
-func (s UpdateFlowTemplateOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opUpdateFlowTemplate = "UpdateFlowTemplate"
 
@@ -93,7 +28,7 @@ const opUpdateFlowTemplate = "UpdateFlowTemplate"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iotthingsgraph-2018-09-06/UpdateFlowTemplate
-func (c *Client) UpdateFlowTemplateRequest(input *UpdateFlowTemplateInput) UpdateFlowTemplateRequest {
+func (c *Client) UpdateFlowTemplateRequest(input *types.UpdateFlowTemplateInput) UpdateFlowTemplateRequest {
 	op := &aws.Operation{
 		Name:       opUpdateFlowTemplate,
 		HTTPMethod: "POST",
@@ -101,10 +36,10 @@ func (c *Client) UpdateFlowTemplateRequest(input *UpdateFlowTemplateInput) Updat
 	}
 
 	if input == nil {
-		input = &UpdateFlowTemplateInput{}
+		input = &types.UpdateFlowTemplateInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateFlowTemplateOutput{})
+	req := c.newRequest(op, input, &types.UpdateFlowTemplateOutput{})
 	return UpdateFlowTemplateRequest{Request: req, Input: input, Copy: c.UpdateFlowTemplateRequest}
 }
 
@@ -112,8 +47,8 @@ func (c *Client) UpdateFlowTemplateRequest(input *UpdateFlowTemplateInput) Updat
 // UpdateFlowTemplate API operation.
 type UpdateFlowTemplateRequest struct {
 	*aws.Request
-	Input *UpdateFlowTemplateInput
-	Copy  func(*UpdateFlowTemplateInput) UpdateFlowTemplateRequest
+	Input *types.UpdateFlowTemplateInput
+	Copy  func(*types.UpdateFlowTemplateInput) UpdateFlowTemplateRequest
 }
 
 // Send marshals and sends the UpdateFlowTemplate API request.
@@ -125,7 +60,7 @@ func (r UpdateFlowTemplateRequest) Send(ctx context.Context) (*UpdateFlowTemplat
 	}
 
 	resp := &UpdateFlowTemplateResponse{
-		UpdateFlowTemplateOutput: r.Request.Data.(*UpdateFlowTemplateOutput),
+		UpdateFlowTemplateOutput: r.Request.Data.(*types.UpdateFlowTemplateOutput),
 		response:                 &aws.Response{Request: r.Request},
 	}
 
@@ -135,7 +70,7 @@ func (r UpdateFlowTemplateRequest) Send(ctx context.Context) (*UpdateFlowTemplat
 // UpdateFlowTemplateResponse is the response type for the
 // UpdateFlowTemplate API operation.
 type UpdateFlowTemplateResponse struct {
-	*UpdateFlowTemplateOutput
+	*types.UpdateFlowTemplateOutput
 
 	response *aws.Response
 }

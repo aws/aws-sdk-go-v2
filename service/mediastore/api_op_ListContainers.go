@@ -6,62 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/mediastore/types"
 )
-
-type ListContainersInput struct {
-	_ struct{} `type:"structure"`
-
-	// Enter the maximum number of containers in the response. Use from 1 to 255
-	// characters.
-	MaxResults *int64 `min:"1" type:"integer"`
-
-	// Only if you used MaxResults in the first command, enter the token (which
-	// was included in the previous response) to obtain the next set of containers.
-	// This token is included in a response only if there actually are more containers
-	// to list.
-	NextToken *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s ListContainersInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListContainersInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListContainersInput"}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-	if s.NextToken != nil && len(*s.NextToken) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ListContainersOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The names of the containers.
-	//
-	// Containers is a required field
-	Containers []Container `type:"list" required:"true"`
-
-	// NextToken is the token to use in the next call to ListContainers. This token
-	// is returned only if you included the MaxResults tag in the original command,
-	// and only if there are still containers to return.
-	NextToken *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s ListContainersOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListContainers = "ListContainers"
 
@@ -87,7 +33,7 @@ const opListContainers = "ListContainers"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mediastore-2017-09-01/ListContainers
-func (c *Client) ListContainersRequest(input *ListContainersInput) ListContainersRequest {
+func (c *Client) ListContainersRequest(input *types.ListContainersInput) ListContainersRequest {
 	op := &aws.Operation{
 		Name:       opListContainers,
 		HTTPMethod: "POST",
@@ -101,10 +47,10 @@ func (c *Client) ListContainersRequest(input *ListContainersInput) ListContainer
 	}
 
 	if input == nil {
-		input = &ListContainersInput{}
+		input = &types.ListContainersInput{}
 	}
 
-	req := c.newRequest(op, input, &ListContainersOutput{})
+	req := c.newRequest(op, input, &types.ListContainersOutput{})
 	return ListContainersRequest{Request: req, Input: input, Copy: c.ListContainersRequest}
 }
 
@@ -112,8 +58,8 @@ func (c *Client) ListContainersRequest(input *ListContainersInput) ListContainer
 // ListContainers API operation.
 type ListContainersRequest struct {
 	*aws.Request
-	Input *ListContainersInput
-	Copy  func(*ListContainersInput) ListContainersRequest
+	Input *types.ListContainersInput
+	Copy  func(*types.ListContainersInput) ListContainersRequest
 }
 
 // Send marshals and sends the ListContainers API request.
@@ -125,7 +71,7 @@ func (r ListContainersRequest) Send(ctx context.Context) (*ListContainersRespons
 	}
 
 	resp := &ListContainersResponse{
-		ListContainersOutput: r.Request.Data.(*ListContainersOutput),
+		ListContainersOutput: r.Request.Data.(*types.ListContainersOutput),
 		response:             &aws.Response{Request: r.Request},
 	}
 
@@ -155,7 +101,7 @@ func NewListContainersPaginator(req ListContainersRequest) ListContainersPaginat
 	return ListContainersPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListContainersInput
+				var inCpy *types.ListContainersInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -175,14 +121,14 @@ type ListContainersPaginator struct {
 	aws.Pager
 }
 
-func (p *ListContainersPaginator) CurrentPage() *ListContainersOutput {
-	return p.Pager.CurrentPage().(*ListContainersOutput)
+func (p *ListContainersPaginator) CurrentPage() *types.ListContainersOutput {
+	return p.Pager.CurrentPage().(*types.ListContainersOutput)
 }
 
 // ListContainersResponse is the response type for the
 // ListContainers API operation.
 type ListContainersResponse struct {
-	*ListContainersOutput
+	*types.ListContainersOutput
 
 	response *aws.Response
 }

@@ -6,68 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/waf/types"
 )
-
-// A request to delete an XssMatchSet from AWS WAF.
-type DeleteXssMatchSetInput struct {
-	_ struct{} `type:"structure"`
-
-	// The value returned by the most recent call to GetChangeToken.
-	//
-	// ChangeToken is a required field
-	ChangeToken *string `min:"1" type:"string" required:"true"`
-
-	// The XssMatchSetId of the XssMatchSet that you want to delete. XssMatchSetId
-	// is returned by CreateXssMatchSet and by ListXssMatchSets.
-	//
-	// XssMatchSetId is a required field
-	XssMatchSetId *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteXssMatchSetInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteXssMatchSetInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteXssMatchSetInput"}
-
-	if s.ChangeToken == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ChangeToken"))
-	}
-	if s.ChangeToken != nil && len(*s.ChangeToken) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ChangeToken", 1))
-	}
-
-	if s.XssMatchSetId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("XssMatchSetId"))
-	}
-	if s.XssMatchSetId != nil && len(*s.XssMatchSetId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("XssMatchSetId", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// The response to a request to delete an XssMatchSet from AWS WAF.
-type DeleteXssMatchSetOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The ChangeToken that you used to submit the DeleteXssMatchSet request. You
-	// can also use this value to query the status of the request. For more information,
-	// see GetChangeTokenStatus.
-	ChangeToken *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s DeleteXssMatchSetOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteXssMatchSet = "DeleteXssMatchSet"
 
@@ -98,7 +38,7 @@ const opDeleteXssMatchSet = "DeleteXssMatchSet"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/DeleteXssMatchSet
-func (c *Client) DeleteXssMatchSetRequest(input *DeleteXssMatchSetInput) DeleteXssMatchSetRequest {
+func (c *Client) DeleteXssMatchSetRequest(input *types.DeleteXssMatchSetInput) DeleteXssMatchSetRequest {
 	op := &aws.Operation{
 		Name:       opDeleteXssMatchSet,
 		HTTPMethod: "POST",
@@ -106,10 +46,10 @@ func (c *Client) DeleteXssMatchSetRequest(input *DeleteXssMatchSetInput) DeleteX
 	}
 
 	if input == nil {
-		input = &DeleteXssMatchSetInput{}
+		input = &types.DeleteXssMatchSetInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteXssMatchSetOutput{})
+	req := c.newRequest(op, input, &types.DeleteXssMatchSetOutput{})
 	return DeleteXssMatchSetRequest{Request: req, Input: input, Copy: c.DeleteXssMatchSetRequest}
 }
 
@@ -117,8 +57,8 @@ func (c *Client) DeleteXssMatchSetRequest(input *DeleteXssMatchSetInput) DeleteX
 // DeleteXssMatchSet API operation.
 type DeleteXssMatchSetRequest struct {
 	*aws.Request
-	Input *DeleteXssMatchSetInput
-	Copy  func(*DeleteXssMatchSetInput) DeleteXssMatchSetRequest
+	Input *types.DeleteXssMatchSetInput
+	Copy  func(*types.DeleteXssMatchSetInput) DeleteXssMatchSetRequest
 }
 
 // Send marshals and sends the DeleteXssMatchSet API request.
@@ -130,7 +70,7 @@ func (r DeleteXssMatchSetRequest) Send(ctx context.Context) (*DeleteXssMatchSetR
 	}
 
 	resp := &DeleteXssMatchSetResponse{
-		DeleteXssMatchSetOutput: r.Request.Data.(*DeleteXssMatchSetOutput),
+		DeleteXssMatchSetOutput: r.Request.Data.(*types.DeleteXssMatchSetOutput),
 		response:                &aws.Response{Request: r.Request},
 	}
 
@@ -140,7 +80,7 @@ func (r DeleteXssMatchSetRequest) Send(ctx context.Context) (*DeleteXssMatchSetR
 // DeleteXssMatchSetResponse is the response type for the
 // DeleteXssMatchSet API operation.
 type DeleteXssMatchSetResponse struct {
-	*DeleteXssMatchSetOutput
+	*types.DeleteXssMatchSetOutput
 
 	response *aws.Response
 }

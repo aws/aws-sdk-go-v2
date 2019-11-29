@@ -6,57 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/ec2query"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-// Contains the parameters for CreateVpnConnectionRoute.
-type CreateVpnConnectionRouteInput struct {
-	_ struct{} `type:"structure"`
-
-	// The CIDR block associated with the local subnet of the customer network.
-	//
-	// DestinationCidrBlock is a required field
-	DestinationCidrBlock *string `type:"string" required:"true"`
-
-	// The ID of the VPN connection.
-	//
-	// VpnConnectionId is a required field
-	VpnConnectionId *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s CreateVpnConnectionRouteInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateVpnConnectionRouteInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateVpnConnectionRouteInput"}
-
-	if s.DestinationCidrBlock == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DestinationCidrBlock"))
-	}
-
-	if s.VpnConnectionId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("VpnConnectionId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type CreateVpnConnectionRouteOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s CreateVpnConnectionRouteOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCreateVpnConnectionRoute = "CreateVpnConnectionRoute"
 
@@ -79,7 +32,7 @@ const opCreateVpnConnectionRoute = "CreateVpnConnectionRoute"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateVpnConnectionRoute
-func (c *Client) CreateVpnConnectionRouteRequest(input *CreateVpnConnectionRouteInput) CreateVpnConnectionRouteRequest {
+func (c *Client) CreateVpnConnectionRouteRequest(input *types.CreateVpnConnectionRouteInput) CreateVpnConnectionRouteRequest {
 	op := &aws.Operation{
 		Name:       opCreateVpnConnectionRoute,
 		HTTPMethod: "POST",
@@ -87,10 +40,10 @@ func (c *Client) CreateVpnConnectionRouteRequest(input *CreateVpnConnectionRoute
 	}
 
 	if input == nil {
-		input = &CreateVpnConnectionRouteInput{}
+		input = &types.CreateVpnConnectionRouteInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateVpnConnectionRouteOutput{})
+	req := c.newRequest(op, input, &types.CreateVpnConnectionRouteOutput{})
 	req.Handlers.Unmarshal.Remove(ec2query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return CreateVpnConnectionRouteRequest{Request: req, Input: input, Copy: c.CreateVpnConnectionRouteRequest}
@@ -100,8 +53,8 @@ func (c *Client) CreateVpnConnectionRouteRequest(input *CreateVpnConnectionRoute
 // CreateVpnConnectionRoute API operation.
 type CreateVpnConnectionRouteRequest struct {
 	*aws.Request
-	Input *CreateVpnConnectionRouteInput
-	Copy  func(*CreateVpnConnectionRouteInput) CreateVpnConnectionRouteRequest
+	Input *types.CreateVpnConnectionRouteInput
+	Copy  func(*types.CreateVpnConnectionRouteInput) CreateVpnConnectionRouteRequest
 }
 
 // Send marshals and sends the CreateVpnConnectionRoute API request.
@@ -113,7 +66,7 @@ func (r CreateVpnConnectionRouteRequest) Send(ctx context.Context) (*CreateVpnCo
 	}
 
 	resp := &CreateVpnConnectionRouteResponse{
-		CreateVpnConnectionRouteOutput: r.Request.Data.(*CreateVpnConnectionRouteOutput),
+		CreateVpnConnectionRouteOutput: r.Request.Data.(*types.CreateVpnConnectionRouteOutput),
 		response:                       &aws.Response{Request: r.Request},
 	}
 
@@ -123,7 +76,7 @@ func (r CreateVpnConnectionRouteRequest) Send(ctx context.Context) (*CreateVpnCo
 // CreateVpnConnectionRouteResponse is the response type for the
 // CreateVpnConnectionRoute API operation.
 type CreateVpnConnectionRouteResponse struct {
-	*CreateVpnConnectionRouteOutput
+	*types.CreateVpnConnectionRouteOutput
 
 	response *aws.Response
 }

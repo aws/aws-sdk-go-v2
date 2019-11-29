@@ -6,57 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/lambda/types"
 )
-
-type GetAccountSettingsInput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s GetAccountSettingsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetAccountSettingsInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	return nil
-}
-
-type GetAccountSettingsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Limits that are related to concurrency and code storage.
-	AccountLimit *AccountLimit `type:"structure"`
-
-	// The number of functions and amount of storage in use.
-	AccountUsage *AccountUsage `type:"structure"`
-}
-
-// String returns the string representation
-func (s GetAccountSettingsOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetAccountSettingsOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.AccountLimit != nil {
-		v := s.AccountLimit
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "AccountLimit", v, metadata)
-	}
-	if s.AccountUsage != nil {
-		v := s.AccountUsage
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "AccountUsage", v, metadata)
-	}
-	return nil
-}
 
 const opGetAccountSettings = "GetAccountSettings"
 
@@ -74,7 +25,7 @@ const opGetAccountSettings = "GetAccountSettings"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/GetAccountSettings
-func (c *Client) GetAccountSettingsRequest(input *GetAccountSettingsInput) GetAccountSettingsRequest {
+func (c *Client) GetAccountSettingsRequest(input *types.GetAccountSettingsInput) GetAccountSettingsRequest {
 	op := &aws.Operation{
 		Name:       opGetAccountSettings,
 		HTTPMethod: "GET",
@@ -82,10 +33,10 @@ func (c *Client) GetAccountSettingsRequest(input *GetAccountSettingsInput) GetAc
 	}
 
 	if input == nil {
-		input = &GetAccountSettingsInput{}
+		input = &types.GetAccountSettingsInput{}
 	}
 
-	req := c.newRequest(op, input, &GetAccountSettingsOutput{})
+	req := c.newRequest(op, input, &types.GetAccountSettingsOutput{})
 	return GetAccountSettingsRequest{Request: req, Input: input, Copy: c.GetAccountSettingsRequest}
 }
 
@@ -93,8 +44,8 @@ func (c *Client) GetAccountSettingsRequest(input *GetAccountSettingsInput) GetAc
 // GetAccountSettings API operation.
 type GetAccountSettingsRequest struct {
 	*aws.Request
-	Input *GetAccountSettingsInput
-	Copy  func(*GetAccountSettingsInput) GetAccountSettingsRequest
+	Input *types.GetAccountSettingsInput
+	Copy  func(*types.GetAccountSettingsInput) GetAccountSettingsRequest
 }
 
 // Send marshals and sends the GetAccountSettings API request.
@@ -106,7 +57,7 @@ func (r GetAccountSettingsRequest) Send(ctx context.Context) (*GetAccountSetting
 	}
 
 	resp := &GetAccountSettingsResponse{
-		GetAccountSettingsOutput: r.Request.Data.(*GetAccountSettingsOutput),
+		GetAccountSettingsOutput: r.Request.Data.(*types.GetAccountSettingsOutput),
 		response:                 &aws.Response{Request: r.Request},
 	}
 
@@ -116,7 +67,7 @@ func (r GetAccountSettingsRequest) Send(ctx context.Context) (*GetAccountSetting
 // GetAccountSettingsResponse is the response type for the
 // GetAccountSettings API operation.
 type GetAccountSettingsResponse struct {
-	*GetAccountSettingsOutput
+	*types.GetAccountSettingsOutput
 
 	response *aws.Response
 }

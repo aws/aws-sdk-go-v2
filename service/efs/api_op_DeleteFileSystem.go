@@ -6,65 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/restjson"
+	"github.com/aws/aws-sdk-go-v2/service/efs/types"
 )
-
-type DeleteFileSystemInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the file system you want to delete.
-	//
-	// FileSystemId is a required field
-	FileSystemId *string `location:"uri" locationName:"FileSystemId" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteFileSystemInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteFileSystemInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteFileSystemInput"}
-
-	if s.FileSystemId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("FileSystemId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteFileSystemInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.FileSystemId != nil {
-		v := *s.FileSystemId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "FileSystemId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type DeleteFileSystemOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteFileSystemOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteFileSystemOutput) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
 
 const opDeleteFileSystem = "DeleteFileSystem"
 
@@ -96,7 +41,7 @@ const opDeleteFileSystem = "DeleteFileSystem"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/DeleteFileSystem
-func (c *Client) DeleteFileSystemRequest(input *DeleteFileSystemInput) DeleteFileSystemRequest {
+func (c *Client) DeleteFileSystemRequest(input *types.DeleteFileSystemInput) DeleteFileSystemRequest {
 	op := &aws.Operation{
 		Name:       opDeleteFileSystem,
 		HTTPMethod: "DELETE",
@@ -104,10 +49,10 @@ func (c *Client) DeleteFileSystemRequest(input *DeleteFileSystemInput) DeleteFil
 	}
 
 	if input == nil {
-		input = &DeleteFileSystemInput{}
+		input = &types.DeleteFileSystemInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteFileSystemOutput{})
+	req := c.newRequest(op, input, &types.DeleteFileSystemOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return DeleteFileSystemRequest{Request: req, Input: input, Copy: c.DeleteFileSystemRequest}
@@ -117,8 +62,8 @@ func (c *Client) DeleteFileSystemRequest(input *DeleteFileSystemInput) DeleteFil
 // DeleteFileSystem API operation.
 type DeleteFileSystemRequest struct {
 	*aws.Request
-	Input *DeleteFileSystemInput
-	Copy  func(*DeleteFileSystemInput) DeleteFileSystemRequest
+	Input *types.DeleteFileSystemInput
+	Copy  func(*types.DeleteFileSystemInput) DeleteFileSystemRequest
 }
 
 // Send marshals and sends the DeleteFileSystem API request.
@@ -130,7 +75,7 @@ func (r DeleteFileSystemRequest) Send(ctx context.Context) (*DeleteFileSystemRes
 	}
 
 	resp := &DeleteFileSystemResponse{
-		DeleteFileSystemOutput: r.Request.Data.(*DeleteFileSystemOutput),
+		DeleteFileSystemOutput: r.Request.Data.(*types.DeleteFileSystemOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -140,7 +85,7 @@ func (r DeleteFileSystemRequest) Send(ctx context.Context) (*DeleteFileSystemRes
 // DeleteFileSystemResponse is the response type for the
 // DeleteFileSystem API operation.
 type DeleteFileSystemResponse struct {
-	*DeleteFileSystemOutput
+	*types.DeleteFileSystemOutput
 
 	response *aws.Response
 }

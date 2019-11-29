@@ -6,29 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/iotthingsgraph/types"
 )
-
-type DeleteSystemInstanceInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the system instance to be deleted.
-	Id *string `locationName:"id" type:"string"`
-}
-
-// String returns the string representation
-func (s DeleteSystemInstanceInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type DeleteSystemInstanceOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteSystemInstanceOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteSystemInstance = "DeleteSystemInstance"
 
@@ -49,7 +28,7 @@ const opDeleteSystemInstance = "DeleteSystemInstance"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iotthingsgraph-2018-09-06/DeleteSystemInstance
-func (c *Client) DeleteSystemInstanceRequest(input *DeleteSystemInstanceInput) DeleteSystemInstanceRequest {
+func (c *Client) DeleteSystemInstanceRequest(input *types.DeleteSystemInstanceInput) DeleteSystemInstanceRequest {
 	op := &aws.Operation{
 		Name:       opDeleteSystemInstance,
 		HTTPMethod: "POST",
@@ -57,10 +36,10 @@ func (c *Client) DeleteSystemInstanceRequest(input *DeleteSystemInstanceInput) D
 	}
 
 	if input == nil {
-		input = &DeleteSystemInstanceInput{}
+		input = &types.DeleteSystemInstanceInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteSystemInstanceOutput{})
+	req := c.newRequest(op, input, &types.DeleteSystemInstanceOutput{})
 	return DeleteSystemInstanceRequest{Request: req, Input: input, Copy: c.DeleteSystemInstanceRequest}
 }
 
@@ -68,8 +47,8 @@ func (c *Client) DeleteSystemInstanceRequest(input *DeleteSystemInstanceInput) D
 // DeleteSystemInstance API operation.
 type DeleteSystemInstanceRequest struct {
 	*aws.Request
-	Input *DeleteSystemInstanceInput
-	Copy  func(*DeleteSystemInstanceInput) DeleteSystemInstanceRequest
+	Input *types.DeleteSystemInstanceInput
+	Copy  func(*types.DeleteSystemInstanceInput) DeleteSystemInstanceRequest
 }
 
 // Send marshals and sends the DeleteSystemInstance API request.
@@ -81,7 +60,7 @@ func (r DeleteSystemInstanceRequest) Send(ctx context.Context) (*DeleteSystemIns
 	}
 
 	resp := &DeleteSystemInstanceResponse{
-		DeleteSystemInstanceOutput: r.Request.Data.(*DeleteSystemInstanceOutput),
+		DeleteSystemInstanceOutput: r.Request.Data.(*types.DeleteSystemInstanceOutput),
 		response:                   &aws.Response{Request: r.Request},
 	}
 
@@ -91,7 +70,7 @@ func (r DeleteSystemInstanceRequest) Send(ctx context.Context) (*DeleteSystemIns
 // DeleteSystemInstanceResponse is the response type for the
 // DeleteSystemInstance API operation.
 type DeleteSystemInstanceResponse struct {
-	*DeleteSystemInstanceOutput
+	*types.DeleteSystemInstanceOutput
 
 	response *aws.Response
 }

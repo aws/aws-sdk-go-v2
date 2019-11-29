@@ -6,59 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/codecommit/types"
 )
-
-type UpdatePullRequestTitleInput struct {
-	_ struct{} `type:"structure"`
-
-	// The system-generated ID of the pull request. To get this ID, use ListPullRequests.
-	//
-	// PullRequestId is a required field
-	PullRequestId *string `locationName:"pullRequestId" type:"string" required:"true"`
-
-	// The updated title of the pull request. This will replace the existing title.
-	//
-	// Title is a required field
-	Title *string `locationName:"title" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s UpdatePullRequestTitleInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdatePullRequestTitleInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdatePullRequestTitleInput"}
-
-	if s.PullRequestId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("PullRequestId"))
-	}
-
-	if s.Title == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Title"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type UpdatePullRequestTitleOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Information about the updated pull request.
-	//
-	// PullRequest is a required field
-	PullRequest *PullRequest `locationName:"pullRequest" type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s UpdatePullRequestTitleOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opUpdatePullRequestTitle = "UpdatePullRequestTitle"
 
@@ -75,7 +24,7 @@ const opUpdatePullRequestTitle = "UpdatePullRequestTitle"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/UpdatePullRequestTitle
-func (c *Client) UpdatePullRequestTitleRequest(input *UpdatePullRequestTitleInput) UpdatePullRequestTitleRequest {
+func (c *Client) UpdatePullRequestTitleRequest(input *types.UpdatePullRequestTitleInput) UpdatePullRequestTitleRequest {
 	op := &aws.Operation{
 		Name:       opUpdatePullRequestTitle,
 		HTTPMethod: "POST",
@@ -83,10 +32,10 @@ func (c *Client) UpdatePullRequestTitleRequest(input *UpdatePullRequestTitleInpu
 	}
 
 	if input == nil {
-		input = &UpdatePullRequestTitleInput{}
+		input = &types.UpdatePullRequestTitleInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdatePullRequestTitleOutput{})
+	req := c.newRequest(op, input, &types.UpdatePullRequestTitleOutput{})
 	return UpdatePullRequestTitleRequest{Request: req, Input: input, Copy: c.UpdatePullRequestTitleRequest}
 }
 
@@ -94,8 +43,8 @@ func (c *Client) UpdatePullRequestTitleRequest(input *UpdatePullRequestTitleInpu
 // UpdatePullRequestTitle API operation.
 type UpdatePullRequestTitleRequest struct {
 	*aws.Request
-	Input *UpdatePullRequestTitleInput
-	Copy  func(*UpdatePullRequestTitleInput) UpdatePullRequestTitleRequest
+	Input *types.UpdatePullRequestTitleInput
+	Copy  func(*types.UpdatePullRequestTitleInput) UpdatePullRequestTitleRequest
 }
 
 // Send marshals and sends the UpdatePullRequestTitle API request.
@@ -107,7 +56,7 @@ func (r UpdatePullRequestTitleRequest) Send(ctx context.Context) (*UpdatePullReq
 	}
 
 	resp := &UpdatePullRequestTitleResponse{
-		UpdatePullRequestTitleOutput: r.Request.Data.(*UpdatePullRequestTitleOutput),
+		UpdatePullRequestTitleOutput: r.Request.Data.(*types.UpdatePullRequestTitleOutput),
 		response:                     &aws.Response{Request: r.Request},
 	}
 
@@ -117,7 +66,7 @@ func (r UpdatePullRequestTitleRequest) Send(ctx context.Context) (*UpdatePullReq
 // UpdatePullRequestTitleResponse is the response type for the
 // UpdatePullRequestTitle API operation.
 type UpdatePullRequestTitleResponse struct {
-	*UpdatePullRequestTitleOutput
+	*types.UpdatePullRequestTitleOutput
 
 	response *aws.Response
 }

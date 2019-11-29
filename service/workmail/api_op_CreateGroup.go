@@ -6,60 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/workmail/types"
 )
-
-type CreateGroupInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the group.
-	//
-	// Name is a required field
-	Name *string `min:"1" type:"string" required:"true"`
-
-	// The organization under which the group is to be created.
-	//
-	// OrganizationId is a required field
-	OrganizationId *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s CreateGroupInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateGroupInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateGroupInput"}
-
-	if s.Name == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Name"))
-	}
-	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
-	}
-
-	if s.OrganizationId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("OrganizationId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type CreateGroupOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The identifier of the group.
-	GroupId *string `min:"12" type:"string"`
-}
-
-// String returns the string representation
-func (s CreateGroupOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCreateGroup = "CreateGroup"
 
@@ -77,7 +25,7 @@ const opCreateGroup = "CreateGroup"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/CreateGroup
-func (c *Client) CreateGroupRequest(input *CreateGroupInput) CreateGroupRequest {
+func (c *Client) CreateGroupRequest(input *types.CreateGroupInput) CreateGroupRequest {
 	op := &aws.Operation{
 		Name:       opCreateGroup,
 		HTTPMethod: "POST",
@@ -85,10 +33,10 @@ func (c *Client) CreateGroupRequest(input *CreateGroupInput) CreateGroupRequest 
 	}
 
 	if input == nil {
-		input = &CreateGroupInput{}
+		input = &types.CreateGroupInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateGroupOutput{})
+	req := c.newRequest(op, input, &types.CreateGroupOutput{})
 	return CreateGroupRequest{Request: req, Input: input, Copy: c.CreateGroupRequest}
 }
 
@@ -96,8 +44,8 @@ func (c *Client) CreateGroupRequest(input *CreateGroupInput) CreateGroupRequest 
 // CreateGroup API operation.
 type CreateGroupRequest struct {
 	*aws.Request
-	Input *CreateGroupInput
-	Copy  func(*CreateGroupInput) CreateGroupRequest
+	Input *types.CreateGroupInput
+	Copy  func(*types.CreateGroupInput) CreateGroupRequest
 }
 
 // Send marshals and sends the CreateGroup API request.
@@ -109,7 +57,7 @@ func (r CreateGroupRequest) Send(ctx context.Context) (*CreateGroupResponse, err
 	}
 
 	resp := &CreateGroupResponse{
-		CreateGroupOutput: r.Request.Data.(*CreateGroupOutput),
+		CreateGroupOutput: r.Request.Data.(*types.CreateGroupOutput),
 		response:          &aws.Response{Request: r.Request},
 	}
 
@@ -119,7 +67,7 @@ func (r CreateGroupRequest) Send(ctx context.Context) (*CreateGroupResponse, err
 // CreateGroupResponse is the response type for the
 // CreateGroup API operation.
 type CreateGroupResponse struct {
-	*CreateGroupOutput
+	*types.CreateGroupOutput
 
 	response *aws.Response
 }

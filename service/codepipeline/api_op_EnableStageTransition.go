@@ -6,75 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
+	"github.com/aws/aws-sdk-go-v2/service/codepipeline/types"
 )
-
-// Represents the input of an EnableStageTransition action.
-type EnableStageTransitionInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the pipeline in which you want to enable the flow of artifacts
-	// from one stage to another.
-	//
-	// PipelineName is a required field
-	PipelineName *string `locationName:"pipelineName" min:"1" type:"string" required:"true"`
-
-	// The name of the stage where you want to enable the transition of artifacts,
-	// either into the stage (inbound) or from that stage to the next stage (outbound).
-	//
-	// StageName is a required field
-	StageName *string `locationName:"stageName" min:"1" type:"string" required:"true"`
-
-	// Specifies whether artifacts are allowed to enter the stage and be processed
-	// by the actions in that stage (inbound) or whether already processed artifacts
-	// are allowed to transition to the next stage (outbound).
-	//
-	// TransitionType is a required field
-	TransitionType StageTransitionType `locationName:"transitionType" type:"string" required:"true" enum:"true"`
-}
-
-// String returns the string representation
-func (s EnableStageTransitionInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *EnableStageTransitionInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "EnableStageTransitionInput"}
-
-	if s.PipelineName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("PipelineName"))
-	}
-	if s.PipelineName != nil && len(*s.PipelineName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("PipelineName", 1))
-	}
-
-	if s.StageName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("StageName"))
-	}
-	if s.StageName != nil && len(*s.StageName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("StageName", 1))
-	}
-	if len(s.TransitionType) == 0 {
-		invalidParams.Add(aws.NewErrParamRequired("TransitionType"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type EnableStageTransitionOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s EnableStageTransitionOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opEnableStageTransition = "EnableStageTransition"
 
@@ -91,7 +26,7 @@ const opEnableStageTransition = "EnableStageTransition"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/EnableStageTransition
-func (c *Client) EnableStageTransitionRequest(input *EnableStageTransitionInput) EnableStageTransitionRequest {
+func (c *Client) EnableStageTransitionRequest(input *types.EnableStageTransitionInput) EnableStageTransitionRequest {
 	op := &aws.Operation{
 		Name:       opEnableStageTransition,
 		HTTPMethod: "POST",
@@ -99,10 +34,10 @@ func (c *Client) EnableStageTransitionRequest(input *EnableStageTransitionInput)
 	}
 
 	if input == nil {
-		input = &EnableStageTransitionInput{}
+		input = &types.EnableStageTransitionInput{}
 	}
 
-	req := c.newRequest(op, input, &EnableStageTransitionOutput{})
+	req := c.newRequest(op, input, &types.EnableStageTransitionOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return EnableStageTransitionRequest{Request: req, Input: input, Copy: c.EnableStageTransitionRequest}
@@ -112,8 +47,8 @@ func (c *Client) EnableStageTransitionRequest(input *EnableStageTransitionInput)
 // EnableStageTransition API operation.
 type EnableStageTransitionRequest struct {
 	*aws.Request
-	Input *EnableStageTransitionInput
-	Copy  func(*EnableStageTransitionInput) EnableStageTransitionRequest
+	Input *types.EnableStageTransitionInput
+	Copy  func(*types.EnableStageTransitionInput) EnableStageTransitionRequest
 }
 
 // Send marshals and sends the EnableStageTransition API request.
@@ -125,7 +60,7 @@ func (r EnableStageTransitionRequest) Send(ctx context.Context) (*EnableStageTra
 	}
 
 	resp := &EnableStageTransitionResponse{
-		EnableStageTransitionOutput: r.Request.Data.(*EnableStageTransitionOutput),
+		EnableStageTransitionOutput: r.Request.Data.(*types.EnableStageTransitionOutput),
 		response:                    &aws.Response{Request: r.Request},
 	}
 
@@ -135,7 +70,7 @@ func (r EnableStageTransitionRequest) Send(ctx context.Context) (*EnableStageTra
 // EnableStageTransitionResponse is the response type for the
 // EnableStageTransition API operation.
 type EnableStageTransitionResponse struct {
-	*EnableStageTransitionOutput
+	*types.EnableStageTransitionOutput
 
 	response *aws.Response
 }

@@ -6,78 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-type CreateVpcEndpointConnectionNotificationInput struct {
-	_ struct{} `type:"structure"`
-
-	// Unique, case-sensitive identifier you provide to ensure the idempotency of
-	// the request. For more information, see How to Ensure Idempotency (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html).
-	ClientToken *string `type:"string"`
-
-	// One or more endpoint events for which to receive notifications. Valid values
-	// are Accept, Connect, Delete, and Reject.
-	//
-	// ConnectionEvents is a required field
-	ConnectionEvents []string `locationNameList:"item" type:"list" required:"true"`
-
-	// The ARN of the SNS topic for the notifications.
-	//
-	// ConnectionNotificationArn is a required field
-	ConnectionNotificationArn *string `type:"string" required:"true"`
-
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have
-	// the required permissions, the error response is DryRunOperation. Otherwise,
-	// it is UnauthorizedOperation.
-	DryRun *bool `type:"boolean"`
-
-	// The ID of the endpoint service.
-	ServiceId *string `type:"string"`
-
-	// The ID of the endpoint.
-	VpcEndpointId *string `type:"string"`
-}
-
-// String returns the string representation
-func (s CreateVpcEndpointConnectionNotificationInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateVpcEndpointConnectionNotificationInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateVpcEndpointConnectionNotificationInput"}
-
-	if s.ConnectionEvents == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ConnectionEvents"))
-	}
-
-	if s.ConnectionNotificationArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ConnectionNotificationArn"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type CreateVpcEndpointConnectionNotificationOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Unique, case-sensitive identifier you provide to ensure the idempotency of
-	// the request.
-	ClientToken *string `locationName:"clientToken" type:"string"`
-
-	// Information about the notification.
-	ConnectionNotification *ConnectionNotification `locationName:"connectionNotification" type:"structure"`
-}
-
-// String returns the string representation
-func (s CreateVpcEndpointConnectionNotificationOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCreateVpcEndpointConnectionNotification = "CreateVpcEndpointConnectionNotification"
 
@@ -100,7 +30,7 @@ const opCreateVpcEndpointConnectionNotification = "CreateVpcEndpointConnectionNo
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateVpcEndpointConnectionNotification
-func (c *Client) CreateVpcEndpointConnectionNotificationRequest(input *CreateVpcEndpointConnectionNotificationInput) CreateVpcEndpointConnectionNotificationRequest {
+func (c *Client) CreateVpcEndpointConnectionNotificationRequest(input *types.CreateVpcEndpointConnectionNotificationInput) CreateVpcEndpointConnectionNotificationRequest {
 	op := &aws.Operation{
 		Name:       opCreateVpcEndpointConnectionNotification,
 		HTTPMethod: "POST",
@@ -108,10 +38,10 @@ func (c *Client) CreateVpcEndpointConnectionNotificationRequest(input *CreateVpc
 	}
 
 	if input == nil {
-		input = &CreateVpcEndpointConnectionNotificationInput{}
+		input = &types.CreateVpcEndpointConnectionNotificationInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateVpcEndpointConnectionNotificationOutput{})
+	req := c.newRequest(op, input, &types.CreateVpcEndpointConnectionNotificationOutput{})
 	return CreateVpcEndpointConnectionNotificationRequest{Request: req, Input: input, Copy: c.CreateVpcEndpointConnectionNotificationRequest}
 }
 
@@ -119,8 +49,8 @@ func (c *Client) CreateVpcEndpointConnectionNotificationRequest(input *CreateVpc
 // CreateVpcEndpointConnectionNotification API operation.
 type CreateVpcEndpointConnectionNotificationRequest struct {
 	*aws.Request
-	Input *CreateVpcEndpointConnectionNotificationInput
-	Copy  func(*CreateVpcEndpointConnectionNotificationInput) CreateVpcEndpointConnectionNotificationRequest
+	Input *types.CreateVpcEndpointConnectionNotificationInput
+	Copy  func(*types.CreateVpcEndpointConnectionNotificationInput) CreateVpcEndpointConnectionNotificationRequest
 }
 
 // Send marshals and sends the CreateVpcEndpointConnectionNotification API request.
@@ -132,7 +62,7 @@ func (r CreateVpcEndpointConnectionNotificationRequest) Send(ctx context.Context
 	}
 
 	resp := &CreateVpcEndpointConnectionNotificationResponse{
-		CreateVpcEndpointConnectionNotificationOutput: r.Request.Data.(*CreateVpcEndpointConnectionNotificationOutput),
+		CreateVpcEndpointConnectionNotificationOutput: r.Request.Data.(*types.CreateVpcEndpointConnectionNotificationOutput),
 		response: &aws.Response{Request: r.Request},
 	}
 
@@ -142,7 +72,7 @@ func (r CreateVpcEndpointConnectionNotificationRequest) Send(ctx context.Context
 // CreateVpcEndpointConnectionNotificationResponse is the response type for the
 // CreateVpcEndpointConnectionNotification API operation.
 type CreateVpcEndpointConnectionNotificationResponse struct {
-	*CreateVpcEndpointConnectionNotificationOutput
+	*types.CreateVpcEndpointConnectionNotificationOutput
 
 	response *aws.Response
 }

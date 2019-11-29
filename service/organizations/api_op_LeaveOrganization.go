@@ -6,28 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
+	"github.com/aws/aws-sdk-go-v2/service/organizations/types"
 )
-
-type LeaveOrganizationInput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s LeaveOrganizationInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type LeaveOrganizationOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s LeaveOrganizationOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opLeaveOrganization = "LeaveOrganization"
 
@@ -72,7 +54,7 @@ const opLeaveOrganization = "LeaveOrganization"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/LeaveOrganization
-func (c *Client) LeaveOrganizationRequest(input *LeaveOrganizationInput) LeaveOrganizationRequest {
+func (c *Client) LeaveOrganizationRequest(input *types.LeaveOrganizationInput) LeaveOrganizationRequest {
 	op := &aws.Operation{
 		Name:       opLeaveOrganization,
 		HTTPMethod: "POST",
@@ -80,10 +62,10 @@ func (c *Client) LeaveOrganizationRequest(input *LeaveOrganizationInput) LeaveOr
 	}
 
 	if input == nil {
-		input = &LeaveOrganizationInput{}
+		input = &types.LeaveOrganizationInput{}
 	}
 
-	req := c.newRequest(op, input, &LeaveOrganizationOutput{})
+	req := c.newRequest(op, input, &types.LeaveOrganizationOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return LeaveOrganizationRequest{Request: req, Input: input, Copy: c.LeaveOrganizationRequest}
@@ -93,8 +75,8 @@ func (c *Client) LeaveOrganizationRequest(input *LeaveOrganizationInput) LeaveOr
 // LeaveOrganization API operation.
 type LeaveOrganizationRequest struct {
 	*aws.Request
-	Input *LeaveOrganizationInput
-	Copy  func(*LeaveOrganizationInput) LeaveOrganizationRequest
+	Input *types.LeaveOrganizationInput
+	Copy  func(*types.LeaveOrganizationInput) LeaveOrganizationRequest
 }
 
 // Send marshals and sends the LeaveOrganization API request.
@@ -106,7 +88,7 @@ func (r LeaveOrganizationRequest) Send(ctx context.Context) (*LeaveOrganizationR
 	}
 
 	resp := &LeaveOrganizationResponse{
-		LeaveOrganizationOutput: r.Request.Data.(*LeaveOrganizationOutput),
+		LeaveOrganizationOutput: r.Request.Data.(*types.LeaveOrganizationOutput),
 		response:                &aws.Response{Request: r.Request},
 	}
 
@@ -116,7 +98,7 @@ func (r LeaveOrganizationRequest) Send(ctx context.Context) (*LeaveOrganizationR
 // LeaveOrganizationResponse is the response type for the
 // LeaveOrganization API operation.
 type LeaveOrganizationResponse struct {
-	*LeaveOrganizationOutput
+	*types.LeaveOrganizationOutput
 
 	response *aws.Response
 }

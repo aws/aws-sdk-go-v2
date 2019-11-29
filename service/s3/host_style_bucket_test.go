@@ -14,6 +14,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws/endpoints"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting/unit"
 	"github.com/aws/aws-sdk-go-v2/service/s3"
+	"github.com/aws/aws-sdk-go-v2/service/s3/types"
 )
 
 type s3BucketTest struct {
@@ -65,7 +66,7 @@ func runTests(t *testing.T, svc *s3.Client, tests []s3BucketTest) {
 	t.Helper()
 
 	for i, test := range tests {
-		req := svc.ListObjectsRequest(&s3.ListObjectsInput{Bucket: &test.bucket})
+		req := svc.ListObjectsRequest(&types.ListObjectsInput{Bucket: &test.bucket})
 		req.Build()
 
 		if test.errCode != "" {
@@ -149,7 +150,7 @@ func TestHostStyleBucketGetBucketLocation(t *testing.T) {
 	cfg.EndpointResolver = endpoints.NewDefaultResolver()
 
 	s := s3.New(cfg)
-	req := s.GetBucketLocationRequest(&s3.GetBucketLocationInput{
+	req := s.GetBucketLocationRequest(&types.GetBucketLocationInput{
 		Bucket: aws.String("bucket"),
 	})
 
@@ -171,7 +172,7 @@ func TestVirtualHostStyleSuite(t *testing.T) {
 		t.Fatalf("expect no error, %v", err)
 	}
 
-	cases := []struct {
+	var cases []struct {
 		Bucket                    string
 		Region                    string
 		UseDualStack              bool
@@ -179,7 +180,7 @@ func TestVirtualHostStyleSuite(t *testing.T) {
 		ConfiguredAddressingStyle string
 
 		ExpectedURI string
-	}{}
+	}
 
 	decoder := json.NewDecoder(f)
 	if err := decoder.Decode(&cases); err != nil {
@@ -199,7 +200,7 @@ func TestVirtualHostStyleSuite(t *testing.T) {
 			svc.ForcePathStyle = c.ConfiguredAddressingStyle == testPathStyle
 			svc.UseAccelerate = c.UseS3Accelerate
 
-			req := svc.HeadBucketRequest(&s3.HeadBucketInput{
+			req := svc.HeadBucketRequest(&types.HeadBucketInput{
 				Bucket: &c.Bucket,
 			})
 			req.Build()

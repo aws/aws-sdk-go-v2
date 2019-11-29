@@ -12,6 +12,8 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws/awserr"
 	"github.com/aws/aws-sdk-go-v2/aws/external"
 	"github.com/aws/aws-sdk-go-v2/service/cloud9"
+	"github.com/aws/aws-sdk-go-v2/service/cloud9/enums"
+	"github.com/aws/aws-sdk-go-v2/service/cloud9/types"
 )
 
 var _ time.Duration
@@ -36,7 +38,7 @@ func ExampleClient_CreateEnvironmentEC2Request_shared00() {
 	}
 
 	svc := cloud9.New(cfg)
-	input := &cloud9.CreateEnvironmentEC2Input{
+	input := &types.CreateEnvironmentEC2Input{
 		AutomaticStopTimeMinutes: aws.Int64(60),
 		Description:              aws.String("This is my demonstration environment."),
 		InstanceType:             aws.String("t2.micro"),
@@ -88,9 +90,9 @@ func ExampleClient_CreateEnvironmentMembershipRequest_shared00() {
 	}
 
 	svc := cloud9.New(cfg)
-	input := &cloud9.CreateEnvironmentMembershipInput{
+	input := &types.CreateEnvironmentMembershipInput{
 		EnvironmentId: aws.String("8d9967e2f0624182b74e7690ad69ebEX"),
-		Permissions:   cloud9.MemberPermissionsReadWrite,
+		Permissions:   enums.MemberPermissionsReadWrite,
 		UserArn:       aws.String("arn:aws:iam::123456789012:user/AnotherDemoUser"),
 	}
 
@@ -137,7 +139,7 @@ func ExampleClient_DeleteEnvironmentRequest_shared00() {
 	}
 
 	svc := cloud9.New(cfg)
-	input := &cloud9.DeleteEnvironmentInput{
+	input := &types.DeleteEnvironmentInput{
 		EnvironmentId: aws.String("8d9967e2f0624182b74e7690ad69ebEX"),
 	}
 
@@ -184,7 +186,7 @@ func ExampleClient_DeleteEnvironmentMembershipRequest_shared00() {
 	}
 
 	svc := cloud9.New(cfg)
-	input := &cloud9.DeleteEnvironmentMembershipInput{
+	input := &types.DeleteEnvironmentMembershipInput{
 		EnvironmentId: aws.String("8d9967e2f0624182b74e7690ad69ebEX"),
 		UserArn:       aws.String("arn:aws:iam::123456789012:user/AnotherDemoUser"),
 	}
@@ -233,7 +235,7 @@ func ExampleClient_DescribeEnvironmentMembershipsRequest_shared00() {
 	}
 
 	svc := cloud9.New(cfg)
-	input := &cloud9.DescribeEnvironmentMembershipsInput{
+	input := &types.DescribeEnvironmentMembershipsInput{
 		EnvironmentId: aws.String("8d9967e2f0624182b74e7690ad69ebEX"),
 	}
 
@@ -281,10 +283,10 @@ func ExampleClient_DescribeEnvironmentMembershipsRequest_shared01() {
 	}
 
 	svc := cloud9.New(cfg)
-	input := &cloud9.DescribeEnvironmentMembershipsInput{
+	input := &types.DescribeEnvironmentMembershipsInput{
 		EnvironmentId: aws.String("8d9967e2f0624182b74e7690ad69ebEX"),
-		Permissions: []cloud9.Permissions{
-			cloud9.Permissions("owner"),
+		Permissions: []enums.Permissions{
+			enums.Permissions("owner"),
 		},
 	}
 
@@ -332,7 +334,7 @@ func ExampleClient_DescribeEnvironmentMembershipsRequest_shared02() {
 	}
 
 	svc := cloud9.New(cfg)
-	input := &cloud9.DescribeEnvironmentMembershipsInput{
+	input := &types.DescribeEnvironmentMembershipsInput{
 		UserArn: aws.String("arn:aws:iam::123456789012:user/MyDemoUser"),
 	}
 
@@ -379,7 +381,7 @@ func ExampleClient_DescribeEnvironmentStatusRequest_shared00() {
 	}
 
 	svc := cloud9.New(cfg)
-	input := &cloud9.DescribeEnvironmentStatusInput{
+	input := &types.DescribeEnvironmentStatusInput{
 		EnvironmentId: aws.String("8d9967e2f0624182b74e7690ad69ebEX"),
 	}
 
@@ -426,7 +428,7 @@ func ExampleClient_DescribeEnvironmentsRequest_shared00() {
 	}
 
 	svc := cloud9.New(cfg)
-	input := &cloud9.DescribeEnvironmentsInput{
+	input := &types.DescribeEnvironmentsInput{
 		EnvironmentIds: []string{
 			"8d9967e2f0624182b74e7690ad69ebEX",
 			"349c86d4579e4e7298d500ff57a6b2EX",
@@ -476,7 +478,7 @@ func ExampleClient_ListEnvironmentsRequest_shared00() {
 	}
 
 	svc := cloud9.New(cfg)
-	input := &cloud9.ListEnvironmentsInput{}
+	input := &types.ListEnvironmentsInput{}
 
 	req := svc.ListEnvironmentsRequest(input)
 	result, err := req.Send(context.Background())
@@ -521,7 +523,7 @@ func ExampleClient_UpdateEnvironmentRequest_shared00() {
 	}
 
 	svc := cloud9.New(cfg)
-	input := &cloud9.UpdateEnvironmentInput{
+	input := &types.UpdateEnvironmentInput{
 		Description:   aws.String("This is my changed demonstration environment."),
 		EnvironmentId: aws.String("8d9967e2f0624182b74e7690ad69ebEX"),
 		Name:          aws.String("my-changed-demo-environment"),
@@ -570,9 +572,9 @@ func ExampleClient_UpdateEnvironmentMembershipRequest_shared00() {
 	}
 
 	svc := cloud9.New(cfg)
-	input := &cloud9.UpdateEnvironmentMembershipInput{
+	input := &types.UpdateEnvironmentMembershipInput{
 		EnvironmentId: aws.String("8d9967e2f0624182b74e7690ad69ebEX"),
-		Permissions:   cloud9.MemberPermissionsReadOnly,
+		Permissions:   enums.MemberPermissionsReadOnly,
 		UserArn:       aws.String("arn:aws:iam::123456789012:user/AnotherDemoUser"),
 	}
 

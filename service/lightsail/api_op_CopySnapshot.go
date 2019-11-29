@@ -6,96 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/lightsail/types"
 )
-
-type CopySnapshotInput struct {
-	_ struct{} `type:"structure"`
-
-	// The date of the automatic snapshot to copy for the new manual snapshot.
-	//
-	// Use the get auto snapshots operation to identify the dates of the available
-	// automatic snapshots.
-	//
-	// Constraints:
-	//
-	//    * Must be specified in YYYY-MM-DD format.
-	//
-	//    * This parameter cannot be defined together with the use latest restorable
-	//    auto snapshot parameter. The restore date and use latest restorable auto
-	//    snapshot parameters are mutually exclusive.
-	//
-	// Define this parameter only when copying an automatic snapshot as a manual
-	// snapshot. For more information, see the Lightsail Dev Guide (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-configuring-automatic-snapshots).
-	RestoreDate *string `locationName:"restoreDate" type:"string"`
-
-	// The AWS Region where the source manual or automatic snapshot is located.
-	//
-	// SourceRegion is a required field
-	SourceRegion RegionName `locationName:"sourceRegion" type:"string" required:"true" enum:"true"`
-
-	// The name of the source resource from which the automatic snapshot was created.
-	//
-	// Define this parameter only when copying an automatic snapshot as a manual
-	// snapshot. For more information, see the Lightsail Dev Guide (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-configuring-automatic-snapshots).
-	SourceResourceName *string `locationName:"sourceResourceName" type:"string"`
-
-	// The name of the source instance or disk snapshot to be copied.
-	//
-	// Define this parameter only when copying a manual snapshot as another manual
-	// snapshot.
-	SourceSnapshotName *string `locationName:"sourceSnapshotName" type:"string"`
-
-	// The name of the new instance or disk snapshot to be created as a copy.
-	//
-	// TargetSnapshotName is a required field
-	TargetSnapshotName *string `locationName:"targetSnapshotName" type:"string" required:"true"`
-
-	// A Boolean value to indicate whether to use the latest available automatic
-	// snapshot.
-	//
-	// This parameter cannot be defined together with the restore date parameter.
-	// The use latest restorable auto snapshot and restore date parameters are mutually
-	// exclusive.
-	//
-	// Define this parameter only when copying an automatic snapshot as a manual
-	// snapshot. For more information, see the Lightsail Dev Guide (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-configuring-automatic-snapshots).
-	UseLatestRestorableAutoSnapshot *bool `locationName:"useLatestRestorableAutoSnapshot" type:"boolean"`
-}
-
-// String returns the string representation
-func (s CopySnapshotInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CopySnapshotInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CopySnapshotInput"}
-	if len(s.SourceRegion) == 0 {
-		invalidParams.Add(aws.NewErrParamRequired("SourceRegion"))
-	}
-
-	if s.TargetSnapshotName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("TargetSnapshotName"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type CopySnapshotOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A list of objects describing the API operation.
-	Operations []Operation `locationName:"operations" type:"list"`
-}
-
-// String returns the string representation
-func (s CopySnapshotOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCopySnapshot = "CopySnapshot"
 
@@ -124,7 +36,7 @@ const opCopySnapshot = "CopySnapshot"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/CopySnapshot
-func (c *Client) CopySnapshotRequest(input *CopySnapshotInput) CopySnapshotRequest {
+func (c *Client) CopySnapshotRequest(input *types.CopySnapshotInput) CopySnapshotRequest {
 	op := &aws.Operation{
 		Name:       opCopySnapshot,
 		HTTPMethod: "POST",
@@ -132,10 +44,10 @@ func (c *Client) CopySnapshotRequest(input *CopySnapshotInput) CopySnapshotReque
 	}
 
 	if input == nil {
-		input = &CopySnapshotInput{}
+		input = &types.CopySnapshotInput{}
 	}
 
-	req := c.newRequest(op, input, &CopySnapshotOutput{})
+	req := c.newRequest(op, input, &types.CopySnapshotOutput{})
 	return CopySnapshotRequest{Request: req, Input: input, Copy: c.CopySnapshotRequest}
 }
 
@@ -143,8 +55,8 @@ func (c *Client) CopySnapshotRequest(input *CopySnapshotInput) CopySnapshotReque
 // CopySnapshot API operation.
 type CopySnapshotRequest struct {
 	*aws.Request
-	Input *CopySnapshotInput
-	Copy  func(*CopySnapshotInput) CopySnapshotRequest
+	Input *types.CopySnapshotInput
+	Copy  func(*types.CopySnapshotInput) CopySnapshotRequest
 }
 
 // Send marshals and sends the CopySnapshot API request.
@@ -156,7 +68,7 @@ func (r CopySnapshotRequest) Send(ctx context.Context) (*CopySnapshotResponse, e
 	}
 
 	resp := &CopySnapshotResponse{
-		CopySnapshotOutput: r.Request.Data.(*CopySnapshotOutput),
+		CopySnapshotOutput: r.Request.Data.(*types.CopySnapshotOutput),
 		response:           &aws.Response{Request: r.Request},
 	}
 
@@ -166,7 +78,7 @@ func (r CopySnapshotRequest) Send(ctx context.Context) (*CopySnapshotResponse, e
 // CopySnapshotResponse is the response type for the
 // CopySnapshot API operation.
 type CopySnapshotResponse struct {
-	*CopySnapshotOutput
+	*types.CopySnapshotOutput
 
 	response *aws.Response
 }

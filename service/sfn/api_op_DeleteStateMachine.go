@@ -6,48 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/sfn/types"
 )
-
-type DeleteStateMachineInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the state machine to delete.
-	//
-	// StateMachineArn is a required field
-	StateMachineArn *string `locationName:"stateMachineArn" min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteStateMachineInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteStateMachineInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteStateMachineInput"}
-
-	if s.StateMachineArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("StateMachineArn"))
-	}
-	if s.StateMachineArn != nil && len(*s.StateMachineArn) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("StateMachineArn", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteStateMachineOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteStateMachineOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteStateMachine = "DeleteStateMachine"
 
@@ -69,7 +29,7 @@ const opDeleteStateMachine = "DeleteStateMachine"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/DeleteStateMachine
-func (c *Client) DeleteStateMachineRequest(input *DeleteStateMachineInput) DeleteStateMachineRequest {
+func (c *Client) DeleteStateMachineRequest(input *types.DeleteStateMachineInput) DeleteStateMachineRequest {
 	op := &aws.Operation{
 		Name:       opDeleteStateMachine,
 		HTTPMethod: "POST",
@@ -77,10 +37,10 @@ func (c *Client) DeleteStateMachineRequest(input *DeleteStateMachineInput) Delet
 	}
 
 	if input == nil {
-		input = &DeleteStateMachineInput{}
+		input = &types.DeleteStateMachineInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteStateMachineOutput{})
+	req := c.newRequest(op, input, &types.DeleteStateMachineOutput{})
 	return DeleteStateMachineRequest{Request: req, Input: input, Copy: c.DeleteStateMachineRequest}
 }
 
@@ -88,8 +48,8 @@ func (c *Client) DeleteStateMachineRequest(input *DeleteStateMachineInput) Delet
 // DeleteStateMachine API operation.
 type DeleteStateMachineRequest struct {
 	*aws.Request
-	Input *DeleteStateMachineInput
-	Copy  func(*DeleteStateMachineInput) DeleteStateMachineRequest
+	Input *types.DeleteStateMachineInput
+	Copy  func(*types.DeleteStateMachineInput) DeleteStateMachineRequest
 }
 
 // Send marshals and sends the DeleteStateMachine API request.
@@ -101,7 +61,7 @@ func (r DeleteStateMachineRequest) Send(ctx context.Context) (*DeleteStateMachin
 	}
 
 	resp := &DeleteStateMachineResponse{
-		DeleteStateMachineOutput: r.Request.Data.(*DeleteStateMachineOutput),
+		DeleteStateMachineOutput: r.Request.Data.(*types.DeleteStateMachineOutput),
 		response:                 &aws.Response{Request: r.Request},
 	}
 
@@ -111,7 +71,7 @@ func (r DeleteStateMachineRequest) Send(ctx context.Context) (*DeleteStateMachin
 // DeleteStateMachineResponse is the response type for the
 // DeleteStateMachine API operation.
 type DeleteStateMachineResponse struct {
-	*DeleteStateMachineOutput
+	*types.DeleteStateMachineOutput
 
 	response *aws.Response
 }

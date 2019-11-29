@@ -6,61 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-type GetConsoleScreenshotInput struct {
-	_ struct{} `type:"structure"`
-
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have
-	// the required permissions, the error response is DryRunOperation. Otherwise,
-	// it is UnauthorizedOperation.
-	DryRun *bool `type:"boolean"`
-
-	// The ID of the instance.
-	//
-	// InstanceId is a required field
-	InstanceId *string `type:"string" required:"true"`
-
-	// When set to true, acts as keystroke input and wakes up an instance that's
-	// in standby or "sleep" mode.
-	WakeUp *bool `type:"boolean"`
-}
-
-// String returns the string representation
-func (s GetConsoleScreenshotInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetConsoleScreenshotInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetConsoleScreenshotInput"}
-
-	if s.InstanceId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("InstanceId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type GetConsoleScreenshotOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The data that comprises the image.
-	ImageData *string `locationName:"imageData" type:"string"`
-
-	// The ID of the instance.
-	InstanceId *string `locationName:"instanceId" type:"string"`
-}
-
-// String returns the string representation
-func (s GetConsoleScreenshotOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetConsoleScreenshot = "GetConsoleScreenshot"
 
@@ -79,7 +26,7 @@ const opGetConsoleScreenshot = "GetConsoleScreenshot"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetConsoleScreenshot
-func (c *Client) GetConsoleScreenshotRequest(input *GetConsoleScreenshotInput) GetConsoleScreenshotRequest {
+func (c *Client) GetConsoleScreenshotRequest(input *types.GetConsoleScreenshotInput) GetConsoleScreenshotRequest {
 	op := &aws.Operation{
 		Name:       opGetConsoleScreenshot,
 		HTTPMethod: "POST",
@@ -87,10 +34,10 @@ func (c *Client) GetConsoleScreenshotRequest(input *GetConsoleScreenshotInput) G
 	}
 
 	if input == nil {
-		input = &GetConsoleScreenshotInput{}
+		input = &types.GetConsoleScreenshotInput{}
 	}
 
-	req := c.newRequest(op, input, &GetConsoleScreenshotOutput{})
+	req := c.newRequest(op, input, &types.GetConsoleScreenshotOutput{})
 	return GetConsoleScreenshotRequest{Request: req, Input: input, Copy: c.GetConsoleScreenshotRequest}
 }
 
@@ -98,8 +45,8 @@ func (c *Client) GetConsoleScreenshotRequest(input *GetConsoleScreenshotInput) G
 // GetConsoleScreenshot API operation.
 type GetConsoleScreenshotRequest struct {
 	*aws.Request
-	Input *GetConsoleScreenshotInput
-	Copy  func(*GetConsoleScreenshotInput) GetConsoleScreenshotRequest
+	Input *types.GetConsoleScreenshotInput
+	Copy  func(*types.GetConsoleScreenshotInput) GetConsoleScreenshotRequest
 }
 
 // Send marshals and sends the GetConsoleScreenshot API request.
@@ -111,7 +58,7 @@ func (r GetConsoleScreenshotRequest) Send(ctx context.Context) (*GetConsoleScree
 	}
 
 	resp := &GetConsoleScreenshotResponse{
-		GetConsoleScreenshotOutput: r.Request.Data.(*GetConsoleScreenshotOutput),
+		GetConsoleScreenshotOutput: r.Request.Data.(*types.GetConsoleScreenshotOutput),
 		response:                   &aws.Response{Request: r.Request},
 	}
 
@@ -121,7 +68,7 @@ func (r GetConsoleScreenshotRequest) Send(ctx context.Context) (*GetConsoleScree
 // GetConsoleScreenshotResponse is the response type for the
 // GetConsoleScreenshot API operation.
 type GetConsoleScreenshotResponse struct {
-	*GetConsoleScreenshotOutput
+	*types.GetConsoleScreenshotOutput
 
 	response *aws.Response
 }

@@ -6,118 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
+	"github.com/aws/aws-sdk-go-v2/service/kms/types"
 )
-
-type PutKeyPolicyInput struct {
-	_ struct{} `type:"structure"`
-
-	// A flag to indicate whether to bypass the key policy lockout safety check.
-	//
-	// Setting this value to true increases the risk that the CMK becomes unmanageable.
-	// Do not set this value to true indiscriminately.
-	//
-	// For more information, refer to the scenario in the Default Key Policy (https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html#key-policy-default-allow-root-enable-iam)
-	// section in the AWS Key Management Service Developer Guide.
-	//
-	// Use this parameter only when you intend to prevent the principal that is
-	// making the request from making a subsequent PutKeyPolicy request on the CMK.
-	//
-	// The default value is false.
-	BypassPolicyLockoutSafetyCheck *bool `type:"boolean"`
-
-	// A unique identifier for the customer master key (CMK).
-	//
-	// Specify the key ID or the Amazon Resource Name (ARN) of the CMK.
-	//
-	// For example:
-	//
-	//    * Key ID: 1234abcd-12ab-34cd-56ef-1234567890ab
-	//
-	//    * Key ARN: arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab
-	//
-	// To get the key ID and key ARN for a CMK, use ListKeys or DescribeKey.
-	//
-	// KeyId is a required field
-	KeyId *string `min:"1" type:"string" required:"true"`
-
-	// The key policy to attach to the CMK.
-	//
-	// The key policy must meet the following criteria:
-	//
-	//    * If you don't set BypassPolicyLockoutSafetyCheck to true, the key policy
-	//    must allow the principal that is making the PutKeyPolicy request to make
-	//    a subsequent PutKeyPolicy request on the CMK. This reduces the risk that
-	//    the CMK becomes unmanageable. For more information, refer to the scenario
-	//    in the Default Key Policy (https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html#key-policy-default-allow-root-enable-iam)
-	//    section of the AWS Key Management Service Developer Guide.
-	//
-	//    * Each statement in the key policy must contain one or more principals.
-	//    The principals in the key policy must exist and be visible to AWS KMS.
-	//    When you create a new AWS principal (for example, an IAM user or role),
-	//    you might need to enforce a delay before including the new principal in
-	//    a key policy because the new principal might not be immediately visible
-	//    to AWS KMS. For more information, see Changes that I make are not always
-	//    immediately visible (https://docs.aws.amazon.com/IAM/latest/UserGuide/troubleshoot_general.html#troubleshoot_general_eventual-consistency)
-	//    in the AWS Identity and Access Management User Guide.
-	//
-	// The key policy size limit is 32 kilobytes (32768 bytes).
-	//
-	// Policy is a required field
-	Policy *string `min:"1" type:"string" required:"true"`
-
-	// The name of the key policy. The only valid value is default.
-	//
-	// PolicyName is a required field
-	PolicyName *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s PutKeyPolicyInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *PutKeyPolicyInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "PutKeyPolicyInput"}
-
-	if s.KeyId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("KeyId"))
-	}
-	if s.KeyId != nil && len(*s.KeyId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("KeyId", 1))
-	}
-
-	if s.Policy == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Policy"))
-	}
-	if s.Policy != nil && len(*s.Policy) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Policy", 1))
-	}
-
-	if s.PolicyName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("PolicyName"))
-	}
-	if s.PolicyName != nil && len(*s.PolicyName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("PolicyName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type PutKeyPolicyOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s PutKeyPolicyOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opPutKeyPolicy = "PutKeyPolicy"
 
@@ -138,7 +30,7 @@ const opPutKeyPolicy = "PutKeyPolicy"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/PutKeyPolicy
-func (c *Client) PutKeyPolicyRequest(input *PutKeyPolicyInput) PutKeyPolicyRequest {
+func (c *Client) PutKeyPolicyRequest(input *types.PutKeyPolicyInput) PutKeyPolicyRequest {
 	op := &aws.Operation{
 		Name:       opPutKeyPolicy,
 		HTTPMethod: "POST",
@@ -146,10 +38,10 @@ func (c *Client) PutKeyPolicyRequest(input *PutKeyPolicyInput) PutKeyPolicyReque
 	}
 
 	if input == nil {
-		input = &PutKeyPolicyInput{}
+		input = &types.PutKeyPolicyInput{}
 	}
 
-	req := c.newRequest(op, input, &PutKeyPolicyOutput{})
+	req := c.newRequest(op, input, &types.PutKeyPolicyOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return PutKeyPolicyRequest{Request: req, Input: input, Copy: c.PutKeyPolicyRequest}
@@ -159,8 +51,8 @@ func (c *Client) PutKeyPolicyRequest(input *PutKeyPolicyInput) PutKeyPolicyReque
 // PutKeyPolicy API operation.
 type PutKeyPolicyRequest struct {
 	*aws.Request
-	Input *PutKeyPolicyInput
-	Copy  func(*PutKeyPolicyInput) PutKeyPolicyRequest
+	Input *types.PutKeyPolicyInput
+	Copy  func(*types.PutKeyPolicyInput) PutKeyPolicyRequest
 }
 
 // Send marshals and sends the PutKeyPolicy API request.
@@ -172,7 +64,7 @@ func (r PutKeyPolicyRequest) Send(ctx context.Context) (*PutKeyPolicyResponse, e
 	}
 
 	resp := &PutKeyPolicyResponse{
-		PutKeyPolicyOutput: r.Request.Data.(*PutKeyPolicyOutput),
+		PutKeyPolicyOutput: r.Request.Data.(*types.PutKeyPolicyOutput),
 		response:           &aws.Response{Request: r.Request},
 	}
 
@@ -182,7 +74,7 @@ func (r PutKeyPolicyRequest) Send(ctx context.Context) (*PutKeyPolicyResponse, e
 // PutKeyPolicyResponse is the response type for the
 // PutKeyPolicy API operation.
 type PutKeyPolicyResponse struct {
-	*PutKeyPolicyOutput
+	*types.PutKeyPolicyOutput
 
 	response *aws.Response
 }

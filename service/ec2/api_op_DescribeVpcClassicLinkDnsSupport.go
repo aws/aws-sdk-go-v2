@@ -6,59 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-type DescribeVpcClassicLinkDnsSupportInput struct {
-	_ struct{} `type:"structure"`
-
-	// The maximum number of results to return with a single call. To retrieve the
-	// remaining results, make another call with the returned nextToken value.
-	MaxResults *int64 `locationName:"maxResults" min:"5" type:"integer"`
-
-	// The token for the next page of results.
-	NextToken *string `locationName:"nextToken" min:"1" type:"string"`
-
-	// One or more VPC IDs.
-	VpcIds []string `locationNameList:"VpcId" type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeVpcClassicLinkDnsSupportInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeVpcClassicLinkDnsSupportInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeVpcClassicLinkDnsSupportInput"}
-	if s.MaxResults != nil && *s.MaxResults < 5 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 5))
-	}
-	if s.NextToken != nil && len(*s.NextToken) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribeVpcClassicLinkDnsSupportOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The token to use to retrieve the next page of results. This value is null
-	// when there are no more results to return.
-	NextToken *string `locationName:"nextToken" min:"1" type:"string"`
-
-	// Information about the ClassicLink DNS support status of the VPCs.
-	Vpcs []ClassicLinkDnsSupport `locationName:"vpcs" locationNameList:"item" type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeVpcClassicLinkDnsSupportOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeVpcClassicLinkDnsSupport = "DescribeVpcClassicLinkDnsSupport"
 
@@ -81,7 +30,7 @@ const opDescribeVpcClassicLinkDnsSupport = "DescribeVpcClassicLinkDnsSupport"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeVpcClassicLinkDnsSupport
-func (c *Client) DescribeVpcClassicLinkDnsSupportRequest(input *DescribeVpcClassicLinkDnsSupportInput) DescribeVpcClassicLinkDnsSupportRequest {
+func (c *Client) DescribeVpcClassicLinkDnsSupportRequest(input *types.DescribeVpcClassicLinkDnsSupportInput) DescribeVpcClassicLinkDnsSupportRequest {
 	op := &aws.Operation{
 		Name:       opDescribeVpcClassicLinkDnsSupport,
 		HTTPMethod: "POST",
@@ -95,10 +44,10 @@ func (c *Client) DescribeVpcClassicLinkDnsSupportRequest(input *DescribeVpcClass
 	}
 
 	if input == nil {
-		input = &DescribeVpcClassicLinkDnsSupportInput{}
+		input = &types.DescribeVpcClassicLinkDnsSupportInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeVpcClassicLinkDnsSupportOutput{})
+	req := c.newRequest(op, input, &types.DescribeVpcClassicLinkDnsSupportOutput{})
 	return DescribeVpcClassicLinkDnsSupportRequest{Request: req, Input: input, Copy: c.DescribeVpcClassicLinkDnsSupportRequest}
 }
 
@@ -106,8 +55,8 @@ func (c *Client) DescribeVpcClassicLinkDnsSupportRequest(input *DescribeVpcClass
 // DescribeVpcClassicLinkDnsSupport API operation.
 type DescribeVpcClassicLinkDnsSupportRequest struct {
 	*aws.Request
-	Input *DescribeVpcClassicLinkDnsSupportInput
-	Copy  func(*DescribeVpcClassicLinkDnsSupportInput) DescribeVpcClassicLinkDnsSupportRequest
+	Input *types.DescribeVpcClassicLinkDnsSupportInput
+	Copy  func(*types.DescribeVpcClassicLinkDnsSupportInput) DescribeVpcClassicLinkDnsSupportRequest
 }
 
 // Send marshals and sends the DescribeVpcClassicLinkDnsSupport API request.
@@ -119,7 +68,7 @@ func (r DescribeVpcClassicLinkDnsSupportRequest) Send(ctx context.Context) (*Des
 	}
 
 	resp := &DescribeVpcClassicLinkDnsSupportResponse{
-		DescribeVpcClassicLinkDnsSupportOutput: r.Request.Data.(*DescribeVpcClassicLinkDnsSupportOutput),
+		DescribeVpcClassicLinkDnsSupportOutput: r.Request.Data.(*types.DescribeVpcClassicLinkDnsSupportOutput),
 		response:                               &aws.Response{Request: r.Request},
 	}
 
@@ -149,7 +98,7 @@ func NewDescribeVpcClassicLinkDnsSupportPaginator(req DescribeVpcClassicLinkDnsS
 	return DescribeVpcClassicLinkDnsSupportPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *DescribeVpcClassicLinkDnsSupportInput
+				var inCpy *types.DescribeVpcClassicLinkDnsSupportInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -169,14 +118,14 @@ type DescribeVpcClassicLinkDnsSupportPaginator struct {
 	aws.Pager
 }
 
-func (p *DescribeVpcClassicLinkDnsSupportPaginator) CurrentPage() *DescribeVpcClassicLinkDnsSupportOutput {
-	return p.Pager.CurrentPage().(*DescribeVpcClassicLinkDnsSupportOutput)
+func (p *DescribeVpcClassicLinkDnsSupportPaginator) CurrentPage() *types.DescribeVpcClassicLinkDnsSupportOutput {
+	return p.Pager.CurrentPage().(*types.DescribeVpcClassicLinkDnsSupportOutput)
 }
 
 // DescribeVpcClassicLinkDnsSupportResponse is the response type for the
 // DescribeVpcClassicLinkDnsSupport API operation.
 type DescribeVpcClassicLinkDnsSupportResponse struct {
-	*DescribeVpcClassicLinkDnsSupportOutput
+	*types.DescribeVpcClassicLinkDnsSupportOutput
 
 	response *aws.Response
 }

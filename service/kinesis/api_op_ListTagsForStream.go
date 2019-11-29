@@ -6,77 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/kinesis/types"
 )
-
-// Represents the input for ListTagsForStream.
-type ListTagsForStreamInput struct {
-	_ struct{} `type:"structure"`
-
-	// The key to use as the starting point for the list of tags. If this parameter
-	// is set, ListTagsForStream gets all tags that occur after ExclusiveStartTagKey.
-	ExclusiveStartTagKey *string `min:"1" type:"string"`
-
-	// The number of tags to return. If this number is less than the total number
-	// of tags associated with the stream, HasMoreTags is set to true. To list additional
-	// tags, set ExclusiveStartTagKey to the last key in the response.
-	Limit *int64 `min:"1" type:"integer"`
-
-	// The name of the stream.
-	//
-	// StreamName is a required field
-	StreamName *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s ListTagsForStreamInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListTagsForStreamInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListTagsForStreamInput"}
-	if s.ExclusiveStartTagKey != nil && len(*s.ExclusiveStartTagKey) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ExclusiveStartTagKey", 1))
-	}
-	if s.Limit != nil && *s.Limit < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("Limit", 1))
-	}
-
-	if s.StreamName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("StreamName"))
-	}
-	if s.StreamName != nil && len(*s.StreamName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("StreamName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Represents the output for ListTagsForStream.
-type ListTagsForStreamOutput struct {
-	_ struct{} `type:"structure"`
-
-	// If set to true, more tags are available. To request additional tags, set
-	// ExclusiveStartTagKey to the key of the last tag returned.
-	//
-	// HasMoreTags is a required field
-	HasMoreTags *bool `type:"boolean" required:"true"`
-
-	// A list of tags associated with StreamName, starting with the first tag after
-	// ExclusiveStartTagKey and up to the specified Limit.
-	//
-	// Tags is a required field
-	Tags []Tag `type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s ListTagsForStreamOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListTagsForStream = "ListTagsForStream"
 
@@ -94,7 +25,7 @@ const opListTagsForStream = "ListTagsForStream"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/ListTagsForStream
-func (c *Client) ListTagsForStreamRequest(input *ListTagsForStreamInput) ListTagsForStreamRequest {
+func (c *Client) ListTagsForStreamRequest(input *types.ListTagsForStreamInput) ListTagsForStreamRequest {
 	op := &aws.Operation{
 		Name:       opListTagsForStream,
 		HTTPMethod: "POST",
@@ -102,10 +33,10 @@ func (c *Client) ListTagsForStreamRequest(input *ListTagsForStreamInput) ListTag
 	}
 
 	if input == nil {
-		input = &ListTagsForStreamInput{}
+		input = &types.ListTagsForStreamInput{}
 	}
 
-	req := c.newRequest(op, input, &ListTagsForStreamOutput{})
+	req := c.newRequest(op, input, &types.ListTagsForStreamOutput{})
 	return ListTagsForStreamRequest{Request: req, Input: input, Copy: c.ListTagsForStreamRequest}
 }
 
@@ -113,8 +44,8 @@ func (c *Client) ListTagsForStreamRequest(input *ListTagsForStreamInput) ListTag
 // ListTagsForStream API operation.
 type ListTagsForStreamRequest struct {
 	*aws.Request
-	Input *ListTagsForStreamInput
-	Copy  func(*ListTagsForStreamInput) ListTagsForStreamRequest
+	Input *types.ListTagsForStreamInput
+	Copy  func(*types.ListTagsForStreamInput) ListTagsForStreamRequest
 }
 
 // Send marshals and sends the ListTagsForStream API request.
@@ -126,7 +57,7 @@ func (r ListTagsForStreamRequest) Send(ctx context.Context) (*ListTagsForStreamR
 	}
 
 	resp := &ListTagsForStreamResponse{
-		ListTagsForStreamOutput: r.Request.Data.(*ListTagsForStreamOutput),
+		ListTagsForStreamOutput: r.Request.Data.(*types.ListTagsForStreamOutput),
 		response:                &aws.Response{Request: r.Request},
 	}
 
@@ -136,7 +67,7 @@ func (r ListTagsForStreamRequest) Send(ctx context.Context) (*ListTagsForStreamR
 // ListTagsForStreamResponse is the response type for the
 // ListTagsForStream API operation.
 type ListTagsForStreamResponse struct {
-	*ListTagsForStreamOutput
+	*types.ListTagsForStreamOutput
 
 	response *aws.Response
 }

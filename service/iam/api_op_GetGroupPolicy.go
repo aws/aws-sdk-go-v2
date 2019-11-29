@@ -6,88 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/iam/types"
 )
-
-type GetGroupPolicyInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the group the policy is associated with.
-	//
-	// This parameter allows (through its regex pattern (http://wikipedia.org/wiki/regex))
-	// a string of characters consisting of upper and lowercase alphanumeric characters
-	// with no spaces. You can also include any of the following characters: _+=,.@-
-	//
-	// GroupName is a required field
-	GroupName *string `min:"1" type:"string" required:"true"`
-
-	// The name of the policy document to get.
-	//
-	// This parameter allows (through its regex pattern (http://wikipedia.org/wiki/regex))
-	// a string of characters consisting of upper and lowercase alphanumeric characters
-	// with no spaces. You can also include any of the following characters: _+=,.@-
-	//
-	// PolicyName is a required field
-	PolicyName *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetGroupPolicyInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetGroupPolicyInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetGroupPolicyInput"}
-
-	if s.GroupName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("GroupName"))
-	}
-	if s.GroupName != nil && len(*s.GroupName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("GroupName", 1))
-	}
-
-	if s.PolicyName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("PolicyName"))
-	}
-	if s.PolicyName != nil && len(*s.PolicyName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("PolicyName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Contains the response to a successful GetGroupPolicy request.
-type GetGroupPolicyOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The group the policy is associated with.
-	//
-	// GroupName is a required field
-	GroupName *string `min:"1" type:"string" required:"true"`
-
-	// The policy document.
-	//
-	// IAM stores policies in JSON format. However, resources that were created
-	// using AWS CloudFormation templates can be formatted in YAML. AWS CloudFormation
-	// always converts a YAML policy to JSON format before submitting it to IAM.
-	//
-	// PolicyDocument is a required field
-	PolicyDocument *string `min:"1" type:"string" required:"true"`
-
-	// The name of the policy.
-	//
-	// PolicyName is a required field
-	PolicyName *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetGroupPolicyOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetGroupPolicy = "GetGroupPolicy"
 
@@ -120,7 +40,7 @@ const opGetGroupPolicy = "GetGroupPolicy"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetGroupPolicy
-func (c *Client) GetGroupPolicyRequest(input *GetGroupPolicyInput) GetGroupPolicyRequest {
+func (c *Client) GetGroupPolicyRequest(input *types.GetGroupPolicyInput) GetGroupPolicyRequest {
 	op := &aws.Operation{
 		Name:       opGetGroupPolicy,
 		HTTPMethod: "POST",
@@ -128,10 +48,10 @@ func (c *Client) GetGroupPolicyRequest(input *GetGroupPolicyInput) GetGroupPolic
 	}
 
 	if input == nil {
-		input = &GetGroupPolicyInput{}
+		input = &types.GetGroupPolicyInput{}
 	}
 
-	req := c.newRequest(op, input, &GetGroupPolicyOutput{})
+	req := c.newRequest(op, input, &types.GetGroupPolicyOutput{})
 	return GetGroupPolicyRequest{Request: req, Input: input, Copy: c.GetGroupPolicyRequest}
 }
 
@@ -139,8 +59,8 @@ func (c *Client) GetGroupPolicyRequest(input *GetGroupPolicyInput) GetGroupPolic
 // GetGroupPolicy API operation.
 type GetGroupPolicyRequest struct {
 	*aws.Request
-	Input *GetGroupPolicyInput
-	Copy  func(*GetGroupPolicyInput) GetGroupPolicyRequest
+	Input *types.GetGroupPolicyInput
+	Copy  func(*types.GetGroupPolicyInput) GetGroupPolicyRequest
 }
 
 // Send marshals and sends the GetGroupPolicy API request.
@@ -152,7 +72,7 @@ func (r GetGroupPolicyRequest) Send(ctx context.Context) (*GetGroupPolicyRespons
 	}
 
 	resp := &GetGroupPolicyResponse{
-		GetGroupPolicyOutput: r.Request.Data.(*GetGroupPolicyOutput),
+		GetGroupPolicyOutput: r.Request.Data.(*types.GetGroupPolicyOutput),
 		response:             &aws.Response{Request: r.Request},
 	}
 
@@ -162,7 +82,7 @@ func (r GetGroupPolicyRequest) Send(ctx context.Context) (*GetGroupPolicyRespons
 // GetGroupPolicyResponse is the response type for the
 // GetGroupPolicy API operation.
 type GetGroupPolicyResponse struct {
-	*GetGroupPolicyOutput
+	*types.GetGroupPolicyOutput
 
 	response *aws.Response
 }

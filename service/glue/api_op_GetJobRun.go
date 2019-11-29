@@ -6,66 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/glue/types"
 )
-
-type GetJobRunInput struct {
-	_ struct{} `type:"structure"`
-
-	// Name of the job definition being run.
-	//
-	// JobName is a required field
-	JobName *string `min:"1" type:"string" required:"true"`
-
-	// True if a list of predecessor runs should be returned.
-	PredecessorsIncluded *bool `type:"boolean"`
-
-	// The ID of the job run.
-	//
-	// RunId is a required field
-	RunId *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetJobRunInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetJobRunInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetJobRunInput"}
-
-	if s.JobName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("JobName"))
-	}
-	if s.JobName != nil && len(*s.JobName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("JobName", 1))
-	}
-
-	if s.RunId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("RunId"))
-	}
-	if s.RunId != nil && len(*s.RunId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("RunId", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type GetJobRunOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The requested job-run metadata.
-	JobRun *JobRun `type:"structure"`
-}
-
-// String returns the string representation
-func (s GetJobRunOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetJobRun = "GetJobRun"
 
@@ -82,7 +24,7 @@ const opGetJobRun = "GetJobRun"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetJobRun
-func (c *Client) GetJobRunRequest(input *GetJobRunInput) GetJobRunRequest {
+func (c *Client) GetJobRunRequest(input *types.GetJobRunInput) GetJobRunRequest {
 	op := &aws.Operation{
 		Name:       opGetJobRun,
 		HTTPMethod: "POST",
@@ -90,10 +32,10 @@ func (c *Client) GetJobRunRequest(input *GetJobRunInput) GetJobRunRequest {
 	}
 
 	if input == nil {
-		input = &GetJobRunInput{}
+		input = &types.GetJobRunInput{}
 	}
 
-	req := c.newRequest(op, input, &GetJobRunOutput{})
+	req := c.newRequest(op, input, &types.GetJobRunOutput{})
 	return GetJobRunRequest{Request: req, Input: input, Copy: c.GetJobRunRequest}
 }
 
@@ -101,8 +43,8 @@ func (c *Client) GetJobRunRequest(input *GetJobRunInput) GetJobRunRequest {
 // GetJobRun API operation.
 type GetJobRunRequest struct {
 	*aws.Request
-	Input *GetJobRunInput
-	Copy  func(*GetJobRunInput) GetJobRunRequest
+	Input *types.GetJobRunInput
+	Copy  func(*types.GetJobRunInput) GetJobRunRequest
 }
 
 // Send marshals and sends the GetJobRun API request.
@@ -114,7 +56,7 @@ func (r GetJobRunRequest) Send(ctx context.Context) (*GetJobRunResponse, error) 
 	}
 
 	resp := &GetJobRunResponse{
-		GetJobRunOutput: r.Request.Data.(*GetJobRunOutput),
+		GetJobRunOutput: r.Request.Data.(*types.GetJobRunOutput),
 		response:        &aws.Response{Request: r.Request},
 	}
 
@@ -124,7 +66,7 @@ func (r GetJobRunRequest) Send(ctx context.Context) (*GetJobRunResponse, error) 
 // GetJobRunResponse is the response type for the
 // GetJobRun API operation.
 type GetJobRunResponse struct {
-	*GetJobRunOutput
+	*types.GetJobRunOutput
 
 	response *aws.Response
 }

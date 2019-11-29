@@ -6,66 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/securityhub/types"
 )
-
-type DescribeHubInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ARN of the Hub resource to retrieve.
-	HubArn *string `location:"querystring" locationName:"HubArn" type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeHubInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DescribeHubInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.HubArn != nil {
-		v := *s.HubArn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "HubArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type DescribeHubOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The ARN of the Hub resource retrieved.
-	HubArn *string `type:"string"`
-
-	// The date and time when Security Hub was enabled in the account.
-	SubscribedAt *string `type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeHubOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DescribeHubOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.HubArn != nil {
-		v := *s.HubArn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "HubArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.SubscribedAt != nil {
-		v := *s.SubscribedAt
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "SubscribedAt", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opDescribeHub = "DescribeHub"
 
@@ -83,7 +25,7 @@ const opDescribeHub = "DescribeHub"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/DescribeHub
-func (c *Client) DescribeHubRequest(input *DescribeHubInput) DescribeHubRequest {
+func (c *Client) DescribeHubRequest(input *types.DescribeHubInput) DescribeHubRequest {
 	op := &aws.Operation{
 		Name:       opDescribeHub,
 		HTTPMethod: "GET",
@@ -91,10 +33,10 @@ func (c *Client) DescribeHubRequest(input *DescribeHubInput) DescribeHubRequest 
 	}
 
 	if input == nil {
-		input = &DescribeHubInput{}
+		input = &types.DescribeHubInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeHubOutput{})
+	req := c.newRequest(op, input, &types.DescribeHubOutput{})
 	return DescribeHubRequest{Request: req, Input: input, Copy: c.DescribeHubRequest}
 }
 
@@ -102,8 +44,8 @@ func (c *Client) DescribeHubRequest(input *DescribeHubInput) DescribeHubRequest 
 // DescribeHub API operation.
 type DescribeHubRequest struct {
 	*aws.Request
-	Input *DescribeHubInput
-	Copy  func(*DescribeHubInput) DescribeHubRequest
+	Input *types.DescribeHubInput
+	Copy  func(*types.DescribeHubInput) DescribeHubRequest
 }
 
 // Send marshals and sends the DescribeHub API request.
@@ -115,7 +57,7 @@ func (r DescribeHubRequest) Send(ctx context.Context) (*DescribeHubResponse, err
 	}
 
 	resp := &DescribeHubResponse{
-		DescribeHubOutput: r.Request.Data.(*DescribeHubOutput),
+		DescribeHubOutput: r.Request.Data.(*types.DescribeHubOutput),
 		response:          &aws.Response{Request: r.Request},
 	}
 
@@ -125,7 +67,7 @@ func (r DescribeHubRequest) Send(ctx context.Context) (*DescribeHubResponse, err
 // DescribeHubResponse is the response type for the
 // DescribeHub API operation.
 type DescribeHubResponse struct {
-	*DescribeHubOutput
+	*types.DescribeHubOutput
 
 	response *aws.Response
 }

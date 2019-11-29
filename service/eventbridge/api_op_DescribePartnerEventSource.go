@@ -6,54 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/eventbridge/types"
 )
-
-type DescribePartnerEventSourceInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the event source to display.
-	//
-	// Name is a required field
-	Name *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribePartnerEventSourceInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribePartnerEventSourceInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribePartnerEventSourceInput"}
-
-	if s.Name == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Name"))
-	}
-	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribePartnerEventSourceOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The ARN of the event source.
-	Arn *string `type:"string"`
-
-	// The name of the event source.
-	Name *string `type:"string"`
-}
-
-// String returns the string representation
-func (s DescribePartnerEventSourceOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribePartnerEventSource = "DescribePartnerEventSource"
 
@@ -74,7 +28,7 @@ const opDescribePartnerEventSource = "DescribePartnerEventSource"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/DescribePartnerEventSource
-func (c *Client) DescribePartnerEventSourceRequest(input *DescribePartnerEventSourceInput) DescribePartnerEventSourceRequest {
+func (c *Client) DescribePartnerEventSourceRequest(input *types.DescribePartnerEventSourceInput) DescribePartnerEventSourceRequest {
 	op := &aws.Operation{
 		Name:       opDescribePartnerEventSource,
 		HTTPMethod: "POST",
@@ -82,10 +36,10 @@ func (c *Client) DescribePartnerEventSourceRequest(input *DescribePartnerEventSo
 	}
 
 	if input == nil {
-		input = &DescribePartnerEventSourceInput{}
+		input = &types.DescribePartnerEventSourceInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribePartnerEventSourceOutput{})
+	req := c.newRequest(op, input, &types.DescribePartnerEventSourceOutput{})
 	return DescribePartnerEventSourceRequest{Request: req, Input: input, Copy: c.DescribePartnerEventSourceRequest}
 }
 
@@ -93,8 +47,8 @@ func (c *Client) DescribePartnerEventSourceRequest(input *DescribePartnerEventSo
 // DescribePartnerEventSource API operation.
 type DescribePartnerEventSourceRequest struct {
 	*aws.Request
-	Input *DescribePartnerEventSourceInput
-	Copy  func(*DescribePartnerEventSourceInput) DescribePartnerEventSourceRequest
+	Input *types.DescribePartnerEventSourceInput
+	Copy  func(*types.DescribePartnerEventSourceInput) DescribePartnerEventSourceRequest
 }
 
 // Send marshals and sends the DescribePartnerEventSource API request.
@@ -106,7 +60,7 @@ func (r DescribePartnerEventSourceRequest) Send(ctx context.Context) (*DescribeP
 	}
 
 	resp := &DescribePartnerEventSourceResponse{
-		DescribePartnerEventSourceOutput: r.Request.Data.(*DescribePartnerEventSourceOutput),
+		DescribePartnerEventSourceOutput: r.Request.Data.(*types.DescribePartnerEventSourceOutput),
 		response:                         &aws.Response{Request: r.Request},
 	}
 
@@ -116,7 +70,7 @@ func (r DescribePartnerEventSourceRequest) Send(ctx context.Context) (*DescribeP
 // DescribePartnerEventSourceResponse is the response type for the
 // DescribePartnerEventSource API operation.
 type DescribePartnerEventSourceResponse struct {
-	*DescribePartnerEventSourceOutput
+	*types.DescribePartnerEventSourceOutput
 
 	response *aws.Response
 }

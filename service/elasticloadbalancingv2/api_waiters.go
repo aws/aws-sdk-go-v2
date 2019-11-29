@@ -7,6 +7,7 @@ import (
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
+	"github.com/aws/aws-sdk-go-v2/service/elasticloadbalancingv2/types"
 )
 
 // WaitUntilLoadBalancerAvailable uses the Elastic Load Balancing v2 API operation
@@ -18,7 +19,7 @@ import (
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Client) WaitUntilLoadBalancerAvailable(ctx context.Context, input *DescribeLoadBalancersInput, opts ...aws.WaiterOption) error {
+func (c *Client) WaitUntilLoadBalancerAvailable(ctx context.Context, input *types.DescribeLoadBalancersInput, opts ...aws.WaiterOption) error {
 	w := aws.Waiter{
 		Name:        "WaitUntilLoadBalancerAvailable",
 		MaxAttempts: 40,
@@ -42,7 +43,7 @@ func (c *Client) WaitUntilLoadBalancerAvailable(ctx context.Context, input *Desc
 		},
 		Logger: c.Config.Logger,
 		NewRequest: func(opts []aws.Option) (*aws.Request, error) {
-			var inCpy *DescribeLoadBalancersInput
+			var inCpy *types.DescribeLoadBalancersInput
 			if input != nil {
 				tmp := *input
 				inCpy = &tmp
@@ -67,7 +68,7 @@ func (c *Client) WaitUntilLoadBalancerAvailable(ctx context.Context, input *Desc
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Client) WaitUntilLoadBalancerExists(ctx context.Context, input *DescribeLoadBalancersInput, opts ...aws.WaiterOption) error {
+func (c *Client) WaitUntilLoadBalancerExists(ctx context.Context, input *types.DescribeLoadBalancersInput, opts ...aws.WaiterOption) error {
 	w := aws.Waiter{
 		Name:        "WaitUntilLoadBalancerExists",
 		MaxAttempts: 40,
@@ -86,7 +87,7 @@ func (c *Client) WaitUntilLoadBalancerExists(ctx context.Context, input *Describ
 		},
 		Logger: c.Config.Logger,
 		NewRequest: func(opts []aws.Option) (*aws.Request, error) {
-			var inCpy *DescribeLoadBalancersInput
+			var inCpy *types.DescribeLoadBalancersInput
 			if input != nil {
 				tmp := *input
 				inCpy = &tmp
@@ -111,7 +112,7 @@ func (c *Client) WaitUntilLoadBalancerExists(ctx context.Context, input *Describ
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Client) WaitUntilLoadBalancersDeleted(ctx context.Context, input *DescribeLoadBalancersInput, opts ...aws.WaiterOption) error {
+func (c *Client) WaitUntilLoadBalancersDeleted(ctx context.Context, input *types.DescribeLoadBalancersInput, opts ...aws.WaiterOption) error {
 	w := aws.Waiter{
 		Name:        "WaitUntilLoadBalancersDeleted",
 		MaxAttempts: 40,
@@ -130,7 +131,7 @@ func (c *Client) WaitUntilLoadBalancersDeleted(ctx context.Context, input *Descr
 		},
 		Logger: c.Config.Logger,
 		NewRequest: func(opts []aws.Option) (*aws.Request, error) {
-			var inCpy *DescribeLoadBalancersInput
+			var inCpy *types.DescribeLoadBalancersInput
 			if input != nil {
 				tmp := *input
 				inCpy = &tmp
@@ -155,7 +156,7 @@ func (c *Client) WaitUntilLoadBalancersDeleted(ctx context.Context, input *Descr
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Client) WaitUntilTargetDeregistered(ctx context.Context, input *DescribeTargetHealthInput, opts ...aws.WaiterOption) error {
+func (c *Client) WaitUntilTargetDeregistered(ctx context.Context, input *types.DescribeTargetHealthInput, opts ...aws.WaiterOption) error {
 	w := aws.Waiter{
 		Name:        "WaitUntilTargetDeregistered",
 		MaxAttempts: 40,
@@ -174,7 +175,7 @@ func (c *Client) WaitUntilTargetDeregistered(ctx context.Context, input *Describ
 		},
 		Logger: c.Config.Logger,
 		NewRequest: func(opts []aws.Option) (*aws.Request, error) {
-			var inCpy *DescribeTargetHealthInput
+			var inCpy *types.DescribeTargetHealthInput
 			if input != nil {
 				tmp := *input
 				inCpy = &tmp
@@ -199,7 +200,7 @@ func (c *Client) WaitUntilTargetDeregistered(ctx context.Context, input *Describ
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Client) WaitUntilTargetInService(ctx context.Context, input *DescribeTargetHealthInput, opts ...aws.WaiterOption) error {
+func (c *Client) WaitUntilTargetInService(ctx context.Context, input *types.DescribeTargetHealthInput, opts ...aws.WaiterOption) error {
 	w := aws.Waiter{
 		Name:        "WaitUntilTargetInService",
 		MaxAttempts: 40,
@@ -218,7 +219,7 @@ func (c *Client) WaitUntilTargetInService(ctx context.Context, input *DescribeTa
 		},
 		Logger: c.Config.Logger,
 		NewRequest: func(opts []aws.Option) (*aws.Request, error) {
-			var inCpy *DescribeTargetHealthInput
+			var inCpy *types.DescribeTargetHealthInput
 			if input != nil {
 				tmp := *input
 				inCpy = &tmp

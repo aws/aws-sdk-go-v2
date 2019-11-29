@@ -6,70 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/iam/types"
 )
-
-type GetUserInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the user to get information about.
-	//
-	// This parameter is optional. If it is not included, it defaults to the user
-	// making the request. This parameter allows (through its regex pattern (http://wikipedia.org/wiki/regex))
-	// a string of characters consisting of upper and lowercase alphanumeric characters
-	// with no spaces. You can also include any of the following characters: _+=,.@-
-	UserName *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s GetUserInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetUserInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetUserInput"}
-	if s.UserName != nil && len(*s.UserName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("UserName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Contains the response to a successful GetUser request.
-type GetUserOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A structure containing details about the IAM user.
-	//
-	// Due to a service issue, password last used data does not include password
-	// use from May 3, 2018 22:50 PDT to May 23, 2018 14:08 PDT. This affects last
-	// sign-in (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_finding-unused.html)
-	// dates shown in the IAM console and password last used dates in the IAM credential
-	// report (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_getting-report.html),
-	// and returned by this GetUser API. If users signed in during the affected
-	// time, the password last used date that is returned is the date the user last
-	// signed in before May 3, 2018. For users that signed in after May 23, 2018
-	// 14:08 PDT, the returned password last used date is accurate.
-	//
-	// You can use password last used information to identify unused credentials
-	// for deletion. For example, you might delete users who did not sign in to
-	// AWS in the last 90 days. In cases like this, we recommend that you adjust
-	// your evaluation window to include dates after May 23, 2018. Alternatively,
-	// if your users use access keys to access AWS programmatically you can refer
-	// to access key last used information because it is accurate for all dates.
-	//
-	// User is a required field
-	User *User `type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s GetUserOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetUser = "GetUser"
 
@@ -90,7 +28,7 @@ const opGetUser = "GetUser"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetUser
-func (c *Client) GetUserRequest(input *GetUserInput) GetUserRequest {
+func (c *Client) GetUserRequest(input *types.GetUserInput) GetUserRequest {
 	op := &aws.Operation{
 		Name:       opGetUser,
 		HTTPMethod: "POST",
@@ -98,10 +36,10 @@ func (c *Client) GetUserRequest(input *GetUserInput) GetUserRequest {
 	}
 
 	if input == nil {
-		input = &GetUserInput{}
+		input = &types.GetUserInput{}
 	}
 
-	req := c.newRequest(op, input, &GetUserOutput{})
+	req := c.newRequest(op, input, &types.GetUserOutput{})
 	return GetUserRequest{Request: req, Input: input, Copy: c.GetUserRequest}
 }
 
@@ -109,8 +47,8 @@ func (c *Client) GetUserRequest(input *GetUserInput) GetUserRequest {
 // GetUser API operation.
 type GetUserRequest struct {
 	*aws.Request
-	Input *GetUserInput
-	Copy  func(*GetUserInput) GetUserRequest
+	Input *types.GetUserInput
+	Copy  func(*types.GetUserInput) GetUserRequest
 }
 
 // Send marshals and sends the GetUser API request.
@@ -122,7 +60,7 @@ func (r GetUserRequest) Send(ctx context.Context) (*GetUserResponse, error) {
 	}
 
 	resp := &GetUserResponse{
-		GetUserOutput: r.Request.Data.(*GetUserOutput),
+		GetUserOutput: r.Request.Data.(*types.GetUserOutput),
 		response:      &aws.Response{Request: r.Request},
 	}
 
@@ -132,7 +70,7 @@ func (r GetUserRequest) Send(ctx context.Context) (*GetUserResponse, error) {
 // GetUserResponse is the response type for the
 // GetUser API operation.
 type GetUserResponse struct {
-	*GetUserOutput
+	*types.GetUserOutput
 
 	response *aws.Response
 }

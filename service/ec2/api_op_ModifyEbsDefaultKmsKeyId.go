@@ -6,71 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-type ModifyEbsDefaultKmsKeyIdInput struct {
-	_ struct{} `type:"structure"`
-
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have
-	// the required permissions, the error response is DryRunOperation. Otherwise,
-	// it is UnauthorizedOperation.
-	DryRun *bool `type:"boolean"`
-
-	// The identifier of the AWS Key Management Service (AWS KMS) customer master
-	// key (CMK) to use for Amazon EBS encryption. If this parameter is not specified,
-	// your AWS managed CMK for EBS is used. If KmsKeyId is specified, the encrypted
-	// state must be true.
-	//
-	// You can specify the CMK using any of the following:
-	//
-	//    * Key ID. For example, key/1234abcd-12ab-34cd-56ef-1234567890ab.
-	//
-	//    * Key alias. For example, alias/ExampleAlias.
-	//
-	//    * Key ARN. For example, arn:aws:kms:us-east-1:012345678910:key/abcd1234-a123-456a-a12b-a123b4cd56ef.
-	//
-	//    * Alias ARN. For example, arn:aws:kms:us-east-1:012345678910:alias/ExampleAlias.
-	//
-	// AWS authenticates the CMK asynchronously. Therefore, if you specify an ID,
-	// alias, or ARN that is not valid, the action can appear to complete, but eventually
-	// fails.
-	//
-	// KmsKeyId is a required field
-	KmsKeyId *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s ModifyEbsDefaultKmsKeyIdInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ModifyEbsDefaultKmsKeyIdInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ModifyEbsDefaultKmsKeyIdInput"}
-
-	if s.KmsKeyId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("KmsKeyId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ModifyEbsDefaultKmsKeyIdOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the default CMK for encryption by default.
-	KmsKeyId *string `locationName:"kmsKeyId" type:"string"`
-}
-
-// String returns the string representation
-func (s ModifyEbsDefaultKmsKeyIdOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opModifyEbsDefaultKmsKeyId = "ModifyEbsDefaultKmsKeyId"
 
@@ -99,7 +36,7 @@ const opModifyEbsDefaultKmsKeyId = "ModifyEbsDefaultKmsKeyId"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyEbsDefaultKmsKeyId
-func (c *Client) ModifyEbsDefaultKmsKeyIdRequest(input *ModifyEbsDefaultKmsKeyIdInput) ModifyEbsDefaultKmsKeyIdRequest {
+func (c *Client) ModifyEbsDefaultKmsKeyIdRequest(input *types.ModifyEbsDefaultKmsKeyIdInput) ModifyEbsDefaultKmsKeyIdRequest {
 	op := &aws.Operation{
 		Name:       opModifyEbsDefaultKmsKeyId,
 		HTTPMethod: "POST",
@@ -107,10 +44,10 @@ func (c *Client) ModifyEbsDefaultKmsKeyIdRequest(input *ModifyEbsDefaultKmsKeyId
 	}
 
 	if input == nil {
-		input = &ModifyEbsDefaultKmsKeyIdInput{}
+		input = &types.ModifyEbsDefaultKmsKeyIdInput{}
 	}
 
-	req := c.newRequest(op, input, &ModifyEbsDefaultKmsKeyIdOutput{})
+	req := c.newRequest(op, input, &types.ModifyEbsDefaultKmsKeyIdOutput{})
 	return ModifyEbsDefaultKmsKeyIdRequest{Request: req, Input: input, Copy: c.ModifyEbsDefaultKmsKeyIdRequest}
 }
 
@@ -118,8 +55,8 @@ func (c *Client) ModifyEbsDefaultKmsKeyIdRequest(input *ModifyEbsDefaultKmsKeyId
 // ModifyEbsDefaultKmsKeyId API operation.
 type ModifyEbsDefaultKmsKeyIdRequest struct {
 	*aws.Request
-	Input *ModifyEbsDefaultKmsKeyIdInput
-	Copy  func(*ModifyEbsDefaultKmsKeyIdInput) ModifyEbsDefaultKmsKeyIdRequest
+	Input *types.ModifyEbsDefaultKmsKeyIdInput
+	Copy  func(*types.ModifyEbsDefaultKmsKeyIdInput) ModifyEbsDefaultKmsKeyIdRequest
 }
 
 // Send marshals and sends the ModifyEbsDefaultKmsKeyId API request.
@@ -131,7 +68,7 @@ func (r ModifyEbsDefaultKmsKeyIdRequest) Send(ctx context.Context) (*ModifyEbsDe
 	}
 
 	resp := &ModifyEbsDefaultKmsKeyIdResponse{
-		ModifyEbsDefaultKmsKeyIdOutput: r.Request.Data.(*ModifyEbsDefaultKmsKeyIdOutput),
+		ModifyEbsDefaultKmsKeyIdOutput: r.Request.Data.(*types.ModifyEbsDefaultKmsKeyIdOutput),
 		response:                       &aws.Response{Request: r.Request},
 	}
 
@@ -141,7 +78,7 @@ func (r ModifyEbsDefaultKmsKeyIdRequest) Send(ctx context.Context) (*ModifyEbsDe
 // ModifyEbsDefaultKmsKeyIdResponse is the response type for the
 // ModifyEbsDefaultKmsKeyId API operation.
 type ModifyEbsDefaultKmsKeyIdResponse struct {
-	*ModifyEbsDefaultKmsKeyIdOutput
+	*types.ModifyEbsDefaultKmsKeyIdOutput
 
 	response *aws.Response
 }

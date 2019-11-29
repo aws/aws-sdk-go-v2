@@ -6,45 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ssm/types"
 )
-
-type DeleteActivationInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the activation that you want to delete.
-	//
-	// ActivationId is a required field
-	ActivationId *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteActivationInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteActivationInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteActivationInput"}
-
-	if s.ActivationId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ActivationId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteActivationOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteActivationOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteActivation = "DeleteActivation"
 
@@ -64,7 +27,7 @@ const opDeleteActivation = "DeleteActivation"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DeleteActivation
-func (c *Client) DeleteActivationRequest(input *DeleteActivationInput) DeleteActivationRequest {
+func (c *Client) DeleteActivationRequest(input *types.DeleteActivationInput) DeleteActivationRequest {
 	op := &aws.Operation{
 		Name:       opDeleteActivation,
 		HTTPMethod: "POST",
@@ -72,10 +35,10 @@ func (c *Client) DeleteActivationRequest(input *DeleteActivationInput) DeleteAct
 	}
 
 	if input == nil {
-		input = &DeleteActivationInput{}
+		input = &types.DeleteActivationInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteActivationOutput{})
+	req := c.newRequest(op, input, &types.DeleteActivationOutput{})
 	return DeleteActivationRequest{Request: req, Input: input, Copy: c.DeleteActivationRequest}
 }
 
@@ -83,8 +46,8 @@ func (c *Client) DeleteActivationRequest(input *DeleteActivationInput) DeleteAct
 // DeleteActivation API operation.
 type DeleteActivationRequest struct {
 	*aws.Request
-	Input *DeleteActivationInput
-	Copy  func(*DeleteActivationInput) DeleteActivationRequest
+	Input *types.DeleteActivationInput
+	Copy  func(*types.DeleteActivationInput) DeleteActivationRequest
 }
 
 // Send marshals and sends the DeleteActivation API request.
@@ -96,7 +59,7 @@ func (r DeleteActivationRequest) Send(ctx context.Context) (*DeleteActivationRes
 	}
 
 	resp := &DeleteActivationResponse{
-		DeleteActivationOutput: r.Request.Data.(*DeleteActivationOutput),
+		DeleteActivationOutput: r.Request.Data.(*types.DeleteActivationOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -106,7 +69,7 @@ func (r DeleteActivationRequest) Send(ctx context.Context) (*DeleteActivationRes
 // DeleteActivationResponse is the response type for the
 // DeleteActivation API operation.
 type DeleteActivationResponse struct {
-	*DeleteActivationOutput
+	*types.DeleteActivationOutput
 
 	response *aws.Response
 }

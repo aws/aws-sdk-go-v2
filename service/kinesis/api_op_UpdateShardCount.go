@@ -6,77 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/kinesis/types"
 )
-
-type UpdateShardCountInput struct {
-	_ struct{} `type:"structure"`
-
-	// The scaling type. Uniform scaling creates shards of equal size.
-	//
-	// ScalingType is a required field
-	ScalingType ScalingType `type:"string" required:"true" enum:"true"`
-
-	// The name of the stream.
-	//
-	// StreamName is a required field
-	StreamName *string `min:"1" type:"string" required:"true"`
-
-	// The new number of shards.
-	//
-	// TargetShardCount is a required field
-	TargetShardCount *int64 `min:"1" type:"integer" required:"true"`
-}
-
-// String returns the string representation
-func (s UpdateShardCountInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateShardCountInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateShardCountInput"}
-	if len(s.ScalingType) == 0 {
-		invalidParams.Add(aws.NewErrParamRequired("ScalingType"))
-	}
-
-	if s.StreamName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("StreamName"))
-	}
-	if s.StreamName != nil && len(*s.StreamName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("StreamName", 1))
-	}
-
-	if s.TargetShardCount == nil {
-		invalidParams.Add(aws.NewErrParamRequired("TargetShardCount"))
-	}
-	if s.TargetShardCount != nil && *s.TargetShardCount < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("TargetShardCount", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type UpdateShardCountOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The current number of shards.
-	CurrentShardCount *int64 `min:"1" type:"integer"`
-
-	// The name of the stream.
-	StreamName *string `min:"1" type:"string"`
-
-	// The updated number of shards.
-	TargetShardCount *int64 `min:"1" type:"integer"`
-}
-
-// String returns the string representation
-func (s UpdateShardCountOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opUpdateShardCount = "UpdateShardCount"
 
@@ -127,7 +58,7 @@ const opUpdateShardCount = "UpdateShardCount"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/UpdateShardCount
-func (c *Client) UpdateShardCountRequest(input *UpdateShardCountInput) UpdateShardCountRequest {
+func (c *Client) UpdateShardCountRequest(input *types.UpdateShardCountInput) UpdateShardCountRequest {
 	op := &aws.Operation{
 		Name:       opUpdateShardCount,
 		HTTPMethod: "POST",
@@ -135,10 +66,10 @@ func (c *Client) UpdateShardCountRequest(input *UpdateShardCountInput) UpdateSha
 	}
 
 	if input == nil {
-		input = &UpdateShardCountInput{}
+		input = &types.UpdateShardCountInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateShardCountOutput{})
+	req := c.newRequest(op, input, &types.UpdateShardCountOutput{})
 	return UpdateShardCountRequest{Request: req, Input: input, Copy: c.UpdateShardCountRequest}
 }
 
@@ -146,8 +77,8 @@ func (c *Client) UpdateShardCountRequest(input *UpdateShardCountInput) UpdateSha
 // UpdateShardCount API operation.
 type UpdateShardCountRequest struct {
 	*aws.Request
-	Input *UpdateShardCountInput
-	Copy  func(*UpdateShardCountInput) UpdateShardCountRequest
+	Input *types.UpdateShardCountInput
+	Copy  func(*types.UpdateShardCountInput) UpdateShardCountRequest
 }
 
 // Send marshals and sends the UpdateShardCount API request.
@@ -159,7 +90,7 @@ func (r UpdateShardCountRequest) Send(ctx context.Context) (*UpdateShardCountRes
 	}
 
 	resp := &UpdateShardCountResponse{
-		UpdateShardCountOutput: r.Request.Data.(*UpdateShardCountOutput),
+		UpdateShardCountOutput: r.Request.Data.(*types.UpdateShardCountOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -169,7 +100,7 @@ func (r UpdateShardCountRequest) Send(ctx context.Context) (*UpdateShardCountRes
 // UpdateShardCountResponse is the response type for the
 // UpdateShardCount API operation.
 type UpdateShardCountResponse struct {
-	*UpdateShardCountOutput
+	*types.UpdateShardCountOutput
 
 	response *aws.Response
 }

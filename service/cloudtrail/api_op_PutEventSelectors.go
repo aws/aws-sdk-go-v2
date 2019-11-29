@@ -6,81 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/cloudtrail/types"
 )
-
-type PutEventSelectorsInput struct {
-	_ struct{} `type:"structure"`
-
-	// Specifies the settings for your event selectors. You can configure up to
-	// five event selectors for a trail.
-	//
-	// EventSelectors is a required field
-	EventSelectors []EventSelector `type:"list" required:"true"`
-
-	// Specifies the name of the trail or trail ARN. If you specify a trail name,
-	// the string must meet the following requirements:
-	//
-	//    * Contain only ASCII letters (a-z, A-Z), numbers (0-9), periods (.), underscores
-	//    (_), or dashes (-)
-	//
-	//    * Start with a letter or number, and end with a letter or number
-	//
-	//    * Be between 3 and 128 characters
-	//
-	//    * Have no adjacent periods, underscores or dashes. Names like my-_namespace
-	//    and my--namespace are invalid.
-	//
-	//    * Not be in IP address format (for example, 192.168.5.4)
-	//
-	// If you specify a trail ARN, it must be in the format:
-	//
-	// arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail
-	//
-	// TrailName is a required field
-	TrailName *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s PutEventSelectorsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *PutEventSelectorsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "PutEventSelectorsInput"}
-
-	if s.EventSelectors == nil {
-		invalidParams.Add(aws.NewErrParamRequired("EventSelectors"))
-	}
-
-	if s.TrailName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("TrailName"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type PutEventSelectorsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Specifies the event selectors configured for your trail.
-	EventSelectors []EventSelector `type:"list"`
-
-	// Specifies the ARN of the trail that was updated with event selectors. The
-	// format of a trail ARN is:
-	//
-	// arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail
-	TrailARN *string `type:"string"`
-}
-
-// String returns the string representation
-func (s PutEventSelectorsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opPutEventSelectors = "PutEventSelectors"
 
@@ -116,7 +43,7 @@ const opPutEventSelectors = "PutEventSelectors"
 // trail was created; otherwise, an InvalidHomeRegionException is thrown.
 //
 // You can configure up to five event selectors for each trail. For more information,
-// see Logging Data and Management Events for Trails (http://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-management-and-data-events-with-cloudtrail.html)
+// see Logging Data and Management Events for Trails (https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-management-and-data-events-with-cloudtrail.html)
 // and Limits in AWS CloudTrail (https://docs.aws.amazon.com/awscloudtrail/latest/userguide/WhatIsCloudTrail-Limits.html)
 // in the AWS CloudTrail User Guide.
 //
@@ -128,7 +55,7 @@ const opPutEventSelectors = "PutEventSelectors"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/PutEventSelectors
-func (c *Client) PutEventSelectorsRequest(input *PutEventSelectorsInput) PutEventSelectorsRequest {
+func (c *Client) PutEventSelectorsRequest(input *types.PutEventSelectorsInput) PutEventSelectorsRequest {
 	op := &aws.Operation{
 		Name:       opPutEventSelectors,
 		HTTPMethod: "POST",
@@ -136,10 +63,10 @@ func (c *Client) PutEventSelectorsRequest(input *PutEventSelectorsInput) PutEven
 	}
 
 	if input == nil {
-		input = &PutEventSelectorsInput{}
+		input = &types.PutEventSelectorsInput{}
 	}
 
-	req := c.newRequest(op, input, &PutEventSelectorsOutput{})
+	req := c.newRequest(op, input, &types.PutEventSelectorsOutput{})
 	return PutEventSelectorsRequest{Request: req, Input: input, Copy: c.PutEventSelectorsRequest}
 }
 
@@ -147,8 +74,8 @@ func (c *Client) PutEventSelectorsRequest(input *PutEventSelectorsInput) PutEven
 // PutEventSelectors API operation.
 type PutEventSelectorsRequest struct {
 	*aws.Request
-	Input *PutEventSelectorsInput
-	Copy  func(*PutEventSelectorsInput) PutEventSelectorsRequest
+	Input *types.PutEventSelectorsInput
+	Copy  func(*types.PutEventSelectorsInput) PutEventSelectorsRequest
 }
 
 // Send marshals and sends the PutEventSelectors API request.
@@ -160,7 +87,7 @@ func (r PutEventSelectorsRequest) Send(ctx context.Context) (*PutEventSelectorsR
 	}
 
 	resp := &PutEventSelectorsResponse{
-		PutEventSelectorsOutput: r.Request.Data.(*PutEventSelectorsOutput),
+		PutEventSelectorsOutput: r.Request.Data.(*types.PutEventSelectorsOutput),
 		response:                &aws.Response{Request: r.Request},
 	}
 
@@ -170,7 +97,7 @@ func (r PutEventSelectorsRequest) Send(ctx context.Context) (*PutEventSelectorsR
 // PutEventSelectorsResponse is the response type for the
 // PutEventSelectors API operation.
 type PutEventSelectorsResponse struct {
-	*PutEventSelectorsOutput
+	*types.PutEventSelectorsOutput
 
 	response *aws.Response
 }

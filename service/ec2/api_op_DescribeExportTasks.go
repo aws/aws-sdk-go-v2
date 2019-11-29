@@ -6,32 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-type DescribeExportTasksInput struct {
-	_ struct{} `type:"structure"`
-
-	// The export task IDs.
-	ExportTaskIds []string `locationName:"exportTaskId" locationNameList:"ExportTaskId" type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeExportTasksInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type DescribeExportTasksOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Information about the export tasks.
-	ExportTasks []ExportTask `locationName:"exportTaskSet" locationNameList:"item" type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeExportTasksOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeExportTasks = "DescribeExportTasks"
 
@@ -49,7 +25,7 @@ const opDescribeExportTasks = "DescribeExportTasks"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeExportTasks
-func (c *Client) DescribeExportTasksRequest(input *DescribeExportTasksInput) DescribeExportTasksRequest {
+func (c *Client) DescribeExportTasksRequest(input *types.DescribeExportTasksInput) DescribeExportTasksRequest {
 	op := &aws.Operation{
 		Name:       opDescribeExportTasks,
 		HTTPMethod: "POST",
@@ -57,10 +33,10 @@ func (c *Client) DescribeExportTasksRequest(input *DescribeExportTasksInput) Des
 	}
 
 	if input == nil {
-		input = &DescribeExportTasksInput{}
+		input = &types.DescribeExportTasksInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeExportTasksOutput{})
+	req := c.newRequest(op, input, &types.DescribeExportTasksOutput{})
 	return DescribeExportTasksRequest{Request: req, Input: input, Copy: c.DescribeExportTasksRequest}
 }
 
@@ -68,8 +44,8 @@ func (c *Client) DescribeExportTasksRequest(input *DescribeExportTasksInput) Des
 // DescribeExportTasks API operation.
 type DescribeExportTasksRequest struct {
 	*aws.Request
-	Input *DescribeExportTasksInput
-	Copy  func(*DescribeExportTasksInput) DescribeExportTasksRequest
+	Input *types.DescribeExportTasksInput
+	Copy  func(*types.DescribeExportTasksInput) DescribeExportTasksRequest
 }
 
 // Send marshals and sends the DescribeExportTasks API request.
@@ -81,7 +57,7 @@ func (r DescribeExportTasksRequest) Send(ctx context.Context) (*DescribeExportTa
 	}
 
 	resp := &DescribeExportTasksResponse{
-		DescribeExportTasksOutput: r.Request.Data.(*DescribeExportTasksOutput),
+		DescribeExportTasksOutput: r.Request.Data.(*types.DescribeExportTasksOutput),
 		response:                  &aws.Response{Request: r.Request},
 	}
 
@@ -91,7 +67,7 @@ func (r DescribeExportTasksRequest) Send(ctx context.Context) (*DescribeExportTa
 // DescribeExportTasksResponse is the response type for the
 // DescribeExportTasks API operation.
 type DescribeExportTasksResponse struct {
-	*DescribeExportTasksOutput
+	*types.DescribeExportTasksOutput
 
 	response *aws.Response
 }

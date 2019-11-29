@@ -6,46 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/gamelift/types"
 )
-
-// Represents the input for a request action.
-type StopMatchmakingInput struct {
-	_ struct{} `type:"structure"`
-
-	// Unique identifier for a matchmaking ticket.
-	//
-	// TicketId is a required field
-	TicketId *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s StopMatchmakingInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *StopMatchmakingInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "StopMatchmakingInput"}
-
-	if s.TicketId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("TicketId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type StopMatchmakingOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s StopMatchmakingOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opStopMatchmaking = "StopMatchmaking"
 
@@ -88,7 +50,7 @@ const opStopMatchmaking = "StopMatchmaking"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/StopMatchmaking
-func (c *Client) StopMatchmakingRequest(input *StopMatchmakingInput) StopMatchmakingRequest {
+func (c *Client) StopMatchmakingRequest(input *types.StopMatchmakingInput) StopMatchmakingRequest {
 	op := &aws.Operation{
 		Name:       opStopMatchmaking,
 		HTTPMethod: "POST",
@@ -96,10 +58,10 @@ func (c *Client) StopMatchmakingRequest(input *StopMatchmakingInput) StopMatchma
 	}
 
 	if input == nil {
-		input = &StopMatchmakingInput{}
+		input = &types.StopMatchmakingInput{}
 	}
 
-	req := c.newRequest(op, input, &StopMatchmakingOutput{})
+	req := c.newRequest(op, input, &types.StopMatchmakingOutput{})
 	return StopMatchmakingRequest{Request: req, Input: input, Copy: c.StopMatchmakingRequest}
 }
 
@@ -107,8 +69,8 @@ func (c *Client) StopMatchmakingRequest(input *StopMatchmakingInput) StopMatchma
 // StopMatchmaking API operation.
 type StopMatchmakingRequest struct {
 	*aws.Request
-	Input *StopMatchmakingInput
-	Copy  func(*StopMatchmakingInput) StopMatchmakingRequest
+	Input *types.StopMatchmakingInput
+	Copy  func(*types.StopMatchmakingInput) StopMatchmakingRequest
 }
 
 // Send marshals and sends the StopMatchmaking API request.
@@ -120,7 +82,7 @@ func (r StopMatchmakingRequest) Send(ctx context.Context) (*StopMatchmakingRespo
 	}
 
 	resp := &StopMatchmakingResponse{
-		StopMatchmakingOutput: r.Request.Data.(*StopMatchmakingOutput),
+		StopMatchmakingOutput: r.Request.Data.(*types.StopMatchmakingOutput),
 		response:              &aws.Response{Request: r.Request},
 	}
 
@@ -130,7 +92,7 @@ func (r StopMatchmakingRequest) Send(ctx context.Context) (*StopMatchmakingRespo
 // StopMatchmakingResponse is the response type for the
 // StopMatchmaking API operation.
 type StopMatchmakingResponse struct {
-	*StopMatchmakingOutput
+	*types.StopMatchmakingOutput
 
 	response *aws.Response
 }

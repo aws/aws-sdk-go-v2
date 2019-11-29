@@ -6,175 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/greengrass/types"
 )
-
-// Request for the CreateSoftwareUpdateJob API.
-type CreateSoftwareUpdateJobInput struct {
-	_ struct{} `type:"structure"`
-
-	AmznClientToken *string `location:"header" locationName:"X-Amzn-Client-Token" type:"string"`
-
-	// The IAM Role that Greengrass will use to create pre-signed URLs pointing
-	// towards the update artifact.
-	//
-	// S3UrlSignerRole is a required field
-	S3UrlSignerRole *string `type:"string" required:"true"`
-
-	// The piece of software on the Greengrass core that will be updated.
-	//
-	// SoftwareToUpdate is a required field
-	SoftwareToUpdate SoftwareToUpdate `type:"string" required:"true" enum:"true"`
-
-	// The minimum level of log statements that should be logged by the OTA Agent
-	// during an update.
-	UpdateAgentLogLevel UpdateAgentLogLevel `type:"string" enum:"true"`
-
-	// The ARNs of the targets (IoT things or IoT thing groups) that this update
-	// will be applied to.
-	//
-	// UpdateTargets is a required field
-	UpdateTargets []string `type:"list" required:"true"`
-
-	// The architecture of the cores which are the targets of an update.
-	//
-	// UpdateTargetsArchitecture is a required field
-	UpdateTargetsArchitecture UpdateTargetsArchitecture `type:"string" required:"true" enum:"true"`
-
-	// The operating system of the cores which are the targets of an update.
-	//
-	// UpdateTargetsOperatingSystem is a required field
-	UpdateTargetsOperatingSystem UpdateTargetsOperatingSystem `type:"string" required:"true" enum:"true"`
-}
-
-// String returns the string representation
-func (s CreateSoftwareUpdateJobInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateSoftwareUpdateJobInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateSoftwareUpdateJobInput"}
-
-	if s.S3UrlSignerRole == nil {
-		invalidParams.Add(aws.NewErrParamRequired("S3UrlSignerRole"))
-	}
-	if len(s.SoftwareToUpdate) == 0 {
-		invalidParams.Add(aws.NewErrParamRequired("SoftwareToUpdate"))
-	}
-
-	if s.UpdateTargets == nil {
-		invalidParams.Add(aws.NewErrParamRequired("UpdateTargets"))
-	}
-	if len(s.UpdateTargetsArchitecture) == 0 {
-		invalidParams.Add(aws.NewErrParamRequired("UpdateTargetsArchitecture"))
-	}
-	if len(s.UpdateTargetsOperatingSystem) == 0 {
-		invalidParams.Add(aws.NewErrParamRequired("UpdateTargetsOperatingSystem"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s CreateSoftwareUpdateJobInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.S3UrlSignerRole != nil {
-		v := *s.S3UrlSignerRole
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "S3UrlSignerRole", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if len(s.SoftwareToUpdate) > 0 {
-		v := s.SoftwareToUpdate
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "SoftwareToUpdate", protocol.QuotedValue{ValueMarshaler: v}, metadata)
-	}
-	if len(s.UpdateAgentLogLevel) > 0 {
-		v := s.UpdateAgentLogLevel
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "UpdateAgentLogLevel", protocol.QuotedValue{ValueMarshaler: v}, metadata)
-	}
-	if s.UpdateTargets != nil {
-		v := s.UpdateTargets
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "UpdateTargets", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
-		}
-		ls0.End()
-
-	}
-	if len(s.UpdateTargetsArchitecture) > 0 {
-		v := s.UpdateTargetsArchitecture
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "UpdateTargetsArchitecture", protocol.QuotedValue{ValueMarshaler: v}, metadata)
-	}
-	if len(s.UpdateTargetsOperatingSystem) > 0 {
-		v := s.UpdateTargetsOperatingSystem
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "UpdateTargetsOperatingSystem", protocol.QuotedValue{ValueMarshaler: v}, metadata)
-	}
-	if s.AmznClientToken != nil {
-		v := *s.AmznClientToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "X-Amzn-Client-Token", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type CreateSoftwareUpdateJobOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The IoT Job ARN corresponding to this update.
-	IotJobArn *string `type:"string"`
-
-	// The IoT Job Id corresponding to this update.
-	IotJobId *string `type:"string"`
-
-	// The software version installed on the device or devices after the update.
-	PlatformSoftwareVersion *string `type:"string"`
-}
-
-// String returns the string representation
-func (s CreateSoftwareUpdateJobOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s CreateSoftwareUpdateJobOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.IotJobArn != nil {
-		v := *s.IotJobArn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "IotJobArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.IotJobId != nil {
-		v := *s.IotJobId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "IotJobId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.PlatformSoftwareVersion != nil {
-		v := *s.PlatformSoftwareVersion
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "PlatformSoftwareVersion", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opCreateSoftwareUpdateJob = "CreateSoftwareUpdateJob"
 
@@ -194,7 +27,7 @@ const opCreateSoftwareUpdateJob = "CreateSoftwareUpdateJob"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/CreateSoftwareUpdateJob
-func (c *Client) CreateSoftwareUpdateJobRequest(input *CreateSoftwareUpdateJobInput) CreateSoftwareUpdateJobRequest {
+func (c *Client) CreateSoftwareUpdateJobRequest(input *types.CreateSoftwareUpdateJobInput) CreateSoftwareUpdateJobRequest {
 	op := &aws.Operation{
 		Name:       opCreateSoftwareUpdateJob,
 		HTTPMethod: "POST",
@@ -202,10 +35,10 @@ func (c *Client) CreateSoftwareUpdateJobRequest(input *CreateSoftwareUpdateJobIn
 	}
 
 	if input == nil {
-		input = &CreateSoftwareUpdateJobInput{}
+		input = &types.CreateSoftwareUpdateJobInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateSoftwareUpdateJobOutput{})
+	req := c.newRequest(op, input, &types.CreateSoftwareUpdateJobOutput{})
 	return CreateSoftwareUpdateJobRequest{Request: req, Input: input, Copy: c.CreateSoftwareUpdateJobRequest}
 }
 
@@ -213,8 +46,8 @@ func (c *Client) CreateSoftwareUpdateJobRequest(input *CreateSoftwareUpdateJobIn
 // CreateSoftwareUpdateJob API operation.
 type CreateSoftwareUpdateJobRequest struct {
 	*aws.Request
-	Input *CreateSoftwareUpdateJobInput
-	Copy  func(*CreateSoftwareUpdateJobInput) CreateSoftwareUpdateJobRequest
+	Input *types.CreateSoftwareUpdateJobInput
+	Copy  func(*types.CreateSoftwareUpdateJobInput) CreateSoftwareUpdateJobRequest
 }
 
 // Send marshals and sends the CreateSoftwareUpdateJob API request.
@@ -226,7 +59,7 @@ func (r CreateSoftwareUpdateJobRequest) Send(ctx context.Context) (*CreateSoftwa
 	}
 
 	resp := &CreateSoftwareUpdateJobResponse{
-		CreateSoftwareUpdateJobOutput: r.Request.Data.(*CreateSoftwareUpdateJobOutput),
+		CreateSoftwareUpdateJobOutput: r.Request.Data.(*types.CreateSoftwareUpdateJobOutput),
 		response:                      &aws.Response{Request: r.Request},
 	}
 
@@ -236,7 +69,7 @@ func (r CreateSoftwareUpdateJobRequest) Send(ctx context.Context) (*CreateSoftwa
 // CreateSoftwareUpdateJobResponse is the response type for the
 // CreateSoftwareUpdateJob API operation.
 type CreateSoftwareUpdateJobResponse struct {
-	*CreateSoftwareUpdateJobOutput
+	*types.CreateSoftwareUpdateJobOutput
 
 	response *aws.Response
 }

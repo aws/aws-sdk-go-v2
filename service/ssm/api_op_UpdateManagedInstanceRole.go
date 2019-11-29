@@ -6,54 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ssm/types"
 )
-
-type UpdateManagedInstanceRoleInput struct {
-	_ struct{} `type:"structure"`
-
-	// The IAM role you want to assign or change.
-	//
-	// IamRole is a required field
-	IamRole *string `type:"string" required:"true"`
-
-	// The ID of the managed instance where you want to update the role.
-	//
-	// InstanceId is a required field
-	InstanceId *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s UpdateManagedInstanceRoleInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateManagedInstanceRoleInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateManagedInstanceRoleInput"}
-
-	if s.IamRole == nil {
-		invalidParams.Add(aws.NewErrParamRequired("IamRole"))
-	}
-
-	if s.InstanceId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("InstanceId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type UpdateManagedInstanceRoleOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s UpdateManagedInstanceRoleOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opUpdateManagedInstanceRole = "UpdateManagedInstanceRole"
 
@@ -71,7 +25,7 @@ const opUpdateManagedInstanceRole = "UpdateManagedInstanceRole"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/UpdateManagedInstanceRole
-func (c *Client) UpdateManagedInstanceRoleRequest(input *UpdateManagedInstanceRoleInput) UpdateManagedInstanceRoleRequest {
+func (c *Client) UpdateManagedInstanceRoleRequest(input *types.UpdateManagedInstanceRoleInput) UpdateManagedInstanceRoleRequest {
 	op := &aws.Operation{
 		Name:       opUpdateManagedInstanceRole,
 		HTTPMethod: "POST",
@@ -79,10 +33,10 @@ func (c *Client) UpdateManagedInstanceRoleRequest(input *UpdateManagedInstanceRo
 	}
 
 	if input == nil {
-		input = &UpdateManagedInstanceRoleInput{}
+		input = &types.UpdateManagedInstanceRoleInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateManagedInstanceRoleOutput{})
+	req := c.newRequest(op, input, &types.UpdateManagedInstanceRoleOutput{})
 	return UpdateManagedInstanceRoleRequest{Request: req, Input: input, Copy: c.UpdateManagedInstanceRoleRequest}
 }
 
@@ -90,8 +44,8 @@ func (c *Client) UpdateManagedInstanceRoleRequest(input *UpdateManagedInstanceRo
 // UpdateManagedInstanceRole API operation.
 type UpdateManagedInstanceRoleRequest struct {
 	*aws.Request
-	Input *UpdateManagedInstanceRoleInput
-	Copy  func(*UpdateManagedInstanceRoleInput) UpdateManagedInstanceRoleRequest
+	Input *types.UpdateManagedInstanceRoleInput
+	Copy  func(*types.UpdateManagedInstanceRoleInput) UpdateManagedInstanceRoleRequest
 }
 
 // Send marshals and sends the UpdateManagedInstanceRole API request.
@@ -103,7 +57,7 @@ func (r UpdateManagedInstanceRoleRequest) Send(ctx context.Context) (*UpdateMana
 	}
 
 	resp := &UpdateManagedInstanceRoleResponse{
-		UpdateManagedInstanceRoleOutput: r.Request.Data.(*UpdateManagedInstanceRoleOutput),
+		UpdateManagedInstanceRoleOutput: r.Request.Data.(*types.UpdateManagedInstanceRoleOutput),
 		response:                        &aws.Response{Request: r.Request},
 	}
 
@@ -113,7 +67,7 @@ func (r UpdateManagedInstanceRoleRequest) Send(ctx context.Context) (*UpdateMana
 // UpdateManagedInstanceRoleResponse is the response type for the
 // UpdateManagedInstanceRole API operation.
 type UpdateManagedInstanceRoleResponse struct {
-	*UpdateManagedInstanceRoleOutput
+	*types.UpdateManagedInstanceRoleOutput
 
 	response *aws.Response
 }

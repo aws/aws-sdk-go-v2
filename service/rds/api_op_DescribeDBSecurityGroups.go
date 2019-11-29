@@ -4,76 +4,10 @@ package rds
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/rds/types"
 )
-
-type DescribeDBSecurityGroupsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the DB security group to return details for.
-	DBSecurityGroupName *string `type:"string"`
-
-	// This parameter is not currently supported.
-	Filters []Filter `locationNameList:"Filter" type:"list"`
-
-	// An optional pagination token provided by a previous DescribeDBSecurityGroups
-	// request. If this parameter is specified, the response includes only records
-	// beyond the marker, up to the value specified by MaxRecords.
-	Marker *string `type:"string"`
-
-	// The maximum number of records to include in the response. If more records
-	// exist than the specified MaxRecords value, a pagination token called a marker
-	// is included in the response so that you can retrieve the remaining results.
-	//
-	// Default: 100
-	//
-	// Constraints: Minimum 20, maximum 100.
-	MaxRecords *int64 `type:"integer"`
-}
-
-// String returns the string representation
-func (s DescribeDBSecurityGroupsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeDBSecurityGroupsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeDBSecurityGroupsInput"}
-	if s.Filters != nil {
-		for i, v := range s.Filters {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Contains the result of a successful invocation of the DescribeDBSecurityGroups
-// action.
-type DescribeDBSecurityGroupsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A list of DBSecurityGroup instances.
-	DBSecurityGroups []DBSecurityGroup `locationNameList:"DBSecurityGroup" type:"list"`
-
-	// An optional pagination token provided by a previous request. If this parameter
-	// is specified, the response includes only records beyond the marker, up to
-	// the value specified by MaxRecords.
-	Marker *string `type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeDBSecurityGroupsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeDBSecurityGroups = "DescribeDBSecurityGroups"
 
@@ -92,7 +26,7 @@ const opDescribeDBSecurityGroups = "DescribeDBSecurityGroups"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeDBSecurityGroups
-func (c *Client) DescribeDBSecurityGroupsRequest(input *DescribeDBSecurityGroupsInput) DescribeDBSecurityGroupsRequest {
+func (c *Client) DescribeDBSecurityGroupsRequest(input *types.DescribeDBSecurityGroupsInput) DescribeDBSecurityGroupsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeDBSecurityGroups,
 		HTTPMethod: "POST",
@@ -106,10 +40,10 @@ func (c *Client) DescribeDBSecurityGroupsRequest(input *DescribeDBSecurityGroups
 	}
 
 	if input == nil {
-		input = &DescribeDBSecurityGroupsInput{}
+		input = &types.DescribeDBSecurityGroupsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeDBSecurityGroupsOutput{})
+	req := c.newRequest(op, input, &types.DescribeDBSecurityGroupsOutput{})
 	return DescribeDBSecurityGroupsRequest{Request: req, Input: input, Copy: c.DescribeDBSecurityGroupsRequest}
 }
 
@@ -117,8 +51,8 @@ func (c *Client) DescribeDBSecurityGroupsRequest(input *DescribeDBSecurityGroups
 // DescribeDBSecurityGroups API operation.
 type DescribeDBSecurityGroupsRequest struct {
 	*aws.Request
-	Input *DescribeDBSecurityGroupsInput
-	Copy  func(*DescribeDBSecurityGroupsInput) DescribeDBSecurityGroupsRequest
+	Input *types.DescribeDBSecurityGroupsInput
+	Copy  func(*types.DescribeDBSecurityGroupsInput) DescribeDBSecurityGroupsRequest
 }
 
 // Send marshals and sends the DescribeDBSecurityGroups API request.
@@ -130,7 +64,7 @@ func (r DescribeDBSecurityGroupsRequest) Send(ctx context.Context) (*DescribeDBS
 	}
 
 	resp := &DescribeDBSecurityGroupsResponse{
-		DescribeDBSecurityGroupsOutput: r.Request.Data.(*DescribeDBSecurityGroupsOutput),
+		DescribeDBSecurityGroupsOutput: r.Request.Data.(*types.DescribeDBSecurityGroupsOutput),
 		response:                       &aws.Response{Request: r.Request},
 	}
 
@@ -160,7 +94,7 @@ func NewDescribeDBSecurityGroupsPaginator(req DescribeDBSecurityGroupsRequest) D
 	return DescribeDBSecurityGroupsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *DescribeDBSecurityGroupsInput
+				var inCpy *types.DescribeDBSecurityGroupsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -180,14 +114,14 @@ type DescribeDBSecurityGroupsPaginator struct {
 	aws.Pager
 }
 
-func (p *DescribeDBSecurityGroupsPaginator) CurrentPage() *DescribeDBSecurityGroupsOutput {
-	return p.Pager.CurrentPage().(*DescribeDBSecurityGroupsOutput)
+func (p *DescribeDBSecurityGroupsPaginator) CurrentPage() *types.DescribeDBSecurityGroupsOutput {
+	return p.Pager.CurrentPage().(*types.DescribeDBSecurityGroupsOutput)
 }
 
 // DescribeDBSecurityGroupsResponse is the response type for the
 // DescribeDBSecurityGroups API operation.
 type DescribeDBSecurityGroupsResponse struct {
-	*DescribeDBSecurityGroupsOutput
+	*types.DescribeDBSecurityGroupsOutput
 
 	response *aws.Response
 }

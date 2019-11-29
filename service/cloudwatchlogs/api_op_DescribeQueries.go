@@ -6,66 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/cloudwatchlogs/types"
 )
-
-type DescribeQueriesInput struct {
-	_ struct{} `type:"structure"`
-
-	// Limits the returned queries to only those for the specified log group.
-	LogGroupName *string `locationName:"logGroupName" min:"1" type:"string"`
-
-	// Limits the number of returned queries to the specified number.
-	MaxResults *int64 `locationName:"maxResults" min:"1" type:"integer"`
-
-	// The token for the next set of items to return. The token expires after 24
-	// hours.
-	NextToken *string `locationName:"nextToken" min:"1" type:"string"`
-
-	// Limits the returned queries to only those that have the specified status.
-	// Valid values are Cancelled, Complete, Failed, Running, and Scheduled.
-	Status QueryStatus `locationName:"status" type:"string" enum:"true"`
-}
-
-// String returns the string representation
-func (s DescribeQueriesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeQueriesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeQueriesInput"}
-	if s.LogGroupName != nil && len(*s.LogGroupName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("LogGroupName", 1))
-	}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-	if s.NextToken != nil && len(*s.NextToken) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribeQueriesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The token for the next set of items to return. The token expires after 24
-	// hours.
-	NextToken *string `locationName:"nextToken" min:"1" type:"string"`
-
-	// The list of queries that match the request.
-	Queries []QueryInfo `locationName:"queries" type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeQueriesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeQueries = "DescribeQueries"
 
@@ -85,7 +27,7 @@ const opDescribeQueries = "DescribeQueries"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/DescribeQueries
-func (c *Client) DescribeQueriesRequest(input *DescribeQueriesInput) DescribeQueriesRequest {
+func (c *Client) DescribeQueriesRequest(input *types.DescribeQueriesInput) DescribeQueriesRequest {
 	op := &aws.Operation{
 		Name:       opDescribeQueries,
 		HTTPMethod: "POST",
@@ -93,10 +35,10 @@ func (c *Client) DescribeQueriesRequest(input *DescribeQueriesInput) DescribeQue
 	}
 
 	if input == nil {
-		input = &DescribeQueriesInput{}
+		input = &types.DescribeQueriesInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeQueriesOutput{})
+	req := c.newRequest(op, input, &types.DescribeQueriesOutput{})
 	return DescribeQueriesRequest{Request: req, Input: input, Copy: c.DescribeQueriesRequest}
 }
 
@@ -104,8 +46,8 @@ func (c *Client) DescribeQueriesRequest(input *DescribeQueriesInput) DescribeQue
 // DescribeQueries API operation.
 type DescribeQueriesRequest struct {
 	*aws.Request
-	Input *DescribeQueriesInput
-	Copy  func(*DescribeQueriesInput) DescribeQueriesRequest
+	Input *types.DescribeQueriesInput
+	Copy  func(*types.DescribeQueriesInput) DescribeQueriesRequest
 }
 
 // Send marshals and sends the DescribeQueries API request.
@@ -117,7 +59,7 @@ func (r DescribeQueriesRequest) Send(ctx context.Context) (*DescribeQueriesRespo
 	}
 
 	resp := &DescribeQueriesResponse{
-		DescribeQueriesOutput: r.Request.Data.(*DescribeQueriesOutput),
+		DescribeQueriesOutput: r.Request.Data.(*types.DescribeQueriesOutput),
 		response:              &aws.Response{Request: r.Request},
 	}
 
@@ -127,7 +69,7 @@ func (r DescribeQueriesRequest) Send(ctx context.Context) (*DescribeQueriesRespo
 // DescribeQueriesResponse is the response type for the
 // DescribeQueries API operation.
 type DescribeQueriesResponse struct {
-	*DescribeQueriesOutput
+	*types.DescribeQueriesOutput
 
 	response *aws.Response
 }

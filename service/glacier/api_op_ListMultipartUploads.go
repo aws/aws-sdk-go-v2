@@ -6,135 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/glacier/types"
 )
-
-// Provides options for retrieving list of in-progress multipart uploads for
-// an Amazon Glacier vault.
-type ListMultipartUploadsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The AccountId value is the AWS account ID of the account that owns the vault.
-	// You can either specify an AWS account ID or optionally a single '-' (hyphen),
-	// in which case Amazon S3 Glacier uses the AWS account ID associated with the
-	// credentials used to sign the request. If you use an account ID, do not include
-	// any hyphens ('-') in the ID.
-	//
-	// AccountId is a required field
-	AccountId *string `location:"uri" locationName:"accountId" type:"string" required:"true"`
-
-	// Specifies the maximum number of uploads returned in the response body. If
-	// this value is not specified, the List Uploads operation returns up to 50
-	// uploads.
-	Limit *string `location:"querystring" locationName:"limit" type:"string"`
-
-	// An opaque string used for pagination. This value specifies the upload at
-	// which the listing of uploads should begin. Get the marker value from a previous
-	// List Uploads response. You need only include the marker if you are continuing
-	// the pagination of results started in a previous List Uploads request.
-	Marker *string `location:"querystring" locationName:"marker" type:"string"`
-
-	// The name of the vault.
-	//
-	// VaultName is a required field
-	VaultName *string `location:"uri" locationName:"vaultName" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s ListMultipartUploadsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListMultipartUploadsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListMultipartUploadsInput"}
-
-	if s.AccountId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("AccountId"))
-	}
-
-	if s.VaultName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("VaultName"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListMultipartUploadsInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.AccountId != nil {
-		v := *s.AccountId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "accountId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.VaultName != nil {
-		v := *s.VaultName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "vaultName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Limit != nil {
-		v := *s.Limit
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "limit", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Marker != nil {
-		v := *s.Marker
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "marker", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-// Contains the Amazon S3 Glacier response to your request.
-type ListMultipartUploadsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// An opaque string that represents where to continue pagination of the results.
-	// You use the marker in a new List Multipart Uploads request to obtain more
-	// uploads in the list. If there are no more uploads, this value is null.
-	Marker *string `type:"string"`
-
-	// A list of in-progress multipart uploads.
-	UploadsList []UploadListElement `type:"list"`
-}
-
-// String returns the string representation
-func (s ListMultipartUploadsOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListMultipartUploadsOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.Marker != nil {
-		v := *s.Marker
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "Marker", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.UploadsList != nil {
-		v := s.UploadsList
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "UploadsList", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	return nil
-}
 
 const opListMultipartUploads = "ListMultipartUploads"
 
@@ -178,7 +51,7 @@ const opListMultipartUploads = "ListMultipartUploads"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) ListMultipartUploadsRequest(input *ListMultipartUploadsInput) ListMultipartUploadsRequest {
+func (c *Client) ListMultipartUploadsRequest(input *types.ListMultipartUploadsInput) ListMultipartUploadsRequest {
 	op := &aws.Operation{
 		Name:       opListMultipartUploads,
 		HTTPMethod: "GET",
@@ -192,10 +65,10 @@ func (c *Client) ListMultipartUploadsRequest(input *ListMultipartUploadsInput) L
 	}
 
 	if input == nil {
-		input = &ListMultipartUploadsInput{}
+		input = &types.ListMultipartUploadsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListMultipartUploadsOutput{})
+	req := c.newRequest(op, input, &types.ListMultipartUploadsOutput{})
 	return ListMultipartUploadsRequest{Request: req, Input: input, Copy: c.ListMultipartUploadsRequest}
 }
 
@@ -203,8 +76,8 @@ func (c *Client) ListMultipartUploadsRequest(input *ListMultipartUploadsInput) L
 // ListMultipartUploads API operation.
 type ListMultipartUploadsRequest struct {
 	*aws.Request
-	Input *ListMultipartUploadsInput
-	Copy  func(*ListMultipartUploadsInput) ListMultipartUploadsRequest
+	Input *types.ListMultipartUploadsInput
+	Copy  func(*types.ListMultipartUploadsInput) ListMultipartUploadsRequest
 }
 
 // Send marshals and sends the ListMultipartUploads API request.
@@ -216,7 +89,7 @@ func (r ListMultipartUploadsRequest) Send(ctx context.Context) (*ListMultipartUp
 	}
 
 	resp := &ListMultipartUploadsResponse{
-		ListMultipartUploadsOutput: r.Request.Data.(*ListMultipartUploadsOutput),
+		ListMultipartUploadsOutput: r.Request.Data.(*types.ListMultipartUploadsOutput),
 		response:                   &aws.Response{Request: r.Request},
 	}
 
@@ -246,7 +119,7 @@ func NewListMultipartUploadsPaginator(req ListMultipartUploadsRequest) ListMulti
 	return ListMultipartUploadsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListMultipartUploadsInput
+				var inCpy *types.ListMultipartUploadsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -266,14 +139,14 @@ type ListMultipartUploadsPaginator struct {
 	aws.Pager
 }
 
-func (p *ListMultipartUploadsPaginator) CurrentPage() *ListMultipartUploadsOutput {
-	return p.Pager.CurrentPage().(*ListMultipartUploadsOutput)
+func (p *ListMultipartUploadsPaginator) CurrentPage() *types.ListMultipartUploadsOutput {
+	return p.Pager.CurrentPage().(*types.ListMultipartUploadsOutput)
 }
 
 // ListMultipartUploadsResponse is the response type for the
 // ListMultipartUploads API operation.
 type ListMultipartUploadsResponse struct {
-	*ListMultipartUploadsOutput
+	*types.ListMultipartUploadsOutput
 
 	response *aws.Response
 }

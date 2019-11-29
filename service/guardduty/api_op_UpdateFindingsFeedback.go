@@ -6,119 +6,15 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/guardduty/types"
 )
-
-type UpdateFindingsFeedbackInput struct {
-	_ struct{} `type:"structure"`
-
-	// Additional feedback about the GuardDuty findings.
-	Comments *string `locationName:"comments" type:"string"`
-
-	// The ID of the detector that specifies the GuardDuty service whose findings
-	// you want to mark as useful or not useful.
-	//
-	// DetectorId is a required field
-	DetectorId *string `location:"uri" locationName:"detectorId" min:"1" type:"string" required:"true"`
-
-	// Valid values: USEFUL | NOT_USEFUL
-	//
-	// Feedback is a required field
-	Feedback Feedback `locationName:"feedback" type:"string" required:"true" enum:"true"`
-
-	// IDs of the findings that you want to mark as useful or not useful.
-	//
-	// FindingIds is a required field
-	FindingIds []string `locationName:"findingIds" type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s UpdateFindingsFeedbackInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateFindingsFeedbackInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateFindingsFeedbackInput"}
-
-	if s.DetectorId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DetectorId"))
-	}
-	if s.DetectorId != nil && len(*s.DetectorId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("DetectorId", 1))
-	}
-	if len(s.Feedback) == 0 {
-		invalidParams.Add(aws.NewErrParamRequired("Feedback"))
-	}
-
-	if s.FindingIds == nil {
-		invalidParams.Add(aws.NewErrParamRequired("FindingIds"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s UpdateFindingsFeedbackInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.Comments != nil {
-		v := *s.Comments
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "comments", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if len(s.Feedback) > 0 {
-		v := s.Feedback
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "feedback", protocol.QuotedValue{ValueMarshaler: v}, metadata)
-	}
-	if s.FindingIds != nil {
-		v := s.FindingIds
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "findingIds", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
-		}
-		ls0.End()
-
-	}
-	if s.DetectorId != nil {
-		v := *s.DetectorId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "detectorId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type UpdateFindingsFeedbackOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s UpdateFindingsFeedbackOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s UpdateFindingsFeedbackOutput) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
 
 const opUpdateFindingsFeedback = "UpdateFindingsFeedback"
 
 // UpdateFindingsFeedbackRequest returns a request value for making API operation for
 // Amazon GuardDuty.
 //
-// Marks specified Amazon GuardDuty findings as useful or not useful.
+// Marks the specified GuardDuty findings as useful or not useful.
 //
 //    // Example sending a request using UpdateFindingsFeedbackRequest.
 //    req := client.UpdateFindingsFeedbackRequest(params)
@@ -128,7 +24,7 @@ const opUpdateFindingsFeedback = "UpdateFindingsFeedback"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/UpdateFindingsFeedback
-func (c *Client) UpdateFindingsFeedbackRequest(input *UpdateFindingsFeedbackInput) UpdateFindingsFeedbackRequest {
+func (c *Client) UpdateFindingsFeedbackRequest(input *types.UpdateFindingsFeedbackInput) UpdateFindingsFeedbackRequest {
 	op := &aws.Operation{
 		Name:       opUpdateFindingsFeedback,
 		HTTPMethod: "POST",
@@ -136,10 +32,10 @@ func (c *Client) UpdateFindingsFeedbackRequest(input *UpdateFindingsFeedbackInpu
 	}
 
 	if input == nil {
-		input = &UpdateFindingsFeedbackInput{}
+		input = &types.UpdateFindingsFeedbackInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateFindingsFeedbackOutput{})
+	req := c.newRequest(op, input, &types.UpdateFindingsFeedbackOutput{})
 	return UpdateFindingsFeedbackRequest{Request: req, Input: input, Copy: c.UpdateFindingsFeedbackRequest}
 }
 
@@ -147,8 +43,8 @@ func (c *Client) UpdateFindingsFeedbackRequest(input *UpdateFindingsFeedbackInpu
 // UpdateFindingsFeedback API operation.
 type UpdateFindingsFeedbackRequest struct {
 	*aws.Request
-	Input *UpdateFindingsFeedbackInput
-	Copy  func(*UpdateFindingsFeedbackInput) UpdateFindingsFeedbackRequest
+	Input *types.UpdateFindingsFeedbackInput
+	Copy  func(*types.UpdateFindingsFeedbackInput) UpdateFindingsFeedbackRequest
 }
 
 // Send marshals and sends the UpdateFindingsFeedback API request.
@@ -160,7 +56,7 @@ func (r UpdateFindingsFeedbackRequest) Send(ctx context.Context) (*UpdateFinding
 	}
 
 	resp := &UpdateFindingsFeedbackResponse{
-		UpdateFindingsFeedbackOutput: r.Request.Data.(*UpdateFindingsFeedbackOutput),
+		UpdateFindingsFeedbackOutput: r.Request.Data.(*types.UpdateFindingsFeedbackOutput),
 		response:                     &aws.Response{Request: r.Request},
 	}
 
@@ -170,7 +66,7 @@ func (r UpdateFindingsFeedbackRequest) Send(ctx context.Context) (*UpdateFinding
 // UpdateFindingsFeedbackResponse is the response type for the
 // UpdateFindingsFeedback API operation.
 type UpdateFindingsFeedbackResponse struct {
-	*UpdateFindingsFeedbackOutput
+	*types.UpdateFindingsFeedbackOutput
 
 	response *aws.Response
 }

@@ -6,88 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
 )
-
-type RenderUiTemplateInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) that has access to the S3 objects that are
-	// used by the template.
-	//
-	// RoleArn is a required field
-	RoleArn *string `min:"20" type:"string" required:"true"`
-
-	// A RenderableTask object containing a representative task to render.
-	//
-	// Task is a required field
-	Task *RenderableTask `type:"structure" required:"true"`
-
-	// A Template object containing the worker UI template to render.
-	//
-	// UiTemplate is a required field
-	UiTemplate *UiTemplate `type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s RenderUiTemplateInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *RenderUiTemplateInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "RenderUiTemplateInput"}
-
-	if s.RoleArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("RoleArn"))
-	}
-	if s.RoleArn != nil && len(*s.RoleArn) < 20 {
-		invalidParams.Add(aws.NewErrParamMinLen("RoleArn", 20))
-	}
-
-	if s.Task == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Task"))
-	}
-
-	if s.UiTemplate == nil {
-		invalidParams.Add(aws.NewErrParamRequired("UiTemplate"))
-	}
-	if s.Task != nil {
-		if err := s.Task.Validate(); err != nil {
-			invalidParams.AddNested("Task", err.(aws.ErrInvalidParams))
-		}
-	}
-	if s.UiTemplate != nil {
-		if err := s.UiTemplate.Validate(); err != nil {
-			invalidParams.AddNested("UiTemplate", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type RenderUiTemplateOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A list of one or more RenderingError objects if any were encountered while
-	// rendering the template. If there were no errors, the list is empty.
-	//
-	// Errors is a required field
-	Errors []RenderingError `type:"list" required:"true"`
-
-	// A Liquid template that renders the HTML for the worker UI.
-	//
-	// RenderedContent is a required field
-	RenderedContent *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s RenderUiTemplateOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opRenderUiTemplate = "RenderUiTemplate"
 
@@ -104,7 +24,7 @@ const opRenderUiTemplate = "RenderUiTemplate"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/RenderUiTemplate
-func (c *Client) RenderUiTemplateRequest(input *RenderUiTemplateInput) RenderUiTemplateRequest {
+func (c *Client) RenderUiTemplateRequest(input *types.RenderUiTemplateInput) RenderUiTemplateRequest {
 	op := &aws.Operation{
 		Name:       opRenderUiTemplate,
 		HTTPMethod: "POST",
@@ -112,10 +32,10 @@ func (c *Client) RenderUiTemplateRequest(input *RenderUiTemplateInput) RenderUiT
 	}
 
 	if input == nil {
-		input = &RenderUiTemplateInput{}
+		input = &types.RenderUiTemplateInput{}
 	}
 
-	req := c.newRequest(op, input, &RenderUiTemplateOutput{})
+	req := c.newRequest(op, input, &types.RenderUiTemplateOutput{})
 	return RenderUiTemplateRequest{Request: req, Input: input, Copy: c.RenderUiTemplateRequest}
 }
 
@@ -123,8 +43,8 @@ func (c *Client) RenderUiTemplateRequest(input *RenderUiTemplateInput) RenderUiT
 // RenderUiTemplate API operation.
 type RenderUiTemplateRequest struct {
 	*aws.Request
-	Input *RenderUiTemplateInput
-	Copy  func(*RenderUiTemplateInput) RenderUiTemplateRequest
+	Input *types.RenderUiTemplateInput
+	Copy  func(*types.RenderUiTemplateInput) RenderUiTemplateRequest
 }
 
 // Send marshals and sends the RenderUiTemplate API request.
@@ -136,7 +56,7 @@ func (r RenderUiTemplateRequest) Send(ctx context.Context) (*RenderUiTemplateRes
 	}
 
 	resp := &RenderUiTemplateResponse{
-		RenderUiTemplateOutput: r.Request.Data.(*RenderUiTemplateOutput),
+		RenderUiTemplateOutput: r.Request.Data.(*types.RenderUiTemplateOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -146,7 +66,7 @@ func (r RenderUiTemplateRequest) Send(ctx context.Context) (*RenderUiTemplateRes
 // RenderUiTemplateResponse is the response type for the
 // RenderUiTemplate API operation.
 type RenderUiTemplateResponse struct {
-	*RenderUiTemplateOutput
+	*types.RenderUiTemplateOutput
 
 	response *aws.Response
 }

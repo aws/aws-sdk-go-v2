@@ -6,82 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/kinesisvideo/types"
 )
-
-type DescribeStreamInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the stream.
-	StreamARN *string `min:"1" type:"string"`
-
-	// The name of the stream.
-	StreamName *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeStreamInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeStreamInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeStreamInput"}
-	if s.StreamARN != nil && len(*s.StreamARN) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("StreamARN", 1))
-	}
-	if s.StreamName != nil && len(*s.StreamName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("StreamName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DescribeStreamInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.StreamARN != nil {
-		v := *s.StreamARN
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "StreamARN", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.StreamName != nil {
-		v := *s.StreamName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "StreamName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type DescribeStreamOutput struct {
-	_ struct{} `type:"structure"`
-
-	// An object that describes the stream.
-	StreamInfo *StreamInfo `type:"structure"`
-}
-
-// String returns the string representation
-func (s DescribeStreamOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DescribeStreamOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.StreamInfo != nil {
-		v := s.StreamInfo
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "StreamInfo", v, metadata)
-	}
-	return nil
-}
 
 const opDescribeStream = "DescribeStream"
 
@@ -99,7 +25,7 @@ const opDescribeStream = "DescribeStream"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesisvideo-2017-09-30/DescribeStream
-func (c *Client) DescribeStreamRequest(input *DescribeStreamInput) DescribeStreamRequest {
+func (c *Client) DescribeStreamRequest(input *types.DescribeStreamInput) DescribeStreamRequest {
 	op := &aws.Operation{
 		Name:       opDescribeStream,
 		HTTPMethod: "POST",
@@ -107,10 +33,10 @@ func (c *Client) DescribeStreamRequest(input *DescribeStreamInput) DescribeStrea
 	}
 
 	if input == nil {
-		input = &DescribeStreamInput{}
+		input = &types.DescribeStreamInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeStreamOutput{})
+	req := c.newRequest(op, input, &types.DescribeStreamOutput{})
 	return DescribeStreamRequest{Request: req, Input: input, Copy: c.DescribeStreamRequest}
 }
 
@@ -118,8 +44,8 @@ func (c *Client) DescribeStreamRequest(input *DescribeStreamInput) DescribeStrea
 // DescribeStream API operation.
 type DescribeStreamRequest struct {
 	*aws.Request
-	Input *DescribeStreamInput
-	Copy  func(*DescribeStreamInput) DescribeStreamRequest
+	Input *types.DescribeStreamInput
+	Copy  func(*types.DescribeStreamInput) DescribeStreamRequest
 }
 
 // Send marshals and sends the DescribeStream API request.
@@ -131,7 +57,7 @@ func (r DescribeStreamRequest) Send(ctx context.Context) (*DescribeStreamRespons
 	}
 
 	resp := &DescribeStreamResponse{
-		DescribeStreamOutput: r.Request.Data.(*DescribeStreamOutput),
+		DescribeStreamOutput: r.Request.Data.(*types.DescribeStreamOutput),
 		response:             &aws.Response{Request: r.Request},
 	}
 
@@ -141,7 +67,7 @@ func (r DescribeStreamRequest) Send(ctx context.Context) (*DescribeStreamRespons
 // DescribeStreamResponse is the response type for the
 // DescribeStream API operation.
 type DescribeStreamResponse struct {
-	*DescribeStreamOutput
+	*types.DescribeStreamOutput
 
 	response *aws.Response
 }

@@ -6,47 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/datasync/types"
 )
-
-// DeleteAgentRequest
-type DeleteAgentInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the agent to delete. Use the ListAgents
-	// operation to return a list of agents for your account and AWS Region.
-	//
-	// AgentArn is a required field
-	AgentArn *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteAgentInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteAgentInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteAgentInput"}
-
-	if s.AgentArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("AgentArn"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteAgentOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteAgentOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteAgent = "DeleteAgent"
 
@@ -66,7 +27,7 @@ const opDeleteAgent = "DeleteAgent"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/DeleteAgent
-func (c *Client) DeleteAgentRequest(input *DeleteAgentInput) DeleteAgentRequest {
+func (c *Client) DeleteAgentRequest(input *types.DeleteAgentInput) DeleteAgentRequest {
 	op := &aws.Operation{
 		Name:       opDeleteAgent,
 		HTTPMethod: "POST",
@@ -74,10 +35,10 @@ func (c *Client) DeleteAgentRequest(input *DeleteAgentInput) DeleteAgentRequest 
 	}
 
 	if input == nil {
-		input = &DeleteAgentInput{}
+		input = &types.DeleteAgentInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteAgentOutput{})
+	req := c.newRequest(op, input, &types.DeleteAgentOutput{})
 	return DeleteAgentRequest{Request: req, Input: input, Copy: c.DeleteAgentRequest}
 }
 
@@ -85,8 +46,8 @@ func (c *Client) DeleteAgentRequest(input *DeleteAgentInput) DeleteAgentRequest 
 // DeleteAgent API operation.
 type DeleteAgentRequest struct {
 	*aws.Request
-	Input *DeleteAgentInput
-	Copy  func(*DeleteAgentInput) DeleteAgentRequest
+	Input *types.DeleteAgentInput
+	Copy  func(*types.DeleteAgentInput) DeleteAgentRequest
 }
 
 // Send marshals and sends the DeleteAgent API request.
@@ -98,7 +59,7 @@ func (r DeleteAgentRequest) Send(ctx context.Context) (*DeleteAgentResponse, err
 	}
 
 	resp := &DeleteAgentResponse{
-		DeleteAgentOutput: r.Request.Data.(*DeleteAgentOutput),
+		DeleteAgentOutput: r.Request.Data.(*types.DeleteAgentOutput),
 		response:          &aws.Response{Request: r.Request},
 	}
 
@@ -108,7 +69,7 @@ func (r DeleteAgentRequest) Send(ctx context.Context) (*DeleteAgentResponse, err
 // DeleteAgentResponse is the response type for the
 // DeleteAgent API operation.
 type DeleteAgentResponse struct {
-	*DeleteAgentOutput
+	*types.DeleteAgentOutput
 
 	response *aws.Response
 }

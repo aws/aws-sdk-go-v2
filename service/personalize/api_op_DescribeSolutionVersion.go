@@ -6,48 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/personalize/types"
 )
-
-type DescribeSolutionVersionInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the solution version.
-	//
-	// SolutionVersionArn is a required field
-	SolutionVersionArn *string `locationName:"solutionVersionArn" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeSolutionVersionInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeSolutionVersionInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeSolutionVersionInput"}
-
-	if s.SolutionVersionArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("SolutionVersionArn"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribeSolutionVersionOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The solution version.
-	SolutionVersion *SolutionVersion `locationName:"solutionVersion" type:"structure"`
-}
-
-// String returns the string representation
-func (s DescribeSolutionVersionOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeSolutionVersion = "DescribeSolutionVersion"
 
@@ -65,7 +25,7 @@ const opDescribeSolutionVersion = "DescribeSolutionVersion"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/DescribeSolutionVersion
-func (c *Client) DescribeSolutionVersionRequest(input *DescribeSolutionVersionInput) DescribeSolutionVersionRequest {
+func (c *Client) DescribeSolutionVersionRequest(input *types.DescribeSolutionVersionInput) DescribeSolutionVersionRequest {
 	op := &aws.Operation{
 		Name:       opDescribeSolutionVersion,
 		HTTPMethod: "POST",
@@ -73,10 +33,10 @@ func (c *Client) DescribeSolutionVersionRequest(input *DescribeSolutionVersionIn
 	}
 
 	if input == nil {
-		input = &DescribeSolutionVersionInput{}
+		input = &types.DescribeSolutionVersionInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeSolutionVersionOutput{})
+	req := c.newRequest(op, input, &types.DescribeSolutionVersionOutput{})
 	return DescribeSolutionVersionRequest{Request: req, Input: input, Copy: c.DescribeSolutionVersionRequest}
 }
 
@@ -84,8 +44,8 @@ func (c *Client) DescribeSolutionVersionRequest(input *DescribeSolutionVersionIn
 // DescribeSolutionVersion API operation.
 type DescribeSolutionVersionRequest struct {
 	*aws.Request
-	Input *DescribeSolutionVersionInput
-	Copy  func(*DescribeSolutionVersionInput) DescribeSolutionVersionRequest
+	Input *types.DescribeSolutionVersionInput
+	Copy  func(*types.DescribeSolutionVersionInput) DescribeSolutionVersionRequest
 }
 
 // Send marshals and sends the DescribeSolutionVersion API request.
@@ -97,7 +57,7 @@ func (r DescribeSolutionVersionRequest) Send(ctx context.Context) (*DescribeSolu
 	}
 
 	resp := &DescribeSolutionVersionResponse{
-		DescribeSolutionVersionOutput: r.Request.Data.(*DescribeSolutionVersionOutput),
+		DescribeSolutionVersionOutput: r.Request.Data.(*types.DescribeSolutionVersionOutput),
 		response:                      &aws.Response{Request: r.Request},
 	}
 
@@ -107,7 +67,7 @@ func (r DescribeSolutionVersionRequest) Send(ctx context.Context) (*DescribeSolu
 // DescribeSolutionVersionResponse is the response type for the
 // DescribeSolutionVersion API operation.
 type DescribeSolutionVersionResponse struct {
-	*DescribeSolutionVersionOutput
+	*types.DescribeSolutionVersionOutput
 
 	response *aws.Response
 }

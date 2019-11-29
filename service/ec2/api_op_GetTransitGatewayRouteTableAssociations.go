@@ -6,77 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-type GetTransitGatewayRouteTableAssociationsInput struct {
-	_ struct{} `type:"structure"`
-
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have
-	// the required permissions, the error response is DryRunOperation. Otherwise,
-	// it is UnauthorizedOperation.
-	DryRun *bool `type:"boolean"`
-
-	// One or more filters. The possible values are:
-	//
-	//    * resource-id - The ID of the resource.
-	//
-	//    * resource-type - The resource type (vpc | vpn).
-	//
-	//    * transit-gateway-attachment-id - The ID of the attachment.
-	Filters []Filter `locationName:"Filter" locationNameList:"Filter" type:"list"`
-
-	// The maximum number of results to return with a single call. To retrieve the
-	// remaining results, make another call with the returned nextToken value.
-	MaxResults *int64 `min:"5" type:"integer"`
-
-	// The token for the next page of results.
-	NextToken *string `type:"string"`
-
-	// The ID of the transit gateway route table.
-	//
-	// TransitGatewayRouteTableId is a required field
-	TransitGatewayRouteTableId *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetTransitGatewayRouteTableAssociationsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetTransitGatewayRouteTableAssociationsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetTransitGatewayRouteTableAssociationsInput"}
-	if s.MaxResults != nil && *s.MaxResults < 5 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 5))
-	}
-
-	if s.TransitGatewayRouteTableId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("TransitGatewayRouteTableId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type GetTransitGatewayRouteTableAssociationsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Information about the associations.
-	Associations []TransitGatewayRouteTableAssociation `locationName:"associations" locationNameList:"item" type:"list"`
-
-	// The token to use to retrieve the next page of results. This value is null
-	// when there are no more results to return.
-	NextToken *string `locationName:"nextToken" type:"string"`
-}
-
-// String returns the string representation
-func (s GetTransitGatewayRouteTableAssociationsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetTransitGatewayRouteTableAssociations = "GetTransitGatewayRouteTableAssociations"
 
@@ -94,7 +25,7 @@ const opGetTransitGatewayRouteTableAssociations = "GetTransitGatewayRouteTableAs
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetTransitGatewayRouteTableAssociations
-func (c *Client) GetTransitGatewayRouteTableAssociationsRequest(input *GetTransitGatewayRouteTableAssociationsInput) GetTransitGatewayRouteTableAssociationsRequest {
+func (c *Client) GetTransitGatewayRouteTableAssociationsRequest(input *types.GetTransitGatewayRouteTableAssociationsInput) GetTransitGatewayRouteTableAssociationsRequest {
 	op := &aws.Operation{
 		Name:       opGetTransitGatewayRouteTableAssociations,
 		HTTPMethod: "POST",
@@ -108,10 +39,10 @@ func (c *Client) GetTransitGatewayRouteTableAssociationsRequest(input *GetTransi
 	}
 
 	if input == nil {
-		input = &GetTransitGatewayRouteTableAssociationsInput{}
+		input = &types.GetTransitGatewayRouteTableAssociationsInput{}
 	}
 
-	req := c.newRequest(op, input, &GetTransitGatewayRouteTableAssociationsOutput{})
+	req := c.newRequest(op, input, &types.GetTransitGatewayRouteTableAssociationsOutput{})
 	return GetTransitGatewayRouteTableAssociationsRequest{Request: req, Input: input, Copy: c.GetTransitGatewayRouteTableAssociationsRequest}
 }
 
@@ -119,8 +50,8 @@ func (c *Client) GetTransitGatewayRouteTableAssociationsRequest(input *GetTransi
 // GetTransitGatewayRouteTableAssociations API operation.
 type GetTransitGatewayRouteTableAssociationsRequest struct {
 	*aws.Request
-	Input *GetTransitGatewayRouteTableAssociationsInput
-	Copy  func(*GetTransitGatewayRouteTableAssociationsInput) GetTransitGatewayRouteTableAssociationsRequest
+	Input *types.GetTransitGatewayRouteTableAssociationsInput
+	Copy  func(*types.GetTransitGatewayRouteTableAssociationsInput) GetTransitGatewayRouteTableAssociationsRequest
 }
 
 // Send marshals and sends the GetTransitGatewayRouteTableAssociations API request.
@@ -132,7 +63,7 @@ func (r GetTransitGatewayRouteTableAssociationsRequest) Send(ctx context.Context
 	}
 
 	resp := &GetTransitGatewayRouteTableAssociationsResponse{
-		GetTransitGatewayRouteTableAssociationsOutput: r.Request.Data.(*GetTransitGatewayRouteTableAssociationsOutput),
+		GetTransitGatewayRouteTableAssociationsOutput: r.Request.Data.(*types.GetTransitGatewayRouteTableAssociationsOutput),
 		response: &aws.Response{Request: r.Request},
 	}
 
@@ -162,7 +93,7 @@ func NewGetTransitGatewayRouteTableAssociationsPaginator(req GetTransitGatewayRo
 	return GetTransitGatewayRouteTableAssociationsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *GetTransitGatewayRouteTableAssociationsInput
+				var inCpy *types.GetTransitGatewayRouteTableAssociationsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -182,14 +113,14 @@ type GetTransitGatewayRouteTableAssociationsPaginator struct {
 	aws.Pager
 }
 
-func (p *GetTransitGatewayRouteTableAssociationsPaginator) CurrentPage() *GetTransitGatewayRouteTableAssociationsOutput {
-	return p.Pager.CurrentPage().(*GetTransitGatewayRouteTableAssociationsOutput)
+func (p *GetTransitGatewayRouteTableAssociationsPaginator) CurrentPage() *types.GetTransitGatewayRouteTableAssociationsOutput {
+	return p.Pager.CurrentPage().(*types.GetTransitGatewayRouteTableAssociationsOutput)
 }
 
 // GetTransitGatewayRouteTableAssociationsResponse is the response type for the
 // GetTransitGatewayRouteTableAssociations API operation.
 type GetTransitGatewayRouteTableAssociationsResponse struct {
-	*GetTransitGatewayRouteTableAssociationsOutput
+	*types.GetTransitGatewayRouteTableAssociationsOutput
 
 	response *aws.Response
 }

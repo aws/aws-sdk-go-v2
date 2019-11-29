@@ -6,66 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/cloudwatchlogs/types"
 )
-
-type GetQueryResultsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID number of the query.
-	//
-	// QueryId is a required field
-	QueryId *string `locationName:"queryId" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetQueryResultsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetQueryResultsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetQueryResultsInput"}
-
-	if s.QueryId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("QueryId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type GetQueryResultsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The log events that matched the query criteria during the most recent time
-	// it ran.
-	//
-	// The results value is an array of arrays. Each log event is one object in
-	// the top-level array. Each of these log event objects is an array of field/value
-	// pairs.
-	Results [][]ResultField `locationName:"results" type:"list"`
-
-	// Includes the number of log events scanned by the query, the number of log
-	// events that matched the query criteria, and the total number of bytes in
-	// the log events that were scanned.
-	Statistics *QueryStatistics `locationName:"statistics" type:"structure"`
-
-	// The status of the most recent running of the query. Possible values are Cancelled,
-	// Complete, Failed, Running, Scheduled, Timeout, and Unknown.
-	//
-	// Queries time out after 15 minutes of execution. To avoid having your queries
-	// time out, reduce the time range being searched, or partition your query into
-	// a number of queries.
-	Status QueryStatus `locationName:"status" type:"string" enum:"true"`
-}
-
-// String returns the string representation
-func (s GetQueryResultsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetQueryResults = "GetQueryResults"
 
@@ -92,7 +34,7 @@ const opGetQueryResults = "GetQueryResults"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/GetQueryResults
-func (c *Client) GetQueryResultsRequest(input *GetQueryResultsInput) GetQueryResultsRequest {
+func (c *Client) GetQueryResultsRequest(input *types.GetQueryResultsInput) GetQueryResultsRequest {
 	op := &aws.Operation{
 		Name:       opGetQueryResults,
 		HTTPMethod: "POST",
@@ -100,10 +42,10 @@ func (c *Client) GetQueryResultsRequest(input *GetQueryResultsInput) GetQueryRes
 	}
 
 	if input == nil {
-		input = &GetQueryResultsInput{}
+		input = &types.GetQueryResultsInput{}
 	}
 
-	req := c.newRequest(op, input, &GetQueryResultsOutput{})
+	req := c.newRequest(op, input, &types.GetQueryResultsOutput{})
 	return GetQueryResultsRequest{Request: req, Input: input, Copy: c.GetQueryResultsRequest}
 }
 
@@ -111,8 +53,8 @@ func (c *Client) GetQueryResultsRequest(input *GetQueryResultsInput) GetQueryRes
 // GetQueryResults API operation.
 type GetQueryResultsRequest struct {
 	*aws.Request
-	Input *GetQueryResultsInput
-	Copy  func(*GetQueryResultsInput) GetQueryResultsRequest
+	Input *types.GetQueryResultsInput
+	Copy  func(*types.GetQueryResultsInput) GetQueryResultsRequest
 }
 
 // Send marshals and sends the GetQueryResults API request.
@@ -124,7 +66,7 @@ func (r GetQueryResultsRequest) Send(ctx context.Context) (*GetQueryResultsRespo
 	}
 
 	resp := &GetQueryResultsResponse{
-		GetQueryResultsOutput: r.Request.Data.(*GetQueryResultsOutput),
+		GetQueryResultsOutput: r.Request.Data.(*types.GetQueryResultsOutput),
 		response:              &aws.Response{Request: r.Request},
 	}
 
@@ -134,7 +76,7 @@ func (r GetQueryResultsRequest) Send(ctx context.Context) (*GetQueryResultsRespo
 // GetQueryResultsResponse is the response type for the
 // GetQueryResults API operation.
 type GetQueryResultsResponse struct {
-	*GetQueryResultsOutput
+	*types.GetQueryResultsOutput
 
 	response *aws.Response
 }

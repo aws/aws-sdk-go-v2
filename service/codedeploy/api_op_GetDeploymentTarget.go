@@ -6,38 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/codedeploy/types"
 )
-
-type GetDeploymentTargetInput struct {
-	_ struct{} `type:"structure"`
-
-	// The unique ID of a deployment.
-	DeploymentId *string `locationName:"deploymentId" type:"string"`
-
-	// The unique ID of a deployment target.
-	TargetId *string `locationName:"targetId" type:"string"`
-}
-
-// String returns the string representation
-func (s GetDeploymentTargetInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type GetDeploymentTargetOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A deployment target that contains information about a deployment such as
-	// its status, lifecyle events, and when it was last updated. It also contains
-	// metadata about the deployment target. The deployment target metadata depends
-	// on the deployment target's type (instanceTarget, lambdaTarget, or ecsTarget).
-	DeploymentTarget *DeploymentTarget `locationName:"deploymentTarget" type:"structure"`
-}
-
-// String returns the string representation
-func (s GetDeploymentTargetOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetDeploymentTarget = "GetDeploymentTarget"
 
@@ -54,7 +24,7 @@ const opGetDeploymentTarget = "GetDeploymentTarget"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/GetDeploymentTarget
-func (c *Client) GetDeploymentTargetRequest(input *GetDeploymentTargetInput) GetDeploymentTargetRequest {
+func (c *Client) GetDeploymentTargetRequest(input *types.GetDeploymentTargetInput) GetDeploymentTargetRequest {
 	op := &aws.Operation{
 		Name:       opGetDeploymentTarget,
 		HTTPMethod: "POST",
@@ -62,10 +32,10 @@ func (c *Client) GetDeploymentTargetRequest(input *GetDeploymentTargetInput) Get
 	}
 
 	if input == nil {
-		input = &GetDeploymentTargetInput{}
+		input = &types.GetDeploymentTargetInput{}
 	}
 
-	req := c.newRequest(op, input, &GetDeploymentTargetOutput{})
+	req := c.newRequest(op, input, &types.GetDeploymentTargetOutput{})
 	return GetDeploymentTargetRequest{Request: req, Input: input, Copy: c.GetDeploymentTargetRequest}
 }
 
@@ -73,8 +43,8 @@ func (c *Client) GetDeploymentTargetRequest(input *GetDeploymentTargetInput) Get
 // GetDeploymentTarget API operation.
 type GetDeploymentTargetRequest struct {
 	*aws.Request
-	Input *GetDeploymentTargetInput
-	Copy  func(*GetDeploymentTargetInput) GetDeploymentTargetRequest
+	Input *types.GetDeploymentTargetInput
+	Copy  func(*types.GetDeploymentTargetInput) GetDeploymentTargetRequest
 }
 
 // Send marshals and sends the GetDeploymentTarget API request.
@@ -86,7 +56,7 @@ func (r GetDeploymentTargetRequest) Send(ctx context.Context) (*GetDeploymentTar
 	}
 
 	resp := &GetDeploymentTargetResponse{
-		GetDeploymentTargetOutput: r.Request.Data.(*GetDeploymentTargetOutput),
+		GetDeploymentTargetOutput: r.Request.Data.(*types.GetDeploymentTargetOutput),
 		response:                  &aws.Response{Request: r.Request},
 	}
 
@@ -96,7 +66,7 @@ func (r GetDeploymentTargetRequest) Send(ctx context.Context) (*GetDeploymentTar
 // GetDeploymentTargetResponse is the response type for the
 // GetDeploymentTarget API operation.
 type GetDeploymentTargetResponse struct {
-	*GetDeploymentTargetOutput
+	*types.GetDeploymentTargetOutput
 
 	response *aws.Response
 }

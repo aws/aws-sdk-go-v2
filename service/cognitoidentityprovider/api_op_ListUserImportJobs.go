@@ -6,77 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/types"
 )
-
-// Represents the request to list the user import jobs.
-type ListUserImportJobsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The maximum number of import jobs you want the request to return.
-	//
-	// MaxResults is a required field
-	MaxResults *int64 `min:"1" type:"integer" required:"true"`
-
-	// An identifier that was returned from the previous call to ListUserImportJobs,
-	// which can be used to return the next set of import jobs in the list.
-	PaginationToken *string `min:"1" type:"string"`
-
-	// The user pool ID for the user pool that the users are being imported into.
-	//
-	// UserPoolId is a required field
-	UserPoolId *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s ListUserImportJobsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListUserImportJobsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListUserImportJobsInput"}
-
-	if s.MaxResults == nil {
-		invalidParams.Add(aws.NewErrParamRequired("MaxResults"))
-	}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-	if s.PaginationToken != nil && len(*s.PaginationToken) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("PaginationToken", 1))
-	}
-
-	if s.UserPoolId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("UserPoolId"))
-	}
-	if s.UserPoolId != nil && len(*s.UserPoolId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("UserPoolId", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Represents the response from the server to the request to list the user import
-// jobs.
-type ListUserImportJobsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// An identifier that can be used to return the next set of user import jobs
-	// in the list.
-	PaginationToken *string `min:"1" type:"string"`
-
-	// The user import jobs.
-	UserImportJobs []UserImportJobType `min:"1" type:"list"`
-}
-
-// String returns the string representation
-func (s ListUserImportJobsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListUserImportJobs = "ListUserImportJobs"
 
@@ -93,7 +24,7 @@ const opListUserImportJobs = "ListUserImportJobs"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/ListUserImportJobs
-func (c *Client) ListUserImportJobsRequest(input *ListUserImportJobsInput) ListUserImportJobsRequest {
+func (c *Client) ListUserImportJobsRequest(input *types.ListUserImportJobsInput) ListUserImportJobsRequest {
 	op := &aws.Operation{
 		Name:       opListUserImportJobs,
 		HTTPMethod: "POST",
@@ -101,10 +32,10 @@ func (c *Client) ListUserImportJobsRequest(input *ListUserImportJobsInput) ListU
 	}
 
 	if input == nil {
-		input = &ListUserImportJobsInput{}
+		input = &types.ListUserImportJobsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListUserImportJobsOutput{})
+	req := c.newRequest(op, input, &types.ListUserImportJobsOutput{})
 	return ListUserImportJobsRequest{Request: req, Input: input, Copy: c.ListUserImportJobsRequest}
 }
 
@@ -112,8 +43,8 @@ func (c *Client) ListUserImportJobsRequest(input *ListUserImportJobsInput) ListU
 // ListUserImportJobs API operation.
 type ListUserImportJobsRequest struct {
 	*aws.Request
-	Input *ListUserImportJobsInput
-	Copy  func(*ListUserImportJobsInput) ListUserImportJobsRequest
+	Input *types.ListUserImportJobsInput
+	Copy  func(*types.ListUserImportJobsInput) ListUserImportJobsRequest
 }
 
 // Send marshals and sends the ListUserImportJobs API request.
@@ -125,7 +56,7 @@ func (r ListUserImportJobsRequest) Send(ctx context.Context) (*ListUserImportJob
 	}
 
 	resp := &ListUserImportJobsResponse{
-		ListUserImportJobsOutput: r.Request.Data.(*ListUserImportJobsOutput),
+		ListUserImportJobsOutput: r.Request.Data.(*types.ListUserImportJobsOutput),
 		response:                 &aws.Response{Request: r.Request},
 	}
 
@@ -135,7 +66,7 @@ func (r ListUserImportJobsRequest) Send(ctx context.Context) (*ListUserImportJob
 // ListUserImportJobsResponse is the response type for the
 // ListUserImportJobs API operation.
 type ListUserImportJobsResponse struct {
-	*ListUserImportJobsOutput
+	*types.ListUserImportJobsOutput
 
 	response *aws.Response
 }

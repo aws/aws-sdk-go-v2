@@ -6,64 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/elasticloadbalancing/types"
 )
-
-// Contains the parameters for ConfigureHealthCheck.
-type ConfigureHealthCheckInput struct {
-	_ struct{} `type:"structure"`
-
-	// The configuration information.
-	//
-	// HealthCheck is a required field
-	HealthCheck *HealthCheck `type:"structure" required:"true"`
-
-	// The name of the load balancer.
-	//
-	// LoadBalancerName is a required field
-	LoadBalancerName *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s ConfigureHealthCheckInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ConfigureHealthCheckInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ConfigureHealthCheckInput"}
-
-	if s.HealthCheck == nil {
-		invalidParams.Add(aws.NewErrParamRequired("HealthCheck"))
-	}
-
-	if s.LoadBalancerName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("LoadBalancerName"))
-	}
-	if s.HealthCheck != nil {
-		if err := s.HealthCheck.Validate(); err != nil {
-			invalidParams.AddNested("HealthCheck", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Contains the output of ConfigureHealthCheck.
-type ConfigureHealthCheckOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The updated health check.
-	HealthCheck *HealthCheck `type:"structure"`
-}
-
-// String returns the string representation
-func (s ConfigureHealthCheckOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opConfigureHealthCheck = "ConfigureHealthCheck"
 
@@ -85,7 +29,7 @@ const opConfigureHealthCheck = "ConfigureHealthCheck"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/ConfigureHealthCheck
-func (c *Client) ConfigureHealthCheckRequest(input *ConfigureHealthCheckInput) ConfigureHealthCheckRequest {
+func (c *Client) ConfigureHealthCheckRequest(input *types.ConfigureHealthCheckInput) ConfigureHealthCheckRequest {
 	op := &aws.Operation{
 		Name:       opConfigureHealthCheck,
 		HTTPMethod: "POST",
@@ -93,10 +37,10 @@ func (c *Client) ConfigureHealthCheckRequest(input *ConfigureHealthCheckInput) C
 	}
 
 	if input == nil {
-		input = &ConfigureHealthCheckInput{}
+		input = &types.ConfigureHealthCheckInput{}
 	}
 
-	req := c.newRequest(op, input, &ConfigureHealthCheckOutput{})
+	req := c.newRequest(op, input, &types.ConfigureHealthCheckOutput{})
 	return ConfigureHealthCheckRequest{Request: req, Input: input, Copy: c.ConfigureHealthCheckRequest}
 }
 
@@ -104,8 +48,8 @@ func (c *Client) ConfigureHealthCheckRequest(input *ConfigureHealthCheckInput) C
 // ConfigureHealthCheck API operation.
 type ConfigureHealthCheckRequest struct {
 	*aws.Request
-	Input *ConfigureHealthCheckInput
-	Copy  func(*ConfigureHealthCheckInput) ConfigureHealthCheckRequest
+	Input *types.ConfigureHealthCheckInput
+	Copy  func(*types.ConfigureHealthCheckInput) ConfigureHealthCheckRequest
 }
 
 // Send marshals and sends the ConfigureHealthCheck API request.
@@ -117,7 +61,7 @@ func (r ConfigureHealthCheckRequest) Send(ctx context.Context) (*ConfigureHealth
 	}
 
 	resp := &ConfigureHealthCheckResponse{
-		ConfigureHealthCheckOutput: r.Request.Data.(*ConfigureHealthCheckOutput),
+		ConfigureHealthCheckOutput: r.Request.Data.(*types.ConfigureHealthCheckOutput),
 		response:                   &aws.Response{Request: r.Request},
 	}
 
@@ -127,7 +71,7 @@ func (r ConfigureHealthCheckRequest) Send(ctx context.Context) (*ConfigureHealth
 // ConfigureHealthCheckResponse is the response type for the
 // ConfigureHealthCheck API operation.
 type ConfigureHealthCheckResponse struct {
-	*ConfigureHealthCheckOutput
+	*types.ConfigureHealthCheckOutput
 
 	response *aws.Response
 }

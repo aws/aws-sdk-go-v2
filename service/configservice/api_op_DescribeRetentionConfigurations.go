@@ -6,45 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/configservice/types"
 )
-
-type DescribeRetentionConfigurationsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The nextToken string returned on a previous page that you use to get the
-	// next page of results in a paginated response.
-	NextToken *string `type:"string"`
-
-	// A list of names of retention configurations for which you want details. If
-	// you do not specify a name, AWS Config returns details for all the retention
-	// configurations for that account.
-	//
-	// Currently, AWS Config supports only one retention configuration per region
-	// in your account.
-	RetentionConfigurationNames []string `type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeRetentionConfigurationsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type DescribeRetentionConfigurationsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The nextToken string returned on a previous page that you use to get the
-	// next page of results in a paginated response.
-	NextToken *string `type:"string"`
-
-	// Returns a retention configuration object.
-	RetentionConfigurations []RetentionConfiguration `type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeRetentionConfigurationsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeRetentionConfigurations = "DescribeRetentionConfigurations"
 
@@ -66,7 +29,7 @@ const opDescribeRetentionConfigurations = "DescribeRetentionConfigurations"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DescribeRetentionConfigurations
-func (c *Client) DescribeRetentionConfigurationsRequest(input *DescribeRetentionConfigurationsInput) DescribeRetentionConfigurationsRequest {
+func (c *Client) DescribeRetentionConfigurationsRequest(input *types.DescribeRetentionConfigurationsInput) DescribeRetentionConfigurationsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeRetentionConfigurations,
 		HTTPMethod: "POST",
@@ -74,10 +37,10 @@ func (c *Client) DescribeRetentionConfigurationsRequest(input *DescribeRetention
 	}
 
 	if input == nil {
-		input = &DescribeRetentionConfigurationsInput{}
+		input = &types.DescribeRetentionConfigurationsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeRetentionConfigurationsOutput{})
+	req := c.newRequest(op, input, &types.DescribeRetentionConfigurationsOutput{})
 	return DescribeRetentionConfigurationsRequest{Request: req, Input: input, Copy: c.DescribeRetentionConfigurationsRequest}
 }
 
@@ -85,8 +48,8 @@ func (c *Client) DescribeRetentionConfigurationsRequest(input *DescribeRetention
 // DescribeRetentionConfigurations API operation.
 type DescribeRetentionConfigurationsRequest struct {
 	*aws.Request
-	Input *DescribeRetentionConfigurationsInput
-	Copy  func(*DescribeRetentionConfigurationsInput) DescribeRetentionConfigurationsRequest
+	Input *types.DescribeRetentionConfigurationsInput
+	Copy  func(*types.DescribeRetentionConfigurationsInput) DescribeRetentionConfigurationsRequest
 }
 
 // Send marshals and sends the DescribeRetentionConfigurations API request.
@@ -98,7 +61,7 @@ func (r DescribeRetentionConfigurationsRequest) Send(ctx context.Context) (*Desc
 	}
 
 	resp := &DescribeRetentionConfigurationsResponse{
-		DescribeRetentionConfigurationsOutput: r.Request.Data.(*DescribeRetentionConfigurationsOutput),
+		DescribeRetentionConfigurationsOutput: r.Request.Data.(*types.DescribeRetentionConfigurationsOutput),
 		response:                              &aws.Response{Request: r.Request},
 	}
 
@@ -108,7 +71,7 @@ func (r DescribeRetentionConfigurationsRequest) Send(ctx context.Context) (*Desc
 // DescribeRetentionConfigurationsResponse is the response type for the
 // DescribeRetentionConfigurations API operation.
 type DescribeRetentionConfigurationsResponse struct {
-	*DescribeRetentionConfigurationsOutput
+	*types.DescribeRetentionConfigurationsOutput
 
 	response *aws.Response
 }

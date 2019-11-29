@@ -6,53 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/kinesis/types"
 )
-
-type DescribeStreamSummaryInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the stream to describe.
-	//
-	// StreamName is a required field
-	StreamName *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeStreamSummaryInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeStreamSummaryInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeStreamSummaryInput"}
-
-	if s.StreamName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("StreamName"))
-	}
-	if s.StreamName != nil && len(*s.StreamName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("StreamName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribeStreamSummaryOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A StreamDescriptionSummary containing information about the stream.
-	//
-	// StreamDescriptionSummary is a required field
-	StreamDescriptionSummary *StreamDescriptionSummary `type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeStreamSummaryOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeStreamSummary = "DescribeStreamSummary"
 
@@ -74,7 +29,7 @@ const opDescribeStreamSummary = "DescribeStreamSummary"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/DescribeStreamSummary
-func (c *Client) DescribeStreamSummaryRequest(input *DescribeStreamSummaryInput) DescribeStreamSummaryRequest {
+func (c *Client) DescribeStreamSummaryRequest(input *types.DescribeStreamSummaryInput) DescribeStreamSummaryRequest {
 	op := &aws.Operation{
 		Name:       opDescribeStreamSummary,
 		HTTPMethod: "POST",
@@ -82,10 +37,10 @@ func (c *Client) DescribeStreamSummaryRequest(input *DescribeStreamSummaryInput)
 	}
 
 	if input == nil {
-		input = &DescribeStreamSummaryInput{}
+		input = &types.DescribeStreamSummaryInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeStreamSummaryOutput{})
+	req := c.newRequest(op, input, &types.DescribeStreamSummaryOutput{})
 	return DescribeStreamSummaryRequest{Request: req, Input: input, Copy: c.DescribeStreamSummaryRequest}
 }
 
@@ -93,8 +48,8 @@ func (c *Client) DescribeStreamSummaryRequest(input *DescribeStreamSummaryInput)
 // DescribeStreamSummary API operation.
 type DescribeStreamSummaryRequest struct {
 	*aws.Request
-	Input *DescribeStreamSummaryInput
-	Copy  func(*DescribeStreamSummaryInput) DescribeStreamSummaryRequest
+	Input *types.DescribeStreamSummaryInput
+	Copy  func(*types.DescribeStreamSummaryInput) DescribeStreamSummaryRequest
 }
 
 // Send marshals and sends the DescribeStreamSummary API request.
@@ -106,7 +61,7 @@ func (r DescribeStreamSummaryRequest) Send(ctx context.Context) (*DescribeStream
 	}
 
 	resp := &DescribeStreamSummaryResponse{
-		DescribeStreamSummaryOutput: r.Request.Data.(*DescribeStreamSummaryOutput),
+		DescribeStreamSummaryOutput: r.Request.Data.(*types.DescribeStreamSummaryOutput),
 		response:                    &aws.Response{Request: r.Request},
 	}
 
@@ -116,7 +71,7 @@ func (r DescribeStreamSummaryRequest) Send(ctx context.Context) (*DescribeStream
 // DescribeStreamSummaryResponse is the response type for the
 // DescribeStreamSummary API operation.
 type DescribeStreamSummaryResponse struct {
-	*DescribeStreamSummaryOutput
+	*types.DescribeStreamSummaryOutput
 
 	response *aws.Response
 }

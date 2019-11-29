@@ -6,69 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/restjson"
+	"github.com/aws/aws-sdk-go-v2/service/iot/types"
 )
-
-// The input for the EnableTopicRuleRequest operation.
-type EnableTopicRuleInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the topic rule to enable.
-	//
-	// RuleName is a required field
-	RuleName *string `location:"uri" locationName:"ruleName" min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s EnableTopicRuleInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *EnableTopicRuleInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "EnableTopicRuleInput"}
-
-	if s.RuleName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("RuleName"))
-	}
-	if s.RuleName != nil && len(*s.RuleName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("RuleName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s EnableTopicRuleInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.RuleName != nil {
-		v := *s.RuleName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "ruleName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type EnableTopicRuleOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s EnableTopicRuleOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s EnableTopicRuleOutput) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
 
 const opEnableTopicRule = "EnableTopicRule"
 
@@ -83,7 +24,7 @@ const opEnableTopicRule = "EnableTopicRule"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) EnableTopicRuleRequest(input *EnableTopicRuleInput) EnableTopicRuleRequest {
+func (c *Client) EnableTopicRuleRequest(input *types.EnableTopicRuleInput) EnableTopicRuleRequest {
 	op := &aws.Operation{
 		Name:       opEnableTopicRule,
 		HTTPMethod: "POST",
@@ -91,10 +32,10 @@ func (c *Client) EnableTopicRuleRequest(input *EnableTopicRuleInput) EnableTopic
 	}
 
 	if input == nil {
-		input = &EnableTopicRuleInput{}
+		input = &types.EnableTopicRuleInput{}
 	}
 
-	req := c.newRequest(op, input, &EnableTopicRuleOutput{})
+	req := c.newRequest(op, input, &types.EnableTopicRuleOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return EnableTopicRuleRequest{Request: req, Input: input, Copy: c.EnableTopicRuleRequest}
@@ -104,8 +45,8 @@ func (c *Client) EnableTopicRuleRequest(input *EnableTopicRuleInput) EnableTopic
 // EnableTopicRule API operation.
 type EnableTopicRuleRequest struct {
 	*aws.Request
-	Input *EnableTopicRuleInput
-	Copy  func(*EnableTopicRuleInput) EnableTopicRuleRequest
+	Input *types.EnableTopicRuleInput
+	Copy  func(*types.EnableTopicRuleInput) EnableTopicRuleRequest
 }
 
 // Send marshals and sends the EnableTopicRule API request.
@@ -117,7 +58,7 @@ func (r EnableTopicRuleRequest) Send(ctx context.Context) (*EnableTopicRuleRespo
 	}
 
 	resp := &EnableTopicRuleResponse{
-		EnableTopicRuleOutput: r.Request.Data.(*EnableTopicRuleOutput),
+		EnableTopicRuleOutput: r.Request.Data.(*types.EnableTopicRuleOutput),
 		response:              &aws.Response{Request: r.Request},
 	}
 
@@ -127,7 +68,7 @@ func (r EnableTopicRuleRequest) Send(ctx context.Context) (*EnableTopicRuleRespo
 // EnableTopicRuleResponse is the response type for the
 // EnableTopicRule API operation.
 type EnableTopicRuleResponse struct {
-	*EnableTopicRuleOutput
+	*types.EnableTopicRuleOutput
 
 	response *aws.Response
 }

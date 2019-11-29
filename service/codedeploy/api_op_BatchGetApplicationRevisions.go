@@ -6,70 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/codedeploy/types"
 )
-
-// Represents the input of a BatchGetApplicationRevisions operation.
-type BatchGetApplicationRevisionsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of an AWS CodeDeploy application about which to get revision information.
-	//
-	// ApplicationName is a required field
-	ApplicationName *string `locationName:"applicationName" min:"1" type:"string" required:"true"`
-
-	// An array of RevisionLocation objects that specify information to get about
-	// the application revisions, including type and location. The maximum number
-	// of RevisionLocation objects you can specify is 25.
-	//
-	// Revisions is a required field
-	Revisions []RevisionLocation `locationName:"revisions" type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s BatchGetApplicationRevisionsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *BatchGetApplicationRevisionsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "BatchGetApplicationRevisionsInput"}
-
-	if s.ApplicationName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ApplicationName"))
-	}
-	if s.ApplicationName != nil && len(*s.ApplicationName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ApplicationName", 1))
-	}
-
-	if s.Revisions == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Revisions"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Represents the output of a BatchGetApplicationRevisions operation.
-type BatchGetApplicationRevisionsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the application that corresponds to the revisions.
-	ApplicationName *string `locationName:"applicationName" min:"1" type:"string"`
-
-	// Information about errors that might have occurred during the API call.
-	ErrorMessage *string `locationName:"errorMessage" type:"string"`
-
-	// Additional information about the revisions, including the type and location.
-	Revisions []RevisionInfo `locationName:"revisions" type:"list"`
-}
-
-// String returns the string representation
-func (s BatchGetApplicationRevisionsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opBatchGetApplicationRevisions = "BatchGetApplicationRevisions"
 
@@ -87,7 +25,7 @@ const opBatchGetApplicationRevisions = "BatchGetApplicationRevisions"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/BatchGetApplicationRevisions
-func (c *Client) BatchGetApplicationRevisionsRequest(input *BatchGetApplicationRevisionsInput) BatchGetApplicationRevisionsRequest {
+func (c *Client) BatchGetApplicationRevisionsRequest(input *types.BatchGetApplicationRevisionsInput) BatchGetApplicationRevisionsRequest {
 	op := &aws.Operation{
 		Name:       opBatchGetApplicationRevisions,
 		HTTPMethod: "POST",
@@ -95,10 +33,10 @@ func (c *Client) BatchGetApplicationRevisionsRequest(input *BatchGetApplicationR
 	}
 
 	if input == nil {
-		input = &BatchGetApplicationRevisionsInput{}
+		input = &types.BatchGetApplicationRevisionsInput{}
 	}
 
-	req := c.newRequest(op, input, &BatchGetApplicationRevisionsOutput{})
+	req := c.newRequest(op, input, &types.BatchGetApplicationRevisionsOutput{})
 	return BatchGetApplicationRevisionsRequest{Request: req, Input: input, Copy: c.BatchGetApplicationRevisionsRequest}
 }
 
@@ -106,8 +44,8 @@ func (c *Client) BatchGetApplicationRevisionsRequest(input *BatchGetApplicationR
 // BatchGetApplicationRevisions API operation.
 type BatchGetApplicationRevisionsRequest struct {
 	*aws.Request
-	Input *BatchGetApplicationRevisionsInput
-	Copy  func(*BatchGetApplicationRevisionsInput) BatchGetApplicationRevisionsRequest
+	Input *types.BatchGetApplicationRevisionsInput
+	Copy  func(*types.BatchGetApplicationRevisionsInput) BatchGetApplicationRevisionsRequest
 }
 
 // Send marshals and sends the BatchGetApplicationRevisions API request.
@@ -119,7 +57,7 @@ func (r BatchGetApplicationRevisionsRequest) Send(ctx context.Context) (*BatchGe
 	}
 
 	resp := &BatchGetApplicationRevisionsResponse{
-		BatchGetApplicationRevisionsOutput: r.Request.Data.(*BatchGetApplicationRevisionsOutput),
+		BatchGetApplicationRevisionsOutput: r.Request.Data.(*types.BatchGetApplicationRevisionsOutput),
 		response:                           &aws.Response{Request: r.Request},
 	}
 
@@ -129,7 +67,7 @@ func (r BatchGetApplicationRevisionsRequest) Send(ctx context.Context) (*BatchGe
 // BatchGetApplicationRevisionsResponse is the response type for the
 // BatchGetApplicationRevisions API operation.
 type BatchGetApplicationRevisionsResponse struct {
-	*BatchGetApplicationRevisionsOutput
+	*types.BatchGetApplicationRevisionsOutput
 
 	response *aws.Response
 }

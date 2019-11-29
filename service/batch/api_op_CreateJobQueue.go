@@ -4,150 +4,10 @@ package batch
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/batch/types"
 )
-
-type CreateJobQueueInput struct {
-	_ struct{} `type:"structure"`
-
-	// The set of compute environments mapped to a job queue and their order relative
-	// to each other. The job scheduler uses this parameter to determine which compute
-	// environment should execute a given job. Compute environments must be in the
-	// VALID state before you can associate them with a job queue. You can associate
-	// up to three compute environments with a job queue.
-	//
-	// ComputeEnvironmentOrder is a required field
-	ComputeEnvironmentOrder []ComputeEnvironmentOrder `locationName:"computeEnvironmentOrder" type:"list" required:"true"`
-
-	// The name of the job queue.
-	//
-	// JobQueueName is a required field
-	JobQueueName *string `locationName:"jobQueueName" type:"string" required:"true"`
-
-	// The priority of the job queue. Job queues with a higher priority (or a higher
-	// integer value for the priority parameter) are evaluated first when associated
-	// with the same compute environment. Priority is determined in descending order,
-	// for example, a job queue with a priority value of 10 is given scheduling
-	// preference over a job queue with a priority value of 1.
-	//
-	// Priority is a required field
-	Priority *int64 `locationName:"priority" type:"integer" required:"true"`
-
-	// The state of the job queue. If the job queue state is ENABLED, it is able
-	// to accept jobs.
-	State JQState `locationName:"state" type:"string" enum:"true"`
-}
-
-// String returns the string representation
-func (s CreateJobQueueInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateJobQueueInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateJobQueueInput"}
-
-	if s.ComputeEnvironmentOrder == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ComputeEnvironmentOrder"))
-	}
-
-	if s.JobQueueName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("JobQueueName"))
-	}
-
-	if s.Priority == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Priority"))
-	}
-	if s.ComputeEnvironmentOrder != nil {
-		for i, v := range s.ComputeEnvironmentOrder {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "ComputeEnvironmentOrder", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s CreateJobQueueInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.ComputeEnvironmentOrder != nil {
-		v := s.ComputeEnvironmentOrder
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "computeEnvironmentOrder", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	if s.JobQueueName != nil {
-		v := *s.JobQueueName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "jobQueueName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Priority != nil {
-		v := *s.Priority
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "priority", protocol.Int64Value(v), metadata)
-	}
-	if len(s.State) > 0 {
-		v := s.State
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "state", protocol.QuotedValue{ValueMarshaler: v}, metadata)
-	}
-	return nil
-}
-
-type CreateJobQueueOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the job queue.
-	//
-	// JobQueueArn is a required field
-	JobQueueArn *string `locationName:"jobQueueArn" type:"string" required:"true"`
-
-	// The name of the job queue.
-	//
-	// JobQueueName is a required field
-	JobQueueName *string `locationName:"jobQueueName" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s CreateJobQueueOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s CreateJobQueueOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.JobQueueArn != nil {
-		v := *s.JobQueueArn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "jobQueueArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.JobQueueName != nil {
-		v := *s.JobQueueName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "jobQueueName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opCreateJobQueue = "CreateJobQueue"
 
@@ -172,7 +32,7 @@ const opCreateJobQueue = "CreateJobQueue"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/CreateJobQueue
-func (c *Client) CreateJobQueueRequest(input *CreateJobQueueInput) CreateJobQueueRequest {
+func (c *Client) CreateJobQueueRequest(input *types.CreateJobQueueInput) CreateJobQueueRequest {
 	op := &aws.Operation{
 		Name:       opCreateJobQueue,
 		HTTPMethod: "POST",
@@ -180,10 +40,10 @@ func (c *Client) CreateJobQueueRequest(input *CreateJobQueueInput) CreateJobQueu
 	}
 
 	if input == nil {
-		input = &CreateJobQueueInput{}
+		input = &types.CreateJobQueueInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateJobQueueOutput{})
+	req := c.newRequest(op, input, &types.CreateJobQueueOutput{})
 	return CreateJobQueueRequest{Request: req, Input: input, Copy: c.CreateJobQueueRequest}
 }
 
@@ -191,8 +51,8 @@ func (c *Client) CreateJobQueueRequest(input *CreateJobQueueInput) CreateJobQueu
 // CreateJobQueue API operation.
 type CreateJobQueueRequest struct {
 	*aws.Request
-	Input *CreateJobQueueInput
-	Copy  func(*CreateJobQueueInput) CreateJobQueueRequest
+	Input *types.CreateJobQueueInput
+	Copy  func(*types.CreateJobQueueInput) CreateJobQueueRequest
 }
 
 // Send marshals and sends the CreateJobQueue API request.
@@ -204,7 +64,7 @@ func (r CreateJobQueueRequest) Send(ctx context.Context) (*CreateJobQueueRespons
 	}
 
 	resp := &CreateJobQueueResponse{
-		CreateJobQueueOutput: r.Request.Data.(*CreateJobQueueOutput),
+		CreateJobQueueOutput: r.Request.Data.(*types.CreateJobQueueOutput),
 		response:             &aws.Response{Request: r.Request},
 	}
 
@@ -214,7 +74,7 @@ func (r CreateJobQueueRequest) Send(ctx context.Context) (*CreateJobQueueRespons
 // CreateJobQueueResponse is the response type for the
 // CreateJobQueue API operation.
 type CreateJobQueueResponse struct {
-	*CreateJobQueueOutput
+	*types.CreateJobQueueOutput
 
 	response *aws.Response
 }

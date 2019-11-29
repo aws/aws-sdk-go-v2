@@ -4,145 +4,10 @@ package glacier
 
 import (
 	"context"
-	"io"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/glacier/types"
 )
-
-// Provides options to add an archive to a vault.
-type UploadArchiveInput struct {
-	_ struct{} `type:"structure" payload:"Body"`
-
-	// The AccountId value is the AWS account ID of the account that owns the vault.
-	// You can either specify an AWS account ID or optionally a single '-' (hyphen),
-	// in which case Amazon S3 Glacier uses the AWS account ID associated with the
-	// credentials used to sign the request. If you use an account ID, do not include
-	// any hyphens ('-') in the ID.
-	//
-	// AccountId is a required field
-	AccountId *string `location:"uri" locationName:"accountId" type:"string" required:"true"`
-
-	// The optional description of the archive you are uploading.
-	ArchiveDescription *string `location:"header" locationName:"x-amz-archive-description" type:"string"`
-
-	// The data to upload.
-	Body io.ReadSeeker `locationName:"body" type:"blob"`
-
-	// The SHA256 tree hash of the data being uploaded.
-	Checksum *string `location:"header" locationName:"x-amz-sha256-tree-hash" type:"string"`
-
-	// The name of the vault.
-	//
-	// VaultName is a required field
-	VaultName *string `location:"uri" locationName:"vaultName" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s UploadArchiveInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UploadArchiveInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UploadArchiveInput"}
-
-	if s.AccountId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("AccountId"))
-	}
-
-	if s.VaultName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("VaultName"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s UploadArchiveInput) MarshalFields(e protocol.FieldEncoder) error {
-
-	if s.ArchiveDescription != nil {
-		v := *s.ArchiveDescription
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "x-amz-archive-description", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Checksum != nil {
-		v := *s.Checksum
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "x-amz-sha256-tree-hash", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.AccountId != nil {
-		v := *s.AccountId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "accountId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.VaultName != nil {
-		v := *s.VaultName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "vaultName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Body != nil {
-		v := s.Body
-
-		metadata := protocol.Metadata{}
-		e.SetStream(protocol.PayloadTarget, "body", protocol.ReadSeekerStream{V: v}, metadata)
-	}
-	return nil
-}
-
-// Contains the Amazon S3 Glacier response to your request.
-//
-// For information about the underlying REST API, see Upload Archive (https://docs.aws.amazon.com/amazonglacier/latest/dev/api-archive-post.html).
-// For conceptual information, see Working with Archives in Amazon S3 Glacier
-// (https://docs.aws.amazon.com/amazonglacier/latest/dev/working-with-archives.html).
-type UploadArchiveOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the archive. This value is also included as part of the location.
-	ArchiveId *string `location:"header" locationName:"x-amz-archive-id" type:"string"`
-
-	// The checksum of the archive computed by Amazon S3 Glacier.
-	Checksum *string `location:"header" locationName:"x-amz-sha256-tree-hash" type:"string"`
-
-	// The relative URI path of the newly added archive resource.
-	Location *string `location:"header" locationName:"Location" type:"string"`
-}
-
-// String returns the string representation
-func (s UploadArchiveOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s UploadArchiveOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.ArchiveId != nil {
-		v := *s.ArchiveId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "x-amz-archive-id", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Checksum != nil {
-		v := *s.Checksum
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "x-amz-sha256-tree-hash", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Location != nil {
-		v := *s.Location
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "Location", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opUploadArchive = "UploadArchive"
 
@@ -192,7 +57,7 @@ const opUploadArchive = "UploadArchive"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) UploadArchiveRequest(input *UploadArchiveInput) UploadArchiveRequest {
+func (c *Client) UploadArchiveRequest(input *types.UploadArchiveInput) UploadArchiveRequest {
 	op := &aws.Operation{
 		Name:       opUploadArchive,
 		HTTPMethod: "POST",
@@ -200,10 +65,10 @@ func (c *Client) UploadArchiveRequest(input *UploadArchiveInput) UploadArchiveRe
 	}
 
 	if input == nil {
-		input = &UploadArchiveInput{}
+		input = &types.UploadArchiveInput{}
 	}
 
-	req := c.newRequest(op, input, &UploadArchiveOutput{})
+	req := c.newRequest(op, input, &types.UploadArchiveOutput{})
 	return UploadArchiveRequest{Request: req, Input: input, Copy: c.UploadArchiveRequest}
 }
 
@@ -211,8 +76,8 @@ func (c *Client) UploadArchiveRequest(input *UploadArchiveInput) UploadArchiveRe
 // UploadArchive API operation.
 type UploadArchiveRequest struct {
 	*aws.Request
-	Input *UploadArchiveInput
-	Copy  func(*UploadArchiveInput) UploadArchiveRequest
+	Input *types.UploadArchiveInput
+	Copy  func(*types.UploadArchiveInput) UploadArchiveRequest
 }
 
 // Send marshals and sends the UploadArchive API request.
@@ -224,7 +89,7 @@ func (r UploadArchiveRequest) Send(ctx context.Context) (*UploadArchiveResponse,
 	}
 
 	resp := &UploadArchiveResponse{
-		UploadArchiveOutput: r.Request.Data.(*UploadArchiveOutput),
+		UploadArchiveOutput: r.Request.Data.(*types.UploadArchiveOutput),
 		response:            &aws.Response{Request: r.Request},
 	}
 
@@ -234,7 +99,7 @@ func (r UploadArchiveRequest) Send(ctx context.Context) (*UploadArchiveResponse,
 // UploadArchiveResponse is the response type for the
 // UploadArchive API operation.
 type UploadArchiveResponse struct {
-	*UploadArchiveOutput
+	*types.UploadArchiveOutput
 
 	response *aws.Response
 }

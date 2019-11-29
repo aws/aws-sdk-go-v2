@@ -6,50 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/devicefarm/types"
 )
-
-type ListOfferingPromotionsInput struct {
-	_ struct{} `type:"structure"`
-
-	// An identifier that was returned from the previous call to this operation,
-	// which can be used to return the next set of items in the list.
-	NextToken *string `locationName:"nextToken" min:"4" type:"string"`
-}
-
-// String returns the string representation
-func (s ListOfferingPromotionsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListOfferingPromotionsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListOfferingPromotionsInput"}
-	if s.NextToken != nil && len(*s.NextToken) < 4 {
-		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 4))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ListOfferingPromotionsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// An identifier to be used in the next call to this operation, to return the
-	// next set of items in the list.
-	NextToken *string `locationName:"nextToken" min:"4" type:"string"`
-
-	// Information about the offering promotions.
-	OfferingPromotions []OfferingPromotion `locationName:"offeringPromotions" type:"list"`
-}
-
-// String returns the string representation
-func (s ListOfferingPromotionsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListOfferingPromotions = "ListOfferingPromotions"
 
@@ -70,7 +28,7 @@ const opListOfferingPromotions = "ListOfferingPromotions"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ListOfferingPromotions
-func (c *Client) ListOfferingPromotionsRequest(input *ListOfferingPromotionsInput) ListOfferingPromotionsRequest {
+func (c *Client) ListOfferingPromotionsRequest(input *types.ListOfferingPromotionsInput) ListOfferingPromotionsRequest {
 	op := &aws.Operation{
 		Name:       opListOfferingPromotions,
 		HTTPMethod: "POST",
@@ -78,10 +36,10 @@ func (c *Client) ListOfferingPromotionsRequest(input *ListOfferingPromotionsInpu
 	}
 
 	if input == nil {
-		input = &ListOfferingPromotionsInput{}
+		input = &types.ListOfferingPromotionsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListOfferingPromotionsOutput{})
+	req := c.newRequest(op, input, &types.ListOfferingPromotionsOutput{})
 	return ListOfferingPromotionsRequest{Request: req, Input: input, Copy: c.ListOfferingPromotionsRequest}
 }
 
@@ -89,8 +47,8 @@ func (c *Client) ListOfferingPromotionsRequest(input *ListOfferingPromotionsInpu
 // ListOfferingPromotions API operation.
 type ListOfferingPromotionsRequest struct {
 	*aws.Request
-	Input *ListOfferingPromotionsInput
-	Copy  func(*ListOfferingPromotionsInput) ListOfferingPromotionsRequest
+	Input *types.ListOfferingPromotionsInput
+	Copy  func(*types.ListOfferingPromotionsInput) ListOfferingPromotionsRequest
 }
 
 // Send marshals and sends the ListOfferingPromotions API request.
@@ -102,7 +60,7 @@ func (r ListOfferingPromotionsRequest) Send(ctx context.Context) (*ListOfferingP
 	}
 
 	resp := &ListOfferingPromotionsResponse{
-		ListOfferingPromotionsOutput: r.Request.Data.(*ListOfferingPromotionsOutput),
+		ListOfferingPromotionsOutput: r.Request.Data.(*types.ListOfferingPromotionsOutput),
 		response:                     &aws.Response{Request: r.Request},
 	}
 
@@ -112,7 +70,7 @@ func (r ListOfferingPromotionsRequest) Send(ctx context.Context) (*ListOfferingP
 // ListOfferingPromotionsResponse is the response type for the
 // ListOfferingPromotions API operation.
 type ListOfferingPromotionsResponse struct {
-	*ListOfferingPromotionsOutput
+	*types.ListOfferingPromotionsOutput
 
 	response *aws.Response
 }

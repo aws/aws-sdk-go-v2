@@ -4,84 +4,10 @@ package elasticbeanstalk
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/elasticbeanstalk/types"
 )
-
-// Request to create an application.
-type CreateApplicationInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the application.
-	//
-	// Constraint: This name must be unique within your account. If the specified
-	// name already exists, the action returns an InvalidParameterValue error.
-	//
-	// ApplicationName is a required field
-	ApplicationName *string `min:"1" type:"string" required:"true"`
-
-	// Describes the application.
-	Description *string `type:"string"`
-
-	// Specify an application resource lifecycle configuration to prevent your application
-	// from accumulating too many versions.
-	ResourceLifecycleConfig *ApplicationResourceLifecycleConfig `type:"structure"`
-
-	// Specifies the tags applied to the application.
-	//
-	// Elastic Beanstalk applies these tags only to the application. Environments
-	// that you create in the application don't inherit the tags.
-	Tags []Tag `type:"list"`
-}
-
-// String returns the string representation
-func (s CreateApplicationInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateApplicationInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateApplicationInput"}
-
-	if s.ApplicationName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ApplicationName"))
-	}
-	if s.ApplicationName != nil && len(*s.ApplicationName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ApplicationName", 1))
-	}
-	if s.ResourceLifecycleConfig != nil {
-		if err := s.ResourceLifecycleConfig.Validate(); err != nil {
-			invalidParams.AddNested("ResourceLifecycleConfig", err.(aws.ErrInvalidParams))
-		}
-	}
-	if s.Tags != nil {
-		for i, v := range s.Tags {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Result message containing a single description of an application.
-type CreateApplicationOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The ApplicationDescription of the application.
-	Application *ApplicationDescription `type:"structure"`
-}
-
-// String returns the string representation
-func (s CreateApplicationOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCreateApplication = "CreateApplication"
 
@@ -99,7 +25,7 @@ const opCreateApplication = "CreateApplication"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/CreateApplication
-func (c *Client) CreateApplicationRequest(input *CreateApplicationInput) CreateApplicationRequest {
+func (c *Client) CreateApplicationRequest(input *types.CreateApplicationInput) CreateApplicationRequest {
 	op := &aws.Operation{
 		Name:       opCreateApplication,
 		HTTPMethod: "POST",
@@ -107,10 +33,10 @@ func (c *Client) CreateApplicationRequest(input *CreateApplicationInput) CreateA
 	}
 
 	if input == nil {
-		input = &CreateApplicationInput{}
+		input = &types.CreateApplicationInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateApplicationOutput{})
+	req := c.newRequest(op, input, &types.CreateApplicationOutput{})
 	return CreateApplicationRequest{Request: req, Input: input, Copy: c.CreateApplicationRequest}
 }
 
@@ -118,8 +44,8 @@ func (c *Client) CreateApplicationRequest(input *CreateApplicationInput) CreateA
 // CreateApplication API operation.
 type CreateApplicationRequest struct {
 	*aws.Request
-	Input *CreateApplicationInput
-	Copy  func(*CreateApplicationInput) CreateApplicationRequest
+	Input *types.CreateApplicationInput
+	Copy  func(*types.CreateApplicationInput) CreateApplicationRequest
 }
 
 // Send marshals and sends the CreateApplication API request.
@@ -131,7 +57,7 @@ func (r CreateApplicationRequest) Send(ctx context.Context) (*CreateApplicationR
 	}
 
 	resp := &CreateApplicationResponse{
-		CreateApplicationOutput: r.Request.Data.(*CreateApplicationOutput),
+		CreateApplicationOutput: r.Request.Data.(*types.CreateApplicationOutput),
 		response:                &aws.Response{Request: r.Request},
 	}
 
@@ -141,7 +67,7 @@ func (r CreateApplicationRequest) Send(ctx context.Context) (*CreateApplicationR
 // CreateApplicationResponse is the response type for the
 // CreateApplication API operation.
 type CreateApplicationResponse struct {
-	*CreateApplicationOutput
+	*types.CreateApplicationOutput
 
 	response *aws.Response
 }

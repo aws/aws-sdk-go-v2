@@ -6,64 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ssm/types"
 )
-
-type ListAssociationVersionsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The association ID for which you want to view all versions.
-	//
-	// AssociationId is a required field
-	AssociationId *string `type:"string" required:"true"`
-
-	// The maximum number of items to return for this call. The call also returns
-	// a token that you can specify in a subsequent call to get the next set of
-	// results.
-	MaxResults *int64 `min:"1" type:"integer"`
-
-	// A token to start the list. Use this token to get the next set of results.
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s ListAssociationVersionsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListAssociationVersionsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListAssociationVersionsInput"}
-
-	if s.AssociationId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("AssociationId"))
-	}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ListAssociationVersionsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Information about all versions of the association for the specified association
-	// ID.
-	AssociationVersions []AssociationVersionInfo `min:"1" type:"list"`
-
-	// The token for the next set of items to return. Use this token to get the
-	// next set of results.
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s ListAssociationVersionsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListAssociationVersions = "ListAssociationVersions"
 
@@ -80,7 +24,7 @@ const opListAssociationVersions = "ListAssociationVersions"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ListAssociationVersions
-func (c *Client) ListAssociationVersionsRequest(input *ListAssociationVersionsInput) ListAssociationVersionsRequest {
+func (c *Client) ListAssociationVersionsRequest(input *types.ListAssociationVersionsInput) ListAssociationVersionsRequest {
 	op := &aws.Operation{
 		Name:       opListAssociationVersions,
 		HTTPMethod: "POST",
@@ -88,10 +32,10 @@ func (c *Client) ListAssociationVersionsRequest(input *ListAssociationVersionsIn
 	}
 
 	if input == nil {
-		input = &ListAssociationVersionsInput{}
+		input = &types.ListAssociationVersionsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListAssociationVersionsOutput{})
+	req := c.newRequest(op, input, &types.ListAssociationVersionsOutput{})
 	return ListAssociationVersionsRequest{Request: req, Input: input, Copy: c.ListAssociationVersionsRequest}
 }
 
@@ -99,8 +43,8 @@ func (c *Client) ListAssociationVersionsRequest(input *ListAssociationVersionsIn
 // ListAssociationVersions API operation.
 type ListAssociationVersionsRequest struct {
 	*aws.Request
-	Input *ListAssociationVersionsInput
-	Copy  func(*ListAssociationVersionsInput) ListAssociationVersionsRequest
+	Input *types.ListAssociationVersionsInput
+	Copy  func(*types.ListAssociationVersionsInput) ListAssociationVersionsRequest
 }
 
 // Send marshals and sends the ListAssociationVersions API request.
@@ -112,7 +56,7 @@ func (r ListAssociationVersionsRequest) Send(ctx context.Context) (*ListAssociat
 	}
 
 	resp := &ListAssociationVersionsResponse{
-		ListAssociationVersionsOutput: r.Request.Data.(*ListAssociationVersionsOutput),
+		ListAssociationVersionsOutput: r.Request.Data.(*types.ListAssociationVersionsOutput),
 		response:                      &aws.Response{Request: r.Request},
 	}
 
@@ -122,7 +66,7 @@ func (r ListAssociationVersionsRequest) Send(ctx context.Context) (*ListAssociat
 // ListAssociationVersionsResponse is the response type for the
 // ListAssociationVersions API operation.
 type ListAssociationVersionsResponse struct {
-	*ListAssociationVersionsOutput
+	*types.ListAssociationVersionsOutput
 
 	response *aws.Response
 }

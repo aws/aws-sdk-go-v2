@@ -4,97 +4,10 @@ package directoryservice
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/directoryservice/types"
 )
-
-// Contains the inputs for the CreateDirectory operation.
-type CreateDirectoryInput struct {
-	_ struct{} `type:"structure"`
-
-	// A textual description for the directory.
-	Description *string `type:"string"`
-
-	// The fully qualified name for the directory, such as corp.example.com.
-	//
-	// Name is a required field
-	Name *string `type:"string" required:"true"`
-
-	// The password for the directory administrator. The directory creation process
-	// creates a directory administrator account with the user name Administrator
-	// and this password.
-	//
-	// Password is a required field
-	Password *string `type:"string" required:"true" sensitive:"true"`
-
-	// The short name of the directory, such as CORP.
-	ShortName *string `type:"string"`
-
-	// The size of the directory.
-	//
-	// Size is a required field
-	Size DirectorySize `type:"string" required:"true" enum:"true"`
-
-	// The tags to be assigned to the Simple AD directory.
-	Tags []Tag `type:"list"`
-
-	// A DirectoryVpcSettings object that contains additional information for the
-	// operation.
-	VpcSettings *DirectoryVpcSettings `type:"structure"`
-}
-
-// String returns the string representation
-func (s CreateDirectoryInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateDirectoryInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateDirectoryInput"}
-
-	if s.Name == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Name"))
-	}
-
-	if s.Password == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Password"))
-	}
-	if len(s.Size) == 0 {
-		invalidParams.Add(aws.NewErrParamRequired("Size"))
-	}
-	if s.Tags != nil {
-		for i, v := range s.Tags {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-	if s.VpcSettings != nil {
-		if err := s.VpcSettings.Validate(); err != nil {
-			invalidParams.AddNested("VpcSettings", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Contains the results of the CreateDirectory operation.
-type CreateDirectoryOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The identifier of the directory that was created.
-	DirectoryId *string `type:"string"`
-}
-
-// String returns the string representation
-func (s CreateDirectoryOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCreateDirectory = "CreateDirectory"
 
@@ -116,7 +29,7 @@ const opCreateDirectory = "CreateDirectory"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/CreateDirectory
-func (c *Client) CreateDirectoryRequest(input *CreateDirectoryInput) CreateDirectoryRequest {
+func (c *Client) CreateDirectoryRequest(input *types.CreateDirectoryInput) CreateDirectoryRequest {
 	op := &aws.Operation{
 		Name:       opCreateDirectory,
 		HTTPMethod: "POST",
@@ -124,10 +37,10 @@ func (c *Client) CreateDirectoryRequest(input *CreateDirectoryInput) CreateDirec
 	}
 
 	if input == nil {
-		input = &CreateDirectoryInput{}
+		input = &types.CreateDirectoryInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateDirectoryOutput{})
+	req := c.newRequest(op, input, &types.CreateDirectoryOutput{})
 	return CreateDirectoryRequest{Request: req, Input: input, Copy: c.CreateDirectoryRequest}
 }
 
@@ -135,8 +48,8 @@ func (c *Client) CreateDirectoryRequest(input *CreateDirectoryInput) CreateDirec
 // CreateDirectory API operation.
 type CreateDirectoryRequest struct {
 	*aws.Request
-	Input *CreateDirectoryInput
-	Copy  func(*CreateDirectoryInput) CreateDirectoryRequest
+	Input *types.CreateDirectoryInput
+	Copy  func(*types.CreateDirectoryInput) CreateDirectoryRequest
 }
 
 // Send marshals and sends the CreateDirectory API request.
@@ -148,7 +61,7 @@ func (r CreateDirectoryRequest) Send(ctx context.Context) (*CreateDirectoryRespo
 	}
 
 	resp := &CreateDirectoryResponse{
-		CreateDirectoryOutput: r.Request.Data.(*CreateDirectoryOutput),
+		CreateDirectoryOutput: r.Request.Data.(*types.CreateDirectoryOutput),
 		response:              &aws.Response{Request: r.Request},
 	}
 
@@ -158,7 +71,7 @@ func (r CreateDirectoryRequest) Send(ctx context.Context) (*CreateDirectoryRespo
 // CreateDirectoryResponse is the response type for the
 // CreateDirectory API operation.
 type CreateDirectoryResponse struct {
-	*CreateDirectoryOutput
+	*types.CreateDirectoryOutput
 
 	response *aws.Response
 }

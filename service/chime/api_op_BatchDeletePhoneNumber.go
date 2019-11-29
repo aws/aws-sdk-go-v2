@@ -6,90 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/chime/types"
 )
-
-type BatchDeletePhoneNumberInput struct {
-	_ struct{} `type:"structure"`
-
-	// List of phone number IDs.
-	//
-	// PhoneNumberIds is a required field
-	PhoneNumberIds []string `min:"1" type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s BatchDeletePhoneNumberInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *BatchDeletePhoneNumberInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "BatchDeletePhoneNumberInput"}
-
-	if s.PhoneNumberIds == nil {
-		invalidParams.Add(aws.NewErrParamRequired("PhoneNumberIds"))
-	}
-	if s.PhoneNumberIds != nil && len(s.PhoneNumberIds) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("PhoneNumberIds", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s BatchDeletePhoneNumberInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.PhoneNumberIds != nil {
-		v := s.PhoneNumberIds
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "PhoneNumberIds", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
-		}
-		ls0.End()
-
-	}
-	return nil
-}
-
-type BatchDeletePhoneNumberOutput struct {
-	_ struct{} `type:"structure"`
-
-	// If the action fails for one or more of the phone numbers in the request,
-	// a list of the phone numbers is returned, along with error codes and error
-	// messages.
-	PhoneNumberErrors []PhoneNumberError `type:"list"`
-}
-
-// String returns the string representation
-func (s BatchDeletePhoneNumberOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s BatchDeletePhoneNumberOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.PhoneNumberErrors != nil {
-		v := s.PhoneNumberErrors
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "PhoneNumberErrors", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	return nil
-}
 
 const opBatchDeletePhoneNumber = "BatchDeletePhoneNumber"
 
@@ -110,7 +28,7 @@ const opBatchDeletePhoneNumber = "BatchDeletePhoneNumber"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/BatchDeletePhoneNumber
-func (c *Client) BatchDeletePhoneNumberRequest(input *BatchDeletePhoneNumberInput) BatchDeletePhoneNumberRequest {
+func (c *Client) BatchDeletePhoneNumberRequest(input *types.BatchDeletePhoneNumberInput) BatchDeletePhoneNumberRequest {
 	op := &aws.Operation{
 		Name:       opBatchDeletePhoneNumber,
 		HTTPMethod: "POST",
@@ -118,10 +36,10 @@ func (c *Client) BatchDeletePhoneNumberRequest(input *BatchDeletePhoneNumberInpu
 	}
 
 	if input == nil {
-		input = &BatchDeletePhoneNumberInput{}
+		input = &types.BatchDeletePhoneNumberInput{}
 	}
 
-	req := c.newRequest(op, input, &BatchDeletePhoneNumberOutput{})
+	req := c.newRequest(op, input, &types.BatchDeletePhoneNumberOutput{})
 	return BatchDeletePhoneNumberRequest{Request: req, Input: input, Copy: c.BatchDeletePhoneNumberRequest}
 }
 
@@ -129,8 +47,8 @@ func (c *Client) BatchDeletePhoneNumberRequest(input *BatchDeletePhoneNumberInpu
 // BatchDeletePhoneNumber API operation.
 type BatchDeletePhoneNumberRequest struct {
 	*aws.Request
-	Input *BatchDeletePhoneNumberInput
-	Copy  func(*BatchDeletePhoneNumberInput) BatchDeletePhoneNumberRequest
+	Input *types.BatchDeletePhoneNumberInput
+	Copy  func(*types.BatchDeletePhoneNumberInput) BatchDeletePhoneNumberRequest
 }
 
 // Send marshals and sends the BatchDeletePhoneNumber API request.
@@ -142,7 +60,7 @@ func (r BatchDeletePhoneNumberRequest) Send(ctx context.Context) (*BatchDeletePh
 	}
 
 	resp := &BatchDeletePhoneNumberResponse{
-		BatchDeletePhoneNumberOutput: r.Request.Data.(*BatchDeletePhoneNumberOutput),
+		BatchDeletePhoneNumberOutput: r.Request.Data.(*types.BatchDeletePhoneNumberOutput),
 		response:                     &aws.Response{Request: r.Request},
 	}
 
@@ -152,7 +70,7 @@ func (r BatchDeletePhoneNumberRequest) Send(ctx context.Context) (*BatchDeletePh
 // BatchDeletePhoneNumberResponse is the response type for the
 // BatchDeletePhoneNumber API operation.
 type BatchDeletePhoneNumberResponse struct {
-	*BatchDeletePhoneNumberOutput
+	*types.BatchDeletePhoneNumberOutput
 
 	response *aws.Response
 }

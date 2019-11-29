@@ -6,74 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/pinpoint/types"
 )
-
-type GetApnsVoipChannelInput struct {
-	_ struct{} `type:"structure"`
-
-	// ApplicationId is a required field
-	ApplicationId *string `location:"uri" locationName:"application-id" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetApnsVoipChannelInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetApnsVoipChannelInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetApnsVoipChannelInput"}
-
-	if s.ApplicationId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ApplicationId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetApnsVoipChannelInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.ApplicationId != nil {
-		v := *s.ApplicationId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "application-id", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type GetApnsVoipChannelOutput struct {
-	_ struct{} `type:"structure" payload:"APNSVoipChannelResponse"`
-
-	// Provides information about the status and settings of the APNs (Apple Push
-	// Notification service) VoIP channel for an application.
-	//
-	// APNSVoipChannelResponse is a required field
-	APNSVoipChannelResponse *APNSVoipChannelResponse `type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s GetApnsVoipChannelOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetApnsVoipChannelOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.APNSVoipChannelResponse != nil {
-		v := s.APNSVoipChannelResponse
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.PayloadTarget, "APNSVoipChannelResponse", v, metadata)
-	}
-	return nil
-}
 
 const opGetApnsVoipChannel = "GetApnsVoipChannel"
 
@@ -91,7 +25,7 @@ const opGetApnsVoipChannel = "GetApnsVoipChannel"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetApnsVoipChannel
-func (c *Client) GetApnsVoipChannelRequest(input *GetApnsVoipChannelInput) GetApnsVoipChannelRequest {
+func (c *Client) GetApnsVoipChannelRequest(input *types.GetApnsVoipChannelInput) GetApnsVoipChannelRequest {
 	op := &aws.Operation{
 		Name:       opGetApnsVoipChannel,
 		HTTPMethod: "GET",
@@ -99,10 +33,10 @@ func (c *Client) GetApnsVoipChannelRequest(input *GetApnsVoipChannelInput) GetAp
 	}
 
 	if input == nil {
-		input = &GetApnsVoipChannelInput{}
+		input = &types.GetApnsVoipChannelInput{}
 	}
 
-	req := c.newRequest(op, input, &GetApnsVoipChannelOutput{})
+	req := c.newRequest(op, input, &types.GetApnsVoipChannelOutput{})
 	return GetApnsVoipChannelRequest{Request: req, Input: input, Copy: c.GetApnsVoipChannelRequest}
 }
 
@@ -110,8 +44,8 @@ func (c *Client) GetApnsVoipChannelRequest(input *GetApnsVoipChannelInput) GetAp
 // GetApnsVoipChannel API operation.
 type GetApnsVoipChannelRequest struct {
 	*aws.Request
-	Input *GetApnsVoipChannelInput
-	Copy  func(*GetApnsVoipChannelInput) GetApnsVoipChannelRequest
+	Input *types.GetApnsVoipChannelInput
+	Copy  func(*types.GetApnsVoipChannelInput) GetApnsVoipChannelRequest
 }
 
 // Send marshals and sends the GetApnsVoipChannel API request.
@@ -123,7 +57,7 @@ func (r GetApnsVoipChannelRequest) Send(ctx context.Context) (*GetApnsVoipChanne
 	}
 
 	resp := &GetApnsVoipChannelResponse{
-		GetApnsVoipChannelOutput: r.Request.Data.(*GetApnsVoipChannelOutput),
+		GetApnsVoipChannelOutput: r.Request.Data.(*types.GetApnsVoipChannelOutput),
 		response:                 &aws.Response{Request: r.Request},
 	}
 
@@ -133,7 +67,7 @@ func (r GetApnsVoipChannelRequest) Send(ctx context.Context) (*GetApnsVoipChanne
 // GetApnsVoipChannelResponse is the response type for the
 // GetApnsVoipChannel API operation.
 type GetApnsVoipChannelResponse struct {
-	*GetApnsVoipChannelOutput
+	*types.GetApnsVoipChannelOutput
 
 	response *aws.Response
 }

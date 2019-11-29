@@ -6,108 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/appmesh/types"
 )
-
-type DeleteRouteInput struct {
-	_ struct{} `type:"structure"`
-
-	// MeshName is a required field
-	MeshName *string `location:"uri" locationName:"meshName" min:"1" type:"string" required:"true"`
-
-	// RouteName is a required field
-	RouteName *string `location:"uri" locationName:"routeName" min:"1" type:"string" required:"true"`
-
-	// VirtualRouterName is a required field
-	VirtualRouterName *string `location:"uri" locationName:"virtualRouterName" min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteRouteInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteRouteInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteRouteInput"}
-
-	if s.MeshName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("MeshName"))
-	}
-	if s.MeshName != nil && len(*s.MeshName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("MeshName", 1))
-	}
-
-	if s.RouteName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("RouteName"))
-	}
-	if s.RouteName != nil && len(*s.RouteName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("RouteName", 1))
-	}
-
-	if s.VirtualRouterName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("VirtualRouterName"))
-	}
-	if s.VirtualRouterName != nil && len(*s.VirtualRouterName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("VirtualRouterName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteRouteInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.MeshName != nil {
-		v := *s.MeshName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "meshName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.RouteName != nil {
-		v := *s.RouteName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "routeName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.VirtualRouterName != nil {
-		v := *s.VirtualRouterName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "virtualRouterName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type DeleteRouteOutput struct {
-	_ struct{} `type:"structure" payload:"Route"`
-
-	// An object representing a route returned by a describe operation.
-	//
-	// Route is a required field
-	Route *RouteData `locationName:"route" type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteRouteOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteRouteOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.Route != nil {
-		v := s.Route
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.PayloadTarget, "route", v, metadata)
-	}
-	return nil
-}
 
 const opDeleteRoute = "DeleteRoute"
 
@@ -124,7 +24,7 @@ const opDeleteRoute = "DeleteRoute"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/DeleteRoute
-func (c *Client) DeleteRouteRequest(input *DeleteRouteInput) DeleteRouteRequest {
+func (c *Client) DeleteRouteRequest(input *types.DeleteRouteInput) DeleteRouteRequest {
 	op := &aws.Operation{
 		Name:       opDeleteRoute,
 		HTTPMethod: "DELETE",
@@ -132,10 +32,10 @@ func (c *Client) DeleteRouteRequest(input *DeleteRouteInput) DeleteRouteRequest 
 	}
 
 	if input == nil {
-		input = &DeleteRouteInput{}
+		input = &types.DeleteRouteInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteRouteOutput{})
+	req := c.newRequest(op, input, &types.DeleteRouteOutput{})
 	return DeleteRouteRequest{Request: req, Input: input, Copy: c.DeleteRouteRequest}
 }
 
@@ -143,8 +43,8 @@ func (c *Client) DeleteRouteRequest(input *DeleteRouteInput) DeleteRouteRequest 
 // DeleteRoute API operation.
 type DeleteRouteRequest struct {
 	*aws.Request
-	Input *DeleteRouteInput
-	Copy  func(*DeleteRouteInput) DeleteRouteRequest
+	Input *types.DeleteRouteInput
+	Copy  func(*types.DeleteRouteInput) DeleteRouteRequest
 }
 
 // Send marshals and sends the DeleteRoute API request.
@@ -156,7 +56,7 @@ func (r DeleteRouteRequest) Send(ctx context.Context) (*DeleteRouteResponse, err
 	}
 
 	resp := &DeleteRouteResponse{
-		DeleteRouteOutput: r.Request.Data.(*DeleteRouteOutput),
+		DeleteRouteOutput: r.Request.Data.(*types.DeleteRouteOutput),
 		response:          &aws.Response{Request: r.Request},
 	}
 
@@ -166,7 +66,7 @@ func (r DeleteRouteRequest) Send(ctx context.Context) (*DeleteRouteResponse, err
 // DeleteRouteResponse is the response type for the
 // DeleteRoute API operation.
 type DeleteRouteResponse struct {
-	*DeleteRouteOutput
+	*types.DeleteRouteOutput
 
 	response *aws.Response
 }

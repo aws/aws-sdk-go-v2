@@ -6,91 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/elasticsearchservice/types"
 )
-
-// Container for the parameters to the DescribeElasticsearchDomains operation.
-// By default, the API returns the status of all Elasticsearch domains.
-type DescribeElasticsearchDomainsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Elasticsearch domains for which you want information.
-	//
-	// DomainNames is a required field
-	DomainNames []string `type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeElasticsearchDomainsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeElasticsearchDomainsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeElasticsearchDomainsInput"}
-
-	if s.DomainNames == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DomainNames"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DescribeElasticsearchDomainsInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.DomainNames != nil {
-		v := s.DomainNames
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "DomainNames", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
-		}
-		ls0.End()
-
-	}
-	return nil
-}
-
-// The result of a DescribeElasticsearchDomains request. Contains the status
-// of the specified domains or all domains owned by the account.
-type DescribeElasticsearchDomainsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The status of the domains requested in the DescribeElasticsearchDomains request.
-	//
-	// DomainStatusList is a required field
-	DomainStatusList []ElasticsearchDomainStatus `type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeElasticsearchDomainsOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DescribeElasticsearchDomainsOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.DomainStatusList != nil {
-		v := s.DomainStatusList
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "DomainStatusList", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	return nil
-}
 
 const opDescribeElasticsearchDomains = "DescribeElasticsearchDomains"
 
@@ -106,7 +23,7 @@ const opDescribeElasticsearchDomains = "DescribeElasticsearchDomains"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) DescribeElasticsearchDomainsRequest(input *DescribeElasticsearchDomainsInput) DescribeElasticsearchDomainsRequest {
+func (c *Client) DescribeElasticsearchDomainsRequest(input *types.DescribeElasticsearchDomainsInput) DescribeElasticsearchDomainsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeElasticsearchDomains,
 		HTTPMethod: "POST",
@@ -114,10 +31,10 @@ func (c *Client) DescribeElasticsearchDomainsRequest(input *DescribeElasticsearc
 	}
 
 	if input == nil {
-		input = &DescribeElasticsearchDomainsInput{}
+		input = &types.DescribeElasticsearchDomainsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeElasticsearchDomainsOutput{})
+	req := c.newRequest(op, input, &types.DescribeElasticsearchDomainsOutput{})
 	return DescribeElasticsearchDomainsRequest{Request: req, Input: input, Copy: c.DescribeElasticsearchDomainsRequest}
 }
 
@@ -125,8 +42,8 @@ func (c *Client) DescribeElasticsearchDomainsRequest(input *DescribeElasticsearc
 // DescribeElasticsearchDomains API operation.
 type DescribeElasticsearchDomainsRequest struct {
 	*aws.Request
-	Input *DescribeElasticsearchDomainsInput
-	Copy  func(*DescribeElasticsearchDomainsInput) DescribeElasticsearchDomainsRequest
+	Input *types.DescribeElasticsearchDomainsInput
+	Copy  func(*types.DescribeElasticsearchDomainsInput) DescribeElasticsearchDomainsRequest
 }
 
 // Send marshals and sends the DescribeElasticsearchDomains API request.
@@ -138,7 +55,7 @@ func (r DescribeElasticsearchDomainsRequest) Send(ctx context.Context) (*Describ
 	}
 
 	resp := &DescribeElasticsearchDomainsResponse{
-		DescribeElasticsearchDomainsOutput: r.Request.Data.(*DescribeElasticsearchDomainsOutput),
+		DescribeElasticsearchDomainsOutput: r.Request.Data.(*types.DescribeElasticsearchDomainsOutput),
 		response:                           &aws.Response{Request: r.Request},
 	}
 
@@ -148,7 +65,7 @@ func (r DescribeElasticsearchDomainsRequest) Send(ctx context.Context) (*Describ
 // DescribeElasticsearchDomainsResponse is the response type for the
 // DescribeElasticsearchDomains API operation.
 type DescribeElasticsearchDomainsResponse struct {
-	*DescribeElasticsearchDomainsOutput
+	*types.DescribeElasticsearchDomainsOutput
 
 	response *aws.Response
 }

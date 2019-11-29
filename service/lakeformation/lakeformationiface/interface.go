@@ -10,6 +10,7 @@ package lakeformationiface
 
 import (
 	"github.com/aws/aws-sdk-go-v2/service/lakeformation"
+	"github.com/aws/aws-sdk-go-v2/service/lakeformation/types"
 )
 
 // ClientAPI provides an interface to enable mocking the
@@ -43,7 +44,7 @@ import (
 //    type mockClientClient struct {
 //        lakeformationiface.ClientPI
 //    }
-//    func (m *mockClientClient) BatchGrantPermissions(input *lakeformation.BatchGrantPermissionsInput) (*lakeformation.BatchGrantPermissionsOutput, error) {
+//    func (m *mockClientClient) BatchGrantPermissions(input *types.BatchGrantPermissionsInput) (*types.BatchGrantPermissionsOutput, error) {
 //        // mock response/functionality
 //    }
 //
@@ -61,31 +62,31 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type ClientAPI interface {
-	BatchGrantPermissionsRequest(*lakeformation.BatchGrantPermissionsInput) lakeformation.BatchGrantPermissionsRequest
+	BatchGrantPermissionsRequest(*types.BatchGrantPermissionsInput) lakeformation.BatchGrantPermissionsRequest
 
-	BatchRevokePermissionsRequest(*lakeformation.BatchRevokePermissionsInput) lakeformation.BatchRevokePermissionsRequest
+	BatchRevokePermissionsRequest(*types.BatchRevokePermissionsInput) lakeformation.BatchRevokePermissionsRequest
 
-	DeregisterResourceRequest(*lakeformation.DeregisterResourceInput) lakeformation.DeregisterResourceRequest
+	DeregisterResourceRequest(*types.DeregisterResourceInput) lakeformation.DeregisterResourceRequest
 
-	DescribeResourceRequest(*lakeformation.DescribeResourceInput) lakeformation.DescribeResourceRequest
+	DescribeResourceRequest(*types.DescribeResourceInput) lakeformation.DescribeResourceRequest
 
-	GetDataLakeSettingsRequest(*lakeformation.GetDataLakeSettingsInput) lakeformation.GetDataLakeSettingsRequest
+	GetDataLakeSettingsRequest(*types.GetDataLakeSettingsInput) lakeformation.GetDataLakeSettingsRequest
 
-	GetEffectivePermissionsForPathRequest(*lakeformation.GetEffectivePermissionsForPathInput) lakeformation.GetEffectivePermissionsForPathRequest
+	GetEffectivePermissionsForPathRequest(*types.GetEffectivePermissionsForPathInput) lakeformation.GetEffectivePermissionsForPathRequest
 
-	GrantPermissionsRequest(*lakeformation.GrantPermissionsInput) lakeformation.GrantPermissionsRequest
+	GrantPermissionsRequest(*types.GrantPermissionsInput) lakeformation.GrantPermissionsRequest
 
-	ListPermissionsRequest(*lakeformation.ListPermissionsInput) lakeformation.ListPermissionsRequest
+	ListPermissionsRequest(*types.ListPermissionsInput) lakeformation.ListPermissionsRequest
 
-	ListResourcesRequest(*lakeformation.ListResourcesInput) lakeformation.ListResourcesRequest
+	ListResourcesRequest(*types.ListResourcesInput) lakeformation.ListResourcesRequest
 
-	PutDataLakeSettingsRequest(*lakeformation.PutDataLakeSettingsInput) lakeformation.PutDataLakeSettingsRequest
+	PutDataLakeSettingsRequest(*types.PutDataLakeSettingsInput) lakeformation.PutDataLakeSettingsRequest
 
-	RegisterResourceRequest(*lakeformation.RegisterResourceInput) lakeformation.RegisterResourceRequest
+	RegisterResourceRequest(*types.RegisterResourceInput) lakeformation.RegisterResourceRequest
 
-	RevokePermissionsRequest(*lakeformation.RevokePermissionsInput) lakeformation.RevokePermissionsRequest
+	RevokePermissionsRequest(*types.RevokePermissionsInput) lakeformation.RevokePermissionsRequest
 
-	UpdateResourceRequest(*lakeformation.UpdateResourceInput) lakeformation.UpdateResourceRequest
+	UpdateResourceRequest(*types.UpdateResourceInput) lakeformation.UpdateResourceRequest
 }
 
 var _ ClientAPI = (*lakeformation.Client)(nil)

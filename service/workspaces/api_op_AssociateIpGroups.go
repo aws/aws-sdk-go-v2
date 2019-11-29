@@ -6,54 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/workspaces/types"
 )
-
-type AssociateIpGroupsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The identifier of the directory.
-	//
-	// DirectoryId is a required field
-	DirectoryId *string `type:"string" required:"true"`
-
-	// The identifiers of one or more IP access control groups.
-	//
-	// GroupIds is a required field
-	GroupIds []string `type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s AssociateIpGroupsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *AssociateIpGroupsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "AssociateIpGroupsInput"}
-
-	if s.DirectoryId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DirectoryId"))
-	}
-
-	if s.GroupIds == nil {
-		invalidParams.Add(aws.NewErrParamRequired("GroupIds"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type AssociateIpGroupsOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s AssociateIpGroupsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opAssociateIpGroups = "AssociateIpGroups"
 
@@ -70,7 +24,7 @@ const opAssociateIpGroups = "AssociateIpGroups"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/AssociateIpGroups
-func (c *Client) AssociateIpGroupsRequest(input *AssociateIpGroupsInput) AssociateIpGroupsRequest {
+func (c *Client) AssociateIpGroupsRequest(input *types.AssociateIpGroupsInput) AssociateIpGroupsRequest {
 	op := &aws.Operation{
 		Name:       opAssociateIpGroups,
 		HTTPMethod: "POST",
@@ -78,10 +32,10 @@ func (c *Client) AssociateIpGroupsRequest(input *AssociateIpGroupsInput) Associa
 	}
 
 	if input == nil {
-		input = &AssociateIpGroupsInput{}
+		input = &types.AssociateIpGroupsInput{}
 	}
 
-	req := c.newRequest(op, input, &AssociateIpGroupsOutput{})
+	req := c.newRequest(op, input, &types.AssociateIpGroupsOutput{})
 	return AssociateIpGroupsRequest{Request: req, Input: input, Copy: c.AssociateIpGroupsRequest}
 }
 
@@ -89,8 +43,8 @@ func (c *Client) AssociateIpGroupsRequest(input *AssociateIpGroupsInput) Associa
 // AssociateIpGroups API operation.
 type AssociateIpGroupsRequest struct {
 	*aws.Request
-	Input *AssociateIpGroupsInput
-	Copy  func(*AssociateIpGroupsInput) AssociateIpGroupsRequest
+	Input *types.AssociateIpGroupsInput
+	Copy  func(*types.AssociateIpGroupsInput) AssociateIpGroupsRequest
 }
 
 // Send marshals and sends the AssociateIpGroups API request.
@@ -102,7 +56,7 @@ func (r AssociateIpGroupsRequest) Send(ctx context.Context) (*AssociateIpGroupsR
 	}
 
 	resp := &AssociateIpGroupsResponse{
-		AssociateIpGroupsOutput: r.Request.Data.(*AssociateIpGroupsOutput),
+		AssociateIpGroupsOutput: r.Request.Data.(*types.AssociateIpGroupsOutput),
 		response:                &aws.Response{Request: r.Request},
 	}
 
@@ -112,7 +66,7 @@ func (r AssociateIpGroupsRequest) Send(ctx context.Context) (*AssociateIpGroupsR
 // AssociateIpGroupsResponse is the response type for the
 // AssociateIpGroups API operation.
 type AssociateIpGroupsResponse struct {
-	*AssociateIpGroupsOutput
+	*types.AssociateIpGroupsOutput
 
 	response *aws.Response
 }

@@ -4,186 +4,10 @@ package robomaker
 
 import (
 	"context"
-	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/robomaker/types"
 )
-
-type DescribeSimulationApplicationInput struct {
-	_ struct{} `type:"structure"`
-
-	// The application information for the simulation application.
-	//
-	// Application is a required field
-	Application *string `locationName:"application" min:"1" type:"string" required:"true"`
-
-	// The version of the simulation application to describe.
-	ApplicationVersion *string `locationName:"applicationVersion" min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeSimulationApplicationInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeSimulationApplicationInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeSimulationApplicationInput"}
-
-	if s.Application == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Application"))
-	}
-	if s.Application != nil && len(*s.Application) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Application", 1))
-	}
-	if s.ApplicationVersion != nil && len(*s.ApplicationVersion) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ApplicationVersion", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DescribeSimulationApplicationInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.Application != nil {
-		v := *s.Application
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "application", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.ApplicationVersion != nil {
-		v := *s.ApplicationVersion
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "applicationVersion", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type DescribeSimulationApplicationOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the robot simulation application.
-	Arn *string `locationName:"arn" min:"1" type:"string"`
-
-	// The time, in milliseconds since the epoch, when the simulation application
-	// was last updated.
-	LastUpdatedAt *time.Time `locationName:"lastUpdatedAt" type:"timestamp"`
-
-	// The name of the simulation application.
-	Name *string `locationName:"name" min:"1" type:"string"`
-
-	// The rendering engine for the simulation application.
-	RenderingEngine *RenderingEngine `locationName:"renderingEngine" type:"structure"`
-
-	// The revision id of the simulation application.
-	RevisionId *string `locationName:"revisionId" min:"1" type:"string"`
-
-	// Information about the robot software suite.
-	RobotSoftwareSuite *RobotSoftwareSuite `locationName:"robotSoftwareSuite" type:"structure"`
-
-	// The simulation software suite used by the simulation application.
-	SimulationSoftwareSuite *SimulationSoftwareSuite `locationName:"simulationSoftwareSuite" type:"structure"`
-
-	// The sources of the simulation application.
-	Sources []Source `locationName:"sources" type:"list"`
-
-	// The list of all tags added to the specified simulation application.
-	Tags map[string]string `locationName:"tags" type:"map"`
-
-	// The version of the simulation application.
-	Version *string `locationName:"version" min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeSimulationApplicationOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DescribeSimulationApplicationOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.Arn != nil {
-		v := *s.Arn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "arn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.LastUpdatedAt != nil {
-		v := *s.LastUpdatedAt
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "lastUpdatedAt",
-			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
-	}
-	if s.Name != nil {
-		v := *s.Name
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.RenderingEngine != nil {
-		v := s.RenderingEngine
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "renderingEngine", v, metadata)
-	}
-	if s.RevisionId != nil {
-		v := *s.RevisionId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "revisionId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.RobotSoftwareSuite != nil {
-		v := s.RobotSoftwareSuite
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "robotSoftwareSuite", v, metadata)
-	}
-	if s.SimulationSoftwareSuite != nil {
-		v := s.SimulationSoftwareSuite
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "simulationSoftwareSuite", v, metadata)
-	}
-	if s.Sources != nil {
-		v := s.Sources
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "sources", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	if s.Tags != nil {
-		v := s.Tags
-
-		metadata := protocol.Metadata{}
-		ms0 := e.Map(protocol.BodyTarget, "tags", metadata)
-		ms0.Start()
-		for k1, v1 := range v {
-			ms0.MapSetValue(k1, protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
-		}
-		ms0.End()
-
-	}
-	if s.Version != nil {
-		v := *s.Version
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "version", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opDescribeSimulationApplication = "DescribeSimulationApplication"
 
@@ -200,7 +24,7 @@ const opDescribeSimulationApplication = "DescribeSimulationApplication"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/DescribeSimulationApplication
-func (c *Client) DescribeSimulationApplicationRequest(input *DescribeSimulationApplicationInput) DescribeSimulationApplicationRequest {
+func (c *Client) DescribeSimulationApplicationRequest(input *types.DescribeSimulationApplicationInput) DescribeSimulationApplicationRequest {
 	op := &aws.Operation{
 		Name:       opDescribeSimulationApplication,
 		HTTPMethod: "POST",
@@ -208,10 +32,10 @@ func (c *Client) DescribeSimulationApplicationRequest(input *DescribeSimulationA
 	}
 
 	if input == nil {
-		input = &DescribeSimulationApplicationInput{}
+		input = &types.DescribeSimulationApplicationInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeSimulationApplicationOutput{})
+	req := c.newRequest(op, input, &types.DescribeSimulationApplicationOutput{})
 	return DescribeSimulationApplicationRequest{Request: req, Input: input, Copy: c.DescribeSimulationApplicationRequest}
 }
 
@@ -219,8 +43,8 @@ func (c *Client) DescribeSimulationApplicationRequest(input *DescribeSimulationA
 // DescribeSimulationApplication API operation.
 type DescribeSimulationApplicationRequest struct {
 	*aws.Request
-	Input *DescribeSimulationApplicationInput
-	Copy  func(*DescribeSimulationApplicationInput) DescribeSimulationApplicationRequest
+	Input *types.DescribeSimulationApplicationInput
+	Copy  func(*types.DescribeSimulationApplicationInput) DescribeSimulationApplicationRequest
 }
 
 // Send marshals and sends the DescribeSimulationApplication API request.
@@ -232,7 +56,7 @@ func (r DescribeSimulationApplicationRequest) Send(ctx context.Context) (*Descri
 	}
 
 	resp := &DescribeSimulationApplicationResponse{
-		DescribeSimulationApplicationOutput: r.Request.Data.(*DescribeSimulationApplicationOutput),
+		DescribeSimulationApplicationOutput: r.Request.Data.(*types.DescribeSimulationApplicationOutput),
 		response:                            &aws.Response{Request: r.Request},
 	}
 
@@ -242,7 +66,7 @@ func (r DescribeSimulationApplicationRequest) Send(ctx context.Context) (*Descri
 // DescribeSimulationApplicationResponse is the response type for the
 // DescribeSimulationApplication API operation.
 type DescribeSimulationApplicationResponse struct {
-	*DescribeSimulationApplicationOutput
+	*types.DescribeSimulationApplicationOutput
 
 	response *aws.Response
 }

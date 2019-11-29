@@ -4,81 +4,10 @@ package budgets
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/budgets/types"
 )
-
-// Request of CreateBudget
-type CreateBudgetInput struct {
-	_ struct{} `type:"structure"`
-
-	// The accountId that is associated with the budget.
-	//
-	// AccountId is a required field
-	AccountId *string `min:"12" type:"string" required:"true"`
-
-	// The budget object that you want to create.
-	//
-	// Budget is a required field
-	Budget *Budget `type:"structure" required:"true"`
-
-	// A notification that you want to associate with a budget. A budget can have
-	// up to five notifications, and each notification can have one SNS subscriber
-	// and up to 10 email subscribers. If you include notifications and subscribers
-	// in your CreateBudget call, AWS creates the notifications and subscribers
-	// for you.
-	NotificationsWithSubscribers []NotificationWithSubscribers `type:"list"`
-}
-
-// String returns the string representation
-func (s CreateBudgetInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateBudgetInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateBudgetInput"}
-
-	if s.AccountId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("AccountId"))
-	}
-	if s.AccountId != nil && len(*s.AccountId) < 12 {
-		invalidParams.Add(aws.NewErrParamMinLen("AccountId", 12))
-	}
-
-	if s.Budget == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Budget"))
-	}
-	if s.Budget != nil {
-		if err := s.Budget.Validate(); err != nil {
-			invalidParams.AddNested("Budget", err.(aws.ErrInvalidParams))
-		}
-	}
-	if s.NotificationsWithSubscribers != nil {
-		for i, v := range s.NotificationsWithSubscribers {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "NotificationsWithSubscribers", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Response of CreateBudget
-type CreateBudgetOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s CreateBudgetOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCreateBudget = "CreateBudget"
 
@@ -98,7 +27,7 @@ const opCreateBudget = "CreateBudget"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) CreateBudgetRequest(input *CreateBudgetInput) CreateBudgetRequest {
+func (c *Client) CreateBudgetRequest(input *types.CreateBudgetInput) CreateBudgetRequest {
 	op := &aws.Operation{
 		Name:       opCreateBudget,
 		HTTPMethod: "POST",
@@ -106,10 +35,10 @@ func (c *Client) CreateBudgetRequest(input *CreateBudgetInput) CreateBudgetReque
 	}
 
 	if input == nil {
-		input = &CreateBudgetInput{}
+		input = &types.CreateBudgetInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateBudgetOutput{})
+	req := c.newRequest(op, input, &types.CreateBudgetOutput{})
 	return CreateBudgetRequest{Request: req, Input: input, Copy: c.CreateBudgetRequest}
 }
 
@@ -117,8 +46,8 @@ func (c *Client) CreateBudgetRequest(input *CreateBudgetInput) CreateBudgetReque
 // CreateBudget API operation.
 type CreateBudgetRequest struct {
 	*aws.Request
-	Input *CreateBudgetInput
-	Copy  func(*CreateBudgetInput) CreateBudgetRequest
+	Input *types.CreateBudgetInput
+	Copy  func(*types.CreateBudgetInput) CreateBudgetRequest
 }
 
 // Send marshals and sends the CreateBudget API request.
@@ -130,7 +59,7 @@ func (r CreateBudgetRequest) Send(ctx context.Context) (*CreateBudgetResponse, e
 	}
 
 	resp := &CreateBudgetResponse{
-		CreateBudgetOutput: r.Request.Data.(*CreateBudgetOutput),
+		CreateBudgetOutput: r.Request.Data.(*types.CreateBudgetOutput),
 		response:           &aws.Response{Request: r.Request},
 	}
 
@@ -140,7 +69,7 @@ func (r CreateBudgetRequest) Send(ctx context.Context) (*CreateBudgetResponse, e
 // CreateBudgetResponse is the response type for the
 // CreateBudget API operation.
 type CreateBudgetResponse struct {
-	*CreateBudgetOutput
+	*types.CreateBudgetOutput
 
 	response *aws.Response
 }

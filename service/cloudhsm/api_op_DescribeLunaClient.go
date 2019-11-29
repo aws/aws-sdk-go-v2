@@ -6,47 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/cloudhsm/types"
 )
-
-type DescribeLunaClientInput struct {
-	_ struct{} `type:"structure"`
-
-	// The certificate fingerprint.
-	CertificateFingerprint *string `type:"string"`
-
-	// The ARN of the client.
-	ClientArn *string `type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeLunaClientInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type DescribeLunaClientOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The certificate installed on the HSMs used by this client.
-	Certificate *string `min:"600" type:"string"`
-
-	// The certificate fingerprint.
-	CertificateFingerprint *string `type:"string"`
-
-	// The ARN of the client.
-	ClientArn *string `type:"string"`
-
-	// The label of the client.
-	Label *string `type:"string"`
-
-	// The date and time the client was last modified.
-	LastModifiedTimestamp *string `type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeLunaClientOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeLunaClient = "DescribeLunaClient"
 
@@ -72,7 +33,7 @@ const opDescribeLunaClient = "DescribeLunaClient"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/DescribeLunaClient
-func (c *Client) DescribeLunaClientRequest(input *DescribeLunaClientInput) DescribeLunaClientRequest {
+func (c *Client) DescribeLunaClientRequest(input *types.DescribeLunaClientInput) DescribeLunaClientRequest {
 	op := &aws.Operation{
 		Name:       opDescribeLunaClient,
 		HTTPMethod: "POST",
@@ -80,10 +41,10 @@ func (c *Client) DescribeLunaClientRequest(input *DescribeLunaClientInput) Descr
 	}
 
 	if input == nil {
-		input = &DescribeLunaClientInput{}
+		input = &types.DescribeLunaClientInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeLunaClientOutput{})
+	req := c.newRequest(op, input, &types.DescribeLunaClientOutput{})
 	return DescribeLunaClientRequest{Request: req, Input: input, Copy: c.DescribeLunaClientRequest}
 }
 
@@ -91,8 +52,8 @@ func (c *Client) DescribeLunaClientRequest(input *DescribeLunaClientInput) Descr
 // DescribeLunaClient API operation.
 type DescribeLunaClientRequest struct {
 	*aws.Request
-	Input *DescribeLunaClientInput
-	Copy  func(*DescribeLunaClientInput) DescribeLunaClientRequest
+	Input *types.DescribeLunaClientInput
+	Copy  func(*types.DescribeLunaClientInput) DescribeLunaClientRequest
 }
 
 // Send marshals and sends the DescribeLunaClient API request.
@@ -104,7 +65,7 @@ func (r DescribeLunaClientRequest) Send(ctx context.Context) (*DescribeLunaClien
 	}
 
 	resp := &DescribeLunaClientResponse{
-		DescribeLunaClientOutput: r.Request.Data.(*DescribeLunaClientOutput),
+		DescribeLunaClientOutput: r.Request.Data.(*types.DescribeLunaClientOutput),
 		response:                 &aws.Response{Request: r.Request},
 	}
 
@@ -114,7 +75,7 @@ func (r DescribeLunaClientRequest) Send(ctx context.Context) (*DescribeLunaClien
 // DescribeLunaClientResponse is the response type for the
 // DescribeLunaClient API operation.
 type DescribeLunaClientResponse struct {
-	*DescribeLunaClientOutput
+	*types.DescribeLunaClientOutput
 
 	response *aws.Response
 }

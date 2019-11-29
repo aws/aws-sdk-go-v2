@@ -6,63 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-type AssociateTransitGatewayRouteTableInput struct {
-	_ struct{} `type:"structure"`
-
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have
-	// the required permissions, the error response is DryRunOperation. Otherwise,
-	// it is UnauthorizedOperation.
-	DryRun *bool `type:"boolean"`
-
-	// The ID of the attachment.
-	//
-	// TransitGatewayAttachmentId is a required field
-	TransitGatewayAttachmentId *string `type:"string" required:"true"`
-
-	// The ID of the transit gateway route table.
-	//
-	// TransitGatewayRouteTableId is a required field
-	TransitGatewayRouteTableId *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s AssociateTransitGatewayRouteTableInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *AssociateTransitGatewayRouteTableInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "AssociateTransitGatewayRouteTableInput"}
-
-	if s.TransitGatewayAttachmentId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("TransitGatewayAttachmentId"))
-	}
-
-	if s.TransitGatewayRouteTableId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("TransitGatewayRouteTableId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type AssociateTransitGatewayRouteTableOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the association.
-	Association *TransitGatewayAssociation `locationName:"association" type:"structure"`
-}
-
-// String returns the string representation
-func (s AssociateTransitGatewayRouteTableOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opAssociateTransitGatewayRouteTable = "AssociateTransitGatewayRouteTable"
 
@@ -80,7 +25,7 @@ const opAssociateTransitGatewayRouteTable = "AssociateTransitGatewayRouteTable"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AssociateTransitGatewayRouteTable
-func (c *Client) AssociateTransitGatewayRouteTableRequest(input *AssociateTransitGatewayRouteTableInput) AssociateTransitGatewayRouteTableRequest {
+func (c *Client) AssociateTransitGatewayRouteTableRequest(input *types.AssociateTransitGatewayRouteTableInput) AssociateTransitGatewayRouteTableRequest {
 	op := &aws.Operation{
 		Name:       opAssociateTransitGatewayRouteTable,
 		HTTPMethod: "POST",
@@ -88,10 +33,10 @@ func (c *Client) AssociateTransitGatewayRouteTableRequest(input *AssociateTransi
 	}
 
 	if input == nil {
-		input = &AssociateTransitGatewayRouteTableInput{}
+		input = &types.AssociateTransitGatewayRouteTableInput{}
 	}
 
-	req := c.newRequest(op, input, &AssociateTransitGatewayRouteTableOutput{})
+	req := c.newRequest(op, input, &types.AssociateTransitGatewayRouteTableOutput{})
 	return AssociateTransitGatewayRouteTableRequest{Request: req, Input: input, Copy: c.AssociateTransitGatewayRouteTableRequest}
 }
 
@@ -99,8 +44,8 @@ func (c *Client) AssociateTransitGatewayRouteTableRequest(input *AssociateTransi
 // AssociateTransitGatewayRouteTable API operation.
 type AssociateTransitGatewayRouteTableRequest struct {
 	*aws.Request
-	Input *AssociateTransitGatewayRouteTableInput
-	Copy  func(*AssociateTransitGatewayRouteTableInput) AssociateTransitGatewayRouteTableRequest
+	Input *types.AssociateTransitGatewayRouteTableInput
+	Copy  func(*types.AssociateTransitGatewayRouteTableInput) AssociateTransitGatewayRouteTableRequest
 }
 
 // Send marshals and sends the AssociateTransitGatewayRouteTable API request.
@@ -112,7 +57,7 @@ func (r AssociateTransitGatewayRouteTableRequest) Send(ctx context.Context) (*As
 	}
 
 	resp := &AssociateTransitGatewayRouteTableResponse{
-		AssociateTransitGatewayRouteTableOutput: r.Request.Data.(*AssociateTransitGatewayRouteTableOutput),
+		AssociateTransitGatewayRouteTableOutput: r.Request.Data.(*types.AssociateTransitGatewayRouteTableOutput),
 		response:                                &aws.Response{Request: r.Request},
 	}
 
@@ -122,7 +67,7 @@ func (r AssociateTransitGatewayRouteTableRequest) Send(ctx context.Context) (*As
 // AssociateTransitGatewayRouteTableResponse is the response type for the
 // AssociateTransitGatewayRouteTable API operation.
 type AssociateTransitGatewayRouteTableResponse struct {
-	*AssociateTransitGatewayRouteTableOutput
+	*types.AssociateTransitGatewayRouteTableOutput
 
 	response *aws.Response
 }

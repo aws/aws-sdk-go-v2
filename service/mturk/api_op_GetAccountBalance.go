@@ -6,32 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/mturk/types"
 )
-
-type GetAccountBalanceInput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s GetAccountBalanceInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type GetAccountBalanceOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A string representing a currency amount.
-	AvailableBalance *string `type:"string"`
-
-	// A string representing a currency amount.
-	OnHoldBalance *string `type:"string"`
-}
-
-// String returns the string representation
-func (s GetAccountBalanceOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetAccountBalance = "GetAccountBalance"
 
@@ -49,7 +25,7 @@ const opGetAccountBalance = "GetAccountBalance"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/GetAccountBalance
-func (c *Client) GetAccountBalanceRequest(input *GetAccountBalanceInput) GetAccountBalanceRequest {
+func (c *Client) GetAccountBalanceRequest(input *types.GetAccountBalanceInput) GetAccountBalanceRequest {
 	op := &aws.Operation{
 		Name:       opGetAccountBalance,
 		HTTPMethod: "POST",
@@ -57,10 +33,10 @@ func (c *Client) GetAccountBalanceRequest(input *GetAccountBalanceInput) GetAcco
 	}
 
 	if input == nil {
-		input = &GetAccountBalanceInput{}
+		input = &types.GetAccountBalanceInput{}
 	}
 
-	req := c.newRequest(op, input, &GetAccountBalanceOutput{})
+	req := c.newRequest(op, input, &types.GetAccountBalanceOutput{})
 	return GetAccountBalanceRequest{Request: req, Input: input, Copy: c.GetAccountBalanceRequest}
 }
 
@@ -68,8 +44,8 @@ func (c *Client) GetAccountBalanceRequest(input *GetAccountBalanceInput) GetAcco
 // GetAccountBalance API operation.
 type GetAccountBalanceRequest struct {
 	*aws.Request
-	Input *GetAccountBalanceInput
-	Copy  func(*GetAccountBalanceInput) GetAccountBalanceRequest
+	Input *types.GetAccountBalanceInput
+	Copy  func(*types.GetAccountBalanceInput) GetAccountBalanceRequest
 }
 
 // Send marshals and sends the GetAccountBalance API request.
@@ -81,7 +57,7 @@ func (r GetAccountBalanceRequest) Send(ctx context.Context) (*GetAccountBalanceR
 	}
 
 	resp := &GetAccountBalanceResponse{
-		GetAccountBalanceOutput: r.Request.Data.(*GetAccountBalanceOutput),
+		GetAccountBalanceOutput: r.Request.Data.(*types.GetAccountBalanceOutput),
 		response:                &aws.Response{Request: r.Request},
 	}
 
@@ -91,7 +67,7 @@ func (r GetAccountBalanceRequest) Send(ctx context.Context) (*GetAccountBalanceR
 // GetAccountBalanceResponse is the response type for the
 // GetAccountBalance API operation.
 type GetAccountBalanceResponse struct {
-	*GetAccountBalanceOutput
+	*types.GetAccountBalanceOutput
 
 	response *aws.Response
 }

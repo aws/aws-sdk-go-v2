@@ -6,68 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/cloudformation/types"
 )
-
-type ListStackSetsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The maximum number of results to be returned with a single call. If the number
-	// of available results exceeds this maximum, the response includes a NextToken
-	// value that you can assign to the NextToken request parameter to get the next
-	// set of results.
-	MaxResults *int64 `min:"1" type:"integer"`
-
-	// If the previous paginated request didn't return all of the remaining results,
-	// the response object's NextToken parameter value is set to a token. To retrieve
-	// the next set of results, call ListStackSets again and assign that token to
-	// the request object's NextToken parameter. If there are no remaining results,
-	// the previous response object's NextToken parameter is set to null.
-	NextToken *string `min:"1" type:"string"`
-
-	// The status of the stack sets that you want to get summary information about.
-	Status StackSetStatus `type:"string" enum:"true"`
-}
-
-// String returns the string representation
-func (s ListStackSetsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListStackSetsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListStackSetsInput"}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-	if s.NextToken != nil && len(*s.NextToken) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ListStackSetsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// If the request doesn't return all of the remaining results, NextToken is
-	// set to a token. To retrieve the next set of results, call ListStackInstances
-	// again and assign that token to the request object's NextToken parameter.
-	// If the request returns all results, NextToken is set to null.
-	NextToken *string `min:"1" type:"string"`
-
-	// A list of StackSetSummary structures that contain information about the user's
-	// stack sets.
-	Summaries []StackSetSummary `type:"list"`
-}
-
-// String returns the string representation
-func (s ListStackSetsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListStackSets = "ListStackSets"
 
@@ -85,7 +25,7 @@ const opListStackSets = "ListStackSets"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ListStackSets
-func (c *Client) ListStackSetsRequest(input *ListStackSetsInput) ListStackSetsRequest {
+func (c *Client) ListStackSetsRequest(input *types.ListStackSetsInput) ListStackSetsRequest {
 	op := &aws.Operation{
 		Name:       opListStackSets,
 		HTTPMethod: "POST",
@@ -93,10 +33,10 @@ func (c *Client) ListStackSetsRequest(input *ListStackSetsInput) ListStackSetsRe
 	}
 
 	if input == nil {
-		input = &ListStackSetsInput{}
+		input = &types.ListStackSetsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListStackSetsOutput{})
+	req := c.newRequest(op, input, &types.ListStackSetsOutput{})
 	return ListStackSetsRequest{Request: req, Input: input, Copy: c.ListStackSetsRequest}
 }
 
@@ -104,8 +44,8 @@ func (c *Client) ListStackSetsRequest(input *ListStackSetsInput) ListStackSetsRe
 // ListStackSets API operation.
 type ListStackSetsRequest struct {
 	*aws.Request
-	Input *ListStackSetsInput
-	Copy  func(*ListStackSetsInput) ListStackSetsRequest
+	Input *types.ListStackSetsInput
+	Copy  func(*types.ListStackSetsInput) ListStackSetsRequest
 }
 
 // Send marshals and sends the ListStackSets API request.
@@ -117,7 +57,7 @@ func (r ListStackSetsRequest) Send(ctx context.Context) (*ListStackSetsResponse,
 	}
 
 	resp := &ListStackSetsResponse{
-		ListStackSetsOutput: r.Request.Data.(*ListStackSetsOutput),
+		ListStackSetsOutput: r.Request.Data.(*types.ListStackSetsOutput),
 		response:            &aws.Response{Request: r.Request},
 	}
 
@@ -127,7 +67,7 @@ func (r ListStackSetsRequest) Send(ctx context.Context) (*ListStackSetsResponse,
 // ListStackSetsResponse is the response type for the
 // ListStackSets API operation.
 type ListStackSetsResponse struct {
-	*ListStackSetsOutput
+	*types.ListStackSetsOutput
 
 	response *aws.Response
 }

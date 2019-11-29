@@ -6,63 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/service/waf"
+	"github.com/aws/aws-sdk-go-v2/service/wafregional/types"
 )
-
-type ListByteMatchSetsInput struct {
-	_ struct{} `type:"structure"`
-
-	// Specifies the number of ByteMatchSet objects that you want AWS WAF to return
-	// for this request. If you have more ByteMatchSets objects than the number
-	// you specify for Limit, the response includes a NextMarker value that you
-	// can use to get another batch of ByteMatchSet objects.
-	Limit *int64 `type:"integer"`
-
-	// If you specify a value for Limit and you have more ByteMatchSets than the
-	// value of Limit, AWS WAF returns a NextMarker value in the response that allows
-	// you to list another group of ByteMatchSets. For the second and subsequent
-	// ListByteMatchSets requests, specify the value of NextMarker from the previous
-	// response to get information about another batch of ByteMatchSets.
-	NextMarker *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s ListByteMatchSetsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListByteMatchSetsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListByteMatchSetsInput"}
-	if s.NextMarker != nil && len(*s.NextMarker) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("NextMarker", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ListByteMatchSetsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// An array of ByteMatchSetSummary objects.
-	ByteMatchSets []waf.ByteMatchSetSummary `type:"list"`
-
-	// If you have more ByteMatchSet objects than the number that you specified
-	// for Limit in the request, the response includes a NextMarker value. To list
-	// more ByteMatchSet objects, submit another ListByteMatchSets request, and
-	// specify the NextMarker value from the response in the NextMarker value in
-	// the next request.
-	NextMarker *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s ListByteMatchSetsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListByteMatchSets = "ListByteMatchSets"
 
@@ -79,7 +24,7 @@ const opListByteMatchSets = "ListByteMatchSets"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/ListByteMatchSets
-func (c *Client) ListByteMatchSetsRequest(input *ListByteMatchSetsInput) ListByteMatchSetsRequest {
+func (c *Client) ListByteMatchSetsRequest(input *types.ListByteMatchSetsInput) ListByteMatchSetsRequest {
 	op := &aws.Operation{
 		Name:       opListByteMatchSets,
 		HTTPMethod: "POST",
@@ -87,10 +32,10 @@ func (c *Client) ListByteMatchSetsRequest(input *ListByteMatchSetsInput) ListByt
 	}
 
 	if input == nil {
-		input = &ListByteMatchSetsInput{}
+		input = &types.ListByteMatchSetsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListByteMatchSetsOutput{})
+	req := c.newRequest(op, input, &types.ListByteMatchSetsOutput{})
 	return ListByteMatchSetsRequest{Request: req, Input: input, Copy: c.ListByteMatchSetsRequest}
 }
 
@@ -98,8 +43,8 @@ func (c *Client) ListByteMatchSetsRequest(input *ListByteMatchSetsInput) ListByt
 // ListByteMatchSets API operation.
 type ListByteMatchSetsRequest struct {
 	*aws.Request
-	Input *ListByteMatchSetsInput
-	Copy  func(*ListByteMatchSetsInput) ListByteMatchSetsRequest
+	Input *types.ListByteMatchSetsInput
+	Copy  func(*types.ListByteMatchSetsInput) ListByteMatchSetsRequest
 }
 
 // Send marshals and sends the ListByteMatchSets API request.
@@ -111,7 +56,7 @@ func (r ListByteMatchSetsRequest) Send(ctx context.Context) (*ListByteMatchSetsR
 	}
 
 	resp := &ListByteMatchSetsResponse{
-		ListByteMatchSetsOutput: r.Request.Data.(*ListByteMatchSetsOutput),
+		ListByteMatchSetsOutput: r.Request.Data.(*types.ListByteMatchSetsOutput),
 		response:                &aws.Response{Request: r.Request},
 	}
 
@@ -121,7 +66,7 @@ func (r ListByteMatchSetsRequest) Send(ctx context.Context) (*ListByteMatchSetsR
 // ListByteMatchSetsResponse is the response type for the
 // ListByteMatchSets API operation.
 type ListByteMatchSetsResponse struct {
-	*ListByteMatchSetsOutput
+	*types.ListByteMatchSetsOutput
 
 	response *aws.Response
 }

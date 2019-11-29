@@ -6,53 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/alexaforbusiness/types"
 )
-
-type DeleteDeviceUsageDataInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ARN of the device.
-	//
-	// DeviceArn is a required field
-	DeviceArn *string `type:"string" required:"true"`
-
-	// The type of usage data to delete.
-	//
-	// DeviceUsageType is a required field
-	DeviceUsageType DeviceUsageType `type:"string" required:"true" enum:"true"`
-}
-
-// String returns the string representation
-func (s DeleteDeviceUsageDataInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteDeviceUsageDataInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteDeviceUsageDataInput"}
-
-	if s.DeviceArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DeviceArn"))
-	}
-	if len(s.DeviceUsageType) == 0 {
-		invalidParams.Add(aws.NewErrParamRequired("DeviceUsageType"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteDeviceUsageDataOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteDeviceUsageDataOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteDeviceUsageData = "DeleteDeviceUsageData"
 
@@ -72,7 +27,7 @@ const opDeleteDeviceUsageData = "DeleteDeviceUsageData"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/DeleteDeviceUsageData
-func (c *Client) DeleteDeviceUsageDataRequest(input *DeleteDeviceUsageDataInput) DeleteDeviceUsageDataRequest {
+func (c *Client) DeleteDeviceUsageDataRequest(input *types.DeleteDeviceUsageDataInput) DeleteDeviceUsageDataRequest {
 	op := &aws.Operation{
 		Name:       opDeleteDeviceUsageData,
 		HTTPMethod: "POST",
@@ -80,10 +35,10 @@ func (c *Client) DeleteDeviceUsageDataRequest(input *DeleteDeviceUsageDataInput)
 	}
 
 	if input == nil {
-		input = &DeleteDeviceUsageDataInput{}
+		input = &types.DeleteDeviceUsageDataInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteDeviceUsageDataOutput{})
+	req := c.newRequest(op, input, &types.DeleteDeviceUsageDataOutput{})
 	return DeleteDeviceUsageDataRequest{Request: req, Input: input, Copy: c.DeleteDeviceUsageDataRequest}
 }
 
@@ -91,8 +46,8 @@ func (c *Client) DeleteDeviceUsageDataRequest(input *DeleteDeviceUsageDataInput)
 // DeleteDeviceUsageData API operation.
 type DeleteDeviceUsageDataRequest struct {
 	*aws.Request
-	Input *DeleteDeviceUsageDataInput
-	Copy  func(*DeleteDeviceUsageDataInput) DeleteDeviceUsageDataRequest
+	Input *types.DeleteDeviceUsageDataInput
+	Copy  func(*types.DeleteDeviceUsageDataInput) DeleteDeviceUsageDataRequest
 }
 
 // Send marshals and sends the DeleteDeviceUsageData API request.
@@ -104,7 +59,7 @@ func (r DeleteDeviceUsageDataRequest) Send(ctx context.Context) (*DeleteDeviceUs
 	}
 
 	resp := &DeleteDeviceUsageDataResponse{
-		DeleteDeviceUsageDataOutput: r.Request.Data.(*DeleteDeviceUsageDataOutput),
+		DeleteDeviceUsageDataOutput: r.Request.Data.(*types.DeleteDeviceUsageDataOutput),
 		response:                    &aws.Response{Request: r.Request},
 	}
 
@@ -114,7 +69,7 @@ func (r DeleteDeviceUsageDataRequest) Send(ctx context.Context) (*DeleteDeviceUs
 // DeleteDeviceUsageDataResponse is the response type for the
 // DeleteDeviceUsageData API operation.
 type DeleteDeviceUsageDataResponse struct {
-	*DeleteDeviceUsageDataOutput
+	*types.DeleteDeviceUsageDataOutput
 
 	response *aws.Response
 }

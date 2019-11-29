@@ -4,75 +4,10 @@ package ec2
 
 import (
 	"context"
-	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-type ModifyInstanceEventStartTimeInput struct {
-	_ struct{} `type:"structure"`
-
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have
-	// the required permissions, the error response is DryRunOperation. Otherwise,
-	// it is UnauthorizedOperation.
-	DryRun *bool `type:"boolean"`
-
-	// The ID of the event whose date and time you are modifying.
-	//
-	// InstanceEventId is a required field
-	InstanceEventId *string `type:"string" required:"true"`
-
-	// The ID of the instance with the scheduled event.
-	//
-	// InstanceId is a required field
-	InstanceId *string `type:"string" required:"true"`
-
-	// The new date and time when the event will take place.
-	//
-	// NotBefore is a required field
-	NotBefore *time.Time `type:"timestamp" required:"true"`
-}
-
-// String returns the string representation
-func (s ModifyInstanceEventStartTimeInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ModifyInstanceEventStartTimeInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ModifyInstanceEventStartTimeInput"}
-
-	if s.InstanceEventId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("InstanceEventId"))
-	}
-
-	if s.InstanceId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("InstanceId"))
-	}
-
-	if s.NotBefore == nil {
-		invalidParams.Add(aws.NewErrParamRequired("NotBefore"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ModifyInstanceEventStartTimeOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Describes a scheduled event for an instance.
-	Event *InstanceStatusEvent `locationName:"event" type:"structure"`
-}
-
-// String returns the string representation
-func (s ModifyInstanceEventStartTimeOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opModifyInstanceEventStartTime = "ModifyInstanceEventStartTime"
 
@@ -89,7 +24,7 @@ const opModifyInstanceEventStartTime = "ModifyInstanceEventStartTime"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyInstanceEventStartTime
-func (c *Client) ModifyInstanceEventStartTimeRequest(input *ModifyInstanceEventStartTimeInput) ModifyInstanceEventStartTimeRequest {
+func (c *Client) ModifyInstanceEventStartTimeRequest(input *types.ModifyInstanceEventStartTimeInput) ModifyInstanceEventStartTimeRequest {
 	op := &aws.Operation{
 		Name:       opModifyInstanceEventStartTime,
 		HTTPMethod: "POST",
@@ -97,10 +32,10 @@ func (c *Client) ModifyInstanceEventStartTimeRequest(input *ModifyInstanceEventS
 	}
 
 	if input == nil {
-		input = &ModifyInstanceEventStartTimeInput{}
+		input = &types.ModifyInstanceEventStartTimeInput{}
 	}
 
-	req := c.newRequest(op, input, &ModifyInstanceEventStartTimeOutput{})
+	req := c.newRequest(op, input, &types.ModifyInstanceEventStartTimeOutput{})
 	return ModifyInstanceEventStartTimeRequest{Request: req, Input: input, Copy: c.ModifyInstanceEventStartTimeRequest}
 }
 
@@ -108,8 +43,8 @@ func (c *Client) ModifyInstanceEventStartTimeRequest(input *ModifyInstanceEventS
 // ModifyInstanceEventStartTime API operation.
 type ModifyInstanceEventStartTimeRequest struct {
 	*aws.Request
-	Input *ModifyInstanceEventStartTimeInput
-	Copy  func(*ModifyInstanceEventStartTimeInput) ModifyInstanceEventStartTimeRequest
+	Input *types.ModifyInstanceEventStartTimeInput
+	Copy  func(*types.ModifyInstanceEventStartTimeInput) ModifyInstanceEventStartTimeRequest
 }
 
 // Send marshals and sends the ModifyInstanceEventStartTime API request.
@@ -121,7 +56,7 @@ func (r ModifyInstanceEventStartTimeRequest) Send(ctx context.Context) (*ModifyI
 	}
 
 	resp := &ModifyInstanceEventStartTimeResponse{
-		ModifyInstanceEventStartTimeOutput: r.Request.Data.(*ModifyInstanceEventStartTimeOutput),
+		ModifyInstanceEventStartTimeOutput: r.Request.Data.(*types.ModifyInstanceEventStartTimeOutput),
 		response:                           &aws.Response{Request: r.Request},
 	}
 
@@ -131,7 +66,7 @@ func (r ModifyInstanceEventStartTimeRequest) Send(ctx context.Context) (*ModifyI
 // ModifyInstanceEventStartTimeResponse is the response type for the
 // ModifyInstanceEventStartTime API operation.
 type ModifyInstanceEventStartTimeResponse struct {
-	*ModifyInstanceEventStartTimeOutput
+	*types.ModifyInstanceEventStartTimeOutput
 
 	response *aws.Response
 }

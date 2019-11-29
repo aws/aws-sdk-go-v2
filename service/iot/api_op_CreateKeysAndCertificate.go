@@ -6,87 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/iot/types"
 )
-
-// The input for the CreateKeysAndCertificate operation.
-type CreateKeysAndCertificateInput struct {
-	_ struct{} `type:"structure"`
-
-	// Specifies whether the certificate is active.
-	SetAsActive *bool `location:"querystring" locationName:"setAsActive" type:"boolean"`
-}
-
-// String returns the string representation
-func (s CreateKeysAndCertificateInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s CreateKeysAndCertificateInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.SetAsActive != nil {
-		v := *s.SetAsActive
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "setAsActive", protocol.BoolValue(v), metadata)
-	}
-	return nil
-}
-
-// The output of the CreateKeysAndCertificate operation.
-type CreateKeysAndCertificateOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The ARN of the certificate.
-	CertificateArn *string `locationName:"certificateArn" type:"string"`
-
-	// The ID of the certificate. AWS IoT issues a default subject name for the
-	// certificate (for example, AWS IoT Certificate).
-	CertificateId *string `locationName:"certificateId" min:"64" type:"string"`
-
-	// The certificate data, in PEM format.
-	CertificatePem *string `locationName:"certificatePem" min:"1" type:"string"`
-
-	// The generated key pair.
-	KeyPair *KeyPair `locationName:"keyPair" type:"structure"`
-}
-
-// String returns the string representation
-func (s CreateKeysAndCertificateOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s CreateKeysAndCertificateOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.CertificateArn != nil {
-		v := *s.CertificateArn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "certificateArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.CertificateId != nil {
-		v := *s.CertificateId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "certificateId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.CertificatePem != nil {
-		v := *s.CertificatePem
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "certificatePem", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.KeyPair != nil {
-		v := s.KeyPair
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "keyPair", v, metadata)
-	}
-	return nil
-}
 
 const opCreateKeysAndCertificate = "CreateKeysAndCertificate"
 
@@ -105,7 +26,7 @@ const opCreateKeysAndCertificate = "CreateKeysAndCertificate"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) CreateKeysAndCertificateRequest(input *CreateKeysAndCertificateInput) CreateKeysAndCertificateRequest {
+func (c *Client) CreateKeysAndCertificateRequest(input *types.CreateKeysAndCertificateInput) CreateKeysAndCertificateRequest {
 	op := &aws.Operation{
 		Name:       opCreateKeysAndCertificate,
 		HTTPMethod: "POST",
@@ -113,10 +34,10 @@ func (c *Client) CreateKeysAndCertificateRequest(input *CreateKeysAndCertificate
 	}
 
 	if input == nil {
-		input = &CreateKeysAndCertificateInput{}
+		input = &types.CreateKeysAndCertificateInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateKeysAndCertificateOutput{})
+	req := c.newRequest(op, input, &types.CreateKeysAndCertificateOutput{})
 	return CreateKeysAndCertificateRequest{Request: req, Input: input, Copy: c.CreateKeysAndCertificateRequest}
 }
 
@@ -124,8 +45,8 @@ func (c *Client) CreateKeysAndCertificateRequest(input *CreateKeysAndCertificate
 // CreateKeysAndCertificate API operation.
 type CreateKeysAndCertificateRequest struct {
 	*aws.Request
-	Input *CreateKeysAndCertificateInput
-	Copy  func(*CreateKeysAndCertificateInput) CreateKeysAndCertificateRequest
+	Input *types.CreateKeysAndCertificateInput
+	Copy  func(*types.CreateKeysAndCertificateInput) CreateKeysAndCertificateRequest
 }
 
 // Send marshals and sends the CreateKeysAndCertificate API request.
@@ -137,7 +58,7 @@ func (r CreateKeysAndCertificateRequest) Send(ctx context.Context) (*CreateKeysA
 	}
 
 	resp := &CreateKeysAndCertificateResponse{
-		CreateKeysAndCertificateOutput: r.Request.Data.(*CreateKeysAndCertificateOutput),
+		CreateKeysAndCertificateOutput: r.Request.Data.(*types.CreateKeysAndCertificateOutput),
 		response:                       &aws.Response{Request: r.Request},
 	}
 
@@ -147,7 +68,7 @@ func (r CreateKeysAndCertificateRequest) Send(ctx context.Context) (*CreateKeysA
 // CreateKeysAndCertificateResponse is the response type for the
 // CreateKeysAndCertificate API operation.
 type CreateKeysAndCertificateResponse struct {
-	*CreateKeysAndCertificateOutput
+	*types.CreateKeysAndCertificateOutput
 
 	response *aws.Response
 }

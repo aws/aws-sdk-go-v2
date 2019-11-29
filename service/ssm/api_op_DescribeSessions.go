@@ -4,79 +4,10 @@ package ssm
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ssm/types"
 )
-
-type DescribeSessionsInput struct {
-	_ struct{} `type:"structure"`
-
-	// One or more filters to limit the type of sessions returned by the request.
-	Filters []SessionFilter `min:"1" type:"list"`
-
-	// The maximum number of items to return for this call. The call also returns
-	// a token that you can specify in a subsequent call to get the next set of
-	// results.
-	MaxResults *int64 `min:"1" type:"integer"`
-
-	// The token for the next set of items to return. (You received this token from
-	// a previous call.)
-	NextToken *string `type:"string"`
-
-	// The session status to retrieve a list of sessions for. For example, "Active".
-	//
-	// State is a required field
-	State SessionState `type:"string" required:"true" enum:"true"`
-}
-
-// String returns the string representation
-func (s DescribeSessionsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeSessionsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeSessionsInput"}
-	if s.Filters != nil && len(s.Filters) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Filters", 1))
-	}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-	if len(s.State) == 0 {
-		invalidParams.Add(aws.NewErrParamRequired("State"))
-	}
-	if s.Filters != nil {
-		for i, v := range s.Filters {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribeSessionsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The token for the next set of items to return. (You received this token from
-	// a previous call.)
-	NextToken *string `type:"string"`
-
-	// A list of sessions meeting the request parameters.
-	Sessions []Session `type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeSessionsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeSessions = "DescribeSessions"
 
@@ -94,7 +25,7 @@ const opDescribeSessions = "DescribeSessions"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeSessions
-func (c *Client) DescribeSessionsRequest(input *DescribeSessionsInput) DescribeSessionsRequest {
+func (c *Client) DescribeSessionsRequest(input *types.DescribeSessionsInput) DescribeSessionsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeSessions,
 		HTTPMethod: "POST",
@@ -102,10 +33,10 @@ func (c *Client) DescribeSessionsRequest(input *DescribeSessionsInput) DescribeS
 	}
 
 	if input == nil {
-		input = &DescribeSessionsInput{}
+		input = &types.DescribeSessionsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeSessionsOutput{})
+	req := c.newRequest(op, input, &types.DescribeSessionsOutput{})
 	return DescribeSessionsRequest{Request: req, Input: input, Copy: c.DescribeSessionsRequest}
 }
 
@@ -113,8 +44,8 @@ func (c *Client) DescribeSessionsRequest(input *DescribeSessionsInput) DescribeS
 // DescribeSessions API operation.
 type DescribeSessionsRequest struct {
 	*aws.Request
-	Input *DescribeSessionsInput
-	Copy  func(*DescribeSessionsInput) DescribeSessionsRequest
+	Input *types.DescribeSessionsInput
+	Copy  func(*types.DescribeSessionsInput) DescribeSessionsRequest
 }
 
 // Send marshals and sends the DescribeSessions API request.
@@ -126,7 +57,7 @@ func (r DescribeSessionsRequest) Send(ctx context.Context) (*DescribeSessionsRes
 	}
 
 	resp := &DescribeSessionsResponse{
-		DescribeSessionsOutput: r.Request.Data.(*DescribeSessionsOutput),
+		DescribeSessionsOutput: r.Request.Data.(*types.DescribeSessionsOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -136,7 +67,7 @@ func (r DescribeSessionsRequest) Send(ctx context.Context) (*DescribeSessionsRes
 // DescribeSessionsResponse is the response type for the
 // DescribeSessions API operation.
 type DescribeSessionsResponse struct {
-	*DescribeSessionsOutput
+	*types.DescribeSessionsOutput
 
 	response *aws.Response
 }

@@ -6,60 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/applicationinsights/types"
 )
-
-type UpdateComponentInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the component.
-	//
-	// ComponentName is a required field
-	ComponentName *string `type:"string" required:"true"`
-
-	// The new name of the component.
-	NewComponentName *string `type:"string"`
-
-	// The name of the resource group.
-	//
-	// ResourceGroupName is a required field
-	ResourceGroupName *string `type:"string" required:"true"`
-
-	// The list of resource ARNs that belong to the component.
-	ResourceList []string `type:"list"`
-}
-
-// String returns the string representation
-func (s UpdateComponentInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateComponentInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateComponentInput"}
-
-	if s.ComponentName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ComponentName"))
-	}
-
-	if s.ResourceGroupName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ResourceGroupName"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type UpdateComponentOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s UpdateComponentOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opUpdateComponent = "UpdateComponent"
 
@@ -77,7 +25,7 @@ const opUpdateComponent = "UpdateComponent"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/application-insights-2018-11-25/UpdateComponent
-func (c *Client) UpdateComponentRequest(input *UpdateComponentInput) UpdateComponentRequest {
+func (c *Client) UpdateComponentRequest(input *types.UpdateComponentInput) UpdateComponentRequest {
 	op := &aws.Operation{
 		Name:       opUpdateComponent,
 		HTTPMethod: "POST",
@@ -85,10 +33,10 @@ func (c *Client) UpdateComponentRequest(input *UpdateComponentInput) UpdateCompo
 	}
 
 	if input == nil {
-		input = &UpdateComponentInput{}
+		input = &types.UpdateComponentInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateComponentOutput{})
+	req := c.newRequest(op, input, &types.UpdateComponentOutput{})
 	return UpdateComponentRequest{Request: req, Input: input, Copy: c.UpdateComponentRequest}
 }
 
@@ -96,8 +44,8 @@ func (c *Client) UpdateComponentRequest(input *UpdateComponentInput) UpdateCompo
 // UpdateComponent API operation.
 type UpdateComponentRequest struct {
 	*aws.Request
-	Input *UpdateComponentInput
-	Copy  func(*UpdateComponentInput) UpdateComponentRequest
+	Input *types.UpdateComponentInput
+	Copy  func(*types.UpdateComponentInput) UpdateComponentRequest
 }
 
 // Send marshals and sends the UpdateComponent API request.
@@ -109,7 +57,7 @@ func (r UpdateComponentRequest) Send(ctx context.Context) (*UpdateComponentRespo
 	}
 
 	resp := &UpdateComponentResponse{
-		UpdateComponentOutput: r.Request.Data.(*UpdateComponentOutput),
+		UpdateComponentOutput: r.Request.Data.(*types.UpdateComponentOutput),
 		response:              &aws.Response{Request: r.Request},
 	}
 
@@ -119,7 +67,7 @@ func (r UpdateComponentRequest) Send(ctx context.Context) (*UpdateComponentRespo
 // UpdateComponentResponse is the response type for the
 // UpdateComponent API operation.
 type UpdateComponentResponse struct {
-	*UpdateComponentOutput
+	*types.UpdateComponentOutput
 
 	response *aws.Response
 }

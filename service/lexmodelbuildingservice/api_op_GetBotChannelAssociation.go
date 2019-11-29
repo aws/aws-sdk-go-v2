@@ -4,206 +4,10 @@ package lexmodelbuildingservice
 
 import (
 	"context"
-	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/lexmodelbuildingservice/types"
 )
-
-type GetBotChannelAssociationInput struct {
-	_ struct{} `type:"structure"`
-
-	// An alias pointing to the specific version of the Amazon Lex bot to which
-	// this association is being made.
-	//
-	// BotAlias is a required field
-	BotAlias *string `location:"uri" locationName:"aliasName" min:"1" type:"string" required:"true"`
-
-	// The name of the Amazon Lex bot.
-	//
-	// BotName is a required field
-	BotName *string `location:"uri" locationName:"botName" min:"2" type:"string" required:"true"`
-
-	// The name of the association between the bot and the channel. The name is
-	// case sensitive.
-	//
-	// Name is a required field
-	Name *string `location:"uri" locationName:"name" min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetBotChannelAssociationInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetBotChannelAssociationInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetBotChannelAssociationInput"}
-
-	if s.BotAlias == nil {
-		invalidParams.Add(aws.NewErrParamRequired("BotAlias"))
-	}
-	if s.BotAlias != nil && len(*s.BotAlias) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("BotAlias", 1))
-	}
-
-	if s.BotName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("BotName"))
-	}
-	if s.BotName != nil && len(*s.BotName) < 2 {
-		invalidParams.Add(aws.NewErrParamMinLen("BotName", 2))
-	}
-
-	if s.Name == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Name"))
-	}
-	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetBotChannelAssociationInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.BotAlias != nil {
-		v := *s.BotAlias
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "aliasName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.BotName != nil {
-		v := *s.BotName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "botName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Name != nil {
-		v := *s.Name
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type GetBotChannelAssociationOutput struct {
-	_ struct{} `type:"structure"`
-
-	// An alias pointing to the specific version of the Amazon Lex bot to which
-	// this association is being made.
-	BotAlias *string `locationName:"botAlias" min:"1" type:"string"`
-
-	// Provides information that the messaging platform needs to communicate with
-	// the Amazon Lex bot.
-	BotConfiguration map[string]string `locationName:"botConfiguration" min:"1" type:"map" sensitive:"true"`
-
-	// The name of the Amazon Lex bot.
-	BotName *string `locationName:"botName" min:"2" type:"string"`
-
-	// The date that the association between the bot and the channel was created.
-	CreatedDate *time.Time `locationName:"createdDate" type:"timestamp"`
-
-	// A description of the association between the bot and the channel.
-	Description *string `locationName:"description" type:"string"`
-
-	// If status is FAILED, Amazon Lex provides the reason that it failed to create
-	// the association.
-	FailureReason *string `locationName:"failureReason" type:"string"`
-
-	// The name of the association between the bot and the channel.
-	Name *string `locationName:"name" min:"1" type:"string"`
-
-	// The status of the bot channel.
-	//
-	//    * CREATED - The channel has been created and is ready for use.
-	//
-	//    * IN_PROGRESS - Channel creation is in progress.
-	//
-	//    * FAILED - There was an error creating the channel. For information about
-	//    the reason for the failure, see the failureReason field.
-	Status ChannelStatus `locationName:"status" type:"string" enum:"true"`
-
-	// The type of the messaging platform.
-	Type ChannelType `locationName:"type" type:"string" enum:"true"`
-}
-
-// String returns the string representation
-func (s GetBotChannelAssociationOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetBotChannelAssociationOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.BotAlias != nil {
-		v := *s.BotAlias
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "botAlias", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.BotConfiguration != nil {
-		v := s.BotConfiguration
-
-		metadata := protocol.Metadata{}
-		ms0 := e.Map(protocol.BodyTarget, "botConfiguration", metadata)
-		ms0.Start()
-		for k1, v1 := range v {
-			ms0.MapSetValue(k1, protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
-		}
-		ms0.End()
-
-	}
-	if s.BotName != nil {
-		v := *s.BotName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "botName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.CreatedDate != nil {
-		v := *s.CreatedDate
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "createdDate",
-			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
-	}
-	if s.Description != nil {
-		v := *s.Description
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "description", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.FailureReason != nil {
-		v := *s.FailureReason
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "failureReason", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Name != nil {
-		v := *s.Name
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if len(s.Status) > 0 {
-		v := s.Status
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "status", protocol.QuotedValue{ValueMarshaler: v}, metadata)
-	}
-	if len(s.Type) > 0 {
-		v := s.Type
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "type", protocol.QuotedValue{ValueMarshaler: v}, metadata)
-	}
-	return nil
-}
 
 const opGetBotChannelAssociation = "GetBotChannelAssociation"
 
@@ -224,7 +28,7 @@ const opGetBotChannelAssociation = "GetBotChannelAssociation"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/GetBotChannelAssociation
-func (c *Client) GetBotChannelAssociationRequest(input *GetBotChannelAssociationInput) GetBotChannelAssociationRequest {
+func (c *Client) GetBotChannelAssociationRequest(input *types.GetBotChannelAssociationInput) GetBotChannelAssociationRequest {
 	op := &aws.Operation{
 		Name:       opGetBotChannelAssociation,
 		HTTPMethod: "GET",
@@ -232,10 +36,10 @@ func (c *Client) GetBotChannelAssociationRequest(input *GetBotChannelAssociation
 	}
 
 	if input == nil {
-		input = &GetBotChannelAssociationInput{}
+		input = &types.GetBotChannelAssociationInput{}
 	}
 
-	req := c.newRequest(op, input, &GetBotChannelAssociationOutput{})
+	req := c.newRequest(op, input, &types.GetBotChannelAssociationOutput{})
 	return GetBotChannelAssociationRequest{Request: req, Input: input, Copy: c.GetBotChannelAssociationRequest}
 }
 
@@ -243,8 +47,8 @@ func (c *Client) GetBotChannelAssociationRequest(input *GetBotChannelAssociation
 // GetBotChannelAssociation API operation.
 type GetBotChannelAssociationRequest struct {
 	*aws.Request
-	Input *GetBotChannelAssociationInput
-	Copy  func(*GetBotChannelAssociationInput) GetBotChannelAssociationRequest
+	Input *types.GetBotChannelAssociationInput
+	Copy  func(*types.GetBotChannelAssociationInput) GetBotChannelAssociationRequest
 }
 
 // Send marshals and sends the GetBotChannelAssociation API request.
@@ -256,7 +60,7 @@ func (r GetBotChannelAssociationRequest) Send(ctx context.Context) (*GetBotChann
 	}
 
 	resp := &GetBotChannelAssociationResponse{
-		GetBotChannelAssociationOutput: r.Request.Data.(*GetBotChannelAssociationOutput),
+		GetBotChannelAssociationOutput: r.Request.Data.(*types.GetBotChannelAssociationOutput),
 		response:                       &aws.Response{Request: r.Request},
 	}
 
@@ -266,7 +70,7 @@ func (r GetBotChannelAssociationRequest) Send(ctx context.Context) (*GetBotChann
 // GetBotChannelAssociationResponse is the response type for the
 // GetBotChannelAssociation API operation.
 type GetBotChannelAssociationResponse struct {
-	*GetBotChannelAssociationOutput
+	*types.GetBotChannelAssociationOutput
 
 	response *aws.Response
 }

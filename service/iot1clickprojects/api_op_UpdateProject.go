@@ -6,88 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/iot1clickprojects/types"
 )
-
-type UpdateProjectInput struct {
-	_ struct{} `type:"structure"`
-
-	// An optional user-defined description for the project.
-	Description *string `locationName:"description" type:"string"`
-
-	// An object defining the project update. Once a project has been created, you
-	// cannot add device template names to the project. However, for a given placementTemplate,
-	// you can update the associated callbackOverrides for the device definition
-	// using this API.
-	PlacementTemplate *PlacementTemplate `locationName:"placementTemplate" type:"structure"`
-
-	// The name of the project to be updated.
-	//
-	// ProjectName is a required field
-	ProjectName *string `location:"uri" locationName:"projectName" min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s UpdateProjectInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateProjectInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateProjectInput"}
-
-	if s.ProjectName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ProjectName"))
-	}
-	if s.ProjectName != nil && len(*s.ProjectName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ProjectName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s UpdateProjectInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.Description != nil {
-		v := *s.Description
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "description", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.PlacementTemplate != nil {
-		v := s.PlacementTemplate
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "placementTemplate", v, metadata)
-	}
-	if s.ProjectName != nil {
-		v := *s.ProjectName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "projectName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type UpdateProjectOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s UpdateProjectOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s UpdateProjectOutput) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
 
 const opUpdateProject = "UpdateProject"
 
@@ -107,7 +27,7 @@ const opUpdateProject = "UpdateProject"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iot1click-projects-2018-05-14/UpdateProject
-func (c *Client) UpdateProjectRequest(input *UpdateProjectInput) UpdateProjectRequest {
+func (c *Client) UpdateProjectRequest(input *types.UpdateProjectInput) UpdateProjectRequest {
 	op := &aws.Operation{
 		Name:       opUpdateProject,
 		HTTPMethod: "PUT",
@@ -115,10 +35,10 @@ func (c *Client) UpdateProjectRequest(input *UpdateProjectInput) UpdateProjectRe
 	}
 
 	if input == nil {
-		input = &UpdateProjectInput{}
+		input = &types.UpdateProjectInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateProjectOutput{})
+	req := c.newRequest(op, input, &types.UpdateProjectOutput{})
 	return UpdateProjectRequest{Request: req, Input: input, Copy: c.UpdateProjectRequest}
 }
 
@@ -126,8 +46,8 @@ func (c *Client) UpdateProjectRequest(input *UpdateProjectInput) UpdateProjectRe
 // UpdateProject API operation.
 type UpdateProjectRequest struct {
 	*aws.Request
-	Input *UpdateProjectInput
-	Copy  func(*UpdateProjectInput) UpdateProjectRequest
+	Input *types.UpdateProjectInput
+	Copy  func(*types.UpdateProjectInput) UpdateProjectRequest
 }
 
 // Send marshals and sends the UpdateProject API request.
@@ -139,7 +59,7 @@ func (r UpdateProjectRequest) Send(ctx context.Context) (*UpdateProjectResponse,
 	}
 
 	resp := &UpdateProjectResponse{
-		UpdateProjectOutput: r.Request.Data.(*UpdateProjectOutput),
+		UpdateProjectOutput: r.Request.Data.(*types.UpdateProjectOutput),
 		response:            &aws.Response{Request: r.Request},
 	}
 
@@ -149,7 +69,7 @@ func (r UpdateProjectRequest) Send(ctx context.Context) (*UpdateProjectResponse,
 // UpdateProjectResponse is the response type for the
 // UpdateProject API operation.
 type UpdateProjectResponse struct {
-	*UpdateProjectOutput
+	*types.UpdateProjectOutput
 
 	response *aws.Response
 }

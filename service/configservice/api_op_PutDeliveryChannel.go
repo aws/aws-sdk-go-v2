@@ -6,54 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
+	"github.com/aws/aws-sdk-go-v2/service/configservice/types"
 )
-
-// The input for the PutDeliveryChannel action.
-type PutDeliveryChannelInput struct {
-	_ struct{} `type:"structure"`
-
-	// The configuration delivery channel object that delivers the configuration
-	// information to an Amazon S3 bucket and to an Amazon SNS topic.
-	//
-	// DeliveryChannel is a required field
-	DeliveryChannel *DeliveryChannel `type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s PutDeliveryChannelInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *PutDeliveryChannelInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "PutDeliveryChannelInput"}
-
-	if s.DeliveryChannel == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DeliveryChannel"))
-	}
-	if s.DeliveryChannel != nil {
-		if err := s.DeliveryChannel.Validate(); err != nil {
-			invalidParams.AddNested("DeliveryChannel", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type PutDeliveryChannelOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s PutDeliveryChannelOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opPutDeliveryChannel = "PutDeliveryChannel"
 
@@ -83,7 +39,7 @@ const opPutDeliveryChannel = "PutDeliveryChannel"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/PutDeliveryChannel
-func (c *Client) PutDeliveryChannelRequest(input *PutDeliveryChannelInput) PutDeliveryChannelRequest {
+func (c *Client) PutDeliveryChannelRequest(input *types.PutDeliveryChannelInput) PutDeliveryChannelRequest {
 	op := &aws.Operation{
 		Name:       opPutDeliveryChannel,
 		HTTPMethod: "POST",
@@ -91,10 +47,10 @@ func (c *Client) PutDeliveryChannelRequest(input *PutDeliveryChannelInput) PutDe
 	}
 
 	if input == nil {
-		input = &PutDeliveryChannelInput{}
+		input = &types.PutDeliveryChannelInput{}
 	}
 
-	req := c.newRequest(op, input, &PutDeliveryChannelOutput{})
+	req := c.newRequest(op, input, &types.PutDeliveryChannelOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return PutDeliveryChannelRequest{Request: req, Input: input, Copy: c.PutDeliveryChannelRequest}
@@ -104,8 +60,8 @@ func (c *Client) PutDeliveryChannelRequest(input *PutDeliveryChannelInput) PutDe
 // PutDeliveryChannel API operation.
 type PutDeliveryChannelRequest struct {
 	*aws.Request
-	Input *PutDeliveryChannelInput
-	Copy  func(*PutDeliveryChannelInput) PutDeliveryChannelRequest
+	Input *types.PutDeliveryChannelInput
+	Copy  func(*types.PutDeliveryChannelInput) PutDeliveryChannelRequest
 }
 
 // Send marshals and sends the PutDeliveryChannel API request.
@@ -117,7 +73,7 @@ func (r PutDeliveryChannelRequest) Send(ctx context.Context) (*PutDeliveryChanne
 	}
 
 	resp := &PutDeliveryChannelResponse{
-		PutDeliveryChannelOutput: r.Request.Data.(*PutDeliveryChannelOutput),
+		PutDeliveryChannelOutput: r.Request.Data.(*types.PutDeliveryChannelOutput),
 		response:                 &aws.Response{Request: r.Request},
 	}
 
@@ -127,7 +83,7 @@ func (r PutDeliveryChannelRequest) Send(ctx context.Context) (*PutDeliveryChanne
 // PutDeliveryChannelResponse is the response type for the
 // PutDeliveryChannel API operation.
 type PutDeliveryChannelResponse struct {
-	*PutDeliveryChannelOutput
+	*types.PutDeliveryChannelOutput
 
 	response *aws.Response
 }

@@ -4,100 +4,10 @@ package neptune
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/neptune/types"
 )
-
-type DescribeDBEngineVersionsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of a specific DB parameter group family to return details for.
-	//
-	// Constraints:
-	//
-	//    * If supplied, must match an existing DBParameterGroupFamily.
-	DBParameterGroupFamily *string `type:"string"`
-
-	// Indicates that only the default version of the specified engine or engine
-	// and major version combination is returned.
-	DefaultOnly *bool `type:"boolean"`
-
-	// The database engine to return.
-	Engine *string `type:"string"`
-
-	// The database engine version to return.
-	//
-	// Example: 5.1.49
-	EngineVersion *string `type:"string"`
-
-	// Not currently supported.
-	Filters []Filter `locationNameList:"Filter" type:"list"`
-
-	// If this parameter is specified and the requested engine supports the CharacterSetName
-	// parameter for CreateDBInstance, the response includes a list of supported
-	// character sets for each engine version.
-	ListSupportedCharacterSets *bool `type:"boolean"`
-
-	// If this parameter is specified and the requested engine supports the TimeZone
-	// parameter for CreateDBInstance, the response includes a list of supported
-	// time zones for each engine version.
-	ListSupportedTimezones *bool `type:"boolean"`
-
-	// An optional pagination token provided by a previous request. If this parameter
-	// is specified, the response includes only records beyond the marker, up to
-	// the value specified by MaxRecords.
-	Marker *string `type:"string"`
-
-	// The maximum number of records to include in the response. If more than the
-	// MaxRecords value is available, a pagination token called a marker is included
-	// in the response so that the following results can be retrieved.
-	//
-	// Default: 100
-	//
-	// Constraints: Minimum 20, maximum 100.
-	MaxRecords *int64 `type:"integer"`
-}
-
-// String returns the string representation
-func (s DescribeDBEngineVersionsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeDBEngineVersionsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeDBEngineVersionsInput"}
-	if s.Filters != nil {
-		for i, v := range s.Filters {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribeDBEngineVersionsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A list of DBEngineVersion elements.
-	DBEngineVersions []DBEngineVersion `locationNameList:"DBEngineVersion" type:"list"`
-
-	// An optional pagination token provided by a previous request. If this parameter
-	// is specified, the response includes only records beyond the marker, up to
-	// the value specified by MaxRecords.
-	Marker *string `type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeDBEngineVersionsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeDBEngineVersions = "DescribeDBEngineVersions"
 
@@ -114,7 +24,7 @@ const opDescribeDBEngineVersions = "DescribeDBEngineVersions"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/DescribeDBEngineVersions
-func (c *Client) DescribeDBEngineVersionsRequest(input *DescribeDBEngineVersionsInput) DescribeDBEngineVersionsRequest {
+func (c *Client) DescribeDBEngineVersionsRequest(input *types.DescribeDBEngineVersionsInput) DescribeDBEngineVersionsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeDBEngineVersions,
 		HTTPMethod: "POST",
@@ -128,10 +38,10 @@ func (c *Client) DescribeDBEngineVersionsRequest(input *DescribeDBEngineVersions
 	}
 
 	if input == nil {
-		input = &DescribeDBEngineVersionsInput{}
+		input = &types.DescribeDBEngineVersionsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeDBEngineVersionsOutput{})
+	req := c.newRequest(op, input, &types.DescribeDBEngineVersionsOutput{})
 	return DescribeDBEngineVersionsRequest{Request: req, Input: input, Copy: c.DescribeDBEngineVersionsRequest}
 }
 
@@ -139,8 +49,8 @@ func (c *Client) DescribeDBEngineVersionsRequest(input *DescribeDBEngineVersions
 // DescribeDBEngineVersions API operation.
 type DescribeDBEngineVersionsRequest struct {
 	*aws.Request
-	Input *DescribeDBEngineVersionsInput
-	Copy  func(*DescribeDBEngineVersionsInput) DescribeDBEngineVersionsRequest
+	Input *types.DescribeDBEngineVersionsInput
+	Copy  func(*types.DescribeDBEngineVersionsInput) DescribeDBEngineVersionsRequest
 }
 
 // Send marshals and sends the DescribeDBEngineVersions API request.
@@ -152,7 +62,7 @@ func (r DescribeDBEngineVersionsRequest) Send(ctx context.Context) (*DescribeDBE
 	}
 
 	resp := &DescribeDBEngineVersionsResponse{
-		DescribeDBEngineVersionsOutput: r.Request.Data.(*DescribeDBEngineVersionsOutput),
+		DescribeDBEngineVersionsOutput: r.Request.Data.(*types.DescribeDBEngineVersionsOutput),
 		response:                       &aws.Response{Request: r.Request},
 	}
 
@@ -182,7 +92,7 @@ func NewDescribeDBEngineVersionsPaginator(req DescribeDBEngineVersionsRequest) D
 	return DescribeDBEngineVersionsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *DescribeDBEngineVersionsInput
+				var inCpy *types.DescribeDBEngineVersionsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -202,14 +112,14 @@ type DescribeDBEngineVersionsPaginator struct {
 	aws.Pager
 }
 
-func (p *DescribeDBEngineVersionsPaginator) CurrentPage() *DescribeDBEngineVersionsOutput {
-	return p.Pager.CurrentPage().(*DescribeDBEngineVersionsOutput)
+func (p *DescribeDBEngineVersionsPaginator) CurrentPage() *types.DescribeDBEngineVersionsOutput {
+	return p.Pager.CurrentPage().(*types.DescribeDBEngineVersionsOutput)
 }
 
 // DescribeDBEngineVersionsResponse is the response type for the
 // DescribeDBEngineVersions API operation.
 type DescribeDBEngineVersionsResponse struct {
-	*DescribeDBEngineVersionsOutput
+	*types.DescribeDBEngineVersionsOutput
 
 	response *aws.Response
 }

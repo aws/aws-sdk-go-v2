@@ -6,87 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
+	"github.com/aws/aws-sdk-go-v2/service/cognitoidentity/types"
 )
-
-// Input to the UnlinkDeveloperIdentity action.
-type UnlinkDeveloperIdentityInput struct {
-	_ struct{} `type:"structure"`
-
-	// The "domain" by which Cognito will refer to your users.
-	//
-	// DeveloperProviderName is a required field
-	DeveloperProviderName *string `min:"1" type:"string" required:"true"`
-
-	// A unique ID used by your backend authentication process to identify a user.
-	//
-	// DeveloperUserIdentifier is a required field
-	DeveloperUserIdentifier *string `min:"1" type:"string" required:"true"`
-
-	// A unique identifier in the format REGION:GUID.
-	//
-	// IdentityId is a required field
-	IdentityId *string `min:"1" type:"string" required:"true"`
-
-	// An identity pool ID in the format REGION:GUID.
-	//
-	// IdentityPoolId is a required field
-	IdentityPoolId *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s UnlinkDeveloperIdentityInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UnlinkDeveloperIdentityInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UnlinkDeveloperIdentityInput"}
-
-	if s.DeveloperProviderName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DeveloperProviderName"))
-	}
-	if s.DeveloperProviderName != nil && len(*s.DeveloperProviderName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("DeveloperProviderName", 1))
-	}
-
-	if s.DeveloperUserIdentifier == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DeveloperUserIdentifier"))
-	}
-	if s.DeveloperUserIdentifier != nil && len(*s.DeveloperUserIdentifier) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("DeveloperUserIdentifier", 1))
-	}
-
-	if s.IdentityId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("IdentityId"))
-	}
-	if s.IdentityId != nil && len(*s.IdentityId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("IdentityId", 1))
-	}
-
-	if s.IdentityPoolId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("IdentityPoolId"))
-	}
-	if s.IdentityPoolId != nil && len(*s.IdentityPoolId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("IdentityPoolId", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type UnlinkDeveloperIdentityOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s UnlinkDeveloperIdentityOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opUnlinkDeveloperIdentity = "UnlinkDeveloperIdentity"
 
@@ -108,7 +31,7 @@ const opUnlinkDeveloperIdentity = "UnlinkDeveloperIdentity"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-identity-2014-06-30/UnlinkDeveloperIdentity
-func (c *Client) UnlinkDeveloperIdentityRequest(input *UnlinkDeveloperIdentityInput) UnlinkDeveloperIdentityRequest {
+func (c *Client) UnlinkDeveloperIdentityRequest(input *types.UnlinkDeveloperIdentityInput) UnlinkDeveloperIdentityRequest {
 	op := &aws.Operation{
 		Name:       opUnlinkDeveloperIdentity,
 		HTTPMethod: "POST",
@@ -116,10 +39,10 @@ func (c *Client) UnlinkDeveloperIdentityRequest(input *UnlinkDeveloperIdentityIn
 	}
 
 	if input == nil {
-		input = &UnlinkDeveloperIdentityInput{}
+		input = &types.UnlinkDeveloperIdentityInput{}
 	}
 
-	req := c.newRequest(op, input, &UnlinkDeveloperIdentityOutput{})
+	req := c.newRequest(op, input, &types.UnlinkDeveloperIdentityOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return UnlinkDeveloperIdentityRequest{Request: req, Input: input, Copy: c.UnlinkDeveloperIdentityRequest}
@@ -129,8 +52,8 @@ func (c *Client) UnlinkDeveloperIdentityRequest(input *UnlinkDeveloperIdentityIn
 // UnlinkDeveloperIdentity API operation.
 type UnlinkDeveloperIdentityRequest struct {
 	*aws.Request
-	Input *UnlinkDeveloperIdentityInput
-	Copy  func(*UnlinkDeveloperIdentityInput) UnlinkDeveloperIdentityRequest
+	Input *types.UnlinkDeveloperIdentityInput
+	Copy  func(*types.UnlinkDeveloperIdentityInput) UnlinkDeveloperIdentityRequest
 }
 
 // Send marshals and sends the UnlinkDeveloperIdentity API request.
@@ -142,7 +65,7 @@ func (r UnlinkDeveloperIdentityRequest) Send(ctx context.Context) (*UnlinkDevelo
 	}
 
 	resp := &UnlinkDeveloperIdentityResponse{
-		UnlinkDeveloperIdentityOutput: r.Request.Data.(*UnlinkDeveloperIdentityOutput),
+		UnlinkDeveloperIdentityOutput: r.Request.Data.(*types.UnlinkDeveloperIdentityOutput),
 		response:                      &aws.Response{Request: r.Request},
 	}
 
@@ -152,7 +75,7 @@ func (r UnlinkDeveloperIdentityRequest) Send(ctx context.Context) (*UnlinkDevelo
 // UnlinkDeveloperIdentityResponse is the response type for the
 // UnlinkDeveloperIdentity API operation.
 type UnlinkDeveloperIdentityResponse struct {
-	*UnlinkDeveloperIdentityOutput
+	*types.UnlinkDeveloperIdentityOutput
 
 	response *aws.Response
 }

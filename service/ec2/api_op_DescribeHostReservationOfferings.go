@@ -6,80 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-type DescribeHostReservationOfferingsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The filters.
-	//
-	//    * instance-family - The instance family of the offering (for example,
-	//    m4).
-	//
-	//    * payment-option - The payment option (NoUpfront | PartialUpfront | AllUpfront).
-	Filter []Filter `locationNameList:"Filter" type:"list"`
-
-	// This is the maximum duration of the reservation to purchase, specified in
-	// seconds. Reservations are available in one-year and three-year terms. The
-	// number of seconds specified must be the number of seconds in a year (365x24x60x60)
-	// times one of the supported durations (1 or 3). For example, specify 94608000
-	// for three years.
-	MaxDuration *int64 `type:"integer"`
-
-	// The maximum number of results to return for the request in a single page.
-	// The remaining results can be seen by sending another request with the returned
-	// nextToken value. This value can be between 5 and 500. If maxResults is given
-	// a larger value than 500, you receive an error.
-	MaxResults *int64 `min:"5" type:"integer"`
-
-	// This is the minimum duration of the reservation you'd like to purchase, specified
-	// in seconds. Reservations are available in one-year and three-year terms.
-	// The number of seconds specified must be the number of seconds in a year (365x24x60x60)
-	// times one of the supported durations (1 or 3). For example, specify 31536000
-	// for one year.
-	MinDuration *int64 `type:"integer"`
-
-	// The token to use to retrieve the next page of results.
-	NextToken *string `type:"string"`
-
-	// The ID of the reservation offering.
-	OfferingId *string `type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeHostReservationOfferingsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeHostReservationOfferingsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeHostReservationOfferingsInput"}
-	if s.MaxResults != nil && *s.MaxResults < 5 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 5))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribeHostReservationOfferingsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The token to use to retrieve the next page of results. This value is null
-	// when there are no more results to return.
-	NextToken *string `locationName:"nextToken" type:"string"`
-
-	// Information about the offerings.
-	OfferingSet []HostOffering `locationName:"offeringSet" locationNameList:"item" type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeHostReservationOfferingsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeHostReservationOfferings = "DescribeHostReservationOfferings"
 
@@ -104,7 +32,7 @@ const opDescribeHostReservationOfferings = "DescribeHostReservationOfferings"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeHostReservationOfferings
-func (c *Client) DescribeHostReservationOfferingsRequest(input *DescribeHostReservationOfferingsInput) DescribeHostReservationOfferingsRequest {
+func (c *Client) DescribeHostReservationOfferingsRequest(input *types.DescribeHostReservationOfferingsInput) DescribeHostReservationOfferingsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeHostReservationOfferings,
 		HTTPMethod: "POST",
@@ -118,10 +46,10 @@ func (c *Client) DescribeHostReservationOfferingsRequest(input *DescribeHostRese
 	}
 
 	if input == nil {
-		input = &DescribeHostReservationOfferingsInput{}
+		input = &types.DescribeHostReservationOfferingsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeHostReservationOfferingsOutput{})
+	req := c.newRequest(op, input, &types.DescribeHostReservationOfferingsOutput{})
 	return DescribeHostReservationOfferingsRequest{Request: req, Input: input, Copy: c.DescribeHostReservationOfferingsRequest}
 }
 
@@ -129,8 +57,8 @@ func (c *Client) DescribeHostReservationOfferingsRequest(input *DescribeHostRese
 // DescribeHostReservationOfferings API operation.
 type DescribeHostReservationOfferingsRequest struct {
 	*aws.Request
-	Input *DescribeHostReservationOfferingsInput
-	Copy  func(*DescribeHostReservationOfferingsInput) DescribeHostReservationOfferingsRequest
+	Input *types.DescribeHostReservationOfferingsInput
+	Copy  func(*types.DescribeHostReservationOfferingsInput) DescribeHostReservationOfferingsRequest
 }
 
 // Send marshals and sends the DescribeHostReservationOfferings API request.
@@ -142,7 +70,7 @@ func (r DescribeHostReservationOfferingsRequest) Send(ctx context.Context) (*Des
 	}
 
 	resp := &DescribeHostReservationOfferingsResponse{
-		DescribeHostReservationOfferingsOutput: r.Request.Data.(*DescribeHostReservationOfferingsOutput),
+		DescribeHostReservationOfferingsOutput: r.Request.Data.(*types.DescribeHostReservationOfferingsOutput),
 		response:                               &aws.Response{Request: r.Request},
 	}
 
@@ -172,7 +100,7 @@ func NewDescribeHostReservationOfferingsPaginator(req DescribeHostReservationOff
 	return DescribeHostReservationOfferingsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *DescribeHostReservationOfferingsInput
+				var inCpy *types.DescribeHostReservationOfferingsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -192,14 +120,14 @@ type DescribeHostReservationOfferingsPaginator struct {
 	aws.Pager
 }
 
-func (p *DescribeHostReservationOfferingsPaginator) CurrentPage() *DescribeHostReservationOfferingsOutput {
-	return p.Pager.CurrentPage().(*DescribeHostReservationOfferingsOutput)
+func (p *DescribeHostReservationOfferingsPaginator) CurrentPage() *types.DescribeHostReservationOfferingsOutput {
+	return p.Pager.CurrentPage().(*types.DescribeHostReservationOfferingsOutput)
 }
 
 // DescribeHostReservationOfferingsResponse is the response type for the
 // DescribeHostReservationOfferings API operation.
 type DescribeHostReservationOfferingsResponse struct {
-	*DescribeHostReservationOfferingsOutput
+	*types.DescribeHostReservationOfferingsOutput
 
 	response *aws.Response
 }

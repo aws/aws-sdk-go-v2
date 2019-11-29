@@ -6,78 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/route53/types"
 )
-
-// A request to get information about a specified reusable delegation set.
-type GetReusableDelegationSetInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the reusable delegation set that you want to get a list of name
-	// servers for.
-	//
-	// Id is a required field
-	Id *string `location:"uri" locationName:"Id" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetReusableDelegationSetInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetReusableDelegationSetInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetReusableDelegationSetInput"}
-
-	if s.Id == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Id"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetReusableDelegationSetInput) MarshalFields(e protocol.FieldEncoder) error {
-
-	if s.Id != nil {
-		v := *s.Id
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "Id", protocol.StringValue(v), metadata)
-	}
-	return nil
-}
-
-// A complex type that contains the response to the GetReusableDelegationSet
-// request.
-type GetReusableDelegationSetOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A complex type that contains information about the reusable delegation set.
-	//
-	// DelegationSet is a required field
-	DelegationSet *DelegationSet `type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s GetReusableDelegationSetOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetReusableDelegationSetOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.DelegationSet != nil {
-		v := s.DelegationSet
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "DelegationSet", v, metadata)
-	}
-	return nil
-}
 
 const opGetReusableDelegationSet = "GetReusableDelegationSet"
 
@@ -95,7 +25,7 @@ const opGetReusableDelegationSet = "GetReusableDelegationSet"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/GetReusableDelegationSet
-func (c *Client) GetReusableDelegationSetRequest(input *GetReusableDelegationSetInput) GetReusableDelegationSetRequest {
+func (c *Client) GetReusableDelegationSetRequest(input *types.GetReusableDelegationSetInput) GetReusableDelegationSetRequest {
 	op := &aws.Operation{
 		Name:       opGetReusableDelegationSet,
 		HTTPMethod: "GET",
@@ -103,10 +33,10 @@ func (c *Client) GetReusableDelegationSetRequest(input *GetReusableDelegationSet
 	}
 
 	if input == nil {
-		input = &GetReusableDelegationSetInput{}
+		input = &types.GetReusableDelegationSetInput{}
 	}
 
-	req := c.newRequest(op, input, &GetReusableDelegationSetOutput{})
+	req := c.newRequest(op, input, &types.GetReusableDelegationSetOutput{})
 	return GetReusableDelegationSetRequest{Request: req, Input: input, Copy: c.GetReusableDelegationSetRequest}
 }
 
@@ -114,8 +44,8 @@ func (c *Client) GetReusableDelegationSetRequest(input *GetReusableDelegationSet
 // GetReusableDelegationSet API operation.
 type GetReusableDelegationSetRequest struct {
 	*aws.Request
-	Input *GetReusableDelegationSetInput
-	Copy  func(*GetReusableDelegationSetInput) GetReusableDelegationSetRequest
+	Input *types.GetReusableDelegationSetInput
+	Copy  func(*types.GetReusableDelegationSetInput) GetReusableDelegationSetRequest
 }
 
 // Send marshals and sends the GetReusableDelegationSet API request.
@@ -127,7 +57,7 @@ func (r GetReusableDelegationSetRequest) Send(ctx context.Context) (*GetReusable
 	}
 
 	resp := &GetReusableDelegationSetResponse{
-		GetReusableDelegationSetOutput: r.Request.Data.(*GetReusableDelegationSetOutput),
+		GetReusableDelegationSetOutput: r.Request.Data.(*types.GetReusableDelegationSetOutput),
 		response:                       &aws.Response{Request: r.Request},
 	}
 
@@ -137,7 +67,7 @@ func (r GetReusableDelegationSetRequest) Send(ctx context.Context) (*GetReusable
 // GetReusableDelegationSetResponse is the response type for the
 // GetReusableDelegationSet API operation.
 type GetReusableDelegationSetResponse struct {
-	*GetReusableDelegationSetOutput
+	*types.GetReusableDelegationSetOutput
 
 	response *aws.Response
 }

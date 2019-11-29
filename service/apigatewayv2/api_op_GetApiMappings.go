@@ -6,102 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/apigatewayv2/types"
 )
-
-type GetApiMappingsInput struct {
-	_ struct{} `type:"structure"`
-
-	// DomainName is a required field
-	DomainName *string `location:"uri" locationName:"domainName" type:"string" required:"true"`
-
-	MaxResults *string `location:"querystring" locationName:"maxResults" type:"string"`
-
-	NextToken *string `location:"querystring" locationName:"nextToken" type:"string"`
-}
-
-// String returns the string representation
-func (s GetApiMappingsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetApiMappingsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetApiMappingsInput"}
-
-	if s.DomainName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DomainName"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetApiMappingsInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.DomainName != nil {
-		v := *s.DomainName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "domainName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.MaxResults != nil {
-		v := *s.MaxResults
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "maxResults", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type GetApiMappingsOutput struct {
-	_ struct{} `type:"structure"`
-
-	Items []ApiMapping `locationName:"items" type:"list"`
-
-	// The next page of elements from this collection. Not valid for the last element
-	// of the collection.
-	NextToken *string `locationName:"nextToken" type:"string"`
-}
-
-// String returns the string representation
-func (s GetApiMappingsOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetApiMappingsOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.Items != nil {
-		v := s.Items
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "items", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opGetApiMappings = "GetApiMappings"
 
@@ -118,7 +24,7 @@ const opGetApiMappings = "GetApiMappings"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/apigatewayv2-2018-11-29/GetApiMappings
-func (c *Client) GetApiMappingsRequest(input *GetApiMappingsInput) GetApiMappingsRequest {
+func (c *Client) GetApiMappingsRequest(input *types.GetApiMappingsInput) GetApiMappingsRequest {
 	op := &aws.Operation{
 		Name:       opGetApiMappings,
 		HTTPMethod: "GET",
@@ -126,10 +32,10 @@ func (c *Client) GetApiMappingsRequest(input *GetApiMappingsInput) GetApiMapping
 	}
 
 	if input == nil {
-		input = &GetApiMappingsInput{}
+		input = &types.GetApiMappingsInput{}
 	}
 
-	req := c.newRequest(op, input, &GetApiMappingsOutput{})
+	req := c.newRequest(op, input, &types.GetApiMappingsOutput{})
 	return GetApiMappingsRequest{Request: req, Input: input, Copy: c.GetApiMappingsRequest}
 }
 
@@ -137,8 +43,8 @@ func (c *Client) GetApiMappingsRequest(input *GetApiMappingsInput) GetApiMapping
 // GetApiMappings API operation.
 type GetApiMappingsRequest struct {
 	*aws.Request
-	Input *GetApiMappingsInput
-	Copy  func(*GetApiMappingsInput) GetApiMappingsRequest
+	Input *types.GetApiMappingsInput
+	Copy  func(*types.GetApiMappingsInput) GetApiMappingsRequest
 }
 
 // Send marshals and sends the GetApiMappings API request.
@@ -150,7 +56,7 @@ func (r GetApiMappingsRequest) Send(ctx context.Context) (*GetApiMappingsRespons
 	}
 
 	resp := &GetApiMappingsResponse{
-		GetApiMappingsOutput: r.Request.Data.(*GetApiMappingsOutput),
+		GetApiMappingsOutput: r.Request.Data.(*types.GetApiMappingsOutput),
 		response:             &aws.Response{Request: r.Request},
 	}
 
@@ -160,7 +66,7 @@ func (r GetApiMappingsRequest) Send(ctx context.Context) (*GetApiMappingsRespons
 // GetApiMappingsResponse is the response type for the
 // GetApiMappings API operation.
 type GetApiMappingsResponse struct {
-	*GetApiMappingsOutput
+	*types.GetApiMappingsOutput
 
 	response *aws.Response
 }

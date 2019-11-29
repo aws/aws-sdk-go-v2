@@ -4,76 +4,10 @@ package athena
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/athena/types"
 )
-
-type CreateWorkGroupInput struct {
-	_ struct{} `type:"structure"`
-
-	// The configuration for the workgroup, which includes the location in Amazon
-	// S3 where query results are stored, the encryption configuration, if any,
-	// used for encrypting query results, whether the Amazon CloudWatch Metrics
-	// are enabled for the workgroup, the limit for the amount of bytes scanned
-	// (cutoff) per query, if it is specified, and whether workgroup's settings
-	// (specified with EnforceWorkGroupConfiguration) in the WorkGroupConfiguration
-	// override client-side settings. See WorkGroupConfiguration$EnforceWorkGroupConfiguration.
-	Configuration *WorkGroupConfiguration `type:"structure"`
-
-	// The workgroup description.
-	Description *string `type:"string"`
-
-	// The workgroup name.
-	//
-	// Name is a required field
-	Name *string `type:"string" required:"true"`
-
-	// One or more tags, separated by commas, that you want to attach to the workgroup
-	// as you create it.
-	Tags []Tag `type:"list"`
-}
-
-// String returns the string representation
-func (s CreateWorkGroupInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateWorkGroupInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateWorkGroupInput"}
-
-	if s.Name == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Name"))
-	}
-	if s.Configuration != nil {
-		if err := s.Configuration.Validate(); err != nil {
-			invalidParams.AddNested("Configuration", err.(aws.ErrInvalidParams))
-		}
-	}
-	if s.Tags != nil {
-		for i, v := range s.Tags {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type CreateWorkGroupOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s CreateWorkGroupOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCreateWorkGroup = "CreateWorkGroup"
 
@@ -90,7 +24,7 @@ const opCreateWorkGroup = "CreateWorkGroup"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/CreateWorkGroup
-func (c *Client) CreateWorkGroupRequest(input *CreateWorkGroupInput) CreateWorkGroupRequest {
+func (c *Client) CreateWorkGroupRequest(input *types.CreateWorkGroupInput) CreateWorkGroupRequest {
 	op := &aws.Operation{
 		Name:       opCreateWorkGroup,
 		HTTPMethod: "POST",
@@ -98,10 +32,10 @@ func (c *Client) CreateWorkGroupRequest(input *CreateWorkGroupInput) CreateWorkG
 	}
 
 	if input == nil {
-		input = &CreateWorkGroupInput{}
+		input = &types.CreateWorkGroupInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateWorkGroupOutput{})
+	req := c.newRequest(op, input, &types.CreateWorkGroupOutput{})
 	return CreateWorkGroupRequest{Request: req, Input: input, Copy: c.CreateWorkGroupRequest}
 }
 
@@ -109,8 +43,8 @@ func (c *Client) CreateWorkGroupRequest(input *CreateWorkGroupInput) CreateWorkG
 // CreateWorkGroup API operation.
 type CreateWorkGroupRequest struct {
 	*aws.Request
-	Input *CreateWorkGroupInput
-	Copy  func(*CreateWorkGroupInput) CreateWorkGroupRequest
+	Input *types.CreateWorkGroupInput
+	Copy  func(*types.CreateWorkGroupInput) CreateWorkGroupRequest
 }
 
 // Send marshals and sends the CreateWorkGroup API request.
@@ -122,7 +56,7 @@ func (r CreateWorkGroupRequest) Send(ctx context.Context) (*CreateWorkGroupRespo
 	}
 
 	resp := &CreateWorkGroupResponse{
-		CreateWorkGroupOutput: r.Request.Data.(*CreateWorkGroupOutput),
+		CreateWorkGroupOutput: r.Request.Data.(*types.CreateWorkGroupOutput),
 		response:              &aws.Response{Request: r.Request},
 	}
 
@@ -132,7 +66,7 @@ func (r CreateWorkGroupRequest) Send(ctx context.Context) (*CreateWorkGroupRespo
 // CreateWorkGroupResponse is the response type for the
 // CreateWorkGroup API operation.
 type CreateWorkGroupResponse struct {
-	*CreateWorkGroupOutput
+	*types.CreateWorkGroupOutput
 
 	response *aws.Response
 }

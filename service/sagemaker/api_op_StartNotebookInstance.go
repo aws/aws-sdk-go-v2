@@ -6,47 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
 )
-
-type StartNotebookInstanceInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the notebook instance to start.
-	//
-	// NotebookInstanceName is a required field
-	NotebookInstanceName *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s StartNotebookInstanceInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *StartNotebookInstanceInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "StartNotebookInstanceInput"}
-
-	if s.NotebookInstanceName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("NotebookInstanceName"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type StartNotebookInstanceOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s StartNotebookInstanceOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opStartNotebookInstance = "StartNotebookInstance"
 
@@ -67,7 +30,7 @@ const opStartNotebookInstance = "StartNotebookInstance"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/StartNotebookInstance
-func (c *Client) StartNotebookInstanceRequest(input *StartNotebookInstanceInput) StartNotebookInstanceRequest {
+func (c *Client) StartNotebookInstanceRequest(input *types.StartNotebookInstanceInput) StartNotebookInstanceRequest {
 	op := &aws.Operation{
 		Name:       opStartNotebookInstance,
 		HTTPMethod: "POST",
@@ -75,10 +38,10 @@ func (c *Client) StartNotebookInstanceRequest(input *StartNotebookInstanceInput)
 	}
 
 	if input == nil {
-		input = &StartNotebookInstanceInput{}
+		input = &types.StartNotebookInstanceInput{}
 	}
 
-	req := c.newRequest(op, input, &StartNotebookInstanceOutput{})
+	req := c.newRequest(op, input, &types.StartNotebookInstanceOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return StartNotebookInstanceRequest{Request: req, Input: input, Copy: c.StartNotebookInstanceRequest}
@@ -88,8 +51,8 @@ func (c *Client) StartNotebookInstanceRequest(input *StartNotebookInstanceInput)
 // StartNotebookInstance API operation.
 type StartNotebookInstanceRequest struct {
 	*aws.Request
-	Input *StartNotebookInstanceInput
-	Copy  func(*StartNotebookInstanceInput) StartNotebookInstanceRequest
+	Input *types.StartNotebookInstanceInput
+	Copy  func(*types.StartNotebookInstanceInput) StartNotebookInstanceRequest
 }
 
 // Send marshals and sends the StartNotebookInstance API request.
@@ -101,7 +64,7 @@ func (r StartNotebookInstanceRequest) Send(ctx context.Context) (*StartNotebookI
 	}
 
 	resp := &StartNotebookInstanceResponse{
-		StartNotebookInstanceOutput: r.Request.Data.(*StartNotebookInstanceOutput),
+		StartNotebookInstanceOutput: r.Request.Data.(*types.StartNotebookInstanceOutput),
 		response:                    &aws.Response{Request: r.Request},
 	}
 
@@ -111,7 +74,7 @@ func (r StartNotebookInstanceRequest) Send(ctx context.Context) (*StartNotebookI
 // StartNotebookInstanceResponse is the response type for the
 // StartNotebookInstance API operation.
 type StartNotebookInstanceResponse struct {
-	*StartNotebookInstanceOutput
+	*types.StartNotebookInstanceOutput
 
 	response *aws.Response
 }

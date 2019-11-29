@@ -6,57 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
+	"github.com/aws/aws-sdk-go-v2/service/cloudwatchevents/types"
 )
-
-type EnableRuleInput struct {
-	_ struct{} `type:"structure"`
-
-	// The event bus associated with the rule. If you omit this, the default event
-	// bus is used.
-	EventBusName *string `min:"1" type:"string"`
-
-	// The name of the rule.
-	//
-	// Name is a required field
-	Name *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s EnableRuleInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *EnableRuleInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "EnableRuleInput"}
-	if s.EventBusName != nil && len(*s.EventBusName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("EventBusName", 1))
-	}
-
-	if s.Name == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Name"))
-	}
-	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type EnableRuleOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s EnableRuleOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opEnableRule = "EnableRule"
 
@@ -77,7 +30,7 @@ const opEnableRule = "EnableRule"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/EnableRule
-func (c *Client) EnableRuleRequest(input *EnableRuleInput) EnableRuleRequest {
+func (c *Client) EnableRuleRequest(input *types.EnableRuleInput) EnableRuleRequest {
 	op := &aws.Operation{
 		Name:       opEnableRule,
 		HTTPMethod: "POST",
@@ -85,10 +38,10 @@ func (c *Client) EnableRuleRequest(input *EnableRuleInput) EnableRuleRequest {
 	}
 
 	if input == nil {
-		input = &EnableRuleInput{}
+		input = &types.EnableRuleInput{}
 	}
 
-	req := c.newRequest(op, input, &EnableRuleOutput{})
+	req := c.newRequest(op, input, &types.EnableRuleOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return EnableRuleRequest{Request: req, Input: input, Copy: c.EnableRuleRequest}
@@ -98,8 +51,8 @@ func (c *Client) EnableRuleRequest(input *EnableRuleInput) EnableRuleRequest {
 // EnableRule API operation.
 type EnableRuleRequest struct {
 	*aws.Request
-	Input *EnableRuleInput
-	Copy  func(*EnableRuleInput) EnableRuleRequest
+	Input *types.EnableRuleInput
+	Copy  func(*types.EnableRuleInput) EnableRuleRequest
 }
 
 // Send marshals and sends the EnableRule API request.
@@ -111,7 +64,7 @@ func (r EnableRuleRequest) Send(ctx context.Context) (*EnableRuleResponse, error
 	}
 
 	resp := &EnableRuleResponse{
-		EnableRuleOutput: r.Request.Data.(*EnableRuleOutput),
+		EnableRuleOutput: r.Request.Data.(*types.EnableRuleOutput),
 		response:         &aws.Response{Request: r.Request},
 	}
 
@@ -121,7 +74,7 @@ func (r EnableRuleRequest) Send(ctx context.Context) (*EnableRuleResponse, error
 // EnableRuleResponse is the response type for the
 // EnableRule API operation.
 type EnableRuleResponse struct {
-	*EnableRuleOutput
+	*types.EnableRuleOutput
 
 	response *aws.Response
 }

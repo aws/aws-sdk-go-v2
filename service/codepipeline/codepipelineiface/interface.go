@@ -10,6 +10,7 @@ package codepipelineiface
 
 import (
 	"github.com/aws/aws-sdk-go-v2/service/codepipeline"
+	"github.com/aws/aws-sdk-go-v2/service/codepipeline/types"
 )
 
 // ClientAPI provides an interface to enable mocking the
@@ -43,7 +44,7 @@ import (
 //    type mockClientClient struct {
 //        codepipelineiface.ClientPI
 //    }
-//    func (m *mockClientClient) AcknowledgeJob(input *codepipeline.AcknowledgeJobInput) (*codepipeline.AcknowledgeJobOutput, error) {
+//    func (m *mockClientClient) AcknowledgeJob(input *types.AcknowledgeJobInput) (*types.AcknowledgeJobOutput, error) {
 //        // mock response/functionality
 //    }
 //
@@ -61,77 +62,77 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type ClientAPI interface {
-	AcknowledgeJobRequest(*codepipeline.AcknowledgeJobInput) codepipeline.AcknowledgeJobRequest
+	AcknowledgeJobRequest(*types.AcknowledgeJobInput) codepipeline.AcknowledgeJobRequest
 
-	AcknowledgeThirdPartyJobRequest(*codepipeline.AcknowledgeThirdPartyJobInput) codepipeline.AcknowledgeThirdPartyJobRequest
+	AcknowledgeThirdPartyJobRequest(*types.AcknowledgeThirdPartyJobInput) codepipeline.AcknowledgeThirdPartyJobRequest
 
-	CreateCustomActionTypeRequest(*codepipeline.CreateCustomActionTypeInput) codepipeline.CreateCustomActionTypeRequest
+	CreateCustomActionTypeRequest(*types.CreateCustomActionTypeInput) codepipeline.CreateCustomActionTypeRequest
 
-	CreatePipelineRequest(*codepipeline.CreatePipelineInput) codepipeline.CreatePipelineRequest
+	CreatePipelineRequest(*types.CreatePipelineInput) codepipeline.CreatePipelineRequest
 
-	DeleteCustomActionTypeRequest(*codepipeline.DeleteCustomActionTypeInput) codepipeline.DeleteCustomActionTypeRequest
+	DeleteCustomActionTypeRequest(*types.DeleteCustomActionTypeInput) codepipeline.DeleteCustomActionTypeRequest
 
-	DeletePipelineRequest(*codepipeline.DeletePipelineInput) codepipeline.DeletePipelineRequest
+	DeletePipelineRequest(*types.DeletePipelineInput) codepipeline.DeletePipelineRequest
 
-	DeleteWebhookRequest(*codepipeline.DeleteWebhookInput) codepipeline.DeleteWebhookRequest
+	DeleteWebhookRequest(*types.DeleteWebhookInput) codepipeline.DeleteWebhookRequest
 
-	DeregisterWebhookWithThirdPartyRequest(*codepipeline.DeregisterWebhookWithThirdPartyInput) codepipeline.DeregisterWebhookWithThirdPartyRequest
+	DeregisterWebhookWithThirdPartyRequest(*types.DeregisterWebhookWithThirdPartyInput) codepipeline.DeregisterWebhookWithThirdPartyRequest
 
-	DisableStageTransitionRequest(*codepipeline.DisableStageTransitionInput) codepipeline.DisableStageTransitionRequest
+	DisableStageTransitionRequest(*types.DisableStageTransitionInput) codepipeline.DisableStageTransitionRequest
 
-	EnableStageTransitionRequest(*codepipeline.EnableStageTransitionInput) codepipeline.EnableStageTransitionRequest
+	EnableStageTransitionRequest(*types.EnableStageTransitionInput) codepipeline.EnableStageTransitionRequest
 
-	GetJobDetailsRequest(*codepipeline.GetJobDetailsInput) codepipeline.GetJobDetailsRequest
+	GetJobDetailsRequest(*types.GetJobDetailsInput) codepipeline.GetJobDetailsRequest
 
-	GetPipelineRequest(*codepipeline.GetPipelineInput) codepipeline.GetPipelineRequest
+	GetPipelineRequest(*types.GetPipelineInput) codepipeline.GetPipelineRequest
 
-	GetPipelineExecutionRequest(*codepipeline.GetPipelineExecutionInput) codepipeline.GetPipelineExecutionRequest
+	GetPipelineExecutionRequest(*types.GetPipelineExecutionInput) codepipeline.GetPipelineExecutionRequest
 
-	GetPipelineStateRequest(*codepipeline.GetPipelineStateInput) codepipeline.GetPipelineStateRequest
+	GetPipelineStateRequest(*types.GetPipelineStateInput) codepipeline.GetPipelineStateRequest
 
-	GetThirdPartyJobDetailsRequest(*codepipeline.GetThirdPartyJobDetailsInput) codepipeline.GetThirdPartyJobDetailsRequest
+	GetThirdPartyJobDetailsRequest(*types.GetThirdPartyJobDetailsInput) codepipeline.GetThirdPartyJobDetailsRequest
 
-	ListActionExecutionsRequest(*codepipeline.ListActionExecutionsInput) codepipeline.ListActionExecutionsRequest
+	ListActionExecutionsRequest(*types.ListActionExecutionsInput) codepipeline.ListActionExecutionsRequest
 
-	ListActionTypesRequest(*codepipeline.ListActionTypesInput) codepipeline.ListActionTypesRequest
+	ListActionTypesRequest(*types.ListActionTypesInput) codepipeline.ListActionTypesRequest
 
-	ListPipelineExecutionsRequest(*codepipeline.ListPipelineExecutionsInput) codepipeline.ListPipelineExecutionsRequest
+	ListPipelineExecutionsRequest(*types.ListPipelineExecutionsInput) codepipeline.ListPipelineExecutionsRequest
 
-	ListPipelinesRequest(*codepipeline.ListPipelinesInput) codepipeline.ListPipelinesRequest
+	ListPipelinesRequest(*types.ListPipelinesInput) codepipeline.ListPipelinesRequest
 
-	ListTagsForResourceRequest(*codepipeline.ListTagsForResourceInput) codepipeline.ListTagsForResourceRequest
+	ListTagsForResourceRequest(*types.ListTagsForResourceInput) codepipeline.ListTagsForResourceRequest
 
-	ListWebhooksRequest(*codepipeline.ListWebhooksInput) codepipeline.ListWebhooksRequest
+	ListWebhooksRequest(*types.ListWebhooksInput) codepipeline.ListWebhooksRequest
 
-	PollForJobsRequest(*codepipeline.PollForJobsInput) codepipeline.PollForJobsRequest
+	PollForJobsRequest(*types.PollForJobsInput) codepipeline.PollForJobsRequest
 
-	PollForThirdPartyJobsRequest(*codepipeline.PollForThirdPartyJobsInput) codepipeline.PollForThirdPartyJobsRequest
+	PollForThirdPartyJobsRequest(*types.PollForThirdPartyJobsInput) codepipeline.PollForThirdPartyJobsRequest
 
-	PutActionRevisionRequest(*codepipeline.PutActionRevisionInput) codepipeline.PutActionRevisionRequest
+	PutActionRevisionRequest(*types.PutActionRevisionInput) codepipeline.PutActionRevisionRequest
 
-	PutApprovalResultRequest(*codepipeline.PutApprovalResultInput) codepipeline.PutApprovalResultRequest
+	PutApprovalResultRequest(*types.PutApprovalResultInput) codepipeline.PutApprovalResultRequest
 
-	PutJobFailureResultRequest(*codepipeline.PutJobFailureResultInput) codepipeline.PutJobFailureResultRequest
+	PutJobFailureResultRequest(*types.PutJobFailureResultInput) codepipeline.PutJobFailureResultRequest
 
-	PutJobSuccessResultRequest(*codepipeline.PutJobSuccessResultInput) codepipeline.PutJobSuccessResultRequest
+	PutJobSuccessResultRequest(*types.PutJobSuccessResultInput) codepipeline.PutJobSuccessResultRequest
 
-	PutThirdPartyJobFailureResultRequest(*codepipeline.PutThirdPartyJobFailureResultInput) codepipeline.PutThirdPartyJobFailureResultRequest
+	PutThirdPartyJobFailureResultRequest(*types.PutThirdPartyJobFailureResultInput) codepipeline.PutThirdPartyJobFailureResultRequest
 
-	PutThirdPartyJobSuccessResultRequest(*codepipeline.PutThirdPartyJobSuccessResultInput) codepipeline.PutThirdPartyJobSuccessResultRequest
+	PutThirdPartyJobSuccessResultRequest(*types.PutThirdPartyJobSuccessResultInput) codepipeline.PutThirdPartyJobSuccessResultRequest
 
-	PutWebhookRequest(*codepipeline.PutWebhookInput) codepipeline.PutWebhookRequest
+	PutWebhookRequest(*types.PutWebhookInput) codepipeline.PutWebhookRequest
 
-	RegisterWebhookWithThirdPartyRequest(*codepipeline.RegisterWebhookWithThirdPartyInput) codepipeline.RegisterWebhookWithThirdPartyRequest
+	RegisterWebhookWithThirdPartyRequest(*types.RegisterWebhookWithThirdPartyInput) codepipeline.RegisterWebhookWithThirdPartyRequest
 
-	RetryStageExecutionRequest(*codepipeline.RetryStageExecutionInput) codepipeline.RetryStageExecutionRequest
+	RetryStageExecutionRequest(*types.RetryStageExecutionInput) codepipeline.RetryStageExecutionRequest
 
-	StartPipelineExecutionRequest(*codepipeline.StartPipelineExecutionInput) codepipeline.StartPipelineExecutionRequest
+	StartPipelineExecutionRequest(*types.StartPipelineExecutionInput) codepipeline.StartPipelineExecutionRequest
 
-	TagResourceRequest(*codepipeline.TagResourceInput) codepipeline.TagResourceRequest
+	TagResourceRequest(*types.TagResourceInput) codepipeline.TagResourceRequest
 
-	UntagResourceRequest(*codepipeline.UntagResourceInput) codepipeline.UntagResourceRequest
+	UntagResourceRequest(*types.UntagResourceInput) codepipeline.UntagResourceRequest
 
-	UpdatePipelineRequest(*codepipeline.UpdatePipelineInput) codepipeline.UpdatePipelineRequest
+	UpdatePipelineRequest(*types.UpdatePipelineInput) codepipeline.UpdatePipelineRequest
 }
 
 var _ ClientAPI = (*codepipeline.Client)(nil)

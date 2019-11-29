@@ -6,40 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/codedeploy/types"
 )
-
-// Represents the input of a ListGitHubAccountTokenNames operation.
-type ListGitHubAccountTokenNamesInput struct {
-	_ struct{} `type:"structure"`
-
-	// An identifier returned from the previous ListGitHubAccountTokenNames call.
-	// It can be used to return the next set of names in the list.
-	NextToken *string `locationName:"nextToken" type:"string"`
-}
-
-// String returns the string representation
-func (s ListGitHubAccountTokenNamesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Represents the output of a ListGitHubAccountTokenNames operation.
-type ListGitHubAccountTokenNamesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// If a large amount of information is returned, an identifier is also returned.
-	// It can be used in a subsequent ListGitHubAccountTokenNames call to return
-	// the next set of names in the list.
-	NextToken *string `locationName:"nextToken" type:"string"`
-
-	// A list of names of connections to GitHub accounts.
-	TokenNameList []string `locationName:"tokenNameList" type:"list"`
-}
-
-// String returns the string representation
-func (s ListGitHubAccountTokenNamesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListGitHubAccountTokenNames = "ListGitHubAccountTokenNames"
 
@@ -56,7 +24,7 @@ const opListGitHubAccountTokenNames = "ListGitHubAccountTokenNames"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/ListGitHubAccountTokenNames
-func (c *Client) ListGitHubAccountTokenNamesRequest(input *ListGitHubAccountTokenNamesInput) ListGitHubAccountTokenNamesRequest {
+func (c *Client) ListGitHubAccountTokenNamesRequest(input *types.ListGitHubAccountTokenNamesInput) ListGitHubAccountTokenNamesRequest {
 	op := &aws.Operation{
 		Name:       opListGitHubAccountTokenNames,
 		HTTPMethod: "POST",
@@ -64,10 +32,10 @@ func (c *Client) ListGitHubAccountTokenNamesRequest(input *ListGitHubAccountToke
 	}
 
 	if input == nil {
-		input = &ListGitHubAccountTokenNamesInput{}
+		input = &types.ListGitHubAccountTokenNamesInput{}
 	}
 
-	req := c.newRequest(op, input, &ListGitHubAccountTokenNamesOutput{})
+	req := c.newRequest(op, input, &types.ListGitHubAccountTokenNamesOutput{})
 	return ListGitHubAccountTokenNamesRequest{Request: req, Input: input, Copy: c.ListGitHubAccountTokenNamesRequest}
 }
 
@@ -75,8 +43,8 @@ func (c *Client) ListGitHubAccountTokenNamesRequest(input *ListGitHubAccountToke
 // ListGitHubAccountTokenNames API operation.
 type ListGitHubAccountTokenNamesRequest struct {
 	*aws.Request
-	Input *ListGitHubAccountTokenNamesInput
-	Copy  func(*ListGitHubAccountTokenNamesInput) ListGitHubAccountTokenNamesRequest
+	Input *types.ListGitHubAccountTokenNamesInput
+	Copy  func(*types.ListGitHubAccountTokenNamesInput) ListGitHubAccountTokenNamesRequest
 }
 
 // Send marshals and sends the ListGitHubAccountTokenNames API request.
@@ -88,7 +56,7 @@ func (r ListGitHubAccountTokenNamesRequest) Send(ctx context.Context) (*ListGitH
 	}
 
 	resp := &ListGitHubAccountTokenNamesResponse{
-		ListGitHubAccountTokenNamesOutput: r.Request.Data.(*ListGitHubAccountTokenNamesOutput),
+		ListGitHubAccountTokenNamesOutput: r.Request.Data.(*types.ListGitHubAccountTokenNamesOutput),
 		response:                          &aws.Response{Request: r.Request},
 	}
 
@@ -98,7 +66,7 @@ func (r ListGitHubAccountTokenNamesRequest) Send(ctx context.Context) (*ListGitH
 // ListGitHubAccountTokenNamesResponse is the response type for the
 // ListGitHubAccountTokenNames API operation.
 type ListGitHubAccountTokenNamesResponse struct {
-	*ListGitHubAccountTokenNamesOutput
+	*types.ListGitHubAccountTokenNamesOutput
 
 	response *aws.Response
 }

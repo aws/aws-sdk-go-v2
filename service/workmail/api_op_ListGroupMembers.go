@@ -6,77 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/workmail/types"
 )
-
-type ListGroupMembersInput struct {
-	_ struct{} `type:"structure"`
-
-	// The identifier for the group to which the members (users or groups) are associated.
-	//
-	// GroupId is a required field
-	GroupId *string `min:"12" type:"string" required:"true"`
-
-	// The maximum number of results to return in a single call.
-	MaxResults *int64 `min:"1" type:"integer"`
-
-	// The token to use to retrieve the next page of results. The first call does
-	// not contain any tokens.
-	NextToken *string `min:"1" type:"string"`
-
-	// The identifier for the organization under which the group exists.
-	//
-	// OrganizationId is a required field
-	OrganizationId *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s ListGroupMembersInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListGroupMembersInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListGroupMembersInput"}
-
-	if s.GroupId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("GroupId"))
-	}
-	if s.GroupId != nil && len(*s.GroupId) < 12 {
-		invalidParams.Add(aws.NewErrParamMinLen("GroupId", 12))
-	}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-	if s.NextToken != nil && len(*s.NextToken) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
-	}
-
-	if s.OrganizationId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("OrganizationId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ListGroupMembersOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The members associated to the group.
-	Members []Member `type:"list"`
-
-	// The token to use to retrieve the next page of results. The first call does
-	// not contain any tokens.
-	NextToken *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s ListGroupMembersOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListGroupMembers = "ListGroupMembers"
 
@@ -94,7 +25,7 @@ const opListGroupMembers = "ListGroupMembers"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/ListGroupMembers
-func (c *Client) ListGroupMembersRequest(input *ListGroupMembersInput) ListGroupMembersRequest {
+func (c *Client) ListGroupMembersRequest(input *types.ListGroupMembersInput) ListGroupMembersRequest {
 	op := &aws.Operation{
 		Name:       opListGroupMembers,
 		HTTPMethod: "POST",
@@ -108,10 +39,10 @@ func (c *Client) ListGroupMembersRequest(input *ListGroupMembersInput) ListGroup
 	}
 
 	if input == nil {
-		input = &ListGroupMembersInput{}
+		input = &types.ListGroupMembersInput{}
 	}
 
-	req := c.newRequest(op, input, &ListGroupMembersOutput{})
+	req := c.newRequest(op, input, &types.ListGroupMembersOutput{})
 	return ListGroupMembersRequest{Request: req, Input: input, Copy: c.ListGroupMembersRequest}
 }
 
@@ -119,8 +50,8 @@ func (c *Client) ListGroupMembersRequest(input *ListGroupMembersInput) ListGroup
 // ListGroupMembers API operation.
 type ListGroupMembersRequest struct {
 	*aws.Request
-	Input *ListGroupMembersInput
-	Copy  func(*ListGroupMembersInput) ListGroupMembersRequest
+	Input *types.ListGroupMembersInput
+	Copy  func(*types.ListGroupMembersInput) ListGroupMembersRequest
 }
 
 // Send marshals and sends the ListGroupMembers API request.
@@ -132,7 +63,7 @@ func (r ListGroupMembersRequest) Send(ctx context.Context) (*ListGroupMembersRes
 	}
 
 	resp := &ListGroupMembersResponse{
-		ListGroupMembersOutput: r.Request.Data.(*ListGroupMembersOutput),
+		ListGroupMembersOutput: r.Request.Data.(*types.ListGroupMembersOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -162,7 +93,7 @@ func NewListGroupMembersPaginator(req ListGroupMembersRequest) ListGroupMembersP
 	return ListGroupMembersPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListGroupMembersInput
+				var inCpy *types.ListGroupMembersInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -182,14 +113,14 @@ type ListGroupMembersPaginator struct {
 	aws.Pager
 }
 
-func (p *ListGroupMembersPaginator) CurrentPage() *ListGroupMembersOutput {
-	return p.Pager.CurrentPage().(*ListGroupMembersOutput)
+func (p *ListGroupMembersPaginator) CurrentPage() *types.ListGroupMembersOutput {
+	return p.Pager.CurrentPage().(*types.ListGroupMembersOutput)
 }
 
 // ListGroupMembersResponse is the response type for the
 // ListGroupMembers API operation.
 type ListGroupMembersResponse struct {
-	*ListGroupMembersOutput
+	*types.ListGroupMembersOutput
 
 	response *aws.Response
 }

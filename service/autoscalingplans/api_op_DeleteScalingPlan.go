@@ -6,57 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/autoscalingplans/types"
 )
-
-type DeleteScalingPlanInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the scaling plan.
-	//
-	// ScalingPlanName is a required field
-	ScalingPlanName *string `min:"1" type:"string" required:"true"`
-
-	// The version number of the scaling plan.
-	//
-	// ScalingPlanVersion is a required field
-	ScalingPlanVersion *int64 `type:"long" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteScalingPlanInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteScalingPlanInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteScalingPlanInput"}
-
-	if s.ScalingPlanName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ScalingPlanName"))
-	}
-	if s.ScalingPlanName != nil && len(*s.ScalingPlanName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ScalingPlanName", 1))
-	}
-
-	if s.ScalingPlanVersion == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ScalingPlanVersion"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteScalingPlanOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteScalingPlanOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteScalingPlan = "DeleteScalingPlan"
 
@@ -79,7 +30,7 @@ const opDeleteScalingPlan = "DeleteScalingPlan"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-plans-2018-01-06/DeleteScalingPlan
-func (c *Client) DeleteScalingPlanRequest(input *DeleteScalingPlanInput) DeleteScalingPlanRequest {
+func (c *Client) DeleteScalingPlanRequest(input *types.DeleteScalingPlanInput) DeleteScalingPlanRequest {
 	op := &aws.Operation{
 		Name:       opDeleteScalingPlan,
 		HTTPMethod: "POST",
@@ -87,10 +38,10 @@ func (c *Client) DeleteScalingPlanRequest(input *DeleteScalingPlanInput) DeleteS
 	}
 
 	if input == nil {
-		input = &DeleteScalingPlanInput{}
+		input = &types.DeleteScalingPlanInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteScalingPlanOutput{})
+	req := c.newRequest(op, input, &types.DeleteScalingPlanOutput{})
 	return DeleteScalingPlanRequest{Request: req, Input: input, Copy: c.DeleteScalingPlanRequest}
 }
 
@@ -98,8 +49,8 @@ func (c *Client) DeleteScalingPlanRequest(input *DeleteScalingPlanInput) DeleteS
 // DeleteScalingPlan API operation.
 type DeleteScalingPlanRequest struct {
 	*aws.Request
-	Input *DeleteScalingPlanInput
-	Copy  func(*DeleteScalingPlanInput) DeleteScalingPlanRequest
+	Input *types.DeleteScalingPlanInput
+	Copy  func(*types.DeleteScalingPlanInput) DeleteScalingPlanRequest
 }
 
 // Send marshals and sends the DeleteScalingPlan API request.
@@ -111,7 +62,7 @@ func (r DeleteScalingPlanRequest) Send(ctx context.Context) (*DeleteScalingPlanR
 	}
 
 	resp := &DeleteScalingPlanResponse{
-		DeleteScalingPlanOutput: r.Request.Data.(*DeleteScalingPlanOutput),
+		DeleteScalingPlanOutput: r.Request.Data.(*types.DeleteScalingPlanOutput),
 		response:                &aws.Response{Request: r.Request},
 	}
 
@@ -121,7 +72,7 @@ func (r DeleteScalingPlanRequest) Send(ctx context.Context) (*DeleteScalingPlanR
 // DeleteScalingPlanResponse is the response type for the
 // DeleteScalingPlan API operation.
 type DeleteScalingPlanResponse struct {
-	*DeleteScalingPlanOutput
+	*types.DeleteScalingPlanOutput
 
 	response *aws.Response
 }

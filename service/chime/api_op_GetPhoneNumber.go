@@ -6,73 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/chime/types"
 )
-
-type GetPhoneNumberInput struct {
-	_ struct{} `type:"structure"`
-
-	// The phone number ID.
-	//
-	// PhoneNumberId is a required field
-	PhoneNumberId *string `location:"uri" locationName:"phoneNumberId" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetPhoneNumberInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetPhoneNumberInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetPhoneNumberInput"}
-
-	if s.PhoneNumberId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("PhoneNumberId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetPhoneNumberInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.PhoneNumberId != nil {
-		v := *s.PhoneNumberId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "phoneNumberId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type GetPhoneNumberOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The phone number details.
-	PhoneNumber *PhoneNumber `type:"structure"`
-}
-
-// String returns the string representation
-func (s GetPhoneNumberOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetPhoneNumberOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.PhoneNumber != nil {
-		v := s.PhoneNumber
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "PhoneNumber", v, metadata)
-	}
-	return nil
-}
 
 const opGetPhoneNumber = "GetPhoneNumber"
 
@@ -90,7 +25,7 @@ const opGetPhoneNumber = "GetPhoneNumber"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/GetPhoneNumber
-func (c *Client) GetPhoneNumberRequest(input *GetPhoneNumberInput) GetPhoneNumberRequest {
+func (c *Client) GetPhoneNumberRequest(input *types.GetPhoneNumberInput) GetPhoneNumberRequest {
 	op := &aws.Operation{
 		Name:       opGetPhoneNumber,
 		HTTPMethod: "GET",
@@ -98,10 +33,10 @@ func (c *Client) GetPhoneNumberRequest(input *GetPhoneNumberInput) GetPhoneNumbe
 	}
 
 	if input == nil {
-		input = &GetPhoneNumberInput{}
+		input = &types.GetPhoneNumberInput{}
 	}
 
-	req := c.newRequest(op, input, &GetPhoneNumberOutput{})
+	req := c.newRequest(op, input, &types.GetPhoneNumberOutput{})
 	return GetPhoneNumberRequest{Request: req, Input: input, Copy: c.GetPhoneNumberRequest}
 }
 
@@ -109,8 +44,8 @@ func (c *Client) GetPhoneNumberRequest(input *GetPhoneNumberInput) GetPhoneNumbe
 // GetPhoneNumber API operation.
 type GetPhoneNumberRequest struct {
 	*aws.Request
-	Input *GetPhoneNumberInput
-	Copy  func(*GetPhoneNumberInput) GetPhoneNumberRequest
+	Input *types.GetPhoneNumberInput
+	Copy  func(*types.GetPhoneNumberInput) GetPhoneNumberRequest
 }
 
 // Send marshals and sends the GetPhoneNumber API request.
@@ -122,7 +57,7 @@ func (r GetPhoneNumberRequest) Send(ctx context.Context) (*GetPhoneNumberRespons
 	}
 
 	resp := &GetPhoneNumberResponse{
-		GetPhoneNumberOutput: r.Request.Data.(*GetPhoneNumberOutput),
+		GetPhoneNumberOutput: r.Request.Data.(*types.GetPhoneNumberOutput),
 		response:             &aws.Response{Request: r.Request},
 	}
 
@@ -132,7 +67,7 @@ func (r GetPhoneNumberRequest) Send(ctx context.Context) (*GetPhoneNumberRespons
 // GetPhoneNumberResponse is the response type for the
 // GetPhoneNumber API operation.
 type GetPhoneNumberResponse struct {
-	*GetPhoneNumberOutput
+	*types.GetPhoneNumberOutput
 
 	response *aws.Response
 }

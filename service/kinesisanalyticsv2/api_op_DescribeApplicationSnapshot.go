@@ -6,65 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/kinesisanalyticsv2/types"
 )
-
-type DescribeApplicationSnapshotInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of an existing application.
-	//
-	// ApplicationName is a required field
-	ApplicationName *string `min:"1" type:"string" required:"true"`
-
-	// The identifier of an application snapshot. You can retrieve this value using .
-	//
-	// SnapshotName is a required field
-	SnapshotName *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeApplicationSnapshotInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeApplicationSnapshotInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeApplicationSnapshotInput"}
-
-	if s.ApplicationName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ApplicationName"))
-	}
-	if s.ApplicationName != nil && len(*s.ApplicationName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ApplicationName", 1))
-	}
-
-	if s.SnapshotName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("SnapshotName"))
-	}
-	if s.SnapshotName != nil && len(*s.SnapshotName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("SnapshotName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribeApplicationSnapshotOutput struct {
-	_ struct{} `type:"structure"`
-
-	// An object containing information about the application snapshot.
-	//
-	// SnapshotDetails is a required field
-	SnapshotDetails *SnapshotDetails `type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeApplicationSnapshotOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeApplicationSnapshot = "DescribeApplicationSnapshot"
 
@@ -81,7 +24,7 @@ const opDescribeApplicationSnapshot = "DescribeApplicationSnapshot"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/DescribeApplicationSnapshot
-func (c *Client) DescribeApplicationSnapshotRequest(input *DescribeApplicationSnapshotInput) DescribeApplicationSnapshotRequest {
+func (c *Client) DescribeApplicationSnapshotRequest(input *types.DescribeApplicationSnapshotInput) DescribeApplicationSnapshotRequest {
 	op := &aws.Operation{
 		Name:       opDescribeApplicationSnapshot,
 		HTTPMethod: "POST",
@@ -89,10 +32,10 @@ func (c *Client) DescribeApplicationSnapshotRequest(input *DescribeApplicationSn
 	}
 
 	if input == nil {
-		input = &DescribeApplicationSnapshotInput{}
+		input = &types.DescribeApplicationSnapshotInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeApplicationSnapshotOutput{})
+	req := c.newRequest(op, input, &types.DescribeApplicationSnapshotOutput{})
 	return DescribeApplicationSnapshotRequest{Request: req, Input: input, Copy: c.DescribeApplicationSnapshotRequest}
 }
 
@@ -100,8 +43,8 @@ func (c *Client) DescribeApplicationSnapshotRequest(input *DescribeApplicationSn
 // DescribeApplicationSnapshot API operation.
 type DescribeApplicationSnapshotRequest struct {
 	*aws.Request
-	Input *DescribeApplicationSnapshotInput
-	Copy  func(*DescribeApplicationSnapshotInput) DescribeApplicationSnapshotRequest
+	Input *types.DescribeApplicationSnapshotInput
+	Copy  func(*types.DescribeApplicationSnapshotInput) DescribeApplicationSnapshotRequest
 }
 
 // Send marshals and sends the DescribeApplicationSnapshot API request.
@@ -113,7 +56,7 @@ func (r DescribeApplicationSnapshotRequest) Send(ctx context.Context) (*Describe
 	}
 
 	resp := &DescribeApplicationSnapshotResponse{
-		DescribeApplicationSnapshotOutput: r.Request.Data.(*DescribeApplicationSnapshotOutput),
+		DescribeApplicationSnapshotOutput: r.Request.Data.(*types.DescribeApplicationSnapshotOutput),
 		response:                          &aws.Response{Request: r.Request},
 	}
 
@@ -123,7 +66,7 @@ func (r DescribeApplicationSnapshotRequest) Send(ctx context.Context) (*Describe
 // DescribeApplicationSnapshotResponse is the response type for the
 // DescribeApplicationSnapshot API operation.
 type DescribeApplicationSnapshotResponse struct {
-	*DescribeApplicationSnapshotOutput
+	*types.DescribeApplicationSnapshotOutput
 
 	response *aws.Response
 }

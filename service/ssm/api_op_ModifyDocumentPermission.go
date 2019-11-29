@@ -6,63 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ssm/types"
 )
-
-type ModifyDocumentPermissionInput struct {
-	_ struct{} `type:"structure"`
-
-	// The AWS user accounts that should have access to the document. The account
-	// IDs can either be a group of account IDs or All.
-	AccountIdsToAdd []string `type:"list"`
-
-	// The AWS user accounts that should no longer have access to the document.
-	// The AWS user account can either be a group of account IDs or All. This action
-	// has a higher priority than AccountIdsToAdd. If you specify an account ID
-	// to add and the same ID to remove, the system removes access to the document.
-	AccountIdsToRemove []string `type:"list"`
-
-	// The name of the document that you want to share.
-	//
-	// Name is a required field
-	Name *string `type:"string" required:"true"`
-
-	// The permission type for the document. The permission type can be Share.
-	//
-	// PermissionType is a required field
-	PermissionType DocumentPermissionType `type:"string" required:"true" enum:"true"`
-}
-
-// String returns the string representation
-func (s ModifyDocumentPermissionInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ModifyDocumentPermissionInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ModifyDocumentPermissionInput"}
-
-	if s.Name == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Name"))
-	}
-	if len(s.PermissionType) == 0 {
-		invalidParams.Add(aws.NewErrParamRequired("PermissionType"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ModifyDocumentPermissionOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s ModifyDocumentPermissionOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opModifyDocumentPermission = "ModifyDocumentPermission"
 
@@ -82,7 +27,7 @@ const opModifyDocumentPermission = "ModifyDocumentPermission"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ModifyDocumentPermission
-func (c *Client) ModifyDocumentPermissionRequest(input *ModifyDocumentPermissionInput) ModifyDocumentPermissionRequest {
+func (c *Client) ModifyDocumentPermissionRequest(input *types.ModifyDocumentPermissionInput) ModifyDocumentPermissionRequest {
 	op := &aws.Operation{
 		Name:       opModifyDocumentPermission,
 		HTTPMethod: "POST",
@@ -90,10 +35,10 @@ func (c *Client) ModifyDocumentPermissionRequest(input *ModifyDocumentPermission
 	}
 
 	if input == nil {
-		input = &ModifyDocumentPermissionInput{}
+		input = &types.ModifyDocumentPermissionInput{}
 	}
 
-	req := c.newRequest(op, input, &ModifyDocumentPermissionOutput{})
+	req := c.newRequest(op, input, &types.ModifyDocumentPermissionOutput{})
 	return ModifyDocumentPermissionRequest{Request: req, Input: input, Copy: c.ModifyDocumentPermissionRequest}
 }
 
@@ -101,8 +46,8 @@ func (c *Client) ModifyDocumentPermissionRequest(input *ModifyDocumentPermission
 // ModifyDocumentPermission API operation.
 type ModifyDocumentPermissionRequest struct {
 	*aws.Request
-	Input *ModifyDocumentPermissionInput
-	Copy  func(*ModifyDocumentPermissionInput) ModifyDocumentPermissionRequest
+	Input *types.ModifyDocumentPermissionInput
+	Copy  func(*types.ModifyDocumentPermissionInput) ModifyDocumentPermissionRequest
 }
 
 // Send marshals and sends the ModifyDocumentPermission API request.
@@ -114,7 +59,7 @@ func (r ModifyDocumentPermissionRequest) Send(ctx context.Context) (*ModifyDocum
 	}
 
 	resp := &ModifyDocumentPermissionResponse{
-		ModifyDocumentPermissionOutput: r.Request.Data.(*ModifyDocumentPermissionOutput),
+		ModifyDocumentPermissionOutput: r.Request.Data.(*types.ModifyDocumentPermissionOutput),
 		response:                       &aws.Response{Request: r.Request},
 	}
 
@@ -124,7 +69,7 @@ func (r ModifyDocumentPermissionRequest) Send(ctx context.Context) (*ModifyDocum
 // ModifyDocumentPermissionResponse is the response type for the
 // ModifyDocumentPermission API operation.
 type ModifyDocumentPermissionResponse struct {
-	*ModifyDocumentPermissionOutput
+	*types.ModifyDocumentPermissionOutput
 
 	response *aws.Response
 }

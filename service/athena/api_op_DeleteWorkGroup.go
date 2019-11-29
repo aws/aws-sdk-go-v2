@@ -6,49 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/athena/types"
 )
-
-type DeleteWorkGroupInput struct {
-	_ struct{} `type:"structure"`
-
-	// The option to delete the workgroup and its contents even if the workgroup
-	// contains any named queries.
-	RecursiveDeleteOption *bool `type:"boolean"`
-
-	// The unique name of the workgroup to delete.
-	//
-	// WorkGroup is a required field
-	WorkGroup *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteWorkGroupInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteWorkGroupInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteWorkGroupInput"}
-
-	if s.WorkGroup == nil {
-		invalidParams.Add(aws.NewErrParamRequired("WorkGroup"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteWorkGroupOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteWorkGroupOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteWorkGroup = "DeleteWorkGroup"
 
@@ -66,7 +25,7 @@ const opDeleteWorkGroup = "DeleteWorkGroup"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/DeleteWorkGroup
-func (c *Client) DeleteWorkGroupRequest(input *DeleteWorkGroupInput) DeleteWorkGroupRequest {
+func (c *Client) DeleteWorkGroupRequest(input *types.DeleteWorkGroupInput) DeleteWorkGroupRequest {
 	op := &aws.Operation{
 		Name:       opDeleteWorkGroup,
 		HTTPMethod: "POST",
@@ -74,10 +33,10 @@ func (c *Client) DeleteWorkGroupRequest(input *DeleteWorkGroupInput) DeleteWorkG
 	}
 
 	if input == nil {
-		input = &DeleteWorkGroupInput{}
+		input = &types.DeleteWorkGroupInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteWorkGroupOutput{})
+	req := c.newRequest(op, input, &types.DeleteWorkGroupOutput{})
 	return DeleteWorkGroupRequest{Request: req, Input: input, Copy: c.DeleteWorkGroupRequest}
 }
 
@@ -85,8 +44,8 @@ func (c *Client) DeleteWorkGroupRequest(input *DeleteWorkGroupInput) DeleteWorkG
 // DeleteWorkGroup API operation.
 type DeleteWorkGroupRequest struct {
 	*aws.Request
-	Input *DeleteWorkGroupInput
-	Copy  func(*DeleteWorkGroupInput) DeleteWorkGroupRequest
+	Input *types.DeleteWorkGroupInput
+	Copy  func(*types.DeleteWorkGroupInput) DeleteWorkGroupRequest
 }
 
 // Send marshals and sends the DeleteWorkGroup API request.
@@ -98,7 +57,7 @@ func (r DeleteWorkGroupRequest) Send(ctx context.Context) (*DeleteWorkGroupRespo
 	}
 
 	resp := &DeleteWorkGroupResponse{
-		DeleteWorkGroupOutput: r.Request.Data.(*DeleteWorkGroupOutput),
+		DeleteWorkGroupOutput: r.Request.Data.(*types.DeleteWorkGroupOutput),
 		response:              &aws.Response{Request: r.Request},
 	}
 
@@ -108,7 +67,7 @@ func (r DeleteWorkGroupRequest) Send(ctx context.Context) (*DeleteWorkGroupRespo
 // DeleteWorkGroupResponse is the response type for the
 // DeleteWorkGroup API operation.
 type DeleteWorkGroupResponse struct {
-	*DeleteWorkGroupOutput
+	*types.DeleteWorkGroupOutput
 
 	response *aws.Response
 }

@@ -6,73 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/codecommit/types"
 )
-
-type ListPullRequestsInput struct {
-	_ struct{} `type:"structure"`
-
-	// Optional. The Amazon Resource Name (ARN) of the user who created the pull
-	// request. If used, this filters the results to pull requests created by that
-	// user.
-	AuthorArn *string `locationName:"authorArn" type:"string"`
-
-	// A non-negative integer used to limit the number of returned results.
-	MaxResults *int64 `locationName:"maxResults" type:"integer"`
-
-	// An enumeration token that when provided in a request, returns the next batch
-	// of the results.
-	NextToken *string `locationName:"nextToken" type:"string"`
-
-	// Optional. The status of the pull request. If used, this refines the results
-	// to the pull requests that match the specified status.
-	PullRequestStatus PullRequestStatusEnum `locationName:"pullRequestStatus" type:"string" enum:"true"`
-
-	// The name of the repository for which you want to list pull requests.
-	//
-	// RepositoryName is a required field
-	RepositoryName *string `locationName:"repositoryName" min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s ListPullRequestsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListPullRequestsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListPullRequestsInput"}
-
-	if s.RepositoryName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("RepositoryName"))
-	}
-	if s.RepositoryName != nil && len(*s.RepositoryName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("RepositoryName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ListPullRequestsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// An enumeration token that when provided in a request, returns the next batch
-	// of the results.
-	NextToken *string `locationName:"nextToken" type:"string"`
-
-	// The system-generated IDs of the pull requests.
-	//
-	// PullRequestIds is a required field
-	PullRequestIds []string `locationName:"pullRequestIds" type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s ListPullRequestsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListPullRequests = "ListPullRequests"
 
@@ -90,7 +25,7 @@ const opListPullRequests = "ListPullRequests"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/ListPullRequests
-func (c *Client) ListPullRequestsRequest(input *ListPullRequestsInput) ListPullRequestsRequest {
+func (c *Client) ListPullRequestsRequest(input *types.ListPullRequestsInput) ListPullRequestsRequest {
 	op := &aws.Operation{
 		Name:       opListPullRequests,
 		HTTPMethod: "POST",
@@ -104,10 +39,10 @@ func (c *Client) ListPullRequestsRequest(input *ListPullRequestsInput) ListPullR
 	}
 
 	if input == nil {
-		input = &ListPullRequestsInput{}
+		input = &types.ListPullRequestsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListPullRequestsOutput{})
+	req := c.newRequest(op, input, &types.ListPullRequestsOutput{})
 	return ListPullRequestsRequest{Request: req, Input: input, Copy: c.ListPullRequestsRequest}
 }
 
@@ -115,8 +50,8 @@ func (c *Client) ListPullRequestsRequest(input *ListPullRequestsInput) ListPullR
 // ListPullRequests API operation.
 type ListPullRequestsRequest struct {
 	*aws.Request
-	Input *ListPullRequestsInput
-	Copy  func(*ListPullRequestsInput) ListPullRequestsRequest
+	Input *types.ListPullRequestsInput
+	Copy  func(*types.ListPullRequestsInput) ListPullRequestsRequest
 }
 
 // Send marshals and sends the ListPullRequests API request.
@@ -128,7 +63,7 @@ func (r ListPullRequestsRequest) Send(ctx context.Context) (*ListPullRequestsRes
 	}
 
 	resp := &ListPullRequestsResponse{
-		ListPullRequestsOutput: r.Request.Data.(*ListPullRequestsOutput),
+		ListPullRequestsOutput: r.Request.Data.(*types.ListPullRequestsOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -158,7 +93,7 @@ func NewListPullRequestsPaginator(req ListPullRequestsRequest) ListPullRequestsP
 	return ListPullRequestsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListPullRequestsInput
+				var inCpy *types.ListPullRequestsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -178,14 +113,14 @@ type ListPullRequestsPaginator struct {
 	aws.Pager
 }
 
-func (p *ListPullRequestsPaginator) CurrentPage() *ListPullRequestsOutput {
-	return p.Pager.CurrentPage().(*ListPullRequestsOutput)
+func (p *ListPullRequestsPaginator) CurrentPage() *types.ListPullRequestsOutput {
+	return p.Pager.CurrentPage().(*types.ListPullRequestsOutput)
 }
 
 // ListPullRequestsResponse is the response type for the
 // ListPullRequests API operation.
 type ListPullRequestsResponse struct {
-	*ListPullRequestsOutput
+	*types.ListPullRequestsOutput
 
 	response *aws.Response
 }

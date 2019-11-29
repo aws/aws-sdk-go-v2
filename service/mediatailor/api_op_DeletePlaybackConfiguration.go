@@ -6,62 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/mediatailor/types"
 )
-
-type DeletePlaybackConfigurationInput struct {
-	_ struct{} `type:"structure"`
-
-	// Name is a required field
-	Name *string `location:"uri" locationName:"Name" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeletePlaybackConfigurationInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeletePlaybackConfigurationInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeletePlaybackConfigurationInput"}
-
-	if s.Name == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Name"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeletePlaybackConfigurationInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.Name != nil {
-		v := *s.Name
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "Name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type DeletePlaybackConfigurationOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeletePlaybackConfigurationOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeletePlaybackConfigurationOutput) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
 
 const opDeletePlaybackConfiguration = "DeletePlaybackConfiguration"
 
@@ -78,7 +24,7 @@ const opDeletePlaybackConfiguration = "DeletePlaybackConfiguration"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/DeletePlaybackConfiguration
-func (c *Client) DeletePlaybackConfigurationRequest(input *DeletePlaybackConfigurationInput) DeletePlaybackConfigurationRequest {
+func (c *Client) DeletePlaybackConfigurationRequest(input *types.DeletePlaybackConfigurationInput) DeletePlaybackConfigurationRequest {
 	op := &aws.Operation{
 		Name:       opDeletePlaybackConfiguration,
 		HTTPMethod: "DELETE",
@@ -86,10 +32,10 @@ func (c *Client) DeletePlaybackConfigurationRequest(input *DeletePlaybackConfigu
 	}
 
 	if input == nil {
-		input = &DeletePlaybackConfigurationInput{}
+		input = &types.DeletePlaybackConfigurationInput{}
 	}
 
-	req := c.newRequest(op, input, &DeletePlaybackConfigurationOutput{})
+	req := c.newRequest(op, input, &types.DeletePlaybackConfigurationOutput{})
 	return DeletePlaybackConfigurationRequest{Request: req, Input: input, Copy: c.DeletePlaybackConfigurationRequest}
 }
 
@@ -97,8 +43,8 @@ func (c *Client) DeletePlaybackConfigurationRequest(input *DeletePlaybackConfigu
 // DeletePlaybackConfiguration API operation.
 type DeletePlaybackConfigurationRequest struct {
 	*aws.Request
-	Input *DeletePlaybackConfigurationInput
-	Copy  func(*DeletePlaybackConfigurationInput) DeletePlaybackConfigurationRequest
+	Input *types.DeletePlaybackConfigurationInput
+	Copy  func(*types.DeletePlaybackConfigurationInput) DeletePlaybackConfigurationRequest
 }
 
 // Send marshals and sends the DeletePlaybackConfiguration API request.
@@ -110,7 +56,7 @@ func (r DeletePlaybackConfigurationRequest) Send(ctx context.Context) (*DeletePl
 	}
 
 	resp := &DeletePlaybackConfigurationResponse{
-		DeletePlaybackConfigurationOutput: r.Request.Data.(*DeletePlaybackConfigurationOutput),
+		DeletePlaybackConfigurationOutput: r.Request.Data.(*types.DeletePlaybackConfigurationOutput),
 		response:                          &aws.Response{Request: r.Request},
 	}
 
@@ -120,7 +66,7 @@ func (r DeletePlaybackConfigurationRequest) Send(ctx context.Context) (*DeletePl
 // DeletePlaybackConfigurationResponse is the response type for the
 // DeletePlaybackConfiguration API operation.
 type DeletePlaybackConfigurationResponse struct {
-	*DeletePlaybackConfigurationOutput
+	*types.DeletePlaybackConfigurationOutput
 
 	response *aws.Response
 }

@@ -4,142 +4,10 @@ package elasticbeanstalk
 
 import (
 	"context"
-	"fmt"
-	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/elasticbeanstalk/types"
 )
-
-// The result message containing the options for the specified solution stack.
-type UpdateConfigurationTemplateInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the application associated with the configuration template to
-	// update.
-	//
-	// If no application is found with this name, UpdateConfigurationTemplate returns
-	// an InvalidParameterValue error.
-	//
-	// ApplicationName is a required field
-	ApplicationName *string `min:"1" type:"string" required:"true"`
-
-	// A new description for the configuration.
-	Description *string `type:"string"`
-
-	// A list of configuration option settings to update with the new specified
-	// option value.
-	OptionSettings []ConfigurationOptionSetting `type:"list"`
-
-	// A list of configuration options to remove from the configuration set.
-	//
-	// Constraint: You can remove only UserDefined configuration options.
-	OptionsToRemove []OptionSpecification `type:"list"`
-
-	// The name of the configuration template to update.
-	//
-	// If no configuration template is found with this name, UpdateConfigurationTemplate
-	// returns an InvalidParameterValue error.
-	//
-	// TemplateName is a required field
-	TemplateName *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s UpdateConfigurationTemplateInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateConfigurationTemplateInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateConfigurationTemplateInput"}
-
-	if s.ApplicationName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ApplicationName"))
-	}
-	if s.ApplicationName != nil && len(*s.ApplicationName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ApplicationName", 1))
-	}
-
-	if s.TemplateName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("TemplateName"))
-	}
-	if s.TemplateName != nil && len(*s.TemplateName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("TemplateName", 1))
-	}
-	if s.OptionSettings != nil {
-		for i, v := range s.OptionSettings {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "OptionSettings", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-	if s.OptionsToRemove != nil {
-		for i, v := range s.OptionsToRemove {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "OptionsToRemove", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Describes the settings for a configuration set.
-type UpdateConfigurationTemplateOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the application associated with this configuration set.
-	ApplicationName *string `min:"1" type:"string"`
-
-	// The date (in UTC time) when this configuration set was created.
-	DateCreated *time.Time `type:"timestamp"`
-
-	// The date (in UTC time) when this configuration set was last modified.
-	DateUpdated *time.Time `type:"timestamp"`
-
-	// If this configuration set is associated with an environment, the DeploymentStatus
-	// parameter indicates the deployment status of this configuration set:
-	//
-	//    * null: This configuration is not associated with a running environment.
-	//
-	//    * pending: This is a draft configuration that is not deployed to the associated
-	//    environment but is in the process of deploying.
-	//
-	//    * deployed: This is the configuration that is currently deployed to the
-	//    associated running environment.
-	//
-	//    * failed: This is a draft configuration that failed to successfully deploy.
-	DeploymentStatus ConfigurationDeploymentStatus `type:"string" enum:"true"`
-
-	// Describes this configuration set.
-	Description *string `type:"string"`
-
-	// If not null, the name of the environment for this configuration set.
-	EnvironmentName *string `min:"4" type:"string"`
-
-	// A list of the configuration options and their values in this configuration
-	// set.
-	OptionSettings []ConfigurationOptionSetting `type:"list"`
-
-	// The ARN of the platform.
-	PlatformArn *string `type:"string"`
-
-	// The name of the solution stack this configuration set uses.
-	SolutionStackName *string `type:"string"`
-
-	// If not null, the name of the configuration template for this configuration
-	// set.
-	TemplateName *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s UpdateConfigurationTemplateOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opUpdateConfigurationTemplate = "UpdateConfigurationTemplate"
 
@@ -164,7 +32,7 @@ const opUpdateConfigurationTemplate = "UpdateConfigurationTemplate"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/UpdateConfigurationTemplate
-func (c *Client) UpdateConfigurationTemplateRequest(input *UpdateConfigurationTemplateInput) UpdateConfigurationTemplateRequest {
+func (c *Client) UpdateConfigurationTemplateRequest(input *types.UpdateConfigurationTemplateInput) UpdateConfigurationTemplateRequest {
 	op := &aws.Operation{
 		Name:       opUpdateConfigurationTemplate,
 		HTTPMethod: "POST",
@@ -172,10 +40,10 @@ func (c *Client) UpdateConfigurationTemplateRequest(input *UpdateConfigurationTe
 	}
 
 	if input == nil {
-		input = &UpdateConfigurationTemplateInput{}
+		input = &types.UpdateConfigurationTemplateInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateConfigurationTemplateOutput{})
+	req := c.newRequest(op, input, &types.UpdateConfigurationTemplateOutput{})
 	return UpdateConfigurationTemplateRequest{Request: req, Input: input, Copy: c.UpdateConfigurationTemplateRequest}
 }
 
@@ -183,8 +51,8 @@ func (c *Client) UpdateConfigurationTemplateRequest(input *UpdateConfigurationTe
 // UpdateConfigurationTemplate API operation.
 type UpdateConfigurationTemplateRequest struct {
 	*aws.Request
-	Input *UpdateConfigurationTemplateInput
-	Copy  func(*UpdateConfigurationTemplateInput) UpdateConfigurationTemplateRequest
+	Input *types.UpdateConfigurationTemplateInput
+	Copy  func(*types.UpdateConfigurationTemplateInput) UpdateConfigurationTemplateRequest
 }
 
 // Send marshals and sends the UpdateConfigurationTemplate API request.
@@ -196,7 +64,7 @@ func (r UpdateConfigurationTemplateRequest) Send(ctx context.Context) (*UpdateCo
 	}
 
 	resp := &UpdateConfigurationTemplateResponse{
-		UpdateConfigurationTemplateOutput: r.Request.Data.(*UpdateConfigurationTemplateOutput),
+		UpdateConfigurationTemplateOutput: r.Request.Data.(*types.UpdateConfigurationTemplateOutput),
 		response:                          &aws.Response{Request: r.Request},
 	}
 
@@ -206,7 +74,7 @@ func (r UpdateConfigurationTemplateRequest) Send(ctx context.Context) (*UpdateCo
 // UpdateConfigurationTemplateResponse is the response type for the
 // UpdateConfigurationTemplate API operation.
 type UpdateConfigurationTemplateResponse struct {
-	*UpdateConfigurationTemplateOutput
+	*types.UpdateConfigurationTemplateOutput
 
 	response *aws.Response
 }

@@ -6,54 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-type UnmonitorInstancesInput struct {
-	_ struct{} `type:"structure"`
-
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have
-	// the required permissions, the error response is DryRunOperation. Otherwise,
-	// it is UnauthorizedOperation.
-	DryRun *bool `locationName:"dryRun" type:"boolean"`
-
-	// The IDs of the instances.
-	//
-	// InstanceIds is a required field
-	InstanceIds []string `locationName:"InstanceId" locationNameList:"InstanceId" type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s UnmonitorInstancesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UnmonitorInstancesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UnmonitorInstancesInput"}
-
-	if s.InstanceIds == nil {
-		invalidParams.Add(aws.NewErrParamRequired("InstanceIds"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type UnmonitorInstancesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The monitoring information.
-	InstanceMonitorings []InstanceMonitoring `locationName:"instancesSet" locationNameList:"item" type:"list"`
-}
-
-// String returns the string representation
-func (s UnmonitorInstancesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opUnmonitorInstances = "UnmonitorInstances"
 
@@ -72,7 +26,7 @@ const opUnmonitorInstances = "UnmonitorInstances"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/UnmonitorInstances
-func (c *Client) UnmonitorInstancesRequest(input *UnmonitorInstancesInput) UnmonitorInstancesRequest {
+func (c *Client) UnmonitorInstancesRequest(input *types.UnmonitorInstancesInput) UnmonitorInstancesRequest {
 	op := &aws.Operation{
 		Name:       opUnmonitorInstances,
 		HTTPMethod: "POST",
@@ -80,10 +34,10 @@ func (c *Client) UnmonitorInstancesRequest(input *UnmonitorInstancesInput) Unmon
 	}
 
 	if input == nil {
-		input = &UnmonitorInstancesInput{}
+		input = &types.UnmonitorInstancesInput{}
 	}
 
-	req := c.newRequest(op, input, &UnmonitorInstancesOutput{})
+	req := c.newRequest(op, input, &types.UnmonitorInstancesOutput{})
 	return UnmonitorInstancesRequest{Request: req, Input: input, Copy: c.UnmonitorInstancesRequest}
 }
 
@@ -91,8 +45,8 @@ func (c *Client) UnmonitorInstancesRequest(input *UnmonitorInstancesInput) Unmon
 // UnmonitorInstances API operation.
 type UnmonitorInstancesRequest struct {
 	*aws.Request
-	Input *UnmonitorInstancesInput
-	Copy  func(*UnmonitorInstancesInput) UnmonitorInstancesRequest
+	Input *types.UnmonitorInstancesInput
+	Copy  func(*types.UnmonitorInstancesInput) UnmonitorInstancesRequest
 }
 
 // Send marshals and sends the UnmonitorInstances API request.
@@ -104,7 +58,7 @@ func (r UnmonitorInstancesRequest) Send(ctx context.Context) (*UnmonitorInstance
 	}
 
 	resp := &UnmonitorInstancesResponse{
-		UnmonitorInstancesOutput: r.Request.Data.(*UnmonitorInstancesOutput),
+		UnmonitorInstancesOutput: r.Request.Data.(*types.UnmonitorInstancesOutput),
 		response:                 &aws.Response{Request: r.Request},
 	}
 
@@ -114,7 +68,7 @@ func (r UnmonitorInstancesRequest) Send(ctx context.Context) (*UnmonitorInstance
 // UnmonitorInstancesResponse is the response type for the
 // UnmonitorInstances API operation.
 type UnmonitorInstancesResponse struct {
-	*UnmonitorInstancesOutput
+	*types.UnmonitorInstancesOutput
 
 	response *aws.Response
 }

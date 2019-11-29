@@ -13,6 +13,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws/awserr"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting/integration"
 	"github.com/aws/aws-sdk-go-v2/service/route53resolver"
+	"github.com/aws/aws-sdk-go-v2/service/route53resolver/types"
 )
 
 var _ aws.Config
@@ -24,7 +25,7 @@ func TestInteg_00_ListResolverEndpoints(t *testing.T) {
 
 	cfg := integration.ConfigWithDefaultRegion("us-west-2")
 	svc := route53resolver.New(cfg)
-	params := &route53resolver.ListResolverEndpointsInput{}
+	params := &types.ListResolverEndpointsInput{}
 
 	req := svc.ListResolverEndpointsRequest(params)
 
@@ -39,7 +40,7 @@ func TestInteg_01_GetResolverRule(t *testing.T) {
 
 	cfg := integration.ConfigWithDefaultRegion("us-west-2")
 	svc := route53resolver.New(cfg)
-	params := &route53resolver.GetResolverRuleInput{
+	params := &types.GetResolverRuleInput{
 		ResolverRuleId: aws.String("fake-id"),
 	}
 

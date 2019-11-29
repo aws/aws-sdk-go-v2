@@ -6,29 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/autoscaling/types"
 )
-
-type DescribeLifecycleHookTypesInput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DescribeLifecycleHookTypesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type DescribeLifecycleHookTypesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The lifecycle hook types.
-	LifecycleHookTypes []string `type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeLifecycleHookTypesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeLifecycleHookTypes = "DescribeLifecycleHookTypes"
 
@@ -51,7 +30,7 @@ const opDescribeLifecycleHookTypes = "DescribeLifecycleHookTypes"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DescribeLifecycleHookTypes
-func (c *Client) DescribeLifecycleHookTypesRequest(input *DescribeLifecycleHookTypesInput) DescribeLifecycleHookTypesRequest {
+func (c *Client) DescribeLifecycleHookTypesRequest(input *types.DescribeLifecycleHookTypesInput) DescribeLifecycleHookTypesRequest {
 	op := &aws.Operation{
 		Name:       opDescribeLifecycleHookTypes,
 		HTTPMethod: "POST",
@@ -59,10 +38,10 @@ func (c *Client) DescribeLifecycleHookTypesRequest(input *DescribeLifecycleHookT
 	}
 
 	if input == nil {
-		input = &DescribeLifecycleHookTypesInput{}
+		input = &types.DescribeLifecycleHookTypesInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeLifecycleHookTypesOutput{})
+	req := c.newRequest(op, input, &types.DescribeLifecycleHookTypesOutput{})
 	return DescribeLifecycleHookTypesRequest{Request: req, Input: input, Copy: c.DescribeLifecycleHookTypesRequest}
 }
 
@@ -70,8 +49,8 @@ func (c *Client) DescribeLifecycleHookTypesRequest(input *DescribeLifecycleHookT
 // DescribeLifecycleHookTypes API operation.
 type DescribeLifecycleHookTypesRequest struct {
 	*aws.Request
-	Input *DescribeLifecycleHookTypesInput
-	Copy  func(*DescribeLifecycleHookTypesInput) DescribeLifecycleHookTypesRequest
+	Input *types.DescribeLifecycleHookTypesInput
+	Copy  func(*types.DescribeLifecycleHookTypesInput) DescribeLifecycleHookTypesRequest
 }
 
 // Send marshals and sends the DescribeLifecycleHookTypes API request.
@@ -83,7 +62,7 @@ func (r DescribeLifecycleHookTypesRequest) Send(ctx context.Context) (*DescribeL
 	}
 
 	resp := &DescribeLifecycleHookTypesResponse{
-		DescribeLifecycleHookTypesOutput: r.Request.Data.(*DescribeLifecycleHookTypesOutput),
+		DescribeLifecycleHookTypesOutput: r.Request.Data.(*types.DescribeLifecycleHookTypesOutput),
 		response:                         &aws.Response{Request: r.Request},
 	}
 
@@ -93,7 +72,7 @@ func (r DescribeLifecycleHookTypesRequest) Send(ctx context.Context) (*DescribeL
 // DescribeLifecycleHookTypesResponse is the response type for the
 // DescribeLifecycleHookTypes API operation.
 type DescribeLifecycleHookTypesResponse struct {
-	*DescribeLifecycleHookTypesOutput
+	*types.DescribeLifecycleHookTypesOutput
 
 	response *aws.Response
 }

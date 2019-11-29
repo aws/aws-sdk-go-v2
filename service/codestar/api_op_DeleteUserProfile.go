@@ -6,53 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/codestar/types"
 )
-
-type DeleteUserProfileInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the user to delete from AWS CodeStar.
-	//
-	// UserArn is a required field
-	UserArn *string `locationName:"userArn" min:"32" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteUserProfileInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteUserProfileInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteUserProfileInput"}
-
-	if s.UserArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("UserArn"))
-	}
-	if s.UserArn != nil && len(*s.UserArn) < 32 {
-		invalidParams.Add(aws.NewErrParamMinLen("UserArn", 32))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteUserProfileOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the user deleted from AWS CodeStar.
-	//
-	// UserArn is a required field
-	UserArn *string `locationName:"userArn" min:"32" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteUserProfileOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteUserProfile = "DeleteUserProfile"
 
@@ -72,7 +27,7 @@ const opDeleteUserProfile = "DeleteUserProfile"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codestar-2017-04-19/DeleteUserProfile
-func (c *Client) DeleteUserProfileRequest(input *DeleteUserProfileInput) DeleteUserProfileRequest {
+func (c *Client) DeleteUserProfileRequest(input *types.DeleteUserProfileInput) DeleteUserProfileRequest {
 	op := &aws.Operation{
 		Name:       opDeleteUserProfile,
 		HTTPMethod: "POST",
@@ -80,10 +35,10 @@ func (c *Client) DeleteUserProfileRequest(input *DeleteUserProfileInput) DeleteU
 	}
 
 	if input == nil {
-		input = &DeleteUserProfileInput{}
+		input = &types.DeleteUserProfileInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteUserProfileOutput{})
+	req := c.newRequest(op, input, &types.DeleteUserProfileOutput{})
 	return DeleteUserProfileRequest{Request: req, Input: input, Copy: c.DeleteUserProfileRequest}
 }
 
@@ -91,8 +46,8 @@ func (c *Client) DeleteUserProfileRequest(input *DeleteUserProfileInput) DeleteU
 // DeleteUserProfile API operation.
 type DeleteUserProfileRequest struct {
 	*aws.Request
-	Input *DeleteUserProfileInput
-	Copy  func(*DeleteUserProfileInput) DeleteUserProfileRequest
+	Input *types.DeleteUserProfileInput
+	Copy  func(*types.DeleteUserProfileInput) DeleteUserProfileRequest
 }
 
 // Send marshals and sends the DeleteUserProfile API request.
@@ -104,7 +59,7 @@ func (r DeleteUserProfileRequest) Send(ctx context.Context) (*DeleteUserProfileR
 	}
 
 	resp := &DeleteUserProfileResponse{
-		DeleteUserProfileOutput: r.Request.Data.(*DeleteUserProfileOutput),
+		DeleteUserProfileOutput: r.Request.Data.(*types.DeleteUserProfileOutput),
 		response:                &aws.Response{Request: r.Request},
 	}
 
@@ -114,7 +69,7 @@ func (r DeleteUserProfileRequest) Send(ctx context.Context) (*DeleteUserProfileR
 // DeleteUserProfileResponse is the response type for the
 // DeleteUserProfile API operation.
 type DeleteUserProfileResponse struct {
-	*DeleteUserProfileOutput
+	*types.DeleteUserProfileOutput
 
 	response *aws.Response
 }

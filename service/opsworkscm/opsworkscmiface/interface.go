@@ -13,6 +13,7 @@ import (
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/opsworkscm"
+	"github.com/aws/aws-sdk-go-v2/service/opsworkscm/types"
 )
 
 // ClientAPI provides an interface to enable mocking the
@@ -46,7 +47,7 @@ import (
 //    type mockClientClient struct {
 //        opsworkscmiface.ClientPI
 //    }
-//    func (m *mockClientClient) AssociateNode(input *opsworkscm.AssociateNodeInput) (*opsworkscm.AssociateNodeOutput, error) {
+//    func (m *mockClientClient) AssociateNode(input *types.AssociateNodeInput) (*types.AssociateNodeOutput, error) {
 //        // mock response/functionality
 //    }
 //
@@ -64,39 +65,39 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type ClientAPI interface {
-	AssociateNodeRequest(*opsworkscm.AssociateNodeInput) opsworkscm.AssociateNodeRequest
+	AssociateNodeRequest(*types.AssociateNodeInput) opsworkscm.AssociateNodeRequest
 
-	CreateBackupRequest(*opsworkscm.CreateBackupInput) opsworkscm.CreateBackupRequest
+	CreateBackupRequest(*types.CreateBackupInput) opsworkscm.CreateBackupRequest
 
-	CreateServerRequest(*opsworkscm.CreateServerInput) opsworkscm.CreateServerRequest
+	CreateServerRequest(*types.CreateServerInput) opsworkscm.CreateServerRequest
 
-	DeleteBackupRequest(*opsworkscm.DeleteBackupInput) opsworkscm.DeleteBackupRequest
+	DeleteBackupRequest(*types.DeleteBackupInput) opsworkscm.DeleteBackupRequest
 
-	DeleteServerRequest(*opsworkscm.DeleteServerInput) opsworkscm.DeleteServerRequest
+	DeleteServerRequest(*types.DeleteServerInput) opsworkscm.DeleteServerRequest
 
-	DescribeAccountAttributesRequest(*opsworkscm.DescribeAccountAttributesInput) opsworkscm.DescribeAccountAttributesRequest
+	DescribeAccountAttributesRequest(*types.DescribeAccountAttributesInput) opsworkscm.DescribeAccountAttributesRequest
 
-	DescribeBackupsRequest(*opsworkscm.DescribeBackupsInput) opsworkscm.DescribeBackupsRequest
+	DescribeBackupsRequest(*types.DescribeBackupsInput) opsworkscm.DescribeBackupsRequest
 
-	DescribeEventsRequest(*opsworkscm.DescribeEventsInput) opsworkscm.DescribeEventsRequest
+	DescribeEventsRequest(*types.DescribeEventsInput) opsworkscm.DescribeEventsRequest
 
-	DescribeNodeAssociationStatusRequest(*opsworkscm.DescribeNodeAssociationStatusInput) opsworkscm.DescribeNodeAssociationStatusRequest
+	DescribeNodeAssociationStatusRequest(*types.DescribeNodeAssociationStatusInput) opsworkscm.DescribeNodeAssociationStatusRequest
 
-	DescribeServersRequest(*opsworkscm.DescribeServersInput) opsworkscm.DescribeServersRequest
+	DescribeServersRequest(*types.DescribeServersInput) opsworkscm.DescribeServersRequest
 
-	DisassociateNodeRequest(*opsworkscm.DisassociateNodeInput) opsworkscm.DisassociateNodeRequest
+	DisassociateNodeRequest(*types.DisassociateNodeInput) opsworkscm.DisassociateNodeRequest
 
-	ExportServerEngineAttributeRequest(*opsworkscm.ExportServerEngineAttributeInput) opsworkscm.ExportServerEngineAttributeRequest
+	ExportServerEngineAttributeRequest(*types.ExportServerEngineAttributeInput) opsworkscm.ExportServerEngineAttributeRequest
 
-	RestoreServerRequest(*opsworkscm.RestoreServerInput) opsworkscm.RestoreServerRequest
+	RestoreServerRequest(*types.RestoreServerInput) opsworkscm.RestoreServerRequest
 
-	StartMaintenanceRequest(*opsworkscm.StartMaintenanceInput) opsworkscm.StartMaintenanceRequest
+	StartMaintenanceRequest(*types.StartMaintenanceInput) opsworkscm.StartMaintenanceRequest
 
-	UpdateServerRequest(*opsworkscm.UpdateServerInput) opsworkscm.UpdateServerRequest
+	UpdateServerRequest(*types.UpdateServerInput) opsworkscm.UpdateServerRequest
 
-	UpdateServerEngineAttributesRequest(*opsworkscm.UpdateServerEngineAttributesInput) opsworkscm.UpdateServerEngineAttributesRequest
+	UpdateServerEngineAttributesRequest(*types.UpdateServerEngineAttributesInput) opsworkscm.UpdateServerEngineAttributesRequest
 
-	WaitUntilNodeAssociated(context.Context, *opsworkscm.DescribeNodeAssociationStatusInput, ...aws.WaiterOption) error
+	WaitUntilNodeAssociated(context.Context, *types.DescribeNodeAssociationStatusInput, ...aws.WaiterOption) error
 }
 
 var _ ClientAPI = (*opsworkscm.Client)(nil)

@@ -6,61 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/devicefarm/types"
 )
-
-type UpdateDeviceInstanceInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the device instance.
-	//
-	// Arn is a required field
-	Arn *string `locationName:"arn" min:"32" type:"string" required:"true"`
-
-	// An array of strings that you want to associate with the device instance.
-	Labels []string `locationName:"labels" type:"list"`
-
-	// The Amazon Resource Name (ARN) of the profile that you want to associate
-	// with the device instance.
-	ProfileArn *string `locationName:"profileArn" min:"32" type:"string"`
-}
-
-// String returns the string representation
-func (s UpdateDeviceInstanceInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateDeviceInstanceInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateDeviceInstanceInput"}
-
-	if s.Arn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Arn"))
-	}
-	if s.Arn != nil && len(*s.Arn) < 32 {
-		invalidParams.Add(aws.NewErrParamMinLen("Arn", 32))
-	}
-	if s.ProfileArn != nil && len(*s.ProfileArn) < 32 {
-		invalidParams.Add(aws.NewErrParamMinLen("ProfileArn", 32))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type UpdateDeviceInstanceOutput struct {
-	_ struct{} `type:"structure"`
-
-	// An object containing information about your device instance.
-	DeviceInstance *DeviceInstance `locationName:"deviceInstance" type:"structure"`
-}
-
-// String returns the string representation
-func (s UpdateDeviceInstanceOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opUpdateDeviceInstance = "UpdateDeviceInstance"
 
@@ -77,7 +24,7 @@ const opUpdateDeviceInstance = "UpdateDeviceInstance"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/UpdateDeviceInstance
-func (c *Client) UpdateDeviceInstanceRequest(input *UpdateDeviceInstanceInput) UpdateDeviceInstanceRequest {
+func (c *Client) UpdateDeviceInstanceRequest(input *types.UpdateDeviceInstanceInput) UpdateDeviceInstanceRequest {
 	op := &aws.Operation{
 		Name:       opUpdateDeviceInstance,
 		HTTPMethod: "POST",
@@ -85,10 +32,10 @@ func (c *Client) UpdateDeviceInstanceRequest(input *UpdateDeviceInstanceInput) U
 	}
 
 	if input == nil {
-		input = &UpdateDeviceInstanceInput{}
+		input = &types.UpdateDeviceInstanceInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateDeviceInstanceOutput{})
+	req := c.newRequest(op, input, &types.UpdateDeviceInstanceOutput{})
 	return UpdateDeviceInstanceRequest{Request: req, Input: input, Copy: c.UpdateDeviceInstanceRequest}
 }
 
@@ -96,8 +43,8 @@ func (c *Client) UpdateDeviceInstanceRequest(input *UpdateDeviceInstanceInput) U
 // UpdateDeviceInstance API operation.
 type UpdateDeviceInstanceRequest struct {
 	*aws.Request
-	Input *UpdateDeviceInstanceInput
-	Copy  func(*UpdateDeviceInstanceInput) UpdateDeviceInstanceRequest
+	Input *types.UpdateDeviceInstanceInput
+	Copy  func(*types.UpdateDeviceInstanceInput) UpdateDeviceInstanceRequest
 }
 
 // Send marshals and sends the UpdateDeviceInstance API request.
@@ -109,7 +56,7 @@ func (r UpdateDeviceInstanceRequest) Send(ctx context.Context) (*UpdateDeviceIns
 	}
 
 	resp := &UpdateDeviceInstanceResponse{
-		UpdateDeviceInstanceOutput: r.Request.Data.(*UpdateDeviceInstanceOutput),
+		UpdateDeviceInstanceOutput: r.Request.Data.(*types.UpdateDeviceInstanceOutput),
 		response:                   &aws.Response{Request: r.Request},
 	}
 
@@ -119,7 +66,7 @@ func (r UpdateDeviceInstanceRequest) Send(ctx context.Context) (*UpdateDeviceIns
 // UpdateDeviceInstanceResponse is the response type for the
 // UpdateDeviceInstance API operation.
 type UpdateDeviceInstanceResponse struct {
-	*UpdateDeviceInstanceOutput
+	*types.UpdateDeviceInstanceOutput
 
 	response *aws.Response
 }

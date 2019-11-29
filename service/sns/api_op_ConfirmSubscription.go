@@ -6,65 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/sns/types"
 )
-
-// Input for ConfirmSubscription action.
-type ConfirmSubscriptionInput struct {
-	_ struct{} `type:"structure"`
-
-	// Disallows unauthenticated unsubscribes of the subscription. If the value
-	// of this parameter is true and the request has an AWS signature, then only
-	// the topic owner and the subscription owner can unsubscribe the endpoint.
-	// The unsubscribe action requires AWS authentication.
-	AuthenticateOnUnsubscribe *string `type:"string"`
-
-	// Short-lived token sent to an endpoint during the Subscribe action.
-	//
-	// Token is a required field
-	Token *string `type:"string" required:"true"`
-
-	// The ARN of the topic for which you wish to confirm a subscription.
-	//
-	// TopicArn is a required field
-	TopicArn *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s ConfirmSubscriptionInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ConfirmSubscriptionInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ConfirmSubscriptionInput"}
-
-	if s.Token == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Token"))
-	}
-
-	if s.TopicArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("TopicArn"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Response for ConfirmSubscriptions action.
-type ConfirmSubscriptionOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The ARN of the created subscription.
-	SubscriptionArn *string `type:"string"`
-}
-
-// String returns the string representation
-func (s ConfirmSubscriptionOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opConfirmSubscription = "ConfirmSubscription"
 
@@ -85,7 +28,7 @@ const opConfirmSubscription = "ConfirmSubscription"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/ConfirmSubscription
-func (c *Client) ConfirmSubscriptionRequest(input *ConfirmSubscriptionInput) ConfirmSubscriptionRequest {
+func (c *Client) ConfirmSubscriptionRequest(input *types.ConfirmSubscriptionInput) ConfirmSubscriptionRequest {
 	op := &aws.Operation{
 		Name:       opConfirmSubscription,
 		HTTPMethod: "POST",
@@ -93,10 +36,10 @@ func (c *Client) ConfirmSubscriptionRequest(input *ConfirmSubscriptionInput) Con
 	}
 
 	if input == nil {
-		input = &ConfirmSubscriptionInput{}
+		input = &types.ConfirmSubscriptionInput{}
 	}
 
-	req := c.newRequest(op, input, &ConfirmSubscriptionOutput{})
+	req := c.newRequest(op, input, &types.ConfirmSubscriptionOutput{})
 	return ConfirmSubscriptionRequest{Request: req, Input: input, Copy: c.ConfirmSubscriptionRequest}
 }
 
@@ -104,8 +47,8 @@ func (c *Client) ConfirmSubscriptionRequest(input *ConfirmSubscriptionInput) Con
 // ConfirmSubscription API operation.
 type ConfirmSubscriptionRequest struct {
 	*aws.Request
-	Input *ConfirmSubscriptionInput
-	Copy  func(*ConfirmSubscriptionInput) ConfirmSubscriptionRequest
+	Input *types.ConfirmSubscriptionInput
+	Copy  func(*types.ConfirmSubscriptionInput) ConfirmSubscriptionRequest
 }
 
 // Send marshals and sends the ConfirmSubscription API request.
@@ -117,7 +60,7 @@ func (r ConfirmSubscriptionRequest) Send(ctx context.Context) (*ConfirmSubscript
 	}
 
 	resp := &ConfirmSubscriptionResponse{
-		ConfirmSubscriptionOutput: r.Request.Data.(*ConfirmSubscriptionOutput),
+		ConfirmSubscriptionOutput: r.Request.Data.(*types.ConfirmSubscriptionOutput),
 		response:                  &aws.Response{Request: r.Request},
 	}
 
@@ -127,7 +70,7 @@ func (r ConfirmSubscriptionRequest) Send(ctx context.Context) (*ConfirmSubscript
 // ConfirmSubscriptionResponse is the response type for the
 // ConfirmSubscription API operation.
 type ConfirmSubscriptionResponse struct {
-	*ConfirmSubscriptionOutput
+	*types.ConfirmSubscriptionOutput
 
 	response *aws.Response
 }

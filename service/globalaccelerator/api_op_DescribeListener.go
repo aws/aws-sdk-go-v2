@@ -6,48 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/globalaccelerator/types"
 )
-
-type DescribeListenerInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the listener to describe.
-	//
-	// ListenerArn is a required field
-	ListenerArn *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeListenerInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeListenerInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeListenerInput"}
-
-	if s.ListenerArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ListenerArn"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribeListenerOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The description of a listener.
-	Listener *Listener `type:"structure"`
-}
-
-// String returns the string representation
-func (s DescribeListenerOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeListener = "DescribeListener"
 
@@ -64,7 +24,7 @@ const opDescribeListener = "DescribeListener"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/DescribeListener
-func (c *Client) DescribeListenerRequest(input *DescribeListenerInput) DescribeListenerRequest {
+func (c *Client) DescribeListenerRequest(input *types.DescribeListenerInput) DescribeListenerRequest {
 	op := &aws.Operation{
 		Name:       opDescribeListener,
 		HTTPMethod: "POST",
@@ -72,10 +32,10 @@ func (c *Client) DescribeListenerRequest(input *DescribeListenerInput) DescribeL
 	}
 
 	if input == nil {
-		input = &DescribeListenerInput{}
+		input = &types.DescribeListenerInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeListenerOutput{})
+	req := c.newRequest(op, input, &types.DescribeListenerOutput{})
 	return DescribeListenerRequest{Request: req, Input: input, Copy: c.DescribeListenerRequest}
 }
 
@@ -83,8 +43,8 @@ func (c *Client) DescribeListenerRequest(input *DescribeListenerInput) DescribeL
 // DescribeListener API operation.
 type DescribeListenerRequest struct {
 	*aws.Request
-	Input *DescribeListenerInput
-	Copy  func(*DescribeListenerInput) DescribeListenerRequest
+	Input *types.DescribeListenerInput
+	Copy  func(*types.DescribeListenerInput) DescribeListenerRequest
 }
 
 // Send marshals and sends the DescribeListener API request.
@@ -96,7 +56,7 @@ func (r DescribeListenerRequest) Send(ctx context.Context) (*DescribeListenerRes
 	}
 
 	resp := &DescribeListenerResponse{
-		DescribeListenerOutput: r.Request.Data.(*DescribeListenerOutput),
+		DescribeListenerOutput: r.Request.Data.(*types.DescribeListenerOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -106,7 +66,7 @@ func (r DescribeListenerRequest) Send(ctx context.Context) (*DescribeListenerRes
 // DescribeListenerResponse is the response type for the
 // DescribeListener API operation.
 type DescribeListenerResponse struct {
-	*DescribeListenerOutput
+	*types.DescribeListenerOutput
 
 	response *aws.Response
 }

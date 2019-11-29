@@ -6,36 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/lightsail/types"
 )
-
-type GetActiveNamesInput struct {
-	_ struct{} `type:"structure"`
-
-	// A token used for paginating results from your get active names request.
-	PageToken *string `locationName:"pageToken" type:"string"`
-}
-
-// String returns the string representation
-func (s GetActiveNamesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type GetActiveNamesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The list of active names returned by the get active names request.
-	ActiveNames []string `locationName:"activeNames" type:"list"`
-
-	// A token used for advancing to the next page of results from your get active
-	// names request.
-	NextPageToken *string `locationName:"nextPageToken" type:"string"`
-}
-
-// String returns the string representation
-func (s GetActiveNamesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetActiveNames = "GetActiveNames"
 
@@ -52,7 +24,7 @@ const opGetActiveNames = "GetActiveNames"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetActiveNames
-func (c *Client) GetActiveNamesRequest(input *GetActiveNamesInput) GetActiveNamesRequest {
+func (c *Client) GetActiveNamesRequest(input *types.GetActiveNamesInput) GetActiveNamesRequest {
 	op := &aws.Operation{
 		Name:       opGetActiveNames,
 		HTTPMethod: "POST",
@@ -60,10 +32,10 @@ func (c *Client) GetActiveNamesRequest(input *GetActiveNamesInput) GetActiveName
 	}
 
 	if input == nil {
-		input = &GetActiveNamesInput{}
+		input = &types.GetActiveNamesInput{}
 	}
 
-	req := c.newRequest(op, input, &GetActiveNamesOutput{})
+	req := c.newRequest(op, input, &types.GetActiveNamesOutput{})
 	return GetActiveNamesRequest{Request: req, Input: input, Copy: c.GetActiveNamesRequest}
 }
 
@@ -71,8 +43,8 @@ func (c *Client) GetActiveNamesRequest(input *GetActiveNamesInput) GetActiveName
 // GetActiveNames API operation.
 type GetActiveNamesRequest struct {
 	*aws.Request
-	Input *GetActiveNamesInput
-	Copy  func(*GetActiveNamesInput) GetActiveNamesRequest
+	Input *types.GetActiveNamesInput
+	Copy  func(*types.GetActiveNamesInput) GetActiveNamesRequest
 }
 
 // Send marshals and sends the GetActiveNames API request.
@@ -84,7 +56,7 @@ func (r GetActiveNamesRequest) Send(ctx context.Context) (*GetActiveNamesRespons
 	}
 
 	resp := &GetActiveNamesResponse{
-		GetActiveNamesOutput: r.Request.Data.(*GetActiveNamesOutput),
+		GetActiveNamesOutput: r.Request.Data.(*types.GetActiveNamesOutput),
 		response:             &aws.Response{Request: r.Request},
 	}
 
@@ -94,7 +66,7 @@ func (r GetActiveNamesRequest) Send(ctx context.Context) (*GetActiveNamesRespons
 // GetActiveNamesResponse is the response type for the
 // GetActiveNames API operation.
 type GetActiveNamesResponse struct {
-	*GetActiveNamesOutput
+	*types.GetActiveNamesOutput
 
 	response *aws.Response
 }

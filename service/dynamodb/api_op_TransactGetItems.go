@@ -4,80 +4,10 @@ package dynamodb
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/dynamodb/types"
 )
-
-type TransactGetItemsInput struct {
-	_ struct{} `type:"structure"`
-
-	// A value of TOTAL causes consumed capacity information to be returned, and
-	// a value of NONE prevents that information from being returned. No other value
-	// is valid.
-	ReturnConsumedCapacity ReturnConsumedCapacity `type:"string" enum:"true"`
-
-	// An ordered array of up to 25 TransactGetItem objects, each of which contains
-	// a Get structure.
-	//
-	// TransactItems is a required field
-	TransactItems []TransactGetItem `min:"1" type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s TransactGetItemsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *TransactGetItemsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "TransactGetItemsInput"}
-
-	if s.TransactItems == nil {
-		invalidParams.Add(aws.NewErrParamRequired("TransactItems"))
-	}
-	if s.TransactItems != nil && len(s.TransactItems) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("TransactItems", 1))
-	}
-	if s.TransactItems != nil {
-		for i, v := range s.TransactItems {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "TransactItems", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type TransactGetItemsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// If the ReturnConsumedCapacity value was TOTAL, this is an array of ConsumedCapacity
-	// objects, one for each table addressed by TransactGetItem objects in the TransactItems
-	// parameter. These ConsumedCapacity objects report the read-capacity units
-	// consumed by the TransactGetItems call in that table.
-	ConsumedCapacity []ConsumedCapacity `type:"list"`
-
-	// An ordered array of up to 25 ItemResponse objects, each of which corresponds
-	// to the TransactGetItem object in the same position in the TransactItems array.
-	// Each ItemResponse object contains a Map of the name-value pairs that are
-	// the projected attributes of the requested item.
-	//
-	// If a requested item could not be retrieved, the corresponding ItemResponse
-	// object is Null, or if the requested item has no projected attributes, the
-	// corresponding ItemResponse object is an empty Map.
-	Responses []ItemResponse `min:"1" type:"list"`
-}
-
-// String returns the string representation
-func (s TransactGetItemsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opTransactGetItems = "TransactGetItems"
 
@@ -91,16 +21,6 @@ const opTransactGetItems = "TransactGetItems"
 // retrieve from a table in the account and Region. A call to TransactGetItems
 // cannot retrieve items from tables in more than one AWS account or Region.
 // The aggregate size of the items in the transaction cannot exceed 4 MB.
-//
-// All AWS Regions and AWS GovCloud (US) support up to 25 items per transaction
-// with up to 4 MB of data, except the following AWS Regions:
-//
-//    * China (Beijing)
-//
-//    * China (Ningxia)
-//
-// The China (Beijing) and China (Ningxia) Regions support up to 10 items per
-// transaction with up to 4 MB of data.
 //
 // DynamoDB rejects the entire TransactGetItems request if any of the following
 // is true:
@@ -123,7 +43,7 @@ const opTransactGetItems = "TransactGetItems"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/TransactGetItems
-func (c *Client) TransactGetItemsRequest(input *TransactGetItemsInput) TransactGetItemsRequest {
+func (c *Client) TransactGetItemsRequest(input *types.TransactGetItemsInput) TransactGetItemsRequest {
 	op := &aws.Operation{
 		Name:       opTransactGetItems,
 		HTTPMethod: "POST",
@@ -131,10 +51,10 @@ func (c *Client) TransactGetItemsRequest(input *TransactGetItemsInput) TransactG
 	}
 
 	if input == nil {
-		input = &TransactGetItemsInput{}
+		input = &types.TransactGetItemsInput{}
 	}
 
-	req := c.newRequest(op, input, &TransactGetItemsOutput{})
+	req := c.newRequest(op, input, &types.TransactGetItemsOutput{})
 	return TransactGetItemsRequest{Request: req, Input: input, Copy: c.TransactGetItemsRequest}
 }
 
@@ -142,8 +62,8 @@ func (c *Client) TransactGetItemsRequest(input *TransactGetItemsInput) TransactG
 // TransactGetItems API operation.
 type TransactGetItemsRequest struct {
 	*aws.Request
-	Input *TransactGetItemsInput
-	Copy  func(*TransactGetItemsInput) TransactGetItemsRequest
+	Input *types.TransactGetItemsInput
+	Copy  func(*types.TransactGetItemsInput) TransactGetItemsRequest
 }
 
 // Send marshals and sends the TransactGetItems API request.
@@ -155,7 +75,7 @@ func (r TransactGetItemsRequest) Send(ctx context.Context) (*TransactGetItemsRes
 	}
 
 	resp := &TransactGetItemsResponse{
-		TransactGetItemsOutput: r.Request.Data.(*TransactGetItemsOutput),
+		TransactGetItemsOutput: r.Request.Data.(*types.TransactGetItemsOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -165,7 +85,7 @@ func (r TransactGetItemsRequest) Send(ctx context.Context) (*TransactGetItemsRes
 // TransactGetItemsResponse is the response type for the
 // TransactGetItems API operation.
 type TransactGetItemsResponse struct {
-	*TransactGetItemsOutput
+	*types.TransactGetItemsOutput
 
 	response *aws.Response
 }

@@ -6,64 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/comprehend/types"
 )
-
-type ListEntitiesDetectionJobsInput struct {
-	_ struct{} `type:"structure"`
-
-	// Filters the jobs that are returned. You can filter jobs on their name, status,
-	// or the date and time that they were submitted. You can only set one filter
-	// at a time.
-	Filter *EntitiesDetectionJobFilter `type:"structure"`
-
-	// The maximum number of results to return in each page. The default is 100.
-	MaxResults *int64 `min:"1" type:"integer"`
-
-	// Identifies the next page of results to return.
-	NextToken *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s ListEntitiesDetectionJobsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListEntitiesDetectionJobsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListEntitiesDetectionJobsInput"}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-	if s.NextToken != nil && len(*s.NextToken) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
-	}
-	if s.Filter != nil {
-		if err := s.Filter.Validate(); err != nil {
-			invalidParams.AddNested("Filter", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ListEntitiesDetectionJobsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A list containing the properties of each job that is returned.
-	EntitiesDetectionJobPropertiesList []EntitiesDetectionJobProperties `type:"list"`
-
-	// Identifies the next page of results to return.
-	NextToken *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s ListEntitiesDetectionJobsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListEntitiesDetectionJobs = "ListEntitiesDetectionJobs"
 
@@ -80,7 +24,7 @@ const opListEntitiesDetectionJobs = "ListEntitiesDetectionJobs"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/ListEntitiesDetectionJobs
-func (c *Client) ListEntitiesDetectionJobsRequest(input *ListEntitiesDetectionJobsInput) ListEntitiesDetectionJobsRequest {
+func (c *Client) ListEntitiesDetectionJobsRequest(input *types.ListEntitiesDetectionJobsInput) ListEntitiesDetectionJobsRequest {
 	op := &aws.Operation{
 		Name:       opListEntitiesDetectionJobs,
 		HTTPMethod: "POST",
@@ -94,10 +38,10 @@ func (c *Client) ListEntitiesDetectionJobsRequest(input *ListEntitiesDetectionJo
 	}
 
 	if input == nil {
-		input = &ListEntitiesDetectionJobsInput{}
+		input = &types.ListEntitiesDetectionJobsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListEntitiesDetectionJobsOutput{})
+	req := c.newRequest(op, input, &types.ListEntitiesDetectionJobsOutput{})
 	return ListEntitiesDetectionJobsRequest{Request: req, Input: input, Copy: c.ListEntitiesDetectionJobsRequest}
 }
 
@@ -105,8 +49,8 @@ func (c *Client) ListEntitiesDetectionJobsRequest(input *ListEntitiesDetectionJo
 // ListEntitiesDetectionJobs API operation.
 type ListEntitiesDetectionJobsRequest struct {
 	*aws.Request
-	Input *ListEntitiesDetectionJobsInput
-	Copy  func(*ListEntitiesDetectionJobsInput) ListEntitiesDetectionJobsRequest
+	Input *types.ListEntitiesDetectionJobsInput
+	Copy  func(*types.ListEntitiesDetectionJobsInput) ListEntitiesDetectionJobsRequest
 }
 
 // Send marshals and sends the ListEntitiesDetectionJobs API request.
@@ -118,7 +62,7 @@ func (r ListEntitiesDetectionJobsRequest) Send(ctx context.Context) (*ListEntiti
 	}
 
 	resp := &ListEntitiesDetectionJobsResponse{
-		ListEntitiesDetectionJobsOutput: r.Request.Data.(*ListEntitiesDetectionJobsOutput),
+		ListEntitiesDetectionJobsOutput: r.Request.Data.(*types.ListEntitiesDetectionJobsOutput),
 		response:                        &aws.Response{Request: r.Request},
 	}
 
@@ -148,7 +92,7 @@ func NewListEntitiesDetectionJobsPaginator(req ListEntitiesDetectionJobsRequest)
 	return ListEntitiesDetectionJobsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListEntitiesDetectionJobsInput
+				var inCpy *types.ListEntitiesDetectionJobsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -168,14 +112,14 @@ type ListEntitiesDetectionJobsPaginator struct {
 	aws.Pager
 }
 
-func (p *ListEntitiesDetectionJobsPaginator) CurrentPage() *ListEntitiesDetectionJobsOutput {
-	return p.Pager.CurrentPage().(*ListEntitiesDetectionJobsOutput)
+func (p *ListEntitiesDetectionJobsPaginator) CurrentPage() *types.ListEntitiesDetectionJobsOutput {
+	return p.Pager.CurrentPage().(*types.ListEntitiesDetectionJobsOutput)
 }
 
 // ListEntitiesDetectionJobsResponse is the response type for the
 // ListEntitiesDetectionJobs API operation.
 type ListEntitiesDetectionJobsResponse struct {
-	*ListEntitiesDetectionJobsOutput
+	*types.ListEntitiesDetectionJobsOutput
 
 	response *aws.Response
 }

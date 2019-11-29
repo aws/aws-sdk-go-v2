@@ -6,101 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/backup/types"
 )
-
-type ListRestoreJobsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The maximum number of items to be returned.
-	MaxResults *int64 `location:"querystring" locationName:"maxResults" min:"1" type:"integer"`
-
-	// The next item following a partial list of returned items. For example, if
-	// a request is made to return maxResults number of items, NextToken allows
-	// you to return more items in your list starting at the location pointed to
-	// by the next token.
-	NextToken *string `location:"querystring" locationName:"nextToken" type:"string"`
-}
-
-// String returns the string representation
-func (s ListRestoreJobsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListRestoreJobsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListRestoreJobsInput"}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListRestoreJobsInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.MaxResults != nil {
-		v := *s.MaxResults
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "maxResults", protocol.Int64Value(v), metadata)
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type ListRestoreJobsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The next item following a partial list of returned items. For example, if
-	// a request is made to return maxResults number of items, NextToken allows
-	// you to return more items in your list starting at the location pointed to
-	// by the next token.
-	NextToken *string `type:"string"`
-
-	// An array of objects that contain detailed information about jobs to restore
-	// saved resources.
-	RestoreJobs []RestoreJobsListMember `type:"list"`
-}
-
-// String returns the string representation
-func (s ListRestoreJobsOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListRestoreJobsOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.RestoreJobs != nil {
-		v := s.RestoreJobs
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "RestoreJobs", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	return nil
-}
 
 const opListRestoreJobs = "ListRestoreJobs"
 
@@ -118,7 +25,7 @@ const opListRestoreJobs = "ListRestoreJobs"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/ListRestoreJobs
-func (c *Client) ListRestoreJobsRequest(input *ListRestoreJobsInput) ListRestoreJobsRequest {
+func (c *Client) ListRestoreJobsRequest(input *types.ListRestoreJobsInput) ListRestoreJobsRequest {
 	op := &aws.Operation{
 		Name:       opListRestoreJobs,
 		HTTPMethod: "GET",
@@ -132,10 +39,10 @@ func (c *Client) ListRestoreJobsRequest(input *ListRestoreJobsInput) ListRestore
 	}
 
 	if input == nil {
-		input = &ListRestoreJobsInput{}
+		input = &types.ListRestoreJobsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListRestoreJobsOutput{})
+	req := c.newRequest(op, input, &types.ListRestoreJobsOutput{})
 	return ListRestoreJobsRequest{Request: req, Input: input, Copy: c.ListRestoreJobsRequest}
 }
 
@@ -143,8 +50,8 @@ func (c *Client) ListRestoreJobsRequest(input *ListRestoreJobsInput) ListRestore
 // ListRestoreJobs API operation.
 type ListRestoreJobsRequest struct {
 	*aws.Request
-	Input *ListRestoreJobsInput
-	Copy  func(*ListRestoreJobsInput) ListRestoreJobsRequest
+	Input *types.ListRestoreJobsInput
+	Copy  func(*types.ListRestoreJobsInput) ListRestoreJobsRequest
 }
 
 // Send marshals and sends the ListRestoreJobs API request.
@@ -156,7 +63,7 @@ func (r ListRestoreJobsRequest) Send(ctx context.Context) (*ListRestoreJobsRespo
 	}
 
 	resp := &ListRestoreJobsResponse{
-		ListRestoreJobsOutput: r.Request.Data.(*ListRestoreJobsOutput),
+		ListRestoreJobsOutput: r.Request.Data.(*types.ListRestoreJobsOutput),
 		response:              &aws.Response{Request: r.Request},
 	}
 
@@ -186,7 +93,7 @@ func NewListRestoreJobsPaginator(req ListRestoreJobsRequest) ListRestoreJobsPagi
 	return ListRestoreJobsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListRestoreJobsInput
+				var inCpy *types.ListRestoreJobsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -206,14 +113,14 @@ type ListRestoreJobsPaginator struct {
 	aws.Pager
 }
 
-func (p *ListRestoreJobsPaginator) CurrentPage() *ListRestoreJobsOutput {
-	return p.Pager.CurrentPage().(*ListRestoreJobsOutput)
+func (p *ListRestoreJobsPaginator) CurrentPage() *types.ListRestoreJobsOutput {
+	return p.Pager.CurrentPage().(*types.ListRestoreJobsOutput)
 }
 
 // ListRestoreJobsResponse is the response type for the
 // ListRestoreJobs API operation.
 type ListRestoreJobsResponse struct {
-	*ListRestoreJobsOutput
+	*types.ListRestoreJobsOutput
 
 	response *aws.Response
 }

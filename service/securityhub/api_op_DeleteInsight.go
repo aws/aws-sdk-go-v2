@@ -6,75 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/securityhub/types"
 )
-
-type DeleteInsightInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ARN of the insight to delete.
-	//
-	// InsightArn is a required field
-	InsightArn *string `location:"uri" locationName:"InsightArn" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteInsightInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteInsightInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteInsightInput"}
-
-	if s.InsightArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("InsightArn"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteInsightInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.InsightArn != nil {
-		v := *s.InsightArn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "InsightArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type DeleteInsightOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The ARN of the insight that was deleted.
-	//
-	// InsightArn is a required field
-	InsightArn *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteInsightOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteInsightOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.InsightArn != nil {
-		v := *s.InsightArn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "InsightArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opDeleteInsight = "DeleteInsight"
 
@@ -91,7 +24,7 @@ const opDeleteInsight = "DeleteInsight"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/DeleteInsight
-func (c *Client) DeleteInsightRequest(input *DeleteInsightInput) DeleteInsightRequest {
+func (c *Client) DeleteInsightRequest(input *types.DeleteInsightInput) DeleteInsightRequest {
 	op := &aws.Operation{
 		Name:       opDeleteInsight,
 		HTTPMethod: "DELETE",
@@ -99,10 +32,10 @@ func (c *Client) DeleteInsightRequest(input *DeleteInsightInput) DeleteInsightRe
 	}
 
 	if input == nil {
-		input = &DeleteInsightInput{}
+		input = &types.DeleteInsightInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteInsightOutput{})
+	req := c.newRequest(op, input, &types.DeleteInsightOutput{})
 	return DeleteInsightRequest{Request: req, Input: input, Copy: c.DeleteInsightRequest}
 }
 
@@ -110,8 +43,8 @@ func (c *Client) DeleteInsightRequest(input *DeleteInsightInput) DeleteInsightRe
 // DeleteInsight API operation.
 type DeleteInsightRequest struct {
 	*aws.Request
-	Input *DeleteInsightInput
-	Copy  func(*DeleteInsightInput) DeleteInsightRequest
+	Input *types.DeleteInsightInput
+	Copy  func(*types.DeleteInsightInput) DeleteInsightRequest
 }
 
 // Send marshals and sends the DeleteInsight API request.
@@ -123,7 +56,7 @@ func (r DeleteInsightRequest) Send(ctx context.Context) (*DeleteInsightResponse,
 	}
 
 	resp := &DeleteInsightResponse{
-		DeleteInsightOutput: r.Request.Data.(*DeleteInsightOutput),
+		DeleteInsightOutput: r.Request.Data.(*types.DeleteInsightOutput),
 		response:            &aws.Response{Request: r.Request},
 	}
 
@@ -133,7 +66,7 @@ func (r DeleteInsightRequest) Send(ctx context.Context) (*DeleteInsightResponse,
 // DeleteInsightResponse is the response type for the
 // DeleteInsight API operation.
 type DeleteInsightResponse struct {
-	*DeleteInsightOutput
+	*types.DeleteInsightOutput
 
 	response *aws.Response
 }

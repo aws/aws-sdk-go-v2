@@ -6,115 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/groundstation/types"
 )
-
-type GetMinuteUsageInput struct {
-	_ struct{} `type:"structure"`
-
-	// Month is a required field
-	Month *int64 `locationName:"month" type:"integer" required:"true"`
-
-	// Year is a required field
-	Year *int64 `locationName:"year" type:"integer" required:"true"`
-}
-
-// String returns the string representation
-func (s GetMinuteUsageInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetMinuteUsageInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetMinuteUsageInput"}
-
-	if s.Month == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Month"))
-	}
-
-	if s.Year == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Year"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetMinuteUsageInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.Month != nil {
-		v := *s.Month
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "month", protocol.Int64Value(v), metadata)
-	}
-	if s.Year != nil {
-		v := *s.Year
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "year", protocol.Int64Value(v), metadata)
-	}
-	return nil
-}
-
-type GetMinuteUsageOutput struct {
-	_ struct{} `type:"structure"`
-
-	EstimatedMinutesRemaining *int64 `locationName:"estimatedMinutesRemaining" type:"integer"`
-
-	IsReservedMinutesCustomer *bool `locationName:"isReservedMinutesCustomer" type:"boolean"`
-
-	TotalReservedMinuteAllocation *int64 `locationName:"totalReservedMinuteAllocation" type:"integer"`
-
-	TotalScheduledMinutes *int64 `locationName:"totalScheduledMinutes" type:"integer"`
-
-	UpcomingMinutesScheduled *int64 `locationName:"upcomingMinutesScheduled" type:"integer"`
-}
-
-// String returns the string representation
-func (s GetMinuteUsageOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetMinuteUsageOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.EstimatedMinutesRemaining != nil {
-		v := *s.EstimatedMinutesRemaining
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "estimatedMinutesRemaining", protocol.Int64Value(v), metadata)
-	}
-	if s.IsReservedMinutesCustomer != nil {
-		v := *s.IsReservedMinutesCustomer
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "isReservedMinutesCustomer", protocol.BoolValue(v), metadata)
-	}
-	if s.TotalReservedMinuteAllocation != nil {
-		v := *s.TotalReservedMinuteAllocation
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "totalReservedMinuteAllocation", protocol.Int64Value(v), metadata)
-	}
-	if s.TotalScheduledMinutes != nil {
-		v := *s.TotalScheduledMinutes
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "totalScheduledMinutes", protocol.Int64Value(v), metadata)
-	}
-	if s.UpcomingMinutesScheduled != nil {
-		v := *s.UpcomingMinutesScheduled
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "upcomingMinutesScheduled", protocol.Int64Value(v), metadata)
-	}
-	return nil
-}
 
 const opGetMinuteUsage = "GetMinuteUsage"
 
@@ -131,7 +24,7 @@ const opGetMinuteUsage = "GetMinuteUsage"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/groundstation-2019-05-23/GetMinuteUsage
-func (c *Client) GetMinuteUsageRequest(input *GetMinuteUsageInput) GetMinuteUsageRequest {
+func (c *Client) GetMinuteUsageRequest(input *types.GetMinuteUsageInput) GetMinuteUsageRequest {
 	op := &aws.Operation{
 		Name:       opGetMinuteUsage,
 		HTTPMethod: "POST",
@@ -139,10 +32,10 @@ func (c *Client) GetMinuteUsageRequest(input *GetMinuteUsageInput) GetMinuteUsag
 	}
 
 	if input == nil {
-		input = &GetMinuteUsageInput{}
+		input = &types.GetMinuteUsageInput{}
 	}
 
-	req := c.newRequest(op, input, &GetMinuteUsageOutput{})
+	req := c.newRequest(op, input, &types.GetMinuteUsageOutput{})
 	return GetMinuteUsageRequest{Request: req, Input: input, Copy: c.GetMinuteUsageRequest}
 }
 
@@ -150,8 +43,8 @@ func (c *Client) GetMinuteUsageRequest(input *GetMinuteUsageInput) GetMinuteUsag
 // GetMinuteUsage API operation.
 type GetMinuteUsageRequest struct {
 	*aws.Request
-	Input *GetMinuteUsageInput
-	Copy  func(*GetMinuteUsageInput) GetMinuteUsageRequest
+	Input *types.GetMinuteUsageInput
+	Copy  func(*types.GetMinuteUsageInput) GetMinuteUsageRequest
 }
 
 // Send marshals and sends the GetMinuteUsage API request.
@@ -163,7 +56,7 @@ func (r GetMinuteUsageRequest) Send(ctx context.Context) (*GetMinuteUsageRespons
 	}
 
 	resp := &GetMinuteUsageResponse{
-		GetMinuteUsageOutput: r.Request.Data.(*GetMinuteUsageOutput),
+		GetMinuteUsageOutput: r.Request.Data.(*types.GetMinuteUsageOutput),
 		response:             &aws.Response{Request: r.Request},
 	}
 
@@ -173,7 +66,7 @@ func (r GetMinuteUsageRequest) Send(ctx context.Context) (*GetMinuteUsageRespons
 // GetMinuteUsageResponse is the response type for the
 // GetMinuteUsage API operation.
 type GetMinuteUsageResponse struct {
-	*GetMinuteUsageOutput
+	*types.GetMinuteUsageOutput
 
 	response *aws.Response
 }

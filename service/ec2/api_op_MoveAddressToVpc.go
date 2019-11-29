@@ -6,57 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-type MoveAddressToVpcInput struct {
-	_ struct{} `type:"structure"`
-
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have
-	// the required permissions, the error response is DryRunOperation. Otherwise,
-	// it is UnauthorizedOperation.
-	DryRun *bool `locationName:"dryRun" type:"boolean"`
-
-	// The Elastic IP address.
-	//
-	// PublicIp is a required field
-	PublicIp *string `locationName:"publicIp" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s MoveAddressToVpcInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *MoveAddressToVpcInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "MoveAddressToVpcInput"}
-
-	if s.PublicIp == nil {
-		invalidParams.Add(aws.NewErrParamRequired("PublicIp"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type MoveAddressToVpcOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The allocation ID for the Elastic IP address.
-	AllocationId *string `locationName:"allocationId" type:"string"`
-
-	// The status of the move of the IP address.
-	Status Status `locationName:"status" type:"string" enum:"true"`
-}
-
-// String returns the string representation
-func (s MoveAddressToVpcOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opMoveAddressToVpc = "MoveAddressToVpc"
 
@@ -79,7 +30,7 @@ const opMoveAddressToVpc = "MoveAddressToVpc"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/MoveAddressToVpc
-func (c *Client) MoveAddressToVpcRequest(input *MoveAddressToVpcInput) MoveAddressToVpcRequest {
+func (c *Client) MoveAddressToVpcRequest(input *types.MoveAddressToVpcInput) MoveAddressToVpcRequest {
 	op := &aws.Operation{
 		Name:       opMoveAddressToVpc,
 		HTTPMethod: "POST",
@@ -87,10 +38,10 @@ func (c *Client) MoveAddressToVpcRequest(input *MoveAddressToVpcInput) MoveAddre
 	}
 
 	if input == nil {
-		input = &MoveAddressToVpcInput{}
+		input = &types.MoveAddressToVpcInput{}
 	}
 
-	req := c.newRequest(op, input, &MoveAddressToVpcOutput{})
+	req := c.newRequest(op, input, &types.MoveAddressToVpcOutput{})
 	return MoveAddressToVpcRequest{Request: req, Input: input, Copy: c.MoveAddressToVpcRequest}
 }
 
@@ -98,8 +49,8 @@ func (c *Client) MoveAddressToVpcRequest(input *MoveAddressToVpcInput) MoveAddre
 // MoveAddressToVpc API operation.
 type MoveAddressToVpcRequest struct {
 	*aws.Request
-	Input *MoveAddressToVpcInput
-	Copy  func(*MoveAddressToVpcInput) MoveAddressToVpcRequest
+	Input *types.MoveAddressToVpcInput
+	Copy  func(*types.MoveAddressToVpcInput) MoveAddressToVpcRequest
 }
 
 // Send marshals and sends the MoveAddressToVpc API request.
@@ -111,7 +62,7 @@ func (r MoveAddressToVpcRequest) Send(ctx context.Context) (*MoveAddressToVpcRes
 	}
 
 	resp := &MoveAddressToVpcResponse{
-		MoveAddressToVpcOutput: r.Request.Data.(*MoveAddressToVpcOutput),
+		MoveAddressToVpcOutput: r.Request.Data.(*types.MoveAddressToVpcOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -121,7 +72,7 @@ func (r MoveAddressToVpcRequest) Send(ctx context.Context) (*MoveAddressToVpcRes
 // MoveAddressToVpcResponse is the response type for the
 // MoveAddressToVpc API operation.
 type MoveAddressToVpcResponse struct {
-	*MoveAddressToVpcOutput
+	*types.MoveAddressToVpcOutput
 
 	response *aws.Response
 }

@@ -6,77 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/shield/types"
 )
-
-type CreateProtectionInput struct {
-	_ struct{} `type:"structure"`
-
-	// Friendly name for the Protection you are creating.
-	//
-	// Name is a required field
-	Name *string `min:"1" type:"string" required:"true"`
-
-	// The ARN (Amazon Resource Name) of the resource to be protected.
-	//
-	// The ARN should be in one of the following formats:
-	//
-	//    * For an Application Load Balancer: arn:aws:elasticloadbalancing:region:account-id:loadbalancer/app/load-balancer-name/load-balancer-id
-	//
-	//    * For an Elastic Load Balancer (Classic Load Balancer): arn:aws:elasticloadbalancing:region:account-id:loadbalancer/load-balancer-name
-	//
-	//    * For an AWS CloudFront distribution: arn:aws:cloudfront::account-id:distribution/distribution-id
-	//
-	//    * For an AWS Global Accelerator accelerator: arn:aws:globalaccelerator::account-id:accelerator/accelerator-id
-	//
-	//    * For Amazon Route 53: arn:aws:route53:::hostedzone/hosted-zone-id
-	//
-	//    * For an Elastic IP address: arn:aws:ec2:region:account-id:eip-allocation/allocation-id
-	//
-	// ResourceArn is a required field
-	ResourceArn *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s CreateProtectionInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateProtectionInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateProtectionInput"}
-
-	if s.Name == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Name"))
-	}
-	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
-	}
-
-	if s.ResourceArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ResourceArn"))
-	}
-	if s.ResourceArn != nil && len(*s.ResourceArn) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ResourceArn", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type CreateProtectionOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The unique identifier (ID) for the Protection object that is created.
-	ProtectionId *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s CreateProtectionOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCreateProtection = "CreateProtection"
 
@@ -102,7 +33,7 @@ const opCreateProtection = "CreateProtection"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/CreateProtection
-func (c *Client) CreateProtectionRequest(input *CreateProtectionInput) CreateProtectionRequest {
+func (c *Client) CreateProtectionRequest(input *types.CreateProtectionInput) CreateProtectionRequest {
 	op := &aws.Operation{
 		Name:       opCreateProtection,
 		HTTPMethod: "POST",
@@ -110,10 +41,10 @@ func (c *Client) CreateProtectionRequest(input *CreateProtectionInput) CreatePro
 	}
 
 	if input == nil {
-		input = &CreateProtectionInput{}
+		input = &types.CreateProtectionInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateProtectionOutput{})
+	req := c.newRequest(op, input, &types.CreateProtectionOutput{})
 	return CreateProtectionRequest{Request: req, Input: input, Copy: c.CreateProtectionRequest}
 }
 
@@ -121,8 +52,8 @@ func (c *Client) CreateProtectionRequest(input *CreateProtectionInput) CreatePro
 // CreateProtection API operation.
 type CreateProtectionRequest struct {
 	*aws.Request
-	Input *CreateProtectionInput
-	Copy  func(*CreateProtectionInput) CreateProtectionRequest
+	Input *types.CreateProtectionInput
+	Copy  func(*types.CreateProtectionInput) CreateProtectionRequest
 }
 
 // Send marshals and sends the CreateProtection API request.
@@ -134,7 +65,7 @@ func (r CreateProtectionRequest) Send(ctx context.Context) (*CreateProtectionRes
 	}
 
 	resp := &CreateProtectionResponse{
-		CreateProtectionOutput: r.Request.Data.(*CreateProtectionOutput),
+		CreateProtectionOutput: r.Request.Data.(*types.CreateProtectionOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -144,7 +75,7 @@ func (r CreateProtectionRequest) Send(ctx context.Context) (*CreateProtectionRes
 // CreateProtectionResponse is the response type for the
 // CreateProtection API operation.
 type CreateProtectionResponse struct {
-	*CreateProtectionOutput
+	*types.CreateProtectionOutput
 
 	response *aws.Response
 }

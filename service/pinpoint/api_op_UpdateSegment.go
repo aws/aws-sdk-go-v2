@@ -6,109 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/pinpoint/types"
 )
-
-type UpdateSegmentInput struct {
-	_ struct{} `type:"structure" payload:"WriteSegmentRequest"`
-
-	// ApplicationId is a required field
-	ApplicationId *string `location:"uri" locationName:"application-id" type:"string" required:"true"`
-
-	// SegmentId is a required field
-	SegmentId *string `location:"uri" locationName:"segment-id" type:"string" required:"true"`
-
-	// Specifies the configuration, dimension, and other settings for a segment.
-	// A WriteSegmentRequest object can include a Dimensions object or a SegmentGroups
-	// object, but not both.
-	//
-	// WriteSegmentRequest is a required field
-	WriteSegmentRequest *WriteSegmentRequest `type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s UpdateSegmentInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateSegmentInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateSegmentInput"}
-
-	if s.ApplicationId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ApplicationId"))
-	}
-
-	if s.SegmentId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("SegmentId"))
-	}
-
-	if s.WriteSegmentRequest == nil {
-		invalidParams.Add(aws.NewErrParamRequired("WriteSegmentRequest"))
-	}
-	if s.WriteSegmentRequest != nil {
-		if err := s.WriteSegmentRequest.Validate(); err != nil {
-			invalidParams.AddNested("WriteSegmentRequest", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s UpdateSegmentInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.ApplicationId != nil {
-		v := *s.ApplicationId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "application-id", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.SegmentId != nil {
-		v := *s.SegmentId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "segment-id", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.WriteSegmentRequest != nil {
-		v := s.WriteSegmentRequest
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.PayloadTarget, "WriteSegmentRequest", v, metadata)
-	}
-	return nil
-}
-
-type UpdateSegmentOutput struct {
-	_ struct{} `type:"structure" payload:"SegmentResponse"`
-
-	// Provides information about the configuration, dimension, and other settings
-	// for a segment.
-	//
-	// SegmentResponse is a required field
-	SegmentResponse *SegmentResponse `type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s UpdateSegmentOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s UpdateSegmentOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.SegmentResponse != nil {
-		v := s.SegmentResponse
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.PayloadTarget, "SegmentResponse", v, metadata)
-	}
-	return nil
-}
 
 const opUpdateSegment = "UpdateSegment"
 
@@ -126,7 +25,7 @@ const opUpdateSegment = "UpdateSegment"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/UpdateSegment
-func (c *Client) UpdateSegmentRequest(input *UpdateSegmentInput) UpdateSegmentRequest {
+func (c *Client) UpdateSegmentRequest(input *types.UpdateSegmentInput) UpdateSegmentRequest {
 	op := &aws.Operation{
 		Name:       opUpdateSegment,
 		HTTPMethod: "PUT",
@@ -134,10 +33,10 @@ func (c *Client) UpdateSegmentRequest(input *UpdateSegmentInput) UpdateSegmentRe
 	}
 
 	if input == nil {
-		input = &UpdateSegmentInput{}
+		input = &types.UpdateSegmentInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateSegmentOutput{})
+	req := c.newRequest(op, input, &types.UpdateSegmentOutput{})
 	return UpdateSegmentRequest{Request: req, Input: input, Copy: c.UpdateSegmentRequest}
 }
 
@@ -145,8 +44,8 @@ func (c *Client) UpdateSegmentRequest(input *UpdateSegmentInput) UpdateSegmentRe
 // UpdateSegment API operation.
 type UpdateSegmentRequest struct {
 	*aws.Request
-	Input *UpdateSegmentInput
-	Copy  func(*UpdateSegmentInput) UpdateSegmentRequest
+	Input *types.UpdateSegmentInput
+	Copy  func(*types.UpdateSegmentInput) UpdateSegmentRequest
 }
 
 // Send marshals and sends the UpdateSegment API request.
@@ -158,7 +57,7 @@ func (r UpdateSegmentRequest) Send(ctx context.Context) (*UpdateSegmentResponse,
 	}
 
 	resp := &UpdateSegmentResponse{
-		UpdateSegmentOutput: r.Request.Data.(*UpdateSegmentOutput),
+		UpdateSegmentOutput: r.Request.Data.(*types.UpdateSegmentOutput),
 		response:            &aws.Response{Request: r.Request},
 	}
 
@@ -168,7 +67,7 @@ func (r UpdateSegmentRequest) Send(ctx context.Context) (*UpdateSegmentResponse,
 // UpdateSegmentResponse is the response type for the
 // UpdateSegment API operation.
 type UpdateSegmentResponse struct {
-	*UpdateSegmentOutput
+	*types.UpdateSegmentOutput
 
 	response *aws.Response
 }

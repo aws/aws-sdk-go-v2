@@ -6,74 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/transcribe/types"
 )
-
-type ListVocabulariesInput struct {
-	_ struct{} `type:"structure"`
-
-	// The maximum number of vocabularies to return in the response. If there are
-	// fewer results in the list, this response contains only the actual results.
-	MaxResults *int64 `min:"1" type:"integer"`
-
-	// When specified, the vocabularies returned in the list are limited to vocabularies
-	// whose name contains the specified string. The search is case-insensitive,
-	// ListVocabularies will return both "vocabularyname" and "VocabularyName" in
-	// the response list.
-	NameContains *string `min:"1" type:"string"`
-
-	// If the result of the previous request to ListVocabularies was truncated,
-	// include the NextToken to fetch the next set of jobs.
-	NextToken *string `type:"string"`
-
-	// When specified, only returns vocabularies with the VocabularyState field
-	// equal to the specified state.
-	StateEquals VocabularyState `type:"string" enum:"true"`
-}
-
-// String returns the string representation
-func (s ListVocabulariesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListVocabulariesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListVocabulariesInput"}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-	if s.NameContains != nil && len(*s.NameContains) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("NameContains", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ListVocabulariesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The ListVocabularies operation returns a page of vocabularies at a time.
-	// The maximum size of the page is set by the MaxResults parameter. If there
-	// are more jobs in the list than the page size, Amazon Transcribe returns the
-	// NextPage token. Include the token in the next request to the ListVocabularies
-	// operation to return in the next page of jobs.
-	NextToken *string `type:"string"`
-
-	// The requested vocabulary state.
-	Status TranscriptionJobStatus `type:"string" enum:"true"`
-
-	// A list of objects that describe the vocabularies that match the search criteria
-	// in the request.
-	Vocabularies []VocabularyInfo `type:"list"`
-}
-
-// String returns the string representation
-func (s ListVocabulariesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListVocabularies = "ListVocabularies"
 
@@ -91,7 +25,7 @@ const opListVocabularies = "ListVocabularies"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/ListVocabularies
-func (c *Client) ListVocabulariesRequest(input *ListVocabulariesInput) ListVocabulariesRequest {
+func (c *Client) ListVocabulariesRequest(input *types.ListVocabulariesInput) ListVocabulariesRequest {
 	op := &aws.Operation{
 		Name:       opListVocabularies,
 		HTTPMethod: "POST",
@@ -105,10 +39,10 @@ func (c *Client) ListVocabulariesRequest(input *ListVocabulariesInput) ListVocab
 	}
 
 	if input == nil {
-		input = &ListVocabulariesInput{}
+		input = &types.ListVocabulariesInput{}
 	}
 
-	req := c.newRequest(op, input, &ListVocabulariesOutput{})
+	req := c.newRequest(op, input, &types.ListVocabulariesOutput{})
 	return ListVocabulariesRequest{Request: req, Input: input, Copy: c.ListVocabulariesRequest}
 }
 
@@ -116,8 +50,8 @@ func (c *Client) ListVocabulariesRequest(input *ListVocabulariesInput) ListVocab
 // ListVocabularies API operation.
 type ListVocabulariesRequest struct {
 	*aws.Request
-	Input *ListVocabulariesInput
-	Copy  func(*ListVocabulariesInput) ListVocabulariesRequest
+	Input *types.ListVocabulariesInput
+	Copy  func(*types.ListVocabulariesInput) ListVocabulariesRequest
 }
 
 // Send marshals and sends the ListVocabularies API request.
@@ -129,7 +63,7 @@ func (r ListVocabulariesRequest) Send(ctx context.Context) (*ListVocabulariesRes
 	}
 
 	resp := &ListVocabulariesResponse{
-		ListVocabulariesOutput: r.Request.Data.(*ListVocabulariesOutput),
+		ListVocabulariesOutput: r.Request.Data.(*types.ListVocabulariesOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -159,7 +93,7 @@ func NewListVocabulariesPaginator(req ListVocabulariesRequest) ListVocabulariesP
 	return ListVocabulariesPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListVocabulariesInput
+				var inCpy *types.ListVocabulariesInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -179,14 +113,14 @@ type ListVocabulariesPaginator struct {
 	aws.Pager
 }
 
-func (p *ListVocabulariesPaginator) CurrentPage() *ListVocabulariesOutput {
-	return p.Pager.CurrentPage().(*ListVocabulariesOutput)
+func (p *ListVocabulariesPaginator) CurrentPage() *types.ListVocabulariesOutput {
+	return p.Pager.CurrentPage().(*types.ListVocabulariesOutput)
 }
 
 // ListVocabulariesResponse is the response type for the
 // ListVocabularies API operation.
 type ListVocabulariesResponse struct {
-	*ListVocabulariesOutput
+	*types.ListVocabulariesOutput
 
 	response *aws.Response
 }

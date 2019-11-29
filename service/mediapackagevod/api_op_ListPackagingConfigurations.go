@@ -6,98 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/mediapackagevod/types"
 )
-
-type ListPackagingConfigurationsInput struct {
-	_ struct{} `type:"structure"`
-
-	MaxResults *int64 `location:"querystring" locationName:"maxResults" min:"1" type:"integer"`
-
-	NextToken *string `location:"querystring" locationName:"nextToken" type:"string"`
-
-	PackagingGroupId *string `location:"querystring" locationName:"packagingGroupId" type:"string"`
-}
-
-// String returns the string representation
-func (s ListPackagingConfigurationsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListPackagingConfigurationsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListPackagingConfigurationsInput"}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListPackagingConfigurationsInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.MaxResults != nil {
-		v := *s.MaxResults
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "maxResults", protocol.Int64Value(v), metadata)
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.PackagingGroupId != nil {
-		v := *s.PackagingGroupId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "packagingGroupId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type ListPackagingConfigurationsOutput struct {
-	_ struct{} `type:"structure"`
-
-	NextToken *string `locationName:"nextToken" type:"string"`
-
-	PackagingConfigurations []PackagingConfiguration `locationName:"packagingConfigurations" type:"list"`
-}
-
-// String returns the string representation
-func (s ListPackagingConfigurationsOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListPackagingConfigurationsOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.PackagingConfigurations != nil {
-		v := s.PackagingConfigurations
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "packagingConfigurations", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	return nil
-}
 
 const opListPackagingConfigurations = "ListPackagingConfigurations"
 
@@ -114,7 +24,7 @@ const opListPackagingConfigurations = "ListPackagingConfigurations"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mediapackage-vod-2018-11-07/ListPackagingConfigurations
-func (c *Client) ListPackagingConfigurationsRequest(input *ListPackagingConfigurationsInput) ListPackagingConfigurationsRequest {
+func (c *Client) ListPackagingConfigurationsRequest(input *types.ListPackagingConfigurationsInput) ListPackagingConfigurationsRequest {
 	op := &aws.Operation{
 		Name:       opListPackagingConfigurations,
 		HTTPMethod: "GET",
@@ -128,10 +38,10 @@ func (c *Client) ListPackagingConfigurationsRequest(input *ListPackagingConfigur
 	}
 
 	if input == nil {
-		input = &ListPackagingConfigurationsInput{}
+		input = &types.ListPackagingConfigurationsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListPackagingConfigurationsOutput{})
+	req := c.newRequest(op, input, &types.ListPackagingConfigurationsOutput{})
 	return ListPackagingConfigurationsRequest{Request: req, Input: input, Copy: c.ListPackagingConfigurationsRequest}
 }
 
@@ -139,8 +49,8 @@ func (c *Client) ListPackagingConfigurationsRequest(input *ListPackagingConfigur
 // ListPackagingConfigurations API operation.
 type ListPackagingConfigurationsRequest struct {
 	*aws.Request
-	Input *ListPackagingConfigurationsInput
-	Copy  func(*ListPackagingConfigurationsInput) ListPackagingConfigurationsRequest
+	Input *types.ListPackagingConfigurationsInput
+	Copy  func(*types.ListPackagingConfigurationsInput) ListPackagingConfigurationsRequest
 }
 
 // Send marshals and sends the ListPackagingConfigurations API request.
@@ -152,7 +62,7 @@ func (r ListPackagingConfigurationsRequest) Send(ctx context.Context) (*ListPack
 	}
 
 	resp := &ListPackagingConfigurationsResponse{
-		ListPackagingConfigurationsOutput: r.Request.Data.(*ListPackagingConfigurationsOutput),
+		ListPackagingConfigurationsOutput: r.Request.Data.(*types.ListPackagingConfigurationsOutput),
 		response:                          &aws.Response{Request: r.Request},
 	}
 
@@ -182,7 +92,7 @@ func NewListPackagingConfigurationsPaginator(req ListPackagingConfigurationsRequ
 	return ListPackagingConfigurationsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListPackagingConfigurationsInput
+				var inCpy *types.ListPackagingConfigurationsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -202,14 +112,14 @@ type ListPackagingConfigurationsPaginator struct {
 	aws.Pager
 }
 
-func (p *ListPackagingConfigurationsPaginator) CurrentPage() *ListPackagingConfigurationsOutput {
-	return p.Pager.CurrentPage().(*ListPackagingConfigurationsOutput)
+func (p *ListPackagingConfigurationsPaginator) CurrentPage() *types.ListPackagingConfigurationsOutput {
+	return p.Pager.CurrentPage().(*types.ListPackagingConfigurationsOutput)
 }
 
 // ListPackagingConfigurationsResponse is the response type for the
 // ListPackagingConfigurations API operation.
 type ListPackagingConfigurationsResponse struct {
-	*ListPackagingConfigurationsOutput
+	*types.ListPackagingConfigurationsOutput
 
 	response *aws.Response
 }

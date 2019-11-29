@@ -6,48 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/directconnect/types"
 )
-
-type DeleteDirectConnectGatewayInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the Direct Connect gateway.
-	//
-	// DirectConnectGatewayId is a required field
-	DirectConnectGatewayId *string `locationName:"directConnectGatewayId" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteDirectConnectGatewayInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteDirectConnectGatewayInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteDirectConnectGatewayInput"}
-
-	if s.DirectConnectGatewayId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DirectConnectGatewayId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteDirectConnectGatewayOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The Direct Connect gateway.
-	DirectConnectGateway *DirectConnectGateway `locationName:"directConnectGateway" type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteDirectConnectGatewayOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteDirectConnectGateway = "DeleteDirectConnectGateway"
 
@@ -66,7 +26,7 @@ const opDeleteDirectConnectGateway = "DeleteDirectConnectGateway"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DeleteDirectConnectGateway
-func (c *Client) DeleteDirectConnectGatewayRequest(input *DeleteDirectConnectGatewayInput) DeleteDirectConnectGatewayRequest {
+func (c *Client) DeleteDirectConnectGatewayRequest(input *types.DeleteDirectConnectGatewayInput) DeleteDirectConnectGatewayRequest {
 	op := &aws.Operation{
 		Name:       opDeleteDirectConnectGateway,
 		HTTPMethod: "POST",
@@ -74,10 +34,10 @@ func (c *Client) DeleteDirectConnectGatewayRequest(input *DeleteDirectConnectGat
 	}
 
 	if input == nil {
-		input = &DeleteDirectConnectGatewayInput{}
+		input = &types.DeleteDirectConnectGatewayInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteDirectConnectGatewayOutput{})
+	req := c.newRequest(op, input, &types.DeleteDirectConnectGatewayOutput{})
 	return DeleteDirectConnectGatewayRequest{Request: req, Input: input, Copy: c.DeleteDirectConnectGatewayRequest}
 }
 
@@ -85,8 +45,8 @@ func (c *Client) DeleteDirectConnectGatewayRequest(input *DeleteDirectConnectGat
 // DeleteDirectConnectGateway API operation.
 type DeleteDirectConnectGatewayRequest struct {
 	*aws.Request
-	Input *DeleteDirectConnectGatewayInput
-	Copy  func(*DeleteDirectConnectGatewayInput) DeleteDirectConnectGatewayRequest
+	Input *types.DeleteDirectConnectGatewayInput
+	Copy  func(*types.DeleteDirectConnectGatewayInput) DeleteDirectConnectGatewayRequest
 }
 
 // Send marshals and sends the DeleteDirectConnectGateway API request.
@@ -98,7 +58,7 @@ func (r DeleteDirectConnectGatewayRequest) Send(ctx context.Context) (*DeleteDir
 	}
 
 	resp := &DeleteDirectConnectGatewayResponse{
-		DeleteDirectConnectGatewayOutput: r.Request.Data.(*DeleteDirectConnectGatewayOutput),
+		DeleteDirectConnectGatewayOutput: r.Request.Data.(*types.DeleteDirectConnectGatewayOutput),
 		response:                         &aws.Response{Request: r.Request},
 	}
 
@@ -108,7 +68,7 @@ func (r DeleteDirectConnectGatewayRequest) Send(ctx context.Context) (*DeleteDir
 // DeleteDirectConnectGatewayResponse is the response type for the
 // DeleteDirectConnectGateway API operation.
 type DeleteDirectConnectGatewayResponse struct {
-	*DeleteDirectConnectGatewayOutput
+	*types.DeleteDirectConnectGatewayOutput
 
 	response *aws.Response
 }

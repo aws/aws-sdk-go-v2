@@ -6,69 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/query"
+	"github.com/aws/aws-sdk-go-v2/service/ses/types"
 )
-
-// Represents a request to update an existing custom verification email template.
-type UpdateCustomVerificationEmailTemplateInput struct {
-	_ struct{} `type:"structure"`
-
-	// The URL that the recipient of the verification email is sent to if his or
-	// her address is not successfully verified.
-	FailureRedirectionURL *string `type:"string"`
-
-	// The email address that the custom verification email is sent from.
-	FromEmailAddress *string `type:"string"`
-
-	// The URL that the recipient of the verification email is sent to if his or
-	// her address is successfully verified.
-	SuccessRedirectionURL *string `type:"string"`
-
-	// The content of the custom verification email. The total size of the email
-	// must be less than 10 MB. The message body may contain HTML, with some limitations.
-	// For more information, see Custom Verification Email Frequently Asked Questions
-	// (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/custom-verification-emails.html#custom-verification-emails-faq)
-	// in the Amazon SES Developer Guide.
-	TemplateContent *string `type:"string"`
-
-	// The name of the custom verification email template that you want to update.
-	//
-	// TemplateName is a required field
-	TemplateName *string `type:"string" required:"true"`
-
-	// The subject line of the custom verification email.
-	TemplateSubject *string `type:"string"`
-}
-
-// String returns the string representation
-func (s UpdateCustomVerificationEmailTemplateInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateCustomVerificationEmailTemplateInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateCustomVerificationEmailTemplateInput"}
-
-	if s.TemplateName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("TemplateName"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type UpdateCustomVerificationEmailTemplateOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s UpdateCustomVerificationEmailTemplateOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opUpdateCustomVerificationEmailTemplate = "UpdateCustomVerificationEmailTemplate"
 
@@ -91,7 +32,7 @@ const opUpdateCustomVerificationEmailTemplate = "UpdateCustomVerificationEmailTe
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/UpdateCustomVerificationEmailTemplate
-func (c *Client) UpdateCustomVerificationEmailTemplateRequest(input *UpdateCustomVerificationEmailTemplateInput) UpdateCustomVerificationEmailTemplateRequest {
+func (c *Client) UpdateCustomVerificationEmailTemplateRequest(input *types.UpdateCustomVerificationEmailTemplateInput) UpdateCustomVerificationEmailTemplateRequest {
 	op := &aws.Operation{
 		Name:       opUpdateCustomVerificationEmailTemplate,
 		HTTPMethod: "POST",
@@ -99,10 +40,10 @@ func (c *Client) UpdateCustomVerificationEmailTemplateRequest(input *UpdateCusto
 	}
 
 	if input == nil {
-		input = &UpdateCustomVerificationEmailTemplateInput{}
+		input = &types.UpdateCustomVerificationEmailTemplateInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateCustomVerificationEmailTemplateOutput{})
+	req := c.newRequest(op, input, &types.UpdateCustomVerificationEmailTemplateOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return UpdateCustomVerificationEmailTemplateRequest{Request: req, Input: input, Copy: c.UpdateCustomVerificationEmailTemplateRequest}
@@ -112,8 +53,8 @@ func (c *Client) UpdateCustomVerificationEmailTemplateRequest(input *UpdateCusto
 // UpdateCustomVerificationEmailTemplate API operation.
 type UpdateCustomVerificationEmailTemplateRequest struct {
 	*aws.Request
-	Input *UpdateCustomVerificationEmailTemplateInput
-	Copy  func(*UpdateCustomVerificationEmailTemplateInput) UpdateCustomVerificationEmailTemplateRequest
+	Input *types.UpdateCustomVerificationEmailTemplateInput
+	Copy  func(*types.UpdateCustomVerificationEmailTemplateInput) UpdateCustomVerificationEmailTemplateRequest
 }
 
 // Send marshals and sends the UpdateCustomVerificationEmailTemplate API request.
@@ -125,7 +66,7 @@ func (r UpdateCustomVerificationEmailTemplateRequest) Send(ctx context.Context) 
 	}
 
 	resp := &UpdateCustomVerificationEmailTemplateResponse{
-		UpdateCustomVerificationEmailTemplateOutput: r.Request.Data.(*UpdateCustomVerificationEmailTemplateOutput),
+		UpdateCustomVerificationEmailTemplateOutput: r.Request.Data.(*types.UpdateCustomVerificationEmailTemplateOutput),
 		response: &aws.Response{Request: r.Request},
 	}
 
@@ -135,7 +76,7 @@ func (r UpdateCustomVerificationEmailTemplateRequest) Send(ctx context.Context) 
 // UpdateCustomVerificationEmailTemplateResponse is the response type for the
 // UpdateCustomVerificationEmailTemplate API operation.
 type UpdateCustomVerificationEmailTemplateResponse struct {
-	*UpdateCustomVerificationEmailTemplateOutput
+	*types.UpdateCustomVerificationEmailTemplateOutput
 
 	response *aws.Response
 }

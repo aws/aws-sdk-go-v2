@@ -6,80 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/restxml"
+	"github.com/aws/aws-sdk-go-v2/service/cloudfront/types"
 )
-
-// The request to remove tags from a CloudFront resource.
-type UntagResourceInput struct {
-	_ struct{} `type:"structure" payload:"TagKeys"`
-
-	// An ARN of a CloudFront resource.
-	//
-	// Resource is a required field
-	Resource *string `location:"querystring" locationName:"Resource" type:"string" required:"true"`
-
-	// A complex type that contains zero or more Tag key elements.
-	//
-	// TagKeys is a required field
-	TagKeys *TagKeys `locationName:"TagKeys" type:"structure" required:"true" xmlURI:"http://cloudfront.amazonaws.com/doc/2019-03-26/"`
-}
-
-// String returns the string representation
-func (s UntagResourceInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UntagResourceInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UntagResourceInput"}
-
-	if s.Resource == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Resource"))
-	}
-
-	if s.TagKeys == nil {
-		invalidParams.Add(aws.NewErrParamRequired("TagKeys"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s UntagResourceInput) MarshalFields(e protocol.FieldEncoder) error {
-
-	if s.TagKeys != nil {
-		v := s.TagKeys
-
-		metadata := protocol.Metadata{XMLNamespaceURI: "http://cloudfront.amazonaws.com/doc/2019-03-26/"}
-		e.SetFields(protocol.PayloadTarget, "TagKeys", v, metadata)
-	}
-	if s.Resource != nil {
-		v := *s.Resource
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "Resource", protocol.StringValue(v), metadata)
-	}
-	return nil
-}
-
-type UntagResourceOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s UntagResourceOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s UntagResourceOutput) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
 
 const opUntagResource = "UntagResource2019_03_26"
 
@@ -96,7 +26,7 @@ const opUntagResource = "UntagResource2019_03_26"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/UntagResource
-func (c *Client) UntagResourceRequest(input *UntagResourceInput) UntagResourceRequest {
+func (c *Client) UntagResourceRequest(input *types.UntagResourceInput) UntagResourceRequest {
 	op := &aws.Operation{
 		Name:       opUntagResource,
 		HTTPMethod: "POST",
@@ -104,10 +34,10 @@ func (c *Client) UntagResourceRequest(input *UntagResourceInput) UntagResourceRe
 	}
 
 	if input == nil {
-		input = &UntagResourceInput{}
+		input = &types.UntagResourceInput{}
 	}
 
-	req := c.newRequest(op, input, &UntagResourceOutput{})
+	req := c.newRequest(op, input, &types.UntagResourceOutput{})
 	req.Handlers.Unmarshal.Remove(restxml.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return UntagResourceRequest{Request: req, Input: input, Copy: c.UntagResourceRequest}
@@ -117,8 +47,8 @@ func (c *Client) UntagResourceRequest(input *UntagResourceInput) UntagResourceRe
 // UntagResource API operation.
 type UntagResourceRequest struct {
 	*aws.Request
-	Input *UntagResourceInput
-	Copy  func(*UntagResourceInput) UntagResourceRequest
+	Input *types.UntagResourceInput
+	Copy  func(*types.UntagResourceInput) UntagResourceRequest
 }
 
 // Send marshals and sends the UntagResource API request.
@@ -130,7 +60,7 @@ func (r UntagResourceRequest) Send(ctx context.Context) (*UntagResourceResponse,
 	}
 
 	resp := &UntagResourceResponse{
-		UntagResourceOutput: r.Request.Data.(*UntagResourceOutput),
+		UntagResourceOutput: r.Request.Data.(*types.UntagResourceOutput),
 		response:            &aws.Response{Request: r.Request},
 	}
 
@@ -140,7 +70,7 @@ func (r UntagResourceRequest) Send(ctx context.Context) (*UntagResourceResponse,
 // UntagResourceResponse is the response type for the
 // UntagResource API operation.
 type UntagResourceResponse struct {
-	*UntagResourceOutput
+	*types.UntagResourceOutput
 
 	response *aws.Response
 }

@@ -6,67 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/pinpointemail/types"
 )
-
-// A request to delete a dedicated IP pool.
-type DeleteDedicatedIpPoolInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the dedicated IP pool that you want to delete.
-	//
-	// PoolName is a required field
-	PoolName *string `location:"uri" locationName:"PoolName" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteDedicatedIpPoolInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteDedicatedIpPoolInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteDedicatedIpPoolInput"}
-
-	if s.PoolName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("PoolName"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteDedicatedIpPoolInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.PoolName != nil {
-		v := *s.PoolName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "PoolName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-// An HTTP 200 response if the request succeeds, or an error message if the
-// request fails.
-type DeleteDedicatedIpPoolOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteDedicatedIpPoolOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteDedicatedIpPoolOutput) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
 
 const opDeleteDedicatedIpPool = "DeleteDedicatedIpPool"
 
@@ -83,7 +24,7 @@ const opDeleteDedicatedIpPool = "DeleteDedicatedIpPool"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/DeleteDedicatedIpPool
-func (c *Client) DeleteDedicatedIpPoolRequest(input *DeleteDedicatedIpPoolInput) DeleteDedicatedIpPoolRequest {
+func (c *Client) DeleteDedicatedIpPoolRequest(input *types.DeleteDedicatedIpPoolInput) DeleteDedicatedIpPoolRequest {
 	op := &aws.Operation{
 		Name:       opDeleteDedicatedIpPool,
 		HTTPMethod: "DELETE",
@@ -91,10 +32,10 @@ func (c *Client) DeleteDedicatedIpPoolRequest(input *DeleteDedicatedIpPoolInput)
 	}
 
 	if input == nil {
-		input = &DeleteDedicatedIpPoolInput{}
+		input = &types.DeleteDedicatedIpPoolInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteDedicatedIpPoolOutput{})
+	req := c.newRequest(op, input, &types.DeleteDedicatedIpPoolOutput{})
 	return DeleteDedicatedIpPoolRequest{Request: req, Input: input, Copy: c.DeleteDedicatedIpPoolRequest}
 }
 
@@ -102,8 +43,8 @@ func (c *Client) DeleteDedicatedIpPoolRequest(input *DeleteDedicatedIpPoolInput)
 // DeleteDedicatedIpPool API operation.
 type DeleteDedicatedIpPoolRequest struct {
 	*aws.Request
-	Input *DeleteDedicatedIpPoolInput
-	Copy  func(*DeleteDedicatedIpPoolInput) DeleteDedicatedIpPoolRequest
+	Input *types.DeleteDedicatedIpPoolInput
+	Copy  func(*types.DeleteDedicatedIpPoolInput) DeleteDedicatedIpPoolRequest
 }
 
 // Send marshals and sends the DeleteDedicatedIpPool API request.
@@ -115,7 +56,7 @@ func (r DeleteDedicatedIpPoolRequest) Send(ctx context.Context) (*DeleteDedicate
 	}
 
 	resp := &DeleteDedicatedIpPoolResponse{
-		DeleteDedicatedIpPoolOutput: r.Request.Data.(*DeleteDedicatedIpPoolOutput),
+		DeleteDedicatedIpPoolOutput: r.Request.Data.(*types.DeleteDedicatedIpPoolOutput),
 		response:                    &aws.Response{Request: r.Request},
 	}
 
@@ -125,7 +66,7 @@ func (r DeleteDedicatedIpPoolRequest) Send(ctx context.Context) (*DeleteDedicate
 // DeleteDedicatedIpPoolResponse is the response type for the
 // DeleteDedicatedIpPool API operation.
 type DeleteDedicatedIpPoolResponse struct {
-	*DeleteDedicatedIpPoolOutput
+	*types.DeleteDedicatedIpPoolOutput
 
 	response *aws.Response
 }

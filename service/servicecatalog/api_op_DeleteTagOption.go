@@ -6,48 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/types"
 )
-
-type DeleteTagOptionInput struct {
-	_ struct{} `type:"structure"`
-
-	// The TagOption identifier.
-	//
-	// Id is a required field
-	Id *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteTagOptionInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteTagOptionInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteTagOptionInput"}
-
-	if s.Id == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Id"))
-	}
-	if s.Id != nil && len(*s.Id) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Id", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteTagOptionOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteTagOptionOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteTagOption = "DeleteTagOption"
 
@@ -66,7 +26,7 @@ const opDeleteTagOption = "DeleteTagOption"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DeleteTagOption
-func (c *Client) DeleteTagOptionRequest(input *DeleteTagOptionInput) DeleteTagOptionRequest {
+func (c *Client) DeleteTagOptionRequest(input *types.DeleteTagOptionInput) DeleteTagOptionRequest {
 	op := &aws.Operation{
 		Name:       opDeleteTagOption,
 		HTTPMethod: "POST",
@@ -74,10 +34,10 @@ func (c *Client) DeleteTagOptionRequest(input *DeleteTagOptionInput) DeleteTagOp
 	}
 
 	if input == nil {
-		input = &DeleteTagOptionInput{}
+		input = &types.DeleteTagOptionInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteTagOptionOutput{})
+	req := c.newRequest(op, input, &types.DeleteTagOptionOutput{})
 	return DeleteTagOptionRequest{Request: req, Input: input, Copy: c.DeleteTagOptionRequest}
 }
 
@@ -85,8 +45,8 @@ func (c *Client) DeleteTagOptionRequest(input *DeleteTagOptionInput) DeleteTagOp
 // DeleteTagOption API operation.
 type DeleteTagOptionRequest struct {
 	*aws.Request
-	Input *DeleteTagOptionInput
-	Copy  func(*DeleteTagOptionInput) DeleteTagOptionRequest
+	Input *types.DeleteTagOptionInput
+	Copy  func(*types.DeleteTagOptionInput) DeleteTagOptionRequest
 }
 
 // Send marshals and sends the DeleteTagOption API request.
@@ -98,7 +58,7 @@ func (r DeleteTagOptionRequest) Send(ctx context.Context) (*DeleteTagOptionRespo
 	}
 
 	resp := &DeleteTagOptionResponse{
-		DeleteTagOptionOutput: r.Request.Data.(*DeleteTagOptionOutput),
+		DeleteTagOptionOutput: r.Request.Data.(*types.DeleteTagOptionOutput),
 		response:              &aws.Response{Request: r.Request},
 	}
 
@@ -108,7 +68,7 @@ func (r DeleteTagOptionRequest) Send(ctx context.Context) (*DeleteTagOptionRespo
 // DeleteTagOptionResponse is the response type for the
 // DeleteTagOption API operation.
 type DeleteTagOptionResponse struct {
-	*DeleteTagOptionOutput
+	*types.DeleteTagOptionOutput
 
 	response *aws.Response
 }

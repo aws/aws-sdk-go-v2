@@ -6,76 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/iot/types"
 )
-
-type DescribeAuthorizerInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the authorizer to describe.
-	//
-	// AuthorizerName is a required field
-	AuthorizerName *string `location:"uri" locationName:"authorizerName" min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeAuthorizerInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeAuthorizerInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeAuthorizerInput"}
-
-	if s.AuthorizerName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("AuthorizerName"))
-	}
-	if s.AuthorizerName != nil && len(*s.AuthorizerName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("AuthorizerName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DescribeAuthorizerInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.AuthorizerName != nil {
-		v := *s.AuthorizerName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "authorizerName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type DescribeAuthorizerOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The authorizer description.
-	AuthorizerDescription *AuthorizerDescription `locationName:"authorizerDescription" type:"structure"`
-}
-
-// String returns the string representation
-func (s DescribeAuthorizerOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DescribeAuthorizerOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.AuthorizerDescription != nil {
-		v := s.AuthorizerDescription
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "authorizerDescription", v, metadata)
-	}
-	return nil
-}
 
 const opDescribeAuthorizer = "DescribeAuthorizer"
 
@@ -90,7 +22,7 @@ const opDescribeAuthorizer = "DescribeAuthorizer"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) DescribeAuthorizerRequest(input *DescribeAuthorizerInput) DescribeAuthorizerRequest {
+func (c *Client) DescribeAuthorizerRequest(input *types.DescribeAuthorizerInput) DescribeAuthorizerRequest {
 	op := &aws.Operation{
 		Name:       opDescribeAuthorizer,
 		HTTPMethod: "GET",
@@ -98,10 +30,10 @@ func (c *Client) DescribeAuthorizerRequest(input *DescribeAuthorizerInput) Descr
 	}
 
 	if input == nil {
-		input = &DescribeAuthorizerInput{}
+		input = &types.DescribeAuthorizerInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeAuthorizerOutput{})
+	req := c.newRequest(op, input, &types.DescribeAuthorizerOutput{})
 	return DescribeAuthorizerRequest{Request: req, Input: input, Copy: c.DescribeAuthorizerRequest}
 }
 
@@ -109,8 +41,8 @@ func (c *Client) DescribeAuthorizerRequest(input *DescribeAuthorizerInput) Descr
 // DescribeAuthorizer API operation.
 type DescribeAuthorizerRequest struct {
 	*aws.Request
-	Input *DescribeAuthorizerInput
-	Copy  func(*DescribeAuthorizerInput) DescribeAuthorizerRequest
+	Input *types.DescribeAuthorizerInput
+	Copy  func(*types.DescribeAuthorizerInput) DescribeAuthorizerRequest
 }
 
 // Send marshals and sends the DescribeAuthorizer API request.
@@ -122,7 +54,7 @@ func (r DescribeAuthorizerRequest) Send(ctx context.Context) (*DescribeAuthorize
 	}
 
 	resp := &DescribeAuthorizerResponse{
-		DescribeAuthorizerOutput: r.Request.Data.(*DescribeAuthorizerOutput),
+		DescribeAuthorizerOutput: r.Request.Data.(*types.DescribeAuthorizerOutput),
 		response:                 &aws.Response{Request: r.Request},
 	}
 
@@ -132,7 +64,7 @@ func (r DescribeAuthorizerRequest) Send(ctx context.Context) (*DescribeAuthorize
 // DescribeAuthorizerResponse is the response type for the
 // DescribeAuthorizer API operation.
 type DescribeAuthorizerResponse struct {
-	*DescribeAuthorizerOutput
+	*types.DescribeAuthorizerOutput
 
 	response *aws.Response
 }

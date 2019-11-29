@@ -6,52 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/configservice/types"
 )
-
-type DeleteRemediationConfigurationInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the AWS Config rule for which you want to delete remediation
-	// configuration.
-	//
-	// ConfigRuleName is a required field
-	ConfigRuleName *string `min:"1" type:"string" required:"true"`
-
-	// The type of a resource.
-	ResourceType *string `type:"string"`
-}
-
-// String returns the string representation
-func (s DeleteRemediationConfigurationInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteRemediationConfigurationInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteRemediationConfigurationInput"}
-
-	if s.ConfigRuleName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ConfigRuleName"))
-	}
-	if s.ConfigRuleName != nil && len(*s.ConfigRuleName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ConfigRuleName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteRemediationConfigurationOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteRemediationConfigurationOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteRemediationConfiguration = "DeleteRemediationConfiguration"
 
@@ -68,7 +24,7 @@ const opDeleteRemediationConfiguration = "DeleteRemediationConfiguration"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DeleteRemediationConfiguration
-func (c *Client) DeleteRemediationConfigurationRequest(input *DeleteRemediationConfigurationInput) DeleteRemediationConfigurationRequest {
+func (c *Client) DeleteRemediationConfigurationRequest(input *types.DeleteRemediationConfigurationInput) DeleteRemediationConfigurationRequest {
 	op := &aws.Operation{
 		Name:       opDeleteRemediationConfiguration,
 		HTTPMethod: "POST",
@@ -76,10 +32,10 @@ func (c *Client) DeleteRemediationConfigurationRequest(input *DeleteRemediationC
 	}
 
 	if input == nil {
-		input = &DeleteRemediationConfigurationInput{}
+		input = &types.DeleteRemediationConfigurationInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteRemediationConfigurationOutput{})
+	req := c.newRequest(op, input, &types.DeleteRemediationConfigurationOutput{})
 	return DeleteRemediationConfigurationRequest{Request: req, Input: input, Copy: c.DeleteRemediationConfigurationRequest}
 }
 
@@ -87,8 +43,8 @@ func (c *Client) DeleteRemediationConfigurationRequest(input *DeleteRemediationC
 // DeleteRemediationConfiguration API operation.
 type DeleteRemediationConfigurationRequest struct {
 	*aws.Request
-	Input *DeleteRemediationConfigurationInput
-	Copy  func(*DeleteRemediationConfigurationInput) DeleteRemediationConfigurationRequest
+	Input *types.DeleteRemediationConfigurationInput
+	Copy  func(*types.DeleteRemediationConfigurationInput) DeleteRemediationConfigurationRequest
 }
 
 // Send marshals and sends the DeleteRemediationConfiguration API request.
@@ -100,7 +56,7 @@ func (r DeleteRemediationConfigurationRequest) Send(ctx context.Context) (*Delet
 	}
 
 	resp := &DeleteRemediationConfigurationResponse{
-		DeleteRemediationConfigurationOutput: r.Request.Data.(*DeleteRemediationConfigurationOutput),
+		DeleteRemediationConfigurationOutput: r.Request.Data.(*types.DeleteRemediationConfigurationOutput),
 		response:                             &aws.Response{Request: r.Request},
 	}
 
@@ -110,7 +66,7 @@ func (r DeleteRemediationConfigurationRequest) Send(ctx context.Context) (*Delet
 // DeleteRemediationConfigurationResponse is the response type for the
 // DeleteRemediationConfiguration API operation.
 type DeleteRemediationConfigurationResponse struct {
-	*DeleteRemediationConfigurationOutput
+	*types.DeleteRemediationConfigurationOutput
 
 	response *aws.Response
 }

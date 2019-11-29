@@ -6,117 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ssm/types"
 )
-
-type GetMaintenanceWindowTaskInput struct {
-	_ struct{} `type:"structure"`
-
-	// The maintenance window ID that includes the task to retrieve.
-	//
-	// WindowId is a required field
-	WindowId *string `min:"20" type:"string" required:"true"`
-
-	// The maintenance window task ID to retrieve.
-	//
-	// WindowTaskId is a required field
-	WindowTaskId *string `min:"36" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetMaintenanceWindowTaskInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetMaintenanceWindowTaskInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetMaintenanceWindowTaskInput"}
-
-	if s.WindowId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("WindowId"))
-	}
-	if s.WindowId != nil && len(*s.WindowId) < 20 {
-		invalidParams.Add(aws.NewErrParamMinLen("WindowId", 20))
-	}
-
-	if s.WindowTaskId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("WindowTaskId"))
-	}
-	if s.WindowTaskId != nil && len(*s.WindowTaskId) < 36 {
-		invalidParams.Add(aws.NewErrParamMinLen("WindowTaskId", 36))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type GetMaintenanceWindowTaskOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The retrieved task description.
-	Description *string `min:"1" type:"string" sensitive:"true"`
-
-	// The location in Amazon S3 where the task results are logged.
-	//
-	// LoggingInfo has been deprecated. To specify an S3 bucket to contain logs,
-	// instead use the OutputS3BucketName and OutputS3KeyPrefix options in the TaskInvocationParameters
-	// structure. For information about how Systems Manager handles these options
-	// for the supported maintenance window task types, see MaintenanceWindowTaskInvocationParameters.
-	LoggingInfo *LoggingInfo `type:"structure"`
-
-	// The maximum number of targets allowed to run this task in parallel.
-	MaxConcurrency *string `min:"1" type:"string"`
-
-	// The maximum number of errors allowed before the task stops being scheduled.
-	MaxErrors *string `min:"1" type:"string"`
-
-	// The retrieved task name.
-	Name *string `min:"3" type:"string"`
-
-	// The priority of the task when it runs. The lower the number, the higher the
-	// priority. Tasks that have the same priority are scheduled in parallel.
-	Priority *int64 `type:"integer"`
-
-	// The ARN of the IAM service role to use to publish Amazon Simple Notification
-	// Service (Amazon SNS) notifications for maintenance window Run Command tasks.
-	ServiceRoleArn *string `type:"string"`
-
-	// The targets where the task should run.
-	Targets []Target `type:"list"`
-
-	// The resource that the task used during execution. For RUN_COMMAND and AUTOMATION
-	// task types, the TaskArn is the Systems Manager Document name/ARN. For LAMBDA
-	// tasks, the value is the function name/ARN. For STEP_FUNCTIONS tasks, the
-	// value is the state machine ARN.
-	TaskArn *string `min:"1" type:"string"`
-
-	// The parameters to pass to the task when it runs.
-	TaskInvocationParameters *MaintenanceWindowTaskInvocationParameters `type:"structure"`
-
-	// The parameters to pass to the task when it runs.
-	//
-	// TaskParameters has been deprecated. To specify parameters to pass to a task
-	// when it runs, instead use the Parameters option in the TaskInvocationParameters
-	// structure. For information about how Systems Manager handles these options
-	// for the supported maintenance window task types, see MaintenanceWindowTaskInvocationParameters.
-	TaskParameters map[string]MaintenanceWindowTaskParameterValueExpression `type:"map" sensitive:"true"`
-
-	// The type of task to run.
-	TaskType MaintenanceWindowTaskType `type:"string" enum:"true"`
-
-	// The retrieved maintenance window ID.
-	WindowId *string `min:"20" type:"string"`
-
-	// The retrieved maintenance window task ID.
-	WindowTaskId *string `min:"36" type:"string"`
-}
-
-// String returns the string representation
-func (s GetMaintenanceWindowTaskOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetMaintenanceWindowTask = "GetMaintenanceWindowTask"
 
@@ -133,7 +24,7 @@ const opGetMaintenanceWindowTask = "GetMaintenanceWindowTask"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetMaintenanceWindowTask
-func (c *Client) GetMaintenanceWindowTaskRequest(input *GetMaintenanceWindowTaskInput) GetMaintenanceWindowTaskRequest {
+func (c *Client) GetMaintenanceWindowTaskRequest(input *types.GetMaintenanceWindowTaskInput) GetMaintenanceWindowTaskRequest {
 	op := &aws.Operation{
 		Name:       opGetMaintenanceWindowTask,
 		HTTPMethod: "POST",
@@ -141,10 +32,10 @@ func (c *Client) GetMaintenanceWindowTaskRequest(input *GetMaintenanceWindowTask
 	}
 
 	if input == nil {
-		input = &GetMaintenanceWindowTaskInput{}
+		input = &types.GetMaintenanceWindowTaskInput{}
 	}
 
-	req := c.newRequest(op, input, &GetMaintenanceWindowTaskOutput{})
+	req := c.newRequest(op, input, &types.GetMaintenanceWindowTaskOutput{})
 	return GetMaintenanceWindowTaskRequest{Request: req, Input: input, Copy: c.GetMaintenanceWindowTaskRequest}
 }
 
@@ -152,8 +43,8 @@ func (c *Client) GetMaintenanceWindowTaskRequest(input *GetMaintenanceWindowTask
 // GetMaintenanceWindowTask API operation.
 type GetMaintenanceWindowTaskRequest struct {
 	*aws.Request
-	Input *GetMaintenanceWindowTaskInput
-	Copy  func(*GetMaintenanceWindowTaskInput) GetMaintenanceWindowTaskRequest
+	Input *types.GetMaintenanceWindowTaskInput
+	Copy  func(*types.GetMaintenanceWindowTaskInput) GetMaintenanceWindowTaskRequest
 }
 
 // Send marshals and sends the GetMaintenanceWindowTask API request.
@@ -165,7 +56,7 @@ func (r GetMaintenanceWindowTaskRequest) Send(ctx context.Context) (*GetMaintena
 	}
 
 	resp := &GetMaintenanceWindowTaskResponse{
-		GetMaintenanceWindowTaskOutput: r.Request.Data.(*GetMaintenanceWindowTaskOutput),
+		GetMaintenanceWindowTaskOutput: r.Request.Data.(*types.GetMaintenanceWindowTaskOutput),
 		response:                       &aws.Response{Request: r.Request},
 	}
 
@@ -175,7 +66,7 @@ func (r GetMaintenanceWindowTaskRequest) Send(ctx context.Context) (*GetMaintena
 // GetMaintenanceWindowTaskResponse is the response type for the
 // GetMaintenanceWindowTask API operation.
 type GetMaintenanceWindowTaskResponse struct {
-	*GetMaintenanceWindowTaskOutput
+	*types.GetMaintenanceWindowTaskOutput
 
 	response *aws.Response
 }

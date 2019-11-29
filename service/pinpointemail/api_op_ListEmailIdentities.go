@@ -6,97 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/pinpointemail/types"
 )
-
-// A request to list all of the email identities associated with your Amazon
-// Pinpoint account. This list includes identities that you've already verified,
-// identities that are unverified, and identities that were verified in the
-// past, but are no longer verified.
-type ListEmailIdentitiesInput struct {
-	_ struct{} `type:"structure"`
-
-	// A token returned from a previous call to ListEmailIdentities to indicate
-	// the position in the list of identities.
-	NextToken *string `location:"querystring" locationName:"NextToken" type:"string"`
-
-	// The number of results to show in a single call to ListEmailIdentities. If
-	// the number of results is larger than the number you specified in this parameter,
-	// then the response includes a NextToken element, which you can use to obtain
-	// additional results.
-	//
-	// The value you specify has to be at least 0, and can be no more than 1000.
-	PageSize *int64 `location:"querystring" locationName:"PageSize" type:"integer"`
-}
-
-// String returns the string representation
-func (s ListEmailIdentitiesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListEmailIdentitiesInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.PageSize != nil {
-		v := *s.PageSize
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "PageSize", protocol.Int64Value(v), metadata)
-	}
-	return nil
-}
-
-// A list of all of the identities that you've attempted to verify for use with
-// Amazon Pinpoint, regardless of whether or not those identities were successfully
-// verified.
-type ListEmailIdentitiesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// An array that includes all of the identities associated with your Amazon
-	// Pinpoint account.
-	EmailIdentities []IdentityInfo `type:"list"`
-
-	// A token that indicates that there are additional configuration sets to list.
-	// To view additional configuration sets, issue another request to ListEmailIdentities,
-	// and pass this token in the NextToken parameter.
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s ListEmailIdentitiesOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListEmailIdentitiesOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.EmailIdentities != nil {
-		v := s.EmailIdentities
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "EmailIdentities", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opListEmailIdentities = "ListEmailIdentities"
 
@@ -116,7 +27,7 @@ const opListEmailIdentities = "ListEmailIdentities"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/ListEmailIdentities
-func (c *Client) ListEmailIdentitiesRequest(input *ListEmailIdentitiesInput) ListEmailIdentitiesRequest {
+func (c *Client) ListEmailIdentitiesRequest(input *types.ListEmailIdentitiesInput) ListEmailIdentitiesRequest {
 	op := &aws.Operation{
 		Name:       opListEmailIdentities,
 		HTTPMethod: "GET",
@@ -130,10 +41,10 @@ func (c *Client) ListEmailIdentitiesRequest(input *ListEmailIdentitiesInput) Lis
 	}
 
 	if input == nil {
-		input = &ListEmailIdentitiesInput{}
+		input = &types.ListEmailIdentitiesInput{}
 	}
 
-	req := c.newRequest(op, input, &ListEmailIdentitiesOutput{})
+	req := c.newRequest(op, input, &types.ListEmailIdentitiesOutput{})
 	return ListEmailIdentitiesRequest{Request: req, Input: input, Copy: c.ListEmailIdentitiesRequest}
 }
 
@@ -141,8 +52,8 @@ func (c *Client) ListEmailIdentitiesRequest(input *ListEmailIdentitiesInput) Lis
 // ListEmailIdentities API operation.
 type ListEmailIdentitiesRequest struct {
 	*aws.Request
-	Input *ListEmailIdentitiesInput
-	Copy  func(*ListEmailIdentitiesInput) ListEmailIdentitiesRequest
+	Input *types.ListEmailIdentitiesInput
+	Copy  func(*types.ListEmailIdentitiesInput) ListEmailIdentitiesRequest
 }
 
 // Send marshals and sends the ListEmailIdentities API request.
@@ -154,7 +65,7 @@ func (r ListEmailIdentitiesRequest) Send(ctx context.Context) (*ListEmailIdentit
 	}
 
 	resp := &ListEmailIdentitiesResponse{
-		ListEmailIdentitiesOutput: r.Request.Data.(*ListEmailIdentitiesOutput),
+		ListEmailIdentitiesOutput: r.Request.Data.(*types.ListEmailIdentitiesOutput),
 		response:                  &aws.Response{Request: r.Request},
 	}
 
@@ -184,7 +95,7 @@ func NewListEmailIdentitiesPaginator(req ListEmailIdentitiesRequest) ListEmailId
 	return ListEmailIdentitiesPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListEmailIdentitiesInput
+				var inCpy *types.ListEmailIdentitiesInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -204,14 +115,14 @@ type ListEmailIdentitiesPaginator struct {
 	aws.Pager
 }
 
-func (p *ListEmailIdentitiesPaginator) CurrentPage() *ListEmailIdentitiesOutput {
-	return p.Pager.CurrentPage().(*ListEmailIdentitiesOutput)
+func (p *ListEmailIdentitiesPaginator) CurrentPage() *types.ListEmailIdentitiesOutput {
+	return p.Pager.CurrentPage().(*types.ListEmailIdentitiesOutput)
 }
 
 // ListEmailIdentitiesResponse is the response type for the
 // ListEmailIdentities API operation.
 type ListEmailIdentitiesResponse struct {
-	*ListEmailIdentitiesOutput
+	*types.ListEmailIdentitiesOutput
 
 	response *aws.Response
 }

@@ -6,54 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/directoryservice/types"
 )
-
-type UpdateTrustInput struct {
-	_ struct{} `type:"structure"`
-
-	// Updates selective authentication for the trust.
-	SelectiveAuth SelectiveAuth `type:"string" enum:"true"`
-
-	// Identifier of the trust relationship.
-	//
-	// TrustId is a required field
-	TrustId *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s UpdateTrustInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateTrustInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateTrustInput"}
-
-	if s.TrustId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("TrustId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type UpdateTrustOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The AWS request identifier.
-	RequestId *string `type:"string"`
-
-	// Identifier of the trust relationship.
-	TrustId *string `type:"string"`
-}
-
-// String returns the string representation
-func (s UpdateTrustOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opUpdateTrust = "UpdateTrust"
 
@@ -71,7 +25,7 @@ const opUpdateTrust = "UpdateTrust"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/UpdateTrust
-func (c *Client) UpdateTrustRequest(input *UpdateTrustInput) UpdateTrustRequest {
+func (c *Client) UpdateTrustRequest(input *types.UpdateTrustInput) UpdateTrustRequest {
 	op := &aws.Operation{
 		Name:       opUpdateTrust,
 		HTTPMethod: "POST",
@@ -79,10 +33,10 @@ func (c *Client) UpdateTrustRequest(input *UpdateTrustInput) UpdateTrustRequest 
 	}
 
 	if input == nil {
-		input = &UpdateTrustInput{}
+		input = &types.UpdateTrustInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateTrustOutput{})
+	req := c.newRequest(op, input, &types.UpdateTrustOutput{})
 	return UpdateTrustRequest{Request: req, Input: input, Copy: c.UpdateTrustRequest}
 }
 
@@ -90,8 +44,8 @@ func (c *Client) UpdateTrustRequest(input *UpdateTrustInput) UpdateTrustRequest 
 // UpdateTrust API operation.
 type UpdateTrustRequest struct {
 	*aws.Request
-	Input *UpdateTrustInput
-	Copy  func(*UpdateTrustInput) UpdateTrustRequest
+	Input *types.UpdateTrustInput
+	Copy  func(*types.UpdateTrustInput) UpdateTrustRequest
 }
 
 // Send marshals and sends the UpdateTrust API request.
@@ -103,7 +57,7 @@ func (r UpdateTrustRequest) Send(ctx context.Context) (*UpdateTrustResponse, err
 	}
 
 	resp := &UpdateTrustResponse{
-		UpdateTrustOutput: r.Request.Data.(*UpdateTrustOutput),
+		UpdateTrustOutput: r.Request.Data.(*types.UpdateTrustOutput),
 		response:          &aws.Response{Request: r.Request},
 	}
 
@@ -113,7 +67,7 @@ func (r UpdateTrustRequest) Send(ctx context.Context) (*UpdateTrustResponse, err
 // UpdateTrustResponse is the response type for the
 // UpdateTrust API operation.
 type UpdateTrustResponse struct {
-	*UpdateTrustOutput
+	*types.UpdateTrustOutput
 
 	response *aws.Response
 }

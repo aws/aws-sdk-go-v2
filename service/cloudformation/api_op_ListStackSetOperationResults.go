@@ -6,88 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/cloudformation/types"
 )
-
-type ListStackSetOperationResultsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The maximum number of results to be returned with a single call. If the number
-	// of available results exceeds this maximum, the response includes a NextToken
-	// value that you can assign to the NextToken request parameter to get the next
-	// set of results.
-	MaxResults *int64 `min:"1" type:"integer"`
-
-	// If the previous request didn't return all of the remaining results, the response
-	// object's NextToken parameter value is set to a token. To retrieve the next
-	// set of results, call ListStackSetOperationResults again and assign that token
-	// to the request object's NextToken parameter. If there are no remaining results,
-	// the previous response object's NextToken parameter is set to null.
-	NextToken *string `min:"1" type:"string"`
-
-	// The ID of the stack set operation.
-	//
-	// OperationId is a required field
-	OperationId *string `min:"1" type:"string" required:"true"`
-
-	// The name or unique ID of the stack set that you want to get operation results
-	// for.
-	//
-	// StackSetName is a required field
-	StackSetName *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s ListStackSetOperationResultsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListStackSetOperationResultsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListStackSetOperationResultsInput"}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-	if s.NextToken != nil && len(*s.NextToken) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
-	}
-
-	if s.OperationId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("OperationId"))
-	}
-	if s.OperationId != nil && len(*s.OperationId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("OperationId", 1))
-	}
-
-	if s.StackSetName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("StackSetName"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ListStackSetOperationResultsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// If the request doesn't return all results, NextToken is set to a token. To
-	// retrieve the next set of results, call ListOperationResults again and assign
-	// that token to the request object's NextToken parameter. If there are no remaining
-	// results, NextToken is set to null.
-	NextToken *string `min:"1" type:"string"`
-
-	// A list of StackSetOperationResultSummary structures that contain information
-	// about the specified operation results, for accounts and regions that are
-	// included in the operation.
-	Summaries []StackSetOperationResultSummary `type:"list"`
-}
-
-// String returns the string representation
-func (s ListStackSetOperationResultsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListStackSetOperationResults = "ListStackSetOperationResults"
 
@@ -104,7 +24,7 @@ const opListStackSetOperationResults = "ListStackSetOperationResults"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ListStackSetOperationResults
-func (c *Client) ListStackSetOperationResultsRequest(input *ListStackSetOperationResultsInput) ListStackSetOperationResultsRequest {
+func (c *Client) ListStackSetOperationResultsRequest(input *types.ListStackSetOperationResultsInput) ListStackSetOperationResultsRequest {
 	op := &aws.Operation{
 		Name:       opListStackSetOperationResults,
 		HTTPMethod: "POST",
@@ -112,10 +32,10 @@ func (c *Client) ListStackSetOperationResultsRequest(input *ListStackSetOperatio
 	}
 
 	if input == nil {
-		input = &ListStackSetOperationResultsInput{}
+		input = &types.ListStackSetOperationResultsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListStackSetOperationResultsOutput{})
+	req := c.newRequest(op, input, &types.ListStackSetOperationResultsOutput{})
 	return ListStackSetOperationResultsRequest{Request: req, Input: input, Copy: c.ListStackSetOperationResultsRequest}
 }
 
@@ -123,8 +43,8 @@ func (c *Client) ListStackSetOperationResultsRequest(input *ListStackSetOperatio
 // ListStackSetOperationResults API operation.
 type ListStackSetOperationResultsRequest struct {
 	*aws.Request
-	Input *ListStackSetOperationResultsInput
-	Copy  func(*ListStackSetOperationResultsInput) ListStackSetOperationResultsRequest
+	Input *types.ListStackSetOperationResultsInput
+	Copy  func(*types.ListStackSetOperationResultsInput) ListStackSetOperationResultsRequest
 }
 
 // Send marshals and sends the ListStackSetOperationResults API request.
@@ -136,7 +56,7 @@ func (r ListStackSetOperationResultsRequest) Send(ctx context.Context) (*ListSta
 	}
 
 	resp := &ListStackSetOperationResultsResponse{
-		ListStackSetOperationResultsOutput: r.Request.Data.(*ListStackSetOperationResultsOutput),
+		ListStackSetOperationResultsOutput: r.Request.Data.(*types.ListStackSetOperationResultsOutput),
 		response:                           &aws.Response{Request: r.Request},
 	}
 
@@ -146,7 +66,7 @@ func (r ListStackSetOperationResultsRequest) Send(ctx context.Context) (*ListSta
 // ListStackSetOperationResultsResponse is the response type for the
 // ListStackSetOperationResults API operation.
 type ListStackSetOperationResultsResponse struct {
-	*ListStackSetOperationResultsOutput
+	*types.ListStackSetOperationResultsOutput
 
 	response *aws.Response
 }

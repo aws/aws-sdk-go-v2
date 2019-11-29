@@ -6,61 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
+	"github.com/aws/aws-sdk-go-v2/service/cloudwatchlogs/types"
 )
-
-type AssociateKmsKeyInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the CMK to use when encrypting log data.
-	// For more information, see Amazon Resource Names - AWS Key Management Service
-	// (AWS KMS) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-kms).
-	//
-	// KmsKeyId is a required field
-	KmsKeyId *string `locationName:"kmsKeyId" type:"string" required:"true"`
-
-	// The name of the log group.
-	//
-	// LogGroupName is a required field
-	LogGroupName *string `locationName:"logGroupName" min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s AssociateKmsKeyInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *AssociateKmsKeyInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "AssociateKmsKeyInput"}
-
-	if s.KmsKeyId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("KmsKeyId"))
-	}
-
-	if s.LogGroupName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("LogGroupName"))
-	}
-	if s.LogGroupName != nil && len(*s.LogGroupName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("LogGroupName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type AssociateKmsKeyOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s AssociateKmsKeyOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opAssociateKmsKey = "AssociateKmsKey"
 
@@ -90,7 +39,7 @@ const opAssociateKmsKey = "AssociateKmsKey"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/AssociateKmsKey
-func (c *Client) AssociateKmsKeyRequest(input *AssociateKmsKeyInput) AssociateKmsKeyRequest {
+func (c *Client) AssociateKmsKeyRequest(input *types.AssociateKmsKeyInput) AssociateKmsKeyRequest {
 	op := &aws.Operation{
 		Name:       opAssociateKmsKey,
 		HTTPMethod: "POST",
@@ -98,10 +47,10 @@ func (c *Client) AssociateKmsKeyRequest(input *AssociateKmsKeyInput) AssociateKm
 	}
 
 	if input == nil {
-		input = &AssociateKmsKeyInput{}
+		input = &types.AssociateKmsKeyInput{}
 	}
 
-	req := c.newRequest(op, input, &AssociateKmsKeyOutput{})
+	req := c.newRequest(op, input, &types.AssociateKmsKeyOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return AssociateKmsKeyRequest{Request: req, Input: input, Copy: c.AssociateKmsKeyRequest}
@@ -111,8 +60,8 @@ func (c *Client) AssociateKmsKeyRequest(input *AssociateKmsKeyInput) AssociateKm
 // AssociateKmsKey API operation.
 type AssociateKmsKeyRequest struct {
 	*aws.Request
-	Input *AssociateKmsKeyInput
-	Copy  func(*AssociateKmsKeyInput) AssociateKmsKeyRequest
+	Input *types.AssociateKmsKeyInput
+	Copy  func(*types.AssociateKmsKeyInput) AssociateKmsKeyRequest
 }
 
 // Send marshals and sends the AssociateKmsKey API request.
@@ -124,7 +73,7 @@ func (r AssociateKmsKeyRequest) Send(ctx context.Context) (*AssociateKmsKeyRespo
 	}
 
 	resp := &AssociateKmsKeyResponse{
-		AssociateKmsKeyOutput: r.Request.Data.(*AssociateKmsKeyOutput),
+		AssociateKmsKeyOutput: r.Request.Data.(*types.AssociateKmsKeyOutput),
 		response:              &aws.Response{Request: r.Request},
 	}
 
@@ -134,7 +83,7 @@ func (r AssociateKmsKeyRequest) Send(ctx context.Context) (*AssociateKmsKeyRespo
 // AssociateKmsKeyResponse is the response type for the
 // AssociateKmsKey API operation.
 type AssociateKmsKeyResponse struct {
-	*AssociateKmsKeyOutput
+	*types.AssociateKmsKeyOutput
 
 	response *aws.Response
 }

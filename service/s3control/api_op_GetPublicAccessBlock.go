@@ -6,69 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/s3control/types"
 )
-
-type GetPublicAccessBlockInput struct {
-	_ struct{} `type:"structure"`
-
-	// AccountId is a required field
-	AccountId *string `location:"header" locationName:"x-amz-account-id" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetPublicAccessBlockInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetPublicAccessBlockInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetPublicAccessBlockInput"}
-
-	if s.AccountId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("AccountId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetPublicAccessBlockInput) MarshalFields(e protocol.FieldEncoder) error {
-
-	if s.AccountId != nil {
-		v := *s.AccountId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "x-amz-account-id", protocol.StringValue(v), metadata)
-	}
-	return nil
-}
-
-type GetPublicAccessBlockOutput struct {
-	_ struct{} `type:"structure" payload:"PublicAccessBlockConfiguration"`
-
-	PublicAccessBlockConfiguration *PublicAccessBlockConfiguration `type:"structure"`
-}
-
-// String returns the string representation
-func (s GetPublicAccessBlockOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetPublicAccessBlockOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.PublicAccessBlockConfiguration != nil {
-		v := s.PublicAccessBlockConfiguration
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.PayloadTarget, "PublicAccessBlockConfiguration", v, metadata)
-	}
-	return nil
-}
 
 const opGetPublicAccessBlock = "GetPublicAccessBlock"
 
@@ -83,7 +22,7 @@ const opGetPublicAccessBlock = "GetPublicAccessBlock"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/GetPublicAccessBlock
-func (c *Client) GetPublicAccessBlockRequest(input *GetPublicAccessBlockInput) GetPublicAccessBlockRequest {
+func (c *Client) GetPublicAccessBlockRequest(input *types.GetPublicAccessBlockInput) GetPublicAccessBlockRequest {
 	op := &aws.Operation{
 		Name:       opGetPublicAccessBlock,
 		HTTPMethod: "GET",
@@ -91,10 +30,10 @@ func (c *Client) GetPublicAccessBlockRequest(input *GetPublicAccessBlockInput) G
 	}
 
 	if input == nil {
-		input = &GetPublicAccessBlockInput{}
+		input = &types.GetPublicAccessBlockInput{}
 	}
 
-	req := c.newRequest(op, input, &GetPublicAccessBlockOutput{})
+	req := c.newRequest(op, input, &types.GetPublicAccessBlockOutput{})
 	req.Handlers.Build.PushBackNamed(buildPrefixHostHandler("AccountID", aws.StringValue(input.AccountId)))
 	req.Handlers.Build.PushBackNamed(buildRemoveHeaderHandler("X-Amz-Account-Id"))
 	return GetPublicAccessBlockRequest{Request: req, Input: input, Copy: c.GetPublicAccessBlockRequest}
@@ -104,8 +43,8 @@ func (c *Client) GetPublicAccessBlockRequest(input *GetPublicAccessBlockInput) G
 // GetPublicAccessBlock API operation.
 type GetPublicAccessBlockRequest struct {
 	*aws.Request
-	Input *GetPublicAccessBlockInput
-	Copy  func(*GetPublicAccessBlockInput) GetPublicAccessBlockRequest
+	Input *types.GetPublicAccessBlockInput
+	Copy  func(*types.GetPublicAccessBlockInput) GetPublicAccessBlockRequest
 }
 
 // Send marshals and sends the GetPublicAccessBlock API request.
@@ -117,7 +56,7 @@ func (r GetPublicAccessBlockRequest) Send(ctx context.Context) (*GetPublicAccess
 	}
 
 	resp := &GetPublicAccessBlockResponse{
-		GetPublicAccessBlockOutput: r.Request.Data.(*GetPublicAccessBlockOutput),
+		GetPublicAccessBlockOutput: r.Request.Data.(*types.GetPublicAccessBlockOutput),
 		response:                   &aws.Response{Request: r.Request},
 	}
 
@@ -127,7 +66,7 @@ func (r GetPublicAccessBlockRequest) Send(ctx context.Context) (*GetPublicAccess
 // GetPublicAccessBlockResponse is the response type for the
 // GetPublicAccessBlock API operation.
 type GetPublicAccessBlockResponse struct {
-	*GetPublicAccessBlockOutput
+	*types.GetPublicAccessBlockOutput
 
 	response *aws.Response
 }

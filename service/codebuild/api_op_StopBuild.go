@@ -6,51 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/codebuild/types"
 )
-
-type StopBuildInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the build.
-	//
-	// Id is a required field
-	Id *string `locationName:"id" min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s StopBuildInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *StopBuildInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "StopBuildInput"}
-
-	if s.Id == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Id"))
-	}
-	if s.Id != nil && len(*s.Id) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Id", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type StopBuildOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Information about the build.
-	Build *Build `locationName:"build" type:"structure"`
-}
-
-// String returns the string representation
-func (s StopBuildOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opStopBuild = "StopBuild"
 
@@ -67,7 +24,7 @@ const opStopBuild = "StopBuild"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/StopBuild
-func (c *Client) StopBuildRequest(input *StopBuildInput) StopBuildRequest {
+func (c *Client) StopBuildRequest(input *types.StopBuildInput) StopBuildRequest {
 	op := &aws.Operation{
 		Name:       opStopBuild,
 		HTTPMethod: "POST",
@@ -75,10 +32,10 @@ func (c *Client) StopBuildRequest(input *StopBuildInput) StopBuildRequest {
 	}
 
 	if input == nil {
-		input = &StopBuildInput{}
+		input = &types.StopBuildInput{}
 	}
 
-	req := c.newRequest(op, input, &StopBuildOutput{})
+	req := c.newRequest(op, input, &types.StopBuildOutput{})
 	return StopBuildRequest{Request: req, Input: input, Copy: c.StopBuildRequest}
 }
 
@@ -86,8 +43,8 @@ func (c *Client) StopBuildRequest(input *StopBuildInput) StopBuildRequest {
 // StopBuild API operation.
 type StopBuildRequest struct {
 	*aws.Request
-	Input *StopBuildInput
-	Copy  func(*StopBuildInput) StopBuildRequest
+	Input *types.StopBuildInput
+	Copy  func(*types.StopBuildInput) StopBuildRequest
 }
 
 // Send marshals and sends the StopBuild API request.
@@ -99,7 +56,7 @@ func (r StopBuildRequest) Send(ctx context.Context) (*StopBuildResponse, error) 
 	}
 
 	resp := &StopBuildResponse{
-		StopBuildOutput: r.Request.Data.(*StopBuildOutput),
+		StopBuildOutput: r.Request.Data.(*types.StopBuildOutput),
 		response:        &aws.Response{Request: r.Request},
 	}
 
@@ -109,7 +66,7 @@ func (r StopBuildRequest) Send(ctx context.Context) (*StopBuildResponse, error) 
 // StopBuildResponse is the response type for the
 // StopBuild API operation.
 type StopBuildResponse struct {
-	*StopBuildOutput
+	*types.StopBuildOutput
 
 	response *aws.Response
 }

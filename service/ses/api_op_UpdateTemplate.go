@@ -6,51 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ses/types"
 )
-
-type UpdateTemplateInput struct {
-	_ struct{} `type:"structure"`
-
-	// The content of the email, composed of a subject line, an HTML part, and a
-	// text-only part.
-	//
-	// Template is a required field
-	Template *Template `type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s UpdateTemplateInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateTemplateInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateTemplateInput"}
-
-	if s.Template == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Template"))
-	}
-	if s.Template != nil {
-		if err := s.Template.Validate(); err != nil {
-			invalidParams.AddNested("Template", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type UpdateTemplateOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s UpdateTemplateOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opUpdateTemplate = "UpdateTemplate"
 
@@ -71,7 +28,7 @@ const opUpdateTemplate = "UpdateTemplate"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/UpdateTemplate
-func (c *Client) UpdateTemplateRequest(input *UpdateTemplateInput) UpdateTemplateRequest {
+func (c *Client) UpdateTemplateRequest(input *types.UpdateTemplateInput) UpdateTemplateRequest {
 	op := &aws.Operation{
 		Name:       opUpdateTemplate,
 		HTTPMethod: "POST",
@@ -79,10 +36,10 @@ func (c *Client) UpdateTemplateRequest(input *UpdateTemplateInput) UpdateTemplat
 	}
 
 	if input == nil {
-		input = &UpdateTemplateInput{}
+		input = &types.UpdateTemplateInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateTemplateOutput{})
+	req := c.newRequest(op, input, &types.UpdateTemplateOutput{})
 	return UpdateTemplateRequest{Request: req, Input: input, Copy: c.UpdateTemplateRequest}
 }
 
@@ -90,8 +47,8 @@ func (c *Client) UpdateTemplateRequest(input *UpdateTemplateInput) UpdateTemplat
 // UpdateTemplate API operation.
 type UpdateTemplateRequest struct {
 	*aws.Request
-	Input *UpdateTemplateInput
-	Copy  func(*UpdateTemplateInput) UpdateTemplateRequest
+	Input *types.UpdateTemplateInput
+	Copy  func(*types.UpdateTemplateInput) UpdateTemplateRequest
 }
 
 // Send marshals and sends the UpdateTemplate API request.
@@ -103,7 +60,7 @@ func (r UpdateTemplateRequest) Send(ctx context.Context) (*UpdateTemplateRespons
 	}
 
 	resp := &UpdateTemplateResponse{
-		UpdateTemplateOutput: r.Request.Data.(*UpdateTemplateOutput),
+		UpdateTemplateOutput: r.Request.Data.(*types.UpdateTemplateOutput),
 		response:             &aws.Response{Request: r.Request},
 	}
 
@@ -113,7 +70,7 @@ func (r UpdateTemplateRequest) Send(ctx context.Context) (*UpdateTemplateRespons
 // UpdateTemplateResponse is the response type for the
 // UpdateTemplate API operation.
 type UpdateTemplateResponse struct {
-	*UpdateTemplateOutput
+	*types.UpdateTemplateOutput
 
 	response *aws.Response
 }

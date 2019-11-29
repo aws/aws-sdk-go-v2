@@ -4,173 +4,10 @@ package xray
 
 import (
 	"context"
-	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/xray/types"
 )
-
-type GetServiceGraphInput struct {
-	_ struct{} `type:"structure"`
-
-	// The end of the timeframe for which to generate a graph.
-	//
-	// EndTime is a required field
-	EndTime *time.Time `type:"timestamp" required:"true"`
-
-	// The ARN of a group to generate a graph based on.
-	GroupARN *string `min:"1" type:"string"`
-
-	// The name of a group to generate a graph based on.
-	GroupName *string `min:"1" type:"string"`
-
-	// Pagination token. Not used.
-	NextToken *string `type:"string"`
-
-	// The start of the time frame for which to generate a graph.
-	//
-	// StartTime is a required field
-	StartTime *time.Time `type:"timestamp" required:"true"`
-}
-
-// String returns the string representation
-func (s GetServiceGraphInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetServiceGraphInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetServiceGraphInput"}
-
-	if s.EndTime == nil {
-		invalidParams.Add(aws.NewErrParamRequired("EndTime"))
-	}
-	if s.GroupARN != nil && len(*s.GroupARN) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("GroupARN", 1))
-	}
-	if s.GroupName != nil && len(*s.GroupName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("GroupName", 1))
-	}
-
-	if s.StartTime == nil {
-		invalidParams.Add(aws.NewErrParamRequired("StartTime"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetServiceGraphInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.EndTime != nil {
-		v := *s.EndTime
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "EndTime",
-			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
-	}
-	if s.GroupARN != nil {
-		v := *s.GroupARN
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "GroupARN", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.GroupName != nil {
-		v := *s.GroupName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "GroupName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.StartTime != nil {
-		v := *s.StartTime
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "StartTime",
-			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
-	}
-	return nil
-}
-
-type GetServiceGraphOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A flag indicating whether the group's filter expression has been consistent,
-	// or if the returned service graph may show traces from an older version of
-	// the group's filter expression.
-	ContainsOldGroupVersions *bool `type:"boolean"`
-
-	// The end of the time frame for which the graph was generated.
-	EndTime *time.Time `type:"timestamp"`
-
-	// Pagination token. Not used.
-	NextToken *string `type:"string"`
-
-	// The services that have processed a traced request during the specified time
-	// frame.
-	Services []Service `type:"list"`
-
-	// The start of the time frame for which the graph was generated.
-	StartTime *time.Time `type:"timestamp"`
-}
-
-// String returns the string representation
-func (s GetServiceGraphOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetServiceGraphOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.ContainsOldGroupVersions != nil {
-		v := *s.ContainsOldGroupVersions
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "ContainsOldGroupVersions", protocol.BoolValue(v), metadata)
-	}
-	if s.EndTime != nil {
-		v := *s.EndTime
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "EndTime",
-			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Services != nil {
-		v := s.Services
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "Services", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	if s.StartTime != nil {
-		v := *s.StartTime
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "StartTime",
-			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
-	}
-	return nil
-}
 
 const opGetServiceGraph = "GetServiceGraph"
 
@@ -191,7 +28,7 @@ const opGetServiceGraph = "GetServiceGraph"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/GetServiceGraph
-func (c *Client) GetServiceGraphRequest(input *GetServiceGraphInput) GetServiceGraphRequest {
+func (c *Client) GetServiceGraphRequest(input *types.GetServiceGraphInput) GetServiceGraphRequest {
 	op := &aws.Operation{
 		Name:       opGetServiceGraph,
 		HTTPMethod: "POST",
@@ -205,10 +42,10 @@ func (c *Client) GetServiceGraphRequest(input *GetServiceGraphInput) GetServiceG
 	}
 
 	if input == nil {
-		input = &GetServiceGraphInput{}
+		input = &types.GetServiceGraphInput{}
 	}
 
-	req := c.newRequest(op, input, &GetServiceGraphOutput{})
+	req := c.newRequest(op, input, &types.GetServiceGraphOutput{})
 	return GetServiceGraphRequest{Request: req, Input: input, Copy: c.GetServiceGraphRequest}
 }
 
@@ -216,8 +53,8 @@ func (c *Client) GetServiceGraphRequest(input *GetServiceGraphInput) GetServiceG
 // GetServiceGraph API operation.
 type GetServiceGraphRequest struct {
 	*aws.Request
-	Input *GetServiceGraphInput
-	Copy  func(*GetServiceGraphInput) GetServiceGraphRequest
+	Input *types.GetServiceGraphInput
+	Copy  func(*types.GetServiceGraphInput) GetServiceGraphRequest
 }
 
 // Send marshals and sends the GetServiceGraph API request.
@@ -229,7 +66,7 @@ func (r GetServiceGraphRequest) Send(ctx context.Context) (*GetServiceGraphRespo
 	}
 
 	resp := &GetServiceGraphResponse{
-		GetServiceGraphOutput: r.Request.Data.(*GetServiceGraphOutput),
+		GetServiceGraphOutput: r.Request.Data.(*types.GetServiceGraphOutput),
 		response:              &aws.Response{Request: r.Request},
 	}
 
@@ -259,7 +96,7 @@ func NewGetServiceGraphPaginator(req GetServiceGraphRequest) GetServiceGraphPagi
 	return GetServiceGraphPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *GetServiceGraphInput
+				var inCpy *types.GetServiceGraphInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -279,14 +116,14 @@ type GetServiceGraphPaginator struct {
 	aws.Pager
 }
 
-func (p *GetServiceGraphPaginator) CurrentPage() *GetServiceGraphOutput {
-	return p.Pager.CurrentPage().(*GetServiceGraphOutput)
+func (p *GetServiceGraphPaginator) CurrentPage() *types.GetServiceGraphOutput {
+	return p.Pager.CurrentPage().(*types.GetServiceGraphOutput)
 }
 
 // GetServiceGraphResponse is the response type for the
 // GetServiceGraph API operation.
 type GetServiceGraphResponse struct {
-	*GetServiceGraphOutput
+	*types.GetServiceGraphOutput
 
 	response *aws.Response
 }

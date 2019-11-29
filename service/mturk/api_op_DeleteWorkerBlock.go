@@ -6,52 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/mturk/types"
 )
-
-type DeleteWorkerBlockInput struct {
-	_ struct{} `type:"structure"`
-
-	// A message that explains the reason for unblocking the Worker. The Worker
-	// does not see this message.
-	Reason *string `type:"string"`
-
-	// The ID of the Worker to unblock.
-	//
-	// WorkerId is a required field
-	WorkerId *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteWorkerBlockInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteWorkerBlockInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteWorkerBlockInput"}
-
-	if s.WorkerId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("WorkerId"))
-	}
-	if s.WorkerId != nil && len(*s.WorkerId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("WorkerId", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteWorkerBlockOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteWorkerBlockOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteWorkerBlock = "DeleteWorkerBlock"
 
@@ -73,7 +29,7 @@ const opDeleteWorkerBlock = "DeleteWorkerBlock"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/DeleteWorkerBlock
-func (c *Client) DeleteWorkerBlockRequest(input *DeleteWorkerBlockInput) DeleteWorkerBlockRequest {
+func (c *Client) DeleteWorkerBlockRequest(input *types.DeleteWorkerBlockInput) DeleteWorkerBlockRequest {
 	op := &aws.Operation{
 		Name:       opDeleteWorkerBlock,
 		HTTPMethod: "POST",
@@ -81,10 +37,10 @@ func (c *Client) DeleteWorkerBlockRequest(input *DeleteWorkerBlockInput) DeleteW
 	}
 
 	if input == nil {
-		input = &DeleteWorkerBlockInput{}
+		input = &types.DeleteWorkerBlockInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteWorkerBlockOutput{})
+	req := c.newRequest(op, input, &types.DeleteWorkerBlockOutput{})
 	return DeleteWorkerBlockRequest{Request: req, Input: input, Copy: c.DeleteWorkerBlockRequest}
 }
 
@@ -92,8 +48,8 @@ func (c *Client) DeleteWorkerBlockRequest(input *DeleteWorkerBlockInput) DeleteW
 // DeleteWorkerBlock API operation.
 type DeleteWorkerBlockRequest struct {
 	*aws.Request
-	Input *DeleteWorkerBlockInput
-	Copy  func(*DeleteWorkerBlockInput) DeleteWorkerBlockRequest
+	Input *types.DeleteWorkerBlockInput
+	Copy  func(*types.DeleteWorkerBlockInput) DeleteWorkerBlockRequest
 }
 
 // Send marshals and sends the DeleteWorkerBlock API request.
@@ -105,7 +61,7 @@ func (r DeleteWorkerBlockRequest) Send(ctx context.Context) (*DeleteWorkerBlockR
 	}
 
 	resp := &DeleteWorkerBlockResponse{
-		DeleteWorkerBlockOutput: r.Request.Data.(*DeleteWorkerBlockOutput),
+		DeleteWorkerBlockOutput: r.Request.Data.(*types.DeleteWorkerBlockOutput),
 		response:                &aws.Response{Request: r.Request},
 	}
 
@@ -115,7 +71,7 @@ func (r DeleteWorkerBlockRequest) Send(ctx context.Context) (*DeleteWorkerBlockR
 // DeleteWorkerBlockResponse is the response type for the
 // DeleteWorkerBlock API operation.
 type DeleteWorkerBlockResponse struct {
-	*DeleteWorkerBlockOutput
+	*types.DeleteWorkerBlockOutput
 
 	response *aws.Response
 }

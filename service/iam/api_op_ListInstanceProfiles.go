@@ -6,92 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/iam/types"
 )
-
-type ListInstanceProfilesInput struct {
-	_ struct{} `type:"structure"`
-
-	// Use this parameter only when paginating results and only after you receive
-	// a response indicating that the results are truncated. Set it to the value
-	// of the Marker element in the response that you received to indicate where
-	// the next call should start.
-	Marker *string `min:"1" type:"string"`
-
-	// Use this only when paginating results to indicate the maximum number of items
-	// you want in the response. If additional items exist beyond the maximum you
-	// specify, the IsTruncated response element is true.
-	//
-	// If you do not include this parameter, the number of items defaults to 100.
-	// Note that IAM might return fewer results, even when there are more results
-	// available. In that case, the IsTruncated response element returns true, and
-	// Marker contains a value to include in the subsequent call that tells the
-	// service where to continue from.
-	MaxItems *int64 `min:"1" type:"integer"`
-
-	// The path prefix for filtering the results. For example, the prefix /application_abc/component_xyz/
-	// gets all instance profiles whose path starts with /application_abc/component_xyz/.
-	//
-	// This parameter is optional. If it is not included, it defaults to a slash
-	// (/), listing all instance profiles. This parameter allows (through its regex
-	// pattern (http://wikipedia.org/wiki/regex)) a string of characters consisting
-	// of either a forward slash (/) by itself or a string that must begin and end
-	// with forward slashes. In addition, it can contain any ASCII character from
-	// the ! (\u0021) through the DEL character (\u007F), including most punctuation
-	// characters, digits, and upper and lowercased letters.
-	PathPrefix *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s ListInstanceProfilesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListInstanceProfilesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListInstanceProfilesInput"}
-	if s.Marker != nil && len(*s.Marker) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Marker", 1))
-	}
-	if s.MaxItems != nil && *s.MaxItems < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxItems", 1))
-	}
-	if s.PathPrefix != nil && len(*s.PathPrefix) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("PathPrefix", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Contains the response to a successful ListInstanceProfiles request.
-type ListInstanceProfilesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A list of instance profiles.
-	//
-	// InstanceProfiles is a required field
-	InstanceProfiles []InstanceProfile `type:"list" required:"true"`
-
-	// A flag that indicates whether there are more items to return. If your results
-	// were truncated, you can make a subsequent pagination request using the Marker
-	// request parameter to retrieve more items. Note that IAM might return fewer
-	// than the MaxItems number of results even when there are more results available.
-	// We recommend that you check IsTruncated after every call to ensure that you
-	// receive all your results.
-	IsTruncated *bool `type:"boolean"`
-
-	// When IsTruncated is true, this element is present and contains the value
-	// to use for the Marker parameter in a subsequent pagination request.
-	Marker *string `type:"string"`
-}
-
-// String returns the string representation
-func (s ListInstanceProfilesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListInstanceProfiles = "ListInstanceProfiles"
 
@@ -112,7 +28,7 @@ const opListInstanceProfiles = "ListInstanceProfiles"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListInstanceProfiles
-func (c *Client) ListInstanceProfilesRequest(input *ListInstanceProfilesInput) ListInstanceProfilesRequest {
+func (c *Client) ListInstanceProfilesRequest(input *types.ListInstanceProfilesInput) ListInstanceProfilesRequest {
 	op := &aws.Operation{
 		Name:       opListInstanceProfiles,
 		HTTPMethod: "POST",
@@ -126,10 +42,10 @@ func (c *Client) ListInstanceProfilesRequest(input *ListInstanceProfilesInput) L
 	}
 
 	if input == nil {
-		input = &ListInstanceProfilesInput{}
+		input = &types.ListInstanceProfilesInput{}
 	}
 
-	req := c.newRequest(op, input, &ListInstanceProfilesOutput{})
+	req := c.newRequest(op, input, &types.ListInstanceProfilesOutput{})
 	return ListInstanceProfilesRequest{Request: req, Input: input, Copy: c.ListInstanceProfilesRequest}
 }
 
@@ -137,8 +53,8 @@ func (c *Client) ListInstanceProfilesRequest(input *ListInstanceProfilesInput) L
 // ListInstanceProfiles API operation.
 type ListInstanceProfilesRequest struct {
 	*aws.Request
-	Input *ListInstanceProfilesInput
-	Copy  func(*ListInstanceProfilesInput) ListInstanceProfilesRequest
+	Input *types.ListInstanceProfilesInput
+	Copy  func(*types.ListInstanceProfilesInput) ListInstanceProfilesRequest
 }
 
 // Send marshals and sends the ListInstanceProfiles API request.
@@ -150,7 +66,7 @@ func (r ListInstanceProfilesRequest) Send(ctx context.Context) (*ListInstancePro
 	}
 
 	resp := &ListInstanceProfilesResponse{
-		ListInstanceProfilesOutput: r.Request.Data.(*ListInstanceProfilesOutput),
+		ListInstanceProfilesOutput: r.Request.Data.(*types.ListInstanceProfilesOutput),
 		response:                   &aws.Response{Request: r.Request},
 	}
 
@@ -180,7 +96,7 @@ func NewListInstanceProfilesPaginator(req ListInstanceProfilesRequest) ListInsta
 	return ListInstanceProfilesPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListInstanceProfilesInput
+				var inCpy *types.ListInstanceProfilesInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -200,14 +116,14 @@ type ListInstanceProfilesPaginator struct {
 	aws.Pager
 }
 
-func (p *ListInstanceProfilesPaginator) CurrentPage() *ListInstanceProfilesOutput {
-	return p.Pager.CurrentPage().(*ListInstanceProfilesOutput)
+func (p *ListInstanceProfilesPaginator) CurrentPage() *types.ListInstanceProfilesOutput {
+	return p.Pager.CurrentPage().(*types.ListInstanceProfilesOutput)
 }
 
 // ListInstanceProfilesResponse is the response type for the
 // ListInstanceProfiles API operation.
 type ListInstanceProfilesResponse struct {
-	*ListInstanceProfilesOutput
+	*types.ListInstanceProfilesOutput
 
 	response *aws.Response
 }

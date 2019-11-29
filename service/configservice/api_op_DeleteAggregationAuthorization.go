@@ -6,59 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
+	"github.com/aws/aws-sdk-go-v2/service/configservice/types"
 )
-
-type DeleteAggregationAuthorizationInput struct {
-	_ struct{} `type:"structure"`
-
-	// The 12-digit account ID of the account authorized to aggregate data.
-	//
-	// AuthorizedAccountId is a required field
-	AuthorizedAccountId *string `type:"string" required:"true"`
-
-	// The region authorized to collect aggregated data.
-	//
-	// AuthorizedAwsRegion is a required field
-	AuthorizedAwsRegion *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteAggregationAuthorizationInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteAggregationAuthorizationInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteAggregationAuthorizationInput"}
-
-	if s.AuthorizedAccountId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("AuthorizedAccountId"))
-	}
-
-	if s.AuthorizedAwsRegion == nil {
-		invalidParams.Add(aws.NewErrParamRequired("AuthorizedAwsRegion"))
-	}
-	if s.AuthorizedAwsRegion != nil && len(*s.AuthorizedAwsRegion) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("AuthorizedAwsRegion", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteAggregationAuthorizationOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteAggregationAuthorizationOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteAggregationAuthorization = "DeleteAggregationAuthorization"
 
@@ -76,7 +27,7 @@ const opDeleteAggregationAuthorization = "DeleteAggregationAuthorization"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DeleteAggregationAuthorization
-func (c *Client) DeleteAggregationAuthorizationRequest(input *DeleteAggregationAuthorizationInput) DeleteAggregationAuthorizationRequest {
+func (c *Client) DeleteAggregationAuthorizationRequest(input *types.DeleteAggregationAuthorizationInput) DeleteAggregationAuthorizationRequest {
 	op := &aws.Operation{
 		Name:       opDeleteAggregationAuthorization,
 		HTTPMethod: "POST",
@@ -84,10 +35,10 @@ func (c *Client) DeleteAggregationAuthorizationRequest(input *DeleteAggregationA
 	}
 
 	if input == nil {
-		input = &DeleteAggregationAuthorizationInput{}
+		input = &types.DeleteAggregationAuthorizationInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteAggregationAuthorizationOutput{})
+	req := c.newRequest(op, input, &types.DeleteAggregationAuthorizationOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return DeleteAggregationAuthorizationRequest{Request: req, Input: input, Copy: c.DeleteAggregationAuthorizationRequest}
@@ -97,8 +48,8 @@ func (c *Client) DeleteAggregationAuthorizationRequest(input *DeleteAggregationA
 // DeleteAggregationAuthorization API operation.
 type DeleteAggregationAuthorizationRequest struct {
 	*aws.Request
-	Input *DeleteAggregationAuthorizationInput
-	Copy  func(*DeleteAggregationAuthorizationInput) DeleteAggregationAuthorizationRequest
+	Input *types.DeleteAggregationAuthorizationInput
+	Copy  func(*types.DeleteAggregationAuthorizationInput) DeleteAggregationAuthorizationRequest
 }
 
 // Send marshals and sends the DeleteAggregationAuthorization API request.
@@ -110,7 +61,7 @@ func (r DeleteAggregationAuthorizationRequest) Send(ctx context.Context) (*Delet
 	}
 
 	resp := &DeleteAggregationAuthorizationResponse{
-		DeleteAggregationAuthorizationOutput: r.Request.Data.(*DeleteAggregationAuthorizationOutput),
+		DeleteAggregationAuthorizationOutput: r.Request.Data.(*types.DeleteAggregationAuthorizationOutput),
 		response:                             &aws.Response{Request: r.Request},
 	}
 
@@ -120,7 +71,7 @@ func (r DeleteAggregationAuthorizationRequest) Send(ctx context.Context) (*Delet
 // DeleteAggregationAuthorizationResponse is the response type for the
 // DeleteAggregationAuthorization API operation.
 type DeleteAggregationAuthorizationResponse struct {
-	*DeleteAggregationAuthorizationOutput
+	*types.DeleteAggregationAuthorizationOutput
 
 	response *aws.Response
 }

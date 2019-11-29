@@ -6,64 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/query"
+	"github.com/aws/aws-sdk-go-v2/service/iam/types"
 )
-
-type DeleteSigningCertificateInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the signing certificate to delete.
-	//
-	// The format of this parameter, as described by its regex (http://wikipedia.org/wiki/regex)
-	// pattern, is a string of characters that can be upper- or lower-cased letters
-	// or digits.
-	//
-	// CertificateId is a required field
-	CertificateId *string `min:"24" type:"string" required:"true"`
-
-	// The name of the user the signing certificate belongs to.
-	//
-	// This parameter allows (through its regex pattern (http://wikipedia.org/wiki/regex))
-	// a string of characters consisting of upper and lowercase alphanumeric characters
-	// with no spaces. You can also include any of the following characters: _+=,.@-
-	UserName *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s DeleteSigningCertificateInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteSigningCertificateInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteSigningCertificateInput"}
-
-	if s.CertificateId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("CertificateId"))
-	}
-	if s.CertificateId != nil && len(*s.CertificateId) < 24 {
-		invalidParams.Add(aws.NewErrParamMinLen("CertificateId", 24))
-	}
-	if s.UserName != nil && len(*s.UserName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("UserName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteSigningCertificateOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteSigningCertificateOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteSigningCertificate = "DeleteSigningCertificate"
 
@@ -86,7 +32,7 @@ const opDeleteSigningCertificate = "DeleteSigningCertificate"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeleteSigningCertificate
-func (c *Client) DeleteSigningCertificateRequest(input *DeleteSigningCertificateInput) DeleteSigningCertificateRequest {
+func (c *Client) DeleteSigningCertificateRequest(input *types.DeleteSigningCertificateInput) DeleteSigningCertificateRequest {
 	op := &aws.Operation{
 		Name:       opDeleteSigningCertificate,
 		HTTPMethod: "POST",
@@ -94,10 +40,10 @@ func (c *Client) DeleteSigningCertificateRequest(input *DeleteSigningCertificate
 	}
 
 	if input == nil {
-		input = &DeleteSigningCertificateInput{}
+		input = &types.DeleteSigningCertificateInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteSigningCertificateOutput{})
+	req := c.newRequest(op, input, &types.DeleteSigningCertificateOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return DeleteSigningCertificateRequest{Request: req, Input: input, Copy: c.DeleteSigningCertificateRequest}
@@ -107,8 +53,8 @@ func (c *Client) DeleteSigningCertificateRequest(input *DeleteSigningCertificate
 // DeleteSigningCertificate API operation.
 type DeleteSigningCertificateRequest struct {
 	*aws.Request
-	Input *DeleteSigningCertificateInput
-	Copy  func(*DeleteSigningCertificateInput) DeleteSigningCertificateRequest
+	Input *types.DeleteSigningCertificateInput
+	Copy  func(*types.DeleteSigningCertificateInput) DeleteSigningCertificateRequest
 }
 
 // Send marshals and sends the DeleteSigningCertificate API request.
@@ -120,7 +66,7 @@ func (r DeleteSigningCertificateRequest) Send(ctx context.Context) (*DeleteSigni
 	}
 
 	resp := &DeleteSigningCertificateResponse{
-		DeleteSigningCertificateOutput: r.Request.Data.(*DeleteSigningCertificateOutput),
+		DeleteSigningCertificateOutput: r.Request.Data.(*types.DeleteSigningCertificateOutput),
 		response:                       &aws.Response{Request: r.Request},
 	}
 
@@ -130,7 +76,7 @@ func (r DeleteSigningCertificateRequest) Send(ctx context.Context) (*DeleteSigni
 // DeleteSigningCertificateResponse is the response type for the
 // DeleteSigningCertificate API operation.
 type DeleteSigningCertificateResponse struct {
-	*DeleteSigningCertificateOutput
+	*types.DeleteSigningCertificateOutput
 
 	response *aws.Response
 }

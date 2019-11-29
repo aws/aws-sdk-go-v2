@@ -6,71 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/query"
+	"github.com/aws/aws-sdk-go-v2/service/iam/types"
 )
-
-type DeactivateMFADeviceInput struct {
-	_ struct{} `type:"structure"`
-
-	// The serial number that uniquely identifies the MFA device. For virtual MFA
-	// devices, the serial number is the device ARN.
-	//
-	// This parameter allows (through its regex pattern (http://wikipedia.org/wiki/regex))
-	// a string of characters consisting of upper and lowercase alphanumeric characters
-	// with no spaces. You can also include any of the following characters: =,.@:/-
-	//
-	// SerialNumber is a required field
-	SerialNumber *string `min:"9" type:"string" required:"true"`
-
-	// The name of the user whose MFA device you want to deactivate.
-	//
-	// This parameter allows (through its regex pattern (http://wikipedia.org/wiki/regex))
-	// a string of characters consisting of upper and lowercase alphanumeric characters
-	// with no spaces. You can also include any of the following characters: _+=,.@-
-	//
-	// UserName is a required field
-	UserName *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeactivateMFADeviceInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeactivateMFADeviceInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeactivateMFADeviceInput"}
-
-	if s.SerialNumber == nil {
-		invalidParams.Add(aws.NewErrParamRequired("SerialNumber"))
-	}
-	if s.SerialNumber != nil && len(*s.SerialNumber) < 9 {
-		invalidParams.Add(aws.NewErrParamMinLen("SerialNumber", 9))
-	}
-
-	if s.UserName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("UserName"))
-	}
-	if s.UserName != nil && len(*s.UserName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("UserName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeactivateMFADeviceOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeactivateMFADeviceOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeactivateMFADevice = "DeactivateMFADevice"
 
@@ -92,7 +31,7 @@ const opDeactivateMFADevice = "DeactivateMFADevice"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeactivateMFADevice
-func (c *Client) DeactivateMFADeviceRequest(input *DeactivateMFADeviceInput) DeactivateMFADeviceRequest {
+func (c *Client) DeactivateMFADeviceRequest(input *types.DeactivateMFADeviceInput) DeactivateMFADeviceRequest {
 	op := &aws.Operation{
 		Name:       opDeactivateMFADevice,
 		HTTPMethod: "POST",
@@ -100,10 +39,10 @@ func (c *Client) DeactivateMFADeviceRequest(input *DeactivateMFADeviceInput) Dea
 	}
 
 	if input == nil {
-		input = &DeactivateMFADeviceInput{}
+		input = &types.DeactivateMFADeviceInput{}
 	}
 
-	req := c.newRequest(op, input, &DeactivateMFADeviceOutput{})
+	req := c.newRequest(op, input, &types.DeactivateMFADeviceOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return DeactivateMFADeviceRequest{Request: req, Input: input, Copy: c.DeactivateMFADeviceRequest}
@@ -113,8 +52,8 @@ func (c *Client) DeactivateMFADeviceRequest(input *DeactivateMFADeviceInput) Dea
 // DeactivateMFADevice API operation.
 type DeactivateMFADeviceRequest struct {
 	*aws.Request
-	Input *DeactivateMFADeviceInput
-	Copy  func(*DeactivateMFADeviceInput) DeactivateMFADeviceRequest
+	Input *types.DeactivateMFADeviceInput
+	Copy  func(*types.DeactivateMFADeviceInput) DeactivateMFADeviceRequest
 }
 
 // Send marshals and sends the DeactivateMFADevice API request.
@@ -126,7 +65,7 @@ func (r DeactivateMFADeviceRequest) Send(ctx context.Context) (*DeactivateMFADev
 	}
 
 	resp := &DeactivateMFADeviceResponse{
-		DeactivateMFADeviceOutput: r.Request.Data.(*DeactivateMFADeviceOutput),
+		DeactivateMFADeviceOutput: r.Request.Data.(*types.DeactivateMFADeviceOutput),
 		response:                  &aws.Response{Request: r.Request},
 	}
 
@@ -136,7 +75,7 @@ func (r DeactivateMFADeviceRequest) Send(ctx context.Context) (*DeactivateMFADev
 // DeactivateMFADeviceResponse is the response type for the
 // DeactivateMFADevice API operation.
 type DeactivateMFADeviceResponse struct {
-	*DeactivateMFADeviceOutput
+	*types.DeactivateMFADeviceOutput
 
 	response *aws.Response
 }

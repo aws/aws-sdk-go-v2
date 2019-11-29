@@ -12,6 +12,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws/awserr"
 	"github.com/aws/aws-sdk-go-v2/aws/external"
 	"github.com/aws/aws-sdk-go-v2/service/elasticloadbalancing"
+	"github.com/aws/aws-sdk-go-v2/service/elasticloadbalancing/types"
 )
 
 var _ time.Duration
@@ -36,11 +37,11 @@ func ExampleClient_AddTagsRequest_shared00() {
 	}
 
 	svc := elasticloadbalancing.New(cfg)
-	input := &elasticloadbalancing.AddTagsInput{
+	input := &types.AddTagsInput{
 		LoadBalancerNames: []string{
 			"my-load-balancer",
 		},
-		Tags: []elasticloadbalancing.Tag{
+		Tags: []types.Tag{
 			{
 				Key:   aws.String("project"),
 				Value: aws.String("lima"),
@@ -87,7 +88,7 @@ func ExampleClient_ApplySecurityGroupsToLoadBalancerRequest_shared00() {
 	}
 
 	svc := elasticloadbalancing.New(cfg)
-	input := &elasticloadbalancing.ApplySecurityGroupsToLoadBalancerInput{
+	input := &types.ApplySecurityGroupsToLoadBalancerInput{
 		LoadBalancerName: aws.String("my-load-balancer"),
 		SecurityGroups: []string{
 			"sg-fc448899",
@@ -130,7 +131,7 @@ func ExampleClient_AttachLoadBalancerToSubnetsRequest_shared00() {
 	}
 
 	svc := elasticloadbalancing.New(cfg)
-	input := &elasticloadbalancing.AttachLoadBalancerToSubnetsInput{
+	input := &types.AttachLoadBalancerToSubnetsInput{
 		LoadBalancerName: aws.String("my-load-balancer"),
 		Subnets: []string{
 			"subnet-0ecac448",
@@ -175,8 +176,8 @@ func ExampleClient_ConfigureHealthCheckRequest_shared00() {
 	}
 
 	svc := elasticloadbalancing.New(cfg)
-	input := &elasticloadbalancing.ConfigureHealthCheckInput{
-		HealthCheck: &elasticloadbalancing.HealthCheck{
+	input := &types.ConfigureHealthCheckInput{
+		HealthCheck: &types.HealthCheck{
 			HealthyThreshold:   aws.Int64(2),
 			Interval:           aws.Int64(30),
 			Target:             aws.String("HTTP:80/png"),
@@ -218,7 +219,7 @@ func ExampleClient_CreateAppCookieStickinessPolicyRequest_shared00() {
 	}
 
 	svc := elasticloadbalancing.New(cfg)
-	input := &elasticloadbalancing.CreateAppCookieStickinessPolicyInput{
+	input := &types.CreateAppCookieStickinessPolicyInput{
 		CookieName:       aws.String("my-app-cookie"),
 		LoadBalancerName: aws.String("my-load-balancer"),
 		PolicyName:       aws.String("my-app-cookie-policy"),
@@ -262,7 +263,7 @@ func ExampleClient_CreateLBCookieStickinessPolicyRequest_shared00() {
 	}
 
 	svc := elasticloadbalancing.New(cfg)
-	input := &elasticloadbalancing.CreateLBCookieStickinessPolicyInput{
+	input := &types.CreateLBCookieStickinessPolicyInput{
 		CookieExpirationPeriod: aws.Int64(60),
 		LoadBalancerName:       aws.String("my-load-balancer"),
 		PolicyName:             aws.String("my-duration-cookie-policy"),
@@ -305,8 +306,8 @@ func ExampleClient_CreateLoadBalancerRequest_shared00() {
 	}
 
 	svc := elasticloadbalancing.New(cfg)
-	input := &elasticloadbalancing.CreateLoadBalancerInput{
-		Listeners: []elasticloadbalancing.Listener{
+	input := &types.CreateLoadBalancerInput{
+		Listeners: []types.Listener{
 			{
 				InstancePort:     aws.Int64(80),
 				InstanceProtocol: aws.String("HTTP"),
@@ -376,11 +377,11 @@ func ExampleClient_CreateLoadBalancerRequest_shared01() {
 	}
 
 	svc := elasticloadbalancing.New(cfg)
-	input := &elasticloadbalancing.CreateLoadBalancerInput{
+	input := &types.CreateLoadBalancerInput{
 		AvailabilityZones: []string{
 			"us-west-2a",
 		},
-		Listeners: []elasticloadbalancing.Listener{
+		Listeners: []types.Listener{
 			{
 				InstancePort:     aws.Int64(80),
 				InstanceProtocol: aws.String("HTTP"),
@@ -444,8 +445,8 @@ func ExampleClient_CreateLoadBalancerRequest_shared02() {
 	}
 
 	svc := elasticloadbalancing.New(cfg)
-	input := &elasticloadbalancing.CreateLoadBalancerInput{
-		Listeners: []elasticloadbalancing.Listener{
+	input := &types.CreateLoadBalancerInput{
+		Listeners: []types.Listener{
 			{
 				InstancePort:     aws.Int64(80),
 				InstanceProtocol: aws.String("HTTP"),
@@ -522,11 +523,11 @@ func ExampleClient_CreateLoadBalancerRequest_shared03() {
 	}
 
 	svc := elasticloadbalancing.New(cfg)
-	input := &elasticloadbalancing.CreateLoadBalancerInput{
+	input := &types.CreateLoadBalancerInput{
 		AvailabilityZones: []string{
 			"us-west-2a",
 		},
-		Listeners: []elasticloadbalancing.Listener{
+		Listeners: []types.Listener{
 			{
 				InstancePort:     aws.Int64(80),
 				InstanceProtocol: aws.String("HTTP"),
@@ -597,8 +598,8 @@ func ExampleClient_CreateLoadBalancerRequest_shared04() {
 	}
 
 	svc := elasticloadbalancing.New(cfg)
-	input := &elasticloadbalancing.CreateLoadBalancerInput{
-		Listeners: []elasticloadbalancing.Listener{
+	input := &types.CreateLoadBalancerInput{
+		Listeners: []types.Listener{
 			{
 				InstancePort:     aws.Int64(80),
 				InstanceProtocol: aws.String("HTTP"),
@@ -670,8 +671,8 @@ func ExampleClient_CreateLoadBalancerListenersRequest_shared00() {
 	}
 
 	svc := elasticloadbalancing.New(cfg)
-	input := &elasticloadbalancing.CreateLoadBalancerListenersInput{
-		Listeners: []elasticloadbalancing.Listener{
+	input := &types.CreateLoadBalancerListenersInput{
+		Listeners: []types.Listener{
 			{
 				InstancePort:     aws.Int64(80),
 				InstanceProtocol: aws.String("HTTP"),
@@ -722,8 +723,8 @@ func ExampleClient_CreateLoadBalancerListenersRequest_shared01() {
 	}
 
 	svc := elasticloadbalancing.New(cfg)
-	input := &elasticloadbalancing.CreateLoadBalancerListenersInput{
-		Listeners: []elasticloadbalancing.Listener{
+	input := &types.CreateLoadBalancerListenersInput{
+		Listeners: []types.Listener{
 			{
 				InstancePort:     aws.Int64(80),
 				InstanceProtocol: aws.String("HTTP"),
@@ -774,9 +775,9 @@ func ExampleClient_CreateLoadBalancerPolicyRequest_shared00() {
 	}
 
 	svc := elasticloadbalancing.New(cfg)
-	input := &elasticloadbalancing.CreateLoadBalancerPolicyInput{
+	input := &types.CreateLoadBalancerPolicyInput{
 		LoadBalancerName: aws.String("my-load-balancer"),
-		PolicyAttributes: []elasticloadbalancing.PolicyAttribute{
+		PolicyAttributes: []types.PolicyAttribute{
 			{
 				AttributeName:  aws.String("ProxyProtocol"),
 				AttributeValue: aws.String("true"),
@@ -825,9 +826,9 @@ func ExampleClient_CreateLoadBalancerPolicyRequest_shared01() {
 	}
 
 	svc := elasticloadbalancing.New(cfg)
-	input := &elasticloadbalancing.CreateLoadBalancerPolicyInput{
+	input := &types.CreateLoadBalancerPolicyInput{
 		LoadBalancerName: aws.String("my-load-balancer"),
-		PolicyAttributes: []elasticloadbalancing.PolicyAttribute{
+		PolicyAttributes: []types.PolicyAttribute{
 			{
 				AttributeName:  aws.String("PublicKey"),
 				AttributeValue: aws.String("MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAwAYUjnfyEyXr1pxjhFWBpMlggUcqoi3kl+dS74kj//c6x7ROtusUaeQCTgIUkayttRDWchuqo1pHC1u+n5xxXnBBe2ejbb2WRsKIQ5rXEeixsjFpFsojpSQKkzhVGI6mJVZBJDVKSHmswnwLBdofLhzvllpovBPTHe+o4haAWvDBALJU0pkSI1FecPHcs2hwxf14zHoXy1e2k36A64nXW43wtfx5qcVSIxtCEOjnYRg7RPvybaGfQ+v6Iaxb/+7J5kEvZhTFQId+bSiJImF1FSUT1W1xwzBZPUbcUkkXDj45vC2s3Z8E+Lk7a3uZhvsQHLZnrfuWjBWGWvZ/MhZYgEXAMPLE"),
@@ -877,9 +878,9 @@ func ExampleClient_CreateLoadBalancerPolicyRequest_shared02() {
 	}
 
 	svc := elasticloadbalancing.New(cfg)
-	input := &elasticloadbalancing.CreateLoadBalancerPolicyInput{
+	input := &types.CreateLoadBalancerPolicyInput{
 		LoadBalancerName: aws.String("my-load-balancer"),
-		PolicyAttributes: []elasticloadbalancing.PolicyAttribute{
+		PolicyAttributes: []types.PolicyAttribute{
 			{
 				AttributeName:  aws.String("PublicKeyPolicyName"),
 				AttributeValue: aws.String("my-PublicKey-policy"),
@@ -928,7 +929,7 @@ func ExampleClient_DeleteLoadBalancerRequest_shared00() {
 	}
 
 	svc := elasticloadbalancing.New(cfg)
-	input := &elasticloadbalancing.DeleteLoadBalancerInput{
+	input := &types.DeleteLoadBalancerInput{
 		LoadBalancerName: aws.String("my-load-balancer"),
 	}
 
@@ -962,7 +963,7 @@ func ExampleClient_DeleteLoadBalancerListenersRequest_shared00() {
 	}
 
 	svc := elasticloadbalancing.New(cfg)
-	input := &elasticloadbalancing.DeleteLoadBalancerListenersInput{
+	input := &types.DeleteLoadBalancerListenersInput{
 		LoadBalancerName: aws.String("my-load-balancer"),
 		LoadBalancerPorts: []int64{
 			80,
@@ -1001,7 +1002,7 @@ func ExampleClient_DeleteLoadBalancerPolicyRequest_shared00() {
 	}
 
 	svc := elasticloadbalancing.New(cfg)
-	input := &elasticloadbalancing.DeleteLoadBalancerPolicyInput{
+	input := &types.DeleteLoadBalancerPolicyInput{
 		LoadBalancerName: aws.String("my-load-balancer"),
 		PolicyName:       aws.String("my-duration-cookie-policy"),
 	}
@@ -1039,8 +1040,8 @@ func ExampleClient_DeregisterInstancesFromLoadBalancerRequest_shared00() {
 	}
 
 	svc := elasticloadbalancing.New(cfg)
-	input := &elasticloadbalancing.DeregisterInstancesFromLoadBalancerInput{
-		Instances: []elasticloadbalancing.Instance{
+	input := &types.DeregisterInstancesFromLoadBalancerInput{
+		Instances: []types.Instance{
 			{
 				InstanceId: aws.String("i-d6f6fae3"),
 			},
@@ -1081,7 +1082,7 @@ func ExampleClient_DescribeInstanceHealthRequest_shared00() {
 	}
 
 	svc := elasticloadbalancing.New(cfg)
-	input := &elasticloadbalancing.DescribeInstanceHealthInput{
+	input := &types.DescribeInstanceHealthInput{
 		LoadBalancerName: aws.String("my-load-balancer"),
 	}
 
@@ -1118,7 +1119,7 @@ func ExampleClient_DescribeLoadBalancerAttributesRequest_shared00() {
 	}
 
 	svc := elasticloadbalancing.New(cfg)
-	input := &elasticloadbalancing.DescribeLoadBalancerAttributesInput{
+	input := &types.DescribeLoadBalancerAttributesInput{
 		LoadBalancerName: aws.String("my-load-balancer"),
 	}
 
@@ -1155,7 +1156,7 @@ func ExampleClient_DescribeLoadBalancerPoliciesRequest_shared00() {
 	}
 
 	svc := elasticloadbalancing.New(cfg)
-	input := &elasticloadbalancing.DescribeLoadBalancerPoliciesInput{
+	input := &types.DescribeLoadBalancerPoliciesInput{
 		LoadBalancerName: aws.String("my-load-balancer"),
 		PolicyNames: []string{
 			"my-authentication-policy",
@@ -1195,7 +1196,7 @@ func ExampleClient_DescribeLoadBalancerPolicyTypesRequest_shared00() {
 	}
 
 	svc := elasticloadbalancing.New(cfg)
-	input := &elasticloadbalancing.DescribeLoadBalancerPolicyTypesInput{
+	input := &types.DescribeLoadBalancerPolicyTypesInput{
 		PolicyTypeNames: []string{
 			"ProxyProtocolPolicyType",
 		},
@@ -1232,7 +1233,7 @@ func ExampleClient_DescribeLoadBalancersRequest_shared00() {
 	}
 
 	svc := elasticloadbalancing.New(cfg)
-	input := &elasticloadbalancing.DescribeLoadBalancersInput{
+	input := &types.DescribeLoadBalancersInput{
 		LoadBalancerNames: []string{
 			"my-load-balancer",
 		},
@@ -1271,7 +1272,7 @@ func ExampleClient_DescribeTagsRequest_shared00() {
 	}
 
 	svc := elasticloadbalancing.New(cfg)
-	input := &elasticloadbalancing.DescribeTagsInput{
+	input := &types.DescribeTagsInput{
 		LoadBalancerNames: []string{
 			"my-load-balancer",
 		},
@@ -1308,7 +1309,7 @@ func ExampleClient_DetachLoadBalancerFromSubnetsRequest_shared00() {
 	}
 
 	svc := elasticloadbalancing.New(cfg)
-	input := &elasticloadbalancing.DetachLoadBalancerFromSubnetsInput{
+	input := &types.DetachLoadBalancerFromSubnetsInput{
 		LoadBalancerName: aws.String("my-load-balancer"),
 		Subnets: []string{
 			"subnet-0ecac448",
@@ -1349,7 +1350,7 @@ func ExampleClient_DisableAvailabilityZonesForLoadBalancerRequest_shared00() {
 	}
 
 	svc := elasticloadbalancing.New(cfg)
-	input := &elasticloadbalancing.DisableAvailabilityZonesForLoadBalancerInput{
+	input := &types.DisableAvailabilityZonesForLoadBalancerInput{
 		AvailabilityZones: []string{
 			"us-west-2a",
 		},
@@ -1389,7 +1390,7 @@ func ExampleClient_EnableAvailabilityZonesForLoadBalancerRequest_shared00() {
 	}
 
 	svc := elasticloadbalancing.New(cfg)
-	input := &elasticloadbalancing.EnableAvailabilityZonesForLoadBalancerInput{
+	input := &types.EnableAvailabilityZonesForLoadBalancerInput{
 		AvailabilityZones: []string{
 			"us-west-2b",
 		},
@@ -1427,9 +1428,9 @@ func ExampleClient_ModifyLoadBalancerAttributesRequest_shared00() {
 	}
 
 	svc := elasticloadbalancing.New(cfg)
-	input := &elasticloadbalancing.ModifyLoadBalancerAttributesInput{
-		LoadBalancerAttributes: &elasticloadbalancing.LoadBalancerAttributes{
-			CrossZoneLoadBalancing: &elasticloadbalancing.CrossZoneLoadBalancing{
+	input := &types.ModifyLoadBalancerAttributesInput{
+		LoadBalancerAttributes: &types.LoadBalancerAttributes{
+			CrossZoneLoadBalancing: &types.CrossZoneLoadBalancing{
 				Enabled: aws.Bool(true),
 			},
 		},
@@ -1471,9 +1472,9 @@ func ExampleClient_ModifyLoadBalancerAttributesRequest_shared01() {
 	}
 
 	svc := elasticloadbalancing.New(cfg)
-	input := &elasticloadbalancing.ModifyLoadBalancerAttributesInput{
-		LoadBalancerAttributes: &elasticloadbalancing.LoadBalancerAttributes{
-			ConnectionDraining: &elasticloadbalancing.ConnectionDraining{
+	input := &types.ModifyLoadBalancerAttributesInput{
+		LoadBalancerAttributes: &types.LoadBalancerAttributes{
+			ConnectionDraining: &types.ConnectionDraining{
 				Enabled: aws.Bool(true),
 				Timeout: aws.Int64(300),
 			},
@@ -1516,8 +1517,8 @@ func ExampleClient_RegisterInstancesWithLoadBalancerRequest_shared00() {
 	}
 
 	svc := elasticloadbalancing.New(cfg)
-	input := &elasticloadbalancing.RegisterInstancesWithLoadBalancerInput{
-		Instances: []elasticloadbalancing.Instance{
+	input := &types.RegisterInstancesWithLoadBalancerInput{
+		Instances: []types.Instance{
 			{
 				InstanceId: aws.String("i-d6f6fae3"),
 			},
@@ -1558,11 +1559,11 @@ func ExampleClient_RemoveTagsRequest_shared00() {
 	}
 
 	svc := elasticloadbalancing.New(cfg)
-	input := &elasticloadbalancing.RemoveTagsInput{
+	input := &types.RemoveTagsInput{
 		LoadBalancerNames: []string{
 			"my-load-balancer",
 		},
-		Tags: []elasticloadbalancing.TagKeyOnly{
+		Tags: []types.TagKeyOnly{
 			{
 				Key: aws.String("project"),
 			},
@@ -1600,7 +1601,7 @@ func ExampleClient_SetLoadBalancerListenerSSLCertificateRequest_shared00() {
 	}
 
 	svc := elasticloadbalancing.New(cfg)
-	input := &elasticloadbalancing.SetLoadBalancerListenerSSLCertificateInput{
+	input := &types.SetLoadBalancerListenerSSLCertificateInput{
 		LoadBalancerName: aws.String("my-load-balancer"),
 		LoadBalancerPort: aws.Int64(443),
 		SSLCertificateId: aws.String("arn:aws:iam::123456789012:server-certificate/new-server-cert"),
@@ -1646,7 +1647,7 @@ func ExampleClient_SetLoadBalancerPoliciesForBackendServerRequest_shared00() {
 	}
 
 	svc := elasticloadbalancing.New(cfg)
-	input := &elasticloadbalancing.SetLoadBalancerPoliciesForBackendServerInput{
+	input := &types.SetLoadBalancerPoliciesForBackendServerInput{
 		InstancePort:     aws.Int64(80),
 		LoadBalancerName: aws.String("my-load-balancer"),
 		PolicyNames: []string{
@@ -1690,7 +1691,7 @@ func ExampleClient_SetLoadBalancerPoliciesOfListenerRequest_shared00() {
 	}
 
 	svc := elasticloadbalancing.New(cfg)
-	input := &elasticloadbalancing.SetLoadBalancerPoliciesOfListenerInput{
+	input := &types.SetLoadBalancerPoliciesOfListenerInput{
 		LoadBalancerName: aws.String("my-load-balancer"),
 		LoadBalancerPort: aws.Int64(80),
 		PolicyNames: []string{

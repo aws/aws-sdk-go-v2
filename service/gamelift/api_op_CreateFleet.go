@@ -4,205 +4,10 @@ package gamelift
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/gamelift/types"
 )
-
-// Represents the input for a request action.
-type CreateFleetInput struct {
-	_ struct{} `type:"structure"`
-
-	// Unique identifier for a build to be deployed on the new fleet. The custom
-	// game server build must have been successfully uploaded to Amazon GameLift
-	// and be in a READY status. This fleet setting cannot be changed once the fleet
-	// is created.
-	BuildId *string `type:"string"`
-
-	CertificateConfiguration *CertificateConfiguration `type:"structure"`
-
-	// Human-readable description of a fleet.
-	Description *string `min:"1" type:"string"`
-
-	// Range of IP addresses and port settings that permit inbound traffic to access
-	// game sessions that running on the fleet. For fleets using a custom game build,
-	// this parameter is required before game sessions running on the fleet can
-	// accept connections. For Realtime Servers fleets, Amazon GameLift automatically
-	// sets TCP and UDP ranges for use by the Realtime servers. You can specify
-	// multiple permission settings or add more by updating the fleet.
-	EC2InboundPermissions []IpPermission `type:"list"`
-
-	// Name of an EC2 instance type that is supported in Amazon GameLift. A fleet
-	// instance type determines the computing resources of each instance in the
-	// fleet, including CPU, memory, storage, and networking capacity. Amazon GameLift
-	// supports the following EC2 instance types. See Amazon EC2 Instance Types
-	// (http://aws.amazon.com/ec2/instance-types/) for detailed descriptions.
-	//
-	// EC2InstanceType is a required field
-	EC2InstanceType EC2InstanceType `type:"string" required:"true" enum:"true"`
-
-	// Indicates whether to use on-demand instances or spot instances for this fleet.
-	// If empty, the default is ON_DEMAND. Both categories of instances use identical
-	// hardware and configurations based on the instance type selected for this
-	// fleet. Learn more about On-Demand versus Spot Instances (https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-ec2-instances.html#gamelift-ec2-instances-spot).
-	FleetType FleetType `type:"string" enum:"true"`
-
-	// Unique identifier for an AWS IAM role that manages access to your AWS services.
-	// With an instance role ARN set, any application that runs on an instance in
-	// this fleet can assume the role, including install scripts, server processes,
-	// daemons (background processes). Create a role or look up a role's ARN using
-	// the IAM dashboard (https://console.aws.amazon.com/iam/) in the AWS Management
-	// Console. Learn more about using on-box credentials for your game servers
-	// at Access external resources from a game server (https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-resources.html).
-	InstanceRoleArn *string `min:"1" type:"string"`
-
-	// This parameter is no longer used. Instead, to specify where Amazon GameLift
-	// should store log files once a server process shuts down, use the Amazon GameLift
-	// server API ProcessReady() and specify one or more directory paths in logParameters.
-	// See more information in the Server API Reference (https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api-ref.html#gamelift-sdk-server-api-ref-dataypes-process).
-	LogPaths []string `type:"list"`
-
-	// Name of an Amazon CloudWatch metric group to add this fleet to. A metric
-	// group aggregates the metrics for all fleets in the group. Specify an existing
-	// metric group name, or provide a new name to create a new metric group. A
-	// fleet can only be included in one metric group at a time.
-	MetricGroups []string `type:"list"`
-
-	// Descriptive label that is associated with a fleet. Fleet names do not need
-	// to be unique.
-	//
-	// Name is a required field
-	Name *string `min:"1" type:"string" required:"true"`
-
-	// Game session protection policy to apply to all instances in this fleet. If
-	// this parameter is not set, instances in this fleet default to no protection.
-	// You can change a fleet's protection policy using UpdateFleetAttributes, but
-	// this change will only affect sessions created after the policy change. You
-	// can also set protection for individual instances using UpdateGameSession.
-	//
-	//    * NoProtection -- The game session can be terminated during a scale-down
-	//    event.
-	//
-	//    * FullProtection -- If the game session is in an ACTIVE status, it cannot
-	//    be terminated during a scale-down event.
-	NewGameSessionProtectionPolicy ProtectionPolicy `type:"string" enum:"true"`
-
-	// Unique identifier for the AWS account with the VPC that you want to peer
-	// your Amazon GameLift fleet with. You can find your Account ID in the AWS
-	// Management Console under account settings.
-	PeerVpcAwsAccountId *string `min:"1" type:"string"`
-
-	// Unique identifier for a VPC with resources to be accessed by your Amazon
-	// GameLift fleet. The VPC must be in the same region where your fleet is deployed.
-	// Look up a VPC ID using the VPC Dashboard (https://console.aws.amazon.com/vpc/)
-	// in the AWS Management Console. Learn more about VPC peering in VPC Peering
-	// with Amazon GameLift Fleets (https://docs.aws.amazon.com/gamelift/latest/developerguide/vpc-peering.html).
-	PeerVpcId *string `min:"1" type:"string"`
-
-	// Policy that limits the number of game sessions an individual player can create
-	// over a span of time for this fleet.
-	ResourceCreationLimitPolicy *ResourceCreationLimitPolicy `type:"structure"`
-
-	// Instructions for launching server processes on each instance in the fleet.
-	// Server processes run either a custom game build executable or a Realtime
-	// Servers script. The run-time configuration lists the types of server processes
-	// to run on an instance and includes the following configuration settings:
-	// the server executable or launch script file, launch parameters, and the number
-	// of processes to run concurrently on each instance. A CreateFleet request
-	// must include a run-time configuration with at least one server process configuration.
-	RuntimeConfiguration *RuntimeConfiguration `type:"structure"`
-
-	// Unique identifier for a Realtime script to be deployed on the new fleet.
-	// The Realtime script must have been successfully uploaded to Amazon GameLift.
-	// This fleet setting cannot be changed once the fleet is created.
-	ScriptId *string `type:"string"`
-
-	// This parameter is no longer used. Instead, specify server launch parameters
-	// in the RuntimeConfiguration parameter. (Requests that specify a server launch
-	// path and launch parameters instead of a run-time configuration will continue
-	// to work.)
-	ServerLaunchParameters *string `min:"1" type:"string"`
-
-	// This parameter is no longer used. Instead, specify a server launch path using
-	// the RuntimeConfiguration parameter. (Requests that specify a server launch
-	// path and launch parameters instead of a run-time configuration will continue
-	// to work.)
-	ServerLaunchPath *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s CreateFleetInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateFleetInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateFleetInput"}
-	if s.Description != nil && len(*s.Description) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Description", 1))
-	}
-	if len(s.EC2InstanceType) == 0 {
-		invalidParams.Add(aws.NewErrParamRequired("EC2InstanceType"))
-	}
-	if s.InstanceRoleArn != nil && len(*s.InstanceRoleArn) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("InstanceRoleArn", 1))
-	}
-
-	if s.Name == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Name"))
-	}
-	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
-	}
-	if s.PeerVpcAwsAccountId != nil && len(*s.PeerVpcAwsAccountId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("PeerVpcAwsAccountId", 1))
-	}
-	if s.PeerVpcId != nil && len(*s.PeerVpcId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("PeerVpcId", 1))
-	}
-	if s.ServerLaunchParameters != nil && len(*s.ServerLaunchParameters) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ServerLaunchParameters", 1))
-	}
-	if s.ServerLaunchPath != nil && len(*s.ServerLaunchPath) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ServerLaunchPath", 1))
-	}
-	if s.CertificateConfiguration != nil {
-		if err := s.CertificateConfiguration.Validate(); err != nil {
-			invalidParams.AddNested("CertificateConfiguration", err.(aws.ErrInvalidParams))
-		}
-	}
-	if s.EC2InboundPermissions != nil {
-		for i, v := range s.EC2InboundPermissions {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "EC2InboundPermissions", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-	if s.RuntimeConfiguration != nil {
-		if err := s.RuntimeConfiguration.Validate(); err != nil {
-			invalidParams.AddNested("RuntimeConfiguration", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Represents the returned data in response to a request action.
-type CreateFleetOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Properties for the newly created fleet.
-	FleetAttributes *FleetAttributes `type:"structure"`
-}
-
-// String returns the string representation
-func (s CreateFleetOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCreateFleet = "CreateFleet"
 
@@ -279,7 +84,7 @@ const opCreateFleet = "CreateFleet"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/CreateFleet
-func (c *Client) CreateFleetRequest(input *CreateFleetInput) CreateFleetRequest {
+func (c *Client) CreateFleetRequest(input *types.CreateFleetInput) CreateFleetRequest {
 	op := &aws.Operation{
 		Name:       opCreateFleet,
 		HTTPMethod: "POST",
@@ -287,10 +92,10 @@ func (c *Client) CreateFleetRequest(input *CreateFleetInput) CreateFleetRequest 
 	}
 
 	if input == nil {
-		input = &CreateFleetInput{}
+		input = &types.CreateFleetInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateFleetOutput{})
+	req := c.newRequest(op, input, &types.CreateFleetOutput{})
 	return CreateFleetRequest{Request: req, Input: input, Copy: c.CreateFleetRequest}
 }
 
@@ -298,8 +103,8 @@ func (c *Client) CreateFleetRequest(input *CreateFleetInput) CreateFleetRequest 
 // CreateFleet API operation.
 type CreateFleetRequest struct {
 	*aws.Request
-	Input *CreateFleetInput
-	Copy  func(*CreateFleetInput) CreateFleetRequest
+	Input *types.CreateFleetInput
+	Copy  func(*types.CreateFleetInput) CreateFleetRequest
 }
 
 // Send marshals and sends the CreateFleet API request.
@@ -311,7 +116,7 @@ func (r CreateFleetRequest) Send(ctx context.Context) (*CreateFleetResponse, err
 	}
 
 	resp := &CreateFleetResponse{
-		CreateFleetOutput: r.Request.Data.(*CreateFleetOutput),
+		CreateFleetOutput: r.Request.Data.(*types.CreateFleetOutput),
 		response:          &aws.Response{Request: r.Request},
 	}
 
@@ -321,7 +126,7 @@ func (r CreateFleetRequest) Send(ctx context.Context) (*CreateFleetResponse, err
 // CreateFleetResponse is the response type for the
 // CreateFleet API operation.
 type CreateFleetResponse struct {
-	*CreateFleetOutput
+	*types.CreateFleetOutput
 
 	response *aws.Response
 }

@@ -6,60 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/emr/types"
 )
-
-// This input identifies a cluster and a list of tags to attach.
-type AddTagsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon EMR resource identifier to which tags will be added. This value
-	// must be a cluster identifier.
-	//
-	// ResourceId is a required field
-	ResourceId *string `type:"string" required:"true"`
-
-	// A list of tags to associate with a cluster and propagate to EC2 instances.
-	// Tags are user-defined key/value pairs that consist of a required key string
-	// with a maximum of 128 characters, and an optional value string with a maximum
-	// of 256 characters.
-	//
-	// Tags is a required field
-	Tags []Tag `type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s AddTagsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *AddTagsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "AddTagsInput"}
-
-	if s.ResourceId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ResourceId"))
-	}
-
-	if s.Tags == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Tags"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// This output indicates the result of adding tags to a resource.
-type AddTagsOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s AddTagsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opAddTags = "AddTags"
 
@@ -78,7 +26,7 @@ const opAddTags = "AddTags"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/AddTags
-func (c *Client) AddTagsRequest(input *AddTagsInput) AddTagsRequest {
+func (c *Client) AddTagsRequest(input *types.AddTagsInput) AddTagsRequest {
 	op := &aws.Operation{
 		Name:       opAddTags,
 		HTTPMethod: "POST",
@@ -86,10 +34,10 @@ func (c *Client) AddTagsRequest(input *AddTagsInput) AddTagsRequest {
 	}
 
 	if input == nil {
-		input = &AddTagsInput{}
+		input = &types.AddTagsInput{}
 	}
 
-	req := c.newRequest(op, input, &AddTagsOutput{})
+	req := c.newRequest(op, input, &types.AddTagsOutput{})
 	return AddTagsRequest{Request: req, Input: input, Copy: c.AddTagsRequest}
 }
 
@@ -97,8 +45,8 @@ func (c *Client) AddTagsRequest(input *AddTagsInput) AddTagsRequest {
 // AddTags API operation.
 type AddTagsRequest struct {
 	*aws.Request
-	Input *AddTagsInput
-	Copy  func(*AddTagsInput) AddTagsRequest
+	Input *types.AddTagsInput
+	Copy  func(*types.AddTagsInput) AddTagsRequest
 }
 
 // Send marshals and sends the AddTags API request.
@@ -110,7 +58,7 @@ func (r AddTagsRequest) Send(ctx context.Context) (*AddTagsResponse, error) {
 	}
 
 	resp := &AddTagsResponse{
-		AddTagsOutput: r.Request.Data.(*AddTagsOutput),
+		AddTagsOutput: r.Request.Data.(*types.AddTagsOutput),
 		response:      &aws.Response{Request: r.Request},
 	}
 
@@ -120,7 +68,7 @@ func (r AddTagsRequest) Send(ctx context.Context) (*AddTagsResponse, error) {
 // AddTagsResponse is the response type for the
 // AddTags API operation.
 type AddTagsResponse struct {
-	*AddTagsOutput
+	*types.AddTagsOutput
 
 	response *aws.Response
 }

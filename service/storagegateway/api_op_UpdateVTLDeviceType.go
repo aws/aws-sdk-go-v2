@@ -6,66 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/storagegateway/types"
 )
-
-type UpdateVTLDeviceTypeInput struct {
-	_ struct{} `type:"structure"`
-
-	// The type of medium changer you want to select.
-	//
-	// Valid Values: "STK-L700", "AWS-Gateway-VTL"
-	//
-	// DeviceType is a required field
-	DeviceType *string `min:"2" type:"string" required:"true"`
-
-	// The Amazon Resource Name (ARN) of the medium changer you want to select.
-	//
-	// VTLDeviceARN is a required field
-	VTLDeviceARN *string `min:"50" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s UpdateVTLDeviceTypeInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateVTLDeviceTypeInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateVTLDeviceTypeInput"}
-
-	if s.DeviceType == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DeviceType"))
-	}
-	if s.DeviceType != nil && len(*s.DeviceType) < 2 {
-		invalidParams.Add(aws.NewErrParamMinLen("DeviceType", 2))
-	}
-
-	if s.VTLDeviceARN == nil {
-		invalidParams.Add(aws.NewErrParamRequired("VTLDeviceARN"))
-	}
-	if s.VTLDeviceARN != nil && len(*s.VTLDeviceARN) < 50 {
-		invalidParams.Add(aws.NewErrParamMinLen("VTLDeviceARN", 50))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// UpdateVTLDeviceTypeOutput
-type UpdateVTLDeviceTypeOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the medium changer you have selected.
-	VTLDeviceARN *string `min:"50" type:"string"`
-}
-
-// String returns the string representation
-func (s UpdateVTLDeviceTypeOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opUpdateVTLDeviceType = "UpdateVTLDeviceType"
 
@@ -86,7 +28,7 @@ const opUpdateVTLDeviceType = "UpdateVTLDeviceType"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/UpdateVTLDeviceType
-func (c *Client) UpdateVTLDeviceTypeRequest(input *UpdateVTLDeviceTypeInput) UpdateVTLDeviceTypeRequest {
+func (c *Client) UpdateVTLDeviceTypeRequest(input *types.UpdateVTLDeviceTypeInput) UpdateVTLDeviceTypeRequest {
 	op := &aws.Operation{
 		Name:       opUpdateVTLDeviceType,
 		HTTPMethod: "POST",
@@ -94,10 +36,10 @@ func (c *Client) UpdateVTLDeviceTypeRequest(input *UpdateVTLDeviceTypeInput) Upd
 	}
 
 	if input == nil {
-		input = &UpdateVTLDeviceTypeInput{}
+		input = &types.UpdateVTLDeviceTypeInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateVTLDeviceTypeOutput{})
+	req := c.newRequest(op, input, &types.UpdateVTLDeviceTypeOutput{})
 	return UpdateVTLDeviceTypeRequest{Request: req, Input: input, Copy: c.UpdateVTLDeviceTypeRequest}
 }
 
@@ -105,8 +47,8 @@ func (c *Client) UpdateVTLDeviceTypeRequest(input *UpdateVTLDeviceTypeInput) Upd
 // UpdateVTLDeviceType API operation.
 type UpdateVTLDeviceTypeRequest struct {
 	*aws.Request
-	Input *UpdateVTLDeviceTypeInput
-	Copy  func(*UpdateVTLDeviceTypeInput) UpdateVTLDeviceTypeRequest
+	Input *types.UpdateVTLDeviceTypeInput
+	Copy  func(*types.UpdateVTLDeviceTypeInput) UpdateVTLDeviceTypeRequest
 }
 
 // Send marshals and sends the UpdateVTLDeviceType API request.
@@ -118,7 +60,7 @@ func (r UpdateVTLDeviceTypeRequest) Send(ctx context.Context) (*UpdateVTLDeviceT
 	}
 
 	resp := &UpdateVTLDeviceTypeResponse{
-		UpdateVTLDeviceTypeOutput: r.Request.Data.(*UpdateVTLDeviceTypeOutput),
+		UpdateVTLDeviceTypeOutput: r.Request.Data.(*types.UpdateVTLDeviceTypeOutput),
 		response:                  &aws.Response{Request: r.Request},
 	}
 
@@ -128,7 +70,7 @@ func (r UpdateVTLDeviceTypeRequest) Send(ctx context.Context) (*UpdateVTLDeviceT
 // UpdateVTLDeviceTypeResponse is the response type for the
 // UpdateVTLDeviceType API operation.
 type UpdateVTLDeviceTypeResponse struct {
-	*UpdateVTLDeviceTypeOutput
+	*types.UpdateVTLDeviceTypeOutput
 
 	response *aws.Response
 }

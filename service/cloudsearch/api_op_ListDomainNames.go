@@ -6,31 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/cloudsearch/types"
 )
-
-type ListDomainNamesInput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s ListDomainNamesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// The result of a ListDomainNames request. Contains a list of the domains owned
-// by an account.
-type ListDomainNamesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The names of the search domains owned by an account.
-	DomainNames map[string]string `type:"map"`
-}
-
-// String returns the string representation
-func (s ListDomainNamesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListDomainNames = "ListDomainNames"
 
@@ -45,7 +22,7 @@ const opListDomainNames = "ListDomainNames"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) ListDomainNamesRequest(input *ListDomainNamesInput) ListDomainNamesRequest {
+func (c *Client) ListDomainNamesRequest(input *types.ListDomainNamesInput) ListDomainNamesRequest {
 	op := &aws.Operation{
 		Name:       opListDomainNames,
 		HTTPMethod: "POST",
@@ -53,10 +30,10 @@ func (c *Client) ListDomainNamesRequest(input *ListDomainNamesInput) ListDomainN
 	}
 
 	if input == nil {
-		input = &ListDomainNamesInput{}
+		input = &types.ListDomainNamesInput{}
 	}
 
-	req := c.newRequest(op, input, &ListDomainNamesOutput{})
+	req := c.newRequest(op, input, &types.ListDomainNamesOutput{})
 	return ListDomainNamesRequest{Request: req, Input: input, Copy: c.ListDomainNamesRequest}
 }
 
@@ -64,8 +41,8 @@ func (c *Client) ListDomainNamesRequest(input *ListDomainNamesInput) ListDomainN
 // ListDomainNames API operation.
 type ListDomainNamesRequest struct {
 	*aws.Request
-	Input *ListDomainNamesInput
-	Copy  func(*ListDomainNamesInput) ListDomainNamesRequest
+	Input *types.ListDomainNamesInput
+	Copy  func(*types.ListDomainNamesInput) ListDomainNamesRequest
 }
 
 // Send marshals and sends the ListDomainNames API request.
@@ -77,7 +54,7 @@ func (r ListDomainNamesRequest) Send(ctx context.Context) (*ListDomainNamesRespo
 	}
 
 	resp := &ListDomainNamesResponse{
-		ListDomainNamesOutput: r.Request.Data.(*ListDomainNamesOutput),
+		ListDomainNamesOutput: r.Request.Data.(*types.ListDomainNamesOutput),
 		response:              &aws.Response{Request: r.Request},
 	}
 
@@ -87,7 +64,7 @@ func (r ListDomainNamesRequest) Send(ctx context.Context) (*ListDomainNamesRespo
 // ListDomainNamesResponse is the response type for the
 // ListDomainNames API operation.
 type ListDomainNamesResponse struct {
-	*ListDomainNamesOutput
+	*types.ListDomainNamesOutput
 
 	response *aws.Response
 }

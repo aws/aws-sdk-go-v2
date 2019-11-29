@@ -6,126 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/dlm/types"
 )
-
-type CreateLifecyclePolicyInput struct {
-	_ struct{} `type:"structure"`
-
-	// A description of the lifecycle policy. The characters ^[0-9A-Za-z _-]+$ are
-	// supported.
-	//
-	// Description is a required field
-	Description *string `type:"string" required:"true"`
-
-	// The Amazon Resource Name (ARN) of the IAM role used to run the operations
-	// specified by the lifecycle policy.
-	//
-	// ExecutionRoleArn is a required field
-	ExecutionRoleArn *string `type:"string" required:"true"`
-
-	// The configuration details of the lifecycle policy.
-	//
-	// Target tags cannot be re-used across lifecycle policies.
-	//
-	// PolicyDetails is a required field
-	PolicyDetails *PolicyDetails `type:"structure" required:"true"`
-
-	// The desired activation state of the lifecycle policy after creation.
-	//
-	// State is a required field
-	State SettablePolicyStateValues `type:"string" required:"true" enum:"true"`
-}
-
-// String returns the string representation
-func (s CreateLifecyclePolicyInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateLifecyclePolicyInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateLifecyclePolicyInput"}
-
-	if s.Description == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Description"))
-	}
-
-	if s.ExecutionRoleArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ExecutionRoleArn"))
-	}
-
-	if s.PolicyDetails == nil {
-		invalidParams.Add(aws.NewErrParamRequired("PolicyDetails"))
-	}
-	if len(s.State) == 0 {
-		invalidParams.Add(aws.NewErrParamRequired("State"))
-	}
-	if s.PolicyDetails != nil {
-		if err := s.PolicyDetails.Validate(); err != nil {
-			invalidParams.AddNested("PolicyDetails", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s CreateLifecyclePolicyInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.Description != nil {
-		v := *s.Description
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "Description", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.ExecutionRoleArn != nil {
-		v := *s.ExecutionRoleArn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "ExecutionRoleArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.PolicyDetails != nil {
-		v := s.PolicyDetails
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "PolicyDetails", v, metadata)
-	}
-	if len(s.State) > 0 {
-		v := s.State
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "State", protocol.QuotedValue{ValueMarshaler: v}, metadata)
-	}
-	return nil
-}
-
-type CreateLifecyclePolicyOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The identifier of the lifecycle policy.
-	PolicyId *string `type:"string"`
-}
-
-// String returns the string representation
-func (s CreateLifecyclePolicyOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s CreateLifecyclePolicyOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.PolicyId != nil {
-		v := *s.PolicyId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "PolicyId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opCreateLifecyclePolicy = "CreateLifecyclePolicy"
 
@@ -143,7 +25,7 @@ const opCreateLifecyclePolicy = "CreateLifecyclePolicy"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dlm-2018-01-12/CreateLifecyclePolicy
-func (c *Client) CreateLifecyclePolicyRequest(input *CreateLifecyclePolicyInput) CreateLifecyclePolicyRequest {
+func (c *Client) CreateLifecyclePolicyRequest(input *types.CreateLifecyclePolicyInput) CreateLifecyclePolicyRequest {
 	op := &aws.Operation{
 		Name:       opCreateLifecyclePolicy,
 		HTTPMethod: "POST",
@@ -151,10 +33,10 @@ func (c *Client) CreateLifecyclePolicyRequest(input *CreateLifecyclePolicyInput)
 	}
 
 	if input == nil {
-		input = &CreateLifecyclePolicyInput{}
+		input = &types.CreateLifecyclePolicyInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateLifecyclePolicyOutput{})
+	req := c.newRequest(op, input, &types.CreateLifecyclePolicyOutput{})
 	return CreateLifecyclePolicyRequest{Request: req, Input: input, Copy: c.CreateLifecyclePolicyRequest}
 }
 
@@ -162,8 +44,8 @@ func (c *Client) CreateLifecyclePolicyRequest(input *CreateLifecyclePolicyInput)
 // CreateLifecyclePolicy API operation.
 type CreateLifecyclePolicyRequest struct {
 	*aws.Request
-	Input *CreateLifecyclePolicyInput
-	Copy  func(*CreateLifecyclePolicyInput) CreateLifecyclePolicyRequest
+	Input *types.CreateLifecyclePolicyInput
+	Copy  func(*types.CreateLifecyclePolicyInput) CreateLifecyclePolicyRequest
 }
 
 // Send marshals and sends the CreateLifecyclePolicy API request.
@@ -175,7 +57,7 @@ func (r CreateLifecyclePolicyRequest) Send(ctx context.Context) (*CreateLifecycl
 	}
 
 	resp := &CreateLifecyclePolicyResponse{
-		CreateLifecyclePolicyOutput: r.Request.Data.(*CreateLifecyclePolicyOutput),
+		CreateLifecyclePolicyOutput: r.Request.Data.(*types.CreateLifecyclePolicyOutput),
 		response:                    &aws.Response{Request: r.Request},
 	}
 
@@ -185,7 +67,7 @@ func (r CreateLifecyclePolicyRequest) Send(ctx context.Context) (*CreateLifecycl
 // CreateLifecyclePolicyResponse is the response type for the
 // CreateLifecyclePolicy API operation.
 type CreateLifecyclePolicyResponse struct {
-	*CreateLifecyclePolicyOutput
+	*types.CreateLifecyclePolicyOutput
 
 	response *aws.Response
 }

@@ -6,45 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/alexaforbusiness/types"
 )
-
-type DeleteAddressBookInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ARN of the address book to delete.
-	//
-	// AddressBookArn is a required field
-	AddressBookArn *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteAddressBookInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteAddressBookInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteAddressBookInput"}
-
-	if s.AddressBookArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("AddressBookArn"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteAddressBookOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteAddressBookOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteAddressBook = "DeleteAddressBook"
 
@@ -61,7 +24,7 @@ const opDeleteAddressBook = "DeleteAddressBook"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/DeleteAddressBook
-func (c *Client) DeleteAddressBookRequest(input *DeleteAddressBookInput) DeleteAddressBookRequest {
+func (c *Client) DeleteAddressBookRequest(input *types.DeleteAddressBookInput) DeleteAddressBookRequest {
 	op := &aws.Operation{
 		Name:       opDeleteAddressBook,
 		HTTPMethod: "POST",
@@ -69,10 +32,10 @@ func (c *Client) DeleteAddressBookRequest(input *DeleteAddressBookInput) DeleteA
 	}
 
 	if input == nil {
-		input = &DeleteAddressBookInput{}
+		input = &types.DeleteAddressBookInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteAddressBookOutput{})
+	req := c.newRequest(op, input, &types.DeleteAddressBookOutput{})
 	return DeleteAddressBookRequest{Request: req, Input: input, Copy: c.DeleteAddressBookRequest}
 }
 
@@ -80,8 +43,8 @@ func (c *Client) DeleteAddressBookRequest(input *DeleteAddressBookInput) DeleteA
 // DeleteAddressBook API operation.
 type DeleteAddressBookRequest struct {
 	*aws.Request
-	Input *DeleteAddressBookInput
-	Copy  func(*DeleteAddressBookInput) DeleteAddressBookRequest
+	Input *types.DeleteAddressBookInput
+	Copy  func(*types.DeleteAddressBookInput) DeleteAddressBookRequest
 }
 
 // Send marshals and sends the DeleteAddressBook API request.
@@ -93,7 +56,7 @@ func (r DeleteAddressBookRequest) Send(ctx context.Context) (*DeleteAddressBookR
 	}
 
 	resp := &DeleteAddressBookResponse{
-		DeleteAddressBookOutput: r.Request.Data.(*DeleteAddressBookOutput),
+		DeleteAddressBookOutput: r.Request.Data.(*types.DeleteAddressBookOutput),
 		response:                &aws.Response{Request: r.Request},
 	}
 
@@ -103,7 +66,7 @@ func (r DeleteAddressBookRequest) Send(ctx context.Context) (*DeleteAddressBookR
 // DeleteAddressBookResponse is the response type for the
 // DeleteAddressBook API operation.
 type DeleteAddressBookResponse struct {
-	*DeleteAddressBookOutput
+	*types.DeleteAddressBookOutput
 
 	response *aws.Response
 }

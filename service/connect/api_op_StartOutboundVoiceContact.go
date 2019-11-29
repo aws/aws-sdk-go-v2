@@ -6,196 +6,18 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/connect/types"
 )
-
-type StartOutboundVoiceContactInput struct {
-	_ struct{} `type:"structure"`
-
-	// Specify a custom key-value pair using an attribute map. The attributes are
-	// standard Amazon Connect attributes, and can be accessed in contact flows
-	// just like any other contact attributes.
-	//
-	// There can be up to 32,768 UTF-8 bytes across all key-value pairs per contact.
-	// Attribute keys can include only alphanumeric, dash, and underscore characters.
-	//
-	// For example, if you want play a greeting when the customer answers the call,
-	// you can pass the customer name in attributes similar to the following:
-	Attributes map[string]string `type:"map"`
-
-	// A unique, case-sensitive identifier that you provide to ensure the idempotency
-	// of the request. The token is valid for 7 days after creation. If a contact
-	// is already started, the contact ID is returned. If the contact is disconnected,
-	// a new contact is started.
-	ClientToken *string `type:"string" idempotencyToken:"true"`
-
-	// The identifier for the contact flow to connect the outbound call to.
-	//
-	// To find the ContactFlowId, open the contact flow you want to use in the Amazon
-	// Connect contact flow editor. The ID for the contact flow is displayed in
-	// the address bar as part of the URL. For example, the contact flow ID is the
-	// set of characters at the end of the URL, after 'contact-flow/' such as 78ea8fd5-2659-4f2b-b528-699760ccfc1b.
-	//
-	// ContactFlowId is a required field
-	ContactFlowId *string `type:"string" required:"true"`
-
-	// The phone number of the customer in E.164 format.
-	//
-	// DestinationPhoneNumber is a required field
-	DestinationPhoneNumber *string `type:"string" required:"true"`
-
-	// The identifier for your Amazon Connect instance. To find the ID of your instance,
-	// open the AWS console and select Amazon Connect. Select the alias of the instance
-	// in the Instance alias column. The instance ID is displayed in the Overview
-	// section of your instance settings. For example, the instance ID is the set
-	// of characters at the end of the instance ARN, after instance/, such as 10a4c4eb-f57e-4d4c-b602-bf39176ced07.
-	//
-	// InstanceId is a required field
-	InstanceId *string `min:"1" type:"string" required:"true"`
-
-	// The queue to add the call to. If you specify a queue, the phone displayed
-	// for caller ID is the phone number specified in the queue. If you do not specify
-	// a queue, the queue used will be the queue defined in the contact flow.
-	//
-	// To find the QueueId, open the queue you want to use in the Amazon Connect
-	// Queue editor. The ID for the queue is displayed in the address bar as part
-	// of the URL. For example, the queue ID is the set of characters at the end
-	// of the URL, after 'queue/' such as queue/aeg40574-2d01-51c3-73d6-bf8624d2168c.
-	QueueId *string `type:"string"`
-
-	// The phone number, in E.164 format, associated with your Amazon Connect instance
-	// to use for the outbound call.
-	SourcePhoneNumber *string `type:"string"`
-}
-
-// String returns the string representation
-func (s StartOutboundVoiceContactInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *StartOutboundVoiceContactInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "StartOutboundVoiceContactInput"}
-
-	if s.ContactFlowId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ContactFlowId"))
-	}
-
-	if s.DestinationPhoneNumber == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DestinationPhoneNumber"))
-	}
-
-	if s.InstanceId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("InstanceId"))
-	}
-	if s.InstanceId != nil && len(*s.InstanceId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("InstanceId", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s StartOutboundVoiceContactInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.Attributes != nil {
-		v := s.Attributes
-
-		metadata := protocol.Metadata{}
-		ms0 := e.Map(protocol.BodyTarget, "Attributes", metadata)
-		ms0.Start()
-		for k1, v1 := range v {
-			ms0.MapSetValue(k1, protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
-		}
-		ms0.End()
-
-	}
-	var ClientToken string
-	if s.ClientToken != nil {
-		ClientToken = *s.ClientToken
-	} else {
-		ClientToken = protocol.GetIdempotencyToken()
-	}
-	{
-		v := ClientToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "ClientToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.ContactFlowId != nil {
-		v := *s.ContactFlowId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "ContactFlowId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.DestinationPhoneNumber != nil {
-		v := *s.DestinationPhoneNumber
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "DestinationPhoneNumber", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.InstanceId != nil {
-		v := *s.InstanceId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "InstanceId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.QueueId != nil {
-		v := *s.QueueId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "QueueId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.SourcePhoneNumber != nil {
-		v := *s.SourcePhoneNumber
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "SourcePhoneNumber", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type StartOutboundVoiceContactOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The unique identifier of this contact within your Amazon Connect instance.
-	ContactId *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s StartOutboundVoiceContactOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s StartOutboundVoiceContactOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.ContactId != nil {
-		v := *s.ContactId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "ContactId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opStartOutboundVoiceContact = "StartOutboundVoiceContact"
 
 // StartOutboundVoiceContactRequest returns a request value for making API operation for
 // Amazon Connect Service.
 //
-// The StartOutboundVoiceContact operation initiates a contact flow to place
-// an outbound call to a customer.
-//
-// If you are using an IAM account, it must have permission to the connect:StartOutboundVoiceContact
-// action.
+// Initiates a contact flow to place an outbound call to a customer.
 //
 // There is a 60 second dialing timeout for this operation. If the call is not
-// connected after 60 seconds, the call fails.
+// connected after 60 seconds, it fails.
 //
 //    // Example sending a request using StartOutboundVoiceContactRequest.
 //    req := client.StartOutboundVoiceContactRequest(params)
@@ -205,7 +27,7 @@ const opStartOutboundVoiceContact = "StartOutboundVoiceContact"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/StartOutboundVoiceContact
-func (c *Client) StartOutboundVoiceContactRequest(input *StartOutboundVoiceContactInput) StartOutboundVoiceContactRequest {
+func (c *Client) StartOutboundVoiceContactRequest(input *types.StartOutboundVoiceContactInput) StartOutboundVoiceContactRequest {
 	op := &aws.Operation{
 		Name:       opStartOutboundVoiceContact,
 		HTTPMethod: "PUT",
@@ -213,10 +35,10 @@ func (c *Client) StartOutboundVoiceContactRequest(input *StartOutboundVoiceConta
 	}
 
 	if input == nil {
-		input = &StartOutboundVoiceContactInput{}
+		input = &types.StartOutboundVoiceContactInput{}
 	}
 
-	req := c.newRequest(op, input, &StartOutboundVoiceContactOutput{})
+	req := c.newRequest(op, input, &types.StartOutboundVoiceContactOutput{})
 	return StartOutboundVoiceContactRequest{Request: req, Input: input, Copy: c.StartOutboundVoiceContactRequest}
 }
 
@@ -224,8 +46,8 @@ func (c *Client) StartOutboundVoiceContactRequest(input *StartOutboundVoiceConta
 // StartOutboundVoiceContact API operation.
 type StartOutboundVoiceContactRequest struct {
 	*aws.Request
-	Input *StartOutboundVoiceContactInput
-	Copy  func(*StartOutboundVoiceContactInput) StartOutboundVoiceContactRequest
+	Input *types.StartOutboundVoiceContactInput
+	Copy  func(*types.StartOutboundVoiceContactInput) StartOutboundVoiceContactRequest
 }
 
 // Send marshals and sends the StartOutboundVoiceContact API request.
@@ -237,7 +59,7 @@ func (r StartOutboundVoiceContactRequest) Send(ctx context.Context) (*StartOutbo
 	}
 
 	resp := &StartOutboundVoiceContactResponse{
-		StartOutboundVoiceContactOutput: r.Request.Data.(*StartOutboundVoiceContactOutput),
+		StartOutboundVoiceContactOutput: r.Request.Data.(*types.StartOutboundVoiceContactOutput),
 		response:                        &aws.Response{Request: r.Request},
 	}
 
@@ -247,7 +69,7 @@ func (r StartOutboundVoiceContactRequest) Send(ctx context.Context) (*StartOutbo
 // StartOutboundVoiceContactResponse is the response type for the
 // StartOutboundVoiceContact API operation.
 type StartOutboundVoiceContactResponse struct {
-	*StartOutboundVoiceContactOutput
+	*types.StartOutboundVoiceContactOutput
 
 	response *aws.Response
 }

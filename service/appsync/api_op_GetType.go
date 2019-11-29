@@ -6,102 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/appsync/types"
 )
-
-type GetTypeInput struct {
-	_ struct{} `type:"structure"`
-
-	// The API ID.
-	//
-	// ApiId is a required field
-	ApiId *string `location:"uri" locationName:"apiId" type:"string" required:"true"`
-
-	// The type format: SDL or JSON.
-	//
-	// Format is a required field
-	Format TypeDefinitionFormat `location:"querystring" locationName:"format" type:"string" required:"true" enum:"true"`
-
-	// The type name.
-	//
-	// TypeName is a required field
-	TypeName *string `location:"uri" locationName:"typeName" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetTypeInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetTypeInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetTypeInput"}
-
-	if s.ApiId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ApiId"))
-	}
-	if len(s.Format) == 0 {
-		invalidParams.Add(aws.NewErrParamRequired("Format"))
-	}
-
-	if s.TypeName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("TypeName"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetTypeInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.ApiId != nil {
-		v := *s.ApiId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "apiId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.TypeName != nil {
-		v := *s.TypeName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "typeName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if len(s.Format) > 0 {
-		v := s.Format
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "format", protocol.QuotedValue{ValueMarshaler: v}, metadata)
-	}
-	return nil
-}
-
-type GetTypeOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The Type object.
-	Type *Type `locationName:"type" type:"structure"`
-}
-
-// String returns the string representation
-func (s GetTypeOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetTypeOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.Type != nil {
-		v := s.Type
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "type", v, metadata)
-	}
-	return nil
-}
 
 const opGetType = "GetType"
 
@@ -118,7 +24,7 @@ const opGetType = "GetType"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/GetType
-func (c *Client) GetTypeRequest(input *GetTypeInput) GetTypeRequest {
+func (c *Client) GetTypeRequest(input *types.GetTypeInput) GetTypeRequest {
 	op := &aws.Operation{
 		Name:       opGetType,
 		HTTPMethod: "GET",
@@ -126,10 +32,10 @@ func (c *Client) GetTypeRequest(input *GetTypeInput) GetTypeRequest {
 	}
 
 	if input == nil {
-		input = &GetTypeInput{}
+		input = &types.GetTypeInput{}
 	}
 
-	req := c.newRequest(op, input, &GetTypeOutput{})
+	req := c.newRequest(op, input, &types.GetTypeOutput{})
 	return GetTypeRequest{Request: req, Input: input, Copy: c.GetTypeRequest}
 }
 
@@ -137,8 +43,8 @@ func (c *Client) GetTypeRequest(input *GetTypeInput) GetTypeRequest {
 // GetType API operation.
 type GetTypeRequest struct {
 	*aws.Request
-	Input *GetTypeInput
-	Copy  func(*GetTypeInput) GetTypeRequest
+	Input *types.GetTypeInput
+	Copy  func(*types.GetTypeInput) GetTypeRequest
 }
 
 // Send marshals and sends the GetType API request.
@@ -150,7 +56,7 @@ func (r GetTypeRequest) Send(ctx context.Context) (*GetTypeResponse, error) {
 	}
 
 	resp := &GetTypeResponse{
-		GetTypeOutput: r.Request.Data.(*GetTypeOutput),
+		GetTypeOutput: r.Request.Data.(*types.GetTypeOutput),
 		response:      &aws.Response{Request: r.Request},
 	}
 
@@ -160,7 +66,7 @@ func (r GetTypeRequest) Send(ctx context.Context) (*GetTypeResponse, error) {
 // GetTypeResponse is the response type for the
 // GetType API operation.
 type GetTypeResponse struct {
-	*GetTypeOutput
+	*types.GetTypeOutput
 
 	response *aws.Response
 }

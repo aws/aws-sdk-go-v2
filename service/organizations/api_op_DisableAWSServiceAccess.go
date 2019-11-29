@@ -6,52 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
+	"github.com/aws/aws-sdk-go-v2/service/organizations/types"
 )
-
-type DisableAWSServiceAccessInput struct {
-	_ struct{} `type:"structure"`
-
-	// The service principal name of the AWS service for which you want to disable
-	// integration with your organization. This is typically in the form of a URL,
-	// such as service-abbreviation.amazonaws.com.
-	//
-	// ServicePrincipal is a required field
-	ServicePrincipal *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DisableAWSServiceAccessInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DisableAWSServiceAccessInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DisableAWSServiceAccessInput"}
-
-	if s.ServicePrincipal == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ServicePrincipal"))
-	}
-	if s.ServicePrincipal != nil && len(*s.ServicePrincipal) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ServicePrincipal", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DisableAWSServiceAccessOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DisableAWSServiceAccessOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDisableAWSServiceAccess = "DisableAWSServiceAccess"
 
@@ -94,7 +52,7 @@ const opDisableAWSServiceAccess = "DisableAWSServiceAccess"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/DisableAWSServiceAccess
-func (c *Client) DisableAWSServiceAccessRequest(input *DisableAWSServiceAccessInput) DisableAWSServiceAccessRequest {
+func (c *Client) DisableAWSServiceAccessRequest(input *types.DisableAWSServiceAccessInput) DisableAWSServiceAccessRequest {
 	op := &aws.Operation{
 		Name:       opDisableAWSServiceAccess,
 		HTTPMethod: "POST",
@@ -102,10 +60,10 @@ func (c *Client) DisableAWSServiceAccessRequest(input *DisableAWSServiceAccessIn
 	}
 
 	if input == nil {
-		input = &DisableAWSServiceAccessInput{}
+		input = &types.DisableAWSServiceAccessInput{}
 	}
 
-	req := c.newRequest(op, input, &DisableAWSServiceAccessOutput{})
+	req := c.newRequest(op, input, &types.DisableAWSServiceAccessOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return DisableAWSServiceAccessRequest{Request: req, Input: input, Copy: c.DisableAWSServiceAccessRequest}
@@ -115,8 +73,8 @@ func (c *Client) DisableAWSServiceAccessRequest(input *DisableAWSServiceAccessIn
 // DisableAWSServiceAccess API operation.
 type DisableAWSServiceAccessRequest struct {
 	*aws.Request
-	Input *DisableAWSServiceAccessInput
-	Copy  func(*DisableAWSServiceAccessInput) DisableAWSServiceAccessRequest
+	Input *types.DisableAWSServiceAccessInput
+	Copy  func(*types.DisableAWSServiceAccessInput) DisableAWSServiceAccessRequest
 }
 
 // Send marshals and sends the DisableAWSServiceAccess API request.
@@ -128,7 +86,7 @@ func (r DisableAWSServiceAccessRequest) Send(ctx context.Context) (*DisableAWSSe
 	}
 
 	resp := &DisableAWSServiceAccessResponse{
-		DisableAWSServiceAccessOutput: r.Request.Data.(*DisableAWSServiceAccessOutput),
+		DisableAWSServiceAccessOutput: r.Request.Data.(*types.DisableAWSServiceAccessOutput),
 		response:                      &aws.Response{Request: r.Request},
 	}
 
@@ -138,7 +96,7 @@ func (r DisableAWSServiceAccessRequest) Send(ctx context.Context) (*DisableAWSSe
 // DisableAWSServiceAccessResponse is the response type for the
 // DisableAWSServiceAccess API operation.
 type DisableAWSServiceAccessResponse struct {
-	*DisableAWSServiceAccessOutput
+	*types.DisableAWSServiceAccessOutput
 
 	response *aws.Response
 }

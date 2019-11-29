@@ -6,48 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/shield/types"
 )
-
-type AssociateDRTLogBucketInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon S3 bucket that contains your AWS WAF logs.
-	//
-	// LogBucket is a required field
-	LogBucket *string `min:"3" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s AssociateDRTLogBucketInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *AssociateDRTLogBucketInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "AssociateDRTLogBucketInput"}
-
-	if s.LogBucket == nil {
-		invalidParams.Add(aws.NewErrParamRequired("LogBucket"))
-	}
-	if s.LogBucket != nil && len(*s.LogBucket) < 3 {
-		invalidParams.Add(aws.NewErrParamMinLen("LogBucket", 3))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type AssociateDRTLogBucketOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s AssociateDRTLogBucketOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opAssociateDRTLogBucket = "AssociateDRTLogBucket"
 
@@ -70,7 +30,7 @@ const opAssociateDRTLogBucket = "AssociateDRTLogBucket"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/AssociateDRTLogBucket
-func (c *Client) AssociateDRTLogBucketRequest(input *AssociateDRTLogBucketInput) AssociateDRTLogBucketRequest {
+func (c *Client) AssociateDRTLogBucketRequest(input *types.AssociateDRTLogBucketInput) AssociateDRTLogBucketRequest {
 	op := &aws.Operation{
 		Name:       opAssociateDRTLogBucket,
 		HTTPMethod: "POST",
@@ -78,10 +38,10 @@ func (c *Client) AssociateDRTLogBucketRequest(input *AssociateDRTLogBucketInput)
 	}
 
 	if input == nil {
-		input = &AssociateDRTLogBucketInput{}
+		input = &types.AssociateDRTLogBucketInput{}
 	}
 
-	req := c.newRequest(op, input, &AssociateDRTLogBucketOutput{})
+	req := c.newRequest(op, input, &types.AssociateDRTLogBucketOutput{})
 	return AssociateDRTLogBucketRequest{Request: req, Input: input, Copy: c.AssociateDRTLogBucketRequest}
 }
 
@@ -89,8 +49,8 @@ func (c *Client) AssociateDRTLogBucketRequest(input *AssociateDRTLogBucketInput)
 // AssociateDRTLogBucket API operation.
 type AssociateDRTLogBucketRequest struct {
 	*aws.Request
-	Input *AssociateDRTLogBucketInput
-	Copy  func(*AssociateDRTLogBucketInput) AssociateDRTLogBucketRequest
+	Input *types.AssociateDRTLogBucketInput
+	Copy  func(*types.AssociateDRTLogBucketInput) AssociateDRTLogBucketRequest
 }
 
 // Send marshals and sends the AssociateDRTLogBucket API request.
@@ -102,7 +62,7 @@ func (r AssociateDRTLogBucketRequest) Send(ctx context.Context) (*AssociateDRTLo
 	}
 
 	resp := &AssociateDRTLogBucketResponse{
-		AssociateDRTLogBucketOutput: r.Request.Data.(*AssociateDRTLogBucketOutput),
+		AssociateDRTLogBucketOutput: r.Request.Data.(*types.AssociateDRTLogBucketOutput),
 		response:                    &aws.Response{Request: r.Request},
 	}
 
@@ -112,7 +72,7 @@ func (r AssociateDRTLogBucketRequest) Send(ctx context.Context) (*AssociateDRTLo
 // AssociateDRTLogBucketResponse is the response type for the
 // AssociateDRTLogBucket API operation.
 type AssociateDRTLogBucketResponse struct {
-	*AssociateDRTLogBucketOutput
+	*types.AssociateDRTLogBucketOutput
 
 	response *aws.Response
 }

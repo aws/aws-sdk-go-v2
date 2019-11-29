@@ -6,49 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/kms/types"
 )
-
-type DisconnectCustomKeyStoreInput struct {
-	_ struct{} `type:"structure"`
-
-	// Enter the ID of the custom key store you want to disconnect. To find the
-	// ID of a custom key store, use the DescribeCustomKeyStores operation.
-	//
-	// CustomKeyStoreId is a required field
-	CustomKeyStoreId *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DisconnectCustomKeyStoreInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DisconnectCustomKeyStoreInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DisconnectCustomKeyStoreInput"}
-
-	if s.CustomKeyStoreId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("CustomKeyStoreId"))
-	}
-	if s.CustomKeyStoreId != nil && len(*s.CustomKeyStoreId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("CustomKeyStoreId", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DisconnectCustomKeyStoreOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DisconnectCustomKeyStoreOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDisconnectCustomKeyStore = "DisconnectCustomKeyStore"
 
@@ -84,7 +43,7 @@ const opDisconnectCustomKeyStore = "DisconnectCustomKeyStore"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/DisconnectCustomKeyStore
-func (c *Client) DisconnectCustomKeyStoreRequest(input *DisconnectCustomKeyStoreInput) DisconnectCustomKeyStoreRequest {
+func (c *Client) DisconnectCustomKeyStoreRequest(input *types.DisconnectCustomKeyStoreInput) DisconnectCustomKeyStoreRequest {
 	op := &aws.Operation{
 		Name:       opDisconnectCustomKeyStore,
 		HTTPMethod: "POST",
@@ -92,10 +51,10 @@ func (c *Client) DisconnectCustomKeyStoreRequest(input *DisconnectCustomKeyStore
 	}
 
 	if input == nil {
-		input = &DisconnectCustomKeyStoreInput{}
+		input = &types.DisconnectCustomKeyStoreInput{}
 	}
 
-	req := c.newRequest(op, input, &DisconnectCustomKeyStoreOutput{})
+	req := c.newRequest(op, input, &types.DisconnectCustomKeyStoreOutput{})
 	return DisconnectCustomKeyStoreRequest{Request: req, Input: input, Copy: c.DisconnectCustomKeyStoreRequest}
 }
 
@@ -103,8 +62,8 @@ func (c *Client) DisconnectCustomKeyStoreRequest(input *DisconnectCustomKeyStore
 // DisconnectCustomKeyStore API operation.
 type DisconnectCustomKeyStoreRequest struct {
 	*aws.Request
-	Input *DisconnectCustomKeyStoreInput
-	Copy  func(*DisconnectCustomKeyStoreInput) DisconnectCustomKeyStoreRequest
+	Input *types.DisconnectCustomKeyStoreInput
+	Copy  func(*types.DisconnectCustomKeyStoreInput) DisconnectCustomKeyStoreRequest
 }
 
 // Send marshals and sends the DisconnectCustomKeyStore API request.
@@ -116,7 +75,7 @@ func (r DisconnectCustomKeyStoreRequest) Send(ctx context.Context) (*DisconnectC
 	}
 
 	resp := &DisconnectCustomKeyStoreResponse{
-		DisconnectCustomKeyStoreOutput: r.Request.Data.(*DisconnectCustomKeyStoreOutput),
+		DisconnectCustomKeyStoreOutput: r.Request.Data.(*types.DisconnectCustomKeyStoreOutput),
 		response:                       &aws.Response{Request: r.Request},
 	}
 
@@ -126,7 +85,7 @@ func (r DisconnectCustomKeyStoreRequest) Send(ctx context.Context) (*DisconnectC
 // DisconnectCustomKeyStoreResponse is the response type for the
 // DisconnectCustomKeyStore API operation.
 type DisconnectCustomKeyStoreResponse struct {
-	*DisconnectCustomKeyStoreOutput
+	*types.DisconnectCustomKeyStoreOutput
 
 	response *aws.Response
 }

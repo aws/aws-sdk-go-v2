@@ -6,69 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/iotthingsgraph/types"
 )
-
-type SearchThingsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the entity to which the things are associated.
-	//
-	// The IDs should be in the following format.
-	//
-	// urn:tdm:REGION/ACCOUNT ID/default:device:DEVICENAME
-	//
-	// EntityId is a required field
-	EntityId *string `locationName:"entityId" type:"string" required:"true"`
-
-	// The maximum number of results to return in the response.
-	MaxResults *int64 `locationName:"maxResults" min:"1" type:"integer"`
-
-	// The version of the user's namespace. Defaults to the latest version of the
-	// user's namespace.
-	NamespaceVersion *int64 `locationName:"namespaceVersion" type:"long"`
-
-	// The string that specifies the next page of results. Use this when you're
-	// paginating results.
-	NextToken *string `locationName:"nextToken" type:"string"`
-}
-
-// String returns the string representation
-func (s SearchThingsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *SearchThingsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "SearchThingsInput"}
-
-	if s.EntityId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("EntityId"))
-	}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type SearchThingsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The string to specify as nextToken when you request the next page of results.
-	NextToken *string `locationName:"nextToken" type:"string"`
-
-	// An array of things in the result set.
-	Things []Thing `locationName:"things" type:"list"`
-}
-
-// String returns the string representation
-func (s SearchThingsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opSearchThings = "SearchThings"
 
@@ -93,7 +32,7 @@ const opSearchThings = "SearchThings"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iotthingsgraph-2018-09-06/SearchThings
-func (c *Client) SearchThingsRequest(input *SearchThingsInput) SearchThingsRequest {
+func (c *Client) SearchThingsRequest(input *types.SearchThingsInput) SearchThingsRequest {
 	op := &aws.Operation{
 		Name:       opSearchThings,
 		HTTPMethod: "POST",
@@ -107,10 +46,10 @@ func (c *Client) SearchThingsRequest(input *SearchThingsInput) SearchThingsReque
 	}
 
 	if input == nil {
-		input = &SearchThingsInput{}
+		input = &types.SearchThingsInput{}
 	}
 
-	req := c.newRequest(op, input, &SearchThingsOutput{})
+	req := c.newRequest(op, input, &types.SearchThingsOutput{})
 	return SearchThingsRequest{Request: req, Input: input, Copy: c.SearchThingsRequest}
 }
 
@@ -118,8 +57,8 @@ func (c *Client) SearchThingsRequest(input *SearchThingsInput) SearchThingsReque
 // SearchThings API operation.
 type SearchThingsRequest struct {
 	*aws.Request
-	Input *SearchThingsInput
-	Copy  func(*SearchThingsInput) SearchThingsRequest
+	Input *types.SearchThingsInput
+	Copy  func(*types.SearchThingsInput) SearchThingsRequest
 }
 
 // Send marshals and sends the SearchThings API request.
@@ -131,7 +70,7 @@ func (r SearchThingsRequest) Send(ctx context.Context) (*SearchThingsResponse, e
 	}
 
 	resp := &SearchThingsResponse{
-		SearchThingsOutput: r.Request.Data.(*SearchThingsOutput),
+		SearchThingsOutput: r.Request.Data.(*types.SearchThingsOutput),
 		response:           &aws.Response{Request: r.Request},
 	}
 
@@ -161,7 +100,7 @@ func NewSearchThingsPaginator(req SearchThingsRequest) SearchThingsPaginator {
 	return SearchThingsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *SearchThingsInput
+				var inCpy *types.SearchThingsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -181,14 +120,14 @@ type SearchThingsPaginator struct {
 	aws.Pager
 }
 
-func (p *SearchThingsPaginator) CurrentPage() *SearchThingsOutput {
-	return p.Pager.CurrentPage().(*SearchThingsOutput)
+func (p *SearchThingsPaginator) CurrentPage() *types.SearchThingsOutput {
+	return p.Pager.CurrentPage().(*types.SearchThingsOutput)
 }
 
 // SearchThingsResponse is the response type for the
 // SearchThings API operation.
 type SearchThingsResponse struct {
-	*SearchThingsOutput
+	*types.SearchThingsOutput
 
 	response *aws.Response
 }

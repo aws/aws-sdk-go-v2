@@ -6,67 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-type CreateVpcEndpointServiceConfigurationInput struct {
-	_ struct{} `type:"structure"`
-
-	// Indicate whether requests from service consumers to create an endpoint to
-	// your service must be accepted. To accept a request, use AcceptVpcEndpointConnections.
-	AcceptanceRequired *bool `type:"boolean"`
-
-	// Unique, case-sensitive identifier you provide to ensure the idempotency of
-	// the request. For more information, see How to Ensure Idempotency (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Run_Instance_Idempotency.html).
-	ClientToken *string `type:"string"`
-
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have
-	// the required permissions, the error response is DryRunOperation. Otherwise,
-	// it is UnauthorizedOperation.
-	DryRun *bool `type:"boolean"`
-
-	// The Amazon Resource Names (ARNs) of one or more Network Load Balancers for
-	// your service.
-	//
-	// NetworkLoadBalancerArns is a required field
-	NetworkLoadBalancerArns []string `locationName:"NetworkLoadBalancerArn" locationNameList:"item" type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s CreateVpcEndpointServiceConfigurationInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateVpcEndpointServiceConfigurationInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateVpcEndpointServiceConfigurationInput"}
-
-	if s.NetworkLoadBalancerArns == nil {
-		invalidParams.Add(aws.NewErrParamRequired("NetworkLoadBalancerArns"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type CreateVpcEndpointServiceConfigurationOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Unique, case-sensitive identifier you provide to ensure the idempotency of
-	// the request.
-	ClientToken *string `locationName:"clientToken" type:"string"`
-
-	// Information about the service configuration.
-	ServiceConfiguration *ServiceConfiguration `locationName:"serviceConfiguration" type:"structure"`
-}
-
-// String returns the string representation
-func (s CreateVpcEndpointServiceConfigurationOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCreateVpcEndpointServiceConfiguration = "CreateVpcEndpointServiceConfiguration"
 
@@ -90,7 +31,7 @@ const opCreateVpcEndpointServiceConfiguration = "CreateVpcEndpointServiceConfigu
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateVpcEndpointServiceConfiguration
-func (c *Client) CreateVpcEndpointServiceConfigurationRequest(input *CreateVpcEndpointServiceConfigurationInput) CreateVpcEndpointServiceConfigurationRequest {
+func (c *Client) CreateVpcEndpointServiceConfigurationRequest(input *types.CreateVpcEndpointServiceConfigurationInput) CreateVpcEndpointServiceConfigurationRequest {
 	op := &aws.Operation{
 		Name:       opCreateVpcEndpointServiceConfiguration,
 		HTTPMethod: "POST",
@@ -98,10 +39,10 @@ func (c *Client) CreateVpcEndpointServiceConfigurationRequest(input *CreateVpcEn
 	}
 
 	if input == nil {
-		input = &CreateVpcEndpointServiceConfigurationInput{}
+		input = &types.CreateVpcEndpointServiceConfigurationInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateVpcEndpointServiceConfigurationOutput{})
+	req := c.newRequest(op, input, &types.CreateVpcEndpointServiceConfigurationOutput{})
 	return CreateVpcEndpointServiceConfigurationRequest{Request: req, Input: input, Copy: c.CreateVpcEndpointServiceConfigurationRequest}
 }
 
@@ -109,8 +50,8 @@ func (c *Client) CreateVpcEndpointServiceConfigurationRequest(input *CreateVpcEn
 // CreateVpcEndpointServiceConfiguration API operation.
 type CreateVpcEndpointServiceConfigurationRequest struct {
 	*aws.Request
-	Input *CreateVpcEndpointServiceConfigurationInput
-	Copy  func(*CreateVpcEndpointServiceConfigurationInput) CreateVpcEndpointServiceConfigurationRequest
+	Input *types.CreateVpcEndpointServiceConfigurationInput
+	Copy  func(*types.CreateVpcEndpointServiceConfigurationInput) CreateVpcEndpointServiceConfigurationRequest
 }
 
 // Send marshals and sends the CreateVpcEndpointServiceConfiguration API request.
@@ -122,7 +63,7 @@ func (r CreateVpcEndpointServiceConfigurationRequest) Send(ctx context.Context) 
 	}
 
 	resp := &CreateVpcEndpointServiceConfigurationResponse{
-		CreateVpcEndpointServiceConfigurationOutput: r.Request.Data.(*CreateVpcEndpointServiceConfigurationOutput),
+		CreateVpcEndpointServiceConfigurationOutput: r.Request.Data.(*types.CreateVpcEndpointServiceConfigurationOutput),
 		response: &aws.Response{Request: r.Request},
 	}
 
@@ -132,7 +73,7 @@ func (r CreateVpcEndpointServiceConfigurationRequest) Send(ctx context.Context) 
 // CreateVpcEndpointServiceConfigurationResponse is the response type for the
 // CreateVpcEndpointServiceConfiguration API operation.
 type CreateVpcEndpointServiceConfigurationResponse struct {
-	*CreateVpcEndpointServiceConfigurationOutput
+	*types.CreateVpcEndpointServiceConfigurationOutput
 
 	response *aws.Response
 }

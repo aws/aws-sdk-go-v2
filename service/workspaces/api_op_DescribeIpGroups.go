@@ -6,59 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/workspaces/types"
 )
-
-type DescribeIpGroupsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The identifiers of one or more IP access control groups.
-	GroupIds []string `type:"list"`
-
-	// The maximum number of items to return.
-	MaxResults *int64 `min:"1" type:"integer"`
-
-	// If you received a NextToken from a previous call that was paginated, provide
-	// this token to receive the next set of results.
-	NextToken *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeIpGroupsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeIpGroupsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeIpGroupsInput"}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-	if s.NextToken != nil && len(*s.NextToken) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribeIpGroupsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The token to use to retrieve the next set of results, or null if no more
-	// results are available.
-	NextToken *string `min:"1" type:"string"`
-
-	// Information about the IP access control groups.
-	Result []WorkspacesIpGroup `type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeIpGroupsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeIpGroups = "DescribeIpGroups"
 
@@ -75,7 +24,7 @@ const opDescribeIpGroups = "DescribeIpGroups"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DescribeIpGroups
-func (c *Client) DescribeIpGroupsRequest(input *DescribeIpGroupsInput) DescribeIpGroupsRequest {
+func (c *Client) DescribeIpGroupsRequest(input *types.DescribeIpGroupsInput) DescribeIpGroupsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeIpGroups,
 		HTTPMethod: "POST",
@@ -83,10 +32,10 @@ func (c *Client) DescribeIpGroupsRequest(input *DescribeIpGroupsInput) DescribeI
 	}
 
 	if input == nil {
-		input = &DescribeIpGroupsInput{}
+		input = &types.DescribeIpGroupsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeIpGroupsOutput{})
+	req := c.newRequest(op, input, &types.DescribeIpGroupsOutput{})
 	return DescribeIpGroupsRequest{Request: req, Input: input, Copy: c.DescribeIpGroupsRequest}
 }
 
@@ -94,8 +43,8 @@ func (c *Client) DescribeIpGroupsRequest(input *DescribeIpGroupsInput) DescribeI
 // DescribeIpGroups API operation.
 type DescribeIpGroupsRequest struct {
 	*aws.Request
-	Input *DescribeIpGroupsInput
-	Copy  func(*DescribeIpGroupsInput) DescribeIpGroupsRequest
+	Input *types.DescribeIpGroupsInput
+	Copy  func(*types.DescribeIpGroupsInput) DescribeIpGroupsRequest
 }
 
 // Send marshals and sends the DescribeIpGroups API request.
@@ -107,7 +56,7 @@ func (r DescribeIpGroupsRequest) Send(ctx context.Context) (*DescribeIpGroupsRes
 	}
 
 	resp := &DescribeIpGroupsResponse{
-		DescribeIpGroupsOutput: r.Request.Data.(*DescribeIpGroupsOutput),
+		DescribeIpGroupsOutput: r.Request.Data.(*types.DescribeIpGroupsOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -117,7 +66,7 @@ func (r DescribeIpGroupsRequest) Send(ctx context.Context) (*DescribeIpGroupsRes
 // DescribeIpGroupsResponse is the response type for the
 // DescribeIpGroups API operation.
 type DescribeIpGroupsResponse struct {
-	*DescribeIpGroupsOutput
+	*types.DescribeIpGroupsOutput
 
 	response *aws.Response
 }

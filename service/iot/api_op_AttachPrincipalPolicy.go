@@ -6,85 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/restjson"
+	"github.com/aws/aws-sdk-go-v2/service/iot/types"
 )
-
-// The input for the AttachPrincipalPolicy operation.
-type AttachPrincipalPolicyInput struct {
-	_ struct{} `type:"structure"`
-
-	// The policy name.
-	//
-	// PolicyName is a required field
-	PolicyName *string `location:"uri" locationName:"policyName" min:"1" type:"string" required:"true"`
-
-	// The principal, which can be a certificate ARN (as returned from the CreateCertificate
-	// operation) or an Amazon Cognito ID.
-	//
-	// Principal is a required field
-	Principal *string `location:"header" locationName:"x-amzn-iot-principal" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s AttachPrincipalPolicyInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *AttachPrincipalPolicyInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "AttachPrincipalPolicyInput"}
-
-	if s.PolicyName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("PolicyName"))
-	}
-	if s.PolicyName != nil && len(*s.PolicyName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("PolicyName", 1))
-	}
-
-	if s.Principal == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Principal"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s AttachPrincipalPolicyInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.Principal != nil {
-		v := *s.Principal
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "x-amzn-iot-principal", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.PolicyName != nil {
-		v := *s.PolicyName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "policyName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type AttachPrincipalPolicyOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s AttachPrincipalPolicyOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s AttachPrincipalPolicyOutput) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
 
 const opAttachPrincipalPolicy = "AttachPrincipalPolicy"
 
@@ -102,7 +27,7 @@ const opAttachPrincipalPolicy = "AttachPrincipalPolicy"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) AttachPrincipalPolicyRequest(input *AttachPrincipalPolicyInput) AttachPrincipalPolicyRequest {
+func (c *Client) AttachPrincipalPolicyRequest(input *types.AttachPrincipalPolicyInput) AttachPrincipalPolicyRequest {
 	if c.Client.Config.Logger != nil {
 		c.Client.Config.Logger.Log("This operation, AttachPrincipalPolicy, has been deprecated")
 	}
@@ -113,10 +38,10 @@ func (c *Client) AttachPrincipalPolicyRequest(input *AttachPrincipalPolicyInput)
 	}
 
 	if input == nil {
-		input = &AttachPrincipalPolicyInput{}
+		input = &types.AttachPrincipalPolicyInput{}
 	}
 
-	req := c.newRequest(op, input, &AttachPrincipalPolicyOutput{})
+	req := c.newRequest(op, input, &types.AttachPrincipalPolicyOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return AttachPrincipalPolicyRequest{Request: req, Input: input, Copy: c.AttachPrincipalPolicyRequest}
@@ -126,8 +51,8 @@ func (c *Client) AttachPrincipalPolicyRequest(input *AttachPrincipalPolicyInput)
 // AttachPrincipalPolicy API operation.
 type AttachPrincipalPolicyRequest struct {
 	*aws.Request
-	Input *AttachPrincipalPolicyInput
-	Copy  func(*AttachPrincipalPolicyInput) AttachPrincipalPolicyRequest
+	Input *types.AttachPrincipalPolicyInput
+	Copy  func(*types.AttachPrincipalPolicyInput) AttachPrincipalPolicyRequest
 }
 
 // Send marshals and sends the AttachPrincipalPolicy API request.
@@ -139,7 +64,7 @@ func (r AttachPrincipalPolicyRequest) Send(ctx context.Context) (*AttachPrincipa
 	}
 
 	resp := &AttachPrincipalPolicyResponse{
-		AttachPrincipalPolicyOutput: r.Request.Data.(*AttachPrincipalPolicyOutput),
+		AttachPrincipalPolicyOutput: r.Request.Data.(*types.AttachPrincipalPolicyOutput),
 		response:                    &aws.Response{Request: r.Request},
 	}
 
@@ -149,7 +74,7 @@ func (r AttachPrincipalPolicyRequest) Send(ctx context.Context) (*AttachPrincipa
 // AttachPrincipalPolicyResponse is the response type for the
 // AttachPrincipalPolicy API operation.
 type AttachPrincipalPolicyResponse struct {
-	*AttachPrincipalPolicyOutput
+	*types.AttachPrincipalPolicyOutput
 
 	response *aws.Response
 }

@@ -6,51 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/support/types"
 )
-
-type DescribeAttachmentInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the attachment to return. Attachment IDs are returned by the DescribeCommunications
-	// operation.
-	//
-	// AttachmentId is a required field
-	AttachmentId *string `locationName:"attachmentId" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeAttachmentInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeAttachmentInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeAttachmentInput"}
-
-	if s.AttachmentId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("AttachmentId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// The content and file name of the attachment returned by the DescribeAttachment
-// operation.
-type DescribeAttachmentOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The attachment content and file name.
-	Attachment *Attachment `locationName:"attachment" type:"structure"`
-}
-
-// String returns the string representation
-func (s DescribeAttachmentOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeAttachment = "DescribeAttachment"
 
@@ -70,7 +27,7 @@ const opDescribeAttachment = "DescribeAttachment"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/support-2013-04-15/DescribeAttachment
-func (c *Client) DescribeAttachmentRequest(input *DescribeAttachmentInput) DescribeAttachmentRequest {
+func (c *Client) DescribeAttachmentRequest(input *types.DescribeAttachmentInput) DescribeAttachmentRequest {
 	op := &aws.Operation{
 		Name:       opDescribeAttachment,
 		HTTPMethod: "POST",
@@ -78,10 +35,10 @@ func (c *Client) DescribeAttachmentRequest(input *DescribeAttachmentInput) Descr
 	}
 
 	if input == nil {
-		input = &DescribeAttachmentInput{}
+		input = &types.DescribeAttachmentInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeAttachmentOutput{})
+	req := c.newRequest(op, input, &types.DescribeAttachmentOutput{})
 	return DescribeAttachmentRequest{Request: req, Input: input, Copy: c.DescribeAttachmentRequest}
 }
 
@@ -89,8 +46,8 @@ func (c *Client) DescribeAttachmentRequest(input *DescribeAttachmentInput) Descr
 // DescribeAttachment API operation.
 type DescribeAttachmentRequest struct {
 	*aws.Request
-	Input *DescribeAttachmentInput
-	Copy  func(*DescribeAttachmentInput) DescribeAttachmentRequest
+	Input *types.DescribeAttachmentInput
+	Copy  func(*types.DescribeAttachmentInput) DescribeAttachmentRequest
 }
 
 // Send marshals and sends the DescribeAttachment API request.
@@ -102,7 +59,7 @@ func (r DescribeAttachmentRequest) Send(ctx context.Context) (*DescribeAttachmen
 	}
 
 	resp := &DescribeAttachmentResponse{
-		DescribeAttachmentOutput: r.Request.Data.(*DescribeAttachmentOutput),
+		DescribeAttachmentOutput: r.Request.Data.(*types.DescribeAttachmentOutput),
 		response:                 &aws.Response{Request: r.Request},
 	}
 
@@ -112,7 +69,7 @@ func (r DescribeAttachmentRequest) Send(ctx context.Context) (*DescribeAttachmen
 // DescribeAttachmentResponse is the response type for the
 // DescribeAttachment API operation.
 type DescribeAttachmentResponse struct {
-	*DescribeAttachmentOutput
+	*types.DescribeAttachmentOutput
 
 	response *aws.Response
 }

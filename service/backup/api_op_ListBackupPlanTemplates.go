@@ -6,100 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/backup/types"
 )
-
-type ListBackupPlanTemplatesInput struct {
-	_ struct{} `type:"structure"`
-
-	// The maximum number of items to be returned.
-	MaxResults *int64 `location:"querystring" locationName:"maxResults" min:"1" type:"integer"`
-
-	// The next item following a partial list of returned items. For example, if
-	// a request is made to return maxResults number of items, NextToken allows
-	// you to return more items in your list starting at the location pointed to
-	// by the next token.
-	NextToken *string `location:"querystring" locationName:"nextToken" type:"string"`
-}
-
-// String returns the string representation
-func (s ListBackupPlanTemplatesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListBackupPlanTemplatesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListBackupPlanTemplatesInput"}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListBackupPlanTemplatesInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.MaxResults != nil {
-		v := *s.MaxResults
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "maxResults", protocol.Int64Value(v), metadata)
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type ListBackupPlanTemplatesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// An array of template list items containing metadata about your saved templates.
-	BackupPlanTemplatesList []BackupPlanTemplatesListMember `type:"list"`
-
-	// The next item following a partial list of returned items. For example, if
-	// a request is made to return maxResults number of items, NextToken allows
-	// you to return more items in your list starting at the location pointed to
-	// by the next token.
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s ListBackupPlanTemplatesOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListBackupPlanTemplatesOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.BackupPlanTemplatesList != nil {
-		v := s.BackupPlanTemplatesList
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "BackupPlanTemplatesList", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opListBackupPlanTemplates = "ListBackupPlanTemplates"
 
@@ -117,7 +25,7 @@ const opListBackupPlanTemplates = "ListBackupPlanTemplates"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/ListBackupPlanTemplates
-func (c *Client) ListBackupPlanTemplatesRequest(input *ListBackupPlanTemplatesInput) ListBackupPlanTemplatesRequest {
+func (c *Client) ListBackupPlanTemplatesRequest(input *types.ListBackupPlanTemplatesInput) ListBackupPlanTemplatesRequest {
 	op := &aws.Operation{
 		Name:       opListBackupPlanTemplates,
 		HTTPMethod: "GET",
@@ -131,10 +39,10 @@ func (c *Client) ListBackupPlanTemplatesRequest(input *ListBackupPlanTemplatesIn
 	}
 
 	if input == nil {
-		input = &ListBackupPlanTemplatesInput{}
+		input = &types.ListBackupPlanTemplatesInput{}
 	}
 
-	req := c.newRequest(op, input, &ListBackupPlanTemplatesOutput{})
+	req := c.newRequest(op, input, &types.ListBackupPlanTemplatesOutput{})
 	return ListBackupPlanTemplatesRequest{Request: req, Input: input, Copy: c.ListBackupPlanTemplatesRequest}
 }
 
@@ -142,8 +50,8 @@ func (c *Client) ListBackupPlanTemplatesRequest(input *ListBackupPlanTemplatesIn
 // ListBackupPlanTemplates API operation.
 type ListBackupPlanTemplatesRequest struct {
 	*aws.Request
-	Input *ListBackupPlanTemplatesInput
-	Copy  func(*ListBackupPlanTemplatesInput) ListBackupPlanTemplatesRequest
+	Input *types.ListBackupPlanTemplatesInput
+	Copy  func(*types.ListBackupPlanTemplatesInput) ListBackupPlanTemplatesRequest
 }
 
 // Send marshals and sends the ListBackupPlanTemplates API request.
@@ -155,7 +63,7 @@ func (r ListBackupPlanTemplatesRequest) Send(ctx context.Context) (*ListBackupPl
 	}
 
 	resp := &ListBackupPlanTemplatesResponse{
-		ListBackupPlanTemplatesOutput: r.Request.Data.(*ListBackupPlanTemplatesOutput),
+		ListBackupPlanTemplatesOutput: r.Request.Data.(*types.ListBackupPlanTemplatesOutput),
 		response:                      &aws.Response{Request: r.Request},
 	}
 
@@ -185,7 +93,7 @@ func NewListBackupPlanTemplatesPaginator(req ListBackupPlanTemplatesRequest) Lis
 	return ListBackupPlanTemplatesPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListBackupPlanTemplatesInput
+				var inCpy *types.ListBackupPlanTemplatesInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -205,14 +113,14 @@ type ListBackupPlanTemplatesPaginator struct {
 	aws.Pager
 }
 
-func (p *ListBackupPlanTemplatesPaginator) CurrentPage() *ListBackupPlanTemplatesOutput {
-	return p.Pager.CurrentPage().(*ListBackupPlanTemplatesOutput)
+func (p *ListBackupPlanTemplatesPaginator) CurrentPage() *types.ListBackupPlanTemplatesOutput {
+	return p.Pager.CurrentPage().(*types.ListBackupPlanTemplatesOutput)
 }
 
 // ListBackupPlanTemplatesResponse is the response type for the
 // ListBackupPlanTemplates API operation.
 type ListBackupPlanTemplatesResponse struct {
-	*ListBackupPlanTemplatesOutput
+	*types.ListBackupPlanTemplatesOutput
 
 	response *aws.Response
 }

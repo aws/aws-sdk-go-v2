@@ -6,53 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/mediastore/types"
 )
-
-type GetCorsPolicyInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the container that the policy is assigned to.
-	//
-	// ContainerName is a required field
-	ContainerName *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetCorsPolicyInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetCorsPolicyInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetCorsPolicyInput"}
-
-	if s.ContainerName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ContainerName"))
-	}
-	if s.ContainerName != nil && len(*s.ContainerName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ContainerName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type GetCorsPolicyOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The CORS policy assigned to the container.
-	//
-	// CorsPolicy is a required field
-	CorsPolicy []CorsRule `min:"1" type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s GetCorsPolicyOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetCorsPolicy = "GetCorsPolicy"
 
@@ -74,7 +29,7 @@ const opGetCorsPolicy = "GetCorsPolicy"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mediastore-2017-09-01/GetCorsPolicy
-func (c *Client) GetCorsPolicyRequest(input *GetCorsPolicyInput) GetCorsPolicyRequest {
+func (c *Client) GetCorsPolicyRequest(input *types.GetCorsPolicyInput) GetCorsPolicyRequest {
 	op := &aws.Operation{
 		Name:       opGetCorsPolicy,
 		HTTPMethod: "POST",
@@ -82,10 +37,10 @@ func (c *Client) GetCorsPolicyRequest(input *GetCorsPolicyInput) GetCorsPolicyRe
 	}
 
 	if input == nil {
-		input = &GetCorsPolicyInput{}
+		input = &types.GetCorsPolicyInput{}
 	}
 
-	req := c.newRequest(op, input, &GetCorsPolicyOutput{})
+	req := c.newRequest(op, input, &types.GetCorsPolicyOutput{})
 	return GetCorsPolicyRequest{Request: req, Input: input, Copy: c.GetCorsPolicyRequest}
 }
 
@@ -93,8 +48,8 @@ func (c *Client) GetCorsPolicyRequest(input *GetCorsPolicyInput) GetCorsPolicyRe
 // GetCorsPolicy API operation.
 type GetCorsPolicyRequest struct {
 	*aws.Request
-	Input *GetCorsPolicyInput
-	Copy  func(*GetCorsPolicyInput) GetCorsPolicyRequest
+	Input *types.GetCorsPolicyInput
+	Copy  func(*types.GetCorsPolicyInput) GetCorsPolicyRequest
 }
 
 // Send marshals and sends the GetCorsPolicy API request.
@@ -106,7 +61,7 @@ func (r GetCorsPolicyRequest) Send(ctx context.Context) (*GetCorsPolicyResponse,
 	}
 
 	resp := &GetCorsPolicyResponse{
-		GetCorsPolicyOutput: r.Request.Data.(*GetCorsPolicyOutput),
+		GetCorsPolicyOutput: r.Request.Data.(*types.GetCorsPolicyOutput),
 		response:            &aws.Response{Request: r.Request},
 	}
 
@@ -116,7 +71,7 @@ func (r GetCorsPolicyRequest) Send(ctx context.Context) (*GetCorsPolicyResponse,
 // GetCorsPolicyResponse is the response type for the
 // GetCorsPolicy API operation.
 type GetCorsPolicyResponse struct {
-	*GetCorsPolicyOutput
+	*types.GetCorsPolicyOutput
 
 	response *aws.Response
 }

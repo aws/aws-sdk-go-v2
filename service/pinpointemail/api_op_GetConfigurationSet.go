@@ -6,132 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/pinpointemail/types"
 )
-
-// A request to obtain information about a configuration set.
-type GetConfigurationSetInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the configuration set that you want to obtain more information
-	// about.
-	//
-	// ConfigurationSetName is a required field
-	ConfigurationSetName *string `location:"uri" locationName:"ConfigurationSetName" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetConfigurationSetInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetConfigurationSetInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetConfigurationSetInput"}
-
-	if s.ConfigurationSetName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ConfigurationSetName"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetConfigurationSetInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.ConfigurationSetName != nil {
-		v := *s.ConfigurationSetName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "ConfigurationSetName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-// Information about a configuration set.
-type GetConfigurationSetOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the configuration set.
-	ConfigurationSetName *string `type:"string"`
-
-	// An object that defines the dedicated IP pool that is used to send emails
-	// that you send using the configuration set.
-	DeliveryOptions *DeliveryOptions `type:"structure"`
-
-	// An object that defines whether or not Amazon Pinpoint collects reputation
-	// metrics for the emails that you send that use the configuration set.
-	ReputationOptions *ReputationOptions `type:"structure"`
-
-	// An object that defines whether or not Amazon Pinpoint can send email that
-	// you send using the configuration set.
-	SendingOptions *SendingOptions `type:"structure"`
-
-	// An array of objects that define the tags (keys and values) that are associated
-	// with the configuration set.
-	Tags []Tag `type:"list"`
-
-	// An object that defines the open and click tracking options for emails that
-	// you send using the configuration set.
-	TrackingOptions *TrackingOptions `type:"structure"`
-}
-
-// String returns the string representation
-func (s GetConfigurationSetOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetConfigurationSetOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.ConfigurationSetName != nil {
-		v := *s.ConfigurationSetName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "ConfigurationSetName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.DeliveryOptions != nil {
-		v := s.DeliveryOptions
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "DeliveryOptions", v, metadata)
-	}
-	if s.ReputationOptions != nil {
-		v := s.ReputationOptions
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "ReputationOptions", v, metadata)
-	}
-	if s.SendingOptions != nil {
-		v := s.SendingOptions
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "SendingOptions", v, metadata)
-	}
-	if s.Tags != nil {
-		v := s.Tags
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "Tags", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	if s.TrackingOptions != nil {
-		v := s.TrackingOptions
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "TrackingOptions", v, metadata)
-	}
-	return nil
-}
 
 const opGetConfigurationSet = "GetConfigurationSet"
 
@@ -156,7 +32,7 @@ const opGetConfigurationSet = "GetConfigurationSet"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/GetConfigurationSet
-func (c *Client) GetConfigurationSetRequest(input *GetConfigurationSetInput) GetConfigurationSetRequest {
+func (c *Client) GetConfigurationSetRequest(input *types.GetConfigurationSetInput) GetConfigurationSetRequest {
 	op := &aws.Operation{
 		Name:       opGetConfigurationSet,
 		HTTPMethod: "GET",
@@ -164,10 +40,10 @@ func (c *Client) GetConfigurationSetRequest(input *GetConfigurationSetInput) Get
 	}
 
 	if input == nil {
-		input = &GetConfigurationSetInput{}
+		input = &types.GetConfigurationSetInput{}
 	}
 
-	req := c.newRequest(op, input, &GetConfigurationSetOutput{})
+	req := c.newRequest(op, input, &types.GetConfigurationSetOutput{})
 	return GetConfigurationSetRequest{Request: req, Input: input, Copy: c.GetConfigurationSetRequest}
 }
 
@@ -175,8 +51,8 @@ func (c *Client) GetConfigurationSetRequest(input *GetConfigurationSetInput) Get
 // GetConfigurationSet API operation.
 type GetConfigurationSetRequest struct {
 	*aws.Request
-	Input *GetConfigurationSetInput
-	Copy  func(*GetConfigurationSetInput) GetConfigurationSetRequest
+	Input *types.GetConfigurationSetInput
+	Copy  func(*types.GetConfigurationSetInput) GetConfigurationSetRequest
 }
 
 // Send marshals and sends the GetConfigurationSet API request.
@@ -188,7 +64,7 @@ func (r GetConfigurationSetRequest) Send(ctx context.Context) (*GetConfiguration
 	}
 
 	resp := &GetConfigurationSetResponse{
-		GetConfigurationSetOutput: r.Request.Data.(*GetConfigurationSetOutput),
+		GetConfigurationSetOutput: r.Request.Data.(*types.GetConfigurationSetOutput),
 		response:                  &aws.Response{Request: r.Request},
 	}
 
@@ -198,7 +74,7 @@ func (r GetConfigurationSetRequest) Send(ctx context.Context) (*GetConfiguration
 // GetConfigurationSetResponse is the response type for the
 // GetConfigurationSet API operation.
 type GetConfigurationSetResponse struct {
-	*GetConfigurationSetOutput
+	*types.GetConfigurationSetOutput
 
 	response *aws.Response
 }

@@ -6,51 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/gamelift/types"
 )
-
-// Represents the input for a request action.
-type DescribeRuntimeConfigurationInput struct {
-	_ struct{} `type:"structure"`
-
-	// Unique identifier for a fleet to get the run-time configuration for.
-	//
-	// FleetId is a required field
-	FleetId *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeRuntimeConfigurationInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeRuntimeConfigurationInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeRuntimeConfigurationInput"}
-
-	if s.FleetId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("FleetId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Represents the returned data in response to a request action.
-type DescribeRuntimeConfigurationOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Instructions describing how server processes should be launched and maintained
-	// on each instance in the fleet.
-	RuntimeConfiguration *RuntimeConfiguration `type:"structure"`
-}
-
-// String returns the string representation
-func (s DescribeRuntimeConfigurationOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeRuntimeConfiguration = "DescribeRuntimeConfiguration"
 
@@ -90,7 +47,7 @@ const opDescribeRuntimeConfiguration = "DescribeRuntimeConfiguration"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DescribeRuntimeConfiguration
-func (c *Client) DescribeRuntimeConfigurationRequest(input *DescribeRuntimeConfigurationInput) DescribeRuntimeConfigurationRequest {
+func (c *Client) DescribeRuntimeConfigurationRequest(input *types.DescribeRuntimeConfigurationInput) DescribeRuntimeConfigurationRequest {
 	op := &aws.Operation{
 		Name:       opDescribeRuntimeConfiguration,
 		HTTPMethod: "POST",
@@ -98,10 +55,10 @@ func (c *Client) DescribeRuntimeConfigurationRequest(input *DescribeRuntimeConfi
 	}
 
 	if input == nil {
-		input = &DescribeRuntimeConfigurationInput{}
+		input = &types.DescribeRuntimeConfigurationInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeRuntimeConfigurationOutput{})
+	req := c.newRequest(op, input, &types.DescribeRuntimeConfigurationOutput{})
 	return DescribeRuntimeConfigurationRequest{Request: req, Input: input, Copy: c.DescribeRuntimeConfigurationRequest}
 }
 
@@ -109,8 +66,8 @@ func (c *Client) DescribeRuntimeConfigurationRequest(input *DescribeRuntimeConfi
 // DescribeRuntimeConfiguration API operation.
 type DescribeRuntimeConfigurationRequest struct {
 	*aws.Request
-	Input *DescribeRuntimeConfigurationInput
-	Copy  func(*DescribeRuntimeConfigurationInput) DescribeRuntimeConfigurationRequest
+	Input *types.DescribeRuntimeConfigurationInput
+	Copy  func(*types.DescribeRuntimeConfigurationInput) DescribeRuntimeConfigurationRequest
 }
 
 // Send marshals and sends the DescribeRuntimeConfiguration API request.
@@ -122,7 +79,7 @@ func (r DescribeRuntimeConfigurationRequest) Send(ctx context.Context) (*Describ
 	}
 
 	resp := &DescribeRuntimeConfigurationResponse{
-		DescribeRuntimeConfigurationOutput: r.Request.Data.(*DescribeRuntimeConfigurationOutput),
+		DescribeRuntimeConfigurationOutput: r.Request.Data.(*types.DescribeRuntimeConfigurationOutput),
 		response:                           &aws.Response{Request: r.Request},
 	}
 
@@ -132,7 +89,7 @@ func (r DescribeRuntimeConfigurationRequest) Send(ctx context.Context) (*Describ
 // DescribeRuntimeConfigurationResponse is the response type for the
 // DescribeRuntimeConfiguration API operation.
 type DescribeRuntimeConfigurationResponse struct {
-	*DescribeRuntimeConfigurationOutput
+	*types.DescribeRuntimeConfigurationOutput
 
 	response *aws.Response
 }

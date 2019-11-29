@@ -6,54 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/ec2query"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-type DisassociateRouteTableInput struct {
-	_ struct{} `type:"structure"`
-
-	// The association ID representing the current association between the route
-	// table and subnet.
-	//
-	// AssociationId is a required field
-	AssociationId *string `locationName:"associationId" type:"string" required:"true"`
-
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have
-	// the required permissions, the error response is DryRunOperation. Otherwise,
-	// it is UnauthorizedOperation.
-	DryRun *bool `locationName:"dryRun" type:"boolean"`
-}
-
-// String returns the string representation
-func (s DisassociateRouteTableInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DisassociateRouteTableInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DisassociateRouteTableInput"}
-
-	if s.AssociationId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("AssociationId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DisassociateRouteTableOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DisassociateRouteTableOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDisassociateRouteTable = "DisassociateRouteTable"
 
@@ -75,7 +31,7 @@ const opDisassociateRouteTable = "DisassociateRouteTable"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DisassociateRouteTable
-func (c *Client) DisassociateRouteTableRequest(input *DisassociateRouteTableInput) DisassociateRouteTableRequest {
+func (c *Client) DisassociateRouteTableRequest(input *types.DisassociateRouteTableInput) DisassociateRouteTableRequest {
 	op := &aws.Operation{
 		Name:       opDisassociateRouteTable,
 		HTTPMethod: "POST",
@@ -83,10 +39,10 @@ func (c *Client) DisassociateRouteTableRequest(input *DisassociateRouteTableInpu
 	}
 
 	if input == nil {
-		input = &DisassociateRouteTableInput{}
+		input = &types.DisassociateRouteTableInput{}
 	}
 
-	req := c.newRequest(op, input, &DisassociateRouteTableOutput{})
+	req := c.newRequest(op, input, &types.DisassociateRouteTableOutput{})
 	req.Handlers.Unmarshal.Remove(ec2query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return DisassociateRouteTableRequest{Request: req, Input: input, Copy: c.DisassociateRouteTableRequest}
@@ -96,8 +52,8 @@ func (c *Client) DisassociateRouteTableRequest(input *DisassociateRouteTableInpu
 // DisassociateRouteTable API operation.
 type DisassociateRouteTableRequest struct {
 	*aws.Request
-	Input *DisassociateRouteTableInput
-	Copy  func(*DisassociateRouteTableInput) DisassociateRouteTableRequest
+	Input *types.DisassociateRouteTableInput
+	Copy  func(*types.DisassociateRouteTableInput) DisassociateRouteTableRequest
 }
 
 // Send marshals and sends the DisassociateRouteTable API request.
@@ -109,7 +65,7 @@ func (r DisassociateRouteTableRequest) Send(ctx context.Context) (*DisassociateR
 	}
 
 	resp := &DisassociateRouteTableResponse{
-		DisassociateRouteTableOutput: r.Request.Data.(*DisassociateRouteTableOutput),
+		DisassociateRouteTableOutput: r.Request.Data.(*types.DisassociateRouteTableOutput),
 		response:                     &aws.Response{Request: r.Request},
 	}
 
@@ -119,7 +75,7 @@ func (r DisassociateRouteTableRequest) Send(ctx context.Context) (*DisassociateR
 // DisassociateRouteTableResponse is the response type for the
 // DisassociateRouteTable API operation.
 type DisassociateRouteTableResponse struct {
-	*DisassociateRouteTableOutput
+	*types.DisassociateRouteTableOutput
 
 	response *aws.Response
 }

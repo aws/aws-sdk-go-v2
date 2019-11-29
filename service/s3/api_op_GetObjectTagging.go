@@ -6,122 +6,33 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/s3/types"
 )
-
-type GetObjectTaggingInput struct {
-	_ struct{} `type:"structure"`
-
-	// Bucket is a required field
-	Bucket *string `location:"uri" locationName:"Bucket" type:"string" required:"true"`
-
-	// Key is a required field
-	Key *string `location:"uri" locationName:"Key" min:"1" type:"string" required:"true"`
-
-	VersionId *string `location:"querystring" locationName:"versionId" type:"string"`
-}
-
-// String returns the string representation
-func (s GetObjectTaggingInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetObjectTaggingInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetObjectTaggingInput"}
-
-	if s.Bucket == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Bucket"))
-	}
-
-	if s.Key == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Key"))
-	}
-	if s.Key != nil && len(*s.Key) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Key", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-func (s *GetObjectTaggingInput) getBucket() (v string) {
-	if s.Bucket == nil {
-		return v
-	}
-	return *s.Bucket
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetObjectTaggingInput) MarshalFields(e protocol.FieldEncoder) error {
-
-	if s.Bucket != nil {
-		v := *s.Bucket
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "Bucket", protocol.StringValue(v), metadata)
-	}
-	if s.Key != nil {
-		v := *s.Key
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "Key", protocol.StringValue(v), metadata)
-	}
-	if s.VersionId != nil {
-		v := *s.VersionId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "versionId", protocol.StringValue(v), metadata)
-	}
-	return nil
-}
-
-type GetObjectTaggingOutput struct {
-	_ struct{} `type:"structure"`
-
-	// TagSet is a required field
-	TagSet []Tag `locationNameList:"Tag" type:"list" required:"true"`
-
-	VersionId *string `location:"header" locationName:"x-amz-version-id" type:"string"`
-}
-
-// String returns the string representation
-func (s GetObjectTaggingOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetObjectTaggingOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.TagSet != nil {
-		v := s.TagSet
-
-		metadata := protocol.Metadata{ListLocationName: "Tag"}
-		ls0 := e.List(protocol.BodyTarget, "TagSet", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	if s.VersionId != nil {
-		v := *s.VersionId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "x-amz-version-id", protocol.StringValue(v), metadata)
-	}
-	return nil
-}
 
 const opGetObjectTagging = "GetObjectTagging"
 
 // GetObjectTaggingRequest returns a request value for making API operation for
 // Amazon Simple Storage Service.
 //
-// Returns the tag-set of an object.
+// Returns the tag-set of an object. You send the GET request against the tagging
+// subresource associated with the object.
+//
+// To use this operation, you must have permission to perform the s3:GetObjectTagging
+// action. By default, the GET operation returns information about current version
+// of an object. For a versioned bucket, you can have multiple versions of an
+// object in your bucket. To retrieve tags of any other version, use the versionId
+// query parameter. You also need permission for the s3:GetObjectVersionTagging
+// action.
+//
+// By default, the bucket owner has this permission and can grant this permission
+// to others.
+//
+// For information about the Amazon S3 object tagging feature, see Object Tagging
+// (https://docs.aws.amazon.com/AmazonS3/latest/dev/object-tagging.html).
+//
+// The following operation is related to GetObjectTagging:
+//
+//    * PutObjectTagging
 //
 //    // Example sending a request using GetObjectTaggingRequest.
 //    req := client.GetObjectTaggingRequest(params)
@@ -131,7 +42,7 @@ const opGetObjectTagging = "GetObjectTagging"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetObjectTagging
-func (c *Client) GetObjectTaggingRequest(input *GetObjectTaggingInput) GetObjectTaggingRequest {
+func (c *Client) GetObjectTaggingRequest(input *types.GetObjectTaggingInput) GetObjectTaggingRequest {
 	op := &aws.Operation{
 		Name:       opGetObjectTagging,
 		HTTPMethod: "GET",
@@ -139,10 +50,10 @@ func (c *Client) GetObjectTaggingRequest(input *GetObjectTaggingInput) GetObject
 	}
 
 	if input == nil {
-		input = &GetObjectTaggingInput{}
+		input = &types.GetObjectTaggingInput{}
 	}
 
-	req := c.newRequest(op, input, &GetObjectTaggingOutput{})
+	req := c.newRequest(op, input, &types.GetObjectTaggingOutput{})
 	return GetObjectTaggingRequest{Request: req, Input: input, Copy: c.GetObjectTaggingRequest}
 }
 
@@ -150,8 +61,8 @@ func (c *Client) GetObjectTaggingRequest(input *GetObjectTaggingInput) GetObject
 // GetObjectTagging API operation.
 type GetObjectTaggingRequest struct {
 	*aws.Request
-	Input *GetObjectTaggingInput
-	Copy  func(*GetObjectTaggingInput) GetObjectTaggingRequest
+	Input *types.GetObjectTaggingInput
+	Copy  func(*types.GetObjectTaggingInput) GetObjectTaggingRequest
 }
 
 // Send marshals and sends the GetObjectTagging API request.
@@ -163,7 +74,7 @@ func (r GetObjectTaggingRequest) Send(ctx context.Context) (*GetObjectTaggingRes
 	}
 
 	resp := &GetObjectTaggingResponse{
-		GetObjectTaggingOutput: r.Request.Data.(*GetObjectTaggingOutput),
+		GetObjectTaggingOutput: r.Request.Data.(*types.GetObjectTaggingOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -173,7 +84,7 @@ func (r GetObjectTaggingRequest) Send(ctx context.Context) (*GetObjectTaggingRes
 // GetObjectTaggingResponse is the response type for the
 // GetObjectTagging API operation.
 type GetObjectTaggingResponse struct {
-	*GetObjectTaggingOutput
+	*types.GetObjectTaggingOutput
 
 	response *aws.Response
 }

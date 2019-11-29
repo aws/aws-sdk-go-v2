@@ -4,73 +4,10 @@ package databasemigrationservice
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/databasemigrationservice/types"
 )
-
-type DescribeEndpointTypesInput struct {
-	_ struct{} `type:"structure"`
-
-	// Filters applied to the describe action.
-	//
-	// Valid filter names: engine-name | endpoint-type
-	Filters []Filter `type:"list"`
-
-	// An optional pagination token provided by a previous request. If this parameter
-	// is specified, the response includes only records beyond the marker, up to
-	// the value specified by MaxRecords.
-	Marker *string `type:"string"`
-
-	// The maximum number of records to include in the response. If more records
-	// exist than the specified MaxRecords value, a pagination token called a marker
-	// is included in the response so that the remaining results can be retrieved.
-	//
-	// Default: 100
-	//
-	// Constraints: Minimum 20, maximum 100.
-	MaxRecords *int64 `type:"integer"`
-}
-
-// String returns the string representation
-func (s DescribeEndpointTypesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeEndpointTypesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeEndpointTypesInput"}
-	if s.Filters != nil {
-		for i, v := range s.Filters {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribeEndpointTypesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// An optional pagination token provided by a previous request. If this parameter
-	// is specified, the response includes only records beyond the marker, up to
-	// the value specified by MaxRecords.
-	Marker *string `type:"string"`
-
-	// The types of endpoints that are supported.
-	SupportedEndpointTypes []SupportedEndpointType `type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeEndpointTypesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeEndpointTypes = "DescribeEndpointTypes"
 
@@ -87,7 +24,7 @@ const opDescribeEndpointTypes = "DescribeEndpointTypes"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeEndpointTypes
-func (c *Client) DescribeEndpointTypesRequest(input *DescribeEndpointTypesInput) DescribeEndpointTypesRequest {
+func (c *Client) DescribeEndpointTypesRequest(input *types.DescribeEndpointTypesInput) DescribeEndpointTypesRequest {
 	op := &aws.Operation{
 		Name:       opDescribeEndpointTypes,
 		HTTPMethod: "POST",
@@ -101,10 +38,10 @@ func (c *Client) DescribeEndpointTypesRequest(input *DescribeEndpointTypesInput)
 	}
 
 	if input == nil {
-		input = &DescribeEndpointTypesInput{}
+		input = &types.DescribeEndpointTypesInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeEndpointTypesOutput{})
+	req := c.newRequest(op, input, &types.DescribeEndpointTypesOutput{})
 	return DescribeEndpointTypesRequest{Request: req, Input: input, Copy: c.DescribeEndpointTypesRequest}
 }
 
@@ -112,8 +49,8 @@ func (c *Client) DescribeEndpointTypesRequest(input *DescribeEndpointTypesInput)
 // DescribeEndpointTypes API operation.
 type DescribeEndpointTypesRequest struct {
 	*aws.Request
-	Input *DescribeEndpointTypesInput
-	Copy  func(*DescribeEndpointTypesInput) DescribeEndpointTypesRequest
+	Input *types.DescribeEndpointTypesInput
+	Copy  func(*types.DescribeEndpointTypesInput) DescribeEndpointTypesRequest
 }
 
 // Send marshals and sends the DescribeEndpointTypes API request.
@@ -125,7 +62,7 @@ func (r DescribeEndpointTypesRequest) Send(ctx context.Context) (*DescribeEndpoi
 	}
 
 	resp := &DescribeEndpointTypesResponse{
-		DescribeEndpointTypesOutput: r.Request.Data.(*DescribeEndpointTypesOutput),
+		DescribeEndpointTypesOutput: r.Request.Data.(*types.DescribeEndpointTypesOutput),
 		response:                    &aws.Response{Request: r.Request},
 	}
 
@@ -155,7 +92,7 @@ func NewDescribeEndpointTypesPaginator(req DescribeEndpointTypesRequest) Describ
 	return DescribeEndpointTypesPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *DescribeEndpointTypesInput
+				var inCpy *types.DescribeEndpointTypesInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -175,14 +112,14 @@ type DescribeEndpointTypesPaginator struct {
 	aws.Pager
 }
 
-func (p *DescribeEndpointTypesPaginator) CurrentPage() *DescribeEndpointTypesOutput {
-	return p.Pager.CurrentPage().(*DescribeEndpointTypesOutput)
+func (p *DescribeEndpointTypesPaginator) CurrentPage() *types.DescribeEndpointTypesOutput {
+	return p.Pager.CurrentPage().(*types.DescribeEndpointTypesOutput)
 }
 
 // DescribeEndpointTypesResponse is the response type for the
 // DescribeEndpointTypes API operation.
 type DescribeEndpointTypesResponse struct {
-	*DescribeEndpointTypesOutput
+	*types.DescribeEndpointTypesOutput
 
 	response *aws.Response
 }

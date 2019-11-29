@@ -4,78 +4,12 @@ package acm
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
+	"github.com/aws/aws-sdk-go-v2/service/acm/types"
 )
-
-type AddTagsToCertificateInput struct {
-	_ struct{} `type:"structure"`
-
-	// String that contains the ARN of the ACM certificate to which the tag is to
-	// be applied. This must be of the form:
-	//
-	// arn:aws:acm:region:123456789012:certificate/12345678-1234-1234-1234-123456789012
-	//
-	// For more information about ARNs, see Amazon Resource Names (ARNs) and AWS
-	// Service Namespaces (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html).
-	//
-	// CertificateArn is a required field
-	CertificateArn *string `min:"20" type:"string" required:"true"`
-
-	// The key-value pair that defines the tag. The tag value is optional.
-	//
-	// Tags is a required field
-	Tags []Tag `min:"1" type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s AddTagsToCertificateInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *AddTagsToCertificateInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "AddTagsToCertificateInput"}
-
-	if s.CertificateArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("CertificateArn"))
-	}
-	if s.CertificateArn != nil && len(*s.CertificateArn) < 20 {
-		invalidParams.Add(aws.NewErrParamMinLen("CertificateArn", 20))
-	}
-
-	if s.Tags == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Tags"))
-	}
-	if s.Tags != nil && len(s.Tags) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Tags", 1))
-	}
-	if s.Tags != nil {
-		for i, v := range s.Tags {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type AddTagsToCertificateOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s AddTagsToCertificateOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opAddTagsToCertificate = "AddTagsToCertificate"
 
@@ -108,7 +42,7 @@ const opAddTagsToCertificate = "AddTagsToCertificate"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/AddTagsToCertificate
-func (c *Client) AddTagsToCertificateRequest(input *AddTagsToCertificateInput) AddTagsToCertificateRequest {
+func (c *Client) AddTagsToCertificateRequest(input *types.AddTagsToCertificateInput) AddTagsToCertificateRequest {
 	op := &aws.Operation{
 		Name:       opAddTagsToCertificate,
 		HTTPMethod: "POST",
@@ -116,10 +50,10 @@ func (c *Client) AddTagsToCertificateRequest(input *AddTagsToCertificateInput) A
 	}
 
 	if input == nil {
-		input = &AddTagsToCertificateInput{}
+		input = &types.AddTagsToCertificateInput{}
 	}
 
-	req := c.newRequest(op, input, &AddTagsToCertificateOutput{})
+	req := c.newRequest(op, input, &types.AddTagsToCertificateOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return AddTagsToCertificateRequest{Request: req, Input: input, Copy: c.AddTagsToCertificateRequest}
@@ -129,8 +63,8 @@ func (c *Client) AddTagsToCertificateRequest(input *AddTagsToCertificateInput) A
 // AddTagsToCertificate API operation.
 type AddTagsToCertificateRequest struct {
 	*aws.Request
-	Input *AddTagsToCertificateInput
-	Copy  func(*AddTagsToCertificateInput) AddTagsToCertificateRequest
+	Input *types.AddTagsToCertificateInput
+	Copy  func(*types.AddTagsToCertificateInput) AddTagsToCertificateRequest
 }
 
 // Send marshals and sends the AddTagsToCertificate API request.
@@ -142,7 +76,7 @@ func (r AddTagsToCertificateRequest) Send(ctx context.Context) (*AddTagsToCertif
 	}
 
 	resp := &AddTagsToCertificateResponse{
-		AddTagsToCertificateOutput: r.Request.Data.(*AddTagsToCertificateOutput),
+		AddTagsToCertificateOutput: r.Request.Data.(*types.AddTagsToCertificateOutput),
 		response:                   &aws.Response{Request: r.Request},
 	}
 
@@ -152,7 +86,7 @@ func (r AddTagsToCertificateRequest) Send(ctx context.Context) (*AddTagsToCertif
 // AddTagsToCertificateResponse is the response type for the
 // AddTagsToCertificate API operation.
 type AddTagsToCertificateResponse struct {
-	*AddTagsToCertificateOutput
+	*types.AddTagsToCertificateOutput
 
 	response *aws.Response
 }

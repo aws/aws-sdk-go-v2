@@ -6,117 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/iot/types"
 )
-
-// The input to the RegisterCertificate operation.
-type RegisterCertificateInput struct {
-	_ struct{} `type:"structure"`
-
-	// The CA certificate used to sign the device certificate being registered.
-	CaCertificatePem *string `locationName:"caCertificatePem" min:"1" type:"string"`
-
-	// The certificate data, in PEM format.
-	//
-	// CertificatePem is a required field
-	CertificatePem *string `locationName:"certificatePem" min:"1" type:"string" required:"true"`
-
-	// A boolean value that specifies if the certificate is set to active.
-	SetAsActive *bool `location:"querystring" locationName:"setAsActive" deprecated:"true" type:"boolean"`
-
-	// The status of the register certificate request.
-	Status CertificateStatus `locationName:"status" type:"string" enum:"true"`
-}
-
-// String returns the string representation
-func (s RegisterCertificateInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *RegisterCertificateInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "RegisterCertificateInput"}
-	if s.CaCertificatePem != nil && len(*s.CaCertificatePem) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("CaCertificatePem", 1))
-	}
-
-	if s.CertificatePem == nil {
-		invalidParams.Add(aws.NewErrParamRequired("CertificatePem"))
-	}
-	if s.CertificatePem != nil && len(*s.CertificatePem) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("CertificatePem", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s RegisterCertificateInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.CaCertificatePem != nil {
-		v := *s.CaCertificatePem
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "caCertificatePem", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.CertificatePem != nil {
-		v := *s.CertificatePem
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "certificatePem", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if len(s.Status) > 0 {
-		v := s.Status
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "status", protocol.QuotedValue{ValueMarshaler: v}, metadata)
-	}
-	if s.SetAsActive != nil {
-		v := *s.SetAsActive
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "setAsActive", protocol.BoolValue(v), metadata)
-	}
-	return nil
-}
-
-// The output from the RegisterCertificate operation.
-type RegisterCertificateOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The certificate ARN.
-	CertificateArn *string `locationName:"certificateArn" type:"string"`
-
-	// The certificate identifier.
-	CertificateId *string `locationName:"certificateId" min:"64" type:"string"`
-}
-
-// String returns the string representation
-func (s RegisterCertificateOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s RegisterCertificateOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.CertificateArn != nil {
-		v := *s.CertificateArn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "certificateArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.CertificateId != nil {
-		v := *s.CertificateId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "certificateId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opRegisterCertificate = "RegisterCertificate"
 
@@ -133,7 +24,7 @@ const opRegisterCertificate = "RegisterCertificate"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) RegisterCertificateRequest(input *RegisterCertificateInput) RegisterCertificateRequest {
+func (c *Client) RegisterCertificateRequest(input *types.RegisterCertificateInput) RegisterCertificateRequest {
 	op := &aws.Operation{
 		Name:       opRegisterCertificate,
 		HTTPMethod: "POST",
@@ -141,10 +32,10 @@ func (c *Client) RegisterCertificateRequest(input *RegisterCertificateInput) Reg
 	}
 
 	if input == nil {
-		input = &RegisterCertificateInput{}
+		input = &types.RegisterCertificateInput{}
 	}
 
-	req := c.newRequest(op, input, &RegisterCertificateOutput{})
+	req := c.newRequest(op, input, &types.RegisterCertificateOutput{})
 	return RegisterCertificateRequest{Request: req, Input: input, Copy: c.RegisterCertificateRequest}
 }
 
@@ -152,8 +43,8 @@ func (c *Client) RegisterCertificateRequest(input *RegisterCertificateInput) Reg
 // RegisterCertificate API operation.
 type RegisterCertificateRequest struct {
 	*aws.Request
-	Input *RegisterCertificateInput
-	Copy  func(*RegisterCertificateInput) RegisterCertificateRequest
+	Input *types.RegisterCertificateInput
+	Copy  func(*types.RegisterCertificateInput) RegisterCertificateRequest
 }
 
 // Send marshals and sends the RegisterCertificate API request.
@@ -165,7 +56,7 @@ func (r RegisterCertificateRequest) Send(ctx context.Context) (*RegisterCertific
 	}
 
 	resp := &RegisterCertificateResponse{
-		RegisterCertificateOutput: r.Request.Data.(*RegisterCertificateOutput),
+		RegisterCertificateOutput: r.Request.Data.(*types.RegisterCertificateOutput),
 		response:                  &aws.Response{Request: r.Request},
 	}
 
@@ -175,7 +66,7 @@ func (r RegisterCertificateRequest) Send(ctx context.Context) (*RegisterCertific
 // RegisterCertificateResponse is the response type for the
 // RegisterCertificate API operation.
 type RegisterCertificateResponse struct {
-	*RegisterCertificateOutput
+	*types.RegisterCertificateOutput
 
 	response *aws.Response
 }

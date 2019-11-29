@@ -6,80 +6,16 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/rds/types"
 )
-
-type DeleteInstallationMediaInput struct {
-	_ struct{} `type:"structure"`
-
-	// The installation media ID.
-	//
-	// InstallationMediaId is a required field
-	InstallationMediaId *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteInstallationMediaInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteInstallationMediaInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteInstallationMediaInput"}
-
-	if s.InstallationMediaId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("InstallationMediaId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Contains the installation media for on-premises, bring your own media (BYOM)
-// DB engines, such as Microsoft SQL Server.
-type DeleteInstallationMediaOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The custom Availability Zone (AZ) that contains the installation media.
-	CustomAvailabilityZoneId *string `type:"string"`
-
-	// The DB engine.
-	Engine *string `type:"string"`
-
-	// The path to the installation media for the DB engine.
-	EngineInstallationMediaPath *string `type:"string"`
-
-	// The engine version of the DB engine.
-	EngineVersion *string `type:"string"`
-
-	// If an installation media failure occurred, the cause of the failure.
-	FailureCause *InstallationMediaFailureCause `type:"structure"`
-
-	// The installation media ID.
-	InstallationMediaId *string `type:"string"`
-
-	// The path to the installation media for the operating system associated with
-	// the DB engine.
-	OSInstallationMediaPath *string `type:"string"`
-
-	// The status of the installation media.
-	Status *string `type:"string"`
-}
-
-// String returns the string representation
-func (s DeleteInstallationMediaOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteInstallationMedia = "DeleteInstallationMedia"
 
 // DeleteInstallationMediaRequest returns a request value for making API operation for
 // Amazon Relational Database Service.
 //
-// Deletes the installation media for an on-premises, bring your own media (BYOM)
-// DB engine, such as Microsoft SQL Server.
+// Deletes the installation medium for a DB engine that requires an on-premises
+// customer provided license, such as Microsoft SQL Server.
 //
 //    // Example sending a request using DeleteInstallationMediaRequest.
 //    req := client.DeleteInstallationMediaRequest(params)
@@ -89,7 +25,7 @@ const opDeleteInstallationMedia = "DeleteInstallationMedia"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteInstallationMedia
-func (c *Client) DeleteInstallationMediaRequest(input *DeleteInstallationMediaInput) DeleteInstallationMediaRequest {
+func (c *Client) DeleteInstallationMediaRequest(input *types.DeleteInstallationMediaInput) DeleteInstallationMediaRequest {
 	op := &aws.Operation{
 		Name:       opDeleteInstallationMedia,
 		HTTPMethod: "POST",
@@ -97,10 +33,10 @@ func (c *Client) DeleteInstallationMediaRequest(input *DeleteInstallationMediaIn
 	}
 
 	if input == nil {
-		input = &DeleteInstallationMediaInput{}
+		input = &types.DeleteInstallationMediaInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteInstallationMediaOutput{})
+	req := c.newRequest(op, input, &types.DeleteInstallationMediaOutput{})
 	return DeleteInstallationMediaRequest{Request: req, Input: input, Copy: c.DeleteInstallationMediaRequest}
 }
 
@@ -108,8 +44,8 @@ func (c *Client) DeleteInstallationMediaRequest(input *DeleteInstallationMediaIn
 // DeleteInstallationMedia API operation.
 type DeleteInstallationMediaRequest struct {
 	*aws.Request
-	Input *DeleteInstallationMediaInput
-	Copy  func(*DeleteInstallationMediaInput) DeleteInstallationMediaRequest
+	Input *types.DeleteInstallationMediaInput
+	Copy  func(*types.DeleteInstallationMediaInput) DeleteInstallationMediaRequest
 }
 
 // Send marshals and sends the DeleteInstallationMedia API request.
@@ -121,7 +57,7 @@ func (r DeleteInstallationMediaRequest) Send(ctx context.Context) (*DeleteInstal
 	}
 
 	resp := &DeleteInstallationMediaResponse{
-		DeleteInstallationMediaOutput: r.Request.Data.(*DeleteInstallationMediaOutput),
+		DeleteInstallationMediaOutput: r.Request.Data.(*types.DeleteInstallationMediaOutput),
 		response:                      &aws.Response{Request: r.Request},
 	}
 
@@ -131,7 +67,7 @@ func (r DeleteInstallationMediaRequest) Send(ctx context.Context) (*DeleteInstal
 // DeleteInstallationMediaResponse is the response type for the
 // DeleteInstallationMedia API operation.
 type DeleteInstallationMediaResponse struct {
-	*DeleteInstallationMediaOutput
+	*types.DeleteInstallationMediaOutput
 
 	response *aws.Response
 }

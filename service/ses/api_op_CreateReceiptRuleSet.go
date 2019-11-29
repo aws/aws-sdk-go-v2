@@ -6,56 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ses/types"
 )
-
-// Represents a request to create an empty receipt rule set. You use receipt
-// rule sets to receive email with Amazon SES. For more information, see the
-// Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-concepts.html).
-type CreateReceiptRuleSetInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the rule set to create. The name must:
-	//
-	//    * This value can only contain ASCII letters (a-z, A-Z), numbers (0-9),
-	//    underscores (_), or dashes (-).
-	//
-	//    * Start and end with a letter or number.
-	//
-	//    * Contain less than 64 characters.
-	//
-	// RuleSetName is a required field
-	RuleSetName *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s CreateReceiptRuleSetInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateReceiptRuleSetInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateReceiptRuleSetInput"}
-
-	if s.RuleSetName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("RuleSetName"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// An empty element returned on a successful request.
-type CreateReceiptRuleSetOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s CreateReceiptRuleSetOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCreateReceiptRuleSet = "CreateReceiptRuleSet"
 
@@ -77,7 +29,7 @@ const opCreateReceiptRuleSet = "CreateReceiptRuleSet"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/CreateReceiptRuleSet
-func (c *Client) CreateReceiptRuleSetRequest(input *CreateReceiptRuleSetInput) CreateReceiptRuleSetRequest {
+func (c *Client) CreateReceiptRuleSetRequest(input *types.CreateReceiptRuleSetInput) CreateReceiptRuleSetRequest {
 	op := &aws.Operation{
 		Name:       opCreateReceiptRuleSet,
 		HTTPMethod: "POST",
@@ -85,10 +37,10 @@ func (c *Client) CreateReceiptRuleSetRequest(input *CreateReceiptRuleSetInput) C
 	}
 
 	if input == nil {
-		input = &CreateReceiptRuleSetInput{}
+		input = &types.CreateReceiptRuleSetInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateReceiptRuleSetOutput{})
+	req := c.newRequest(op, input, &types.CreateReceiptRuleSetOutput{})
 	return CreateReceiptRuleSetRequest{Request: req, Input: input, Copy: c.CreateReceiptRuleSetRequest}
 }
 
@@ -96,8 +48,8 @@ func (c *Client) CreateReceiptRuleSetRequest(input *CreateReceiptRuleSetInput) C
 // CreateReceiptRuleSet API operation.
 type CreateReceiptRuleSetRequest struct {
 	*aws.Request
-	Input *CreateReceiptRuleSetInput
-	Copy  func(*CreateReceiptRuleSetInput) CreateReceiptRuleSetRequest
+	Input *types.CreateReceiptRuleSetInput
+	Copy  func(*types.CreateReceiptRuleSetInput) CreateReceiptRuleSetRequest
 }
 
 // Send marshals and sends the CreateReceiptRuleSet API request.
@@ -109,7 +61,7 @@ func (r CreateReceiptRuleSetRequest) Send(ctx context.Context) (*CreateReceiptRu
 	}
 
 	resp := &CreateReceiptRuleSetResponse{
-		CreateReceiptRuleSetOutput: r.Request.Data.(*CreateReceiptRuleSetOutput),
+		CreateReceiptRuleSetOutput: r.Request.Data.(*types.CreateReceiptRuleSetOutput),
 		response:                   &aws.Response{Request: r.Request},
 	}
 
@@ -119,7 +71,7 @@ func (r CreateReceiptRuleSetRequest) Send(ctx context.Context) (*CreateReceiptRu
 // CreateReceiptRuleSetResponse is the response type for the
 // CreateReceiptRuleSet API operation.
 type CreateReceiptRuleSetResponse struct {
-	*CreateReceiptRuleSetOutput
+	*types.CreateReceiptRuleSetOutput
 
 	response *aws.Response
 }

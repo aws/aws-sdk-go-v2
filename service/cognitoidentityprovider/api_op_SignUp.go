@@ -4,161 +4,10 @@ package cognitoidentityprovider
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/types"
 )
-
-// Represents the request to register a user.
-type SignUpInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Pinpoint analytics metadata for collecting metrics for SignUp
-	// calls.
-	AnalyticsMetadata *AnalyticsMetadataType `type:"structure"`
-
-	// The ID of the client associated with the user pool.
-	//
-	// ClientId is a required field
-	ClientId *string `min:"1" type:"string" required:"true" sensitive:"true"`
-
-	// A map of custom key-value pairs that you can provide as input for any custom
-	// workflows that this action triggers.
-	//
-	// You create custom workflows by assigning AWS Lambda functions to user pool
-	// triggers. When you use the SignUp API action, Amazon Cognito invokes any
-	// functions that are assigned to the following triggers: pre sign-up, custom
-	// message, and post confirmation. When Amazon Cognito invokes any of these
-	// functions, it passes a JSON payload, which the function receives as input.
-	// This payload contains a clientMetadata attribute, which provides the data
-	// that you assigned to the ClientMetadata parameter in your SignUp request.
-	// In your function code in AWS Lambda, you can process the clientMetadata value
-	// to enhance your workflow for your specific needs.
-	//
-	// For more information, see Customizing User Pool Workflows with Lambda Triggers
-	// (https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools-working-with-aws-lambda-triggers.html)
-	// in the Amazon Cognito Developer Guide.
-	//
-	// Take the following limitations into consideration when you use the ClientMetadata
-	// parameter:
-	//
-	//    * Amazon Cognito does not store the ClientMetadata value. This data is
-	//    available only to AWS Lambda triggers that are assigned to a user pool
-	//    to support custom workflows. If your user pool configuration does not
-	//    include triggers, the ClientMetadata parameter serves no purpose.
-	//
-	//    * Amazon Cognito does not validate the ClientMetadata value.
-	//
-	//    * Amazon Cognito does not encrypt the the ClientMetadata value, so don't
-	//    use it to provide sensitive information.
-	ClientMetadata map[string]string `type:"map"`
-
-	// The password of the user you wish to register.
-	//
-	// Password is a required field
-	Password *string `min:"6" type:"string" required:"true" sensitive:"true"`
-
-	// A keyed-hash message authentication code (HMAC) calculated using the secret
-	// key of a user pool client and username plus the client ID in the message.
-	SecretHash *string `min:"1" type:"string" sensitive:"true"`
-
-	// An array of name-value pairs representing user attributes.
-	//
-	// For custom attributes, you must prepend the custom: prefix to the attribute
-	// name.
-	UserAttributes []AttributeType `type:"list"`
-
-	// Contextual data such as the user's device fingerprint, IP address, or location
-	// used for evaluating the risk of an unexpected event by Amazon Cognito advanced
-	// security.
-	UserContextData *UserContextDataType `type:"structure"`
-
-	// The user name of the user you wish to register.
-	//
-	// Username is a required field
-	Username *string `min:"1" type:"string" required:"true" sensitive:"true"`
-
-	// The validation data in the request to register a user.
-	ValidationData []AttributeType `type:"list"`
-}
-
-// String returns the string representation
-func (s SignUpInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *SignUpInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "SignUpInput"}
-
-	if s.ClientId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ClientId"))
-	}
-	if s.ClientId != nil && len(*s.ClientId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ClientId", 1))
-	}
-
-	if s.Password == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Password"))
-	}
-	if s.Password != nil && len(*s.Password) < 6 {
-		invalidParams.Add(aws.NewErrParamMinLen("Password", 6))
-	}
-	if s.SecretHash != nil && len(*s.SecretHash) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("SecretHash", 1))
-	}
-
-	if s.Username == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Username"))
-	}
-	if s.Username != nil && len(*s.Username) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Username", 1))
-	}
-	if s.UserAttributes != nil {
-		for i, v := range s.UserAttributes {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "UserAttributes", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-	if s.ValidationData != nil {
-		for i, v := range s.ValidationData {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "ValidationData", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// The response from the server for a registration request.
-type SignUpOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The code delivery details returned by the server response to the user registration
-	// request.
-	CodeDeliveryDetails *CodeDeliveryDetailsType `type:"structure"`
-
-	// A response from the server indicating that a user registration has been confirmed.
-	//
-	// UserConfirmed is a required field
-	UserConfirmed *bool `type:"boolean" required:"true"`
-
-	// The UUID of the authenticated user. This is not the same as username.
-	//
-	// UserSub is a required field
-	UserSub *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s SignUpOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opSignUp = "SignUp"
 
@@ -176,7 +25,7 @@ const opSignUp = "SignUp"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/SignUp
-func (c *Client) SignUpRequest(input *SignUpInput) SignUpRequest {
+func (c *Client) SignUpRequest(input *types.SignUpInput) SignUpRequest {
 	op := &aws.Operation{
 		Name:       opSignUp,
 		HTTPMethod: "POST",
@@ -184,10 +33,10 @@ func (c *Client) SignUpRequest(input *SignUpInput) SignUpRequest {
 	}
 
 	if input == nil {
-		input = &SignUpInput{}
+		input = &types.SignUpInput{}
 	}
 
-	req := c.newRequest(op, input, &SignUpOutput{})
+	req := c.newRequest(op, input, &types.SignUpOutput{})
 	req.Config.Credentials = aws.AnonymousCredentials
 	return SignUpRequest{Request: req, Input: input, Copy: c.SignUpRequest}
 }
@@ -196,8 +45,8 @@ func (c *Client) SignUpRequest(input *SignUpInput) SignUpRequest {
 // SignUp API operation.
 type SignUpRequest struct {
 	*aws.Request
-	Input *SignUpInput
-	Copy  func(*SignUpInput) SignUpRequest
+	Input *types.SignUpInput
+	Copy  func(*types.SignUpInput) SignUpRequest
 }
 
 // Send marshals and sends the SignUp API request.
@@ -209,7 +58,7 @@ func (r SignUpRequest) Send(ctx context.Context) (*SignUpResponse, error) {
 	}
 
 	resp := &SignUpResponse{
-		SignUpOutput: r.Request.Data.(*SignUpOutput),
+		SignUpOutput: r.Request.Data.(*types.SignUpOutput),
 		response:     &aws.Response{Request: r.Request},
 	}
 
@@ -219,7 +68,7 @@ func (r SignUpRequest) Send(ctx context.Context) (*SignUpResponse, error) {
 // SignUpResponse is the response type for the
 // SignUp API operation.
 type SignUpResponse struct {
-	*SignUpOutput
+	*types.SignUpOutput
 
 	response *aws.Response
 }

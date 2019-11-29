@@ -6,68 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/applicationinsights/types"
 )
-
-type UpdateComponentConfigurationInput struct {
-	_ struct{} `type:"structure"`
-
-	// The configuration settings of the component. The value is the escaped JSON
-	// of the configuration. For more information about the JSON format, see Working
-	// with JSON (https://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/working-with-json.html).
-	// You can send a request to DescribeComponentConfigurationRecommendation to
-	// see the recommended configuration for a component.
-	ComponentConfiguration *string `type:"string"`
-
-	// The name of the component.
-	//
-	// ComponentName is a required field
-	ComponentName *string `type:"string" required:"true"`
-
-	// Indicates whether the application component is monitored.
-	Monitor *bool `type:"boolean"`
-
-	// The name of the resource group.
-	//
-	// ResourceGroupName is a required field
-	ResourceGroupName *string `type:"string" required:"true"`
-
-	// The tier of the application component. Supported tiers include DOT_NET_WORKER,
-	// DOT_NET_WEB, SQL_SERVER, and DEFAULT.
-	Tier *string `type:"string"`
-}
-
-// String returns the string representation
-func (s UpdateComponentConfigurationInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateComponentConfigurationInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateComponentConfigurationInput"}
-
-	if s.ComponentName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ComponentName"))
-	}
-
-	if s.ResourceGroupName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ResourceGroupName"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type UpdateComponentConfigurationOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s UpdateComponentConfigurationOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opUpdateComponentConfiguration = "UpdateComponentConfiguration"
 
@@ -86,7 +26,7 @@ const opUpdateComponentConfiguration = "UpdateComponentConfiguration"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/application-insights-2018-11-25/UpdateComponentConfiguration
-func (c *Client) UpdateComponentConfigurationRequest(input *UpdateComponentConfigurationInput) UpdateComponentConfigurationRequest {
+func (c *Client) UpdateComponentConfigurationRequest(input *types.UpdateComponentConfigurationInput) UpdateComponentConfigurationRequest {
 	op := &aws.Operation{
 		Name:       opUpdateComponentConfiguration,
 		HTTPMethod: "POST",
@@ -94,10 +34,10 @@ func (c *Client) UpdateComponentConfigurationRequest(input *UpdateComponentConfi
 	}
 
 	if input == nil {
-		input = &UpdateComponentConfigurationInput{}
+		input = &types.UpdateComponentConfigurationInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateComponentConfigurationOutput{})
+	req := c.newRequest(op, input, &types.UpdateComponentConfigurationOutput{})
 	return UpdateComponentConfigurationRequest{Request: req, Input: input, Copy: c.UpdateComponentConfigurationRequest}
 }
 
@@ -105,8 +45,8 @@ func (c *Client) UpdateComponentConfigurationRequest(input *UpdateComponentConfi
 // UpdateComponentConfiguration API operation.
 type UpdateComponentConfigurationRequest struct {
 	*aws.Request
-	Input *UpdateComponentConfigurationInput
-	Copy  func(*UpdateComponentConfigurationInput) UpdateComponentConfigurationRequest
+	Input *types.UpdateComponentConfigurationInput
+	Copy  func(*types.UpdateComponentConfigurationInput) UpdateComponentConfigurationRequest
 }
 
 // Send marshals and sends the UpdateComponentConfiguration API request.
@@ -118,7 +58,7 @@ func (r UpdateComponentConfigurationRequest) Send(ctx context.Context) (*UpdateC
 	}
 
 	resp := &UpdateComponentConfigurationResponse{
-		UpdateComponentConfigurationOutput: r.Request.Data.(*UpdateComponentConfigurationOutput),
+		UpdateComponentConfigurationOutput: r.Request.Data.(*types.UpdateComponentConfigurationOutput),
 		response:                           &aws.Response{Request: r.Request},
 	}
 
@@ -128,7 +68,7 @@ func (r UpdateComponentConfigurationRequest) Send(ctx context.Context) (*UpdateC
 // UpdateComponentConfigurationResponse is the response type for the
 // UpdateComponentConfiguration API operation.
 type UpdateComponentConfigurationResponse struct {
-	*UpdateComponentConfigurationOutput
+	*types.UpdateComponentConfigurationOutput
 
 	response *aws.Response
 }

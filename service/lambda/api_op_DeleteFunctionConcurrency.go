@@ -6,79 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/restjson"
+	"github.com/aws/aws-sdk-go-v2/service/lambda/types"
 )
-
-type DeleteFunctionConcurrencyInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the Lambda function.
-	//
-	// Name formats
-	//
-	//    * Function name - my-function.
-	//
-	//    * Function ARN - arn:aws:lambda:us-west-2:123456789012:function:my-function.
-	//
-	//    * Partial ARN - 123456789012:function:my-function.
-	//
-	// The length constraint applies only to the full ARN. If you specify only the
-	// function name, it is limited to 64 characters in length.
-	//
-	// FunctionName is a required field
-	FunctionName *string `location:"uri" locationName:"FunctionName" min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteFunctionConcurrencyInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteFunctionConcurrencyInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteFunctionConcurrencyInput"}
-
-	if s.FunctionName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("FunctionName"))
-	}
-	if s.FunctionName != nil && len(*s.FunctionName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("FunctionName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteFunctionConcurrencyInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.FunctionName != nil {
-		v := *s.FunctionName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "FunctionName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type DeleteFunctionConcurrencyOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteFunctionConcurrencyOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteFunctionConcurrencyOutput) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
 
 const opDeleteFunctionConcurrency = "DeleteFunctionConcurrency"
 
@@ -95,7 +26,7 @@ const opDeleteFunctionConcurrency = "DeleteFunctionConcurrency"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/DeleteFunctionConcurrency
-func (c *Client) DeleteFunctionConcurrencyRequest(input *DeleteFunctionConcurrencyInput) DeleteFunctionConcurrencyRequest {
+func (c *Client) DeleteFunctionConcurrencyRequest(input *types.DeleteFunctionConcurrencyInput) DeleteFunctionConcurrencyRequest {
 	op := &aws.Operation{
 		Name:       opDeleteFunctionConcurrency,
 		HTTPMethod: "DELETE",
@@ -103,10 +34,10 @@ func (c *Client) DeleteFunctionConcurrencyRequest(input *DeleteFunctionConcurren
 	}
 
 	if input == nil {
-		input = &DeleteFunctionConcurrencyInput{}
+		input = &types.DeleteFunctionConcurrencyInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteFunctionConcurrencyOutput{})
+	req := c.newRequest(op, input, &types.DeleteFunctionConcurrencyOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return DeleteFunctionConcurrencyRequest{Request: req, Input: input, Copy: c.DeleteFunctionConcurrencyRequest}
@@ -116,8 +47,8 @@ func (c *Client) DeleteFunctionConcurrencyRequest(input *DeleteFunctionConcurren
 // DeleteFunctionConcurrency API operation.
 type DeleteFunctionConcurrencyRequest struct {
 	*aws.Request
-	Input *DeleteFunctionConcurrencyInput
-	Copy  func(*DeleteFunctionConcurrencyInput) DeleteFunctionConcurrencyRequest
+	Input *types.DeleteFunctionConcurrencyInput
+	Copy  func(*types.DeleteFunctionConcurrencyInput) DeleteFunctionConcurrencyRequest
 }
 
 // Send marshals and sends the DeleteFunctionConcurrency API request.
@@ -129,7 +60,7 @@ func (r DeleteFunctionConcurrencyRequest) Send(ctx context.Context) (*DeleteFunc
 	}
 
 	resp := &DeleteFunctionConcurrencyResponse{
-		DeleteFunctionConcurrencyOutput: r.Request.Data.(*DeleteFunctionConcurrencyOutput),
+		DeleteFunctionConcurrencyOutput: r.Request.Data.(*types.DeleteFunctionConcurrencyOutput),
 		response:                        &aws.Response{Request: r.Request},
 	}
 
@@ -139,7 +70,7 @@ func (r DeleteFunctionConcurrencyRequest) Send(ctx context.Context) (*DeleteFunc
 // DeleteFunctionConcurrencyResponse is the response type for the
 // DeleteFunctionConcurrency API operation.
 type DeleteFunctionConcurrencyResponse struct {
-	*DeleteFunctionConcurrencyOutput
+	*types.DeleteFunctionConcurrencyOutput
 
 	response *aws.Response
 }

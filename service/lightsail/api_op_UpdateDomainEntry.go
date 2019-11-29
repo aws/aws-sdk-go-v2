@@ -6,57 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/lightsail/types"
 )
-
-type UpdateDomainEntryInput struct {
-	_ struct{} `type:"structure"`
-
-	// An array of key-value pairs containing information about the domain entry.
-	//
-	// DomainEntry is a required field
-	DomainEntry *DomainEntry `locationName:"domainEntry" type:"structure" required:"true"`
-
-	// The name of the domain recordset to update.
-	//
-	// DomainName is a required field
-	DomainName *string `locationName:"domainName" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s UpdateDomainEntryInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateDomainEntryInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateDomainEntryInput"}
-
-	if s.DomainEntry == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DomainEntry"))
-	}
-
-	if s.DomainName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DomainName"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type UpdateDomainEntryOutput struct {
-	_ struct{} `type:"structure"`
-
-	// An array of key-value pairs containing information about the request operation.
-	Operations []Operation `locationName:"operations" type:"list"`
-}
-
-// String returns the string representation
-func (s UpdateDomainEntryOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opUpdateDomainEntry = "UpdateDomainEntry"
 
@@ -77,7 +28,7 @@ const opUpdateDomainEntry = "UpdateDomainEntry"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/UpdateDomainEntry
-func (c *Client) UpdateDomainEntryRequest(input *UpdateDomainEntryInput) UpdateDomainEntryRequest {
+func (c *Client) UpdateDomainEntryRequest(input *types.UpdateDomainEntryInput) UpdateDomainEntryRequest {
 	op := &aws.Operation{
 		Name:       opUpdateDomainEntry,
 		HTTPMethod: "POST",
@@ -85,10 +36,10 @@ func (c *Client) UpdateDomainEntryRequest(input *UpdateDomainEntryInput) UpdateD
 	}
 
 	if input == nil {
-		input = &UpdateDomainEntryInput{}
+		input = &types.UpdateDomainEntryInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateDomainEntryOutput{})
+	req := c.newRequest(op, input, &types.UpdateDomainEntryOutput{})
 	return UpdateDomainEntryRequest{Request: req, Input: input, Copy: c.UpdateDomainEntryRequest}
 }
 
@@ -96,8 +47,8 @@ func (c *Client) UpdateDomainEntryRequest(input *UpdateDomainEntryInput) UpdateD
 // UpdateDomainEntry API operation.
 type UpdateDomainEntryRequest struct {
 	*aws.Request
-	Input *UpdateDomainEntryInput
-	Copy  func(*UpdateDomainEntryInput) UpdateDomainEntryRequest
+	Input *types.UpdateDomainEntryInput
+	Copy  func(*types.UpdateDomainEntryInput) UpdateDomainEntryRequest
 }
 
 // Send marshals and sends the UpdateDomainEntry API request.
@@ -109,7 +60,7 @@ func (r UpdateDomainEntryRequest) Send(ctx context.Context) (*UpdateDomainEntryR
 	}
 
 	resp := &UpdateDomainEntryResponse{
-		UpdateDomainEntryOutput: r.Request.Data.(*UpdateDomainEntryOutput),
+		UpdateDomainEntryOutput: r.Request.Data.(*types.UpdateDomainEntryOutput),
 		response:                &aws.Response{Request: r.Request},
 	}
 
@@ -119,7 +70,7 @@ func (r UpdateDomainEntryRequest) Send(ctx context.Context) (*UpdateDomainEntryR
 // UpdateDomainEntryResponse is the response type for the
 // UpdateDomainEntry API operation.
 type UpdateDomainEntryResponse struct {
-	*UpdateDomainEntryOutput
+	*types.UpdateDomainEntryOutput
 
 	response *aws.Response
 }

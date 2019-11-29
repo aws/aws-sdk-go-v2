@@ -6,58 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/cloudformation/types"
 )
-
-// The input for the DeleteChangeSet action.
-type DeleteChangeSetInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name or Amazon Resource Name (ARN) of the change set that you want to
-	// delete.
-	//
-	// ChangeSetName is a required field
-	ChangeSetName *string `min:"1" type:"string" required:"true"`
-
-	// If you specified the name of a change set to delete, specify the stack name
-	// or ID (ARN) that is associated with it.
-	StackName *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s DeleteChangeSetInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteChangeSetInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteChangeSetInput"}
-
-	if s.ChangeSetName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ChangeSetName"))
-	}
-	if s.ChangeSetName != nil && len(*s.ChangeSetName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ChangeSetName", 1))
-	}
-	if s.StackName != nil && len(*s.StackName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("StackName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// The output for the DeleteChangeSet action.
-type DeleteChangeSetOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteChangeSetOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteChangeSet = "DeleteChangeSet"
 
@@ -78,7 +28,7 @@ const opDeleteChangeSet = "DeleteChangeSet"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DeleteChangeSet
-func (c *Client) DeleteChangeSetRequest(input *DeleteChangeSetInput) DeleteChangeSetRequest {
+func (c *Client) DeleteChangeSetRequest(input *types.DeleteChangeSetInput) DeleteChangeSetRequest {
 	op := &aws.Operation{
 		Name:       opDeleteChangeSet,
 		HTTPMethod: "POST",
@@ -86,10 +36,10 @@ func (c *Client) DeleteChangeSetRequest(input *DeleteChangeSetInput) DeleteChang
 	}
 
 	if input == nil {
-		input = &DeleteChangeSetInput{}
+		input = &types.DeleteChangeSetInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteChangeSetOutput{})
+	req := c.newRequest(op, input, &types.DeleteChangeSetOutput{})
 	return DeleteChangeSetRequest{Request: req, Input: input, Copy: c.DeleteChangeSetRequest}
 }
 
@@ -97,8 +47,8 @@ func (c *Client) DeleteChangeSetRequest(input *DeleteChangeSetInput) DeleteChang
 // DeleteChangeSet API operation.
 type DeleteChangeSetRequest struct {
 	*aws.Request
-	Input *DeleteChangeSetInput
-	Copy  func(*DeleteChangeSetInput) DeleteChangeSetRequest
+	Input *types.DeleteChangeSetInput
+	Copy  func(*types.DeleteChangeSetInput) DeleteChangeSetRequest
 }
 
 // Send marshals and sends the DeleteChangeSet API request.
@@ -110,7 +60,7 @@ func (r DeleteChangeSetRequest) Send(ctx context.Context) (*DeleteChangeSetRespo
 	}
 
 	resp := &DeleteChangeSetResponse{
-		DeleteChangeSetOutput: r.Request.Data.(*DeleteChangeSetOutput),
+		DeleteChangeSetOutput: r.Request.Data.(*types.DeleteChangeSetOutput),
 		response:              &aws.Response{Request: r.Request},
 	}
 
@@ -120,7 +70,7 @@ func (r DeleteChangeSetRequest) Send(ctx context.Context) (*DeleteChangeSetRespo
 // DeleteChangeSetResponse is the response type for the
 // DeleteChangeSet API operation.
 type DeleteChangeSetResponse struct {
-	*DeleteChangeSetOutput
+	*types.DeleteChangeSetOutput
 
 	response *aws.Response
 }

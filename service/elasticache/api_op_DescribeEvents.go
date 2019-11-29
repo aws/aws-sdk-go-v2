@@ -4,75 +4,10 @@ package elasticache
 
 import (
 	"context"
-	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/elasticache/types"
 )
-
-// Represents the input of a DescribeEvents operation.
-type DescribeEventsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The number of minutes worth of events to retrieve.
-	Duration *int64 `type:"integer"`
-
-	// The end of the time interval for which to retrieve events, specified in ISO
-	// 8601 format.
-	//
-	// Example: 2017-03-30T07:03:49.555Z
-	EndTime *time.Time `type:"timestamp"`
-
-	// An optional marker returned from a prior request. Use this marker for pagination
-	// of results from this operation. If this parameter is specified, the response
-	// includes only records beyond the marker, up to the value specified by MaxRecords.
-	Marker *string `type:"string"`
-
-	// The maximum number of records to include in the response. If more records
-	// exist than the specified MaxRecords value, a marker is included in the response
-	// so that the remaining results can be retrieved.
-	//
-	// Default: 100
-	//
-	// Constraints: minimum 20; maximum 100.
-	MaxRecords *int64 `type:"integer"`
-
-	// The identifier of the event source for which events are returned. If not
-	// specified, all sources are included in the response.
-	SourceIdentifier *string `type:"string"`
-
-	// The event source to retrieve events for. If no value is specified, all events
-	// are returned.
-	SourceType SourceType `type:"string" enum:"true"`
-
-	// The beginning of the time interval to retrieve events for, specified in ISO
-	// 8601 format.
-	//
-	// Example: 2017-03-30T07:03:49.555Z
-	StartTime *time.Time `type:"timestamp"`
-}
-
-// String returns the string representation
-func (s DescribeEventsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Represents the output of a DescribeEvents operation.
-type DescribeEventsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A list of events. Each element in the list contains detailed information
-	// about one event.
-	Events []Event `locationNameList:"Event" type:"list"`
-
-	// Provides an identifier to allow retrieval of paginated results.
-	Marker *string `type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeEventsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeEvents = "DescribeEvents"
 
@@ -94,7 +29,7 @@ const opDescribeEvents = "DescribeEvents"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DescribeEvents
-func (c *Client) DescribeEventsRequest(input *DescribeEventsInput) DescribeEventsRequest {
+func (c *Client) DescribeEventsRequest(input *types.DescribeEventsInput) DescribeEventsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeEvents,
 		HTTPMethod: "POST",
@@ -108,10 +43,10 @@ func (c *Client) DescribeEventsRequest(input *DescribeEventsInput) DescribeEvent
 	}
 
 	if input == nil {
-		input = &DescribeEventsInput{}
+		input = &types.DescribeEventsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeEventsOutput{})
+	req := c.newRequest(op, input, &types.DescribeEventsOutput{})
 	return DescribeEventsRequest{Request: req, Input: input, Copy: c.DescribeEventsRequest}
 }
 
@@ -119,8 +54,8 @@ func (c *Client) DescribeEventsRequest(input *DescribeEventsInput) DescribeEvent
 // DescribeEvents API operation.
 type DescribeEventsRequest struct {
 	*aws.Request
-	Input *DescribeEventsInput
-	Copy  func(*DescribeEventsInput) DescribeEventsRequest
+	Input *types.DescribeEventsInput
+	Copy  func(*types.DescribeEventsInput) DescribeEventsRequest
 }
 
 // Send marshals and sends the DescribeEvents API request.
@@ -132,7 +67,7 @@ func (r DescribeEventsRequest) Send(ctx context.Context) (*DescribeEventsRespons
 	}
 
 	resp := &DescribeEventsResponse{
-		DescribeEventsOutput: r.Request.Data.(*DescribeEventsOutput),
+		DescribeEventsOutput: r.Request.Data.(*types.DescribeEventsOutput),
 		response:             &aws.Response{Request: r.Request},
 	}
 
@@ -162,7 +97,7 @@ func NewDescribeEventsPaginator(req DescribeEventsRequest) DescribeEventsPaginat
 	return DescribeEventsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *DescribeEventsInput
+				var inCpy *types.DescribeEventsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -182,14 +117,14 @@ type DescribeEventsPaginator struct {
 	aws.Pager
 }
 
-func (p *DescribeEventsPaginator) CurrentPage() *DescribeEventsOutput {
-	return p.Pager.CurrentPage().(*DescribeEventsOutput)
+func (p *DescribeEventsPaginator) CurrentPage() *types.DescribeEventsOutput {
+	return p.Pager.CurrentPage().(*types.DescribeEventsOutput)
 }
 
 // DescribeEventsResponse is the response type for the
 // DescribeEvents API operation.
 type DescribeEventsResponse struct {
-	*DescribeEventsOutput
+	*types.DescribeEventsOutput
 
 	response *aws.Response
 }

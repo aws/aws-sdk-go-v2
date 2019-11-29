@@ -6,66 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/types"
 )
-
-// Represents the request to stop the user import job.
-type StopUserImportJobInput struct {
-	_ struct{} `type:"structure"`
-
-	// The job ID for the user import job.
-	//
-	// JobId is a required field
-	JobId *string `min:"1" type:"string" required:"true"`
-
-	// The user pool ID for the user pool that the users are being imported into.
-	//
-	// UserPoolId is a required field
-	UserPoolId *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s StopUserImportJobInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *StopUserImportJobInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "StopUserImportJobInput"}
-
-	if s.JobId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("JobId"))
-	}
-	if s.JobId != nil && len(*s.JobId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("JobId", 1))
-	}
-
-	if s.UserPoolId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("UserPoolId"))
-	}
-	if s.UserPoolId != nil && len(*s.UserPoolId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("UserPoolId", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Represents the response from the server to the request to stop the user import
-// job.
-type StopUserImportJobOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The job object that represents the user import job.
-	UserImportJob *UserImportJobType `type:"structure"`
-}
-
-// String returns the string representation
-func (s StopUserImportJobOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opStopUserImportJob = "StopUserImportJob"
 
@@ -82,7 +24,7 @@ const opStopUserImportJob = "StopUserImportJob"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/StopUserImportJob
-func (c *Client) StopUserImportJobRequest(input *StopUserImportJobInput) StopUserImportJobRequest {
+func (c *Client) StopUserImportJobRequest(input *types.StopUserImportJobInput) StopUserImportJobRequest {
 	op := &aws.Operation{
 		Name:       opStopUserImportJob,
 		HTTPMethod: "POST",
@@ -90,10 +32,10 @@ func (c *Client) StopUserImportJobRequest(input *StopUserImportJobInput) StopUse
 	}
 
 	if input == nil {
-		input = &StopUserImportJobInput{}
+		input = &types.StopUserImportJobInput{}
 	}
 
-	req := c.newRequest(op, input, &StopUserImportJobOutput{})
+	req := c.newRequest(op, input, &types.StopUserImportJobOutput{})
 	return StopUserImportJobRequest{Request: req, Input: input, Copy: c.StopUserImportJobRequest}
 }
 
@@ -101,8 +43,8 @@ func (c *Client) StopUserImportJobRequest(input *StopUserImportJobInput) StopUse
 // StopUserImportJob API operation.
 type StopUserImportJobRequest struct {
 	*aws.Request
-	Input *StopUserImportJobInput
-	Copy  func(*StopUserImportJobInput) StopUserImportJobRequest
+	Input *types.StopUserImportJobInput
+	Copy  func(*types.StopUserImportJobInput) StopUserImportJobRequest
 }
 
 // Send marshals and sends the StopUserImportJob API request.
@@ -114,7 +56,7 @@ func (r StopUserImportJobRequest) Send(ctx context.Context) (*StopUserImportJobR
 	}
 
 	resp := &StopUserImportJobResponse{
-		StopUserImportJobOutput: r.Request.Data.(*StopUserImportJobOutput),
+		StopUserImportJobOutput: r.Request.Data.(*types.StopUserImportJobOutput),
 		response:                &aws.Response{Request: r.Request},
 	}
 
@@ -124,7 +66,7 @@ func (r StopUserImportJobRequest) Send(ctx context.Context) (*StopUserImportJobR
 // StopUserImportJobResponse is the response type for the
 // StopUserImportJob API operation.
 type StopUserImportJobResponse struct {
-	*StopUserImportJobOutput
+	*types.StopUserImportJobOutput
 
 	response *aws.Response
 }

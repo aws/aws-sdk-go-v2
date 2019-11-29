@@ -6,39 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/opsworks/types"
 )
-
-type DescribeAppsInput struct {
-	_ struct{} `type:"structure"`
-
-	// An array of app IDs for the apps to be described. If you use this parameter,
-	// DescribeApps returns a description of the specified apps. Otherwise, it returns
-	// a description of every app.
-	AppIds []string `type:"list"`
-
-	// The app stack ID. If you use this parameter, DescribeApps returns a description
-	// of the apps in the specified stack.
-	StackId *string `type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeAppsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Contains the response to a DescribeApps request.
-type DescribeAppsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// An array of App objects that describe the specified apps.
-	Apps []App `type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeAppsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeApps = "DescribeApps"
 
@@ -62,7 +31,7 @@ const opDescribeApps = "DescribeApps"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DescribeApps
-func (c *Client) DescribeAppsRequest(input *DescribeAppsInput) DescribeAppsRequest {
+func (c *Client) DescribeAppsRequest(input *types.DescribeAppsInput) DescribeAppsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeApps,
 		HTTPMethod: "POST",
@@ -70,10 +39,10 @@ func (c *Client) DescribeAppsRequest(input *DescribeAppsInput) DescribeAppsReque
 	}
 
 	if input == nil {
-		input = &DescribeAppsInput{}
+		input = &types.DescribeAppsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeAppsOutput{})
+	req := c.newRequest(op, input, &types.DescribeAppsOutput{})
 	return DescribeAppsRequest{Request: req, Input: input, Copy: c.DescribeAppsRequest}
 }
 
@@ -81,8 +50,8 @@ func (c *Client) DescribeAppsRequest(input *DescribeAppsInput) DescribeAppsReque
 // DescribeApps API operation.
 type DescribeAppsRequest struct {
 	*aws.Request
-	Input *DescribeAppsInput
-	Copy  func(*DescribeAppsInput) DescribeAppsRequest
+	Input *types.DescribeAppsInput
+	Copy  func(*types.DescribeAppsInput) DescribeAppsRequest
 }
 
 // Send marshals and sends the DescribeApps API request.
@@ -94,7 +63,7 @@ func (r DescribeAppsRequest) Send(ctx context.Context) (*DescribeAppsResponse, e
 	}
 
 	resp := &DescribeAppsResponse{
-		DescribeAppsOutput: r.Request.Data.(*DescribeAppsOutput),
+		DescribeAppsOutput: r.Request.Data.(*types.DescribeAppsOutput),
 		response:           &aws.Response{Request: r.Request},
 	}
 
@@ -104,7 +73,7 @@ func (r DescribeAppsRequest) Send(ctx context.Context) (*DescribeAppsResponse, e
 // DescribeAppsResponse is the response type for the
 // DescribeApps API operation.
 type DescribeAppsResponse struct {
-	*DescribeAppsOutput
+	*types.DescribeAppsOutput
 
 	response *aws.Response
 }

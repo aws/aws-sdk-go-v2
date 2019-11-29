@@ -6,88 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/clouddirectory/types"
 )
-
-type PutSchemaFromJsonInput struct {
-	_ struct{} `type:"structure"`
-
-	// The replacement JSON schema.
-	//
-	// Document is a required field
-	Document *string `type:"string" required:"true"`
-
-	// The ARN of the schema to update.
-	//
-	// SchemaArn is a required field
-	SchemaArn *string `location:"header" locationName:"x-amz-data-partition" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s PutSchemaFromJsonInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *PutSchemaFromJsonInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "PutSchemaFromJsonInput"}
-
-	if s.Document == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Document"))
-	}
-
-	if s.SchemaArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("SchemaArn"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s PutSchemaFromJsonInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.Document != nil {
-		v := *s.Document
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "Document", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.SchemaArn != nil {
-		v := *s.SchemaArn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "x-amz-data-partition", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type PutSchemaFromJsonOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The ARN of the schema to update.
-	Arn *string `type:"string"`
-}
-
-// String returns the string representation
-func (s PutSchemaFromJsonOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s PutSchemaFromJsonOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.Arn != nil {
-		v := *s.Arn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "Arn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opPutSchemaFromJson = "PutSchemaFromJson"
 
@@ -106,7 +26,7 @@ const opPutSchemaFromJson = "PutSchemaFromJson"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/PutSchemaFromJson
-func (c *Client) PutSchemaFromJsonRequest(input *PutSchemaFromJsonInput) PutSchemaFromJsonRequest {
+func (c *Client) PutSchemaFromJsonRequest(input *types.PutSchemaFromJsonInput) PutSchemaFromJsonRequest {
 	op := &aws.Operation{
 		Name:       opPutSchemaFromJson,
 		HTTPMethod: "PUT",
@@ -114,10 +34,10 @@ func (c *Client) PutSchemaFromJsonRequest(input *PutSchemaFromJsonInput) PutSche
 	}
 
 	if input == nil {
-		input = &PutSchemaFromJsonInput{}
+		input = &types.PutSchemaFromJsonInput{}
 	}
 
-	req := c.newRequest(op, input, &PutSchemaFromJsonOutput{})
+	req := c.newRequest(op, input, &types.PutSchemaFromJsonOutput{})
 	return PutSchemaFromJsonRequest{Request: req, Input: input, Copy: c.PutSchemaFromJsonRequest}
 }
 
@@ -125,8 +45,8 @@ func (c *Client) PutSchemaFromJsonRequest(input *PutSchemaFromJsonInput) PutSche
 // PutSchemaFromJson API operation.
 type PutSchemaFromJsonRequest struct {
 	*aws.Request
-	Input *PutSchemaFromJsonInput
-	Copy  func(*PutSchemaFromJsonInput) PutSchemaFromJsonRequest
+	Input *types.PutSchemaFromJsonInput
+	Copy  func(*types.PutSchemaFromJsonInput) PutSchemaFromJsonRequest
 }
 
 // Send marshals and sends the PutSchemaFromJson API request.
@@ -138,7 +58,7 @@ func (r PutSchemaFromJsonRequest) Send(ctx context.Context) (*PutSchemaFromJsonR
 	}
 
 	resp := &PutSchemaFromJsonResponse{
-		PutSchemaFromJsonOutput: r.Request.Data.(*PutSchemaFromJsonOutput),
+		PutSchemaFromJsonOutput: r.Request.Data.(*types.PutSchemaFromJsonOutput),
 		response:                &aws.Response{Request: r.Request},
 	}
 
@@ -148,7 +68,7 @@ func (r PutSchemaFromJsonRequest) Send(ctx context.Context) (*PutSchemaFromJsonR
 // PutSchemaFromJsonResponse is the response type for the
 // PutSchemaFromJson API operation.
 type PutSchemaFromJsonResponse struct {
-	*PutSchemaFromJsonOutput
+	*types.PutSchemaFromJsonOutput
 
 	response *aws.Response
 }

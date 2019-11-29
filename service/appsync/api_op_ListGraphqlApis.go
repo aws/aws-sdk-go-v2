@@ -6,83 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/appsync/types"
 )
-
-type ListGraphqlApisInput struct {
-	_ struct{} `type:"structure"`
-
-	// The maximum number of results you want the request to return.
-	MaxResults *int64 `location:"querystring" locationName:"maxResults" type:"integer"`
-
-	// An identifier that was returned from the previous call to this operation,
-	// which can be used to return the next set of items in the list.
-	NextToken *string `location:"querystring" locationName:"nextToken" type:"string"`
-}
-
-// String returns the string representation
-func (s ListGraphqlApisInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListGraphqlApisInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.MaxResults != nil {
-		v := *s.MaxResults
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "maxResults", protocol.Int64Value(v), metadata)
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type ListGraphqlApisOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The GraphqlApi objects.
-	GraphqlApis []GraphqlApi `locationName:"graphqlApis" type:"list"`
-
-	// An identifier to be passed in the next request to this operation to return
-	// the next set of items in the list.
-	NextToken *string `locationName:"nextToken" type:"string"`
-}
-
-// String returns the string representation
-func (s ListGraphqlApisOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListGraphqlApisOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.GraphqlApis != nil {
-		v := s.GraphqlApis
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "graphqlApis", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opListGraphqlApis = "ListGraphqlApis"
 
@@ -99,7 +24,7 @@ const opListGraphqlApis = "ListGraphqlApis"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/ListGraphqlApis
-func (c *Client) ListGraphqlApisRequest(input *ListGraphqlApisInput) ListGraphqlApisRequest {
+func (c *Client) ListGraphqlApisRequest(input *types.ListGraphqlApisInput) ListGraphqlApisRequest {
 	op := &aws.Operation{
 		Name:       opListGraphqlApis,
 		HTTPMethod: "GET",
@@ -107,10 +32,10 @@ func (c *Client) ListGraphqlApisRequest(input *ListGraphqlApisInput) ListGraphql
 	}
 
 	if input == nil {
-		input = &ListGraphqlApisInput{}
+		input = &types.ListGraphqlApisInput{}
 	}
 
-	req := c.newRequest(op, input, &ListGraphqlApisOutput{})
+	req := c.newRequest(op, input, &types.ListGraphqlApisOutput{})
 	return ListGraphqlApisRequest{Request: req, Input: input, Copy: c.ListGraphqlApisRequest}
 }
 
@@ -118,8 +43,8 @@ func (c *Client) ListGraphqlApisRequest(input *ListGraphqlApisInput) ListGraphql
 // ListGraphqlApis API operation.
 type ListGraphqlApisRequest struct {
 	*aws.Request
-	Input *ListGraphqlApisInput
-	Copy  func(*ListGraphqlApisInput) ListGraphqlApisRequest
+	Input *types.ListGraphqlApisInput
+	Copy  func(*types.ListGraphqlApisInput) ListGraphqlApisRequest
 }
 
 // Send marshals and sends the ListGraphqlApis API request.
@@ -131,7 +56,7 @@ func (r ListGraphqlApisRequest) Send(ctx context.Context) (*ListGraphqlApisRespo
 	}
 
 	resp := &ListGraphqlApisResponse{
-		ListGraphqlApisOutput: r.Request.Data.(*ListGraphqlApisOutput),
+		ListGraphqlApisOutput: r.Request.Data.(*types.ListGraphqlApisOutput),
 		response:              &aws.Response{Request: r.Request},
 	}
 
@@ -141,7 +66,7 @@ func (r ListGraphqlApisRequest) Send(ctx context.Context) (*ListGraphqlApisRespo
 // ListGraphqlApisResponse is the response type for the
 // ListGraphqlApis API operation.
 type ListGraphqlApisResponse struct {
-	*ListGraphqlApisOutput
+	*types.ListGraphqlApisOutput
 
 	response *aws.Response
 }

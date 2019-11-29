@@ -12,6 +12,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws/awserr"
 	"github.com/aws/aws-sdk-go-v2/aws/external"
 	"github.com/aws/aws-sdk-go-v2/service/ec2instanceconnect"
+	"github.com/aws/aws-sdk-go-v2/service/ec2instanceconnect/types"
 )
 
 var _ time.Duration
@@ -37,7 +38,7 @@ func ExampleClient_SendSSHPublicKeyRequest_shared00() {
 	}
 
 	svc := ec2instanceconnect.New(cfg)
-	input := &ec2instanceconnect.SendSSHPublicKeyInput{
+	input := &types.SendSSHPublicKeyInput{
 		AvailabilityZone: aws.String("us-west-2a"),
 		InstanceId:       aws.String("i-abcd1234"),
 		InstanceOSUser:   aws.String("ec2-user"),

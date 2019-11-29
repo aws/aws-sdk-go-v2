@@ -4,105 +4,10 @@ package lightsail
 
 import (
 	"context"
-	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/lightsail/types"
 )
-
-type GetRelationalDatabaseLogEventsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The end of the time interval from which to get log events.
-	//
-	// Constraints:
-	//
-	//    * Specified in Coordinated Universal Time (UTC).
-	//
-	//    * Specified in the Unix time format. For example, if you wish to use an
-	//    end time of October 1, 2018, at 8 PM UTC, then you input 1538424000 as
-	//    the end time.
-	EndTime *time.Time `locationName:"endTime" type:"timestamp"`
-
-	// The name of the log stream.
-	//
-	// Use the get relational database log streams operation to get a list of available
-	// log streams.
-	//
-	// LogStreamName is a required field
-	LogStreamName *string `locationName:"logStreamName" type:"string" required:"true"`
-
-	// A token used for advancing to a specific page of results for your get relational
-	// database log events request.
-	PageToken *string `locationName:"pageToken" type:"string"`
-
-	// The name of your database for which to get log events.
-	//
-	// RelationalDatabaseName is a required field
-	RelationalDatabaseName *string `locationName:"relationalDatabaseName" type:"string" required:"true"`
-
-	// Parameter to specify if the log should start from head or tail. If true is
-	// specified, the log event starts from the head of the log. If false is specified,
-	// the log event starts from the tail of the log.
-	//
-	// For PostgreSQL, the default value of false is the only option available.
-	StartFromHead *bool `locationName:"startFromHead" type:"boolean"`
-
-	// The start of the time interval from which to get log events.
-	//
-	// Constraints:
-	//
-	//    * Specified in Coordinated Universal Time (UTC).
-	//
-	//    * Specified in the Unix time format. For example, if you wish to use a
-	//    start time of October 1, 2018, at 8 PM UTC, then you input 1538424000
-	//    as the start time.
-	StartTime *time.Time `locationName:"startTime" type:"timestamp"`
-}
-
-// String returns the string representation
-func (s GetRelationalDatabaseLogEventsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetRelationalDatabaseLogEventsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetRelationalDatabaseLogEventsInput"}
-
-	if s.LogStreamName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("LogStreamName"))
-	}
-
-	if s.RelationalDatabaseName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("RelationalDatabaseName"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type GetRelationalDatabaseLogEventsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A token used for advancing to the previous page of results from your get
-	// relational database log events request.
-	NextBackwardToken *string `locationName:"nextBackwardToken" type:"string"`
-
-	// A token used for advancing to the next page of results from your get relational
-	// database log events request.
-	NextForwardToken *string `locationName:"nextForwardToken" type:"string"`
-
-	// An object describing the result of your get relational database log events
-	// request.
-	ResourceLogEvents []LogEvent `locationName:"resourceLogEvents" type:"list"`
-}
-
-// String returns the string representation
-func (s GetRelationalDatabaseLogEventsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetRelationalDatabaseLogEvents = "GetRelationalDatabaseLogEvents"
 
@@ -119,7 +24,7 @@ const opGetRelationalDatabaseLogEvents = "GetRelationalDatabaseLogEvents"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetRelationalDatabaseLogEvents
-func (c *Client) GetRelationalDatabaseLogEventsRequest(input *GetRelationalDatabaseLogEventsInput) GetRelationalDatabaseLogEventsRequest {
+func (c *Client) GetRelationalDatabaseLogEventsRequest(input *types.GetRelationalDatabaseLogEventsInput) GetRelationalDatabaseLogEventsRequest {
 	op := &aws.Operation{
 		Name:       opGetRelationalDatabaseLogEvents,
 		HTTPMethod: "POST",
@@ -127,10 +32,10 @@ func (c *Client) GetRelationalDatabaseLogEventsRequest(input *GetRelationalDatab
 	}
 
 	if input == nil {
-		input = &GetRelationalDatabaseLogEventsInput{}
+		input = &types.GetRelationalDatabaseLogEventsInput{}
 	}
 
-	req := c.newRequest(op, input, &GetRelationalDatabaseLogEventsOutput{})
+	req := c.newRequest(op, input, &types.GetRelationalDatabaseLogEventsOutput{})
 	return GetRelationalDatabaseLogEventsRequest{Request: req, Input: input, Copy: c.GetRelationalDatabaseLogEventsRequest}
 }
 
@@ -138,8 +43,8 @@ func (c *Client) GetRelationalDatabaseLogEventsRequest(input *GetRelationalDatab
 // GetRelationalDatabaseLogEvents API operation.
 type GetRelationalDatabaseLogEventsRequest struct {
 	*aws.Request
-	Input *GetRelationalDatabaseLogEventsInput
-	Copy  func(*GetRelationalDatabaseLogEventsInput) GetRelationalDatabaseLogEventsRequest
+	Input *types.GetRelationalDatabaseLogEventsInput
+	Copy  func(*types.GetRelationalDatabaseLogEventsInput) GetRelationalDatabaseLogEventsRequest
 }
 
 // Send marshals and sends the GetRelationalDatabaseLogEvents API request.
@@ -151,7 +56,7 @@ func (r GetRelationalDatabaseLogEventsRequest) Send(ctx context.Context) (*GetRe
 	}
 
 	resp := &GetRelationalDatabaseLogEventsResponse{
-		GetRelationalDatabaseLogEventsOutput: r.Request.Data.(*GetRelationalDatabaseLogEventsOutput),
+		GetRelationalDatabaseLogEventsOutput: r.Request.Data.(*types.GetRelationalDatabaseLogEventsOutput),
 		response:                             &aws.Response{Request: r.Request},
 	}
 
@@ -161,7 +66,7 @@ func (r GetRelationalDatabaseLogEventsRequest) Send(ctx context.Context) (*GetRe
 // GetRelationalDatabaseLogEventsResponse is the response type for the
 // GetRelationalDatabaseLogEvents API operation.
 type GetRelationalDatabaseLogEventsResponse struct {
-	*GetRelationalDatabaseLogEventsOutput
+	*types.GetRelationalDatabaseLogEventsOutput
 
 	response *aws.Response
 }

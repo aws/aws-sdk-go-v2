@@ -6,465 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/lambda/types"
 )
-
-type CreateFunctionInput struct {
-	_ struct{} `type:"structure"`
-
-	// The code for the function.
-	//
-	// Code is a required field
-	Code *FunctionCode `type:"structure" required:"true"`
-
-	// A dead letter queue configuration that specifies the queue or topic where
-	// Lambda sends asynchronous events when they fail processing. For more information,
-	// see Dead Letter Queues (https://docs.aws.amazon.com/lambda/latest/dg/dlq.html).
-	DeadLetterConfig *DeadLetterConfig `type:"structure"`
-
-	// A description of the function.
-	Description *string `type:"string"`
-
-	// Environment variables that are accessible from function code during execution.
-	Environment *Environment `type:"structure"`
-
-	// The name of the Lambda function.
-	//
-	// Name formats
-	//
-	//    * Function name - my-function.
-	//
-	//    * Function ARN - arn:aws:lambda:us-west-2:123456789012:function:my-function.
-	//
-	//    * Partial ARN - 123456789012:function:my-function.
-	//
-	// The length constraint applies only to the full ARN. If you specify only the
-	// function name, it is limited to 64 characters in length.
-	//
-	// FunctionName is a required field
-	FunctionName *string `min:"1" type:"string" required:"true"`
-
-	// The name of the method within your code that Lambda calls to execute your
-	// function. The format includes the file name. It can also include namespaces
-	// and other qualifiers, depending on the runtime. For more information, see
-	// Programming Model (https://docs.aws.amazon.com/lambda/latest/dg/programming-model-v2.html).
-	//
-	// Handler is a required field
-	Handler *string `type:"string" required:"true"`
-
-	// The ARN of the AWS Key Management Service (AWS KMS) key that's used to encrypt
-	// your function's environment variables. If it's not provided, AWS Lambda uses
-	// a default service key.
-	KMSKeyArn *string `type:"string"`
-
-	// A list of function layers (https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html)
-	// to add to the function's execution environment. Specify each layer by its
-	// ARN, including the version.
-	Layers []string `type:"list"`
-
-	// The amount of memory that your function has access to. Increasing the function's
-	// memory also increases its CPU allocation. The default value is 128 MB. The
-	// value must be a multiple of 64 MB.
-	MemorySize *int64 `min:"128" type:"integer"`
-
-	// Set to true to publish the first version of the function during creation.
-	Publish *bool `type:"boolean"`
-
-	// The Amazon Resource Name (ARN) of the function's execution role.
-	//
-	// Role is a required field
-	Role *string `type:"string" required:"true"`
-
-	// The identifier of the function's runtime (https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html).
-	//
-	// Runtime is a required field
-	Runtime Runtime `type:"string" required:"true" enum:"true"`
-
-	// A list of tags (https://docs.aws.amazon.com/lambda/latest/dg/tagging.html)
-	// to apply to the function.
-	Tags map[string]string `type:"map"`
-
-	// The amount of time that Lambda allows a function to run before stopping it.
-	// The default is 3 seconds. The maximum allowed value is 900 seconds.
-	Timeout *int64 `min:"1" type:"integer"`
-
-	// Set Mode to Active to sample and trace a subset of incoming requests with
-	// AWS X-Ray.
-	TracingConfig *TracingConfig `type:"structure"`
-
-	// For network connectivity to AWS resources in a VPC, specify a list of security
-	// groups and subnets in the VPC. When you connect a function to a VPC, it can
-	// only access resources and the internet through that VPC. For more information,
-	// see VPC Settings (https://docs.aws.amazon.com/lambda/latest/dg/vpc.html).
-	VpcConfig *VpcConfig `type:"structure"`
-}
-
-// String returns the string representation
-func (s CreateFunctionInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateFunctionInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateFunctionInput"}
-
-	if s.Code == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Code"))
-	}
-
-	if s.FunctionName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("FunctionName"))
-	}
-	if s.FunctionName != nil && len(*s.FunctionName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("FunctionName", 1))
-	}
-
-	if s.Handler == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Handler"))
-	}
-	if s.MemorySize != nil && *s.MemorySize < 128 {
-		invalidParams.Add(aws.NewErrParamMinValue("MemorySize", 128))
-	}
-
-	if s.Role == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Role"))
-	}
-	if len(s.Runtime) == 0 {
-		invalidParams.Add(aws.NewErrParamRequired("Runtime"))
-	}
-	if s.Timeout != nil && *s.Timeout < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("Timeout", 1))
-	}
-	if s.Code != nil {
-		if err := s.Code.Validate(); err != nil {
-			invalidParams.AddNested("Code", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s CreateFunctionInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.Code != nil {
-		v := s.Code
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "Code", v, metadata)
-	}
-	if s.DeadLetterConfig != nil {
-		v := s.DeadLetterConfig
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "DeadLetterConfig", v, metadata)
-	}
-	if s.Description != nil {
-		v := *s.Description
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "Description", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Environment != nil {
-		v := s.Environment
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "Environment", v, metadata)
-	}
-	if s.FunctionName != nil {
-		v := *s.FunctionName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "FunctionName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Handler != nil {
-		v := *s.Handler
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "Handler", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.KMSKeyArn != nil {
-		v := *s.KMSKeyArn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "KMSKeyArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Layers != nil {
-		v := s.Layers
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "Layers", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
-		}
-		ls0.End()
-
-	}
-	if s.MemorySize != nil {
-		v := *s.MemorySize
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "MemorySize", protocol.Int64Value(v), metadata)
-	}
-	if s.Publish != nil {
-		v := *s.Publish
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "Publish", protocol.BoolValue(v), metadata)
-	}
-	if s.Role != nil {
-		v := *s.Role
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "Role", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if len(s.Runtime) > 0 {
-		v := s.Runtime
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "Runtime", protocol.QuotedValue{ValueMarshaler: v}, metadata)
-	}
-	if s.Tags != nil {
-		v := s.Tags
-
-		metadata := protocol.Metadata{}
-		ms0 := e.Map(protocol.BodyTarget, "Tags", metadata)
-		ms0.Start()
-		for k1, v1 := range v {
-			ms0.MapSetValue(k1, protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
-		}
-		ms0.End()
-
-	}
-	if s.Timeout != nil {
-		v := *s.Timeout
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "Timeout", protocol.Int64Value(v), metadata)
-	}
-	if s.TracingConfig != nil {
-		v := s.TracingConfig
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "TracingConfig", v, metadata)
-	}
-	if s.VpcConfig != nil {
-		v := s.VpcConfig
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "VpcConfig", v, metadata)
-	}
-	return nil
-}
-
-// Details about a function's configuration.
-type CreateFunctionOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The SHA256 hash of the function's deployment package.
-	CodeSha256 *string `type:"string"`
-
-	// The size of the function's deployment package, in bytes.
-	CodeSize *int64 `type:"long"`
-
-	// The function's dead letter queue.
-	DeadLetterConfig *DeadLetterConfig `type:"structure"`
-
-	// The function's description.
-	Description *string `type:"string"`
-
-	// The function's environment variables.
-	Environment *EnvironmentResponse `type:"structure"`
-
-	// The function's Amazon Resource Name (ARN).
-	FunctionArn *string `type:"string"`
-
-	// The name of the function.
-	FunctionName *string `min:"1" type:"string"`
-
-	// The function that Lambda calls to begin executing your function.
-	Handler *string `type:"string"`
-
-	// The KMS key that's used to encrypt the function's environment variables.
-	// This key is only returned if you've configured a customer-managed CMK.
-	KMSKeyArn *string `type:"string"`
-
-	// The date and time that the function was last updated, in ISO-8601 format
-	// (https://www.w3.org/TR/NOTE-datetime) (YYYY-MM-DDThh:mm:ss.sTZD).
-	LastModified *string `type:"string"`
-
-	// The function's layers (https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html).
-	Layers []Layer `type:"list"`
-
-	// For Lambda@Edge functions, the ARN of the master function.
-	MasterArn *string `type:"string"`
-
-	// The memory that's allocated to the function.
-	MemorySize *int64 `min:"128" type:"integer"`
-
-	// The latest updated revision of the function or alias.
-	RevisionId *string `type:"string"`
-
-	// The function's execution role.
-	Role *string `type:"string"`
-
-	// The runtime environment for the Lambda function.
-	Runtime Runtime `type:"string" enum:"true"`
-
-	// The amount of time that Lambda allows a function to run before stopping it.
-	Timeout *int64 `min:"1" type:"integer"`
-
-	// The function's AWS X-Ray tracing configuration.
-	TracingConfig *TracingConfigResponse `type:"structure"`
-
-	// The version of the Lambda function.
-	Version *string `min:"1" type:"string"`
-
-	// The function's networking configuration.
-	VpcConfig *VpcConfigResponse `type:"structure"`
-}
-
-// String returns the string representation
-func (s CreateFunctionOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s CreateFunctionOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.CodeSha256 != nil {
-		v := *s.CodeSha256
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "CodeSha256", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.CodeSize != nil {
-		v := *s.CodeSize
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "CodeSize", protocol.Int64Value(v), metadata)
-	}
-	if s.DeadLetterConfig != nil {
-		v := s.DeadLetterConfig
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "DeadLetterConfig", v, metadata)
-	}
-	if s.Description != nil {
-		v := *s.Description
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "Description", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Environment != nil {
-		v := s.Environment
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "Environment", v, metadata)
-	}
-	if s.FunctionArn != nil {
-		v := *s.FunctionArn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "FunctionArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.FunctionName != nil {
-		v := *s.FunctionName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "FunctionName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Handler != nil {
-		v := *s.Handler
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "Handler", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.KMSKeyArn != nil {
-		v := *s.KMSKeyArn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "KMSKeyArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.LastModified != nil {
-		v := *s.LastModified
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "LastModified", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Layers != nil {
-		v := s.Layers
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "Layers", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	if s.MasterArn != nil {
-		v := *s.MasterArn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "MasterArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.MemorySize != nil {
-		v := *s.MemorySize
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "MemorySize", protocol.Int64Value(v), metadata)
-	}
-	if s.RevisionId != nil {
-		v := *s.RevisionId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "RevisionId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Role != nil {
-		v := *s.Role
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "Role", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if len(s.Runtime) > 0 {
-		v := s.Runtime
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "Runtime", protocol.QuotedValue{ValueMarshaler: v}, metadata)
-	}
-	if s.Timeout != nil {
-		v := *s.Timeout
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "Timeout", protocol.Int64Value(v), metadata)
-	}
-	if s.TracingConfig != nil {
-		v := s.TracingConfig
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "TracingConfig", v, metadata)
-	}
-	if s.Version != nil {
-		v := *s.Version
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "Version", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.VpcConfig != nil {
-		v := s.VpcConfig
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "VpcConfig", v, metadata)
-	}
-	return nil
-}
 
 const opCreateFunction = "CreateFunction"
 
@@ -509,7 +52,7 @@ const opCreateFunction = "CreateFunction"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/CreateFunction
-func (c *Client) CreateFunctionRequest(input *CreateFunctionInput) CreateFunctionRequest {
+func (c *Client) CreateFunctionRequest(input *types.CreateFunctionInput) CreateFunctionRequest {
 	op := &aws.Operation{
 		Name:       opCreateFunction,
 		HTTPMethod: "POST",
@@ -517,10 +60,10 @@ func (c *Client) CreateFunctionRequest(input *CreateFunctionInput) CreateFunctio
 	}
 
 	if input == nil {
-		input = &CreateFunctionInput{}
+		input = &types.CreateFunctionInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateFunctionOutput{})
+	req := c.newRequest(op, input, &types.CreateFunctionOutput{})
 	return CreateFunctionRequest{Request: req, Input: input, Copy: c.CreateFunctionRequest}
 }
 
@@ -528,8 +71,8 @@ func (c *Client) CreateFunctionRequest(input *CreateFunctionInput) CreateFunctio
 // CreateFunction API operation.
 type CreateFunctionRequest struct {
 	*aws.Request
-	Input *CreateFunctionInput
-	Copy  func(*CreateFunctionInput) CreateFunctionRequest
+	Input *types.CreateFunctionInput
+	Copy  func(*types.CreateFunctionInput) CreateFunctionRequest
 }
 
 // Send marshals and sends the CreateFunction API request.
@@ -541,7 +84,7 @@ func (r CreateFunctionRequest) Send(ctx context.Context) (*CreateFunctionRespons
 	}
 
 	resp := &CreateFunctionResponse{
-		CreateFunctionOutput: r.Request.Data.(*CreateFunctionOutput),
+		CreateFunctionOutput: r.Request.Data.(*types.CreateFunctionOutput),
 		response:             &aws.Response{Request: r.Request},
 	}
 
@@ -551,7 +94,7 @@ func (r CreateFunctionRequest) Send(ctx context.Context) (*CreateFunctionRespons
 // CreateFunctionResponse is the response type for the
 // CreateFunction API operation.
 type CreateFunctionResponse struct {
-	*CreateFunctionOutput
+	*types.CreateFunctionOutput
 
 	response *aws.Response
 }

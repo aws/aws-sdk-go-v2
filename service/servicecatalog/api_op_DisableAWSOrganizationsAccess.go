@@ -6,26 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/types"
 )
-
-type DisableAWSOrganizationsAccessInput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DisableAWSOrganizationsAccessInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type DisableAWSOrganizationsAccessOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DisableAWSOrganizationsAccessOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDisableAWSOrganizationsAccess = "DisableAWSOrganizationsAccess"
 
@@ -46,7 +28,7 @@ const opDisableAWSOrganizationsAccess = "DisableAWSOrganizationsAccess"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DisableAWSOrganizationsAccess
-func (c *Client) DisableAWSOrganizationsAccessRequest(input *DisableAWSOrganizationsAccessInput) DisableAWSOrganizationsAccessRequest {
+func (c *Client) DisableAWSOrganizationsAccessRequest(input *types.DisableAWSOrganizationsAccessInput) DisableAWSOrganizationsAccessRequest {
 	op := &aws.Operation{
 		Name:       opDisableAWSOrganizationsAccess,
 		HTTPMethod: "POST",
@@ -54,10 +36,10 @@ func (c *Client) DisableAWSOrganizationsAccessRequest(input *DisableAWSOrganizat
 	}
 
 	if input == nil {
-		input = &DisableAWSOrganizationsAccessInput{}
+		input = &types.DisableAWSOrganizationsAccessInput{}
 	}
 
-	req := c.newRequest(op, input, &DisableAWSOrganizationsAccessOutput{})
+	req := c.newRequest(op, input, &types.DisableAWSOrganizationsAccessOutput{})
 	return DisableAWSOrganizationsAccessRequest{Request: req, Input: input, Copy: c.DisableAWSOrganizationsAccessRequest}
 }
 
@@ -65,8 +47,8 @@ func (c *Client) DisableAWSOrganizationsAccessRequest(input *DisableAWSOrganizat
 // DisableAWSOrganizationsAccess API operation.
 type DisableAWSOrganizationsAccessRequest struct {
 	*aws.Request
-	Input *DisableAWSOrganizationsAccessInput
-	Copy  func(*DisableAWSOrganizationsAccessInput) DisableAWSOrganizationsAccessRequest
+	Input *types.DisableAWSOrganizationsAccessInput
+	Copy  func(*types.DisableAWSOrganizationsAccessInput) DisableAWSOrganizationsAccessRequest
 }
 
 // Send marshals and sends the DisableAWSOrganizationsAccess API request.
@@ -78,7 +60,7 @@ func (r DisableAWSOrganizationsAccessRequest) Send(ctx context.Context) (*Disabl
 	}
 
 	resp := &DisableAWSOrganizationsAccessResponse{
-		DisableAWSOrganizationsAccessOutput: r.Request.Data.(*DisableAWSOrganizationsAccessOutput),
+		DisableAWSOrganizationsAccessOutput: r.Request.Data.(*types.DisableAWSOrganizationsAccessOutput),
 		response:                            &aws.Response{Request: r.Request},
 	}
 
@@ -88,7 +70,7 @@ func (r DisableAWSOrganizationsAccessRequest) Send(ctx context.Context) (*Disabl
 // DisableAWSOrganizationsAccessResponse is the response type for the
 // DisableAWSOrganizationsAccess API operation.
 type DisableAWSOrganizationsAccessResponse struct {
-	*DisableAWSOrganizationsAccessOutput
+	*types.DisableAWSOrganizationsAccessOutput
 
 	response *aws.Response
 }

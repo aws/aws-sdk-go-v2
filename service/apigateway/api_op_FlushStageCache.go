@@ -6,81 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/restjson"
+	"github.com/aws/aws-sdk-go-v2/service/apigateway/types"
 )
-
-// Requests API Gateway to flush a stage's cache.
-type FlushStageCacheInput struct {
-	_ struct{} `type:"structure"`
-
-	// [Required] The string identifier of the associated RestApi.
-	//
-	// RestApiId is a required field
-	RestApiId *string `location:"uri" locationName:"restapi_id" type:"string" required:"true"`
-
-	// [Required] The name of the stage to flush its cache.
-	//
-	// StageName is a required field
-	StageName *string `location:"uri" locationName:"stage_name" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s FlushStageCacheInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *FlushStageCacheInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "FlushStageCacheInput"}
-
-	if s.RestApiId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("RestApiId"))
-	}
-
-	if s.StageName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("StageName"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s FlushStageCacheInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.RestApiId != nil {
-		v := *s.RestApiId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "restapi_id", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.StageName != nil {
-		v := *s.StageName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "stage_name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type FlushStageCacheOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s FlushStageCacheOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s FlushStageCacheOutput) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
 
 const opFlushStageCache = "FlushStageCache"
 
@@ -95,7 +24,7 @@ const opFlushStageCache = "FlushStageCache"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) FlushStageCacheRequest(input *FlushStageCacheInput) FlushStageCacheRequest {
+func (c *Client) FlushStageCacheRequest(input *types.FlushStageCacheInput) FlushStageCacheRequest {
 	op := &aws.Operation{
 		Name:       opFlushStageCache,
 		HTTPMethod: "DELETE",
@@ -103,10 +32,10 @@ func (c *Client) FlushStageCacheRequest(input *FlushStageCacheInput) FlushStageC
 	}
 
 	if input == nil {
-		input = &FlushStageCacheInput{}
+		input = &types.FlushStageCacheInput{}
 	}
 
-	req := c.newRequest(op, input, &FlushStageCacheOutput{})
+	req := c.newRequest(op, input, &types.FlushStageCacheOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return FlushStageCacheRequest{Request: req, Input: input, Copy: c.FlushStageCacheRequest}
@@ -116,8 +45,8 @@ func (c *Client) FlushStageCacheRequest(input *FlushStageCacheInput) FlushStageC
 // FlushStageCache API operation.
 type FlushStageCacheRequest struct {
 	*aws.Request
-	Input *FlushStageCacheInput
-	Copy  func(*FlushStageCacheInput) FlushStageCacheRequest
+	Input *types.FlushStageCacheInput
+	Copy  func(*types.FlushStageCacheInput) FlushStageCacheRequest
 }
 
 // Send marshals and sends the FlushStageCache API request.
@@ -129,7 +58,7 @@ func (r FlushStageCacheRequest) Send(ctx context.Context) (*FlushStageCacheRespo
 	}
 
 	resp := &FlushStageCacheResponse{
-		FlushStageCacheOutput: r.Request.Data.(*FlushStageCacheOutput),
+		FlushStageCacheOutput: r.Request.Data.(*types.FlushStageCacheOutput),
 		response:              &aws.Response{Request: r.Request},
 	}
 
@@ -139,7 +68,7 @@ func (r FlushStageCacheRequest) Send(ctx context.Context) (*FlushStageCacheRespo
 // FlushStageCacheResponse is the response type for the
 // FlushStageCache API operation.
 type FlushStageCacheResponse struct {
-	*FlushStageCacheOutput
+	*types.FlushStageCacheOutput
 
 	response *aws.Response
 }

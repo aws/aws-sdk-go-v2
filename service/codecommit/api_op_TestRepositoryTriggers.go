@@ -4,77 +4,10 @@ package codecommit
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/codecommit/types"
 )
-
-// Represents the input of a test repository triggers operation.
-type TestRepositoryTriggersInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the repository in which to test the triggers.
-	//
-	// RepositoryName is a required field
-	RepositoryName *string `locationName:"repositoryName" min:"1" type:"string" required:"true"`
-
-	// The list of triggers to test.
-	//
-	// Triggers is a required field
-	Triggers []RepositoryTrigger `locationName:"triggers" type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s TestRepositoryTriggersInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *TestRepositoryTriggersInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "TestRepositoryTriggersInput"}
-
-	if s.RepositoryName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("RepositoryName"))
-	}
-	if s.RepositoryName != nil && len(*s.RepositoryName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("RepositoryName", 1))
-	}
-
-	if s.Triggers == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Triggers"))
-	}
-	if s.Triggers != nil {
-		for i, v := range s.Triggers {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Triggers", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Represents the output of a test repository triggers operation.
-type TestRepositoryTriggersOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The list of triggers that were not able to be tested. This list provides
-	// the names of the triggers that could not be tested, separated by commas.
-	FailedExecutions []RepositoryTriggerExecutionFailure `locationName:"failedExecutions" type:"list"`
-
-	// The list of triggers that were successfully tested. This list provides the
-	// names of the triggers that were successfully tested, separated by commas.
-	SuccessfulExecutions []string `locationName:"successfulExecutions" type:"list"`
-}
-
-// String returns the string representation
-func (s TestRepositoryTriggersOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opTestRepositoryTriggers = "TestRepositoryTriggers"
 
@@ -83,8 +16,8 @@ const opTestRepositoryTriggers = "TestRepositoryTriggers"
 //
 // Tests the functionality of repository triggers by sending information to
 // the trigger target. If real data is available in the repository, the test
-// will send data from the last commit. If no data is available, sample data
-// will be generated.
+// sends data from the last commit. If no data is available, sample data is
+// generated.
 //
 //    // Example sending a request using TestRepositoryTriggersRequest.
 //    req := client.TestRepositoryTriggersRequest(params)
@@ -94,7 +27,7 @@ const opTestRepositoryTriggers = "TestRepositoryTriggers"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/TestRepositoryTriggers
-func (c *Client) TestRepositoryTriggersRequest(input *TestRepositoryTriggersInput) TestRepositoryTriggersRequest {
+func (c *Client) TestRepositoryTriggersRequest(input *types.TestRepositoryTriggersInput) TestRepositoryTriggersRequest {
 	op := &aws.Operation{
 		Name:       opTestRepositoryTriggers,
 		HTTPMethod: "POST",
@@ -102,10 +35,10 @@ func (c *Client) TestRepositoryTriggersRequest(input *TestRepositoryTriggersInpu
 	}
 
 	if input == nil {
-		input = &TestRepositoryTriggersInput{}
+		input = &types.TestRepositoryTriggersInput{}
 	}
 
-	req := c.newRequest(op, input, &TestRepositoryTriggersOutput{})
+	req := c.newRequest(op, input, &types.TestRepositoryTriggersOutput{})
 	return TestRepositoryTriggersRequest{Request: req, Input: input, Copy: c.TestRepositoryTriggersRequest}
 }
 
@@ -113,8 +46,8 @@ func (c *Client) TestRepositoryTriggersRequest(input *TestRepositoryTriggersInpu
 // TestRepositoryTriggers API operation.
 type TestRepositoryTriggersRequest struct {
 	*aws.Request
-	Input *TestRepositoryTriggersInput
-	Copy  func(*TestRepositoryTriggersInput) TestRepositoryTriggersRequest
+	Input *types.TestRepositoryTriggersInput
+	Copy  func(*types.TestRepositoryTriggersInput) TestRepositoryTriggersRequest
 }
 
 // Send marshals and sends the TestRepositoryTriggers API request.
@@ -126,7 +59,7 @@ func (r TestRepositoryTriggersRequest) Send(ctx context.Context) (*TestRepositor
 	}
 
 	resp := &TestRepositoryTriggersResponse{
-		TestRepositoryTriggersOutput: r.Request.Data.(*TestRepositoryTriggersOutput),
+		TestRepositoryTriggersOutput: r.Request.Data.(*types.TestRepositoryTriggersOutput),
 		response:                     &aws.Response{Request: r.Request},
 	}
 
@@ -136,7 +69,7 @@ func (r TestRepositoryTriggersRequest) Send(ctx context.Context) (*TestRepositor
 // TestRepositoryTriggersResponse is the response type for the
 // TestRepositoryTriggers API operation.
 type TestRepositoryTriggersResponse struct {
-	*TestRepositoryTriggersOutput
+	*types.TestRepositoryTriggersOutput
 
 	response *aws.Response
 }

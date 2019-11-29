@@ -6,92 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/cognitoidentity/types"
 )
-
-// Input to the GetOpenIdTokenForDeveloperIdentity action.
-type GetOpenIdTokenForDeveloperIdentityInput struct {
-	_ struct{} `type:"structure"`
-
-	// A unique identifier in the format REGION:GUID.
-	IdentityId *string `min:"1" type:"string"`
-
-	// An identity pool ID in the format REGION:GUID.
-	//
-	// IdentityPoolId is a required field
-	IdentityPoolId *string `min:"1" type:"string" required:"true"`
-
-	// A set of optional name-value pairs that map provider names to provider tokens.
-	// Each name-value pair represents a user from a public provider or developer
-	// provider. If the user is from a developer provider, the name-value pair will
-	// follow the syntax "developer_provider_name": "developer_user_identifier".
-	// The developer provider is the "domain" by which Cognito will refer to your
-	// users; you provided this domain while creating/updating the identity pool.
-	// The developer user identifier is an identifier from your backend that uniquely
-	// identifies a user. When you create an identity pool, you can specify the
-	// supported logins.
-	//
-	// Logins is a required field
-	Logins map[string]string `type:"map" required:"true"`
-
-	// The expiration time of the token, in seconds. You can specify a custom expiration
-	// time for the token so that you can cache it. If you don't provide an expiration
-	// time, the token is valid for 15 minutes. You can exchange the token with
-	// Amazon STS for temporary AWS credentials, which are valid for a maximum of
-	// one hour. The maximum token duration you can set is 24 hours. You should
-	// take care in setting the expiration time for a token, as there are significant
-	// security implications: an attacker could use a leaked token to access your
-	// AWS resources for the token's duration.
-	TokenDuration *int64 `min:"1" type:"long"`
-}
-
-// String returns the string representation
-func (s GetOpenIdTokenForDeveloperIdentityInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetOpenIdTokenForDeveloperIdentityInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetOpenIdTokenForDeveloperIdentityInput"}
-	if s.IdentityId != nil && len(*s.IdentityId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("IdentityId", 1))
-	}
-
-	if s.IdentityPoolId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("IdentityPoolId"))
-	}
-	if s.IdentityPoolId != nil && len(*s.IdentityPoolId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("IdentityPoolId", 1))
-	}
-
-	if s.Logins == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Logins"))
-	}
-	if s.TokenDuration != nil && *s.TokenDuration < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("TokenDuration", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Returned in response to a successful GetOpenIdTokenForDeveloperIdentity request.
-type GetOpenIdTokenForDeveloperIdentityOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A unique identifier in the format REGION:GUID.
-	IdentityId *string `min:"1" type:"string"`
-
-	// An OpenID token.
-	Token *string `type:"string"`
-}
-
-// String returns the string representation
-func (s GetOpenIdTokenForDeveloperIdentityOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetOpenIdTokenForDeveloperIdentity = "GetOpenIdTokenForDeveloperIdentity"
 
@@ -123,7 +39,7 @@ const opGetOpenIdTokenForDeveloperIdentity = "GetOpenIdTokenForDeveloperIdentity
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-identity-2014-06-30/GetOpenIdTokenForDeveloperIdentity
-func (c *Client) GetOpenIdTokenForDeveloperIdentityRequest(input *GetOpenIdTokenForDeveloperIdentityInput) GetOpenIdTokenForDeveloperIdentityRequest {
+func (c *Client) GetOpenIdTokenForDeveloperIdentityRequest(input *types.GetOpenIdTokenForDeveloperIdentityInput) GetOpenIdTokenForDeveloperIdentityRequest {
 	op := &aws.Operation{
 		Name:       opGetOpenIdTokenForDeveloperIdentity,
 		HTTPMethod: "POST",
@@ -131,10 +47,10 @@ func (c *Client) GetOpenIdTokenForDeveloperIdentityRequest(input *GetOpenIdToken
 	}
 
 	if input == nil {
-		input = &GetOpenIdTokenForDeveloperIdentityInput{}
+		input = &types.GetOpenIdTokenForDeveloperIdentityInput{}
 	}
 
-	req := c.newRequest(op, input, &GetOpenIdTokenForDeveloperIdentityOutput{})
+	req := c.newRequest(op, input, &types.GetOpenIdTokenForDeveloperIdentityOutput{})
 	return GetOpenIdTokenForDeveloperIdentityRequest{Request: req, Input: input, Copy: c.GetOpenIdTokenForDeveloperIdentityRequest}
 }
 
@@ -142,8 +58,8 @@ func (c *Client) GetOpenIdTokenForDeveloperIdentityRequest(input *GetOpenIdToken
 // GetOpenIdTokenForDeveloperIdentity API operation.
 type GetOpenIdTokenForDeveloperIdentityRequest struct {
 	*aws.Request
-	Input *GetOpenIdTokenForDeveloperIdentityInput
-	Copy  func(*GetOpenIdTokenForDeveloperIdentityInput) GetOpenIdTokenForDeveloperIdentityRequest
+	Input *types.GetOpenIdTokenForDeveloperIdentityInput
+	Copy  func(*types.GetOpenIdTokenForDeveloperIdentityInput) GetOpenIdTokenForDeveloperIdentityRequest
 }
 
 // Send marshals and sends the GetOpenIdTokenForDeveloperIdentity API request.
@@ -155,7 +71,7 @@ func (r GetOpenIdTokenForDeveloperIdentityRequest) Send(ctx context.Context) (*G
 	}
 
 	resp := &GetOpenIdTokenForDeveloperIdentityResponse{
-		GetOpenIdTokenForDeveloperIdentityOutput: r.Request.Data.(*GetOpenIdTokenForDeveloperIdentityOutput),
+		GetOpenIdTokenForDeveloperIdentityOutput: r.Request.Data.(*types.GetOpenIdTokenForDeveloperIdentityOutput),
 		response:                                 &aws.Response{Request: r.Request},
 	}
 
@@ -165,7 +81,7 @@ func (r GetOpenIdTokenForDeveloperIdentityRequest) Send(ctx context.Context) (*G
 // GetOpenIdTokenForDeveloperIdentityResponse is the response type for the
 // GetOpenIdTokenForDeveloperIdentity API operation.
 type GetOpenIdTokenForDeveloperIdentityResponse struct {
-	*GetOpenIdTokenForDeveloperIdentityOutput
+	*types.GetOpenIdTokenForDeveloperIdentityOutput
 
 	response *aws.Response
 }

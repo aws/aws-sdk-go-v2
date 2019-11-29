@@ -4,73 +4,10 @@ package kinesisanalyticsv2
 
 import (
 	"context"
-	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/kinesisanalyticsv2/types"
 )
-
-type DeleteApplicationSnapshotInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of an existing application.
-	//
-	// ApplicationName is a required field
-	ApplicationName *string `min:"1" type:"string" required:"true"`
-
-	// The creation timestamp of the application snapshot to delete. You can retrieve
-	// this value using or .
-	//
-	// SnapshotCreationTimestamp is a required field
-	SnapshotCreationTimestamp *time.Time `type:"timestamp" required:"true"`
-
-	// The identifier for the snapshot delete.
-	//
-	// SnapshotName is a required field
-	SnapshotName *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteApplicationSnapshotInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteApplicationSnapshotInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteApplicationSnapshotInput"}
-
-	if s.ApplicationName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ApplicationName"))
-	}
-	if s.ApplicationName != nil && len(*s.ApplicationName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ApplicationName", 1))
-	}
-
-	if s.SnapshotCreationTimestamp == nil {
-		invalidParams.Add(aws.NewErrParamRequired("SnapshotCreationTimestamp"))
-	}
-
-	if s.SnapshotName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("SnapshotName"))
-	}
-	if s.SnapshotName != nil && len(*s.SnapshotName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("SnapshotName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteApplicationSnapshotOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteApplicationSnapshotOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteApplicationSnapshot = "DeleteApplicationSnapshot"
 
@@ -87,7 +24,7 @@ const opDeleteApplicationSnapshot = "DeleteApplicationSnapshot"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/DeleteApplicationSnapshot
-func (c *Client) DeleteApplicationSnapshotRequest(input *DeleteApplicationSnapshotInput) DeleteApplicationSnapshotRequest {
+func (c *Client) DeleteApplicationSnapshotRequest(input *types.DeleteApplicationSnapshotInput) DeleteApplicationSnapshotRequest {
 	op := &aws.Operation{
 		Name:       opDeleteApplicationSnapshot,
 		HTTPMethod: "POST",
@@ -95,10 +32,10 @@ func (c *Client) DeleteApplicationSnapshotRequest(input *DeleteApplicationSnapsh
 	}
 
 	if input == nil {
-		input = &DeleteApplicationSnapshotInput{}
+		input = &types.DeleteApplicationSnapshotInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteApplicationSnapshotOutput{})
+	req := c.newRequest(op, input, &types.DeleteApplicationSnapshotOutput{})
 	return DeleteApplicationSnapshotRequest{Request: req, Input: input, Copy: c.DeleteApplicationSnapshotRequest}
 }
 
@@ -106,8 +43,8 @@ func (c *Client) DeleteApplicationSnapshotRequest(input *DeleteApplicationSnapsh
 // DeleteApplicationSnapshot API operation.
 type DeleteApplicationSnapshotRequest struct {
 	*aws.Request
-	Input *DeleteApplicationSnapshotInput
-	Copy  func(*DeleteApplicationSnapshotInput) DeleteApplicationSnapshotRequest
+	Input *types.DeleteApplicationSnapshotInput
+	Copy  func(*types.DeleteApplicationSnapshotInput) DeleteApplicationSnapshotRequest
 }
 
 // Send marshals and sends the DeleteApplicationSnapshot API request.
@@ -119,7 +56,7 @@ func (r DeleteApplicationSnapshotRequest) Send(ctx context.Context) (*DeleteAppl
 	}
 
 	resp := &DeleteApplicationSnapshotResponse{
-		DeleteApplicationSnapshotOutput: r.Request.Data.(*DeleteApplicationSnapshotOutput),
+		DeleteApplicationSnapshotOutput: r.Request.Data.(*types.DeleteApplicationSnapshotOutput),
 		response:                        &aws.Response{Request: r.Request},
 	}
 
@@ -129,7 +66,7 @@ func (r DeleteApplicationSnapshotRequest) Send(ctx context.Context) (*DeleteAppl
 // DeleteApplicationSnapshotResponse is the response type for the
 // DeleteApplicationSnapshot API operation.
 type DeleteApplicationSnapshotResponse struct {
-	*DeleteApplicationSnapshotOutput
+	*types.DeleteApplicationSnapshotOutput
 
 	response *aws.Response
 }

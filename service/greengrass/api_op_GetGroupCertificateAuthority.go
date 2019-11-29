@@ -6,103 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/greengrass/types"
 )
-
-type GetGroupCertificateAuthorityInput struct {
-	_ struct{} `type:"structure"`
-
-	// CertificateAuthorityId is a required field
-	CertificateAuthorityId *string `location:"uri" locationName:"CertificateAuthorityId" type:"string" required:"true"`
-
-	// GroupId is a required field
-	GroupId *string `location:"uri" locationName:"GroupId" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetGroupCertificateAuthorityInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetGroupCertificateAuthorityInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetGroupCertificateAuthorityInput"}
-
-	if s.CertificateAuthorityId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("CertificateAuthorityId"))
-	}
-
-	if s.GroupId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("GroupId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetGroupCertificateAuthorityInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.CertificateAuthorityId != nil {
-		v := *s.CertificateAuthorityId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "CertificateAuthorityId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.GroupId != nil {
-		v := *s.GroupId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "GroupId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-// Information about a certificate authority for a group.
-type GetGroupCertificateAuthorityOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The ARN of the certificate authority for the group.
-	GroupCertificateAuthorityArn *string `type:"string"`
-
-	// The ID of the certificate authority for the group.
-	GroupCertificateAuthorityId *string `type:"string"`
-
-	// The PEM encoded certificate for the group.
-	PemEncodedCertificate *string `type:"string"`
-}
-
-// String returns the string representation
-func (s GetGroupCertificateAuthorityOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetGroupCertificateAuthorityOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.GroupCertificateAuthorityArn != nil {
-		v := *s.GroupCertificateAuthorityArn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "GroupCertificateAuthorityArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.GroupCertificateAuthorityId != nil {
-		v := *s.GroupCertificateAuthorityId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "GroupCertificateAuthorityId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.PemEncodedCertificate != nil {
-		v := *s.PemEncodedCertificate
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "PemEncodedCertificate", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opGetGroupCertificateAuthority = "GetGroupCertificateAuthority"
 
@@ -119,7 +24,7 @@ const opGetGroupCertificateAuthority = "GetGroupCertificateAuthority"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GetGroupCertificateAuthority
-func (c *Client) GetGroupCertificateAuthorityRequest(input *GetGroupCertificateAuthorityInput) GetGroupCertificateAuthorityRequest {
+func (c *Client) GetGroupCertificateAuthorityRequest(input *types.GetGroupCertificateAuthorityInput) GetGroupCertificateAuthorityRequest {
 	op := &aws.Operation{
 		Name:       opGetGroupCertificateAuthority,
 		HTTPMethod: "GET",
@@ -127,10 +32,10 @@ func (c *Client) GetGroupCertificateAuthorityRequest(input *GetGroupCertificateA
 	}
 
 	if input == nil {
-		input = &GetGroupCertificateAuthorityInput{}
+		input = &types.GetGroupCertificateAuthorityInput{}
 	}
 
-	req := c.newRequest(op, input, &GetGroupCertificateAuthorityOutput{})
+	req := c.newRequest(op, input, &types.GetGroupCertificateAuthorityOutput{})
 	return GetGroupCertificateAuthorityRequest{Request: req, Input: input, Copy: c.GetGroupCertificateAuthorityRequest}
 }
 
@@ -138,8 +43,8 @@ func (c *Client) GetGroupCertificateAuthorityRequest(input *GetGroupCertificateA
 // GetGroupCertificateAuthority API operation.
 type GetGroupCertificateAuthorityRequest struct {
 	*aws.Request
-	Input *GetGroupCertificateAuthorityInput
-	Copy  func(*GetGroupCertificateAuthorityInput) GetGroupCertificateAuthorityRequest
+	Input *types.GetGroupCertificateAuthorityInput
+	Copy  func(*types.GetGroupCertificateAuthorityInput) GetGroupCertificateAuthorityRequest
 }
 
 // Send marshals and sends the GetGroupCertificateAuthority API request.
@@ -151,7 +56,7 @@ func (r GetGroupCertificateAuthorityRequest) Send(ctx context.Context) (*GetGrou
 	}
 
 	resp := &GetGroupCertificateAuthorityResponse{
-		GetGroupCertificateAuthorityOutput: r.Request.Data.(*GetGroupCertificateAuthorityOutput),
+		GetGroupCertificateAuthorityOutput: r.Request.Data.(*types.GetGroupCertificateAuthorityOutput),
 		response:                           &aws.Response{Request: r.Request},
 	}
 
@@ -161,7 +66,7 @@ func (r GetGroupCertificateAuthorityRequest) Send(ctx context.Context) (*GetGrou
 // GetGroupCertificateAuthorityResponse is the response type for the
 // GetGroupCertificateAuthority API operation.
 type GetGroupCertificateAuthorityResponse struct {
-	*GetGroupCertificateAuthorityOutput
+	*types.GetGroupCertificateAuthorityOutput
 
 	response *aws.Response
 }

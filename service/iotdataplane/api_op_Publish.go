@@ -6,83 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/restjson"
+	"github.com/aws/aws-sdk-go-v2/service/iotdataplane/types"
 )
-
-// The input for the Publish operation.
-type PublishInput struct {
-	_ struct{} `type:"structure" payload:"Payload"`
-
-	// The state information, in JSON format.
-	Payload []byte `locationName:"payload" type:"blob"`
-
-	// The Quality of Service (QoS) level.
-	Qos *int64 `location:"querystring" locationName:"qos" type:"integer"`
-
-	// The name of the MQTT topic.
-	//
-	// Topic is a required field
-	Topic *string `location:"uri" locationName:"topic" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s PublishInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *PublishInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "PublishInput"}
-
-	if s.Topic == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Topic"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s PublishInput) MarshalFields(e protocol.FieldEncoder) error {
-
-	if s.Topic != nil {
-		v := *s.Topic
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "topic", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Payload != nil {
-		v := s.Payload
-
-		metadata := protocol.Metadata{}
-		e.SetStream(protocol.PayloadTarget, "payload", protocol.BytesStream(v), metadata)
-	}
-	if s.Qos != nil {
-		v := *s.Qos
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "qos", protocol.Int64Value(v), metadata)
-	}
-	return nil
-}
-
-type PublishOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s PublishOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s PublishOutput) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
 
 const opPublish = "Publish"
 
@@ -100,7 +27,7 @@ const opPublish = "Publish"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) PublishRequest(input *PublishInput) PublishRequest {
+func (c *Client) PublishRequest(input *types.PublishInput) PublishRequest {
 	op := &aws.Operation{
 		Name:       opPublish,
 		HTTPMethod: "POST",
@@ -108,10 +35,10 @@ func (c *Client) PublishRequest(input *PublishInput) PublishRequest {
 	}
 
 	if input == nil {
-		input = &PublishInput{}
+		input = &types.PublishInput{}
 	}
 
-	req := c.newRequest(op, input, &PublishOutput{})
+	req := c.newRequest(op, input, &types.PublishOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return PublishRequest{Request: req, Input: input, Copy: c.PublishRequest}
@@ -121,8 +48,8 @@ func (c *Client) PublishRequest(input *PublishInput) PublishRequest {
 // Publish API operation.
 type PublishRequest struct {
 	*aws.Request
-	Input *PublishInput
-	Copy  func(*PublishInput) PublishRequest
+	Input *types.PublishInput
+	Copy  func(*types.PublishInput) PublishRequest
 }
 
 // Send marshals and sends the Publish API request.
@@ -134,7 +61,7 @@ func (r PublishRequest) Send(ctx context.Context) (*PublishResponse, error) {
 	}
 
 	resp := &PublishResponse{
-		PublishOutput: r.Request.Data.(*PublishOutput),
+		PublishOutput: r.Request.Data.(*types.PublishOutput),
 		response:      &aws.Response{Request: r.Request},
 	}
 
@@ -144,7 +71,7 @@ func (r PublishRequest) Send(ctx context.Context) (*PublishResponse, error) {
 // PublishResponse is the response type for the
 // Publish API operation.
 type PublishResponse struct {
-	*PublishOutput
+	*types.PublishOutput
 
 	response *aws.Response
 }

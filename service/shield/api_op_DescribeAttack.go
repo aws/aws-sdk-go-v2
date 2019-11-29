@@ -6,51 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/shield/types"
 )
-
-type DescribeAttackInput struct {
-	_ struct{} `type:"structure"`
-
-	// The unique identifier (ID) for the attack that to be described.
-	//
-	// AttackId is a required field
-	AttackId *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeAttackInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeAttackInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeAttackInput"}
-
-	if s.AttackId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("AttackId"))
-	}
-	if s.AttackId != nil && len(*s.AttackId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("AttackId", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribeAttackOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The attack that is described.
-	Attack *AttackDetail `type:"structure"`
-}
-
-// String returns the string representation
-func (s DescribeAttackOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeAttack = "DescribeAttack"
 
@@ -67,7 +24,7 @@ const opDescribeAttack = "DescribeAttack"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/DescribeAttack
-func (c *Client) DescribeAttackRequest(input *DescribeAttackInput) DescribeAttackRequest {
+func (c *Client) DescribeAttackRequest(input *types.DescribeAttackInput) DescribeAttackRequest {
 	op := &aws.Operation{
 		Name:       opDescribeAttack,
 		HTTPMethod: "POST",
@@ -75,10 +32,10 @@ func (c *Client) DescribeAttackRequest(input *DescribeAttackInput) DescribeAttac
 	}
 
 	if input == nil {
-		input = &DescribeAttackInput{}
+		input = &types.DescribeAttackInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeAttackOutput{})
+	req := c.newRequest(op, input, &types.DescribeAttackOutput{})
 	return DescribeAttackRequest{Request: req, Input: input, Copy: c.DescribeAttackRequest}
 }
 
@@ -86,8 +43,8 @@ func (c *Client) DescribeAttackRequest(input *DescribeAttackInput) DescribeAttac
 // DescribeAttack API operation.
 type DescribeAttackRequest struct {
 	*aws.Request
-	Input *DescribeAttackInput
-	Copy  func(*DescribeAttackInput) DescribeAttackRequest
+	Input *types.DescribeAttackInput
+	Copy  func(*types.DescribeAttackInput) DescribeAttackRequest
 }
 
 // Send marshals and sends the DescribeAttack API request.
@@ -99,7 +56,7 @@ func (r DescribeAttackRequest) Send(ctx context.Context) (*DescribeAttackRespons
 	}
 
 	resp := &DescribeAttackResponse{
-		DescribeAttackOutput: r.Request.Data.(*DescribeAttackOutput),
+		DescribeAttackOutput: r.Request.Data.(*types.DescribeAttackOutput),
 		response:             &aws.Response{Request: r.Request},
 	}
 
@@ -109,7 +66,7 @@ func (r DescribeAttackRequest) Send(ctx context.Context) (*DescribeAttackRespons
 // DescribeAttackResponse is the response type for the
 // DescribeAttack API operation.
 type DescribeAttackResponse struct {
-	*DescribeAttackOutput
+	*types.DescribeAttackOutput
 
 	response *aws.Response
 }

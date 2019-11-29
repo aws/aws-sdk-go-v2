@@ -4,81 +4,10 @@ package route53domains
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/route53domains/types"
 )
-
-// Replaces the current set of name servers for the domain with the specified
-// set of name servers. If you use Amazon Route 53 as your DNS service, specify
-// the four name servers in the delegation set for the hosted zone for the domain.
-//
-// If successful, this operation returns an operation ID that you can use to
-// track the progress and completion of the action. If the request is not completed
-// successfully, the domain registrant will be notified by email.
-type UpdateDomainNameserversInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the domain that you want to change name servers for.
-	//
-	// DomainName is a required field
-	DomainName *string `type:"string" required:"true"`
-
-	// The authorization key for .fi domains
-	FIAuthKey *string `deprecated:"true" type:"string"`
-
-	// A list of new name servers for the domain.
-	//
-	// Nameservers is a required field
-	Nameservers []Nameserver `type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s UpdateDomainNameserversInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateDomainNameserversInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateDomainNameserversInput"}
-
-	if s.DomainName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DomainName"))
-	}
-
-	if s.Nameservers == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Nameservers"))
-	}
-	if s.Nameservers != nil {
-		for i, v := range s.Nameservers {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Nameservers", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// The UpdateDomainNameservers response includes the following element.
-type UpdateDomainNameserversOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Identifier for tracking the progress of the request. To use this ID to query
-	// the operation status, use GetOperationDetail.
-	//
-	// OperationId is a required field
-	OperationId *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s UpdateDomainNameserversOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opUpdateDomainNameservers = "UpdateDomainNameservers"
 
@@ -102,7 +31,7 @@ const opUpdateDomainNameservers = "UpdateDomainNameservers"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/UpdateDomainNameservers
-func (c *Client) UpdateDomainNameserversRequest(input *UpdateDomainNameserversInput) UpdateDomainNameserversRequest {
+func (c *Client) UpdateDomainNameserversRequest(input *types.UpdateDomainNameserversInput) UpdateDomainNameserversRequest {
 	op := &aws.Operation{
 		Name:       opUpdateDomainNameservers,
 		HTTPMethod: "POST",
@@ -110,10 +39,10 @@ func (c *Client) UpdateDomainNameserversRequest(input *UpdateDomainNameserversIn
 	}
 
 	if input == nil {
-		input = &UpdateDomainNameserversInput{}
+		input = &types.UpdateDomainNameserversInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateDomainNameserversOutput{})
+	req := c.newRequest(op, input, &types.UpdateDomainNameserversOutput{})
 	return UpdateDomainNameserversRequest{Request: req, Input: input, Copy: c.UpdateDomainNameserversRequest}
 }
 
@@ -121,8 +50,8 @@ func (c *Client) UpdateDomainNameserversRequest(input *UpdateDomainNameserversIn
 // UpdateDomainNameservers API operation.
 type UpdateDomainNameserversRequest struct {
 	*aws.Request
-	Input *UpdateDomainNameserversInput
-	Copy  func(*UpdateDomainNameserversInput) UpdateDomainNameserversRequest
+	Input *types.UpdateDomainNameserversInput
+	Copy  func(*types.UpdateDomainNameserversInput) UpdateDomainNameserversRequest
 }
 
 // Send marshals and sends the UpdateDomainNameservers API request.
@@ -134,7 +63,7 @@ func (r UpdateDomainNameserversRequest) Send(ctx context.Context) (*UpdateDomain
 	}
 
 	resp := &UpdateDomainNameserversResponse{
-		UpdateDomainNameserversOutput: r.Request.Data.(*UpdateDomainNameserversOutput),
+		UpdateDomainNameserversOutput: r.Request.Data.(*types.UpdateDomainNameserversOutput),
 		response:                      &aws.Response{Request: r.Request},
 	}
 
@@ -144,7 +73,7 @@ func (r UpdateDomainNameserversRequest) Send(ctx context.Context) (*UpdateDomain
 // UpdateDomainNameserversResponse is the response type for the
 // UpdateDomainNameservers API operation.
 type UpdateDomainNameserversResponse struct {
-	*UpdateDomainNameserversOutput
+	*types.UpdateDomainNameserversOutput
 
 	response *aws.Response
 }

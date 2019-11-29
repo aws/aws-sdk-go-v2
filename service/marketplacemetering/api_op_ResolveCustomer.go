@@ -6,60 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/marketplacemetering/types"
 )
-
-// Contains input to the ResolveCustomer operation.
-type ResolveCustomerInput struct {
-	_ struct{} `type:"structure"`
-
-	// When a buyer visits your website during the registration process, the buyer
-	// submits a registration token through the browser. The registration token
-	// is resolved to obtain a CustomerIdentifier and product code.
-	//
-	// RegistrationToken is a required field
-	RegistrationToken *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s ResolveCustomerInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ResolveCustomerInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ResolveCustomerInput"}
-
-	if s.RegistrationToken == nil {
-		invalidParams.Add(aws.NewErrParamRequired("RegistrationToken"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// The result of the ResolveCustomer operation. Contains the CustomerIdentifier
-// and product code.
-type ResolveCustomerOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The CustomerIdentifier is used to identify an individual customer in your
-	// application. Calls to BatchMeterUsage require CustomerIdentifiers for each
-	// UsageRecord.
-	CustomerIdentifier *string `min:"1" type:"string"`
-
-	// The product code is returned to confirm that the buyer is registering for
-	// your product. Subsequent BatchMeterUsage calls should be made using this
-	// product code.
-	ProductCode *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s ResolveCustomerOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opResolveCustomer = "ResolveCustomer"
 
@@ -79,7 +27,7 @@ const opResolveCustomer = "ResolveCustomer"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/meteringmarketplace-2016-01-14/ResolveCustomer
-func (c *Client) ResolveCustomerRequest(input *ResolveCustomerInput) ResolveCustomerRequest {
+func (c *Client) ResolveCustomerRequest(input *types.ResolveCustomerInput) ResolveCustomerRequest {
 	op := &aws.Operation{
 		Name:       opResolveCustomer,
 		HTTPMethod: "POST",
@@ -87,10 +35,10 @@ func (c *Client) ResolveCustomerRequest(input *ResolveCustomerInput) ResolveCust
 	}
 
 	if input == nil {
-		input = &ResolveCustomerInput{}
+		input = &types.ResolveCustomerInput{}
 	}
 
-	req := c.newRequest(op, input, &ResolveCustomerOutput{})
+	req := c.newRequest(op, input, &types.ResolveCustomerOutput{})
 	return ResolveCustomerRequest{Request: req, Input: input, Copy: c.ResolveCustomerRequest}
 }
 
@@ -98,8 +46,8 @@ func (c *Client) ResolveCustomerRequest(input *ResolveCustomerInput) ResolveCust
 // ResolveCustomer API operation.
 type ResolveCustomerRequest struct {
 	*aws.Request
-	Input *ResolveCustomerInput
-	Copy  func(*ResolveCustomerInput) ResolveCustomerRequest
+	Input *types.ResolveCustomerInput
+	Copy  func(*types.ResolveCustomerInput) ResolveCustomerRequest
 }
 
 // Send marshals and sends the ResolveCustomer API request.
@@ -111,7 +59,7 @@ func (r ResolveCustomerRequest) Send(ctx context.Context) (*ResolveCustomerRespo
 	}
 
 	resp := &ResolveCustomerResponse{
-		ResolveCustomerOutput: r.Request.Data.(*ResolveCustomerOutput),
+		ResolveCustomerOutput: r.Request.Data.(*types.ResolveCustomerOutput),
 		response:              &aws.Response{Request: r.Request},
 	}
 
@@ -121,7 +69,7 @@ func (r ResolveCustomerRequest) Send(ctx context.Context) (*ResolveCustomerRespo
 // ResolveCustomerResponse is the response type for the
 // ResolveCustomer API operation.
 type ResolveCustomerResponse struct {
-	*ResolveCustomerOutput
+	*types.ResolveCustomerOutput
 
 	response *aws.Response
 }

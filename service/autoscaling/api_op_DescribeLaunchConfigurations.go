@@ -6,49 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/autoscaling/types"
 )
-
-type DescribeLaunchConfigurationsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The launch configuration names. If you omit this parameter, all launch configurations
-	// are described.
-	LaunchConfigurationNames []string `type:"list"`
-
-	// The maximum number of items to return with this call. The default value is
-	// 50 and the maximum value is 100.
-	MaxRecords *int64 `type:"integer"`
-
-	// The token for the next set of items to return. (You received this token from
-	// a previous call.)
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeLaunchConfigurationsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type DescribeLaunchConfigurationsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The launch configurations.
-	//
-	// LaunchConfigurations is a required field
-	LaunchConfigurations []LaunchConfiguration `type:"list" required:"true"`
-
-	// A string that indicates that the response contains more items than can be
-	// returned in a single response. To receive additional items, specify this
-	// string for the NextToken value when requesting the next set of items. This
-	// value is null when there are no more items to return.
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeLaunchConfigurationsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeLaunchConfigurations = "DescribeLaunchConfigurations"
 
@@ -65,7 +24,7 @@ const opDescribeLaunchConfigurations = "DescribeLaunchConfigurations"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DescribeLaunchConfigurations
-func (c *Client) DescribeLaunchConfigurationsRequest(input *DescribeLaunchConfigurationsInput) DescribeLaunchConfigurationsRequest {
+func (c *Client) DescribeLaunchConfigurationsRequest(input *types.DescribeLaunchConfigurationsInput) DescribeLaunchConfigurationsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeLaunchConfigurations,
 		HTTPMethod: "POST",
@@ -79,10 +38,10 @@ func (c *Client) DescribeLaunchConfigurationsRequest(input *DescribeLaunchConfig
 	}
 
 	if input == nil {
-		input = &DescribeLaunchConfigurationsInput{}
+		input = &types.DescribeLaunchConfigurationsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeLaunchConfigurationsOutput{})
+	req := c.newRequest(op, input, &types.DescribeLaunchConfigurationsOutput{})
 	return DescribeLaunchConfigurationsRequest{Request: req, Input: input, Copy: c.DescribeLaunchConfigurationsRequest}
 }
 
@@ -90,8 +49,8 @@ func (c *Client) DescribeLaunchConfigurationsRequest(input *DescribeLaunchConfig
 // DescribeLaunchConfigurations API operation.
 type DescribeLaunchConfigurationsRequest struct {
 	*aws.Request
-	Input *DescribeLaunchConfigurationsInput
-	Copy  func(*DescribeLaunchConfigurationsInput) DescribeLaunchConfigurationsRequest
+	Input *types.DescribeLaunchConfigurationsInput
+	Copy  func(*types.DescribeLaunchConfigurationsInput) DescribeLaunchConfigurationsRequest
 }
 
 // Send marshals and sends the DescribeLaunchConfigurations API request.
@@ -103,7 +62,7 @@ func (r DescribeLaunchConfigurationsRequest) Send(ctx context.Context) (*Describ
 	}
 
 	resp := &DescribeLaunchConfigurationsResponse{
-		DescribeLaunchConfigurationsOutput: r.Request.Data.(*DescribeLaunchConfigurationsOutput),
+		DescribeLaunchConfigurationsOutput: r.Request.Data.(*types.DescribeLaunchConfigurationsOutput),
 		response:                           &aws.Response{Request: r.Request},
 	}
 
@@ -133,7 +92,7 @@ func NewDescribeLaunchConfigurationsPaginator(req DescribeLaunchConfigurationsRe
 	return DescribeLaunchConfigurationsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *DescribeLaunchConfigurationsInput
+				var inCpy *types.DescribeLaunchConfigurationsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -153,14 +112,14 @@ type DescribeLaunchConfigurationsPaginator struct {
 	aws.Pager
 }
 
-func (p *DescribeLaunchConfigurationsPaginator) CurrentPage() *DescribeLaunchConfigurationsOutput {
-	return p.Pager.CurrentPage().(*DescribeLaunchConfigurationsOutput)
+func (p *DescribeLaunchConfigurationsPaginator) CurrentPage() *types.DescribeLaunchConfigurationsOutput {
+	return p.Pager.CurrentPage().(*types.DescribeLaunchConfigurationsOutput)
 }
 
 // DescribeLaunchConfigurationsResponse is the response type for the
 // DescribeLaunchConfigurations API operation.
 type DescribeLaunchConfigurationsResponse struct {
-	*DescribeLaunchConfigurationsOutput
+	*types.DescribeLaunchConfigurationsOutput
 
 	response *aws.Response
 }

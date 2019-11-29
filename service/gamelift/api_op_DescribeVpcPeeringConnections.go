@@ -6,34 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/gamelift/types"
 )
-
-// Represents the input for a request action.
-type DescribeVpcPeeringConnectionsInput struct {
-	_ struct{} `type:"structure"`
-
-	// Unique identifier for a fleet.
-	FleetId *string `type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeVpcPeeringConnectionsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Represents the returned data in response to a request action.
-type DescribeVpcPeeringConnectionsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Collection of VPC peering connection records that match the request.
-	VpcPeeringConnections []VpcPeeringConnection `type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeVpcPeeringConnectionsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeVpcPeeringConnections = "DescribeVpcPeeringConnections"
 
@@ -69,7 +43,7 @@ const opDescribeVpcPeeringConnections = "DescribeVpcPeeringConnections"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DescribeVpcPeeringConnections
-func (c *Client) DescribeVpcPeeringConnectionsRequest(input *DescribeVpcPeeringConnectionsInput) DescribeVpcPeeringConnectionsRequest {
+func (c *Client) DescribeVpcPeeringConnectionsRequest(input *types.DescribeVpcPeeringConnectionsInput) DescribeVpcPeeringConnectionsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeVpcPeeringConnections,
 		HTTPMethod: "POST",
@@ -77,10 +51,10 @@ func (c *Client) DescribeVpcPeeringConnectionsRequest(input *DescribeVpcPeeringC
 	}
 
 	if input == nil {
-		input = &DescribeVpcPeeringConnectionsInput{}
+		input = &types.DescribeVpcPeeringConnectionsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeVpcPeeringConnectionsOutput{})
+	req := c.newRequest(op, input, &types.DescribeVpcPeeringConnectionsOutput{})
 	return DescribeVpcPeeringConnectionsRequest{Request: req, Input: input, Copy: c.DescribeVpcPeeringConnectionsRequest}
 }
 
@@ -88,8 +62,8 @@ func (c *Client) DescribeVpcPeeringConnectionsRequest(input *DescribeVpcPeeringC
 // DescribeVpcPeeringConnections API operation.
 type DescribeVpcPeeringConnectionsRequest struct {
 	*aws.Request
-	Input *DescribeVpcPeeringConnectionsInput
-	Copy  func(*DescribeVpcPeeringConnectionsInput) DescribeVpcPeeringConnectionsRequest
+	Input *types.DescribeVpcPeeringConnectionsInput
+	Copy  func(*types.DescribeVpcPeeringConnectionsInput) DescribeVpcPeeringConnectionsRequest
 }
 
 // Send marshals and sends the DescribeVpcPeeringConnections API request.
@@ -101,7 +75,7 @@ func (r DescribeVpcPeeringConnectionsRequest) Send(ctx context.Context) (*Descri
 	}
 
 	resp := &DescribeVpcPeeringConnectionsResponse{
-		DescribeVpcPeeringConnectionsOutput: r.Request.Data.(*DescribeVpcPeeringConnectionsOutput),
+		DescribeVpcPeeringConnectionsOutput: r.Request.Data.(*types.DescribeVpcPeeringConnectionsOutput),
 		response:                            &aws.Response{Request: r.Request},
 	}
 
@@ -111,7 +85,7 @@ func (r DescribeVpcPeeringConnectionsRequest) Send(ctx context.Context) (*Descri
 // DescribeVpcPeeringConnectionsResponse is the response type for the
 // DescribeVpcPeeringConnections API operation.
 type DescribeVpcPeeringConnectionsResponse struct {
-	*DescribeVpcPeeringConnectionsOutput
+	*types.DescribeVpcPeeringConnectionsOutput
 
 	response *aws.Response
 }

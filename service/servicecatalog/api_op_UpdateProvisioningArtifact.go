@@ -6,98 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/types"
 )
-
-type UpdateProvisioningArtifactInput struct {
-	_ struct{} `type:"structure"`
-
-	// The language code.
-	//
-	//    * en - English (default)
-	//
-	//    * jp - Japanese
-	//
-	//    * zh - Chinese
-	AcceptLanguage *string `type:"string"`
-
-	// Indicates whether the product version is active.
-	Active *bool `type:"boolean"`
-
-	// The updated description of the provisioning artifact.
-	Description *string `type:"string"`
-
-	// Information set by the administrator to provide guidance to end users about
-	// which provisioning artifacts to use.
-	//
-	// The DEFAULT value indicates that the product version is active.
-	//
-	// The administrator can set the guidance to DEPRECATED to inform users that
-	// the product version is deprecated. Users are able to make updates to a provisioned
-	// product of a deprecated version but cannot launch new provisioned products
-	// using a deprecated version.
-	Guidance ProvisioningArtifactGuidance `type:"string" enum:"true"`
-
-	// The updated name of the provisioning artifact.
-	Name *string `type:"string"`
-
-	// The product identifier.
-	//
-	// ProductId is a required field
-	ProductId *string `min:"1" type:"string" required:"true"`
-
-	// The identifier of the provisioning artifact.
-	//
-	// ProvisioningArtifactId is a required field
-	ProvisioningArtifactId *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s UpdateProvisioningArtifactInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateProvisioningArtifactInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateProvisioningArtifactInput"}
-
-	if s.ProductId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ProductId"))
-	}
-	if s.ProductId != nil && len(*s.ProductId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ProductId", 1))
-	}
-
-	if s.ProvisioningArtifactId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ProvisioningArtifactId"))
-	}
-	if s.ProvisioningArtifactId != nil && len(*s.ProvisioningArtifactId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ProvisioningArtifactId", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type UpdateProvisioningArtifactOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The URL of the CloudFormation template in Amazon S3.
-	Info map[string]string `min:"1" type:"map"`
-
-	// Information about the provisioning artifact.
-	ProvisioningArtifactDetail *ProvisioningArtifactDetail `type:"structure"`
-
-	// The status of the current request.
-	Status Status `type:"string" enum:"true"`
-}
-
-// String returns the string representation
-func (s UpdateProvisioningArtifactOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opUpdateProvisioningArtifact = "UpdateProvisioningArtifact"
 
@@ -118,7 +28,7 @@ const opUpdateProvisioningArtifact = "UpdateProvisioningArtifact"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/UpdateProvisioningArtifact
-func (c *Client) UpdateProvisioningArtifactRequest(input *UpdateProvisioningArtifactInput) UpdateProvisioningArtifactRequest {
+func (c *Client) UpdateProvisioningArtifactRequest(input *types.UpdateProvisioningArtifactInput) UpdateProvisioningArtifactRequest {
 	op := &aws.Operation{
 		Name:       opUpdateProvisioningArtifact,
 		HTTPMethod: "POST",
@@ -126,10 +36,10 @@ func (c *Client) UpdateProvisioningArtifactRequest(input *UpdateProvisioningArti
 	}
 
 	if input == nil {
-		input = &UpdateProvisioningArtifactInput{}
+		input = &types.UpdateProvisioningArtifactInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateProvisioningArtifactOutput{})
+	req := c.newRequest(op, input, &types.UpdateProvisioningArtifactOutput{})
 	return UpdateProvisioningArtifactRequest{Request: req, Input: input, Copy: c.UpdateProvisioningArtifactRequest}
 }
 
@@ -137,8 +47,8 @@ func (c *Client) UpdateProvisioningArtifactRequest(input *UpdateProvisioningArti
 // UpdateProvisioningArtifact API operation.
 type UpdateProvisioningArtifactRequest struct {
 	*aws.Request
-	Input *UpdateProvisioningArtifactInput
-	Copy  func(*UpdateProvisioningArtifactInput) UpdateProvisioningArtifactRequest
+	Input *types.UpdateProvisioningArtifactInput
+	Copy  func(*types.UpdateProvisioningArtifactInput) UpdateProvisioningArtifactRequest
 }
 
 // Send marshals and sends the UpdateProvisioningArtifact API request.
@@ -150,7 +60,7 @@ func (r UpdateProvisioningArtifactRequest) Send(ctx context.Context) (*UpdatePro
 	}
 
 	resp := &UpdateProvisioningArtifactResponse{
-		UpdateProvisioningArtifactOutput: r.Request.Data.(*UpdateProvisioningArtifactOutput),
+		UpdateProvisioningArtifactOutput: r.Request.Data.(*types.UpdateProvisioningArtifactOutput),
 		response:                         &aws.Response{Request: r.Request},
 	}
 
@@ -160,7 +70,7 @@ func (r UpdateProvisioningArtifactRequest) Send(ctx context.Context) (*UpdatePro
 // UpdateProvisioningArtifactResponse is the response type for the
 // UpdateProvisioningArtifact API operation.
 type UpdateProvisioningArtifactResponse struct {
-	*UpdateProvisioningArtifactOutput
+	*types.UpdateProvisioningArtifactOutput
 
 	response *aws.Response
 }

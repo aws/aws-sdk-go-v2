@@ -6,53 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/machinelearning/types"
 )
-
-type DeleteDataSourceInput struct {
-	_ struct{} `type:"structure"`
-
-	// A user-supplied ID that uniquely identifies the DataSource.
-	//
-	// DataSourceId is a required field
-	DataSourceId *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteDataSourceInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteDataSourceInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteDataSourceInput"}
-
-	if s.DataSourceId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DataSourceId"))
-	}
-	if s.DataSourceId != nil && len(*s.DataSourceId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("DataSourceId", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Represents the output of a DeleteDataSource operation.
-type DeleteDataSourceOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A user-supplied ID that uniquely identifies the DataSource. This value should
-	// be identical to the value of the DataSourceID in the request.
-	DataSourceId *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s DeleteDataSourceOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteDataSource = "DeleteDataSource"
 
@@ -72,7 +27,7 @@ const opDeleteDataSource = "DeleteDataSource"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) DeleteDataSourceRequest(input *DeleteDataSourceInput) DeleteDataSourceRequest {
+func (c *Client) DeleteDataSourceRequest(input *types.DeleteDataSourceInput) DeleteDataSourceRequest {
 	op := &aws.Operation{
 		Name:       opDeleteDataSource,
 		HTTPMethod: "POST",
@@ -80,10 +35,10 @@ func (c *Client) DeleteDataSourceRequest(input *DeleteDataSourceInput) DeleteDat
 	}
 
 	if input == nil {
-		input = &DeleteDataSourceInput{}
+		input = &types.DeleteDataSourceInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteDataSourceOutput{})
+	req := c.newRequest(op, input, &types.DeleteDataSourceOutput{})
 	return DeleteDataSourceRequest{Request: req, Input: input, Copy: c.DeleteDataSourceRequest}
 }
 
@@ -91,8 +46,8 @@ func (c *Client) DeleteDataSourceRequest(input *DeleteDataSourceInput) DeleteDat
 // DeleteDataSource API operation.
 type DeleteDataSourceRequest struct {
 	*aws.Request
-	Input *DeleteDataSourceInput
-	Copy  func(*DeleteDataSourceInput) DeleteDataSourceRequest
+	Input *types.DeleteDataSourceInput
+	Copy  func(*types.DeleteDataSourceInput) DeleteDataSourceRequest
 }
 
 // Send marshals and sends the DeleteDataSource API request.
@@ -104,7 +59,7 @@ func (r DeleteDataSourceRequest) Send(ctx context.Context) (*DeleteDataSourceRes
 	}
 
 	resp := &DeleteDataSourceResponse{
-		DeleteDataSourceOutput: r.Request.Data.(*DeleteDataSourceOutput),
+		DeleteDataSourceOutput: r.Request.Data.(*types.DeleteDataSourceOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -114,7 +69,7 @@ func (r DeleteDataSourceRequest) Send(ctx context.Context) (*DeleteDataSourceRes
 // DeleteDataSourceResponse is the response type for the
 // DeleteDataSource API operation.
 type DeleteDataSourceResponse struct {
-	*DeleteDataSourceOutput
+	*types.DeleteDataSourceOutput
 
 	response *aws.Response
 }

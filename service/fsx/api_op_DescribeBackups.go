@@ -6,69 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/fsx/types"
 )
-
-// The request object for DescribeBackups operation.
-type DescribeBackupsInput struct {
-	_ struct{} `type:"structure"`
-
-	// (Optional) IDs of the backups you want to retrieve (String). This overrides
-	// any filters. If any IDs are not found, BackupNotFound will be thrown.
-	BackupIds []string `type:"list"`
-
-	// (Optional) Filters structure. Supported names are file-system-id and backup-type.
-	Filters []Filter `type:"list"`
-
-	// (Optional) Maximum number of backups to return in the response (integer).
-	// This parameter value must be greater than 0. The number of items that Amazon
-	// FSx returns is the minimum of the MaxResults parameter specified in the request
-	// and the service's internal maximum number of items per page.
-	MaxResults *int64 `min:"1" type:"integer"`
-
-	// (Optional) Opaque pagination token returned from a previous DescribeBackups
-	// operation (String). If a token present, the action continues the list from
-	// where the returning call left off.
-	NextToken *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeBackupsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeBackupsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeBackupsInput"}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-	if s.NextToken != nil && len(*s.NextToken) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Response object for DescribeBackups operation.
-type DescribeBackupsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Any array of backups.
-	Backups []Backup `type:"list"`
-
-	// This is present if there are more backups than returned in the response (String).
-	// You can use the NextToken value in the later request to fetch the backups.
-	NextToken *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeBackupsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeBackups = "DescribeBackups"
 
@@ -108,7 +47,7 @@ const opDescribeBackups = "DescribeBackups"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/DescribeBackups
-func (c *Client) DescribeBackupsRequest(input *DescribeBackupsInput) DescribeBackupsRequest {
+func (c *Client) DescribeBackupsRequest(input *types.DescribeBackupsInput) DescribeBackupsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeBackups,
 		HTTPMethod: "POST",
@@ -122,10 +61,10 @@ func (c *Client) DescribeBackupsRequest(input *DescribeBackupsInput) DescribeBac
 	}
 
 	if input == nil {
-		input = &DescribeBackupsInput{}
+		input = &types.DescribeBackupsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeBackupsOutput{})
+	req := c.newRequest(op, input, &types.DescribeBackupsOutput{})
 	return DescribeBackupsRequest{Request: req, Input: input, Copy: c.DescribeBackupsRequest}
 }
 
@@ -133,8 +72,8 @@ func (c *Client) DescribeBackupsRequest(input *DescribeBackupsInput) DescribeBac
 // DescribeBackups API operation.
 type DescribeBackupsRequest struct {
 	*aws.Request
-	Input *DescribeBackupsInput
-	Copy  func(*DescribeBackupsInput) DescribeBackupsRequest
+	Input *types.DescribeBackupsInput
+	Copy  func(*types.DescribeBackupsInput) DescribeBackupsRequest
 }
 
 // Send marshals and sends the DescribeBackups API request.
@@ -146,7 +85,7 @@ func (r DescribeBackupsRequest) Send(ctx context.Context) (*DescribeBackupsRespo
 	}
 
 	resp := &DescribeBackupsResponse{
-		DescribeBackupsOutput: r.Request.Data.(*DescribeBackupsOutput),
+		DescribeBackupsOutput: r.Request.Data.(*types.DescribeBackupsOutput),
 		response:              &aws.Response{Request: r.Request},
 	}
 
@@ -176,7 +115,7 @@ func NewDescribeBackupsPaginator(req DescribeBackupsRequest) DescribeBackupsPagi
 	return DescribeBackupsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *DescribeBackupsInput
+				var inCpy *types.DescribeBackupsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -196,14 +135,14 @@ type DescribeBackupsPaginator struct {
 	aws.Pager
 }
 
-func (p *DescribeBackupsPaginator) CurrentPage() *DescribeBackupsOutput {
-	return p.Pager.CurrentPage().(*DescribeBackupsOutput)
+func (p *DescribeBackupsPaginator) CurrentPage() *types.DescribeBackupsOutput {
+	return p.Pager.CurrentPage().(*types.DescribeBackupsOutput)
 }
 
 // DescribeBackupsResponse is the response type for the
 // DescribeBackups API operation.
 type DescribeBackupsResponse struct {
-	*DescribeBackupsOutput
+	*types.DescribeBackupsOutput
 
 	response *aws.Response
 }

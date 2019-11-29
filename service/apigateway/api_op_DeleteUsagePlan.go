@@ -6,66 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/restjson"
+	"github.com/aws/aws-sdk-go-v2/service/apigateway/types"
 )
-
-// The DELETE request to delete a usage plan of a given plan Id.
-type DeleteUsagePlanInput struct {
-	_ struct{} `type:"structure"`
-
-	// [Required] The Id of the to-be-deleted usage plan.
-	//
-	// UsagePlanId is a required field
-	UsagePlanId *string `location:"uri" locationName:"usageplanId" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteUsagePlanInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteUsagePlanInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteUsagePlanInput"}
-
-	if s.UsagePlanId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("UsagePlanId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteUsagePlanInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.UsagePlanId != nil {
-		v := *s.UsagePlanId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "usageplanId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type DeleteUsagePlanOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteUsagePlanOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteUsagePlanOutput) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
 
 const opDeleteUsagePlan = "DeleteUsagePlan"
 
@@ -80,7 +24,7 @@ const opDeleteUsagePlan = "DeleteUsagePlan"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) DeleteUsagePlanRequest(input *DeleteUsagePlanInput) DeleteUsagePlanRequest {
+func (c *Client) DeleteUsagePlanRequest(input *types.DeleteUsagePlanInput) DeleteUsagePlanRequest {
 	op := &aws.Operation{
 		Name:       opDeleteUsagePlan,
 		HTTPMethod: "DELETE",
@@ -88,10 +32,10 @@ func (c *Client) DeleteUsagePlanRequest(input *DeleteUsagePlanInput) DeleteUsage
 	}
 
 	if input == nil {
-		input = &DeleteUsagePlanInput{}
+		input = &types.DeleteUsagePlanInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteUsagePlanOutput{})
+	req := c.newRequest(op, input, &types.DeleteUsagePlanOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return DeleteUsagePlanRequest{Request: req, Input: input, Copy: c.DeleteUsagePlanRequest}
@@ -101,8 +45,8 @@ func (c *Client) DeleteUsagePlanRequest(input *DeleteUsagePlanInput) DeleteUsage
 // DeleteUsagePlan API operation.
 type DeleteUsagePlanRequest struct {
 	*aws.Request
-	Input *DeleteUsagePlanInput
-	Copy  func(*DeleteUsagePlanInput) DeleteUsagePlanRequest
+	Input *types.DeleteUsagePlanInput
+	Copy  func(*types.DeleteUsagePlanInput) DeleteUsagePlanRequest
 }
 
 // Send marshals and sends the DeleteUsagePlan API request.
@@ -114,7 +58,7 @@ func (r DeleteUsagePlanRequest) Send(ctx context.Context) (*DeleteUsagePlanRespo
 	}
 
 	resp := &DeleteUsagePlanResponse{
-		DeleteUsagePlanOutput: r.Request.Data.(*DeleteUsagePlanOutput),
+		DeleteUsagePlanOutput: r.Request.Data.(*types.DeleteUsagePlanOutput),
 		response:              &aws.Response{Request: r.Request},
 	}
 
@@ -124,7 +68,7 @@ func (r DeleteUsagePlanRequest) Send(ctx context.Context) (*DeleteUsagePlanRespo
 // DeleteUsagePlanResponse is the response type for the
 // DeleteUsagePlan API operation.
 type DeleteUsagePlanResponse struct {
-	*DeleteUsagePlanOutput
+	*types.DeleteUsagePlanOutput
 
 	response *aws.Response
 }

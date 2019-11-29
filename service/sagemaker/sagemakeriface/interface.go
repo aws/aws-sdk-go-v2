@@ -13,6 +13,7 @@ import (
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
 )
 
 // ClientAPI provides an interface to enable mocking the
@@ -46,7 +47,7 @@ import (
 //    type mockClientClient struct {
 //        sagemakeriface.ClientPI
 //    }
-//    func (m *mockClientClient) AddTags(input *sagemaker.AddTagsInput) (*sagemaker.AddTagsOutput, error) {
+//    func (m *mockClientClient) AddTags(input *types.AddTagsInput) (*types.AddTagsOutput, error) {
 //        // mock response/functionality
 //    }
 //
@@ -64,169 +65,169 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type ClientAPI interface {
-	AddTagsRequest(*sagemaker.AddTagsInput) sagemaker.AddTagsRequest
+	AddTagsRequest(*types.AddTagsInput) sagemaker.AddTagsRequest
 
-	CreateAlgorithmRequest(*sagemaker.CreateAlgorithmInput) sagemaker.CreateAlgorithmRequest
+	CreateAlgorithmRequest(*types.CreateAlgorithmInput) sagemaker.CreateAlgorithmRequest
 
-	CreateCodeRepositoryRequest(*sagemaker.CreateCodeRepositoryInput) sagemaker.CreateCodeRepositoryRequest
+	CreateCodeRepositoryRequest(*types.CreateCodeRepositoryInput) sagemaker.CreateCodeRepositoryRequest
 
-	CreateCompilationJobRequest(*sagemaker.CreateCompilationJobInput) sagemaker.CreateCompilationJobRequest
+	CreateCompilationJobRequest(*types.CreateCompilationJobInput) sagemaker.CreateCompilationJobRequest
 
-	CreateEndpointRequest(*sagemaker.CreateEndpointInput) sagemaker.CreateEndpointRequest
+	CreateEndpointRequest(*types.CreateEndpointInput) sagemaker.CreateEndpointRequest
 
-	CreateEndpointConfigRequest(*sagemaker.CreateEndpointConfigInput) sagemaker.CreateEndpointConfigRequest
+	CreateEndpointConfigRequest(*types.CreateEndpointConfigInput) sagemaker.CreateEndpointConfigRequest
 
-	CreateHyperParameterTuningJobRequest(*sagemaker.CreateHyperParameterTuningJobInput) sagemaker.CreateHyperParameterTuningJobRequest
+	CreateHyperParameterTuningJobRequest(*types.CreateHyperParameterTuningJobInput) sagemaker.CreateHyperParameterTuningJobRequest
 
-	CreateLabelingJobRequest(*sagemaker.CreateLabelingJobInput) sagemaker.CreateLabelingJobRequest
+	CreateLabelingJobRequest(*types.CreateLabelingJobInput) sagemaker.CreateLabelingJobRequest
 
-	CreateModelRequest(*sagemaker.CreateModelInput) sagemaker.CreateModelRequest
+	CreateModelRequest(*types.CreateModelInput) sagemaker.CreateModelRequest
 
-	CreateModelPackageRequest(*sagemaker.CreateModelPackageInput) sagemaker.CreateModelPackageRequest
+	CreateModelPackageRequest(*types.CreateModelPackageInput) sagemaker.CreateModelPackageRequest
 
-	CreateNotebookInstanceRequest(*sagemaker.CreateNotebookInstanceInput) sagemaker.CreateNotebookInstanceRequest
+	CreateNotebookInstanceRequest(*types.CreateNotebookInstanceInput) sagemaker.CreateNotebookInstanceRequest
 
-	CreateNotebookInstanceLifecycleConfigRequest(*sagemaker.CreateNotebookInstanceLifecycleConfigInput) sagemaker.CreateNotebookInstanceLifecycleConfigRequest
+	CreateNotebookInstanceLifecycleConfigRequest(*types.CreateNotebookInstanceLifecycleConfigInput) sagemaker.CreateNotebookInstanceLifecycleConfigRequest
 
-	CreatePresignedNotebookInstanceUrlRequest(*sagemaker.CreatePresignedNotebookInstanceUrlInput) sagemaker.CreatePresignedNotebookInstanceUrlRequest
+	CreatePresignedNotebookInstanceUrlRequest(*types.CreatePresignedNotebookInstanceUrlInput) sagemaker.CreatePresignedNotebookInstanceUrlRequest
 
-	CreateTrainingJobRequest(*sagemaker.CreateTrainingJobInput) sagemaker.CreateTrainingJobRequest
+	CreateTrainingJobRequest(*types.CreateTrainingJobInput) sagemaker.CreateTrainingJobRequest
 
-	CreateTransformJobRequest(*sagemaker.CreateTransformJobInput) sagemaker.CreateTransformJobRequest
+	CreateTransformJobRequest(*types.CreateTransformJobInput) sagemaker.CreateTransformJobRequest
 
-	CreateWorkteamRequest(*sagemaker.CreateWorkteamInput) sagemaker.CreateWorkteamRequest
+	CreateWorkteamRequest(*types.CreateWorkteamInput) sagemaker.CreateWorkteamRequest
 
-	DeleteAlgorithmRequest(*sagemaker.DeleteAlgorithmInput) sagemaker.DeleteAlgorithmRequest
+	DeleteAlgorithmRequest(*types.DeleteAlgorithmInput) sagemaker.DeleteAlgorithmRequest
 
-	DeleteCodeRepositoryRequest(*sagemaker.DeleteCodeRepositoryInput) sagemaker.DeleteCodeRepositoryRequest
+	DeleteCodeRepositoryRequest(*types.DeleteCodeRepositoryInput) sagemaker.DeleteCodeRepositoryRequest
 
-	DeleteEndpointRequest(*sagemaker.DeleteEndpointInput) sagemaker.DeleteEndpointRequest
+	DeleteEndpointRequest(*types.DeleteEndpointInput) sagemaker.DeleteEndpointRequest
 
-	DeleteEndpointConfigRequest(*sagemaker.DeleteEndpointConfigInput) sagemaker.DeleteEndpointConfigRequest
+	DeleteEndpointConfigRequest(*types.DeleteEndpointConfigInput) sagemaker.DeleteEndpointConfigRequest
 
-	DeleteModelRequest(*sagemaker.DeleteModelInput) sagemaker.DeleteModelRequest
+	DeleteModelRequest(*types.DeleteModelInput) sagemaker.DeleteModelRequest
 
-	DeleteModelPackageRequest(*sagemaker.DeleteModelPackageInput) sagemaker.DeleteModelPackageRequest
+	DeleteModelPackageRequest(*types.DeleteModelPackageInput) sagemaker.DeleteModelPackageRequest
 
-	DeleteNotebookInstanceRequest(*sagemaker.DeleteNotebookInstanceInput) sagemaker.DeleteNotebookInstanceRequest
+	DeleteNotebookInstanceRequest(*types.DeleteNotebookInstanceInput) sagemaker.DeleteNotebookInstanceRequest
 
-	DeleteNotebookInstanceLifecycleConfigRequest(*sagemaker.DeleteNotebookInstanceLifecycleConfigInput) sagemaker.DeleteNotebookInstanceLifecycleConfigRequest
+	DeleteNotebookInstanceLifecycleConfigRequest(*types.DeleteNotebookInstanceLifecycleConfigInput) sagemaker.DeleteNotebookInstanceLifecycleConfigRequest
 
-	DeleteTagsRequest(*sagemaker.DeleteTagsInput) sagemaker.DeleteTagsRequest
+	DeleteTagsRequest(*types.DeleteTagsInput) sagemaker.DeleteTagsRequest
 
-	DeleteWorkteamRequest(*sagemaker.DeleteWorkteamInput) sagemaker.DeleteWorkteamRequest
+	DeleteWorkteamRequest(*types.DeleteWorkteamInput) sagemaker.DeleteWorkteamRequest
 
-	DescribeAlgorithmRequest(*sagemaker.DescribeAlgorithmInput) sagemaker.DescribeAlgorithmRequest
+	DescribeAlgorithmRequest(*types.DescribeAlgorithmInput) sagemaker.DescribeAlgorithmRequest
 
-	DescribeCodeRepositoryRequest(*sagemaker.DescribeCodeRepositoryInput) sagemaker.DescribeCodeRepositoryRequest
+	DescribeCodeRepositoryRequest(*types.DescribeCodeRepositoryInput) sagemaker.DescribeCodeRepositoryRequest
 
-	DescribeCompilationJobRequest(*sagemaker.DescribeCompilationJobInput) sagemaker.DescribeCompilationJobRequest
+	DescribeCompilationJobRequest(*types.DescribeCompilationJobInput) sagemaker.DescribeCompilationJobRequest
 
-	DescribeEndpointRequest(*sagemaker.DescribeEndpointInput) sagemaker.DescribeEndpointRequest
+	DescribeEndpointRequest(*types.DescribeEndpointInput) sagemaker.DescribeEndpointRequest
 
-	DescribeEndpointConfigRequest(*sagemaker.DescribeEndpointConfigInput) sagemaker.DescribeEndpointConfigRequest
+	DescribeEndpointConfigRequest(*types.DescribeEndpointConfigInput) sagemaker.DescribeEndpointConfigRequest
 
-	DescribeHyperParameterTuningJobRequest(*sagemaker.DescribeHyperParameterTuningJobInput) sagemaker.DescribeHyperParameterTuningJobRequest
+	DescribeHyperParameterTuningJobRequest(*types.DescribeHyperParameterTuningJobInput) sagemaker.DescribeHyperParameterTuningJobRequest
 
-	DescribeLabelingJobRequest(*sagemaker.DescribeLabelingJobInput) sagemaker.DescribeLabelingJobRequest
+	DescribeLabelingJobRequest(*types.DescribeLabelingJobInput) sagemaker.DescribeLabelingJobRequest
 
-	DescribeModelRequest(*sagemaker.DescribeModelInput) sagemaker.DescribeModelRequest
+	DescribeModelRequest(*types.DescribeModelInput) sagemaker.DescribeModelRequest
 
-	DescribeModelPackageRequest(*sagemaker.DescribeModelPackageInput) sagemaker.DescribeModelPackageRequest
+	DescribeModelPackageRequest(*types.DescribeModelPackageInput) sagemaker.DescribeModelPackageRequest
 
-	DescribeNotebookInstanceRequest(*sagemaker.DescribeNotebookInstanceInput) sagemaker.DescribeNotebookInstanceRequest
+	DescribeNotebookInstanceRequest(*types.DescribeNotebookInstanceInput) sagemaker.DescribeNotebookInstanceRequest
 
-	DescribeNotebookInstanceLifecycleConfigRequest(*sagemaker.DescribeNotebookInstanceLifecycleConfigInput) sagemaker.DescribeNotebookInstanceLifecycleConfigRequest
+	DescribeNotebookInstanceLifecycleConfigRequest(*types.DescribeNotebookInstanceLifecycleConfigInput) sagemaker.DescribeNotebookInstanceLifecycleConfigRequest
 
-	DescribeSubscribedWorkteamRequest(*sagemaker.DescribeSubscribedWorkteamInput) sagemaker.DescribeSubscribedWorkteamRequest
+	DescribeSubscribedWorkteamRequest(*types.DescribeSubscribedWorkteamInput) sagemaker.DescribeSubscribedWorkteamRequest
 
-	DescribeTrainingJobRequest(*sagemaker.DescribeTrainingJobInput) sagemaker.DescribeTrainingJobRequest
+	DescribeTrainingJobRequest(*types.DescribeTrainingJobInput) sagemaker.DescribeTrainingJobRequest
 
-	DescribeTransformJobRequest(*sagemaker.DescribeTransformJobInput) sagemaker.DescribeTransformJobRequest
+	DescribeTransformJobRequest(*types.DescribeTransformJobInput) sagemaker.DescribeTransformJobRequest
 
-	DescribeWorkteamRequest(*sagemaker.DescribeWorkteamInput) sagemaker.DescribeWorkteamRequest
+	DescribeWorkteamRequest(*types.DescribeWorkteamInput) sagemaker.DescribeWorkteamRequest
 
-	GetSearchSuggestionsRequest(*sagemaker.GetSearchSuggestionsInput) sagemaker.GetSearchSuggestionsRequest
+	GetSearchSuggestionsRequest(*types.GetSearchSuggestionsInput) sagemaker.GetSearchSuggestionsRequest
 
-	ListAlgorithmsRequest(*sagemaker.ListAlgorithmsInput) sagemaker.ListAlgorithmsRequest
+	ListAlgorithmsRequest(*types.ListAlgorithmsInput) sagemaker.ListAlgorithmsRequest
 
-	ListCodeRepositoriesRequest(*sagemaker.ListCodeRepositoriesInput) sagemaker.ListCodeRepositoriesRequest
+	ListCodeRepositoriesRequest(*types.ListCodeRepositoriesInput) sagemaker.ListCodeRepositoriesRequest
 
-	ListCompilationJobsRequest(*sagemaker.ListCompilationJobsInput) sagemaker.ListCompilationJobsRequest
+	ListCompilationJobsRequest(*types.ListCompilationJobsInput) sagemaker.ListCompilationJobsRequest
 
-	ListEndpointConfigsRequest(*sagemaker.ListEndpointConfigsInput) sagemaker.ListEndpointConfigsRequest
+	ListEndpointConfigsRequest(*types.ListEndpointConfigsInput) sagemaker.ListEndpointConfigsRequest
 
-	ListEndpointsRequest(*sagemaker.ListEndpointsInput) sagemaker.ListEndpointsRequest
+	ListEndpointsRequest(*types.ListEndpointsInput) sagemaker.ListEndpointsRequest
 
-	ListHyperParameterTuningJobsRequest(*sagemaker.ListHyperParameterTuningJobsInput) sagemaker.ListHyperParameterTuningJobsRequest
+	ListHyperParameterTuningJobsRequest(*types.ListHyperParameterTuningJobsInput) sagemaker.ListHyperParameterTuningJobsRequest
 
-	ListLabelingJobsRequest(*sagemaker.ListLabelingJobsInput) sagemaker.ListLabelingJobsRequest
+	ListLabelingJobsRequest(*types.ListLabelingJobsInput) sagemaker.ListLabelingJobsRequest
 
-	ListLabelingJobsForWorkteamRequest(*sagemaker.ListLabelingJobsForWorkteamInput) sagemaker.ListLabelingJobsForWorkteamRequest
+	ListLabelingJobsForWorkteamRequest(*types.ListLabelingJobsForWorkteamInput) sagemaker.ListLabelingJobsForWorkteamRequest
 
-	ListModelPackagesRequest(*sagemaker.ListModelPackagesInput) sagemaker.ListModelPackagesRequest
+	ListModelPackagesRequest(*types.ListModelPackagesInput) sagemaker.ListModelPackagesRequest
 
-	ListModelsRequest(*sagemaker.ListModelsInput) sagemaker.ListModelsRequest
+	ListModelsRequest(*types.ListModelsInput) sagemaker.ListModelsRequest
 
-	ListNotebookInstanceLifecycleConfigsRequest(*sagemaker.ListNotebookInstanceLifecycleConfigsInput) sagemaker.ListNotebookInstanceLifecycleConfigsRequest
+	ListNotebookInstanceLifecycleConfigsRequest(*types.ListNotebookInstanceLifecycleConfigsInput) sagemaker.ListNotebookInstanceLifecycleConfigsRequest
 
-	ListNotebookInstancesRequest(*sagemaker.ListNotebookInstancesInput) sagemaker.ListNotebookInstancesRequest
+	ListNotebookInstancesRequest(*types.ListNotebookInstancesInput) sagemaker.ListNotebookInstancesRequest
 
-	ListSubscribedWorkteamsRequest(*sagemaker.ListSubscribedWorkteamsInput) sagemaker.ListSubscribedWorkteamsRequest
+	ListSubscribedWorkteamsRequest(*types.ListSubscribedWorkteamsInput) sagemaker.ListSubscribedWorkteamsRequest
 
-	ListTagsRequest(*sagemaker.ListTagsInput) sagemaker.ListTagsRequest
+	ListTagsRequest(*types.ListTagsInput) sagemaker.ListTagsRequest
 
-	ListTrainingJobsRequest(*sagemaker.ListTrainingJobsInput) sagemaker.ListTrainingJobsRequest
+	ListTrainingJobsRequest(*types.ListTrainingJobsInput) sagemaker.ListTrainingJobsRequest
 
-	ListTrainingJobsForHyperParameterTuningJobRequest(*sagemaker.ListTrainingJobsForHyperParameterTuningJobInput) sagemaker.ListTrainingJobsForHyperParameterTuningJobRequest
+	ListTrainingJobsForHyperParameterTuningJobRequest(*types.ListTrainingJobsForHyperParameterTuningJobInput) sagemaker.ListTrainingJobsForHyperParameterTuningJobRequest
 
-	ListTransformJobsRequest(*sagemaker.ListTransformJobsInput) sagemaker.ListTransformJobsRequest
+	ListTransformJobsRequest(*types.ListTransformJobsInput) sagemaker.ListTransformJobsRequest
 
-	ListWorkteamsRequest(*sagemaker.ListWorkteamsInput) sagemaker.ListWorkteamsRequest
+	ListWorkteamsRequest(*types.ListWorkteamsInput) sagemaker.ListWorkteamsRequest
 
-	RenderUiTemplateRequest(*sagemaker.RenderUiTemplateInput) sagemaker.RenderUiTemplateRequest
+	RenderUiTemplateRequest(*types.RenderUiTemplateInput) sagemaker.RenderUiTemplateRequest
 
-	SearchRequest(*sagemaker.SearchInput) sagemaker.SearchRequest
+	SearchRequest(*types.SearchInput) sagemaker.SearchRequest
 
-	StartNotebookInstanceRequest(*sagemaker.StartNotebookInstanceInput) sagemaker.StartNotebookInstanceRequest
+	StartNotebookInstanceRequest(*types.StartNotebookInstanceInput) sagemaker.StartNotebookInstanceRequest
 
-	StopCompilationJobRequest(*sagemaker.StopCompilationJobInput) sagemaker.StopCompilationJobRequest
+	StopCompilationJobRequest(*types.StopCompilationJobInput) sagemaker.StopCompilationJobRequest
 
-	StopHyperParameterTuningJobRequest(*sagemaker.StopHyperParameterTuningJobInput) sagemaker.StopHyperParameterTuningJobRequest
+	StopHyperParameterTuningJobRequest(*types.StopHyperParameterTuningJobInput) sagemaker.StopHyperParameterTuningJobRequest
 
-	StopLabelingJobRequest(*sagemaker.StopLabelingJobInput) sagemaker.StopLabelingJobRequest
+	StopLabelingJobRequest(*types.StopLabelingJobInput) sagemaker.StopLabelingJobRequest
 
-	StopNotebookInstanceRequest(*sagemaker.StopNotebookInstanceInput) sagemaker.StopNotebookInstanceRequest
+	StopNotebookInstanceRequest(*types.StopNotebookInstanceInput) sagemaker.StopNotebookInstanceRequest
 
-	StopTrainingJobRequest(*sagemaker.StopTrainingJobInput) sagemaker.StopTrainingJobRequest
+	StopTrainingJobRequest(*types.StopTrainingJobInput) sagemaker.StopTrainingJobRequest
 
-	StopTransformJobRequest(*sagemaker.StopTransformJobInput) sagemaker.StopTransformJobRequest
+	StopTransformJobRequest(*types.StopTransformJobInput) sagemaker.StopTransformJobRequest
 
-	UpdateCodeRepositoryRequest(*sagemaker.UpdateCodeRepositoryInput) sagemaker.UpdateCodeRepositoryRequest
+	UpdateCodeRepositoryRequest(*types.UpdateCodeRepositoryInput) sagemaker.UpdateCodeRepositoryRequest
 
-	UpdateEndpointRequest(*sagemaker.UpdateEndpointInput) sagemaker.UpdateEndpointRequest
+	UpdateEndpointRequest(*types.UpdateEndpointInput) sagemaker.UpdateEndpointRequest
 
-	UpdateEndpointWeightsAndCapacitiesRequest(*sagemaker.UpdateEndpointWeightsAndCapacitiesInput) sagemaker.UpdateEndpointWeightsAndCapacitiesRequest
+	UpdateEndpointWeightsAndCapacitiesRequest(*types.UpdateEndpointWeightsAndCapacitiesInput) sagemaker.UpdateEndpointWeightsAndCapacitiesRequest
 
-	UpdateNotebookInstanceRequest(*sagemaker.UpdateNotebookInstanceInput) sagemaker.UpdateNotebookInstanceRequest
+	UpdateNotebookInstanceRequest(*types.UpdateNotebookInstanceInput) sagemaker.UpdateNotebookInstanceRequest
 
-	UpdateNotebookInstanceLifecycleConfigRequest(*sagemaker.UpdateNotebookInstanceLifecycleConfigInput) sagemaker.UpdateNotebookInstanceLifecycleConfigRequest
+	UpdateNotebookInstanceLifecycleConfigRequest(*types.UpdateNotebookInstanceLifecycleConfigInput) sagemaker.UpdateNotebookInstanceLifecycleConfigRequest
 
-	UpdateWorkteamRequest(*sagemaker.UpdateWorkteamInput) sagemaker.UpdateWorkteamRequest
+	UpdateWorkteamRequest(*types.UpdateWorkteamInput) sagemaker.UpdateWorkteamRequest
 
-	WaitUntilEndpointDeleted(context.Context, *sagemaker.DescribeEndpointInput, ...aws.WaiterOption) error
+	WaitUntilEndpointDeleted(context.Context, *types.DescribeEndpointInput, ...aws.WaiterOption) error
 
-	WaitUntilEndpointInService(context.Context, *sagemaker.DescribeEndpointInput, ...aws.WaiterOption) error
+	WaitUntilEndpointInService(context.Context, *types.DescribeEndpointInput, ...aws.WaiterOption) error
 
-	WaitUntilNotebookInstanceDeleted(context.Context, *sagemaker.DescribeNotebookInstanceInput, ...aws.WaiterOption) error
+	WaitUntilNotebookInstanceDeleted(context.Context, *types.DescribeNotebookInstanceInput, ...aws.WaiterOption) error
 
-	WaitUntilNotebookInstanceInService(context.Context, *sagemaker.DescribeNotebookInstanceInput, ...aws.WaiterOption) error
+	WaitUntilNotebookInstanceInService(context.Context, *types.DescribeNotebookInstanceInput, ...aws.WaiterOption) error
 
-	WaitUntilNotebookInstanceStopped(context.Context, *sagemaker.DescribeNotebookInstanceInput, ...aws.WaiterOption) error
+	WaitUntilNotebookInstanceStopped(context.Context, *types.DescribeNotebookInstanceInput, ...aws.WaiterOption) error
 
-	WaitUntilTrainingJobCompletedOrStopped(context.Context, *sagemaker.DescribeTrainingJobInput, ...aws.WaiterOption) error
+	WaitUntilTrainingJobCompletedOrStopped(context.Context, *types.DescribeTrainingJobInput, ...aws.WaiterOption) error
 
-	WaitUntilTransformJobCompletedOrStopped(context.Context, *sagemaker.DescribeTransformJobInput, ...aws.WaiterOption) error
+	WaitUntilTransformJobCompletedOrStopped(context.Context, *types.DescribeTransformJobInput, ...aws.WaiterOption) error
 }
 
 var _ ClientAPI = (*sagemaker.Client)(nil)

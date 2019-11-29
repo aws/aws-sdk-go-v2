@@ -6,48 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/dax/types"
 )
-
-type DescribeClustersInput struct {
-	_ struct{} `type:"structure"`
-
-	// The names of the DAX clusters being described.
-	ClusterNames []string `type:"list"`
-
-	// The maximum number of results to include in the response. If more results
-	// exist than the specified MaxResults value, a token is included in the response
-	// so that the remaining results can be retrieved.
-	//
-	// The value for MaxResults must be between 20 and 100.
-	MaxResults *int64 `type:"integer"`
-
-	// An optional token returned from a prior request. Use this token for pagination
-	// of results from this action. If this parameter is specified, the response
-	// includes only results beyond the token, up to the value specified by MaxResults.
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeClustersInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type DescribeClustersOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The descriptions of your DAX clusters, in response to a DescribeClusters
-	// request.
-	Clusters []Cluster `type:"list"`
-
-	// Provides an identifier to allow retrieval of paginated results.
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeClustersOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeClusters = "DescribeClusters"
 
@@ -80,7 +40,7 @@ const opDescribeClusters = "DescribeClusters"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dax-2017-04-19/DescribeClusters
-func (c *Client) DescribeClustersRequest(input *DescribeClustersInput) DescribeClustersRequest {
+func (c *Client) DescribeClustersRequest(input *types.DescribeClustersInput) DescribeClustersRequest {
 	op := &aws.Operation{
 		Name:       opDescribeClusters,
 		HTTPMethod: "POST",
@@ -88,10 +48,10 @@ func (c *Client) DescribeClustersRequest(input *DescribeClustersInput) DescribeC
 	}
 
 	if input == nil {
-		input = &DescribeClustersInput{}
+		input = &types.DescribeClustersInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeClustersOutput{})
+	req := c.newRequest(op, input, &types.DescribeClustersOutput{})
 	return DescribeClustersRequest{Request: req, Input: input, Copy: c.DescribeClustersRequest}
 }
 
@@ -99,8 +59,8 @@ func (c *Client) DescribeClustersRequest(input *DescribeClustersInput) DescribeC
 // DescribeClusters API operation.
 type DescribeClustersRequest struct {
 	*aws.Request
-	Input *DescribeClustersInput
-	Copy  func(*DescribeClustersInput) DescribeClustersRequest
+	Input *types.DescribeClustersInput
+	Copy  func(*types.DescribeClustersInput) DescribeClustersRequest
 }
 
 // Send marshals and sends the DescribeClusters API request.
@@ -112,7 +72,7 @@ func (r DescribeClustersRequest) Send(ctx context.Context) (*DescribeClustersRes
 	}
 
 	resp := &DescribeClustersResponse{
-		DescribeClustersOutput: r.Request.Data.(*DescribeClustersOutput),
+		DescribeClustersOutput: r.Request.Data.(*types.DescribeClustersOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -122,7 +82,7 @@ func (r DescribeClustersRequest) Send(ctx context.Context) (*DescribeClustersRes
 // DescribeClustersResponse is the response type for the
 // DescribeClusters API operation.
 type DescribeClustersResponse struct {
-	*DescribeClustersOutput
+	*types.DescribeClustersOutput
 
 	response *aws.Response
 }

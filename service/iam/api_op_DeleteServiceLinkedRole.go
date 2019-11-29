@@ -6,54 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/iam/types"
 )
-
-type DeleteServiceLinkedRoleInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the service-linked role to be deleted.
-	//
-	// RoleName is a required field
-	RoleName *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteServiceLinkedRoleInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteServiceLinkedRoleInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteServiceLinkedRoleInput"}
-
-	if s.RoleName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("RoleName"))
-	}
-	if s.RoleName != nil && len(*s.RoleName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("RoleName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteServiceLinkedRoleOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The deletion task identifier that you can use to check the status of the
-	// deletion. This identifier is returned in the format task/aws-service-role/<service-principal-name>/<role-name>/<task-uuid>.
-	//
-	// DeletionTaskId is a required field
-	DeletionTaskId *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteServiceLinkedRoleOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteServiceLinkedRole = "DeleteServiceLinkedRole"
 
@@ -89,7 +43,7 @@ const opDeleteServiceLinkedRole = "DeleteServiceLinkedRole"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeleteServiceLinkedRole
-func (c *Client) DeleteServiceLinkedRoleRequest(input *DeleteServiceLinkedRoleInput) DeleteServiceLinkedRoleRequest {
+func (c *Client) DeleteServiceLinkedRoleRequest(input *types.DeleteServiceLinkedRoleInput) DeleteServiceLinkedRoleRequest {
 	op := &aws.Operation{
 		Name:       opDeleteServiceLinkedRole,
 		HTTPMethod: "POST",
@@ -97,10 +51,10 @@ func (c *Client) DeleteServiceLinkedRoleRequest(input *DeleteServiceLinkedRoleIn
 	}
 
 	if input == nil {
-		input = &DeleteServiceLinkedRoleInput{}
+		input = &types.DeleteServiceLinkedRoleInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteServiceLinkedRoleOutput{})
+	req := c.newRequest(op, input, &types.DeleteServiceLinkedRoleOutput{})
 	return DeleteServiceLinkedRoleRequest{Request: req, Input: input, Copy: c.DeleteServiceLinkedRoleRequest}
 }
 
@@ -108,8 +62,8 @@ func (c *Client) DeleteServiceLinkedRoleRequest(input *DeleteServiceLinkedRoleIn
 // DeleteServiceLinkedRole API operation.
 type DeleteServiceLinkedRoleRequest struct {
 	*aws.Request
-	Input *DeleteServiceLinkedRoleInput
-	Copy  func(*DeleteServiceLinkedRoleInput) DeleteServiceLinkedRoleRequest
+	Input *types.DeleteServiceLinkedRoleInput
+	Copy  func(*types.DeleteServiceLinkedRoleInput) DeleteServiceLinkedRoleRequest
 }
 
 // Send marshals and sends the DeleteServiceLinkedRole API request.
@@ -121,7 +75,7 @@ func (r DeleteServiceLinkedRoleRequest) Send(ctx context.Context) (*DeleteServic
 	}
 
 	resp := &DeleteServiceLinkedRoleResponse{
-		DeleteServiceLinkedRoleOutput: r.Request.Data.(*DeleteServiceLinkedRoleOutput),
+		DeleteServiceLinkedRoleOutput: r.Request.Data.(*types.DeleteServiceLinkedRoleOutput),
 		response:                      &aws.Response{Request: r.Request},
 	}
 
@@ -131,7 +85,7 @@ func (r DeleteServiceLinkedRoleRequest) Send(ctx context.Context) (*DeleteServic
 // DeleteServiceLinkedRoleResponse is the response type for the
 // DeleteServiceLinkedRole API operation.
 type DeleteServiceLinkedRoleResponse struct {
-	*DeleteServiceLinkedRoleOutput
+	*types.DeleteServiceLinkedRoleOutput
 
 	response *aws.Response
 }

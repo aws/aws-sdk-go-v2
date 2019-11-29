@@ -6,90 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/pinpoint/types"
 )
-
-type UpdateApnsChannelInput struct {
-	_ struct{} `type:"structure" payload:"APNSChannelRequest"`
-
-	// Specifies the status and settings of the APNs (Apple Push Notification service)
-	// channel for an application.
-	//
-	// APNSChannelRequest is a required field
-	APNSChannelRequest *APNSChannelRequest `type:"structure" required:"true"`
-
-	// ApplicationId is a required field
-	ApplicationId *string `location:"uri" locationName:"application-id" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s UpdateApnsChannelInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateApnsChannelInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateApnsChannelInput"}
-
-	if s.APNSChannelRequest == nil {
-		invalidParams.Add(aws.NewErrParamRequired("APNSChannelRequest"))
-	}
-
-	if s.ApplicationId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ApplicationId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s UpdateApnsChannelInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.ApplicationId != nil {
-		v := *s.ApplicationId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "application-id", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.APNSChannelRequest != nil {
-		v := s.APNSChannelRequest
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.PayloadTarget, "APNSChannelRequest", v, metadata)
-	}
-	return nil
-}
-
-type UpdateApnsChannelOutput struct {
-	_ struct{} `type:"structure" payload:"APNSChannelResponse"`
-
-	// Provides information about the status and settings of the APNs (Apple Push
-	// Notification service) channel for an application.
-	//
-	// APNSChannelResponse is a required field
-	APNSChannelResponse *APNSChannelResponse `type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s UpdateApnsChannelOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s UpdateApnsChannelOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.APNSChannelResponse != nil {
-		v := s.APNSChannelResponse
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.PayloadTarget, "APNSChannelResponse", v, metadata)
-	}
-	return nil
-}
 
 const opUpdateApnsChannel = "UpdateApnsChannel"
 
@@ -107,7 +25,7 @@ const opUpdateApnsChannel = "UpdateApnsChannel"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/UpdateApnsChannel
-func (c *Client) UpdateApnsChannelRequest(input *UpdateApnsChannelInput) UpdateApnsChannelRequest {
+func (c *Client) UpdateApnsChannelRequest(input *types.UpdateApnsChannelInput) UpdateApnsChannelRequest {
 	op := &aws.Operation{
 		Name:       opUpdateApnsChannel,
 		HTTPMethod: "PUT",
@@ -115,10 +33,10 @@ func (c *Client) UpdateApnsChannelRequest(input *UpdateApnsChannelInput) UpdateA
 	}
 
 	if input == nil {
-		input = &UpdateApnsChannelInput{}
+		input = &types.UpdateApnsChannelInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateApnsChannelOutput{})
+	req := c.newRequest(op, input, &types.UpdateApnsChannelOutput{})
 	return UpdateApnsChannelRequest{Request: req, Input: input, Copy: c.UpdateApnsChannelRequest}
 }
 
@@ -126,8 +44,8 @@ func (c *Client) UpdateApnsChannelRequest(input *UpdateApnsChannelInput) UpdateA
 // UpdateApnsChannel API operation.
 type UpdateApnsChannelRequest struct {
 	*aws.Request
-	Input *UpdateApnsChannelInput
-	Copy  func(*UpdateApnsChannelInput) UpdateApnsChannelRequest
+	Input *types.UpdateApnsChannelInput
+	Copy  func(*types.UpdateApnsChannelInput) UpdateApnsChannelRequest
 }
 
 // Send marshals and sends the UpdateApnsChannel API request.
@@ -139,7 +57,7 @@ func (r UpdateApnsChannelRequest) Send(ctx context.Context) (*UpdateApnsChannelR
 	}
 
 	resp := &UpdateApnsChannelResponse{
-		UpdateApnsChannelOutput: r.Request.Data.(*UpdateApnsChannelOutput),
+		UpdateApnsChannelOutput: r.Request.Data.(*types.UpdateApnsChannelOutput),
 		response:                &aws.Response{Request: r.Request},
 	}
 
@@ -149,7 +67,7 @@ func (r UpdateApnsChannelRequest) Send(ctx context.Context) (*UpdateApnsChannelR
 // UpdateApnsChannelResponse is the response type for the
 // UpdateApnsChannel API operation.
 type UpdateApnsChannelResponse struct {
-	*UpdateApnsChannelOutput
+	*types.UpdateApnsChannelOutput
 
 	response *aws.Response
 }

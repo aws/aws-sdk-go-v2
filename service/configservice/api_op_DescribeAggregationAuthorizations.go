@@ -6,42 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/configservice/types"
 )
-
-type DescribeAggregationAuthorizationsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The maximum number of AggregationAuthorizations returned on each page. The
-	// default is maximum. If you specify 0, AWS Config uses the default.
-	Limit *int64 `type:"integer"`
-
-	// The nextToken string returned on a previous page that you use to get the
-	// next page of results in a paginated response.
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeAggregationAuthorizationsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type DescribeAggregationAuthorizationsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Returns a list of authorizations granted to various aggregator accounts and
-	// regions.
-	AggregationAuthorizations []AggregationAuthorization `type:"list"`
-
-	// The nextToken string returned on a previous page that you use to get the
-	// next page of results in a paginated response.
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeAggregationAuthorizationsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeAggregationAuthorizations = "DescribeAggregationAuthorizations"
 
@@ -59,7 +25,7 @@ const opDescribeAggregationAuthorizations = "DescribeAggregationAuthorizations"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DescribeAggregationAuthorizations
-func (c *Client) DescribeAggregationAuthorizationsRequest(input *DescribeAggregationAuthorizationsInput) DescribeAggregationAuthorizationsRequest {
+func (c *Client) DescribeAggregationAuthorizationsRequest(input *types.DescribeAggregationAuthorizationsInput) DescribeAggregationAuthorizationsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeAggregationAuthorizations,
 		HTTPMethod: "POST",
@@ -67,10 +33,10 @@ func (c *Client) DescribeAggregationAuthorizationsRequest(input *DescribeAggrega
 	}
 
 	if input == nil {
-		input = &DescribeAggregationAuthorizationsInput{}
+		input = &types.DescribeAggregationAuthorizationsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeAggregationAuthorizationsOutput{})
+	req := c.newRequest(op, input, &types.DescribeAggregationAuthorizationsOutput{})
 	return DescribeAggregationAuthorizationsRequest{Request: req, Input: input, Copy: c.DescribeAggregationAuthorizationsRequest}
 }
 
@@ -78,8 +44,8 @@ func (c *Client) DescribeAggregationAuthorizationsRequest(input *DescribeAggrega
 // DescribeAggregationAuthorizations API operation.
 type DescribeAggregationAuthorizationsRequest struct {
 	*aws.Request
-	Input *DescribeAggregationAuthorizationsInput
-	Copy  func(*DescribeAggregationAuthorizationsInput) DescribeAggregationAuthorizationsRequest
+	Input *types.DescribeAggregationAuthorizationsInput
+	Copy  func(*types.DescribeAggregationAuthorizationsInput) DescribeAggregationAuthorizationsRequest
 }
 
 // Send marshals and sends the DescribeAggregationAuthorizations API request.
@@ -91,7 +57,7 @@ func (r DescribeAggregationAuthorizationsRequest) Send(ctx context.Context) (*De
 	}
 
 	resp := &DescribeAggregationAuthorizationsResponse{
-		DescribeAggregationAuthorizationsOutput: r.Request.Data.(*DescribeAggregationAuthorizationsOutput),
+		DescribeAggregationAuthorizationsOutput: r.Request.Data.(*types.DescribeAggregationAuthorizationsOutput),
 		response:                                &aws.Response{Request: r.Request},
 	}
 
@@ -101,7 +67,7 @@ func (r DescribeAggregationAuthorizationsRequest) Send(ctx context.Context) (*De
 // DescribeAggregationAuthorizationsResponse is the response type for the
 // DescribeAggregationAuthorizations API operation.
 type DescribeAggregationAuthorizationsResponse struct {
-	*DescribeAggregationAuthorizationsOutput
+	*types.DescribeAggregationAuthorizationsOutput
 
 	response *aws.Response
 }

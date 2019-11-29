@@ -6,67 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/query"
+	"github.com/aws/aws-sdk-go-v2/service/iam/types"
 )
-
-type DeleteServiceSpecificCredentialInput struct {
-	_ struct{} `type:"structure"`
-
-	// The unique identifier of the service-specific credential. You can get this
-	// value by calling ListServiceSpecificCredentials.
-	//
-	// This parameter allows (through its regex pattern (http://wikipedia.org/wiki/regex))
-	// a string of characters that can consist of any upper or lowercased letter
-	// or digit.
-	//
-	// ServiceSpecificCredentialId is a required field
-	ServiceSpecificCredentialId *string `min:"20" type:"string" required:"true"`
-
-	// The name of the IAM user associated with the service-specific credential.
-	// If this value is not specified, then the operation assumes the user whose
-	// credentials are used to call the operation.
-	//
-	// This parameter allows (through its regex pattern (http://wikipedia.org/wiki/regex))
-	// a string of characters consisting of upper and lowercase alphanumeric characters
-	// with no spaces. You can also include any of the following characters: _+=,.@-
-	UserName *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s DeleteServiceSpecificCredentialInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteServiceSpecificCredentialInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteServiceSpecificCredentialInput"}
-
-	if s.ServiceSpecificCredentialId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ServiceSpecificCredentialId"))
-	}
-	if s.ServiceSpecificCredentialId != nil && len(*s.ServiceSpecificCredentialId) < 20 {
-		invalidParams.Add(aws.NewErrParamMinLen("ServiceSpecificCredentialId", 20))
-	}
-	if s.UserName != nil && len(*s.UserName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("UserName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteServiceSpecificCredentialOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteServiceSpecificCredentialOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteServiceSpecificCredential = "DeleteServiceSpecificCredential"
 
@@ -83,7 +26,7 @@ const opDeleteServiceSpecificCredential = "DeleteServiceSpecificCredential"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeleteServiceSpecificCredential
-func (c *Client) DeleteServiceSpecificCredentialRequest(input *DeleteServiceSpecificCredentialInput) DeleteServiceSpecificCredentialRequest {
+func (c *Client) DeleteServiceSpecificCredentialRequest(input *types.DeleteServiceSpecificCredentialInput) DeleteServiceSpecificCredentialRequest {
 	op := &aws.Operation{
 		Name:       opDeleteServiceSpecificCredential,
 		HTTPMethod: "POST",
@@ -91,10 +34,10 @@ func (c *Client) DeleteServiceSpecificCredentialRequest(input *DeleteServiceSpec
 	}
 
 	if input == nil {
-		input = &DeleteServiceSpecificCredentialInput{}
+		input = &types.DeleteServiceSpecificCredentialInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteServiceSpecificCredentialOutput{})
+	req := c.newRequest(op, input, &types.DeleteServiceSpecificCredentialOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return DeleteServiceSpecificCredentialRequest{Request: req, Input: input, Copy: c.DeleteServiceSpecificCredentialRequest}
@@ -104,8 +47,8 @@ func (c *Client) DeleteServiceSpecificCredentialRequest(input *DeleteServiceSpec
 // DeleteServiceSpecificCredential API operation.
 type DeleteServiceSpecificCredentialRequest struct {
 	*aws.Request
-	Input *DeleteServiceSpecificCredentialInput
-	Copy  func(*DeleteServiceSpecificCredentialInput) DeleteServiceSpecificCredentialRequest
+	Input *types.DeleteServiceSpecificCredentialInput
+	Copy  func(*types.DeleteServiceSpecificCredentialInput) DeleteServiceSpecificCredentialRequest
 }
 
 // Send marshals and sends the DeleteServiceSpecificCredential API request.
@@ -117,7 +60,7 @@ func (r DeleteServiceSpecificCredentialRequest) Send(ctx context.Context) (*Dele
 	}
 
 	resp := &DeleteServiceSpecificCredentialResponse{
-		DeleteServiceSpecificCredentialOutput: r.Request.Data.(*DeleteServiceSpecificCredentialOutput),
+		DeleteServiceSpecificCredentialOutput: r.Request.Data.(*types.DeleteServiceSpecificCredentialOutput),
 		response:                              &aws.Response{Request: r.Request},
 	}
 
@@ -127,7 +70,7 @@ func (r DeleteServiceSpecificCredentialRequest) Send(ctx context.Context) (*Dele
 // DeleteServiceSpecificCredentialResponse is the response type for the
 // DeleteServiceSpecificCredential API operation.
 type DeleteServiceSpecificCredentialResponse struct {
-	*DeleteServiceSpecificCredentialOutput
+	*types.DeleteServiceSpecificCredentialOutput
 
 	response *aws.Response
 }

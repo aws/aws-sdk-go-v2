@@ -4,89 +4,10 @@ package alexaforbusiness
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/alexaforbusiness/types"
 )
-
-type SearchNetworkProfilesInput struct {
-	_ struct{} `type:"structure"`
-
-	// The filters to use to list a specified set of network profiles. Valid filters
-	// are NetworkProfileName, Ssid, and SecurityType.
-	Filters []Filter `type:"list"`
-
-	// The maximum number of results to include in the response. If more results
-	// exist than the specified MaxResults value, a token is included in the response
-	// so that the remaining results can be retrieved.
-	MaxResults *int64 `min:"1" type:"integer"`
-
-	// An optional token returned from a prior request. Use this token for pagination
-	// of results from this action. If this parameter is specified, the response
-	// includes only results beyond the token, up to the value specified by MaxResults.
-	NextToken *string `min:"1" type:"string"`
-
-	// The sort order to use to list the specified set of network profiles. Valid
-	// sort criteria includes NetworkProfileName, Ssid, and SecurityType.
-	SortCriteria []Sort `type:"list"`
-}
-
-// String returns the string representation
-func (s SearchNetworkProfilesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *SearchNetworkProfilesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "SearchNetworkProfilesInput"}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-	if s.NextToken != nil && len(*s.NextToken) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
-	}
-	if s.Filters != nil {
-		for i, v := range s.Filters {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-	if s.SortCriteria != nil {
-		for i, v := range s.SortCriteria {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "SortCriteria", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type SearchNetworkProfilesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The network profiles that meet the specified set of filter criteria, in sort
-	// order. It is a list of NetworkProfileData objects.
-	NetworkProfiles []NetworkProfileData `type:"list"`
-
-	// An optional token returned from a prior request. Use this token for pagination
-	// of results from this action. If this parameter is specified, the response
-	// includes only results beyond the token, up to the value specified by MaxResults.
-	NextToken *string `min:"1" type:"string"`
-
-	// The total number of network profiles returned.
-	TotalCount *int64 `type:"integer"`
-}
-
-// String returns the string representation
-func (s SearchNetworkProfilesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opSearchNetworkProfiles = "SearchNetworkProfiles"
 
@@ -104,7 +25,7 @@ const opSearchNetworkProfiles = "SearchNetworkProfiles"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/SearchNetworkProfiles
-func (c *Client) SearchNetworkProfilesRequest(input *SearchNetworkProfilesInput) SearchNetworkProfilesRequest {
+func (c *Client) SearchNetworkProfilesRequest(input *types.SearchNetworkProfilesInput) SearchNetworkProfilesRequest {
 	op := &aws.Operation{
 		Name:       opSearchNetworkProfiles,
 		HTTPMethod: "POST",
@@ -118,10 +39,10 @@ func (c *Client) SearchNetworkProfilesRequest(input *SearchNetworkProfilesInput)
 	}
 
 	if input == nil {
-		input = &SearchNetworkProfilesInput{}
+		input = &types.SearchNetworkProfilesInput{}
 	}
 
-	req := c.newRequest(op, input, &SearchNetworkProfilesOutput{})
+	req := c.newRequest(op, input, &types.SearchNetworkProfilesOutput{})
 	return SearchNetworkProfilesRequest{Request: req, Input: input, Copy: c.SearchNetworkProfilesRequest}
 }
 
@@ -129,8 +50,8 @@ func (c *Client) SearchNetworkProfilesRequest(input *SearchNetworkProfilesInput)
 // SearchNetworkProfiles API operation.
 type SearchNetworkProfilesRequest struct {
 	*aws.Request
-	Input *SearchNetworkProfilesInput
-	Copy  func(*SearchNetworkProfilesInput) SearchNetworkProfilesRequest
+	Input *types.SearchNetworkProfilesInput
+	Copy  func(*types.SearchNetworkProfilesInput) SearchNetworkProfilesRequest
 }
 
 // Send marshals and sends the SearchNetworkProfiles API request.
@@ -142,7 +63,7 @@ func (r SearchNetworkProfilesRequest) Send(ctx context.Context) (*SearchNetworkP
 	}
 
 	resp := &SearchNetworkProfilesResponse{
-		SearchNetworkProfilesOutput: r.Request.Data.(*SearchNetworkProfilesOutput),
+		SearchNetworkProfilesOutput: r.Request.Data.(*types.SearchNetworkProfilesOutput),
 		response:                    &aws.Response{Request: r.Request},
 	}
 
@@ -172,7 +93,7 @@ func NewSearchNetworkProfilesPaginator(req SearchNetworkProfilesRequest) SearchN
 	return SearchNetworkProfilesPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *SearchNetworkProfilesInput
+				var inCpy *types.SearchNetworkProfilesInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -192,14 +113,14 @@ type SearchNetworkProfilesPaginator struct {
 	aws.Pager
 }
 
-func (p *SearchNetworkProfilesPaginator) CurrentPage() *SearchNetworkProfilesOutput {
-	return p.Pager.CurrentPage().(*SearchNetworkProfilesOutput)
+func (p *SearchNetworkProfilesPaginator) CurrentPage() *types.SearchNetworkProfilesOutput {
+	return p.Pager.CurrentPage().(*types.SearchNetworkProfilesOutput)
 }
 
 // SearchNetworkProfilesResponse is the response type for the
 // SearchNetworkProfiles API operation.
 type SearchNetworkProfilesResponse struct {
-	*SearchNetworkProfilesOutput
+	*types.SearchNetworkProfilesOutput
 
 	response *aws.Response
 }

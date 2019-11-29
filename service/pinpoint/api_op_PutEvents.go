@@ -6,94 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/pinpoint/types"
 )
-
-type PutEventsInput struct {
-	_ struct{} `type:"structure" payload:"EventsRequest"`
-
-	// ApplicationId is a required field
-	ApplicationId *string `location:"uri" locationName:"application-id" type:"string" required:"true"`
-
-	// Specifies a batch of events to process.
-	//
-	// EventsRequest is a required field
-	EventsRequest *EventsRequest `type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s PutEventsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *PutEventsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "PutEventsInput"}
-
-	if s.ApplicationId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ApplicationId"))
-	}
-
-	if s.EventsRequest == nil {
-		invalidParams.Add(aws.NewErrParamRequired("EventsRequest"))
-	}
-	if s.EventsRequest != nil {
-		if err := s.EventsRequest.Validate(); err != nil {
-			invalidParams.AddNested("EventsRequest", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s PutEventsInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.ApplicationId != nil {
-		v := *s.ApplicationId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "application-id", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.EventsRequest != nil {
-		v := s.EventsRequest
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.PayloadTarget, "EventsRequest", v, metadata)
-	}
-	return nil
-}
-
-type PutEventsOutput struct {
-	_ struct{} `type:"structure" payload:"EventsResponse"`
-
-	// Provides information about endpoints and the events that they're associated
-	// with.
-	//
-	// EventsResponse is a required field
-	EventsResponse *EventsResponse `type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s PutEventsOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s PutEventsOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.EventsResponse != nil {
-		v := s.EventsResponse
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.PayloadTarget, "EventsResponse", v, metadata)
-	}
-	return nil
-}
 
 const opPutEvents = "PutEvents"
 
@@ -111,7 +25,7 @@ const opPutEvents = "PutEvents"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/PutEvents
-func (c *Client) PutEventsRequest(input *PutEventsInput) PutEventsRequest {
+func (c *Client) PutEventsRequest(input *types.PutEventsInput) PutEventsRequest {
 	op := &aws.Operation{
 		Name:       opPutEvents,
 		HTTPMethod: "POST",
@@ -119,10 +33,10 @@ func (c *Client) PutEventsRequest(input *PutEventsInput) PutEventsRequest {
 	}
 
 	if input == nil {
-		input = &PutEventsInput{}
+		input = &types.PutEventsInput{}
 	}
 
-	req := c.newRequest(op, input, &PutEventsOutput{})
+	req := c.newRequest(op, input, &types.PutEventsOutput{})
 	return PutEventsRequest{Request: req, Input: input, Copy: c.PutEventsRequest}
 }
 
@@ -130,8 +44,8 @@ func (c *Client) PutEventsRequest(input *PutEventsInput) PutEventsRequest {
 // PutEvents API operation.
 type PutEventsRequest struct {
 	*aws.Request
-	Input *PutEventsInput
-	Copy  func(*PutEventsInput) PutEventsRequest
+	Input *types.PutEventsInput
+	Copy  func(*types.PutEventsInput) PutEventsRequest
 }
 
 // Send marshals and sends the PutEvents API request.
@@ -143,7 +57,7 @@ func (r PutEventsRequest) Send(ctx context.Context) (*PutEventsResponse, error) 
 	}
 
 	resp := &PutEventsResponse{
-		PutEventsOutput: r.Request.Data.(*PutEventsOutput),
+		PutEventsOutput: r.Request.Data.(*types.PutEventsOutput),
 		response:        &aws.Response{Request: r.Request},
 	}
 
@@ -153,7 +67,7 @@ func (r PutEventsRequest) Send(ctx context.Context) (*PutEventsResponse, error) 
 // PutEventsResponse is the response type for the
 // PutEvents API operation.
 type PutEventsResponse struct {
-	*PutEventsOutput
+	*types.PutEventsOutput
 
 	response *aws.Response
 }

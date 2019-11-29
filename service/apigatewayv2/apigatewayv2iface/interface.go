@@ -10,6 +10,7 @@ package apigatewayv2iface
 
 import (
 	"github.com/aws/aws-sdk-go-v2/service/apigatewayv2"
+	"github.com/aws/aws-sdk-go-v2/service/apigatewayv2/types"
 )
 
 // ClientAPI provides an interface to enable mocking the
@@ -43,7 +44,7 @@ import (
 //    type mockClientClient struct {
 //        apigatewayv2iface.ClientPI
 //    }
-//    func (m *mockClientClient) CreateApi(input *apigatewayv2.CreateApiInput) (*apigatewayv2.CreateApiOutput, error) {
+//    func (m *mockClientClient) CreateApi(input *types.CreateApiInput) (*types.CreateApiOutput, error) {
 //        // mock response/functionality
 //    }
 //
@@ -61,123 +62,123 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type ClientAPI interface {
-	CreateApiRequest(*apigatewayv2.CreateApiInput) apigatewayv2.CreateApiRequest
+	CreateApiRequest(*types.CreateApiInput) apigatewayv2.CreateApiRequest
 
-	CreateApiMappingRequest(*apigatewayv2.CreateApiMappingInput) apigatewayv2.CreateApiMappingRequest
+	CreateApiMappingRequest(*types.CreateApiMappingInput) apigatewayv2.CreateApiMappingRequest
 
-	CreateAuthorizerRequest(*apigatewayv2.CreateAuthorizerInput) apigatewayv2.CreateAuthorizerRequest
+	CreateAuthorizerRequest(*types.CreateAuthorizerInput) apigatewayv2.CreateAuthorizerRequest
 
-	CreateDeploymentRequest(*apigatewayv2.CreateDeploymentInput) apigatewayv2.CreateDeploymentRequest
+	CreateDeploymentRequest(*types.CreateDeploymentInput) apigatewayv2.CreateDeploymentRequest
 
-	CreateDomainNameRequest(*apigatewayv2.CreateDomainNameInput) apigatewayv2.CreateDomainNameRequest
+	CreateDomainNameRequest(*types.CreateDomainNameInput) apigatewayv2.CreateDomainNameRequest
 
-	CreateIntegrationRequest(*apigatewayv2.CreateIntegrationInput) apigatewayv2.CreateIntegrationRequest
+	CreateIntegrationRequest(*types.CreateIntegrationInput) apigatewayv2.CreateIntegrationRequest
 
-	CreateIntegrationResponseRequest(*apigatewayv2.CreateIntegrationResponseInput) apigatewayv2.CreateIntegrationResponseRequest
+	CreateIntegrationResponseRequest(*types.CreateIntegrationResponseInput) apigatewayv2.CreateIntegrationResponseRequest
 
-	CreateModelRequest(*apigatewayv2.CreateModelInput) apigatewayv2.CreateModelRequest
+	CreateModelRequest(*types.CreateModelInput) apigatewayv2.CreateModelRequest
 
-	CreateRouteRequest(*apigatewayv2.CreateRouteInput) apigatewayv2.CreateRouteRequest
+	CreateRouteRequest(*types.CreateRouteInput) apigatewayv2.CreateRouteRequest
 
-	CreateRouteResponseRequest(*apigatewayv2.CreateRouteResponseInput) apigatewayv2.CreateRouteResponseRequest
+	CreateRouteResponseRequest(*types.CreateRouteResponseInput) apigatewayv2.CreateRouteResponseRequest
 
-	CreateStageRequest(*apigatewayv2.CreateStageInput) apigatewayv2.CreateStageRequest
+	CreateStageRequest(*types.CreateStageInput) apigatewayv2.CreateStageRequest
 
-	DeleteApiRequest(*apigatewayv2.DeleteApiInput) apigatewayv2.DeleteApiRequest
+	DeleteApiRequest(*types.DeleteApiInput) apigatewayv2.DeleteApiRequest
 
-	DeleteApiMappingRequest(*apigatewayv2.DeleteApiMappingInput) apigatewayv2.DeleteApiMappingRequest
+	DeleteApiMappingRequest(*types.DeleteApiMappingInput) apigatewayv2.DeleteApiMappingRequest
 
-	DeleteAuthorizerRequest(*apigatewayv2.DeleteAuthorizerInput) apigatewayv2.DeleteAuthorizerRequest
+	DeleteAuthorizerRequest(*types.DeleteAuthorizerInput) apigatewayv2.DeleteAuthorizerRequest
 
-	DeleteDeploymentRequest(*apigatewayv2.DeleteDeploymentInput) apigatewayv2.DeleteDeploymentRequest
+	DeleteDeploymentRequest(*types.DeleteDeploymentInput) apigatewayv2.DeleteDeploymentRequest
 
-	DeleteDomainNameRequest(*apigatewayv2.DeleteDomainNameInput) apigatewayv2.DeleteDomainNameRequest
+	DeleteDomainNameRequest(*types.DeleteDomainNameInput) apigatewayv2.DeleteDomainNameRequest
 
-	DeleteIntegrationRequest(*apigatewayv2.DeleteIntegrationInput) apigatewayv2.DeleteIntegrationRequest
+	DeleteIntegrationRequest(*types.DeleteIntegrationInput) apigatewayv2.DeleteIntegrationRequest
 
-	DeleteIntegrationResponseRequest(*apigatewayv2.DeleteIntegrationResponseInput) apigatewayv2.DeleteIntegrationResponseRequest
+	DeleteIntegrationResponseRequest(*types.DeleteIntegrationResponseInput) apigatewayv2.DeleteIntegrationResponseRequest
 
-	DeleteModelRequest(*apigatewayv2.DeleteModelInput) apigatewayv2.DeleteModelRequest
+	DeleteModelRequest(*types.DeleteModelInput) apigatewayv2.DeleteModelRequest
 
-	DeleteRouteRequest(*apigatewayv2.DeleteRouteInput) apigatewayv2.DeleteRouteRequest
+	DeleteRouteRequest(*types.DeleteRouteInput) apigatewayv2.DeleteRouteRequest
 
-	DeleteRouteResponseRequest(*apigatewayv2.DeleteRouteResponseInput) apigatewayv2.DeleteRouteResponseRequest
+	DeleteRouteResponseRequest(*types.DeleteRouteResponseInput) apigatewayv2.DeleteRouteResponseRequest
 
-	DeleteStageRequest(*apigatewayv2.DeleteStageInput) apigatewayv2.DeleteStageRequest
+	DeleteStageRequest(*types.DeleteStageInput) apigatewayv2.DeleteStageRequest
 
-	GetApiRequest(*apigatewayv2.GetApiInput) apigatewayv2.GetApiRequest
+	GetApiRequest(*types.GetApiInput) apigatewayv2.GetApiRequest
 
-	GetApiMappingRequest(*apigatewayv2.GetApiMappingInput) apigatewayv2.GetApiMappingRequest
+	GetApiMappingRequest(*types.GetApiMappingInput) apigatewayv2.GetApiMappingRequest
 
-	GetApiMappingsRequest(*apigatewayv2.GetApiMappingsInput) apigatewayv2.GetApiMappingsRequest
+	GetApiMappingsRequest(*types.GetApiMappingsInput) apigatewayv2.GetApiMappingsRequest
 
-	GetApisRequest(*apigatewayv2.GetApisInput) apigatewayv2.GetApisRequest
+	GetApisRequest(*types.GetApisInput) apigatewayv2.GetApisRequest
 
-	GetAuthorizerRequest(*apigatewayv2.GetAuthorizerInput) apigatewayv2.GetAuthorizerRequest
+	GetAuthorizerRequest(*types.GetAuthorizerInput) apigatewayv2.GetAuthorizerRequest
 
-	GetAuthorizersRequest(*apigatewayv2.GetAuthorizersInput) apigatewayv2.GetAuthorizersRequest
+	GetAuthorizersRequest(*types.GetAuthorizersInput) apigatewayv2.GetAuthorizersRequest
 
-	GetDeploymentRequest(*apigatewayv2.GetDeploymentInput) apigatewayv2.GetDeploymentRequest
+	GetDeploymentRequest(*types.GetDeploymentInput) apigatewayv2.GetDeploymentRequest
 
-	GetDeploymentsRequest(*apigatewayv2.GetDeploymentsInput) apigatewayv2.GetDeploymentsRequest
+	GetDeploymentsRequest(*types.GetDeploymentsInput) apigatewayv2.GetDeploymentsRequest
 
-	GetDomainNameRequest(*apigatewayv2.GetDomainNameInput) apigatewayv2.GetDomainNameRequest
+	GetDomainNameRequest(*types.GetDomainNameInput) apigatewayv2.GetDomainNameRequest
 
-	GetDomainNamesRequest(*apigatewayv2.GetDomainNamesInput) apigatewayv2.GetDomainNamesRequest
+	GetDomainNamesRequest(*types.GetDomainNamesInput) apigatewayv2.GetDomainNamesRequest
 
-	GetIntegrationRequest(*apigatewayv2.GetIntegrationInput) apigatewayv2.GetIntegrationRequest
+	GetIntegrationRequest(*types.GetIntegrationInput) apigatewayv2.GetIntegrationRequest
 
-	GetIntegrationResponseRequest(*apigatewayv2.GetIntegrationResponseInput) apigatewayv2.GetIntegrationResponseRequest
+	GetIntegrationResponseRequest(*types.GetIntegrationResponseInput) apigatewayv2.GetIntegrationResponseRequest
 
-	GetIntegrationResponsesRequest(*apigatewayv2.GetIntegrationResponsesInput) apigatewayv2.GetIntegrationResponsesRequest
+	GetIntegrationResponsesRequest(*types.GetIntegrationResponsesInput) apigatewayv2.GetIntegrationResponsesRequest
 
-	GetIntegrationsRequest(*apigatewayv2.GetIntegrationsInput) apigatewayv2.GetIntegrationsRequest
+	GetIntegrationsRequest(*types.GetIntegrationsInput) apigatewayv2.GetIntegrationsRequest
 
-	GetModelRequest(*apigatewayv2.GetModelInput) apigatewayv2.GetModelRequest
+	GetModelRequest(*types.GetModelInput) apigatewayv2.GetModelRequest
 
-	GetModelTemplateRequest(*apigatewayv2.GetModelTemplateInput) apigatewayv2.GetModelTemplateRequest
+	GetModelTemplateRequest(*types.GetModelTemplateInput) apigatewayv2.GetModelTemplateRequest
 
-	GetModelsRequest(*apigatewayv2.GetModelsInput) apigatewayv2.GetModelsRequest
+	GetModelsRequest(*types.GetModelsInput) apigatewayv2.GetModelsRequest
 
-	GetRouteRequest(*apigatewayv2.GetRouteInput) apigatewayv2.GetRouteRequest
+	GetRouteRequest(*types.GetRouteInput) apigatewayv2.GetRouteRequest
 
-	GetRouteResponseRequest(*apigatewayv2.GetRouteResponseInput) apigatewayv2.GetRouteResponseRequest
+	GetRouteResponseRequest(*types.GetRouteResponseInput) apigatewayv2.GetRouteResponseRequest
 
-	GetRouteResponsesRequest(*apigatewayv2.GetRouteResponsesInput) apigatewayv2.GetRouteResponsesRequest
+	GetRouteResponsesRequest(*types.GetRouteResponsesInput) apigatewayv2.GetRouteResponsesRequest
 
-	GetRoutesRequest(*apigatewayv2.GetRoutesInput) apigatewayv2.GetRoutesRequest
+	GetRoutesRequest(*types.GetRoutesInput) apigatewayv2.GetRoutesRequest
 
-	GetStageRequest(*apigatewayv2.GetStageInput) apigatewayv2.GetStageRequest
+	GetStageRequest(*types.GetStageInput) apigatewayv2.GetStageRequest
 
-	GetStagesRequest(*apigatewayv2.GetStagesInput) apigatewayv2.GetStagesRequest
+	GetStagesRequest(*types.GetStagesInput) apigatewayv2.GetStagesRequest
 
-	GetTagsRequest(*apigatewayv2.GetTagsInput) apigatewayv2.GetTagsRequest
+	GetTagsRequest(*types.GetTagsInput) apigatewayv2.GetTagsRequest
 
-	TagResourceRequest(*apigatewayv2.TagResourceInput) apigatewayv2.TagResourceRequest
+	TagResourceRequest(*types.TagResourceInput) apigatewayv2.TagResourceRequest
 
-	UntagResourceRequest(*apigatewayv2.UntagResourceInput) apigatewayv2.UntagResourceRequest
+	UntagResourceRequest(*types.UntagResourceInput) apigatewayv2.UntagResourceRequest
 
-	UpdateApiRequest(*apigatewayv2.UpdateApiInput) apigatewayv2.UpdateApiRequest
+	UpdateApiRequest(*types.UpdateApiInput) apigatewayv2.UpdateApiRequest
 
-	UpdateApiMappingRequest(*apigatewayv2.UpdateApiMappingInput) apigatewayv2.UpdateApiMappingRequest
+	UpdateApiMappingRequest(*types.UpdateApiMappingInput) apigatewayv2.UpdateApiMappingRequest
 
-	UpdateAuthorizerRequest(*apigatewayv2.UpdateAuthorizerInput) apigatewayv2.UpdateAuthorizerRequest
+	UpdateAuthorizerRequest(*types.UpdateAuthorizerInput) apigatewayv2.UpdateAuthorizerRequest
 
-	UpdateDeploymentRequest(*apigatewayv2.UpdateDeploymentInput) apigatewayv2.UpdateDeploymentRequest
+	UpdateDeploymentRequest(*types.UpdateDeploymentInput) apigatewayv2.UpdateDeploymentRequest
 
-	UpdateDomainNameRequest(*apigatewayv2.UpdateDomainNameInput) apigatewayv2.UpdateDomainNameRequest
+	UpdateDomainNameRequest(*types.UpdateDomainNameInput) apigatewayv2.UpdateDomainNameRequest
 
-	UpdateIntegrationRequest(*apigatewayv2.UpdateIntegrationInput) apigatewayv2.UpdateIntegrationRequest
+	UpdateIntegrationRequest(*types.UpdateIntegrationInput) apigatewayv2.UpdateIntegrationRequest
 
-	UpdateIntegrationResponseRequest(*apigatewayv2.UpdateIntegrationResponseInput) apigatewayv2.UpdateIntegrationResponseRequest
+	UpdateIntegrationResponseRequest(*types.UpdateIntegrationResponseInput) apigatewayv2.UpdateIntegrationResponseRequest
 
-	UpdateModelRequest(*apigatewayv2.UpdateModelInput) apigatewayv2.UpdateModelRequest
+	UpdateModelRequest(*types.UpdateModelInput) apigatewayv2.UpdateModelRequest
 
-	UpdateRouteRequest(*apigatewayv2.UpdateRouteInput) apigatewayv2.UpdateRouteRequest
+	UpdateRouteRequest(*types.UpdateRouteInput) apigatewayv2.UpdateRouteRequest
 
-	UpdateRouteResponseRequest(*apigatewayv2.UpdateRouteResponseInput) apigatewayv2.UpdateRouteResponseRequest
+	UpdateRouteResponseRequest(*types.UpdateRouteResponseInput) apigatewayv2.UpdateRouteResponseRequest
 
-	UpdateStageRequest(*apigatewayv2.UpdateStageInput) apigatewayv2.UpdateStageRequest
+	UpdateStageRequest(*types.UpdateStageInput) apigatewayv2.UpdateStageRequest
 }
 
 var _ ClientAPI = (*apigatewayv2.Client)(nil)

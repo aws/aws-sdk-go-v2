@@ -6,51 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/glue/types"
 )
-
-type GetSecurityConfigurationInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the security configuration to retrieve.
-	//
-	// Name is a required field
-	Name *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetSecurityConfigurationInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetSecurityConfigurationInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetSecurityConfigurationInput"}
-
-	if s.Name == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Name"))
-	}
-	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type GetSecurityConfigurationOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The requested security configuration.
-	SecurityConfiguration *SecurityConfiguration `type:"structure"`
-}
-
-// String returns the string representation
-func (s GetSecurityConfigurationOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetSecurityConfiguration = "GetSecurityConfiguration"
 
@@ -67,7 +24,7 @@ const opGetSecurityConfiguration = "GetSecurityConfiguration"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetSecurityConfiguration
-func (c *Client) GetSecurityConfigurationRequest(input *GetSecurityConfigurationInput) GetSecurityConfigurationRequest {
+func (c *Client) GetSecurityConfigurationRequest(input *types.GetSecurityConfigurationInput) GetSecurityConfigurationRequest {
 	op := &aws.Operation{
 		Name:       opGetSecurityConfiguration,
 		HTTPMethod: "POST",
@@ -75,10 +32,10 @@ func (c *Client) GetSecurityConfigurationRequest(input *GetSecurityConfiguration
 	}
 
 	if input == nil {
-		input = &GetSecurityConfigurationInput{}
+		input = &types.GetSecurityConfigurationInput{}
 	}
 
-	req := c.newRequest(op, input, &GetSecurityConfigurationOutput{})
+	req := c.newRequest(op, input, &types.GetSecurityConfigurationOutput{})
 	return GetSecurityConfigurationRequest{Request: req, Input: input, Copy: c.GetSecurityConfigurationRequest}
 }
 
@@ -86,8 +43,8 @@ func (c *Client) GetSecurityConfigurationRequest(input *GetSecurityConfiguration
 // GetSecurityConfiguration API operation.
 type GetSecurityConfigurationRequest struct {
 	*aws.Request
-	Input *GetSecurityConfigurationInput
-	Copy  func(*GetSecurityConfigurationInput) GetSecurityConfigurationRequest
+	Input *types.GetSecurityConfigurationInput
+	Copy  func(*types.GetSecurityConfigurationInput) GetSecurityConfigurationRequest
 }
 
 // Send marshals and sends the GetSecurityConfiguration API request.
@@ -99,7 +56,7 @@ func (r GetSecurityConfigurationRequest) Send(ctx context.Context) (*GetSecurity
 	}
 
 	resp := &GetSecurityConfigurationResponse{
-		GetSecurityConfigurationOutput: r.Request.Data.(*GetSecurityConfigurationOutput),
+		GetSecurityConfigurationOutput: r.Request.Data.(*types.GetSecurityConfigurationOutput),
 		response:                       &aws.Response{Request: r.Request},
 	}
 
@@ -109,7 +66,7 @@ func (r GetSecurityConfigurationRequest) Send(ctx context.Context) (*GetSecurity
 // GetSecurityConfigurationResponse is the response type for the
 // GetSecurityConfiguration API operation.
 type GetSecurityConfigurationResponse struct {
-	*GetSecurityConfigurationOutput
+	*types.GetSecurityConfigurationOutput
 
 	response *aws.Response
 }

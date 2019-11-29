@@ -6,48 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/elasticache/types"
 )
-
-type DescribeServiceUpdatesInput struct {
-	_ struct{} `type:"structure"`
-
-	// An optional marker returned from a prior request. Use this marker for pagination
-	// of results from this operation. If this parameter is specified, the response
-	// includes only records beyond the marker, up to the value specified by MaxRecords.
-	Marker *string `type:"string"`
-
-	// The maximum number of records to include in the response
-	MaxRecords *int64 `type:"integer"`
-
-	// The unique ID of the service update
-	ServiceUpdateName *string `type:"string"`
-
-	// The status of the service update
-	ServiceUpdateStatus []ServiceUpdateStatus `type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeServiceUpdatesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type DescribeServiceUpdatesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// An optional marker returned from a prior request. Use this marker for pagination
-	// of results from this operation. If this parameter is specified, the response
-	// includes only records beyond the marker, up to the value specified by MaxRecords.
-	Marker *string `type:"string"`
-
-	// A list of service updates
-	ServiceUpdates []ServiceUpdate `locationNameList:"ServiceUpdate" type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeServiceUpdatesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeServiceUpdates = "DescribeServiceUpdates"
 
@@ -64,7 +24,7 @@ const opDescribeServiceUpdates = "DescribeServiceUpdates"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DescribeServiceUpdates
-func (c *Client) DescribeServiceUpdatesRequest(input *DescribeServiceUpdatesInput) DescribeServiceUpdatesRequest {
+func (c *Client) DescribeServiceUpdatesRequest(input *types.DescribeServiceUpdatesInput) DescribeServiceUpdatesRequest {
 	op := &aws.Operation{
 		Name:       opDescribeServiceUpdates,
 		HTTPMethod: "POST",
@@ -78,10 +38,10 @@ func (c *Client) DescribeServiceUpdatesRequest(input *DescribeServiceUpdatesInpu
 	}
 
 	if input == nil {
-		input = &DescribeServiceUpdatesInput{}
+		input = &types.DescribeServiceUpdatesInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeServiceUpdatesOutput{})
+	req := c.newRequest(op, input, &types.DescribeServiceUpdatesOutput{})
 	return DescribeServiceUpdatesRequest{Request: req, Input: input, Copy: c.DescribeServiceUpdatesRequest}
 }
 
@@ -89,8 +49,8 @@ func (c *Client) DescribeServiceUpdatesRequest(input *DescribeServiceUpdatesInpu
 // DescribeServiceUpdates API operation.
 type DescribeServiceUpdatesRequest struct {
 	*aws.Request
-	Input *DescribeServiceUpdatesInput
-	Copy  func(*DescribeServiceUpdatesInput) DescribeServiceUpdatesRequest
+	Input *types.DescribeServiceUpdatesInput
+	Copy  func(*types.DescribeServiceUpdatesInput) DescribeServiceUpdatesRequest
 }
 
 // Send marshals and sends the DescribeServiceUpdates API request.
@@ -102,7 +62,7 @@ func (r DescribeServiceUpdatesRequest) Send(ctx context.Context) (*DescribeServi
 	}
 
 	resp := &DescribeServiceUpdatesResponse{
-		DescribeServiceUpdatesOutput: r.Request.Data.(*DescribeServiceUpdatesOutput),
+		DescribeServiceUpdatesOutput: r.Request.Data.(*types.DescribeServiceUpdatesOutput),
 		response:                     &aws.Response{Request: r.Request},
 	}
 
@@ -132,7 +92,7 @@ func NewDescribeServiceUpdatesPaginator(req DescribeServiceUpdatesRequest) Descr
 	return DescribeServiceUpdatesPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *DescribeServiceUpdatesInput
+				var inCpy *types.DescribeServiceUpdatesInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -152,14 +112,14 @@ type DescribeServiceUpdatesPaginator struct {
 	aws.Pager
 }
 
-func (p *DescribeServiceUpdatesPaginator) CurrentPage() *DescribeServiceUpdatesOutput {
-	return p.Pager.CurrentPage().(*DescribeServiceUpdatesOutput)
+func (p *DescribeServiceUpdatesPaginator) CurrentPage() *types.DescribeServiceUpdatesOutput {
+	return p.Pager.CurrentPage().(*types.DescribeServiceUpdatesOutput)
 }
 
 // DescribeServiceUpdatesResponse is the response type for the
 // DescribeServiceUpdates API operation.
 type DescribeServiceUpdatesResponse struct {
-	*DescribeServiceUpdatesOutput
+	*types.DescribeServiceUpdatesOutput
 
 	response *aws.Response
 }

@@ -6,81 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/redshift/types"
 )
-
-// The result of the DescribeSnapshotCopyGrants action.
-type DescribeSnapshotCopyGrantsInput struct {
-	_ struct{} `type:"structure"`
-
-	// An optional parameter that specifies the starting point to return a set of
-	// response records. When the results of a DescribeSnapshotCopyGrant request
-	// exceed the value specified in MaxRecords, AWS returns a value in the Marker
-	// field of the response. You can retrieve the next set of response records
-	// by providing the returned marker value in the Marker parameter and retrying
-	// the request.
-	//
-	// Constraints: You can specify either the SnapshotCopyGrantName parameter or
-	// the Marker parameter, but not both.
-	Marker *string `type:"string"`
-
-	// The maximum number of response records to return in each call. If the number
-	// of remaining response records exceeds the specified MaxRecords value, a value
-	// is returned in a marker field of the response. You can retrieve the next
-	// set of records by retrying the command with the returned marker value.
-	//
-	// Default: 100
-	//
-	// Constraints: minimum 20, maximum 100.
-	MaxRecords *int64 `type:"integer"`
-
-	// The name of the snapshot copy grant.
-	SnapshotCopyGrantName *string `type:"string"`
-
-	// A tag key or keys for which you want to return all matching resources that
-	// are associated with the specified key or keys. For example, suppose that
-	// you have resources tagged with keys called owner and environment. If you
-	// specify both of these tag keys in the request, Amazon Redshift returns a
-	// response with all resources that have either or both of these tag keys associated
-	// with them.
-	TagKeys []string `locationNameList:"TagKey" type:"list"`
-
-	// A tag value or values for which you want to return all matching resources
-	// that are associated with the specified value or values. For example, suppose
-	// that you have resources tagged with values called admin and test. If you
-	// specify both of these tag values in the request, Amazon Redshift returns
-	// a response with all resources that have either or both of these tag values
-	// associated with them.
-	TagValues []string `locationNameList:"TagValue" type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeSnapshotCopyGrantsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type DescribeSnapshotCopyGrantsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// An optional parameter that specifies the starting point to return a set of
-	// response records. When the results of a DescribeSnapshotCopyGrant request
-	// exceed the value specified in MaxRecords, AWS returns a value in the Marker
-	// field of the response. You can retrieve the next set of response records
-	// by providing the returned marker value in the Marker parameter and retrying
-	// the request.
-	//
-	// Constraints: You can specify either the SnapshotCopyGrantName parameter or
-	// the Marker parameter, but not both.
-	Marker *string `type:"string"`
-
-	// The list of SnapshotCopyGrant objects.
-	SnapshotCopyGrants []SnapshotCopyGrant `locationNameList:"SnapshotCopyGrant" type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeSnapshotCopyGrantsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeSnapshotCopyGrants = "DescribeSnapshotCopyGrants"
 
@@ -102,7 +29,7 @@ const opDescribeSnapshotCopyGrants = "DescribeSnapshotCopyGrants"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeSnapshotCopyGrants
-func (c *Client) DescribeSnapshotCopyGrantsRequest(input *DescribeSnapshotCopyGrantsInput) DescribeSnapshotCopyGrantsRequest {
+func (c *Client) DescribeSnapshotCopyGrantsRequest(input *types.DescribeSnapshotCopyGrantsInput) DescribeSnapshotCopyGrantsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeSnapshotCopyGrants,
 		HTTPMethod: "POST",
@@ -110,10 +37,10 @@ func (c *Client) DescribeSnapshotCopyGrantsRequest(input *DescribeSnapshotCopyGr
 	}
 
 	if input == nil {
-		input = &DescribeSnapshotCopyGrantsInput{}
+		input = &types.DescribeSnapshotCopyGrantsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeSnapshotCopyGrantsOutput{})
+	req := c.newRequest(op, input, &types.DescribeSnapshotCopyGrantsOutput{})
 	return DescribeSnapshotCopyGrantsRequest{Request: req, Input: input, Copy: c.DescribeSnapshotCopyGrantsRequest}
 }
 
@@ -121,8 +48,8 @@ func (c *Client) DescribeSnapshotCopyGrantsRequest(input *DescribeSnapshotCopyGr
 // DescribeSnapshotCopyGrants API operation.
 type DescribeSnapshotCopyGrantsRequest struct {
 	*aws.Request
-	Input *DescribeSnapshotCopyGrantsInput
-	Copy  func(*DescribeSnapshotCopyGrantsInput) DescribeSnapshotCopyGrantsRequest
+	Input *types.DescribeSnapshotCopyGrantsInput
+	Copy  func(*types.DescribeSnapshotCopyGrantsInput) DescribeSnapshotCopyGrantsRequest
 }
 
 // Send marshals and sends the DescribeSnapshotCopyGrants API request.
@@ -134,7 +61,7 @@ func (r DescribeSnapshotCopyGrantsRequest) Send(ctx context.Context) (*DescribeS
 	}
 
 	resp := &DescribeSnapshotCopyGrantsResponse{
-		DescribeSnapshotCopyGrantsOutput: r.Request.Data.(*DescribeSnapshotCopyGrantsOutput),
+		DescribeSnapshotCopyGrantsOutput: r.Request.Data.(*types.DescribeSnapshotCopyGrantsOutput),
 		response:                         &aws.Response{Request: r.Request},
 	}
 
@@ -144,7 +71,7 @@ func (r DescribeSnapshotCopyGrantsRequest) Send(ctx context.Context) (*DescribeS
 // DescribeSnapshotCopyGrantsResponse is the response type for the
 // DescribeSnapshotCopyGrants API operation.
 type DescribeSnapshotCopyGrantsResponse struct {
-	*DescribeSnapshotCopyGrantsOutput
+	*types.DescribeSnapshotCopyGrantsOutput
 
 	response *aws.Response
 }

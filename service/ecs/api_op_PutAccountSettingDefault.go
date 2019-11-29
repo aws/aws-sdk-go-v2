@@ -6,64 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ecs/types"
 )
-
-type PutAccountSettingDefaultInput struct {
-	_ struct{} `type:"structure"`
-
-	// The resource name for which to modify the account setting. If serviceLongArnFormat
-	// is specified, the ARN for your Amazon ECS services is affected. If taskLongArnFormat
-	// is specified, the ARN and resource ID for your Amazon ECS tasks is affected.
-	// If containerInstanceLongArnFormat is specified, the ARN and resource ID for
-	// your Amazon ECS container instances is affected. If awsvpcTrunking is specified,
-	// the ENI limit for your Amazon ECS container instances is affected. If containerInsights
-	// is specified, the default setting for CloudWatch Container Insights for your
-	// clusters is affected.
-	//
-	// Name is a required field
-	Name SettingName `locationName:"name" type:"string" required:"true" enum:"true"`
-
-	// The account setting value for the specified principal ARN. Accepted values
-	// are enabled and disabled.
-	//
-	// Value is a required field
-	Value *string `locationName:"value" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s PutAccountSettingDefaultInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *PutAccountSettingDefaultInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "PutAccountSettingDefaultInput"}
-	if len(s.Name) == 0 {
-		invalidParams.Add(aws.NewErrParamRequired("Name"))
-	}
-
-	if s.Value == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Value"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type PutAccountSettingDefaultOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The current account setting for a resource.
-	Setting *Setting `locationName:"setting" type:"structure"`
-}
-
-// String returns the string representation
-func (s PutAccountSettingDefaultOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opPutAccountSettingDefault = "PutAccountSettingDefault"
 
@@ -82,7 +26,7 @@ const opPutAccountSettingDefault = "PutAccountSettingDefault"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/PutAccountSettingDefault
-func (c *Client) PutAccountSettingDefaultRequest(input *PutAccountSettingDefaultInput) PutAccountSettingDefaultRequest {
+func (c *Client) PutAccountSettingDefaultRequest(input *types.PutAccountSettingDefaultInput) PutAccountSettingDefaultRequest {
 	op := &aws.Operation{
 		Name:       opPutAccountSettingDefault,
 		HTTPMethod: "POST",
@@ -90,10 +34,10 @@ func (c *Client) PutAccountSettingDefaultRequest(input *PutAccountSettingDefault
 	}
 
 	if input == nil {
-		input = &PutAccountSettingDefaultInput{}
+		input = &types.PutAccountSettingDefaultInput{}
 	}
 
-	req := c.newRequest(op, input, &PutAccountSettingDefaultOutput{})
+	req := c.newRequest(op, input, &types.PutAccountSettingDefaultOutput{})
 	return PutAccountSettingDefaultRequest{Request: req, Input: input, Copy: c.PutAccountSettingDefaultRequest}
 }
 
@@ -101,8 +45,8 @@ func (c *Client) PutAccountSettingDefaultRequest(input *PutAccountSettingDefault
 // PutAccountSettingDefault API operation.
 type PutAccountSettingDefaultRequest struct {
 	*aws.Request
-	Input *PutAccountSettingDefaultInput
-	Copy  func(*PutAccountSettingDefaultInput) PutAccountSettingDefaultRequest
+	Input *types.PutAccountSettingDefaultInput
+	Copy  func(*types.PutAccountSettingDefaultInput) PutAccountSettingDefaultRequest
 }
 
 // Send marshals and sends the PutAccountSettingDefault API request.
@@ -114,7 +58,7 @@ func (r PutAccountSettingDefaultRequest) Send(ctx context.Context) (*PutAccountS
 	}
 
 	resp := &PutAccountSettingDefaultResponse{
-		PutAccountSettingDefaultOutput: r.Request.Data.(*PutAccountSettingDefaultOutput),
+		PutAccountSettingDefaultOutput: r.Request.Data.(*types.PutAccountSettingDefaultOutput),
 		response:                       &aws.Response{Request: r.Request},
 	}
 
@@ -124,7 +68,7 @@ func (r PutAccountSettingDefaultRequest) Send(ctx context.Context) (*PutAccountS
 // PutAccountSettingDefaultResponse is the response type for the
 // PutAccountSettingDefault API operation.
 type PutAccountSettingDefaultResponse struct {
-	*PutAccountSettingDefaultOutput
+	*types.PutAccountSettingDefaultOutput
 
 	response *aws.Response
 }

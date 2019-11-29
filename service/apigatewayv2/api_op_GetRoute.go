@@ -6,216 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/apigatewayv2/types"
 )
-
-type GetRouteInput struct {
-	_ struct{} `type:"structure"`
-
-	// ApiId is a required field
-	ApiId *string `location:"uri" locationName:"apiId" type:"string" required:"true"`
-
-	// RouteId is a required field
-	RouteId *string `location:"uri" locationName:"routeId" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetRouteInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetRouteInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetRouteInput"}
-
-	if s.ApiId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ApiId"))
-	}
-
-	if s.RouteId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("RouteId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetRouteInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.ApiId != nil {
-		v := *s.ApiId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "apiId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.RouteId != nil {
-		v := *s.RouteId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "routeId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type GetRouteOutput struct {
-	_ struct{} `type:"structure"`
-
-	ApiKeyRequired *bool `locationName:"apiKeyRequired" type:"boolean"`
-
-	// A list of authorization scopes configured on a route. The scopes are used
-	// with a COGNITO_USER_POOLS authorizer to authorize the method invocation.
-	// The authorization works by matching the route scopes against the scopes parsed
-	// from the access token in the incoming request. The method invocation is authorized
-	// if any route scope matches a claimed scope in the access token. Otherwise,
-	// the invocation is not authorized. When the route scope is configured, the
-	// client must provide an access token instead of an identity token for authorization
-	// purposes.
-	AuthorizationScopes []string `locationName:"authorizationScopes" type:"list"`
-
-	// The authorization type. Valid values are NONE for open access, AWS_IAM for
-	// using AWS IAM permissions, and CUSTOM for using a Lambda authorizer.
-	AuthorizationType AuthorizationType `locationName:"authorizationType" type:"string" enum:"true"`
-
-	// The identifier.
-	AuthorizerId *string `locationName:"authorizerId" type:"string"`
-
-	// An expression used to extract information at runtime. See Selection Expressions
-	// (https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html#apigateway-websocket-api-apikey-selection-expressions)
-	// for more information.
-	ModelSelectionExpression *string `locationName:"modelSelectionExpression" type:"string"`
-
-	// A string with a length between [1-64].
-	OperationName *string `locationName:"operationName" type:"string"`
-
-	// The route models.
-	RequestModels map[string]string `locationName:"requestModels" type:"map"`
-
-	// The route parameters.
-	RequestParameters map[string]ParameterConstraints `locationName:"requestParameters" type:"map"`
-
-	// The identifier.
-	RouteId *string `locationName:"routeId" type:"string"`
-
-	// After evaulating a selection expression, the result is compared against one
-	// or more selection keys to find a matching key. See Selection Expressions
-	// (https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html#apigateway-websocket-api-apikey-selection-expressions)
-	// for a list of expressions and each expression's associated selection key
-	// type.
-	RouteKey *string `locationName:"routeKey" type:"string"`
-
-	// An expression used to extract information at runtime. See Selection Expressions
-	// (https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html#apigateway-websocket-api-apikey-selection-expressions)
-	// for more information.
-	RouteResponseSelectionExpression *string `locationName:"routeResponseSelectionExpression" type:"string"`
-
-	// A string with a length between [1-128].
-	Target *string `locationName:"target" type:"string"`
-}
-
-// String returns the string representation
-func (s GetRouteOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetRouteOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.ApiKeyRequired != nil {
-		v := *s.ApiKeyRequired
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "apiKeyRequired", protocol.BoolValue(v), metadata)
-	}
-	if s.AuthorizationScopes != nil {
-		v := s.AuthorizationScopes
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "authorizationScopes", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
-		}
-		ls0.End()
-
-	}
-	if len(s.AuthorizationType) > 0 {
-		v := s.AuthorizationType
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "authorizationType", protocol.QuotedValue{ValueMarshaler: v}, metadata)
-	}
-	if s.AuthorizerId != nil {
-		v := *s.AuthorizerId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "authorizerId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.ModelSelectionExpression != nil {
-		v := *s.ModelSelectionExpression
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "modelSelectionExpression", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.OperationName != nil {
-		v := *s.OperationName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "operationName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.RequestModels != nil {
-		v := s.RequestModels
-
-		metadata := protocol.Metadata{}
-		ms0 := e.Map(protocol.BodyTarget, "requestModels", metadata)
-		ms0.Start()
-		for k1, v1 := range v {
-			ms0.MapSetValue(k1, protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
-		}
-		ms0.End()
-
-	}
-	if s.RequestParameters != nil {
-		v := s.RequestParameters
-
-		metadata := protocol.Metadata{}
-		ms0 := e.Map(protocol.BodyTarget, "requestParameters", metadata)
-		ms0.Start()
-		for k1, v1 := range v {
-			ms0.MapSetFields(k1, v1)
-		}
-		ms0.End()
-
-	}
-	if s.RouteId != nil {
-		v := *s.RouteId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "routeId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.RouteKey != nil {
-		v := *s.RouteKey
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "routeKey", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.RouteResponseSelectionExpression != nil {
-		v := *s.RouteResponseSelectionExpression
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "routeResponseSelectionExpression", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Target != nil {
-		v := *s.Target
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "target", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opGetRoute = "GetRoute"
 
@@ -232,7 +24,7 @@ const opGetRoute = "GetRoute"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/apigatewayv2-2018-11-29/GetRoute
-func (c *Client) GetRouteRequest(input *GetRouteInput) GetRouteRequest {
+func (c *Client) GetRouteRequest(input *types.GetRouteInput) GetRouteRequest {
 	op := &aws.Operation{
 		Name:       opGetRoute,
 		HTTPMethod: "GET",
@@ -240,10 +32,10 @@ func (c *Client) GetRouteRequest(input *GetRouteInput) GetRouteRequest {
 	}
 
 	if input == nil {
-		input = &GetRouteInput{}
+		input = &types.GetRouteInput{}
 	}
 
-	req := c.newRequest(op, input, &GetRouteOutput{})
+	req := c.newRequest(op, input, &types.GetRouteOutput{})
 	return GetRouteRequest{Request: req, Input: input, Copy: c.GetRouteRequest}
 }
 
@@ -251,8 +43,8 @@ func (c *Client) GetRouteRequest(input *GetRouteInput) GetRouteRequest {
 // GetRoute API operation.
 type GetRouteRequest struct {
 	*aws.Request
-	Input *GetRouteInput
-	Copy  func(*GetRouteInput) GetRouteRequest
+	Input *types.GetRouteInput
+	Copy  func(*types.GetRouteInput) GetRouteRequest
 }
 
 // Send marshals and sends the GetRoute API request.
@@ -264,7 +56,7 @@ func (r GetRouteRequest) Send(ctx context.Context) (*GetRouteResponse, error) {
 	}
 
 	resp := &GetRouteResponse{
-		GetRouteOutput: r.Request.Data.(*GetRouteOutput),
+		GetRouteOutput: r.Request.Data.(*types.GetRouteOutput),
 		response:       &aws.Response{Request: r.Request},
 	}
 
@@ -274,7 +66,7 @@ func (r GetRouteRequest) Send(ctx context.Context) (*GetRouteResponse, error) {
 // GetRouteResponse is the response type for the
 // GetRoute API operation.
 type GetRouteResponse struct {
-	*GetRouteOutput
+	*types.GetRouteOutput
 
 	response *aws.Response
 }

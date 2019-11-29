@@ -6,118 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/guardduty/types"
 )
-
-type UpdateThreatIntelSetInput struct {
-	_ struct{} `type:"structure"`
-
-	// The updated boolean value that specifies whether the ThreateIntelSet is active
-	// or not.
-	Activate *bool `locationName:"activate" type:"boolean"`
-
-	// The detectorID that specifies the GuardDuty service whose ThreatIntelSet
-	// you want to update.
-	//
-	// DetectorId is a required field
-	DetectorId *string `location:"uri" locationName:"detectorId" min:"1" type:"string" required:"true"`
-
-	// The updated URI of the file that contains the ThreateIntelSet. For example
-	// (https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key)
-	Location *string `locationName:"location" min:"1" type:"string"`
-
-	// The unique ID that specifies the ThreatIntelSet that you want to update.
-	Name *string `locationName:"name" min:"1" type:"string"`
-
-	// The unique ID that specifies the ThreatIntelSet that you want to update.
-	//
-	// ThreatIntelSetId is a required field
-	ThreatIntelSetId *string `location:"uri" locationName:"threatIntelSetId" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s UpdateThreatIntelSetInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateThreatIntelSetInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateThreatIntelSetInput"}
-
-	if s.DetectorId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DetectorId"))
-	}
-	if s.DetectorId != nil && len(*s.DetectorId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("DetectorId", 1))
-	}
-	if s.Location != nil && len(*s.Location) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Location", 1))
-	}
-	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
-	}
-
-	if s.ThreatIntelSetId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ThreatIntelSetId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s UpdateThreatIntelSetInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.Activate != nil {
-		v := *s.Activate
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "activate", protocol.BoolValue(v), metadata)
-	}
-	if s.Location != nil {
-		v := *s.Location
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "location", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Name != nil {
-		v := *s.Name
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.DetectorId != nil {
-		v := *s.DetectorId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "detectorId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.ThreatIntelSetId != nil {
-		v := *s.ThreatIntelSetId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "threatIntelSetId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type UpdateThreatIntelSetOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s UpdateThreatIntelSetOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s UpdateThreatIntelSetOutput) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
 
 const opUpdateThreatIntelSet = "UpdateThreatIntelSet"
 
@@ -134,7 +24,7 @@ const opUpdateThreatIntelSet = "UpdateThreatIntelSet"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/UpdateThreatIntelSet
-func (c *Client) UpdateThreatIntelSetRequest(input *UpdateThreatIntelSetInput) UpdateThreatIntelSetRequest {
+func (c *Client) UpdateThreatIntelSetRequest(input *types.UpdateThreatIntelSetInput) UpdateThreatIntelSetRequest {
 	op := &aws.Operation{
 		Name:       opUpdateThreatIntelSet,
 		HTTPMethod: "POST",
@@ -142,10 +32,10 @@ func (c *Client) UpdateThreatIntelSetRequest(input *UpdateThreatIntelSetInput) U
 	}
 
 	if input == nil {
-		input = &UpdateThreatIntelSetInput{}
+		input = &types.UpdateThreatIntelSetInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateThreatIntelSetOutput{})
+	req := c.newRequest(op, input, &types.UpdateThreatIntelSetOutput{})
 	return UpdateThreatIntelSetRequest{Request: req, Input: input, Copy: c.UpdateThreatIntelSetRequest}
 }
 
@@ -153,8 +43,8 @@ func (c *Client) UpdateThreatIntelSetRequest(input *UpdateThreatIntelSetInput) U
 // UpdateThreatIntelSet API operation.
 type UpdateThreatIntelSetRequest struct {
 	*aws.Request
-	Input *UpdateThreatIntelSetInput
-	Copy  func(*UpdateThreatIntelSetInput) UpdateThreatIntelSetRequest
+	Input *types.UpdateThreatIntelSetInput
+	Copy  func(*types.UpdateThreatIntelSetInput) UpdateThreatIntelSetRequest
 }
 
 // Send marshals and sends the UpdateThreatIntelSet API request.
@@ -166,7 +56,7 @@ func (r UpdateThreatIntelSetRequest) Send(ctx context.Context) (*UpdateThreatInt
 	}
 
 	resp := &UpdateThreatIntelSetResponse{
-		UpdateThreatIntelSetOutput: r.Request.Data.(*UpdateThreatIntelSetOutput),
+		UpdateThreatIntelSetOutput: r.Request.Data.(*types.UpdateThreatIntelSetOutput),
 		response:                   &aws.Response{Request: r.Request},
 	}
 
@@ -176,7 +66,7 @@ func (r UpdateThreatIntelSetRequest) Send(ctx context.Context) (*UpdateThreatInt
 // UpdateThreatIntelSetResponse is the response type for the
 // UpdateThreatIntelSet API operation.
 type UpdateThreatIntelSetResponse struct {
-	*UpdateThreatIntelSetOutput
+	*types.UpdateThreatIntelSetOutput
 
 	response *aws.Response
 }

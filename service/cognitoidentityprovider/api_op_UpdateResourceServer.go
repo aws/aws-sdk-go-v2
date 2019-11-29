@@ -4,90 +4,10 @@ package cognitoidentityprovider
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/types"
 )
-
-type UpdateResourceServerInput struct {
-	_ struct{} `type:"structure"`
-
-	// The identifier for the resource server.
-	//
-	// Identifier is a required field
-	Identifier *string `min:"1" type:"string" required:"true"`
-
-	// The name of the resource server.
-	//
-	// Name is a required field
-	Name *string `min:"1" type:"string" required:"true"`
-
-	// The scope values to be set for the resource server.
-	Scopes []ResourceServerScopeType `type:"list"`
-
-	// The user pool ID for the user pool.
-	//
-	// UserPoolId is a required field
-	UserPoolId *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s UpdateResourceServerInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateResourceServerInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateResourceServerInput"}
-
-	if s.Identifier == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Identifier"))
-	}
-	if s.Identifier != nil && len(*s.Identifier) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Identifier", 1))
-	}
-
-	if s.Name == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Name"))
-	}
-	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
-	}
-
-	if s.UserPoolId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("UserPoolId"))
-	}
-	if s.UserPoolId != nil && len(*s.UserPoolId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("UserPoolId", 1))
-	}
-	if s.Scopes != nil {
-		for i, v := range s.Scopes {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Scopes", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type UpdateResourceServerOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The resource server.
-	//
-	// ResourceServer is a required field
-	ResourceServer *ResourceServerType `type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s UpdateResourceServerOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opUpdateResourceServer = "UpdateResourceServer"
 
@@ -95,6 +15,9 @@ const opUpdateResourceServer = "UpdateResourceServer"
 // Amazon Cognito Identity Provider.
 //
 // Updates the name and scopes of resource server. All other fields are read-only.
+//
+// If you don't provide a value for an attribute, it will be set to the default
+// value.
 //
 //    // Example sending a request using UpdateResourceServerRequest.
 //    req := client.UpdateResourceServerRequest(params)
@@ -104,7 +27,7 @@ const opUpdateResourceServer = "UpdateResourceServer"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/UpdateResourceServer
-func (c *Client) UpdateResourceServerRequest(input *UpdateResourceServerInput) UpdateResourceServerRequest {
+func (c *Client) UpdateResourceServerRequest(input *types.UpdateResourceServerInput) UpdateResourceServerRequest {
 	op := &aws.Operation{
 		Name:       opUpdateResourceServer,
 		HTTPMethod: "POST",
@@ -112,10 +35,10 @@ func (c *Client) UpdateResourceServerRequest(input *UpdateResourceServerInput) U
 	}
 
 	if input == nil {
-		input = &UpdateResourceServerInput{}
+		input = &types.UpdateResourceServerInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateResourceServerOutput{})
+	req := c.newRequest(op, input, &types.UpdateResourceServerOutput{})
 	return UpdateResourceServerRequest{Request: req, Input: input, Copy: c.UpdateResourceServerRequest}
 }
 
@@ -123,8 +46,8 @@ func (c *Client) UpdateResourceServerRequest(input *UpdateResourceServerInput) U
 // UpdateResourceServer API operation.
 type UpdateResourceServerRequest struct {
 	*aws.Request
-	Input *UpdateResourceServerInput
-	Copy  func(*UpdateResourceServerInput) UpdateResourceServerRequest
+	Input *types.UpdateResourceServerInput
+	Copy  func(*types.UpdateResourceServerInput) UpdateResourceServerRequest
 }
 
 // Send marshals and sends the UpdateResourceServer API request.
@@ -136,7 +59,7 @@ func (r UpdateResourceServerRequest) Send(ctx context.Context) (*UpdateResourceS
 	}
 
 	resp := &UpdateResourceServerResponse{
-		UpdateResourceServerOutput: r.Request.Data.(*UpdateResourceServerOutput),
+		UpdateResourceServerOutput: r.Request.Data.(*types.UpdateResourceServerOutput),
 		response:                   &aws.Response{Request: r.Request},
 	}
 
@@ -146,7 +69,7 @@ func (r UpdateResourceServerRequest) Send(ctx context.Context) (*UpdateResourceS
 // UpdateResourceServerResponse is the response type for the
 // UpdateResourceServer API operation.
 type UpdateResourceServerResponse struct {
-	*UpdateResourceServerOutput
+	*types.UpdateResourceServerOutput
 
 	response *aws.Response
 }

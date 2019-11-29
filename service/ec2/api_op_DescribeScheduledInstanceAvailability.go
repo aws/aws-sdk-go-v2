@@ -6,106 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-// Contains the parameters for DescribeScheduledInstanceAvailability.
-type DescribeScheduledInstanceAvailabilityInput struct {
-	_ struct{} `type:"structure"`
-
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have
-	// the required permissions, the error response is DryRunOperation. Otherwise,
-	// it is UnauthorizedOperation.
-	DryRun *bool `type:"boolean"`
-
-	// The filters.
-	//
-	//    * availability-zone - The Availability Zone (for example, us-west-2a).
-	//
-	//    * instance-type - The instance type (for example, c4.large).
-	//
-	//    * network-platform - The network platform (EC2-Classic or EC2-VPC).
-	//
-	//    * platform - The platform (Linux/UNIX or Windows).
-	Filters []Filter `locationName:"Filter" locationNameList:"Filter" type:"list"`
-
-	// The time period for the first schedule to start.
-	//
-	// FirstSlotStartTimeRange is a required field
-	FirstSlotStartTimeRange *SlotDateTimeRangeRequest `type:"structure" required:"true"`
-
-	// The maximum number of results to return in a single call. This value can
-	// be between 5 and 300. The default value is 300. To retrieve the remaining
-	// results, make another call with the returned NextToken value.
-	MaxResults *int64 `min:"5" type:"integer"`
-
-	// The maximum available duration, in hours. This value must be greater than
-	// MinSlotDurationInHours and less than 1,720.
-	MaxSlotDurationInHours *int64 `type:"integer"`
-
-	// The minimum available duration, in hours. The minimum required duration is
-	// 1,200 hours per year. For example, the minimum daily schedule is 4 hours,
-	// the minimum weekly schedule is 24 hours, and the minimum monthly schedule
-	// is 100 hours.
-	MinSlotDurationInHours *int64 `type:"integer"`
-
-	// The token for the next set of results.
-	NextToken *string `type:"string"`
-
-	// The schedule recurrence.
-	//
-	// Recurrence is a required field
-	Recurrence *ScheduledInstanceRecurrenceRequest `type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeScheduledInstanceAvailabilityInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeScheduledInstanceAvailabilityInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeScheduledInstanceAvailabilityInput"}
-
-	if s.FirstSlotStartTimeRange == nil {
-		invalidParams.Add(aws.NewErrParamRequired("FirstSlotStartTimeRange"))
-	}
-	if s.MaxResults != nil && *s.MaxResults < 5 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 5))
-	}
-
-	if s.Recurrence == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Recurrence"))
-	}
-	if s.FirstSlotStartTimeRange != nil {
-		if err := s.FirstSlotStartTimeRange.Validate(); err != nil {
-			invalidParams.AddNested("FirstSlotStartTimeRange", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Contains the output of DescribeScheduledInstanceAvailability.
-type DescribeScheduledInstanceAvailabilityOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The token required to retrieve the next set of results. This value is null
-	// when there are no more results to return.
-	NextToken *string `locationName:"nextToken" type:"string"`
-
-	// Information about the available Scheduled Instances.
-	ScheduledInstanceAvailabilitySet []ScheduledInstanceAvailability `locationName:"scheduledInstanceAvailabilitySet" locationNameList:"item" type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeScheduledInstanceAvailabilityOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeScheduledInstanceAvailability = "DescribeScheduledInstanceAvailability"
 
@@ -130,7 +32,7 @@ const opDescribeScheduledInstanceAvailability = "DescribeScheduledInstanceAvaila
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeScheduledInstanceAvailability
-func (c *Client) DescribeScheduledInstanceAvailabilityRequest(input *DescribeScheduledInstanceAvailabilityInput) DescribeScheduledInstanceAvailabilityRequest {
+func (c *Client) DescribeScheduledInstanceAvailabilityRequest(input *types.DescribeScheduledInstanceAvailabilityInput) DescribeScheduledInstanceAvailabilityRequest {
 	op := &aws.Operation{
 		Name:       opDescribeScheduledInstanceAvailability,
 		HTTPMethod: "POST",
@@ -144,10 +46,10 @@ func (c *Client) DescribeScheduledInstanceAvailabilityRequest(input *DescribeSch
 	}
 
 	if input == nil {
-		input = &DescribeScheduledInstanceAvailabilityInput{}
+		input = &types.DescribeScheduledInstanceAvailabilityInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeScheduledInstanceAvailabilityOutput{})
+	req := c.newRequest(op, input, &types.DescribeScheduledInstanceAvailabilityOutput{})
 	return DescribeScheduledInstanceAvailabilityRequest{Request: req, Input: input, Copy: c.DescribeScheduledInstanceAvailabilityRequest}
 }
 
@@ -155,8 +57,8 @@ func (c *Client) DescribeScheduledInstanceAvailabilityRequest(input *DescribeSch
 // DescribeScheduledInstanceAvailability API operation.
 type DescribeScheduledInstanceAvailabilityRequest struct {
 	*aws.Request
-	Input *DescribeScheduledInstanceAvailabilityInput
-	Copy  func(*DescribeScheduledInstanceAvailabilityInput) DescribeScheduledInstanceAvailabilityRequest
+	Input *types.DescribeScheduledInstanceAvailabilityInput
+	Copy  func(*types.DescribeScheduledInstanceAvailabilityInput) DescribeScheduledInstanceAvailabilityRequest
 }
 
 // Send marshals and sends the DescribeScheduledInstanceAvailability API request.
@@ -168,7 +70,7 @@ func (r DescribeScheduledInstanceAvailabilityRequest) Send(ctx context.Context) 
 	}
 
 	resp := &DescribeScheduledInstanceAvailabilityResponse{
-		DescribeScheduledInstanceAvailabilityOutput: r.Request.Data.(*DescribeScheduledInstanceAvailabilityOutput),
+		DescribeScheduledInstanceAvailabilityOutput: r.Request.Data.(*types.DescribeScheduledInstanceAvailabilityOutput),
 		response: &aws.Response{Request: r.Request},
 	}
 
@@ -198,7 +100,7 @@ func NewDescribeScheduledInstanceAvailabilityPaginator(req DescribeScheduledInst
 	return DescribeScheduledInstanceAvailabilityPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *DescribeScheduledInstanceAvailabilityInput
+				var inCpy *types.DescribeScheduledInstanceAvailabilityInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -218,14 +120,14 @@ type DescribeScheduledInstanceAvailabilityPaginator struct {
 	aws.Pager
 }
 
-func (p *DescribeScheduledInstanceAvailabilityPaginator) CurrentPage() *DescribeScheduledInstanceAvailabilityOutput {
-	return p.Pager.CurrentPage().(*DescribeScheduledInstanceAvailabilityOutput)
+func (p *DescribeScheduledInstanceAvailabilityPaginator) CurrentPage() *types.DescribeScheduledInstanceAvailabilityOutput {
+	return p.Pager.CurrentPage().(*types.DescribeScheduledInstanceAvailabilityOutput)
 }
 
 // DescribeScheduledInstanceAvailabilityResponse is the response type for the
 // DescribeScheduledInstanceAvailability API operation.
 type DescribeScheduledInstanceAvailabilityResponse struct {
-	*DescribeScheduledInstanceAvailabilityOutput
+	*types.DescribeScheduledInstanceAvailabilityOutput
 
 	response *aws.Response
 }

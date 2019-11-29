@@ -6,54 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/pinpointemail/types"
 )
-
-// A request to enable or disable the automatic IP address warm-up feature.
-type PutAccountDedicatedIpWarmupAttributesInput struct {
-	_ struct{} `type:"structure"`
-
-	// Enables or disables the automatic warm-up feature for dedicated IP addresses
-	// that are associated with your Amazon Pinpoint account in the current AWS
-	// Region. Set to true to enable the automatic warm-up feature, or set to false
-	// to disable it.
-	AutoWarmupEnabled *bool `type:"boolean"`
-}
-
-// String returns the string representation
-func (s PutAccountDedicatedIpWarmupAttributesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s PutAccountDedicatedIpWarmupAttributesInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.AutoWarmupEnabled != nil {
-		v := *s.AutoWarmupEnabled
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "AutoWarmupEnabled", protocol.BoolValue(v), metadata)
-	}
-	return nil
-}
-
-// An HTTP 200 response if the request succeeds, or an error message if the
-// request fails.
-type PutAccountDedicatedIpWarmupAttributesOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s PutAccountDedicatedIpWarmupAttributesOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s PutAccountDedicatedIpWarmupAttributesOutput) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
 
 const opPutAccountDedicatedIpWarmupAttributes = "PutAccountDedicatedIpWarmupAttributes"
 
@@ -70,7 +24,7 @@ const opPutAccountDedicatedIpWarmupAttributes = "PutAccountDedicatedIpWarmupAttr
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/PutAccountDedicatedIpWarmupAttributes
-func (c *Client) PutAccountDedicatedIpWarmupAttributesRequest(input *PutAccountDedicatedIpWarmupAttributesInput) PutAccountDedicatedIpWarmupAttributesRequest {
+func (c *Client) PutAccountDedicatedIpWarmupAttributesRequest(input *types.PutAccountDedicatedIpWarmupAttributesInput) PutAccountDedicatedIpWarmupAttributesRequest {
 	op := &aws.Operation{
 		Name:       opPutAccountDedicatedIpWarmupAttributes,
 		HTTPMethod: "PUT",
@@ -78,10 +32,10 @@ func (c *Client) PutAccountDedicatedIpWarmupAttributesRequest(input *PutAccountD
 	}
 
 	if input == nil {
-		input = &PutAccountDedicatedIpWarmupAttributesInput{}
+		input = &types.PutAccountDedicatedIpWarmupAttributesInput{}
 	}
 
-	req := c.newRequest(op, input, &PutAccountDedicatedIpWarmupAttributesOutput{})
+	req := c.newRequest(op, input, &types.PutAccountDedicatedIpWarmupAttributesOutput{})
 	return PutAccountDedicatedIpWarmupAttributesRequest{Request: req, Input: input, Copy: c.PutAccountDedicatedIpWarmupAttributesRequest}
 }
 
@@ -89,8 +43,8 @@ func (c *Client) PutAccountDedicatedIpWarmupAttributesRequest(input *PutAccountD
 // PutAccountDedicatedIpWarmupAttributes API operation.
 type PutAccountDedicatedIpWarmupAttributesRequest struct {
 	*aws.Request
-	Input *PutAccountDedicatedIpWarmupAttributesInput
-	Copy  func(*PutAccountDedicatedIpWarmupAttributesInput) PutAccountDedicatedIpWarmupAttributesRequest
+	Input *types.PutAccountDedicatedIpWarmupAttributesInput
+	Copy  func(*types.PutAccountDedicatedIpWarmupAttributesInput) PutAccountDedicatedIpWarmupAttributesRequest
 }
 
 // Send marshals and sends the PutAccountDedicatedIpWarmupAttributes API request.
@@ -102,7 +56,7 @@ func (r PutAccountDedicatedIpWarmupAttributesRequest) Send(ctx context.Context) 
 	}
 
 	resp := &PutAccountDedicatedIpWarmupAttributesResponse{
-		PutAccountDedicatedIpWarmupAttributesOutput: r.Request.Data.(*PutAccountDedicatedIpWarmupAttributesOutput),
+		PutAccountDedicatedIpWarmupAttributesOutput: r.Request.Data.(*types.PutAccountDedicatedIpWarmupAttributesOutput),
 		response: &aws.Response{Request: r.Request},
 	}
 
@@ -112,7 +66,7 @@ func (r PutAccountDedicatedIpWarmupAttributesRequest) Send(ctx context.Context) 
 // PutAccountDedicatedIpWarmupAttributesResponse is the response type for the
 // PutAccountDedicatedIpWarmupAttributes API operation.
 type PutAccountDedicatedIpWarmupAttributesResponse struct {
-	*PutAccountDedicatedIpWarmupAttributesOutput
+	*types.PutAccountDedicatedIpWarmupAttributesOutput
 
 	response *aws.Response
 }

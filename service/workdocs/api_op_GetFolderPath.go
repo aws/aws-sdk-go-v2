@@ -6,126 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/workdocs/types"
 )
-
-type GetFolderPathInput struct {
-	_ struct{} `type:"structure"`
-
-	// Amazon WorkDocs authentication token. Do not set this field when using administrative
-	// API actions, as in accessing the API using AWS credentials.
-	AuthenticationToken *string `location:"header" locationName:"Authentication" min:"1" type:"string" sensitive:"true"`
-
-	// A comma-separated list of values. Specify "NAME" to include the names of
-	// the parent folders.
-	Fields *string `location:"querystring" locationName:"fields" min:"1" type:"string"`
-
-	// The ID of the folder.
-	//
-	// FolderId is a required field
-	FolderId *string `location:"uri" locationName:"FolderId" min:"1" type:"string" required:"true"`
-
-	// The maximum number of levels in the hierarchy to return.
-	Limit *int64 `location:"querystring" locationName:"limit" min:"1" type:"integer"`
-
-	// This value is not supported.
-	Marker *string `location:"querystring" locationName:"marker" min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s GetFolderPathInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetFolderPathInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetFolderPathInput"}
-	if s.AuthenticationToken != nil && len(*s.AuthenticationToken) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("AuthenticationToken", 1))
-	}
-	if s.Fields != nil && len(*s.Fields) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Fields", 1))
-	}
-
-	if s.FolderId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("FolderId"))
-	}
-	if s.FolderId != nil && len(*s.FolderId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("FolderId", 1))
-	}
-	if s.Limit != nil && *s.Limit < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("Limit", 1))
-	}
-	if s.Marker != nil && len(*s.Marker) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Marker", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetFolderPathInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.AuthenticationToken != nil {
-		v := *s.AuthenticationToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "Authentication", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.FolderId != nil {
-		v := *s.FolderId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "FolderId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Fields != nil {
-		v := *s.Fields
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "fields", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Limit != nil {
-		v := *s.Limit
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "limit", protocol.Int64Value(v), metadata)
-	}
-	if s.Marker != nil {
-		v := *s.Marker
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "marker", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type GetFolderPathOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The path information.
-	Path *ResourcePath `type:"structure"`
-}
-
-// String returns the string representation
-func (s GetFolderPathOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetFolderPathOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.Path != nil {
-		v := s.Path
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "Path", v, metadata)
-	}
-	return nil
-}
 
 const opGetFolderPath = "GetFolderPath"
 
@@ -148,7 +30,7 @@ const opGetFolderPath = "GetFolderPath"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/GetFolderPath
-func (c *Client) GetFolderPathRequest(input *GetFolderPathInput) GetFolderPathRequest {
+func (c *Client) GetFolderPathRequest(input *types.GetFolderPathInput) GetFolderPathRequest {
 	op := &aws.Operation{
 		Name:       opGetFolderPath,
 		HTTPMethod: "GET",
@@ -156,10 +38,10 @@ func (c *Client) GetFolderPathRequest(input *GetFolderPathInput) GetFolderPathRe
 	}
 
 	if input == nil {
-		input = &GetFolderPathInput{}
+		input = &types.GetFolderPathInput{}
 	}
 
-	req := c.newRequest(op, input, &GetFolderPathOutput{})
+	req := c.newRequest(op, input, &types.GetFolderPathOutput{})
 	return GetFolderPathRequest{Request: req, Input: input, Copy: c.GetFolderPathRequest}
 }
 
@@ -167,8 +49,8 @@ func (c *Client) GetFolderPathRequest(input *GetFolderPathInput) GetFolderPathRe
 // GetFolderPath API operation.
 type GetFolderPathRequest struct {
 	*aws.Request
-	Input *GetFolderPathInput
-	Copy  func(*GetFolderPathInput) GetFolderPathRequest
+	Input *types.GetFolderPathInput
+	Copy  func(*types.GetFolderPathInput) GetFolderPathRequest
 }
 
 // Send marshals and sends the GetFolderPath API request.
@@ -180,7 +62,7 @@ func (r GetFolderPathRequest) Send(ctx context.Context) (*GetFolderPathResponse,
 	}
 
 	resp := &GetFolderPathResponse{
-		GetFolderPathOutput: r.Request.Data.(*GetFolderPathOutput),
+		GetFolderPathOutput: r.Request.Data.(*types.GetFolderPathOutput),
 		response:            &aws.Response{Request: r.Request},
 	}
 
@@ -190,7 +72,7 @@ func (r GetFolderPathRequest) Send(ctx context.Context) (*GetFolderPathResponse,
 // GetFolderPathResponse is the response type for the
 // GetFolderPath API operation.
 type GetFolderPathResponse struct {
-	*GetFolderPathOutput
+	*types.GetFolderPathOutput
 
 	response *aws.Response
 }

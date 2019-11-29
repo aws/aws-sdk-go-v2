@@ -6,26 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/shield/types"
 )
-
-type CreateSubscriptionInput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s CreateSubscriptionInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type CreateSubscriptionOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s CreateSubscriptionOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCreateSubscription = "CreateSubscription"
 
@@ -55,7 +37,7 @@ const opCreateSubscription = "CreateSubscription"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/CreateSubscription
-func (c *Client) CreateSubscriptionRequest(input *CreateSubscriptionInput) CreateSubscriptionRequest {
+func (c *Client) CreateSubscriptionRequest(input *types.CreateSubscriptionInput) CreateSubscriptionRequest {
 	op := &aws.Operation{
 		Name:       opCreateSubscription,
 		HTTPMethod: "POST",
@@ -63,10 +45,10 @@ func (c *Client) CreateSubscriptionRequest(input *CreateSubscriptionInput) Creat
 	}
 
 	if input == nil {
-		input = &CreateSubscriptionInput{}
+		input = &types.CreateSubscriptionInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateSubscriptionOutput{})
+	req := c.newRequest(op, input, &types.CreateSubscriptionOutput{})
 	return CreateSubscriptionRequest{Request: req, Input: input, Copy: c.CreateSubscriptionRequest}
 }
 
@@ -74,8 +56,8 @@ func (c *Client) CreateSubscriptionRequest(input *CreateSubscriptionInput) Creat
 // CreateSubscription API operation.
 type CreateSubscriptionRequest struct {
 	*aws.Request
-	Input *CreateSubscriptionInput
-	Copy  func(*CreateSubscriptionInput) CreateSubscriptionRequest
+	Input *types.CreateSubscriptionInput
+	Copy  func(*types.CreateSubscriptionInput) CreateSubscriptionRequest
 }
 
 // Send marshals and sends the CreateSubscription API request.
@@ -87,7 +69,7 @@ func (r CreateSubscriptionRequest) Send(ctx context.Context) (*CreateSubscriptio
 	}
 
 	resp := &CreateSubscriptionResponse{
-		CreateSubscriptionOutput: r.Request.Data.(*CreateSubscriptionOutput),
+		CreateSubscriptionOutput: r.Request.Data.(*types.CreateSubscriptionOutput),
 		response:                 &aws.Response{Request: r.Request},
 	}
 
@@ -97,7 +79,7 @@ func (r CreateSubscriptionRequest) Send(ctx context.Context) (*CreateSubscriptio
 // CreateSubscriptionResponse is the response type for the
 // CreateSubscription API operation.
 type CreateSubscriptionResponse struct {
-	*CreateSubscriptionOutput
+	*types.CreateSubscriptionOutput
 
 	response *aws.Response
 }

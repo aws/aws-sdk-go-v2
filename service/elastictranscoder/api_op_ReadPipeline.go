@@ -6,95 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/elastictranscoder/types"
 )
-
-// The ReadPipelineRequest structure.
-type ReadPipelineInput struct {
-	_ struct{} `type:"structure"`
-
-	// The identifier of the pipeline to read.
-	//
-	// Id is a required field
-	Id *string `location:"uri" locationName:"Id" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s ReadPipelineInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ReadPipelineInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ReadPipelineInput"}
-
-	if s.Id == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Id"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ReadPipelineInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.Id != nil {
-		v := *s.Id
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "Id", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-// The ReadPipelineResponse structure.
-type ReadPipelineOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A section of the response body that provides information about the pipeline.
-	Pipeline *Pipeline `type:"structure"`
-
-	// Elastic Transcoder returns a warning if the resources used by your pipeline
-	// are not in the same region as the pipeline.
-	//
-	// Using resources in the same region, such as your Amazon S3 buckets, Amazon
-	// SNS notification topics, and AWS KMS key, reduces processing time and prevents
-	// cross-regional charges.
-	Warnings []Warning `type:"list"`
-}
-
-// String returns the string representation
-func (s ReadPipelineOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ReadPipelineOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.Pipeline != nil {
-		v := s.Pipeline
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "Pipeline", v, metadata)
-	}
-	if s.Warnings != nil {
-		v := s.Warnings
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "Warnings", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	return nil
-}
 
 const opReadPipeline = "ReadPipeline"
 
@@ -109,7 +22,7 @@ const opReadPipeline = "ReadPipeline"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) ReadPipelineRequest(input *ReadPipelineInput) ReadPipelineRequest {
+func (c *Client) ReadPipelineRequest(input *types.ReadPipelineInput) ReadPipelineRequest {
 	op := &aws.Operation{
 		Name:       opReadPipeline,
 		HTTPMethod: "GET",
@@ -117,10 +30,10 @@ func (c *Client) ReadPipelineRequest(input *ReadPipelineInput) ReadPipelineReque
 	}
 
 	if input == nil {
-		input = &ReadPipelineInput{}
+		input = &types.ReadPipelineInput{}
 	}
 
-	req := c.newRequest(op, input, &ReadPipelineOutput{})
+	req := c.newRequest(op, input, &types.ReadPipelineOutput{})
 	return ReadPipelineRequest{Request: req, Input: input, Copy: c.ReadPipelineRequest}
 }
 
@@ -128,8 +41,8 @@ func (c *Client) ReadPipelineRequest(input *ReadPipelineInput) ReadPipelineReque
 // ReadPipeline API operation.
 type ReadPipelineRequest struct {
 	*aws.Request
-	Input *ReadPipelineInput
-	Copy  func(*ReadPipelineInput) ReadPipelineRequest
+	Input *types.ReadPipelineInput
+	Copy  func(*types.ReadPipelineInput) ReadPipelineRequest
 }
 
 // Send marshals and sends the ReadPipeline API request.
@@ -141,7 +54,7 @@ func (r ReadPipelineRequest) Send(ctx context.Context) (*ReadPipelineResponse, e
 	}
 
 	resp := &ReadPipelineResponse{
-		ReadPipelineOutput: r.Request.Data.(*ReadPipelineOutput),
+		ReadPipelineOutput: r.Request.Data.(*types.ReadPipelineOutput),
 		response:           &aws.Response{Request: r.Request},
 	}
 
@@ -151,7 +64,7 @@ func (r ReadPipelineRequest) Send(ctx context.Context) (*ReadPipelineResponse, e
 // ReadPipelineResponse is the response type for the
 // ReadPipeline API operation.
 type ReadPipelineResponse struct {
-	*ReadPipelineOutput
+	*types.ReadPipelineOutput
 
 	response *aws.Response
 }

@@ -6,63 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/service/waf"
+	"github.com/aws/aws-sdk-go-v2/service/wafregional/types"
 )
-
-type ListSubscribedRuleGroupsInput struct {
-	_ struct{} `type:"structure"`
-
-	// Specifies the number of subscribed rule groups that you want AWS WAF to return
-	// for this request. If you have more objects than the number you specify for
-	// Limit, the response includes a NextMarker value that you can use to get another
-	// batch of objects.
-	Limit *int64 `type:"integer"`
-
-	// If you specify a value for Limit and you have more ByteMatchSetssubscribed
-	// rule groups than the value of Limit, AWS WAF returns a NextMarker value in
-	// the response that allows you to list another group of subscribed rule groups.
-	// For the second and subsequent ListSubscribedRuleGroupsRequest requests, specify
-	// the value of NextMarker from the previous response to get information about
-	// another batch of subscribed rule groups.
-	NextMarker *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s ListSubscribedRuleGroupsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListSubscribedRuleGroupsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListSubscribedRuleGroupsInput"}
-	if s.NextMarker != nil && len(*s.NextMarker) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("NextMarker", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ListSubscribedRuleGroupsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// If you have more objects than the number that you specified for Limit in
-	// the request, the response includes a NextMarker value. To list more objects,
-	// submit another ListSubscribedRuleGroups request, and specify the NextMarker
-	// value from the response in the NextMarker value in the next request.
-	NextMarker *string `min:"1" type:"string"`
-
-	// An array of RuleGroup objects.
-	RuleGroups []waf.SubscribedRuleGroupSummary `type:"list"`
-}
-
-// String returns the string representation
-func (s ListSubscribedRuleGroupsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListSubscribedRuleGroups = "ListSubscribedRuleGroups"
 
@@ -79,7 +24,7 @@ const opListSubscribedRuleGroups = "ListSubscribedRuleGroups"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/ListSubscribedRuleGroups
-func (c *Client) ListSubscribedRuleGroupsRequest(input *ListSubscribedRuleGroupsInput) ListSubscribedRuleGroupsRequest {
+func (c *Client) ListSubscribedRuleGroupsRequest(input *types.ListSubscribedRuleGroupsInput) ListSubscribedRuleGroupsRequest {
 	op := &aws.Operation{
 		Name:       opListSubscribedRuleGroups,
 		HTTPMethod: "POST",
@@ -87,10 +32,10 @@ func (c *Client) ListSubscribedRuleGroupsRequest(input *ListSubscribedRuleGroups
 	}
 
 	if input == nil {
-		input = &ListSubscribedRuleGroupsInput{}
+		input = &types.ListSubscribedRuleGroupsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListSubscribedRuleGroupsOutput{})
+	req := c.newRequest(op, input, &types.ListSubscribedRuleGroupsOutput{})
 	return ListSubscribedRuleGroupsRequest{Request: req, Input: input, Copy: c.ListSubscribedRuleGroupsRequest}
 }
 
@@ -98,8 +43,8 @@ func (c *Client) ListSubscribedRuleGroupsRequest(input *ListSubscribedRuleGroups
 // ListSubscribedRuleGroups API operation.
 type ListSubscribedRuleGroupsRequest struct {
 	*aws.Request
-	Input *ListSubscribedRuleGroupsInput
-	Copy  func(*ListSubscribedRuleGroupsInput) ListSubscribedRuleGroupsRequest
+	Input *types.ListSubscribedRuleGroupsInput
+	Copy  func(*types.ListSubscribedRuleGroupsInput) ListSubscribedRuleGroupsRequest
 }
 
 // Send marshals and sends the ListSubscribedRuleGroups API request.
@@ -111,7 +56,7 @@ func (r ListSubscribedRuleGroupsRequest) Send(ctx context.Context) (*ListSubscri
 	}
 
 	resp := &ListSubscribedRuleGroupsResponse{
-		ListSubscribedRuleGroupsOutput: r.Request.Data.(*ListSubscribedRuleGroupsOutput),
+		ListSubscribedRuleGroupsOutput: r.Request.Data.(*types.ListSubscribedRuleGroupsOutput),
 		response:                       &aws.Response{Request: r.Request},
 	}
 
@@ -121,7 +66,7 @@ func (r ListSubscribedRuleGroupsRequest) Send(ctx context.Context) (*ListSubscri
 // ListSubscribedRuleGroupsResponse is the response type for the
 // ListSubscribedRuleGroups API operation.
 type ListSubscribedRuleGroupsResponse struct {
-	*ListSubscribedRuleGroupsOutput
+	*types.ListSubscribedRuleGroupsOutput
 
 	response *aws.Response
 }

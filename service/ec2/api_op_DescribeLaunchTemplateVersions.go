@@ -6,98 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-type DescribeLaunchTemplateVersionsInput struct {
-	_ struct{} `type:"structure"`
-
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have
-	// the required permissions, the error response is DryRunOperation. Otherwise,
-	// it is UnauthorizedOperation.
-	DryRun *bool `type:"boolean"`
-
-	// One or more filters.
-	//
-	//    * create-time - The time the launch template version was created.
-	//
-	//    * ebs-optimized - A boolean that indicates whether the instance is optimized
-	//    for Amazon EBS I/O.
-	//
-	//    * iam-instance-profile - The ARN of the IAM instance profile.
-	//
-	//    * image-id - The ID of the AMI.
-	//
-	//    * instance-type - The instance type.
-	//
-	//    * is-default-version - A boolean that indicates whether the launch template
-	//    version is the default version.
-	//
-	//    * kernel-id - The kernel ID.
-	//
-	//    * ram-disk-id - The RAM disk ID.
-	Filters []Filter `locationName:"Filter" locationNameList:"Filter" type:"list"`
-
-	// The ID of the launch template. You must specify either the launch template
-	// ID or launch template name in the request.
-	LaunchTemplateId *string `type:"string"`
-
-	// The name of the launch template. You must specify either the launch template
-	// ID or launch template name in the request.
-	LaunchTemplateName *string `min:"3" type:"string"`
-
-	// The maximum number of results to return in a single call. To retrieve the
-	// remaining results, make another call with the returned NextToken value. This
-	// value can be between 1 and 200.
-	MaxResults *int64 `type:"integer"`
-
-	// The version number up to which to describe launch template versions.
-	MaxVersion *string `type:"string"`
-
-	// The version number after which to describe launch template versions.
-	MinVersion *string `type:"string"`
-
-	// The token to request the next page of results.
-	NextToken *string `type:"string"`
-
-	// One or more versions of the launch template.
-	Versions []string `locationName:"LaunchTemplateVersion" locationNameList:"item" type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeLaunchTemplateVersionsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeLaunchTemplateVersionsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeLaunchTemplateVersionsInput"}
-	if s.LaunchTemplateName != nil && len(*s.LaunchTemplateName) < 3 {
-		invalidParams.Add(aws.NewErrParamMinLen("LaunchTemplateName", 3))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribeLaunchTemplateVersionsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Information about the launch template versions.
-	LaunchTemplateVersions []LaunchTemplateVersion `locationName:"launchTemplateVersionSet" locationNameList:"item" type:"list"`
-
-	// The token to use to retrieve the next page of results. This value is null
-	// when there are no more results to return.
-	NextToken *string `locationName:"nextToken" type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeLaunchTemplateVersionsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeLaunchTemplateVersions = "DescribeLaunchTemplateVersions"
 
@@ -115,7 +25,7 @@ const opDescribeLaunchTemplateVersions = "DescribeLaunchTemplateVersions"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeLaunchTemplateVersions
-func (c *Client) DescribeLaunchTemplateVersionsRequest(input *DescribeLaunchTemplateVersionsInput) DescribeLaunchTemplateVersionsRequest {
+func (c *Client) DescribeLaunchTemplateVersionsRequest(input *types.DescribeLaunchTemplateVersionsInput) DescribeLaunchTemplateVersionsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeLaunchTemplateVersions,
 		HTTPMethod: "POST",
@@ -129,10 +39,10 @@ func (c *Client) DescribeLaunchTemplateVersionsRequest(input *DescribeLaunchTemp
 	}
 
 	if input == nil {
-		input = &DescribeLaunchTemplateVersionsInput{}
+		input = &types.DescribeLaunchTemplateVersionsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeLaunchTemplateVersionsOutput{})
+	req := c.newRequest(op, input, &types.DescribeLaunchTemplateVersionsOutput{})
 	return DescribeLaunchTemplateVersionsRequest{Request: req, Input: input, Copy: c.DescribeLaunchTemplateVersionsRequest}
 }
 
@@ -140,8 +50,8 @@ func (c *Client) DescribeLaunchTemplateVersionsRequest(input *DescribeLaunchTemp
 // DescribeLaunchTemplateVersions API operation.
 type DescribeLaunchTemplateVersionsRequest struct {
 	*aws.Request
-	Input *DescribeLaunchTemplateVersionsInput
-	Copy  func(*DescribeLaunchTemplateVersionsInput) DescribeLaunchTemplateVersionsRequest
+	Input *types.DescribeLaunchTemplateVersionsInput
+	Copy  func(*types.DescribeLaunchTemplateVersionsInput) DescribeLaunchTemplateVersionsRequest
 }
 
 // Send marshals and sends the DescribeLaunchTemplateVersions API request.
@@ -153,7 +63,7 @@ func (r DescribeLaunchTemplateVersionsRequest) Send(ctx context.Context) (*Descr
 	}
 
 	resp := &DescribeLaunchTemplateVersionsResponse{
-		DescribeLaunchTemplateVersionsOutput: r.Request.Data.(*DescribeLaunchTemplateVersionsOutput),
+		DescribeLaunchTemplateVersionsOutput: r.Request.Data.(*types.DescribeLaunchTemplateVersionsOutput),
 		response:                             &aws.Response{Request: r.Request},
 	}
 
@@ -183,7 +93,7 @@ func NewDescribeLaunchTemplateVersionsPaginator(req DescribeLaunchTemplateVersio
 	return DescribeLaunchTemplateVersionsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *DescribeLaunchTemplateVersionsInput
+				var inCpy *types.DescribeLaunchTemplateVersionsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -203,14 +113,14 @@ type DescribeLaunchTemplateVersionsPaginator struct {
 	aws.Pager
 }
 
-func (p *DescribeLaunchTemplateVersionsPaginator) CurrentPage() *DescribeLaunchTemplateVersionsOutput {
-	return p.Pager.CurrentPage().(*DescribeLaunchTemplateVersionsOutput)
+func (p *DescribeLaunchTemplateVersionsPaginator) CurrentPage() *types.DescribeLaunchTemplateVersionsOutput {
+	return p.Pager.CurrentPage().(*types.DescribeLaunchTemplateVersionsOutput)
 }
 
 // DescribeLaunchTemplateVersionsResponse is the response type for the
 // DescribeLaunchTemplateVersions API operation.
 type DescribeLaunchTemplateVersionsResponse struct {
-	*DescribeLaunchTemplateVersionsOutput
+	*types.DescribeLaunchTemplateVersionsOutput
 
 	response *aws.Response
 }

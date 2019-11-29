@@ -6,48 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/lightsail/types"
 )
-
-type GetLoadBalancerInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the load balancer.
-	//
-	// LoadBalancerName is a required field
-	LoadBalancerName *string `locationName:"loadBalancerName" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetLoadBalancerInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetLoadBalancerInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetLoadBalancerInput"}
-
-	if s.LoadBalancerName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("LoadBalancerName"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type GetLoadBalancerOutput struct {
-	_ struct{} `type:"structure"`
-
-	// An object containing information about your load balancer.
-	LoadBalancer *LoadBalancer `locationName:"loadBalancer" type:"structure"`
-}
-
-// String returns the string representation
-func (s GetLoadBalancerOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetLoadBalancer = "GetLoadBalancer"
 
@@ -64,7 +24,7 @@ const opGetLoadBalancer = "GetLoadBalancer"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetLoadBalancer
-func (c *Client) GetLoadBalancerRequest(input *GetLoadBalancerInput) GetLoadBalancerRequest {
+func (c *Client) GetLoadBalancerRequest(input *types.GetLoadBalancerInput) GetLoadBalancerRequest {
 	op := &aws.Operation{
 		Name:       opGetLoadBalancer,
 		HTTPMethod: "POST",
@@ -72,10 +32,10 @@ func (c *Client) GetLoadBalancerRequest(input *GetLoadBalancerInput) GetLoadBala
 	}
 
 	if input == nil {
-		input = &GetLoadBalancerInput{}
+		input = &types.GetLoadBalancerInput{}
 	}
 
-	req := c.newRequest(op, input, &GetLoadBalancerOutput{})
+	req := c.newRequest(op, input, &types.GetLoadBalancerOutput{})
 	return GetLoadBalancerRequest{Request: req, Input: input, Copy: c.GetLoadBalancerRequest}
 }
 
@@ -83,8 +43,8 @@ func (c *Client) GetLoadBalancerRequest(input *GetLoadBalancerInput) GetLoadBala
 // GetLoadBalancer API operation.
 type GetLoadBalancerRequest struct {
 	*aws.Request
-	Input *GetLoadBalancerInput
-	Copy  func(*GetLoadBalancerInput) GetLoadBalancerRequest
+	Input *types.GetLoadBalancerInput
+	Copy  func(*types.GetLoadBalancerInput) GetLoadBalancerRequest
 }
 
 // Send marshals and sends the GetLoadBalancer API request.
@@ -96,7 +56,7 @@ func (r GetLoadBalancerRequest) Send(ctx context.Context) (*GetLoadBalancerRespo
 	}
 
 	resp := &GetLoadBalancerResponse{
-		GetLoadBalancerOutput: r.Request.Data.(*GetLoadBalancerOutput),
+		GetLoadBalancerOutput: r.Request.Data.(*types.GetLoadBalancerOutput),
 		response:              &aws.Response{Request: r.Request},
 	}
 
@@ -106,7 +66,7 @@ func (r GetLoadBalancerRequest) Send(ctx context.Context) (*GetLoadBalancerRespo
 // GetLoadBalancerResponse is the response type for the
 // GetLoadBalancer API operation.
 type GetLoadBalancerResponse struct {
-	*GetLoadBalancerOutput
+	*types.GetLoadBalancerOutput
 
 	response *aws.Response
 }

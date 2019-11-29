@@ -6,110 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/securityhub/types"
 )
-
-type ListMembersInput struct {
-	_ struct{} `type:"structure"`
-
-	// The maximum number of items that you want in the response.
-	MaxResults *int64 `location:"querystring" locationName:"MaxResults" min:"1" type:"integer"`
-
-	// Paginates results. Set the value of this parameter to NULL on your first
-	// call to the ListMembers operation. For subsequent calls to the operation,
-	// fill nextToken in the request with the value of nextToken from the previous
-	// response to continue listing data.
-	NextToken *string `location:"querystring" locationName:"NextToken" type:"string"`
-
-	// Specifies which member accounts the response includes based on their relationship
-	// status with the master account. The default value is TRUE. If onlyAssociated
-	// is set to TRUE, the response includes member accounts whose relationship
-	// status with the master is set to ENABLED or DISABLED. If onlyAssociated is
-	// set to FALSE, the response includes all existing member accounts.
-	OnlyAssociated *bool `location:"querystring" locationName:"OnlyAssociated" type:"boolean"`
-}
-
-// String returns the string representation
-func (s ListMembersInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListMembersInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListMembersInput"}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListMembersInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.MaxResults != nil {
-		v := *s.MaxResults
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "MaxResults", protocol.Int64Value(v), metadata)
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.OnlyAssociated != nil {
-		v := *s.OnlyAssociated
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "OnlyAssociated", protocol.BoolValue(v), metadata)
-	}
-	return nil
-}
-
-type ListMembersOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Member details returned by the operation.
-	Members []Member `type:"list"`
-
-	// The token that is required for pagination.
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s ListMembersOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListMembersOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.Members != nil {
-		v := s.Members
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "Members", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opListMembers = "ListMembers"
 
@@ -127,7 +25,7 @@ const opListMembers = "ListMembers"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ListMembers
-func (c *Client) ListMembersRequest(input *ListMembersInput) ListMembersRequest {
+func (c *Client) ListMembersRequest(input *types.ListMembersInput) ListMembersRequest {
 	op := &aws.Operation{
 		Name:       opListMembers,
 		HTTPMethod: "GET",
@@ -135,10 +33,10 @@ func (c *Client) ListMembersRequest(input *ListMembersInput) ListMembersRequest 
 	}
 
 	if input == nil {
-		input = &ListMembersInput{}
+		input = &types.ListMembersInput{}
 	}
 
-	req := c.newRequest(op, input, &ListMembersOutput{})
+	req := c.newRequest(op, input, &types.ListMembersOutput{})
 	return ListMembersRequest{Request: req, Input: input, Copy: c.ListMembersRequest}
 }
 
@@ -146,8 +44,8 @@ func (c *Client) ListMembersRequest(input *ListMembersInput) ListMembersRequest 
 // ListMembers API operation.
 type ListMembersRequest struct {
 	*aws.Request
-	Input *ListMembersInput
-	Copy  func(*ListMembersInput) ListMembersRequest
+	Input *types.ListMembersInput
+	Copy  func(*types.ListMembersInput) ListMembersRequest
 }
 
 // Send marshals and sends the ListMembers API request.
@@ -159,7 +57,7 @@ func (r ListMembersRequest) Send(ctx context.Context) (*ListMembersResponse, err
 	}
 
 	resp := &ListMembersResponse{
-		ListMembersOutput: r.Request.Data.(*ListMembersOutput),
+		ListMembersOutput: r.Request.Data.(*types.ListMembersOutput),
 		response:          &aws.Response{Request: r.Request},
 	}
 
@@ -169,7 +67,7 @@ func (r ListMembersRequest) Send(ctx context.Context) (*ListMembersResponse, err
 // ListMembersResponse is the response type for the
 // ListMembers API operation.
 type ListMembersResponse struct {
-	*ListMembersOutput
+	*types.ListMembersOutput
 
 	response *aws.Response
 }

@@ -6,31 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/dynamodb/types"
 )
-
-type DescribeEndpointsInput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DescribeEndpointsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type DescribeEndpointsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// List of endpoints.
-	//
-	// Endpoints is a required field
-	Endpoints []Endpoint `type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeEndpointsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeEndpoints = "DescribeEndpoints"
 
@@ -47,7 +24,7 @@ const opDescribeEndpoints = "DescribeEndpoints"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/DescribeEndpoints
-func (c *Client) DescribeEndpointsRequest(input *DescribeEndpointsInput) DescribeEndpointsRequest {
+func (c *Client) DescribeEndpointsRequest(input *types.DescribeEndpointsInput) DescribeEndpointsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeEndpoints,
 		HTTPMethod: "POST",
@@ -55,10 +32,10 @@ func (c *Client) DescribeEndpointsRequest(input *DescribeEndpointsInput) Describ
 	}
 
 	if input == nil {
-		input = &DescribeEndpointsInput{}
+		input = &types.DescribeEndpointsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeEndpointsOutput{})
+	req := c.newRequest(op, input, &types.DescribeEndpointsOutput{})
 	return DescribeEndpointsRequest{Request: req, Input: input, Copy: c.DescribeEndpointsRequest}
 }
 
@@ -66,8 +43,8 @@ func (c *Client) DescribeEndpointsRequest(input *DescribeEndpointsInput) Describ
 // DescribeEndpoints API operation.
 type DescribeEndpointsRequest struct {
 	*aws.Request
-	Input *DescribeEndpointsInput
-	Copy  func(*DescribeEndpointsInput) DescribeEndpointsRequest
+	Input *types.DescribeEndpointsInput
+	Copy  func(*types.DescribeEndpointsInput) DescribeEndpointsRequest
 }
 
 // Send marshals and sends the DescribeEndpoints API request.
@@ -79,7 +56,7 @@ func (r DescribeEndpointsRequest) Send(ctx context.Context) (*DescribeEndpointsR
 	}
 
 	resp := &DescribeEndpointsResponse{
-		DescribeEndpointsOutput: r.Request.Data.(*DescribeEndpointsOutput),
+		DescribeEndpointsOutput: r.Request.Data.(*types.DescribeEndpointsOutput),
 		response:                &aws.Response{Request: r.Request},
 	}
 
@@ -89,7 +66,7 @@ func (r DescribeEndpointsRequest) Send(ctx context.Context) (*DescribeEndpointsR
 // DescribeEndpointsResponse is the response type for the
 // DescribeEndpoints API operation.
 type DescribeEndpointsResponse struct {
-	*DescribeEndpointsOutput
+	*types.DescribeEndpointsOutput
 
 	response *aws.Response
 }

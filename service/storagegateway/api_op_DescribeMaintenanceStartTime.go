@@ -6,91 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/storagegateway/types"
 )
-
-// A JSON object containing the of the gateway.
-type DescribeMaintenanceStartTimeInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation
-	// to return a list of gateways for your account and AWS Region.
-	//
-	// GatewayARN is a required field
-	GatewayARN *string `min:"50" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeMaintenanceStartTimeInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeMaintenanceStartTimeInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeMaintenanceStartTimeInput"}
-
-	if s.GatewayARN == nil {
-		invalidParams.Add(aws.NewErrParamRequired("GatewayARN"))
-	}
-	if s.GatewayARN != nil && len(*s.GatewayARN) < 50 {
-		invalidParams.Add(aws.NewErrParamMinLen("GatewayARN", 50))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// A JSON object containing the following fields:
-//
-//    * DescribeMaintenanceStartTimeOutput$DayOfMonth
-//
-//    * DescribeMaintenanceStartTimeOutput$DayOfWeek
-//
-//    * DescribeMaintenanceStartTimeOutput$HourOfDay
-//
-//    * DescribeMaintenanceStartTimeOutput$MinuteOfHour
-//
-//    * DescribeMaintenanceStartTimeOutput$Timezone
-type DescribeMaintenanceStartTimeOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The day of the month component of the maintenance start time represented
-	// as an ordinal number from 1 to 28, where 1 represents the first day of the
-	// month and 28 represents the last day of the month.
-	//
-	// This value is only available for tape and volume gateways.
-	DayOfMonth *int64 `min:"1" type:"integer"`
-
-	// An ordinal number between 0 and 6 that represents the day of the week, where
-	// 0 represents Sunday and 6 represents Saturday. The day of week is in the
-	// time zone of the gateway.
-	DayOfWeek *int64 `type:"integer"`
-
-	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation
-	// to return a list of gateways for your account and AWS Region.
-	GatewayARN *string `min:"50" type:"string"`
-
-	// The hour component of the maintenance start time represented as hh, where
-	// hh is the hour (0 to 23). The hour of the day is in the time zone of the
-	// gateway.
-	HourOfDay *int64 `type:"integer"`
-
-	// The minute component of the maintenance start time represented as mm, where
-	// mm is the minute (0 to 59). The minute of the hour is in the time zone of
-	// the gateway.
-	MinuteOfHour *int64 `type:"integer"`
-
-	// A value that indicates the time zone that is set for the gateway. The start
-	// time and day of week specified should be in the time zone of the gateway.
-	Timezone *string `min:"3" type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeMaintenanceStartTimeOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeMaintenanceStartTime = "DescribeMaintenanceStartTime"
 
@@ -108,7 +25,7 @@ const opDescribeMaintenanceStartTime = "DescribeMaintenanceStartTime"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DescribeMaintenanceStartTime
-func (c *Client) DescribeMaintenanceStartTimeRequest(input *DescribeMaintenanceStartTimeInput) DescribeMaintenanceStartTimeRequest {
+func (c *Client) DescribeMaintenanceStartTimeRequest(input *types.DescribeMaintenanceStartTimeInput) DescribeMaintenanceStartTimeRequest {
 	op := &aws.Operation{
 		Name:       opDescribeMaintenanceStartTime,
 		HTTPMethod: "POST",
@@ -116,10 +33,10 @@ func (c *Client) DescribeMaintenanceStartTimeRequest(input *DescribeMaintenanceS
 	}
 
 	if input == nil {
-		input = &DescribeMaintenanceStartTimeInput{}
+		input = &types.DescribeMaintenanceStartTimeInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeMaintenanceStartTimeOutput{})
+	req := c.newRequest(op, input, &types.DescribeMaintenanceStartTimeOutput{})
 	return DescribeMaintenanceStartTimeRequest{Request: req, Input: input, Copy: c.DescribeMaintenanceStartTimeRequest}
 }
 
@@ -127,8 +44,8 @@ func (c *Client) DescribeMaintenanceStartTimeRequest(input *DescribeMaintenanceS
 // DescribeMaintenanceStartTime API operation.
 type DescribeMaintenanceStartTimeRequest struct {
 	*aws.Request
-	Input *DescribeMaintenanceStartTimeInput
-	Copy  func(*DescribeMaintenanceStartTimeInput) DescribeMaintenanceStartTimeRequest
+	Input *types.DescribeMaintenanceStartTimeInput
+	Copy  func(*types.DescribeMaintenanceStartTimeInput) DescribeMaintenanceStartTimeRequest
 }
 
 // Send marshals and sends the DescribeMaintenanceStartTime API request.
@@ -140,7 +57,7 @@ func (r DescribeMaintenanceStartTimeRequest) Send(ctx context.Context) (*Describ
 	}
 
 	resp := &DescribeMaintenanceStartTimeResponse{
-		DescribeMaintenanceStartTimeOutput: r.Request.Data.(*DescribeMaintenanceStartTimeOutput),
+		DescribeMaintenanceStartTimeOutput: r.Request.Data.(*types.DescribeMaintenanceStartTimeOutput),
 		response:                           &aws.Response{Request: r.Request},
 	}
 
@@ -150,7 +67,7 @@ func (r DescribeMaintenanceStartTimeRequest) Send(ctx context.Context) (*Describ
 // DescribeMaintenanceStartTimeResponse is the response type for the
 // DescribeMaintenanceStartTime API operation.
 type DescribeMaintenanceStartTimeResponse struct {
-	*DescribeMaintenanceStartTimeOutput
+	*types.DescribeMaintenanceStartTimeOutput
 
 	response *aws.Response
 }

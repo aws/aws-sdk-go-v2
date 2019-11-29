@@ -6,51 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/workspaces/types"
 )
-
-type StopWorkspacesInput struct {
-	_ struct{} `type:"structure"`
-
-	// The WorkSpaces to stop. You can specify up to 25 WorkSpaces.
-	//
-	// StopWorkspaceRequests is a required field
-	StopWorkspaceRequests []StopRequest `min:"1" type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s StopWorkspacesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *StopWorkspacesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "StopWorkspacesInput"}
-
-	if s.StopWorkspaceRequests == nil {
-		invalidParams.Add(aws.NewErrParamRequired("StopWorkspaceRequests"))
-	}
-	if s.StopWorkspaceRequests != nil && len(s.StopWorkspaceRequests) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("StopWorkspaceRequests", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type StopWorkspacesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Information about the WorkSpaces that could not be stopped.
-	FailedRequests []FailedWorkspaceChangeRequest `type:"list"`
-}
-
-// String returns the string representation
-func (s StopWorkspacesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opStopWorkspaces = "StopWorkspaces"
 
@@ -70,7 +27,7 @@ const opStopWorkspaces = "StopWorkspaces"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/StopWorkspaces
-func (c *Client) StopWorkspacesRequest(input *StopWorkspacesInput) StopWorkspacesRequest {
+func (c *Client) StopWorkspacesRequest(input *types.StopWorkspacesInput) StopWorkspacesRequest {
 	op := &aws.Operation{
 		Name:       opStopWorkspaces,
 		HTTPMethod: "POST",
@@ -78,10 +35,10 @@ func (c *Client) StopWorkspacesRequest(input *StopWorkspacesInput) StopWorkspace
 	}
 
 	if input == nil {
-		input = &StopWorkspacesInput{}
+		input = &types.StopWorkspacesInput{}
 	}
 
-	req := c.newRequest(op, input, &StopWorkspacesOutput{})
+	req := c.newRequest(op, input, &types.StopWorkspacesOutput{})
 	return StopWorkspacesRequest{Request: req, Input: input, Copy: c.StopWorkspacesRequest}
 }
 
@@ -89,8 +46,8 @@ func (c *Client) StopWorkspacesRequest(input *StopWorkspacesInput) StopWorkspace
 // StopWorkspaces API operation.
 type StopWorkspacesRequest struct {
 	*aws.Request
-	Input *StopWorkspacesInput
-	Copy  func(*StopWorkspacesInput) StopWorkspacesRequest
+	Input *types.StopWorkspacesInput
+	Copy  func(*types.StopWorkspacesInput) StopWorkspacesRequest
 }
 
 // Send marshals and sends the StopWorkspaces API request.
@@ -102,7 +59,7 @@ func (r StopWorkspacesRequest) Send(ctx context.Context) (*StopWorkspacesRespons
 	}
 
 	resp := &StopWorkspacesResponse{
-		StopWorkspacesOutput: r.Request.Data.(*StopWorkspacesOutput),
+		StopWorkspacesOutput: r.Request.Data.(*types.StopWorkspacesOutput),
 		response:             &aws.Response{Request: r.Request},
 	}
 
@@ -112,7 +69,7 @@ func (r StopWorkspacesRequest) Send(ctx context.Context) (*StopWorkspacesRespons
 // StopWorkspacesResponse is the response type for the
 // StopWorkspaces API operation.
 type StopWorkspacesResponse struct {
-	*StopWorkspacesOutput
+	*types.StopWorkspacesOutput
 
 	response *aws.Response
 }

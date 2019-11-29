@@ -13,6 +13,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws/awserr"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting/integration"
 	"github.com/aws/aws-sdk-go-v2/service/autoscaling"
+	"github.com/aws/aws-sdk-go-v2/service/autoscaling/types"
 )
 
 var _ aws.Config
@@ -24,7 +25,7 @@ func TestInteg_00_DescribeScalingProcessTypes(t *testing.T) {
 
 	cfg := integration.ConfigWithDefaultRegion("us-west-2")
 	svc := autoscaling.New(cfg)
-	params := &autoscaling.DescribeScalingProcessTypesInput{}
+	params := &types.DescribeScalingProcessTypesInput{}
 
 	req := svc.DescribeScalingProcessTypesRequest(params)
 
@@ -39,7 +40,7 @@ func TestInteg_01_CreateLaunchConfiguration(t *testing.T) {
 
 	cfg := integration.ConfigWithDefaultRegion("us-west-2")
 	svc := autoscaling.New(cfg)
-	params := &autoscaling.CreateLaunchConfigurationInput{
+	params := &types.CreateLaunchConfigurationInput{
 		ImageId:                 aws.String("ami-12345678"),
 		InstanceType:            aws.String("m1.small"),
 		LaunchConfigurationName: aws.String("hello, world"),

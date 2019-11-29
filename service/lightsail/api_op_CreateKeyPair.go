@@ -6,64 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/lightsail/types"
 )
-
-type CreateKeyPairInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name for your new key pair.
-	//
-	// KeyPairName is a required field
-	KeyPairName *string `locationName:"keyPairName" type:"string" required:"true"`
-
-	// The tag keys and optional values to add to the resource during create.
-	//
-	// To tag a resource after it has been created, see the tag resource operation.
-	Tags []Tag `locationName:"tags" type:"list"`
-}
-
-// String returns the string representation
-func (s CreateKeyPairInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateKeyPairInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateKeyPairInput"}
-
-	if s.KeyPairName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("KeyPairName"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type CreateKeyPairOutput struct {
-	_ struct{} `type:"structure"`
-
-	// An array of key-value pairs containing information about the new key pair
-	// you just created.
-	KeyPair *KeyPair `locationName:"keyPair" type:"structure"`
-
-	// An array of key-value pairs containing information about the results of your
-	// create key pair request.
-	Operation *Operation `locationName:"operation" type:"structure"`
-
-	// A base64-encoded RSA private key.
-	PrivateKeyBase64 *string `locationName:"privateKeyBase64" type:"string"`
-
-	// A base64-encoded public key of the ssh-rsa type.
-	PublicKeyBase64 *string `locationName:"publicKeyBase64" type:"string"`
-}
-
-// String returns the string representation
-func (s CreateKeyPairOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCreateKeyPair = "CreateKeyPair"
 
@@ -83,7 +27,7 @@ const opCreateKeyPair = "CreateKeyPair"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/CreateKeyPair
-func (c *Client) CreateKeyPairRequest(input *CreateKeyPairInput) CreateKeyPairRequest {
+func (c *Client) CreateKeyPairRequest(input *types.CreateKeyPairInput) CreateKeyPairRequest {
 	op := &aws.Operation{
 		Name:       opCreateKeyPair,
 		HTTPMethod: "POST",
@@ -91,10 +35,10 @@ func (c *Client) CreateKeyPairRequest(input *CreateKeyPairInput) CreateKeyPairRe
 	}
 
 	if input == nil {
-		input = &CreateKeyPairInput{}
+		input = &types.CreateKeyPairInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateKeyPairOutput{})
+	req := c.newRequest(op, input, &types.CreateKeyPairOutput{})
 	return CreateKeyPairRequest{Request: req, Input: input, Copy: c.CreateKeyPairRequest}
 }
 
@@ -102,8 +46,8 @@ func (c *Client) CreateKeyPairRequest(input *CreateKeyPairInput) CreateKeyPairRe
 // CreateKeyPair API operation.
 type CreateKeyPairRequest struct {
 	*aws.Request
-	Input *CreateKeyPairInput
-	Copy  func(*CreateKeyPairInput) CreateKeyPairRequest
+	Input *types.CreateKeyPairInput
+	Copy  func(*types.CreateKeyPairInput) CreateKeyPairRequest
 }
 
 // Send marshals and sends the CreateKeyPair API request.
@@ -115,7 +59,7 @@ func (r CreateKeyPairRequest) Send(ctx context.Context) (*CreateKeyPairResponse,
 	}
 
 	resp := &CreateKeyPairResponse{
-		CreateKeyPairOutput: r.Request.Data.(*CreateKeyPairOutput),
+		CreateKeyPairOutput: r.Request.Data.(*types.CreateKeyPairOutput),
 		response:            &aws.Response{Request: r.Request},
 	}
 
@@ -125,7 +69,7 @@ func (r CreateKeyPairRequest) Send(ctx context.Context) (*CreateKeyPairResponse,
 // CreateKeyPairResponse is the response type for the
 // CreateKeyPair API operation.
 type CreateKeyPairResponse struct {
-	*CreateKeyPairOutput
+	*types.CreateKeyPairOutput
 
 	response *aws.Response
 }

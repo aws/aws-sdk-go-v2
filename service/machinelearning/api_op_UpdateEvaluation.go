@@ -6,65 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/machinelearning/types"
 )
-
-type UpdateEvaluationInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID assigned to the Evaluation during creation.
-	//
-	// EvaluationId is a required field
-	EvaluationId *string `min:"1" type:"string" required:"true"`
-
-	// A new user-supplied name or description of the Evaluation that will replace
-	// the current content.
-	//
-	// EvaluationName is a required field
-	EvaluationName *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s UpdateEvaluationInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateEvaluationInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateEvaluationInput"}
-
-	if s.EvaluationId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("EvaluationId"))
-	}
-	if s.EvaluationId != nil && len(*s.EvaluationId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("EvaluationId", 1))
-	}
-
-	if s.EvaluationName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("EvaluationName"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Represents the output of an UpdateEvaluation operation.
-//
-// You can see the updated content by using the GetEvaluation operation.
-type UpdateEvaluationOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID assigned to the Evaluation during creation. This value should be identical
-	// to the value of the Evaluation in the request.
-	EvaluationId *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s UpdateEvaluationOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opUpdateEvaluation = "UpdateEvaluation"
 
@@ -82,7 +25,7 @@ const opUpdateEvaluation = "UpdateEvaluation"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) UpdateEvaluationRequest(input *UpdateEvaluationInput) UpdateEvaluationRequest {
+func (c *Client) UpdateEvaluationRequest(input *types.UpdateEvaluationInput) UpdateEvaluationRequest {
 	op := &aws.Operation{
 		Name:       opUpdateEvaluation,
 		HTTPMethod: "POST",
@@ -90,10 +33,10 @@ func (c *Client) UpdateEvaluationRequest(input *UpdateEvaluationInput) UpdateEva
 	}
 
 	if input == nil {
-		input = &UpdateEvaluationInput{}
+		input = &types.UpdateEvaluationInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateEvaluationOutput{})
+	req := c.newRequest(op, input, &types.UpdateEvaluationOutput{})
 	return UpdateEvaluationRequest{Request: req, Input: input, Copy: c.UpdateEvaluationRequest}
 }
 
@@ -101,8 +44,8 @@ func (c *Client) UpdateEvaluationRequest(input *UpdateEvaluationInput) UpdateEva
 // UpdateEvaluation API operation.
 type UpdateEvaluationRequest struct {
 	*aws.Request
-	Input *UpdateEvaluationInput
-	Copy  func(*UpdateEvaluationInput) UpdateEvaluationRequest
+	Input *types.UpdateEvaluationInput
+	Copy  func(*types.UpdateEvaluationInput) UpdateEvaluationRequest
 }
 
 // Send marshals and sends the UpdateEvaluation API request.
@@ -114,7 +57,7 @@ func (r UpdateEvaluationRequest) Send(ctx context.Context) (*UpdateEvaluationRes
 	}
 
 	resp := &UpdateEvaluationResponse{
-		UpdateEvaluationOutput: r.Request.Data.(*UpdateEvaluationOutput),
+		UpdateEvaluationOutput: r.Request.Data.(*types.UpdateEvaluationOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -124,7 +67,7 @@ func (r UpdateEvaluationRequest) Send(ctx context.Context) (*UpdateEvaluationRes
 // UpdateEvaluationResponse is the response type for the
 // UpdateEvaluation API operation.
 type UpdateEvaluationResponse struct {
-	*UpdateEvaluationOutput
+	*types.UpdateEvaluationOutput
 
 	response *aws.Response
 }

@@ -6,32 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/sms/types"
 )
-
-type PutAppReplicationConfigurationInput struct {
-	_ struct{} `type:"structure"`
-
-	// ID of the application tassociated with the replication configuration.
-	AppId *string `locationName:"appId" type:"string"`
-
-	// Replication configurations for server groups in the application.
-	ServerGroupReplicationConfigurations []ServerGroupReplicationConfiguration `locationName:"serverGroupReplicationConfigurations" type:"list"`
-}
-
-// String returns the string representation
-func (s PutAppReplicationConfigurationInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type PutAppReplicationConfigurationOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s PutAppReplicationConfigurationOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opPutAppReplicationConfiguration = "PutAppReplicationConfiguration"
 
@@ -48,7 +24,7 @@ const opPutAppReplicationConfiguration = "PutAppReplicationConfiguration"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sms-2016-10-24/PutAppReplicationConfiguration
-func (c *Client) PutAppReplicationConfigurationRequest(input *PutAppReplicationConfigurationInput) PutAppReplicationConfigurationRequest {
+func (c *Client) PutAppReplicationConfigurationRequest(input *types.PutAppReplicationConfigurationInput) PutAppReplicationConfigurationRequest {
 	op := &aws.Operation{
 		Name:       opPutAppReplicationConfiguration,
 		HTTPMethod: "POST",
@@ -56,10 +32,10 @@ func (c *Client) PutAppReplicationConfigurationRequest(input *PutAppReplicationC
 	}
 
 	if input == nil {
-		input = &PutAppReplicationConfigurationInput{}
+		input = &types.PutAppReplicationConfigurationInput{}
 	}
 
-	req := c.newRequest(op, input, &PutAppReplicationConfigurationOutput{})
+	req := c.newRequest(op, input, &types.PutAppReplicationConfigurationOutput{})
 	return PutAppReplicationConfigurationRequest{Request: req, Input: input, Copy: c.PutAppReplicationConfigurationRequest}
 }
 
@@ -67,8 +43,8 @@ func (c *Client) PutAppReplicationConfigurationRequest(input *PutAppReplicationC
 // PutAppReplicationConfiguration API operation.
 type PutAppReplicationConfigurationRequest struct {
 	*aws.Request
-	Input *PutAppReplicationConfigurationInput
-	Copy  func(*PutAppReplicationConfigurationInput) PutAppReplicationConfigurationRequest
+	Input *types.PutAppReplicationConfigurationInput
+	Copy  func(*types.PutAppReplicationConfigurationInput) PutAppReplicationConfigurationRequest
 }
 
 // Send marshals and sends the PutAppReplicationConfiguration API request.
@@ -80,7 +56,7 @@ func (r PutAppReplicationConfigurationRequest) Send(ctx context.Context) (*PutAp
 	}
 
 	resp := &PutAppReplicationConfigurationResponse{
-		PutAppReplicationConfigurationOutput: r.Request.Data.(*PutAppReplicationConfigurationOutput),
+		PutAppReplicationConfigurationOutput: r.Request.Data.(*types.PutAppReplicationConfigurationOutput),
 		response:                             &aws.Response{Request: r.Request},
 	}
 
@@ -90,7 +66,7 @@ func (r PutAppReplicationConfigurationRequest) Send(ctx context.Context) (*PutAp
 // PutAppReplicationConfigurationResponse is the response type for the
 // PutAppReplicationConfiguration API operation.
 type PutAppReplicationConfigurationResponse struct {
-	*PutAppReplicationConfigurationOutput
+	*types.PutAppReplicationConfigurationOutput
 
 	response *aws.Response
 }

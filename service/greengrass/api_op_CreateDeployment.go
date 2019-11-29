@@ -6,122 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/greengrass/types"
 )
-
-// Information about a deployment.
-type CreateDeploymentInput struct {
-	_ struct{} `type:"structure"`
-
-	AmznClientToken *string `location:"header" locationName:"X-Amzn-Client-Token" type:"string"`
-
-	// The ID of the deployment if you wish to redeploy a previous deployment.
-	DeploymentId *string `type:"string"`
-
-	// The type of deployment. When used for ''CreateDeployment'', only ''NewDeployment''
-	// and ''Redeployment'' are valid.
-	//
-	// DeploymentType is a required field
-	DeploymentType DeploymentType `type:"string" required:"true" enum:"true"`
-
-	// GroupId is a required field
-	GroupId *string `location:"uri" locationName:"GroupId" type:"string" required:"true"`
-
-	// The ID of the group version to be deployed.
-	GroupVersionId *string `type:"string"`
-}
-
-// String returns the string representation
-func (s CreateDeploymentInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateDeploymentInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateDeploymentInput"}
-	if len(s.DeploymentType) == 0 {
-		invalidParams.Add(aws.NewErrParamRequired("DeploymentType"))
-	}
-
-	if s.GroupId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("GroupId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s CreateDeploymentInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.DeploymentId != nil {
-		v := *s.DeploymentId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "DeploymentId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if len(s.DeploymentType) > 0 {
-		v := s.DeploymentType
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "DeploymentType", protocol.QuotedValue{ValueMarshaler: v}, metadata)
-	}
-	if s.GroupVersionId != nil {
-		v := *s.GroupVersionId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "GroupVersionId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.AmznClientToken != nil {
-		v := *s.AmznClientToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "X-Amzn-Client-Token", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.GroupId != nil {
-		v := *s.GroupId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "GroupId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type CreateDeploymentOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The ARN of the deployment.
-	DeploymentArn *string `type:"string"`
-
-	// The ID of the deployment.
-	DeploymentId *string `type:"string"`
-}
-
-// String returns the string representation
-func (s CreateDeploymentOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s CreateDeploymentOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.DeploymentArn != nil {
-		v := *s.DeploymentArn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "DeploymentArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.DeploymentId != nil {
-		v := *s.DeploymentId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "DeploymentId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opCreateDeployment = "CreateDeployment"
 
@@ -139,7 +25,7 @@ const opCreateDeployment = "CreateDeployment"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/CreateDeployment
-func (c *Client) CreateDeploymentRequest(input *CreateDeploymentInput) CreateDeploymentRequest {
+func (c *Client) CreateDeploymentRequest(input *types.CreateDeploymentInput) CreateDeploymentRequest {
 	op := &aws.Operation{
 		Name:       opCreateDeployment,
 		HTTPMethod: "POST",
@@ -147,10 +33,10 @@ func (c *Client) CreateDeploymentRequest(input *CreateDeploymentInput) CreateDep
 	}
 
 	if input == nil {
-		input = &CreateDeploymentInput{}
+		input = &types.CreateDeploymentInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateDeploymentOutput{})
+	req := c.newRequest(op, input, &types.CreateDeploymentOutput{})
 	return CreateDeploymentRequest{Request: req, Input: input, Copy: c.CreateDeploymentRequest}
 }
 
@@ -158,8 +44,8 @@ func (c *Client) CreateDeploymentRequest(input *CreateDeploymentInput) CreateDep
 // CreateDeployment API operation.
 type CreateDeploymentRequest struct {
 	*aws.Request
-	Input *CreateDeploymentInput
-	Copy  func(*CreateDeploymentInput) CreateDeploymentRequest
+	Input *types.CreateDeploymentInput
+	Copy  func(*types.CreateDeploymentInput) CreateDeploymentRequest
 }
 
 // Send marshals and sends the CreateDeployment API request.
@@ -171,7 +57,7 @@ func (r CreateDeploymentRequest) Send(ctx context.Context) (*CreateDeploymentRes
 	}
 
 	resp := &CreateDeploymentResponse{
-		CreateDeploymentOutput: r.Request.Data.(*CreateDeploymentOutput),
+		CreateDeploymentOutput: r.Request.Data.(*types.CreateDeploymentOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -181,7 +67,7 @@ func (r CreateDeploymentRequest) Send(ctx context.Context) (*CreateDeploymentRes
 // CreateDeploymentResponse is the response type for the
 // CreateDeployment API operation.
 type CreateDeploymentResponse struct {
-	*CreateDeploymentOutput
+	*types.CreateDeploymentOutput
 
 	response *aws.Response
 }

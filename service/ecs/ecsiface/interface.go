@@ -13,6 +13,7 @@ import (
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/ecs"
+	"github.com/aws/aws-sdk-go-v2/service/ecs/types"
 )
 
 // ClientAPI provides an interface to enable mocking the
@@ -46,7 +47,7 @@ import (
 //    type mockClientClient struct {
 //        ecsiface.ClientPI
 //    }
-//    func (m *mockClientClient) CreateCluster(input *ecs.CreateClusterInput) (*ecs.CreateClusterOutput, error) {
+//    func (m *mockClientClient) CreateCluster(input *types.CreateClusterInput) (*types.CreateClusterOutput, error) {
 //        // mock response/functionality
 //    }
 //
@@ -64,103 +65,103 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type ClientAPI interface {
-	CreateClusterRequest(*ecs.CreateClusterInput) ecs.CreateClusterRequest
+	CreateClusterRequest(*types.CreateClusterInput) ecs.CreateClusterRequest
 
-	CreateServiceRequest(*ecs.CreateServiceInput) ecs.CreateServiceRequest
+	CreateServiceRequest(*types.CreateServiceInput) ecs.CreateServiceRequest
 
-	CreateTaskSetRequest(*ecs.CreateTaskSetInput) ecs.CreateTaskSetRequest
+	CreateTaskSetRequest(*types.CreateTaskSetInput) ecs.CreateTaskSetRequest
 
-	DeleteAccountSettingRequest(*ecs.DeleteAccountSettingInput) ecs.DeleteAccountSettingRequest
+	DeleteAccountSettingRequest(*types.DeleteAccountSettingInput) ecs.DeleteAccountSettingRequest
 
-	DeleteAttributesRequest(*ecs.DeleteAttributesInput) ecs.DeleteAttributesRequest
+	DeleteAttributesRequest(*types.DeleteAttributesInput) ecs.DeleteAttributesRequest
 
-	DeleteClusterRequest(*ecs.DeleteClusterInput) ecs.DeleteClusterRequest
+	DeleteClusterRequest(*types.DeleteClusterInput) ecs.DeleteClusterRequest
 
-	DeleteServiceRequest(*ecs.DeleteServiceInput) ecs.DeleteServiceRequest
+	DeleteServiceRequest(*types.DeleteServiceInput) ecs.DeleteServiceRequest
 
-	DeleteTaskSetRequest(*ecs.DeleteTaskSetInput) ecs.DeleteTaskSetRequest
+	DeleteTaskSetRequest(*types.DeleteTaskSetInput) ecs.DeleteTaskSetRequest
 
-	DeregisterContainerInstanceRequest(*ecs.DeregisterContainerInstanceInput) ecs.DeregisterContainerInstanceRequest
+	DeregisterContainerInstanceRequest(*types.DeregisterContainerInstanceInput) ecs.DeregisterContainerInstanceRequest
 
-	DeregisterTaskDefinitionRequest(*ecs.DeregisterTaskDefinitionInput) ecs.DeregisterTaskDefinitionRequest
+	DeregisterTaskDefinitionRequest(*types.DeregisterTaskDefinitionInput) ecs.DeregisterTaskDefinitionRequest
 
-	DescribeClustersRequest(*ecs.DescribeClustersInput) ecs.DescribeClustersRequest
+	DescribeClustersRequest(*types.DescribeClustersInput) ecs.DescribeClustersRequest
 
-	DescribeContainerInstancesRequest(*ecs.DescribeContainerInstancesInput) ecs.DescribeContainerInstancesRequest
+	DescribeContainerInstancesRequest(*types.DescribeContainerInstancesInput) ecs.DescribeContainerInstancesRequest
 
-	DescribeServicesRequest(*ecs.DescribeServicesInput) ecs.DescribeServicesRequest
+	DescribeServicesRequest(*types.DescribeServicesInput) ecs.DescribeServicesRequest
 
-	DescribeTaskDefinitionRequest(*ecs.DescribeTaskDefinitionInput) ecs.DescribeTaskDefinitionRequest
+	DescribeTaskDefinitionRequest(*types.DescribeTaskDefinitionInput) ecs.DescribeTaskDefinitionRequest
 
-	DescribeTaskSetsRequest(*ecs.DescribeTaskSetsInput) ecs.DescribeTaskSetsRequest
+	DescribeTaskSetsRequest(*types.DescribeTaskSetsInput) ecs.DescribeTaskSetsRequest
 
-	DescribeTasksRequest(*ecs.DescribeTasksInput) ecs.DescribeTasksRequest
+	DescribeTasksRequest(*types.DescribeTasksInput) ecs.DescribeTasksRequest
 
-	DiscoverPollEndpointRequest(*ecs.DiscoverPollEndpointInput) ecs.DiscoverPollEndpointRequest
+	DiscoverPollEndpointRequest(*types.DiscoverPollEndpointInput) ecs.DiscoverPollEndpointRequest
 
-	ListAccountSettingsRequest(*ecs.ListAccountSettingsInput) ecs.ListAccountSettingsRequest
+	ListAccountSettingsRequest(*types.ListAccountSettingsInput) ecs.ListAccountSettingsRequest
 
-	ListAttributesRequest(*ecs.ListAttributesInput) ecs.ListAttributesRequest
+	ListAttributesRequest(*types.ListAttributesInput) ecs.ListAttributesRequest
 
-	ListClustersRequest(*ecs.ListClustersInput) ecs.ListClustersRequest
+	ListClustersRequest(*types.ListClustersInput) ecs.ListClustersRequest
 
-	ListContainerInstancesRequest(*ecs.ListContainerInstancesInput) ecs.ListContainerInstancesRequest
+	ListContainerInstancesRequest(*types.ListContainerInstancesInput) ecs.ListContainerInstancesRequest
 
-	ListServicesRequest(*ecs.ListServicesInput) ecs.ListServicesRequest
+	ListServicesRequest(*types.ListServicesInput) ecs.ListServicesRequest
 
-	ListTagsForResourceRequest(*ecs.ListTagsForResourceInput) ecs.ListTagsForResourceRequest
+	ListTagsForResourceRequest(*types.ListTagsForResourceInput) ecs.ListTagsForResourceRequest
 
-	ListTaskDefinitionFamiliesRequest(*ecs.ListTaskDefinitionFamiliesInput) ecs.ListTaskDefinitionFamiliesRequest
+	ListTaskDefinitionFamiliesRequest(*types.ListTaskDefinitionFamiliesInput) ecs.ListTaskDefinitionFamiliesRequest
 
-	ListTaskDefinitionsRequest(*ecs.ListTaskDefinitionsInput) ecs.ListTaskDefinitionsRequest
+	ListTaskDefinitionsRequest(*types.ListTaskDefinitionsInput) ecs.ListTaskDefinitionsRequest
 
-	ListTasksRequest(*ecs.ListTasksInput) ecs.ListTasksRequest
+	ListTasksRequest(*types.ListTasksInput) ecs.ListTasksRequest
 
-	PutAccountSettingRequest(*ecs.PutAccountSettingInput) ecs.PutAccountSettingRequest
+	PutAccountSettingRequest(*types.PutAccountSettingInput) ecs.PutAccountSettingRequest
 
-	PutAccountSettingDefaultRequest(*ecs.PutAccountSettingDefaultInput) ecs.PutAccountSettingDefaultRequest
+	PutAccountSettingDefaultRequest(*types.PutAccountSettingDefaultInput) ecs.PutAccountSettingDefaultRequest
 
-	PutAttributesRequest(*ecs.PutAttributesInput) ecs.PutAttributesRequest
+	PutAttributesRequest(*types.PutAttributesInput) ecs.PutAttributesRequest
 
-	RegisterContainerInstanceRequest(*ecs.RegisterContainerInstanceInput) ecs.RegisterContainerInstanceRequest
+	RegisterContainerInstanceRequest(*types.RegisterContainerInstanceInput) ecs.RegisterContainerInstanceRequest
 
-	RegisterTaskDefinitionRequest(*ecs.RegisterTaskDefinitionInput) ecs.RegisterTaskDefinitionRequest
+	RegisterTaskDefinitionRequest(*types.RegisterTaskDefinitionInput) ecs.RegisterTaskDefinitionRequest
 
-	RunTaskRequest(*ecs.RunTaskInput) ecs.RunTaskRequest
+	RunTaskRequest(*types.RunTaskInput) ecs.RunTaskRequest
 
-	StartTaskRequest(*ecs.StartTaskInput) ecs.StartTaskRequest
+	StartTaskRequest(*types.StartTaskInput) ecs.StartTaskRequest
 
-	StopTaskRequest(*ecs.StopTaskInput) ecs.StopTaskRequest
+	StopTaskRequest(*types.StopTaskInput) ecs.StopTaskRequest
 
-	SubmitAttachmentStateChangesRequest(*ecs.SubmitAttachmentStateChangesInput) ecs.SubmitAttachmentStateChangesRequest
+	SubmitAttachmentStateChangesRequest(*types.SubmitAttachmentStateChangesInput) ecs.SubmitAttachmentStateChangesRequest
 
-	SubmitContainerStateChangeRequest(*ecs.SubmitContainerStateChangeInput) ecs.SubmitContainerStateChangeRequest
+	SubmitContainerStateChangeRequest(*types.SubmitContainerStateChangeInput) ecs.SubmitContainerStateChangeRequest
 
-	SubmitTaskStateChangeRequest(*ecs.SubmitTaskStateChangeInput) ecs.SubmitTaskStateChangeRequest
+	SubmitTaskStateChangeRequest(*types.SubmitTaskStateChangeInput) ecs.SubmitTaskStateChangeRequest
 
-	TagResourceRequest(*ecs.TagResourceInput) ecs.TagResourceRequest
+	TagResourceRequest(*types.TagResourceInput) ecs.TagResourceRequest
 
-	UntagResourceRequest(*ecs.UntagResourceInput) ecs.UntagResourceRequest
+	UntagResourceRequest(*types.UntagResourceInput) ecs.UntagResourceRequest
 
-	UpdateClusterSettingsRequest(*ecs.UpdateClusterSettingsInput) ecs.UpdateClusterSettingsRequest
+	UpdateClusterSettingsRequest(*types.UpdateClusterSettingsInput) ecs.UpdateClusterSettingsRequest
 
-	UpdateContainerAgentRequest(*ecs.UpdateContainerAgentInput) ecs.UpdateContainerAgentRequest
+	UpdateContainerAgentRequest(*types.UpdateContainerAgentInput) ecs.UpdateContainerAgentRequest
 
-	UpdateContainerInstancesStateRequest(*ecs.UpdateContainerInstancesStateInput) ecs.UpdateContainerInstancesStateRequest
+	UpdateContainerInstancesStateRequest(*types.UpdateContainerInstancesStateInput) ecs.UpdateContainerInstancesStateRequest
 
-	UpdateServiceRequest(*ecs.UpdateServiceInput) ecs.UpdateServiceRequest
+	UpdateServiceRequest(*types.UpdateServiceInput) ecs.UpdateServiceRequest
 
-	UpdateServicePrimaryTaskSetRequest(*ecs.UpdateServicePrimaryTaskSetInput) ecs.UpdateServicePrimaryTaskSetRequest
+	UpdateServicePrimaryTaskSetRequest(*types.UpdateServicePrimaryTaskSetInput) ecs.UpdateServicePrimaryTaskSetRequest
 
-	UpdateTaskSetRequest(*ecs.UpdateTaskSetInput) ecs.UpdateTaskSetRequest
+	UpdateTaskSetRequest(*types.UpdateTaskSetInput) ecs.UpdateTaskSetRequest
 
-	WaitUntilServicesInactive(context.Context, *ecs.DescribeServicesInput, ...aws.WaiterOption) error
+	WaitUntilServicesInactive(context.Context, *types.DescribeServicesInput, ...aws.WaiterOption) error
 
-	WaitUntilServicesStable(context.Context, *ecs.DescribeServicesInput, ...aws.WaiterOption) error
+	WaitUntilServicesStable(context.Context, *types.DescribeServicesInput, ...aws.WaiterOption) error
 
-	WaitUntilTasksRunning(context.Context, *ecs.DescribeTasksInput, ...aws.WaiterOption) error
+	WaitUntilTasksRunning(context.Context, *types.DescribeTasksInput, ...aws.WaiterOption) error
 
-	WaitUntilTasksStopped(context.Context, *ecs.DescribeTasksInput, ...aws.WaiterOption) error
+	WaitUntilTasksStopped(context.Context, *types.DescribeTasksInput, ...aws.WaiterOption) error
 }
 
 var _ ClientAPI = (*ecs.Client)(nil)

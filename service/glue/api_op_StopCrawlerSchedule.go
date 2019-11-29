@@ -6,48 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/glue/types"
 )
-
-type StopCrawlerScheduleInput struct {
-	_ struct{} `type:"structure"`
-
-	// Name of the crawler whose schedule state to set.
-	//
-	// CrawlerName is a required field
-	CrawlerName *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s StopCrawlerScheduleInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *StopCrawlerScheduleInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "StopCrawlerScheduleInput"}
-
-	if s.CrawlerName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("CrawlerName"))
-	}
-	if s.CrawlerName != nil && len(*s.CrawlerName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("CrawlerName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type StopCrawlerScheduleOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s StopCrawlerScheduleOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opStopCrawlerSchedule = "StopCrawlerSchedule"
 
@@ -65,7 +25,7 @@ const opStopCrawlerSchedule = "StopCrawlerSchedule"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/StopCrawlerSchedule
-func (c *Client) StopCrawlerScheduleRequest(input *StopCrawlerScheduleInput) StopCrawlerScheduleRequest {
+func (c *Client) StopCrawlerScheduleRequest(input *types.StopCrawlerScheduleInput) StopCrawlerScheduleRequest {
 	op := &aws.Operation{
 		Name:       opStopCrawlerSchedule,
 		HTTPMethod: "POST",
@@ -73,10 +33,10 @@ func (c *Client) StopCrawlerScheduleRequest(input *StopCrawlerScheduleInput) Sto
 	}
 
 	if input == nil {
-		input = &StopCrawlerScheduleInput{}
+		input = &types.StopCrawlerScheduleInput{}
 	}
 
-	req := c.newRequest(op, input, &StopCrawlerScheduleOutput{})
+	req := c.newRequest(op, input, &types.StopCrawlerScheduleOutput{})
 	return StopCrawlerScheduleRequest{Request: req, Input: input, Copy: c.StopCrawlerScheduleRequest}
 }
 
@@ -84,8 +44,8 @@ func (c *Client) StopCrawlerScheduleRequest(input *StopCrawlerScheduleInput) Sto
 // StopCrawlerSchedule API operation.
 type StopCrawlerScheduleRequest struct {
 	*aws.Request
-	Input *StopCrawlerScheduleInput
-	Copy  func(*StopCrawlerScheduleInput) StopCrawlerScheduleRequest
+	Input *types.StopCrawlerScheduleInput
+	Copy  func(*types.StopCrawlerScheduleInput) StopCrawlerScheduleRequest
 }
 
 // Send marshals and sends the StopCrawlerSchedule API request.
@@ -97,7 +57,7 @@ func (r StopCrawlerScheduleRequest) Send(ctx context.Context) (*StopCrawlerSched
 	}
 
 	resp := &StopCrawlerScheduleResponse{
-		StopCrawlerScheduleOutput: r.Request.Data.(*StopCrawlerScheduleOutput),
+		StopCrawlerScheduleOutput: r.Request.Data.(*types.StopCrawlerScheduleOutput),
 		response:                  &aws.Response{Request: r.Request},
 	}
 
@@ -107,7 +67,7 @@ func (r StopCrawlerScheduleRequest) Send(ctx context.Context) (*StopCrawlerSched
 // StopCrawlerScheduleResponse is the response type for the
 // StopCrawlerSchedule API operation.
 type StopCrawlerScheduleResponse struct {
-	*StopCrawlerScheduleOutput
+	*types.StopCrawlerScheduleOutput
 
 	response *aws.Response
 }

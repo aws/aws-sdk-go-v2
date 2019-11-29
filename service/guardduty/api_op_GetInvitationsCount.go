@@ -6,48 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/guardduty/types"
 )
-
-type GetInvitationsCountInput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s GetInvitationsCountInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetInvitationsCountInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	return nil
-}
-
-type GetInvitationsCountOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The number of received invitations.
-	InvitationsCount *int64 `locationName:"invitationsCount" type:"integer"`
-}
-
-// String returns the string representation
-func (s GetInvitationsCountOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetInvitationsCountOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.InvitationsCount != nil {
-		v := *s.InvitationsCount
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "invitationsCount", protocol.Int64Value(v), metadata)
-	}
-	return nil
-}
 
 const opGetInvitationsCount = "GetInvitationsCount"
 
@@ -65,7 +25,7 @@ const opGetInvitationsCount = "GetInvitationsCount"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetInvitationsCount
-func (c *Client) GetInvitationsCountRequest(input *GetInvitationsCountInput) GetInvitationsCountRequest {
+func (c *Client) GetInvitationsCountRequest(input *types.GetInvitationsCountInput) GetInvitationsCountRequest {
 	op := &aws.Operation{
 		Name:       opGetInvitationsCount,
 		HTTPMethod: "GET",
@@ -73,10 +33,10 @@ func (c *Client) GetInvitationsCountRequest(input *GetInvitationsCountInput) Get
 	}
 
 	if input == nil {
-		input = &GetInvitationsCountInput{}
+		input = &types.GetInvitationsCountInput{}
 	}
 
-	req := c.newRequest(op, input, &GetInvitationsCountOutput{})
+	req := c.newRequest(op, input, &types.GetInvitationsCountOutput{})
 	return GetInvitationsCountRequest{Request: req, Input: input, Copy: c.GetInvitationsCountRequest}
 }
 
@@ -84,8 +44,8 @@ func (c *Client) GetInvitationsCountRequest(input *GetInvitationsCountInput) Get
 // GetInvitationsCount API operation.
 type GetInvitationsCountRequest struct {
 	*aws.Request
-	Input *GetInvitationsCountInput
-	Copy  func(*GetInvitationsCountInput) GetInvitationsCountRequest
+	Input *types.GetInvitationsCountInput
+	Copy  func(*types.GetInvitationsCountInput) GetInvitationsCountRequest
 }
 
 // Send marshals and sends the GetInvitationsCount API request.
@@ -97,7 +57,7 @@ func (r GetInvitationsCountRequest) Send(ctx context.Context) (*GetInvitationsCo
 	}
 
 	resp := &GetInvitationsCountResponse{
-		GetInvitationsCountOutput: r.Request.Data.(*GetInvitationsCountOutput),
+		GetInvitationsCountOutput: r.Request.Data.(*types.GetInvitationsCountOutput),
 		response:                  &aws.Response{Request: r.Request},
 	}
 
@@ -107,7 +67,7 @@ func (r GetInvitationsCountRequest) Send(ctx context.Context) (*GetInvitationsCo
 // GetInvitationsCountResponse is the response type for the
 // GetInvitationsCount API operation.
 type GetInvitationsCountResponse struct {
-	*GetInvitationsCountOutput
+	*types.GetInvitationsCountOutput
 
 	response *aws.Response
 }

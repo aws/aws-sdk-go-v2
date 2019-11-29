@@ -6,55 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/query"
+	"github.com/aws/aws-sdk-go-v2/service/iam/types"
 )
-
-type CreateAccountAliasInput struct {
-	_ struct{} `type:"structure"`
-
-	// The account alias to create.
-	//
-	// This parameter allows (through its regex pattern (http://wikipedia.org/wiki/regex))
-	// a string of characters consisting of lowercase letters, digits, and dashes.
-	// You cannot start or finish with a dash, nor can you have two dashes in a
-	// row.
-	//
-	// AccountAlias is a required field
-	AccountAlias *string `min:"3" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s CreateAccountAliasInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateAccountAliasInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateAccountAliasInput"}
-
-	if s.AccountAlias == nil {
-		invalidParams.Add(aws.NewErrParamRequired("AccountAlias"))
-	}
-	if s.AccountAlias != nil && len(*s.AccountAlias) < 3 {
-		invalidParams.Add(aws.NewErrParamMinLen("AccountAlias", 3))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type CreateAccountAliasOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s CreateAccountAliasOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCreateAccountAlias = "CreateAccountAlias"
 
@@ -73,7 +28,7 @@ const opCreateAccountAlias = "CreateAccountAlias"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/CreateAccountAlias
-func (c *Client) CreateAccountAliasRequest(input *CreateAccountAliasInput) CreateAccountAliasRequest {
+func (c *Client) CreateAccountAliasRequest(input *types.CreateAccountAliasInput) CreateAccountAliasRequest {
 	op := &aws.Operation{
 		Name:       opCreateAccountAlias,
 		HTTPMethod: "POST",
@@ -81,10 +36,10 @@ func (c *Client) CreateAccountAliasRequest(input *CreateAccountAliasInput) Creat
 	}
 
 	if input == nil {
-		input = &CreateAccountAliasInput{}
+		input = &types.CreateAccountAliasInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateAccountAliasOutput{})
+	req := c.newRequest(op, input, &types.CreateAccountAliasOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return CreateAccountAliasRequest{Request: req, Input: input, Copy: c.CreateAccountAliasRequest}
@@ -94,8 +49,8 @@ func (c *Client) CreateAccountAliasRequest(input *CreateAccountAliasInput) Creat
 // CreateAccountAlias API operation.
 type CreateAccountAliasRequest struct {
 	*aws.Request
-	Input *CreateAccountAliasInput
-	Copy  func(*CreateAccountAliasInput) CreateAccountAliasRequest
+	Input *types.CreateAccountAliasInput
+	Copy  func(*types.CreateAccountAliasInput) CreateAccountAliasRequest
 }
 
 // Send marshals and sends the CreateAccountAlias API request.
@@ -107,7 +62,7 @@ func (r CreateAccountAliasRequest) Send(ctx context.Context) (*CreateAccountAlia
 	}
 
 	resp := &CreateAccountAliasResponse{
-		CreateAccountAliasOutput: r.Request.Data.(*CreateAccountAliasOutput),
+		CreateAccountAliasOutput: r.Request.Data.(*types.CreateAccountAliasOutput),
 		response:                 &aws.Response{Request: r.Request},
 	}
 
@@ -117,7 +72,7 @@ func (r CreateAccountAliasRequest) Send(ctx context.Context) (*CreateAccountAlia
 // CreateAccountAliasResponse is the response type for the
 // CreateAccountAlias API operation.
 type CreateAccountAliasResponse struct {
-	*CreateAccountAliasOutput
+	*types.CreateAccountAliasOutput
 
 	response *aws.Response
 }

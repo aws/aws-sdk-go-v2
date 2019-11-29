@@ -6,35 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ssm/types"
 )
-
-type GetDefaultPatchBaselineInput struct {
-	_ struct{} `type:"structure"`
-
-	// Returns the default patch baseline for the specified operating system.
-	OperatingSystem OperatingSystem `type:"string" enum:"true"`
-}
-
-// String returns the string representation
-func (s GetDefaultPatchBaselineInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type GetDefaultPatchBaselineOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the default patch baseline.
-	BaselineId *string `min:"20" type:"string"`
-
-	// The operating system for the returned patch baseline.
-	OperatingSystem OperatingSystem `type:"string" enum:"true"`
-}
-
-// String returns the string representation
-func (s GetDefaultPatchBaselineOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetDefaultPatchBaseline = "GetDefaultPatchBaseline"
 
@@ -56,7 +29,7 @@ const opGetDefaultPatchBaseline = "GetDefaultPatchBaseline"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetDefaultPatchBaseline
-func (c *Client) GetDefaultPatchBaselineRequest(input *GetDefaultPatchBaselineInput) GetDefaultPatchBaselineRequest {
+func (c *Client) GetDefaultPatchBaselineRequest(input *types.GetDefaultPatchBaselineInput) GetDefaultPatchBaselineRequest {
 	op := &aws.Operation{
 		Name:       opGetDefaultPatchBaseline,
 		HTTPMethod: "POST",
@@ -64,10 +37,10 @@ func (c *Client) GetDefaultPatchBaselineRequest(input *GetDefaultPatchBaselineIn
 	}
 
 	if input == nil {
-		input = &GetDefaultPatchBaselineInput{}
+		input = &types.GetDefaultPatchBaselineInput{}
 	}
 
-	req := c.newRequest(op, input, &GetDefaultPatchBaselineOutput{})
+	req := c.newRequest(op, input, &types.GetDefaultPatchBaselineOutput{})
 	return GetDefaultPatchBaselineRequest{Request: req, Input: input, Copy: c.GetDefaultPatchBaselineRequest}
 }
 
@@ -75,8 +48,8 @@ func (c *Client) GetDefaultPatchBaselineRequest(input *GetDefaultPatchBaselineIn
 // GetDefaultPatchBaseline API operation.
 type GetDefaultPatchBaselineRequest struct {
 	*aws.Request
-	Input *GetDefaultPatchBaselineInput
-	Copy  func(*GetDefaultPatchBaselineInput) GetDefaultPatchBaselineRequest
+	Input *types.GetDefaultPatchBaselineInput
+	Copy  func(*types.GetDefaultPatchBaselineInput) GetDefaultPatchBaselineRequest
 }
 
 // Send marshals and sends the GetDefaultPatchBaseline API request.
@@ -88,7 +61,7 @@ func (r GetDefaultPatchBaselineRequest) Send(ctx context.Context) (*GetDefaultPa
 	}
 
 	resp := &GetDefaultPatchBaselineResponse{
-		GetDefaultPatchBaselineOutput: r.Request.Data.(*GetDefaultPatchBaselineOutput),
+		GetDefaultPatchBaselineOutput: r.Request.Data.(*types.GetDefaultPatchBaselineOutput),
 		response:                      &aws.Response{Request: r.Request},
 	}
 
@@ -98,7 +71,7 @@ func (r GetDefaultPatchBaselineRequest) Send(ctx context.Context) (*GetDefaultPa
 // GetDefaultPatchBaselineResponse is the response type for the
 // GetDefaultPatchBaseline API operation.
 type GetDefaultPatchBaselineResponse struct {
-	*GetDefaultPatchBaselineOutput
+	*types.GetDefaultPatchBaselineOutput
 
 	response *aws.Response
 }

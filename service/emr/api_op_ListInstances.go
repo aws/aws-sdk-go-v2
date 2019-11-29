@@ -6,72 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/emr/types"
 )
-
-// This input determines which instances to list.
-type ListInstancesInput struct {
-	_ struct{} `type:"structure"`
-
-	// The identifier of the cluster for which to list the instances.
-	//
-	// ClusterId is a required field
-	ClusterId *string `type:"string" required:"true"`
-
-	// The unique identifier of the instance fleet.
-	InstanceFleetId *string `type:"string"`
-
-	// The node type of the instance fleet. For example MASTER, CORE, or TASK.
-	InstanceFleetType InstanceFleetType `type:"string" enum:"true"`
-
-	// The identifier of the instance group for which to list the instances.
-	InstanceGroupId *string `type:"string"`
-
-	// The type of instance group for which to list the instances.
-	InstanceGroupTypes []InstanceGroupType `type:"list"`
-
-	// A list of instance states that will filter the instances returned with this
-	// request.
-	InstanceStates []InstanceState `type:"list"`
-
-	// The pagination token that indicates the next set of results to retrieve.
-	Marker *string `type:"string"`
-}
-
-// String returns the string representation
-func (s ListInstancesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListInstancesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListInstancesInput"}
-
-	if s.ClusterId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ClusterId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// This output contains the list of instances.
-type ListInstancesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The list of instances for the cluster and given filters.
-	Instances []Instance `type:"list"`
-
-	// The pagination token that indicates the next set of results to retrieve.
-	Marker *string `type:"string"`
-}
-
-// String returns the string representation
-func (s ListInstancesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListInstances = "ListInstances"
 
@@ -91,7 +27,7 @@ const opListInstances = "ListInstances"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/ListInstances
-func (c *Client) ListInstancesRequest(input *ListInstancesInput) ListInstancesRequest {
+func (c *Client) ListInstancesRequest(input *types.ListInstancesInput) ListInstancesRequest {
 	op := &aws.Operation{
 		Name:       opListInstances,
 		HTTPMethod: "POST",
@@ -105,10 +41,10 @@ func (c *Client) ListInstancesRequest(input *ListInstancesInput) ListInstancesRe
 	}
 
 	if input == nil {
-		input = &ListInstancesInput{}
+		input = &types.ListInstancesInput{}
 	}
 
-	req := c.newRequest(op, input, &ListInstancesOutput{})
+	req := c.newRequest(op, input, &types.ListInstancesOutput{})
 	return ListInstancesRequest{Request: req, Input: input, Copy: c.ListInstancesRequest}
 }
 
@@ -116,8 +52,8 @@ func (c *Client) ListInstancesRequest(input *ListInstancesInput) ListInstancesRe
 // ListInstances API operation.
 type ListInstancesRequest struct {
 	*aws.Request
-	Input *ListInstancesInput
-	Copy  func(*ListInstancesInput) ListInstancesRequest
+	Input *types.ListInstancesInput
+	Copy  func(*types.ListInstancesInput) ListInstancesRequest
 }
 
 // Send marshals and sends the ListInstances API request.
@@ -129,7 +65,7 @@ func (r ListInstancesRequest) Send(ctx context.Context) (*ListInstancesResponse,
 	}
 
 	resp := &ListInstancesResponse{
-		ListInstancesOutput: r.Request.Data.(*ListInstancesOutput),
+		ListInstancesOutput: r.Request.Data.(*types.ListInstancesOutput),
 		response:            &aws.Response{Request: r.Request},
 	}
 
@@ -159,7 +95,7 @@ func NewListInstancesPaginator(req ListInstancesRequest) ListInstancesPaginator 
 	return ListInstancesPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListInstancesInput
+				var inCpy *types.ListInstancesInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -179,14 +115,14 @@ type ListInstancesPaginator struct {
 	aws.Pager
 }
 
-func (p *ListInstancesPaginator) CurrentPage() *ListInstancesOutput {
-	return p.Pager.CurrentPage().(*ListInstancesOutput)
+func (p *ListInstancesPaginator) CurrentPage() *types.ListInstancesOutput {
+	return p.Pager.CurrentPage().(*types.ListInstancesOutput)
 }
 
 // ListInstancesResponse is the response type for the
 // ListInstances API operation.
 type ListInstancesResponse struct {
-	*ListInstancesOutput
+	*types.ListInstancesOutput
 
 	response *aws.Response
 }

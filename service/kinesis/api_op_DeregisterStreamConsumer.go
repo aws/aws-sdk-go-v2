@@ -6,62 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
+	"github.com/aws/aws-sdk-go-v2/service/kinesis/types"
 )
-
-type DeregisterStreamConsumerInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ARN returned by Kinesis Data Streams when you registered the consumer.
-	// If you don't know the ARN of the consumer that you want to deregister, you
-	// can use the ListStreamConsumers operation to get a list of the descriptions
-	// of all the consumers that are currently registered with a given data stream.
-	// The description of a consumer contains its ARN.
-	ConsumerARN *string `min:"1" type:"string"`
-
-	// The name that you gave to the consumer.
-	ConsumerName *string `min:"1" type:"string"`
-
-	// The ARN of the Kinesis data stream that the consumer is registered with.
-	// For more information, see Amazon Resource Names (ARNs) and AWS Service Namespaces
-	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-kinesis-streams).
-	StreamARN *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s DeregisterStreamConsumerInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeregisterStreamConsumerInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeregisterStreamConsumerInput"}
-	if s.ConsumerARN != nil && len(*s.ConsumerARN) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ConsumerARN", 1))
-	}
-	if s.ConsumerName != nil && len(*s.ConsumerName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ConsumerName", 1))
-	}
-	if s.StreamARN != nil && len(*s.StreamARN) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("StreamARN", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeregisterStreamConsumerOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeregisterStreamConsumerOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeregisterStreamConsumer = "DeregisterStreamConsumer"
 
@@ -87,7 +35,7 @@ const opDeregisterStreamConsumer = "DeregisterStreamConsumer"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/DeregisterStreamConsumer
-func (c *Client) DeregisterStreamConsumerRequest(input *DeregisterStreamConsumerInput) DeregisterStreamConsumerRequest {
+func (c *Client) DeregisterStreamConsumerRequest(input *types.DeregisterStreamConsumerInput) DeregisterStreamConsumerRequest {
 	op := &aws.Operation{
 		Name:       opDeregisterStreamConsumer,
 		HTTPMethod: "POST",
@@ -95,10 +43,10 @@ func (c *Client) DeregisterStreamConsumerRequest(input *DeregisterStreamConsumer
 	}
 
 	if input == nil {
-		input = &DeregisterStreamConsumerInput{}
+		input = &types.DeregisterStreamConsumerInput{}
 	}
 
-	req := c.newRequest(op, input, &DeregisterStreamConsumerOutput{})
+	req := c.newRequest(op, input, &types.DeregisterStreamConsumerOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return DeregisterStreamConsumerRequest{Request: req, Input: input, Copy: c.DeregisterStreamConsumerRequest}
@@ -108,8 +56,8 @@ func (c *Client) DeregisterStreamConsumerRequest(input *DeregisterStreamConsumer
 // DeregisterStreamConsumer API operation.
 type DeregisterStreamConsumerRequest struct {
 	*aws.Request
-	Input *DeregisterStreamConsumerInput
-	Copy  func(*DeregisterStreamConsumerInput) DeregisterStreamConsumerRequest
+	Input *types.DeregisterStreamConsumerInput
+	Copy  func(*types.DeregisterStreamConsumerInput) DeregisterStreamConsumerRequest
 }
 
 // Send marshals and sends the DeregisterStreamConsumer API request.
@@ -121,7 +69,7 @@ func (r DeregisterStreamConsumerRequest) Send(ctx context.Context) (*DeregisterS
 	}
 
 	resp := &DeregisterStreamConsumerResponse{
-		DeregisterStreamConsumerOutput: r.Request.Data.(*DeregisterStreamConsumerOutput),
+		DeregisterStreamConsumerOutput: r.Request.Data.(*types.DeregisterStreamConsumerOutput),
 		response:                       &aws.Response{Request: r.Request},
 	}
 
@@ -131,7 +79,7 @@ func (r DeregisterStreamConsumerRequest) Send(ctx context.Context) (*DeregisterS
 // DeregisterStreamConsumerResponse is the response type for the
 // DeregisterStreamConsumer API operation.
 type DeregisterStreamConsumerResponse struct {
-	*DeregisterStreamConsumerOutput
+	*types.DeregisterStreamConsumerOutput
 
 	response *aws.Response
 }

@@ -6,75 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/securityhub/types"
 )
-
-type DeleteActionTargetInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ARN of the custom action target to delete.
-	//
-	// ActionTargetArn is a required field
-	ActionTargetArn *string `location:"uri" locationName:"ActionTargetArn" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteActionTargetInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteActionTargetInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteActionTargetInput"}
-
-	if s.ActionTargetArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ActionTargetArn"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteActionTargetInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.ActionTargetArn != nil {
-		v := *s.ActionTargetArn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "ActionTargetArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type DeleteActionTargetOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The ARN of the custom action target that was deleted.
-	//
-	// ActionTargetArn is a required field
-	ActionTargetArn *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteActionTargetOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteActionTargetOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.ActionTargetArn != nil {
-		v := *s.ActionTargetArn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "ActionTargetArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opDeleteActionTarget = "DeleteActionTarget"
 
@@ -93,7 +26,7 @@ const opDeleteActionTarget = "DeleteActionTarget"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/DeleteActionTarget
-func (c *Client) DeleteActionTargetRequest(input *DeleteActionTargetInput) DeleteActionTargetRequest {
+func (c *Client) DeleteActionTargetRequest(input *types.DeleteActionTargetInput) DeleteActionTargetRequest {
 	op := &aws.Operation{
 		Name:       opDeleteActionTarget,
 		HTTPMethod: "DELETE",
@@ -101,10 +34,10 @@ func (c *Client) DeleteActionTargetRequest(input *DeleteActionTargetInput) Delet
 	}
 
 	if input == nil {
-		input = &DeleteActionTargetInput{}
+		input = &types.DeleteActionTargetInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteActionTargetOutput{})
+	req := c.newRequest(op, input, &types.DeleteActionTargetOutput{})
 	return DeleteActionTargetRequest{Request: req, Input: input, Copy: c.DeleteActionTargetRequest}
 }
 
@@ -112,8 +45,8 @@ func (c *Client) DeleteActionTargetRequest(input *DeleteActionTargetInput) Delet
 // DeleteActionTarget API operation.
 type DeleteActionTargetRequest struct {
 	*aws.Request
-	Input *DeleteActionTargetInput
-	Copy  func(*DeleteActionTargetInput) DeleteActionTargetRequest
+	Input *types.DeleteActionTargetInput
+	Copy  func(*types.DeleteActionTargetInput) DeleteActionTargetRequest
 }
 
 // Send marshals and sends the DeleteActionTarget API request.
@@ -125,7 +58,7 @@ func (r DeleteActionTargetRequest) Send(ctx context.Context) (*DeleteActionTarge
 	}
 
 	resp := &DeleteActionTargetResponse{
-		DeleteActionTargetOutput: r.Request.Data.(*DeleteActionTargetOutput),
+		DeleteActionTargetOutput: r.Request.Data.(*types.DeleteActionTargetOutput),
 		response:                 &aws.Response{Request: r.Request},
 	}
 
@@ -135,7 +68,7 @@ func (r DeleteActionTargetRequest) Send(ctx context.Context) (*DeleteActionTarge
 // DeleteActionTargetResponse is the response type for the
 // DeleteActionTarget API operation.
 type DeleteActionTargetResponse struct {
-	*DeleteActionTargetOutput
+	*types.DeleteActionTargetOutput
 
 	response *aws.Response
 }

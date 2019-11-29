@@ -4,96 +4,10 @@ package storagegateway
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/storagegateway/types"
 )
-
-// A JSON object containing one or more of the following fields:
-//
-//    * CreateSnapshotInput$SnapshotDescription
-//
-//    * CreateSnapshotInput$VolumeARN
-type CreateSnapshotInput struct {
-	_ struct{} `type:"structure"`
-
-	// Textual description of the snapshot that appears in the Amazon EC2 console,
-	// Elastic Block Store snapshots panel in the Description field, and in the
-	// AWS Storage Gateway snapshot Details pane, Description field
-	//
-	// SnapshotDescription is a required field
-	SnapshotDescription *string `min:"1" type:"string" required:"true"`
-
-	// A list of up to 50 tags that can be assigned to a snapshot. Each tag is a
-	// key-value pair.
-	//
-	// Valid characters for key and value are letters, spaces, and numbers representable
-	// in UTF-8 format, and the following special characters: + - = . _ : / @. The
-	// maximum length of a tag's key is 128 characters, and the maximum length for
-	// a tag's value is 256.
-	Tags []Tag `type:"list"`
-
-	// The Amazon Resource Name (ARN) of the volume. Use the ListVolumes operation
-	// to return a list of gateway volumes.
-	//
-	// VolumeARN is a required field
-	VolumeARN *string `min:"50" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s CreateSnapshotInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateSnapshotInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateSnapshotInput"}
-
-	if s.SnapshotDescription == nil {
-		invalidParams.Add(aws.NewErrParamRequired("SnapshotDescription"))
-	}
-	if s.SnapshotDescription != nil && len(*s.SnapshotDescription) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("SnapshotDescription", 1))
-	}
-
-	if s.VolumeARN == nil {
-		invalidParams.Add(aws.NewErrParamRequired("VolumeARN"))
-	}
-	if s.VolumeARN != nil && len(*s.VolumeARN) < 50 {
-		invalidParams.Add(aws.NewErrParamMinLen("VolumeARN", 50))
-	}
-	if s.Tags != nil {
-		for i, v := range s.Tags {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// A JSON object containing the following fields:
-type CreateSnapshotOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The snapshot ID that is used to refer to the snapshot in future operations
-	// such as describing snapshots (Amazon Elastic Compute Cloud API DescribeSnapshots)
-	// or creating a volume from a snapshot (CreateStorediSCSIVolume).
-	SnapshotId *string `type:"string"`
-
-	// The Amazon Resource Name (ARN) of the volume of which the snapshot was taken.
-	VolumeARN *string `min:"50" type:"string"`
-}
-
-// String returns the string representation
-func (s CreateSnapshotOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCreateSnapshot = "CreateSnapshot"
 
@@ -133,7 +47,7 @@ const opCreateSnapshot = "CreateSnapshot"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/CreateSnapshot
-func (c *Client) CreateSnapshotRequest(input *CreateSnapshotInput) CreateSnapshotRequest {
+func (c *Client) CreateSnapshotRequest(input *types.CreateSnapshotInput) CreateSnapshotRequest {
 	op := &aws.Operation{
 		Name:       opCreateSnapshot,
 		HTTPMethod: "POST",
@@ -141,10 +55,10 @@ func (c *Client) CreateSnapshotRequest(input *CreateSnapshotInput) CreateSnapsho
 	}
 
 	if input == nil {
-		input = &CreateSnapshotInput{}
+		input = &types.CreateSnapshotInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateSnapshotOutput{})
+	req := c.newRequest(op, input, &types.CreateSnapshotOutput{})
 	return CreateSnapshotRequest{Request: req, Input: input, Copy: c.CreateSnapshotRequest}
 }
 
@@ -152,8 +66,8 @@ func (c *Client) CreateSnapshotRequest(input *CreateSnapshotInput) CreateSnapsho
 // CreateSnapshot API operation.
 type CreateSnapshotRequest struct {
 	*aws.Request
-	Input *CreateSnapshotInput
-	Copy  func(*CreateSnapshotInput) CreateSnapshotRequest
+	Input *types.CreateSnapshotInput
+	Copy  func(*types.CreateSnapshotInput) CreateSnapshotRequest
 }
 
 // Send marshals and sends the CreateSnapshot API request.
@@ -165,7 +79,7 @@ func (r CreateSnapshotRequest) Send(ctx context.Context) (*CreateSnapshotRespons
 	}
 
 	resp := &CreateSnapshotResponse{
-		CreateSnapshotOutput: r.Request.Data.(*CreateSnapshotOutput),
+		CreateSnapshotOutput: r.Request.Data.(*types.CreateSnapshotOutput),
 		response:             &aws.Response{Request: r.Request},
 	}
 
@@ -175,7 +89,7 @@ func (r CreateSnapshotRequest) Send(ctx context.Context) (*CreateSnapshotRespons
 // CreateSnapshotResponse is the response type for the
 // CreateSnapshot API operation.
 type CreateSnapshotResponse struct {
-	*CreateSnapshotOutput
+	*types.CreateSnapshotOutput
 
 	response *aws.Response
 }

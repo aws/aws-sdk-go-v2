@@ -6,56 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-type CreateTrafficMirrorTargetInput struct {
-	_ struct{} `type:"structure"`
-
-	// Unique, case-sensitive identifier that you provide to ensure the idempotency
-	// of the request. For more information, see How to Ensure Idempotency (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html).
-	ClientToken *string `type:"string" idempotencyToken:"true"`
-
-	// The description of the Traffic Mirror target.
-	Description *string `type:"string"`
-
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have
-	// the required permissions, the error response is DryRunOperation. Otherwise,
-	// it is UnauthorizedOperation.
-	DryRun *bool `type:"boolean"`
-
-	// The network interface ID that is associated with the target.
-	NetworkInterfaceId *string `type:"string"`
-
-	// The Amazon Resource Name (ARN) of the Network Load Balancer that is associated
-	// with the target.
-	NetworkLoadBalancerArn *string `type:"string"`
-
-	// The tags to assign to the Traffic Mirror target.
-	TagSpecifications []TagSpecification `locationName:"TagSpecification" locationNameList:"item" type:"list"`
-}
-
-// String returns the string representation
-func (s CreateTrafficMirrorTargetInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type CreateTrafficMirrorTargetOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Unique, case-sensitive identifier that you provide to ensure the idempotency
-	// of the request. For more information, see How to Ensure Idempotency (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html).
-	ClientToken *string `locationName:"clientToken" type:"string"`
-
-	// Information about the Traffic Mirror target.
-	TrafficMirrorTarget *TrafficMirrorTarget `locationName:"trafficMirrorTarget" type:"structure"`
-}
-
-// String returns the string representation
-func (s CreateTrafficMirrorTargetOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCreateTrafficMirrorTarget = "CreateTrafficMirrorTarget"
 
@@ -71,7 +23,8 @@ const opCreateTrafficMirrorTarget = "CreateTrafficMirrorTarget"
 //
 // A Traffic Mirror target can be a network interface, or a Network Load Balancer.
 //
-// To use the target in a Traffic Mirror session, use CreateTrafficMirrorSession.
+// To use the target in a Traffic Mirror session, use CreateTrafficMirrorSession
+// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateTrafficMirrorSession.htm).
 //
 //    // Example sending a request using CreateTrafficMirrorTargetRequest.
 //    req := client.CreateTrafficMirrorTargetRequest(params)
@@ -81,7 +34,7 @@ const opCreateTrafficMirrorTarget = "CreateTrafficMirrorTarget"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateTrafficMirrorTarget
-func (c *Client) CreateTrafficMirrorTargetRequest(input *CreateTrafficMirrorTargetInput) CreateTrafficMirrorTargetRequest {
+func (c *Client) CreateTrafficMirrorTargetRequest(input *types.CreateTrafficMirrorTargetInput) CreateTrafficMirrorTargetRequest {
 	op := &aws.Operation{
 		Name:       opCreateTrafficMirrorTarget,
 		HTTPMethod: "POST",
@@ -89,10 +42,10 @@ func (c *Client) CreateTrafficMirrorTargetRequest(input *CreateTrafficMirrorTarg
 	}
 
 	if input == nil {
-		input = &CreateTrafficMirrorTargetInput{}
+		input = &types.CreateTrafficMirrorTargetInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateTrafficMirrorTargetOutput{})
+	req := c.newRequest(op, input, &types.CreateTrafficMirrorTargetOutput{})
 	return CreateTrafficMirrorTargetRequest{Request: req, Input: input, Copy: c.CreateTrafficMirrorTargetRequest}
 }
 
@@ -100,8 +53,8 @@ func (c *Client) CreateTrafficMirrorTargetRequest(input *CreateTrafficMirrorTarg
 // CreateTrafficMirrorTarget API operation.
 type CreateTrafficMirrorTargetRequest struct {
 	*aws.Request
-	Input *CreateTrafficMirrorTargetInput
-	Copy  func(*CreateTrafficMirrorTargetInput) CreateTrafficMirrorTargetRequest
+	Input *types.CreateTrafficMirrorTargetInput
+	Copy  func(*types.CreateTrafficMirrorTargetInput) CreateTrafficMirrorTargetRequest
 }
 
 // Send marshals and sends the CreateTrafficMirrorTarget API request.
@@ -113,7 +66,7 @@ func (r CreateTrafficMirrorTargetRequest) Send(ctx context.Context) (*CreateTraf
 	}
 
 	resp := &CreateTrafficMirrorTargetResponse{
-		CreateTrafficMirrorTargetOutput: r.Request.Data.(*CreateTrafficMirrorTargetOutput),
+		CreateTrafficMirrorTargetOutput: r.Request.Data.(*types.CreateTrafficMirrorTargetOutput),
 		response:                        &aws.Response{Request: r.Request},
 	}
 
@@ -123,7 +76,7 @@ func (r CreateTrafficMirrorTargetRequest) Send(ctx context.Context) (*CreateTraf
 // CreateTrafficMirrorTargetResponse is the response type for the
 // CreateTrafficMirrorTarget API operation.
 type CreateTrafficMirrorTargetResponse struct {
-	*CreateTrafficMirrorTargetOutput
+	*types.CreateTrafficMirrorTargetOutput
 
 	response *aws.Response
 }

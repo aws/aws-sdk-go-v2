@@ -6,66 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/devicefarm/types"
 )
-
-// Represents a request to the list runs operation.
-type ListRunsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the project for which you want to list
-	// runs.
-	//
-	// Arn is a required field
-	Arn *string `locationName:"arn" min:"32" type:"string" required:"true"`
-
-	// An identifier that was returned from the previous call to this operation,
-	// which can be used to return the next set of items in the list.
-	NextToken *string `locationName:"nextToken" min:"4" type:"string"`
-}
-
-// String returns the string representation
-func (s ListRunsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListRunsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListRunsInput"}
-
-	if s.Arn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Arn"))
-	}
-	if s.Arn != nil && len(*s.Arn) < 32 {
-		invalidParams.Add(aws.NewErrParamMinLen("Arn", 32))
-	}
-	if s.NextToken != nil && len(*s.NextToken) < 4 {
-		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 4))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Represents the result of a list runs request.
-type ListRunsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// If the number of items that are returned is significantly large, this is
-	// an identifier that is also returned, which can be used in a subsequent call
-	// to this operation to return the next set of items in the list.
-	NextToken *string `locationName:"nextToken" min:"4" type:"string"`
-
-	// Information about the runs.
-	Runs []Run `locationName:"runs" type:"list"`
-}
-
-// String returns the string representation
-func (s ListRunsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListRuns = "ListRuns"
 
@@ -82,7 +24,7 @@ const opListRuns = "ListRuns"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ListRuns
-func (c *Client) ListRunsRequest(input *ListRunsInput) ListRunsRequest {
+func (c *Client) ListRunsRequest(input *types.ListRunsInput) ListRunsRequest {
 	op := &aws.Operation{
 		Name:       opListRuns,
 		HTTPMethod: "POST",
@@ -96,10 +38,10 @@ func (c *Client) ListRunsRequest(input *ListRunsInput) ListRunsRequest {
 	}
 
 	if input == nil {
-		input = &ListRunsInput{}
+		input = &types.ListRunsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListRunsOutput{})
+	req := c.newRequest(op, input, &types.ListRunsOutput{})
 	return ListRunsRequest{Request: req, Input: input, Copy: c.ListRunsRequest}
 }
 
@@ -107,8 +49,8 @@ func (c *Client) ListRunsRequest(input *ListRunsInput) ListRunsRequest {
 // ListRuns API operation.
 type ListRunsRequest struct {
 	*aws.Request
-	Input *ListRunsInput
-	Copy  func(*ListRunsInput) ListRunsRequest
+	Input *types.ListRunsInput
+	Copy  func(*types.ListRunsInput) ListRunsRequest
 }
 
 // Send marshals and sends the ListRuns API request.
@@ -120,7 +62,7 @@ func (r ListRunsRequest) Send(ctx context.Context) (*ListRunsResponse, error) {
 	}
 
 	resp := &ListRunsResponse{
-		ListRunsOutput: r.Request.Data.(*ListRunsOutput),
+		ListRunsOutput: r.Request.Data.(*types.ListRunsOutput),
 		response:       &aws.Response{Request: r.Request},
 	}
 
@@ -150,7 +92,7 @@ func NewListRunsPaginator(req ListRunsRequest) ListRunsPaginator {
 	return ListRunsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListRunsInput
+				var inCpy *types.ListRunsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -170,14 +112,14 @@ type ListRunsPaginator struct {
 	aws.Pager
 }
 
-func (p *ListRunsPaginator) CurrentPage() *ListRunsOutput {
-	return p.Pager.CurrentPage().(*ListRunsOutput)
+func (p *ListRunsPaginator) CurrentPage() *types.ListRunsOutput {
+	return p.Pager.CurrentPage().(*types.ListRunsOutput)
 }
 
 // ListRunsResponse is the response type for the
 // ListRuns API operation.
 type ListRunsResponse struct {
-	*ListRunsOutput
+	*types.ListRunsOutput
 
 	response *aws.Response
 }

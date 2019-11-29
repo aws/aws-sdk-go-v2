@@ -13,6 +13,7 @@ import (
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/docdb"
+	"github.com/aws/aws-sdk-go-v2/service/docdb/types"
 )
 
 // ClientAPI provides an interface to enable mocking the
@@ -46,7 +47,7 @@ import (
 //    type mockClientClient struct {
 //        docdbiface.ClientPI
 //    }
-//    func (m *mockClientClient) AddTagsToResource(input *docdb.AddTagsToResourceInput) (*docdb.AddTagsToResourceOutput, error) {
+//    func (m *mockClientClient) AddTagsToResource(input *types.AddTagsToResourceInput) (*types.AddTagsToResourceOutput, error) {
 //        // mock response/functionality
 //    }
 //
@@ -64,93 +65,93 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type ClientAPI interface {
-	AddTagsToResourceRequest(*docdb.AddTagsToResourceInput) docdb.AddTagsToResourceRequest
+	AddTagsToResourceRequest(*types.AddTagsToResourceInput) docdb.AddTagsToResourceRequest
 
-	ApplyPendingMaintenanceActionRequest(*docdb.ApplyPendingMaintenanceActionInput) docdb.ApplyPendingMaintenanceActionRequest
+	ApplyPendingMaintenanceActionRequest(*types.ApplyPendingMaintenanceActionInput) docdb.ApplyPendingMaintenanceActionRequest
 
-	CopyDBClusterParameterGroupRequest(*docdb.CopyDBClusterParameterGroupInput) docdb.CopyDBClusterParameterGroupRequest
+	CopyDBClusterParameterGroupRequest(*types.CopyDBClusterParameterGroupInput) docdb.CopyDBClusterParameterGroupRequest
 
-	CopyDBClusterSnapshotRequest(*docdb.CopyDBClusterSnapshotInput) docdb.CopyDBClusterSnapshotRequest
+	CopyDBClusterSnapshotRequest(*types.CopyDBClusterSnapshotInput) docdb.CopyDBClusterSnapshotRequest
 
-	CreateDBClusterRequest(*docdb.CreateDBClusterInput) docdb.CreateDBClusterRequest
+	CreateDBClusterRequest(*types.CreateDBClusterInput) docdb.CreateDBClusterRequest
 
-	CreateDBClusterParameterGroupRequest(*docdb.CreateDBClusterParameterGroupInput) docdb.CreateDBClusterParameterGroupRequest
+	CreateDBClusterParameterGroupRequest(*types.CreateDBClusterParameterGroupInput) docdb.CreateDBClusterParameterGroupRequest
 
-	CreateDBClusterSnapshotRequest(*docdb.CreateDBClusterSnapshotInput) docdb.CreateDBClusterSnapshotRequest
+	CreateDBClusterSnapshotRequest(*types.CreateDBClusterSnapshotInput) docdb.CreateDBClusterSnapshotRequest
 
-	CreateDBInstanceRequest(*docdb.CreateDBInstanceInput) docdb.CreateDBInstanceRequest
+	CreateDBInstanceRequest(*types.CreateDBInstanceInput) docdb.CreateDBInstanceRequest
 
-	CreateDBSubnetGroupRequest(*docdb.CreateDBSubnetGroupInput) docdb.CreateDBSubnetGroupRequest
+	CreateDBSubnetGroupRequest(*types.CreateDBSubnetGroupInput) docdb.CreateDBSubnetGroupRequest
 
-	DeleteDBClusterRequest(*docdb.DeleteDBClusterInput) docdb.DeleteDBClusterRequest
+	DeleteDBClusterRequest(*types.DeleteDBClusterInput) docdb.DeleteDBClusterRequest
 
-	DeleteDBClusterParameterGroupRequest(*docdb.DeleteDBClusterParameterGroupInput) docdb.DeleteDBClusterParameterGroupRequest
+	DeleteDBClusterParameterGroupRequest(*types.DeleteDBClusterParameterGroupInput) docdb.DeleteDBClusterParameterGroupRequest
 
-	DeleteDBClusterSnapshotRequest(*docdb.DeleteDBClusterSnapshotInput) docdb.DeleteDBClusterSnapshotRequest
+	DeleteDBClusterSnapshotRequest(*types.DeleteDBClusterSnapshotInput) docdb.DeleteDBClusterSnapshotRequest
 
-	DeleteDBInstanceRequest(*docdb.DeleteDBInstanceInput) docdb.DeleteDBInstanceRequest
+	DeleteDBInstanceRequest(*types.DeleteDBInstanceInput) docdb.DeleteDBInstanceRequest
 
-	DeleteDBSubnetGroupRequest(*docdb.DeleteDBSubnetGroupInput) docdb.DeleteDBSubnetGroupRequest
+	DeleteDBSubnetGroupRequest(*types.DeleteDBSubnetGroupInput) docdb.DeleteDBSubnetGroupRequest
 
-	DescribeCertificatesRequest(*docdb.DescribeCertificatesInput) docdb.DescribeCertificatesRequest
+	DescribeCertificatesRequest(*types.DescribeCertificatesInput) docdb.DescribeCertificatesRequest
 
-	DescribeDBClusterParameterGroupsRequest(*docdb.DescribeDBClusterParameterGroupsInput) docdb.DescribeDBClusterParameterGroupsRequest
+	DescribeDBClusterParameterGroupsRequest(*types.DescribeDBClusterParameterGroupsInput) docdb.DescribeDBClusterParameterGroupsRequest
 
-	DescribeDBClusterParametersRequest(*docdb.DescribeDBClusterParametersInput) docdb.DescribeDBClusterParametersRequest
+	DescribeDBClusterParametersRequest(*types.DescribeDBClusterParametersInput) docdb.DescribeDBClusterParametersRequest
 
-	DescribeDBClusterSnapshotAttributesRequest(*docdb.DescribeDBClusterSnapshotAttributesInput) docdb.DescribeDBClusterSnapshotAttributesRequest
+	DescribeDBClusterSnapshotAttributesRequest(*types.DescribeDBClusterSnapshotAttributesInput) docdb.DescribeDBClusterSnapshotAttributesRequest
 
-	DescribeDBClusterSnapshotsRequest(*docdb.DescribeDBClusterSnapshotsInput) docdb.DescribeDBClusterSnapshotsRequest
+	DescribeDBClusterSnapshotsRequest(*types.DescribeDBClusterSnapshotsInput) docdb.DescribeDBClusterSnapshotsRequest
 
-	DescribeDBClustersRequest(*docdb.DescribeDBClustersInput) docdb.DescribeDBClustersRequest
+	DescribeDBClustersRequest(*types.DescribeDBClustersInput) docdb.DescribeDBClustersRequest
 
-	DescribeDBEngineVersionsRequest(*docdb.DescribeDBEngineVersionsInput) docdb.DescribeDBEngineVersionsRequest
+	DescribeDBEngineVersionsRequest(*types.DescribeDBEngineVersionsInput) docdb.DescribeDBEngineVersionsRequest
 
-	DescribeDBInstancesRequest(*docdb.DescribeDBInstancesInput) docdb.DescribeDBInstancesRequest
+	DescribeDBInstancesRequest(*types.DescribeDBInstancesInput) docdb.DescribeDBInstancesRequest
 
-	DescribeDBSubnetGroupsRequest(*docdb.DescribeDBSubnetGroupsInput) docdb.DescribeDBSubnetGroupsRequest
+	DescribeDBSubnetGroupsRequest(*types.DescribeDBSubnetGroupsInput) docdb.DescribeDBSubnetGroupsRequest
 
-	DescribeEngineDefaultClusterParametersRequest(*docdb.DescribeEngineDefaultClusterParametersInput) docdb.DescribeEngineDefaultClusterParametersRequest
+	DescribeEngineDefaultClusterParametersRequest(*types.DescribeEngineDefaultClusterParametersInput) docdb.DescribeEngineDefaultClusterParametersRequest
 
-	DescribeEventCategoriesRequest(*docdb.DescribeEventCategoriesInput) docdb.DescribeEventCategoriesRequest
+	DescribeEventCategoriesRequest(*types.DescribeEventCategoriesInput) docdb.DescribeEventCategoriesRequest
 
-	DescribeEventsRequest(*docdb.DescribeEventsInput) docdb.DescribeEventsRequest
+	DescribeEventsRequest(*types.DescribeEventsInput) docdb.DescribeEventsRequest
 
-	DescribeOrderableDBInstanceOptionsRequest(*docdb.DescribeOrderableDBInstanceOptionsInput) docdb.DescribeOrderableDBInstanceOptionsRequest
+	DescribeOrderableDBInstanceOptionsRequest(*types.DescribeOrderableDBInstanceOptionsInput) docdb.DescribeOrderableDBInstanceOptionsRequest
 
-	DescribePendingMaintenanceActionsRequest(*docdb.DescribePendingMaintenanceActionsInput) docdb.DescribePendingMaintenanceActionsRequest
+	DescribePendingMaintenanceActionsRequest(*types.DescribePendingMaintenanceActionsInput) docdb.DescribePendingMaintenanceActionsRequest
 
-	FailoverDBClusterRequest(*docdb.FailoverDBClusterInput) docdb.FailoverDBClusterRequest
+	FailoverDBClusterRequest(*types.FailoverDBClusterInput) docdb.FailoverDBClusterRequest
 
-	ListTagsForResourceRequest(*docdb.ListTagsForResourceInput) docdb.ListTagsForResourceRequest
+	ListTagsForResourceRequest(*types.ListTagsForResourceInput) docdb.ListTagsForResourceRequest
 
-	ModifyDBClusterRequest(*docdb.ModifyDBClusterInput) docdb.ModifyDBClusterRequest
+	ModifyDBClusterRequest(*types.ModifyDBClusterInput) docdb.ModifyDBClusterRequest
 
-	ModifyDBClusterParameterGroupRequest(*docdb.ModifyDBClusterParameterGroupInput) docdb.ModifyDBClusterParameterGroupRequest
+	ModifyDBClusterParameterGroupRequest(*types.ModifyDBClusterParameterGroupInput) docdb.ModifyDBClusterParameterGroupRequest
 
-	ModifyDBClusterSnapshotAttributeRequest(*docdb.ModifyDBClusterSnapshotAttributeInput) docdb.ModifyDBClusterSnapshotAttributeRequest
+	ModifyDBClusterSnapshotAttributeRequest(*types.ModifyDBClusterSnapshotAttributeInput) docdb.ModifyDBClusterSnapshotAttributeRequest
 
-	ModifyDBInstanceRequest(*docdb.ModifyDBInstanceInput) docdb.ModifyDBInstanceRequest
+	ModifyDBInstanceRequest(*types.ModifyDBInstanceInput) docdb.ModifyDBInstanceRequest
 
-	ModifyDBSubnetGroupRequest(*docdb.ModifyDBSubnetGroupInput) docdb.ModifyDBSubnetGroupRequest
+	ModifyDBSubnetGroupRequest(*types.ModifyDBSubnetGroupInput) docdb.ModifyDBSubnetGroupRequest
 
-	RebootDBInstanceRequest(*docdb.RebootDBInstanceInput) docdb.RebootDBInstanceRequest
+	RebootDBInstanceRequest(*types.RebootDBInstanceInput) docdb.RebootDBInstanceRequest
 
-	RemoveTagsFromResourceRequest(*docdb.RemoveTagsFromResourceInput) docdb.RemoveTagsFromResourceRequest
+	RemoveTagsFromResourceRequest(*types.RemoveTagsFromResourceInput) docdb.RemoveTagsFromResourceRequest
 
-	ResetDBClusterParameterGroupRequest(*docdb.ResetDBClusterParameterGroupInput) docdb.ResetDBClusterParameterGroupRequest
+	ResetDBClusterParameterGroupRequest(*types.ResetDBClusterParameterGroupInput) docdb.ResetDBClusterParameterGroupRequest
 
-	RestoreDBClusterFromSnapshotRequest(*docdb.RestoreDBClusterFromSnapshotInput) docdb.RestoreDBClusterFromSnapshotRequest
+	RestoreDBClusterFromSnapshotRequest(*types.RestoreDBClusterFromSnapshotInput) docdb.RestoreDBClusterFromSnapshotRequest
 
-	RestoreDBClusterToPointInTimeRequest(*docdb.RestoreDBClusterToPointInTimeInput) docdb.RestoreDBClusterToPointInTimeRequest
+	RestoreDBClusterToPointInTimeRequest(*types.RestoreDBClusterToPointInTimeInput) docdb.RestoreDBClusterToPointInTimeRequest
 
-	StartDBClusterRequest(*docdb.StartDBClusterInput) docdb.StartDBClusterRequest
+	StartDBClusterRequest(*types.StartDBClusterInput) docdb.StartDBClusterRequest
 
-	StopDBClusterRequest(*docdb.StopDBClusterInput) docdb.StopDBClusterRequest
+	StopDBClusterRequest(*types.StopDBClusterInput) docdb.StopDBClusterRequest
 
-	WaitUntilDBInstanceAvailable(context.Context, *docdb.DescribeDBInstancesInput, ...aws.WaiterOption) error
+	WaitUntilDBInstanceAvailable(context.Context, *types.DescribeDBInstancesInput, ...aws.WaiterOption) error
 
-	WaitUntilDBInstanceDeleted(context.Context, *docdb.DescribeDBInstancesInput, ...aws.WaiterOption) error
+	WaitUntilDBInstanceDeleted(context.Context, *types.DescribeDBInstancesInput, ...aws.WaiterOption) error
 }
 
 var _ ClientAPI = (*docdb.Client)(nil)

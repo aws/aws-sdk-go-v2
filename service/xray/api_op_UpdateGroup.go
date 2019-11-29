@@ -6,93 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/xray/types"
 )
-
-type UpdateGroupInput struct {
-	_ struct{} `type:"structure"`
-
-	// The updated filter expression defining criteria by which to group traces.
-	FilterExpression *string `type:"string"`
-
-	// The ARN that was generated upon creation.
-	GroupARN *string `min:"1" type:"string"`
-
-	// The case-sensitive name of the group.
-	GroupName *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s UpdateGroupInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateGroupInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateGroupInput"}
-	if s.GroupARN != nil && len(*s.GroupARN) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("GroupARN", 1))
-	}
-	if s.GroupName != nil && len(*s.GroupName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("GroupName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s UpdateGroupInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.FilterExpression != nil {
-		v := *s.FilterExpression
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "FilterExpression", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.GroupARN != nil {
-		v := *s.GroupARN
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "GroupARN", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.GroupName != nil {
-		v := *s.GroupName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "GroupName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type UpdateGroupOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The group that was updated. Contains the name of the group that was updated,
-	// the ARN of the group that was updated, and the updated filter expression
-	// assigned to the group.
-	Group *Group `type:"structure"`
-}
-
-// String returns the string representation
-func (s UpdateGroupOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s UpdateGroupOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.Group != nil {
-		v := s.Group
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "Group", v, metadata)
-	}
-	return nil
-}
 
 const opUpdateGroup = "UpdateGroup"
 
@@ -109,7 +24,7 @@ const opUpdateGroup = "UpdateGroup"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/UpdateGroup
-func (c *Client) UpdateGroupRequest(input *UpdateGroupInput) UpdateGroupRequest {
+func (c *Client) UpdateGroupRequest(input *types.UpdateGroupInput) UpdateGroupRequest {
 	op := &aws.Operation{
 		Name:       opUpdateGroup,
 		HTTPMethod: "POST",
@@ -117,10 +32,10 @@ func (c *Client) UpdateGroupRequest(input *UpdateGroupInput) UpdateGroupRequest 
 	}
 
 	if input == nil {
-		input = &UpdateGroupInput{}
+		input = &types.UpdateGroupInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateGroupOutput{})
+	req := c.newRequest(op, input, &types.UpdateGroupOutput{})
 	return UpdateGroupRequest{Request: req, Input: input, Copy: c.UpdateGroupRequest}
 }
 
@@ -128,8 +43,8 @@ func (c *Client) UpdateGroupRequest(input *UpdateGroupInput) UpdateGroupRequest 
 // UpdateGroup API operation.
 type UpdateGroupRequest struct {
 	*aws.Request
-	Input *UpdateGroupInput
-	Copy  func(*UpdateGroupInput) UpdateGroupRequest
+	Input *types.UpdateGroupInput
+	Copy  func(*types.UpdateGroupInput) UpdateGroupRequest
 }
 
 // Send marshals and sends the UpdateGroup API request.
@@ -141,7 +56,7 @@ func (r UpdateGroupRequest) Send(ctx context.Context) (*UpdateGroupResponse, err
 	}
 
 	resp := &UpdateGroupResponse{
-		UpdateGroupOutput: r.Request.Data.(*UpdateGroupOutput),
+		UpdateGroupOutput: r.Request.Data.(*types.UpdateGroupOutput),
 		response:          &aws.Response{Request: r.Request},
 	}
 
@@ -151,7 +66,7 @@ func (r UpdateGroupRequest) Send(ctx context.Context) (*UpdateGroupResponse, err
 // UpdateGroupResponse is the response type for the
 // UpdateGroup API operation.
 type UpdateGroupResponse struct {
-	*UpdateGroupOutput
+	*types.UpdateGroupOutput
 
 	response *aws.Response
 }

@@ -6,61 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/applicationinsights/types"
 )
-
-type ListComponentsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The maximum number of results to return in a single call. To retrieve the
-	// remaining results, make another call with the returned NextToken value.
-	MaxResults *int64 `min:"1" type:"integer"`
-
-	// The token to request the next page of results.
-	NextToken *string `type:"string"`
-
-	// The name of the resource group.
-	//
-	// ResourceGroupName is a required field
-	ResourceGroupName *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s ListComponentsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListComponentsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListComponentsInput"}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-
-	if s.ResourceGroupName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ResourceGroupName"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ListComponentsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The list of application components.
-	ApplicationComponentList []ApplicationComponent `type:"list"`
-
-	// The token to request the next page of results.
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s ListComponentsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListComponents = "ListComponents"
 
@@ -77,7 +24,7 @@ const opListComponents = "ListComponents"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/application-insights-2018-11-25/ListComponents
-func (c *Client) ListComponentsRequest(input *ListComponentsInput) ListComponentsRequest {
+func (c *Client) ListComponentsRequest(input *types.ListComponentsInput) ListComponentsRequest {
 	op := &aws.Operation{
 		Name:       opListComponents,
 		HTTPMethod: "POST",
@@ -91,10 +38,10 @@ func (c *Client) ListComponentsRequest(input *ListComponentsInput) ListComponent
 	}
 
 	if input == nil {
-		input = &ListComponentsInput{}
+		input = &types.ListComponentsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListComponentsOutput{})
+	req := c.newRequest(op, input, &types.ListComponentsOutput{})
 	return ListComponentsRequest{Request: req, Input: input, Copy: c.ListComponentsRequest}
 }
 
@@ -102,8 +49,8 @@ func (c *Client) ListComponentsRequest(input *ListComponentsInput) ListComponent
 // ListComponents API operation.
 type ListComponentsRequest struct {
 	*aws.Request
-	Input *ListComponentsInput
-	Copy  func(*ListComponentsInput) ListComponentsRequest
+	Input *types.ListComponentsInput
+	Copy  func(*types.ListComponentsInput) ListComponentsRequest
 }
 
 // Send marshals and sends the ListComponents API request.
@@ -115,7 +62,7 @@ func (r ListComponentsRequest) Send(ctx context.Context) (*ListComponentsRespons
 	}
 
 	resp := &ListComponentsResponse{
-		ListComponentsOutput: r.Request.Data.(*ListComponentsOutput),
+		ListComponentsOutput: r.Request.Data.(*types.ListComponentsOutput),
 		response:             &aws.Response{Request: r.Request},
 	}
 
@@ -145,7 +92,7 @@ func NewListComponentsPaginator(req ListComponentsRequest) ListComponentsPaginat
 	return ListComponentsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListComponentsInput
+				var inCpy *types.ListComponentsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -165,14 +112,14 @@ type ListComponentsPaginator struct {
 	aws.Pager
 }
 
-func (p *ListComponentsPaginator) CurrentPage() *ListComponentsOutput {
-	return p.Pager.CurrentPage().(*ListComponentsOutput)
+func (p *ListComponentsPaginator) CurrentPage() *types.ListComponentsOutput {
+	return p.Pager.CurrentPage().(*types.ListComponentsOutput)
 }
 
 // ListComponentsResponse is the response type for the
 // ListComponents API operation.
 type ListComponentsResponse struct {
-	*ListComponentsOutput
+	*types.ListComponentsOutput
 
 	response *aws.Response
 }

@@ -6,56 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/devicefarm/types"
 )
-
-// Represents the request to retrieve the offering status for the specified
-// customer or account.
-type GetOfferingStatusInput struct {
-	_ struct{} `type:"structure"`
-
-	// An identifier that was returned from the previous call to this operation,
-	// which can be used to return the next set of items in the list.
-	NextToken *string `locationName:"nextToken" min:"4" type:"string"`
-}
-
-// String returns the string representation
-func (s GetOfferingStatusInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetOfferingStatusInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetOfferingStatusInput"}
-	if s.NextToken != nil && len(*s.NextToken) < 4 {
-		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 4))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Returns the status result for a device offering.
-type GetOfferingStatusOutput struct {
-	_ struct{} `type:"structure"`
-
-	// When specified, gets the offering status for the current period.
-	Current map[string]OfferingStatus `locationName:"current" type:"map"`
-
-	// When specified, gets the offering status for the next period.
-	NextPeriod map[string]OfferingStatus `locationName:"nextPeriod" type:"map"`
-
-	// An identifier that was returned from the previous call to this operation,
-	// which can be used to return the next set of items in the list.
-	NextToken *string `locationName:"nextToken" min:"4" type:"string"`
-}
-
-// String returns the string representation
-func (s GetOfferingStatusOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetOfferingStatus = "GetOfferingStatus"
 
@@ -77,7 +29,7 @@ const opGetOfferingStatus = "GetOfferingStatus"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/GetOfferingStatus
-func (c *Client) GetOfferingStatusRequest(input *GetOfferingStatusInput) GetOfferingStatusRequest {
+func (c *Client) GetOfferingStatusRequest(input *types.GetOfferingStatusInput) GetOfferingStatusRequest {
 	op := &aws.Operation{
 		Name:       opGetOfferingStatus,
 		HTTPMethod: "POST",
@@ -91,10 +43,10 @@ func (c *Client) GetOfferingStatusRequest(input *GetOfferingStatusInput) GetOffe
 	}
 
 	if input == nil {
-		input = &GetOfferingStatusInput{}
+		input = &types.GetOfferingStatusInput{}
 	}
 
-	req := c.newRequest(op, input, &GetOfferingStatusOutput{})
+	req := c.newRequest(op, input, &types.GetOfferingStatusOutput{})
 	return GetOfferingStatusRequest{Request: req, Input: input, Copy: c.GetOfferingStatusRequest}
 }
 
@@ -102,8 +54,8 @@ func (c *Client) GetOfferingStatusRequest(input *GetOfferingStatusInput) GetOffe
 // GetOfferingStatus API operation.
 type GetOfferingStatusRequest struct {
 	*aws.Request
-	Input *GetOfferingStatusInput
-	Copy  func(*GetOfferingStatusInput) GetOfferingStatusRequest
+	Input *types.GetOfferingStatusInput
+	Copy  func(*types.GetOfferingStatusInput) GetOfferingStatusRequest
 }
 
 // Send marshals and sends the GetOfferingStatus API request.
@@ -115,7 +67,7 @@ func (r GetOfferingStatusRequest) Send(ctx context.Context) (*GetOfferingStatusR
 	}
 
 	resp := &GetOfferingStatusResponse{
-		GetOfferingStatusOutput: r.Request.Data.(*GetOfferingStatusOutput),
+		GetOfferingStatusOutput: r.Request.Data.(*types.GetOfferingStatusOutput),
 		response:                &aws.Response{Request: r.Request},
 	}
 
@@ -145,7 +97,7 @@ func NewGetOfferingStatusPaginator(req GetOfferingStatusRequest) GetOfferingStat
 	return GetOfferingStatusPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *GetOfferingStatusInput
+				var inCpy *types.GetOfferingStatusInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -165,14 +117,14 @@ type GetOfferingStatusPaginator struct {
 	aws.Pager
 }
 
-func (p *GetOfferingStatusPaginator) CurrentPage() *GetOfferingStatusOutput {
-	return p.Pager.CurrentPage().(*GetOfferingStatusOutput)
+func (p *GetOfferingStatusPaginator) CurrentPage() *types.GetOfferingStatusOutput {
+	return p.Pager.CurrentPage().(*types.GetOfferingStatusOutput)
 }
 
 // GetOfferingStatusResponse is the response type for the
 // GetOfferingStatus API operation.
 type GetOfferingStatusResponse struct {
-	*GetOfferingStatusOutput
+	*types.GetOfferingStatusOutput
 
 	response *aws.Response
 }

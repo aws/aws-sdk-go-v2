@@ -6,68 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/glue/types"
 )
-
-type CreateClassifierInput struct {
-	_ struct{} `type:"structure"`
-
-	// A CsvClassifier object specifying the classifier to create.
-	CsvClassifier *CreateCsvClassifierRequest `type:"structure"`
-
-	// A GrokClassifier object specifying the classifier to create.
-	GrokClassifier *CreateGrokClassifierRequest `type:"structure"`
-
-	// A JsonClassifier object specifying the classifier to create.
-	JsonClassifier *CreateJsonClassifierRequest `type:"structure"`
-
-	// An XMLClassifier object specifying the classifier to create.
-	XMLClassifier *CreateXMLClassifierRequest `type:"structure"`
-}
-
-// String returns the string representation
-func (s CreateClassifierInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateClassifierInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateClassifierInput"}
-	if s.CsvClassifier != nil {
-		if err := s.CsvClassifier.Validate(); err != nil {
-			invalidParams.AddNested("CsvClassifier", err.(aws.ErrInvalidParams))
-		}
-	}
-	if s.GrokClassifier != nil {
-		if err := s.GrokClassifier.Validate(); err != nil {
-			invalidParams.AddNested("GrokClassifier", err.(aws.ErrInvalidParams))
-		}
-	}
-	if s.JsonClassifier != nil {
-		if err := s.JsonClassifier.Validate(); err != nil {
-			invalidParams.AddNested("JsonClassifier", err.(aws.ErrInvalidParams))
-		}
-	}
-	if s.XMLClassifier != nil {
-		if err := s.XMLClassifier.Validate(); err != nil {
-			invalidParams.AddNested("XMLClassifier", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type CreateClassifierOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s CreateClassifierOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCreateClassifier = "CreateClassifier"
 
@@ -86,7 +26,7 @@ const opCreateClassifier = "CreateClassifier"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CreateClassifier
-func (c *Client) CreateClassifierRequest(input *CreateClassifierInput) CreateClassifierRequest {
+func (c *Client) CreateClassifierRequest(input *types.CreateClassifierInput) CreateClassifierRequest {
 	op := &aws.Operation{
 		Name:       opCreateClassifier,
 		HTTPMethod: "POST",
@@ -94,10 +34,10 @@ func (c *Client) CreateClassifierRequest(input *CreateClassifierInput) CreateCla
 	}
 
 	if input == nil {
-		input = &CreateClassifierInput{}
+		input = &types.CreateClassifierInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateClassifierOutput{})
+	req := c.newRequest(op, input, &types.CreateClassifierOutput{})
 	return CreateClassifierRequest{Request: req, Input: input, Copy: c.CreateClassifierRequest}
 }
 
@@ -105,8 +45,8 @@ func (c *Client) CreateClassifierRequest(input *CreateClassifierInput) CreateCla
 // CreateClassifier API operation.
 type CreateClassifierRequest struct {
 	*aws.Request
-	Input *CreateClassifierInput
-	Copy  func(*CreateClassifierInput) CreateClassifierRequest
+	Input *types.CreateClassifierInput
+	Copy  func(*types.CreateClassifierInput) CreateClassifierRequest
 }
 
 // Send marshals and sends the CreateClassifier API request.
@@ -118,7 +58,7 @@ func (r CreateClassifierRequest) Send(ctx context.Context) (*CreateClassifierRes
 	}
 
 	resp := &CreateClassifierResponse{
-		CreateClassifierOutput: r.Request.Data.(*CreateClassifierOutput),
+		CreateClassifierOutput: r.Request.Data.(*types.CreateClassifierOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -128,7 +68,7 @@ func (r CreateClassifierRequest) Send(ctx context.Context) (*CreateClassifierRes
 // CreateClassifierResponse is the response type for the
 // CreateClassifier API operation.
 type CreateClassifierResponse struct {
-	*CreateClassifierOutput
+	*types.CreateClassifierOutput
 
 	response *aws.Response
 }

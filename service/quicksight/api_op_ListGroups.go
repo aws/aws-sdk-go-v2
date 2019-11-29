@@ -6,141 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/quicksight/types"
 )
-
-type ListGroupsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID for the AWS account that the group is in. Currently, you use the ID
-	// for the AWS account that contains your Amazon QuickSight account.
-	//
-	// AwsAccountId is a required field
-	AwsAccountId *string `location:"uri" locationName:"AwsAccountId" min:"12" type:"string" required:"true"`
-
-	// The maximum number of results to return.
-	MaxResults *int64 `location:"querystring" locationName:"max-results" min:"1" type:"integer"`
-
-	// The namespace. Currently, you should set this to default.
-	//
-	// Namespace is a required field
-	Namespace *string `location:"uri" locationName:"Namespace" type:"string" required:"true"`
-
-	// A pagination token that can be used in a subsequent request.
-	NextToken *string `location:"querystring" locationName:"next-token" type:"string"`
-}
-
-// String returns the string representation
-func (s ListGroupsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListGroupsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListGroupsInput"}
-
-	if s.AwsAccountId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("AwsAccountId"))
-	}
-	if s.AwsAccountId != nil && len(*s.AwsAccountId) < 12 {
-		invalidParams.Add(aws.NewErrParamMinLen("AwsAccountId", 12))
-	}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-
-	if s.Namespace == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Namespace"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListGroupsInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.AwsAccountId != nil {
-		v := *s.AwsAccountId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "AwsAccountId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Namespace != nil {
-		v := *s.Namespace
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "Namespace", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.MaxResults != nil {
-		v := *s.MaxResults
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "max-results", protocol.Int64Value(v), metadata)
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "next-token", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type ListGroupsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The list of the groups.
-	GroupList []Group `type:"list"`
-
-	// A pagination token that can be used in a subsequent request.
-	NextToken *string `type:"string"`
-
-	// The AWS request ID for this operation.
-	RequestId *string `type:"string"`
-
-	// The http status of the request.
-	Status *int64 `location:"statusCode" type:"integer"`
-}
-
-// String returns the string representation
-func (s ListGroupsOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListGroupsOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.GroupList != nil {
-		v := s.GroupList
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "GroupList", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.RequestId != nil {
-		v := *s.RequestId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "RequestId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	// ignoring invalid encode state, StatusCode. Status
-	return nil
-}
 
 const opListGroups = "ListGroups"
 
@@ -165,7 +32,7 @@ const opListGroups = "ListGroups"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/ListGroups
-func (c *Client) ListGroupsRequest(input *ListGroupsInput) ListGroupsRequest {
+func (c *Client) ListGroupsRequest(input *types.ListGroupsInput) ListGroupsRequest {
 	op := &aws.Operation{
 		Name:       opListGroups,
 		HTTPMethod: "GET",
@@ -173,10 +40,10 @@ func (c *Client) ListGroupsRequest(input *ListGroupsInput) ListGroupsRequest {
 	}
 
 	if input == nil {
-		input = &ListGroupsInput{}
+		input = &types.ListGroupsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListGroupsOutput{})
+	req := c.newRequest(op, input, &types.ListGroupsOutput{})
 	return ListGroupsRequest{Request: req, Input: input, Copy: c.ListGroupsRequest}
 }
 
@@ -184,8 +51,8 @@ func (c *Client) ListGroupsRequest(input *ListGroupsInput) ListGroupsRequest {
 // ListGroups API operation.
 type ListGroupsRequest struct {
 	*aws.Request
-	Input *ListGroupsInput
-	Copy  func(*ListGroupsInput) ListGroupsRequest
+	Input *types.ListGroupsInput
+	Copy  func(*types.ListGroupsInput) ListGroupsRequest
 }
 
 // Send marshals and sends the ListGroups API request.
@@ -197,7 +64,7 @@ func (r ListGroupsRequest) Send(ctx context.Context) (*ListGroupsResponse, error
 	}
 
 	resp := &ListGroupsResponse{
-		ListGroupsOutput: r.Request.Data.(*ListGroupsOutput),
+		ListGroupsOutput: r.Request.Data.(*types.ListGroupsOutput),
 		response:         &aws.Response{Request: r.Request},
 	}
 
@@ -207,7 +74,7 @@ func (r ListGroupsRequest) Send(ctx context.Context) (*ListGroupsResponse, error
 // ListGroupsResponse is the response type for the
 // ListGroups API operation.
 type ListGroupsResponse struct {
-	*ListGroupsOutput
+	*types.ListGroupsOutput
 
 	response *aws.Response
 }

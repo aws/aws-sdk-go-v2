@@ -15,6 +15,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/service/s3"
 	"github.com/aws/aws-sdk-go-v2/service/s3/s3iface"
+	"github.com/aws/aws-sdk-go-v2/service/s3/types"
 )
 
 // DefaultDownloadPartSize is the default range of bytes to get at a time when
@@ -166,7 +167,7 @@ func NewDownloaderWithClient(svc s3iface.ClientAPI, options ...func(*Downloader)
 // If the GetObjectInput's Range value is provided that will cause the downloader
 // to perform a single GetObjectInput request for that object's range. This will
 // caused the part size, and concurrency configurations to be ignored.
-func (d Downloader) Download(w io.WriterAt, input *s3.GetObjectInput, options ...func(*Downloader)) (n int64, err error) {
+func (d Downloader) Download(w io.WriterAt, input *types.GetObjectInput, options ...func(*Downloader)) (n int64, err error) {
 	return d.DownloadWithContext(context.Background(), w, input, options...)
 }
 
@@ -196,7 +197,7 @@ func (d Downloader) Download(w io.WriterAt, input *s3.GetObjectInput, options ..
 // If the GetObjectInput's Range value is provided that will cause the downloader
 // to perform a single GetObjectInput request for that object's range. This will
 // caused the part size, and concurrency configurations to be ignored.
-func (d Downloader) DownloadWithContext(ctx context.Context, w io.WriterAt, input *s3.GetObjectInput, options ...func(*Downloader)) (n int64, err error) {
+func (d Downloader) DownloadWithContext(ctx context.Context, w io.WriterAt, input *types.GetObjectInput, options ...func(*Downloader)) (n int64, err error) {
 	impl := downloader{w: w, in: input, cfg: d, ctx: ctx}
 
 	for _, option := range options {
@@ -245,7 +246,7 @@ func (d Downloader) DownloadWithContext(ctx context.Context, w io.WriterAt, inpu
 //			Writer: fooFile,
 //		},
 //		{
-//			Input: &s3.GetObjectInput {
+//			Input: &types.GetObjectInput {
 //				Bucket: aws.String("bucket"),
 //				Key: aws.String("bar"),
 //			},
@@ -285,7 +286,7 @@ type downloader struct {
 	ctx context.Context
 	cfg Downloader
 
-	in *s3.GetObjectInput
+	in *types.GetObjectInput
 	w  io.WriterAt
 
 	wg sync.WaitGroup
@@ -417,7 +418,7 @@ func (d *downloader) downloadRange(rng string) {
 
 // downloadChunk downloads the chunk from s3
 func (d *downloader) downloadChunk(chunk dlchunk) error {
-	in := &s3.GetObjectInput{}
+	in := &types.GetObjectInput{}
 	awsutil.Copy(in, d.in)
 
 	// Get the next byte range of data
@@ -452,7 +453,7 @@ func (d *downloader) downloadChunk(chunk dlchunk) error {
 	return err
 }
 
-func (d *downloader) tryDownloadChunk(in *s3.GetObjectInput, w io.Writer) (int64, error) {
+func (d *downloader) tryDownloadChunk(in *types.GetObjectInput, w io.Writer) (int64, error) {
 	cleanup := func() {}
 	if d.cfg.BufferProvider != nil {
 		w, cleanup = d.cfg.BufferProvider.GetReadFrom(w)
@@ -504,7 +505,7 @@ func (d *downloader) getTotalBytes() int64 {
 // will be chunked, or Content-Length. Content-Length is used when the response
 // does not include a Content-Range. Meaning the object was not chunked. This
 // occurs when the full file fits within the PartSize directive.
-func (d *downloader) setTotalBytes(resp *s3.GetObjectOutput) {
+func (d *downloader) setTotalBytes(resp *types.GetObjectOutput) {
 	d.m.Lock()
 	defer d.m.Unlock()
 

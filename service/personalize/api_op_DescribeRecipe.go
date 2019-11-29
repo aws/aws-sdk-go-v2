@@ -6,48 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/personalize/types"
 )
-
-type DescribeRecipeInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the recipe to describe.
-	//
-	// RecipeArn is a required field
-	RecipeArn *string `locationName:"recipeArn" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeRecipeInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeRecipeInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeRecipeInput"}
-
-	if s.RecipeArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("RecipeArn"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribeRecipeOutput struct {
-	_ struct{} `type:"structure"`
-
-	// An object that describes the recipe.
-	Recipe *Recipe `locationName:"recipe" type:"structure"`
-}
-
-// String returns the string representation
-func (s DescribeRecipeOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeRecipe = "DescribeRecipe"
 
@@ -80,7 +40,7 @@ const opDescribeRecipe = "DescribeRecipe"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/DescribeRecipe
-func (c *Client) DescribeRecipeRequest(input *DescribeRecipeInput) DescribeRecipeRequest {
+func (c *Client) DescribeRecipeRequest(input *types.DescribeRecipeInput) DescribeRecipeRequest {
 	op := &aws.Operation{
 		Name:       opDescribeRecipe,
 		HTTPMethod: "POST",
@@ -88,10 +48,10 @@ func (c *Client) DescribeRecipeRequest(input *DescribeRecipeInput) DescribeRecip
 	}
 
 	if input == nil {
-		input = &DescribeRecipeInput{}
+		input = &types.DescribeRecipeInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeRecipeOutput{})
+	req := c.newRequest(op, input, &types.DescribeRecipeOutput{})
 	return DescribeRecipeRequest{Request: req, Input: input, Copy: c.DescribeRecipeRequest}
 }
 
@@ -99,8 +59,8 @@ func (c *Client) DescribeRecipeRequest(input *DescribeRecipeInput) DescribeRecip
 // DescribeRecipe API operation.
 type DescribeRecipeRequest struct {
 	*aws.Request
-	Input *DescribeRecipeInput
-	Copy  func(*DescribeRecipeInput) DescribeRecipeRequest
+	Input *types.DescribeRecipeInput
+	Copy  func(*types.DescribeRecipeInput) DescribeRecipeRequest
 }
 
 // Send marshals and sends the DescribeRecipe API request.
@@ -112,7 +72,7 @@ func (r DescribeRecipeRequest) Send(ctx context.Context) (*DescribeRecipeRespons
 	}
 
 	resp := &DescribeRecipeResponse{
-		DescribeRecipeOutput: r.Request.Data.(*DescribeRecipeOutput),
+		DescribeRecipeOutput: r.Request.Data.(*types.DescribeRecipeOutput),
 		response:             &aws.Response{Request: r.Request},
 	}
 
@@ -122,7 +82,7 @@ func (r DescribeRecipeRequest) Send(ctx context.Context) (*DescribeRecipeRespons
 // DescribeRecipeResponse is the response type for the
 // DescribeRecipe API operation.
 type DescribeRecipeResponse struct {
-	*DescribeRecipeOutput
+	*types.DescribeRecipeOutput
 
 	response *aws.Response
 }

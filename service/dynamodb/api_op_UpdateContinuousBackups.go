@@ -6,66 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/dynamodb/types"
 )
-
-type UpdateContinuousBackupsInput struct {
-	_ struct{} `type:"structure"`
-
-	// Represents the settings used to enable point in time recovery.
-	//
-	// PointInTimeRecoverySpecification is a required field
-	PointInTimeRecoverySpecification *PointInTimeRecoverySpecification `type:"structure" required:"true"`
-
-	// The name of the table.
-	//
-	// TableName is a required field
-	TableName *string `min:"3" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s UpdateContinuousBackupsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateContinuousBackupsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateContinuousBackupsInput"}
-
-	if s.PointInTimeRecoverySpecification == nil {
-		invalidParams.Add(aws.NewErrParamRequired("PointInTimeRecoverySpecification"))
-	}
-
-	if s.TableName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("TableName"))
-	}
-	if s.TableName != nil && len(*s.TableName) < 3 {
-		invalidParams.Add(aws.NewErrParamMinLen("TableName", 3))
-	}
-	if s.PointInTimeRecoverySpecification != nil {
-		if err := s.PointInTimeRecoverySpecification.Validate(); err != nil {
-			invalidParams.AddNested("PointInTimeRecoverySpecification", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type UpdateContinuousBackupsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Represents the continuous backups and point in time recovery settings on
-	// the table.
-	ContinuousBackupsDescription *ContinuousBackupsDescription `type:"structure"`
-}
-
-// String returns the string representation
-func (s UpdateContinuousBackupsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opUpdateContinuousBackups = "UpdateContinuousBackups"
 
@@ -92,7 +34,7 @@ const opUpdateContinuousBackups = "UpdateContinuousBackups"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/UpdateContinuousBackups
-func (c *Client) UpdateContinuousBackupsRequest(input *UpdateContinuousBackupsInput) UpdateContinuousBackupsRequest {
+func (c *Client) UpdateContinuousBackupsRequest(input *types.UpdateContinuousBackupsInput) UpdateContinuousBackupsRequest {
 	op := &aws.Operation{
 		Name:       opUpdateContinuousBackups,
 		HTTPMethod: "POST",
@@ -100,10 +42,10 @@ func (c *Client) UpdateContinuousBackupsRequest(input *UpdateContinuousBackupsIn
 	}
 
 	if input == nil {
-		input = &UpdateContinuousBackupsInput{}
+		input = &types.UpdateContinuousBackupsInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateContinuousBackupsOutput{})
+	req := c.newRequest(op, input, &types.UpdateContinuousBackupsOutput{})
 	return UpdateContinuousBackupsRequest{Request: req, Input: input, Copy: c.UpdateContinuousBackupsRequest}
 }
 
@@ -111,8 +53,8 @@ func (c *Client) UpdateContinuousBackupsRequest(input *UpdateContinuousBackupsIn
 // UpdateContinuousBackups API operation.
 type UpdateContinuousBackupsRequest struct {
 	*aws.Request
-	Input *UpdateContinuousBackupsInput
-	Copy  func(*UpdateContinuousBackupsInput) UpdateContinuousBackupsRequest
+	Input *types.UpdateContinuousBackupsInput
+	Copy  func(*types.UpdateContinuousBackupsInput) UpdateContinuousBackupsRequest
 }
 
 // Send marshals and sends the UpdateContinuousBackups API request.
@@ -124,7 +66,7 @@ func (r UpdateContinuousBackupsRequest) Send(ctx context.Context) (*UpdateContin
 	}
 
 	resp := &UpdateContinuousBackupsResponse{
-		UpdateContinuousBackupsOutput: r.Request.Data.(*UpdateContinuousBackupsOutput),
+		UpdateContinuousBackupsOutput: r.Request.Data.(*types.UpdateContinuousBackupsOutput),
 		response:                      &aws.Response{Request: r.Request},
 	}
 
@@ -134,7 +76,7 @@ func (r UpdateContinuousBackupsRequest) Send(ctx context.Context) (*UpdateContin
 // UpdateContinuousBackupsResponse is the response type for the
 // UpdateContinuousBackups API operation.
 type UpdateContinuousBackupsResponse struct {
-	*UpdateContinuousBackupsOutput
+	*types.UpdateContinuousBackupsOutput
 
 	response *aws.Response
 }

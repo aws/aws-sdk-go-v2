@@ -13,6 +13,7 @@ import (
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/medialive"
+	"github.com/aws/aws-sdk-go-v2/service/medialive/types"
 )
 
 // ClientAPI provides an interface to enable mocking the
@@ -46,7 +47,7 @@ import (
 //    type mockClientClient struct {
 //        medialiveiface.ClientPI
 //    }
-//    func (m *mockClientClient) BatchUpdateSchedule(input *medialive.BatchUpdateScheduleInput) (*medialive.BatchUpdateScheduleOutput, error) {
+//    func (m *mockClientClient) BatchUpdateSchedule(input *types.BatchUpdateScheduleInput) (*types.BatchUpdateScheduleOutput, error) {
 //        // mock response/functionality
 //    }
 //
@@ -64,75 +65,75 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type ClientAPI interface {
-	BatchUpdateScheduleRequest(*medialive.BatchUpdateScheduleInput) medialive.BatchUpdateScheduleRequest
+	BatchUpdateScheduleRequest(*types.BatchUpdateScheduleInput) medialive.BatchUpdateScheduleRequest
 
-	CreateChannelRequest(*medialive.CreateChannelInput) medialive.CreateChannelRequest
+	CreateChannelRequest(*types.CreateChannelInput) medialive.CreateChannelRequest
 
-	CreateInputRequest(*medialive.CreateInputInput) medialive.CreateInputRequest
+	CreateInputRequest(*types.CreateInputInput) medialive.CreateInputRequest
 
-	CreateInputSecurityGroupRequest(*medialive.CreateInputSecurityGroupInput) medialive.CreateInputSecurityGroupRequest
+	CreateInputSecurityGroupRequest(*types.CreateInputSecurityGroupInput) medialive.CreateInputSecurityGroupRequest
 
-	CreateTagsRequest(*medialive.CreateTagsInput) medialive.CreateTagsRequest
+	CreateTagsRequest(*types.CreateTagsInput) medialive.CreateTagsRequest
 
-	DeleteChannelRequest(*medialive.DeleteChannelInput) medialive.DeleteChannelRequest
+	DeleteChannelRequest(*types.DeleteChannelInput) medialive.DeleteChannelRequest
 
-	DeleteInputRequest(*medialive.DeleteInputInput) medialive.DeleteInputRequest
+	DeleteInputRequest(*types.DeleteInputInput) medialive.DeleteInputRequest
 
-	DeleteInputSecurityGroupRequest(*medialive.DeleteInputSecurityGroupInput) medialive.DeleteInputSecurityGroupRequest
+	DeleteInputSecurityGroupRequest(*types.DeleteInputSecurityGroupInput) medialive.DeleteInputSecurityGroupRequest
 
-	DeleteReservationRequest(*medialive.DeleteReservationInput) medialive.DeleteReservationRequest
+	DeleteReservationRequest(*types.DeleteReservationInput) medialive.DeleteReservationRequest
 
-	DeleteScheduleRequest(*medialive.DeleteScheduleInput) medialive.DeleteScheduleRequest
+	DeleteScheduleRequest(*types.DeleteScheduleInput) medialive.DeleteScheduleRequest
 
-	DeleteTagsRequest(*medialive.DeleteTagsInput) medialive.DeleteTagsRequest
+	DeleteTagsRequest(*types.DeleteTagsInput) medialive.DeleteTagsRequest
 
-	DescribeChannelRequest(*medialive.DescribeChannelInput) medialive.DescribeChannelRequest
+	DescribeChannelRequest(*types.DescribeChannelInput) medialive.DescribeChannelRequest
 
-	DescribeInputRequest(*medialive.DescribeInputInput) medialive.DescribeInputRequest
+	DescribeInputRequest(*types.DescribeInputInput) medialive.DescribeInputRequest
 
-	DescribeInputSecurityGroupRequest(*medialive.DescribeInputSecurityGroupInput) medialive.DescribeInputSecurityGroupRequest
+	DescribeInputSecurityGroupRequest(*types.DescribeInputSecurityGroupInput) medialive.DescribeInputSecurityGroupRequest
 
-	DescribeOfferingRequest(*medialive.DescribeOfferingInput) medialive.DescribeOfferingRequest
+	DescribeOfferingRequest(*types.DescribeOfferingInput) medialive.DescribeOfferingRequest
 
-	DescribeReservationRequest(*medialive.DescribeReservationInput) medialive.DescribeReservationRequest
+	DescribeReservationRequest(*types.DescribeReservationInput) medialive.DescribeReservationRequest
 
-	DescribeScheduleRequest(*medialive.DescribeScheduleInput) medialive.DescribeScheduleRequest
+	DescribeScheduleRequest(*types.DescribeScheduleInput) medialive.DescribeScheduleRequest
 
-	ListChannelsRequest(*medialive.ListChannelsInput) medialive.ListChannelsRequest
+	ListChannelsRequest(*types.ListChannelsInput) medialive.ListChannelsRequest
 
-	ListInputSecurityGroupsRequest(*medialive.ListInputSecurityGroupsInput) medialive.ListInputSecurityGroupsRequest
+	ListInputSecurityGroupsRequest(*types.ListInputSecurityGroupsInput) medialive.ListInputSecurityGroupsRequest
 
-	ListInputsRequest(*medialive.ListInputsInput) medialive.ListInputsRequest
+	ListInputsRequest(*types.ListInputsInput) medialive.ListInputsRequest
 
-	ListOfferingsRequest(*medialive.ListOfferingsInput) medialive.ListOfferingsRequest
+	ListOfferingsRequest(*types.ListOfferingsInput) medialive.ListOfferingsRequest
 
-	ListReservationsRequest(*medialive.ListReservationsInput) medialive.ListReservationsRequest
+	ListReservationsRequest(*types.ListReservationsInput) medialive.ListReservationsRequest
 
-	ListTagsForResourceRequest(*medialive.ListTagsForResourceInput) medialive.ListTagsForResourceRequest
+	ListTagsForResourceRequest(*types.ListTagsForResourceInput) medialive.ListTagsForResourceRequest
 
-	PurchaseOfferingRequest(*medialive.PurchaseOfferingInput) medialive.PurchaseOfferingRequest
+	PurchaseOfferingRequest(*types.PurchaseOfferingInput) medialive.PurchaseOfferingRequest
 
-	StartChannelRequest(*medialive.StartChannelInput) medialive.StartChannelRequest
+	StartChannelRequest(*types.StartChannelInput) medialive.StartChannelRequest
 
-	StopChannelRequest(*medialive.StopChannelInput) medialive.StopChannelRequest
+	StopChannelRequest(*types.StopChannelInput) medialive.StopChannelRequest
 
-	UpdateChannelRequest(*medialive.UpdateChannelInput) medialive.UpdateChannelRequest
+	UpdateChannelRequest(*types.UpdateChannelInput) medialive.UpdateChannelRequest
 
-	UpdateChannelClassRequest(*medialive.UpdateChannelClassInput) medialive.UpdateChannelClassRequest
+	UpdateChannelClassRequest(*types.UpdateChannelClassInput) medialive.UpdateChannelClassRequest
 
-	UpdateInputRequest(*medialive.UpdateInputInput) medialive.UpdateInputRequest
+	UpdateInputRequest(*types.UpdateInputInput) medialive.UpdateInputRequest
 
-	UpdateInputSecurityGroupRequest(*medialive.UpdateInputSecurityGroupInput) medialive.UpdateInputSecurityGroupRequest
+	UpdateInputSecurityGroupRequest(*types.UpdateInputSecurityGroupInput) medialive.UpdateInputSecurityGroupRequest
 
-	UpdateReservationRequest(*medialive.UpdateReservationInput) medialive.UpdateReservationRequest
+	UpdateReservationRequest(*types.UpdateReservationInput) medialive.UpdateReservationRequest
 
-	WaitUntilChannelCreated(context.Context, *medialive.DescribeChannelInput, ...aws.WaiterOption) error
+	WaitUntilChannelCreated(context.Context, *types.DescribeChannelInput, ...aws.WaiterOption) error
 
-	WaitUntilChannelDeleted(context.Context, *medialive.DescribeChannelInput, ...aws.WaiterOption) error
+	WaitUntilChannelDeleted(context.Context, *types.DescribeChannelInput, ...aws.WaiterOption) error
 
-	WaitUntilChannelRunning(context.Context, *medialive.DescribeChannelInput, ...aws.WaiterOption) error
+	WaitUntilChannelRunning(context.Context, *types.DescribeChannelInput, ...aws.WaiterOption) error
 
-	WaitUntilChannelStopped(context.Context, *medialive.DescribeChannelInput, ...aws.WaiterOption) error
+	WaitUntilChannelStopped(context.Context, *types.DescribeChannelInput, ...aws.WaiterOption) error
 }
 
 var _ ClientAPI = (*medialive.Client)(nil)

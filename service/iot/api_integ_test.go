@@ -13,6 +13,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws/awserr"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting/integration"
 	"github.com/aws/aws-sdk-go-v2/service/iot"
+	"github.com/aws/aws-sdk-go-v2/service/iot/types"
 )
 
 var _ aws.Config
@@ -24,7 +25,7 @@ func TestInteg_00_ListPolicies(t *testing.T) {
 
 	cfg := integration.ConfigWithDefaultRegion("us-west-2")
 	svc := iot.New(cfg)
-	params := &iot.ListPoliciesInput{}
+	params := &types.ListPoliciesInput{}
 
 	req := svc.ListPoliciesRequest(params)
 
@@ -39,7 +40,7 @@ func TestInteg_01_DescribeThing(t *testing.T) {
 
 	cfg := integration.ConfigWithDefaultRegion("us-west-2")
 	svc := iot.New(cfg)
-	params := &iot.DescribeThingInput{
+	params := &types.DescribeThingInput{
 		ThingName: aws.String("fake-thing"),
 	}
 

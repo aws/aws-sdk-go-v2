@@ -4,96 +4,10 @@ package waf
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/waf/types"
 )
-
-type UpdateByteMatchSetInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ByteMatchSetId of the ByteMatchSet that you want to update. ByteMatchSetId
-	// is returned by CreateByteMatchSet and by ListByteMatchSets.
-	//
-	// ByteMatchSetId is a required field
-	ByteMatchSetId *string `min:"1" type:"string" required:"true"`
-
-	// The value returned by the most recent call to GetChangeToken.
-	//
-	// ChangeToken is a required field
-	ChangeToken *string `min:"1" type:"string" required:"true"`
-
-	// An array of ByteMatchSetUpdate objects that you want to insert into or delete
-	// from a ByteMatchSet. For more information, see the applicable data types:
-	//
-	//    * ByteMatchSetUpdate: Contains Action and ByteMatchTuple
-	//
-	//    * ByteMatchTuple: Contains FieldToMatch, PositionalConstraint, TargetString,
-	//    and TextTransformation
-	//
-	//    * FieldToMatch: Contains Data and Type
-	//
-	// Updates is a required field
-	Updates []ByteMatchSetUpdate `min:"1" type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s UpdateByteMatchSetInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateByteMatchSetInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateByteMatchSetInput"}
-
-	if s.ByteMatchSetId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ByteMatchSetId"))
-	}
-	if s.ByteMatchSetId != nil && len(*s.ByteMatchSetId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ByteMatchSetId", 1))
-	}
-
-	if s.ChangeToken == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ChangeToken"))
-	}
-	if s.ChangeToken != nil && len(*s.ChangeToken) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ChangeToken", 1))
-	}
-
-	if s.Updates == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Updates"))
-	}
-	if s.Updates != nil && len(s.Updates) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Updates", 1))
-	}
-	if s.Updates != nil {
-		for i, v := range s.Updates {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Updates", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type UpdateByteMatchSetOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The ChangeToken that you used to submit the UpdateByteMatchSet request. You
-	// can also use this value to query the status of the request. For more information,
-	// see GetChangeTokenStatus.
-	ChangeToken *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s UpdateByteMatchSetOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opUpdateByteMatchSet = "UpdateByteMatchSet"
 
@@ -146,7 +60,7 @@ const opUpdateByteMatchSet = "UpdateByteMatchSet"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/UpdateByteMatchSet
-func (c *Client) UpdateByteMatchSetRequest(input *UpdateByteMatchSetInput) UpdateByteMatchSetRequest {
+func (c *Client) UpdateByteMatchSetRequest(input *types.UpdateByteMatchSetInput) UpdateByteMatchSetRequest {
 	op := &aws.Operation{
 		Name:       opUpdateByteMatchSet,
 		HTTPMethod: "POST",
@@ -154,10 +68,10 @@ func (c *Client) UpdateByteMatchSetRequest(input *UpdateByteMatchSetInput) Updat
 	}
 
 	if input == nil {
-		input = &UpdateByteMatchSetInput{}
+		input = &types.UpdateByteMatchSetInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateByteMatchSetOutput{})
+	req := c.newRequest(op, input, &types.UpdateByteMatchSetOutput{})
 	return UpdateByteMatchSetRequest{Request: req, Input: input, Copy: c.UpdateByteMatchSetRequest}
 }
 
@@ -165,8 +79,8 @@ func (c *Client) UpdateByteMatchSetRequest(input *UpdateByteMatchSetInput) Updat
 // UpdateByteMatchSet API operation.
 type UpdateByteMatchSetRequest struct {
 	*aws.Request
-	Input *UpdateByteMatchSetInput
-	Copy  func(*UpdateByteMatchSetInput) UpdateByteMatchSetRequest
+	Input *types.UpdateByteMatchSetInput
+	Copy  func(*types.UpdateByteMatchSetInput) UpdateByteMatchSetRequest
 }
 
 // Send marshals and sends the UpdateByteMatchSet API request.
@@ -178,7 +92,7 @@ func (r UpdateByteMatchSetRequest) Send(ctx context.Context) (*UpdateByteMatchSe
 	}
 
 	resp := &UpdateByteMatchSetResponse{
-		UpdateByteMatchSetOutput: r.Request.Data.(*UpdateByteMatchSetOutput),
+		UpdateByteMatchSetOutput: r.Request.Data.(*types.UpdateByteMatchSetOutput),
 		response:                 &aws.Response{Request: r.Request},
 	}
 
@@ -188,7 +102,7 @@ func (r UpdateByteMatchSetRequest) Send(ctx context.Context) (*UpdateByteMatchSe
 // UpdateByteMatchSetResponse is the response type for the
 // UpdateByteMatchSet API operation.
 type UpdateByteMatchSetResponse struct {
-	*UpdateByteMatchSetOutput
+	*types.UpdateByteMatchSetOutput
 
 	response *aws.Response
 }

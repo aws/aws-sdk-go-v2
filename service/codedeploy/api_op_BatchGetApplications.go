@@ -6,51 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/codedeploy/types"
 )
-
-// Represents the input of a BatchGetApplications operation.
-type BatchGetApplicationsInput struct {
-	_ struct{} `type:"structure"`
-
-	// A list of application names separated by spaces. The maximum number of application
-	// names you can specify is 25.
-	//
-	// ApplicationNames is a required field
-	ApplicationNames []string `locationName:"applicationNames" type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s BatchGetApplicationsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *BatchGetApplicationsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "BatchGetApplicationsInput"}
-
-	if s.ApplicationNames == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ApplicationNames"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Represents the output of a BatchGetApplications operation.
-type BatchGetApplicationsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Information about the applications.
-	ApplicationsInfo []ApplicationInfo `locationName:"applicationsInfo" type:"list"`
-}
-
-// String returns the string representation
-func (s BatchGetApplicationsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opBatchGetApplications = "BatchGetApplications"
 
@@ -68,7 +25,7 @@ const opBatchGetApplications = "BatchGetApplications"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/BatchGetApplications
-func (c *Client) BatchGetApplicationsRequest(input *BatchGetApplicationsInput) BatchGetApplicationsRequest {
+func (c *Client) BatchGetApplicationsRequest(input *types.BatchGetApplicationsInput) BatchGetApplicationsRequest {
 	op := &aws.Operation{
 		Name:       opBatchGetApplications,
 		HTTPMethod: "POST",
@@ -76,10 +33,10 @@ func (c *Client) BatchGetApplicationsRequest(input *BatchGetApplicationsInput) B
 	}
 
 	if input == nil {
-		input = &BatchGetApplicationsInput{}
+		input = &types.BatchGetApplicationsInput{}
 	}
 
-	req := c.newRequest(op, input, &BatchGetApplicationsOutput{})
+	req := c.newRequest(op, input, &types.BatchGetApplicationsOutput{})
 	return BatchGetApplicationsRequest{Request: req, Input: input, Copy: c.BatchGetApplicationsRequest}
 }
 
@@ -87,8 +44,8 @@ func (c *Client) BatchGetApplicationsRequest(input *BatchGetApplicationsInput) B
 // BatchGetApplications API operation.
 type BatchGetApplicationsRequest struct {
 	*aws.Request
-	Input *BatchGetApplicationsInput
-	Copy  func(*BatchGetApplicationsInput) BatchGetApplicationsRequest
+	Input *types.BatchGetApplicationsInput
+	Copy  func(*types.BatchGetApplicationsInput) BatchGetApplicationsRequest
 }
 
 // Send marshals and sends the BatchGetApplications API request.
@@ -100,7 +57,7 @@ func (r BatchGetApplicationsRequest) Send(ctx context.Context) (*BatchGetApplica
 	}
 
 	resp := &BatchGetApplicationsResponse{
-		BatchGetApplicationsOutput: r.Request.Data.(*BatchGetApplicationsOutput),
+		BatchGetApplicationsOutput: r.Request.Data.(*types.BatchGetApplicationsOutput),
 		response:                   &aws.Response{Request: r.Request},
 	}
 
@@ -110,7 +67,7 @@ func (r BatchGetApplicationsRequest) Send(ctx context.Context) (*BatchGetApplica
 // BatchGetApplicationsResponse is the response type for the
 // BatchGetApplications API operation.
 type BatchGetApplicationsResponse struct {
-	*BatchGetApplicationsOutput
+	*types.BatchGetApplicationsOutput
 
 	response *aws.Response
 }

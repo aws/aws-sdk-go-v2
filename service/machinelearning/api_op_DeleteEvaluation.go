@@ -6,57 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/machinelearning/types"
 )
-
-type DeleteEvaluationInput struct {
-	_ struct{} `type:"structure"`
-
-	// A user-supplied ID that uniquely identifies the Evaluation to delete.
-	//
-	// EvaluationId is a required field
-	EvaluationId *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteEvaluationInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteEvaluationInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteEvaluationInput"}
-
-	if s.EvaluationId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("EvaluationId"))
-	}
-	if s.EvaluationId != nil && len(*s.EvaluationId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("EvaluationId", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Represents the output of a DeleteEvaluation operation. The output indicates
-// that Amazon Machine Learning (Amazon ML) received the request.
-//
-// You can use the GetEvaluation operation and check the value of the Status
-// parameter to see whether an Evaluation is marked as DELETED.
-type DeleteEvaluationOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A user-supplied ID that uniquely identifies the Evaluation. This value should
-	// be identical to the value of the EvaluationId in the request.
-	EvaluationId *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s DeleteEvaluationOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteEvaluation = "DeleteEvaluation"
 
@@ -76,7 +27,7 @@ const opDeleteEvaluation = "DeleteEvaluation"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) DeleteEvaluationRequest(input *DeleteEvaluationInput) DeleteEvaluationRequest {
+func (c *Client) DeleteEvaluationRequest(input *types.DeleteEvaluationInput) DeleteEvaluationRequest {
 	op := &aws.Operation{
 		Name:       opDeleteEvaluation,
 		HTTPMethod: "POST",
@@ -84,10 +35,10 @@ func (c *Client) DeleteEvaluationRequest(input *DeleteEvaluationInput) DeleteEva
 	}
 
 	if input == nil {
-		input = &DeleteEvaluationInput{}
+		input = &types.DeleteEvaluationInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteEvaluationOutput{})
+	req := c.newRequest(op, input, &types.DeleteEvaluationOutput{})
 	return DeleteEvaluationRequest{Request: req, Input: input, Copy: c.DeleteEvaluationRequest}
 }
 
@@ -95,8 +46,8 @@ func (c *Client) DeleteEvaluationRequest(input *DeleteEvaluationInput) DeleteEva
 // DeleteEvaluation API operation.
 type DeleteEvaluationRequest struct {
 	*aws.Request
-	Input *DeleteEvaluationInput
-	Copy  func(*DeleteEvaluationInput) DeleteEvaluationRequest
+	Input *types.DeleteEvaluationInput
+	Copy  func(*types.DeleteEvaluationInput) DeleteEvaluationRequest
 }
 
 // Send marshals and sends the DeleteEvaluation API request.
@@ -108,7 +59,7 @@ func (r DeleteEvaluationRequest) Send(ctx context.Context) (*DeleteEvaluationRes
 	}
 
 	resp := &DeleteEvaluationResponse{
-		DeleteEvaluationOutput: r.Request.Data.(*DeleteEvaluationOutput),
+		DeleteEvaluationOutput: r.Request.Data.(*types.DeleteEvaluationOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -118,7 +69,7 @@ func (r DeleteEvaluationRequest) Send(ctx context.Context) (*DeleteEvaluationRes
 // DeleteEvaluationResponse is the response type for the
 // DeleteEvaluation API operation.
 type DeleteEvaluationResponse struct {
-	*DeleteEvaluationOutput
+	*types.DeleteEvaluationOutput
 
 	response *aws.Response
 }

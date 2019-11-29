@@ -6,60 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
+	"github.com/aws/aws-sdk-go-v2/service/codedeploy/types"
 )
-
-// Represents the input of, and adds tags to, an on-premises instance operation.
-type AddTagsToOnPremisesInstancesInput struct {
-	_ struct{} `type:"structure"`
-
-	// The names of the on-premises instances to which to add tags.
-	//
-	// InstanceNames is a required field
-	InstanceNames []string `locationName:"instanceNames" type:"list" required:"true"`
-
-	// The tag key-value pairs to add to the on-premises instances.
-	//
-	// Keys and values are both required. Keys cannot be null or empty strings.
-	// Value-only tags are not allowed.
-	//
-	// Tags is a required field
-	Tags []Tag `locationName:"tags" type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s AddTagsToOnPremisesInstancesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *AddTagsToOnPremisesInstancesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "AddTagsToOnPremisesInstancesInput"}
-
-	if s.InstanceNames == nil {
-		invalidParams.Add(aws.NewErrParamRequired("InstanceNames"))
-	}
-
-	if s.Tags == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Tags"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type AddTagsToOnPremisesInstancesOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s AddTagsToOnPremisesInstancesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opAddTagsToOnPremisesInstances = "AddTagsToOnPremisesInstances"
 
@@ -76,7 +26,7 @@ const opAddTagsToOnPremisesInstances = "AddTagsToOnPremisesInstances"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/AddTagsToOnPremisesInstances
-func (c *Client) AddTagsToOnPremisesInstancesRequest(input *AddTagsToOnPremisesInstancesInput) AddTagsToOnPremisesInstancesRequest {
+func (c *Client) AddTagsToOnPremisesInstancesRequest(input *types.AddTagsToOnPremisesInstancesInput) AddTagsToOnPremisesInstancesRequest {
 	op := &aws.Operation{
 		Name:       opAddTagsToOnPremisesInstances,
 		HTTPMethod: "POST",
@@ -84,10 +34,10 @@ func (c *Client) AddTagsToOnPremisesInstancesRequest(input *AddTagsToOnPremisesI
 	}
 
 	if input == nil {
-		input = &AddTagsToOnPremisesInstancesInput{}
+		input = &types.AddTagsToOnPremisesInstancesInput{}
 	}
 
-	req := c.newRequest(op, input, &AddTagsToOnPremisesInstancesOutput{})
+	req := c.newRequest(op, input, &types.AddTagsToOnPremisesInstancesOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return AddTagsToOnPremisesInstancesRequest{Request: req, Input: input, Copy: c.AddTagsToOnPremisesInstancesRequest}
@@ -97,8 +47,8 @@ func (c *Client) AddTagsToOnPremisesInstancesRequest(input *AddTagsToOnPremisesI
 // AddTagsToOnPremisesInstances API operation.
 type AddTagsToOnPremisesInstancesRequest struct {
 	*aws.Request
-	Input *AddTagsToOnPremisesInstancesInput
-	Copy  func(*AddTagsToOnPremisesInstancesInput) AddTagsToOnPremisesInstancesRequest
+	Input *types.AddTagsToOnPremisesInstancesInput
+	Copy  func(*types.AddTagsToOnPremisesInstancesInput) AddTagsToOnPremisesInstancesRequest
 }
 
 // Send marshals and sends the AddTagsToOnPremisesInstances API request.
@@ -110,7 +60,7 @@ func (r AddTagsToOnPremisesInstancesRequest) Send(ctx context.Context) (*AddTags
 	}
 
 	resp := &AddTagsToOnPremisesInstancesResponse{
-		AddTagsToOnPremisesInstancesOutput: r.Request.Data.(*AddTagsToOnPremisesInstancesOutput),
+		AddTagsToOnPremisesInstancesOutput: r.Request.Data.(*types.AddTagsToOnPremisesInstancesOutput),
 		response:                           &aws.Response{Request: r.Request},
 	}
 
@@ -120,7 +70,7 @@ func (r AddTagsToOnPremisesInstancesRequest) Send(ctx context.Context) (*AddTags
 // AddTagsToOnPremisesInstancesResponse is the response type for the
 // AddTagsToOnPremisesInstances API operation.
 type AddTagsToOnPremisesInstancesResponse struct {
-	*AddTagsToOnPremisesInstancesOutput
+	*types.AddTagsToOnPremisesInstancesOutput
 
 	response *aws.Response
 }

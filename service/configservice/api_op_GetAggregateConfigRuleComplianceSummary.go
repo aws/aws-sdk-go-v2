@@ -6,78 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/configservice/types"
 )
-
-type GetAggregateConfigRuleComplianceSummaryInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the configuration aggregator.
-	//
-	// ConfigurationAggregatorName is a required field
-	ConfigurationAggregatorName *string `min:"1" type:"string" required:"true"`
-
-	// Filters the results based on the ConfigRuleComplianceSummaryFilters object.
-	Filters *ConfigRuleComplianceSummaryFilters `type:"structure"`
-
-	// Groups the result based on ACCOUNT_ID or AWS_REGION.
-	GroupByKey ConfigRuleComplianceSummaryGroupKey `type:"string" enum:"true"`
-
-	// The maximum number of evaluation results returned on each page. The default
-	// is 1000. You cannot specify a number greater than 1000. If you specify 0,
-	// AWS Config uses the default.
-	Limit *int64 `type:"integer"`
-
-	// The nextToken string returned on a previous page that you use to get the
-	// next page of results in a paginated response.
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s GetAggregateConfigRuleComplianceSummaryInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetAggregateConfigRuleComplianceSummaryInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetAggregateConfigRuleComplianceSummaryInput"}
-
-	if s.ConfigurationAggregatorName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ConfigurationAggregatorName"))
-	}
-	if s.ConfigurationAggregatorName != nil && len(*s.ConfigurationAggregatorName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ConfigurationAggregatorName", 1))
-	}
-	if s.Filters != nil {
-		if err := s.Filters.Validate(); err != nil {
-			invalidParams.AddNested("Filters", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type GetAggregateConfigRuleComplianceSummaryOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Returns a list of AggregateComplianceCounts object.
-	AggregateComplianceCounts []AggregateComplianceCount `type:"list"`
-
-	// Groups the result based on ACCOUNT_ID or AWS_REGION.
-	GroupByKey *string `min:"1" type:"string"`
-
-	// The nextToken string returned on a previous page that you use to get the
-	// next page of results in a paginated response.
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s GetAggregateConfigRuleComplianceSummaryOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetAggregateConfigRuleComplianceSummary = "GetAggregateConfigRuleComplianceSummary"
 
@@ -98,7 +28,7 @@ const opGetAggregateConfigRuleComplianceSummary = "GetAggregateConfigRuleComplia
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/GetAggregateConfigRuleComplianceSummary
-func (c *Client) GetAggregateConfigRuleComplianceSummaryRequest(input *GetAggregateConfigRuleComplianceSummaryInput) GetAggregateConfigRuleComplianceSummaryRequest {
+func (c *Client) GetAggregateConfigRuleComplianceSummaryRequest(input *types.GetAggregateConfigRuleComplianceSummaryInput) GetAggregateConfigRuleComplianceSummaryRequest {
 	op := &aws.Operation{
 		Name:       opGetAggregateConfigRuleComplianceSummary,
 		HTTPMethod: "POST",
@@ -106,10 +36,10 @@ func (c *Client) GetAggregateConfigRuleComplianceSummaryRequest(input *GetAggreg
 	}
 
 	if input == nil {
-		input = &GetAggregateConfigRuleComplianceSummaryInput{}
+		input = &types.GetAggregateConfigRuleComplianceSummaryInput{}
 	}
 
-	req := c.newRequest(op, input, &GetAggregateConfigRuleComplianceSummaryOutput{})
+	req := c.newRequest(op, input, &types.GetAggregateConfigRuleComplianceSummaryOutput{})
 	return GetAggregateConfigRuleComplianceSummaryRequest{Request: req, Input: input, Copy: c.GetAggregateConfigRuleComplianceSummaryRequest}
 }
 
@@ -117,8 +47,8 @@ func (c *Client) GetAggregateConfigRuleComplianceSummaryRequest(input *GetAggreg
 // GetAggregateConfigRuleComplianceSummary API operation.
 type GetAggregateConfigRuleComplianceSummaryRequest struct {
 	*aws.Request
-	Input *GetAggregateConfigRuleComplianceSummaryInput
-	Copy  func(*GetAggregateConfigRuleComplianceSummaryInput) GetAggregateConfigRuleComplianceSummaryRequest
+	Input *types.GetAggregateConfigRuleComplianceSummaryInput
+	Copy  func(*types.GetAggregateConfigRuleComplianceSummaryInput) GetAggregateConfigRuleComplianceSummaryRequest
 }
 
 // Send marshals and sends the GetAggregateConfigRuleComplianceSummary API request.
@@ -130,7 +60,7 @@ func (r GetAggregateConfigRuleComplianceSummaryRequest) Send(ctx context.Context
 	}
 
 	resp := &GetAggregateConfigRuleComplianceSummaryResponse{
-		GetAggregateConfigRuleComplianceSummaryOutput: r.Request.Data.(*GetAggregateConfigRuleComplianceSummaryOutput),
+		GetAggregateConfigRuleComplianceSummaryOutput: r.Request.Data.(*types.GetAggregateConfigRuleComplianceSummaryOutput),
 		response: &aws.Response{Request: r.Request},
 	}
 
@@ -140,7 +70,7 @@ func (r GetAggregateConfigRuleComplianceSummaryRequest) Send(ctx context.Context
 // GetAggregateConfigRuleComplianceSummaryResponse is the response type for the
 // GetAggregateConfigRuleComplianceSummary API operation.
 type GetAggregateConfigRuleComplianceSummaryResponse struct {
-	*GetAggregateConfigRuleComplianceSummaryOutput
+	*types.GetAggregateConfigRuleComplianceSummaryOutput
 
 	response *aws.Response
 }

@@ -6,57 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/types"
 )
-
-type DeleteConstraintInput struct {
-	_ struct{} `type:"structure"`
-
-	// The language code.
-	//
-	//    * en - English (default)
-	//
-	//    * jp - Japanese
-	//
-	//    * zh - Chinese
-	AcceptLanguage *string `type:"string"`
-
-	// The identifier of the constraint.
-	//
-	// Id is a required field
-	Id *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteConstraintInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteConstraintInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteConstraintInput"}
-
-	if s.Id == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Id"))
-	}
-	if s.Id != nil && len(*s.Id) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Id", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteConstraintOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteConstraintOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteConstraint = "DeleteConstraint"
 
@@ -73,7 +24,7 @@ const opDeleteConstraint = "DeleteConstraint"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DeleteConstraint
-func (c *Client) DeleteConstraintRequest(input *DeleteConstraintInput) DeleteConstraintRequest {
+func (c *Client) DeleteConstraintRequest(input *types.DeleteConstraintInput) DeleteConstraintRequest {
 	op := &aws.Operation{
 		Name:       opDeleteConstraint,
 		HTTPMethod: "POST",
@@ -81,10 +32,10 @@ func (c *Client) DeleteConstraintRequest(input *DeleteConstraintInput) DeleteCon
 	}
 
 	if input == nil {
-		input = &DeleteConstraintInput{}
+		input = &types.DeleteConstraintInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteConstraintOutput{})
+	req := c.newRequest(op, input, &types.DeleteConstraintOutput{})
 	return DeleteConstraintRequest{Request: req, Input: input, Copy: c.DeleteConstraintRequest}
 }
 
@@ -92,8 +43,8 @@ func (c *Client) DeleteConstraintRequest(input *DeleteConstraintInput) DeleteCon
 // DeleteConstraint API operation.
 type DeleteConstraintRequest struct {
 	*aws.Request
-	Input *DeleteConstraintInput
-	Copy  func(*DeleteConstraintInput) DeleteConstraintRequest
+	Input *types.DeleteConstraintInput
+	Copy  func(*types.DeleteConstraintInput) DeleteConstraintRequest
 }
 
 // Send marshals and sends the DeleteConstraint API request.
@@ -105,7 +56,7 @@ func (r DeleteConstraintRequest) Send(ctx context.Context) (*DeleteConstraintRes
 	}
 
 	resp := &DeleteConstraintResponse{
-		DeleteConstraintOutput: r.Request.Data.(*DeleteConstraintOutput),
+		DeleteConstraintOutput: r.Request.Data.(*types.DeleteConstraintOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -115,7 +66,7 @@ func (r DeleteConstraintRequest) Send(ctx context.Context) (*DeleteConstraintRes
 // DeleteConstraintResponse is the response type for the
 // DeleteConstraint API operation.
 type DeleteConstraintResponse struct {
-	*DeleteConstraintOutput
+	*types.DeleteConstraintOutput
 
 	response *aws.Response
 }

@@ -6,30 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/elasticbeanstalk/types"
 )
-
-type CreateStorageLocationInput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s CreateStorageLocationInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Results of a CreateStorageLocationResult call.
-type CreateStorageLocationOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the Amazon S3 bucket created.
-	S3Bucket *string `type:"string"`
-}
-
-// String returns the string representation
-func (s CreateStorageLocationOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCreateStorageLocation = "CreateStorageLocation"
 
@@ -50,7 +28,7 @@ const opCreateStorageLocation = "CreateStorageLocation"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/CreateStorageLocation
-func (c *Client) CreateStorageLocationRequest(input *CreateStorageLocationInput) CreateStorageLocationRequest {
+func (c *Client) CreateStorageLocationRequest(input *types.CreateStorageLocationInput) CreateStorageLocationRequest {
 	op := &aws.Operation{
 		Name:       opCreateStorageLocation,
 		HTTPMethod: "POST",
@@ -58,10 +36,10 @@ func (c *Client) CreateStorageLocationRequest(input *CreateStorageLocationInput)
 	}
 
 	if input == nil {
-		input = &CreateStorageLocationInput{}
+		input = &types.CreateStorageLocationInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateStorageLocationOutput{})
+	req := c.newRequest(op, input, &types.CreateStorageLocationOutput{})
 	return CreateStorageLocationRequest{Request: req, Input: input, Copy: c.CreateStorageLocationRequest}
 }
 
@@ -69,8 +47,8 @@ func (c *Client) CreateStorageLocationRequest(input *CreateStorageLocationInput)
 // CreateStorageLocation API operation.
 type CreateStorageLocationRequest struct {
 	*aws.Request
-	Input *CreateStorageLocationInput
-	Copy  func(*CreateStorageLocationInput) CreateStorageLocationRequest
+	Input *types.CreateStorageLocationInput
+	Copy  func(*types.CreateStorageLocationInput) CreateStorageLocationRequest
 }
 
 // Send marshals and sends the CreateStorageLocation API request.
@@ -82,7 +60,7 @@ func (r CreateStorageLocationRequest) Send(ctx context.Context) (*CreateStorageL
 	}
 
 	resp := &CreateStorageLocationResponse{
-		CreateStorageLocationOutput: r.Request.Data.(*CreateStorageLocationOutput),
+		CreateStorageLocationOutput: r.Request.Data.(*types.CreateStorageLocationOutput),
 		response:                    &aws.Response{Request: r.Request},
 	}
 
@@ -92,7 +70,7 @@ func (r CreateStorageLocationRequest) Send(ctx context.Context) (*CreateStorageL
 // CreateStorageLocationResponse is the response type for the
 // CreateStorageLocation API operation.
 type CreateStorageLocationResponse struct {
-	*CreateStorageLocationOutput
+	*types.CreateStorageLocationOutput
 
 	response *aws.Response
 }

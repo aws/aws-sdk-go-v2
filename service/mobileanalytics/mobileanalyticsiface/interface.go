@@ -10,6 +10,7 @@ package mobileanalyticsiface
 
 import (
 	"github.com/aws/aws-sdk-go-v2/service/mobileanalytics"
+	"github.com/aws/aws-sdk-go-v2/service/mobileanalytics/types"
 )
 
 // ClientAPI provides an interface to enable mocking the
@@ -43,7 +44,7 @@ import (
 //    type mockClientClient struct {
 //        mobileanalyticsiface.ClientPI
 //    }
-//    func (m *mockClientClient) PutEvents(input *mobileanalytics.PutEventsInput) (*mobileanalytics.PutEventsOutput, error) {
+//    func (m *mockClientClient) PutEvents(input *types.PutEventsInput) (*types.PutEventsOutput, error) {
 //        // mock response/functionality
 //    }
 //
@@ -61,7 +62,7 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type ClientAPI interface {
-	PutEventsRequest(*mobileanalytics.PutEventsInput) mobileanalytics.PutEventsRequest
+	PutEventsRequest(*types.PutEventsInput) mobileanalytics.PutEventsRequest
 }
 
 var _ ClientAPI = (*mobileanalytics.Client)(nil)

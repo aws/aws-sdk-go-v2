@@ -6,87 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/securityhub/types"
 )
-
-type UpdateFindingsInput struct {
-	_ struct{} `type:"structure"`
-
-	// A collection of attributes that specify which findings you want to update.
-	//
-	// Filters is a required field
-	Filters *AwsSecurityFindingFilters `type:"structure" required:"true"`
-
-	// The updated note for the finding.
-	Note *NoteUpdate `type:"structure"`
-
-	// The updated record state for the finding.
-	RecordState RecordState `type:"string" enum:"true"`
-}
-
-// String returns the string representation
-func (s UpdateFindingsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateFindingsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateFindingsInput"}
-
-	if s.Filters == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Filters"))
-	}
-	if s.Note != nil {
-		if err := s.Note.Validate(); err != nil {
-			invalidParams.AddNested("Note", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s UpdateFindingsInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.Filters != nil {
-		v := s.Filters
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "Filters", v, metadata)
-	}
-	if s.Note != nil {
-		v := s.Note
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "Note", v, metadata)
-	}
-	if len(s.RecordState) > 0 {
-		v := s.RecordState
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "RecordState", protocol.QuotedValue{ValueMarshaler: v}, metadata)
-	}
-	return nil
-}
-
-type UpdateFindingsOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s UpdateFindingsOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s UpdateFindingsOutput) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
 
 const opUpdateFindings = "UpdateFindings"
 
@@ -105,7 +26,7 @@ const opUpdateFindings = "UpdateFindings"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/UpdateFindings
-func (c *Client) UpdateFindingsRequest(input *UpdateFindingsInput) UpdateFindingsRequest {
+func (c *Client) UpdateFindingsRequest(input *types.UpdateFindingsInput) UpdateFindingsRequest {
 	op := &aws.Operation{
 		Name:       opUpdateFindings,
 		HTTPMethod: "PATCH",
@@ -113,10 +34,10 @@ func (c *Client) UpdateFindingsRequest(input *UpdateFindingsInput) UpdateFinding
 	}
 
 	if input == nil {
-		input = &UpdateFindingsInput{}
+		input = &types.UpdateFindingsInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateFindingsOutput{})
+	req := c.newRequest(op, input, &types.UpdateFindingsOutput{})
 	return UpdateFindingsRequest{Request: req, Input: input, Copy: c.UpdateFindingsRequest}
 }
 
@@ -124,8 +45,8 @@ func (c *Client) UpdateFindingsRequest(input *UpdateFindingsInput) UpdateFinding
 // UpdateFindings API operation.
 type UpdateFindingsRequest struct {
 	*aws.Request
-	Input *UpdateFindingsInput
-	Copy  func(*UpdateFindingsInput) UpdateFindingsRequest
+	Input *types.UpdateFindingsInput
+	Copy  func(*types.UpdateFindingsInput) UpdateFindingsRequest
 }
 
 // Send marshals and sends the UpdateFindings API request.
@@ -137,7 +58,7 @@ func (r UpdateFindingsRequest) Send(ctx context.Context) (*UpdateFindingsRespons
 	}
 
 	resp := &UpdateFindingsResponse{
-		UpdateFindingsOutput: r.Request.Data.(*UpdateFindingsOutput),
+		UpdateFindingsOutput: r.Request.Data.(*types.UpdateFindingsOutput),
 		response:             &aws.Response{Request: r.Request},
 	}
 
@@ -147,7 +68,7 @@ func (r UpdateFindingsRequest) Send(ctx context.Context) (*UpdateFindingsRespons
 // UpdateFindingsResponse is the response type for the
 // UpdateFindings API operation.
 type UpdateFindingsResponse struct {
-	*UpdateFindingsOutput
+	*types.UpdateFindingsOutput
 
 	response *aws.Response
 }

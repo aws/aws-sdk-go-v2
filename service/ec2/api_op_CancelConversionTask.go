@@ -6,56 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/ec2query"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-type CancelConversionTaskInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the conversion task.
-	//
-	// ConversionTaskId is a required field
-	ConversionTaskId *string `locationName:"conversionTaskId" type:"string" required:"true"`
-
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have
-	// the required permissions, the error response is DryRunOperation. Otherwise,
-	// it is UnauthorizedOperation.
-	DryRun *bool `locationName:"dryRun" type:"boolean"`
-
-	// The reason for canceling the conversion task.
-	ReasonMessage *string `locationName:"reasonMessage" type:"string"`
-}
-
-// String returns the string representation
-func (s CancelConversionTaskInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CancelConversionTaskInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CancelConversionTaskInput"}
-
-	if s.ConversionTaskId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ConversionTaskId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type CancelConversionTaskOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s CancelConversionTaskOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCancelConversionTask = "CancelConversionTask"
 
@@ -79,7 +33,7 @@ const opCancelConversionTask = "CancelConversionTask"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CancelConversionTask
-func (c *Client) CancelConversionTaskRequest(input *CancelConversionTaskInput) CancelConversionTaskRequest {
+func (c *Client) CancelConversionTaskRequest(input *types.CancelConversionTaskInput) CancelConversionTaskRequest {
 	op := &aws.Operation{
 		Name:       opCancelConversionTask,
 		HTTPMethod: "POST",
@@ -87,10 +41,10 @@ func (c *Client) CancelConversionTaskRequest(input *CancelConversionTaskInput) C
 	}
 
 	if input == nil {
-		input = &CancelConversionTaskInput{}
+		input = &types.CancelConversionTaskInput{}
 	}
 
-	req := c.newRequest(op, input, &CancelConversionTaskOutput{})
+	req := c.newRequest(op, input, &types.CancelConversionTaskOutput{})
 	req.Handlers.Unmarshal.Remove(ec2query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return CancelConversionTaskRequest{Request: req, Input: input, Copy: c.CancelConversionTaskRequest}
@@ -100,8 +54,8 @@ func (c *Client) CancelConversionTaskRequest(input *CancelConversionTaskInput) C
 // CancelConversionTask API operation.
 type CancelConversionTaskRequest struct {
 	*aws.Request
-	Input *CancelConversionTaskInput
-	Copy  func(*CancelConversionTaskInput) CancelConversionTaskRequest
+	Input *types.CancelConversionTaskInput
+	Copy  func(*types.CancelConversionTaskInput) CancelConversionTaskRequest
 }
 
 // Send marshals and sends the CancelConversionTask API request.
@@ -113,7 +67,7 @@ func (r CancelConversionTaskRequest) Send(ctx context.Context) (*CancelConversio
 	}
 
 	resp := &CancelConversionTaskResponse{
-		CancelConversionTaskOutput: r.Request.Data.(*CancelConversionTaskOutput),
+		CancelConversionTaskOutput: r.Request.Data.(*types.CancelConversionTaskOutput),
 		response:                   &aws.Response{Request: r.Request},
 	}
 
@@ -123,7 +77,7 @@ func (r CancelConversionTaskRequest) Send(ctx context.Context) (*CancelConversio
 // CancelConversionTaskResponse is the response type for the
 // CancelConversionTask API operation.
 type CancelConversionTaskResponse struct {
-	*CancelConversionTaskOutput
+	*types.CancelConversionTaskOutput
 
 	response *aws.Response
 }

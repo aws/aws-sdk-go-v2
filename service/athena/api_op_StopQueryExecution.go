@@ -6,45 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/athena/types"
 )
-
-type StopQueryExecutionInput struct {
-	_ struct{} `type:"structure"`
-
-	// The unique ID of the query execution to stop.
-	//
-	// QueryExecutionId is a required field
-	QueryExecutionId *string `type:"string" required:"true" idempotencyToken:"true"`
-}
-
-// String returns the string representation
-func (s StopQueryExecutionInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *StopQueryExecutionInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "StopQueryExecutionInput"}
-
-	if s.QueryExecutionId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("QueryExecutionId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type StopQueryExecutionOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s StopQueryExecutionOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opStopQueryExecution = "StopQueryExecution"
 
@@ -66,7 +29,7 @@ const opStopQueryExecution = "StopQueryExecution"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/StopQueryExecution
-func (c *Client) StopQueryExecutionRequest(input *StopQueryExecutionInput) StopQueryExecutionRequest {
+func (c *Client) StopQueryExecutionRequest(input *types.StopQueryExecutionInput) StopQueryExecutionRequest {
 	op := &aws.Operation{
 		Name:       opStopQueryExecution,
 		HTTPMethod: "POST",
@@ -74,10 +37,10 @@ func (c *Client) StopQueryExecutionRequest(input *StopQueryExecutionInput) StopQ
 	}
 
 	if input == nil {
-		input = &StopQueryExecutionInput{}
+		input = &types.StopQueryExecutionInput{}
 	}
 
-	req := c.newRequest(op, input, &StopQueryExecutionOutput{})
+	req := c.newRequest(op, input, &types.StopQueryExecutionOutput{})
 	return StopQueryExecutionRequest{Request: req, Input: input, Copy: c.StopQueryExecutionRequest}
 }
 
@@ -85,8 +48,8 @@ func (c *Client) StopQueryExecutionRequest(input *StopQueryExecutionInput) StopQ
 // StopQueryExecution API operation.
 type StopQueryExecutionRequest struct {
 	*aws.Request
-	Input *StopQueryExecutionInput
-	Copy  func(*StopQueryExecutionInput) StopQueryExecutionRequest
+	Input *types.StopQueryExecutionInput
+	Copy  func(*types.StopQueryExecutionInput) StopQueryExecutionRequest
 }
 
 // Send marshals and sends the StopQueryExecution API request.
@@ -98,7 +61,7 @@ func (r StopQueryExecutionRequest) Send(ctx context.Context) (*StopQueryExecutio
 	}
 
 	resp := &StopQueryExecutionResponse{
-		StopQueryExecutionOutput: r.Request.Data.(*StopQueryExecutionOutput),
+		StopQueryExecutionOutput: r.Request.Data.(*types.StopQueryExecutionOutput),
 		response:                 &aws.Response{Request: r.Request},
 	}
 
@@ -108,7 +71,7 @@ func (r StopQueryExecutionRequest) Send(ctx context.Context) (*StopQueryExecutio
 // StopQueryExecutionResponse is the response type for the
 // StopQueryExecution API operation.
 type StopQueryExecutionResponse struct {
-	*StopQueryExecutionOutput
+	*types.StopQueryExecutionOutput
 
 	response *aws.Response
 }

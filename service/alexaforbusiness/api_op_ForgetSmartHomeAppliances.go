@@ -6,45 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/alexaforbusiness/types"
 )
-
-type ForgetSmartHomeAppliancesInput struct {
-	_ struct{} `type:"structure"`
-
-	// The room that the appliances are associated with.
-	//
-	// RoomArn is a required field
-	RoomArn *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s ForgetSmartHomeAppliancesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ForgetSmartHomeAppliancesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ForgetSmartHomeAppliancesInput"}
-
-	if s.RoomArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("RoomArn"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ForgetSmartHomeAppliancesOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s ForgetSmartHomeAppliancesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opForgetSmartHomeAppliances = "ForgetSmartHomeAppliances"
 
@@ -61,7 +24,7 @@ const opForgetSmartHomeAppliances = "ForgetSmartHomeAppliances"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/ForgetSmartHomeAppliances
-func (c *Client) ForgetSmartHomeAppliancesRequest(input *ForgetSmartHomeAppliancesInput) ForgetSmartHomeAppliancesRequest {
+func (c *Client) ForgetSmartHomeAppliancesRequest(input *types.ForgetSmartHomeAppliancesInput) ForgetSmartHomeAppliancesRequest {
 	op := &aws.Operation{
 		Name:       opForgetSmartHomeAppliances,
 		HTTPMethod: "POST",
@@ -69,10 +32,10 @@ func (c *Client) ForgetSmartHomeAppliancesRequest(input *ForgetSmartHomeApplianc
 	}
 
 	if input == nil {
-		input = &ForgetSmartHomeAppliancesInput{}
+		input = &types.ForgetSmartHomeAppliancesInput{}
 	}
 
-	req := c.newRequest(op, input, &ForgetSmartHomeAppliancesOutput{})
+	req := c.newRequest(op, input, &types.ForgetSmartHomeAppliancesOutput{})
 	return ForgetSmartHomeAppliancesRequest{Request: req, Input: input, Copy: c.ForgetSmartHomeAppliancesRequest}
 }
 
@@ -80,8 +43,8 @@ func (c *Client) ForgetSmartHomeAppliancesRequest(input *ForgetSmartHomeApplianc
 // ForgetSmartHomeAppliances API operation.
 type ForgetSmartHomeAppliancesRequest struct {
 	*aws.Request
-	Input *ForgetSmartHomeAppliancesInput
-	Copy  func(*ForgetSmartHomeAppliancesInput) ForgetSmartHomeAppliancesRequest
+	Input *types.ForgetSmartHomeAppliancesInput
+	Copy  func(*types.ForgetSmartHomeAppliancesInput) ForgetSmartHomeAppliancesRequest
 }
 
 // Send marshals and sends the ForgetSmartHomeAppliances API request.
@@ -93,7 +56,7 @@ func (r ForgetSmartHomeAppliancesRequest) Send(ctx context.Context) (*ForgetSmar
 	}
 
 	resp := &ForgetSmartHomeAppliancesResponse{
-		ForgetSmartHomeAppliancesOutput: r.Request.Data.(*ForgetSmartHomeAppliancesOutput),
+		ForgetSmartHomeAppliancesOutput: r.Request.Data.(*types.ForgetSmartHomeAppliancesOutput),
 		response:                        &aws.Response{Request: r.Request},
 	}
 
@@ -103,7 +66,7 @@ func (r ForgetSmartHomeAppliancesRequest) Send(ctx context.Context) (*ForgetSmar
 // ForgetSmartHomeAppliancesResponse is the response type for the
 // ForgetSmartHomeAppliances API operation.
 type ForgetSmartHomeAppliancesResponse struct {
-	*ForgetSmartHomeAppliancesOutput
+	*types.ForgetSmartHomeAppliancesOutput
 
 	response *aws.Response
 }

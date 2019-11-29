@@ -6,67 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/iotevents/types"
 )
-
-type DeleteDetectorModelInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the detector model to be deleted.
-	//
-	// DetectorModelName is a required field
-	DetectorModelName *string `location:"uri" locationName:"detectorModelName" min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteDetectorModelInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteDetectorModelInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteDetectorModelInput"}
-
-	if s.DetectorModelName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DetectorModelName"))
-	}
-	if s.DetectorModelName != nil && len(*s.DetectorModelName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("DetectorModelName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteDetectorModelInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.DetectorModelName != nil {
-		v := *s.DetectorModelName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "detectorModelName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type DeleteDetectorModelOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteDetectorModelOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteDetectorModelOutput) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
 
 const opDeleteDetectorModel = "DeleteDetectorModel"
 
@@ -84,7 +25,7 @@ const opDeleteDetectorModel = "DeleteDetectorModel"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iotevents-2018-07-27/DeleteDetectorModel
-func (c *Client) DeleteDetectorModelRequest(input *DeleteDetectorModelInput) DeleteDetectorModelRequest {
+func (c *Client) DeleteDetectorModelRequest(input *types.DeleteDetectorModelInput) DeleteDetectorModelRequest {
 	op := &aws.Operation{
 		Name:       opDeleteDetectorModel,
 		HTTPMethod: "DELETE",
@@ -92,10 +33,10 @@ func (c *Client) DeleteDetectorModelRequest(input *DeleteDetectorModelInput) Del
 	}
 
 	if input == nil {
-		input = &DeleteDetectorModelInput{}
+		input = &types.DeleteDetectorModelInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteDetectorModelOutput{})
+	req := c.newRequest(op, input, &types.DeleteDetectorModelOutput{})
 	return DeleteDetectorModelRequest{Request: req, Input: input, Copy: c.DeleteDetectorModelRequest}
 }
 
@@ -103,8 +44,8 @@ func (c *Client) DeleteDetectorModelRequest(input *DeleteDetectorModelInput) Del
 // DeleteDetectorModel API operation.
 type DeleteDetectorModelRequest struct {
 	*aws.Request
-	Input *DeleteDetectorModelInput
-	Copy  func(*DeleteDetectorModelInput) DeleteDetectorModelRequest
+	Input *types.DeleteDetectorModelInput
+	Copy  func(*types.DeleteDetectorModelInput) DeleteDetectorModelRequest
 }
 
 // Send marshals and sends the DeleteDetectorModel API request.
@@ -116,7 +57,7 @@ func (r DeleteDetectorModelRequest) Send(ctx context.Context) (*DeleteDetectorMo
 	}
 
 	resp := &DeleteDetectorModelResponse{
-		DeleteDetectorModelOutput: r.Request.Data.(*DeleteDetectorModelOutput),
+		DeleteDetectorModelOutput: r.Request.Data.(*types.DeleteDetectorModelOutput),
 		response:                  &aws.Response{Request: r.Request},
 	}
 
@@ -126,7 +67,7 @@ func (r DeleteDetectorModelRequest) Send(ctx context.Context) (*DeleteDetectorMo
 // DeleteDetectorModelResponse is the response type for the
 // DeleteDetectorModel API operation.
 type DeleteDetectorModelResponse struct {
-	*DeleteDetectorModelOutput
+	*types.DeleteDetectorModelOutput
 
 	response *aws.Response
 }

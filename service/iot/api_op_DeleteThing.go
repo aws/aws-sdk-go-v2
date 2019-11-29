@@ -6,80 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/iot/types"
 )
-
-// The input for the DeleteThing operation.
-type DeleteThingInput struct {
-	_ struct{} `type:"structure"`
-
-	// The expected version of the thing record in the registry. If the version
-	// of the record in the registry does not match the expected version specified
-	// in the request, the DeleteThing request is rejected with a VersionConflictException.
-	ExpectedVersion *int64 `location:"querystring" locationName:"expectedVersion" type:"long"`
-
-	// The name of the thing to delete.
-	//
-	// ThingName is a required field
-	ThingName *string `location:"uri" locationName:"thingName" min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteThingInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteThingInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteThingInput"}
-
-	if s.ThingName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ThingName"))
-	}
-	if s.ThingName != nil && len(*s.ThingName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ThingName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteThingInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.ThingName != nil {
-		v := *s.ThingName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "thingName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.ExpectedVersion != nil {
-		v := *s.ExpectedVersion
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "expectedVersion", protocol.Int64Value(v), metadata)
-	}
-	return nil
-}
-
-// The output of the DeleteThing operation.
-type DeleteThingOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteThingOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteThingOutput) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
 
 const opDeleteThing = "DeleteThing"
 
@@ -95,7 +23,7 @@ const opDeleteThing = "DeleteThing"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) DeleteThingRequest(input *DeleteThingInput) DeleteThingRequest {
+func (c *Client) DeleteThingRequest(input *types.DeleteThingInput) DeleteThingRequest {
 	op := &aws.Operation{
 		Name:       opDeleteThing,
 		HTTPMethod: "DELETE",
@@ -103,10 +31,10 @@ func (c *Client) DeleteThingRequest(input *DeleteThingInput) DeleteThingRequest 
 	}
 
 	if input == nil {
-		input = &DeleteThingInput{}
+		input = &types.DeleteThingInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteThingOutput{})
+	req := c.newRequest(op, input, &types.DeleteThingOutput{})
 	return DeleteThingRequest{Request: req, Input: input, Copy: c.DeleteThingRequest}
 }
 
@@ -114,8 +42,8 @@ func (c *Client) DeleteThingRequest(input *DeleteThingInput) DeleteThingRequest 
 // DeleteThing API operation.
 type DeleteThingRequest struct {
 	*aws.Request
-	Input *DeleteThingInput
-	Copy  func(*DeleteThingInput) DeleteThingRequest
+	Input *types.DeleteThingInput
+	Copy  func(*types.DeleteThingInput) DeleteThingRequest
 }
 
 // Send marshals and sends the DeleteThing API request.
@@ -127,7 +55,7 @@ func (r DeleteThingRequest) Send(ctx context.Context) (*DeleteThingResponse, err
 	}
 
 	resp := &DeleteThingResponse{
-		DeleteThingOutput: r.Request.Data.(*DeleteThingOutput),
+		DeleteThingOutput: r.Request.Data.(*types.DeleteThingOutput),
 		response:          &aws.Response{Request: r.Request},
 	}
 
@@ -137,7 +65,7 @@ func (r DeleteThingRequest) Send(ctx context.Context) (*DeleteThingResponse, err
 // DeleteThingResponse is the response type for the
 // DeleteThing API operation.
 type DeleteThingResponse struct {
-	*DeleteThingOutput
+	*types.DeleteThingOutput
 
 	response *aws.Response
 }

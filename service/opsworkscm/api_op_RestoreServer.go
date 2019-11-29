@@ -6,67 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/opsworkscm/types"
 )
-
-type RestoreServerInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the backup that you want to use to restore a server.
-	//
-	// BackupId is a required field
-	BackupId *string `type:"string" required:"true"`
-
-	// The type of the instance to create. Valid values must be specified in the
-	// following format: ^([cm][34]|t2).* For example, m5.large. Valid values are
-	// m5.large, r5.xlarge, and r5.2xlarge. If you do not specify this parameter,
-	// RestoreServer uses the instance type from the specified backup.
-	InstanceType *string `type:"string"`
-
-	// The name of the key pair to set on the new EC2 instance. This can be helpful
-	// if the administrator no longer has the SSH key.
-	KeyPair *string `type:"string"`
-
-	// The name of the server that you want to restore.
-	//
-	// ServerName is a required field
-	ServerName *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s RestoreServerInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *RestoreServerInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "RestoreServerInput"}
-
-	if s.BackupId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("BackupId"))
-	}
-
-	if s.ServerName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ServerName"))
-	}
-	if s.ServerName != nil && len(*s.ServerName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ServerName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type RestoreServerOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s RestoreServerOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opRestoreServer = "RestoreServer"
 
@@ -93,7 +34,7 @@ const opRestoreServer = "RestoreServer"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/RestoreServer
-func (c *Client) RestoreServerRequest(input *RestoreServerInput) RestoreServerRequest {
+func (c *Client) RestoreServerRequest(input *types.RestoreServerInput) RestoreServerRequest {
 	op := &aws.Operation{
 		Name:       opRestoreServer,
 		HTTPMethod: "POST",
@@ -101,10 +42,10 @@ func (c *Client) RestoreServerRequest(input *RestoreServerInput) RestoreServerRe
 	}
 
 	if input == nil {
-		input = &RestoreServerInput{}
+		input = &types.RestoreServerInput{}
 	}
 
-	req := c.newRequest(op, input, &RestoreServerOutput{})
+	req := c.newRequest(op, input, &types.RestoreServerOutput{})
 	return RestoreServerRequest{Request: req, Input: input, Copy: c.RestoreServerRequest}
 }
 
@@ -112,8 +53,8 @@ func (c *Client) RestoreServerRequest(input *RestoreServerInput) RestoreServerRe
 // RestoreServer API operation.
 type RestoreServerRequest struct {
 	*aws.Request
-	Input *RestoreServerInput
-	Copy  func(*RestoreServerInput) RestoreServerRequest
+	Input *types.RestoreServerInput
+	Copy  func(*types.RestoreServerInput) RestoreServerRequest
 }
 
 // Send marshals and sends the RestoreServer API request.
@@ -125,7 +66,7 @@ func (r RestoreServerRequest) Send(ctx context.Context) (*RestoreServerResponse,
 	}
 
 	resp := &RestoreServerResponse{
-		RestoreServerOutput: r.Request.Data.(*RestoreServerOutput),
+		RestoreServerOutput: r.Request.Data.(*types.RestoreServerOutput),
 		response:            &aws.Response{Request: r.Request},
 	}
 
@@ -135,7 +76,7 @@ func (r RestoreServerRequest) Send(ctx context.Context) (*RestoreServerResponse,
 // RestoreServerResponse is the response type for the
 // RestoreServer API operation.
 type RestoreServerResponse struct {
-	*RestoreServerOutput
+	*types.RestoreServerOutput
 
 	response *aws.Response
 }

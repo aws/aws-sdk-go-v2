@@ -6,48 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/autoscaling/types"
 )
-
-type DescribeAutoScalingInstancesInput struct {
-	_ struct{} `type:"structure"`
-
-	// The IDs of the instances. You can specify up to MaxRecords IDs. If you omit
-	// this parameter, all Auto Scaling instances are described. If you specify
-	// an ID that does not exist, it is ignored with no error.
-	InstanceIds []string `type:"list"`
-
-	// The maximum number of items to return with this call. The default value is
-	// 50 and the maximum value is 50.
-	MaxRecords *int64 `type:"integer"`
-
-	// The token for the next set of items to return. (You received this token from
-	// a previous call.)
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeAutoScalingInstancesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type DescribeAutoScalingInstancesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The instances.
-	AutoScalingInstances []AutoScalingInstanceDetails `type:"list"`
-
-	// A string that indicates that the response contains more items than can be
-	// returned in a single response. To receive additional items, specify this
-	// string for the NextToken value when requesting the next set of items. This
-	// value is null when there are no more items to return.
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeAutoScalingInstancesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeAutoScalingInstances = "DescribeAutoScalingInstances"
 
@@ -64,7 +24,7 @@ const opDescribeAutoScalingInstances = "DescribeAutoScalingInstances"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DescribeAutoScalingInstances
-func (c *Client) DescribeAutoScalingInstancesRequest(input *DescribeAutoScalingInstancesInput) DescribeAutoScalingInstancesRequest {
+func (c *Client) DescribeAutoScalingInstancesRequest(input *types.DescribeAutoScalingInstancesInput) DescribeAutoScalingInstancesRequest {
 	op := &aws.Operation{
 		Name:       opDescribeAutoScalingInstances,
 		HTTPMethod: "POST",
@@ -78,10 +38,10 @@ func (c *Client) DescribeAutoScalingInstancesRequest(input *DescribeAutoScalingI
 	}
 
 	if input == nil {
-		input = &DescribeAutoScalingInstancesInput{}
+		input = &types.DescribeAutoScalingInstancesInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeAutoScalingInstancesOutput{})
+	req := c.newRequest(op, input, &types.DescribeAutoScalingInstancesOutput{})
 	return DescribeAutoScalingInstancesRequest{Request: req, Input: input, Copy: c.DescribeAutoScalingInstancesRequest}
 }
 
@@ -89,8 +49,8 @@ func (c *Client) DescribeAutoScalingInstancesRequest(input *DescribeAutoScalingI
 // DescribeAutoScalingInstances API operation.
 type DescribeAutoScalingInstancesRequest struct {
 	*aws.Request
-	Input *DescribeAutoScalingInstancesInput
-	Copy  func(*DescribeAutoScalingInstancesInput) DescribeAutoScalingInstancesRequest
+	Input *types.DescribeAutoScalingInstancesInput
+	Copy  func(*types.DescribeAutoScalingInstancesInput) DescribeAutoScalingInstancesRequest
 }
 
 // Send marshals and sends the DescribeAutoScalingInstances API request.
@@ -102,7 +62,7 @@ func (r DescribeAutoScalingInstancesRequest) Send(ctx context.Context) (*Describ
 	}
 
 	resp := &DescribeAutoScalingInstancesResponse{
-		DescribeAutoScalingInstancesOutput: r.Request.Data.(*DescribeAutoScalingInstancesOutput),
+		DescribeAutoScalingInstancesOutput: r.Request.Data.(*types.DescribeAutoScalingInstancesOutput),
 		response:                           &aws.Response{Request: r.Request},
 	}
 
@@ -132,7 +92,7 @@ func NewDescribeAutoScalingInstancesPaginator(req DescribeAutoScalingInstancesRe
 	return DescribeAutoScalingInstancesPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *DescribeAutoScalingInstancesInput
+				var inCpy *types.DescribeAutoScalingInstancesInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -152,14 +112,14 @@ type DescribeAutoScalingInstancesPaginator struct {
 	aws.Pager
 }
 
-func (p *DescribeAutoScalingInstancesPaginator) CurrentPage() *DescribeAutoScalingInstancesOutput {
-	return p.Pager.CurrentPage().(*DescribeAutoScalingInstancesOutput)
+func (p *DescribeAutoScalingInstancesPaginator) CurrentPage() *types.DescribeAutoScalingInstancesOutput {
+	return p.Pager.CurrentPage().(*types.DescribeAutoScalingInstancesOutput)
 }
 
 // DescribeAutoScalingInstancesResponse is the response type for the
 // DescribeAutoScalingInstances API operation.
 type DescribeAutoScalingInstancesResponse struct {
-	*DescribeAutoScalingInstancesOutput
+	*types.DescribeAutoScalingInstancesOutput
 
 	response *aws.Response
 }

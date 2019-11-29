@@ -6,82 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/cloudfront/types"
 )
-
-type GetFieldLevelEncryptionConfigInput struct {
-	_ struct{} `type:"structure"`
-
-	// Request the ID for the field-level encryption configuration information.
-	//
-	// Id is a required field
-	Id *string `location:"uri" locationName:"Id" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetFieldLevelEncryptionConfigInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetFieldLevelEncryptionConfigInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetFieldLevelEncryptionConfigInput"}
-
-	if s.Id == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Id"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetFieldLevelEncryptionConfigInput) MarshalFields(e protocol.FieldEncoder) error {
-
-	if s.Id != nil {
-		v := *s.Id
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "Id", protocol.StringValue(v), metadata)
-	}
-	return nil
-}
-
-type GetFieldLevelEncryptionConfigOutput struct {
-	_ struct{} `type:"structure" payload:"FieldLevelEncryptionConfig"`
-
-	// The current version of the field level encryption configuration. For example:
-	// E2QWRUHAPOMQZL.
-	ETag *string `location:"header" locationName:"ETag" type:"string"`
-
-	// Return the field-level encryption configuration information.
-	FieldLevelEncryptionConfig *FieldLevelEncryptionConfig `type:"structure"`
-}
-
-// String returns the string representation
-func (s GetFieldLevelEncryptionConfigOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetFieldLevelEncryptionConfigOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.ETag != nil {
-		v := *s.ETag
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "ETag", protocol.StringValue(v), metadata)
-	}
-	if s.FieldLevelEncryptionConfig != nil {
-		v := s.FieldLevelEncryptionConfig
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.PayloadTarget, "FieldLevelEncryptionConfig", v, metadata)
-	}
-	return nil
-}
 
 const opGetFieldLevelEncryptionConfig = "GetFieldLevelEncryptionConfig2019_03_26"
 
@@ -98,7 +24,7 @@ const opGetFieldLevelEncryptionConfig = "GetFieldLevelEncryptionConfig2019_03_26
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/GetFieldLevelEncryptionConfig
-func (c *Client) GetFieldLevelEncryptionConfigRequest(input *GetFieldLevelEncryptionConfigInput) GetFieldLevelEncryptionConfigRequest {
+func (c *Client) GetFieldLevelEncryptionConfigRequest(input *types.GetFieldLevelEncryptionConfigInput) GetFieldLevelEncryptionConfigRequest {
 	op := &aws.Operation{
 		Name:       opGetFieldLevelEncryptionConfig,
 		HTTPMethod: "GET",
@@ -106,10 +32,10 @@ func (c *Client) GetFieldLevelEncryptionConfigRequest(input *GetFieldLevelEncryp
 	}
 
 	if input == nil {
-		input = &GetFieldLevelEncryptionConfigInput{}
+		input = &types.GetFieldLevelEncryptionConfigInput{}
 	}
 
-	req := c.newRequest(op, input, &GetFieldLevelEncryptionConfigOutput{})
+	req := c.newRequest(op, input, &types.GetFieldLevelEncryptionConfigOutput{})
 	return GetFieldLevelEncryptionConfigRequest{Request: req, Input: input, Copy: c.GetFieldLevelEncryptionConfigRequest}
 }
 
@@ -117,8 +43,8 @@ func (c *Client) GetFieldLevelEncryptionConfigRequest(input *GetFieldLevelEncryp
 // GetFieldLevelEncryptionConfig API operation.
 type GetFieldLevelEncryptionConfigRequest struct {
 	*aws.Request
-	Input *GetFieldLevelEncryptionConfigInput
-	Copy  func(*GetFieldLevelEncryptionConfigInput) GetFieldLevelEncryptionConfigRequest
+	Input *types.GetFieldLevelEncryptionConfigInput
+	Copy  func(*types.GetFieldLevelEncryptionConfigInput) GetFieldLevelEncryptionConfigRequest
 }
 
 // Send marshals and sends the GetFieldLevelEncryptionConfig API request.
@@ -130,7 +56,7 @@ func (r GetFieldLevelEncryptionConfigRequest) Send(ctx context.Context) (*GetFie
 	}
 
 	resp := &GetFieldLevelEncryptionConfigResponse{
-		GetFieldLevelEncryptionConfigOutput: r.Request.Data.(*GetFieldLevelEncryptionConfigOutput),
+		GetFieldLevelEncryptionConfigOutput: r.Request.Data.(*types.GetFieldLevelEncryptionConfigOutput),
 		response:                            &aws.Response{Request: r.Request},
 	}
 
@@ -140,7 +66,7 @@ func (r GetFieldLevelEncryptionConfigRequest) Send(ctx context.Context) (*GetFie
 // GetFieldLevelEncryptionConfigResponse is the response type for the
 // GetFieldLevelEncryptionConfig API operation.
 type GetFieldLevelEncryptionConfigResponse struct {
-	*GetFieldLevelEncryptionConfigOutput
+	*types.GetFieldLevelEncryptionConfigOutput
 
 	response *aws.Response
 }

@@ -6,80 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/greengrass/types"
 )
-
-type ListBulkDeploymentsInput struct {
-	_ struct{} `type:"structure"`
-
-	MaxResults *string `location:"querystring" locationName:"MaxResults" type:"string"`
-
-	NextToken *string `location:"querystring" locationName:"NextToken" type:"string"`
-}
-
-// String returns the string representation
-func (s ListBulkDeploymentsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListBulkDeploymentsInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.MaxResults != nil {
-		v := *s.MaxResults
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "MaxResults", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type ListBulkDeploymentsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A list of bulk deployments.
-	BulkDeployments []BulkDeployment `type:"list"`
-
-	// The token for the next set of results, or ''null'' if there are no additional
-	// results.
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s ListBulkDeploymentsOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListBulkDeploymentsOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.BulkDeployments != nil {
-		v := s.BulkDeployments
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "BulkDeployments", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opListBulkDeployments = "ListBulkDeployments"
 
@@ -96,7 +24,7 @@ const opListBulkDeployments = "ListBulkDeployments"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/ListBulkDeployments
-func (c *Client) ListBulkDeploymentsRequest(input *ListBulkDeploymentsInput) ListBulkDeploymentsRequest {
+func (c *Client) ListBulkDeploymentsRequest(input *types.ListBulkDeploymentsInput) ListBulkDeploymentsRequest {
 	op := &aws.Operation{
 		Name:       opListBulkDeployments,
 		HTTPMethod: "GET",
@@ -104,10 +32,10 @@ func (c *Client) ListBulkDeploymentsRequest(input *ListBulkDeploymentsInput) Lis
 	}
 
 	if input == nil {
-		input = &ListBulkDeploymentsInput{}
+		input = &types.ListBulkDeploymentsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListBulkDeploymentsOutput{})
+	req := c.newRequest(op, input, &types.ListBulkDeploymentsOutput{})
 	return ListBulkDeploymentsRequest{Request: req, Input: input, Copy: c.ListBulkDeploymentsRequest}
 }
 
@@ -115,8 +43,8 @@ func (c *Client) ListBulkDeploymentsRequest(input *ListBulkDeploymentsInput) Lis
 // ListBulkDeployments API operation.
 type ListBulkDeploymentsRequest struct {
 	*aws.Request
-	Input *ListBulkDeploymentsInput
-	Copy  func(*ListBulkDeploymentsInput) ListBulkDeploymentsRequest
+	Input *types.ListBulkDeploymentsInput
+	Copy  func(*types.ListBulkDeploymentsInput) ListBulkDeploymentsRequest
 }
 
 // Send marshals and sends the ListBulkDeployments API request.
@@ -128,7 +56,7 @@ func (r ListBulkDeploymentsRequest) Send(ctx context.Context) (*ListBulkDeployme
 	}
 
 	resp := &ListBulkDeploymentsResponse{
-		ListBulkDeploymentsOutput: r.Request.Data.(*ListBulkDeploymentsOutput),
+		ListBulkDeploymentsOutput: r.Request.Data.(*types.ListBulkDeploymentsOutput),
 		response:                  &aws.Response{Request: r.Request},
 	}
 
@@ -138,7 +66,7 @@ func (r ListBulkDeploymentsRequest) Send(ctx context.Context) (*ListBulkDeployme
 // ListBulkDeploymentsResponse is the response type for the
 // ListBulkDeployments API operation.
 type ListBulkDeploymentsResponse struct {
-	*ListBulkDeploymentsOutput
+	*types.ListBulkDeploymentsOutput
 
 	response *aws.Response
 }

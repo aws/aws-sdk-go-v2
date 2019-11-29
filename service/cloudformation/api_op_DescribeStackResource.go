@@ -6,70 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/cloudformation/types"
 )
-
-// The input for DescribeStackResource action.
-type DescribeStackResourceInput struct {
-	_ struct{} `type:"structure"`
-
-	// The logical name of the resource as specified in the template.
-	//
-	// Default: There is no default value.
-	//
-	// LogicalResourceId is a required field
-	LogicalResourceId *string `type:"string" required:"true"`
-
-	// The name or the unique stack ID that is associated with the stack, which
-	// are not always interchangeable:
-	//
-	//    * Running stacks: You can specify either the stack's name or its unique
-	//    stack ID.
-	//
-	//    * Deleted stacks: You must specify the unique stack ID.
-	//
-	// Default: There is no default value.
-	//
-	// StackName is a required field
-	StackName *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeStackResourceInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeStackResourceInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeStackResourceInput"}
-
-	if s.LogicalResourceId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("LogicalResourceId"))
-	}
-
-	if s.StackName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("StackName"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// The output for a DescribeStackResource action.
-type DescribeStackResourceOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A StackResourceDetail structure containing the description of the specified
-	// resource in the specified stack.
-	StackResourceDetail *StackResourceDetail `type:"structure"`
-}
-
-// String returns the string representation
-func (s DescribeStackResourceOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeStackResource = "DescribeStackResource"
 
@@ -89,7 +27,7 @@ const opDescribeStackResource = "DescribeStackResource"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DescribeStackResource
-func (c *Client) DescribeStackResourceRequest(input *DescribeStackResourceInput) DescribeStackResourceRequest {
+func (c *Client) DescribeStackResourceRequest(input *types.DescribeStackResourceInput) DescribeStackResourceRequest {
 	op := &aws.Operation{
 		Name:       opDescribeStackResource,
 		HTTPMethod: "POST",
@@ -97,10 +35,10 @@ func (c *Client) DescribeStackResourceRequest(input *DescribeStackResourceInput)
 	}
 
 	if input == nil {
-		input = &DescribeStackResourceInput{}
+		input = &types.DescribeStackResourceInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeStackResourceOutput{})
+	req := c.newRequest(op, input, &types.DescribeStackResourceOutput{})
 	return DescribeStackResourceRequest{Request: req, Input: input, Copy: c.DescribeStackResourceRequest}
 }
 
@@ -108,8 +46,8 @@ func (c *Client) DescribeStackResourceRequest(input *DescribeStackResourceInput)
 // DescribeStackResource API operation.
 type DescribeStackResourceRequest struct {
 	*aws.Request
-	Input *DescribeStackResourceInput
-	Copy  func(*DescribeStackResourceInput) DescribeStackResourceRequest
+	Input *types.DescribeStackResourceInput
+	Copy  func(*types.DescribeStackResourceInput) DescribeStackResourceRequest
 }
 
 // Send marshals and sends the DescribeStackResource API request.
@@ -121,7 +59,7 @@ func (r DescribeStackResourceRequest) Send(ctx context.Context) (*DescribeStackR
 	}
 
 	resp := &DescribeStackResourceResponse{
-		DescribeStackResourceOutput: r.Request.Data.(*DescribeStackResourceOutput),
+		DescribeStackResourceOutput: r.Request.Data.(*types.DescribeStackResourceOutput),
 		response:                    &aws.Response{Request: r.Request},
 	}
 
@@ -131,7 +69,7 @@ func (r DescribeStackResourceRequest) Send(ctx context.Context) (*DescribeStackR
 // DescribeStackResourceResponse is the response type for the
 // DescribeStackResource API operation.
 type DescribeStackResourceResponse struct {
-	*DescribeStackResourceOutput
+	*types.DescribeStackResourceOutput
 
 	response *aws.Response
 }

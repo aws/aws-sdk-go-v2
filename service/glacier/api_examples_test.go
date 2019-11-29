@@ -12,6 +12,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws/awserr"
 	"github.com/aws/aws-sdk-go-v2/aws/external"
 	"github.com/aws/aws-sdk-go-v2/service/glacier"
+	"github.com/aws/aws-sdk-go-v2/service/glacier/types"
 )
 
 var _ time.Duration
@@ -36,7 +37,7 @@ func ExampleClient_AbortMultipartUploadRequest_shared00() {
 	}
 
 	svc := glacier.New(cfg)
-	input := &glacier.AbortMultipartUploadInput{
+	input := &types.AbortMultipartUploadInput{
 		AccountId: aws.String("-"),
 		UploadId:  aws.String("19gaRezEXAMPLES6Ry5YYdqthHOC_kGRCT03L9yetr220UmPtBYKk-OssZtLqyFu7sY1_lR7vgFuJV6NtcV5zpsJ"),
 		VaultName: aws.String("my-vault"),
@@ -80,7 +81,7 @@ func ExampleClient_AbortVaultLockRequest_shared00() {
 	}
 
 	svc := glacier.New(cfg)
-	input := &glacier.AbortVaultLockInput{
+	input := &types.AbortVaultLockInput{
 		AccountId: aws.String("-"),
 		VaultName: aws.String("examplevault"),
 	}
@@ -122,7 +123,7 @@ func ExampleClient_AddTagsToVaultRequest_shared00() {
 	}
 
 	svc := glacier.New(cfg)
-	input := &glacier.AddTagsToVaultInput{
+	input := &types.AddTagsToVaultInput{
 		Tags: map[string]string{
 			"examplekey1": "examplevalue1",
 			"examplekey2": "examplevalue2",
@@ -170,7 +171,7 @@ func ExampleClient_CompleteMultipartUploadRequest_shared00() {
 	}
 
 	svc := glacier.New(cfg)
-	input := &glacier.CompleteMultipartUploadInput{
+	input := &types.CompleteMultipartUploadInput{
 		AccountId:   aws.String("-"),
 		ArchiveSize: aws.String("3145728"),
 		Checksum:    aws.String("9628195fcdbcbbe76cdde456d4646fa7de5f219fb39823836d81f0cc0e18aa67"),
@@ -216,7 +217,7 @@ func ExampleClient_CompleteVaultLockRequest_shared00() {
 	}
 
 	svc := glacier.New(cfg)
-	input := &glacier.CompleteVaultLockInput{
+	input := &types.CompleteVaultLockInput{
 		AccountId: aws.String("-"),
 		LockId:    aws.String("AE863rKkWZU53SLW5be4DUcW"),
 		VaultName: aws.String("example-vault"),
@@ -259,7 +260,7 @@ func ExampleClient_CreateVaultRequest_shared00() {
 	}
 
 	svc := glacier.New(cfg)
-	input := &glacier.CreateVaultInput{
+	input := &types.CreateVaultInput{
 		AccountId: aws.String("-"),
 		VaultName: aws.String("my-vault"),
 	}
@@ -301,7 +302,7 @@ func ExampleClient_DeleteArchiveRequest_shared00() {
 	}
 
 	svc := glacier.New(cfg)
-	input := &glacier.DeleteArchiveInput{
+	input := &types.DeleteArchiveInput{
 		AccountId: aws.String("-"),
 		ArchiveId: aws.String("NkbByEejwEggmBz2fTHgJrg0XBoDfjP4q6iu87-TjhqG6eGoOY9Z8i1_AUyUsuhPAdTqLHy8pTl5nfCFJmDl2yEZONi5L26Omw12vcs01MNGntHEQL8MBfGlqrEXAMPLEArchiveId"),
 		VaultName: aws.String("examplevault"),
@@ -344,7 +345,7 @@ func ExampleClient_DeleteVaultRequest_shared00() {
 	}
 
 	svc := glacier.New(cfg)
-	input := &glacier.DeleteVaultInput{
+	input := &types.DeleteVaultInput{
 		AccountId: aws.String("-"),
 		VaultName: aws.String("my-vault"),
 	}
@@ -386,7 +387,7 @@ func ExampleClient_DeleteVaultAccessPolicyRequest_shared00() {
 	}
 
 	svc := glacier.New(cfg)
-	input := &glacier.DeleteVaultAccessPolicyInput{
+	input := &types.DeleteVaultAccessPolicyInput{
 		AccountId: aws.String("-"),
 		VaultName: aws.String("examplevault"),
 	}
@@ -428,7 +429,7 @@ func ExampleClient_DeleteVaultNotificationsRequest_shared00() {
 	}
 
 	svc := glacier.New(cfg)
-	input := &glacier.DeleteVaultNotificationsInput{
+	input := &types.DeleteVaultNotificationsInput{
 		AccountId: aws.String("-"),
 		VaultName: aws.String("examplevault"),
 	}
@@ -471,7 +472,7 @@ func ExampleClient_DescribeJobRequest_shared00() {
 	}
 
 	svc := glacier.New(cfg)
-	input := &glacier.DescribeJobInput{
+	input := &types.DescribeJobInput{
 		AccountId: aws.String("-"),
 		JobId:     aws.String("zbxcm3Z_3z5UkoroF7SuZKrxgGoDc3RloGduS7Eg-RO47Yc6FxsdGBgf_Q2DK5Ejh18CnTS5XW4_XqlNHS61dsO4Cn"),
 		VaultName: aws.String("my-vault"),
@@ -514,7 +515,7 @@ func ExampleClient_DescribeVaultRequest_shared00() {
 	}
 
 	svc := glacier.New(cfg)
-	input := &glacier.DescribeVaultInput{
+	input := &types.DescribeVaultInput{
 		AccountId: aws.String("-"),
 		VaultName: aws.String("my-vault"),
 	}
@@ -556,7 +557,7 @@ func ExampleClient_GetDataRetrievalPolicyRequest_shared00() {
 	}
 
 	svc := glacier.New(cfg)
-	input := &glacier.GetDataRetrievalPolicyInput{
+	input := &types.GetDataRetrievalPolicyInput{
 		AccountId: aws.String("-"),
 	}
 
@@ -596,7 +597,7 @@ func ExampleClient_GetJobOutputRequest_shared00() {
 	}
 
 	svc := glacier.New(cfg)
-	input := &glacier.GetJobOutputInput{
+	input := &types.GetJobOutputInput{
 		AccountId: aws.String("-"),
 		JobId:     aws.String("zbxcm3Z_3z5UkoroF7SuZKrxgGoDc3RloGduS7Eg-RO47Yc6FxsdGBgf_Q2DK5Ejh18CnTS5XW4_XqlNHS61dsO4CnMW"),
 		Range:     aws.String(""),
@@ -640,7 +641,7 @@ func ExampleClient_GetVaultAccessPolicyRequest_shared00() {
 	}
 
 	svc := glacier.New(cfg)
-	input := &glacier.GetVaultAccessPolicyInput{
+	input := &types.GetVaultAccessPolicyInput{
 		AccountId: aws.String("-"),
 		VaultName: aws.String("example-vault"),
 	}
@@ -683,7 +684,7 @@ func ExampleClient_GetVaultLockRequest_shared00() {
 	}
 
 	svc := glacier.New(cfg)
-	input := &glacier.GetVaultLockInput{
+	input := &types.GetVaultLockInput{
 		AccountId: aws.String("-"),
 		VaultName: aws.String("examplevault"),
 	}
@@ -725,7 +726,7 @@ func ExampleClient_GetVaultNotificationsRequest_shared00() {
 	}
 
 	svc := glacier.New(cfg)
-	input := &glacier.GetVaultNotificationsInput{
+	input := &types.GetVaultNotificationsInput{
 		AccountId: aws.String("-"),
 		VaultName: aws.String("my-vault"),
 	}
@@ -767,9 +768,9 @@ func ExampleClient_InitiateJobRequest_shared00() {
 	}
 
 	svc := glacier.New(cfg)
-	input := &glacier.InitiateJobInput{
+	input := &types.InitiateJobInput{
 		AccountId: aws.String("-"),
-		JobParameters: &glacier.JobParameters{
+		JobParameters: &types.JobParameters{
 			Description: aws.String("My inventory job"),
 			Format:      aws.String("CSV"),
 			SNSTopic:    aws.String("arn:aws:sns:us-west-2:111111111111:Glacier-InventoryRetrieval-topic-Example"),
@@ -820,7 +821,7 @@ func ExampleClient_InitiateMultipartUploadRequest_shared00() {
 	}
 
 	svc := glacier.New(cfg)
-	input := &glacier.InitiateMultipartUploadInput{
+	input := &types.InitiateMultipartUploadInput{
 		AccountId: aws.String("-"),
 		PartSize:  aws.String("1048576"),
 		VaultName: aws.String("my-vault"),
@@ -863,9 +864,9 @@ func ExampleClient_InitiateVaultLockRequest_shared00() {
 	}
 
 	svc := glacier.New(cfg)
-	input := &glacier.InitiateVaultLockInput{
+	input := &types.InitiateVaultLockInput{
 		AccountId: aws.String("-"),
-		Policy: &glacier.VaultLockPolicy{
+		Policy: &types.VaultLockPolicy{
 			Policy: aws.String("{\"Version\":\"2012-10-17\",\"Statement\":[{\"Sid\":\"Define-vault-lock\",\"Effect\":\"Deny\",\"Principal\":{\"AWS\":\"arn:aws:iam::999999999999:root\"},\"Action\":\"glacier:DeleteArchive\",\"Resource\":\"arn:aws:glacier:us-west-2:999999999999:vaults/examplevault\",\"Condition\":{\"NumericLessThanEquals\":{\"glacier:ArchiveAgeinDays\":\"365\"}}}]}"),
 		},
 		VaultName: aws.String("my-vault"),
@@ -908,7 +909,7 @@ func ExampleClient_ListJobsRequest_shared00() {
 	}
 
 	svc := glacier.New(cfg)
-	input := &glacier.ListJobsInput{
+	input := &types.ListJobsInput{
 		AccountId: aws.String("-"),
 		VaultName: aws.String("my-vault"),
 	}
@@ -950,7 +951,7 @@ func ExampleClient_ListMultipartUploadsRequest_shared00() {
 	}
 
 	svc := glacier.New(cfg)
-	input := &glacier.ListMultipartUploadsInput{
+	input := &types.ListMultipartUploadsInput{
 		AccountId: aws.String("-"),
 		VaultName: aws.String("examplevault"),
 	}
@@ -992,7 +993,7 @@ func ExampleClient_ListPartsRequest_shared00() {
 	}
 
 	svc := glacier.New(cfg)
-	input := &glacier.ListPartsInput{
+	input := &types.ListPartsInput{
 		AccountId: aws.String("-"),
 		UploadId:  aws.String("OW2fM5iVylEpFEMM9_HpKowRapC3vn5sSL39_396UW9zLFUWVrnRHaPjUJddQ5OxSHVXjYtrN47NBZ-khxOjyEXAMPLE"),
 		VaultName: aws.String("examplevault"),
@@ -1035,7 +1036,7 @@ func ExampleClient_ListProvisionedCapacityRequest_shared00() {
 	}
 
 	svc := glacier.New(cfg)
-	input := &glacier.ListProvisionedCapacityInput{
+	input := &types.ListProvisionedCapacityInput{
 		AccountId: aws.String("-"),
 	}
 
@@ -1074,7 +1075,7 @@ func ExampleClient_ListTagsForVaultRequest_shared00() {
 	}
 
 	svc := glacier.New(cfg)
-	input := &glacier.ListTagsForVaultInput{
+	input := &types.ListTagsForVaultInput{
 		AccountId: aws.String("-"),
 		VaultName: aws.String("examplevault"),
 	}
@@ -1116,7 +1117,7 @@ func ExampleClient_ListVaultsRequest_shared00() {
 	}
 
 	svc := glacier.New(cfg)
-	input := &glacier.ListVaultsInput{
+	input := &types.ListVaultsInput{
 		AccountId: aws.String("-"),
 		Limit:     aws.String(""),
 		Marker:    aws.String(""),
@@ -1159,7 +1160,7 @@ func ExampleClient_PurchaseProvisionedCapacityRequest_shared00() {
 	}
 
 	svc := glacier.New(cfg)
-	input := &glacier.PurchaseProvisionedCapacityInput{
+	input := &types.PurchaseProvisionedCapacityInput{
 		AccountId: aws.String("-"),
 	}
 
@@ -1200,7 +1201,7 @@ func ExampleClient_RemoveTagsFromVaultRequest_shared00() {
 	}
 
 	svc := glacier.New(cfg)
-	input := &glacier.RemoveTagsFromVaultInput{
+	input := &types.RemoveTagsFromVaultInput{
 		TagKeys: []string{
 			"examplekey1",
 			"examplekey2",
@@ -1246,9 +1247,9 @@ func ExampleClient_SetDataRetrievalPolicyRequest_shared00() {
 	}
 
 	svc := glacier.New(cfg)
-	input := &glacier.SetDataRetrievalPolicyInput{
-		Policy: &glacier.DataRetrievalPolicy{
-			Rules: []glacier.DataRetrievalRule{
+	input := &types.SetDataRetrievalPolicyInput{
+		Policy: &types.DataRetrievalPolicy{
+			Rules: []types.DataRetrievalRule{
 				{
 					BytesPerHour: aws.Int64(10737418240),
 					Strategy:     aws.String("BytesPerHour"),
@@ -1293,9 +1294,9 @@ func ExampleClient_SetVaultAccessPolicyRequest_shared00() {
 	}
 
 	svc := glacier.New(cfg)
-	input := &glacier.SetVaultAccessPolicyInput{
+	input := &types.SetVaultAccessPolicyInput{
 		AccountId: aws.String("-"),
-		Policy: &glacier.VaultAccessPolicy{
+		Policy: &types.VaultAccessPolicy{
 			Policy: aws.String("{\"Version\":\"2012-10-17\",\"Statement\":[{\"Sid\":\"Define-owner-access-rights\",\"Effect\":\"Allow\",\"Principal\":{\"AWS\":\"arn:aws:iam::999999999999:root\"},\"Action\":\"glacier:DeleteArchive\",\"Resource\":\"arn:aws:glacier:us-west-2:999999999999:vaults/examplevault\"}]}"),
 		},
 		VaultName: aws.String("examplevault"),
@@ -1338,10 +1339,10 @@ func ExampleClient_SetVaultNotificationsRequest_shared00() {
 	}
 
 	svc := glacier.New(cfg)
-	input := &glacier.SetVaultNotificationsInput{
+	input := &types.SetVaultNotificationsInput{
 		AccountId: aws.String("-"),
 		VaultName: aws.String("examplevault"),
-		VaultNotificationConfig: &glacier.VaultNotificationConfig{
+		VaultNotificationConfig: &types.VaultNotificationConfig{
 			Events: []string{
 				"ArchiveRetrievalCompleted",
 				"InventoryRetrievalCompleted",
@@ -1387,7 +1388,7 @@ func ExampleClient_UploadArchiveRequest_shared00() {
 	}
 
 	svc := glacier.New(cfg)
-	input := &glacier.UploadArchiveInput{
+	input := &types.UploadArchiveInput{
 		AccountId:          aws.String("-"),
 		ArchiveDescription: aws.String(""),
 		Body:               aws.ReadSeekCloser(strings.NewReader("example-data-to-upload")),
@@ -1434,7 +1435,7 @@ func ExampleClient_UploadMultipartPartRequest_shared00() {
 	}
 
 	svc := glacier.New(cfg)
-	input := &glacier.UploadMultipartPartInput{
+	input := &types.UploadMultipartPartInput{
 		AccountId: aws.String("-"),
 		Body:      aws.ReadSeekCloser(strings.NewReader("part1")),
 		Checksum:  aws.String("c06f7cd4baacb087002a99a5f48bf953"),

@@ -6,97 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/codecommit/types"
 )
-
-type GetMergeCommitInput struct {
-	_ struct{} `type:"structure"`
-
-	// The level of conflict detail to use. If unspecified, the default FILE_LEVEL
-	// is used, which will return a not mergeable result if the same file has differences
-	// in both branches. If LINE_LEVEL is specified, a conflict will be considered
-	// not mergeable if the same file in both branches has differences on the same
-	// line.
-	ConflictDetailLevel ConflictDetailLevelTypeEnum `locationName:"conflictDetailLevel" type:"string" enum:"true"`
-
-	// Specifies which branch to use when resolving conflicts, or whether to attempt
-	// automatically merging two versions of a file. The default is NONE, which
-	// requires any conflicts to be resolved manually before the merge operation
-	// will be successful.
-	ConflictResolutionStrategy ConflictResolutionStrategyTypeEnum `locationName:"conflictResolutionStrategy" type:"string" enum:"true"`
-
-	// The branch, tag, HEAD, or other fully qualified reference used to identify
-	// a commit. For example, a branch name or a full commit ID.
-	//
-	// DestinationCommitSpecifier is a required field
-	DestinationCommitSpecifier *string `locationName:"destinationCommitSpecifier" type:"string" required:"true"`
-
-	// The name of the repository that contains the merge commit about which you
-	// want to get information.
-	//
-	// RepositoryName is a required field
-	RepositoryName *string `locationName:"repositoryName" min:"1" type:"string" required:"true"`
-
-	// The branch, tag, HEAD, or other fully qualified reference used to identify
-	// a commit. For example, a branch name or a full commit ID.
-	//
-	// SourceCommitSpecifier is a required field
-	SourceCommitSpecifier *string `locationName:"sourceCommitSpecifier" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetMergeCommitInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetMergeCommitInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetMergeCommitInput"}
-
-	if s.DestinationCommitSpecifier == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DestinationCommitSpecifier"))
-	}
-
-	if s.RepositoryName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("RepositoryName"))
-	}
-	if s.RepositoryName != nil && len(*s.RepositoryName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("RepositoryName", 1))
-	}
-
-	if s.SourceCommitSpecifier == nil {
-		invalidParams.Add(aws.NewErrParamRequired("SourceCommitSpecifier"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type GetMergeCommitOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The commit ID of the merge base.
-	BaseCommitId *string `locationName:"baseCommitId" type:"string"`
-
-	// The commit ID of the destination commit specifier that was used in the merge
-	// evaluation.
-	DestinationCommitId *string `locationName:"destinationCommitId" type:"string"`
-
-	// The commit ID for the merge commit created when the source branch was merged
-	// into the destination branch. If the fast-forward merge strategy was used,
-	// no merge commit exists.
-	MergedCommitId *string `locationName:"mergedCommitId" type:"string"`
-
-	// The commit ID of the source commit specifier that was used in the merge evaluation.
-	SourceCommitId *string `locationName:"sourceCommitId" type:"string"`
-}
-
-// String returns the string representation
-func (s GetMergeCommitOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetMergeCommit = "GetMergeCommit"
 
@@ -113,7 +24,7 @@ const opGetMergeCommit = "GetMergeCommit"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/GetMergeCommit
-func (c *Client) GetMergeCommitRequest(input *GetMergeCommitInput) GetMergeCommitRequest {
+func (c *Client) GetMergeCommitRequest(input *types.GetMergeCommitInput) GetMergeCommitRequest {
 	op := &aws.Operation{
 		Name:       opGetMergeCommit,
 		HTTPMethod: "POST",
@@ -121,10 +32,10 @@ func (c *Client) GetMergeCommitRequest(input *GetMergeCommitInput) GetMergeCommi
 	}
 
 	if input == nil {
-		input = &GetMergeCommitInput{}
+		input = &types.GetMergeCommitInput{}
 	}
 
-	req := c.newRequest(op, input, &GetMergeCommitOutput{})
+	req := c.newRequest(op, input, &types.GetMergeCommitOutput{})
 	return GetMergeCommitRequest{Request: req, Input: input, Copy: c.GetMergeCommitRequest}
 }
 
@@ -132,8 +43,8 @@ func (c *Client) GetMergeCommitRequest(input *GetMergeCommitInput) GetMergeCommi
 // GetMergeCommit API operation.
 type GetMergeCommitRequest struct {
 	*aws.Request
-	Input *GetMergeCommitInput
-	Copy  func(*GetMergeCommitInput) GetMergeCommitRequest
+	Input *types.GetMergeCommitInput
+	Copy  func(*types.GetMergeCommitInput) GetMergeCommitRequest
 }
 
 // Send marshals and sends the GetMergeCommit API request.
@@ -145,7 +56,7 @@ func (r GetMergeCommitRequest) Send(ctx context.Context) (*GetMergeCommitRespons
 	}
 
 	resp := &GetMergeCommitResponse{
-		GetMergeCommitOutput: r.Request.Data.(*GetMergeCommitOutput),
+		GetMergeCommitOutput: r.Request.Data.(*types.GetMergeCommitOutput),
 		response:             &aws.Response{Request: r.Request},
 	}
 
@@ -155,7 +66,7 @@ func (r GetMergeCommitRequest) Send(ctx context.Context) (*GetMergeCommitRespons
 // GetMergeCommitResponse is the response type for the
 // GetMergeCommit API operation.
 type GetMergeCommitResponse struct {
-	*GetMergeCommitOutput
+	*types.GetMergeCommitOutput
 
 	response *aws.Response
 }

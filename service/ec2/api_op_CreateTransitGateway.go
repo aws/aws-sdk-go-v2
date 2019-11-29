@@ -6,44 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-type CreateTransitGatewayInput struct {
-	_ struct{} `type:"structure"`
-
-	// A description of the transit gateway.
-	Description *string `type:"string"`
-
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have
-	// the required permissions, the error response is DryRunOperation. Otherwise,
-	// it is UnauthorizedOperation.
-	DryRun *bool `type:"boolean"`
-
-	// The transit gateway options.
-	Options *TransitGatewayRequestOptions `type:"structure"`
-
-	// The tags to apply to the transit gateway.
-	TagSpecifications []TagSpecification `locationName:"TagSpecification" locationNameList:"item" type:"list"`
-}
-
-// String returns the string representation
-func (s CreateTransitGatewayInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type CreateTransitGatewayOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Information about the transit gateway.
-	TransitGateway *TransitGateway `locationName:"transitGateway" type:"structure"`
-}
-
-// String returns the string representation
-func (s CreateTransitGatewayOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCreateTransitGateway = "CreateTransitGateway"
 
@@ -79,7 +43,7 @@ const opCreateTransitGateway = "CreateTransitGateway"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateTransitGateway
-func (c *Client) CreateTransitGatewayRequest(input *CreateTransitGatewayInput) CreateTransitGatewayRequest {
+func (c *Client) CreateTransitGatewayRequest(input *types.CreateTransitGatewayInput) CreateTransitGatewayRequest {
 	op := &aws.Operation{
 		Name:       opCreateTransitGateway,
 		HTTPMethod: "POST",
@@ -87,10 +51,10 @@ func (c *Client) CreateTransitGatewayRequest(input *CreateTransitGatewayInput) C
 	}
 
 	if input == nil {
-		input = &CreateTransitGatewayInput{}
+		input = &types.CreateTransitGatewayInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateTransitGatewayOutput{})
+	req := c.newRequest(op, input, &types.CreateTransitGatewayOutput{})
 	return CreateTransitGatewayRequest{Request: req, Input: input, Copy: c.CreateTransitGatewayRequest}
 }
 
@@ -98,8 +62,8 @@ func (c *Client) CreateTransitGatewayRequest(input *CreateTransitGatewayInput) C
 // CreateTransitGateway API operation.
 type CreateTransitGatewayRequest struct {
 	*aws.Request
-	Input *CreateTransitGatewayInput
-	Copy  func(*CreateTransitGatewayInput) CreateTransitGatewayRequest
+	Input *types.CreateTransitGatewayInput
+	Copy  func(*types.CreateTransitGatewayInput) CreateTransitGatewayRequest
 }
 
 // Send marshals and sends the CreateTransitGateway API request.
@@ -111,7 +75,7 @@ func (r CreateTransitGatewayRequest) Send(ctx context.Context) (*CreateTransitGa
 	}
 
 	resp := &CreateTransitGatewayResponse{
-		CreateTransitGatewayOutput: r.Request.Data.(*CreateTransitGatewayOutput),
+		CreateTransitGatewayOutput: r.Request.Data.(*types.CreateTransitGatewayOutput),
 		response:                   &aws.Response{Request: r.Request},
 	}
 
@@ -121,7 +85,7 @@ func (r CreateTransitGatewayRequest) Send(ctx context.Context) (*CreateTransitGa
 // CreateTransitGatewayResponse is the response type for the
 // CreateTransitGateway API operation.
 type CreateTransitGatewayResponse struct {
-	*CreateTransitGatewayOutput
+	*types.CreateTransitGatewayOutput
 
 	response *aws.Response
 }

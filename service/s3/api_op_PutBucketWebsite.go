@@ -6,96 +6,77 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/restxml"
+	"github.com/aws/aws-sdk-go-v2/service/s3/types"
 )
-
-type PutBucketWebsiteInput struct {
-	_ struct{} `type:"structure" payload:"WebsiteConfiguration"`
-
-	// Bucket is a required field
-	Bucket *string `location:"uri" locationName:"Bucket" type:"string" required:"true"`
-
-	// Specifies website configuration parameters for an Amazon S3 bucket.
-	//
-	// WebsiteConfiguration is a required field
-	WebsiteConfiguration *WebsiteConfiguration `locationName:"WebsiteConfiguration" type:"structure" required:"true" xmlURI:"http://s3.amazonaws.com/doc/2006-03-01/"`
-}
-
-// String returns the string representation
-func (s PutBucketWebsiteInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *PutBucketWebsiteInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "PutBucketWebsiteInput"}
-
-	if s.Bucket == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Bucket"))
-	}
-
-	if s.WebsiteConfiguration == nil {
-		invalidParams.Add(aws.NewErrParamRequired("WebsiteConfiguration"))
-	}
-	if s.WebsiteConfiguration != nil {
-		if err := s.WebsiteConfiguration.Validate(); err != nil {
-			invalidParams.AddNested("WebsiteConfiguration", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-func (s *PutBucketWebsiteInput) getBucket() (v string) {
-	if s.Bucket == nil {
-		return v
-	}
-	return *s.Bucket
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s PutBucketWebsiteInput) MarshalFields(e protocol.FieldEncoder) error {
-
-	if s.Bucket != nil {
-		v := *s.Bucket
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "Bucket", protocol.StringValue(v), metadata)
-	}
-	if s.WebsiteConfiguration != nil {
-		v := s.WebsiteConfiguration
-
-		metadata := protocol.Metadata{XMLNamespaceURI: "http://s3.amazonaws.com/doc/2006-03-01/"}
-		e.SetFields(protocol.PayloadTarget, "WebsiteConfiguration", v, metadata)
-	}
-	return nil
-}
-
-type PutBucketWebsiteOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s PutBucketWebsiteOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s PutBucketWebsiteOutput) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
 
 const opPutBucketWebsite = "PutBucketWebsite"
 
 // PutBucketWebsiteRequest returns a request value for making API operation for
 // Amazon Simple Storage Service.
 //
-// Set the website configuration for a bucket.
+// Sets the configuration of the website that is specified in the website subresource.
+// To configure a bucket as a website, you can add this subresource on the bucket
+// with website configuration information such as the file name of the index
+// document and any redirect rules. For more information, see Hosting Websites
+// on Amazon S3 (https://docs.aws.amazon.com/AmazonS3/latest/dev/WebsiteHosting.html).
+//
+// This PUT operation requires the S3:PutBucketWebsite permission. By default,
+// only the bucket owner can configure the website attached to a bucket; however,
+// bucket owners can allow other users to set the website configuration by writing
+// a bucket policy that grants them the S3:PutBucketWebsite permission.
+//
+// To redirect all website requests sent to the bucket's website endpoint, you
+// add a website configuration with the following elements. Because all requests
+// are sent to another website, you don't need to provide index document name
+// for the bucket.
+//
+//    * WebsiteConfiguration
+//
+//    * RedirectAllRequestsTo
+//
+//    * HostName
+//
+//    * Protocol
+//
+// If you want granular control over redirects, you can use the following elements
+// to add routing rules that describe conditions for redirecting requests and
+// information about the redirect destination. In this case, the website configuration
+// must provide an index document for the bucket, because some requests might
+// not be redirected.
+//
+//    * WebsiteConfiguration
+//
+//    * IndexDocument
+//
+//    * Suffix
+//
+//    * ErrorDocument
+//
+//    * Key
+//
+//    * RoutingRules
+//
+//    * RoutingRule
+//
+//    * Condition
+//
+//    * HttpErrorCodeReturnedEquals
+//
+//    * KeyPrefixEquals
+//
+//    * Redirect
+//
+//    * Protocol
+//
+//    * HostName
+//
+//    * ReplaceKeyPrefixWith
+//
+//    * ReplaceKeyWith
+//
+//    * HttpRedirectCode
 //
 //    // Example sending a request using PutBucketWebsiteRequest.
 //    req := client.PutBucketWebsiteRequest(params)
@@ -105,7 +86,7 @@ const opPutBucketWebsite = "PutBucketWebsite"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutBucketWebsite
-func (c *Client) PutBucketWebsiteRequest(input *PutBucketWebsiteInput) PutBucketWebsiteRequest {
+func (c *Client) PutBucketWebsiteRequest(input *types.PutBucketWebsiteInput) PutBucketWebsiteRequest {
 	op := &aws.Operation{
 		Name:       opPutBucketWebsite,
 		HTTPMethod: "PUT",
@@ -113,10 +94,10 @@ func (c *Client) PutBucketWebsiteRequest(input *PutBucketWebsiteInput) PutBucket
 	}
 
 	if input == nil {
-		input = &PutBucketWebsiteInput{}
+		input = &types.PutBucketWebsiteInput{}
 	}
 
-	req := c.newRequest(op, input, &PutBucketWebsiteOutput{})
+	req := c.newRequest(op, input, &types.PutBucketWebsiteOutput{})
 	req.Handlers.Unmarshal.Remove(restxml.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return PutBucketWebsiteRequest{Request: req, Input: input, Copy: c.PutBucketWebsiteRequest}
@@ -126,8 +107,8 @@ func (c *Client) PutBucketWebsiteRequest(input *PutBucketWebsiteInput) PutBucket
 // PutBucketWebsite API operation.
 type PutBucketWebsiteRequest struct {
 	*aws.Request
-	Input *PutBucketWebsiteInput
-	Copy  func(*PutBucketWebsiteInput) PutBucketWebsiteRequest
+	Input *types.PutBucketWebsiteInput
+	Copy  func(*types.PutBucketWebsiteInput) PutBucketWebsiteRequest
 }
 
 // Send marshals and sends the PutBucketWebsite API request.
@@ -139,7 +120,7 @@ func (r PutBucketWebsiteRequest) Send(ctx context.Context) (*PutBucketWebsiteRes
 	}
 
 	resp := &PutBucketWebsiteResponse{
-		PutBucketWebsiteOutput: r.Request.Data.(*PutBucketWebsiteOutput),
+		PutBucketWebsiteOutput: r.Request.Data.(*types.PutBucketWebsiteOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -149,7 +130,7 @@ func (r PutBucketWebsiteRequest) Send(ctx context.Context) (*PutBucketWebsiteRes
 // PutBucketWebsiteResponse is the response type for the
 // PutBucketWebsite API operation.
 type PutBucketWebsiteResponse struct {
-	*PutBucketWebsiteOutput
+	*types.PutBucketWebsiteOutput
 
 	response *aws.Response
 }

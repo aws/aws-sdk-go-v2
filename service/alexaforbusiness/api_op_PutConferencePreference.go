@@ -6,45 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/alexaforbusiness/types"
 )
-
-type PutConferencePreferenceInput struct {
-	_ struct{} `type:"structure"`
-
-	// The conference preference of a specific conference provider.
-	//
-	// ConferencePreference is a required field
-	ConferencePreference *ConferencePreference `type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s PutConferencePreferenceInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *PutConferencePreferenceInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "PutConferencePreferenceInput"}
-
-	if s.ConferencePreference == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ConferencePreference"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type PutConferencePreferenceOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s PutConferencePreferenceOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opPutConferencePreference = "PutConferencePreference"
 
@@ -62,7 +25,7 @@ const opPutConferencePreference = "PutConferencePreference"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/PutConferencePreference
-func (c *Client) PutConferencePreferenceRequest(input *PutConferencePreferenceInput) PutConferencePreferenceRequest {
+func (c *Client) PutConferencePreferenceRequest(input *types.PutConferencePreferenceInput) PutConferencePreferenceRequest {
 	op := &aws.Operation{
 		Name:       opPutConferencePreference,
 		HTTPMethod: "POST",
@@ -70,10 +33,10 @@ func (c *Client) PutConferencePreferenceRequest(input *PutConferencePreferenceIn
 	}
 
 	if input == nil {
-		input = &PutConferencePreferenceInput{}
+		input = &types.PutConferencePreferenceInput{}
 	}
 
-	req := c.newRequest(op, input, &PutConferencePreferenceOutput{})
+	req := c.newRequest(op, input, &types.PutConferencePreferenceOutput{})
 	return PutConferencePreferenceRequest{Request: req, Input: input, Copy: c.PutConferencePreferenceRequest}
 }
 
@@ -81,8 +44,8 @@ func (c *Client) PutConferencePreferenceRequest(input *PutConferencePreferenceIn
 // PutConferencePreference API operation.
 type PutConferencePreferenceRequest struct {
 	*aws.Request
-	Input *PutConferencePreferenceInput
-	Copy  func(*PutConferencePreferenceInput) PutConferencePreferenceRequest
+	Input *types.PutConferencePreferenceInput
+	Copy  func(*types.PutConferencePreferenceInput) PutConferencePreferenceRequest
 }
 
 // Send marshals and sends the PutConferencePreference API request.
@@ -94,7 +57,7 @@ func (r PutConferencePreferenceRequest) Send(ctx context.Context) (*PutConferenc
 	}
 
 	resp := &PutConferencePreferenceResponse{
-		PutConferencePreferenceOutput: r.Request.Data.(*PutConferencePreferenceOutput),
+		PutConferencePreferenceOutput: r.Request.Data.(*types.PutConferencePreferenceOutput),
 		response:                      &aws.Response{Request: r.Request},
 	}
 
@@ -104,7 +67,7 @@ func (r PutConferencePreferenceRequest) Send(ctx context.Context) (*PutConferenc
 // PutConferencePreferenceResponse is the response type for the
 // PutConferencePreference API operation.
 type PutConferencePreferenceResponse struct {
-	*PutConferencePreferenceOutput
+	*types.PutConferencePreferenceOutput
 
 	response *aws.Response
 }

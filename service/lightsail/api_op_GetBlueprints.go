@@ -6,41 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/lightsail/types"
 )
-
-type GetBlueprintsInput struct {
-	_ struct{} `type:"structure"`
-
-	// A Boolean value indicating whether to include inactive results in your request.
-	IncludeInactive *bool `locationName:"includeInactive" type:"boolean"`
-
-	// A token used for advancing to the next page of results from your get blueprints
-	// request.
-	PageToken *string `locationName:"pageToken" type:"string"`
-}
-
-// String returns the string representation
-func (s GetBlueprintsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type GetBlueprintsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// An array of key-value pairs that contains information about the available
-	// blueprints.
-	Blueprints []Blueprint `locationName:"blueprints" type:"list"`
-
-	// A token used for advancing to the next page of results from your get blueprints
-	// request.
-	NextPageToken *string `locationName:"nextPageToken" type:"string"`
-}
-
-// String returns the string representation
-func (s GetBlueprintsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetBlueprints = "GetBlueprints"
 
@@ -65,7 +32,7 @@ const opGetBlueprints = "GetBlueprints"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetBlueprints
-func (c *Client) GetBlueprintsRequest(input *GetBlueprintsInput) GetBlueprintsRequest {
+func (c *Client) GetBlueprintsRequest(input *types.GetBlueprintsInput) GetBlueprintsRequest {
 	op := &aws.Operation{
 		Name:       opGetBlueprints,
 		HTTPMethod: "POST",
@@ -73,10 +40,10 @@ func (c *Client) GetBlueprintsRequest(input *GetBlueprintsInput) GetBlueprintsRe
 	}
 
 	if input == nil {
-		input = &GetBlueprintsInput{}
+		input = &types.GetBlueprintsInput{}
 	}
 
-	req := c.newRequest(op, input, &GetBlueprintsOutput{})
+	req := c.newRequest(op, input, &types.GetBlueprintsOutput{})
 	return GetBlueprintsRequest{Request: req, Input: input, Copy: c.GetBlueprintsRequest}
 }
 
@@ -84,8 +51,8 @@ func (c *Client) GetBlueprintsRequest(input *GetBlueprintsInput) GetBlueprintsRe
 // GetBlueprints API operation.
 type GetBlueprintsRequest struct {
 	*aws.Request
-	Input *GetBlueprintsInput
-	Copy  func(*GetBlueprintsInput) GetBlueprintsRequest
+	Input *types.GetBlueprintsInput
+	Copy  func(*types.GetBlueprintsInput) GetBlueprintsRequest
 }
 
 // Send marshals and sends the GetBlueprints API request.
@@ -97,7 +64,7 @@ func (r GetBlueprintsRequest) Send(ctx context.Context) (*GetBlueprintsResponse,
 	}
 
 	resp := &GetBlueprintsResponse{
-		GetBlueprintsOutput: r.Request.Data.(*GetBlueprintsOutput),
+		GetBlueprintsOutput: r.Request.Data.(*types.GetBlueprintsOutput),
 		response:            &aws.Response{Request: r.Request},
 	}
 
@@ -107,7 +74,7 @@ func (r GetBlueprintsRequest) Send(ctx context.Context) (*GetBlueprintsResponse,
 // GetBlueprintsResponse is the response type for the
 // GetBlueprints API operation.
 type GetBlueprintsResponse struct {
-	*GetBlueprintsOutput
+	*types.GetBlueprintsOutput
 
 	response *aws.Response
 }

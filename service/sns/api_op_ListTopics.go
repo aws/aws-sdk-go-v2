@@ -6,37 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/sns/types"
 )
-
-type ListTopicsInput struct {
-	_ struct{} `type:"structure"`
-
-	// Token returned by the previous ListTopics request.
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s ListTopicsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Response for ListTopics action.
-type ListTopicsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Token to pass along to the next ListTopics request. This element is returned
-	// if there are additional topics to retrieve.
-	NextToken *string `type:"string"`
-
-	// A list of topic ARNs.
-	Topics []Topic `type:"list"`
-}
-
-// String returns the string representation
-func (s ListTopicsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListTopics = "ListTopics"
 
@@ -57,7 +28,7 @@ const opListTopics = "ListTopics"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/ListTopics
-func (c *Client) ListTopicsRequest(input *ListTopicsInput) ListTopicsRequest {
+func (c *Client) ListTopicsRequest(input *types.ListTopicsInput) ListTopicsRequest {
 	op := &aws.Operation{
 		Name:       opListTopics,
 		HTTPMethod: "POST",
@@ -71,10 +42,10 @@ func (c *Client) ListTopicsRequest(input *ListTopicsInput) ListTopicsRequest {
 	}
 
 	if input == nil {
-		input = &ListTopicsInput{}
+		input = &types.ListTopicsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListTopicsOutput{})
+	req := c.newRequest(op, input, &types.ListTopicsOutput{})
 	return ListTopicsRequest{Request: req, Input: input, Copy: c.ListTopicsRequest}
 }
 
@@ -82,8 +53,8 @@ func (c *Client) ListTopicsRequest(input *ListTopicsInput) ListTopicsRequest {
 // ListTopics API operation.
 type ListTopicsRequest struct {
 	*aws.Request
-	Input *ListTopicsInput
-	Copy  func(*ListTopicsInput) ListTopicsRequest
+	Input *types.ListTopicsInput
+	Copy  func(*types.ListTopicsInput) ListTopicsRequest
 }
 
 // Send marshals and sends the ListTopics API request.
@@ -95,7 +66,7 @@ func (r ListTopicsRequest) Send(ctx context.Context) (*ListTopicsResponse, error
 	}
 
 	resp := &ListTopicsResponse{
-		ListTopicsOutput: r.Request.Data.(*ListTopicsOutput),
+		ListTopicsOutput: r.Request.Data.(*types.ListTopicsOutput),
 		response:         &aws.Response{Request: r.Request},
 	}
 
@@ -125,7 +96,7 @@ func NewListTopicsPaginator(req ListTopicsRequest) ListTopicsPaginator {
 	return ListTopicsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListTopicsInput
+				var inCpy *types.ListTopicsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -145,14 +116,14 @@ type ListTopicsPaginator struct {
 	aws.Pager
 }
 
-func (p *ListTopicsPaginator) CurrentPage() *ListTopicsOutput {
-	return p.Pager.CurrentPage().(*ListTopicsOutput)
+func (p *ListTopicsPaginator) CurrentPage() *types.ListTopicsOutput {
+	return p.Pager.CurrentPage().(*types.ListTopicsOutput)
 }
 
 // ListTopicsResponse is the response type for the
 // ListTopics API operation.
 type ListTopicsResponse struct {
-	*ListTopicsOutput
+	*types.ListTopicsOutput
 
 	response *aws.Response
 }

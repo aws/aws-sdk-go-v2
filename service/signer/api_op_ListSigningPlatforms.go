@@ -6,135 +6,19 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/signer/types"
 )
-
-type ListSigningPlatformsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The category type of a signing platform.
-	Category *string `location:"querystring" locationName:"category" type:"string"`
-
-	// The maximum number of results to be returned by this operation.
-	MaxResults *int64 `location:"querystring" locationName:"maxResults" min:"1" type:"integer"`
-
-	// Value for specifying the next set of paginated results to return. After you
-	// receive a response with truncated results, use this parameter in a subsequent
-	// request. Set it to the value of nextToken from the response that you just
-	// received.
-	NextToken *string `location:"querystring" locationName:"nextToken" type:"string"`
-
-	// Any partner entities connected to a signing platform.
-	Partner *string `location:"querystring" locationName:"partner" type:"string"`
-
-	// The validation template that is used by the target signing platform.
-	Target *string `location:"querystring" locationName:"target" type:"string"`
-}
-
-// String returns the string representation
-func (s ListSigningPlatformsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListSigningPlatformsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListSigningPlatformsInput"}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListSigningPlatformsInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.Category != nil {
-		v := *s.Category
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "category", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.MaxResults != nil {
-		v := *s.MaxResults
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "maxResults", protocol.Int64Value(v), metadata)
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Partner != nil {
-		v := *s.Partner
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "partner", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Target != nil {
-		v := *s.Target
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "target", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type ListSigningPlatformsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Value for specifying the next set of paginated results to return.
-	NextToken *string `locationName:"nextToken" type:"string"`
-
-	// A list of all platforms that match the request parameters.
-	Platforms []SigningPlatform `locationName:"platforms" type:"list"`
-}
-
-// String returns the string representation
-func (s ListSigningPlatformsOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListSigningPlatformsOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Platforms != nil {
-		v := s.Platforms
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "platforms", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	return nil
-}
 
 const opListSigningPlatforms = "ListSigningPlatforms"
 
 // ListSigningPlatformsRequest returns a request value for making API operation for
 // AWS Signer.
 //
-// Lists all signing platforms available in AWS Signer that match the request
-// parameters. If additional jobs remain to be listed, AWS Signer returns a
-// nextToken value. Use this value in subsequent calls to ListSigningJobs to
-// fetch the remaining values. You can continue calling ListSigningJobs with
-// your maxResults parameter and with new values that AWS Signer returns in
+// Lists all signing platforms available in code signing that match the request
+// parameters. If additional jobs remain to be listed, code signing returns
+// a nextToken value. Use this value in subsequent calls to ListSigningJobs
+// to fetch the remaining values. You can continue calling ListSigningJobs with
+// your maxResults parameter and with new values that code signing returns in
 // the nextToken parameter until all of your signing jobs have been returned.
 //
 //    // Example sending a request using ListSigningPlatformsRequest.
@@ -145,7 +29,7 @@ const opListSigningPlatforms = "ListSigningPlatforms"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/signer-2017-08-25/ListSigningPlatforms
-func (c *Client) ListSigningPlatformsRequest(input *ListSigningPlatformsInput) ListSigningPlatformsRequest {
+func (c *Client) ListSigningPlatformsRequest(input *types.ListSigningPlatformsInput) ListSigningPlatformsRequest {
 	op := &aws.Operation{
 		Name:       opListSigningPlatforms,
 		HTTPMethod: "GET",
@@ -159,10 +43,10 @@ func (c *Client) ListSigningPlatformsRequest(input *ListSigningPlatformsInput) L
 	}
 
 	if input == nil {
-		input = &ListSigningPlatformsInput{}
+		input = &types.ListSigningPlatformsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListSigningPlatformsOutput{})
+	req := c.newRequest(op, input, &types.ListSigningPlatformsOutput{})
 	return ListSigningPlatformsRequest{Request: req, Input: input, Copy: c.ListSigningPlatformsRequest}
 }
 
@@ -170,8 +54,8 @@ func (c *Client) ListSigningPlatformsRequest(input *ListSigningPlatformsInput) L
 // ListSigningPlatforms API operation.
 type ListSigningPlatformsRequest struct {
 	*aws.Request
-	Input *ListSigningPlatformsInput
-	Copy  func(*ListSigningPlatformsInput) ListSigningPlatformsRequest
+	Input *types.ListSigningPlatformsInput
+	Copy  func(*types.ListSigningPlatformsInput) ListSigningPlatformsRequest
 }
 
 // Send marshals and sends the ListSigningPlatforms API request.
@@ -183,7 +67,7 @@ func (r ListSigningPlatformsRequest) Send(ctx context.Context) (*ListSigningPlat
 	}
 
 	resp := &ListSigningPlatformsResponse{
-		ListSigningPlatformsOutput: r.Request.Data.(*ListSigningPlatformsOutput),
+		ListSigningPlatformsOutput: r.Request.Data.(*types.ListSigningPlatformsOutput),
 		response:                   &aws.Response{Request: r.Request},
 	}
 
@@ -213,7 +97,7 @@ func NewListSigningPlatformsPaginator(req ListSigningPlatformsRequest) ListSigni
 	return ListSigningPlatformsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListSigningPlatformsInput
+				var inCpy *types.ListSigningPlatformsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -233,14 +117,14 @@ type ListSigningPlatformsPaginator struct {
 	aws.Pager
 }
 
-func (p *ListSigningPlatformsPaginator) CurrentPage() *ListSigningPlatformsOutput {
-	return p.Pager.CurrentPage().(*ListSigningPlatformsOutput)
+func (p *ListSigningPlatformsPaginator) CurrentPage() *types.ListSigningPlatformsOutput {
+	return p.Pager.CurrentPage().(*types.ListSigningPlatformsOutput)
 }
 
 // ListSigningPlatformsResponse is the response type for the
 // ListSigningPlatforms API operation.
 type ListSigningPlatformsResponse struct {
-	*ListSigningPlatformsOutput
+	*types.ListSigningPlatformsOutput
 
 	response *aws.Response
 }

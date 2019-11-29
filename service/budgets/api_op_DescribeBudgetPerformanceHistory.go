@@ -6,86 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/budgets/types"
 )
-
-type DescribeBudgetPerformanceHistoryInput struct {
-	_ struct{} `type:"structure"`
-
-	// The account ID of the user. It should be a 12-digit number.
-	//
-	// AccountId is a required field
-	AccountId *string `min:"12" type:"string" required:"true"`
-
-	// A string that represents the budget name. The ":" and "\" characters aren't
-	// allowed.
-	//
-	// BudgetName is a required field
-	BudgetName *string `min:"1" type:"string" required:"true"`
-
-	// An integer that represents how many entries a paginated response contains.
-	// The maximum is 100.
-	MaxResults *int64 `min:"1" type:"integer"`
-
-	// A generic string.
-	NextToken *string `type:"string"`
-
-	// Retrieves how often the budget went into an ALARM state for the specified
-	// time period.
-	TimePeriod *TimePeriod `type:"structure"`
-}
-
-// String returns the string representation
-func (s DescribeBudgetPerformanceHistoryInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeBudgetPerformanceHistoryInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeBudgetPerformanceHistoryInput"}
-
-	if s.AccountId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("AccountId"))
-	}
-	if s.AccountId != nil && len(*s.AccountId) < 12 {
-		invalidParams.Add(aws.NewErrParamMinLen("AccountId", 12))
-	}
-
-	if s.BudgetName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("BudgetName"))
-	}
-	if s.BudgetName != nil && len(*s.BudgetName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("BudgetName", 1))
-	}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribeBudgetPerformanceHistoryOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The history of how often the budget has gone into an ALARM state.
-	//
-	// For DAILY budgets, the history saves the state of the budget for the last
-	// 60 days. For MONTHLY budgets, the history saves the state of the budget for
-	// the current month plus the last 12 months. For QUARTERLY budgets, the history
-	// saves the state of the budget for the last four quarters.
-	BudgetPerformanceHistory *BudgetPerformanceHistory `type:"structure"`
-
-	// A generic string.
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeBudgetPerformanceHistoryOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeBudgetPerformanceHistory = "DescribeBudgetPerformanceHistory"
 
@@ -101,7 +23,7 @@ const opDescribeBudgetPerformanceHistory = "DescribeBudgetPerformanceHistory"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) DescribeBudgetPerformanceHistoryRequest(input *DescribeBudgetPerformanceHistoryInput) DescribeBudgetPerformanceHistoryRequest {
+func (c *Client) DescribeBudgetPerformanceHistoryRequest(input *types.DescribeBudgetPerformanceHistoryInput) DescribeBudgetPerformanceHistoryRequest {
 	op := &aws.Operation{
 		Name:       opDescribeBudgetPerformanceHistory,
 		HTTPMethod: "POST",
@@ -109,10 +31,10 @@ func (c *Client) DescribeBudgetPerformanceHistoryRequest(input *DescribeBudgetPe
 	}
 
 	if input == nil {
-		input = &DescribeBudgetPerformanceHistoryInput{}
+		input = &types.DescribeBudgetPerformanceHistoryInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeBudgetPerformanceHistoryOutput{})
+	req := c.newRequest(op, input, &types.DescribeBudgetPerformanceHistoryOutput{})
 	return DescribeBudgetPerformanceHistoryRequest{Request: req, Input: input, Copy: c.DescribeBudgetPerformanceHistoryRequest}
 }
 
@@ -120,8 +42,8 @@ func (c *Client) DescribeBudgetPerformanceHistoryRequest(input *DescribeBudgetPe
 // DescribeBudgetPerformanceHistory API operation.
 type DescribeBudgetPerformanceHistoryRequest struct {
 	*aws.Request
-	Input *DescribeBudgetPerformanceHistoryInput
-	Copy  func(*DescribeBudgetPerformanceHistoryInput) DescribeBudgetPerformanceHistoryRequest
+	Input *types.DescribeBudgetPerformanceHistoryInput
+	Copy  func(*types.DescribeBudgetPerformanceHistoryInput) DescribeBudgetPerformanceHistoryRequest
 }
 
 // Send marshals and sends the DescribeBudgetPerformanceHistory API request.
@@ -133,7 +55,7 @@ func (r DescribeBudgetPerformanceHistoryRequest) Send(ctx context.Context) (*Des
 	}
 
 	resp := &DescribeBudgetPerformanceHistoryResponse{
-		DescribeBudgetPerformanceHistoryOutput: r.Request.Data.(*DescribeBudgetPerformanceHistoryOutput),
+		DescribeBudgetPerformanceHistoryOutput: r.Request.Data.(*types.DescribeBudgetPerformanceHistoryOutput),
 		response:                               &aws.Response{Request: r.Request},
 	}
 
@@ -143,7 +65,7 @@ func (r DescribeBudgetPerformanceHistoryRequest) Send(ctx context.Context) (*Des
 // DescribeBudgetPerformanceHistoryResponse is the response type for the
 // DescribeBudgetPerformanceHistory API operation.
 type DescribeBudgetPerformanceHistoryResponse struct {
-	*DescribeBudgetPerformanceHistoryOutput
+	*types.DescribeBudgetPerformanceHistoryOutput
 
 	response *aws.Response
 }

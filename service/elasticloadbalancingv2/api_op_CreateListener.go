@@ -4,119 +4,10 @@ package elasticloadbalancingv2
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/elasticloadbalancingv2/types"
 )
-
-type CreateListenerInput struct {
-	_ struct{} `type:"structure"`
-
-	// [HTTPS and TLS listeners] The default certificate for the listener. You must
-	// provide exactly one certificate. Set CertificateArn to the certificate ARN
-	// but do not set IsDefault.
-	//
-	// To create a certificate list for the listener, use AddListenerCertificates.
-	Certificates []Certificate `type:"list"`
-
-	// The actions for the default rule. The rule must include one forward action
-	// or one or more fixed-response actions.
-	//
-	// If the action type is forward, you specify a target group. The protocol of
-	// the target group must be HTTP or HTTPS for an Application Load Balancer.
-	// The protocol of the target group must be TCP, TLS, UDP, or TCP_UDP for a
-	// Network Load Balancer.
-	//
-	// [HTTPS listeners] If the action type is authenticate-oidc, you authenticate
-	// users through an identity provider that is OpenID Connect (OIDC) compliant.
-	//
-	// [HTTPS listeners] If the action type is authenticate-cognito, you authenticate
-	// users through the user pools supported by Amazon Cognito.
-	//
-	// [Application Load Balancer] If the action type is redirect, you redirect
-	// specified client requests from one URL to another.
-	//
-	// [Application Load Balancer] If the action type is fixed-response, you drop
-	// specified client requests and return a custom HTTP response.
-	//
-	// DefaultActions is a required field
-	DefaultActions []Action `type:"list" required:"true"`
-
-	// The Amazon Resource Name (ARN) of the load balancer.
-	//
-	// LoadBalancerArn is a required field
-	LoadBalancerArn *string `type:"string" required:"true"`
-
-	// The port on which the load balancer is listening.
-	//
-	// Port is a required field
-	Port *int64 `min:"1" type:"integer" required:"true"`
-
-	// The protocol for connections from clients to the load balancer. For Application
-	// Load Balancers, the supported protocols are HTTP and HTTPS. For Network Load
-	// Balancers, the supported protocols are TCP, TLS, UDP, and TCP_UDP.
-	//
-	// Protocol is a required field
-	Protocol ProtocolEnum `type:"string" required:"true" enum:"true"`
-
-	// [HTTPS and TLS listeners] The security policy that defines which ciphers
-	// and protocols are supported. The default is the current predefined security
-	// policy.
-	SslPolicy *string `type:"string"`
-}
-
-// String returns the string representation
-func (s CreateListenerInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateListenerInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateListenerInput"}
-
-	if s.DefaultActions == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DefaultActions"))
-	}
-
-	if s.LoadBalancerArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("LoadBalancerArn"))
-	}
-
-	if s.Port == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Port"))
-	}
-	if s.Port != nil && *s.Port < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("Port", 1))
-	}
-	if len(s.Protocol) == 0 {
-		invalidParams.Add(aws.NewErrParamRequired("Protocol"))
-	}
-	if s.DefaultActions != nil {
-		for i, v := range s.DefaultActions {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "DefaultActions", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type CreateListenerOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Information about the listener.
-	Listeners []Listener `type:"list"`
-}
-
-// String returns the string representation
-func (s CreateListenerOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCreateListener = "CreateListener"
 
@@ -147,7 +38,7 @@ const opCreateListener = "CreateListener"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/CreateListener
-func (c *Client) CreateListenerRequest(input *CreateListenerInput) CreateListenerRequest {
+func (c *Client) CreateListenerRequest(input *types.CreateListenerInput) CreateListenerRequest {
 	op := &aws.Operation{
 		Name:       opCreateListener,
 		HTTPMethod: "POST",
@@ -155,10 +46,10 @@ func (c *Client) CreateListenerRequest(input *CreateListenerInput) CreateListene
 	}
 
 	if input == nil {
-		input = &CreateListenerInput{}
+		input = &types.CreateListenerInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateListenerOutput{})
+	req := c.newRequest(op, input, &types.CreateListenerOutput{})
 	return CreateListenerRequest{Request: req, Input: input, Copy: c.CreateListenerRequest}
 }
 
@@ -166,8 +57,8 @@ func (c *Client) CreateListenerRequest(input *CreateListenerInput) CreateListene
 // CreateListener API operation.
 type CreateListenerRequest struct {
 	*aws.Request
-	Input *CreateListenerInput
-	Copy  func(*CreateListenerInput) CreateListenerRequest
+	Input *types.CreateListenerInput
+	Copy  func(*types.CreateListenerInput) CreateListenerRequest
 }
 
 // Send marshals and sends the CreateListener API request.
@@ -179,7 +70,7 @@ func (r CreateListenerRequest) Send(ctx context.Context) (*CreateListenerRespons
 	}
 
 	resp := &CreateListenerResponse{
-		CreateListenerOutput: r.Request.Data.(*CreateListenerOutput),
+		CreateListenerOutput: r.Request.Data.(*types.CreateListenerOutput),
 		response:             &aws.Response{Request: r.Request},
 	}
 
@@ -189,7 +80,7 @@ func (r CreateListenerRequest) Send(ctx context.Context) (*CreateListenerRespons
 // CreateListenerResponse is the response type for the
 // CreateListener API operation.
 type CreateListenerResponse struct {
-	*CreateListenerOutput
+	*types.CreateListenerOutput
 
 	response *aws.Response
 }

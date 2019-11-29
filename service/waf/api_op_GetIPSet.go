@@ -6,58 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/waf/types"
 )
-
-type GetIPSetInput struct {
-	_ struct{} `type:"structure"`
-
-	// The IPSetId of the IPSet that you want to get. IPSetId is returned by CreateIPSet
-	// and by ListIPSets.
-	//
-	// IPSetId is a required field
-	IPSetId *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetIPSetInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetIPSetInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetIPSetInput"}
-
-	if s.IPSetId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("IPSetId"))
-	}
-	if s.IPSetId != nil && len(*s.IPSetId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("IPSetId", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type GetIPSetOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Information about the IPSet that you specified in the GetIPSet request. For
-	// more information, see the following topics:
-	//
-	//    * IPSet: Contains IPSetDescriptors, IPSetId, and Name
-	//
-	//    * IPSetDescriptors: Contains an array of IPSetDescriptor objects. Each
-	//    IPSetDescriptor object contains Type and Value
-	IPSet *IPSet `type:"structure"`
-}
-
-// String returns the string representation
-func (s GetIPSetOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetIPSet = "GetIPSet"
 
@@ -74,7 +24,7 @@ const opGetIPSet = "GetIPSet"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/GetIPSet
-func (c *Client) GetIPSetRequest(input *GetIPSetInput) GetIPSetRequest {
+func (c *Client) GetIPSetRequest(input *types.GetIPSetInput) GetIPSetRequest {
 	op := &aws.Operation{
 		Name:       opGetIPSet,
 		HTTPMethod: "POST",
@@ -82,10 +32,10 @@ func (c *Client) GetIPSetRequest(input *GetIPSetInput) GetIPSetRequest {
 	}
 
 	if input == nil {
-		input = &GetIPSetInput{}
+		input = &types.GetIPSetInput{}
 	}
 
-	req := c.newRequest(op, input, &GetIPSetOutput{})
+	req := c.newRequest(op, input, &types.GetIPSetOutput{})
 	return GetIPSetRequest{Request: req, Input: input, Copy: c.GetIPSetRequest}
 }
 
@@ -93,8 +43,8 @@ func (c *Client) GetIPSetRequest(input *GetIPSetInput) GetIPSetRequest {
 // GetIPSet API operation.
 type GetIPSetRequest struct {
 	*aws.Request
-	Input *GetIPSetInput
-	Copy  func(*GetIPSetInput) GetIPSetRequest
+	Input *types.GetIPSetInput
+	Copy  func(*types.GetIPSetInput) GetIPSetRequest
 }
 
 // Send marshals and sends the GetIPSet API request.
@@ -106,7 +56,7 @@ func (r GetIPSetRequest) Send(ctx context.Context) (*GetIPSetResponse, error) {
 	}
 
 	resp := &GetIPSetResponse{
-		GetIPSetOutput: r.Request.Data.(*GetIPSetOutput),
+		GetIPSetOutput: r.Request.Data.(*types.GetIPSetOutput),
 		response:       &aws.Response{Request: r.Request},
 	}
 
@@ -116,7 +66,7 @@ func (r GetIPSetRequest) Send(ctx context.Context) (*GetIPSetResponse, error) {
 // GetIPSetResponse is the response type for the
 // GetIPSet API operation.
 type GetIPSetResponse struct {
-	*GetIPSetOutput
+	*types.GetIPSetOutput
 
 	response *aws.Response
 }

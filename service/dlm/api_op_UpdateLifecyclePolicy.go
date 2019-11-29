@@ -6,108 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/dlm/types"
 )
-
-type UpdateLifecyclePolicyInput struct {
-	_ struct{} `type:"structure"`
-
-	// A description of the lifecycle policy.
-	Description *string `type:"string"`
-
-	// The Amazon Resource Name (ARN) of the IAM role used to run the operations
-	// specified by the lifecycle policy.
-	ExecutionRoleArn *string `type:"string"`
-
-	// The configuration of the lifecycle policy.
-	//
-	// Target tags cannot be re-used across policies.
-	PolicyDetails *PolicyDetails `type:"structure"`
-
-	// The identifier of the lifecycle policy.
-	//
-	// PolicyId is a required field
-	PolicyId *string `location:"uri" locationName:"policyId" type:"string" required:"true"`
-
-	// The desired activation state of the lifecycle policy after creation.
-	State SettablePolicyStateValues `type:"string" enum:"true"`
-}
-
-// String returns the string representation
-func (s UpdateLifecyclePolicyInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateLifecyclePolicyInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateLifecyclePolicyInput"}
-
-	if s.PolicyId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("PolicyId"))
-	}
-	if s.PolicyDetails != nil {
-		if err := s.PolicyDetails.Validate(); err != nil {
-			invalidParams.AddNested("PolicyDetails", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s UpdateLifecyclePolicyInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.Description != nil {
-		v := *s.Description
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "Description", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.ExecutionRoleArn != nil {
-		v := *s.ExecutionRoleArn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "ExecutionRoleArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.PolicyDetails != nil {
-		v := s.PolicyDetails
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "PolicyDetails", v, metadata)
-	}
-	if len(s.State) > 0 {
-		v := s.State
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "State", protocol.QuotedValue{ValueMarshaler: v}, metadata)
-	}
-	if s.PolicyId != nil {
-		v := *s.PolicyId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "policyId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type UpdateLifecyclePolicyOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s UpdateLifecyclePolicyOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s UpdateLifecyclePolicyOutput) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
 
 const opUpdateLifecyclePolicy = "UpdateLifecyclePolicy"
 
@@ -124,7 +24,7 @@ const opUpdateLifecyclePolicy = "UpdateLifecyclePolicy"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dlm-2018-01-12/UpdateLifecyclePolicy
-func (c *Client) UpdateLifecyclePolicyRequest(input *UpdateLifecyclePolicyInput) UpdateLifecyclePolicyRequest {
+func (c *Client) UpdateLifecyclePolicyRequest(input *types.UpdateLifecyclePolicyInput) UpdateLifecyclePolicyRequest {
 	op := &aws.Operation{
 		Name:       opUpdateLifecyclePolicy,
 		HTTPMethod: "PATCH",
@@ -132,10 +32,10 @@ func (c *Client) UpdateLifecyclePolicyRequest(input *UpdateLifecyclePolicyInput)
 	}
 
 	if input == nil {
-		input = &UpdateLifecyclePolicyInput{}
+		input = &types.UpdateLifecyclePolicyInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateLifecyclePolicyOutput{})
+	req := c.newRequest(op, input, &types.UpdateLifecyclePolicyOutput{})
 	return UpdateLifecyclePolicyRequest{Request: req, Input: input, Copy: c.UpdateLifecyclePolicyRequest}
 }
 
@@ -143,8 +43,8 @@ func (c *Client) UpdateLifecyclePolicyRequest(input *UpdateLifecyclePolicyInput)
 // UpdateLifecyclePolicy API operation.
 type UpdateLifecyclePolicyRequest struct {
 	*aws.Request
-	Input *UpdateLifecyclePolicyInput
-	Copy  func(*UpdateLifecyclePolicyInput) UpdateLifecyclePolicyRequest
+	Input *types.UpdateLifecyclePolicyInput
+	Copy  func(*types.UpdateLifecyclePolicyInput) UpdateLifecyclePolicyRequest
 }
 
 // Send marshals and sends the UpdateLifecyclePolicy API request.
@@ -156,7 +56,7 @@ func (r UpdateLifecyclePolicyRequest) Send(ctx context.Context) (*UpdateLifecycl
 	}
 
 	resp := &UpdateLifecyclePolicyResponse{
-		UpdateLifecyclePolicyOutput: r.Request.Data.(*UpdateLifecyclePolicyOutput),
+		UpdateLifecyclePolicyOutput: r.Request.Data.(*types.UpdateLifecyclePolicyOutput),
 		response:                    &aws.Response{Request: r.Request},
 	}
 
@@ -166,7 +66,7 @@ func (r UpdateLifecyclePolicyRequest) Send(ctx context.Context) (*UpdateLifecycl
 // UpdateLifecyclePolicyResponse is the response type for the
 // UpdateLifecyclePolicy API operation.
 type UpdateLifecyclePolicyResponse struct {
-	*UpdateLifecyclePolicyOutput
+	*types.UpdateLifecyclePolicyOutput
 
 	response *aws.Response
 }

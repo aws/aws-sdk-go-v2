@@ -4,94 +4,10 @@ package transcribe
 
 import (
 	"context"
-	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/transcribe/types"
 )
-
-type UpdateVocabularyInput struct {
-	_ struct{} `type:"structure"`
-
-	// The language code of the vocabulary entries.
-	//
-	// LanguageCode is a required field
-	LanguageCode LanguageCode `type:"string" required:"true" enum:"true"`
-
-	// An array of strings containing the vocabulary entries.
-	Phrases []string `type:"list"`
-
-	// The S3 location of the text file that contains the definition of the custom
-	// vocabulary. The URI must be in the same region as the API endpoint that you
-	// are calling. The general form is
-	//
-	// https://s3-<aws-region>.amazonaws.com/<bucket-name>/<keyprefix>/<objectkey>
-	//
-	// For example:
-	//
-	// https://s3-us-east-1.amazonaws.com/examplebucket/vocab.txt
-	//
-	// For more information about S3 object names, see Object Keys (http://docs.aws.amazon.com/AmazonS3/latest/dev/UsingMetadata.html#object-keys)
-	// in the Amazon S3 Developer Guide.
-	//
-	// For more information about custom vocabularies, see Custom Vocabularies (http://docs.aws.amazon.com/transcribe/latest/dg/how-it-works.html#how-vocabulary).
-	VocabularyFileUri *string `min:"1" type:"string"`
-
-	// The name of the vocabulary to update. The name is case-sensitive.
-	//
-	// VocabularyName is a required field
-	VocabularyName *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s UpdateVocabularyInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateVocabularyInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateVocabularyInput"}
-	if len(s.LanguageCode) == 0 {
-		invalidParams.Add(aws.NewErrParamRequired("LanguageCode"))
-	}
-	if s.VocabularyFileUri != nil && len(*s.VocabularyFileUri) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("VocabularyFileUri", 1))
-	}
-
-	if s.VocabularyName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("VocabularyName"))
-	}
-	if s.VocabularyName != nil && len(*s.VocabularyName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("VocabularyName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type UpdateVocabularyOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The language code of the vocabulary entries.
-	LanguageCode LanguageCode `type:"string" enum:"true"`
-
-	// The date and time that the vocabulary was updated.
-	LastModifiedTime *time.Time `type:"timestamp"`
-
-	// The name of the vocabulary that was updated.
-	VocabularyName *string `min:"1" type:"string"`
-
-	// The processing state of the vocabulary. When the VocabularyState field contains
-	// READY the vocabulary is ready to be used in a StartTranscriptionJob request.
-	VocabularyState VocabularyState `type:"string" enum:"true"`
-}
-
-// String returns the string representation
-func (s UpdateVocabularyOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opUpdateVocabulary = "UpdateVocabulary"
 
@@ -110,7 +26,7 @@ const opUpdateVocabulary = "UpdateVocabulary"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/UpdateVocabulary
-func (c *Client) UpdateVocabularyRequest(input *UpdateVocabularyInput) UpdateVocabularyRequest {
+func (c *Client) UpdateVocabularyRequest(input *types.UpdateVocabularyInput) UpdateVocabularyRequest {
 	op := &aws.Operation{
 		Name:       opUpdateVocabulary,
 		HTTPMethod: "POST",
@@ -118,10 +34,10 @@ func (c *Client) UpdateVocabularyRequest(input *UpdateVocabularyInput) UpdateVoc
 	}
 
 	if input == nil {
-		input = &UpdateVocabularyInput{}
+		input = &types.UpdateVocabularyInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateVocabularyOutput{})
+	req := c.newRequest(op, input, &types.UpdateVocabularyOutput{})
 	return UpdateVocabularyRequest{Request: req, Input: input, Copy: c.UpdateVocabularyRequest}
 }
 
@@ -129,8 +45,8 @@ func (c *Client) UpdateVocabularyRequest(input *UpdateVocabularyInput) UpdateVoc
 // UpdateVocabulary API operation.
 type UpdateVocabularyRequest struct {
 	*aws.Request
-	Input *UpdateVocabularyInput
-	Copy  func(*UpdateVocabularyInput) UpdateVocabularyRequest
+	Input *types.UpdateVocabularyInput
+	Copy  func(*types.UpdateVocabularyInput) UpdateVocabularyRequest
 }
 
 // Send marshals and sends the UpdateVocabulary API request.
@@ -142,7 +58,7 @@ func (r UpdateVocabularyRequest) Send(ctx context.Context) (*UpdateVocabularyRes
 	}
 
 	resp := &UpdateVocabularyResponse{
-		UpdateVocabularyOutput: r.Request.Data.(*UpdateVocabularyOutput),
+		UpdateVocabularyOutput: r.Request.Data.(*types.UpdateVocabularyOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -152,7 +68,7 @@ func (r UpdateVocabularyRequest) Send(ctx context.Context) (*UpdateVocabularyRes
 // UpdateVocabularyResponse is the response type for the
 // UpdateVocabulary API operation.
 type UpdateVocabularyResponse struct {
-	*UpdateVocabularyOutput
+	*types.UpdateVocabularyOutput
 
 	response *aws.Response
 }

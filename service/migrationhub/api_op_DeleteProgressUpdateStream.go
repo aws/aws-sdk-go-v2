@@ -6,52 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/migrationhub/types"
 )
-
-type DeleteProgressUpdateStreamInput struct {
-	_ struct{} `type:"structure"`
-
-	// Optional boolean flag to indicate whether any effect should take place. Used
-	// to test if the caller has permission to make the call.
-	DryRun *bool `type:"boolean"`
-
-	// The name of the ProgressUpdateStream.
-	//
-	// ProgressUpdateStreamName is a required field
-	ProgressUpdateStreamName *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteProgressUpdateStreamInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteProgressUpdateStreamInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteProgressUpdateStreamInput"}
-
-	if s.ProgressUpdateStreamName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ProgressUpdateStreamName"))
-	}
-	if s.ProgressUpdateStreamName != nil && len(*s.ProgressUpdateStreamName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ProgressUpdateStreamName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteProgressUpdateStreamOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteProgressUpdateStreamOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteProgressUpdateStream = "DeleteProgressUpdateStream"
 
@@ -73,7 +29,7 @@ const opDeleteProgressUpdateStream = "DeleteProgressUpdateStream"
 //    ListProgressUpdateStreams call.
 //
 //    * CreateProgressUpdateStream, ImportMigrationTask, NotifyMigrationTaskState,
-//    and all Associate[*] APIs realted to the tasks belonging to the stream
+//    and all Associate[*] APIs related to the tasks belonging to the stream
 //    will throw "InvalidInputException" if the stream of the same name is in
 //    the process of being deleted.
 //
@@ -90,7 +46,7 @@ const opDeleteProgressUpdateStream = "DeleteProgressUpdateStream"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/DeleteProgressUpdateStream
-func (c *Client) DeleteProgressUpdateStreamRequest(input *DeleteProgressUpdateStreamInput) DeleteProgressUpdateStreamRequest {
+func (c *Client) DeleteProgressUpdateStreamRequest(input *types.DeleteProgressUpdateStreamInput) DeleteProgressUpdateStreamRequest {
 	op := &aws.Operation{
 		Name:       opDeleteProgressUpdateStream,
 		HTTPMethod: "POST",
@@ -98,10 +54,10 @@ func (c *Client) DeleteProgressUpdateStreamRequest(input *DeleteProgressUpdateSt
 	}
 
 	if input == nil {
-		input = &DeleteProgressUpdateStreamInput{}
+		input = &types.DeleteProgressUpdateStreamInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteProgressUpdateStreamOutput{})
+	req := c.newRequest(op, input, &types.DeleteProgressUpdateStreamOutput{})
 	return DeleteProgressUpdateStreamRequest{Request: req, Input: input, Copy: c.DeleteProgressUpdateStreamRequest}
 }
 
@@ -109,8 +65,8 @@ func (c *Client) DeleteProgressUpdateStreamRequest(input *DeleteProgressUpdateSt
 // DeleteProgressUpdateStream API operation.
 type DeleteProgressUpdateStreamRequest struct {
 	*aws.Request
-	Input *DeleteProgressUpdateStreamInput
-	Copy  func(*DeleteProgressUpdateStreamInput) DeleteProgressUpdateStreamRequest
+	Input *types.DeleteProgressUpdateStreamInput
+	Copy  func(*types.DeleteProgressUpdateStreamInput) DeleteProgressUpdateStreamRequest
 }
 
 // Send marshals and sends the DeleteProgressUpdateStream API request.
@@ -122,7 +78,7 @@ func (r DeleteProgressUpdateStreamRequest) Send(ctx context.Context) (*DeletePro
 	}
 
 	resp := &DeleteProgressUpdateStreamResponse{
-		DeleteProgressUpdateStreamOutput: r.Request.Data.(*DeleteProgressUpdateStreamOutput),
+		DeleteProgressUpdateStreamOutput: r.Request.Data.(*types.DeleteProgressUpdateStreamOutput),
 		response:                         &aws.Response{Request: r.Request},
 	}
 
@@ -132,7 +88,7 @@ func (r DeleteProgressUpdateStreamRequest) Send(ctx context.Context) (*DeletePro
 // DeleteProgressUpdateStreamResponse is the response type for the
 // DeleteProgressUpdateStream API operation.
 type DeleteProgressUpdateStreamResponse struct {
-	*DeleteProgressUpdateStreamOutput
+	*types.DeleteProgressUpdateStreamOutput
 
 	response *aws.Response
 }

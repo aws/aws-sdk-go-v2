@@ -6,77 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/workdocs/types"
 )
-
-type GetCurrentUserInput struct {
-	_ struct{} `type:"structure"`
-
-	// Amazon WorkDocs authentication token. Do not set this field when using administrative
-	// API actions, as in accessing the API using AWS credentials.
-	//
-	// AuthenticationToken is a required field
-	AuthenticationToken *string `location:"header" locationName:"Authentication" min:"1" type:"string" required:"true" sensitive:"true"`
-}
-
-// String returns the string representation
-func (s GetCurrentUserInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetCurrentUserInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetCurrentUserInput"}
-
-	if s.AuthenticationToken == nil {
-		invalidParams.Add(aws.NewErrParamRequired("AuthenticationToken"))
-	}
-	if s.AuthenticationToken != nil && len(*s.AuthenticationToken) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("AuthenticationToken", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetCurrentUserInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.AuthenticationToken != nil {
-		v := *s.AuthenticationToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "Authentication", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type GetCurrentUserOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Metadata of the user.
-	User *User `type:"structure"`
-}
-
-// String returns the string representation
-func (s GetCurrentUserOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetCurrentUserOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.User != nil {
-		v := s.User
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "User", v, metadata)
-	}
-	return nil
-}
 
 const opGetCurrentUser = "GetCurrentUser"
 
@@ -94,7 +25,7 @@ const opGetCurrentUser = "GetCurrentUser"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/GetCurrentUser
-func (c *Client) GetCurrentUserRequest(input *GetCurrentUserInput) GetCurrentUserRequest {
+func (c *Client) GetCurrentUserRequest(input *types.GetCurrentUserInput) GetCurrentUserRequest {
 	op := &aws.Operation{
 		Name:       opGetCurrentUser,
 		HTTPMethod: "GET",
@@ -102,10 +33,10 @@ func (c *Client) GetCurrentUserRequest(input *GetCurrentUserInput) GetCurrentUse
 	}
 
 	if input == nil {
-		input = &GetCurrentUserInput{}
+		input = &types.GetCurrentUserInput{}
 	}
 
-	req := c.newRequest(op, input, &GetCurrentUserOutput{})
+	req := c.newRequest(op, input, &types.GetCurrentUserOutput{})
 	return GetCurrentUserRequest{Request: req, Input: input, Copy: c.GetCurrentUserRequest}
 }
 
@@ -113,8 +44,8 @@ func (c *Client) GetCurrentUserRequest(input *GetCurrentUserInput) GetCurrentUse
 // GetCurrentUser API operation.
 type GetCurrentUserRequest struct {
 	*aws.Request
-	Input *GetCurrentUserInput
-	Copy  func(*GetCurrentUserInput) GetCurrentUserRequest
+	Input *types.GetCurrentUserInput
+	Copy  func(*types.GetCurrentUserInput) GetCurrentUserRequest
 }
 
 // Send marshals and sends the GetCurrentUser API request.
@@ -126,7 +57,7 @@ func (r GetCurrentUserRequest) Send(ctx context.Context) (*GetCurrentUserRespons
 	}
 
 	resp := &GetCurrentUserResponse{
-		GetCurrentUserOutput: r.Request.Data.(*GetCurrentUserOutput),
+		GetCurrentUserOutput: r.Request.Data.(*types.GetCurrentUserOutput),
 		response:             &aws.Response{Request: r.Request},
 	}
 
@@ -136,7 +67,7 @@ func (r GetCurrentUserRequest) Send(ctx context.Context) (*GetCurrentUserRespons
 // GetCurrentUserResponse is the response type for the
 // GetCurrentUser API operation.
 type GetCurrentUserResponse struct {
-	*GetCurrentUserOutput
+	*types.GetCurrentUserOutput
 
 	response *aws.Response
 }

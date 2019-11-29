@@ -6,80 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/redshift/types"
 )
-
-type DescribeClusterSecurityGroupsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of a cluster security group for which you are requesting details.
-	// You can specify either the Marker parameter or a ClusterSecurityGroupName
-	// parameter, but not both.
-	//
-	// Example: securitygroup1
-	ClusterSecurityGroupName *string `type:"string"`
-
-	// An optional parameter that specifies the starting point to return a set of
-	// response records. When the results of a DescribeClusterSecurityGroups request
-	// exceed the value specified in MaxRecords, AWS returns a value in the Marker
-	// field of the response. You can retrieve the next set of response records
-	// by providing the returned marker value in the Marker parameter and retrying
-	// the request.
-	//
-	// Constraints: You can specify either the ClusterSecurityGroupName parameter
-	// or the Marker parameter, but not both.
-	Marker *string `type:"string"`
-
-	// The maximum number of response records to return in each call. If the number
-	// of remaining response records exceeds the specified MaxRecords value, a value
-	// is returned in a marker field of the response. You can retrieve the next
-	// set of records by retrying the command with the returned marker value.
-	//
-	// Default: 100
-	//
-	// Constraints: minimum 20, maximum 100.
-	MaxRecords *int64 `type:"integer"`
-
-	// A tag key or keys for which you want to return all matching cluster security
-	// groups that are associated with the specified key or keys. For example, suppose
-	// that you have security groups that are tagged with keys called owner and
-	// environment. If you specify both of these tag keys in the request, Amazon
-	// Redshift returns a response with the security groups that have either or
-	// both of these tag keys associated with them.
-	TagKeys []string `locationNameList:"TagKey" type:"list"`
-
-	// A tag value or values for which you want to return all matching cluster security
-	// groups that are associated with the specified tag value or values. For example,
-	// suppose that you have security groups that are tagged with values called
-	// admin and test. If you specify both of these tag values in the request, Amazon
-	// Redshift returns a response with the security groups that have either or
-	// both of these tag values associated with them.
-	TagValues []string `locationNameList:"TagValue" type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeClusterSecurityGroupsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type DescribeClusterSecurityGroupsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A list of ClusterSecurityGroup instances.
-	ClusterSecurityGroups []ClusterSecurityGroup `locationNameList:"ClusterSecurityGroup" type:"list"`
-
-	// A value that indicates the starting point for the next set of response records
-	// in a subsequent request. If a value is returned in a response, you can retrieve
-	// the next set of records by providing this returned marker value in the Marker
-	// parameter and retrying the command. If the Marker field is empty, all response
-	// records have been retrieved for the request.
-	Marker *string `type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeClusterSecurityGroupsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeClusterSecurityGroups = "DescribeClusterSecurityGroups"
 
@@ -112,7 +40,7 @@ const opDescribeClusterSecurityGroups = "DescribeClusterSecurityGroups"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeClusterSecurityGroups
-func (c *Client) DescribeClusterSecurityGroupsRequest(input *DescribeClusterSecurityGroupsInput) DescribeClusterSecurityGroupsRequest {
+func (c *Client) DescribeClusterSecurityGroupsRequest(input *types.DescribeClusterSecurityGroupsInput) DescribeClusterSecurityGroupsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeClusterSecurityGroups,
 		HTTPMethod: "POST",
@@ -126,10 +54,10 @@ func (c *Client) DescribeClusterSecurityGroupsRequest(input *DescribeClusterSecu
 	}
 
 	if input == nil {
-		input = &DescribeClusterSecurityGroupsInput{}
+		input = &types.DescribeClusterSecurityGroupsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeClusterSecurityGroupsOutput{})
+	req := c.newRequest(op, input, &types.DescribeClusterSecurityGroupsOutput{})
 	return DescribeClusterSecurityGroupsRequest{Request: req, Input: input, Copy: c.DescribeClusterSecurityGroupsRequest}
 }
 
@@ -137,8 +65,8 @@ func (c *Client) DescribeClusterSecurityGroupsRequest(input *DescribeClusterSecu
 // DescribeClusterSecurityGroups API operation.
 type DescribeClusterSecurityGroupsRequest struct {
 	*aws.Request
-	Input *DescribeClusterSecurityGroupsInput
-	Copy  func(*DescribeClusterSecurityGroupsInput) DescribeClusterSecurityGroupsRequest
+	Input *types.DescribeClusterSecurityGroupsInput
+	Copy  func(*types.DescribeClusterSecurityGroupsInput) DescribeClusterSecurityGroupsRequest
 }
 
 // Send marshals and sends the DescribeClusterSecurityGroups API request.
@@ -150,7 +78,7 @@ func (r DescribeClusterSecurityGroupsRequest) Send(ctx context.Context) (*Descri
 	}
 
 	resp := &DescribeClusterSecurityGroupsResponse{
-		DescribeClusterSecurityGroupsOutput: r.Request.Data.(*DescribeClusterSecurityGroupsOutput),
+		DescribeClusterSecurityGroupsOutput: r.Request.Data.(*types.DescribeClusterSecurityGroupsOutput),
 		response:                            &aws.Response{Request: r.Request},
 	}
 
@@ -180,7 +108,7 @@ func NewDescribeClusterSecurityGroupsPaginator(req DescribeClusterSecurityGroups
 	return DescribeClusterSecurityGroupsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *DescribeClusterSecurityGroupsInput
+				var inCpy *types.DescribeClusterSecurityGroupsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -200,14 +128,14 @@ type DescribeClusterSecurityGroupsPaginator struct {
 	aws.Pager
 }
 
-func (p *DescribeClusterSecurityGroupsPaginator) CurrentPage() *DescribeClusterSecurityGroupsOutput {
-	return p.Pager.CurrentPage().(*DescribeClusterSecurityGroupsOutput)
+func (p *DescribeClusterSecurityGroupsPaginator) CurrentPage() *types.DescribeClusterSecurityGroupsOutput {
+	return p.Pager.CurrentPage().(*types.DescribeClusterSecurityGroupsOutput)
 }
 
 // DescribeClusterSecurityGroupsResponse is the response type for the
 // DescribeClusterSecurityGroups API operation.
 type DescribeClusterSecurityGroupsResponse struct {
-	*DescribeClusterSecurityGroupsOutput
+	*types.DescribeClusterSecurityGroupsOutput
 
 	response *aws.Response
 }

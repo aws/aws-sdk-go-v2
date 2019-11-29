@@ -6,73 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ssm/types"
 )
-
-type LabelParameterVersionInput struct {
-	_ struct{} `type:"structure"`
-
-	// One or more labels to attach to the specified parameter version.
-	//
-	// Labels is a required field
-	Labels []string `min:"1" type:"list" required:"true"`
-
-	// The parameter name on which you want to attach one or more labels.
-	//
-	// Name is a required field
-	Name *string `min:"1" type:"string" required:"true"`
-
-	// The specific version of the parameter on which you want to attach one or
-	// more labels. If no version is specified, the system attaches the label to
-	// the latest version.
-	ParameterVersion *int64 `type:"long"`
-}
-
-// String returns the string representation
-func (s LabelParameterVersionInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *LabelParameterVersionInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "LabelParameterVersionInput"}
-
-	if s.Labels == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Labels"))
-	}
-	if s.Labels != nil && len(s.Labels) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Labels", 1))
-	}
-
-	if s.Name == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Name"))
-	}
-	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type LabelParameterVersionOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The label does not meet the requirements. For information about parameter
-	// label requirements, see Labeling Parameters (http://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-paramstore-labels.html)
-	// in the AWS Systems Manager User Guide.
-	InvalidLabels []string `min:"1" type:"list"`
-
-	// The version of the parameter that has been labeled.
-	ParameterVersion *int64 `type:"long"`
-}
-
-// String returns the string representation
-func (s LabelParameterVersionOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opLabelParameterVersion = "LabelParameterVersion"
 
@@ -117,7 +52,7 @@ const opLabelParameterVersion = "LabelParameterVersion"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/LabelParameterVersion
-func (c *Client) LabelParameterVersionRequest(input *LabelParameterVersionInput) LabelParameterVersionRequest {
+func (c *Client) LabelParameterVersionRequest(input *types.LabelParameterVersionInput) LabelParameterVersionRequest {
 	op := &aws.Operation{
 		Name:       opLabelParameterVersion,
 		HTTPMethod: "POST",
@@ -125,10 +60,10 @@ func (c *Client) LabelParameterVersionRequest(input *LabelParameterVersionInput)
 	}
 
 	if input == nil {
-		input = &LabelParameterVersionInput{}
+		input = &types.LabelParameterVersionInput{}
 	}
 
-	req := c.newRequest(op, input, &LabelParameterVersionOutput{})
+	req := c.newRequest(op, input, &types.LabelParameterVersionOutput{})
 	return LabelParameterVersionRequest{Request: req, Input: input, Copy: c.LabelParameterVersionRequest}
 }
 
@@ -136,8 +71,8 @@ func (c *Client) LabelParameterVersionRequest(input *LabelParameterVersionInput)
 // LabelParameterVersion API operation.
 type LabelParameterVersionRequest struct {
 	*aws.Request
-	Input *LabelParameterVersionInput
-	Copy  func(*LabelParameterVersionInput) LabelParameterVersionRequest
+	Input *types.LabelParameterVersionInput
+	Copy  func(*types.LabelParameterVersionInput) LabelParameterVersionRequest
 }
 
 // Send marshals and sends the LabelParameterVersion API request.
@@ -149,7 +84,7 @@ func (r LabelParameterVersionRequest) Send(ctx context.Context) (*LabelParameter
 	}
 
 	resp := &LabelParameterVersionResponse{
-		LabelParameterVersionOutput: r.Request.Data.(*LabelParameterVersionOutput),
+		LabelParameterVersionOutput: r.Request.Data.(*types.LabelParameterVersionOutput),
 		response:                    &aws.Response{Request: r.Request},
 	}
 
@@ -159,7 +94,7 @@ func (r LabelParameterVersionRequest) Send(ctx context.Context) (*LabelParameter
 // LabelParameterVersionResponse is the response type for the
 // LabelParameterVersion API operation.
 type LabelParameterVersionResponse struct {
-	*LabelParameterVersionOutput
+	*types.LabelParameterVersionOutput
 
 	response *aws.Response
 }

@@ -6,59 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/types"
 )
-
-type AdminDisableProviderForUserInput struct {
-	_ struct{} `type:"structure"`
-
-	// The user to be disabled.
-	//
-	// User is a required field
-	User *ProviderUserIdentifierType `type:"structure" required:"true"`
-
-	// The user pool ID for the user pool.
-	//
-	// UserPoolId is a required field
-	UserPoolId *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s AdminDisableProviderForUserInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *AdminDisableProviderForUserInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "AdminDisableProviderForUserInput"}
-
-	if s.User == nil {
-		invalidParams.Add(aws.NewErrParamRequired("User"))
-	}
-
-	if s.UserPoolId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("UserPoolId"))
-	}
-	if s.User != nil {
-		if err := s.User.Validate(); err != nil {
-			invalidParams.AddNested("User", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type AdminDisableProviderForUserOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s AdminDisableProviderForUserOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opAdminDisableProviderForUser = "AdminDisableProviderForUser"
 
@@ -103,7 +52,7 @@ const opAdminDisableProviderForUser = "AdminDisableProviderForUser"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AdminDisableProviderForUser
-func (c *Client) AdminDisableProviderForUserRequest(input *AdminDisableProviderForUserInput) AdminDisableProviderForUserRequest {
+func (c *Client) AdminDisableProviderForUserRequest(input *types.AdminDisableProviderForUserInput) AdminDisableProviderForUserRequest {
 	op := &aws.Operation{
 		Name:       opAdminDisableProviderForUser,
 		HTTPMethod: "POST",
@@ -111,10 +60,10 @@ func (c *Client) AdminDisableProviderForUserRequest(input *AdminDisableProviderF
 	}
 
 	if input == nil {
-		input = &AdminDisableProviderForUserInput{}
+		input = &types.AdminDisableProviderForUserInput{}
 	}
 
-	req := c.newRequest(op, input, &AdminDisableProviderForUserOutput{})
+	req := c.newRequest(op, input, &types.AdminDisableProviderForUserOutput{})
 	return AdminDisableProviderForUserRequest{Request: req, Input: input, Copy: c.AdminDisableProviderForUserRequest}
 }
 
@@ -122,8 +71,8 @@ func (c *Client) AdminDisableProviderForUserRequest(input *AdminDisableProviderF
 // AdminDisableProviderForUser API operation.
 type AdminDisableProviderForUserRequest struct {
 	*aws.Request
-	Input *AdminDisableProviderForUserInput
-	Copy  func(*AdminDisableProviderForUserInput) AdminDisableProviderForUserRequest
+	Input *types.AdminDisableProviderForUserInput
+	Copy  func(*types.AdminDisableProviderForUserInput) AdminDisableProviderForUserRequest
 }
 
 // Send marshals and sends the AdminDisableProviderForUser API request.
@@ -135,7 +84,7 @@ func (r AdminDisableProviderForUserRequest) Send(ctx context.Context) (*AdminDis
 	}
 
 	resp := &AdminDisableProviderForUserResponse{
-		AdminDisableProviderForUserOutput: r.Request.Data.(*AdminDisableProviderForUserOutput),
+		AdminDisableProviderForUserOutput: r.Request.Data.(*types.AdminDisableProviderForUserOutput),
 		response:                          &aws.Response{Request: r.Request},
 	}
 
@@ -145,7 +94,7 @@ func (r AdminDisableProviderForUserRequest) Send(ctx context.Context) (*AdminDis
 // AdminDisableProviderForUserResponse is the response type for the
 // AdminDisableProviderForUser API operation.
 type AdminDisableProviderForUserResponse struct {
-	*AdminDisableProviderForUserOutput
+	*types.AdminDisableProviderForUserOutput
 
 	response *aws.Response
 }

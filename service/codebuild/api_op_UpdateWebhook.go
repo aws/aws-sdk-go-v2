@@ -6,70 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/codebuild/types"
 )
-
-type UpdateWebhookInput struct {
-	_ struct{} `type:"structure"`
-
-	// A regular expression used to determine which repository branches are built
-	// when a webhook is triggered. If the name of a branch matches the regular
-	// expression, then it is built. If branchFilter is empty, then all branches
-	// are built.
-	//
-	// It is recommended that you use filterGroups instead of branchFilter.
-	BranchFilter *string `locationName:"branchFilter" type:"string"`
-
-	// An array of arrays of WebhookFilter objects used to determine if a webhook
-	// event can trigger a build. A filter group must pcontain at least one EVENT
-	// WebhookFilter.
-	FilterGroups [][]WebhookFilter `locationName:"filterGroups" type:"list"`
-
-	// The name of the AWS CodeBuild project.
-	//
-	// ProjectName is a required field
-	ProjectName *string `locationName:"projectName" min:"2" type:"string" required:"true"`
-
-	// A boolean value that specifies whether the associated GitHub repository's
-	// secret token should be updated. If you use Bitbucket for your repository,
-	// rotateSecret is ignored.
-	RotateSecret *bool `locationName:"rotateSecret" type:"boolean"`
-}
-
-// String returns the string representation
-func (s UpdateWebhookInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateWebhookInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateWebhookInput"}
-
-	if s.ProjectName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ProjectName"))
-	}
-	if s.ProjectName != nil && len(*s.ProjectName) < 2 {
-		invalidParams.Add(aws.NewErrParamMinLen("ProjectName", 2))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type UpdateWebhookOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Information about a repository's webhook that is associated with a project
-	// in AWS CodeBuild.
-	Webhook *Webhook `locationName:"webhook" type:"structure"`
-}
-
-// String returns the string representation
-func (s UpdateWebhookOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opUpdateWebhook = "UpdateWebhook"
 
@@ -88,7 +26,7 @@ const opUpdateWebhook = "UpdateWebhook"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/UpdateWebhook
-func (c *Client) UpdateWebhookRequest(input *UpdateWebhookInput) UpdateWebhookRequest {
+func (c *Client) UpdateWebhookRequest(input *types.UpdateWebhookInput) UpdateWebhookRequest {
 	op := &aws.Operation{
 		Name:       opUpdateWebhook,
 		HTTPMethod: "POST",
@@ -96,10 +34,10 @@ func (c *Client) UpdateWebhookRequest(input *UpdateWebhookInput) UpdateWebhookRe
 	}
 
 	if input == nil {
-		input = &UpdateWebhookInput{}
+		input = &types.UpdateWebhookInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateWebhookOutput{})
+	req := c.newRequest(op, input, &types.UpdateWebhookOutput{})
 	return UpdateWebhookRequest{Request: req, Input: input, Copy: c.UpdateWebhookRequest}
 }
 
@@ -107,8 +45,8 @@ func (c *Client) UpdateWebhookRequest(input *UpdateWebhookInput) UpdateWebhookRe
 // UpdateWebhook API operation.
 type UpdateWebhookRequest struct {
 	*aws.Request
-	Input *UpdateWebhookInput
-	Copy  func(*UpdateWebhookInput) UpdateWebhookRequest
+	Input *types.UpdateWebhookInput
+	Copy  func(*types.UpdateWebhookInput) UpdateWebhookRequest
 }
 
 // Send marshals and sends the UpdateWebhook API request.
@@ -120,7 +58,7 @@ func (r UpdateWebhookRequest) Send(ctx context.Context) (*UpdateWebhookResponse,
 	}
 
 	resp := &UpdateWebhookResponse{
-		UpdateWebhookOutput: r.Request.Data.(*UpdateWebhookOutput),
+		UpdateWebhookOutput: r.Request.Data.(*types.UpdateWebhookOutput),
 		response:            &aws.Response{Request: r.Request},
 	}
 
@@ -130,7 +68,7 @@ func (r UpdateWebhookRequest) Send(ctx context.Context) (*UpdateWebhookResponse,
 // UpdateWebhookResponse is the response type for the
 // UpdateWebhook API operation.
 type UpdateWebhookResponse struct {
-	*UpdateWebhookOutput
+	*types.UpdateWebhookOutput
 
 	response *aws.Response
 }

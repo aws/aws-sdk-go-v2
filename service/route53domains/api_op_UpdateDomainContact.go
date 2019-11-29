@@ -6,77 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/route53domains/types"
 )
-
-// The UpdateDomainContact request includes the following elements.
-type UpdateDomainContactInput struct {
-	_ struct{} `type:"structure"`
-
-	// Provides detailed contact information.
-	AdminContact *ContactDetail `type:"structure" sensitive:"true"`
-
-	// The name of the domain that you want to update contact information for.
-	//
-	// DomainName is a required field
-	DomainName *string `type:"string" required:"true"`
-
-	// Provides detailed contact information.
-	RegistrantContact *ContactDetail `type:"structure" sensitive:"true"`
-
-	// Provides detailed contact information.
-	TechContact *ContactDetail `type:"structure" sensitive:"true"`
-}
-
-// String returns the string representation
-func (s UpdateDomainContactInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateDomainContactInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateDomainContactInput"}
-
-	if s.DomainName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DomainName"))
-	}
-	if s.AdminContact != nil {
-		if err := s.AdminContact.Validate(); err != nil {
-			invalidParams.AddNested("AdminContact", err.(aws.ErrInvalidParams))
-		}
-	}
-	if s.RegistrantContact != nil {
-		if err := s.RegistrantContact.Validate(); err != nil {
-			invalidParams.AddNested("RegistrantContact", err.(aws.ErrInvalidParams))
-		}
-	}
-	if s.TechContact != nil {
-		if err := s.TechContact.Validate(); err != nil {
-			invalidParams.AddNested("TechContact", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// The UpdateDomainContact response includes the following element.
-type UpdateDomainContactOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Identifier for tracking the progress of the request. To use this ID to query
-	// the operation status, use GetOperationDetail.
-	//
-	// OperationId is a required field
-	OperationId *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s UpdateDomainContactOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opUpdateDomainContact = "UpdateDomainContact"
 
@@ -100,7 +31,7 @@ const opUpdateDomainContact = "UpdateDomainContact"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/UpdateDomainContact
-func (c *Client) UpdateDomainContactRequest(input *UpdateDomainContactInput) UpdateDomainContactRequest {
+func (c *Client) UpdateDomainContactRequest(input *types.UpdateDomainContactInput) UpdateDomainContactRequest {
 	op := &aws.Operation{
 		Name:       opUpdateDomainContact,
 		HTTPMethod: "POST",
@@ -108,10 +39,10 @@ func (c *Client) UpdateDomainContactRequest(input *UpdateDomainContactInput) Upd
 	}
 
 	if input == nil {
-		input = &UpdateDomainContactInput{}
+		input = &types.UpdateDomainContactInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateDomainContactOutput{})
+	req := c.newRequest(op, input, &types.UpdateDomainContactOutput{})
 	return UpdateDomainContactRequest{Request: req, Input: input, Copy: c.UpdateDomainContactRequest}
 }
 
@@ -119,8 +50,8 @@ func (c *Client) UpdateDomainContactRequest(input *UpdateDomainContactInput) Upd
 // UpdateDomainContact API operation.
 type UpdateDomainContactRequest struct {
 	*aws.Request
-	Input *UpdateDomainContactInput
-	Copy  func(*UpdateDomainContactInput) UpdateDomainContactRequest
+	Input *types.UpdateDomainContactInput
+	Copy  func(*types.UpdateDomainContactInput) UpdateDomainContactRequest
 }
 
 // Send marshals and sends the UpdateDomainContact API request.
@@ -132,7 +63,7 @@ func (r UpdateDomainContactRequest) Send(ctx context.Context) (*UpdateDomainCont
 	}
 
 	resp := &UpdateDomainContactResponse{
-		UpdateDomainContactOutput: r.Request.Data.(*UpdateDomainContactOutput),
+		UpdateDomainContactOutput: r.Request.Data.(*types.UpdateDomainContactOutput),
 		response:                  &aws.Response{Request: r.Request},
 	}
 
@@ -142,7 +73,7 @@ func (r UpdateDomainContactRequest) Send(ctx context.Context) (*UpdateDomainCont
 // UpdateDomainContactResponse is the response type for the
 // UpdateDomainContact API operation.
 type UpdateDomainContactResponse struct {
-	*UpdateDomainContactOutput
+	*types.UpdateDomainContactOutput
 
 	response *aws.Response
 }

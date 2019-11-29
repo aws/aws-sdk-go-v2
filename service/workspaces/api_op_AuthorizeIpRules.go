@@ -6,54 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/workspaces/types"
 )
-
-type AuthorizeIpRulesInput struct {
-	_ struct{} `type:"structure"`
-
-	// The identifier of the group.
-	//
-	// GroupId is a required field
-	GroupId *string `type:"string" required:"true"`
-
-	// The rules to add to the group.
-	//
-	// UserRules is a required field
-	UserRules []IpRuleItem `type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s AuthorizeIpRulesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *AuthorizeIpRulesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "AuthorizeIpRulesInput"}
-
-	if s.GroupId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("GroupId"))
-	}
-
-	if s.UserRules == nil {
-		invalidParams.Add(aws.NewErrParamRequired("UserRules"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type AuthorizeIpRulesOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s AuthorizeIpRulesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opAuthorizeIpRules = "AuthorizeIpRules"
 
@@ -73,7 +27,7 @@ const opAuthorizeIpRules = "AuthorizeIpRules"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/AuthorizeIpRules
-func (c *Client) AuthorizeIpRulesRequest(input *AuthorizeIpRulesInput) AuthorizeIpRulesRequest {
+func (c *Client) AuthorizeIpRulesRequest(input *types.AuthorizeIpRulesInput) AuthorizeIpRulesRequest {
 	op := &aws.Operation{
 		Name:       opAuthorizeIpRules,
 		HTTPMethod: "POST",
@@ -81,10 +35,10 @@ func (c *Client) AuthorizeIpRulesRequest(input *AuthorizeIpRulesInput) Authorize
 	}
 
 	if input == nil {
-		input = &AuthorizeIpRulesInput{}
+		input = &types.AuthorizeIpRulesInput{}
 	}
 
-	req := c.newRequest(op, input, &AuthorizeIpRulesOutput{})
+	req := c.newRequest(op, input, &types.AuthorizeIpRulesOutput{})
 	return AuthorizeIpRulesRequest{Request: req, Input: input, Copy: c.AuthorizeIpRulesRequest}
 }
 
@@ -92,8 +46,8 @@ func (c *Client) AuthorizeIpRulesRequest(input *AuthorizeIpRulesInput) Authorize
 // AuthorizeIpRules API operation.
 type AuthorizeIpRulesRequest struct {
 	*aws.Request
-	Input *AuthorizeIpRulesInput
-	Copy  func(*AuthorizeIpRulesInput) AuthorizeIpRulesRequest
+	Input *types.AuthorizeIpRulesInput
+	Copy  func(*types.AuthorizeIpRulesInput) AuthorizeIpRulesRequest
 }
 
 // Send marshals and sends the AuthorizeIpRules API request.
@@ -105,7 +59,7 @@ func (r AuthorizeIpRulesRequest) Send(ctx context.Context) (*AuthorizeIpRulesRes
 	}
 
 	resp := &AuthorizeIpRulesResponse{
-		AuthorizeIpRulesOutput: r.Request.Data.(*AuthorizeIpRulesOutput),
+		AuthorizeIpRulesOutput: r.Request.Data.(*types.AuthorizeIpRulesOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -115,7 +69,7 @@ func (r AuthorizeIpRulesRequest) Send(ctx context.Context) (*AuthorizeIpRulesRes
 // AuthorizeIpRulesResponse is the response type for the
 // AuthorizeIpRules API operation.
 type AuthorizeIpRulesResponse struct {
-	*AuthorizeIpRulesOutput
+	*types.AuthorizeIpRulesOutput
 
 	response *aws.Response
 }

@@ -6,51 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/rekognition/types"
 )
-
-type DeleteCollectionInput struct {
-	_ struct{} `type:"structure"`
-
-	// ID of the collection to delete.
-	//
-	// CollectionId is a required field
-	CollectionId *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteCollectionInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteCollectionInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteCollectionInput"}
-
-	if s.CollectionId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("CollectionId"))
-	}
-	if s.CollectionId != nil && len(*s.CollectionId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("CollectionId", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteCollectionOutput struct {
-	_ struct{} `type:"structure"`
-
-	// HTTP status code that indicates the result of the operation.
-	StatusCode *int64 `type:"integer"`
-}
-
-// String returns the string representation
-func (s DeleteCollectionOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteCollection = "DeleteCollection"
 
@@ -69,7 +26,7 @@ const opDeleteCollection = "DeleteCollection"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) DeleteCollectionRequest(input *DeleteCollectionInput) DeleteCollectionRequest {
+func (c *Client) DeleteCollectionRequest(input *types.DeleteCollectionInput) DeleteCollectionRequest {
 	op := &aws.Operation{
 		Name:       opDeleteCollection,
 		HTTPMethod: "POST",
@@ -77,10 +34,10 @@ func (c *Client) DeleteCollectionRequest(input *DeleteCollectionInput) DeleteCol
 	}
 
 	if input == nil {
-		input = &DeleteCollectionInput{}
+		input = &types.DeleteCollectionInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteCollectionOutput{})
+	req := c.newRequest(op, input, &types.DeleteCollectionOutput{})
 	return DeleteCollectionRequest{Request: req, Input: input, Copy: c.DeleteCollectionRequest}
 }
 
@@ -88,8 +45,8 @@ func (c *Client) DeleteCollectionRequest(input *DeleteCollectionInput) DeleteCol
 // DeleteCollection API operation.
 type DeleteCollectionRequest struct {
 	*aws.Request
-	Input *DeleteCollectionInput
-	Copy  func(*DeleteCollectionInput) DeleteCollectionRequest
+	Input *types.DeleteCollectionInput
+	Copy  func(*types.DeleteCollectionInput) DeleteCollectionRequest
 }
 
 // Send marshals and sends the DeleteCollection API request.
@@ -101,7 +58,7 @@ func (r DeleteCollectionRequest) Send(ctx context.Context) (*DeleteCollectionRes
 	}
 
 	resp := &DeleteCollectionResponse{
-		DeleteCollectionOutput: r.Request.Data.(*DeleteCollectionOutput),
+		DeleteCollectionOutput: r.Request.Data.(*types.DeleteCollectionOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -111,7 +68,7 @@ func (r DeleteCollectionRequest) Send(ctx context.Context) (*DeleteCollectionRes
 // DeleteCollectionResponse is the response type for the
 // DeleteCollection API operation.
 type DeleteCollectionResponse struct {
-	*DeleteCollectionOutput
+	*types.DeleteCollectionOutput
 
 	response *aws.Response
 }

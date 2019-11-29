@@ -6,76 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/medialive/types"
 )
-
-type CreateInputSecurityGroupInput struct {
-	_ struct{} `type:"structure"`
-
-	Tags map[string]string `locationName:"tags" type:"map"`
-
-	WhitelistRules []InputWhitelistRuleCidr `locationName:"whitelistRules" type:"list"`
-}
-
-// String returns the string representation
-func (s CreateInputSecurityGroupInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s CreateInputSecurityGroupInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.Tags != nil {
-		v := s.Tags
-
-		metadata := protocol.Metadata{}
-		ms0 := e.Map(protocol.BodyTarget, "tags", metadata)
-		ms0.Start()
-		for k1, v1 := range v {
-			ms0.MapSetValue(k1, protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
-		}
-		ms0.End()
-
-	}
-	if s.WhitelistRules != nil {
-		v := s.WhitelistRules
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "whitelistRules", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	return nil
-}
-
-type CreateInputSecurityGroupOutput struct {
-	_ struct{} `type:"structure"`
-
-	// An Input Security Group
-	SecurityGroup *InputSecurityGroup `locationName:"securityGroup" type:"structure"`
-}
-
-// String returns the string representation
-func (s CreateInputSecurityGroupOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s CreateInputSecurityGroupOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.SecurityGroup != nil {
-		v := s.SecurityGroup
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "securityGroup", v, metadata)
-	}
-	return nil
-}
 
 const opCreateInputSecurityGroup = "CreateInputSecurityGroup"
 
@@ -92,7 +24,7 @@ const opCreateInputSecurityGroup = "CreateInputSecurityGroup"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/CreateInputSecurityGroup
-func (c *Client) CreateInputSecurityGroupRequest(input *CreateInputSecurityGroupInput) CreateInputSecurityGroupRequest {
+func (c *Client) CreateInputSecurityGroupRequest(input *types.CreateInputSecurityGroupInput) CreateInputSecurityGroupRequest {
 	op := &aws.Operation{
 		Name:       opCreateInputSecurityGroup,
 		HTTPMethod: "POST",
@@ -100,10 +32,10 @@ func (c *Client) CreateInputSecurityGroupRequest(input *CreateInputSecurityGroup
 	}
 
 	if input == nil {
-		input = &CreateInputSecurityGroupInput{}
+		input = &types.CreateInputSecurityGroupInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateInputSecurityGroupOutput{})
+	req := c.newRequest(op, input, &types.CreateInputSecurityGroupOutput{})
 	return CreateInputSecurityGroupRequest{Request: req, Input: input, Copy: c.CreateInputSecurityGroupRequest}
 }
 
@@ -111,8 +43,8 @@ func (c *Client) CreateInputSecurityGroupRequest(input *CreateInputSecurityGroup
 // CreateInputSecurityGroup API operation.
 type CreateInputSecurityGroupRequest struct {
 	*aws.Request
-	Input *CreateInputSecurityGroupInput
-	Copy  func(*CreateInputSecurityGroupInput) CreateInputSecurityGroupRequest
+	Input *types.CreateInputSecurityGroupInput
+	Copy  func(*types.CreateInputSecurityGroupInput) CreateInputSecurityGroupRequest
 }
 
 // Send marshals and sends the CreateInputSecurityGroup API request.
@@ -124,7 +56,7 @@ func (r CreateInputSecurityGroupRequest) Send(ctx context.Context) (*CreateInput
 	}
 
 	resp := &CreateInputSecurityGroupResponse{
-		CreateInputSecurityGroupOutput: r.Request.Data.(*CreateInputSecurityGroupOutput),
+		CreateInputSecurityGroupOutput: r.Request.Data.(*types.CreateInputSecurityGroupOutput),
 		response:                       &aws.Response{Request: r.Request},
 	}
 
@@ -134,7 +66,7 @@ func (r CreateInputSecurityGroupRequest) Send(ctx context.Context) (*CreateInput
 // CreateInputSecurityGroupResponse is the response type for the
 // CreateInputSecurityGroup API operation.
 type CreateInputSecurityGroupResponse struct {
-	*CreateInputSecurityGroupOutput
+	*types.CreateInputSecurityGroupOutput
 
 	response *aws.Response
 }

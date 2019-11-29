@@ -6,67 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/securityhub/types"
 )
-
-type EnableSecurityHubInput struct {
-	_ struct{} `type:"structure"`
-
-	// The tags to add to the Hub resource when you enable Security Hub.
-	Tags map[string]string `min:"1" type:"map"`
-}
-
-// String returns the string representation
-func (s EnableSecurityHubInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *EnableSecurityHubInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "EnableSecurityHubInput"}
-	if s.Tags != nil && len(s.Tags) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Tags", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s EnableSecurityHubInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.Tags != nil {
-		v := s.Tags
-
-		metadata := protocol.Metadata{}
-		ms0 := e.Map(protocol.BodyTarget, "Tags", metadata)
-		ms0.Start()
-		for k1, v1 := range v {
-			ms0.MapSetValue(k1, protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
-		}
-		ms0.End()
-
-	}
-	return nil
-}
-
-type EnableSecurityHubOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s EnableSecurityHubOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s EnableSecurityHubOutput) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
 
 const opEnableSecurityHub = "EnableSecurityHub"
 
@@ -87,7 +28,7 @@ const opEnableSecurityHub = "EnableSecurityHub"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/EnableSecurityHub
-func (c *Client) EnableSecurityHubRequest(input *EnableSecurityHubInput) EnableSecurityHubRequest {
+func (c *Client) EnableSecurityHubRequest(input *types.EnableSecurityHubInput) EnableSecurityHubRequest {
 	op := &aws.Operation{
 		Name:       opEnableSecurityHub,
 		HTTPMethod: "POST",
@@ -95,10 +36,10 @@ func (c *Client) EnableSecurityHubRequest(input *EnableSecurityHubInput) EnableS
 	}
 
 	if input == nil {
-		input = &EnableSecurityHubInput{}
+		input = &types.EnableSecurityHubInput{}
 	}
 
-	req := c.newRequest(op, input, &EnableSecurityHubOutput{})
+	req := c.newRequest(op, input, &types.EnableSecurityHubOutput{})
 	return EnableSecurityHubRequest{Request: req, Input: input, Copy: c.EnableSecurityHubRequest}
 }
 
@@ -106,8 +47,8 @@ func (c *Client) EnableSecurityHubRequest(input *EnableSecurityHubInput) EnableS
 // EnableSecurityHub API operation.
 type EnableSecurityHubRequest struct {
 	*aws.Request
-	Input *EnableSecurityHubInput
-	Copy  func(*EnableSecurityHubInput) EnableSecurityHubRequest
+	Input *types.EnableSecurityHubInput
+	Copy  func(*types.EnableSecurityHubInput) EnableSecurityHubRequest
 }
 
 // Send marshals and sends the EnableSecurityHub API request.
@@ -119,7 +60,7 @@ func (r EnableSecurityHubRequest) Send(ctx context.Context) (*EnableSecurityHubR
 	}
 
 	resp := &EnableSecurityHubResponse{
-		EnableSecurityHubOutput: r.Request.Data.(*EnableSecurityHubOutput),
+		EnableSecurityHubOutput: r.Request.Data.(*types.EnableSecurityHubOutput),
 		response:                &aws.Response{Request: r.Request},
 	}
 
@@ -129,7 +70,7 @@ func (r EnableSecurityHubRequest) Send(ctx context.Context) (*EnableSecurityHubR
 // EnableSecurityHubResponse is the response type for the
 // EnableSecurityHub API operation.
 type EnableSecurityHubResponse struct {
-	*EnableSecurityHubOutput
+	*types.EnableSecurityHubOutput
 
 	response *aws.Response
 }

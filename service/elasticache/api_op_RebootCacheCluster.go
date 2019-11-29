@@ -6,59 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/elasticache/types"
 )
-
-// Represents the input of a RebootCacheCluster operation.
-type RebootCacheClusterInput struct {
-	_ struct{} `type:"structure"`
-
-	// The cluster identifier. This parameter is stored as a lowercase string.
-	//
-	// CacheClusterId is a required field
-	CacheClusterId *string `type:"string" required:"true"`
-
-	// A list of cache node IDs to reboot. A node ID is a numeric identifier (0001,
-	// 0002, etc.). To reboot an entire cluster, specify all of the cache node IDs.
-	//
-	// CacheNodeIdsToReboot is a required field
-	CacheNodeIdsToReboot []string `locationNameList:"CacheNodeId" type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s RebootCacheClusterInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *RebootCacheClusterInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "RebootCacheClusterInput"}
-
-	if s.CacheClusterId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("CacheClusterId"))
-	}
-
-	if s.CacheNodeIdsToReboot == nil {
-		invalidParams.Add(aws.NewErrParamRequired("CacheNodeIdsToReboot"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type RebootCacheClusterOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Contains all of the attributes of a specific cluster.
-	CacheCluster *CacheCluster `type:"structure"`
-}
-
-// String returns the string representation
-func (s RebootCacheClusterOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opRebootCacheCluster = "RebootCacheCluster"
 
@@ -91,7 +40,7 @@ const opRebootCacheCluster = "RebootCacheCluster"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/RebootCacheCluster
-func (c *Client) RebootCacheClusterRequest(input *RebootCacheClusterInput) RebootCacheClusterRequest {
+func (c *Client) RebootCacheClusterRequest(input *types.RebootCacheClusterInput) RebootCacheClusterRequest {
 	op := &aws.Operation{
 		Name:       opRebootCacheCluster,
 		HTTPMethod: "POST",
@@ -99,10 +48,10 @@ func (c *Client) RebootCacheClusterRequest(input *RebootCacheClusterInput) Reboo
 	}
 
 	if input == nil {
-		input = &RebootCacheClusterInput{}
+		input = &types.RebootCacheClusterInput{}
 	}
 
-	req := c.newRequest(op, input, &RebootCacheClusterOutput{})
+	req := c.newRequest(op, input, &types.RebootCacheClusterOutput{})
 	return RebootCacheClusterRequest{Request: req, Input: input, Copy: c.RebootCacheClusterRequest}
 }
 
@@ -110,8 +59,8 @@ func (c *Client) RebootCacheClusterRequest(input *RebootCacheClusterInput) Reboo
 // RebootCacheCluster API operation.
 type RebootCacheClusterRequest struct {
 	*aws.Request
-	Input *RebootCacheClusterInput
-	Copy  func(*RebootCacheClusterInput) RebootCacheClusterRequest
+	Input *types.RebootCacheClusterInput
+	Copy  func(*types.RebootCacheClusterInput) RebootCacheClusterRequest
 }
 
 // Send marshals and sends the RebootCacheCluster API request.
@@ -123,7 +72,7 @@ func (r RebootCacheClusterRequest) Send(ctx context.Context) (*RebootCacheCluste
 	}
 
 	resp := &RebootCacheClusterResponse{
-		RebootCacheClusterOutput: r.Request.Data.(*RebootCacheClusterOutput),
+		RebootCacheClusterOutput: r.Request.Data.(*types.RebootCacheClusterOutput),
 		response:                 &aws.Response{Request: r.Request},
 	}
 
@@ -133,7 +82,7 @@ func (r RebootCacheClusterRequest) Send(ctx context.Context) (*RebootCacheCluste
 // RebootCacheClusterResponse is the response type for the
 // RebootCacheCluster API operation.
 type RebootCacheClusterResponse struct {
-	*RebootCacheClusterOutput
+	*types.RebootCacheClusterOutput
 
 	response *aws.Response
 }

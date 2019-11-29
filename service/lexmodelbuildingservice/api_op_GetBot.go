@@ -4,259 +4,10 @@ package lexmodelbuildingservice
 
 import (
 	"context"
-	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/lexmodelbuildingservice/types"
 )
-
-type GetBotInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the bot. The name is case sensitive.
-	//
-	// Name is a required field
-	Name *string `location:"uri" locationName:"name" min:"2" type:"string" required:"true"`
-
-	// The version or alias of the bot.
-	//
-	// VersionOrAlias is a required field
-	VersionOrAlias *string `location:"uri" locationName:"versionoralias" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetBotInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetBotInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetBotInput"}
-
-	if s.Name == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Name"))
-	}
-	if s.Name != nil && len(*s.Name) < 2 {
-		invalidParams.Add(aws.NewErrParamMinLen("Name", 2))
-	}
-
-	if s.VersionOrAlias == nil {
-		invalidParams.Add(aws.NewErrParamRequired("VersionOrAlias"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetBotInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.Name != nil {
-		v := *s.Name
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.VersionOrAlias != nil {
-		v := *s.VersionOrAlias
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "versionoralias", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type GetBotOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The message that Amazon Lex returns when the user elects to end the conversation
-	// without completing it. For more information, see PutBot.
-	AbortStatement *Statement `locationName:"abortStatement" type:"structure"`
-
-	// Checksum of the bot used to identify a specific revision of the bot's $LATEST
-	// version.
-	Checksum *string `locationName:"checksum" type:"string"`
-
-	// For each Amazon Lex bot created with the Amazon Lex Model Building Service,
-	// you must specify whether your use of Amazon Lex is related to a website,
-	// program, or other application that is directed or targeted, in whole or in
-	// part, to children under age 13 and subject to the Children's Online Privacy
-	// Protection Act (COPPA) by specifying true or false in the childDirected field.
-	// By specifying true in the childDirected field, you confirm that your use
-	// of Amazon Lex is related to a website, program, or other application that
-	// is directed or targeted, in whole or in part, to children under age 13 and
-	// subject to COPPA. By specifying false in the childDirected field, you confirm
-	// that your use of Amazon Lex is not related to a website, program, or other
-	// application that is directed or targeted, in whole or in part, to children
-	// under age 13 and subject to COPPA. You may not specify a default value for
-	// the childDirected field that does not accurately reflect whether your use
-	// of Amazon Lex is related to a website, program, or other application that
-	// is directed or targeted, in whole or in part, to children under age 13 and
-	// subject to COPPA.
-	//
-	// If your use of Amazon Lex relates to a website, program, or other application
-	// that is directed in whole or in part, to children under age 13, you must
-	// obtain any required verifiable parental consent under COPPA. For information
-	// regarding the use of Amazon Lex in connection with websites, programs, or
-	// other applications that are directed or targeted, in whole or in part, to
-	// children under age 13, see the Amazon Lex FAQ. (https://aws.amazon.com/lex/faqs#data-security)
-	ChildDirected *bool `locationName:"childDirected" type:"boolean"`
-
-	// The message Amazon Lex uses when it doesn't understand the user's request.
-	// For more information, see PutBot.
-	ClarificationPrompt *Prompt `locationName:"clarificationPrompt" type:"structure"`
-
-	// The date that the bot was created.
-	CreatedDate *time.Time `locationName:"createdDate" type:"timestamp"`
-
-	// A description of the bot.
-	Description *string `locationName:"description" type:"string"`
-
-	// If status is FAILED, Amazon Lex explains why it failed to build the bot.
-	FailureReason *string `locationName:"failureReason" type:"string"`
-
-	// The maximum time in seconds that Amazon Lex retains the data gathered in
-	// a conversation. For more information, see PutBot.
-	IdleSessionTTLInSeconds *int64 `locationName:"idleSessionTTLInSeconds" min:"60" type:"integer"`
-
-	// An array of intent objects. For more information, see PutBot.
-	Intents []Intent `locationName:"intents" type:"list"`
-
-	// The date that the bot was updated. When you create a resource, the creation
-	// date and last updated date are the same.
-	LastUpdatedDate *time.Time `locationName:"lastUpdatedDate" type:"timestamp"`
-
-	// The target locale for the bot.
-	Locale Locale `locationName:"locale" type:"string" enum:"true"`
-
-	// The name of the bot.
-	Name *string `locationName:"name" min:"2" type:"string"`
-
-	// The status of the bot. If the bot is ready to run, the status is READY. If
-	// there was a problem with building the bot, the status is FAILED and the failureReason
-	// explains why the bot did not build. If the bot was saved but not built, the
-	// status is NOT BUILT.
-	Status Status `locationName:"status" type:"string" enum:"true"`
-
-	// The version of the bot. For a new bot, the version is always $LATEST.
-	Version *string `locationName:"version" min:"1" type:"string"`
-
-	// The Amazon Polly voice ID that Amazon Lex uses for voice interaction with
-	// the user. For more information, see PutBot.
-	VoiceId *string `locationName:"voiceId" type:"string"`
-}
-
-// String returns the string representation
-func (s GetBotOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetBotOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.AbortStatement != nil {
-		v := s.AbortStatement
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "abortStatement", v, metadata)
-	}
-	if s.Checksum != nil {
-		v := *s.Checksum
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "checksum", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.ChildDirected != nil {
-		v := *s.ChildDirected
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "childDirected", protocol.BoolValue(v), metadata)
-	}
-	if s.ClarificationPrompt != nil {
-		v := s.ClarificationPrompt
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "clarificationPrompt", v, metadata)
-	}
-	if s.CreatedDate != nil {
-		v := *s.CreatedDate
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "createdDate",
-			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
-	}
-	if s.Description != nil {
-		v := *s.Description
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "description", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.FailureReason != nil {
-		v := *s.FailureReason
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "failureReason", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.IdleSessionTTLInSeconds != nil {
-		v := *s.IdleSessionTTLInSeconds
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "idleSessionTTLInSeconds", protocol.Int64Value(v), metadata)
-	}
-	if s.Intents != nil {
-		v := s.Intents
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "intents", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	if s.LastUpdatedDate != nil {
-		v := *s.LastUpdatedDate
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "lastUpdatedDate",
-			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
-	}
-	if len(s.Locale) > 0 {
-		v := s.Locale
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "locale", protocol.QuotedValue{ValueMarshaler: v}, metadata)
-	}
-	if s.Name != nil {
-		v := *s.Name
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if len(s.Status) > 0 {
-		v := s.Status
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "status", protocol.QuotedValue{ValueMarshaler: v}, metadata)
-	}
-	if s.Version != nil {
-		v := *s.Version
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "version", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.VoiceId != nil {
-		v := *s.VoiceId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "voiceId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opGetBot = "GetBot"
 
@@ -276,7 +27,7 @@ const opGetBot = "GetBot"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/GetBot
-func (c *Client) GetBotRequest(input *GetBotInput) GetBotRequest {
+func (c *Client) GetBotRequest(input *types.GetBotInput) GetBotRequest {
 	op := &aws.Operation{
 		Name:       opGetBot,
 		HTTPMethod: "GET",
@@ -284,10 +35,10 @@ func (c *Client) GetBotRequest(input *GetBotInput) GetBotRequest {
 	}
 
 	if input == nil {
-		input = &GetBotInput{}
+		input = &types.GetBotInput{}
 	}
 
-	req := c.newRequest(op, input, &GetBotOutput{})
+	req := c.newRequest(op, input, &types.GetBotOutput{})
 	return GetBotRequest{Request: req, Input: input, Copy: c.GetBotRequest}
 }
 
@@ -295,8 +46,8 @@ func (c *Client) GetBotRequest(input *GetBotInput) GetBotRequest {
 // GetBot API operation.
 type GetBotRequest struct {
 	*aws.Request
-	Input *GetBotInput
-	Copy  func(*GetBotInput) GetBotRequest
+	Input *types.GetBotInput
+	Copy  func(*types.GetBotInput) GetBotRequest
 }
 
 // Send marshals and sends the GetBot API request.
@@ -308,7 +59,7 @@ func (r GetBotRequest) Send(ctx context.Context) (*GetBotResponse, error) {
 	}
 
 	resp := &GetBotResponse{
-		GetBotOutput: r.Request.Data.(*GetBotOutput),
+		GetBotOutput: r.Request.Data.(*types.GetBotOutput),
 		response:     &aws.Response{Request: r.Request},
 	}
 
@@ -318,7 +69,7 @@ func (r GetBotRequest) Send(ctx context.Context) (*GetBotResponse, error) {
 // GetBotResponse is the response type for the
 // GetBot API operation.
 type GetBotResponse struct {
-	*GetBotOutput
+	*types.GetBotOutput
 
 	response *aws.Response
 }

@@ -6,42 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/directoryservice/types"
 )
-
-// Describes event topics.
-type DescribeEventTopicsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Directory ID for which to get the list of associated SNS topics. If this
-	// member is null, associations for all Directory IDs are returned.
-	DirectoryId *string `type:"string"`
-
-	// A list of SNS topic names for which to obtain the information. If this member
-	// is null, all associations for the specified Directory ID are returned.
-	//
-	// An empty list results in an InvalidParameterException being thrown.
-	TopicNames []string `type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeEventTopicsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// The result of a DescribeEventTopic request.
-type DescribeEventTopicsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A list of SNS topic names that receive status messages from the specified
-	// Directory ID.
-	EventTopics []EventTopic `type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeEventTopicsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeEventTopics = "DescribeEventTopics"
 
@@ -62,7 +28,7 @@ const opDescribeEventTopics = "DescribeEventTopics"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DescribeEventTopics
-func (c *Client) DescribeEventTopicsRequest(input *DescribeEventTopicsInput) DescribeEventTopicsRequest {
+func (c *Client) DescribeEventTopicsRequest(input *types.DescribeEventTopicsInput) DescribeEventTopicsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeEventTopics,
 		HTTPMethod: "POST",
@@ -70,10 +36,10 @@ func (c *Client) DescribeEventTopicsRequest(input *DescribeEventTopicsInput) Des
 	}
 
 	if input == nil {
-		input = &DescribeEventTopicsInput{}
+		input = &types.DescribeEventTopicsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeEventTopicsOutput{})
+	req := c.newRequest(op, input, &types.DescribeEventTopicsOutput{})
 	return DescribeEventTopicsRequest{Request: req, Input: input, Copy: c.DescribeEventTopicsRequest}
 }
 
@@ -81,8 +47,8 @@ func (c *Client) DescribeEventTopicsRequest(input *DescribeEventTopicsInput) Des
 // DescribeEventTopics API operation.
 type DescribeEventTopicsRequest struct {
 	*aws.Request
-	Input *DescribeEventTopicsInput
-	Copy  func(*DescribeEventTopicsInput) DescribeEventTopicsRequest
+	Input *types.DescribeEventTopicsInput
+	Copy  func(*types.DescribeEventTopicsInput) DescribeEventTopicsRequest
 }
 
 // Send marshals and sends the DescribeEventTopics API request.
@@ -94,7 +60,7 @@ func (r DescribeEventTopicsRequest) Send(ctx context.Context) (*DescribeEventTop
 	}
 
 	resp := &DescribeEventTopicsResponse{
-		DescribeEventTopicsOutput: r.Request.Data.(*DescribeEventTopicsOutput),
+		DescribeEventTopicsOutput: r.Request.Data.(*types.DescribeEventTopicsOutput),
 		response:                  &aws.Response{Request: r.Request},
 	}
 
@@ -104,7 +70,7 @@ func (r DescribeEventTopicsRequest) Send(ctx context.Context) (*DescribeEventTop
 // DescribeEventTopicsResponse is the response type for the
 // DescribeEventTopics API operation.
 type DescribeEventTopicsResponse struct {
-	*DescribeEventTopicsOutput
+	*types.DescribeEventTopicsOutput
 
 	response *aws.Response
 }

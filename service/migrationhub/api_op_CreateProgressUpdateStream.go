@@ -6,52 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/migrationhub/types"
 )
-
-type CreateProgressUpdateStreamInput struct {
-	_ struct{} `type:"structure"`
-
-	// Optional boolean flag to indicate whether any effect should take place. Used
-	// to test if the caller has permission to make the call.
-	DryRun *bool `type:"boolean"`
-
-	// The name of the ProgressUpdateStream.
-	//
-	// ProgressUpdateStreamName is a required field
-	ProgressUpdateStreamName *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s CreateProgressUpdateStreamInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateProgressUpdateStreamInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateProgressUpdateStreamInput"}
-
-	if s.ProgressUpdateStreamName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ProgressUpdateStreamName"))
-	}
-	if s.ProgressUpdateStreamName != nil && len(*s.ProgressUpdateStreamName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ProgressUpdateStreamName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type CreateProgressUpdateStreamOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s CreateProgressUpdateStreamOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCreateProgressUpdateStream = "CreateProgressUpdateStream"
 
@@ -72,7 +28,7 @@ const opCreateProgressUpdateStream = "CreateProgressUpdateStream"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/CreateProgressUpdateStream
-func (c *Client) CreateProgressUpdateStreamRequest(input *CreateProgressUpdateStreamInput) CreateProgressUpdateStreamRequest {
+func (c *Client) CreateProgressUpdateStreamRequest(input *types.CreateProgressUpdateStreamInput) CreateProgressUpdateStreamRequest {
 	op := &aws.Operation{
 		Name:       opCreateProgressUpdateStream,
 		HTTPMethod: "POST",
@@ -80,10 +36,10 @@ func (c *Client) CreateProgressUpdateStreamRequest(input *CreateProgressUpdateSt
 	}
 
 	if input == nil {
-		input = &CreateProgressUpdateStreamInput{}
+		input = &types.CreateProgressUpdateStreamInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateProgressUpdateStreamOutput{})
+	req := c.newRequest(op, input, &types.CreateProgressUpdateStreamOutput{})
 	return CreateProgressUpdateStreamRequest{Request: req, Input: input, Copy: c.CreateProgressUpdateStreamRequest}
 }
 
@@ -91,8 +47,8 @@ func (c *Client) CreateProgressUpdateStreamRequest(input *CreateProgressUpdateSt
 // CreateProgressUpdateStream API operation.
 type CreateProgressUpdateStreamRequest struct {
 	*aws.Request
-	Input *CreateProgressUpdateStreamInput
-	Copy  func(*CreateProgressUpdateStreamInput) CreateProgressUpdateStreamRequest
+	Input *types.CreateProgressUpdateStreamInput
+	Copy  func(*types.CreateProgressUpdateStreamInput) CreateProgressUpdateStreamRequest
 }
 
 // Send marshals and sends the CreateProgressUpdateStream API request.
@@ -104,7 +60,7 @@ func (r CreateProgressUpdateStreamRequest) Send(ctx context.Context) (*CreatePro
 	}
 
 	resp := &CreateProgressUpdateStreamResponse{
-		CreateProgressUpdateStreamOutput: r.Request.Data.(*CreateProgressUpdateStreamOutput),
+		CreateProgressUpdateStreamOutput: r.Request.Data.(*types.CreateProgressUpdateStreamOutput),
 		response:                         &aws.Response{Request: r.Request},
 	}
 
@@ -114,7 +70,7 @@ func (r CreateProgressUpdateStreamRequest) Send(ctx context.Context) (*CreatePro
 // CreateProgressUpdateStreamResponse is the response type for the
 // CreateProgressUpdateStream API operation.
 type CreateProgressUpdateStreamResponse struct {
-	*CreateProgressUpdateStreamOutput
+	*types.CreateProgressUpdateStreamOutput
 
 	response *aws.Response
 }

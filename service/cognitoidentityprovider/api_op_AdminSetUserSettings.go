@@ -4,84 +4,10 @@ package cognitoidentityprovider
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/types"
 )
-
-// You can use this parameter to set an MFA configuration that uses the SMS
-// delivery medium.
-type AdminSetUserSettingsInput struct {
-	_ struct{} `type:"structure"`
-
-	// You can use this parameter only to set an SMS configuration that uses SMS
-	// for delivery.
-	//
-	// MFAOptions is a required field
-	MFAOptions []MFAOptionType `type:"list" required:"true"`
-
-	// The ID of the user pool that contains the user that you are setting options
-	// for.
-	//
-	// UserPoolId is a required field
-	UserPoolId *string `min:"1" type:"string" required:"true"`
-
-	// The user name of the user that you are setting options for.
-	//
-	// Username is a required field
-	Username *string `min:"1" type:"string" required:"true" sensitive:"true"`
-}
-
-// String returns the string representation
-func (s AdminSetUserSettingsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *AdminSetUserSettingsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "AdminSetUserSettingsInput"}
-
-	if s.MFAOptions == nil {
-		invalidParams.Add(aws.NewErrParamRequired("MFAOptions"))
-	}
-
-	if s.UserPoolId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("UserPoolId"))
-	}
-	if s.UserPoolId != nil && len(*s.UserPoolId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("UserPoolId", 1))
-	}
-
-	if s.Username == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Username"))
-	}
-	if s.Username != nil && len(*s.Username) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Username", 1))
-	}
-	if s.MFAOptions != nil {
-		for i, v := range s.MFAOptions {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "MFAOptions", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Represents the response from the server to set user settings as an administrator.
-type AdminSetUserSettingsOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s AdminSetUserSettingsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opAdminSetUserSettings = "AdminSetUserSettings"
 
@@ -100,7 +26,7 @@ const opAdminSetUserSettings = "AdminSetUserSettings"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AdminSetUserSettings
-func (c *Client) AdminSetUserSettingsRequest(input *AdminSetUserSettingsInput) AdminSetUserSettingsRequest {
+func (c *Client) AdminSetUserSettingsRequest(input *types.AdminSetUserSettingsInput) AdminSetUserSettingsRequest {
 	op := &aws.Operation{
 		Name:       opAdminSetUserSettings,
 		HTTPMethod: "POST",
@@ -108,10 +34,10 @@ func (c *Client) AdminSetUserSettingsRequest(input *AdminSetUserSettingsInput) A
 	}
 
 	if input == nil {
-		input = &AdminSetUserSettingsInput{}
+		input = &types.AdminSetUserSettingsInput{}
 	}
 
-	req := c.newRequest(op, input, &AdminSetUserSettingsOutput{})
+	req := c.newRequest(op, input, &types.AdminSetUserSettingsOutput{})
 	return AdminSetUserSettingsRequest{Request: req, Input: input, Copy: c.AdminSetUserSettingsRequest}
 }
 
@@ -119,8 +45,8 @@ func (c *Client) AdminSetUserSettingsRequest(input *AdminSetUserSettingsInput) A
 // AdminSetUserSettings API operation.
 type AdminSetUserSettingsRequest struct {
 	*aws.Request
-	Input *AdminSetUserSettingsInput
-	Copy  func(*AdminSetUserSettingsInput) AdminSetUserSettingsRequest
+	Input *types.AdminSetUserSettingsInput
+	Copy  func(*types.AdminSetUserSettingsInput) AdminSetUserSettingsRequest
 }
 
 // Send marshals and sends the AdminSetUserSettings API request.
@@ -132,7 +58,7 @@ func (r AdminSetUserSettingsRequest) Send(ctx context.Context) (*AdminSetUserSet
 	}
 
 	resp := &AdminSetUserSettingsResponse{
-		AdminSetUserSettingsOutput: r.Request.Data.(*AdminSetUserSettingsOutput),
+		AdminSetUserSettingsOutput: r.Request.Data.(*types.AdminSetUserSettingsOutput),
 		response:                   &aws.Response{Request: r.Request},
 	}
 
@@ -142,7 +68,7 @@ func (r AdminSetUserSettingsRequest) Send(ctx context.Context) (*AdminSetUserSet
 // AdminSetUserSettingsResponse is the response type for the
 // AdminSetUserSettings API operation.
 type AdminSetUserSettingsResponse struct {
-	*AdminSetUserSettingsOutput
+	*types.AdminSetUserSettingsOutput
 
 	response *aws.Response
 }

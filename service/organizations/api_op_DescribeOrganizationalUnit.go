@@ -6,54 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/organizations/types"
 )
-
-type DescribeOrganizationalUnitInput struct {
-	_ struct{} `type:"structure"`
-
-	// The unique identifier (ID) of the organizational unit that you want details
-	// about. You can get the ID from the ListOrganizationalUnitsForParent operation.
-	//
-	// The regex pattern (http://wikipedia.org/wiki/regex) for an organizational
-	// unit ID string requires "ou-" followed by from 4 to 32 lower-case letters
-	// or digits (the ID of the root that contains the OU) followed by a second
-	// "-" dash and from 8 to 32 additional lower-case letters or digits.
-	//
-	// OrganizationalUnitId is a required field
-	OrganizationalUnitId *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeOrganizationalUnitInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeOrganizationalUnitInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeOrganizationalUnitInput"}
-
-	if s.OrganizationalUnitId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("OrganizationalUnitId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribeOrganizationalUnitOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A structure that contains details about the specified OU.
-	OrganizationalUnit *OrganizationalUnit `type:"structure"`
-}
-
-// String returns the string representation
-func (s DescribeOrganizationalUnitOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeOrganizationalUnit = "DescribeOrganizationalUnit"
 
@@ -72,7 +26,7 @@ const opDescribeOrganizationalUnit = "DescribeOrganizationalUnit"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/DescribeOrganizationalUnit
-func (c *Client) DescribeOrganizationalUnitRequest(input *DescribeOrganizationalUnitInput) DescribeOrganizationalUnitRequest {
+func (c *Client) DescribeOrganizationalUnitRequest(input *types.DescribeOrganizationalUnitInput) DescribeOrganizationalUnitRequest {
 	op := &aws.Operation{
 		Name:       opDescribeOrganizationalUnit,
 		HTTPMethod: "POST",
@@ -80,10 +34,10 @@ func (c *Client) DescribeOrganizationalUnitRequest(input *DescribeOrganizational
 	}
 
 	if input == nil {
-		input = &DescribeOrganizationalUnitInput{}
+		input = &types.DescribeOrganizationalUnitInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeOrganizationalUnitOutput{})
+	req := c.newRequest(op, input, &types.DescribeOrganizationalUnitOutput{})
 	return DescribeOrganizationalUnitRequest{Request: req, Input: input, Copy: c.DescribeOrganizationalUnitRequest}
 }
 
@@ -91,8 +45,8 @@ func (c *Client) DescribeOrganizationalUnitRequest(input *DescribeOrganizational
 // DescribeOrganizationalUnit API operation.
 type DescribeOrganizationalUnitRequest struct {
 	*aws.Request
-	Input *DescribeOrganizationalUnitInput
-	Copy  func(*DescribeOrganizationalUnitInput) DescribeOrganizationalUnitRequest
+	Input *types.DescribeOrganizationalUnitInput
+	Copy  func(*types.DescribeOrganizationalUnitInput) DescribeOrganizationalUnitRequest
 }
 
 // Send marshals and sends the DescribeOrganizationalUnit API request.
@@ -104,7 +58,7 @@ func (r DescribeOrganizationalUnitRequest) Send(ctx context.Context) (*DescribeO
 	}
 
 	resp := &DescribeOrganizationalUnitResponse{
-		DescribeOrganizationalUnitOutput: r.Request.Data.(*DescribeOrganizationalUnitOutput),
+		DescribeOrganizationalUnitOutput: r.Request.Data.(*types.DescribeOrganizationalUnitOutput),
 		response:                         &aws.Response{Request: r.Request},
 	}
 
@@ -114,7 +68,7 @@ func (r DescribeOrganizationalUnitRequest) Send(ctx context.Context) (*DescribeO
 // DescribeOrganizationalUnitResponse is the response type for the
 // DescribeOrganizationalUnit API operation.
 type DescribeOrganizationalUnitResponse struct {
-	*DescribeOrganizationalUnitOutput
+	*types.DescribeOrganizationalUnitOutput
 
 	response *aws.Response
 }

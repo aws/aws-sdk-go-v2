@@ -6,54 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/ec2query"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-// Contains the parameters for DeleteVpnGateway.
-type DeleteVpnGatewayInput struct {
-	_ struct{} `type:"structure"`
-
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have
-	// the required permissions, the error response is DryRunOperation. Otherwise,
-	// it is UnauthorizedOperation.
-	DryRun *bool `locationName:"dryRun" type:"boolean"`
-
-	// The ID of the virtual private gateway.
-	//
-	// VpnGatewayId is a required field
-	VpnGatewayId *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteVpnGatewayInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteVpnGatewayInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteVpnGatewayInput"}
-
-	if s.VpnGatewayId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("VpnGatewayId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteVpnGatewayOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteVpnGatewayOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteVpnGateway = "DeleteVpnGateway"
 
@@ -74,7 +30,7 @@ const opDeleteVpnGateway = "DeleteVpnGateway"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteVpnGateway
-func (c *Client) DeleteVpnGatewayRequest(input *DeleteVpnGatewayInput) DeleteVpnGatewayRequest {
+func (c *Client) DeleteVpnGatewayRequest(input *types.DeleteVpnGatewayInput) DeleteVpnGatewayRequest {
 	op := &aws.Operation{
 		Name:       opDeleteVpnGateway,
 		HTTPMethod: "POST",
@@ -82,10 +38,10 @@ func (c *Client) DeleteVpnGatewayRequest(input *DeleteVpnGatewayInput) DeleteVpn
 	}
 
 	if input == nil {
-		input = &DeleteVpnGatewayInput{}
+		input = &types.DeleteVpnGatewayInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteVpnGatewayOutput{})
+	req := c.newRequest(op, input, &types.DeleteVpnGatewayOutput{})
 	req.Handlers.Unmarshal.Remove(ec2query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return DeleteVpnGatewayRequest{Request: req, Input: input, Copy: c.DeleteVpnGatewayRequest}
@@ -95,8 +51,8 @@ func (c *Client) DeleteVpnGatewayRequest(input *DeleteVpnGatewayInput) DeleteVpn
 // DeleteVpnGateway API operation.
 type DeleteVpnGatewayRequest struct {
 	*aws.Request
-	Input *DeleteVpnGatewayInput
-	Copy  func(*DeleteVpnGatewayInput) DeleteVpnGatewayRequest
+	Input *types.DeleteVpnGatewayInput
+	Copy  func(*types.DeleteVpnGatewayInput) DeleteVpnGatewayRequest
 }
 
 // Send marshals and sends the DeleteVpnGateway API request.
@@ -108,7 +64,7 @@ func (r DeleteVpnGatewayRequest) Send(ctx context.Context) (*DeleteVpnGatewayRes
 	}
 
 	resp := &DeleteVpnGatewayResponse{
-		DeleteVpnGatewayOutput: r.Request.Data.(*DeleteVpnGatewayOutput),
+		DeleteVpnGatewayOutput: r.Request.Data.(*types.DeleteVpnGatewayOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -118,7 +74,7 @@ func (r DeleteVpnGatewayRequest) Send(ctx context.Context) (*DeleteVpnGatewayRes
 // DeleteVpnGatewayResponse is the response type for the
 // DeleteVpnGateway API operation.
 type DeleteVpnGatewayResponse struct {
-	*DeleteVpnGatewayOutput
+	*types.DeleteVpnGatewayOutput
 
 	response *aws.Response
 }

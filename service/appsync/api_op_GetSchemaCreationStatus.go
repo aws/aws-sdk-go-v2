@@ -6,83 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/appsync/types"
 )
-
-type GetSchemaCreationStatusInput struct {
-	_ struct{} `type:"structure"`
-
-	// The API ID.
-	//
-	// ApiId is a required field
-	ApiId *string `location:"uri" locationName:"apiId" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetSchemaCreationStatusInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetSchemaCreationStatusInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetSchemaCreationStatusInput"}
-
-	if s.ApiId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ApiId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetSchemaCreationStatusInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.ApiId != nil {
-		v := *s.ApiId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "apiId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type GetSchemaCreationStatusOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Detailed information about the status of the schema creation operation.
-	Details *string `locationName:"details" type:"string"`
-
-	// The current state of the schema (PROCESSING, FAILED, SUCCESS, or NOT_APPLICABLE).
-	// When the schema is in the ACTIVE state, you can add data.
-	Status SchemaStatus `locationName:"status" type:"string" enum:"true"`
-}
-
-// String returns the string representation
-func (s GetSchemaCreationStatusOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetSchemaCreationStatusOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.Details != nil {
-		v := *s.Details
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "details", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if len(s.Status) > 0 {
-		v := s.Status
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "status", protocol.QuotedValue{ValueMarshaler: v}, metadata)
-	}
-	return nil
-}
 
 const opGetSchemaCreationStatus = "GetSchemaCreationStatus"
 
@@ -99,7 +24,7 @@ const opGetSchemaCreationStatus = "GetSchemaCreationStatus"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/GetSchemaCreationStatus
-func (c *Client) GetSchemaCreationStatusRequest(input *GetSchemaCreationStatusInput) GetSchemaCreationStatusRequest {
+func (c *Client) GetSchemaCreationStatusRequest(input *types.GetSchemaCreationStatusInput) GetSchemaCreationStatusRequest {
 	op := &aws.Operation{
 		Name:       opGetSchemaCreationStatus,
 		HTTPMethod: "GET",
@@ -107,10 +32,10 @@ func (c *Client) GetSchemaCreationStatusRequest(input *GetSchemaCreationStatusIn
 	}
 
 	if input == nil {
-		input = &GetSchemaCreationStatusInput{}
+		input = &types.GetSchemaCreationStatusInput{}
 	}
 
-	req := c.newRequest(op, input, &GetSchemaCreationStatusOutput{})
+	req := c.newRequest(op, input, &types.GetSchemaCreationStatusOutput{})
 	return GetSchemaCreationStatusRequest{Request: req, Input: input, Copy: c.GetSchemaCreationStatusRequest}
 }
 
@@ -118,8 +43,8 @@ func (c *Client) GetSchemaCreationStatusRequest(input *GetSchemaCreationStatusIn
 // GetSchemaCreationStatus API operation.
 type GetSchemaCreationStatusRequest struct {
 	*aws.Request
-	Input *GetSchemaCreationStatusInput
-	Copy  func(*GetSchemaCreationStatusInput) GetSchemaCreationStatusRequest
+	Input *types.GetSchemaCreationStatusInput
+	Copy  func(*types.GetSchemaCreationStatusInput) GetSchemaCreationStatusRequest
 }
 
 // Send marshals and sends the GetSchemaCreationStatus API request.
@@ -131,7 +56,7 @@ func (r GetSchemaCreationStatusRequest) Send(ctx context.Context) (*GetSchemaCre
 	}
 
 	resp := &GetSchemaCreationStatusResponse{
-		GetSchemaCreationStatusOutput: r.Request.Data.(*GetSchemaCreationStatusOutput),
+		GetSchemaCreationStatusOutput: r.Request.Data.(*types.GetSchemaCreationStatusOutput),
 		response:                      &aws.Response{Request: r.Request},
 	}
 
@@ -141,7 +66,7 @@ func (r GetSchemaCreationStatusRequest) Send(ctx context.Context) (*GetSchemaCre
 // GetSchemaCreationStatusResponse is the response type for the
 // GetSchemaCreationStatus API operation.
 type GetSchemaCreationStatusResponse struct {
-	*GetSchemaCreationStatusOutput
+	*types.GetSchemaCreationStatusOutput
 
 	response *aws.Response
 }

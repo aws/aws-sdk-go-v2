@@ -6,67 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ecr/types"
 )
-
-type GetDownloadUrlForLayerInput struct {
-	_ struct{} `type:"structure"`
-
-	// The digest of the image layer to download.
-	//
-	// LayerDigest is a required field
-	LayerDigest *string `locationName:"layerDigest" type:"string" required:"true"`
-
-	// The AWS account ID associated with the registry that contains the image layer
-	// to download. If you do not specify a registry, the default registry is assumed.
-	RegistryId *string `locationName:"registryId" type:"string"`
-
-	// The name of the repository that is associated with the image layer to download.
-	//
-	// RepositoryName is a required field
-	RepositoryName *string `locationName:"repositoryName" min:"2" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetDownloadUrlForLayerInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetDownloadUrlForLayerInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetDownloadUrlForLayerInput"}
-
-	if s.LayerDigest == nil {
-		invalidParams.Add(aws.NewErrParamRequired("LayerDigest"))
-	}
-
-	if s.RepositoryName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("RepositoryName"))
-	}
-	if s.RepositoryName != nil && len(*s.RepositoryName) < 2 {
-		invalidParams.Add(aws.NewErrParamMinLen("RepositoryName", 2))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type GetDownloadUrlForLayerOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The pre-signed Amazon S3 download URL for the requested layer.
-	DownloadUrl *string `locationName:"downloadUrl" type:"string"`
-
-	// The digest of the image layer to download.
-	LayerDigest *string `locationName:"layerDigest" type:"string"`
-}
-
-// String returns the string representation
-func (s GetDownloadUrlForLayerOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetDownloadUrlForLayer = "GetDownloadUrlForLayer"
 
@@ -88,7 +29,7 @@ const opGetDownloadUrlForLayer = "GetDownloadUrlForLayer"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/GetDownloadUrlForLayer
-func (c *Client) GetDownloadUrlForLayerRequest(input *GetDownloadUrlForLayerInput) GetDownloadUrlForLayerRequest {
+func (c *Client) GetDownloadUrlForLayerRequest(input *types.GetDownloadUrlForLayerInput) GetDownloadUrlForLayerRequest {
 	op := &aws.Operation{
 		Name:       opGetDownloadUrlForLayer,
 		HTTPMethod: "POST",
@@ -96,10 +37,10 @@ func (c *Client) GetDownloadUrlForLayerRequest(input *GetDownloadUrlForLayerInpu
 	}
 
 	if input == nil {
-		input = &GetDownloadUrlForLayerInput{}
+		input = &types.GetDownloadUrlForLayerInput{}
 	}
 
-	req := c.newRequest(op, input, &GetDownloadUrlForLayerOutput{})
+	req := c.newRequest(op, input, &types.GetDownloadUrlForLayerOutput{})
 	return GetDownloadUrlForLayerRequest{Request: req, Input: input, Copy: c.GetDownloadUrlForLayerRequest}
 }
 
@@ -107,8 +48,8 @@ func (c *Client) GetDownloadUrlForLayerRequest(input *GetDownloadUrlForLayerInpu
 // GetDownloadUrlForLayer API operation.
 type GetDownloadUrlForLayerRequest struct {
 	*aws.Request
-	Input *GetDownloadUrlForLayerInput
-	Copy  func(*GetDownloadUrlForLayerInput) GetDownloadUrlForLayerRequest
+	Input *types.GetDownloadUrlForLayerInput
+	Copy  func(*types.GetDownloadUrlForLayerInput) GetDownloadUrlForLayerRequest
 }
 
 // Send marshals and sends the GetDownloadUrlForLayer API request.
@@ -120,7 +61,7 @@ func (r GetDownloadUrlForLayerRequest) Send(ctx context.Context) (*GetDownloadUr
 	}
 
 	resp := &GetDownloadUrlForLayerResponse{
-		GetDownloadUrlForLayerOutput: r.Request.Data.(*GetDownloadUrlForLayerOutput),
+		GetDownloadUrlForLayerOutput: r.Request.Data.(*types.GetDownloadUrlForLayerOutput),
 		response:                     &aws.Response{Request: r.Request},
 	}
 
@@ -130,7 +71,7 @@ func (r GetDownloadUrlForLayerRequest) Send(ctx context.Context) (*GetDownloadUr
 // GetDownloadUrlForLayerResponse is the response type for the
 // GetDownloadUrlForLayer API operation.
 type GetDownloadUrlForLayerResponse struct {
-	*GetDownloadUrlForLayerOutput
+	*types.GetDownloadUrlForLayerOutput
 
 	response *aws.Response
 }

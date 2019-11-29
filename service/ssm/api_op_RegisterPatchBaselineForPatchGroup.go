@@ -6,66 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ssm/types"
 )
-
-type RegisterPatchBaselineForPatchGroupInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the patch baseline to register the patch group with.
-	//
-	// BaselineId is a required field
-	BaselineId *string `min:"20" type:"string" required:"true"`
-
-	// The name of the patch group that should be registered with the patch baseline.
-	//
-	// PatchGroup is a required field
-	PatchGroup *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s RegisterPatchBaselineForPatchGroupInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *RegisterPatchBaselineForPatchGroupInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "RegisterPatchBaselineForPatchGroupInput"}
-
-	if s.BaselineId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("BaselineId"))
-	}
-	if s.BaselineId != nil && len(*s.BaselineId) < 20 {
-		invalidParams.Add(aws.NewErrParamMinLen("BaselineId", 20))
-	}
-
-	if s.PatchGroup == nil {
-		invalidParams.Add(aws.NewErrParamRequired("PatchGroup"))
-	}
-	if s.PatchGroup != nil && len(*s.PatchGroup) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("PatchGroup", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type RegisterPatchBaselineForPatchGroupOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the patch baseline the patch group was registered with.
-	BaselineId *string `min:"20" type:"string"`
-
-	// The name of the patch group registered with the patch baseline.
-	PatchGroup *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s RegisterPatchBaselineForPatchGroupOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opRegisterPatchBaselineForPatchGroup = "RegisterPatchBaselineForPatchGroup"
 
@@ -82,7 +24,7 @@ const opRegisterPatchBaselineForPatchGroup = "RegisterPatchBaselineForPatchGroup
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/RegisterPatchBaselineForPatchGroup
-func (c *Client) RegisterPatchBaselineForPatchGroupRequest(input *RegisterPatchBaselineForPatchGroupInput) RegisterPatchBaselineForPatchGroupRequest {
+func (c *Client) RegisterPatchBaselineForPatchGroupRequest(input *types.RegisterPatchBaselineForPatchGroupInput) RegisterPatchBaselineForPatchGroupRequest {
 	op := &aws.Operation{
 		Name:       opRegisterPatchBaselineForPatchGroup,
 		HTTPMethod: "POST",
@@ -90,10 +32,10 @@ func (c *Client) RegisterPatchBaselineForPatchGroupRequest(input *RegisterPatchB
 	}
 
 	if input == nil {
-		input = &RegisterPatchBaselineForPatchGroupInput{}
+		input = &types.RegisterPatchBaselineForPatchGroupInput{}
 	}
 
-	req := c.newRequest(op, input, &RegisterPatchBaselineForPatchGroupOutput{})
+	req := c.newRequest(op, input, &types.RegisterPatchBaselineForPatchGroupOutput{})
 	return RegisterPatchBaselineForPatchGroupRequest{Request: req, Input: input, Copy: c.RegisterPatchBaselineForPatchGroupRequest}
 }
 
@@ -101,8 +43,8 @@ func (c *Client) RegisterPatchBaselineForPatchGroupRequest(input *RegisterPatchB
 // RegisterPatchBaselineForPatchGroup API operation.
 type RegisterPatchBaselineForPatchGroupRequest struct {
 	*aws.Request
-	Input *RegisterPatchBaselineForPatchGroupInput
-	Copy  func(*RegisterPatchBaselineForPatchGroupInput) RegisterPatchBaselineForPatchGroupRequest
+	Input *types.RegisterPatchBaselineForPatchGroupInput
+	Copy  func(*types.RegisterPatchBaselineForPatchGroupInput) RegisterPatchBaselineForPatchGroupRequest
 }
 
 // Send marshals and sends the RegisterPatchBaselineForPatchGroup API request.
@@ -114,7 +56,7 @@ func (r RegisterPatchBaselineForPatchGroupRequest) Send(ctx context.Context) (*R
 	}
 
 	resp := &RegisterPatchBaselineForPatchGroupResponse{
-		RegisterPatchBaselineForPatchGroupOutput: r.Request.Data.(*RegisterPatchBaselineForPatchGroupOutput),
+		RegisterPatchBaselineForPatchGroupOutput: r.Request.Data.(*types.RegisterPatchBaselineForPatchGroupOutput),
 		response:                                 &aws.Response{Request: r.Request},
 	}
 
@@ -124,7 +66,7 @@ func (r RegisterPatchBaselineForPatchGroupRequest) Send(ctx context.Context) (*R
 // RegisterPatchBaselineForPatchGroupResponse is the response type for the
 // RegisterPatchBaselineForPatchGroup API operation.
 type RegisterPatchBaselineForPatchGroupResponse struct {
-	*RegisterPatchBaselineForPatchGroupOutput
+	*types.RegisterPatchBaselineForPatchGroupOutput
 
 	response *aws.Response
 }

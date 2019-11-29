@@ -6,131 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/mediaconvert/types"
 )
-
-// Send your create preset request with the name of the preset and the JSON
-// for the output settings specified by the preset.
-type CreatePresetInput struct {
-	_ struct{} `type:"structure"`
-
-	// Optional. A category for the preset you are creating.
-	Category *string `locationName:"category" type:"string"`
-
-	// Optional. A description of the preset you are creating.
-	Description *string `locationName:"description" type:"string"`
-
-	// The name of the preset you are creating.
-	//
-	// Name is a required field
-	Name *string `locationName:"name" type:"string" required:"true"`
-
-	// Settings for preset
-	//
-	// Settings is a required field
-	Settings *PresetSettings `locationName:"settings" type:"structure" required:"true"`
-
-	// The tags that you want to add to the resource. You can tag resources with
-	// a key-value pair or with only a key.
-	Tags map[string]string `locationName:"tags" type:"map"`
-}
-
-// String returns the string representation
-func (s CreatePresetInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreatePresetInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreatePresetInput"}
-
-	if s.Name == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Name"))
-	}
-
-	if s.Settings == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Settings"))
-	}
-	if s.Settings != nil {
-		if err := s.Settings.Validate(); err != nil {
-			invalidParams.AddNested("Settings", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s CreatePresetInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.Category != nil {
-		v := *s.Category
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "category", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Description != nil {
-		v := *s.Description
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "description", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Name != nil {
-		v := *s.Name
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Settings != nil {
-		v := s.Settings
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "settings", v, metadata)
-	}
-	if s.Tags != nil {
-		v := s.Tags
-
-		metadata := protocol.Metadata{}
-		ms0 := e.Map(protocol.BodyTarget, "tags", metadata)
-		ms0.Start()
-		for k1, v1 := range v {
-			ms0.MapSetValue(k1, protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
-		}
-		ms0.End()
-
-	}
-	return nil
-}
-
-// Successful create preset requests will return the preset JSON.
-type CreatePresetOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A preset is a collection of preconfigured media conversion settings that
-	// you want MediaConvert to apply to the output during the conversion process.
-	Preset *Preset `locationName:"preset" type:"structure"`
-}
-
-// String returns the string representation
-func (s CreatePresetOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s CreatePresetOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.Preset != nil {
-		v := s.Preset
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "preset", v, metadata)
-	}
-	return nil
-}
 
 const opCreatePreset = "CreatePreset"
 
@@ -148,7 +25,7 @@ const opCreatePreset = "CreatePreset"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/CreatePreset
-func (c *Client) CreatePresetRequest(input *CreatePresetInput) CreatePresetRequest {
+func (c *Client) CreatePresetRequest(input *types.CreatePresetInput) CreatePresetRequest {
 	op := &aws.Operation{
 		Name:       opCreatePreset,
 		HTTPMethod: "POST",
@@ -156,10 +33,10 @@ func (c *Client) CreatePresetRequest(input *CreatePresetInput) CreatePresetReque
 	}
 
 	if input == nil {
-		input = &CreatePresetInput{}
+		input = &types.CreatePresetInput{}
 	}
 
-	req := c.newRequest(op, input, &CreatePresetOutput{})
+	req := c.newRequest(op, input, &types.CreatePresetOutput{})
 	return CreatePresetRequest{Request: req, Input: input, Copy: c.CreatePresetRequest}
 }
 
@@ -167,8 +44,8 @@ func (c *Client) CreatePresetRequest(input *CreatePresetInput) CreatePresetReque
 // CreatePreset API operation.
 type CreatePresetRequest struct {
 	*aws.Request
-	Input *CreatePresetInput
-	Copy  func(*CreatePresetInput) CreatePresetRequest
+	Input *types.CreatePresetInput
+	Copy  func(*types.CreatePresetInput) CreatePresetRequest
 }
 
 // Send marshals and sends the CreatePreset API request.
@@ -180,7 +57,7 @@ func (r CreatePresetRequest) Send(ctx context.Context) (*CreatePresetResponse, e
 	}
 
 	resp := &CreatePresetResponse{
-		CreatePresetOutput: r.Request.Data.(*CreatePresetOutput),
+		CreatePresetOutput: r.Request.Data.(*types.CreatePresetOutput),
 		response:           &aws.Response{Request: r.Request},
 	}
 
@@ -190,7 +67,7 @@ func (r CreatePresetRequest) Send(ctx context.Context) (*CreatePresetResponse, e
 // CreatePresetResponse is the response type for the
 // CreatePreset API operation.
 type CreatePresetResponse struct {
-	*CreatePresetOutput
+	*types.CreatePresetOutput
 
 	response *aws.Response
 }

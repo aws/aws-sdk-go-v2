@@ -6,59 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/codecommit/types"
 )
-
-// Represents the input of a list branches operation.
-type ListBranchesInput struct {
-	_ struct{} `type:"structure"`
-
-	// An enumeration token that allows the operation to batch the results.
-	NextToken *string `locationName:"nextToken" type:"string"`
-
-	// The name of the repository that contains the branches.
-	//
-	// RepositoryName is a required field
-	RepositoryName *string `locationName:"repositoryName" min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s ListBranchesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListBranchesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListBranchesInput"}
-
-	if s.RepositoryName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("RepositoryName"))
-	}
-	if s.RepositoryName != nil && len(*s.RepositoryName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("RepositoryName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Represents the output of a list branches operation.
-type ListBranchesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The list of branch names.
-	Branches []string `locationName:"branches" type:"list"`
-
-	// An enumeration token that returns the batch of the results.
-	NextToken *string `locationName:"nextToken" type:"string"`
-}
-
-// String returns the string representation
-func (s ListBranchesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListBranches = "ListBranches"
 
@@ -75,7 +24,7 @@ const opListBranches = "ListBranches"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/ListBranches
-func (c *Client) ListBranchesRequest(input *ListBranchesInput) ListBranchesRequest {
+func (c *Client) ListBranchesRequest(input *types.ListBranchesInput) ListBranchesRequest {
 	op := &aws.Operation{
 		Name:       opListBranches,
 		HTTPMethod: "POST",
@@ -89,10 +38,10 @@ func (c *Client) ListBranchesRequest(input *ListBranchesInput) ListBranchesReque
 	}
 
 	if input == nil {
-		input = &ListBranchesInput{}
+		input = &types.ListBranchesInput{}
 	}
 
-	req := c.newRequest(op, input, &ListBranchesOutput{})
+	req := c.newRequest(op, input, &types.ListBranchesOutput{})
 	return ListBranchesRequest{Request: req, Input: input, Copy: c.ListBranchesRequest}
 }
 
@@ -100,8 +49,8 @@ func (c *Client) ListBranchesRequest(input *ListBranchesInput) ListBranchesReque
 // ListBranches API operation.
 type ListBranchesRequest struct {
 	*aws.Request
-	Input *ListBranchesInput
-	Copy  func(*ListBranchesInput) ListBranchesRequest
+	Input *types.ListBranchesInput
+	Copy  func(*types.ListBranchesInput) ListBranchesRequest
 }
 
 // Send marshals and sends the ListBranches API request.
@@ -113,7 +62,7 @@ func (r ListBranchesRequest) Send(ctx context.Context) (*ListBranchesResponse, e
 	}
 
 	resp := &ListBranchesResponse{
-		ListBranchesOutput: r.Request.Data.(*ListBranchesOutput),
+		ListBranchesOutput: r.Request.Data.(*types.ListBranchesOutput),
 		response:           &aws.Response{Request: r.Request},
 	}
 
@@ -143,7 +92,7 @@ func NewListBranchesPaginator(req ListBranchesRequest) ListBranchesPaginator {
 	return ListBranchesPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListBranchesInput
+				var inCpy *types.ListBranchesInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -163,14 +112,14 @@ type ListBranchesPaginator struct {
 	aws.Pager
 }
 
-func (p *ListBranchesPaginator) CurrentPage() *ListBranchesOutput {
-	return p.Pager.CurrentPage().(*ListBranchesOutput)
+func (p *ListBranchesPaginator) CurrentPage() *types.ListBranchesOutput {
+	return p.Pager.CurrentPage().(*types.ListBranchesOutput)
 }
 
 // ListBranchesResponse is the response type for the
 // ListBranches API operation.
 type ListBranchesResponse struct {
-	*ListBranchesOutput
+	*types.ListBranchesOutput
 
 	response *aws.Response
 }

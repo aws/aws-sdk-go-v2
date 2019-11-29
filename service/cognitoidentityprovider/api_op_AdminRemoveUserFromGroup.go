@@ -6,74 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
+	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/types"
 )
-
-type AdminRemoveUserFromGroupInput struct {
-	_ struct{} `type:"structure"`
-
-	// The group name.
-	//
-	// GroupName is a required field
-	GroupName *string `min:"1" type:"string" required:"true"`
-
-	// The user pool ID for the user pool.
-	//
-	// UserPoolId is a required field
-	UserPoolId *string `min:"1" type:"string" required:"true"`
-
-	// The username for the user.
-	//
-	// Username is a required field
-	Username *string `min:"1" type:"string" required:"true" sensitive:"true"`
-}
-
-// String returns the string representation
-func (s AdminRemoveUserFromGroupInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *AdminRemoveUserFromGroupInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "AdminRemoveUserFromGroupInput"}
-
-	if s.GroupName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("GroupName"))
-	}
-	if s.GroupName != nil && len(*s.GroupName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("GroupName", 1))
-	}
-
-	if s.UserPoolId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("UserPoolId"))
-	}
-	if s.UserPoolId != nil && len(*s.UserPoolId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("UserPoolId", 1))
-	}
-
-	if s.Username == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Username"))
-	}
-	if s.Username != nil && len(*s.Username) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Username", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type AdminRemoveUserFromGroupOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s AdminRemoveUserFromGroupOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opAdminRemoveUserFromGroup = "AdminRemoveUserFromGroup"
 
@@ -92,7 +28,7 @@ const opAdminRemoveUserFromGroup = "AdminRemoveUserFromGroup"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AdminRemoveUserFromGroup
-func (c *Client) AdminRemoveUserFromGroupRequest(input *AdminRemoveUserFromGroupInput) AdminRemoveUserFromGroupRequest {
+func (c *Client) AdminRemoveUserFromGroupRequest(input *types.AdminRemoveUserFromGroupInput) AdminRemoveUserFromGroupRequest {
 	op := &aws.Operation{
 		Name:       opAdminRemoveUserFromGroup,
 		HTTPMethod: "POST",
@@ -100,10 +36,10 @@ func (c *Client) AdminRemoveUserFromGroupRequest(input *AdminRemoveUserFromGroup
 	}
 
 	if input == nil {
-		input = &AdminRemoveUserFromGroupInput{}
+		input = &types.AdminRemoveUserFromGroupInput{}
 	}
 
-	req := c.newRequest(op, input, &AdminRemoveUserFromGroupOutput{})
+	req := c.newRequest(op, input, &types.AdminRemoveUserFromGroupOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return AdminRemoveUserFromGroupRequest{Request: req, Input: input, Copy: c.AdminRemoveUserFromGroupRequest}
@@ -113,8 +49,8 @@ func (c *Client) AdminRemoveUserFromGroupRequest(input *AdminRemoveUserFromGroup
 // AdminRemoveUserFromGroup API operation.
 type AdminRemoveUserFromGroupRequest struct {
 	*aws.Request
-	Input *AdminRemoveUserFromGroupInput
-	Copy  func(*AdminRemoveUserFromGroupInput) AdminRemoveUserFromGroupRequest
+	Input *types.AdminRemoveUserFromGroupInput
+	Copy  func(*types.AdminRemoveUserFromGroupInput) AdminRemoveUserFromGroupRequest
 }
 
 // Send marshals and sends the AdminRemoveUserFromGroup API request.
@@ -126,7 +62,7 @@ func (r AdminRemoveUserFromGroupRequest) Send(ctx context.Context) (*AdminRemove
 	}
 
 	resp := &AdminRemoveUserFromGroupResponse{
-		AdminRemoveUserFromGroupOutput: r.Request.Data.(*AdminRemoveUserFromGroupOutput),
+		AdminRemoveUserFromGroupOutput: r.Request.Data.(*types.AdminRemoveUserFromGroupOutput),
 		response:                       &aws.Response{Request: r.Request},
 	}
 
@@ -136,7 +72,7 @@ func (r AdminRemoveUserFromGroupRequest) Send(ctx context.Context) (*AdminRemove
 // AdminRemoveUserFromGroupResponse is the response type for the
 // AdminRemoveUserFromGroup API operation.
 type AdminRemoveUserFromGroupResponse struct {
-	*AdminRemoveUserFromGroupOutput
+	*types.AdminRemoveUserFromGroupOutput
 
 	response *aws.Response
 }

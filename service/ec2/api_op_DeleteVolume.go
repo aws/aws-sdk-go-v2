@@ -6,54 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/ec2query"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-// Contains the parameters for DeleteVolume.
-type DeleteVolumeInput struct {
-	_ struct{} `type:"structure"`
-
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have
-	// the required permissions, the error response is DryRunOperation. Otherwise,
-	// it is UnauthorizedOperation.
-	DryRun *bool `locationName:"dryRun" type:"boolean"`
-
-	// The ID of the volume.
-	//
-	// VolumeId is a required field
-	VolumeId *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteVolumeInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteVolumeInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteVolumeInput"}
-
-	if s.VolumeId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("VolumeId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteVolumeOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteVolumeOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteVolume = "DeleteVolume"
 
@@ -76,7 +32,7 @@ const opDeleteVolume = "DeleteVolume"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteVolume
-func (c *Client) DeleteVolumeRequest(input *DeleteVolumeInput) DeleteVolumeRequest {
+func (c *Client) DeleteVolumeRequest(input *types.DeleteVolumeInput) DeleteVolumeRequest {
 	op := &aws.Operation{
 		Name:       opDeleteVolume,
 		HTTPMethod: "POST",
@@ -84,10 +40,10 @@ func (c *Client) DeleteVolumeRequest(input *DeleteVolumeInput) DeleteVolumeReque
 	}
 
 	if input == nil {
-		input = &DeleteVolumeInput{}
+		input = &types.DeleteVolumeInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteVolumeOutput{})
+	req := c.newRequest(op, input, &types.DeleteVolumeOutput{})
 	req.Handlers.Unmarshal.Remove(ec2query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return DeleteVolumeRequest{Request: req, Input: input, Copy: c.DeleteVolumeRequest}
@@ -97,8 +53,8 @@ func (c *Client) DeleteVolumeRequest(input *DeleteVolumeInput) DeleteVolumeReque
 // DeleteVolume API operation.
 type DeleteVolumeRequest struct {
 	*aws.Request
-	Input *DeleteVolumeInput
-	Copy  func(*DeleteVolumeInput) DeleteVolumeRequest
+	Input *types.DeleteVolumeInput
+	Copy  func(*types.DeleteVolumeInput) DeleteVolumeRequest
 }
 
 // Send marshals and sends the DeleteVolume API request.
@@ -110,7 +66,7 @@ func (r DeleteVolumeRequest) Send(ctx context.Context) (*DeleteVolumeResponse, e
 	}
 
 	resp := &DeleteVolumeResponse{
-		DeleteVolumeOutput: r.Request.Data.(*DeleteVolumeOutput),
+		DeleteVolumeOutput: r.Request.Data.(*types.DeleteVolumeOutput),
 		response:           &aws.Response{Request: r.Request},
 	}
 
@@ -120,7 +76,7 @@ func (r DeleteVolumeRequest) Send(ctx context.Context) (*DeleteVolumeResponse, e
 // DeleteVolumeResponse is the response type for the
 // DeleteVolume API operation.
 type DeleteVolumeResponse struct {
-	*DeleteVolumeOutput
+	*types.DeleteVolumeOutput
 
 	response *aws.Response
 }

@@ -6,83 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/apigateway/types"
 )
-
-// Get the SdkTypes collection.
-type GetSdkTypesInput struct {
-	_ struct{} `type:"structure"`
-
-	// The maximum number of returned results per page. The default value is 25
-	// and the maximum value is 500.
-	Limit *int64 `location:"querystring" locationName:"limit" type:"integer"`
-
-	// The current pagination position in the paged result set.
-	Position *string `location:"querystring" locationName:"position" type:"string"`
-}
-
-// String returns the string representation
-func (s GetSdkTypesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetSdkTypesInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.Limit != nil {
-		v := *s.Limit
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "limit", protocol.Int64Value(v), metadata)
-	}
-	if s.Position != nil {
-		v := *s.Position
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "position", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-// The collection of SdkType instances.
-type GetSdkTypesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The current page of elements from this collection.
-	Items []SdkType `locationName:"item" type:"list"`
-
-	Position *string `locationName:"position" type:"string"`
-}
-
-// String returns the string representation
-func (s GetSdkTypesOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetSdkTypesOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.Items != nil {
-		v := s.Items
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "item", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	if s.Position != nil {
-		v := *s.Position
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "position", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opGetSdkTypes = "GetSdkTypes"
 
@@ -95,7 +20,7 @@ const opGetSdkTypes = "GetSdkTypes"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) GetSdkTypesRequest(input *GetSdkTypesInput) GetSdkTypesRequest {
+func (c *Client) GetSdkTypesRequest(input *types.GetSdkTypesInput) GetSdkTypesRequest {
 	op := &aws.Operation{
 		Name:       opGetSdkTypes,
 		HTTPMethod: "GET",
@@ -103,10 +28,10 @@ func (c *Client) GetSdkTypesRequest(input *GetSdkTypesInput) GetSdkTypesRequest 
 	}
 
 	if input == nil {
-		input = &GetSdkTypesInput{}
+		input = &types.GetSdkTypesInput{}
 	}
 
-	req := c.newRequest(op, input, &GetSdkTypesOutput{})
+	req := c.newRequest(op, input, &types.GetSdkTypesOutput{})
 	return GetSdkTypesRequest{Request: req, Input: input, Copy: c.GetSdkTypesRequest}
 }
 
@@ -114,8 +39,8 @@ func (c *Client) GetSdkTypesRequest(input *GetSdkTypesInput) GetSdkTypesRequest 
 // GetSdkTypes API operation.
 type GetSdkTypesRequest struct {
 	*aws.Request
-	Input *GetSdkTypesInput
-	Copy  func(*GetSdkTypesInput) GetSdkTypesRequest
+	Input *types.GetSdkTypesInput
+	Copy  func(*types.GetSdkTypesInput) GetSdkTypesRequest
 }
 
 // Send marshals and sends the GetSdkTypes API request.
@@ -127,7 +52,7 @@ func (r GetSdkTypesRequest) Send(ctx context.Context) (*GetSdkTypesResponse, err
 	}
 
 	resp := &GetSdkTypesResponse{
-		GetSdkTypesOutput: r.Request.Data.(*GetSdkTypesOutput),
+		GetSdkTypesOutput: r.Request.Data.(*types.GetSdkTypesOutput),
 		response:          &aws.Response{Request: r.Request},
 	}
 
@@ -137,7 +62,7 @@ func (r GetSdkTypesRequest) Send(ctx context.Context) (*GetSdkTypesResponse, err
 // GetSdkTypesResponse is the response type for the
 // GetSdkTypes API operation.
 type GetSdkTypesResponse struct {
-	*GetSdkTypesOutput
+	*types.GetSdkTypesOutput
 
 	response *aws.Response
 }

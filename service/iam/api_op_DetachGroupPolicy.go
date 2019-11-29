@@ -6,70 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/query"
+	"github.com/aws/aws-sdk-go-v2/service/iam/types"
 )
-
-type DetachGroupPolicyInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name (friendly name, not ARN) of the IAM group to detach the policy from.
-	//
-	// This parameter allows (through its regex pattern (http://wikipedia.org/wiki/regex))
-	// a string of characters consisting of upper and lowercase alphanumeric characters
-	// with no spaces. You can also include any of the following characters: _+=,.@-
-	//
-	// GroupName is a required field
-	GroupName *string `min:"1" type:"string" required:"true"`
-
-	// The Amazon Resource Name (ARN) of the IAM policy you want to detach.
-	//
-	// For more information about ARNs, see Amazon Resource Names (ARNs) and AWS
-	// Service Namespaces (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
-	// in the AWS General Reference.
-	//
-	// PolicyArn is a required field
-	PolicyArn *string `min:"20" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DetachGroupPolicyInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DetachGroupPolicyInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DetachGroupPolicyInput"}
-
-	if s.GroupName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("GroupName"))
-	}
-	if s.GroupName != nil && len(*s.GroupName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("GroupName", 1))
-	}
-
-	if s.PolicyArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("PolicyArn"))
-	}
-	if s.PolicyArn != nil && len(*s.PolicyArn) < 20 {
-		invalidParams.Add(aws.NewErrParamMinLen("PolicyArn", 20))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DetachGroupPolicyOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DetachGroupPolicyOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDetachGroupPolicy = "DetachGroupPolicy"
 
@@ -91,7 +31,7 @@ const opDetachGroupPolicy = "DetachGroupPolicy"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DetachGroupPolicy
-func (c *Client) DetachGroupPolicyRequest(input *DetachGroupPolicyInput) DetachGroupPolicyRequest {
+func (c *Client) DetachGroupPolicyRequest(input *types.DetachGroupPolicyInput) DetachGroupPolicyRequest {
 	op := &aws.Operation{
 		Name:       opDetachGroupPolicy,
 		HTTPMethod: "POST",
@@ -99,10 +39,10 @@ func (c *Client) DetachGroupPolicyRequest(input *DetachGroupPolicyInput) DetachG
 	}
 
 	if input == nil {
-		input = &DetachGroupPolicyInput{}
+		input = &types.DetachGroupPolicyInput{}
 	}
 
-	req := c.newRequest(op, input, &DetachGroupPolicyOutput{})
+	req := c.newRequest(op, input, &types.DetachGroupPolicyOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return DetachGroupPolicyRequest{Request: req, Input: input, Copy: c.DetachGroupPolicyRequest}
@@ -112,8 +52,8 @@ func (c *Client) DetachGroupPolicyRequest(input *DetachGroupPolicyInput) DetachG
 // DetachGroupPolicy API operation.
 type DetachGroupPolicyRequest struct {
 	*aws.Request
-	Input *DetachGroupPolicyInput
-	Copy  func(*DetachGroupPolicyInput) DetachGroupPolicyRequest
+	Input *types.DetachGroupPolicyInput
+	Copy  func(*types.DetachGroupPolicyInput) DetachGroupPolicyRequest
 }
 
 // Send marshals and sends the DetachGroupPolicy API request.
@@ -125,7 +65,7 @@ func (r DetachGroupPolicyRequest) Send(ctx context.Context) (*DetachGroupPolicyR
 	}
 
 	resp := &DetachGroupPolicyResponse{
-		DetachGroupPolicyOutput: r.Request.Data.(*DetachGroupPolicyOutput),
+		DetachGroupPolicyOutput: r.Request.Data.(*types.DetachGroupPolicyOutput),
 		response:                &aws.Response{Request: r.Request},
 	}
 
@@ -135,7 +75,7 @@ func (r DetachGroupPolicyRequest) Send(ctx context.Context) (*DetachGroupPolicyR
 // DetachGroupPolicyResponse is the response type for the
 // DetachGroupPolicy API operation.
 type DetachGroupPolicyResponse struct {
-	*DetachGroupPolicyOutput
+	*types.DetachGroupPolicyOutput
 
 	response *aws.Response
 }

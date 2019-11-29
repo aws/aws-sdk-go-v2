@@ -6,54 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-type DeleteTrafficMirrorSessionInput struct {
-	_ struct{} `type:"structure"`
-
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have
-	// the required permissions, the error response is DryRunOperation. Otherwise,
-	// it is UnauthorizedOperation.
-	DryRun *bool `type:"boolean"`
-
-	// The ID of the Traffic Mirror session.
-	//
-	// TrafficMirrorSessionId is a required field
-	TrafficMirrorSessionId *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteTrafficMirrorSessionInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteTrafficMirrorSessionInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteTrafficMirrorSessionInput"}
-
-	if s.TrafficMirrorSessionId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("TrafficMirrorSessionId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteTrafficMirrorSessionOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the deleted Traffic Mirror session.
-	TrafficMirrorSessionId *string `locationName:"trafficMirrorSessionId" type:"string"`
-}
-
-// String returns the string representation
-func (s DeleteTrafficMirrorSessionOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteTrafficMirrorSession = "DeleteTrafficMirrorSession"
 
@@ -70,7 +24,7 @@ const opDeleteTrafficMirrorSession = "DeleteTrafficMirrorSession"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteTrafficMirrorSession
-func (c *Client) DeleteTrafficMirrorSessionRequest(input *DeleteTrafficMirrorSessionInput) DeleteTrafficMirrorSessionRequest {
+func (c *Client) DeleteTrafficMirrorSessionRequest(input *types.DeleteTrafficMirrorSessionInput) DeleteTrafficMirrorSessionRequest {
 	op := &aws.Operation{
 		Name:       opDeleteTrafficMirrorSession,
 		HTTPMethod: "POST",
@@ -78,10 +32,10 @@ func (c *Client) DeleteTrafficMirrorSessionRequest(input *DeleteTrafficMirrorSes
 	}
 
 	if input == nil {
-		input = &DeleteTrafficMirrorSessionInput{}
+		input = &types.DeleteTrafficMirrorSessionInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteTrafficMirrorSessionOutput{})
+	req := c.newRequest(op, input, &types.DeleteTrafficMirrorSessionOutput{})
 	return DeleteTrafficMirrorSessionRequest{Request: req, Input: input, Copy: c.DeleteTrafficMirrorSessionRequest}
 }
 
@@ -89,8 +43,8 @@ func (c *Client) DeleteTrafficMirrorSessionRequest(input *DeleteTrafficMirrorSes
 // DeleteTrafficMirrorSession API operation.
 type DeleteTrafficMirrorSessionRequest struct {
 	*aws.Request
-	Input *DeleteTrafficMirrorSessionInput
-	Copy  func(*DeleteTrafficMirrorSessionInput) DeleteTrafficMirrorSessionRequest
+	Input *types.DeleteTrafficMirrorSessionInput
+	Copy  func(*types.DeleteTrafficMirrorSessionInput) DeleteTrafficMirrorSessionRequest
 }
 
 // Send marshals and sends the DeleteTrafficMirrorSession API request.
@@ -102,7 +56,7 @@ func (r DeleteTrafficMirrorSessionRequest) Send(ctx context.Context) (*DeleteTra
 	}
 
 	resp := &DeleteTrafficMirrorSessionResponse{
-		DeleteTrafficMirrorSessionOutput: r.Request.Data.(*DeleteTrafficMirrorSessionOutput),
+		DeleteTrafficMirrorSessionOutput: r.Request.Data.(*types.DeleteTrafficMirrorSessionOutput),
 		response:                         &aws.Response{Request: r.Request},
 	}
 
@@ -112,7 +66,7 @@ func (r DeleteTrafficMirrorSessionRequest) Send(ctx context.Context) (*DeleteTra
 // DeleteTrafficMirrorSessionResponse is the response type for the
 // DeleteTrafficMirrorSession API operation.
 type DeleteTrafficMirrorSessionResponse struct {
-	*DeleteTrafficMirrorSessionOutput
+	*types.DeleteTrafficMirrorSessionOutput
 
 	response *aws.Response
 }

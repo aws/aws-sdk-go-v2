@@ -6,60 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-type AssignIpv6AddressesInput struct {
-	_ struct{} `type:"structure"`
-
-	// The number of IPv6 addresses to assign to the network interface. Amazon EC2
-	// automatically selects the IPv6 addresses from the subnet range. You can't
-	// use this option if specifying specific IPv6 addresses.
-	Ipv6AddressCount *int64 `locationName:"ipv6AddressCount" type:"integer"`
-
-	// One or more specific IPv6 addresses to be assigned to the network interface.
-	// You can't use this option if you're specifying a number of IPv6 addresses.
-	Ipv6Addresses []string `locationName:"ipv6Addresses" locationNameList:"item" type:"list"`
-
-	// The ID of the network interface.
-	//
-	// NetworkInterfaceId is a required field
-	NetworkInterfaceId *string `locationName:"networkInterfaceId" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s AssignIpv6AddressesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *AssignIpv6AddressesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "AssignIpv6AddressesInput"}
-
-	if s.NetworkInterfaceId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("NetworkInterfaceId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type AssignIpv6AddressesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The IPv6 addresses assigned to the network interface.
-	AssignedIpv6Addresses []string `locationName:"assignedIpv6Addresses" locationNameList:"item" type:"list"`
-
-	// The ID of the network interface.
-	NetworkInterfaceId *string `locationName:"networkInterfaceId" type:"string"`
-}
-
-// String returns the string representation
-func (s AssignIpv6AddressesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opAssignIpv6Addresses = "AssignIpv6Addresses"
 
@@ -83,7 +31,7 @@ const opAssignIpv6Addresses = "AssignIpv6Addresses"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AssignIpv6Addresses
-func (c *Client) AssignIpv6AddressesRequest(input *AssignIpv6AddressesInput) AssignIpv6AddressesRequest {
+func (c *Client) AssignIpv6AddressesRequest(input *types.AssignIpv6AddressesInput) AssignIpv6AddressesRequest {
 	op := &aws.Operation{
 		Name:       opAssignIpv6Addresses,
 		HTTPMethod: "POST",
@@ -91,10 +39,10 @@ func (c *Client) AssignIpv6AddressesRequest(input *AssignIpv6AddressesInput) Ass
 	}
 
 	if input == nil {
-		input = &AssignIpv6AddressesInput{}
+		input = &types.AssignIpv6AddressesInput{}
 	}
 
-	req := c.newRequest(op, input, &AssignIpv6AddressesOutput{})
+	req := c.newRequest(op, input, &types.AssignIpv6AddressesOutput{})
 	return AssignIpv6AddressesRequest{Request: req, Input: input, Copy: c.AssignIpv6AddressesRequest}
 }
 
@@ -102,8 +50,8 @@ func (c *Client) AssignIpv6AddressesRequest(input *AssignIpv6AddressesInput) Ass
 // AssignIpv6Addresses API operation.
 type AssignIpv6AddressesRequest struct {
 	*aws.Request
-	Input *AssignIpv6AddressesInput
-	Copy  func(*AssignIpv6AddressesInput) AssignIpv6AddressesRequest
+	Input *types.AssignIpv6AddressesInput
+	Copy  func(*types.AssignIpv6AddressesInput) AssignIpv6AddressesRequest
 }
 
 // Send marshals and sends the AssignIpv6Addresses API request.
@@ -115,7 +63,7 @@ func (r AssignIpv6AddressesRequest) Send(ctx context.Context) (*AssignIpv6Addres
 	}
 
 	resp := &AssignIpv6AddressesResponse{
-		AssignIpv6AddressesOutput: r.Request.Data.(*AssignIpv6AddressesOutput),
+		AssignIpv6AddressesOutput: r.Request.Data.(*types.AssignIpv6AddressesOutput),
 		response:                  &aws.Response{Request: r.Request},
 	}
 
@@ -125,7 +73,7 @@ func (r AssignIpv6AddressesRequest) Send(ctx context.Context) (*AssignIpv6Addres
 // AssignIpv6AddressesResponse is the response type for the
 // AssignIpv6Addresses API operation.
 type AssignIpv6AddressesResponse struct {
-	*AssignIpv6AddressesOutput
+	*types.AssignIpv6AddressesOutput
 
 	response *aws.Response
 }

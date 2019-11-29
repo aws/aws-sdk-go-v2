@@ -6,60 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/appstream/types"
 )
-
-type UpdateDirectoryConfigInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the Directory Config object.
-	//
-	// DirectoryName is a required field
-	DirectoryName *string `type:"string" required:"true"`
-
-	// The distinguished names of the organizational units for computer accounts.
-	OrganizationalUnitDistinguishedNames []string `type:"list"`
-
-	// The credentials for the service account used by the fleet or image builder
-	// to connect to the directory.
-	ServiceAccountCredentials *ServiceAccountCredentials `type:"structure"`
-}
-
-// String returns the string representation
-func (s UpdateDirectoryConfigInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateDirectoryConfigInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateDirectoryConfigInput"}
-
-	if s.DirectoryName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DirectoryName"))
-	}
-	if s.ServiceAccountCredentials != nil {
-		if err := s.ServiceAccountCredentials.Validate(); err != nil {
-			invalidParams.AddNested("ServiceAccountCredentials", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type UpdateDirectoryConfigOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Information about the Directory Config object.
-	DirectoryConfig *DirectoryConfig `type:"structure"`
-}
-
-// String returns the string representation
-func (s UpdateDirectoryConfigOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opUpdateDirectoryConfig = "UpdateDirectoryConfig"
 
@@ -78,7 +26,7 @@ const opUpdateDirectoryConfig = "UpdateDirectoryConfig"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/UpdateDirectoryConfig
-func (c *Client) UpdateDirectoryConfigRequest(input *UpdateDirectoryConfigInput) UpdateDirectoryConfigRequest {
+func (c *Client) UpdateDirectoryConfigRequest(input *types.UpdateDirectoryConfigInput) UpdateDirectoryConfigRequest {
 	op := &aws.Operation{
 		Name:       opUpdateDirectoryConfig,
 		HTTPMethod: "POST",
@@ -86,10 +34,10 @@ func (c *Client) UpdateDirectoryConfigRequest(input *UpdateDirectoryConfigInput)
 	}
 
 	if input == nil {
-		input = &UpdateDirectoryConfigInput{}
+		input = &types.UpdateDirectoryConfigInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateDirectoryConfigOutput{})
+	req := c.newRequest(op, input, &types.UpdateDirectoryConfigOutput{})
 	return UpdateDirectoryConfigRequest{Request: req, Input: input, Copy: c.UpdateDirectoryConfigRequest}
 }
 
@@ -97,8 +45,8 @@ func (c *Client) UpdateDirectoryConfigRequest(input *UpdateDirectoryConfigInput)
 // UpdateDirectoryConfig API operation.
 type UpdateDirectoryConfigRequest struct {
 	*aws.Request
-	Input *UpdateDirectoryConfigInput
-	Copy  func(*UpdateDirectoryConfigInput) UpdateDirectoryConfigRequest
+	Input *types.UpdateDirectoryConfigInput
+	Copy  func(*types.UpdateDirectoryConfigInput) UpdateDirectoryConfigRequest
 }
 
 // Send marshals and sends the UpdateDirectoryConfig API request.
@@ -110,7 +58,7 @@ func (r UpdateDirectoryConfigRequest) Send(ctx context.Context) (*UpdateDirector
 	}
 
 	resp := &UpdateDirectoryConfigResponse{
-		UpdateDirectoryConfigOutput: r.Request.Data.(*UpdateDirectoryConfigOutput),
+		UpdateDirectoryConfigOutput: r.Request.Data.(*types.UpdateDirectoryConfigOutput),
 		response:                    &aws.Response{Request: r.Request},
 	}
 
@@ -120,7 +68,7 @@ func (r UpdateDirectoryConfigRequest) Send(ctx context.Context) (*UpdateDirector
 // UpdateDirectoryConfigResponse is the response type for the
 // UpdateDirectoryConfig API operation.
 type UpdateDirectoryConfigResponse struct {
-	*UpdateDirectoryConfigOutput
+	*types.UpdateDirectoryConfigOutput
 
 	response *aws.Response
 }

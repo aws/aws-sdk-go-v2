@@ -6,75 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/elasticache/types"
 )
-
-// Represents the input of a DescribeCacheEngineVersions operation.
-type DescribeCacheEngineVersionsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of a specific cache parameter group family to return details for.
-	//
-	// Valid values are: memcached1.4 | memcached1.5 | redis2.6 | redis2.8 | redis3.2
-	// | redis4.0 | redis5.0 |
-	//
-	// Constraints:
-	//
-	//    * Must be 1 to 255 alphanumeric characters
-	//
-	//    * First character must be a letter
-	//
-	//    * Cannot end with a hyphen or contain two consecutive hyphens
-	CacheParameterGroupFamily *string `type:"string"`
-
-	// If true, specifies that only the default version of the specified engine
-	// or engine and major version combination is to be returned.
-	DefaultOnly *bool `type:"boolean"`
-
-	// The cache engine to return. Valid values: memcached | redis
-	Engine *string `type:"string"`
-
-	// The cache engine version to return.
-	//
-	// Example: 1.4.14
-	EngineVersion *string `type:"string"`
-
-	// An optional marker returned from a prior request. Use this marker for pagination
-	// of results from this operation. If this parameter is specified, the response
-	// includes only records beyond the marker, up to the value specified by MaxRecords.
-	Marker *string `type:"string"`
-
-	// The maximum number of records to include in the response. If more records
-	// exist than the specified MaxRecords value, a marker is included in the response
-	// so that the remaining results can be retrieved.
-	//
-	// Default: 100
-	//
-	// Constraints: minimum 20; maximum 100.
-	MaxRecords *int64 `type:"integer"`
-}
-
-// String returns the string representation
-func (s DescribeCacheEngineVersionsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Represents the output of a DescribeCacheEngineVersions operation.
-type DescribeCacheEngineVersionsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A list of cache engine version details. Each element in the list contains
-	// detailed information about one cache engine version.
-	CacheEngineVersions []CacheEngineVersion `locationNameList:"CacheEngineVersion" type:"list"`
-
-	// Provides an identifier to allow retrieval of paginated results.
-	Marker *string `type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeCacheEngineVersionsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeCacheEngineVersions = "DescribeCacheEngineVersions"
 
@@ -91,7 +24,7 @@ const opDescribeCacheEngineVersions = "DescribeCacheEngineVersions"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DescribeCacheEngineVersions
-func (c *Client) DescribeCacheEngineVersionsRequest(input *DescribeCacheEngineVersionsInput) DescribeCacheEngineVersionsRequest {
+func (c *Client) DescribeCacheEngineVersionsRequest(input *types.DescribeCacheEngineVersionsInput) DescribeCacheEngineVersionsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeCacheEngineVersions,
 		HTTPMethod: "POST",
@@ -105,10 +38,10 @@ func (c *Client) DescribeCacheEngineVersionsRequest(input *DescribeCacheEngineVe
 	}
 
 	if input == nil {
-		input = &DescribeCacheEngineVersionsInput{}
+		input = &types.DescribeCacheEngineVersionsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeCacheEngineVersionsOutput{})
+	req := c.newRequest(op, input, &types.DescribeCacheEngineVersionsOutput{})
 	return DescribeCacheEngineVersionsRequest{Request: req, Input: input, Copy: c.DescribeCacheEngineVersionsRequest}
 }
 
@@ -116,8 +49,8 @@ func (c *Client) DescribeCacheEngineVersionsRequest(input *DescribeCacheEngineVe
 // DescribeCacheEngineVersions API operation.
 type DescribeCacheEngineVersionsRequest struct {
 	*aws.Request
-	Input *DescribeCacheEngineVersionsInput
-	Copy  func(*DescribeCacheEngineVersionsInput) DescribeCacheEngineVersionsRequest
+	Input *types.DescribeCacheEngineVersionsInput
+	Copy  func(*types.DescribeCacheEngineVersionsInput) DescribeCacheEngineVersionsRequest
 }
 
 // Send marshals and sends the DescribeCacheEngineVersions API request.
@@ -129,7 +62,7 @@ func (r DescribeCacheEngineVersionsRequest) Send(ctx context.Context) (*Describe
 	}
 
 	resp := &DescribeCacheEngineVersionsResponse{
-		DescribeCacheEngineVersionsOutput: r.Request.Data.(*DescribeCacheEngineVersionsOutput),
+		DescribeCacheEngineVersionsOutput: r.Request.Data.(*types.DescribeCacheEngineVersionsOutput),
 		response:                          &aws.Response{Request: r.Request},
 	}
 
@@ -159,7 +92,7 @@ func NewDescribeCacheEngineVersionsPaginator(req DescribeCacheEngineVersionsRequ
 	return DescribeCacheEngineVersionsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *DescribeCacheEngineVersionsInput
+				var inCpy *types.DescribeCacheEngineVersionsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -179,14 +112,14 @@ type DescribeCacheEngineVersionsPaginator struct {
 	aws.Pager
 }
 
-func (p *DescribeCacheEngineVersionsPaginator) CurrentPage() *DescribeCacheEngineVersionsOutput {
-	return p.Pager.CurrentPage().(*DescribeCacheEngineVersionsOutput)
+func (p *DescribeCacheEngineVersionsPaginator) CurrentPage() *types.DescribeCacheEngineVersionsOutput {
+	return p.Pager.CurrentPage().(*types.DescribeCacheEngineVersionsOutput)
 }
 
 // DescribeCacheEngineVersionsResponse is the response type for the
 // DescribeCacheEngineVersions API operation.
 type DescribeCacheEngineVersionsResponse struct {
-	*DescribeCacheEngineVersionsOutput
+	*types.DescribeCacheEngineVersionsOutput
 
 	response *aws.Response
 }

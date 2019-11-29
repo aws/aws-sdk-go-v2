@@ -6,101 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/restjson"
+	"github.com/aws/aws-sdk-go-v2/service/glacier/types"
 )
-
-// The input values for CompleteVaultLock.
-type CompleteVaultLockInput struct {
-	_ struct{} `type:"structure"`
-
-	// The AccountId value is the AWS account ID. This value must match the AWS
-	// account ID associated with the credentials used to sign the request. You
-	// can either specify an AWS account ID or optionally a single '-' (hyphen),
-	// in which case Amazon Glacier uses the AWS account ID associated with the
-	// credentials used to sign the request. If you specify your account ID, do
-	// not include any hyphens ('-') in the ID.
-	//
-	// AccountId is a required field
-	AccountId *string `location:"uri" locationName:"accountId" type:"string" required:"true"`
-
-	// The lockId value is the lock ID obtained from a InitiateVaultLock request.
-	//
-	// LockId is a required field
-	LockId *string `location:"uri" locationName:"lockId" type:"string" required:"true"`
-
-	// The name of the vault.
-	//
-	// VaultName is a required field
-	VaultName *string `location:"uri" locationName:"vaultName" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s CompleteVaultLockInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CompleteVaultLockInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CompleteVaultLockInput"}
-
-	if s.AccountId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("AccountId"))
-	}
-
-	if s.LockId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("LockId"))
-	}
-
-	if s.VaultName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("VaultName"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s CompleteVaultLockInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.AccountId != nil {
-		v := *s.AccountId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "accountId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.LockId != nil {
-		v := *s.LockId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "lockId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.VaultName != nil {
-		v := *s.VaultName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "vaultName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type CompleteVaultLockOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s CompleteVaultLockOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s CompleteVaultLockOutput) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
 
 const opCompleteVaultLock = "CompleteVaultLock"
 
@@ -129,7 +38,7 @@ const opCompleteVaultLock = "CompleteVaultLock"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) CompleteVaultLockRequest(input *CompleteVaultLockInput) CompleteVaultLockRequest {
+func (c *Client) CompleteVaultLockRequest(input *types.CompleteVaultLockInput) CompleteVaultLockRequest {
 	op := &aws.Operation{
 		Name:       opCompleteVaultLock,
 		HTTPMethod: "POST",
@@ -137,10 +46,10 @@ func (c *Client) CompleteVaultLockRequest(input *CompleteVaultLockInput) Complet
 	}
 
 	if input == nil {
-		input = &CompleteVaultLockInput{}
+		input = &types.CompleteVaultLockInput{}
 	}
 
-	req := c.newRequest(op, input, &CompleteVaultLockOutput{})
+	req := c.newRequest(op, input, &types.CompleteVaultLockOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return CompleteVaultLockRequest{Request: req, Input: input, Copy: c.CompleteVaultLockRequest}
@@ -150,8 +59,8 @@ func (c *Client) CompleteVaultLockRequest(input *CompleteVaultLockInput) Complet
 // CompleteVaultLock API operation.
 type CompleteVaultLockRequest struct {
 	*aws.Request
-	Input *CompleteVaultLockInput
-	Copy  func(*CompleteVaultLockInput) CompleteVaultLockRequest
+	Input *types.CompleteVaultLockInput
+	Copy  func(*types.CompleteVaultLockInput) CompleteVaultLockRequest
 }
 
 // Send marshals and sends the CompleteVaultLock API request.
@@ -163,7 +72,7 @@ func (r CompleteVaultLockRequest) Send(ctx context.Context) (*CompleteVaultLockR
 	}
 
 	resp := &CompleteVaultLockResponse{
-		CompleteVaultLockOutput: r.Request.Data.(*CompleteVaultLockOutput),
+		CompleteVaultLockOutput: r.Request.Data.(*types.CompleteVaultLockOutput),
 		response:                &aws.Response{Request: r.Request},
 	}
 
@@ -173,7 +82,7 @@ func (r CompleteVaultLockRequest) Send(ctx context.Context) (*CompleteVaultLockR
 // CompleteVaultLockResponse is the response type for the
 // CompleteVaultLock API operation.
 type CompleteVaultLockResponse struct {
-	*CompleteVaultLockOutput
+	*types.CompleteVaultLockOutput
 
 	response *aws.Response
 }

@@ -6,47 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/types"
 )
-
-// Represents the request to sign out all devices.
-type GlobalSignOutInput struct {
-	_ struct{} `type:"structure"`
-
-	// The access token.
-	//
-	// AccessToken is a required field
-	AccessToken *string `type:"string" required:"true" sensitive:"true"`
-}
-
-// String returns the string representation
-func (s GlobalSignOutInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GlobalSignOutInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GlobalSignOutInput"}
-
-	if s.AccessToken == nil {
-		invalidParams.Add(aws.NewErrParamRequired("AccessToken"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// The response to the request to sign out all devices.
-type GlobalSignOutOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s GlobalSignOutOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGlobalSignOut = "GlobalSignOut"
 
@@ -63,7 +24,7 @@ const opGlobalSignOut = "GlobalSignOut"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/GlobalSignOut
-func (c *Client) GlobalSignOutRequest(input *GlobalSignOutInput) GlobalSignOutRequest {
+func (c *Client) GlobalSignOutRequest(input *types.GlobalSignOutInput) GlobalSignOutRequest {
 	op := &aws.Operation{
 		Name:       opGlobalSignOut,
 		HTTPMethod: "POST",
@@ -71,10 +32,10 @@ func (c *Client) GlobalSignOutRequest(input *GlobalSignOutInput) GlobalSignOutRe
 	}
 
 	if input == nil {
-		input = &GlobalSignOutInput{}
+		input = &types.GlobalSignOutInput{}
 	}
 
-	req := c.newRequest(op, input, &GlobalSignOutOutput{})
+	req := c.newRequest(op, input, &types.GlobalSignOutOutput{})
 	return GlobalSignOutRequest{Request: req, Input: input, Copy: c.GlobalSignOutRequest}
 }
 
@@ -82,8 +43,8 @@ func (c *Client) GlobalSignOutRequest(input *GlobalSignOutInput) GlobalSignOutRe
 // GlobalSignOut API operation.
 type GlobalSignOutRequest struct {
 	*aws.Request
-	Input *GlobalSignOutInput
-	Copy  func(*GlobalSignOutInput) GlobalSignOutRequest
+	Input *types.GlobalSignOutInput
+	Copy  func(*types.GlobalSignOutInput) GlobalSignOutRequest
 }
 
 // Send marshals and sends the GlobalSignOut API request.
@@ -95,7 +56,7 @@ func (r GlobalSignOutRequest) Send(ctx context.Context) (*GlobalSignOutResponse,
 	}
 
 	resp := &GlobalSignOutResponse{
-		GlobalSignOutOutput: r.Request.Data.(*GlobalSignOutOutput),
+		GlobalSignOutOutput: r.Request.Data.(*types.GlobalSignOutOutput),
 		response:            &aws.Response{Request: r.Request},
 	}
 
@@ -105,7 +66,7 @@ func (r GlobalSignOutRequest) Send(ctx context.Context) (*GlobalSignOutResponse,
 // GlobalSignOutResponse is the response type for the
 // GlobalSignOut API operation.
 type GlobalSignOutResponse struct {
-	*GlobalSignOutOutput
+	*types.GlobalSignOutOutput
 
 	response *aws.Response
 }

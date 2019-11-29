@@ -6,101 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/secretsmanager/types"
 )
-
-type UpdateSecretVersionStageInput struct {
-	_ struct{} `type:"structure"`
-
-	// (Optional) The secret version ID that you want to add the staging label to.
-	// If you want to remove a label from a version, then do not specify this parameter.
-	//
-	// If the staging label is already attached to a different version of the secret,
-	// then you must also specify the RemoveFromVersionId parameter.
-	MoveToVersionId *string `min:"32" type:"string"`
-
-	// Specifies the secret version ID of the version that the staging label is
-	// to be removed from. If the staging label you are trying to attach to one
-	// version is already attached to a different version, then you must include
-	// this parameter and specify the version that the label is to be removed from.
-	// If the label is attached and you either do not specify this parameter, or
-	// the version ID does not match, then the operation fails.
-	RemoveFromVersionId *string `min:"32" type:"string"`
-
-	// Specifies the secret with the version whose list of staging labels you want
-	// to modify. You can specify either the Amazon Resource Name (ARN) or the friendly
-	// name of the secret.
-	//
-	// If you specify an ARN, we generally recommend that you specify a complete
-	// ARN. You can specify a partial ARN too—for example, if you don’t include
-	// the final hyphen and six random characters that Secrets Manager adds at the
-	// end of the ARN when you created the secret. A partial ARN match can work
-	// as long as it uniquely matches only one secret. However, if your secret has
-	// a name that ends in a hyphen followed by six characters (before Secrets Manager
-	// adds the hyphen and six characters to the ARN) and you try to use that as
-	// a partial ARN, then those characters cause Secrets Manager to assume that
-	// you’re specifying a complete ARN. This confusion can cause unexpected results.
-	// To avoid this situation, we recommend that you don’t create secret names
-	// that end with a hyphen followed by six characters.
-	//
-	// SecretId is a required field
-	SecretId *string `min:"1" type:"string" required:"true"`
-
-	// The staging label to add to this version.
-	//
-	// VersionStage is a required field
-	VersionStage *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s UpdateSecretVersionStageInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateSecretVersionStageInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateSecretVersionStageInput"}
-	if s.MoveToVersionId != nil && len(*s.MoveToVersionId) < 32 {
-		invalidParams.Add(aws.NewErrParamMinLen("MoveToVersionId", 32))
-	}
-	if s.RemoveFromVersionId != nil && len(*s.RemoveFromVersionId) < 32 {
-		invalidParams.Add(aws.NewErrParamMinLen("RemoveFromVersionId", 32))
-	}
-
-	if s.SecretId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("SecretId"))
-	}
-	if s.SecretId != nil && len(*s.SecretId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("SecretId", 1))
-	}
-
-	if s.VersionStage == nil {
-		invalidParams.Add(aws.NewErrParamRequired("VersionStage"))
-	}
-	if s.VersionStage != nil && len(*s.VersionStage) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("VersionStage", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type UpdateSecretVersionStageOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The ARN of the secret with the staging label that was modified.
-	ARN *string `min:"20" type:"string"`
-
-	// The friendly name of the secret with the staging label that was modified.
-	Name *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s UpdateSecretVersionStageOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opUpdateSecretVersionStage = "UpdateSecretVersionStage"
 
@@ -149,7 +56,7 @@ const opUpdateSecretVersionStage = "UpdateSecretVersionStage"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/secretsmanager-2017-10-17/UpdateSecretVersionStage
-func (c *Client) UpdateSecretVersionStageRequest(input *UpdateSecretVersionStageInput) UpdateSecretVersionStageRequest {
+func (c *Client) UpdateSecretVersionStageRequest(input *types.UpdateSecretVersionStageInput) UpdateSecretVersionStageRequest {
 	op := &aws.Operation{
 		Name:       opUpdateSecretVersionStage,
 		HTTPMethod: "POST",
@@ -157,10 +64,10 @@ func (c *Client) UpdateSecretVersionStageRequest(input *UpdateSecretVersionStage
 	}
 
 	if input == nil {
-		input = &UpdateSecretVersionStageInput{}
+		input = &types.UpdateSecretVersionStageInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateSecretVersionStageOutput{})
+	req := c.newRequest(op, input, &types.UpdateSecretVersionStageOutput{})
 	return UpdateSecretVersionStageRequest{Request: req, Input: input, Copy: c.UpdateSecretVersionStageRequest}
 }
 
@@ -168,8 +75,8 @@ func (c *Client) UpdateSecretVersionStageRequest(input *UpdateSecretVersionStage
 // UpdateSecretVersionStage API operation.
 type UpdateSecretVersionStageRequest struct {
 	*aws.Request
-	Input *UpdateSecretVersionStageInput
-	Copy  func(*UpdateSecretVersionStageInput) UpdateSecretVersionStageRequest
+	Input *types.UpdateSecretVersionStageInput
+	Copy  func(*types.UpdateSecretVersionStageInput) UpdateSecretVersionStageRequest
 }
 
 // Send marshals and sends the UpdateSecretVersionStage API request.
@@ -181,7 +88,7 @@ func (r UpdateSecretVersionStageRequest) Send(ctx context.Context) (*UpdateSecre
 	}
 
 	resp := &UpdateSecretVersionStageResponse{
-		UpdateSecretVersionStageOutput: r.Request.Data.(*UpdateSecretVersionStageOutput),
+		UpdateSecretVersionStageOutput: r.Request.Data.(*types.UpdateSecretVersionStageOutput),
 		response:                       &aws.Response{Request: r.Request},
 	}
 
@@ -191,7 +98,7 @@ func (r UpdateSecretVersionStageRequest) Send(ctx context.Context) (*UpdateSecre
 // UpdateSecretVersionStageResponse is the response type for the
 // UpdateSecretVersionStage API operation.
 type UpdateSecretVersionStageResponse struct {
-	*UpdateSecretVersionStageOutput
+	*types.UpdateSecretVersionStageOutput
 
 	response *aws.Response
 }

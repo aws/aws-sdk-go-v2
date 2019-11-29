@@ -4,164 +4,10 @@ package amplify
 
 import (
 	"context"
-	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/amplify/types"
 )
-
-// Request structure for Start job request.
-type StartJobInput struct {
-	_ struct{} `type:"structure"`
-
-	// Unique Id for an Amplify App.
-	//
-	// AppId is a required field
-	AppId *string `location:"uri" locationName:"appId" min:"1" type:"string" required:"true"`
-
-	// Name for the branch, for the Job.
-	//
-	// BranchName is a required field
-	BranchName *string `location:"uri" locationName:"branchName" min:"1" type:"string" required:"true"`
-
-	// Commit Id from 3rd party repository provider for the Job.
-	CommitId *string `locationName:"commitId" type:"string"`
-
-	// Commit message from 3rd party repository provider for the Job.
-	CommitMessage *string `locationName:"commitMessage" type:"string"`
-
-	// Commit date / time for the Job.
-	CommitTime *time.Time `locationName:"commitTime" type:"timestamp"`
-
-	// Unique Id for an existing job. Required for "RETRY" JobType.
-	JobId *string `locationName:"jobId" type:"string"`
-
-	// Descriptive reason for starting this job.
-	JobReason *string `locationName:"jobReason" type:"string"`
-
-	// Type for the Job. Available JobTypes are: \n "RELEASE": Start a new job with
-	// the latest change from the specified branch. Only available for apps that
-	// have connected to a repository. "RETRY": Retry an existing job. JobId is
-	// required for this type of job.
-	//
-	// JobType is a required field
-	JobType JobType `locationName:"jobType" type:"string" required:"true" enum:"true"`
-}
-
-// String returns the string representation
-func (s StartJobInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *StartJobInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "StartJobInput"}
-
-	if s.AppId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("AppId"))
-	}
-	if s.AppId != nil && len(*s.AppId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("AppId", 1))
-	}
-
-	if s.BranchName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("BranchName"))
-	}
-	if s.BranchName != nil && len(*s.BranchName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("BranchName", 1))
-	}
-	if len(s.JobType) == 0 {
-		invalidParams.Add(aws.NewErrParamRequired("JobType"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s StartJobInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.CommitId != nil {
-		v := *s.CommitId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "commitId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.CommitMessage != nil {
-		v := *s.CommitMessage
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "commitMessage", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.CommitTime != nil {
-		v := *s.CommitTime
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "commitTime",
-			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
-	}
-	if s.JobId != nil {
-		v := *s.JobId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "jobId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.JobReason != nil {
-		v := *s.JobReason
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "jobReason", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if len(s.JobType) > 0 {
-		v := s.JobType
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "jobType", protocol.QuotedValue{ValueMarshaler: v}, metadata)
-	}
-	if s.AppId != nil {
-		v := *s.AppId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "appId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.BranchName != nil {
-		v := *s.BranchName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "branchName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-// Result structure for run job request.
-type StartJobOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Summary for the Job.
-	//
-	// JobSummary is a required field
-	JobSummary *JobSummary `locationName:"jobSummary" type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s StartJobOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s StartJobOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.JobSummary != nil {
-		v := s.JobSummary
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "jobSummary", v, metadata)
-	}
-	return nil
-}
 
 const opStartJob = "StartJob"
 
@@ -178,7 +24,7 @@ const opStartJob = "StartJob"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/StartJob
-func (c *Client) StartJobRequest(input *StartJobInput) StartJobRequest {
+func (c *Client) StartJobRequest(input *types.StartJobInput) StartJobRequest {
 	op := &aws.Operation{
 		Name:       opStartJob,
 		HTTPMethod: "POST",
@@ -186,10 +32,10 @@ func (c *Client) StartJobRequest(input *StartJobInput) StartJobRequest {
 	}
 
 	if input == nil {
-		input = &StartJobInput{}
+		input = &types.StartJobInput{}
 	}
 
-	req := c.newRequest(op, input, &StartJobOutput{})
+	req := c.newRequest(op, input, &types.StartJobOutput{})
 	return StartJobRequest{Request: req, Input: input, Copy: c.StartJobRequest}
 }
 
@@ -197,8 +43,8 @@ func (c *Client) StartJobRequest(input *StartJobInput) StartJobRequest {
 // StartJob API operation.
 type StartJobRequest struct {
 	*aws.Request
-	Input *StartJobInput
-	Copy  func(*StartJobInput) StartJobRequest
+	Input *types.StartJobInput
+	Copy  func(*types.StartJobInput) StartJobRequest
 }
 
 // Send marshals and sends the StartJob API request.
@@ -210,7 +56,7 @@ func (r StartJobRequest) Send(ctx context.Context) (*StartJobResponse, error) {
 	}
 
 	resp := &StartJobResponse{
-		StartJobOutput: r.Request.Data.(*StartJobOutput),
+		StartJobOutput: r.Request.Data.(*types.StartJobOutput),
 		response:       &aws.Response{Request: r.Request},
 	}
 
@@ -220,7 +66,7 @@ func (r StartJobRequest) Send(ctx context.Context) (*StartJobResponse, error) {
 // StartJobResponse is the response type for the
 // StartJob API operation.
 type StartJobResponse struct {
-	*StartJobOutput
+	*types.StartJobOutput
 
 	response *aws.Response
 }

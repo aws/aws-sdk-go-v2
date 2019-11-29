@@ -6,28 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
+	"github.com/aws/aws-sdk-go-v2/service/organizations/types"
 )
-
-type DeleteOrganizationInput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteOrganizationInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type DeleteOrganizationOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteOrganizationOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteOrganization = "DeleteOrganization"
 
@@ -45,7 +27,7 @@ const opDeleteOrganization = "DeleteOrganization"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/DeleteOrganization
-func (c *Client) DeleteOrganizationRequest(input *DeleteOrganizationInput) DeleteOrganizationRequest {
+func (c *Client) DeleteOrganizationRequest(input *types.DeleteOrganizationInput) DeleteOrganizationRequest {
 	op := &aws.Operation{
 		Name:       opDeleteOrganization,
 		HTTPMethod: "POST",
@@ -53,10 +35,10 @@ func (c *Client) DeleteOrganizationRequest(input *DeleteOrganizationInput) Delet
 	}
 
 	if input == nil {
-		input = &DeleteOrganizationInput{}
+		input = &types.DeleteOrganizationInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteOrganizationOutput{})
+	req := c.newRequest(op, input, &types.DeleteOrganizationOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return DeleteOrganizationRequest{Request: req, Input: input, Copy: c.DeleteOrganizationRequest}
@@ -66,8 +48,8 @@ func (c *Client) DeleteOrganizationRequest(input *DeleteOrganizationInput) Delet
 // DeleteOrganization API operation.
 type DeleteOrganizationRequest struct {
 	*aws.Request
-	Input *DeleteOrganizationInput
-	Copy  func(*DeleteOrganizationInput) DeleteOrganizationRequest
+	Input *types.DeleteOrganizationInput
+	Copy  func(*types.DeleteOrganizationInput) DeleteOrganizationRequest
 }
 
 // Send marshals and sends the DeleteOrganization API request.
@@ -79,7 +61,7 @@ func (r DeleteOrganizationRequest) Send(ctx context.Context) (*DeleteOrganizatio
 	}
 
 	resp := &DeleteOrganizationResponse{
-		DeleteOrganizationOutput: r.Request.Data.(*DeleteOrganizationOutput),
+		DeleteOrganizationOutput: r.Request.Data.(*types.DeleteOrganizationOutput),
 		response:                 &aws.Response{Request: r.Request},
 	}
 
@@ -89,7 +71,7 @@ func (r DeleteOrganizationRequest) Send(ctx context.Context) (*DeleteOrganizatio
 // DeleteOrganizationResponse is the response type for the
 // DeleteOrganization API operation.
 type DeleteOrganizationResponse struct {
-	*DeleteOrganizationOutput
+	*types.DeleteOrganizationOutput
 
 	response *aws.Response
 }

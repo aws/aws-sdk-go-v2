@@ -6,83 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/apigatewayv2/types"
 )
-
-type GetModelTemplateInput struct {
-	_ struct{} `type:"structure"`
-
-	// ApiId is a required field
-	ApiId *string `location:"uri" locationName:"apiId" type:"string" required:"true"`
-
-	// ModelId is a required field
-	ModelId *string `location:"uri" locationName:"modelId" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetModelTemplateInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetModelTemplateInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetModelTemplateInput"}
-
-	if s.ApiId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ApiId"))
-	}
-
-	if s.ModelId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ModelId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetModelTemplateInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.ApiId != nil {
-		v := *s.ApiId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "apiId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.ModelId != nil {
-		v := *s.ModelId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "modelId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type GetModelTemplateOutput struct {
-	_ struct{} `type:"structure"`
-
-	Value *string `locationName:"value" type:"string"`
-}
-
-// String returns the string representation
-func (s GetModelTemplateOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetModelTemplateOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.Value != nil {
-		v := *s.Value
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "value", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opGetModelTemplate = "GetModelTemplate"
 
@@ -99,7 +24,7 @@ const opGetModelTemplate = "GetModelTemplate"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/apigatewayv2-2018-11-29/GetModelTemplate
-func (c *Client) GetModelTemplateRequest(input *GetModelTemplateInput) GetModelTemplateRequest {
+func (c *Client) GetModelTemplateRequest(input *types.GetModelTemplateInput) GetModelTemplateRequest {
 	op := &aws.Operation{
 		Name:       opGetModelTemplate,
 		HTTPMethod: "GET",
@@ -107,10 +32,10 @@ func (c *Client) GetModelTemplateRequest(input *GetModelTemplateInput) GetModelT
 	}
 
 	if input == nil {
-		input = &GetModelTemplateInput{}
+		input = &types.GetModelTemplateInput{}
 	}
 
-	req := c.newRequest(op, input, &GetModelTemplateOutput{})
+	req := c.newRequest(op, input, &types.GetModelTemplateOutput{})
 	return GetModelTemplateRequest{Request: req, Input: input, Copy: c.GetModelTemplateRequest}
 }
 
@@ -118,8 +43,8 @@ func (c *Client) GetModelTemplateRequest(input *GetModelTemplateInput) GetModelT
 // GetModelTemplate API operation.
 type GetModelTemplateRequest struct {
 	*aws.Request
-	Input *GetModelTemplateInput
-	Copy  func(*GetModelTemplateInput) GetModelTemplateRequest
+	Input *types.GetModelTemplateInput
+	Copy  func(*types.GetModelTemplateInput) GetModelTemplateRequest
 }
 
 // Send marshals and sends the GetModelTemplate API request.
@@ -131,7 +56,7 @@ func (r GetModelTemplateRequest) Send(ctx context.Context) (*GetModelTemplateRes
 	}
 
 	resp := &GetModelTemplateResponse{
-		GetModelTemplateOutput: r.Request.Data.(*GetModelTemplateOutput),
+		GetModelTemplateOutput: r.Request.Data.(*types.GetModelTemplateOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -141,7 +66,7 @@ func (r GetModelTemplateRequest) Send(ctx context.Context) (*GetModelTemplateRes
 // GetModelTemplateResponse is the response type for the
 // GetModelTemplate API operation.
 type GetModelTemplateResponse struct {
-	*GetModelTemplateOutput
+	*types.GetModelTemplateOutput
 
 	response *aws.Response
 }

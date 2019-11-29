@@ -6,69 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
 )
-
-type CreateCodeRepositoryInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the Git repository. The name must have 1 to 63 characters. Valid
-	// characters are a-z, A-Z, 0-9, and - (hyphen).
-	//
-	// CodeRepositoryName is a required field
-	CodeRepositoryName *string `min:"1" type:"string" required:"true"`
-
-	// Specifies details about the repository, including the URL where the repository
-	// is located, the default branch, and credentials to use to access the repository.
-	//
-	// GitConfig is a required field
-	GitConfig *GitConfig `type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s CreateCodeRepositoryInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateCodeRepositoryInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateCodeRepositoryInput"}
-
-	if s.CodeRepositoryName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("CodeRepositoryName"))
-	}
-	if s.CodeRepositoryName != nil && len(*s.CodeRepositoryName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("CodeRepositoryName", 1))
-	}
-
-	if s.GitConfig == nil {
-		invalidParams.Add(aws.NewErrParamRequired("GitConfig"))
-	}
-	if s.GitConfig != nil {
-		if err := s.GitConfig.Validate(); err != nil {
-			invalidParams.AddNested("GitConfig", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type CreateCodeRepositoryOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the new repository.
-	//
-	// CodeRepositoryArn is a required field
-	CodeRepositoryArn *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s CreateCodeRepositoryOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCreateCodeRepository = "CreateCodeRepository"
 
@@ -93,7 +32,7 @@ const opCreateCodeRepository = "CreateCodeRepository"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateCodeRepository
-func (c *Client) CreateCodeRepositoryRequest(input *CreateCodeRepositoryInput) CreateCodeRepositoryRequest {
+func (c *Client) CreateCodeRepositoryRequest(input *types.CreateCodeRepositoryInput) CreateCodeRepositoryRequest {
 	op := &aws.Operation{
 		Name:       opCreateCodeRepository,
 		HTTPMethod: "POST",
@@ -101,10 +40,10 @@ func (c *Client) CreateCodeRepositoryRequest(input *CreateCodeRepositoryInput) C
 	}
 
 	if input == nil {
-		input = &CreateCodeRepositoryInput{}
+		input = &types.CreateCodeRepositoryInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateCodeRepositoryOutput{})
+	req := c.newRequest(op, input, &types.CreateCodeRepositoryOutput{})
 	return CreateCodeRepositoryRequest{Request: req, Input: input, Copy: c.CreateCodeRepositoryRequest}
 }
 
@@ -112,8 +51,8 @@ func (c *Client) CreateCodeRepositoryRequest(input *CreateCodeRepositoryInput) C
 // CreateCodeRepository API operation.
 type CreateCodeRepositoryRequest struct {
 	*aws.Request
-	Input *CreateCodeRepositoryInput
-	Copy  func(*CreateCodeRepositoryInput) CreateCodeRepositoryRequest
+	Input *types.CreateCodeRepositoryInput
+	Copy  func(*types.CreateCodeRepositoryInput) CreateCodeRepositoryRequest
 }
 
 // Send marshals and sends the CreateCodeRepository API request.
@@ -125,7 +64,7 @@ func (r CreateCodeRepositoryRequest) Send(ctx context.Context) (*CreateCodeRepos
 	}
 
 	resp := &CreateCodeRepositoryResponse{
-		CreateCodeRepositoryOutput: r.Request.Data.(*CreateCodeRepositoryOutput),
+		CreateCodeRepositoryOutput: r.Request.Data.(*types.CreateCodeRepositoryOutput),
 		response:                   &aws.Response{Request: r.Request},
 	}
 
@@ -135,7 +74,7 @@ func (r CreateCodeRepositoryRequest) Send(ctx context.Context) (*CreateCodeRepos
 // CreateCodeRepositoryResponse is the response type for the
 // CreateCodeRepository API operation.
 type CreateCodeRepositoryResponse struct {
-	*CreateCodeRepositoryOutput
+	*types.CreateCodeRepositoryOutput
 
 	response *aws.Response
 }

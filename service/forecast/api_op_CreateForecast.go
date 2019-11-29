@@ -6,60 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/forecast/types"
 )
-
-type CreateForecastInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name for the forecast.
-	//
-	// ForecastName is a required field
-	ForecastName *string `min:"1" type:"string" required:"true"`
-
-	// The Amazon Resource Name (ARN) of the predictor to use to generate the forecast.
-	//
-	// PredictorArn is a required field
-	PredictorArn *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s CreateForecastInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateForecastInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateForecastInput"}
-
-	if s.ForecastName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ForecastName"))
-	}
-	if s.ForecastName != nil && len(*s.ForecastName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ForecastName", 1))
-	}
-
-	if s.PredictorArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("PredictorArn"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type CreateForecastOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the forecast.
-	ForecastArn *string `type:"string"`
-}
-
-// String returns the string representation
-func (s CreateForecastOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCreateForecast = "CreateForecast"
 
@@ -95,7 +43,7 @@ const opCreateForecast = "CreateForecast"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/CreateForecast
-func (c *Client) CreateForecastRequest(input *CreateForecastInput) CreateForecastRequest {
+func (c *Client) CreateForecastRequest(input *types.CreateForecastInput) CreateForecastRequest {
 	op := &aws.Operation{
 		Name:       opCreateForecast,
 		HTTPMethod: "POST",
@@ -103,10 +51,10 @@ func (c *Client) CreateForecastRequest(input *CreateForecastInput) CreateForecas
 	}
 
 	if input == nil {
-		input = &CreateForecastInput{}
+		input = &types.CreateForecastInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateForecastOutput{})
+	req := c.newRequest(op, input, &types.CreateForecastOutput{})
 	return CreateForecastRequest{Request: req, Input: input, Copy: c.CreateForecastRequest}
 }
 
@@ -114,8 +62,8 @@ func (c *Client) CreateForecastRequest(input *CreateForecastInput) CreateForecas
 // CreateForecast API operation.
 type CreateForecastRequest struct {
 	*aws.Request
-	Input *CreateForecastInput
-	Copy  func(*CreateForecastInput) CreateForecastRequest
+	Input *types.CreateForecastInput
+	Copy  func(*types.CreateForecastInput) CreateForecastRequest
 }
 
 // Send marshals and sends the CreateForecast API request.
@@ -127,7 +75,7 @@ func (r CreateForecastRequest) Send(ctx context.Context) (*CreateForecastRespons
 	}
 
 	resp := &CreateForecastResponse{
-		CreateForecastOutput: r.Request.Data.(*CreateForecastOutput),
+		CreateForecastOutput: r.Request.Data.(*types.CreateForecastOutput),
 		response:             &aws.Response{Request: r.Request},
 	}
 
@@ -137,7 +85,7 @@ func (r CreateForecastRequest) Send(ctx context.Context) (*CreateForecastRespons
 // CreateForecastResponse is the response type for the
 // CreateForecast API operation.
 type CreateForecastResponse struct {
-	*CreateForecastOutput
+	*types.CreateForecastOutput
 
 	response *aws.Response
 }

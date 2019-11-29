@@ -6,48 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/shield/types"
 )
-
-type DeleteProtectionInput struct {
-	_ struct{} `type:"structure"`
-
-	// The unique identifier (ID) for the Protection object to be deleted.
-	//
-	// ProtectionId is a required field
-	ProtectionId *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteProtectionInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteProtectionInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteProtectionInput"}
-
-	if s.ProtectionId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ProtectionId"))
-	}
-	if s.ProtectionId != nil && len(*s.ProtectionId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ProtectionId", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteProtectionOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteProtectionOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteProtection = "DeleteProtection"
 
@@ -64,7 +24,7 @@ const opDeleteProtection = "DeleteProtection"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/DeleteProtection
-func (c *Client) DeleteProtectionRequest(input *DeleteProtectionInput) DeleteProtectionRequest {
+func (c *Client) DeleteProtectionRequest(input *types.DeleteProtectionInput) DeleteProtectionRequest {
 	op := &aws.Operation{
 		Name:       opDeleteProtection,
 		HTTPMethod: "POST",
@@ -72,10 +32,10 @@ func (c *Client) DeleteProtectionRequest(input *DeleteProtectionInput) DeletePro
 	}
 
 	if input == nil {
-		input = &DeleteProtectionInput{}
+		input = &types.DeleteProtectionInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteProtectionOutput{})
+	req := c.newRequest(op, input, &types.DeleteProtectionOutput{})
 	return DeleteProtectionRequest{Request: req, Input: input, Copy: c.DeleteProtectionRequest}
 }
 
@@ -83,8 +43,8 @@ func (c *Client) DeleteProtectionRequest(input *DeleteProtectionInput) DeletePro
 // DeleteProtection API operation.
 type DeleteProtectionRequest struct {
 	*aws.Request
-	Input *DeleteProtectionInput
-	Copy  func(*DeleteProtectionInput) DeleteProtectionRequest
+	Input *types.DeleteProtectionInput
+	Copy  func(*types.DeleteProtectionInput) DeleteProtectionRequest
 }
 
 // Send marshals and sends the DeleteProtection API request.
@@ -96,7 +56,7 @@ func (r DeleteProtectionRequest) Send(ctx context.Context) (*DeleteProtectionRes
 	}
 
 	resp := &DeleteProtectionResponse{
-		DeleteProtectionOutput: r.Request.Data.(*DeleteProtectionOutput),
+		DeleteProtectionOutput: r.Request.Data.(*types.DeleteProtectionOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -106,7 +66,7 @@ func (r DeleteProtectionRequest) Send(ctx context.Context) (*DeleteProtectionRes
 // DeleteProtectionResponse is the response type for the
 // DeleteProtection API operation.
 type DeleteProtectionResponse struct {
-	*DeleteProtectionOutput
+	*types.DeleteProtectionOutput
 
 	response *aws.Response
 }

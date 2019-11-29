@@ -4,93 +4,10 @@ package kinesis
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/kinesis/types"
 )
-
-// A PutRecords request.
-type PutRecordsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The records associated with the request.
-	//
-	// Records is a required field
-	Records []PutRecordsRequestEntry `min:"1" type:"list" required:"true"`
-
-	// The stream name associated with the request.
-	//
-	// StreamName is a required field
-	StreamName *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s PutRecordsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *PutRecordsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "PutRecordsInput"}
-
-	if s.Records == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Records"))
-	}
-	if s.Records != nil && len(s.Records) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Records", 1))
-	}
-
-	if s.StreamName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("StreamName"))
-	}
-	if s.StreamName != nil && len(*s.StreamName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("StreamName", 1))
-	}
-	if s.Records != nil {
-		for i, v := range s.Records {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Records", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// PutRecords results.
-type PutRecordsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The encryption type used on the records. This parameter can be one of the
-	// following values:
-	//
-	//    * NONE: Do not encrypt the records.
-	//
-	//    * KMS: Use server-side encryption on the records using a customer-managed
-	//    AWS KMS key.
-	EncryptionType EncryptionType `type:"string" enum:"true"`
-
-	// The number of unsuccessfully processed records in a PutRecords request.
-	FailedRecordCount *int64 `min:"1" type:"integer"`
-
-	// An array of successfully and unsuccessfully processed record results, correlated
-	// with the request by natural ordering. A record that is successfully added
-	// to a stream includes SequenceNumber and ShardId in the result. A record that
-	// fails to be added to a stream includes ErrorCode and ErrorMessage in the
-	// result.
-	//
-	// Records is a required field
-	Records []PutRecordsResultEntry `min:"1" type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s PutRecordsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opPutRecords = "PutRecords"
 
@@ -165,7 +82,7 @@ const opPutRecords = "PutRecords"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/PutRecords
-func (c *Client) PutRecordsRequest(input *PutRecordsInput) PutRecordsRequest {
+func (c *Client) PutRecordsRequest(input *types.PutRecordsInput) PutRecordsRequest {
 	op := &aws.Operation{
 		Name:       opPutRecords,
 		HTTPMethod: "POST",
@@ -173,10 +90,10 @@ func (c *Client) PutRecordsRequest(input *PutRecordsInput) PutRecordsRequest {
 	}
 
 	if input == nil {
-		input = &PutRecordsInput{}
+		input = &types.PutRecordsInput{}
 	}
 
-	req := c.newRequest(op, input, &PutRecordsOutput{})
+	req := c.newRequest(op, input, &types.PutRecordsOutput{})
 	return PutRecordsRequest{Request: req, Input: input, Copy: c.PutRecordsRequest}
 }
 
@@ -184,8 +101,8 @@ func (c *Client) PutRecordsRequest(input *PutRecordsInput) PutRecordsRequest {
 // PutRecords API operation.
 type PutRecordsRequest struct {
 	*aws.Request
-	Input *PutRecordsInput
-	Copy  func(*PutRecordsInput) PutRecordsRequest
+	Input *types.PutRecordsInput
+	Copy  func(*types.PutRecordsInput) PutRecordsRequest
 }
 
 // Send marshals and sends the PutRecords API request.
@@ -197,7 +114,7 @@ func (r PutRecordsRequest) Send(ctx context.Context) (*PutRecordsResponse, error
 	}
 
 	resp := &PutRecordsResponse{
-		PutRecordsOutput: r.Request.Data.(*PutRecordsOutput),
+		PutRecordsOutput: r.Request.Data.(*types.PutRecordsOutput),
 		response:         &aws.Response{Request: r.Request},
 	}
 
@@ -207,7 +124,7 @@ func (r PutRecordsRequest) Send(ctx context.Context) (*PutRecordsResponse, error
 // PutRecordsResponse is the response type for the
 // PutRecords API operation.
 type PutRecordsResponse struct {
-	*PutRecordsOutput
+	*types.PutRecordsOutput
 
 	response *aws.Response
 }

@@ -6,47 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
 )
-
-type DeleteNotebookInstanceLifecycleConfigInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the lifecycle configuration to delete.
-	//
-	// NotebookInstanceLifecycleConfigName is a required field
-	NotebookInstanceLifecycleConfigName *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteNotebookInstanceLifecycleConfigInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteNotebookInstanceLifecycleConfigInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteNotebookInstanceLifecycleConfigInput"}
-
-	if s.NotebookInstanceLifecycleConfigName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("NotebookInstanceLifecycleConfigName"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteNotebookInstanceLifecycleConfigOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteNotebookInstanceLifecycleConfigOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteNotebookInstanceLifecycleConfig = "DeleteNotebookInstanceLifecycleConfig"
 
@@ -63,7 +26,7 @@ const opDeleteNotebookInstanceLifecycleConfig = "DeleteNotebookInstanceLifecycle
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DeleteNotebookInstanceLifecycleConfig
-func (c *Client) DeleteNotebookInstanceLifecycleConfigRequest(input *DeleteNotebookInstanceLifecycleConfigInput) DeleteNotebookInstanceLifecycleConfigRequest {
+func (c *Client) DeleteNotebookInstanceLifecycleConfigRequest(input *types.DeleteNotebookInstanceLifecycleConfigInput) DeleteNotebookInstanceLifecycleConfigRequest {
 	op := &aws.Operation{
 		Name:       opDeleteNotebookInstanceLifecycleConfig,
 		HTTPMethod: "POST",
@@ -71,10 +34,10 @@ func (c *Client) DeleteNotebookInstanceLifecycleConfigRequest(input *DeleteNoteb
 	}
 
 	if input == nil {
-		input = &DeleteNotebookInstanceLifecycleConfigInput{}
+		input = &types.DeleteNotebookInstanceLifecycleConfigInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteNotebookInstanceLifecycleConfigOutput{})
+	req := c.newRequest(op, input, &types.DeleteNotebookInstanceLifecycleConfigOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return DeleteNotebookInstanceLifecycleConfigRequest{Request: req, Input: input, Copy: c.DeleteNotebookInstanceLifecycleConfigRequest}
@@ -84,8 +47,8 @@ func (c *Client) DeleteNotebookInstanceLifecycleConfigRequest(input *DeleteNoteb
 // DeleteNotebookInstanceLifecycleConfig API operation.
 type DeleteNotebookInstanceLifecycleConfigRequest struct {
 	*aws.Request
-	Input *DeleteNotebookInstanceLifecycleConfigInput
-	Copy  func(*DeleteNotebookInstanceLifecycleConfigInput) DeleteNotebookInstanceLifecycleConfigRequest
+	Input *types.DeleteNotebookInstanceLifecycleConfigInput
+	Copy  func(*types.DeleteNotebookInstanceLifecycleConfigInput) DeleteNotebookInstanceLifecycleConfigRequest
 }
 
 // Send marshals and sends the DeleteNotebookInstanceLifecycleConfig API request.
@@ -97,7 +60,7 @@ func (r DeleteNotebookInstanceLifecycleConfigRequest) Send(ctx context.Context) 
 	}
 
 	resp := &DeleteNotebookInstanceLifecycleConfigResponse{
-		DeleteNotebookInstanceLifecycleConfigOutput: r.Request.Data.(*DeleteNotebookInstanceLifecycleConfigOutput),
+		DeleteNotebookInstanceLifecycleConfigOutput: r.Request.Data.(*types.DeleteNotebookInstanceLifecycleConfigOutput),
 		response: &aws.Response{Request: r.Request},
 	}
 
@@ -107,7 +70,7 @@ func (r DeleteNotebookInstanceLifecycleConfigRequest) Send(ctx context.Context) 
 // DeleteNotebookInstanceLifecycleConfigResponse is the response type for the
 // DeleteNotebookInstanceLifecycleConfig API operation.
 type DeleteNotebookInstanceLifecycleConfigResponse struct {
-	*DeleteNotebookInstanceLifecycleConfigOutput
+	*types.DeleteNotebookInstanceLifecycleConfigOutput
 
 	response *aws.Response
 }

@@ -6,47 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
+	"github.com/aws/aws-sdk-go-v2/service/opsworks/types"
 )
-
-type UnassignInstanceInput struct {
-	_ struct{} `type:"structure"`
-
-	// The instance ID.
-	//
-	// InstanceId is a required field
-	InstanceId *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s UnassignInstanceInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UnassignInstanceInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UnassignInstanceInput"}
-
-	if s.InstanceId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("InstanceId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type UnassignInstanceOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s UnassignInstanceOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opUnassignInstance = "UnassignInstance"
 
@@ -71,7 +34,7 @@ const opUnassignInstance = "UnassignInstance"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/UnassignInstance
-func (c *Client) UnassignInstanceRequest(input *UnassignInstanceInput) UnassignInstanceRequest {
+func (c *Client) UnassignInstanceRequest(input *types.UnassignInstanceInput) UnassignInstanceRequest {
 	op := &aws.Operation{
 		Name:       opUnassignInstance,
 		HTTPMethod: "POST",
@@ -79,10 +42,10 @@ func (c *Client) UnassignInstanceRequest(input *UnassignInstanceInput) UnassignI
 	}
 
 	if input == nil {
-		input = &UnassignInstanceInput{}
+		input = &types.UnassignInstanceInput{}
 	}
 
-	req := c.newRequest(op, input, &UnassignInstanceOutput{})
+	req := c.newRequest(op, input, &types.UnassignInstanceOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return UnassignInstanceRequest{Request: req, Input: input, Copy: c.UnassignInstanceRequest}
@@ -92,8 +55,8 @@ func (c *Client) UnassignInstanceRequest(input *UnassignInstanceInput) UnassignI
 // UnassignInstance API operation.
 type UnassignInstanceRequest struct {
 	*aws.Request
-	Input *UnassignInstanceInput
-	Copy  func(*UnassignInstanceInput) UnassignInstanceRequest
+	Input *types.UnassignInstanceInput
+	Copy  func(*types.UnassignInstanceInput) UnassignInstanceRequest
 }
 
 // Send marshals and sends the UnassignInstance API request.
@@ -105,7 +68,7 @@ func (r UnassignInstanceRequest) Send(ctx context.Context) (*UnassignInstanceRes
 	}
 
 	resp := &UnassignInstanceResponse{
-		UnassignInstanceOutput: r.Request.Data.(*UnassignInstanceOutput),
+		UnassignInstanceOutput: r.Request.Data.(*types.UnassignInstanceOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -115,7 +78,7 @@ func (r UnassignInstanceRequest) Send(ctx context.Context) (*UnassignInstanceRes
 // UnassignInstanceResponse is the response type for the
 // UnassignInstance API operation.
 type UnassignInstanceResponse struct {
-	*UnassignInstanceOutput
+	*types.UnassignInstanceOutput
 
 	response *aws.Response
 }

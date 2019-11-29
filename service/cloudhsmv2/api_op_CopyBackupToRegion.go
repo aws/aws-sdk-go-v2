@@ -6,64 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/cloudhsmv2/types"
 )
-
-type CopyBackupToRegionInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the backup that will be copied to the destination region.
-	//
-	// BackupId is a required field
-	BackupId *string `type:"string" required:"true"`
-
-	// The AWS region that will contain your copied CloudHSM cluster backup.
-	//
-	// DestinationRegion is a required field
-	DestinationRegion *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s CopyBackupToRegionInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CopyBackupToRegionInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CopyBackupToRegionInput"}
-
-	if s.BackupId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("BackupId"))
-	}
-
-	if s.DestinationRegion == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DestinationRegion"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type CopyBackupToRegionOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Information on the backup that will be copied to the destination region,
-	// including CreateTimestamp, SourceBackup, SourceCluster, and Source Region.
-	// CreateTimestamp of the destination backup will be the same as that of the
-	// source backup.
-	//
-	// You will need to use the sourceBackupID returned in this operation to use
-	// the DescribeBackups operation on the backup that will be copied to the destination
-	// region.
-	DestinationBackup *DestinationBackup `type:"structure"`
-}
-
-// String returns the string representation
-func (s CopyBackupToRegionOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCopyBackupToRegion = "CopyBackupToRegion"
 
@@ -80,7 +24,7 @@ const opCopyBackupToRegion = "CopyBackupToRegion"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudhsmv2-2017-04-28/CopyBackupToRegion
-func (c *Client) CopyBackupToRegionRequest(input *CopyBackupToRegionInput) CopyBackupToRegionRequest {
+func (c *Client) CopyBackupToRegionRequest(input *types.CopyBackupToRegionInput) CopyBackupToRegionRequest {
 	op := &aws.Operation{
 		Name:       opCopyBackupToRegion,
 		HTTPMethod: "POST",
@@ -88,10 +32,10 @@ func (c *Client) CopyBackupToRegionRequest(input *CopyBackupToRegionInput) CopyB
 	}
 
 	if input == nil {
-		input = &CopyBackupToRegionInput{}
+		input = &types.CopyBackupToRegionInput{}
 	}
 
-	req := c.newRequest(op, input, &CopyBackupToRegionOutput{})
+	req := c.newRequest(op, input, &types.CopyBackupToRegionOutput{})
 	return CopyBackupToRegionRequest{Request: req, Input: input, Copy: c.CopyBackupToRegionRequest}
 }
 
@@ -99,8 +43,8 @@ func (c *Client) CopyBackupToRegionRequest(input *CopyBackupToRegionInput) CopyB
 // CopyBackupToRegion API operation.
 type CopyBackupToRegionRequest struct {
 	*aws.Request
-	Input *CopyBackupToRegionInput
-	Copy  func(*CopyBackupToRegionInput) CopyBackupToRegionRequest
+	Input *types.CopyBackupToRegionInput
+	Copy  func(*types.CopyBackupToRegionInput) CopyBackupToRegionRequest
 }
 
 // Send marshals and sends the CopyBackupToRegion API request.
@@ -112,7 +56,7 @@ func (r CopyBackupToRegionRequest) Send(ctx context.Context) (*CopyBackupToRegio
 	}
 
 	resp := &CopyBackupToRegionResponse{
-		CopyBackupToRegionOutput: r.Request.Data.(*CopyBackupToRegionOutput),
+		CopyBackupToRegionOutput: r.Request.Data.(*types.CopyBackupToRegionOutput),
 		response:                 &aws.Response{Request: r.Request},
 	}
 
@@ -122,7 +66,7 @@ func (r CopyBackupToRegionRequest) Send(ctx context.Context) (*CopyBackupToRegio
 // CopyBackupToRegionResponse is the response type for the
 // CopyBackupToRegion API operation.
 type CopyBackupToRegionResponse struct {
-	*CopyBackupToRegionOutput
+	*types.CopyBackupToRegionOutput
 
 	response *aws.Response
 }

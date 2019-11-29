@@ -4,89 +4,10 @@ package elasticbeanstalk
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/elasticbeanstalk/types"
 )
-
-// A list of validation messages for a specified configuration template.
-type ValidateConfigurationSettingsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the application that the configuration template or environment
-	// belongs to.
-	//
-	// ApplicationName is a required field
-	ApplicationName *string `min:"1" type:"string" required:"true"`
-
-	// The name of the environment to validate the settings against.
-	//
-	// Condition: You cannot specify both this and a configuration template name.
-	EnvironmentName *string `min:"4" type:"string"`
-
-	// A list of the options and desired values to evaluate.
-	//
-	// OptionSettings is a required field
-	OptionSettings []ConfigurationOptionSetting `type:"list" required:"true"`
-
-	// The name of the configuration template to validate the settings against.
-	//
-	// Condition: You cannot specify both this and an environment name.
-	TemplateName *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s ValidateConfigurationSettingsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ValidateConfigurationSettingsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ValidateConfigurationSettingsInput"}
-
-	if s.ApplicationName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ApplicationName"))
-	}
-	if s.ApplicationName != nil && len(*s.ApplicationName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ApplicationName", 1))
-	}
-	if s.EnvironmentName != nil && len(*s.EnvironmentName) < 4 {
-		invalidParams.Add(aws.NewErrParamMinLen("EnvironmentName", 4))
-	}
-
-	if s.OptionSettings == nil {
-		invalidParams.Add(aws.NewErrParamRequired("OptionSettings"))
-	}
-	if s.TemplateName != nil && len(*s.TemplateName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("TemplateName", 1))
-	}
-	if s.OptionSettings != nil {
-		for i, v := range s.OptionSettings {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "OptionSettings", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Provides a list of validation messages.
-type ValidateConfigurationSettingsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A list of ValidationMessage.
-	Messages []ValidationMessage `type:"list"`
-}
-
-// String returns the string representation
-func (s ValidateConfigurationSettingsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opValidateConfigurationSettings = "ValidateConfigurationSettings"
 
@@ -107,7 +28,7 @@ const opValidateConfigurationSettings = "ValidateConfigurationSettings"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/ValidateConfigurationSettings
-func (c *Client) ValidateConfigurationSettingsRequest(input *ValidateConfigurationSettingsInput) ValidateConfigurationSettingsRequest {
+func (c *Client) ValidateConfigurationSettingsRequest(input *types.ValidateConfigurationSettingsInput) ValidateConfigurationSettingsRequest {
 	op := &aws.Operation{
 		Name:       opValidateConfigurationSettings,
 		HTTPMethod: "POST",
@@ -115,10 +36,10 @@ func (c *Client) ValidateConfigurationSettingsRequest(input *ValidateConfigurati
 	}
 
 	if input == nil {
-		input = &ValidateConfigurationSettingsInput{}
+		input = &types.ValidateConfigurationSettingsInput{}
 	}
 
-	req := c.newRequest(op, input, &ValidateConfigurationSettingsOutput{})
+	req := c.newRequest(op, input, &types.ValidateConfigurationSettingsOutput{})
 	return ValidateConfigurationSettingsRequest{Request: req, Input: input, Copy: c.ValidateConfigurationSettingsRequest}
 }
 
@@ -126,8 +47,8 @@ func (c *Client) ValidateConfigurationSettingsRequest(input *ValidateConfigurati
 // ValidateConfigurationSettings API operation.
 type ValidateConfigurationSettingsRequest struct {
 	*aws.Request
-	Input *ValidateConfigurationSettingsInput
-	Copy  func(*ValidateConfigurationSettingsInput) ValidateConfigurationSettingsRequest
+	Input *types.ValidateConfigurationSettingsInput
+	Copy  func(*types.ValidateConfigurationSettingsInput) ValidateConfigurationSettingsRequest
 }
 
 // Send marshals and sends the ValidateConfigurationSettings API request.
@@ -139,7 +60,7 @@ func (r ValidateConfigurationSettingsRequest) Send(ctx context.Context) (*Valida
 	}
 
 	resp := &ValidateConfigurationSettingsResponse{
-		ValidateConfigurationSettingsOutput: r.Request.Data.(*ValidateConfigurationSettingsOutput),
+		ValidateConfigurationSettingsOutput: r.Request.Data.(*types.ValidateConfigurationSettingsOutput),
 		response:                            &aws.Response{Request: r.Request},
 	}
 
@@ -149,7 +70,7 @@ func (r ValidateConfigurationSettingsRequest) Send(ctx context.Context) (*Valida
 // ValidateConfigurationSettingsResponse is the response type for the
 // ValidateConfigurationSettings API operation.
 type ValidateConfigurationSettingsResponse struct {
-	*ValidateConfigurationSettingsOutput
+	*types.ValidateConfigurationSettingsOutput
 
 	response *aws.Response
 }

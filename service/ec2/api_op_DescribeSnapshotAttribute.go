@@ -6,71 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-// Contains the parameters for DescribeSnapshotAttribute.
-type DescribeSnapshotAttributeInput struct {
-	_ struct{} `type:"structure"`
-
-	// The snapshot attribute you would like to view.
-	//
-	// Attribute is a required field
-	Attribute SnapshotAttributeName `type:"string" required:"true" enum:"true"`
-
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have
-	// the required permissions, the error response is DryRunOperation. Otherwise,
-	// it is UnauthorizedOperation.
-	DryRun *bool `locationName:"dryRun" type:"boolean"`
-
-	// The ID of the EBS snapshot.
-	//
-	// SnapshotId is a required field
-	SnapshotId *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeSnapshotAttributeInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeSnapshotAttributeInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeSnapshotAttributeInput"}
-	if len(s.Attribute) == 0 {
-		invalidParams.Add(aws.NewErrParamRequired("Attribute"))
-	}
-
-	if s.SnapshotId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("SnapshotId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Contains the output of DescribeSnapshotAttribute.
-type DescribeSnapshotAttributeOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The users and groups that have the permissions for creating volumes from
-	// the snapshot.
-	CreateVolumePermissions []CreateVolumePermission `locationName:"createVolumePermission" locationNameList:"item" type:"list"`
-
-	// The product codes.
-	ProductCodes []ProductCode `locationName:"productCodes" locationNameList:"item" type:"list"`
-
-	// The ID of the EBS snapshot.
-	SnapshotId *string `locationName:"snapshotId" type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeSnapshotAttributeOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeSnapshotAttribute = "DescribeSnapshotAttribute"
 
@@ -91,7 +28,7 @@ const opDescribeSnapshotAttribute = "DescribeSnapshotAttribute"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeSnapshotAttribute
-func (c *Client) DescribeSnapshotAttributeRequest(input *DescribeSnapshotAttributeInput) DescribeSnapshotAttributeRequest {
+func (c *Client) DescribeSnapshotAttributeRequest(input *types.DescribeSnapshotAttributeInput) DescribeSnapshotAttributeRequest {
 	op := &aws.Operation{
 		Name:       opDescribeSnapshotAttribute,
 		HTTPMethod: "POST",
@@ -99,10 +36,10 @@ func (c *Client) DescribeSnapshotAttributeRequest(input *DescribeSnapshotAttribu
 	}
 
 	if input == nil {
-		input = &DescribeSnapshotAttributeInput{}
+		input = &types.DescribeSnapshotAttributeInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeSnapshotAttributeOutput{})
+	req := c.newRequest(op, input, &types.DescribeSnapshotAttributeOutput{})
 	return DescribeSnapshotAttributeRequest{Request: req, Input: input, Copy: c.DescribeSnapshotAttributeRequest}
 }
 
@@ -110,8 +47,8 @@ func (c *Client) DescribeSnapshotAttributeRequest(input *DescribeSnapshotAttribu
 // DescribeSnapshotAttribute API operation.
 type DescribeSnapshotAttributeRequest struct {
 	*aws.Request
-	Input *DescribeSnapshotAttributeInput
-	Copy  func(*DescribeSnapshotAttributeInput) DescribeSnapshotAttributeRequest
+	Input *types.DescribeSnapshotAttributeInput
+	Copy  func(*types.DescribeSnapshotAttributeInput) DescribeSnapshotAttributeRequest
 }
 
 // Send marshals and sends the DescribeSnapshotAttribute API request.
@@ -123,7 +60,7 @@ func (r DescribeSnapshotAttributeRequest) Send(ctx context.Context) (*DescribeSn
 	}
 
 	resp := &DescribeSnapshotAttributeResponse{
-		DescribeSnapshotAttributeOutput: r.Request.Data.(*DescribeSnapshotAttributeOutput),
+		DescribeSnapshotAttributeOutput: r.Request.Data.(*types.DescribeSnapshotAttributeOutput),
 		response:                        &aws.Response{Request: r.Request},
 	}
 
@@ -133,7 +70,7 @@ func (r DescribeSnapshotAttributeRequest) Send(ctx context.Context) (*DescribeSn
 // DescribeSnapshotAttributeResponse is the response type for the
 // DescribeSnapshotAttribute API operation.
 type DescribeSnapshotAttributeResponse struct {
-	*DescribeSnapshotAttributeOutput
+	*types.DescribeSnapshotAttributeOutput
 
 	response *aws.Response
 }

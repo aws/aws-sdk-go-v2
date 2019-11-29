@@ -6,78 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
+	"github.com/aws/aws-sdk-go-v2/service/kinesis/types"
 )
-
-// Represents the input for SplitShard.
-type SplitShardInput struct {
-	_ struct{} `type:"structure"`
-
-	// A hash key value for the starting hash key of one of the child shards created
-	// by the split. The hash key range for a given shard constitutes a set of ordered
-	// contiguous positive integers. The value for NewStartingHashKey must be in
-	// the range of hash keys being mapped into the shard. The NewStartingHashKey
-	// hash key value and all higher hash key values in hash key range are distributed
-	// to one of the child shards. All the lower hash key values in the range are
-	// distributed to the other child shard.
-	//
-	// NewStartingHashKey is a required field
-	NewStartingHashKey *string `type:"string" required:"true"`
-
-	// The shard ID of the shard to split.
-	//
-	// ShardToSplit is a required field
-	ShardToSplit *string `min:"1" type:"string" required:"true"`
-
-	// The name of the stream for the shard split.
-	//
-	// StreamName is a required field
-	StreamName *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s SplitShardInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *SplitShardInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "SplitShardInput"}
-
-	if s.NewStartingHashKey == nil {
-		invalidParams.Add(aws.NewErrParamRequired("NewStartingHashKey"))
-	}
-
-	if s.ShardToSplit == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ShardToSplit"))
-	}
-	if s.ShardToSplit != nil && len(*s.ShardToSplit) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ShardToSplit", 1))
-	}
-
-	if s.StreamName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("StreamName"))
-	}
-	if s.StreamName != nil && len(*s.StreamName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("StreamName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type SplitShardOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s SplitShardOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opSplitShard = "SplitShard"
 
@@ -139,7 +71,7 @@ const opSplitShard = "SplitShard"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/SplitShard
-func (c *Client) SplitShardRequest(input *SplitShardInput) SplitShardRequest {
+func (c *Client) SplitShardRequest(input *types.SplitShardInput) SplitShardRequest {
 	op := &aws.Operation{
 		Name:       opSplitShard,
 		HTTPMethod: "POST",
@@ -147,10 +79,10 @@ func (c *Client) SplitShardRequest(input *SplitShardInput) SplitShardRequest {
 	}
 
 	if input == nil {
-		input = &SplitShardInput{}
+		input = &types.SplitShardInput{}
 	}
 
-	req := c.newRequest(op, input, &SplitShardOutput{})
+	req := c.newRequest(op, input, &types.SplitShardOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return SplitShardRequest{Request: req, Input: input, Copy: c.SplitShardRequest}
@@ -160,8 +92,8 @@ func (c *Client) SplitShardRequest(input *SplitShardInput) SplitShardRequest {
 // SplitShard API operation.
 type SplitShardRequest struct {
 	*aws.Request
-	Input *SplitShardInput
-	Copy  func(*SplitShardInput) SplitShardRequest
+	Input *types.SplitShardInput
+	Copy  func(*types.SplitShardInput) SplitShardRequest
 }
 
 // Send marshals and sends the SplitShard API request.
@@ -173,7 +105,7 @@ func (r SplitShardRequest) Send(ctx context.Context) (*SplitShardResponse, error
 	}
 
 	resp := &SplitShardResponse{
-		SplitShardOutput: r.Request.Data.(*SplitShardOutput),
+		SplitShardOutput: r.Request.Data.(*types.SplitShardOutput),
 		response:         &aws.Response{Request: r.Request},
 	}
 
@@ -183,7 +115,7 @@ func (r SplitShardRequest) Send(ctx context.Context) (*SplitShardResponse, error
 // SplitShardResponse is the response type for the
 // SplitShard API operation.
 type SplitShardResponse struct {
-	*SplitShardOutput
+	*types.SplitShardOutput
 
 	response *aws.Response
 }

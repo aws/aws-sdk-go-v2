@@ -6,72 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/swf/types"
 )
-
-type CountPendingDecisionTasksInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the domain that contains the task list.
-	//
-	// Domain is a required field
-	Domain *string `locationName:"domain" min:"1" type:"string" required:"true"`
-
-	// The name of the task list.
-	//
-	// TaskList is a required field
-	TaskList *TaskList `locationName:"taskList" type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s CountPendingDecisionTasksInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CountPendingDecisionTasksInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CountPendingDecisionTasksInput"}
-
-	if s.Domain == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Domain"))
-	}
-	if s.Domain != nil && len(*s.Domain) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Domain", 1))
-	}
-
-	if s.TaskList == nil {
-		invalidParams.Add(aws.NewErrParamRequired("TaskList"))
-	}
-	if s.TaskList != nil {
-		if err := s.TaskList.Validate(); err != nil {
-			invalidParams.AddNested("TaskList", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Contains the count of tasks in a task list.
-type CountPendingDecisionTasksOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The number of tasks in the task list.
-	//
-	// Count is a required field
-	Count *int64 `locationName:"count" type:"integer" required:"true"`
-
-	// If set to true, indicates that the actual count was more than the maximum
-	// supported by this API and the count returned is the truncated value.
-	Truncated *bool `locationName:"truncated" type:"boolean"`
-}
-
-// String returns the string representation
-func (s CountPendingDecisionTasksOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCountPendingDecisionTasks = "CountPendingDecisionTasks"
 
@@ -110,7 +46,7 @@ const opCountPendingDecisionTasks = "CountPendingDecisionTasks"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) CountPendingDecisionTasksRequest(input *CountPendingDecisionTasksInput) CountPendingDecisionTasksRequest {
+func (c *Client) CountPendingDecisionTasksRequest(input *types.CountPendingDecisionTasksInput) CountPendingDecisionTasksRequest {
 	op := &aws.Operation{
 		Name:       opCountPendingDecisionTasks,
 		HTTPMethod: "POST",
@@ -118,10 +54,10 @@ func (c *Client) CountPendingDecisionTasksRequest(input *CountPendingDecisionTas
 	}
 
 	if input == nil {
-		input = &CountPendingDecisionTasksInput{}
+		input = &types.CountPendingDecisionTasksInput{}
 	}
 
-	req := c.newRequest(op, input, &CountPendingDecisionTasksOutput{})
+	req := c.newRequest(op, input, &types.CountPendingDecisionTasksOutput{})
 	return CountPendingDecisionTasksRequest{Request: req, Input: input, Copy: c.CountPendingDecisionTasksRequest}
 }
 
@@ -129,8 +65,8 @@ func (c *Client) CountPendingDecisionTasksRequest(input *CountPendingDecisionTas
 // CountPendingDecisionTasks API operation.
 type CountPendingDecisionTasksRequest struct {
 	*aws.Request
-	Input *CountPendingDecisionTasksInput
-	Copy  func(*CountPendingDecisionTasksInput) CountPendingDecisionTasksRequest
+	Input *types.CountPendingDecisionTasksInput
+	Copy  func(*types.CountPendingDecisionTasksInput) CountPendingDecisionTasksRequest
 }
 
 // Send marshals and sends the CountPendingDecisionTasks API request.
@@ -142,7 +78,7 @@ func (r CountPendingDecisionTasksRequest) Send(ctx context.Context) (*CountPendi
 	}
 
 	resp := &CountPendingDecisionTasksResponse{
-		CountPendingDecisionTasksOutput: r.Request.Data.(*CountPendingDecisionTasksOutput),
+		CountPendingDecisionTasksOutput: r.Request.Data.(*types.CountPendingDecisionTasksOutput),
 		response:                        &aws.Response{Request: r.Request},
 	}
 
@@ -152,7 +88,7 @@ func (r CountPendingDecisionTasksRequest) Send(ctx context.Context) (*CountPendi
 // CountPendingDecisionTasksResponse is the response type for the
 // CountPendingDecisionTasks API operation.
 type CountPendingDecisionTasksResponse struct {
-	*CountPendingDecisionTasksOutput
+	*types.CountPendingDecisionTasksOutput
 
 	response *aws.Response
 }

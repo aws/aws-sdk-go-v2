@@ -6,68 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/opsworks/types"
 )
-
-type RegisterInstanceInput struct {
-	_ struct{} `type:"structure"`
-
-	// The instance's hostname.
-	Hostname *string `type:"string"`
-
-	// An InstanceIdentity object that contains the instance's identity.
-	InstanceIdentity *InstanceIdentity `type:"structure"`
-
-	// The instance's private IP address.
-	PrivateIp *string `type:"string"`
-
-	// The instance's public IP address.
-	PublicIp *string `type:"string"`
-
-	// The instances public RSA key. This key is used to encrypt communication between
-	// the instance and the service.
-	RsaPublicKey *string `type:"string"`
-
-	// The instances public RSA key fingerprint.
-	RsaPublicKeyFingerprint *string `type:"string"`
-
-	// The ID of the stack that the instance is to be registered with.
-	//
-	// StackId is a required field
-	StackId *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s RegisterInstanceInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *RegisterInstanceInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "RegisterInstanceInput"}
-
-	if s.StackId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("StackId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Contains the response to a RegisterInstanceResult request.
-type RegisterInstanceOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The registered instance's AWS OpsWorks Stacks ID.
-	InstanceId *string `type:"string"`
-}
-
-// String returns the string representation
-func (s RegisterInstanceOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opRegisterInstance = "RegisterInstance"
 
@@ -103,7 +43,7 @@ const opRegisterInstance = "RegisterInstance"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/RegisterInstance
-func (c *Client) RegisterInstanceRequest(input *RegisterInstanceInput) RegisterInstanceRequest {
+func (c *Client) RegisterInstanceRequest(input *types.RegisterInstanceInput) RegisterInstanceRequest {
 	op := &aws.Operation{
 		Name:       opRegisterInstance,
 		HTTPMethod: "POST",
@@ -111,10 +51,10 @@ func (c *Client) RegisterInstanceRequest(input *RegisterInstanceInput) RegisterI
 	}
 
 	if input == nil {
-		input = &RegisterInstanceInput{}
+		input = &types.RegisterInstanceInput{}
 	}
 
-	req := c.newRequest(op, input, &RegisterInstanceOutput{})
+	req := c.newRequest(op, input, &types.RegisterInstanceOutput{})
 	return RegisterInstanceRequest{Request: req, Input: input, Copy: c.RegisterInstanceRequest}
 }
 
@@ -122,8 +62,8 @@ func (c *Client) RegisterInstanceRequest(input *RegisterInstanceInput) RegisterI
 // RegisterInstance API operation.
 type RegisterInstanceRequest struct {
 	*aws.Request
-	Input *RegisterInstanceInput
-	Copy  func(*RegisterInstanceInput) RegisterInstanceRequest
+	Input *types.RegisterInstanceInput
+	Copy  func(*types.RegisterInstanceInput) RegisterInstanceRequest
 }
 
 // Send marshals and sends the RegisterInstance API request.
@@ -135,7 +75,7 @@ func (r RegisterInstanceRequest) Send(ctx context.Context) (*RegisterInstanceRes
 	}
 
 	resp := &RegisterInstanceResponse{
-		RegisterInstanceOutput: r.Request.Data.(*RegisterInstanceOutput),
+		RegisterInstanceOutput: r.Request.Data.(*types.RegisterInstanceOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -145,7 +85,7 @@ func (r RegisterInstanceRequest) Send(ctx context.Context) (*RegisterInstanceRes
 // RegisterInstanceResponse is the response type for the
 // RegisterInstance API operation.
 type RegisterInstanceResponse struct {
-	*RegisterInstanceOutput
+	*types.RegisterInstanceOutput
 
 	response *aws.Response
 }

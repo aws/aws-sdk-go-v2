@@ -4,104 +4,17 @@ package ssm
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ssm/types"
 )
-
-type GetParametersByPathInput struct {
-	_ struct{} `type:"structure"`
-
-	// The maximum number of items to return for this call. The call also returns
-	// a token that you can specify in a subsequent call to get the next set of
-	// results.
-	MaxResults *int64 `min:"1" type:"integer"`
-
-	// A token to start the list. Use this token to get the next set of results.
-	NextToken *string `type:"string"`
-
-	// Filters to limit the request results.
-	//
-	// You can't filter using the parameter name.
-	ParameterFilters []ParameterStringFilter `type:"list"`
-
-	// The hierarchy for the parameter. Hierarchies start with a forward slash (/)
-	// and end with the parameter name. A parameter name hierarchy can have a maximum
-	// of 15 levels. Here is an example of a hierarchy: /Finance/Prod/IAD/WinServ2016/license33
-	//
-	// Path is a required field
-	Path *string `min:"1" type:"string" required:"true"`
-
-	// Retrieve all parameters within a hierarchy.
-	//
-	// If a user has access to a path, then the user can access all levels of that
-	// path. For example, if a user has permission to access path /a, then the user
-	// can also access /a/b. Even if a user has explicitly been denied access in
-	// IAM for parameter /a/b, they can still call the GetParametersByPath API action
-	// recursively for /a and view /a/b.
-	Recursive *bool `type:"boolean"`
-
-	// Retrieve all parameters in a hierarchy with their value decrypted.
-	WithDecryption *bool `type:"boolean"`
-}
-
-// String returns the string representation
-func (s GetParametersByPathInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetParametersByPathInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetParametersByPathInput"}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-
-	if s.Path == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Path"))
-	}
-	if s.Path != nil && len(*s.Path) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Path", 1))
-	}
-	if s.ParameterFilters != nil {
-		for i, v := range s.ParameterFilters {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "ParameterFilters", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type GetParametersByPathOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The token for the next set of items to return. Use this token to get the
-	// next set of results.
-	NextToken *string `type:"string"`
-
-	// A list of parameters found in the specified hierarchy.
-	Parameters []Parameter `type:"list"`
-}
-
-// String returns the string representation
-func (s GetParametersByPathOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetParametersByPath = "GetParametersByPath"
 
 // GetParametersByPathRequest returns a request value for making API operation for
 // Amazon Simple Systems Manager (SSM).
 //
-// Retrieve parameters in a specific hierarchy. For more information, see Working
-// with Systems Manager Parameters (http://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-paramstore-working.html)
-// in the AWS Systems Manager User Guide.
+// Retrieve information about one or more parameters in a specific hierarchy.
 //
 // Request results are returned on a best-effort basis. If you specify MaxResults
 // in the request, the response includes information up to the limit specified.
@@ -111,8 +24,6 @@ const opGetParametersByPath = "GetParametersByPath"
 // that point and a NextToken. You can specify the NextToken in a subsequent
 // call to get the next set of results.
 //
-// This API action doesn't support filtering by tags.
-//
 //    // Example sending a request using GetParametersByPathRequest.
 //    req := client.GetParametersByPathRequest(params)
 //    resp, err := req.Send(context.TODO())
@@ -121,7 +32,7 @@ const opGetParametersByPath = "GetParametersByPath"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetParametersByPath
-func (c *Client) GetParametersByPathRequest(input *GetParametersByPathInput) GetParametersByPathRequest {
+func (c *Client) GetParametersByPathRequest(input *types.GetParametersByPathInput) GetParametersByPathRequest {
 	op := &aws.Operation{
 		Name:       opGetParametersByPath,
 		HTTPMethod: "POST",
@@ -135,10 +46,10 @@ func (c *Client) GetParametersByPathRequest(input *GetParametersByPathInput) Get
 	}
 
 	if input == nil {
-		input = &GetParametersByPathInput{}
+		input = &types.GetParametersByPathInput{}
 	}
 
-	req := c.newRequest(op, input, &GetParametersByPathOutput{})
+	req := c.newRequest(op, input, &types.GetParametersByPathOutput{})
 	return GetParametersByPathRequest{Request: req, Input: input, Copy: c.GetParametersByPathRequest}
 }
 
@@ -146,8 +57,8 @@ func (c *Client) GetParametersByPathRequest(input *GetParametersByPathInput) Get
 // GetParametersByPath API operation.
 type GetParametersByPathRequest struct {
 	*aws.Request
-	Input *GetParametersByPathInput
-	Copy  func(*GetParametersByPathInput) GetParametersByPathRequest
+	Input *types.GetParametersByPathInput
+	Copy  func(*types.GetParametersByPathInput) GetParametersByPathRequest
 }
 
 // Send marshals and sends the GetParametersByPath API request.
@@ -159,7 +70,7 @@ func (r GetParametersByPathRequest) Send(ctx context.Context) (*GetParametersByP
 	}
 
 	resp := &GetParametersByPathResponse{
-		GetParametersByPathOutput: r.Request.Data.(*GetParametersByPathOutput),
+		GetParametersByPathOutput: r.Request.Data.(*types.GetParametersByPathOutput),
 		response:                  &aws.Response{Request: r.Request},
 	}
 
@@ -189,7 +100,7 @@ func NewGetParametersByPathPaginator(req GetParametersByPathRequest) GetParamete
 	return GetParametersByPathPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *GetParametersByPathInput
+				var inCpy *types.GetParametersByPathInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -209,14 +120,14 @@ type GetParametersByPathPaginator struct {
 	aws.Pager
 }
 
-func (p *GetParametersByPathPaginator) CurrentPage() *GetParametersByPathOutput {
-	return p.Pager.CurrentPage().(*GetParametersByPathOutput)
+func (p *GetParametersByPathPaginator) CurrentPage() *types.GetParametersByPathOutput {
+	return p.Pager.CurrentPage().(*types.GetParametersByPathOutput)
 }
 
 // GetParametersByPathResponse is the response type for the
 // GetParametersByPath API operation.
 type GetParametersByPathResponse struct {
-	*GetParametersByPathOutput
+	*types.GetParametersByPathOutput
 
 	response *aws.Response
 }

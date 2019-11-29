@@ -6,53 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/neptune/types"
 )
-
-type DescribeDBClusterSnapshotAttributesInput struct {
-	_ struct{} `type:"structure"`
-
-	// The identifier for the DB cluster snapshot to describe the attributes for.
-	//
-	// DBClusterSnapshotIdentifier is a required field
-	DBClusterSnapshotIdentifier *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeDBClusterSnapshotAttributesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeDBClusterSnapshotAttributesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeDBClusterSnapshotAttributesInput"}
-
-	if s.DBClusterSnapshotIdentifier == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DBClusterSnapshotIdentifier"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribeDBClusterSnapshotAttributesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Contains the results of a successful call to the DescribeDBClusterSnapshotAttributes
-	// API action.
-	//
-	// Manual DB cluster snapshot attributes are used to authorize other AWS accounts
-	// to copy or restore a manual DB cluster snapshot. For more information, see
-	// the ModifyDBClusterSnapshotAttribute API action.
-	DBClusterSnapshotAttributesResult *DBClusterSnapshotAttributesResult `type:"structure"`
-}
-
-// String returns the string representation
-func (s DescribeDBClusterSnapshotAttributesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeDBClusterSnapshotAttributes = "DescribeDBClusterSnapshotAttributes"
 
@@ -80,7 +35,7 @@ const opDescribeDBClusterSnapshotAttributes = "DescribeDBClusterSnapshotAttribut
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/DescribeDBClusterSnapshotAttributes
-func (c *Client) DescribeDBClusterSnapshotAttributesRequest(input *DescribeDBClusterSnapshotAttributesInput) DescribeDBClusterSnapshotAttributesRequest {
+func (c *Client) DescribeDBClusterSnapshotAttributesRequest(input *types.DescribeDBClusterSnapshotAttributesInput) DescribeDBClusterSnapshotAttributesRequest {
 	op := &aws.Operation{
 		Name:       opDescribeDBClusterSnapshotAttributes,
 		HTTPMethod: "POST",
@@ -88,10 +43,10 @@ func (c *Client) DescribeDBClusterSnapshotAttributesRequest(input *DescribeDBClu
 	}
 
 	if input == nil {
-		input = &DescribeDBClusterSnapshotAttributesInput{}
+		input = &types.DescribeDBClusterSnapshotAttributesInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeDBClusterSnapshotAttributesOutput{})
+	req := c.newRequest(op, input, &types.DescribeDBClusterSnapshotAttributesOutput{})
 	return DescribeDBClusterSnapshotAttributesRequest{Request: req, Input: input, Copy: c.DescribeDBClusterSnapshotAttributesRequest}
 }
 
@@ -99,8 +54,8 @@ func (c *Client) DescribeDBClusterSnapshotAttributesRequest(input *DescribeDBClu
 // DescribeDBClusterSnapshotAttributes API operation.
 type DescribeDBClusterSnapshotAttributesRequest struct {
 	*aws.Request
-	Input *DescribeDBClusterSnapshotAttributesInput
-	Copy  func(*DescribeDBClusterSnapshotAttributesInput) DescribeDBClusterSnapshotAttributesRequest
+	Input *types.DescribeDBClusterSnapshotAttributesInput
+	Copy  func(*types.DescribeDBClusterSnapshotAttributesInput) DescribeDBClusterSnapshotAttributesRequest
 }
 
 // Send marshals and sends the DescribeDBClusterSnapshotAttributes API request.
@@ -112,7 +67,7 @@ func (r DescribeDBClusterSnapshotAttributesRequest) Send(ctx context.Context) (*
 	}
 
 	resp := &DescribeDBClusterSnapshotAttributesResponse{
-		DescribeDBClusterSnapshotAttributesOutput: r.Request.Data.(*DescribeDBClusterSnapshotAttributesOutput),
+		DescribeDBClusterSnapshotAttributesOutput: r.Request.Data.(*types.DescribeDBClusterSnapshotAttributesOutput),
 		response: &aws.Response{Request: r.Request},
 	}
 
@@ -122,7 +77,7 @@ func (r DescribeDBClusterSnapshotAttributesRequest) Send(ctx context.Context) (*
 // DescribeDBClusterSnapshotAttributesResponse is the response type for the
 // DescribeDBClusterSnapshotAttributes API operation.
 type DescribeDBClusterSnapshotAttributesResponse struct {
-	*DescribeDBClusterSnapshotAttributesOutput
+	*types.DescribeDBClusterSnapshotAttributesOutput
 
 	response *aws.Response
 }

@@ -6,76 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/elasticache/types"
 )
-
-// Represents the input of a CopySnapshotMessage operation.
-type CopySnapshotInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the KMS key used to encrypt the target snapshot.
-	KmsKeyId *string `type:"string"`
-
-	// The name of an existing snapshot from which to make a copy.
-	//
-	// SourceSnapshotName is a required field
-	SourceSnapshotName *string `type:"string" required:"true"`
-
-	// The Amazon S3 bucket to which the snapshot is exported. This parameter is
-	// used only when exporting a snapshot for external access.
-	//
-	// When using this parameter to export a snapshot, be sure Amazon ElastiCache
-	// has the needed permissions to this S3 bucket. For more information, see Step
-	// 2: Grant ElastiCache Access to Your Amazon S3 Bucket (https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/backups-exporting.html#backups-exporting-grant-access)
-	// in the Amazon ElastiCache User Guide.
-	//
-	// For more information, see Exporting a Snapshot (https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/Snapshots.Exporting.html)
-	// in the Amazon ElastiCache User Guide.
-	TargetBucket *string `type:"string"`
-
-	// A name for the snapshot copy. ElastiCache does not permit overwriting a snapshot,
-	// therefore this name must be unique within its context - ElastiCache or an
-	// Amazon S3 bucket if exporting.
-	//
-	// TargetSnapshotName is a required field
-	TargetSnapshotName *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s CopySnapshotInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CopySnapshotInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CopySnapshotInput"}
-
-	if s.SourceSnapshotName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("SourceSnapshotName"))
-	}
-
-	if s.TargetSnapshotName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("TargetSnapshotName"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type CopySnapshotOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Represents a copy of an entire Redis cluster as of the time when the snapshot
-	// was taken.
-	Snapshot *Snapshot `type:"structure"`
-}
-
-// String returns the string representation
-func (s CopySnapshotOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCopySnapshot = "CopySnapshot"
 
@@ -147,7 +79,7 @@ const opCopySnapshot = "CopySnapshot"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CopySnapshot
-func (c *Client) CopySnapshotRequest(input *CopySnapshotInput) CopySnapshotRequest {
+func (c *Client) CopySnapshotRequest(input *types.CopySnapshotInput) CopySnapshotRequest {
 	op := &aws.Operation{
 		Name:       opCopySnapshot,
 		HTTPMethod: "POST",
@@ -155,10 +87,10 @@ func (c *Client) CopySnapshotRequest(input *CopySnapshotInput) CopySnapshotReque
 	}
 
 	if input == nil {
-		input = &CopySnapshotInput{}
+		input = &types.CopySnapshotInput{}
 	}
 
-	req := c.newRequest(op, input, &CopySnapshotOutput{})
+	req := c.newRequest(op, input, &types.CopySnapshotOutput{})
 	return CopySnapshotRequest{Request: req, Input: input, Copy: c.CopySnapshotRequest}
 }
 
@@ -166,8 +98,8 @@ func (c *Client) CopySnapshotRequest(input *CopySnapshotInput) CopySnapshotReque
 // CopySnapshot API operation.
 type CopySnapshotRequest struct {
 	*aws.Request
-	Input *CopySnapshotInput
-	Copy  func(*CopySnapshotInput) CopySnapshotRequest
+	Input *types.CopySnapshotInput
+	Copy  func(*types.CopySnapshotInput) CopySnapshotRequest
 }
 
 // Send marshals and sends the CopySnapshot API request.
@@ -179,7 +111,7 @@ func (r CopySnapshotRequest) Send(ctx context.Context) (*CopySnapshotResponse, e
 	}
 
 	resp := &CopySnapshotResponse{
-		CopySnapshotOutput: r.Request.Data.(*CopySnapshotOutput),
+		CopySnapshotOutput: r.Request.Data.(*types.CopySnapshotOutput),
 		response:           &aws.Response{Request: r.Request},
 	}
 
@@ -189,7 +121,7 @@ func (r CopySnapshotRequest) Send(ctx context.Context) (*CopySnapshotResponse, e
 // CopySnapshotResponse is the response type for the
 // CopySnapshot API operation.
 type CopySnapshotResponse struct {
-	*CopySnapshotOutput
+	*types.CopySnapshotOutput
 
 	response *aws.Response
 }

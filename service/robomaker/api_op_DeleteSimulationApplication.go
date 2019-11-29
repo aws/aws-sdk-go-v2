@@ -6,79 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/robomaker/types"
 )
-
-type DeleteSimulationApplicationInput struct {
-	_ struct{} `type:"structure"`
-
-	// The application information for the simulation application to delete.
-	//
-	// Application is a required field
-	Application *string `locationName:"application" min:"1" type:"string" required:"true"`
-
-	// The version of the simulation application to delete.
-	ApplicationVersion *string `locationName:"applicationVersion" min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s DeleteSimulationApplicationInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteSimulationApplicationInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteSimulationApplicationInput"}
-
-	if s.Application == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Application"))
-	}
-	if s.Application != nil && len(*s.Application) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Application", 1))
-	}
-	if s.ApplicationVersion != nil && len(*s.ApplicationVersion) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ApplicationVersion", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteSimulationApplicationInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.Application != nil {
-		v := *s.Application
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "application", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.ApplicationVersion != nil {
-		v := *s.ApplicationVersion
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "applicationVersion", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type DeleteSimulationApplicationOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteSimulationApplicationOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteSimulationApplicationOutput) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
 
 const opDeleteSimulationApplication = "DeleteSimulationApplication"
 
@@ -95,7 +24,7 @@ const opDeleteSimulationApplication = "DeleteSimulationApplication"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/DeleteSimulationApplication
-func (c *Client) DeleteSimulationApplicationRequest(input *DeleteSimulationApplicationInput) DeleteSimulationApplicationRequest {
+func (c *Client) DeleteSimulationApplicationRequest(input *types.DeleteSimulationApplicationInput) DeleteSimulationApplicationRequest {
 	op := &aws.Operation{
 		Name:       opDeleteSimulationApplication,
 		HTTPMethod: "POST",
@@ -103,10 +32,10 @@ func (c *Client) DeleteSimulationApplicationRequest(input *DeleteSimulationAppli
 	}
 
 	if input == nil {
-		input = &DeleteSimulationApplicationInput{}
+		input = &types.DeleteSimulationApplicationInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteSimulationApplicationOutput{})
+	req := c.newRequest(op, input, &types.DeleteSimulationApplicationOutput{})
 	return DeleteSimulationApplicationRequest{Request: req, Input: input, Copy: c.DeleteSimulationApplicationRequest}
 }
 
@@ -114,8 +43,8 @@ func (c *Client) DeleteSimulationApplicationRequest(input *DeleteSimulationAppli
 // DeleteSimulationApplication API operation.
 type DeleteSimulationApplicationRequest struct {
 	*aws.Request
-	Input *DeleteSimulationApplicationInput
-	Copy  func(*DeleteSimulationApplicationInput) DeleteSimulationApplicationRequest
+	Input *types.DeleteSimulationApplicationInput
+	Copy  func(*types.DeleteSimulationApplicationInput) DeleteSimulationApplicationRequest
 }
 
 // Send marshals and sends the DeleteSimulationApplication API request.
@@ -127,7 +56,7 @@ func (r DeleteSimulationApplicationRequest) Send(ctx context.Context) (*DeleteSi
 	}
 
 	resp := &DeleteSimulationApplicationResponse{
-		DeleteSimulationApplicationOutput: r.Request.Data.(*DeleteSimulationApplicationOutput),
+		DeleteSimulationApplicationOutput: r.Request.Data.(*types.DeleteSimulationApplicationOutput),
 		response:                          &aws.Response{Request: r.Request},
 	}
 
@@ -137,7 +66,7 @@ func (r DeleteSimulationApplicationRequest) Send(ctx context.Context) (*DeleteSi
 // DeleteSimulationApplicationResponse is the response type for the
 // DeleteSimulationApplication API operation.
 type DeleteSimulationApplicationResponse struct {
-	*DeleteSimulationApplicationOutput
+	*types.DeleteSimulationApplicationOutput
 
 	response *aws.Response
 }

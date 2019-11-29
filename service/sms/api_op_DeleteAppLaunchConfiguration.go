@@ -6,29 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/sms/types"
 )
-
-type DeleteAppLaunchConfigurationInput struct {
-	_ struct{} `type:"structure"`
-
-	// ID of the application associated with the launch configuration.
-	AppId *string `locationName:"appId" type:"string"`
-}
-
-// String returns the string representation
-func (s DeleteAppLaunchConfigurationInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type DeleteAppLaunchConfigurationOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteAppLaunchConfigurationOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteAppLaunchConfiguration = "DeleteAppLaunchConfiguration"
 
@@ -45,7 +24,7 @@ const opDeleteAppLaunchConfiguration = "DeleteAppLaunchConfiguration"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sms-2016-10-24/DeleteAppLaunchConfiguration
-func (c *Client) DeleteAppLaunchConfigurationRequest(input *DeleteAppLaunchConfigurationInput) DeleteAppLaunchConfigurationRequest {
+func (c *Client) DeleteAppLaunchConfigurationRequest(input *types.DeleteAppLaunchConfigurationInput) DeleteAppLaunchConfigurationRequest {
 	op := &aws.Operation{
 		Name:       opDeleteAppLaunchConfiguration,
 		HTTPMethod: "POST",
@@ -53,10 +32,10 @@ func (c *Client) DeleteAppLaunchConfigurationRequest(input *DeleteAppLaunchConfi
 	}
 
 	if input == nil {
-		input = &DeleteAppLaunchConfigurationInput{}
+		input = &types.DeleteAppLaunchConfigurationInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteAppLaunchConfigurationOutput{})
+	req := c.newRequest(op, input, &types.DeleteAppLaunchConfigurationOutput{})
 	return DeleteAppLaunchConfigurationRequest{Request: req, Input: input, Copy: c.DeleteAppLaunchConfigurationRequest}
 }
 
@@ -64,8 +43,8 @@ func (c *Client) DeleteAppLaunchConfigurationRequest(input *DeleteAppLaunchConfi
 // DeleteAppLaunchConfiguration API operation.
 type DeleteAppLaunchConfigurationRequest struct {
 	*aws.Request
-	Input *DeleteAppLaunchConfigurationInput
-	Copy  func(*DeleteAppLaunchConfigurationInput) DeleteAppLaunchConfigurationRequest
+	Input *types.DeleteAppLaunchConfigurationInput
+	Copy  func(*types.DeleteAppLaunchConfigurationInput) DeleteAppLaunchConfigurationRequest
 }
 
 // Send marshals and sends the DeleteAppLaunchConfiguration API request.
@@ -77,7 +56,7 @@ func (r DeleteAppLaunchConfigurationRequest) Send(ctx context.Context) (*DeleteA
 	}
 
 	resp := &DeleteAppLaunchConfigurationResponse{
-		DeleteAppLaunchConfigurationOutput: r.Request.Data.(*DeleteAppLaunchConfigurationOutput),
+		DeleteAppLaunchConfigurationOutput: r.Request.Data.(*types.DeleteAppLaunchConfigurationOutput),
 		response:                           &aws.Response{Request: r.Request},
 	}
 
@@ -87,7 +66,7 @@ func (r DeleteAppLaunchConfigurationRequest) Send(ctx context.Context) (*DeleteA
 // DeleteAppLaunchConfigurationResponse is the response type for the
 // DeleteAppLaunchConfiguration API operation.
 type DeleteAppLaunchConfigurationResponse struct {
-	*DeleteAppLaunchConfigurationOutput
+	*types.DeleteAppLaunchConfigurationOutput
 
 	response *aws.Response
 }

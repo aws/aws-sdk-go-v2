@@ -6,122 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/apigateway/types"
 )
-
-// The GET request to get all the usage plan keys representing the API keys
-// added to a specified usage plan.
-type GetUsagePlanKeysInput struct {
-	_ struct{} `type:"structure"`
-
-	// The maximum number of returned results per page. The default value is 25
-	// and the maximum value is 500.
-	Limit *int64 `location:"querystring" locationName:"limit" type:"integer"`
-
-	// A query parameter specifying the name of the to-be-returned usage plan keys.
-	NameQuery *string `location:"querystring" locationName:"name" type:"string"`
-
-	// The current pagination position in the paged result set.
-	Position *string `location:"querystring" locationName:"position" type:"string"`
-
-	// [Required] The Id of the UsagePlan resource representing the usage plan containing
-	// the to-be-retrieved UsagePlanKey resource representing a plan customer.
-	//
-	// UsagePlanId is a required field
-	UsagePlanId *string `location:"uri" locationName:"usageplanId" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetUsagePlanKeysInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetUsagePlanKeysInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetUsagePlanKeysInput"}
-
-	if s.UsagePlanId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("UsagePlanId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetUsagePlanKeysInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.UsagePlanId != nil {
-		v := *s.UsagePlanId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "usageplanId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Limit != nil {
-		v := *s.Limit
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "limit", protocol.Int64Value(v), metadata)
-	}
-	if s.NameQuery != nil {
-		v := *s.NameQuery
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Position != nil {
-		v := *s.Position
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "position", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-// Represents the collection of usage plan keys added to usage plans for the
-// associated API keys and, possibly, other types of keys.
-//
-// Create and Use Usage Plans (https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-api-usage-plans.html)
-type GetUsagePlanKeysOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The current page of elements from this collection.
-	Items []UsagePlanKey `locationName:"item" type:"list"`
-
-	Position *string `locationName:"position" type:"string"`
-}
-
-// String returns the string representation
-func (s GetUsagePlanKeysOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetUsagePlanKeysOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.Items != nil {
-		v := s.Items
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "item", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	if s.Position != nil {
-		v := *s.Position
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "position", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opGetUsagePlanKeys = "GetUsagePlanKeys"
 
@@ -137,7 +23,7 @@ const opGetUsagePlanKeys = "GetUsagePlanKeys"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) GetUsagePlanKeysRequest(input *GetUsagePlanKeysInput) GetUsagePlanKeysRequest {
+func (c *Client) GetUsagePlanKeysRequest(input *types.GetUsagePlanKeysInput) GetUsagePlanKeysRequest {
 	op := &aws.Operation{
 		Name:       opGetUsagePlanKeys,
 		HTTPMethod: "GET",
@@ -151,10 +37,10 @@ func (c *Client) GetUsagePlanKeysRequest(input *GetUsagePlanKeysInput) GetUsageP
 	}
 
 	if input == nil {
-		input = &GetUsagePlanKeysInput{}
+		input = &types.GetUsagePlanKeysInput{}
 	}
 
-	req := c.newRequest(op, input, &GetUsagePlanKeysOutput{})
+	req := c.newRequest(op, input, &types.GetUsagePlanKeysOutput{})
 	return GetUsagePlanKeysRequest{Request: req, Input: input, Copy: c.GetUsagePlanKeysRequest}
 }
 
@@ -162,8 +48,8 @@ func (c *Client) GetUsagePlanKeysRequest(input *GetUsagePlanKeysInput) GetUsageP
 // GetUsagePlanKeys API operation.
 type GetUsagePlanKeysRequest struct {
 	*aws.Request
-	Input *GetUsagePlanKeysInput
-	Copy  func(*GetUsagePlanKeysInput) GetUsagePlanKeysRequest
+	Input *types.GetUsagePlanKeysInput
+	Copy  func(*types.GetUsagePlanKeysInput) GetUsagePlanKeysRequest
 }
 
 // Send marshals and sends the GetUsagePlanKeys API request.
@@ -175,7 +61,7 @@ func (r GetUsagePlanKeysRequest) Send(ctx context.Context) (*GetUsagePlanKeysRes
 	}
 
 	resp := &GetUsagePlanKeysResponse{
-		GetUsagePlanKeysOutput: r.Request.Data.(*GetUsagePlanKeysOutput),
+		GetUsagePlanKeysOutput: r.Request.Data.(*types.GetUsagePlanKeysOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -205,7 +91,7 @@ func NewGetUsagePlanKeysPaginator(req GetUsagePlanKeysRequest) GetUsagePlanKeysP
 	return GetUsagePlanKeysPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *GetUsagePlanKeysInput
+				var inCpy *types.GetUsagePlanKeysInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -225,14 +111,14 @@ type GetUsagePlanKeysPaginator struct {
 	aws.Pager
 }
 
-func (p *GetUsagePlanKeysPaginator) CurrentPage() *GetUsagePlanKeysOutput {
-	return p.Pager.CurrentPage().(*GetUsagePlanKeysOutput)
+func (p *GetUsagePlanKeysPaginator) CurrentPage() *types.GetUsagePlanKeysOutput {
+	return p.Pager.CurrentPage().(*types.GetUsagePlanKeysOutput)
 }
 
 // GetUsagePlanKeysResponse is the response type for the
 // GetUsagePlanKeys API operation.
 type GetUsagePlanKeysResponse struct {
-	*GetUsagePlanKeysOutput
+	*types.GetUsagePlanKeysOutput
 
 	response *aws.Response
 }

@@ -6,52 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/lightsail/types"
 )
-
-type GetInstanceAccessDetailsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the instance to access.
-	//
-	// InstanceName is a required field
-	InstanceName *string `locationName:"instanceName" type:"string" required:"true"`
-
-	// The protocol to use to connect to your instance. Defaults to ssh.
-	Protocol InstanceAccessProtocol `locationName:"protocol" type:"string" enum:"true"`
-}
-
-// String returns the string representation
-func (s GetInstanceAccessDetailsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetInstanceAccessDetailsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetInstanceAccessDetailsInput"}
-
-	if s.InstanceName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("InstanceName"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type GetInstanceAccessDetailsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// An array of key-value pairs containing information about a get instance access
-	// request.
-	AccessDetails *InstanceAccessDetails `locationName:"accessDetails" type:"structure"`
-}
-
-// String returns the string representation
-func (s GetInstanceAccessDetailsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetInstanceAccessDetails = "GetInstanceAccessDetails"
 
@@ -73,7 +29,7 @@ const opGetInstanceAccessDetails = "GetInstanceAccessDetails"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetInstanceAccessDetails
-func (c *Client) GetInstanceAccessDetailsRequest(input *GetInstanceAccessDetailsInput) GetInstanceAccessDetailsRequest {
+func (c *Client) GetInstanceAccessDetailsRequest(input *types.GetInstanceAccessDetailsInput) GetInstanceAccessDetailsRequest {
 	op := &aws.Operation{
 		Name:       opGetInstanceAccessDetails,
 		HTTPMethod: "POST",
@@ -81,10 +37,10 @@ func (c *Client) GetInstanceAccessDetailsRequest(input *GetInstanceAccessDetails
 	}
 
 	if input == nil {
-		input = &GetInstanceAccessDetailsInput{}
+		input = &types.GetInstanceAccessDetailsInput{}
 	}
 
-	req := c.newRequest(op, input, &GetInstanceAccessDetailsOutput{})
+	req := c.newRequest(op, input, &types.GetInstanceAccessDetailsOutput{})
 	return GetInstanceAccessDetailsRequest{Request: req, Input: input, Copy: c.GetInstanceAccessDetailsRequest}
 }
 
@@ -92,8 +48,8 @@ func (c *Client) GetInstanceAccessDetailsRequest(input *GetInstanceAccessDetails
 // GetInstanceAccessDetails API operation.
 type GetInstanceAccessDetailsRequest struct {
 	*aws.Request
-	Input *GetInstanceAccessDetailsInput
-	Copy  func(*GetInstanceAccessDetailsInput) GetInstanceAccessDetailsRequest
+	Input *types.GetInstanceAccessDetailsInput
+	Copy  func(*types.GetInstanceAccessDetailsInput) GetInstanceAccessDetailsRequest
 }
 
 // Send marshals and sends the GetInstanceAccessDetails API request.
@@ -105,7 +61,7 @@ func (r GetInstanceAccessDetailsRequest) Send(ctx context.Context) (*GetInstance
 	}
 
 	resp := &GetInstanceAccessDetailsResponse{
-		GetInstanceAccessDetailsOutput: r.Request.Data.(*GetInstanceAccessDetailsOutput),
+		GetInstanceAccessDetailsOutput: r.Request.Data.(*types.GetInstanceAccessDetailsOutput),
 		response:                       &aws.Response{Request: r.Request},
 	}
 
@@ -115,7 +71,7 @@ func (r GetInstanceAccessDetailsRequest) Send(ctx context.Context) (*GetInstance
 // GetInstanceAccessDetailsResponse is the response type for the
 // GetInstanceAccessDetails API operation.
 type GetInstanceAccessDetailsResponse struct {
-	*GetInstanceAccessDetailsOutput
+	*types.GetInstanceAccessDetailsOutput
 
 	response *aws.Response
 }

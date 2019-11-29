@@ -4,70 +4,10 @@ package ssm
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ssm/types"
 )
-
-type DescribePatchBaselinesInput struct {
-	_ struct{} `type:"structure"`
-
-	// Each element in the array is a structure containing:
-	//
-	// Key: (string, "NAME_PREFIX" or "OWNER")
-	//
-	// Value: (array of strings, exactly 1 entry, between 1 and 255 characters)
-	Filters []PatchOrchestratorFilter `type:"list"`
-
-	// The maximum number of patch baselines to return (per page).
-	MaxResults *int64 `min:"1" type:"integer"`
-
-	// The token for the next set of items to return. (You received this token from
-	// a previous call.)
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s DescribePatchBaselinesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribePatchBaselinesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribePatchBaselinesInput"}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-	if s.Filters != nil {
-		for i, v := range s.Filters {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribePatchBaselinesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// An array of PatchBaselineIdentity elements.
-	BaselineIdentities []PatchBaselineIdentity `type:"list"`
-
-	// The token to use when requesting the next set of items. If there are no additional
-	// items to return, the string is empty.
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s DescribePatchBaselinesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribePatchBaselines = "DescribePatchBaselines"
 
@@ -84,7 +24,7 @@ const opDescribePatchBaselines = "DescribePatchBaselines"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribePatchBaselines
-func (c *Client) DescribePatchBaselinesRequest(input *DescribePatchBaselinesInput) DescribePatchBaselinesRequest {
+func (c *Client) DescribePatchBaselinesRequest(input *types.DescribePatchBaselinesInput) DescribePatchBaselinesRequest {
 	op := &aws.Operation{
 		Name:       opDescribePatchBaselines,
 		HTTPMethod: "POST",
@@ -92,10 +32,10 @@ func (c *Client) DescribePatchBaselinesRequest(input *DescribePatchBaselinesInpu
 	}
 
 	if input == nil {
-		input = &DescribePatchBaselinesInput{}
+		input = &types.DescribePatchBaselinesInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribePatchBaselinesOutput{})
+	req := c.newRequest(op, input, &types.DescribePatchBaselinesOutput{})
 	return DescribePatchBaselinesRequest{Request: req, Input: input, Copy: c.DescribePatchBaselinesRequest}
 }
 
@@ -103,8 +43,8 @@ func (c *Client) DescribePatchBaselinesRequest(input *DescribePatchBaselinesInpu
 // DescribePatchBaselines API operation.
 type DescribePatchBaselinesRequest struct {
 	*aws.Request
-	Input *DescribePatchBaselinesInput
-	Copy  func(*DescribePatchBaselinesInput) DescribePatchBaselinesRequest
+	Input *types.DescribePatchBaselinesInput
+	Copy  func(*types.DescribePatchBaselinesInput) DescribePatchBaselinesRequest
 }
 
 // Send marshals and sends the DescribePatchBaselines API request.
@@ -116,7 +56,7 @@ func (r DescribePatchBaselinesRequest) Send(ctx context.Context) (*DescribePatch
 	}
 
 	resp := &DescribePatchBaselinesResponse{
-		DescribePatchBaselinesOutput: r.Request.Data.(*DescribePatchBaselinesOutput),
+		DescribePatchBaselinesOutput: r.Request.Data.(*types.DescribePatchBaselinesOutput),
 		response:                     &aws.Response{Request: r.Request},
 	}
 
@@ -126,7 +66,7 @@ func (r DescribePatchBaselinesRequest) Send(ctx context.Context) (*DescribePatch
 // DescribePatchBaselinesResponse is the response type for the
 // DescribePatchBaselines API operation.
 type DescribePatchBaselinesResponse struct {
-	*DescribePatchBaselinesOutput
+	*types.DescribePatchBaselinesOutput
 
 	response *aws.Response
 }

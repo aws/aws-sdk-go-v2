@@ -13,6 +13,7 @@ import (
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/iam"
+	"github.com/aws/aws-sdk-go-v2/service/iam/types"
 )
 
 // ClientAPI provides an interface to enable mocking the
@@ -46,7 +47,7 @@ import (
 //    type mockClientClient struct {
 //        iamiface.ClientPI
 //    }
-//    func (m *mockClientClient) AddClientIDToOpenIDConnectProvider(input *iam.AddClientIDToOpenIDConnectProviderInput) (*iam.AddClientIDToOpenIDConnectProviderOutput, error) {
+//    func (m *mockClientClient) AddClientIDToOpenIDConnectProvider(input *types.AddClientIDToOpenIDConnectProviderInput) (*types.AddClientIDToOpenIDConnectProviderOutput, error) {
 //        // mock response/functionality
 //    }
 //
@@ -64,293 +65,293 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type ClientAPI interface {
-	AddClientIDToOpenIDConnectProviderRequest(*iam.AddClientIDToOpenIDConnectProviderInput) iam.AddClientIDToOpenIDConnectProviderRequest
+	AddClientIDToOpenIDConnectProviderRequest(*types.AddClientIDToOpenIDConnectProviderInput) iam.AddClientIDToOpenIDConnectProviderRequest
 
-	AddRoleToInstanceProfileRequest(*iam.AddRoleToInstanceProfileInput) iam.AddRoleToInstanceProfileRequest
+	AddRoleToInstanceProfileRequest(*types.AddRoleToInstanceProfileInput) iam.AddRoleToInstanceProfileRequest
 
-	AddUserToGroupRequest(*iam.AddUserToGroupInput) iam.AddUserToGroupRequest
+	AddUserToGroupRequest(*types.AddUserToGroupInput) iam.AddUserToGroupRequest
 
-	AttachGroupPolicyRequest(*iam.AttachGroupPolicyInput) iam.AttachGroupPolicyRequest
+	AttachGroupPolicyRequest(*types.AttachGroupPolicyInput) iam.AttachGroupPolicyRequest
 
-	AttachRolePolicyRequest(*iam.AttachRolePolicyInput) iam.AttachRolePolicyRequest
+	AttachRolePolicyRequest(*types.AttachRolePolicyInput) iam.AttachRolePolicyRequest
 
-	AttachUserPolicyRequest(*iam.AttachUserPolicyInput) iam.AttachUserPolicyRequest
+	AttachUserPolicyRequest(*types.AttachUserPolicyInput) iam.AttachUserPolicyRequest
 
-	ChangePasswordRequest(*iam.ChangePasswordInput) iam.ChangePasswordRequest
+	ChangePasswordRequest(*types.ChangePasswordInput) iam.ChangePasswordRequest
 
-	CreateAccessKeyRequest(*iam.CreateAccessKeyInput) iam.CreateAccessKeyRequest
+	CreateAccessKeyRequest(*types.CreateAccessKeyInput) iam.CreateAccessKeyRequest
 
-	CreateAccountAliasRequest(*iam.CreateAccountAliasInput) iam.CreateAccountAliasRequest
+	CreateAccountAliasRequest(*types.CreateAccountAliasInput) iam.CreateAccountAliasRequest
 
-	CreateGroupRequest(*iam.CreateGroupInput) iam.CreateGroupRequest
+	CreateGroupRequest(*types.CreateGroupInput) iam.CreateGroupRequest
 
-	CreateInstanceProfileRequest(*iam.CreateInstanceProfileInput) iam.CreateInstanceProfileRequest
+	CreateInstanceProfileRequest(*types.CreateInstanceProfileInput) iam.CreateInstanceProfileRequest
 
-	CreateLoginProfileRequest(*iam.CreateLoginProfileInput) iam.CreateLoginProfileRequest
+	CreateLoginProfileRequest(*types.CreateLoginProfileInput) iam.CreateLoginProfileRequest
 
-	CreateOpenIDConnectProviderRequest(*iam.CreateOpenIDConnectProviderInput) iam.CreateOpenIDConnectProviderRequest
+	CreateOpenIDConnectProviderRequest(*types.CreateOpenIDConnectProviderInput) iam.CreateOpenIDConnectProviderRequest
 
-	CreatePolicyRequest(*iam.CreatePolicyInput) iam.CreatePolicyRequest
+	CreatePolicyRequest(*types.CreatePolicyInput) iam.CreatePolicyRequest
 
-	CreatePolicyVersionRequest(*iam.CreatePolicyVersionInput) iam.CreatePolicyVersionRequest
+	CreatePolicyVersionRequest(*types.CreatePolicyVersionInput) iam.CreatePolicyVersionRequest
 
-	CreateRoleRequest(*iam.CreateRoleInput) iam.CreateRoleRequest
+	CreateRoleRequest(*types.CreateRoleInput) iam.CreateRoleRequest
 
-	CreateSAMLProviderRequest(*iam.CreateSAMLProviderInput) iam.CreateSAMLProviderRequest
+	CreateSAMLProviderRequest(*types.CreateSAMLProviderInput) iam.CreateSAMLProviderRequest
 
-	CreateServiceLinkedRoleRequest(*iam.CreateServiceLinkedRoleInput) iam.CreateServiceLinkedRoleRequest
+	CreateServiceLinkedRoleRequest(*types.CreateServiceLinkedRoleInput) iam.CreateServiceLinkedRoleRequest
 
-	CreateServiceSpecificCredentialRequest(*iam.CreateServiceSpecificCredentialInput) iam.CreateServiceSpecificCredentialRequest
+	CreateServiceSpecificCredentialRequest(*types.CreateServiceSpecificCredentialInput) iam.CreateServiceSpecificCredentialRequest
 
-	CreateUserRequest(*iam.CreateUserInput) iam.CreateUserRequest
+	CreateUserRequest(*types.CreateUserInput) iam.CreateUserRequest
 
-	CreateVirtualMFADeviceRequest(*iam.CreateVirtualMFADeviceInput) iam.CreateVirtualMFADeviceRequest
+	CreateVirtualMFADeviceRequest(*types.CreateVirtualMFADeviceInput) iam.CreateVirtualMFADeviceRequest
 
-	DeactivateMFADeviceRequest(*iam.DeactivateMFADeviceInput) iam.DeactivateMFADeviceRequest
+	DeactivateMFADeviceRequest(*types.DeactivateMFADeviceInput) iam.DeactivateMFADeviceRequest
 
-	DeleteAccessKeyRequest(*iam.DeleteAccessKeyInput) iam.DeleteAccessKeyRequest
+	DeleteAccessKeyRequest(*types.DeleteAccessKeyInput) iam.DeleteAccessKeyRequest
 
-	DeleteAccountAliasRequest(*iam.DeleteAccountAliasInput) iam.DeleteAccountAliasRequest
+	DeleteAccountAliasRequest(*types.DeleteAccountAliasInput) iam.DeleteAccountAliasRequest
 
-	DeleteAccountPasswordPolicyRequest(*iam.DeleteAccountPasswordPolicyInput) iam.DeleteAccountPasswordPolicyRequest
+	DeleteAccountPasswordPolicyRequest(*types.DeleteAccountPasswordPolicyInput) iam.DeleteAccountPasswordPolicyRequest
 
-	DeleteGroupRequest(*iam.DeleteGroupInput) iam.DeleteGroupRequest
+	DeleteGroupRequest(*types.DeleteGroupInput) iam.DeleteGroupRequest
 
-	DeleteGroupPolicyRequest(*iam.DeleteGroupPolicyInput) iam.DeleteGroupPolicyRequest
+	DeleteGroupPolicyRequest(*types.DeleteGroupPolicyInput) iam.DeleteGroupPolicyRequest
 
-	DeleteInstanceProfileRequest(*iam.DeleteInstanceProfileInput) iam.DeleteInstanceProfileRequest
+	DeleteInstanceProfileRequest(*types.DeleteInstanceProfileInput) iam.DeleteInstanceProfileRequest
 
-	DeleteLoginProfileRequest(*iam.DeleteLoginProfileInput) iam.DeleteLoginProfileRequest
+	DeleteLoginProfileRequest(*types.DeleteLoginProfileInput) iam.DeleteLoginProfileRequest
 
-	DeleteOpenIDConnectProviderRequest(*iam.DeleteOpenIDConnectProviderInput) iam.DeleteOpenIDConnectProviderRequest
+	DeleteOpenIDConnectProviderRequest(*types.DeleteOpenIDConnectProviderInput) iam.DeleteOpenIDConnectProviderRequest
 
-	DeletePolicyRequest(*iam.DeletePolicyInput) iam.DeletePolicyRequest
+	DeletePolicyRequest(*types.DeletePolicyInput) iam.DeletePolicyRequest
 
-	DeletePolicyVersionRequest(*iam.DeletePolicyVersionInput) iam.DeletePolicyVersionRequest
+	DeletePolicyVersionRequest(*types.DeletePolicyVersionInput) iam.DeletePolicyVersionRequest
 
-	DeleteRoleRequest(*iam.DeleteRoleInput) iam.DeleteRoleRequest
+	DeleteRoleRequest(*types.DeleteRoleInput) iam.DeleteRoleRequest
 
-	DeleteRolePermissionsBoundaryRequest(*iam.DeleteRolePermissionsBoundaryInput) iam.DeleteRolePermissionsBoundaryRequest
+	DeleteRolePermissionsBoundaryRequest(*types.DeleteRolePermissionsBoundaryInput) iam.DeleteRolePermissionsBoundaryRequest
 
-	DeleteRolePolicyRequest(*iam.DeleteRolePolicyInput) iam.DeleteRolePolicyRequest
+	DeleteRolePolicyRequest(*types.DeleteRolePolicyInput) iam.DeleteRolePolicyRequest
 
-	DeleteSAMLProviderRequest(*iam.DeleteSAMLProviderInput) iam.DeleteSAMLProviderRequest
+	DeleteSAMLProviderRequest(*types.DeleteSAMLProviderInput) iam.DeleteSAMLProviderRequest
 
-	DeleteSSHPublicKeyRequest(*iam.DeleteSSHPublicKeyInput) iam.DeleteSSHPublicKeyRequest
+	DeleteSSHPublicKeyRequest(*types.DeleteSSHPublicKeyInput) iam.DeleteSSHPublicKeyRequest
 
-	DeleteServerCertificateRequest(*iam.DeleteServerCertificateInput) iam.DeleteServerCertificateRequest
+	DeleteServerCertificateRequest(*types.DeleteServerCertificateInput) iam.DeleteServerCertificateRequest
 
-	DeleteServiceLinkedRoleRequest(*iam.DeleteServiceLinkedRoleInput) iam.DeleteServiceLinkedRoleRequest
+	DeleteServiceLinkedRoleRequest(*types.DeleteServiceLinkedRoleInput) iam.DeleteServiceLinkedRoleRequest
 
-	DeleteServiceSpecificCredentialRequest(*iam.DeleteServiceSpecificCredentialInput) iam.DeleteServiceSpecificCredentialRequest
+	DeleteServiceSpecificCredentialRequest(*types.DeleteServiceSpecificCredentialInput) iam.DeleteServiceSpecificCredentialRequest
 
-	DeleteSigningCertificateRequest(*iam.DeleteSigningCertificateInput) iam.DeleteSigningCertificateRequest
+	DeleteSigningCertificateRequest(*types.DeleteSigningCertificateInput) iam.DeleteSigningCertificateRequest
 
-	DeleteUserRequest(*iam.DeleteUserInput) iam.DeleteUserRequest
+	DeleteUserRequest(*types.DeleteUserInput) iam.DeleteUserRequest
 
-	DeleteUserPermissionsBoundaryRequest(*iam.DeleteUserPermissionsBoundaryInput) iam.DeleteUserPermissionsBoundaryRequest
+	DeleteUserPermissionsBoundaryRequest(*types.DeleteUserPermissionsBoundaryInput) iam.DeleteUserPermissionsBoundaryRequest
 
-	DeleteUserPolicyRequest(*iam.DeleteUserPolicyInput) iam.DeleteUserPolicyRequest
+	DeleteUserPolicyRequest(*types.DeleteUserPolicyInput) iam.DeleteUserPolicyRequest
 
-	DeleteVirtualMFADeviceRequest(*iam.DeleteVirtualMFADeviceInput) iam.DeleteVirtualMFADeviceRequest
+	DeleteVirtualMFADeviceRequest(*types.DeleteVirtualMFADeviceInput) iam.DeleteVirtualMFADeviceRequest
 
-	DetachGroupPolicyRequest(*iam.DetachGroupPolicyInput) iam.DetachGroupPolicyRequest
+	DetachGroupPolicyRequest(*types.DetachGroupPolicyInput) iam.DetachGroupPolicyRequest
 
-	DetachRolePolicyRequest(*iam.DetachRolePolicyInput) iam.DetachRolePolicyRequest
+	DetachRolePolicyRequest(*types.DetachRolePolicyInput) iam.DetachRolePolicyRequest
 
-	DetachUserPolicyRequest(*iam.DetachUserPolicyInput) iam.DetachUserPolicyRequest
+	DetachUserPolicyRequest(*types.DetachUserPolicyInput) iam.DetachUserPolicyRequest
 
-	EnableMFADeviceRequest(*iam.EnableMFADeviceInput) iam.EnableMFADeviceRequest
+	EnableMFADeviceRequest(*types.EnableMFADeviceInput) iam.EnableMFADeviceRequest
 
-	GenerateCredentialReportRequest(*iam.GenerateCredentialReportInput) iam.GenerateCredentialReportRequest
+	GenerateCredentialReportRequest(*types.GenerateCredentialReportInput) iam.GenerateCredentialReportRequest
 
-	GenerateOrganizationsAccessReportRequest(*iam.GenerateOrganizationsAccessReportInput) iam.GenerateOrganizationsAccessReportRequest
+	GenerateOrganizationsAccessReportRequest(*types.GenerateOrganizationsAccessReportInput) iam.GenerateOrganizationsAccessReportRequest
 
-	GenerateServiceLastAccessedDetailsRequest(*iam.GenerateServiceLastAccessedDetailsInput) iam.GenerateServiceLastAccessedDetailsRequest
+	GenerateServiceLastAccessedDetailsRequest(*types.GenerateServiceLastAccessedDetailsInput) iam.GenerateServiceLastAccessedDetailsRequest
 
-	GetAccessKeyLastUsedRequest(*iam.GetAccessKeyLastUsedInput) iam.GetAccessKeyLastUsedRequest
+	GetAccessKeyLastUsedRequest(*types.GetAccessKeyLastUsedInput) iam.GetAccessKeyLastUsedRequest
 
-	GetAccountAuthorizationDetailsRequest(*iam.GetAccountAuthorizationDetailsInput) iam.GetAccountAuthorizationDetailsRequest
+	GetAccountAuthorizationDetailsRequest(*types.GetAccountAuthorizationDetailsInput) iam.GetAccountAuthorizationDetailsRequest
 
-	GetAccountPasswordPolicyRequest(*iam.GetAccountPasswordPolicyInput) iam.GetAccountPasswordPolicyRequest
+	GetAccountPasswordPolicyRequest(*types.GetAccountPasswordPolicyInput) iam.GetAccountPasswordPolicyRequest
 
-	GetAccountSummaryRequest(*iam.GetAccountSummaryInput) iam.GetAccountSummaryRequest
+	GetAccountSummaryRequest(*types.GetAccountSummaryInput) iam.GetAccountSummaryRequest
 
-	GetContextKeysForCustomPolicyRequest(*iam.GetContextKeysForCustomPolicyInput) iam.GetContextKeysForCustomPolicyRequest
+	GetContextKeysForCustomPolicyRequest(*types.GetContextKeysForCustomPolicyInput) iam.GetContextKeysForCustomPolicyRequest
 
-	GetContextKeysForPrincipalPolicyRequest(*iam.GetContextKeysForPrincipalPolicyInput) iam.GetContextKeysForPrincipalPolicyRequest
+	GetContextKeysForPrincipalPolicyRequest(*types.GetContextKeysForPrincipalPolicyInput) iam.GetContextKeysForPrincipalPolicyRequest
 
-	GetCredentialReportRequest(*iam.GetCredentialReportInput) iam.GetCredentialReportRequest
+	GetCredentialReportRequest(*types.GetCredentialReportInput) iam.GetCredentialReportRequest
 
-	GetGroupRequest(*iam.GetGroupInput) iam.GetGroupRequest
+	GetGroupRequest(*types.GetGroupInput) iam.GetGroupRequest
 
-	GetGroupPolicyRequest(*iam.GetGroupPolicyInput) iam.GetGroupPolicyRequest
+	GetGroupPolicyRequest(*types.GetGroupPolicyInput) iam.GetGroupPolicyRequest
 
-	GetInstanceProfileRequest(*iam.GetInstanceProfileInput) iam.GetInstanceProfileRequest
+	GetInstanceProfileRequest(*types.GetInstanceProfileInput) iam.GetInstanceProfileRequest
 
-	GetLoginProfileRequest(*iam.GetLoginProfileInput) iam.GetLoginProfileRequest
+	GetLoginProfileRequest(*types.GetLoginProfileInput) iam.GetLoginProfileRequest
 
-	GetOpenIDConnectProviderRequest(*iam.GetOpenIDConnectProviderInput) iam.GetOpenIDConnectProviderRequest
+	GetOpenIDConnectProviderRequest(*types.GetOpenIDConnectProviderInput) iam.GetOpenIDConnectProviderRequest
 
-	GetOrganizationsAccessReportRequest(*iam.GetOrganizationsAccessReportInput) iam.GetOrganizationsAccessReportRequest
+	GetOrganizationsAccessReportRequest(*types.GetOrganizationsAccessReportInput) iam.GetOrganizationsAccessReportRequest
 
-	GetPolicyRequest(*iam.GetPolicyInput) iam.GetPolicyRequest
+	GetPolicyRequest(*types.GetPolicyInput) iam.GetPolicyRequest
 
-	GetPolicyVersionRequest(*iam.GetPolicyVersionInput) iam.GetPolicyVersionRequest
+	GetPolicyVersionRequest(*types.GetPolicyVersionInput) iam.GetPolicyVersionRequest
 
-	GetRoleRequest(*iam.GetRoleInput) iam.GetRoleRequest
+	GetRoleRequest(*types.GetRoleInput) iam.GetRoleRequest
 
-	GetRolePolicyRequest(*iam.GetRolePolicyInput) iam.GetRolePolicyRequest
+	GetRolePolicyRequest(*types.GetRolePolicyInput) iam.GetRolePolicyRequest
 
-	GetSAMLProviderRequest(*iam.GetSAMLProviderInput) iam.GetSAMLProviderRequest
+	GetSAMLProviderRequest(*types.GetSAMLProviderInput) iam.GetSAMLProviderRequest
 
-	GetSSHPublicKeyRequest(*iam.GetSSHPublicKeyInput) iam.GetSSHPublicKeyRequest
+	GetSSHPublicKeyRequest(*types.GetSSHPublicKeyInput) iam.GetSSHPublicKeyRequest
 
-	GetServerCertificateRequest(*iam.GetServerCertificateInput) iam.GetServerCertificateRequest
+	GetServerCertificateRequest(*types.GetServerCertificateInput) iam.GetServerCertificateRequest
 
-	GetServiceLastAccessedDetailsRequest(*iam.GetServiceLastAccessedDetailsInput) iam.GetServiceLastAccessedDetailsRequest
+	GetServiceLastAccessedDetailsRequest(*types.GetServiceLastAccessedDetailsInput) iam.GetServiceLastAccessedDetailsRequest
 
-	GetServiceLastAccessedDetailsWithEntitiesRequest(*iam.GetServiceLastAccessedDetailsWithEntitiesInput) iam.GetServiceLastAccessedDetailsWithEntitiesRequest
+	GetServiceLastAccessedDetailsWithEntitiesRequest(*types.GetServiceLastAccessedDetailsWithEntitiesInput) iam.GetServiceLastAccessedDetailsWithEntitiesRequest
 
-	GetServiceLinkedRoleDeletionStatusRequest(*iam.GetServiceLinkedRoleDeletionStatusInput) iam.GetServiceLinkedRoleDeletionStatusRequest
+	GetServiceLinkedRoleDeletionStatusRequest(*types.GetServiceLinkedRoleDeletionStatusInput) iam.GetServiceLinkedRoleDeletionStatusRequest
 
-	GetUserRequest(*iam.GetUserInput) iam.GetUserRequest
+	GetUserRequest(*types.GetUserInput) iam.GetUserRequest
 
-	GetUserPolicyRequest(*iam.GetUserPolicyInput) iam.GetUserPolicyRequest
+	GetUserPolicyRequest(*types.GetUserPolicyInput) iam.GetUserPolicyRequest
 
-	ListAccessKeysRequest(*iam.ListAccessKeysInput) iam.ListAccessKeysRequest
+	ListAccessKeysRequest(*types.ListAccessKeysInput) iam.ListAccessKeysRequest
 
-	ListAccountAliasesRequest(*iam.ListAccountAliasesInput) iam.ListAccountAliasesRequest
+	ListAccountAliasesRequest(*types.ListAccountAliasesInput) iam.ListAccountAliasesRequest
 
-	ListAttachedGroupPoliciesRequest(*iam.ListAttachedGroupPoliciesInput) iam.ListAttachedGroupPoliciesRequest
+	ListAttachedGroupPoliciesRequest(*types.ListAttachedGroupPoliciesInput) iam.ListAttachedGroupPoliciesRequest
 
-	ListAttachedRolePoliciesRequest(*iam.ListAttachedRolePoliciesInput) iam.ListAttachedRolePoliciesRequest
+	ListAttachedRolePoliciesRequest(*types.ListAttachedRolePoliciesInput) iam.ListAttachedRolePoliciesRequest
 
-	ListAttachedUserPoliciesRequest(*iam.ListAttachedUserPoliciesInput) iam.ListAttachedUserPoliciesRequest
+	ListAttachedUserPoliciesRequest(*types.ListAttachedUserPoliciesInput) iam.ListAttachedUserPoliciesRequest
 
-	ListEntitiesForPolicyRequest(*iam.ListEntitiesForPolicyInput) iam.ListEntitiesForPolicyRequest
+	ListEntitiesForPolicyRequest(*types.ListEntitiesForPolicyInput) iam.ListEntitiesForPolicyRequest
 
-	ListGroupPoliciesRequest(*iam.ListGroupPoliciesInput) iam.ListGroupPoliciesRequest
+	ListGroupPoliciesRequest(*types.ListGroupPoliciesInput) iam.ListGroupPoliciesRequest
 
-	ListGroupsRequest(*iam.ListGroupsInput) iam.ListGroupsRequest
+	ListGroupsRequest(*types.ListGroupsInput) iam.ListGroupsRequest
 
-	ListGroupsForUserRequest(*iam.ListGroupsForUserInput) iam.ListGroupsForUserRequest
+	ListGroupsForUserRequest(*types.ListGroupsForUserInput) iam.ListGroupsForUserRequest
 
-	ListInstanceProfilesRequest(*iam.ListInstanceProfilesInput) iam.ListInstanceProfilesRequest
+	ListInstanceProfilesRequest(*types.ListInstanceProfilesInput) iam.ListInstanceProfilesRequest
 
-	ListInstanceProfilesForRoleRequest(*iam.ListInstanceProfilesForRoleInput) iam.ListInstanceProfilesForRoleRequest
+	ListInstanceProfilesForRoleRequest(*types.ListInstanceProfilesForRoleInput) iam.ListInstanceProfilesForRoleRequest
 
-	ListMFADevicesRequest(*iam.ListMFADevicesInput) iam.ListMFADevicesRequest
+	ListMFADevicesRequest(*types.ListMFADevicesInput) iam.ListMFADevicesRequest
 
-	ListOpenIDConnectProvidersRequest(*iam.ListOpenIDConnectProvidersInput) iam.ListOpenIDConnectProvidersRequest
+	ListOpenIDConnectProvidersRequest(*types.ListOpenIDConnectProvidersInput) iam.ListOpenIDConnectProvidersRequest
 
-	ListPoliciesRequest(*iam.ListPoliciesInput) iam.ListPoliciesRequest
+	ListPoliciesRequest(*types.ListPoliciesInput) iam.ListPoliciesRequest
 
-	ListPoliciesGrantingServiceAccessRequest(*iam.ListPoliciesGrantingServiceAccessInput) iam.ListPoliciesGrantingServiceAccessRequest
+	ListPoliciesGrantingServiceAccessRequest(*types.ListPoliciesGrantingServiceAccessInput) iam.ListPoliciesGrantingServiceAccessRequest
 
-	ListPolicyVersionsRequest(*iam.ListPolicyVersionsInput) iam.ListPolicyVersionsRequest
+	ListPolicyVersionsRequest(*types.ListPolicyVersionsInput) iam.ListPolicyVersionsRequest
 
-	ListRolePoliciesRequest(*iam.ListRolePoliciesInput) iam.ListRolePoliciesRequest
+	ListRolePoliciesRequest(*types.ListRolePoliciesInput) iam.ListRolePoliciesRequest
 
-	ListRoleTagsRequest(*iam.ListRoleTagsInput) iam.ListRoleTagsRequest
+	ListRoleTagsRequest(*types.ListRoleTagsInput) iam.ListRoleTagsRequest
 
-	ListRolesRequest(*iam.ListRolesInput) iam.ListRolesRequest
+	ListRolesRequest(*types.ListRolesInput) iam.ListRolesRequest
 
-	ListSAMLProvidersRequest(*iam.ListSAMLProvidersInput) iam.ListSAMLProvidersRequest
+	ListSAMLProvidersRequest(*types.ListSAMLProvidersInput) iam.ListSAMLProvidersRequest
 
-	ListSSHPublicKeysRequest(*iam.ListSSHPublicKeysInput) iam.ListSSHPublicKeysRequest
+	ListSSHPublicKeysRequest(*types.ListSSHPublicKeysInput) iam.ListSSHPublicKeysRequest
 
-	ListServerCertificatesRequest(*iam.ListServerCertificatesInput) iam.ListServerCertificatesRequest
+	ListServerCertificatesRequest(*types.ListServerCertificatesInput) iam.ListServerCertificatesRequest
 
-	ListServiceSpecificCredentialsRequest(*iam.ListServiceSpecificCredentialsInput) iam.ListServiceSpecificCredentialsRequest
+	ListServiceSpecificCredentialsRequest(*types.ListServiceSpecificCredentialsInput) iam.ListServiceSpecificCredentialsRequest
 
-	ListSigningCertificatesRequest(*iam.ListSigningCertificatesInput) iam.ListSigningCertificatesRequest
+	ListSigningCertificatesRequest(*types.ListSigningCertificatesInput) iam.ListSigningCertificatesRequest
 
-	ListUserPoliciesRequest(*iam.ListUserPoliciesInput) iam.ListUserPoliciesRequest
+	ListUserPoliciesRequest(*types.ListUserPoliciesInput) iam.ListUserPoliciesRequest
 
-	ListUserTagsRequest(*iam.ListUserTagsInput) iam.ListUserTagsRequest
+	ListUserTagsRequest(*types.ListUserTagsInput) iam.ListUserTagsRequest
 
-	ListUsersRequest(*iam.ListUsersInput) iam.ListUsersRequest
+	ListUsersRequest(*types.ListUsersInput) iam.ListUsersRequest
 
-	ListVirtualMFADevicesRequest(*iam.ListVirtualMFADevicesInput) iam.ListVirtualMFADevicesRequest
+	ListVirtualMFADevicesRequest(*types.ListVirtualMFADevicesInput) iam.ListVirtualMFADevicesRequest
 
-	PutGroupPolicyRequest(*iam.PutGroupPolicyInput) iam.PutGroupPolicyRequest
+	PutGroupPolicyRequest(*types.PutGroupPolicyInput) iam.PutGroupPolicyRequest
 
-	PutRolePermissionsBoundaryRequest(*iam.PutRolePermissionsBoundaryInput) iam.PutRolePermissionsBoundaryRequest
+	PutRolePermissionsBoundaryRequest(*types.PutRolePermissionsBoundaryInput) iam.PutRolePermissionsBoundaryRequest
 
-	PutRolePolicyRequest(*iam.PutRolePolicyInput) iam.PutRolePolicyRequest
+	PutRolePolicyRequest(*types.PutRolePolicyInput) iam.PutRolePolicyRequest
 
-	PutUserPermissionsBoundaryRequest(*iam.PutUserPermissionsBoundaryInput) iam.PutUserPermissionsBoundaryRequest
+	PutUserPermissionsBoundaryRequest(*types.PutUserPermissionsBoundaryInput) iam.PutUserPermissionsBoundaryRequest
 
-	PutUserPolicyRequest(*iam.PutUserPolicyInput) iam.PutUserPolicyRequest
+	PutUserPolicyRequest(*types.PutUserPolicyInput) iam.PutUserPolicyRequest
 
-	RemoveClientIDFromOpenIDConnectProviderRequest(*iam.RemoveClientIDFromOpenIDConnectProviderInput) iam.RemoveClientIDFromOpenIDConnectProviderRequest
+	RemoveClientIDFromOpenIDConnectProviderRequest(*types.RemoveClientIDFromOpenIDConnectProviderInput) iam.RemoveClientIDFromOpenIDConnectProviderRequest
 
-	RemoveRoleFromInstanceProfileRequest(*iam.RemoveRoleFromInstanceProfileInput) iam.RemoveRoleFromInstanceProfileRequest
+	RemoveRoleFromInstanceProfileRequest(*types.RemoveRoleFromInstanceProfileInput) iam.RemoveRoleFromInstanceProfileRequest
 
-	RemoveUserFromGroupRequest(*iam.RemoveUserFromGroupInput) iam.RemoveUserFromGroupRequest
+	RemoveUserFromGroupRequest(*types.RemoveUserFromGroupInput) iam.RemoveUserFromGroupRequest
 
-	ResetServiceSpecificCredentialRequest(*iam.ResetServiceSpecificCredentialInput) iam.ResetServiceSpecificCredentialRequest
+	ResetServiceSpecificCredentialRequest(*types.ResetServiceSpecificCredentialInput) iam.ResetServiceSpecificCredentialRequest
 
-	ResyncMFADeviceRequest(*iam.ResyncMFADeviceInput) iam.ResyncMFADeviceRequest
+	ResyncMFADeviceRequest(*types.ResyncMFADeviceInput) iam.ResyncMFADeviceRequest
 
-	SetDefaultPolicyVersionRequest(*iam.SetDefaultPolicyVersionInput) iam.SetDefaultPolicyVersionRequest
+	SetDefaultPolicyVersionRequest(*types.SetDefaultPolicyVersionInput) iam.SetDefaultPolicyVersionRequest
 
-	SetSecurityTokenServicePreferencesRequest(*iam.SetSecurityTokenServicePreferencesInput) iam.SetSecurityTokenServicePreferencesRequest
+	SetSecurityTokenServicePreferencesRequest(*types.SetSecurityTokenServicePreferencesInput) iam.SetSecurityTokenServicePreferencesRequest
 
-	SimulateCustomPolicyRequest(*iam.SimulateCustomPolicyInput) iam.SimulateCustomPolicyRequest
+	SimulateCustomPolicyRequest(*types.SimulateCustomPolicyInput) iam.SimulateCustomPolicyRequest
 
-	SimulatePrincipalPolicyRequest(*iam.SimulatePrincipalPolicyInput) iam.SimulatePrincipalPolicyRequest
+	SimulatePrincipalPolicyRequest(*types.SimulatePrincipalPolicyInput) iam.SimulatePrincipalPolicyRequest
 
-	TagRoleRequest(*iam.TagRoleInput) iam.TagRoleRequest
+	TagRoleRequest(*types.TagRoleInput) iam.TagRoleRequest
 
-	TagUserRequest(*iam.TagUserInput) iam.TagUserRequest
+	TagUserRequest(*types.TagUserInput) iam.TagUserRequest
 
-	UntagRoleRequest(*iam.UntagRoleInput) iam.UntagRoleRequest
+	UntagRoleRequest(*types.UntagRoleInput) iam.UntagRoleRequest
 
-	UntagUserRequest(*iam.UntagUserInput) iam.UntagUserRequest
+	UntagUserRequest(*types.UntagUserInput) iam.UntagUserRequest
 
-	UpdateAccessKeyRequest(*iam.UpdateAccessKeyInput) iam.UpdateAccessKeyRequest
+	UpdateAccessKeyRequest(*types.UpdateAccessKeyInput) iam.UpdateAccessKeyRequest
 
-	UpdateAccountPasswordPolicyRequest(*iam.UpdateAccountPasswordPolicyInput) iam.UpdateAccountPasswordPolicyRequest
+	UpdateAccountPasswordPolicyRequest(*types.UpdateAccountPasswordPolicyInput) iam.UpdateAccountPasswordPolicyRequest
 
-	UpdateAssumeRolePolicyRequest(*iam.UpdateAssumeRolePolicyInput) iam.UpdateAssumeRolePolicyRequest
+	UpdateAssumeRolePolicyRequest(*types.UpdateAssumeRolePolicyInput) iam.UpdateAssumeRolePolicyRequest
 
-	UpdateGroupRequest(*iam.UpdateGroupInput) iam.UpdateGroupRequest
+	UpdateGroupRequest(*types.UpdateGroupInput) iam.UpdateGroupRequest
 
-	UpdateLoginProfileRequest(*iam.UpdateLoginProfileInput) iam.UpdateLoginProfileRequest
+	UpdateLoginProfileRequest(*types.UpdateLoginProfileInput) iam.UpdateLoginProfileRequest
 
-	UpdateOpenIDConnectProviderThumbprintRequest(*iam.UpdateOpenIDConnectProviderThumbprintInput) iam.UpdateOpenIDConnectProviderThumbprintRequest
+	UpdateOpenIDConnectProviderThumbprintRequest(*types.UpdateOpenIDConnectProviderThumbprintInput) iam.UpdateOpenIDConnectProviderThumbprintRequest
 
-	UpdateRoleRequest(*iam.UpdateRoleInput) iam.UpdateRoleRequest
+	UpdateRoleRequest(*types.UpdateRoleInput) iam.UpdateRoleRequest
 
-	UpdateRoleDescriptionRequest(*iam.UpdateRoleDescriptionInput) iam.UpdateRoleDescriptionRequest
+	UpdateRoleDescriptionRequest(*types.UpdateRoleDescriptionInput) iam.UpdateRoleDescriptionRequest
 
-	UpdateSAMLProviderRequest(*iam.UpdateSAMLProviderInput) iam.UpdateSAMLProviderRequest
+	UpdateSAMLProviderRequest(*types.UpdateSAMLProviderInput) iam.UpdateSAMLProviderRequest
 
-	UpdateSSHPublicKeyRequest(*iam.UpdateSSHPublicKeyInput) iam.UpdateSSHPublicKeyRequest
+	UpdateSSHPublicKeyRequest(*types.UpdateSSHPublicKeyInput) iam.UpdateSSHPublicKeyRequest
 
-	UpdateServerCertificateRequest(*iam.UpdateServerCertificateInput) iam.UpdateServerCertificateRequest
+	UpdateServerCertificateRequest(*types.UpdateServerCertificateInput) iam.UpdateServerCertificateRequest
 
-	UpdateServiceSpecificCredentialRequest(*iam.UpdateServiceSpecificCredentialInput) iam.UpdateServiceSpecificCredentialRequest
+	UpdateServiceSpecificCredentialRequest(*types.UpdateServiceSpecificCredentialInput) iam.UpdateServiceSpecificCredentialRequest
 
-	UpdateSigningCertificateRequest(*iam.UpdateSigningCertificateInput) iam.UpdateSigningCertificateRequest
+	UpdateSigningCertificateRequest(*types.UpdateSigningCertificateInput) iam.UpdateSigningCertificateRequest
 
-	UpdateUserRequest(*iam.UpdateUserInput) iam.UpdateUserRequest
+	UpdateUserRequest(*types.UpdateUserInput) iam.UpdateUserRequest
 
-	UploadSSHPublicKeyRequest(*iam.UploadSSHPublicKeyInput) iam.UploadSSHPublicKeyRequest
+	UploadSSHPublicKeyRequest(*types.UploadSSHPublicKeyInput) iam.UploadSSHPublicKeyRequest
 
-	UploadServerCertificateRequest(*iam.UploadServerCertificateInput) iam.UploadServerCertificateRequest
+	UploadServerCertificateRequest(*types.UploadServerCertificateInput) iam.UploadServerCertificateRequest
 
-	UploadSigningCertificateRequest(*iam.UploadSigningCertificateInput) iam.UploadSigningCertificateRequest
+	UploadSigningCertificateRequest(*types.UploadSigningCertificateInput) iam.UploadSigningCertificateRequest
 
-	WaitUntilInstanceProfileExists(context.Context, *iam.GetInstanceProfileInput, ...aws.WaiterOption) error
+	WaitUntilInstanceProfileExists(context.Context, *types.GetInstanceProfileInput, ...aws.WaiterOption) error
 
-	WaitUntilPolicyExists(context.Context, *iam.GetPolicyInput, ...aws.WaiterOption) error
+	WaitUntilPolicyExists(context.Context, *types.GetPolicyInput, ...aws.WaiterOption) error
 
-	WaitUntilRoleExists(context.Context, *iam.GetRoleInput, ...aws.WaiterOption) error
+	WaitUntilRoleExists(context.Context, *types.GetRoleInput, ...aws.WaiterOption) error
 
-	WaitUntilUserExists(context.Context, *iam.GetUserInput, ...aws.WaiterOption) error
+	WaitUntilUserExists(context.Context, *types.GetUserInput, ...aws.WaiterOption) error
 }
 
 var _ ClientAPI = (*iam.Client)(nil)

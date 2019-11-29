@@ -4,64 +4,10 @@ package ec2
 
 import (
 	"context"
-	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-type GetPasswordDataInput struct {
-	_ struct{} `type:"structure"`
-
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have
-	// the required permissions, the error response is DryRunOperation. Otherwise,
-	// it is UnauthorizedOperation.
-	DryRun *bool `locationName:"dryRun" type:"boolean"`
-
-	// The ID of the Windows instance.
-	//
-	// InstanceId is a required field
-	InstanceId *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetPasswordDataInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetPasswordDataInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetPasswordDataInput"}
-
-	if s.InstanceId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("InstanceId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type GetPasswordDataOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the Windows instance.
-	InstanceId *string `locationName:"instanceId" type:"string"`
-
-	// The password of the instance. Returns an empty string if the password is
-	// not available.
-	PasswordData *string `locationName:"passwordData" type:"string"`
-
-	// The time the data was last updated.
-	Timestamp *time.Time `locationName:"timestamp" type:"timestamp"`
-}
-
-// String returns the string representation
-func (s GetPasswordDataOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetPasswordData = "GetPasswordData"
 
@@ -95,7 +41,7 @@ const opGetPasswordData = "GetPasswordData"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetPasswordData
-func (c *Client) GetPasswordDataRequest(input *GetPasswordDataInput) GetPasswordDataRequest {
+func (c *Client) GetPasswordDataRequest(input *types.GetPasswordDataInput) GetPasswordDataRequest {
 	op := &aws.Operation{
 		Name:       opGetPasswordData,
 		HTTPMethod: "POST",
@@ -103,10 +49,10 @@ func (c *Client) GetPasswordDataRequest(input *GetPasswordDataInput) GetPassword
 	}
 
 	if input == nil {
-		input = &GetPasswordDataInput{}
+		input = &types.GetPasswordDataInput{}
 	}
 
-	req := c.newRequest(op, input, &GetPasswordDataOutput{})
+	req := c.newRequest(op, input, &types.GetPasswordDataOutput{})
 	return GetPasswordDataRequest{Request: req, Input: input, Copy: c.GetPasswordDataRequest}
 }
 
@@ -114,8 +60,8 @@ func (c *Client) GetPasswordDataRequest(input *GetPasswordDataInput) GetPassword
 // GetPasswordData API operation.
 type GetPasswordDataRequest struct {
 	*aws.Request
-	Input *GetPasswordDataInput
-	Copy  func(*GetPasswordDataInput) GetPasswordDataRequest
+	Input *types.GetPasswordDataInput
+	Copy  func(*types.GetPasswordDataInput) GetPasswordDataRequest
 }
 
 // Send marshals and sends the GetPasswordData API request.
@@ -127,7 +73,7 @@ func (r GetPasswordDataRequest) Send(ctx context.Context) (*GetPasswordDataRespo
 	}
 
 	resp := &GetPasswordDataResponse{
-		GetPasswordDataOutput: r.Request.Data.(*GetPasswordDataOutput),
+		GetPasswordDataOutput: r.Request.Data.(*types.GetPasswordDataOutput),
 		response:              &aws.Response{Request: r.Request},
 	}
 
@@ -137,7 +83,7 @@ func (r GetPasswordDataRequest) Send(ctx context.Context) (*GetPasswordDataRespo
 // GetPasswordDataResponse is the response type for the
 // GetPasswordData API operation.
 type GetPasswordDataResponse struct {
-	*GetPasswordDataOutput
+	*types.GetPasswordDataOutput
 
 	response *aws.Response
 }

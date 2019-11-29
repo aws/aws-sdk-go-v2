@@ -6,37 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/emr/types"
 )
-
-type ListSecurityConfigurationsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The pagination token that indicates the set of results to retrieve.
-	Marker *string `type:"string"`
-}
-
-// String returns the string representation
-func (s ListSecurityConfigurationsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type ListSecurityConfigurationsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A pagination token that indicates the next set of results to retrieve. Include
-	// the marker in the next ListSecurityConfiguration call to retrieve the next
-	// page of results, if required.
-	Marker *string `type:"string"`
-
-	// The creation date and time, and name, of each security configuration.
-	SecurityConfigurations []SecurityConfigurationSummary `type:"list"`
-}
-
-// String returns the string representation
-func (s ListSecurityConfigurationsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListSecurityConfigurations = "ListSecurityConfigurations"
 
@@ -56,7 +27,7 @@ const opListSecurityConfigurations = "ListSecurityConfigurations"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/ListSecurityConfigurations
-func (c *Client) ListSecurityConfigurationsRequest(input *ListSecurityConfigurationsInput) ListSecurityConfigurationsRequest {
+func (c *Client) ListSecurityConfigurationsRequest(input *types.ListSecurityConfigurationsInput) ListSecurityConfigurationsRequest {
 	op := &aws.Operation{
 		Name:       opListSecurityConfigurations,
 		HTTPMethod: "POST",
@@ -70,10 +41,10 @@ func (c *Client) ListSecurityConfigurationsRequest(input *ListSecurityConfigurat
 	}
 
 	if input == nil {
-		input = &ListSecurityConfigurationsInput{}
+		input = &types.ListSecurityConfigurationsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListSecurityConfigurationsOutput{})
+	req := c.newRequest(op, input, &types.ListSecurityConfigurationsOutput{})
 	return ListSecurityConfigurationsRequest{Request: req, Input: input, Copy: c.ListSecurityConfigurationsRequest}
 }
 
@@ -81,8 +52,8 @@ func (c *Client) ListSecurityConfigurationsRequest(input *ListSecurityConfigurat
 // ListSecurityConfigurations API operation.
 type ListSecurityConfigurationsRequest struct {
 	*aws.Request
-	Input *ListSecurityConfigurationsInput
-	Copy  func(*ListSecurityConfigurationsInput) ListSecurityConfigurationsRequest
+	Input *types.ListSecurityConfigurationsInput
+	Copy  func(*types.ListSecurityConfigurationsInput) ListSecurityConfigurationsRequest
 }
 
 // Send marshals and sends the ListSecurityConfigurations API request.
@@ -94,7 +65,7 @@ func (r ListSecurityConfigurationsRequest) Send(ctx context.Context) (*ListSecur
 	}
 
 	resp := &ListSecurityConfigurationsResponse{
-		ListSecurityConfigurationsOutput: r.Request.Data.(*ListSecurityConfigurationsOutput),
+		ListSecurityConfigurationsOutput: r.Request.Data.(*types.ListSecurityConfigurationsOutput),
 		response:                         &aws.Response{Request: r.Request},
 	}
 
@@ -124,7 +95,7 @@ func NewListSecurityConfigurationsPaginator(req ListSecurityConfigurationsReques
 	return ListSecurityConfigurationsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListSecurityConfigurationsInput
+				var inCpy *types.ListSecurityConfigurationsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -144,14 +115,14 @@ type ListSecurityConfigurationsPaginator struct {
 	aws.Pager
 }
 
-func (p *ListSecurityConfigurationsPaginator) CurrentPage() *ListSecurityConfigurationsOutput {
-	return p.Pager.CurrentPage().(*ListSecurityConfigurationsOutput)
+func (p *ListSecurityConfigurationsPaginator) CurrentPage() *types.ListSecurityConfigurationsOutput {
+	return p.Pager.CurrentPage().(*types.ListSecurityConfigurationsOutput)
 }
 
 // ListSecurityConfigurationsResponse is the response type for the
 // ListSecurityConfigurations API operation.
 type ListSecurityConfigurationsResponse struct {
-	*ListSecurityConfigurationsOutput
+	*types.ListSecurityConfigurationsOutput
 
 	response *aws.Response
 }

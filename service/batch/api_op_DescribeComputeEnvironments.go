@@ -6,114 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/batch/types"
 )
-
-type DescribeComputeEnvironmentsInput struct {
-	_ struct{} `type:"structure"`
-
-	// A list of up to 100 compute environment names or full Amazon Resource Name
-	// (ARN) entries.
-	ComputeEnvironments []string `locationName:"computeEnvironments" type:"list"`
-
-	// The maximum number of cluster results returned by DescribeComputeEnvironments
-	// in paginated output. When this parameter is used, DescribeComputeEnvironments
-	// only returns maxResults results in a single page along with a nextToken response
-	// element. The remaining results of the initial request can be seen by sending
-	// another DescribeComputeEnvironments request with the returned nextToken value.
-	// This value can be between 1 and 100. If this parameter is not used, then
-	// DescribeComputeEnvironments returns up to 100 results and a nextToken value
-	// if applicable.
-	MaxResults *int64 `locationName:"maxResults" type:"integer"`
-
-	// The nextToken value returned from a previous paginated DescribeComputeEnvironments
-	// request where maxResults was used and the results exceeded the value of that
-	// parameter. Pagination continues from the end of the previous results that
-	// returned the nextToken value. This value is null when there are no more results
-	// to return.
-	//
-	// This token should be treated as an opaque identifier that is only used to
-	// retrieve the next items in a list and not for other programmatic purposes.
-	NextToken *string `locationName:"nextToken" type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeComputeEnvironmentsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DescribeComputeEnvironmentsInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.ComputeEnvironments != nil {
-		v := s.ComputeEnvironments
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "computeEnvironments", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
-		}
-		ls0.End()
-
-	}
-	if s.MaxResults != nil {
-		v := *s.MaxResults
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "maxResults", protocol.Int64Value(v), metadata)
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type DescribeComputeEnvironmentsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The list of compute environments.
-	ComputeEnvironments []ComputeEnvironmentDetail `locationName:"computeEnvironments" type:"list"`
-
-	// The nextToken value to include in a future DescribeComputeEnvironments request.
-	// When the results of a DescribeJobDefinitions request exceed maxResults, this
-	// value can be used to retrieve the next page of results. This value is null
-	// when there are no more results to return.
-	NextToken *string `locationName:"nextToken" type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeComputeEnvironmentsOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DescribeComputeEnvironmentsOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.ComputeEnvironments != nil {
-		v := s.ComputeEnvironments
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "computeEnvironments", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opDescribeComputeEnvironments = "DescribeComputeEnvironments"
 
@@ -134,7 +28,7 @@ const opDescribeComputeEnvironments = "DescribeComputeEnvironments"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/DescribeComputeEnvironments
-func (c *Client) DescribeComputeEnvironmentsRequest(input *DescribeComputeEnvironmentsInput) DescribeComputeEnvironmentsRequest {
+func (c *Client) DescribeComputeEnvironmentsRequest(input *types.DescribeComputeEnvironmentsInput) DescribeComputeEnvironmentsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeComputeEnvironments,
 		HTTPMethod: "POST",
@@ -148,10 +42,10 @@ func (c *Client) DescribeComputeEnvironmentsRequest(input *DescribeComputeEnviro
 	}
 
 	if input == nil {
-		input = &DescribeComputeEnvironmentsInput{}
+		input = &types.DescribeComputeEnvironmentsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeComputeEnvironmentsOutput{})
+	req := c.newRequest(op, input, &types.DescribeComputeEnvironmentsOutput{})
 	return DescribeComputeEnvironmentsRequest{Request: req, Input: input, Copy: c.DescribeComputeEnvironmentsRequest}
 }
 
@@ -159,8 +53,8 @@ func (c *Client) DescribeComputeEnvironmentsRequest(input *DescribeComputeEnviro
 // DescribeComputeEnvironments API operation.
 type DescribeComputeEnvironmentsRequest struct {
 	*aws.Request
-	Input *DescribeComputeEnvironmentsInput
-	Copy  func(*DescribeComputeEnvironmentsInput) DescribeComputeEnvironmentsRequest
+	Input *types.DescribeComputeEnvironmentsInput
+	Copy  func(*types.DescribeComputeEnvironmentsInput) DescribeComputeEnvironmentsRequest
 }
 
 // Send marshals and sends the DescribeComputeEnvironments API request.
@@ -172,7 +66,7 @@ func (r DescribeComputeEnvironmentsRequest) Send(ctx context.Context) (*Describe
 	}
 
 	resp := &DescribeComputeEnvironmentsResponse{
-		DescribeComputeEnvironmentsOutput: r.Request.Data.(*DescribeComputeEnvironmentsOutput),
+		DescribeComputeEnvironmentsOutput: r.Request.Data.(*types.DescribeComputeEnvironmentsOutput),
 		response:                          &aws.Response{Request: r.Request},
 	}
 
@@ -202,7 +96,7 @@ func NewDescribeComputeEnvironmentsPaginator(req DescribeComputeEnvironmentsRequ
 	return DescribeComputeEnvironmentsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *DescribeComputeEnvironmentsInput
+				var inCpy *types.DescribeComputeEnvironmentsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -222,14 +116,14 @@ type DescribeComputeEnvironmentsPaginator struct {
 	aws.Pager
 }
 
-func (p *DescribeComputeEnvironmentsPaginator) CurrentPage() *DescribeComputeEnvironmentsOutput {
-	return p.Pager.CurrentPage().(*DescribeComputeEnvironmentsOutput)
+func (p *DescribeComputeEnvironmentsPaginator) CurrentPage() *types.DescribeComputeEnvironmentsOutput {
+	return p.Pager.CurrentPage().(*types.DescribeComputeEnvironmentsOutput)
 }
 
 // DescribeComputeEnvironmentsResponse is the response type for the
 // DescribeComputeEnvironments API operation.
 type DescribeComputeEnvironmentsResponse struct {
-	*DescribeComputeEnvironmentsOutput
+	*types.DescribeComputeEnvironmentsOutput
 
 	response *aws.Response
 }

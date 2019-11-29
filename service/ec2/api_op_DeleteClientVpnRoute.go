@@ -6,66 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-type DeleteClientVpnRouteInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the Client VPN endpoint from which the route is to be deleted.
-	//
-	// ClientVpnEndpointId is a required field
-	ClientVpnEndpointId *string `type:"string" required:"true"`
-
-	// The IPv4 address range, in CIDR notation, of the route to be deleted.
-	//
-	// DestinationCidrBlock is a required field
-	DestinationCidrBlock *string `type:"string" required:"true"`
-
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have
-	// the required permissions, the error response is DryRunOperation. Otherwise,
-	// it is UnauthorizedOperation.
-	DryRun *bool `type:"boolean"`
-
-	// The ID of the target subnet used by the route.
-	TargetVpcSubnetId *string `type:"string"`
-}
-
-// String returns the string representation
-func (s DeleteClientVpnRouteInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteClientVpnRouteInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteClientVpnRouteInput"}
-
-	if s.ClientVpnEndpointId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ClientVpnEndpointId"))
-	}
-
-	if s.DestinationCidrBlock == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DestinationCidrBlock"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteClientVpnRouteOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The current state of the route.
-	Status *VpnRouteStatus `locationName:"status" type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteClientVpnRouteOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteClientVpnRoute = "DeleteClientVpnRoute"
 
@@ -86,7 +28,7 @@ const opDeleteClientVpnRoute = "DeleteClientVpnRoute"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteClientVpnRoute
-func (c *Client) DeleteClientVpnRouteRequest(input *DeleteClientVpnRouteInput) DeleteClientVpnRouteRequest {
+func (c *Client) DeleteClientVpnRouteRequest(input *types.DeleteClientVpnRouteInput) DeleteClientVpnRouteRequest {
 	op := &aws.Operation{
 		Name:       opDeleteClientVpnRoute,
 		HTTPMethod: "POST",
@@ -94,10 +36,10 @@ func (c *Client) DeleteClientVpnRouteRequest(input *DeleteClientVpnRouteInput) D
 	}
 
 	if input == nil {
-		input = &DeleteClientVpnRouteInput{}
+		input = &types.DeleteClientVpnRouteInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteClientVpnRouteOutput{})
+	req := c.newRequest(op, input, &types.DeleteClientVpnRouteOutput{})
 	return DeleteClientVpnRouteRequest{Request: req, Input: input, Copy: c.DeleteClientVpnRouteRequest}
 }
 
@@ -105,8 +47,8 @@ func (c *Client) DeleteClientVpnRouteRequest(input *DeleteClientVpnRouteInput) D
 // DeleteClientVpnRoute API operation.
 type DeleteClientVpnRouteRequest struct {
 	*aws.Request
-	Input *DeleteClientVpnRouteInput
-	Copy  func(*DeleteClientVpnRouteInput) DeleteClientVpnRouteRequest
+	Input *types.DeleteClientVpnRouteInput
+	Copy  func(*types.DeleteClientVpnRouteInput) DeleteClientVpnRouteRequest
 }
 
 // Send marshals and sends the DeleteClientVpnRoute API request.
@@ -118,7 +60,7 @@ func (r DeleteClientVpnRouteRequest) Send(ctx context.Context) (*DeleteClientVpn
 	}
 
 	resp := &DeleteClientVpnRouteResponse{
-		DeleteClientVpnRouteOutput: r.Request.Data.(*DeleteClientVpnRouteOutput),
+		DeleteClientVpnRouteOutput: r.Request.Data.(*types.DeleteClientVpnRouteOutput),
 		response:                   &aws.Response{Request: r.Request},
 	}
 
@@ -128,7 +70,7 @@ func (r DeleteClientVpnRouteRequest) Send(ctx context.Context) (*DeleteClientVpn
 // DeleteClientVpnRouteResponse is the response type for the
 // DeleteClientVpnRoute API operation.
 type DeleteClientVpnRouteResponse struct {
-	*DeleteClientVpnRouteOutput
+	*types.DeleteClientVpnRouteOutput
 
 	response *aws.Response
 }

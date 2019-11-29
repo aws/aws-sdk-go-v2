@@ -6,68 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-// Contains the parameters for AssignPrivateIpAddresses.
-type AssignPrivateIpAddressesInput struct {
-	_ struct{} `type:"structure"`
-
-	// Indicates whether to allow an IP address that is already assigned to another
-	// network interface or instance to be reassigned to the specified network interface.
-	AllowReassignment *bool `locationName:"allowReassignment" type:"boolean"`
-
-	// The ID of the network interface.
-	//
-	// NetworkInterfaceId is a required field
-	NetworkInterfaceId *string `locationName:"networkInterfaceId" type:"string" required:"true"`
-
-	// One or more IP addresses to be assigned as a secondary private IP address
-	// to the network interface. You can't specify this parameter when also specifying
-	// a number of secondary IP addresses.
-	//
-	// If you don't specify an IP address, Amazon EC2 automatically selects an IP
-	// address within the subnet range.
-	PrivateIpAddresses []string `locationName:"privateIpAddress" locationNameList:"PrivateIpAddress" type:"list"`
-
-	// The number of secondary IP addresses to assign to the network interface.
-	// You can't specify this parameter when also specifying private IP addresses.
-	SecondaryPrivateIpAddressCount *int64 `locationName:"secondaryPrivateIpAddressCount" type:"integer"`
-}
-
-// String returns the string representation
-func (s AssignPrivateIpAddressesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *AssignPrivateIpAddressesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "AssignPrivateIpAddressesInput"}
-
-	if s.NetworkInterfaceId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("NetworkInterfaceId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type AssignPrivateIpAddressesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The private IP addresses assigned to the network interface.
-	AssignedPrivateIpAddresses []AssignedPrivateIpAddress `locationName:"assignedPrivateIpAddressesSet" locationNameList:"item" type:"list"`
-
-	// The ID of the network interface.
-	NetworkInterfaceId *string `locationName:"networkInterfaceId" type:"string"`
-}
-
-// String returns the string representation
-func (s AssignPrivateIpAddressesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opAssignPrivateIpAddresses = "AssignPrivateIpAddresses"
 
@@ -101,7 +41,7 @@ const opAssignPrivateIpAddresses = "AssignPrivateIpAddresses"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AssignPrivateIpAddresses
-func (c *Client) AssignPrivateIpAddressesRequest(input *AssignPrivateIpAddressesInput) AssignPrivateIpAddressesRequest {
+func (c *Client) AssignPrivateIpAddressesRequest(input *types.AssignPrivateIpAddressesInput) AssignPrivateIpAddressesRequest {
 	op := &aws.Operation{
 		Name:       opAssignPrivateIpAddresses,
 		HTTPMethod: "POST",
@@ -109,10 +49,10 @@ func (c *Client) AssignPrivateIpAddressesRequest(input *AssignPrivateIpAddresses
 	}
 
 	if input == nil {
-		input = &AssignPrivateIpAddressesInput{}
+		input = &types.AssignPrivateIpAddressesInput{}
 	}
 
-	req := c.newRequest(op, input, &AssignPrivateIpAddressesOutput{})
+	req := c.newRequest(op, input, &types.AssignPrivateIpAddressesOutput{})
 	return AssignPrivateIpAddressesRequest{Request: req, Input: input, Copy: c.AssignPrivateIpAddressesRequest}
 }
 
@@ -120,8 +60,8 @@ func (c *Client) AssignPrivateIpAddressesRequest(input *AssignPrivateIpAddresses
 // AssignPrivateIpAddresses API operation.
 type AssignPrivateIpAddressesRequest struct {
 	*aws.Request
-	Input *AssignPrivateIpAddressesInput
-	Copy  func(*AssignPrivateIpAddressesInput) AssignPrivateIpAddressesRequest
+	Input *types.AssignPrivateIpAddressesInput
+	Copy  func(*types.AssignPrivateIpAddressesInput) AssignPrivateIpAddressesRequest
 }
 
 // Send marshals and sends the AssignPrivateIpAddresses API request.
@@ -133,7 +73,7 @@ func (r AssignPrivateIpAddressesRequest) Send(ctx context.Context) (*AssignPriva
 	}
 
 	resp := &AssignPrivateIpAddressesResponse{
-		AssignPrivateIpAddressesOutput: r.Request.Data.(*AssignPrivateIpAddressesOutput),
+		AssignPrivateIpAddressesOutput: r.Request.Data.(*types.AssignPrivateIpAddressesOutput),
 		response:                       &aws.Response{Request: r.Request},
 	}
 
@@ -143,7 +83,7 @@ func (r AssignPrivateIpAddressesRequest) Send(ctx context.Context) (*AssignPriva
 // AssignPrivateIpAddressesResponse is the response type for the
 // AssignPrivateIpAddresses API operation.
 type AssignPrivateIpAddressesResponse struct {
-	*AssignPrivateIpAddressesOutput
+	*types.AssignPrivateIpAddressesOutput
 
 	response *aws.Response
 }

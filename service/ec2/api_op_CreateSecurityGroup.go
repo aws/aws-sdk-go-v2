@@ -6,78 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-type CreateSecurityGroupInput struct {
-	_ struct{} `type:"structure"`
-
-	// A description for the security group. This is informational only.
-	//
-	// Constraints: Up to 255 characters in length
-	//
-	// Constraints for EC2-Classic: ASCII characters
-	//
-	// Constraints for EC2-VPC: a-z, A-Z, 0-9, spaces, and ._-:/()#,@[]+=&;{}!$*
-	//
-	// Description is a required field
-	Description *string `locationName:"GroupDescription" type:"string" required:"true"`
-
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have
-	// the required permissions, the error response is DryRunOperation. Otherwise,
-	// it is UnauthorizedOperation.
-	DryRun *bool `locationName:"dryRun" type:"boolean"`
-
-	// The name of the security group.
-	//
-	// Constraints: Up to 255 characters in length. Cannot start with sg-.
-	//
-	// Constraints for EC2-Classic: ASCII characters
-	//
-	// Constraints for EC2-VPC: a-z, A-Z, 0-9, spaces, and ._-:/()#,@[]+=&;{}!$*
-	//
-	// GroupName is a required field
-	GroupName *string `type:"string" required:"true"`
-
-	// [EC2-VPC] The ID of the VPC. Required for EC2-VPC.
-	VpcId *string `type:"string"`
-}
-
-// String returns the string representation
-func (s CreateSecurityGroupInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateSecurityGroupInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateSecurityGroupInput"}
-
-	if s.Description == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Description"))
-	}
-
-	if s.GroupName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("GroupName"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type CreateSecurityGroupOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the security group.
-	GroupId *string `locationName:"groupId" type:"string"`
-}
-
-// String returns the string representation
-func (s CreateSecurityGroupOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCreateSecurityGroup = "CreateSecurityGroup"
 
@@ -119,7 +49,7 @@ const opCreateSecurityGroup = "CreateSecurityGroup"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateSecurityGroup
-func (c *Client) CreateSecurityGroupRequest(input *CreateSecurityGroupInput) CreateSecurityGroupRequest {
+func (c *Client) CreateSecurityGroupRequest(input *types.CreateSecurityGroupInput) CreateSecurityGroupRequest {
 	op := &aws.Operation{
 		Name:       opCreateSecurityGroup,
 		HTTPMethod: "POST",
@@ -127,10 +57,10 @@ func (c *Client) CreateSecurityGroupRequest(input *CreateSecurityGroupInput) Cre
 	}
 
 	if input == nil {
-		input = &CreateSecurityGroupInput{}
+		input = &types.CreateSecurityGroupInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateSecurityGroupOutput{})
+	req := c.newRequest(op, input, &types.CreateSecurityGroupOutput{})
 	return CreateSecurityGroupRequest{Request: req, Input: input, Copy: c.CreateSecurityGroupRequest}
 }
 
@@ -138,8 +68,8 @@ func (c *Client) CreateSecurityGroupRequest(input *CreateSecurityGroupInput) Cre
 // CreateSecurityGroup API operation.
 type CreateSecurityGroupRequest struct {
 	*aws.Request
-	Input *CreateSecurityGroupInput
-	Copy  func(*CreateSecurityGroupInput) CreateSecurityGroupRequest
+	Input *types.CreateSecurityGroupInput
+	Copy  func(*types.CreateSecurityGroupInput) CreateSecurityGroupRequest
 }
 
 // Send marshals and sends the CreateSecurityGroup API request.
@@ -151,7 +81,7 @@ func (r CreateSecurityGroupRequest) Send(ctx context.Context) (*CreateSecurityGr
 	}
 
 	resp := &CreateSecurityGroupResponse{
-		CreateSecurityGroupOutput: r.Request.Data.(*CreateSecurityGroupOutput),
+		CreateSecurityGroupOutput: r.Request.Data.(*types.CreateSecurityGroupOutput),
 		response:                  &aws.Response{Request: r.Request},
 	}
 
@@ -161,7 +91,7 @@ func (r CreateSecurityGroupRequest) Send(ctx context.Context) (*CreateSecurityGr
 // CreateSecurityGroupResponse is the response type for the
 // CreateSecurityGroup API operation.
 type CreateSecurityGroupResponse struct {
-	*CreateSecurityGroupOutput
+	*types.CreateSecurityGroupOutput
 
 	response *aws.Response
 }

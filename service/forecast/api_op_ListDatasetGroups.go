@@ -6,57 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/forecast/types"
 )
-
-type ListDatasetGroupsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The number of items to return in the response.
-	MaxResults *int64 `min:"1" type:"integer"`
-
-	// If the result of the previous request was truncated, the response includes
-	// a NextToken. To retrieve the next set of results, use the token in the next
-	// request. Tokens expire after 24 hours.
-	NextToken *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s ListDatasetGroupsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListDatasetGroupsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListDatasetGroupsInput"}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-	if s.NextToken != nil && len(*s.NextToken) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ListDatasetGroupsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// An array of objects that summarize each dataset group's properties.
-	DatasetGroups []DatasetGroupSummary `type:"list"`
-
-	// If the response is truncated, Amazon Forecast returns this token. To retrieve
-	// the next set of results, use the token in the next request.
-	NextToken *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s ListDatasetGroupsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListDatasetGroups = "ListDatasetGroups"
 
@@ -76,7 +27,7 @@ const opListDatasetGroups = "ListDatasetGroups"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/ListDatasetGroups
-func (c *Client) ListDatasetGroupsRequest(input *ListDatasetGroupsInput) ListDatasetGroupsRequest {
+func (c *Client) ListDatasetGroupsRequest(input *types.ListDatasetGroupsInput) ListDatasetGroupsRequest {
 	op := &aws.Operation{
 		Name:       opListDatasetGroups,
 		HTTPMethod: "POST",
@@ -90,10 +41,10 @@ func (c *Client) ListDatasetGroupsRequest(input *ListDatasetGroupsInput) ListDat
 	}
 
 	if input == nil {
-		input = &ListDatasetGroupsInput{}
+		input = &types.ListDatasetGroupsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListDatasetGroupsOutput{})
+	req := c.newRequest(op, input, &types.ListDatasetGroupsOutput{})
 	return ListDatasetGroupsRequest{Request: req, Input: input, Copy: c.ListDatasetGroupsRequest}
 }
 
@@ -101,8 +52,8 @@ func (c *Client) ListDatasetGroupsRequest(input *ListDatasetGroupsInput) ListDat
 // ListDatasetGroups API operation.
 type ListDatasetGroupsRequest struct {
 	*aws.Request
-	Input *ListDatasetGroupsInput
-	Copy  func(*ListDatasetGroupsInput) ListDatasetGroupsRequest
+	Input *types.ListDatasetGroupsInput
+	Copy  func(*types.ListDatasetGroupsInput) ListDatasetGroupsRequest
 }
 
 // Send marshals and sends the ListDatasetGroups API request.
@@ -114,7 +65,7 @@ func (r ListDatasetGroupsRequest) Send(ctx context.Context) (*ListDatasetGroupsR
 	}
 
 	resp := &ListDatasetGroupsResponse{
-		ListDatasetGroupsOutput: r.Request.Data.(*ListDatasetGroupsOutput),
+		ListDatasetGroupsOutput: r.Request.Data.(*types.ListDatasetGroupsOutput),
 		response:                &aws.Response{Request: r.Request},
 	}
 
@@ -144,7 +95,7 @@ func NewListDatasetGroupsPaginator(req ListDatasetGroupsRequest) ListDatasetGrou
 	return ListDatasetGroupsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListDatasetGroupsInput
+				var inCpy *types.ListDatasetGroupsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -164,14 +115,14 @@ type ListDatasetGroupsPaginator struct {
 	aws.Pager
 }
 
-func (p *ListDatasetGroupsPaginator) CurrentPage() *ListDatasetGroupsOutput {
-	return p.Pager.CurrentPage().(*ListDatasetGroupsOutput)
+func (p *ListDatasetGroupsPaginator) CurrentPage() *types.ListDatasetGroupsOutput {
+	return p.Pager.CurrentPage().(*types.ListDatasetGroupsOutput)
 }
 
 // ListDatasetGroupsResponse is the response type for the
 // ListDatasetGroups API operation.
 type ListDatasetGroupsResponse struct {
-	*ListDatasetGroupsOutput
+	*types.ListDatasetGroupsOutput
 
 	response *aws.Response
 }

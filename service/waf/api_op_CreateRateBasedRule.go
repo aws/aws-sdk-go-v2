@@ -4,126 +4,10 @@ package waf
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/waf/types"
 )
-
-type CreateRateBasedRuleInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ChangeToken that you used to submit the CreateRateBasedRule request.
-	// You can also use this value to query the status of the request. For more
-	// information, see GetChangeTokenStatus.
-	//
-	// ChangeToken is a required field
-	ChangeToken *string `min:"1" type:"string" required:"true"`
-
-	// A friendly name or description for the metrics for this RateBasedRule. The
-	// name can contain only alphanumeric characters (A-Z, a-z, 0-9), with maximum
-	// length 128 and minimum length one. It can't contain whitespace or metric
-	// names reserved for AWS WAF, including "All" and "Default_Action." You can't
-	// change the name of the metric after you create the RateBasedRule.
-	//
-	// MetricName is a required field
-	MetricName *string `type:"string" required:"true"`
-
-	// A friendly name or description of the RateBasedRule. You can't change the
-	// name of a RateBasedRule after you create it.
-	//
-	// Name is a required field
-	Name *string `min:"1" type:"string" required:"true"`
-
-	// The field that AWS WAF uses to determine if requests are likely arriving
-	// from a single source and thus subject to rate monitoring. The only valid
-	// value for RateKey is IP. IP indicates that requests that arrive from the
-	// same IP address are subject to the RateLimit that is specified in the RateBasedRule.
-	//
-	// RateKey is a required field
-	RateKey RateKey `type:"string" required:"true" enum:"true"`
-
-	// The maximum number of requests, which have an identical value in the field
-	// that is specified by RateKey, allowed in a five-minute period. If the number
-	// of requests exceeds the RateLimit and the other predicates specified in the
-	// rule are also met, AWS WAF triggers the action that is specified for this
-	// rule.
-	//
-	// RateLimit is a required field
-	RateLimit *int64 `min:"100" type:"long" required:"true"`
-
-	Tags []Tag `min:"1" type:"list"`
-}
-
-// String returns the string representation
-func (s CreateRateBasedRuleInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateRateBasedRuleInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateRateBasedRuleInput"}
-
-	if s.ChangeToken == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ChangeToken"))
-	}
-	if s.ChangeToken != nil && len(*s.ChangeToken) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ChangeToken", 1))
-	}
-
-	if s.MetricName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("MetricName"))
-	}
-
-	if s.Name == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Name"))
-	}
-	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
-	}
-	if len(s.RateKey) == 0 {
-		invalidParams.Add(aws.NewErrParamRequired("RateKey"))
-	}
-
-	if s.RateLimit == nil {
-		invalidParams.Add(aws.NewErrParamRequired("RateLimit"))
-	}
-	if s.RateLimit != nil && *s.RateLimit < 100 {
-		invalidParams.Add(aws.NewErrParamMinValue("RateLimit", 100))
-	}
-	if s.Tags != nil && len(s.Tags) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Tags", 1))
-	}
-	if s.Tags != nil {
-		for i, v := range s.Tags {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type CreateRateBasedRuleOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The ChangeToken that you used to submit the CreateRateBasedRule request.
-	// You can also use this value to query the status of the request. For more
-	// information, see GetChangeTokenStatus.
-	ChangeToken *string `min:"1" type:"string"`
-
-	// The RateBasedRule that is returned in the CreateRateBasedRule response.
-	Rule *RateBasedRule `type:"structure"`
-}
-
-// String returns the string representation
-func (s CreateRateBasedRuleOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCreateRateBasedRule = "CreateRateBasedRule"
 
@@ -200,7 +84,7 @@ const opCreateRateBasedRule = "CreateRateBasedRule"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/CreateRateBasedRule
-func (c *Client) CreateRateBasedRuleRequest(input *CreateRateBasedRuleInput) CreateRateBasedRuleRequest {
+func (c *Client) CreateRateBasedRuleRequest(input *types.CreateRateBasedRuleInput) CreateRateBasedRuleRequest {
 	op := &aws.Operation{
 		Name:       opCreateRateBasedRule,
 		HTTPMethod: "POST",
@@ -208,10 +92,10 @@ func (c *Client) CreateRateBasedRuleRequest(input *CreateRateBasedRuleInput) Cre
 	}
 
 	if input == nil {
-		input = &CreateRateBasedRuleInput{}
+		input = &types.CreateRateBasedRuleInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateRateBasedRuleOutput{})
+	req := c.newRequest(op, input, &types.CreateRateBasedRuleOutput{})
 	return CreateRateBasedRuleRequest{Request: req, Input: input, Copy: c.CreateRateBasedRuleRequest}
 }
 
@@ -219,8 +103,8 @@ func (c *Client) CreateRateBasedRuleRequest(input *CreateRateBasedRuleInput) Cre
 // CreateRateBasedRule API operation.
 type CreateRateBasedRuleRequest struct {
 	*aws.Request
-	Input *CreateRateBasedRuleInput
-	Copy  func(*CreateRateBasedRuleInput) CreateRateBasedRuleRequest
+	Input *types.CreateRateBasedRuleInput
+	Copy  func(*types.CreateRateBasedRuleInput) CreateRateBasedRuleRequest
 }
 
 // Send marshals and sends the CreateRateBasedRule API request.
@@ -232,7 +116,7 @@ func (r CreateRateBasedRuleRequest) Send(ctx context.Context) (*CreateRateBasedR
 	}
 
 	resp := &CreateRateBasedRuleResponse{
-		CreateRateBasedRuleOutput: r.Request.Data.(*CreateRateBasedRuleOutput),
+		CreateRateBasedRuleOutput: r.Request.Data.(*types.CreateRateBasedRuleOutput),
 		response:                  &aws.Response{Request: r.Request},
 	}
 
@@ -242,7 +126,7 @@ func (r CreateRateBasedRuleRequest) Send(ctx context.Context) (*CreateRateBasedR
 // CreateRateBasedRuleResponse is the response type for the
 // CreateRateBasedRule API operation.
 type CreateRateBasedRuleResponse struct {
-	*CreateRateBasedRuleOutput
+	*types.CreateRateBasedRuleOutput
 
 	response *aws.Response
 }

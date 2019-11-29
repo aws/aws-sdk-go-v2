@@ -6,67 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-type DescribeTagsInput struct {
-	_ struct{} `type:"structure"`
-
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have
-	// the required permissions, the error response is DryRunOperation. Otherwise,
-	// it is UnauthorizedOperation.
-	DryRun *bool `locationName:"dryRun" type:"boolean"`
-
-	// The filters.
-	//
-	//    * key - The tag key.
-	//
-	//    * resource-id - The ID of the resource.
-	//
-	//    * resource-type - The resource type (customer-gateway | dedicated-host
-	//    | dhcp-options | elastic-ip | fleet | fpga-image | image | instance |
-	//    host-reservation | internet-gateway | launch-template | natgateway | network-acl
-	//    | network-interface | reserved-instances | route-table | security-group
-	//    | snapshot | spot-instances-request | subnet | volume | vpc | vpc-peering-connection
-	//    | vpn-connection | vpn-gateway).
-	//
-	//    * tag:<key> - The key/value combination of the tag. For example, specify
-	//    "tag:Owner" for the filter name and "TeamA" for the filter value to find
-	//    resources with the tag "Owner=TeamA".
-	//
-	//    * value - The tag value.
-	Filters []Filter `locationName:"Filter" locationNameList:"Filter" type:"list"`
-
-	// The maximum number of results to return in a single call. This value can
-	// be between 5 and 1000. To retrieve the remaining results, make another call
-	// with the returned NextToken value.
-	MaxResults *int64 `locationName:"maxResults" type:"integer"`
-
-	// The token to retrieve the next page of results.
-	NextToken *string `locationName:"nextToken" type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeTagsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type DescribeTagsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The token to use to retrieve the next page of results. This value is null
-	// when there are no more results to return.
-	NextToken *string `locationName:"nextToken" type:"string"`
-
-	// The tags.
-	Tags []TagDescription `locationName:"tagSet" locationNameList:"item" type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeTagsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeTags = "DescribeTags"
 
@@ -86,7 +27,7 @@ const opDescribeTags = "DescribeTags"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeTags
-func (c *Client) DescribeTagsRequest(input *DescribeTagsInput) DescribeTagsRequest {
+func (c *Client) DescribeTagsRequest(input *types.DescribeTagsInput) DescribeTagsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeTags,
 		HTTPMethod: "POST",
@@ -100,10 +41,10 @@ func (c *Client) DescribeTagsRequest(input *DescribeTagsInput) DescribeTagsReque
 	}
 
 	if input == nil {
-		input = &DescribeTagsInput{}
+		input = &types.DescribeTagsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeTagsOutput{})
+	req := c.newRequest(op, input, &types.DescribeTagsOutput{})
 	return DescribeTagsRequest{Request: req, Input: input, Copy: c.DescribeTagsRequest}
 }
 
@@ -111,8 +52,8 @@ func (c *Client) DescribeTagsRequest(input *DescribeTagsInput) DescribeTagsReque
 // DescribeTags API operation.
 type DescribeTagsRequest struct {
 	*aws.Request
-	Input *DescribeTagsInput
-	Copy  func(*DescribeTagsInput) DescribeTagsRequest
+	Input *types.DescribeTagsInput
+	Copy  func(*types.DescribeTagsInput) DescribeTagsRequest
 }
 
 // Send marshals and sends the DescribeTags API request.
@@ -124,7 +65,7 @@ func (r DescribeTagsRequest) Send(ctx context.Context) (*DescribeTagsResponse, e
 	}
 
 	resp := &DescribeTagsResponse{
-		DescribeTagsOutput: r.Request.Data.(*DescribeTagsOutput),
+		DescribeTagsOutput: r.Request.Data.(*types.DescribeTagsOutput),
 		response:           &aws.Response{Request: r.Request},
 	}
 
@@ -154,7 +95,7 @@ func NewDescribeTagsPaginator(req DescribeTagsRequest) DescribeTagsPaginator {
 	return DescribeTagsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *DescribeTagsInput
+				var inCpy *types.DescribeTagsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -174,14 +115,14 @@ type DescribeTagsPaginator struct {
 	aws.Pager
 }
 
-func (p *DescribeTagsPaginator) CurrentPage() *DescribeTagsOutput {
-	return p.Pager.CurrentPage().(*DescribeTagsOutput)
+func (p *DescribeTagsPaginator) CurrentPage() *types.DescribeTagsOutput {
+	return p.Pager.CurrentPage().(*types.DescribeTagsOutput)
 }
 
 // DescribeTagsResponse is the response type for the
 // DescribeTags API operation.
 type DescribeTagsResponse struct {
-	*DescribeTagsOutput
+	*types.DescribeTagsOutput
 
 	response *aws.Response
 }

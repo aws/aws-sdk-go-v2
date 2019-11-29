@@ -6,54 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-type DeleteVpcPeeringConnectionInput struct {
-	_ struct{} `type:"structure"`
-
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have
-	// the required permissions, the error response is DryRunOperation. Otherwise,
-	// it is UnauthorizedOperation.
-	DryRun *bool `locationName:"dryRun" type:"boolean"`
-
-	// The ID of the VPC peering connection.
-	//
-	// VpcPeeringConnectionId is a required field
-	VpcPeeringConnectionId *string `locationName:"vpcPeeringConnectionId" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteVpcPeeringConnectionInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteVpcPeeringConnectionInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteVpcPeeringConnectionInput"}
-
-	if s.VpcPeeringConnectionId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("VpcPeeringConnectionId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteVpcPeeringConnectionOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Returns true if the request succeeds; otherwise, it returns an error.
-	Return *bool `locationName:"return" type:"boolean"`
-}
-
-// String returns the string representation
-func (s DeleteVpcPeeringConnectionOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteVpcPeeringConnection = "DeleteVpcPeeringConnection"
 
@@ -74,7 +28,7 @@ const opDeleteVpcPeeringConnection = "DeleteVpcPeeringConnection"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteVpcPeeringConnection
-func (c *Client) DeleteVpcPeeringConnectionRequest(input *DeleteVpcPeeringConnectionInput) DeleteVpcPeeringConnectionRequest {
+func (c *Client) DeleteVpcPeeringConnectionRequest(input *types.DeleteVpcPeeringConnectionInput) DeleteVpcPeeringConnectionRequest {
 	op := &aws.Operation{
 		Name:       opDeleteVpcPeeringConnection,
 		HTTPMethod: "POST",
@@ -82,10 +36,10 @@ func (c *Client) DeleteVpcPeeringConnectionRequest(input *DeleteVpcPeeringConnec
 	}
 
 	if input == nil {
-		input = &DeleteVpcPeeringConnectionInput{}
+		input = &types.DeleteVpcPeeringConnectionInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteVpcPeeringConnectionOutput{})
+	req := c.newRequest(op, input, &types.DeleteVpcPeeringConnectionOutput{})
 	return DeleteVpcPeeringConnectionRequest{Request: req, Input: input, Copy: c.DeleteVpcPeeringConnectionRequest}
 }
 
@@ -93,8 +47,8 @@ func (c *Client) DeleteVpcPeeringConnectionRequest(input *DeleteVpcPeeringConnec
 // DeleteVpcPeeringConnection API operation.
 type DeleteVpcPeeringConnectionRequest struct {
 	*aws.Request
-	Input *DeleteVpcPeeringConnectionInput
-	Copy  func(*DeleteVpcPeeringConnectionInput) DeleteVpcPeeringConnectionRequest
+	Input *types.DeleteVpcPeeringConnectionInput
+	Copy  func(*types.DeleteVpcPeeringConnectionInput) DeleteVpcPeeringConnectionRequest
 }
 
 // Send marshals and sends the DeleteVpcPeeringConnection API request.
@@ -106,7 +60,7 @@ func (r DeleteVpcPeeringConnectionRequest) Send(ctx context.Context) (*DeleteVpc
 	}
 
 	resp := &DeleteVpcPeeringConnectionResponse{
-		DeleteVpcPeeringConnectionOutput: r.Request.Data.(*DeleteVpcPeeringConnectionOutput),
+		DeleteVpcPeeringConnectionOutput: r.Request.Data.(*types.DeleteVpcPeeringConnectionOutput),
 		response:                         &aws.Response{Request: r.Request},
 	}
 
@@ -116,7 +70,7 @@ func (r DeleteVpcPeeringConnectionRequest) Send(ctx context.Context) (*DeleteVpc
 // DeleteVpcPeeringConnectionResponse is the response type for the
 // DeleteVpcPeeringConnection API operation.
 type DeleteVpcPeeringConnectionResponse struct {
-	*DeleteVpcPeeringConnectionOutput
+	*types.DeleteVpcPeeringConnectionOutput
 
 	response *aws.Response
 }

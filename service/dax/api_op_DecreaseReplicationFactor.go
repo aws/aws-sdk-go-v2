@@ -6,64 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/dax/types"
 )
-
-type DecreaseReplicationFactorInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Availability Zone(s) from which to remove nodes.
-	AvailabilityZones []string `type:"list"`
-
-	// The name of the DAX cluster from which you want to remove nodes.
-	//
-	// ClusterName is a required field
-	ClusterName *string `type:"string" required:"true"`
-
-	// The new number of nodes for the DAX cluster.
-	//
-	// NewReplicationFactor is a required field
-	NewReplicationFactor *int64 `type:"integer" required:"true"`
-
-	// The unique identifiers of the nodes to be removed from the cluster.
-	NodeIdsToRemove []string `type:"list"`
-}
-
-// String returns the string representation
-func (s DecreaseReplicationFactorInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DecreaseReplicationFactorInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DecreaseReplicationFactorInput"}
-
-	if s.ClusterName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ClusterName"))
-	}
-
-	if s.NewReplicationFactor == nil {
-		invalidParams.Add(aws.NewErrParamRequired("NewReplicationFactor"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DecreaseReplicationFactorOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A description of the DAX cluster, after you have decreased its replication
-	// factor.
-	Cluster *Cluster `type:"structure"`
-}
-
-// String returns the string representation
-func (s DecreaseReplicationFactorOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDecreaseReplicationFactor = "DecreaseReplicationFactor"
 
@@ -83,7 +27,7 @@ const opDecreaseReplicationFactor = "DecreaseReplicationFactor"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dax-2017-04-19/DecreaseReplicationFactor
-func (c *Client) DecreaseReplicationFactorRequest(input *DecreaseReplicationFactorInput) DecreaseReplicationFactorRequest {
+func (c *Client) DecreaseReplicationFactorRequest(input *types.DecreaseReplicationFactorInput) DecreaseReplicationFactorRequest {
 	op := &aws.Operation{
 		Name:       opDecreaseReplicationFactor,
 		HTTPMethod: "POST",
@@ -91,10 +35,10 @@ func (c *Client) DecreaseReplicationFactorRequest(input *DecreaseReplicationFact
 	}
 
 	if input == nil {
-		input = &DecreaseReplicationFactorInput{}
+		input = &types.DecreaseReplicationFactorInput{}
 	}
 
-	req := c.newRequest(op, input, &DecreaseReplicationFactorOutput{})
+	req := c.newRequest(op, input, &types.DecreaseReplicationFactorOutput{})
 	return DecreaseReplicationFactorRequest{Request: req, Input: input, Copy: c.DecreaseReplicationFactorRequest}
 }
 
@@ -102,8 +46,8 @@ func (c *Client) DecreaseReplicationFactorRequest(input *DecreaseReplicationFact
 // DecreaseReplicationFactor API operation.
 type DecreaseReplicationFactorRequest struct {
 	*aws.Request
-	Input *DecreaseReplicationFactorInput
-	Copy  func(*DecreaseReplicationFactorInput) DecreaseReplicationFactorRequest
+	Input *types.DecreaseReplicationFactorInput
+	Copy  func(*types.DecreaseReplicationFactorInput) DecreaseReplicationFactorRequest
 }
 
 // Send marshals and sends the DecreaseReplicationFactor API request.
@@ -115,7 +59,7 @@ func (r DecreaseReplicationFactorRequest) Send(ctx context.Context) (*DecreaseRe
 	}
 
 	resp := &DecreaseReplicationFactorResponse{
-		DecreaseReplicationFactorOutput: r.Request.Data.(*DecreaseReplicationFactorOutput),
+		DecreaseReplicationFactorOutput: r.Request.Data.(*types.DecreaseReplicationFactorOutput),
 		response:                        &aws.Response{Request: r.Request},
 	}
 
@@ -125,7 +69,7 @@ func (r DecreaseReplicationFactorRequest) Send(ctx context.Context) (*DecreaseRe
 // DecreaseReplicationFactorResponse is the response type for the
 // DecreaseReplicationFactor API operation.
 type DecreaseReplicationFactorResponse struct {
-	*DecreaseReplicationFactorOutput
+	*types.DecreaseReplicationFactorOutput
 
 	response *aws.Response
 }

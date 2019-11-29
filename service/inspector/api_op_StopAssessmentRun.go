@@ -6,57 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
+	"github.com/aws/aws-sdk-go-v2/service/inspector/types"
 )
-
-type StopAssessmentRunInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ARN of the assessment run that you want to stop.
-	//
-	// AssessmentRunArn is a required field
-	AssessmentRunArn *string `locationName:"assessmentRunArn" min:"1" type:"string" required:"true"`
-
-	// An input option that can be set to either START_EVALUATION or SKIP_EVALUATION.
-	// START_EVALUATION (the default value), stops the AWS agent from collecting
-	// data and begins the results evaluation and the findings generation process.
-	// SKIP_EVALUATION cancels the assessment run immediately, after which no findings
-	// are generated.
-	StopAction StopAction `locationName:"stopAction" type:"string" enum:"true"`
-}
-
-// String returns the string representation
-func (s StopAssessmentRunInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *StopAssessmentRunInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "StopAssessmentRunInput"}
-
-	if s.AssessmentRunArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("AssessmentRunArn"))
-	}
-	if s.AssessmentRunArn != nil && len(*s.AssessmentRunArn) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("AssessmentRunArn", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type StopAssessmentRunOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s StopAssessmentRunOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opStopAssessmentRun = "StopAssessmentRun"
 
@@ -73,7 +26,7 @@ const opStopAssessmentRun = "StopAssessmentRun"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/StopAssessmentRun
-func (c *Client) StopAssessmentRunRequest(input *StopAssessmentRunInput) StopAssessmentRunRequest {
+func (c *Client) StopAssessmentRunRequest(input *types.StopAssessmentRunInput) StopAssessmentRunRequest {
 	op := &aws.Operation{
 		Name:       opStopAssessmentRun,
 		HTTPMethod: "POST",
@@ -81,10 +34,10 @@ func (c *Client) StopAssessmentRunRequest(input *StopAssessmentRunInput) StopAss
 	}
 
 	if input == nil {
-		input = &StopAssessmentRunInput{}
+		input = &types.StopAssessmentRunInput{}
 	}
 
-	req := c.newRequest(op, input, &StopAssessmentRunOutput{})
+	req := c.newRequest(op, input, &types.StopAssessmentRunOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return StopAssessmentRunRequest{Request: req, Input: input, Copy: c.StopAssessmentRunRequest}
@@ -94,8 +47,8 @@ func (c *Client) StopAssessmentRunRequest(input *StopAssessmentRunInput) StopAss
 // StopAssessmentRun API operation.
 type StopAssessmentRunRequest struct {
 	*aws.Request
-	Input *StopAssessmentRunInput
-	Copy  func(*StopAssessmentRunInput) StopAssessmentRunRequest
+	Input *types.StopAssessmentRunInput
+	Copy  func(*types.StopAssessmentRunInput) StopAssessmentRunRequest
 }
 
 // Send marshals and sends the StopAssessmentRun API request.
@@ -107,7 +60,7 @@ func (r StopAssessmentRunRequest) Send(ctx context.Context) (*StopAssessmentRunR
 	}
 
 	resp := &StopAssessmentRunResponse{
-		StopAssessmentRunOutput: r.Request.Data.(*StopAssessmentRunOutput),
+		StopAssessmentRunOutput: r.Request.Data.(*types.StopAssessmentRunOutput),
 		response:                &aws.Response{Request: r.Request},
 	}
 
@@ -117,7 +70,7 @@ func (r StopAssessmentRunRequest) Send(ctx context.Context) (*StopAssessmentRunR
 // StopAssessmentRunResponse is the response type for the
 // StopAssessmentRun API operation.
 type StopAssessmentRunResponse struct {
-	*StopAssessmentRunOutput
+	*types.StopAssessmentRunOutput
 
 	response *aws.Response
 }

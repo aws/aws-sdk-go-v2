@@ -6,70 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/service/waf"
+	"github.com/aws/aws-sdk-go-v2/service/wafregional/types"
 )
-
-type CreateRegexMatchSetInput struct {
-	_ struct{} `type:"structure"`
-
-	// The value returned by the most recent call to GetChangeToken.
-	//
-	// ChangeToken is a required field
-	ChangeToken *string `min:"1" type:"string" required:"true"`
-
-	// A friendly name or description of the RegexMatchSet. You can't change Name
-	// after you create a RegexMatchSet.
-	//
-	// Name is a required field
-	Name *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s CreateRegexMatchSetInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateRegexMatchSetInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateRegexMatchSetInput"}
-
-	if s.ChangeToken == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ChangeToken"))
-	}
-	if s.ChangeToken != nil && len(*s.ChangeToken) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ChangeToken", 1))
-	}
-
-	if s.Name == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Name"))
-	}
-	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type CreateRegexMatchSetOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The ChangeToken that you used to submit the CreateRegexMatchSet request.
-	// You can also use this value to query the status of the request. For more
-	// information, see GetChangeTokenStatus.
-	ChangeToken *string `min:"1" type:"string"`
-
-	// A RegexMatchSet that contains no RegexMatchTuple objects.
-	RegexMatchSet *waf.RegexMatchSet `type:"structure"`
-}
-
-// String returns the string representation
-func (s CreateRegexMatchSetOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCreateRegexMatchSet = "CreateRegexMatchSet"
 
@@ -108,7 +46,7 @@ const opCreateRegexMatchSet = "CreateRegexMatchSet"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/CreateRegexMatchSet
-func (c *Client) CreateRegexMatchSetRequest(input *CreateRegexMatchSetInput) CreateRegexMatchSetRequest {
+func (c *Client) CreateRegexMatchSetRequest(input *types.CreateRegexMatchSetInput) CreateRegexMatchSetRequest {
 	op := &aws.Operation{
 		Name:       opCreateRegexMatchSet,
 		HTTPMethod: "POST",
@@ -116,10 +54,10 @@ func (c *Client) CreateRegexMatchSetRequest(input *CreateRegexMatchSetInput) Cre
 	}
 
 	if input == nil {
-		input = &CreateRegexMatchSetInput{}
+		input = &types.CreateRegexMatchSetInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateRegexMatchSetOutput{})
+	req := c.newRequest(op, input, &types.CreateRegexMatchSetOutput{})
 	return CreateRegexMatchSetRequest{Request: req, Input: input, Copy: c.CreateRegexMatchSetRequest}
 }
 
@@ -127,8 +65,8 @@ func (c *Client) CreateRegexMatchSetRequest(input *CreateRegexMatchSetInput) Cre
 // CreateRegexMatchSet API operation.
 type CreateRegexMatchSetRequest struct {
 	*aws.Request
-	Input *CreateRegexMatchSetInput
-	Copy  func(*CreateRegexMatchSetInput) CreateRegexMatchSetRequest
+	Input *types.CreateRegexMatchSetInput
+	Copy  func(*types.CreateRegexMatchSetInput) CreateRegexMatchSetRequest
 }
 
 // Send marshals and sends the CreateRegexMatchSet API request.
@@ -140,7 +78,7 @@ func (r CreateRegexMatchSetRequest) Send(ctx context.Context) (*CreateRegexMatch
 	}
 
 	resp := &CreateRegexMatchSetResponse{
-		CreateRegexMatchSetOutput: r.Request.Data.(*CreateRegexMatchSetOutput),
+		CreateRegexMatchSetOutput: r.Request.Data.(*types.CreateRegexMatchSetOutput),
 		response:                  &aws.Response{Request: r.Request},
 	}
 
@@ -150,7 +88,7 @@ func (r CreateRegexMatchSetRequest) Send(ctx context.Context) (*CreateRegexMatch
 // CreateRegexMatchSetResponse is the response type for the
 // CreateRegexMatchSet API operation.
 type CreateRegexMatchSetResponse struct {
-	*CreateRegexMatchSetOutput
+	*types.CreateRegexMatchSetOutput
 
 	response *aws.Response
 }

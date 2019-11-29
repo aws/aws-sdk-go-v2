@@ -6,45 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/datasync/types"
 )
-
-// ListTaskExecutions
-type ListTaskExecutionsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The maximum number of executed tasks to list.
-	MaxResults *int64 `type:"integer"`
-
-	// An opaque string that indicates the position at which to begin the next list
-	// of the executed tasks.
-	NextToken *string `type:"string"`
-
-	// The Amazon Resource Name (ARN) of the task whose tasks you want to list.
-	TaskArn *string `type:"string"`
-}
-
-// String returns the string representation
-func (s ListTaskExecutionsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// ListTaskExecutionsResponse
-type ListTaskExecutionsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// An opaque string that indicates the position at which to begin returning
-	// the next list of executed tasks.
-	NextToken *string `type:"string"`
-
-	// A list of executed tasks.
-	TaskExecutions []TaskExecutionListEntry `type:"list"`
-}
-
-// String returns the string representation
-func (s ListTaskExecutionsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListTaskExecutions = "ListTaskExecutions"
 
@@ -61,7 +24,7 @@ const opListTaskExecutions = "ListTaskExecutions"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/ListTaskExecutions
-func (c *Client) ListTaskExecutionsRequest(input *ListTaskExecutionsInput) ListTaskExecutionsRequest {
+func (c *Client) ListTaskExecutionsRequest(input *types.ListTaskExecutionsInput) ListTaskExecutionsRequest {
 	op := &aws.Operation{
 		Name:       opListTaskExecutions,
 		HTTPMethod: "POST",
@@ -75,10 +38,10 @@ func (c *Client) ListTaskExecutionsRequest(input *ListTaskExecutionsInput) ListT
 	}
 
 	if input == nil {
-		input = &ListTaskExecutionsInput{}
+		input = &types.ListTaskExecutionsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListTaskExecutionsOutput{})
+	req := c.newRequest(op, input, &types.ListTaskExecutionsOutput{})
 	return ListTaskExecutionsRequest{Request: req, Input: input, Copy: c.ListTaskExecutionsRequest}
 }
 
@@ -86,8 +49,8 @@ func (c *Client) ListTaskExecutionsRequest(input *ListTaskExecutionsInput) ListT
 // ListTaskExecutions API operation.
 type ListTaskExecutionsRequest struct {
 	*aws.Request
-	Input *ListTaskExecutionsInput
-	Copy  func(*ListTaskExecutionsInput) ListTaskExecutionsRequest
+	Input *types.ListTaskExecutionsInput
+	Copy  func(*types.ListTaskExecutionsInput) ListTaskExecutionsRequest
 }
 
 // Send marshals and sends the ListTaskExecutions API request.
@@ -99,7 +62,7 @@ func (r ListTaskExecutionsRequest) Send(ctx context.Context) (*ListTaskExecution
 	}
 
 	resp := &ListTaskExecutionsResponse{
-		ListTaskExecutionsOutput: r.Request.Data.(*ListTaskExecutionsOutput),
+		ListTaskExecutionsOutput: r.Request.Data.(*types.ListTaskExecutionsOutput),
 		response:                 &aws.Response{Request: r.Request},
 	}
 
@@ -129,7 +92,7 @@ func NewListTaskExecutionsPaginator(req ListTaskExecutionsRequest) ListTaskExecu
 	return ListTaskExecutionsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListTaskExecutionsInput
+				var inCpy *types.ListTaskExecutionsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -149,14 +112,14 @@ type ListTaskExecutionsPaginator struct {
 	aws.Pager
 }
 
-func (p *ListTaskExecutionsPaginator) CurrentPage() *ListTaskExecutionsOutput {
-	return p.Pager.CurrentPage().(*ListTaskExecutionsOutput)
+func (p *ListTaskExecutionsPaginator) CurrentPage() *types.ListTaskExecutionsOutput {
+	return p.Pager.CurrentPage().(*types.ListTaskExecutionsOutput)
 }
 
 // ListTaskExecutionsResponse is the response type for the
 // ListTaskExecutions API operation.
 type ListTaskExecutionsResponse struct {
-	*ListTaskExecutionsOutput
+	*types.ListTaskExecutionsOutput
 
 	response *aws.Response
 }

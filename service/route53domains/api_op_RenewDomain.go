@@ -6,74 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/route53domains/types"
 )
-
-// A RenewDomain request includes the number of years that you want to renew
-// for and the current expiration year.
-type RenewDomainInput struct {
-	_ struct{} `type:"structure"`
-
-	// The year when the registration for the domain is set to expire. This value
-	// must match the current expiration date for the domain.
-	//
-	// CurrentExpiryYear is a required field
-	CurrentExpiryYear *int64 `type:"integer" required:"true"`
-
-	// The name of the domain that you want to renew.
-	//
-	// DomainName is a required field
-	DomainName *string `type:"string" required:"true"`
-
-	// The number of years that you want to renew the domain for. The maximum number
-	// of years depends on the top-level domain. For the range of valid values for
-	// your domain, see Domains that You Can Register with Amazon Route 53 (http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/registrar-tld-list.html)
-	// in the Amazon Route 53 Developer Guide.
-	//
-	// Default: 1
-	DurationInYears *int64 `min:"1" type:"integer"`
-}
-
-// String returns the string representation
-func (s RenewDomainInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *RenewDomainInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "RenewDomainInput"}
-
-	if s.CurrentExpiryYear == nil {
-		invalidParams.Add(aws.NewErrParamRequired("CurrentExpiryYear"))
-	}
-
-	if s.DomainName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DomainName"))
-	}
-	if s.DurationInYears != nil && *s.DurationInYears < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("DurationInYears", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type RenewDomainOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The identifier for tracking the progress of the request. To use this ID to
-	// query the operation status, use GetOperationDetail.
-	//
-	// OperationId is a required field
-	OperationId *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s RenewDomainOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opRenewDomain = "RenewDomain"
 
@@ -97,7 +31,7 @@ const opRenewDomain = "RenewDomain"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/RenewDomain
-func (c *Client) RenewDomainRequest(input *RenewDomainInput) RenewDomainRequest {
+func (c *Client) RenewDomainRequest(input *types.RenewDomainInput) RenewDomainRequest {
 	op := &aws.Operation{
 		Name:       opRenewDomain,
 		HTTPMethod: "POST",
@@ -105,10 +39,10 @@ func (c *Client) RenewDomainRequest(input *RenewDomainInput) RenewDomainRequest 
 	}
 
 	if input == nil {
-		input = &RenewDomainInput{}
+		input = &types.RenewDomainInput{}
 	}
 
-	req := c.newRequest(op, input, &RenewDomainOutput{})
+	req := c.newRequest(op, input, &types.RenewDomainOutput{})
 	return RenewDomainRequest{Request: req, Input: input, Copy: c.RenewDomainRequest}
 }
 
@@ -116,8 +50,8 @@ func (c *Client) RenewDomainRequest(input *RenewDomainInput) RenewDomainRequest 
 // RenewDomain API operation.
 type RenewDomainRequest struct {
 	*aws.Request
-	Input *RenewDomainInput
-	Copy  func(*RenewDomainInput) RenewDomainRequest
+	Input *types.RenewDomainInput
+	Copy  func(*types.RenewDomainInput) RenewDomainRequest
 }
 
 // Send marshals and sends the RenewDomain API request.
@@ -129,7 +63,7 @@ func (r RenewDomainRequest) Send(ctx context.Context) (*RenewDomainResponse, err
 	}
 
 	resp := &RenewDomainResponse{
-		RenewDomainOutput: r.Request.Data.(*RenewDomainOutput),
+		RenewDomainOutput: r.Request.Data.(*types.RenewDomainOutput),
 		response:          &aws.Response{Request: r.Request},
 	}
 
@@ -139,7 +73,7 @@ func (r RenewDomainRequest) Send(ctx context.Context) (*RenewDomainResponse, err
 // RenewDomainResponse is the response type for the
 // RenewDomain API operation.
 type RenewDomainResponse struct {
-	*RenewDomainOutput
+	*types.RenewDomainOutput
 
 	response *aws.Response
 }

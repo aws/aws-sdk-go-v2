@@ -6,45 +6,15 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/workspaces/types"
 )
-
-type DescribeAccountInput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DescribeAccountInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type DescribeAccountOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The IP address range, specified as an IPv4 CIDR block, used for the management
-	// network interface.
-	//
-	// The management network interface is connected to a secure Amazon WorkSpaces
-	// management network. It is used for interactive streaming of the WorkSpace
-	// desktop to Amazon WorkSpaces clients, and to allow Amazon WorkSpaces to manage
-	// the WorkSpace.
-	DedicatedTenancyManagementCidrRange *string `type:"string"`
-
-	// The status of BYOL (whether BYOL is enabled or disabled).
-	DedicatedTenancySupport DedicatedTenancySupportResultEnum `type:"string" enum:"true"`
-}
-
-// String returns the string representation
-func (s DescribeAccountOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeAccount = "DescribeAccount"
 
 // DescribeAccountRequest returns a request value for making API operation for
 // Amazon WorkSpaces.
 //
-// Retrieves a list that describes the configuration of bring your own license
+// Retrieves a list that describes the configuration of Bring Your Own License
 // (BYOL) for the specified account.
 //
 //    // Example sending a request using DescribeAccountRequest.
@@ -55,7 +25,7 @@ const opDescribeAccount = "DescribeAccount"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DescribeAccount
-func (c *Client) DescribeAccountRequest(input *DescribeAccountInput) DescribeAccountRequest {
+func (c *Client) DescribeAccountRequest(input *types.DescribeAccountInput) DescribeAccountRequest {
 	op := &aws.Operation{
 		Name:       opDescribeAccount,
 		HTTPMethod: "POST",
@@ -63,10 +33,10 @@ func (c *Client) DescribeAccountRequest(input *DescribeAccountInput) DescribeAcc
 	}
 
 	if input == nil {
-		input = &DescribeAccountInput{}
+		input = &types.DescribeAccountInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeAccountOutput{})
+	req := c.newRequest(op, input, &types.DescribeAccountOutput{})
 	return DescribeAccountRequest{Request: req, Input: input, Copy: c.DescribeAccountRequest}
 }
 
@@ -74,8 +44,8 @@ func (c *Client) DescribeAccountRequest(input *DescribeAccountInput) DescribeAcc
 // DescribeAccount API operation.
 type DescribeAccountRequest struct {
 	*aws.Request
-	Input *DescribeAccountInput
-	Copy  func(*DescribeAccountInput) DescribeAccountRequest
+	Input *types.DescribeAccountInput
+	Copy  func(*types.DescribeAccountInput) DescribeAccountRequest
 }
 
 // Send marshals and sends the DescribeAccount API request.
@@ -87,7 +57,7 @@ func (r DescribeAccountRequest) Send(ctx context.Context) (*DescribeAccountRespo
 	}
 
 	resp := &DescribeAccountResponse{
-		DescribeAccountOutput: r.Request.Data.(*DescribeAccountOutput),
+		DescribeAccountOutput: r.Request.Data.(*types.DescribeAccountOutput),
 		response:              &aws.Response{Request: r.Request},
 	}
 
@@ -97,7 +67,7 @@ func (r DescribeAccountRequest) Send(ctx context.Context) (*DescribeAccountRespo
 // DescribeAccountResponse is the response type for the
 // DescribeAccount API operation.
 type DescribeAccountResponse struct {
-	*DescribeAccountOutput
+	*types.DescribeAccountOutput
 
 	response *aws.Response
 }

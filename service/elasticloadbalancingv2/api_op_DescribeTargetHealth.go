@@ -4,61 +4,10 @@ package elasticloadbalancingv2
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/elasticloadbalancingv2/types"
 )
-
-type DescribeTargetHealthInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the target group.
-	//
-	// TargetGroupArn is a required field
-	TargetGroupArn *string `type:"string" required:"true"`
-
-	// The targets.
-	Targets []TargetDescription `type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeTargetHealthInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeTargetHealthInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeTargetHealthInput"}
-
-	if s.TargetGroupArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("TargetGroupArn"))
-	}
-	if s.Targets != nil {
-		for i, v := range s.Targets {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Targets", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribeTargetHealthOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Information about the health of the targets.
-	TargetHealthDescriptions []TargetHealthDescription `type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeTargetHealthOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeTargetHealth = "DescribeTargetHealth"
 
@@ -75,7 +24,7 @@ const opDescribeTargetHealth = "DescribeTargetHealth"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/DescribeTargetHealth
-func (c *Client) DescribeTargetHealthRequest(input *DescribeTargetHealthInput) DescribeTargetHealthRequest {
+func (c *Client) DescribeTargetHealthRequest(input *types.DescribeTargetHealthInput) DescribeTargetHealthRequest {
 	op := &aws.Operation{
 		Name:       opDescribeTargetHealth,
 		HTTPMethod: "POST",
@@ -83,10 +32,10 @@ func (c *Client) DescribeTargetHealthRequest(input *DescribeTargetHealthInput) D
 	}
 
 	if input == nil {
-		input = &DescribeTargetHealthInput{}
+		input = &types.DescribeTargetHealthInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeTargetHealthOutput{})
+	req := c.newRequest(op, input, &types.DescribeTargetHealthOutput{})
 	return DescribeTargetHealthRequest{Request: req, Input: input, Copy: c.DescribeTargetHealthRequest}
 }
 
@@ -94,8 +43,8 @@ func (c *Client) DescribeTargetHealthRequest(input *DescribeTargetHealthInput) D
 // DescribeTargetHealth API operation.
 type DescribeTargetHealthRequest struct {
 	*aws.Request
-	Input *DescribeTargetHealthInput
-	Copy  func(*DescribeTargetHealthInput) DescribeTargetHealthRequest
+	Input *types.DescribeTargetHealthInput
+	Copy  func(*types.DescribeTargetHealthInput) DescribeTargetHealthRequest
 }
 
 // Send marshals and sends the DescribeTargetHealth API request.
@@ -107,7 +56,7 @@ func (r DescribeTargetHealthRequest) Send(ctx context.Context) (*DescribeTargetH
 	}
 
 	resp := &DescribeTargetHealthResponse{
-		DescribeTargetHealthOutput: r.Request.Data.(*DescribeTargetHealthOutput),
+		DescribeTargetHealthOutput: r.Request.Data.(*types.DescribeTargetHealthOutput),
 		response:                   &aws.Response{Request: r.Request},
 	}
 
@@ -117,7 +66,7 @@ func (r DescribeTargetHealthRequest) Send(ctx context.Context) (*DescribeTargetH
 // DescribeTargetHealthResponse is the response type for the
 // DescribeTargetHealth API operation.
 type DescribeTargetHealthResponse struct {
-	*DescribeTargetHealthOutput
+	*types.DescribeTargetHealthOutput
 
 	response *aws.Response
 }

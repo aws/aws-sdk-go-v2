@@ -10,6 +10,7 @@ package snowballiface
 
 import (
 	"github.com/aws/aws-sdk-go-v2/service/snowball"
+	"github.com/aws/aws-sdk-go-v2/service/snowball/types"
 )
 
 // ClientAPI provides an interface to enable mocking the
@@ -43,7 +44,7 @@ import (
 //    type mockClientClient struct {
 //        snowballiface.ClientPI
 //    }
-//    func (m *mockClientClient) CancelCluster(input *snowball.CancelClusterInput) (*snowball.CancelClusterOutput, error) {
+//    func (m *mockClientClient) CancelCluster(input *types.CancelClusterInput) (*types.CancelClusterOutput, error) {
 //        // mock response/functionality
 //    }
 //
@@ -61,43 +62,43 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type ClientAPI interface {
-	CancelClusterRequest(*snowball.CancelClusterInput) snowball.CancelClusterRequest
+	CancelClusterRequest(*types.CancelClusterInput) snowball.CancelClusterRequest
 
-	CancelJobRequest(*snowball.CancelJobInput) snowball.CancelJobRequest
+	CancelJobRequest(*types.CancelJobInput) snowball.CancelJobRequest
 
-	CreateAddressRequest(*snowball.CreateAddressInput) snowball.CreateAddressRequest
+	CreateAddressRequest(*types.CreateAddressInput) snowball.CreateAddressRequest
 
-	CreateClusterRequest(*snowball.CreateClusterInput) snowball.CreateClusterRequest
+	CreateClusterRequest(*types.CreateClusterInput) snowball.CreateClusterRequest
 
-	CreateJobRequest(*snowball.CreateJobInput) snowball.CreateJobRequest
+	CreateJobRequest(*types.CreateJobInput) snowball.CreateJobRequest
 
-	DescribeAddressRequest(*snowball.DescribeAddressInput) snowball.DescribeAddressRequest
+	DescribeAddressRequest(*types.DescribeAddressInput) snowball.DescribeAddressRequest
 
-	DescribeAddressesRequest(*snowball.DescribeAddressesInput) snowball.DescribeAddressesRequest
+	DescribeAddressesRequest(*types.DescribeAddressesInput) snowball.DescribeAddressesRequest
 
-	DescribeClusterRequest(*snowball.DescribeClusterInput) snowball.DescribeClusterRequest
+	DescribeClusterRequest(*types.DescribeClusterInput) snowball.DescribeClusterRequest
 
-	DescribeJobRequest(*snowball.DescribeJobInput) snowball.DescribeJobRequest
+	DescribeJobRequest(*types.DescribeJobInput) snowball.DescribeJobRequest
 
-	GetJobManifestRequest(*snowball.GetJobManifestInput) snowball.GetJobManifestRequest
+	GetJobManifestRequest(*types.GetJobManifestInput) snowball.GetJobManifestRequest
 
-	GetJobUnlockCodeRequest(*snowball.GetJobUnlockCodeInput) snowball.GetJobUnlockCodeRequest
+	GetJobUnlockCodeRequest(*types.GetJobUnlockCodeInput) snowball.GetJobUnlockCodeRequest
 
-	GetSnowballUsageRequest(*snowball.GetSnowballUsageInput) snowball.GetSnowballUsageRequest
+	GetSnowballUsageRequest(*types.GetSnowballUsageInput) snowball.GetSnowballUsageRequest
 
-	GetSoftwareUpdatesRequest(*snowball.GetSoftwareUpdatesInput) snowball.GetSoftwareUpdatesRequest
+	GetSoftwareUpdatesRequest(*types.GetSoftwareUpdatesInput) snowball.GetSoftwareUpdatesRequest
 
-	ListClusterJobsRequest(*snowball.ListClusterJobsInput) snowball.ListClusterJobsRequest
+	ListClusterJobsRequest(*types.ListClusterJobsInput) snowball.ListClusterJobsRequest
 
-	ListClustersRequest(*snowball.ListClustersInput) snowball.ListClustersRequest
+	ListClustersRequest(*types.ListClustersInput) snowball.ListClustersRequest
 
-	ListCompatibleImagesRequest(*snowball.ListCompatibleImagesInput) snowball.ListCompatibleImagesRequest
+	ListCompatibleImagesRequest(*types.ListCompatibleImagesInput) snowball.ListCompatibleImagesRequest
 
-	ListJobsRequest(*snowball.ListJobsInput) snowball.ListJobsRequest
+	ListJobsRequest(*types.ListJobsInput) snowball.ListJobsRequest
 
-	UpdateClusterRequest(*snowball.UpdateClusterInput) snowball.UpdateClusterRequest
+	UpdateClusterRequest(*types.UpdateClusterInput) snowball.UpdateClusterRequest
 
-	UpdateJobRequest(*snowball.UpdateJobInput) snowball.UpdateJobRequest
+	UpdateJobRequest(*types.UpdateJobInput) snowball.UpdateJobRequest
 }
 
 var _ ClientAPI = (*snowball.Client)(nil)

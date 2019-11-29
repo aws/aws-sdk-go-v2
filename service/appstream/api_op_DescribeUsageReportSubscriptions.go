@@ -6,53 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/appstream/types"
 )
-
-type DescribeUsageReportSubscriptionsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The maximum size of each page of results.
-	MaxResults *int64 `type:"integer"`
-
-	// The pagination token to use to retrieve the next page of results for this
-	// operation. If this value is null, it retrieves the first page.
-	NextToken *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeUsageReportSubscriptionsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeUsageReportSubscriptionsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeUsageReportSubscriptionsInput"}
-	if s.NextToken != nil && len(*s.NextToken) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribeUsageReportSubscriptionsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The pagination token to use to retrieve the next page of results for this
-	// operation. If there are no more pages, this value is null.
-	NextToken *string `min:"1" type:"string"`
-
-	// Information about the usage report subscription.
-	UsageReportSubscriptions []UsageReportSubscription `type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeUsageReportSubscriptionsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeUsageReportSubscriptions = "DescribeUsageReportSubscriptions"
 
@@ -69,7 +24,7 @@ const opDescribeUsageReportSubscriptions = "DescribeUsageReportSubscriptions"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DescribeUsageReportSubscriptions
-func (c *Client) DescribeUsageReportSubscriptionsRequest(input *DescribeUsageReportSubscriptionsInput) DescribeUsageReportSubscriptionsRequest {
+func (c *Client) DescribeUsageReportSubscriptionsRequest(input *types.DescribeUsageReportSubscriptionsInput) DescribeUsageReportSubscriptionsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeUsageReportSubscriptions,
 		HTTPMethod: "POST",
@@ -77,10 +32,10 @@ func (c *Client) DescribeUsageReportSubscriptionsRequest(input *DescribeUsageRep
 	}
 
 	if input == nil {
-		input = &DescribeUsageReportSubscriptionsInput{}
+		input = &types.DescribeUsageReportSubscriptionsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeUsageReportSubscriptionsOutput{})
+	req := c.newRequest(op, input, &types.DescribeUsageReportSubscriptionsOutput{})
 	return DescribeUsageReportSubscriptionsRequest{Request: req, Input: input, Copy: c.DescribeUsageReportSubscriptionsRequest}
 }
 
@@ -88,8 +43,8 @@ func (c *Client) DescribeUsageReportSubscriptionsRequest(input *DescribeUsageRep
 // DescribeUsageReportSubscriptions API operation.
 type DescribeUsageReportSubscriptionsRequest struct {
 	*aws.Request
-	Input *DescribeUsageReportSubscriptionsInput
-	Copy  func(*DescribeUsageReportSubscriptionsInput) DescribeUsageReportSubscriptionsRequest
+	Input *types.DescribeUsageReportSubscriptionsInput
+	Copy  func(*types.DescribeUsageReportSubscriptionsInput) DescribeUsageReportSubscriptionsRequest
 }
 
 // Send marshals and sends the DescribeUsageReportSubscriptions API request.
@@ -101,7 +56,7 @@ func (r DescribeUsageReportSubscriptionsRequest) Send(ctx context.Context) (*Des
 	}
 
 	resp := &DescribeUsageReportSubscriptionsResponse{
-		DescribeUsageReportSubscriptionsOutput: r.Request.Data.(*DescribeUsageReportSubscriptionsOutput),
+		DescribeUsageReportSubscriptionsOutput: r.Request.Data.(*types.DescribeUsageReportSubscriptionsOutput),
 		response:                               &aws.Response{Request: r.Request},
 	}
 
@@ -111,7 +66,7 @@ func (r DescribeUsageReportSubscriptionsRequest) Send(ctx context.Context) (*Des
 // DescribeUsageReportSubscriptionsResponse is the response type for the
 // DescribeUsageReportSubscriptions API operation.
 type DescribeUsageReportSubscriptionsResponse struct {
-	*DescribeUsageReportSubscriptionsOutput
+	*types.DescribeUsageReportSubscriptionsOutput
 
 	response *aws.Response
 }

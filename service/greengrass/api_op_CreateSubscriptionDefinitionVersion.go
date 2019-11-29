@@ -4,126 +4,10 @@ package greengrass
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/greengrass/types"
 )
-
-type CreateSubscriptionDefinitionVersionInput struct {
-	_ struct{} `type:"structure"`
-
-	AmznClientToken *string `location:"header" locationName:"X-Amzn-Client-Token" type:"string"`
-
-	// SubscriptionDefinitionId is a required field
-	SubscriptionDefinitionId *string `location:"uri" locationName:"SubscriptionDefinitionId" type:"string" required:"true"`
-
-	Subscriptions []Subscription `type:"list"`
-}
-
-// String returns the string representation
-func (s CreateSubscriptionDefinitionVersionInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateSubscriptionDefinitionVersionInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateSubscriptionDefinitionVersionInput"}
-
-	if s.SubscriptionDefinitionId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("SubscriptionDefinitionId"))
-	}
-	if s.Subscriptions != nil {
-		for i, v := range s.Subscriptions {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Subscriptions", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s CreateSubscriptionDefinitionVersionInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.Subscriptions != nil {
-		v := s.Subscriptions
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "Subscriptions", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	if s.AmznClientToken != nil {
-		v := *s.AmznClientToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "X-Amzn-Client-Token", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.SubscriptionDefinitionId != nil {
-		v := *s.SubscriptionDefinitionId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "SubscriptionDefinitionId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type CreateSubscriptionDefinitionVersionOutput struct {
-	_ struct{} `type:"structure"`
-
-	Arn *string `type:"string"`
-
-	CreationTimestamp *string `type:"string"`
-
-	Id *string `type:"string"`
-
-	Version *string `type:"string"`
-}
-
-// String returns the string representation
-func (s CreateSubscriptionDefinitionVersionOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s CreateSubscriptionDefinitionVersionOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.Arn != nil {
-		v := *s.Arn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "Arn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.CreationTimestamp != nil {
-		v := *s.CreationTimestamp
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "CreationTimestamp", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Id != nil {
-		v := *s.Id
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "Id", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Version != nil {
-		v := *s.Version
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "Version", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opCreateSubscriptionDefinitionVersion = "CreateSubscriptionDefinitionVersion"
 
@@ -140,7 +24,7 @@ const opCreateSubscriptionDefinitionVersion = "CreateSubscriptionDefinitionVersi
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/CreateSubscriptionDefinitionVersion
-func (c *Client) CreateSubscriptionDefinitionVersionRequest(input *CreateSubscriptionDefinitionVersionInput) CreateSubscriptionDefinitionVersionRequest {
+func (c *Client) CreateSubscriptionDefinitionVersionRequest(input *types.CreateSubscriptionDefinitionVersionInput) CreateSubscriptionDefinitionVersionRequest {
 	op := &aws.Operation{
 		Name:       opCreateSubscriptionDefinitionVersion,
 		HTTPMethod: "POST",
@@ -148,10 +32,10 @@ func (c *Client) CreateSubscriptionDefinitionVersionRequest(input *CreateSubscri
 	}
 
 	if input == nil {
-		input = &CreateSubscriptionDefinitionVersionInput{}
+		input = &types.CreateSubscriptionDefinitionVersionInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateSubscriptionDefinitionVersionOutput{})
+	req := c.newRequest(op, input, &types.CreateSubscriptionDefinitionVersionOutput{})
 	return CreateSubscriptionDefinitionVersionRequest{Request: req, Input: input, Copy: c.CreateSubscriptionDefinitionVersionRequest}
 }
 
@@ -159,8 +43,8 @@ func (c *Client) CreateSubscriptionDefinitionVersionRequest(input *CreateSubscri
 // CreateSubscriptionDefinitionVersion API operation.
 type CreateSubscriptionDefinitionVersionRequest struct {
 	*aws.Request
-	Input *CreateSubscriptionDefinitionVersionInput
-	Copy  func(*CreateSubscriptionDefinitionVersionInput) CreateSubscriptionDefinitionVersionRequest
+	Input *types.CreateSubscriptionDefinitionVersionInput
+	Copy  func(*types.CreateSubscriptionDefinitionVersionInput) CreateSubscriptionDefinitionVersionRequest
 }
 
 // Send marshals and sends the CreateSubscriptionDefinitionVersion API request.
@@ -172,7 +56,7 @@ func (r CreateSubscriptionDefinitionVersionRequest) Send(ctx context.Context) (*
 	}
 
 	resp := &CreateSubscriptionDefinitionVersionResponse{
-		CreateSubscriptionDefinitionVersionOutput: r.Request.Data.(*CreateSubscriptionDefinitionVersionOutput),
+		CreateSubscriptionDefinitionVersionOutput: r.Request.Data.(*types.CreateSubscriptionDefinitionVersionOutput),
 		response: &aws.Response{Request: r.Request},
 	}
 
@@ -182,7 +66,7 @@ func (r CreateSubscriptionDefinitionVersionRequest) Send(ctx context.Context) (*
 // CreateSubscriptionDefinitionVersionResponse is the response type for the
 // CreateSubscriptionDefinitionVersion API operation.
 type CreateSubscriptionDefinitionVersionResponse struct {
-	*CreateSubscriptionDefinitionVersionOutput
+	*types.CreateSubscriptionDefinitionVersionOutput
 
 	response *aws.Response
 }

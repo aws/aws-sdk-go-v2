@@ -6,48 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/mediastore/types"
 )
-
-type DeleteContainerInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the container to delete.
-	//
-	// ContainerName is a required field
-	ContainerName *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteContainerInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteContainerInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteContainerInput"}
-
-	if s.ContainerName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ContainerName"))
-	}
-	if s.ContainerName != nil && len(*s.ContainerName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ContainerName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteContainerOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteContainerOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteContainer = "DeleteContainer"
 
@@ -66,7 +26,7 @@ const opDeleteContainer = "DeleteContainer"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mediastore-2017-09-01/DeleteContainer
-func (c *Client) DeleteContainerRequest(input *DeleteContainerInput) DeleteContainerRequest {
+func (c *Client) DeleteContainerRequest(input *types.DeleteContainerInput) DeleteContainerRequest {
 	op := &aws.Operation{
 		Name:       opDeleteContainer,
 		HTTPMethod: "POST",
@@ -74,10 +34,10 @@ func (c *Client) DeleteContainerRequest(input *DeleteContainerInput) DeleteConta
 	}
 
 	if input == nil {
-		input = &DeleteContainerInput{}
+		input = &types.DeleteContainerInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteContainerOutput{})
+	req := c.newRequest(op, input, &types.DeleteContainerOutput{})
 	return DeleteContainerRequest{Request: req, Input: input, Copy: c.DeleteContainerRequest}
 }
 
@@ -85,8 +45,8 @@ func (c *Client) DeleteContainerRequest(input *DeleteContainerInput) DeleteConta
 // DeleteContainer API operation.
 type DeleteContainerRequest struct {
 	*aws.Request
-	Input *DeleteContainerInput
-	Copy  func(*DeleteContainerInput) DeleteContainerRequest
+	Input *types.DeleteContainerInput
+	Copy  func(*types.DeleteContainerInput) DeleteContainerRequest
 }
 
 // Send marshals and sends the DeleteContainer API request.
@@ -98,7 +58,7 @@ func (r DeleteContainerRequest) Send(ctx context.Context) (*DeleteContainerRespo
 	}
 
 	resp := &DeleteContainerResponse{
-		DeleteContainerOutput: r.Request.Data.(*DeleteContainerOutput),
+		DeleteContainerOutput: r.Request.Data.(*types.DeleteContainerOutput),
 		response:              &aws.Response{Request: r.Request},
 	}
 
@@ -108,7 +68,7 @@ func (r DeleteContainerRequest) Send(ctx context.Context) (*DeleteContainerRespo
 // DeleteContainerResponse is the response type for the
 // DeleteContainer API operation.
 type DeleteContainerResponse struct {
-	*DeleteContainerOutput
+	*types.DeleteContainerOutput
 
 	response *aws.Response
 }

@@ -6,73 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/storagegateway/types"
 )
-
-// A JSON object containing one or more of the following fields:
-//
-//    * DeleteChapCredentialsInput$InitiatorName
-//
-//    * DeleteChapCredentialsInput$TargetARN
-type DeleteChapCredentialsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The iSCSI initiator that connects to the target.
-	//
-	// InitiatorName is a required field
-	InitiatorName *string `min:"1" type:"string" required:"true"`
-
-	// The Amazon Resource Name (ARN) of the iSCSI volume target. Use the DescribeStorediSCSIVolumes
-	// operation to return to retrieve the TargetARN for specified VolumeARN.
-	//
-	// TargetARN is a required field
-	TargetARN *string `min:"50" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteChapCredentialsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteChapCredentialsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteChapCredentialsInput"}
-
-	if s.InitiatorName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("InitiatorName"))
-	}
-	if s.InitiatorName != nil && len(*s.InitiatorName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("InitiatorName", 1))
-	}
-
-	if s.TargetARN == nil {
-		invalidParams.Add(aws.NewErrParamRequired("TargetARN"))
-	}
-	if s.TargetARN != nil && len(*s.TargetARN) < 50 {
-		invalidParams.Add(aws.NewErrParamMinLen("TargetARN", 50))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// A JSON object containing the following fields:
-type DeleteChapCredentialsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The iSCSI initiator that connects to the target.
-	InitiatorName *string `min:"1" type:"string"`
-
-	// The Amazon Resource Name (ARN) of the target.
-	TargetARN *string `min:"50" type:"string"`
-}
-
-// String returns the string representation
-func (s DeleteChapCredentialsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteChapCredentials = "DeleteChapCredentials"
 
@@ -80,7 +15,8 @@ const opDeleteChapCredentials = "DeleteChapCredentials"
 // AWS Storage Gateway.
 //
 // Deletes Challenge-Handshake Authentication Protocol (CHAP) credentials for
-// a specified iSCSI target and initiator pair.
+// a specified iSCSI target and initiator pair. This operation is supported
+// in volume and tape gateway types.
 //
 //    // Example sending a request using DeleteChapCredentialsRequest.
 //    req := client.DeleteChapCredentialsRequest(params)
@@ -90,7 +26,7 @@ const opDeleteChapCredentials = "DeleteChapCredentials"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DeleteChapCredentials
-func (c *Client) DeleteChapCredentialsRequest(input *DeleteChapCredentialsInput) DeleteChapCredentialsRequest {
+func (c *Client) DeleteChapCredentialsRequest(input *types.DeleteChapCredentialsInput) DeleteChapCredentialsRequest {
 	op := &aws.Operation{
 		Name:       opDeleteChapCredentials,
 		HTTPMethod: "POST",
@@ -98,10 +34,10 @@ func (c *Client) DeleteChapCredentialsRequest(input *DeleteChapCredentialsInput)
 	}
 
 	if input == nil {
-		input = &DeleteChapCredentialsInput{}
+		input = &types.DeleteChapCredentialsInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteChapCredentialsOutput{})
+	req := c.newRequest(op, input, &types.DeleteChapCredentialsOutput{})
 	return DeleteChapCredentialsRequest{Request: req, Input: input, Copy: c.DeleteChapCredentialsRequest}
 }
 
@@ -109,8 +45,8 @@ func (c *Client) DeleteChapCredentialsRequest(input *DeleteChapCredentialsInput)
 // DeleteChapCredentials API operation.
 type DeleteChapCredentialsRequest struct {
 	*aws.Request
-	Input *DeleteChapCredentialsInput
-	Copy  func(*DeleteChapCredentialsInput) DeleteChapCredentialsRequest
+	Input *types.DeleteChapCredentialsInput
+	Copy  func(*types.DeleteChapCredentialsInput) DeleteChapCredentialsRequest
 }
 
 // Send marshals and sends the DeleteChapCredentials API request.
@@ -122,7 +58,7 @@ func (r DeleteChapCredentialsRequest) Send(ctx context.Context) (*DeleteChapCred
 	}
 
 	resp := &DeleteChapCredentialsResponse{
-		DeleteChapCredentialsOutput: r.Request.Data.(*DeleteChapCredentialsOutput),
+		DeleteChapCredentialsOutput: r.Request.Data.(*types.DeleteChapCredentialsOutput),
 		response:                    &aws.Response{Request: r.Request},
 	}
 
@@ -132,7 +68,7 @@ func (r DeleteChapCredentialsRequest) Send(ctx context.Context) (*DeleteChapCred
 // DeleteChapCredentialsResponse is the response type for the
 // DeleteChapCredentials API operation.
 type DeleteChapCredentialsResponse struct {
-	*DeleteChapCredentialsOutput
+	*types.DeleteChapCredentialsOutput
 
 	response *aws.Response
 }

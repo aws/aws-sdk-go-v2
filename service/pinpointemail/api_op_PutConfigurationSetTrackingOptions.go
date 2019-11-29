@@ -6,78 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/pinpointemail/types"
 )
-
-// A request to add a custom domain for tracking open and click events to a
-// configuration set.
-type PutConfigurationSetTrackingOptionsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the configuration set that you want to add a custom tracking
-	// domain to.
-	//
-	// ConfigurationSetName is a required field
-	ConfigurationSetName *string `location:"uri" locationName:"ConfigurationSetName" type:"string" required:"true"`
-
-	// The domain that you want to use to track open and click events.
-	CustomRedirectDomain *string `type:"string"`
-}
-
-// String returns the string representation
-func (s PutConfigurationSetTrackingOptionsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *PutConfigurationSetTrackingOptionsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "PutConfigurationSetTrackingOptionsInput"}
-
-	if s.ConfigurationSetName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ConfigurationSetName"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s PutConfigurationSetTrackingOptionsInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.CustomRedirectDomain != nil {
-		v := *s.CustomRedirectDomain
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "CustomRedirectDomain", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.ConfigurationSetName != nil {
-		v := *s.ConfigurationSetName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "ConfigurationSetName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-// An HTTP 200 response if the request succeeds, or an error message if the
-// request fails.
-type PutConfigurationSetTrackingOptionsOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s PutConfigurationSetTrackingOptionsOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s PutConfigurationSetTrackingOptionsOutput) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
 
 const opPutConfigurationSetTrackingOptions = "PutConfigurationSetTrackingOptions"
 
@@ -95,7 +25,7 @@ const opPutConfigurationSetTrackingOptions = "PutConfigurationSetTrackingOptions
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/PutConfigurationSetTrackingOptions
-func (c *Client) PutConfigurationSetTrackingOptionsRequest(input *PutConfigurationSetTrackingOptionsInput) PutConfigurationSetTrackingOptionsRequest {
+func (c *Client) PutConfigurationSetTrackingOptionsRequest(input *types.PutConfigurationSetTrackingOptionsInput) PutConfigurationSetTrackingOptionsRequest {
 	op := &aws.Operation{
 		Name:       opPutConfigurationSetTrackingOptions,
 		HTTPMethod: "PUT",
@@ -103,10 +33,10 @@ func (c *Client) PutConfigurationSetTrackingOptionsRequest(input *PutConfigurati
 	}
 
 	if input == nil {
-		input = &PutConfigurationSetTrackingOptionsInput{}
+		input = &types.PutConfigurationSetTrackingOptionsInput{}
 	}
 
-	req := c.newRequest(op, input, &PutConfigurationSetTrackingOptionsOutput{})
+	req := c.newRequest(op, input, &types.PutConfigurationSetTrackingOptionsOutput{})
 	return PutConfigurationSetTrackingOptionsRequest{Request: req, Input: input, Copy: c.PutConfigurationSetTrackingOptionsRequest}
 }
 
@@ -114,8 +44,8 @@ func (c *Client) PutConfigurationSetTrackingOptionsRequest(input *PutConfigurati
 // PutConfigurationSetTrackingOptions API operation.
 type PutConfigurationSetTrackingOptionsRequest struct {
 	*aws.Request
-	Input *PutConfigurationSetTrackingOptionsInput
-	Copy  func(*PutConfigurationSetTrackingOptionsInput) PutConfigurationSetTrackingOptionsRequest
+	Input *types.PutConfigurationSetTrackingOptionsInput
+	Copy  func(*types.PutConfigurationSetTrackingOptionsInput) PutConfigurationSetTrackingOptionsRequest
 }
 
 // Send marshals and sends the PutConfigurationSetTrackingOptions API request.
@@ -127,7 +57,7 @@ func (r PutConfigurationSetTrackingOptionsRequest) Send(ctx context.Context) (*P
 	}
 
 	resp := &PutConfigurationSetTrackingOptionsResponse{
-		PutConfigurationSetTrackingOptionsOutput: r.Request.Data.(*PutConfigurationSetTrackingOptionsOutput),
+		PutConfigurationSetTrackingOptionsOutput: r.Request.Data.(*types.PutConfigurationSetTrackingOptionsOutput),
 		response:                                 &aws.Response{Request: r.Request},
 	}
 
@@ -137,7 +67,7 @@ func (r PutConfigurationSetTrackingOptionsRequest) Send(ctx context.Context) (*P
 // PutConfigurationSetTrackingOptionsResponse is the response type for the
 // PutConfigurationSetTrackingOptions API operation.
 type PutConfigurationSetTrackingOptionsResponse struct {
-	*PutConfigurationSetTrackingOptionsOutput
+	*types.PutConfigurationSetTrackingOptionsOutput
 
 	response *aws.Response
 }

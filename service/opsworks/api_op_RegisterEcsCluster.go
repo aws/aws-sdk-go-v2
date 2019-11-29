@@ -6,58 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/opsworks/types"
 )
-
-type RegisterEcsClusterInput struct {
-	_ struct{} `type:"structure"`
-
-	// The cluster's ARN.
-	//
-	// EcsClusterArn is a required field
-	EcsClusterArn *string `type:"string" required:"true"`
-
-	// The stack ID.
-	//
-	// StackId is a required field
-	StackId *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s RegisterEcsClusterInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *RegisterEcsClusterInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "RegisterEcsClusterInput"}
-
-	if s.EcsClusterArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("EcsClusterArn"))
-	}
-
-	if s.StackId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("StackId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Contains the response to a RegisterEcsCluster request.
-type RegisterEcsClusterOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The cluster's ARN.
-	EcsClusterArn *string `type:"string"`
-}
-
-// String returns the string representation
-func (s RegisterEcsClusterOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opRegisterEcsCluster = "RegisterEcsCluster"
 
@@ -81,7 +31,7 @@ const opRegisterEcsCluster = "RegisterEcsCluster"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/RegisterEcsCluster
-func (c *Client) RegisterEcsClusterRequest(input *RegisterEcsClusterInput) RegisterEcsClusterRequest {
+func (c *Client) RegisterEcsClusterRequest(input *types.RegisterEcsClusterInput) RegisterEcsClusterRequest {
 	op := &aws.Operation{
 		Name:       opRegisterEcsCluster,
 		HTTPMethod: "POST",
@@ -89,10 +39,10 @@ func (c *Client) RegisterEcsClusterRequest(input *RegisterEcsClusterInput) Regis
 	}
 
 	if input == nil {
-		input = &RegisterEcsClusterInput{}
+		input = &types.RegisterEcsClusterInput{}
 	}
 
-	req := c.newRequest(op, input, &RegisterEcsClusterOutput{})
+	req := c.newRequest(op, input, &types.RegisterEcsClusterOutput{})
 	return RegisterEcsClusterRequest{Request: req, Input: input, Copy: c.RegisterEcsClusterRequest}
 }
 
@@ -100,8 +50,8 @@ func (c *Client) RegisterEcsClusterRequest(input *RegisterEcsClusterInput) Regis
 // RegisterEcsCluster API operation.
 type RegisterEcsClusterRequest struct {
 	*aws.Request
-	Input *RegisterEcsClusterInput
-	Copy  func(*RegisterEcsClusterInput) RegisterEcsClusterRequest
+	Input *types.RegisterEcsClusterInput
+	Copy  func(*types.RegisterEcsClusterInput) RegisterEcsClusterRequest
 }
 
 // Send marshals and sends the RegisterEcsCluster API request.
@@ -113,7 +63,7 @@ func (r RegisterEcsClusterRequest) Send(ctx context.Context) (*RegisterEcsCluste
 	}
 
 	resp := &RegisterEcsClusterResponse{
-		RegisterEcsClusterOutput: r.Request.Data.(*RegisterEcsClusterOutput),
+		RegisterEcsClusterOutput: r.Request.Data.(*types.RegisterEcsClusterOutput),
 		response:                 &aws.Response{Request: r.Request},
 	}
 
@@ -123,7 +73,7 @@ func (r RegisterEcsClusterRequest) Send(ctx context.Context) (*RegisterEcsCluste
 // RegisterEcsClusterResponse is the response type for the
 // RegisterEcsCluster API operation.
 type RegisterEcsClusterResponse struct {
-	*RegisterEcsClusterOutput
+	*types.RegisterEcsClusterOutput
 
 	response *aws.Response
 }

@@ -6,65 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/directconnect/types"
 )
-
-type DeleteInterconnectInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the interconnect.
-	//
-	// InterconnectId is a required field
-	InterconnectId *string `locationName:"interconnectId" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteInterconnectInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteInterconnectInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteInterconnectInput"}
-
-	if s.InterconnectId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("InterconnectId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteInterconnectOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The state of the interconnect. The following are the possible values:
-	//
-	//    * requested: The initial state of an interconnect. The interconnect stays
-	//    in the requested state until the Letter of Authorization (LOA) is sent
-	//    to the customer.
-	//
-	//    * pending: The interconnect is approved, and is being initialized.
-	//
-	//    * available: The network link is up, and the interconnect is ready for
-	//    use.
-	//
-	//    * down: The network link is down.
-	//
-	//    * deleting: The interconnect is being deleted.
-	//
-	//    * deleted: The interconnect is deleted.
-	//
-	//    * unknown: The state of the interconnect is not available.
-	InterconnectState InterconnectState `locationName:"interconnectState" type:"string" enum:"true"`
-}
-
-// String returns the string representation
-func (s DeleteInterconnectOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteInterconnect = "DeleteInterconnect"
 
@@ -83,7 +26,7 @@ const opDeleteInterconnect = "DeleteInterconnect"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DeleteInterconnect
-func (c *Client) DeleteInterconnectRequest(input *DeleteInterconnectInput) DeleteInterconnectRequest {
+func (c *Client) DeleteInterconnectRequest(input *types.DeleteInterconnectInput) DeleteInterconnectRequest {
 	op := &aws.Operation{
 		Name:       opDeleteInterconnect,
 		HTTPMethod: "POST",
@@ -91,10 +34,10 @@ func (c *Client) DeleteInterconnectRequest(input *DeleteInterconnectInput) Delet
 	}
 
 	if input == nil {
-		input = &DeleteInterconnectInput{}
+		input = &types.DeleteInterconnectInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteInterconnectOutput{})
+	req := c.newRequest(op, input, &types.DeleteInterconnectOutput{})
 	return DeleteInterconnectRequest{Request: req, Input: input, Copy: c.DeleteInterconnectRequest}
 }
 
@@ -102,8 +45,8 @@ func (c *Client) DeleteInterconnectRequest(input *DeleteInterconnectInput) Delet
 // DeleteInterconnect API operation.
 type DeleteInterconnectRequest struct {
 	*aws.Request
-	Input *DeleteInterconnectInput
-	Copy  func(*DeleteInterconnectInput) DeleteInterconnectRequest
+	Input *types.DeleteInterconnectInput
+	Copy  func(*types.DeleteInterconnectInput) DeleteInterconnectRequest
 }
 
 // Send marshals and sends the DeleteInterconnect API request.
@@ -115,7 +58,7 @@ func (r DeleteInterconnectRequest) Send(ctx context.Context) (*DeleteInterconnec
 	}
 
 	resp := &DeleteInterconnectResponse{
-		DeleteInterconnectOutput: r.Request.Data.(*DeleteInterconnectOutput),
+		DeleteInterconnectOutput: r.Request.Data.(*types.DeleteInterconnectOutput),
 		response:                 &aws.Response{Request: r.Request},
 	}
 
@@ -125,7 +68,7 @@ func (r DeleteInterconnectRequest) Send(ctx context.Context) (*DeleteInterconnec
 // DeleteInterconnectResponse is the response type for the
 // DeleteInterconnect API operation.
 type DeleteInterconnectResponse struct {
-	*DeleteInterconnectOutput
+	*types.DeleteInterconnectOutput
 
 	response *aws.Response
 }

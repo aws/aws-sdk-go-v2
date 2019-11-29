@@ -6,55 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/route53domains/types"
 )
-
-// The DeleteTagsForDomainRequest includes the following elements.
-type DeleteTagsForDomainInput struct {
-	_ struct{} `type:"structure"`
-
-	// The domain for which you want to delete one or more tags.
-	//
-	// DomainName is a required field
-	DomainName *string `type:"string" required:"true"`
-
-	// A list of tag keys to delete.
-	//
-	// TagsToDelete is a required field
-	TagsToDelete []string `type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteTagsForDomainInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteTagsForDomainInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteTagsForDomainInput"}
-
-	if s.DomainName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DomainName"))
-	}
-
-	if s.TagsToDelete == nil {
-		invalidParams.Add(aws.NewErrParamRequired("TagsToDelete"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteTagsForDomainOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteTagsForDomainOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteTagsForDomain = "DeleteTagsForDomain"
 
@@ -74,7 +27,7 @@ const opDeleteTagsForDomain = "DeleteTagsForDomain"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/DeleteTagsForDomain
-func (c *Client) DeleteTagsForDomainRequest(input *DeleteTagsForDomainInput) DeleteTagsForDomainRequest {
+func (c *Client) DeleteTagsForDomainRequest(input *types.DeleteTagsForDomainInput) DeleteTagsForDomainRequest {
 	op := &aws.Operation{
 		Name:       opDeleteTagsForDomain,
 		HTTPMethod: "POST",
@@ -82,10 +35,10 @@ func (c *Client) DeleteTagsForDomainRequest(input *DeleteTagsForDomainInput) Del
 	}
 
 	if input == nil {
-		input = &DeleteTagsForDomainInput{}
+		input = &types.DeleteTagsForDomainInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteTagsForDomainOutput{})
+	req := c.newRequest(op, input, &types.DeleteTagsForDomainOutput{})
 	return DeleteTagsForDomainRequest{Request: req, Input: input, Copy: c.DeleteTagsForDomainRequest}
 }
 
@@ -93,8 +46,8 @@ func (c *Client) DeleteTagsForDomainRequest(input *DeleteTagsForDomainInput) Del
 // DeleteTagsForDomain API operation.
 type DeleteTagsForDomainRequest struct {
 	*aws.Request
-	Input *DeleteTagsForDomainInput
-	Copy  func(*DeleteTagsForDomainInput) DeleteTagsForDomainRequest
+	Input *types.DeleteTagsForDomainInput
+	Copy  func(*types.DeleteTagsForDomainInput) DeleteTagsForDomainRequest
 }
 
 // Send marshals and sends the DeleteTagsForDomain API request.
@@ -106,7 +59,7 @@ func (r DeleteTagsForDomainRequest) Send(ctx context.Context) (*DeleteTagsForDom
 	}
 
 	resp := &DeleteTagsForDomainResponse{
-		DeleteTagsForDomainOutput: r.Request.Data.(*DeleteTagsForDomainOutput),
+		DeleteTagsForDomainOutput: r.Request.Data.(*types.DeleteTagsForDomainOutput),
 		response:                  &aws.Response{Request: r.Request},
 	}
 
@@ -116,7 +69,7 @@ func (r DeleteTagsForDomainRequest) Send(ctx context.Context) (*DeleteTagsForDom
 // DeleteTagsForDomainResponse is the response type for the
 // DeleteTagsForDomain API operation.
 type DeleteTagsForDomainResponse struct {
-	*DeleteTagsForDomainOutput
+	*types.DeleteTagsForDomainOutput
 
 	response *aws.Response
 }

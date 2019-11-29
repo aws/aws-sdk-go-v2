@@ -6,51 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/glue/types"
 )
-
-type GetClassifiersInput struct {
-	_ struct{} `type:"structure"`
-
-	// The size of the list to return (optional).
-	MaxResults *int64 `min:"1" type:"integer"`
-
-	// An optional continuation token.
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s GetClassifiersInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetClassifiersInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetClassifiersInput"}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type GetClassifiersOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The requested list of classifier objects.
-	Classifiers []Classifier `type:"list"`
-
-	// A continuation token.
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s GetClassifiersOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetClassifiers = "GetClassifiers"
 
@@ -67,7 +24,7 @@ const opGetClassifiers = "GetClassifiers"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetClassifiers
-func (c *Client) GetClassifiersRequest(input *GetClassifiersInput) GetClassifiersRequest {
+func (c *Client) GetClassifiersRequest(input *types.GetClassifiersInput) GetClassifiersRequest {
 	op := &aws.Operation{
 		Name:       opGetClassifiers,
 		HTTPMethod: "POST",
@@ -81,10 +38,10 @@ func (c *Client) GetClassifiersRequest(input *GetClassifiersInput) GetClassifier
 	}
 
 	if input == nil {
-		input = &GetClassifiersInput{}
+		input = &types.GetClassifiersInput{}
 	}
 
-	req := c.newRequest(op, input, &GetClassifiersOutput{})
+	req := c.newRequest(op, input, &types.GetClassifiersOutput{})
 	return GetClassifiersRequest{Request: req, Input: input, Copy: c.GetClassifiersRequest}
 }
 
@@ -92,8 +49,8 @@ func (c *Client) GetClassifiersRequest(input *GetClassifiersInput) GetClassifier
 // GetClassifiers API operation.
 type GetClassifiersRequest struct {
 	*aws.Request
-	Input *GetClassifiersInput
-	Copy  func(*GetClassifiersInput) GetClassifiersRequest
+	Input *types.GetClassifiersInput
+	Copy  func(*types.GetClassifiersInput) GetClassifiersRequest
 }
 
 // Send marshals and sends the GetClassifiers API request.
@@ -105,7 +62,7 @@ func (r GetClassifiersRequest) Send(ctx context.Context) (*GetClassifiersRespons
 	}
 
 	resp := &GetClassifiersResponse{
-		GetClassifiersOutput: r.Request.Data.(*GetClassifiersOutput),
+		GetClassifiersOutput: r.Request.Data.(*types.GetClassifiersOutput),
 		response:             &aws.Response{Request: r.Request},
 	}
 
@@ -135,7 +92,7 @@ func NewGetClassifiersPaginator(req GetClassifiersRequest) GetClassifiersPaginat
 	return GetClassifiersPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *GetClassifiersInput
+				var inCpy *types.GetClassifiersInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -155,14 +112,14 @@ type GetClassifiersPaginator struct {
 	aws.Pager
 }
 
-func (p *GetClassifiersPaginator) CurrentPage() *GetClassifiersOutput {
-	return p.Pager.CurrentPage().(*GetClassifiersOutput)
+func (p *GetClassifiersPaginator) CurrentPage() *types.GetClassifiersOutput {
+	return p.Pager.CurrentPage().(*types.GetClassifiersOutput)
 }
 
 // GetClassifiersResponse is the response type for the
 // GetClassifiers API operation.
 type GetClassifiersResponse struct {
-	*GetClassifiersOutput
+	*types.GetClassifiersOutput
 
 	response *aws.Response
 }

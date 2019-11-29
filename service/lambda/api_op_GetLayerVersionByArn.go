@@ -6,146 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/lambda/types"
 )
-
-type GetLayerVersionByArnInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ARN of the layer version.
-	//
-	// Arn is a required field
-	Arn *string `location:"querystring" locationName:"Arn" min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetLayerVersionByArnInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetLayerVersionByArnInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetLayerVersionByArnInput"}
-
-	if s.Arn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Arn"))
-	}
-	if s.Arn != nil && len(*s.Arn) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Arn", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetLayerVersionByArnInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.Arn != nil {
-		v := *s.Arn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "Arn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type GetLayerVersionByArnOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The layer's compatible runtimes.
-	CompatibleRuntimes []Runtime `type:"list"`
-
-	// Details about the layer version.
-	Content *LayerVersionContentOutput `type:"structure"`
-
-	// The date that the layer version was created, in ISO-8601 format (https://www.w3.org/TR/NOTE-datetime)
-	// (YYYY-MM-DDThh:mm:ss.sTZD).
-	CreatedDate *string `type:"string"`
-
-	// The description of the version.
-	Description *string `type:"string"`
-
-	// The ARN of the layer.
-	LayerArn *string `min:"1" type:"string"`
-
-	// The ARN of the layer version.
-	LayerVersionArn *string `min:"1" type:"string"`
-
-	// The layer's software license.
-	LicenseInfo *string `type:"string"`
-
-	// The version number.
-	Version *int64 `type:"long"`
-}
-
-// String returns the string representation
-func (s GetLayerVersionByArnOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetLayerVersionByArnOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.CompatibleRuntimes != nil {
-		v := s.CompatibleRuntimes
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "CompatibleRuntimes", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
-		}
-		ls0.End()
-
-	}
-	if s.Content != nil {
-		v := s.Content
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "Content", v, metadata)
-	}
-	if s.CreatedDate != nil {
-		v := *s.CreatedDate
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "CreatedDate", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Description != nil {
-		v := *s.Description
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "Description", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.LayerArn != nil {
-		v := *s.LayerArn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "LayerArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.LayerVersionArn != nil {
-		v := *s.LayerVersionArn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "LayerVersionArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.LicenseInfo != nil {
-		v := *s.LicenseInfo
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "LicenseInfo", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Version != nil {
-		v := *s.Version
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "Version", protocol.Int64Value(v), metadata)
-	}
-	return nil
-}
 
 const opGetLayerVersionByArn = "GetLayerVersionByArn"
 
@@ -163,7 +25,7 @@ const opGetLayerVersionByArn = "GetLayerVersionByArn"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/GetLayerVersionByArn
-func (c *Client) GetLayerVersionByArnRequest(input *GetLayerVersionByArnInput) GetLayerVersionByArnRequest {
+func (c *Client) GetLayerVersionByArnRequest(input *types.GetLayerVersionByArnInput) GetLayerVersionByArnRequest {
 	op := &aws.Operation{
 		Name:       opGetLayerVersionByArn,
 		HTTPMethod: "GET",
@@ -171,10 +33,10 @@ func (c *Client) GetLayerVersionByArnRequest(input *GetLayerVersionByArnInput) G
 	}
 
 	if input == nil {
-		input = &GetLayerVersionByArnInput{}
+		input = &types.GetLayerVersionByArnInput{}
 	}
 
-	req := c.newRequest(op, input, &GetLayerVersionByArnOutput{})
+	req := c.newRequest(op, input, &types.GetLayerVersionByArnOutput{})
 	return GetLayerVersionByArnRequest{Request: req, Input: input, Copy: c.GetLayerVersionByArnRequest}
 }
 
@@ -182,8 +44,8 @@ func (c *Client) GetLayerVersionByArnRequest(input *GetLayerVersionByArnInput) G
 // GetLayerVersionByArn API operation.
 type GetLayerVersionByArnRequest struct {
 	*aws.Request
-	Input *GetLayerVersionByArnInput
-	Copy  func(*GetLayerVersionByArnInput) GetLayerVersionByArnRequest
+	Input *types.GetLayerVersionByArnInput
+	Copy  func(*types.GetLayerVersionByArnInput) GetLayerVersionByArnRequest
 }
 
 // Send marshals and sends the GetLayerVersionByArn API request.
@@ -195,7 +57,7 @@ func (r GetLayerVersionByArnRequest) Send(ctx context.Context) (*GetLayerVersion
 	}
 
 	resp := &GetLayerVersionByArnResponse{
-		GetLayerVersionByArnOutput: r.Request.Data.(*GetLayerVersionByArnOutput),
+		GetLayerVersionByArnOutput: r.Request.Data.(*types.GetLayerVersionByArnOutput),
 		response:                   &aws.Response{Request: r.Request},
 	}
 
@@ -205,7 +67,7 @@ func (r GetLayerVersionByArnRequest) Send(ctx context.Context) (*GetLayerVersion
 // GetLayerVersionByArnResponse is the response type for the
 // GetLayerVersionByArn API operation.
 type GetLayerVersionByArnResponse struct {
-	*GetLayerVersionByArnOutput
+	*types.GetLayerVersionByArnOutput
 
 	response *aws.Response
 }

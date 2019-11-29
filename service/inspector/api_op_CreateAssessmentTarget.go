@@ -6,62 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/inspector/types"
 )
-
-type CreateAssessmentTargetInput struct {
-	_ struct{} `type:"structure"`
-
-	// The user-defined name that identifies the assessment target that you want
-	// to create. The name must be unique within the AWS account.
-	//
-	// AssessmentTargetName is a required field
-	AssessmentTargetName *string `locationName:"assessmentTargetName" min:"1" type:"string" required:"true"`
-
-	// The ARN that specifies the resource group that is used to create the assessment
-	// target. If resourceGroupArn is not specified, all EC2 instances in the current
-	// AWS account and region are included in the assessment target.
-	ResourceGroupArn *string `locationName:"resourceGroupArn" min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s CreateAssessmentTargetInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateAssessmentTargetInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateAssessmentTargetInput"}
-
-	if s.AssessmentTargetName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("AssessmentTargetName"))
-	}
-	if s.AssessmentTargetName != nil && len(*s.AssessmentTargetName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("AssessmentTargetName", 1))
-	}
-	if s.ResourceGroupArn != nil && len(*s.ResourceGroupArn) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ResourceGroupArn", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type CreateAssessmentTargetOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The ARN that specifies the assessment target that is created.
-	//
-	// AssessmentTargetArn is a required field
-	AssessmentTargetArn *string `locationName:"assessmentTargetArn" min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s CreateAssessmentTargetOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCreateAssessmentTarget = "CreateAssessmentTarget"
 
@@ -86,7 +32,7 @@ const opCreateAssessmentTarget = "CreateAssessmentTarget"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/CreateAssessmentTarget
-func (c *Client) CreateAssessmentTargetRequest(input *CreateAssessmentTargetInput) CreateAssessmentTargetRequest {
+func (c *Client) CreateAssessmentTargetRequest(input *types.CreateAssessmentTargetInput) CreateAssessmentTargetRequest {
 	op := &aws.Operation{
 		Name:       opCreateAssessmentTarget,
 		HTTPMethod: "POST",
@@ -94,10 +40,10 @@ func (c *Client) CreateAssessmentTargetRequest(input *CreateAssessmentTargetInpu
 	}
 
 	if input == nil {
-		input = &CreateAssessmentTargetInput{}
+		input = &types.CreateAssessmentTargetInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateAssessmentTargetOutput{})
+	req := c.newRequest(op, input, &types.CreateAssessmentTargetOutput{})
 	return CreateAssessmentTargetRequest{Request: req, Input: input, Copy: c.CreateAssessmentTargetRequest}
 }
 
@@ -105,8 +51,8 @@ func (c *Client) CreateAssessmentTargetRequest(input *CreateAssessmentTargetInpu
 // CreateAssessmentTarget API operation.
 type CreateAssessmentTargetRequest struct {
 	*aws.Request
-	Input *CreateAssessmentTargetInput
-	Copy  func(*CreateAssessmentTargetInput) CreateAssessmentTargetRequest
+	Input *types.CreateAssessmentTargetInput
+	Copy  func(*types.CreateAssessmentTargetInput) CreateAssessmentTargetRequest
 }
 
 // Send marshals and sends the CreateAssessmentTarget API request.
@@ -118,7 +64,7 @@ func (r CreateAssessmentTargetRequest) Send(ctx context.Context) (*CreateAssessm
 	}
 
 	resp := &CreateAssessmentTargetResponse{
-		CreateAssessmentTargetOutput: r.Request.Data.(*CreateAssessmentTargetOutput),
+		CreateAssessmentTargetOutput: r.Request.Data.(*types.CreateAssessmentTargetOutput),
 		response:                     &aws.Response{Request: r.Request},
 	}
 
@@ -128,7 +74,7 @@ func (r CreateAssessmentTargetRequest) Send(ctx context.Context) (*CreateAssessm
 // CreateAssessmentTargetResponse is the response type for the
 // CreateAssessmentTarget API operation.
 type CreateAssessmentTargetResponse struct {
-	*CreateAssessmentTargetOutput
+	*types.CreateAssessmentTargetOutput
 
 	response *aws.Response
 }

@@ -6,114 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/securityhub/types"
 )
-
-type GetInsightsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ARNs of the insights that you want to describe.
-	InsightArns []string `type:"list"`
-
-	// The maximum number of items that you want in the response.
-	MaxResults *int64 `min:"1" type:"integer"`
-
-	// Paginates results. On your first call to the GetInsights operation, set the
-	// value of this parameter to NULL. For subsequent calls to the operation, fill
-	// nextToken in the request with the value of nextToken from the previous response
-	// to continue listing data.
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s GetInsightsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetInsightsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetInsightsInput"}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetInsightsInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.InsightArns != nil {
-		v := s.InsightArns
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "InsightArns", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
-		}
-		ls0.End()
-
-	}
-	if s.MaxResults != nil {
-		v := *s.MaxResults
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "MaxResults", protocol.Int64Value(v), metadata)
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type GetInsightsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The insights returned by the operation.
-	//
-	// Insights is a required field
-	Insights []Insight `type:"list" required:"true"`
-
-	// The token that is required for pagination.
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s GetInsightsOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetInsightsOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.Insights != nil {
-		v := s.Insights
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "Insights", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opGetInsights = "GetInsights"
 
@@ -130,7 +24,7 @@ const opGetInsights = "GetInsights"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/GetInsights
-func (c *Client) GetInsightsRequest(input *GetInsightsInput) GetInsightsRequest {
+func (c *Client) GetInsightsRequest(input *types.GetInsightsInput) GetInsightsRequest {
 	op := &aws.Operation{
 		Name:       opGetInsights,
 		HTTPMethod: "POST",
@@ -144,10 +38,10 @@ func (c *Client) GetInsightsRequest(input *GetInsightsInput) GetInsightsRequest 
 	}
 
 	if input == nil {
-		input = &GetInsightsInput{}
+		input = &types.GetInsightsInput{}
 	}
 
-	req := c.newRequest(op, input, &GetInsightsOutput{})
+	req := c.newRequest(op, input, &types.GetInsightsOutput{})
 	return GetInsightsRequest{Request: req, Input: input, Copy: c.GetInsightsRequest}
 }
 
@@ -155,8 +49,8 @@ func (c *Client) GetInsightsRequest(input *GetInsightsInput) GetInsightsRequest 
 // GetInsights API operation.
 type GetInsightsRequest struct {
 	*aws.Request
-	Input *GetInsightsInput
-	Copy  func(*GetInsightsInput) GetInsightsRequest
+	Input *types.GetInsightsInput
+	Copy  func(*types.GetInsightsInput) GetInsightsRequest
 }
 
 // Send marshals and sends the GetInsights API request.
@@ -168,7 +62,7 @@ func (r GetInsightsRequest) Send(ctx context.Context) (*GetInsightsResponse, err
 	}
 
 	resp := &GetInsightsResponse{
-		GetInsightsOutput: r.Request.Data.(*GetInsightsOutput),
+		GetInsightsOutput: r.Request.Data.(*types.GetInsightsOutput),
 		response:          &aws.Response{Request: r.Request},
 	}
 
@@ -198,7 +92,7 @@ func NewGetInsightsPaginator(req GetInsightsRequest) GetInsightsPaginator {
 	return GetInsightsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *GetInsightsInput
+				var inCpy *types.GetInsightsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -218,14 +112,14 @@ type GetInsightsPaginator struct {
 	aws.Pager
 }
 
-func (p *GetInsightsPaginator) CurrentPage() *GetInsightsOutput {
-	return p.Pager.CurrentPage().(*GetInsightsOutput)
+func (p *GetInsightsPaginator) CurrentPage() *types.GetInsightsOutput {
+	return p.Pager.CurrentPage().(*types.GetInsightsOutput)
 }
 
 // GetInsightsResponse is the response type for the
 // GetInsights API operation.
 type GetInsightsResponse struct {
-	*GetInsightsOutput
+	*types.GetInsightsOutput
 
 	response *aws.Response
 }

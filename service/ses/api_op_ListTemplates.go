@@ -6,45 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ses/types"
 )
-
-type ListTemplatesInput struct {
-	_ struct{} `type:"structure"`
-
-	// The maximum number of templates to return. This value must be at least 1
-	// and less than or equal to 10. If you do not specify a value, or if you specify
-	// a value less than 1 or greater than 10, the operation will return up to 10
-	// results.
-	MaxItems *int64 `type:"integer"`
-
-	// A token returned from a previous call to ListTemplates to indicate the position
-	// in the list of email templates.
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s ListTemplatesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type ListTemplatesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A token indicating that there are additional email templates available to
-	// be listed. Pass this token to a subsequent call to ListTemplates to retrieve
-	// the next 50 email templates.
-	NextToken *string `type:"string"`
-
-	// An array the contains the name and creation time stamp for each template
-	// in your Amazon SES account.
-	TemplatesMetadata []TemplateMetadata `type:"list"`
-}
-
-// String returns the string representation
-func (s ListTemplatesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListTemplates = "ListTemplates"
 
@@ -64,7 +27,7 @@ const opListTemplates = "ListTemplates"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/ListTemplates
-func (c *Client) ListTemplatesRequest(input *ListTemplatesInput) ListTemplatesRequest {
+func (c *Client) ListTemplatesRequest(input *types.ListTemplatesInput) ListTemplatesRequest {
 	op := &aws.Operation{
 		Name:       opListTemplates,
 		HTTPMethod: "POST",
@@ -72,10 +35,10 @@ func (c *Client) ListTemplatesRequest(input *ListTemplatesInput) ListTemplatesRe
 	}
 
 	if input == nil {
-		input = &ListTemplatesInput{}
+		input = &types.ListTemplatesInput{}
 	}
 
-	req := c.newRequest(op, input, &ListTemplatesOutput{})
+	req := c.newRequest(op, input, &types.ListTemplatesOutput{})
 	return ListTemplatesRequest{Request: req, Input: input, Copy: c.ListTemplatesRequest}
 }
 
@@ -83,8 +46,8 @@ func (c *Client) ListTemplatesRequest(input *ListTemplatesInput) ListTemplatesRe
 // ListTemplates API operation.
 type ListTemplatesRequest struct {
 	*aws.Request
-	Input *ListTemplatesInput
-	Copy  func(*ListTemplatesInput) ListTemplatesRequest
+	Input *types.ListTemplatesInput
+	Copy  func(*types.ListTemplatesInput) ListTemplatesRequest
 }
 
 // Send marshals and sends the ListTemplates API request.
@@ -96,7 +59,7 @@ func (r ListTemplatesRequest) Send(ctx context.Context) (*ListTemplatesResponse,
 	}
 
 	resp := &ListTemplatesResponse{
-		ListTemplatesOutput: r.Request.Data.(*ListTemplatesOutput),
+		ListTemplatesOutput: r.Request.Data.(*types.ListTemplatesOutput),
 		response:            &aws.Response{Request: r.Request},
 	}
 
@@ -106,7 +69,7 @@ func (r ListTemplatesRequest) Send(ctx context.Context) (*ListTemplatesResponse,
 // ListTemplatesResponse is the response type for the
 // ListTemplates API operation.
 type ListTemplatesResponse struct {
-	*ListTemplatesOutput
+	*types.ListTemplatesOutput
 
 	response *aws.Response
 }

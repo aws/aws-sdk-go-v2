@@ -6,72 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-type DescribeClientVpnAuthorizationRulesInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the Client VPN endpoint.
-	//
-	// ClientVpnEndpointId is a required field
-	ClientVpnEndpointId *string `type:"string" required:"true"`
-
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have
-	// the required permissions, the error response is DryRunOperation. Otherwise,
-	// it is UnauthorizedOperation.
-	DryRun *bool `type:"boolean"`
-
-	// One or more filters. Filter names and values are case-sensitive.
-	Filters []Filter `locationName:"Filter" locationNameList:"Filter" type:"list"`
-
-	// The maximum number of results to return for the request in a single page.
-	// The remaining results can be seen by sending another request with the nextToken
-	// value.
-	MaxResults *int64 `min:"5" type:"integer"`
-
-	// The token to retrieve the next page of results.
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeClientVpnAuthorizationRulesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeClientVpnAuthorizationRulesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeClientVpnAuthorizationRulesInput"}
-
-	if s.ClientVpnEndpointId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ClientVpnEndpointId"))
-	}
-	if s.MaxResults != nil && *s.MaxResults < 5 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 5))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribeClientVpnAuthorizationRulesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Information about the authorization rules.
-	AuthorizationRules []AuthorizationRule `locationName:"authorizationRule" locationNameList:"item" type:"list"`
-
-	// The token to use to retrieve the next page of results. This value is null
-	// when there are no more results to return.
-	NextToken *string `locationName:"nextToken" type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeClientVpnAuthorizationRulesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeClientVpnAuthorizationRules = "DescribeClientVpnAuthorizationRules"
 
@@ -88,7 +24,7 @@ const opDescribeClientVpnAuthorizationRules = "DescribeClientVpnAuthorizationRul
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeClientVpnAuthorizationRules
-func (c *Client) DescribeClientVpnAuthorizationRulesRequest(input *DescribeClientVpnAuthorizationRulesInput) DescribeClientVpnAuthorizationRulesRequest {
+func (c *Client) DescribeClientVpnAuthorizationRulesRequest(input *types.DescribeClientVpnAuthorizationRulesInput) DescribeClientVpnAuthorizationRulesRequest {
 	op := &aws.Operation{
 		Name:       opDescribeClientVpnAuthorizationRules,
 		HTTPMethod: "POST",
@@ -102,10 +38,10 @@ func (c *Client) DescribeClientVpnAuthorizationRulesRequest(input *DescribeClien
 	}
 
 	if input == nil {
-		input = &DescribeClientVpnAuthorizationRulesInput{}
+		input = &types.DescribeClientVpnAuthorizationRulesInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeClientVpnAuthorizationRulesOutput{})
+	req := c.newRequest(op, input, &types.DescribeClientVpnAuthorizationRulesOutput{})
 	return DescribeClientVpnAuthorizationRulesRequest{Request: req, Input: input, Copy: c.DescribeClientVpnAuthorizationRulesRequest}
 }
 
@@ -113,8 +49,8 @@ func (c *Client) DescribeClientVpnAuthorizationRulesRequest(input *DescribeClien
 // DescribeClientVpnAuthorizationRules API operation.
 type DescribeClientVpnAuthorizationRulesRequest struct {
 	*aws.Request
-	Input *DescribeClientVpnAuthorizationRulesInput
-	Copy  func(*DescribeClientVpnAuthorizationRulesInput) DescribeClientVpnAuthorizationRulesRequest
+	Input *types.DescribeClientVpnAuthorizationRulesInput
+	Copy  func(*types.DescribeClientVpnAuthorizationRulesInput) DescribeClientVpnAuthorizationRulesRequest
 }
 
 // Send marshals and sends the DescribeClientVpnAuthorizationRules API request.
@@ -126,7 +62,7 @@ func (r DescribeClientVpnAuthorizationRulesRequest) Send(ctx context.Context) (*
 	}
 
 	resp := &DescribeClientVpnAuthorizationRulesResponse{
-		DescribeClientVpnAuthorizationRulesOutput: r.Request.Data.(*DescribeClientVpnAuthorizationRulesOutput),
+		DescribeClientVpnAuthorizationRulesOutput: r.Request.Data.(*types.DescribeClientVpnAuthorizationRulesOutput),
 		response: &aws.Response{Request: r.Request},
 	}
 
@@ -156,7 +92,7 @@ func NewDescribeClientVpnAuthorizationRulesPaginator(req DescribeClientVpnAuthor
 	return DescribeClientVpnAuthorizationRulesPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *DescribeClientVpnAuthorizationRulesInput
+				var inCpy *types.DescribeClientVpnAuthorizationRulesInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -176,14 +112,14 @@ type DescribeClientVpnAuthorizationRulesPaginator struct {
 	aws.Pager
 }
 
-func (p *DescribeClientVpnAuthorizationRulesPaginator) CurrentPage() *DescribeClientVpnAuthorizationRulesOutput {
-	return p.Pager.CurrentPage().(*DescribeClientVpnAuthorizationRulesOutput)
+func (p *DescribeClientVpnAuthorizationRulesPaginator) CurrentPage() *types.DescribeClientVpnAuthorizationRulesOutput {
+	return p.Pager.CurrentPage().(*types.DescribeClientVpnAuthorizationRulesOutput)
 }
 
 // DescribeClientVpnAuthorizationRulesResponse is the response type for the
 // DescribeClientVpnAuthorizationRules API operation.
 type DescribeClientVpnAuthorizationRulesResponse struct {
-	*DescribeClientVpnAuthorizationRulesOutput
+	*types.DescribeClientVpnAuthorizationRulesOutput
 
 	response *aws.Response
 }

@@ -6,48 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/appstream/types"
 )
-
-type StopFleetInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the fleet.
-	//
-	// Name is a required field
-	Name *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s StopFleetInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *StopFleetInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "StopFleetInput"}
-
-	if s.Name == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Name"))
-	}
-	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type StopFleetOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s StopFleetOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opStopFleet = "StopFleet"
 
@@ -64,7 +24,7 @@ const opStopFleet = "StopFleet"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/StopFleet
-func (c *Client) StopFleetRequest(input *StopFleetInput) StopFleetRequest {
+func (c *Client) StopFleetRequest(input *types.StopFleetInput) StopFleetRequest {
 	op := &aws.Operation{
 		Name:       opStopFleet,
 		HTTPMethod: "POST",
@@ -72,10 +32,10 @@ func (c *Client) StopFleetRequest(input *StopFleetInput) StopFleetRequest {
 	}
 
 	if input == nil {
-		input = &StopFleetInput{}
+		input = &types.StopFleetInput{}
 	}
 
-	req := c.newRequest(op, input, &StopFleetOutput{})
+	req := c.newRequest(op, input, &types.StopFleetOutput{})
 	return StopFleetRequest{Request: req, Input: input, Copy: c.StopFleetRequest}
 }
 
@@ -83,8 +43,8 @@ func (c *Client) StopFleetRequest(input *StopFleetInput) StopFleetRequest {
 // StopFleet API operation.
 type StopFleetRequest struct {
 	*aws.Request
-	Input *StopFleetInput
-	Copy  func(*StopFleetInput) StopFleetRequest
+	Input *types.StopFleetInput
+	Copy  func(*types.StopFleetInput) StopFleetRequest
 }
 
 // Send marshals and sends the StopFleet API request.
@@ -96,7 +56,7 @@ func (r StopFleetRequest) Send(ctx context.Context) (*StopFleetResponse, error) 
 	}
 
 	resp := &StopFleetResponse{
-		StopFleetOutput: r.Request.Data.(*StopFleetOutput),
+		StopFleetOutput: r.Request.Data.(*types.StopFleetOutput),
 		response:        &aws.Response{Request: r.Request},
 	}
 
@@ -106,7 +66,7 @@ func (r StopFleetRequest) Send(ctx context.Context) (*StopFleetResponse, error) 
 // StopFleetResponse is the response type for the
 // StopFleet API operation.
 type StopFleetResponse struct {
-	*StopFleetOutput
+	*types.StopFleetOutput
 
 	response *aws.Response
 }

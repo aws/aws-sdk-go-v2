@@ -6,46 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/comprehend/types"
 )
-
-type StopTrainingDocumentClassifierInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) that identifies the document classifier currently
-	// being trained.
-	//
-	// DocumentClassifierArn is a required field
-	DocumentClassifierArn *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s StopTrainingDocumentClassifierInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *StopTrainingDocumentClassifierInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "StopTrainingDocumentClassifierInput"}
-
-	if s.DocumentClassifierArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DocumentClassifierArn"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type StopTrainingDocumentClassifierOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s StopTrainingDocumentClassifierOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opStopTrainingDocumentClassifier = "StopTrainingDocumentClassifier"
 
@@ -68,7 +30,7 @@ const opStopTrainingDocumentClassifier = "StopTrainingDocumentClassifier"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/StopTrainingDocumentClassifier
-func (c *Client) StopTrainingDocumentClassifierRequest(input *StopTrainingDocumentClassifierInput) StopTrainingDocumentClassifierRequest {
+func (c *Client) StopTrainingDocumentClassifierRequest(input *types.StopTrainingDocumentClassifierInput) StopTrainingDocumentClassifierRequest {
 	op := &aws.Operation{
 		Name:       opStopTrainingDocumentClassifier,
 		HTTPMethod: "POST",
@@ -76,10 +38,10 @@ func (c *Client) StopTrainingDocumentClassifierRequest(input *StopTrainingDocume
 	}
 
 	if input == nil {
-		input = &StopTrainingDocumentClassifierInput{}
+		input = &types.StopTrainingDocumentClassifierInput{}
 	}
 
-	req := c.newRequest(op, input, &StopTrainingDocumentClassifierOutput{})
+	req := c.newRequest(op, input, &types.StopTrainingDocumentClassifierOutput{})
 	return StopTrainingDocumentClassifierRequest{Request: req, Input: input, Copy: c.StopTrainingDocumentClassifierRequest}
 }
 
@@ -87,8 +49,8 @@ func (c *Client) StopTrainingDocumentClassifierRequest(input *StopTrainingDocume
 // StopTrainingDocumentClassifier API operation.
 type StopTrainingDocumentClassifierRequest struct {
 	*aws.Request
-	Input *StopTrainingDocumentClassifierInput
-	Copy  func(*StopTrainingDocumentClassifierInput) StopTrainingDocumentClassifierRequest
+	Input *types.StopTrainingDocumentClassifierInput
+	Copy  func(*types.StopTrainingDocumentClassifierInput) StopTrainingDocumentClassifierRequest
 }
 
 // Send marshals and sends the StopTrainingDocumentClassifier API request.
@@ -100,7 +62,7 @@ func (r StopTrainingDocumentClassifierRequest) Send(ctx context.Context) (*StopT
 	}
 
 	resp := &StopTrainingDocumentClassifierResponse{
-		StopTrainingDocumentClassifierOutput: r.Request.Data.(*StopTrainingDocumentClassifierOutput),
+		StopTrainingDocumentClassifierOutput: r.Request.Data.(*types.StopTrainingDocumentClassifierOutput),
 		response:                             &aws.Response{Request: r.Request},
 	}
 
@@ -110,7 +72,7 @@ func (r StopTrainingDocumentClassifierRequest) Send(ctx context.Context) (*StopT
 // StopTrainingDocumentClassifierResponse is the response type for the
 // StopTrainingDocumentClassifier API operation.
 type StopTrainingDocumentClassifierResponse struct {
-	*StopTrainingDocumentClassifierOutput
+	*types.StopTrainingDocumentClassifierOutput
 
 	response *aws.Response
 }

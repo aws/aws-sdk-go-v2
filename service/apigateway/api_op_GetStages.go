@@ -6,92 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/apigateway/types"
 )
-
-// Requests API Gateway to get information about one or more Stage resources.
-type GetStagesInput struct {
-	_ struct{} `type:"structure"`
-
-	// The stages' deployment identifiers.
-	DeploymentId *string `location:"querystring" locationName:"deploymentId" type:"string"`
-
-	// [Required] The string identifier of the associated RestApi.
-	//
-	// RestApiId is a required field
-	RestApiId *string `location:"uri" locationName:"restapi_id" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetStagesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetStagesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetStagesInput"}
-
-	if s.RestApiId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("RestApiId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetStagesInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.RestApiId != nil {
-		v := *s.RestApiId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "restapi_id", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.DeploymentId != nil {
-		v := *s.DeploymentId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "deploymentId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-// A list of Stage resources that are associated with the ApiKey resource.
-//
-// Deploying API in Stages (https://docs.aws.amazon.com/apigateway/latest/developerguide/stages.html)
-type GetStagesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The current page of elements from this collection.
-	Item []Stage `locationName:"item" type:"list"`
-}
-
-// String returns the string representation
-func (s GetStagesOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetStagesOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.Item != nil {
-		v := s.Item
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "item", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	return nil
-}
 
 const opGetStages = "GetStages"
 
@@ -106,7 +22,7 @@ const opGetStages = "GetStages"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) GetStagesRequest(input *GetStagesInput) GetStagesRequest {
+func (c *Client) GetStagesRequest(input *types.GetStagesInput) GetStagesRequest {
 	op := &aws.Operation{
 		Name:       opGetStages,
 		HTTPMethod: "GET",
@@ -114,10 +30,10 @@ func (c *Client) GetStagesRequest(input *GetStagesInput) GetStagesRequest {
 	}
 
 	if input == nil {
-		input = &GetStagesInput{}
+		input = &types.GetStagesInput{}
 	}
 
-	req := c.newRequest(op, input, &GetStagesOutput{})
+	req := c.newRequest(op, input, &types.GetStagesOutput{})
 	return GetStagesRequest{Request: req, Input: input, Copy: c.GetStagesRequest}
 }
 
@@ -125,8 +41,8 @@ func (c *Client) GetStagesRequest(input *GetStagesInput) GetStagesRequest {
 // GetStages API operation.
 type GetStagesRequest struct {
 	*aws.Request
-	Input *GetStagesInput
-	Copy  func(*GetStagesInput) GetStagesRequest
+	Input *types.GetStagesInput
+	Copy  func(*types.GetStagesInput) GetStagesRequest
 }
 
 // Send marshals and sends the GetStages API request.
@@ -138,7 +54,7 @@ func (r GetStagesRequest) Send(ctx context.Context) (*GetStagesResponse, error) 
 	}
 
 	resp := &GetStagesResponse{
-		GetStagesOutput: r.Request.Data.(*GetStagesOutput),
+		GetStagesOutput: r.Request.Data.(*types.GetStagesOutput),
 		response:        &aws.Response{Request: r.Request},
 	}
 
@@ -148,7 +64,7 @@ func (r GetStagesRequest) Send(ctx context.Context) (*GetStagesResponse, error) 
 // GetStagesResponse is the response type for the
 // GetStages API operation.
 type GetStagesResponse struct {
-	*GetStagesOutput
+	*types.GetStagesOutput
 
 	response *aws.Response
 }

@@ -4,51 +4,10 @@ package emr
 
 import (
 	"context"
-	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/emr/types"
 )
-
-// This input determines how the ListClusters action filters the list of clusters
-// that it returns.
-type ListClustersInput struct {
-	_ struct{} `type:"structure"`
-
-	// The cluster state filters to apply when listing clusters.
-	ClusterStates []ClusterState `type:"list"`
-
-	// The creation date and time beginning value filter for listing clusters.
-	CreatedAfter *time.Time `type:"timestamp"`
-
-	// The creation date and time end value filter for listing clusters.
-	CreatedBefore *time.Time `type:"timestamp"`
-
-	// The pagination token that indicates the next set of results to retrieve.
-	Marker *string `type:"string"`
-}
-
-// String returns the string representation
-func (s ListClustersInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// This contains a ClusterSummaryList with the cluster details; for example,
-// the cluster IDs, names, and status.
-type ListClustersOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The list of clusters for the account based on the given filters.
-	Clusters []ClusterSummary `type:"list"`
-
-	// The pagination token that indicates the next set of results to retrieve.
-	Marker *string `type:"string"`
-}
-
-// String returns the string representation
-func (s ListClustersOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListClusters = "ListClusters"
 
@@ -69,7 +28,7 @@ const opListClusters = "ListClusters"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/ListClusters
-func (c *Client) ListClustersRequest(input *ListClustersInput) ListClustersRequest {
+func (c *Client) ListClustersRequest(input *types.ListClustersInput) ListClustersRequest {
 	op := &aws.Operation{
 		Name:       opListClusters,
 		HTTPMethod: "POST",
@@ -83,10 +42,10 @@ func (c *Client) ListClustersRequest(input *ListClustersInput) ListClustersReque
 	}
 
 	if input == nil {
-		input = &ListClustersInput{}
+		input = &types.ListClustersInput{}
 	}
 
-	req := c.newRequest(op, input, &ListClustersOutput{})
+	req := c.newRequest(op, input, &types.ListClustersOutput{})
 	return ListClustersRequest{Request: req, Input: input, Copy: c.ListClustersRequest}
 }
 
@@ -94,8 +53,8 @@ func (c *Client) ListClustersRequest(input *ListClustersInput) ListClustersReque
 // ListClusters API operation.
 type ListClustersRequest struct {
 	*aws.Request
-	Input *ListClustersInput
-	Copy  func(*ListClustersInput) ListClustersRequest
+	Input *types.ListClustersInput
+	Copy  func(*types.ListClustersInput) ListClustersRequest
 }
 
 // Send marshals and sends the ListClusters API request.
@@ -107,7 +66,7 @@ func (r ListClustersRequest) Send(ctx context.Context) (*ListClustersResponse, e
 	}
 
 	resp := &ListClustersResponse{
-		ListClustersOutput: r.Request.Data.(*ListClustersOutput),
+		ListClustersOutput: r.Request.Data.(*types.ListClustersOutput),
 		response:           &aws.Response{Request: r.Request},
 	}
 
@@ -137,7 +96,7 @@ func NewListClustersPaginator(req ListClustersRequest) ListClustersPaginator {
 	return ListClustersPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListClustersInput
+				var inCpy *types.ListClustersInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -157,14 +116,14 @@ type ListClustersPaginator struct {
 	aws.Pager
 }
 
-func (p *ListClustersPaginator) CurrentPage() *ListClustersOutput {
-	return p.Pager.CurrentPage().(*ListClustersOutput)
+func (p *ListClustersPaginator) CurrentPage() *types.ListClustersOutput {
+	return p.Pager.CurrentPage().(*types.ListClustersOutput)
 }
 
 // ListClustersResponse is the response type for the
 // ListClusters API operation.
 type ListClustersResponse struct {
-	*ListClustersOutput
+	*types.ListClustersOutput
 
 	response *aws.Response
 }

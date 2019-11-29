@@ -4,103 +4,10 @@ package wafregional
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/service/waf"
+	"github.com/aws/aws-sdk-go-v2/service/wafregional/types"
 )
-
-type UpdateWebACLInput struct {
-	_ struct{} `type:"structure"`
-
-	// The value returned by the most recent call to GetChangeToken.
-	//
-	// ChangeToken is a required field
-	ChangeToken *string `min:"1" type:"string" required:"true"`
-
-	// A default action for the web ACL, either ALLOW or BLOCK. AWS WAF performs
-	// the default action if a request doesn't match the criteria in any of the
-	// rules in a web ACL.
-	DefaultAction *waf.WafAction `type:"structure"`
-
-	// An array of updates to make to the WebACL.
-	//
-	// An array of WebACLUpdate objects that you want to insert into or delete from
-	// a WebACL. For more information, see the applicable data types:
-	//
-	//    * WebACLUpdate: Contains Action and ActivatedRule
-	//
-	//    * ActivatedRule: Contains Action, OverrideAction, Priority, RuleId, and
-	//    Type. ActivatedRule|OverrideAction applies only when updating or adding
-	//    a RuleGroup to a WebACL. In this case, you do not use ActivatedRule|Action.
-	//    For all other update requests, ActivatedRule|Action is used instead of
-	//    ActivatedRule|OverrideAction.
-	//
-	//    * WafAction: Contains Type
-	Updates []waf.WebACLUpdate `type:"list"`
-
-	// The WebACLId of the WebACL that you want to update. WebACLId is returned
-	// by CreateWebACL and by ListWebACLs.
-	//
-	// WebACLId is a required field
-	WebACLId *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s UpdateWebACLInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateWebACLInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateWebACLInput"}
-
-	if s.ChangeToken == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ChangeToken"))
-	}
-	if s.ChangeToken != nil && len(*s.ChangeToken) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ChangeToken", 1))
-	}
-
-	if s.WebACLId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("WebACLId"))
-	}
-	if s.WebACLId != nil && len(*s.WebACLId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("WebACLId", 1))
-	}
-	if s.DefaultAction != nil {
-		if err := s.DefaultAction.Validate(); err != nil {
-			invalidParams.AddNested("DefaultAction", err.(aws.ErrInvalidParams))
-		}
-	}
-	if s.Updates != nil {
-		for i, v := range s.Updates {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Updates", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type UpdateWebACLOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The ChangeToken that you used to submit the UpdateWebACL request. You can
-	// also use this value to query the status of the request. For more information,
-	// see GetChangeTokenStatus.
-	ChangeToken *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s UpdateWebACLOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opUpdateWebACL = "UpdateWebACL"
 
@@ -172,7 +79,7 @@ const opUpdateWebACL = "UpdateWebACL"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/UpdateWebACL
-func (c *Client) UpdateWebACLRequest(input *UpdateWebACLInput) UpdateWebACLRequest {
+func (c *Client) UpdateWebACLRequest(input *types.UpdateWebACLInput) UpdateWebACLRequest {
 	op := &aws.Operation{
 		Name:       opUpdateWebACL,
 		HTTPMethod: "POST",
@@ -180,10 +87,10 @@ func (c *Client) UpdateWebACLRequest(input *UpdateWebACLInput) UpdateWebACLReque
 	}
 
 	if input == nil {
-		input = &UpdateWebACLInput{}
+		input = &types.UpdateWebACLInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateWebACLOutput{})
+	req := c.newRequest(op, input, &types.UpdateWebACLOutput{})
 	return UpdateWebACLRequest{Request: req, Input: input, Copy: c.UpdateWebACLRequest}
 }
 
@@ -191,8 +98,8 @@ func (c *Client) UpdateWebACLRequest(input *UpdateWebACLInput) UpdateWebACLReque
 // UpdateWebACL API operation.
 type UpdateWebACLRequest struct {
 	*aws.Request
-	Input *UpdateWebACLInput
-	Copy  func(*UpdateWebACLInput) UpdateWebACLRequest
+	Input *types.UpdateWebACLInput
+	Copy  func(*types.UpdateWebACLInput) UpdateWebACLRequest
 }
 
 // Send marshals and sends the UpdateWebACL API request.
@@ -204,7 +111,7 @@ func (r UpdateWebACLRequest) Send(ctx context.Context) (*UpdateWebACLResponse, e
 	}
 
 	resp := &UpdateWebACLResponse{
-		UpdateWebACLOutput: r.Request.Data.(*UpdateWebACLOutput),
+		UpdateWebACLOutput: r.Request.Data.(*types.UpdateWebACLOutput),
 		response:           &aws.Response{Request: r.Request},
 	}
 
@@ -214,7 +121,7 @@ func (r UpdateWebACLRequest) Send(ctx context.Context) (*UpdateWebACLResponse, e
 // UpdateWebACLResponse is the response type for the
 // UpdateWebACL API operation.
 type UpdateWebACLResponse struct {
-	*UpdateWebACLOutput
+	*types.UpdateWebACLOutput
 
 	response *aws.Response
 }

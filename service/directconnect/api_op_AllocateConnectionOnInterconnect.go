@@ -4,164 +4,10 @@ package directconnect
 
 import (
 	"context"
-	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/directconnect/types"
 )
-
-type AllocateConnectionOnInterconnectInput struct {
-	_ struct{} `type:"structure"`
-
-	// The bandwidth of the connection. The possible values are 50Mbps, 100Mbps,
-	// 200Mbps, 300Mbps, 400Mbps, 500Mbps, 1Gbps, 2Gbps, 5Gbps, and 10Gbps. Note
-	// that only those AWS Direct Connect Partners who have met specific requirements
-	// are allowed to create a 1Gbps, 2Gbps, 5Gbps or 10Gbps hosted connection.
-	//
-	// Bandwidth is a required field
-	Bandwidth *string `locationName:"bandwidth" type:"string" required:"true"`
-
-	// The name of the provisioned connection.
-	//
-	// ConnectionName is a required field
-	ConnectionName *string `locationName:"connectionName" type:"string" required:"true"`
-
-	// The ID of the interconnect on which the connection will be provisioned.
-	//
-	// InterconnectId is a required field
-	InterconnectId *string `locationName:"interconnectId" type:"string" required:"true"`
-
-	// The ID of the AWS account of the customer for whom the connection will be
-	// provisioned.
-	//
-	// OwnerAccount is a required field
-	OwnerAccount *string `locationName:"ownerAccount" type:"string" required:"true"`
-
-	// The dedicated VLAN provisioned to the connection.
-	//
-	// Vlan is a required field
-	Vlan *int64 `locationName:"vlan" type:"integer" required:"true"`
-}
-
-// String returns the string representation
-func (s AllocateConnectionOnInterconnectInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *AllocateConnectionOnInterconnectInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "AllocateConnectionOnInterconnectInput"}
-
-	if s.Bandwidth == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Bandwidth"))
-	}
-
-	if s.ConnectionName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ConnectionName"))
-	}
-
-	if s.InterconnectId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("InterconnectId"))
-	}
-
-	if s.OwnerAccount == nil {
-		invalidParams.Add(aws.NewErrParamRequired("OwnerAccount"))
-	}
-
-	if s.Vlan == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Vlan"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Information about an AWS Direct Connect connection.
-type AllocateConnectionOnInterconnectOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The Direct Connect endpoint on which the physical connection terminates.
-	AwsDevice *string `locationName:"awsDevice" deprecated:"true" type:"string"`
-
-	// The Direct Connect endpoint on which the physical connection terminates.
-	AwsDeviceV2 *string `locationName:"awsDeviceV2" type:"string"`
-
-	// The bandwidth of the connection.
-	Bandwidth *string `locationName:"bandwidth" type:"string"`
-
-	// The ID of the connection.
-	ConnectionId *string `locationName:"connectionId" type:"string"`
-
-	// The name of the connection.
-	ConnectionName *string `locationName:"connectionName" type:"string"`
-
-	// The state of the connection. The following are the possible values:
-	//
-	//    * ordering: The initial state of a hosted connection provisioned on an
-	//    interconnect. The connection stays in the ordering state until the owner
-	//    of the hosted connection confirms or declines the connection order.
-	//
-	//    * requested: The initial state of a standard connection. The connection
-	//    stays in the requested state until the Letter of Authorization (LOA) is
-	//    sent to the customer.
-	//
-	//    * pending: The connection has been approved and is being initialized.
-	//
-	//    * available: The network link is up and the connection is ready for use.
-	//
-	//    * down: The network link is down.
-	//
-	//    * deleting: The connection is being deleted.
-	//
-	//    * deleted: The connection has been deleted.
-	//
-	//    * rejected: A hosted connection in the ordering state enters the rejected
-	//    state if it is deleted by the customer.
-	//
-	//    * unknown: The state of the connection is not available.
-	ConnectionState ConnectionState `locationName:"connectionState" type:"string" enum:"true"`
-
-	// Indicates whether the connection supports a secondary BGP peer in the same
-	// address family (IPv4/IPv6).
-	HasLogicalRedundancy HasLogicalRedundancy `locationName:"hasLogicalRedundancy" type:"string" enum:"true"`
-
-	// Indicates whether jumbo frames (9001 MTU) are supported.
-	JumboFrameCapable *bool `locationName:"jumboFrameCapable" type:"boolean"`
-
-	// The ID of the LAG.
-	LagId *string `locationName:"lagId" type:"string"`
-
-	// The time of the most recent call to DescribeLoa for this connection.
-	LoaIssueTime *time.Time `locationName:"loaIssueTime" type:"timestamp"`
-
-	// The location of the connection.
-	Location *string `locationName:"location" type:"string"`
-
-	// The ID of the AWS account that owns the connection.
-	OwnerAccount *string `locationName:"ownerAccount" type:"string"`
-
-	// The name of the AWS Direct Connect service provider associated with the connection.
-	PartnerName *string `locationName:"partnerName" type:"string"`
-
-	// The name of the service provider associated with the connection.
-	ProviderName *string `locationName:"providerName" type:"string"`
-
-	// The AWS Region where the connection is located.
-	Region *string `locationName:"region" type:"string"`
-
-	// The tags associated with the connection.
-	Tags []Tag `locationName:"tags" min:"1" type:"list"`
-
-	// The ID of the VLAN.
-	Vlan *int64 `locationName:"vlan" type:"integer"`
-}
-
-// String returns the string representation
-func (s AllocateConnectionOnInterconnectOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opAllocateConnectionOnInterconnect = "AllocateConnectionOnInterconnect"
 
@@ -185,7 +31,7 @@ const opAllocateConnectionOnInterconnect = "AllocateConnectionOnInterconnect"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/AllocateConnectionOnInterconnect
-func (c *Client) AllocateConnectionOnInterconnectRequest(input *AllocateConnectionOnInterconnectInput) AllocateConnectionOnInterconnectRequest {
+func (c *Client) AllocateConnectionOnInterconnectRequest(input *types.AllocateConnectionOnInterconnectInput) AllocateConnectionOnInterconnectRequest {
 	if c.Client.Config.Logger != nil {
 		c.Client.Config.Logger.Log("This operation, AllocateConnectionOnInterconnect, has been deprecated")
 	}
@@ -196,10 +42,10 @@ func (c *Client) AllocateConnectionOnInterconnectRequest(input *AllocateConnecti
 	}
 
 	if input == nil {
-		input = &AllocateConnectionOnInterconnectInput{}
+		input = &types.AllocateConnectionOnInterconnectInput{}
 	}
 
-	req := c.newRequest(op, input, &AllocateConnectionOnInterconnectOutput{})
+	req := c.newRequest(op, input, &types.AllocateConnectionOnInterconnectOutput{})
 	return AllocateConnectionOnInterconnectRequest{Request: req, Input: input, Copy: c.AllocateConnectionOnInterconnectRequest}
 }
 
@@ -207,8 +53,8 @@ func (c *Client) AllocateConnectionOnInterconnectRequest(input *AllocateConnecti
 // AllocateConnectionOnInterconnect API operation.
 type AllocateConnectionOnInterconnectRequest struct {
 	*aws.Request
-	Input *AllocateConnectionOnInterconnectInput
-	Copy  func(*AllocateConnectionOnInterconnectInput) AllocateConnectionOnInterconnectRequest
+	Input *types.AllocateConnectionOnInterconnectInput
+	Copy  func(*types.AllocateConnectionOnInterconnectInput) AllocateConnectionOnInterconnectRequest
 }
 
 // Send marshals and sends the AllocateConnectionOnInterconnect API request.
@@ -220,7 +66,7 @@ func (r AllocateConnectionOnInterconnectRequest) Send(ctx context.Context) (*All
 	}
 
 	resp := &AllocateConnectionOnInterconnectResponse{
-		AllocateConnectionOnInterconnectOutput: r.Request.Data.(*AllocateConnectionOnInterconnectOutput),
+		AllocateConnectionOnInterconnectOutput: r.Request.Data.(*types.AllocateConnectionOnInterconnectOutput),
 		response:                               &aws.Response{Request: r.Request},
 	}
 
@@ -230,7 +76,7 @@ func (r AllocateConnectionOnInterconnectRequest) Send(ctx context.Context) (*All
 // AllocateConnectionOnInterconnectResponse is the response type for the
 // AllocateConnectionOnInterconnect API operation.
 type AllocateConnectionOnInterconnectResponse struct {
-	*AllocateConnectionOnInterconnectOutput
+	*types.AllocateConnectionOnInterconnectOutput
 
 	response *aws.Response
 }

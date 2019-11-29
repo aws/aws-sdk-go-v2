@@ -6,69 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/autoscaling/types"
 )
-
-type DescribeScalingActivitiesInput struct {
-	_ struct{} `type:"structure"`
-
-	// The activity IDs of the desired scaling activities. You can specify up to
-	// 50 IDs. If you omit this parameter, all activities for the past six weeks
-	// are described. If unknown activities are requested, they are ignored with
-	// no error. If you specify an Auto Scaling group, the results are limited to
-	// that group.
-	ActivityIds []string `type:"list"`
-
-	// The name of the Auto Scaling group.
-	AutoScalingGroupName *string `min:"1" type:"string"`
-
-	// The maximum number of items to return with this call. The default value is
-	// 100 and the maximum value is 100.
-	MaxRecords *int64 `type:"integer"`
-
-	// The token for the next set of items to return. (You received this token from
-	// a previous call.)
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeScalingActivitiesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeScalingActivitiesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeScalingActivitiesInput"}
-	if s.AutoScalingGroupName != nil && len(*s.AutoScalingGroupName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("AutoScalingGroupName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribeScalingActivitiesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The scaling activities. Activities are sorted by start time. Activities still
-	// in progress are described first.
-	//
-	// Activities is a required field
-	Activities []Activity `type:"list" required:"true"`
-
-	// A string that indicates that the response contains more items than can be
-	// returned in a single response. To receive additional items, specify this
-	// string for the NextToken value when requesting the next set of items. This
-	// value is null when there are no more items to return.
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeScalingActivitiesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeScalingActivities = "DescribeScalingActivities"
 
@@ -85,7 +24,7 @@ const opDescribeScalingActivities = "DescribeScalingActivities"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DescribeScalingActivities
-func (c *Client) DescribeScalingActivitiesRequest(input *DescribeScalingActivitiesInput) DescribeScalingActivitiesRequest {
+func (c *Client) DescribeScalingActivitiesRequest(input *types.DescribeScalingActivitiesInput) DescribeScalingActivitiesRequest {
 	op := &aws.Operation{
 		Name:       opDescribeScalingActivities,
 		HTTPMethod: "POST",
@@ -99,10 +38,10 @@ func (c *Client) DescribeScalingActivitiesRequest(input *DescribeScalingActiviti
 	}
 
 	if input == nil {
-		input = &DescribeScalingActivitiesInput{}
+		input = &types.DescribeScalingActivitiesInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeScalingActivitiesOutput{})
+	req := c.newRequest(op, input, &types.DescribeScalingActivitiesOutput{})
 	return DescribeScalingActivitiesRequest{Request: req, Input: input, Copy: c.DescribeScalingActivitiesRequest}
 }
 
@@ -110,8 +49,8 @@ func (c *Client) DescribeScalingActivitiesRequest(input *DescribeScalingActiviti
 // DescribeScalingActivities API operation.
 type DescribeScalingActivitiesRequest struct {
 	*aws.Request
-	Input *DescribeScalingActivitiesInput
-	Copy  func(*DescribeScalingActivitiesInput) DescribeScalingActivitiesRequest
+	Input *types.DescribeScalingActivitiesInput
+	Copy  func(*types.DescribeScalingActivitiesInput) DescribeScalingActivitiesRequest
 }
 
 // Send marshals and sends the DescribeScalingActivities API request.
@@ -123,7 +62,7 @@ func (r DescribeScalingActivitiesRequest) Send(ctx context.Context) (*DescribeSc
 	}
 
 	resp := &DescribeScalingActivitiesResponse{
-		DescribeScalingActivitiesOutput: r.Request.Data.(*DescribeScalingActivitiesOutput),
+		DescribeScalingActivitiesOutput: r.Request.Data.(*types.DescribeScalingActivitiesOutput),
 		response:                        &aws.Response{Request: r.Request},
 	}
 
@@ -153,7 +92,7 @@ func NewDescribeScalingActivitiesPaginator(req DescribeScalingActivitiesRequest)
 	return DescribeScalingActivitiesPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *DescribeScalingActivitiesInput
+				var inCpy *types.DescribeScalingActivitiesInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -173,14 +112,14 @@ type DescribeScalingActivitiesPaginator struct {
 	aws.Pager
 }
 
-func (p *DescribeScalingActivitiesPaginator) CurrentPage() *DescribeScalingActivitiesOutput {
-	return p.Pager.CurrentPage().(*DescribeScalingActivitiesOutput)
+func (p *DescribeScalingActivitiesPaginator) CurrentPage() *types.DescribeScalingActivitiesOutput {
+	return p.Pager.CurrentPage().(*types.DescribeScalingActivitiesOutput)
 }
 
 // DescribeScalingActivitiesResponse is the response type for the
 // DescribeScalingActivities API operation.
 type DescribeScalingActivitiesResponse struct {
-	*DescribeScalingActivitiesOutput
+	*types.DescribeScalingActivitiesOutput
 
 	response *aws.Response
 }

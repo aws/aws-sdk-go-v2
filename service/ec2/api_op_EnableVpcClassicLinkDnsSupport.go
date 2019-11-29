@@ -6,32 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-type EnableVpcClassicLinkDnsSupportInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the VPC.
-	VpcId *string `type:"string"`
-}
-
-// String returns the string representation
-func (s EnableVpcClassicLinkDnsSupportInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type EnableVpcClassicLinkDnsSupportOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Returns true if the request succeeds; otherwise, it returns an error.
-	Return *bool `locationName:"return" type:"boolean"`
-}
-
-// String returns the string representation
-func (s EnableVpcClassicLinkDnsSupportOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opEnableVpcClassicLinkDnsSupport = "EnableVpcClassicLinkDnsSupport"
 
@@ -54,7 +30,7 @@ const opEnableVpcClassicLinkDnsSupport = "EnableVpcClassicLinkDnsSupport"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/EnableVpcClassicLinkDnsSupport
-func (c *Client) EnableVpcClassicLinkDnsSupportRequest(input *EnableVpcClassicLinkDnsSupportInput) EnableVpcClassicLinkDnsSupportRequest {
+func (c *Client) EnableVpcClassicLinkDnsSupportRequest(input *types.EnableVpcClassicLinkDnsSupportInput) EnableVpcClassicLinkDnsSupportRequest {
 	op := &aws.Operation{
 		Name:       opEnableVpcClassicLinkDnsSupport,
 		HTTPMethod: "POST",
@@ -62,10 +38,10 @@ func (c *Client) EnableVpcClassicLinkDnsSupportRequest(input *EnableVpcClassicLi
 	}
 
 	if input == nil {
-		input = &EnableVpcClassicLinkDnsSupportInput{}
+		input = &types.EnableVpcClassicLinkDnsSupportInput{}
 	}
 
-	req := c.newRequest(op, input, &EnableVpcClassicLinkDnsSupportOutput{})
+	req := c.newRequest(op, input, &types.EnableVpcClassicLinkDnsSupportOutput{})
 	return EnableVpcClassicLinkDnsSupportRequest{Request: req, Input: input, Copy: c.EnableVpcClassicLinkDnsSupportRequest}
 }
 
@@ -73,8 +49,8 @@ func (c *Client) EnableVpcClassicLinkDnsSupportRequest(input *EnableVpcClassicLi
 // EnableVpcClassicLinkDnsSupport API operation.
 type EnableVpcClassicLinkDnsSupportRequest struct {
 	*aws.Request
-	Input *EnableVpcClassicLinkDnsSupportInput
-	Copy  func(*EnableVpcClassicLinkDnsSupportInput) EnableVpcClassicLinkDnsSupportRequest
+	Input *types.EnableVpcClassicLinkDnsSupportInput
+	Copy  func(*types.EnableVpcClassicLinkDnsSupportInput) EnableVpcClassicLinkDnsSupportRequest
 }
 
 // Send marshals and sends the EnableVpcClassicLinkDnsSupport API request.
@@ -86,7 +62,7 @@ func (r EnableVpcClassicLinkDnsSupportRequest) Send(ctx context.Context) (*Enabl
 	}
 
 	resp := &EnableVpcClassicLinkDnsSupportResponse{
-		EnableVpcClassicLinkDnsSupportOutput: r.Request.Data.(*EnableVpcClassicLinkDnsSupportOutput),
+		EnableVpcClassicLinkDnsSupportOutput: r.Request.Data.(*types.EnableVpcClassicLinkDnsSupportOutput),
 		response:                             &aws.Response{Request: r.Request},
 	}
 
@@ -96,7 +72,7 @@ func (r EnableVpcClassicLinkDnsSupportRequest) Send(ctx context.Context) (*Enabl
 // EnableVpcClassicLinkDnsSupportResponse is the response type for the
 // EnableVpcClassicLinkDnsSupport API operation.
 type EnableVpcClassicLinkDnsSupportResponse struct {
-	*EnableVpcClassicLinkDnsSupportOutput
+	*types.EnableVpcClassicLinkDnsSupportOutput
 
 	response *aws.Response
 }

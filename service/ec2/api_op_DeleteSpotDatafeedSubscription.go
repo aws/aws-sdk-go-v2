@@ -6,35 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/ec2query"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-// Contains the parameters for DeleteSpotDatafeedSubscription.
-type DeleteSpotDatafeedSubscriptionInput struct {
-	_ struct{} `type:"structure"`
-
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have
-	// the required permissions, the error response is DryRunOperation. Otherwise,
-	// it is UnauthorizedOperation.
-	DryRun *bool `locationName:"dryRun" type:"boolean"`
-}
-
-// String returns the string representation
-func (s DeleteSpotDatafeedSubscriptionInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type DeleteSpotDatafeedSubscriptionOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteSpotDatafeedSubscriptionOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteSpotDatafeedSubscription = "DeleteSpotDatafeedSubscription"
 
@@ -51,7 +26,7 @@ const opDeleteSpotDatafeedSubscription = "DeleteSpotDatafeedSubscription"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteSpotDatafeedSubscription
-func (c *Client) DeleteSpotDatafeedSubscriptionRequest(input *DeleteSpotDatafeedSubscriptionInput) DeleteSpotDatafeedSubscriptionRequest {
+func (c *Client) DeleteSpotDatafeedSubscriptionRequest(input *types.DeleteSpotDatafeedSubscriptionInput) DeleteSpotDatafeedSubscriptionRequest {
 	op := &aws.Operation{
 		Name:       opDeleteSpotDatafeedSubscription,
 		HTTPMethod: "POST",
@@ -59,10 +34,10 @@ func (c *Client) DeleteSpotDatafeedSubscriptionRequest(input *DeleteSpotDatafeed
 	}
 
 	if input == nil {
-		input = &DeleteSpotDatafeedSubscriptionInput{}
+		input = &types.DeleteSpotDatafeedSubscriptionInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteSpotDatafeedSubscriptionOutput{})
+	req := c.newRequest(op, input, &types.DeleteSpotDatafeedSubscriptionOutput{})
 	req.Handlers.Unmarshal.Remove(ec2query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return DeleteSpotDatafeedSubscriptionRequest{Request: req, Input: input, Copy: c.DeleteSpotDatafeedSubscriptionRequest}
@@ -72,8 +47,8 @@ func (c *Client) DeleteSpotDatafeedSubscriptionRequest(input *DeleteSpotDatafeed
 // DeleteSpotDatafeedSubscription API operation.
 type DeleteSpotDatafeedSubscriptionRequest struct {
 	*aws.Request
-	Input *DeleteSpotDatafeedSubscriptionInput
-	Copy  func(*DeleteSpotDatafeedSubscriptionInput) DeleteSpotDatafeedSubscriptionRequest
+	Input *types.DeleteSpotDatafeedSubscriptionInput
+	Copy  func(*types.DeleteSpotDatafeedSubscriptionInput) DeleteSpotDatafeedSubscriptionRequest
 }
 
 // Send marshals and sends the DeleteSpotDatafeedSubscription API request.
@@ -85,7 +60,7 @@ func (r DeleteSpotDatafeedSubscriptionRequest) Send(ctx context.Context) (*Delet
 	}
 
 	resp := &DeleteSpotDatafeedSubscriptionResponse{
-		DeleteSpotDatafeedSubscriptionOutput: r.Request.Data.(*DeleteSpotDatafeedSubscriptionOutput),
+		DeleteSpotDatafeedSubscriptionOutput: r.Request.Data.(*types.DeleteSpotDatafeedSubscriptionOutput),
 		response:                             &aws.Response{Request: r.Request},
 	}
 
@@ -95,7 +70,7 @@ func (r DeleteSpotDatafeedSubscriptionRequest) Send(ctx context.Context) (*Delet
 // DeleteSpotDatafeedSubscriptionResponse is the response type for the
 // DeleteSpotDatafeedSubscription API operation.
 type DeleteSpotDatafeedSubscriptionResponse struct {
-	*DeleteSpotDatafeedSubscriptionOutput
+	*types.DeleteSpotDatafeedSubscriptionOutput
 
 	response *aws.Response
 }

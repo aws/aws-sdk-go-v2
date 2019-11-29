@@ -6,133 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/lexmodelbuildingservice/types"
 )
-
-type GetUtterancesViewInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the bot for which utterance information should be returned.
-	//
-	// BotName is a required field
-	BotName *string `location:"uri" locationName:"botname" min:"2" type:"string" required:"true"`
-
-	// An array of bot versions for which utterance information should be returned.
-	// The limit is 5 versions per request.
-	//
-	// BotVersions is a required field
-	BotVersions []string `location:"querystring" locationName:"bot_versions" min:"1" type:"list" required:"true"`
-
-	// To return utterances that were recognized and handled, useDetected. To return
-	// utterances that were not recognized, use Missed.
-	//
-	// StatusType is a required field
-	StatusType StatusType `location:"querystring" locationName:"status_type" type:"string" required:"true" enum:"true"`
-}
-
-// String returns the string representation
-func (s GetUtterancesViewInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetUtterancesViewInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetUtterancesViewInput"}
-
-	if s.BotName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("BotName"))
-	}
-	if s.BotName != nil && len(*s.BotName) < 2 {
-		invalidParams.Add(aws.NewErrParamMinLen("BotName", 2))
-	}
-
-	if s.BotVersions == nil {
-		invalidParams.Add(aws.NewErrParamRequired("BotVersions"))
-	}
-	if s.BotVersions != nil && len(s.BotVersions) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("BotVersions", 1))
-	}
-	if len(s.StatusType) == 0 {
-		invalidParams.Add(aws.NewErrParamRequired("StatusType"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetUtterancesViewInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.BotName != nil {
-		v := *s.BotName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "botname", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.BotVersions != nil {
-		v := s.BotVersions
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.QueryTarget, "bot_versions", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
-		}
-		ls0.End()
-
-	}
-	if len(s.StatusType) > 0 {
-		v := s.StatusType
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "status_type", protocol.QuotedValue{ValueMarshaler: v}, metadata)
-	}
-	return nil
-}
-
-type GetUtterancesViewOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the bot for which utterance information was returned.
-	BotName *string `locationName:"botName" min:"2" type:"string"`
-
-	// An array of UtteranceList objects, each containing a list of UtteranceData
-	// objects describing the utterances that were processed by your bot. The response
-	// contains a maximum of 100 UtteranceData objects for each version.
-	Utterances []UtteranceList `locationName:"utterances" type:"list"`
-}
-
-// String returns the string representation
-func (s GetUtterancesViewOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetUtterancesViewOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.BotName != nil {
-		v := *s.BotName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "botName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Utterances != nil {
-		v := s.Utterances
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "utterances", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	return nil
-}
 
 const opGetUtterancesView = "GetUtterancesView"
 
@@ -169,7 +44,7 @@ const opGetUtterancesView = "GetUtterancesView"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/GetUtterancesView
-func (c *Client) GetUtterancesViewRequest(input *GetUtterancesViewInput) GetUtterancesViewRequest {
+func (c *Client) GetUtterancesViewRequest(input *types.GetUtterancesViewInput) GetUtterancesViewRequest {
 	op := &aws.Operation{
 		Name:       opGetUtterancesView,
 		HTTPMethod: "GET",
@@ -177,10 +52,10 @@ func (c *Client) GetUtterancesViewRequest(input *GetUtterancesViewInput) GetUtte
 	}
 
 	if input == nil {
-		input = &GetUtterancesViewInput{}
+		input = &types.GetUtterancesViewInput{}
 	}
 
-	req := c.newRequest(op, input, &GetUtterancesViewOutput{})
+	req := c.newRequest(op, input, &types.GetUtterancesViewOutput{})
 	return GetUtterancesViewRequest{Request: req, Input: input, Copy: c.GetUtterancesViewRequest}
 }
 
@@ -188,8 +63,8 @@ func (c *Client) GetUtterancesViewRequest(input *GetUtterancesViewInput) GetUtte
 // GetUtterancesView API operation.
 type GetUtterancesViewRequest struct {
 	*aws.Request
-	Input *GetUtterancesViewInput
-	Copy  func(*GetUtterancesViewInput) GetUtterancesViewRequest
+	Input *types.GetUtterancesViewInput
+	Copy  func(*types.GetUtterancesViewInput) GetUtterancesViewRequest
 }
 
 // Send marshals and sends the GetUtterancesView API request.
@@ -201,7 +76,7 @@ func (r GetUtterancesViewRequest) Send(ctx context.Context) (*GetUtterancesViewR
 	}
 
 	resp := &GetUtterancesViewResponse{
-		GetUtterancesViewOutput: r.Request.Data.(*GetUtterancesViewOutput),
+		GetUtterancesViewOutput: r.Request.Data.(*types.GetUtterancesViewOutput),
 		response:                &aws.Response{Request: r.Request},
 	}
 
@@ -211,7 +86,7 @@ func (r GetUtterancesViewRequest) Send(ctx context.Context) (*GetUtterancesViewR
 // GetUtterancesViewResponse is the response type for the
 // GetUtterancesView API operation.
 type GetUtterancesViewResponse struct {
-	*GetUtterancesViewOutput
+	*types.GetUtterancesViewOutput
 
 	response *aws.Response
 }

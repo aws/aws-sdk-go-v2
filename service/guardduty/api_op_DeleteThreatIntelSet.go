@@ -6,82 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/guardduty/types"
 )
-
-type DeleteThreatIntelSetInput struct {
-	_ struct{} `type:"structure"`
-
-	// The unique ID of the detector the threatIntelSet is associated with.
-	//
-	// DetectorId is a required field
-	DetectorId *string `location:"uri" locationName:"detectorId" min:"1" type:"string" required:"true"`
-
-	// The unique ID of the threatIntelSet you want to delete.
-	//
-	// ThreatIntelSetId is a required field
-	ThreatIntelSetId *string `location:"uri" locationName:"threatIntelSetId" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteThreatIntelSetInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteThreatIntelSetInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteThreatIntelSetInput"}
-
-	if s.DetectorId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DetectorId"))
-	}
-	if s.DetectorId != nil && len(*s.DetectorId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("DetectorId", 1))
-	}
-
-	if s.ThreatIntelSetId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ThreatIntelSetId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteThreatIntelSetInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.DetectorId != nil {
-		v := *s.DetectorId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "detectorId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.ThreatIntelSetId != nil {
-		v := *s.ThreatIntelSetId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "threatIntelSetId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type DeleteThreatIntelSetOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteThreatIntelSetOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteThreatIntelSetOutput) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
 
 const opDeleteThreatIntelSet = "DeleteThreatIntelSet"
 
@@ -98,7 +24,7 @@ const opDeleteThreatIntelSet = "DeleteThreatIntelSet"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DeleteThreatIntelSet
-func (c *Client) DeleteThreatIntelSetRequest(input *DeleteThreatIntelSetInput) DeleteThreatIntelSetRequest {
+func (c *Client) DeleteThreatIntelSetRequest(input *types.DeleteThreatIntelSetInput) DeleteThreatIntelSetRequest {
 	op := &aws.Operation{
 		Name:       opDeleteThreatIntelSet,
 		HTTPMethod: "DELETE",
@@ -106,10 +32,10 @@ func (c *Client) DeleteThreatIntelSetRequest(input *DeleteThreatIntelSetInput) D
 	}
 
 	if input == nil {
-		input = &DeleteThreatIntelSetInput{}
+		input = &types.DeleteThreatIntelSetInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteThreatIntelSetOutput{})
+	req := c.newRequest(op, input, &types.DeleteThreatIntelSetOutput{})
 	return DeleteThreatIntelSetRequest{Request: req, Input: input, Copy: c.DeleteThreatIntelSetRequest}
 }
 
@@ -117,8 +43,8 @@ func (c *Client) DeleteThreatIntelSetRequest(input *DeleteThreatIntelSetInput) D
 // DeleteThreatIntelSet API operation.
 type DeleteThreatIntelSetRequest struct {
 	*aws.Request
-	Input *DeleteThreatIntelSetInput
-	Copy  func(*DeleteThreatIntelSetInput) DeleteThreatIntelSetRequest
+	Input *types.DeleteThreatIntelSetInput
+	Copy  func(*types.DeleteThreatIntelSetInput) DeleteThreatIntelSetRequest
 }
 
 // Send marshals and sends the DeleteThreatIntelSet API request.
@@ -130,7 +56,7 @@ func (r DeleteThreatIntelSetRequest) Send(ctx context.Context) (*DeleteThreatInt
 	}
 
 	resp := &DeleteThreatIntelSetResponse{
-		DeleteThreatIntelSetOutput: r.Request.Data.(*DeleteThreatIntelSetOutput),
+		DeleteThreatIntelSetOutput: r.Request.Data.(*types.DeleteThreatIntelSetOutput),
 		response:                   &aws.Response{Request: r.Request},
 	}
 
@@ -140,7 +66,7 @@ func (r DeleteThreatIntelSetRequest) Send(ctx context.Context) (*DeleteThreatInt
 // DeleteThreatIntelSetResponse is the response type for the
 // DeleteThreatIntelSet API operation.
 type DeleteThreatIntelSetResponse struct {
-	*DeleteThreatIntelSetOutput
+	*types.DeleteThreatIntelSetOutput
 
 	response *aws.Response
 }

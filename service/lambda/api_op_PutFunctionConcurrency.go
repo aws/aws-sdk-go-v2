@@ -6,103 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/lambda/types"
 )
-
-type PutFunctionConcurrencyInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the Lambda function.
-	//
-	// Name formats
-	//
-	//    * Function name - my-function.
-	//
-	//    * Function ARN - arn:aws:lambda:us-west-2:123456789012:function:my-function.
-	//
-	//    * Partial ARN - 123456789012:function:my-function.
-	//
-	// The length constraint applies only to the full ARN. If you specify only the
-	// function name, it is limited to 64 characters in length.
-	//
-	// FunctionName is a required field
-	FunctionName *string `location:"uri" locationName:"FunctionName" min:"1" type:"string" required:"true"`
-
-	// The number of simultaneous executions to reserve for the function.
-	//
-	// ReservedConcurrentExecutions is a required field
-	ReservedConcurrentExecutions *int64 `type:"integer" required:"true"`
-}
-
-// String returns the string representation
-func (s PutFunctionConcurrencyInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *PutFunctionConcurrencyInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "PutFunctionConcurrencyInput"}
-
-	if s.FunctionName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("FunctionName"))
-	}
-	if s.FunctionName != nil && len(*s.FunctionName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("FunctionName", 1))
-	}
-
-	if s.ReservedConcurrentExecutions == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ReservedConcurrentExecutions"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s PutFunctionConcurrencyInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.ReservedConcurrentExecutions != nil {
-		v := *s.ReservedConcurrentExecutions
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "ReservedConcurrentExecutions", protocol.Int64Value(v), metadata)
-	}
-	if s.FunctionName != nil {
-		v := *s.FunctionName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "FunctionName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type PutFunctionConcurrencyOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The number of concurrent executions that are reserved for this function.
-	// For more information, see Managing Concurrency (https://docs.aws.amazon.com/lambda/latest/dg/concurrent-executions.html).
-	ReservedConcurrentExecutions *int64 `type:"integer"`
-}
-
-// String returns the string representation
-func (s PutFunctionConcurrencyOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s PutFunctionConcurrencyOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.ReservedConcurrentExecutions != nil {
-		v := *s.ReservedConcurrentExecutions
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "ReservedConcurrentExecutions", protocol.Int64Value(v), metadata)
-	}
-	return nil
-}
 
 const opPutFunctionConcurrency = "PutFunctionConcurrency"
 
@@ -132,7 +37,7 @@ const opPutFunctionConcurrency = "PutFunctionConcurrency"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/PutFunctionConcurrency
-func (c *Client) PutFunctionConcurrencyRequest(input *PutFunctionConcurrencyInput) PutFunctionConcurrencyRequest {
+func (c *Client) PutFunctionConcurrencyRequest(input *types.PutFunctionConcurrencyInput) PutFunctionConcurrencyRequest {
 	op := &aws.Operation{
 		Name:       opPutFunctionConcurrency,
 		HTTPMethod: "PUT",
@@ -140,10 +45,10 @@ func (c *Client) PutFunctionConcurrencyRequest(input *PutFunctionConcurrencyInpu
 	}
 
 	if input == nil {
-		input = &PutFunctionConcurrencyInput{}
+		input = &types.PutFunctionConcurrencyInput{}
 	}
 
-	req := c.newRequest(op, input, &PutFunctionConcurrencyOutput{})
+	req := c.newRequest(op, input, &types.PutFunctionConcurrencyOutput{})
 	return PutFunctionConcurrencyRequest{Request: req, Input: input, Copy: c.PutFunctionConcurrencyRequest}
 }
 
@@ -151,8 +56,8 @@ func (c *Client) PutFunctionConcurrencyRequest(input *PutFunctionConcurrencyInpu
 // PutFunctionConcurrency API operation.
 type PutFunctionConcurrencyRequest struct {
 	*aws.Request
-	Input *PutFunctionConcurrencyInput
-	Copy  func(*PutFunctionConcurrencyInput) PutFunctionConcurrencyRequest
+	Input *types.PutFunctionConcurrencyInput
+	Copy  func(*types.PutFunctionConcurrencyInput) PutFunctionConcurrencyRequest
 }
 
 // Send marshals and sends the PutFunctionConcurrency API request.
@@ -164,7 +69,7 @@ func (r PutFunctionConcurrencyRequest) Send(ctx context.Context) (*PutFunctionCo
 	}
 
 	resp := &PutFunctionConcurrencyResponse{
-		PutFunctionConcurrencyOutput: r.Request.Data.(*PutFunctionConcurrencyOutput),
+		PutFunctionConcurrencyOutput: r.Request.Data.(*types.PutFunctionConcurrencyOutput),
 		response:                     &aws.Response{Request: r.Request},
 	}
 
@@ -174,7 +79,7 @@ func (r PutFunctionConcurrencyRequest) Send(ctx context.Context) (*PutFunctionCo
 // PutFunctionConcurrencyResponse is the response type for the
 // PutFunctionConcurrency API operation.
 type PutFunctionConcurrencyResponse struct {
-	*PutFunctionConcurrencyOutput
+	*types.PutFunctionConcurrencyOutput
 
 	response *aws.Response
 }

@@ -6,63 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
 )
-
-type ListTagsInput struct {
-	_ struct{} `type:"structure"`
-
-	// Maximum number of tags to return.
-	MaxResults *int64 `min:"50" type:"integer"`
-
-	// If the response to the previous ListTags request is truncated, Amazon SageMaker
-	// returns this token. To retrieve the next set of tags, use it in the subsequent
-	// request.
-	NextToken *string `type:"string"`
-
-	// The Amazon Resource Name (ARN) of the resource whose tags you want to retrieve.
-	//
-	// ResourceArn is a required field
-	ResourceArn *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s ListTagsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListTagsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListTagsInput"}
-	if s.MaxResults != nil && *s.MaxResults < 50 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 50))
-	}
-
-	if s.ResourceArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ResourceArn"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ListTagsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// If response is truncated, Amazon SageMaker includes a token in the response.
-	// You can use this token in your subsequent request to fetch next set of tokens.
-	NextToken *string `type:"string"`
-
-	// An array of Tag objects, each with a tag key and a value.
-	Tags []Tag `type:"list"`
-}
-
-// String returns the string representation
-func (s ListTagsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListTags = "ListTags"
 
@@ -79,7 +24,7 @@ const opListTags = "ListTags"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListTags
-func (c *Client) ListTagsRequest(input *ListTagsInput) ListTagsRequest {
+func (c *Client) ListTagsRequest(input *types.ListTagsInput) ListTagsRequest {
 	op := &aws.Operation{
 		Name:       opListTags,
 		HTTPMethod: "POST",
@@ -93,10 +38,10 @@ func (c *Client) ListTagsRequest(input *ListTagsInput) ListTagsRequest {
 	}
 
 	if input == nil {
-		input = &ListTagsInput{}
+		input = &types.ListTagsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListTagsOutput{})
+	req := c.newRequest(op, input, &types.ListTagsOutput{})
 	return ListTagsRequest{Request: req, Input: input, Copy: c.ListTagsRequest}
 }
 
@@ -104,8 +49,8 @@ func (c *Client) ListTagsRequest(input *ListTagsInput) ListTagsRequest {
 // ListTags API operation.
 type ListTagsRequest struct {
 	*aws.Request
-	Input *ListTagsInput
-	Copy  func(*ListTagsInput) ListTagsRequest
+	Input *types.ListTagsInput
+	Copy  func(*types.ListTagsInput) ListTagsRequest
 }
 
 // Send marshals and sends the ListTags API request.
@@ -117,7 +62,7 @@ func (r ListTagsRequest) Send(ctx context.Context) (*ListTagsResponse, error) {
 	}
 
 	resp := &ListTagsResponse{
-		ListTagsOutput: r.Request.Data.(*ListTagsOutput),
+		ListTagsOutput: r.Request.Data.(*types.ListTagsOutput),
 		response:       &aws.Response{Request: r.Request},
 	}
 
@@ -147,7 +92,7 @@ func NewListTagsPaginator(req ListTagsRequest) ListTagsPaginator {
 	return ListTagsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListTagsInput
+				var inCpy *types.ListTagsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -167,14 +112,14 @@ type ListTagsPaginator struct {
 	aws.Pager
 }
 
-func (p *ListTagsPaginator) CurrentPage() *ListTagsOutput {
-	return p.Pager.CurrentPage().(*ListTagsOutput)
+func (p *ListTagsPaginator) CurrentPage() *types.ListTagsOutput {
+	return p.Pager.CurrentPage().(*types.ListTagsOutput)
 }
 
 // ListTagsResponse is the response type for the
 // ListTags API operation.
 type ListTagsResponse struct {
-	*ListTagsOutput
+	*types.ListTagsOutput
 
 	response *aws.Response
 }

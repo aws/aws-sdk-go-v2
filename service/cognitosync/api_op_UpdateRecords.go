@@ -4,187 +4,10 @@ package cognitosync
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/cognitosync/types"
 )
-
-// A request to post updates to records or add and delete records for a dataset
-// and user.
-type UpdateRecordsInput struct {
-	_ struct{} `type:"structure"`
-
-	// Intended to supply a device ID that will populate the lastModifiedBy field
-	// referenced in other methods. The ClientContext field is not yet implemented.
-	ClientContext *string `location:"header" locationName:"x-amz-Client-Context" type:"string"`
-
-	// A string of up to 128 characters. Allowed characters are a-z, A-Z, 0-9, '_'
-	// (underscore), '-' (dash), and '.' (dot).
-	//
-	// DatasetName is a required field
-	DatasetName *string `location:"uri" locationName:"DatasetName" min:"1" type:"string" required:"true"`
-
-	// The unique ID generated for this device by Cognito.
-	DeviceId *string `min:"1" type:"string"`
-
-	// A name-spaced GUID (for example, us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE)
-	// created by Amazon Cognito. GUID generation is unique within a region.
-	//
-	// IdentityId is a required field
-	IdentityId *string `location:"uri" locationName:"IdentityId" min:"1" type:"string" required:"true"`
-
-	// A name-spaced GUID (for example, us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE)
-	// created by Amazon Cognito. GUID generation is unique within a region.
-	//
-	// IdentityPoolId is a required field
-	IdentityPoolId *string `location:"uri" locationName:"IdentityPoolId" min:"1" type:"string" required:"true"`
-
-	// A list of patch operations.
-	RecordPatches []RecordPatch `type:"list"`
-
-	// The SyncSessionToken returned by a previous call to ListRecords for this
-	// dataset and identity.
-	//
-	// SyncSessionToken is a required field
-	SyncSessionToken *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s UpdateRecordsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateRecordsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateRecordsInput"}
-
-	if s.DatasetName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DatasetName"))
-	}
-	if s.DatasetName != nil && len(*s.DatasetName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("DatasetName", 1))
-	}
-	if s.DeviceId != nil && len(*s.DeviceId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("DeviceId", 1))
-	}
-
-	if s.IdentityId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("IdentityId"))
-	}
-	if s.IdentityId != nil && len(*s.IdentityId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("IdentityId", 1))
-	}
-
-	if s.IdentityPoolId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("IdentityPoolId"))
-	}
-	if s.IdentityPoolId != nil && len(*s.IdentityPoolId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("IdentityPoolId", 1))
-	}
-
-	if s.SyncSessionToken == nil {
-		invalidParams.Add(aws.NewErrParamRequired("SyncSessionToken"))
-	}
-	if s.RecordPatches != nil {
-		for i, v := range s.RecordPatches {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "RecordPatches", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s UpdateRecordsInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.DeviceId != nil {
-		v := *s.DeviceId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "DeviceId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.RecordPatches != nil {
-		v := s.RecordPatches
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "RecordPatches", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	if s.SyncSessionToken != nil {
-		v := *s.SyncSessionToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "SyncSessionToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.ClientContext != nil {
-		v := *s.ClientContext
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "x-amz-Client-Context", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.DatasetName != nil {
-		v := *s.DatasetName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "DatasetName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.IdentityId != nil {
-		v := *s.IdentityId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "IdentityId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.IdentityPoolId != nil {
-		v := *s.IdentityPoolId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "IdentityPoolId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-// Returned for a successful UpdateRecordsRequest.
-type UpdateRecordsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A list of records that have been updated.
-	Records []Record `type:"list"`
-}
-
-// String returns the string representation
-func (s UpdateRecordsOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s UpdateRecordsOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.Records != nil {
-		v := s.Records
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "Records", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	return nil
-}
 
 const opUpdateRecords = "UpdateRecords"
 
@@ -216,7 +39,7 @@ const opUpdateRecords = "UpdateRecords"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-sync-2014-06-30/UpdateRecords
-func (c *Client) UpdateRecordsRequest(input *UpdateRecordsInput) UpdateRecordsRequest {
+func (c *Client) UpdateRecordsRequest(input *types.UpdateRecordsInput) UpdateRecordsRequest {
 	op := &aws.Operation{
 		Name:       opUpdateRecords,
 		HTTPMethod: "POST",
@@ -224,10 +47,10 @@ func (c *Client) UpdateRecordsRequest(input *UpdateRecordsInput) UpdateRecordsRe
 	}
 
 	if input == nil {
-		input = &UpdateRecordsInput{}
+		input = &types.UpdateRecordsInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateRecordsOutput{})
+	req := c.newRequest(op, input, &types.UpdateRecordsOutput{})
 	return UpdateRecordsRequest{Request: req, Input: input, Copy: c.UpdateRecordsRequest}
 }
 
@@ -235,8 +58,8 @@ func (c *Client) UpdateRecordsRequest(input *UpdateRecordsInput) UpdateRecordsRe
 // UpdateRecords API operation.
 type UpdateRecordsRequest struct {
 	*aws.Request
-	Input *UpdateRecordsInput
-	Copy  func(*UpdateRecordsInput) UpdateRecordsRequest
+	Input *types.UpdateRecordsInput
+	Copy  func(*types.UpdateRecordsInput) UpdateRecordsRequest
 }
 
 // Send marshals and sends the UpdateRecords API request.
@@ -248,7 +71,7 @@ func (r UpdateRecordsRequest) Send(ctx context.Context) (*UpdateRecordsResponse,
 	}
 
 	resp := &UpdateRecordsResponse{
-		UpdateRecordsOutput: r.Request.Data.(*UpdateRecordsOutput),
+		UpdateRecordsOutput: r.Request.Data.(*types.UpdateRecordsOutput),
 		response:            &aws.Response{Request: r.Request},
 	}
 
@@ -258,7 +81,7 @@ func (r UpdateRecordsRequest) Send(ctx context.Context) (*UpdateRecordsResponse,
 // UpdateRecordsResponse is the response type for the
 // UpdateRecords API operation.
 type UpdateRecordsResponse struct {
-	*UpdateRecordsOutput
+	*types.UpdateRecordsOutput
 
 	response *aws.Response
 }

@@ -6,56 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/codedeploy/types"
 )
-
-type BatchGetDeploymentTargetsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The unique ID of a deployment.
-	DeploymentId *string `locationName:"deploymentId" type:"string"`
-
-	// The unique IDs of the deployment targets. The compute platform of the deployment
-	// determines the type of the targets and their formats. The maximum number
-	// of deployment target IDs you can specify is 25.
-	//
-	//    * For deployments that use the EC2/On-premises compute platform, the target
-	//    IDs are EC2 or on-premises instances IDs, and their target type is instanceTarget.
-	//
-	//    * For deployments that use the AWS Lambda compute platform, the target
-	//    IDs are the names of Lambda functions, and their target type is instanceTarget.
-	//
-	//    * For deployments that use the Amazon ECS compute platform, the target
-	//    IDs are pairs of Amazon ECS clusters and services specified using the
-	//    format <clustername>:<servicename>. Their target type is ecsTarget.
-	TargetIds []string `locationName:"targetIds" type:"list"`
-}
-
-// String returns the string representation
-func (s BatchGetDeploymentTargetsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type BatchGetDeploymentTargetsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A list of target objects for a deployment. Each target object contains details
-	// about the target, such as its status and lifecycle events. The type of the
-	// target objects depends on the deployment' compute platform.
-	//
-	//    * EC2/On-premises: Each target object is an EC2 or on-premises instance.
-	//
-	//    * AWS Lambda: The target object is a specific version of an AWS Lambda
-	//    function.
-	//
-	//    * Amazon ECS: The target object is an Amazon ECS service.
-	DeploymentTargets []DeploymentTarget `locationName:"deploymentTargets" type:"list"`
-}
-
-// String returns the string representation
-func (s BatchGetDeploymentTargetsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opBatchGetDeploymentTargets = "BatchGetDeploymentTargets"
 
@@ -83,7 +35,7 @@ const opBatchGetDeploymentTargets = "BatchGetDeploymentTargets"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/BatchGetDeploymentTargets
-func (c *Client) BatchGetDeploymentTargetsRequest(input *BatchGetDeploymentTargetsInput) BatchGetDeploymentTargetsRequest {
+func (c *Client) BatchGetDeploymentTargetsRequest(input *types.BatchGetDeploymentTargetsInput) BatchGetDeploymentTargetsRequest {
 	op := &aws.Operation{
 		Name:       opBatchGetDeploymentTargets,
 		HTTPMethod: "POST",
@@ -91,10 +43,10 @@ func (c *Client) BatchGetDeploymentTargetsRequest(input *BatchGetDeploymentTarge
 	}
 
 	if input == nil {
-		input = &BatchGetDeploymentTargetsInput{}
+		input = &types.BatchGetDeploymentTargetsInput{}
 	}
 
-	req := c.newRequest(op, input, &BatchGetDeploymentTargetsOutput{})
+	req := c.newRequest(op, input, &types.BatchGetDeploymentTargetsOutput{})
 	return BatchGetDeploymentTargetsRequest{Request: req, Input: input, Copy: c.BatchGetDeploymentTargetsRequest}
 }
 
@@ -102,8 +54,8 @@ func (c *Client) BatchGetDeploymentTargetsRequest(input *BatchGetDeploymentTarge
 // BatchGetDeploymentTargets API operation.
 type BatchGetDeploymentTargetsRequest struct {
 	*aws.Request
-	Input *BatchGetDeploymentTargetsInput
-	Copy  func(*BatchGetDeploymentTargetsInput) BatchGetDeploymentTargetsRequest
+	Input *types.BatchGetDeploymentTargetsInput
+	Copy  func(*types.BatchGetDeploymentTargetsInput) BatchGetDeploymentTargetsRequest
 }
 
 // Send marshals and sends the BatchGetDeploymentTargets API request.
@@ -115,7 +67,7 @@ func (r BatchGetDeploymentTargetsRequest) Send(ctx context.Context) (*BatchGetDe
 	}
 
 	resp := &BatchGetDeploymentTargetsResponse{
-		BatchGetDeploymentTargetsOutput: r.Request.Data.(*BatchGetDeploymentTargetsOutput),
+		BatchGetDeploymentTargetsOutput: r.Request.Data.(*types.BatchGetDeploymentTargetsOutput),
 		response:                        &aws.Response{Request: r.Request},
 	}
 
@@ -125,7 +77,7 @@ func (r BatchGetDeploymentTargetsRequest) Send(ctx context.Context) (*BatchGetDe
 // BatchGetDeploymentTargetsResponse is the response type for the
 // BatchGetDeploymentTargets API operation.
 type BatchGetDeploymentTargetsResponse struct {
-	*BatchGetDeploymentTargetsOutput
+	*types.BatchGetDeploymentTargetsOutput
 
 	response *aws.Response
 }

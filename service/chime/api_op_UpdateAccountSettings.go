@@ -6,79 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/chime/types"
 )
-
-type UpdateAccountSettingsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Chime account ID.
-	//
-	// AccountId is a required field
-	AccountId *string `location:"uri" locationName:"accountId" type:"string" required:"true"`
-
-	// The Amazon Chime account settings to update.
-	//
-	// AccountSettings is a required field
-	AccountSettings *AccountSettings `type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s UpdateAccountSettingsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateAccountSettingsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateAccountSettingsInput"}
-
-	if s.AccountId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("AccountId"))
-	}
-
-	if s.AccountSettings == nil {
-		invalidParams.Add(aws.NewErrParamRequired("AccountSettings"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s UpdateAccountSettingsInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.AccountSettings != nil {
-		v := s.AccountSettings
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "AccountSettings", v, metadata)
-	}
-	if s.AccountId != nil {
-		v := *s.AccountId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "accountId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type UpdateAccountSettingsOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s UpdateAccountSettingsOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s UpdateAccountSettingsOutput) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
 
 const opUpdateAccountSettings = "UpdateAccountSettings"
 
@@ -98,7 +27,7 @@ const opUpdateAccountSettings = "UpdateAccountSettings"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/UpdateAccountSettings
-func (c *Client) UpdateAccountSettingsRequest(input *UpdateAccountSettingsInput) UpdateAccountSettingsRequest {
+func (c *Client) UpdateAccountSettingsRequest(input *types.UpdateAccountSettingsInput) UpdateAccountSettingsRequest {
 	op := &aws.Operation{
 		Name:       opUpdateAccountSettings,
 		HTTPMethod: "PUT",
@@ -106,10 +35,10 @@ func (c *Client) UpdateAccountSettingsRequest(input *UpdateAccountSettingsInput)
 	}
 
 	if input == nil {
-		input = &UpdateAccountSettingsInput{}
+		input = &types.UpdateAccountSettingsInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateAccountSettingsOutput{})
+	req := c.newRequest(op, input, &types.UpdateAccountSettingsOutput{})
 	return UpdateAccountSettingsRequest{Request: req, Input: input, Copy: c.UpdateAccountSettingsRequest}
 }
 
@@ -117,8 +46,8 @@ func (c *Client) UpdateAccountSettingsRequest(input *UpdateAccountSettingsInput)
 // UpdateAccountSettings API operation.
 type UpdateAccountSettingsRequest struct {
 	*aws.Request
-	Input *UpdateAccountSettingsInput
-	Copy  func(*UpdateAccountSettingsInput) UpdateAccountSettingsRequest
+	Input *types.UpdateAccountSettingsInput
+	Copy  func(*types.UpdateAccountSettingsInput) UpdateAccountSettingsRequest
 }
 
 // Send marshals and sends the UpdateAccountSettings API request.
@@ -130,7 +59,7 @@ func (r UpdateAccountSettingsRequest) Send(ctx context.Context) (*UpdateAccountS
 	}
 
 	resp := &UpdateAccountSettingsResponse{
-		UpdateAccountSettingsOutput: r.Request.Data.(*UpdateAccountSettingsOutput),
+		UpdateAccountSettingsOutput: r.Request.Data.(*types.UpdateAccountSettingsOutput),
 		response:                    &aws.Response{Request: r.Request},
 	}
 
@@ -140,7 +69,7 @@ func (r UpdateAccountSettingsRequest) Send(ctx context.Context) (*UpdateAccountS
 // UpdateAccountSettingsResponse is the response type for the
 // UpdateAccountSettings API operation.
 type UpdateAccountSettingsResponse struct {
-	*UpdateAccountSettingsOutput
+	*types.UpdateAccountSettingsOutput
 
 	response *aws.Response
 }

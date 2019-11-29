@@ -6,54 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/dax/types"
 )
-
-type UpdateSubnetGroupInput struct {
-	_ struct{} `type:"structure"`
-
-	// A description of the subnet group.
-	Description *string `type:"string"`
-
-	// The name of the subnet group.
-	//
-	// SubnetGroupName is a required field
-	SubnetGroupName *string `type:"string" required:"true"`
-
-	// A list of subnet IDs in the subnet group.
-	SubnetIds []string `type:"list"`
-}
-
-// String returns the string representation
-func (s UpdateSubnetGroupInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateSubnetGroupInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateSubnetGroupInput"}
-
-	if s.SubnetGroupName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("SubnetGroupName"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type UpdateSubnetGroupOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The subnet group that has been modified.
-	SubnetGroup *SubnetGroup `type:"structure"`
-}
-
-// String returns the string representation
-func (s UpdateSubnetGroupOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opUpdateSubnetGroup = "UpdateSubnetGroup"
 
@@ -70,7 +24,7 @@ const opUpdateSubnetGroup = "UpdateSubnetGroup"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dax-2017-04-19/UpdateSubnetGroup
-func (c *Client) UpdateSubnetGroupRequest(input *UpdateSubnetGroupInput) UpdateSubnetGroupRequest {
+func (c *Client) UpdateSubnetGroupRequest(input *types.UpdateSubnetGroupInput) UpdateSubnetGroupRequest {
 	op := &aws.Operation{
 		Name:       opUpdateSubnetGroup,
 		HTTPMethod: "POST",
@@ -78,10 +32,10 @@ func (c *Client) UpdateSubnetGroupRequest(input *UpdateSubnetGroupInput) UpdateS
 	}
 
 	if input == nil {
-		input = &UpdateSubnetGroupInput{}
+		input = &types.UpdateSubnetGroupInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateSubnetGroupOutput{})
+	req := c.newRequest(op, input, &types.UpdateSubnetGroupOutput{})
 	return UpdateSubnetGroupRequest{Request: req, Input: input, Copy: c.UpdateSubnetGroupRequest}
 }
 
@@ -89,8 +43,8 @@ func (c *Client) UpdateSubnetGroupRequest(input *UpdateSubnetGroupInput) UpdateS
 // UpdateSubnetGroup API operation.
 type UpdateSubnetGroupRequest struct {
 	*aws.Request
-	Input *UpdateSubnetGroupInput
-	Copy  func(*UpdateSubnetGroupInput) UpdateSubnetGroupRequest
+	Input *types.UpdateSubnetGroupInput
+	Copy  func(*types.UpdateSubnetGroupInput) UpdateSubnetGroupRequest
 }
 
 // Send marshals and sends the UpdateSubnetGroup API request.
@@ -102,7 +56,7 @@ func (r UpdateSubnetGroupRequest) Send(ctx context.Context) (*UpdateSubnetGroupR
 	}
 
 	resp := &UpdateSubnetGroupResponse{
-		UpdateSubnetGroupOutput: r.Request.Data.(*UpdateSubnetGroupOutput),
+		UpdateSubnetGroupOutput: r.Request.Data.(*types.UpdateSubnetGroupOutput),
 		response:                &aws.Response{Request: r.Request},
 	}
 
@@ -112,7 +66,7 @@ func (r UpdateSubnetGroupRequest) Send(ctx context.Context) (*UpdateSubnetGroupR
 // UpdateSubnetGroupResponse is the response type for the
 // UpdateSubnetGroup API operation.
 type UpdateSubnetGroupResponse struct {
-	*UpdateSubnetGroupOutput
+	*types.UpdateSubnetGroupOutput
 
 	response *aws.Response
 }

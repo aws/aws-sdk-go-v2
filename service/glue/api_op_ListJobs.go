@@ -6,55 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/glue/types"
 )
-
-type ListJobsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The maximum size of a list to return.
-	MaxResults *int64 `min:"1" type:"integer"`
-
-	// A continuation token, if this is a continuation request.
-	NextToken *string `type:"string"`
-
-	// Specifies to return only these tagged resources.
-	Tags map[string]string `type:"map"`
-}
-
-// String returns the string representation
-func (s ListJobsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListJobsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListJobsInput"}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ListJobsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The names of all jobs in the account, or the jobs with the specified tags.
-	JobNames []string `type:"list"`
-
-	// A continuation token, if the returned list does not contain the last metric
-	// available.
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s ListJobsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListJobs = "ListJobs"
 
@@ -77,7 +30,7 @@ const opListJobs = "ListJobs"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ListJobs
-func (c *Client) ListJobsRequest(input *ListJobsInput) ListJobsRequest {
+func (c *Client) ListJobsRequest(input *types.ListJobsInput) ListJobsRequest {
 	op := &aws.Operation{
 		Name:       opListJobs,
 		HTTPMethod: "POST",
@@ -91,10 +44,10 @@ func (c *Client) ListJobsRequest(input *ListJobsInput) ListJobsRequest {
 	}
 
 	if input == nil {
-		input = &ListJobsInput{}
+		input = &types.ListJobsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListJobsOutput{})
+	req := c.newRequest(op, input, &types.ListJobsOutput{})
 	return ListJobsRequest{Request: req, Input: input, Copy: c.ListJobsRequest}
 }
 
@@ -102,8 +55,8 @@ func (c *Client) ListJobsRequest(input *ListJobsInput) ListJobsRequest {
 // ListJobs API operation.
 type ListJobsRequest struct {
 	*aws.Request
-	Input *ListJobsInput
-	Copy  func(*ListJobsInput) ListJobsRequest
+	Input *types.ListJobsInput
+	Copy  func(*types.ListJobsInput) ListJobsRequest
 }
 
 // Send marshals and sends the ListJobs API request.
@@ -115,7 +68,7 @@ func (r ListJobsRequest) Send(ctx context.Context) (*ListJobsResponse, error) {
 	}
 
 	resp := &ListJobsResponse{
-		ListJobsOutput: r.Request.Data.(*ListJobsOutput),
+		ListJobsOutput: r.Request.Data.(*types.ListJobsOutput),
 		response:       &aws.Response{Request: r.Request},
 	}
 
@@ -145,7 +98,7 @@ func NewListJobsPaginator(req ListJobsRequest) ListJobsPaginator {
 	return ListJobsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListJobsInput
+				var inCpy *types.ListJobsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -165,14 +118,14 @@ type ListJobsPaginator struct {
 	aws.Pager
 }
 
-func (p *ListJobsPaginator) CurrentPage() *ListJobsOutput {
-	return p.Pager.CurrentPage().(*ListJobsOutput)
+func (p *ListJobsPaginator) CurrentPage() *types.ListJobsOutput {
+	return p.Pager.CurrentPage().(*types.ListJobsOutput)
 }
 
 // ListJobsResponse is the response type for the
 // ListJobs API operation.
 type ListJobsResponse struct {
-	*ListJobsOutput
+	*types.ListJobsOutput
 
 	response *aws.Response
 }

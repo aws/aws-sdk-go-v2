@@ -6,73 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-type DescribeInstanceCreditSpecificationsInput struct {
-	_ struct{} `type:"structure"`
-
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have
-	// the required permissions, the error response is DryRunOperation. Otherwise,
-	// it is UnauthorizedOperation.
-	DryRun *bool `type:"boolean"`
-
-	// The filters.
-	//
-	//    * instance-id - The ID of the instance.
-	Filters []Filter `locationName:"Filter" locationNameList:"Filter" type:"list"`
-
-	// The instance IDs.
-	//
-	// Default: Describes all your instances.
-	//
-	// Constraints: Maximum 1000 explicitly specified instance IDs.
-	InstanceIds []string `locationName:"InstanceId" locationNameList:"InstanceId" type:"list"`
-
-	// The maximum number of results to return in a single call. To retrieve the
-	// remaining results, make another call with the returned NextToken value. This
-	// value can be between 5 and 1000. You cannot specify this parameter and the
-	// instance IDs parameter in the same call.
-	MaxResults *int64 `min:"5" type:"integer"`
-
-	// The token to retrieve the next page of results.
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeInstanceCreditSpecificationsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeInstanceCreditSpecificationsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeInstanceCreditSpecificationsInput"}
-	if s.MaxResults != nil && *s.MaxResults < 5 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 5))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribeInstanceCreditSpecificationsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Information about the credit option for CPU usage of an instance.
-	InstanceCreditSpecifications []InstanceCreditSpecification `locationName:"instanceCreditSpecificationSet" locationNameList:"item" type:"list"`
-
-	// The token to use to retrieve the next page of results. This value is null
-	// when there are no more results to return.
-	NextToken *string `locationName:"nextToken" type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeInstanceCreditSpecificationsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeInstanceCreditSpecifications = "DescribeInstanceCreditSpecifications"
 
@@ -112,7 +47,7 @@ const opDescribeInstanceCreditSpecifications = "DescribeInstanceCreditSpecificat
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeInstanceCreditSpecifications
-func (c *Client) DescribeInstanceCreditSpecificationsRequest(input *DescribeInstanceCreditSpecificationsInput) DescribeInstanceCreditSpecificationsRequest {
+func (c *Client) DescribeInstanceCreditSpecificationsRequest(input *types.DescribeInstanceCreditSpecificationsInput) DescribeInstanceCreditSpecificationsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeInstanceCreditSpecifications,
 		HTTPMethod: "POST",
@@ -126,10 +61,10 @@ func (c *Client) DescribeInstanceCreditSpecificationsRequest(input *DescribeInst
 	}
 
 	if input == nil {
-		input = &DescribeInstanceCreditSpecificationsInput{}
+		input = &types.DescribeInstanceCreditSpecificationsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeInstanceCreditSpecificationsOutput{})
+	req := c.newRequest(op, input, &types.DescribeInstanceCreditSpecificationsOutput{})
 	return DescribeInstanceCreditSpecificationsRequest{Request: req, Input: input, Copy: c.DescribeInstanceCreditSpecificationsRequest}
 }
 
@@ -137,8 +72,8 @@ func (c *Client) DescribeInstanceCreditSpecificationsRequest(input *DescribeInst
 // DescribeInstanceCreditSpecifications API operation.
 type DescribeInstanceCreditSpecificationsRequest struct {
 	*aws.Request
-	Input *DescribeInstanceCreditSpecificationsInput
-	Copy  func(*DescribeInstanceCreditSpecificationsInput) DescribeInstanceCreditSpecificationsRequest
+	Input *types.DescribeInstanceCreditSpecificationsInput
+	Copy  func(*types.DescribeInstanceCreditSpecificationsInput) DescribeInstanceCreditSpecificationsRequest
 }
 
 // Send marshals and sends the DescribeInstanceCreditSpecifications API request.
@@ -150,7 +85,7 @@ func (r DescribeInstanceCreditSpecificationsRequest) Send(ctx context.Context) (
 	}
 
 	resp := &DescribeInstanceCreditSpecificationsResponse{
-		DescribeInstanceCreditSpecificationsOutput: r.Request.Data.(*DescribeInstanceCreditSpecificationsOutput),
+		DescribeInstanceCreditSpecificationsOutput: r.Request.Data.(*types.DescribeInstanceCreditSpecificationsOutput),
 		response: &aws.Response{Request: r.Request},
 	}
 
@@ -180,7 +115,7 @@ func NewDescribeInstanceCreditSpecificationsPaginator(req DescribeInstanceCredit
 	return DescribeInstanceCreditSpecificationsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *DescribeInstanceCreditSpecificationsInput
+				var inCpy *types.DescribeInstanceCreditSpecificationsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -200,14 +135,14 @@ type DescribeInstanceCreditSpecificationsPaginator struct {
 	aws.Pager
 }
 
-func (p *DescribeInstanceCreditSpecificationsPaginator) CurrentPage() *DescribeInstanceCreditSpecificationsOutput {
-	return p.Pager.CurrentPage().(*DescribeInstanceCreditSpecificationsOutput)
+func (p *DescribeInstanceCreditSpecificationsPaginator) CurrentPage() *types.DescribeInstanceCreditSpecificationsOutput {
+	return p.Pager.CurrentPage().(*types.DescribeInstanceCreditSpecificationsOutput)
 }
 
 // DescribeInstanceCreditSpecificationsResponse is the response type for the
 // DescribeInstanceCreditSpecifications API operation.
 type DescribeInstanceCreditSpecificationsResponse struct {
-	*DescribeInstanceCreditSpecificationsOutput
+	*types.DescribeInstanceCreditSpecificationsOutput
 
 	response *aws.Response
 }

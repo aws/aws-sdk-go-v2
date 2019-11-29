@@ -6,50 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/query"
+	"github.com/aws/aws-sdk-go-v2/service/autoscaling/types"
 )
-
-type DeleteLaunchConfigurationInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the launch configuration.
-	//
-	// LaunchConfigurationName is a required field
-	LaunchConfigurationName *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteLaunchConfigurationInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteLaunchConfigurationInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteLaunchConfigurationInput"}
-
-	if s.LaunchConfigurationName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("LaunchConfigurationName"))
-	}
-	if s.LaunchConfigurationName != nil && len(*s.LaunchConfigurationName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("LaunchConfigurationName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteLaunchConfigurationOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteLaunchConfigurationOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteLaunchConfiguration = "DeleteLaunchConfiguration"
 
@@ -70,7 +30,7 @@ const opDeleteLaunchConfiguration = "DeleteLaunchConfiguration"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DeleteLaunchConfiguration
-func (c *Client) DeleteLaunchConfigurationRequest(input *DeleteLaunchConfigurationInput) DeleteLaunchConfigurationRequest {
+func (c *Client) DeleteLaunchConfigurationRequest(input *types.DeleteLaunchConfigurationInput) DeleteLaunchConfigurationRequest {
 	op := &aws.Operation{
 		Name:       opDeleteLaunchConfiguration,
 		HTTPMethod: "POST",
@@ -78,10 +38,10 @@ func (c *Client) DeleteLaunchConfigurationRequest(input *DeleteLaunchConfigurati
 	}
 
 	if input == nil {
-		input = &DeleteLaunchConfigurationInput{}
+		input = &types.DeleteLaunchConfigurationInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteLaunchConfigurationOutput{})
+	req := c.newRequest(op, input, &types.DeleteLaunchConfigurationOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return DeleteLaunchConfigurationRequest{Request: req, Input: input, Copy: c.DeleteLaunchConfigurationRequest}
@@ -91,8 +51,8 @@ func (c *Client) DeleteLaunchConfigurationRequest(input *DeleteLaunchConfigurati
 // DeleteLaunchConfiguration API operation.
 type DeleteLaunchConfigurationRequest struct {
 	*aws.Request
-	Input *DeleteLaunchConfigurationInput
-	Copy  func(*DeleteLaunchConfigurationInput) DeleteLaunchConfigurationRequest
+	Input *types.DeleteLaunchConfigurationInput
+	Copy  func(*types.DeleteLaunchConfigurationInput) DeleteLaunchConfigurationRequest
 }
 
 // Send marshals and sends the DeleteLaunchConfiguration API request.
@@ -104,7 +64,7 @@ func (r DeleteLaunchConfigurationRequest) Send(ctx context.Context) (*DeleteLaun
 	}
 
 	resp := &DeleteLaunchConfigurationResponse{
-		DeleteLaunchConfigurationOutput: r.Request.Data.(*DeleteLaunchConfigurationOutput),
+		DeleteLaunchConfigurationOutput: r.Request.Data.(*types.DeleteLaunchConfigurationOutput),
 		response:                        &aws.Response{Request: r.Request},
 	}
 
@@ -114,7 +74,7 @@ func (r DeleteLaunchConfigurationRequest) Send(ctx context.Context) (*DeleteLaun
 // DeleteLaunchConfigurationResponse is the response type for the
 // DeleteLaunchConfiguration API operation.
 type DeleteLaunchConfigurationResponse struct {
-	*DeleteLaunchConfigurationOutput
+	*types.DeleteLaunchConfigurationOutput
 
 	response *aws.Response
 }

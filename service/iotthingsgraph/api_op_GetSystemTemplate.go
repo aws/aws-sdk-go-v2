@@ -6,55 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/iotthingsgraph/types"
 )
-
-type GetSystemTemplateInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the system to get. This ID must be in the user's namespace.
-	//
-	// The ID should be in the following format.
-	//
-	// urn:tdm:REGION/ACCOUNT ID/default:system:SYSTEMNAME
-	//
-	// Id is a required field
-	Id *string `locationName:"id" type:"string" required:"true"`
-
-	// The number that specifies the revision of the system to get.
-	RevisionNumber *int64 `locationName:"revisionNumber" type:"long"`
-}
-
-// String returns the string representation
-func (s GetSystemTemplateInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetSystemTemplateInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetSystemTemplateInput"}
-
-	if s.Id == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Id"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type GetSystemTemplateOutput struct {
-	_ struct{} `type:"structure"`
-
-	// An object that contains summary data about the system.
-	Description *SystemTemplateDescription `locationName:"description" type:"structure"`
-}
-
-// String returns the string representation
-func (s GetSystemTemplateOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetSystemTemplate = "GetSystemTemplate"
 
@@ -71,7 +24,7 @@ const opGetSystemTemplate = "GetSystemTemplate"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iotthingsgraph-2018-09-06/GetSystemTemplate
-func (c *Client) GetSystemTemplateRequest(input *GetSystemTemplateInput) GetSystemTemplateRequest {
+func (c *Client) GetSystemTemplateRequest(input *types.GetSystemTemplateInput) GetSystemTemplateRequest {
 	op := &aws.Operation{
 		Name:       opGetSystemTemplate,
 		HTTPMethod: "POST",
@@ -79,10 +32,10 @@ func (c *Client) GetSystemTemplateRequest(input *GetSystemTemplateInput) GetSyst
 	}
 
 	if input == nil {
-		input = &GetSystemTemplateInput{}
+		input = &types.GetSystemTemplateInput{}
 	}
 
-	req := c.newRequest(op, input, &GetSystemTemplateOutput{})
+	req := c.newRequest(op, input, &types.GetSystemTemplateOutput{})
 	return GetSystemTemplateRequest{Request: req, Input: input, Copy: c.GetSystemTemplateRequest}
 }
 
@@ -90,8 +43,8 @@ func (c *Client) GetSystemTemplateRequest(input *GetSystemTemplateInput) GetSyst
 // GetSystemTemplate API operation.
 type GetSystemTemplateRequest struct {
 	*aws.Request
-	Input *GetSystemTemplateInput
-	Copy  func(*GetSystemTemplateInput) GetSystemTemplateRequest
+	Input *types.GetSystemTemplateInput
+	Copy  func(*types.GetSystemTemplateInput) GetSystemTemplateRequest
 }
 
 // Send marshals and sends the GetSystemTemplate API request.
@@ -103,7 +56,7 @@ func (r GetSystemTemplateRequest) Send(ctx context.Context) (*GetSystemTemplateR
 	}
 
 	resp := &GetSystemTemplateResponse{
-		GetSystemTemplateOutput: r.Request.Data.(*GetSystemTemplateOutput),
+		GetSystemTemplateOutput: r.Request.Data.(*types.GetSystemTemplateOutput),
 		response:                &aws.Response{Request: r.Request},
 	}
 
@@ -113,7 +66,7 @@ func (r GetSystemTemplateRequest) Send(ctx context.Context) (*GetSystemTemplateR
 // GetSystemTemplateResponse is the response type for the
 // GetSystemTemplate API operation.
 type GetSystemTemplateResponse struct {
-	*GetSystemTemplateOutput
+	*types.GetSystemTemplateOutput
 
 	response *aws.Response
 }

@@ -4,89 +4,10 @@ package ec2
 
 import (
 	"context"
-	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-// Contains the parameters for DetachVolume.
-type DetachVolumeInput struct {
-	_ struct{} `type:"structure"`
-
-	// The device name.
-	Device *string `type:"string"`
-
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have
-	// the required permissions, the error response is DryRunOperation. Otherwise,
-	// it is UnauthorizedOperation.
-	DryRun *bool `locationName:"dryRun" type:"boolean"`
-
-	// Forces detachment if the previous detachment attempt did not occur cleanly
-	// (for example, logging into an instance, unmounting the volume, and detaching
-	// normally). This option can lead to data loss or a corrupted file system.
-	// Use this option only as a last resort to detach a volume from a failed instance.
-	// The instance won't have an opportunity to flush file system caches or file
-	// system metadata. If you use this option, you must perform file system check
-	// and repair procedures.
-	Force *bool `type:"boolean"`
-
-	// The ID of the instance.
-	InstanceId *string `type:"string"`
-
-	// The ID of the volume.
-	//
-	// VolumeId is a required field
-	VolumeId *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DetachVolumeInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DetachVolumeInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DetachVolumeInput"}
-
-	if s.VolumeId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("VolumeId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Describes volume attachment details.
-type DetachVolumeOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The time stamp when the attachment initiated.
-	AttachTime *time.Time `locationName:"attachTime" type:"timestamp"`
-
-	// Indicates whether the EBS volume is deleted on instance termination.
-	DeleteOnTermination *bool `locationName:"deleteOnTermination" type:"boolean"`
-
-	// The device name.
-	Device *string `locationName:"device" type:"string"`
-
-	// The ID of the instance.
-	InstanceId *string `locationName:"instanceId" type:"string"`
-
-	// The attachment state of the volume.
-	State VolumeAttachmentState `locationName:"status" type:"string" enum:"true"`
-
-	// The ID of the volume.
-	VolumeId *string `locationName:"volumeId" type:"string"`
-}
-
-// String returns the string representation
-func (s DetachVolumeOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDetachVolume = "DetachVolume"
 
@@ -116,7 +37,7 @@ const opDetachVolume = "DetachVolume"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DetachVolume
-func (c *Client) DetachVolumeRequest(input *DetachVolumeInput) DetachVolumeRequest {
+func (c *Client) DetachVolumeRequest(input *types.DetachVolumeInput) DetachVolumeRequest {
 	op := &aws.Operation{
 		Name:       opDetachVolume,
 		HTTPMethod: "POST",
@@ -124,10 +45,10 @@ func (c *Client) DetachVolumeRequest(input *DetachVolumeInput) DetachVolumeReque
 	}
 
 	if input == nil {
-		input = &DetachVolumeInput{}
+		input = &types.DetachVolumeInput{}
 	}
 
-	req := c.newRequest(op, input, &DetachVolumeOutput{})
+	req := c.newRequest(op, input, &types.DetachVolumeOutput{})
 	return DetachVolumeRequest{Request: req, Input: input, Copy: c.DetachVolumeRequest}
 }
 
@@ -135,8 +56,8 @@ func (c *Client) DetachVolumeRequest(input *DetachVolumeInput) DetachVolumeReque
 // DetachVolume API operation.
 type DetachVolumeRequest struct {
 	*aws.Request
-	Input *DetachVolumeInput
-	Copy  func(*DetachVolumeInput) DetachVolumeRequest
+	Input *types.DetachVolumeInput
+	Copy  func(*types.DetachVolumeInput) DetachVolumeRequest
 }
 
 // Send marshals and sends the DetachVolume API request.
@@ -148,7 +69,7 @@ func (r DetachVolumeRequest) Send(ctx context.Context) (*DetachVolumeResponse, e
 	}
 
 	resp := &DetachVolumeResponse{
-		DetachVolumeOutput: r.Request.Data.(*DetachVolumeOutput),
+		DetachVolumeOutput: r.Request.Data.(*types.DetachVolumeOutput),
 		response:           &aws.Response{Request: r.Request},
 	}
 
@@ -158,7 +79,7 @@ func (r DetachVolumeRequest) Send(ctx context.Context) (*DetachVolumeResponse, e
 // DetachVolumeResponse is the response type for the
 // DetachVolume API operation.
 type DetachVolumeResponse struct {
-	*DetachVolumeOutput
+	*types.DetachVolumeOutput
 
 	response *aws.Response
 }

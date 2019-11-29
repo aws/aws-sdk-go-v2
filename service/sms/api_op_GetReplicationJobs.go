@@ -6,44 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/sms/types"
 )
-
-type GetReplicationJobsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The maximum number of results to return in a single call. The default value
-	// is 50. To retrieve the remaining results, make another call with the returned
-	// NextToken value.
-	MaxResults *int64 `locationName:"maxResults" type:"integer"`
-
-	// The token for the next set of results.
-	NextToken *string `locationName:"nextToken" type:"string"`
-
-	// The identifier of the replication job.
-	ReplicationJobId *string `locationName:"replicationJobId" type:"string"`
-}
-
-// String returns the string representation
-func (s GetReplicationJobsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type GetReplicationJobsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The token required to retrieve the next set of results. This value is null
-	// when there are no more results to return.
-	NextToken *string `locationName:"nextToken" type:"string"`
-
-	// Information about the replication jobs.
-	ReplicationJobList []ReplicationJob `locationName:"replicationJobList" type:"list"`
-}
-
-// String returns the string representation
-func (s GetReplicationJobsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetReplicationJobs = "GetReplicationJobs"
 
@@ -60,7 +24,7 @@ const opGetReplicationJobs = "GetReplicationJobs"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sms-2016-10-24/GetReplicationJobs
-func (c *Client) GetReplicationJobsRequest(input *GetReplicationJobsInput) GetReplicationJobsRequest {
+func (c *Client) GetReplicationJobsRequest(input *types.GetReplicationJobsInput) GetReplicationJobsRequest {
 	op := &aws.Operation{
 		Name:       opGetReplicationJobs,
 		HTTPMethod: "POST",
@@ -74,10 +38,10 @@ func (c *Client) GetReplicationJobsRequest(input *GetReplicationJobsInput) GetRe
 	}
 
 	if input == nil {
-		input = &GetReplicationJobsInput{}
+		input = &types.GetReplicationJobsInput{}
 	}
 
-	req := c.newRequest(op, input, &GetReplicationJobsOutput{})
+	req := c.newRequest(op, input, &types.GetReplicationJobsOutput{})
 	return GetReplicationJobsRequest{Request: req, Input: input, Copy: c.GetReplicationJobsRequest}
 }
 
@@ -85,8 +49,8 @@ func (c *Client) GetReplicationJobsRequest(input *GetReplicationJobsInput) GetRe
 // GetReplicationJobs API operation.
 type GetReplicationJobsRequest struct {
 	*aws.Request
-	Input *GetReplicationJobsInput
-	Copy  func(*GetReplicationJobsInput) GetReplicationJobsRequest
+	Input *types.GetReplicationJobsInput
+	Copy  func(*types.GetReplicationJobsInput) GetReplicationJobsRequest
 }
 
 // Send marshals and sends the GetReplicationJobs API request.
@@ -98,7 +62,7 @@ func (r GetReplicationJobsRequest) Send(ctx context.Context) (*GetReplicationJob
 	}
 
 	resp := &GetReplicationJobsResponse{
-		GetReplicationJobsOutput: r.Request.Data.(*GetReplicationJobsOutput),
+		GetReplicationJobsOutput: r.Request.Data.(*types.GetReplicationJobsOutput),
 		response:                 &aws.Response{Request: r.Request},
 	}
 
@@ -128,7 +92,7 @@ func NewGetReplicationJobsPaginator(req GetReplicationJobsRequest) GetReplicatio
 	return GetReplicationJobsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *GetReplicationJobsInput
+				var inCpy *types.GetReplicationJobsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -148,14 +112,14 @@ type GetReplicationJobsPaginator struct {
 	aws.Pager
 }
 
-func (p *GetReplicationJobsPaginator) CurrentPage() *GetReplicationJobsOutput {
-	return p.Pager.CurrentPage().(*GetReplicationJobsOutput)
+func (p *GetReplicationJobsPaginator) CurrentPage() *types.GetReplicationJobsOutput {
+	return p.Pager.CurrentPage().(*types.GetReplicationJobsOutput)
 }
 
 // GetReplicationJobsResponse is the response type for the
 // GetReplicationJobs API operation.
 type GetReplicationJobsResponse struct {
-	*GetReplicationJobsOutput
+	*types.GetReplicationJobsOutput
 
 	response *aws.Response
 }

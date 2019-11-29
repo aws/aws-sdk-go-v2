@@ -4,82 +4,10 @@ package alexaforbusiness
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/alexaforbusiness/types"
 )
-
-type CreateUserInput struct {
-	_ struct{} `type:"structure"`
-
-	// A unique, user-specified identifier for this request that ensures idempotency.
-	ClientRequestToken *string `min:"10" type:"string" idempotencyToken:"true"`
-
-	// The email address for the user.
-	Email *string `min:"1" type:"string"`
-
-	// The first name for the user.
-	FirstName *string `type:"string"`
-
-	// The last name for the user.
-	LastName *string `type:"string"`
-
-	// The tags for the user.
-	Tags []Tag `type:"list"`
-
-	// The ARN for the user.
-	//
-	// UserId is a required field
-	UserId *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s CreateUserInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateUserInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateUserInput"}
-	if s.ClientRequestToken != nil && len(*s.ClientRequestToken) < 10 {
-		invalidParams.Add(aws.NewErrParamMinLen("ClientRequestToken", 10))
-	}
-	if s.Email != nil && len(*s.Email) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Email", 1))
-	}
-
-	if s.UserId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("UserId"))
-	}
-	if s.UserId != nil && len(*s.UserId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("UserId", 1))
-	}
-	if s.Tags != nil {
-		for i, v := range s.Tags {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type CreateUserOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The ARN of the newly created user in the response.
-	UserArn *string `type:"string"`
-}
-
-// String returns the string representation
-func (s CreateUserOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCreateUser = "CreateUser"
 
@@ -96,7 +24,7 @@ const opCreateUser = "CreateUser"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/CreateUser
-func (c *Client) CreateUserRequest(input *CreateUserInput) CreateUserRequest {
+func (c *Client) CreateUserRequest(input *types.CreateUserInput) CreateUserRequest {
 	op := &aws.Operation{
 		Name:       opCreateUser,
 		HTTPMethod: "POST",
@@ -104,10 +32,10 @@ func (c *Client) CreateUserRequest(input *CreateUserInput) CreateUserRequest {
 	}
 
 	if input == nil {
-		input = &CreateUserInput{}
+		input = &types.CreateUserInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateUserOutput{})
+	req := c.newRequest(op, input, &types.CreateUserOutput{})
 	return CreateUserRequest{Request: req, Input: input, Copy: c.CreateUserRequest}
 }
 
@@ -115,8 +43,8 @@ func (c *Client) CreateUserRequest(input *CreateUserInput) CreateUserRequest {
 // CreateUser API operation.
 type CreateUserRequest struct {
 	*aws.Request
-	Input *CreateUserInput
-	Copy  func(*CreateUserInput) CreateUserRequest
+	Input *types.CreateUserInput
+	Copy  func(*types.CreateUserInput) CreateUserRequest
 }
 
 // Send marshals and sends the CreateUser API request.
@@ -128,7 +56,7 @@ func (r CreateUserRequest) Send(ctx context.Context) (*CreateUserResponse, error
 	}
 
 	resp := &CreateUserResponse{
-		CreateUserOutput: r.Request.Data.(*CreateUserOutput),
+		CreateUserOutput: r.Request.Data.(*types.CreateUserOutput),
 		response:         &aws.Response{Request: r.Request},
 	}
 
@@ -138,7 +66,7 @@ func (r CreateUserRequest) Send(ctx context.Context) (*CreateUserResponse, error
 // CreateUserResponse is the response type for the
 // CreateUser API operation.
 type CreateUserResponse struct {
-	*CreateUserOutput
+	*types.CreateUserOutput
 
 	response *aws.Response
 }

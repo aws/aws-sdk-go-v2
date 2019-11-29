@@ -6,70 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/mq/types"
 )
-
-type DeleteBrokerInput struct {
-	_ struct{} `type:"structure"`
-
-	// BrokerId is a required field
-	BrokerId *string `location:"uri" locationName:"broker-id" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteBrokerInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteBrokerInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteBrokerInput"}
-
-	if s.BrokerId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("BrokerId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteBrokerInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.BrokerId != nil {
-		v := *s.BrokerId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "broker-id", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type DeleteBrokerOutput struct {
-	_ struct{} `type:"structure"`
-
-	BrokerId *string `locationName:"brokerId" type:"string"`
-}
-
-// String returns the string representation
-func (s DeleteBrokerOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteBrokerOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.BrokerId != nil {
-		v := *s.BrokerId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "brokerId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opDeleteBroker = "DeleteBroker"
 
@@ -86,7 +24,7 @@ const opDeleteBroker = "DeleteBroker"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/DeleteBroker
-func (c *Client) DeleteBrokerRequest(input *DeleteBrokerInput) DeleteBrokerRequest {
+func (c *Client) DeleteBrokerRequest(input *types.DeleteBrokerInput) DeleteBrokerRequest {
 	op := &aws.Operation{
 		Name:       opDeleteBroker,
 		HTTPMethod: "DELETE",
@@ -94,10 +32,10 @@ func (c *Client) DeleteBrokerRequest(input *DeleteBrokerInput) DeleteBrokerReque
 	}
 
 	if input == nil {
-		input = &DeleteBrokerInput{}
+		input = &types.DeleteBrokerInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteBrokerOutput{})
+	req := c.newRequest(op, input, &types.DeleteBrokerOutput{})
 	return DeleteBrokerRequest{Request: req, Input: input, Copy: c.DeleteBrokerRequest}
 }
 
@@ -105,8 +43,8 @@ func (c *Client) DeleteBrokerRequest(input *DeleteBrokerInput) DeleteBrokerReque
 // DeleteBroker API operation.
 type DeleteBrokerRequest struct {
 	*aws.Request
-	Input *DeleteBrokerInput
-	Copy  func(*DeleteBrokerInput) DeleteBrokerRequest
+	Input *types.DeleteBrokerInput
+	Copy  func(*types.DeleteBrokerInput) DeleteBrokerRequest
 }
 
 // Send marshals and sends the DeleteBroker API request.
@@ -118,7 +56,7 @@ func (r DeleteBrokerRequest) Send(ctx context.Context) (*DeleteBrokerResponse, e
 	}
 
 	resp := &DeleteBrokerResponse{
-		DeleteBrokerOutput: r.Request.Data.(*DeleteBrokerOutput),
+		DeleteBrokerOutput: r.Request.Data.(*types.DeleteBrokerOutput),
 		response:           &aws.Response{Request: r.Request},
 	}
 
@@ -128,7 +66,7 @@ func (r DeleteBrokerRequest) Send(ctx context.Context) (*DeleteBrokerResponse, e
 // DeleteBrokerResponse is the response type for the
 // DeleteBroker API operation.
 type DeleteBrokerResponse struct {
-	*DeleteBrokerOutput
+	*types.DeleteBrokerOutput
 
 	response *aws.Response
 }

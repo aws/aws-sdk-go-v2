@@ -6,49 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/iotthingsgraph/types"
 )
-
-type DeleteSystemTemplateInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the system to be deleted.
-	//
-	// The ID should be in the following format.
-	//
-	// urn:tdm:REGION/ACCOUNT ID/default:system:SYSTEMNAME
-	//
-	// Id is a required field
-	Id *string `locationName:"id" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteSystemTemplateInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteSystemTemplateInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteSystemTemplateInput"}
-
-	if s.Id == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Id"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteSystemTemplateOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteSystemTemplateOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteSystemTemplate = "DeleteSystemTemplate"
 
@@ -67,7 +26,7 @@ const opDeleteSystemTemplate = "DeleteSystemTemplate"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iotthingsgraph-2018-09-06/DeleteSystemTemplate
-func (c *Client) DeleteSystemTemplateRequest(input *DeleteSystemTemplateInput) DeleteSystemTemplateRequest {
+func (c *Client) DeleteSystemTemplateRequest(input *types.DeleteSystemTemplateInput) DeleteSystemTemplateRequest {
 	op := &aws.Operation{
 		Name:       opDeleteSystemTemplate,
 		HTTPMethod: "POST",
@@ -75,10 +34,10 @@ func (c *Client) DeleteSystemTemplateRequest(input *DeleteSystemTemplateInput) D
 	}
 
 	if input == nil {
-		input = &DeleteSystemTemplateInput{}
+		input = &types.DeleteSystemTemplateInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteSystemTemplateOutput{})
+	req := c.newRequest(op, input, &types.DeleteSystemTemplateOutput{})
 	return DeleteSystemTemplateRequest{Request: req, Input: input, Copy: c.DeleteSystemTemplateRequest}
 }
 
@@ -86,8 +45,8 @@ func (c *Client) DeleteSystemTemplateRequest(input *DeleteSystemTemplateInput) D
 // DeleteSystemTemplate API operation.
 type DeleteSystemTemplateRequest struct {
 	*aws.Request
-	Input *DeleteSystemTemplateInput
-	Copy  func(*DeleteSystemTemplateInput) DeleteSystemTemplateRequest
+	Input *types.DeleteSystemTemplateInput
+	Copy  func(*types.DeleteSystemTemplateInput) DeleteSystemTemplateRequest
 }
 
 // Send marshals and sends the DeleteSystemTemplate API request.
@@ -99,7 +58,7 @@ func (r DeleteSystemTemplateRequest) Send(ctx context.Context) (*DeleteSystemTem
 	}
 
 	resp := &DeleteSystemTemplateResponse{
-		DeleteSystemTemplateOutput: r.Request.Data.(*DeleteSystemTemplateOutput),
+		DeleteSystemTemplateOutput: r.Request.Data.(*types.DeleteSystemTemplateOutput),
 		response:                   &aws.Response{Request: r.Request},
 	}
 
@@ -109,7 +68,7 @@ func (r DeleteSystemTemplateRequest) Send(ctx context.Context) (*DeleteSystemTem
 // DeleteSystemTemplateResponse is the response type for the
 // DeleteSystemTemplate API operation.
 type DeleteSystemTemplateResponse struct {
-	*DeleteSystemTemplateOutput
+	*types.DeleteSystemTemplateOutput
 
 	response *aws.Response
 }

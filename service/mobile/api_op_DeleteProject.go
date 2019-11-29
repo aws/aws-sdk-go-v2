@@ -6,97 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/mobile/types"
 )
-
-// Request structure used to request a project be deleted.
-type DeleteProjectInput struct {
-	_ struct{} `type:"structure"`
-
-	// Unique project identifier.
-	//
-	// ProjectId is a required field
-	ProjectId *string `location:"uri" locationName:"projectId" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteProjectInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteProjectInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteProjectInput"}
-
-	if s.ProjectId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ProjectId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteProjectInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.ProjectId != nil {
-		v := *s.ProjectId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "projectId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-// Result structure used in response to request to delete a project.
-type DeleteProjectOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Resources which were deleted.
-	DeletedResources []Resource `locationName:"deletedResources" type:"list"`
-
-	// Resources which were not deleted, due to a risk of losing potentially important
-	// data or files.
-	OrphanedResources []Resource `locationName:"orphanedResources" type:"list"`
-}
-
-// String returns the string representation
-func (s DeleteProjectOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteProjectOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.DeletedResources != nil {
-		v := s.DeletedResources
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "deletedResources", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	if s.OrphanedResources != nil {
-		v := s.OrphanedResources
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "orphanedResources", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	return nil
-}
 
 const opDeleteProject = "DeleteProject"
 
@@ -113,7 +24,7 @@ const opDeleteProject = "DeleteProject"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mobile-2017-07-01/DeleteProject
-func (c *Client) DeleteProjectRequest(input *DeleteProjectInput) DeleteProjectRequest {
+func (c *Client) DeleteProjectRequest(input *types.DeleteProjectInput) DeleteProjectRequest {
 	op := &aws.Operation{
 		Name:       opDeleteProject,
 		HTTPMethod: "DELETE",
@@ -121,10 +32,10 @@ func (c *Client) DeleteProjectRequest(input *DeleteProjectInput) DeleteProjectRe
 	}
 
 	if input == nil {
-		input = &DeleteProjectInput{}
+		input = &types.DeleteProjectInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteProjectOutput{})
+	req := c.newRequest(op, input, &types.DeleteProjectOutput{})
 	return DeleteProjectRequest{Request: req, Input: input, Copy: c.DeleteProjectRequest}
 }
 
@@ -132,8 +43,8 @@ func (c *Client) DeleteProjectRequest(input *DeleteProjectInput) DeleteProjectRe
 // DeleteProject API operation.
 type DeleteProjectRequest struct {
 	*aws.Request
-	Input *DeleteProjectInput
-	Copy  func(*DeleteProjectInput) DeleteProjectRequest
+	Input *types.DeleteProjectInput
+	Copy  func(*types.DeleteProjectInput) DeleteProjectRequest
 }
 
 // Send marshals and sends the DeleteProject API request.
@@ -145,7 +56,7 @@ func (r DeleteProjectRequest) Send(ctx context.Context) (*DeleteProjectResponse,
 	}
 
 	resp := &DeleteProjectResponse{
-		DeleteProjectOutput: r.Request.Data.(*DeleteProjectOutput),
+		DeleteProjectOutput: r.Request.Data.(*types.DeleteProjectOutput),
 		response:            &aws.Response{Request: r.Request},
 	}
 
@@ -155,7 +66,7 @@ func (r DeleteProjectRequest) Send(ctx context.Context) (*DeleteProjectResponse,
 // DeleteProjectResponse is the response type for the
 // DeleteProject API operation.
 type DeleteProjectResponse struct {
-	*DeleteProjectOutput
+	*types.DeleteProjectOutput
 
 	response *aws.Response
 }

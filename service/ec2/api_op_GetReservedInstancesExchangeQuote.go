@@ -4,95 +4,10 @@ package ec2
 
 import (
 	"context"
-	"fmt"
-	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-// Contains the parameters for GetReservedInstanceExchangeQuote.
-type GetReservedInstancesExchangeQuoteInput struct {
-	_ struct{} `type:"structure"`
-
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have
-	// the required permissions, the error response is DryRunOperation. Otherwise,
-	// it is UnauthorizedOperation.
-	DryRun *bool `type:"boolean"`
-
-	// The IDs of the Convertible Reserved Instances to exchange.
-	//
-	// ReservedInstanceIds is a required field
-	ReservedInstanceIds []string `locationName:"ReservedInstanceId" locationNameList:"ReservedInstanceId" type:"list" required:"true"`
-
-	// The configuration of the target Convertible Reserved Instance to exchange
-	// for your current Convertible Reserved Instances.
-	TargetConfigurations []TargetConfigurationRequest `locationName:"TargetConfiguration" locationNameList:"TargetConfigurationRequest" type:"list"`
-}
-
-// String returns the string representation
-func (s GetReservedInstancesExchangeQuoteInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetReservedInstancesExchangeQuoteInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetReservedInstancesExchangeQuoteInput"}
-
-	if s.ReservedInstanceIds == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ReservedInstanceIds"))
-	}
-	if s.TargetConfigurations != nil {
-		for i, v := range s.TargetConfigurations {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "TargetConfigurations", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Contains the output of GetReservedInstancesExchangeQuote.
-type GetReservedInstancesExchangeQuoteOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The currency of the transaction.
-	CurrencyCode *string `locationName:"currencyCode" type:"string"`
-
-	// If true, the exchange is valid. If false, the exchange cannot be completed.
-	IsValidExchange *bool `locationName:"isValidExchange" type:"boolean"`
-
-	// The new end date of the reservation term.
-	OutputReservedInstancesWillExpireAt *time.Time `locationName:"outputReservedInstancesWillExpireAt" type:"timestamp"`
-
-	// The total true upfront charge for the exchange.
-	PaymentDue *string `locationName:"paymentDue" type:"string"`
-
-	// The cost associated with the Reserved Instance.
-	ReservedInstanceValueRollup *ReservationValue `locationName:"reservedInstanceValueRollup" type:"structure"`
-
-	// The configuration of your Convertible Reserved Instances.
-	ReservedInstanceValueSet []ReservedInstanceReservationValue `locationName:"reservedInstanceValueSet" locationNameList:"item" type:"list"`
-
-	// The cost associated with the Reserved Instance.
-	TargetConfigurationValueRollup *ReservationValue `locationName:"targetConfigurationValueRollup" type:"structure"`
-
-	// The values of the target Convertible Reserved Instances.
-	TargetConfigurationValueSet []TargetReservationValue `locationName:"targetConfigurationValueSet" locationNameList:"item" type:"list"`
-
-	// Describes the reason why the exchange cannot be completed.
-	ValidationFailureReason *string `locationName:"validationFailureReason" type:"string"`
-}
-
-// String returns the string representation
-func (s GetReservedInstancesExchangeQuoteOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetReservedInstancesExchangeQuote = "GetReservedInstancesExchangeQuote"
 
@@ -112,7 +27,7 @@ const opGetReservedInstancesExchangeQuote = "GetReservedInstancesExchangeQuote"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetReservedInstancesExchangeQuote
-func (c *Client) GetReservedInstancesExchangeQuoteRequest(input *GetReservedInstancesExchangeQuoteInput) GetReservedInstancesExchangeQuoteRequest {
+func (c *Client) GetReservedInstancesExchangeQuoteRequest(input *types.GetReservedInstancesExchangeQuoteInput) GetReservedInstancesExchangeQuoteRequest {
 	op := &aws.Operation{
 		Name:       opGetReservedInstancesExchangeQuote,
 		HTTPMethod: "POST",
@@ -120,10 +35,10 @@ func (c *Client) GetReservedInstancesExchangeQuoteRequest(input *GetReservedInst
 	}
 
 	if input == nil {
-		input = &GetReservedInstancesExchangeQuoteInput{}
+		input = &types.GetReservedInstancesExchangeQuoteInput{}
 	}
 
-	req := c.newRequest(op, input, &GetReservedInstancesExchangeQuoteOutput{})
+	req := c.newRequest(op, input, &types.GetReservedInstancesExchangeQuoteOutput{})
 	return GetReservedInstancesExchangeQuoteRequest{Request: req, Input: input, Copy: c.GetReservedInstancesExchangeQuoteRequest}
 }
 
@@ -131,8 +46,8 @@ func (c *Client) GetReservedInstancesExchangeQuoteRequest(input *GetReservedInst
 // GetReservedInstancesExchangeQuote API operation.
 type GetReservedInstancesExchangeQuoteRequest struct {
 	*aws.Request
-	Input *GetReservedInstancesExchangeQuoteInput
-	Copy  func(*GetReservedInstancesExchangeQuoteInput) GetReservedInstancesExchangeQuoteRequest
+	Input *types.GetReservedInstancesExchangeQuoteInput
+	Copy  func(*types.GetReservedInstancesExchangeQuoteInput) GetReservedInstancesExchangeQuoteRequest
 }
 
 // Send marshals and sends the GetReservedInstancesExchangeQuote API request.
@@ -144,7 +59,7 @@ func (r GetReservedInstancesExchangeQuoteRequest) Send(ctx context.Context) (*Ge
 	}
 
 	resp := &GetReservedInstancesExchangeQuoteResponse{
-		GetReservedInstancesExchangeQuoteOutput: r.Request.Data.(*GetReservedInstancesExchangeQuoteOutput),
+		GetReservedInstancesExchangeQuoteOutput: r.Request.Data.(*types.GetReservedInstancesExchangeQuoteOutput),
 		response:                                &aws.Response{Request: r.Request},
 	}
 
@@ -154,7 +69,7 @@ func (r GetReservedInstancesExchangeQuoteRequest) Send(ctx context.Context) (*Ge
 // GetReservedInstancesExchangeQuoteResponse is the response type for the
 // GetReservedInstancesExchangeQuote API operation.
 type GetReservedInstancesExchangeQuoteResponse struct {
-	*GetReservedInstancesExchangeQuoteOutput
+	*types.GetReservedInstancesExchangeQuoteOutput
 
 	response *aws.Response
 }

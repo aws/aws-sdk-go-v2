@@ -6,56 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-type DeleteFlowLogsInput struct {
-	_ struct{} `type:"structure"`
-
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have
-	// the required permissions, the error response is DryRunOperation. Otherwise,
-	// it is UnauthorizedOperation.
-	DryRun *bool `type:"boolean"`
-
-	// One or more flow log IDs.
-	//
-	// Constraint: Maximum of 1000 flow log IDs.
-	//
-	// FlowLogIds is a required field
-	FlowLogIds []string `locationName:"FlowLogId" locationNameList:"item" type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteFlowLogsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteFlowLogsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteFlowLogsInput"}
-
-	if s.FlowLogIds == nil {
-		invalidParams.Add(aws.NewErrParamRequired("FlowLogIds"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteFlowLogsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Information about the flow logs that could not be deleted successfully.
-	Unsuccessful []UnsuccessfulItem `locationName:"unsuccessful" locationNameList:"item" type:"list"`
-}
-
-// String returns the string representation
-func (s DeleteFlowLogsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteFlowLogs = "DeleteFlowLogs"
 
@@ -72,7 +24,7 @@ const opDeleteFlowLogs = "DeleteFlowLogs"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteFlowLogs
-func (c *Client) DeleteFlowLogsRequest(input *DeleteFlowLogsInput) DeleteFlowLogsRequest {
+func (c *Client) DeleteFlowLogsRequest(input *types.DeleteFlowLogsInput) DeleteFlowLogsRequest {
 	op := &aws.Operation{
 		Name:       opDeleteFlowLogs,
 		HTTPMethod: "POST",
@@ -80,10 +32,10 @@ func (c *Client) DeleteFlowLogsRequest(input *DeleteFlowLogsInput) DeleteFlowLog
 	}
 
 	if input == nil {
-		input = &DeleteFlowLogsInput{}
+		input = &types.DeleteFlowLogsInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteFlowLogsOutput{})
+	req := c.newRequest(op, input, &types.DeleteFlowLogsOutput{})
 	return DeleteFlowLogsRequest{Request: req, Input: input, Copy: c.DeleteFlowLogsRequest}
 }
 
@@ -91,8 +43,8 @@ func (c *Client) DeleteFlowLogsRequest(input *DeleteFlowLogsInput) DeleteFlowLog
 // DeleteFlowLogs API operation.
 type DeleteFlowLogsRequest struct {
 	*aws.Request
-	Input *DeleteFlowLogsInput
-	Copy  func(*DeleteFlowLogsInput) DeleteFlowLogsRequest
+	Input *types.DeleteFlowLogsInput
+	Copy  func(*types.DeleteFlowLogsInput) DeleteFlowLogsRequest
 }
 
 // Send marshals and sends the DeleteFlowLogs API request.
@@ -104,7 +56,7 @@ func (r DeleteFlowLogsRequest) Send(ctx context.Context) (*DeleteFlowLogsRespons
 	}
 
 	resp := &DeleteFlowLogsResponse{
-		DeleteFlowLogsOutput: r.Request.Data.(*DeleteFlowLogsOutput),
+		DeleteFlowLogsOutput: r.Request.Data.(*types.DeleteFlowLogsOutput),
 		response:             &aws.Response{Request: r.Request},
 	}
 
@@ -114,7 +66,7 @@ func (r DeleteFlowLogsRequest) Send(ctx context.Context) (*DeleteFlowLogsRespons
 // DeleteFlowLogsResponse is the response type for the
 // DeleteFlowLogs API operation.
 type DeleteFlowLogsResponse struct {
-	*DeleteFlowLogsOutput
+	*types.DeleteFlowLogsOutput
 
 	response *aws.Response
 }

@@ -7,6 +7,7 @@ import (
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
+	"github.com/aws/aws-sdk-go-v2/service/appstream/types"
 )
 
 // WaitUntilFleetStarted uses the Amazon AppStream API operation
@@ -18,7 +19,7 @@ import (
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Client) WaitUntilFleetStarted(ctx context.Context, input *DescribeFleetsInput, opts ...aws.WaiterOption) error {
+func (c *Client) WaitUntilFleetStarted(ctx context.Context, input *types.DescribeFleetsInput, opts ...aws.WaiterOption) error {
 	w := aws.Waiter{
 		Name:        "WaitUntilFleetStarted",
 		MaxAttempts: 40,
@@ -42,7 +43,7 @@ func (c *Client) WaitUntilFleetStarted(ctx context.Context, input *DescribeFleet
 		},
 		Logger: c.Config.Logger,
 		NewRequest: func(opts []aws.Option) (*aws.Request, error) {
-			var inCpy *DescribeFleetsInput
+			var inCpy *types.DescribeFleetsInput
 			if input != nil {
 				tmp := *input
 				inCpy = &tmp
@@ -67,7 +68,7 @@ func (c *Client) WaitUntilFleetStarted(ctx context.Context, input *DescribeFleet
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Client) WaitUntilFleetStopped(ctx context.Context, input *DescribeFleetsInput, opts ...aws.WaiterOption) error {
+func (c *Client) WaitUntilFleetStopped(ctx context.Context, input *types.DescribeFleetsInput, opts ...aws.WaiterOption) error {
 	w := aws.Waiter{
 		Name:        "WaitUntilFleetStopped",
 		MaxAttempts: 40,
@@ -91,7 +92,7 @@ func (c *Client) WaitUntilFleetStopped(ctx context.Context, input *DescribeFleet
 		},
 		Logger: c.Config.Logger,
 		NewRequest: func(opts []aws.Option) (*aws.Request, error) {
-			var inCpy *DescribeFleetsInput
+			var inCpy *types.DescribeFleetsInput
 			if input != nil {
 				tmp := *input
 				inCpy = &tmp

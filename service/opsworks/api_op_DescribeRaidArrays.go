@@ -6,42 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/opsworks/types"
 )
-
-type DescribeRaidArraysInput struct {
-	_ struct{} `type:"structure"`
-
-	// The instance ID. If you use this parameter, DescribeRaidArrays returns descriptions
-	// of the RAID arrays associated with the specified instance.
-	InstanceId *string `type:"string"`
-
-	// An array of RAID array IDs. If you use this parameter, DescribeRaidArrays
-	// returns descriptions of the specified arrays. Otherwise, it returns a description
-	// of every array.
-	RaidArrayIds []string `type:"list"`
-
-	// The stack ID.
-	StackId *string `type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeRaidArraysInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Contains the response to a DescribeRaidArrays request.
-type DescribeRaidArraysOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A RaidArrays object that describes the specified RAID arrays.
-	RaidArrays []RaidArray `type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeRaidArraysOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeRaidArrays = "DescribeRaidArrays"
 
@@ -65,7 +31,7 @@ const opDescribeRaidArrays = "DescribeRaidArrays"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DescribeRaidArrays
-func (c *Client) DescribeRaidArraysRequest(input *DescribeRaidArraysInput) DescribeRaidArraysRequest {
+func (c *Client) DescribeRaidArraysRequest(input *types.DescribeRaidArraysInput) DescribeRaidArraysRequest {
 	op := &aws.Operation{
 		Name:       opDescribeRaidArrays,
 		HTTPMethod: "POST",
@@ -73,10 +39,10 @@ func (c *Client) DescribeRaidArraysRequest(input *DescribeRaidArraysInput) Descr
 	}
 
 	if input == nil {
-		input = &DescribeRaidArraysInput{}
+		input = &types.DescribeRaidArraysInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeRaidArraysOutput{})
+	req := c.newRequest(op, input, &types.DescribeRaidArraysOutput{})
 	return DescribeRaidArraysRequest{Request: req, Input: input, Copy: c.DescribeRaidArraysRequest}
 }
 
@@ -84,8 +50,8 @@ func (c *Client) DescribeRaidArraysRequest(input *DescribeRaidArraysInput) Descr
 // DescribeRaidArrays API operation.
 type DescribeRaidArraysRequest struct {
 	*aws.Request
-	Input *DescribeRaidArraysInput
-	Copy  func(*DescribeRaidArraysInput) DescribeRaidArraysRequest
+	Input *types.DescribeRaidArraysInput
+	Copy  func(*types.DescribeRaidArraysInput) DescribeRaidArraysRequest
 }
 
 // Send marshals and sends the DescribeRaidArrays API request.
@@ -97,7 +63,7 @@ func (r DescribeRaidArraysRequest) Send(ctx context.Context) (*DescribeRaidArray
 	}
 
 	resp := &DescribeRaidArraysResponse{
-		DescribeRaidArraysOutput: r.Request.Data.(*DescribeRaidArraysOutput),
+		DescribeRaidArraysOutput: r.Request.Data.(*types.DescribeRaidArraysOutput),
 		response:                 &aws.Response{Request: r.Request},
 	}
 
@@ -107,7 +73,7 @@ func (r DescribeRaidArraysRequest) Send(ctx context.Context) (*DescribeRaidArray
 // DescribeRaidArraysResponse is the response type for the
 // DescribeRaidArrays API operation.
 type DescribeRaidArraysResponse struct {
-	*DescribeRaidArraysOutput
+	*types.DescribeRaidArraysOutput
 
 	response *aws.Response
 }

@@ -4,120 +4,10 @@ package clouddirectory
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/clouddirectory/types"
 )
-
-type UpdateObjectAttributesInput struct {
-	_ struct{} `type:"structure"`
-
-	// The attributes update structure.
-	//
-	// AttributeUpdates is a required field
-	AttributeUpdates []ObjectAttributeUpdate `type:"list" required:"true"`
-
-	// The Amazon Resource Name (ARN) that is associated with the Directory where
-	// the object resides. For more information, see arns.
-	//
-	// DirectoryArn is a required field
-	DirectoryArn *string `location:"header" locationName:"x-amz-data-partition" type:"string" required:"true"`
-
-	// The reference that identifies the object.
-	//
-	// ObjectReference is a required field
-	ObjectReference *ObjectReference `type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s UpdateObjectAttributesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateObjectAttributesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateObjectAttributesInput"}
-
-	if s.AttributeUpdates == nil {
-		invalidParams.Add(aws.NewErrParamRequired("AttributeUpdates"))
-	}
-
-	if s.DirectoryArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DirectoryArn"))
-	}
-
-	if s.ObjectReference == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ObjectReference"))
-	}
-	if s.AttributeUpdates != nil {
-		for i, v := range s.AttributeUpdates {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "AttributeUpdates", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s UpdateObjectAttributesInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.AttributeUpdates != nil {
-		v := s.AttributeUpdates
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "AttributeUpdates", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	if s.ObjectReference != nil {
-		v := s.ObjectReference
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "ObjectReference", v, metadata)
-	}
-	if s.DirectoryArn != nil {
-		v := *s.DirectoryArn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "x-amz-data-partition", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type UpdateObjectAttributesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The ObjectIdentifier of the updated object.
-	ObjectIdentifier *string `type:"string"`
-}
-
-// String returns the string representation
-func (s UpdateObjectAttributesOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s UpdateObjectAttributesOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.ObjectIdentifier != nil {
-		v := *s.ObjectIdentifier
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "ObjectIdentifier", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opUpdateObjectAttributes = "UpdateObjectAttributes"
 
@@ -134,7 +24,7 @@ const opUpdateObjectAttributes = "UpdateObjectAttributes"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/UpdateObjectAttributes
-func (c *Client) UpdateObjectAttributesRequest(input *UpdateObjectAttributesInput) UpdateObjectAttributesRequest {
+func (c *Client) UpdateObjectAttributesRequest(input *types.UpdateObjectAttributesInput) UpdateObjectAttributesRequest {
 	op := &aws.Operation{
 		Name:       opUpdateObjectAttributes,
 		HTTPMethod: "PUT",
@@ -142,10 +32,10 @@ func (c *Client) UpdateObjectAttributesRequest(input *UpdateObjectAttributesInpu
 	}
 
 	if input == nil {
-		input = &UpdateObjectAttributesInput{}
+		input = &types.UpdateObjectAttributesInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateObjectAttributesOutput{})
+	req := c.newRequest(op, input, &types.UpdateObjectAttributesOutput{})
 	return UpdateObjectAttributesRequest{Request: req, Input: input, Copy: c.UpdateObjectAttributesRequest}
 }
 
@@ -153,8 +43,8 @@ func (c *Client) UpdateObjectAttributesRequest(input *UpdateObjectAttributesInpu
 // UpdateObjectAttributes API operation.
 type UpdateObjectAttributesRequest struct {
 	*aws.Request
-	Input *UpdateObjectAttributesInput
-	Copy  func(*UpdateObjectAttributesInput) UpdateObjectAttributesRequest
+	Input *types.UpdateObjectAttributesInput
+	Copy  func(*types.UpdateObjectAttributesInput) UpdateObjectAttributesRequest
 }
 
 // Send marshals and sends the UpdateObjectAttributes API request.
@@ -166,7 +56,7 @@ func (r UpdateObjectAttributesRequest) Send(ctx context.Context) (*UpdateObjectA
 	}
 
 	resp := &UpdateObjectAttributesResponse{
-		UpdateObjectAttributesOutput: r.Request.Data.(*UpdateObjectAttributesOutput),
+		UpdateObjectAttributesOutput: r.Request.Data.(*types.UpdateObjectAttributesOutput),
 		response:                     &aws.Response{Request: r.Request},
 	}
 
@@ -176,7 +66,7 @@ func (r UpdateObjectAttributesRequest) Send(ctx context.Context) (*UpdateObjectA
 // UpdateObjectAttributesResponse is the response type for the
 // UpdateObjectAttributes API operation.
 type UpdateObjectAttributesResponse struct {
-	*UpdateObjectAttributesOutput
+	*types.UpdateObjectAttributesOutput
 
 	response *aws.Response
 }

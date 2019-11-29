@@ -4,81 +4,10 @@ package redshift
 
 import (
 	"context"
-	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/redshift/types"
 )
-
-type ModifySnapshotScheduleInput struct {
-	_ struct{} `type:"structure"`
-
-	// An updated list of schedule definitions. A schedule definition is made up
-	// of schedule expressions, for example, "cron(30 12 *)" or "rate(12 hours)".
-	//
-	// ScheduleDefinitions is a required field
-	ScheduleDefinitions []string `locationNameList:"ScheduleDefinition" type:"list" required:"true"`
-
-	// A unique alphanumeric identifier of the schedule to modify.
-	//
-	// ScheduleIdentifier is a required field
-	ScheduleIdentifier *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s ModifySnapshotScheduleInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ModifySnapshotScheduleInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ModifySnapshotScheduleInput"}
-
-	if s.ScheduleDefinitions == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ScheduleDefinitions"))
-	}
-
-	if s.ScheduleIdentifier == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ScheduleIdentifier"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Describes a snapshot schedule. You can set a regular interval for creating
-// snapshots of a cluster. You can also schedule snapshots for specific dates.
-type ModifySnapshotScheduleOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The number of clusters associated with the schedule.
-	AssociatedClusterCount *int64 `type:"integer"`
-
-	// A list of clusters associated with the schedule. A maximum of 100 clusters
-	// is returned.
-	AssociatedClusters []ClusterAssociatedToSchedule `locationNameList:"ClusterAssociatedToSchedule" type:"list"`
-
-	NextInvocations []time.Time `locationNameList:"SnapshotTime" type:"list"`
-
-	// A list of ScheduleDefinitions.
-	ScheduleDefinitions []string `locationNameList:"ScheduleDefinition" type:"list"`
-
-	// The description of the schedule.
-	ScheduleDescription *string `type:"string"`
-
-	// A unique identifier for the schedule.
-	ScheduleIdentifier *string `type:"string"`
-
-	// An optional set of tags describing the schedule.
-	Tags []Tag `locationNameList:"Tag" type:"list"`
-}
-
-// String returns the string representation
-func (s ModifySnapshotScheduleOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opModifySnapshotSchedule = "ModifySnapshotSchedule"
 
@@ -96,7 +25,7 @@ const opModifySnapshotSchedule = "ModifySnapshotSchedule"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ModifySnapshotSchedule
-func (c *Client) ModifySnapshotScheduleRequest(input *ModifySnapshotScheduleInput) ModifySnapshotScheduleRequest {
+func (c *Client) ModifySnapshotScheduleRequest(input *types.ModifySnapshotScheduleInput) ModifySnapshotScheduleRequest {
 	op := &aws.Operation{
 		Name:       opModifySnapshotSchedule,
 		HTTPMethod: "POST",
@@ -104,10 +33,10 @@ func (c *Client) ModifySnapshotScheduleRequest(input *ModifySnapshotScheduleInpu
 	}
 
 	if input == nil {
-		input = &ModifySnapshotScheduleInput{}
+		input = &types.ModifySnapshotScheduleInput{}
 	}
 
-	req := c.newRequest(op, input, &ModifySnapshotScheduleOutput{})
+	req := c.newRequest(op, input, &types.ModifySnapshotScheduleOutput{})
 	return ModifySnapshotScheduleRequest{Request: req, Input: input, Copy: c.ModifySnapshotScheduleRequest}
 }
 
@@ -115,8 +44,8 @@ func (c *Client) ModifySnapshotScheduleRequest(input *ModifySnapshotScheduleInpu
 // ModifySnapshotSchedule API operation.
 type ModifySnapshotScheduleRequest struct {
 	*aws.Request
-	Input *ModifySnapshotScheduleInput
-	Copy  func(*ModifySnapshotScheduleInput) ModifySnapshotScheduleRequest
+	Input *types.ModifySnapshotScheduleInput
+	Copy  func(*types.ModifySnapshotScheduleInput) ModifySnapshotScheduleRequest
 }
 
 // Send marshals and sends the ModifySnapshotSchedule API request.
@@ -128,7 +57,7 @@ func (r ModifySnapshotScheduleRequest) Send(ctx context.Context) (*ModifySnapsho
 	}
 
 	resp := &ModifySnapshotScheduleResponse{
-		ModifySnapshotScheduleOutput: r.Request.Data.(*ModifySnapshotScheduleOutput),
+		ModifySnapshotScheduleOutput: r.Request.Data.(*types.ModifySnapshotScheduleOutput),
 		response:                     &aws.Response{Request: r.Request},
 	}
 
@@ -138,7 +67,7 @@ func (r ModifySnapshotScheduleRequest) Send(ctx context.Context) (*ModifySnapsho
 // ModifySnapshotScheduleResponse is the response type for the
 // ModifySnapshotSchedule API operation.
 type ModifySnapshotScheduleResponse struct {
-	*ModifySnapshotScheduleOutput
+	*types.ModifySnapshotScheduleOutput
 
 	response *aws.Response
 }

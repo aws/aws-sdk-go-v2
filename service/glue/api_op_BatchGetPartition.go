@@ -4,93 +4,10 @@ package glue
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/glue/types"
 )
-
-type BatchGetPartitionInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the Data Catalog where the partitions in question reside. If none
-	// is supplied, the AWS account ID is used by default.
-	CatalogId *string `min:"1" type:"string"`
-
-	// The name of the catalog database where the partitions reside.
-	//
-	// DatabaseName is a required field
-	DatabaseName *string `min:"1" type:"string" required:"true"`
-
-	// A list of partition values identifying the partitions to retrieve.
-	//
-	// PartitionsToGet is a required field
-	PartitionsToGet []PartitionValueList `type:"list" required:"true"`
-
-	// The name of the partitions' table.
-	//
-	// TableName is a required field
-	TableName *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s BatchGetPartitionInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *BatchGetPartitionInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "BatchGetPartitionInput"}
-	if s.CatalogId != nil && len(*s.CatalogId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("CatalogId", 1))
-	}
-
-	if s.DatabaseName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DatabaseName"))
-	}
-	if s.DatabaseName != nil && len(*s.DatabaseName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("DatabaseName", 1))
-	}
-
-	if s.PartitionsToGet == nil {
-		invalidParams.Add(aws.NewErrParamRequired("PartitionsToGet"))
-	}
-
-	if s.TableName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("TableName"))
-	}
-	if s.TableName != nil && len(*s.TableName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("TableName", 1))
-	}
-	if s.PartitionsToGet != nil {
-		for i, v := range s.PartitionsToGet {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "PartitionsToGet", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type BatchGetPartitionOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A list of the requested partitions.
-	Partitions []Partition `type:"list"`
-
-	// A list of the partition values in the request for which partitions were not
-	// returned.
-	UnprocessedKeys []PartitionValueList `type:"list"`
-}
-
-// String returns the string representation
-func (s BatchGetPartitionOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opBatchGetPartition = "BatchGetPartition"
 
@@ -107,7 +24,7 @@ const opBatchGetPartition = "BatchGetPartition"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/BatchGetPartition
-func (c *Client) BatchGetPartitionRequest(input *BatchGetPartitionInput) BatchGetPartitionRequest {
+func (c *Client) BatchGetPartitionRequest(input *types.BatchGetPartitionInput) BatchGetPartitionRequest {
 	op := &aws.Operation{
 		Name:       opBatchGetPartition,
 		HTTPMethod: "POST",
@@ -115,10 +32,10 @@ func (c *Client) BatchGetPartitionRequest(input *BatchGetPartitionInput) BatchGe
 	}
 
 	if input == nil {
-		input = &BatchGetPartitionInput{}
+		input = &types.BatchGetPartitionInput{}
 	}
 
-	req := c.newRequest(op, input, &BatchGetPartitionOutput{})
+	req := c.newRequest(op, input, &types.BatchGetPartitionOutput{})
 	return BatchGetPartitionRequest{Request: req, Input: input, Copy: c.BatchGetPartitionRequest}
 }
 
@@ -126,8 +43,8 @@ func (c *Client) BatchGetPartitionRequest(input *BatchGetPartitionInput) BatchGe
 // BatchGetPartition API operation.
 type BatchGetPartitionRequest struct {
 	*aws.Request
-	Input *BatchGetPartitionInput
-	Copy  func(*BatchGetPartitionInput) BatchGetPartitionRequest
+	Input *types.BatchGetPartitionInput
+	Copy  func(*types.BatchGetPartitionInput) BatchGetPartitionRequest
 }
 
 // Send marshals and sends the BatchGetPartition API request.
@@ -139,7 +56,7 @@ func (r BatchGetPartitionRequest) Send(ctx context.Context) (*BatchGetPartitionR
 	}
 
 	resp := &BatchGetPartitionResponse{
-		BatchGetPartitionOutput: r.Request.Data.(*BatchGetPartitionOutput),
+		BatchGetPartitionOutput: r.Request.Data.(*types.BatchGetPartitionOutput),
 		response:                &aws.Response{Request: r.Request},
 	}
 
@@ -149,7 +66,7 @@ func (r BatchGetPartitionRequest) Send(ctx context.Context) (*BatchGetPartitionR
 // BatchGetPartitionResponse is the response type for the
 // BatchGetPartition API operation.
 type BatchGetPartitionResponse struct {
-	*BatchGetPartitionOutput
+	*types.BatchGetPartitionOutput
 
 	response *aws.Response
 }

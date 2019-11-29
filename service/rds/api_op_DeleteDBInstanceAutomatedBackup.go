@@ -6,52 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/rds/types"
 )
-
-// Parameter input for the DeleteDBInstanceAutomatedBackup operation.
-type DeleteDBInstanceAutomatedBackupInput struct {
-	_ struct{} `type:"structure"`
-
-	// The identifier for the source DB instance, which can't be changed and which
-	// is unique to an AWS Region.
-	//
-	// DbiResourceId is a required field
-	DbiResourceId *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteDBInstanceAutomatedBackupInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteDBInstanceAutomatedBackupInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteDBInstanceAutomatedBackupInput"}
-
-	if s.DbiResourceId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DbiResourceId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteDBInstanceAutomatedBackupOutput struct {
-	_ struct{} `type:"structure"`
-
-	// An automated backup of a DB instance. It it consists of system backups, transaction
-	// logs, and the database instance properties that existed at the time you deleted
-	// the source instance.
-	DBInstanceAutomatedBackup *DBInstanceAutomatedBackup `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteDBInstanceAutomatedBackupOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteDBInstanceAutomatedBackup = "DeleteDBInstanceAutomatedBackup"
 
@@ -69,7 +25,7 @@ const opDeleteDBInstanceAutomatedBackup = "DeleteDBInstanceAutomatedBackup"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteDBInstanceAutomatedBackup
-func (c *Client) DeleteDBInstanceAutomatedBackupRequest(input *DeleteDBInstanceAutomatedBackupInput) DeleteDBInstanceAutomatedBackupRequest {
+func (c *Client) DeleteDBInstanceAutomatedBackupRequest(input *types.DeleteDBInstanceAutomatedBackupInput) DeleteDBInstanceAutomatedBackupRequest {
 	op := &aws.Operation{
 		Name:       opDeleteDBInstanceAutomatedBackup,
 		HTTPMethod: "POST",
@@ -77,10 +33,10 @@ func (c *Client) DeleteDBInstanceAutomatedBackupRequest(input *DeleteDBInstanceA
 	}
 
 	if input == nil {
-		input = &DeleteDBInstanceAutomatedBackupInput{}
+		input = &types.DeleteDBInstanceAutomatedBackupInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteDBInstanceAutomatedBackupOutput{})
+	req := c.newRequest(op, input, &types.DeleteDBInstanceAutomatedBackupOutput{})
 	return DeleteDBInstanceAutomatedBackupRequest{Request: req, Input: input, Copy: c.DeleteDBInstanceAutomatedBackupRequest}
 }
 
@@ -88,8 +44,8 @@ func (c *Client) DeleteDBInstanceAutomatedBackupRequest(input *DeleteDBInstanceA
 // DeleteDBInstanceAutomatedBackup API operation.
 type DeleteDBInstanceAutomatedBackupRequest struct {
 	*aws.Request
-	Input *DeleteDBInstanceAutomatedBackupInput
-	Copy  func(*DeleteDBInstanceAutomatedBackupInput) DeleteDBInstanceAutomatedBackupRequest
+	Input *types.DeleteDBInstanceAutomatedBackupInput
+	Copy  func(*types.DeleteDBInstanceAutomatedBackupInput) DeleteDBInstanceAutomatedBackupRequest
 }
 
 // Send marshals and sends the DeleteDBInstanceAutomatedBackup API request.
@@ -101,7 +57,7 @@ func (r DeleteDBInstanceAutomatedBackupRequest) Send(ctx context.Context) (*Dele
 	}
 
 	resp := &DeleteDBInstanceAutomatedBackupResponse{
-		DeleteDBInstanceAutomatedBackupOutput: r.Request.Data.(*DeleteDBInstanceAutomatedBackupOutput),
+		DeleteDBInstanceAutomatedBackupOutput: r.Request.Data.(*types.DeleteDBInstanceAutomatedBackupOutput),
 		response:                              &aws.Response{Request: r.Request},
 	}
 
@@ -111,7 +67,7 @@ func (r DeleteDBInstanceAutomatedBackupRequest) Send(ctx context.Context) (*Dele
 // DeleteDBInstanceAutomatedBackupResponse is the response type for the
 // DeleteDBInstanceAutomatedBackup API operation.
 type DeleteDBInstanceAutomatedBackupResponse struct {
-	*DeleteDBInstanceAutomatedBackupOutput
+	*types.DeleteDBInstanceAutomatedBackupOutput
 
 	response *aws.Response
 }

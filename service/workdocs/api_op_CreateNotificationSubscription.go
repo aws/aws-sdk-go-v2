@@ -6,124 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/workdocs/types"
 )
-
-type CreateNotificationSubscriptionInput struct {
-	_ struct{} `type:"structure"`
-
-	// The endpoint to receive the notifications. If the protocol is HTTPS, the
-	// endpoint is a URL that begins with https.
-	//
-	// Endpoint is a required field
-	Endpoint *string `min:"1" type:"string" required:"true"`
-
-	// The ID of the organization.
-	//
-	// OrganizationId is a required field
-	OrganizationId *string `location:"uri" locationName:"OrganizationId" min:"1" type:"string" required:"true"`
-
-	// The protocol to use. The supported value is https, which delivers JSON-encoded
-	// messages using HTTPS POST.
-	//
-	// Protocol is a required field
-	Protocol SubscriptionProtocolType `type:"string" required:"true" enum:"true"`
-
-	// The notification type.
-	//
-	// SubscriptionType is a required field
-	SubscriptionType SubscriptionType `type:"string" required:"true" enum:"true"`
-}
-
-// String returns the string representation
-func (s CreateNotificationSubscriptionInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateNotificationSubscriptionInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateNotificationSubscriptionInput"}
-
-	if s.Endpoint == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Endpoint"))
-	}
-	if s.Endpoint != nil && len(*s.Endpoint) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Endpoint", 1))
-	}
-
-	if s.OrganizationId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("OrganizationId"))
-	}
-	if s.OrganizationId != nil && len(*s.OrganizationId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("OrganizationId", 1))
-	}
-	if len(s.Protocol) == 0 {
-		invalidParams.Add(aws.NewErrParamRequired("Protocol"))
-	}
-	if len(s.SubscriptionType) == 0 {
-		invalidParams.Add(aws.NewErrParamRequired("SubscriptionType"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s CreateNotificationSubscriptionInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.Endpoint != nil {
-		v := *s.Endpoint
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "Endpoint", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if len(s.Protocol) > 0 {
-		v := s.Protocol
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "Protocol", protocol.QuotedValue{ValueMarshaler: v}, metadata)
-	}
-	if len(s.SubscriptionType) > 0 {
-		v := s.SubscriptionType
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "SubscriptionType", protocol.QuotedValue{ValueMarshaler: v}, metadata)
-	}
-	if s.OrganizationId != nil {
-		v := *s.OrganizationId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "OrganizationId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type CreateNotificationSubscriptionOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The subscription.
-	Subscription *Subscription `type:"structure"`
-}
-
-// String returns the string representation
-func (s CreateNotificationSubscriptionOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s CreateNotificationSubscriptionOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.Subscription != nil {
-		v := s.Subscription
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "Subscription", v, metadata)
-	}
-	return nil
-}
 
 const opCreateNotificationSubscription = "CreateNotificationSubscription"
 
@@ -144,7 +28,7 @@ const opCreateNotificationSubscription = "CreateNotificationSubscription"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/CreateNotificationSubscription
-func (c *Client) CreateNotificationSubscriptionRequest(input *CreateNotificationSubscriptionInput) CreateNotificationSubscriptionRequest {
+func (c *Client) CreateNotificationSubscriptionRequest(input *types.CreateNotificationSubscriptionInput) CreateNotificationSubscriptionRequest {
 	op := &aws.Operation{
 		Name:       opCreateNotificationSubscription,
 		HTTPMethod: "POST",
@@ -152,10 +36,10 @@ func (c *Client) CreateNotificationSubscriptionRequest(input *CreateNotification
 	}
 
 	if input == nil {
-		input = &CreateNotificationSubscriptionInput{}
+		input = &types.CreateNotificationSubscriptionInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateNotificationSubscriptionOutput{})
+	req := c.newRequest(op, input, &types.CreateNotificationSubscriptionOutput{})
 	return CreateNotificationSubscriptionRequest{Request: req, Input: input, Copy: c.CreateNotificationSubscriptionRequest}
 }
 
@@ -163,8 +47,8 @@ func (c *Client) CreateNotificationSubscriptionRequest(input *CreateNotification
 // CreateNotificationSubscription API operation.
 type CreateNotificationSubscriptionRequest struct {
 	*aws.Request
-	Input *CreateNotificationSubscriptionInput
-	Copy  func(*CreateNotificationSubscriptionInput) CreateNotificationSubscriptionRequest
+	Input *types.CreateNotificationSubscriptionInput
+	Copy  func(*types.CreateNotificationSubscriptionInput) CreateNotificationSubscriptionRequest
 }
 
 // Send marshals and sends the CreateNotificationSubscription API request.
@@ -176,7 +60,7 @@ func (r CreateNotificationSubscriptionRequest) Send(ctx context.Context) (*Creat
 	}
 
 	resp := &CreateNotificationSubscriptionResponse{
-		CreateNotificationSubscriptionOutput: r.Request.Data.(*CreateNotificationSubscriptionOutput),
+		CreateNotificationSubscriptionOutput: r.Request.Data.(*types.CreateNotificationSubscriptionOutput),
 		response:                             &aws.Response{Request: r.Request},
 	}
 
@@ -186,7 +70,7 @@ func (r CreateNotificationSubscriptionRequest) Send(ctx context.Context) (*Creat
 // CreateNotificationSubscriptionResponse is the response type for the
 // CreateNotificationSubscription API operation.
 type CreateNotificationSubscriptionResponse struct {
-	*CreateNotificationSubscriptionOutput
+	*types.CreateNotificationSubscriptionOutput
 
 	response *aws.Response
 }

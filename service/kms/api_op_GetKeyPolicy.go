@@ -6,74 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/kms/types"
 )
-
-type GetKeyPolicyInput struct {
-	_ struct{} `type:"structure"`
-
-	// A unique identifier for the customer master key (CMK).
-	//
-	// Specify the key ID or the Amazon Resource Name (ARN) of the CMK.
-	//
-	// For example:
-	//
-	//    * Key ID: 1234abcd-12ab-34cd-56ef-1234567890ab
-	//
-	//    * Key ARN: arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab
-	//
-	// To get the key ID and key ARN for a CMK, use ListKeys or DescribeKey.
-	//
-	// KeyId is a required field
-	KeyId *string `min:"1" type:"string" required:"true"`
-
-	// Specifies the name of the key policy. The only valid name is default. To
-	// get the names of key policies, use ListKeyPolicies.
-	//
-	// PolicyName is a required field
-	PolicyName *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetKeyPolicyInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetKeyPolicyInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetKeyPolicyInput"}
-
-	if s.KeyId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("KeyId"))
-	}
-	if s.KeyId != nil && len(*s.KeyId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("KeyId", 1))
-	}
-
-	if s.PolicyName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("PolicyName"))
-	}
-	if s.PolicyName != nil && len(*s.PolicyName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("PolicyName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type GetKeyPolicyOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A key policy document in JSON format.
-	Policy *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s GetKeyPolicyOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetKeyPolicy = "GetKeyPolicy"
 
@@ -91,7 +25,7 @@ const opGetKeyPolicy = "GetKeyPolicy"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/GetKeyPolicy
-func (c *Client) GetKeyPolicyRequest(input *GetKeyPolicyInput) GetKeyPolicyRequest {
+func (c *Client) GetKeyPolicyRequest(input *types.GetKeyPolicyInput) GetKeyPolicyRequest {
 	op := &aws.Operation{
 		Name:       opGetKeyPolicy,
 		HTTPMethod: "POST",
@@ -99,10 +33,10 @@ func (c *Client) GetKeyPolicyRequest(input *GetKeyPolicyInput) GetKeyPolicyReque
 	}
 
 	if input == nil {
-		input = &GetKeyPolicyInput{}
+		input = &types.GetKeyPolicyInput{}
 	}
 
-	req := c.newRequest(op, input, &GetKeyPolicyOutput{})
+	req := c.newRequest(op, input, &types.GetKeyPolicyOutput{})
 	return GetKeyPolicyRequest{Request: req, Input: input, Copy: c.GetKeyPolicyRequest}
 }
 
@@ -110,8 +44,8 @@ func (c *Client) GetKeyPolicyRequest(input *GetKeyPolicyInput) GetKeyPolicyReque
 // GetKeyPolicy API operation.
 type GetKeyPolicyRequest struct {
 	*aws.Request
-	Input *GetKeyPolicyInput
-	Copy  func(*GetKeyPolicyInput) GetKeyPolicyRequest
+	Input *types.GetKeyPolicyInput
+	Copy  func(*types.GetKeyPolicyInput) GetKeyPolicyRequest
 }
 
 // Send marshals and sends the GetKeyPolicy API request.
@@ -123,7 +57,7 @@ func (r GetKeyPolicyRequest) Send(ctx context.Context) (*GetKeyPolicyResponse, e
 	}
 
 	resp := &GetKeyPolicyResponse{
-		GetKeyPolicyOutput: r.Request.Data.(*GetKeyPolicyOutput),
+		GetKeyPolicyOutput: r.Request.Data.(*types.GetKeyPolicyOutput),
 		response:           &aws.Response{Request: r.Request},
 	}
 
@@ -133,7 +67,7 @@ func (r GetKeyPolicyRequest) Send(ctx context.Context) (*GetKeyPolicyResponse, e
 // GetKeyPolicyResponse is the response type for the
 // GetKeyPolicy API operation.
 type GetKeyPolicyResponse struct {
-	*GetKeyPolicyOutput
+	*types.GetKeyPolicyOutput
 
 	response *aws.Response
 }

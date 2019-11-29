@@ -4,199 +4,10 @@ package workdocs
 
 import (
 	"context"
-	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/workdocs/types"
 )
-
-type DescribeActivitiesInput struct {
-	_ struct{} `type:"structure"`
-
-	// Specifies which activity types to include in the response. If this field
-	// is left empty, all activity types are returned.
-	ActivityTypes *string `location:"querystring" locationName:"activityTypes" min:"1" type:"string"`
-
-	// Amazon WorkDocs authentication token. Do not set this field when using administrative
-	// API actions, as in accessing the API using AWS credentials.
-	AuthenticationToken *string `location:"header" locationName:"Authentication" min:"1" type:"string" sensitive:"true"`
-
-	// The timestamp that determines the end time of the activities. The response
-	// includes the activities performed before the specified timestamp.
-	EndTime *time.Time `location:"querystring" locationName:"endTime" type:"timestamp"`
-
-	// Includes indirect activities. An indirect activity results from a direct
-	// activity performed on a parent resource. For example, sharing a parent folder
-	// (the direct activity) shares all of the subfolders and documents within the
-	// parent folder (the indirect activity).
-	IncludeIndirectActivities *bool `location:"querystring" locationName:"includeIndirectActivities" type:"boolean"`
-
-	// The maximum number of items to return.
-	Limit *int64 `location:"querystring" locationName:"limit" min:"1" type:"integer"`
-
-	// The marker for the next set of results.
-	Marker *string `location:"querystring" locationName:"marker" min:"1" type:"string"`
-
-	// The ID of the organization. This is a mandatory parameter when using administrative
-	// API (SigV4) requests.
-	OrganizationId *string `location:"querystring" locationName:"organizationId" min:"1" type:"string"`
-
-	// The document or folder ID for which to describe activity types.
-	ResourceId *string `location:"querystring" locationName:"resourceId" min:"1" type:"string"`
-
-	// The timestamp that determines the starting time of the activities. The response
-	// includes the activities performed after the specified timestamp.
-	StartTime *time.Time `location:"querystring" locationName:"startTime" type:"timestamp"`
-
-	// The ID of the user who performed the action. The response includes activities
-	// pertaining to this user. This is an optional parameter and is only applicable
-	// for administrative API (SigV4) requests.
-	UserId *string `location:"querystring" locationName:"userId" min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeActivitiesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeActivitiesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeActivitiesInput"}
-	if s.ActivityTypes != nil && len(*s.ActivityTypes) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ActivityTypes", 1))
-	}
-	if s.AuthenticationToken != nil && len(*s.AuthenticationToken) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("AuthenticationToken", 1))
-	}
-	if s.Limit != nil && *s.Limit < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("Limit", 1))
-	}
-	if s.Marker != nil && len(*s.Marker) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Marker", 1))
-	}
-	if s.OrganizationId != nil && len(*s.OrganizationId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("OrganizationId", 1))
-	}
-	if s.ResourceId != nil && len(*s.ResourceId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ResourceId", 1))
-	}
-	if s.UserId != nil && len(*s.UserId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("UserId", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DescribeActivitiesInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.AuthenticationToken != nil {
-		v := *s.AuthenticationToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "Authentication", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.ActivityTypes != nil {
-		v := *s.ActivityTypes
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "activityTypes", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.EndTime != nil {
-		v := *s.EndTime
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "endTime",
-			protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormatName, QuotedFormatTime: false}, metadata)
-	}
-	if s.IncludeIndirectActivities != nil {
-		v := *s.IncludeIndirectActivities
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "includeIndirectActivities", protocol.BoolValue(v), metadata)
-	}
-	if s.Limit != nil {
-		v := *s.Limit
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "limit", protocol.Int64Value(v), metadata)
-	}
-	if s.Marker != nil {
-		v := *s.Marker
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "marker", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.OrganizationId != nil {
-		v := *s.OrganizationId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "organizationId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.ResourceId != nil {
-		v := *s.ResourceId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "resourceId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.StartTime != nil {
-		v := *s.StartTime
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "startTime",
-			protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormatName, QuotedFormatTime: false}, metadata)
-	}
-	if s.UserId != nil {
-		v := *s.UserId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "userId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type DescribeActivitiesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The marker for the next set of results.
-	Marker *string `min:"1" type:"string"`
-
-	// The list of activities for the specified user and time period.
-	UserActivities []Activity `type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeActivitiesOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DescribeActivitiesOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.Marker != nil {
-		v := *s.Marker
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "Marker", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.UserActivities != nil {
-		v := s.UserActivities
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "UserActivities", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	return nil
-}
 
 const opDescribeActivities = "DescribeActivities"
 
@@ -213,7 +24,7 @@ const opDescribeActivities = "DescribeActivities"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/DescribeActivities
-func (c *Client) DescribeActivitiesRequest(input *DescribeActivitiesInput) DescribeActivitiesRequest {
+func (c *Client) DescribeActivitiesRequest(input *types.DescribeActivitiesInput) DescribeActivitiesRequest {
 	op := &aws.Operation{
 		Name:       opDescribeActivities,
 		HTTPMethod: "GET",
@@ -221,10 +32,10 @@ func (c *Client) DescribeActivitiesRequest(input *DescribeActivitiesInput) Descr
 	}
 
 	if input == nil {
-		input = &DescribeActivitiesInput{}
+		input = &types.DescribeActivitiesInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeActivitiesOutput{})
+	req := c.newRequest(op, input, &types.DescribeActivitiesOutput{})
 	return DescribeActivitiesRequest{Request: req, Input: input, Copy: c.DescribeActivitiesRequest}
 }
 
@@ -232,8 +43,8 @@ func (c *Client) DescribeActivitiesRequest(input *DescribeActivitiesInput) Descr
 // DescribeActivities API operation.
 type DescribeActivitiesRequest struct {
 	*aws.Request
-	Input *DescribeActivitiesInput
-	Copy  func(*DescribeActivitiesInput) DescribeActivitiesRequest
+	Input *types.DescribeActivitiesInput
+	Copy  func(*types.DescribeActivitiesInput) DescribeActivitiesRequest
 }
 
 // Send marshals and sends the DescribeActivities API request.
@@ -245,7 +56,7 @@ func (r DescribeActivitiesRequest) Send(ctx context.Context) (*DescribeActivitie
 	}
 
 	resp := &DescribeActivitiesResponse{
-		DescribeActivitiesOutput: r.Request.Data.(*DescribeActivitiesOutput),
+		DescribeActivitiesOutput: r.Request.Data.(*types.DescribeActivitiesOutput),
 		response:                 &aws.Response{Request: r.Request},
 	}
 
@@ -255,7 +66,7 @@ func (r DescribeActivitiesRequest) Send(ctx context.Context) (*DescribeActivitie
 // DescribeActivitiesResponse is the response type for the
 // DescribeActivities API operation.
 type DescribeActivitiesResponse struct {
-	*DescribeActivitiesOutput
+	*types.DescribeActivitiesOutput
 
 	response *aws.Response
 }

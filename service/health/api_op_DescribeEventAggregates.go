@@ -6,75 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/health/types"
 )
-
-type DescribeEventAggregatesInput struct {
-	_ struct{} `type:"structure"`
-
-	// The only currently supported value is eventTypeCategory.
-	//
-	// AggregateField is a required field
-	AggregateField EventAggregateField `locationName:"aggregateField" type:"string" required:"true" enum:"true"`
-
-	// Values to narrow the results returned.
-	Filter *EventFilter `locationName:"filter" type:"structure"`
-
-	// The maximum number of items to return in one batch, between 10 and 100, inclusive.
-	MaxResults *int64 `locationName:"maxResults" min:"10" type:"integer"`
-
-	// If the results of a search are large, only a portion of the results are returned,
-	// and a nextToken pagination token is returned in the response. To retrieve
-	// the next batch of results, reissue the search request and include the returned
-	// token. When all results have been returned, the response does not contain
-	// a pagination token value.
-	NextToken *string `locationName:"nextToken" type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeEventAggregatesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeEventAggregatesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeEventAggregatesInput"}
-	if len(s.AggregateField) == 0 {
-		invalidParams.Add(aws.NewErrParamRequired("AggregateField"))
-	}
-	if s.MaxResults != nil && *s.MaxResults < 10 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 10))
-	}
-	if s.Filter != nil {
-		if err := s.Filter.Validate(); err != nil {
-			invalidParams.AddNested("Filter", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribeEventAggregatesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The number of events in each category that meet the optional filter criteria.
-	EventAggregates []EventAggregate `locationName:"eventAggregates" type:"list"`
-
-	// If the results of a search are large, only a portion of the results are returned,
-	// and a nextToken pagination token is returned in the response. To retrieve
-	// the next batch of results, reissue the search request and include the returned
-	// token. When all results have been returned, the response does not contain
-	// a pagination token value.
-	NextToken *string `locationName:"nextToken" type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeEventAggregatesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeEventAggregates = "DescribeEventAggregates"
 
@@ -93,7 +26,7 @@ const opDescribeEventAggregates = "DescribeEventAggregates"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/health-2016-08-04/DescribeEventAggregates
-func (c *Client) DescribeEventAggregatesRequest(input *DescribeEventAggregatesInput) DescribeEventAggregatesRequest {
+func (c *Client) DescribeEventAggregatesRequest(input *types.DescribeEventAggregatesInput) DescribeEventAggregatesRequest {
 	op := &aws.Operation{
 		Name:       opDescribeEventAggregates,
 		HTTPMethod: "POST",
@@ -107,10 +40,10 @@ func (c *Client) DescribeEventAggregatesRequest(input *DescribeEventAggregatesIn
 	}
 
 	if input == nil {
-		input = &DescribeEventAggregatesInput{}
+		input = &types.DescribeEventAggregatesInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeEventAggregatesOutput{})
+	req := c.newRequest(op, input, &types.DescribeEventAggregatesOutput{})
 	return DescribeEventAggregatesRequest{Request: req, Input: input, Copy: c.DescribeEventAggregatesRequest}
 }
 
@@ -118,8 +51,8 @@ func (c *Client) DescribeEventAggregatesRequest(input *DescribeEventAggregatesIn
 // DescribeEventAggregates API operation.
 type DescribeEventAggregatesRequest struct {
 	*aws.Request
-	Input *DescribeEventAggregatesInput
-	Copy  func(*DescribeEventAggregatesInput) DescribeEventAggregatesRequest
+	Input *types.DescribeEventAggregatesInput
+	Copy  func(*types.DescribeEventAggregatesInput) DescribeEventAggregatesRequest
 }
 
 // Send marshals and sends the DescribeEventAggregates API request.
@@ -131,7 +64,7 @@ func (r DescribeEventAggregatesRequest) Send(ctx context.Context) (*DescribeEven
 	}
 
 	resp := &DescribeEventAggregatesResponse{
-		DescribeEventAggregatesOutput: r.Request.Data.(*DescribeEventAggregatesOutput),
+		DescribeEventAggregatesOutput: r.Request.Data.(*types.DescribeEventAggregatesOutput),
 		response:                      &aws.Response{Request: r.Request},
 	}
 
@@ -161,7 +94,7 @@ func NewDescribeEventAggregatesPaginator(req DescribeEventAggregatesRequest) Des
 	return DescribeEventAggregatesPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *DescribeEventAggregatesInput
+				var inCpy *types.DescribeEventAggregatesInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -181,14 +114,14 @@ type DescribeEventAggregatesPaginator struct {
 	aws.Pager
 }
 
-func (p *DescribeEventAggregatesPaginator) CurrentPage() *DescribeEventAggregatesOutput {
-	return p.Pager.CurrentPage().(*DescribeEventAggregatesOutput)
+func (p *DescribeEventAggregatesPaginator) CurrentPage() *types.DescribeEventAggregatesOutput {
+	return p.Pager.CurrentPage().(*types.DescribeEventAggregatesOutput)
 }
 
 // DescribeEventAggregatesResponse is the response type for the
 // DescribeEventAggregates API operation.
 type DescribeEventAggregatesResponse struct {
-	*DescribeEventAggregatesOutput
+	*types.DescribeEventAggregatesOutput
 
 	response *aws.Response
 }

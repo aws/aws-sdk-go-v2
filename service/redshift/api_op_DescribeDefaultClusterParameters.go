@@ -6,66 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/redshift/types"
 )
-
-type DescribeDefaultClusterParametersInput struct {
-	_ struct{} `type:"structure"`
-
-	// An optional parameter that specifies the starting point to return a set of
-	// response records. When the results of a DescribeDefaultClusterParameters
-	// request exceed the value specified in MaxRecords, AWS returns a value in
-	// the Marker field of the response. You can retrieve the next set of response
-	// records by providing the returned marker value in the Marker parameter and
-	// retrying the request.
-	Marker *string `type:"string"`
-
-	// The maximum number of response records to return in each call. If the number
-	// of remaining response records exceeds the specified MaxRecords value, a value
-	// is returned in a marker field of the response. You can retrieve the next
-	// set of records by retrying the command with the returned marker value.
-	//
-	// Default: 100
-	//
-	// Constraints: minimum 20, maximum 100.
-	MaxRecords *int64 `type:"integer"`
-
-	// The name of the cluster parameter group family.
-	//
-	// ParameterGroupFamily is a required field
-	ParameterGroupFamily *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeDefaultClusterParametersInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeDefaultClusterParametersInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeDefaultClusterParametersInput"}
-
-	if s.ParameterGroupFamily == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ParameterGroupFamily"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribeDefaultClusterParametersOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Describes the default cluster parameters for a parameter group family.
-	DefaultClusterParameters *DefaultClusterParameters `type:"structure"`
-}
-
-// String returns the string representation
-func (s DescribeDefaultClusterParametersOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeDefaultClusterParameters = "DescribeDefaultClusterParameters"
 
@@ -86,7 +28,7 @@ const opDescribeDefaultClusterParameters = "DescribeDefaultClusterParameters"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeDefaultClusterParameters
-func (c *Client) DescribeDefaultClusterParametersRequest(input *DescribeDefaultClusterParametersInput) DescribeDefaultClusterParametersRequest {
+func (c *Client) DescribeDefaultClusterParametersRequest(input *types.DescribeDefaultClusterParametersInput) DescribeDefaultClusterParametersRequest {
 	op := &aws.Operation{
 		Name:       opDescribeDefaultClusterParameters,
 		HTTPMethod: "POST",
@@ -100,10 +42,10 @@ func (c *Client) DescribeDefaultClusterParametersRequest(input *DescribeDefaultC
 	}
 
 	if input == nil {
-		input = &DescribeDefaultClusterParametersInput{}
+		input = &types.DescribeDefaultClusterParametersInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeDefaultClusterParametersOutput{})
+	req := c.newRequest(op, input, &types.DescribeDefaultClusterParametersOutput{})
 	return DescribeDefaultClusterParametersRequest{Request: req, Input: input, Copy: c.DescribeDefaultClusterParametersRequest}
 }
 
@@ -111,8 +53,8 @@ func (c *Client) DescribeDefaultClusterParametersRequest(input *DescribeDefaultC
 // DescribeDefaultClusterParameters API operation.
 type DescribeDefaultClusterParametersRequest struct {
 	*aws.Request
-	Input *DescribeDefaultClusterParametersInput
-	Copy  func(*DescribeDefaultClusterParametersInput) DescribeDefaultClusterParametersRequest
+	Input *types.DescribeDefaultClusterParametersInput
+	Copy  func(*types.DescribeDefaultClusterParametersInput) DescribeDefaultClusterParametersRequest
 }
 
 // Send marshals and sends the DescribeDefaultClusterParameters API request.
@@ -124,7 +66,7 @@ func (r DescribeDefaultClusterParametersRequest) Send(ctx context.Context) (*Des
 	}
 
 	resp := &DescribeDefaultClusterParametersResponse{
-		DescribeDefaultClusterParametersOutput: r.Request.Data.(*DescribeDefaultClusterParametersOutput),
+		DescribeDefaultClusterParametersOutput: r.Request.Data.(*types.DescribeDefaultClusterParametersOutput),
 		response:                               &aws.Response{Request: r.Request},
 	}
 
@@ -154,7 +96,7 @@ func NewDescribeDefaultClusterParametersPaginator(req DescribeDefaultClusterPara
 	return DescribeDefaultClusterParametersPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *DescribeDefaultClusterParametersInput
+				var inCpy *types.DescribeDefaultClusterParametersInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -174,14 +116,14 @@ type DescribeDefaultClusterParametersPaginator struct {
 	aws.Pager
 }
 
-func (p *DescribeDefaultClusterParametersPaginator) CurrentPage() *DescribeDefaultClusterParametersOutput {
-	return p.Pager.CurrentPage().(*DescribeDefaultClusterParametersOutput)
+func (p *DescribeDefaultClusterParametersPaginator) CurrentPage() *types.DescribeDefaultClusterParametersOutput {
+	return p.Pager.CurrentPage().(*types.DescribeDefaultClusterParametersOutput)
 }
 
 // DescribeDefaultClusterParametersResponse is the response type for the
 // DescribeDefaultClusterParameters API operation.
 type DescribeDefaultClusterParametersResponse struct {
-	*DescribeDefaultClusterParametersOutput
+	*types.DescribeDefaultClusterParametersOutput
 
 	response *aws.Response
 }

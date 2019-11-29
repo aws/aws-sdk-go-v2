@@ -4,153 +4,10 @@ package mediaconnect
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/mediaconnect/types"
 )
-
-// Creates a new flow. The request must include one source. The request optionally
-// can include outputs (up to 20) and one entitlement.
-type CreateFlowInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Availability Zone that you want to create the flow in. These options
-	// are limited to the Availability Zones within the current AWS Region.
-	AvailabilityZone *string `locationName:"availabilityZone" type:"string"`
-
-	// The entitlements that you want to grant on a flow.
-	Entitlements []GrantEntitlementRequest `locationName:"entitlements" type:"list"`
-
-	// The name of the flow.
-	//
-	// Name is a required field
-	Name *string `locationName:"name" type:"string" required:"true"`
-
-	// The outputs that you want to add to this flow.
-	Outputs []AddOutputRequest `locationName:"outputs" type:"list"`
-
-	// The settings for the source of the flow.
-	//
-	// Source is a required field
-	Source *SetSourceRequest `locationName:"source" type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s CreateFlowInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateFlowInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateFlowInput"}
-
-	if s.Name == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Name"))
-	}
-
-	if s.Source == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Source"))
-	}
-	if s.Entitlements != nil {
-		for i, v := range s.Entitlements {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Entitlements", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-	if s.Outputs != nil {
-		for i, v := range s.Outputs {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Outputs", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-	if s.Source != nil {
-		if err := s.Source.Validate(); err != nil {
-			invalidParams.AddNested("Source", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s CreateFlowInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.AvailabilityZone != nil {
-		v := *s.AvailabilityZone
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "availabilityZone", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Entitlements != nil {
-		v := s.Entitlements
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "entitlements", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	if s.Name != nil {
-		v := *s.Name
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Outputs != nil {
-		v := s.Outputs
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "outputs", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	if s.Source != nil {
-		v := s.Source
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "source", v, metadata)
-	}
-	return nil
-}
-
-// The result of a successful CreateFlow request.
-type CreateFlowOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The settings for a flow, including its source, outputs, and entitlements.
-	Flow *Flow `locationName:"flow" type:"structure"`
-}
-
-// String returns the string representation
-func (s CreateFlowOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s CreateFlowOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.Flow != nil {
-		v := s.Flow
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "flow", v, metadata)
-	}
-	return nil
-}
 
 const opCreateFlow = "CreateFlow"
 
@@ -168,7 +25,7 @@ const opCreateFlow = "CreateFlow"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/CreateFlow
-func (c *Client) CreateFlowRequest(input *CreateFlowInput) CreateFlowRequest {
+func (c *Client) CreateFlowRequest(input *types.CreateFlowInput) CreateFlowRequest {
 	op := &aws.Operation{
 		Name:       opCreateFlow,
 		HTTPMethod: "POST",
@@ -176,10 +33,10 @@ func (c *Client) CreateFlowRequest(input *CreateFlowInput) CreateFlowRequest {
 	}
 
 	if input == nil {
-		input = &CreateFlowInput{}
+		input = &types.CreateFlowInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateFlowOutput{})
+	req := c.newRequest(op, input, &types.CreateFlowOutput{})
 	return CreateFlowRequest{Request: req, Input: input, Copy: c.CreateFlowRequest}
 }
 
@@ -187,8 +44,8 @@ func (c *Client) CreateFlowRequest(input *CreateFlowInput) CreateFlowRequest {
 // CreateFlow API operation.
 type CreateFlowRequest struct {
 	*aws.Request
-	Input *CreateFlowInput
-	Copy  func(*CreateFlowInput) CreateFlowRequest
+	Input *types.CreateFlowInput
+	Copy  func(*types.CreateFlowInput) CreateFlowRequest
 }
 
 // Send marshals and sends the CreateFlow API request.
@@ -200,7 +57,7 @@ func (r CreateFlowRequest) Send(ctx context.Context) (*CreateFlowResponse, error
 	}
 
 	resp := &CreateFlowResponse{
-		CreateFlowOutput: r.Request.Data.(*CreateFlowOutput),
+		CreateFlowOutput: r.Request.Data.(*types.CreateFlowOutput),
 		response:         &aws.Response{Request: r.Request},
 	}
 
@@ -210,7 +67,7 @@ func (r CreateFlowRequest) Send(ctx context.Context) (*CreateFlowResponse, error
 // CreateFlowResponse is the response type for the
 // CreateFlow API operation.
 type CreateFlowResponse struct {
-	*CreateFlowOutput
+	*types.CreateFlowOutput
 
 	response *aws.Response
 }

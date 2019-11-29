@@ -6,49 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/query"
+	"github.com/aws/aws-sdk-go-v2/service/rds/types"
 )
-
-type DeleteOptionGroupInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the option group to be deleted.
-	//
-	// You can't delete default option groups.
-	//
-	// OptionGroupName is a required field
-	OptionGroupName *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteOptionGroupInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteOptionGroupInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteOptionGroupInput"}
-
-	if s.OptionGroupName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("OptionGroupName"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteOptionGroupOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteOptionGroupOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteOptionGroup = "DeleteOptionGroup"
 
@@ -65,7 +26,7 @@ const opDeleteOptionGroup = "DeleteOptionGroup"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteOptionGroup
-func (c *Client) DeleteOptionGroupRequest(input *DeleteOptionGroupInput) DeleteOptionGroupRequest {
+func (c *Client) DeleteOptionGroupRequest(input *types.DeleteOptionGroupInput) DeleteOptionGroupRequest {
 	op := &aws.Operation{
 		Name:       opDeleteOptionGroup,
 		HTTPMethod: "POST",
@@ -73,10 +34,10 @@ func (c *Client) DeleteOptionGroupRequest(input *DeleteOptionGroupInput) DeleteO
 	}
 
 	if input == nil {
-		input = &DeleteOptionGroupInput{}
+		input = &types.DeleteOptionGroupInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteOptionGroupOutput{})
+	req := c.newRequest(op, input, &types.DeleteOptionGroupOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return DeleteOptionGroupRequest{Request: req, Input: input, Copy: c.DeleteOptionGroupRequest}
@@ -86,8 +47,8 @@ func (c *Client) DeleteOptionGroupRequest(input *DeleteOptionGroupInput) DeleteO
 // DeleteOptionGroup API operation.
 type DeleteOptionGroupRequest struct {
 	*aws.Request
-	Input *DeleteOptionGroupInput
-	Copy  func(*DeleteOptionGroupInput) DeleteOptionGroupRequest
+	Input *types.DeleteOptionGroupInput
+	Copy  func(*types.DeleteOptionGroupInput) DeleteOptionGroupRequest
 }
 
 // Send marshals and sends the DeleteOptionGroup API request.
@@ -99,7 +60,7 @@ func (r DeleteOptionGroupRequest) Send(ctx context.Context) (*DeleteOptionGroupR
 	}
 
 	resp := &DeleteOptionGroupResponse{
-		DeleteOptionGroupOutput: r.Request.Data.(*DeleteOptionGroupOutput),
+		DeleteOptionGroupOutput: r.Request.Data.(*types.DeleteOptionGroupOutput),
 		response:                &aws.Response{Request: r.Request},
 	}
 
@@ -109,7 +70,7 @@ func (r DeleteOptionGroupRequest) Send(ctx context.Context) (*DeleteOptionGroupR
 // DeleteOptionGroupResponse is the response type for the
 // DeleteOptionGroup API operation.
 type DeleteOptionGroupResponse struct {
-	*DeleteOptionGroupOutput
+	*types.DeleteOptionGroupOutput
 
 	response *aws.Response
 }

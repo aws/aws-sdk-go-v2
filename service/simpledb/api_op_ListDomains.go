@@ -6,42 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/simpledb/types"
 )
-
-type ListDomainsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The maximum number of domain names you want returned. The range is 1 to 100.
-	// The default setting is 100.
-	MaxNumberOfDomains *int64 `type:"integer"`
-
-	// A string informing Amazon SimpleDB where to start the next list of domain
-	// names.
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s ListDomainsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type ListDomainsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A list of domain names that match the expression.
-	DomainNames []string `locationNameList:"DomainName" type:"list" flattened:"true"`
-
-	// An opaque token indicating that there are more domains than the specified
-	//    MaxNumberOfDomains
-	//  still available.
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s ListDomainsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListDomains = "ListDomains"
 
@@ -61,7 +27,7 @@ const opListDomains = "ListDomains"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) ListDomainsRequest(input *ListDomainsInput) ListDomainsRequest {
+func (c *Client) ListDomainsRequest(input *types.ListDomainsInput) ListDomainsRequest {
 	op := &aws.Operation{
 		Name:       opListDomains,
 		HTTPMethod: "POST",
@@ -75,10 +41,10 @@ func (c *Client) ListDomainsRequest(input *ListDomainsInput) ListDomainsRequest 
 	}
 
 	if input == nil {
-		input = &ListDomainsInput{}
+		input = &types.ListDomainsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListDomainsOutput{})
+	req := c.newRequest(op, input, &types.ListDomainsOutput{})
 	return ListDomainsRequest{Request: req, Input: input, Copy: c.ListDomainsRequest}
 }
 
@@ -86,8 +52,8 @@ func (c *Client) ListDomainsRequest(input *ListDomainsInput) ListDomainsRequest 
 // ListDomains API operation.
 type ListDomainsRequest struct {
 	*aws.Request
-	Input *ListDomainsInput
-	Copy  func(*ListDomainsInput) ListDomainsRequest
+	Input *types.ListDomainsInput
+	Copy  func(*types.ListDomainsInput) ListDomainsRequest
 }
 
 // Send marshals and sends the ListDomains API request.
@@ -99,7 +65,7 @@ func (r ListDomainsRequest) Send(ctx context.Context) (*ListDomainsResponse, err
 	}
 
 	resp := &ListDomainsResponse{
-		ListDomainsOutput: r.Request.Data.(*ListDomainsOutput),
+		ListDomainsOutput: r.Request.Data.(*types.ListDomainsOutput),
 		response:          &aws.Response{Request: r.Request},
 	}
 
@@ -129,7 +95,7 @@ func NewListDomainsPaginator(req ListDomainsRequest) ListDomainsPaginator {
 	return ListDomainsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListDomainsInput
+				var inCpy *types.ListDomainsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -149,14 +115,14 @@ type ListDomainsPaginator struct {
 	aws.Pager
 }
 
-func (p *ListDomainsPaginator) CurrentPage() *ListDomainsOutput {
-	return p.Pager.CurrentPage().(*ListDomainsOutput)
+func (p *ListDomainsPaginator) CurrentPage() *types.ListDomainsOutput {
+	return p.Pager.CurrentPage().(*types.ListDomainsOutput)
 }
 
 // ListDomainsResponse is the response type for the
 // ListDomains API operation.
 type ListDomainsResponse struct {
-	*ListDomainsOutput
+	*types.ListDomainsOutput
 
 	response *aws.Response
 }

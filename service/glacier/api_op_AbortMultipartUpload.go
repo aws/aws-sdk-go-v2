@@ -6,105 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/restjson"
+	"github.com/aws/aws-sdk-go-v2/service/glacier/types"
 )
-
-// Provides options to abort a multipart upload identified by the upload ID.
-//
-// For information about the underlying REST API, see Abort Multipart Upload
-// (https://docs.aws.amazon.com/amazonglacier/latest/dev/api-multipart-abort-upload.html).
-// For conceptual information, see Working with Archives in Amazon S3 Glacier
-// (https://docs.aws.amazon.com/amazonglacier/latest/dev/working-with-archives.html).
-type AbortMultipartUploadInput struct {
-	_ struct{} `type:"structure"`
-
-	// The AccountId value is the AWS account ID of the account that owns the vault.
-	// You can either specify an AWS account ID or optionally a single '-' (hyphen),
-	// in which case Amazon S3 Glacier uses the AWS account ID associated with the
-	// credentials used to sign the request. If you use an account ID, do not include
-	// any hyphens ('-') in the ID.
-	//
-	// AccountId is a required field
-	AccountId *string `location:"uri" locationName:"accountId" type:"string" required:"true"`
-
-	// The upload ID of the multipart upload to delete.
-	//
-	// UploadId is a required field
-	UploadId *string `location:"uri" locationName:"uploadId" type:"string" required:"true"`
-
-	// The name of the vault.
-	//
-	// VaultName is a required field
-	VaultName *string `location:"uri" locationName:"vaultName" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s AbortMultipartUploadInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *AbortMultipartUploadInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "AbortMultipartUploadInput"}
-
-	if s.AccountId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("AccountId"))
-	}
-
-	if s.UploadId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("UploadId"))
-	}
-
-	if s.VaultName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("VaultName"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s AbortMultipartUploadInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.AccountId != nil {
-		v := *s.AccountId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "accountId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.UploadId != nil {
-		v := *s.UploadId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "uploadId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.VaultName != nil {
-		v := *s.VaultName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "vaultName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type AbortMultipartUploadOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s AbortMultipartUploadOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s AbortMultipartUploadOutput) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
 
 const opAbortMultipartUpload = "AbortMultipartUpload"
 
@@ -138,7 +43,7 @@ const opAbortMultipartUpload = "AbortMultipartUpload"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) AbortMultipartUploadRequest(input *AbortMultipartUploadInput) AbortMultipartUploadRequest {
+func (c *Client) AbortMultipartUploadRequest(input *types.AbortMultipartUploadInput) AbortMultipartUploadRequest {
 	op := &aws.Operation{
 		Name:       opAbortMultipartUpload,
 		HTTPMethod: "DELETE",
@@ -146,10 +51,10 @@ func (c *Client) AbortMultipartUploadRequest(input *AbortMultipartUploadInput) A
 	}
 
 	if input == nil {
-		input = &AbortMultipartUploadInput{}
+		input = &types.AbortMultipartUploadInput{}
 	}
 
-	req := c.newRequest(op, input, &AbortMultipartUploadOutput{})
+	req := c.newRequest(op, input, &types.AbortMultipartUploadOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return AbortMultipartUploadRequest{Request: req, Input: input, Copy: c.AbortMultipartUploadRequest}
@@ -159,8 +64,8 @@ func (c *Client) AbortMultipartUploadRequest(input *AbortMultipartUploadInput) A
 // AbortMultipartUpload API operation.
 type AbortMultipartUploadRequest struct {
 	*aws.Request
-	Input *AbortMultipartUploadInput
-	Copy  func(*AbortMultipartUploadInput) AbortMultipartUploadRequest
+	Input *types.AbortMultipartUploadInput
+	Copy  func(*types.AbortMultipartUploadInput) AbortMultipartUploadRequest
 }
 
 // Send marshals and sends the AbortMultipartUpload API request.
@@ -172,7 +77,7 @@ func (r AbortMultipartUploadRequest) Send(ctx context.Context) (*AbortMultipartU
 	}
 
 	resp := &AbortMultipartUploadResponse{
-		AbortMultipartUploadOutput: r.Request.Data.(*AbortMultipartUploadOutput),
+		AbortMultipartUploadOutput: r.Request.Data.(*types.AbortMultipartUploadOutput),
 		response:                   &aws.Response{Request: r.Request},
 	}
 
@@ -182,7 +87,7 @@ func (r AbortMultipartUploadRequest) Send(ctx context.Context) (*AbortMultipartU
 // AbortMultipartUploadResponse is the response type for the
 // AbortMultipartUpload API operation.
 type AbortMultipartUploadResponse struct {
-	*AbortMultipartUploadOutput
+	*types.AbortMultipartUploadOutput
 
 	response *aws.Response
 }

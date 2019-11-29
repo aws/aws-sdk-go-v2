@@ -6,109 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/eks/types"
 )
-
-type ListClustersInput struct {
-	_ struct{} `type:"structure"`
-
-	// The maximum number of cluster results returned by ListClusters in paginated
-	// output. When you use this parameter, ListClusters returns only maxResults
-	// results in a single page along with a nextToken response element. You can
-	// see the remaining results of the initial request by sending another ListClusters
-	// request with the returned nextToken value. This value can be between 1 and
-	// 100. If you don't use this parameter, ListClusters returns up to 100 results
-	// and a nextToken value if applicable.
-	MaxResults *int64 `location:"querystring" locationName:"maxResults" min:"1" type:"integer"`
-
-	// The nextToken value returned from a previous paginated ListClusters request
-	// where maxResults was used and the results exceeded the value of that parameter.
-	// Pagination continues from the end of the previous results that returned the
-	// nextToken value.
-	//
-	// This token should be treated as an opaque identifier that is used only to
-	// retrieve the next items in a list and not for other programmatic purposes.
-	NextToken *string `location:"querystring" locationName:"nextToken" type:"string"`
-}
-
-// String returns the string representation
-func (s ListClustersInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListClustersInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListClustersInput"}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListClustersInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.MaxResults != nil {
-		v := *s.MaxResults
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "maxResults", protocol.Int64Value(v), metadata)
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type ListClustersOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A list of all of the clusters for your account in the specified Region.
-	Clusters []string `locationName:"clusters" type:"list"`
-
-	// The nextToken value to include in a future ListClusters request. When the
-	// results of a ListClusters request exceed maxResults, you can use this value
-	// to retrieve the next page of results. This value is null when there are no
-	// more results to return.
-	NextToken *string `locationName:"nextToken" type:"string"`
-}
-
-// String returns the string representation
-func (s ListClustersOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListClustersOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.Clusters != nil {
-		v := s.Clusters
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "clusters", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
-		}
-		ls0.End()
-
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opListClusters = "ListClusters"
 
@@ -125,7 +24,7 @@ const opListClusters = "ListClusters"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/ListClusters
-func (c *Client) ListClustersRequest(input *ListClustersInput) ListClustersRequest {
+func (c *Client) ListClustersRequest(input *types.ListClustersInput) ListClustersRequest {
 	op := &aws.Operation{
 		Name:       opListClusters,
 		HTTPMethod: "GET",
@@ -139,10 +38,10 @@ func (c *Client) ListClustersRequest(input *ListClustersInput) ListClustersReque
 	}
 
 	if input == nil {
-		input = &ListClustersInput{}
+		input = &types.ListClustersInput{}
 	}
 
-	req := c.newRequest(op, input, &ListClustersOutput{})
+	req := c.newRequest(op, input, &types.ListClustersOutput{})
 	return ListClustersRequest{Request: req, Input: input, Copy: c.ListClustersRequest}
 }
 
@@ -150,8 +49,8 @@ func (c *Client) ListClustersRequest(input *ListClustersInput) ListClustersReque
 // ListClusters API operation.
 type ListClustersRequest struct {
 	*aws.Request
-	Input *ListClustersInput
-	Copy  func(*ListClustersInput) ListClustersRequest
+	Input *types.ListClustersInput
+	Copy  func(*types.ListClustersInput) ListClustersRequest
 }
 
 // Send marshals and sends the ListClusters API request.
@@ -163,7 +62,7 @@ func (r ListClustersRequest) Send(ctx context.Context) (*ListClustersResponse, e
 	}
 
 	resp := &ListClustersResponse{
-		ListClustersOutput: r.Request.Data.(*ListClustersOutput),
+		ListClustersOutput: r.Request.Data.(*types.ListClustersOutput),
 		response:           &aws.Response{Request: r.Request},
 	}
 
@@ -193,7 +92,7 @@ func NewListClustersPaginator(req ListClustersRequest) ListClustersPaginator {
 	return ListClustersPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListClustersInput
+				var inCpy *types.ListClustersInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -213,14 +112,14 @@ type ListClustersPaginator struct {
 	aws.Pager
 }
 
-func (p *ListClustersPaginator) CurrentPage() *ListClustersOutput {
-	return p.Pager.CurrentPage().(*ListClustersOutput)
+func (p *ListClustersPaginator) CurrentPage() *types.ListClustersOutput {
+	return p.Pager.CurrentPage().(*types.ListClustersOutput)
 }
 
 // ListClustersResponse is the response type for the
 // ListClusters API operation.
 type ListClustersResponse struct {
-	*ListClustersOutput
+	*types.ListClustersOutput
 
 	response *aws.Response
 }

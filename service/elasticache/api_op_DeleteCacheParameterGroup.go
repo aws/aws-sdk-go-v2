@@ -6,50 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/query"
+	"github.com/aws/aws-sdk-go-v2/service/elasticache/types"
 )
-
-// Represents the input of a DeleteCacheParameterGroup operation.
-type DeleteCacheParameterGroupInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the cache parameter group to delete.
-	//
-	// The specified cache security group must not be associated with any clusters.
-	//
-	// CacheParameterGroupName is a required field
-	CacheParameterGroupName *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteCacheParameterGroupInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteCacheParameterGroupInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteCacheParameterGroupInput"}
-
-	if s.CacheParameterGroupName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("CacheParameterGroupName"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteCacheParameterGroupOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteCacheParameterGroupOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteCacheParameterGroup = "DeleteCacheParameterGroup"
 
@@ -67,7 +27,7 @@ const opDeleteCacheParameterGroup = "DeleteCacheParameterGroup"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DeleteCacheParameterGroup
-func (c *Client) DeleteCacheParameterGroupRequest(input *DeleteCacheParameterGroupInput) DeleteCacheParameterGroupRequest {
+func (c *Client) DeleteCacheParameterGroupRequest(input *types.DeleteCacheParameterGroupInput) DeleteCacheParameterGroupRequest {
 	op := &aws.Operation{
 		Name:       opDeleteCacheParameterGroup,
 		HTTPMethod: "POST",
@@ -75,10 +35,10 @@ func (c *Client) DeleteCacheParameterGroupRequest(input *DeleteCacheParameterGro
 	}
 
 	if input == nil {
-		input = &DeleteCacheParameterGroupInput{}
+		input = &types.DeleteCacheParameterGroupInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteCacheParameterGroupOutput{})
+	req := c.newRequest(op, input, &types.DeleteCacheParameterGroupOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return DeleteCacheParameterGroupRequest{Request: req, Input: input, Copy: c.DeleteCacheParameterGroupRequest}
@@ -88,8 +48,8 @@ func (c *Client) DeleteCacheParameterGroupRequest(input *DeleteCacheParameterGro
 // DeleteCacheParameterGroup API operation.
 type DeleteCacheParameterGroupRequest struct {
 	*aws.Request
-	Input *DeleteCacheParameterGroupInput
-	Copy  func(*DeleteCacheParameterGroupInput) DeleteCacheParameterGroupRequest
+	Input *types.DeleteCacheParameterGroupInput
+	Copy  func(*types.DeleteCacheParameterGroupInput) DeleteCacheParameterGroupRequest
 }
 
 // Send marshals and sends the DeleteCacheParameterGroup API request.
@@ -101,7 +61,7 @@ func (r DeleteCacheParameterGroupRequest) Send(ctx context.Context) (*DeleteCach
 	}
 
 	resp := &DeleteCacheParameterGroupResponse{
-		DeleteCacheParameterGroupOutput: r.Request.Data.(*DeleteCacheParameterGroupOutput),
+		DeleteCacheParameterGroupOutput: r.Request.Data.(*types.DeleteCacheParameterGroupOutput),
 		response:                        &aws.Response{Request: r.Request},
 	}
 
@@ -111,7 +71,7 @@ func (r DeleteCacheParameterGroupRequest) Send(ctx context.Context) (*DeleteCach
 // DeleteCacheParameterGroupResponse is the response type for the
 // DeleteCacheParameterGroup API operation.
 type DeleteCacheParameterGroupResponse struct {
-	*DeleteCacheParameterGroupOutput
+	*types.DeleteCacheParameterGroupOutput
 
 	response *aws.Response
 }

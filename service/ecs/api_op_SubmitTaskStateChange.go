@@ -4,78 +4,10 @@ package ecs
 
 import (
 	"context"
-	"fmt"
-	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ecs/types"
 )
-
-type SubmitTaskStateChangeInput struct {
-	_ struct{} `type:"structure"`
-
-	// Any attachments associated with the state change request.
-	Attachments []AttachmentStateChange `locationName:"attachments" type:"list"`
-
-	// The short name or full Amazon Resource Name (ARN) of the cluster that hosts
-	// the task.
-	Cluster *string `locationName:"cluster" type:"string"`
-
-	// Any containers associated with the state change request.
-	Containers []ContainerStateChange `locationName:"containers" type:"list"`
-
-	// The Unix timestamp for when the task execution stopped.
-	ExecutionStoppedAt *time.Time `locationName:"executionStoppedAt" type:"timestamp"`
-
-	// The Unix timestamp for when the container image pull began.
-	PullStartedAt *time.Time `locationName:"pullStartedAt" type:"timestamp"`
-
-	// The Unix timestamp for when the container image pull completed.
-	PullStoppedAt *time.Time `locationName:"pullStoppedAt" type:"timestamp"`
-
-	// The reason for the state change request.
-	Reason *string `locationName:"reason" type:"string"`
-
-	// The status of the state change request.
-	Status *string `locationName:"status" type:"string"`
-
-	// The task ID or full ARN of the task in the state change request.
-	Task *string `locationName:"task" type:"string"`
-}
-
-// String returns the string representation
-func (s SubmitTaskStateChangeInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *SubmitTaskStateChangeInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "SubmitTaskStateChangeInput"}
-	if s.Attachments != nil {
-		for i, v := range s.Attachments {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Attachments", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type SubmitTaskStateChangeOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Acknowledgement of the state change.
-	Acknowledgment *string `locationName:"acknowledgment" type:"string"`
-}
-
-// String returns the string representation
-func (s SubmitTaskStateChangeOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opSubmitTaskStateChange = "SubmitTaskStateChange"
 
@@ -96,7 +28,7 @@ const opSubmitTaskStateChange = "SubmitTaskStateChange"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/SubmitTaskStateChange
-func (c *Client) SubmitTaskStateChangeRequest(input *SubmitTaskStateChangeInput) SubmitTaskStateChangeRequest {
+func (c *Client) SubmitTaskStateChangeRequest(input *types.SubmitTaskStateChangeInput) SubmitTaskStateChangeRequest {
 	op := &aws.Operation{
 		Name:       opSubmitTaskStateChange,
 		HTTPMethod: "POST",
@@ -104,10 +36,10 @@ func (c *Client) SubmitTaskStateChangeRequest(input *SubmitTaskStateChangeInput)
 	}
 
 	if input == nil {
-		input = &SubmitTaskStateChangeInput{}
+		input = &types.SubmitTaskStateChangeInput{}
 	}
 
-	req := c.newRequest(op, input, &SubmitTaskStateChangeOutput{})
+	req := c.newRequest(op, input, &types.SubmitTaskStateChangeOutput{})
 	return SubmitTaskStateChangeRequest{Request: req, Input: input, Copy: c.SubmitTaskStateChangeRequest}
 }
 
@@ -115,8 +47,8 @@ func (c *Client) SubmitTaskStateChangeRequest(input *SubmitTaskStateChangeInput)
 // SubmitTaskStateChange API operation.
 type SubmitTaskStateChangeRequest struct {
 	*aws.Request
-	Input *SubmitTaskStateChangeInput
-	Copy  func(*SubmitTaskStateChangeInput) SubmitTaskStateChangeRequest
+	Input *types.SubmitTaskStateChangeInput
+	Copy  func(*types.SubmitTaskStateChangeInput) SubmitTaskStateChangeRequest
 }
 
 // Send marshals and sends the SubmitTaskStateChange API request.
@@ -128,7 +60,7 @@ func (r SubmitTaskStateChangeRequest) Send(ctx context.Context) (*SubmitTaskStat
 	}
 
 	resp := &SubmitTaskStateChangeResponse{
-		SubmitTaskStateChangeOutput: r.Request.Data.(*SubmitTaskStateChangeOutput),
+		SubmitTaskStateChangeOutput: r.Request.Data.(*types.SubmitTaskStateChangeOutput),
 		response:                    &aws.Response{Request: r.Request},
 	}
 
@@ -138,7 +70,7 @@ func (r SubmitTaskStateChangeRequest) Send(ctx context.Context) (*SubmitTaskStat
 // SubmitTaskStateChangeResponse is the response type for the
 // SubmitTaskStateChange API operation.
 type SubmitTaskStateChangeResponse struct {
-	*SubmitTaskStateChangeOutput
+	*types.SubmitTaskStateChangeOutput
 
 	response *aws.Response
 }

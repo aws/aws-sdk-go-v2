@@ -10,6 +10,7 @@ package cloudsearchdomainiface
 
 import (
 	"github.com/aws/aws-sdk-go-v2/service/cloudsearchdomain"
+	"github.com/aws/aws-sdk-go-v2/service/cloudsearchdomain/types"
 )
 
 // ClientAPI provides an interface to enable mocking the
@@ -43,7 +44,7 @@ import (
 //    type mockClientClient struct {
 //        cloudsearchdomainiface.ClientPI
 //    }
-//    func (m *mockClientClient) Search(input *cloudsearchdomain.SearchInput) (*cloudsearchdomain.SearchOutput, error) {
+//    func (m *mockClientClient) Search(input *types.SearchInput) (*types.SearchOutput, error) {
 //        // mock response/functionality
 //    }
 //
@@ -61,11 +62,11 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type ClientAPI interface {
-	SearchRequest(*cloudsearchdomain.SearchInput) cloudsearchdomain.SearchRequest
+	SearchRequest(*types.SearchInput) cloudsearchdomain.SearchRequest
 
-	SuggestRequest(*cloudsearchdomain.SuggestInput) cloudsearchdomain.SuggestRequest
+	SuggestRequest(*types.SuggestInput) cloudsearchdomain.SuggestRequest
 
-	UploadDocumentsRequest(*cloudsearchdomain.UploadDocumentsInput) cloudsearchdomain.UploadDocumentsRequest
+	UploadDocumentsRequest(*types.UploadDocumentsInput) cloudsearchdomain.UploadDocumentsRequest
 }
 
 var _ ClientAPI = (*cloudsearchdomain.Client)(nil)

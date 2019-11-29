@@ -6,59 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/inspector/types"
 )
-
-type DescribeResourceGroupsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ARN that specifies the resource group that you want to describe.
-	//
-	// ResourceGroupArns is a required field
-	ResourceGroupArns []string `locationName:"resourceGroupArns" min:"1" type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeResourceGroupsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeResourceGroupsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeResourceGroupsInput"}
-
-	if s.ResourceGroupArns == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ResourceGroupArns"))
-	}
-	if s.ResourceGroupArns != nil && len(s.ResourceGroupArns) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ResourceGroupArns", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribeResourceGroupsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Resource group details that cannot be described. An error code is provided
-	// for each failed item.
-	//
-	// FailedItems is a required field
-	FailedItems map[string]FailedItemDetails `locationName:"failedItems" type:"map" required:"true"`
-
-	// Information about a resource group.
-	//
-	// ResourceGroups is a required field
-	ResourceGroups []ResourceGroup `locationName:"resourceGroups" type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeResourceGroupsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeResourceGroups = "DescribeResourceGroups"
 
@@ -76,7 +25,7 @@ const opDescribeResourceGroups = "DescribeResourceGroups"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/DescribeResourceGroups
-func (c *Client) DescribeResourceGroupsRequest(input *DescribeResourceGroupsInput) DescribeResourceGroupsRequest {
+func (c *Client) DescribeResourceGroupsRequest(input *types.DescribeResourceGroupsInput) DescribeResourceGroupsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeResourceGroups,
 		HTTPMethod: "POST",
@@ -84,10 +33,10 @@ func (c *Client) DescribeResourceGroupsRequest(input *DescribeResourceGroupsInpu
 	}
 
 	if input == nil {
-		input = &DescribeResourceGroupsInput{}
+		input = &types.DescribeResourceGroupsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeResourceGroupsOutput{})
+	req := c.newRequest(op, input, &types.DescribeResourceGroupsOutput{})
 	return DescribeResourceGroupsRequest{Request: req, Input: input, Copy: c.DescribeResourceGroupsRequest}
 }
 
@@ -95,8 +44,8 @@ func (c *Client) DescribeResourceGroupsRequest(input *DescribeResourceGroupsInpu
 // DescribeResourceGroups API operation.
 type DescribeResourceGroupsRequest struct {
 	*aws.Request
-	Input *DescribeResourceGroupsInput
-	Copy  func(*DescribeResourceGroupsInput) DescribeResourceGroupsRequest
+	Input *types.DescribeResourceGroupsInput
+	Copy  func(*types.DescribeResourceGroupsInput) DescribeResourceGroupsRequest
 }
 
 // Send marshals and sends the DescribeResourceGroups API request.
@@ -108,7 +57,7 @@ func (r DescribeResourceGroupsRequest) Send(ctx context.Context) (*DescribeResou
 	}
 
 	resp := &DescribeResourceGroupsResponse{
-		DescribeResourceGroupsOutput: r.Request.Data.(*DescribeResourceGroupsOutput),
+		DescribeResourceGroupsOutput: r.Request.Data.(*types.DescribeResourceGroupsOutput),
 		response:                     &aws.Response{Request: r.Request},
 	}
 
@@ -118,7 +67,7 @@ func (r DescribeResourceGroupsRequest) Send(ctx context.Context) (*DescribeResou
 // DescribeResourceGroupsResponse is the response type for the
 // DescribeResourceGroups API operation.
 type DescribeResourceGroupsResponse struct {
-	*DescribeResourceGroupsOutput
+	*types.DescribeResourceGroupsOutput
 
 	response *aws.Response
 }

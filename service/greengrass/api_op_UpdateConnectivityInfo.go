@@ -6,96 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/greengrass/types"
 )
-
-// Information required to update a Greengrass core's connectivity.
-type UpdateConnectivityInfoInput struct {
-	_ struct{} `type:"structure"`
-
-	// A list of connectivity info.
-	ConnectivityInfo []ConnectivityInfo `type:"list"`
-
-	// ThingName is a required field
-	ThingName *string `location:"uri" locationName:"ThingName" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s UpdateConnectivityInfoInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateConnectivityInfoInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateConnectivityInfoInput"}
-
-	if s.ThingName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ThingName"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s UpdateConnectivityInfoInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.ConnectivityInfo != nil {
-		v := s.ConnectivityInfo
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "ConnectivityInfo", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	if s.ThingName != nil {
-		v := *s.ThingName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "ThingName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type UpdateConnectivityInfoOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A message about the connectivity info update request.
-	Message *string `locationName:"message" type:"string"`
-
-	// The new version of the connectivity info.
-	Version *string `type:"string"`
-}
-
-// String returns the string representation
-func (s UpdateConnectivityInfoOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s UpdateConnectivityInfoOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.Message != nil {
-		v := *s.Message
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "message", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Version != nil {
-		v := *s.Version
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "Version", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opUpdateConnectivityInfo = "UpdateConnectivityInfo"
 
@@ -114,7 +26,7 @@ const opUpdateConnectivityInfo = "UpdateConnectivityInfo"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/UpdateConnectivityInfo
-func (c *Client) UpdateConnectivityInfoRequest(input *UpdateConnectivityInfoInput) UpdateConnectivityInfoRequest {
+func (c *Client) UpdateConnectivityInfoRequest(input *types.UpdateConnectivityInfoInput) UpdateConnectivityInfoRequest {
 	op := &aws.Operation{
 		Name:       opUpdateConnectivityInfo,
 		HTTPMethod: "PUT",
@@ -122,10 +34,10 @@ func (c *Client) UpdateConnectivityInfoRequest(input *UpdateConnectivityInfoInpu
 	}
 
 	if input == nil {
-		input = &UpdateConnectivityInfoInput{}
+		input = &types.UpdateConnectivityInfoInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateConnectivityInfoOutput{})
+	req := c.newRequest(op, input, &types.UpdateConnectivityInfoOutput{})
 	return UpdateConnectivityInfoRequest{Request: req, Input: input, Copy: c.UpdateConnectivityInfoRequest}
 }
 
@@ -133,8 +45,8 @@ func (c *Client) UpdateConnectivityInfoRequest(input *UpdateConnectivityInfoInpu
 // UpdateConnectivityInfo API operation.
 type UpdateConnectivityInfoRequest struct {
 	*aws.Request
-	Input *UpdateConnectivityInfoInput
-	Copy  func(*UpdateConnectivityInfoInput) UpdateConnectivityInfoRequest
+	Input *types.UpdateConnectivityInfoInput
+	Copy  func(*types.UpdateConnectivityInfoInput) UpdateConnectivityInfoRequest
 }
 
 // Send marshals and sends the UpdateConnectivityInfo API request.
@@ -146,7 +58,7 @@ func (r UpdateConnectivityInfoRequest) Send(ctx context.Context) (*UpdateConnect
 	}
 
 	resp := &UpdateConnectivityInfoResponse{
-		UpdateConnectivityInfoOutput: r.Request.Data.(*UpdateConnectivityInfoOutput),
+		UpdateConnectivityInfoOutput: r.Request.Data.(*types.UpdateConnectivityInfoOutput),
 		response:                     &aws.Response{Request: r.Request},
 	}
 
@@ -156,7 +68,7 @@ func (r UpdateConnectivityInfoRequest) Send(ctx context.Context) (*UpdateConnect
 // UpdateConnectivityInfoResponse is the response type for the
 // UpdateConnectivityInfo API operation.
 type UpdateConnectivityInfoResponse struct {
-	*UpdateConnectivityInfoOutput
+	*types.UpdateConnectivityInfoOutput
 
 	response *aws.Response
 }

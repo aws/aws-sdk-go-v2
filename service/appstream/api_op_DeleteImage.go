@@ -6,48 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/appstream/types"
 )
-
-type DeleteImageInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the image.
-	//
-	// Name is a required field
-	Name *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteImageInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteImageInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteImageInput"}
-
-	if s.Name == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Name"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteImageOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Information about the image.
-	Image *Image `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteImageOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteImage = "DeleteImage"
 
@@ -65,7 +25,7 @@ const opDeleteImage = "DeleteImage"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DeleteImage
-func (c *Client) DeleteImageRequest(input *DeleteImageInput) DeleteImageRequest {
+func (c *Client) DeleteImageRequest(input *types.DeleteImageInput) DeleteImageRequest {
 	op := &aws.Operation{
 		Name:       opDeleteImage,
 		HTTPMethod: "POST",
@@ -73,10 +33,10 @@ func (c *Client) DeleteImageRequest(input *DeleteImageInput) DeleteImageRequest 
 	}
 
 	if input == nil {
-		input = &DeleteImageInput{}
+		input = &types.DeleteImageInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteImageOutput{})
+	req := c.newRequest(op, input, &types.DeleteImageOutput{})
 	return DeleteImageRequest{Request: req, Input: input, Copy: c.DeleteImageRequest}
 }
 
@@ -84,8 +44,8 @@ func (c *Client) DeleteImageRequest(input *DeleteImageInput) DeleteImageRequest 
 // DeleteImage API operation.
 type DeleteImageRequest struct {
 	*aws.Request
-	Input *DeleteImageInput
-	Copy  func(*DeleteImageInput) DeleteImageRequest
+	Input *types.DeleteImageInput
+	Copy  func(*types.DeleteImageInput) DeleteImageRequest
 }
 
 // Send marshals and sends the DeleteImage API request.
@@ -97,7 +57,7 @@ func (r DeleteImageRequest) Send(ctx context.Context) (*DeleteImageResponse, err
 	}
 
 	resp := &DeleteImageResponse{
-		DeleteImageOutput: r.Request.Data.(*DeleteImageOutput),
+		DeleteImageOutput: r.Request.Data.(*types.DeleteImageOutput),
 		response:          &aws.Response{Request: r.Request},
 	}
 
@@ -107,7 +67,7 @@ func (r DeleteImageRequest) Send(ctx context.Context) (*DeleteImageResponse, err
 // DeleteImageResponse is the response type for the
 // DeleteImage API operation.
 type DeleteImageResponse struct {
-	*DeleteImageOutput
+	*types.DeleteImageOutput
 
 	response *aws.Response
 }

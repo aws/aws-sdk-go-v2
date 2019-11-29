@@ -6,65 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/elasticache/types"
 )
-
-// Represents the input of a PurchaseReservedCacheNodesOffering operation.
-type PurchaseReservedCacheNodesOfferingInput struct {
-	_ struct{} `type:"structure"`
-
-	// The number of cache node instances to reserve.
-	//
-	// Default: 1
-	CacheNodeCount *int64 `type:"integer"`
-
-	// A customer-specified identifier to track this reservation.
-	//
-	// The Reserved Cache Node ID is an unique customer-specified identifier to
-	// track this reservation. If this parameter is not specified, ElastiCache automatically
-	// generates an identifier for the reservation.
-	//
-	// Example: myreservationID
-	ReservedCacheNodeId *string `type:"string"`
-
-	// The ID of the reserved cache node offering to purchase.
-	//
-	// Example: 438012d3-4052-4cc7-b2e3-8d3372e0e706
-	//
-	// ReservedCacheNodesOfferingId is a required field
-	ReservedCacheNodesOfferingId *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s PurchaseReservedCacheNodesOfferingInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *PurchaseReservedCacheNodesOfferingInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "PurchaseReservedCacheNodesOfferingInput"}
-
-	if s.ReservedCacheNodesOfferingId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ReservedCacheNodesOfferingId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type PurchaseReservedCacheNodesOfferingOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Represents the output of a PurchaseReservedCacheNodesOffering operation.
-	ReservedCacheNode *ReservedCacheNode `type:"structure"`
-}
-
-// String returns the string representation
-func (s PurchaseReservedCacheNodesOfferingOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opPurchaseReservedCacheNodesOffering = "PurchaseReservedCacheNodesOffering"
 
@@ -81,7 +24,7 @@ const opPurchaseReservedCacheNodesOffering = "PurchaseReservedCacheNodesOffering
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/PurchaseReservedCacheNodesOffering
-func (c *Client) PurchaseReservedCacheNodesOfferingRequest(input *PurchaseReservedCacheNodesOfferingInput) PurchaseReservedCacheNodesOfferingRequest {
+func (c *Client) PurchaseReservedCacheNodesOfferingRequest(input *types.PurchaseReservedCacheNodesOfferingInput) PurchaseReservedCacheNodesOfferingRequest {
 	op := &aws.Operation{
 		Name:       opPurchaseReservedCacheNodesOffering,
 		HTTPMethod: "POST",
@@ -89,10 +32,10 @@ func (c *Client) PurchaseReservedCacheNodesOfferingRequest(input *PurchaseReserv
 	}
 
 	if input == nil {
-		input = &PurchaseReservedCacheNodesOfferingInput{}
+		input = &types.PurchaseReservedCacheNodesOfferingInput{}
 	}
 
-	req := c.newRequest(op, input, &PurchaseReservedCacheNodesOfferingOutput{})
+	req := c.newRequest(op, input, &types.PurchaseReservedCacheNodesOfferingOutput{})
 	return PurchaseReservedCacheNodesOfferingRequest{Request: req, Input: input, Copy: c.PurchaseReservedCacheNodesOfferingRequest}
 }
 
@@ -100,8 +43,8 @@ func (c *Client) PurchaseReservedCacheNodesOfferingRequest(input *PurchaseReserv
 // PurchaseReservedCacheNodesOffering API operation.
 type PurchaseReservedCacheNodesOfferingRequest struct {
 	*aws.Request
-	Input *PurchaseReservedCacheNodesOfferingInput
-	Copy  func(*PurchaseReservedCacheNodesOfferingInput) PurchaseReservedCacheNodesOfferingRequest
+	Input *types.PurchaseReservedCacheNodesOfferingInput
+	Copy  func(*types.PurchaseReservedCacheNodesOfferingInput) PurchaseReservedCacheNodesOfferingRequest
 }
 
 // Send marshals and sends the PurchaseReservedCacheNodesOffering API request.
@@ -113,7 +56,7 @@ func (r PurchaseReservedCacheNodesOfferingRequest) Send(ctx context.Context) (*P
 	}
 
 	resp := &PurchaseReservedCacheNodesOfferingResponse{
-		PurchaseReservedCacheNodesOfferingOutput: r.Request.Data.(*PurchaseReservedCacheNodesOfferingOutput),
+		PurchaseReservedCacheNodesOfferingOutput: r.Request.Data.(*types.PurchaseReservedCacheNodesOfferingOutput),
 		response:                                 &aws.Response{Request: r.Request},
 	}
 
@@ -123,7 +66,7 @@ func (r PurchaseReservedCacheNodesOfferingRequest) Send(ctx context.Context) (*P
 // PurchaseReservedCacheNodesOfferingResponse is the response type for the
 // PurchaseReservedCacheNodesOffering API operation.
 type PurchaseReservedCacheNodesOfferingResponse struct {
-	*PurchaseReservedCacheNodesOfferingOutput
+	*types.PurchaseReservedCacheNodesOfferingOutput
 
 	response *aws.Response
 }

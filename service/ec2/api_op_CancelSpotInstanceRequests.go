@@ -6,56 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-// Contains the parameters for CancelSpotInstanceRequests.
-type CancelSpotInstanceRequestsInput struct {
-	_ struct{} `type:"structure"`
-
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have
-	// the required permissions, the error response is DryRunOperation. Otherwise,
-	// it is UnauthorizedOperation.
-	DryRun *bool `locationName:"dryRun" type:"boolean"`
-
-	// One or more Spot Instance request IDs.
-	//
-	// SpotInstanceRequestIds is a required field
-	SpotInstanceRequestIds []string `locationName:"SpotInstanceRequestId" locationNameList:"SpotInstanceRequestId" type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s CancelSpotInstanceRequestsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CancelSpotInstanceRequestsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CancelSpotInstanceRequestsInput"}
-
-	if s.SpotInstanceRequestIds == nil {
-		invalidParams.Add(aws.NewErrParamRequired("SpotInstanceRequestIds"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Contains the output of CancelSpotInstanceRequests.
-type CancelSpotInstanceRequestsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// One or more Spot Instance requests.
-	CancelledSpotInstanceRequests []CancelledSpotInstanceRequest `locationName:"spotInstanceRequestSet" locationNameList:"item" type:"list"`
-}
-
-// String returns the string representation
-func (s CancelSpotInstanceRequestsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCancelSpotInstanceRequests = "CancelSpotInstanceRequests"
 
@@ -75,7 +27,7 @@ const opCancelSpotInstanceRequests = "CancelSpotInstanceRequests"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CancelSpotInstanceRequests
-func (c *Client) CancelSpotInstanceRequestsRequest(input *CancelSpotInstanceRequestsInput) CancelSpotInstanceRequestsRequest {
+func (c *Client) CancelSpotInstanceRequestsRequest(input *types.CancelSpotInstanceRequestsInput) CancelSpotInstanceRequestsRequest {
 	op := &aws.Operation{
 		Name:       opCancelSpotInstanceRequests,
 		HTTPMethod: "POST",
@@ -83,10 +35,10 @@ func (c *Client) CancelSpotInstanceRequestsRequest(input *CancelSpotInstanceRequ
 	}
 
 	if input == nil {
-		input = &CancelSpotInstanceRequestsInput{}
+		input = &types.CancelSpotInstanceRequestsInput{}
 	}
 
-	req := c.newRequest(op, input, &CancelSpotInstanceRequestsOutput{})
+	req := c.newRequest(op, input, &types.CancelSpotInstanceRequestsOutput{})
 	return CancelSpotInstanceRequestsRequest{Request: req, Input: input, Copy: c.CancelSpotInstanceRequestsRequest}
 }
 
@@ -94,8 +46,8 @@ func (c *Client) CancelSpotInstanceRequestsRequest(input *CancelSpotInstanceRequ
 // CancelSpotInstanceRequests API operation.
 type CancelSpotInstanceRequestsRequest struct {
 	*aws.Request
-	Input *CancelSpotInstanceRequestsInput
-	Copy  func(*CancelSpotInstanceRequestsInput) CancelSpotInstanceRequestsRequest
+	Input *types.CancelSpotInstanceRequestsInput
+	Copy  func(*types.CancelSpotInstanceRequestsInput) CancelSpotInstanceRequestsRequest
 }
 
 // Send marshals and sends the CancelSpotInstanceRequests API request.
@@ -107,7 +59,7 @@ func (r CancelSpotInstanceRequestsRequest) Send(ctx context.Context) (*CancelSpo
 	}
 
 	resp := &CancelSpotInstanceRequestsResponse{
-		CancelSpotInstanceRequestsOutput: r.Request.Data.(*CancelSpotInstanceRequestsOutput),
+		CancelSpotInstanceRequestsOutput: r.Request.Data.(*types.CancelSpotInstanceRequestsOutput),
 		response:                         &aws.Response{Request: r.Request},
 	}
 
@@ -117,7 +69,7 @@ func (r CancelSpotInstanceRequestsRequest) Send(ctx context.Context) (*CancelSpo
 // CancelSpotInstanceRequestsResponse is the response type for the
 // CancelSpotInstanceRequests API operation.
 type CancelSpotInstanceRequestsResponse struct {
-	*CancelSpotInstanceRequestsOutput
+	*types.CancelSpotInstanceRequestsOutput
 
 	response *aws.Response
 }

@@ -6,115 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/route53/types"
 )
-
-// A complex type that contains information about the request to authorize associating
-// a VPC with your private hosted zone. Authorization is only required when
-// a private hosted zone and a VPC were created by using different accounts.
-type CreateVPCAssociationAuthorizationInput struct {
-	_ struct{} `locationName:"CreateVPCAssociationAuthorizationRequest" type:"structure" xmlURI:"https://route53.amazonaws.com/doc/2013-04-01/"`
-
-	// The ID of the private hosted zone that you want to authorize associating
-	// a VPC with.
-	//
-	// HostedZoneId is a required field
-	HostedZoneId *string `location:"uri" locationName:"Id" type:"string" required:"true"`
-
-	// A complex type that contains the VPC ID and region for the VPC that you want
-	// to authorize associating with your hosted zone.
-	//
-	// VPC is a required field
-	VPC *VPC `type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s CreateVPCAssociationAuthorizationInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateVPCAssociationAuthorizationInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateVPCAssociationAuthorizationInput"}
-
-	if s.HostedZoneId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("HostedZoneId"))
-	}
-
-	if s.VPC == nil {
-		invalidParams.Add(aws.NewErrParamRequired("VPC"))
-	}
-	if s.VPC != nil {
-		if err := s.VPC.Validate(); err != nil {
-			invalidParams.AddNested("VPC", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s CreateVPCAssociationAuthorizationInput) MarshalFields(e protocol.FieldEncoder) error {
-
-	e.SetFields(protocol.BodyTarget, "CreateVPCAssociationAuthorizationRequest", protocol.FieldMarshalerFunc(func(e protocol.FieldEncoder) error {
-		if s.VPC != nil {
-			v := s.VPC
-
-			metadata := protocol.Metadata{}
-			e.SetFields(protocol.BodyTarget, "VPC", v, metadata)
-		}
-		return nil
-	}), protocol.Metadata{XMLNamespaceURI: "https://route53.amazonaws.com/doc/2013-04-01/"})
-	if s.HostedZoneId != nil {
-		v := *s.HostedZoneId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "Id", protocol.StringValue(v), metadata)
-	}
-	return nil
-}
-
-// A complex type that contains the response information from a CreateVPCAssociationAuthorization
-// request.
-type CreateVPCAssociationAuthorizationOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the hosted zone that you authorized associating a VPC with.
-	//
-	// HostedZoneId is a required field
-	HostedZoneId *string `type:"string" required:"true"`
-
-	// The VPC that you authorized associating with a hosted zone.
-	//
-	// VPC is a required field
-	VPC *VPC `type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s CreateVPCAssociationAuthorizationOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s CreateVPCAssociationAuthorizationOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.HostedZoneId != nil {
-		v := *s.HostedZoneId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "HostedZoneId", protocol.StringValue(v), metadata)
-	}
-	if s.VPC != nil {
-		v := s.VPC
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "VPC", v, metadata)
-	}
-	return nil
-}
 
 const opCreateVPCAssociationAuthorization = "CreateVPCAssociationAuthorization"
 
@@ -140,7 +33,7 @@ const opCreateVPCAssociationAuthorization = "CreateVPCAssociationAuthorization"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/CreateVPCAssociationAuthorization
-func (c *Client) CreateVPCAssociationAuthorizationRequest(input *CreateVPCAssociationAuthorizationInput) CreateVPCAssociationAuthorizationRequest {
+func (c *Client) CreateVPCAssociationAuthorizationRequest(input *types.CreateVPCAssociationAuthorizationInput) CreateVPCAssociationAuthorizationRequest {
 	op := &aws.Operation{
 		Name:       opCreateVPCAssociationAuthorization,
 		HTTPMethod: "POST",
@@ -148,10 +41,10 @@ func (c *Client) CreateVPCAssociationAuthorizationRequest(input *CreateVPCAssoci
 	}
 
 	if input == nil {
-		input = &CreateVPCAssociationAuthorizationInput{}
+		input = &types.CreateVPCAssociationAuthorizationInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateVPCAssociationAuthorizationOutput{})
+	req := c.newRequest(op, input, &types.CreateVPCAssociationAuthorizationOutput{})
 	return CreateVPCAssociationAuthorizationRequest{Request: req, Input: input, Copy: c.CreateVPCAssociationAuthorizationRequest}
 }
 
@@ -159,8 +52,8 @@ func (c *Client) CreateVPCAssociationAuthorizationRequest(input *CreateVPCAssoci
 // CreateVPCAssociationAuthorization API operation.
 type CreateVPCAssociationAuthorizationRequest struct {
 	*aws.Request
-	Input *CreateVPCAssociationAuthorizationInput
-	Copy  func(*CreateVPCAssociationAuthorizationInput) CreateVPCAssociationAuthorizationRequest
+	Input *types.CreateVPCAssociationAuthorizationInput
+	Copy  func(*types.CreateVPCAssociationAuthorizationInput) CreateVPCAssociationAuthorizationRequest
 }
 
 // Send marshals and sends the CreateVPCAssociationAuthorization API request.
@@ -172,7 +65,7 @@ func (r CreateVPCAssociationAuthorizationRequest) Send(ctx context.Context) (*Cr
 	}
 
 	resp := &CreateVPCAssociationAuthorizationResponse{
-		CreateVPCAssociationAuthorizationOutput: r.Request.Data.(*CreateVPCAssociationAuthorizationOutput),
+		CreateVPCAssociationAuthorizationOutput: r.Request.Data.(*types.CreateVPCAssociationAuthorizationOutput),
 		response:                                &aws.Response{Request: r.Request},
 	}
 
@@ -182,7 +75,7 @@ func (r CreateVPCAssociationAuthorizationRequest) Send(ctx context.Context) (*Cr
 // CreateVPCAssociationAuthorizationResponse is the response type for the
 // CreateVPCAssociationAuthorization API operation.
 type CreateVPCAssociationAuthorizationResponse struct {
-	*CreateVPCAssociationAuthorizationOutput
+	*types.CreateVPCAssociationAuthorizationOutput
 
 	response *aws.Response
 }

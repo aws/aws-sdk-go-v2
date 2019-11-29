@@ -6,48 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/query"
+	"github.com/aws/aws-sdk-go-v2/service/sns/types"
 )
-
-// Input for Unsubscribe action.
-type UnsubscribeInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ARN of the subscription to be deleted.
-	//
-	// SubscriptionArn is a required field
-	SubscriptionArn *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s UnsubscribeInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UnsubscribeInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UnsubscribeInput"}
-
-	if s.SubscriptionArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("SubscriptionArn"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type UnsubscribeOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s UnsubscribeOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opUnsubscribe = "Unsubscribe"
 
@@ -71,7 +33,7 @@ const opUnsubscribe = "Unsubscribe"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/Unsubscribe
-func (c *Client) UnsubscribeRequest(input *UnsubscribeInput) UnsubscribeRequest {
+func (c *Client) UnsubscribeRequest(input *types.UnsubscribeInput) UnsubscribeRequest {
 	op := &aws.Operation{
 		Name:       opUnsubscribe,
 		HTTPMethod: "POST",
@@ -79,10 +41,10 @@ func (c *Client) UnsubscribeRequest(input *UnsubscribeInput) UnsubscribeRequest 
 	}
 
 	if input == nil {
-		input = &UnsubscribeInput{}
+		input = &types.UnsubscribeInput{}
 	}
 
-	req := c.newRequest(op, input, &UnsubscribeOutput{})
+	req := c.newRequest(op, input, &types.UnsubscribeOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return UnsubscribeRequest{Request: req, Input: input, Copy: c.UnsubscribeRequest}
@@ -92,8 +54,8 @@ func (c *Client) UnsubscribeRequest(input *UnsubscribeInput) UnsubscribeRequest 
 // Unsubscribe API operation.
 type UnsubscribeRequest struct {
 	*aws.Request
-	Input *UnsubscribeInput
-	Copy  func(*UnsubscribeInput) UnsubscribeRequest
+	Input *types.UnsubscribeInput
+	Copy  func(*types.UnsubscribeInput) UnsubscribeRequest
 }
 
 // Send marshals and sends the Unsubscribe API request.
@@ -105,7 +67,7 @@ func (r UnsubscribeRequest) Send(ctx context.Context) (*UnsubscribeResponse, err
 	}
 
 	resp := &UnsubscribeResponse{
-		UnsubscribeOutput: r.Request.Data.(*UnsubscribeOutput),
+		UnsubscribeOutput: r.Request.Data.(*types.UnsubscribeOutput),
 		response:          &aws.Response{Request: r.Request},
 	}
 
@@ -115,7 +77,7 @@ func (r UnsubscribeRequest) Send(ctx context.Context) (*UnsubscribeResponse, err
 // UnsubscribeResponse is the response type for the
 // Unsubscribe API operation.
 type UnsubscribeResponse struct {
-	*UnsubscribeOutput
+	*types.UnsubscribeOutput
 
 	response *aws.Response
 }

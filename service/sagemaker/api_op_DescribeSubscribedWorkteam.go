@@ -6,50 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
 )
-
-type DescribeSubscribedWorkteamInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the subscribed work team to describe.
-	//
-	// WorkteamArn is a required field
-	WorkteamArn *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeSubscribedWorkteamInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeSubscribedWorkteamInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeSubscribedWorkteamInput"}
-
-	if s.WorkteamArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("WorkteamArn"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribeSubscribedWorkteamOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A Workteam instance that contains information about the work team.
-	//
-	// SubscribedWorkteam is a required field
-	SubscribedWorkteam *SubscribedWorkteam `type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeSubscribedWorkteamOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeSubscribedWorkteam = "DescribeSubscribedWorkteam"
 
@@ -67,7 +25,7 @@ const opDescribeSubscribedWorkteam = "DescribeSubscribedWorkteam"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeSubscribedWorkteam
-func (c *Client) DescribeSubscribedWorkteamRequest(input *DescribeSubscribedWorkteamInput) DescribeSubscribedWorkteamRequest {
+func (c *Client) DescribeSubscribedWorkteamRequest(input *types.DescribeSubscribedWorkteamInput) DescribeSubscribedWorkteamRequest {
 	op := &aws.Operation{
 		Name:       opDescribeSubscribedWorkteam,
 		HTTPMethod: "POST",
@@ -75,10 +33,10 @@ func (c *Client) DescribeSubscribedWorkteamRequest(input *DescribeSubscribedWork
 	}
 
 	if input == nil {
-		input = &DescribeSubscribedWorkteamInput{}
+		input = &types.DescribeSubscribedWorkteamInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeSubscribedWorkteamOutput{})
+	req := c.newRequest(op, input, &types.DescribeSubscribedWorkteamOutput{})
 	return DescribeSubscribedWorkteamRequest{Request: req, Input: input, Copy: c.DescribeSubscribedWorkteamRequest}
 }
 
@@ -86,8 +44,8 @@ func (c *Client) DescribeSubscribedWorkteamRequest(input *DescribeSubscribedWork
 // DescribeSubscribedWorkteam API operation.
 type DescribeSubscribedWorkteamRequest struct {
 	*aws.Request
-	Input *DescribeSubscribedWorkteamInput
-	Copy  func(*DescribeSubscribedWorkteamInput) DescribeSubscribedWorkteamRequest
+	Input *types.DescribeSubscribedWorkteamInput
+	Copy  func(*types.DescribeSubscribedWorkteamInput) DescribeSubscribedWorkteamRequest
 }
 
 // Send marshals and sends the DescribeSubscribedWorkteam API request.
@@ -99,7 +57,7 @@ func (r DescribeSubscribedWorkteamRequest) Send(ctx context.Context) (*DescribeS
 	}
 
 	resp := &DescribeSubscribedWorkteamResponse{
-		DescribeSubscribedWorkteamOutput: r.Request.Data.(*DescribeSubscribedWorkteamOutput),
+		DescribeSubscribedWorkteamOutput: r.Request.Data.(*types.DescribeSubscribedWorkteamOutput),
 		response:                         &aws.Response{Request: r.Request},
 	}
 
@@ -109,7 +67,7 @@ func (r DescribeSubscribedWorkteamRequest) Send(ctx context.Context) (*DescribeS
 // DescribeSubscribedWorkteamResponse is the response type for the
 // DescribeSubscribedWorkteam API operation.
 type DescribeSubscribedWorkteamResponse struct {
-	*DescribeSubscribedWorkteamOutput
+	*types.DescribeSubscribedWorkteamOutput
 
 	response *aws.Response
 }

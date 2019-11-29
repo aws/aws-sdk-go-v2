@@ -6,74 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/configservice/types"
 )
-
-type DescribeComplianceByResourceInput struct {
-	_ struct{} `type:"structure"`
-
-	// Filters the results by compliance.
-	//
-	// The allowed values are COMPLIANT, NON_COMPLIANT, and INSUFFICIENT_DATA.
-	ComplianceTypes []ComplianceType `type:"list"`
-
-	// The maximum number of evaluation results returned on each page. The default
-	// is 10. You cannot specify a number greater than 100. If you specify 0, AWS
-	// Config uses the default.
-	Limit *int64 `type:"integer"`
-
-	// The nextToken string returned on a previous page that you use to get the
-	// next page of results in a paginated response.
-	NextToken *string `type:"string"`
-
-	// The ID of the AWS resource for which you want compliance information. You
-	// can specify only one resource ID. If you specify a resource ID, you must
-	// also specify a type for ResourceType.
-	ResourceId *string `min:"1" type:"string"`
-
-	// The types of AWS resources for which you want compliance information (for
-	// example, AWS::EC2::Instance). For this action, you can specify that the resource
-	// type is an AWS account by specifying AWS::::Account.
-	ResourceType *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeComplianceByResourceInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeComplianceByResourceInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeComplianceByResourceInput"}
-	if s.ResourceId != nil && len(*s.ResourceId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ResourceId", 1))
-	}
-	if s.ResourceType != nil && len(*s.ResourceType) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ResourceType", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribeComplianceByResourceOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Indicates whether the specified AWS resource complies with all of the AWS
-	// Config rules that evaluate it.
-	ComplianceByResources []ComplianceByResource `type:"list"`
-
-	// The string that you use in a subsequent request to get the next page of results
-	// in a paginated response.
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeComplianceByResourceOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeComplianceByResource = "DescribeComplianceByResource"
 
@@ -114,7 +48,7 @@ const opDescribeComplianceByResource = "DescribeComplianceByResource"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DescribeComplianceByResource
-func (c *Client) DescribeComplianceByResourceRequest(input *DescribeComplianceByResourceInput) DescribeComplianceByResourceRequest {
+func (c *Client) DescribeComplianceByResourceRequest(input *types.DescribeComplianceByResourceInput) DescribeComplianceByResourceRequest {
 	op := &aws.Operation{
 		Name:       opDescribeComplianceByResource,
 		HTTPMethod: "POST",
@@ -122,10 +56,10 @@ func (c *Client) DescribeComplianceByResourceRequest(input *DescribeComplianceBy
 	}
 
 	if input == nil {
-		input = &DescribeComplianceByResourceInput{}
+		input = &types.DescribeComplianceByResourceInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeComplianceByResourceOutput{})
+	req := c.newRequest(op, input, &types.DescribeComplianceByResourceOutput{})
 	return DescribeComplianceByResourceRequest{Request: req, Input: input, Copy: c.DescribeComplianceByResourceRequest}
 }
 
@@ -133,8 +67,8 @@ func (c *Client) DescribeComplianceByResourceRequest(input *DescribeComplianceBy
 // DescribeComplianceByResource API operation.
 type DescribeComplianceByResourceRequest struct {
 	*aws.Request
-	Input *DescribeComplianceByResourceInput
-	Copy  func(*DescribeComplianceByResourceInput) DescribeComplianceByResourceRequest
+	Input *types.DescribeComplianceByResourceInput
+	Copy  func(*types.DescribeComplianceByResourceInput) DescribeComplianceByResourceRequest
 }
 
 // Send marshals and sends the DescribeComplianceByResource API request.
@@ -146,7 +80,7 @@ func (r DescribeComplianceByResourceRequest) Send(ctx context.Context) (*Describ
 	}
 
 	resp := &DescribeComplianceByResourceResponse{
-		DescribeComplianceByResourceOutput: r.Request.Data.(*DescribeComplianceByResourceOutput),
+		DescribeComplianceByResourceOutput: r.Request.Data.(*types.DescribeComplianceByResourceOutput),
 		response:                           &aws.Response{Request: r.Request},
 	}
 
@@ -156,7 +90,7 @@ func (r DescribeComplianceByResourceRequest) Send(ctx context.Context) (*Describ
 // DescribeComplianceByResourceResponse is the response type for the
 // DescribeComplianceByResource API operation.
 type DescribeComplianceByResourceResponse struct {
-	*DescribeComplianceByResourceOutput
+	*types.DescribeComplianceByResourceOutput
 
 	response *aws.Response
 }

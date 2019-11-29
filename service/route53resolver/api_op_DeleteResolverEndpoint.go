@@ -6,52 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/route53resolver/types"
 )
-
-type DeleteResolverEndpointInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the resolver endpoint that you want to delete.
-	//
-	// ResolverEndpointId is a required field
-	ResolverEndpointId *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteResolverEndpointInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteResolverEndpointInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteResolverEndpointInput"}
-
-	if s.ResolverEndpointId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ResolverEndpointId"))
-	}
-	if s.ResolverEndpointId != nil && len(*s.ResolverEndpointId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ResolverEndpointId", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteResolverEndpointOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Information about the DeleteResolverEndpoint request, including the status
-	// of the request.
-	ResolverEndpoint *ResolverEndpoint `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteResolverEndpointOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteResolverEndpoint = "DeleteResolverEndpoint"
 
@@ -75,7 +31,7 @@ const opDeleteResolverEndpoint = "DeleteResolverEndpoint"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/DeleteResolverEndpoint
-func (c *Client) DeleteResolverEndpointRequest(input *DeleteResolverEndpointInput) DeleteResolverEndpointRequest {
+func (c *Client) DeleteResolverEndpointRequest(input *types.DeleteResolverEndpointInput) DeleteResolverEndpointRequest {
 	op := &aws.Operation{
 		Name:       opDeleteResolverEndpoint,
 		HTTPMethod: "POST",
@@ -83,10 +39,10 @@ func (c *Client) DeleteResolverEndpointRequest(input *DeleteResolverEndpointInpu
 	}
 
 	if input == nil {
-		input = &DeleteResolverEndpointInput{}
+		input = &types.DeleteResolverEndpointInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteResolverEndpointOutput{})
+	req := c.newRequest(op, input, &types.DeleteResolverEndpointOutput{})
 	return DeleteResolverEndpointRequest{Request: req, Input: input, Copy: c.DeleteResolverEndpointRequest}
 }
 
@@ -94,8 +50,8 @@ func (c *Client) DeleteResolverEndpointRequest(input *DeleteResolverEndpointInpu
 // DeleteResolverEndpoint API operation.
 type DeleteResolverEndpointRequest struct {
 	*aws.Request
-	Input *DeleteResolverEndpointInput
-	Copy  func(*DeleteResolverEndpointInput) DeleteResolverEndpointRequest
+	Input *types.DeleteResolverEndpointInput
+	Copy  func(*types.DeleteResolverEndpointInput) DeleteResolverEndpointRequest
 }
 
 // Send marshals and sends the DeleteResolverEndpoint API request.
@@ -107,7 +63,7 @@ func (r DeleteResolverEndpointRequest) Send(ctx context.Context) (*DeleteResolve
 	}
 
 	resp := &DeleteResolverEndpointResponse{
-		DeleteResolverEndpointOutput: r.Request.Data.(*DeleteResolverEndpointOutput),
+		DeleteResolverEndpointOutput: r.Request.Data.(*types.DeleteResolverEndpointOutput),
 		response:                     &aws.Response{Request: r.Request},
 	}
 
@@ -117,7 +73,7 @@ func (r DeleteResolverEndpointRequest) Send(ctx context.Context) (*DeleteResolve
 // DeleteResolverEndpointResponse is the response type for the
 // DeleteResolverEndpoint API operation.
 type DeleteResolverEndpointResponse struct {
-	*DeleteResolverEndpointOutput
+	*types.DeleteResolverEndpointOutput
 
 	response *aws.Response
 }

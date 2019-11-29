@@ -13,6 +13,7 @@ import (
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/dynamodb"
+	"github.com/aws/aws-sdk-go-v2/service/dynamodb/types"
 )
 
 // ClientAPI provides an interface to enable mocking the
@@ -46,7 +47,7 @@ import (
 //    type mockClientClient struct {
 //        dynamodbiface.ClientPI
 //    }
-//    func (m *mockClientClient) BatchGetItem(input *dynamodb.BatchGetItemInput) (*dynamodb.BatchGetItemOutput, error) {
+//    func (m *mockClientClient) BatchGetItem(input *types.BatchGetItemInput) (*types.BatchGetItemOutput, error) {
 //        // mock response/functionality
 //    }
 //
@@ -64,81 +65,81 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type ClientAPI interface {
-	BatchGetItemRequest(*dynamodb.BatchGetItemInput) dynamodb.BatchGetItemRequest
+	BatchGetItemRequest(*types.BatchGetItemInput) dynamodb.BatchGetItemRequest
 
-	BatchWriteItemRequest(*dynamodb.BatchWriteItemInput) dynamodb.BatchWriteItemRequest
+	BatchWriteItemRequest(*types.BatchWriteItemInput) dynamodb.BatchWriteItemRequest
 
-	CreateBackupRequest(*dynamodb.CreateBackupInput) dynamodb.CreateBackupRequest
+	CreateBackupRequest(*types.CreateBackupInput) dynamodb.CreateBackupRequest
 
-	CreateGlobalTableRequest(*dynamodb.CreateGlobalTableInput) dynamodb.CreateGlobalTableRequest
+	CreateGlobalTableRequest(*types.CreateGlobalTableInput) dynamodb.CreateGlobalTableRequest
 
-	CreateTableRequest(*dynamodb.CreateTableInput) dynamodb.CreateTableRequest
+	CreateTableRequest(*types.CreateTableInput) dynamodb.CreateTableRequest
 
-	DeleteBackupRequest(*dynamodb.DeleteBackupInput) dynamodb.DeleteBackupRequest
+	DeleteBackupRequest(*types.DeleteBackupInput) dynamodb.DeleteBackupRequest
 
-	DeleteItemRequest(*dynamodb.DeleteItemInput) dynamodb.DeleteItemRequest
+	DeleteItemRequest(*types.DeleteItemInput) dynamodb.DeleteItemRequest
 
-	DeleteTableRequest(*dynamodb.DeleteTableInput) dynamodb.DeleteTableRequest
+	DeleteTableRequest(*types.DeleteTableInput) dynamodb.DeleteTableRequest
 
-	DescribeBackupRequest(*dynamodb.DescribeBackupInput) dynamodb.DescribeBackupRequest
+	DescribeBackupRequest(*types.DescribeBackupInput) dynamodb.DescribeBackupRequest
 
-	DescribeContinuousBackupsRequest(*dynamodb.DescribeContinuousBackupsInput) dynamodb.DescribeContinuousBackupsRequest
+	DescribeContinuousBackupsRequest(*types.DescribeContinuousBackupsInput) dynamodb.DescribeContinuousBackupsRequest
 
-	DescribeEndpointsRequest(*dynamodb.DescribeEndpointsInput) dynamodb.DescribeEndpointsRequest
+	DescribeEndpointsRequest(*types.DescribeEndpointsInput) dynamodb.DescribeEndpointsRequest
 
-	DescribeGlobalTableRequest(*dynamodb.DescribeGlobalTableInput) dynamodb.DescribeGlobalTableRequest
+	DescribeGlobalTableRequest(*types.DescribeGlobalTableInput) dynamodb.DescribeGlobalTableRequest
 
-	DescribeGlobalTableSettingsRequest(*dynamodb.DescribeGlobalTableSettingsInput) dynamodb.DescribeGlobalTableSettingsRequest
+	DescribeGlobalTableSettingsRequest(*types.DescribeGlobalTableSettingsInput) dynamodb.DescribeGlobalTableSettingsRequest
 
-	DescribeLimitsRequest(*dynamodb.DescribeLimitsInput) dynamodb.DescribeLimitsRequest
+	DescribeLimitsRequest(*types.DescribeLimitsInput) dynamodb.DescribeLimitsRequest
 
-	DescribeTableRequest(*dynamodb.DescribeTableInput) dynamodb.DescribeTableRequest
+	DescribeTableRequest(*types.DescribeTableInput) dynamodb.DescribeTableRequest
 
-	DescribeTimeToLiveRequest(*dynamodb.DescribeTimeToLiveInput) dynamodb.DescribeTimeToLiveRequest
+	DescribeTimeToLiveRequest(*types.DescribeTimeToLiveInput) dynamodb.DescribeTimeToLiveRequest
 
-	GetItemRequest(*dynamodb.GetItemInput) dynamodb.GetItemRequest
+	GetItemRequest(*types.GetItemInput) dynamodb.GetItemRequest
 
-	ListBackupsRequest(*dynamodb.ListBackupsInput) dynamodb.ListBackupsRequest
+	ListBackupsRequest(*types.ListBackupsInput) dynamodb.ListBackupsRequest
 
-	ListGlobalTablesRequest(*dynamodb.ListGlobalTablesInput) dynamodb.ListGlobalTablesRequest
+	ListGlobalTablesRequest(*types.ListGlobalTablesInput) dynamodb.ListGlobalTablesRequest
 
-	ListTablesRequest(*dynamodb.ListTablesInput) dynamodb.ListTablesRequest
+	ListTablesRequest(*types.ListTablesInput) dynamodb.ListTablesRequest
 
-	ListTagsOfResourceRequest(*dynamodb.ListTagsOfResourceInput) dynamodb.ListTagsOfResourceRequest
+	ListTagsOfResourceRequest(*types.ListTagsOfResourceInput) dynamodb.ListTagsOfResourceRequest
 
-	PutItemRequest(*dynamodb.PutItemInput) dynamodb.PutItemRequest
+	PutItemRequest(*types.PutItemInput) dynamodb.PutItemRequest
 
-	QueryRequest(*dynamodb.QueryInput) dynamodb.QueryRequest
+	QueryRequest(*types.QueryInput) dynamodb.QueryRequest
 
-	RestoreTableFromBackupRequest(*dynamodb.RestoreTableFromBackupInput) dynamodb.RestoreTableFromBackupRequest
+	RestoreTableFromBackupRequest(*types.RestoreTableFromBackupInput) dynamodb.RestoreTableFromBackupRequest
 
-	RestoreTableToPointInTimeRequest(*dynamodb.RestoreTableToPointInTimeInput) dynamodb.RestoreTableToPointInTimeRequest
+	RestoreTableToPointInTimeRequest(*types.RestoreTableToPointInTimeInput) dynamodb.RestoreTableToPointInTimeRequest
 
-	ScanRequest(*dynamodb.ScanInput) dynamodb.ScanRequest
+	ScanRequest(*types.ScanInput) dynamodb.ScanRequest
 
-	TagResourceRequest(*dynamodb.TagResourceInput) dynamodb.TagResourceRequest
+	TagResourceRequest(*types.TagResourceInput) dynamodb.TagResourceRequest
 
-	TransactGetItemsRequest(*dynamodb.TransactGetItemsInput) dynamodb.TransactGetItemsRequest
+	TransactGetItemsRequest(*types.TransactGetItemsInput) dynamodb.TransactGetItemsRequest
 
-	TransactWriteItemsRequest(*dynamodb.TransactWriteItemsInput) dynamodb.TransactWriteItemsRequest
+	TransactWriteItemsRequest(*types.TransactWriteItemsInput) dynamodb.TransactWriteItemsRequest
 
-	UntagResourceRequest(*dynamodb.UntagResourceInput) dynamodb.UntagResourceRequest
+	UntagResourceRequest(*types.UntagResourceInput) dynamodb.UntagResourceRequest
 
-	UpdateContinuousBackupsRequest(*dynamodb.UpdateContinuousBackupsInput) dynamodb.UpdateContinuousBackupsRequest
+	UpdateContinuousBackupsRequest(*types.UpdateContinuousBackupsInput) dynamodb.UpdateContinuousBackupsRequest
 
-	UpdateGlobalTableRequest(*dynamodb.UpdateGlobalTableInput) dynamodb.UpdateGlobalTableRequest
+	UpdateGlobalTableRequest(*types.UpdateGlobalTableInput) dynamodb.UpdateGlobalTableRequest
 
-	UpdateGlobalTableSettingsRequest(*dynamodb.UpdateGlobalTableSettingsInput) dynamodb.UpdateGlobalTableSettingsRequest
+	UpdateGlobalTableSettingsRequest(*types.UpdateGlobalTableSettingsInput) dynamodb.UpdateGlobalTableSettingsRequest
 
-	UpdateItemRequest(*dynamodb.UpdateItemInput) dynamodb.UpdateItemRequest
+	UpdateItemRequest(*types.UpdateItemInput) dynamodb.UpdateItemRequest
 
-	UpdateTableRequest(*dynamodb.UpdateTableInput) dynamodb.UpdateTableRequest
+	UpdateTableRequest(*types.UpdateTableInput) dynamodb.UpdateTableRequest
 
-	UpdateTimeToLiveRequest(*dynamodb.UpdateTimeToLiveInput) dynamodb.UpdateTimeToLiveRequest
+	UpdateTimeToLiveRequest(*types.UpdateTimeToLiveInput) dynamodb.UpdateTimeToLiveRequest
 
-	WaitUntilTableExists(context.Context, *dynamodb.DescribeTableInput, ...aws.WaiterOption) error
+	WaitUntilTableExists(context.Context, *types.DescribeTableInput, ...aws.WaiterOption) error
 
-	WaitUntilTableNotExists(context.Context, *dynamodb.DescribeTableInput, ...aws.WaiterOption) error
+	WaitUntilTableNotExists(context.Context, *types.DescribeTableInput, ...aws.WaiterOption) error
 }
 
 var _ ClientAPI = (*dynamodb.Client)(nil)

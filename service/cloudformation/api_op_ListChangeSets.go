@@ -6,66 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/cloudformation/types"
 )
-
-// The input for the ListChangeSets action.
-type ListChangeSetsInput struct {
-	_ struct{} `type:"structure"`
-
-	// A string (provided by the ListChangeSets response output) that identifies
-	// the next page of change sets that you want to retrieve.
-	NextToken *string `min:"1" type:"string"`
-
-	// The name or the Amazon Resource Name (ARN) of the stack for which you want
-	// to list change sets.
-	//
-	// StackName is a required field
-	StackName *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s ListChangeSetsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListChangeSetsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListChangeSetsInput"}
-	if s.NextToken != nil && len(*s.NextToken) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
-	}
-
-	if s.StackName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("StackName"))
-	}
-	if s.StackName != nil && len(*s.StackName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("StackName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// The output for the ListChangeSets action.
-type ListChangeSetsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// If the output exceeds 1 MB, a string that identifies the next page of change
-	// sets. If there is no additional page, this value is null.
-	NextToken *string `min:"1" type:"string"`
-
-	// A list of ChangeSetSummary structures that provides the ID and status of
-	// each change set for the specified stack.
-	Summaries []ChangeSetSummary `type:"list"`
-}
-
-// String returns the string representation
-func (s ListChangeSetsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListChangeSets = "ListChangeSets"
 
@@ -84,7 +26,7 @@ const opListChangeSets = "ListChangeSets"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ListChangeSets
-func (c *Client) ListChangeSetsRequest(input *ListChangeSetsInput) ListChangeSetsRequest {
+func (c *Client) ListChangeSetsRequest(input *types.ListChangeSetsInput) ListChangeSetsRequest {
 	op := &aws.Operation{
 		Name:       opListChangeSets,
 		HTTPMethod: "POST",
@@ -92,10 +34,10 @@ func (c *Client) ListChangeSetsRequest(input *ListChangeSetsInput) ListChangeSet
 	}
 
 	if input == nil {
-		input = &ListChangeSetsInput{}
+		input = &types.ListChangeSetsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListChangeSetsOutput{})
+	req := c.newRequest(op, input, &types.ListChangeSetsOutput{})
 	return ListChangeSetsRequest{Request: req, Input: input, Copy: c.ListChangeSetsRequest}
 }
 
@@ -103,8 +45,8 @@ func (c *Client) ListChangeSetsRequest(input *ListChangeSetsInput) ListChangeSet
 // ListChangeSets API operation.
 type ListChangeSetsRequest struct {
 	*aws.Request
-	Input *ListChangeSetsInput
-	Copy  func(*ListChangeSetsInput) ListChangeSetsRequest
+	Input *types.ListChangeSetsInput
+	Copy  func(*types.ListChangeSetsInput) ListChangeSetsRequest
 }
 
 // Send marshals and sends the ListChangeSets API request.
@@ -116,7 +58,7 @@ func (r ListChangeSetsRequest) Send(ctx context.Context) (*ListChangeSetsRespons
 	}
 
 	resp := &ListChangeSetsResponse{
-		ListChangeSetsOutput: r.Request.Data.(*ListChangeSetsOutput),
+		ListChangeSetsOutput: r.Request.Data.(*types.ListChangeSetsOutput),
 		response:             &aws.Response{Request: r.Request},
 	}
 
@@ -126,7 +68,7 @@ func (r ListChangeSetsRequest) Send(ctx context.Context) (*ListChangeSetsRespons
 // ListChangeSetsResponse is the response type for the
 // ListChangeSets API operation.
 type ListChangeSetsResponse struct {
-	*ListChangeSetsOutput
+	*types.ListChangeSetsOutput
 
 	response *aws.Response
 }

@@ -4,71 +4,10 @@ package databasemigrationservice
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/databasemigrationservice/types"
 )
-
-type DescribeReplicationSubnetGroupsInput struct {
-	_ struct{} `type:"structure"`
-
-	// Filters applied to the describe action.
-	Filters []Filter `type:"list"`
-
-	// An optional pagination token provided by a previous request. If this parameter
-	// is specified, the response includes only records beyond the marker, up to
-	// the value specified by MaxRecords.
-	Marker *string `type:"string"`
-
-	// The maximum number of records to include in the response. If more records
-	// exist than the specified MaxRecords value, a pagination token called a marker
-	// is included in the response so that the remaining results can be retrieved.
-	//
-	// Default: 100
-	//
-	// Constraints: Minimum 20, maximum 100.
-	MaxRecords *int64 `type:"integer"`
-}
-
-// String returns the string representation
-func (s DescribeReplicationSubnetGroupsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeReplicationSubnetGroupsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeReplicationSubnetGroupsInput"}
-	if s.Filters != nil {
-		for i, v := range s.Filters {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribeReplicationSubnetGroupsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// An optional pagination token provided by a previous request. If this parameter
-	// is specified, the response includes only records beyond the marker, up to
-	// the value specified by MaxRecords.
-	Marker *string `type:"string"`
-
-	// A description of the replication subnet groups.
-	ReplicationSubnetGroups []ReplicationSubnetGroup `type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeReplicationSubnetGroupsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeReplicationSubnetGroups = "DescribeReplicationSubnetGroups"
 
@@ -85,7 +24,7 @@ const opDescribeReplicationSubnetGroups = "DescribeReplicationSubnetGroups"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeReplicationSubnetGroups
-func (c *Client) DescribeReplicationSubnetGroupsRequest(input *DescribeReplicationSubnetGroupsInput) DescribeReplicationSubnetGroupsRequest {
+func (c *Client) DescribeReplicationSubnetGroupsRequest(input *types.DescribeReplicationSubnetGroupsInput) DescribeReplicationSubnetGroupsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeReplicationSubnetGroups,
 		HTTPMethod: "POST",
@@ -99,10 +38,10 @@ func (c *Client) DescribeReplicationSubnetGroupsRequest(input *DescribeReplicati
 	}
 
 	if input == nil {
-		input = &DescribeReplicationSubnetGroupsInput{}
+		input = &types.DescribeReplicationSubnetGroupsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeReplicationSubnetGroupsOutput{})
+	req := c.newRequest(op, input, &types.DescribeReplicationSubnetGroupsOutput{})
 	return DescribeReplicationSubnetGroupsRequest{Request: req, Input: input, Copy: c.DescribeReplicationSubnetGroupsRequest}
 }
 
@@ -110,8 +49,8 @@ func (c *Client) DescribeReplicationSubnetGroupsRequest(input *DescribeReplicati
 // DescribeReplicationSubnetGroups API operation.
 type DescribeReplicationSubnetGroupsRequest struct {
 	*aws.Request
-	Input *DescribeReplicationSubnetGroupsInput
-	Copy  func(*DescribeReplicationSubnetGroupsInput) DescribeReplicationSubnetGroupsRequest
+	Input *types.DescribeReplicationSubnetGroupsInput
+	Copy  func(*types.DescribeReplicationSubnetGroupsInput) DescribeReplicationSubnetGroupsRequest
 }
 
 // Send marshals and sends the DescribeReplicationSubnetGroups API request.
@@ -123,7 +62,7 @@ func (r DescribeReplicationSubnetGroupsRequest) Send(ctx context.Context) (*Desc
 	}
 
 	resp := &DescribeReplicationSubnetGroupsResponse{
-		DescribeReplicationSubnetGroupsOutput: r.Request.Data.(*DescribeReplicationSubnetGroupsOutput),
+		DescribeReplicationSubnetGroupsOutput: r.Request.Data.(*types.DescribeReplicationSubnetGroupsOutput),
 		response:                              &aws.Response{Request: r.Request},
 	}
 
@@ -153,7 +92,7 @@ func NewDescribeReplicationSubnetGroupsPaginator(req DescribeReplicationSubnetGr
 	return DescribeReplicationSubnetGroupsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *DescribeReplicationSubnetGroupsInput
+				var inCpy *types.DescribeReplicationSubnetGroupsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -173,14 +112,14 @@ type DescribeReplicationSubnetGroupsPaginator struct {
 	aws.Pager
 }
 
-func (p *DescribeReplicationSubnetGroupsPaginator) CurrentPage() *DescribeReplicationSubnetGroupsOutput {
-	return p.Pager.CurrentPage().(*DescribeReplicationSubnetGroupsOutput)
+func (p *DescribeReplicationSubnetGroupsPaginator) CurrentPage() *types.DescribeReplicationSubnetGroupsOutput {
+	return p.Pager.CurrentPage().(*types.DescribeReplicationSubnetGroupsOutput)
 }
 
 // DescribeReplicationSubnetGroupsResponse is the response type for the
 // DescribeReplicationSubnetGroups API operation.
 type DescribeReplicationSubnetGroupsResponse struct {
-	*DescribeReplicationSubnetGroupsOutput
+	*types.DescribeReplicationSubnetGroupsOutput
 
 	response *aws.Response
 }

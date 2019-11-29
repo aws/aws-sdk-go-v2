@@ -10,6 +10,7 @@ package directoryserviceiface
 
 import (
 	"github.com/aws/aws-sdk-go-v2/service/directoryservice"
+	"github.com/aws/aws-sdk-go-v2/service/directoryservice/types"
 )
 
 // ClientAPI provides an interface to enable mocking the
@@ -43,7 +44,7 @@ import (
 //    type mockClientClient struct {
 //        directoryserviceiface.ClientPI
 //    }
-//    func (m *mockClientClient) AcceptSharedDirectory(input *directoryservice.AcceptSharedDirectoryInput) (*directoryservice.AcceptSharedDirectoryOutput, error) {
+//    func (m *mockClientClient) AcceptSharedDirectory(input *types.AcceptSharedDirectoryInput) (*types.AcceptSharedDirectoryOutput, error) {
 //        // mock response/functionality
 //    }
 //
@@ -61,105 +62,105 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type ClientAPI interface {
-	AcceptSharedDirectoryRequest(*directoryservice.AcceptSharedDirectoryInput) directoryservice.AcceptSharedDirectoryRequest
+	AcceptSharedDirectoryRequest(*types.AcceptSharedDirectoryInput) directoryservice.AcceptSharedDirectoryRequest
 
-	AddIpRoutesRequest(*directoryservice.AddIpRoutesInput) directoryservice.AddIpRoutesRequest
+	AddIpRoutesRequest(*types.AddIpRoutesInput) directoryservice.AddIpRoutesRequest
 
-	AddTagsToResourceRequest(*directoryservice.AddTagsToResourceInput) directoryservice.AddTagsToResourceRequest
+	AddTagsToResourceRequest(*types.AddTagsToResourceInput) directoryservice.AddTagsToResourceRequest
 
-	CancelSchemaExtensionRequest(*directoryservice.CancelSchemaExtensionInput) directoryservice.CancelSchemaExtensionRequest
+	CancelSchemaExtensionRequest(*types.CancelSchemaExtensionInput) directoryservice.CancelSchemaExtensionRequest
 
-	ConnectDirectoryRequest(*directoryservice.ConnectDirectoryInput) directoryservice.ConnectDirectoryRequest
+	ConnectDirectoryRequest(*types.ConnectDirectoryInput) directoryservice.ConnectDirectoryRequest
 
-	CreateAliasRequest(*directoryservice.CreateAliasInput) directoryservice.CreateAliasRequest
+	CreateAliasRequest(*types.CreateAliasInput) directoryservice.CreateAliasRequest
 
-	CreateComputerRequest(*directoryservice.CreateComputerInput) directoryservice.CreateComputerRequest
+	CreateComputerRequest(*types.CreateComputerInput) directoryservice.CreateComputerRequest
 
-	CreateConditionalForwarderRequest(*directoryservice.CreateConditionalForwarderInput) directoryservice.CreateConditionalForwarderRequest
+	CreateConditionalForwarderRequest(*types.CreateConditionalForwarderInput) directoryservice.CreateConditionalForwarderRequest
 
-	CreateDirectoryRequest(*directoryservice.CreateDirectoryInput) directoryservice.CreateDirectoryRequest
+	CreateDirectoryRequest(*types.CreateDirectoryInput) directoryservice.CreateDirectoryRequest
 
-	CreateLogSubscriptionRequest(*directoryservice.CreateLogSubscriptionInput) directoryservice.CreateLogSubscriptionRequest
+	CreateLogSubscriptionRequest(*types.CreateLogSubscriptionInput) directoryservice.CreateLogSubscriptionRequest
 
-	CreateMicrosoftADRequest(*directoryservice.CreateMicrosoftADInput) directoryservice.CreateMicrosoftADRequest
+	CreateMicrosoftADRequest(*types.CreateMicrosoftADInput) directoryservice.CreateMicrosoftADRequest
 
-	CreateSnapshotRequest(*directoryservice.CreateSnapshotInput) directoryservice.CreateSnapshotRequest
+	CreateSnapshotRequest(*types.CreateSnapshotInput) directoryservice.CreateSnapshotRequest
 
-	CreateTrustRequest(*directoryservice.CreateTrustInput) directoryservice.CreateTrustRequest
+	CreateTrustRequest(*types.CreateTrustInput) directoryservice.CreateTrustRequest
 
-	DeleteConditionalForwarderRequest(*directoryservice.DeleteConditionalForwarderInput) directoryservice.DeleteConditionalForwarderRequest
+	DeleteConditionalForwarderRequest(*types.DeleteConditionalForwarderInput) directoryservice.DeleteConditionalForwarderRequest
 
-	DeleteDirectoryRequest(*directoryservice.DeleteDirectoryInput) directoryservice.DeleteDirectoryRequest
+	DeleteDirectoryRequest(*types.DeleteDirectoryInput) directoryservice.DeleteDirectoryRequest
 
-	DeleteLogSubscriptionRequest(*directoryservice.DeleteLogSubscriptionInput) directoryservice.DeleteLogSubscriptionRequest
+	DeleteLogSubscriptionRequest(*types.DeleteLogSubscriptionInput) directoryservice.DeleteLogSubscriptionRequest
 
-	DeleteSnapshotRequest(*directoryservice.DeleteSnapshotInput) directoryservice.DeleteSnapshotRequest
+	DeleteSnapshotRequest(*types.DeleteSnapshotInput) directoryservice.DeleteSnapshotRequest
 
-	DeleteTrustRequest(*directoryservice.DeleteTrustInput) directoryservice.DeleteTrustRequest
+	DeleteTrustRequest(*types.DeleteTrustInput) directoryservice.DeleteTrustRequest
 
-	DeregisterEventTopicRequest(*directoryservice.DeregisterEventTopicInput) directoryservice.DeregisterEventTopicRequest
+	DeregisterEventTopicRequest(*types.DeregisterEventTopicInput) directoryservice.DeregisterEventTopicRequest
 
-	DescribeConditionalForwardersRequest(*directoryservice.DescribeConditionalForwardersInput) directoryservice.DescribeConditionalForwardersRequest
+	DescribeConditionalForwardersRequest(*types.DescribeConditionalForwardersInput) directoryservice.DescribeConditionalForwardersRequest
 
-	DescribeDirectoriesRequest(*directoryservice.DescribeDirectoriesInput) directoryservice.DescribeDirectoriesRequest
+	DescribeDirectoriesRequest(*types.DescribeDirectoriesInput) directoryservice.DescribeDirectoriesRequest
 
-	DescribeDomainControllersRequest(*directoryservice.DescribeDomainControllersInput) directoryservice.DescribeDomainControllersRequest
+	DescribeDomainControllersRequest(*types.DescribeDomainControllersInput) directoryservice.DescribeDomainControllersRequest
 
-	DescribeEventTopicsRequest(*directoryservice.DescribeEventTopicsInput) directoryservice.DescribeEventTopicsRequest
+	DescribeEventTopicsRequest(*types.DescribeEventTopicsInput) directoryservice.DescribeEventTopicsRequest
 
-	DescribeSharedDirectoriesRequest(*directoryservice.DescribeSharedDirectoriesInput) directoryservice.DescribeSharedDirectoriesRequest
+	DescribeSharedDirectoriesRequest(*types.DescribeSharedDirectoriesInput) directoryservice.DescribeSharedDirectoriesRequest
 
-	DescribeSnapshotsRequest(*directoryservice.DescribeSnapshotsInput) directoryservice.DescribeSnapshotsRequest
+	DescribeSnapshotsRequest(*types.DescribeSnapshotsInput) directoryservice.DescribeSnapshotsRequest
 
-	DescribeTrustsRequest(*directoryservice.DescribeTrustsInput) directoryservice.DescribeTrustsRequest
+	DescribeTrustsRequest(*types.DescribeTrustsInput) directoryservice.DescribeTrustsRequest
 
-	DisableRadiusRequest(*directoryservice.DisableRadiusInput) directoryservice.DisableRadiusRequest
+	DisableRadiusRequest(*types.DisableRadiusInput) directoryservice.DisableRadiusRequest
 
-	DisableSsoRequest(*directoryservice.DisableSsoInput) directoryservice.DisableSsoRequest
+	DisableSsoRequest(*types.DisableSsoInput) directoryservice.DisableSsoRequest
 
-	EnableRadiusRequest(*directoryservice.EnableRadiusInput) directoryservice.EnableRadiusRequest
+	EnableRadiusRequest(*types.EnableRadiusInput) directoryservice.EnableRadiusRequest
 
-	EnableSsoRequest(*directoryservice.EnableSsoInput) directoryservice.EnableSsoRequest
+	EnableSsoRequest(*types.EnableSsoInput) directoryservice.EnableSsoRequest
 
-	GetDirectoryLimitsRequest(*directoryservice.GetDirectoryLimitsInput) directoryservice.GetDirectoryLimitsRequest
+	GetDirectoryLimitsRequest(*types.GetDirectoryLimitsInput) directoryservice.GetDirectoryLimitsRequest
 
-	GetSnapshotLimitsRequest(*directoryservice.GetSnapshotLimitsInput) directoryservice.GetSnapshotLimitsRequest
+	GetSnapshotLimitsRequest(*types.GetSnapshotLimitsInput) directoryservice.GetSnapshotLimitsRequest
 
-	ListIpRoutesRequest(*directoryservice.ListIpRoutesInput) directoryservice.ListIpRoutesRequest
+	ListIpRoutesRequest(*types.ListIpRoutesInput) directoryservice.ListIpRoutesRequest
 
-	ListLogSubscriptionsRequest(*directoryservice.ListLogSubscriptionsInput) directoryservice.ListLogSubscriptionsRequest
+	ListLogSubscriptionsRequest(*types.ListLogSubscriptionsInput) directoryservice.ListLogSubscriptionsRequest
 
-	ListSchemaExtensionsRequest(*directoryservice.ListSchemaExtensionsInput) directoryservice.ListSchemaExtensionsRequest
+	ListSchemaExtensionsRequest(*types.ListSchemaExtensionsInput) directoryservice.ListSchemaExtensionsRequest
 
-	ListTagsForResourceRequest(*directoryservice.ListTagsForResourceInput) directoryservice.ListTagsForResourceRequest
+	ListTagsForResourceRequest(*types.ListTagsForResourceInput) directoryservice.ListTagsForResourceRequest
 
-	RegisterEventTopicRequest(*directoryservice.RegisterEventTopicInput) directoryservice.RegisterEventTopicRequest
+	RegisterEventTopicRequest(*types.RegisterEventTopicInput) directoryservice.RegisterEventTopicRequest
 
-	RejectSharedDirectoryRequest(*directoryservice.RejectSharedDirectoryInput) directoryservice.RejectSharedDirectoryRequest
+	RejectSharedDirectoryRequest(*types.RejectSharedDirectoryInput) directoryservice.RejectSharedDirectoryRequest
 
-	RemoveIpRoutesRequest(*directoryservice.RemoveIpRoutesInput) directoryservice.RemoveIpRoutesRequest
+	RemoveIpRoutesRequest(*types.RemoveIpRoutesInput) directoryservice.RemoveIpRoutesRequest
 
-	RemoveTagsFromResourceRequest(*directoryservice.RemoveTagsFromResourceInput) directoryservice.RemoveTagsFromResourceRequest
+	RemoveTagsFromResourceRequest(*types.RemoveTagsFromResourceInput) directoryservice.RemoveTagsFromResourceRequest
 
-	ResetUserPasswordRequest(*directoryservice.ResetUserPasswordInput) directoryservice.ResetUserPasswordRequest
+	ResetUserPasswordRequest(*types.ResetUserPasswordInput) directoryservice.ResetUserPasswordRequest
 
-	RestoreFromSnapshotRequest(*directoryservice.RestoreFromSnapshotInput) directoryservice.RestoreFromSnapshotRequest
+	RestoreFromSnapshotRequest(*types.RestoreFromSnapshotInput) directoryservice.RestoreFromSnapshotRequest
 
-	ShareDirectoryRequest(*directoryservice.ShareDirectoryInput) directoryservice.ShareDirectoryRequest
+	ShareDirectoryRequest(*types.ShareDirectoryInput) directoryservice.ShareDirectoryRequest
 
-	StartSchemaExtensionRequest(*directoryservice.StartSchemaExtensionInput) directoryservice.StartSchemaExtensionRequest
+	StartSchemaExtensionRequest(*types.StartSchemaExtensionInput) directoryservice.StartSchemaExtensionRequest
 
-	UnshareDirectoryRequest(*directoryservice.UnshareDirectoryInput) directoryservice.UnshareDirectoryRequest
+	UnshareDirectoryRequest(*types.UnshareDirectoryInput) directoryservice.UnshareDirectoryRequest
 
-	UpdateConditionalForwarderRequest(*directoryservice.UpdateConditionalForwarderInput) directoryservice.UpdateConditionalForwarderRequest
+	UpdateConditionalForwarderRequest(*types.UpdateConditionalForwarderInput) directoryservice.UpdateConditionalForwarderRequest
 
-	UpdateNumberOfDomainControllersRequest(*directoryservice.UpdateNumberOfDomainControllersInput) directoryservice.UpdateNumberOfDomainControllersRequest
+	UpdateNumberOfDomainControllersRequest(*types.UpdateNumberOfDomainControllersInput) directoryservice.UpdateNumberOfDomainControllersRequest
 
-	UpdateRadiusRequest(*directoryservice.UpdateRadiusInput) directoryservice.UpdateRadiusRequest
+	UpdateRadiusRequest(*types.UpdateRadiusInput) directoryservice.UpdateRadiusRequest
 
-	UpdateTrustRequest(*directoryservice.UpdateTrustInput) directoryservice.UpdateTrustRequest
+	UpdateTrustRequest(*types.UpdateTrustInput) directoryservice.UpdateTrustRequest
 
-	VerifyTrustRequest(*directoryservice.VerifyTrustInput) directoryservice.VerifyTrustRequest
+	VerifyTrustRequest(*types.VerifyTrustInput) directoryservice.VerifyTrustRequest
 }
 
 var _ ClientAPI = (*directoryservice.Client)(nil)

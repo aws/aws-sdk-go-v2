@@ -4,222 +4,10 @@ package sts
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/sts/types"
 )
-
-type AssumeRoleWithWebIdentityInput struct {
-	_ struct{} `type:"structure"`
-
-	// The duration, in seconds, of the role session. The value can range from 900
-	// seconds (15 minutes) up to the maximum session duration setting for the role.
-	// This setting can have a value from 1 hour to 12 hours. If you specify a value
-	// higher than this setting, the operation fails. For example, if you specify
-	// a session duration of 12 hours, but your administrator set the maximum session
-	// duration to 6 hours, your operation fails. To learn how to view the maximum
-	// value for your role, see View the Maximum Session Duration Setting for a
-	// Role (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use.html#id_roles_use_view-role-max-session)
-	// in the IAM User Guide.
-	//
-	// By default, the value is set to 3600 seconds.
-	//
-	// The DurationSeconds parameter is separate from the duration of a console
-	// session that you might request using the returned credentials. The request
-	// to the federation endpoint for a console sign-in token takes a SessionDuration
-	// parameter that specifies the maximum length of the console session. For more
-	// information, see Creating a URL that Enables Federated Users to Access the
-	// AWS Management Console (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_enable-console-custom-url.html)
-	// in the IAM User Guide.
-	DurationSeconds *int64 `min:"900" type:"integer"`
-
-	// An IAM policy in JSON format that you want to use as an inline session policy.
-	//
-	// This parameter is optional. Passing policies to this operation returns new
-	// temporary credentials. The resulting session's permissions are the intersection
-	// of the role's identity-based policy and the session policies. You can use
-	// the role's temporary credentials in subsequent AWS API calls to access resources
-	// in the account that owns the role. You cannot use session policies to grant
-	// more permissions than those allowed by the identity-based policy of the role
-	// that is being assumed. For more information, see Session Policies (https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies.html#policies_session)
-	// in the IAM User Guide.
-	//
-	// The plain text that you use for both inline and managed session policies
-	// shouldn't exceed 2048 characters. The JSON policy characters can be any ASCII
-	// character from the space character to the end of the valid character list
-	// (\u0020 through \u00FF). It can also include the tab (\u0009), linefeed (\u000A),
-	// and carriage return (\u000D) characters.
-	//
-	// The characters in this parameter count towards the 2048 character session
-	// policy guideline. However, an AWS conversion compresses the session policies
-	// into a packed binary format that has a separate limit. This is the enforced
-	// limit. The PackedPolicySize response element indicates by percentage how
-	// close the policy is to the upper size limit.
-	Policy *string `min:"1" type:"string"`
-
-	// The Amazon Resource Names (ARNs) of the IAM managed policies that you want
-	// to use as managed session policies. The policies must exist in the same account
-	// as the role.
-	//
-	// This parameter is optional. You can provide up to 10 managed policy ARNs.
-	// However, the plain text that you use for both inline and managed session
-	// policies shouldn't exceed 2048 characters. For more information about ARNs,
-	// see Amazon Resource Names (ARNs) and AWS Service Namespaces (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
-	// in the AWS General Reference.
-	//
-	// The characters in this parameter count towards the 2048 character session
-	// policy guideline. However, an AWS conversion compresses the session policies
-	// into a packed binary format that has a separate limit. This is the enforced
-	// limit. The PackedPolicySize response element indicates by percentage how
-	// close the policy is to the upper size limit.
-	//
-	// Passing policies to this operation returns new temporary credentials. The
-	// resulting session's permissions are the intersection of the role's identity-based
-	// policy and the session policies. You can use the role's temporary credentials
-	// in subsequent AWS API calls to access resources in the account that owns
-	// the role. You cannot use session policies to grant more permissions than
-	// those allowed by the identity-based policy of the role that is being assumed.
-	// For more information, see Session Policies (https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies.html#policies_session)
-	// in the IAM User Guide.
-	PolicyArns []PolicyDescriptorType `type:"list"`
-
-	// The fully qualified host component of the domain name of the identity provider.
-	//
-	// Specify this value only for OAuth 2.0 access tokens. Currently www.amazon.com
-	// and graph.facebook.com are the only supported identity providers for OAuth
-	// 2.0 access tokens. Do not include URL schemes and port numbers.
-	//
-	// Do not specify this value for OpenID Connect ID tokens.
-	ProviderId *string `min:"4" type:"string"`
-
-	// The Amazon Resource Name (ARN) of the role that the caller is assuming.
-	//
-	// RoleArn is a required field
-	RoleArn *string `min:"20" type:"string" required:"true"`
-
-	// An identifier for the assumed role session. Typically, you pass the name
-	// or identifier that is associated with the user who is using your application.
-	// That way, the temporary security credentials that your application will use
-	// are associated with that user. This session name is included as part of the
-	// ARN and assumed role ID in the AssumedRoleUser response element.
-	//
-	// The regex used to validate this parameter is a string of characters consisting
-	// of upper- and lower-case alphanumeric characters with no spaces. You can
-	// also include underscores or any of the following characters: =,.@-
-	//
-	// RoleSessionName is a required field
-	RoleSessionName *string `min:"2" type:"string" required:"true"`
-
-	// The OAuth 2.0 access token or OpenID Connect ID token that is provided by
-	// the identity provider. Your application must get this token by authenticating
-	// the user who is using your application with a web identity provider before
-	// the application makes an AssumeRoleWithWebIdentity call.
-	//
-	// WebIdentityToken is a required field
-	WebIdentityToken *string `min:"4" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s AssumeRoleWithWebIdentityInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *AssumeRoleWithWebIdentityInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "AssumeRoleWithWebIdentityInput"}
-	if s.DurationSeconds != nil && *s.DurationSeconds < 900 {
-		invalidParams.Add(aws.NewErrParamMinValue("DurationSeconds", 900))
-	}
-	if s.Policy != nil && len(*s.Policy) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Policy", 1))
-	}
-	if s.ProviderId != nil && len(*s.ProviderId) < 4 {
-		invalidParams.Add(aws.NewErrParamMinLen("ProviderId", 4))
-	}
-
-	if s.RoleArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("RoleArn"))
-	}
-	if s.RoleArn != nil && len(*s.RoleArn) < 20 {
-		invalidParams.Add(aws.NewErrParamMinLen("RoleArn", 20))
-	}
-
-	if s.RoleSessionName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("RoleSessionName"))
-	}
-	if s.RoleSessionName != nil && len(*s.RoleSessionName) < 2 {
-		invalidParams.Add(aws.NewErrParamMinLen("RoleSessionName", 2))
-	}
-
-	if s.WebIdentityToken == nil {
-		invalidParams.Add(aws.NewErrParamRequired("WebIdentityToken"))
-	}
-	if s.WebIdentityToken != nil && len(*s.WebIdentityToken) < 4 {
-		invalidParams.Add(aws.NewErrParamMinLen("WebIdentityToken", 4))
-	}
-	if s.PolicyArns != nil {
-		for i, v := range s.PolicyArns {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "PolicyArns", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Contains the response to a successful AssumeRoleWithWebIdentity request,
-// including temporary AWS credentials that can be used to make AWS requests.
-type AssumeRoleWithWebIdentityOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) and the assumed role ID, which are identifiers
-	// that you can use to refer to the resulting temporary security credentials.
-	// For example, you can reference these credentials as a principal in a resource-based
-	// policy by using the ARN or assumed role ID. The ARN and ID include the RoleSessionName
-	// that you specified when you called AssumeRole.
-	AssumedRoleUser *AssumedRoleUser `type:"structure"`
-
-	// The intended audience (also known as client ID) of the web identity token.
-	// This is traditionally the client identifier issued to the application that
-	// requested the web identity token.
-	Audience *string `type:"string"`
-
-	// The temporary security credentials, which include an access key ID, a secret
-	// access key, and a security token.
-	//
-	// The size of the security token that STS API operations return is not fixed.
-	// We strongly recommend that you make no assumptions about the maximum size.
-	Credentials *Credentials `type:"structure"`
-
-	// A percentage value that indicates the size of the policy in packed form.
-	// The service rejects any policy with a packed size greater than 100 percent,
-	// which means the policy exceeded the allowed space.
-	PackedPolicySize *int64 `type:"integer"`
-
-	// The issuing authority of the web identity token presented. For OpenID Connect
-	// ID tokens, this contains the value of the iss field. For OAuth 2.0 access
-	// tokens, this contains the value of the ProviderId parameter that was passed
-	// in the AssumeRoleWithWebIdentity request.
-	Provider *string `type:"string"`
-
-	// The unique user identifier that is returned by the identity provider. This
-	// identifier is associated with the WebIdentityToken that was submitted with
-	// the AssumeRoleWithWebIdentity call. The identifier is typically unique to
-	// the user and the application that acquired the WebIdentityToken (pairwise
-	// identifier). For OpenID Connect ID tokens, this field contains the value
-	// returned by the identity provider as the token's sub (Subject) claim.
-	SubjectFromWebIdentityToken *string `min:"6" type:"string"`
-}
-
-// String returns the string representation
-func (s AssumeRoleWithWebIdentityOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opAssumeRoleWithWebIdentity = "AssumeRoleWithWebIdentity"
 
@@ -331,7 +119,7 @@ const opAssumeRoleWithWebIdentity = "AssumeRoleWithWebIdentity"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sts-2011-06-15/AssumeRoleWithWebIdentity
-func (c *Client) AssumeRoleWithWebIdentityRequest(input *AssumeRoleWithWebIdentityInput) AssumeRoleWithWebIdentityRequest {
+func (c *Client) AssumeRoleWithWebIdentityRequest(input *types.AssumeRoleWithWebIdentityInput) AssumeRoleWithWebIdentityRequest {
 	op := &aws.Operation{
 		Name:       opAssumeRoleWithWebIdentity,
 		HTTPMethod: "POST",
@@ -339,10 +127,10 @@ func (c *Client) AssumeRoleWithWebIdentityRequest(input *AssumeRoleWithWebIdenti
 	}
 
 	if input == nil {
-		input = &AssumeRoleWithWebIdentityInput{}
+		input = &types.AssumeRoleWithWebIdentityInput{}
 	}
 
-	req := c.newRequest(op, input, &AssumeRoleWithWebIdentityOutput{})
+	req := c.newRequest(op, input, &types.AssumeRoleWithWebIdentityOutput{})
 	req.Config.Credentials = aws.AnonymousCredentials
 	return AssumeRoleWithWebIdentityRequest{Request: req, Input: input, Copy: c.AssumeRoleWithWebIdentityRequest}
 }
@@ -351,8 +139,8 @@ func (c *Client) AssumeRoleWithWebIdentityRequest(input *AssumeRoleWithWebIdenti
 // AssumeRoleWithWebIdentity API operation.
 type AssumeRoleWithWebIdentityRequest struct {
 	*aws.Request
-	Input *AssumeRoleWithWebIdentityInput
-	Copy  func(*AssumeRoleWithWebIdentityInput) AssumeRoleWithWebIdentityRequest
+	Input *types.AssumeRoleWithWebIdentityInput
+	Copy  func(*types.AssumeRoleWithWebIdentityInput) AssumeRoleWithWebIdentityRequest
 }
 
 // Send marshals and sends the AssumeRoleWithWebIdentity API request.
@@ -364,7 +152,7 @@ func (r AssumeRoleWithWebIdentityRequest) Send(ctx context.Context) (*AssumeRole
 	}
 
 	resp := &AssumeRoleWithWebIdentityResponse{
-		AssumeRoleWithWebIdentityOutput: r.Request.Data.(*AssumeRoleWithWebIdentityOutput),
+		AssumeRoleWithWebIdentityOutput: r.Request.Data.(*types.AssumeRoleWithWebIdentityOutput),
 		response:                        &aws.Response{Request: r.Request},
 	}
 
@@ -374,7 +162,7 @@ func (r AssumeRoleWithWebIdentityRequest) Send(ctx context.Context) (*AssumeRole
 // AssumeRoleWithWebIdentityResponse is the response type for the
 // AssumeRoleWithWebIdentity API operation.
 type AssumeRoleWithWebIdentityResponse struct {
-	*AssumeRoleWithWebIdentityOutput
+	*types.AssumeRoleWithWebIdentityOutput
 
 	response *aws.Response
 }

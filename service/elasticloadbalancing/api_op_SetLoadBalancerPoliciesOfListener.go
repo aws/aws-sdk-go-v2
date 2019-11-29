@@ -6,67 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/elasticloadbalancing/types"
 )
-
-// Contains the parameters for SetLoadBalancePoliciesOfListener.
-type SetLoadBalancerPoliciesOfListenerInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the load balancer.
-	//
-	// LoadBalancerName is a required field
-	LoadBalancerName *string `type:"string" required:"true"`
-
-	// The external port of the load balancer.
-	//
-	// LoadBalancerPort is a required field
-	LoadBalancerPort *int64 `type:"integer" required:"true"`
-
-	// The names of the policies. This list must include all policies to be enabled.
-	// If you omit a policy that is currently enabled, it is disabled. If the list
-	// is empty, all current policies are disabled.
-	//
-	// PolicyNames is a required field
-	PolicyNames []string `type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s SetLoadBalancerPoliciesOfListenerInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *SetLoadBalancerPoliciesOfListenerInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "SetLoadBalancerPoliciesOfListenerInput"}
-
-	if s.LoadBalancerName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("LoadBalancerName"))
-	}
-
-	if s.LoadBalancerPort == nil {
-		invalidParams.Add(aws.NewErrParamRequired("LoadBalancerPort"))
-	}
-
-	if s.PolicyNames == nil {
-		invalidParams.Add(aws.NewErrParamRequired("PolicyNames"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Contains the output of SetLoadBalancePoliciesOfListener.
-type SetLoadBalancerPoliciesOfListenerOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s SetLoadBalancerPoliciesOfListenerOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opSetLoadBalancerPoliciesOfListener = "SetLoadBalancerPoliciesOfListener"
 
@@ -92,7 +33,7 @@ const opSetLoadBalancerPoliciesOfListener = "SetLoadBalancerPoliciesOfListener"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/SetLoadBalancerPoliciesOfListener
-func (c *Client) SetLoadBalancerPoliciesOfListenerRequest(input *SetLoadBalancerPoliciesOfListenerInput) SetLoadBalancerPoliciesOfListenerRequest {
+func (c *Client) SetLoadBalancerPoliciesOfListenerRequest(input *types.SetLoadBalancerPoliciesOfListenerInput) SetLoadBalancerPoliciesOfListenerRequest {
 	op := &aws.Operation{
 		Name:       opSetLoadBalancerPoliciesOfListener,
 		HTTPMethod: "POST",
@@ -100,10 +41,10 @@ func (c *Client) SetLoadBalancerPoliciesOfListenerRequest(input *SetLoadBalancer
 	}
 
 	if input == nil {
-		input = &SetLoadBalancerPoliciesOfListenerInput{}
+		input = &types.SetLoadBalancerPoliciesOfListenerInput{}
 	}
 
-	req := c.newRequest(op, input, &SetLoadBalancerPoliciesOfListenerOutput{})
+	req := c.newRequest(op, input, &types.SetLoadBalancerPoliciesOfListenerOutput{})
 	return SetLoadBalancerPoliciesOfListenerRequest{Request: req, Input: input, Copy: c.SetLoadBalancerPoliciesOfListenerRequest}
 }
 
@@ -111,8 +52,8 @@ func (c *Client) SetLoadBalancerPoliciesOfListenerRequest(input *SetLoadBalancer
 // SetLoadBalancerPoliciesOfListener API operation.
 type SetLoadBalancerPoliciesOfListenerRequest struct {
 	*aws.Request
-	Input *SetLoadBalancerPoliciesOfListenerInput
-	Copy  func(*SetLoadBalancerPoliciesOfListenerInput) SetLoadBalancerPoliciesOfListenerRequest
+	Input *types.SetLoadBalancerPoliciesOfListenerInput
+	Copy  func(*types.SetLoadBalancerPoliciesOfListenerInput) SetLoadBalancerPoliciesOfListenerRequest
 }
 
 // Send marshals and sends the SetLoadBalancerPoliciesOfListener API request.
@@ -124,7 +65,7 @@ func (r SetLoadBalancerPoliciesOfListenerRequest) Send(ctx context.Context) (*Se
 	}
 
 	resp := &SetLoadBalancerPoliciesOfListenerResponse{
-		SetLoadBalancerPoliciesOfListenerOutput: r.Request.Data.(*SetLoadBalancerPoliciesOfListenerOutput),
+		SetLoadBalancerPoliciesOfListenerOutput: r.Request.Data.(*types.SetLoadBalancerPoliciesOfListenerOutput),
 		response:                                &aws.Response{Request: r.Request},
 	}
 
@@ -134,7 +75,7 @@ func (r SetLoadBalancerPoliciesOfListenerRequest) Send(ctx context.Context) (*Se
 // SetLoadBalancerPoliciesOfListenerResponse is the response type for the
 // SetLoadBalancerPoliciesOfListener API operation.
 type SetLoadBalancerPoliciesOfListenerResponse struct {
-	*SetLoadBalancerPoliciesOfListenerOutput
+	*types.SetLoadBalancerPoliciesOfListenerOutput
 
 	response *aws.Response
 }

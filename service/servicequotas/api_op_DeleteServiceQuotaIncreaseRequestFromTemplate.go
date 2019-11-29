@@ -6,72 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/servicequotas/types"
 )
-
-type DeleteServiceQuotaIncreaseRequestFromTemplateInput struct {
-	_ struct{} `type:"structure"`
-
-	// Specifies the AWS Region for the quota that you want to delete.
-	//
-	// AwsRegion is a required field
-	AwsRegion *string `min:"1" type:"string" required:"true"`
-
-	// Specifies the code for the quota that you want to delete.
-	//
-	// QuotaCode is a required field
-	QuotaCode *string `min:"1" type:"string" required:"true"`
-
-	// Specifies the code for the service that you want to delete.
-	//
-	// ServiceCode is a required field
-	ServiceCode *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteServiceQuotaIncreaseRequestFromTemplateInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteServiceQuotaIncreaseRequestFromTemplateInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteServiceQuotaIncreaseRequestFromTemplateInput"}
-
-	if s.AwsRegion == nil {
-		invalidParams.Add(aws.NewErrParamRequired("AwsRegion"))
-	}
-	if s.AwsRegion != nil && len(*s.AwsRegion) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("AwsRegion", 1))
-	}
-
-	if s.QuotaCode == nil {
-		invalidParams.Add(aws.NewErrParamRequired("QuotaCode"))
-	}
-	if s.QuotaCode != nil && len(*s.QuotaCode) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("QuotaCode", 1))
-	}
-
-	if s.ServiceCode == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ServiceCode"))
-	}
-	if s.ServiceCode != nil && len(*s.ServiceCode) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ServiceCode", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteServiceQuotaIncreaseRequestFromTemplateOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteServiceQuotaIncreaseRequestFromTemplateOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteServiceQuotaIncreaseRequestFromTemplate = "DeleteServiceQuotaIncreaseRequestFromTemplate"
 
@@ -88,7 +24,7 @@ const opDeleteServiceQuotaIncreaseRequestFromTemplate = "DeleteServiceQuotaIncre
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/service-quotas-2019-06-24/DeleteServiceQuotaIncreaseRequestFromTemplate
-func (c *Client) DeleteServiceQuotaIncreaseRequestFromTemplateRequest(input *DeleteServiceQuotaIncreaseRequestFromTemplateInput) DeleteServiceQuotaIncreaseRequestFromTemplateRequest {
+func (c *Client) DeleteServiceQuotaIncreaseRequestFromTemplateRequest(input *types.DeleteServiceQuotaIncreaseRequestFromTemplateInput) DeleteServiceQuotaIncreaseRequestFromTemplateRequest {
 	op := &aws.Operation{
 		Name:       opDeleteServiceQuotaIncreaseRequestFromTemplate,
 		HTTPMethod: "POST",
@@ -96,10 +32,10 @@ func (c *Client) DeleteServiceQuotaIncreaseRequestFromTemplateRequest(input *Del
 	}
 
 	if input == nil {
-		input = &DeleteServiceQuotaIncreaseRequestFromTemplateInput{}
+		input = &types.DeleteServiceQuotaIncreaseRequestFromTemplateInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteServiceQuotaIncreaseRequestFromTemplateOutput{})
+	req := c.newRequest(op, input, &types.DeleteServiceQuotaIncreaseRequestFromTemplateOutput{})
 	return DeleteServiceQuotaIncreaseRequestFromTemplateRequest{Request: req, Input: input, Copy: c.DeleteServiceQuotaIncreaseRequestFromTemplateRequest}
 }
 
@@ -107,8 +43,8 @@ func (c *Client) DeleteServiceQuotaIncreaseRequestFromTemplateRequest(input *Del
 // DeleteServiceQuotaIncreaseRequestFromTemplate API operation.
 type DeleteServiceQuotaIncreaseRequestFromTemplateRequest struct {
 	*aws.Request
-	Input *DeleteServiceQuotaIncreaseRequestFromTemplateInput
-	Copy  func(*DeleteServiceQuotaIncreaseRequestFromTemplateInput) DeleteServiceQuotaIncreaseRequestFromTemplateRequest
+	Input *types.DeleteServiceQuotaIncreaseRequestFromTemplateInput
+	Copy  func(*types.DeleteServiceQuotaIncreaseRequestFromTemplateInput) DeleteServiceQuotaIncreaseRequestFromTemplateRequest
 }
 
 // Send marshals and sends the DeleteServiceQuotaIncreaseRequestFromTemplate API request.
@@ -120,7 +56,7 @@ func (r DeleteServiceQuotaIncreaseRequestFromTemplateRequest) Send(ctx context.C
 	}
 
 	resp := &DeleteServiceQuotaIncreaseRequestFromTemplateResponse{
-		DeleteServiceQuotaIncreaseRequestFromTemplateOutput: r.Request.Data.(*DeleteServiceQuotaIncreaseRequestFromTemplateOutput),
+		DeleteServiceQuotaIncreaseRequestFromTemplateOutput: r.Request.Data.(*types.DeleteServiceQuotaIncreaseRequestFromTemplateOutput),
 		response: &aws.Response{Request: r.Request},
 	}
 
@@ -130,7 +66,7 @@ func (r DeleteServiceQuotaIncreaseRequestFromTemplateRequest) Send(ctx context.C
 // DeleteServiceQuotaIncreaseRequestFromTemplateResponse is the response type for the
 // DeleteServiceQuotaIncreaseRequestFromTemplate API operation.
 type DeleteServiceQuotaIncreaseRequestFromTemplateResponse struct {
-	*DeleteServiceQuotaIncreaseRequestFromTemplateOutput
+	*types.DeleteServiceQuotaIncreaseRequestFromTemplateOutput
 
 	response *aws.Response
 }

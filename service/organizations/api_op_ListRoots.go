@@ -6,66 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/organizations/types"
 )
-
-type ListRootsInput struct {
-	_ struct{} `type:"structure"`
-
-	// (Optional) Use this to limit the number of results you want included per
-	// page in the response. If you do not include this parameter, it defaults to
-	// a value that is specific to the operation. If additional items exist beyond
-	// the maximum you specify, the NextToken response element is present and has
-	// a value (is not null). Include that value as the NextToken request parameter
-	// in the next call to the operation to get the next part of the results. Note
-	// that Organizations might return fewer results than the maximum even when
-	// there are more results available. You should check NextToken after every
-	// operation to ensure that you receive all of the results.
-	MaxResults *int64 `min:"1" type:"integer"`
-
-	// Use this parameter if you receive a NextToken response in a previous request
-	// that indicates that there is more output available. Set it to the value of
-	// the previous call's NextToken response to indicate where the output should
-	// continue from.
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s ListRootsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListRootsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListRootsInput"}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ListRootsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// If present, this value indicates that there is more output available than
-	// is included in the current response. Use this value in the NextToken request
-	// parameter in a subsequent call to the operation to get the next part of the
-	// output. You should repeat this until the NextToken response element comes
-	// back as null.
-	NextToken *string `type:"string"`
-
-	// A list of roots that are defined in an organization.
-	Roots []Root `type:"list"`
-}
-
-// String returns the string representation
-func (s ListRootsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListRoots = "ListRoots"
 
@@ -95,7 +37,7 @@ const opListRoots = "ListRoots"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListRoots
-func (c *Client) ListRootsRequest(input *ListRootsInput) ListRootsRequest {
+func (c *Client) ListRootsRequest(input *types.ListRootsInput) ListRootsRequest {
 	op := &aws.Operation{
 		Name:       opListRoots,
 		HTTPMethod: "POST",
@@ -109,10 +51,10 @@ func (c *Client) ListRootsRequest(input *ListRootsInput) ListRootsRequest {
 	}
 
 	if input == nil {
-		input = &ListRootsInput{}
+		input = &types.ListRootsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListRootsOutput{})
+	req := c.newRequest(op, input, &types.ListRootsOutput{})
 	return ListRootsRequest{Request: req, Input: input, Copy: c.ListRootsRequest}
 }
 
@@ -120,8 +62,8 @@ func (c *Client) ListRootsRequest(input *ListRootsInput) ListRootsRequest {
 // ListRoots API operation.
 type ListRootsRequest struct {
 	*aws.Request
-	Input *ListRootsInput
-	Copy  func(*ListRootsInput) ListRootsRequest
+	Input *types.ListRootsInput
+	Copy  func(*types.ListRootsInput) ListRootsRequest
 }
 
 // Send marshals and sends the ListRoots API request.
@@ -133,7 +75,7 @@ func (r ListRootsRequest) Send(ctx context.Context) (*ListRootsResponse, error) 
 	}
 
 	resp := &ListRootsResponse{
-		ListRootsOutput: r.Request.Data.(*ListRootsOutput),
+		ListRootsOutput: r.Request.Data.(*types.ListRootsOutput),
 		response:        &aws.Response{Request: r.Request},
 	}
 
@@ -163,7 +105,7 @@ func NewListRootsPaginator(req ListRootsRequest) ListRootsPaginator {
 	return ListRootsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListRootsInput
+				var inCpy *types.ListRootsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -183,14 +125,14 @@ type ListRootsPaginator struct {
 	aws.Pager
 }
 
-func (p *ListRootsPaginator) CurrentPage() *ListRootsOutput {
-	return p.Pager.CurrentPage().(*ListRootsOutput)
+func (p *ListRootsPaginator) CurrentPage() *types.ListRootsOutput {
+	return p.Pager.CurrentPage().(*types.ListRootsOutput)
 }
 
 // ListRootsResponse is the response type for the
 // ListRoots API operation.
 type ListRootsResponse struct {
-	*ListRootsOutput
+	*types.ListRootsOutput
 
 	response *aws.Response
 }

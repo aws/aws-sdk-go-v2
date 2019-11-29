@@ -6,68 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/storagegateway/types"
 )
-
-// RetrieveTapeRecoveryPointInput
-type RetrieveTapeRecoveryPointInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation
-	// to return a list of gateways for your account and AWS Region.
-	//
-	// GatewayARN is a required field
-	GatewayARN *string `min:"50" type:"string" required:"true"`
-
-	// The Amazon Resource Name (ARN) of the virtual tape for which you want to
-	// retrieve the recovery point.
-	//
-	// TapeARN is a required field
-	TapeARN *string `min:"50" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s RetrieveTapeRecoveryPointInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *RetrieveTapeRecoveryPointInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "RetrieveTapeRecoveryPointInput"}
-
-	if s.GatewayARN == nil {
-		invalidParams.Add(aws.NewErrParamRequired("GatewayARN"))
-	}
-	if s.GatewayARN != nil && len(*s.GatewayARN) < 50 {
-		invalidParams.Add(aws.NewErrParamMinLen("GatewayARN", 50))
-	}
-
-	if s.TapeARN == nil {
-		invalidParams.Add(aws.NewErrParamRequired("TapeARN"))
-	}
-	if s.TapeARN != nil && len(*s.TapeARN) < 50 {
-		invalidParams.Add(aws.NewErrParamMinLen("TapeARN", 50))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// RetrieveTapeRecoveryPointOutput
-type RetrieveTapeRecoveryPointOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the virtual tape for which the recovery
-	// point was retrieved.
-	TapeARN *string `min:"50" type:"string"`
-}
-
-// String returns the string representation
-func (s RetrieveTapeRecoveryPointOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opRetrieveTapeRecoveryPoint = "RetrieveTapeRecoveryPoint"
 
@@ -93,7 +33,7 @@ const opRetrieveTapeRecoveryPoint = "RetrieveTapeRecoveryPoint"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/RetrieveTapeRecoveryPoint
-func (c *Client) RetrieveTapeRecoveryPointRequest(input *RetrieveTapeRecoveryPointInput) RetrieveTapeRecoveryPointRequest {
+func (c *Client) RetrieveTapeRecoveryPointRequest(input *types.RetrieveTapeRecoveryPointInput) RetrieveTapeRecoveryPointRequest {
 	op := &aws.Operation{
 		Name:       opRetrieveTapeRecoveryPoint,
 		HTTPMethod: "POST",
@@ -101,10 +41,10 @@ func (c *Client) RetrieveTapeRecoveryPointRequest(input *RetrieveTapeRecoveryPoi
 	}
 
 	if input == nil {
-		input = &RetrieveTapeRecoveryPointInput{}
+		input = &types.RetrieveTapeRecoveryPointInput{}
 	}
 
-	req := c.newRequest(op, input, &RetrieveTapeRecoveryPointOutput{})
+	req := c.newRequest(op, input, &types.RetrieveTapeRecoveryPointOutput{})
 	return RetrieveTapeRecoveryPointRequest{Request: req, Input: input, Copy: c.RetrieveTapeRecoveryPointRequest}
 }
 
@@ -112,8 +52,8 @@ func (c *Client) RetrieveTapeRecoveryPointRequest(input *RetrieveTapeRecoveryPoi
 // RetrieveTapeRecoveryPoint API operation.
 type RetrieveTapeRecoveryPointRequest struct {
 	*aws.Request
-	Input *RetrieveTapeRecoveryPointInput
-	Copy  func(*RetrieveTapeRecoveryPointInput) RetrieveTapeRecoveryPointRequest
+	Input *types.RetrieveTapeRecoveryPointInput
+	Copy  func(*types.RetrieveTapeRecoveryPointInput) RetrieveTapeRecoveryPointRequest
 }
 
 // Send marshals and sends the RetrieveTapeRecoveryPoint API request.
@@ -125,7 +65,7 @@ func (r RetrieveTapeRecoveryPointRequest) Send(ctx context.Context) (*RetrieveTa
 	}
 
 	resp := &RetrieveTapeRecoveryPointResponse{
-		RetrieveTapeRecoveryPointOutput: r.Request.Data.(*RetrieveTapeRecoveryPointOutput),
+		RetrieveTapeRecoveryPointOutput: r.Request.Data.(*types.RetrieveTapeRecoveryPointOutput),
 		response:                        &aws.Response{Request: r.Request},
 	}
 
@@ -135,7 +75,7 @@ func (r RetrieveTapeRecoveryPointRequest) Send(ctx context.Context) (*RetrieveTa
 // RetrieveTapeRecoveryPointResponse is the response type for the
 // RetrieveTapeRecoveryPoint API operation.
 type RetrieveTapeRecoveryPointResponse struct {
-	*RetrieveTapeRecoveryPointOutput
+	*types.RetrieveTapeRecoveryPointOutput
 
 	response *aws.Response
 }

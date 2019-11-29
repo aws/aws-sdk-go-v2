@@ -4,69 +4,10 @@ package configservice
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/configservice/types"
 )
-
-type BatchGetResourceConfigInput struct {
-	_ struct{} `type:"structure"`
-
-	// A list of resource keys to be processed with the current request. Each element
-	// in the list consists of the resource type and resource ID.
-	//
-	// ResourceKeys is a required field
-	ResourceKeys []ResourceKey `locationName:"resourceKeys" min:"1" type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s BatchGetResourceConfigInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *BatchGetResourceConfigInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "BatchGetResourceConfigInput"}
-
-	if s.ResourceKeys == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ResourceKeys"))
-	}
-	if s.ResourceKeys != nil && len(s.ResourceKeys) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ResourceKeys", 1))
-	}
-	if s.ResourceKeys != nil {
-		for i, v := range s.ResourceKeys {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "ResourceKeys", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type BatchGetResourceConfigOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A list that contains the current configuration of one or more resources.
-	BaseConfigurationItems []BaseConfigurationItem `locationName:"baseConfigurationItems" type:"list"`
-
-	// A list of resource keys that were not processed with the current response.
-	// The unprocessesResourceKeys value is in the same form as ResourceKeys, so
-	// the value can be directly provided to a subsequent BatchGetResourceConfig
-	// operation. If there are no unprocessed resource keys, the response contains
-	// an empty unprocessedResourceKeys list.
-	UnprocessedResourceKeys []ResourceKey `locationName:"unprocessedResourceKeys" min:"1" type:"list"`
-}
-
-// String returns the string representation
-func (s BatchGetResourceConfigOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opBatchGetResourceConfig = "BatchGetResourceConfig"
 
@@ -91,7 +32,7 @@ const opBatchGetResourceConfig = "BatchGetResourceConfig"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/BatchGetResourceConfig
-func (c *Client) BatchGetResourceConfigRequest(input *BatchGetResourceConfigInput) BatchGetResourceConfigRequest {
+func (c *Client) BatchGetResourceConfigRequest(input *types.BatchGetResourceConfigInput) BatchGetResourceConfigRequest {
 	op := &aws.Operation{
 		Name:       opBatchGetResourceConfig,
 		HTTPMethod: "POST",
@@ -99,10 +40,10 @@ func (c *Client) BatchGetResourceConfigRequest(input *BatchGetResourceConfigInpu
 	}
 
 	if input == nil {
-		input = &BatchGetResourceConfigInput{}
+		input = &types.BatchGetResourceConfigInput{}
 	}
 
-	req := c.newRequest(op, input, &BatchGetResourceConfigOutput{})
+	req := c.newRequest(op, input, &types.BatchGetResourceConfigOutput{})
 	return BatchGetResourceConfigRequest{Request: req, Input: input, Copy: c.BatchGetResourceConfigRequest}
 }
 
@@ -110,8 +51,8 @@ func (c *Client) BatchGetResourceConfigRequest(input *BatchGetResourceConfigInpu
 // BatchGetResourceConfig API operation.
 type BatchGetResourceConfigRequest struct {
 	*aws.Request
-	Input *BatchGetResourceConfigInput
-	Copy  func(*BatchGetResourceConfigInput) BatchGetResourceConfigRequest
+	Input *types.BatchGetResourceConfigInput
+	Copy  func(*types.BatchGetResourceConfigInput) BatchGetResourceConfigRequest
 }
 
 // Send marshals and sends the BatchGetResourceConfig API request.
@@ -123,7 +64,7 @@ func (r BatchGetResourceConfigRequest) Send(ctx context.Context) (*BatchGetResou
 	}
 
 	resp := &BatchGetResourceConfigResponse{
-		BatchGetResourceConfigOutput: r.Request.Data.(*BatchGetResourceConfigOutput),
+		BatchGetResourceConfigOutput: r.Request.Data.(*types.BatchGetResourceConfigOutput),
 		response:                     &aws.Response{Request: r.Request},
 	}
 
@@ -133,7 +74,7 @@ func (r BatchGetResourceConfigRequest) Send(ctx context.Context) (*BatchGetResou
 // BatchGetResourceConfigResponse is the response type for the
 // BatchGetResourceConfig API operation.
 type BatchGetResourceConfigResponse struct {
-	*BatchGetResourceConfigOutput
+	*types.BatchGetResourceConfigOutput
 
 	response *aws.Response
 }

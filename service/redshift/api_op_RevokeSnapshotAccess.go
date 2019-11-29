@@ -6,63 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/redshift/types"
 )
-
-type RevokeSnapshotAccessInput struct {
-	_ struct{} `type:"structure"`
-
-	// The identifier of the AWS customer account that can no longer restore the
-	// specified snapshot.
-	//
-	// AccountWithRestoreAccess is a required field
-	AccountWithRestoreAccess *string `type:"string" required:"true"`
-
-	// The identifier of the cluster the snapshot was created from. This parameter
-	// is required if your IAM user has a policy containing a snapshot resource
-	// element that specifies anything other than * for the cluster name.
-	SnapshotClusterIdentifier *string `type:"string"`
-
-	// The identifier of the snapshot that the account can no longer access.
-	//
-	// SnapshotIdentifier is a required field
-	SnapshotIdentifier *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s RevokeSnapshotAccessInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *RevokeSnapshotAccessInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "RevokeSnapshotAccessInput"}
-
-	if s.AccountWithRestoreAccess == nil {
-		invalidParams.Add(aws.NewErrParamRequired("AccountWithRestoreAccess"))
-	}
-
-	if s.SnapshotIdentifier == nil {
-		invalidParams.Add(aws.NewErrParamRequired("SnapshotIdentifier"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type RevokeSnapshotAccessOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Describes a snapshot.
-	Snapshot *Snapshot `type:"structure"`
-}
-
-// String returns the string representation
-func (s RevokeSnapshotAccessOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opRevokeSnapshotAccess = "RevokeSnapshotAccess"
 
@@ -85,7 +30,7 @@ const opRevokeSnapshotAccess = "RevokeSnapshotAccess"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/RevokeSnapshotAccess
-func (c *Client) RevokeSnapshotAccessRequest(input *RevokeSnapshotAccessInput) RevokeSnapshotAccessRequest {
+func (c *Client) RevokeSnapshotAccessRequest(input *types.RevokeSnapshotAccessInput) RevokeSnapshotAccessRequest {
 	op := &aws.Operation{
 		Name:       opRevokeSnapshotAccess,
 		HTTPMethod: "POST",
@@ -93,10 +38,10 @@ func (c *Client) RevokeSnapshotAccessRequest(input *RevokeSnapshotAccessInput) R
 	}
 
 	if input == nil {
-		input = &RevokeSnapshotAccessInput{}
+		input = &types.RevokeSnapshotAccessInput{}
 	}
 
-	req := c.newRequest(op, input, &RevokeSnapshotAccessOutput{})
+	req := c.newRequest(op, input, &types.RevokeSnapshotAccessOutput{})
 	return RevokeSnapshotAccessRequest{Request: req, Input: input, Copy: c.RevokeSnapshotAccessRequest}
 }
 
@@ -104,8 +49,8 @@ func (c *Client) RevokeSnapshotAccessRequest(input *RevokeSnapshotAccessInput) R
 // RevokeSnapshotAccess API operation.
 type RevokeSnapshotAccessRequest struct {
 	*aws.Request
-	Input *RevokeSnapshotAccessInput
-	Copy  func(*RevokeSnapshotAccessInput) RevokeSnapshotAccessRequest
+	Input *types.RevokeSnapshotAccessInput
+	Copy  func(*types.RevokeSnapshotAccessInput) RevokeSnapshotAccessRequest
 }
 
 // Send marshals and sends the RevokeSnapshotAccess API request.
@@ -117,7 +62,7 @@ func (r RevokeSnapshotAccessRequest) Send(ctx context.Context) (*RevokeSnapshotA
 	}
 
 	resp := &RevokeSnapshotAccessResponse{
-		RevokeSnapshotAccessOutput: r.Request.Data.(*RevokeSnapshotAccessOutput),
+		RevokeSnapshotAccessOutput: r.Request.Data.(*types.RevokeSnapshotAccessOutput),
 		response:                   &aws.Response{Request: r.Request},
 	}
 
@@ -127,7 +72,7 @@ func (r RevokeSnapshotAccessRequest) Send(ctx context.Context) (*RevokeSnapshotA
 // RevokeSnapshotAccessResponse is the response type for the
 // RevokeSnapshotAccess API operation.
 type RevokeSnapshotAccessResponse struct {
-	*RevokeSnapshotAccessOutput
+	*types.RevokeSnapshotAccessOutput
 
 	response *aws.Response
 }

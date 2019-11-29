@@ -6,75 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/databasemigrationservice/types"
 )
-
-type CreateReplicationSubnetGroupInput struct {
-	_ struct{} `type:"structure"`
-
-	// The description for the subnet group.
-	//
-	// ReplicationSubnetGroupDescription is a required field
-	ReplicationSubnetGroupDescription *string `type:"string" required:"true"`
-
-	// The name for the replication subnet group. This value is stored as a lowercase
-	// string.
-	//
-	// Constraints: Must contain no more than 255 alphanumeric characters, periods,
-	// spaces, underscores, or hyphens. Must not be "default".
-	//
-	// Example: mySubnetgroup
-	//
-	// ReplicationSubnetGroupIdentifier is a required field
-	ReplicationSubnetGroupIdentifier *string `type:"string" required:"true"`
-
-	// One or more subnet IDs to be assigned to the subnet group.
-	//
-	// SubnetIds is a required field
-	SubnetIds []string `type:"list" required:"true"`
-
-	// One or more tags to be assigned to the subnet group.
-	Tags []Tag `type:"list"`
-}
-
-// String returns the string representation
-func (s CreateReplicationSubnetGroupInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateReplicationSubnetGroupInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateReplicationSubnetGroupInput"}
-
-	if s.ReplicationSubnetGroupDescription == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ReplicationSubnetGroupDescription"))
-	}
-
-	if s.ReplicationSubnetGroupIdentifier == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ReplicationSubnetGroupIdentifier"))
-	}
-
-	if s.SubnetIds == nil {
-		invalidParams.Add(aws.NewErrParamRequired("SubnetIds"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type CreateReplicationSubnetGroupOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The replication subnet group that was created.
-	ReplicationSubnetGroup *ReplicationSubnetGroup `type:"structure"`
-}
-
-// String returns the string representation
-func (s CreateReplicationSubnetGroupOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCreateReplicationSubnetGroup = "CreateReplicationSubnetGroup"
 
@@ -91,7 +24,7 @@ const opCreateReplicationSubnetGroup = "CreateReplicationSubnetGroup"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/CreateReplicationSubnetGroup
-func (c *Client) CreateReplicationSubnetGroupRequest(input *CreateReplicationSubnetGroupInput) CreateReplicationSubnetGroupRequest {
+func (c *Client) CreateReplicationSubnetGroupRequest(input *types.CreateReplicationSubnetGroupInput) CreateReplicationSubnetGroupRequest {
 	op := &aws.Operation{
 		Name:       opCreateReplicationSubnetGroup,
 		HTTPMethod: "POST",
@@ -99,10 +32,10 @@ func (c *Client) CreateReplicationSubnetGroupRequest(input *CreateReplicationSub
 	}
 
 	if input == nil {
-		input = &CreateReplicationSubnetGroupInput{}
+		input = &types.CreateReplicationSubnetGroupInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateReplicationSubnetGroupOutput{})
+	req := c.newRequest(op, input, &types.CreateReplicationSubnetGroupOutput{})
 	return CreateReplicationSubnetGroupRequest{Request: req, Input: input, Copy: c.CreateReplicationSubnetGroupRequest}
 }
 
@@ -110,8 +43,8 @@ func (c *Client) CreateReplicationSubnetGroupRequest(input *CreateReplicationSub
 // CreateReplicationSubnetGroup API operation.
 type CreateReplicationSubnetGroupRequest struct {
 	*aws.Request
-	Input *CreateReplicationSubnetGroupInput
-	Copy  func(*CreateReplicationSubnetGroupInput) CreateReplicationSubnetGroupRequest
+	Input *types.CreateReplicationSubnetGroupInput
+	Copy  func(*types.CreateReplicationSubnetGroupInput) CreateReplicationSubnetGroupRequest
 }
 
 // Send marshals and sends the CreateReplicationSubnetGroup API request.
@@ -123,7 +56,7 @@ func (r CreateReplicationSubnetGroupRequest) Send(ctx context.Context) (*CreateR
 	}
 
 	resp := &CreateReplicationSubnetGroupResponse{
-		CreateReplicationSubnetGroupOutput: r.Request.Data.(*CreateReplicationSubnetGroupOutput),
+		CreateReplicationSubnetGroupOutput: r.Request.Data.(*types.CreateReplicationSubnetGroupOutput),
 		response:                           &aws.Response{Request: r.Request},
 	}
 
@@ -133,7 +66,7 @@ func (r CreateReplicationSubnetGroupRequest) Send(ctx context.Context) (*CreateR
 // CreateReplicationSubnetGroupResponse is the response type for the
 // CreateReplicationSubnetGroup API operation.
 type CreateReplicationSubnetGroupResponse struct {
-	*CreateReplicationSubnetGroupOutput
+	*types.CreateReplicationSubnetGroupOutput
 
 	response *aws.Response
 }

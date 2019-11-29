@@ -6,54 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-type GetLaunchTemplateDataInput struct {
-	_ struct{} `type:"structure"`
-
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have
-	// the required permissions, the error response is DryRunOperation. Otherwise,
-	// it is UnauthorizedOperation.
-	DryRun *bool `type:"boolean"`
-
-	// The ID of the instance.
-	//
-	// InstanceId is a required field
-	InstanceId *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetLaunchTemplateDataInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetLaunchTemplateDataInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetLaunchTemplateDataInput"}
-
-	if s.InstanceId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("InstanceId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type GetLaunchTemplateDataOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The instance data.
-	LaunchTemplateData *ResponseLaunchTemplateData `locationName:"launchTemplateData" type:"structure"`
-}
-
-// String returns the string representation
-func (s GetLaunchTemplateDataOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetLaunchTemplateData = "GetLaunchTemplateData"
 
@@ -71,7 +25,7 @@ const opGetLaunchTemplateData = "GetLaunchTemplateData"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetLaunchTemplateData
-func (c *Client) GetLaunchTemplateDataRequest(input *GetLaunchTemplateDataInput) GetLaunchTemplateDataRequest {
+func (c *Client) GetLaunchTemplateDataRequest(input *types.GetLaunchTemplateDataInput) GetLaunchTemplateDataRequest {
 	op := &aws.Operation{
 		Name:       opGetLaunchTemplateData,
 		HTTPMethod: "POST",
@@ -79,10 +33,10 @@ func (c *Client) GetLaunchTemplateDataRequest(input *GetLaunchTemplateDataInput)
 	}
 
 	if input == nil {
-		input = &GetLaunchTemplateDataInput{}
+		input = &types.GetLaunchTemplateDataInput{}
 	}
 
-	req := c.newRequest(op, input, &GetLaunchTemplateDataOutput{})
+	req := c.newRequest(op, input, &types.GetLaunchTemplateDataOutput{})
 	return GetLaunchTemplateDataRequest{Request: req, Input: input, Copy: c.GetLaunchTemplateDataRequest}
 }
 
@@ -90,8 +44,8 @@ func (c *Client) GetLaunchTemplateDataRequest(input *GetLaunchTemplateDataInput)
 // GetLaunchTemplateData API operation.
 type GetLaunchTemplateDataRequest struct {
 	*aws.Request
-	Input *GetLaunchTemplateDataInput
-	Copy  func(*GetLaunchTemplateDataInput) GetLaunchTemplateDataRequest
+	Input *types.GetLaunchTemplateDataInput
+	Copy  func(*types.GetLaunchTemplateDataInput) GetLaunchTemplateDataRequest
 }
 
 // Send marshals and sends the GetLaunchTemplateData API request.
@@ -103,7 +57,7 @@ func (r GetLaunchTemplateDataRequest) Send(ctx context.Context) (*GetLaunchTempl
 	}
 
 	resp := &GetLaunchTemplateDataResponse{
-		GetLaunchTemplateDataOutput: r.Request.Data.(*GetLaunchTemplateDataOutput),
+		GetLaunchTemplateDataOutput: r.Request.Data.(*types.GetLaunchTemplateDataOutput),
 		response:                    &aws.Response{Request: r.Request},
 	}
 
@@ -113,7 +67,7 @@ func (r GetLaunchTemplateDataRequest) Send(ctx context.Context) (*GetLaunchTempl
 // GetLaunchTemplateDataResponse is the response type for the
 // GetLaunchTemplateData API operation.
 type GetLaunchTemplateDataResponse struct {
-	*GetLaunchTemplateDataOutput
+	*types.GetLaunchTemplateDataOutput
 
 	response *aws.Response
 }

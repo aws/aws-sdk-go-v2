@@ -6,69 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-// Contains the parameters for CancelSpotFleetRequests.
-type CancelSpotFleetRequestsInput struct {
-	_ struct{} `type:"structure"`
-
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have
-	// the required permissions, the error response is DryRunOperation. Otherwise,
-	// it is UnauthorizedOperation.
-	DryRun *bool `locationName:"dryRun" type:"boolean"`
-
-	// The IDs of the Spot Fleet requests.
-	//
-	// SpotFleetRequestIds is a required field
-	SpotFleetRequestIds []string `locationName:"spotFleetRequestId" locationNameList:"item" type:"list" required:"true"`
-
-	// Indicates whether to terminate instances for a Spot Fleet request if it is
-	// canceled successfully.
-	//
-	// TerminateInstances is a required field
-	TerminateInstances *bool `locationName:"terminateInstances" type:"boolean" required:"true"`
-}
-
-// String returns the string representation
-func (s CancelSpotFleetRequestsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CancelSpotFleetRequestsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CancelSpotFleetRequestsInput"}
-
-	if s.SpotFleetRequestIds == nil {
-		invalidParams.Add(aws.NewErrParamRequired("SpotFleetRequestIds"))
-	}
-
-	if s.TerminateInstances == nil {
-		invalidParams.Add(aws.NewErrParamRequired("TerminateInstances"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Contains the output of CancelSpotFleetRequests.
-type CancelSpotFleetRequestsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Information about the Spot Fleet requests that are successfully canceled.
-	SuccessfulFleetRequests []CancelSpotFleetRequestsSuccessItem `locationName:"successfulFleetRequestSet" locationNameList:"item" type:"list"`
-
-	// Information about the Spot Fleet requests that are not successfully canceled.
-	UnsuccessfulFleetRequests []CancelSpotFleetRequestsErrorItem `locationName:"unsuccessfulFleetRequestSet" locationNameList:"item" type:"list"`
-}
-
-// String returns the string representation
-func (s CancelSpotFleetRequestsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCancelSpotFleetRequests = "CancelSpotFleetRequests"
 
@@ -92,7 +31,7 @@ const opCancelSpotFleetRequests = "CancelSpotFleetRequests"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CancelSpotFleetRequests
-func (c *Client) CancelSpotFleetRequestsRequest(input *CancelSpotFleetRequestsInput) CancelSpotFleetRequestsRequest {
+func (c *Client) CancelSpotFleetRequestsRequest(input *types.CancelSpotFleetRequestsInput) CancelSpotFleetRequestsRequest {
 	op := &aws.Operation{
 		Name:       opCancelSpotFleetRequests,
 		HTTPMethod: "POST",
@@ -100,10 +39,10 @@ func (c *Client) CancelSpotFleetRequestsRequest(input *CancelSpotFleetRequestsIn
 	}
 
 	if input == nil {
-		input = &CancelSpotFleetRequestsInput{}
+		input = &types.CancelSpotFleetRequestsInput{}
 	}
 
-	req := c.newRequest(op, input, &CancelSpotFleetRequestsOutput{})
+	req := c.newRequest(op, input, &types.CancelSpotFleetRequestsOutput{})
 	return CancelSpotFleetRequestsRequest{Request: req, Input: input, Copy: c.CancelSpotFleetRequestsRequest}
 }
 
@@ -111,8 +50,8 @@ func (c *Client) CancelSpotFleetRequestsRequest(input *CancelSpotFleetRequestsIn
 // CancelSpotFleetRequests API operation.
 type CancelSpotFleetRequestsRequest struct {
 	*aws.Request
-	Input *CancelSpotFleetRequestsInput
-	Copy  func(*CancelSpotFleetRequestsInput) CancelSpotFleetRequestsRequest
+	Input *types.CancelSpotFleetRequestsInput
+	Copy  func(*types.CancelSpotFleetRequestsInput) CancelSpotFleetRequestsRequest
 }
 
 // Send marshals and sends the CancelSpotFleetRequests API request.
@@ -124,7 +63,7 @@ func (r CancelSpotFleetRequestsRequest) Send(ctx context.Context) (*CancelSpotFl
 	}
 
 	resp := &CancelSpotFleetRequestsResponse{
-		CancelSpotFleetRequestsOutput: r.Request.Data.(*CancelSpotFleetRequestsOutput),
+		CancelSpotFleetRequestsOutput: r.Request.Data.(*types.CancelSpotFleetRequestsOutput),
 		response:                      &aws.Response{Request: r.Request},
 	}
 
@@ -134,7 +73,7 @@ func (r CancelSpotFleetRequestsRequest) Send(ctx context.Context) (*CancelSpotFl
 // CancelSpotFleetRequestsResponse is the response type for the
 // CancelSpotFleetRequests API operation.
 type CancelSpotFleetRequestsResponse struct {
-	*CancelSpotFleetRequestsOutput
+	*types.CancelSpotFleetRequestsOutput
 
 	response *aws.Response
 }

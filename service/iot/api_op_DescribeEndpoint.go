@@ -6,68 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/iot/types"
 )
-
-// The input for the DescribeEndpoint operation.
-type DescribeEndpointInput struct {
-	_ struct{} `type:"structure"`
-
-	// The endpoint type. Valid endpoint types include:
-	//
-	//    * iot:Data - Returns a VeriSign signed data endpoint.
-	//
-	//    * iot:Data-ATS - Returns an ATS signed data endpoint.
-	//
-	//    * iot:CredentialProvider - Returns an AWS IoT credentials provider API
-	//    endpoint.
-	//
-	//    * iot:Jobs - Returns an AWS IoT device management Jobs API endpoint.
-	EndpointType *string `location:"querystring" locationName:"endpointType" type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeEndpointInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DescribeEndpointInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.EndpointType != nil {
-		v := *s.EndpointType
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "endpointType", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-// The output from the DescribeEndpoint operation.
-type DescribeEndpointOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The endpoint. The format of the endpoint is as follows: identifier.iot.region.amazonaws.com.
-	EndpointAddress *string `locationName:"endpointAddress" type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeEndpointOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DescribeEndpointOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.EndpointAddress != nil {
-		v := *s.EndpointAddress
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "endpointAddress", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opDescribeEndpoint = "DescribeEndpoint"
 
@@ -82,7 +22,7 @@ const opDescribeEndpoint = "DescribeEndpoint"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) DescribeEndpointRequest(input *DescribeEndpointInput) DescribeEndpointRequest {
+func (c *Client) DescribeEndpointRequest(input *types.DescribeEndpointInput) DescribeEndpointRequest {
 	op := &aws.Operation{
 		Name:       opDescribeEndpoint,
 		HTTPMethod: "GET",
@@ -90,10 +30,10 @@ func (c *Client) DescribeEndpointRequest(input *DescribeEndpointInput) DescribeE
 	}
 
 	if input == nil {
-		input = &DescribeEndpointInput{}
+		input = &types.DescribeEndpointInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeEndpointOutput{})
+	req := c.newRequest(op, input, &types.DescribeEndpointOutput{})
 	return DescribeEndpointRequest{Request: req, Input: input, Copy: c.DescribeEndpointRequest}
 }
 
@@ -101,8 +41,8 @@ func (c *Client) DescribeEndpointRequest(input *DescribeEndpointInput) DescribeE
 // DescribeEndpoint API operation.
 type DescribeEndpointRequest struct {
 	*aws.Request
-	Input *DescribeEndpointInput
-	Copy  func(*DescribeEndpointInput) DescribeEndpointRequest
+	Input *types.DescribeEndpointInput
+	Copy  func(*types.DescribeEndpointInput) DescribeEndpointRequest
 }
 
 // Send marshals and sends the DescribeEndpoint API request.
@@ -114,7 +54,7 @@ func (r DescribeEndpointRequest) Send(ctx context.Context) (*DescribeEndpointRes
 	}
 
 	resp := &DescribeEndpointResponse{
-		DescribeEndpointOutput: r.Request.Data.(*DescribeEndpointOutput),
+		DescribeEndpointOutput: r.Request.Data.(*types.DescribeEndpointOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -124,7 +64,7 @@ func (r DescribeEndpointRequest) Send(ctx context.Context) (*DescribeEndpointRes
 // DescribeEndpointResponse is the response type for the
 // DescribeEndpoint API operation.
 type DescribeEndpointResponse struct {
-	*DescribeEndpointOutput
+	*types.DescribeEndpointOutput
 
 	response *aws.Response
 }

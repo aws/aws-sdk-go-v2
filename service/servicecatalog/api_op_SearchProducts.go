@@ -6,62 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/types"
 )
-
-type SearchProductsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The language code.
-	//
-	//    * en - English (default)
-	//
-	//    * jp - Japanese
-	//
-	//    * zh - Chinese
-	AcceptLanguage *string `type:"string"`
-
-	// The search filters. If no search filters are specified, the output includes
-	// all products to which the caller has access.
-	Filters map[string][]string `type:"map"`
-
-	// The maximum number of items to return with this call.
-	PageSize *int64 `type:"integer"`
-
-	// The page token for the next set of results. To retrieve the first set of
-	// results, use null.
-	PageToken *string `type:"string"`
-
-	// The sort field. If no value is specified, the results are not sorted.
-	SortBy ProductViewSortBy `type:"string" enum:"true"`
-
-	// The sort order. If no value is specified, the results are not sorted.
-	SortOrder SortOrder `type:"string" enum:"true"`
-}
-
-// String returns the string representation
-func (s SearchProductsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type SearchProductsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The page token to use to retrieve the next set of results. If there are no
-	// additional results, this value is null.
-	NextPageToken *string `type:"string"`
-
-	// The product view aggregations.
-	ProductViewAggregations map[string][]ProductViewAggregationValue `type:"map"`
-
-	// Information about the product views.
-	ProductViewSummaries []ProductViewSummary `type:"list"`
-}
-
-// String returns the string representation
-func (s SearchProductsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opSearchProducts = "SearchProducts"
 
@@ -78,7 +24,7 @@ const opSearchProducts = "SearchProducts"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/SearchProducts
-func (c *Client) SearchProductsRequest(input *SearchProductsInput) SearchProductsRequest {
+func (c *Client) SearchProductsRequest(input *types.SearchProductsInput) SearchProductsRequest {
 	op := &aws.Operation{
 		Name:       opSearchProducts,
 		HTTPMethod: "POST",
@@ -92,10 +38,10 @@ func (c *Client) SearchProductsRequest(input *SearchProductsInput) SearchProduct
 	}
 
 	if input == nil {
-		input = &SearchProductsInput{}
+		input = &types.SearchProductsInput{}
 	}
 
-	req := c.newRequest(op, input, &SearchProductsOutput{})
+	req := c.newRequest(op, input, &types.SearchProductsOutput{})
 	return SearchProductsRequest{Request: req, Input: input, Copy: c.SearchProductsRequest}
 }
 
@@ -103,8 +49,8 @@ func (c *Client) SearchProductsRequest(input *SearchProductsInput) SearchProduct
 // SearchProducts API operation.
 type SearchProductsRequest struct {
 	*aws.Request
-	Input *SearchProductsInput
-	Copy  func(*SearchProductsInput) SearchProductsRequest
+	Input *types.SearchProductsInput
+	Copy  func(*types.SearchProductsInput) SearchProductsRequest
 }
 
 // Send marshals and sends the SearchProducts API request.
@@ -116,7 +62,7 @@ func (r SearchProductsRequest) Send(ctx context.Context) (*SearchProductsRespons
 	}
 
 	resp := &SearchProductsResponse{
-		SearchProductsOutput: r.Request.Data.(*SearchProductsOutput),
+		SearchProductsOutput: r.Request.Data.(*types.SearchProductsOutput),
 		response:             &aws.Response{Request: r.Request},
 	}
 
@@ -146,7 +92,7 @@ func NewSearchProductsPaginator(req SearchProductsRequest) SearchProductsPaginat
 	return SearchProductsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *SearchProductsInput
+				var inCpy *types.SearchProductsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -166,14 +112,14 @@ type SearchProductsPaginator struct {
 	aws.Pager
 }
 
-func (p *SearchProductsPaginator) CurrentPage() *SearchProductsOutput {
-	return p.Pager.CurrentPage().(*SearchProductsOutput)
+func (p *SearchProductsPaginator) CurrentPage() *types.SearchProductsOutput {
+	return p.Pager.CurrentPage().(*types.SearchProductsOutput)
 }
 
 // SearchProductsResponse is the response type for the
 // SearchProducts API operation.
 type SearchProductsResponse struct {
-	*SearchProductsOutput
+	*types.SearchProductsOutput
 
 	response *aws.Response
 }

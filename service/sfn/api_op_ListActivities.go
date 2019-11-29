@@ -6,66 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/sfn/types"
 )
-
-type ListActivitiesInput struct {
-	_ struct{} `type:"structure"`
-
-	// The maximum number of results that are returned per call. You can use nextToken
-	// to obtain further pages of results. The default is 100 and the maximum allowed
-	// page size is 1000. A value of 0 uses the default.
-	//
-	// This is only an upper limit. The actual number of results returned per call
-	// might be fewer than the specified maximum.
-	MaxResults *int64 `locationName:"maxResults" type:"integer"`
-
-	// If nextToken is returned, there are more results available. The value of
-	// nextToken is a unique pagination token for each page. Make the call again
-	// using the returned token to retrieve the next page. Keep all other arguments
-	// unchanged. Each pagination token expires after 24 hours. Using an expired
-	// pagination token will return an HTTP 400 InvalidToken error.
-	NextToken *string `locationName:"nextToken" min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s ListActivitiesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListActivitiesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListActivitiesInput"}
-	if s.NextToken != nil && len(*s.NextToken) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ListActivitiesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The list of activities.
-	//
-	// Activities is a required field
-	Activities []ActivityListItem `locationName:"activities" type:"list" required:"true"`
-
-	// If nextToken is returned, there are more results available. The value of
-	// nextToken is a unique pagination token for each page. Make the call again
-	// using the returned token to retrieve the next page. Keep all other arguments
-	// unchanged. Each pagination token expires after 24 hours. Using an expired
-	// pagination token will return an HTTP 400 InvalidToken error.
-	NextToken *string `locationName:"nextToken" min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s ListActivitiesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListActivities = "ListActivities"
 
@@ -91,7 +33,7 @@ const opListActivities = "ListActivities"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/ListActivities
-func (c *Client) ListActivitiesRequest(input *ListActivitiesInput) ListActivitiesRequest {
+func (c *Client) ListActivitiesRequest(input *types.ListActivitiesInput) ListActivitiesRequest {
 	op := &aws.Operation{
 		Name:       opListActivities,
 		HTTPMethod: "POST",
@@ -105,10 +47,10 @@ func (c *Client) ListActivitiesRequest(input *ListActivitiesInput) ListActivitie
 	}
 
 	if input == nil {
-		input = &ListActivitiesInput{}
+		input = &types.ListActivitiesInput{}
 	}
 
-	req := c.newRequest(op, input, &ListActivitiesOutput{})
+	req := c.newRequest(op, input, &types.ListActivitiesOutput{})
 	return ListActivitiesRequest{Request: req, Input: input, Copy: c.ListActivitiesRequest}
 }
 
@@ -116,8 +58,8 @@ func (c *Client) ListActivitiesRequest(input *ListActivitiesInput) ListActivitie
 // ListActivities API operation.
 type ListActivitiesRequest struct {
 	*aws.Request
-	Input *ListActivitiesInput
-	Copy  func(*ListActivitiesInput) ListActivitiesRequest
+	Input *types.ListActivitiesInput
+	Copy  func(*types.ListActivitiesInput) ListActivitiesRequest
 }
 
 // Send marshals and sends the ListActivities API request.
@@ -129,7 +71,7 @@ func (r ListActivitiesRequest) Send(ctx context.Context) (*ListActivitiesRespons
 	}
 
 	resp := &ListActivitiesResponse{
-		ListActivitiesOutput: r.Request.Data.(*ListActivitiesOutput),
+		ListActivitiesOutput: r.Request.Data.(*types.ListActivitiesOutput),
 		response:             &aws.Response{Request: r.Request},
 	}
 
@@ -159,7 +101,7 @@ func NewListActivitiesPaginator(req ListActivitiesRequest) ListActivitiesPaginat
 	return ListActivitiesPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListActivitiesInput
+				var inCpy *types.ListActivitiesInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -179,14 +121,14 @@ type ListActivitiesPaginator struct {
 	aws.Pager
 }
 
-func (p *ListActivitiesPaginator) CurrentPage() *ListActivitiesOutput {
-	return p.Pager.CurrentPage().(*ListActivitiesOutput)
+func (p *ListActivitiesPaginator) CurrentPage() *types.ListActivitiesOutput {
+	return p.Pager.CurrentPage().(*types.ListActivitiesOutput)
 }
 
 // ListActivitiesResponse is the response type for the
 // ListActivities API operation.
 type ListActivitiesResponse struct {
-	*ListActivitiesOutput
+	*types.ListActivitiesOutput
 
 	response *aws.Response
 }

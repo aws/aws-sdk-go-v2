@@ -6,50 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
 )
-
-type StopLabelingJobInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the labeling job to stop.
-	//
-	// LabelingJobName is a required field
-	LabelingJobName *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s StopLabelingJobInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *StopLabelingJobInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "StopLabelingJobInput"}
-
-	if s.LabelingJobName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("LabelingJobName"))
-	}
-	if s.LabelingJobName != nil && len(*s.LabelingJobName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("LabelingJobName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type StopLabelingJobOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s StopLabelingJobOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opStopLabelingJob = "StopLabelingJob"
 
@@ -68,7 +28,7 @@ const opStopLabelingJob = "StopLabelingJob"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/StopLabelingJob
-func (c *Client) StopLabelingJobRequest(input *StopLabelingJobInput) StopLabelingJobRequest {
+func (c *Client) StopLabelingJobRequest(input *types.StopLabelingJobInput) StopLabelingJobRequest {
 	op := &aws.Operation{
 		Name:       opStopLabelingJob,
 		HTTPMethod: "POST",
@@ -76,10 +36,10 @@ func (c *Client) StopLabelingJobRequest(input *StopLabelingJobInput) StopLabelin
 	}
 
 	if input == nil {
-		input = &StopLabelingJobInput{}
+		input = &types.StopLabelingJobInput{}
 	}
 
-	req := c.newRequest(op, input, &StopLabelingJobOutput{})
+	req := c.newRequest(op, input, &types.StopLabelingJobOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return StopLabelingJobRequest{Request: req, Input: input, Copy: c.StopLabelingJobRequest}
@@ -89,8 +49,8 @@ func (c *Client) StopLabelingJobRequest(input *StopLabelingJobInput) StopLabelin
 // StopLabelingJob API operation.
 type StopLabelingJobRequest struct {
 	*aws.Request
-	Input *StopLabelingJobInput
-	Copy  func(*StopLabelingJobInput) StopLabelingJobRequest
+	Input *types.StopLabelingJobInput
+	Copy  func(*types.StopLabelingJobInput) StopLabelingJobRequest
 }
 
 // Send marshals and sends the StopLabelingJob API request.
@@ -102,7 +62,7 @@ func (r StopLabelingJobRequest) Send(ctx context.Context) (*StopLabelingJobRespo
 	}
 
 	resp := &StopLabelingJobResponse{
-		StopLabelingJobOutput: r.Request.Data.(*StopLabelingJobOutput),
+		StopLabelingJobOutput: r.Request.Data.(*types.StopLabelingJobOutput),
 		response:              &aws.Response{Request: r.Request},
 	}
 
@@ -112,7 +72,7 @@ func (r StopLabelingJobRequest) Send(ctx context.Context) (*StopLabelingJobRespo
 // StopLabelingJobResponse is the response type for the
 // StopLabelingJob API operation.
 type StopLabelingJobResponse struct {
-	*StopLabelingJobOutput
+	*types.StopLabelingJobOutput
 
 	response *aws.Response
 }

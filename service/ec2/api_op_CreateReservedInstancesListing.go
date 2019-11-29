@@ -6,83 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-// Contains the parameters for CreateReservedInstancesListing.
-type CreateReservedInstancesListingInput struct {
-	_ struct{} `type:"structure"`
-
-	// Unique, case-sensitive identifier you provide to ensure idempotency of your
-	// listings. This helps avoid duplicate listings. For more information, see
-	// Ensuring Idempotency (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html).
-	//
-	// ClientToken is a required field
-	ClientToken *string `locationName:"clientToken" type:"string" required:"true"`
-
-	// The number of instances that are a part of a Reserved Instance account to
-	// be listed in the Reserved Instance Marketplace. This number should be less
-	// than or equal to the instance count associated with the Reserved Instance
-	// ID specified in this call.
-	//
-	// InstanceCount is a required field
-	InstanceCount *int64 `locationName:"instanceCount" type:"integer" required:"true"`
-
-	// A list specifying the price of the Standard Reserved Instance for each month
-	// remaining in the Reserved Instance term.
-	//
-	// PriceSchedules is a required field
-	PriceSchedules []PriceScheduleSpecification `locationName:"priceSchedules" locationNameList:"item" type:"list" required:"true"`
-
-	// The ID of the active Standard Reserved Instance.
-	//
-	// ReservedInstancesId is a required field
-	ReservedInstancesId *string `locationName:"reservedInstancesId" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s CreateReservedInstancesListingInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateReservedInstancesListingInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateReservedInstancesListingInput"}
-
-	if s.ClientToken == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ClientToken"))
-	}
-
-	if s.InstanceCount == nil {
-		invalidParams.Add(aws.NewErrParamRequired("InstanceCount"))
-	}
-
-	if s.PriceSchedules == nil {
-		invalidParams.Add(aws.NewErrParamRequired("PriceSchedules"))
-	}
-
-	if s.ReservedInstancesId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ReservedInstancesId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Contains the output of CreateReservedInstancesListing.
-type CreateReservedInstancesListingOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Information about the Standard Reserved Instance listing.
-	ReservedInstancesListings []ReservedInstancesListing `locationName:"reservedInstancesListingsSet" locationNameList:"item" type:"list"`
-}
-
-// String returns the string representation
-func (s CreateReservedInstancesListingOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCreateReservedInstancesListing = "CreateReservedInstancesListing"
 
@@ -121,7 +46,7 @@ const opCreateReservedInstancesListing = "CreateReservedInstancesListing"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateReservedInstancesListing
-func (c *Client) CreateReservedInstancesListingRequest(input *CreateReservedInstancesListingInput) CreateReservedInstancesListingRequest {
+func (c *Client) CreateReservedInstancesListingRequest(input *types.CreateReservedInstancesListingInput) CreateReservedInstancesListingRequest {
 	op := &aws.Operation{
 		Name:       opCreateReservedInstancesListing,
 		HTTPMethod: "POST",
@@ -129,10 +54,10 @@ func (c *Client) CreateReservedInstancesListingRequest(input *CreateReservedInst
 	}
 
 	if input == nil {
-		input = &CreateReservedInstancesListingInput{}
+		input = &types.CreateReservedInstancesListingInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateReservedInstancesListingOutput{})
+	req := c.newRequest(op, input, &types.CreateReservedInstancesListingOutput{})
 	return CreateReservedInstancesListingRequest{Request: req, Input: input, Copy: c.CreateReservedInstancesListingRequest}
 }
 
@@ -140,8 +65,8 @@ func (c *Client) CreateReservedInstancesListingRequest(input *CreateReservedInst
 // CreateReservedInstancesListing API operation.
 type CreateReservedInstancesListingRequest struct {
 	*aws.Request
-	Input *CreateReservedInstancesListingInput
-	Copy  func(*CreateReservedInstancesListingInput) CreateReservedInstancesListingRequest
+	Input *types.CreateReservedInstancesListingInput
+	Copy  func(*types.CreateReservedInstancesListingInput) CreateReservedInstancesListingRequest
 }
 
 // Send marshals and sends the CreateReservedInstancesListing API request.
@@ -153,7 +78,7 @@ func (r CreateReservedInstancesListingRequest) Send(ctx context.Context) (*Creat
 	}
 
 	resp := &CreateReservedInstancesListingResponse{
-		CreateReservedInstancesListingOutput: r.Request.Data.(*CreateReservedInstancesListingOutput),
+		CreateReservedInstancesListingOutput: r.Request.Data.(*types.CreateReservedInstancesListingOutput),
 		response:                             &aws.Response{Request: r.Request},
 	}
 
@@ -163,7 +88,7 @@ func (r CreateReservedInstancesListingRequest) Send(ctx context.Context) (*Creat
 // CreateReservedInstancesListingResponse is the response type for the
 // CreateReservedInstancesListing API operation.
 type CreateReservedInstancesListingResponse struct {
-	*CreateReservedInstancesListingOutput
+	*types.CreateReservedInstancesListingOutput
 
 	response *aws.Response
 }

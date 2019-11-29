@@ -6,56 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/elasticache/types"
 )
-
-// Represents the input of a DescribeReplicationGroups operation.
-type DescribeReplicationGroupsInput struct {
-	_ struct{} `type:"structure"`
-
-	// An optional marker returned from a prior request. Use this marker for pagination
-	// of results from this operation. If this parameter is specified, the response
-	// includes only records beyond the marker, up to the value specified by MaxRecords.
-	Marker *string `type:"string"`
-
-	// The maximum number of records to include in the response. If more records
-	// exist than the specified MaxRecords value, a marker is included in the response
-	// so that the remaining results can be retrieved.
-	//
-	// Default: 100
-	//
-	// Constraints: minimum 20; maximum 100.
-	MaxRecords *int64 `type:"integer"`
-
-	// The identifier for the replication group to be described. This parameter
-	// is not case sensitive.
-	//
-	// If you do not specify this parameter, information about all replication groups
-	// is returned.
-	ReplicationGroupId *string `type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeReplicationGroupsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Represents the output of a DescribeReplicationGroups operation.
-type DescribeReplicationGroupsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Provides an identifier to allow retrieval of paginated results.
-	Marker *string `type:"string"`
-
-	// A list of replication groups. Each item in the list contains detailed information
-	// about one replication group.
-	ReplicationGroups []ReplicationGroup `locationNameList:"ReplicationGroup" type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeReplicationGroupsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeReplicationGroups = "DescribeReplicationGroups"
 
@@ -76,7 +28,7 @@ const opDescribeReplicationGroups = "DescribeReplicationGroups"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DescribeReplicationGroups
-func (c *Client) DescribeReplicationGroupsRequest(input *DescribeReplicationGroupsInput) DescribeReplicationGroupsRequest {
+func (c *Client) DescribeReplicationGroupsRequest(input *types.DescribeReplicationGroupsInput) DescribeReplicationGroupsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeReplicationGroups,
 		HTTPMethod: "POST",
@@ -90,10 +42,10 @@ func (c *Client) DescribeReplicationGroupsRequest(input *DescribeReplicationGrou
 	}
 
 	if input == nil {
-		input = &DescribeReplicationGroupsInput{}
+		input = &types.DescribeReplicationGroupsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeReplicationGroupsOutput{})
+	req := c.newRequest(op, input, &types.DescribeReplicationGroupsOutput{})
 	return DescribeReplicationGroupsRequest{Request: req, Input: input, Copy: c.DescribeReplicationGroupsRequest}
 }
 
@@ -101,8 +53,8 @@ func (c *Client) DescribeReplicationGroupsRequest(input *DescribeReplicationGrou
 // DescribeReplicationGroups API operation.
 type DescribeReplicationGroupsRequest struct {
 	*aws.Request
-	Input *DescribeReplicationGroupsInput
-	Copy  func(*DescribeReplicationGroupsInput) DescribeReplicationGroupsRequest
+	Input *types.DescribeReplicationGroupsInput
+	Copy  func(*types.DescribeReplicationGroupsInput) DescribeReplicationGroupsRequest
 }
 
 // Send marshals and sends the DescribeReplicationGroups API request.
@@ -114,7 +66,7 @@ func (r DescribeReplicationGroupsRequest) Send(ctx context.Context) (*DescribeRe
 	}
 
 	resp := &DescribeReplicationGroupsResponse{
-		DescribeReplicationGroupsOutput: r.Request.Data.(*DescribeReplicationGroupsOutput),
+		DescribeReplicationGroupsOutput: r.Request.Data.(*types.DescribeReplicationGroupsOutput),
 		response:                        &aws.Response{Request: r.Request},
 	}
 
@@ -144,7 +96,7 @@ func NewDescribeReplicationGroupsPaginator(req DescribeReplicationGroupsRequest)
 	return DescribeReplicationGroupsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *DescribeReplicationGroupsInput
+				var inCpy *types.DescribeReplicationGroupsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -164,14 +116,14 @@ type DescribeReplicationGroupsPaginator struct {
 	aws.Pager
 }
 
-func (p *DescribeReplicationGroupsPaginator) CurrentPage() *DescribeReplicationGroupsOutput {
-	return p.Pager.CurrentPage().(*DescribeReplicationGroupsOutput)
+func (p *DescribeReplicationGroupsPaginator) CurrentPage() *types.DescribeReplicationGroupsOutput {
+	return p.Pager.CurrentPage().(*types.DescribeReplicationGroupsOutput)
 }
 
 // DescribeReplicationGroupsResponse is the response type for the
 // DescribeReplicationGroups API operation.
 type DescribeReplicationGroupsResponse struct {
-	*DescribeReplicationGroupsOutput
+	*types.DescribeReplicationGroupsOutput
 
 	response *aws.Response
 }

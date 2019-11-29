@@ -6,50 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/codedeploy/types"
 )
-
-// Represents the input of a GetOnPremisesInstance operation.
-type GetOnPremisesInstanceInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the on-premises instance about which to get information.
-	//
-	// InstanceName is a required field
-	InstanceName *string `locationName:"instanceName" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetOnPremisesInstanceInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetOnPremisesInstanceInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetOnPremisesInstanceInput"}
-
-	if s.InstanceName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("InstanceName"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Represents the output of a GetOnPremisesInstance operation.
-type GetOnPremisesInstanceOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Information about the on-premises instance.
-	InstanceInfo *InstanceInfo `locationName:"instanceInfo" type:"structure"`
-}
-
-// String returns the string representation
-func (s GetOnPremisesInstanceOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetOnPremisesInstance = "GetOnPremisesInstance"
 
@@ -66,7 +24,7 @@ const opGetOnPremisesInstance = "GetOnPremisesInstance"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/GetOnPremisesInstance
-func (c *Client) GetOnPremisesInstanceRequest(input *GetOnPremisesInstanceInput) GetOnPremisesInstanceRequest {
+func (c *Client) GetOnPremisesInstanceRequest(input *types.GetOnPremisesInstanceInput) GetOnPremisesInstanceRequest {
 	op := &aws.Operation{
 		Name:       opGetOnPremisesInstance,
 		HTTPMethod: "POST",
@@ -74,10 +32,10 @@ func (c *Client) GetOnPremisesInstanceRequest(input *GetOnPremisesInstanceInput)
 	}
 
 	if input == nil {
-		input = &GetOnPremisesInstanceInput{}
+		input = &types.GetOnPremisesInstanceInput{}
 	}
 
-	req := c.newRequest(op, input, &GetOnPremisesInstanceOutput{})
+	req := c.newRequest(op, input, &types.GetOnPremisesInstanceOutput{})
 	return GetOnPremisesInstanceRequest{Request: req, Input: input, Copy: c.GetOnPremisesInstanceRequest}
 }
 
@@ -85,8 +43,8 @@ func (c *Client) GetOnPremisesInstanceRequest(input *GetOnPremisesInstanceInput)
 // GetOnPremisesInstance API operation.
 type GetOnPremisesInstanceRequest struct {
 	*aws.Request
-	Input *GetOnPremisesInstanceInput
-	Copy  func(*GetOnPremisesInstanceInput) GetOnPremisesInstanceRequest
+	Input *types.GetOnPremisesInstanceInput
+	Copy  func(*types.GetOnPremisesInstanceInput) GetOnPremisesInstanceRequest
 }
 
 // Send marshals and sends the GetOnPremisesInstance API request.
@@ -98,7 +56,7 @@ func (r GetOnPremisesInstanceRequest) Send(ctx context.Context) (*GetOnPremisesI
 	}
 
 	resp := &GetOnPremisesInstanceResponse{
-		GetOnPremisesInstanceOutput: r.Request.Data.(*GetOnPremisesInstanceOutput),
+		GetOnPremisesInstanceOutput: r.Request.Data.(*types.GetOnPremisesInstanceOutput),
 		response:                    &aws.Response{Request: r.Request},
 	}
 
@@ -108,7 +66,7 @@ func (r GetOnPremisesInstanceRequest) Send(ctx context.Context) (*GetOnPremisesI
 // GetOnPremisesInstanceResponse is the response type for the
 // GetOnPremisesInstance API operation.
 type GetOnPremisesInstanceResponse struct {
-	*GetOnPremisesInstanceOutput
+	*types.GetOnPremisesInstanceOutput
 
 	response *aws.Response
 }

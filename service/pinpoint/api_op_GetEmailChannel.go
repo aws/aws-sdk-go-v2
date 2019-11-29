@@ -6,74 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/pinpoint/types"
 )
-
-type GetEmailChannelInput struct {
-	_ struct{} `type:"structure"`
-
-	// ApplicationId is a required field
-	ApplicationId *string `location:"uri" locationName:"application-id" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetEmailChannelInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetEmailChannelInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetEmailChannelInput"}
-
-	if s.ApplicationId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ApplicationId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetEmailChannelInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.ApplicationId != nil {
-		v := *s.ApplicationId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "application-id", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type GetEmailChannelOutput struct {
-	_ struct{} `type:"structure" payload:"EmailChannelResponse"`
-
-	// Provides information about the status and settings of the email channel for
-	// an application.
-	//
-	// EmailChannelResponse is a required field
-	EmailChannelResponse *EmailChannelResponse `type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s GetEmailChannelOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetEmailChannelOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.EmailChannelResponse != nil {
-		v := s.EmailChannelResponse
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.PayloadTarget, "EmailChannelResponse", v, metadata)
-	}
-	return nil
-}
 
 const opGetEmailChannel = "GetEmailChannel"
 
@@ -91,7 +25,7 @@ const opGetEmailChannel = "GetEmailChannel"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetEmailChannel
-func (c *Client) GetEmailChannelRequest(input *GetEmailChannelInput) GetEmailChannelRequest {
+func (c *Client) GetEmailChannelRequest(input *types.GetEmailChannelInput) GetEmailChannelRequest {
 	op := &aws.Operation{
 		Name:       opGetEmailChannel,
 		HTTPMethod: "GET",
@@ -99,10 +33,10 @@ func (c *Client) GetEmailChannelRequest(input *GetEmailChannelInput) GetEmailCha
 	}
 
 	if input == nil {
-		input = &GetEmailChannelInput{}
+		input = &types.GetEmailChannelInput{}
 	}
 
-	req := c.newRequest(op, input, &GetEmailChannelOutput{})
+	req := c.newRequest(op, input, &types.GetEmailChannelOutput{})
 	return GetEmailChannelRequest{Request: req, Input: input, Copy: c.GetEmailChannelRequest}
 }
 
@@ -110,8 +44,8 @@ func (c *Client) GetEmailChannelRequest(input *GetEmailChannelInput) GetEmailCha
 // GetEmailChannel API operation.
 type GetEmailChannelRequest struct {
 	*aws.Request
-	Input *GetEmailChannelInput
-	Copy  func(*GetEmailChannelInput) GetEmailChannelRequest
+	Input *types.GetEmailChannelInput
+	Copy  func(*types.GetEmailChannelInput) GetEmailChannelRequest
 }
 
 // Send marshals and sends the GetEmailChannel API request.
@@ -123,7 +57,7 @@ func (r GetEmailChannelRequest) Send(ctx context.Context) (*GetEmailChannelRespo
 	}
 
 	resp := &GetEmailChannelResponse{
-		GetEmailChannelOutput: r.Request.Data.(*GetEmailChannelOutput),
+		GetEmailChannelOutput: r.Request.Data.(*types.GetEmailChannelOutput),
 		response:              &aws.Response{Request: r.Request},
 	}
 
@@ -133,7 +67,7 @@ func (r GetEmailChannelRequest) Send(ctx context.Context) (*GetEmailChannelRespo
 // GetEmailChannelResponse is the response type for the
 // GetEmailChannel API operation.
 type GetEmailChannelResponse struct {
-	*GetEmailChannelOutput
+	*types.GetEmailChannelOutput
 
 	response *aws.Response
 }

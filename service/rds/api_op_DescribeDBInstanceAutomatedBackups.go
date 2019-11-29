@@ -4,96 +4,10 @@ package rds
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/rds/types"
 )
-
-// Parameter input for DescribeDBInstanceAutomatedBackups.
-type DescribeDBInstanceAutomatedBackupsInput struct {
-	_ struct{} `type:"structure"`
-
-	// (Optional) The user-supplied instance identifier. If this parameter is specified,
-	// it must match the identifier of an existing DB instance. It returns information
-	// from the specific DB instance' automated backup. This parameter isn't case-sensitive.
-	DBInstanceIdentifier *string `type:"string"`
-
-	// The resource ID of the DB instance that is the source of the automated backup.
-	// This parameter isn't case-sensitive.
-	DbiResourceId *string `type:"string"`
-
-	// A filter that specifies which resources to return based on status.
-	//
-	// Supported filters are the following:
-	//
-	//    * status active - automated backups for current instances retained - automated
-	//    backups for deleted instances creating - automated backups that are waiting
-	//    for the first automated snapshot to be available
-	//
-	//    * db-instance-id - Accepts DB instance identifiers and Amazon Resource
-	//    Names (ARNs) for DB instances. The results list includes only information
-	//    about the DB instance automated backupss identified by these ARNs.
-	//
-	//    * dbi-resource-id - Accepts DB instance resource identifiers and DB Amazon
-	//    Resource Names (ARNs) for DB instances. The results list includes only
-	//    information about the DB instance resources identified by these ARNs.
-	//
-	// Returns all resources by default. The status for each resource is specified
-	// in the response.
-	Filters []Filter `locationNameList:"Filter" type:"list"`
-
-	// The pagination token provided in the previous request. If this parameter
-	// is specified the response includes only records beyond the marker, up to
-	// MaxRecords.
-	Marker *string `type:"string"`
-
-	// The maximum number of records to include in the response. If more records
-	// exist than the specified MaxRecords value, a pagination token called a marker
-	// is included in the response so that you can retrieve the remaining results.
-	MaxRecords *int64 `type:"integer"`
-}
-
-// String returns the string representation
-func (s DescribeDBInstanceAutomatedBackupsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeDBInstanceAutomatedBackupsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeDBInstanceAutomatedBackupsInput"}
-	if s.Filters != nil {
-		for i, v := range s.Filters {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Contains the result of a successful invocation of the DescribeDBInstanceAutomatedBackups
-// action.
-type DescribeDBInstanceAutomatedBackupsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A list of DBInstanceAutomatedBackup instances.
-	DBInstanceAutomatedBackups []DBInstanceAutomatedBackup `locationNameList:"DBInstanceAutomatedBackup" type:"list"`
-
-	// An optional pagination token provided by a previous request. If this parameter
-	// is specified, the response includes only records beyond the marker, up to
-	// the value specified by MaxRecords .
-	Marker *string `type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeDBInstanceAutomatedBackupsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeDBInstanceAutomatedBackups = "DescribeDBInstanceAutomatedBackups"
 
@@ -116,7 +30,7 @@ const opDescribeDBInstanceAutomatedBackups = "DescribeDBInstanceAutomatedBackups
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeDBInstanceAutomatedBackups
-func (c *Client) DescribeDBInstanceAutomatedBackupsRequest(input *DescribeDBInstanceAutomatedBackupsInput) DescribeDBInstanceAutomatedBackupsRequest {
+func (c *Client) DescribeDBInstanceAutomatedBackupsRequest(input *types.DescribeDBInstanceAutomatedBackupsInput) DescribeDBInstanceAutomatedBackupsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeDBInstanceAutomatedBackups,
 		HTTPMethod: "POST",
@@ -130,10 +44,10 @@ func (c *Client) DescribeDBInstanceAutomatedBackupsRequest(input *DescribeDBInst
 	}
 
 	if input == nil {
-		input = &DescribeDBInstanceAutomatedBackupsInput{}
+		input = &types.DescribeDBInstanceAutomatedBackupsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeDBInstanceAutomatedBackupsOutput{})
+	req := c.newRequest(op, input, &types.DescribeDBInstanceAutomatedBackupsOutput{})
 	return DescribeDBInstanceAutomatedBackupsRequest{Request: req, Input: input, Copy: c.DescribeDBInstanceAutomatedBackupsRequest}
 }
 
@@ -141,8 +55,8 @@ func (c *Client) DescribeDBInstanceAutomatedBackupsRequest(input *DescribeDBInst
 // DescribeDBInstanceAutomatedBackups API operation.
 type DescribeDBInstanceAutomatedBackupsRequest struct {
 	*aws.Request
-	Input *DescribeDBInstanceAutomatedBackupsInput
-	Copy  func(*DescribeDBInstanceAutomatedBackupsInput) DescribeDBInstanceAutomatedBackupsRequest
+	Input *types.DescribeDBInstanceAutomatedBackupsInput
+	Copy  func(*types.DescribeDBInstanceAutomatedBackupsInput) DescribeDBInstanceAutomatedBackupsRequest
 }
 
 // Send marshals and sends the DescribeDBInstanceAutomatedBackups API request.
@@ -154,7 +68,7 @@ func (r DescribeDBInstanceAutomatedBackupsRequest) Send(ctx context.Context) (*D
 	}
 
 	resp := &DescribeDBInstanceAutomatedBackupsResponse{
-		DescribeDBInstanceAutomatedBackupsOutput: r.Request.Data.(*DescribeDBInstanceAutomatedBackupsOutput),
+		DescribeDBInstanceAutomatedBackupsOutput: r.Request.Data.(*types.DescribeDBInstanceAutomatedBackupsOutput),
 		response:                                 &aws.Response{Request: r.Request},
 	}
 
@@ -184,7 +98,7 @@ func NewDescribeDBInstanceAutomatedBackupsPaginator(req DescribeDBInstanceAutoma
 	return DescribeDBInstanceAutomatedBackupsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *DescribeDBInstanceAutomatedBackupsInput
+				var inCpy *types.DescribeDBInstanceAutomatedBackupsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -204,14 +118,14 @@ type DescribeDBInstanceAutomatedBackupsPaginator struct {
 	aws.Pager
 }
 
-func (p *DescribeDBInstanceAutomatedBackupsPaginator) CurrentPage() *DescribeDBInstanceAutomatedBackupsOutput {
-	return p.Pager.CurrentPage().(*DescribeDBInstanceAutomatedBackupsOutput)
+func (p *DescribeDBInstanceAutomatedBackupsPaginator) CurrentPage() *types.DescribeDBInstanceAutomatedBackupsOutput {
+	return p.Pager.CurrentPage().(*types.DescribeDBInstanceAutomatedBackupsOutput)
 }
 
 // DescribeDBInstanceAutomatedBackupsResponse is the response type for the
 // DescribeDBInstanceAutomatedBackups API operation.
 type DescribeDBInstanceAutomatedBackupsResponse struct {
-	*DescribeDBInstanceAutomatedBackupsOutput
+	*types.DescribeDBInstanceAutomatedBackupsOutput
 
 	response *aws.Response
 }

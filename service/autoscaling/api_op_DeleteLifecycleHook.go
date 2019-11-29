@@ -6,60 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/autoscaling/types"
 )
-
-type DeleteLifecycleHookInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the Auto Scaling group.
-	//
-	// AutoScalingGroupName is a required field
-	AutoScalingGroupName *string `min:"1" type:"string" required:"true"`
-
-	// The name of the lifecycle hook.
-	//
-	// LifecycleHookName is a required field
-	LifecycleHookName *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteLifecycleHookInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteLifecycleHookInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteLifecycleHookInput"}
-
-	if s.AutoScalingGroupName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("AutoScalingGroupName"))
-	}
-	if s.AutoScalingGroupName != nil && len(*s.AutoScalingGroupName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("AutoScalingGroupName", 1))
-	}
-
-	if s.LifecycleHookName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("LifecycleHookName"))
-	}
-	if s.LifecycleHookName != nil && len(*s.LifecycleHookName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("LifecycleHookName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteLifecycleHookOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteLifecycleHookOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteLifecycleHook = "DeleteLifecycleHook"
 
@@ -79,7 +27,7 @@ const opDeleteLifecycleHook = "DeleteLifecycleHook"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DeleteLifecycleHook
-func (c *Client) DeleteLifecycleHookRequest(input *DeleteLifecycleHookInput) DeleteLifecycleHookRequest {
+func (c *Client) DeleteLifecycleHookRequest(input *types.DeleteLifecycleHookInput) DeleteLifecycleHookRequest {
 	op := &aws.Operation{
 		Name:       opDeleteLifecycleHook,
 		HTTPMethod: "POST",
@@ -87,10 +35,10 @@ func (c *Client) DeleteLifecycleHookRequest(input *DeleteLifecycleHookInput) Del
 	}
 
 	if input == nil {
-		input = &DeleteLifecycleHookInput{}
+		input = &types.DeleteLifecycleHookInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteLifecycleHookOutput{})
+	req := c.newRequest(op, input, &types.DeleteLifecycleHookOutput{})
 	return DeleteLifecycleHookRequest{Request: req, Input: input, Copy: c.DeleteLifecycleHookRequest}
 }
 
@@ -98,8 +46,8 @@ func (c *Client) DeleteLifecycleHookRequest(input *DeleteLifecycleHookInput) Del
 // DeleteLifecycleHook API operation.
 type DeleteLifecycleHookRequest struct {
 	*aws.Request
-	Input *DeleteLifecycleHookInput
-	Copy  func(*DeleteLifecycleHookInput) DeleteLifecycleHookRequest
+	Input *types.DeleteLifecycleHookInput
+	Copy  func(*types.DeleteLifecycleHookInput) DeleteLifecycleHookRequest
 }
 
 // Send marshals and sends the DeleteLifecycleHook API request.
@@ -111,7 +59,7 @@ func (r DeleteLifecycleHookRequest) Send(ctx context.Context) (*DeleteLifecycleH
 	}
 
 	resp := &DeleteLifecycleHookResponse{
-		DeleteLifecycleHookOutput: r.Request.Data.(*DeleteLifecycleHookOutput),
+		DeleteLifecycleHookOutput: r.Request.Data.(*types.DeleteLifecycleHookOutput),
 		response:                  &aws.Response{Request: r.Request},
 	}
 
@@ -121,7 +69,7 @@ func (r DeleteLifecycleHookRequest) Send(ctx context.Context) (*DeleteLifecycleH
 // DeleteLifecycleHookResponse is the response type for the
 // DeleteLifecycleHook API operation.
 type DeleteLifecycleHookResponse struct {
-	*DeleteLifecycleHookOutput
+	*types.DeleteLifecycleHookOutput
 
 	response *aws.Response
 }

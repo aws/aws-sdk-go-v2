@@ -6,92 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
+	"github.com/aws/aws-sdk-go-v2/service/organizations/types"
 )
-
-type MoveAccountInput struct {
-	_ struct{} `type:"structure"`
-
-	// The unique identifier (ID) of the account that you want to move.
-	//
-	// The regex pattern (http://wikipedia.org/wiki/regex) for an account ID string
-	// requires exactly 12 digits.
-	//
-	// AccountId is a required field
-	AccountId *string `type:"string" required:"true"`
-
-	// The unique identifier (ID) of the root or organizational unit that you want
-	// to move the account to.
-	//
-	// The regex pattern (http://wikipedia.org/wiki/regex) for a parent ID string
-	// requires one of the following:
-	//
-	//    * Root - A string that begins with "r-" followed by from 4 to 32 lower-case
-	//    letters or digits.
-	//
-	//    * Organizational unit (OU) - A string that begins with "ou-" followed
-	//    by from 4 to 32 lower-case letters or digits (the ID of the root that
-	//    the OU is in) followed by a second "-" dash and from 8 to 32 additional
-	//    lower-case letters or digits.
-	//
-	// DestinationParentId is a required field
-	DestinationParentId *string `type:"string" required:"true"`
-
-	// The unique identifier (ID) of the root or organizational unit that you want
-	// to move the account from.
-	//
-	// The regex pattern (http://wikipedia.org/wiki/regex) for a parent ID string
-	// requires one of the following:
-	//
-	//    * Root - A string that begins with "r-" followed by from 4 to 32 lower-case
-	//    letters or digits.
-	//
-	//    * Organizational unit (OU) - A string that begins with "ou-" followed
-	//    by from 4 to 32 lower-case letters or digits (the ID of the root that
-	//    the OU is in) followed by a second "-" dash and from 8 to 32 additional
-	//    lower-case letters or digits.
-	//
-	// SourceParentId is a required field
-	SourceParentId *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s MoveAccountInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *MoveAccountInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "MoveAccountInput"}
-
-	if s.AccountId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("AccountId"))
-	}
-
-	if s.DestinationParentId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DestinationParentId"))
-	}
-
-	if s.SourceParentId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("SourceParentId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type MoveAccountOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s MoveAccountOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opMoveAccount = "MoveAccount"
 
@@ -111,7 +29,7 @@ const opMoveAccount = "MoveAccount"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/MoveAccount
-func (c *Client) MoveAccountRequest(input *MoveAccountInput) MoveAccountRequest {
+func (c *Client) MoveAccountRequest(input *types.MoveAccountInput) MoveAccountRequest {
 	op := &aws.Operation{
 		Name:       opMoveAccount,
 		HTTPMethod: "POST",
@@ -119,10 +37,10 @@ func (c *Client) MoveAccountRequest(input *MoveAccountInput) MoveAccountRequest 
 	}
 
 	if input == nil {
-		input = &MoveAccountInput{}
+		input = &types.MoveAccountInput{}
 	}
 
-	req := c.newRequest(op, input, &MoveAccountOutput{})
+	req := c.newRequest(op, input, &types.MoveAccountOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return MoveAccountRequest{Request: req, Input: input, Copy: c.MoveAccountRequest}
@@ -132,8 +50,8 @@ func (c *Client) MoveAccountRequest(input *MoveAccountInput) MoveAccountRequest 
 // MoveAccount API operation.
 type MoveAccountRequest struct {
 	*aws.Request
-	Input *MoveAccountInput
-	Copy  func(*MoveAccountInput) MoveAccountRequest
+	Input *types.MoveAccountInput
+	Copy  func(*types.MoveAccountInput) MoveAccountRequest
 }
 
 // Send marshals and sends the MoveAccount API request.
@@ -145,7 +63,7 @@ func (r MoveAccountRequest) Send(ctx context.Context) (*MoveAccountResponse, err
 	}
 
 	resp := &MoveAccountResponse{
-		MoveAccountOutput: r.Request.Data.(*MoveAccountOutput),
+		MoveAccountOutput: r.Request.Data.(*types.MoveAccountOutput),
 		response:          &aws.Response{Request: r.Request},
 	}
 
@@ -155,7 +73,7 @@ func (r MoveAccountRequest) Send(ctx context.Context) (*MoveAccountResponse, err
 // MoveAccountResponse is the response type for the
 // MoveAccount API operation.
 type MoveAccountResponse struct {
-	*MoveAccountOutput
+	*types.MoveAccountOutput
 
 	response *aws.Response
 }

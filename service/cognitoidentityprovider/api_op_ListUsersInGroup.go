@@ -6,77 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/types"
 )
-
-type ListUsersInGroupInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the group.
-	//
-	// GroupName is a required field
-	GroupName *string `min:"1" type:"string" required:"true"`
-
-	// The limit of the request to list users.
-	Limit *int64 `type:"integer"`
-
-	// An identifier that was returned from the previous call to this operation,
-	// which can be used to return the next set of items in the list.
-	NextToken *string `min:"1" type:"string"`
-
-	// The user pool ID for the user pool.
-	//
-	// UserPoolId is a required field
-	UserPoolId *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s ListUsersInGroupInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListUsersInGroupInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListUsersInGroupInput"}
-
-	if s.GroupName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("GroupName"))
-	}
-	if s.GroupName != nil && len(*s.GroupName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("GroupName", 1))
-	}
-	if s.NextToken != nil && len(*s.NextToken) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
-	}
-
-	if s.UserPoolId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("UserPoolId"))
-	}
-	if s.UserPoolId != nil && len(*s.UserPoolId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("UserPoolId", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ListUsersInGroupOutput struct {
-	_ struct{} `type:"structure"`
-
-	// An identifier that was returned from the previous call to this operation,
-	// which can be used to return the next set of items in the list.
-	NextToken *string `min:"1" type:"string"`
-
-	// The users returned in the request to list users.
-	Users []UserType `type:"list"`
-}
-
-// String returns the string representation
-func (s ListUsersInGroupOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListUsersInGroup = "ListUsersInGroup"
 
@@ -95,7 +26,7 @@ const opListUsersInGroup = "ListUsersInGroup"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/ListUsersInGroup
-func (c *Client) ListUsersInGroupRequest(input *ListUsersInGroupInput) ListUsersInGroupRequest {
+func (c *Client) ListUsersInGroupRequest(input *types.ListUsersInGroupInput) ListUsersInGroupRequest {
 	op := &aws.Operation{
 		Name:       opListUsersInGroup,
 		HTTPMethod: "POST",
@@ -109,10 +40,10 @@ func (c *Client) ListUsersInGroupRequest(input *ListUsersInGroupInput) ListUsers
 	}
 
 	if input == nil {
-		input = &ListUsersInGroupInput{}
+		input = &types.ListUsersInGroupInput{}
 	}
 
-	req := c.newRequest(op, input, &ListUsersInGroupOutput{})
+	req := c.newRequest(op, input, &types.ListUsersInGroupOutput{})
 	return ListUsersInGroupRequest{Request: req, Input: input, Copy: c.ListUsersInGroupRequest}
 }
 
@@ -120,8 +51,8 @@ func (c *Client) ListUsersInGroupRequest(input *ListUsersInGroupInput) ListUsers
 // ListUsersInGroup API operation.
 type ListUsersInGroupRequest struct {
 	*aws.Request
-	Input *ListUsersInGroupInput
-	Copy  func(*ListUsersInGroupInput) ListUsersInGroupRequest
+	Input *types.ListUsersInGroupInput
+	Copy  func(*types.ListUsersInGroupInput) ListUsersInGroupRequest
 }
 
 // Send marshals and sends the ListUsersInGroup API request.
@@ -133,7 +64,7 @@ func (r ListUsersInGroupRequest) Send(ctx context.Context) (*ListUsersInGroupRes
 	}
 
 	resp := &ListUsersInGroupResponse{
-		ListUsersInGroupOutput: r.Request.Data.(*ListUsersInGroupOutput),
+		ListUsersInGroupOutput: r.Request.Data.(*types.ListUsersInGroupOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -163,7 +94,7 @@ func NewListUsersInGroupPaginator(req ListUsersInGroupRequest) ListUsersInGroupP
 	return ListUsersInGroupPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListUsersInGroupInput
+				var inCpy *types.ListUsersInGroupInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -183,14 +114,14 @@ type ListUsersInGroupPaginator struct {
 	aws.Pager
 }
 
-func (p *ListUsersInGroupPaginator) CurrentPage() *ListUsersInGroupOutput {
-	return p.Pager.CurrentPage().(*ListUsersInGroupOutput)
+func (p *ListUsersInGroupPaginator) CurrentPage() *types.ListUsersInGroupOutput {
+	return p.Pager.CurrentPage().(*types.ListUsersInGroupOutput)
 }
 
 // ListUsersInGroupResponse is the response type for the
 // ListUsersInGroup API operation.
 type ListUsersInGroupResponse struct {
-	*ListUsersInGroupOutput
+	*types.ListUsersInGroupOutput
 
 	response *aws.Response
 }

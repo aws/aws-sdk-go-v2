@@ -6,79 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/migrationhub/types"
 )
-
-type ListCreatedArtifactsInput struct {
-	_ struct{} `type:"structure"`
-
-	// Maximum number of results to be returned per page.
-	MaxResults *int64 `min:"1" type:"integer"`
-
-	// Unique identifier that references the migration task.
-	//
-	// MigrationTaskName is a required field
-	MigrationTaskName *string `min:"1" type:"string" required:"true"`
-
-	// If a NextToken was returned by a previous call, there are more results available.
-	// To retrieve the next page of results, make the call again using the returned
-	// token in NextToken.
-	NextToken *string `type:"string"`
-
-	// The name of the ProgressUpdateStream.
-	//
-	// ProgressUpdateStream is a required field
-	ProgressUpdateStream *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s ListCreatedArtifactsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListCreatedArtifactsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListCreatedArtifactsInput"}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-
-	if s.MigrationTaskName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("MigrationTaskName"))
-	}
-	if s.MigrationTaskName != nil && len(*s.MigrationTaskName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("MigrationTaskName", 1))
-	}
-
-	if s.ProgressUpdateStream == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ProgressUpdateStream"))
-	}
-	if s.ProgressUpdateStream != nil && len(*s.ProgressUpdateStream) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ProgressUpdateStream", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ListCreatedArtifactsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// List of created artifacts up to the maximum number of results specified in
-	// the request.
-	CreatedArtifactList []CreatedArtifact `type:"list"`
-
-	// If there are more created artifacts than the max result, return the next
-	// token to be passed to the next call as a bookmark of where to start from.
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s ListCreatedArtifactsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListCreatedArtifacts = "ListCreatedArtifacts"
 
@@ -103,18 +32,24 @@ const opListCreatedArtifacts = "ListCreatedArtifacts"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/ListCreatedArtifacts
-func (c *Client) ListCreatedArtifactsRequest(input *ListCreatedArtifactsInput) ListCreatedArtifactsRequest {
+func (c *Client) ListCreatedArtifactsRequest(input *types.ListCreatedArtifactsInput) ListCreatedArtifactsRequest {
 	op := &aws.Operation{
 		Name:       opListCreatedArtifacts,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
+		Paginator: &aws.Paginator{
+			InputTokens:     []string{"NextToken"},
+			OutputTokens:    []string{"NextToken"},
+			LimitToken:      "MaxResults",
+			TruncationToken: "",
+		},
 	}
 
 	if input == nil {
-		input = &ListCreatedArtifactsInput{}
+		input = &types.ListCreatedArtifactsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListCreatedArtifactsOutput{})
+	req := c.newRequest(op, input, &types.ListCreatedArtifactsOutput{})
 	return ListCreatedArtifactsRequest{Request: req, Input: input, Copy: c.ListCreatedArtifactsRequest}
 }
 
@@ -122,8 +57,8 @@ func (c *Client) ListCreatedArtifactsRequest(input *ListCreatedArtifactsInput) L
 // ListCreatedArtifacts API operation.
 type ListCreatedArtifactsRequest struct {
 	*aws.Request
-	Input *ListCreatedArtifactsInput
-	Copy  func(*ListCreatedArtifactsInput) ListCreatedArtifactsRequest
+	Input *types.ListCreatedArtifactsInput
+	Copy  func(*types.ListCreatedArtifactsInput) ListCreatedArtifactsRequest
 }
 
 // Send marshals and sends the ListCreatedArtifacts API request.
@@ -135,17 +70,64 @@ func (r ListCreatedArtifactsRequest) Send(ctx context.Context) (*ListCreatedArti
 	}
 
 	resp := &ListCreatedArtifactsResponse{
-		ListCreatedArtifactsOutput: r.Request.Data.(*ListCreatedArtifactsOutput),
+		ListCreatedArtifactsOutput: r.Request.Data.(*types.ListCreatedArtifactsOutput),
 		response:                   &aws.Response{Request: r.Request},
 	}
 
 	return resp, nil
 }
 
+// NewListCreatedArtifactsRequestPaginator returns a paginator for ListCreatedArtifacts.
+// Use Next method to get the next page, and CurrentPage to get the current
+// response page from the paginator. Next will return false, if there are
+// no more pages, or an error was encountered.
+//
+// Note: This operation can generate multiple requests to a service.
+//
+//   // Example iterating over pages.
+//   req := client.ListCreatedArtifactsRequest(input)
+//   p := migrationhub.NewListCreatedArtifactsRequestPaginator(req)
+//
+//   for p.Next(context.TODO()) {
+//       page := p.CurrentPage()
+//   }
+//
+//   if err := p.Err(); err != nil {
+//       return err
+//   }
+//
+func NewListCreatedArtifactsPaginator(req ListCreatedArtifactsRequest) ListCreatedArtifactsPaginator {
+	return ListCreatedArtifactsPaginator{
+		Pager: aws.Pager{
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
+				var inCpy *types.ListCreatedArtifactsInput
+				if req.Input != nil {
+					tmp := *req.Input
+					inCpy = &tmp
+				}
+
+				newReq := req.Copy(inCpy)
+				newReq.SetContext(ctx)
+				return newReq.Request, nil
+			},
+		},
+	}
+}
+
+// ListCreatedArtifactsPaginator is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type ListCreatedArtifactsPaginator struct {
+	aws.Pager
+}
+
+func (p *ListCreatedArtifactsPaginator) CurrentPage() *types.ListCreatedArtifactsOutput {
+	return p.Pager.CurrentPage().(*types.ListCreatedArtifactsOutput)
+}
+
 // ListCreatedArtifactsResponse is the response type for the
 // ListCreatedArtifacts API operation.
 type ListCreatedArtifactsResponse struct {
-	*ListCreatedArtifactsOutput
+	*types.ListCreatedArtifactsOutput
 
 	response *aws.Response
 }

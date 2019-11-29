@@ -6,66 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-type ImportClientVpnClientCertificateRevocationListInput struct {
-	_ struct{} `type:"structure"`
-
-	// The client certificate revocation list file. For more information, see Generate
-	// a Client Certificate Revocation List (https://docs.aws.amazon.com/vpn/latest/clientvpn-admin/cvpn-working-certificates.html#cvpn-working-certificates-generate)
-	// in the AWS Client VPN Administrator Guide.
-	//
-	// CertificateRevocationList is a required field
-	CertificateRevocationList *string `type:"string" required:"true"`
-
-	// The ID of the Client VPN endpoint to which the client certificate revocation
-	// list applies.
-	//
-	// ClientVpnEndpointId is a required field
-	ClientVpnEndpointId *string `type:"string" required:"true"`
-
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have
-	// the required permissions, the error response is DryRunOperation. Otherwise,
-	// it is UnauthorizedOperation.
-	DryRun *bool `type:"boolean"`
-}
-
-// String returns the string representation
-func (s ImportClientVpnClientCertificateRevocationListInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ImportClientVpnClientCertificateRevocationListInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ImportClientVpnClientCertificateRevocationListInput"}
-
-	if s.CertificateRevocationList == nil {
-		invalidParams.Add(aws.NewErrParamRequired("CertificateRevocationList"))
-	}
-
-	if s.ClientVpnEndpointId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ClientVpnEndpointId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ImportClientVpnClientCertificateRevocationListOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Returns true if the request succeeds; otherwise, it returns an error.
-	Return *bool `locationName:"return" type:"boolean"`
-}
-
-// String returns the string representation
-func (s ImportClientVpnClientCertificateRevocationListOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opImportClientVpnClientCertificateRevocationList = "ImportClientVpnClientCertificateRevocationList"
 
@@ -86,7 +28,7 @@ const opImportClientVpnClientCertificateRevocationList = "ImportClientVpnClientC
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ImportClientVpnClientCertificateRevocationList
-func (c *Client) ImportClientVpnClientCertificateRevocationListRequest(input *ImportClientVpnClientCertificateRevocationListInput) ImportClientVpnClientCertificateRevocationListRequest {
+func (c *Client) ImportClientVpnClientCertificateRevocationListRequest(input *types.ImportClientVpnClientCertificateRevocationListInput) ImportClientVpnClientCertificateRevocationListRequest {
 	op := &aws.Operation{
 		Name:       opImportClientVpnClientCertificateRevocationList,
 		HTTPMethod: "POST",
@@ -94,10 +36,10 @@ func (c *Client) ImportClientVpnClientCertificateRevocationListRequest(input *Im
 	}
 
 	if input == nil {
-		input = &ImportClientVpnClientCertificateRevocationListInput{}
+		input = &types.ImportClientVpnClientCertificateRevocationListInput{}
 	}
 
-	req := c.newRequest(op, input, &ImportClientVpnClientCertificateRevocationListOutput{})
+	req := c.newRequest(op, input, &types.ImportClientVpnClientCertificateRevocationListOutput{})
 	return ImportClientVpnClientCertificateRevocationListRequest{Request: req, Input: input, Copy: c.ImportClientVpnClientCertificateRevocationListRequest}
 }
 
@@ -105,8 +47,8 @@ func (c *Client) ImportClientVpnClientCertificateRevocationListRequest(input *Im
 // ImportClientVpnClientCertificateRevocationList API operation.
 type ImportClientVpnClientCertificateRevocationListRequest struct {
 	*aws.Request
-	Input *ImportClientVpnClientCertificateRevocationListInput
-	Copy  func(*ImportClientVpnClientCertificateRevocationListInput) ImportClientVpnClientCertificateRevocationListRequest
+	Input *types.ImportClientVpnClientCertificateRevocationListInput
+	Copy  func(*types.ImportClientVpnClientCertificateRevocationListInput) ImportClientVpnClientCertificateRevocationListRequest
 }
 
 // Send marshals and sends the ImportClientVpnClientCertificateRevocationList API request.
@@ -118,7 +60,7 @@ func (r ImportClientVpnClientCertificateRevocationListRequest) Send(ctx context.
 	}
 
 	resp := &ImportClientVpnClientCertificateRevocationListResponse{
-		ImportClientVpnClientCertificateRevocationListOutput: r.Request.Data.(*ImportClientVpnClientCertificateRevocationListOutput),
+		ImportClientVpnClientCertificateRevocationListOutput: r.Request.Data.(*types.ImportClientVpnClientCertificateRevocationListOutput),
 		response: &aws.Response{Request: r.Request},
 	}
 
@@ -128,7 +70,7 @@ func (r ImportClientVpnClientCertificateRevocationListRequest) Send(ctx context.
 // ImportClientVpnClientCertificateRevocationListResponse is the response type for the
 // ImportClientVpnClientCertificateRevocationList API operation.
 type ImportClientVpnClientCertificateRevocationListResponse struct {
-	*ImportClientVpnClientCertificateRevocationListOutput
+	*types.ImportClientVpnClientCertificateRevocationListOutput
 
 	response *aws.Response
 }

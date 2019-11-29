@@ -6,110 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/apigateway/types"
 )
-
-// A request to get information about a collection of BasePathMapping resources.
-type GetBasePathMappingsInput struct {
-	_ struct{} `type:"structure"`
-
-	// [Required] The domain name of a BasePathMapping resource.
-	//
-	// DomainName is a required field
-	DomainName *string `location:"uri" locationName:"domain_name" type:"string" required:"true"`
-
-	// The maximum number of returned results per page. The default value is 25
-	// and the maximum value is 500.
-	Limit *int64 `location:"querystring" locationName:"limit" type:"integer"`
-
-	// The current pagination position in the paged result set.
-	Position *string `location:"querystring" locationName:"position" type:"string"`
-}
-
-// String returns the string representation
-func (s GetBasePathMappingsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetBasePathMappingsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetBasePathMappingsInput"}
-
-	if s.DomainName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DomainName"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetBasePathMappingsInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.DomainName != nil {
-		v := *s.DomainName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "domain_name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Limit != nil {
-		v := *s.Limit
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "limit", protocol.Int64Value(v), metadata)
-	}
-	if s.Position != nil {
-		v := *s.Position
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "position", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-// Represents a collection of BasePathMapping resources.
-//
-// Use Custom Domain Names (https://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-custom-domains.html)
-type GetBasePathMappingsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The current page of elements from this collection.
-	Items []BasePathMapping `locationName:"item" type:"list"`
-
-	Position *string `locationName:"position" type:"string"`
-}
-
-// String returns the string representation
-func (s GetBasePathMappingsOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetBasePathMappingsOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.Items != nil {
-		v := s.Items
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "item", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	if s.Position != nil {
-		v := *s.Position
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "position", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opGetBasePathMappings = "GetBasePathMappings"
 
@@ -124,7 +22,7 @@ const opGetBasePathMappings = "GetBasePathMappings"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) GetBasePathMappingsRequest(input *GetBasePathMappingsInput) GetBasePathMappingsRequest {
+func (c *Client) GetBasePathMappingsRequest(input *types.GetBasePathMappingsInput) GetBasePathMappingsRequest {
 	op := &aws.Operation{
 		Name:       opGetBasePathMappings,
 		HTTPMethod: "GET",
@@ -138,10 +36,10 @@ func (c *Client) GetBasePathMappingsRequest(input *GetBasePathMappingsInput) Get
 	}
 
 	if input == nil {
-		input = &GetBasePathMappingsInput{}
+		input = &types.GetBasePathMappingsInput{}
 	}
 
-	req := c.newRequest(op, input, &GetBasePathMappingsOutput{})
+	req := c.newRequest(op, input, &types.GetBasePathMappingsOutput{})
 	return GetBasePathMappingsRequest{Request: req, Input: input, Copy: c.GetBasePathMappingsRequest}
 }
 
@@ -149,8 +47,8 @@ func (c *Client) GetBasePathMappingsRequest(input *GetBasePathMappingsInput) Get
 // GetBasePathMappings API operation.
 type GetBasePathMappingsRequest struct {
 	*aws.Request
-	Input *GetBasePathMappingsInput
-	Copy  func(*GetBasePathMappingsInput) GetBasePathMappingsRequest
+	Input *types.GetBasePathMappingsInput
+	Copy  func(*types.GetBasePathMappingsInput) GetBasePathMappingsRequest
 }
 
 // Send marshals and sends the GetBasePathMappings API request.
@@ -162,7 +60,7 @@ func (r GetBasePathMappingsRequest) Send(ctx context.Context) (*GetBasePathMappi
 	}
 
 	resp := &GetBasePathMappingsResponse{
-		GetBasePathMappingsOutput: r.Request.Data.(*GetBasePathMappingsOutput),
+		GetBasePathMappingsOutput: r.Request.Data.(*types.GetBasePathMappingsOutput),
 		response:                  &aws.Response{Request: r.Request},
 	}
 
@@ -192,7 +90,7 @@ func NewGetBasePathMappingsPaginator(req GetBasePathMappingsRequest) GetBasePath
 	return GetBasePathMappingsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *GetBasePathMappingsInput
+				var inCpy *types.GetBasePathMappingsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -212,14 +110,14 @@ type GetBasePathMappingsPaginator struct {
 	aws.Pager
 }
 
-func (p *GetBasePathMappingsPaginator) CurrentPage() *GetBasePathMappingsOutput {
-	return p.Pager.CurrentPage().(*GetBasePathMappingsOutput)
+func (p *GetBasePathMappingsPaginator) CurrentPage() *types.GetBasePathMappingsOutput {
+	return p.Pager.CurrentPage().(*types.GetBasePathMappingsOutput)
 }
 
 // GetBasePathMappingsResponse is the response type for the
 // GetBasePathMappings API operation.
 type GetBasePathMappingsResponse struct {
-	*GetBasePathMappingsOutput
+	*types.GetBasePathMappingsOutput
 
 	response *aws.Response
 }

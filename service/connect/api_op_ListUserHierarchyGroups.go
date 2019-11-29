@@ -6,127 +6,16 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/connect/types"
 )
-
-type ListUserHierarchyGroupsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The identifier for your Amazon Connect instance. To find the ID of your instance,
-	// open the AWS console and select Amazon Connect. Select the alias of the instance
-	// in the Instance alias column. The instance ID is displayed in the Overview
-	// section of your instance settings. For example, the instance ID is the set
-	// of characters at the end of the instance ARN, after instance/, such as 10a4c4eb-f57e-4d4c-b602-bf39176ced07.
-	//
-	// InstanceId is a required field
-	InstanceId *string `location:"uri" locationName:"InstanceId" min:"1" type:"string" required:"true"`
-
-	// The maximum number of hierarchy groups to return.
-	MaxResults *int64 `location:"querystring" locationName:"maxResults" min:"1" type:"integer"`
-
-	// The token for the next set of results. Use the value returned in the previous
-	// response in the next request to retrieve the next set of results.
-	NextToken *string `location:"querystring" locationName:"nextToken" type:"string"`
-}
-
-// String returns the string representation
-func (s ListUserHierarchyGroupsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListUserHierarchyGroupsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListUserHierarchyGroupsInput"}
-
-	if s.InstanceId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("InstanceId"))
-	}
-	if s.InstanceId != nil && len(*s.InstanceId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("InstanceId", 1))
-	}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListUserHierarchyGroupsInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.InstanceId != nil {
-		v := *s.InstanceId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "InstanceId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.MaxResults != nil {
-		v := *s.MaxResults
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "maxResults", protocol.Int64Value(v), metadata)
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type ListUserHierarchyGroupsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A string returned in the response. Use the value returned in the response
-	// as the value of the NextToken in a subsequent request to retrieve the next
-	// set of results.
-	NextToken *string `type:"string"`
-
-	// An array of HierarchyGroupSummary objects.
-	UserHierarchyGroupSummaryList []HierarchyGroupSummary `type:"list"`
-}
-
-// String returns the string representation
-func (s ListUserHierarchyGroupsOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListUserHierarchyGroupsOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.UserHierarchyGroupSummaryList != nil {
-		v := s.UserHierarchyGroupSummaryList
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "UserHierarchyGroupSummaryList", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	return nil
-}
 
 const opListUserHierarchyGroups = "ListUserHierarchyGroups"
 
 // ListUserHierarchyGroupsRequest returns a request value for making API operation for
 // Amazon Connect Service.
 //
-// Returns a UserHierarchyGroupSummaryList, which is an array of HierarchyGroupSummary
-// objects that contain information about the hierarchy groups in your instance.
+// Provides summary information about the hierarchy groups for the specified
+// Amazon Connect instance.
 //
 //    // Example sending a request using ListUserHierarchyGroupsRequest.
 //    req := client.ListUserHierarchyGroupsRequest(params)
@@ -136,18 +25,24 @@ const opListUserHierarchyGroups = "ListUserHierarchyGroups"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListUserHierarchyGroups
-func (c *Client) ListUserHierarchyGroupsRequest(input *ListUserHierarchyGroupsInput) ListUserHierarchyGroupsRequest {
+func (c *Client) ListUserHierarchyGroupsRequest(input *types.ListUserHierarchyGroupsInput) ListUserHierarchyGroupsRequest {
 	op := &aws.Operation{
 		Name:       opListUserHierarchyGroups,
 		HTTPMethod: "GET",
 		HTTPPath:   "/user-hierarchy-groups-summary/{InstanceId}",
+		Paginator: &aws.Paginator{
+			InputTokens:     []string{"NextToken"},
+			OutputTokens:    []string{"NextToken"},
+			LimitToken:      "MaxResults",
+			TruncationToken: "",
+		},
 	}
 
 	if input == nil {
-		input = &ListUserHierarchyGroupsInput{}
+		input = &types.ListUserHierarchyGroupsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListUserHierarchyGroupsOutput{})
+	req := c.newRequest(op, input, &types.ListUserHierarchyGroupsOutput{})
 	return ListUserHierarchyGroupsRequest{Request: req, Input: input, Copy: c.ListUserHierarchyGroupsRequest}
 }
 
@@ -155,8 +50,8 @@ func (c *Client) ListUserHierarchyGroupsRequest(input *ListUserHierarchyGroupsIn
 // ListUserHierarchyGroups API operation.
 type ListUserHierarchyGroupsRequest struct {
 	*aws.Request
-	Input *ListUserHierarchyGroupsInput
-	Copy  func(*ListUserHierarchyGroupsInput) ListUserHierarchyGroupsRequest
+	Input *types.ListUserHierarchyGroupsInput
+	Copy  func(*types.ListUserHierarchyGroupsInput) ListUserHierarchyGroupsRequest
 }
 
 // Send marshals and sends the ListUserHierarchyGroups API request.
@@ -168,17 +63,64 @@ func (r ListUserHierarchyGroupsRequest) Send(ctx context.Context) (*ListUserHier
 	}
 
 	resp := &ListUserHierarchyGroupsResponse{
-		ListUserHierarchyGroupsOutput: r.Request.Data.(*ListUserHierarchyGroupsOutput),
+		ListUserHierarchyGroupsOutput: r.Request.Data.(*types.ListUserHierarchyGroupsOutput),
 		response:                      &aws.Response{Request: r.Request},
 	}
 
 	return resp, nil
 }
 
+// NewListUserHierarchyGroupsRequestPaginator returns a paginator for ListUserHierarchyGroups.
+// Use Next method to get the next page, and CurrentPage to get the current
+// response page from the paginator. Next will return false, if there are
+// no more pages, or an error was encountered.
+//
+// Note: This operation can generate multiple requests to a service.
+//
+//   // Example iterating over pages.
+//   req := client.ListUserHierarchyGroupsRequest(input)
+//   p := connect.NewListUserHierarchyGroupsRequestPaginator(req)
+//
+//   for p.Next(context.TODO()) {
+//       page := p.CurrentPage()
+//   }
+//
+//   if err := p.Err(); err != nil {
+//       return err
+//   }
+//
+func NewListUserHierarchyGroupsPaginator(req ListUserHierarchyGroupsRequest) ListUserHierarchyGroupsPaginator {
+	return ListUserHierarchyGroupsPaginator{
+		Pager: aws.Pager{
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
+				var inCpy *types.ListUserHierarchyGroupsInput
+				if req.Input != nil {
+					tmp := *req.Input
+					inCpy = &tmp
+				}
+
+				newReq := req.Copy(inCpy)
+				newReq.SetContext(ctx)
+				return newReq.Request, nil
+			},
+		},
+	}
+}
+
+// ListUserHierarchyGroupsPaginator is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type ListUserHierarchyGroupsPaginator struct {
+	aws.Pager
+}
+
+func (p *ListUserHierarchyGroupsPaginator) CurrentPage() *types.ListUserHierarchyGroupsOutput {
+	return p.Pager.CurrentPage().(*types.ListUserHierarchyGroupsOutput)
+}
+
 // ListUserHierarchyGroupsResponse is the response type for the
 // ListUserHierarchyGroups API operation.
 type ListUserHierarchyGroupsResponse struct {
-	*ListUserHierarchyGroupsOutput
+	*types.ListUserHierarchyGroupsOutput
 
 	response *aws.Response
 }

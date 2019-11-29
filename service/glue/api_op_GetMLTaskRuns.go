@@ -6,76 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/glue/types"
 )
-
-type GetMLTaskRunsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The filter criteria, in the TaskRunFilterCriteria structure, for the task
-	// run.
-	Filter *TaskRunFilterCriteria `type:"structure"`
-
-	// The maximum number of results to return.
-	MaxResults *int64 `min:"1" type:"integer"`
-
-	// A token for pagination of the results. The default is empty.
-	NextToken *string `type:"string"`
-
-	// The sorting criteria, in the TaskRunSortCriteria structure, for the task
-	// run.
-	Sort *TaskRunSortCriteria `type:"structure"`
-
-	// The unique identifier of the machine learning transform.
-	//
-	// TransformId is a required field
-	TransformId *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetMLTaskRunsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetMLTaskRunsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetMLTaskRunsInput"}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-
-	if s.TransformId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("TransformId"))
-	}
-	if s.TransformId != nil && len(*s.TransformId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("TransformId", 1))
-	}
-	if s.Sort != nil {
-		if err := s.Sort.Validate(); err != nil {
-			invalidParams.AddNested("Sort", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type GetMLTaskRunsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A pagination token, if more results are available.
-	NextToken *string `type:"string"`
-
-	// A list of task runs that are associated with the transform.
-	TaskRuns []TaskRun `type:"list"`
-}
-
-// String returns the string representation
-func (s GetMLTaskRunsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetMLTaskRuns = "GetMLTaskRuns"
 
@@ -99,7 +31,7 @@ const opGetMLTaskRuns = "GetMLTaskRuns"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetMLTaskRuns
-func (c *Client) GetMLTaskRunsRequest(input *GetMLTaskRunsInput) GetMLTaskRunsRequest {
+func (c *Client) GetMLTaskRunsRequest(input *types.GetMLTaskRunsInput) GetMLTaskRunsRequest {
 	op := &aws.Operation{
 		Name:       opGetMLTaskRuns,
 		HTTPMethod: "POST",
@@ -113,10 +45,10 @@ func (c *Client) GetMLTaskRunsRequest(input *GetMLTaskRunsInput) GetMLTaskRunsRe
 	}
 
 	if input == nil {
-		input = &GetMLTaskRunsInput{}
+		input = &types.GetMLTaskRunsInput{}
 	}
 
-	req := c.newRequest(op, input, &GetMLTaskRunsOutput{})
+	req := c.newRequest(op, input, &types.GetMLTaskRunsOutput{})
 	return GetMLTaskRunsRequest{Request: req, Input: input, Copy: c.GetMLTaskRunsRequest}
 }
 
@@ -124,8 +56,8 @@ func (c *Client) GetMLTaskRunsRequest(input *GetMLTaskRunsInput) GetMLTaskRunsRe
 // GetMLTaskRuns API operation.
 type GetMLTaskRunsRequest struct {
 	*aws.Request
-	Input *GetMLTaskRunsInput
-	Copy  func(*GetMLTaskRunsInput) GetMLTaskRunsRequest
+	Input *types.GetMLTaskRunsInput
+	Copy  func(*types.GetMLTaskRunsInput) GetMLTaskRunsRequest
 }
 
 // Send marshals and sends the GetMLTaskRuns API request.
@@ -137,7 +69,7 @@ func (r GetMLTaskRunsRequest) Send(ctx context.Context) (*GetMLTaskRunsResponse,
 	}
 
 	resp := &GetMLTaskRunsResponse{
-		GetMLTaskRunsOutput: r.Request.Data.(*GetMLTaskRunsOutput),
+		GetMLTaskRunsOutput: r.Request.Data.(*types.GetMLTaskRunsOutput),
 		response:            &aws.Response{Request: r.Request},
 	}
 
@@ -167,7 +99,7 @@ func NewGetMLTaskRunsPaginator(req GetMLTaskRunsRequest) GetMLTaskRunsPaginator 
 	return GetMLTaskRunsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *GetMLTaskRunsInput
+				var inCpy *types.GetMLTaskRunsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -187,14 +119,14 @@ type GetMLTaskRunsPaginator struct {
 	aws.Pager
 }
 
-func (p *GetMLTaskRunsPaginator) CurrentPage() *GetMLTaskRunsOutput {
-	return p.Pager.CurrentPage().(*GetMLTaskRunsOutput)
+func (p *GetMLTaskRunsPaginator) CurrentPage() *types.GetMLTaskRunsOutput {
+	return p.Pager.CurrentPage().(*types.GetMLTaskRunsOutput)
 }
 
 // GetMLTaskRunsResponse is the response type for the
 // GetMLTaskRuns API operation.
 type GetMLTaskRunsResponse struct {
-	*GetMLTaskRunsOutput
+	*types.GetMLTaskRunsOutput
 
 	response *aws.Response
 }

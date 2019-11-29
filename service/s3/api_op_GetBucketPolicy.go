@@ -6,84 +6,34 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/s3/types"
 )
-
-type GetBucketPolicyInput struct {
-	_ struct{} `type:"structure"`
-
-	// Bucket is a required field
-	Bucket *string `location:"uri" locationName:"Bucket" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetBucketPolicyInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetBucketPolicyInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetBucketPolicyInput"}
-
-	if s.Bucket == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Bucket"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-func (s *GetBucketPolicyInput) getBucket() (v string) {
-	if s.Bucket == nil {
-		return v
-	}
-	return *s.Bucket
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetBucketPolicyInput) MarshalFields(e protocol.FieldEncoder) error {
-
-	if s.Bucket != nil {
-		v := *s.Bucket
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "Bucket", protocol.StringValue(v), metadata)
-	}
-	return nil
-}
-
-type GetBucketPolicyOutput struct {
-	_ struct{} `type:"structure" payload:"Policy"`
-
-	// The bucket policy as a JSON document.
-	Policy *string `type:"string"`
-}
-
-// String returns the string representation
-func (s GetBucketPolicyOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetBucketPolicyOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.Policy != nil {
-		v := *s.Policy
-
-		metadata := protocol.Metadata{}
-		e.SetStream(protocol.PayloadTarget, "Policy", protocol.StringStream(v), metadata)
-	}
-	return nil
-}
 
 const opGetBucketPolicy = "GetBucketPolicy"
 
 // GetBucketPolicyRequest returns a request value for making API operation for
 // Amazon Simple Storage Service.
 //
-// Returns the policy of a specified bucket.
+// Returns the policy of a specified bucket. If you are using an identity other
+// than the root user of the AWS account that owns the bucket, the calling identity
+// must have the GetBucketPolicy permissions on the specified bucket and belong
+// to the bucket owner's account in order to use this operation.
+//
+// If you don't have GetBucketPolicy permissions, Amazon S3 returns a 403 Access
+// Denied error. If you have the correct permissions, but you're not using an
+// identity that belongs to the bucket owner's account, Amazon S3 returns a
+// 405 Method Not Allowed error.
+//
+// As a security precaution, the root user of the AWS account that owns a bucket
+// can always use this operation, even if the policy explicitly denies the root
+// user the ability to perform this action.
+//
+// For more information about bucket policies, see Using Bucket Policies and
+// User Policies (https://docs.aws.amazon.com/AmazonS3/latest/dev/using-iam-policies.html).
+//
+// The following operation is related to GetBucketPolicy:
+//
+//    * GetObject
 //
 //    // Example sending a request using GetBucketPolicyRequest.
 //    req := client.GetBucketPolicyRequest(params)
@@ -93,7 +43,7 @@ const opGetBucketPolicy = "GetBucketPolicy"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetBucketPolicy
-func (c *Client) GetBucketPolicyRequest(input *GetBucketPolicyInput) GetBucketPolicyRequest {
+func (c *Client) GetBucketPolicyRequest(input *types.GetBucketPolicyInput) GetBucketPolicyRequest {
 	op := &aws.Operation{
 		Name:       opGetBucketPolicy,
 		HTTPMethod: "GET",
@@ -101,10 +51,10 @@ func (c *Client) GetBucketPolicyRequest(input *GetBucketPolicyInput) GetBucketPo
 	}
 
 	if input == nil {
-		input = &GetBucketPolicyInput{}
+		input = &types.GetBucketPolicyInput{}
 	}
 
-	req := c.newRequest(op, input, &GetBucketPolicyOutput{})
+	req := c.newRequest(op, input, &types.GetBucketPolicyOutput{})
 	return GetBucketPolicyRequest{Request: req, Input: input, Copy: c.GetBucketPolicyRequest}
 }
 
@@ -112,8 +62,8 @@ func (c *Client) GetBucketPolicyRequest(input *GetBucketPolicyInput) GetBucketPo
 // GetBucketPolicy API operation.
 type GetBucketPolicyRequest struct {
 	*aws.Request
-	Input *GetBucketPolicyInput
-	Copy  func(*GetBucketPolicyInput) GetBucketPolicyRequest
+	Input *types.GetBucketPolicyInput
+	Copy  func(*types.GetBucketPolicyInput) GetBucketPolicyRequest
 }
 
 // Send marshals and sends the GetBucketPolicy API request.
@@ -125,7 +75,7 @@ func (r GetBucketPolicyRequest) Send(ctx context.Context) (*GetBucketPolicyRespo
 	}
 
 	resp := &GetBucketPolicyResponse{
-		GetBucketPolicyOutput: r.Request.Data.(*GetBucketPolicyOutput),
+		GetBucketPolicyOutput: r.Request.Data.(*types.GetBucketPolicyOutput),
 		response:              &aws.Response{Request: r.Request},
 	}
 
@@ -135,7 +85,7 @@ func (r GetBucketPolicyRequest) Send(ctx context.Context) (*GetBucketPolicyRespo
 // GetBucketPolicyResponse is the response type for the
 // GetBucketPolicy API operation.
 type GetBucketPolicyResponse struct {
-	*GetBucketPolicyOutput
+	*types.GetBucketPolicyOutput
 
 	response *aws.Response
 }

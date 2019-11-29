@@ -6,74 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/mturk/types"
 )
-
-type ListAssignmentsForHITInput struct {
-	_ struct{} `type:"structure"`
-
-	// The status of the assignments to return: Submitted | Approved | Rejected
-	AssignmentStatuses []AssignmentStatus `type:"list"`
-
-	// The ID of the HIT.
-	//
-	// HITId is a required field
-	HITId *string `min:"1" type:"string" required:"true"`
-
-	MaxResults *int64 `min:"1" type:"integer"`
-
-	// Pagination token
-	NextToken *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s ListAssignmentsForHITInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListAssignmentsForHITInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListAssignmentsForHITInput"}
-
-	if s.HITId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("HITId"))
-	}
-	if s.HITId != nil && len(*s.HITId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("HITId", 1))
-	}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-	if s.NextToken != nil && len(*s.NextToken) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ListAssignmentsForHITOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The collection of Assignment data structures returned by this call.
-	Assignments []Assignment `type:"list"`
-
-	// If the previous response was incomplete (because there is more data to retrieve),
-	// Amazon Mechanical Turk returns a pagination token in the response. You can
-	// use this pagination token to retrieve the next set of results.
-	NextToken *string `min:"1" type:"string"`
-
-	// The number of assignments on the page in the filtered results list, equivalent
-	// to the number of assignments returned by this call.
-	NumResults *int64 `type:"integer"`
-}
-
-// String returns the string representation
-func (s ListAssignmentsForHITOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListAssignmentsForHIT = "ListAssignmentsForHIT"
 
@@ -110,7 +44,7 @@ const opListAssignmentsForHIT = "ListAssignmentsForHIT"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/ListAssignmentsForHIT
-func (c *Client) ListAssignmentsForHITRequest(input *ListAssignmentsForHITInput) ListAssignmentsForHITRequest {
+func (c *Client) ListAssignmentsForHITRequest(input *types.ListAssignmentsForHITInput) ListAssignmentsForHITRequest {
 	op := &aws.Operation{
 		Name:       opListAssignmentsForHIT,
 		HTTPMethod: "POST",
@@ -124,10 +58,10 @@ func (c *Client) ListAssignmentsForHITRequest(input *ListAssignmentsForHITInput)
 	}
 
 	if input == nil {
-		input = &ListAssignmentsForHITInput{}
+		input = &types.ListAssignmentsForHITInput{}
 	}
 
-	req := c.newRequest(op, input, &ListAssignmentsForHITOutput{})
+	req := c.newRequest(op, input, &types.ListAssignmentsForHITOutput{})
 	return ListAssignmentsForHITRequest{Request: req, Input: input, Copy: c.ListAssignmentsForHITRequest}
 }
 
@@ -135,8 +69,8 @@ func (c *Client) ListAssignmentsForHITRequest(input *ListAssignmentsForHITInput)
 // ListAssignmentsForHIT API operation.
 type ListAssignmentsForHITRequest struct {
 	*aws.Request
-	Input *ListAssignmentsForHITInput
-	Copy  func(*ListAssignmentsForHITInput) ListAssignmentsForHITRequest
+	Input *types.ListAssignmentsForHITInput
+	Copy  func(*types.ListAssignmentsForHITInput) ListAssignmentsForHITRequest
 }
 
 // Send marshals and sends the ListAssignmentsForHIT API request.
@@ -148,7 +82,7 @@ func (r ListAssignmentsForHITRequest) Send(ctx context.Context) (*ListAssignment
 	}
 
 	resp := &ListAssignmentsForHITResponse{
-		ListAssignmentsForHITOutput: r.Request.Data.(*ListAssignmentsForHITOutput),
+		ListAssignmentsForHITOutput: r.Request.Data.(*types.ListAssignmentsForHITOutput),
 		response:                    &aws.Response{Request: r.Request},
 	}
 
@@ -178,7 +112,7 @@ func NewListAssignmentsForHITPaginator(req ListAssignmentsForHITRequest) ListAss
 	return ListAssignmentsForHITPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListAssignmentsForHITInput
+				var inCpy *types.ListAssignmentsForHITInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -198,14 +132,14 @@ type ListAssignmentsForHITPaginator struct {
 	aws.Pager
 }
 
-func (p *ListAssignmentsForHITPaginator) CurrentPage() *ListAssignmentsForHITOutput {
-	return p.Pager.CurrentPage().(*ListAssignmentsForHITOutput)
+func (p *ListAssignmentsForHITPaginator) CurrentPage() *types.ListAssignmentsForHITOutput {
+	return p.Pager.CurrentPage().(*types.ListAssignmentsForHITOutput)
 }
 
 // ListAssignmentsForHITResponse is the response type for the
 // ListAssignmentsForHIT API operation.
 type ListAssignmentsForHITResponse struct {
-	*ListAssignmentsForHITOutput
+	*types.ListAssignmentsForHITOutput
 
 	response *aws.Response
 }

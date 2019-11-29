@@ -4,92 +4,10 @@ package ec2
 
 import (
 	"context"
-	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-type DescribeFleetHistoryInput struct {
-	_ struct{} `type:"structure"`
-
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have
-	// the required permissions, the error response is DryRunOperation. Otherwise,
-	// it is UnauthorizedOperation.
-	DryRun *bool `type:"boolean"`
-
-	// The type of events to describe. By default, all events are described.
-	EventType FleetEventType `type:"string" enum:"true"`
-
-	// The ID of the EC2 Fleet.
-	//
-	// FleetId is a required field
-	FleetId *string `type:"string" required:"true"`
-
-	// The maximum number of results to return in a single call. Specify a value
-	// between 1 and 1000. The default value is 1000. To retrieve the remaining
-	// results, make another call with the returned NextToken value.
-	MaxResults *int64 `type:"integer"`
-
-	// The token for the next set of results.
-	NextToken *string `type:"string"`
-
-	// The start date and time for the events, in UTC format (for example, YYYY-MM-DDTHH:MM:SSZ).
-	//
-	// StartTime is a required field
-	StartTime *time.Time `type:"timestamp" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeFleetHistoryInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeFleetHistoryInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeFleetHistoryInput"}
-
-	if s.FleetId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("FleetId"))
-	}
-
-	if s.StartTime == nil {
-		invalidParams.Add(aws.NewErrParamRequired("StartTime"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribeFleetHistoryOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the EC Fleet.
-	FleetId *string `locationName:"fleetId" type:"string"`
-
-	// Information about the events in the history of the EC2 Fleet.
-	HistoryRecords []HistoryRecordEntry `locationName:"historyRecordSet" locationNameList:"item" type:"list"`
-
-	// The last date and time for the events, in UTC format (for example, YYYY-MM-DDTHH:MM:SSZ).
-	// All records up to this time were retrieved.
-	//
-	// If nextToken indicates that there are more results, this value is not present.
-	LastEvaluatedTime *time.Time `locationName:"lastEvaluatedTime" type:"timestamp"`
-
-	// The token for the next set of results.
-	NextToken *string `locationName:"nextToken" type:"string"`
-
-	// The start date and time for the events, in UTC format (for example, YYYY-MM-DDTHH:MM:SSZ).
-	StartTime *time.Time `locationName:"startTime" type:"timestamp"`
-}
-
-// String returns the string representation
-func (s DescribeFleetHistoryOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeFleetHistory = "DescribeFleetHistory"
 
@@ -106,7 +24,7 @@ const opDescribeFleetHistory = "DescribeFleetHistory"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeFleetHistory
-func (c *Client) DescribeFleetHistoryRequest(input *DescribeFleetHistoryInput) DescribeFleetHistoryRequest {
+func (c *Client) DescribeFleetHistoryRequest(input *types.DescribeFleetHistoryInput) DescribeFleetHistoryRequest {
 	op := &aws.Operation{
 		Name:       opDescribeFleetHistory,
 		HTTPMethod: "POST",
@@ -114,10 +32,10 @@ func (c *Client) DescribeFleetHistoryRequest(input *DescribeFleetHistoryInput) D
 	}
 
 	if input == nil {
-		input = &DescribeFleetHistoryInput{}
+		input = &types.DescribeFleetHistoryInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeFleetHistoryOutput{})
+	req := c.newRequest(op, input, &types.DescribeFleetHistoryOutput{})
 	return DescribeFleetHistoryRequest{Request: req, Input: input, Copy: c.DescribeFleetHistoryRequest}
 }
 
@@ -125,8 +43,8 @@ func (c *Client) DescribeFleetHistoryRequest(input *DescribeFleetHistoryInput) D
 // DescribeFleetHistory API operation.
 type DescribeFleetHistoryRequest struct {
 	*aws.Request
-	Input *DescribeFleetHistoryInput
-	Copy  func(*DescribeFleetHistoryInput) DescribeFleetHistoryRequest
+	Input *types.DescribeFleetHistoryInput
+	Copy  func(*types.DescribeFleetHistoryInput) DescribeFleetHistoryRequest
 }
 
 // Send marshals and sends the DescribeFleetHistory API request.
@@ -138,7 +56,7 @@ func (r DescribeFleetHistoryRequest) Send(ctx context.Context) (*DescribeFleetHi
 	}
 
 	resp := &DescribeFleetHistoryResponse{
-		DescribeFleetHistoryOutput: r.Request.Data.(*DescribeFleetHistoryOutput),
+		DescribeFleetHistoryOutput: r.Request.Data.(*types.DescribeFleetHistoryOutput),
 		response:                   &aws.Response{Request: r.Request},
 	}
 
@@ -148,7 +66,7 @@ func (r DescribeFleetHistoryRequest) Send(ctx context.Context) (*DescribeFleetHi
 // DescribeFleetHistoryResponse is the response type for the
 // DescribeFleetHistory API operation.
 type DescribeFleetHistoryResponse struct {
-	*DescribeFleetHistoryOutput
+	*types.DescribeFleetHistoryOutput
 
 	response *aws.Response
 }

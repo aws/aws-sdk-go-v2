@@ -6,66 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/query"
+	"github.com/aws/aws-sdk-go-v2/service/cloudformation/types"
 )
-
-// The input for the SetStackPolicy action.
-type SetStackPolicyInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name or unique stack ID that you want to associate a policy with.
-	//
-	// StackName is a required field
-	StackName *string `type:"string" required:"true"`
-
-	// Structure containing the stack policy body. For more information, go to Prevent
-	// Updates to Stack Resources (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/protect-stack-resources.html)
-	// in the AWS CloudFormation User Guide. You can specify either the StackPolicyBody
-	// or the StackPolicyURL parameter, but not both.
-	StackPolicyBody *string `min:"1" type:"string"`
-
-	// Location of a file containing the stack policy. The URL must point to a policy
-	// (maximum size: 16 KB) located in an S3 bucket in the same region as the stack.
-	// You can specify either the StackPolicyBody or the StackPolicyURL parameter,
-	// but not both.
-	StackPolicyURL *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s SetStackPolicyInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *SetStackPolicyInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "SetStackPolicyInput"}
-
-	if s.StackName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("StackName"))
-	}
-	if s.StackPolicyBody != nil && len(*s.StackPolicyBody) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("StackPolicyBody", 1))
-	}
-	if s.StackPolicyURL != nil && len(*s.StackPolicyURL) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("StackPolicyURL", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type SetStackPolicyOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s SetStackPolicyOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opSetStackPolicy = "SetStackPolicy"
 
@@ -82,7 +26,7 @@ const opSetStackPolicy = "SetStackPolicy"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/SetStackPolicy
-func (c *Client) SetStackPolicyRequest(input *SetStackPolicyInput) SetStackPolicyRequest {
+func (c *Client) SetStackPolicyRequest(input *types.SetStackPolicyInput) SetStackPolicyRequest {
 	op := &aws.Operation{
 		Name:       opSetStackPolicy,
 		HTTPMethod: "POST",
@@ -90,10 +34,10 @@ func (c *Client) SetStackPolicyRequest(input *SetStackPolicyInput) SetStackPolic
 	}
 
 	if input == nil {
-		input = &SetStackPolicyInput{}
+		input = &types.SetStackPolicyInput{}
 	}
 
-	req := c.newRequest(op, input, &SetStackPolicyOutput{})
+	req := c.newRequest(op, input, &types.SetStackPolicyOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return SetStackPolicyRequest{Request: req, Input: input, Copy: c.SetStackPolicyRequest}
@@ -103,8 +47,8 @@ func (c *Client) SetStackPolicyRequest(input *SetStackPolicyInput) SetStackPolic
 // SetStackPolicy API operation.
 type SetStackPolicyRequest struct {
 	*aws.Request
-	Input *SetStackPolicyInput
-	Copy  func(*SetStackPolicyInput) SetStackPolicyRequest
+	Input *types.SetStackPolicyInput
+	Copy  func(*types.SetStackPolicyInput) SetStackPolicyRequest
 }
 
 // Send marshals and sends the SetStackPolicy API request.
@@ -116,7 +60,7 @@ func (r SetStackPolicyRequest) Send(ctx context.Context) (*SetStackPolicyRespons
 	}
 
 	resp := &SetStackPolicyResponse{
-		SetStackPolicyOutput: r.Request.Data.(*SetStackPolicyOutput),
+		SetStackPolicyOutput: r.Request.Data.(*types.SetStackPolicyOutput),
 		response:             &aws.Response{Request: r.Request},
 	}
 
@@ -126,7 +70,7 @@ func (r SetStackPolicyRequest) Send(ctx context.Context) (*SetStackPolicyRespons
 // SetStackPolicyResponse is the response type for the
 // SetStackPolicy API operation.
 type SetStackPolicyResponse struct {
-	*SetStackPolicyOutput
+	*types.SetStackPolicyOutput
 
 	response *aws.Response
 }

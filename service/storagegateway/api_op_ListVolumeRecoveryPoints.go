@@ -6,56 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/storagegateway/types"
 )
-
-type ListVolumeRecoveryPointsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation
-	// to return a list of gateways for your account and AWS Region.
-	//
-	// GatewayARN is a required field
-	GatewayARN *string `min:"50" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s ListVolumeRecoveryPointsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListVolumeRecoveryPointsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListVolumeRecoveryPointsInput"}
-
-	if s.GatewayARN == nil {
-		invalidParams.Add(aws.NewErrParamRequired("GatewayARN"))
-	}
-	if s.GatewayARN != nil && len(*s.GatewayARN) < 50 {
-		invalidParams.Add(aws.NewErrParamMinLen("GatewayARN", 50))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ListVolumeRecoveryPointsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation
-	// to return a list of gateways for your account and AWS Region.
-	GatewayARN *string `min:"50" type:"string"`
-
-	// An array of VolumeRecoveryPointInfo objects.
-	VolumeRecoveryPointInfos []VolumeRecoveryPointInfo `type:"list"`
-}
-
-// String returns the string representation
-func (s ListVolumeRecoveryPointsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListVolumeRecoveryPoints = "ListVolumeRecoveryPoints"
 
@@ -79,7 +31,7 @@ const opListVolumeRecoveryPoints = "ListVolumeRecoveryPoints"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/ListVolumeRecoveryPoints
-func (c *Client) ListVolumeRecoveryPointsRequest(input *ListVolumeRecoveryPointsInput) ListVolumeRecoveryPointsRequest {
+func (c *Client) ListVolumeRecoveryPointsRequest(input *types.ListVolumeRecoveryPointsInput) ListVolumeRecoveryPointsRequest {
 	op := &aws.Operation{
 		Name:       opListVolumeRecoveryPoints,
 		HTTPMethod: "POST",
@@ -87,10 +39,10 @@ func (c *Client) ListVolumeRecoveryPointsRequest(input *ListVolumeRecoveryPoints
 	}
 
 	if input == nil {
-		input = &ListVolumeRecoveryPointsInput{}
+		input = &types.ListVolumeRecoveryPointsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListVolumeRecoveryPointsOutput{})
+	req := c.newRequest(op, input, &types.ListVolumeRecoveryPointsOutput{})
 	return ListVolumeRecoveryPointsRequest{Request: req, Input: input, Copy: c.ListVolumeRecoveryPointsRequest}
 }
 
@@ -98,8 +50,8 @@ func (c *Client) ListVolumeRecoveryPointsRequest(input *ListVolumeRecoveryPoints
 // ListVolumeRecoveryPoints API operation.
 type ListVolumeRecoveryPointsRequest struct {
 	*aws.Request
-	Input *ListVolumeRecoveryPointsInput
-	Copy  func(*ListVolumeRecoveryPointsInput) ListVolumeRecoveryPointsRequest
+	Input *types.ListVolumeRecoveryPointsInput
+	Copy  func(*types.ListVolumeRecoveryPointsInput) ListVolumeRecoveryPointsRequest
 }
 
 // Send marshals and sends the ListVolumeRecoveryPoints API request.
@@ -111,7 +63,7 @@ func (r ListVolumeRecoveryPointsRequest) Send(ctx context.Context) (*ListVolumeR
 	}
 
 	resp := &ListVolumeRecoveryPointsResponse{
-		ListVolumeRecoveryPointsOutput: r.Request.Data.(*ListVolumeRecoveryPointsOutput),
+		ListVolumeRecoveryPointsOutput: r.Request.Data.(*types.ListVolumeRecoveryPointsOutput),
 		response:                       &aws.Response{Request: r.Request},
 	}
 
@@ -121,7 +73,7 @@ func (r ListVolumeRecoveryPointsRequest) Send(ctx context.Context) (*ListVolumeR
 // ListVolumeRecoveryPointsResponse is the response type for the
 // ListVolumeRecoveryPoints API operation.
 type ListVolumeRecoveryPointsResponse struct {
-	*ListVolumeRecoveryPointsOutput
+	*types.ListVolumeRecoveryPointsOutput
 
 	response *aws.Response
 }

@@ -6,85 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/worklink/types"
 )
-
-type DisassociateWebsiteCertificateAuthorityInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ARN of the fleet.
-	//
-	// FleetArn is a required field
-	FleetArn *string `min:"20" type:"string" required:"true"`
-
-	// A unique identifier for the CA.
-	//
-	// WebsiteCaId is a required field
-	WebsiteCaId *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DisassociateWebsiteCertificateAuthorityInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DisassociateWebsiteCertificateAuthorityInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DisassociateWebsiteCertificateAuthorityInput"}
-
-	if s.FleetArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("FleetArn"))
-	}
-	if s.FleetArn != nil && len(*s.FleetArn) < 20 {
-		invalidParams.Add(aws.NewErrParamMinLen("FleetArn", 20))
-	}
-
-	if s.WebsiteCaId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("WebsiteCaId"))
-	}
-	if s.WebsiteCaId != nil && len(*s.WebsiteCaId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("WebsiteCaId", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DisassociateWebsiteCertificateAuthorityInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.FleetArn != nil {
-		v := *s.FleetArn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "FleetArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.WebsiteCaId != nil {
-		v := *s.WebsiteCaId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "WebsiteCaId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type DisassociateWebsiteCertificateAuthorityOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DisassociateWebsiteCertificateAuthorityOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DisassociateWebsiteCertificateAuthorityOutput) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
 
 const opDisassociateWebsiteCertificateAuthority = "DisassociateWebsiteCertificateAuthority"
 
@@ -101,7 +24,7 @@ const opDisassociateWebsiteCertificateAuthority = "DisassociateWebsiteCertificat
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/worklink-2018-09-25/DisassociateWebsiteCertificateAuthority
-func (c *Client) DisassociateWebsiteCertificateAuthorityRequest(input *DisassociateWebsiteCertificateAuthorityInput) DisassociateWebsiteCertificateAuthorityRequest {
+func (c *Client) DisassociateWebsiteCertificateAuthorityRequest(input *types.DisassociateWebsiteCertificateAuthorityInput) DisassociateWebsiteCertificateAuthorityRequest {
 	op := &aws.Operation{
 		Name:       opDisassociateWebsiteCertificateAuthority,
 		HTTPMethod: "POST",
@@ -109,10 +32,10 @@ func (c *Client) DisassociateWebsiteCertificateAuthorityRequest(input *Disassoci
 	}
 
 	if input == nil {
-		input = &DisassociateWebsiteCertificateAuthorityInput{}
+		input = &types.DisassociateWebsiteCertificateAuthorityInput{}
 	}
 
-	req := c.newRequest(op, input, &DisassociateWebsiteCertificateAuthorityOutput{})
+	req := c.newRequest(op, input, &types.DisassociateWebsiteCertificateAuthorityOutput{})
 	return DisassociateWebsiteCertificateAuthorityRequest{Request: req, Input: input, Copy: c.DisassociateWebsiteCertificateAuthorityRequest}
 }
 
@@ -120,8 +43,8 @@ func (c *Client) DisassociateWebsiteCertificateAuthorityRequest(input *Disassoci
 // DisassociateWebsiteCertificateAuthority API operation.
 type DisassociateWebsiteCertificateAuthorityRequest struct {
 	*aws.Request
-	Input *DisassociateWebsiteCertificateAuthorityInput
-	Copy  func(*DisassociateWebsiteCertificateAuthorityInput) DisassociateWebsiteCertificateAuthorityRequest
+	Input *types.DisassociateWebsiteCertificateAuthorityInput
+	Copy  func(*types.DisassociateWebsiteCertificateAuthorityInput) DisassociateWebsiteCertificateAuthorityRequest
 }
 
 // Send marshals and sends the DisassociateWebsiteCertificateAuthority API request.
@@ -133,7 +56,7 @@ func (r DisassociateWebsiteCertificateAuthorityRequest) Send(ctx context.Context
 	}
 
 	resp := &DisassociateWebsiteCertificateAuthorityResponse{
-		DisassociateWebsiteCertificateAuthorityOutput: r.Request.Data.(*DisassociateWebsiteCertificateAuthorityOutput),
+		DisassociateWebsiteCertificateAuthorityOutput: r.Request.Data.(*types.DisassociateWebsiteCertificateAuthorityOutput),
 		response: &aws.Response{Request: r.Request},
 	}
 
@@ -143,7 +66,7 @@ func (r DisassociateWebsiteCertificateAuthorityRequest) Send(ctx context.Context
 // DisassociateWebsiteCertificateAuthorityResponse is the response type for the
 // DisassociateWebsiteCertificateAuthority API operation.
 type DisassociateWebsiteCertificateAuthorityResponse struct {
-	*DisassociateWebsiteCertificateAuthorityOutput
+	*types.DisassociateWebsiteCertificateAuthorityOutput
 
 	response *aws.Response
 }

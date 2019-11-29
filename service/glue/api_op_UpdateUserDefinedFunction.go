@@ -6,81 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/glue/types"
 )
-
-type UpdateUserDefinedFunctionInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the Data Catalog where the function to be updated is located. If
-	// none is provided, the AWS account ID is used by default.
-	CatalogId *string `min:"1" type:"string"`
-
-	// The name of the catalog database where the function to be updated is located.
-	//
-	// DatabaseName is a required field
-	DatabaseName *string `min:"1" type:"string" required:"true"`
-
-	// A FunctionInput object that redefines the function in the Data Catalog.
-	//
-	// FunctionInput is a required field
-	FunctionInput *UserDefinedFunctionInput `type:"structure" required:"true"`
-
-	// The name of the function.
-	//
-	// FunctionName is a required field
-	FunctionName *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s UpdateUserDefinedFunctionInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateUserDefinedFunctionInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateUserDefinedFunctionInput"}
-	if s.CatalogId != nil && len(*s.CatalogId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("CatalogId", 1))
-	}
-
-	if s.DatabaseName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DatabaseName"))
-	}
-	if s.DatabaseName != nil && len(*s.DatabaseName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("DatabaseName", 1))
-	}
-
-	if s.FunctionInput == nil {
-		invalidParams.Add(aws.NewErrParamRequired("FunctionInput"))
-	}
-
-	if s.FunctionName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("FunctionName"))
-	}
-	if s.FunctionName != nil && len(*s.FunctionName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("FunctionName", 1))
-	}
-	if s.FunctionInput != nil {
-		if err := s.FunctionInput.Validate(); err != nil {
-			invalidParams.AddNested("FunctionInput", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type UpdateUserDefinedFunctionOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s UpdateUserDefinedFunctionOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opUpdateUserDefinedFunction = "UpdateUserDefinedFunction"
 
@@ -97,7 +24,7 @@ const opUpdateUserDefinedFunction = "UpdateUserDefinedFunction"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/UpdateUserDefinedFunction
-func (c *Client) UpdateUserDefinedFunctionRequest(input *UpdateUserDefinedFunctionInput) UpdateUserDefinedFunctionRequest {
+func (c *Client) UpdateUserDefinedFunctionRequest(input *types.UpdateUserDefinedFunctionInput) UpdateUserDefinedFunctionRequest {
 	op := &aws.Operation{
 		Name:       opUpdateUserDefinedFunction,
 		HTTPMethod: "POST",
@@ -105,10 +32,10 @@ func (c *Client) UpdateUserDefinedFunctionRequest(input *UpdateUserDefinedFuncti
 	}
 
 	if input == nil {
-		input = &UpdateUserDefinedFunctionInput{}
+		input = &types.UpdateUserDefinedFunctionInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateUserDefinedFunctionOutput{})
+	req := c.newRequest(op, input, &types.UpdateUserDefinedFunctionOutput{})
 	return UpdateUserDefinedFunctionRequest{Request: req, Input: input, Copy: c.UpdateUserDefinedFunctionRequest}
 }
 
@@ -116,8 +43,8 @@ func (c *Client) UpdateUserDefinedFunctionRequest(input *UpdateUserDefinedFuncti
 // UpdateUserDefinedFunction API operation.
 type UpdateUserDefinedFunctionRequest struct {
 	*aws.Request
-	Input *UpdateUserDefinedFunctionInput
-	Copy  func(*UpdateUserDefinedFunctionInput) UpdateUserDefinedFunctionRequest
+	Input *types.UpdateUserDefinedFunctionInput
+	Copy  func(*types.UpdateUserDefinedFunctionInput) UpdateUserDefinedFunctionRequest
 }
 
 // Send marshals and sends the UpdateUserDefinedFunction API request.
@@ -129,7 +56,7 @@ func (r UpdateUserDefinedFunctionRequest) Send(ctx context.Context) (*UpdateUser
 	}
 
 	resp := &UpdateUserDefinedFunctionResponse{
-		UpdateUserDefinedFunctionOutput: r.Request.Data.(*UpdateUserDefinedFunctionOutput),
+		UpdateUserDefinedFunctionOutput: r.Request.Data.(*types.UpdateUserDefinedFunctionOutput),
 		response:                        &aws.Response{Request: r.Request},
 	}
 
@@ -139,7 +66,7 @@ func (r UpdateUserDefinedFunctionRequest) Send(ctx context.Context) (*UpdateUser
 // UpdateUserDefinedFunctionResponse is the response type for the
 // UpdateUserDefinedFunction API operation.
 type UpdateUserDefinedFunctionResponse struct {
-	*UpdateUserDefinedFunctionOutput
+	*types.UpdateUserDefinedFunctionOutput
 
 	response *aws.Response
 }

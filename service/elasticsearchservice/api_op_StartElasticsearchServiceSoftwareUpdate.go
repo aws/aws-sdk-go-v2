@@ -6,81 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/elasticsearchservice/types"
 )
-
-// Container for the parameters to the StartElasticsearchServiceSoftwareUpdate
-// operation. Specifies the name of the Elasticsearch domain that you wish to
-// schedule a service software update on.
-type StartElasticsearchServiceSoftwareUpdateInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the domain that you want to update to the latest service software.
-	//
-	// DomainName is a required field
-	DomainName *string `min:"3" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s StartElasticsearchServiceSoftwareUpdateInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *StartElasticsearchServiceSoftwareUpdateInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "StartElasticsearchServiceSoftwareUpdateInput"}
-
-	if s.DomainName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DomainName"))
-	}
-	if s.DomainName != nil && len(*s.DomainName) < 3 {
-		invalidParams.Add(aws.NewErrParamMinLen("DomainName", 3))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s StartElasticsearchServiceSoftwareUpdateInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.DomainName != nil {
-		v := *s.DomainName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "DomainName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-// The result of a StartElasticsearchServiceSoftwareUpdate operation. Contains
-// the status of the update.
-type StartElasticsearchServiceSoftwareUpdateOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The current status of the Elasticsearch service software update.
-	ServiceSoftwareOptions *ServiceSoftwareOptions `type:"structure"`
-}
-
-// String returns the string representation
-func (s StartElasticsearchServiceSoftwareUpdateOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s StartElasticsearchServiceSoftwareUpdateOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.ServiceSoftwareOptions != nil {
-		v := s.ServiceSoftwareOptions
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "ServiceSoftwareOptions", v, metadata)
-	}
-	return nil
-}
 
 const opStartElasticsearchServiceSoftwareUpdate = "StartElasticsearchServiceSoftwareUpdate"
 
@@ -95,7 +22,7 @@ const opStartElasticsearchServiceSoftwareUpdate = "StartElasticsearchServiceSoft
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) StartElasticsearchServiceSoftwareUpdateRequest(input *StartElasticsearchServiceSoftwareUpdateInput) StartElasticsearchServiceSoftwareUpdateRequest {
+func (c *Client) StartElasticsearchServiceSoftwareUpdateRequest(input *types.StartElasticsearchServiceSoftwareUpdateInput) StartElasticsearchServiceSoftwareUpdateRequest {
 	op := &aws.Operation{
 		Name:       opStartElasticsearchServiceSoftwareUpdate,
 		HTTPMethod: "POST",
@@ -103,10 +30,10 @@ func (c *Client) StartElasticsearchServiceSoftwareUpdateRequest(input *StartElas
 	}
 
 	if input == nil {
-		input = &StartElasticsearchServiceSoftwareUpdateInput{}
+		input = &types.StartElasticsearchServiceSoftwareUpdateInput{}
 	}
 
-	req := c.newRequest(op, input, &StartElasticsearchServiceSoftwareUpdateOutput{})
+	req := c.newRequest(op, input, &types.StartElasticsearchServiceSoftwareUpdateOutput{})
 	return StartElasticsearchServiceSoftwareUpdateRequest{Request: req, Input: input, Copy: c.StartElasticsearchServiceSoftwareUpdateRequest}
 }
 
@@ -114,8 +41,8 @@ func (c *Client) StartElasticsearchServiceSoftwareUpdateRequest(input *StartElas
 // StartElasticsearchServiceSoftwareUpdate API operation.
 type StartElasticsearchServiceSoftwareUpdateRequest struct {
 	*aws.Request
-	Input *StartElasticsearchServiceSoftwareUpdateInput
-	Copy  func(*StartElasticsearchServiceSoftwareUpdateInput) StartElasticsearchServiceSoftwareUpdateRequest
+	Input *types.StartElasticsearchServiceSoftwareUpdateInput
+	Copy  func(*types.StartElasticsearchServiceSoftwareUpdateInput) StartElasticsearchServiceSoftwareUpdateRequest
 }
 
 // Send marshals and sends the StartElasticsearchServiceSoftwareUpdate API request.
@@ -127,7 +54,7 @@ func (r StartElasticsearchServiceSoftwareUpdateRequest) Send(ctx context.Context
 	}
 
 	resp := &StartElasticsearchServiceSoftwareUpdateResponse{
-		StartElasticsearchServiceSoftwareUpdateOutput: r.Request.Data.(*StartElasticsearchServiceSoftwareUpdateOutput),
+		StartElasticsearchServiceSoftwareUpdateOutput: r.Request.Data.(*types.StartElasticsearchServiceSoftwareUpdateOutput),
 		response: &aws.Response{Request: r.Request},
 	}
 
@@ -137,7 +64,7 @@ func (r StartElasticsearchServiceSoftwareUpdateRequest) Send(ctx context.Context
 // StartElasticsearchServiceSoftwareUpdateResponse is the response type for the
 // StartElasticsearchServiceSoftwareUpdate API operation.
 type StartElasticsearchServiceSoftwareUpdateResponse struct {
-	*StartElasticsearchServiceSoftwareUpdateOutput
+	*types.StartElasticsearchServiceSoftwareUpdateOutput
 
 	response *aws.Response
 }

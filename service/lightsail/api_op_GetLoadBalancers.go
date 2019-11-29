@@ -6,36 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/lightsail/types"
 )
-
-type GetLoadBalancersInput struct {
-	_ struct{} `type:"structure"`
-
-	// A token used for paginating the results from your GetLoadBalancers request.
-	PageToken *string `locationName:"pageToken" type:"string"`
-}
-
-// String returns the string representation
-func (s GetLoadBalancersInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type GetLoadBalancersOutput struct {
-	_ struct{} `type:"structure"`
-
-	// An array of LoadBalancer objects describing your load balancers.
-	LoadBalancers []LoadBalancer `locationName:"loadBalancers" type:"list"`
-
-	// A token used for advancing to the next page of results from your GetLoadBalancers
-	// request.
-	NextPageToken *string `locationName:"nextPageToken" type:"string"`
-}
-
-// String returns the string representation
-func (s GetLoadBalancersOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetLoadBalancers = "GetLoadBalancers"
 
@@ -56,7 +28,7 @@ const opGetLoadBalancers = "GetLoadBalancers"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetLoadBalancers
-func (c *Client) GetLoadBalancersRequest(input *GetLoadBalancersInput) GetLoadBalancersRequest {
+func (c *Client) GetLoadBalancersRequest(input *types.GetLoadBalancersInput) GetLoadBalancersRequest {
 	op := &aws.Operation{
 		Name:       opGetLoadBalancers,
 		HTTPMethod: "POST",
@@ -64,10 +36,10 @@ func (c *Client) GetLoadBalancersRequest(input *GetLoadBalancersInput) GetLoadBa
 	}
 
 	if input == nil {
-		input = &GetLoadBalancersInput{}
+		input = &types.GetLoadBalancersInput{}
 	}
 
-	req := c.newRequest(op, input, &GetLoadBalancersOutput{})
+	req := c.newRequest(op, input, &types.GetLoadBalancersOutput{})
 	return GetLoadBalancersRequest{Request: req, Input: input, Copy: c.GetLoadBalancersRequest}
 }
 
@@ -75,8 +47,8 @@ func (c *Client) GetLoadBalancersRequest(input *GetLoadBalancersInput) GetLoadBa
 // GetLoadBalancers API operation.
 type GetLoadBalancersRequest struct {
 	*aws.Request
-	Input *GetLoadBalancersInput
-	Copy  func(*GetLoadBalancersInput) GetLoadBalancersRequest
+	Input *types.GetLoadBalancersInput
+	Copy  func(*types.GetLoadBalancersInput) GetLoadBalancersRequest
 }
 
 // Send marshals and sends the GetLoadBalancers API request.
@@ -88,7 +60,7 @@ func (r GetLoadBalancersRequest) Send(ctx context.Context) (*GetLoadBalancersRes
 	}
 
 	resp := &GetLoadBalancersResponse{
-		GetLoadBalancersOutput: r.Request.Data.(*GetLoadBalancersOutput),
+		GetLoadBalancersOutput: r.Request.Data.(*types.GetLoadBalancersOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -98,7 +70,7 @@ func (r GetLoadBalancersRequest) Send(ctx context.Context) (*GetLoadBalancersRes
 // GetLoadBalancersResponse is the response type for the
 // GetLoadBalancers API operation.
 type GetLoadBalancersResponse struct {
-	*GetLoadBalancersOutput
+	*types.GetLoadBalancersOutput
 
 	response *aws.Response
 }

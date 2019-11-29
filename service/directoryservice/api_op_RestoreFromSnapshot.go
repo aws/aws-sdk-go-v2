@@ -6,47 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/directoryservice/types"
 )
-
-// An object representing the inputs for the RestoreFromSnapshot operation.
-type RestoreFromSnapshotInput struct {
-	_ struct{} `type:"structure"`
-
-	// The identifier of the snapshot to restore from.
-	//
-	// SnapshotId is a required field
-	SnapshotId *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s RestoreFromSnapshotInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *RestoreFromSnapshotInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "RestoreFromSnapshotInput"}
-
-	if s.SnapshotId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("SnapshotId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Contains the results of the RestoreFromSnapshot operation.
-type RestoreFromSnapshotOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s RestoreFromSnapshotOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opRestoreFromSnapshot = "RestoreFromSnapshot"
 
@@ -71,7 +32,7 @@ const opRestoreFromSnapshot = "RestoreFromSnapshot"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/RestoreFromSnapshot
-func (c *Client) RestoreFromSnapshotRequest(input *RestoreFromSnapshotInput) RestoreFromSnapshotRequest {
+func (c *Client) RestoreFromSnapshotRequest(input *types.RestoreFromSnapshotInput) RestoreFromSnapshotRequest {
 	op := &aws.Operation{
 		Name:       opRestoreFromSnapshot,
 		HTTPMethod: "POST",
@@ -79,10 +40,10 @@ func (c *Client) RestoreFromSnapshotRequest(input *RestoreFromSnapshotInput) Res
 	}
 
 	if input == nil {
-		input = &RestoreFromSnapshotInput{}
+		input = &types.RestoreFromSnapshotInput{}
 	}
 
-	req := c.newRequest(op, input, &RestoreFromSnapshotOutput{})
+	req := c.newRequest(op, input, &types.RestoreFromSnapshotOutput{})
 	return RestoreFromSnapshotRequest{Request: req, Input: input, Copy: c.RestoreFromSnapshotRequest}
 }
 
@@ -90,8 +51,8 @@ func (c *Client) RestoreFromSnapshotRequest(input *RestoreFromSnapshotInput) Res
 // RestoreFromSnapshot API operation.
 type RestoreFromSnapshotRequest struct {
 	*aws.Request
-	Input *RestoreFromSnapshotInput
-	Copy  func(*RestoreFromSnapshotInput) RestoreFromSnapshotRequest
+	Input *types.RestoreFromSnapshotInput
+	Copy  func(*types.RestoreFromSnapshotInput) RestoreFromSnapshotRequest
 }
 
 // Send marshals and sends the RestoreFromSnapshot API request.
@@ -103,7 +64,7 @@ func (r RestoreFromSnapshotRequest) Send(ctx context.Context) (*RestoreFromSnaps
 	}
 
 	resp := &RestoreFromSnapshotResponse{
-		RestoreFromSnapshotOutput: r.Request.Data.(*RestoreFromSnapshotOutput),
+		RestoreFromSnapshotOutput: r.Request.Data.(*types.RestoreFromSnapshotOutput),
 		response:                  &aws.Response{Request: r.Request},
 	}
 
@@ -113,7 +74,7 @@ func (r RestoreFromSnapshotRequest) Send(ctx context.Context) (*RestoreFromSnaps
 // RestoreFromSnapshotResponse is the response type for the
 // RestoreFromSnapshot API operation.
 type RestoreFromSnapshotResponse struct {
-	*RestoreFromSnapshotOutput
+	*types.RestoreFromSnapshotOutput
 
 	response *aws.Response
 }

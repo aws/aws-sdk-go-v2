@@ -6,51 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ssm/types"
 )
-
-type DeletePatchBaselineInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the patch baseline to delete.
-	//
-	// BaselineId is a required field
-	BaselineId *string `min:"20" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeletePatchBaselineInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeletePatchBaselineInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeletePatchBaselineInput"}
-
-	if s.BaselineId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("BaselineId"))
-	}
-	if s.BaselineId != nil && len(*s.BaselineId) < 20 {
-		invalidParams.Add(aws.NewErrParamMinLen("BaselineId", 20))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeletePatchBaselineOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the deleted patch baseline.
-	BaselineId *string `min:"20" type:"string"`
-}
-
-// String returns the string representation
-func (s DeletePatchBaselineOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeletePatchBaseline = "DeletePatchBaseline"
 
@@ -67,7 +24,7 @@ const opDeletePatchBaseline = "DeletePatchBaseline"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DeletePatchBaseline
-func (c *Client) DeletePatchBaselineRequest(input *DeletePatchBaselineInput) DeletePatchBaselineRequest {
+func (c *Client) DeletePatchBaselineRequest(input *types.DeletePatchBaselineInput) DeletePatchBaselineRequest {
 	op := &aws.Operation{
 		Name:       opDeletePatchBaseline,
 		HTTPMethod: "POST",
@@ -75,10 +32,10 @@ func (c *Client) DeletePatchBaselineRequest(input *DeletePatchBaselineInput) Del
 	}
 
 	if input == nil {
-		input = &DeletePatchBaselineInput{}
+		input = &types.DeletePatchBaselineInput{}
 	}
 
-	req := c.newRequest(op, input, &DeletePatchBaselineOutput{})
+	req := c.newRequest(op, input, &types.DeletePatchBaselineOutput{})
 	return DeletePatchBaselineRequest{Request: req, Input: input, Copy: c.DeletePatchBaselineRequest}
 }
 
@@ -86,8 +43,8 @@ func (c *Client) DeletePatchBaselineRequest(input *DeletePatchBaselineInput) Del
 // DeletePatchBaseline API operation.
 type DeletePatchBaselineRequest struct {
 	*aws.Request
-	Input *DeletePatchBaselineInput
-	Copy  func(*DeletePatchBaselineInput) DeletePatchBaselineRequest
+	Input *types.DeletePatchBaselineInput
+	Copy  func(*types.DeletePatchBaselineInput) DeletePatchBaselineRequest
 }
 
 // Send marshals and sends the DeletePatchBaseline API request.
@@ -99,7 +56,7 @@ func (r DeletePatchBaselineRequest) Send(ctx context.Context) (*DeletePatchBasel
 	}
 
 	resp := &DeletePatchBaselineResponse{
-		DeletePatchBaselineOutput: r.Request.Data.(*DeletePatchBaselineOutput),
+		DeletePatchBaselineOutput: r.Request.Data.(*types.DeletePatchBaselineOutput),
 		response:                  &aws.Response{Request: r.Request},
 	}
 
@@ -109,7 +66,7 @@ func (r DeletePatchBaselineRequest) Send(ctx context.Context) (*DeletePatchBasel
 // DeletePatchBaselineResponse is the response type for the
 // DeletePatchBaseline API operation.
 type DeletePatchBaselineResponse struct {
-	*DeletePatchBaselineOutput
+	*types.DeletePatchBaselineOutput
 
 	response *aws.Response
 }

@@ -6,37 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/sms/types"
 )
-
-type DeleteAppInput struct {
-	_ struct{} `type:"structure"`
-
-	// ID of the application to delete.
-	AppId *string `locationName:"appId" type:"string"`
-
-	// While deleting the application, stop all replication jobs corresponding to
-	// the servers in the application.
-	ForceStopAppReplication *bool `locationName:"forceStopAppReplication" type:"boolean"`
-
-	// While deleting the application, terminate the stack corresponding to the
-	// application.
-	ForceTerminateApp *bool `locationName:"forceTerminateApp" type:"boolean"`
-}
-
-// String returns the string representation
-func (s DeleteAppInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type DeleteAppOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteAppOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteApp = "DeleteApp"
 
@@ -55,7 +26,7 @@ const opDeleteApp = "DeleteApp"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sms-2016-10-24/DeleteApp
-func (c *Client) DeleteAppRequest(input *DeleteAppInput) DeleteAppRequest {
+func (c *Client) DeleteAppRequest(input *types.DeleteAppInput) DeleteAppRequest {
 	op := &aws.Operation{
 		Name:       opDeleteApp,
 		HTTPMethod: "POST",
@@ -63,10 +34,10 @@ func (c *Client) DeleteAppRequest(input *DeleteAppInput) DeleteAppRequest {
 	}
 
 	if input == nil {
-		input = &DeleteAppInput{}
+		input = &types.DeleteAppInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteAppOutput{})
+	req := c.newRequest(op, input, &types.DeleteAppOutput{})
 	return DeleteAppRequest{Request: req, Input: input, Copy: c.DeleteAppRequest}
 }
 
@@ -74,8 +45,8 @@ func (c *Client) DeleteAppRequest(input *DeleteAppInput) DeleteAppRequest {
 // DeleteApp API operation.
 type DeleteAppRequest struct {
 	*aws.Request
-	Input *DeleteAppInput
-	Copy  func(*DeleteAppInput) DeleteAppRequest
+	Input *types.DeleteAppInput
+	Copy  func(*types.DeleteAppInput) DeleteAppRequest
 }
 
 // Send marshals and sends the DeleteApp API request.
@@ -87,7 +58,7 @@ func (r DeleteAppRequest) Send(ctx context.Context) (*DeleteAppResponse, error) 
 	}
 
 	resp := &DeleteAppResponse{
-		DeleteAppOutput: r.Request.Data.(*DeleteAppOutput),
+		DeleteAppOutput: r.Request.Data.(*types.DeleteAppOutput),
 		response:        &aws.Response{Request: r.Request},
 	}
 
@@ -97,7 +68,7 @@ func (r DeleteAppRequest) Send(ctx context.Context) (*DeleteAppResponse, error) 
 // DeleteAppResponse is the response type for the
 // DeleteApp API operation.
 type DeleteAppResponse struct {
-	*DeleteAppOutput
+	*types.DeleteAppOutput
 
 	response *aws.Response
 }

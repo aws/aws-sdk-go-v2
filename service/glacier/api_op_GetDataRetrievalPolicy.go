@@ -6,80 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/glacier/types"
 )
-
-// Input for GetDataRetrievalPolicy.
-type GetDataRetrievalPolicyInput struct {
-	_ struct{} `type:"structure"`
-
-	// The AccountId value is the AWS account ID. This value must match the AWS
-	// account ID associated with the credentials used to sign the request. You
-	// can either specify an AWS account ID or optionally a single '-' (hyphen),
-	// in which case Amazon Glacier uses the AWS account ID associated with the
-	// credentials used to sign the request. If you specify your account ID, do
-	// not include any hyphens ('-') in the ID.
-	//
-	// AccountId is a required field
-	AccountId *string `location:"uri" locationName:"accountId" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetDataRetrievalPolicyInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetDataRetrievalPolicyInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetDataRetrievalPolicyInput"}
-
-	if s.AccountId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("AccountId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetDataRetrievalPolicyInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.AccountId != nil {
-		v := *s.AccountId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "accountId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-// Contains the Amazon S3 Glacier response to the GetDataRetrievalPolicy request.
-type GetDataRetrievalPolicyOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Contains the returned data retrieval policy in JSON format.
-	Policy *DataRetrievalPolicy `type:"structure"`
-}
-
-// String returns the string representation
-func (s GetDataRetrievalPolicyOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetDataRetrievalPolicyOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.Policy != nil {
-		v := s.Policy
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "Policy", v, metadata)
-	}
-	return nil
-}
 
 const opGetDataRetrievalPolicy = "GetDataRetrievalPolicy"
 
@@ -96,7 +24,7 @@ const opGetDataRetrievalPolicy = "GetDataRetrievalPolicy"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) GetDataRetrievalPolicyRequest(input *GetDataRetrievalPolicyInput) GetDataRetrievalPolicyRequest {
+func (c *Client) GetDataRetrievalPolicyRequest(input *types.GetDataRetrievalPolicyInput) GetDataRetrievalPolicyRequest {
 	op := &aws.Operation{
 		Name:       opGetDataRetrievalPolicy,
 		HTTPMethod: "GET",
@@ -104,10 +32,10 @@ func (c *Client) GetDataRetrievalPolicyRequest(input *GetDataRetrievalPolicyInpu
 	}
 
 	if input == nil {
-		input = &GetDataRetrievalPolicyInput{}
+		input = &types.GetDataRetrievalPolicyInput{}
 	}
 
-	req := c.newRequest(op, input, &GetDataRetrievalPolicyOutput{})
+	req := c.newRequest(op, input, &types.GetDataRetrievalPolicyOutput{})
 	return GetDataRetrievalPolicyRequest{Request: req, Input: input, Copy: c.GetDataRetrievalPolicyRequest}
 }
 
@@ -115,8 +43,8 @@ func (c *Client) GetDataRetrievalPolicyRequest(input *GetDataRetrievalPolicyInpu
 // GetDataRetrievalPolicy API operation.
 type GetDataRetrievalPolicyRequest struct {
 	*aws.Request
-	Input *GetDataRetrievalPolicyInput
-	Copy  func(*GetDataRetrievalPolicyInput) GetDataRetrievalPolicyRequest
+	Input *types.GetDataRetrievalPolicyInput
+	Copy  func(*types.GetDataRetrievalPolicyInput) GetDataRetrievalPolicyRequest
 }
 
 // Send marshals and sends the GetDataRetrievalPolicy API request.
@@ -128,7 +56,7 @@ func (r GetDataRetrievalPolicyRequest) Send(ctx context.Context) (*GetDataRetrie
 	}
 
 	resp := &GetDataRetrievalPolicyResponse{
-		GetDataRetrievalPolicyOutput: r.Request.Data.(*GetDataRetrievalPolicyOutput),
+		GetDataRetrievalPolicyOutput: r.Request.Data.(*types.GetDataRetrievalPolicyOutput),
 		response:                     &aws.Response{Request: r.Request},
 	}
 
@@ -138,7 +66,7 @@ func (r GetDataRetrievalPolicyRequest) Send(ctx context.Context) (*GetDataRetrie
 // GetDataRetrievalPolicyResponse is the response type for the
 // GetDataRetrievalPolicy API operation.
 type GetDataRetrievalPolicyResponse struct {
-	*GetDataRetrievalPolicyOutput
+	*types.GetDataRetrievalPolicyOutput
 
 	response *aws.Response
 }

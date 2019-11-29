@@ -10,6 +10,7 @@ package cognitoidentityiface
 
 import (
 	"github.com/aws/aws-sdk-go-v2/service/cognitoidentity"
+	"github.com/aws/aws-sdk-go-v2/service/cognitoidentity/types"
 )
 
 // ClientAPI provides an interface to enable mocking the
@@ -43,7 +44,7 @@ import (
 //    type mockClientClient struct {
 //        cognitoidentityiface.ClientPI
 //    }
-//    func (m *mockClientClient) CreateIdentityPool(input *cognitoidentity.CreateIdentityPoolInput) (*cognitoidentity.CreateIdentityPoolOutput, error) {
+//    func (m *mockClientClient) CreateIdentityPool(input *types.CreateIdentityPoolInput) (*types.CreateIdentityPoolOutput, error) {
 //        // mock response/functionality
 //    }
 //
@@ -61,47 +62,47 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type ClientAPI interface {
-	CreateIdentityPoolRequest(*cognitoidentity.CreateIdentityPoolInput) cognitoidentity.CreateIdentityPoolRequest
+	CreateIdentityPoolRequest(*types.CreateIdentityPoolInput) cognitoidentity.CreateIdentityPoolRequest
 
-	DeleteIdentitiesRequest(*cognitoidentity.DeleteIdentitiesInput) cognitoidentity.DeleteIdentitiesRequest
+	DeleteIdentitiesRequest(*types.DeleteIdentitiesInput) cognitoidentity.DeleteIdentitiesRequest
 
-	DeleteIdentityPoolRequest(*cognitoidentity.DeleteIdentityPoolInput) cognitoidentity.DeleteIdentityPoolRequest
+	DeleteIdentityPoolRequest(*types.DeleteIdentityPoolInput) cognitoidentity.DeleteIdentityPoolRequest
 
-	DescribeIdentityRequest(*cognitoidentity.DescribeIdentityInput) cognitoidentity.DescribeIdentityRequest
+	DescribeIdentityRequest(*types.DescribeIdentityInput) cognitoidentity.DescribeIdentityRequest
 
-	DescribeIdentityPoolRequest(*cognitoidentity.DescribeIdentityPoolInput) cognitoidentity.DescribeIdentityPoolRequest
+	DescribeIdentityPoolRequest(*types.DescribeIdentityPoolInput) cognitoidentity.DescribeIdentityPoolRequest
 
-	GetCredentialsForIdentityRequest(*cognitoidentity.GetCredentialsForIdentityInput) cognitoidentity.GetCredentialsForIdentityRequest
+	GetCredentialsForIdentityRequest(*types.GetCredentialsForIdentityInput) cognitoidentity.GetCredentialsForIdentityRequest
 
-	GetIdRequest(*cognitoidentity.GetIdInput) cognitoidentity.GetIdRequest
+	GetIdRequest(*types.GetIdInput) cognitoidentity.GetIdRequest
 
-	GetIdentityPoolRolesRequest(*cognitoidentity.GetIdentityPoolRolesInput) cognitoidentity.GetIdentityPoolRolesRequest
+	GetIdentityPoolRolesRequest(*types.GetIdentityPoolRolesInput) cognitoidentity.GetIdentityPoolRolesRequest
 
-	GetOpenIdTokenRequest(*cognitoidentity.GetOpenIdTokenInput) cognitoidentity.GetOpenIdTokenRequest
+	GetOpenIdTokenRequest(*types.GetOpenIdTokenInput) cognitoidentity.GetOpenIdTokenRequest
 
-	GetOpenIdTokenForDeveloperIdentityRequest(*cognitoidentity.GetOpenIdTokenForDeveloperIdentityInput) cognitoidentity.GetOpenIdTokenForDeveloperIdentityRequest
+	GetOpenIdTokenForDeveloperIdentityRequest(*types.GetOpenIdTokenForDeveloperIdentityInput) cognitoidentity.GetOpenIdTokenForDeveloperIdentityRequest
 
-	ListIdentitiesRequest(*cognitoidentity.ListIdentitiesInput) cognitoidentity.ListIdentitiesRequest
+	ListIdentitiesRequest(*types.ListIdentitiesInput) cognitoidentity.ListIdentitiesRequest
 
-	ListIdentityPoolsRequest(*cognitoidentity.ListIdentityPoolsInput) cognitoidentity.ListIdentityPoolsRequest
+	ListIdentityPoolsRequest(*types.ListIdentityPoolsInput) cognitoidentity.ListIdentityPoolsRequest
 
-	ListTagsForResourceRequest(*cognitoidentity.ListTagsForResourceInput) cognitoidentity.ListTagsForResourceRequest
+	ListTagsForResourceRequest(*types.ListTagsForResourceInput) cognitoidentity.ListTagsForResourceRequest
 
-	LookupDeveloperIdentityRequest(*cognitoidentity.LookupDeveloperIdentityInput) cognitoidentity.LookupDeveloperIdentityRequest
+	LookupDeveloperIdentityRequest(*types.LookupDeveloperIdentityInput) cognitoidentity.LookupDeveloperIdentityRequest
 
-	MergeDeveloperIdentitiesRequest(*cognitoidentity.MergeDeveloperIdentitiesInput) cognitoidentity.MergeDeveloperIdentitiesRequest
+	MergeDeveloperIdentitiesRequest(*types.MergeDeveloperIdentitiesInput) cognitoidentity.MergeDeveloperIdentitiesRequest
 
-	SetIdentityPoolRolesRequest(*cognitoidentity.SetIdentityPoolRolesInput) cognitoidentity.SetIdentityPoolRolesRequest
+	SetIdentityPoolRolesRequest(*types.SetIdentityPoolRolesInput) cognitoidentity.SetIdentityPoolRolesRequest
 
-	TagResourceRequest(*cognitoidentity.TagResourceInput) cognitoidentity.TagResourceRequest
+	TagResourceRequest(*types.TagResourceInput) cognitoidentity.TagResourceRequest
 
-	UnlinkDeveloperIdentityRequest(*cognitoidentity.UnlinkDeveloperIdentityInput) cognitoidentity.UnlinkDeveloperIdentityRequest
+	UnlinkDeveloperIdentityRequest(*types.UnlinkDeveloperIdentityInput) cognitoidentity.UnlinkDeveloperIdentityRequest
 
-	UnlinkIdentityRequest(*cognitoidentity.UnlinkIdentityInput) cognitoidentity.UnlinkIdentityRequest
+	UnlinkIdentityRequest(*types.UnlinkIdentityInput) cognitoidentity.UnlinkIdentityRequest
 
-	UntagResourceRequest(*cognitoidentity.UntagResourceInput) cognitoidentity.UntagResourceRequest
+	UntagResourceRequest(*types.UntagResourceInput) cognitoidentity.UntagResourceRequest
 
-	UpdateIdentityPoolRequest(*cognitoidentity.UpdateIdentityPoolInput) cognitoidentity.UpdateIdentityPoolRequest
+	UpdateIdentityPoolRequest(*types.UpdateIdentityPoolInput) cognitoidentity.UpdateIdentityPoolRequest
 }
 
 var _ ClientAPI = (*cognitoidentity.Client)(nil)

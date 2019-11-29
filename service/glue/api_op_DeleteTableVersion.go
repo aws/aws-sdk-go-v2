@@ -6,81 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/glue/types"
 )
-
-type DeleteTableVersionInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the Data Catalog where the tables reside. If none is provided,
-	// the AWS account ID is used by default.
-	CatalogId *string `min:"1" type:"string"`
-
-	// The database in the catalog in which the table resides. For Hive compatibility,
-	// this name is entirely lowercase.
-	//
-	// DatabaseName is a required field
-	DatabaseName *string `min:"1" type:"string" required:"true"`
-
-	// The name of the table. For Hive compatibility, this name is entirely lowercase.
-	//
-	// TableName is a required field
-	TableName *string `min:"1" type:"string" required:"true"`
-
-	// The ID of the table version to be deleted. A VersionID is a string representation
-	// of an integer. Each version is incremented by 1.
-	//
-	// VersionId is a required field
-	VersionId *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteTableVersionInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteTableVersionInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteTableVersionInput"}
-	if s.CatalogId != nil && len(*s.CatalogId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("CatalogId", 1))
-	}
-
-	if s.DatabaseName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DatabaseName"))
-	}
-	if s.DatabaseName != nil && len(*s.DatabaseName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("DatabaseName", 1))
-	}
-
-	if s.TableName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("TableName"))
-	}
-	if s.TableName != nil && len(*s.TableName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("TableName", 1))
-	}
-
-	if s.VersionId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("VersionId"))
-	}
-	if s.VersionId != nil && len(*s.VersionId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("VersionId", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteTableVersionOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteTableVersionOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteTableVersion = "DeleteTableVersion"
 
@@ -97,7 +24,7 @@ const opDeleteTableVersion = "DeleteTableVersion"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DeleteTableVersion
-func (c *Client) DeleteTableVersionRequest(input *DeleteTableVersionInput) DeleteTableVersionRequest {
+func (c *Client) DeleteTableVersionRequest(input *types.DeleteTableVersionInput) DeleteTableVersionRequest {
 	op := &aws.Operation{
 		Name:       opDeleteTableVersion,
 		HTTPMethod: "POST",
@@ -105,10 +32,10 @@ func (c *Client) DeleteTableVersionRequest(input *DeleteTableVersionInput) Delet
 	}
 
 	if input == nil {
-		input = &DeleteTableVersionInput{}
+		input = &types.DeleteTableVersionInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteTableVersionOutput{})
+	req := c.newRequest(op, input, &types.DeleteTableVersionOutput{})
 	return DeleteTableVersionRequest{Request: req, Input: input, Copy: c.DeleteTableVersionRequest}
 }
 
@@ -116,8 +43,8 @@ func (c *Client) DeleteTableVersionRequest(input *DeleteTableVersionInput) Delet
 // DeleteTableVersion API operation.
 type DeleteTableVersionRequest struct {
 	*aws.Request
-	Input *DeleteTableVersionInput
-	Copy  func(*DeleteTableVersionInput) DeleteTableVersionRequest
+	Input *types.DeleteTableVersionInput
+	Copy  func(*types.DeleteTableVersionInput) DeleteTableVersionRequest
 }
 
 // Send marshals and sends the DeleteTableVersion API request.
@@ -129,7 +56,7 @@ func (r DeleteTableVersionRequest) Send(ctx context.Context) (*DeleteTableVersio
 	}
 
 	resp := &DeleteTableVersionResponse{
-		DeleteTableVersionOutput: r.Request.Data.(*DeleteTableVersionOutput),
+		DeleteTableVersionOutput: r.Request.Data.(*types.DeleteTableVersionOutput),
 		response:                 &aws.Response{Request: r.Request},
 	}
 
@@ -139,7 +66,7 @@ func (r DeleteTableVersionRequest) Send(ctx context.Context) (*DeleteTableVersio
 // DeleteTableVersionResponse is the response type for the
 // DeleteTableVersion API operation.
 type DeleteTableVersionResponse struct {
-	*DeleteTableVersionOutput
+	*types.DeleteTableVersionOutput
 
 	response *aws.Response
 }

@@ -6,63 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
+	"github.com/aws/aws-sdk-go-v2/service/codecommit/types"
 )
-
-// Represents the input of an update default branch operation.
-type UpdateDefaultBranchInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the branch to set as the default.
-	//
-	// DefaultBranchName is a required field
-	DefaultBranchName *string `locationName:"defaultBranchName" min:"1" type:"string" required:"true"`
-
-	// The name of the repository to set or change the default branch for.
-	//
-	// RepositoryName is a required field
-	RepositoryName *string `locationName:"repositoryName" min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s UpdateDefaultBranchInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateDefaultBranchInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateDefaultBranchInput"}
-
-	if s.DefaultBranchName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DefaultBranchName"))
-	}
-	if s.DefaultBranchName != nil && len(*s.DefaultBranchName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("DefaultBranchName", 1))
-	}
-
-	if s.RepositoryName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("RepositoryName"))
-	}
-	if s.RepositoryName != nil && len(*s.RepositoryName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("RepositoryName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type UpdateDefaultBranchOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s UpdateDefaultBranchOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opUpdateDefaultBranch = "UpdateDefaultBranch"
 
@@ -83,7 +30,7 @@ const opUpdateDefaultBranch = "UpdateDefaultBranch"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/UpdateDefaultBranch
-func (c *Client) UpdateDefaultBranchRequest(input *UpdateDefaultBranchInput) UpdateDefaultBranchRequest {
+func (c *Client) UpdateDefaultBranchRequest(input *types.UpdateDefaultBranchInput) UpdateDefaultBranchRequest {
 	op := &aws.Operation{
 		Name:       opUpdateDefaultBranch,
 		HTTPMethod: "POST",
@@ -91,10 +38,10 @@ func (c *Client) UpdateDefaultBranchRequest(input *UpdateDefaultBranchInput) Upd
 	}
 
 	if input == nil {
-		input = &UpdateDefaultBranchInput{}
+		input = &types.UpdateDefaultBranchInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateDefaultBranchOutput{})
+	req := c.newRequest(op, input, &types.UpdateDefaultBranchOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return UpdateDefaultBranchRequest{Request: req, Input: input, Copy: c.UpdateDefaultBranchRequest}
@@ -104,8 +51,8 @@ func (c *Client) UpdateDefaultBranchRequest(input *UpdateDefaultBranchInput) Upd
 // UpdateDefaultBranch API operation.
 type UpdateDefaultBranchRequest struct {
 	*aws.Request
-	Input *UpdateDefaultBranchInput
-	Copy  func(*UpdateDefaultBranchInput) UpdateDefaultBranchRequest
+	Input *types.UpdateDefaultBranchInput
+	Copy  func(*types.UpdateDefaultBranchInput) UpdateDefaultBranchRequest
 }
 
 // Send marshals and sends the UpdateDefaultBranch API request.
@@ -117,7 +64,7 @@ func (r UpdateDefaultBranchRequest) Send(ctx context.Context) (*UpdateDefaultBra
 	}
 
 	resp := &UpdateDefaultBranchResponse{
-		UpdateDefaultBranchOutput: r.Request.Data.(*UpdateDefaultBranchOutput),
+		UpdateDefaultBranchOutput: r.Request.Data.(*types.UpdateDefaultBranchOutput),
 		response:                  &aws.Response{Request: r.Request},
 	}
 
@@ -127,7 +74,7 @@ func (r UpdateDefaultBranchRequest) Send(ctx context.Context) (*UpdateDefaultBra
 // UpdateDefaultBranchResponse is the response type for the
 // UpdateDefaultBranch API operation.
 type UpdateDefaultBranchResponse struct {
-	*UpdateDefaultBranchOutput
+	*types.UpdateDefaultBranchOutput
 
 	response *aws.Response
 }

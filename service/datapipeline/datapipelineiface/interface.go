@@ -10,6 +10,7 @@ package datapipelineiface
 
 import (
 	"github.com/aws/aws-sdk-go-v2/service/datapipeline"
+	"github.com/aws/aws-sdk-go-v2/service/datapipeline/types"
 )
 
 // ClientAPI provides an interface to enable mocking the
@@ -43,7 +44,7 @@ import (
 //    type mockClientClient struct {
 //        datapipelineiface.ClientPI
 //    }
-//    func (m *mockClientClient) ActivatePipeline(input *datapipeline.ActivatePipelineInput) (*datapipeline.ActivatePipelineOutput, error) {
+//    func (m *mockClientClient) ActivatePipeline(input *types.ActivatePipelineInput) (*types.ActivatePipelineOutput, error) {
 //        // mock response/functionality
 //    }
 //
@@ -61,43 +62,43 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type ClientAPI interface {
-	ActivatePipelineRequest(*datapipeline.ActivatePipelineInput) datapipeline.ActivatePipelineRequest
+	ActivatePipelineRequest(*types.ActivatePipelineInput) datapipeline.ActivatePipelineRequest
 
-	AddTagsRequest(*datapipeline.AddTagsInput) datapipeline.AddTagsRequest
+	AddTagsRequest(*types.AddTagsInput) datapipeline.AddTagsRequest
 
-	CreatePipelineRequest(*datapipeline.CreatePipelineInput) datapipeline.CreatePipelineRequest
+	CreatePipelineRequest(*types.CreatePipelineInput) datapipeline.CreatePipelineRequest
 
-	DeactivatePipelineRequest(*datapipeline.DeactivatePipelineInput) datapipeline.DeactivatePipelineRequest
+	DeactivatePipelineRequest(*types.DeactivatePipelineInput) datapipeline.DeactivatePipelineRequest
 
-	DeletePipelineRequest(*datapipeline.DeletePipelineInput) datapipeline.DeletePipelineRequest
+	DeletePipelineRequest(*types.DeletePipelineInput) datapipeline.DeletePipelineRequest
 
-	DescribeObjectsRequest(*datapipeline.DescribeObjectsInput) datapipeline.DescribeObjectsRequest
+	DescribeObjectsRequest(*types.DescribeObjectsInput) datapipeline.DescribeObjectsRequest
 
-	DescribePipelinesRequest(*datapipeline.DescribePipelinesInput) datapipeline.DescribePipelinesRequest
+	DescribePipelinesRequest(*types.DescribePipelinesInput) datapipeline.DescribePipelinesRequest
 
-	EvaluateExpressionRequest(*datapipeline.EvaluateExpressionInput) datapipeline.EvaluateExpressionRequest
+	EvaluateExpressionRequest(*types.EvaluateExpressionInput) datapipeline.EvaluateExpressionRequest
 
-	GetPipelineDefinitionRequest(*datapipeline.GetPipelineDefinitionInput) datapipeline.GetPipelineDefinitionRequest
+	GetPipelineDefinitionRequest(*types.GetPipelineDefinitionInput) datapipeline.GetPipelineDefinitionRequest
 
-	ListPipelinesRequest(*datapipeline.ListPipelinesInput) datapipeline.ListPipelinesRequest
+	ListPipelinesRequest(*types.ListPipelinesInput) datapipeline.ListPipelinesRequest
 
-	PollForTaskRequest(*datapipeline.PollForTaskInput) datapipeline.PollForTaskRequest
+	PollForTaskRequest(*types.PollForTaskInput) datapipeline.PollForTaskRequest
 
-	PutPipelineDefinitionRequest(*datapipeline.PutPipelineDefinitionInput) datapipeline.PutPipelineDefinitionRequest
+	PutPipelineDefinitionRequest(*types.PutPipelineDefinitionInput) datapipeline.PutPipelineDefinitionRequest
 
-	QueryObjectsRequest(*datapipeline.QueryObjectsInput) datapipeline.QueryObjectsRequest
+	QueryObjectsRequest(*types.QueryObjectsInput) datapipeline.QueryObjectsRequest
 
-	RemoveTagsRequest(*datapipeline.RemoveTagsInput) datapipeline.RemoveTagsRequest
+	RemoveTagsRequest(*types.RemoveTagsInput) datapipeline.RemoveTagsRequest
 
-	ReportTaskProgressRequest(*datapipeline.ReportTaskProgressInput) datapipeline.ReportTaskProgressRequest
+	ReportTaskProgressRequest(*types.ReportTaskProgressInput) datapipeline.ReportTaskProgressRequest
 
-	ReportTaskRunnerHeartbeatRequest(*datapipeline.ReportTaskRunnerHeartbeatInput) datapipeline.ReportTaskRunnerHeartbeatRequest
+	ReportTaskRunnerHeartbeatRequest(*types.ReportTaskRunnerHeartbeatInput) datapipeline.ReportTaskRunnerHeartbeatRequest
 
-	SetStatusRequest(*datapipeline.SetStatusInput) datapipeline.SetStatusRequest
+	SetStatusRequest(*types.SetStatusInput) datapipeline.SetStatusRequest
 
-	SetTaskStatusRequest(*datapipeline.SetTaskStatusInput) datapipeline.SetTaskStatusRequest
+	SetTaskStatusRequest(*types.SetTaskStatusInput) datapipeline.SetTaskStatusRequest
 
-	ValidatePipelineDefinitionRequest(*datapipeline.ValidatePipelineDefinitionInput) datapipeline.ValidatePipelineDefinitionRequest
+	ValidatePipelineDefinitionRequest(*types.ValidatePipelineDefinitionInput) datapipeline.ValidatePipelineDefinitionRequest
 }
 
 var _ ClientAPI = (*datapipeline.Client)(nil)

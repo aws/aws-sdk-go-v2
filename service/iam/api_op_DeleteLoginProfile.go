@@ -6,54 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/query"
+	"github.com/aws/aws-sdk-go-v2/service/iam/types"
 )
-
-type DeleteLoginProfileInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the user whose password you want to delete.
-	//
-	// This parameter allows (through its regex pattern (http://wikipedia.org/wiki/regex))
-	// a string of characters consisting of upper and lowercase alphanumeric characters
-	// with no spaces. You can also include any of the following characters: _+=,.@-
-	//
-	// UserName is a required field
-	UserName *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteLoginProfileInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteLoginProfileInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteLoginProfileInput"}
-
-	if s.UserName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("UserName"))
-	}
-	if s.UserName != nil && len(*s.UserName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("UserName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteLoginProfileOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteLoginProfileOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteLoginProfile = "DeleteLoginProfile"
 
@@ -76,7 +32,7 @@ const opDeleteLoginProfile = "DeleteLoginProfile"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeleteLoginProfile
-func (c *Client) DeleteLoginProfileRequest(input *DeleteLoginProfileInput) DeleteLoginProfileRequest {
+func (c *Client) DeleteLoginProfileRequest(input *types.DeleteLoginProfileInput) DeleteLoginProfileRequest {
 	op := &aws.Operation{
 		Name:       opDeleteLoginProfile,
 		HTTPMethod: "POST",
@@ -84,10 +40,10 @@ func (c *Client) DeleteLoginProfileRequest(input *DeleteLoginProfileInput) Delet
 	}
 
 	if input == nil {
-		input = &DeleteLoginProfileInput{}
+		input = &types.DeleteLoginProfileInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteLoginProfileOutput{})
+	req := c.newRequest(op, input, &types.DeleteLoginProfileOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return DeleteLoginProfileRequest{Request: req, Input: input, Copy: c.DeleteLoginProfileRequest}
@@ -97,8 +53,8 @@ func (c *Client) DeleteLoginProfileRequest(input *DeleteLoginProfileInput) Delet
 // DeleteLoginProfile API operation.
 type DeleteLoginProfileRequest struct {
 	*aws.Request
-	Input *DeleteLoginProfileInput
-	Copy  func(*DeleteLoginProfileInput) DeleteLoginProfileRequest
+	Input *types.DeleteLoginProfileInput
+	Copy  func(*types.DeleteLoginProfileInput) DeleteLoginProfileRequest
 }
 
 // Send marshals and sends the DeleteLoginProfile API request.
@@ -110,7 +66,7 @@ func (r DeleteLoginProfileRequest) Send(ctx context.Context) (*DeleteLoginProfil
 	}
 
 	resp := &DeleteLoginProfileResponse{
-		DeleteLoginProfileOutput: r.Request.Data.(*DeleteLoginProfileOutput),
+		DeleteLoginProfileOutput: r.Request.Data.(*types.DeleteLoginProfileOutput),
 		response:                 &aws.Response{Request: r.Request},
 	}
 
@@ -120,7 +76,7 @@ func (r DeleteLoginProfileRequest) Send(ctx context.Context) (*DeleteLoginProfil
 // DeleteLoginProfileResponse is the response type for the
 // DeleteLoginProfile API operation.
 type DeleteLoginProfileResponse struct {
-	*DeleteLoginProfileOutput
+	*types.DeleteLoginProfileOutput
 
 	response *aws.Response
 }

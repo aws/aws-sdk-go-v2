@@ -6,128 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/signer/types"
 )
-
-type GetSigningProfileInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the target signing profile.
-	//
-	// ProfileName is a required field
-	ProfileName *string `location:"uri" locationName:"profileName" min:"2" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetSigningProfileInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetSigningProfileInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetSigningProfileInput"}
-
-	if s.ProfileName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ProfileName"))
-	}
-	if s.ProfileName != nil && len(*s.ProfileName) < 2 {
-		invalidParams.Add(aws.NewErrParamMinLen("ProfileName", 2))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetSigningProfileInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.ProfileName != nil {
-		v := *s.ProfileName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "profileName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type GetSigningProfileOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A list of overrides applied by the target signing profile for signing operations.
-	Overrides *SigningPlatformOverrides `locationName:"overrides" type:"structure"`
-
-	// The ID of the platform that is used by the target signing profile.
-	PlatformId *string `locationName:"platformId" type:"string"`
-
-	// The name of the target signing profile.
-	ProfileName *string `locationName:"profileName" min:"2" type:"string"`
-
-	// The ARN of the certificate that the target profile uses for signing operations.
-	SigningMaterial *SigningMaterial `locationName:"signingMaterial" type:"structure"`
-
-	// A map of key-value pairs for signing operations that is attached to the target
-	// signing profile.
-	SigningParameters map[string]string `locationName:"signingParameters" type:"map"`
-
-	// The status of the target signing profile.
-	Status SigningProfileStatus `locationName:"status" type:"string" enum:"true"`
-}
-
-// String returns the string representation
-func (s GetSigningProfileOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetSigningProfileOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.Overrides != nil {
-		v := s.Overrides
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "overrides", v, metadata)
-	}
-	if s.PlatformId != nil {
-		v := *s.PlatformId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "platformId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.ProfileName != nil {
-		v := *s.ProfileName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "profileName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.SigningMaterial != nil {
-		v := s.SigningMaterial
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "signingMaterial", v, metadata)
-	}
-	if s.SigningParameters != nil {
-		v := s.SigningParameters
-
-		metadata := protocol.Metadata{}
-		ms0 := e.Map(protocol.BodyTarget, "signingParameters", metadata)
-		ms0.Start()
-		for k1, v1 := range v {
-			ms0.MapSetValue(k1, protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
-		}
-		ms0.End()
-
-	}
-	if len(s.Status) > 0 {
-		v := s.Status
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "status", protocol.QuotedValue{ValueMarshaler: v}, metadata)
-	}
-	return nil
-}
 
 const opGetSigningProfile = "GetSigningProfile"
 
@@ -144,7 +24,7 @@ const opGetSigningProfile = "GetSigningProfile"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/signer-2017-08-25/GetSigningProfile
-func (c *Client) GetSigningProfileRequest(input *GetSigningProfileInput) GetSigningProfileRequest {
+func (c *Client) GetSigningProfileRequest(input *types.GetSigningProfileInput) GetSigningProfileRequest {
 	op := &aws.Operation{
 		Name:       opGetSigningProfile,
 		HTTPMethod: "GET",
@@ -152,10 +32,10 @@ func (c *Client) GetSigningProfileRequest(input *GetSigningProfileInput) GetSign
 	}
 
 	if input == nil {
-		input = &GetSigningProfileInput{}
+		input = &types.GetSigningProfileInput{}
 	}
 
-	req := c.newRequest(op, input, &GetSigningProfileOutput{})
+	req := c.newRequest(op, input, &types.GetSigningProfileOutput{})
 	return GetSigningProfileRequest{Request: req, Input: input, Copy: c.GetSigningProfileRequest}
 }
 
@@ -163,8 +43,8 @@ func (c *Client) GetSigningProfileRequest(input *GetSigningProfileInput) GetSign
 // GetSigningProfile API operation.
 type GetSigningProfileRequest struct {
 	*aws.Request
-	Input *GetSigningProfileInput
-	Copy  func(*GetSigningProfileInput) GetSigningProfileRequest
+	Input *types.GetSigningProfileInput
+	Copy  func(*types.GetSigningProfileInput) GetSigningProfileRequest
 }
 
 // Send marshals and sends the GetSigningProfile API request.
@@ -176,7 +56,7 @@ func (r GetSigningProfileRequest) Send(ctx context.Context) (*GetSigningProfileR
 	}
 
 	resp := &GetSigningProfileResponse{
-		GetSigningProfileOutput: r.Request.Data.(*GetSigningProfileOutput),
+		GetSigningProfileOutput: r.Request.Data.(*types.GetSigningProfileOutput),
 		response:                &aws.Response{Request: r.Request},
 	}
 
@@ -186,7 +66,7 @@ func (r GetSigningProfileRequest) Send(ctx context.Context) (*GetSigningProfileR
 // GetSigningProfileResponse is the response type for the
 // GetSigningProfile API operation.
 type GetSigningProfileResponse struct {
-	*GetSigningProfileOutput
+	*types.GetSigningProfileOutput
 
 	response *aws.Response
 }

@@ -6,65 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/query"
+	"github.com/aws/aws-sdk-go-v2/service/iam/types"
 )
-
-type AddClientIDToOpenIDConnectProviderInput struct {
-	_ struct{} `type:"structure"`
-
-	// The client ID (also known as audience) to add to the IAM OpenID Connect provider
-	// resource.
-	//
-	// ClientID is a required field
-	ClientID *string `min:"1" type:"string" required:"true"`
-
-	// The Amazon Resource Name (ARN) of the IAM OpenID Connect (OIDC) provider
-	// resource to add the client ID to. You can get a list of OIDC provider ARNs
-	// by using the ListOpenIDConnectProviders operation.
-	//
-	// OpenIDConnectProviderArn is a required field
-	OpenIDConnectProviderArn *string `min:"20" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s AddClientIDToOpenIDConnectProviderInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *AddClientIDToOpenIDConnectProviderInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "AddClientIDToOpenIDConnectProviderInput"}
-
-	if s.ClientID == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ClientID"))
-	}
-	if s.ClientID != nil && len(*s.ClientID) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ClientID", 1))
-	}
-
-	if s.OpenIDConnectProviderArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("OpenIDConnectProviderArn"))
-	}
-	if s.OpenIDConnectProviderArn != nil && len(*s.OpenIDConnectProviderArn) < 20 {
-		invalidParams.Add(aws.NewErrParamMinLen("OpenIDConnectProviderArn", 20))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type AddClientIDToOpenIDConnectProviderOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s AddClientIDToOpenIDConnectProviderOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opAddClientIDToOpenIDConnectProvider = "AddClientIDToOpenIDConnectProvider"
 
@@ -85,7 +30,7 @@ const opAddClientIDToOpenIDConnectProvider = "AddClientIDToOpenIDConnectProvider
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/AddClientIDToOpenIDConnectProvider
-func (c *Client) AddClientIDToOpenIDConnectProviderRequest(input *AddClientIDToOpenIDConnectProviderInput) AddClientIDToOpenIDConnectProviderRequest {
+func (c *Client) AddClientIDToOpenIDConnectProviderRequest(input *types.AddClientIDToOpenIDConnectProviderInput) AddClientIDToOpenIDConnectProviderRequest {
 	op := &aws.Operation{
 		Name:       opAddClientIDToOpenIDConnectProvider,
 		HTTPMethod: "POST",
@@ -93,10 +38,10 @@ func (c *Client) AddClientIDToOpenIDConnectProviderRequest(input *AddClientIDToO
 	}
 
 	if input == nil {
-		input = &AddClientIDToOpenIDConnectProviderInput{}
+		input = &types.AddClientIDToOpenIDConnectProviderInput{}
 	}
 
-	req := c.newRequest(op, input, &AddClientIDToOpenIDConnectProviderOutput{})
+	req := c.newRequest(op, input, &types.AddClientIDToOpenIDConnectProviderOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return AddClientIDToOpenIDConnectProviderRequest{Request: req, Input: input, Copy: c.AddClientIDToOpenIDConnectProviderRequest}
@@ -106,8 +51,8 @@ func (c *Client) AddClientIDToOpenIDConnectProviderRequest(input *AddClientIDToO
 // AddClientIDToOpenIDConnectProvider API operation.
 type AddClientIDToOpenIDConnectProviderRequest struct {
 	*aws.Request
-	Input *AddClientIDToOpenIDConnectProviderInput
-	Copy  func(*AddClientIDToOpenIDConnectProviderInput) AddClientIDToOpenIDConnectProviderRequest
+	Input *types.AddClientIDToOpenIDConnectProviderInput
+	Copy  func(*types.AddClientIDToOpenIDConnectProviderInput) AddClientIDToOpenIDConnectProviderRequest
 }
 
 // Send marshals and sends the AddClientIDToOpenIDConnectProvider API request.
@@ -119,7 +64,7 @@ func (r AddClientIDToOpenIDConnectProviderRequest) Send(ctx context.Context) (*A
 	}
 
 	resp := &AddClientIDToOpenIDConnectProviderResponse{
-		AddClientIDToOpenIDConnectProviderOutput: r.Request.Data.(*AddClientIDToOpenIDConnectProviderOutput),
+		AddClientIDToOpenIDConnectProviderOutput: r.Request.Data.(*types.AddClientIDToOpenIDConnectProviderOutput),
 		response:                                 &aws.Response{Request: r.Request},
 	}
 
@@ -129,7 +74,7 @@ func (r AddClientIDToOpenIDConnectProviderRequest) Send(ctx context.Context) (*A
 // AddClientIDToOpenIDConnectProviderResponse is the response type for the
 // AddClientIDToOpenIDConnectProvider API operation.
 type AddClientIDToOpenIDConnectProviderResponse struct {
-	*AddClientIDToOpenIDConnectProviderOutput
+	*types.AddClientIDToOpenIDConnectProviderOutput
 
 	response *aws.Response
 }

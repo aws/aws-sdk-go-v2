@@ -4,61 +4,10 @@ package workspaces
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/workspaces/types"
 )
-
-type RebootWorkspacesInput struct {
-	_ struct{} `type:"structure"`
-
-	// The WorkSpaces to reboot. You can specify up to 25 WorkSpaces.
-	//
-	// RebootWorkspaceRequests is a required field
-	RebootWorkspaceRequests []RebootRequest `min:"1" type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s RebootWorkspacesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *RebootWorkspacesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "RebootWorkspacesInput"}
-
-	if s.RebootWorkspaceRequests == nil {
-		invalidParams.Add(aws.NewErrParamRequired("RebootWorkspaceRequests"))
-	}
-	if s.RebootWorkspaceRequests != nil && len(s.RebootWorkspaceRequests) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("RebootWorkspaceRequests", 1))
-	}
-	if s.RebootWorkspaceRequests != nil {
-		for i, v := range s.RebootWorkspaceRequests {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "RebootWorkspaceRequests", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type RebootWorkspacesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Information about the WorkSpaces that could not be rebooted.
-	FailedRequests []FailedWorkspaceChangeRequest `type:"list"`
-}
-
-// String returns the string representation
-func (s RebootWorkspacesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opRebootWorkspaces = "RebootWorkspaces"
 
@@ -79,7 +28,7 @@ const opRebootWorkspaces = "RebootWorkspaces"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/RebootWorkspaces
-func (c *Client) RebootWorkspacesRequest(input *RebootWorkspacesInput) RebootWorkspacesRequest {
+func (c *Client) RebootWorkspacesRequest(input *types.RebootWorkspacesInput) RebootWorkspacesRequest {
 	op := &aws.Operation{
 		Name:       opRebootWorkspaces,
 		HTTPMethod: "POST",
@@ -87,10 +36,10 @@ func (c *Client) RebootWorkspacesRequest(input *RebootWorkspacesInput) RebootWor
 	}
 
 	if input == nil {
-		input = &RebootWorkspacesInput{}
+		input = &types.RebootWorkspacesInput{}
 	}
 
-	req := c.newRequest(op, input, &RebootWorkspacesOutput{})
+	req := c.newRequest(op, input, &types.RebootWorkspacesOutput{})
 	return RebootWorkspacesRequest{Request: req, Input: input, Copy: c.RebootWorkspacesRequest}
 }
 
@@ -98,8 +47,8 @@ func (c *Client) RebootWorkspacesRequest(input *RebootWorkspacesInput) RebootWor
 // RebootWorkspaces API operation.
 type RebootWorkspacesRequest struct {
 	*aws.Request
-	Input *RebootWorkspacesInput
-	Copy  func(*RebootWorkspacesInput) RebootWorkspacesRequest
+	Input *types.RebootWorkspacesInput
+	Copy  func(*types.RebootWorkspacesInput) RebootWorkspacesRequest
 }
 
 // Send marshals and sends the RebootWorkspaces API request.
@@ -111,7 +60,7 @@ func (r RebootWorkspacesRequest) Send(ctx context.Context) (*RebootWorkspacesRes
 	}
 
 	resp := &RebootWorkspacesResponse{
-		RebootWorkspacesOutput: r.Request.Data.(*RebootWorkspacesOutput),
+		RebootWorkspacesOutput: r.Request.Data.(*types.RebootWorkspacesOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -121,7 +70,7 @@ func (r RebootWorkspacesRequest) Send(ctx context.Context) (*RebootWorkspacesRes
 // RebootWorkspacesResponse is the response type for the
 // RebootWorkspaces API operation.
 type RebootWorkspacesResponse struct {
-	*RebootWorkspacesOutput
+	*types.RebootWorkspacesOutput
 
 	response *aws.Response
 }

@@ -6,74 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/cloudsearch/types"
 )
-
-// Container for the parameters to the DefineIndexField operation. Specifies
-// the name of the domain you want to update and the index field configuration.
-type DefineIndexFieldInput struct {
-	_ struct{} `type:"structure"`
-
-	// A string that represents the name of a domain. Domain names are unique across
-	// the domains owned by an account within an AWS region. Domain names start
-	// with a letter or number and can contain the following characters: a-z (lowercase),
-	// 0-9, and - (hyphen).
-	//
-	// DomainName is a required field
-	DomainName *string `min:"3" type:"string" required:"true"`
-
-	// The index field and field options you want to configure.
-	//
-	// IndexField is a required field
-	IndexField *IndexField `type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s DefineIndexFieldInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DefineIndexFieldInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DefineIndexFieldInput"}
-
-	if s.DomainName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DomainName"))
-	}
-	if s.DomainName != nil && len(*s.DomainName) < 3 {
-		invalidParams.Add(aws.NewErrParamMinLen("DomainName", 3))
-	}
-
-	if s.IndexField == nil {
-		invalidParams.Add(aws.NewErrParamRequired("IndexField"))
-	}
-	if s.IndexField != nil {
-		if err := s.IndexField.Validate(); err != nil {
-			invalidParams.AddNested("IndexField", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// The result of a DefineIndexField request. Contains the status of the newly-configured
-// index field.
-type DefineIndexFieldOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The value of an IndexField and its current status.
-	//
-	// IndexField is a required field
-	IndexField *IndexFieldStatus `type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s DefineIndexFieldOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDefineIndexField = "DefineIndexField"
 
@@ -95,7 +29,7 @@ const opDefineIndexField = "DefineIndexField"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) DefineIndexFieldRequest(input *DefineIndexFieldInput) DefineIndexFieldRequest {
+func (c *Client) DefineIndexFieldRequest(input *types.DefineIndexFieldInput) DefineIndexFieldRequest {
 	op := &aws.Operation{
 		Name:       opDefineIndexField,
 		HTTPMethod: "POST",
@@ -103,10 +37,10 @@ func (c *Client) DefineIndexFieldRequest(input *DefineIndexFieldInput) DefineInd
 	}
 
 	if input == nil {
-		input = &DefineIndexFieldInput{}
+		input = &types.DefineIndexFieldInput{}
 	}
 
-	req := c.newRequest(op, input, &DefineIndexFieldOutput{})
+	req := c.newRequest(op, input, &types.DefineIndexFieldOutput{})
 	return DefineIndexFieldRequest{Request: req, Input: input, Copy: c.DefineIndexFieldRequest}
 }
 
@@ -114,8 +48,8 @@ func (c *Client) DefineIndexFieldRequest(input *DefineIndexFieldInput) DefineInd
 // DefineIndexField API operation.
 type DefineIndexFieldRequest struct {
 	*aws.Request
-	Input *DefineIndexFieldInput
-	Copy  func(*DefineIndexFieldInput) DefineIndexFieldRequest
+	Input *types.DefineIndexFieldInput
+	Copy  func(*types.DefineIndexFieldInput) DefineIndexFieldRequest
 }
 
 // Send marshals and sends the DefineIndexField API request.
@@ -127,7 +61,7 @@ func (r DefineIndexFieldRequest) Send(ctx context.Context) (*DefineIndexFieldRes
 	}
 
 	resp := &DefineIndexFieldResponse{
-		DefineIndexFieldOutput: r.Request.Data.(*DefineIndexFieldOutput),
+		DefineIndexFieldOutput: r.Request.Data.(*types.DefineIndexFieldOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -137,7 +71,7 @@ func (r DefineIndexFieldRequest) Send(ctx context.Context) (*DefineIndexFieldRes
 // DefineIndexFieldResponse is the response type for the
 // DefineIndexField API operation.
 type DefineIndexFieldResponse struct {
-	*DefineIndexFieldOutput
+	*types.DefineIndexFieldOutput
 
 	response *aws.Response
 }

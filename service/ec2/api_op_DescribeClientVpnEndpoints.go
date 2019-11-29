@@ -6,66 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-type DescribeClientVpnEndpointsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the Client VPN endpoint.
-	ClientVpnEndpointIds []string `locationName:"ClientVpnEndpointId" locationNameList:"item" type:"list"`
-
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have
-	// the required permissions, the error response is DryRunOperation. Otherwise,
-	// it is UnauthorizedOperation.
-	DryRun *bool `type:"boolean"`
-
-	// One or more filters. Filter names and values are case-sensitive.
-	Filters []Filter `locationName:"Filter" locationNameList:"Filter" type:"list"`
-
-	// The maximum number of results to return for the request in a single page.
-	// The remaining results can be seen by sending another request with the nextToken
-	// value.
-	MaxResults *int64 `min:"5" type:"integer"`
-
-	// The token to retrieve the next page of results.
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeClientVpnEndpointsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeClientVpnEndpointsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeClientVpnEndpointsInput"}
-	if s.MaxResults != nil && *s.MaxResults < 5 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 5))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribeClientVpnEndpointsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Information about the Client VPN endpoints.
-	ClientVpnEndpoints []VpnEndpoint `locationName:"clientVpnEndpoint" locationNameList:"item" type:"list"`
-
-	// The token to use to retrieve the next page of results. This value is null
-	// when there are no more results to return.
-	NextToken *string `locationName:"nextToken" type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeClientVpnEndpointsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeClientVpnEndpoints = "DescribeClientVpnEndpoints"
 
@@ -82,7 +24,7 @@ const opDescribeClientVpnEndpoints = "DescribeClientVpnEndpoints"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeClientVpnEndpoints
-func (c *Client) DescribeClientVpnEndpointsRequest(input *DescribeClientVpnEndpointsInput) DescribeClientVpnEndpointsRequest {
+func (c *Client) DescribeClientVpnEndpointsRequest(input *types.DescribeClientVpnEndpointsInput) DescribeClientVpnEndpointsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeClientVpnEndpoints,
 		HTTPMethod: "POST",
@@ -96,10 +38,10 @@ func (c *Client) DescribeClientVpnEndpointsRequest(input *DescribeClientVpnEndpo
 	}
 
 	if input == nil {
-		input = &DescribeClientVpnEndpointsInput{}
+		input = &types.DescribeClientVpnEndpointsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeClientVpnEndpointsOutput{})
+	req := c.newRequest(op, input, &types.DescribeClientVpnEndpointsOutput{})
 	return DescribeClientVpnEndpointsRequest{Request: req, Input: input, Copy: c.DescribeClientVpnEndpointsRequest}
 }
 
@@ -107,8 +49,8 @@ func (c *Client) DescribeClientVpnEndpointsRequest(input *DescribeClientVpnEndpo
 // DescribeClientVpnEndpoints API operation.
 type DescribeClientVpnEndpointsRequest struct {
 	*aws.Request
-	Input *DescribeClientVpnEndpointsInput
-	Copy  func(*DescribeClientVpnEndpointsInput) DescribeClientVpnEndpointsRequest
+	Input *types.DescribeClientVpnEndpointsInput
+	Copy  func(*types.DescribeClientVpnEndpointsInput) DescribeClientVpnEndpointsRequest
 }
 
 // Send marshals and sends the DescribeClientVpnEndpoints API request.
@@ -120,7 +62,7 @@ func (r DescribeClientVpnEndpointsRequest) Send(ctx context.Context) (*DescribeC
 	}
 
 	resp := &DescribeClientVpnEndpointsResponse{
-		DescribeClientVpnEndpointsOutput: r.Request.Data.(*DescribeClientVpnEndpointsOutput),
+		DescribeClientVpnEndpointsOutput: r.Request.Data.(*types.DescribeClientVpnEndpointsOutput),
 		response:                         &aws.Response{Request: r.Request},
 	}
 
@@ -150,7 +92,7 @@ func NewDescribeClientVpnEndpointsPaginator(req DescribeClientVpnEndpointsReques
 	return DescribeClientVpnEndpointsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *DescribeClientVpnEndpointsInput
+				var inCpy *types.DescribeClientVpnEndpointsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -170,14 +112,14 @@ type DescribeClientVpnEndpointsPaginator struct {
 	aws.Pager
 }
 
-func (p *DescribeClientVpnEndpointsPaginator) CurrentPage() *DescribeClientVpnEndpointsOutput {
-	return p.Pager.CurrentPage().(*DescribeClientVpnEndpointsOutput)
+func (p *DescribeClientVpnEndpointsPaginator) CurrentPage() *types.DescribeClientVpnEndpointsOutput {
+	return p.Pager.CurrentPage().(*types.DescribeClientVpnEndpointsOutput)
 }
 
 // DescribeClientVpnEndpointsResponse is the response type for the
 // DescribeClientVpnEndpoints API operation.
 type DescribeClientVpnEndpointsResponse struct {
-	*DescribeClientVpnEndpointsOutput
+	*types.DescribeClientVpnEndpointsOutput
 
 	response *aws.Response
 }

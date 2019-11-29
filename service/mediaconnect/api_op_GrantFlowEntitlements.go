@@ -4,119 +4,10 @@ package mediaconnect
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/mediaconnect/types"
 )
-
-// Grants an entitlement on a flow.
-type GrantFlowEntitlementsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The list of entitlements that you want to grant.
-	//
-	// Entitlements is a required field
-	Entitlements []GrantEntitlementRequest `locationName:"entitlements" type:"list" required:"true"`
-
-	// FlowArn is a required field
-	FlowArn *string `location:"uri" locationName:"flowArn" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GrantFlowEntitlementsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GrantFlowEntitlementsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GrantFlowEntitlementsInput"}
-
-	if s.Entitlements == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Entitlements"))
-	}
-
-	if s.FlowArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("FlowArn"))
-	}
-	if s.Entitlements != nil {
-		for i, v := range s.Entitlements {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Entitlements", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GrantFlowEntitlementsInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.Entitlements != nil {
-		v := s.Entitlements
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "entitlements", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	if s.FlowArn != nil {
-		v := *s.FlowArn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "flowArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-// The entitlements that were just granted.
-type GrantFlowEntitlementsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The entitlements that were just granted.
-	Entitlements []Entitlement `locationName:"entitlements" type:"list"`
-
-	// The ARN of the flow that these entitlements were granted to.
-	FlowArn *string `locationName:"flowArn" type:"string"`
-}
-
-// String returns the string representation
-func (s GrantFlowEntitlementsOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GrantFlowEntitlementsOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.Entitlements != nil {
-		v := s.Entitlements
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "entitlements", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	if s.FlowArn != nil {
-		v := *s.FlowArn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "flowArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opGrantFlowEntitlements = "GrantFlowEntitlements"
 
@@ -133,7 +24,7 @@ const opGrantFlowEntitlements = "GrantFlowEntitlements"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/GrantFlowEntitlements
-func (c *Client) GrantFlowEntitlementsRequest(input *GrantFlowEntitlementsInput) GrantFlowEntitlementsRequest {
+func (c *Client) GrantFlowEntitlementsRequest(input *types.GrantFlowEntitlementsInput) GrantFlowEntitlementsRequest {
 	op := &aws.Operation{
 		Name:       opGrantFlowEntitlements,
 		HTTPMethod: "POST",
@@ -141,10 +32,10 @@ func (c *Client) GrantFlowEntitlementsRequest(input *GrantFlowEntitlementsInput)
 	}
 
 	if input == nil {
-		input = &GrantFlowEntitlementsInput{}
+		input = &types.GrantFlowEntitlementsInput{}
 	}
 
-	req := c.newRequest(op, input, &GrantFlowEntitlementsOutput{})
+	req := c.newRequest(op, input, &types.GrantFlowEntitlementsOutput{})
 	return GrantFlowEntitlementsRequest{Request: req, Input: input, Copy: c.GrantFlowEntitlementsRequest}
 }
 
@@ -152,8 +43,8 @@ func (c *Client) GrantFlowEntitlementsRequest(input *GrantFlowEntitlementsInput)
 // GrantFlowEntitlements API operation.
 type GrantFlowEntitlementsRequest struct {
 	*aws.Request
-	Input *GrantFlowEntitlementsInput
-	Copy  func(*GrantFlowEntitlementsInput) GrantFlowEntitlementsRequest
+	Input *types.GrantFlowEntitlementsInput
+	Copy  func(*types.GrantFlowEntitlementsInput) GrantFlowEntitlementsRequest
 }
 
 // Send marshals and sends the GrantFlowEntitlements API request.
@@ -165,7 +56,7 @@ func (r GrantFlowEntitlementsRequest) Send(ctx context.Context) (*GrantFlowEntit
 	}
 
 	resp := &GrantFlowEntitlementsResponse{
-		GrantFlowEntitlementsOutput: r.Request.Data.(*GrantFlowEntitlementsOutput),
+		GrantFlowEntitlementsOutput: r.Request.Data.(*types.GrantFlowEntitlementsOutput),
 		response:                    &aws.Response{Request: r.Request},
 	}
 
@@ -175,7 +66,7 @@ func (r GrantFlowEntitlementsRequest) Send(ctx context.Context) (*GrantFlowEntit
 // GrantFlowEntitlementsResponse is the response type for the
 // GrantFlowEntitlements API operation.
 type GrantFlowEntitlementsResponse struct {
-	*GrantFlowEntitlementsOutput
+	*types.GrantFlowEntitlementsOutput
 
 	response *aws.Response
 }

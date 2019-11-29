@@ -6,47 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
+	"github.com/aws/aws-sdk-go-v2/service/opsworks/types"
 )
-
-type DeleteStackInput struct {
-	_ struct{} `type:"structure"`
-
-	// The stack ID.
-	//
-	// StackId is a required field
-	StackId *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteStackInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteStackInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteStackInput"}
-
-	if s.StackId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("StackId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteStackOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteStackOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteStack = "DeleteStack"
 
@@ -70,7 +33,7 @@ const opDeleteStack = "DeleteStack"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DeleteStack
-func (c *Client) DeleteStackRequest(input *DeleteStackInput) DeleteStackRequest {
+func (c *Client) DeleteStackRequest(input *types.DeleteStackInput) DeleteStackRequest {
 	op := &aws.Operation{
 		Name:       opDeleteStack,
 		HTTPMethod: "POST",
@@ -78,10 +41,10 @@ func (c *Client) DeleteStackRequest(input *DeleteStackInput) DeleteStackRequest 
 	}
 
 	if input == nil {
-		input = &DeleteStackInput{}
+		input = &types.DeleteStackInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteStackOutput{})
+	req := c.newRequest(op, input, &types.DeleteStackOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return DeleteStackRequest{Request: req, Input: input, Copy: c.DeleteStackRequest}
@@ -91,8 +54,8 @@ func (c *Client) DeleteStackRequest(input *DeleteStackInput) DeleteStackRequest 
 // DeleteStack API operation.
 type DeleteStackRequest struct {
 	*aws.Request
-	Input *DeleteStackInput
-	Copy  func(*DeleteStackInput) DeleteStackRequest
+	Input *types.DeleteStackInput
+	Copy  func(*types.DeleteStackInput) DeleteStackRequest
 }
 
 // Send marshals and sends the DeleteStack API request.
@@ -104,7 +67,7 @@ func (r DeleteStackRequest) Send(ctx context.Context) (*DeleteStackResponse, err
 	}
 
 	resp := &DeleteStackResponse{
-		DeleteStackOutput: r.Request.Data.(*DeleteStackOutput),
+		DeleteStackOutput: r.Request.Data.(*types.DeleteStackOutput),
 		response:          &aws.Response{Request: r.Request},
 	}
 
@@ -114,7 +77,7 @@ func (r DeleteStackRequest) Send(ctx context.Context) (*DeleteStackResponse, err
 // DeleteStackResponse is the response type for the
 // DeleteStack API operation.
 type DeleteStackResponse struct {
-	*DeleteStackOutput
+	*types.DeleteStackOutput
 
 	response *aws.Response
 }

@@ -4,90 +4,10 @@ package ecr
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ecr/types"
 )
-
-type BatchGetImageInput struct {
-	_ struct{} `type:"structure"`
-
-	// The accepted media types for the request.
-	//
-	// Valid values: application/vnd.docker.distribution.manifest.v1+json | application/vnd.docker.distribution.manifest.v2+json
-	// | application/vnd.oci.image.manifest.v1+json
-	AcceptedMediaTypes []string `locationName:"acceptedMediaTypes" min:"1" type:"list"`
-
-	// A list of image ID references that correspond to images to describe. The
-	// format of the imageIds reference is imageTag=tag or imageDigest=digest.
-	//
-	// ImageIds is a required field
-	ImageIds []ImageIdentifier `locationName:"imageIds" min:"1" type:"list" required:"true"`
-
-	// The AWS account ID associated with the registry that contains the images
-	// to describe. If you do not specify a registry, the default registry is assumed.
-	RegistryId *string `locationName:"registryId" type:"string"`
-
-	// The repository that contains the images to describe.
-	//
-	// RepositoryName is a required field
-	RepositoryName *string `locationName:"repositoryName" min:"2" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s BatchGetImageInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *BatchGetImageInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "BatchGetImageInput"}
-	if s.AcceptedMediaTypes != nil && len(s.AcceptedMediaTypes) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("AcceptedMediaTypes", 1))
-	}
-
-	if s.ImageIds == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ImageIds"))
-	}
-	if s.ImageIds != nil && len(s.ImageIds) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ImageIds", 1))
-	}
-
-	if s.RepositoryName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("RepositoryName"))
-	}
-	if s.RepositoryName != nil && len(*s.RepositoryName) < 2 {
-		invalidParams.Add(aws.NewErrParamMinLen("RepositoryName", 2))
-	}
-	if s.ImageIds != nil {
-		for i, v := range s.ImageIds {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "ImageIds", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type BatchGetImageOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Any failures associated with the call.
-	Failures []ImageFailure `locationName:"failures" type:"list"`
-
-	// A list of image objects corresponding to the image references in the request.
-	Images []Image `locationName:"images" type:"list"`
-}
-
-// String returns the string representation
-func (s BatchGetImageOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opBatchGetImage = "BatchGetImage"
 
@@ -105,7 +25,7 @@ const opBatchGetImage = "BatchGetImage"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/BatchGetImage
-func (c *Client) BatchGetImageRequest(input *BatchGetImageInput) BatchGetImageRequest {
+func (c *Client) BatchGetImageRequest(input *types.BatchGetImageInput) BatchGetImageRequest {
 	op := &aws.Operation{
 		Name:       opBatchGetImage,
 		HTTPMethod: "POST",
@@ -113,10 +33,10 @@ func (c *Client) BatchGetImageRequest(input *BatchGetImageInput) BatchGetImageRe
 	}
 
 	if input == nil {
-		input = &BatchGetImageInput{}
+		input = &types.BatchGetImageInput{}
 	}
 
-	req := c.newRequest(op, input, &BatchGetImageOutput{})
+	req := c.newRequest(op, input, &types.BatchGetImageOutput{})
 	return BatchGetImageRequest{Request: req, Input: input, Copy: c.BatchGetImageRequest}
 }
 
@@ -124,8 +44,8 @@ func (c *Client) BatchGetImageRequest(input *BatchGetImageInput) BatchGetImageRe
 // BatchGetImage API operation.
 type BatchGetImageRequest struct {
 	*aws.Request
-	Input *BatchGetImageInput
-	Copy  func(*BatchGetImageInput) BatchGetImageRequest
+	Input *types.BatchGetImageInput
+	Copy  func(*types.BatchGetImageInput) BatchGetImageRequest
 }
 
 // Send marshals and sends the BatchGetImage API request.
@@ -137,7 +57,7 @@ func (r BatchGetImageRequest) Send(ctx context.Context) (*BatchGetImageResponse,
 	}
 
 	resp := &BatchGetImageResponse{
-		BatchGetImageOutput: r.Request.Data.(*BatchGetImageOutput),
+		BatchGetImageOutput: r.Request.Data.(*types.BatchGetImageOutput),
 		response:            &aws.Response{Request: r.Request},
 	}
 
@@ -147,7 +67,7 @@ func (r BatchGetImageRequest) Send(ctx context.Context) (*BatchGetImageResponse,
 // BatchGetImageResponse is the response type for the
 // BatchGetImage API operation.
 type BatchGetImageResponse struct {
-	*BatchGetImageOutput
+	*types.BatchGetImageOutput
 
 	response *aws.Response
 }

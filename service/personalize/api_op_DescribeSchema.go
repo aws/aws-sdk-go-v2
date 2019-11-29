@@ -6,48 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/personalize/types"
 )
-
-type DescribeSchemaInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the schema to retrieve.
-	//
-	// SchemaArn is a required field
-	SchemaArn *string `locationName:"schemaArn" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeSchemaInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeSchemaInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeSchemaInput"}
-
-	if s.SchemaArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("SchemaArn"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribeSchemaOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The requested schema.
-	Schema *DatasetSchema `locationName:"schema" type:"structure"`
-}
-
-// String returns the string representation
-func (s DescribeSchemaOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeSchema = "DescribeSchema"
 
@@ -64,7 +24,7 @@ const opDescribeSchema = "DescribeSchema"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/DescribeSchema
-func (c *Client) DescribeSchemaRequest(input *DescribeSchemaInput) DescribeSchemaRequest {
+func (c *Client) DescribeSchemaRequest(input *types.DescribeSchemaInput) DescribeSchemaRequest {
 	op := &aws.Operation{
 		Name:       opDescribeSchema,
 		HTTPMethod: "POST",
@@ -72,10 +32,10 @@ func (c *Client) DescribeSchemaRequest(input *DescribeSchemaInput) DescribeSchem
 	}
 
 	if input == nil {
-		input = &DescribeSchemaInput{}
+		input = &types.DescribeSchemaInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeSchemaOutput{})
+	req := c.newRequest(op, input, &types.DescribeSchemaOutput{})
 	return DescribeSchemaRequest{Request: req, Input: input, Copy: c.DescribeSchemaRequest}
 }
 
@@ -83,8 +43,8 @@ func (c *Client) DescribeSchemaRequest(input *DescribeSchemaInput) DescribeSchem
 // DescribeSchema API operation.
 type DescribeSchemaRequest struct {
 	*aws.Request
-	Input *DescribeSchemaInput
-	Copy  func(*DescribeSchemaInput) DescribeSchemaRequest
+	Input *types.DescribeSchemaInput
+	Copy  func(*types.DescribeSchemaInput) DescribeSchemaRequest
 }
 
 // Send marshals and sends the DescribeSchema API request.
@@ -96,7 +56,7 @@ func (r DescribeSchemaRequest) Send(ctx context.Context) (*DescribeSchemaRespons
 	}
 
 	resp := &DescribeSchemaResponse{
-		DescribeSchemaOutput: r.Request.Data.(*DescribeSchemaOutput),
+		DescribeSchemaOutput: r.Request.Data.(*types.DescribeSchemaOutput),
 		response:             &aws.Response{Request: r.Request},
 	}
 
@@ -106,7 +66,7 @@ func (r DescribeSchemaRequest) Send(ctx context.Context) (*DescribeSchemaRespons
 // DescribeSchemaResponse is the response type for the
 // DescribeSchema API operation.
 type DescribeSchemaResponse struct {
-	*DescribeSchemaOutput
+	*types.DescribeSchemaOutput
 
 	response *aws.Response
 }

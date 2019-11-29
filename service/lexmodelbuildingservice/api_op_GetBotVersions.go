@@ -6,120 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/lexmodelbuildingservice/types"
 )
-
-type GetBotVersionsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The maximum number of bot versions to return in the response. The default
-	// is 10.
-	MaxResults *int64 `location:"querystring" locationName:"maxResults" min:"1" type:"integer"`
-
-	// The name of the bot for which versions should be returned.
-	//
-	// Name is a required field
-	Name *string `location:"uri" locationName:"name" min:"2" type:"string" required:"true"`
-
-	// A pagination token for fetching the next page of bot versions. If the response
-	// to this call is truncated, Amazon Lex returns a pagination token in the response.
-	// To fetch the next page of versions, specify the pagination token in the next
-	// request.
-	NextToken *string `location:"querystring" locationName:"nextToken" type:"string"`
-}
-
-// String returns the string representation
-func (s GetBotVersionsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetBotVersionsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetBotVersionsInput"}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-
-	if s.Name == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Name"))
-	}
-	if s.Name != nil && len(*s.Name) < 2 {
-		invalidParams.Add(aws.NewErrParamMinLen("Name", 2))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetBotVersionsInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.Name != nil {
-		v := *s.Name
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.MaxResults != nil {
-		v := *s.MaxResults
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "maxResults", protocol.Int64Value(v), metadata)
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type GetBotVersionsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// An array of BotMetadata objects, one for each numbered version of the bot
-	// plus one for the $LATEST version.
-	Bots []BotMetadata `locationName:"bots" type:"list"`
-
-	// A pagination token for fetching the next page of bot versions. If the response
-	// to this call is truncated, Amazon Lex returns a pagination token in the response.
-	// To fetch the next page of versions, specify the pagination token in the next
-	// request.
-	NextToken *string `locationName:"nextToken" type:"string"`
-}
-
-// String returns the string representation
-func (s GetBotVersionsOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetBotVersionsOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.Bots != nil {
-		v := s.Bots
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "bots", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opGetBotVersions = "GetBotVersions"
 
@@ -146,7 +34,7 @@ const opGetBotVersions = "GetBotVersions"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/GetBotVersions
-func (c *Client) GetBotVersionsRequest(input *GetBotVersionsInput) GetBotVersionsRequest {
+func (c *Client) GetBotVersionsRequest(input *types.GetBotVersionsInput) GetBotVersionsRequest {
 	op := &aws.Operation{
 		Name:       opGetBotVersions,
 		HTTPMethod: "GET",
@@ -160,10 +48,10 @@ func (c *Client) GetBotVersionsRequest(input *GetBotVersionsInput) GetBotVersion
 	}
 
 	if input == nil {
-		input = &GetBotVersionsInput{}
+		input = &types.GetBotVersionsInput{}
 	}
 
-	req := c.newRequest(op, input, &GetBotVersionsOutput{})
+	req := c.newRequest(op, input, &types.GetBotVersionsOutput{})
 	return GetBotVersionsRequest{Request: req, Input: input, Copy: c.GetBotVersionsRequest}
 }
 
@@ -171,8 +59,8 @@ func (c *Client) GetBotVersionsRequest(input *GetBotVersionsInput) GetBotVersion
 // GetBotVersions API operation.
 type GetBotVersionsRequest struct {
 	*aws.Request
-	Input *GetBotVersionsInput
-	Copy  func(*GetBotVersionsInput) GetBotVersionsRequest
+	Input *types.GetBotVersionsInput
+	Copy  func(*types.GetBotVersionsInput) GetBotVersionsRequest
 }
 
 // Send marshals and sends the GetBotVersions API request.
@@ -184,7 +72,7 @@ func (r GetBotVersionsRequest) Send(ctx context.Context) (*GetBotVersionsRespons
 	}
 
 	resp := &GetBotVersionsResponse{
-		GetBotVersionsOutput: r.Request.Data.(*GetBotVersionsOutput),
+		GetBotVersionsOutput: r.Request.Data.(*types.GetBotVersionsOutput),
 		response:             &aws.Response{Request: r.Request},
 	}
 
@@ -214,7 +102,7 @@ func NewGetBotVersionsPaginator(req GetBotVersionsRequest) GetBotVersionsPaginat
 	return GetBotVersionsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *GetBotVersionsInput
+				var inCpy *types.GetBotVersionsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -234,14 +122,14 @@ type GetBotVersionsPaginator struct {
 	aws.Pager
 }
 
-func (p *GetBotVersionsPaginator) CurrentPage() *GetBotVersionsOutput {
-	return p.Pager.CurrentPage().(*GetBotVersionsOutput)
+func (p *GetBotVersionsPaginator) CurrentPage() *types.GetBotVersionsOutput {
+	return p.Pager.CurrentPage().(*types.GetBotVersionsOutput)
 }
 
 // GetBotVersionsResponse is the response type for the
 // GetBotVersions API operation.
 type GetBotVersionsResponse struct {
-	*GetBotVersionsOutput
+	*types.GetBotVersionsOutput
 
 	response *aws.Response
 }

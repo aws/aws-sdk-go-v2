@@ -6,50 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/codebuild/types"
 )
-
-type ListBuildsInput struct {
-	_ struct{} `type:"structure"`
-
-	// During a previous call, if there are more than 100 items in the list, only
-	// the first 100 items are returned, along with a unique string called a next
-	// token. To get the next batch of items in the list, call this operation again,
-	// adding the next token to the call. To get all of the items in the list, keep
-	// calling this operation with each subsequent next token that is returned,
-	// until no more next tokens are returned.
-	NextToken *string `locationName:"nextToken" type:"string"`
-
-	// The order to list build IDs. Valid values include:
-	//
-	//    * ASCENDING: List the build IDs in ascending order by build ID.
-	//
-	//    * DESCENDING: List the build IDs in descending order by build ID.
-	SortOrder SortOrderType `locationName:"sortOrder" type:"string" enum:"true"`
-}
-
-// String returns the string representation
-func (s ListBuildsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type ListBuildsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A list of build IDs, with each build ID representing a single build.
-	Ids []string `locationName:"ids" min:"1" type:"list"`
-
-	// If there are more than 100 items in the list, only the first 100 items are
-	// returned, along with a unique string called a next token. To get the next
-	// batch of items in the list, call this operation again, adding the next token
-	// to the call.
-	NextToken *string `locationName:"nextToken" type:"string"`
-}
-
-// String returns the string representation
-func (s ListBuildsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListBuilds = "ListBuilds"
 
@@ -66,7 +24,7 @@ const opListBuilds = "ListBuilds"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/ListBuilds
-func (c *Client) ListBuildsRequest(input *ListBuildsInput) ListBuildsRequest {
+func (c *Client) ListBuildsRequest(input *types.ListBuildsInput) ListBuildsRequest {
 	op := &aws.Operation{
 		Name:       opListBuilds,
 		HTTPMethod: "POST",
@@ -74,10 +32,10 @@ func (c *Client) ListBuildsRequest(input *ListBuildsInput) ListBuildsRequest {
 	}
 
 	if input == nil {
-		input = &ListBuildsInput{}
+		input = &types.ListBuildsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListBuildsOutput{})
+	req := c.newRequest(op, input, &types.ListBuildsOutput{})
 	return ListBuildsRequest{Request: req, Input: input, Copy: c.ListBuildsRequest}
 }
 
@@ -85,8 +43,8 @@ func (c *Client) ListBuildsRequest(input *ListBuildsInput) ListBuildsRequest {
 // ListBuilds API operation.
 type ListBuildsRequest struct {
 	*aws.Request
-	Input *ListBuildsInput
-	Copy  func(*ListBuildsInput) ListBuildsRequest
+	Input *types.ListBuildsInput
+	Copy  func(*types.ListBuildsInput) ListBuildsRequest
 }
 
 // Send marshals and sends the ListBuilds API request.
@@ -98,7 +56,7 @@ func (r ListBuildsRequest) Send(ctx context.Context) (*ListBuildsResponse, error
 	}
 
 	resp := &ListBuildsResponse{
-		ListBuildsOutput: r.Request.Data.(*ListBuildsOutput),
+		ListBuildsOutput: r.Request.Data.(*types.ListBuildsOutput),
 		response:         &aws.Response{Request: r.Request},
 	}
 
@@ -108,7 +66,7 @@ func (r ListBuildsRequest) Send(ctx context.Context) (*ListBuildsResponse, error
 // ListBuildsResponse is the response type for the
 // ListBuilds API operation.
 type ListBuildsResponse struct {
-	*ListBuildsOutput
+	*types.ListBuildsOutput
 
 	response *aws.Response
 }

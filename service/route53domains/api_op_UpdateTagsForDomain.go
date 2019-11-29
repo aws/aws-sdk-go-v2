@@ -6,50 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/route53domains/types"
 )
-
-// The UpdateTagsForDomainRequest includes the following elements.
-type UpdateTagsForDomainInput struct {
-	_ struct{} `type:"structure"`
-
-	// The domain for which you want to add or update tags.
-	//
-	// DomainName is a required field
-	DomainName *string `type:"string" required:"true"`
-
-	// A list of the tag keys and values that you want to add or update. If you
-	// specify a key that already exists, the corresponding value will be replaced.
-	TagsToUpdate []Tag `type:"list"`
-}
-
-// String returns the string representation
-func (s UpdateTagsForDomainInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateTagsForDomainInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateTagsForDomainInput"}
-
-	if s.DomainName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DomainName"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type UpdateTagsForDomainOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s UpdateTagsForDomainOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opUpdateTagsForDomain = "UpdateTagsForDomain"
 
@@ -69,7 +27,7 @@ const opUpdateTagsForDomain = "UpdateTagsForDomain"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/UpdateTagsForDomain
-func (c *Client) UpdateTagsForDomainRequest(input *UpdateTagsForDomainInput) UpdateTagsForDomainRequest {
+func (c *Client) UpdateTagsForDomainRequest(input *types.UpdateTagsForDomainInput) UpdateTagsForDomainRequest {
 	op := &aws.Operation{
 		Name:       opUpdateTagsForDomain,
 		HTTPMethod: "POST",
@@ -77,10 +35,10 @@ func (c *Client) UpdateTagsForDomainRequest(input *UpdateTagsForDomainInput) Upd
 	}
 
 	if input == nil {
-		input = &UpdateTagsForDomainInput{}
+		input = &types.UpdateTagsForDomainInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateTagsForDomainOutput{})
+	req := c.newRequest(op, input, &types.UpdateTagsForDomainOutput{})
 	return UpdateTagsForDomainRequest{Request: req, Input: input, Copy: c.UpdateTagsForDomainRequest}
 }
 
@@ -88,8 +46,8 @@ func (c *Client) UpdateTagsForDomainRequest(input *UpdateTagsForDomainInput) Upd
 // UpdateTagsForDomain API operation.
 type UpdateTagsForDomainRequest struct {
 	*aws.Request
-	Input *UpdateTagsForDomainInput
-	Copy  func(*UpdateTagsForDomainInput) UpdateTagsForDomainRequest
+	Input *types.UpdateTagsForDomainInput
+	Copy  func(*types.UpdateTagsForDomainInput) UpdateTagsForDomainRequest
 }
 
 // Send marshals and sends the UpdateTagsForDomain API request.
@@ -101,7 +59,7 @@ func (r UpdateTagsForDomainRequest) Send(ctx context.Context) (*UpdateTagsForDom
 	}
 
 	resp := &UpdateTagsForDomainResponse{
-		UpdateTagsForDomainOutput: r.Request.Data.(*UpdateTagsForDomainOutput),
+		UpdateTagsForDomainOutput: r.Request.Data.(*types.UpdateTagsForDomainOutput),
 		response:                  &aws.Response{Request: r.Request},
 	}
 
@@ -111,7 +69,7 @@ func (r UpdateTagsForDomainRequest) Send(ctx context.Context) (*UpdateTagsForDom
 // UpdateTagsForDomainResponse is the response type for the
 // UpdateTagsForDomain API operation.
 type UpdateTagsForDomainResponse struct {
-	*UpdateTagsForDomainOutput
+	*types.UpdateTagsForDomainOutput
 
 	response *aws.Response
 }

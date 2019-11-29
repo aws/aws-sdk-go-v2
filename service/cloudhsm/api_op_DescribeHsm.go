@@ -6,103 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/cloudhsm/types"
 )
-
-// Contains the inputs for the DescribeHsm operation.
-type DescribeHsmInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ARN of the HSM. Either the HsmArn or the SerialNumber parameter must
-	// be specified.
-	HsmArn *string `type:"string"`
-
-	// The serial number of the HSM. Either the HsmArn or the HsmSerialNumber parameter
-	// must be specified.
-	HsmSerialNumber *string `type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeHsmInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Contains the output of the DescribeHsm operation.
-type DescribeHsmOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The Availability Zone that the HSM is in.
-	AvailabilityZone *string `type:"string"`
-
-	// The identifier of the elastic network interface (ENI) attached to the HSM.
-	EniId *string `type:"string"`
-
-	// The IP address assigned to the HSM's ENI.
-	EniIp *string `type:"string"`
-
-	// The ARN of the HSM.
-	HsmArn *string `type:"string"`
-
-	// The HSM model type.
-	HsmType *string `type:"string"`
-
-	// The ARN of the IAM role assigned to the HSM.
-	IamRoleArn *string `type:"string"`
-
-	// The list of partitions on the HSM.
-	Partitions []string `type:"list"`
-
-	// The serial number of the HSM.
-	SerialNumber *string `type:"string"`
-
-	// The date and time that the server certificate was last updated.
-	ServerCertLastUpdated *string `type:"string"`
-
-	// The URI of the certificate server.
-	ServerCertUri *string `type:"string"`
-
-	// The HSM software version.
-	SoftwareVersion *string `type:"string"`
-
-	// The date and time that the SSH key was last updated.
-	SshKeyLastUpdated *string `type:"string"`
-
-	// The public SSH key.
-	SshPublicKey *string `type:"string"`
-
-	// The status of the HSM.
-	Status HsmStatus `type:"string" enum:"true"`
-
-	// Contains additional information about the status of the HSM.
-	StatusDetails *string `type:"string"`
-
-	// The identifier of the subnet that the HSM is in.
-	SubnetId *string `type:"string"`
-
-	// The subscription end date.
-	SubscriptionEndDate *string `type:"string"`
-
-	// The subscription start date.
-	SubscriptionStartDate *string `type:"string"`
-
-	// Specifies the type of subscription for the HSM.
-	//
-	//    * PRODUCTION - The HSM is being used in a production environment.
-	//
-	//    * TRIAL - The HSM is being used in a product trial.
-	SubscriptionType SubscriptionType `type:"string" enum:"true"`
-
-	// The name of the HSM vendor.
-	VendorName *string `type:"string"`
-
-	// The identifier of the VPC that the HSM is in.
-	VpcId *string `type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeHsmOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeHsm = "DescribeHsm"
 
@@ -129,7 +34,7 @@ const opDescribeHsm = "DescribeHsm"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/DescribeHsm
-func (c *Client) DescribeHsmRequest(input *DescribeHsmInput) DescribeHsmRequest {
+func (c *Client) DescribeHsmRequest(input *types.DescribeHsmInput) DescribeHsmRequest {
 	op := &aws.Operation{
 		Name:       opDescribeHsm,
 		HTTPMethod: "POST",
@@ -137,10 +42,10 @@ func (c *Client) DescribeHsmRequest(input *DescribeHsmInput) DescribeHsmRequest 
 	}
 
 	if input == nil {
-		input = &DescribeHsmInput{}
+		input = &types.DescribeHsmInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeHsmOutput{})
+	req := c.newRequest(op, input, &types.DescribeHsmOutput{})
 	return DescribeHsmRequest{Request: req, Input: input, Copy: c.DescribeHsmRequest}
 }
 
@@ -148,8 +53,8 @@ func (c *Client) DescribeHsmRequest(input *DescribeHsmInput) DescribeHsmRequest 
 // DescribeHsm API operation.
 type DescribeHsmRequest struct {
 	*aws.Request
-	Input *DescribeHsmInput
-	Copy  func(*DescribeHsmInput) DescribeHsmRequest
+	Input *types.DescribeHsmInput
+	Copy  func(*types.DescribeHsmInput) DescribeHsmRequest
 }
 
 // Send marshals and sends the DescribeHsm API request.
@@ -161,7 +66,7 @@ func (r DescribeHsmRequest) Send(ctx context.Context) (*DescribeHsmResponse, err
 	}
 
 	resp := &DescribeHsmResponse{
-		DescribeHsmOutput: r.Request.Data.(*DescribeHsmOutput),
+		DescribeHsmOutput: r.Request.Data.(*types.DescribeHsmOutput),
 		response:          &aws.Response{Request: r.Request},
 	}
 
@@ -171,7 +76,7 @@ func (r DescribeHsmRequest) Send(ctx context.Context) (*DescribeHsmResponse, err
 // DescribeHsmResponse is the response type for the
 // DescribeHsm API operation.
 type DescribeHsmResponse struct {
-	*DescribeHsmOutput
+	*types.DescribeHsmOutput
 
 	response *aws.Response
 }

@@ -4,147 +4,10 @@ package directconnect
 
 import (
 	"context"
-	"fmt"
-	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/directconnect/types"
 )
-
-type CreateInterconnectInput struct {
-	_ struct{} `type:"structure"`
-
-	// The port bandwidth, in Gbps. The possible values are 1 and 10.
-	//
-	// Bandwidth is a required field
-	Bandwidth *string `locationName:"bandwidth" type:"string" required:"true"`
-
-	// The name of the interconnect.
-	//
-	// InterconnectName is a required field
-	InterconnectName *string `locationName:"interconnectName" type:"string" required:"true"`
-
-	// The ID of the LAG.
-	LagId *string `locationName:"lagId" type:"string"`
-
-	// The location of the interconnect.
-	//
-	// Location is a required field
-	Location *string `locationName:"location" type:"string" required:"true"`
-
-	// The name of the service provider associated with the interconnect.
-	ProviderName *string `locationName:"providerName" type:"string"`
-
-	// The tags to associate with the interconnect.
-	Tags []Tag `locationName:"tags" min:"1" type:"list"`
-}
-
-// String returns the string representation
-func (s CreateInterconnectInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateInterconnectInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateInterconnectInput"}
-
-	if s.Bandwidth == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Bandwidth"))
-	}
-
-	if s.InterconnectName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("InterconnectName"))
-	}
-
-	if s.Location == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Location"))
-	}
-	if s.Tags != nil && len(s.Tags) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Tags", 1))
-	}
-	if s.Tags != nil {
-		for i, v := range s.Tags {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Information about an interconnect.
-type CreateInterconnectOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The Direct Connect endpoint on which the physical connection terminates.
-	AwsDevice *string `locationName:"awsDevice" deprecated:"true" type:"string"`
-
-	// The Direct Connect endpoint on which the physical connection terminates.
-	AwsDeviceV2 *string `locationName:"awsDeviceV2" type:"string"`
-
-	// The bandwidth of the connection.
-	Bandwidth *string `locationName:"bandwidth" type:"string"`
-
-	// Indicates whether the interconnect supports a secondary BGP in the same address
-	// family (IPv4/IPv6).
-	HasLogicalRedundancy HasLogicalRedundancy `locationName:"hasLogicalRedundancy" type:"string" enum:"true"`
-
-	// The ID of the interconnect.
-	InterconnectId *string `locationName:"interconnectId" type:"string"`
-
-	// The name of the interconnect.
-	InterconnectName *string `locationName:"interconnectName" type:"string"`
-
-	// The state of the interconnect. The following are the possible values:
-	//
-	//    * requested: The initial state of an interconnect. The interconnect stays
-	//    in the requested state until the Letter of Authorization (LOA) is sent
-	//    to the customer.
-	//
-	//    * pending: The interconnect is approved, and is being initialized.
-	//
-	//    * available: The network link is up, and the interconnect is ready for
-	//    use.
-	//
-	//    * down: The network link is down.
-	//
-	//    * deleting: The interconnect is being deleted.
-	//
-	//    * deleted: The interconnect is deleted.
-	//
-	//    * unknown: The state of the interconnect is not available.
-	InterconnectState InterconnectState `locationName:"interconnectState" type:"string" enum:"true"`
-
-	// Indicates whether jumbo frames (9001 MTU) are supported.
-	JumboFrameCapable *bool `locationName:"jumboFrameCapable" type:"boolean"`
-
-	// The ID of the LAG.
-	LagId *string `locationName:"lagId" type:"string"`
-
-	// The time of the most recent call to DescribeLoa for this connection.
-	LoaIssueTime *time.Time `locationName:"loaIssueTime" type:"timestamp"`
-
-	// The location of the connection.
-	Location *string `locationName:"location" type:"string"`
-
-	// The name of the service provider associated with the interconnect.
-	ProviderName *string `locationName:"providerName" type:"string"`
-
-	// The AWS Region where the connection is located.
-	Region *string `locationName:"region" type:"string"`
-
-	// The tags associated with the interconnect.
-	Tags []Tag `locationName:"tags" min:"1" type:"list"`
-}
-
-// String returns the string representation
-func (s CreateInterconnectOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCreateInterconnect = "CreateInterconnect"
 
@@ -183,7 +46,7 @@ const opCreateInterconnect = "CreateInterconnect"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/CreateInterconnect
-func (c *Client) CreateInterconnectRequest(input *CreateInterconnectInput) CreateInterconnectRequest {
+func (c *Client) CreateInterconnectRequest(input *types.CreateInterconnectInput) CreateInterconnectRequest {
 	op := &aws.Operation{
 		Name:       opCreateInterconnect,
 		HTTPMethod: "POST",
@@ -191,10 +54,10 @@ func (c *Client) CreateInterconnectRequest(input *CreateInterconnectInput) Creat
 	}
 
 	if input == nil {
-		input = &CreateInterconnectInput{}
+		input = &types.CreateInterconnectInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateInterconnectOutput{})
+	req := c.newRequest(op, input, &types.CreateInterconnectOutput{})
 	return CreateInterconnectRequest{Request: req, Input: input, Copy: c.CreateInterconnectRequest}
 }
 
@@ -202,8 +65,8 @@ func (c *Client) CreateInterconnectRequest(input *CreateInterconnectInput) Creat
 // CreateInterconnect API operation.
 type CreateInterconnectRequest struct {
 	*aws.Request
-	Input *CreateInterconnectInput
-	Copy  func(*CreateInterconnectInput) CreateInterconnectRequest
+	Input *types.CreateInterconnectInput
+	Copy  func(*types.CreateInterconnectInput) CreateInterconnectRequest
 }
 
 // Send marshals and sends the CreateInterconnect API request.
@@ -215,7 +78,7 @@ func (r CreateInterconnectRequest) Send(ctx context.Context) (*CreateInterconnec
 	}
 
 	resp := &CreateInterconnectResponse{
-		CreateInterconnectOutput: r.Request.Data.(*CreateInterconnectOutput),
+		CreateInterconnectOutput: r.Request.Data.(*types.CreateInterconnectOutput),
 		response:                 &aws.Response{Request: r.Request},
 	}
 
@@ -225,7 +88,7 @@ func (r CreateInterconnectRequest) Send(ctx context.Context) (*CreateInterconnec
 // CreateInterconnectResponse is the response type for the
 // CreateInterconnect API operation.
 type CreateInterconnectResponse struct {
-	*CreateInterconnectOutput
+	*types.CreateInterconnectOutput
 
 	response *aws.Response
 }

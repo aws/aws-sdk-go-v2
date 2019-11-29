@@ -4,135 +4,10 @@ package fsx
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/fsx/types"
 )
-
-// The request object used to create a new Amazon FSx file system.
-type CreateFileSystemInput struct {
-	_ struct{} `type:"structure"`
-
-	// (Optional) A string of up to 64 ASCII characters that Amazon FSx uses to
-	// ensure idempotent creation. This string is automatically filled on your behalf
-	// when you use the AWS Command Line Interface (AWS CLI) or an AWS SDK.
-	ClientRequestToken *string `min:"1" type:"string" idempotencyToken:"true"`
-
-	// The type of Amazon FSx file system to create.
-	//
-	// FileSystemType is a required field
-	FileSystemType FileSystemType `type:"string" required:"true" enum:"true"`
-
-	// The ID of your AWS Key Management Service (AWS KMS) key. This ID is used
-	// to encrypt the data in your file system at rest. For more information, see
-	// Encrypt (https://docs.aws.amazon.com/kms/latest/APIReference/API_Encrypt.html)
-	// in the AWS Key Management Service API Reference.
-	KmsKeyId *string `min:"1" type:"string"`
-
-	// The Lustre configuration for the file system being created. This value is
-	// required if FileSystemType is set to LUSTRE.
-	LustreConfiguration *CreateFileSystemLustreConfiguration `type:"structure"`
-
-	// A list of IDs specifying the security groups to apply to all network interfaces
-	// created for file system access. This list isn't returned in later requests
-	// to describe the file system.
-	SecurityGroupIds []string `type:"list"`
-
-	// The storage capacity of the file system being created.
-	//
-	// For Windows file systems, the storage capacity has a minimum of 300 GiB,
-	// and a maximum of 65,536 GiB.
-	//
-	// For Lustre file systems, the storage capacity has a minimum of 3,600 GiB.
-	// Storage capacity is provisioned in increments of 3,600 GiB.
-	//
-	// StorageCapacity is a required field
-	StorageCapacity *int64 `min:"1" type:"integer" required:"true"`
-
-	// The IDs of the subnets that the file system will be accessible from. File
-	// systems support only one subnet. The file server is also launched in that
-	// subnet's Availability Zone.
-	//
-	// SubnetIds is a required field
-	SubnetIds []string `type:"list" required:"true"`
-
-	// The tags to apply to the file system being created. The key value of the
-	// Name tag appears in the console as the file system name.
-	Tags []Tag `min:"1" type:"list"`
-
-	// The Microsoft Windows configuration for the file system being created. This
-	// value is required if FileSystemType is set to WINDOWS.
-	WindowsConfiguration *CreateFileSystemWindowsConfiguration `type:"structure"`
-}
-
-// String returns the string representation
-func (s CreateFileSystemInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateFileSystemInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateFileSystemInput"}
-	if s.ClientRequestToken != nil && len(*s.ClientRequestToken) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ClientRequestToken", 1))
-	}
-	if len(s.FileSystemType) == 0 {
-		invalidParams.Add(aws.NewErrParamRequired("FileSystemType"))
-	}
-	if s.KmsKeyId != nil && len(*s.KmsKeyId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("KmsKeyId", 1))
-	}
-
-	if s.StorageCapacity == nil {
-		invalidParams.Add(aws.NewErrParamRequired("StorageCapacity"))
-	}
-	if s.StorageCapacity != nil && *s.StorageCapacity < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("StorageCapacity", 1))
-	}
-
-	if s.SubnetIds == nil {
-		invalidParams.Add(aws.NewErrParamRequired("SubnetIds"))
-	}
-	if s.Tags != nil && len(s.Tags) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Tags", 1))
-	}
-	if s.LustreConfiguration != nil {
-		if err := s.LustreConfiguration.Validate(); err != nil {
-			invalidParams.AddNested("LustreConfiguration", err.(aws.ErrInvalidParams))
-		}
-	}
-	if s.Tags != nil {
-		for i, v := range s.Tags {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-	if s.WindowsConfiguration != nil {
-		if err := s.WindowsConfiguration.Validate(); err != nil {
-			invalidParams.AddNested("WindowsConfiguration", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// The response object returned after the file system is created.
-type CreateFileSystemOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The configuration of the file system that was created.
-	FileSystem *FileSystem `type:"structure"`
-}
-
-// String returns the string representation
-func (s CreateFileSystemOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCreateFileSystem = "CreateFileSystem"
 
@@ -177,7 +52,7 @@ const opCreateFileSystem = "CreateFileSystem"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/CreateFileSystem
-func (c *Client) CreateFileSystemRequest(input *CreateFileSystemInput) CreateFileSystemRequest {
+func (c *Client) CreateFileSystemRequest(input *types.CreateFileSystemInput) CreateFileSystemRequest {
 	op := &aws.Operation{
 		Name:       opCreateFileSystem,
 		HTTPMethod: "POST",
@@ -185,10 +60,10 @@ func (c *Client) CreateFileSystemRequest(input *CreateFileSystemInput) CreateFil
 	}
 
 	if input == nil {
-		input = &CreateFileSystemInput{}
+		input = &types.CreateFileSystemInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateFileSystemOutput{})
+	req := c.newRequest(op, input, &types.CreateFileSystemOutput{})
 	return CreateFileSystemRequest{Request: req, Input: input, Copy: c.CreateFileSystemRequest}
 }
 
@@ -196,8 +71,8 @@ func (c *Client) CreateFileSystemRequest(input *CreateFileSystemInput) CreateFil
 // CreateFileSystem API operation.
 type CreateFileSystemRequest struct {
 	*aws.Request
-	Input *CreateFileSystemInput
-	Copy  func(*CreateFileSystemInput) CreateFileSystemRequest
+	Input *types.CreateFileSystemInput
+	Copy  func(*types.CreateFileSystemInput) CreateFileSystemRequest
 }
 
 // Send marshals and sends the CreateFileSystem API request.
@@ -209,7 +84,7 @@ func (r CreateFileSystemRequest) Send(ctx context.Context) (*CreateFileSystemRes
 	}
 
 	resp := &CreateFileSystemResponse{
-		CreateFileSystemOutput: r.Request.Data.(*CreateFileSystemOutput),
+		CreateFileSystemOutput: r.Request.Data.(*types.CreateFileSystemOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -219,7 +94,7 @@ func (r CreateFileSystemRequest) Send(ctx context.Context) (*CreateFileSystemRes
 // CreateFileSystemResponse is the response type for the
 // CreateFileSystem API operation.
 type CreateFileSystemResponse struct {
-	*CreateFileSystemOutput
+	*types.CreateFileSystemOutput
 
 	response *aws.Response
 }

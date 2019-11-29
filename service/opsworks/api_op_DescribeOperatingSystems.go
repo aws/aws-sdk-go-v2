@@ -6,30 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/opsworks/types"
 )
-
-type DescribeOperatingSystemsInput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DescribeOperatingSystemsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// The response to a DescribeOperatingSystems request.
-type DescribeOperatingSystemsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Contains information in response to a DescribeOperatingSystems request.
-	OperatingSystems []OperatingSystem `type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeOperatingSystemsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeOperatingSystems = "DescribeOperatingSystems"
 
@@ -46,7 +24,7 @@ const opDescribeOperatingSystems = "DescribeOperatingSystems"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DescribeOperatingSystems
-func (c *Client) DescribeOperatingSystemsRequest(input *DescribeOperatingSystemsInput) DescribeOperatingSystemsRequest {
+func (c *Client) DescribeOperatingSystemsRequest(input *types.DescribeOperatingSystemsInput) DescribeOperatingSystemsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeOperatingSystems,
 		HTTPMethod: "POST",
@@ -54,10 +32,10 @@ func (c *Client) DescribeOperatingSystemsRequest(input *DescribeOperatingSystems
 	}
 
 	if input == nil {
-		input = &DescribeOperatingSystemsInput{}
+		input = &types.DescribeOperatingSystemsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeOperatingSystemsOutput{})
+	req := c.newRequest(op, input, &types.DescribeOperatingSystemsOutput{})
 	return DescribeOperatingSystemsRequest{Request: req, Input: input, Copy: c.DescribeOperatingSystemsRequest}
 }
 
@@ -65,8 +43,8 @@ func (c *Client) DescribeOperatingSystemsRequest(input *DescribeOperatingSystems
 // DescribeOperatingSystems API operation.
 type DescribeOperatingSystemsRequest struct {
 	*aws.Request
-	Input *DescribeOperatingSystemsInput
-	Copy  func(*DescribeOperatingSystemsInput) DescribeOperatingSystemsRequest
+	Input *types.DescribeOperatingSystemsInput
+	Copy  func(*types.DescribeOperatingSystemsInput) DescribeOperatingSystemsRequest
 }
 
 // Send marshals and sends the DescribeOperatingSystems API request.
@@ -78,7 +56,7 @@ func (r DescribeOperatingSystemsRequest) Send(ctx context.Context) (*DescribeOpe
 	}
 
 	resp := &DescribeOperatingSystemsResponse{
-		DescribeOperatingSystemsOutput: r.Request.Data.(*DescribeOperatingSystemsOutput),
+		DescribeOperatingSystemsOutput: r.Request.Data.(*types.DescribeOperatingSystemsOutput),
 		response:                       &aws.Response{Request: r.Request},
 	}
 
@@ -88,7 +66,7 @@ func (r DescribeOperatingSystemsRequest) Send(ctx context.Context) (*DescribeOpe
 // DescribeOperatingSystemsResponse is the response type for the
 // DescribeOperatingSystems API operation.
 type DescribeOperatingSystemsResponse struct {
-	*DescribeOperatingSystemsOutput
+	*types.DescribeOperatingSystemsOutput
 
 	response *aws.Response
 }

@@ -13,6 +13,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws/awserr"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting/integration"
 	"github.com/aws/aws-sdk-go-v2/service/secretsmanager"
+	"github.com/aws/aws-sdk-go-v2/service/secretsmanager/types"
 )
 
 var _ aws.Config
@@ -24,7 +25,7 @@ func TestInteg_00_ListSecrets(t *testing.T) {
 
 	cfg := integration.ConfigWithDefaultRegion("us-west-2")
 	svc := secretsmanager.New(cfg)
-	params := &secretsmanager.ListSecretsInput{}
+	params := &types.ListSecretsInput{}
 
 	req := svc.ListSecretsRequest(params)
 
@@ -39,7 +40,7 @@ func TestInteg_01_DescribeSecret(t *testing.T) {
 
 	cfg := integration.ConfigWithDefaultRegion("us-west-2")
 	svc := secretsmanager.New(cfg)
-	params := &secretsmanager.DescribeSecretInput{
+	params := &types.DescribeSecretInput{
 		SecretId: aws.String("fake-secret-id"),
 	}
 

@@ -6,66 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/elasticache/types"
 )
-
-// Represents the input of a ResetCacheParameterGroup operation.
-type ResetCacheParameterGroupInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the cache parameter group to reset.
-	//
-	// CacheParameterGroupName is a required field
-	CacheParameterGroupName *string `type:"string" required:"true"`
-
-	// An array of parameter names to reset to their default values. If ResetAllParameters
-	// is true, do not use ParameterNameValues. If ResetAllParameters is false,
-	// you must specify the name of at least one parameter to reset.
-	ParameterNameValues []ParameterNameValue `locationNameList:"ParameterNameValue" type:"list"`
-
-	// If true, all parameters in the cache parameter group are reset to their default
-	// values. If false, only the parameters listed by ParameterNameValues are reset
-	// to their default values.
-	//
-	// Valid values: true | false
-	ResetAllParameters *bool `type:"boolean"`
-}
-
-// String returns the string representation
-func (s ResetCacheParameterGroupInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ResetCacheParameterGroupInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ResetCacheParameterGroupInput"}
-
-	if s.CacheParameterGroupName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("CacheParameterGroupName"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Represents the output of one of the following operations:
-//
-//    * ModifyCacheParameterGroup
-//
-//    * ResetCacheParameterGroup
-type ResetCacheParameterGroupOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the cache parameter group.
-	CacheParameterGroupName *string `type:"string"`
-}
-
-// String returns the string representation
-func (s ResetCacheParameterGroupOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opResetCacheParameterGroup = "ResetCacheParameterGroup"
 
@@ -85,7 +27,7 @@ const opResetCacheParameterGroup = "ResetCacheParameterGroup"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/ResetCacheParameterGroup
-func (c *Client) ResetCacheParameterGroupRequest(input *ResetCacheParameterGroupInput) ResetCacheParameterGroupRequest {
+func (c *Client) ResetCacheParameterGroupRequest(input *types.ResetCacheParameterGroupInput) ResetCacheParameterGroupRequest {
 	op := &aws.Operation{
 		Name:       opResetCacheParameterGroup,
 		HTTPMethod: "POST",
@@ -93,10 +35,10 @@ func (c *Client) ResetCacheParameterGroupRequest(input *ResetCacheParameterGroup
 	}
 
 	if input == nil {
-		input = &ResetCacheParameterGroupInput{}
+		input = &types.ResetCacheParameterGroupInput{}
 	}
 
-	req := c.newRequest(op, input, &ResetCacheParameterGroupOutput{})
+	req := c.newRequest(op, input, &types.ResetCacheParameterGroupOutput{})
 	return ResetCacheParameterGroupRequest{Request: req, Input: input, Copy: c.ResetCacheParameterGroupRequest}
 }
 
@@ -104,8 +46,8 @@ func (c *Client) ResetCacheParameterGroupRequest(input *ResetCacheParameterGroup
 // ResetCacheParameterGroup API operation.
 type ResetCacheParameterGroupRequest struct {
 	*aws.Request
-	Input *ResetCacheParameterGroupInput
-	Copy  func(*ResetCacheParameterGroupInput) ResetCacheParameterGroupRequest
+	Input *types.ResetCacheParameterGroupInput
+	Copy  func(*types.ResetCacheParameterGroupInput) ResetCacheParameterGroupRequest
 }
 
 // Send marshals and sends the ResetCacheParameterGroup API request.
@@ -117,7 +59,7 @@ func (r ResetCacheParameterGroupRequest) Send(ctx context.Context) (*ResetCacheP
 	}
 
 	resp := &ResetCacheParameterGroupResponse{
-		ResetCacheParameterGroupOutput: r.Request.Data.(*ResetCacheParameterGroupOutput),
+		ResetCacheParameterGroupOutput: r.Request.Data.(*types.ResetCacheParameterGroupOutput),
 		response:                       &aws.Response{Request: r.Request},
 	}
 
@@ -127,7 +69,7 @@ func (r ResetCacheParameterGroupRequest) Send(ctx context.Context) (*ResetCacheP
 // ResetCacheParameterGroupResponse is the response type for the
 // ResetCacheParameterGroup API operation.
 type ResetCacheParameterGroupResponse struct {
-	*ResetCacheParameterGroupOutput
+	*types.ResetCacheParameterGroupOutput
 
 	response *aws.Response
 }

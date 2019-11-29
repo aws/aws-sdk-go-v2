@@ -6,45 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/alexaforbusiness/types"
 )
-
-type DeleteConferenceProviderInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ARN of the conference provider.
-	//
-	// ConferenceProviderArn is a required field
-	ConferenceProviderArn *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteConferenceProviderInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteConferenceProviderInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteConferenceProviderInput"}
-
-	if s.ConferenceProviderArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ConferenceProviderArn"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteConferenceProviderOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteConferenceProviderOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteConferenceProvider = "DeleteConferenceProvider"
 
@@ -61,7 +24,7 @@ const opDeleteConferenceProvider = "DeleteConferenceProvider"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/DeleteConferenceProvider
-func (c *Client) DeleteConferenceProviderRequest(input *DeleteConferenceProviderInput) DeleteConferenceProviderRequest {
+func (c *Client) DeleteConferenceProviderRequest(input *types.DeleteConferenceProviderInput) DeleteConferenceProviderRequest {
 	op := &aws.Operation{
 		Name:       opDeleteConferenceProvider,
 		HTTPMethod: "POST",
@@ -69,10 +32,10 @@ func (c *Client) DeleteConferenceProviderRequest(input *DeleteConferenceProvider
 	}
 
 	if input == nil {
-		input = &DeleteConferenceProviderInput{}
+		input = &types.DeleteConferenceProviderInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteConferenceProviderOutput{})
+	req := c.newRequest(op, input, &types.DeleteConferenceProviderOutput{})
 	return DeleteConferenceProviderRequest{Request: req, Input: input, Copy: c.DeleteConferenceProviderRequest}
 }
 
@@ -80,8 +43,8 @@ func (c *Client) DeleteConferenceProviderRequest(input *DeleteConferenceProvider
 // DeleteConferenceProvider API operation.
 type DeleteConferenceProviderRequest struct {
 	*aws.Request
-	Input *DeleteConferenceProviderInput
-	Copy  func(*DeleteConferenceProviderInput) DeleteConferenceProviderRequest
+	Input *types.DeleteConferenceProviderInput
+	Copy  func(*types.DeleteConferenceProviderInput) DeleteConferenceProviderRequest
 }
 
 // Send marshals and sends the DeleteConferenceProvider API request.
@@ -93,7 +56,7 @@ func (r DeleteConferenceProviderRequest) Send(ctx context.Context) (*DeleteConfe
 	}
 
 	resp := &DeleteConferenceProviderResponse{
-		DeleteConferenceProviderOutput: r.Request.Data.(*DeleteConferenceProviderOutput),
+		DeleteConferenceProviderOutput: r.Request.Data.(*types.DeleteConferenceProviderOutput),
 		response:                       &aws.Response{Request: r.Request},
 	}
 
@@ -103,7 +66,7 @@ func (r DeleteConferenceProviderRequest) Send(ctx context.Context) (*DeleteConfe
 // DeleteConferenceProviderResponse is the response type for the
 // DeleteConferenceProvider API operation.
 type DeleteConferenceProviderResponse struct {
-	*DeleteConferenceProviderOutput
+	*types.DeleteConferenceProviderOutput
 
 	response *aws.Response
 }

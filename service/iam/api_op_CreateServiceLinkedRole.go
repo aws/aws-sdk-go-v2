@@ -6,77 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/iam/types"
 )
-
-type CreateServiceLinkedRoleInput struct {
-	_ struct{} `type:"structure"`
-
-	// The service principal for the AWS service to which this role is attached.
-	// You use a string similar to a URL but without the http:// in front. For example:
-	// elasticbeanstalk.amazonaws.com.
-	//
-	// Service principals are unique and case-sensitive. To find the exact service
-	// principal for your service-linked role, see AWS Services That Work with IAM
-	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_aws-services-that-work-with-iam.html)
-	// in the IAM User Guide. Look for the services that have Yes in the Service-Linked
-	// Role column. Choose the Yes link to view the service-linked role documentation
-	// for that service.
-	//
-	// AWSServiceName is a required field
-	AWSServiceName *string `min:"1" type:"string" required:"true"`
-
-	// A string that you provide, which is combined with the service-provided prefix
-	// to form the complete role name. If you make multiple requests for the same
-	// service, then you must supply a different CustomSuffix for each request.
-	// Otherwise the request fails with a duplicate role name error. For example,
-	// you could add -1 or -debug to the suffix.
-	//
-	// Some services do not support the CustomSuffix parameter. If you provide an
-	// optional suffix and the operation fails, try the operation again without
-	// the suffix.
-	CustomSuffix *string `min:"1" type:"string"`
-
-	// The description of the role.
-	Description *string `type:"string"`
-}
-
-// String returns the string representation
-func (s CreateServiceLinkedRoleInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateServiceLinkedRoleInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateServiceLinkedRoleInput"}
-
-	if s.AWSServiceName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("AWSServiceName"))
-	}
-	if s.AWSServiceName != nil && len(*s.AWSServiceName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("AWSServiceName", 1))
-	}
-	if s.CustomSuffix != nil && len(*s.CustomSuffix) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("CustomSuffix", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type CreateServiceLinkedRoleOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A Role object that contains details about the newly created role.
-	Role *Role `type:"structure"`
-}
-
-// String returns the string representation
-func (s CreateServiceLinkedRoleOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCreateServiceLinkedRole = "CreateServiceLinkedRole"
 
@@ -103,7 +34,7 @@ const opCreateServiceLinkedRole = "CreateServiceLinkedRole"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/CreateServiceLinkedRole
-func (c *Client) CreateServiceLinkedRoleRequest(input *CreateServiceLinkedRoleInput) CreateServiceLinkedRoleRequest {
+func (c *Client) CreateServiceLinkedRoleRequest(input *types.CreateServiceLinkedRoleInput) CreateServiceLinkedRoleRequest {
 	op := &aws.Operation{
 		Name:       opCreateServiceLinkedRole,
 		HTTPMethod: "POST",
@@ -111,10 +42,10 @@ func (c *Client) CreateServiceLinkedRoleRequest(input *CreateServiceLinkedRoleIn
 	}
 
 	if input == nil {
-		input = &CreateServiceLinkedRoleInput{}
+		input = &types.CreateServiceLinkedRoleInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateServiceLinkedRoleOutput{})
+	req := c.newRequest(op, input, &types.CreateServiceLinkedRoleOutput{})
 	return CreateServiceLinkedRoleRequest{Request: req, Input: input, Copy: c.CreateServiceLinkedRoleRequest}
 }
 
@@ -122,8 +53,8 @@ func (c *Client) CreateServiceLinkedRoleRequest(input *CreateServiceLinkedRoleIn
 // CreateServiceLinkedRole API operation.
 type CreateServiceLinkedRoleRequest struct {
 	*aws.Request
-	Input *CreateServiceLinkedRoleInput
-	Copy  func(*CreateServiceLinkedRoleInput) CreateServiceLinkedRoleRequest
+	Input *types.CreateServiceLinkedRoleInput
+	Copy  func(*types.CreateServiceLinkedRoleInput) CreateServiceLinkedRoleRequest
 }
 
 // Send marshals and sends the CreateServiceLinkedRole API request.
@@ -135,7 +66,7 @@ func (r CreateServiceLinkedRoleRequest) Send(ctx context.Context) (*CreateServic
 	}
 
 	resp := &CreateServiceLinkedRoleResponse{
-		CreateServiceLinkedRoleOutput: r.Request.Data.(*CreateServiceLinkedRoleOutput),
+		CreateServiceLinkedRoleOutput: r.Request.Data.(*types.CreateServiceLinkedRoleOutput),
 		response:                      &aws.Response{Request: r.Request},
 	}
 
@@ -145,7 +76,7 @@ func (r CreateServiceLinkedRoleRequest) Send(ctx context.Context) (*CreateServic
 // CreateServiceLinkedRoleResponse is the response type for the
 // CreateServiceLinkedRole API operation.
 type CreateServiceLinkedRoleResponse struct {
-	*CreateServiceLinkedRoleOutput
+	*types.CreateServiceLinkedRoleOutput
 
 	response *aws.Response
 }

@@ -6,113 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/elasticsearchservice/types"
 )
-
-// Container for request parameters to GetUpgradeStatus operation.
-type GetUpgradeStatusInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of an Elasticsearch domain. Domain names are unique across the domains
-	// owned by an account within an AWS region. Domain names start with a letter
-	// or number and can contain the following characters: a-z (lowercase), 0-9,
-	// and - (hyphen).
-	//
-	// DomainName is a required field
-	DomainName *string `location:"uri" locationName:"DomainName" min:"3" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetUpgradeStatusInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetUpgradeStatusInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetUpgradeStatusInput"}
-
-	if s.DomainName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DomainName"))
-	}
-	if s.DomainName != nil && len(*s.DomainName) < 3 {
-		invalidParams.Add(aws.NewErrParamMinLen("DomainName", 3))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetUpgradeStatusInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.DomainName != nil {
-		v := *s.DomainName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "DomainName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-// Container for response returned by GetUpgradeStatus operation.
-type GetUpgradeStatusOutput struct {
-	_ struct{} `type:"structure"`
-
-	// One of 4 statuses that a step can go through returned as part of the GetUpgradeStatusResponse
-	// object. The status can take one of the following values:
-	//    * In Progress
-	//
-	//    * Succeeded
-	//
-	//    * Succeeded with Issues
-	//
-	//    * Failed
-	StepStatus UpgradeStatus `type:"string" enum:"true"`
-
-	// A string that describes the update briefly
-	UpgradeName *string `type:"string"`
-
-	// Represents one of 3 steps that an Upgrade or Upgrade Eligibility Check does
-	// through:
-	//    * PreUpgradeCheck
-	//
-	//    * Snapshot
-	//
-	//    * Upgrade
-	UpgradeStep UpgradeStep `type:"string" enum:"true"`
-}
-
-// String returns the string representation
-func (s GetUpgradeStatusOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetUpgradeStatusOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.StepStatus) > 0 {
-		v := s.StepStatus
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "StepStatus", protocol.QuotedValue{ValueMarshaler: v}, metadata)
-	}
-	if s.UpgradeName != nil {
-		v := *s.UpgradeName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "UpgradeName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if len(s.UpgradeStep) > 0 {
-		v := s.UpgradeStep
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "UpgradeStep", protocol.QuotedValue{ValueMarshaler: v}, metadata)
-	}
-	return nil
-}
 
 const opGetUpgradeStatus = "GetUpgradeStatus"
 
@@ -128,7 +23,7 @@ const opGetUpgradeStatus = "GetUpgradeStatus"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) GetUpgradeStatusRequest(input *GetUpgradeStatusInput) GetUpgradeStatusRequest {
+func (c *Client) GetUpgradeStatusRequest(input *types.GetUpgradeStatusInput) GetUpgradeStatusRequest {
 	op := &aws.Operation{
 		Name:       opGetUpgradeStatus,
 		HTTPMethod: "GET",
@@ -136,10 +31,10 @@ func (c *Client) GetUpgradeStatusRequest(input *GetUpgradeStatusInput) GetUpgrad
 	}
 
 	if input == nil {
-		input = &GetUpgradeStatusInput{}
+		input = &types.GetUpgradeStatusInput{}
 	}
 
-	req := c.newRequest(op, input, &GetUpgradeStatusOutput{})
+	req := c.newRequest(op, input, &types.GetUpgradeStatusOutput{})
 	return GetUpgradeStatusRequest{Request: req, Input: input, Copy: c.GetUpgradeStatusRequest}
 }
 
@@ -147,8 +42,8 @@ func (c *Client) GetUpgradeStatusRequest(input *GetUpgradeStatusInput) GetUpgrad
 // GetUpgradeStatus API operation.
 type GetUpgradeStatusRequest struct {
 	*aws.Request
-	Input *GetUpgradeStatusInput
-	Copy  func(*GetUpgradeStatusInput) GetUpgradeStatusRequest
+	Input *types.GetUpgradeStatusInput
+	Copy  func(*types.GetUpgradeStatusInput) GetUpgradeStatusRequest
 }
 
 // Send marshals and sends the GetUpgradeStatus API request.
@@ -160,7 +55,7 @@ func (r GetUpgradeStatusRequest) Send(ctx context.Context) (*GetUpgradeStatusRes
 	}
 
 	resp := &GetUpgradeStatusResponse{
-		GetUpgradeStatusOutput: r.Request.Data.(*GetUpgradeStatusOutput),
+		GetUpgradeStatusOutput: r.Request.Data.(*types.GetUpgradeStatusOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -170,7 +65,7 @@ func (r GetUpgradeStatusRequest) Send(ctx context.Context) (*GetUpgradeStatusRes
 // GetUpgradeStatusResponse is the response type for the
 // GetUpgradeStatus API operation.
 type GetUpgradeStatusResponse struct {
-	*GetUpgradeStatusOutput
+	*types.GetUpgradeStatusOutput
 
 	response *aws.Response
 }

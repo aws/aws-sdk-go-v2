@@ -6,103 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/swf/types"
 )
-
-type PollForActivityTaskInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the domain that contains the task lists being polled.
-	//
-	// Domain is a required field
-	Domain *string `locationName:"domain" min:"1" type:"string" required:"true"`
-
-	// Identity of the worker making the request, recorded in the ActivityTaskStarted
-	// event in the workflow history. This enables diagnostic tracing when problems
-	// arise. The form of this identity is user defined.
-	Identity *string `locationName:"identity" type:"string"`
-
-	// Specifies the task list to poll for activity tasks.
-	//
-	// The specified string must not start or end with whitespace. It must not contain
-	// a : (colon), / (slash), | (vertical bar), or any control characters (\u0000-\u001f
-	// | \u007f-\u009f). Also, it must not be the literal string arn.
-	//
-	// TaskList is a required field
-	TaskList *TaskList `locationName:"taskList" type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s PollForActivityTaskInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *PollForActivityTaskInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "PollForActivityTaskInput"}
-
-	if s.Domain == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Domain"))
-	}
-	if s.Domain != nil && len(*s.Domain) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Domain", 1))
-	}
-
-	if s.TaskList == nil {
-		invalidParams.Add(aws.NewErrParamRequired("TaskList"))
-	}
-	if s.TaskList != nil {
-		if err := s.TaskList.Validate(); err != nil {
-			invalidParams.AddNested("TaskList", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Unit of work sent to an activity worker.
-type PollForActivityTaskOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The unique ID of the task.
-	//
-	// ActivityId is a required field
-	ActivityId *string `locationName:"activityId" min:"1" type:"string" required:"true"`
-
-	// The type of this activity task.
-	//
-	// ActivityType is a required field
-	ActivityType *ActivityType `locationName:"activityType" type:"structure" required:"true"`
-
-	// The inputs provided when the activity task was scheduled. The form of the
-	// input is user defined and should be meaningful to the activity implementation.
-	Input *string `locationName:"input" type:"string"`
-
-	// The ID of the ActivityTaskStarted event recorded in the history.
-	//
-	// StartedEventId is a required field
-	StartedEventId *int64 `locationName:"startedEventId" type:"long" required:"true"`
-
-	// The opaque string used as a handle on the task. This token is used by workers
-	// to communicate progress and response information back to the system about
-	// the task.
-	//
-	// TaskToken is a required field
-	TaskToken *string `locationName:"taskToken" min:"1" type:"string" required:"true"`
-
-	// The workflow execution that started this activity task.
-	//
-	// WorkflowExecution is a required field
-	WorkflowExecution *WorkflowExecution `locationName:"workflowExecution" type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s PollForActivityTaskOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opPollForActivityTask = "PollForActivityTask"
 
@@ -148,7 +53,7 @@ const opPollForActivityTask = "PollForActivityTask"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) PollForActivityTaskRequest(input *PollForActivityTaskInput) PollForActivityTaskRequest {
+func (c *Client) PollForActivityTaskRequest(input *types.PollForActivityTaskInput) PollForActivityTaskRequest {
 	op := &aws.Operation{
 		Name:       opPollForActivityTask,
 		HTTPMethod: "POST",
@@ -156,10 +61,10 @@ func (c *Client) PollForActivityTaskRequest(input *PollForActivityTaskInput) Pol
 	}
 
 	if input == nil {
-		input = &PollForActivityTaskInput{}
+		input = &types.PollForActivityTaskInput{}
 	}
 
-	req := c.newRequest(op, input, &PollForActivityTaskOutput{})
+	req := c.newRequest(op, input, &types.PollForActivityTaskOutput{})
 	return PollForActivityTaskRequest{Request: req, Input: input, Copy: c.PollForActivityTaskRequest}
 }
 
@@ -167,8 +72,8 @@ func (c *Client) PollForActivityTaskRequest(input *PollForActivityTaskInput) Pol
 // PollForActivityTask API operation.
 type PollForActivityTaskRequest struct {
 	*aws.Request
-	Input *PollForActivityTaskInput
-	Copy  func(*PollForActivityTaskInput) PollForActivityTaskRequest
+	Input *types.PollForActivityTaskInput
+	Copy  func(*types.PollForActivityTaskInput) PollForActivityTaskRequest
 }
 
 // Send marshals and sends the PollForActivityTask API request.
@@ -180,7 +85,7 @@ func (r PollForActivityTaskRequest) Send(ctx context.Context) (*PollForActivityT
 	}
 
 	resp := &PollForActivityTaskResponse{
-		PollForActivityTaskOutput: r.Request.Data.(*PollForActivityTaskOutput),
+		PollForActivityTaskOutput: r.Request.Data.(*types.PollForActivityTaskOutput),
 		response:                  &aws.Response{Request: r.Request},
 	}
 
@@ -190,7 +95,7 @@ func (r PollForActivityTaskRequest) Send(ctx context.Context) (*PollForActivityT
 // PollForActivityTaskResponse is the response type for the
 // PollForActivityTask API operation.
 type PollForActivityTaskResponse struct {
-	*PollForActivityTaskOutput
+	*types.PollForActivityTaskOutput
 
 	response *aws.Response
 }

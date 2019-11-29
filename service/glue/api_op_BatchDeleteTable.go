@@ -6,68 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/glue/types"
 )
-
-type BatchDeleteTableInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the Data Catalog where the table resides. If none is provided,
-	// the AWS account ID is used by default.
-	CatalogId *string `min:"1" type:"string"`
-
-	// The name of the catalog database in which the tables to delete reside. For
-	// Hive compatibility, this name is entirely lowercase.
-	//
-	// DatabaseName is a required field
-	DatabaseName *string `min:"1" type:"string" required:"true"`
-
-	// A list of the table to delete.
-	//
-	// TablesToDelete is a required field
-	TablesToDelete []string `type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s BatchDeleteTableInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *BatchDeleteTableInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "BatchDeleteTableInput"}
-	if s.CatalogId != nil && len(*s.CatalogId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("CatalogId", 1))
-	}
-
-	if s.DatabaseName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DatabaseName"))
-	}
-	if s.DatabaseName != nil && len(*s.DatabaseName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("DatabaseName", 1))
-	}
-
-	if s.TablesToDelete == nil {
-		invalidParams.Add(aws.NewErrParamRequired("TablesToDelete"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type BatchDeleteTableOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A list of errors encountered in attempting to delete the specified tables.
-	Errors []TableError `type:"list"`
-}
-
-// String returns the string representation
-func (s BatchDeleteTableOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opBatchDeleteTable = "BatchDeleteTable"
 
@@ -93,7 +33,7 @@ const opBatchDeleteTable = "BatchDeleteTable"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/BatchDeleteTable
-func (c *Client) BatchDeleteTableRequest(input *BatchDeleteTableInput) BatchDeleteTableRequest {
+func (c *Client) BatchDeleteTableRequest(input *types.BatchDeleteTableInput) BatchDeleteTableRequest {
 	op := &aws.Operation{
 		Name:       opBatchDeleteTable,
 		HTTPMethod: "POST",
@@ -101,10 +41,10 @@ func (c *Client) BatchDeleteTableRequest(input *BatchDeleteTableInput) BatchDele
 	}
 
 	if input == nil {
-		input = &BatchDeleteTableInput{}
+		input = &types.BatchDeleteTableInput{}
 	}
 
-	req := c.newRequest(op, input, &BatchDeleteTableOutput{})
+	req := c.newRequest(op, input, &types.BatchDeleteTableOutput{})
 	return BatchDeleteTableRequest{Request: req, Input: input, Copy: c.BatchDeleteTableRequest}
 }
 
@@ -112,8 +52,8 @@ func (c *Client) BatchDeleteTableRequest(input *BatchDeleteTableInput) BatchDele
 // BatchDeleteTable API operation.
 type BatchDeleteTableRequest struct {
 	*aws.Request
-	Input *BatchDeleteTableInput
-	Copy  func(*BatchDeleteTableInput) BatchDeleteTableRequest
+	Input *types.BatchDeleteTableInput
+	Copy  func(*types.BatchDeleteTableInput) BatchDeleteTableRequest
 }
 
 // Send marshals and sends the BatchDeleteTable API request.
@@ -125,7 +65,7 @@ func (r BatchDeleteTableRequest) Send(ctx context.Context) (*BatchDeleteTableRes
 	}
 
 	resp := &BatchDeleteTableResponse{
-		BatchDeleteTableOutput: r.Request.Data.(*BatchDeleteTableOutput),
+		BatchDeleteTableOutput: r.Request.Data.(*types.BatchDeleteTableOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -135,7 +75,7 @@ func (r BatchDeleteTableRequest) Send(ctx context.Context) (*BatchDeleteTableRes
 // BatchDeleteTableResponse is the response type for the
 // BatchDeleteTable API operation.
 type BatchDeleteTableResponse struct {
-	*BatchDeleteTableOutput
+	*types.BatchDeleteTableOutput
 
 	response *aws.Response
 }

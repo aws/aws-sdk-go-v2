@@ -6,64 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-type DescribeIamInstanceProfileAssociationsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The IAM instance profile associations.
-	AssociationIds []string `locationName:"AssociationId" locationNameList:"AssociationId" type:"list"`
-
-	// The filters.
-	//
-	//    * instance-id - The ID of the instance.
-	//
-	//    * state - The state of the association (associating | associated | disassociating
-	//    | disassociated).
-	Filters []Filter `locationName:"Filter" locationNameList:"Filter" type:"list"`
-
-	// The maximum number of results to return in a single call. To retrieve the
-	// remaining results, make another call with the returned NextToken value.
-	MaxResults *int64 `min:"5" type:"integer"`
-
-	// The token to request the next page of results.
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeIamInstanceProfileAssociationsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeIamInstanceProfileAssociationsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeIamInstanceProfileAssociationsInput"}
-	if s.MaxResults != nil && *s.MaxResults < 5 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 5))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribeIamInstanceProfileAssociationsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Information about the IAM instance profile associations.
-	IamInstanceProfileAssociations []IamInstanceProfileAssociation `locationName:"iamInstanceProfileAssociationSet" locationNameList:"item" type:"list"`
-
-	// The token to use to retrieve the next page of results. This value is null
-	// when there are no more results to return.
-	NextToken *string `locationName:"nextToken" type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeIamInstanceProfileAssociationsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeIamInstanceProfileAssociations = "DescribeIamInstanceProfileAssociations"
 
@@ -80,7 +24,7 @@ const opDescribeIamInstanceProfileAssociations = "DescribeIamInstanceProfileAsso
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeIamInstanceProfileAssociations
-func (c *Client) DescribeIamInstanceProfileAssociationsRequest(input *DescribeIamInstanceProfileAssociationsInput) DescribeIamInstanceProfileAssociationsRequest {
+func (c *Client) DescribeIamInstanceProfileAssociationsRequest(input *types.DescribeIamInstanceProfileAssociationsInput) DescribeIamInstanceProfileAssociationsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeIamInstanceProfileAssociations,
 		HTTPMethod: "POST",
@@ -94,10 +38,10 @@ func (c *Client) DescribeIamInstanceProfileAssociationsRequest(input *DescribeIa
 	}
 
 	if input == nil {
-		input = &DescribeIamInstanceProfileAssociationsInput{}
+		input = &types.DescribeIamInstanceProfileAssociationsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeIamInstanceProfileAssociationsOutput{})
+	req := c.newRequest(op, input, &types.DescribeIamInstanceProfileAssociationsOutput{})
 	return DescribeIamInstanceProfileAssociationsRequest{Request: req, Input: input, Copy: c.DescribeIamInstanceProfileAssociationsRequest}
 }
 
@@ -105,8 +49,8 @@ func (c *Client) DescribeIamInstanceProfileAssociationsRequest(input *DescribeIa
 // DescribeIamInstanceProfileAssociations API operation.
 type DescribeIamInstanceProfileAssociationsRequest struct {
 	*aws.Request
-	Input *DescribeIamInstanceProfileAssociationsInput
-	Copy  func(*DescribeIamInstanceProfileAssociationsInput) DescribeIamInstanceProfileAssociationsRequest
+	Input *types.DescribeIamInstanceProfileAssociationsInput
+	Copy  func(*types.DescribeIamInstanceProfileAssociationsInput) DescribeIamInstanceProfileAssociationsRequest
 }
 
 // Send marshals and sends the DescribeIamInstanceProfileAssociations API request.
@@ -118,7 +62,7 @@ func (r DescribeIamInstanceProfileAssociationsRequest) Send(ctx context.Context)
 	}
 
 	resp := &DescribeIamInstanceProfileAssociationsResponse{
-		DescribeIamInstanceProfileAssociationsOutput: r.Request.Data.(*DescribeIamInstanceProfileAssociationsOutput),
+		DescribeIamInstanceProfileAssociationsOutput: r.Request.Data.(*types.DescribeIamInstanceProfileAssociationsOutput),
 		response: &aws.Response{Request: r.Request},
 	}
 
@@ -148,7 +92,7 @@ func NewDescribeIamInstanceProfileAssociationsPaginator(req DescribeIamInstanceP
 	return DescribeIamInstanceProfileAssociationsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *DescribeIamInstanceProfileAssociationsInput
+				var inCpy *types.DescribeIamInstanceProfileAssociationsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -168,14 +112,14 @@ type DescribeIamInstanceProfileAssociationsPaginator struct {
 	aws.Pager
 }
 
-func (p *DescribeIamInstanceProfileAssociationsPaginator) CurrentPage() *DescribeIamInstanceProfileAssociationsOutput {
-	return p.Pager.CurrentPage().(*DescribeIamInstanceProfileAssociationsOutput)
+func (p *DescribeIamInstanceProfileAssociationsPaginator) CurrentPage() *types.DescribeIamInstanceProfileAssociationsOutput {
+	return p.Pager.CurrentPage().(*types.DescribeIamInstanceProfileAssociationsOutput)
 }
 
 // DescribeIamInstanceProfileAssociationsResponse is the response type for the
 // DescribeIamInstanceProfileAssociations API operation.
 type DescribeIamInstanceProfileAssociationsResponse struct {
-	*DescribeIamInstanceProfileAssociationsOutput
+	*types.DescribeIamInstanceProfileAssociationsOutput
 
 	response *aws.Response
 }

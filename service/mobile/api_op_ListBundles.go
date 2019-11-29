@@ -6,86 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/mobile/types"
 )
-
-// Request structure to request all available bundles.
-type ListBundlesInput struct {
-	_ struct{} `type:"structure"`
-
-	// Maximum number of records to list in a single response.
-	MaxResults *int64 `location:"querystring" locationName:"maxResults" type:"integer"`
-
-	// Pagination token. Set to null to start listing bundles from start. If non-null
-	// pagination token is returned in a result, then pass its value in here in
-	// another request to list more bundles.
-	NextToken *string `location:"querystring" locationName:"nextToken" type:"string"`
-}
-
-// String returns the string representation
-func (s ListBundlesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListBundlesInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.MaxResults != nil {
-		v := *s.MaxResults
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "maxResults", protocol.Int64Value(v), metadata)
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-// Result structure contains a list of all available bundles with details.
-type ListBundlesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A list of bundles.
-	BundleList []BundleDetails `locationName:"bundleList" type:"list"`
-
-	// Pagination token. If non-null pagination token is returned in a result, then
-	// pass its value in another request to fetch more entries.
-	NextToken *string `locationName:"nextToken" type:"string"`
-}
-
-// String returns the string representation
-func (s ListBundlesOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListBundlesOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.BundleList != nil {
-		v := s.BundleList
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "bundleList", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opListBundles = "ListBundles"
 
@@ -102,7 +24,7 @@ const opListBundles = "ListBundles"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mobile-2017-07-01/ListBundles
-func (c *Client) ListBundlesRequest(input *ListBundlesInput) ListBundlesRequest {
+func (c *Client) ListBundlesRequest(input *types.ListBundlesInput) ListBundlesRequest {
 	op := &aws.Operation{
 		Name:       opListBundles,
 		HTTPMethod: "GET",
@@ -116,10 +38,10 @@ func (c *Client) ListBundlesRequest(input *ListBundlesInput) ListBundlesRequest 
 	}
 
 	if input == nil {
-		input = &ListBundlesInput{}
+		input = &types.ListBundlesInput{}
 	}
 
-	req := c.newRequest(op, input, &ListBundlesOutput{})
+	req := c.newRequest(op, input, &types.ListBundlesOutput{})
 	return ListBundlesRequest{Request: req, Input: input, Copy: c.ListBundlesRequest}
 }
 
@@ -127,8 +49,8 @@ func (c *Client) ListBundlesRequest(input *ListBundlesInput) ListBundlesRequest 
 // ListBundles API operation.
 type ListBundlesRequest struct {
 	*aws.Request
-	Input *ListBundlesInput
-	Copy  func(*ListBundlesInput) ListBundlesRequest
+	Input *types.ListBundlesInput
+	Copy  func(*types.ListBundlesInput) ListBundlesRequest
 }
 
 // Send marshals and sends the ListBundles API request.
@@ -140,7 +62,7 @@ func (r ListBundlesRequest) Send(ctx context.Context) (*ListBundlesResponse, err
 	}
 
 	resp := &ListBundlesResponse{
-		ListBundlesOutput: r.Request.Data.(*ListBundlesOutput),
+		ListBundlesOutput: r.Request.Data.(*types.ListBundlesOutput),
 		response:          &aws.Response{Request: r.Request},
 	}
 
@@ -170,7 +92,7 @@ func NewListBundlesPaginator(req ListBundlesRequest) ListBundlesPaginator {
 	return ListBundlesPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListBundlesInput
+				var inCpy *types.ListBundlesInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -190,14 +112,14 @@ type ListBundlesPaginator struct {
 	aws.Pager
 }
 
-func (p *ListBundlesPaginator) CurrentPage() *ListBundlesOutput {
-	return p.Pager.CurrentPage().(*ListBundlesOutput)
+func (p *ListBundlesPaginator) CurrentPage() *types.ListBundlesOutput {
+	return p.Pager.CurrentPage().(*types.ListBundlesOutput)
 }
 
 // ListBundlesResponse is the response type for the
 // ListBundles API operation.
 type ListBundlesResponse struct {
-	*ListBundlesOutput
+	*types.ListBundlesOutput
 
 	response *aws.Response
 }

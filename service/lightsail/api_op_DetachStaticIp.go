@@ -6,49 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/lightsail/types"
 )
-
-type DetachStaticIpInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the static IP to detach from the instance.
-	//
-	// StaticIpName is a required field
-	StaticIpName *string `locationName:"staticIpName" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DetachStaticIpInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DetachStaticIpInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DetachStaticIpInput"}
-
-	if s.StaticIpName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("StaticIpName"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DetachStaticIpOutput struct {
-	_ struct{} `type:"structure"`
-
-	// An array of key-value pairs containing information about the results of your
-	// detach static IP request.
-	Operations []Operation `locationName:"operations" type:"list"`
-}
-
-// String returns the string representation
-func (s DetachStaticIpOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDetachStaticIp = "DetachStaticIp"
 
@@ -65,7 +24,7 @@ const opDetachStaticIp = "DetachStaticIp"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/DetachStaticIp
-func (c *Client) DetachStaticIpRequest(input *DetachStaticIpInput) DetachStaticIpRequest {
+func (c *Client) DetachStaticIpRequest(input *types.DetachStaticIpInput) DetachStaticIpRequest {
 	op := &aws.Operation{
 		Name:       opDetachStaticIp,
 		HTTPMethod: "POST",
@@ -73,10 +32,10 @@ func (c *Client) DetachStaticIpRequest(input *DetachStaticIpInput) DetachStaticI
 	}
 
 	if input == nil {
-		input = &DetachStaticIpInput{}
+		input = &types.DetachStaticIpInput{}
 	}
 
-	req := c.newRequest(op, input, &DetachStaticIpOutput{})
+	req := c.newRequest(op, input, &types.DetachStaticIpOutput{})
 	return DetachStaticIpRequest{Request: req, Input: input, Copy: c.DetachStaticIpRequest}
 }
 
@@ -84,8 +43,8 @@ func (c *Client) DetachStaticIpRequest(input *DetachStaticIpInput) DetachStaticI
 // DetachStaticIp API operation.
 type DetachStaticIpRequest struct {
 	*aws.Request
-	Input *DetachStaticIpInput
-	Copy  func(*DetachStaticIpInput) DetachStaticIpRequest
+	Input *types.DetachStaticIpInput
+	Copy  func(*types.DetachStaticIpInput) DetachStaticIpRequest
 }
 
 // Send marshals and sends the DetachStaticIp API request.
@@ -97,7 +56,7 @@ func (r DetachStaticIpRequest) Send(ctx context.Context) (*DetachStaticIpRespons
 	}
 
 	resp := &DetachStaticIpResponse{
-		DetachStaticIpOutput: r.Request.Data.(*DetachStaticIpOutput),
+		DetachStaticIpOutput: r.Request.Data.(*types.DetachStaticIpOutput),
 		response:             &aws.Response{Request: r.Request},
 	}
 
@@ -107,7 +66,7 @@ func (r DetachStaticIpRequest) Send(ctx context.Context) (*DetachStaticIpRespons
 // DetachStaticIpResponse is the response type for the
 // DetachStaticIp API operation.
 type DetachStaticIpResponse struct {
-	*DetachStaticIpOutput
+	*types.DetachStaticIpOutput
 
 	response *aws.Response
 }

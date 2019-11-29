@@ -6,128 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/elasticsearchservice/types"
 )
-
-// Container for the parameters to the ListElasticsearchInstanceTypes operation.
-type ListElasticsearchInstanceTypesInput struct {
-	_ struct{} `type:"structure"`
-
-	// DomainName represents the name of the Domain that we are trying to modify.
-	// This should be present only if we are querying for list of available Elasticsearch
-	// instance types when modifying existing domain.
-	DomainName *string `location:"querystring" locationName:"domainName" min:"3" type:"string"`
-
-	// Version of Elasticsearch for which list of supported elasticsearch instance
-	// types are needed.
-	//
-	// ElasticsearchVersion is a required field
-	ElasticsearchVersion *string `location:"uri" locationName:"ElasticsearchVersion" type:"string" required:"true"`
-
-	// Set this value to limit the number of results returned. Value provided must
-	// be greater than 30 else it wont be honored.
-	MaxResults *int64 `location:"querystring" locationName:"maxResults" type:"integer"`
-
-	// NextToken should be sent in case if earlier API call produced result containing
-	// NextToken. It is used for pagination.
-	NextToken *string `location:"querystring" locationName:"nextToken" type:"string"`
-}
-
-// String returns the string representation
-func (s ListElasticsearchInstanceTypesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListElasticsearchInstanceTypesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListElasticsearchInstanceTypesInput"}
-	if s.DomainName != nil && len(*s.DomainName) < 3 {
-		invalidParams.Add(aws.NewErrParamMinLen("DomainName", 3))
-	}
-
-	if s.ElasticsearchVersion == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ElasticsearchVersion"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListElasticsearchInstanceTypesInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.ElasticsearchVersion != nil {
-		v := *s.ElasticsearchVersion
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "ElasticsearchVersion", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.DomainName != nil {
-		v := *s.DomainName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "domainName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.MaxResults != nil {
-		v := *s.MaxResults
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "maxResults", protocol.Int64Value(v), metadata)
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-// Container for the parameters returned by ListElasticsearchInstanceTypes operation.
-type ListElasticsearchInstanceTypesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// List of instance types supported by Amazon Elasticsearch service for given
-	// ElasticsearchVersion
-	ElasticsearchInstanceTypes []ESPartitionInstanceType `type:"list"`
-
-	// In case if there are more results available NextToken would be present, make
-	// further request to the same API with received NextToken to paginate remaining
-	// results.
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s ListElasticsearchInstanceTypesOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListElasticsearchInstanceTypesOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.ElasticsearchInstanceTypes != nil {
-		v := s.ElasticsearchInstanceTypes
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "ElasticsearchInstanceTypes", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
-		}
-		ls0.End()
-
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opListElasticsearchInstanceTypes = "ListElasticsearchInstanceTypes"
 
@@ -142,7 +22,7 @@ const opListElasticsearchInstanceTypes = "ListElasticsearchInstanceTypes"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) ListElasticsearchInstanceTypesRequest(input *ListElasticsearchInstanceTypesInput) ListElasticsearchInstanceTypesRequest {
+func (c *Client) ListElasticsearchInstanceTypesRequest(input *types.ListElasticsearchInstanceTypesInput) ListElasticsearchInstanceTypesRequest {
 	op := &aws.Operation{
 		Name:       opListElasticsearchInstanceTypes,
 		HTTPMethod: "GET",
@@ -156,10 +36,10 @@ func (c *Client) ListElasticsearchInstanceTypesRequest(input *ListElasticsearchI
 	}
 
 	if input == nil {
-		input = &ListElasticsearchInstanceTypesInput{}
+		input = &types.ListElasticsearchInstanceTypesInput{}
 	}
 
-	req := c.newRequest(op, input, &ListElasticsearchInstanceTypesOutput{})
+	req := c.newRequest(op, input, &types.ListElasticsearchInstanceTypesOutput{})
 	return ListElasticsearchInstanceTypesRequest{Request: req, Input: input, Copy: c.ListElasticsearchInstanceTypesRequest}
 }
 
@@ -167,8 +47,8 @@ func (c *Client) ListElasticsearchInstanceTypesRequest(input *ListElasticsearchI
 // ListElasticsearchInstanceTypes API operation.
 type ListElasticsearchInstanceTypesRequest struct {
 	*aws.Request
-	Input *ListElasticsearchInstanceTypesInput
-	Copy  func(*ListElasticsearchInstanceTypesInput) ListElasticsearchInstanceTypesRequest
+	Input *types.ListElasticsearchInstanceTypesInput
+	Copy  func(*types.ListElasticsearchInstanceTypesInput) ListElasticsearchInstanceTypesRequest
 }
 
 // Send marshals and sends the ListElasticsearchInstanceTypes API request.
@@ -180,7 +60,7 @@ func (r ListElasticsearchInstanceTypesRequest) Send(ctx context.Context) (*ListE
 	}
 
 	resp := &ListElasticsearchInstanceTypesResponse{
-		ListElasticsearchInstanceTypesOutput: r.Request.Data.(*ListElasticsearchInstanceTypesOutput),
+		ListElasticsearchInstanceTypesOutput: r.Request.Data.(*types.ListElasticsearchInstanceTypesOutput),
 		response:                             &aws.Response{Request: r.Request},
 	}
 
@@ -210,7 +90,7 @@ func NewListElasticsearchInstanceTypesPaginator(req ListElasticsearchInstanceTyp
 	return ListElasticsearchInstanceTypesPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListElasticsearchInstanceTypesInput
+				var inCpy *types.ListElasticsearchInstanceTypesInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -230,14 +110,14 @@ type ListElasticsearchInstanceTypesPaginator struct {
 	aws.Pager
 }
 
-func (p *ListElasticsearchInstanceTypesPaginator) CurrentPage() *ListElasticsearchInstanceTypesOutput {
-	return p.Pager.CurrentPage().(*ListElasticsearchInstanceTypesOutput)
+func (p *ListElasticsearchInstanceTypesPaginator) CurrentPage() *types.ListElasticsearchInstanceTypesOutput {
+	return p.Pager.CurrentPage().(*types.ListElasticsearchInstanceTypesOutput)
 }
 
 // ListElasticsearchInstanceTypesResponse is the response type for the
 // ListElasticsearchInstanceTypes API operation.
 type ListElasticsearchInstanceTypesResponse struct {
-	*ListElasticsearchInstanceTypesOutput
+	*types.ListElasticsearchInstanceTypesOutput
 
 	response *aws.Response
 }

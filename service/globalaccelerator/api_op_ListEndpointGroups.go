@@ -6,63 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/globalaccelerator/types"
 )
-
-type ListEndpointGroupsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the listener.
-	//
-	// ListenerArn is a required field
-	ListenerArn *string `type:"string" required:"true"`
-
-	// The number of endpoint group objects that you want to return with this call.
-	// The default value is 10.
-	MaxResults *int64 `min:"1" type:"integer"`
-
-	// The token for the next set of results. You receive this token from a previous
-	// call.
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s ListEndpointGroupsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListEndpointGroupsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListEndpointGroupsInput"}
-
-	if s.ListenerArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ListenerArn"))
-	}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ListEndpointGroupsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The list of the endpoint groups associated with a listener.
-	EndpointGroups []EndpointGroup `type:"list"`
-
-	// The token for the next set of results. You receive this token from a previous
-	// call.
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s ListEndpointGroupsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListEndpointGroups = "ListEndpointGroups"
 
@@ -79,7 +24,7 @@ const opListEndpointGroups = "ListEndpointGroups"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/ListEndpointGroups
-func (c *Client) ListEndpointGroupsRequest(input *ListEndpointGroupsInput) ListEndpointGroupsRequest {
+func (c *Client) ListEndpointGroupsRequest(input *types.ListEndpointGroupsInput) ListEndpointGroupsRequest {
 	op := &aws.Operation{
 		Name:       opListEndpointGroups,
 		HTTPMethod: "POST",
@@ -87,10 +32,10 @@ func (c *Client) ListEndpointGroupsRequest(input *ListEndpointGroupsInput) ListE
 	}
 
 	if input == nil {
-		input = &ListEndpointGroupsInput{}
+		input = &types.ListEndpointGroupsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListEndpointGroupsOutput{})
+	req := c.newRequest(op, input, &types.ListEndpointGroupsOutput{})
 	return ListEndpointGroupsRequest{Request: req, Input: input, Copy: c.ListEndpointGroupsRequest}
 }
 
@@ -98,8 +43,8 @@ func (c *Client) ListEndpointGroupsRequest(input *ListEndpointGroupsInput) ListE
 // ListEndpointGroups API operation.
 type ListEndpointGroupsRequest struct {
 	*aws.Request
-	Input *ListEndpointGroupsInput
-	Copy  func(*ListEndpointGroupsInput) ListEndpointGroupsRequest
+	Input *types.ListEndpointGroupsInput
+	Copy  func(*types.ListEndpointGroupsInput) ListEndpointGroupsRequest
 }
 
 // Send marshals and sends the ListEndpointGroups API request.
@@ -111,7 +56,7 @@ func (r ListEndpointGroupsRequest) Send(ctx context.Context) (*ListEndpointGroup
 	}
 
 	resp := &ListEndpointGroupsResponse{
-		ListEndpointGroupsOutput: r.Request.Data.(*ListEndpointGroupsOutput),
+		ListEndpointGroupsOutput: r.Request.Data.(*types.ListEndpointGroupsOutput),
 		response:                 &aws.Response{Request: r.Request},
 	}
 
@@ -121,7 +66,7 @@ func (r ListEndpointGroupsRequest) Send(ctx context.Context) (*ListEndpointGroup
 // ListEndpointGroupsResponse is the response type for the
 // ListEndpointGroups API operation.
 type ListEndpointGroupsResponse struct {
-	*ListEndpointGroupsOutput
+	*types.ListEndpointGroupsOutput
 
 	response *aws.Response
 }

@@ -4,70 +4,10 @@ package dynamodb
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/dynamodb/types"
 )
-
-type UpdateGlobalTableInput struct {
-	_ struct{} `type:"structure"`
-
-	// The global table name.
-	//
-	// GlobalTableName is a required field
-	GlobalTableName *string `min:"3" type:"string" required:"true"`
-
-	// A list of Regions that should be added or removed from the global table.
-	//
-	// ReplicaUpdates is a required field
-	ReplicaUpdates []ReplicaUpdate `type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s UpdateGlobalTableInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateGlobalTableInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateGlobalTableInput"}
-
-	if s.GlobalTableName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("GlobalTableName"))
-	}
-	if s.GlobalTableName != nil && len(*s.GlobalTableName) < 3 {
-		invalidParams.Add(aws.NewErrParamMinLen("GlobalTableName", 3))
-	}
-
-	if s.ReplicaUpdates == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ReplicaUpdates"))
-	}
-	if s.ReplicaUpdates != nil {
-		for i, v := range s.ReplicaUpdates {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "ReplicaUpdates", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type UpdateGlobalTableOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Contains the details of the global table.
-	GlobalTableDescription *GlobalTableDescription `type:"structure"`
-}
-
-// String returns the string representation
-func (s UpdateGlobalTableOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opUpdateGlobalTable = "UpdateGlobalTable"
 
@@ -103,7 +43,7 @@ const opUpdateGlobalTable = "UpdateGlobalTable"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/UpdateGlobalTable
-func (c *Client) UpdateGlobalTableRequest(input *UpdateGlobalTableInput) UpdateGlobalTableRequest {
+func (c *Client) UpdateGlobalTableRequest(input *types.UpdateGlobalTableInput) UpdateGlobalTableRequest {
 	op := &aws.Operation{
 		Name:       opUpdateGlobalTable,
 		HTTPMethod: "POST",
@@ -111,10 +51,10 @@ func (c *Client) UpdateGlobalTableRequest(input *UpdateGlobalTableInput) UpdateG
 	}
 
 	if input == nil {
-		input = &UpdateGlobalTableInput{}
+		input = &types.UpdateGlobalTableInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateGlobalTableOutput{})
+	req := c.newRequest(op, input, &types.UpdateGlobalTableOutput{})
 	return UpdateGlobalTableRequest{Request: req, Input: input, Copy: c.UpdateGlobalTableRequest}
 }
 
@@ -122,8 +62,8 @@ func (c *Client) UpdateGlobalTableRequest(input *UpdateGlobalTableInput) UpdateG
 // UpdateGlobalTable API operation.
 type UpdateGlobalTableRequest struct {
 	*aws.Request
-	Input *UpdateGlobalTableInput
-	Copy  func(*UpdateGlobalTableInput) UpdateGlobalTableRequest
+	Input *types.UpdateGlobalTableInput
+	Copy  func(*types.UpdateGlobalTableInput) UpdateGlobalTableRequest
 }
 
 // Send marshals and sends the UpdateGlobalTable API request.
@@ -135,7 +75,7 @@ func (r UpdateGlobalTableRequest) Send(ctx context.Context) (*UpdateGlobalTableR
 	}
 
 	resp := &UpdateGlobalTableResponse{
-		UpdateGlobalTableOutput: r.Request.Data.(*UpdateGlobalTableOutput),
+		UpdateGlobalTableOutput: r.Request.Data.(*types.UpdateGlobalTableOutput),
 		response:                &aws.Response{Request: r.Request},
 	}
 
@@ -145,7 +85,7 @@ func (r UpdateGlobalTableRequest) Send(ctx context.Context) (*UpdateGlobalTableR
 // UpdateGlobalTableResponse is the response type for the
 // UpdateGlobalTable API operation.
 type UpdateGlobalTableResponse struct {
-	*UpdateGlobalTableOutput
+	*types.UpdateGlobalTableOutput
 
 	response *aws.Response
 }

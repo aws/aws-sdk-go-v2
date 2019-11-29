@@ -6,64 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/autoscaling/types"
 )
-
-type DetachInstancesInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the Auto Scaling group.
-	//
-	// AutoScalingGroupName is a required field
-	AutoScalingGroupName *string `min:"1" type:"string" required:"true"`
-
-	// The IDs of the instances. You can specify up to 20 instances.
-	InstanceIds []string `type:"list"`
-
-	// Indicates whether the Auto Scaling group decrements the desired capacity
-	// value by the number of instances detached.
-	//
-	// ShouldDecrementDesiredCapacity is a required field
-	ShouldDecrementDesiredCapacity *bool `type:"boolean" required:"true"`
-}
-
-// String returns the string representation
-func (s DetachInstancesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DetachInstancesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DetachInstancesInput"}
-
-	if s.AutoScalingGroupName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("AutoScalingGroupName"))
-	}
-	if s.AutoScalingGroupName != nil && len(*s.AutoScalingGroupName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("AutoScalingGroupName", 1))
-	}
-
-	if s.ShouldDecrementDesiredCapacity == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ShouldDecrementDesiredCapacity"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DetachInstancesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The activities related to detaching the instances from the Auto Scaling group.
-	Activities []Activity `type:"list"`
-}
-
-// String returns the string representation
-func (s DetachInstancesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDetachInstances = "DetachInstances"
 
@@ -95,7 +39,7 @@ const opDetachInstances = "DetachInstances"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DetachInstances
-func (c *Client) DetachInstancesRequest(input *DetachInstancesInput) DetachInstancesRequest {
+func (c *Client) DetachInstancesRequest(input *types.DetachInstancesInput) DetachInstancesRequest {
 	op := &aws.Operation{
 		Name:       opDetachInstances,
 		HTTPMethod: "POST",
@@ -103,10 +47,10 @@ func (c *Client) DetachInstancesRequest(input *DetachInstancesInput) DetachInsta
 	}
 
 	if input == nil {
-		input = &DetachInstancesInput{}
+		input = &types.DetachInstancesInput{}
 	}
 
-	req := c.newRequest(op, input, &DetachInstancesOutput{})
+	req := c.newRequest(op, input, &types.DetachInstancesOutput{})
 	return DetachInstancesRequest{Request: req, Input: input, Copy: c.DetachInstancesRequest}
 }
 
@@ -114,8 +58,8 @@ func (c *Client) DetachInstancesRequest(input *DetachInstancesInput) DetachInsta
 // DetachInstances API operation.
 type DetachInstancesRequest struct {
 	*aws.Request
-	Input *DetachInstancesInput
-	Copy  func(*DetachInstancesInput) DetachInstancesRequest
+	Input *types.DetachInstancesInput
+	Copy  func(*types.DetachInstancesInput) DetachInstancesRequest
 }
 
 // Send marshals and sends the DetachInstances API request.
@@ -127,7 +71,7 @@ func (r DetachInstancesRequest) Send(ctx context.Context) (*DetachInstancesRespo
 	}
 
 	resp := &DetachInstancesResponse{
-		DetachInstancesOutput: r.Request.Data.(*DetachInstancesOutput),
+		DetachInstancesOutput: r.Request.Data.(*types.DetachInstancesOutput),
 		response:              &aws.Response{Request: r.Request},
 	}
 
@@ -137,7 +81,7 @@ func (r DetachInstancesRequest) Send(ctx context.Context) (*DetachInstancesRespo
 // DetachInstancesResponse is the response type for the
 // DetachInstances API operation.
 type DetachInstancesResponse struct {
-	*DetachInstancesOutput
+	*types.DetachInstancesOutput
 
 	response *aws.Response
 }

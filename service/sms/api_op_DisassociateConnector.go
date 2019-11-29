@@ -6,45 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/sms/types"
 )
-
-type DisassociateConnectorInput struct {
-	_ struct{} `type:"structure"`
-
-	// The identifier of the connector.
-	//
-	// ConnectorId is a required field
-	ConnectorId *string `locationName:"connectorId" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DisassociateConnectorInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DisassociateConnectorInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DisassociateConnectorInput"}
-
-	if s.ConnectorId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ConnectorId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DisassociateConnectorOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DisassociateConnectorOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDisassociateConnector = "DisassociateConnector"
 
@@ -64,7 +27,7 @@ const opDisassociateConnector = "DisassociateConnector"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sms-2016-10-24/DisassociateConnector
-func (c *Client) DisassociateConnectorRequest(input *DisassociateConnectorInput) DisassociateConnectorRequest {
+func (c *Client) DisassociateConnectorRequest(input *types.DisassociateConnectorInput) DisassociateConnectorRequest {
 	op := &aws.Operation{
 		Name:       opDisassociateConnector,
 		HTTPMethod: "POST",
@@ -72,10 +35,10 @@ func (c *Client) DisassociateConnectorRequest(input *DisassociateConnectorInput)
 	}
 
 	if input == nil {
-		input = &DisassociateConnectorInput{}
+		input = &types.DisassociateConnectorInput{}
 	}
 
-	req := c.newRequest(op, input, &DisassociateConnectorOutput{})
+	req := c.newRequest(op, input, &types.DisassociateConnectorOutput{})
 	return DisassociateConnectorRequest{Request: req, Input: input, Copy: c.DisassociateConnectorRequest}
 }
 
@@ -83,8 +46,8 @@ func (c *Client) DisassociateConnectorRequest(input *DisassociateConnectorInput)
 // DisassociateConnector API operation.
 type DisassociateConnectorRequest struct {
 	*aws.Request
-	Input *DisassociateConnectorInput
-	Copy  func(*DisassociateConnectorInput) DisassociateConnectorRequest
+	Input *types.DisassociateConnectorInput
+	Copy  func(*types.DisassociateConnectorInput) DisassociateConnectorRequest
 }
 
 // Send marshals and sends the DisassociateConnector API request.
@@ -96,7 +59,7 @@ func (r DisassociateConnectorRequest) Send(ctx context.Context) (*DisassociateCo
 	}
 
 	resp := &DisassociateConnectorResponse{
-		DisassociateConnectorOutput: r.Request.Data.(*DisassociateConnectorOutput),
+		DisassociateConnectorOutput: r.Request.Data.(*types.DisassociateConnectorOutput),
 		response:                    &aws.Response{Request: r.Request},
 	}
 
@@ -106,7 +69,7 @@ func (r DisassociateConnectorRequest) Send(ctx context.Context) (*DisassociateCo
 // DisassociateConnectorResponse is the response type for the
 // DisassociateConnector API operation.
 type DisassociateConnectorResponse struct {
-	*DisassociateConnectorOutput
+	*types.DisassociateConnectorOutput
 
 	response *aws.Response
 }

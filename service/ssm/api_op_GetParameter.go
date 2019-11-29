@@ -6,55 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ssm/types"
 )
-
-type GetParameterInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the parameter you want to query.
-	//
-	// Name is a required field
-	Name *string `min:"1" type:"string" required:"true"`
-
-	// Return decrypted values for secure string parameters. This flag is ignored
-	// for String and StringList parameter types.
-	WithDecryption *bool `type:"boolean"`
-}
-
-// String returns the string representation
-func (s GetParameterInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetParameterInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetParameterInput"}
-
-	if s.Name == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Name"))
-	}
-	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type GetParameterOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Information about a parameter.
-	Parameter *Parameter `type:"structure"`
-}
-
-// String returns the string representation
-func (s GetParameterOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetParameter = "GetParameter"
 
@@ -72,7 +25,7 @@ const opGetParameter = "GetParameter"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetParameter
-func (c *Client) GetParameterRequest(input *GetParameterInput) GetParameterRequest {
+func (c *Client) GetParameterRequest(input *types.GetParameterInput) GetParameterRequest {
 	op := &aws.Operation{
 		Name:       opGetParameter,
 		HTTPMethod: "POST",
@@ -80,10 +33,10 @@ func (c *Client) GetParameterRequest(input *GetParameterInput) GetParameterReque
 	}
 
 	if input == nil {
-		input = &GetParameterInput{}
+		input = &types.GetParameterInput{}
 	}
 
-	req := c.newRequest(op, input, &GetParameterOutput{})
+	req := c.newRequest(op, input, &types.GetParameterOutput{})
 	return GetParameterRequest{Request: req, Input: input, Copy: c.GetParameterRequest}
 }
 
@@ -91,8 +44,8 @@ func (c *Client) GetParameterRequest(input *GetParameterInput) GetParameterReque
 // GetParameter API operation.
 type GetParameterRequest struct {
 	*aws.Request
-	Input *GetParameterInput
-	Copy  func(*GetParameterInput) GetParameterRequest
+	Input *types.GetParameterInput
+	Copy  func(*types.GetParameterInput) GetParameterRequest
 }
 
 // Send marshals and sends the GetParameter API request.
@@ -104,7 +57,7 @@ func (r GetParameterRequest) Send(ctx context.Context) (*GetParameterResponse, e
 	}
 
 	resp := &GetParameterResponse{
-		GetParameterOutput: r.Request.Data.(*GetParameterOutput),
+		GetParameterOutput: r.Request.Data.(*types.GetParameterOutput),
 		response:           &aws.Response{Request: r.Request},
 	}
 
@@ -114,7 +67,7 @@ func (r GetParameterRequest) Send(ctx context.Context) (*GetParameterResponse, e
 // GetParameterResponse is the response type for the
 // GetParameter API operation.
 type GetParameterResponse struct {
-	*GetParameterOutput
+	*types.GetParameterOutput
 
 	response *aws.Response
 }

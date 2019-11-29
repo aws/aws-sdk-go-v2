@@ -13,6 +13,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws/awserr"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting/integration"
 	"github.com/aws/aws-sdk-go-v2/service/servicecatalog"
+	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/types"
 )
 
 var _ aws.Config
@@ -24,7 +25,7 @@ func TestInteg_00_ListAcceptedPortfolioShares(t *testing.T) {
 
 	cfg := integration.ConfigWithDefaultRegion("us-west-2")
 	svc := servicecatalog.New(cfg)
-	params := &servicecatalog.ListAcceptedPortfolioSharesInput{}
+	params := &types.ListAcceptedPortfolioSharesInput{}
 
 	req := svc.ListAcceptedPortfolioSharesRequest(params)
 

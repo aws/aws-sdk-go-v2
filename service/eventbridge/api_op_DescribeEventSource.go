@@ -4,74 +4,10 @@ package eventbridge
 
 import (
 	"context"
-	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/eventbridge/types"
 )
-
-type DescribeEventSourceInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the partner event source to display the details of.
-	//
-	// Name is a required field
-	Name *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeEventSourceInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeEventSourceInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeEventSourceInput"}
-
-	if s.Name == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Name"))
-	}
-	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribeEventSourceOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The ARN of the partner event source.
-	Arn *string `type:"string"`
-
-	// The name of the SaaS partner that created the event source.
-	CreatedBy *string `type:"string"`
-
-	// The date and time that the event source was created.
-	CreationTime *time.Time `type:"timestamp"`
-
-	// The date and time that the event source will expire if you don't create a
-	// matching event bus.
-	ExpirationTime *time.Time `type:"timestamp"`
-
-	// The name of the partner event source.
-	Name *string `type:"string"`
-
-	// The state of the event source. If it's ACTIVE, you have already created a
-	// matching event bus for this event source, and that event bus is active. If
-	// it's PENDING, either you haven't yet created a matching event bus, or that
-	// event bus is deactivated. If it's DELETED, you have created a matching event
-	// bus, but the event source has since been deleted.
-	State EventSourceState `type:"string" enum:"true"`
-}
-
-// String returns the string representation
-func (s DescribeEventSourceOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeEventSource = "DescribeEventSource"
 
@@ -91,7 +27,7 @@ const opDescribeEventSource = "DescribeEventSource"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/DescribeEventSource
-func (c *Client) DescribeEventSourceRequest(input *DescribeEventSourceInput) DescribeEventSourceRequest {
+func (c *Client) DescribeEventSourceRequest(input *types.DescribeEventSourceInput) DescribeEventSourceRequest {
 	op := &aws.Operation{
 		Name:       opDescribeEventSource,
 		HTTPMethod: "POST",
@@ -99,10 +35,10 @@ func (c *Client) DescribeEventSourceRequest(input *DescribeEventSourceInput) Des
 	}
 
 	if input == nil {
-		input = &DescribeEventSourceInput{}
+		input = &types.DescribeEventSourceInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeEventSourceOutput{})
+	req := c.newRequest(op, input, &types.DescribeEventSourceOutput{})
 	return DescribeEventSourceRequest{Request: req, Input: input, Copy: c.DescribeEventSourceRequest}
 }
 
@@ -110,8 +46,8 @@ func (c *Client) DescribeEventSourceRequest(input *DescribeEventSourceInput) Des
 // DescribeEventSource API operation.
 type DescribeEventSourceRequest struct {
 	*aws.Request
-	Input *DescribeEventSourceInput
-	Copy  func(*DescribeEventSourceInput) DescribeEventSourceRequest
+	Input *types.DescribeEventSourceInput
+	Copy  func(*types.DescribeEventSourceInput) DescribeEventSourceRequest
 }
 
 // Send marshals and sends the DescribeEventSource API request.
@@ -123,7 +59,7 @@ func (r DescribeEventSourceRequest) Send(ctx context.Context) (*DescribeEventSou
 	}
 
 	resp := &DescribeEventSourceResponse{
-		DescribeEventSourceOutput: r.Request.Data.(*DescribeEventSourceOutput),
+		DescribeEventSourceOutput: r.Request.Data.(*types.DescribeEventSourceOutput),
 		response:                  &aws.Response{Request: r.Request},
 	}
 
@@ -133,7 +69,7 @@ func (r DescribeEventSourceRequest) Send(ctx context.Context) (*DescribeEventSou
 // DescribeEventSourceResponse is the response type for the
 // DescribeEventSource API operation.
 type DescribeEventSourceResponse struct {
-	*DescribeEventSourceOutput
+	*types.DescribeEventSourceOutput
 
 	response *aws.Response
 }

@@ -13,6 +13,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws/awserr"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting/integration"
 	"github.com/aws/aws-sdk-go-v2/service/elasticsearchservice"
+	"github.com/aws/aws-sdk-go-v2/service/elasticsearchservice/types"
 )
 
 var _ aws.Config
@@ -24,7 +25,7 @@ func TestInteg_00_ListDomainNames(t *testing.T) {
 
 	cfg := integration.ConfigWithDefaultRegion("us-west-2")
 	svc := elasticsearchservice.New(cfg)
-	params := &elasticsearchservice.ListDomainNamesInput{}
+	params := &types.ListDomainNamesInput{}
 
 	req := svc.ListDomainNamesRequest(params)
 
@@ -39,7 +40,7 @@ func TestInteg_01_DescribeElasticsearchDomain(t *testing.T) {
 
 	cfg := integration.ConfigWithDefaultRegion("us-west-2")
 	svc := elasticsearchservice.New(cfg)
-	params := &elasticsearchservice.DescribeElasticsearchDomainInput{
+	params := &types.DescribeElasticsearchDomainInput{
 		DomainName: aws.String("not-a-domain"),
 	}
 

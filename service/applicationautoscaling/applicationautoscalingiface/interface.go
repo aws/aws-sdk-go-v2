@@ -10,6 +10,7 @@ package applicationautoscalingiface
 
 import (
 	"github.com/aws/aws-sdk-go-v2/service/applicationautoscaling"
+	"github.com/aws/aws-sdk-go-v2/service/applicationautoscaling/types"
 )
 
 // ClientAPI provides an interface to enable mocking the
@@ -43,7 +44,7 @@ import (
 //    type mockClientClient struct {
 //        applicationautoscalingiface.ClientPI
 //    }
-//    func (m *mockClientClient) DeleteScalingPolicy(input *applicationautoscaling.DeleteScalingPolicyInput) (*applicationautoscaling.DeleteScalingPolicyOutput, error) {
+//    func (m *mockClientClient) DeleteScalingPolicy(input *types.DeleteScalingPolicyInput) (*types.DeleteScalingPolicyOutput, error) {
 //        // mock response/functionality
 //    }
 //
@@ -61,25 +62,25 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type ClientAPI interface {
-	DeleteScalingPolicyRequest(*applicationautoscaling.DeleteScalingPolicyInput) applicationautoscaling.DeleteScalingPolicyRequest
+	DeleteScalingPolicyRequest(*types.DeleteScalingPolicyInput) applicationautoscaling.DeleteScalingPolicyRequest
 
-	DeleteScheduledActionRequest(*applicationautoscaling.DeleteScheduledActionInput) applicationautoscaling.DeleteScheduledActionRequest
+	DeleteScheduledActionRequest(*types.DeleteScheduledActionInput) applicationautoscaling.DeleteScheduledActionRequest
 
-	DeregisterScalableTargetRequest(*applicationautoscaling.DeregisterScalableTargetInput) applicationautoscaling.DeregisterScalableTargetRequest
+	DeregisterScalableTargetRequest(*types.DeregisterScalableTargetInput) applicationautoscaling.DeregisterScalableTargetRequest
 
-	DescribeScalableTargetsRequest(*applicationautoscaling.DescribeScalableTargetsInput) applicationautoscaling.DescribeScalableTargetsRequest
+	DescribeScalableTargetsRequest(*types.DescribeScalableTargetsInput) applicationautoscaling.DescribeScalableTargetsRequest
 
-	DescribeScalingActivitiesRequest(*applicationautoscaling.DescribeScalingActivitiesInput) applicationautoscaling.DescribeScalingActivitiesRequest
+	DescribeScalingActivitiesRequest(*types.DescribeScalingActivitiesInput) applicationautoscaling.DescribeScalingActivitiesRequest
 
-	DescribeScalingPoliciesRequest(*applicationautoscaling.DescribeScalingPoliciesInput) applicationautoscaling.DescribeScalingPoliciesRequest
+	DescribeScalingPoliciesRequest(*types.DescribeScalingPoliciesInput) applicationautoscaling.DescribeScalingPoliciesRequest
 
-	DescribeScheduledActionsRequest(*applicationautoscaling.DescribeScheduledActionsInput) applicationautoscaling.DescribeScheduledActionsRequest
+	DescribeScheduledActionsRequest(*types.DescribeScheduledActionsInput) applicationautoscaling.DescribeScheduledActionsRequest
 
-	PutScalingPolicyRequest(*applicationautoscaling.PutScalingPolicyInput) applicationautoscaling.PutScalingPolicyRequest
+	PutScalingPolicyRequest(*types.PutScalingPolicyInput) applicationautoscaling.PutScalingPolicyRequest
 
-	PutScheduledActionRequest(*applicationautoscaling.PutScheduledActionInput) applicationautoscaling.PutScheduledActionRequest
+	PutScheduledActionRequest(*types.PutScheduledActionInput) applicationautoscaling.PutScheduledActionRequest
 
-	RegisterScalableTargetRequest(*applicationautoscaling.RegisterScalableTargetInput) applicationautoscaling.RegisterScalableTargetRequest
+	RegisterScalableTargetRequest(*types.RegisterScalableTargetInput) applicationautoscaling.RegisterScalableTargetRequest
 }
 
 var _ ClientAPI = (*applicationautoscaling.Client)(nil)

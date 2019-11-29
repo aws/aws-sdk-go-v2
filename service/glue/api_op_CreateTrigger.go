@@ -4,115 +4,10 @@ package glue
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/glue/types"
 )
-
-type CreateTriggerInput struct {
-	_ struct{} `type:"structure"`
-
-	// The actions initiated by this trigger when it fires.
-	//
-	// Actions is a required field
-	Actions []Action `type:"list" required:"true"`
-
-	// A description of the new trigger.
-	Description *string `type:"string"`
-
-	// The name of the trigger.
-	//
-	// Name is a required field
-	Name *string `min:"1" type:"string" required:"true"`
-
-	// A predicate to specify when the new trigger should fire.
-	//
-	// This field is required when the trigger type is CONDITIONAL.
-	Predicate *Predicate `type:"structure"`
-
-	// A cron expression used to specify the schedule (see Time-Based Schedules
-	// for Jobs and Crawlers (https://docs.aws.amazon.com/glue/latest/dg/monitor-data-warehouse-schedule.html).
-	// For example, to run something every day at 12:15 UTC, you would specify:
-	// cron(15 12 * * ? *).
-	//
-	// This field is required when the trigger type is SCHEDULED.
-	Schedule *string `type:"string"`
-
-	// Set to true to start SCHEDULED and CONDITIONAL triggers when created. True
-	// is not supported for ON_DEMAND triggers.
-	StartOnCreation *bool `type:"boolean"`
-
-	// The tags to use with this trigger. You may use tags to limit access to the
-	// trigger. For more information about tags in AWS Glue, see AWS Tags in AWS
-	// Glue (https://docs.aws.amazon.com/glue/latest/dg/monitor-tags.html) in the
-	// developer guide.
-	Tags map[string]string `type:"map"`
-
-	// The type of the new trigger.
-	//
-	// Type is a required field
-	Type TriggerType `type:"string" required:"true" enum:"true"`
-
-	// The name of the workflow associated with the trigger.
-	WorkflowName *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s CreateTriggerInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateTriggerInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateTriggerInput"}
-
-	if s.Actions == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Actions"))
-	}
-
-	if s.Name == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Name"))
-	}
-	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
-	}
-	if len(s.Type) == 0 {
-		invalidParams.Add(aws.NewErrParamRequired("Type"))
-	}
-	if s.WorkflowName != nil && len(*s.WorkflowName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("WorkflowName", 1))
-	}
-	if s.Actions != nil {
-		for i, v := range s.Actions {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Actions", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-	if s.Predicate != nil {
-		if err := s.Predicate.Validate(); err != nil {
-			invalidParams.AddNested("Predicate", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type CreateTriggerOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the trigger.
-	Name *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s CreateTriggerOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCreateTrigger = "CreateTrigger"
 
@@ -129,7 +24,7 @@ const opCreateTrigger = "CreateTrigger"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CreateTrigger
-func (c *Client) CreateTriggerRequest(input *CreateTriggerInput) CreateTriggerRequest {
+func (c *Client) CreateTriggerRequest(input *types.CreateTriggerInput) CreateTriggerRequest {
 	op := &aws.Operation{
 		Name:       opCreateTrigger,
 		HTTPMethod: "POST",
@@ -137,10 +32,10 @@ func (c *Client) CreateTriggerRequest(input *CreateTriggerInput) CreateTriggerRe
 	}
 
 	if input == nil {
-		input = &CreateTriggerInput{}
+		input = &types.CreateTriggerInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateTriggerOutput{})
+	req := c.newRequest(op, input, &types.CreateTriggerOutput{})
 	return CreateTriggerRequest{Request: req, Input: input, Copy: c.CreateTriggerRequest}
 }
 
@@ -148,8 +43,8 @@ func (c *Client) CreateTriggerRequest(input *CreateTriggerInput) CreateTriggerRe
 // CreateTrigger API operation.
 type CreateTriggerRequest struct {
 	*aws.Request
-	Input *CreateTriggerInput
-	Copy  func(*CreateTriggerInput) CreateTriggerRequest
+	Input *types.CreateTriggerInput
+	Copy  func(*types.CreateTriggerInput) CreateTriggerRequest
 }
 
 // Send marshals and sends the CreateTrigger API request.
@@ -161,7 +56,7 @@ func (r CreateTriggerRequest) Send(ctx context.Context) (*CreateTriggerResponse,
 	}
 
 	resp := &CreateTriggerResponse{
-		CreateTriggerOutput: r.Request.Data.(*CreateTriggerOutput),
+		CreateTriggerOutput: r.Request.Data.(*types.CreateTriggerOutput),
 		response:            &aws.Response{Request: r.Request},
 	}
 
@@ -171,7 +66,7 @@ func (r CreateTriggerRequest) Send(ctx context.Context) (*CreateTriggerResponse,
 // CreateTriggerResponse is the response type for the
 // CreateTrigger API operation.
 type CreateTriggerResponse struct {
-	*CreateTriggerOutput
+	*types.CreateTriggerOutput
 
 	response *aws.Response
 }

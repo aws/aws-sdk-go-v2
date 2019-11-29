@@ -4,125 +4,10 @@ package lightsail
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/lightsail/types"
 )
-
-type CreateInstancesInput struct {
-	_ struct{} `type:"structure"`
-
-	// An array of objects representing the add-ons to enable for the new instance.
-	AddOns []AddOnRequest `locationName:"addOns" type:"list"`
-
-	// The Availability Zone in which to create your instance. Use the following
-	// format: us-east-2a (case sensitive). You can get a list of Availability Zones
-	// by using the get regions (http://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/API_GetRegions.html)
-	// operation. Be sure to add the include Availability Zones parameter to your
-	// request.
-	//
-	// AvailabilityZone is a required field
-	AvailabilityZone *string `locationName:"availabilityZone" type:"string" required:"true"`
-
-	// The ID for a virtual private server image (e.g., app_wordpress_4_4 or app_lamp_7_0).
-	// Use the get blueprints operation to return a list of available images (or
-	// blueprints).
-	//
-	// Use active blueprints when creating new instances. Inactive blueprints are
-	// listed to support customers with existing instances and are not necessarily
-	// available to create new instances. Blueprints are marked inactive when they
-	// become outdated due to operating system updates or new application releases.
-	//
-	// BlueprintId is a required field
-	BlueprintId *string `locationName:"blueprintId" type:"string" required:"true"`
-
-	// The bundle of specification information for your virtual private server (or
-	// instance), including the pricing plan (e.g., micro_1_0).
-	//
-	// BundleId is a required field
-	BundleId *string `locationName:"bundleId" type:"string" required:"true"`
-
-	// (Deprecated) The name for your custom image.
-	//
-	// In releases prior to June 12, 2017, this parameter was ignored by the API.
-	// It is now deprecated.
-	CustomImageName *string `locationName:"customImageName" deprecated:"true" type:"string"`
-
-	// The names to use for your new Lightsail instances. Separate multiple values
-	// using quotation marks and commas, for example: ["MyFirstInstance","MySecondInstance"]
-	//
-	// InstanceNames is a required field
-	InstanceNames []string `locationName:"instanceNames" type:"list" required:"true"`
-
-	// The name of your key pair.
-	KeyPairName *string `locationName:"keyPairName" type:"string"`
-
-	// The tag keys and optional values to add to the resource during create.
-	//
-	// To tag a resource after it has been created, see the tag resource operation.
-	Tags []Tag `locationName:"tags" type:"list"`
-
-	// A launch script you can create that configures a server with additional user
-	// data. For example, you might want to run apt-get -y update.
-	//
-	// Depending on the machine image you choose, the command to get software on
-	// your instance varies. Amazon Linux and CentOS use yum, Debian and Ubuntu
-	// use apt-get, and FreeBSD uses pkg. For a complete list, see the Dev Guide
-	// (https://lightsail.aws.amazon.com/ls/docs/getting-started/article/compare-options-choose-lightsail-instance-image).
-	UserData *string `locationName:"userData" type:"string"`
-}
-
-// String returns the string representation
-func (s CreateInstancesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateInstancesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateInstancesInput"}
-
-	if s.AvailabilityZone == nil {
-		invalidParams.Add(aws.NewErrParamRequired("AvailabilityZone"))
-	}
-
-	if s.BlueprintId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("BlueprintId"))
-	}
-
-	if s.BundleId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("BundleId"))
-	}
-
-	if s.InstanceNames == nil {
-		invalidParams.Add(aws.NewErrParamRequired("InstanceNames"))
-	}
-	if s.AddOns != nil {
-		for i, v := range s.AddOns {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "AddOns", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type CreateInstancesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// An array of key-value pairs containing information about the results of your
-	// create instances request.
-	Operations []Operation `locationName:"operations" type:"list"`
-}
-
-// String returns the string representation
-func (s CreateInstancesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCreateInstances = "CreateInstances"
 
@@ -142,7 +27,7 @@ const opCreateInstances = "CreateInstances"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/CreateInstances
-func (c *Client) CreateInstancesRequest(input *CreateInstancesInput) CreateInstancesRequest {
+func (c *Client) CreateInstancesRequest(input *types.CreateInstancesInput) CreateInstancesRequest {
 	op := &aws.Operation{
 		Name:       opCreateInstances,
 		HTTPMethod: "POST",
@@ -150,10 +35,10 @@ func (c *Client) CreateInstancesRequest(input *CreateInstancesInput) CreateInsta
 	}
 
 	if input == nil {
-		input = &CreateInstancesInput{}
+		input = &types.CreateInstancesInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateInstancesOutput{})
+	req := c.newRequest(op, input, &types.CreateInstancesOutput{})
 	return CreateInstancesRequest{Request: req, Input: input, Copy: c.CreateInstancesRequest}
 }
 
@@ -161,8 +46,8 @@ func (c *Client) CreateInstancesRequest(input *CreateInstancesInput) CreateInsta
 // CreateInstances API operation.
 type CreateInstancesRequest struct {
 	*aws.Request
-	Input *CreateInstancesInput
-	Copy  func(*CreateInstancesInput) CreateInstancesRequest
+	Input *types.CreateInstancesInput
+	Copy  func(*types.CreateInstancesInput) CreateInstancesRequest
 }
 
 // Send marshals and sends the CreateInstances API request.
@@ -174,7 +59,7 @@ func (r CreateInstancesRequest) Send(ctx context.Context) (*CreateInstancesRespo
 	}
 
 	resp := &CreateInstancesResponse{
-		CreateInstancesOutput: r.Request.Data.(*CreateInstancesOutput),
+		CreateInstancesOutput: r.Request.Data.(*types.CreateInstancesOutput),
 		response:              &aws.Response{Request: r.Request},
 	}
 
@@ -184,7 +69,7 @@ func (r CreateInstancesRequest) Send(ctx context.Context) (*CreateInstancesRespo
 // CreateInstancesResponse is the response type for the
 // CreateInstances API operation.
 type CreateInstancesResponse struct {
-	*CreateInstancesOutput
+	*types.CreateInstancesOutput
 
 	response *aws.Response
 }

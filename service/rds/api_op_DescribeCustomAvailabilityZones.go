@@ -4,75 +4,10 @@ package rds
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/rds/types"
 )
-
-type DescribeCustomAvailabilityZonesInput struct {
-	_ struct{} `type:"structure"`
-
-	// The custom AZ identifier. If this parameter is specified, information from
-	// only the specific custom AZ is returned.
-	CustomAvailabilityZoneId *string `type:"string"`
-
-	// A filter that specifies one or more custom AZs to describe.
-	Filters []Filter `locationNameList:"Filter" type:"list"`
-
-	// An optional pagination token provided by a previous DescribeCustomAvailabilityZones
-	// request. If this parameter is specified, the response includes only records
-	// beyond the marker, up to the value specified by MaxRecords.
-	Marker *string `type:"string"`
-
-	// The maximum number of records to include in the response. If more records
-	// exist than the specified MaxRecords value, a pagination token called a marker
-	// is included in the response so that you can retrieve the remaining results.
-	//
-	// Default: 100
-	//
-	// Constraints: Minimum 20, maximum 100.
-	MaxRecords *int64 `type:"integer"`
-}
-
-// String returns the string representation
-func (s DescribeCustomAvailabilityZonesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeCustomAvailabilityZonesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeCustomAvailabilityZonesInput"}
-	if s.Filters != nil {
-		for i, v := range s.Filters {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribeCustomAvailabilityZonesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The list of CustomAvailabilityZone objects for the AWS account.
-	CustomAvailabilityZones []CustomAvailabilityZone `locationNameList:"CustomAvailabilityZone" type:"list"`
-
-	// An optional pagination token provided by a previous DescribeCustomAvailabilityZones
-	// request. If this parameter is specified, the response includes only records
-	// beyond the marker, up to the value specified by MaxRecords.
-	Marker *string `type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeCustomAvailabilityZonesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeCustomAvailabilityZones = "DescribeCustomAvailabilityZones"
 
@@ -95,7 +30,7 @@ const opDescribeCustomAvailabilityZones = "DescribeCustomAvailabilityZones"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeCustomAvailabilityZones
-func (c *Client) DescribeCustomAvailabilityZonesRequest(input *DescribeCustomAvailabilityZonesInput) DescribeCustomAvailabilityZonesRequest {
+func (c *Client) DescribeCustomAvailabilityZonesRequest(input *types.DescribeCustomAvailabilityZonesInput) DescribeCustomAvailabilityZonesRequest {
 	op := &aws.Operation{
 		Name:       opDescribeCustomAvailabilityZones,
 		HTTPMethod: "POST",
@@ -109,10 +44,10 @@ func (c *Client) DescribeCustomAvailabilityZonesRequest(input *DescribeCustomAva
 	}
 
 	if input == nil {
-		input = &DescribeCustomAvailabilityZonesInput{}
+		input = &types.DescribeCustomAvailabilityZonesInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeCustomAvailabilityZonesOutput{})
+	req := c.newRequest(op, input, &types.DescribeCustomAvailabilityZonesOutput{})
 	return DescribeCustomAvailabilityZonesRequest{Request: req, Input: input, Copy: c.DescribeCustomAvailabilityZonesRequest}
 }
 
@@ -120,8 +55,8 @@ func (c *Client) DescribeCustomAvailabilityZonesRequest(input *DescribeCustomAva
 // DescribeCustomAvailabilityZones API operation.
 type DescribeCustomAvailabilityZonesRequest struct {
 	*aws.Request
-	Input *DescribeCustomAvailabilityZonesInput
-	Copy  func(*DescribeCustomAvailabilityZonesInput) DescribeCustomAvailabilityZonesRequest
+	Input *types.DescribeCustomAvailabilityZonesInput
+	Copy  func(*types.DescribeCustomAvailabilityZonesInput) DescribeCustomAvailabilityZonesRequest
 }
 
 // Send marshals and sends the DescribeCustomAvailabilityZones API request.
@@ -133,7 +68,7 @@ func (r DescribeCustomAvailabilityZonesRequest) Send(ctx context.Context) (*Desc
 	}
 
 	resp := &DescribeCustomAvailabilityZonesResponse{
-		DescribeCustomAvailabilityZonesOutput: r.Request.Data.(*DescribeCustomAvailabilityZonesOutput),
+		DescribeCustomAvailabilityZonesOutput: r.Request.Data.(*types.DescribeCustomAvailabilityZonesOutput),
 		response:                              &aws.Response{Request: r.Request},
 	}
 
@@ -163,7 +98,7 @@ func NewDescribeCustomAvailabilityZonesPaginator(req DescribeCustomAvailabilityZ
 	return DescribeCustomAvailabilityZonesPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *DescribeCustomAvailabilityZonesInput
+				var inCpy *types.DescribeCustomAvailabilityZonesInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -183,14 +118,14 @@ type DescribeCustomAvailabilityZonesPaginator struct {
 	aws.Pager
 }
 
-func (p *DescribeCustomAvailabilityZonesPaginator) CurrentPage() *DescribeCustomAvailabilityZonesOutput {
-	return p.Pager.CurrentPage().(*DescribeCustomAvailabilityZonesOutput)
+func (p *DescribeCustomAvailabilityZonesPaginator) CurrentPage() *types.DescribeCustomAvailabilityZonesOutput {
+	return p.Pager.CurrentPage().(*types.DescribeCustomAvailabilityZonesOutput)
 }
 
 // DescribeCustomAvailabilityZonesResponse is the response type for the
 // DescribeCustomAvailabilityZones API operation.
 type DescribeCustomAvailabilityZonesResponse struct {
-	*DescribeCustomAvailabilityZonesOutput
+	*types.DescribeCustomAvailabilityZonesOutput
 
 	response *aws.Response
 }

@@ -6,95 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/restjson"
+	"github.com/aws/aws-sdk-go-v2/service/glacier/types"
 )
-
-// Provides options to configure notifications that will be sent when specific
-// events happen to a vault.
-type SetVaultNotificationsInput struct {
-	_ struct{} `type:"structure" payload:"VaultNotificationConfig"`
-
-	// The AccountId value is the AWS account ID of the account that owns the vault.
-	// You can either specify an AWS account ID or optionally a single '-' (hyphen),
-	// in which case Amazon S3 Glacier uses the AWS account ID associated with the
-	// credentials used to sign the request. If you use an account ID, do not include
-	// any hyphens ('-') in the ID.
-	//
-	// AccountId is a required field
-	AccountId *string `location:"uri" locationName:"accountId" type:"string" required:"true"`
-
-	// The name of the vault.
-	//
-	// VaultName is a required field
-	VaultName *string `location:"uri" locationName:"vaultName" type:"string" required:"true"`
-
-	// Provides options for specifying notification configuration.
-	VaultNotificationConfig *VaultNotificationConfig `locationName:"vaultNotificationConfig" type:"structure"`
-}
-
-// String returns the string representation
-func (s SetVaultNotificationsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *SetVaultNotificationsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "SetVaultNotificationsInput"}
-
-	if s.AccountId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("AccountId"))
-	}
-
-	if s.VaultName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("VaultName"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s SetVaultNotificationsInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.AccountId != nil {
-		v := *s.AccountId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "accountId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.VaultName != nil {
-		v := *s.VaultName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "vaultName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.VaultNotificationConfig != nil {
-		v := s.VaultNotificationConfig
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.PayloadTarget, "vaultNotificationConfig", v, metadata)
-	}
-	return nil
-}
-
-type SetVaultNotificationsOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s SetVaultNotificationsOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s SetVaultNotificationsOutput) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
 
 const opSetVaultNotifications = "SetVaultNotifications"
 
@@ -140,7 +55,7 @@ const opSetVaultNotifications = "SetVaultNotifications"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) SetVaultNotificationsRequest(input *SetVaultNotificationsInput) SetVaultNotificationsRequest {
+func (c *Client) SetVaultNotificationsRequest(input *types.SetVaultNotificationsInput) SetVaultNotificationsRequest {
 	op := &aws.Operation{
 		Name:       opSetVaultNotifications,
 		HTTPMethod: "PUT",
@@ -148,10 +63,10 @@ func (c *Client) SetVaultNotificationsRequest(input *SetVaultNotificationsInput)
 	}
 
 	if input == nil {
-		input = &SetVaultNotificationsInput{}
+		input = &types.SetVaultNotificationsInput{}
 	}
 
-	req := c.newRequest(op, input, &SetVaultNotificationsOutput{})
+	req := c.newRequest(op, input, &types.SetVaultNotificationsOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return SetVaultNotificationsRequest{Request: req, Input: input, Copy: c.SetVaultNotificationsRequest}
@@ -161,8 +76,8 @@ func (c *Client) SetVaultNotificationsRequest(input *SetVaultNotificationsInput)
 // SetVaultNotifications API operation.
 type SetVaultNotificationsRequest struct {
 	*aws.Request
-	Input *SetVaultNotificationsInput
-	Copy  func(*SetVaultNotificationsInput) SetVaultNotificationsRequest
+	Input *types.SetVaultNotificationsInput
+	Copy  func(*types.SetVaultNotificationsInput) SetVaultNotificationsRequest
 }
 
 // Send marshals and sends the SetVaultNotifications API request.
@@ -174,7 +89,7 @@ func (r SetVaultNotificationsRequest) Send(ctx context.Context) (*SetVaultNotifi
 	}
 
 	resp := &SetVaultNotificationsResponse{
-		SetVaultNotificationsOutput: r.Request.Data.(*SetVaultNotificationsOutput),
+		SetVaultNotificationsOutput: r.Request.Data.(*types.SetVaultNotificationsOutput),
 		response:                    &aws.Response{Request: r.Request},
 	}
 
@@ -184,7 +99,7 @@ func (r SetVaultNotificationsRequest) Send(ctx context.Context) (*SetVaultNotifi
 // SetVaultNotificationsResponse is the response type for the
 // SetVaultNotifications API operation.
 type SetVaultNotificationsResponse struct {
-	*SetVaultNotificationsOutput
+	*types.SetVaultNotificationsOutput
 
 	response *aws.Response
 }

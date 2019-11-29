@@ -6,47 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
+	"github.com/aws/aws-sdk-go-v2/service/personalize/types"
 )
-
-type DeleteEventTrackerInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the event tracker to delete.
-	//
-	// EventTrackerArn is a required field
-	EventTrackerArn *string `locationName:"eventTrackerArn" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteEventTrackerInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteEventTrackerInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteEventTrackerInput"}
-
-	if s.EventTrackerArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("EventTrackerArn"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteEventTrackerOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteEventTrackerOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteEventTracker = "DeleteEventTracker"
 
@@ -65,7 +28,7 @@ const opDeleteEventTracker = "DeleteEventTracker"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/DeleteEventTracker
-func (c *Client) DeleteEventTrackerRequest(input *DeleteEventTrackerInput) DeleteEventTrackerRequest {
+func (c *Client) DeleteEventTrackerRequest(input *types.DeleteEventTrackerInput) DeleteEventTrackerRequest {
 	op := &aws.Operation{
 		Name:       opDeleteEventTracker,
 		HTTPMethod: "POST",
@@ -73,10 +36,10 @@ func (c *Client) DeleteEventTrackerRequest(input *DeleteEventTrackerInput) Delet
 	}
 
 	if input == nil {
-		input = &DeleteEventTrackerInput{}
+		input = &types.DeleteEventTrackerInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteEventTrackerOutput{})
+	req := c.newRequest(op, input, &types.DeleteEventTrackerOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return DeleteEventTrackerRequest{Request: req, Input: input, Copy: c.DeleteEventTrackerRequest}
@@ -86,8 +49,8 @@ func (c *Client) DeleteEventTrackerRequest(input *DeleteEventTrackerInput) Delet
 // DeleteEventTracker API operation.
 type DeleteEventTrackerRequest struct {
 	*aws.Request
-	Input *DeleteEventTrackerInput
-	Copy  func(*DeleteEventTrackerInput) DeleteEventTrackerRequest
+	Input *types.DeleteEventTrackerInput
+	Copy  func(*types.DeleteEventTrackerInput) DeleteEventTrackerRequest
 }
 
 // Send marshals and sends the DeleteEventTracker API request.
@@ -99,7 +62,7 @@ func (r DeleteEventTrackerRequest) Send(ctx context.Context) (*DeleteEventTracke
 	}
 
 	resp := &DeleteEventTrackerResponse{
-		DeleteEventTrackerOutput: r.Request.Data.(*DeleteEventTrackerOutput),
+		DeleteEventTrackerOutput: r.Request.Data.(*types.DeleteEventTrackerOutput),
 		response:                 &aws.Response{Request: r.Request},
 	}
 
@@ -109,7 +72,7 @@ func (r DeleteEventTrackerRequest) Send(ctx context.Context) (*DeleteEventTracke
 // DeleteEventTrackerResponse is the response type for the
 // DeleteEventTracker API operation.
 type DeleteEventTrackerResponse struct {
-	*DeleteEventTrackerOutput
+	*types.DeleteEventTrackerOutput
 
 	response *aws.Response
 }

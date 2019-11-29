@@ -6,97 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/iotanalytics/types"
 )
-
-type ListDatasetsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The maximum number of results to return in this request.
-	//
-	// The default value is 100.
-	MaxResults *int64 `location:"querystring" locationName:"maxResults" min:"1" type:"integer"`
-
-	// The token for the next set of results.
-	NextToken *string `location:"querystring" locationName:"nextToken" type:"string"`
-}
-
-// String returns the string representation
-func (s ListDatasetsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListDatasetsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListDatasetsInput"}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListDatasetsInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.MaxResults != nil {
-		v := *s.MaxResults
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "maxResults", protocol.Int64Value(v), metadata)
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type ListDatasetsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A list of "DatasetSummary" objects.
-	DatasetSummaries []DatasetSummary `locationName:"datasetSummaries" type:"list"`
-
-	// The token to retrieve the next set of results, or null if there are no more
-	// results.
-	NextToken *string `locationName:"nextToken" type:"string"`
-}
-
-// String returns the string representation
-func (s ListDatasetsOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListDatasetsOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.DatasetSummaries != nil {
-		v := s.DatasetSummaries
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "datasetSummaries", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opListDatasets = "ListDatasets"
 
@@ -113,7 +24,7 @@ const opListDatasets = "ListDatasets"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iotanalytics-2017-11-27/ListDatasets
-func (c *Client) ListDatasetsRequest(input *ListDatasetsInput) ListDatasetsRequest {
+func (c *Client) ListDatasetsRequest(input *types.ListDatasetsInput) ListDatasetsRequest {
 	op := &aws.Operation{
 		Name:       opListDatasets,
 		HTTPMethod: "GET",
@@ -127,10 +38,10 @@ func (c *Client) ListDatasetsRequest(input *ListDatasetsInput) ListDatasetsReque
 	}
 
 	if input == nil {
-		input = &ListDatasetsInput{}
+		input = &types.ListDatasetsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListDatasetsOutput{})
+	req := c.newRequest(op, input, &types.ListDatasetsOutput{})
 	return ListDatasetsRequest{Request: req, Input: input, Copy: c.ListDatasetsRequest}
 }
 
@@ -138,8 +49,8 @@ func (c *Client) ListDatasetsRequest(input *ListDatasetsInput) ListDatasetsReque
 // ListDatasets API operation.
 type ListDatasetsRequest struct {
 	*aws.Request
-	Input *ListDatasetsInput
-	Copy  func(*ListDatasetsInput) ListDatasetsRequest
+	Input *types.ListDatasetsInput
+	Copy  func(*types.ListDatasetsInput) ListDatasetsRequest
 }
 
 // Send marshals and sends the ListDatasets API request.
@@ -151,7 +62,7 @@ func (r ListDatasetsRequest) Send(ctx context.Context) (*ListDatasetsResponse, e
 	}
 
 	resp := &ListDatasetsResponse{
-		ListDatasetsOutput: r.Request.Data.(*ListDatasetsOutput),
+		ListDatasetsOutput: r.Request.Data.(*types.ListDatasetsOutput),
 		response:           &aws.Response{Request: r.Request},
 	}
 
@@ -181,7 +92,7 @@ func NewListDatasetsPaginator(req ListDatasetsRequest) ListDatasetsPaginator {
 	return ListDatasetsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListDatasetsInput
+				var inCpy *types.ListDatasetsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -201,14 +112,14 @@ type ListDatasetsPaginator struct {
 	aws.Pager
 }
 
-func (p *ListDatasetsPaginator) CurrentPage() *ListDatasetsOutput {
-	return p.Pager.CurrentPage().(*ListDatasetsOutput)
+func (p *ListDatasetsPaginator) CurrentPage() *types.ListDatasetsOutput {
+	return p.Pager.CurrentPage().(*types.ListDatasetsOutput)
 }
 
 // ListDatasetsResponse is the response type for the
 // ListDatasets API operation.
 type ListDatasetsResponse struct {
-	*ListDatasetsOutput
+	*types.ListDatasetsOutput
 
 	response *aws.Response
 }

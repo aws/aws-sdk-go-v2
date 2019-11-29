@@ -10,6 +10,7 @@ package codestariface
 
 import (
 	"github.com/aws/aws-sdk-go-v2/service/codestar"
+	"github.com/aws/aws-sdk-go-v2/service/codestar/types"
 )
 
 // ClientAPI provides an interface to enable mocking the
@@ -43,7 +44,7 @@ import (
 //    type mockClientClient struct {
 //        codestariface.ClientPI
 //    }
-//    func (m *mockClientClient) AssociateTeamMember(input *codestar.AssociateTeamMemberInput) (*codestar.AssociateTeamMemberOutput, error) {
+//    func (m *mockClientClient) AssociateTeamMember(input *types.AssociateTeamMemberInput) (*types.AssociateTeamMemberOutput, error) {
 //        // mock response/functionality
 //    }
 //
@@ -61,41 +62,41 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type ClientAPI interface {
-	AssociateTeamMemberRequest(*codestar.AssociateTeamMemberInput) codestar.AssociateTeamMemberRequest
+	AssociateTeamMemberRequest(*types.AssociateTeamMemberInput) codestar.AssociateTeamMemberRequest
 
-	CreateProjectRequest(*codestar.CreateProjectInput) codestar.CreateProjectRequest
+	CreateProjectRequest(*types.CreateProjectInput) codestar.CreateProjectRequest
 
-	CreateUserProfileRequest(*codestar.CreateUserProfileInput) codestar.CreateUserProfileRequest
+	CreateUserProfileRequest(*types.CreateUserProfileInput) codestar.CreateUserProfileRequest
 
-	DeleteProjectRequest(*codestar.DeleteProjectInput) codestar.DeleteProjectRequest
+	DeleteProjectRequest(*types.DeleteProjectInput) codestar.DeleteProjectRequest
 
-	DeleteUserProfileRequest(*codestar.DeleteUserProfileInput) codestar.DeleteUserProfileRequest
+	DeleteUserProfileRequest(*types.DeleteUserProfileInput) codestar.DeleteUserProfileRequest
 
-	DescribeProjectRequest(*codestar.DescribeProjectInput) codestar.DescribeProjectRequest
+	DescribeProjectRequest(*types.DescribeProjectInput) codestar.DescribeProjectRequest
 
-	DescribeUserProfileRequest(*codestar.DescribeUserProfileInput) codestar.DescribeUserProfileRequest
+	DescribeUserProfileRequest(*types.DescribeUserProfileInput) codestar.DescribeUserProfileRequest
 
-	DisassociateTeamMemberRequest(*codestar.DisassociateTeamMemberInput) codestar.DisassociateTeamMemberRequest
+	DisassociateTeamMemberRequest(*types.DisassociateTeamMemberInput) codestar.DisassociateTeamMemberRequest
 
-	ListProjectsRequest(*codestar.ListProjectsInput) codestar.ListProjectsRequest
+	ListProjectsRequest(*types.ListProjectsInput) codestar.ListProjectsRequest
 
-	ListResourcesRequest(*codestar.ListResourcesInput) codestar.ListResourcesRequest
+	ListResourcesRequest(*types.ListResourcesInput) codestar.ListResourcesRequest
 
-	ListTagsForProjectRequest(*codestar.ListTagsForProjectInput) codestar.ListTagsForProjectRequest
+	ListTagsForProjectRequest(*types.ListTagsForProjectInput) codestar.ListTagsForProjectRequest
 
-	ListTeamMembersRequest(*codestar.ListTeamMembersInput) codestar.ListTeamMembersRequest
+	ListTeamMembersRequest(*types.ListTeamMembersInput) codestar.ListTeamMembersRequest
 
-	ListUserProfilesRequest(*codestar.ListUserProfilesInput) codestar.ListUserProfilesRequest
+	ListUserProfilesRequest(*types.ListUserProfilesInput) codestar.ListUserProfilesRequest
 
-	TagProjectRequest(*codestar.TagProjectInput) codestar.TagProjectRequest
+	TagProjectRequest(*types.TagProjectInput) codestar.TagProjectRequest
 
-	UntagProjectRequest(*codestar.UntagProjectInput) codestar.UntagProjectRequest
+	UntagProjectRequest(*types.UntagProjectInput) codestar.UntagProjectRequest
 
-	UpdateProjectRequest(*codestar.UpdateProjectInput) codestar.UpdateProjectRequest
+	UpdateProjectRequest(*types.UpdateProjectInput) codestar.UpdateProjectRequest
 
-	UpdateTeamMemberRequest(*codestar.UpdateTeamMemberInput) codestar.UpdateTeamMemberRequest
+	UpdateTeamMemberRequest(*types.UpdateTeamMemberInput) codestar.UpdateTeamMemberRequest
 
-	UpdateUserProfileRequest(*codestar.UpdateUserProfileInput) codestar.UpdateUserProfileRequest
+	UpdateUserProfileRequest(*types.UpdateUserProfileInput) codestar.UpdateUserProfileRequest
 }
 
 var _ ClientAPI = (*codestar.Client)(nil)

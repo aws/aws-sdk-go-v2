@@ -6,76 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/iot/types"
 )
-
-type DeleteDynamicThingGroupInput struct {
-	_ struct{} `type:"structure"`
-
-	// The expected version of the dynamic thing group to delete.
-	ExpectedVersion *int64 `location:"querystring" locationName:"expectedVersion" type:"long"`
-
-	// The name of the dynamic thing group to delete.
-	//
-	// ThingGroupName is a required field
-	ThingGroupName *string `location:"uri" locationName:"thingGroupName" min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteDynamicThingGroupInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteDynamicThingGroupInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteDynamicThingGroupInput"}
-
-	if s.ThingGroupName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ThingGroupName"))
-	}
-	if s.ThingGroupName != nil && len(*s.ThingGroupName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ThingGroupName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteDynamicThingGroupInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.ThingGroupName != nil {
-		v := *s.ThingGroupName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "thingGroupName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.ExpectedVersion != nil {
-		v := *s.ExpectedVersion
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "expectedVersion", protocol.Int64Value(v), metadata)
-	}
-	return nil
-}
-
-type DeleteDynamicThingGroupOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteDynamicThingGroupOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteDynamicThingGroupOutput) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
 
 const opDeleteDynamicThingGroup = "DeleteDynamicThingGroup"
 
@@ -90,7 +22,7 @@ const opDeleteDynamicThingGroup = "DeleteDynamicThingGroup"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) DeleteDynamicThingGroupRequest(input *DeleteDynamicThingGroupInput) DeleteDynamicThingGroupRequest {
+func (c *Client) DeleteDynamicThingGroupRequest(input *types.DeleteDynamicThingGroupInput) DeleteDynamicThingGroupRequest {
 	op := &aws.Operation{
 		Name:       opDeleteDynamicThingGroup,
 		HTTPMethod: "DELETE",
@@ -98,10 +30,10 @@ func (c *Client) DeleteDynamicThingGroupRequest(input *DeleteDynamicThingGroupIn
 	}
 
 	if input == nil {
-		input = &DeleteDynamicThingGroupInput{}
+		input = &types.DeleteDynamicThingGroupInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteDynamicThingGroupOutput{})
+	req := c.newRequest(op, input, &types.DeleteDynamicThingGroupOutput{})
 	return DeleteDynamicThingGroupRequest{Request: req, Input: input, Copy: c.DeleteDynamicThingGroupRequest}
 }
 
@@ -109,8 +41,8 @@ func (c *Client) DeleteDynamicThingGroupRequest(input *DeleteDynamicThingGroupIn
 // DeleteDynamicThingGroup API operation.
 type DeleteDynamicThingGroupRequest struct {
 	*aws.Request
-	Input *DeleteDynamicThingGroupInput
-	Copy  func(*DeleteDynamicThingGroupInput) DeleteDynamicThingGroupRequest
+	Input *types.DeleteDynamicThingGroupInput
+	Copy  func(*types.DeleteDynamicThingGroupInput) DeleteDynamicThingGroupRequest
 }
 
 // Send marshals and sends the DeleteDynamicThingGroup API request.
@@ -122,7 +54,7 @@ func (r DeleteDynamicThingGroupRequest) Send(ctx context.Context) (*DeleteDynami
 	}
 
 	resp := &DeleteDynamicThingGroupResponse{
-		DeleteDynamicThingGroupOutput: r.Request.Data.(*DeleteDynamicThingGroupOutput),
+		DeleteDynamicThingGroupOutput: r.Request.Data.(*types.DeleteDynamicThingGroupOutput),
 		response:                      &aws.Response{Request: r.Request},
 	}
 
@@ -132,7 +64,7 @@ func (r DeleteDynamicThingGroupRequest) Send(ctx context.Context) (*DeleteDynami
 // DeleteDynamicThingGroupResponse is the response type for the
 // DeleteDynamicThingGroup API operation.
 type DeleteDynamicThingGroupResponse struct {
-	*DeleteDynamicThingGroupOutput
+	*types.DeleteDynamicThingGroupOutput
 
 	response *aws.Response
 }

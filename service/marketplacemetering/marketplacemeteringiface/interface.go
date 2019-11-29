@@ -10,6 +10,7 @@ package marketplacemeteringiface
 
 import (
 	"github.com/aws/aws-sdk-go-v2/service/marketplacemetering"
+	"github.com/aws/aws-sdk-go-v2/service/marketplacemetering/types"
 )
 
 // ClientAPI provides an interface to enable mocking the
@@ -43,7 +44,7 @@ import (
 //    type mockClientClient struct {
 //        marketplacemeteringiface.ClientPI
 //    }
-//    func (m *mockClientClient) BatchMeterUsage(input *marketplacemetering.BatchMeterUsageInput) (*marketplacemetering.BatchMeterUsageOutput, error) {
+//    func (m *mockClientClient) BatchMeterUsage(input *types.BatchMeterUsageInput) (*types.BatchMeterUsageOutput, error) {
 //        // mock response/functionality
 //    }
 //
@@ -61,13 +62,13 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type ClientAPI interface {
-	BatchMeterUsageRequest(*marketplacemetering.BatchMeterUsageInput) marketplacemetering.BatchMeterUsageRequest
+	BatchMeterUsageRequest(*types.BatchMeterUsageInput) marketplacemetering.BatchMeterUsageRequest
 
-	MeterUsageRequest(*marketplacemetering.MeterUsageInput) marketplacemetering.MeterUsageRequest
+	MeterUsageRequest(*types.MeterUsageInput) marketplacemetering.MeterUsageRequest
 
-	RegisterUsageRequest(*marketplacemetering.RegisterUsageInput) marketplacemetering.RegisterUsageRequest
+	RegisterUsageRequest(*types.RegisterUsageInput) marketplacemetering.RegisterUsageRequest
 
-	ResolveCustomerRequest(*marketplacemetering.ResolveCustomerInput) marketplacemetering.ResolveCustomerRequest
+	ResolveCustomerRequest(*types.ResolveCustomerInput) marketplacemetering.ResolveCustomerRequest
 }
 
 var _ ClientAPI = (*marketplacemetering.Client)(nil)

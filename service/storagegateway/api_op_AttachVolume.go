@@ -6,103 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/storagegateway/types"
 )
-
-// AttachVolumeInput
-type AttachVolumeInput struct {
-	_ struct{} `type:"structure"`
-
-	// The unique device ID or other distinguishing data that identifies the local
-	// disk used to create the volume. This value is only required when you are
-	// attaching a stored volume.
-	DiskId *string `min:"1" type:"string"`
-
-	// The Amazon Resource Name (ARN) of the gateway that you want to attach the
-	// volume to.
-	//
-	// GatewayARN is a required field
-	GatewayARN *string `min:"50" type:"string" required:"true"`
-
-	// The network interface of the gateway on which to expose the iSCSI target.
-	// Only IPv4 addresses are accepted. Use DescribeGatewayInformation to get a
-	// list of the network interfaces available on a gateway.
-	//
-	// Valid Values: A valid IP address.
-	//
-	// NetworkInterfaceId is a required field
-	NetworkInterfaceId *string `type:"string" required:"true"`
-
-	// The name of the iSCSI target used by an initiator to connect to a volume
-	// and used as a suffix for the target ARN. For example, specifying TargetName
-	// as myvolume results in the target ARN of arn:aws:storagegateway:us-east-2:111122223333:gateway/sgw-12A3456B/target/iqn.1997-05.com.amazon:myvolume.
-	// The target name must be unique across all volumes on a gateway.
-	//
-	// If you don't specify a value, Storage Gateway uses the value that was previously
-	// used for this volume as the new target name.
-	TargetName *string `min:"1" type:"string"`
-
-	// The Amazon Resource Name (ARN) of the volume to attach to the specified gateway.
-	//
-	// VolumeARN is a required field
-	VolumeARN *string `min:"50" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s AttachVolumeInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *AttachVolumeInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "AttachVolumeInput"}
-	if s.DiskId != nil && len(*s.DiskId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("DiskId", 1))
-	}
-
-	if s.GatewayARN == nil {
-		invalidParams.Add(aws.NewErrParamRequired("GatewayARN"))
-	}
-	if s.GatewayARN != nil && len(*s.GatewayARN) < 50 {
-		invalidParams.Add(aws.NewErrParamMinLen("GatewayARN", 50))
-	}
-
-	if s.NetworkInterfaceId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("NetworkInterfaceId"))
-	}
-	if s.TargetName != nil && len(*s.TargetName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("TargetName", 1))
-	}
-
-	if s.VolumeARN == nil {
-		invalidParams.Add(aws.NewErrParamRequired("VolumeARN"))
-	}
-	if s.VolumeARN != nil && len(*s.VolumeARN) < 50 {
-		invalidParams.Add(aws.NewErrParamMinLen("VolumeARN", 50))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// AttachVolumeOutput
-type AttachVolumeOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the volume target, which includes the iSCSI
-	// name for the initiator that was used to connect to the target.
-	TargetARN *string `min:"50" type:"string"`
-
-	// The Amazon Resource Name (ARN) of the volume that was attached to the gateway.
-	VolumeARN *string `min:"50" type:"string"`
-}
-
-// String returns the string representation
-func (s AttachVolumeOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opAttachVolume = "AttachVolume"
 
@@ -123,7 +28,7 @@ const opAttachVolume = "AttachVolume"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/AttachVolume
-func (c *Client) AttachVolumeRequest(input *AttachVolumeInput) AttachVolumeRequest {
+func (c *Client) AttachVolumeRequest(input *types.AttachVolumeInput) AttachVolumeRequest {
 	op := &aws.Operation{
 		Name:       opAttachVolume,
 		HTTPMethod: "POST",
@@ -131,10 +36,10 @@ func (c *Client) AttachVolumeRequest(input *AttachVolumeInput) AttachVolumeReque
 	}
 
 	if input == nil {
-		input = &AttachVolumeInput{}
+		input = &types.AttachVolumeInput{}
 	}
 
-	req := c.newRequest(op, input, &AttachVolumeOutput{})
+	req := c.newRequest(op, input, &types.AttachVolumeOutput{})
 	return AttachVolumeRequest{Request: req, Input: input, Copy: c.AttachVolumeRequest}
 }
 
@@ -142,8 +47,8 @@ func (c *Client) AttachVolumeRequest(input *AttachVolumeInput) AttachVolumeReque
 // AttachVolume API operation.
 type AttachVolumeRequest struct {
 	*aws.Request
-	Input *AttachVolumeInput
-	Copy  func(*AttachVolumeInput) AttachVolumeRequest
+	Input *types.AttachVolumeInput
+	Copy  func(*types.AttachVolumeInput) AttachVolumeRequest
 }
 
 // Send marshals and sends the AttachVolume API request.
@@ -155,7 +60,7 @@ func (r AttachVolumeRequest) Send(ctx context.Context) (*AttachVolumeResponse, e
 	}
 
 	resp := &AttachVolumeResponse{
-		AttachVolumeOutput: r.Request.Data.(*AttachVolumeOutput),
+		AttachVolumeOutput: r.Request.Data.(*types.AttachVolumeOutput),
 		response:           &aws.Response{Request: r.Request},
 	}
 
@@ -165,7 +70,7 @@ func (r AttachVolumeRequest) Send(ctx context.Context) (*AttachVolumeResponse, e
 // AttachVolumeResponse is the response type for the
 // AttachVolume API operation.
 type AttachVolumeResponse struct {
-	*AttachVolumeOutput
+	*types.AttachVolumeOutput
 
 	response *aws.Response
 }

@@ -6,55 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/support/types"
 )
-
-type DescribeTrustedAdvisorCheckResultInput struct {
-	_ struct{} `type:"structure"`
-
-	// The unique identifier for the Trusted Advisor check.
-	//
-	// CheckId is a required field
-	CheckId *string `locationName:"checkId" type:"string" required:"true"`
-
-	// The ISO 639-1 code for the language in which AWS provides support. AWS Support
-	// currently supports English ("en") and Japanese ("ja"). Language parameters
-	// must be passed explicitly for operations that take them.
-	Language *string `locationName:"language" type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeTrustedAdvisorCheckResultInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeTrustedAdvisorCheckResultInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeTrustedAdvisorCheckResultInput"}
-
-	if s.CheckId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("CheckId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// The result of the Trusted Advisor check returned by the DescribeTrustedAdvisorCheckResult
-// operation.
-type DescribeTrustedAdvisorCheckResultOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The detailed results of the Trusted Advisor check.
-	Result *TrustedAdvisorCheckResult `locationName:"result" type:"structure"`
-}
-
-// String returns the string representation
-func (s DescribeTrustedAdvisorCheckResultOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeTrustedAdvisorCheckResult = "DescribeTrustedAdvisorCheckResult"
 
@@ -90,7 +43,7 @@ const opDescribeTrustedAdvisorCheckResult = "DescribeTrustedAdvisorCheckResult"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/support-2013-04-15/DescribeTrustedAdvisorCheckResult
-func (c *Client) DescribeTrustedAdvisorCheckResultRequest(input *DescribeTrustedAdvisorCheckResultInput) DescribeTrustedAdvisorCheckResultRequest {
+func (c *Client) DescribeTrustedAdvisorCheckResultRequest(input *types.DescribeTrustedAdvisorCheckResultInput) DescribeTrustedAdvisorCheckResultRequest {
 	op := &aws.Operation{
 		Name:       opDescribeTrustedAdvisorCheckResult,
 		HTTPMethod: "POST",
@@ -98,10 +51,10 @@ func (c *Client) DescribeTrustedAdvisorCheckResultRequest(input *DescribeTrusted
 	}
 
 	if input == nil {
-		input = &DescribeTrustedAdvisorCheckResultInput{}
+		input = &types.DescribeTrustedAdvisorCheckResultInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeTrustedAdvisorCheckResultOutput{})
+	req := c.newRequest(op, input, &types.DescribeTrustedAdvisorCheckResultOutput{})
 	return DescribeTrustedAdvisorCheckResultRequest{Request: req, Input: input, Copy: c.DescribeTrustedAdvisorCheckResultRequest}
 }
 
@@ -109,8 +62,8 @@ func (c *Client) DescribeTrustedAdvisorCheckResultRequest(input *DescribeTrusted
 // DescribeTrustedAdvisorCheckResult API operation.
 type DescribeTrustedAdvisorCheckResultRequest struct {
 	*aws.Request
-	Input *DescribeTrustedAdvisorCheckResultInput
-	Copy  func(*DescribeTrustedAdvisorCheckResultInput) DescribeTrustedAdvisorCheckResultRequest
+	Input *types.DescribeTrustedAdvisorCheckResultInput
+	Copy  func(*types.DescribeTrustedAdvisorCheckResultInput) DescribeTrustedAdvisorCheckResultRequest
 }
 
 // Send marshals and sends the DescribeTrustedAdvisorCheckResult API request.
@@ -122,7 +75,7 @@ func (r DescribeTrustedAdvisorCheckResultRequest) Send(ctx context.Context) (*De
 	}
 
 	resp := &DescribeTrustedAdvisorCheckResultResponse{
-		DescribeTrustedAdvisorCheckResultOutput: r.Request.Data.(*DescribeTrustedAdvisorCheckResultOutput),
+		DescribeTrustedAdvisorCheckResultOutput: r.Request.Data.(*types.DescribeTrustedAdvisorCheckResultOutput),
 		response:                                &aws.Response{Request: r.Request},
 	}
 
@@ -132,7 +85,7 @@ func (r DescribeTrustedAdvisorCheckResultRequest) Send(ctx context.Context) (*De
 // DescribeTrustedAdvisorCheckResultResponse is the response type for the
 // DescribeTrustedAdvisorCheckResult API operation.
 type DescribeTrustedAdvisorCheckResultResponse struct {
-	*DescribeTrustedAdvisorCheckResultOutput
+	*types.DescribeTrustedAdvisorCheckResultOutput
 
 	response *aws.Response
 }

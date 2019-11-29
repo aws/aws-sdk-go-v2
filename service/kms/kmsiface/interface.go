@@ -10,6 +10,7 @@ package kmsiface
 
 import (
 	"github.com/aws/aws-sdk-go-v2/service/kms"
+	"github.com/aws/aws-sdk-go-v2/service/kms/types"
 )
 
 // ClientAPI provides an interface to enable mocking the
@@ -43,7 +44,7 @@ import (
 //    type mockClientClient struct {
 //        kmsiface.ClientPI
 //    }
-//    func (m *mockClientClient) CancelKeyDeletion(input *kms.CancelKeyDeletionInput) (*kms.CancelKeyDeletionOutput, error) {
+//    func (m *mockClientClient) CancelKeyDeletion(input *types.CancelKeyDeletionInput) (*types.CancelKeyDeletionOutput, error) {
 //        // mock response/functionality
 //    }
 //
@@ -61,87 +62,87 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type ClientAPI interface {
-	CancelKeyDeletionRequest(*kms.CancelKeyDeletionInput) kms.CancelKeyDeletionRequest
+	CancelKeyDeletionRequest(*types.CancelKeyDeletionInput) kms.CancelKeyDeletionRequest
 
-	ConnectCustomKeyStoreRequest(*kms.ConnectCustomKeyStoreInput) kms.ConnectCustomKeyStoreRequest
+	ConnectCustomKeyStoreRequest(*types.ConnectCustomKeyStoreInput) kms.ConnectCustomKeyStoreRequest
 
-	CreateAliasRequest(*kms.CreateAliasInput) kms.CreateAliasRequest
+	CreateAliasRequest(*types.CreateAliasInput) kms.CreateAliasRequest
 
-	CreateCustomKeyStoreRequest(*kms.CreateCustomKeyStoreInput) kms.CreateCustomKeyStoreRequest
+	CreateCustomKeyStoreRequest(*types.CreateCustomKeyStoreInput) kms.CreateCustomKeyStoreRequest
 
-	CreateGrantRequest(*kms.CreateGrantInput) kms.CreateGrantRequest
+	CreateGrantRequest(*types.CreateGrantInput) kms.CreateGrantRequest
 
-	CreateKeyRequest(*kms.CreateKeyInput) kms.CreateKeyRequest
+	CreateKeyRequest(*types.CreateKeyInput) kms.CreateKeyRequest
 
-	DecryptRequest(*kms.DecryptInput) kms.DecryptRequest
+	DecryptRequest(*types.DecryptInput) kms.DecryptRequest
 
-	DeleteAliasRequest(*kms.DeleteAliasInput) kms.DeleteAliasRequest
+	DeleteAliasRequest(*types.DeleteAliasInput) kms.DeleteAliasRequest
 
-	DeleteCustomKeyStoreRequest(*kms.DeleteCustomKeyStoreInput) kms.DeleteCustomKeyStoreRequest
+	DeleteCustomKeyStoreRequest(*types.DeleteCustomKeyStoreInput) kms.DeleteCustomKeyStoreRequest
 
-	DeleteImportedKeyMaterialRequest(*kms.DeleteImportedKeyMaterialInput) kms.DeleteImportedKeyMaterialRequest
+	DeleteImportedKeyMaterialRequest(*types.DeleteImportedKeyMaterialInput) kms.DeleteImportedKeyMaterialRequest
 
-	DescribeCustomKeyStoresRequest(*kms.DescribeCustomKeyStoresInput) kms.DescribeCustomKeyStoresRequest
+	DescribeCustomKeyStoresRequest(*types.DescribeCustomKeyStoresInput) kms.DescribeCustomKeyStoresRequest
 
-	DescribeKeyRequest(*kms.DescribeKeyInput) kms.DescribeKeyRequest
+	DescribeKeyRequest(*types.DescribeKeyInput) kms.DescribeKeyRequest
 
-	DisableKeyRequest(*kms.DisableKeyInput) kms.DisableKeyRequest
+	DisableKeyRequest(*types.DisableKeyInput) kms.DisableKeyRequest
 
-	DisableKeyRotationRequest(*kms.DisableKeyRotationInput) kms.DisableKeyRotationRequest
+	DisableKeyRotationRequest(*types.DisableKeyRotationInput) kms.DisableKeyRotationRequest
 
-	DisconnectCustomKeyStoreRequest(*kms.DisconnectCustomKeyStoreInput) kms.DisconnectCustomKeyStoreRequest
+	DisconnectCustomKeyStoreRequest(*types.DisconnectCustomKeyStoreInput) kms.DisconnectCustomKeyStoreRequest
 
-	EnableKeyRequest(*kms.EnableKeyInput) kms.EnableKeyRequest
+	EnableKeyRequest(*types.EnableKeyInput) kms.EnableKeyRequest
 
-	EnableKeyRotationRequest(*kms.EnableKeyRotationInput) kms.EnableKeyRotationRequest
+	EnableKeyRotationRequest(*types.EnableKeyRotationInput) kms.EnableKeyRotationRequest
 
-	EncryptRequest(*kms.EncryptInput) kms.EncryptRequest
+	EncryptRequest(*types.EncryptInput) kms.EncryptRequest
 
-	GenerateDataKeyRequest(*kms.GenerateDataKeyInput) kms.GenerateDataKeyRequest
+	GenerateDataKeyRequest(*types.GenerateDataKeyInput) kms.GenerateDataKeyRequest
 
-	GenerateDataKeyWithoutPlaintextRequest(*kms.GenerateDataKeyWithoutPlaintextInput) kms.GenerateDataKeyWithoutPlaintextRequest
+	GenerateDataKeyWithoutPlaintextRequest(*types.GenerateDataKeyWithoutPlaintextInput) kms.GenerateDataKeyWithoutPlaintextRequest
 
-	GenerateRandomRequest(*kms.GenerateRandomInput) kms.GenerateRandomRequest
+	GenerateRandomRequest(*types.GenerateRandomInput) kms.GenerateRandomRequest
 
-	GetKeyPolicyRequest(*kms.GetKeyPolicyInput) kms.GetKeyPolicyRequest
+	GetKeyPolicyRequest(*types.GetKeyPolicyInput) kms.GetKeyPolicyRequest
 
-	GetKeyRotationStatusRequest(*kms.GetKeyRotationStatusInput) kms.GetKeyRotationStatusRequest
+	GetKeyRotationStatusRequest(*types.GetKeyRotationStatusInput) kms.GetKeyRotationStatusRequest
 
-	GetParametersForImportRequest(*kms.GetParametersForImportInput) kms.GetParametersForImportRequest
+	GetParametersForImportRequest(*types.GetParametersForImportInput) kms.GetParametersForImportRequest
 
-	ImportKeyMaterialRequest(*kms.ImportKeyMaterialInput) kms.ImportKeyMaterialRequest
+	ImportKeyMaterialRequest(*types.ImportKeyMaterialInput) kms.ImportKeyMaterialRequest
 
-	ListAliasesRequest(*kms.ListAliasesInput) kms.ListAliasesRequest
+	ListAliasesRequest(*types.ListAliasesInput) kms.ListAliasesRequest
 
-	ListGrantsRequest(*kms.ListGrantsInput) kms.ListGrantsRequest
+	ListGrantsRequest(*types.ListGrantsInput) kms.ListGrantsRequest
 
-	ListKeyPoliciesRequest(*kms.ListKeyPoliciesInput) kms.ListKeyPoliciesRequest
+	ListKeyPoliciesRequest(*types.ListKeyPoliciesInput) kms.ListKeyPoliciesRequest
 
-	ListKeysRequest(*kms.ListKeysInput) kms.ListKeysRequest
+	ListKeysRequest(*types.ListKeysInput) kms.ListKeysRequest
 
-	ListResourceTagsRequest(*kms.ListResourceTagsInput) kms.ListResourceTagsRequest
+	ListResourceTagsRequest(*types.ListResourceTagsInput) kms.ListResourceTagsRequest
 
-	ListRetirableGrantsRequest(*kms.ListRetirableGrantsInput) kms.ListRetirableGrantsRequest
+	ListRetirableGrantsRequest(*types.ListRetirableGrantsInput) kms.ListRetirableGrantsRequest
 
-	PutKeyPolicyRequest(*kms.PutKeyPolicyInput) kms.PutKeyPolicyRequest
+	PutKeyPolicyRequest(*types.PutKeyPolicyInput) kms.PutKeyPolicyRequest
 
-	ReEncryptRequest(*kms.ReEncryptInput) kms.ReEncryptRequest
+	ReEncryptRequest(*types.ReEncryptInput) kms.ReEncryptRequest
 
-	RetireGrantRequest(*kms.RetireGrantInput) kms.RetireGrantRequest
+	RetireGrantRequest(*types.RetireGrantInput) kms.RetireGrantRequest
 
-	RevokeGrantRequest(*kms.RevokeGrantInput) kms.RevokeGrantRequest
+	RevokeGrantRequest(*types.RevokeGrantInput) kms.RevokeGrantRequest
 
-	ScheduleKeyDeletionRequest(*kms.ScheduleKeyDeletionInput) kms.ScheduleKeyDeletionRequest
+	ScheduleKeyDeletionRequest(*types.ScheduleKeyDeletionInput) kms.ScheduleKeyDeletionRequest
 
-	TagResourceRequest(*kms.TagResourceInput) kms.TagResourceRequest
+	TagResourceRequest(*types.TagResourceInput) kms.TagResourceRequest
 
-	UntagResourceRequest(*kms.UntagResourceInput) kms.UntagResourceRequest
+	UntagResourceRequest(*types.UntagResourceInput) kms.UntagResourceRequest
 
-	UpdateAliasRequest(*kms.UpdateAliasInput) kms.UpdateAliasRequest
+	UpdateAliasRequest(*types.UpdateAliasInput) kms.UpdateAliasRequest
 
-	UpdateCustomKeyStoreRequest(*kms.UpdateCustomKeyStoreInput) kms.UpdateCustomKeyStoreRequest
+	UpdateCustomKeyStoreRequest(*types.UpdateCustomKeyStoreInput) kms.UpdateCustomKeyStoreRequest
 
-	UpdateKeyDescriptionRequest(*kms.UpdateKeyDescriptionInput) kms.UpdateKeyDescriptionRequest
+	UpdateKeyDescriptionRequest(*types.UpdateKeyDescriptionInput) kms.UpdateKeyDescriptionRequest
 }
 
 var _ ClientAPI = (*kms.Client)(nil)

@@ -6,94 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/restjson"
+	"github.com/aws/aws-sdk-go-v2/service/glacier/types"
 )
-
-// SetVaultAccessPolicy input.
-type SetVaultAccessPolicyInput struct {
-	_ struct{} `type:"structure" payload:"Policy"`
-
-	// The AccountId value is the AWS account ID of the account that owns the vault.
-	// You can either specify an AWS account ID or optionally a single '-' (hyphen),
-	// in which case Amazon S3 Glacier uses the AWS account ID associated with the
-	// credentials used to sign the request. If you use an account ID, do not include
-	// any hyphens ('-') in the ID.
-	//
-	// AccountId is a required field
-	AccountId *string `location:"uri" locationName:"accountId" type:"string" required:"true"`
-
-	// The vault access policy as a JSON string.
-	Policy *VaultAccessPolicy `locationName:"policy" type:"structure"`
-
-	// The name of the vault.
-	//
-	// VaultName is a required field
-	VaultName *string `location:"uri" locationName:"vaultName" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s SetVaultAccessPolicyInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *SetVaultAccessPolicyInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "SetVaultAccessPolicyInput"}
-
-	if s.AccountId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("AccountId"))
-	}
-
-	if s.VaultName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("VaultName"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s SetVaultAccessPolicyInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.AccountId != nil {
-		v := *s.AccountId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "accountId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.VaultName != nil {
-		v := *s.VaultName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "vaultName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Policy != nil {
-		v := s.Policy
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.PayloadTarget, "policy", v, metadata)
-	}
-	return nil
-}
-
-type SetVaultAccessPolicyOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s SetVaultAccessPolicyOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s SetVaultAccessPolicyOutput) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
 
 const opSetVaultAccessPolicy = "SetVaultAccessPolicy"
 
@@ -114,7 +30,7 @@ const opSetVaultAccessPolicy = "SetVaultAccessPolicy"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) SetVaultAccessPolicyRequest(input *SetVaultAccessPolicyInput) SetVaultAccessPolicyRequest {
+func (c *Client) SetVaultAccessPolicyRequest(input *types.SetVaultAccessPolicyInput) SetVaultAccessPolicyRequest {
 	op := &aws.Operation{
 		Name:       opSetVaultAccessPolicy,
 		HTTPMethod: "PUT",
@@ -122,10 +38,10 @@ func (c *Client) SetVaultAccessPolicyRequest(input *SetVaultAccessPolicyInput) S
 	}
 
 	if input == nil {
-		input = &SetVaultAccessPolicyInput{}
+		input = &types.SetVaultAccessPolicyInput{}
 	}
 
-	req := c.newRequest(op, input, &SetVaultAccessPolicyOutput{})
+	req := c.newRequest(op, input, &types.SetVaultAccessPolicyOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return SetVaultAccessPolicyRequest{Request: req, Input: input, Copy: c.SetVaultAccessPolicyRequest}
@@ -135,8 +51,8 @@ func (c *Client) SetVaultAccessPolicyRequest(input *SetVaultAccessPolicyInput) S
 // SetVaultAccessPolicy API operation.
 type SetVaultAccessPolicyRequest struct {
 	*aws.Request
-	Input *SetVaultAccessPolicyInput
-	Copy  func(*SetVaultAccessPolicyInput) SetVaultAccessPolicyRequest
+	Input *types.SetVaultAccessPolicyInput
+	Copy  func(*types.SetVaultAccessPolicyInput) SetVaultAccessPolicyRequest
 }
 
 // Send marshals and sends the SetVaultAccessPolicy API request.
@@ -148,7 +64,7 @@ func (r SetVaultAccessPolicyRequest) Send(ctx context.Context) (*SetVaultAccessP
 	}
 
 	resp := &SetVaultAccessPolicyResponse{
-		SetVaultAccessPolicyOutput: r.Request.Data.(*SetVaultAccessPolicyOutput),
+		SetVaultAccessPolicyOutput: r.Request.Data.(*types.SetVaultAccessPolicyOutput),
 		response:                   &aws.Response{Request: r.Request},
 	}
 
@@ -158,7 +74,7 @@ func (r SetVaultAccessPolicyRequest) Send(ctx context.Context) (*SetVaultAccessP
 // SetVaultAccessPolicyResponse is the response type for the
 // SetVaultAccessPolicy API operation.
 type SetVaultAccessPolicyResponse struct {
-	*SetVaultAccessPolicyOutput
+	*types.SetVaultAccessPolicyOutput
 
 	response *aws.Response
 }

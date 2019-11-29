@@ -6,62 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/appstream/types"
 )
-
-type DescribeUsersInput struct {
-	_ struct{} `type:"structure"`
-
-	// The authentication type for the users in the user pool to describe. You must
-	// specify USERPOOL.
-	//
-	// AuthenticationType is a required field
-	AuthenticationType AuthenticationType `type:"string" required:"true" enum:"true"`
-
-	// The maximum size of each page of results.
-	MaxResults *int64 `type:"integer"`
-
-	// The pagination token to use to retrieve the next page of results for this
-	// operation. If this value is null, it retrieves the first page.
-	NextToken *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeUsersInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeUsersInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeUsersInput"}
-	if len(s.AuthenticationType) == 0 {
-		invalidParams.Add(aws.NewErrParamRequired("AuthenticationType"))
-	}
-	if s.NextToken != nil && len(*s.NextToken) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribeUsersOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The pagination token to use to retrieve the next page of results for this
-	// operation. If there are no more pages, this value is null.
-	NextToken *string `min:"1" type:"string"`
-
-	// Information about users in the user pool.
-	Users []User `type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeUsersOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeUsers = "DescribeUsers"
 
@@ -78,7 +24,7 @@ const opDescribeUsers = "DescribeUsers"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DescribeUsers
-func (c *Client) DescribeUsersRequest(input *DescribeUsersInput) DescribeUsersRequest {
+func (c *Client) DescribeUsersRequest(input *types.DescribeUsersInput) DescribeUsersRequest {
 	op := &aws.Operation{
 		Name:       opDescribeUsers,
 		HTTPMethod: "POST",
@@ -86,10 +32,10 @@ func (c *Client) DescribeUsersRequest(input *DescribeUsersInput) DescribeUsersRe
 	}
 
 	if input == nil {
-		input = &DescribeUsersInput{}
+		input = &types.DescribeUsersInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeUsersOutput{})
+	req := c.newRequest(op, input, &types.DescribeUsersOutput{})
 	return DescribeUsersRequest{Request: req, Input: input, Copy: c.DescribeUsersRequest}
 }
 
@@ -97,8 +43,8 @@ func (c *Client) DescribeUsersRequest(input *DescribeUsersInput) DescribeUsersRe
 // DescribeUsers API operation.
 type DescribeUsersRequest struct {
 	*aws.Request
-	Input *DescribeUsersInput
-	Copy  func(*DescribeUsersInput) DescribeUsersRequest
+	Input *types.DescribeUsersInput
+	Copy  func(*types.DescribeUsersInput) DescribeUsersRequest
 }
 
 // Send marshals and sends the DescribeUsers API request.
@@ -110,7 +56,7 @@ func (r DescribeUsersRequest) Send(ctx context.Context) (*DescribeUsersResponse,
 	}
 
 	resp := &DescribeUsersResponse{
-		DescribeUsersOutput: r.Request.Data.(*DescribeUsersOutput),
+		DescribeUsersOutput: r.Request.Data.(*types.DescribeUsersOutput),
 		response:            &aws.Response{Request: r.Request},
 	}
 
@@ -120,7 +66,7 @@ func (r DescribeUsersRequest) Send(ctx context.Context) (*DescribeUsersResponse,
 // DescribeUsersResponse is the response type for the
 // DescribeUsers API operation.
 type DescribeUsersResponse struct {
-	*DescribeUsersOutput
+	*types.DescribeUsersOutput
 
 	response *aws.Response
 }

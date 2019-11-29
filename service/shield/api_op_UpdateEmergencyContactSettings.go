@@ -4,50 +4,10 @@ package shield
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/shield/types"
 )
-
-type UpdateEmergencyContactSettingsInput struct {
-	_ struct{} `type:"structure"`
-
-	// A list of email addresses that the DRT can use to contact you during a suspected
-	// attack.
-	EmergencyContactList []EmergencyContact `type:"list"`
-}
-
-// String returns the string representation
-func (s UpdateEmergencyContactSettingsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateEmergencyContactSettingsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateEmergencyContactSettingsInput"}
-	if s.EmergencyContactList != nil {
-		for i, v := range s.EmergencyContactList {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "EmergencyContactList", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type UpdateEmergencyContactSettingsOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s UpdateEmergencyContactSettingsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opUpdateEmergencyContactSettings = "UpdateEmergencyContactSettings"
 
@@ -65,7 +25,7 @@ const opUpdateEmergencyContactSettings = "UpdateEmergencyContactSettings"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/UpdateEmergencyContactSettings
-func (c *Client) UpdateEmergencyContactSettingsRequest(input *UpdateEmergencyContactSettingsInput) UpdateEmergencyContactSettingsRequest {
+func (c *Client) UpdateEmergencyContactSettingsRequest(input *types.UpdateEmergencyContactSettingsInput) UpdateEmergencyContactSettingsRequest {
 	op := &aws.Operation{
 		Name:       opUpdateEmergencyContactSettings,
 		HTTPMethod: "POST",
@@ -73,10 +33,10 @@ func (c *Client) UpdateEmergencyContactSettingsRequest(input *UpdateEmergencyCon
 	}
 
 	if input == nil {
-		input = &UpdateEmergencyContactSettingsInput{}
+		input = &types.UpdateEmergencyContactSettingsInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateEmergencyContactSettingsOutput{})
+	req := c.newRequest(op, input, &types.UpdateEmergencyContactSettingsOutput{})
 	return UpdateEmergencyContactSettingsRequest{Request: req, Input: input, Copy: c.UpdateEmergencyContactSettingsRequest}
 }
 
@@ -84,8 +44,8 @@ func (c *Client) UpdateEmergencyContactSettingsRequest(input *UpdateEmergencyCon
 // UpdateEmergencyContactSettings API operation.
 type UpdateEmergencyContactSettingsRequest struct {
 	*aws.Request
-	Input *UpdateEmergencyContactSettingsInput
-	Copy  func(*UpdateEmergencyContactSettingsInput) UpdateEmergencyContactSettingsRequest
+	Input *types.UpdateEmergencyContactSettingsInput
+	Copy  func(*types.UpdateEmergencyContactSettingsInput) UpdateEmergencyContactSettingsRequest
 }
 
 // Send marshals and sends the UpdateEmergencyContactSettings API request.
@@ -97,7 +57,7 @@ func (r UpdateEmergencyContactSettingsRequest) Send(ctx context.Context) (*Updat
 	}
 
 	resp := &UpdateEmergencyContactSettingsResponse{
-		UpdateEmergencyContactSettingsOutput: r.Request.Data.(*UpdateEmergencyContactSettingsOutput),
+		UpdateEmergencyContactSettingsOutput: r.Request.Data.(*types.UpdateEmergencyContactSettingsOutput),
 		response:                             &aws.Response{Request: r.Request},
 	}
 
@@ -107,7 +67,7 @@ func (r UpdateEmergencyContactSettingsRequest) Send(ctx context.Context) (*Updat
 // UpdateEmergencyContactSettingsResponse is the response type for the
 // UpdateEmergencyContactSettings API operation.
 type UpdateEmergencyContactSettingsResponse struct {
-	*UpdateEmergencyContactSettingsOutput
+	*types.UpdateEmergencyContactSettingsOutput
 
 	response *aws.Response
 }

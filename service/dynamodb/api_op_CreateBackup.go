@@ -6,63 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/dynamodb/types"
 )
-
-type CreateBackupInput struct {
-	_ struct{} `type:"structure"`
-
-	// Specified name for the backup.
-	//
-	// BackupName is a required field
-	BackupName *string `min:"3" type:"string" required:"true"`
-
-	// The name of the table.
-	//
-	// TableName is a required field
-	TableName *string `min:"3" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s CreateBackupInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateBackupInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateBackupInput"}
-
-	if s.BackupName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("BackupName"))
-	}
-	if s.BackupName != nil && len(*s.BackupName) < 3 {
-		invalidParams.Add(aws.NewErrParamMinLen("BackupName", 3))
-	}
-
-	if s.TableName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("TableName"))
-	}
-	if s.TableName != nil && len(*s.TableName) < 3 {
-		invalidParams.Add(aws.NewErrParamMinLen("TableName", 3))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type CreateBackupOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Contains the details of the backup created for the table.
-	BackupDetails *BackupDetails `type:"structure"`
-}
-
-// String returns the string representation
-func (s CreateBackupOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCreateBackup = "CreateBackup"
 
@@ -107,7 +52,7 @@ const opCreateBackup = "CreateBackup"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/CreateBackup
-func (c *Client) CreateBackupRequest(input *CreateBackupInput) CreateBackupRequest {
+func (c *Client) CreateBackupRequest(input *types.CreateBackupInput) CreateBackupRequest {
 	op := &aws.Operation{
 		Name:       opCreateBackup,
 		HTTPMethod: "POST",
@@ -115,10 +60,10 @@ func (c *Client) CreateBackupRequest(input *CreateBackupInput) CreateBackupReque
 	}
 
 	if input == nil {
-		input = &CreateBackupInput{}
+		input = &types.CreateBackupInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateBackupOutput{})
+	req := c.newRequest(op, input, &types.CreateBackupOutput{})
 	return CreateBackupRequest{Request: req, Input: input, Copy: c.CreateBackupRequest}
 }
 
@@ -126,8 +71,8 @@ func (c *Client) CreateBackupRequest(input *CreateBackupInput) CreateBackupReque
 // CreateBackup API operation.
 type CreateBackupRequest struct {
 	*aws.Request
-	Input *CreateBackupInput
-	Copy  func(*CreateBackupInput) CreateBackupRequest
+	Input *types.CreateBackupInput
+	Copy  func(*types.CreateBackupInput) CreateBackupRequest
 }
 
 // Send marshals and sends the CreateBackup API request.
@@ -139,7 +84,7 @@ func (r CreateBackupRequest) Send(ctx context.Context) (*CreateBackupResponse, e
 	}
 
 	resp := &CreateBackupResponse{
-		CreateBackupOutput: r.Request.Data.(*CreateBackupOutput),
+		CreateBackupOutput: r.Request.Data.(*types.CreateBackupOutput),
 		response:           &aws.Response{Request: r.Request},
 	}
 
@@ -149,7 +94,7 @@ func (r CreateBackupRequest) Send(ctx context.Context) (*CreateBackupResponse, e
 // CreateBackupResponse is the response type for the
 // CreateBackup API operation.
 type CreateBackupResponse struct {
-	*CreateBackupOutput
+	*types.CreateBackupOutput
 
 	response *aws.Response
 }

@@ -6,68 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/restjson"
+	"github.com/aws/aws-sdk-go-v2/service/signer/types"
 )
-
-type CancelSigningProfileInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the signing profile to be canceled.
-	//
-	// ProfileName is a required field
-	ProfileName *string `location:"uri" locationName:"profileName" min:"2" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s CancelSigningProfileInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CancelSigningProfileInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CancelSigningProfileInput"}
-
-	if s.ProfileName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ProfileName"))
-	}
-	if s.ProfileName != nil && len(*s.ProfileName) < 2 {
-		invalidParams.Add(aws.NewErrParamMinLen("ProfileName", 2))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s CancelSigningProfileInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.ProfileName != nil {
-		v := *s.ProfileName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "profileName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type CancelSigningProfileOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s CancelSigningProfileOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s CancelSigningProfileOutput) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
 
 const opCancelSigningProfile = "CancelSigningProfile"
 
@@ -86,7 +28,7 @@ const opCancelSigningProfile = "CancelSigningProfile"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/signer-2017-08-25/CancelSigningProfile
-func (c *Client) CancelSigningProfileRequest(input *CancelSigningProfileInput) CancelSigningProfileRequest {
+func (c *Client) CancelSigningProfileRequest(input *types.CancelSigningProfileInput) CancelSigningProfileRequest {
 	op := &aws.Operation{
 		Name:       opCancelSigningProfile,
 		HTTPMethod: "DELETE",
@@ -94,10 +36,10 @@ func (c *Client) CancelSigningProfileRequest(input *CancelSigningProfileInput) C
 	}
 
 	if input == nil {
-		input = &CancelSigningProfileInput{}
+		input = &types.CancelSigningProfileInput{}
 	}
 
-	req := c.newRequest(op, input, &CancelSigningProfileOutput{})
+	req := c.newRequest(op, input, &types.CancelSigningProfileOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return CancelSigningProfileRequest{Request: req, Input: input, Copy: c.CancelSigningProfileRequest}
@@ -107,8 +49,8 @@ func (c *Client) CancelSigningProfileRequest(input *CancelSigningProfileInput) C
 // CancelSigningProfile API operation.
 type CancelSigningProfileRequest struct {
 	*aws.Request
-	Input *CancelSigningProfileInput
-	Copy  func(*CancelSigningProfileInput) CancelSigningProfileRequest
+	Input *types.CancelSigningProfileInput
+	Copy  func(*types.CancelSigningProfileInput) CancelSigningProfileRequest
 }
 
 // Send marshals and sends the CancelSigningProfile API request.
@@ -120,7 +62,7 @@ func (r CancelSigningProfileRequest) Send(ctx context.Context) (*CancelSigningPr
 	}
 
 	resp := &CancelSigningProfileResponse{
-		CancelSigningProfileOutput: r.Request.Data.(*CancelSigningProfileOutput),
+		CancelSigningProfileOutput: r.Request.Data.(*types.CancelSigningProfileOutput),
 		response:                   &aws.Response{Request: r.Request},
 	}
 
@@ -130,7 +72,7 @@ func (r CancelSigningProfileRequest) Send(ctx context.Context) (*CancelSigningPr
 // CancelSigningProfileResponse is the response type for the
 // CancelSigningProfile API operation.
 type CancelSigningProfileResponse struct {
-	*CancelSigningProfileOutput
+	*types.CancelSigningProfileOutput
 
 	response *aws.Response
 }

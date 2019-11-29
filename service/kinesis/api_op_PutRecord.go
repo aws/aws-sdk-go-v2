@@ -6,116 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/kinesis/types"
 )
-
-// Represents the input for PutRecord.
-type PutRecordInput struct {
-	_ struct{} `type:"structure"`
-
-	// The data blob to put into the record, which is base64-encoded when the blob
-	// is serialized. When the data blob (the payload before base64-encoding) is
-	// added to the partition key size, the total size must not exceed the maximum
-	// record size (1 MB).
-	//
-	// Data is automatically base64 encoded/decoded by the SDK.
-	//
-	// Data is a required field
-	Data []byte `type:"blob" required:"true"`
-
-	// The hash value used to explicitly determine the shard the data record is
-	// assigned to by overriding the partition key hash.
-	ExplicitHashKey *string `type:"string"`
-
-	// Determines which shard in the stream the data record is assigned to. Partition
-	// keys are Unicode strings with a maximum length limit of 256 characters for
-	// each key. Amazon Kinesis Data Streams uses the partition key as input to
-	// a hash function that maps the partition key and associated data to a specific
-	// shard. Specifically, an MD5 hash function is used to map partition keys to
-	// 128-bit integer values and to map associated data records to shards. As a
-	// result of this hashing mechanism, all data records with the same partition
-	// key map to the same shard within the stream.
-	//
-	// PartitionKey is a required field
-	PartitionKey *string `min:"1" type:"string" required:"true"`
-
-	// Guarantees strictly increasing sequence numbers, for puts from the same client
-	// and to the same partition key. Usage: set the SequenceNumberForOrdering of
-	// record n to the sequence number of record n-1 (as returned in the result
-	// when putting record n-1). If this parameter is not set, records are coarsely
-	// ordered based on arrival time.
-	SequenceNumberForOrdering *string `type:"string"`
-
-	// The name of the stream to put the data record into.
-	//
-	// StreamName is a required field
-	StreamName *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s PutRecordInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *PutRecordInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "PutRecordInput"}
-
-	if s.Data == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Data"))
-	}
-
-	if s.PartitionKey == nil {
-		invalidParams.Add(aws.NewErrParamRequired("PartitionKey"))
-	}
-	if s.PartitionKey != nil && len(*s.PartitionKey) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("PartitionKey", 1))
-	}
-
-	if s.StreamName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("StreamName"))
-	}
-	if s.StreamName != nil && len(*s.StreamName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("StreamName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Represents the output for PutRecord.
-type PutRecordOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The encryption type to use on the record. This parameter can be one of the
-	// following values:
-	//
-	//    * NONE: Do not encrypt the records in the stream.
-	//
-	//    * KMS: Use server-side encryption on the records in the stream using a
-	//    customer-managed AWS KMS key.
-	EncryptionType EncryptionType `type:"string" enum:"true"`
-
-	// The sequence number identifier that was assigned to the put data record.
-	// The sequence number for the record is unique across all records in the stream.
-	// A sequence number is the identifier associated with every record put into
-	// the stream.
-	//
-	// SequenceNumber is a required field
-	SequenceNumber *string `type:"string" required:"true"`
-
-	// The shard ID of the shard where the data record was placed.
-	//
-	// ShardId is a required field
-	ShardId *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s PutRecordOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opPutRecord = "PutRecord"
 
@@ -170,7 +62,7 @@ const opPutRecord = "PutRecord"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/PutRecord
-func (c *Client) PutRecordRequest(input *PutRecordInput) PutRecordRequest {
+func (c *Client) PutRecordRequest(input *types.PutRecordInput) PutRecordRequest {
 	op := &aws.Operation{
 		Name:       opPutRecord,
 		HTTPMethod: "POST",
@@ -178,10 +70,10 @@ func (c *Client) PutRecordRequest(input *PutRecordInput) PutRecordRequest {
 	}
 
 	if input == nil {
-		input = &PutRecordInput{}
+		input = &types.PutRecordInput{}
 	}
 
-	req := c.newRequest(op, input, &PutRecordOutput{})
+	req := c.newRequest(op, input, &types.PutRecordOutput{})
 	return PutRecordRequest{Request: req, Input: input, Copy: c.PutRecordRequest}
 }
 
@@ -189,8 +81,8 @@ func (c *Client) PutRecordRequest(input *PutRecordInput) PutRecordRequest {
 // PutRecord API operation.
 type PutRecordRequest struct {
 	*aws.Request
-	Input *PutRecordInput
-	Copy  func(*PutRecordInput) PutRecordRequest
+	Input *types.PutRecordInput
+	Copy  func(*types.PutRecordInput) PutRecordRequest
 }
 
 // Send marshals and sends the PutRecord API request.
@@ -202,7 +94,7 @@ func (r PutRecordRequest) Send(ctx context.Context) (*PutRecordResponse, error) 
 	}
 
 	resp := &PutRecordResponse{
-		PutRecordOutput: r.Request.Data.(*PutRecordOutput),
+		PutRecordOutput: r.Request.Data.(*types.PutRecordOutput),
 		response:        &aws.Response{Request: r.Request},
 	}
 
@@ -212,7 +104,7 @@ func (r PutRecordRequest) Send(ctx context.Context) (*PutRecordResponse, error) 
 // PutRecordResponse is the response type for the
 // PutRecord API operation.
 type PutRecordResponse struct {
-	*PutRecordOutput
+	*types.PutRecordOutput
 
 	response *aws.Response
 }

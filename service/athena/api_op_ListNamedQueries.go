@@ -6,55 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/athena/types"
 )
-
-type ListNamedQueriesInput struct {
-	_ struct{} `type:"structure"`
-
-	// The maximum number of queries to return in this request.
-	MaxResults *int64 `type:"integer"`
-
-	// The token that specifies where to start pagination if a previous request
-	// was truncated.
-	NextToken *string `min:"1" type:"string"`
-
-	// The name of the workgroup from which the named queries are being returned.
-	WorkGroup *string `type:"string"`
-}
-
-// String returns the string representation
-func (s ListNamedQueriesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListNamedQueriesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListNamedQueriesInput"}
-	if s.NextToken != nil && len(*s.NextToken) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ListNamedQueriesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The list of unique query IDs.
-	NamedQueryIds []string `min:"1" type:"list"`
-
-	// A token to be used by the next request if this request is truncated.
-	NextToken *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s ListNamedQueriesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListNamedQueries = "ListNamedQueries"
 
@@ -76,7 +29,7 @@ const opListNamedQueries = "ListNamedQueries"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/ListNamedQueries
-func (c *Client) ListNamedQueriesRequest(input *ListNamedQueriesInput) ListNamedQueriesRequest {
+func (c *Client) ListNamedQueriesRequest(input *types.ListNamedQueriesInput) ListNamedQueriesRequest {
 	op := &aws.Operation{
 		Name:       opListNamedQueries,
 		HTTPMethod: "POST",
@@ -90,10 +43,10 @@ func (c *Client) ListNamedQueriesRequest(input *ListNamedQueriesInput) ListNamed
 	}
 
 	if input == nil {
-		input = &ListNamedQueriesInput{}
+		input = &types.ListNamedQueriesInput{}
 	}
 
-	req := c.newRequest(op, input, &ListNamedQueriesOutput{})
+	req := c.newRequest(op, input, &types.ListNamedQueriesOutput{})
 	return ListNamedQueriesRequest{Request: req, Input: input, Copy: c.ListNamedQueriesRequest}
 }
 
@@ -101,8 +54,8 @@ func (c *Client) ListNamedQueriesRequest(input *ListNamedQueriesInput) ListNamed
 // ListNamedQueries API operation.
 type ListNamedQueriesRequest struct {
 	*aws.Request
-	Input *ListNamedQueriesInput
-	Copy  func(*ListNamedQueriesInput) ListNamedQueriesRequest
+	Input *types.ListNamedQueriesInput
+	Copy  func(*types.ListNamedQueriesInput) ListNamedQueriesRequest
 }
 
 // Send marshals and sends the ListNamedQueries API request.
@@ -114,7 +67,7 @@ func (r ListNamedQueriesRequest) Send(ctx context.Context) (*ListNamedQueriesRes
 	}
 
 	resp := &ListNamedQueriesResponse{
-		ListNamedQueriesOutput: r.Request.Data.(*ListNamedQueriesOutput),
+		ListNamedQueriesOutput: r.Request.Data.(*types.ListNamedQueriesOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -144,7 +97,7 @@ func NewListNamedQueriesPaginator(req ListNamedQueriesRequest) ListNamedQueriesP
 	return ListNamedQueriesPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListNamedQueriesInput
+				var inCpy *types.ListNamedQueriesInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -164,14 +117,14 @@ type ListNamedQueriesPaginator struct {
 	aws.Pager
 }
 
-func (p *ListNamedQueriesPaginator) CurrentPage() *ListNamedQueriesOutput {
-	return p.Pager.CurrentPage().(*ListNamedQueriesOutput)
+func (p *ListNamedQueriesPaginator) CurrentPage() *types.ListNamedQueriesOutput {
+	return p.Pager.CurrentPage().(*types.ListNamedQueriesOutput)
 }
 
 // ListNamedQueriesResponse is the response type for the
 // ListNamedQueries API operation.
 type ListNamedQueriesResponse struct {
-	*ListNamedQueriesOutput
+	*types.ListNamedQueriesOutput
 
 	response *aws.Response
 }

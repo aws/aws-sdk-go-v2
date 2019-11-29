@@ -4,75 +4,10 @@ package autoscaling
 
 import (
 	"context"
-	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/autoscaling/types"
 )
-
-type DescribeScheduledActionsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the Auto Scaling group.
-	AutoScalingGroupName *string `min:"1" type:"string"`
-
-	// The latest scheduled start time to return. If scheduled action names are
-	// provided, this parameter is ignored.
-	EndTime *time.Time `type:"timestamp"`
-
-	// The maximum number of items to return with this call. The default value is
-	// 50 and the maximum value is 100.
-	MaxRecords *int64 `type:"integer"`
-
-	// The token for the next set of items to return. (You received this token from
-	// a previous call.)
-	NextToken *string `type:"string"`
-
-	// The names of one or more scheduled actions. You can specify up to 50 actions.
-	// If you omit this parameter, all scheduled actions are described. If you specify
-	// an unknown scheduled action, it is ignored with no error.
-	ScheduledActionNames []string `type:"list"`
-
-	// The earliest scheduled start time to return. If scheduled action names are
-	// provided, this parameter is ignored.
-	StartTime *time.Time `type:"timestamp"`
-}
-
-// String returns the string representation
-func (s DescribeScheduledActionsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeScheduledActionsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeScheduledActionsInput"}
-	if s.AutoScalingGroupName != nil && len(*s.AutoScalingGroupName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("AutoScalingGroupName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribeScheduledActionsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A string that indicates that the response contains more items than can be
-	// returned in a single response. To receive additional items, specify this
-	// string for the NextToken value when requesting the next set of items. This
-	// value is null when there are no more items to return.
-	NextToken *string `type:"string"`
-
-	// The scheduled actions.
-	ScheduledUpdateGroupActions []ScheduledUpdateGroupAction `type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeScheduledActionsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeScheduledActions = "DescribeScheduledActions"
 
@@ -91,7 +26,7 @@ const opDescribeScheduledActions = "DescribeScheduledActions"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DescribeScheduledActions
-func (c *Client) DescribeScheduledActionsRequest(input *DescribeScheduledActionsInput) DescribeScheduledActionsRequest {
+func (c *Client) DescribeScheduledActionsRequest(input *types.DescribeScheduledActionsInput) DescribeScheduledActionsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeScheduledActions,
 		HTTPMethod: "POST",
@@ -105,10 +40,10 @@ func (c *Client) DescribeScheduledActionsRequest(input *DescribeScheduledActions
 	}
 
 	if input == nil {
-		input = &DescribeScheduledActionsInput{}
+		input = &types.DescribeScheduledActionsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeScheduledActionsOutput{})
+	req := c.newRequest(op, input, &types.DescribeScheduledActionsOutput{})
 	return DescribeScheduledActionsRequest{Request: req, Input: input, Copy: c.DescribeScheduledActionsRequest}
 }
 
@@ -116,8 +51,8 @@ func (c *Client) DescribeScheduledActionsRequest(input *DescribeScheduledActions
 // DescribeScheduledActions API operation.
 type DescribeScheduledActionsRequest struct {
 	*aws.Request
-	Input *DescribeScheduledActionsInput
-	Copy  func(*DescribeScheduledActionsInput) DescribeScheduledActionsRequest
+	Input *types.DescribeScheduledActionsInput
+	Copy  func(*types.DescribeScheduledActionsInput) DescribeScheduledActionsRequest
 }
 
 // Send marshals and sends the DescribeScheduledActions API request.
@@ -129,7 +64,7 @@ func (r DescribeScheduledActionsRequest) Send(ctx context.Context) (*DescribeSch
 	}
 
 	resp := &DescribeScheduledActionsResponse{
-		DescribeScheduledActionsOutput: r.Request.Data.(*DescribeScheduledActionsOutput),
+		DescribeScheduledActionsOutput: r.Request.Data.(*types.DescribeScheduledActionsOutput),
 		response:                       &aws.Response{Request: r.Request},
 	}
 
@@ -159,7 +94,7 @@ func NewDescribeScheduledActionsPaginator(req DescribeScheduledActionsRequest) D
 	return DescribeScheduledActionsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *DescribeScheduledActionsInput
+				var inCpy *types.DescribeScheduledActionsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -179,14 +114,14 @@ type DescribeScheduledActionsPaginator struct {
 	aws.Pager
 }
 
-func (p *DescribeScheduledActionsPaginator) CurrentPage() *DescribeScheduledActionsOutput {
-	return p.Pager.CurrentPage().(*DescribeScheduledActionsOutput)
+func (p *DescribeScheduledActionsPaginator) CurrentPage() *types.DescribeScheduledActionsOutput {
+	return p.Pager.CurrentPage().(*types.DescribeScheduledActionsOutput)
 }
 
 // DescribeScheduledActionsResponse is the response type for the
 // DescribeScheduledActions API operation.
 type DescribeScheduledActionsResponse struct {
-	*DescribeScheduledActionsOutput
+	*types.DescribeScheduledActionsOutput
 
 	response *aws.Response
 }

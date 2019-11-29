@@ -6,53 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/ec2query"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-type DeleteRouteTableInput struct {
-	_ struct{} `type:"structure"`
-
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have
-	// the required permissions, the error response is DryRunOperation. Otherwise,
-	// it is UnauthorizedOperation.
-	DryRun *bool `locationName:"dryRun" type:"boolean"`
-
-	// The ID of the route table.
-	//
-	// RouteTableId is a required field
-	RouteTableId *string `locationName:"routeTableId" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteRouteTableInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteRouteTableInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteRouteTableInput"}
-
-	if s.RouteTableId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("RouteTableId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteRouteTableOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteRouteTableOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteRouteTable = "DeleteRouteTable"
 
@@ -71,7 +28,7 @@ const opDeleteRouteTable = "DeleteRouteTable"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteRouteTable
-func (c *Client) DeleteRouteTableRequest(input *DeleteRouteTableInput) DeleteRouteTableRequest {
+func (c *Client) DeleteRouteTableRequest(input *types.DeleteRouteTableInput) DeleteRouteTableRequest {
 	op := &aws.Operation{
 		Name:       opDeleteRouteTable,
 		HTTPMethod: "POST",
@@ -79,10 +36,10 @@ func (c *Client) DeleteRouteTableRequest(input *DeleteRouteTableInput) DeleteRou
 	}
 
 	if input == nil {
-		input = &DeleteRouteTableInput{}
+		input = &types.DeleteRouteTableInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteRouteTableOutput{})
+	req := c.newRequest(op, input, &types.DeleteRouteTableOutput{})
 	req.Handlers.Unmarshal.Remove(ec2query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return DeleteRouteTableRequest{Request: req, Input: input, Copy: c.DeleteRouteTableRequest}
@@ -92,8 +49,8 @@ func (c *Client) DeleteRouteTableRequest(input *DeleteRouteTableInput) DeleteRou
 // DeleteRouteTable API operation.
 type DeleteRouteTableRequest struct {
 	*aws.Request
-	Input *DeleteRouteTableInput
-	Copy  func(*DeleteRouteTableInput) DeleteRouteTableRequest
+	Input *types.DeleteRouteTableInput
+	Copy  func(*types.DeleteRouteTableInput) DeleteRouteTableRequest
 }
 
 // Send marshals and sends the DeleteRouteTable API request.
@@ -105,7 +62,7 @@ func (r DeleteRouteTableRequest) Send(ctx context.Context) (*DeleteRouteTableRes
 	}
 
 	resp := &DeleteRouteTableResponse{
-		DeleteRouteTableOutput: r.Request.Data.(*DeleteRouteTableOutput),
+		DeleteRouteTableOutput: r.Request.Data.(*types.DeleteRouteTableOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -115,7 +72,7 @@ func (r DeleteRouteTableRequest) Send(ctx context.Context) (*DeleteRouteTableRes
 // DeleteRouteTableResponse is the response type for the
 // DeleteRouteTable API operation.
 type DeleteRouteTableResponse struct {
-	*DeleteRouteTableOutput
+	*types.DeleteRouteTableOutput
 
 	response *aws.Response
 }

@@ -6,62 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/types"
 )
-
-// The request to sign out of all devices, as an administrator.
-type AdminUserGlobalSignOutInput struct {
-	_ struct{} `type:"structure"`
-
-	// The user pool ID.
-	//
-	// UserPoolId is a required field
-	UserPoolId *string `min:"1" type:"string" required:"true"`
-
-	// The user name.
-	//
-	// Username is a required field
-	Username *string `min:"1" type:"string" required:"true" sensitive:"true"`
-}
-
-// String returns the string representation
-func (s AdminUserGlobalSignOutInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *AdminUserGlobalSignOutInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "AdminUserGlobalSignOutInput"}
-
-	if s.UserPoolId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("UserPoolId"))
-	}
-	if s.UserPoolId != nil && len(*s.UserPoolId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("UserPoolId", 1))
-	}
-
-	if s.Username == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Username"))
-	}
-	if s.Username != nil && len(*s.Username) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Username", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// The global sign-out response, as an administrator.
-type AdminUserGlobalSignOutOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s AdminUserGlobalSignOutOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opAdminUserGlobalSignOut = "AdminUserGlobalSignOut"
 
@@ -80,7 +26,7 @@ const opAdminUserGlobalSignOut = "AdminUserGlobalSignOut"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AdminUserGlobalSignOut
-func (c *Client) AdminUserGlobalSignOutRequest(input *AdminUserGlobalSignOutInput) AdminUserGlobalSignOutRequest {
+func (c *Client) AdminUserGlobalSignOutRequest(input *types.AdminUserGlobalSignOutInput) AdminUserGlobalSignOutRequest {
 	op := &aws.Operation{
 		Name:       opAdminUserGlobalSignOut,
 		HTTPMethod: "POST",
@@ -88,10 +34,10 @@ func (c *Client) AdminUserGlobalSignOutRequest(input *AdminUserGlobalSignOutInpu
 	}
 
 	if input == nil {
-		input = &AdminUserGlobalSignOutInput{}
+		input = &types.AdminUserGlobalSignOutInput{}
 	}
 
-	req := c.newRequest(op, input, &AdminUserGlobalSignOutOutput{})
+	req := c.newRequest(op, input, &types.AdminUserGlobalSignOutOutput{})
 	return AdminUserGlobalSignOutRequest{Request: req, Input: input, Copy: c.AdminUserGlobalSignOutRequest}
 }
 
@@ -99,8 +45,8 @@ func (c *Client) AdminUserGlobalSignOutRequest(input *AdminUserGlobalSignOutInpu
 // AdminUserGlobalSignOut API operation.
 type AdminUserGlobalSignOutRequest struct {
 	*aws.Request
-	Input *AdminUserGlobalSignOutInput
-	Copy  func(*AdminUserGlobalSignOutInput) AdminUserGlobalSignOutRequest
+	Input *types.AdminUserGlobalSignOutInput
+	Copy  func(*types.AdminUserGlobalSignOutInput) AdminUserGlobalSignOutRequest
 }
 
 // Send marshals and sends the AdminUserGlobalSignOut API request.
@@ -112,7 +58,7 @@ func (r AdminUserGlobalSignOutRequest) Send(ctx context.Context) (*AdminUserGlob
 	}
 
 	resp := &AdminUserGlobalSignOutResponse{
-		AdminUserGlobalSignOutOutput: r.Request.Data.(*AdminUserGlobalSignOutOutput),
+		AdminUserGlobalSignOutOutput: r.Request.Data.(*types.AdminUserGlobalSignOutOutput),
 		response:                     &aws.Response{Request: r.Request},
 	}
 
@@ -122,7 +68,7 @@ func (r AdminUserGlobalSignOutRequest) Send(ctx context.Context) (*AdminUserGlob
 // AdminUserGlobalSignOutResponse is the response type for the
 // AdminUserGlobalSignOut API operation.
 type AdminUserGlobalSignOutResponse struct {
-	*AdminUserGlobalSignOutOutput
+	*types.AdminUserGlobalSignOutOutput
 
 	response *aws.Response
 }

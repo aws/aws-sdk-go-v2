@@ -6,77 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-type GetTransitGatewayRouteTablePropagationsInput struct {
-	_ struct{} `type:"structure"`
-
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have
-	// the required permissions, the error response is DryRunOperation. Otherwise,
-	// it is UnauthorizedOperation.
-	DryRun *bool `type:"boolean"`
-
-	// One or more filters. The possible values are:
-	//
-	//    * resource-id - The ID of the resource.
-	//
-	//    * resource-type - The resource type (vpc | vpn).
-	//
-	//    * transit-gateway-attachment-id - The ID of the attachment.
-	Filters []Filter `locationName:"Filter" locationNameList:"Filter" type:"list"`
-
-	// The maximum number of results to return with a single call. To retrieve the
-	// remaining results, make another call with the returned nextToken value.
-	MaxResults *int64 `min:"5" type:"integer"`
-
-	// The token for the next page of results.
-	NextToken *string `type:"string"`
-
-	// The ID of the transit gateway route table.
-	//
-	// TransitGatewayRouteTableId is a required field
-	TransitGatewayRouteTableId *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetTransitGatewayRouteTablePropagationsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetTransitGatewayRouteTablePropagationsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetTransitGatewayRouteTablePropagationsInput"}
-	if s.MaxResults != nil && *s.MaxResults < 5 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 5))
-	}
-
-	if s.TransitGatewayRouteTableId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("TransitGatewayRouteTableId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type GetTransitGatewayRouteTablePropagationsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The token to use to retrieve the next page of results. This value is null
-	// when there are no more results to return.
-	NextToken *string `locationName:"nextToken" type:"string"`
-
-	// Information about the route table propagations.
-	TransitGatewayRouteTablePropagations []TransitGatewayRouteTablePropagation `locationName:"transitGatewayRouteTablePropagations" locationNameList:"item" type:"list"`
-}
-
-// String returns the string representation
-func (s GetTransitGatewayRouteTablePropagationsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetTransitGatewayRouteTablePropagations = "GetTransitGatewayRouteTablePropagations"
 
@@ -94,7 +25,7 @@ const opGetTransitGatewayRouteTablePropagations = "GetTransitGatewayRouteTablePr
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetTransitGatewayRouteTablePropagations
-func (c *Client) GetTransitGatewayRouteTablePropagationsRequest(input *GetTransitGatewayRouteTablePropagationsInput) GetTransitGatewayRouteTablePropagationsRequest {
+func (c *Client) GetTransitGatewayRouteTablePropagationsRequest(input *types.GetTransitGatewayRouteTablePropagationsInput) GetTransitGatewayRouteTablePropagationsRequest {
 	op := &aws.Operation{
 		Name:       opGetTransitGatewayRouteTablePropagations,
 		HTTPMethod: "POST",
@@ -108,10 +39,10 @@ func (c *Client) GetTransitGatewayRouteTablePropagationsRequest(input *GetTransi
 	}
 
 	if input == nil {
-		input = &GetTransitGatewayRouteTablePropagationsInput{}
+		input = &types.GetTransitGatewayRouteTablePropagationsInput{}
 	}
 
-	req := c.newRequest(op, input, &GetTransitGatewayRouteTablePropagationsOutput{})
+	req := c.newRequest(op, input, &types.GetTransitGatewayRouteTablePropagationsOutput{})
 	return GetTransitGatewayRouteTablePropagationsRequest{Request: req, Input: input, Copy: c.GetTransitGatewayRouteTablePropagationsRequest}
 }
 
@@ -119,8 +50,8 @@ func (c *Client) GetTransitGatewayRouteTablePropagationsRequest(input *GetTransi
 // GetTransitGatewayRouteTablePropagations API operation.
 type GetTransitGatewayRouteTablePropagationsRequest struct {
 	*aws.Request
-	Input *GetTransitGatewayRouteTablePropagationsInput
-	Copy  func(*GetTransitGatewayRouteTablePropagationsInput) GetTransitGatewayRouteTablePropagationsRequest
+	Input *types.GetTransitGatewayRouteTablePropagationsInput
+	Copy  func(*types.GetTransitGatewayRouteTablePropagationsInput) GetTransitGatewayRouteTablePropagationsRequest
 }
 
 // Send marshals and sends the GetTransitGatewayRouteTablePropagations API request.
@@ -132,7 +63,7 @@ func (r GetTransitGatewayRouteTablePropagationsRequest) Send(ctx context.Context
 	}
 
 	resp := &GetTransitGatewayRouteTablePropagationsResponse{
-		GetTransitGatewayRouteTablePropagationsOutput: r.Request.Data.(*GetTransitGatewayRouteTablePropagationsOutput),
+		GetTransitGatewayRouteTablePropagationsOutput: r.Request.Data.(*types.GetTransitGatewayRouteTablePropagationsOutput),
 		response: &aws.Response{Request: r.Request},
 	}
 
@@ -162,7 +93,7 @@ func NewGetTransitGatewayRouteTablePropagationsPaginator(req GetTransitGatewayRo
 	return GetTransitGatewayRouteTablePropagationsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *GetTransitGatewayRouteTablePropagationsInput
+				var inCpy *types.GetTransitGatewayRouteTablePropagationsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -182,14 +113,14 @@ type GetTransitGatewayRouteTablePropagationsPaginator struct {
 	aws.Pager
 }
 
-func (p *GetTransitGatewayRouteTablePropagationsPaginator) CurrentPage() *GetTransitGatewayRouteTablePropagationsOutput {
-	return p.Pager.CurrentPage().(*GetTransitGatewayRouteTablePropagationsOutput)
+func (p *GetTransitGatewayRouteTablePropagationsPaginator) CurrentPage() *types.GetTransitGatewayRouteTablePropagationsOutput {
+	return p.Pager.CurrentPage().(*types.GetTransitGatewayRouteTablePropagationsOutput)
 }
 
 // GetTransitGatewayRouteTablePropagationsResponse is the response type for the
 // GetTransitGatewayRouteTablePropagations API operation.
 type GetTransitGatewayRouteTablePropagationsResponse struct {
-	*GetTransitGatewayRouteTablePropagationsOutput
+	*types.GetTransitGatewayRouteTablePropagationsOutput
 
 	response *aws.Response
 }

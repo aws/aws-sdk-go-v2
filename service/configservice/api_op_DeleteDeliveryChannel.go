@@ -6,52 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
+	"github.com/aws/aws-sdk-go-v2/service/configservice/types"
 )
-
-// The input for the DeleteDeliveryChannel action. The action accepts the following
-// data, in JSON format.
-type DeleteDeliveryChannelInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the delivery channel to delete.
-	//
-	// DeliveryChannelName is a required field
-	DeliveryChannelName *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteDeliveryChannelInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteDeliveryChannelInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteDeliveryChannelInput"}
-
-	if s.DeliveryChannelName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DeliveryChannelName"))
-	}
-	if s.DeliveryChannelName != nil && len(*s.DeliveryChannelName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("DeliveryChannelName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteDeliveryChannelOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteDeliveryChannelOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteDeliveryChannel = "DeleteDeliveryChannel"
 
@@ -71,7 +29,7 @@ const opDeleteDeliveryChannel = "DeleteDeliveryChannel"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DeleteDeliveryChannel
-func (c *Client) DeleteDeliveryChannelRequest(input *DeleteDeliveryChannelInput) DeleteDeliveryChannelRequest {
+func (c *Client) DeleteDeliveryChannelRequest(input *types.DeleteDeliveryChannelInput) DeleteDeliveryChannelRequest {
 	op := &aws.Operation{
 		Name:       opDeleteDeliveryChannel,
 		HTTPMethod: "POST",
@@ -79,10 +37,10 @@ func (c *Client) DeleteDeliveryChannelRequest(input *DeleteDeliveryChannelInput)
 	}
 
 	if input == nil {
-		input = &DeleteDeliveryChannelInput{}
+		input = &types.DeleteDeliveryChannelInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteDeliveryChannelOutput{})
+	req := c.newRequest(op, input, &types.DeleteDeliveryChannelOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return DeleteDeliveryChannelRequest{Request: req, Input: input, Copy: c.DeleteDeliveryChannelRequest}
@@ -92,8 +50,8 @@ func (c *Client) DeleteDeliveryChannelRequest(input *DeleteDeliveryChannelInput)
 // DeleteDeliveryChannel API operation.
 type DeleteDeliveryChannelRequest struct {
 	*aws.Request
-	Input *DeleteDeliveryChannelInput
-	Copy  func(*DeleteDeliveryChannelInput) DeleteDeliveryChannelRequest
+	Input *types.DeleteDeliveryChannelInput
+	Copy  func(*types.DeleteDeliveryChannelInput) DeleteDeliveryChannelRequest
 }
 
 // Send marshals and sends the DeleteDeliveryChannel API request.
@@ -105,7 +63,7 @@ func (r DeleteDeliveryChannelRequest) Send(ctx context.Context) (*DeleteDelivery
 	}
 
 	resp := &DeleteDeliveryChannelResponse{
-		DeleteDeliveryChannelOutput: r.Request.Data.(*DeleteDeliveryChannelOutput),
+		DeleteDeliveryChannelOutput: r.Request.Data.(*types.DeleteDeliveryChannelOutput),
 		response:                    &aws.Response{Request: r.Request},
 	}
 
@@ -115,7 +73,7 @@ func (r DeleteDeliveryChannelRequest) Send(ctx context.Context) (*DeleteDelivery
 // DeleteDeliveryChannelResponse is the response type for the
 // DeleteDeliveryChannel API operation.
 type DeleteDeliveryChannelResponse struct {
-	*DeleteDeliveryChannelOutput
+	*types.DeleteDeliveryChannelOutput
 
 	response *aws.Response
 }

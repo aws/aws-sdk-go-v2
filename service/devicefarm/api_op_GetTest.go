@@ -6,53 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/devicefarm/types"
 )
-
-// Represents a request to the get test operation.
-type GetTestInput struct {
-	_ struct{} `type:"structure"`
-
-	// The test's ARN.
-	//
-	// Arn is a required field
-	Arn *string `locationName:"arn" min:"32" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetTestInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetTestInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetTestInput"}
-
-	if s.Arn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Arn"))
-	}
-	if s.Arn != nil && len(*s.Arn) < 32 {
-		invalidParams.Add(aws.NewErrParamMinLen("Arn", 32))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Represents the result of a get test request.
-type GetTestOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A test condition that is evaluated.
-	Test *Test `locationName:"test" type:"structure"`
-}
-
-// String returns the string representation
-func (s GetTestOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetTest = "GetTest"
 
@@ -69,7 +24,7 @@ const opGetTest = "GetTest"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/GetTest
-func (c *Client) GetTestRequest(input *GetTestInput) GetTestRequest {
+func (c *Client) GetTestRequest(input *types.GetTestInput) GetTestRequest {
 	op := &aws.Operation{
 		Name:       opGetTest,
 		HTTPMethod: "POST",
@@ -77,10 +32,10 @@ func (c *Client) GetTestRequest(input *GetTestInput) GetTestRequest {
 	}
 
 	if input == nil {
-		input = &GetTestInput{}
+		input = &types.GetTestInput{}
 	}
 
-	req := c.newRequest(op, input, &GetTestOutput{})
+	req := c.newRequest(op, input, &types.GetTestOutput{})
 	return GetTestRequest{Request: req, Input: input, Copy: c.GetTestRequest}
 }
 
@@ -88,8 +43,8 @@ func (c *Client) GetTestRequest(input *GetTestInput) GetTestRequest {
 // GetTest API operation.
 type GetTestRequest struct {
 	*aws.Request
-	Input *GetTestInput
-	Copy  func(*GetTestInput) GetTestRequest
+	Input *types.GetTestInput
+	Copy  func(*types.GetTestInput) GetTestRequest
 }
 
 // Send marshals and sends the GetTest API request.
@@ -101,7 +56,7 @@ func (r GetTestRequest) Send(ctx context.Context) (*GetTestResponse, error) {
 	}
 
 	resp := &GetTestResponse{
-		GetTestOutput: r.Request.Data.(*GetTestOutput),
+		GetTestOutput: r.Request.Data.(*types.GetTestOutput),
 		response:      &aws.Response{Request: r.Request},
 	}
 
@@ -111,7 +66,7 @@ func (r GetTestRequest) Send(ctx context.Context) (*GetTestResponse, error) {
 // GetTestResponse is the response type for the
 // GetTest API operation.
 type GetTestResponse struct {
-	*GetTestOutput
+	*types.GetTestOutput
 
 	response *aws.Response
 }

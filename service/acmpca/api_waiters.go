@@ -7,6 +7,7 @@ import (
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
+	"github.com/aws/aws-sdk-go-v2/service/acmpca/types"
 )
 
 // WaitUntilAuditReportCreated uses the ACM-PCA API operation
@@ -18,7 +19,7 @@ import (
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Client) WaitUntilAuditReportCreated(ctx context.Context, input *DescribeCertificateAuthorityAuditReportInput, opts ...aws.WaiterOption) error {
+func (c *Client) WaitUntilAuditReportCreated(ctx context.Context, input *types.DescribeCertificateAuthorityAuditReportInput, opts ...aws.WaiterOption) error {
 	w := aws.Waiter{
 		Name:        "WaitUntilAuditReportCreated",
 		MaxAttempts: 60,
@@ -37,7 +38,7 @@ func (c *Client) WaitUntilAuditReportCreated(ctx context.Context, input *Describ
 		},
 		Logger: c.Config.Logger,
 		NewRequest: func(opts []aws.Option) (*aws.Request, error) {
-			var inCpy *DescribeCertificateAuthorityAuditReportInput
+			var inCpy *types.DescribeCertificateAuthorityAuditReportInput
 			if input != nil {
 				tmp := *input
 				inCpy = &tmp
@@ -62,7 +63,7 @@ func (c *Client) WaitUntilAuditReportCreated(ctx context.Context, input *Describ
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Client) WaitUntilCertificateAuthorityCSRCreated(ctx context.Context, input *GetCertificateAuthorityCsrInput, opts ...aws.WaiterOption) error {
+func (c *Client) WaitUntilCertificateAuthorityCSRCreated(ctx context.Context, input *types.GetCertificateAuthorityCsrInput, opts ...aws.WaiterOption) error {
 	w := aws.Waiter{
 		Name:        "WaitUntilCertificateAuthorityCSRCreated",
 		MaxAttempts: 60,
@@ -81,7 +82,7 @@ func (c *Client) WaitUntilCertificateAuthorityCSRCreated(ctx context.Context, in
 		},
 		Logger: c.Config.Logger,
 		NewRequest: func(opts []aws.Option) (*aws.Request, error) {
-			var inCpy *GetCertificateAuthorityCsrInput
+			var inCpy *types.GetCertificateAuthorityCsrInput
 			if input != nil {
 				tmp := *input
 				inCpy = &tmp
@@ -106,7 +107,7 @@ func (c *Client) WaitUntilCertificateAuthorityCSRCreated(ctx context.Context, in
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Client) WaitUntilCertificateIssued(ctx context.Context, input *GetCertificateInput, opts ...aws.WaiterOption) error {
+func (c *Client) WaitUntilCertificateIssued(ctx context.Context, input *types.GetCertificateInput, opts ...aws.WaiterOption) error {
 	w := aws.Waiter{
 		Name:        "WaitUntilCertificateIssued",
 		MaxAttempts: 60,
@@ -125,7 +126,7 @@ func (c *Client) WaitUntilCertificateIssued(ctx context.Context, input *GetCerti
 		},
 		Logger: c.Config.Logger,
 		NewRequest: func(opts []aws.Option) (*aws.Request, error) {
-			var inCpy *GetCertificateInput
+			var inCpy *types.GetCertificateInput
 			if input != nil {
 				tmp := *input
 				inCpy = &tmp

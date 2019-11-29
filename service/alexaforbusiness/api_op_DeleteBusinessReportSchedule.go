@@ -6,45 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/alexaforbusiness/types"
 )
-
-type DeleteBusinessReportScheduleInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ARN of the business report schedule.
-	//
-	// ScheduleArn is a required field
-	ScheduleArn *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteBusinessReportScheduleInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteBusinessReportScheduleInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteBusinessReportScheduleInput"}
-
-	if s.ScheduleArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ScheduleArn"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteBusinessReportScheduleOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteBusinessReportScheduleOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteBusinessReportSchedule = "DeleteBusinessReportSchedule"
 
@@ -62,7 +25,7 @@ const opDeleteBusinessReportSchedule = "DeleteBusinessReportSchedule"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/DeleteBusinessReportSchedule
-func (c *Client) DeleteBusinessReportScheduleRequest(input *DeleteBusinessReportScheduleInput) DeleteBusinessReportScheduleRequest {
+func (c *Client) DeleteBusinessReportScheduleRequest(input *types.DeleteBusinessReportScheduleInput) DeleteBusinessReportScheduleRequest {
 	op := &aws.Operation{
 		Name:       opDeleteBusinessReportSchedule,
 		HTTPMethod: "POST",
@@ -70,10 +33,10 @@ func (c *Client) DeleteBusinessReportScheduleRequest(input *DeleteBusinessReport
 	}
 
 	if input == nil {
-		input = &DeleteBusinessReportScheduleInput{}
+		input = &types.DeleteBusinessReportScheduleInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteBusinessReportScheduleOutput{})
+	req := c.newRequest(op, input, &types.DeleteBusinessReportScheduleOutput{})
 	return DeleteBusinessReportScheduleRequest{Request: req, Input: input, Copy: c.DeleteBusinessReportScheduleRequest}
 }
 
@@ -81,8 +44,8 @@ func (c *Client) DeleteBusinessReportScheduleRequest(input *DeleteBusinessReport
 // DeleteBusinessReportSchedule API operation.
 type DeleteBusinessReportScheduleRequest struct {
 	*aws.Request
-	Input *DeleteBusinessReportScheduleInput
-	Copy  func(*DeleteBusinessReportScheduleInput) DeleteBusinessReportScheduleRequest
+	Input *types.DeleteBusinessReportScheduleInput
+	Copy  func(*types.DeleteBusinessReportScheduleInput) DeleteBusinessReportScheduleRequest
 }
 
 // Send marshals and sends the DeleteBusinessReportSchedule API request.
@@ -94,7 +57,7 @@ func (r DeleteBusinessReportScheduleRequest) Send(ctx context.Context) (*DeleteB
 	}
 
 	resp := &DeleteBusinessReportScheduleResponse{
-		DeleteBusinessReportScheduleOutput: r.Request.Data.(*DeleteBusinessReportScheduleOutput),
+		DeleteBusinessReportScheduleOutput: r.Request.Data.(*types.DeleteBusinessReportScheduleOutput),
 		response:                           &aws.Response{Request: r.Request},
 	}
 
@@ -104,7 +67,7 @@ func (r DeleteBusinessReportScheduleRequest) Send(ctx context.Context) (*DeleteB
 // DeleteBusinessReportScheduleResponse is the response type for the
 // DeleteBusinessReportSchedule API operation.
 type DeleteBusinessReportScheduleResponse struct {
-	*DeleteBusinessReportScheduleOutput
+	*types.DeleteBusinessReportScheduleOutput
 
 	response *aws.Response
 }

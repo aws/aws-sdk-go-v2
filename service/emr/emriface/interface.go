@@ -13,6 +13,7 @@ import (
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/emr"
+	"github.com/aws/aws-sdk-go-v2/service/emr/types"
 )
 
 // ClientAPI provides an interface to enable mocking the
@@ -46,7 +47,7 @@ import (
 //    type mockClientClient struct {
 //        emriface.ClientPI
 //    }
-//    func (m *mockClientClient) AddInstanceFleet(input *emr.AddInstanceFleetInput) (*emr.AddInstanceFleetOutput, error) {
+//    func (m *mockClientClient) AddInstanceFleet(input *types.AddInstanceFleetInput) (*types.AddInstanceFleetOutput, error) {
 //        // mock response/functionality
 //    }
 //
@@ -64,69 +65,69 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type ClientAPI interface {
-	AddInstanceFleetRequest(*emr.AddInstanceFleetInput) emr.AddInstanceFleetRequest
+	AddInstanceFleetRequest(*types.AddInstanceFleetInput) emr.AddInstanceFleetRequest
 
-	AddInstanceGroupsRequest(*emr.AddInstanceGroupsInput) emr.AddInstanceGroupsRequest
+	AddInstanceGroupsRequest(*types.AddInstanceGroupsInput) emr.AddInstanceGroupsRequest
 
-	AddJobFlowStepsRequest(*emr.AddJobFlowStepsInput) emr.AddJobFlowStepsRequest
+	AddJobFlowStepsRequest(*types.AddJobFlowStepsInput) emr.AddJobFlowStepsRequest
 
-	AddTagsRequest(*emr.AddTagsInput) emr.AddTagsRequest
+	AddTagsRequest(*types.AddTagsInput) emr.AddTagsRequest
 
-	CancelStepsRequest(*emr.CancelStepsInput) emr.CancelStepsRequest
+	CancelStepsRequest(*types.CancelStepsInput) emr.CancelStepsRequest
 
-	CreateSecurityConfigurationRequest(*emr.CreateSecurityConfigurationInput) emr.CreateSecurityConfigurationRequest
+	CreateSecurityConfigurationRequest(*types.CreateSecurityConfigurationInput) emr.CreateSecurityConfigurationRequest
 
-	DeleteSecurityConfigurationRequest(*emr.DeleteSecurityConfigurationInput) emr.DeleteSecurityConfigurationRequest
+	DeleteSecurityConfigurationRequest(*types.DeleteSecurityConfigurationInput) emr.DeleteSecurityConfigurationRequest
 
-	DescribeClusterRequest(*emr.DescribeClusterInput) emr.DescribeClusterRequest
+	DescribeClusterRequest(*types.DescribeClusterInput) emr.DescribeClusterRequest
 
-	DescribeJobFlowsRequest(*emr.DescribeJobFlowsInput) emr.DescribeJobFlowsRequest
+	DescribeJobFlowsRequest(*types.DescribeJobFlowsInput) emr.DescribeJobFlowsRequest
 
-	DescribeSecurityConfigurationRequest(*emr.DescribeSecurityConfigurationInput) emr.DescribeSecurityConfigurationRequest
+	DescribeSecurityConfigurationRequest(*types.DescribeSecurityConfigurationInput) emr.DescribeSecurityConfigurationRequest
 
-	DescribeStepRequest(*emr.DescribeStepInput) emr.DescribeStepRequest
+	DescribeStepRequest(*types.DescribeStepInput) emr.DescribeStepRequest
 
-	GetBlockPublicAccessConfigurationRequest(*emr.GetBlockPublicAccessConfigurationInput) emr.GetBlockPublicAccessConfigurationRequest
+	GetBlockPublicAccessConfigurationRequest(*types.GetBlockPublicAccessConfigurationInput) emr.GetBlockPublicAccessConfigurationRequest
 
-	ListBootstrapActionsRequest(*emr.ListBootstrapActionsInput) emr.ListBootstrapActionsRequest
+	ListBootstrapActionsRequest(*types.ListBootstrapActionsInput) emr.ListBootstrapActionsRequest
 
-	ListClustersRequest(*emr.ListClustersInput) emr.ListClustersRequest
+	ListClustersRequest(*types.ListClustersInput) emr.ListClustersRequest
 
-	ListInstanceFleetsRequest(*emr.ListInstanceFleetsInput) emr.ListInstanceFleetsRequest
+	ListInstanceFleetsRequest(*types.ListInstanceFleetsInput) emr.ListInstanceFleetsRequest
 
-	ListInstanceGroupsRequest(*emr.ListInstanceGroupsInput) emr.ListInstanceGroupsRequest
+	ListInstanceGroupsRequest(*types.ListInstanceGroupsInput) emr.ListInstanceGroupsRequest
 
-	ListInstancesRequest(*emr.ListInstancesInput) emr.ListInstancesRequest
+	ListInstancesRequest(*types.ListInstancesInput) emr.ListInstancesRequest
 
-	ListSecurityConfigurationsRequest(*emr.ListSecurityConfigurationsInput) emr.ListSecurityConfigurationsRequest
+	ListSecurityConfigurationsRequest(*types.ListSecurityConfigurationsInput) emr.ListSecurityConfigurationsRequest
 
-	ListStepsRequest(*emr.ListStepsInput) emr.ListStepsRequest
+	ListStepsRequest(*types.ListStepsInput) emr.ListStepsRequest
 
-	ModifyInstanceFleetRequest(*emr.ModifyInstanceFleetInput) emr.ModifyInstanceFleetRequest
+	ModifyInstanceFleetRequest(*types.ModifyInstanceFleetInput) emr.ModifyInstanceFleetRequest
 
-	ModifyInstanceGroupsRequest(*emr.ModifyInstanceGroupsInput) emr.ModifyInstanceGroupsRequest
+	ModifyInstanceGroupsRequest(*types.ModifyInstanceGroupsInput) emr.ModifyInstanceGroupsRequest
 
-	PutAutoScalingPolicyRequest(*emr.PutAutoScalingPolicyInput) emr.PutAutoScalingPolicyRequest
+	PutAutoScalingPolicyRequest(*types.PutAutoScalingPolicyInput) emr.PutAutoScalingPolicyRequest
 
-	PutBlockPublicAccessConfigurationRequest(*emr.PutBlockPublicAccessConfigurationInput) emr.PutBlockPublicAccessConfigurationRequest
+	PutBlockPublicAccessConfigurationRequest(*types.PutBlockPublicAccessConfigurationInput) emr.PutBlockPublicAccessConfigurationRequest
 
-	RemoveAutoScalingPolicyRequest(*emr.RemoveAutoScalingPolicyInput) emr.RemoveAutoScalingPolicyRequest
+	RemoveAutoScalingPolicyRequest(*types.RemoveAutoScalingPolicyInput) emr.RemoveAutoScalingPolicyRequest
 
-	RemoveTagsRequest(*emr.RemoveTagsInput) emr.RemoveTagsRequest
+	RemoveTagsRequest(*types.RemoveTagsInput) emr.RemoveTagsRequest
 
-	RunJobFlowRequest(*emr.RunJobFlowInput) emr.RunJobFlowRequest
+	RunJobFlowRequest(*types.RunJobFlowInput) emr.RunJobFlowRequest
 
-	SetTerminationProtectionRequest(*emr.SetTerminationProtectionInput) emr.SetTerminationProtectionRequest
+	SetTerminationProtectionRequest(*types.SetTerminationProtectionInput) emr.SetTerminationProtectionRequest
 
-	SetVisibleToAllUsersRequest(*emr.SetVisibleToAllUsersInput) emr.SetVisibleToAllUsersRequest
+	SetVisibleToAllUsersRequest(*types.SetVisibleToAllUsersInput) emr.SetVisibleToAllUsersRequest
 
-	TerminateJobFlowsRequest(*emr.TerminateJobFlowsInput) emr.TerminateJobFlowsRequest
+	TerminateJobFlowsRequest(*types.TerminateJobFlowsInput) emr.TerminateJobFlowsRequest
 
-	WaitUntilClusterRunning(context.Context, *emr.DescribeClusterInput, ...aws.WaiterOption) error
+	WaitUntilClusterRunning(context.Context, *types.DescribeClusterInput, ...aws.WaiterOption) error
 
-	WaitUntilClusterTerminated(context.Context, *emr.DescribeClusterInput, ...aws.WaiterOption) error
+	WaitUntilClusterTerminated(context.Context, *types.DescribeClusterInput, ...aws.WaiterOption) error
 
-	WaitUntilStepComplete(context.Context, *emr.DescribeStepInput, ...aws.WaiterOption) error
+	WaitUntilStepComplete(context.Context, *types.DescribeStepInput, ...aws.WaiterOption) error
 }
 
 var _ ClientAPI = (*emr.Client)(nil)

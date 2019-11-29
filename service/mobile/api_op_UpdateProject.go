@@ -6,85 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/mobile/types"
 )
-
-// Request structure used for requests to update project configuration.
-type UpdateProjectInput struct {
-	_ struct{} `type:"structure" payload:"Contents"`
-
-	// ZIP or YAML file which contains project configuration to be updated. This
-	// should be the contents of the file downloaded from the URL provided in an
-	// export project operation.
-	Contents []byte `locationName:"contents" type:"blob"`
-
-	// Unique project identifier.
-	//
-	// ProjectId is a required field
-	ProjectId *string `location:"querystring" locationName:"projectId" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s UpdateProjectInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateProjectInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateProjectInput"}
-
-	if s.ProjectId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ProjectId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s UpdateProjectInput) MarshalFields(e protocol.FieldEncoder) error {
-
-	if s.Contents != nil {
-		v := s.Contents
-
-		metadata := protocol.Metadata{}
-		e.SetStream(protocol.PayloadTarget, "contents", protocol.BytesStream(v), metadata)
-	}
-	if s.ProjectId != nil {
-		v := *s.ProjectId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "projectId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-// Result structure used for requests to updated project configuration.
-type UpdateProjectOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Detailed information about the updated AWS Mobile Hub project.
-	Details *ProjectDetails `locationName:"details" type:"structure"`
-}
-
-// String returns the string representation
-func (s UpdateProjectOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s UpdateProjectOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.Details != nil {
-		v := s.Details
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "details", v, metadata)
-	}
-	return nil
-}
 
 const opUpdateProject = "UpdateProject"
 
@@ -101,7 +24,7 @@ const opUpdateProject = "UpdateProject"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mobile-2017-07-01/UpdateProject
-func (c *Client) UpdateProjectRequest(input *UpdateProjectInput) UpdateProjectRequest {
+func (c *Client) UpdateProjectRequest(input *types.UpdateProjectInput) UpdateProjectRequest {
 	op := &aws.Operation{
 		Name:       opUpdateProject,
 		HTTPMethod: "POST",
@@ -109,10 +32,10 @@ func (c *Client) UpdateProjectRequest(input *UpdateProjectInput) UpdateProjectRe
 	}
 
 	if input == nil {
-		input = &UpdateProjectInput{}
+		input = &types.UpdateProjectInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateProjectOutput{})
+	req := c.newRequest(op, input, &types.UpdateProjectOutput{})
 	return UpdateProjectRequest{Request: req, Input: input, Copy: c.UpdateProjectRequest}
 }
 
@@ -120,8 +43,8 @@ func (c *Client) UpdateProjectRequest(input *UpdateProjectInput) UpdateProjectRe
 // UpdateProject API operation.
 type UpdateProjectRequest struct {
 	*aws.Request
-	Input *UpdateProjectInput
-	Copy  func(*UpdateProjectInput) UpdateProjectRequest
+	Input *types.UpdateProjectInput
+	Copy  func(*types.UpdateProjectInput) UpdateProjectRequest
 }
 
 // Send marshals and sends the UpdateProject API request.
@@ -133,7 +56,7 @@ func (r UpdateProjectRequest) Send(ctx context.Context) (*UpdateProjectResponse,
 	}
 
 	resp := &UpdateProjectResponse{
-		UpdateProjectOutput: r.Request.Data.(*UpdateProjectOutput),
+		UpdateProjectOutput: r.Request.Data.(*types.UpdateProjectOutput),
 		response:            &aws.Response{Request: r.Request},
 	}
 
@@ -143,7 +66,7 @@ func (r UpdateProjectRequest) Send(ctx context.Context) (*UpdateProjectResponse,
 // UpdateProjectResponse is the response type for the
 // UpdateProject API operation.
 type UpdateProjectResponse struct {
-	*UpdateProjectOutput
+	*types.UpdateProjectOutput
 
 	response *aws.Response
 }

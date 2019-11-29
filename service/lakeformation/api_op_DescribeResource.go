@@ -6,48 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/lakeformation/types"
 )
-
-type DescribeResourceInput struct {
-	_ struct{} `type:"structure"`
-
-	// The resource ARN.
-	//
-	// ResourceArn is a required field
-	ResourceArn *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeResourceInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeResourceInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeResourceInput"}
-
-	if s.ResourceArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ResourceArn"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribeResourceOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A structure containing information about an AWS Lake Formation resource.
-	ResourceInfo *ResourceInfo `type:"structure"`
-}
-
-// String returns the string representation
-func (s DescribeResourceOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeResource = "DescribeResource"
 
@@ -65,7 +25,7 @@ const opDescribeResource = "DescribeResource"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/DescribeResource
-func (c *Client) DescribeResourceRequest(input *DescribeResourceInput) DescribeResourceRequest {
+func (c *Client) DescribeResourceRequest(input *types.DescribeResourceInput) DescribeResourceRequest {
 	op := &aws.Operation{
 		Name:       opDescribeResource,
 		HTTPMethod: "POST",
@@ -73,10 +33,10 @@ func (c *Client) DescribeResourceRequest(input *DescribeResourceInput) DescribeR
 	}
 
 	if input == nil {
-		input = &DescribeResourceInput{}
+		input = &types.DescribeResourceInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeResourceOutput{})
+	req := c.newRequest(op, input, &types.DescribeResourceOutput{})
 	return DescribeResourceRequest{Request: req, Input: input, Copy: c.DescribeResourceRequest}
 }
 
@@ -84,8 +44,8 @@ func (c *Client) DescribeResourceRequest(input *DescribeResourceInput) DescribeR
 // DescribeResource API operation.
 type DescribeResourceRequest struct {
 	*aws.Request
-	Input *DescribeResourceInput
-	Copy  func(*DescribeResourceInput) DescribeResourceRequest
+	Input *types.DescribeResourceInput
+	Copy  func(*types.DescribeResourceInput) DescribeResourceRequest
 }
 
 // Send marshals and sends the DescribeResource API request.
@@ -97,7 +57,7 @@ func (r DescribeResourceRequest) Send(ctx context.Context) (*DescribeResourceRes
 	}
 
 	resp := &DescribeResourceResponse{
-		DescribeResourceOutput: r.Request.Data.(*DescribeResourceOutput),
+		DescribeResourceOutput: r.Request.Data.(*types.DescribeResourceOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -107,7 +67,7 @@ func (r DescribeResourceRequest) Send(ctx context.Context) (*DescribeResourceRes
 // DescribeResourceResponse is the response type for the
 // DescribeResource API operation.
 type DescribeResourceResponse struct {
-	*DescribeResourceOutput
+	*types.DescribeResourceOutput
 
 	response *aws.Response
 }

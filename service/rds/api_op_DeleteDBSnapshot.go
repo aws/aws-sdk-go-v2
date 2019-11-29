@@ -6,53 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/rds/types"
 )
-
-type DeleteDBSnapshotInput struct {
-	_ struct{} `type:"structure"`
-
-	// The DB snapshot identifier.
-	//
-	// Constraints: Must be the name of an existing DB snapshot in the available
-	// state.
-	//
-	// DBSnapshotIdentifier is a required field
-	DBSnapshotIdentifier *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteDBSnapshotInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteDBSnapshotInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteDBSnapshotInput"}
-
-	if s.DBSnapshotIdentifier == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DBSnapshotIdentifier"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteDBSnapshotOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Contains the details of an Amazon RDS DB snapshot.
-	//
-	// This data type is used as a response element in the DescribeDBSnapshots action.
-	DBSnapshot *DBSnapshot `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteDBSnapshotOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteDBSnapshot = "DeleteDBSnapshot"
 
@@ -72,7 +27,7 @@ const opDeleteDBSnapshot = "DeleteDBSnapshot"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteDBSnapshot
-func (c *Client) DeleteDBSnapshotRequest(input *DeleteDBSnapshotInput) DeleteDBSnapshotRequest {
+func (c *Client) DeleteDBSnapshotRequest(input *types.DeleteDBSnapshotInput) DeleteDBSnapshotRequest {
 	op := &aws.Operation{
 		Name:       opDeleteDBSnapshot,
 		HTTPMethod: "POST",
@@ -80,10 +35,10 @@ func (c *Client) DeleteDBSnapshotRequest(input *DeleteDBSnapshotInput) DeleteDBS
 	}
 
 	if input == nil {
-		input = &DeleteDBSnapshotInput{}
+		input = &types.DeleteDBSnapshotInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteDBSnapshotOutput{})
+	req := c.newRequest(op, input, &types.DeleteDBSnapshotOutput{})
 	return DeleteDBSnapshotRequest{Request: req, Input: input, Copy: c.DeleteDBSnapshotRequest}
 }
 
@@ -91,8 +46,8 @@ func (c *Client) DeleteDBSnapshotRequest(input *DeleteDBSnapshotInput) DeleteDBS
 // DeleteDBSnapshot API operation.
 type DeleteDBSnapshotRequest struct {
 	*aws.Request
-	Input *DeleteDBSnapshotInput
-	Copy  func(*DeleteDBSnapshotInput) DeleteDBSnapshotRequest
+	Input *types.DeleteDBSnapshotInput
+	Copy  func(*types.DeleteDBSnapshotInput) DeleteDBSnapshotRequest
 }
 
 // Send marshals and sends the DeleteDBSnapshot API request.
@@ -104,7 +59,7 @@ func (r DeleteDBSnapshotRequest) Send(ctx context.Context) (*DeleteDBSnapshotRes
 	}
 
 	resp := &DeleteDBSnapshotResponse{
-		DeleteDBSnapshotOutput: r.Request.Data.(*DeleteDBSnapshotOutput),
+		DeleteDBSnapshotOutput: r.Request.Data.(*types.DeleteDBSnapshotOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -114,7 +69,7 @@ func (r DeleteDBSnapshotRequest) Send(ctx context.Context) (*DeleteDBSnapshotRes
 // DeleteDBSnapshotResponse is the response type for the
 // DeleteDBSnapshot API operation.
 type DeleteDBSnapshotResponse struct {
-	*DeleteDBSnapshotOutput
+	*types.DeleteDBSnapshotOutput
 
 	response *aws.Response
 }

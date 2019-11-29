@@ -6,66 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/wafregional/types"
 )
-
-type DeleteGeoMatchSetInput struct {
-	_ struct{} `type:"structure"`
-
-	// The value returned by the most recent call to GetChangeToken.
-	//
-	// ChangeToken is a required field
-	ChangeToken *string `min:"1" type:"string" required:"true"`
-
-	// The GeoMatchSetID of the GeoMatchSet that you want to delete. GeoMatchSetId
-	// is returned by CreateGeoMatchSet and by ListGeoMatchSets.
-	//
-	// GeoMatchSetId is a required field
-	GeoMatchSetId *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteGeoMatchSetInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteGeoMatchSetInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteGeoMatchSetInput"}
-
-	if s.ChangeToken == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ChangeToken"))
-	}
-	if s.ChangeToken != nil && len(*s.ChangeToken) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ChangeToken", 1))
-	}
-
-	if s.GeoMatchSetId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("GeoMatchSetId"))
-	}
-	if s.GeoMatchSetId != nil && len(*s.GeoMatchSetId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("GeoMatchSetId", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteGeoMatchSetOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The ChangeToken that you used to submit the DeleteGeoMatchSet request. You
-	// can also use this value to query the status of the request. For more information,
-	// see GetChangeTokenStatus.
-	ChangeToken *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s DeleteGeoMatchSetOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteGeoMatchSet = "DeleteGeoMatchSet"
 
@@ -95,7 +37,7 @@ const opDeleteGeoMatchSet = "DeleteGeoMatchSet"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/DeleteGeoMatchSet
-func (c *Client) DeleteGeoMatchSetRequest(input *DeleteGeoMatchSetInput) DeleteGeoMatchSetRequest {
+func (c *Client) DeleteGeoMatchSetRequest(input *types.DeleteGeoMatchSetInput) DeleteGeoMatchSetRequest {
 	op := &aws.Operation{
 		Name:       opDeleteGeoMatchSet,
 		HTTPMethod: "POST",
@@ -103,10 +45,10 @@ func (c *Client) DeleteGeoMatchSetRequest(input *DeleteGeoMatchSetInput) DeleteG
 	}
 
 	if input == nil {
-		input = &DeleteGeoMatchSetInput{}
+		input = &types.DeleteGeoMatchSetInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteGeoMatchSetOutput{})
+	req := c.newRequest(op, input, &types.DeleteGeoMatchSetOutput{})
 	return DeleteGeoMatchSetRequest{Request: req, Input: input, Copy: c.DeleteGeoMatchSetRequest}
 }
 
@@ -114,8 +56,8 @@ func (c *Client) DeleteGeoMatchSetRequest(input *DeleteGeoMatchSetInput) DeleteG
 // DeleteGeoMatchSet API operation.
 type DeleteGeoMatchSetRequest struct {
 	*aws.Request
-	Input *DeleteGeoMatchSetInput
-	Copy  func(*DeleteGeoMatchSetInput) DeleteGeoMatchSetRequest
+	Input *types.DeleteGeoMatchSetInput
+	Copy  func(*types.DeleteGeoMatchSetInput) DeleteGeoMatchSetRequest
 }
 
 // Send marshals and sends the DeleteGeoMatchSet API request.
@@ -127,7 +69,7 @@ func (r DeleteGeoMatchSetRequest) Send(ctx context.Context) (*DeleteGeoMatchSetR
 	}
 
 	resp := &DeleteGeoMatchSetResponse{
-		DeleteGeoMatchSetOutput: r.Request.Data.(*DeleteGeoMatchSetOutput),
+		DeleteGeoMatchSetOutput: r.Request.Data.(*types.DeleteGeoMatchSetOutput),
 		response:                &aws.Response{Request: r.Request},
 	}
 
@@ -137,7 +79,7 @@ func (r DeleteGeoMatchSetRequest) Send(ctx context.Context) (*DeleteGeoMatchSetR
 // DeleteGeoMatchSetResponse is the response type for the
 // DeleteGeoMatchSet API operation.
 type DeleteGeoMatchSetResponse struct {
-	*DeleteGeoMatchSetOutput
+	*types.DeleteGeoMatchSetOutput
 
 	response *aws.Response
 }

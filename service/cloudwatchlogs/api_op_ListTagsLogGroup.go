@@ -6,51 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/cloudwatchlogs/types"
 )
-
-type ListTagsLogGroupInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the log group.
-	//
-	// LogGroupName is a required field
-	LogGroupName *string `locationName:"logGroupName" min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s ListTagsLogGroupInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListTagsLogGroupInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListTagsLogGroupInput"}
-
-	if s.LogGroupName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("LogGroupName"))
-	}
-	if s.LogGroupName != nil && len(*s.LogGroupName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("LogGroupName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ListTagsLogGroupOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The tags for the log group.
-	Tags map[string]string `locationName:"tags" min:"1" type:"map"`
-}
-
-// String returns the string representation
-func (s ListTagsLogGroupOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListTagsLogGroup = "ListTagsLogGroup"
 
@@ -67,7 +24,7 @@ const opListTagsLogGroup = "ListTagsLogGroup"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/ListTagsLogGroup
-func (c *Client) ListTagsLogGroupRequest(input *ListTagsLogGroupInput) ListTagsLogGroupRequest {
+func (c *Client) ListTagsLogGroupRequest(input *types.ListTagsLogGroupInput) ListTagsLogGroupRequest {
 	op := &aws.Operation{
 		Name:       opListTagsLogGroup,
 		HTTPMethod: "POST",
@@ -75,10 +32,10 @@ func (c *Client) ListTagsLogGroupRequest(input *ListTagsLogGroupInput) ListTagsL
 	}
 
 	if input == nil {
-		input = &ListTagsLogGroupInput{}
+		input = &types.ListTagsLogGroupInput{}
 	}
 
-	req := c.newRequest(op, input, &ListTagsLogGroupOutput{})
+	req := c.newRequest(op, input, &types.ListTagsLogGroupOutput{})
 	return ListTagsLogGroupRequest{Request: req, Input: input, Copy: c.ListTagsLogGroupRequest}
 }
 
@@ -86,8 +43,8 @@ func (c *Client) ListTagsLogGroupRequest(input *ListTagsLogGroupInput) ListTagsL
 // ListTagsLogGroup API operation.
 type ListTagsLogGroupRequest struct {
 	*aws.Request
-	Input *ListTagsLogGroupInput
-	Copy  func(*ListTagsLogGroupInput) ListTagsLogGroupRequest
+	Input *types.ListTagsLogGroupInput
+	Copy  func(*types.ListTagsLogGroupInput) ListTagsLogGroupRequest
 }
 
 // Send marshals and sends the ListTagsLogGroup API request.
@@ -99,7 +56,7 @@ func (r ListTagsLogGroupRequest) Send(ctx context.Context) (*ListTagsLogGroupRes
 	}
 
 	resp := &ListTagsLogGroupResponse{
-		ListTagsLogGroupOutput: r.Request.Data.(*ListTagsLogGroupOutput),
+		ListTagsLogGroupOutput: r.Request.Data.(*types.ListTagsLogGroupOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -109,7 +66,7 @@ func (r ListTagsLogGroupRequest) Send(ctx context.Context) (*ListTagsLogGroupRes
 // ListTagsLogGroupResponse is the response type for the
 // ListTagsLogGroup API operation.
 type ListTagsLogGroupResponse struct {
-	*ListTagsLogGroupOutput
+	*types.ListTagsLogGroupOutput
 
 	response *aws.Response
 }

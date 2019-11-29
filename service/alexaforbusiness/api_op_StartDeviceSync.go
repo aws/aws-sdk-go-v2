@@ -6,51 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/alexaforbusiness/types"
 )
-
-type StartDeviceSyncInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ARN of the device to sync. Required.
-	DeviceArn *string `type:"string"`
-
-	// Request structure to start the device sync. Required.
-	//
-	// Features is a required field
-	Features []Feature `type:"list" required:"true"`
-
-	// The ARN of the room with which the device to sync is associated. Required.
-	RoomArn *string `type:"string"`
-}
-
-// String returns the string representation
-func (s StartDeviceSyncInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *StartDeviceSyncInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "StartDeviceSyncInput"}
-
-	if s.Features == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Features"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type StartDeviceSyncOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s StartDeviceSyncOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opStartDeviceSync = "StartDeviceSync"
 
@@ -81,7 +38,7 @@ const opStartDeviceSync = "StartDeviceSync"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/StartDeviceSync
-func (c *Client) StartDeviceSyncRequest(input *StartDeviceSyncInput) StartDeviceSyncRequest {
+func (c *Client) StartDeviceSyncRequest(input *types.StartDeviceSyncInput) StartDeviceSyncRequest {
 	op := &aws.Operation{
 		Name:       opStartDeviceSync,
 		HTTPMethod: "POST",
@@ -89,10 +46,10 @@ func (c *Client) StartDeviceSyncRequest(input *StartDeviceSyncInput) StartDevice
 	}
 
 	if input == nil {
-		input = &StartDeviceSyncInput{}
+		input = &types.StartDeviceSyncInput{}
 	}
 
-	req := c.newRequest(op, input, &StartDeviceSyncOutput{})
+	req := c.newRequest(op, input, &types.StartDeviceSyncOutput{})
 	return StartDeviceSyncRequest{Request: req, Input: input, Copy: c.StartDeviceSyncRequest}
 }
 
@@ -100,8 +57,8 @@ func (c *Client) StartDeviceSyncRequest(input *StartDeviceSyncInput) StartDevice
 // StartDeviceSync API operation.
 type StartDeviceSyncRequest struct {
 	*aws.Request
-	Input *StartDeviceSyncInput
-	Copy  func(*StartDeviceSyncInput) StartDeviceSyncRequest
+	Input *types.StartDeviceSyncInput
+	Copy  func(*types.StartDeviceSyncInput) StartDeviceSyncRequest
 }
 
 // Send marshals and sends the StartDeviceSync API request.
@@ -113,7 +70,7 @@ func (r StartDeviceSyncRequest) Send(ctx context.Context) (*StartDeviceSyncRespo
 	}
 
 	resp := &StartDeviceSyncResponse{
-		StartDeviceSyncOutput: r.Request.Data.(*StartDeviceSyncOutput),
+		StartDeviceSyncOutput: r.Request.Data.(*types.StartDeviceSyncOutput),
 		response:              &aws.Response{Request: r.Request},
 	}
 
@@ -123,7 +80,7 @@ func (r StartDeviceSyncRequest) Send(ctx context.Context) (*StartDeviceSyncRespo
 // StartDeviceSyncResponse is the response type for the
 // StartDeviceSync API operation.
 type StartDeviceSyncResponse struct {
-	*StartDeviceSyncOutput
+	*types.StartDeviceSyncOutput
 
 	response *aws.Response
 }

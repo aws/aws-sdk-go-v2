@@ -6,98 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/appsync/types"
 )
-
-type GetIntrospectionSchemaInput struct {
-	_ struct{} `type:"structure"`
-
-	// The API ID.
-	//
-	// ApiId is a required field
-	ApiId *string `location:"uri" locationName:"apiId" type:"string" required:"true"`
-
-	// The schema format: SDL or JSON.
-	//
-	// Format is a required field
-	Format OutputType `location:"querystring" locationName:"format" type:"string" required:"true" enum:"true"`
-
-	// A flag that specifies whether the schema introspection should contain directives.
-	IncludeDirectives *bool `location:"querystring" locationName:"includeDirectives" type:"boolean"`
-}
-
-// String returns the string representation
-func (s GetIntrospectionSchemaInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetIntrospectionSchemaInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetIntrospectionSchemaInput"}
-
-	if s.ApiId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ApiId"))
-	}
-	if len(s.Format) == 0 {
-		invalidParams.Add(aws.NewErrParamRequired("Format"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetIntrospectionSchemaInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.ApiId != nil {
-		v := *s.ApiId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "apiId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if len(s.Format) > 0 {
-		v := s.Format
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "format", protocol.QuotedValue{ValueMarshaler: v}, metadata)
-	}
-	if s.IncludeDirectives != nil {
-		v := *s.IncludeDirectives
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "includeDirectives", protocol.BoolValue(v), metadata)
-	}
-	return nil
-}
-
-type GetIntrospectionSchemaOutput struct {
-	_ struct{} `type:"structure" payload:"Schema"`
-
-	// The schema, in GraphQL Schema Definition Language (SDL) format.
-	//
-	// For more information, see the GraphQL SDL documentation (http://graphql.org/learn/schema/).
-	Schema []byte `locationName:"schema" type:"blob"`
-}
-
-// String returns the string representation
-func (s GetIntrospectionSchemaOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetIntrospectionSchemaOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.Schema != nil {
-		v := s.Schema
-
-		metadata := protocol.Metadata{}
-		e.SetStream(protocol.PayloadTarget, "schema", protocol.BytesStream(v), metadata)
-	}
-	return nil
-}
 
 const opGetIntrospectionSchema = "GetIntrospectionSchema"
 
@@ -114,7 +24,7 @@ const opGetIntrospectionSchema = "GetIntrospectionSchema"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/GetIntrospectionSchema
-func (c *Client) GetIntrospectionSchemaRequest(input *GetIntrospectionSchemaInput) GetIntrospectionSchemaRequest {
+func (c *Client) GetIntrospectionSchemaRequest(input *types.GetIntrospectionSchemaInput) GetIntrospectionSchemaRequest {
 	op := &aws.Operation{
 		Name:       opGetIntrospectionSchema,
 		HTTPMethod: "GET",
@@ -122,10 +32,10 @@ func (c *Client) GetIntrospectionSchemaRequest(input *GetIntrospectionSchemaInpu
 	}
 
 	if input == nil {
-		input = &GetIntrospectionSchemaInput{}
+		input = &types.GetIntrospectionSchemaInput{}
 	}
 
-	req := c.newRequest(op, input, &GetIntrospectionSchemaOutput{})
+	req := c.newRequest(op, input, &types.GetIntrospectionSchemaOutput{})
 	return GetIntrospectionSchemaRequest{Request: req, Input: input, Copy: c.GetIntrospectionSchemaRequest}
 }
 
@@ -133,8 +43,8 @@ func (c *Client) GetIntrospectionSchemaRequest(input *GetIntrospectionSchemaInpu
 // GetIntrospectionSchema API operation.
 type GetIntrospectionSchemaRequest struct {
 	*aws.Request
-	Input *GetIntrospectionSchemaInput
-	Copy  func(*GetIntrospectionSchemaInput) GetIntrospectionSchemaRequest
+	Input *types.GetIntrospectionSchemaInput
+	Copy  func(*types.GetIntrospectionSchemaInput) GetIntrospectionSchemaRequest
 }
 
 // Send marshals and sends the GetIntrospectionSchema API request.
@@ -146,7 +56,7 @@ func (r GetIntrospectionSchemaRequest) Send(ctx context.Context) (*GetIntrospect
 	}
 
 	resp := &GetIntrospectionSchemaResponse{
-		GetIntrospectionSchemaOutput: r.Request.Data.(*GetIntrospectionSchemaOutput),
+		GetIntrospectionSchemaOutput: r.Request.Data.(*types.GetIntrospectionSchemaOutput),
 		response:                     &aws.Response{Request: r.Request},
 	}
 
@@ -156,7 +66,7 @@ func (r GetIntrospectionSchemaRequest) Send(ctx context.Context) (*GetIntrospect
 // GetIntrospectionSchemaResponse is the response type for the
 // GetIntrospectionSchema API operation.
 type GetIntrospectionSchemaResponse struct {
-	*GetIntrospectionSchemaOutput
+	*types.GetIntrospectionSchemaOutput
 
 	response *aws.Response
 }

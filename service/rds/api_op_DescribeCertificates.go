@@ -4,81 +4,10 @@ package rds
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/rds/types"
 )
-
-type DescribeCertificatesInput struct {
-	_ struct{} `type:"structure"`
-
-	// The user-supplied certificate identifier. If this parameter is specified,
-	// information for only the identified certificate is returned. This parameter
-	// isn't case-sensitive.
-	//
-	// Constraints:
-	//
-	//    * Must match an existing CertificateIdentifier.
-	CertificateIdentifier *string `type:"string"`
-
-	// This parameter is not currently supported.
-	Filters []Filter `locationNameList:"Filter" type:"list"`
-
-	// An optional pagination token provided by a previous DescribeCertificates
-	// request. If this parameter is specified, the response includes only records
-	// beyond the marker, up to the value specified by MaxRecords.
-	Marker *string `type:"string"`
-
-	// The maximum number of records to include in the response. If more records
-	// exist than the specified MaxRecords value, a pagination token called a marker
-	// is included in the response so that you can retrieve the remaining results.
-	//
-	// Default: 100
-	//
-	// Constraints: Minimum 20, maximum 100.
-	MaxRecords *int64 `type:"integer"`
-}
-
-// String returns the string representation
-func (s DescribeCertificatesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeCertificatesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeCertificatesInput"}
-	if s.Filters != nil {
-		for i, v := range s.Filters {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Data returned by the DescribeCertificates action.
-type DescribeCertificatesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The list of Certificate objects for the AWS account.
-	Certificates []Certificate `locationNameList:"Certificate" type:"list"`
-
-	// An optional pagination token provided by a previous DescribeCertificates
-	// request. If this parameter is specified, the response includes only records
-	// beyond the marker, up to the value specified by MaxRecords .
-	Marker *string `type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeCertificatesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeCertificates = "DescribeCertificates"
 
@@ -95,7 +24,7 @@ const opDescribeCertificates = "DescribeCertificates"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeCertificates
-func (c *Client) DescribeCertificatesRequest(input *DescribeCertificatesInput) DescribeCertificatesRequest {
+func (c *Client) DescribeCertificatesRequest(input *types.DescribeCertificatesInput) DescribeCertificatesRequest {
 	op := &aws.Operation{
 		Name:       opDescribeCertificates,
 		HTTPMethod: "POST",
@@ -103,10 +32,10 @@ func (c *Client) DescribeCertificatesRequest(input *DescribeCertificatesInput) D
 	}
 
 	if input == nil {
-		input = &DescribeCertificatesInput{}
+		input = &types.DescribeCertificatesInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeCertificatesOutput{})
+	req := c.newRequest(op, input, &types.DescribeCertificatesOutput{})
 	return DescribeCertificatesRequest{Request: req, Input: input, Copy: c.DescribeCertificatesRequest}
 }
 
@@ -114,8 +43,8 @@ func (c *Client) DescribeCertificatesRequest(input *DescribeCertificatesInput) D
 // DescribeCertificates API operation.
 type DescribeCertificatesRequest struct {
 	*aws.Request
-	Input *DescribeCertificatesInput
-	Copy  func(*DescribeCertificatesInput) DescribeCertificatesRequest
+	Input *types.DescribeCertificatesInput
+	Copy  func(*types.DescribeCertificatesInput) DescribeCertificatesRequest
 }
 
 // Send marshals and sends the DescribeCertificates API request.
@@ -127,7 +56,7 @@ func (r DescribeCertificatesRequest) Send(ctx context.Context) (*DescribeCertifi
 	}
 
 	resp := &DescribeCertificatesResponse{
-		DescribeCertificatesOutput: r.Request.Data.(*DescribeCertificatesOutput),
+		DescribeCertificatesOutput: r.Request.Data.(*types.DescribeCertificatesOutput),
 		response:                   &aws.Response{Request: r.Request},
 	}
 
@@ -137,7 +66,7 @@ func (r DescribeCertificatesRequest) Send(ctx context.Context) (*DescribeCertifi
 // DescribeCertificatesResponse is the response type for the
 // DescribeCertificates API operation.
 type DescribeCertificatesResponse struct {
-	*DescribeCertificatesOutput
+	*types.DescribeCertificatesOutput
 
 	response *aws.Response
 }

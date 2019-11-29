@@ -6,77 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/rds/types"
 )
-
-type CreateDBSubnetGroupInput struct {
-	_ struct{} `type:"structure"`
-
-	// The description for the DB subnet group.
-	//
-	// DBSubnetGroupDescription is a required field
-	DBSubnetGroupDescription *string `type:"string" required:"true"`
-
-	// The name for the DB subnet group. This value is stored as a lowercase string.
-	//
-	// Constraints: Must contain no more than 255 letters, numbers, periods, underscores,
-	// spaces, or hyphens. Must not be default.
-	//
-	// Example: mySubnetgroup
-	//
-	// DBSubnetGroupName is a required field
-	DBSubnetGroupName *string `type:"string" required:"true"`
-
-	// The EC2 Subnet IDs for the DB subnet group.
-	//
-	// SubnetIds is a required field
-	SubnetIds []string `locationNameList:"SubnetIdentifier" type:"list" required:"true"`
-
-	// Tags to assign to the DB subnet group.
-	Tags []Tag `locationNameList:"Tag" type:"list"`
-}
-
-// String returns the string representation
-func (s CreateDBSubnetGroupInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateDBSubnetGroupInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateDBSubnetGroupInput"}
-
-	if s.DBSubnetGroupDescription == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DBSubnetGroupDescription"))
-	}
-
-	if s.DBSubnetGroupName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DBSubnetGroupName"))
-	}
-
-	if s.SubnetIds == nil {
-		invalidParams.Add(aws.NewErrParamRequired("SubnetIds"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type CreateDBSubnetGroupOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Contains the details of an Amazon RDS DB subnet group.
-	//
-	// This data type is used as a response element in the DescribeDBSubnetGroups
-	// action.
-	DBSubnetGroup *DBSubnetGroup `type:"structure"`
-}
-
-// String returns the string representation
-func (s CreateDBSubnetGroupOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCreateDBSubnetGroup = "CreateDBSubnetGroup"
 
@@ -94,7 +25,7 @@ const opCreateDBSubnetGroup = "CreateDBSubnetGroup"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBSubnetGroup
-func (c *Client) CreateDBSubnetGroupRequest(input *CreateDBSubnetGroupInput) CreateDBSubnetGroupRequest {
+func (c *Client) CreateDBSubnetGroupRequest(input *types.CreateDBSubnetGroupInput) CreateDBSubnetGroupRequest {
 	op := &aws.Operation{
 		Name:       opCreateDBSubnetGroup,
 		HTTPMethod: "POST",
@@ -102,10 +33,10 @@ func (c *Client) CreateDBSubnetGroupRequest(input *CreateDBSubnetGroupInput) Cre
 	}
 
 	if input == nil {
-		input = &CreateDBSubnetGroupInput{}
+		input = &types.CreateDBSubnetGroupInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateDBSubnetGroupOutput{})
+	req := c.newRequest(op, input, &types.CreateDBSubnetGroupOutput{})
 	return CreateDBSubnetGroupRequest{Request: req, Input: input, Copy: c.CreateDBSubnetGroupRequest}
 }
 
@@ -113,8 +44,8 @@ func (c *Client) CreateDBSubnetGroupRequest(input *CreateDBSubnetGroupInput) Cre
 // CreateDBSubnetGroup API operation.
 type CreateDBSubnetGroupRequest struct {
 	*aws.Request
-	Input *CreateDBSubnetGroupInput
-	Copy  func(*CreateDBSubnetGroupInput) CreateDBSubnetGroupRequest
+	Input *types.CreateDBSubnetGroupInput
+	Copy  func(*types.CreateDBSubnetGroupInput) CreateDBSubnetGroupRequest
 }
 
 // Send marshals and sends the CreateDBSubnetGroup API request.
@@ -126,7 +57,7 @@ func (r CreateDBSubnetGroupRequest) Send(ctx context.Context) (*CreateDBSubnetGr
 	}
 
 	resp := &CreateDBSubnetGroupResponse{
-		CreateDBSubnetGroupOutput: r.Request.Data.(*CreateDBSubnetGroupOutput),
+		CreateDBSubnetGroupOutput: r.Request.Data.(*types.CreateDBSubnetGroupOutput),
 		response:                  &aws.Response{Request: r.Request},
 	}
 
@@ -136,7 +67,7 @@ func (r CreateDBSubnetGroupRequest) Send(ctx context.Context) (*CreateDBSubnetGr
 // CreateDBSubnetGroupResponse is the response type for the
 // CreateDBSubnetGroup API operation.
 type CreateDBSubnetGroupResponse struct {
-	*CreateDBSubnetGroupOutput
+	*types.CreateDBSubnetGroupOutput
 
 	response *aws.Response
 }

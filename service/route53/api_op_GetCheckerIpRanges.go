@@ -6,58 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/route53/types"
 )
-
-// Empty request.
-type GetCheckerIpRangesInput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s GetCheckerIpRangesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetCheckerIpRangesInput) MarshalFields(e protocol.FieldEncoder) error {
-
-	return nil
-}
-
-// A complex type that contains the CheckerIpRanges element.
-type GetCheckerIpRangesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A complex type that contains sorted list of IP ranges in CIDR format for
-	// Amazon Route 53 health checkers.
-	//
-	// CheckerIpRanges is a required field
-	CheckerIpRanges []string `type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s GetCheckerIpRangesOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetCheckerIpRangesOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.CheckerIpRanges != nil {
-		v := s.CheckerIpRanges
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "CheckerIpRanges", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddValue(protocol.StringValue(v1))
-		}
-		ls0.End()
-
-	}
-	return nil
-}
 
 const opGetCheckerIpRanges = "GetCheckerIpRanges"
 
@@ -78,7 +28,7 @@ const opGetCheckerIpRanges = "GetCheckerIpRanges"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/GetCheckerIpRanges
-func (c *Client) GetCheckerIpRangesRequest(input *GetCheckerIpRangesInput) GetCheckerIpRangesRequest {
+func (c *Client) GetCheckerIpRangesRequest(input *types.GetCheckerIpRangesInput) GetCheckerIpRangesRequest {
 	op := &aws.Operation{
 		Name:       opGetCheckerIpRanges,
 		HTTPMethod: "GET",
@@ -86,10 +36,10 @@ func (c *Client) GetCheckerIpRangesRequest(input *GetCheckerIpRangesInput) GetCh
 	}
 
 	if input == nil {
-		input = &GetCheckerIpRangesInput{}
+		input = &types.GetCheckerIpRangesInput{}
 	}
 
-	req := c.newRequest(op, input, &GetCheckerIpRangesOutput{})
+	req := c.newRequest(op, input, &types.GetCheckerIpRangesOutput{})
 	return GetCheckerIpRangesRequest{Request: req, Input: input, Copy: c.GetCheckerIpRangesRequest}
 }
 
@@ -97,8 +47,8 @@ func (c *Client) GetCheckerIpRangesRequest(input *GetCheckerIpRangesInput) GetCh
 // GetCheckerIpRanges API operation.
 type GetCheckerIpRangesRequest struct {
 	*aws.Request
-	Input *GetCheckerIpRangesInput
-	Copy  func(*GetCheckerIpRangesInput) GetCheckerIpRangesRequest
+	Input *types.GetCheckerIpRangesInput
+	Copy  func(*types.GetCheckerIpRangesInput) GetCheckerIpRangesRequest
 }
 
 // Send marshals and sends the GetCheckerIpRanges API request.
@@ -110,7 +60,7 @@ func (r GetCheckerIpRangesRequest) Send(ctx context.Context) (*GetCheckerIpRange
 	}
 
 	resp := &GetCheckerIpRangesResponse{
-		GetCheckerIpRangesOutput: r.Request.Data.(*GetCheckerIpRangesOutput),
+		GetCheckerIpRangesOutput: r.Request.Data.(*types.GetCheckerIpRangesOutput),
 		response:                 &aws.Response{Request: r.Request},
 	}
 
@@ -120,7 +70,7 @@ func (r GetCheckerIpRangesRequest) Send(ctx context.Context) (*GetCheckerIpRange
 // GetCheckerIpRangesResponse is the response type for the
 // GetCheckerIpRanges API operation.
 type GetCheckerIpRangesResponse struct {
-	*GetCheckerIpRangesOutput
+	*types.GetCheckerIpRangesOutput
 
 	response *aws.Response
 }

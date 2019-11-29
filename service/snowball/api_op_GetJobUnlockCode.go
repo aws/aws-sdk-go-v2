@@ -6,53 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/snowball/types"
 )
-
-type GetJobUnlockCodeInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID for the job that you want to get the UnlockCode value for, for example
-	// JID123e4567-e89b-12d3-a456-426655440000.
-	//
-	// JobId is a required field
-	JobId *string `min:"39" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetJobUnlockCodeInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetJobUnlockCodeInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetJobUnlockCodeInput"}
-
-	if s.JobId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("JobId"))
-	}
-	if s.JobId != nil && len(*s.JobId) < 39 {
-		invalidParams.Add(aws.NewErrParamMinLen("JobId", 39))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type GetJobUnlockCodeOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The UnlockCode value for the specified job. The UnlockCode value can be accessed
-	// for up to 90 days after the job has been created.
-	UnlockCode *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s GetJobUnlockCodeOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetJobUnlockCode = "GetJobUnlockCode"
 
@@ -81,7 +36,7 @@ const opGetJobUnlockCode = "GetJobUnlockCode"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/GetJobUnlockCode
-func (c *Client) GetJobUnlockCodeRequest(input *GetJobUnlockCodeInput) GetJobUnlockCodeRequest {
+func (c *Client) GetJobUnlockCodeRequest(input *types.GetJobUnlockCodeInput) GetJobUnlockCodeRequest {
 	op := &aws.Operation{
 		Name:       opGetJobUnlockCode,
 		HTTPMethod: "POST",
@@ -89,10 +44,10 @@ func (c *Client) GetJobUnlockCodeRequest(input *GetJobUnlockCodeInput) GetJobUnl
 	}
 
 	if input == nil {
-		input = &GetJobUnlockCodeInput{}
+		input = &types.GetJobUnlockCodeInput{}
 	}
 
-	req := c.newRequest(op, input, &GetJobUnlockCodeOutput{})
+	req := c.newRequest(op, input, &types.GetJobUnlockCodeOutput{})
 	return GetJobUnlockCodeRequest{Request: req, Input: input, Copy: c.GetJobUnlockCodeRequest}
 }
 
@@ -100,8 +55,8 @@ func (c *Client) GetJobUnlockCodeRequest(input *GetJobUnlockCodeInput) GetJobUnl
 // GetJobUnlockCode API operation.
 type GetJobUnlockCodeRequest struct {
 	*aws.Request
-	Input *GetJobUnlockCodeInput
-	Copy  func(*GetJobUnlockCodeInput) GetJobUnlockCodeRequest
+	Input *types.GetJobUnlockCodeInput
+	Copy  func(*types.GetJobUnlockCodeInput) GetJobUnlockCodeRequest
 }
 
 // Send marshals and sends the GetJobUnlockCode API request.
@@ -113,7 +68,7 @@ func (r GetJobUnlockCodeRequest) Send(ctx context.Context) (*GetJobUnlockCodeRes
 	}
 
 	resp := &GetJobUnlockCodeResponse{
-		GetJobUnlockCodeOutput: r.Request.Data.(*GetJobUnlockCodeOutput),
+		GetJobUnlockCodeOutput: r.Request.Data.(*types.GetJobUnlockCodeOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -123,7 +78,7 @@ func (r GetJobUnlockCodeRequest) Send(ctx context.Context) (*GetJobUnlockCodeRes
 // GetJobUnlockCodeResponse is the response type for the
 // GetJobUnlockCode API operation.
 type GetJobUnlockCodeResponse struct {
-	*GetJobUnlockCodeOutput
+	*types.GetJobUnlockCodeOutput
 
 	response *aws.Response
 }

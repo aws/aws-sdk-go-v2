@@ -6,72 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/rds/types"
 )
-
-type ModifyDBParameterGroupInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the DB parameter group.
-	//
-	// Constraints:
-	//
-	//    * If supplied, must match the name of an existing DBParameterGroup.
-	//
-	// DBParameterGroupName is a required field
-	DBParameterGroupName *string `type:"string" required:"true"`
-
-	// An array of parameter names, values, and the apply method for the parameter
-	// update. At least one parameter name, value, and apply method must be supplied;
-	// subsequent arguments are optional. A maximum of 20 parameters can be modified
-	// in a single request.
-	//
-	// Valid Values (for the application method): immediate | pending-reboot
-	//
-	// You can use the immediate value with dynamic parameters only. You can use
-	// the pending-reboot value for both dynamic and static parameters, and changes
-	// are applied when you reboot the DB instance without failover.
-	//
-	// Parameters is a required field
-	Parameters []Parameter `locationNameList:"Parameter" type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s ModifyDBParameterGroupInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ModifyDBParameterGroupInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ModifyDBParameterGroupInput"}
-
-	if s.DBParameterGroupName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DBParameterGroupName"))
-	}
-
-	if s.Parameters == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Parameters"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Contains the result of a successful invocation of the ModifyDBParameterGroup
-// or ResetDBParameterGroup action.
-type ModifyDBParameterGroupOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Provides the name of the DB parameter group.
-	DBParameterGroupName *string `type:"string"`
-}
-
-// String returns the string representation
-func (s ModifyDBParameterGroupOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opModifyDBParameterGroup = "ModifyDBParameterGroup"
 
@@ -105,7 +41,7 @@ const opModifyDBParameterGroup = "ModifyDBParameterGroup"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyDBParameterGroup
-func (c *Client) ModifyDBParameterGroupRequest(input *ModifyDBParameterGroupInput) ModifyDBParameterGroupRequest {
+func (c *Client) ModifyDBParameterGroupRequest(input *types.ModifyDBParameterGroupInput) ModifyDBParameterGroupRequest {
 	op := &aws.Operation{
 		Name:       opModifyDBParameterGroup,
 		HTTPMethod: "POST",
@@ -113,10 +49,10 @@ func (c *Client) ModifyDBParameterGroupRequest(input *ModifyDBParameterGroupInpu
 	}
 
 	if input == nil {
-		input = &ModifyDBParameterGroupInput{}
+		input = &types.ModifyDBParameterGroupInput{}
 	}
 
-	req := c.newRequest(op, input, &ModifyDBParameterGroupOutput{})
+	req := c.newRequest(op, input, &types.ModifyDBParameterGroupOutput{})
 	return ModifyDBParameterGroupRequest{Request: req, Input: input, Copy: c.ModifyDBParameterGroupRequest}
 }
 
@@ -124,8 +60,8 @@ func (c *Client) ModifyDBParameterGroupRequest(input *ModifyDBParameterGroupInpu
 // ModifyDBParameterGroup API operation.
 type ModifyDBParameterGroupRequest struct {
 	*aws.Request
-	Input *ModifyDBParameterGroupInput
-	Copy  func(*ModifyDBParameterGroupInput) ModifyDBParameterGroupRequest
+	Input *types.ModifyDBParameterGroupInput
+	Copy  func(*types.ModifyDBParameterGroupInput) ModifyDBParameterGroupRequest
 }
 
 // Send marshals and sends the ModifyDBParameterGroup API request.
@@ -137,7 +73,7 @@ func (r ModifyDBParameterGroupRequest) Send(ctx context.Context) (*ModifyDBParam
 	}
 
 	resp := &ModifyDBParameterGroupResponse{
-		ModifyDBParameterGroupOutput: r.Request.Data.(*ModifyDBParameterGroupOutput),
+		ModifyDBParameterGroupOutput: r.Request.Data.(*types.ModifyDBParameterGroupOutput),
 		response:                     &aws.Response{Request: r.Request},
 	}
 
@@ -147,7 +83,7 @@ func (r ModifyDBParameterGroupRequest) Send(ctx context.Context) (*ModifyDBParam
 // ModifyDBParameterGroupResponse is the response type for the
 // ModifyDBParameterGroup API operation.
 type ModifyDBParameterGroupResponse struct {
-	*ModifyDBParameterGroupOutput
+	*types.ModifyDBParameterGroupOutput
 
 	response *aws.Response
 }

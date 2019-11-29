@@ -6,93 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/ram/types"
 )
-
-type DeleteResourceShareInput struct {
-	_ struct{} `type:"structure"`
-
-	// A unique, case-sensitive identifier that you provide to ensure the idempotency
-	// of the request.
-	ClientToken *string `location:"querystring" locationName:"clientToken" type:"string"`
-
-	// The Amazon Resource Name (ARN) of the resource share.
-	//
-	// ResourceShareArn is a required field
-	ResourceShareArn *string `location:"querystring" locationName:"resourceShareArn" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteResourceShareInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteResourceShareInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteResourceShareInput"}
-
-	if s.ResourceShareArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ResourceShareArn"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteResourceShareInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.ClientToken != nil {
-		v := *s.ClientToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "clientToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.ResourceShareArn != nil {
-		v := *s.ResourceShareArn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "resourceShareArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type DeleteResourceShareOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A unique, case-sensitive identifier that you provide to ensure the idempotency
-	// of the request.
-	ClientToken *string `locationName:"clientToken" type:"string"`
-
-	// Indicates whether the request succeeded.
-	ReturnValue *bool `locationName:"returnValue" type:"boolean"`
-}
-
-// String returns the string representation
-func (s DeleteResourceShareOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteResourceShareOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.ClientToken != nil {
-		v := *s.ClientToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "clientToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.ReturnValue != nil {
-		v := *s.ReturnValue
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "returnValue", protocol.BoolValue(v), metadata)
-	}
-	return nil
-}
 
 const opDeleteResourceShare = "DeleteResourceShare"
 
@@ -109,7 +24,7 @@ const opDeleteResourceShare = "DeleteResourceShare"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/DeleteResourceShare
-func (c *Client) DeleteResourceShareRequest(input *DeleteResourceShareInput) DeleteResourceShareRequest {
+func (c *Client) DeleteResourceShareRequest(input *types.DeleteResourceShareInput) DeleteResourceShareRequest {
 	op := &aws.Operation{
 		Name:       opDeleteResourceShare,
 		HTTPMethod: "DELETE",
@@ -117,10 +32,10 @@ func (c *Client) DeleteResourceShareRequest(input *DeleteResourceShareInput) Del
 	}
 
 	if input == nil {
-		input = &DeleteResourceShareInput{}
+		input = &types.DeleteResourceShareInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteResourceShareOutput{})
+	req := c.newRequest(op, input, &types.DeleteResourceShareOutput{})
 	return DeleteResourceShareRequest{Request: req, Input: input, Copy: c.DeleteResourceShareRequest}
 }
 
@@ -128,8 +43,8 @@ func (c *Client) DeleteResourceShareRequest(input *DeleteResourceShareInput) Del
 // DeleteResourceShare API operation.
 type DeleteResourceShareRequest struct {
 	*aws.Request
-	Input *DeleteResourceShareInput
-	Copy  func(*DeleteResourceShareInput) DeleteResourceShareRequest
+	Input *types.DeleteResourceShareInput
+	Copy  func(*types.DeleteResourceShareInput) DeleteResourceShareRequest
 }
 
 // Send marshals and sends the DeleteResourceShare API request.
@@ -141,7 +56,7 @@ func (r DeleteResourceShareRequest) Send(ctx context.Context) (*DeleteResourceSh
 	}
 
 	resp := &DeleteResourceShareResponse{
-		DeleteResourceShareOutput: r.Request.Data.(*DeleteResourceShareOutput),
+		DeleteResourceShareOutput: r.Request.Data.(*types.DeleteResourceShareOutput),
 		response:                  &aws.Response{Request: r.Request},
 	}
 
@@ -151,7 +66,7 @@ func (r DeleteResourceShareRequest) Send(ctx context.Context) (*DeleteResourceSh
 // DeleteResourceShareResponse is the response type for the
 // DeleteResourceShare API operation.
 type DeleteResourceShareResponse struct {
-	*DeleteResourceShareOutput
+	*types.DeleteResourceShareOutput
 
 	response *aws.Response
 }

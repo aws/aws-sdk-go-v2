@@ -6,109 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/guardduty/types"
 )
-
-type GetFindingsStatisticsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the detector that specifies the GuardDuty service whose findings'
-	// statistics you want to retrieve.
-	//
-	// DetectorId is a required field
-	DetectorId *string `location:"uri" locationName:"detectorId" min:"1" type:"string" required:"true"`
-
-	// Represents the criteria used for querying findings.
-	FindingCriteria *FindingCriteria `locationName:"findingCriteria" type:"structure"`
-
-	// Types of finding statistics to retrieve.
-	//
-	// FindingStatisticTypes is a required field
-	FindingStatisticTypes []FindingStatisticType `locationName:"findingStatisticTypes" type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s GetFindingsStatisticsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetFindingsStatisticsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetFindingsStatisticsInput"}
-
-	if s.DetectorId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DetectorId"))
-	}
-	if s.DetectorId != nil && len(*s.DetectorId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("DetectorId", 1))
-	}
-
-	if s.FindingStatisticTypes == nil {
-		invalidParams.Add(aws.NewErrParamRequired("FindingStatisticTypes"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetFindingsStatisticsInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.FindingCriteria != nil {
-		v := s.FindingCriteria
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "findingCriteria", v, metadata)
-	}
-	if s.FindingStatisticTypes != nil {
-		v := s.FindingStatisticTypes
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "findingStatisticTypes", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
-		}
-		ls0.End()
-
-	}
-	if s.DetectorId != nil {
-		v := *s.DetectorId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "detectorId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type GetFindingsStatisticsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Finding statistics object.
-	//
-	// FindingStatistics is a required field
-	FindingStatistics *FindingStatistics `locationName:"findingStatistics" type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s GetFindingsStatisticsOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetFindingsStatisticsOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.FindingStatistics != nil {
-		v := s.FindingStatistics
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "findingStatistics", v, metadata)
-	}
-	return nil
-}
 
 const opGetFindingsStatistics = "GetFindingsStatistics"
 
@@ -125,7 +24,7 @@ const opGetFindingsStatistics = "GetFindingsStatistics"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetFindingsStatistics
-func (c *Client) GetFindingsStatisticsRequest(input *GetFindingsStatisticsInput) GetFindingsStatisticsRequest {
+func (c *Client) GetFindingsStatisticsRequest(input *types.GetFindingsStatisticsInput) GetFindingsStatisticsRequest {
 	op := &aws.Operation{
 		Name:       opGetFindingsStatistics,
 		HTTPMethod: "POST",
@@ -133,10 +32,10 @@ func (c *Client) GetFindingsStatisticsRequest(input *GetFindingsStatisticsInput)
 	}
 
 	if input == nil {
-		input = &GetFindingsStatisticsInput{}
+		input = &types.GetFindingsStatisticsInput{}
 	}
 
-	req := c.newRequest(op, input, &GetFindingsStatisticsOutput{})
+	req := c.newRequest(op, input, &types.GetFindingsStatisticsOutput{})
 	return GetFindingsStatisticsRequest{Request: req, Input: input, Copy: c.GetFindingsStatisticsRequest}
 }
 
@@ -144,8 +43,8 @@ func (c *Client) GetFindingsStatisticsRequest(input *GetFindingsStatisticsInput)
 // GetFindingsStatistics API operation.
 type GetFindingsStatisticsRequest struct {
 	*aws.Request
-	Input *GetFindingsStatisticsInput
-	Copy  func(*GetFindingsStatisticsInput) GetFindingsStatisticsRequest
+	Input *types.GetFindingsStatisticsInput
+	Copy  func(*types.GetFindingsStatisticsInput) GetFindingsStatisticsRequest
 }
 
 // Send marshals and sends the GetFindingsStatistics API request.
@@ -157,7 +56,7 @@ func (r GetFindingsStatisticsRequest) Send(ctx context.Context) (*GetFindingsSta
 	}
 
 	resp := &GetFindingsStatisticsResponse{
-		GetFindingsStatisticsOutput: r.Request.Data.(*GetFindingsStatisticsOutput),
+		GetFindingsStatisticsOutput: r.Request.Data.(*types.GetFindingsStatisticsOutput),
 		response:                    &aws.Response{Request: r.Request},
 	}
 
@@ -167,7 +66,7 @@ func (r GetFindingsStatisticsRequest) Send(ctx context.Context) (*GetFindingsSta
 // GetFindingsStatisticsResponse is the response type for the
 // GetFindingsStatistics API operation.
 type GetFindingsStatisticsResponse struct {
-	*GetFindingsStatisticsOutput
+	*types.GetFindingsStatisticsOutput
 
 	response *aws.Response
 }

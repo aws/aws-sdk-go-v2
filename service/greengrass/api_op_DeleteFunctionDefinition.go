@@ -6,62 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/greengrass/types"
 )
-
-type DeleteFunctionDefinitionInput struct {
-	_ struct{} `type:"structure"`
-
-	// FunctionDefinitionId is a required field
-	FunctionDefinitionId *string `location:"uri" locationName:"FunctionDefinitionId" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteFunctionDefinitionInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteFunctionDefinitionInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteFunctionDefinitionInput"}
-
-	if s.FunctionDefinitionId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("FunctionDefinitionId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteFunctionDefinitionInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.FunctionDefinitionId != nil {
-		v := *s.FunctionDefinitionId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "FunctionDefinitionId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type DeleteFunctionDefinitionOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteFunctionDefinitionOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteFunctionDefinitionOutput) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
 
 const opDeleteFunctionDefinition = "DeleteFunctionDefinition"
 
@@ -78,7 +24,7 @@ const opDeleteFunctionDefinition = "DeleteFunctionDefinition"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/DeleteFunctionDefinition
-func (c *Client) DeleteFunctionDefinitionRequest(input *DeleteFunctionDefinitionInput) DeleteFunctionDefinitionRequest {
+func (c *Client) DeleteFunctionDefinitionRequest(input *types.DeleteFunctionDefinitionInput) DeleteFunctionDefinitionRequest {
 	op := &aws.Operation{
 		Name:       opDeleteFunctionDefinition,
 		HTTPMethod: "DELETE",
@@ -86,10 +32,10 @@ func (c *Client) DeleteFunctionDefinitionRequest(input *DeleteFunctionDefinition
 	}
 
 	if input == nil {
-		input = &DeleteFunctionDefinitionInput{}
+		input = &types.DeleteFunctionDefinitionInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteFunctionDefinitionOutput{})
+	req := c.newRequest(op, input, &types.DeleteFunctionDefinitionOutput{})
 	return DeleteFunctionDefinitionRequest{Request: req, Input: input, Copy: c.DeleteFunctionDefinitionRequest}
 }
 
@@ -97,8 +43,8 @@ func (c *Client) DeleteFunctionDefinitionRequest(input *DeleteFunctionDefinition
 // DeleteFunctionDefinition API operation.
 type DeleteFunctionDefinitionRequest struct {
 	*aws.Request
-	Input *DeleteFunctionDefinitionInput
-	Copy  func(*DeleteFunctionDefinitionInput) DeleteFunctionDefinitionRequest
+	Input *types.DeleteFunctionDefinitionInput
+	Copy  func(*types.DeleteFunctionDefinitionInput) DeleteFunctionDefinitionRequest
 }
 
 // Send marshals and sends the DeleteFunctionDefinition API request.
@@ -110,7 +56,7 @@ func (r DeleteFunctionDefinitionRequest) Send(ctx context.Context) (*DeleteFunct
 	}
 
 	resp := &DeleteFunctionDefinitionResponse{
-		DeleteFunctionDefinitionOutput: r.Request.Data.(*DeleteFunctionDefinitionOutput),
+		DeleteFunctionDefinitionOutput: r.Request.Data.(*types.DeleteFunctionDefinitionOutput),
 		response:                       &aws.Response{Request: r.Request},
 	}
 
@@ -120,7 +66,7 @@ func (r DeleteFunctionDefinitionRequest) Send(ctx context.Context) (*DeleteFunct
 // DeleteFunctionDefinitionResponse is the response type for the
 // DeleteFunctionDefinition API operation.
 type DeleteFunctionDefinitionResponse struct {
-	*DeleteFunctionDefinitionOutput
+	*types.DeleteFunctionDefinitionOutput
 
 	response *aws.Response
 }

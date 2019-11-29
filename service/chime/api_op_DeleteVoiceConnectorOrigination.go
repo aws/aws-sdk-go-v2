@@ -6,65 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/restjson"
+	"github.com/aws/aws-sdk-go-v2/service/chime/types"
 )
-
-type DeleteVoiceConnectorOriginationInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Chime Voice Connector ID.
-	//
-	// VoiceConnectorId is a required field
-	VoiceConnectorId *string `location:"uri" locationName:"voiceConnectorId" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteVoiceConnectorOriginationInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteVoiceConnectorOriginationInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteVoiceConnectorOriginationInput"}
-
-	if s.VoiceConnectorId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("VoiceConnectorId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteVoiceConnectorOriginationInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.VoiceConnectorId != nil {
-		v := *s.VoiceConnectorId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "voiceConnectorId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type DeleteVoiceConnectorOriginationOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteVoiceConnectorOriginationOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteVoiceConnectorOriginationOutput) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
 
 const opDeleteVoiceConnectorOrigination = "DeleteVoiceConnectorOrigination"
 
@@ -81,7 +26,7 @@ const opDeleteVoiceConnectorOrigination = "DeleteVoiceConnectorOrigination"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/DeleteVoiceConnectorOrigination
-func (c *Client) DeleteVoiceConnectorOriginationRequest(input *DeleteVoiceConnectorOriginationInput) DeleteVoiceConnectorOriginationRequest {
+func (c *Client) DeleteVoiceConnectorOriginationRequest(input *types.DeleteVoiceConnectorOriginationInput) DeleteVoiceConnectorOriginationRequest {
 	op := &aws.Operation{
 		Name:       opDeleteVoiceConnectorOrigination,
 		HTTPMethod: "DELETE",
@@ -89,10 +34,10 @@ func (c *Client) DeleteVoiceConnectorOriginationRequest(input *DeleteVoiceConnec
 	}
 
 	if input == nil {
-		input = &DeleteVoiceConnectorOriginationInput{}
+		input = &types.DeleteVoiceConnectorOriginationInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteVoiceConnectorOriginationOutput{})
+	req := c.newRequest(op, input, &types.DeleteVoiceConnectorOriginationOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return DeleteVoiceConnectorOriginationRequest{Request: req, Input: input, Copy: c.DeleteVoiceConnectorOriginationRequest}
@@ -102,8 +47,8 @@ func (c *Client) DeleteVoiceConnectorOriginationRequest(input *DeleteVoiceConnec
 // DeleteVoiceConnectorOrigination API operation.
 type DeleteVoiceConnectorOriginationRequest struct {
 	*aws.Request
-	Input *DeleteVoiceConnectorOriginationInput
-	Copy  func(*DeleteVoiceConnectorOriginationInput) DeleteVoiceConnectorOriginationRequest
+	Input *types.DeleteVoiceConnectorOriginationInput
+	Copy  func(*types.DeleteVoiceConnectorOriginationInput) DeleteVoiceConnectorOriginationRequest
 }
 
 // Send marshals and sends the DeleteVoiceConnectorOrigination API request.
@@ -115,7 +60,7 @@ func (r DeleteVoiceConnectorOriginationRequest) Send(ctx context.Context) (*Dele
 	}
 
 	resp := &DeleteVoiceConnectorOriginationResponse{
-		DeleteVoiceConnectorOriginationOutput: r.Request.Data.(*DeleteVoiceConnectorOriginationOutput),
+		DeleteVoiceConnectorOriginationOutput: r.Request.Data.(*types.DeleteVoiceConnectorOriginationOutput),
 		response:                              &aws.Response{Request: r.Request},
 	}
 
@@ -125,7 +70,7 @@ func (r DeleteVoiceConnectorOriginationRequest) Send(ctx context.Context) (*Dele
 // DeleteVoiceConnectorOriginationResponse is the response type for the
 // DeleteVoiceConnectorOrigination API operation.
 type DeleteVoiceConnectorOriginationResponse struct {
-	*DeleteVoiceConnectorOriginationOutput
+	*types.DeleteVoiceConnectorOriginationOutput
 
 	response *aws.Response
 }

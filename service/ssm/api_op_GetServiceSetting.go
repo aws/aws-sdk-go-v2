@@ -6,53 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ssm/types"
 )
-
-// The request body of the GetServiceSetting API action.
-type GetServiceSettingInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the service setting to get.
-	//
-	// SettingId is a required field
-	SettingId *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetServiceSettingInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetServiceSettingInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetServiceSettingInput"}
-
-	if s.SettingId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("SettingId"))
-	}
-	if s.SettingId != nil && len(*s.SettingId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("SettingId", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// The query result body of the GetServiceSetting API action.
-type GetServiceSettingOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The query result of the current service setting.
-	ServiceSetting *ServiceSetting `type:"structure"`
-}
-
-// String returns the string representation
-func (s GetServiceSettingOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetServiceSetting = "GetServiceSetting"
 
@@ -83,7 +38,7 @@ const opGetServiceSetting = "GetServiceSetting"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetServiceSetting
-func (c *Client) GetServiceSettingRequest(input *GetServiceSettingInput) GetServiceSettingRequest {
+func (c *Client) GetServiceSettingRequest(input *types.GetServiceSettingInput) GetServiceSettingRequest {
 	op := &aws.Operation{
 		Name:       opGetServiceSetting,
 		HTTPMethod: "POST",
@@ -91,10 +46,10 @@ func (c *Client) GetServiceSettingRequest(input *GetServiceSettingInput) GetServ
 	}
 
 	if input == nil {
-		input = &GetServiceSettingInput{}
+		input = &types.GetServiceSettingInput{}
 	}
 
-	req := c.newRequest(op, input, &GetServiceSettingOutput{})
+	req := c.newRequest(op, input, &types.GetServiceSettingOutput{})
 	return GetServiceSettingRequest{Request: req, Input: input, Copy: c.GetServiceSettingRequest}
 }
 
@@ -102,8 +57,8 @@ func (c *Client) GetServiceSettingRequest(input *GetServiceSettingInput) GetServ
 // GetServiceSetting API operation.
 type GetServiceSettingRequest struct {
 	*aws.Request
-	Input *GetServiceSettingInput
-	Copy  func(*GetServiceSettingInput) GetServiceSettingRequest
+	Input *types.GetServiceSettingInput
+	Copy  func(*types.GetServiceSettingInput) GetServiceSettingRequest
 }
 
 // Send marshals and sends the GetServiceSetting API request.
@@ -115,7 +70,7 @@ func (r GetServiceSettingRequest) Send(ctx context.Context) (*GetServiceSettingR
 	}
 
 	resp := &GetServiceSettingResponse{
-		GetServiceSettingOutput: r.Request.Data.(*GetServiceSettingOutput),
+		GetServiceSettingOutput: r.Request.Data.(*types.GetServiceSettingOutput),
 		response:                &aws.Response{Request: r.Request},
 	}
 
@@ -125,7 +80,7 @@ func (r GetServiceSettingRequest) Send(ctx context.Context) (*GetServiceSettingR
 // GetServiceSettingResponse is the response type for the
 // GetServiceSetting API operation.
 type GetServiceSettingResponse struct {
-	*GetServiceSettingOutput
+	*types.GetServiceSettingOutput
 
 	response *aws.Response
 }

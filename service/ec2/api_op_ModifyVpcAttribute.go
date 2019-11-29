@@ -6,65 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/ec2query"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-type ModifyVpcAttributeInput struct {
-	_ struct{} `type:"structure"`
-
-	// Indicates whether the instances launched in the VPC get DNS hostnames. If
-	// enabled, instances in the VPC get DNS hostnames; otherwise, they do not.
-	//
-	// You cannot modify the DNS resolution and DNS hostnames attributes in the
-	// same request. Use separate requests for each attribute. You can only enable
-	// DNS hostnames if you've enabled DNS support.
-	EnableDnsHostnames *AttributeBooleanValue `type:"structure"`
-
-	// Indicates whether the DNS resolution is supported for the VPC. If enabled,
-	// queries to the Amazon provided DNS server at the 169.254.169.253 IP address,
-	// or the reserved IP address at the base of the VPC network range "plus two"
-	// succeed. If disabled, the Amazon provided DNS service in the VPC that resolves
-	// public DNS hostnames to IP addresses is not enabled.
-	//
-	// You cannot modify the DNS resolution and DNS hostnames attributes in the
-	// same request. Use separate requests for each attribute.
-	EnableDnsSupport *AttributeBooleanValue `type:"structure"`
-
-	// The ID of the VPC.
-	//
-	// VpcId is a required field
-	VpcId *string `locationName:"vpcId" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s ModifyVpcAttributeInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ModifyVpcAttributeInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ModifyVpcAttributeInput"}
-
-	if s.VpcId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("VpcId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ModifyVpcAttributeOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s ModifyVpcAttributeOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opModifyVpcAttribute = "ModifyVpcAttribute"
 
@@ -81,7 +26,7 @@ const opModifyVpcAttribute = "ModifyVpcAttribute"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyVpcAttribute
-func (c *Client) ModifyVpcAttributeRequest(input *ModifyVpcAttributeInput) ModifyVpcAttributeRequest {
+func (c *Client) ModifyVpcAttributeRequest(input *types.ModifyVpcAttributeInput) ModifyVpcAttributeRequest {
 	op := &aws.Operation{
 		Name:       opModifyVpcAttribute,
 		HTTPMethod: "POST",
@@ -89,10 +34,10 @@ func (c *Client) ModifyVpcAttributeRequest(input *ModifyVpcAttributeInput) Modif
 	}
 
 	if input == nil {
-		input = &ModifyVpcAttributeInput{}
+		input = &types.ModifyVpcAttributeInput{}
 	}
 
-	req := c.newRequest(op, input, &ModifyVpcAttributeOutput{})
+	req := c.newRequest(op, input, &types.ModifyVpcAttributeOutput{})
 	req.Handlers.Unmarshal.Remove(ec2query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return ModifyVpcAttributeRequest{Request: req, Input: input, Copy: c.ModifyVpcAttributeRequest}
@@ -102,8 +47,8 @@ func (c *Client) ModifyVpcAttributeRequest(input *ModifyVpcAttributeInput) Modif
 // ModifyVpcAttribute API operation.
 type ModifyVpcAttributeRequest struct {
 	*aws.Request
-	Input *ModifyVpcAttributeInput
-	Copy  func(*ModifyVpcAttributeInput) ModifyVpcAttributeRequest
+	Input *types.ModifyVpcAttributeInput
+	Copy  func(*types.ModifyVpcAttributeInput) ModifyVpcAttributeRequest
 }
 
 // Send marshals and sends the ModifyVpcAttribute API request.
@@ -115,7 +60,7 @@ func (r ModifyVpcAttributeRequest) Send(ctx context.Context) (*ModifyVpcAttribut
 	}
 
 	resp := &ModifyVpcAttributeResponse{
-		ModifyVpcAttributeOutput: r.Request.Data.(*ModifyVpcAttributeOutput),
+		ModifyVpcAttributeOutput: r.Request.Data.(*types.ModifyVpcAttributeOutput),
 		response:                 &aws.Response{Request: r.Request},
 	}
 
@@ -125,7 +70,7 @@ func (r ModifyVpcAttributeRequest) Send(ctx context.Context) (*ModifyVpcAttribut
 // ModifyVpcAttributeResponse is the response type for the
 // ModifyVpcAttribute API operation.
 type ModifyVpcAttributeResponse struct {
-	*ModifyVpcAttributeOutput
+	*types.ModifyVpcAttributeOutput
 
 	response *aws.Response
 }

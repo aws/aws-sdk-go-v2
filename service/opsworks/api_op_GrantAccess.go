@@ -6,59 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/opsworks/types"
 )
-
-type GrantAccessInput struct {
-	_ struct{} `type:"structure"`
-
-	// The instance's AWS OpsWorks Stacks ID.
-	//
-	// InstanceId is a required field
-	InstanceId *string `type:"string" required:"true"`
-
-	// The length of time (in minutes) that the grant is valid. When the grant expires
-	// at the end of this period, the user will no longer be able to use the credentials
-	// to log in. If the user is logged in at the time, he or she automatically
-	// will be logged out.
-	ValidForInMinutes *int64 `min:"60" type:"integer"`
-}
-
-// String returns the string representation
-func (s GrantAccessInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GrantAccessInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GrantAccessInput"}
-
-	if s.InstanceId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("InstanceId"))
-	}
-	if s.ValidForInMinutes != nil && *s.ValidForInMinutes < 60 {
-		invalidParams.Add(aws.NewErrParamMinValue("ValidForInMinutes", 60))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Contains the response to a GrantAccess request.
-type GrantAccessOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A TemporaryCredential object that contains the data needed to log in to the
-	// instance by RDP clients, such as the Microsoft Remote Desktop Connection.
-	TemporaryCredential *TemporaryCredential `type:"structure"`
-}
-
-// String returns the string representation
-func (s GrantAccessOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGrantAccess = "GrantAccess"
 
@@ -78,7 +27,7 @@ const opGrantAccess = "GrantAccess"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/GrantAccess
-func (c *Client) GrantAccessRequest(input *GrantAccessInput) GrantAccessRequest {
+func (c *Client) GrantAccessRequest(input *types.GrantAccessInput) GrantAccessRequest {
 	op := &aws.Operation{
 		Name:       opGrantAccess,
 		HTTPMethod: "POST",
@@ -86,10 +35,10 @@ func (c *Client) GrantAccessRequest(input *GrantAccessInput) GrantAccessRequest 
 	}
 
 	if input == nil {
-		input = &GrantAccessInput{}
+		input = &types.GrantAccessInput{}
 	}
 
-	req := c.newRequest(op, input, &GrantAccessOutput{})
+	req := c.newRequest(op, input, &types.GrantAccessOutput{})
 	return GrantAccessRequest{Request: req, Input: input, Copy: c.GrantAccessRequest}
 }
 
@@ -97,8 +46,8 @@ func (c *Client) GrantAccessRequest(input *GrantAccessInput) GrantAccessRequest 
 // GrantAccess API operation.
 type GrantAccessRequest struct {
 	*aws.Request
-	Input *GrantAccessInput
-	Copy  func(*GrantAccessInput) GrantAccessRequest
+	Input *types.GrantAccessInput
+	Copy  func(*types.GrantAccessInput) GrantAccessRequest
 }
 
 // Send marshals and sends the GrantAccess API request.
@@ -110,7 +59,7 @@ func (r GrantAccessRequest) Send(ctx context.Context) (*GrantAccessResponse, err
 	}
 
 	resp := &GrantAccessResponse{
-		GrantAccessOutput: r.Request.Data.(*GrantAccessOutput),
+		GrantAccessOutput: r.Request.Data.(*types.GrantAccessOutput),
 		response:          &aws.Response{Request: r.Request},
 	}
 
@@ -120,7 +69,7 @@ func (r GrantAccessRequest) Send(ctx context.Context) (*GrantAccessResponse, err
 // GrantAccessResponse is the response type for the
 // GrantAccess API operation.
 type GrantAccessResponse struct {
-	*GrantAccessOutput
+	*types.GrantAccessOutput
 
 	response *aws.Response
 }

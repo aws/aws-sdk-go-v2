@@ -6,56 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/iotthingsgraph/types"
 )
-
-type DissociateEntityFromThingInput struct {
-	_ struct{} `type:"structure"`
-
-	// The entity type from which to disassociate the thing.
-	//
-	// EntityType is a required field
-	EntityType EntityType `locationName:"entityType" type:"string" required:"true" enum:"true"`
-
-	// The name of the thing to disassociate.
-	//
-	// ThingName is a required field
-	ThingName *string `locationName:"thingName" min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DissociateEntityFromThingInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DissociateEntityFromThingInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DissociateEntityFromThingInput"}
-	if len(s.EntityType) == 0 {
-		invalidParams.Add(aws.NewErrParamRequired("EntityType"))
-	}
-
-	if s.ThingName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ThingName"))
-	}
-	if s.ThingName != nil && len(*s.ThingName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ThingName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DissociateEntityFromThingOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DissociateEntityFromThingOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDissociateEntityFromThing = "DissociateEntityFromThing"
 
@@ -74,7 +26,7 @@ const opDissociateEntityFromThing = "DissociateEntityFromThing"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iotthingsgraph-2018-09-06/DissociateEntityFromThing
-func (c *Client) DissociateEntityFromThingRequest(input *DissociateEntityFromThingInput) DissociateEntityFromThingRequest {
+func (c *Client) DissociateEntityFromThingRequest(input *types.DissociateEntityFromThingInput) DissociateEntityFromThingRequest {
 	op := &aws.Operation{
 		Name:       opDissociateEntityFromThing,
 		HTTPMethod: "POST",
@@ -82,10 +34,10 @@ func (c *Client) DissociateEntityFromThingRequest(input *DissociateEntityFromThi
 	}
 
 	if input == nil {
-		input = &DissociateEntityFromThingInput{}
+		input = &types.DissociateEntityFromThingInput{}
 	}
 
-	req := c.newRequest(op, input, &DissociateEntityFromThingOutput{})
+	req := c.newRequest(op, input, &types.DissociateEntityFromThingOutput{})
 	return DissociateEntityFromThingRequest{Request: req, Input: input, Copy: c.DissociateEntityFromThingRequest}
 }
 
@@ -93,8 +45,8 @@ func (c *Client) DissociateEntityFromThingRequest(input *DissociateEntityFromThi
 // DissociateEntityFromThing API operation.
 type DissociateEntityFromThingRequest struct {
 	*aws.Request
-	Input *DissociateEntityFromThingInput
-	Copy  func(*DissociateEntityFromThingInput) DissociateEntityFromThingRequest
+	Input *types.DissociateEntityFromThingInput
+	Copy  func(*types.DissociateEntityFromThingInput) DissociateEntityFromThingRequest
 }
 
 // Send marshals and sends the DissociateEntityFromThing API request.
@@ -106,7 +58,7 @@ func (r DissociateEntityFromThingRequest) Send(ctx context.Context) (*Dissociate
 	}
 
 	resp := &DissociateEntityFromThingResponse{
-		DissociateEntityFromThingOutput: r.Request.Data.(*DissociateEntityFromThingOutput),
+		DissociateEntityFromThingOutput: r.Request.Data.(*types.DissociateEntityFromThingOutput),
 		response:                        &aws.Response{Request: r.Request},
 	}
 
@@ -116,7 +68,7 @@ func (r DissociateEntityFromThingRequest) Send(ctx context.Context) (*Dissociate
 // DissociateEntityFromThingResponse is the response type for the
 // DissociateEntityFromThing API operation.
 type DissociateEntityFromThingResponse struct {
-	*DissociateEntityFromThingOutput
+	*types.DissociateEntityFromThingOutput
 
 	response *aws.Response
 }

@@ -6,52 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/redshift/types"
 )
-
-type DisableSnapshotCopyInput struct {
-	_ struct{} `type:"structure"`
-
-	// The unique identifier of the source cluster that you want to disable copying
-	// of snapshots to a destination region.
-	//
-	// Constraints: Must be the valid name of an existing cluster that has cross-region
-	// snapshot copy enabled.
-	//
-	// ClusterIdentifier is a required field
-	ClusterIdentifier *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DisableSnapshotCopyInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DisableSnapshotCopyInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DisableSnapshotCopyInput"}
-
-	if s.ClusterIdentifier == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ClusterIdentifier"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DisableSnapshotCopyOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Describes a cluster.
-	Cluster *Cluster `type:"structure"`
-}
-
-// String returns the string representation
-func (s DisableSnapshotCopyOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDisableSnapshotCopy = "DisableSnapshotCopy"
 
@@ -73,7 +29,7 @@ const opDisableSnapshotCopy = "DisableSnapshotCopy"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DisableSnapshotCopy
-func (c *Client) DisableSnapshotCopyRequest(input *DisableSnapshotCopyInput) DisableSnapshotCopyRequest {
+func (c *Client) DisableSnapshotCopyRequest(input *types.DisableSnapshotCopyInput) DisableSnapshotCopyRequest {
 	op := &aws.Operation{
 		Name:       opDisableSnapshotCopy,
 		HTTPMethod: "POST",
@@ -81,10 +37,10 @@ func (c *Client) DisableSnapshotCopyRequest(input *DisableSnapshotCopyInput) Dis
 	}
 
 	if input == nil {
-		input = &DisableSnapshotCopyInput{}
+		input = &types.DisableSnapshotCopyInput{}
 	}
 
-	req := c.newRequest(op, input, &DisableSnapshotCopyOutput{})
+	req := c.newRequest(op, input, &types.DisableSnapshotCopyOutput{})
 	return DisableSnapshotCopyRequest{Request: req, Input: input, Copy: c.DisableSnapshotCopyRequest}
 }
 
@@ -92,8 +48,8 @@ func (c *Client) DisableSnapshotCopyRequest(input *DisableSnapshotCopyInput) Dis
 // DisableSnapshotCopy API operation.
 type DisableSnapshotCopyRequest struct {
 	*aws.Request
-	Input *DisableSnapshotCopyInput
-	Copy  func(*DisableSnapshotCopyInput) DisableSnapshotCopyRequest
+	Input *types.DisableSnapshotCopyInput
+	Copy  func(*types.DisableSnapshotCopyInput) DisableSnapshotCopyRequest
 }
 
 // Send marshals and sends the DisableSnapshotCopy API request.
@@ -105,7 +61,7 @@ func (r DisableSnapshotCopyRequest) Send(ctx context.Context) (*DisableSnapshotC
 	}
 
 	resp := &DisableSnapshotCopyResponse{
-		DisableSnapshotCopyOutput: r.Request.Data.(*DisableSnapshotCopyOutput),
+		DisableSnapshotCopyOutput: r.Request.Data.(*types.DisableSnapshotCopyOutput),
 		response:                  &aws.Response{Request: r.Request},
 	}
 
@@ -115,7 +71,7 @@ func (r DisableSnapshotCopyRequest) Send(ctx context.Context) (*DisableSnapshotC
 // DisableSnapshotCopyResponse is the response type for the
 // DisableSnapshotCopy API operation.
 type DisableSnapshotCopyResponse struct {
-	*DisableSnapshotCopyOutput
+	*types.DisableSnapshotCopyOutput
 
 	response *aws.Response
 }

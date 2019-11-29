@@ -6,85 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/rekognition/types"
 )
-
-type DetectFacesInput struct {
-	_ struct{} `type:"structure"`
-
-	// An array of facial attributes you want to be returned. This can be the default
-	// list of attributes or all attributes. If you don't specify a value for Attributes
-	// or if you specify ["DEFAULT"], the API returns the following subset of facial
-	// attributes: BoundingBox, Confidence, Pose, Quality, and Landmarks. If you
-	// provide ["ALL"], all facial attributes are returned, but the operation takes
-	// longer to complete.
-	//
-	// If you provide both, ["ALL", "DEFAULT"], the service uses a logical AND operator
-	// to determine which attributes to return (in this case, all attributes).
-	Attributes []Attribute `type:"list"`
-
-	// The input image as base64-encoded bytes or an S3 object. If you use the AWS
-	// CLI to call Amazon Rekognition operations, passing base64-encoded image bytes
-	// is not supported.
-	//
-	// If you are using an AWS SDK to call Amazon Rekognition, you might not need
-	// to base64-encode image bytes passed using the Bytes field. For more information,
-	// see Images in the Amazon Rekognition developer guide.
-	//
-	// Image is a required field
-	Image *Image `type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s DetectFacesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DetectFacesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DetectFacesInput"}
-
-	if s.Image == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Image"))
-	}
-	if s.Image != nil {
-		if err := s.Image.Validate(); err != nil {
-			invalidParams.AddNested("Image", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DetectFacesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Details of each face found in the image.
-	FaceDetails []FaceDetail `type:"list"`
-
-	// The value of OrientationCorrection is always null.
-	//
-	// If the input image is in .jpeg format, it might contain exchangeable image
-	// file format (Exif) metadata that includes the image's orientation. Amazon
-	// Rekognition uses this orientation information to perform image correction.
-	// The bounding box coordinates are translated to represent object locations
-	// after the orientation information in the Exif metadata is used to correct
-	// the image orientation. Images in .png format don't contain Exif metadata.
-	//
-	// Amazon Rekognition doesn’t perform image correction for images in .png
-	// format and .jpeg images without orientation information in the image Exif
-	// metadata. The bounding box coordinates aren't translated and represent the
-	// object locations before the image is rotated.
-	OrientationCorrection OrientationCorrection `type:"string" enum:"true"`
-}
-
-// String returns the string representation
-func (s DetectFacesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDetectFaces = "DetectFaces"
 
@@ -120,7 +43,7 @@ const opDetectFaces = "DetectFaces"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) DetectFacesRequest(input *DetectFacesInput) DetectFacesRequest {
+func (c *Client) DetectFacesRequest(input *types.DetectFacesInput) DetectFacesRequest {
 	op := &aws.Operation{
 		Name:       opDetectFaces,
 		HTTPMethod: "POST",
@@ -128,10 +51,10 @@ func (c *Client) DetectFacesRequest(input *DetectFacesInput) DetectFacesRequest 
 	}
 
 	if input == nil {
-		input = &DetectFacesInput{}
+		input = &types.DetectFacesInput{}
 	}
 
-	req := c.newRequest(op, input, &DetectFacesOutput{})
+	req := c.newRequest(op, input, &types.DetectFacesOutput{})
 	return DetectFacesRequest{Request: req, Input: input, Copy: c.DetectFacesRequest}
 }
 
@@ -139,8 +62,8 @@ func (c *Client) DetectFacesRequest(input *DetectFacesInput) DetectFacesRequest 
 // DetectFaces API operation.
 type DetectFacesRequest struct {
 	*aws.Request
-	Input *DetectFacesInput
-	Copy  func(*DetectFacesInput) DetectFacesRequest
+	Input *types.DetectFacesInput
+	Copy  func(*types.DetectFacesInput) DetectFacesRequest
 }
 
 // Send marshals and sends the DetectFaces API request.
@@ -152,7 +75,7 @@ func (r DetectFacesRequest) Send(ctx context.Context) (*DetectFacesResponse, err
 	}
 
 	resp := &DetectFacesResponse{
-		DetectFacesOutput: r.Request.Data.(*DetectFacesOutput),
+		DetectFacesOutput: r.Request.Data.(*types.DetectFacesOutput),
 		response:          &aws.Response{Request: r.Request},
 	}
 
@@ -162,7 +85,7 @@ func (r DetectFacesRequest) Send(ctx context.Context) (*DetectFacesResponse, err
 // DetectFacesResponse is the response type for the
 // DetectFaces API operation.
 type DetectFacesResponse struct {
-	*DetectFacesOutput
+	*types.DetectFacesOutput
 
 	response *aws.Response
 }

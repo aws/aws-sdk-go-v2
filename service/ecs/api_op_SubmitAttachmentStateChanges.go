@@ -4,62 +4,10 @@ package ecs
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ecs/types"
 )
-
-type SubmitAttachmentStateChangesInput struct {
-	_ struct{} `type:"structure"`
-
-	// Any attachments associated with the state change request.
-	//
-	// Attachments is a required field
-	Attachments []AttachmentStateChange `locationName:"attachments" type:"list" required:"true"`
-
-	// The short name or full ARN of the cluster that hosts the container instance
-	// the attachment belongs to.
-	Cluster *string `locationName:"cluster" type:"string"`
-}
-
-// String returns the string representation
-func (s SubmitAttachmentStateChangesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *SubmitAttachmentStateChangesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "SubmitAttachmentStateChangesInput"}
-
-	if s.Attachments == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Attachments"))
-	}
-	if s.Attachments != nil {
-		for i, v := range s.Attachments {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Attachments", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type SubmitAttachmentStateChangesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Acknowledgement of the state change.
-	Acknowledgment *string `locationName:"acknowledgment" type:"string"`
-}
-
-// String returns the string representation
-func (s SubmitAttachmentStateChangesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opSubmitAttachmentStateChanges = "SubmitAttachmentStateChanges"
 
@@ -80,7 +28,7 @@ const opSubmitAttachmentStateChanges = "SubmitAttachmentStateChanges"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/SubmitAttachmentStateChanges
-func (c *Client) SubmitAttachmentStateChangesRequest(input *SubmitAttachmentStateChangesInput) SubmitAttachmentStateChangesRequest {
+func (c *Client) SubmitAttachmentStateChangesRequest(input *types.SubmitAttachmentStateChangesInput) SubmitAttachmentStateChangesRequest {
 	op := &aws.Operation{
 		Name:       opSubmitAttachmentStateChanges,
 		HTTPMethod: "POST",
@@ -88,10 +36,10 @@ func (c *Client) SubmitAttachmentStateChangesRequest(input *SubmitAttachmentStat
 	}
 
 	if input == nil {
-		input = &SubmitAttachmentStateChangesInput{}
+		input = &types.SubmitAttachmentStateChangesInput{}
 	}
 
-	req := c.newRequest(op, input, &SubmitAttachmentStateChangesOutput{})
+	req := c.newRequest(op, input, &types.SubmitAttachmentStateChangesOutput{})
 	return SubmitAttachmentStateChangesRequest{Request: req, Input: input, Copy: c.SubmitAttachmentStateChangesRequest}
 }
 
@@ -99,8 +47,8 @@ func (c *Client) SubmitAttachmentStateChangesRequest(input *SubmitAttachmentStat
 // SubmitAttachmentStateChanges API operation.
 type SubmitAttachmentStateChangesRequest struct {
 	*aws.Request
-	Input *SubmitAttachmentStateChangesInput
-	Copy  func(*SubmitAttachmentStateChangesInput) SubmitAttachmentStateChangesRequest
+	Input *types.SubmitAttachmentStateChangesInput
+	Copy  func(*types.SubmitAttachmentStateChangesInput) SubmitAttachmentStateChangesRequest
 }
 
 // Send marshals and sends the SubmitAttachmentStateChanges API request.
@@ -112,7 +60,7 @@ func (r SubmitAttachmentStateChangesRequest) Send(ctx context.Context) (*SubmitA
 	}
 
 	resp := &SubmitAttachmentStateChangesResponse{
-		SubmitAttachmentStateChangesOutput: r.Request.Data.(*SubmitAttachmentStateChangesOutput),
+		SubmitAttachmentStateChangesOutput: r.Request.Data.(*types.SubmitAttachmentStateChangesOutput),
 		response:                           &aws.Response{Request: r.Request},
 	}
 
@@ -122,7 +70,7 @@ func (r SubmitAttachmentStateChangesRequest) Send(ctx context.Context) (*SubmitA
 // SubmitAttachmentStateChangesResponse is the response type for the
 // SubmitAttachmentStateChanges API operation.
 type SubmitAttachmentStateChangesResponse struct {
-	*SubmitAttachmentStateChangesOutput
+	*types.SubmitAttachmentStateChangesOutput
 
 	response *aws.Response
 }

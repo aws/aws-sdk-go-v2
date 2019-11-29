@@ -6,49 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ses/types"
 )
-
-// Represents a request to return a list of all identities (email addresses
-// and domains) that you have attempted to verify under your AWS account, regardless
-// of verification status.
-type ListIdentitiesInput struct {
-	_ struct{} `type:"structure"`
-
-	// The type of the identities to list. Possible values are "EmailAddress" and
-	// "Domain". If this parameter is omitted, then all identities will be listed.
-	IdentityType IdentityType `type:"string" enum:"true"`
-
-	// The maximum number of identities per page. Possible values are 1-1000 inclusive.
-	MaxItems *int64 `type:"integer"`
-
-	// The token to use for pagination.
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s ListIdentitiesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// A list of all identities that you have attempted to verify under your AWS
-// account, regardless of verification status.
-type ListIdentitiesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A list of identities.
-	//
-	// Identities is a required field
-	Identities []string `type:"list" required:"true"`
-
-	// The token used for pagination.
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s ListIdentitiesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListIdentities = "ListIdentities"
 
@@ -69,7 +28,7 @@ const opListIdentities = "ListIdentities"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/ListIdentities
-func (c *Client) ListIdentitiesRequest(input *ListIdentitiesInput) ListIdentitiesRequest {
+func (c *Client) ListIdentitiesRequest(input *types.ListIdentitiesInput) ListIdentitiesRequest {
 	op := &aws.Operation{
 		Name:       opListIdentities,
 		HTTPMethod: "POST",
@@ -83,10 +42,10 @@ func (c *Client) ListIdentitiesRequest(input *ListIdentitiesInput) ListIdentitie
 	}
 
 	if input == nil {
-		input = &ListIdentitiesInput{}
+		input = &types.ListIdentitiesInput{}
 	}
 
-	req := c.newRequest(op, input, &ListIdentitiesOutput{})
+	req := c.newRequest(op, input, &types.ListIdentitiesOutput{})
 	return ListIdentitiesRequest{Request: req, Input: input, Copy: c.ListIdentitiesRequest}
 }
 
@@ -94,8 +53,8 @@ func (c *Client) ListIdentitiesRequest(input *ListIdentitiesInput) ListIdentitie
 // ListIdentities API operation.
 type ListIdentitiesRequest struct {
 	*aws.Request
-	Input *ListIdentitiesInput
-	Copy  func(*ListIdentitiesInput) ListIdentitiesRequest
+	Input *types.ListIdentitiesInput
+	Copy  func(*types.ListIdentitiesInput) ListIdentitiesRequest
 }
 
 // Send marshals and sends the ListIdentities API request.
@@ -107,7 +66,7 @@ func (r ListIdentitiesRequest) Send(ctx context.Context) (*ListIdentitiesRespons
 	}
 
 	resp := &ListIdentitiesResponse{
-		ListIdentitiesOutput: r.Request.Data.(*ListIdentitiesOutput),
+		ListIdentitiesOutput: r.Request.Data.(*types.ListIdentitiesOutput),
 		response:             &aws.Response{Request: r.Request},
 	}
 
@@ -137,7 +96,7 @@ func NewListIdentitiesPaginator(req ListIdentitiesRequest) ListIdentitiesPaginat
 	return ListIdentitiesPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListIdentitiesInput
+				var inCpy *types.ListIdentitiesInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -157,14 +116,14 @@ type ListIdentitiesPaginator struct {
 	aws.Pager
 }
 
-func (p *ListIdentitiesPaginator) CurrentPage() *ListIdentitiesOutput {
-	return p.Pager.CurrentPage().(*ListIdentitiesOutput)
+func (p *ListIdentitiesPaginator) CurrentPage() *types.ListIdentitiesOutput {
+	return p.Pager.CurrentPage().(*types.ListIdentitiesOutput)
 }
 
 // ListIdentitiesResponse is the response type for the
 // ListIdentities API operation.
 type ListIdentitiesResponse struct {
-	*ListIdentitiesOutput
+	*types.ListIdentitiesOutput
 
 	response *aws.Response
 }

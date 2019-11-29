@@ -6,89 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/opsworks/types"
 )
-
-type CreateDeploymentInput struct {
-	_ struct{} `type:"structure"`
-
-	// The app ID. This parameter is required for app deployments, but not for other
-	// deployment commands.
-	AppId *string `type:"string"`
-
-	// A DeploymentCommand object that specifies the deployment command and any
-	// associated arguments.
-	//
-	// Command is a required field
-	Command *DeploymentCommand `type:"structure" required:"true"`
-
-	// A user-defined comment.
-	Comment *string `type:"string"`
-
-	// A string that contains user-defined, custom JSON. You can use this parameter
-	// to override some corresponding default stack configuration JSON values. The
-	// string should be in the following format:
-	//
-	// "{\"key1\": \"value1\", \"key2\": \"value2\",...}"
-	//
-	// For more information about custom JSON, see Use Custom JSON to Modify the
-	// Stack Configuration Attributes (https://docs.aws.amazon.com/opsworks/latest/userguide/workingstacks-json.html)
-	// and Overriding Attributes With Custom JSON (https://docs.aws.amazon.com/opsworks/latest/userguide/workingcookbook-json-override.html).
-	CustomJson *string `type:"string"`
-
-	// The instance IDs for the deployment targets.
-	InstanceIds []string `type:"list"`
-
-	// The layer IDs for the deployment targets.
-	LayerIds []string `type:"list"`
-
-	// The stack ID.
-	//
-	// StackId is a required field
-	StackId *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s CreateDeploymentInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateDeploymentInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateDeploymentInput"}
-
-	if s.Command == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Command"))
-	}
-
-	if s.StackId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("StackId"))
-	}
-	if s.Command != nil {
-		if err := s.Command.Validate(); err != nil {
-			invalidParams.AddNested("Command", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Contains the response to a CreateDeployment request.
-type CreateDeploymentOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The deployment ID, which can be used with other requests to identify the
-	// deployment.
-	DeploymentId *string `type:"string"`
-}
-
-// String returns the string representation
-func (s CreateDeploymentOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCreateDeployment = "CreateDeployment"
 
@@ -112,7 +31,7 @@ const opCreateDeployment = "CreateDeployment"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/CreateDeployment
-func (c *Client) CreateDeploymentRequest(input *CreateDeploymentInput) CreateDeploymentRequest {
+func (c *Client) CreateDeploymentRequest(input *types.CreateDeploymentInput) CreateDeploymentRequest {
 	op := &aws.Operation{
 		Name:       opCreateDeployment,
 		HTTPMethod: "POST",
@@ -120,10 +39,10 @@ func (c *Client) CreateDeploymentRequest(input *CreateDeploymentInput) CreateDep
 	}
 
 	if input == nil {
-		input = &CreateDeploymentInput{}
+		input = &types.CreateDeploymentInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateDeploymentOutput{})
+	req := c.newRequest(op, input, &types.CreateDeploymentOutput{})
 	return CreateDeploymentRequest{Request: req, Input: input, Copy: c.CreateDeploymentRequest}
 }
 
@@ -131,8 +50,8 @@ func (c *Client) CreateDeploymentRequest(input *CreateDeploymentInput) CreateDep
 // CreateDeployment API operation.
 type CreateDeploymentRequest struct {
 	*aws.Request
-	Input *CreateDeploymentInput
-	Copy  func(*CreateDeploymentInput) CreateDeploymentRequest
+	Input *types.CreateDeploymentInput
+	Copy  func(*types.CreateDeploymentInput) CreateDeploymentRequest
 }
 
 // Send marshals and sends the CreateDeployment API request.
@@ -144,7 +63,7 @@ func (r CreateDeploymentRequest) Send(ctx context.Context) (*CreateDeploymentRes
 	}
 
 	resp := &CreateDeploymentResponse{
-		CreateDeploymentOutput: r.Request.Data.(*CreateDeploymentOutput),
+		CreateDeploymentOutput: r.Request.Data.(*types.CreateDeploymentOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -154,7 +73,7 @@ func (r CreateDeploymentRequest) Send(ctx context.Context) (*CreateDeploymentRes
 // CreateDeploymentResponse is the response type for the
 // CreateDeployment API operation.
 type CreateDeploymentResponse struct {
-	*CreateDeploymentOutput
+	*types.CreateDeploymentOutput
 
 	response *aws.Response
 }

@@ -6,57 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/databasemigrationservice/types"
 )
-
-type DeleteConnectionInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) string that uniquely identifies the endpoint.
-	//
-	// EndpointArn is a required field
-	EndpointArn *string `type:"string" required:"true"`
-
-	// The Amazon Resource Name (ARN) of the replication instance.
-	//
-	// ReplicationInstanceArn is a required field
-	ReplicationInstanceArn *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteConnectionInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteConnectionInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteConnectionInput"}
-
-	if s.EndpointArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("EndpointArn"))
-	}
-
-	if s.ReplicationInstanceArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ReplicationInstanceArn"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteConnectionOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The connection that is being deleted.
-	Connection *Connection `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteConnectionOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteConnection = "DeleteConnection"
 
@@ -73,7 +24,7 @@ const opDeleteConnection = "DeleteConnection"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DeleteConnection
-func (c *Client) DeleteConnectionRequest(input *DeleteConnectionInput) DeleteConnectionRequest {
+func (c *Client) DeleteConnectionRequest(input *types.DeleteConnectionInput) DeleteConnectionRequest {
 	op := &aws.Operation{
 		Name:       opDeleteConnection,
 		HTTPMethod: "POST",
@@ -81,10 +32,10 @@ func (c *Client) DeleteConnectionRequest(input *DeleteConnectionInput) DeleteCon
 	}
 
 	if input == nil {
-		input = &DeleteConnectionInput{}
+		input = &types.DeleteConnectionInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteConnectionOutput{})
+	req := c.newRequest(op, input, &types.DeleteConnectionOutput{})
 	return DeleteConnectionRequest{Request: req, Input: input, Copy: c.DeleteConnectionRequest}
 }
 
@@ -92,8 +43,8 @@ func (c *Client) DeleteConnectionRequest(input *DeleteConnectionInput) DeleteCon
 // DeleteConnection API operation.
 type DeleteConnectionRequest struct {
 	*aws.Request
-	Input *DeleteConnectionInput
-	Copy  func(*DeleteConnectionInput) DeleteConnectionRequest
+	Input *types.DeleteConnectionInput
+	Copy  func(*types.DeleteConnectionInput) DeleteConnectionRequest
 }
 
 // Send marshals and sends the DeleteConnection API request.
@@ -105,7 +56,7 @@ func (r DeleteConnectionRequest) Send(ctx context.Context) (*DeleteConnectionRes
 	}
 
 	resp := &DeleteConnectionResponse{
-		DeleteConnectionOutput: r.Request.Data.(*DeleteConnectionOutput),
+		DeleteConnectionOutput: r.Request.Data.(*types.DeleteConnectionOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -115,7 +66,7 @@ func (r DeleteConnectionRequest) Send(ctx context.Context) (*DeleteConnectionRes
 // DeleteConnectionResponse is the response type for the
 // DeleteConnection API operation.
 type DeleteConnectionResponse struct {
-	*DeleteConnectionOutput
+	*types.DeleteConnectionOutput
 
 	response *aws.Response
 }

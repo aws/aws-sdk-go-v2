@@ -6,62 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
+	"github.com/aws/aws-sdk-go-v2/service/cloudwatchlogs/types"
 )
-
-type UntagLogGroupInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the log group.
-	//
-	// LogGroupName is a required field
-	LogGroupName *string `locationName:"logGroupName" min:"1" type:"string" required:"true"`
-
-	// The tag keys. The corresponding tags are removed from the log group.
-	//
-	// Tags is a required field
-	Tags []string `locationName:"tags" min:"1" type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s UntagLogGroupInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UntagLogGroupInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UntagLogGroupInput"}
-
-	if s.LogGroupName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("LogGroupName"))
-	}
-	if s.LogGroupName != nil && len(*s.LogGroupName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("LogGroupName", 1))
-	}
-
-	if s.Tags == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Tags"))
-	}
-	if s.Tags != nil && len(s.Tags) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Tags", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type UntagLogGroupOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s UntagLogGroupOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opUntagLogGroup = "UntagLogGroup"
 
@@ -81,7 +29,7 @@ const opUntagLogGroup = "UntagLogGroup"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/UntagLogGroup
-func (c *Client) UntagLogGroupRequest(input *UntagLogGroupInput) UntagLogGroupRequest {
+func (c *Client) UntagLogGroupRequest(input *types.UntagLogGroupInput) UntagLogGroupRequest {
 	op := &aws.Operation{
 		Name:       opUntagLogGroup,
 		HTTPMethod: "POST",
@@ -89,10 +37,10 @@ func (c *Client) UntagLogGroupRequest(input *UntagLogGroupInput) UntagLogGroupRe
 	}
 
 	if input == nil {
-		input = &UntagLogGroupInput{}
+		input = &types.UntagLogGroupInput{}
 	}
 
-	req := c.newRequest(op, input, &UntagLogGroupOutput{})
+	req := c.newRequest(op, input, &types.UntagLogGroupOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return UntagLogGroupRequest{Request: req, Input: input, Copy: c.UntagLogGroupRequest}
@@ -102,8 +50,8 @@ func (c *Client) UntagLogGroupRequest(input *UntagLogGroupInput) UntagLogGroupRe
 // UntagLogGroup API operation.
 type UntagLogGroupRequest struct {
 	*aws.Request
-	Input *UntagLogGroupInput
-	Copy  func(*UntagLogGroupInput) UntagLogGroupRequest
+	Input *types.UntagLogGroupInput
+	Copy  func(*types.UntagLogGroupInput) UntagLogGroupRequest
 }
 
 // Send marshals and sends the UntagLogGroup API request.
@@ -115,7 +63,7 @@ func (r UntagLogGroupRequest) Send(ctx context.Context) (*UntagLogGroupResponse,
 	}
 
 	resp := &UntagLogGroupResponse{
-		UntagLogGroupOutput: r.Request.Data.(*UntagLogGroupOutput),
+		UntagLogGroupOutput: r.Request.Data.(*types.UntagLogGroupOutput),
 		response:            &aws.Response{Request: r.Request},
 	}
 
@@ -125,7 +73,7 @@ func (r UntagLogGroupRequest) Send(ctx context.Context) (*UntagLogGroupResponse,
 // UntagLogGroupResponse is the response type for the
 // UntagLogGroup API operation.
 type UntagLogGroupResponse struct {
-	*UntagLogGroupOutput
+	*types.UntagLogGroupOutput
 
 	response *aws.Response
 }

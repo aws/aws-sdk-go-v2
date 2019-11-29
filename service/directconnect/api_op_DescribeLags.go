@@ -6,32 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/directconnect/types"
 )
-
-type DescribeLagsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the LAG.
-	LagId *string `locationName:"lagId" type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeLagsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type DescribeLagsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The LAGs.
-	Lags []Lag `locationName:"lags" type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeLagsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeLags = "DescribeLags"
 
@@ -48,7 +24,7 @@ const opDescribeLags = "DescribeLags"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DescribeLags
-func (c *Client) DescribeLagsRequest(input *DescribeLagsInput) DescribeLagsRequest {
+func (c *Client) DescribeLagsRequest(input *types.DescribeLagsInput) DescribeLagsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeLags,
 		HTTPMethod: "POST",
@@ -56,10 +32,10 @@ func (c *Client) DescribeLagsRequest(input *DescribeLagsInput) DescribeLagsReque
 	}
 
 	if input == nil {
-		input = &DescribeLagsInput{}
+		input = &types.DescribeLagsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeLagsOutput{})
+	req := c.newRequest(op, input, &types.DescribeLagsOutput{})
 	return DescribeLagsRequest{Request: req, Input: input, Copy: c.DescribeLagsRequest}
 }
 
@@ -67,8 +43,8 @@ func (c *Client) DescribeLagsRequest(input *DescribeLagsInput) DescribeLagsReque
 // DescribeLags API operation.
 type DescribeLagsRequest struct {
 	*aws.Request
-	Input *DescribeLagsInput
-	Copy  func(*DescribeLagsInput) DescribeLagsRequest
+	Input *types.DescribeLagsInput
+	Copy  func(*types.DescribeLagsInput) DescribeLagsRequest
 }
 
 // Send marshals and sends the DescribeLags API request.
@@ -80,7 +56,7 @@ func (r DescribeLagsRequest) Send(ctx context.Context) (*DescribeLagsResponse, e
 	}
 
 	resp := &DescribeLagsResponse{
-		DescribeLagsOutput: r.Request.Data.(*DescribeLagsOutput),
+		DescribeLagsOutput: r.Request.Data.(*types.DescribeLagsOutput),
 		response:           &aws.Response{Request: r.Request},
 	}
 
@@ -90,7 +66,7 @@ func (r DescribeLagsRequest) Send(ctx context.Context) (*DescribeLagsResponse, e
 // DescribeLagsResponse is the response type for the
 // DescribeLags API operation.
 type DescribeLagsResponse struct {
-	*DescribeLagsOutput
+	*types.DescribeLagsOutput
 
 	response *aws.Response
 }

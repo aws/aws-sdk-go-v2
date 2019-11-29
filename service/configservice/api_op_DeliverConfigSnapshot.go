@@ -6,53 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/configservice/types"
 )
-
-// The input for the DeliverConfigSnapshot action.
-type DeliverConfigSnapshotInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the delivery channel through which the snapshot is delivered.
-	//
-	// DeliveryChannelName is a required field
-	DeliveryChannelName *string `locationName:"deliveryChannelName" min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeliverConfigSnapshotInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeliverConfigSnapshotInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeliverConfigSnapshotInput"}
-
-	if s.DeliveryChannelName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DeliveryChannelName"))
-	}
-	if s.DeliveryChannelName != nil && len(*s.DeliveryChannelName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("DeliveryChannelName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// The output for the DeliverConfigSnapshot action, in JSON format.
-type DeliverConfigSnapshotOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the snapshot that is being created.
-	ConfigSnapshotId *string `locationName:"configSnapshotId" type:"string"`
-}
-
-// String returns the string representation
-func (s DeliverConfigSnapshotOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeliverConfigSnapshot = "DeliverConfigSnapshot"
 
@@ -79,7 +34,7 @@ const opDeliverConfigSnapshot = "DeliverConfigSnapshot"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DeliverConfigSnapshot
-func (c *Client) DeliverConfigSnapshotRequest(input *DeliverConfigSnapshotInput) DeliverConfigSnapshotRequest {
+func (c *Client) DeliverConfigSnapshotRequest(input *types.DeliverConfigSnapshotInput) DeliverConfigSnapshotRequest {
 	op := &aws.Operation{
 		Name:       opDeliverConfigSnapshot,
 		HTTPMethod: "POST",
@@ -87,10 +42,10 @@ func (c *Client) DeliverConfigSnapshotRequest(input *DeliverConfigSnapshotInput)
 	}
 
 	if input == nil {
-		input = &DeliverConfigSnapshotInput{}
+		input = &types.DeliverConfigSnapshotInput{}
 	}
 
-	req := c.newRequest(op, input, &DeliverConfigSnapshotOutput{})
+	req := c.newRequest(op, input, &types.DeliverConfigSnapshotOutput{})
 	return DeliverConfigSnapshotRequest{Request: req, Input: input, Copy: c.DeliverConfigSnapshotRequest}
 }
 
@@ -98,8 +53,8 @@ func (c *Client) DeliverConfigSnapshotRequest(input *DeliverConfigSnapshotInput)
 // DeliverConfigSnapshot API operation.
 type DeliverConfigSnapshotRequest struct {
 	*aws.Request
-	Input *DeliverConfigSnapshotInput
-	Copy  func(*DeliverConfigSnapshotInput) DeliverConfigSnapshotRequest
+	Input *types.DeliverConfigSnapshotInput
+	Copy  func(*types.DeliverConfigSnapshotInput) DeliverConfigSnapshotRequest
 }
 
 // Send marshals and sends the DeliverConfigSnapshot API request.
@@ -111,7 +66,7 @@ func (r DeliverConfigSnapshotRequest) Send(ctx context.Context) (*DeliverConfigS
 	}
 
 	resp := &DeliverConfigSnapshotResponse{
-		DeliverConfigSnapshotOutput: r.Request.Data.(*DeliverConfigSnapshotOutput),
+		DeliverConfigSnapshotOutput: r.Request.Data.(*types.DeliverConfigSnapshotOutput),
 		response:                    &aws.Response{Request: r.Request},
 	}
 
@@ -121,7 +76,7 @@ func (r DeliverConfigSnapshotRequest) Send(ctx context.Context) (*DeliverConfigS
 // DeliverConfigSnapshotResponse is the response type for the
 // DeliverConfigSnapshot API operation.
 type DeliverConfigSnapshotResponse struct {
-	*DeliverConfigSnapshotOutput
+	*types.DeliverConfigSnapshotOutput
 
 	response *aws.Response
 }

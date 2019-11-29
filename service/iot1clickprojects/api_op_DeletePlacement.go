@@ -6,85 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/iot1clickprojects/types"
 )
-
-type DeletePlacementInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the empty placement to delete.
-	//
-	// PlacementName is a required field
-	PlacementName *string `location:"uri" locationName:"placementName" min:"1" type:"string" required:"true"`
-
-	// The project containing the empty placement to delete.
-	//
-	// ProjectName is a required field
-	ProjectName *string `location:"uri" locationName:"projectName" min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeletePlacementInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeletePlacementInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeletePlacementInput"}
-
-	if s.PlacementName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("PlacementName"))
-	}
-	if s.PlacementName != nil && len(*s.PlacementName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("PlacementName", 1))
-	}
-
-	if s.ProjectName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ProjectName"))
-	}
-	if s.ProjectName != nil && len(*s.ProjectName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ProjectName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeletePlacementInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.PlacementName != nil {
-		v := *s.PlacementName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "placementName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.ProjectName != nil {
-		v := *s.ProjectName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "projectName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type DeletePlacementOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeletePlacementOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeletePlacementOutput) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
 
 const opDeletePlacement = "DeletePlacement"
 
@@ -104,7 +27,7 @@ const opDeletePlacement = "DeletePlacement"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iot1click-projects-2018-05-14/DeletePlacement
-func (c *Client) DeletePlacementRequest(input *DeletePlacementInput) DeletePlacementRequest {
+func (c *Client) DeletePlacementRequest(input *types.DeletePlacementInput) DeletePlacementRequest {
 	op := &aws.Operation{
 		Name:       opDeletePlacement,
 		HTTPMethod: "DELETE",
@@ -112,10 +35,10 @@ func (c *Client) DeletePlacementRequest(input *DeletePlacementInput) DeletePlace
 	}
 
 	if input == nil {
-		input = &DeletePlacementInput{}
+		input = &types.DeletePlacementInput{}
 	}
 
-	req := c.newRequest(op, input, &DeletePlacementOutput{})
+	req := c.newRequest(op, input, &types.DeletePlacementOutput{})
 	return DeletePlacementRequest{Request: req, Input: input, Copy: c.DeletePlacementRequest}
 }
 
@@ -123,8 +46,8 @@ func (c *Client) DeletePlacementRequest(input *DeletePlacementInput) DeletePlace
 // DeletePlacement API operation.
 type DeletePlacementRequest struct {
 	*aws.Request
-	Input *DeletePlacementInput
-	Copy  func(*DeletePlacementInput) DeletePlacementRequest
+	Input *types.DeletePlacementInput
+	Copy  func(*types.DeletePlacementInput) DeletePlacementRequest
 }
 
 // Send marshals and sends the DeletePlacement API request.
@@ -136,7 +59,7 @@ func (r DeletePlacementRequest) Send(ctx context.Context) (*DeletePlacementRespo
 	}
 
 	resp := &DeletePlacementResponse{
-		DeletePlacementOutput: r.Request.Data.(*DeletePlacementOutput),
+		DeletePlacementOutput: r.Request.Data.(*types.DeletePlacementOutput),
 		response:              &aws.Response{Request: r.Request},
 	}
 
@@ -146,7 +69,7 @@ func (r DeletePlacementRequest) Send(ctx context.Context) (*DeletePlacementRespo
 // DeletePlacementResponse is the response type for the
 // DeletePlacement API operation.
 type DeletePlacementResponse struct {
-	*DeletePlacementOutput
+	*types.DeletePlacementOutput
 
 	response *aws.Response
 }

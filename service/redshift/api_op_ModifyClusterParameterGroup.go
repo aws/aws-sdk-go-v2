@@ -6,69 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/redshift/types"
 )
-
-type ModifyClusterParameterGroupInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the parameter group to be modified.
-	//
-	// ParameterGroupName is a required field
-	ParameterGroupName *string `type:"string" required:"true"`
-
-	// An array of parameters to be modified. A maximum of 20 parameters can be
-	// modified in a single request.
-	//
-	// For each parameter to be modified, you must supply at least the parameter
-	// name and parameter value; other name-value pairs of the parameter are optional.
-	//
-	// For the workload management (WLM) configuration, you must supply all the
-	// name-value pairs in the wlm_json_configuration parameter.
-	//
-	// Parameters is a required field
-	Parameters []Parameter `locationNameList:"Parameter" type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s ModifyClusterParameterGroupInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ModifyClusterParameterGroupInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ModifyClusterParameterGroupInput"}
-
-	if s.ParameterGroupName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ParameterGroupName"))
-	}
-
-	if s.Parameters == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Parameters"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ModifyClusterParameterGroupOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the cluster parameter group.
-	ParameterGroupName *string `type:"string"`
-
-	// The status of the parameter group. For example, if you made a change to a
-	// parameter group name-value pair, then the change could be pending a reboot
-	// of an associated cluster.
-	ParameterGroupStatus *string `type:"string"`
-}
-
-// String returns the string representation
-func (s ModifyClusterParameterGroupOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opModifyClusterParameterGroup = "ModifyClusterParameterGroup"
 
@@ -89,7 +28,7 @@ const opModifyClusterParameterGroup = "ModifyClusterParameterGroup"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ModifyClusterParameterGroup
-func (c *Client) ModifyClusterParameterGroupRequest(input *ModifyClusterParameterGroupInput) ModifyClusterParameterGroupRequest {
+func (c *Client) ModifyClusterParameterGroupRequest(input *types.ModifyClusterParameterGroupInput) ModifyClusterParameterGroupRequest {
 	op := &aws.Operation{
 		Name:       opModifyClusterParameterGroup,
 		HTTPMethod: "POST",
@@ -97,10 +36,10 @@ func (c *Client) ModifyClusterParameterGroupRequest(input *ModifyClusterParamete
 	}
 
 	if input == nil {
-		input = &ModifyClusterParameterGroupInput{}
+		input = &types.ModifyClusterParameterGroupInput{}
 	}
 
-	req := c.newRequest(op, input, &ModifyClusterParameterGroupOutput{})
+	req := c.newRequest(op, input, &types.ModifyClusterParameterGroupOutput{})
 	return ModifyClusterParameterGroupRequest{Request: req, Input: input, Copy: c.ModifyClusterParameterGroupRequest}
 }
 
@@ -108,8 +47,8 @@ func (c *Client) ModifyClusterParameterGroupRequest(input *ModifyClusterParamete
 // ModifyClusterParameterGroup API operation.
 type ModifyClusterParameterGroupRequest struct {
 	*aws.Request
-	Input *ModifyClusterParameterGroupInput
-	Copy  func(*ModifyClusterParameterGroupInput) ModifyClusterParameterGroupRequest
+	Input *types.ModifyClusterParameterGroupInput
+	Copy  func(*types.ModifyClusterParameterGroupInput) ModifyClusterParameterGroupRequest
 }
 
 // Send marshals and sends the ModifyClusterParameterGroup API request.
@@ -121,7 +60,7 @@ func (r ModifyClusterParameterGroupRequest) Send(ctx context.Context) (*ModifyCl
 	}
 
 	resp := &ModifyClusterParameterGroupResponse{
-		ModifyClusterParameterGroupOutput: r.Request.Data.(*ModifyClusterParameterGroupOutput),
+		ModifyClusterParameterGroupOutput: r.Request.Data.(*types.ModifyClusterParameterGroupOutput),
 		response:                          &aws.Response{Request: r.Request},
 	}
 
@@ -131,7 +70,7 @@ func (r ModifyClusterParameterGroupRequest) Send(ctx context.Context) (*ModifyCl
 // ModifyClusterParameterGroupResponse is the response type for the
 // ModifyClusterParameterGroup API operation.
 type ModifyClusterParameterGroupResponse struct {
-	*ModifyClusterParameterGroupOutput
+	*types.ModifyClusterParameterGroupOutput
 
 	response *aws.Response
 }

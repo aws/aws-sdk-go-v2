@@ -4,121 +4,10 @@ package gamelift
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/gamelift/types"
 )
-
-// Represents the input for a request action.
-type CreateGameSessionInput struct {
-	_ struct{} `type:"structure"`
-
-	// Unique identifier for an alias associated with the fleet to create a game
-	// session in. Each request must reference either a fleet ID or alias ID, but
-	// not both.
-	AliasId *string `type:"string"`
-
-	// Unique identifier for a player or entity creating the game session. This
-	// ID is used to enforce a resource protection policy (if one exists) that limits
-	// the number of concurrent active game sessions one player can have.
-	CreatorId *string `min:"1" type:"string"`
-
-	// Unique identifier for a fleet to create a game session in. Each request must
-	// reference either a fleet ID or alias ID, but not both.
-	FleetId *string `type:"string"`
-
-	// Set of custom properties for a game session, formatted as key:value pairs.
-	// These properties are passed to a game server process in the GameSession object
-	// with a request to start a new game session (see Start a Game Session (https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession)).
-	GameProperties []GameProperty `type:"list"`
-
-	// Set of custom game session properties, formatted as a single string value.
-	// This data is passed to a game server process in the GameSession object with
-	// a request to start a new game session (see Start a Game Session (https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession)).
-	GameSessionData *string `min:"1" type:"string"`
-
-	// This parameter is no longer preferred. Please use IdempotencyToken instead.
-	// Custom string that uniquely identifies a request for a new game session.
-	// Maximum token length is 48 characters. If provided, this string is included
-	// in the new game session's ID. (A game session ARN has the following format:
-	// arn:aws:gamelift:<region>::gamesession/<fleet ID>/<custom ID string or idempotency
-	// token>.)
-	GameSessionId *string `min:"1" type:"string"`
-
-	// Custom string that uniquely identifies a request for a new game session.
-	// Maximum token length is 48 characters. If provided, this string is included
-	// in the new game session's ID. (A game session ARN has the following format:
-	// arn:aws:gamelift:<region>::gamesession/<fleet ID>/<custom ID string or idempotency
-	// token>.) Idempotency tokens remain in use for 30 days after a game session
-	// has ended; game session objects are retained for this time period and then
-	// deleted.
-	IdempotencyToken *string `min:"1" type:"string"`
-
-	// Maximum number of players that can be connected simultaneously to the game
-	// session.
-	//
-	// MaximumPlayerSessionCount is a required field
-	MaximumPlayerSessionCount *int64 `type:"integer" required:"true"`
-
-	// Descriptive label that is associated with a game session. Session names do
-	// not need to be unique.
-	Name *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s CreateGameSessionInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateGameSessionInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateGameSessionInput"}
-	if s.CreatorId != nil && len(*s.CreatorId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("CreatorId", 1))
-	}
-	if s.GameSessionData != nil && len(*s.GameSessionData) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("GameSessionData", 1))
-	}
-	if s.GameSessionId != nil && len(*s.GameSessionId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("GameSessionId", 1))
-	}
-	if s.IdempotencyToken != nil && len(*s.IdempotencyToken) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("IdempotencyToken", 1))
-	}
-
-	if s.MaximumPlayerSessionCount == nil {
-		invalidParams.Add(aws.NewErrParamRequired("MaximumPlayerSessionCount"))
-	}
-	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
-	}
-	if s.GameProperties != nil {
-		for i, v := range s.GameProperties {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "GameProperties", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Represents the returned data in response to a request action.
-type CreateGameSessionOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Object that describes the newly created game session record.
-	GameSession *GameSession `type:"structure"`
-}
-
-// String returns the string representation
-func (s CreateGameSessionOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCreateGameSession = "CreateGameSession"
 
@@ -179,7 +68,7 @@ const opCreateGameSession = "CreateGameSession"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/CreateGameSession
-func (c *Client) CreateGameSessionRequest(input *CreateGameSessionInput) CreateGameSessionRequest {
+func (c *Client) CreateGameSessionRequest(input *types.CreateGameSessionInput) CreateGameSessionRequest {
 	op := &aws.Operation{
 		Name:       opCreateGameSession,
 		HTTPMethod: "POST",
@@ -187,10 +76,10 @@ func (c *Client) CreateGameSessionRequest(input *CreateGameSessionInput) CreateG
 	}
 
 	if input == nil {
-		input = &CreateGameSessionInput{}
+		input = &types.CreateGameSessionInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateGameSessionOutput{})
+	req := c.newRequest(op, input, &types.CreateGameSessionOutput{})
 	return CreateGameSessionRequest{Request: req, Input: input, Copy: c.CreateGameSessionRequest}
 }
 
@@ -198,8 +87,8 @@ func (c *Client) CreateGameSessionRequest(input *CreateGameSessionInput) CreateG
 // CreateGameSession API operation.
 type CreateGameSessionRequest struct {
 	*aws.Request
-	Input *CreateGameSessionInput
-	Copy  func(*CreateGameSessionInput) CreateGameSessionRequest
+	Input *types.CreateGameSessionInput
+	Copy  func(*types.CreateGameSessionInput) CreateGameSessionRequest
 }
 
 // Send marshals and sends the CreateGameSession API request.
@@ -211,7 +100,7 @@ func (r CreateGameSessionRequest) Send(ctx context.Context) (*CreateGameSessionR
 	}
 
 	resp := &CreateGameSessionResponse{
-		CreateGameSessionOutput: r.Request.Data.(*CreateGameSessionOutput),
+		CreateGameSessionOutput: r.Request.Data.(*types.CreateGameSessionOutput),
 		response:                &aws.Response{Request: r.Request},
 	}
 
@@ -221,7 +110,7 @@ func (r CreateGameSessionRequest) Send(ctx context.Context) (*CreateGameSessionR
 // CreateGameSessionResponse is the response type for the
 // CreateGameSession API operation.
 type CreateGameSessionResponse struct {
-	*CreateGameSessionOutput
+	*types.CreateGameSessionOutput
 
 	response *aws.Response
 }

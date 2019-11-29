@@ -6,64 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/translate/types"
 )
-
-type GetTerminologyInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the custom terminology being retrieved.
-	//
-	// Name is a required field
-	Name *string `min:"1" type:"string" required:"true"`
-
-	// The data format of the custom terminology being retrieved, either CSV or
-	// TMX.
-	//
-	// TerminologyDataFormat is a required field
-	TerminologyDataFormat TerminologyDataFormat `type:"string" required:"true" enum:"true"`
-}
-
-// String returns the string representation
-func (s GetTerminologyInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetTerminologyInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetTerminologyInput"}
-
-	if s.Name == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Name"))
-	}
-	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
-	}
-	if len(s.TerminologyDataFormat) == 0 {
-		invalidParams.Add(aws.NewErrParamRequired("TerminologyDataFormat"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type GetTerminologyOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The data location of the custom terminology being retrieved. The custom terminology
-	// file is returned in a presigned url that has a 30 minute expiration.
-	TerminologyDataLocation *TerminologyDataLocation `type:"structure"`
-
-	// The properties of the custom terminology being retrieved.
-	TerminologyProperties *TerminologyProperties `type:"structure"`
-}
-
-// String returns the string representation
-func (s GetTerminologyOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetTerminology = "GetTerminology"
 
@@ -80,7 +24,7 @@ const opGetTerminology = "GetTerminology"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/translate-2017-07-01/GetTerminology
-func (c *Client) GetTerminologyRequest(input *GetTerminologyInput) GetTerminologyRequest {
+func (c *Client) GetTerminologyRequest(input *types.GetTerminologyInput) GetTerminologyRequest {
 	op := &aws.Operation{
 		Name:       opGetTerminology,
 		HTTPMethod: "POST",
@@ -88,10 +32,10 @@ func (c *Client) GetTerminologyRequest(input *GetTerminologyInput) GetTerminolog
 	}
 
 	if input == nil {
-		input = &GetTerminologyInput{}
+		input = &types.GetTerminologyInput{}
 	}
 
-	req := c.newRequest(op, input, &GetTerminologyOutput{})
+	req := c.newRequest(op, input, &types.GetTerminologyOutput{})
 	return GetTerminologyRequest{Request: req, Input: input, Copy: c.GetTerminologyRequest}
 }
 
@@ -99,8 +43,8 @@ func (c *Client) GetTerminologyRequest(input *GetTerminologyInput) GetTerminolog
 // GetTerminology API operation.
 type GetTerminologyRequest struct {
 	*aws.Request
-	Input *GetTerminologyInput
-	Copy  func(*GetTerminologyInput) GetTerminologyRequest
+	Input *types.GetTerminologyInput
+	Copy  func(*types.GetTerminologyInput) GetTerminologyRequest
 }
 
 // Send marshals and sends the GetTerminology API request.
@@ -112,7 +56,7 @@ func (r GetTerminologyRequest) Send(ctx context.Context) (*GetTerminologyRespons
 	}
 
 	resp := &GetTerminologyResponse{
-		GetTerminologyOutput: r.Request.Data.(*GetTerminologyOutput),
+		GetTerminologyOutput: r.Request.Data.(*types.GetTerminologyOutput),
 		response:             &aws.Response{Request: r.Request},
 	}
 
@@ -122,7 +66,7 @@ func (r GetTerminologyRequest) Send(ctx context.Context) (*GetTerminologyRespons
 // GetTerminologyResponse is the response type for the
 // GetTerminology API operation.
 type GetTerminologyResponse struct {
-	*GetTerminologyOutput
+	*types.GetTerminologyOutput
 
 	response *aws.Response
 }

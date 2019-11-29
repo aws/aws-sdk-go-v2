@@ -6,44 +6,15 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/workspaces/types"
 )
-
-type ModifyAccountInput struct {
-	_ struct{} `type:"structure"`
-
-	// The IP address range, specified as an IPv4 CIDR block, for the management
-	// network interface. Specify an IP address range that is compatible with your
-	// network and in CIDR notation (that is, specify the range as an IPv4 CIDR
-	// block). The CIDR block size must be /16 (for example, 203.0.113.25/16). It
-	// must also be specified as available by the ListAvailableManagementCidrRanges
-	// operation.
-	DedicatedTenancyManagementCidrRange *string `type:"string"`
-
-	// The status of BYOL.
-	DedicatedTenancySupport DedicatedTenancySupportEnum `type:"string" enum:"true"`
-}
-
-// String returns the string representation
-func (s ModifyAccountInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type ModifyAccountOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s ModifyAccountOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opModifyAccount = "ModifyAccount"
 
 // ModifyAccountRequest returns a request value for making API operation for
 // Amazon WorkSpaces.
 //
-// Modifies the configuration of bring your own license (BYOL) for the specified
+// Modifies the configuration of Bring Your Own License (BYOL) for the specified
 // account.
 //
 //    // Example sending a request using ModifyAccountRequest.
@@ -54,7 +25,7 @@ const opModifyAccount = "ModifyAccount"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/ModifyAccount
-func (c *Client) ModifyAccountRequest(input *ModifyAccountInput) ModifyAccountRequest {
+func (c *Client) ModifyAccountRequest(input *types.ModifyAccountInput) ModifyAccountRequest {
 	op := &aws.Operation{
 		Name:       opModifyAccount,
 		HTTPMethod: "POST",
@@ -62,10 +33,10 @@ func (c *Client) ModifyAccountRequest(input *ModifyAccountInput) ModifyAccountRe
 	}
 
 	if input == nil {
-		input = &ModifyAccountInput{}
+		input = &types.ModifyAccountInput{}
 	}
 
-	req := c.newRequest(op, input, &ModifyAccountOutput{})
+	req := c.newRequest(op, input, &types.ModifyAccountOutput{})
 	return ModifyAccountRequest{Request: req, Input: input, Copy: c.ModifyAccountRequest}
 }
 
@@ -73,8 +44,8 @@ func (c *Client) ModifyAccountRequest(input *ModifyAccountInput) ModifyAccountRe
 // ModifyAccount API operation.
 type ModifyAccountRequest struct {
 	*aws.Request
-	Input *ModifyAccountInput
-	Copy  func(*ModifyAccountInput) ModifyAccountRequest
+	Input *types.ModifyAccountInput
+	Copy  func(*types.ModifyAccountInput) ModifyAccountRequest
 }
 
 // Send marshals and sends the ModifyAccount API request.
@@ -86,7 +57,7 @@ func (r ModifyAccountRequest) Send(ctx context.Context) (*ModifyAccountResponse,
 	}
 
 	resp := &ModifyAccountResponse{
-		ModifyAccountOutput: r.Request.Data.(*ModifyAccountOutput),
+		ModifyAccountOutput: r.Request.Data.(*types.ModifyAccountOutput),
 		response:            &aws.Response{Request: r.Request},
 	}
 
@@ -96,7 +67,7 @@ func (r ModifyAccountRequest) Send(ctx context.Context) (*ModifyAccountResponse,
 // ModifyAccountResponse is the response type for the
 // ModifyAccount API operation.
 type ModifyAccountResponse struct {
-	*ModifyAccountOutput
+	*types.ModifyAccountOutput
 
 	response *aws.Response
 }

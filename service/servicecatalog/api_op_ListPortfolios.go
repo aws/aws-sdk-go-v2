@@ -6,49 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/types"
 )
-
-type ListPortfoliosInput struct {
-	_ struct{} `type:"structure"`
-
-	// The language code.
-	//
-	//    * en - English (default)
-	//
-	//    * jp - Japanese
-	//
-	//    * zh - Chinese
-	AcceptLanguage *string `type:"string"`
-
-	// The maximum number of items to return with this call.
-	PageSize *int64 `type:"integer"`
-
-	// The page token for the next set of results. To retrieve the first set of
-	// results, use null.
-	PageToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s ListPortfoliosInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type ListPortfoliosOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The page token to use to retrieve the next set of results. If there are no
-	// additional results, this value is null.
-	NextPageToken *string `type:"string"`
-
-	// Information about the portfolios.
-	PortfolioDetails []PortfolioDetail `type:"list"`
-}
-
-// String returns the string representation
-func (s ListPortfoliosOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListPortfolios = "ListPortfolios"
 
@@ -65,7 +24,7 @@ const opListPortfolios = "ListPortfolios"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ListPortfolios
-func (c *Client) ListPortfoliosRequest(input *ListPortfoliosInput) ListPortfoliosRequest {
+func (c *Client) ListPortfoliosRequest(input *types.ListPortfoliosInput) ListPortfoliosRequest {
 	op := &aws.Operation{
 		Name:       opListPortfolios,
 		HTTPMethod: "POST",
@@ -79,10 +38,10 @@ func (c *Client) ListPortfoliosRequest(input *ListPortfoliosInput) ListPortfolio
 	}
 
 	if input == nil {
-		input = &ListPortfoliosInput{}
+		input = &types.ListPortfoliosInput{}
 	}
 
-	req := c.newRequest(op, input, &ListPortfoliosOutput{})
+	req := c.newRequest(op, input, &types.ListPortfoliosOutput{})
 	return ListPortfoliosRequest{Request: req, Input: input, Copy: c.ListPortfoliosRequest}
 }
 
@@ -90,8 +49,8 @@ func (c *Client) ListPortfoliosRequest(input *ListPortfoliosInput) ListPortfolio
 // ListPortfolios API operation.
 type ListPortfoliosRequest struct {
 	*aws.Request
-	Input *ListPortfoliosInput
-	Copy  func(*ListPortfoliosInput) ListPortfoliosRequest
+	Input *types.ListPortfoliosInput
+	Copy  func(*types.ListPortfoliosInput) ListPortfoliosRequest
 }
 
 // Send marshals and sends the ListPortfolios API request.
@@ -103,7 +62,7 @@ func (r ListPortfoliosRequest) Send(ctx context.Context) (*ListPortfoliosRespons
 	}
 
 	resp := &ListPortfoliosResponse{
-		ListPortfoliosOutput: r.Request.Data.(*ListPortfoliosOutput),
+		ListPortfoliosOutput: r.Request.Data.(*types.ListPortfoliosOutput),
 		response:             &aws.Response{Request: r.Request},
 	}
 
@@ -133,7 +92,7 @@ func NewListPortfoliosPaginator(req ListPortfoliosRequest) ListPortfoliosPaginat
 	return ListPortfoliosPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListPortfoliosInput
+				var inCpy *types.ListPortfoliosInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -153,14 +112,14 @@ type ListPortfoliosPaginator struct {
 	aws.Pager
 }
 
-func (p *ListPortfoliosPaginator) CurrentPage() *ListPortfoliosOutput {
-	return p.Pager.CurrentPage().(*ListPortfoliosOutput)
+func (p *ListPortfoliosPaginator) CurrentPage() *types.ListPortfoliosOutput {
+	return p.Pager.CurrentPage().(*types.ListPortfoliosOutput)
 }
 
 // ListPortfoliosResponse is the response type for the
 // ListPortfolios API operation.
 type ListPortfoliosResponse struct {
-	*ListPortfoliosOutput
+	*types.ListPortfoliosOutput
 
 	response *aws.Response
 }

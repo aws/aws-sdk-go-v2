@@ -6,74 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/query"
+	"github.com/aws/aws-sdk-go-v2/service/iam/types"
 )
-
-type UpdateAccessKeyInput struct {
-	_ struct{} `type:"structure"`
-
-	// The access key ID of the secret access key you want to update.
-	//
-	// This parameter allows (through its regex pattern (http://wikipedia.org/wiki/regex))
-	// a string of characters that can consist of any upper or lowercased letter
-	// or digit.
-	//
-	// AccessKeyId is a required field
-	AccessKeyId *string `min:"16" type:"string" required:"true"`
-
-	// The status you want to assign to the secret access key. Active means that
-	// the key can be used for API calls to AWS, while Inactive means that the key
-	// cannot be used.
-	//
-	// Status is a required field
-	Status StatusType `type:"string" required:"true" enum:"true"`
-
-	// The name of the user whose key you want to update.
-	//
-	// This parameter allows (through its regex pattern (http://wikipedia.org/wiki/regex))
-	// a string of characters consisting of upper and lowercase alphanumeric characters
-	// with no spaces. You can also include any of the following characters: _+=,.@-
-	UserName *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s UpdateAccessKeyInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateAccessKeyInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateAccessKeyInput"}
-
-	if s.AccessKeyId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("AccessKeyId"))
-	}
-	if s.AccessKeyId != nil && len(*s.AccessKeyId) < 16 {
-		invalidParams.Add(aws.NewErrParamMinLen("AccessKeyId", 16))
-	}
-	if len(s.Status) == 0 {
-		invalidParams.Add(aws.NewErrParamRequired("Status"))
-	}
-	if s.UserName != nil && len(*s.UserName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("UserName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type UpdateAccessKeyOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s UpdateAccessKeyOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opUpdateAccessKey = "UpdateAccessKey"
 
@@ -101,7 +37,7 @@ const opUpdateAccessKey = "UpdateAccessKey"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/UpdateAccessKey
-func (c *Client) UpdateAccessKeyRequest(input *UpdateAccessKeyInput) UpdateAccessKeyRequest {
+func (c *Client) UpdateAccessKeyRequest(input *types.UpdateAccessKeyInput) UpdateAccessKeyRequest {
 	op := &aws.Operation{
 		Name:       opUpdateAccessKey,
 		HTTPMethod: "POST",
@@ -109,10 +45,10 @@ func (c *Client) UpdateAccessKeyRequest(input *UpdateAccessKeyInput) UpdateAcces
 	}
 
 	if input == nil {
-		input = &UpdateAccessKeyInput{}
+		input = &types.UpdateAccessKeyInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateAccessKeyOutput{})
+	req := c.newRequest(op, input, &types.UpdateAccessKeyOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return UpdateAccessKeyRequest{Request: req, Input: input, Copy: c.UpdateAccessKeyRequest}
@@ -122,8 +58,8 @@ func (c *Client) UpdateAccessKeyRequest(input *UpdateAccessKeyInput) UpdateAcces
 // UpdateAccessKey API operation.
 type UpdateAccessKeyRequest struct {
 	*aws.Request
-	Input *UpdateAccessKeyInput
-	Copy  func(*UpdateAccessKeyInput) UpdateAccessKeyRequest
+	Input *types.UpdateAccessKeyInput
+	Copy  func(*types.UpdateAccessKeyInput) UpdateAccessKeyRequest
 }
 
 // Send marshals and sends the UpdateAccessKey API request.
@@ -135,7 +71,7 @@ func (r UpdateAccessKeyRequest) Send(ctx context.Context) (*UpdateAccessKeyRespo
 	}
 
 	resp := &UpdateAccessKeyResponse{
-		UpdateAccessKeyOutput: r.Request.Data.(*UpdateAccessKeyOutput),
+		UpdateAccessKeyOutput: r.Request.Data.(*types.UpdateAccessKeyOutput),
 		response:              &aws.Response{Request: r.Request},
 	}
 
@@ -145,7 +81,7 @@ func (r UpdateAccessKeyRequest) Send(ctx context.Context) (*UpdateAccessKeyRespo
 // UpdateAccessKeyResponse is the response type for the
 // UpdateAccessKey API operation.
 type UpdateAccessKeyResponse struct {
-	*UpdateAccessKeyOutput
+	*types.UpdateAccessKeyOutput
 
 	response *aws.Response
 }

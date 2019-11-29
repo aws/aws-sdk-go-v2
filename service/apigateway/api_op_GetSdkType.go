@@ -6,108 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/apigateway/types"
 )
-
-// Get an SdkType instance.
-type GetSdkTypeInput struct {
-	_ struct{} `type:"structure"`
-
-	// [Required] The identifier of the queried SdkType instance.
-	//
-	// Id is a required field
-	Id *string `location:"uri" locationName:"sdktype_id" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetSdkTypeInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetSdkTypeInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetSdkTypeInput"}
-
-	if s.Id == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Id"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetSdkTypeInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.Id != nil {
-		v := *s.Id
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "sdktype_id", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-// A type of SDK that API Gateway can generate.
-type GetSdkTypeOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A list of configuration properties of an SdkType.
-	ConfigurationProperties []SdkConfigurationProperty `locationName:"configurationProperties" type:"list"`
-
-	// The description of an SdkType.
-	Description *string `locationName:"description" type:"string"`
-
-	// The user-friendly name of an SdkType instance.
-	FriendlyName *string `locationName:"friendlyName" type:"string"`
-
-	// The identifier of an SdkType instance.
-	Id *string `locationName:"id" type:"string"`
-}
-
-// String returns the string representation
-func (s GetSdkTypeOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetSdkTypeOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.ConfigurationProperties != nil {
-		v := s.ConfigurationProperties
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "configurationProperties", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	if s.Description != nil {
-		v := *s.Description
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "description", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.FriendlyName != nil {
-		v := *s.FriendlyName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "friendlyName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Id != nil {
-		v := *s.Id
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "id", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opGetSdkType = "GetSdkType"
 
@@ -120,7 +20,7 @@ const opGetSdkType = "GetSdkType"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) GetSdkTypeRequest(input *GetSdkTypeInput) GetSdkTypeRequest {
+func (c *Client) GetSdkTypeRequest(input *types.GetSdkTypeInput) GetSdkTypeRequest {
 	op := &aws.Operation{
 		Name:       opGetSdkType,
 		HTTPMethod: "GET",
@@ -128,10 +28,10 @@ func (c *Client) GetSdkTypeRequest(input *GetSdkTypeInput) GetSdkTypeRequest {
 	}
 
 	if input == nil {
-		input = &GetSdkTypeInput{}
+		input = &types.GetSdkTypeInput{}
 	}
 
-	req := c.newRequest(op, input, &GetSdkTypeOutput{})
+	req := c.newRequest(op, input, &types.GetSdkTypeOutput{})
 	return GetSdkTypeRequest{Request: req, Input: input, Copy: c.GetSdkTypeRequest}
 }
 
@@ -139,8 +39,8 @@ func (c *Client) GetSdkTypeRequest(input *GetSdkTypeInput) GetSdkTypeRequest {
 // GetSdkType API operation.
 type GetSdkTypeRequest struct {
 	*aws.Request
-	Input *GetSdkTypeInput
-	Copy  func(*GetSdkTypeInput) GetSdkTypeRequest
+	Input *types.GetSdkTypeInput
+	Copy  func(*types.GetSdkTypeInput) GetSdkTypeRequest
 }
 
 // Send marshals and sends the GetSdkType API request.
@@ -152,7 +52,7 @@ func (r GetSdkTypeRequest) Send(ctx context.Context) (*GetSdkTypeResponse, error
 	}
 
 	resp := &GetSdkTypeResponse{
-		GetSdkTypeOutput: r.Request.Data.(*GetSdkTypeOutput),
+		GetSdkTypeOutput: r.Request.Data.(*types.GetSdkTypeOutput),
 		response:         &aws.Response{Request: r.Request},
 	}
 
@@ -162,7 +62,7 @@ func (r GetSdkTypeRequest) Send(ctx context.Context) (*GetSdkTypeResponse, error
 // GetSdkTypeResponse is the response type for the
 // GetSdkType API operation.
 type GetSdkTypeResponse struct {
-	*GetSdkTypeOutput
+	*types.GetSdkTypeOutput
 
 	response *aws.Response
 }

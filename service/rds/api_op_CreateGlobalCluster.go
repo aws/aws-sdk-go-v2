@@ -6,54 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/rds/types"
 )
-
-type CreateGlobalClusterInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name for your database of up to 64 alpha-numeric characters. If you do
-	// not provide a name, Amazon Aurora will not create a database in the global
-	// database cluster you are creating.
-	DatabaseName *string `type:"string"`
-
-	// The deletion protection setting for the new global database. The global database
-	// can't be deleted when deletion protection is enabled.
-	DeletionProtection *bool `type:"boolean"`
-
-	// Provides the name of the database engine to be used for this DB cluster.
-	Engine *string `type:"string"`
-
-	// The engine version of the Aurora global database.
-	EngineVersion *string `type:"string"`
-
-	// The cluster identifier of the new global database cluster.
-	GlobalClusterIdentifier *string `type:"string"`
-
-	// The Amazon Resource Name (ARN) to use as the primary cluster of the global
-	// database. This parameter is optional.
-	SourceDBClusterIdentifier *string `type:"string"`
-
-	// The storage encryption setting for the new global database cluster.
-	StorageEncrypted *bool `type:"boolean"`
-}
-
-// String returns the string representation
-func (s CreateGlobalClusterInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type CreateGlobalClusterOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A data type representing an Aurora global database.
-	GlobalCluster *GlobalCluster `type:"structure"`
-}
-
-// String returns the string representation
-func (s CreateGlobalClusterOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCreateGlobalCluster = "CreateGlobalCluster"
 
@@ -81,7 +35,7 @@ const opCreateGlobalCluster = "CreateGlobalCluster"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateGlobalCluster
-func (c *Client) CreateGlobalClusterRequest(input *CreateGlobalClusterInput) CreateGlobalClusterRequest {
+func (c *Client) CreateGlobalClusterRequest(input *types.CreateGlobalClusterInput) CreateGlobalClusterRequest {
 	op := &aws.Operation{
 		Name:       opCreateGlobalCluster,
 		HTTPMethod: "POST",
@@ -89,10 +43,10 @@ func (c *Client) CreateGlobalClusterRequest(input *CreateGlobalClusterInput) Cre
 	}
 
 	if input == nil {
-		input = &CreateGlobalClusterInput{}
+		input = &types.CreateGlobalClusterInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateGlobalClusterOutput{})
+	req := c.newRequest(op, input, &types.CreateGlobalClusterOutput{})
 	return CreateGlobalClusterRequest{Request: req, Input: input, Copy: c.CreateGlobalClusterRequest}
 }
 
@@ -100,8 +54,8 @@ func (c *Client) CreateGlobalClusterRequest(input *CreateGlobalClusterInput) Cre
 // CreateGlobalCluster API operation.
 type CreateGlobalClusterRequest struct {
 	*aws.Request
-	Input *CreateGlobalClusterInput
-	Copy  func(*CreateGlobalClusterInput) CreateGlobalClusterRequest
+	Input *types.CreateGlobalClusterInput
+	Copy  func(*types.CreateGlobalClusterInput) CreateGlobalClusterRequest
 }
 
 // Send marshals and sends the CreateGlobalCluster API request.
@@ -113,7 +67,7 @@ func (r CreateGlobalClusterRequest) Send(ctx context.Context) (*CreateGlobalClus
 	}
 
 	resp := &CreateGlobalClusterResponse{
-		CreateGlobalClusterOutput: r.Request.Data.(*CreateGlobalClusterOutput),
+		CreateGlobalClusterOutput: r.Request.Data.(*types.CreateGlobalClusterOutput),
 		response:                  &aws.Response{Request: r.Request},
 	}
 
@@ -123,7 +77,7 @@ func (r CreateGlobalClusterRequest) Send(ctx context.Context) (*CreateGlobalClus
 // CreateGlobalClusterResponse is the response type for the
 // CreateGlobalCluster API operation.
 type CreateGlobalClusterResponse struct {
-	*CreateGlobalClusterOutput
+	*types.CreateGlobalClusterOutput
 
 	response *aws.Response
 }

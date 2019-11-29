@@ -6,103 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/types"
 )
-
-type AdminLinkProviderForUserInput struct {
-	_ struct{} `type:"structure"`
-
-	// The existing user in the user pool to be linked to the external identity
-	// provider user account. Can be a native (Username + Password) Cognito User
-	// Pools user or a federated user (for example, a SAML or Facebook user). If
-	// the user doesn't exist, an exception is thrown. This is the user that is
-	// returned when the new user (with the linked identity provider attribute)
-	// signs in.
-	//
-	// For a native username + password user, the ProviderAttributeValue for the
-	// DestinationUser should be the username in the user pool. For a federated
-	// user, it should be the provider-specific user_id.
-	//
-	// The ProviderAttributeName of the DestinationUser is ignored.
-	//
-	// The ProviderName should be set to Cognito for users in Cognito user pools.
-	//
-	// DestinationUser is a required field
-	DestinationUser *ProviderUserIdentifierType `type:"structure" required:"true"`
-
-	// An external identity provider account for a user who does not currently exist
-	// yet in the user pool. This user must be a federated user (for example, a
-	// SAML or Facebook user), not another native user.
-	//
-	// If the SourceUser is a federated social identity provider user (Facebook,
-	// Google, or Login with Amazon), you must set the ProviderAttributeName to
-	// Cognito_Subject. For social identity providers, the ProviderName will be
-	// Facebook, Google, or LoginWithAmazon, and Cognito will automatically parse
-	// the Facebook, Google, and Login with Amazon tokens for id, sub, and user_id,
-	// respectively. The ProviderAttributeValue for the user must be the same value
-	// as the id, sub, or user_id value found in the social identity provider token.
-	//
-	// For SAML, the ProviderAttributeName can be any value that matches a claim
-	// in the SAML assertion. If you wish to link SAML users based on the subject
-	// of the SAML assertion, you should map the subject to a claim through the
-	// SAML identity provider and submit that claim name as the ProviderAttributeName.
-	// If you set ProviderAttributeName to Cognito_Subject, Cognito will automatically
-	// parse the default unique identifier found in the subject from the SAML token.
-	//
-	// SourceUser is a required field
-	SourceUser *ProviderUserIdentifierType `type:"structure" required:"true"`
-
-	// The user pool ID for the user pool.
-	//
-	// UserPoolId is a required field
-	UserPoolId *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s AdminLinkProviderForUserInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *AdminLinkProviderForUserInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "AdminLinkProviderForUserInput"}
-
-	if s.DestinationUser == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DestinationUser"))
-	}
-
-	if s.SourceUser == nil {
-		invalidParams.Add(aws.NewErrParamRequired("SourceUser"))
-	}
-
-	if s.UserPoolId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("UserPoolId"))
-	}
-	if s.DestinationUser != nil {
-		if err := s.DestinationUser.Validate(); err != nil {
-			invalidParams.AddNested("DestinationUser", err.(aws.ErrInvalidParams))
-		}
-	}
-	if s.SourceUser != nil {
-		if err := s.SourceUser.Validate(); err != nil {
-			invalidParams.AddNested("SourceUser", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type AdminLinkProviderForUserOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s AdminLinkProviderForUserOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opAdminLinkProviderForUser = "AdminLinkProviderForUser"
 
@@ -137,7 +42,7 @@ const opAdminLinkProviderForUser = "AdminLinkProviderForUser"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AdminLinkProviderForUser
-func (c *Client) AdminLinkProviderForUserRequest(input *AdminLinkProviderForUserInput) AdminLinkProviderForUserRequest {
+func (c *Client) AdminLinkProviderForUserRequest(input *types.AdminLinkProviderForUserInput) AdminLinkProviderForUserRequest {
 	op := &aws.Operation{
 		Name:       opAdminLinkProviderForUser,
 		HTTPMethod: "POST",
@@ -145,10 +50,10 @@ func (c *Client) AdminLinkProviderForUserRequest(input *AdminLinkProviderForUser
 	}
 
 	if input == nil {
-		input = &AdminLinkProviderForUserInput{}
+		input = &types.AdminLinkProviderForUserInput{}
 	}
 
-	req := c.newRequest(op, input, &AdminLinkProviderForUserOutput{})
+	req := c.newRequest(op, input, &types.AdminLinkProviderForUserOutput{})
 	return AdminLinkProviderForUserRequest{Request: req, Input: input, Copy: c.AdminLinkProviderForUserRequest}
 }
 
@@ -156,8 +61,8 @@ func (c *Client) AdminLinkProviderForUserRequest(input *AdminLinkProviderForUser
 // AdminLinkProviderForUser API operation.
 type AdminLinkProviderForUserRequest struct {
 	*aws.Request
-	Input *AdminLinkProviderForUserInput
-	Copy  func(*AdminLinkProviderForUserInput) AdminLinkProviderForUserRequest
+	Input *types.AdminLinkProviderForUserInput
+	Copy  func(*types.AdminLinkProviderForUserInput) AdminLinkProviderForUserRequest
 }
 
 // Send marshals and sends the AdminLinkProviderForUser API request.
@@ -169,7 +74,7 @@ func (r AdminLinkProviderForUserRequest) Send(ctx context.Context) (*AdminLinkPr
 	}
 
 	resp := &AdminLinkProviderForUserResponse{
-		AdminLinkProviderForUserOutput: r.Request.Data.(*AdminLinkProviderForUserOutput),
+		AdminLinkProviderForUserOutput: r.Request.Data.(*types.AdminLinkProviderForUserOutput),
 		response:                       &aws.Response{Request: r.Request},
 	}
 
@@ -179,7 +84,7 @@ func (r AdminLinkProviderForUserRequest) Send(ctx context.Context) (*AdminLinkPr
 // AdminLinkProviderForUserResponse is the response type for the
 // AdminLinkProviderForUser API operation.
 type AdminLinkProviderForUserResponse struct {
-	*AdminLinkProviderForUserOutput
+	*types.AdminLinkProviderForUserOutput
 
 	response *aws.Response
 }

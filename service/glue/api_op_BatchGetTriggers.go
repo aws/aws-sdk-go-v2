@@ -6,52 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/glue/types"
 )
-
-type BatchGetTriggersInput struct {
-	_ struct{} `type:"structure"`
-
-	// A list of trigger names, which may be the names returned from the ListTriggers
-	// operation.
-	//
-	// TriggerNames is a required field
-	TriggerNames []string `type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s BatchGetTriggersInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *BatchGetTriggersInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "BatchGetTriggersInput"}
-
-	if s.TriggerNames == nil {
-		invalidParams.Add(aws.NewErrParamRequired("TriggerNames"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type BatchGetTriggersOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A list of trigger definitions.
-	Triggers []Trigger `type:"list"`
-
-	// A list of names of triggers not found.
-	TriggersNotFound []string `type:"list"`
-}
-
-// String returns the string representation
-func (s BatchGetTriggersOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opBatchGetTriggers = "BatchGetTriggers"
 
@@ -71,7 +27,7 @@ const opBatchGetTriggers = "BatchGetTriggers"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/BatchGetTriggers
-func (c *Client) BatchGetTriggersRequest(input *BatchGetTriggersInput) BatchGetTriggersRequest {
+func (c *Client) BatchGetTriggersRequest(input *types.BatchGetTriggersInput) BatchGetTriggersRequest {
 	op := &aws.Operation{
 		Name:       opBatchGetTriggers,
 		HTTPMethod: "POST",
@@ -79,10 +35,10 @@ func (c *Client) BatchGetTriggersRequest(input *BatchGetTriggersInput) BatchGetT
 	}
 
 	if input == nil {
-		input = &BatchGetTriggersInput{}
+		input = &types.BatchGetTriggersInput{}
 	}
 
-	req := c.newRequest(op, input, &BatchGetTriggersOutput{})
+	req := c.newRequest(op, input, &types.BatchGetTriggersOutput{})
 	return BatchGetTriggersRequest{Request: req, Input: input, Copy: c.BatchGetTriggersRequest}
 }
 
@@ -90,8 +46,8 @@ func (c *Client) BatchGetTriggersRequest(input *BatchGetTriggersInput) BatchGetT
 // BatchGetTriggers API operation.
 type BatchGetTriggersRequest struct {
 	*aws.Request
-	Input *BatchGetTriggersInput
-	Copy  func(*BatchGetTriggersInput) BatchGetTriggersRequest
+	Input *types.BatchGetTriggersInput
+	Copy  func(*types.BatchGetTriggersInput) BatchGetTriggersRequest
 }
 
 // Send marshals and sends the BatchGetTriggers API request.
@@ -103,7 +59,7 @@ func (r BatchGetTriggersRequest) Send(ctx context.Context) (*BatchGetTriggersRes
 	}
 
 	resp := &BatchGetTriggersResponse{
-		BatchGetTriggersOutput: r.Request.Data.(*BatchGetTriggersOutput),
+		BatchGetTriggersOutput: r.Request.Data.(*types.BatchGetTriggersOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -113,7 +69,7 @@ func (r BatchGetTriggersRequest) Send(ctx context.Context) (*BatchGetTriggersRes
 // BatchGetTriggersResponse is the response type for the
 // BatchGetTriggers API operation.
 type BatchGetTriggersResponse struct {
-	*BatchGetTriggersOutput
+	*types.BatchGetTriggersOutput
 
 	response *aws.Response
 }

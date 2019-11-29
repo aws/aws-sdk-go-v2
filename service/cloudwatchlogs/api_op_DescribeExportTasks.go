@@ -6,68 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/cloudwatchlogs/types"
 )
-
-type DescribeExportTasksInput struct {
-	_ struct{} `type:"structure"`
-
-	// The maximum number of items returned. If you don't specify a value, the default
-	// is up to 50 items.
-	Limit *int64 `locationName:"limit" min:"1" type:"integer"`
-
-	// The token for the next set of items to return. (You received this token from
-	// a previous call.)
-	NextToken *string `locationName:"nextToken" min:"1" type:"string"`
-
-	// The status code of the export task. Specifying a status code filters the
-	// results to zero or more export tasks.
-	StatusCode ExportTaskStatusCode `locationName:"statusCode" type:"string" enum:"true"`
-
-	// The ID of the export task. Specifying a task ID filters the results to zero
-	// or one export tasks.
-	TaskId *string `locationName:"taskId" min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeExportTasksInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeExportTasksInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeExportTasksInput"}
-	if s.Limit != nil && *s.Limit < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("Limit", 1))
-	}
-	if s.NextToken != nil && len(*s.NextToken) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
-	}
-	if s.TaskId != nil && len(*s.TaskId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("TaskId", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribeExportTasksOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The export tasks.
-	ExportTasks []ExportTask `locationName:"exportTasks" type:"list"`
-
-	// The token for the next set of items to return. The token expires after 24
-	// hours.
-	NextToken *string `locationName:"nextToken" min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeExportTasksOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeExportTasks = "DescribeExportTasks"
 
@@ -85,7 +25,7 @@ const opDescribeExportTasks = "DescribeExportTasks"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/DescribeExportTasks
-func (c *Client) DescribeExportTasksRequest(input *DescribeExportTasksInput) DescribeExportTasksRequest {
+func (c *Client) DescribeExportTasksRequest(input *types.DescribeExportTasksInput) DescribeExportTasksRequest {
 	op := &aws.Operation{
 		Name:       opDescribeExportTasks,
 		HTTPMethod: "POST",
@@ -93,10 +33,10 @@ func (c *Client) DescribeExportTasksRequest(input *DescribeExportTasksInput) Des
 	}
 
 	if input == nil {
-		input = &DescribeExportTasksInput{}
+		input = &types.DescribeExportTasksInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeExportTasksOutput{})
+	req := c.newRequest(op, input, &types.DescribeExportTasksOutput{})
 	return DescribeExportTasksRequest{Request: req, Input: input, Copy: c.DescribeExportTasksRequest}
 }
 
@@ -104,8 +44,8 @@ func (c *Client) DescribeExportTasksRequest(input *DescribeExportTasksInput) Des
 // DescribeExportTasks API operation.
 type DescribeExportTasksRequest struct {
 	*aws.Request
-	Input *DescribeExportTasksInput
-	Copy  func(*DescribeExportTasksInput) DescribeExportTasksRequest
+	Input *types.DescribeExportTasksInput
+	Copy  func(*types.DescribeExportTasksInput) DescribeExportTasksRequest
 }
 
 // Send marshals and sends the DescribeExportTasks API request.
@@ -117,7 +57,7 @@ func (r DescribeExportTasksRequest) Send(ctx context.Context) (*DescribeExportTa
 	}
 
 	resp := &DescribeExportTasksResponse{
-		DescribeExportTasksOutput: r.Request.Data.(*DescribeExportTasksOutput),
+		DescribeExportTasksOutput: r.Request.Data.(*types.DescribeExportTasksOutput),
 		response:                  &aws.Response{Request: r.Request},
 	}
 
@@ -127,7 +67,7 @@ func (r DescribeExportTasksRequest) Send(ctx context.Context) (*DescribeExportTa
 // DescribeExportTasksResponse is the response type for the
 // DescribeExportTasks API operation.
 type DescribeExportTasksResponse struct {
-	*DescribeExportTasksOutput
+	*types.DescribeExportTasksOutput
 
 	response *aws.Response
 }

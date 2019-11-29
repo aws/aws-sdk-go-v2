@@ -6,47 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
+	"github.com/aws/aws-sdk-go-v2/service/personalize/types"
 )
-
-type DeleteDatasetGroupInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ARN of the dataset group to delete.
-	//
-	// DatasetGroupArn is a required field
-	DatasetGroupArn *string `locationName:"datasetGroupArn" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteDatasetGroupInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteDatasetGroupInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteDatasetGroupInput"}
-
-	if s.DatasetGroupArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DatasetGroupArn"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteDatasetGroupOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteDatasetGroupOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteDatasetGroup = "DeleteDatasetGroup"
 
@@ -70,7 +33,7 @@ const opDeleteDatasetGroup = "DeleteDatasetGroup"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/DeleteDatasetGroup
-func (c *Client) DeleteDatasetGroupRequest(input *DeleteDatasetGroupInput) DeleteDatasetGroupRequest {
+func (c *Client) DeleteDatasetGroupRequest(input *types.DeleteDatasetGroupInput) DeleteDatasetGroupRequest {
 	op := &aws.Operation{
 		Name:       opDeleteDatasetGroup,
 		HTTPMethod: "POST",
@@ -78,10 +41,10 @@ func (c *Client) DeleteDatasetGroupRequest(input *DeleteDatasetGroupInput) Delet
 	}
 
 	if input == nil {
-		input = &DeleteDatasetGroupInput{}
+		input = &types.DeleteDatasetGroupInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteDatasetGroupOutput{})
+	req := c.newRequest(op, input, &types.DeleteDatasetGroupOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return DeleteDatasetGroupRequest{Request: req, Input: input, Copy: c.DeleteDatasetGroupRequest}
@@ -91,8 +54,8 @@ func (c *Client) DeleteDatasetGroupRequest(input *DeleteDatasetGroupInput) Delet
 // DeleteDatasetGroup API operation.
 type DeleteDatasetGroupRequest struct {
 	*aws.Request
-	Input *DeleteDatasetGroupInput
-	Copy  func(*DeleteDatasetGroupInput) DeleteDatasetGroupRequest
+	Input *types.DeleteDatasetGroupInput
+	Copy  func(*types.DeleteDatasetGroupInput) DeleteDatasetGroupRequest
 }
 
 // Send marshals and sends the DeleteDatasetGroup API request.
@@ -104,7 +67,7 @@ func (r DeleteDatasetGroupRequest) Send(ctx context.Context) (*DeleteDatasetGrou
 	}
 
 	resp := &DeleteDatasetGroupResponse{
-		DeleteDatasetGroupOutput: r.Request.Data.(*DeleteDatasetGroupOutput),
+		DeleteDatasetGroupOutput: r.Request.Data.(*types.DeleteDatasetGroupOutput),
 		response:                 &aws.Response{Request: r.Request},
 	}
 
@@ -114,7 +77,7 @@ func (r DeleteDatasetGroupRequest) Send(ctx context.Context) (*DeleteDatasetGrou
 // DeleteDatasetGroupResponse is the response type for the
 // DeleteDatasetGroup API operation.
 type DeleteDatasetGroupResponse struct {
-	*DeleteDatasetGroupOutput
+	*types.DeleteDatasetGroupOutput
 
 	response *aws.Response
 }

@@ -6,89 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/pinpoint/types"
 )
-
-type GetImportJobInput struct {
-	_ struct{} `type:"structure"`
-
-	// ApplicationId is a required field
-	ApplicationId *string `location:"uri" locationName:"application-id" type:"string" required:"true"`
-
-	// JobId is a required field
-	JobId *string `location:"uri" locationName:"job-id" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetImportJobInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetImportJobInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetImportJobInput"}
-
-	if s.ApplicationId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ApplicationId"))
-	}
-
-	if s.JobId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("JobId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetImportJobInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.ApplicationId != nil {
-		v := *s.ApplicationId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "application-id", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.JobId != nil {
-		v := *s.JobId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "job-id", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type GetImportJobOutput struct {
-	_ struct{} `type:"structure" payload:"ImportJobResponse"`
-
-	// Provides information about the status and settings of a job that imports
-	// endpoint definitions from one or more files. The files can be stored in an
-	// Amazon Simple Storage Service (Amazon S3) bucket or uploaded directly from
-	// a computer by using the Amazon Pinpoint console.
-	//
-	// ImportJobResponse is a required field
-	ImportJobResponse *ImportJobResponse `type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s GetImportJobOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetImportJobOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.ImportJobResponse != nil {
-		v := s.ImportJobResponse
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.PayloadTarget, "ImportJobResponse", v, metadata)
-	}
-	return nil
-}
 
 const opGetImportJob = "GetImportJob"
 
@@ -106,7 +25,7 @@ const opGetImportJob = "GetImportJob"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetImportJob
-func (c *Client) GetImportJobRequest(input *GetImportJobInput) GetImportJobRequest {
+func (c *Client) GetImportJobRequest(input *types.GetImportJobInput) GetImportJobRequest {
 	op := &aws.Operation{
 		Name:       opGetImportJob,
 		HTTPMethod: "GET",
@@ -114,10 +33,10 @@ func (c *Client) GetImportJobRequest(input *GetImportJobInput) GetImportJobReque
 	}
 
 	if input == nil {
-		input = &GetImportJobInput{}
+		input = &types.GetImportJobInput{}
 	}
 
-	req := c.newRequest(op, input, &GetImportJobOutput{})
+	req := c.newRequest(op, input, &types.GetImportJobOutput{})
 	return GetImportJobRequest{Request: req, Input: input, Copy: c.GetImportJobRequest}
 }
 
@@ -125,8 +44,8 @@ func (c *Client) GetImportJobRequest(input *GetImportJobInput) GetImportJobReque
 // GetImportJob API operation.
 type GetImportJobRequest struct {
 	*aws.Request
-	Input *GetImportJobInput
-	Copy  func(*GetImportJobInput) GetImportJobRequest
+	Input *types.GetImportJobInput
+	Copy  func(*types.GetImportJobInput) GetImportJobRequest
 }
 
 // Send marshals and sends the GetImportJob API request.
@@ -138,7 +57,7 @@ func (r GetImportJobRequest) Send(ctx context.Context) (*GetImportJobResponse, e
 	}
 
 	resp := &GetImportJobResponse{
-		GetImportJobOutput: r.Request.Data.(*GetImportJobOutput),
+		GetImportJobOutput: r.Request.Data.(*types.GetImportJobOutput),
 		response:           &aws.Response{Request: r.Request},
 	}
 
@@ -148,7 +67,7 @@ func (r GetImportJobRequest) Send(ctx context.Context) (*GetImportJobResponse, e
 // GetImportJobResponse is the response type for the
 // GetImportJob API operation.
 type GetImportJobResponse struct {
-	*GetImportJobOutput
+	*types.GetImportJobOutput
 
 	response *aws.Response
 }

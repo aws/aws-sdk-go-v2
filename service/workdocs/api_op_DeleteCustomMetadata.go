@@ -6,118 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/workdocs/types"
 )
-
-type DeleteCustomMetadataInput struct {
-	_ struct{} `type:"structure"`
-
-	// Amazon WorkDocs authentication token. Do not set this field when using administrative
-	// API actions, as in accessing the API using AWS credentials.
-	AuthenticationToken *string `location:"header" locationName:"Authentication" min:"1" type:"string" sensitive:"true"`
-
-	// Flag to indicate removal of all custom metadata properties from the specified
-	// resource.
-	DeleteAll *bool `location:"querystring" locationName:"deleteAll" type:"boolean"`
-
-	// List of properties to remove.
-	Keys []string `location:"querystring" locationName:"keys" type:"list"`
-
-	// The ID of the resource, either a document or folder.
-	//
-	// ResourceId is a required field
-	ResourceId *string `location:"uri" locationName:"ResourceId" min:"1" type:"string" required:"true"`
-
-	// The ID of the version, if the custom metadata is being deleted from a document
-	// version.
-	VersionId *string `location:"querystring" locationName:"versionId" min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s DeleteCustomMetadataInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteCustomMetadataInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteCustomMetadataInput"}
-	if s.AuthenticationToken != nil && len(*s.AuthenticationToken) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("AuthenticationToken", 1))
-	}
-
-	if s.ResourceId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ResourceId"))
-	}
-	if s.ResourceId != nil && len(*s.ResourceId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ResourceId", 1))
-	}
-	if s.VersionId != nil && len(*s.VersionId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("VersionId", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteCustomMetadataInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.AuthenticationToken != nil {
-		v := *s.AuthenticationToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "Authentication", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.ResourceId != nil {
-		v := *s.ResourceId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "ResourceId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.DeleteAll != nil {
-		v := *s.DeleteAll
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "deleteAll", protocol.BoolValue(v), metadata)
-	}
-	if s.Keys != nil {
-		v := s.Keys
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.QueryTarget, "keys", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
-		}
-		ls0.End()
-
-	}
-	if s.VersionId != nil {
-		v := *s.VersionId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "versionId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type DeleteCustomMetadataOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteCustomMetadataOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteCustomMetadataOutput) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
 
 const opDeleteCustomMetadata = "DeleteCustomMetadata"
 
@@ -134,7 +24,7 @@ const opDeleteCustomMetadata = "DeleteCustomMetadata"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/DeleteCustomMetadata
-func (c *Client) DeleteCustomMetadataRequest(input *DeleteCustomMetadataInput) DeleteCustomMetadataRequest {
+func (c *Client) DeleteCustomMetadataRequest(input *types.DeleteCustomMetadataInput) DeleteCustomMetadataRequest {
 	op := &aws.Operation{
 		Name:       opDeleteCustomMetadata,
 		HTTPMethod: "DELETE",
@@ -142,10 +32,10 @@ func (c *Client) DeleteCustomMetadataRequest(input *DeleteCustomMetadataInput) D
 	}
 
 	if input == nil {
-		input = &DeleteCustomMetadataInput{}
+		input = &types.DeleteCustomMetadataInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteCustomMetadataOutput{})
+	req := c.newRequest(op, input, &types.DeleteCustomMetadataOutput{})
 	return DeleteCustomMetadataRequest{Request: req, Input: input, Copy: c.DeleteCustomMetadataRequest}
 }
 
@@ -153,8 +43,8 @@ func (c *Client) DeleteCustomMetadataRequest(input *DeleteCustomMetadataInput) D
 // DeleteCustomMetadata API operation.
 type DeleteCustomMetadataRequest struct {
 	*aws.Request
-	Input *DeleteCustomMetadataInput
-	Copy  func(*DeleteCustomMetadataInput) DeleteCustomMetadataRequest
+	Input *types.DeleteCustomMetadataInput
+	Copy  func(*types.DeleteCustomMetadataInput) DeleteCustomMetadataRequest
 }
 
 // Send marshals and sends the DeleteCustomMetadata API request.
@@ -166,7 +56,7 @@ func (r DeleteCustomMetadataRequest) Send(ctx context.Context) (*DeleteCustomMet
 	}
 
 	resp := &DeleteCustomMetadataResponse{
-		DeleteCustomMetadataOutput: r.Request.Data.(*DeleteCustomMetadataOutput),
+		DeleteCustomMetadataOutput: r.Request.Data.(*types.DeleteCustomMetadataOutput),
 		response:                   &aws.Response{Request: r.Request},
 	}
 
@@ -176,7 +66,7 @@ func (r DeleteCustomMetadataRequest) Send(ctx context.Context) (*DeleteCustomMet
 // DeleteCustomMetadataResponse is the response type for the
 // DeleteCustomMetadata API operation.
 type DeleteCustomMetadataResponse struct {
-	*DeleteCustomMetadataOutput
+	*types.DeleteCustomMetadataOutput
 
 	response *aws.Response
 }

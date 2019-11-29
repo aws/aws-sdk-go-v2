@@ -6,107 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/clouddirectory/types"
 )
-
-type ListDirectoriesInput struct {
-	_ struct{} `type:"structure"`
-
-	// The maximum number of results to retrieve.
-	MaxResults *int64 `min:"1" type:"integer"`
-
-	// The pagination token.
-	NextToken *string `type:"string"`
-
-	// The state of the directories in the list. Can be either Enabled, Disabled,
-	// or Deleted.
-	State DirectoryState `locationName:"state" type:"string" enum:"true"`
-}
-
-// String returns the string representation
-func (s ListDirectoriesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListDirectoriesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListDirectoriesInput"}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListDirectoriesInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.MaxResults != nil {
-		v := *s.MaxResults
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "MaxResults", protocol.Int64Value(v), metadata)
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if len(s.State) > 0 {
-		v := s.State
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "state", protocol.QuotedValue{ValueMarshaler: v}, metadata)
-	}
-	return nil
-}
-
-type ListDirectoriesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Lists all directories that are associated with your account in pagination
-	// fashion.
-	//
-	// Directories is a required field
-	Directories []Directory `type:"list" required:"true"`
-
-	// The pagination token.
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s ListDirectoriesOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListDirectoriesOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.Directories != nil {
-		v := s.Directories
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "Directories", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opListDirectories = "ListDirectories"
 
@@ -123,7 +24,7 @@ const opListDirectories = "ListDirectories"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/ListDirectories
-func (c *Client) ListDirectoriesRequest(input *ListDirectoriesInput) ListDirectoriesRequest {
+func (c *Client) ListDirectoriesRequest(input *types.ListDirectoriesInput) ListDirectoriesRequest {
 	op := &aws.Operation{
 		Name:       opListDirectories,
 		HTTPMethod: "POST",
@@ -137,10 +38,10 @@ func (c *Client) ListDirectoriesRequest(input *ListDirectoriesInput) ListDirecto
 	}
 
 	if input == nil {
-		input = &ListDirectoriesInput{}
+		input = &types.ListDirectoriesInput{}
 	}
 
-	req := c.newRequest(op, input, &ListDirectoriesOutput{})
+	req := c.newRequest(op, input, &types.ListDirectoriesOutput{})
 	return ListDirectoriesRequest{Request: req, Input: input, Copy: c.ListDirectoriesRequest}
 }
 
@@ -148,8 +49,8 @@ func (c *Client) ListDirectoriesRequest(input *ListDirectoriesInput) ListDirecto
 // ListDirectories API operation.
 type ListDirectoriesRequest struct {
 	*aws.Request
-	Input *ListDirectoriesInput
-	Copy  func(*ListDirectoriesInput) ListDirectoriesRequest
+	Input *types.ListDirectoriesInput
+	Copy  func(*types.ListDirectoriesInput) ListDirectoriesRequest
 }
 
 // Send marshals and sends the ListDirectories API request.
@@ -161,7 +62,7 @@ func (r ListDirectoriesRequest) Send(ctx context.Context) (*ListDirectoriesRespo
 	}
 
 	resp := &ListDirectoriesResponse{
-		ListDirectoriesOutput: r.Request.Data.(*ListDirectoriesOutput),
+		ListDirectoriesOutput: r.Request.Data.(*types.ListDirectoriesOutput),
 		response:              &aws.Response{Request: r.Request},
 	}
 
@@ -191,7 +92,7 @@ func NewListDirectoriesPaginator(req ListDirectoriesRequest) ListDirectoriesPagi
 	return ListDirectoriesPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListDirectoriesInput
+				var inCpy *types.ListDirectoriesInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -211,14 +112,14 @@ type ListDirectoriesPaginator struct {
 	aws.Pager
 }
 
-func (p *ListDirectoriesPaginator) CurrentPage() *ListDirectoriesOutput {
-	return p.Pager.CurrentPage().(*ListDirectoriesOutput)
+func (p *ListDirectoriesPaginator) CurrentPage() *types.ListDirectoriesOutput {
+	return p.Pager.CurrentPage().(*types.ListDirectoriesOutput)
 }
 
 // ListDirectoriesResponse is the response type for the
 // ListDirectories API operation.
 type ListDirectoriesResponse struct {
-	*ListDirectoriesOutput
+	*types.ListDirectoriesOutput
 
 	response *aws.Response
 }

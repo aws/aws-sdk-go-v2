@@ -6,83 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/redshift/types"
 )
-
-type DescribeNodeConfigurationOptionsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The action type to evaluate for possible node configurations. Currently,
-	// it must be "restore-cluster".
-	//
-	// ActionType is a required field
-	ActionType ActionType `type:"string" required:"true" enum:"true"`
-
-	// A set of name, operator, and value items to filter the results.
-	Filters []NodeConfigurationOptionsFilter `locationName:"Filter" locationNameList:"NodeConfigurationOptionsFilter" type:"list"`
-
-	// An optional parameter that specifies the starting point to return a set of
-	// response records. When the results of a DescribeNodeConfigurationOptions
-	// request exceed the value specified in MaxRecords, AWS returns a value in
-	// the Marker field of the response. You can retrieve the next set of response
-	// records by providing the returned marker value in the Marker parameter and
-	// retrying the request.
-	Marker *string `type:"string"`
-
-	// The maximum number of response records to return in each call. If the number
-	// of remaining response records exceeds the specified MaxRecords value, a value
-	// is returned in a marker field of the response. You can retrieve the next
-	// set of records by retrying the command with the returned marker value.
-	//
-	// Default: 500
-	//
-	// Constraints: minimum 100, maximum 500.
-	MaxRecords *int64 `type:"integer"`
-
-	// The AWS customer account used to create or copy the snapshot. Required if
-	// you are restoring a snapshot you do not own, optional if you own the snapshot.
-	OwnerAccount *string `type:"string"`
-
-	// The identifier of the snapshot to evaluate for possible node configurations.
-	SnapshotIdentifier *string `type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeNodeConfigurationOptionsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeNodeConfigurationOptionsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeNodeConfigurationOptionsInput"}
-	if len(s.ActionType) == 0 {
-		invalidParams.Add(aws.NewErrParamRequired("ActionType"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribeNodeConfigurationOptionsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A value that indicates the starting point for the next set of response records
-	// in a subsequent request. If a value is returned in a response, you can retrieve
-	// the next set of records by providing this returned marker value in the Marker
-	// parameter and retrying the command. If the Marker field is empty, all response
-	// records have been retrieved for the request.
-	Marker *string `type:"string"`
-
-	// A list of valid node configurations.
-	NodeConfigurationOptionList []NodeConfigurationOption `locationNameList:"NodeConfigurationOption" type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeNodeConfigurationOptionsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeNodeConfigurationOptions = "DescribeNodeConfigurationOptions"
 
@@ -100,7 +25,7 @@ const opDescribeNodeConfigurationOptions = "DescribeNodeConfigurationOptions"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeNodeConfigurationOptions
-func (c *Client) DescribeNodeConfigurationOptionsRequest(input *DescribeNodeConfigurationOptionsInput) DescribeNodeConfigurationOptionsRequest {
+func (c *Client) DescribeNodeConfigurationOptionsRequest(input *types.DescribeNodeConfigurationOptionsInput) DescribeNodeConfigurationOptionsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeNodeConfigurationOptions,
 		HTTPMethod: "POST",
@@ -114,10 +39,10 @@ func (c *Client) DescribeNodeConfigurationOptionsRequest(input *DescribeNodeConf
 	}
 
 	if input == nil {
-		input = &DescribeNodeConfigurationOptionsInput{}
+		input = &types.DescribeNodeConfigurationOptionsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeNodeConfigurationOptionsOutput{})
+	req := c.newRequest(op, input, &types.DescribeNodeConfigurationOptionsOutput{})
 	return DescribeNodeConfigurationOptionsRequest{Request: req, Input: input, Copy: c.DescribeNodeConfigurationOptionsRequest}
 }
 
@@ -125,8 +50,8 @@ func (c *Client) DescribeNodeConfigurationOptionsRequest(input *DescribeNodeConf
 // DescribeNodeConfigurationOptions API operation.
 type DescribeNodeConfigurationOptionsRequest struct {
 	*aws.Request
-	Input *DescribeNodeConfigurationOptionsInput
-	Copy  func(*DescribeNodeConfigurationOptionsInput) DescribeNodeConfigurationOptionsRequest
+	Input *types.DescribeNodeConfigurationOptionsInput
+	Copy  func(*types.DescribeNodeConfigurationOptionsInput) DescribeNodeConfigurationOptionsRequest
 }
 
 // Send marshals and sends the DescribeNodeConfigurationOptions API request.
@@ -138,7 +63,7 @@ func (r DescribeNodeConfigurationOptionsRequest) Send(ctx context.Context) (*Des
 	}
 
 	resp := &DescribeNodeConfigurationOptionsResponse{
-		DescribeNodeConfigurationOptionsOutput: r.Request.Data.(*DescribeNodeConfigurationOptionsOutput),
+		DescribeNodeConfigurationOptionsOutput: r.Request.Data.(*types.DescribeNodeConfigurationOptionsOutput),
 		response:                               &aws.Response{Request: r.Request},
 	}
 
@@ -168,7 +93,7 @@ func NewDescribeNodeConfigurationOptionsPaginator(req DescribeNodeConfigurationO
 	return DescribeNodeConfigurationOptionsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *DescribeNodeConfigurationOptionsInput
+				var inCpy *types.DescribeNodeConfigurationOptionsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -188,14 +113,14 @@ type DescribeNodeConfigurationOptionsPaginator struct {
 	aws.Pager
 }
 
-func (p *DescribeNodeConfigurationOptionsPaginator) CurrentPage() *DescribeNodeConfigurationOptionsOutput {
-	return p.Pager.CurrentPage().(*DescribeNodeConfigurationOptionsOutput)
+func (p *DescribeNodeConfigurationOptionsPaginator) CurrentPage() *types.DescribeNodeConfigurationOptionsOutput {
+	return p.Pager.CurrentPage().(*types.DescribeNodeConfigurationOptionsOutput)
 }
 
 // DescribeNodeConfigurationOptionsResponse is the response type for the
 // DescribeNodeConfigurationOptions API operation.
 type DescribeNodeConfigurationOptionsResponse struct {
-	*DescribeNodeConfigurationOptionsOutput
+	*types.DescribeNodeConfigurationOptionsOutput
 
 	response *aws.Response
 }

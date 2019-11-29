@@ -7,6 +7,7 @@ import (
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
+	"github.com/aws/aws-sdk-go-v2/service/ses/types"
 )
 
 // WaitUntilIdentityExists uses the Amazon SES API operation
@@ -18,7 +19,7 @@ import (
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Client) WaitUntilIdentityExists(ctx context.Context, input *GetIdentityVerificationAttributesInput, opts ...aws.WaiterOption) error {
+func (c *Client) WaitUntilIdentityExists(ctx context.Context, input *types.GetIdentityVerificationAttributesInput, opts ...aws.WaiterOption) error {
 	w := aws.Waiter{
 		Name:        "WaitUntilIdentityExists",
 		MaxAttempts: 20,
@@ -32,7 +33,7 @@ func (c *Client) WaitUntilIdentityExists(ctx context.Context, input *GetIdentity
 		},
 		Logger: c.Config.Logger,
 		NewRequest: func(opts []aws.Option) (*aws.Request, error) {
-			var inCpy *GetIdentityVerificationAttributesInput
+			var inCpy *types.GetIdentityVerificationAttributesInput
 			if input != nil {
 				tmp := *input
 				inCpy = &tmp

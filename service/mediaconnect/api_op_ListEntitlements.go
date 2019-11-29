@@ -6,99 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/mediaconnect/types"
 )
-
-type ListEntitlementsInput struct {
-	_ struct{} `type:"structure"`
-
-	MaxResults *int64 `location:"querystring" locationName:"maxResults" min:"1" type:"integer"`
-
-	NextToken *string `location:"querystring" locationName:"nextToken" type:"string"`
-}
-
-// String returns the string representation
-func (s ListEntitlementsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListEntitlementsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListEntitlementsInput"}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListEntitlementsInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.MaxResults != nil {
-		v := *s.MaxResults
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "maxResults", protocol.Int64Value(v), metadata)
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-// The result of a successful ListEntitlements request. The response includes
-// the ARN of each entitlement, the name of the associated flow, and the NextToken
-// to use in a subsequent ListEntitlements request.
-type ListEntitlementsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A list of entitlements that have been granted to you from other AWS accounts.
-	Entitlements []ListedEntitlement `locationName:"entitlements" type:"list"`
-
-	// The token that identifies which batch of results that you want to see. For
-	// example, you submit a ListEntitlements request with MaxResults set at 5.
-	// The service returns the first batch of results (up to 5) and a NextToken
-	// value. To see the next batch of results, you can submit the ListEntitlements
-	// request a second time and specify the NextToken value.
-	NextToken *string `locationName:"nextToken" type:"string"`
-}
-
-// String returns the string representation
-func (s ListEntitlementsOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListEntitlementsOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.Entitlements != nil {
-		v := s.Entitlements
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "entitlements", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opListEntitlements = "ListEntitlements"
 
@@ -116,7 +25,7 @@ const opListEntitlements = "ListEntitlements"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/ListEntitlements
-func (c *Client) ListEntitlementsRequest(input *ListEntitlementsInput) ListEntitlementsRequest {
+func (c *Client) ListEntitlementsRequest(input *types.ListEntitlementsInput) ListEntitlementsRequest {
 	op := &aws.Operation{
 		Name:       opListEntitlements,
 		HTTPMethod: "GET",
@@ -130,10 +39,10 @@ func (c *Client) ListEntitlementsRequest(input *ListEntitlementsInput) ListEntit
 	}
 
 	if input == nil {
-		input = &ListEntitlementsInput{}
+		input = &types.ListEntitlementsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListEntitlementsOutput{})
+	req := c.newRequest(op, input, &types.ListEntitlementsOutput{})
 	return ListEntitlementsRequest{Request: req, Input: input, Copy: c.ListEntitlementsRequest}
 }
 
@@ -141,8 +50,8 @@ func (c *Client) ListEntitlementsRequest(input *ListEntitlementsInput) ListEntit
 // ListEntitlements API operation.
 type ListEntitlementsRequest struct {
 	*aws.Request
-	Input *ListEntitlementsInput
-	Copy  func(*ListEntitlementsInput) ListEntitlementsRequest
+	Input *types.ListEntitlementsInput
+	Copy  func(*types.ListEntitlementsInput) ListEntitlementsRequest
 }
 
 // Send marshals and sends the ListEntitlements API request.
@@ -154,7 +63,7 @@ func (r ListEntitlementsRequest) Send(ctx context.Context) (*ListEntitlementsRes
 	}
 
 	resp := &ListEntitlementsResponse{
-		ListEntitlementsOutput: r.Request.Data.(*ListEntitlementsOutput),
+		ListEntitlementsOutput: r.Request.Data.(*types.ListEntitlementsOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -184,7 +93,7 @@ func NewListEntitlementsPaginator(req ListEntitlementsRequest) ListEntitlementsP
 	return ListEntitlementsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListEntitlementsInput
+				var inCpy *types.ListEntitlementsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -204,14 +113,14 @@ type ListEntitlementsPaginator struct {
 	aws.Pager
 }
 
-func (p *ListEntitlementsPaginator) CurrentPage() *ListEntitlementsOutput {
-	return p.Pager.CurrentPage().(*ListEntitlementsOutput)
+func (p *ListEntitlementsPaginator) CurrentPage() *types.ListEntitlementsOutput {
+	return p.Pager.CurrentPage().(*types.ListEntitlementsOutput)
 }
 
 // ListEntitlementsResponse is the response type for the
 // ListEntitlements API operation.
 type ListEntitlementsResponse struct {
-	*ListEntitlementsOutput
+	*types.ListEntitlementsOutput
 
 	response *aws.Response
 }

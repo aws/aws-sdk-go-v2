@@ -6,156 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/swf/types"
 )
-
-type ListClosedWorkflowExecutionsInput struct {
-	_ struct{} `type:"structure"`
-
-	// If specified, only workflow executions that match this close status are listed.
-	// For example, if TERMINATED is specified, then only TERMINATED workflow executions
-	// are listed.
-	//
-	// closeStatusFilter, executionFilter, typeFilter and tagFilter are mutually
-	// exclusive. You can specify at most one of these in a request.
-	CloseStatusFilter *CloseStatusFilter `locationName:"closeStatusFilter" type:"structure"`
-
-	// If specified, the workflow executions are included in the returned results
-	// based on whether their close times are within the range specified by this
-	// filter. Also, if this parameter is specified, the returned results are ordered
-	// by their close times.
-	//
-	// startTimeFilter and closeTimeFilter are mutually exclusive. You must specify
-	// one of these in a request but not both.
-	CloseTimeFilter *ExecutionTimeFilter `locationName:"closeTimeFilter" type:"structure"`
-
-	// The name of the domain that contains the workflow executions to list.
-	//
-	// Domain is a required field
-	Domain *string `locationName:"domain" min:"1" type:"string" required:"true"`
-
-	// If specified, only workflow executions matching the workflow ID specified
-	// in the filter are returned.
-	//
-	// closeStatusFilter, executionFilter, typeFilter and tagFilter are mutually
-	// exclusive. You can specify at most one of these in a request.
-	ExecutionFilter *WorkflowExecutionFilter `locationName:"executionFilter" type:"structure"`
-
-	// The maximum number of results that are returned per call. Use nextPageToken
-	// to obtain further pages of results.
-	MaximumPageSize *int64 `locationName:"maximumPageSize" type:"integer"`
-
-	// If NextPageToken is returned there are more results available. The value
-	// of NextPageToken is a unique pagination token for each page. Make the call
-	// again using the returned token to retrieve the next page. Keep all other
-	// arguments unchanged. Each pagination token expires after 60 seconds. Using
-	// an expired pagination token will return a 400 error: "Specified token has
-	// exceeded its maximum lifetime".
-	//
-	// The configured maximumPageSize determines how many results can be returned
-	// in a single call.
-	NextPageToken *string `locationName:"nextPageToken" type:"string"`
-
-	// When set to true, returns the results in reverse order. By default the results
-	// are returned in descending order of the start or the close time of the executions.
-	ReverseOrder *bool `locationName:"reverseOrder" type:"boolean"`
-
-	// If specified, the workflow executions are included in the returned results
-	// based on whether their start times are within the range specified by this
-	// filter. Also, if this parameter is specified, the returned results are ordered
-	// by their start times.
-	//
-	// startTimeFilter and closeTimeFilter are mutually exclusive. You must specify
-	// one of these in a request but not both.
-	StartTimeFilter *ExecutionTimeFilter `locationName:"startTimeFilter" type:"structure"`
-
-	// If specified, only executions that have the matching tag are listed.
-	//
-	// closeStatusFilter, executionFilter, typeFilter and tagFilter are mutually
-	// exclusive. You can specify at most one of these in a request.
-	TagFilter *TagFilter `locationName:"tagFilter" type:"structure"`
-
-	// If specified, only executions of the type specified in the filter are returned.
-	//
-	// closeStatusFilter, executionFilter, typeFilter and tagFilter are mutually
-	// exclusive. You can specify at most one of these in a request.
-	TypeFilter *WorkflowTypeFilter `locationName:"typeFilter" type:"structure"`
-}
-
-// String returns the string representation
-func (s ListClosedWorkflowExecutionsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListClosedWorkflowExecutionsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListClosedWorkflowExecutionsInput"}
-
-	if s.Domain == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Domain"))
-	}
-	if s.Domain != nil && len(*s.Domain) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Domain", 1))
-	}
-	if s.CloseStatusFilter != nil {
-		if err := s.CloseStatusFilter.Validate(); err != nil {
-			invalidParams.AddNested("CloseStatusFilter", err.(aws.ErrInvalidParams))
-		}
-	}
-	if s.CloseTimeFilter != nil {
-		if err := s.CloseTimeFilter.Validate(); err != nil {
-			invalidParams.AddNested("CloseTimeFilter", err.(aws.ErrInvalidParams))
-		}
-	}
-	if s.ExecutionFilter != nil {
-		if err := s.ExecutionFilter.Validate(); err != nil {
-			invalidParams.AddNested("ExecutionFilter", err.(aws.ErrInvalidParams))
-		}
-	}
-	if s.StartTimeFilter != nil {
-		if err := s.StartTimeFilter.Validate(); err != nil {
-			invalidParams.AddNested("StartTimeFilter", err.(aws.ErrInvalidParams))
-		}
-	}
-	if s.TagFilter != nil {
-		if err := s.TagFilter.Validate(); err != nil {
-			invalidParams.AddNested("TagFilter", err.(aws.ErrInvalidParams))
-		}
-	}
-	if s.TypeFilter != nil {
-		if err := s.TypeFilter.Validate(); err != nil {
-			invalidParams.AddNested("TypeFilter", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Contains a paginated list of information about workflow executions.
-type ListClosedWorkflowExecutionsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The list of workflow information structures.
-	//
-	// ExecutionInfos is a required field
-	ExecutionInfos []WorkflowExecutionInfo `locationName:"executionInfos" type:"list" required:"true"`
-
-	// If a NextPageToken was returned by a previous call, there are more results
-	// available. To retrieve the next page of results, make the call again using
-	// the returned token in nextPageToken. Keep all other arguments unchanged.
-	//
-	// The configured maximumPageSize determines how many results can be returned
-	// in a single call.
-	NextPageToken *string `locationName:"nextPageToken" type:"string"`
-}
-
-// String returns the string representation
-func (s ListClosedWorkflowExecutionsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListClosedWorkflowExecutions = "ListClosedWorkflowExecutions"
 
@@ -198,7 +50,7 @@ const opListClosedWorkflowExecutions = "ListClosedWorkflowExecutions"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) ListClosedWorkflowExecutionsRequest(input *ListClosedWorkflowExecutionsInput) ListClosedWorkflowExecutionsRequest {
+func (c *Client) ListClosedWorkflowExecutionsRequest(input *types.ListClosedWorkflowExecutionsInput) ListClosedWorkflowExecutionsRequest {
 	op := &aws.Operation{
 		Name:       opListClosedWorkflowExecutions,
 		HTTPMethod: "POST",
@@ -212,10 +64,10 @@ func (c *Client) ListClosedWorkflowExecutionsRequest(input *ListClosedWorkflowEx
 	}
 
 	if input == nil {
-		input = &ListClosedWorkflowExecutionsInput{}
+		input = &types.ListClosedWorkflowExecutionsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListClosedWorkflowExecutionsOutput{})
+	req := c.newRequest(op, input, &types.ListClosedWorkflowExecutionsOutput{})
 	return ListClosedWorkflowExecutionsRequest{Request: req, Input: input, Copy: c.ListClosedWorkflowExecutionsRequest}
 }
 
@@ -223,8 +75,8 @@ func (c *Client) ListClosedWorkflowExecutionsRequest(input *ListClosedWorkflowEx
 // ListClosedWorkflowExecutions API operation.
 type ListClosedWorkflowExecutionsRequest struct {
 	*aws.Request
-	Input *ListClosedWorkflowExecutionsInput
-	Copy  func(*ListClosedWorkflowExecutionsInput) ListClosedWorkflowExecutionsRequest
+	Input *types.ListClosedWorkflowExecutionsInput
+	Copy  func(*types.ListClosedWorkflowExecutionsInput) ListClosedWorkflowExecutionsRequest
 }
 
 // Send marshals and sends the ListClosedWorkflowExecutions API request.
@@ -236,7 +88,7 @@ func (r ListClosedWorkflowExecutionsRequest) Send(ctx context.Context) (*ListClo
 	}
 
 	resp := &ListClosedWorkflowExecutionsResponse{
-		ListClosedWorkflowExecutionsOutput: r.Request.Data.(*ListClosedWorkflowExecutionsOutput),
+		ListClosedWorkflowExecutionsOutput: r.Request.Data.(*types.ListClosedWorkflowExecutionsOutput),
 		response:                           &aws.Response{Request: r.Request},
 	}
 
@@ -266,7 +118,7 @@ func NewListClosedWorkflowExecutionsPaginator(req ListClosedWorkflowExecutionsRe
 	return ListClosedWorkflowExecutionsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListClosedWorkflowExecutionsInput
+				var inCpy *types.ListClosedWorkflowExecutionsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -286,14 +138,14 @@ type ListClosedWorkflowExecutionsPaginator struct {
 	aws.Pager
 }
 
-func (p *ListClosedWorkflowExecutionsPaginator) CurrentPage() *ListClosedWorkflowExecutionsOutput {
-	return p.Pager.CurrentPage().(*ListClosedWorkflowExecutionsOutput)
+func (p *ListClosedWorkflowExecutionsPaginator) CurrentPage() *types.ListClosedWorkflowExecutionsOutput {
+	return p.Pager.CurrentPage().(*types.ListClosedWorkflowExecutionsOutput)
 }
 
 // ListClosedWorkflowExecutionsResponse is the response type for the
 // ListClosedWorkflowExecutions API operation.
 type ListClosedWorkflowExecutionsResponse struct {
-	*ListClosedWorkflowExecutionsOutput
+	*types.ListClosedWorkflowExecutionsOutput
 
 	response *aws.Response
 }

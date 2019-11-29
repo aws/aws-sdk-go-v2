@@ -6,61 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/waf/types"
 )
-
-type PutPermissionPolicyInput struct {
-	_ struct{} `type:"structure"`
-
-	// The policy to attach to the specified RuleGroup.
-	//
-	// Policy is a required field
-	Policy *string `min:"1" type:"string" required:"true"`
-
-	// The Amazon Resource Name (ARN) of the RuleGroup to which you want to attach
-	// the policy.
-	//
-	// ResourceArn is a required field
-	ResourceArn *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s PutPermissionPolicyInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *PutPermissionPolicyInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "PutPermissionPolicyInput"}
-
-	if s.Policy == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Policy"))
-	}
-	if s.Policy != nil && len(*s.Policy) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Policy", 1))
-	}
-
-	if s.ResourceArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ResourceArn"))
-	}
-	if s.ResourceArn != nil && len(*s.ResourceArn) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ResourceArn", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type PutPermissionPolicyOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s PutPermissionPolicyOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opPutPermissionPolicy = "PutPermissionPolicy"
 
@@ -103,7 +50,7 @@ const opPutPermissionPolicy = "PutPermissionPolicy"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/PutPermissionPolicy
-func (c *Client) PutPermissionPolicyRequest(input *PutPermissionPolicyInput) PutPermissionPolicyRequest {
+func (c *Client) PutPermissionPolicyRequest(input *types.PutPermissionPolicyInput) PutPermissionPolicyRequest {
 	op := &aws.Operation{
 		Name:       opPutPermissionPolicy,
 		HTTPMethod: "POST",
@@ -111,10 +58,10 @@ func (c *Client) PutPermissionPolicyRequest(input *PutPermissionPolicyInput) Put
 	}
 
 	if input == nil {
-		input = &PutPermissionPolicyInput{}
+		input = &types.PutPermissionPolicyInput{}
 	}
 
-	req := c.newRequest(op, input, &PutPermissionPolicyOutput{})
+	req := c.newRequest(op, input, &types.PutPermissionPolicyOutput{})
 	return PutPermissionPolicyRequest{Request: req, Input: input, Copy: c.PutPermissionPolicyRequest}
 }
 
@@ -122,8 +69,8 @@ func (c *Client) PutPermissionPolicyRequest(input *PutPermissionPolicyInput) Put
 // PutPermissionPolicy API operation.
 type PutPermissionPolicyRequest struct {
 	*aws.Request
-	Input *PutPermissionPolicyInput
-	Copy  func(*PutPermissionPolicyInput) PutPermissionPolicyRequest
+	Input *types.PutPermissionPolicyInput
+	Copy  func(*types.PutPermissionPolicyInput) PutPermissionPolicyRequest
 }
 
 // Send marshals and sends the PutPermissionPolicy API request.
@@ -135,7 +82,7 @@ func (r PutPermissionPolicyRequest) Send(ctx context.Context) (*PutPermissionPol
 	}
 
 	resp := &PutPermissionPolicyResponse{
-		PutPermissionPolicyOutput: r.Request.Data.(*PutPermissionPolicyOutput),
+		PutPermissionPolicyOutput: r.Request.Data.(*types.PutPermissionPolicyOutput),
 		response:                  &aws.Response{Request: r.Request},
 	}
 
@@ -145,7 +92,7 @@ func (r PutPermissionPolicyRequest) Send(ctx context.Context) (*PutPermissionPol
 // PutPermissionPolicyResponse is the response type for the
 // PutPermissionPolicy API operation.
 type PutPermissionPolicyResponse struct {
-	*PutPermissionPolicyOutput
+	*types.PutPermissionPolicyOutput
 
 	response *aws.Response
 }

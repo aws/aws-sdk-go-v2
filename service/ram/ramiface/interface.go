@@ -10,6 +10,7 @@ package ramiface
 
 import (
 	"github.com/aws/aws-sdk-go-v2/service/ram"
+	"github.com/aws/aws-sdk-go-v2/service/ram/types"
 )
 
 // ClientAPI provides an interface to enable mocking the
@@ -43,7 +44,7 @@ import (
 //    type mockClientClient struct {
 //        ramiface.ClientPI
 //    }
-//    func (m *mockClientClient) AcceptResourceShareInvitation(input *ram.AcceptResourceShareInvitationInput) (*ram.AcceptResourceShareInvitationOutput, error) {
+//    func (m *mockClientClient) AcceptResourceShareInvitation(input *types.AcceptResourceShareInvitationInput) (*types.AcceptResourceShareInvitationOutput, error) {
 //        // mock response/functionality
 //    }
 //
@@ -61,39 +62,39 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type ClientAPI interface {
-	AcceptResourceShareInvitationRequest(*ram.AcceptResourceShareInvitationInput) ram.AcceptResourceShareInvitationRequest
+	AcceptResourceShareInvitationRequest(*types.AcceptResourceShareInvitationInput) ram.AcceptResourceShareInvitationRequest
 
-	AssociateResourceShareRequest(*ram.AssociateResourceShareInput) ram.AssociateResourceShareRequest
+	AssociateResourceShareRequest(*types.AssociateResourceShareInput) ram.AssociateResourceShareRequest
 
-	CreateResourceShareRequest(*ram.CreateResourceShareInput) ram.CreateResourceShareRequest
+	CreateResourceShareRequest(*types.CreateResourceShareInput) ram.CreateResourceShareRequest
 
-	DeleteResourceShareRequest(*ram.DeleteResourceShareInput) ram.DeleteResourceShareRequest
+	DeleteResourceShareRequest(*types.DeleteResourceShareInput) ram.DeleteResourceShareRequest
 
-	DisassociateResourceShareRequest(*ram.DisassociateResourceShareInput) ram.DisassociateResourceShareRequest
+	DisassociateResourceShareRequest(*types.DisassociateResourceShareInput) ram.DisassociateResourceShareRequest
 
-	EnableSharingWithAwsOrganizationRequest(*ram.EnableSharingWithAwsOrganizationInput) ram.EnableSharingWithAwsOrganizationRequest
+	EnableSharingWithAwsOrganizationRequest(*types.EnableSharingWithAwsOrganizationInput) ram.EnableSharingWithAwsOrganizationRequest
 
-	GetResourcePoliciesRequest(*ram.GetResourcePoliciesInput) ram.GetResourcePoliciesRequest
+	GetResourcePoliciesRequest(*types.GetResourcePoliciesInput) ram.GetResourcePoliciesRequest
 
-	GetResourceShareAssociationsRequest(*ram.GetResourceShareAssociationsInput) ram.GetResourceShareAssociationsRequest
+	GetResourceShareAssociationsRequest(*types.GetResourceShareAssociationsInput) ram.GetResourceShareAssociationsRequest
 
-	GetResourceShareInvitationsRequest(*ram.GetResourceShareInvitationsInput) ram.GetResourceShareInvitationsRequest
+	GetResourceShareInvitationsRequest(*types.GetResourceShareInvitationsInput) ram.GetResourceShareInvitationsRequest
 
-	GetResourceSharesRequest(*ram.GetResourceSharesInput) ram.GetResourceSharesRequest
+	GetResourceSharesRequest(*types.GetResourceSharesInput) ram.GetResourceSharesRequest
 
-	ListPendingInvitationResourcesRequest(*ram.ListPendingInvitationResourcesInput) ram.ListPendingInvitationResourcesRequest
+	ListPendingInvitationResourcesRequest(*types.ListPendingInvitationResourcesInput) ram.ListPendingInvitationResourcesRequest
 
-	ListPrincipalsRequest(*ram.ListPrincipalsInput) ram.ListPrincipalsRequest
+	ListPrincipalsRequest(*types.ListPrincipalsInput) ram.ListPrincipalsRequest
 
-	ListResourcesRequest(*ram.ListResourcesInput) ram.ListResourcesRequest
+	ListResourcesRequest(*types.ListResourcesInput) ram.ListResourcesRequest
 
-	RejectResourceShareInvitationRequest(*ram.RejectResourceShareInvitationInput) ram.RejectResourceShareInvitationRequest
+	RejectResourceShareInvitationRequest(*types.RejectResourceShareInvitationInput) ram.RejectResourceShareInvitationRequest
 
-	TagResourceRequest(*ram.TagResourceInput) ram.TagResourceRequest
+	TagResourceRequest(*types.TagResourceInput) ram.TagResourceRequest
 
-	UntagResourceRequest(*ram.UntagResourceInput) ram.UntagResourceRequest
+	UntagResourceRequest(*types.UntagResourceInput) ram.UntagResourceRequest
 
-	UpdateResourceShareRequest(*ram.UpdateResourceShareInput) ram.UpdateResourceShareRequest
+	UpdateResourceShareRequest(*types.UpdateResourceShareInput) ram.UpdateResourceShareRequest
 }
 
 var _ ClientAPI = (*ram.Client)(nil)

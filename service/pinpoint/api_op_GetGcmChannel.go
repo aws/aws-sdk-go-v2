@@ -6,76 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/pinpoint/types"
 )
-
-type GetGcmChannelInput struct {
-	_ struct{} `type:"structure"`
-
-	// ApplicationId is a required field
-	ApplicationId *string `location:"uri" locationName:"application-id" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetGcmChannelInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetGcmChannelInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetGcmChannelInput"}
-
-	if s.ApplicationId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ApplicationId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetGcmChannelInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.ApplicationId != nil {
-		v := *s.ApplicationId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "application-id", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type GetGcmChannelOutput struct {
-	_ struct{} `type:"structure" payload:"GCMChannelResponse"`
-
-	// Provides information about the status and settings of the GCM channel for
-	// an application. The GCM channel enables Amazon Pinpoint to send push notifications
-	// through the Firebase Cloud Messaging (FCM), formerly Google Cloud Messaging
-	// (GCM), service.
-	//
-	// GCMChannelResponse is a required field
-	GCMChannelResponse *GCMChannelResponse `type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s GetGcmChannelOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetGcmChannelOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.GCMChannelResponse != nil {
-		v := s.GCMChannelResponse
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.PayloadTarget, "GCMChannelResponse", v, metadata)
-	}
-	return nil
-}
 
 const opGetGcmChannel = "GetGcmChannel"
 
@@ -93,7 +25,7 @@ const opGetGcmChannel = "GetGcmChannel"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetGcmChannel
-func (c *Client) GetGcmChannelRequest(input *GetGcmChannelInput) GetGcmChannelRequest {
+func (c *Client) GetGcmChannelRequest(input *types.GetGcmChannelInput) GetGcmChannelRequest {
 	op := &aws.Operation{
 		Name:       opGetGcmChannel,
 		HTTPMethod: "GET",
@@ -101,10 +33,10 @@ func (c *Client) GetGcmChannelRequest(input *GetGcmChannelInput) GetGcmChannelRe
 	}
 
 	if input == nil {
-		input = &GetGcmChannelInput{}
+		input = &types.GetGcmChannelInput{}
 	}
 
-	req := c.newRequest(op, input, &GetGcmChannelOutput{})
+	req := c.newRequest(op, input, &types.GetGcmChannelOutput{})
 	return GetGcmChannelRequest{Request: req, Input: input, Copy: c.GetGcmChannelRequest}
 }
 
@@ -112,8 +44,8 @@ func (c *Client) GetGcmChannelRequest(input *GetGcmChannelInput) GetGcmChannelRe
 // GetGcmChannel API operation.
 type GetGcmChannelRequest struct {
 	*aws.Request
-	Input *GetGcmChannelInput
-	Copy  func(*GetGcmChannelInput) GetGcmChannelRequest
+	Input *types.GetGcmChannelInput
+	Copy  func(*types.GetGcmChannelInput) GetGcmChannelRequest
 }
 
 // Send marshals and sends the GetGcmChannel API request.
@@ -125,7 +57,7 @@ func (r GetGcmChannelRequest) Send(ctx context.Context) (*GetGcmChannelResponse,
 	}
 
 	resp := &GetGcmChannelResponse{
-		GetGcmChannelOutput: r.Request.Data.(*GetGcmChannelOutput),
+		GetGcmChannelOutput: r.Request.Data.(*types.GetGcmChannelOutput),
 		response:            &aws.Response{Request: r.Request},
 	}
 
@@ -135,7 +67,7 @@ func (r GetGcmChannelRequest) Send(ctx context.Context) (*GetGcmChannelResponse,
 // GetGcmChannelResponse is the response type for the
 // GetGcmChannel API operation.
 type GetGcmChannelResponse struct {
-	*GetGcmChannelOutput
+	*types.GetGcmChannelOutput
 
 	response *aws.Response
 }

@@ -4,188 +4,11 @@ package mediastoredata
 
 import (
 	"context"
-	"io"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/mediastoredata/types"
 )
-
-type PutObjectInput struct {
-	_ struct{} `type:"structure" payload:"Body"`
-
-	// The bytes to be stored.
-	//
-	// To use an non-seekable io.Reader for this request wrap the io.Reader with
-	// "aws.ReadSeekCloser". The SDK will not retry request errors for non-seekable
-	// readers. This will allow the SDK to send the reader's payload as chunked
-	// transfer encoding.
-	//
-	// Body is a required field
-	Body io.ReadSeeker `type:"blob" required:"true"`
-
-	// An optional CacheControl header that allows the caller to control the object's
-	// cache behavior. Headers can be passed in as specified in the HTTP at https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.9
-	// (https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.9).
-	//
-	// Headers with a custom user-defined value are also accepted.
-	CacheControl *string `location:"header" locationName:"Cache-Control" type:"string"`
-
-	// The content type of the object.
-	ContentType *string `location:"header" locationName:"Content-Type" type:"string"`
-
-	// The path (including the file name) where the object is stored in the container.
-	// Format: <folder name>/<folder name>/<file name>
-	//
-	// For example, to upload the file mlaw.avi to the folder path premium\canada
-	// in the container movies, enter the path premium/canada/mlaw.avi.
-	//
-	// Do not include the container name in this path.
-	//
-	// If the path includes any folders that don't exist yet, the service creates
-	// them. For example, suppose you have an existing premium/usa subfolder. If
-	// you specify premium/canada, the service creates a canada subfolder in the
-	// premium folder. You then have two subfolders, usa and canada, in the premium
-	// folder.
-	//
-	// There is no correlation between the path to the source and the path (folders)
-	// in the container in AWS Elemental MediaStore.
-	//
-	// For more information about folders and how they exist in a container, see
-	// the AWS Elemental MediaStore User Guide (http://docs.aws.amazon.com/mediastore/latest/ug/).
-	//
-	// The file name is the name that is assigned to the file that you upload. The
-	// file can have the same name inside and outside of AWS Elemental MediaStore,
-	// or it can have the same name. The file name can include or omit an extension.
-	//
-	// Path is a required field
-	Path *string `location:"uri" locationName:"Path" min:"1" type:"string" required:"true"`
-
-	// Indicates the storage class of a Put request. Defaults to high-performance
-	// temporal storage class, and objects are persisted into durable storage shortly
-	// after being received.
-	StorageClass StorageClass `location:"header" locationName:"x-amz-storage-class" min:"1" type:"string" enum:"true"`
-
-	// Indicates the availability of an object while it is still uploading. If the
-	// value is set to streaming, the object is available for downloading after
-	// some initial buffering but before the object is uploaded completely. If the
-	// value is set to standard, the object is available for downloading only when
-	// it is uploaded completely. The default value for this header is standard.
-	//
-	// To use this header, you must also set the HTTP Transfer-Encoding header to
-	// chunked.
-	UploadAvailability UploadAvailability `location:"header" locationName:"x-amz-upload-availability" min:"1" type:"string" enum:"true"`
-}
-
-// String returns the string representation
-func (s PutObjectInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *PutObjectInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "PutObjectInput"}
-
-	if s.Body == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Body"))
-	}
-
-	if s.Path == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Path"))
-	}
-	if s.Path != nil && len(*s.Path) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Path", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s PutObjectInput) MarshalFields(e protocol.FieldEncoder) error {
-
-	if s.CacheControl != nil {
-		v := *s.CacheControl
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "Cache-Control", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.ContentType != nil {
-		v := *s.ContentType
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if len(s.StorageClass) > 0 {
-		v := s.StorageClass
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "x-amz-storage-class", protocol.QuotedValue{ValueMarshaler: v}, metadata)
-	}
-	if len(s.UploadAvailability) > 0 {
-		v := s.UploadAvailability
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "x-amz-upload-availability", protocol.QuotedValue{ValueMarshaler: v}, metadata)
-	}
-	if s.Path != nil {
-		v := *s.Path
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "Path", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Body != nil {
-		v := s.Body
-
-		metadata := protocol.Metadata{}
-		e.SetStream(protocol.PayloadTarget, "Body", protocol.ReadSeekerStream{V: v}, metadata)
-	}
-	return nil
-}
-
-type PutObjectOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The SHA256 digest of the object that is persisted.
-	ContentSHA256 *string `min:"64" type:"string"`
-
-	// Unique identifier of the object in the container.
-	ETag *string `min:"1" type:"string"`
-
-	// The storage class where the object was persisted. The class should be “Temporal”.
-	StorageClass StorageClass `min:"1" type:"string" enum:"true"`
-}
-
-// String returns the string representation
-func (s PutObjectOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s PutObjectOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.ContentSHA256 != nil {
-		v := *s.ContentSHA256
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "ContentSHA256", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.ETag != nil {
-		v := *s.ETag
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "ETag", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if len(s.StorageClass) > 0 {
-		v := s.StorageClass
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "StorageClass", protocol.QuotedValue{ValueMarshaler: v}, metadata)
-	}
-	return nil
-}
 
 const opPutObject = "PutObject"
 
@@ -203,7 +26,7 @@ const opPutObject = "PutObject"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mediastore-data-2017-09-01/PutObject
-func (c *Client) PutObjectRequest(input *PutObjectInput) PutObjectRequest {
+func (c *Client) PutObjectRequest(input *types.PutObjectInput) PutObjectRequest {
 	op := &aws.Operation{
 		Name:       opPutObject,
 		HTTPMethod: "PUT",
@@ -211,10 +34,10 @@ func (c *Client) PutObjectRequest(input *PutObjectInput) PutObjectRequest {
 	}
 
 	if input == nil {
-		input = &PutObjectInput{}
+		input = &types.PutObjectInput{}
 	}
 
-	req := c.newRequest(op, input, &PutObjectOutput{})
+	req := c.newRequest(op, input, &types.PutObjectOutput{})
 	req.Handlers.Sign.Remove(v4.SignRequestHandler)
 	handler := v4.BuildNamedHandler("v4.CustomSignerHandler", v4.WithUnsignedPayload)
 	req.Handlers.Sign.PushFrontNamed(handler)
@@ -225,8 +48,8 @@ func (c *Client) PutObjectRequest(input *PutObjectInput) PutObjectRequest {
 // PutObject API operation.
 type PutObjectRequest struct {
 	*aws.Request
-	Input *PutObjectInput
-	Copy  func(*PutObjectInput) PutObjectRequest
+	Input *types.PutObjectInput
+	Copy  func(*types.PutObjectInput) PutObjectRequest
 }
 
 // Send marshals and sends the PutObject API request.
@@ -238,7 +61,7 @@ func (r PutObjectRequest) Send(ctx context.Context) (*PutObjectResponse, error) 
 	}
 
 	resp := &PutObjectResponse{
-		PutObjectOutput: r.Request.Data.(*PutObjectOutput),
+		PutObjectOutput: r.Request.Data.(*types.PutObjectOutput),
 		response:        &aws.Response{Request: r.Request},
 	}
 
@@ -248,7 +71,7 @@ func (r PutObjectRequest) Send(ctx context.Context) (*PutObjectResponse, error) 
 // PutObjectResponse is the response type for the
 // PutObject API operation.
 type PutObjectResponse struct {
-	*PutObjectOutput
+	*types.PutObjectOutput
 
 	response *aws.Response
 }

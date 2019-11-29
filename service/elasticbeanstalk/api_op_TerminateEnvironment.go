@@ -4,173 +4,10 @@ package elasticbeanstalk
 
 import (
 	"context"
-	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/elasticbeanstalk/types"
 )
-
-// Request to terminate an environment.
-type TerminateEnvironmentInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the environment to terminate.
-	//
-	// Condition: You must specify either this or an EnvironmentName, or both. If
-	// you do not specify either, AWS Elastic Beanstalk returns MissingRequiredParameter
-	// error.
-	EnvironmentId *string `type:"string"`
-
-	// The name of the environment to terminate.
-	//
-	// Condition: You must specify either this or an EnvironmentId, or both. If
-	// you do not specify either, AWS Elastic Beanstalk returns MissingRequiredParameter
-	// error.
-	EnvironmentName *string `min:"4" type:"string"`
-
-	// Terminates the target environment even if another environment in the same
-	// group is dependent on it.
-	ForceTerminate *bool `type:"boolean"`
-
-	// Indicates whether the associated AWS resources should shut down when the
-	// environment is terminated:
-	//
-	//    * true: The specified environment as well as the associated AWS resources,
-	//    such as Auto Scaling group and LoadBalancer, are terminated.
-	//
-	//    * false: AWS Elastic Beanstalk resource management is removed from the
-	//    environment, but the AWS resources continue to operate.
-	//
-	// For more information, see the AWS Elastic Beanstalk User Guide. (https://docs.aws.amazon.com/elasticbeanstalk/latest/ug/)
-	//
-	// Default: true
-	//
-	// Valid Values: true | false
-	TerminateResources *bool `type:"boolean"`
-}
-
-// String returns the string representation
-func (s TerminateEnvironmentInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *TerminateEnvironmentInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "TerminateEnvironmentInput"}
-	if s.EnvironmentName != nil && len(*s.EnvironmentName) < 4 {
-		invalidParams.Add(aws.NewErrParamMinLen("EnvironmentName", 4))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Describes the properties of an environment.
-type TerminateEnvironmentOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Indicates if there is an in-progress environment configuration update or
-	// application version deployment that you can cancel.
-	//
-	// true: There is an update in progress.
-	//
-	// false: There are no updates currently in progress.
-	AbortableOperationInProgress *bool `type:"boolean"`
-
-	// The name of the application associated with this environment.
-	ApplicationName *string `min:"1" type:"string"`
-
-	// The URL to the CNAME for this environment.
-	CNAME *string `min:"1" type:"string"`
-
-	// The creation date for this environment.
-	DateCreated *time.Time `type:"timestamp"`
-
-	// The last modified date for this environment.
-	DateUpdated *time.Time `type:"timestamp"`
-
-	// Describes this environment.
-	Description *string `type:"string"`
-
-	// For load-balanced, autoscaling environments, the URL to the LoadBalancer.
-	// For single-instance environments, the IP address of the instance.
-	EndpointURL *string `type:"string"`
-
-	// The environment's Amazon Resource Name (ARN), which can be used in other
-	// API requests that require an ARN.
-	EnvironmentArn *string `type:"string"`
-
-	// The ID of this environment.
-	EnvironmentId *string `type:"string"`
-
-	// A list of links to other environments in the same group.
-	EnvironmentLinks []EnvironmentLink `type:"list"`
-
-	// The name of this environment.
-	EnvironmentName *string `min:"4" type:"string"`
-
-	// Describes the health status of the environment. AWS Elastic Beanstalk indicates
-	// the failure levels for a running environment:
-	//
-	//    * Red: Indicates the environment is not responsive. Occurs when three
-	//    or more consecutive failures occur for an environment.
-	//
-	//    * Yellow: Indicates that something is wrong. Occurs when two consecutive
-	//    failures occur for an environment.
-	//
-	//    * Green: Indicates the environment is healthy and fully functional.
-	//
-	//    * Grey: Default health for a new environment. The environment is not fully
-	//    launched and health checks have not started or health checks are suspended
-	//    during an UpdateEnvironment or RestartEnvironment request.
-	//
-	// Default: Grey
-	Health EnvironmentHealth `type:"string" enum:"true"`
-
-	// Returns the health status of the application running in your environment.
-	// For more information, see Health Colors and Statuses (https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/health-enhanced-status.html).
-	HealthStatus EnvironmentHealthStatus `type:"string" enum:"true"`
-
-	// The ARN of the platform.
-	PlatformArn *string `type:"string"`
-
-	// The description of the AWS resources used by this environment.
-	Resources *EnvironmentResourcesDescription `type:"structure"`
-
-	// The name of the SolutionStack deployed with this environment.
-	SolutionStackName *string `type:"string"`
-
-	// The current operational status of the environment:
-	//
-	//    * Launching: Environment is in the process of initial deployment.
-	//
-	//    * Updating: Environment is in the process of updating its configuration
-	//    settings or application version.
-	//
-	//    * Ready: Environment is available to have an action performed on it, such
-	//    as update or terminate.
-	//
-	//    * Terminating: Environment is in the shut-down process.
-	//
-	//    * Terminated: Environment is not running.
-	Status EnvironmentStatus `type:"string" enum:"true"`
-
-	// The name of the configuration template used to originally launch this environment.
-	TemplateName *string `min:"1" type:"string"`
-
-	// Describes the current tier of this environment.
-	Tier *EnvironmentTier `type:"structure"`
-
-	// The application version deployed in this environment.
-	VersionLabel *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s TerminateEnvironmentOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opTerminateEnvironment = "TerminateEnvironment"
 
@@ -187,7 +24,7 @@ const opTerminateEnvironment = "TerminateEnvironment"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/TerminateEnvironment
-func (c *Client) TerminateEnvironmentRequest(input *TerminateEnvironmentInput) TerminateEnvironmentRequest {
+func (c *Client) TerminateEnvironmentRequest(input *types.TerminateEnvironmentInput) TerminateEnvironmentRequest {
 	op := &aws.Operation{
 		Name:       opTerminateEnvironment,
 		HTTPMethod: "POST",
@@ -195,10 +32,10 @@ func (c *Client) TerminateEnvironmentRequest(input *TerminateEnvironmentInput) T
 	}
 
 	if input == nil {
-		input = &TerminateEnvironmentInput{}
+		input = &types.TerminateEnvironmentInput{}
 	}
 
-	req := c.newRequest(op, input, &TerminateEnvironmentOutput{})
+	req := c.newRequest(op, input, &types.TerminateEnvironmentOutput{})
 	return TerminateEnvironmentRequest{Request: req, Input: input, Copy: c.TerminateEnvironmentRequest}
 }
 
@@ -206,8 +43,8 @@ func (c *Client) TerminateEnvironmentRequest(input *TerminateEnvironmentInput) T
 // TerminateEnvironment API operation.
 type TerminateEnvironmentRequest struct {
 	*aws.Request
-	Input *TerminateEnvironmentInput
-	Copy  func(*TerminateEnvironmentInput) TerminateEnvironmentRequest
+	Input *types.TerminateEnvironmentInput
+	Copy  func(*types.TerminateEnvironmentInput) TerminateEnvironmentRequest
 }
 
 // Send marshals and sends the TerminateEnvironment API request.
@@ -219,7 +56,7 @@ func (r TerminateEnvironmentRequest) Send(ctx context.Context) (*TerminateEnviro
 	}
 
 	resp := &TerminateEnvironmentResponse{
-		TerminateEnvironmentOutput: r.Request.Data.(*TerminateEnvironmentOutput),
+		TerminateEnvironmentOutput: r.Request.Data.(*types.TerminateEnvironmentOutput),
 		response:                   &aws.Response{Request: r.Request},
 	}
 
@@ -229,7 +66,7 @@ func (r TerminateEnvironmentRequest) Send(ctx context.Context) (*TerminateEnviro
 // TerminateEnvironmentResponse is the response type for the
 // TerminateEnvironment API operation.
 type TerminateEnvironmentResponse struct {
-	*TerminateEnvironmentOutput
+	*types.TerminateEnvironmentOutput
 
 	response *aws.Response
 }

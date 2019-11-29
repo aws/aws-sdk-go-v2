@@ -10,6 +10,7 @@ package rekognitioniface
 
 import (
 	"github.com/aws/aws-sdk-go-v2/service/rekognition"
+	"github.com/aws/aws-sdk-go-v2/service/rekognition/types"
 )
 
 // ClientAPI provides an interface to enable mocking the
@@ -43,7 +44,7 @@ import (
 //    type mockClientClient struct {
 //        rekognitioniface.ClientPI
 //    }
-//    func (m *mockClientClient) CompareFaces(input *rekognition.CompareFacesInput) (*rekognition.CompareFacesOutput, error) {
+//    func (m *mockClientClient) CompareFaces(input *types.CompareFacesInput) (*types.CompareFacesOutput, error) {
 //        // mock response/functionality
 //    }
 //
@@ -61,73 +62,73 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type ClientAPI interface {
-	CompareFacesRequest(*rekognition.CompareFacesInput) rekognition.CompareFacesRequest
+	CompareFacesRequest(*types.CompareFacesInput) rekognition.CompareFacesRequest
 
-	CreateCollectionRequest(*rekognition.CreateCollectionInput) rekognition.CreateCollectionRequest
+	CreateCollectionRequest(*types.CreateCollectionInput) rekognition.CreateCollectionRequest
 
-	CreateStreamProcessorRequest(*rekognition.CreateStreamProcessorInput) rekognition.CreateStreamProcessorRequest
+	CreateStreamProcessorRequest(*types.CreateStreamProcessorInput) rekognition.CreateStreamProcessorRequest
 
-	DeleteCollectionRequest(*rekognition.DeleteCollectionInput) rekognition.DeleteCollectionRequest
+	DeleteCollectionRequest(*types.DeleteCollectionInput) rekognition.DeleteCollectionRequest
 
-	DeleteFacesRequest(*rekognition.DeleteFacesInput) rekognition.DeleteFacesRequest
+	DeleteFacesRequest(*types.DeleteFacesInput) rekognition.DeleteFacesRequest
 
-	DeleteStreamProcessorRequest(*rekognition.DeleteStreamProcessorInput) rekognition.DeleteStreamProcessorRequest
+	DeleteStreamProcessorRequest(*types.DeleteStreamProcessorInput) rekognition.DeleteStreamProcessorRequest
 
-	DescribeCollectionRequest(*rekognition.DescribeCollectionInput) rekognition.DescribeCollectionRequest
+	DescribeCollectionRequest(*types.DescribeCollectionInput) rekognition.DescribeCollectionRequest
 
-	DescribeStreamProcessorRequest(*rekognition.DescribeStreamProcessorInput) rekognition.DescribeStreamProcessorRequest
+	DescribeStreamProcessorRequest(*types.DescribeStreamProcessorInput) rekognition.DescribeStreamProcessorRequest
 
-	DetectFacesRequest(*rekognition.DetectFacesInput) rekognition.DetectFacesRequest
+	DetectFacesRequest(*types.DetectFacesInput) rekognition.DetectFacesRequest
 
-	DetectLabelsRequest(*rekognition.DetectLabelsInput) rekognition.DetectLabelsRequest
+	DetectLabelsRequest(*types.DetectLabelsInput) rekognition.DetectLabelsRequest
 
-	DetectModerationLabelsRequest(*rekognition.DetectModerationLabelsInput) rekognition.DetectModerationLabelsRequest
+	DetectModerationLabelsRequest(*types.DetectModerationLabelsInput) rekognition.DetectModerationLabelsRequest
 
-	DetectTextRequest(*rekognition.DetectTextInput) rekognition.DetectTextRequest
+	DetectTextRequest(*types.DetectTextInput) rekognition.DetectTextRequest
 
-	GetCelebrityInfoRequest(*rekognition.GetCelebrityInfoInput) rekognition.GetCelebrityInfoRequest
+	GetCelebrityInfoRequest(*types.GetCelebrityInfoInput) rekognition.GetCelebrityInfoRequest
 
-	GetCelebrityRecognitionRequest(*rekognition.GetCelebrityRecognitionInput) rekognition.GetCelebrityRecognitionRequest
+	GetCelebrityRecognitionRequest(*types.GetCelebrityRecognitionInput) rekognition.GetCelebrityRecognitionRequest
 
-	GetContentModerationRequest(*rekognition.GetContentModerationInput) rekognition.GetContentModerationRequest
+	GetContentModerationRequest(*types.GetContentModerationInput) rekognition.GetContentModerationRequest
 
-	GetFaceDetectionRequest(*rekognition.GetFaceDetectionInput) rekognition.GetFaceDetectionRequest
+	GetFaceDetectionRequest(*types.GetFaceDetectionInput) rekognition.GetFaceDetectionRequest
 
-	GetFaceSearchRequest(*rekognition.GetFaceSearchInput) rekognition.GetFaceSearchRequest
+	GetFaceSearchRequest(*types.GetFaceSearchInput) rekognition.GetFaceSearchRequest
 
-	GetLabelDetectionRequest(*rekognition.GetLabelDetectionInput) rekognition.GetLabelDetectionRequest
+	GetLabelDetectionRequest(*types.GetLabelDetectionInput) rekognition.GetLabelDetectionRequest
 
-	GetPersonTrackingRequest(*rekognition.GetPersonTrackingInput) rekognition.GetPersonTrackingRequest
+	GetPersonTrackingRequest(*types.GetPersonTrackingInput) rekognition.GetPersonTrackingRequest
 
-	IndexFacesRequest(*rekognition.IndexFacesInput) rekognition.IndexFacesRequest
+	IndexFacesRequest(*types.IndexFacesInput) rekognition.IndexFacesRequest
 
-	ListCollectionsRequest(*rekognition.ListCollectionsInput) rekognition.ListCollectionsRequest
+	ListCollectionsRequest(*types.ListCollectionsInput) rekognition.ListCollectionsRequest
 
-	ListFacesRequest(*rekognition.ListFacesInput) rekognition.ListFacesRequest
+	ListFacesRequest(*types.ListFacesInput) rekognition.ListFacesRequest
 
-	ListStreamProcessorsRequest(*rekognition.ListStreamProcessorsInput) rekognition.ListStreamProcessorsRequest
+	ListStreamProcessorsRequest(*types.ListStreamProcessorsInput) rekognition.ListStreamProcessorsRequest
 
-	RecognizeCelebritiesRequest(*rekognition.RecognizeCelebritiesInput) rekognition.RecognizeCelebritiesRequest
+	RecognizeCelebritiesRequest(*types.RecognizeCelebritiesInput) rekognition.RecognizeCelebritiesRequest
 
-	SearchFacesRequest(*rekognition.SearchFacesInput) rekognition.SearchFacesRequest
+	SearchFacesRequest(*types.SearchFacesInput) rekognition.SearchFacesRequest
 
-	SearchFacesByImageRequest(*rekognition.SearchFacesByImageInput) rekognition.SearchFacesByImageRequest
+	SearchFacesByImageRequest(*types.SearchFacesByImageInput) rekognition.SearchFacesByImageRequest
 
-	StartCelebrityRecognitionRequest(*rekognition.StartCelebrityRecognitionInput) rekognition.StartCelebrityRecognitionRequest
+	StartCelebrityRecognitionRequest(*types.StartCelebrityRecognitionInput) rekognition.StartCelebrityRecognitionRequest
 
-	StartContentModerationRequest(*rekognition.StartContentModerationInput) rekognition.StartContentModerationRequest
+	StartContentModerationRequest(*types.StartContentModerationInput) rekognition.StartContentModerationRequest
 
-	StartFaceDetectionRequest(*rekognition.StartFaceDetectionInput) rekognition.StartFaceDetectionRequest
+	StartFaceDetectionRequest(*types.StartFaceDetectionInput) rekognition.StartFaceDetectionRequest
 
-	StartFaceSearchRequest(*rekognition.StartFaceSearchInput) rekognition.StartFaceSearchRequest
+	StartFaceSearchRequest(*types.StartFaceSearchInput) rekognition.StartFaceSearchRequest
 
-	StartLabelDetectionRequest(*rekognition.StartLabelDetectionInput) rekognition.StartLabelDetectionRequest
+	StartLabelDetectionRequest(*types.StartLabelDetectionInput) rekognition.StartLabelDetectionRequest
 
-	StartPersonTrackingRequest(*rekognition.StartPersonTrackingInput) rekognition.StartPersonTrackingRequest
+	StartPersonTrackingRequest(*types.StartPersonTrackingInput) rekognition.StartPersonTrackingRequest
 
-	StartStreamProcessorRequest(*rekognition.StartStreamProcessorInput) rekognition.StartStreamProcessorRequest
+	StartStreamProcessorRequest(*types.StartStreamProcessorInput) rekognition.StartStreamProcessorRequest
 
-	StopStreamProcessorRequest(*rekognition.StopStreamProcessorInput) rekognition.StopStreamProcessorRequest
+	StopStreamProcessorRequest(*types.StopStreamProcessorInput) rekognition.StopStreamProcessorRequest
 }
 
 var _ ClientAPI = (*rekognition.Client)(nil)

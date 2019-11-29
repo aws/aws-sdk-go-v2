@@ -6,79 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ssm/types"
 )
-
-type SendAutomationSignalInput struct {
-	_ struct{} `type:"structure"`
-
-	// The unique identifier for an existing Automation execution that you want
-	// to send the signal to.
-	//
-	// AutomationExecutionId is a required field
-	AutomationExecutionId *string `min:"36" type:"string" required:"true"`
-
-	// The data sent with the signal. The data schema depends on the type of signal
-	// used in the request.
-	//
-	// For Approve and Reject signal types, the payload is an optional comment that
-	// you can send with the signal type. For example:
-	//
-	// Comment="Looks good"
-	//
-	// For StartStep and Resume signal types, you must send the name of the Automation
-	// step to start or resume as the payload. For example:
-	//
-	// StepName="step1"
-	//
-	// For the StopStep signal type, you must send the step execution ID as the
-	// payload. For example:
-	//
-	// StepExecutionId="97fff367-fc5a-4299-aed8-0123456789ab"
-	Payload map[string][]string `min:"1" type:"map"`
-
-	// The type of signal to send to an Automation execution.
-	//
-	// SignalType is a required field
-	SignalType SignalType `type:"string" required:"true" enum:"true"`
-}
-
-// String returns the string representation
-func (s SendAutomationSignalInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *SendAutomationSignalInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "SendAutomationSignalInput"}
-
-	if s.AutomationExecutionId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("AutomationExecutionId"))
-	}
-	if s.AutomationExecutionId != nil && len(*s.AutomationExecutionId) < 36 {
-		invalidParams.Add(aws.NewErrParamMinLen("AutomationExecutionId", 36))
-	}
-	if s.Payload != nil && len(s.Payload) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Payload", 1))
-	}
-	if len(s.SignalType) == 0 {
-		invalidParams.Add(aws.NewErrParamRequired("SignalType"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type SendAutomationSignalOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s SendAutomationSignalOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opSendAutomationSignal = "SendAutomationSignal"
 
@@ -96,7 +25,7 @@ const opSendAutomationSignal = "SendAutomationSignal"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/SendAutomationSignal
-func (c *Client) SendAutomationSignalRequest(input *SendAutomationSignalInput) SendAutomationSignalRequest {
+func (c *Client) SendAutomationSignalRequest(input *types.SendAutomationSignalInput) SendAutomationSignalRequest {
 	op := &aws.Operation{
 		Name:       opSendAutomationSignal,
 		HTTPMethod: "POST",
@@ -104,10 +33,10 @@ func (c *Client) SendAutomationSignalRequest(input *SendAutomationSignalInput) S
 	}
 
 	if input == nil {
-		input = &SendAutomationSignalInput{}
+		input = &types.SendAutomationSignalInput{}
 	}
 
-	req := c.newRequest(op, input, &SendAutomationSignalOutput{})
+	req := c.newRequest(op, input, &types.SendAutomationSignalOutput{})
 	return SendAutomationSignalRequest{Request: req, Input: input, Copy: c.SendAutomationSignalRequest}
 }
 
@@ -115,8 +44,8 @@ func (c *Client) SendAutomationSignalRequest(input *SendAutomationSignalInput) S
 // SendAutomationSignal API operation.
 type SendAutomationSignalRequest struct {
 	*aws.Request
-	Input *SendAutomationSignalInput
-	Copy  func(*SendAutomationSignalInput) SendAutomationSignalRequest
+	Input *types.SendAutomationSignalInput
+	Copy  func(*types.SendAutomationSignalInput) SendAutomationSignalRequest
 }
 
 // Send marshals and sends the SendAutomationSignal API request.
@@ -128,7 +57,7 @@ func (r SendAutomationSignalRequest) Send(ctx context.Context) (*SendAutomationS
 	}
 
 	resp := &SendAutomationSignalResponse{
-		SendAutomationSignalOutput: r.Request.Data.(*SendAutomationSignalOutput),
+		SendAutomationSignalOutput: r.Request.Data.(*types.SendAutomationSignalOutput),
 		response:                   &aws.Response{Request: r.Request},
 	}
 
@@ -138,7 +67,7 @@ func (r SendAutomationSignalRequest) Send(ctx context.Context) (*SendAutomationS
 // SendAutomationSignalResponse is the response type for the
 // SendAutomationSignal API operation.
 type SendAutomationSignalResponse struct {
-	*SendAutomationSignalOutput
+	*types.SendAutomationSignalOutput
 
 	response *aws.Response
 }

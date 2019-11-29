@@ -6,51 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/codedeploy/types"
 )
-
-// Represents the input of a BatchGetDeployments operation.
-type BatchGetDeploymentsInput struct {
-	_ struct{} `type:"structure"`
-
-	// A list of deployment IDs, separated by spaces. The maximum number of deployment
-	// IDs you can specify is 25.
-	//
-	// DeploymentIds is a required field
-	DeploymentIds []string `locationName:"deploymentIds" type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s BatchGetDeploymentsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *BatchGetDeploymentsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "BatchGetDeploymentsInput"}
-
-	if s.DeploymentIds == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DeploymentIds"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Represents the output of a BatchGetDeployments operation.
-type BatchGetDeploymentsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Information about the deployments.
-	DeploymentsInfo []DeploymentInfo `locationName:"deploymentsInfo" type:"list"`
-}
-
-// String returns the string representation
-func (s BatchGetDeploymentsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opBatchGetDeployments = "BatchGetDeployments"
 
@@ -68,7 +25,7 @@ const opBatchGetDeployments = "BatchGetDeployments"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/BatchGetDeployments
-func (c *Client) BatchGetDeploymentsRequest(input *BatchGetDeploymentsInput) BatchGetDeploymentsRequest {
+func (c *Client) BatchGetDeploymentsRequest(input *types.BatchGetDeploymentsInput) BatchGetDeploymentsRequest {
 	op := &aws.Operation{
 		Name:       opBatchGetDeployments,
 		HTTPMethod: "POST",
@@ -76,10 +33,10 @@ func (c *Client) BatchGetDeploymentsRequest(input *BatchGetDeploymentsInput) Bat
 	}
 
 	if input == nil {
-		input = &BatchGetDeploymentsInput{}
+		input = &types.BatchGetDeploymentsInput{}
 	}
 
-	req := c.newRequest(op, input, &BatchGetDeploymentsOutput{})
+	req := c.newRequest(op, input, &types.BatchGetDeploymentsOutput{})
 	return BatchGetDeploymentsRequest{Request: req, Input: input, Copy: c.BatchGetDeploymentsRequest}
 }
 
@@ -87,8 +44,8 @@ func (c *Client) BatchGetDeploymentsRequest(input *BatchGetDeploymentsInput) Bat
 // BatchGetDeployments API operation.
 type BatchGetDeploymentsRequest struct {
 	*aws.Request
-	Input *BatchGetDeploymentsInput
-	Copy  func(*BatchGetDeploymentsInput) BatchGetDeploymentsRequest
+	Input *types.BatchGetDeploymentsInput
+	Copy  func(*types.BatchGetDeploymentsInput) BatchGetDeploymentsRequest
 }
 
 // Send marshals and sends the BatchGetDeployments API request.
@@ -100,7 +57,7 @@ func (r BatchGetDeploymentsRequest) Send(ctx context.Context) (*BatchGetDeployme
 	}
 
 	resp := &BatchGetDeploymentsResponse{
-		BatchGetDeploymentsOutput: r.Request.Data.(*BatchGetDeploymentsOutput),
+		BatchGetDeploymentsOutput: r.Request.Data.(*types.BatchGetDeploymentsOutput),
 		response:                  &aws.Response{Request: r.Request},
 	}
 
@@ -110,7 +67,7 @@ func (r BatchGetDeploymentsRequest) Send(ctx context.Context) (*BatchGetDeployme
 // BatchGetDeploymentsResponse is the response type for the
 // BatchGetDeployments API operation.
 type BatchGetDeploymentsResponse struct {
-	*BatchGetDeploymentsOutput
+	*types.BatchGetDeploymentsOutput
 
 	response *aws.Response
 }

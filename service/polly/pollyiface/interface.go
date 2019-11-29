@@ -10,6 +10,7 @@ package pollyiface
 
 import (
 	"github.com/aws/aws-sdk-go-v2/service/polly"
+	"github.com/aws/aws-sdk-go-v2/service/polly/types"
 )
 
 // ClientAPI provides an interface to enable mocking the
@@ -43,7 +44,7 @@ import (
 //    type mockClientClient struct {
 //        pollyiface.ClientPI
 //    }
-//    func (m *mockClientClient) DeleteLexicon(input *polly.DeleteLexiconInput) (*polly.DeleteLexiconOutput, error) {
+//    func (m *mockClientClient) DeleteLexicon(input *types.DeleteLexiconInput) (*types.DeleteLexiconOutput, error) {
 //        // mock response/functionality
 //    }
 //
@@ -61,23 +62,23 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type ClientAPI interface {
-	DeleteLexiconRequest(*polly.DeleteLexiconInput) polly.DeleteLexiconRequest
+	DeleteLexiconRequest(*types.DeleteLexiconInput) polly.DeleteLexiconRequest
 
-	DescribeVoicesRequest(*polly.DescribeVoicesInput) polly.DescribeVoicesRequest
+	DescribeVoicesRequest(*types.DescribeVoicesInput) polly.DescribeVoicesRequest
 
-	GetLexiconRequest(*polly.GetLexiconInput) polly.GetLexiconRequest
+	GetLexiconRequest(*types.GetLexiconInput) polly.GetLexiconRequest
 
-	GetSpeechSynthesisTaskRequest(*polly.GetSpeechSynthesisTaskInput) polly.GetSpeechSynthesisTaskRequest
+	GetSpeechSynthesisTaskRequest(*types.GetSpeechSynthesisTaskInput) polly.GetSpeechSynthesisTaskRequest
 
-	ListLexiconsRequest(*polly.ListLexiconsInput) polly.ListLexiconsRequest
+	ListLexiconsRequest(*types.ListLexiconsInput) polly.ListLexiconsRequest
 
-	ListSpeechSynthesisTasksRequest(*polly.ListSpeechSynthesisTasksInput) polly.ListSpeechSynthesisTasksRequest
+	ListSpeechSynthesisTasksRequest(*types.ListSpeechSynthesisTasksInput) polly.ListSpeechSynthesisTasksRequest
 
-	PutLexiconRequest(*polly.PutLexiconInput) polly.PutLexiconRequest
+	PutLexiconRequest(*types.PutLexiconInput) polly.PutLexiconRequest
 
-	StartSpeechSynthesisTaskRequest(*polly.StartSpeechSynthesisTaskInput) polly.StartSpeechSynthesisTaskRequest
+	StartSpeechSynthesisTaskRequest(*types.StartSpeechSynthesisTaskInput) polly.StartSpeechSynthesisTaskRequest
 
-	SynthesizeSpeechRequest(*polly.SynthesizeSpeechInput) polly.SynthesizeSpeechRequest
+	SynthesizeSpeechRequest(*types.SynthesizeSpeechInput) polly.SynthesizeSpeechRequest
 }
 
 var _ ClientAPI = (*polly.Client)(nil)

@@ -6,88 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/iotevents/types"
 )
-
-type DescribeDetectorModelInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the detector model.
-	//
-	// DetectorModelName is a required field
-	DetectorModelName *string `location:"uri" locationName:"detectorModelName" min:"1" type:"string" required:"true"`
-
-	// The version of the detector model.
-	DetectorModelVersion *string `location:"querystring" locationName:"version" min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeDetectorModelInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeDetectorModelInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeDetectorModelInput"}
-
-	if s.DetectorModelName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DetectorModelName"))
-	}
-	if s.DetectorModelName != nil && len(*s.DetectorModelName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("DetectorModelName", 1))
-	}
-	if s.DetectorModelVersion != nil && len(*s.DetectorModelVersion) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("DetectorModelVersion", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DescribeDetectorModelInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.DetectorModelName != nil {
-		v := *s.DetectorModelName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "detectorModelName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.DetectorModelVersion != nil {
-		v := *s.DetectorModelVersion
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "version", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type DescribeDetectorModelOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Information about the detector model.
-	DetectorModel *DetectorModel `locationName:"detectorModel" type:"structure"`
-}
-
-// String returns the string representation
-func (s DescribeDetectorModelOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DescribeDetectorModelOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.DetectorModel != nil {
-		v := s.DetectorModel
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "detectorModel", v, metadata)
-	}
-	return nil
-}
 
 const opDescribeDetectorModel = "DescribeDetectorModel"
 
@@ -105,7 +25,7 @@ const opDescribeDetectorModel = "DescribeDetectorModel"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iotevents-2018-07-27/DescribeDetectorModel
-func (c *Client) DescribeDetectorModelRequest(input *DescribeDetectorModelInput) DescribeDetectorModelRequest {
+func (c *Client) DescribeDetectorModelRequest(input *types.DescribeDetectorModelInput) DescribeDetectorModelRequest {
 	op := &aws.Operation{
 		Name:       opDescribeDetectorModel,
 		HTTPMethod: "GET",
@@ -113,10 +33,10 @@ func (c *Client) DescribeDetectorModelRequest(input *DescribeDetectorModelInput)
 	}
 
 	if input == nil {
-		input = &DescribeDetectorModelInput{}
+		input = &types.DescribeDetectorModelInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeDetectorModelOutput{})
+	req := c.newRequest(op, input, &types.DescribeDetectorModelOutput{})
 	return DescribeDetectorModelRequest{Request: req, Input: input, Copy: c.DescribeDetectorModelRequest}
 }
 
@@ -124,8 +44,8 @@ func (c *Client) DescribeDetectorModelRequest(input *DescribeDetectorModelInput)
 // DescribeDetectorModel API operation.
 type DescribeDetectorModelRequest struct {
 	*aws.Request
-	Input *DescribeDetectorModelInput
-	Copy  func(*DescribeDetectorModelInput) DescribeDetectorModelRequest
+	Input *types.DescribeDetectorModelInput
+	Copy  func(*types.DescribeDetectorModelInput) DescribeDetectorModelRequest
 }
 
 // Send marshals and sends the DescribeDetectorModel API request.
@@ -137,7 +57,7 @@ func (r DescribeDetectorModelRequest) Send(ctx context.Context) (*DescribeDetect
 	}
 
 	resp := &DescribeDetectorModelResponse{
-		DescribeDetectorModelOutput: r.Request.Data.(*DescribeDetectorModelOutput),
+		DescribeDetectorModelOutput: r.Request.Data.(*types.DescribeDetectorModelOutput),
 		response:                    &aws.Response{Request: r.Request},
 	}
 
@@ -147,7 +67,7 @@ func (r DescribeDetectorModelRequest) Send(ctx context.Context) (*DescribeDetect
 // DescribeDetectorModelResponse is the response type for the
 // DescribeDetectorModel API operation.
 type DescribeDetectorModelResponse struct {
-	*DescribeDetectorModelOutput
+	*types.DescribeDetectorModelOutput
 
 	response *aws.Response
 }

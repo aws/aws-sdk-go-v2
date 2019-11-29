@@ -6,87 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/iot/types"
 )
-
-// The input for the DescribeCACertificate operation.
-type DescribeCACertificateInput struct {
-	_ struct{} `type:"structure"`
-
-	// The CA certificate identifier.
-	//
-	// CertificateId is a required field
-	CertificateId *string `location:"uri" locationName:"caCertificateId" min:"64" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeCACertificateInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeCACertificateInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeCACertificateInput"}
-
-	if s.CertificateId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("CertificateId"))
-	}
-	if s.CertificateId != nil && len(*s.CertificateId) < 64 {
-		invalidParams.Add(aws.NewErrParamMinLen("CertificateId", 64))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DescribeCACertificateInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.CertificateId != nil {
-		v := *s.CertificateId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "caCertificateId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-// The output from the DescribeCACertificate operation.
-type DescribeCACertificateOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The CA certificate description.
-	CertificateDescription *CACertificateDescription `locationName:"certificateDescription" type:"structure"`
-
-	// Information about the registration configuration.
-	RegistrationConfig *RegistrationConfig `locationName:"registrationConfig" type:"structure"`
-}
-
-// String returns the string representation
-func (s DescribeCACertificateOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DescribeCACertificateOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.CertificateDescription != nil {
-		v := s.CertificateDescription
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "certificateDescription", v, metadata)
-	}
-	if s.RegistrationConfig != nil {
-		v := s.RegistrationConfig
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "registrationConfig", v, metadata)
-	}
-	return nil
-}
 
 const opDescribeCACertificate = "DescribeCACertificate"
 
@@ -101,7 +22,7 @@ const opDescribeCACertificate = "DescribeCACertificate"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) DescribeCACertificateRequest(input *DescribeCACertificateInput) DescribeCACertificateRequest {
+func (c *Client) DescribeCACertificateRequest(input *types.DescribeCACertificateInput) DescribeCACertificateRequest {
 	op := &aws.Operation{
 		Name:       opDescribeCACertificate,
 		HTTPMethod: "GET",
@@ -109,10 +30,10 @@ func (c *Client) DescribeCACertificateRequest(input *DescribeCACertificateInput)
 	}
 
 	if input == nil {
-		input = &DescribeCACertificateInput{}
+		input = &types.DescribeCACertificateInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeCACertificateOutput{})
+	req := c.newRequest(op, input, &types.DescribeCACertificateOutput{})
 	return DescribeCACertificateRequest{Request: req, Input: input, Copy: c.DescribeCACertificateRequest}
 }
 
@@ -120,8 +41,8 @@ func (c *Client) DescribeCACertificateRequest(input *DescribeCACertificateInput)
 // DescribeCACertificate API operation.
 type DescribeCACertificateRequest struct {
 	*aws.Request
-	Input *DescribeCACertificateInput
-	Copy  func(*DescribeCACertificateInput) DescribeCACertificateRequest
+	Input *types.DescribeCACertificateInput
+	Copy  func(*types.DescribeCACertificateInput) DescribeCACertificateRequest
 }
 
 // Send marshals and sends the DescribeCACertificate API request.
@@ -133,7 +54,7 @@ func (r DescribeCACertificateRequest) Send(ctx context.Context) (*DescribeCACert
 	}
 
 	resp := &DescribeCACertificateResponse{
-		DescribeCACertificateOutput: r.Request.Data.(*DescribeCACertificateOutput),
+		DescribeCACertificateOutput: r.Request.Data.(*types.DescribeCACertificateOutput),
 		response:                    &aws.Response{Request: r.Request},
 	}
 
@@ -143,7 +64,7 @@ func (r DescribeCACertificateRequest) Send(ctx context.Context) (*DescribeCACert
 // DescribeCACertificateResponse is the response type for the
 // DescribeCACertificate API operation.
 type DescribeCACertificateResponse struct {
-	*DescribeCACertificateOutput
+	*types.DescribeCACertificateOutput
 
 	response *aws.Response
 }

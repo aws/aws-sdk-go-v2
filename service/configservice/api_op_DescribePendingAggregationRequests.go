@@ -6,41 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/configservice/types"
 )
-
-type DescribePendingAggregationRequestsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The maximum number of evaluation results returned on each page. The default
-	// is maximum. If you specify 0, AWS Config uses the default.
-	Limit *int64 `type:"integer"`
-
-	// The nextToken string returned on a previous page that you use to get the
-	// next page of results in a paginated response.
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s DescribePendingAggregationRequestsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type DescribePendingAggregationRequestsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The nextToken string returned on a previous page that you use to get the
-	// next page of results in a paginated response.
-	NextToken *string `type:"string"`
-
-	// Returns a PendingAggregationRequests object.
-	PendingAggregationRequests []PendingAggregationRequest `type:"list"`
-}
-
-// String returns the string representation
-func (s DescribePendingAggregationRequestsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribePendingAggregationRequests = "DescribePendingAggregationRequests"
 
@@ -57,7 +24,7 @@ const opDescribePendingAggregationRequests = "DescribePendingAggregationRequests
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DescribePendingAggregationRequests
-func (c *Client) DescribePendingAggregationRequestsRequest(input *DescribePendingAggregationRequestsInput) DescribePendingAggregationRequestsRequest {
+func (c *Client) DescribePendingAggregationRequestsRequest(input *types.DescribePendingAggregationRequestsInput) DescribePendingAggregationRequestsRequest {
 	op := &aws.Operation{
 		Name:       opDescribePendingAggregationRequests,
 		HTTPMethod: "POST",
@@ -65,10 +32,10 @@ func (c *Client) DescribePendingAggregationRequestsRequest(input *DescribePendin
 	}
 
 	if input == nil {
-		input = &DescribePendingAggregationRequestsInput{}
+		input = &types.DescribePendingAggregationRequestsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribePendingAggregationRequestsOutput{})
+	req := c.newRequest(op, input, &types.DescribePendingAggregationRequestsOutput{})
 	return DescribePendingAggregationRequestsRequest{Request: req, Input: input, Copy: c.DescribePendingAggregationRequestsRequest}
 }
 
@@ -76,8 +43,8 @@ func (c *Client) DescribePendingAggregationRequestsRequest(input *DescribePendin
 // DescribePendingAggregationRequests API operation.
 type DescribePendingAggregationRequestsRequest struct {
 	*aws.Request
-	Input *DescribePendingAggregationRequestsInput
-	Copy  func(*DescribePendingAggregationRequestsInput) DescribePendingAggregationRequestsRequest
+	Input *types.DescribePendingAggregationRequestsInput
+	Copy  func(*types.DescribePendingAggregationRequestsInput) DescribePendingAggregationRequestsRequest
 }
 
 // Send marshals and sends the DescribePendingAggregationRequests API request.
@@ -89,7 +56,7 @@ func (r DescribePendingAggregationRequestsRequest) Send(ctx context.Context) (*D
 	}
 
 	resp := &DescribePendingAggregationRequestsResponse{
-		DescribePendingAggregationRequestsOutput: r.Request.Data.(*DescribePendingAggregationRequestsOutput),
+		DescribePendingAggregationRequestsOutput: r.Request.Data.(*types.DescribePendingAggregationRequestsOutput),
 		response:                                 &aws.Response{Request: r.Request},
 	}
 
@@ -99,7 +66,7 @@ func (r DescribePendingAggregationRequestsRequest) Send(ctx context.Context) (*D
 // DescribePendingAggregationRequestsResponse is the response type for the
 // DescribePendingAggregationRequests API operation.
 type DescribePendingAggregationRequestsResponse struct {
-	*DescribePendingAggregationRequestsOutput
+	*types.DescribePendingAggregationRequestsOutput
 
 	response *aws.Response
 }

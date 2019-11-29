@@ -4,68 +4,10 @@ package datapipeline
 
 import (
 	"context"
-	"fmt"
-	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/datapipeline/types"
 )
-
-// Contains the parameters for ActivatePipeline.
-type ActivatePipelineInput struct {
-	_ struct{} `type:"structure"`
-
-	// A list of parameter values to pass to the pipeline at activation.
-	ParameterValues []ParameterValue `locationName:"parameterValues" type:"list"`
-
-	// The ID of the pipeline.
-	//
-	// PipelineId is a required field
-	PipelineId *string `locationName:"pipelineId" min:"1" type:"string" required:"true"`
-
-	// The date and time to resume the pipeline. By default, the pipeline resumes
-	// from the last completed execution.
-	StartTimestamp *time.Time `locationName:"startTimestamp" type:"timestamp"`
-}
-
-// String returns the string representation
-func (s ActivatePipelineInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ActivatePipelineInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ActivatePipelineInput"}
-
-	if s.PipelineId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("PipelineId"))
-	}
-	if s.PipelineId != nil && len(*s.PipelineId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("PipelineId", 1))
-	}
-	if s.ParameterValues != nil {
-		for i, v := range s.ParameterValues {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "ParameterValues", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Contains the output of ActivatePipeline.
-type ActivatePipelineOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s ActivatePipelineOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opActivatePipeline = "ActivatePipeline"
 
@@ -89,7 +31,7 @@ const opActivatePipeline = "ActivatePipeline"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/datapipeline-2012-10-29/ActivatePipeline
-func (c *Client) ActivatePipelineRequest(input *ActivatePipelineInput) ActivatePipelineRequest {
+func (c *Client) ActivatePipelineRequest(input *types.ActivatePipelineInput) ActivatePipelineRequest {
 	op := &aws.Operation{
 		Name:       opActivatePipeline,
 		HTTPMethod: "POST",
@@ -97,10 +39,10 @@ func (c *Client) ActivatePipelineRequest(input *ActivatePipelineInput) ActivateP
 	}
 
 	if input == nil {
-		input = &ActivatePipelineInput{}
+		input = &types.ActivatePipelineInput{}
 	}
 
-	req := c.newRequest(op, input, &ActivatePipelineOutput{})
+	req := c.newRequest(op, input, &types.ActivatePipelineOutput{})
 	return ActivatePipelineRequest{Request: req, Input: input, Copy: c.ActivatePipelineRequest}
 }
 
@@ -108,8 +50,8 @@ func (c *Client) ActivatePipelineRequest(input *ActivatePipelineInput) ActivateP
 // ActivatePipeline API operation.
 type ActivatePipelineRequest struct {
 	*aws.Request
-	Input *ActivatePipelineInput
-	Copy  func(*ActivatePipelineInput) ActivatePipelineRequest
+	Input *types.ActivatePipelineInput
+	Copy  func(*types.ActivatePipelineInput) ActivatePipelineRequest
 }
 
 // Send marshals and sends the ActivatePipeline API request.
@@ -121,7 +63,7 @@ func (r ActivatePipelineRequest) Send(ctx context.Context) (*ActivatePipelineRes
 	}
 
 	resp := &ActivatePipelineResponse{
-		ActivatePipelineOutput: r.Request.Data.(*ActivatePipelineOutput),
+		ActivatePipelineOutput: r.Request.Data.(*types.ActivatePipelineOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -131,7 +73,7 @@ func (r ActivatePipelineRequest) Send(ctx context.Context) (*ActivatePipelineRes
 // ActivatePipelineResponse is the response type for the
 // ActivatePipeline API operation.
 type ActivatePipelineResponse struct {
-	*ActivatePipelineOutput
+	*types.ActivatePipelineOutput
 
 	response *aws.Response
 }

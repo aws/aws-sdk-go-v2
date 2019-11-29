@@ -6,69 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/storagegateway/types"
 )
-
-// DescribeTapeArchivesInput
-type DescribeTapeArchivesInput struct {
-	_ struct{} `type:"structure"`
-
-	// Specifies that the number of virtual tapes descried be limited to the specified
-	// number.
-	Limit *int64 `min:"1" type:"integer"`
-
-	// An opaque string that indicates the position at which to begin describing
-	// virtual tapes.
-	Marker *string `min:"1" type:"string"`
-
-	// Specifies one or more unique Amazon Resource Names (ARNs) that represent
-	// the virtual tapes you want to describe.
-	TapeARNs []string `type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeTapeArchivesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeTapeArchivesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeTapeArchivesInput"}
-	if s.Limit != nil && *s.Limit < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("Limit", 1))
-	}
-	if s.Marker != nil && len(*s.Marker) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Marker", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// DescribeTapeArchivesOutput
-type DescribeTapeArchivesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// An opaque string that indicates the position at which the virtual tapes that
-	// were fetched for description ended. Use this marker in your next request
-	// to fetch the next set of virtual tapes in the virtual tape shelf (VTS). If
-	// there are no more virtual tapes to describe, this field does not appear in
-	// the response.
-	Marker *string `min:"1" type:"string"`
-
-	// An array of virtual tape objects in the virtual tape shelf (VTS). The description
-	// includes of the Amazon Resource Name (ARN) of the virtual tapes. The information
-	// returned includes the Amazon Resource Names (ARNs) of the tapes, size of
-	// the tapes, status of the tapes, progress of the description and tape barcode.
-	TapeArchives []TapeArchive `type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeTapeArchivesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeTapeArchives = "DescribeTapeArchives"
 
@@ -89,7 +28,7 @@ const opDescribeTapeArchives = "DescribeTapeArchives"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DescribeTapeArchives
-func (c *Client) DescribeTapeArchivesRequest(input *DescribeTapeArchivesInput) DescribeTapeArchivesRequest {
+func (c *Client) DescribeTapeArchivesRequest(input *types.DescribeTapeArchivesInput) DescribeTapeArchivesRequest {
 	op := &aws.Operation{
 		Name:       opDescribeTapeArchives,
 		HTTPMethod: "POST",
@@ -103,10 +42,10 @@ func (c *Client) DescribeTapeArchivesRequest(input *DescribeTapeArchivesInput) D
 	}
 
 	if input == nil {
-		input = &DescribeTapeArchivesInput{}
+		input = &types.DescribeTapeArchivesInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeTapeArchivesOutput{})
+	req := c.newRequest(op, input, &types.DescribeTapeArchivesOutput{})
 	return DescribeTapeArchivesRequest{Request: req, Input: input, Copy: c.DescribeTapeArchivesRequest}
 }
 
@@ -114,8 +53,8 @@ func (c *Client) DescribeTapeArchivesRequest(input *DescribeTapeArchivesInput) D
 // DescribeTapeArchives API operation.
 type DescribeTapeArchivesRequest struct {
 	*aws.Request
-	Input *DescribeTapeArchivesInput
-	Copy  func(*DescribeTapeArchivesInput) DescribeTapeArchivesRequest
+	Input *types.DescribeTapeArchivesInput
+	Copy  func(*types.DescribeTapeArchivesInput) DescribeTapeArchivesRequest
 }
 
 // Send marshals and sends the DescribeTapeArchives API request.
@@ -127,7 +66,7 @@ func (r DescribeTapeArchivesRequest) Send(ctx context.Context) (*DescribeTapeArc
 	}
 
 	resp := &DescribeTapeArchivesResponse{
-		DescribeTapeArchivesOutput: r.Request.Data.(*DescribeTapeArchivesOutput),
+		DescribeTapeArchivesOutput: r.Request.Data.(*types.DescribeTapeArchivesOutput),
 		response:                   &aws.Response{Request: r.Request},
 	}
 
@@ -157,7 +96,7 @@ func NewDescribeTapeArchivesPaginator(req DescribeTapeArchivesRequest) DescribeT
 	return DescribeTapeArchivesPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *DescribeTapeArchivesInput
+				var inCpy *types.DescribeTapeArchivesInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -177,14 +116,14 @@ type DescribeTapeArchivesPaginator struct {
 	aws.Pager
 }
 
-func (p *DescribeTapeArchivesPaginator) CurrentPage() *DescribeTapeArchivesOutput {
-	return p.Pager.CurrentPage().(*DescribeTapeArchivesOutput)
+func (p *DescribeTapeArchivesPaginator) CurrentPage() *types.DescribeTapeArchivesOutput {
+	return p.Pager.CurrentPage().(*types.DescribeTapeArchivesOutput)
 }
 
 // DescribeTapeArchivesResponse is the response type for the
 // DescribeTapeArchives API operation.
 type DescribeTapeArchivesResponse struct {
-	*DescribeTapeArchivesOutput
+	*types.DescribeTapeArchivesOutput
 
 	response *aws.Response
 }

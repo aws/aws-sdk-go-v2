@@ -6,48 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/databasemigrationservice/types"
 )
-
-type DescribeOrderableReplicationInstancesInput struct {
-	_ struct{} `type:"structure"`
-
-	// An optional pagination token provided by a previous request. If this parameter
-	// is specified, the response includes only records beyond the marker, up to
-	// the value specified by MaxRecords.
-	Marker *string `type:"string"`
-
-	// The maximum number of records to include in the response. If more records
-	// exist than the specified MaxRecords value, a pagination token called a marker
-	// is included in the response so that the remaining results can be retrieved.
-	//
-	// Default: 100
-	//
-	// Constraints: Minimum 20, maximum 100.
-	MaxRecords *int64 `type:"integer"`
-}
-
-// String returns the string representation
-func (s DescribeOrderableReplicationInstancesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type DescribeOrderableReplicationInstancesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// An optional pagination token provided by a previous request. If this parameter
-	// is specified, the response includes only records beyond the marker, up to
-	// the value specified by MaxRecords.
-	Marker *string `type:"string"`
-
-	// The order-able replication instances available.
-	OrderableReplicationInstances []OrderableReplicationInstance `type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeOrderableReplicationInstancesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeOrderableReplicationInstances = "DescribeOrderableReplicationInstances"
 
@@ -65,7 +25,7 @@ const opDescribeOrderableReplicationInstances = "DescribeOrderableReplicationIns
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeOrderableReplicationInstances
-func (c *Client) DescribeOrderableReplicationInstancesRequest(input *DescribeOrderableReplicationInstancesInput) DescribeOrderableReplicationInstancesRequest {
+func (c *Client) DescribeOrderableReplicationInstancesRequest(input *types.DescribeOrderableReplicationInstancesInput) DescribeOrderableReplicationInstancesRequest {
 	op := &aws.Operation{
 		Name:       opDescribeOrderableReplicationInstances,
 		HTTPMethod: "POST",
@@ -79,10 +39,10 @@ func (c *Client) DescribeOrderableReplicationInstancesRequest(input *DescribeOrd
 	}
 
 	if input == nil {
-		input = &DescribeOrderableReplicationInstancesInput{}
+		input = &types.DescribeOrderableReplicationInstancesInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeOrderableReplicationInstancesOutput{})
+	req := c.newRequest(op, input, &types.DescribeOrderableReplicationInstancesOutput{})
 	return DescribeOrderableReplicationInstancesRequest{Request: req, Input: input, Copy: c.DescribeOrderableReplicationInstancesRequest}
 }
 
@@ -90,8 +50,8 @@ func (c *Client) DescribeOrderableReplicationInstancesRequest(input *DescribeOrd
 // DescribeOrderableReplicationInstances API operation.
 type DescribeOrderableReplicationInstancesRequest struct {
 	*aws.Request
-	Input *DescribeOrderableReplicationInstancesInput
-	Copy  func(*DescribeOrderableReplicationInstancesInput) DescribeOrderableReplicationInstancesRequest
+	Input *types.DescribeOrderableReplicationInstancesInput
+	Copy  func(*types.DescribeOrderableReplicationInstancesInput) DescribeOrderableReplicationInstancesRequest
 }
 
 // Send marshals and sends the DescribeOrderableReplicationInstances API request.
@@ -103,7 +63,7 @@ func (r DescribeOrderableReplicationInstancesRequest) Send(ctx context.Context) 
 	}
 
 	resp := &DescribeOrderableReplicationInstancesResponse{
-		DescribeOrderableReplicationInstancesOutput: r.Request.Data.(*DescribeOrderableReplicationInstancesOutput),
+		DescribeOrderableReplicationInstancesOutput: r.Request.Data.(*types.DescribeOrderableReplicationInstancesOutput),
 		response: &aws.Response{Request: r.Request},
 	}
 
@@ -133,7 +93,7 @@ func NewDescribeOrderableReplicationInstancesPaginator(req DescribeOrderableRepl
 	return DescribeOrderableReplicationInstancesPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *DescribeOrderableReplicationInstancesInput
+				var inCpy *types.DescribeOrderableReplicationInstancesInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -153,14 +113,14 @@ type DescribeOrderableReplicationInstancesPaginator struct {
 	aws.Pager
 }
 
-func (p *DescribeOrderableReplicationInstancesPaginator) CurrentPage() *DescribeOrderableReplicationInstancesOutput {
-	return p.Pager.CurrentPage().(*DescribeOrderableReplicationInstancesOutput)
+func (p *DescribeOrderableReplicationInstancesPaginator) CurrentPage() *types.DescribeOrderableReplicationInstancesOutput {
+	return p.Pager.CurrentPage().(*types.DescribeOrderableReplicationInstancesOutput)
 }
 
 // DescribeOrderableReplicationInstancesResponse is the response type for the
 // DescribeOrderableReplicationInstances API operation.
 type DescribeOrderableReplicationInstancesResponse struct {
-	*DescribeOrderableReplicationInstancesOutput
+	*types.DescribeOrderableReplicationInstancesOutput
 
 	response *aws.Response
 }

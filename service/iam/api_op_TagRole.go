@@ -4,74 +4,12 @@ package iam
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/query"
+	"github.com/aws/aws-sdk-go-v2/service/iam/types"
 )
-
-type TagRoleInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the role that you want to add tags to.
-	//
-	// This parameter accepts (through its regex pattern (http://wikipedia.org/wiki/regex))
-	// a string of characters that consist of upper and lowercase alphanumeric characters
-	// with no spaces. You can also include any of the following characters: _+=,.@-
-	//
-	// RoleName is a required field
-	RoleName *string `min:"1" type:"string" required:"true"`
-
-	// The list of tags that you want to attach to the role. Each tag consists of
-	// a key name and an associated value. You can specify this with a JSON string.
-	//
-	// Tags is a required field
-	Tags []Tag `type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s TagRoleInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *TagRoleInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "TagRoleInput"}
-
-	if s.RoleName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("RoleName"))
-	}
-	if s.RoleName != nil && len(*s.RoleName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("RoleName", 1))
-	}
-
-	if s.Tags == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Tags"))
-	}
-	if s.Tags != nil {
-		for i, v := range s.Tags {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type TagRoleOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s TagRoleOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opTagRole = "TagRole"
 
@@ -121,7 +59,7 @@ const opTagRole = "TagRole"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/TagRole
-func (c *Client) TagRoleRequest(input *TagRoleInput) TagRoleRequest {
+func (c *Client) TagRoleRequest(input *types.TagRoleInput) TagRoleRequest {
 	op := &aws.Operation{
 		Name:       opTagRole,
 		HTTPMethod: "POST",
@@ -129,10 +67,10 @@ func (c *Client) TagRoleRequest(input *TagRoleInput) TagRoleRequest {
 	}
 
 	if input == nil {
-		input = &TagRoleInput{}
+		input = &types.TagRoleInput{}
 	}
 
-	req := c.newRequest(op, input, &TagRoleOutput{})
+	req := c.newRequest(op, input, &types.TagRoleOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return TagRoleRequest{Request: req, Input: input, Copy: c.TagRoleRequest}
@@ -142,8 +80,8 @@ func (c *Client) TagRoleRequest(input *TagRoleInput) TagRoleRequest {
 // TagRole API operation.
 type TagRoleRequest struct {
 	*aws.Request
-	Input *TagRoleInput
-	Copy  func(*TagRoleInput) TagRoleRequest
+	Input *types.TagRoleInput
+	Copy  func(*types.TagRoleInput) TagRoleRequest
 }
 
 // Send marshals and sends the TagRole API request.
@@ -155,7 +93,7 @@ func (r TagRoleRequest) Send(ctx context.Context) (*TagRoleResponse, error) {
 	}
 
 	resp := &TagRoleResponse{
-		TagRoleOutput: r.Request.Data.(*TagRoleOutput),
+		TagRoleOutput: r.Request.Data.(*types.TagRoleOutput),
 		response:      &aws.Response{Request: r.Request},
 	}
 
@@ -165,7 +103,7 @@ func (r TagRoleRequest) Send(ctx context.Context) (*TagRoleResponse, error) {
 // TagRoleResponse is the response type for the
 // TagRole API operation.
 type TagRoleResponse struct {
-	*TagRoleOutput
+	*types.TagRoleOutput
 
 	response *aws.Response
 }

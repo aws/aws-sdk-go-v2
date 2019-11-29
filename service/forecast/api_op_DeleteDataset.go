@@ -6,47 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
+	"github.com/aws/aws-sdk-go-v2/service/forecast/types"
 )
-
-type DeleteDatasetInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the dataset to delete.
-	//
-	// DatasetArn is a required field
-	DatasetArn *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteDatasetInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteDatasetInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteDatasetInput"}
-
-	if s.DatasetArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DatasetArn"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteDatasetOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteDatasetOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteDataset = "DeleteDataset"
 
@@ -65,7 +28,7 @@ const opDeleteDataset = "DeleteDataset"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/DeleteDataset
-func (c *Client) DeleteDatasetRequest(input *DeleteDatasetInput) DeleteDatasetRequest {
+func (c *Client) DeleteDatasetRequest(input *types.DeleteDatasetInput) DeleteDatasetRequest {
 	op := &aws.Operation{
 		Name:       opDeleteDataset,
 		HTTPMethod: "POST",
@@ -73,10 +36,10 @@ func (c *Client) DeleteDatasetRequest(input *DeleteDatasetInput) DeleteDatasetRe
 	}
 
 	if input == nil {
-		input = &DeleteDatasetInput{}
+		input = &types.DeleteDatasetInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteDatasetOutput{})
+	req := c.newRequest(op, input, &types.DeleteDatasetOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return DeleteDatasetRequest{Request: req, Input: input, Copy: c.DeleteDatasetRequest}
@@ -86,8 +49,8 @@ func (c *Client) DeleteDatasetRequest(input *DeleteDatasetInput) DeleteDatasetRe
 // DeleteDataset API operation.
 type DeleteDatasetRequest struct {
 	*aws.Request
-	Input *DeleteDatasetInput
-	Copy  func(*DeleteDatasetInput) DeleteDatasetRequest
+	Input *types.DeleteDatasetInput
+	Copy  func(*types.DeleteDatasetInput) DeleteDatasetRequest
 }
 
 // Send marshals and sends the DeleteDataset API request.
@@ -99,7 +62,7 @@ func (r DeleteDatasetRequest) Send(ctx context.Context) (*DeleteDatasetResponse,
 	}
 
 	resp := &DeleteDatasetResponse{
-		DeleteDatasetOutput: r.Request.Data.(*DeleteDatasetOutput),
+		DeleteDatasetOutput: r.Request.Data.(*types.DeleteDatasetOutput),
 		response:            &aws.Response{Request: r.Request},
 	}
 
@@ -109,7 +72,7 @@ func (r DeleteDatasetRequest) Send(ctx context.Context) (*DeleteDatasetResponse,
 // DeleteDatasetResponse is the response type for the
 // DeleteDataset API operation.
 type DeleteDatasetResponse struct {
-	*DeleteDatasetOutput
+	*types.DeleteDatasetOutput
 
 	response *aws.Response
 }

@@ -6,76 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-// Contains the parameters for CreateVpnConnection.
-type CreateVpnConnectionInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the customer gateway.
-	//
-	// CustomerGatewayId is a required field
-	CustomerGatewayId *string `type:"string" required:"true"`
-
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have
-	// the required permissions, the error response is DryRunOperation. Otherwise,
-	// it is UnauthorizedOperation.
-	DryRun *bool `locationName:"dryRun" type:"boolean"`
-
-	// The options for the VPN connection.
-	Options *VpnConnectionOptionsSpecification `locationName:"options" type:"structure"`
-
-	// The ID of the transit gateway. If you specify a transit gateway, you cannot
-	// specify a virtual private gateway.
-	TransitGatewayId *string `type:"string"`
-
-	// The type of VPN connection (ipsec.1).
-	//
-	// Type is a required field
-	Type *string `type:"string" required:"true"`
-
-	// The ID of the virtual private gateway. If you specify a virtual private gateway,
-	// you cannot specify a transit gateway.
-	VpnGatewayId *string `type:"string"`
-}
-
-// String returns the string representation
-func (s CreateVpnConnectionInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateVpnConnectionInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateVpnConnectionInput"}
-
-	if s.CustomerGatewayId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("CustomerGatewayId"))
-	}
-
-	if s.Type == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Type"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Contains the output of CreateVpnConnection.
-type CreateVpnConnectionOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Information about the VPN connection.
-	VpnConnection *VpnConnection `locationName:"vpnConnection" type:"structure"`
-}
-
-// String returns the string representation
-func (s CreateVpnConnectionOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCreateVpnConnection = "CreateVpnConnection"
 
@@ -110,7 +42,7 @@ const opCreateVpnConnection = "CreateVpnConnection"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateVpnConnection
-func (c *Client) CreateVpnConnectionRequest(input *CreateVpnConnectionInput) CreateVpnConnectionRequest {
+func (c *Client) CreateVpnConnectionRequest(input *types.CreateVpnConnectionInput) CreateVpnConnectionRequest {
 	op := &aws.Operation{
 		Name:       opCreateVpnConnection,
 		HTTPMethod: "POST",
@@ -118,10 +50,10 @@ func (c *Client) CreateVpnConnectionRequest(input *CreateVpnConnectionInput) Cre
 	}
 
 	if input == nil {
-		input = &CreateVpnConnectionInput{}
+		input = &types.CreateVpnConnectionInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateVpnConnectionOutput{})
+	req := c.newRequest(op, input, &types.CreateVpnConnectionOutput{})
 	return CreateVpnConnectionRequest{Request: req, Input: input, Copy: c.CreateVpnConnectionRequest}
 }
 
@@ -129,8 +61,8 @@ func (c *Client) CreateVpnConnectionRequest(input *CreateVpnConnectionInput) Cre
 // CreateVpnConnection API operation.
 type CreateVpnConnectionRequest struct {
 	*aws.Request
-	Input *CreateVpnConnectionInput
-	Copy  func(*CreateVpnConnectionInput) CreateVpnConnectionRequest
+	Input *types.CreateVpnConnectionInput
+	Copy  func(*types.CreateVpnConnectionInput) CreateVpnConnectionRequest
 }
 
 // Send marshals and sends the CreateVpnConnection API request.
@@ -142,7 +74,7 @@ func (r CreateVpnConnectionRequest) Send(ctx context.Context) (*CreateVpnConnect
 	}
 
 	resp := &CreateVpnConnectionResponse{
-		CreateVpnConnectionOutput: r.Request.Data.(*CreateVpnConnectionOutput),
+		CreateVpnConnectionOutput: r.Request.Data.(*types.CreateVpnConnectionOutput),
 		response:                  &aws.Response{Request: r.Request},
 	}
 
@@ -152,7 +84,7 @@ func (r CreateVpnConnectionRequest) Send(ctx context.Context) (*CreateVpnConnect
 // CreateVpnConnectionResponse is the response type for the
 // CreateVpnConnection API operation.
 type CreateVpnConnectionResponse struct {
-	*CreateVpnConnectionOutput
+	*types.CreateVpnConnectionOutput
 
 	response *aws.Response
 }

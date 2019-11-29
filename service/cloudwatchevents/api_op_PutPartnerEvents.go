@@ -6,56 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/cloudwatchevents/types"
 )
-
-type PutPartnerEventsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The list of events to write to the event bus.
-	//
-	// Entries is a required field
-	Entries []PutPartnerEventsRequestEntry `min:"1" type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s PutPartnerEventsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *PutPartnerEventsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "PutPartnerEventsInput"}
-
-	if s.Entries == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Entries"))
-	}
-	if s.Entries != nil && len(s.Entries) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Entries", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type PutPartnerEventsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The list of events from this operation that were successfully written to
-	// the partner event bus.
-	Entries []PutPartnerEventsResultEntry `type:"list"`
-
-	// The number of events from this operation that couldn't be written to the
-	// partner event bus.
-	FailedEntryCount *int64 `type:"integer"`
-}
-
-// String returns the string representation
-func (s PutPartnerEventsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opPutPartnerEvents = "PutPartnerEvents"
 
@@ -76,7 +28,7 @@ const opPutPartnerEvents = "PutPartnerEvents"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/PutPartnerEvents
-func (c *Client) PutPartnerEventsRequest(input *PutPartnerEventsInput) PutPartnerEventsRequest {
+func (c *Client) PutPartnerEventsRequest(input *types.PutPartnerEventsInput) PutPartnerEventsRequest {
 	op := &aws.Operation{
 		Name:       opPutPartnerEvents,
 		HTTPMethod: "POST",
@@ -84,10 +36,10 @@ func (c *Client) PutPartnerEventsRequest(input *PutPartnerEventsInput) PutPartne
 	}
 
 	if input == nil {
-		input = &PutPartnerEventsInput{}
+		input = &types.PutPartnerEventsInput{}
 	}
 
-	req := c.newRequest(op, input, &PutPartnerEventsOutput{})
+	req := c.newRequest(op, input, &types.PutPartnerEventsOutput{})
 	return PutPartnerEventsRequest{Request: req, Input: input, Copy: c.PutPartnerEventsRequest}
 }
 
@@ -95,8 +47,8 @@ func (c *Client) PutPartnerEventsRequest(input *PutPartnerEventsInput) PutPartne
 // PutPartnerEvents API operation.
 type PutPartnerEventsRequest struct {
 	*aws.Request
-	Input *PutPartnerEventsInput
-	Copy  func(*PutPartnerEventsInput) PutPartnerEventsRequest
+	Input *types.PutPartnerEventsInput
+	Copy  func(*types.PutPartnerEventsInput) PutPartnerEventsRequest
 }
 
 // Send marshals and sends the PutPartnerEvents API request.
@@ -108,7 +60,7 @@ func (r PutPartnerEventsRequest) Send(ctx context.Context) (*PutPartnerEventsRes
 	}
 
 	resp := &PutPartnerEventsResponse{
-		PutPartnerEventsOutput: r.Request.Data.(*PutPartnerEventsOutput),
+		PutPartnerEventsOutput: r.Request.Data.(*types.PutPartnerEventsOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -118,7 +70,7 @@ func (r PutPartnerEventsRequest) Send(ctx context.Context) (*PutPartnerEventsRes
 // PutPartnerEventsResponse is the response type for the
 // PutPartnerEvents API operation.
 type PutPartnerEventsResponse struct {
-	*PutPartnerEventsOutput
+	*types.PutPartnerEventsOutput
 
 	response *aws.Response
 }

@@ -6,31 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
+	"github.com/aws/aws-sdk-go-v2/service/opsworks/types"
 )
-
-type UpdateMyUserProfileInput struct {
-	_ struct{} `type:"structure"`
-
-	// The user's SSH public key.
-	SshPublicKey *string `type:"string"`
-}
-
-// String returns the string representation
-func (s UpdateMyUserProfileInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type UpdateMyUserProfileOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s UpdateMyUserProfileOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opUpdateMyUserProfile = "UpdateMyUserProfile"
 
@@ -51,7 +30,7 @@ const opUpdateMyUserProfile = "UpdateMyUserProfile"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/UpdateMyUserProfile
-func (c *Client) UpdateMyUserProfileRequest(input *UpdateMyUserProfileInput) UpdateMyUserProfileRequest {
+func (c *Client) UpdateMyUserProfileRequest(input *types.UpdateMyUserProfileInput) UpdateMyUserProfileRequest {
 	op := &aws.Operation{
 		Name:       opUpdateMyUserProfile,
 		HTTPMethod: "POST",
@@ -59,10 +38,10 @@ func (c *Client) UpdateMyUserProfileRequest(input *UpdateMyUserProfileInput) Upd
 	}
 
 	if input == nil {
-		input = &UpdateMyUserProfileInput{}
+		input = &types.UpdateMyUserProfileInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateMyUserProfileOutput{})
+	req := c.newRequest(op, input, &types.UpdateMyUserProfileOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return UpdateMyUserProfileRequest{Request: req, Input: input, Copy: c.UpdateMyUserProfileRequest}
@@ -72,8 +51,8 @@ func (c *Client) UpdateMyUserProfileRequest(input *UpdateMyUserProfileInput) Upd
 // UpdateMyUserProfile API operation.
 type UpdateMyUserProfileRequest struct {
 	*aws.Request
-	Input *UpdateMyUserProfileInput
-	Copy  func(*UpdateMyUserProfileInput) UpdateMyUserProfileRequest
+	Input *types.UpdateMyUserProfileInput
+	Copy  func(*types.UpdateMyUserProfileInput) UpdateMyUserProfileRequest
 }
 
 // Send marshals and sends the UpdateMyUserProfile API request.
@@ -85,7 +64,7 @@ func (r UpdateMyUserProfileRequest) Send(ctx context.Context) (*UpdateMyUserProf
 	}
 
 	resp := &UpdateMyUserProfileResponse{
-		UpdateMyUserProfileOutput: r.Request.Data.(*UpdateMyUserProfileOutput),
+		UpdateMyUserProfileOutput: r.Request.Data.(*types.UpdateMyUserProfileOutput),
 		response:                  &aws.Response{Request: r.Request},
 	}
 
@@ -95,7 +74,7 @@ func (r UpdateMyUserProfileRequest) Send(ctx context.Context) (*UpdateMyUserProf
 // UpdateMyUserProfileResponse is the response type for the
 // UpdateMyUserProfile API operation.
 type UpdateMyUserProfileResponse struct {
-	*UpdateMyUserProfileOutput
+	*types.UpdateMyUserProfileOutput
 
 	response *aws.Response
 }

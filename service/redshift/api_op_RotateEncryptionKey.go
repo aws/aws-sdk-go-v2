@@ -6,51 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/redshift/types"
 )
-
-type RotateEncryptionKeyInput struct {
-	_ struct{} `type:"structure"`
-
-	// The unique identifier of the cluster that you want to rotate the encryption
-	// keys for.
-	//
-	// Constraints: Must be the name of valid cluster that has encryption enabled.
-	//
-	// ClusterIdentifier is a required field
-	ClusterIdentifier *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s RotateEncryptionKeyInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *RotateEncryptionKeyInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "RotateEncryptionKeyInput"}
-
-	if s.ClusterIdentifier == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ClusterIdentifier"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type RotateEncryptionKeyOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Describes a cluster.
-	Cluster *Cluster `type:"structure"`
-}
-
-// String returns the string representation
-func (s RotateEncryptionKeyOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opRotateEncryptionKey = "RotateEncryptionKey"
 
@@ -67,7 +24,7 @@ const opRotateEncryptionKey = "RotateEncryptionKey"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/RotateEncryptionKey
-func (c *Client) RotateEncryptionKeyRequest(input *RotateEncryptionKeyInput) RotateEncryptionKeyRequest {
+func (c *Client) RotateEncryptionKeyRequest(input *types.RotateEncryptionKeyInput) RotateEncryptionKeyRequest {
 	op := &aws.Operation{
 		Name:       opRotateEncryptionKey,
 		HTTPMethod: "POST",
@@ -75,10 +32,10 @@ func (c *Client) RotateEncryptionKeyRequest(input *RotateEncryptionKeyInput) Rot
 	}
 
 	if input == nil {
-		input = &RotateEncryptionKeyInput{}
+		input = &types.RotateEncryptionKeyInput{}
 	}
 
-	req := c.newRequest(op, input, &RotateEncryptionKeyOutput{})
+	req := c.newRequest(op, input, &types.RotateEncryptionKeyOutput{})
 	return RotateEncryptionKeyRequest{Request: req, Input: input, Copy: c.RotateEncryptionKeyRequest}
 }
 
@@ -86,8 +43,8 @@ func (c *Client) RotateEncryptionKeyRequest(input *RotateEncryptionKeyInput) Rot
 // RotateEncryptionKey API operation.
 type RotateEncryptionKeyRequest struct {
 	*aws.Request
-	Input *RotateEncryptionKeyInput
-	Copy  func(*RotateEncryptionKeyInput) RotateEncryptionKeyRequest
+	Input *types.RotateEncryptionKeyInput
+	Copy  func(*types.RotateEncryptionKeyInput) RotateEncryptionKeyRequest
 }
 
 // Send marshals and sends the RotateEncryptionKey API request.
@@ -99,7 +56,7 @@ func (r RotateEncryptionKeyRequest) Send(ctx context.Context) (*RotateEncryption
 	}
 
 	resp := &RotateEncryptionKeyResponse{
-		RotateEncryptionKeyOutput: r.Request.Data.(*RotateEncryptionKeyOutput),
+		RotateEncryptionKeyOutput: r.Request.Data.(*types.RotateEncryptionKeyOutput),
 		response:                  &aws.Response{Request: r.Request},
 	}
 
@@ -109,7 +66,7 @@ func (r RotateEncryptionKeyRequest) Send(ctx context.Context) (*RotateEncryption
 // RotateEncryptionKeyResponse is the response type for the
 // RotateEncryptionKey API operation.
 type RotateEncryptionKeyResponse struct {
-	*RotateEncryptionKeyOutput
+	*types.RotateEncryptionKeyOutput
 
 	response *aws.Response
 }

@@ -6,71 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/glue/types"
 )
-
-type SearchTablesInput struct {
-	_ struct{} `type:"structure"`
-
-	// A unique identifier, consisting of account_id/datalake.
-	CatalogId *string `min:"1" type:"string"`
-
-	// A list of key-value pairs, and a comparator used to filter the search results.
-	// Returns all entities matching the predicate.
-	Filters []PropertyPredicate `type:"list"`
-
-	// The maximum number of tables to return in a single response.
-	MaxResults *int64 `min:"1" type:"integer"`
-
-	// A continuation token, included if this is a continuation call.
-	NextToken *string `type:"string"`
-
-	// A string used for a text search.
-	//
-	// Specifying a value in quotes filters based on an exact match to the value.
-	SearchText *string `type:"string"`
-
-	// A list of criteria for sorting the results by a field name, in an ascending
-	// or descending order.
-	SortCriteria []SortCriterion `type:"list"`
-}
-
-// String returns the string representation
-func (s SearchTablesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *SearchTablesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "SearchTablesInput"}
-	if s.CatalogId != nil && len(*s.CatalogId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("CatalogId", 1))
-	}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type SearchTablesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A continuation token, present if the current list segment is not the last.
-	NextToken *string `type:"string"`
-
-	// A list of the requested Table objects. The SearchTables response returns
-	// only the tables that you have access to.
-	TableList []Table `type:"list"`
-}
-
-// String returns the string representation
-func (s SearchTablesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opSearchTables = "SearchTables"
 
@@ -96,7 +33,7 @@ const opSearchTables = "SearchTables"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/SearchTables
-func (c *Client) SearchTablesRequest(input *SearchTablesInput) SearchTablesRequest {
+func (c *Client) SearchTablesRequest(input *types.SearchTablesInput) SearchTablesRequest {
 	op := &aws.Operation{
 		Name:       opSearchTables,
 		HTTPMethod: "POST",
@@ -110,10 +47,10 @@ func (c *Client) SearchTablesRequest(input *SearchTablesInput) SearchTablesReque
 	}
 
 	if input == nil {
-		input = &SearchTablesInput{}
+		input = &types.SearchTablesInput{}
 	}
 
-	req := c.newRequest(op, input, &SearchTablesOutput{})
+	req := c.newRequest(op, input, &types.SearchTablesOutput{})
 	return SearchTablesRequest{Request: req, Input: input, Copy: c.SearchTablesRequest}
 }
 
@@ -121,8 +58,8 @@ func (c *Client) SearchTablesRequest(input *SearchTablesInput) SearchTablesReque
 // SearchTables API operation.
 type SearchTablesRequest struct {
 	*aws.Request
-	Input *SearchTablesInput
-	Copy  func(*SearchTablesInput) SearchTablesRequest
+	Input *types.SearchTablesInput
+	Copy  func(*types.SearchTablesInput) SearchTablesRequest
 }
 
 // Send marshals and sends the SearchTables API request.
@@ -134,7 +71,7 @@ func (r SearchTablesRequest) Send(ctx context.Context) (*SearchTablesResponse, e
 	}
 
 	resp := &SearchTablesResponse{
-		SearchTablesOutput: r.Request.Data.(*SearchTablesOutput),
+		SearchTablesOutput: r.Request.Data.(*types.SearchTablesOutput),
 		response:           &aws.Response{Request: r.Request},
 	}
 
@@ -164,7 +101,7 @@ func NewSearchTablesPaginator(req SearchTablesRequest) SearchTablesPaginator {
 	return SearchTablesPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *SearchTablesInput
+				var inCpy *types.SearchTablesInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -184,14 +121,14 @@ type SearchTablesPaginator struct {
 	aws.Pager
 }
 
-func (p *SearchTablesPaginator) CurrentPage() *SearchTablesOutput {
-	return p.Pager.CurrentPage().(*SearchTablesOutput)
+func (p *SearchTablesPaginator) CurrentPage() *types.SearchTablesOutput {
+	return p.Pager.CurrentPage().(*types.SearchTablesOutput)
 }
 
 // SearchTablesResponse is the response type for the
 // SearchTables API operation.
 type SearchTablesResponse struct {
-	*SearchTablesOutput
+	*types.SearchTablesOutput
 
 	response *aws.Response
 }

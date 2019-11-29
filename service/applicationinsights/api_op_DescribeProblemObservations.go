@@ -6,48 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/applicationinsights/types"
 )
-
-type DescribeProblemObservationsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the problem.
-	//
-	// ProblemId is a required field
-	ProblemId *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeProblemObservationsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeProblemObservationsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeProblemObservationsInput"}
-
-	if s.ProblemId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ProblemId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribeProblemObservationsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Observations related to the problem.
-	RelatedObservations *RelatedObservations `type:"structure"`
-}
-
-// String returns the string representation
-func (s DescribeProblemObservationsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeProblemObservations = "DescribeProblemObservations"
 
@@ -64,7 +24,7 @@ const opDescribeProblemObservations = "DescribeProblemObservations"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/application-insights-2018-11-25/DescribeProblemObservations
-func (c *Client) DescribeProblemObservationsRequest(input *DescribeProblemObservationsInput) DescribeProblemObservationsRequest {
+func (c *Client) DescribeProblemObservationsRequest(input *types.DescribeProblemObservationsInput) DescribeProblemObservationsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeProblemObservations,
 		HTTPMethod: "POST",
@@ -72,10 +32,10 @@ func (c *Client) DescribeProblemObservationsRequest(input *DescribeProblemObserv
 	}
 
 	if input == nil {
-		input = &DescribeProblemObservationsInput{}
+		input = &types.DescribeProblemObservationsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeProblemObservationsOutput{})
+	req := c.newRequest(op, input, &types.DescribeProblemObservationsOutput{})
 	return DescribeProblemObservationsRequest{Request: req, Input: input, Copy: c.DescribeProblemObservationsRequest}
 }
 
@@ -83,8 +43,8 @@ func (c *Client) DescribeProblemObservationsRequest(input *DescribeProblemObserv
 // DescribeProblemObservations API operation.
 type DescribeProblemObservationsRequest struct {
 	*aws.Request
-	Input *DescribeProblemObservationsInput
-	Copy  func(*DescribeProblemObservationsInput) DescribeProblemObservationsRequest
+	Input *types.DescribeProblemObservationsInput
+	Copy  func(*types.DescribeProblemObservationsInput) DescribeProblemObservationsRequest
 }
 
 // Send marshals and sends the DescribeProblemObservations API request.
@@ -96,7 +56,7 @@ func (r DescribeProblemObservationsRequest) Send(ctx context.Context) (*Describe
 	}
 
 	resp := &DescribeProblemObservationsResponse{
-		DescribeProblemObservationsOutput: r.Request.Data.(*DescribeProblemObservationsOutput),
+		DescribeProblemObservationsOutput: r.Request.Data.(*types.DescribeProblemObservationsOutput),
 		response:                          &aws.Response{Request: r.Request},
 	}
 
@@ -106,7 +66,7 @@ func (r DescribeProblemObservationsRequest) Send(ctx context.Context) (*Describe
 // DescribeProblemObservationsResponse is the response type for the
 // DescribeProblemObservations API operation.
 type DescribeProblemObservationsResponse struct {
-	*DescribeProblemObservationsOutput
+	*types.DescribeProblemObservationsOutput
 
 	response *aws.Response
 }

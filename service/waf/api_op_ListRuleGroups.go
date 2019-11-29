@@ -6,61 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/waf/types"
 )
-
-type ListRuleGroupsInput struct {
-	_ struct{} `type:"structure"`
-
-	// Specifies the number of RuleGroups that you want AWS WAF to return for this
-	// request. If you have more RuleGroups than the number that you specify for
-	// Limit, the response includes a NextMarker value that you can use to get another
-	// batch of RuleGroups.
-	Limit *int64 `type:"integer"`
-
-	// If you specify a value for Limit and you have more RuleGroups than the value
-	// of Limit, AWS WAF returns a NextMarker value in the response that allows
-	// you to list another group of RuleGroups. For the second and subsequent ListRuleGroups
-	// requests, specify the value of NextMarker from the previous response to get
-	// information about another batch of RuleGroups.
-	NextMarker *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s ListRuleGroupsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListRuleGroupsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListRuleGroupsInput"}
-	if s.NextMarker != nil && len(*s.NextMarker) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("NextMarker", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ListRuleGroupsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// If you have more RuleGroups than the number that you specified for Limit
-	// in the request, the response includes a NextMarker value. To list more RuleGroups,
-	// submit another ListRuleGroups request, and specify the NextMarker value from
-	// the response in the NextMarker value in the next request.
-	NextMarker *string `min:"1" type:"string"`
-
-	// An array of RuleGroup objects.
-	RuleGroups []RuleGroupSummary `type:"list"`
-}
-
-// String returns the string representation
-func (s ListRuleGroupsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListRuleGroups = "ListRuleGroups"
 
@@ -77,7 +24,7 @@ const opListRuleGroups = "ListRuleGroups"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/ListRuleGroups
-func (c *Client) ListRuleGroupsRequest(input *ListRuleGroupsInput) ListRuleGroupsRequest {
+func (c *Client) ListRuleGroupsRequest(input *types.ListRuleGroupsInput) ListRuleGroupsRequest {
 	op := &aws.Operation{
 		Name:       opListRuleGroups,
 		HTTPMethod: "POST",
@@ -85,10 +32,10 @@ func (c *Client) ListRuleGroupsRequest(input *ListRuleGroupsInput) ListRuleGroup
 	}
 
 	if input == nil {
-		input = &ListRuleGroupsInput{}
+		input = &types.ListRuleGroupsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListRuleGroupsOutput{})
+	req := c.newRequest(op, input, &types.ListRuleGroupsOutput{})
 	return ListRuleGroupsRequest{Request: req, Input: input, Copy: c.ListRuleGroupsRequest}
 }
 
@@ -96,8 +43,8 @@ func (c *Client) ListRuleGroupsRequest(input *ListRuleGroupsInput) ListRuleGroup
 // ListRuleGroups API operation.
 type ListRuleGroupsRequest struct {
 	*aws.Request
-	Input *ListRuleGroupsInput
-	Copy  func(*ListRuleGroupsInput) ListRuleGroupsRequest
+	Input *types.ListRuleGroupsInput
+	Copy  func(*types.ListRuleGroupsInput) ListRuleGroupsRequest
 }
 
 // Send marshals and sends the ListRuleGroups API request.
@@ -109,7 +56,7 @@ func (r ListRuleGroupsRequest) Send(ctx context.Context) (*ListRuleGroupsRespons
 	}
 
 	resp := &ListRuleGroupsResponse{
-		ListRuleGroupsOutput: r.Request.Data.(*ListRuleGroupsOutput),
+		ListRuleGroupsOutput: r.Request.Data.(*types.ListRuleGroupsOutput),
 		response:             &aws.Response{Request: r.Request},
 	}
 
@@ -119,7 +66,7 @@ func (r ListRuleGroupsRequest) Send(ctx context.Context) (*ListRuleGroupsRespons
 // ListRuleGroupsResponse is the response type for the
 // ListRuleGroups API operation.
 type ListRuleGroupsResponse struct {
-	*ListRuleGroupsOutput
+	*types.ListRuleGroupsOutput
 
 	response *aws.Response
 }

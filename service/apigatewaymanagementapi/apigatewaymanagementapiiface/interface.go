@@ -10,6 +10,7 @@ package apigatewaymanagementapiiface
 
 import (
 	"github.com/aws/aws-sdk-go-v2/service/apigatewaymanagementapi"
+	"github.com/aws/aws-sdk-go-v2/service/apigatewaymanagementapi/types"
 )
 
 // ClientAPI provides an interface to enable mocking the
@@ -43,7 +44,7 @@ import (
 //    type mockClientClient struct {
 //        apigatewaymanagementapiiface.ClientPI
 //    }
-//    func (m *mockClientClient) DeleteConnection(input *apigatewaymanagementapi.DeleteConnectionInput) (*apigatewaymanagementapi.DeleteConnectionOutput, error) {
+//    func (m *mockClientClient) DeleteConnection(input *types.DeleteConnectionInput) (*types.DeleteConnectionOutput, error) {
 //        // mock response/functionality
 //    }
 //
@@ -61,11 +62,11 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type ClientAPI interface {
-	DeleteConnectionRequest(*apigatewaymanagementapi.DeleteConnectionInput) apigatewaymanagementapi.DeleteConnectionRequest
+	DeleteConnectionRequest(*types.DeleteConnectionInput) apigatewaymanagementapi.DeleteConnectionRequest
 
-	GetConnectionRequest(*apigatewaymanagementapi.GetConnectionInput) apigatewaymanagementapi.GetConnectionRequest
+	GetConnectionRequest(*types.GetConnectionInput) apigatewaymanagementapi.GetConnectionRequest
 
-	PostToConnectionRequest(*apigatewaymanagementapi.PostToConnectionInput) apigatewaymanagementapi.PostToConnectionRequest
+	PostToConnectionRequest(*types.PostToConnectionInput) apigatewaymanagementapi.PostToConnectionRequest
 }
 
 var _ ClientAPI = (*apigatewaymanagementapi.Client)(nil)

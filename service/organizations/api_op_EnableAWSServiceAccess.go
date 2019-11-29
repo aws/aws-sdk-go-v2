@@ -6,52 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
+	"github.com/aws/aws-sdk-go-v2/service/organizations/types"
 )
-
-type EnableAWSServiceAccessInput struct {
-	_ struct{} `type:"structure"`
-
-	// The service principal name of the AWS service for which you want to enable
-	// integration with your organization. This is typically in the form of a URL,
-	// such as service-abbreviation.amazonaws.com.
-	//
-	// ServicePrincipal is a required field
-	ServicePrincipal *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s EnableAWSServiceAccessInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *EnableAWSServiceAccessInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "EnableAWSServiceAccessInput"}
-
-	if s.ServicePrincipal == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ServicePrincipal"))
-	}
-	if s.ServicePrincipal != nil && len(*s.ServicePrincipal) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ServicePrincipal", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type EnableAWSServiceAccessOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s EnableAWSServiceAccessOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opEnableAWSServiceAccess = "EnableAWSServiceAccess"
 
@@ -87,7 +45,7 @@ const opEnableAWSServiceAccess = "EnableAWSServiceAccess"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/EnableAWSServiceAccess
-func (c *Client) EnableAWSServiceAccessRequest(input *EnableAWSServiceAccessInput) EnableAWSServiceAccessRequest {
+func (c *Client) EnableAWSServiceAccessRequest(input *types.EnableAWSServiceAccessInput) EnableAWSServiceAccessRequest {
 	op := &aws.Operation{
 		Name:       opEnableAWSServiceAccess,
 		HTTPMethod: "POST",
@@ -95,10 +53,10 @@ func (c *Client) EnableAWSServiceAccessRequest(input *EnableAWSServiceAccessInpu
 	}
 
 	if input == nil {
-		input = &EnableAWSServiceAccessInput{}
+		input = &types.EnableAWSServiceAccessInput{}
 	}
 
-	req := c.newRequest(op, input, &EnableAWSServiceAccessOutput{})
+	req := c.newRequest(op, input, &types.EnableAWSServiceAccessOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return EnableAWSServiceAccessRequest{Request: req, Input: input, Copy: c.EnableAWSServiceAccessRequest}
@@ -108,8 +66,8 @@ func (c *Client) EnableAWSServiceAccessRequest(input *EnableAWSServiceAccessInpu
 // EnableAWSServiceAccess API operation.
 type EnableAWSServiceAccessRequest struct {
 	*aws.Request
-	Input *EnableAWSServiceAccessInput
-	Copy  func(*EnableAWSServiceAccessInput) EnableAWSServiceAccessRequest
+	Input *types.EnableAWSServiceAccessInput
+	Copy  func(*types.EnableAWSServiceAccessInput) EnableAWSServiceAccessRequest
 }
 
 // Send marshals and sends the EnableAWSServiceAccess API request.
@@ -121,7 +79,7 @@ func (r EnableAWSServiceAccessRequest) Send(ctx context.Context) (*EnableAWSServ
 	}
 
 	resp := &EnableAWSServiceAccessResponse{
-		EnableAWSServiceAccessOutput: r.Request.Data.(*EnableAWSServiceAccessOutput),
+		EnableAWSServiceAccessOutput: r.Request.Data.(*types.EnableAWSServiceAccessOutput),
 		response:                     &aws.Response{Request: r.Request},
 	}
 
@@ -131,7 +89,7 @@ func (r EnableAWSServiceAccessRequest) Send(ctx context.Context) (*EnableAWSServ
 // EnableAWSServiceAccessResponse is the response type for the
 // EnableAWSServiceAccess API operation.
 type EnableAWSServiceAccessResponse struct {
-	*EnableAWSServiceAccessOutput
+	*types.EnableAWSServiceAccessOutput
 
 	response *aws.Response
 }

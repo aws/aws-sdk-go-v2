@@ -6,86 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/translate/types"
 )
-
-type ImportTerminologyInput struct {
-	_ struct{} `type:"structure"`
-
-	// The description of the custom terminology being imported.
-	Description *string `type:"string"`
-
-	// The encryption key for the custom terminology being imported.
-	EncryptionKey *EncryptionKey `type:"structure"`
-
-	// The merge strategy of the custom terminology being imported. Currently, only
-	// the OVERWRITE merge strategy is supported. In this case, the imported terminology
-	// will overwrite an existing terminology of the same name.
-	//
-	// MergeStrategy is a required field
-	MergeStrategy MergeStrategy `type:"string" required:"true" enum:"true"`
-
-	// The name of the custom terminology being imported.
-	//
-	// Name is a required field
-	Name *string `min:"1" type:"string" required:"true"`
-
-	// The terminology data for the custom terminology being imported.
-	//
-	// TerminologyData is a required field
-	TerminologyData *TerminologyData `type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s ImportTerminologyInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ImportTerminologyInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ImportTerminologyInput"}
-	if len(s.MergeStrategy) == 0 {
-		invalidParams.Add(aws.NewErrParamRequired("MergeStrategy"))
-	}
-
-	if s.Name == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Name"))
-	}
-	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
-	}
-
-	if s.TerminologyData == nil {
-		invalidParams.Add(aws.NewErrParamRequired("TerminologyData"))
-	}
-	if s.EncryptionKey != nil {
-		if err := s.EncryptionKey.Validate(); err != nil {
-			invalidParams.AddNested("EncryptionKey", err.(aws.ErrInvalidParams))
-		}
-	}
-	if s.TerminologyData != nil {
-		if err := s.TerminologyData.Validate(); err != nil {
-			invalidParams.AddNested("TerminologyData", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ImportTerminologyOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The properties of the custom terminology being imported.
-	TerminologyProperties *TerminologyProperties `type:"structure"`
-}
-
-// String returns the string representation
-func (s ImportTerminologyOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opImportTerminology = "ImportTerminology"
 
@@ -111,7 +33,7 @@ const opImportTerminology = "ImportTerminology"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/translate-2017-07-01/ImportTerminology
-func (c *Client) ImportTerminologyRequest(input *ImportTerminologyInput) ImportTerminologyRequest {
+func (c *Client) ImportTerminologyRequest(input *types.ImportTerminologyInput) ImportTerminologyRequest {
 	op := &aws.Operation{
 		Name:       opImportTerminology,
 		HTTPMethod: "POST",
@@ -119,10 +41,10 @@ func (c *Client) ImportTerminologyRequest(input *ImportTerminologyInput) ImportT
 	}
 
 	if input == nil {
-		input = &ImportTerminologyInput{}
+		input = &types.ImportTerminologyInput{}
 	}
 
-	req := c.newRequest(op, input, &ImportTerminologyOutput{})
+	req := c.newRequest(op, input, &types.ImportTerminologyOutput{})
 	return ImportTerminologyRequest{Request: req, Input: input, Copy: c.ImportTerminologyRequest}
 }
 
@@ -130,8 +52,8 @@ func (c *Client) ImportTerminologyRequest(input *ImportTerminologyInput) ImportT
 // ImportTerminology API operation.
 type ImportTerminologyRequest struct {
 	*aws.Request
-	Input *ImportTerminologyInput
-	Copy  func(*ImportTerminologyInput) ImportTerminologyRequest
+	Input *types.ImportTerminologyInput
+	Copy  func(*types.ImportTerminologyInput) ImportTerminologyRequest
 }
 
 // Send marshals and sends the ImportTerminology API request.
@@ -143,7 +65,7 @@ func (r ImportTerminologyRequest) Send(ctx context.Context) (*ImportTerminologyR
 	}
 
 	resp := &ImportTerminologyResponse{
-		ImportTerminologyOutput: r.Request.Data.(*ImportTerminologyOutput),
+		ImportTerminologyOutput: r.Request.Data.(*types.ImportTerminologyOutput),
 		response:                &aws.Response{Request: r.Request},
 	}
 
@@ -153,7 +75,7 @@ func (r ImportTerminologyRequest) Send(ctx context.Context) (*ImportTerminologyR
 // ImportTerminologyResponse is the response type for the
 // ImportTerminology API operation.
 type ImportTerminologyResponse struct {
-	*ImportTerminologyOutput
+	*types.ImportTerminologyOutput
 
 	response *aws.Response
 }

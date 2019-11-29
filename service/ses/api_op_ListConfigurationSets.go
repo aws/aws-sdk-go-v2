@@ -6,47 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ses/types"
 )
-
-// Represents a request to list the configuration sets associated with your
-// AWS account. Configuration sets enable you to publish email sending events.
-// For information about using configuration sets, see the Amazon SES Developer
-// Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html).
-type ListConfigurationSetsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The number of configuration sets to return.
-	MaxItems *int64 `type:"integer"`
-
-	// A token returned from a previous call to ListConfigurationSets to indicate
-	// the position of the configuration set in the configuration set list.
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s ListConfigurationSetsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// A list of configuration sets associated with your AWS account. Configuration
-// sets enable you to publish email sending events. For information about using
-// configuration sets, see the Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html).
-type ListConfigurationSetsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A list of configuration sets.
-	ConfigurationSets []ConfigurationSet `type:"list"`
-
-	// A token indicating that there are additional configuration sets available
-	// to be listed. Pass this token to successive calls of ListConfigurationSets.
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s ListConfigurationSetsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListConfigurationSets = "ListConfigurationSets"
 
@@ -73,7 +34,7 @@ const opListConfigurationSets = "ListConfigurationSets"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/ListConfigurationSets
-func (c *Client) ListConfigurationSetsRequest(input *ListConfigurationSetsInput) ListConfigurationSetsRequest {
+func (c *Client) ListConfigurationSetsRequest(input *types.ListConfigurationSetsInput) ListConfigurationSetsRequest {
 	op := &aws.Operation{
 		Name:       opListConfigurationSets,
 		HTTPMethod: "POST",
@@ -81,10 +42,10 @@ func (c *Client) ListConfigurationSetsRequest(input *ListConfigurationSetsInput)
 	}
 
 	if input == nil {
-		input = &ListConfigurationSetsInput{}
+		input = &types.ListConfigurationSetsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListConfigurationSetsOutput{})
+	req := c.newRequest(op, input, &types.ListConfigurationSetsOutput{})
 	return ListConfigurationSetsRequest{Request: req, Input: input, Copy: c.ListConfigurationSetsRequest}
 }
 
@@ -92,8 +53,8 @@ func (c *Client) ListConfigurationSetsRequest(input *ListConfigurationSetsInput)
 // ListConfigurationSets API operation.
 type ListConfigurationSetsRequest struct {
 	*aws.Request
-	Input *ListConfigurationSetsInput
-	Copy  func(*ListConfigurationSetsInput) ListConfigurationSetsRequest
+	Input *types.ListConfigurationSetsInput
+	Copy  func(*types.ListConfigurationSetsInput) ListConfigurationSetsRequest
 }
 
 // Send marshals and sends the ListConfigurationSets API request.
@@ -105,7 +66,7 @@ func (r ListConfigurationSetsRequest) Send(ctx context.Context) (*ListConfigurat
 	}
 
 	resp := &ListConfigurationSetsResponse{
-		ListConfigurationSetsOutput: r.Request.Data.(*ListConfigurationSetsOutput),
+		ListConfigurationSetsOutput: r.Request.Data.(*types.ListConfigurationSetsOutput),
 		response:                    &aws.Response{Request: r.Request},
 	}
 
@@ -115,7 +76,7 @@ func (r ListConfigurationSetsRequest) Send(ctx context.Context) (*ListConfigurat
 // ListConfigurationSetsResponse is the response type for the
 // ListConfigurationSets API operation.
 type ListConfigurationSetsResponse struct {
-	*ListConfigurationSetsOutput
+	*types.ListConfigurationSetsOutput
 
 	response *aws.Response
 }

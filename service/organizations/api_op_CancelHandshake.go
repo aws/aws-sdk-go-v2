@@ -6,52 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/organizations/types"
 )
-
-type CancelHandshakeInput struct {
-	_ struct{} `type:"structure"`
-
-	// The unique identifier (ID) of the handshake that you want to cancel. You
-	// can get the ID from the ListHandshakesForOrganization operation.
-	//
-	// The regex pattern (http://wikipedia.org/wiki/regex) for handshake ID string
-	// requires "h-" followed by from 8 to 32 lower-case letters or digits.
-	//
-	// HandshakeId is a required field
-	HandshakeId *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s CancelHandshakeInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CancelHandshakeInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CancelHandshakeInput"}
-
-	if s.HandshakeId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("HandshakeId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type CancelHandshakeOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A structure that contains details about the handshake that you canceled.
-	Handshake *Handshake `type:"structure"`
-}
-
-// String returns the string representation
-func (s CancelHandshakeOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCancelHandshake = "CancelHandshake"
 
@@ -76,7 +32,7 @@ const opCancelHandshake = "CancelHandshake"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/CancelHandshake
-func (c *Client) CancelHandshakeRequest(input *CancelHandshakeInput) CancelHandshakeRequest {
+func (c *Client) CancelHandshakeRequest(input *types.CancelHandshakeInput) CancelHandshakeRequest {
 	op := &aws.Operation{
 		Name:       opCancelHandshake,
 		HTTPMethod: "POST",
@@ -84,10 +40,10 @@ func (c *Client) CancelHandshakeRequest(input *CancelHandshakeInput) CancelHands
 	}
 
 	if input == nil {
-		input = &CancelHandshakeInput{}
+		input = &types.CancelHandshakeInput{}
 	}
 
-	req := c.newRequest(op, input, &CancelHandshakeOutput{})
+	req := c.newRequest(op, input, &types.CancelHandshakeOutput{})
 	return CancelHandshakeRequest{Request: req, Input: input, Copy: c.CancelHandshakeRequest}
 }
 
@@ -95,8 +51,8 @@ func (c *Client) CancelHandshakeRequest(input *CancelHandshakeInput) CancelHands
 // CancelHandshake API operation.
 type CancelHandshakeRequest struct {
 	*aws.Request
-	Input *CancelHandshakeInput
-	Copy  func(*CancelHandshakeInput) CancelHandshakeRequest
+	Input *types.CancelHandshakeInput
+	Copy  func(*types.CancelHandshakeInput) CancelHandshakeRequest
 }
 
 // Send marshals and sends the CancelHandshake API request.
@@ -108,7 +64,7 @@ func (r CancelHandshakeRequest) Send(ctx context.Context) (*CancelHandshakeRespo
 	}
 
 	resp := &CancelHandshakeResponse{
-		CancelHandshakeOutput: r.Request.Data.(*CancelHandshakeOutput),
+		CancelHandshakeOutput: r.Request.Data.(*types.CancelHandshakeOutput),
 		response:              &aws.Response{Request: r.Request},
 	}
 
@@ -118,7 +74,7 @@ func (r CancelHandshakeRequest) Send(ctx context.Context) (*CancelHandshakeRespo
 // CancelHandshakeResponse is the response type for the
 // CancelHandshake API operation.
 type CancelHandshakeResponse struct {
-	*CancelHandshakeOutput
+	*types.CancelHandshakeOutput
 
 	response *aws.Response
 }

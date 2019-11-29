@@ -6,48 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/alexaforbusiness/types"
 )
-
-type DeleteSkillAuthorizationInput struct {
-	_ struct{} `type:"structure"`
-
-	// The room that the skill is authorized for.
-	RoomArn *string `type:"string"`
-
-	// The unique identifier of a skill.
-	//
-	// SkillId is a required field
-	SkillId *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteSkillAuthorizationInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteSkillAuthorizationInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteSkillAuthorizationInput"}
-
-	if s.SkillId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("SkillId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteSkillAuthorizationOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteSkillAuthorizationOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteSkillAuthorization = "DeleteSkillAuthorization"
 
@@ -64,7 +24,7 @@ const opDeleteSkillAuthorization = "DeleteSkillAuthorization"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/DeleteSkillAuthorization
-func (c *Client) DeleteSkillAuthorizationRequest(input *DeleteSkillAuthorizationInput) DeleteSkillAuthorizationRequest {
+func (c *Client) DeleteSkillAuthorizationRequest(input *types.DeleteSkillAuthorizationInput) DeleteSkillAuthorizationRequest {
 	op := &aws.Operation{
 		Name:       opDeleteSkillAuthorization,
 		HTTPMethod: "POST",
@@ -72,10 +32,10 @@ func (c *Client) DeleteSkillAuthorizationRequest(input *DeleteSkillAuthorization
 	}
 
 	if input == nil {
-		input = &DeleteSkillAuthorizationInput{}
+		input = &types.DeleteSkillAuthorizationInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteSkillAuthorizationOutput{})
+	req := c.newRequest(op, input, &types.DeleteSkillAuthorizationOutput{})
 	return DeleteSkillAuthorizationRequest{Request: req, Input: input, Copy: c.DeleteSkillAuthorizationRequest}
 }
 
@@ -83,8 +43,8 @@ func (c *Client) DeleteSkillAuthorizationRequest(input *DeleteSkillAuthorization
 // DeleteSkillAuthorization API operation.
 type DeleteSkillAuthorizationRequest struct {
 	*aws.Request
-	Input *DeleteSkillAuthorizationInput
-	Copy  func(*DeleteSkillAuthorizationInput) DeleteSkillAuthorizationRequest
+	Input *types.DeleteSkillAuthorizationInput
+	Copy  func(*types.DeleteSkillAuthorizationInput) DeleteSkillAuthorizationRequest
 }
 
 // Send marshals and sends the DeleteSkillAuthorization API request.
@@ -96,7 +56,7 @@ func (r DeleteSkillAuthorizationRequest) Send(ctx context.Context) (*DeleteSkill
 	}
 
 	resp := &DeleteSkillAuthorizationResponse{
-		DeleteSkillAuthorizationOutput: r.Request.Data.(*DeleteSkillAuthorizationOutput),
+		DeleteSkillAuthorizationOutput: r.Request.Data.(*types.DeleteSkillAuthorizationOutput),
 		response:                       &aws.Response{Request: r.Request},
 	}
 
@@ -106,7 +66,7 @@ func (r DeleteSkillAuthorizationRequest) Send(ctx context.Context) (*DeleteSkill
 // DeleteSkillAuthorizationResponse is the response type for the
 // DeleteSkillAuthorization API operation.
 type DeleteSkillAuthorizationResponse struct {
-	*DeleteSkillAuthorizationOutput
+	*types.DeleteSkillAuthorizationOutput
 
 	response *aws.Response
 }

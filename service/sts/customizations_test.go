@@ -13,6 +13,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws/endpoints"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting/unit"
 	"github.com/aws/aws-sdk-go-v2/service/sts"
+	"github.com/aws/aws-sdk-go-v2/service/sts/types"
 )
 
 func init() {
@@ -25,7 +26,7 @@ func init() {
 var svc *sts.Client
 
 func TestUnsignedRequest_AssumeRoleWithSAML(t *testing.T) {
-	req := svc.AssumeRoleWithSAMLRequest(&sts.AssumeRoleWithSAMLInput{
+	req := svc.AssumeRoleWithSAMLRequest(&types.AssumeRoleWithSAMLInput{
 		PrincipalArn:  aws.String("ARN01234567890123456789"),
 		RoleArn:       aws.String("ARN01234567890123456789"),
 		SAMLAssertion: aws.String("ASSERT"),
@@ -41,7 +42,7 @@ func TestUnsignedRequest_AssumeRoleWithSAML(t *testing.T) {
 }
 
 func TestUnsignedRequest_AssumeRoleWithWebIdentity(t *testing.T) {
-	req := svc.AssumeRoleWithWebIdentityRequest(&sts.AssumeRoleWithWebIdentityInput{
+	req := svc.AssumeRoleWithWebIdentityRequest(&types.AssumeRoleWithWebIdentityInput{
 		RoleArn:          aws.String("ARN01234567890123456789"),
 		RoleSessionName:  aws.String("SESSION"),
 		WebIdentityToken: aws.String("TOKEN"),
@@ -82,7 +83,7 @@ func TestSTSCustomRetryErrorCodes(t *testing.T) {
 		},
 	}
 
-	req := svc.AssumeRoleWithWebIdentityRequest(&sts.AssumeRoleWithWebIdentityInput{})
+	req := svc.AssumeRoleWithWebIdentityRequest(&types.AssumeRoleWithWebIdentityInput{})
 	req.Handlers.Send.Swap(defaults.SendHandler.Name, aws.NamedHandler{
 		Name: "custom send handler",
 		Fn: func(r *aws.Request) {

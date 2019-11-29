@@ -6,35 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/directconnect/types"
 )
-
-type CreateBGPPeerInput struct {
-	_ struct{} `type:"structure"`
-
-	// Information about the BGP peer.
-	NewBGPPeer *NewBGPPeer `locationName:"newBGPPeer" type:"structure"`
-
-	// The ID of the virtual interface.
-	VirtualInterfaceId *string `locationName:"virtualInterfaceId" type:"string"`
-}
-
-// String returns the string representation
-func (s CreateBGPPeerInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type CreateBGPPeerOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The virtual interface.
-	VirtualInterface *VirtualInterface `locationName:"virtualInterface" type:"structure"`
-}
-
-// String returns the string representation
-func (s CreateBGPPeerOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCreateBGPPeer = "CreateBGPPeer"
 
@@ -65,7 +38,7 @@ const opCreateBGPPeer = "CreateBGPPeer"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/CreateBGPPeer
-func (c *Client) CreateBGPPeerRequest(input *CreateBGPPeerInput) CreateBGPPeerRequest {
+func (c *Client) CreateBGPPeerRequest(input *types.CreateBGPPeerInput) CreateBGPPeerRequest {
 	op := &aws.Operation{
 		Name:       opCreateBGPPeer,
 		HTTPMethod: "POST",
@@ -73,10 +46,10 @@ func (c *Client) CreateBGPPeerRequest(input *CreateBGPPeerInput) CreateBGPPeerRe
 	}
 
 	if input == nil {
-		input = &CreateBGPPeerInput{}
+		input = &types.CreateBGPPeerInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateBGPPeerOutput{})
+	req := c.newRequest(op, input, &types.CreateBGPPeerOutput{})
 	return CreateBGPPeerRequest{Request: req, Input: input, Copy: c.CreateBGPPeerRequest}
 }
 
@@ -84,8 +57,8 @@ func (c *Client) CreateBGPPeerRequest(input *CreateBGPPeerInput) CreateBGPPeerRe
 // CreateBGPPeer API operation.
 type CreateBGPPeerRequest struct {
 	*aws.Request
-	Input *CreateBGPPeerInput
-	Copy  func(*CreateBGPPeerInput) CreateBGPPeerRequest
+	Input *types.CreateBGPPeerInput
+	Copy  func(*types.CreateBGPPeerInput) CreateBGPPeerRequest
 }
 
 // Send marshals and sends the CreateBGPPeer API request.
@@ -97,7 +70,7 @@ func (r CreateBGPPeerRequest) Send(ctx context.Context) (*CreateBGPPeerResponse,
 	}
 
 	resp := &CreateBGPPeerResponse{
-		CreateBGPPeerOutput: r.Request.Data.(*CreateBGPPeerOutput),
+		CreateBGPPeerOutput: r.Request.Data.(*types.CreateBGPPeerOutput),
 		response:            &aws.Response{Request: r.Request},
 	}
 
@@ -107,7 +80,7 @@ func (r CreateBGPPeerRequest) Send(ctx context.Context) (*CreateBGPPeerResponse,
 // CreateBGPPeerResponse is the response type for the
 // CreateBGPPeer API operation.
 type CreateBGPPeerResponse struct {
-	*CreateBGPPeerOutput
+	*types.CreateBGPPeerOutput
 
 	response *aws.Response
 }

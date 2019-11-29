@@ -6,112 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/iot/types"
 )
-
-type ListAuthorizersInput struct {
-	_ struct{} `type:"structure"`
-
-	// Return the list of authorizers in ascending alphabetical order.
-	AscendingOrder *bool `location:"querystring" locationName:"isAscendingOrder" type:"boolean"`
-
-	// A marker used to get the next set of results.
-	Marker *string `location:"querystring" locationName:"marker" type:"string"`
-
-	// The maximum number of results to return at one time.
-	PageSize *int64 `location:"querystring" locationName:"pageSize" min:"1" type:"integer"`
-
-	// The status of the list authorizers request.
-	Status AuthorizerStatus `location:"querystring" locationName:"status" type:"string" enum:"true"`
-}
-
-// String returns the string representation
-func (s ListAuthorizersInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListAuthorizersInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListAuthorizersInput"}
-	if s.PageSize != nil && *s.PageSize < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("PageSize", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListAuthorizersInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.AscendingOrder != nil {
-		v := *s.AscendingOrder
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "isAscendingOrder", protocol.BoolValue(v), metadata)
-	}
-	if s.Marker != nil {
-		v := *s.Marker
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "marker", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.PageSize != nil {
-		v := *s.PageSize
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "pageSize", protocol.Int64Value(v), metadata)
-	}
-	if len(s.Status) > 0 {
-		v := s.Status
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "status", protocol.QuotedValue{ValueMarshaler: v}, metadata)
-	}
-	return nil
-}
-
-type ListAuthorizersOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The authorizers.
-	Authorizers []AuthorizerSummary `locationName:"authorizers" type:"list"`
-
-	// A marker used to get the next set of results.
-	NextMarker *string `locationName:"nextMarker" type:"string"`
-}
-
-// String returns the string representation
-func (s ListAuthorizersOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListAuthorizersOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.Authorizers != nil {
-		v := s.Authorizers
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "authorizers", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	if s.NextMarker != nil {
-		v := *s.NextMarker
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "nextMarker", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opListAuthorizers = "ListAuthorizers"
 
@@ -126,7 +22,7 @@ const opListAuthorizers = "ListAuthorizers"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) ListAuthorizersRequest(input *ListAuthorizersInput) ListAuthorizersRequest {
+func (c *Client) ListAuthorizersRequest(input *types.ListAuthorizersInput) ListAuthorizersRequest {
 	op := &aws.Operation{
 		Name:       opListAuthorizers,
 		HTTPMethod: "GET",
@@ -134,10 +30,10 @@ func (c *Client) ListAuthorizersRequest(input *ListAuthorizersInput) ListAuthori
 	}
 
 	if input == nil {
-		input = &ListAuthorizersInput{}
+		input = &types.ListAuthorizersInput{}
 	}
 
-	req := c.newRequest(op, input, &ListAuthorizersOutput{})
+	req := c.newRequest(op, input, &types.ListAuthorizersOutput{})
 	return ListAuthorizersRequest{Request: req, Input: input, Copy: c.ListAuthorizersRequest}
 }
 
@@ -145,8 +41,8 @@ func (c *Client) ListAuthorizersRequest(input *ListAuthorizersInput) ListAuthori
 // ListAuthorizers API operation.
 type ListAuthorizersRequest struct {
 	*aws.Request
-	Input *ListAuthorizersInput
-	Copy  func(*ListAuthorizersInput) ListAuthorizersRequest
+	Input *types.ListAuthorizersInput
+	Copy  func(*types.ListAuthorizersInput) ListAuthorizersRequest
 }
 
 // Send marshals and sends the ListAuthorizers API request.
@@ -158,7 +54,7 @@ func (r ListAuthorizersRequest) Send(ctx context.Context) (*ListAuthorizersRespo
 	}
 
 	resp := &ListAuthorizersResponse{
-		ListAuthorizersOutput: r.Request.Data.(*ListAuthorizersOutput),
+		ListAuthorizersOutput: r.Request.Data.(*types.ListAuthorizersOutput),
 		response:              &aws.Response{Request: r.Request},
 	}
 
@@ -168,7 +64,7 @@ func (r ListAuthorizersRequest) Send(ctx context.Context) (*ListAuthorizersRespo
 // ListAuthorizersResponse is the response type for the
 // ListAuthorizers API operation.
 type ListAuthorizersResponse struct {
-	*ListAuthorizersOutput
+	*types.ListAuthorizersOutput
 
 	response *aws.Response
 }

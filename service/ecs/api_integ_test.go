@@ -13,6 +13,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws/awserr"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting/integration"
 	"github.com/aws/aws-sdk-go-v2/service/ecs"
+	"github.com/aws/aws-sdk-go-v2/service/ecs/types"
 )
 
 var _ aws.Config
@@ -24,7 +25,7 @@ func TestInteg_00_ListClusters(t *testing.T) {
 
 	cfg := integration.ConfigWithDefaultRegion("us-west-2")
 	svc := ecs.New(cfg)
-	params := &ecs.ListClustersInput{}
+	params := &types.ListClustersInput{}
 
 	req := svc.ListClustersRequest(params)
 
@@ -39,7 +40,7 @@ func TestInteg_01_StopTask(t *testing.T) {
 
 	cfg := integration.ConfigWithDefaultRegion("us-west-2")
 	svc := ecs.New(cfg)
-	params := &ecs.StopTaskInput{
+	params := &types.StopTaskInput{
 		Task: aws.String("xxxxxxxxxxx-xxxxxxxxxxxx-xxxxxxxxxxx"),
 	}
 

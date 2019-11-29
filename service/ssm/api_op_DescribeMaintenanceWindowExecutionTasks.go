@@ -4,83 +4,10 @@ package ssm
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ssm/types"
 )
-
-type DescribeMaintenanceWindowExecutionTasksInput struct {
-	_ struct{} `type:"structure"`
-
-	// Optional filters used to scope down the returned tasks. The supported filter
-	// key is STATUS with the corresponding values PENDING, IN_PROGRESS, SUCCESS,
-	// FAILED, TIMED_OUT, CANCELLING, and CANCELLED.
-	Filters []MaintenanceWindowFilter `type:"list"`
-
-	// The maximum number of items to return for this call. The call also returns
-	// a token that you can specify in a subsequent call to get the next set of
-	// results.
-	MaxResults *int64 `min:"10" type:"integer"`
-
-	// The token for the next set of items to return. (You received this token from
-	// a previous call.)
-	NextToken *string `type:"string"`
-
-	// The ID of the maintenance window execution whose task executions should be
-	// retrieved.
-	//
-	// WindowExecutionId is a required field
-	WindowExecutionId *string `min:"36" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeMaintenanceWindowExecutionTasksInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeMaintenanceWindowExecutionTasksInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeMaintenanceWindowExecutionTasksInput"}
-	if s.MaxResults != nil && *s.MaxResults < 10 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 10))
-	}
-
-	if s.WindowExecutionId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("WindowExecutionId"))
-	}
-	if s.WindowExecutionId != nil && len(*s.WindowExecutionId) < 36 {
-		invalidParams.Add(aws.NewErrParamMinLen("WindowExecutionId", 36))
-	}
-	if s.Filters != nil {
-		for i, v := range s.Filters {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribeMaintenanceWindowExecutionTasksOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The token to use when requesting the next set of items. If there are no additional
-	// items to return, the string is empty.
-	NextToken *string `type:"string"`
-
-	// Information about the task executions.
-	WindowExecutionTaskIdentities []MaintenanceWindowExecutionTaskIdentity `type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeMaintenanceWindowExecutionTasksOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeMaintenanceWindowExecutionTasks = "DescribeMaintenanceWindowExecutionTasks"
 
@@ -97,7 +24,7 @@ const opDescribeMaintenanceWindowExecutionTasks = "DescribeMaintenanceWindowExec
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeMaintenanceWindowExecutionTasks
-func (c *Client) DescribeMaintenanceWindowExecutionTasksRequest(input *DescribeMaintenanceWindowExecutionTasksInput) DescribeMaintenanceWindowExecutionTasksRequest {
+func (c *Client) DescribeMaintenanceWindowExecutionTasksRequest(input *types.DescribeMaintenanceWindowExecutionTasksInput) DescribeMaintenanceWindowExecutionTasksRequest {
 	op := &aws.Operation{
 		Name:       opDescribeMaintenanceWindowExecutionTasks,
 		HTTPMethod: "POST",
@@ -105,10 +32,10 @@ func (c *Client) DescribeMaintenanceWindowExecutionTasksRequest(input *DescribeM
 	}
 
 	if input == nil {
-		input = &DescribeMaintenanceWindowExecutionTasksInput{}
+		input = &types.DescribeMaintenanceWindowExecutionTasksInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeMaintenanceWindowExecutionTasksOutput{})
+	req := c.newRequest(op, input, &types.DescribeMaintenanceWindowExecutionTasksOutput{})
 	return DescribeMaintenanceWindowExecutionTasksRequest{Request: req, Input: input, Copy: c.DescribeMaintenanceWindowExecutionTasksRequest}
 }
 
@@ -116,8 +43,8 @@ func (c *Client) DescribeMaintenanceWindowExecutionTasksRequest(input *DescribeM
 // DescribeMaintenanceWindowExecutionTasks API operation.
 type DescribeMaintenanceWindowExecutionTasksRequest struct {
 	*aws.Request
-	Input *DescribeMaintenanceWindowExecutionTasksInput
-	Copy  func(*DescribeMaintenanceWindowExecutionTasksInput) DescribeMaintenanceWindowExecutionTasksRequest
+	Input *types.DescribeMaintenanceWindowExecutionTasksInput
+	Copy  func(*types.DescribeMaintenanceWindowExecutionTasksInput) DescribeMaintenanceWindowExecutionTasksRequest
 }
 
 // Send marshals and sends the DescribeMaintenanceWindowExecutionTasks API request.
@@ -129,7 +56,7 @@ func (r DescribeMaintenanceWindowExecutionTasksRequest) Send(ctx context.Context
 	}
 
 	resp := &DescribeMaintenanceWindowExecutionTasksResponse{
-		DescribeMaintenanceWindowExecutionTasksOutput: r.Request.Data.(*DescribeMaintenanceWindowExecutionTasksOutput),
+		DescribeMaintenanceWindowExecutionTasksOutput: r.Request.Data.(*types.DescribeMaintenanceWindowExecutionTasksOutput),
 		response: &aws.Response{Request: r.Request},
 	}
 
@@ -139,7 +66,7 @@ func (r DescribeMaintenanceWindowExecutionTasksRequest) Send(ctx context.Context
 // DescribeMaintenanceWindowExecutionTasksResponse is the response type for the
 // DescribeMaintenanceWindowExecutionTasks API operation.
 type DescribeMaintenanceWindowExecutionTasksResponse struct {
-	*DescribeMaintenanceWindowExecutionTasksOutput
+	*types.DescribeMaintenanceWindowExecutionTasksOutput
 
 	response *aws.Response
 }

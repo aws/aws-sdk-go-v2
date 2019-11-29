@@ -6,56 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/mturk/types"
 )
-
-type UpdateHITReviewStatusInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the HIT to update.
-	//
-	// HITId is a required field
-	HITId *string `min:"1" type:"string" required:"true"`
-
-	// Specifies how to update the HIT status. Default is False.
-	//
-	//    * Setting this to false will only transition a HIT from Reviewable to
-	//    Reviewing
-	//
-	//    * Setting this to true will only transition a HIT from Reviewing to Reviewable
-	Revert *bool `type:"boolean"`
-}
-
-// String returns the string representation
-func (s UpdateHITReviewStatusInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateHITReviewStatusInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateHITReviewStatusInput"}
-
-	if s.HITId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("HITId"))
-	}
-	if s.HITId != nil && len(*s.HITId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("HITId", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type UpdateHITReviewStatusOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s UpdateHITReviewStatusOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opUpdateHITReviewStatus = "UpdateHITReviewStatus"
 
@@ -74,7 +26,7 @@ const opUpdateHITReviewStatus = "UpdateHITReviewStatus"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/UpdateHITReviewStatus
-func (c *Client) UpdateHITReviewStatusRequest(input *UpdateHITReviewStatusInput) UpdateHITReviewStatusRequest {
+func (c *Client) UpdateHITReviewStatusRequest(input *types.UpdateHITReviewStatusInput) UpdateHITReviewStatusRequest {
 	op := &aws.Operation{
 		Name:       opUpdateHITReviewStatus,
 		HTTPMethod: "POST",
@@ -82,10 +34,10 @@ func (c *Client) UpdateHITReviewStatusRequest(input *UpdateHITReviewStatusInput)
 	}
 
 	if input == nil {
-		input = &UpdateHITReviewStatusInput{}
+		input = &types.UpdateHITReviewStatusInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateHITReviewStatusOutput{})
+	req := c.newRequest(op, input, &types.UpdateHITReviewStatusOutput{})
 	return UpdateHITReviewStatusRequest{Request: req, Input: input, Copy: c.UpdateHITReviewStatusRequest}
 }
 
@@ -93,8 +45,8 @@ func (c *Client) UpdateHITReviewStatusRequest(input *UpdateHITReviewStatusInput)
 // UpdateHITReviewStatus API operation.
 type UpdateHITReviewStatusRequest struct {
 	*aws.Request
-	Input *UpdateHITReviewStatusInput
-	Copy  func(*UpdateHITReviewStatusInput) UpdateHITReviewStatusRequest
+	Input *types.UpdateHITReviewStatusInput
+	Copy  func(*types.UpdateHITReviewStatusInput) UpdateHITReviewStatusRequest
 }
 
 // Send marshals and sends the UpdateHITReviewStatus API request.
@@ -106,7 +58,7 @@ func (r UpdateHITReviewStatusRequest) Send(ctx context.Context) (*UpdateHITRevie
 	}
 
 	resp := &UpdateHITReviewStatusResponse{
-		UpdateHITReviewStatusOutput: r.Request.Data.(*UpdateHITReviewStatusOutput),
+		UpdateHITReviewStatusOutput: r.Request.Data.(*types.UpdateHITReviewStatusOutput),
 		response:                    &aws.Response{Request: r.Request},
 	}
 
@@ -116,7 +68,7 @@ func (r UpdateHITReviewStatusRequest) Send(ctx context.Context) (*UpdateHITRevie
 // UpdateHITReviewStatusResponse is the response type for the
 // UpdateHITReviewStatus API operation.
 type UpdateHITReviewStatusResponse struct {
-	*UpdateHITReviewStatusOutput
+	*types.UpdateHITReviewStatusOutput
 
 	response *aws.Response
 }

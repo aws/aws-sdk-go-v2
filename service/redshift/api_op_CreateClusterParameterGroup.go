@@ -6,89 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/redshift/types"
 )
-
-type CreateClusterParameterGroupInput struct {
-	_ struct{} `type:"structure"`
-
-	// A description of the parameter group.
-	//
-	// Description is a required field
-	Description *string `type:"string" required:"true"`
-
-	// The Amazon Redshift engine version to which the cluster parameter group applies.
-	// The cluster engine version determines the set of parameters.
-	//
-	// To get a list of valid parameter group family names, you can call DescribeClusterParameterGroups.
-	// By default, Amazon Redshift returns a list of all the parameter groups that
-	// are owned by your AWS account, including the default parameter groups for
-	// each Amazon Redshift engine version. The parameter group family names associated
-	// with the default parameter groups provide you the valid values. For example,
-	// a valid family name is "redshift-1.0".
-	//
-	// ParameterGroupFamily is a required field
-	ParameterGroupFamily *string `type:"string" required:"true"`
-
-	// The name of the cluster parameter group.
-	//
-	// Constraints:
-	//
-	//    * Must be 1 to 255 alphanumeric characters or hyphens
-	//
-	//    * First character must be a letter.
-	//
-	//    * Cannot end with a hyphen or contain two consecutive hyphens.
-	//
-	//    * Must be unique withing your AWS account.
-	//
-	// This value is stored as a lower-case string.
-	//
-	// ParameterGroupName is a required field
-	ParameterGroupName *string `type:"string" required:"true"`
-
-	// A list of tag instances.
-	Tags []Tag `locationNameList:"Tag" type:"list"`
-}
-
-// String returns the string representation
-func (s CreateClusterParameterGroupInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateClusterParameterGroupInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateClusterParameterGroupInput"}
-
-	if s.Description == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Description"))
-	}
-
-	if s.ParameterGroupFamily == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ParameterGroupFamily"))
-	}
-
-	if s.ParameterGroupName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ParameterGroupName"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type CreateClusterParameterGroupOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Describes a parameter group.
-	ClusterParameterGroup *ClusterParameterGroup `type:"structure"`
-}
-
-// String returns the string representation
-func (s CreateClusterParameterGroupOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCreateClusterParameterGroup = "CreateClusterParameterGroup"
 
@@ -115,7 +34,7 @@ const opCreateClusterParameterGroup = "CreateClusterParameterGroup"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/CreateClusterParameterGroup
-func (c *Client) CreateClusterParameterGroupRequest(input *CreateClusterParameterGroupInput) CreateClusterParameterGroupRequest {
+func (c *Client) CreateClusterParameterGroupRequest(input *types.CreateClusterParameterGroupInput) CreateClusterParameterGroupRequest {
 	op := &aws.Operation{
 		Name:       opCreateClusterParameterGroup,
 		HTTPMethod: "POST",
@@ -123,10 +42,10 @@ func (c *Client) CreateClusterParameterGroupRequest(input *CreateClusterParamete
 	}
 
 	if input == nil {
-		input = &CreateClusterParameterGroupInput{}
+		input = &types.CreateClusterParameterGroupInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateClusterParameterGroupOutput{})
+	req := c.newRequest(op, input, &types.CreateClusterParameterGroupOutput{})
 	return CreateClusterParameterGroupRequest{Request: req, Input: input, Copy: c.CreateClusterParameterGroupRequest}
 }
 
@@ -134,8 +53,8 @@ func (c *Client) CreateClusterParameterGroupRequest(input *CreateClusterParamete
 // CreateClusterParameterGroup API operation.
 type CreateClusterParameterGroupRequest struct {
 	*aws.Request
-	Input *CreateClusterParameterGroupInput
-	Copy  func(*CreateClusterParameterGroupInput) CreateClusterParameterGroupRequest
+	Input *types.CreateClusterParameterGroupInput
+	Copy  func(*types.CreateClusterParameterGroupInput) CreateClusterParameterGroupRequest
 }
 
 // Send marshals and sends the CreateClusterParameterGroup API request.
@@ -147,7 +66,7 @@ func (r CreateClusterParameterGroupRequest) Send(ctx context.Context) (*CreateCl
 	}
 
 	resp := &CreateClusterParameterGroupResponse{
-		CreateClusterParameterGroupOutput: r.Request.Data.(*CreateClusterParameterGroupOutput),
+		CreateClusterParameterGroupOutput: r.Request.Data.(*types.CreateClusterParameterGroupOutput),
 		response:                          &aws.Response{Request: r.Request},
 	}
 
@@ -157,7 +76,7 @@ func (r CreateClusterParameterGroupRequest) Send(ctx context.Context) (*CreateCl
 // CreateClusterParameterGroupResponse is the response type for the
 // CreateClusterParameterGroup API operation.
 type CreateClusterParameterGroupResponse struct {
-	*CreateClusterParameterGroupOutput
+	*types.CreateClusterParameterGroupOutput
 
 	response *aws.Response
 }

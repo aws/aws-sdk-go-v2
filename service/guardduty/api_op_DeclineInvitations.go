@@ -6,92 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/guardduty/types"
 )
-
-type DeclineInvitationsInput struct {
-	_ struct{} `type:"structure"`
-
-	// A list of account IDs of the AWS accounts that sent invitations to the current
-	// member account that you want to decline invitations from.
-	//
-	// AccountIds is a required field
-	AccountIds []string `locationName:"accountIds" min:"1" type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s DeclineInvitationsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeclineInvitationsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeclineInvitationsInput"}
-
-	if s.AccountIds == nil {
-		invalidParams.Add(aws.NewErrParamRequired("AccountIds"))
-	}
-	if s.AccountIds != nil && len(s.AccountIds) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("AccountIds", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeclineInvitationsInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.AccountIds != nil {
-		v := s.AccountIds
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "accountIds", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
-		}
-		ls0.End()
-
-	}
-	return nil
-}
-
-type DeclineInvitationsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A list of objects containing the unprocessed account and a result string
-	// explaining why it was unprocessed.
-	//
-	// UnprocessedAccounts is a required field
-	UnprocessedAccounts []UnprocessedAccount `locationName:"unprocessedAccounts" type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s DeclineInvitationsOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeclineInvitationsOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.UnprocessedAccounts != nil {
-		v := s.UnprocessedAccounts
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "unprocessedAccounts", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	return nil
-}
 
 const opDeclineInvitations = "DeclineInvitations"
 
@@ -109,7 +25,7 @@ const opDeclineInvitations = "DeclineInvitations"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DeclineInvitations
-func (c *Client) DeclineInvitationsRequest(input *DeclineInvitationsInput) DeclineInvitationsRequest {
+func (c *Client) DeclineInvitationsRequest(input *types.DeclineInvitationsInput) DeclineInvitationsRequest {
 	op := &aws.Operation{
 		Name:       opDeclineInvitations,
 		HTTPMethod: "POST",
@@ -117,10 +33,10 @@ func (c *Client) DeclineInvitationsRequest(input *DeclineInvitationsInput) Decli
 	}
 
 	if input == nil {
-		input = &DeclineInvitationsInput{}
+		input = &types.DeclineInvitationsInput{}
 	}
 
-	req := c.newRequest(op, input, &DeclineInvitationsOutput{})
+	req := c.newRequest(op, input, &types.DeclineInvitationsOutput{})
 	return DeclineInvitationsRequest{Request: req, Input: input, Copy: c.DeclineInvitationsRequest}
 }
 
@@ -128,8 +44,8 @@ func (c *Client) DeclineInvitationsRequest(input *DeclineInvitationsInput) Decli
 // DeclineInvitations API operation.
 type DeclineInvitationsRequest struct {
 	*aws.Request
-	Input *DeclineInvitationsInput
-	Copy  func(*DeclineInvitationsInput) DeclineInvitationsRequest
+	Input *types.DeclineInvitationsInput
+	Copy  func(*types.DeclineInvitationsInput) DeclineInvitationsRequest
 }
 
 // Send marshals and sends the DeclineInvitations API request.
@@ -141,7 +57,7 @@ func (r DeclineInvitationsRequest) Send(ctx context.Context) (*DeclineInvitation
 	}
 
 	resp := &DeclineInvitationsResponse{
-		DeclineInvitationsOutput: r.Request.Data.(*DeclineInvitationsOutput),
+		DeclineInvitationsOutput: r.Request.Data.(*types.DeclineInvitationsOutput),
 		response:                 &aws.Response{Request: r.Request},
 	}
 
@@ -151,7 +67,7 @@ func (r DeclineInvitationsRequest) Send(ctx context.Context) (*DeclineInvitation
 // DeclineInvitationsResponse is the response type for the
 // DeclineInvitations API operation.
 type DeclineInvitationsResponse struct {
-	*DeclineInvitationsOutput
+	*types.DeclineInvitationsOutput
 
 	response *aws.Response
 }

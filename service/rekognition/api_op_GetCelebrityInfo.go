@@ -6,52 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/rekognition/types"
 )
-
-type GetCelebrityInfoInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID for the celebrity. You get the celebrity ID from a call to the RecognizeCelebrities
-	// operation, which recognizes celebrities in an image.
-	//
-	// Id is a required field
-	Id *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetCelebrityInfoInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetCelebrityInfoInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetCelebrityInfoInput"}
-
-	if s.Id == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Id"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type GetCelebrityInfoOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the celebrity.
-	Name *string `type:"string"`
-
-	// An array of URLs pointing to additional celebrity information.
-	Urls []string `type:"list"`
-}
-
-// String returns the string representation
-func (s GetCelebrityInfoOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetCelebrityInfo = "GetCelebrityInfo"
 
@@ -75,7 +31,7 @@ const opGetCelebrityInfo = "GetCelebrityInfo"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) GetCelebrityInfoRequest(input *GetCelebrityInfoInput) GetCelebrityInfoRequest {
+func (c *Client) GetCelebrityInfoRequest(input *types.GetCelebrityInfoInput) GetCelebrityInfoRequest {
 	op := &aws.Operation{
 		Name:       opGetCelebrityInfo,
 		HTTPMethod: "POST",
@@ -83,10 +39,10 @@ func (c *Client) GetCelebrityInfoRequest(input *GetCelebrityInfoInput) GetCelebr
 	}
 
 	if input == nil {
-		input = &GetCelebrityInfoInput{}
+		input = &types.GetCelebrityInfoInput{}
 	}
 
-	req := c.newRequest(op, input, &GetCelebrityInfoOutput{})
+	req := c.newRequest(op, input, &types.GetCelebrityInfoOutput{})
 	return GetCelebrityInfoRequest{Request: req, Input: input, Copy: c.GetCelebrityInfoRequest}
 }
 
@@ -94,8 +50,8 @@ func (c *Client) GetCelebrityInfoRequest(input *GetCelebrityInfoInput) GetCelebr
 // GetCelebrityInfo API operation.
 type GetCelebrityInfoRequest struct {
 	*aws.Request
-	Input *GetCelebrityInfoInput
-	Copy  func(*GetCelebrityInfoInput) GetCelebrityInfoRequest
+	Input *types.GetCelebrityInfoInput
+	Copy  func(*types.GetCelebrityInfoInput) GetCelebrityInfoRequest
 }
 
 // Send marshals and sends the GetCelebrityInfo API request.
@@ -107,7 +63,7 @@ func (r GetCelebrityInfoRequest) Send(ctx context.Context) (*GetCelebrityInfoRes
 	}
 
 	resp := &GetCelebrityInfoResponse{
-		GetCelebrityInfoOutput: r.Request.Data.(*GetCelebrityInfoOutput),
+		GetCelebrityInfoOutput: r.Request.Data.(*types.GetCelebrityInfoOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -117,7 +73,7 @@ func (r GetCelebrityInfoRequest) Send(ctx context.Context) (*GetCelebrityInfoRes
 // GetCelebrityInfoResponse is the response type for the
 // GetCelebrityInfo API operation.
 type GetCelebrityInfoResponse struct {
-	*GetCelebrityInfoOutput
+	*types.GetCelebrityInfoOutput
 
 	response *aws.Response
 }

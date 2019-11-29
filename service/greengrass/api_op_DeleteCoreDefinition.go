@@ -6,62 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/greengrass/types"
 )
-
-type DeleteCoreDefinitionInput struct {
-	_ struct{} `type:"structure"`
-
-	// CoreDefinitionId is a required field
-	CoreDefinitionId *string `location:"uri" locationName:"CoreDefinitionId" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteCoreDefinitionInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteCoreDefinitionInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteCoreDefinitionInput"}
-
-	if s.CoreDefinitionId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("CoreDefinitionId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteCoreDefinitionInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.CoreDefinitionId != nil {
-		v := *s.CoreDefinitionId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "CoreDefinitionId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type DeleteCoreDefinitionOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteCoreDefinitionOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteCoreDefinitionOutput) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
 
 const opDeleteCoreDefinition = "DeleteCoreDefinition"
 
@@ -78,7 +24,7 @@ const opDeleteCoreDefinition = "DeleteCoreDefinition"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/DeleteCoreDefinition
-func (c *Client) DeleteCoreDefinitionRequest(input *DeleteCoreDefinitionInput) DeleteCoreDefinitionRequest {
+func (c *Client) DeleteCoreDefinitionRequest(input *types.DeleteCoreDefinitionInput) DeleteCoreDefinitionRequest {
 	op := &aws.Operation{
 		Name:       opDeleteCoreDefinition,
 		HTTPMethod: "DELETE",
@@ -86,10 +32,10 @@ func (c *Client) DeleteCoreDefinitionRequest(input *DeleteCoreDefinitionInput) D
 	}
 
 	if input == nil {
-		input = &DeleteCoreDefinitionInput{}
+		input = &types.DeleteCoreDefinitionInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteCoreDefinitionOutput{})
+	req := c.newRequest(op, input, &types.DeleteCoreDefinitionOutput{})
 	return DeleteCoreDefinitionRequest{Request: req, Input: input, Copy: c.DeleteCoreDefinitionRequest}
 }
 
@@ -97,8 +43,8 @@ func (c *Client) DeleteCoreDefinitionRequest(input *DeleteCoreDefinitionInput) D
 // DeleteCoreDefinition API operation.
 type DeleteCoreDefinitionRequest struct {
 	*aws.Request
-	Input *DeleteCoreDefinitionInput
-	Copy  func(*DeleteCoreDefinitionInput) DeleteCoreDefinitionRequest
+	Input *types.DeleteCoreDefinitionInput
+	Copy  func(*types.DeleteCoreDefinitionInput) DeleteCoreDefinitionRequest
 }
 
 // Send marshals and sends the DeleteCoreDefinition API request.
@@ -110,7 +56,7 @@ func (r DeleteCoreDefinitionRequest) Send(ctx context.Context) (*DeleteCoreDefin
 	}
 
 	resp := &DeleteCoreDefinitionResponse{
-		DeleteCoreDefinitionOutput: r.Request.Data.(*DeleteCoreDefinitionOutput),
+		DeleteCoreDefinitionOutput: r.Request.Data.(*types.DeleteCoreDefinitionOutput),
 		response:                   &aws.Response{Request: r.Request},
 	}
 
@@ -120,7 +66,7 @@ func (r DeleteCoreDefinitionRequest) Send(ctx context.Context) (*DeleteCoreDefin
 // DeleteCoreDefinitionResponse is the response type for the
 // DeleteCoreDefinition API operation.
 type DeleteCoreDefinitionResponse struct {
-	*DeleteCoreDefinitionOutput
+	*types.DeleteCoreDefinitionOutput
 
 	response *aws.Response
 }

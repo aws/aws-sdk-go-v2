@@ -6,76 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/storagegateway/types"
 )
-
-// ListTagsForResourceInput
-type ListTagsForResourceInput struct {
-	_ struct{} `type:"structure"`
-
-	// Specifies that the list of tags returned be limited to the specified number
-	// of items.
-	Limit *int64 `min:"1" type:"integer"`
-
-	// An opaque string that indicates the position at which to begin returning
-	// the list of tags.
-	Marker *string `min:"1" type:"string"`
-
-	// The Amazon Resource Name (ARN) of the resource for which you want to list
-	// tags.
-	//
-	// ResourceARN is a required field
-	ResourceARN *string `min:"50" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s ListTagsForResourceInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListTagsForResourceInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListTagsForResourceInput"}
-	if s.Limit != nil && *s.Limit < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("Limit", 1))
-	}
-	if s.Marker != nil && len(*s.Marker) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Marker", 1))
-	}
-
-	if s.ResourceARN == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ResourceARN"))
-	}
-	if s.ResourceARN != nil && len(*s.ResourceARN) < 50 {
-		invalidParams.Add(aws.NewErrParamMinLen("ResourceARN", 50))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// ListTagsForResourceOutput
-type ListTagsForResourceOutput struct {
-	_ struct{} `type:"structure"`
-
-	// An opaque string that indicates the position at which to stop returning the
-	// list of tags.
-	Marker *string `min:"1" type:"string"`
-
-	// he Amazon Resource Name (ARN) of the resource for which you want to list
-	// tags.
-	ResourceARN *string `min:"50" type:"string"`
-
-	// An array that contains the tags for the specified resource.
-	Tags []Tag `type:"list"`
-}
-
-// String returns the string representation
-func (s ListTagsForResourceOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListTagsForResource = "ListTagsForResource"
 
@@ -83,7 +15,7 @@ const opListTagsForResource = "ListTagsForResource"
 // AWS Storage Gateway.
 //
 // Lists the tags that have been added to the specified resource. This operation
-// is only supported in the cached volume, stored volume and tape gateway type.
+// is supported in storage gateways of all types.
 //
 //    // Example sending a request using ListTagsForResourceRequest.
 //    req := client.ListTagsForResourceRequest(params)
@@ -93,7 +25,7 @@ const opListTagsForResource = "ListTagsForResource"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/ListTagsForResource
-func (c *Client) ListTagsForResourceRequest(input *ListTagsForResourceInput) ListTagsForResourceRequest {
+func (c *Client) ListTagsForResourceRequest(input *types.ListTagsForResourceInput) ListTagsForResourceRequest {
 	op := &aws.Operation{
 		Name:       opListTagsForResource,
 		HTTPMethod: "POST",
@@ -107,10 +39,10 @@ func (c *Client) ListTagsForResourceRequest(input *ListTagsForResourceInput) Lis
 	}
 
 	if input == nil {
-		input = &ListTagsForResourceInput{}
+		input = &types.ListTagsForResourceInput{}
 	}
 
-	req := c.newRequest(op, input, &ListTagsForResourceOutput{})
+	req := c.newRequest(op, input, &types.ListTagsForResourceOutput{})
 	return ListTagsForResourceRequest{Request: req, Input: input, Copy: c.ListTagsForResourceRequest}
 }
 
@@ -118,8 +50,8 @@ func (c *Client) ListTagsForResourceRequest(input *ListTagsForResourceInput) Lis
 // ListTagsForResource API operation.
 type ListTagsForResourceRequest struct {
 	*aws.Request
-	Input *ListTagsForResourceInput
-	Copy  func(*ListTagsForResourceInput) ListTagsForResourceRequest
+	Input *types.ListTagsForResourceInput
+	Copy  func(*types.ListTagsForResourceInput) ListTagsForResourceRequest
 }
 
 // Send marshals and sends the ListTagsForResource API request.
@@ -131,7 +63,7 @@ func (r ListTagsForResourceRequest) Send(ctx context.Context) (*ListTagsForResou
 	}
 
 	resp := &ListTagsForResourceResponse{
-		ListTagsForResourceOutput: r.Request.Data.(*ListTagsForResourceOutput),
+		ListTagsForResourceOutput: r.Request.Data.(*types.ListTagsForResourceOutput),
 		response:                  &aws.Response{Request: r.Request},
 	}
 
@@ -161,7 +93,7 @@ func NewListTagsForResourcePaginator(req ListTagsForResourceRequest) ListTagsFor
 	return ListTagsForResourcePaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListTagsForResourceInput
+				var inCpy *types.ListTagsForResourceInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -181,14 +113,14 @@ type ListTagsForResourcePaginator struct {
 	aws.Pager
 }
 
-func (p *ListTagsForResourcePaginator) CurrentPage() *ListTagsForResourceOutput {
-	return p.Pager.CurrentPage().(*ListTagsForResourceOutput)
+func (p *ListTagsForResourcePaginator) CurrentPage() *types.ListTagsForResourceOutput {
+	return p.Pager.CurrentPage().(*types.ListTagsForResourceOutput)
 }
 
 // ListTagsForResourceResponse is the response type for the
 // ListTagsForResource API operation.
 type ListTagsForResourceResponse struct {
-	*ListTagsForResourceOutput
+	*types.ListTagsForResourceOutput
 
 	response *aws.Response
 }

@@ -6,54 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/glue/types"
 )
-
-type UpdateCrawlerScheduleInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the crawler whose schedule to update.
-	//
-	// CrawlerName is a required field
-	CrawlerName *string `min:"1" type:"string" required:"true"`
-
-	// The updated cron expression used to specify the schedule. For more information,
-	// see Time-Based Schedules for Jobs and Crawlers (http://docs.aws.amazon.com/glue/latest/dg/monitor-data-warehouse-schedule.html).
-	// For example, to run something every day at 12:15 UTC, specify cron(15 12
-	// * * ? *).
-	Schedule *string `type:"string"`
-}
-
-// String returns the string representation
-func (s UpdateCrawlerScheduleInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateCrawlerScheduleInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateCrawlerScheduleInput"}
-
-	if s.CrawlerName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("CrawlerName"))
-	}
-	if s.CrawlerName != nil && len(*s.CrawlerName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("CrawlerName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type UpdateCrawlerScheduleOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s UpdateCrawlerScheduleOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opUpdateCrawlerSchedule = "UpdateCrawlerSchedule"
 
@@ -70,7 +24,7 @@ const opUpdateCrawlerSchedule = "UpdateCrawlerSchedule"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/UpdateCrawlerSchedule
-func (c *Client) UpdateCrawlerScheduleRequest(input *UpdateCrawlerScheduleInput) UpdateCrawlerScheduleRequest {
+func (c *Client) UpdateCrawlerScheduleRequest(input *types.UpdateCrawlerScheduleInput) UpdateCrawlerScheduleRequest {
 	op := &aws.Operation{
 		Name:       opUpdateCrawlerSchedule,
 		HTTPMethod: "POST",
@@ -78,10 +32,10 @@ func (c *Client) UpdateCrawlerScheduleRequest(input *UpdateCrawlerScheduleInput)
 	}
 
 	if input == nil {
-		input = &UpdateCrawlerScheduleInput{}
+		input = &types.UpdateCrawlerScheduleInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateCrawlerScheduleOutput{})
+	req := c.newRequest(op, input, &types.UpdateCrawlerScheduleOutput{})
 	return UpdateCrawlerScheduleRequest{Request: req, Input: input, Copy: c.UpdateCrawlerScheduleRequest}
 }
 
@@ -89,8 +43,8 @@ func (c *Client) UpdateCrawlerScheduleRequest(input *UpdateCrawlerScheduleInput)
 // UpdateCrawlerSchedule API operation.
 type UpdateCrawlerScheduleRequest struct {
 	*aws.Request
-	Input *UpdateCrawlerScheduleInput
-	Copy  func(*UpdateCrawlerScheduleInput) UpdateCrawlerScheduleRequest
+	Input *types.UpdateCrawlerScheduleInput
+	Copy  func(*types.UpdateCrawlerScheduleInput) UpdateCrawlerScheduleRequest
 }
 
 // Send marshals and sends the UpdateCrawlerSchedule API request.
@@ -102,7 +56,7 @@ func (r UpdateCrawlerScheduleRequest) Send(ctx context.Context) (*UpdateCrawlerS
 	}
 
 	resp := &UpdateCrawlerScheduleResponse{
-		UpdateCrawlerScheduleOutput: r.Request.Data.(*UpdateCrawlerScheduleOutput),
+		UpdateCrawlerScheduleOutput: r.Request.Data.(*types.UpdateCrawlerScheduleOutput),
 		response:                    &aws.Response{Request: r.Request},
 	}
 
@@ -112,7 +66,7 @@ func (r UpdateCrawlerScheduleRequest) Send(ctx context.Context) (*UpdateCrawlerS
 // UpdateCrawlerScheduleResponse is the response type for the
 // UpdateCrawlerSchedule API operation.
 type UpdateCrawlerScheduleResponse struct {
-	*UpdateCrawlerScheduleOutput
+	*types.UpdateCrawlerScheduleOutput
 
 	response *aws.Response
 }

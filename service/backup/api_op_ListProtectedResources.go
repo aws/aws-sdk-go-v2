@@ -6,102 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/backup/types"
 )
-
-type ListProtectedResourcesInput struct {
-	_ struct{} `type:"structure"`
-
-	// The maximum number of items to be returned.
-	MaxResults *int64 `location:"querystring" locationName:"maxResults" min:"1" type:"integer"`
-
-	// The next item following a partial list of returned items. For example, if
-	// a request is made to return maxResults number of items, NextToken allows
-	// you to return more items in your list starting at the location pointed to
-	// by the next token.
-	NextToken *string `location:"querystring" locationName:"nextToken" type:"string"`
-}
-
-// String returns the string representation
-func (s ListProtectedResourcesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListProtectedResourcesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListProtectedResourcesInput"}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListProtectedResourcesInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.MaxResults != nil {
-		v := *s.MaxResults
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "maxResults", protocol.Int64Value(v), metadata)
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type ListProtectedResourcesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The next item following a partial list of returned items. For example, if
-	// a request is made to return maxResults number of items, NextToken allows
-	// you to return more items in your list starting at the location pointed to
-	// by the next token.
-	NextToken *string `type:"string"`
-
-	// An array of resources successfully backed up by AWS Backup including the
-	// time the resource was saved, an Amazon Resource Name (ARN) of the resource,
-	// and a resource type.
-	Results []ProtectedResource `type:"list"`
-}
-
-// String returns the string representation
-func (s ListProtectedResourcesOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListProtectedResourcesOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Results != nil {
-		v := s.Results
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "Results", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	return nil
-}
 
 const opListProtectedResources = "ListProtectedResources"
 
@@ -120,7 +26,7 @@ const opListProtectedResources = "ListProtectedResources"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/ListProtectedResources
-func (c *Client) ListProtectedResourcesRequest(input *ListProtectedResourcesInput) ListProtectedResourcesRequest {
+func (c *Client) ListProtectedResourcesRequest(input *types.ListProtectedResourcesInput) ListProtectedResourcesRequest {
 	op := &aws.Operation{
 		Name:       opListProtectedResources,
 		HTTPMethod: "GET",
@@ -134,10 +40,10 @@ func (c *Client) ListProtectedResourcesRequest(input *ListProtectedResourcesInpu
 	}
 
 	if input == nil {
-		input = &ListProtectedResourcesInput{}
+		input = &types.ListProtectedResourcesInput{}
 	}
 
-	req := c.newRequest(op, input, &ListProtectedResourcesOutput{})
+	req := c.newRequest(op, input, &types.ListProtectedResourcesOutput{})
 	return ListProtectedResourcesRequest{Request: req, Input: input, Copy: c.ListProtectedResourcesRequest}
 }
 
@@ -145,8 +51,8 @@ func (c *Client) ListProtectedResourcesRequest(input *ListProtectedResourcesInpu
 // ListProtectedResources API operation.
 type ListProtectedResourcesRequest struct {
 	*aws.Request
-	Input *ListProtectedResourcesInput
-	Copy  func(*ListProtectedResourcesInput) ListProtectedResourcesRequest
+	Input *types.ListProtectedResourcesInput
+	Copy  func(*types.ListProtectedResourcesInput) ListProtectedResourcesRequest
 }
 
 // Send marshals and sends the ListProtectedResources API request.
@@ -158,7 +64,7 @@ func (r ListProtectedResourcesRequest) Send(ctx context.Context) (*ListProtected
 	}
 
 	resp := &ListProtectedResourcesResponse{
-		ListProtectedResourcesOutput: r.Request.Data.(*ListProtectedResourcesOutput),
+		ListProtectedResourcesOutput: r.Request.Data.(*types.ListProtectedResourcesOutput),
 		response:                     &aws.Response{Request: r.Request},
 	}
 
@@ -188,7 +94,7 @@ func NewListProtectedResourcesPaginator(req ListProtectedResourcesRequest) ListP
 	return ListProtectedResourcesPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListProtectedResourcesInput
+				var inCpy *types.ListProtectedResourcesInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -208,14 +114,14 @@ type ListProtectedResourcesPaginator struct {
 	aws.Pager
 }
 
-func (p *ListProtectedResourcesPaginator) CurrentPage() *ListProtectedResourcesOutput {
-	return p.Pager.CurrentPage().(*ListProtectedResourcesOutput)
+func (p *ListProtectedResourcesPaginator) CurrentPage() *types.ListProtectedResourcesOutput {
+	return p.Pager.CurrentPage().(*types.ListProtectedResourcesOutput)
 }
 
 // ListProtectedResourcesResponse is the response type for the
 // ListProtectedResources API operation.
 type ListProtectedResourcesResponse struct {
-	*ListProtectedResourcesOutput
+	*types.ListProtectedResourcesOutput
 
 	response *aws.Response
 }

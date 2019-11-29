@@ -6,58 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/glue/types"
 )
-
-type GetTriggersInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the job to retrieve triggers for. The trigger that can start
-	// this job is returned, and if there is no such trigger, all triggers are returned.
-	DependentJobName *string `min:"1" type:"string"`
-
-	// The maximum size of the response.
-	MaxResults *int64 `min:"1" type:"integer"`
-
-	// A continuation token, if this is a continuation call.
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s GetTriggersInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetTriggersInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetTriggersInput"}
-	if s.DependentJobName != nil && len(*s.DependentJobName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("DependentJobName", 1))
-	}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type GetTriggersOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A continuation token, if not all the requested triggers have yet been returned.
-	NextToken *string `type:"string"`
-
-	// A list of triggers for the specified job.
-	Triggers []Trigger `type:"list"`
-}
-
-// String returns the string representation
-func (s GetTriggersOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetTriggers = "GetTriggers"
 
@@ -74,7 +24,7 @@ const opGetTriggers = "GetTriggers"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetTriggers
-func (c *Client) GetTriggersRequest(input *GetTriggersInput) GetTriggersRequest {
+func (c *Client) GetTriggersRequest(input *types.GetTriggersInput) GetTriggersRequest {
 	op := &aws.Operation{
 		Name:       opGetTriggers,
 		HTTPMethod: "POST",
@@ -88,10 +38,10 @@ func (c *Client) GetTriggersRequest(input *GetTriggersInput) GetTriggersRequest 
 	}
 
 	if input == nil {
-		input = &GetTriggersInput{}
+		input = &types.GetTriggersInput{}
 	}
 
-	req := c.newRequest(op, input, &GetTriggersOutput{})
+	req := c.newRequest(op, input, &types.GetTriggersOutput{})
 	return GetTriggersRequest{Request: req, Input: input, Copy: c.GetTriggersRequest}
 }
 
@@ -99,8 +49,8 @@ func (c *Client) GetTriggersRequest(input *GetTriggersInput) GetTriggersRequest 
 // GetTriggers API operation.
 type GetTriggersRequest struct {
 	*aws.Request
-	Input *GetTriggersInput
-	Copy  func(*GetTriggersInput) GetTriggersRequest
+	Input *types.GetTriggersInput
+	Copy  func(*types.GetTriggersInput) GetTriggersRequest
 }
 
 // Send marshals and sends the GetTriggers API request.
@@ -112,7 +62,7 @@ func (r GetTriggersRequest) Send(ctx context.Context) (*GetTriggersResponse, err
 	}
 
 	resp := &GetTriggersResponse{
-		GetTriggersOutput: r.Request.Data.(*GetTriggersOutput),
+		GetTriggersOutput: r.Request.Data.(*types.GetTriggersOutput),
 		response:          &aws.Response{Request: r.Request},
 	}
 
@@ -142,7 +92,7 @@ func NewGetTriggersPaginator(req GetTriggersRequest) GetTriggersPaginator {
 	return GetTriggersPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *GetTriggersInput
+				var inCpy *types.GetTriggersInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -162,14 +112,14 @@ type GetTriggersPaginator struct {
 	aws.Pager
 }
 
-func (p *GetTriggersPaginator) CurrentPage() *GetTriggersOutput {
-	return p.Pager.CurrentPage().(*GetTriggersOutput)
+func (p *GetTriggersPaginator) CurrentPage() *types.GetTriggersOutput {
+	return p.Pager.CurrentPage().(*types.GetTriggersOutput)
 }
 
 // GetTriggersResponse is the response type for the
 // GetTriggers API operation.
 type GetTriggersResponse struct {
-	*GetTriggersOutput
+	*types.GetTriggersOutput
 
 	response *aws.Response
 }

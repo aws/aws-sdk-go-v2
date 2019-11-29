@@ -6,83 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
+	"github.com/aws/aws-sdk-go-v2/service/acmpca/types"
 )
-
-type CreatePermissionInput struct {
-	_ struct{} `type:"structure"`
-
-	// The actions that the specified AWS service principal can use. These include
-	// IssueCertificate, GetCertificate, and ListPermissions.
-	//
-	// Actions is a required field
-	Actions []ActionType `min:"1" type:"list" required:"true"`
-
-	// The Amazon Resource Name (ARN) of the CA that grants the permissions. You
-	// can find the ARN by calling the ListCertificateAuthorities action. This must
-	// have the following form:
-	//
-	// arn:aws:acm-pca:region:account:certificate-authority/12345678-1234-1234-1234-123456789012 .
-	//
-	// CertificateAuthorityArn is a required field
-	CertificateAuthorityArn *string `min:"5" type:"string" required:"true"`
-
-	// The AWS service or identity that receives the permission. At this time, the
-	// only valid principal is acm.amazonaws.com.
-	//
-	// Principal is a required field
-	Principal *string `type:"string" required:"true"`
-
-	// The ID of the calling account.
-	SourceAccount *string `min:"12" type:"string"`
-}
-
-// String returns the string representation
-func (s CreatePermissionInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreatePermissionInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreatePermissionInput"}
-
-	if s.Actions == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Actions"))
-	}
-	if s.Actions != nil && len(s.Actions) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Actions", 1))
-	}
-
-	if s.CertificateAuthorityArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("CertificateAuthorityArn"))
-	}
-	if s.CertificateAuthorityArn != nil && len(*s.CertificateAuthorityArn) < 5 {
-		invalidParams.Add(aws.NewErrParamMinLen("CertificateAuthorityArn", 5))
-	}
-
-	if s.Principal == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Principal"))
-	}
-	if s.SourceAccount != nil && len(*s.SourceAccount) < 12 {
-		invalidParams.Add(aws.NewErrParamMinLen("SourceAccount", 12))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type CreatePermissionOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s CreatePermissionOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCreatePermission = "CreatePermission"
 
@@ -108,7 +35,7 @@ const opCreatePermission = "CreatePermission"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/acm-pca-2017-08-22/CreatePermission
-func (c *Client) CreatePermissionRequest(input *CreatePermissionInput) CreatePermissionRequest {
+func (c *Client) CreatePermissionRequest(input *types.CreatePermissionInput) CreatePermissionRequest {
 	op := &aws.Operation{
 		Name:       opCreatePermission,
 		HTTPMethod: "POST",
@@ -116,10 +43,10 @@ func (c *Client) CreatePermissionRequest(input *CreatePermissionInput) CreatePer
 	}
 
 	if input == nil {
-		input = &CreatePermissionInput{}
+		input = &types.CreatePermissionInput{}
 	}
 
-	req := c.newRequest(op, input, &CreatePermissionOutput{})
+	req := c.newRequest(op, input, &types.CreatePermissionOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return CreatePermissionRequest{Request: req, Input: input, Copy: c.CreatePermissionRequest}
@@ -129,8 +56,8 @@ func (c *Client) CreatePermissionRequest(input *CreatePermissionInput) CreatePer
 // CreatePermission API operation.
 type CreatePermissionRequest struct {
 	*aws.Request
-	Input *CreatePermissionInput
-	Copy  func(*CreatePermissionInput) CreatePermissionRequest
+	Input *types.CreatePermissionInput
+	Copy  func(*types.CreatePermissionInput) CreatePermissionRequest
 }
 
 // Send marshals and sends the CreatePermission API request.
@@ -142,7 +69,7 @@ func (r CreatePermissionRequest) Send(ctx context.Context) (*CreatePermissionRes
 	}
 
 	resp := &CreatePermissionResponse{
-		CreatePermissionOutput: r.Request.Data.(*CreatePermissionOutput),
+		CreatePermissionOutput: r.Request.Data.(*types.CreatePermissionOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -152,7 +79,7 @@ func (r CreatePermissionRequest) Send(ctx context.Context) (*CreatePermissionRes
 // CreatePermissionResponse is the response type for the
 // CreatePermission API operation.
 type CreatePermissionResponse struct {
-	*CreatePermissionOutput
+	*types.CreatePermissionOutput
 
 	response *aws.Response
 }

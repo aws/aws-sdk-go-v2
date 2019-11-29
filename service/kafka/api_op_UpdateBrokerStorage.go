@@ -4,135 +4,10 @@ package kafka
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/kafka/types"
 )
-
-// Request object for UpdateBrokerStorage.
-type UpdateBrokerStorageInput struct {
-	_ struct{} `type:"structure"`
-
-	// ClusterArn is a required field
-	ClusterArn *string `location:"uri" locationName:"clusterArn" type:"string" required:"true"`
-
-	// The version of cluster to update from. A successful operation will then generate
-	// a new version.
-	//
-	// CurrentVersion is a required field
-	CurrentVersion *string `locationName:"currentVersion" type:"string" required:"true"`
-
-	// Describes the target volume size and the ID of the broker to apply the update
-	// to.
-	//
-	// The value you specify for Target-Volume-in-GiB must be a whole number that
-	// is greater than 100 GiB.
-	//
-	// The storage per broker after the update operation can't exceed 16384 GiB.
-	//
-	// TargetBrokerEBSVolumeInfo is a required field
-	TargetBrokerEBSVolumeInfo []BrokerEBSVolumeInfo `locationName:"targetBrokerEBSVolumeInfo" type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s UpdateBrokerStorageInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateBrokerStorageInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateBrokerStorageInput"}
-
-	if s.ClusterArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ClusterArn"))
-	}
-
-	if s.CurrentVersion == nil {
-		invalidParams.Add(aws.NewErrParamRequired("CurrentVersion"))
-	}
-
-	if s.TargetBrokerEBSVolumeInfo == nil {
-		invalidParams.Add(aws.NewErrParamRequired("TargetBrokerEBSVolumeInfo"))
-	}
-	if s.TargetBrokerEBSVolumeInfo != nil {
-		for i, v := range s.TargetBrokerEBSVolumeInfo {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "TargetBrokerEBSVolumeInfo", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s UpdateBrokerStorageInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.CurrentVersion != nil {
-		v := *s.CurrentVersion
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "currentVersion", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.TargetBrokerEBSVolumeInfo != nil {
-		v := s.TargetBrokerEBSVolumeInfo
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "targetBrokerEBSVolumeInfo", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	if s.ClusterArn != nil {
-		v := *s.ClusterArn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "clusterArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-// Response body for UpdateBrokerStorage.
-type UpdateBrokerStorageOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the cluster.
-	ClusterArn *string `locationName:"clusterArn" type:"string"`
-
-	// The Amazon Resource Name (ARN) of the cluster operation.
-	ClusterOperationArn *string `locationName:"clusterOperationArn" type:"string"`
-}
-
-// String returns the string representation
-func (s UpdateBrokerStorageOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s UpdateBrokerStorageOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.ClusterArn != nil {
-		v := *s.ClusterArn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "clusterArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.ClusterOperationArn != nil {
-		v := *s.ClusterOperationArn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "clusterOperationArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opUpdateBrokerStorage = "UpdateBrokerStorage"
 
@@ -149,7 +24,7 @@ const opUpdateBrokerStorage = "UpdateBrokerStorage"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/UpdateBrokerStorage
-func (c *Client) UpdateBrokerStorageRequest(input *UpdateBrokerStorageInput) UpdateBrokerStorageRequest {
+func (c *Client) UpdateBrokerStorageRequest(input *types.UpdateBrokerStorageInput) UpdateBrokerStorageRequest {
 	op := &aws.Operation{
 		Name:       opUpdateBrokerStorage,
 		HTTPMethod: "PUT",
@@ -157,10 +32,10 @@ func (c *Client) UpdateBrokerStorageRequest(input *UpdateBrokerStorageInput) Upd
 	}
 
 	if input == nil {
-		input = &UpdateBrokerStorageInput{}
+		input = &types.UpdateBrokerStorageInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateBrokerStorageOutput{})
+	req := c.newRequest(op, input, &types.UpdateBrokerStorageOutput{})
 	return UpdateBrokerStorageRequest{Request: req, Input: input, Copy: c.UpdateBrokerStorageRequest}
 }
 
@@ -168,8 +43,8 @@ func (c *Client) UpdateBrokerStorageRequest(input *UpdateBrokerStorageInput) Upd
 // UpdateBrokerStorage API operation.
 type UpdateBrokerStorageRequest struct {
 	*aws.Request
-	Input *UpdateBrokerStorageInput
-	Copy  func(*UpdateBrokerStorageInput) UpdateBrokerStorageRequest
+	Input *types.UpdateBrokerStorageInput
+	Copy  func(*types.UpdateBrokerStorageInput) UpdateBrokerStorageRequest
 }
 
 // Send marshals and sends the UpdateBrokerStorage API request.
@@ -181,7 +56,7 @@ func (r UpdateBrokerStorageRequest) Send(ctx context.Context) (*UpdateBrokerStor
 	}
 
 	resp := &UpdateBrokerStorageResponse{
-		UpdateBrokerStorageOutput: r.Request.Data.(*UpdateBrokerStorageOutput),
+		UpdateBrokerStorageOutput: r.Request.Data.(*types.UpdateBrokerStorageOutput),
 		response:                  &aws.Response{Request: r.Request},
 	}
 
@@ -191,7 +66,7 @@ func (r UpdateBrokerStorageRequest) Send(ctx context.Context) (*UpdateBrokerStor
 // UpdateBrokerStorageResponse is the response type for the
 // UpdateBrokerStorage API operation.
 type UpdateBrokerStorageResponse struct {
-	*UpdateBrokerStorageOutput
+	*types.UpdateBrokerStorageOutput
 
 	response *aws.Response
 }

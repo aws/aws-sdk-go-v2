@@ -10,6 +10,7 @@ package iotanalyticsiface
 
 import (
 	"github.com/aws/aws-sdk-go-v2/service/iotanalytics"
+	"github.com/aws/aws-sdk-go-v2/service/iotanalytics/types"
 )
 
 // ClientAPI provides an interface to enable mocking the
@@ -43,7 +44,7 @@ import (
 //    type mockClientClient struct {
 //        iotanalyticsiface.ClientPI
 //    }
-//    func (m *mockClientClient) BatchPutMessage(input *iotanalytics.BatchPutMessageInput) (*iotanalytics.BatchPutMessageOutput, error) {
+//    func (m *mockClientClient) BatchPutMessage(input *types.BatchPutMessageInput) (*types.BatchPutMessageOutput, error) {
 //        // mock response/functionality
 //    }
 //
@@ -61,73 +62,73 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type ClientAPI interface {
-	BatchPutMessageRequest(*iotanalytics.BatchPutMessageInput) iotanalytics.BatchPutMessageRequest
+	BatchPutMessageRequest(*types.BatchPutMessageInput) iotanalytics.BatchPutMessageRequest
 
-	CancelPipelineReprocessingRequest(*iotanalytics.CancelPipelineReprocessingInput) iotanalytics.CancelPipelineReprocessingRequest
+	CancelPipelineReprocessingRequest(*types.CancelPipelineReprocessingInput) iotanalytics.CancelPipelineReprocessingRequest
 
-	CreateChannelRequest(*iotanalytics.CreateChannelInput) iotanalytics.CreateChannelRequest
+	CreateChannelRequest(*types.CreateChannelInput) iotanalytics.CreateChannelRequest
 
-	CreateDatasetRequest(*iotanalytics.CreateDatasetInput) iotanalytics.CreateDatasetRequest
+	CreateDatasetRequest(*types.CreateDatasetInput) iotanalytics.CreateDatasetRequest
 
-	CreateDatasetContentRequest(*iotanalytics.CreateDatasetContentInput) iotanalytics.CreateDatasetContentRequest
+	CreateDatasetContentRequest(*types.CreateDatasetContentInput) iotanalytics.CreateDatasetContentRequest
 
-	CreateDatastoreRequest(*iotanalytics.CreateDatastoreInput) iotanalytics.CreateDatastoreRequest
+	CreateDatastoreRequest(*types.CreateDatastoreInput) iotanalytics.CreateDatastoreRequest
 
-	CreatePipelineRequest(*iotanalytics.CreatePipelineInput) iotanalytics.CreatePipelineRequest
+	CreatePipelineRequest(*types.CreatePipelineInput) iotanalytics.CreatePipelineRequest
 
-	DeleteChannelRequest(*iotanalytics.DeleteChannelInput) iotanalytics.DeleteChannelRequest
+	DeleteChannelRequest(*types.DeleteChannelInput) iotanalytics.DeleteChannelRequest
 
-	DeleteDatasetRequest(*iotanalytics.DeleteDatasetInput) iotanalytics.DeleteDatasetRequest
+	DeleteDatasetRequest(*types.DeleteDatasetInput) iotanalytics.DeleteDatasetRequest
 
-	DeleteDatasetContentRequest(*iotanalytics.DeleteDatasetContentInput) iotanalytics.DeleteDatasetContentRequest
+	DeleteDatasetContentRequest(*types.DeleteDatasetContentInput) iotanalytics.DeleteDatasetContentRequest
 
-	DeleteDatastoreRequest(*iotanalytics.DeleteDatastoreInput) iotanalytics.DeleteDatastoreRequest
+	DeleteDatastoreRequest(*types.DeleteDatastoreInput) iotanalytics.DeleteDatastoreRequest
 
-	DeletePipelineRequest(*iotanalytics.DeletePipelineInput) iotanalytics.DeletePipelineRequest
+	DeletePipelineRequest(*types.DeletePipelineInput) iotanalytics.DeletePipelineRequest
 
-	DescribeChannelRequest(*iotanalytics.DescribeChannelInput) iotanalytics.DescribeChannelRequest
+	DescribeChannelRequest(*types.DescribeChannelInput) iotanalytics.DescribeChannelRequest
 
-	DescribeDatasetRequest(*iotanalytics.DescribeDatasetInput) iotanalytics.DescribeDatasetRequest
+	DescribeDatasetRequest(*types.DescribeDatasetInput) iotanalytics.DescribeDatasetRequest
 
-	DescribeDatastoreRequest(*iotanalytics.DescribeDatastoreInput) iotanalytics.DescribeDatastoreRequest
+	DescribeDatastoreRequest(*types.DescribeDatastoreInput) iotanalytics.DescribeDatastoreRequest
 
-	DescribeLoggingOptionsRequest(*iotanalytics.DescribeLoggingOptionsInput) iotanalytics.DescribeLoggingOptionsRequest
+	DescribeLoggingOptionsRequest(*types.DescribeLoggingOptionsInput) iotanalytics.DescribeLoggingOptionsRequest
 
-	DescribePipelineRequest(*iotanalytics.DescribePipelineInput) iotanalytics.DescribePipelineRequest
+	DescribePipelineRequest(*types.DescribePipelineInput) iotanalytics.DescribePipelineRequest
 
-	GetDatasetContentRequest(*iotanalytics.GetDatasetContentInput) iotanalytics.GetDatasetContentRequest
+	GetDatasetContentRequest(*types.GetDatasetContentInput) iotanalytics.GetDatasetContentRequest
 
-	ListChannelsRequest(*iotanalytics.ListChannelsInput) iotanalytics.ListChannelsRequest
+	ListChannelsRequest(*types.ListChannelsInput) iotanalytics.ListChannelsRequest
 
-	ListDatasetContentsRequest(*iotanalytics.ListDatasetContentsInput) iotanalytics.ListDatasetContentsRequest
+	ListDatasetContentsRequest(*types.ListDatasetContentsInput) iotanalytics.ListDatasetContentsRequest
 
-	ListDatasetsRequest(*iotanalytics.ListDatasetsInput) iotanalytics.ListDatasetsRequest
+	ListDatasetsRequest(*types.ListDatasetsInput) iotanalytics.ListDatasetsRequest
 
-	ListDatastoresRequest(*iotanalytics.ListDatastoresInput) iotanalytics.ListDatastoresRequest
+	ListDatastoresRequest(*types.ListDatastoresInput) iotanalytics.ListDatastoresRequest
 
-	ListPipelinesRequest(*iotanalytics.ListPipelinesInput) iotanalytics.ListPipelinesRequest
+	ListPipelinesRequest(*types.ListPipelinesInput) iotanalytics.ListPipelinesRequest
 
-	ListTagsForResourceRequest(*iotanalytics.ListTagsForResourceInput) iotanalytics.ListTagsForResourceRequest
+	ListTagsForResourceRequest(*types.ListTagsForResourceInput) iotanalytics.ListTagsForResourceRequest
 
-	PutLoggingOptionsRequest(*iotanalytics.PutLoggingOptionsInput) iotanalytics.PutLoggingOptionsRequest
+	PutLoggingOptionsRequest(*types.PutLoggingOptionsInput) iotanalytics.PutLoggingOptionsRequest
 
-	RunPipelineActivityRequest(*iotanalytics.RunPipelineActivityInput) iotanalytics.RunPipelineActivityRequest
+	RunPipelineActivityRequest(*types.RunPipelineActivityInput) iotanalytics.RunPipelineActivityRequest
 
-	SampleChannelDataRequest(*iotanalytics.SampleChannelDataInput) iotanalytics.SampleChannelDataRequest
+	SampleChannelDataRequest(*types.SampleChannelDataInput) iotanalytics.SampleChannelDataRequest
 
-	StartPipelineReprocessingRequest(*iotanalytics.StartPipelineReprocessingInput) iotanalytics.StartPipelineReprocessingRequest
+	StartPipelineReprocessingRequest(*types.StartPipelineReprocessingInput) iotanalytics.StartPipelineReprocessingRequest
 
-	TagResourceRequest(*iotanalytics.TagResourceInput) iotanalytics.TagResourceRequest
+	TagResourceRequest(*types.TagResourceInput) iotanalytics.TagResourceRequest
 
-	UntagResourceRequest(*iotanalytics.UntagResourceInput) iotanalytics.UntagResourceRequest
+	UntagResourceRequest(*types.UntagResourceInput) iotanalytics.UntagResourceRequest
 
-	UpdateChannelRequest(*iotanalytics.UpdateChannelInput) iotanalytics.UpdateChannelRequest
+	UpdateChannelRequest(*types.UpdateChannelInput) iotanalytics.UpdateChannelRequest
 
-	UpdateDatasetRequest(*iotanalytics.UpdateDatasetInput) iotanalytics.UpdateDatasetRequest
+	UpdateDatasetRequest(*types.UpdateDatasetInput) iotanalytics.UpdateDatasetRequest
 
-	UpdateDatastoreRequest(*iotanalytics.UpdateDatastoreInput) iotanalytics.UpdateDatastoreRequest
+	UpdateDatastoreRequest(*types.UpdateDatastoreInput) iotanalytics.UpdateDatastoreRequest
 
-	UpdatePipelineRequest(*iotanalytics.UpdatePipelineInput) iotanalytics.UpdatePipelineRequest
+	UpdatePipelineRequest(*types.UpdatePipelineInput) iotanalytics.UpdatePipelineRequest
 }
 
 var _ ClientAPI = (*iotanalytics.Client)(nil)

@@ -4,105 +4,10 @@ package serverlessapplicationrepository
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/serverlessapplicationrepository/types"
 )
-
-type PutApplicationPolicyInput struct {
-	_ struct{} `type:"structure"`
-
-	// ApplicationId is a required field
-	ApplicationId *string `location:"uri" locationName:"applicationId" type:"string" required:"true"`
-
-	// Statements is a required field
-	Statements []ApplicationPolicyStatement `locationName:"statements" type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s PutApplicationPolicyInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *PutApplicationPolicyInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "PutApplicationPolicyInput"}
-
-	if s.ApplicationId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ApplicationId"))
-	}
-
-	if s.Statements == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Statements"))
-	}
-	if s.Statements != nil {
-		for i, v := range s.Statements {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Statements", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s PutApplicationPolicyInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.Statements != nil {
-		v := s.Statements
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "statements", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	if s.ApplicationId != nil {
-		v := *s.ApplicationId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "applicationId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type PutApplicationPolicyOutput struct {
-	_ struct{} `type:"structure"`
-
-	Statements []ApplicationPolicyStatement `locationName:"statements" type:"list"`
-}
-
-// String returns the string representation
-func (s PutApplicationPolicyOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s PutApplicationPolicyOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.Statements != nil {
-		v := s.Statements
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "statements", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	return nil
-}
 
 const opPutApplicationPolicy = "PutApplicationPolicy"
 
@@ -120,7 +25,7 @@ const opPutApplicationPolicy = "PutApplicationPolicy"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/serverlessrepo-2017-09-08/PutApplicationPolicy
-func (c *Client) PutApplicationPolicyRequest(input *PutApplicationPolicyInput) PutApplicationPolicyRequest {
+func (c *Client) PutApplicationPolicyRequest(input *types.PutApplicationPolicyInput) PutApplicationPolicyRequest {
 	op := &aws.Operation{
 		Name:       opPutApplicationPolicy,
 		HTTPMethod: "PUT",
@@ -128,10 +33,10 @@ func (c *Client) PutApplicationPolicyRequest(input *PutApplicationPolicyInput) P
 	}
 
 	if input == nil {
-		input = &PutApplicationPolicyInput{}
+		input = &types.PutApplicationPolicyInput{}
 	}
 
-	req := c.newRequest(op, input, &PutApplicationPolicyOutput{})
+	req := c.newRequest(op, input, &types.PutApplicationPolicyOutput{})
 	return PutApplicationPolicyRequest{Request: req, Input: input, Copy: c.PutApplicationPolicyRequest}
 }
 
@@ -139,8 +44,8 @@ func (c *Client) PutApplicationPolicyRequest(input *PutApplicationPolicyInput) P
 // PutApplicationPolicy API operation.
 type PutApplicationPolicyRequest struct {
 	*aws.Request
-	Input *PutApplicationPolicyInput
-	Copy  func(*PutApplicationPolicyInput) PutApplicationPolicyRequest
+	Input *types.PutApplicationPolicyInput
+	Copy  func(*types.PutApplicationPolicyInput) PutApplicationPolicyRequest
 }
 
 // Send marshals and sends the PutApplicationPolicy API request.
@@ -152,7 +57,7 @@ func (r PutApplicationPolicyRequest) Send(ctx context.Context) (*PutApplicationP
 	}
 
 	resp := &PutApplicationPolicyResponse{
-		PutApplicationPolicyOutput: r.Request.Data.(*PutApplicationPolicyOutput),
+		PutApplicationPolicyOutput: r.Request.Data.(*types.PutApplicationPolicyOutput),
 		response:                   &aws.Response{Request: r.Request},
 	}
 
@@ -162,7 +67,7 @@ func (r PutApplicationPolicyRequest) Send(ctx context.Context) (*PutApplicationP
 // PutApplicationPolicyResponse is the response type for the
 // PutApplicationPolicy API operation.
 type PutApplicationPolicyResponse struct {
-	*PutApplicationPolicyOutput
+	*types.PutApplicationPolicyOutput
 
 	response *aws.Response
 }

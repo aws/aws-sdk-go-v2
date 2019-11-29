@@ -6,77 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/types"
 )
-
-// The request to update the device status, as an administrator.
-type AdminUpdateDeviceStatusInput struct {
-	_ struct{} `type:"structure"`
-
-	// The device key.
-	//
-	// DeviceKey is a required field
-	DeviceKey *string `min:"1" type:"string" required:"true"`
-
-	// The status indicating whether a device has been remembered or not.
-	DeviceRememberedStatus DeviceRememberedStatusType `type:"string" enum:"true"`
-
-	// The user pool ID.
-	//
-	// UserPoolId is a required field
-	UserPoolId *string `min:"1" type:"string" required:"true"`
-
-	// The user name.
-	//
-	// Username is a required field
-	Username *string `min:"1" type:"string" required:"true" sensitive:"true"`
-}
-
-// String returns the string representation
-func (s AdminUpdateDeviceStatusInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *AdminUpdateDeviceStatusInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "AdminUpdateDeviceStatusInput"}
-
-	if s.DeviceKey == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DeviceKey"))
-	}
-	if s.DeviceKey != nil && len(*s.DeviceKey) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("DeviceKey", 1))
-	}
-
-	if s.UserPoolId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("UserPoolId"))
-	}
-	if s.UserPoolId != nil && len(*s.UserPoolId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("UserPoolId", 1))
-	}
-
-	if s.Username == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Username"))
-	}
-	if s.Username != nil && len(*s.Username) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Username", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// The status response from the request to update the device, as an administrator.
-type AdminUpdateDeviceStatusOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s AdminUpdateDeviceStatusOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opAdminUpdateDeviceStatus = "AdminUpdateDeviceStatus"
 
@@ -95,7 +26,7 @@ const opAdminUpdateDeviceStatus = "AdminUpdateDeviceStatus"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AdminUpdateDeviceStatus
-func (c *Client) AdminUpdateDeviceStatusRequest(input *AdminUpdateDeviceStatusInput) AdminUpdateDeviceStatusRequest {
+func (c *Client) AdminUpdateDeviceStatusRequest(input *types.AdminUpdateDeviceStatusInput) AdminUpdateDeviceStatusRequest {
 	op := &aws.Operation{
 		Name:       opAdminUpdateDeviceStatus,
 		HTTPMethod: "POST",
@@ -103,10 +34,10 @@ func (c *Client) AdminUpdateDeviceStatusRequest(input *AdminUpdateDeviceStatusIn
 	}
 
 	if input == nil {
-		input = &AdminUpdateDeviceStatusInput{}
+		input = &types.AdminUpdateDeviceStatusInput{}
 	}
 
-	req := c.newRequest(op, input, &AdminUpdateDeviceStatusOutput{})
+	req := c.newRequest(op, input, &types.AdminUpdateDeviceStatusOutput{})
 	return AdminUpdateDeviceStatusRequest{Request: req, Input: input, Copy: c.AdminUpdateDeviceStatusRequest}
 }
 
@@ -114,8 +45,8 @@ func (c *Client) AdminUpdateDeviceStatusRequest(input *AdminUpdateDeviceStatusIn
 // AdminUpdateDeviceStatus API operation.
 type AdminUpdateDeviceStatusRequest struct {
 	*aws.Request
-	Input *AdminUpdateDeviceStatusInput
-	Copy  func(*AdminUpdateDeviceStatusInput) AdminUpdateDeviceStatusRequest
+	Input *types.AdminUpdateDeviceStatusInput
+	Copy  func(*types.AdminUpdateDeviceStatusInput) AdminUpdateDeviceStatusRequest
 }
 
 // Send marshals and sends the AdminUpdateDeviceStatus API request.
@@ -127,7 +58,7 @@ func (r AdminUpdateDeviceStatusRequest) Send(ctx context.Context) (*AdminUpdateD
 	}
 
 	resp := &AdminUpdateDeviceStatusResponse{
-		AdminUpdateDeviceStatusOutput: r.Request.Data.(*AdminUpdateDeviceStatusOutput),
+		AdminUpdateDeviceStatusOutput: r.Request.Data.(*types.AdminUpdateDeviceStatusOutput),
 		response:                      &aws.Response{Request: r.Request},
 	}
 
@@ -137,7 +68,7 @@ func (r AdminUpdateDeviceStatusRequest) Send(ctx context.Context) (*AdminUpdateD
 // AdminUpdateDeviceStatusResponse is the response type for the
 // AdminUpdateDeviceStatus API operation.
 type AdminUpdateDeviceStatusResponse struct {
-	*AdminUpdateDeviceStatusOutput
+	*types.AdminUpdateDeviceStatusOutput
 
 	response *aws.Response
 }

@@ -6,111 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/iot/types"
 )
-
-type GetStatisticsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The aggregation field name. Currently not supported.
-	AggregationField *string `locationName:"aggregationField" min:"1" type:"string"`
-
-	// The name of the index to search. The default value is AWS_Things.
-	IndexName *string `locationName:"indexName" min:"1" type:"string"`
-
-	// The query used to search. You can specify "*" for the query string to get
-	// the count of all indexed things in your AWS account.
-	//
-	// QueryString is a required field
-	QueryString *string `locationName:"queryString" min:"1" type:"string" required:"true"`
-
-	// The version of the query used to search.
-	QueryVersion *string `locationName:"queryVersion" type:"string"`
-}
-
-// String returns the string representation
-func (s GetStatisticsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetStatisticsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetStatisticsInput"}
-	if s.AggregationField != nil && len(*s.AggregationField) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("AggregationField", 1))
-	}
-	if s.IndexName != nil && len(*s.IndexName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("IndexName", 1))
-	}
-
-	if s.QueryString == nil {
-		invalidParams.Add(aws.NewErrParamRequired("QueryString"))
-	}
-	if s.QueryString != nil && len(*s.QueryString) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("QueryString", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetStatisticsInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.AggregationField != nil {
-		v := *s.AggregationField
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "aggregationField", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.IndexName != nil {
-		v := *s.IndexName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "indexName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.QueryString != nil {
-		v := *s.QueryString
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "queryString", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.QueryVersion != nil {
-		v := *s.QueryVersion
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "queryVersion", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type GetStatisticsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The statistics returned by the Fleet Indexing service based on the query
-	// and aggregation field.
-	Statistics *Statistics `locationName:"statistics" type:"structure"`
-}
-
-// String returns the string representation
-func (s GetStatisticsOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetStatisticsOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.Statistics != nil {
-		v := s.Statistics
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "statistics", v, metadata)
-	}
-	return nil
-}
 
 const opGetStatistics = "GetStatistics"
 
@@ -125,7 +22,7 @@ const opGetStatistics = "GetStatistics"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) GetStatisticsRequest(input *GetStatisticsInput) GetStatisticsRequest {
+func (c *Client) GetStatisticsRequest(input *types.GetStatisticsInput) GetStatisticsRequest {
 	op := &aws.Operation{
 		Name:       opGetStatistics,
 		HTTPMethod: "POST",
@@ -133,10 +30,10 @@ func (c *Client) GetStatisticsRequest(input *GetStatisticsInput) GetStatisticsRe
 	}
 
 	if input == nil {
-		input = &GetStatisticsInput{}
+		input = &types.GetStatisticsInput{}
 	}
 
-	req := c.newRequest(op, input, &GetStatisticsOutput{})
+	req := c.newRequest(op, input, &types.GetStatisticsOutput{})
 	return GetStatisticsRequest{Request: req, Input: input, Copy: c.GetStatisticsRequest}
 }
 
@@ -144,8 +41,8 @@ func (c *Client) GetStatisticsRequest(input *GetStatisticsInput) GetStatisticsRe
 // GetStatistics API operation.
 type GetStatisticsRequest struct {
 	*aws.Request
-	Input *GetStatisticsInput
-	Copy  func(*GetStatisticsInput) GetStatisticsRequest
+	Input *types.GetStatisticsInput
+	Copy  func(*types.GetStatisticsInput) GetStatisticsRequest
 }
 
 // Send marshals and sends the GetStatistics API request.
@@ -157,7 +54,7 @@ func (r GetStatisticsRequest) Send(ctx context.Context) (*GetStatisticsResponse,
 	}
 
 	resp := &GetStatisticsResponse{
-		GetStatisticsOutput: r.Request.Data.(*GetStatisticsOutput),
+		GetStatisticsOutput: r.Request.Data.(*types.GetStatisticsOutput),
 		response:            &aws.Response{Request: r.Request},
 	}
 
@@ -167,7 +64,7 @@ func (r GetStatisticsRequest) Send(ctx context.Context) (*GetStatisticsResponse,
 // GetStatisticsResponse is the response type for the
 // GetStatistics API operation.
 type GetStatisticsResponse struct {
-	*GetStatisticsOutput
+	*types.GetStatisticsOutput
 
 	response *aws.Response
 }

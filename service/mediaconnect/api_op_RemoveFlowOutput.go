@@ -6,95 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/mediaconnect/types"
 )
-
-type RemoveFlowOutputInput struct {
-	_ struct{} `type:"structure"`
-
-	// FlowArn is a required field
-	FlowArn *string `location:"uri" locationName:"flowArn" type:"string" required:"true"`
-
-	// OutputArn is a required field
-	OutputArn *string `location:"uri" locationName:"outputArn" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s RemoveFlowOutputInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *RemoveFlowOutputInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "RemoveFlowOutputInput"}
-
-	if s.FlowArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("FlowArn"))
-	}
-
-	if s.OutputArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("OutputArn"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s RemoveFlowOutputInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.FlowArn != nil {
-		v := *s.FlowArn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "flowArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.OutputArn != nil {
-		v := *s.OutputArn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "outputArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-// The result of a successful RemoveFlowOutput request including the flow ARN
-// and the output ARN that was removed.
-type RemoveFlowOutputOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The ARN of the flow that is associated with the output you removed.
-	FlowArn *string `locationName:"flowArn" type:"string"`
-
-	// The ARN of the output that was removed.
-	OutputArn *string `locationName:"outputArn" type:"string"`
-}
-
-// String returns the string representation
-func (s RemoveFlowOutputOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s RemoveFlowOutputOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.FlowArn != nil {
-		v := *s.FlowArn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "flowArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.OutputArn != nil {
-		v := *s.OutputArn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "outputArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opRemoveFlowOutput = "RemoveFlowOutput"
 
@@ -115,7 +28,7 @@ const opRemoveFlowOutput = "RemoveFlowOutput"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/RemoveFlowOutput
-func (c *Client) RemoveFlowOutputRequest(input *RemoveFlowOutputInput) RemoveFlowOutputRequest {
+func (c *Client) RemoveFlowOutputRequest(input *types.RemoveFlowOutputInput) RemoveFlowOutputRequest {
 	op := &aws.Operation{
 		Name:       opRemoveFlowOutput,
 		HTTPMethod: "DELETE",
@@ -123,10 +36,10 @@ func (c *Client) RemoveFlowOutputRequest(input *RemoveFlowOutputInput) RemoveFlo
 	}
 
 	if input == nil {
-		input = &RemoveFlowOutputInput{}
+		input = &types.RemoveFlowOutputInput{}
 	}
 
-	req := c.newRequest(op, input, &RemoveFlowOutputOutput{})
+	req := c.newRequest(op, input, &types.RemoveFlowOutputOutput{})
 	return RemoveFlowOutputRequest{Request: req, Input: input, Copy: c.RemoveFlowOutputRequest}
 }
 
@@ -134,8 +47,8 @@ func (c *Client) RemoveFlowOutputRequest(input *RemoveFlowOutputInput) RemoveFlo
 // RemoveFlowOutput API operation.
 type RemoveFlowOutputRequest struct {
 	*aws.Request
-	Input *RemoveFlowOutputInput
-	Copy  func(*RemoveFlowOutputInput) RemoveFlowOutputRequest
+	Input *types.RemoveFlowOutputInput
+	Copy  func(*types.RemoveFlowOutputInput) RemoveFlowOutputRequest
 }
 
 // Send marshals and sends the RemoveFlowOutput API request.
@@ -147,7 +60,7 @@ func (r RemoveFlowOutputRequest) Send(ctx context.Context) (*RemoveFlowOutputRes
 	}
 
 	resp := &RemoveFlowOutputResponse{
-		RemoveFlowOutputOutput: r.Request.Data.(*RemoveFlowOutputOutput),
+		RemoveFlowOutputOutput: r.Request.Data.(*types.RemoveFlowOutputOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -157,7 +70,7 @@ func (r RemoveFlowOutputRequest) Send(ctx context.Context) (*RemoveFlowOutputRes
 // RemoveFlowOutputResponse is the response type for the
 // RemoveFlowOutput API operation.
 type RemoveFlowOutputResponse struct {
-	*RemoveFlowOutputOutput
+	*types.RemoveFlowOutputOutput
 
 	response *aws.Response
 }

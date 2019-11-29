@@ -4,8 +4,9 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws/awserr"
-	"github.com/aws/aws-sdk-go-v2/service/kms"
+	"github.com/aws/aws-sdk-go-v2/service/kms/enums"
 	"github.com/aws/aws-sdk-go-v2/service/kms/kmsiface"
+	"github.com/aws/aws-sdk-go-v2/service/kms/types"
 )
 
 const (
@@ -80,8 +81,8 @@ func (kp kmsKeyHandler) decryptHandler(env Envelope) (CipherDataDecrypter, error
 
 // DecryptKey makes a call to KMS to decrypt the key.
 func (kp *kmsKeyHandler) DecryptKey(key []byte) ([]byte, error) {
-	req := kp.kms.DecryptRequest(&kms.DecryptInput{
-		EncryptionContext: map[string]string(kp.CipherData.MaterialDescription),
+	req := kp.kms.DecryptRequest(&types.DecryptInput{
+		EncryptionContext: kp.CipherData.MaterialDescription,
 		CiphertextBlob:    key,
 		GrantTokens:       []string{},
 	})
@@ -95,10 +96,10 @@ func (kp *kmsKeyHandler) DecryptKey(key []byte) ([]byte, error) {
 // GenerateCipherData makes a call to KMS to generate a data key, Upon making
 // the call, it also sets the encrypted key.
 func (kp *kmsKeyHandler) GenerateCipherData(keySize, ivSize int) (CipherData, error) {
-	req := kp.kms.GenerateDataKeyRequest(&kms.GenerateDataKeyInput{
+	req := kp.kms.GenerateDataKeyRequest(&types.GenerateDataKeyInput{
 		EncryptionContext: kp.CipherData.MaterialDescription,
 		KeyId:             &kp.cmkID,
-		KeySpec:           kms.DataKeySpecAes256,
+		KeySpec:           enums.DataKeySpecAes256,
 	})
 	resp, err := req.Send(context.Background())
 	if err != nil {

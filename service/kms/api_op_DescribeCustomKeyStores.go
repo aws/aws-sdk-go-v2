@@ -6,89 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/kms/types"
 )
-
-type DescribeCustomKeyStoresInput struct {
-	_ struct{} `type:"structure"`
-
-	// Gets only information about the specified custom key store. Enter the key
-	// store ID.
-	//
-	// By default, this operation gets information about all custom key stores in
-	// the account and region. To limit the output to a particular custom key store,
-	// you can use either the CustomKeyStoreId or CustomKeyStoreName parameter,
-	// but not both.
-	CustomKeyStoreId *string `min:"1" type:"string"`
-
-	// Gets only information about the specified custom key store. Enter the friendly
-	// name of the custom key store.
-	//
-	// By default, this operation gets information about all custom key stores in
-	// the account and region. To limit the output to a particular custom key store,
-	// you can use either the CustomKeyStoreId or CustomKeyStoreName parameter,
-	// but not both.
-	CustomKeyStoreName *string `min:"1" type:"string"`
-
-	// Use this parameter to specify the maximum number of items to return. When
-	// this value is present, AWS KMS does not return more than the specified number
-	// of items, but it might return fewer.
-	Limit *int64 `min:"1" type:"integer"`
-
-	// Use this parameter in a subsequent request after you receive a response with
-	// truncated results. Set it to the value of NextMarker from the truncated response
-	// you just received.
-	Marker *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeCustomKeyStoresInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeCustomKeyStoresInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeCustomKeyStoresInput"}
-	if s.CustomKeyStoreId != nil && len(*s.CustomKeyStoreId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("CustomKeyStoreId", 1))
-	}
-	if s.CustomKeyStoreName != nil && len(*s.CustomKeyStoreName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("CustomKeyStoreName", 1))
-	}
-	if s.Limit != nil && *s.Limit < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("Limit", 1))
-	}
-	if s.Marker != nil && len(*s.Marker) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Marker", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribeCustomKeyStoresOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Contains metadata about each custom key store.
-	CustomKeyStores []CustomKeyStoresListEntry `type:"list"`
-
-	// When Truncated is true, this element is present and contains the value to
-	// use for the Marker parameter in a subsequent request.
-	NextMarker *string `min:"1" type:"string"`
-
-	// A flag that indicates whether there are more items in the list. When this
-	// value is true, the list in this response is truncated. To get more items,
-	// pass the value of the NextMarker element in thisresponse to the Marker parameter
-	// in a subsequent request.
-	Truncated *bool `type:"boolean"`
-}
-
-// String returns the string representation
-func (s DescribeCustomKeyStoresOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeCustomKeyStores = "DescribeCustomKeyStores"
 
@@ -131,7 +50,7 @@ const opDescribeCustomKeyStores = "DescribeCustomKeyStores"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/DescribeCustomKeyStores
-func (c *Client) DescribeCustomKeyStoresRequest(input *DescribeCustomKeyStoresInput) DescribeCustomKeyStoresRequest {
+func (c *Client) DescribeCustomKeyStoresRequest(input *types.DescribeCustomKeyStoresInput) DescribeCustomKeyStoresRequest {
 	op := &aws.Operation{
 		Name:       opDescribeCustomKeyStores,
 		HTTPMethod: "POST",
@@ -139,10 +58,10 @@ func (c *Client) DescribeCustomKeyStoresRequest(input *DescribeCustomKeyStoresIn
 	}
 
 	if input == nil {
-		input = &DescribeCustomKeyStoresInput{}
+		input = &types.DescribeCustomKeyStoresInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeCustomKeyStoresOutput{})
+	req := c.newRequest(op, input, &types.DescribeCustomKeyStoresOutput{})
 	return DescribeCustomKeyStoresRequest{Request: req, Input: input, Copy: c.DescribeCustomKeyStoresRequest}
 }
 
@@ -150,8 +69,8 @@ func (c *Client) DescribeCustomKeyStoresRequest(input *DescribeCustomKeyStoresIn
 // DescribeCustomKeyStores API operation.
 type DescribeCustomKeyStoresRequest struct {
 	*aws.Request
-	Input *DescribeCustomKeyStoresInput
-	Copy  func(*DescribeCustomKeyStoresInput) DescribeCustomKeyStoresRequest
+	Input *types.DescribeCustomKeyStoresInput
+	Copy  func(*types.DescribeCustomKeyStoresInput) DescribeCustomKeyStoresRequest
 }
 
 // Send marshals and sends the DescribeCustomKeyStores API request.
@@ -163,7 +82,7 @@ func (r DescribeCustomKeyStoresRequest) Send(ctx context.Context) (*DescribeCust
 	}
 
 	resp := &DescribeCustomKeyStoresResponse{
-		DescribeCustomKeyStoresOutput: r.Request.Data.(*DescribeCustomKeyStoresOutput),
+		DescribeCustomKeyStoresOutput: r.Request.Data.(*types.DescribeCustomKeyStoresOutput),
 		response:                      &aws.Response{Request: r.Request},
 	}
 
@@ -173,7 +92,7 @@ func (r DescribeCustomKeyStoresRequest) Send(ctx context.Context) (*DescribeCust
 // DescribeCustomKeyStoresResponse is the response type for the
 // DescribeCustomKeyStores API operation.
 type DescribeCustomKeyStoresResponse struct {
-	*DescribeCustomKeyStoresOutput
+	*types.DescribeCustomKeyStoresOutput
 
 	response *aws.Response
 }

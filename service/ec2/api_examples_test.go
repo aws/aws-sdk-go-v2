@@ -12,6 +12,8 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws/awserr"
 	"github.com/aws/aws-sdk-go-v2/aws/external"
 	"github.com/aws/aws-sdk-go-v2/service/ec2"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/enums"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
 
 var _ time.Duration
@@ -36,8 +38,8 @@ func ExampleClient_AllocateAddressRequest_shared00() {
 	}
 
 	svc := ec2.New(cfg)
-	input := &ec2.AllocateAddressInput{
-		Domain: ec2.DomainTypeVpc,
+	input := &types.AllocateAddressInput{
+		Domain: enums.DomainTypeVpc,
 	}
 
 	req := svc.AllocateAddressRequest(input)
@@ -69,7 +71,7 @@ func ExampleClient_AllocateAddressRequest_shared01() {
 	}
 
 	svc := ec2.New(cfg)
-	input := &ec2.AllocateAddressInput{}
+	input := &types.AllocateAddressInput{}
 
 	req := svc.AllocateAddressRequest(input)
 	result, err := req.Send(context.Background())
@@ -101,7 +103,7 @@ func ExampleClient_AssignPrivateIpAddressesRequest_shared00() {
 	}
 
 	svc := ec2.New(cfg)
-	input := &ec2.AssignPrivateIpAddressesInput{
+	input := &types.AssignPrivateIpAddressesInput{
 		NetworkInterfaceId: aws.String("eni-e5aa89a3"),
 		PrivateIpAddresses: []string{
 			"10.0.0.82",
@@ -140,7 +142,7 @@ func ExampleClient_AssignPrivateIpAddressesRequest_shared01() {
 	}
 
 	svc := ec2.New(cfg)
-	input := &ec2.AssignPrivateIpAddressesInput{
+	input := &types.AssignPrivateIpAddressesInput{
 		NetworkInterfaceId:             aws.String("eni-e5aa89a3"),
 		SecondaryPrivateIpAddressCount: aws.Int64(2),
 	}
@@ -175,7 +177,7 @@ func ExampleClient_AssociateAddressRequest_shared00() {
 	}
 
 	svc := ec2.New(cfg)
-	input := &ec2.AssociateAddressInput{
+	input := &types.AssociateAddressInput{
 		AllocationId: aws.String("eipalloc-64d5890a"),
 		InstanceId:   aws.String("i-0b263919b6498b123"),
 	}
@@ -210,7 +212,7 @@ func ExampleClient_AssociateAddressRequest_shared01() {
 	}
 
 	svc := ec2.New(cfg)
-	input := &ec2.AssociateAddressInput{
+	input := &types.AssociateAddressInput{
 		AllocationId:       aws.String("eipalloc-64d5890a"),
 		NetworkInterfaceId: aws.String("eni-1a2b3c4d"),
 	}
@@ -244,7 +246,7 @@ func ExampleClient_AssociateAddressRequest_shared02() {
 	}
 
 	svc := ec2.New(cfg)
-	input := &ec2.AssociateAddressInput{
+	input := &types.AssociateAddressInput{
 		InstanceId: aws.String("i-07ffe74c7330ebf53"),
 		PublicIp:   aws.String("198.51.100.0"),
 	}
@@ -278,7 +280,7 @@ func ExampleClient_AssociateDhcpOptionsRequest_shared00() {
 	}
 
 	svc := ec2.New(cfg)
-	input := &ec2.AssociateDhcpOptionsInput{
+	input := &types.AssociateDhcpOptionsInput{
 		DhcpOptionsId: aws.String("dopt-d9070ebb"),
 		VpcId:         aws.String("vpc-a01106c2"),
 	}
@@ -312,7 +314,7 @@ func ExampleClient_AssociateDhcpOptionsRequest_shared01() {
 	}
 
 	svc := ec2.New(cfg)
-	input := &ec2.AssociateDhcpOptionsInput{
+	input := &types.AssociateDhcpOptionsInput{
 		DhcpOptionsId: aws.String("default"),
 		VpcId:         aws.String("vpc-a01106c2"),
 	}
@@ -347,8 +349,8 @@ func ExampleClient_AssociateIamInstanceProfileRequest_shared00() {
 	}
 
 	svc := ec2.New(cfg)
-	input := &ec2.AssociateIamInstanceProfileInput{
-		IamInstanceProfile: &ec2.IamInstanceProfileSpecification{
+	input := &types.AssociateIamInstanceProfileInput{
+		IamInstanceProfile: &types.IamInstanceProfileSpecification{
 			Name: aws.String("admin-role"),
 		},
 		InstanceId: aws.String("i-123456789abcde123"),
@@ -383,7 +385,7 @@ func ExampleClient_AssociateRouteTableRequest_shared00() {
 	}
 
 	svc := ec2.New(cfg)
-	input := &ec2.AssociateRouteTableInput{
+	input := &types.AssociateRouteTableInput{
 		RouteTableId: aws.String("rtb-22574640"),
 		SubnetId:     aws.String("subnet-9d4a7b6"),
 	}
@@ -417,7 +419,7 @@ func ExampleClient_AttachInternetGatewayRequest_shared00() {
 	}
 
 	svc := ec2.New(cfg)
-	input := &ec2.AttachInternetGatewayInput{
+	input := &types.AttachInternetGatewayInput{
 		InternetGatewayId: aws.String("igw-c0a643a9"),
 		VpcId:             aws.String("vpc-a01106c2"),
 	}
@@ -451,7 +453,7 @@ func ExampleClient_AttachNetworkInterfaceRequest_shared00() {
 	}
 
 	svc := ec2.New(cfg)
-	input := &ec2.AttachNetworkInterfaceInput{
+	input := &types.AttachNetworkInterfaceInput{
 		DeviceIndex:        aws.Int64(1),
 		InstanceId:         aws.String("i-1234567890abcdef0"),
 		NetworkInterfaceId: aws.String("eni-e5aa89a3"),
@@ -487,7 +489,7 @@ func ExampleClient_AttachVolumeRequest_shared00() {
 	}
 
 	svc := ec2.New(cfg)
-	input := &ec2.AttachVolumeInput{
+	input := &types.AttachVolumeInput{
 		Device:     aws.String("/dev/sdf"),
 		InstanceId: aws.String("i-01474ef662b89480"),
 		VolumeId:   aws.String("vol-1234567890abcdef0"),
@@ -523,13 +525,13 @@ func ExampleClient_AuthorizeSecurityGroupEgressRequest_shared00() {
 	}
 
 	svc := ec2.New(cfg)
-	input := &ec2.AuthorizeSecurityGroupEgressInput{
+	input := &types.AuthorizeSecurityGroupEgressInput{
 		GroupId: aws.String("sg-1a2b3c4d"),
-		IpPermissions: []ec2.IpPermission{
+		IpPermissions: []types.IpPermission{
 			{
 				FromPort:   aws.Int64(80),
 				IpProtocol: aws.String("tcp"),
-				IpRanges: []ec2.IpRange{
+				IpRanges: []types.IpRange{
 					{
 						CidrIp: aws.String("10.0.0.0/16"),
 					},
@@ -569,14 +571,14 @@ func ExampleClient_AuthorizeSecurityGroupEgressRequest_shared01() {
 	}
 
 	svc := ec2.New(cfg)
-	input := &ec2.AuthorizeSecurityGroupEgressInput{
+	input := &types.AuthorizeSecurityGroupEgressInput{
 		GroupId: aws.String("sg-1a2b3c4d"),
-		IpPermissions: []ec2.IpPermission{
+		IpPermissions: []types.IpPermission{
 			{
 				FromPort:   aws.Int64(80),
 				IpProtocol: aws.String("tcp"),
 				ToPort:     aws.Int64(80),
-				UserIdGroupPairs: []ec2.UserIdGroupPair{
+				UserIdGroupPairs: []types.UserIdGroupPair{
 					{
 						GroupId: aws.String("sg-4b51a32f"),
 					},
@@ -615,13 +617,13 @@ func ExampleClient_AuthorizeSecurityGroupIngressRequest_shared00() {
 	}
 
 	svc := ec2.New(cfg)
-	input := &ec2.AuthorizeSecurityGroupIngressInput{
+	input := &types.AuthorizeSecurityGroupIngressInput{
 		GroupId: aws.String("sg-903004f8"),
-		IpPermissions: []ec2.IpPermission{
+		IpPermissions: []types.IpPermission{
 			{
 				FromPort:   aws.Int64(22),
 				IpProtocol: aws.String("tcp"),
-				IpRanges: []ec2.IpRange{
+				IpRanges: []types.IpRange{
 					{
 						CidrIp:      aws.String("203.0.113.0/24"),
 						Description: aws.String("SSH access from the LA office"),
@@ -664,14 +666,14 @@ func ExampleClient_AuthorizeSecurityGroupIngressRequest_shared01() {
 	}
 
 	svc := ec2.New(cfg)
-	input := &ec2.AuthorizeSecurityGroupIngressInput{
+	input := &types.AuthorizeSecurityGroupIngressInput{
 		GroupId: aws.String("sg-111aaa22"),
-		IpPermissions: []ec2.IpPermission{
+		IpPermissions: []types.IpPermission{
 			{
 				FromPort:   aws.Int64(80),
 				IpProtocol: aws.String("tcp"),
 				ToPort:     aws.Int64(80),
-				UserIdGroupPairs: []ec2.UserIdGroupPair{
+				UserIdGroupPairs: []types.UserIdGroupPair{
 					{
 						Description: aws.String("HTTP access from other instances"),
 						GroupId:     aws.String("sg-1a2b3c4d"),
@@ -711,13 +713,13 @@ func ExampleClient_AuthorizeSecurityGroupIngressRequest_shared02() {
 	}
 
 	svc := ec2.New(cfg)
-	input := &ec2.AuthorizeSecurityGroupIngressInput{
+	input := &types.AuthorizeSecurityGroupIngressInput{
 		GroupId: aws.String("sg-123abc12 "),
-		IpPermissions: []ec2.IpPermission{
+		IpPermissions: []types.IpPermission{
 			{
 				FromPort:   aws.Int64(3389),
 				IpProtocol: aws.String("tcp"),
-				Ipv6Ranges: []ec2.Ipv6Range{
+				Ipv6Ranges: []types.Ipv6Range{
 					{
 						CidrIpv6:    aws.String("2001:db8:1234:1a00::/64"),
 						Description: aws.String("RDP access from the NY office"),
@@ -758,7 +760,7 @@ func ExampleClient_CancelSpotFleetRequestsRequest_shared00() {
 	}
 
 	svc := ec2.New(cfg)
-	input := &ec2.CancelSpotFleetRequestsInput{
+	input := &types.CancelSpotFleetRequestsInput{
 		SpotFleetRequestIds: []string{
 			"sfr-73fbd2ce-aa30-494c-8788-1cee4EXAMPLE",
 		},
@@ -795,7 +797,7 @@ func ExampleClient_CancelSpotFleetRequestsRequest_shared01() {
 	}
 
 	svc := ec2.New(cfg)
-	input := &ec2.CancelSpotFleetRequestsInput{
+	input := &types.CancelSpotFleetRequestsInput{
 		SpotFleetRequestIds: []string{
 			"sfr-73fbd2ce-aa30-494c-8788-1cee4EXAMPLE",
 		},
@@ -831,7 +833,7 @@ func ExampleClient_CancelSpotInstanceRequestsRequest_shared00() {
 	}
 
 	svc := ec2.New(cfg)
-	input := &ec2.CancelSpotInstanceRequestsInput{
+	input := &types.CancelSpotInstanceRequestsInput{
 		SpotInstanceRequestIds: []string{
 			"sir-08b93456",
 		},
@@ -867,7 +869,7 @@ func ExampleClient_ConfirmProductInstanceRequest_shared00() {
 	}
 
 	svc := ec2.New(cfg)
-	input := &ec2.ConfirmProductInstanceInput{
+	input := &types.ConfirmProductInstanceInput{
 		InstanceId:  aws.String("i-1234567890abcdef0"),
 		ProductCode: aws.String("774F4FF8"),
 	}
@@ -901,7 +903,7 @@ func ExampleClient_CopyImageRequest_shared00() {
 	}
 
 	svc := ec2.New(cfg)
-	input := &ec2.CopyImageInput{
+	input := &types.CopyImageInput{
 		Description:   aws.String(""),
 		Name:          aws.String("My server"),
 		SourceImageId: aws.String("ami-5731123e"),
@@ -939,7 +941,7 @@ func ExampleClient_CopySnapshotRequest_shared00() {
 	}
 
 	svc := ec2.New(cfg)
-	input := &ec2.CopySnapshotInput{
+	input := &types.CopySnapshotInput{
 		Description:       aws.String("This is my copied snapshot."),
 		DestinationRegion: aws.String("us-east-1"),
 		SourceRegion:      aws.String("us-west-2"),
@@ -976,10 +978,10 @@ func ExampleClient_CreateCustomerGatewayRequest_shared00() {
 	}
 
 	svc := ec2.New(cfg)
-	input := &ec2.CreateCustomerGatewayInput{
+	input := &types.CreateCustomerGatewayInput{
 		BgpAsn:   aws.Int64(65534),
 		PublicIp: aws.String("12.1.2.3"),
-		Type:     ec2.GatewayTypeIpsec1,
+		Type:     enums.GatewayTypeIpsec1,
 	}
 
 	req := svc.CreateCustomerGatewayRequest(input)
@@ -1011,8 +1013,8 @@ func ExampleClient_CreateDhcpOptionsRequest_shared00() {
 	}
 
 	svc := ec2.New(cfg)
-	input := &ec2.CreateDhcpOptionsInput{
-		DhcpConfigurations: []ec2.NewDhcpConfiguration{
+	input := &types.CreateDhcpOptionsInput{
+		DhcpConfigurations: []types.NewDhcpConfiguration{
 			{
 				Key: aws.String("domain-name-servers"),
 				Values: []string{
@@ -1053,8 +1055,8 @@ func ExampleClient_CreateImageRequest_shared00() {
 	}
 
 	svc := ec2.New(cfg)
-	input := &ec2.CreateImageInput{
-		BlockDeviceMappings: []ec2.BlockDeviceMapping{
+	input := &types.CreateImageInput{
+		BlockDeviceMappings: []types.BlockDeviceMapping{
 			{
 				DeviceName: aws.String("/dev/sdh"),
 			},
@@ -1098,7 +1100,7 @@ func ExampleClient_CreateInternetGatewayRequest_shared00() {
 	}
 
 	svc := ec2.New(cfg)
-	input := &ec2.CreateInternetGatewayInput{}
+	input := &types.CreateInternetGatewayInput{}
 
 	req := svc.CreateInternetGatewayRequest(input)
 	result, err := req.Send(context.Background())
@@ -1129,7 +1131,7 @@ func ExampleClient_CreateKeyPairRequest_shared00() {
 	}
 
 	svc := ec2.New(cfg)
-	input := &ec2.CreateKeyPairInput{
+	input := &types.CreateKeyPairInput{
 		KeyName: aws.String("my-key-pair"),
 	}
 
@@ -1164,11 +1166,11 @@ func ExampleClient_CreateLaunchTemplateRequest_shared00() {
 	}
 
 	svc := ec2.New(cfg)
-	input := &ec2.CreateLaunchTemplateInput{
-		LaunchTemplateData: &ec2.RequestLaunchTemplateData{
+	input := &types.CreateLaunchTemplateInput{
+		LaunchTemplateData: &types.RequestLaunchTemplateData{
 			ImageId:      aws.String("ami-8c1be5f6"),
-			InstanceType: ec2.InstanceTypeT2Small,
-			NetworkInterfaces: []ec2.LaunchTemplateInstanceNetworkInterfaceSpecificationRequest{
+			InstanceType: enums.InstanceTypeT2Small,
+			NetworkInterfaces: []types.LaunchTemplateInstanceNetworkInterfaceSpecificationRequest{
 				{
 					AssociatePublicIpAddress: aws.Bool(true),
 					DeviceIndex:              aws.Int64(0),
@@ -1176,10 +1178,10 @@ func ExampleClient_CreateLaunchTemplateRequest_shared00() {
 					SubnetId:                 aws.String("subnet-7b16de0c"),
 				},
 			},
-			TagSpecifications: []ec2.LaunchTemplateTagSpecificationRequest{
+			TagSpecifications: []types.LaunchTemplateTagSpecificationRequest{
 				{
-					ResourceType: ec2.ResourceTypeInstance,
-					Tags: []ec2.Tag{
+					ResourceType: enums.ResourceTypeInstance,
+					Tags: []types.Tag{
 						{
 							Key:   aws.String("Name"),
 							Value: aws.String("webserver"),
@@ -1222,8 +1224,8 @@ func ExampleClient_CreateLaunchTemplateVersionRequest_shared00() {
 	}
 
 	svc := ec2.New(cfg)
-	input := &ec2.CreateLaunchTemplateVersionInput{
-		LaunchTemplateData: &ec2.RequestLaunchTemplateData{
+	input := &types.CreateLaunchTemplateVersionInput{
+		LaunchTemplateData: &types.RequestLaunchTemplateData{
 			ImageId: aws.String("ami-c998b6b2"),
 		},
 		LaunchTemplateId:   aws.String("lt-0abcd290751193123"),
@@ -1261,7 +1263,7 @@ func ExampleClient_CreateNatGatewayRequest_shared00() {
 	}
 
 	svc := ec2.New(cfg)
-	input := &ec2.CreateNatGatewayInput{
+	input := &types.CreateNatGatewayInput{
 		AllocationId: aws.String("eipalloc-37fc1a52"),
 		SubnetId:     aws.String("subnet-1a2b3c4d"),
 	}
@@ -1295,7 +1297,7 @@ func ExampleClient_CreateNetworkAclRequest_shared00() {
 	}
 
 	svc := ec2.New(cfg)
-	input := &ec2.CreateNetworkAclInput{
+	input := &types.CreateNetworkAclInput{
 		VpcId: aws.String("vpc-a01106c2"),
 	}
 
@@ -1329,16 +1331,16 @@ func ExampleClient_CreateNetworkAclEntryRequest_shared00() {
 	}
 
 	svc := ec2.New(cfg)
-	input := &ec2.CreateNetworkAclEntryInput{
+	input := &types.CreateNetworkAclEntryInput{
 		CidrBlock:    aws.String("0.0.0.0/0"),
 		Egress:       aws.Bool(false),
 		NetworkAclId: aws.String("acl-5fb85d36"),
-		PortRange: &ec2.PortRange{
+		PortRange: &types.PortRange{
 			From: aws.Int64(53),
 			To:   aws.Int64(53),
 		},
 		Protocol:   aws.String("17"),
-		RuleAction: ec2.RuleActionAllow,
+		RuleAction: enums.RuleActionAllow,
 		RuleNumber: aws.Int64(100),
 	}
 
@@ -1371,7 +1373,7 @@ func ExampleClient_CreateNetworkInterfaceRequest_shared00() {
 	}
 
 	svc := ec2.New(cfg)
-	input := &ec2.CreateNetworkInterfaceInput{
+	input := &types.CreateNetworkInterfaceInput{
 		Description: aws.String("my network interface"),
 		Groups: []string{
 			"sg-903004f8",
@@ -1409,9 +1411,9 @@ func ExampleClient_CreatePlacementGroupRequest_shared00() {
 	}
 
 	svc := ec2.New(cfg)
-	input := &ec2.CreatePlacementGroupInput{
+	input := &types.CreatePlacementGroupInput{
 		GroupName: aws.String("my-cluster"),
-		Strategy:  ec2.PlacementStrategyCluster,
+		Strategy:  enums.PlacementStrategyCluster,
 	}
 
 	req := svc.CreatePlacementGroupRequest(input)
@@ -1444,7 +1446,7 @@ func ExampleClient_CreateRouteRequest_shared00() {
 	}
 
 	svc := ec2.New(cfg)
-	input := &ec2.CreateRouteInput{
+	input := &types.CreateRouteInput{
 		DestinationCidrBlock: aws.String("0.0.0.0/0"),
 		GatewayId:            aws.String("igw-c0a643a9"),
 		RouteTableId:         aws.String("rtb-22574640"),
@@ -1479,7 +1481,7 @@ func ExampleClient_CreateRouteTableRequest_shared00() {
 	}
 
 	svc := ec2.New(cfg)
-	input := &ec2.CreateRouteTableInput{
+	input := &types.CreateRouteTableInput{
 		VpcId: aws.String("vpc-a01106c2"),
 	}
 
@@ -1512,7 +1514,7 @@ func ExampleClient_CreateSecurityGroupRequest_shared00() {
 	}
 
 	svc := ec2.New(cfg)
-	input := &ec2.CreateSecurityGroupInput{
+	input := &types.CreateSecurityGroupInput{
 		Description: aws.String("My security group"),
 		GroupName:   aws.String("my-security-group"),
 		VpcId:       aws.String("vpc-1a2b3c4d"),
@@ -1548,7 +1550,7 @@ func ExampleClient_CreateSnapshotRequest_shared00() {
 	}
 
 	svc := ec2.New(cfg)
-	input := &ec2.CreateSnapshotInput{
+	input := &types.CreateSnapshotInput{
 		Description: aws.String("This is my root volume snapshot."),
 		VolumeId:    aws.String("vol-1234567890abcdef0"),
 	}
@@ -1582,7 +1584,7 @@ func ExampleClient_CreateSpotDatafeedSubscriptionRequest_shared00() {
 	}
 
 	svc := ec2.New(cfg)
-	input := &ec2.CreateSpotDatafeedSubscriptionInput{
+	input := &types.CreateSpotDatafeedSubscriptionInput{
 		Bucket: aws.String("my-s3-bucket"),
 		Prefix: aws.String("spotdata"),
 	}
@@ -1617,7 +1619,7 @@ func ExampleClient_CreateSubnetRequest_shared00() {
 	}
 
 	svc := ec2.New(cfg)
-	input := &ec2.CreateSubnetInput{
+	input := &types.CreateSubnetInput{
 		CidrBlock: aws.String("10.0.1.0/24"),
 		VpcId:     aws.String("vpc-a01106c2"),
 	}
@@ -1652,11 +1654,11 @@ func ExampleClient_CreateTagsRequest_shared00() {
 	}
 
 	svc := ec2.New(cfg)
-	input := &ec2.CreateTagsInput{
+	input := &types.CreateTagsInput{
 		Resources: []string{
 			"ami-78a54011",
 		},
-		Tags: []ec2.Tag{
+		Tags: []types.Tag{
 			{
 				Key:   aws.String("Stack"),
 				Value: aws.String("production"),
@@ -1694,10 +1696,10 @@ func ExampleClient_CreateVolumeRequest_shared00() {
 	}
 
 	svc := ec2.New(cfg)
-	input := &ec2.CreateVolumeInput{
+	input := &types.CreateVolumeInput{
 		AvailabilityZone: aws.String("us-east-1a"),
 		Size:             aws.Int64(80),
-		VolumeType:       ec2.VolumeTypeGp2,
+		VolumeType:       enums.VolumeTypeGp2,
 	}
 
 	req := svc.CreateVolumeRequest(input)
@@ -1730,11 +1732,11 @@ func ExampleClient_CreateVolumeRequest_shared01() {
 	}
 
 	svc := ec2.New(cfg)
-	input := &ec2.CreateVolumeInput{
+	input := &types.CreateVolumeInput{
 		AvailabilityZone: aws.String("us-east-1a"),
 		Iops:             aws.Int64(1000),
 		SnapshotId:       aws.String("snap-066877671789bd71b"),
-		VolumeType:       ec2.VolumeTypeIo1,
+		VolumeType:       enums.VolumeTypeIo1,
 	}
 
 	req := svc.CreateVolumeRequest(input)
@@ -1766,7 +1768,7 @@ func ExampleClient_CreateVpcRequest_shared00() {
 	}
 
 	svc := ec2.New(cfg)
-	input := &ec2.CreateVpcInput{
+	input := &types.CreateVpcInput{
 		CidrBlock: aws.String("10.0.0.0/16"),
 	}
 
@@ -1799,7 +1801,7 @@ func ExampleClient_DeleteCustomerGatewayRequest_shared00() {
 	}
 
 	svc := ec2.New(cfg)
-	input := &ec2.DeleteCustomerGatewayInput{
+	input := &types.DeleteCustomerGatewayInput{
 		CustomerGatewayId: aws.String("cgw-0e11f167"),
 	}
 
@@ -1832,7 +1834,7 @@ func ExampleClient_DeleteDhcpOptionsRequest_shared00() {
 	}
 
 	svc := ec2.New(cfg)
-	input := &ec2.DeleteDhcpOptionsInput{
+	input := &types.DeleteDhcpOptionsInput{
 		DhcpOptionsId: aws.String("dopt-d9070ebb"),
 	}
 
@@ -1865,7 +1867,7 @@ func ExampleClient_DeleteInternetGatewayRequest_shared00() {
 	}
 
 	svc := ec2.New(cfg)
-	input := &ec2.DeleteInternetGatewayInput{
+	input := &types.DeleteInternetGatewayInput{
 		InternetGatewayId: aws.String("igw-c0a643a9"),
 	}
 
@@ -1898,7 +1900,7 @@ func ExampleClient_DeleteKeyPairRequest_shared00() {
 	}
 
 	svc := ec2.New(cfg)
-	input := &ec2.DeleteKeyPairInput{
+	input := &types.DeleteKeyPairInput{
 		KeyName: aws.String("my-key-pair"),
 	}
 
@@ -1931,7 +1933,7 @@ func ExampleClient_DeleteLaunchTemplateRequest_shared00() {
 	}
 
 	svc := ec2.New(cfg)
-	input := &ec2.DeleteLaunchTemplateInput{
+	input := &types.DeleteLaunchTemplateInput{
 		LaunchTemplateId: aws.String("lt-0abcd290751193123"),
 	}
 
@@ -1964,7 +1966,7 @@ func ExampleClient_DeleteLaunchTemplateVersionsRequest_shared00() {
 	}
 
 	svc := ec2.New(cfg)
-	input := &ec2.DeleteLaunchTemplateVersionsInput{
+	input := &types.DeleteLaunchTemplateVersionsInput{
 		LaunchTemplateId: aws.String("lt-0abcd290751193123"),
 		Versions: []string{
 			"1",
@@ -2000,7 +2002,7 @@ func ExampleClient_DeleteNatGatewayRequest_shared00() {
 	}
 
 	svc := ec2.New(cfg)
-	input := &ec2.DeleteNatGatewayInput{
+	input := &types.DeleteNatGatewayInput{
 		NatGatewayId: aws.String("nat-04ae55e711cec5680"),
 	}
 
@@ -2033,7 +2035,7 @@ func ExampleClient_DeleteNetworkAclRequest_shared00() {
 	}
 
 	svc := ec2.New(cfg)
-	input := &ec2.DeleteNetworkAclInput{
+	input := &types.DeleteNetworkAclInput{
 		NetworkAclId: aws.String("acl-5fb85d36"),
 	}
 
@@ -2066,7 +2068,7 @@ func ExampleClient_DeleteNetworkAclEntryRequest_shared00() {
 	}
 
 	svc := ec2.New(cfg)
-	input := &ec2.DeleteNetworkAclEntryInput{
+	input := &types.DeleteNetworkAclEntryInput{
 		Egress:       aws.Bool(true),
 		NetworkAclId: aws.String("acl-5fb85d36"),
 		RuleNumber:   aws.Int64(100),
@@ -2101,7 +2103,7 @@ func ExampleClient_DeleteNetworkInterfaceRequest_shared00() {
 	}
 
 	svc := ec2.New(cfg)
-	input := &ec2.DeleteNetworkInterfaceInput{
+	input := &types.DeleteNetworkInterfaceInput{
 		NetworkInterfaceId: aws.String("eni-e5aa89a3"),
 	}
 
@@ -2134,7 +2136,7 @@ func ExampleClient_DeletePlacementGroupRequest_shared00() {
 	}
 
 	svc := ec2.New(cfg)
-	input := &ec2.DeletePlacementGroupInput{
+	input := &types.DeletePlacementGroupInput{
 		GroupName: aws.String("my-cluster"),
 	}
 
@@ -2167,7 +2169,7 @@ func ExampleClient_DeleteRouteRequest_shared00() {
 	}
 
 	svc := ec2.New(cfg)
-	input := &ec2.DeleteRouteInput{
+	input := &types.DeleteRouteInput{
 		DestinationCidrBlock: aws.String("0.0.0.0/0"),
 		RouteTableId:         aws.String("rtb-22574640"),
 	}
@@ -2201,7 +2203,7 @@ func ExampleClient_DeleteRouteTableRequest_shared00() {
 	}
 
 	svc := ec2.New(cfg)
-	input := &ec2.DeleteRouteTableInput{
+	input := &types.DeleteRouteTableInput{
 		RouteTableId: aws.String("rtb-22574640"),
 	}
 
@@ -2234,7 +2236,7 @@ func ExampleClient_DeleteSecurityGroupRequest_shared00() {
 	}
 
 	svc := ec2.New(cfg)
-	input := &ec2.DeleteSecurityGroupInput{
+	input := &types.DeleteSecurityGroupInput{
 		GroupId: aws.String("sg-903004f8"),
 	}
 
@@ -2268,7 +2270,7 @@ func ExampleClient_DeleteSnapshotRequest_shared00() {
 	}
 
 	svc := ec2.New(cfg)
-	input := &ec2.DeleteSnapshotInput{
+	input := &types.DeleteSnapshotInput{
 		SnapshotId: aws.String("snap-1234567890abcdef0"),
 	}
 
@@ -2301,7 +2303,7 @@ func ExampleClient_DeleteSpotDatafeedSubscriptionRequest_shared00() {
 	}
 
 	svc := ec2.New(cfg)
-	input := &ec2.DeleteSpotDatafeedSubscriptionInput{}
+	input := &types.DeleteSpotDatafeedSubscriptionInput{}
 
 	req := svc.DeleteSpotDatafeedSubscriptionRequest(input)
 	result, err := req.Send(context.Background())
@@ -2332,7 +2334,7 @@ func ExampleClient_DeleteSubnetRequest_shared00() {
 	}
 
 	svc := ec2.New(cfg)
-	input := &ec2.DeleteSubnetInput{
+	input := &types.DeleteSubnetInput{
 		SubnetId: aws.String("subnet-9d4a7b6c"),
 	}
 
@@ -2365,11 +2367,11 @@ func ExampleClient_DeleteTagsRequest_shared00() {
 	}
 
 	svc := ec2.New(cfg)
-	input := &ec2.DeleteTagsInput{
+	input := &types.DeleteTagsInput{
 		Resources: []string{
 			"ami-78a54011",
 		},
-		Tags: []ec2.Tag{
+		Tags: []types.Tag{
 			{
 				Key:   aws.String("Stack"),
 				Value: aws.String("test"),
@@ -2407,7 +2409,7 @@ func ExampleClient_DeleteVolumeRequest_shared00() {
 	}
 
 	svc := ec2.New(cfg)
-	input := &ec2.DeleteVolumeInput{
+	input := &types.DeleteVolumeInput{
 		VolumeId: aws.String("vol-049df61146c4d7901"),
 	}
 
@@ -2440,7 +2442,7 @@ func ExampleClient_DeleteVpcRequest_shared00() {
 	}
 
 	svc := ec2.New(cfg)
-	input := &ec2.DeleteVpcInput{
+	input := &types.DeleteVpcInput{
 		VpcId: aws.String("vpc-a01106c2"),
 	}
 
@@ -2473,9 +2475,9 @@ func ExampleClient_DescribeAccountAttributesRequest_shared00() {
 	}
 
 	svc := ec2.New(cfg)
-	input := &ec2.DescribeAccountAttributesInput{
-		AttributeNames: []ec2.AccountAttributeName{
-			ec2.AccountAttributeName("supported-platforms"),
+	input := &types.DescribeAccountAttributesInput{
+		AttributeNames: []enums.AccountAttributeName{
+			enums.AccountAttributeName("supported-platforms"),
 		},
 	}
 
@@ -2508,7 +2510,7 @@ func ExampleClient_DescribeAccountAttributesRequest_shared01() {
 	}
 
 	svc := ec2.New(cfg)
-	input := &ec2.DescribeAccountAttributesInput{}
+	input := &types.DescribeAccountAttributesInput{}
 
 	req := svc.DescribeAccountAttributesRequest(input)
 	result, err := req.Send(context.Background())
@@ -2539,7 +2541,7 @@ func ExampleClient_DescribeAddressesRequest_shared00() {
 	}
 
 	svc := ec2.New(cfg)
-	input := &ec2.DescribeAddressesInput{}
+	input := &types.DescribeAddressesInput{}
 
 	req := svc.DescribeAddressesRequest(input)
 	result, err := req.Send(context.Background())
@@ -2570,8 +2572,8 @@ func ExampleClient_DescribeAddressesRequest_shared01() {
 	}
 
 	svc := ec2.New(cfg)
-	input := &ec2.DescribeAddressesInput{
-		Filters: []ec2.Filter{
+	input := &types.DescribeAddressesInput{
+		Filters: []types.Filter{
 			{
 				Name: aws.String("domain"),
 				Values: []string{
@@ -2610,8 +2612,8 @@ func ExampleClient_DescribeAddressesRequest_shared02() {
 	}
 
 	svc := ec2.New(cfg)
-	input := &ec2.DescribeAddressesInput{
-		Filters: []ec2.Filter{
+	input := &types.DescribeAddressesInput{
+		Filters: []types.Filter{
 			{
 				Name: aws.String("domain"),
 				Values: []string{
@@ -2651,7 +2653,7 @@ func ExampleClient_DescribeAvailabilityZonesRequest_shared00() {
 	}
 
 	svc := ec2.New(cfg)
-	input := &ec2.DescribeAvailabilityZonesInput{}
+	input := &types.DescribeAvailabilityZonesInput{}
 
 	req := svc.DescribeAvailabilityZonesRequest(input)
 	result, err := req.Send(context.Background())
@@ -2682,7 +2684,7 @@ func ExampleClient_DescribeCustomerGatewaysRequest_shared00() {
 	}
 
 	svc := ec2.New(cfg)
-	input := &ec2.DescribeCustomerGatewaysInput{
+	input := &types.DescribeCustomerGatewaysInput{
 		CustomerGatewayIds: []string{
 			"cgw-0e11f167",
 		},
@@ -2717,7 +2719,7 @@ func ExampleClient_DescribeDhcpOptionsRequest_shared00() {
 	}
 
 	svc := ec2.New(cfg)
-	input := &ec2.DescribeDhcpOptionsInput{
+	input := &types.DescribeDhcpOptionsInput{
 		DhcpOptionsIds: []string{
 			"dopt-d9070ebb",
 		},
@@ -2752,7 +2754,7 @@ func ExampleClient_DescribeIamInstanceProfileAssociationsRequest_shared00() {
 	}
 
 	svc := ec2.New(cfg)
-	input := &ec2.DescribeIamInstanceProfileAssociationsInput{
+	input := &types.DescribeIamInstanceProfileAssociationsInput{
 		AssociationIds: []string{
 			"iip-assoc-0db249b1f25fa24b8",
 		},
@@ -2787,8 +2789,8 @@ func ExampleClient_DescribeImageAttributeRequest_shared00() {
 	}
 
 	svc := ec2.New(cfg)
-	input := &ec2.DescribeImageAttributeInput{
-		Attribute: ec2.ImageAttributeNameLaunchPermission,
+	input := &types.DescribeImageAttributeInput{
+		Attribute: enums.ImageAttributeNameLaunchPermission,
 		ImageId:   aws.String("ami-5731123e"),
 	}
 
@@ -2821,7 +2823,7 @@ func ExampleClient_DescribeImagesRequest_shared00() {
 	}
 
 	svc := ec2.New(cfg)
-	input := &ec2.DescribeImagesInput{
+	input := &types.DescribeImagesInput{
 		ImageIds: []string{
 			"ami-5731123e",
 		},
@@ -2856,8 +2858,8 @@ func ExampleClient_DescribeInstanceAttributeRequest_shared00() {
 	}
 
 	svc := ec2.New(cfg)
-	input := &ec2.DescribeInstanceAttributeInput{
-		Attribute:  ec2.InstanceAttributeNameInstanceType,
+	input := &types.DescribeInstanceAttributeInput{
+		Attribute:  enums.InstanceAttributeNameInstanceType,
 		InstanceId: aws.String("i-1234567890abcdef0"),
 	}
 
@@ -2890,8 +2892,8 @@ func ExampleClient_DescribeInstanceAttributeRequest_shared01() {
 	}
 
 	svc := ec2.New(cfg)
-	input := &ec2.DescribeInstanceAttributeInput{
-		Attribute:  ec2.InstanceAttributeNameDisableApiTermination,
+	input := &types.DescribeInstanceAttributeInput{
+		Attribute:  enums.InstanceAttributeNameDisableApiTermination,
 		InstanceId: aws.String("i-1234567890abcdef0"),
 	}
 
@@ -2924,8 +2926,8 @@ func ExampleClient_DescribeInstanceAttributeRequest_shared02() {
 	}
 
 	svc := ec2.New(cfg)
-	input := &ec2.DescribeInstanceAttributeInput{
-		Attribute:  ec2.InstanceAttributeNameBlockDeviceMapping,
+	input := &types.DescribeInstanceAttributeInput{
+		Attribute:  enums.InstanceAttributeNameBlockDeviceMapping,
 		InstanceId: aws.String("i-1234567890abcdef0"),
 	}
 
@@ -2958,7 +2960,7 @@ func ExampleClient_DescribeInstanceStatusRequest_shared00() {
 	}
 
 	svc := ec2.New(cfg)
-	input := &ec2.DescribeInstanceStatusInput{
+	input := &types.DescribeInstanceStatusInput{
 		InstanceIds: []string{
 			"i-1234567890abcdef0",
 		},
@@ -2993,7 +2995,7 @@ func ExampleClient_DescribeInstancesRequest_shared00() {
 	}
 
 	svc := ec2.New(cfg)
-	input := &ec2.DescribeInstancesInput{
+	input := &types.DescribeInstancesInput{
 		InstanceIds: []string{
 			"i-1234567890abcdef0",
 		},
@@ -3028,8 +3030,8 @@ func ExampleClient_DescribeInstancesRequest_shared01() {
 	}
 
 	svc := ec2.New(cfg)
-	input := &ec2.DescribeInstancesInput{
-		Filters: []ec2.Filter{
+	input := &types.DescribeInstancesInput{
+		Filters: []types.Filter{
 			{
 				Name: aws.String("instance-type"),
 				Values: []string{
@@ -3068,8 +3070,8 @@ func ExampleClient_DescribeInstancesRequest_shared02() {
 	}
 
 	svc := ec2.New(cfg)
-	input := &ec2.DescribeInstancesInput{
-		Filters: []ec2.Filter{
+	input := &types.DescribeInstancesInput{
+		Filters: []types.Filter{
 			{
 				Name: aws.String("tag:Purpose"),
 				Values: []string{
@@ -3108,8 +3110,8 @@ func ExampleClient_DescribeInternetGatewaysRequest_shared00() {
 	}
 
 	svc := ec2.New(cfg)
-	input := &ec2.DescribeInternetGatewaysInput{
-		Filters: []ec2.Filter{
+	input := &types.DescribeInternetGatewaysInput{
+		Filters: []types.Filter{
 			{
 				Name: aws.String("attachment.vpc-id"),
 				Values: []string{
@@ -3148,7 +3150,7 @@ func ExampleClient_DescribeKeyPairsRequest_shared00() {
 	}
 
 	svc := ec2.New(cfg)
-	input := &ec2.DescribeKeyPairsInput{
+	input := &types.DescribeKeyPairsInput{
 		KeyNames: []string{
 			"my-key-pair",
 		},
@@ -3183,7 +3185,7 @@ func ExampleClient_DescribeLaunchTemplateVersionsRequest_shared00() {
 	}
 
 	svc := ec2.New(cfg)
-	input := &ec2.DescribeLaunchTemplateVersionsInput{
+	input := &types.DescribeLaunchTemplateVersionsInput{
 		LaunchTemplateId: aws.String("068f72b72934aff71"),
 	}
 
@@ -3216,7 +3218,7 @@ func ExampleClient_DescribeLaunchTemplatesRequest_shared00() {
 	}
 
 	svc := ec2.New(cfg)
-	input := &ec2.DescribeLaunchTemplatesInput{
+	input := &types.DescribeLaunchTemplatesInput{
 		LaunchTemplateIds: []string{
 			"lt-01238c059e3466abc",
 		},
@@ -3251,7 +3253,7 @@ func ExampleClient_DescribeMovingAddressesRequest_shared00() {
 	}
 
 	svc := ec2.New(cfg)
-	input := &ec2.DescribeMovingAddressesInput{}
+	input := &types.DescribeMovingAddressesInput{}
 
 	req := svc.DescribeMovingAddressesRequest(input)
 	result, err := req.Send(context.Background())
@@ -3282,8 +3284,8 @@ func ExampleClient_DescribeNatGatewaysRequest_shared00() {
 	}
 
 	svc := ec2.New(cfg)
-	input := &ec2.DescribeNatGatewaysInput{
-		Filter: []ec2.Filter{
+	input := &types.DescribeNatGatewaysInput{
+		Filter: []types.Filter{
 			{
 				Name: aws.String("vpc-id"),
 				Values: []string{
@@ -3322,7 +3324,7 @@ func ExampleClient_DescribeNetworkAclsRequest_shared00() {
 	}
 
 	svc := ec2.New(cfg)
-	input := &ec2.DescribeNetworkAclsInput{
+	input := &types.DescribeNetworkAclsInput{
 		NetworkAclIds: []string{
 			"acl-5fb85d36",
 		},
@@ -3357,8 +3359,8 @@ func ExampleClient_DescribeNetworkInterfaceAttributeRequest_shared00() {
 	}
 
 	svc := ec2.New(cfg)
-	input := &ec2.DescribeNetworkInterfaceAttributeInput{
-		Attribute:          ec2.NetworkInterfaceAttributeAttachment,
+	input := &types.DescribeNetworkInterfaceAttributeInput{
+		Attribute:          enums.NetworkInterfaceAttributeAttachment,
 		NetworkInterfaceId: aws.String("eni-686ea200"),
 	}
 
@@ -3391,8 +3393,8 @@ func ExampleClient_DescribeNetworkInterfaceAttributeRequest_shared01() {
 	}
 
 	svc := ec2.New(cfg)
-	input := &ec2.DescribeNetworkInterfaceAttributeInput{
-		Attribute:          ec2.NetworkInterfaceAttributeDescription,
+	input := &types.DescribeNetworkInterfaceAttributeInput{
+		Attribute:          enums.NetworkInterfaceAttributeDescription,
 		NetworkInterfaceId: aws.String("eni-686ea200"),
 	}
 
@@ -3425,8 +3427,8 @@ func ExampleClient_DescribeNetworkInterfaceAttributeRequest_shared02() {
 	}
 
 	svc := ec2.New(cfg)
-	input := &ec2.DescribeNetworkInterfaceAttributeInput{
-		Attribute:          ec2.NetworkInterfaceAttributeGroupSet,
+	input := &types.DescribeNetworkInterfaceAttributeInput{
+		Attribute:          enums.NetworkInterfaceAttributeGroupSet,
 		NetworkInterfaceId: aws.String("eni-686ea200"),
 	}
 
@@ -3459,8 +3461,8 @@ func ExampleClient_DescribeNetworkInterfaceAttributeRequest_shared03() {
 	}
 
 	svc := ec2.New(cfg)
-	input := &ec2.DescribeNetworkInterfaceAttributeInput{
-		Attribute:          ec2.NetworkInterfaceAttributeSourceDestCheck,
+	input := &types.DescribeNetworkInterfaceAttributeInput{
+		Attribute:          enums.NetworkInterfaceAttributeSourceDestCheck,
 		NetworkInterfaceId: aws.String("eni-686ea200"),
 	}
 
@@ -3493,7 +3495,7 @@ func ExampleClient_DescribeNetworkInterfacesRequest_shared00() {
 	}
 
 	svc := ec2.New(cfg)
-	input := &ec2.DescribeNetworkInterfacesInput{
+	input := &types.DescribeNetworkInterfacesInput{
 		NetworkInterfaceIds: []string{
 			"eni-e5aa89a3",
 		},
@@ -3528,7 +3530,7 @@ func ExampleClient_DescribeRegionsRequest_shared00() {
 	}
 
 	svc := ec2.New(cfg)
-	input := &ec2.DescribeRegionsInput{}
+	input := &types.DescribeRegionsInput{}
 
 	req := svc.DescribeRegionsRequest(input)
 	result, err := req.Send(context.Background())
@@ -3559,7 +3561,7 @@ func ExampleClient_DescribeRouteTablesRequest_shared00() {
 	}
 
 	svc := ec2.New(cfg)
-	input := &ec2.DescribeRouteTablesInput{
+	input := &types.DescribeRouteTablesInput{
 		RouteTableIds: []string{
 			"rtb-1f382e7d",
 		},
@@ -3595,12 +3597,12 @@ func ExampleClient_DescribeScheduledInstanceAvailabilityRequest_shared00() {
 	}
 
 	svc := ec2.New(cfg)
-	input := &ec2.DescribeScheduledInstanceAvailabilityInput{
-		FirstSlotStartTimeRange: &ec2.SlotDateTimeRangeRequest{
+	input := &types.DescribeScheduledInstanceAvailabilityInput{
+		FirstSlotStartTimeRange: &types.SlotDateTimeRangeRequest{
 			EarliestTime: parseTime("2006-01-02T15:04:05Z", "2016-01-31T00:00:00Z"),
 			LatestTime:   parseTime("2006-01-02T15:04:05Z", "2016-01-31T04:00:00Z"),
 		},
-		Recurrence: &ec2.ScheduledInstanceRecurrenceRequest{
+		Recurrence: &types.ScheduledInstanceRecurrenceRequest{
 			Frequency: aws.String("Weekly"),
 			Interval:  aws.Int64(1),
 			OccurrenceDays: []int64{
@@ -3638,7 +3640,7 @@ func ExampleClient_DescribeScheduledInstancesRequest_shared00() {
 	}
 
 	svc := ec2.New(cfg)
-	input := &ec2.DescribeScheduledInstancesInput{
+	input := &types.DescribeScheduledInstancesInput{
 		ScheduledInstanceIds: []string{
 			"sci-1234-1234-1234-1234-123456789012",
 		},
@@ -3673,7 +3675,7 @@ func ExampleClient_DescribeSecurityGroupReferencesRequest_shared00() {
 	}
 
 	svc := ec2.New(cfg)
-	input := &ec2.DescribeSecurityGroupReferencesInput{
+	input := &types.DescribeSecurityGroupReferencesInput{
 		GroupId: []string{
 			"sg-903004f8",
 		},
@@ -3708,7 +3710,7 @@ func ExampleClient_DescribeSecurityGroupsRequest_shared00() {
 	}
 
 	svc := ec2.New(cfg)
-	input := &ec2.DescribeSecurityGroupsInput{
+	input := &types.DescribeSecurityGroupsInput{
 		GroupIds: []string{
 			"sg-903004f8",
 		},
@@ -3743,8 +3745,8 @@ func ExampleClient_DescribeSecurityGroupsRequest_shared01() {
 	}
 
 	svc := ec2.New(cfg)
-	input := &ec2.DescribeSecurityGroupsInput{
-		Filters: []ec2.Filter{
+	input := &types.DescribeSecurityGroupsInput{
+		Filters: []types.Filter{
 			{
 				Name: aws.String("tag:Purpose"),
 				Values: []string{
@@ -3784,8 +3786,8 @@ func ExampleClient_DescribeSnapshotAttributeRequest_shared00() {
 	}
 
 	svc := ec2.New(cfg)
-	input := &ec2.DescribeSnapshotAttributeInput{
-		Attribute:  ec2.SnapshotAttributeNameCreateVolumePermission,
+	input := &types.DescribeSnapshotAttributeInput{
+		Attribute:  enums.SnapshotAttributeNameCreateVolumePermission,
 		SnapshotId: aws.String("snap-066877671789bd71b"),
 	}
 
@@ -3818,7 +3820,7 @@ func ExampleClient_DescribeSnapshotsRequest_shared00() {
 	}
 
 	svc := ec2.New(cfg)
-	input := &ec2.DescribeSnapshotsInput{
+	input := &types.DescribeSnapshotsInput{
 		SnapshotIds: []string{
 			"snap-1234567890abcdef0",
 		},
@@ -3854,8 +3856,8 @@ func ExampleClient_DescribeSnapshotsRequest_shared01() {
 	}
 
 	svc := ec2.New(cfg)
-	input := &ec2.DescribeSnapshotsInput{
-		Filters: []ec2.Filter{
+	input := &types.DescribeSnapshotsInput{
+		Filters: []types.Filter{
 			{
 				Name: aws.String("status"),
 				Values: []string{
@@ -3897,7 +3899,7 @@ func ExampleClient_DescribeSpotDatafeedSubscriptionRequest_shared00() {
 	}
 
 	svc := ec2.New(cfg)
-	input := &ec2.DescribeSpotDatafeedSubscriptionInput{}
+	input := &types.DescribeSpotDatafeedSubscriptionInput{}
 
 	req := svc.DescribeSpotDatafeedSubscriptionRequest(input)
 	result, err := req.Send(context.Background())
@@ -3928,7 +3930,7 @@ func ExampleClient_DescribeSpotFleetInstancesRequest_shared00() {
 	}
 
 	svc := ec2.New(cfg)
-	input := &ec2.DescribeSpotFleetInstancesInput{
+	input := &types.DescribeSpotFleetInstancesInput{
 		SpotFleetRequestId: aws.String("sfr-73fbd2ce-aa30-494c-8788-1cee4EXAMPLE"),
 	}
 
@@ -3962,7 +3964,7 @@ func ExampleClient_DescribeSpotFleetRequestHistoryRequest_shared00() {
 	}
 
 	svc := ec2.New(cfg)
-	input := &ec2.DescribeSpotFleetRequestHistoryInput{
+	input := &types.DescribeSpotFleetRequestHistoryInput{
 		SpotFleetRequestId: aws.String("sfr-73fbd2ce-aa30-494c-8788-1cee4EXAMPLE"),
 		StartTime:          parseTime("2006-01-02T15:04:05Z", "2015-05-26T00:00:00Z"),
 	}
@@ -3996,7 +3998,7 @@ func ExampleClient_DescribeSpotFleetRequestsRequest_shared00() {
 	}
 
 	svc := ec2.New(cfg)
-	input := &ec2.DescribeSpotFleetRequestsInput{
+	input := &types.DescribeSpotFleetRequestsInput{
 		SpotFleetRequestIds: []string{
 			"sfr-73fbd2ce-aa30-494c-8788-1cee4EXAMPLE",
 		},
@@ -4031,7 +4033,7 @@ func ExampleClient_DescribeSpotInstanceRequestsRequest_shared00() {
 	}
 
 	svc := ec2.New(cfg)
-	input := &ec2.DescribeSpotInstanceRequestsInput{
+	input := &types.DescribeSpotInstanceRequestsInput{
 		SpotInstanceRequestIds: []string{
 			"sir-08b93456",
 		},
@@ -4067,10 +4069,10 @@ func ExampleClient_DescribeSpotPriceHistoryRequest_shared00() {
 	}
 
 	svc := ec2.New(cfg)
-	input := &ec2.DescribeSpotPriceHistoryInput{
+	input := &types.DescribeSpotPriceHistoryInput{
 		EndTime: parseTime("2006-01-02T15:04:05Z", "2014-01-06T08:09:10"),
-		InstanceTypes: []ec2.InstanceType{
-			ec2.InstanceType("m1.xlarge"),
+		InstanceTypes: []enums.InstanceType{
+			enums.InstanceType("m1.xlarge"),
 		},
 		ProductDescriptions: []string{
 			"Linux/UNIX (Amazon VPC)",
@@ -4107,8 +4109,8 @@ func ExampleClient_DescribeSubnetsRequest_shared00() {
 	}
 
 	svc := ec2.New(cfg)
-	input := &ec2.DescribeSubnetsInput{
-		Filters: []ec2.Filter{
+	input := &types.DescribeSubnetsInput{
+		Filters: []types.Filter{
 			{
 				Name: aws.String("vpc-id"),
 				Values: []string{
@@ -4147,8 +4149,8 @@ func ExampleClient_DescribeTagsRequest_shared00() {
 	}
 
 	svc := ec2.New(cfg)
-	input := &ec2.DescribeTagsInput{
-		Filters: []ec2.Filter{
+	input := &types.DescribeTagsInput{
+		Filters: []types.Filter{
 			{
 				Name: aws.String("resource-id"),
 				Values: []string{
@@ -4187,8 +4189,8 @@ func ExampleClient_DescribeVolumeAttributeRequest_shared00() {
 	}
 
 	svc := ec2.New(cfg)
-	input := &ec2.DescribeVolumeAttributeInput{
-		Attribute: ec2.VolumeAttributeNameAutoEnableIo,
+	input := &types.DescribeVolumeAttributeInput{
+		Attribute: enums.VolumeAttributeNameAutoEnableIo,
 		VolumeId:  aws.String("vol-049df61146c4d7901"),
 	}
 
@@ -4221,7 +4223,7 @@ func ExampleClient_DescribeVolumeStatusRequest_shared00() {
 	}
 
 	svc := ec2.New(cfg)
-	input := &ec2.DescribeVolumeStatusInput{
+	input := &types.DescribeVolumeStatusInput{
 		VolumeIds: []string{
 			"vol-1234567890abcdef0",
 		},
@@ -4257,8 +4259,8 @@ func ExampleClient_DescribeVolumeStatusRequest_shared01() {
 	}
 
 	svc := ec2.New(cfg)
-	input := &ec2.DescribeVolumeStatusInput{
-		Filters: []ec2.Filter{
+	input := &types.DescribeVolumeStatusInput{
+		Filters: []types.Filter{
 			{
 				Name: aws.String("volume-status.status"),
 				Values: []string{
@@ -4297,7 +4299,7 @@ func ExampleClient_DescribeVolumesRequest_shared00() {
 	}
 
 	svc := ec2.New(cfg)
-	input := &ec2.DescribeVolumesInput{}
+	input := &types.DescribeVolumesInput{}
 
 	req := svc.DescribeVolumesRequest(input)
 	result, err := req.Send(context.Background())
@@ -4329,8 +4331,8 @@ func ExampleClient_DescribeVolumesRequest_shared01() {
 	}
 
 	svc := ec2.New(cfg)
-	input := &ec2.DescribeVolumesInput{
-		Filters: []ec2.Filter{
+	input := &types.DescribeVolumesInput{
+		Filters: []types.Filter{
 			{
 				Name: aws.String("attachment.instance-id"),
 				Values: []string{
@@ -4378,8 +4380,8 @@ func ExampleClient_DescribeVpcAttributeRequest_shared00() {
 	}
 
 	svc := ec2.New(cfg)
-	input := &ec2.DescribeVpcAttributeInput{
-		Attribute: ec2.VpcAttributeNameEnableDnsSupport,
+	input := &types.DescribeVpcAttributeInput{
+		Attribute: enums.VpcAttributeNameEnableDnsSupport,
 		VpcId:     aws.String("vpc-a01106c2"),
 	}
 
@@ -4414,8 +4416,8 @@ func ExampleClient_DescribeVpcAttributeRequest_shared01() {
 	}
 
 	svc := ec2.New(cfg)
-	input := &ec2.DescribeVpcAttributeInput{
-		Attribute: ec2.VpcAttributeNameEnableDnsHostnames,
+	input := &types.DescribeVpcAttributeInput{
+		Attribute: enums.VpcAttributeNameEnableDnsHostnames,
 		VpcId:     aws.String("vpc-a01106c2"),
 	}
 
@@ -4448,7 +4450,7 @@ func ExampleClient_DescribeVpcsRequest_shared00() {
 	}
 
 	svc := ec2.New(cfg)
-	input := &ec2.DescribeVpcsInput{
+	input := &types.DescribeVpcsInput{
 		VpcIds: []string{
 			"vpc-a01106c2",
 		},
@@ -4483,7 +4485,7 @@ func ExampleClient_DetachInternetGatewayRequest_shared00() {
 	}
 
 	svc := ec2.New(cfg)
-	input := &ec2.DetachInternetGatewayInput{
+	input := &types.DetachInternetGatewayInput{
 		InternetGatewayId: aws.String("igw-c0a643a9"),
 		VpcId:             aws.String("vpc-a01106c2"),
 	}
@@ -4517,7 +4519,7 @@ func ExampleClient_DetachNetworkInterfaceRequest_shared00() {
 	}
 
 	svc := ec2.New(cfg)
-	input := &ec2.DetachNetworkInterfaceInput{
+	input := &types.DetachNetworkInterfaceInput{
 		AttachmentId: aws.String("eni-attach-66c4350a"),
 	}
 
@@ -4551,7 +4553,7 @@ func ExampleClient_DetachVolumeRequest_shared00() {
 	}
 
 	svc := ec2.New(cfg)
-	input := &ec2.DetachVolumeInput{
+	input := &types.DetachVolumeInput{
 		VolumeId: aws.String("vol-1234567890abcdef0"),
 	}
 
@@ -4585,7 +4587,7 @@ func ExampleClient_DisableVgwRoutePropagationRequest_shared00() {
 	}
 
 	svc := ec2.New(cfg)
-	input := &ec2.DisableVgwRoutePropagationInput{
+	input := &types.DisableVgwRoutePropagationInput{
 		GatewayId:    aws.String("vgw-9a4cacf3"),
 		RouteTableId: aws.String("rtb-22574640"),
 	}
@@ -4619,7 +4621,7 @@ func ExampleClient_DisassociateAddressRequest_shared00() {
 	}
 
 	svc := ec2.New(cfg)
-	input := &ec2.DisassociateAddressInput{
+	input := &types.DisassociateAddressInput{
 		AssociationId: aws.String("eipassoc-2bebb745"),
 	}
 
@@ -4652,7 +4654,7 @@ func ExampleClient_DisassociateAddressRequest_shared01() {
 	}
 
 	svc := ec2.New(cfg)
-	input := &ec2.DisassociateAddressInput{
+	input := &types.DisassociateAddressInput{
 		PublicIp: aws.String("198.51.100.0"),
 	}
 
@@ -4685,7 +4687,7 @@ func ExampleClient_DisassociateIamInstanceProfileRequest_shared00() {
 	}
 
 	svc := ec2.New(cfg)
-	input := &ec2.DisassociateIamInstanceProfileInput{
+	input := &types.DisassociateIamInstanceProfileInput{
 		AssociationId: aws.String("iip-assoc-05020b59952902f5f"),
 	}
 
@@ -4718,7 +4720,7 @@ func ExampleClient_DisassociateRouteTableRequest_shared00() {
 	}
 
 	svc := ec2.New(cfg)
-	input := &ec2.DisassociateRouteTableInput{
+	input := &types.DisassociateRouteTableInput{
 		AssociationId: aws.String("rtbassoc-781d0d1a"),
 	}
 
@@ -4752,7 +4754,7 @@ func ExampleClient_EnableVgwRoutePropagationRequest_shared00() {
 	}
 
 	svc := ec2.New(cfg)
-	input := &ec2.EnableVgwRoutePropagationInput{
+	input := &types.EnableVgwRoutePropagationInput{
 		GatewayId:    aws.String("vgw-9a4cacf3"),
 		RouteTableId: aws.String("rtb-22574640"),
 	}
@@ -4786,7 +4788,7 @@ func ExampleClient_EnableVolumeIORequest_shared00() {
 	}
 
 	svc := ec2.New(cfg)
-	input := &ec2.EnableVolumeIOInput{
+	input := &types.EnableVolumeIOInput{
 		VolumeId: aws.String("vol-1234567890abcdef0"),
 	}
 
@@ -4819,7 +4821,7 @@ func ExampleClient_GetConsoleOutputRequest_shared00() {
 	}
 
 	svc := ec2.New(cfg)
-	input := &ec2.GetConsoleOutputInput{
+	input := &types.GetConsoleOutputInput{
 		InstanceId: aws.String("i-1234567890abcdef0"),
 	}
 
@@ -4852,7 +4854,7 @@ func ExampleClient_GetLaunchTemplateDataRequest_shared00() {
 	}
 
 	svc := ec2.New(cfg)
-	input := &ec2.GetLaunchTemplateDataInput{
+	input := &types.GetLaunchTemplateDataInput{
 		InstanceId: aws.String("0123d646e8048babc"),
 	}
 
@@ -4885,12 +4887,12 @@ func ExampleClient_ModifyImageAttributeRequest_shared00() {
 	}
 
 	svc := ec2.New(cfg)
-	input := &ec2.ModifyImageAttributeInput{
+	input := &types.ModifyImageAttributeInput{
 		ImageId: aws.String("ami-5731123e"),
-		LaunchPermission: &ec2.LaunchPermissionModifications{
-			Add: []ec2.LaunchPermission{
+		LaunchPermission: &types.LaunchPermissionModifications{
+			Add: []types.LaunchPermission{
 				{
-					Group: ec2.PermissionGroupAll,
+					Group: enums.PermissionGroupAll,
 				},
 			},
 		},
@@ -4926,10 +4928,10 @@ func ExampleClient_ModifyImageAttributeRequest_shared01() {
 	}
 
 	svc := ec2.New(cfg)
-	input := &ec2.ModifyImageAttributeInput{
+	input := &types.ModifyImageAttributeInput{
 		ImageId: aws.String("ami-5731123e"),
-		LaunchPermission: &ec2.LaunchPermissionModifications{
-			Add: []ec2.LaunchPermission{
+		LaunchPermission: &types.LaunchPermissionModifications{
+			Add: []types.LaunchPermission{
 				{
 					UserId: aws.String("123456789012"),
 				},
@@ -4966,9 +4968,9 @@ func ExampleClient_ModifyInstanceAttributeRequest_shared00() {
 	}
 
 	svc := ec2.New(cfg)
-	input := &ec2.ModifyInstanceAttributeInput{
+	input := &types.ModifyInstanceAttributeInput{
 		InstanceId: aws.String("i-1234567890abcdef0"),
-		InstanceType: &ec2.AttributeValue{
+		InstanceType: &types.AttributeValue{
 			Value: aws.String("m5.large"),
 		},
 	}
@@ -5002,8 +5004,8 @@ func ExampleClient_ModifyInstanceAttributeRequest_shared01() {
 	}
 
 	svc := ec2.New(cfg)
-	input := &ec2.ModifyInstanceAttributeInput{
-		EnaSupport: &ec2.AttributeBooleanValue{
+	input := &types.ModifyInstanceAttributeInput{
+		EnaSupport: &types.AttributeBooleanValue{
 			Value: aws.Bool(true),
 		},
 		InstanceId: aws.String("i-1234567890abcdef0"),
@@ -5038,7 +5040,7 @@ func ExampleClient_ModifyLaunchTemplateRequest_shared00() {
 	}
 
 	svc := ec2.New(cfg)
-	input := &ec2.ModifyLaunchTemplateInput{
+	input := &types.ModifyLaunchTemplateInput{
 		DefaultVersion:   aws.String("2"),
 		LaunchTemplateId: aws.String("lt-0abcd290751193123"),
 	}
@@ -5072,8 +5074,8 @@ func ExampleClient_ModifyNetworkInterfaceAttributeRequest_shared00() {
 	}
 
 	svc := ec2.New(cfg)
-	input := &ec2.ModifyNetworkInterfaceAttributeInput{
-		Attachment: &ec2.NetworkInterfaceAttachmentChanges{
+	input := &types.ModifyNetworkInterfaceAttributeInput{
+		Attachment: &types.NetworkInterfaceAttachmentChanges{
 			AttachmentId:        aws.String("eni-attach-43348162"),
 			DeleteOnTermination: aws.Bool(false),
 		},
@@ -5109,8 +5111,8 @@ func ExampleClient_ModifyNetworkInterfaceAttributeRequest_shared01() {
 	}
 
 	svc := ec2.New(cfg)
-	input := &ec2.ModifyNetworkInterfaceAttributeInput{
-		Description: &ec2.AttributeValue{
+	input := &types.ModifyNetworkInterfaceAttributeInput{
+		Description: &types.AttributeValue{
 			Value: aws.String("My description"),
 		},
 		NetworkInterfaceId: aws.String("eni-686ea200"),
@@ -5145,7 +5147,7 @@ func ExampleClient_ModifyNetworkInterfaceAttributeRequest_shared02() {
 	}
 
 	svc := ec2.New(cfg)
-	input := &ec2.ModifyNetworkInterfaceAttributeInput{
+	input := &types.ModifyNetworkInterfaceAttributeInput{
 		Groups: []string{
 			"sg-903004f8",
 			"sg-1a2b3c4d",
@@ -5183,9 +5185,9 @@ func ExampleClient_ModifyNetworkInterfaceAttributeRequest_shared03() {
 	}
 
 	svc := ec2.New(cfg)
-	input := &ec2.ModifyNetworkInterfaceAttributeInput{
+	input := &types.ModifyNetworkInterfaceAttributeInput{
 		NetworkInterfaceId: aws.String("eni-686ea200"),
-		SourceDestCheck: &ec2.AttributeBooleanValue{
+		SourceDestCheck: &types.AttributeBooleanValue{
 			Value: aws.Bool(false),
 		},
 	}
@@ -5221,9 +5223,9 @@ func ExampleClient_ModifySnapshotAttributeRequest_shared00() {
 	}
 
 	svc := ec2.New(cfg)
-	input := &ec2.ModifySnapshotAttributeInput{
-		Attribute:     ec2.SnapshotAttributeNameCreateVolumePermission,
-		OperationType: ec2.OperationTypeRemove,
+	input := &types.ModifySnapshotAttributeInput{
+		Attribute:     enums.SnapshotAttributeNameCreateVolumePermission,
+		OperationType: enums.OperationTypeRemove,
 		SnapshotId:    aws.String("snap-1234567890abcdef0"),
 		UserIds: []string{
 			"123456789012",
@@ -5259,12 +5261,12 @@ func ExampleClient_ModifySnapshotAttributeRequest_shared01() {
 	}
 
 	svc := ec2.New(cfg)
-	input := &ec2.ModifySnapshotAttributeInput{
-		Attribute: ec2.SnapshotAttributeNameCreateVolumePermission,
+	input := &types.ModifySnapshotAttributeInput{
+		Attribute: enums.SnapshotAttributeNameCreateVolumePermission,
 		GroupNames: []string{
 			"all",
 		},
-		OperationType: ec2.OperationTypeAdd,
+		OperationType: enums.OperationTypeAdd,
 		SnapshotId:    aws.String("snap-1234567890abcdef0"),
 	}
 
@@ -5297,7 +5299,7 @@ func ExampleClient_ModifySpotFleetRequestRequest_shared00() {
 	}
 
 	svc := ec2.New(cfg)
-	input := &ec2.ModifySpotFleetRequestInput{
+	input := &types.ModifySpotFleetRequestInput{
 		SpotFleetRequestId: aws.String("sfr-73fbd2ce-aa30-494c-8788-1cee4EXAMPLE"),
 		TargetCapacity:     aws.Int64(20),
 	}
@@ -5332,8 +5334,8 @@ func ExampleClient_ModifySpotFleetRequestRequest_shared01() {
 	}
 
 	svc := ec2.New(cfg)
-	input := &ec2.ModifySpotFleetRequestInput{
-		ExcessCapacityTerminationPolicy: ec2.ExcessCapacityTerminationPolicy("NoTermination "),
+	input := &types.ModifySpotFleetRequestInput{
+		ExcessCapacityTerminationPolicy: enums.ExcessCapacityTerminationPolicy("NoTermination "),
 		SpotFleetRequestId:              aws.String("sfr-73fbd2ce-aa30-494c-8788-1cee4EXAMPLE"),
 		TargetCapacity:                  aws.Int64(10),
 	}
@@ -5368,8 +5370,8 @@ func ExampleClient_ModifySubnetAttributeRequest_shared00() {
 	}
 
 	svc := ec2.New(cfg)
-	input := &ec2.ModifySubnetAttributeInput{
-		MapPublicIpOnLaunch: &ec2.AttributeBooleanValue{
+	input := &types.ModifySubnetAttributeInput{
+		MapPublicIpOnLaunch: &types.AttributeBooleanValue{
 			Value: aws.Bool(true),
 		},
 		SubnetId: aws.String("subnet-1a2b3c4d"),
@@ -5405,8 +5407,8 @@ func ExampleClient_ModifyVolumeAttributeRequest_shared00() {
 	}
 
 	svc := ec2.New(cfg)
-	input := &ec2.ModifyVolumeAttributeInput{
-		AutoEnableIO: &ec2.AttributeBooleanValue{
+	input := &types.ModifyVolumeAttributeInput{
+		AutoEnableIO: &types.AttributeBooleanValue{
 			Value: aws.Bool(true),
 		},
 		DryRun:   aws.Bool(true),
@@ -5445,8 +5447,8 @@ func ExampleClient_ModifyVpcAttributeRequest_shared00() {
 	}
 
 	svc := ec2.New(cfg)
-	input := &ec2.ModifyVpcAttributeInput{
-		EnableDnsSupport: &ec2.AttributeBooleanValue{
+	input := &types.ModifyVpcAttributeInput{
+		EnableDnsSupport: &types.AttributeBooleanValue{
 			Value: aws.Bool(false),
 		},
 		VpcId: aws.String("vpc-a01106c2"),
@@ -5483,8 +5485,8 @@ func ExampleClient_ModifyVpcAttributeRequest_shared01() {
 	}
 
 	svc := ec2.New(cfg)
-	input := &ec2.ModifyVpcAttributeInput{
-		EnableDnsHostnames: &ec2.AttributeBooleanValue{
+	input := &types.ModifyVpcAttributeInput{
+		EnableDnsHostnames: &types.AttributeBooleanValue{
 			Value: aws.Bool(false),
 		},
 		VpcId: aws.String("vpc-a01106c2"),
@@ -5519,7 +5521,7 @@ func ExampleClient_MoveAddressToVpcRequest_shared00() {
 	}
 
 	svc := ec2.New(cfg)
-	input := &ec2.MoveAddressToVpcInput{
+	input := &types.MoveAddressToVpcInput{
 		PublicIp: aws.String("54.123.4.56"),
 	}
 
@@ -5552,8 +5554,8 @@ func ExampleClient_PurchaseScheduledInstancesRequest_shared00() {
 	}
 
 	svc := ec2.New(cfg)
-	input := &ec2.PurchaseScheduledInstancesInput{
-		PurchaseRequests: []ec2.PurchaseRequest{
+	input := &types.PurchaseScheduledInstancesInput{
+		PurchaseRequests: []types.PurchaseRequest{
 			{
 				InstanceCount: aws.Int64(1),
 				PurchaseToken: aws.String("eyJ2IjoiMSIsInMiOjEsImMiOi..."),
@@ -5590,7 +5592,7 @@ func ExampleClient_RebootInstancesRequest_shared00() {
 	}
 
 	svc := ec2.New(cfg)
-	input := &ec2.RebootInstancesInput{
+	input := &types.RebootInstancesInput{
 		InstanceIds: []string{
 			"i-1234567890abcdef5",
 		},
@@ -5625,7 +5627,7 @@ func ExampleClient_ReleaseAddressRequest_shared00() {
 	}
 
 	svc := ec2.New(cfg)
-	input := &ec2.ReleaseAddressInput{
+	input := &types.ReleaseAddressInput{
 		AllocationId: aws.String("eipalloc-64d5890a"),
 	}
 
@@ -5658,7 +5660,7 @@ func ExampleClient_ReleaseAddressRequest_shared01() {
 	}
 
 	svc := ec2.New(cfg)
-	input := &ec2.ReleaseAddressInput{
+	input := &types.ReleaseAddressInput{
 		PublicIp: aws.String("198.51.100.0"),
 	}
 
@@ -5692,7 +5694,7 @@ func ExampleClient_ReplaceNetworkAclAssociationRequest_shared00() {
 	}
 
 	svc := ec2.New(cfg)
-	input := &ec2.ReplaceNetworkAclAssociationInput{
+	input := &types.ReplaceNetworkAclAssociationInput{
 		AssociationId: aws.String("aclassoc-e5b95c8c"),
 		NetworkAclId:  aws.String("acl-5fb85d36"),
 	}
@@ -5727,16 +5729,16 @@ func ExampleClient_ReplaceNetworkAclEntryRequest_shared00() {
 	}
 
 	svc := ec2.New(cfg)
-	input := &ec2.ReplaceNetworkAclEntryInput{
+	input := &types.ReplaceNetworkAclEntryInput{
 		CidrBlock:    aws.String("203.0.113.12/24"),
 		Egress:       aws.Bool(false),
 		NetworkAclId: aws.String("acl-5fb85d36"),
-		PortRange: &ec2.PortRange{
+		PortRange: &types.PortRange{
 			From: aws.Int64(53),
 			To:   aws.Int64(53),
 		},
 		Protocol:   aws.String("17"),
-		RuleAction: ec2.RuleActionAllow,
+		RuleAction: enums.RuleActionAllow,
 		RuleNumber: aws.Int64(100),
 	}
 
@@ -5771,7 +5773,7 @@ func ExampleClient_ReplaceRouteRequest_shared00() {
 	}
 
 	svc := ec2.New(cfg)
-	input := &ec2.ReplaceRouteInput{
+	input := &types.ReplaceRouteInput{
 		DestinationCidrBlock: aws.String("10.0.0.0/16"),
 		GatewayId:            aws.String("vgw-9a4cacf3"),
 		RouteTableId:         aws.String("rtb-22574640"),
@@ -5807,7 +5809,7 @@ func ExampleClient_ReplaceRouteTableAssociationRequest_shared00() {
 	}
 
 	svc := ec2.New(cfg)
-	input := &ec2.ReplaceRouteTableAssociationInput{
+	input := &types.ReplaceRouteTableAssociationInput{
 		AssociationId: aws.String("rtbassoc-781d0d1a"),
 		RouteTableId:  aws.String("rtb-22574640"),
 	}
@@ -5846,15 +5848,15 @@ func ExampleClient_RequestSpotFleetRequest_shared00() {
 	}
 
 	svc := ec2.New(cfg)
-	input := &ec2.RequestSpotFleetInput{
-		SpotFleetRequestConfig: &ec2.SpotFleetRequestConfigData{
+	input := &types.RequestSpotFleetInput{
+		SpotFleetRequestConfig: &types.SpotFleetRequestConfigData{
 			IamFleetRole: aws.String("arn:aws:iam::123456789012:role/my-spot-fleet-role"),
-			LaunchSpecifications: []ec2.SpotFleetLaunchSpecification{
+			LaunchSpecifications: []types.SpotFleetLaunchSpecification{
 				{
 					ImageId:      aws.String("ami-1a2b3c4d"),
-					InstanceType: ec2.InstanceTypeM3Medium,
+					InstanceType: enums.InstanceTypeM3Medium,
 					KeyName:      aws.String("my-key-pair"),
-					SecurityGroups: []ec2.GroupIdentifier{
+					SecurityGroups: []types.GroupIdentifier{
 						{
 							GroupId: aws.String("sg-1a2b3c4d"),
 						},
@@ -5901,15 +5903,15 @@ func ExampleClient_RequestSpotFleetRequest_shared01() {
 	}
 
 	svc := ec2.New(cfg)
-	input := &ec2.RequestSpotFleetInput{
-		SpotFleetRequestConfig: &ec2.SpotFleetRequestConfigData{
+	input := &types.RequestSpotFleetInput{
+		SpotFleetRequestConfig: &types.SpotFleetRequestConfigData{
 			IamFleetRole: aws.String("arn:aws:iam::123456789012:role/my-spot-fleet-role"),
-			LaunchSpecifications: []ec2.SpotFleetLaunchSpecification{
+			LaunchSpecifications: []types.SpotFleetLaunchSpecification{
 				{
 					ImageId:      aws.String("ami-1a2b3c4d"),
-					InstanceType: ec2.InstanceTypeM3Medium,
+					InstanceType: enums.InstanceTypeM3Medium,
 					KeyName:      aws.String("my-key-pair"),
-					SecurityGroups: []ec2.GroupIdentifier{
+					SecurityGroups: []types.GroupIdentifier{
 						{
 							GroupId: aws.String("sg-1a2b3c4d"),
 						},
@@ -5952,15 +5954,15 @@ func ExampleClient_RequestSpotFleetRequest_shared02() {
 	}
 
 	svc := ec2.New(cfg)
-	input := &ec2.RequestSpotFleetInput{
-		SpotFleetRequestConfig: &ec2.SpotFleetRequestConfigData{
+	input := &types.RequestSpotFleetInput{
+		SpotFleetRequestConfig: &types.SpotFleetRequestConfigData{
 			IamFleetRole: aws.String("arn:aws:iam::123456789012:role/my-spot-fleet-role"),
-			LaunchSpecifications: []ec2.SpotFleetLaunchSpecification{
+			LaunchSpecifications: []types.SpotFleetLaunchSpecification{
 				{
 					ImageId:      aws.String("ami-1a2b3c4d"),
-					InstanceType: ec2.InstanceTypeM3Medium,
+					InstanceType: enums.InstanceTypeM3Medium,
 					KeyName:      aws.String("my-key-pair"),
-					NetworkInterfaces: []ec2.InstanceNetworkInterfaceSpecification{
+					NetworkInterfaces: []types.InstanceNetworkInterfaceSpecification{
 						{
 							AssociatePublicIpAddress: aws.Bool(true),
 							DeviceIndex:              aws.Int64(0),
@@ -6009,24 +6011,24 @@ func ExampleClient_RequestSpotFleetRequest_shared03() {
 	}
 
 	svc := ec2.New(cfg)
-	input := &ec2.RequestSpotFleetInput{
-		SpotFleetRequestConfig: &ec2.SpotFleetRequestConfigData{
-			AllocationStrategy: ec2.AllocationStrategyDiversified,
+	input := &types.RequestSpotFleetInput{
+		SpotFleetRequestConfig: &types.SpotFleetRequestConfigData{
+			AllocationStrategy: enums.AllocationStrategyDiversified,
 			IamFleetRole:       aws.String("arn:aws:iam::123456789012:role/my-spot-fleet-role"),
-			LaunchSpecifications: []ec2.SpotFleetLaunchSpecification{
+			LaunchSpecifications: []types.SpotFleetLaunchSpecification{
 				{
 					ImageId:      aws.String("ami-1a2b3c4d"),
-					InstanceType: ec2.InstanceTypeC42xlarge,
+					InstanceType: enums.InstanceTypeC42xlarge,
 					SubnetId:     aws.String("subnet-1a2b3c4d"),
 				},
 				{
 					ImageId:      aws.String("ami-1a2b3c4d"),
-					InstanceType: ec2.InstanceTypeM32xlarge,
+					InstanceType: enums.InstanceTypeM32xlarge,
 					SubnetId:     aws.String("subnet-1a2b3c4d"),
 				},
 				{
 					ImageId:      aws.String("ami-1a2b3c4d"),
-					InstanceType: ec2.InstanceTypeR32xlarge,
+					InstanceType: enums.InstanceTypeR32xlarge,
 					SubnetId:     aws.String("subnet-1a2b3c4d"),
 				},
 			},
@@ -6068,16 +6070,16 @@ func ExampleClient_RequestSpotInstancesRequest_shared00() {
 	}
 
 	svc := ec2.New(cfg)
-	input := &ec2.RequestSpotInstancesInput{
+	input := &types.RequestSpotInstancesInput{
 		InstanceCount: aws.Int64(5),
-		LaunchSpecification: &ec2.RequestSpotLaunchSpecification{
-			IamInstanceProfile: &ec2.IamInstanceProfileSpecification{
+		LaunchSpecification: &types.RequestSpotLaunchSpecification{
+			IamInstanceProfile: &types.IamInstanceProfileSpecification{
 				Arn: aws.String("arn:aws:iam::123456789012:instance-profile/my-iam-role"),
 			},
 			ImageId:      aws.String("ami-1a2b3c4d"),
-			InstanceType: ec2.InstanceTypeM3Medium,
+			InstanceType: enums.InstanceTypeM3Medium,
 			KeyName:      aws.String("my-key-pair"),
-			Placement: &ec2.SpotPlacement{
+			Placement: &types.SpotPlacement{
 				AvailabilityZone: aws.String("us-west-2a"),
 			},
 			SecurityGroupIds: []string{
@@ -6085,7 +6087,7 @@ func ExampleClient_RequestSpotInstancesRequest_shared00() {
 			},
 		},
 		SpotPrice: aws.String("0.03"),
-		Type:      ec2.SpotInstanceTypeOneTime,
+		Type:      enums.SpotInstanceTypeOneTime,
 	}
 
 	req := svc.RequestSpotInstancesRequest(input)
@@ -6120,21 +6122,21 @@ func ExampleClient_RequestSpotInstancesRequest_shared01() {
 	}
 
 	svc := ec2.New(cfg)
-	input := &ec2.RequestSpotInstancesInput{
+	input := &types.RequestSpotInstancesInput{
 		InstanceCount: aws.Int64(5),
-		LaunchSpecification: &ec2.RequestSpotLaunchSpecification{
-			IamInstanceProfile: &ec2.IamInstanceProfileSpecification{
+		LaunchSpecification: &types.RequestSpotLaunchSpecification{
+			IamInstanceProfile: &types.IamInstanceProfileSpecification{
 				Arn: aws.String("arn:aws:iam::123456789012:instance-profile/my-iam-role"),
 			},
 			ImageId:      aws.String("ami-1a2b3c4d"),
-			InstanceType: ec2.InstanceTypeM3Medium,
+			InstanceType: enums.InstanceTypeM3Medium,
 			SecurityGroupIds: []string{
 				"sg-1a2b3c4d",
 			},
 			SubnetId: aws.String("subnet-1a2b3c4d"),
 		},
 		SpotPrice: aws.String("0.050"),
-		Type:      ec2.SpotInstanceTypeOneTime,
+		Type:      enums.SpotInstanceTypeOneTime,
 	}
 
 	req := svc.RequestSpotInstancesRequest(input)
@@ -6167,8 +6169,8 @@ func ExampleClient_ResetImageAttributeRequest_shared00() {
 	}
 
 	svc := ec2.New(cfg)
-	input := &ec2.ResetImageAttributeInput{
-		Attribute: ec2.ResetImageAttributeNameLaunchPermission,
+	input := &types.ResetImageAttributeInput{
+		Attribute: enums.ResetImageAttributeNameLaunchPermission,
 		ImageId:   aws.String("ami-5731123e"),
 	}
 
@@ -6201,8 +6203,8 @@ func ExampleClient_ResetInstanceAttributeRequest_shared00() {
 	}
 
 	svc := ec2.New(cfg)
-	input := &ec2.ResetInstanceAttributeInput{
-		Attribute:  ec2.InstanceAttributeNameSourceDestCheck,
+	input := &types.ResetInstanceAttributeInput{
+		Attribute:  enums.InstanceAttributeNameSourceDestCheck,
 		InstanceId: aws.String("i-1234567890abcdef0"),
 	}
 
@@ -6236,8 +6238,8 @@ func ExampleClient_ResetSnapshotAttributeRequest_shared00() {
 	}
 
 	svc := ec2.New(cfg)
-	input := &ec2.ResetSnapshotAttributeInput{
-		Attribute:  ec2.SnapshotAttributeNameCreateVolumePermission,
+	input := &types.ResetSnapshotAttributeInput{
+		Attribute:  enums.SnapshotAttributeNameCreateVolumePermission,
 		SnapshotId: aws.String("snap-1234567890abcdef0"),
 	}
 
@@ -6270,7 +6272,7 @@ func ExampleClient_RestoreAddressToClassicRequest_shared00() {
 	}
 
 	svc := ec2.New(cfg)
-	input := &ec2.RestoreAddressToClassicInput{
+	input := &types.RestoreAddressToClassicInput{
 		PublicIp: aws.String("198.51.100.0"),
 	}
 
@@ -6304,14 +6306,14 @@ func ExampleClient_RunInstancesRequest_shared00() {
 	}
 
 	svc := ec2.New(cfg)
-	input := &ec2.RunInstancesInput{
-		BlockDeviceMappings: []ec2.BlockDeviceMapping{
+	input := &types.RunInstancesInput{
+		BlockDeviceMappings: []types.BlockDeviceMapping{
 			{
 				DeviceName: aws.String("/dev/sdh"),
 			},
 		},
 		ImageId:      aws.String("ami-abc12345"),
-		InstanceType: ec2.InstanceTypeT2Micro,
+		InstanceType: enums.InstanceTypeT2Micro,
 		KeyName:      aws.String("my-key-pair"),
 		MaxCount:     aws.Int64(1),
 		MinCount:     aws.Int64(1),
@@ -6319,10 +6321,10 @@ func ExampleClient_RunInstancesRequest_shared00() {
 			"sg-1a2b3c4d",
 		},
 		SubnetId: aws.String("subnet-6e7f829e"),
-		TagSpecifications: []ec2.TagSpecification{
+		TagSpecifications: []types.TagSpecification{
 			{
-				ResourceType: ec2.ResourceTypeInstance,
-				Tags: []ec2.Tag{
+				ResourceType: enums.ResourceTypeInstance,
+				Tags: []types.Tag{
 					{
 						Key:   aws.String("Purpose"),
 						Value: aws.String("test"),
@@ -6361,16 +6363,16 @@ func ExampleClient_RunScheduledInstancesRequest_shared00() {
 	}
 
 	svc := ec2.New(cfg)
-	input := &ec2.RunScheduledInstancesInput{
+	input := &types.RunScheduledInstancesInput{
 		InstanceCount: aws.Int64(1),
-		LaunchSpecification: &ec2.ScheduledInstancesLaunchSpecification{
-			IamInstanceProfile: &ec2.ScheduledInstancesIamInstanceProfile{
+		LaunchSpecification: &types.ScheduledInstancesLaunchSpecification{
+			IamInstanceProfile: &types.ScheduledInstancesIamInstanceProfile{
 				Name: aws.String("my-iam-role"),
 			},
 			ImageId:      aws.String("ami-12345678"),
 			InstanceType: aws.String("c4.large"),
 			KeyName:      aws.String("my-key-pair"),
-			NetworkInterfaces: []ec2.ScheduledInstancesNetworkInterface{
+			NetworkInterfaces: []types.ScheduledInstancesNetworkInterface{
 				{
 					AssociatePublicIpAddress: aws.Bool(true),
 					DeviceIndex:              aws.Int64(0),
@@ -6413,16 +6415,16 @@ func ExampleClient_RunScheduledInstancesRequest_shared01() {
 	}
 
 	svc := ec2.New(cfg)
-	input := &ec2.RunScheduledInstancesInput{
+	input := &types.RunScheduledInstancesInput{
 		InstanceCount: aws.Int64(1),
-		LaunchSpecification: &ec2.ScheduledInstancesLaunchSpecification{
-			IamInstanceProfile: &ec2.ScheduledInstancesIamInstanceProfile{
+		LaunchSpecification: &types.ScheduledInstancesLaunchSpecification{
+			IamInstanceProfile: &types.ScheduledInstancesIamInstanceProfile{
 				Name: aws.String("my-iam-role"),
 			},
 			ImageId:      aws.String("ami-12345678"),
 			InstanceType: aws.String("c4.large"),
 			KeyName:      aws.String("my-key-pair"),
-			Placement: &ec2.ScheduledInstancesPlacement{
+			Placement: &types.ScheduledInstancesPlacement{
 				AvailabilityZone: aws.String("us-west-2b"),
 			},
 			SecurityGroupIds: []string{
@@ -6461,7 +6463,7 @@ func ExampleClient_StartInstancesRequest_shared00() {
 	}
 
 	svc := ec2.New(cfg)
-	input := &ec2.StartInstancesInput{
+	input := &types.StartInstancesInput{
 		InstanceIds: []string{
 			"i-1234567890abcdef0",
 		},
@@ -6496,7 +6498,7 @@ func ExampleClient_StopInstancesRequest_shared00() {
 	}
 
 	svc := ec2.New(cfg)
-	input := &ec2.StopInstancesInput{
+	input := &types.StopInstancesInput{
 		InstanceIds: []string{
 			"i-1234567890abcdef0",
 		},
@@ -6531,7 +6533,7 @@ func ExampleClient_TerminateInstancesRequest_shared00() {
 	}
 
 	svc := ec2.New(cfg)
-	input := &ec2.TerminateInstancesInput{
+	input := &types.TerminateInstancesInput{
 		InstanceIds: []string{
 			"i-1234567890abcdef0",
 		},
@@ -6567,7 +6569,7 @@ func ExampleClient_UnassignPrivateIpAddressesRequest_shared00() {
 	}
 
 	svc := ec2.New(cfg)
-	input := &ec2.UnassignPrivateIpAddressesInput{
+	input := &types.UnassignPrivateIpAddressesInput{
 		NetworkInterfaceId: aws.String("eni-e5aa89a3"),
 		PrivateIpAddresses: []string{
 			"10.0.0.82",
@@ -6603,13 +6605,13 @@ func ExampleClient_UpdateSecurityGroupRuleDescriptionsEgressRequest_shared00() {
 	}
 
 	svc := ec2.New(cfg)
-	input := &ec2.UpdateSecurityGroupRuleDescriptionsEgressInput{
+	input := &types.UpdateSecurityGroupRuleDescriptionsEgressInput{
 		GroupId: aws.String("sg-123abc12"),
-		IpPermissions: []ec2.IpPermission{
+		IpPermissions: []types.IpPermission{
 			{
 				FromPort:   aws.Int64(80),
 				IpProtocol: aws.String("tcp"),
-				IpRanges: []ec2.IpRange{
+				IpRanges: []types.IpRange{
 					{
 						CidrIp:      aws.String("203.0.113.0/24"),
 						Description: aws.String("Outbound HTTP access to server 2"),
@@ -6649,13 +6651,13 @@ func ExampleClient_UpdateSecurityGroupRuleDescriptionsIngressRequest_shared00() 
 	}
 
 	svc := ec2.New(cfg)
-	input := &ec2.UpdateSecurityGroupRuleDescriptionsIngressInput{
+	input := &types.UpdateSecurityGroupRuleDescriptionsIngressInput{
 		GroupId: aws.String("sg-123abc12"),
-		IpPermissions: []ec2.IpPermission{
+		IpPermissions: []types.IpPermission{
 			{
 				FromPort:   aws.Int64(22),
 				IpProtocol: aws.String("tcp"),
-				IpRanges: []ec2.IpRange{
+				IpRanges: []types.IpRange{
 					{
 						CidrIp:      aws.String("203.0.113.0/16"),
 						Description: aws.String("SSH access from the LA office"),

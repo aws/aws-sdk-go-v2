@@ -6,63 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-type ModifyVpcEndpointServicePermissionsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Names (ARN) of one or more principals. Permissions are
-	// granted to the principals in this list. To grant permissions to all principals,
-	// specify an asterisk (*).
-	AddAllowedPrincipals []string `locationNameList:"item" type:"list"`
-
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have
-	// the required permissions, the error response is DryRunOperation. Otherwise,
-	// it is UnauthorizedOperation.
-	DryRun *bool `type:"boolean"`
-
-	// The Amazon Resource Names (ARN) of one or more principals. Permissions are
-	// revoked for principals in this list.
-	RemoveAllowedPrincipals []string `locationNameList:"item" type:"list"`
-
-	// The ID of the service.
-	//
-	// ServiceId is a required field
-	ServiceId *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s ModifyVpcEndpointServicePermissionsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ModifyVpcEndpointServicePermissionsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ModifyVpcEndpointServicePermissionsInput"}
-
-	if s.ServiceId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ServiceId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ModifyVpcEndpointServicePermissionsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Returns true if the request succeeds; otherwise, it returns an error.
-	ReturnValue *bool `locationName:"return" type:"boolean"`
-}
-
-// String returns the string representation
-func (s ModifyVpcEndpointServicePermissionsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opModifyVpcEndpointServicePermissions = "ModifyVpcEndpointServicePermissions"
 
@@ -86,7 +31,7 @@ const opModifyVpcEndpointServicePermissions = "ModifyVpcEndpointServicePermissio
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyVpcEndpointServicePermissions
-func (c *Client) ModifyVpcEndpointServicePermissionsRequest(input *ModifyVpcEndpointServicePermissionsInput) ModifyVpcEndpointServicePermissionsRequest {
+func (c *Client) ModifyVpcEndpointServicePermissionsRequest(input *types.ModifyVpcEndpointServicePermissionsInput) ModifyVpcEndpointServicePermissionsRequest {
 	op := &aws.Operation{
 		Name:       opModifyVpcEndpointServicePermissions,
 		HTTPMethod: "POST",
@@ -94,10 +39,10 @@ func (c *Client) ModifyVpcEndpointServicePermissionsRequest(input *ModifyVpcEndp
 	}
 
 	if input == nil {
-		input = &ModifyVpcEndpointServicePermissionsInput{}
+		input = &types.ModifyVpcEndpointServicePermissionsInput{}
 	}
 
-	req := c.newRequest(op, input, &ModifyVpcEndpointServicePermissionsOutput{})
+	req := c.newRequest(op, input, &types.ModifyVpcEndpointServicePermissionsOutput{})
 	return ModifyVpcEndpointServicePermissionsRequest{Request: req, Input: input, Copy: c.ModifyVpcEndpointServicePermissionsRequest}
 }
 
@@ -105,8 +50,8 @@ func (c *Client) ModifyVpcEndpointServicePermissionsRequest(input *ModifyVpcEndp
 // ModifyVpcEndpointServicePermissions API operation.
 type ModifyVpcEndpointServicePermissionsRequest struct {
 	*aws.Request
-	Input *ModifyVpcEndpointServicePermissionsInput
-	Copy  func(*ModifyVpcEndpointServicePermissionsInput) ModifyVpcEndpointServicePermissionsRequest
+	Input *types.ModifyVpcEndpointServicePermissionsInput
+	Copy  func(*types.ModifyVpcEndpointServicePermissionsInput) ModifyVpcEndpointServicePermissionsRequest
 }
 
 // Send marshals and sends the ModifyVpcEndpointServicePermissions API request.
@@ -118,7 +63,7 @@ func (r ModifyVpcEndpointServicePermissionsRequest) Send(ctx context.Context) (*
 	}
 
 	resp := &ModifyVpcEndpointServicePermissionsResponse{
-		ModifyVpcEndpointServicePermissionsOutput: r.Request.Data.(*ModifyVpcEndpointServicePermissionsOutput),
+		ModifyVpcEndpointServicePermissionsOutput: r.Request.Data.(*types.ModifyVpcEndpointServicePermissionsOutput),
 		response: &aws.Response{Request: r.Request},
 	}
 
@@ -128,7 +73,7 @@ func (r ModifyVpcEndpointServicePermissionsRequest) Send(ctx context.Context) (*
 // ModifyVpcEndpointServicePermissionsResponse is the response type for the
 // ModifyVpcEndpointServicePermissions API operation.
 type ModifyVpcEndpointServicePermissionsResponse struct {
-	*ModifyVpcEndpointServicePermissionsOutput
+	*types.ModifyVpcEndpointServicePermissionsOutput
 
 	response *aws.Response
 }

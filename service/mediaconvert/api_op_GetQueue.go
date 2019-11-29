@@ -6,79 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/mediaconvert/types"
 )
-
-// Get information about a queue by sending a request with the queue name.
-type GetQueueInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the queue that you want information about.
-	//
-	// Name is a required field
-	Name *string `location:"uri" locationName:"name" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetQueueInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetQueueInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetQueueInput"}
-
-	if s.Name == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Name"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetQueueInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.Name != nil {
-		v := *s.Name
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-// Successful get queue requests return an OK message and information about
-// the queue in JSON.
-type GetQueueOutput struct {
-	_ struct{} `type:"structure"`
-
-	// You can use queues to manage the resources that are available to your AWS
-	// account for running multiple transcoding jobs at the same time. If you don't
-	// specify a queue, the service sends all jobs through the default queue. For
-	// more information, see https://docs.aws.amazon.com/mediaconvert/latest/ug/working-with-queues.html.
-	Queue *Queue `locationName:"queue" type:"structure"`
-}
-
-// String returns the string representation
-func (s GetQueueOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetQueueOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.Queue != nil {
-		v := s.Queue
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "queue", v, metadata)
-	}
-	return nil
-}
 
 const opGetQueue = "GetQueue"
 
@@ -95,7 +24,7 @@ const opGetQueue = "GetQueue"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/GetQueue
-func (c *Client) GetQueueRequest(input *GetQueueInput) GetQueueRequest {
+func (c *Client) GetQueueRequest(input *types.GetQueueInput) GetQueueRequest {
 	op := &aws.Operation{
 		Name:       opGetQueue,
 		HTTPMethod: "GET",
@@ -103,10 +32,10 @@ func (c *Client) GetQueueRequest(input *GetQueueInput) GetQueueRequest {
 	}
 
 	if input == nil {
-		input = &GetQueueInput{}
+		input = &types.GetQueueInput{}
 	}
 
-	req := c.newRequest(op, input, &GetQueueOutput{})
+	req := c.newRequest(op, input, &types.GetQueueOutput{})
 	return GetQueueRequest{Request: req, Input: input, Copy: c.GetQueueRequest}
 }
 
@@ -114,8 +43,8 @@ func (c *Client) GetQueueRequest(input *GetQueueInput) GetQueueRequest {
 // GetQueue API operation.
 type GetQueueRequest struct {
 	*aws.Request
-	Input *GetQueueInput
-	Copy  func(*GetQueueInput) GetQueueRequest
+	Input *types.GetQueueInput
+	Copy  func(*types.GetQueueInput) GetQueueRequest
 }
 
 // Send marshals and sends the GetQueue API request.
@@ -127,7 +56,7 @@ func (r GetQueueRequest) Send(ctx context.Context) (*GetQueueResponse, error) {
 	}
 
 	resp := &GetQueueResponse{
-		GetQueueOutput: r.Request.Data.(*GetQueueOutput),
+		GetQueueOutput: r.Request.Data.(*types.GetQueueOutput),
 		response:       &aws.Response{Request: r.Request},
 	}
 
@@ -137,7 +66,7 @@ func (r GetQueueRequest) Send(ctx context.Context) (*GetQueueResponse, error) {
 // GetQueueResponse is the response type for the
 // GetQueue API operation.
 type GetQueueResponse struct {
-	*GetQueueOutput
+	*types.GetQueueOutput
 
 	response *aws.Response
 }

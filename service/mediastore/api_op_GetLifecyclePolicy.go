@@ -6,53 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/mediastore/types"
 )
-
-type GetLifecyclePolicyInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the container that the object lifecycle policy is assigned to.
-	//
-	// ContainerName is a required field
-	ContainerName *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetLifecyclePolicyInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetLifecyclePolicyInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetLifecyclePolicyInput"}
-
-	if s.ContainerName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ContainerName"))
-	}
-	if s.ContainerName != nil && len(*s.ContainerName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ContainerName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type GetLifecyclePolicyOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The object lifecycle policy that is assigned to the container.
-	//
-	// LifecyclePolicy is a required field
-	LifecyclePolicy *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetLifecyclePolicyOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetLifecyclePolicy = "GetLifecyclePolicy"
 
@@ -69,7 +24,7 @@ const opGetLifecyclePolicy = "GetLifecyclePolicy"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mediastore-2017-09-01/GetLifecyclePolicy
-func (c *Client) GetLifecyclePolicyRequest(input *GetLifecyclePolicyInput) GetLifecyclePolicyRequest {
+func (c *Client) GetLifecyclePolicyRequest(input *types.GetLifecyclePolicyInput) GetLifecyclePolicyRequest {
 	op := &aws.Operation{
 		Name:       opGetLifecyclePolicy,
 		HTTPMethod: "POST",
@@ -77,10 +32,10 @@ func (c *Client) GetLifecyclePolicyRequest(input *GetLifecyclePolicyInput) GetLi
 	}
 
 	if input == nil {
-		input = &GetLifecyclePolicyInput{}
+		input = &types.GetLifecyclePolicyInput{}
 	}
 
-	req := c.newRequest(op, input, &GetLifecyclePolicyOutput{})
+	req := c.newRequest(op, input, &types.GetLifecyclePolicyOutput{})
 	return GetLifecyclePolicyRequest{Request: req, Input: input, Copy: c.GetLifecyclePolicyRequest}
 }
 
@@ -88,8 +43,8 @@ func (c *Client) GetLifecyclePolicyRequest(input *GetLifecyclePolicyInput) GetLi
 // GetLifecyclePolicy API operation.
 type GetLifecyclePolicyRequest struct {
 	*aws.Request
-	Input *GetLifecyclePolicyInput
-	Copy  func(*GetLifecyclePolicyInput) GetLifecyclePolicyRequest
+	Input *types.GetLifecyclePolicyInput
+	Copy  func(*types.GetLifecyclePolicyInput) GetLifecyclePolicyRequest
 }
 
 // Send marshals and sends the GetLifecyclePolicy API request.
@@ -101,7 +56,7 @@ func (r GetLifecyclePolicyRequest) Send(ctx context.Context) (*GetLifecyclePolic
 	}
 
 	resp := &GetLifecyclePolicyResponse{
-		GetLifecyclePolicyOutput: r.Request.Data.(*GetLifecyclePolicyOutput),
+		GetLifecyclePolicyOutput: r.Request.Data.(*types.GetLifecyclePolicyOutput),
 		response:                 &aws.Response{Request: r.Request},
 	}
 
@@ -111,7 +66,7 @@ func (r GetLifecyclePolicyRequest) Send(ctx context.Context) (*GetLifecyclePolic
 // GetLifecyclePolicyResponse is the response type for the
 // GetLifecyclePolicy API operation.
 type GetLifecyclePolicyResponse struct {
-	*GetLifecyclePolicyOutput
+	*types.GetLifecyclePolicyOutput
 
 	response *aws.Response
 }

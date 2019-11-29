@@ -6,69 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-type AssociateAddressInput struct {
-	_ struct{} `type:"structure"`
-
-	// [EC2-VPC] The allocation ID. This is required for EC2-VPC.
-	AllocationId *string `type:"string"`
-
-	// [EC2-VPC] For a VPC in an EC2-Classic account, specify true to allow an Elastic
-	// IP address that is already associated with an instance or network interface
-	// to be reassociated with the specified instance or network interface. Otherwise,
-	// the operation fails. In a VPC in an EC2-VPC-only account, reassociation is
-	// automatic, therefore you can specify false to ensure the operation fails
-	// if the Elastic IP address is already associated with another resource.
-	AllowReassociation *bool `locationName:"allowReassociation" type:"boolean"`
-
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have
-	// the required permissions, the error response is DryRunOperation. Otherwise,
-	// it is UnauthorizedOperation.
-	DryRun *bool `locationName:"dryRun" type:"boolean"`
-
-	// The ID of the instance. This is required for EC2-Classic. For EC2-VPC, you
-	// can specify either the instance ID or the network interface ID, but not both.
-	// The operation fails if you specify an instance ID unless exactly one network
-	// interface is attached.
-	InstanceId *string `type:"string"`
-
-	// [EC2-VPC] The ID of the network interface. If the instance has more than
-	// one network interface, you must specify a network interface ID.
-	//
-	// For EC2-VPC, you can specify either the instance ID or the network interface
-	// ID, but not both.
-	NetworkInterfaceId *string `locationName:"networkInterfaceId" type:"string"`
-
-	// [EC2-VPC] The primary or secondary private IP address to associate with the
-	// Elastic IP address. If no private IP address is specified, the Elastic IP
-	// address is associated with the primary private IP address.
-	PrivateIpAddress *string `locationName:"privateIpAddress" type:"string"`
-
-	// The Elastic IP address to associate with the instance. This is required for
-	// EC2-Classic.
-	PublicIp *string `type:"string"`
-}
-
-// String returns the string representation
-func (s AssociateAddressInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type AssociateAddressOutput struct {
-	_ struct{} `type:"structure"`
-
-	// [EC2-VPC] The ID that represents the association of the Elastic IP address
-	// with an instance.
-	AssociationId *string `locationName:"associationId" type:"string"`
-}
-
-// String returns the string representation
-func (s AssociateAddressOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opAssociateAddress = "AssociateAddress"
 
@@ -109,7 +48,7 @@ const opAssociateAddress = "AssociateAddress"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AssociateAddress
-func (c *Client) AssociateAddressRequest(input *AssociateAddressInput) AssociateAddressRequest {
+func (c *Client) AssociateAddressRequest(input *types.AssociateAddressInput) AssociateAddressRequest {
 	op := &aws.Operation{
 		Name:       opAssociateAddress,
 		HTTPMethod: "POST",
@@ -117,10 +56,10 @@ func (c *Client) AssociateAddressRequest(input *AssociateAddressInput) Associate
 	}
 
 	if input == nil {
-		input = &AssociateAddressInput{}
+		input = &types.AssociateAddressInput{}
 	}
 
-	req := c.newRequest(op, input, &AssociateAddressOutput{})
+	req := c.newRequest(op, input, &types.AssociateAddressOutput{})
 	return AssociateAddressRequest{Request: req, Input: input, Copy: c.AssociateAddressRequest}
 }
 
@@ -128,8 +67,8 @@ func (c *Client) AssociateAddressRequest(input *AssociateAddressInput) Associate
 // AssociateAddress API operation.
 type AssociateAddressRequest struct {
 	*aws.Request
-	Input *AssociateAddressInput
-	Copy  func(*AssociateAddressInput) AssociateAddressRequest
+	Input *types.AssociateAddressInput
+	Copy  func(*types.AssociateAddressInput) AssociateAddressRequest
 }
 
 // Send marshals and sends the AssociateAddress API request.
@@ -141,7 +80,7 @@ func (r AssociateAddressRequest) Send(ctx context.Context) (*AssociateAddressRes
 	}
 
 	resp := &AssociateAddressResponse{
-		AssociateAddressOutput: r.Request.Data.(*AssociateAddressOutput),
+		AssociateAddressOutput: r.Request.Data.(*types.AssociateAddressOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -151,7 +90,7 @@ func (r AssociateAddressRequest) Send(ctx context.Context) (*AssociateAddressRes
 // AssociateAddressResponse is the response type for the
 // AssociateAddress API operation.
 type AssociateAddressResponse struct {
-	*AssociateAddressOutput
+	*types.AssociateAddressOutput
 
 	response *aws.Response
 }

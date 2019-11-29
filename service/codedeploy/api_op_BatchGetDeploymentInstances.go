@@ -6,63 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/codedeploy/types"
 )
-
-// Represents the input of a BatchGetDeploymentInstances operation.
-type BatchGetDeploymentInstancesInput struct {
-	_ struct{} `type:"structure"`
-
-	// The unique ID of a deployment.
-	//
-	// DeploymentId is a required field
-	DeploymentId *string `locationName:"deploymentId" type:"string" required:"true"`
-
-	// The unique IDs of instances used in the deployment. The maximum number of
-	// instance IDs you can specify is 25.
-	//
-	// InstanceIds is a required field
-	InstanceIds []string `locationName:"instanceIds" type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s BatchGetDeploymentInstancesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *BatchGetDeploymentInstancesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "BatchGetDeploymentInstancesInput"}
-
-	if s.DeploymentId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DeploymentId"))
-	}
-
-	if s.InstanceIds == nil {
-		invalidParams.Add(aws.NewErrParamRequired("InstanceIds"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Represents the output of a BatchGetDeploymentInstances operation.
-type BatchGetDeploymentInstancesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Information about errors that might have occurred during the API call.
-	ErrorMessage *string `locationName:"errorMessage" type:"string"`
-
-	// Information about the instance.
-	InstancesSummary []InstanceSummary `locationName:"instancesSummary" type:"list"`
-}
-
-// String returns the string representation
-func (s BatchGetDeploymentInstancesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opBatchGetDeploymentInstances = "BatchGetDeploymentInstances"
 
@@ -85,7 +30,7 @@ const opBatchGetDeploymentInstances = "BatchGetDeploymentInstances"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/BatchGetDeploymentInstances
-func (c *Client) BatchGetDeploymentInstancesRequest(input *BatchGetDeploymentInstancesInput) BatchGetDeploymentInstancesRequest {
+func (c *Client) BatchGetDeploymentInstancesRequest(input *types.BatchGetDeploymentInstancesInput) BatchGetDeploymentInstancesRequest {
 	if c.Client.Config.Logger != nil {
 		c.Client.Config.Logger.Log("This operation, BatchGetDeploymentInstances, has been deprecated")
 	}
@@ -96,10 +41,10 @@ func (c *Client) BatchGetDeploymentInstancesRequest(input *BatchGetDeploymentIns
 	}
 
 	if input == nil {
-		input = &BatchGetDeploymentInstancesInput{}
+		input = &types.BatchGetDeploymentInstancesInput{}
 	}
 
-	req := c.newRequest(op, input, &BatchGetDeploymentInstancesOutput{})
+	req := c.newRequest(op, input, &types.BatchGetDeploymentInstancesOutput{})
 	return BatchGetDeploymentInstancesRequest{Request: req, Input: input, Copy: c.BatchGetDeploymentInstancesRequest}
 }
 
@@ -107,8 +52,8 @@ func (c *Client) BatchGetDeploymentInstancesRequest(input *BatchGetDeploymentIns
 // BatchGetDeploymentInstances API operation.
 type BatchGetDeploymentInstancesRequest struct {
 	*aws.Request
-	Input *BatchGetDeploymentInstancesInput
-	Copy  func(*BatchGetDeploymentInstancesInput) BatchGetDeploymentInstancesRequest
+	Input *types.BatchGetDeploymentInstancesInput
+	Copy  func(*types.BatchGetDeploymentInstancesInput) BatchGetDeploymentInstancesRequest
 }
 
 // Send marshals and sends the BatchGetDeploymentInstances API request.
@@ -120,7 +65,7 @@ func (r BatchGetDeploymentInstancesRequest) Send(ctx context.Context) (*BatchGet
 	}
 
 	resp := &BatchGetDeploymentInstancesResponse{
-		BatchGetDeploymentInstancesOutput: r.Request.Data.(*BatchGetDeploymentInstancesOutput),
+		BatchGetDeploymentInstancesOutput: r.Request.Data.(*types.BatchGetDeploymentInstancesOutput),
 		response:                          &aws.Response{Request: r.Request},
 	}
 
@@ -130,7 +75,7 @@ func (r BatchGetDeploymentInstancesRequest) Send(ctx context.Context) (*BatchGet
 // BatchGetDeploymentInstancesResponse is the response type for the
 // BatchGetDeploymentInstances API operation.
 type BatchGetDeploymentInstancesResponse struct {
-	*BatchGetDeploymentInstancesOutput
+	*types.BatchGetDeploymentInstancesOutput
 
 	response *aws.Response
 }

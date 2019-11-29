@@ -6,55 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/opsworkscm/types"
 )
-
-type StartMaintenanceInput struct {
-	_ struct{} `type:"structure"`
-
-	// Engine attributes that are specific to the server on which you want to run
-	// maintenance.
-	EngineAttributes []EngineAttribute `type:"list"`
-
-	// The name of the server on which to run maintenance.
-	//
-	// ServerName is a required field
-	ServerName *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s StartMaintenanceInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *StartMaintenanceInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "StartMaintenanceInput"}
-
-	if s.ServerName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ServerName"))
-	}
-	if s.ServerName != nil && len(*s.ServerName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ServerName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type StartMaintenanceOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Contains the response to a StartMaintenance request.
-	Server *Server `type:"structure"`
-}
-
-// String returns the string representation
-func (s StartMaintenanceOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opStartMaintenance = "StartMaintenance"
 
@@ -79,7 +32,7 @@ const opStartMaintenance = "StartMaintenance"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/StartMaintenance
-func (c *Client) StartMaintenanceRequest(input *StartMaintenanceInput) StartMaintenanceRequest {
+func (c *Client) StartMaintenanceRequest(input *types.StartMaintenanceInput) StartMaintenanceRequest {
 	op := &aws.Operation{
 		Name:       opStartMaintenance,
 		HTTPMethod: "POST",
@@ -87,10 +40,10 @@ func (c *Client) StartMaintenanceRequest(input *StartMaintenanceInput) StartMain
 	}
 
 	if input == nil {
-		input = &StartMaintenanceInput{}
+		input = &types.StartMaintenanceInput{}
 	}
 
-	req := c.newRequest(op, input, &StartMaintenanceOutput{})
+	req := c.newRequest(op, input, &types.StartMaintenanceOutput{})
 	return StartMaintenanceRequest{Request: req, Input: input, Copy: c.StartMaintenanceRequest}
 }
 
@@ -98,8 +51,8 @@ func (c *Client) StartMaintenanceRequest(input *StartMaintenanceInput) StartMain
 // StartMaintenance API operation.
 type StartMaintenanceRequest struct {
 	*aws.Request
-	Input *StartMaintenanceInput
-	Copy  func(*StartMaintenanceInput) StartMaintenanceRequest
+	Input *types.StartMaintenanceInput
+	Copy  func(*types.StartMaintenanceInput) StartMaintenanceRequest
 }
 
 // Send marshals and sends the StartMaintenance API request.
@@ -111,7 +64,7 @@ func (r StartMaintenanceRequest) Send(ctx context.Context) (*StartMaintenanceRes
 	}
 
 	resp := &StartMaintenanceResponse{
-		StartMaintenanceOutput: r.Request.Data.(*StartMaintenanceOutput),
+		StartMaintenanceOutput: r.Request.Data.(*types.StartMaintenanceOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -121,7 +74,7 @@ func (r StartMaintenanceRequest) Send(ctx context.Context) (*StartMaintenanceRes
 // StartMaintenanceResponse is the response type for the
 // StartMaintenance API operation.
 type StartMaintenanceResponse struct {
-	*StartMaintenanceOutput
+	*types.StartMaintenanceOutput
 
 	response *aws.Response
 }

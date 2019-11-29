@@ -4,107 +4,12 @@ package mobileanalytics
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/restjson"
+	"github.com/aws/aws-sdk-go-v2/service/mobileanalytics/types"
 )
-
-// A container for the data needed for a PutEvent operation
-type PutEventsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The client context including the client ID, app title, app version and package
-	// name.
-	//
-	// ClientContext is a required field
-	ClientContext *string `location:"header" locationName:"x-amz-Client-Context" type:"string" required:"true"`
-
-	// The encoding used for the client context.
-	ClientContextEncoding *string `location:"header" locationName:"x-amz-Client-Context-Encoding" type:"string"`
-
-	// An array of Event JSON objects
-	//
-	// Events is a required field
-	Events []Event `locationName:"events" type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s PutEventsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *PutEventsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "PutEventsInput"}
-
-	if s.ClientContext == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ClientContext"))
-	}
-
-	if s.Events == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Events"))
-	}
-	if s.Events != nil {
-		for i, v := range s.Events {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Events", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s PutEventsInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.Events != nil {
-		v := s.Events
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "events", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	if s.ClientContext != nil {
-		v := *s.ClientContext
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "x-amz-Client-Context", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.ClientContextEncoding != nil {
-		v := *s.ClientContextEncoding
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "x-amz-Client-Context-Encoding", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type PutEventsOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s PutEventsOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s PutEventsOutput) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
 
 const opPutEvents = "PutEvents"
 
@@ -121,7 +26,7 @@ const opPutEvents = "PutEvents"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) PutEventsRequest(input *PutEventsInput) PutEventsRequest {
+func (c *Client) PutEventsRequest(input *types.PutEventsInput) PutEventsRequest {
 	op := &aws.Operation{
 		Name:       opPutEvents,
 		HTTPMethod: "POST",
@@ -129,10 +34,10 @@ func (c *Client) PutEventsRequest(input *PutEventsInput) PutEventsRequest {
 	}
 
 	if input == nil {
-		input = &PutEventsInput{}
+		input = &types.PutEventsInput{}
 	}
 
-	req := c.newRequest(op, input, &PutEventsOutput{})
+	req := c.newRequest(op, input, &types.PutEventsOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return PutEventsRequest{Request: req, Input: input, Copy: c.PutEventsRequest}
@@ -142,8 +47,8 @@ func (c *Client) PutEventsRequest(input *PutEventsInput) PutEventsRequest {
 // PutEvents API operation.
 type PutEventsRequest struct {
 	*aws.Request
-	Input *PutEventsInput
-	Copy  func(*PutEventsInput) PutEventsRequest
+	Input *types.PutEventsInput
+	Copy  func(*types.PutEventsInput) PutEventsRequest
 }
 
 // Send marshals and sends the PutEvents API request.
@@ -155,7 +60,7 @@ func (r PutEventsRequest) Send(ctx context.Context) (*PutEventsResponse, error) 
 	}
 
 	resp := &PutEventsResponse{
-		PutEventsOutput: r.Request.Data.(*PutEventsOutput),
+		PutEventsOutput: r.Request.Data.(*types.PutEventsOutput),
 		response:        &aws.Response{Request: r.Request},
 	}
 
@@ -165,7 +70,7 @@ func (r PutEventsRequest) Send(ctx context.Context) (*PutEventsResponse, error) 
 // PutEventsResponse is the response type for the
 // PutEvents API operation.
 type PutEventsResponse struct {
-	*PutEventsOutput
+	*types.PutEventsOutput
 
 	response *aws.Response
 }

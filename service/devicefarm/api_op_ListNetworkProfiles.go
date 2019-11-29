@@ -6,67 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/devicefarm/types"
 )
-
-type ListNetworkProfilesInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the project for which you want to list
-	// network profiles.
-	//
-	// Arn is a required field
-	Arn *string `locationName:"arn" min:"32" type:"string" required:"true"`
-
-	// An identifier that was returned from the previous call to this operation,
-	// which can be used to return the next set of items in the list.
-	NextToken *string `locationName:"nextToken" min:"4" type:"string"`
-
-	// The type of network profile you wish to return information about. Valid values
-	// are listed below.
-	Type NetworkProfileType `locationName:"type" type:"string" enum:"true"`
-}
-
-// String returns the string representation
-func (s ListNetworkProfilesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListNetworkProfilesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListNetworkProfilesInput"}
-
-	if s.Arn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Arn"))
-	}
-	if s.Arn != nil && len(*s.Arn) < 32 {
-		invalidParams.Add(aws.NewErrParamMinLen("Arn", 32))
-	}
-	if s.NextToken != nil && len(*s.NextToken) < 4 {
-		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 4))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ListNetworkProfilesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A list of the available network profiles.
-	NetworkProfiles []NetworkProfile `locationName:"networkProfiles" type:"list"`
-
-	// An identifier that was returned from the previous call to this operation,
-	// which can be used to return the next set of items in the list.
-	NextToken *string `locationName:"nextToken" min:"4" type:"string"`
-}
-
-// String returns the string representation
-func (s ListNetworkProfilesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListNetworkProfiles = "ListNetworkProfiles"
 
@@ -83,7 +24,7 @@ const opListNetworkProfiles = "ListNetworkProfiles"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ListNetworkProfiles
-func (c *Client) ListNetworkProfilesRequest(input *ListNetworkProfilesInput) ListNetworkProfilesRequest {
+func (c *Client) ListNetworkProfilesRequest(input *types.ListNetworkProfilesInput) ListNetworkProfilesRequest {
 	op := &aws.Operation{
 		Name:       opListNetworkProfiles,
 		HTTPMethod: "POST",
@@ -91,10 +32,10 @@ func (c *Client) ListNetworkProfilesRequest(input *ListNetworkProfilesInput) Lis
 	}
 
 	if input == nil {
-		input = &ListNetworkProfilesInput{}
+		input = &types.ListNetworkProfilesInput{}
 	}
 
-	req := c.newRequest(op, input, &ListNetworkProfilesOutput{})
+	req := c.newRequest(op, input, &types.ListNetworkProfilesOutput{})
 	return ListNetworkProfilesRequest{Request: req, Input: input, Copy: c.ListNetworkProfilesRequest}
 }
 
@@ -102,8 +43,8 @@ func (c *Client) ListNetworkProfilesRequest(input *ListNetworkProfilesInput) Lis
 // ListNetworkProfiles API operation.
 type ListNetworkProfilesRequest struct {
 	*aws.Request
-	Input *ListNetworkProfilesInput
-	Copy  func(*ListNetworkProfilesInput) ListNetworkProfilesRequest
+	Input *types.ListNetworkProfilesInput
+	Copy  func(*types.ListNetworkProfilesInput) ListNetworkProfilesRequest
 }
 
 // Send marshals and sends the ListNetworkProfiles API request.
@@ -115,7 +56,7 @@ func (r ListNetworkProfilesRequest) Send(ctx context.Context) (*ListNetworkProfi
 	}
 
 	resp := &ListNetworkProfilesResponse{
-		ListNetworkProfilesOutput: r.Request.Data.(*ListNetworkProfilesOutput),
+		ListNetworkProfilesOutput: r.Request.Data.(*types.ListNetworkProfilesOutput),
 		response:                  &aws.Response{Request: r.Request},
 	}
 
@@ -125,7 +66,7 @@ func (r ListNetworkProfilesRequest) Send(ctx context.Context) (*ListNetworkProfi
 // ListNetworkProfilesResponse is the response type for the
 // ListNetworkProfiles API operation.
 type ListNetworkProfilesResponse struct {
-	*ListNetworkProfilesOutput
+	*types.ListNetworkProfilesOutput
 
 	response *aws.Response
 }

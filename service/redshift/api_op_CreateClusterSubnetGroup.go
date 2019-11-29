@@ -6,81 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/redshift/types"
 )
-
-type CreateClusterSubnetGroupInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name for the subnet group. Amazon Redshift stores the value as a lowercase
-	// string.
-	//
-	// Constraints:
-	//
-	//    * Must contain no more than 255 alphanumeric characters or hyphens.
-	//
-	//    * Must not be "Default".
-	//
-	//    * Must be unique for all subnet groups that are created by your AWS account.
-	//
-	// Example: examplesubnetgroup
-	//
-	// ClusterSubnetGroupName is a required field
-	ClusterSubnetGroupName *string `type:"string" required:"true"`
-
-	// A description for the subnet group.
-	//
-	// Description is a required field
-	Description *string `type:"string" required:"true"`
-
-	// An array of VPC subnet IDs. A maximum of 20 subnets can be modified in a
-	// single request.
-	//
-	// SubnetIds is a required field
-	SubnetIds []string `locationNameList:"SubnetIdentifier" type:"list" required:"true"`
-
-	// A list of tag instances.
-	Tags []Tag `locationNameList:"Tag" type:"list"`
-}
-
-// String returns the string representation
-func (s CreateClusterSubnetGroupInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateClusterSubnetGroupInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateClusterSubnetGroupInput"}
-
-	if s.ClusterSubnetGroupName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ClusterSubnetGroupName"))
-	}
-
-	if s.Description == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Description"))
-	}
-
-	if s.SubnetIds == nil {
-		invalidParams.Add(aws.NewErrParamRequired("SubnetIds"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type CreateClusterSubnetGroupOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Describes a subnet group.
-	ClusterSubnetGroup *ClusterSubnetGroup `type:"structure"`
-}
-
-// String returns the string representation
-func (s CreateClusterSubnetGroupOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCreateClusterSubnetGroup = "CreateClusterSubnetGroup"
 
@@ -103,7 +30,7 @@ const opCreateClusterSubnetGroup = "CreateClusterSubnetGroup"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/CreateClusterSubnetGroup
-func (c *Client) CreateClusterSubnetGroupRequest(input *CreateClusterSubnetGroupInput) CreateClusterSubnetGroupRequest {
+func (c *Client) CreateClusterSubnetGroupRequest(input *types.CreateClusterSubnetGroupInput) CreateClusterSubnetGroupRequest {
 	op := &aws.Operation{
 		Name:       opCreateClusterSubnetGroup,
 		HTTPMethod: "POST",
@@ -111,10 +38,10 @@ func (c *Client) CreateClusterSubnetGroupRequest(input *CreateClusterSubnetGroup
 	}
 
 	if input == nil {
-		input = &CreateClusterSubnetGroupInput{}
+		input = &types.CreateClusterSubnetGroupInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateClusterSubnetGroupOutput{})
+	req := c.newRequest(op, input, &types.CreateClusterSubnetGroupOutput{})
 	return CreateClusterSubnetGroupRequest{Request: req, Input: input, Copy: c.CreateClusterSubnetGroupRequest}
 }
 
@@ -122,8 +49,8 @@ func (c *Client) CreateClusterSubnetGroupRequest(input *CreateClusterSubnetGroup
 // CreateClusterSubnetGroup API operation.
 type CreateClusterSubnetGroupRequest struct {
 	*aws.Request
-	Input *CreateClusterSubnetGroupInput
-	Copy  func(*CreateClusterSubnetGroupInput) CreateClusterSubnetGroupRequest
+	Input *types.CreateClusterSubnetGroupInput
+	Copy  func(*types.CreateClusterSubnetGroupInput) CreateClusterSubnetGroupRequest
 }
 
 // Send marshals and sends the CreateClusterSubnetGroup API request.
@@ -135,7 +62,7 @@ func (r CreateClusterSubnetGroupRequest) Send(ctx context.Context) (*CreateClust
 	}
 
 	resp := &CreateClusterSubnetGroupResponse{
-		CreateClusterSubnetGroupOutput: r.Request.Data.(*CreateClusterSubnetGroupOutput),
+		CreateClusterSubnetGroupOutput: r.Request.Data.(*types.CreateClusterSubnetGroupOutput),
 		response:                       &aws.Response{Request: r.Request},
 	}
 
@@ -145,7 +72,7 @@ func (r CreateClusterSubnetGroupRequest) Send(ctx context.Context) (*CreateClust
 // CreateClusterSubnetGroupResponse is the response type for the
 // CreateClusterSubnetGroup API operation.
 type CreateClusterSubnetGroupResponse struct {
-	*CreateClusterSubnetGroupOutput
+	*types.CreateClusterSubnetGroupOutput
 
 	response *aws.Response
 }

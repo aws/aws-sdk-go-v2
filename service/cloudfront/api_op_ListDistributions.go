@@ -6,71 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/cloudfront/types"
 )
-
-// The request to list your distributions.
-type ListDistributionsInput struct {
-	_ struct{} `type:"structure"`
-
-	// Use this when paginating results to indicate where to begin in your list
-	// of distributions. The results include distributions in the list that occur
-	// after the marker. To get the next page of results, set the Marker to the
-	// value of the NextMarker from the current page's response (which is also the
-	// ID of the last distribution on that page).
-	Marker *string `location:"querystring" locationName:"Marker" type:"string"`
-
-	// The maximum number of distributions you want in the response body.
-	MaxItems *int64 `location:"querystring" locationName:"MaxItems" type:"integer"`
-}
-
-// String returns the string representation
-func (s ListDistributionsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListDistributionsInput) MarshalFields(e protocol.FieldEncoder) error {
-
-	if s.Marker != nil {
-		v := *s.Marker
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "Marker", protocol.StringValue(v), metadata)
-	}
-	if s.MaxItems != nil {
-		v := *s.MaxItems
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "MaxItems", protocol.Int64Value(v), metadata)
-	}
-	return nil
-}
-
-// The returned result of the corresponding request.
-type ListDistributionsOutput struct {
-	_ struct{} `type:"structure" payload:"DistributionList"`
-
-	// The DistributionList type.
-	DistributionList *DistributionList `type:"structure"`
-}
-
-// String returns the string representation
-func (s ListDistributionsOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListDistributionsOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.DistributionList != nil {
-		v := s.DistributionList
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.PayloadTarget, "DistributionList", v, metadata)
-	}
-	return nil
-}
 
 const opListDistributions = "ListDistributions2019_03_26"
 
@@ -87,7 +24,7 @@ const opListDistributions = "ListDistributions2019_03_26"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/ListDistributions
-func (c *Client) ListDistributionsRequest(input *ListDistributionsInput) ListDistributionsRequest {
+func (c *Client) ListDistributionsRequest(input *types.ListDistributionsInput) ListDistributionsRequest {
 	op := &aws.Operation{
 		Name:       opListDistributions,
 		HTTPMethod: "GET",
@@ -101,10 +38,10 @@ func (c *Client) ListDistributionsRequest(input *ListDistributionsInput) ListDis
 	}
 
 	if input == nil {
-		input = &ListDistributionsInput{}
+		input = &types.ListDistributionsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListDistributionsOutput{})
+	req := c.newRequest(op, input, &types.ListDistributionsOutput{})
 	return ListDistributionsRequest{Request: req, Input: input, Copy: c.ListDistributionsRequest}
 }
 
@@ -112,8 +49,8 @@ func (c *Client) ListDistributionsRequest(input *ListDistributionsInput) ListDis
 // ListDistributions API operation.
 type ListDistributionsRequest struct {
 	*aws.Request
-	Input *ListDistributionsInput
-	Copy  func(*ListDistributionsInput) ListDistributionsRequest
+	Input *types.ListDistributionsInput
+	Copy  func(*types.ListDistributionsInput) ListDistributionsRequest
 }
 
 // Send marshals and sends the ListDistributions API request.
@@ -125,7 +62,7 @@ func (r ListDistributionsRequest) Send(ctx context.Context) (*ListDistributionsR
 	}
 
 	resp := &ListDistributionsResponse{
-		ListDistributionsOutput: r.Request.Data.(*ListDistributionsOutput),
+		ListDistributionsOutput: r.Request.Data.(*types.ListDistributionsOutput),
 		response:                &aws.Response{Request: r.Request},
 	}
 
@@ -155,7 +92,7 @@ func NewListDistributionsPaginator(req ListDistributionsRequest) ListDistributio
 	return ListDistributionsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListDistributionsInput
+				var inCpy *types.ListDistributionsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -175,14 +112,14 @@ type ListDistributionsPaginator struct {
 	aws.Pager
 }
 
-func (p *ListDistributionsPaginator) CurrentPage() *ListDistributionsOutput {
-	return p.Pager.CurrentPage().(*ListDistributionsOutput)
+func (p *ListDistributionsPaginator) CurrentPage() *types.ListDistributionsOutput {
+	return p.Pager.CurrentPage().(*types.ListDistributionsOutput)
 }
 
 // ListDistributionsResponse is the response type for the
 // ListDistributions API operation.
 type ListDistributionsResponse struct {
-	*ListDistributionsOutput
+	*types.ListDistributionsOutput
 
 	response *aws.Response
 }

@@ -6,142 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/iot/types"
 )
-
-type ListAuditMitigationActionsExecutionsInput struct {
-	_ struct{} `type:"structure"`
-
-	// Specify this filter to limit results to those with a specific status.
-	ActionStatus AuditMitigationActionsExecutionStatus `location:"querystring" locationName:"actionStatus" type:"string" enum:"true"`
-
-	// Specify this filter to limit results to those that were applied to a specific
-	// audit finding.
-	//
-	// FindingId is a required field
-	FindingId *string `location:"querystring" locationName:"findingId" min:"1" type:"string" required:"true"`
-
-	// The maximum number of results to return at one time. The default is 25.
-	MaxResults *int64 `location:"querystring" locationName:"maxResults" min:"1" type:"integer"`
-
-	// The token for the next set of results.
-	NextToken *string `location:"querystring" locationName:"nextToken" type:"string"`
-
-	// Specify this filter to limit results to actions for a specific audit mitigation
-	// actions task.
-	//
-	// TaskId is a required field
-	TaskId *string `location:"querystring" locationName:"taskId" min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s ListAuditMitigationActionsExecutionsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListAuditMitigationActionsExecutionsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListAuditMitigationActionsExecutionsInput"}
-
-	if s.FindingId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("FindingId"))
-	}
-	if s.FindingId != nil && len(*s.FindingId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("FindingId", 1))
-	}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-
-	if s.TaskId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("TaskId"))
-	}
-	if s.TaskId != nil && len(*s.TaskId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("TaskId", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListAuditMitigationActionsExecutionsInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if len(s.ActionStatus) > 0 {
-		v := s.ActionStatus
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "actionStatus", protocol.QuotedValue{ValueMarshaler: v}, metadata)
-	}
-	if s.FindingId != nil {
-		v := *s.FindingId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "findingId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.MaxResults != nil {
-		v := *s.MaxResults
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "maxResults", protocol.Int64Value(v), metadata)
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.TaskId != nil {
-		v := *s.TaskId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "taskId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type ListAuditMitigationActionsExecutionsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A set of task execution results based on the input parameters. Details include
-	// the mitigation action applied, start time, and task status.
-	ActionsExecutions []AuditMitigationActionExecutionMetadata `locationName:"actionsExecutions" type:"list"`
-
-	// The token for the next set of results.
-	NextToken *string `locationName:"nextToken" type:"string"`
-}
-
-// String returns the string representation
-func (s ListAuditMitigationActionsExecutionsOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListAuditMitigationActionsExecutionsOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.ActionsExecutions != nil {
-		v := s.ActionsExecutions
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "actionsExecutions", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opListAuditMitigationActionsExecutions = "ListAuditMitigationActionsExecutions"
 
@@ -156,7 +22,7 @@ const opListAuditMitigationActionsExecutions = "ListAuditMitigationActionsExecut
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) ListAuditMitigationActionsExecutionsRequest(input *ListAuditMitigationActionsExecutionsInput) ListAuditMitigationActionsExecutionsRequest {
+func (c *Client) ListAuditMitigationActionsExecutionsRequest(input *types.ListAuditMitigationActionsExecutionsInput) ListAuditMitigationActionsExecutionsRequest {
 	op := &aws.Operation{
 		Name:       opListAuditMitigationActionsExecutions,
 		HTTPMethod: "GET",
@@ -164,10 +30,10 @@ func (c *Client) ListAuditMitigationActionsExecutionsRequest(input *ListAuditMit
 	}
 
 	if input == nil {
-		input = &ListAuditMitigationActionsExecutionsInput{}
+		input = &types.ListAuditMitigationActionsExecutionsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListAuditMitigationActionsExecutionsOutput{})
+	req := c.newRequest(op, input, &types.ListAuditMitigationActionsExecutionsOutput{})
 	return ListAuditMitigationActionsExecutionsRequest{Request: req, Input: input, Copy: c.ListAuditMitigationActionsExecutionsRequest}
 }
 
@@ -175,8 +41,8 @@ func (c *Client) ListAuditMitigationActionsExecutionsRequest(input *ListAuditMit
 // ListAuditMitigationActionsExecutions API operation.
 type ListAuditMitigationActionsExecutionsRequest struct {
 	*aws.Request
-	Input *ListAuditMitigationActionsExecutionsInput
-	Copy  func(*ListAuditMitigationActionsExecutionsInput) ListAuditMitigationActionsExecutionsRequest
+	Input *types.ListAuditMitigationActionsExecutionsInput
+	Copy  func(*types.ListAuditMitigationActionsExecutionsInput) ListAuditMitigationActionsExecutionsRequest
 }
 
 // Send marshals and sends the ListAuditMitigationActionsExecutions API request.
@@ -188,7 +54,7 @@ func (r ListAuditMitigationActionsExecutionsRequest) Send(ctx context.Context) (
 	}
 
 	resp := &ListAuditMitigationActionsExecutionsResponse{
-		ListAuditMitigationActionsExecutionsOutput: r.Request.Data.(*ListAuditMitigationActionsExecutionsOutput),
+		ListAuditMitigationActionsExecutionsOutput: r.Request.Data.(*types.ListAuditMitigationActionsExecutionsOutput),
 		response: &aws.Response{Request: r.Request},
 	}
 
@@ -198,7 +64,7 @@ func (r ListAuditMitigationActionsExecutionsRequest) Send(ctx context.Context) (
 // ListAuditMitigationActionsExecutionsResponse is the response type for the
 // ListAuditMitigationActionsExecutions API operation.
 type ListAuditMitigationActionsExecutionsResponse struct {
-	*ListAuditMitigationActionsExecutionsOutput
+	*types.ListAuditMitigationActionsExecutionsOutput
 
 	response *aws.Response
 }

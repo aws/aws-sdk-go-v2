@@ -6,128 +6,16 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/connect/types"
 )
-
-type ListRoutingProfilesInput struct {
-	_ struct{} `type:"structure"`
-
-	// The identifier for your Amazon Connect instance. To find the ID of your instance,
-	// open the AWS console and select Amazon Connect. Select the alias of the instance
-	// in the Instance alias column. The instance ID is displayed in the Overview
-	// section of your instance settings. For example, the instance ID is the set
-	// of characters at the end of the instance ARN, after instance/, such as 10a4c4eb-f57e-4d4c-b602-bf39176ced07.
-	//
-	// InstanceId is a required field
-	InstanceId *string `location:"uri" locationName:"InstanceId" min:"1" type:"string" required:"true"`
-
-	// The maximum number of routing profiles to return in the response.
-	MaxResults *int64 `location:"querystring" locationName:"maxResults" min:"1" type:"integer"`
-
-	// The token for the next set of results. Use the value returned in the previous
-	// response in the next request to retrieve the next set of results.
-	NextToken *string `location:"querystring" locationName:"nextToken" type:"string"`
-}
-
-// String returns the string representation
-func (s ListRoutingProfilesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListRoutingProfilesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListRoutingProfilesInput"}
-
-	if s.InstanceId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("InstanceId"))
-	}
-	if s.InstanceId != nil && len(*s.InstanceId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("InstanceId", 1))
-	}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListRoutingProfilesInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.InstanceId != nil {
-		v := *s.InstanceId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "InstanceId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.MaxResults != nil {
-		v := *s.MaxResults
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "maxResults", protocol.Int64Value(v), metadata)
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type ListRoutingProfilesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A string returned in the response. Use the value returned in the response
-	// as the value of the NextToken in a subsequent request to retrieve the next
-	// set of results.
-	NextToken *string `type:"string"`
-
-	// An array of RoutingProfileSummary objects that include the ARN, Id, and Name
-	// of the routing profile.
-	RoutingProfileSummaryList []RoutingProfileSummary `type:"list"`
-}
-
-// String returns the string representation
-func (s ListRoutingProfilesOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListRoutingProfilesOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.RoutingProfileSummaryList != nil {
-		v := s.RoutingProfileSummaryList
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "RoutingProfileSummaryList", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	return nil
-}
 
 const opListRoutingProfiles = "ListRoutingProfiles"
 
 // ListRoutingProfilesRequest returns a request value for making API operation for
 // Amazon Connect Service.
 //
-// Returns an array of RoutingProfileSummary objects that includes information
-// about the routing profiles in your instance.
+// Provides summary information about the routing profiles for the specified
+// Amazon Connect instance.
 //
 //    // Example sending a request using ListRoutingProfilesRequest.
 //    req := client.ListRoutingProfilesRequest(params)
@@ -137,18 +25,24 @@ const opListRoutingProfiles = "ListRoutingProfiles"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListRoutingProfiles
-func (c *Client) ListRoutingProfilesRequest(input *ListRoutingProfilesInput) ListRoutingProfilesRequest {
+func (c *Client) ListRoutingProfilesRequest(input *types.ListRoutingProfilesInput) ListRoutingProfilesRequest {
 	op := &aws.Operation{
 		Name:       opListRoutingProfiles,
 		HTTPMethod: "GET",
 		HTTPPath:   "/routing-profiles-summary/{InstanceId}",
+		Paginator: &aws.Paginator{
+			InputTokens:     []string{"NextToken"},
+			OutputTokens:    []string{"NextToken"},
+			LimitToken:      "MaxResults",
+			TruncationToken: "",
+		},
 	}
 
 	if input == nil {
-		input = &ListRoutingProfilesInput{}
+		input = &types.ListRoutingProfilesInput{}
 	}
 
-	req := c.newRequest(op, input, &ListRoutingProfilesOutput{})
+	req := c.newRequest(op, input, &types.ListRoutingProfilesOutput{})
 	return ListRoutingProfilesRequest{Request: req, Input: input, Copy: c.ListRoutingProfilesRequest}
 }
 
@@ -156,8 +50,8 @@ func (c *Client) ListRoutingProfilesRequest(input *ListRoutingProfilesInput) Lis
 // ListRoutingProfiles API operation.
 type ListRoutingProfilesRequest struct {
 	*aws.Request
-	Input *ListRoutingProfilesInput
-	Copy  func(*ListRoutingProfilesInput) ListRoutingProfilesRequest
+	Input *types.ListRoutingProfilesInput
+	Copy  func(*types.ListRoutingProfilesInput) ListRoutingProfilesRequest
 }
 
 // Send marshals and sends the ListRoutingProfiles API request.
@@ -169,17 +63,64 @@ func (r ListRoutingProfilesRequest) Send(ctx context.Context) (*ListRoutingProfi
 	}
 
 	resp := &ListRoutingProfilesResponse{
-		ListRoutingProfilesOutput: r.Request.Data.(*ListRoutingProfilesOutput),
+		ListRoutingProfilesOutput: r.Request.Data.(*types.ListRoutingProfilesOutput),
 		response:                  &aws.Response{Request: r.Request},
 	}
 
 	return resp, nil
 }
 
+// NewListRoutingProfilesRequestPaginator returns a paginator for ListRoutingProfiles.
+// Use Next method to get the next page, and CurrentPage to get the current
+// response page from the paginator. Next will return false, if there are
+// no more pages, or an error was encountered.
+//
+// Note: This operation can generate multiple requests to a service.
+//
+//   // Example iterating over pages.
+//   req := client.ListRoutingProfilesRequest(input)
+//   p := connect.NewListRoutingProfilesRequestPaginator(req)
+//
+//   for p.Next(context.TODO()) {
+//       page := p.CurrentPage()
+//   }
+//
+//   if err := p.Err(); err != nil {
+//       return err
+//   }
+//
+func NewListRoutingProfilesPaginator(req ListRoutingProfilesRequest) ListRoutingProfilesPaginator {
+	return ListRoutingProfilesPaginator{
+		Pager: aws.Pager{
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
+				var inCpy *types.ListRoutingProfilesInput
+				if req.Input != nil {
+					tmp := *req.Input
+					inCpy = &tmp
+				}
+
+				newReq := req.Copy(inCpy)
+				newReq.SetContext(ctx)
+				return newReq.Request, nil
+			},
+		},
+	}
+}
+
+// ListRoutingProfilesPaginator is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type ListRoutingProfilesPaginator struct {
+	aws.Pager
+}
+
+func (p *ListRoutingProfilesPaginator) CurrentPage() *types.ListRoutingProfilesOutput {
+	return p.Pager.CurrentPage().(*types.ListRoutingProfilesOutput)
+}
+
 // ListRoutingProfilesResponse is the response type for the
 // ListRoutingProfiles API operation.
 type ListRoutingProfilesResponse struct {
-	*ListRoutingProfilesOutput
+	*types.ListRoutingProfilesOutput
 
 	response *aws.Response
 }

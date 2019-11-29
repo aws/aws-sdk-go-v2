@@ -6,95 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/iotevents/types"
 )
-
-type ListInputsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The maximum number of results to return at one time.
-	MaxResults *int64 `location:"querystring" locationName:"maxResults" min:"1" type:"integer"`
-
-	// The token for the next set of results.
-	NextToken *string `location:"querystring" locationName:"nextToken" type:"string"`
-}
-
-// String returns the string representation
-func (s ListInputsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListInputsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListInputsInput"}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListInputsInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.MaxResults != nil {
-		v := *s.MaxResults
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "maxResults", protocol.Int64Value(v), metadata)
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type ListInputsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Summary information about the inputs.
-	InputSummaries []InputSummary `locationName:"inputSummaries" type:"list"`
-
-	// A token to retrieve the next set of results, or null if there are no additional
-	// results.
-	NextToken *string `locationName:"nextToken" type:"string"`
-}
-
-// String returns the string representation
-func (s ListInputsOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListInputsOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.InputSummaries != nil {
-		v := s.InputSummaries
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "inputSummaries", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opListInputs = "ListInputs"
 
@@ -111,7 +24,7 @@ const opListInputs = "ListInputs"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iotevents-2018-07-27/ListInputs
-func (c *Client) ListInputsRequest(input *ListInputsInput) ListInputsRequest {
+func (c *Client) ListInputsRequest(input *types.ListInputsInput) ListInputsRequest {
 	op := &aws.Operation{
 		Name:       opListInputs,
 		HTTPMethod: "GET",
@@ -119,10 +32,10 @@ func (c *Client) ListInputsRequest(input *ListInputsInput) ListInputsRequest {
 	}
 
 	if input == nil {
-		input = &ListInputsInput{}
+		input = &types.ListInputsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListInputsOutput{})
+	req := c.newRequest(op, input, &types.ListInputsOutput{})
 	return ListInputsRequest{Request: req, Input: input, Copy: c.ListInputsRequest}
 }
 
@@ -130,8 +43,8 @@ func (c *Client) ListInputsRequest(input *ListInputsInput) ListInputsRequest {
 // ListInputs API operation.
 type ListInputsRequest struct {
 	*aws.Request
-	Input *ListInputsInput
-	Copy  func(*ListInputsInput) ListInputsRequest
+	Input *types.ListInputsInput
+	Copy  func(*types.ListInputsInput) ListInputsRequest
 }
 
 // Send marshals and sends the ListInputs API request.
@@ -143,7 +56,7 @@ func (r ListInputsRequest) Send(ctx context.Context) (*ListInputsResponse, error
 	}
 
 	resp := &ListInputsResponse{
-		ListInputsOutput: r.Request.Data.(*ListInputsOutput),
+		ListInputsOutput: r.Request.Data.(*types.ListInputsOutput),
 		response:         &aws.Response{Request: r.Request},
 	}
 
@@ -153,7 +66,7 @@ func (r ListInputsRequest) Send(ctx context.Context) (*ListInputsResponse, error
 // ListInputsResponse is the response type for the
 // ListInputs API operation.
 type ListInputsResponse struct {
-	*ListInputsOutput
+	*types.ListInputsOutput
 
 	response *aws.Response
 }

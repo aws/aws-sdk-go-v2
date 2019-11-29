@@ -6,74 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/pinpoint/types"
 )
-
-type DeleteBaiduChannelInput struct {
-	_ struct{} `type:"structure"`
-
-	// ApplicationId is a required field
-	ApplicationId *string `location:"uri" locationName:"application-id" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteBaiduChannelInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteBaiduChannelInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteBaiduChannelInput"}
-
-	if s.ApplicationId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ApplicationId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteBaiduChannelInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.ApplicationId != nil {
-		v := *s.ApplicationId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "application-id", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type DeleteBaiduChannelOutput struct {
-	_ struct{} `type:"structure" payload:"BaiduChannelResponse"`
-
-	// Provides information about the status and settings of the Baidu (Baidu Cloud
-	// Push) channel for an application.
-	//
-	// BaiduChannelResponse is a required field
-	BaiduChannelResponse *BaiduChannelResponse `type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteBaiduChannelOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteBaiduChannelOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.BaiduChannelResponse != nil {
-		v := s.BaiduChannelResponse
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.PayloadTarget, "BaiduChannelResponse", v, metadata)
-	}
-	return nil
-}
 
 const opDeleteBaiduChannel = "DeleteBaiduChannel"
 
@@ -91,7 +25,7 @@ const opDeleteBaiduChannel = "DeleteBaiduChannel"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/DeleteBaiduChannel
-func (c *Client) DeleteBaiduChannelRequest(input *DeleteBaiduChannelInput) DeleteBaiduChannelRequest {
+func (c *Client) DeleteBaiduChannelRequest(input *types.DeleteBaiduChannelInput) DeleteBaiduChannelRequest {
 	op := &aws.Operation{
 		Name:       opDeleteBaiduChannel,
 		HTTPMethod: "DELETE",
@@ -99,10 +33,10 @@ func (c *Client) DeleteBaiduChannelRequest(input *DeleteBaiduChannelInput) Delet
 	}
 
 	if input == nil {
-		input = &DeleteBaiduChannelInput{}
+		input = &types.DeleteBaiduChannelInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteBaiduChannelOutput{})
+	req := c.newRequest(op, input, &types.DeleteBaiduChannelOutput{})
 	return DeleteBaiduChannelRequest{Request: req, Input: input, Copy: c.DeleteBaiduChannelRequest}
 }
 
@@ -110,8 +44,8 @@ func (c *Client) DeleteBaiduChannelRequest(input *DeleteBaiduChannelInput) Delet
 // DeleteBaiduChannel API operation.
 type DeleteBaiduChannelRequest struct {
 	*aws.Request
-	Input *DeleteBaiduChannelInput
-	Copy  func(*DeleteBaiduChannelInput) DeleteBaiduChannelRequest
+	Input *types.DeleteBaiduChannelInput
+	Copy  func(*types.DeleteBaiduChannelInput) DeleteBaiduChannelRequest
 }
 
 // Send marshals and sends the DeleteBaiduChannel API request.
@@ -123,7 +57,7 @@ func (r DeleteBaiduChannelRequest) Send(ctx context.Context) (*DeleteBaiduChanne
 	}
 
 	resp := &DeleteBaiduChannelResponse{
-		DeleteBaiduChannelOutput: r.Request.Data.(*DeleteBaiduChannelOutput),
+		DeleteBaiduChannelOutput: r.Request.Data.(*types.DeleteBaiduChannelOutput),
 		response:                 &aws.Response{Request: r.Request},
 	}
 
@@ -133,7 +67,7 @@ func (r DeleteBaiduChannelRequest) Send(ctx context.Context) (*DeleteBaiduChanne
 // DeleteBaiduChannelResponse is the response type for the
 // DeleteBaiduChannel API operation.
 type DeleteBaiduChannelResponse struct {
-	*DeleteBaiduChannelOutput
+	*types.DeleteBaiduChannelOutput
 
 	response *aws.Response
 }

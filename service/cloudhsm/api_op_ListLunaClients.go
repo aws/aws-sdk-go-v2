@@ -6,39 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/cloudhsm/types"
 )
-
-type ListLunaClientsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The NextToken value from a previous call to ListLunaClients. Pass null if
-	// this is the first call.
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s ListLunaClientsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type ListLunaClientsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The list of clients.
-	//
-	// ClientList is a required field
-	ClientList []string `type:"list" required:"true"`
-
-	// If not null, more results are available. Pass this to ListLunaClients to
-	// retrieve the next set of items.
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s ListLunaClientsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListLunaClients = "ListLunaClients"
 
@@ -69,7 +38,7 @@ const opListLunaClients = "ListLunaClients"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/ListLunaClients
-func (c *Client) ListLunaClientsRequest(input *ListLunaClientsInput) ListLunaClientsRequest {
+func (c *Client) ListLunaClientsRequest(input *types.ListLunaClientsInput) ListLunaClientsRequest {
 	op := &aws.Operation{
 		Name:       opListLunaClients,
 		HTTPMethod: "POST",
@@ -77,10 +46,10 @@ func (c *Client) ListLunaClientsRequest(input *ListLunaClientsInput) ListLunaCli
 	}
 
 	if input == nil {
-		input = &ListLunaClientsInput{}
+		input = &types.ListLunaClientsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListLunaClientsOutput{})
+	req := c.newRequest(op, input, &types.ListLunaClientsOutput{})
 	return ListLunaClientsRequest{Request: req, Input: input, Copy: c.ListLunaClientsRequest}
 }
 
@@ -88,8 +57,8 @@ func (c *Client) ListLunaClientsRequest(input *ListLunaClientsInput) ListLunaCli
 // ListLunaClients API operation.
 type ListLunaClientsRequest struct {
 	*aws.Request
-	Input *ListLunaClientsInput
-	Copy  func(*ListLunaClientsInput) ListLunaClientsRequest
+	Input *types.ListLunaClientsInput
+	Copy  func(*types.ListLunaClientsInput) ListLunaClientsRequest
 }
 
 // Send marshals and sends the ListLunaClients API request.
@@ -101,7 +70,7 @@ func (r ListLunaClientsRequest) Send(ctx context.Context) (*ListLunaClientsRespo
 	}
 
 	resp := &ListLunaClientsResponse{
-		ListLunaClientsOutput: r.Request.Data.(*ListLunaClientsOutput),
+		ListLunaClientsOutput: r.Request.Data.(*types.ListLunaClientsOutput),
 		response:              &aws.Response{Request: r.Request},
 	}
 
@@ -111,7 +80,7 @@ func (r ListLunaClientsRequest) Send(ctx context.Context) (*ListLunaClientsRespo
 // ListLunaClientsResponse is the response type for the
 // ListLunaClients API operation.
 type ListLunaClientsResponse struct {
-	*ListLunaClientsOutput
+	*types.ListLunaClientsOutput
 
 	response *aws.Response
 }

@@ -6,54 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/fms/types"
 )
-
-type GetPolicyInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the AWS Firewall Manager policy that you want the details for.
-	//
-	// PolicyId is a required field
-	PolicyId *string `min:"36" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetPolicyInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetPolicyInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetPolicyInput"}
-
-	if s.PolicyId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("PolicyId"))
-	}
-	if s.PolicyId != nil && len(*s.PolicyId) < 36 {
-		invalidParams.Add(aws.NewErrParamMinLen("PolicyId", 36))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type GetPolicyOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Information about the specified AWS Firewall Manager policy.
-	Policy *Policy `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the specified policy.
-	PolicyArn *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s GetPolicyOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetPolicy = "GetPolicy"
 
@@ -70,7 +24,7 @@ const opGetPolicy = "GetPolicy"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/GetPolicy
-func (c *Client) GetPolicyRequest(input *GetPolicyInput) GetPolicyRequest {
+func (c *Client) GetPolicyRequest(input *types.GetPolicyInput) GetPolicyRequest {
 	op := &aws.Operation{
 		Name:       opGetPolicy,
 		HTTPMethod: "POST",
@@ -78,10 +32,10 @@ func (c *Client) GetPolicyRequest(input *GetPolicyInput) GetPolicyRequest {
 	}
 
 	if input == nil {
-		input = &GetPolicyInput{}
+		input = &types.GetPolicyInput{}
 	}
 
-	req := c.newRequest(op, input, &GetPolicyOutput{})
+	req := c.newRequest(op, input, &types.GetPolicyOutput{})
 	return GetPolicyRequest{Request: req, Input: input, Copy: c.GetPolicyRequest}
 }
 
@@ -89,8 +43,8 @@ func (c *Client) GetPolicyRequest(input *GetPolicyInput) GetPolicyRequest {
 // GetPolicy API operation.
 type GetPolicyRequest struct {
 	*aws.Request
-	Input *GetPolicyInput
-	Copy  func(*GetPolicyInput) GetPolicyRequest
+	Input *types.GetPolicyInput
+	Copy  func(*types.GetPolicyInput) GetPolicyRequest
 }
 
 // Send marshals and sends the GetPolicy API request.
@@ -102,7 +56,7 @@ func (r GetPolicyRequest) Send(ctx context.Context) (*GetPolicyResponse, error) 
 	}
 
 	resp := &GetPolicyResponse{
-		GetPolicyOutput: r.Request.Data.(*GetPolicyOutput),
+		GetPolicyOutput: r.Request.Data.(*types.GetPolicyOutput),
 		response:        &aws.Response{Request: r.Request},
 	}
 
@@ -112,7 +66,7 @@ func (r GetPolicyRequest) Send(ctx context.Context) (*GetPolicyResponse, error) 
 // GetPolicyResponse is the response type for the
 // GetPolicy API operation.
 type GetPolicyResponse struct {
-	*GetPolicyOutput
+	*types.GetPolicyOutput
 
 	response *aws.Response
 }

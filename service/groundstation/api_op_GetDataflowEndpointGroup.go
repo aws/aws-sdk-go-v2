@@ -6,106 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/groundstation/types"
 )
-
-type GetDataflowEndpointGroupInput struct {
-	_ struct{} `type:"structure"`
-
-	// DataflowEndpointGroupId is a required field
-	DataflowEndpointGroupId *string `location:"uri" locationName:"dataflowEndpointGroupId" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetDataflowEndpointGroupInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetDataflowEndpointGroupInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetDataflowEndpointGroupInput"}
-
-	if s.DataflowEndpointGroupId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DataflowEndpointGroupId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetDataflowEndpointGroupInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.DataflowEndpointGroupId != nil {
-		v := *s.DataflowEndpointGroupId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "dataflowEndpointGroupId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type GetDataflowEndpointGroupOutput struct {
-	_ struct{} `type:"structure"`
-
-	DataflowEndpointGroupArn *string `locationName:"dataflowEndpointGroupArn" type:"string"`
-
-	DataflowEndpointGroupId *string `locationName:"dataflowEndpointGroupId" type:"string"`
-
-	EndpointsDetails []EndpointDetails `locationName:"endpointsDetails" type:"list"`
-
-	Tags map[string]string `locationName:"tags" type:"map"`
-}
-
-// String returns the string representation
-func (s GetDataflowEndpointGroupOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetDataflowEndpointGroupOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.DataflowEndpointGroupArn != nil {
-		v := *s.DataflowEndpointGroupArn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "dataflowEndpointGroupArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.DataflowEndpointGroupId != nil {
-		v := *s.DataflowEndpointGroupId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "dataflowEndpointGroupId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.EndpointsDetails != nil {
-		v := s.EndpointsDetails
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "endpointsDetails", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	if s.Tags != nil {
-		v := s.Tags
-
-		metadata := protocol.Metadata{}
-		ms0 := e.Map(protocol.BodyTarget, "tags", metadata)
-		ms0.Start()
-		for k1, v1 := range v {
-			ms0.MapSetValue(k1, protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
-		}
-		ms0.End()
-
-	}
-	return nil
-}
 
 const opGetDataflowEndpointGroup = "GetDataflowEndpointGroup"
 
@@ -122,7 +24,7 @@ const opGetDataflowEndpointGroup = "GetDataflowEndpointGroup"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/groundstation-2019-05-23/GetDataflowEndpointGroup
-func (c *Client) GetDataflowEndpointGroupRequest(input *GetDataflowEndpointGroupInput) GetDataflowEndpointGroupRequest {
+func (c *Client) GetDataflowEndpointGroupRequest(input *types.GetDataflowEndpointGroupInput) GetDataflowEndpointGroupRequest {
 	op := &aws.Operation{
 		Name:       opGetDataflowEndpointGroup,
 		HTTPMethod: "GET",
@@ -130,10 +32,10 @@ func (c *Client) GetDataflowEndpointGroupRequest(input *GetDataflowEndpointGroup
 	}
 
 	if input == nil {
-		input = &GetDataflowEndpointGroupInput{}
+		input = &types.GetDataflowEndpointGroupInput{}
 	}
 
-	req := c.newRequest(op, input, &GetDataflowEndpointGroupOutput{})
+	req := c.newRequest(op, input, &types.GetDataflowEndpointGroupOutput{})
 	return GetDataflowEndpointGroupRequest{Request: req, Input: input, Copy: c.GetDataflowEndpointGroupRequest}
 }
 
@@ -141,8 +43,8 @@ func (c *Client) GetDataflowEndpointGroupRequest(input *GetDataflowEndpointGroup
 // GetDataflowEndpointGroup API operation.
 type GetDataflowEndpointGroupRequest struct {
 	*aws.Request
-	Input *GetDataflowEndpointGroupInput
-	Copy  func(*GetDataflowEndpointGroupInput) GetDataflowEndpointGroupRequest
+	Input *types.GetDataflowEndpointGroupInput
+	Copy  func(*types.GetDataflowEndpointGroupInput) GetDataflowEndpointGroupRequest
 }
 
 // Send marshals and sends the GetDataflowEndpointGroup API request.
@@ -154,7 +56,7 @@ func (r GetDataflowEndpointGroupRequest) Send(ctx context.Context) (*GetDataflow
 	}
 
 	resp := &GetDataflowEndpointGroupResponse{
-		GetDataflowEndpointGroupOutput: r.Request.Data.(*GetDataflowEndpointGroupOutput),
+		GetDataflowEndpointGroupOutput: r.Request.Data.(*types.GetDataflowEndpointGroupOutput),
 		response:                       &aws.Response{Request: r.Request},
 	}
 
@@ -164,7 +66,7 @@ func (r GetDataflowEndpointGroupRequest) Send(ctx context.Context) (*GetDataflow
 // GetDataflowEndpointGroupResponse is the response type for the
 // GetDataflowEndpointGroup API operation.
 type GetDataflowEndpointGroupResponse struct {
-	*GetDataflowEndpointGroupOutput
+	*types.GetDataflowEndpointGroupOutput
 
 	response *aws.Response
 }

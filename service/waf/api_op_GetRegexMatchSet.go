@@ -6,53 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/waf/types"
 )
-
-type GetRegexMatchSetInput struct {
-	_ struct{} `type:"structure"`
-
-	// The RegexMatchSetId of the RegexMatchSet that you want to get. RegexMatchSetId
-	// is returned by CreateRegexMatchSet and by ListRegexMatchSets.
-	//
-	// RegexMatchSetId is a required field
-	RegexMatchSetId *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetRegexMatchSetInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetRegexMatchSetInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetRegexMatchSetInput"}
-
-	if s.RegexMatchSetId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("RegexMatchSetId"))
-	}
-	if s.RegexMatchSetId != nil && len(*s.RegexMatchSetId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("RegexMatchSetId", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type GetRegexMatchSetOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Information about the RegexMatchSet that you specified in the GetRegexMatchSet
-	// request. For more information, see RegexMatchTuple.
-	RegexMatchSet *RegexMatchSet `type:"structure"`
-}
-
-// String returns the string representation
-func (s GetRegexMatchSetOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetRegexMatchSet = "GetRegexMatchSet"
 
@@ -69,7 +24,7 @@ const opGetRegexMatchSet = "GetRegexMatchSet"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/GetRegexMatchSet
-func (c *Client) GetRegexMatchSetRequest(input *GetRegexMatchSetInput) GetRegexMatchSetRequest {
+func (c *Client) GetRegexMatchSetRequest(input *types.GetRegexMatchSetInput) GetRegexMatchSetRequest {
 	op := &aws.Operation{
 		Name:       opGetRegexMatchSet,
 		HTTPMethod: "POST",
@@ -77,10 +32,10 @@ func (c *Client) GetRegexMatchSetRequest(input *GetRegexMatchSetInput) GetRegexM
 	}
 
 	if input == nil {
-		input = &GetRegexMatchSetInput{}
+		input = &types.GetRegexMatchSetInput{}
 	}
 
-	req := c.newRequest(op, input, &GetRegexMatchSetOutput{})
+	req := c.newRequest(op, input, &types.GetRegexMatchSetOutput{})
 	return GetRegexMatchSetRequest{Request: req, Input: input, Copy: c.GetRegexMatchSetRequest}
 }
 
@@ -88,8 +43,8 @@ func (c *Client) GetRegexMatchSetRequest(input *GetRegexMatchSetInput) GetRegexM
 // GetRegexMatchSet API operation.
 type GetRegexMatchSetRequest struct {
 	*aws.Request
-	Input *GetRegexMatchSetInput
-	Copy  func(*GetRegexMatchSetInput) GetRegexMatchSetRequest
+	Input *types.GetRegexMatchSetInput
+	Copy  func(*types.GetRegexMatchSetInput) GetRegexMatchSetRequest
 }
 
 // Send marshals and sends the GetRegexMatchSet API request.
@@ -101,7 +56,7 @@ func (r GetRegexMatchSetRequest) Send(ctx context.Context) (*GetRegexMatchSetRes
 	}
 
 	resp := &GetRegexMatchSetResponse{
-		GetRegexMatchSetOutput: r.Request.Data.(*GetRegexMatchSetOutput),
+		GetRegexMatchSetOutput: r.Request.Data.(*types.GetRegexMatchSetOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -111,7 +66,7 @@ func (r GetRegexMatchSetRequest) Send(ctx context.Context) (*GetRegexMatchSetRes
 // GetRegexMatchSetResponse is the response type for the
 // GetRegexMatchSet API operation.
 type GetRegexMatchSetResponse struct {
-	*GetRegexMatchSetOutput
+	*types.GetRegexMatchSetOutput
 
 	response *aws.Response
 }

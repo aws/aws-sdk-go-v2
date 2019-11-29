@@ -6,58 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ecs/types"
 )
-
-type DeleteServiceInput struct {
-	_ struct{} `type:"structure"`
-
-	// The short name or full Amazon Resource Name (ARN) of the cluster that hosts
-	// the service to delete. If you do not specify a cluster, the default cluster
-	// is assumed.
-	Cluster *string `locationName:"cluster" type:"string"`
-
-	// If true, allows you to delete a service even if it has not been scaled down
-	// to zero tasks. It is only necessary to use this if the service is using the
-	// REPLICA scheduling strategy.
-	Force *bool `locationName:"force" type:"boolean"`
-
-	// The name of the service to delete.
-	//
-	// Service is a required field
-	Service *string `locationName:"service" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteServiceInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteServiceInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteServiceInput"}
-
-	if s.Service == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Service"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteServiceOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The full description of the deleted service.
-	Service *Service `locationName:"service" type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteServiceOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteService = "DeleteService"
 
@@ -91,7 +41,7 @@ const opDeleteService = "DeleteService"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DeleteService
-func (c *Client) DeleteServiceRequest(input *DeleteServiceInput) DeleteServiceRequest {
+func (c *Client) DeleteServiceRequest(input *types.DeleteServiceInput) DeleteServiceRequest {
 	op := &aws.Operation{
 		Name:       opDeleteService,
 		HTTPMethod: "POST",
@@ -99,10 +49,10 @@ func (c *Client) DeleteServiceRequest(input *DeleteServiceInput) DeleteServiceRe
 	}
 
 	if input == nil {
-		input = &DeleteServiceInput{}
+		input = &types.DeleteServiceInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteServiceOutput{})
+	req := c.newRequest(op, input, &types.DeleteServiceOutput{})
 	return DeleteServiceRequest{Request: req, Input: input, Copy: c.DeleteServiceRequest}
 }
 
@@ -110,8 +60,8 @@ func (c *Client) DeleteServiceRequest(input *DeleteServiceInput) DeleteServiceRe
 // DeleteService API operation.
 type DeleteServiceRequest struct {
 	*aws.Request
-	Input *DeleteServiceInput
-	Copy  func(*DeleteServiceInput) DeleteServiceRequest
+	Input *types.DeleteServiceInput
+	Copy  func(*types.DeleteServiceInput) DeleteServiceRequest
 }
 
 // Send marshals and sends the DeleteService API request.
@@ -123,7 +73,7 @@ func (r DeleteServiceRequest) Send(ctx context.Context) (*DeleteServiceResponse,
 	}
 
 	resp := &DeleteServiceResponse{
-		DeleteServiceOutput: r.Request.Data.(*DeleteServiceOutput),
+		DeleteServiceOutput: r.Request.Data.(*types.DeleteServiceOutput),
 		response:            &aws.Response{Request: r.Request},
 	}
 
@@ -133,7 +83,7 @@ func (r DeleteServiceRequest) Send(ctx context.Context) (*DeleteServiceResponse,
 // DeleteServiceResponse is the response type for the
 // DeleteService API operation.
 type DeleteServiceResponse struct {
-	*DeleteServiceOutput
+	*types.DeleteServiceOutput
 
 	response *aws.Response
 }

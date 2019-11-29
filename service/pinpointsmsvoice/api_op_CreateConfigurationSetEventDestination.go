@@ -6,82 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoice/types"
 )
-
-// Create a new event destination in a configuration set.
-type CreateConfigurationSetEventDestinationInput struct {
-	_ struct{} `type:"structure"`
-
-	// ConfigurationSetName is a required field
-	ConfigurationSetName *string `location:"uri" locationName:"ConfigurationSetName" type:"string" required:"true"`
-
-	// An object that defines a single event destination.
-	EventDestination *EventDestinationDefinition `type:"structure"`
-
-	// A name that identifies the event destination.
-	EventDestinationName *string `type:"string"`
-}
-
-// String returns the string representation
-func (s CreateConfigurationSetEventDestinationInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateConfigurationSetEventDestinationInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateConfigurationSetEventDestinationInput"}
-
-	if s.ConfigurationSetName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ConfigurationSetName"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s CreateConfigurationSetEventDestinationInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.EventDestination != nil {
-		v := s.EventDestination
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "EventDestination", v, metadata)
-	}
-	if s.EventDestinationName != nil {
-		v := *s.EventDestinationName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "EventDestinationName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.ConfigurationSetName != nil {
-		v := *s.ConfigurationSetName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "ConfigurationSetName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-// An empty object that indicates that the event destination was created successfully.
-type CreateConfigurationSetEventDestinationOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s CreateConfigurationSetEventDestinationOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s CreateConfigurationSetEventDestinationOutput) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
 
 const opCreateConfigurationSetEventDestination = "CreateConfigurationSetEventDestination"
 
@@ -98,7 +24,7 @@ const opCreateConfigurationSetEventDestination = "CreateConfigurationSetEventDes
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-2018-09-05/CreateConfigurationSetEventDestination
-func (c *Client) CreateConfigurationSetEventDestinationRequest(input *CreateConfigurationSetEventDestinationInput) CreateConfigurationSetEventDestinationRequest {
+func (c *Client) CreateConfigurationSetEventDestinationRequest(input *types.CreateConfigurationSetEventDestinationInput) CreateConfigurationSetEventDestinationRequest {
 	op := &aws.Operation{
 		Name:       opCreateConfigurationSetEventDestination,
 		HTTPMethod: "POST",
@@ -106,10 +32,10 @@ func (c *Client) CreateConfigurationSetEventDestinationRequest(input *CreateConf
 	}
 
 	if input == nil {
-		input = &CreateConfigurationSetEventDestinationInput{}
+		input = &types.CreateConfigurationSetEventDestinationInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateConfigurationSetEventDestinationOutput{})
+	req := c.newRequest(op, input, &types.CreateConfigurationSetEventDestinationOutput{})
 	return CreateConfigurationSetEventDestinationRequest{Request: req, Input: input, Copy: c.CreateConfigurationSetEventDestinationRequest}
 }
 
@@ -117,8 +43,8 @@ func (c *Client) CreateConfigurationSetEventDestinationRequest(input *CreateConf
 // CreateConfigurationSetEventDestination API operation.
 type CreateConfigurationSetEventDestinationRequest struct {
 	*aws.Request
-	Input *CreateConfigurationSetEventDestinationInput
-	Copy  func(*CreateConfigurationSetEventDestinationInput) CreateConfigurationSetEventDestinationRequest
+	Input *types.CreateConfigurationSetEventDestinationInput
+	Copy  func(*types.CreateConfigurationSetEventDestinationInput) CreateConfigurationSetEventDestinationRequest
 }
 
 // Send marshals and sends the CreateConfigurationSetEventDestination API request.
@@ -130,7 +56,7 @@ func (r CreateConfigurationSetEventDestinationRequest) Send(ctx context.Context)
 	}
 
 	resp := &CreateConfigurationSetEventDestinationResponse{
-		CreateConfigurationSetEventDestinationOutput: r.Request.Data.(*CreateConfigurationSetEventDestinationOutput),
+		CreateConfigurationSetEventDestinationOutput: r.Request.Data.(*types.CreateConfigurationSetEventDestinationOutput),
 		response: &aws.Response{Request: r.Request},
 	}
 
@@ -140,7 +66,7 @@ func (r CreateConfigurationSetEventDestinationRequest) Send(ctx context.Context)
 // CreateConfigurationSetEventDestinationResponse is the response type for the
 // CreateConfigurationSetEventDestination API operation.
 type CreateConfigurationSetEventDestinationResponse struct {
-	*CreateConfigurationSetEventDestinationOutput
+	*types.CreateConfigurationSetEventDestinationOutput
 
 	response *aws.Response
 }

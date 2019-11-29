@@ -6,69 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/gamelift/types"
 )
-
-// Represents the input for a request action.
-type CreateAliasInput struct {
-	_ struct{} `type:"structure"`
-
-	// Human-readable description of an alias.
-	Description *string `min:"1" type:"string"`
-
-	// Descriptive label that is associated with an alias. Alias names do not need
-	// to be unique.
-	//
-	// Name is a required field
-	Name *string `min:"1" type:"string" required:"true"`
-
-	// Object that specifies the fleet and routing type to use for the alias.
-	//
-	// RoutingStrategy is a required field
-	RoutingStrategy *RoutingStrategy `type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s CreateAliasInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateAliasInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateAliasInput"}
-	if s.Description != nil && len(*s.Description) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Description", 1))
-	}
-
-	if s.Name == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Name"))
-	}
-	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
-	}
-
-	if s.RoutingStrategy == nil {
-		invalidParams.Add(aws.NewErrParamRequired("RoutingStrategy"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Represents the returned data in response to a request action.
-type CreateAliasOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Object that describes the newly created alias record.
-	Alias *Alias `type:"structure"`
-}
-
-// String returns the string representation
-func (s CreateAliasOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCreateAlias = "CreateAlias"
 
@@ -115,7 +54,7 @@ const opCreateAlias = "CreateAlias"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/CreateAlias
-func (c *Client) CreateAliasRequest(input *CreateAliasInput) CreateAliasRequest {
+func (c *Client) CreateAliasRequest(input *types.CreateAliasInput) CreateAliasRequest {
 	op := &aws.Operation{
 		Name:       opCreateAlias,
 		HTTPMethod: "POST",
@@ -123,10 +62,10 @@ func (c *Client) CreateAliasRequest(input *CreateAliasInput) CreateAliasRequest 
 	}
 
 	if input == nil {
-		input = &CreateAliasInput{}
+		input = &types.CreateAliasInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateAliasOutput{})
+	req := c.newRequest(op, input, &types.CreateAliasOutput{})
 	return CreateAliasRequest{Request: req, Input: input, Copy: c.CreateAliasRequest}
 }
 
@@ -134,8 +73,8 @@ func (c *Client) CreateAliasRequest(input *CreateAliasInput) CreateAliasRequest 
 // CreateAlias API operation.
 type CreateAliasRequest struct {
 	*aws.Request
-	Input *CreateAliasInput
-	Copy  func(*CreateAliasInput) CreateAliasRequest
+	Input *types.CreateAliasInput
+	Copy  func(*types.CreateAliasInput) CreateAliasRequest
 }
 
 // Send marshals and sends the CreateAlias API request.
@@ -147,7 +86,7 @@ func (r CreateAliasRequest) Send(ctx context.Context) (*CreateAliasResponse, err
 	}
 
 	resp := &CreateAliasResponse{
-		CreateAliasOutput: r.Request.Data.(*CreateAliasOutput),
+		CreateAliasOutput: r.Request.Data.(*types.CreateAliasOutput),
 		response:          &aws.Response{Request: r.Request},
 	}
 
@@ -157,7 +96,7 @@ func (r CreateAliasRequest) Send(ctx context.Context) (*CreateAliasResponse, err
 // CreateAliasResponse is the response type for the
 // CreateAlias API operation.
 type CreateAliasResponse struct {
-	*CreateAliasOutput
+	*types.CreateAliasOutput
 
 	response *aws.Response
 }

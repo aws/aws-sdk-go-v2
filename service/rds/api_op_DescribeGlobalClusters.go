@@ -4,86 +4,10 @@ package rds
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/rds/types"
 )
-
-type DescribeGlobalClustersInput struct {
-	_ struct{} `type:"structure"`
-
-	// A filter that specifies one or more global DB clusters to describe.
-	//
-	// Supported filters:
-	//
-	//    * db-cluster-id - Accepts DB cluster identifiers and DB cluster Amazon
-	//    Resource Names (ARNs). The results list will only include information
-	//    about the DB clusters identified by these ARNs.
-	Filters []Filter `locationNameList:"Filter" type:"list"`
-
-	// The user-supplied DB cluster identifier. If this parameter is specified,
-	// information from only the specific DB cluster is returned. This parameter
-	// isn't case-sensitive.
-	//
-	// Constraints:
-	//
-	//    * If supplied, must match an existing DBClusterIdentifier.
-	GlobalClusterIdentifier *string `type:"string"`
-
-	// An optional pagination token provided by a previous DescribeGlobalClusters
-	// request. If this parameter is specified, the response includes only records
-	// beyond the marker, up to the value specified by MaxRecords.
-	Marker *string `type:"string"`
-
-	// The maximum number of records to include in the response. If more records
-	// exist than the specified MaxRecords value, a pagination token called a marker
-	// is included in the response so that you can retrieve the remaining results.
-	//
-	// Default: 100
-	//
-	// Constraints: Minimum 20, maximum 100.
-	MaxRecords *int64 `type:"integer"`
-}
-
-// String returns the string representation
-func (s DescribeGlobalClustersInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeGlobalClustersInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeGlobalClustersInput"}
-	if s.Filters != nil {
-		for i, v := range s.Filters {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribeGlobalClustersOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The list of global clusters returned by this request.
-	GlobalClusters []GlobalCluster `locationNameList:"GlobalClusterMember" type:"list"`
-
-	// An optional pagination token provided by a previous DescribeGlobalClusters
-	// request. If this parameter is specified, the response includes only records
-	// beyond the marker, up to the value specified by MaxRecords.
-	Marker *string `type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeGlobalClustersOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeGlobalClusters = "DescribeGlobalClusters"
 
@@ -106,7 +30,7 @@ const opDescribeGlobalClusters = "DescribeGlobalClusters"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeGlobalClusters
-func (c *Client) DescribeGlobalClustersRequest(input *DescribeGlobalClustersInput) DescribeGlobalClustersRequest {
+func (c *Client) DescribeGlobalClustersRequest(input *types.DescribeGlobalClustersInput) DescribeGlobalClustersRequest {
 	op := &aws.Operation{
 		Name:       opDescribeGlobalClusters,
 		HTTPMethod: "POST",
@@ -120,10 +44,10 @@ func (c *Client) DescribeGlobalClustersRequest(input *DescribeGlobalClustersInpu
 	}
 
 	if input == nil {
-		input = &DescribeGlobalClustersInput{}
+		input = &types.DescribeGlobalClustersInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeGlobalClustersOutput{})
+	req := c.newRequest(op, input, &types.DescribeGlobalClustersOutput{})
 	return DescribeGlobalClustersRequest{Request: req, Input: input, Copy: c.DescribeGlobalClustersRequest}
 }
 
@@ -131,8 +55,8 @@ func (c *Client) DescribeGlobalClustersRequest(input *DescribeGlobalClustersInpu
 // DescribeGlobalClusters API operation.
 type DescribeGlobalClustersRequest struct {
 	*aws.Request
-	Input *DescribeGlobalClustersInput
-	Copy  func(*DescribeGlobalClustersInput) DescribeGlobalClustersRequest
+	Input *types.DescribeGlobalClustersInput
+	Copy  func(*types.DescribeGlobalClustersInput) DescribeGlobalClustersRequest
 }
 
 // Send marshals and sends the DescribeGlobalClusters API request.
@@ -144,7 +68,7 @@ func (r DescribeGlobalClustersRequest) Send(ctx context.Context) (*DescribeGloba
 	}
 
 	resp := &DescribeGlobalClustersResponse{
-		DescribeGlobalClustersOutput: r.Request.Data.(*DescribeGlobalClustersOutput),
+		DescribeGlobalClustersOutput: r.Request.Data.(*types.DescribeGlobalClustersOutput),
 		response:                     &aws.Response{Request: r.Request},
 	}
 
@@ -174,7 +98,7 @@ func NewDescribeGlobalClustersPaginator(req DescribeGlobalClustersRequest) Descr
 	return DescribeGlobalClustersPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *DescribeGlobalClustersInput
+				var inCpy *types.DescribeGlobalClustersInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -194,14 +118,14 @@ type DescribeGlobalClustersPaginator struct {
 	aws.Pager
 }
 
-func (p *DescribeGlobalClustersPaginator) CurrentPage() *DescribeGlobalClustersOutput {
-	return p.Pager.CurrentPage().(*DescribeGlobalClustersOutput)
+func (p *DescribeGlobalClustersPaginator) CurrentPage() *types.DescribeGlobalClustersOutput {
+	return p.Pager.CurrentPage().(*types.DescribeGlobalClustersOutput)
 }
 
 // DescribeGlobalClustersResponse is the response type for the
 // DescribeGlobalClusters API operation.
 type DescribeGlobalClustersResponse struct {
-	*DescribeGlobalClustersOutput
+	*types.DescribeGlobalClustersOutput
 
 	response *aws.Response
 }

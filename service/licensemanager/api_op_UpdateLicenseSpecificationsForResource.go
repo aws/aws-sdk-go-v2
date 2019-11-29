@@ -4,68 +4,10 @@ package licensemanager
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/licensemanager/types"
 )
-
-type UpdateLicenseSpecificationsForResourceInput struct {
-	_ struct{} `type:"structure"`
-
-	// License configuration ARNs to be added to a resource.
-	AddLicenseSpecifications []LicenseSpecification `type:"list"`
-
-	// License configuration ARNs to be removed from a resource.
-	RemoveLicenseSpecifications []LicenseSpecification `type:"list"`
-
-	// ARN for an AWS server resource.
-	//
-	// ResourceArn is a required field
-	ResourceArn *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s UpdateLicenseSpecificationsForResourceInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateLicenseSpecificationsForResourceInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateLicenseSpecificationsForResourceInput"}
-
-	if s.ResourceArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ResourceArn"))
-	}
-	if s.AddLicenseSpecifications != nil {
-		for i, v := range s.AddLicenseSpecifications {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "AddLicenseSpecifications", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-	if s.RemoveLicenseSpecifications != nil {
-		for i, v := range s.RemoveLicenseSpecifications {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "RemoveLicenseSpecifications", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type UpdateLicenseSpecificationsForResourceOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s UpdateLicenseSpecificationsForResourceOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opUpdateLicenseSpecificationsForResource = "UpdateLicenseSpecificationsForResource"
 
@@ -86,7 +28,7 @@ const opUpdateLicenseSpecificationsForResource = "UpdateLicenseSpecificationsFor
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/license-manager-2018-08-01/UpdateLicenseSpecificationsForResource
-func (c *Client) UpdateLicenseSpecificationsForResourceRequest(input *UpdateLicenseSpecificationsForResourceInput) UpdateLicenseSpecificationsForResourceRequest {
+func (c *Client) UpdateLicenseSpecificationsForResourceRequest(input *types.UpdateLicenseSpecificationsForResourceInput) UpdateLicenseSpecificationsForResourceRequest {
 	op := &aws.Operation{
 		Name:       opUpdateLicenseSpecificationsForResource,
 		HTTPMethod: "POST",
@@ -94,10 +36,10 @@ func (c *Client) UpdateLicenseSpecificationsForResourceRequest(input *UpdateLice
 	}
 
 	if input == nil {
-		input = &UpdateLicenseSpecificationsForResourceInput{}
+		input = &types.UpdateLicenseSpecificationsForResourceInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateLicenseSpecificationsForResourceOutput{})
+	req := c.newRequest(op, input, &types.UpdateLicenseSpecificationsForResourceOutput{})
 	return UpdateLicenseSpecificationsForResourceRequest{Request: req, Input: input, Copy: c.UpdateLicenseSpecificationsForResourceRequest}
 }
 
@@ -105,8 +47,8 @@ func (c *Client) UpdateLicenseSpecificationsForResourceRequest(input *UpdateLice
 // UpdateLicenseSpecificationsForResource API operation.
 type UpdateLicenseSpecificationsForResourceRequest struct {
 	*aws.Request
-	Input *UpdateLicenseSpecificationsForResourceInput
-	Copy  func(*UpdateLicenseSpecificationsForResourceInput) UpdateLicenseSpecificationsForResourceRequest
+	Input *types.UpdateLicenseSpecificationsForResourceInput
+	Copy  func(*types.UpdateLicenseSpecificationsForResourceInput) UpdateLicenseSpecificationsForResourceRequest
 }
 
 // Send marshals and sends the UpdateLicenseSpecificationsForResource API request.
@@ -118,7 +60,7 @@ func (r UpdateLicenseSpecificationsForResourceRequest) Send(ctx context.Context)
 	}
 
 	resp := &UpdateLicenseSpecificationsForResourceResponse{
-		UpdateLicenseSpecificationsForResourceOutput: r.Request.Data.(*UpdateLicenseSpecificationsForResourceOutput),
+		UpdateLicenseSpecificationsForResourceOutput: r.Request.Data.(*types.UpdateLicenseSpecificationsForResourceOutput),
 		response: &aws.Response{Request: r.Request},
 	}
 
@@ -128,7 +70,7 @@ func (r UpdateLicenseSpecificationsForResourceRequest) Send(ctx context.Context)
 // UpdateLicenseSpecificationsForResourceResponse is the response type for the
 // UpdateLicenseSpecificationsForResource API operation.
 type UpdateLicenseSpecificationsForResourceResponse struct {
-	*UpdateLicenseSpecificationsForResourceOutput
+	*types.UpdateLicenseSpecificationsForResourceOutput
 
 	response *aws.Response
 }

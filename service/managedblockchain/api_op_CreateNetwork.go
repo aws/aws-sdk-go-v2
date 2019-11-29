@@ -6,209 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/managedblockchain/types"
 )
-
-type CreateNetworkInput struct {
-	_ struct{} `type:"structure"`
-
-	// A unique, case-sensitive identifier that you provide to ensure the idempotency
-	// of the operation. An idempotent operation completes no more than one time.
-	// This identifier is required only if you make a service request directly using
-	// an HTTP client. It is generated automatically if you use an AWS SDK or the
-	// AWS CLI.
-	//
-	// ClientRequestToken is a required field
-	ClientRequestToken *string `min:"1" type:"string" required:"true" idempotencyToken:"true"`
-
-	// An optional description for the network.
-	Description *string `type:"string"`
-
-	// The blockchain framework that the network uses.
-	//
-	// Framework is a required field
-	Framework Framework `type:"string" required:"true" enum:"true"`
-
-	// Configuration properties of the blockchain framework relevant to the network
-	// configuration.
-	FrameworkConfiguration *NetworkFrameworkConfiguration `type:"structure"`
-
-	// The version of the blockchain framework that the network uses.
-	//
-	// FrameworkVersion is a required field
-	FrameworkVersion *string `min:"1" type:"string" required:"true"`
-
-	// Configuration properties for the first member within the network.
-	//
-	// MemberConfiguration is a required field
-	MemberConfiguration *MemberConfiguration `type:"structure" required:"true"`
-
-	// The name of the network.
-	//
-	// Name is a required field
-	Name *string `min:"1" type:"string" required:"true"`
-
-	// The voting rules used by the network to determine if a proposal is approved.
-	//
-	// VotingPolicy is a required field
-	VotingPolicy *VotingPolicy `type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s CreateNetworkInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateNetworkInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateNetworkInput"}
-
-	if s.ClientRequestToken == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ClientRequestToken"))
-	}
-	if s.ClientRequestToken != nil && len(*s.ClientRequestToken) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ClientRequestToken", 1))
-	}
-	if len(s.Framework) == 0 {
-		invalidParams.Add(aws.NewErrParamRequired("Framework"))
-	}
-
-	if s.FrameworkVersion == nil {
-		invalidParams.Add(aws.NewErrParamRequired("FrameworkVersion"))
-	}
-	if s.FrameworkVersion != nil && len(*s.FrameworkVersion) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("FrameworkVersion", 1))
-	}
-
-	if s.MemberConfiguration == nil {
-		invalidParams.Add(aws.NewErrParamRequired("MemberConfiguration"))
-	}
-
-	if s.Name == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Name"))
-	}
-	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
-	}
-
-	if s.VotingPolicy == nil {
-		invalidParams.Add(aws.NewErrParamRequired("VotingPolicy"))
-	}
-	if s.FrameworkConfiguration != nil {
-		if err := s.FrameworkConfiguration.Validate(); err != nil {
-			invalidParams.AddNested("FrameworkConfiguration", err.(aws.ErrInvalidParams))
-		}
-	}
-	if s.MemberConfiguration != nil {
-		if err := s.MemberConfiguration.Validate(); err != nil {
-			invalidParams.AddNested("MemberConfiguration", err.(aws.ErrInvalidParams))
-		}
-	}
-	if s.VotingPolicy != nil {
-		if err := s.VotingPolicy.Validate(); err != nil {
-			invalidParams.AddNested("VotingPolicy", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s CreateNetworkInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	var ClientRequestToken string
-	if s.ClientRequestToken != nil {
-		ClientRequestToken = *s.ClientRequestToken
-	} else {
-		ClientRequestToken = protocol.GetIdempotencyToken()
-	}
-	{
-		v := ClientRequestToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "ClientRequestToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Description != nil {
-		v := *s.Description
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "Description", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if len(s.Framework) > 0 {
-		v := s.Framework
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "Framework", protocol.QuotedValue{ValueMarshaler: v}, metadata)
-	}
-	if s.FrameworkConfiguration != nil {
-		v := s.FrameworkConfiguration
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "FrameworkConfiguration", v, metadata)
-	}
-	if s.FrameworkVersion != nil {
-		v := *s.FrameworkVersion
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "FrameworkVersion", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.MemberConfiguration != nil {
-		v := s.MemberConfiguration
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "MemberConfiguration", v, metadata)
-	}
-	if s.Name != nil {
-		v := *s.Name
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "Name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.VotingPolicy != nil {
-		v := s.VotingPolicy
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "VotingPolicy", v, metadata)
-	}
-	return nil
-}
-
-type CreateNetworkOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The unique identifier for the first member within the network.
-	MemberId *string `min:"1" type:"string"`
-
-	// The unique identifier for the network.
-	NetworkId *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s CreateNetworkOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s CreateNetworkOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.MemberId != nil {
-		v := *s.MemberId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "MemberId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.NetworkId != nil {
-		v := *s.NetworkId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "NetworkId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opCreateNetwork = "CreateNetwork"
 
@@ -225,7 +24,7 @@ const opCreateNetwork = "CreateNetwork"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/managedblockchain-2018-09-24/CreateNetwork
-func (c *Client) CreateNetworkRequest(input *CreateNetworkInput) CreateNetworkRequest {
+func (c *Client) CreateNetworkRequest(input *types.CreateNetworkInput) CreateNetworkRequest {
 	op := &aws.Operation{
 		Name:       opCreateNetwork,
 		HTTPMethod: "POST",
@@ -233,10 +32,10 @@ func (c *Client) CreateNetworkRequest(input *CreateNetworkInput) CreateNetworkRe
 	}
 
 	if input == nil {
-		input = &CreateNetworkInput{}
+		input = &types.CreateNetworkInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateNetworkOutput{})
+	req := c.newRequest(op, input, &types.CreateNetworkOutput{})
 	return CreateNetworkRequest{Request: req, Input: input, Copy: c.CreateNetworkRequest}
 }
 
@@ -244,8 +43,8 @@ func (c *Client) CreateNetworkRequest(input *CreateNetworkInput) CreateNetworkRe
 // CreateNetwork API operation.
 type CreateNetworkRequest struct {
 	*aws.Request
-	Input *CreateNetworkInput
-	Copy  func(*CreateNetworkInput) CreateNetworkRequest
+	Input *types.CreateNetworkInput
+	Copy  func(*types.CreateNetworkInput) CreateNetworkRequest
 }
 
 // Send marshals and sends the CreateNetwork API request.
@@ -257,7 +56,7 @@ func (r CreateNetworkRequest) Send(ctx context.Context) (*CreateNetworkResponse,
 	}
 
 	resp := &CreateNetworkResponse{
-		CreateNetworkOutput: r.Request.Data.(*CreateNetworkOutput),
+		CreateNetworkOutput: r.Request.Data.(*types.CreateNetworkOutput),
 		response:            &aws.Response{Request: r.Request},
 	}
 
@@ -267,7 +66,7 @@ func (r CreateNetworkRequest) Send(ctx context.Context) (*CreateNetworkResponse,
 // CreateNetworkResponse is the response type for the
 // CreateNetwork API operation.
 type CreateNetworkResponse struct {
-	*CreateNetworkOutput
+	*types.CreateNetworkOutput
 
 	response *aws.Response
 }

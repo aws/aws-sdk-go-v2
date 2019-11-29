@@ -6,54 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-type DeleteVpcEndpointConnectionNotificationsInput struct {
-	_ struct{} `type:"structure"`
-
-	// One or more notification IDs.
-	//
-	// ConnectionNotificationIds is a required field
-	ConnectionNotificationIds []string `locationName:"ConnectionNotificationId" locationNameList:"item" type:"list" required:"true"`
-
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have
-	// the required permissions, the error response is DryRunOperation. Otherwise,
-	// it is UnauthorizedOperation.
-	DryRun *bool `type:"boolean"`
-}
-
-// String returns the string representation
-func (s DeleteVpcEndpointConnectionNotificationsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteVpcEndpointConnectionNotificationsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteVpcEndpointConnectionNotificationsInput"}
-
-	if s.ConnectionNotificationIds == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ConnectionNotificationIds"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteVpcEndpointConnectionNotificationsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Information about the notifications that could not be deleted successfully.
-	Unsuccessful []UnsuccessfulItem `locationName:"unsuccessful" locationNameList:"item" type:"list"`
-}
-
-// String returns the string representation
-func (s DeleteVpcEndpointConnectionNotificationsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteVpcEndpointConnectionNotifications = "DeleteVpcEndpointConnectionNotifications"
 
@@ -70,7 +24,7 @@ const opDeleteVpcEndpointConnectionNotifications = "DeleteVpcEndpointConnectionN
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteVpcEndpointConnectionNotifications
-func (c *Client) DeleteVpcEndpointConnectionNotificationsRequest(input *DeleteVpcEndpointConnectionNotificationsInput) DeleteVpcEndpointConnectionNotificationsRequest {
+func (c *Client) DeleteVpcEndpointConnectionNotificationsRequest(input *types.DeleteVpcEndpointConnectionNotificationsInput) DeleteVpcEndpointConnectionNotificationsRequest {
 	op := &aws.Operation{
 		Name:       opDeleteVpcEndpointConnectionNotifications,
 		HTTPMethod: "POST",
@@ -78,10 +32,10 @@ func (c *Client) DeleteVpcEndpointConnectionNotificationsRequest(input *DeleteVp
 	}
 
 	if input == nil {
-		input = &DeleteVpcEndpointConnectionNotificationsInput{}
+		input = &types.DeleteVpcEndpointConnectionNotificationsInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteVpcEndpointConnectionNotificationsOutput{})
+	req := c.newRequest(op, input, &types.DeleteVpcEndpointConnectionNotificationsOutput{})
 	return DeleteVpcEndpointConnectionNotificationsRequest{Request: req, Input: input, Copy: c.DeleteVpcEndpointConnectionNotificationsRequest}
 }
 
@@ -89,8 +43,8 @@ func (c *Client) DeleteVpcEndpointConnectionNotificationsRequest(input *DeleteVp
 // DeleteVpcEndpointConnectionNotifications API operation.
 type DeleteVpcEndpointConnectionNotificationsRequest struct {
 	*aws.Request
-	Input *DeleteVpcEndpointConnectionNotificationsInput
-	Copy  func(*DeleteVpcEndpointConnectionNotificationsInput) DeleteVpcEndpointConnectionNotificationsRequest
+	Input *types.DeleteVpcEndpointConnectionNotificationsInput
+	Copy  func(*types.DeleteVpcEndpointConnectionNotificationsInput) DeleteVpcEndpointConnectionNotificationsRequest
 }
 
 // Send marshals and sends the DeleteVpcEndpointConnectionNotifications API request.
@@ -102,7 +56,7 @@ func (r DeleteVpcEndpointConnectionNotificationsRequest) Send(ctx context.Contex
 	}
 
 	resp := &DeleteVpcEndpointConnectionNotificationsResponse{
-		DeleteVpcEndpointConnectionNotificationsOutput: r.Request.Data.(*DeleteVpcEndpointConnectionNotificationsOutput),
+		DeleteVpcEndpointConnectionNotificationsOutput: r.Request.Data.(*types.DeleteVpcEndpointConnectionNotificationsOutput),
 		response: &aws.Response{Request: r.Request},
 	}
 
@@ -112,7 +66,7 @@ func (r DeleteVpcEndpointConnectionNotificationsRequest) Send(ctx context.Contex
 // DeleteVpcEndpointConnectionNotificationsResponse is the response type for the
 // DeleteVpcEndpointConnectionNotifications API operation.
 type DeleteVpcEndpointConnectionNotificationsResponse struct {
-	*DeleteVpcEndpointConnectionNotificationsOutput
+	*types.DeleteVpcEndpointConnectionNotificationsOutput
 
 	response *aws.Response
 }

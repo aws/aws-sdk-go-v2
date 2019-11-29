@@ -6,58 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/emr/types"
 )
-
-type PutBlockPublicAccessConfigurationInput struct {
-	_ struct{} `type:"structure"`
-
-	// A configuration for Amazon EMR block public access. The configuration applies
-	// to all clusters created in your account for the current Region. The configuration
-	// specifies whether block public access is enabled. If block public access
-	// is enabled, security groups associated with the cluster cannot have rules
-	// that allow inbound traffic from 0.0.0.0/0 or ::/0 on a port, unless the port
-	// is specified as an exception using PermittedPublicSecurityGroupRuleRanges
-	// in the BlockPublicAccessConfiguration. By default, Port 22 (SSH) is an exception,
-	// and public access is allowed on this port. You can change this by updating
-	// BlockPublicSecurityGroupRules to remove the exception.
-	//
-	// BlockPublicAccessConfiguration is a required field
-	BlockPublicAccessConfiguration *BlockPublicAccessConfiguration `type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s PutBlockPublicAccessConfigurationInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *PutBlockPublicAccessConfigurationInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "PutBlockPublicAccessConfigurationInput"}
-
-	if s.BlockPublicAccessConfiguration == nil {
-		invalidParams.Add(aws.NewErrParamRequired("BlockPublicAccessConfiguration"))
-	}
-	if s.BlockPublicAccessConfiguration != nil {
-		if err := s.BlockPublicAccessConfiguration.Validate(); err != nil {
-			invalidParams.AddNested("BlockPublicAccessConfiguration", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type PutBlockPublicAccessConfigurationOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s PutBlockPublicAccessConfigurationOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opPutBlockPublicAccessConfiguration = "PutBlockPublicAccessConfiguration"
 
@@ -77,7 +27,7 @@ const opPutBlockPublicAccessConfiguration = "PutBlockPublicAccessConfiguration"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/PutBlockPublicAccessConfiguration
-func (c *Client) PutBlockPublicAccessConfigurationRequest(input *PutBlockPublicAccessConfigurationInput) PutBlockPublicAccessConfigurationRequest {
+func (c *Client) PutBlockPublicAccessConfigurationRequest(input *types.PutBlockPublicAccessConfigurationInput) PutBlockPublicAccessConfigurationRequest {
 	op := &aws.Operation{
 		Name:       opPutBlockPublicAccessConfiguration,
 		HTTPMethod: "POST",
@@ -85,10 +35,10 @@ func (c *Client) PutBlockPublicAccessConfigurationRequest(input *PutBlockPublicA
 	}
 
 	if input == nil {
-		input = &PutBlockPublicAccessConfigurationInput{}
+		input = &types.PutBlockPublicAccessConfigurationInput{}
 	}
 
-	req := c.newRequest(op, input, &PutBlockPublicAccessConfigurationOutput{})
+	req := c.newRequest(op, input, &types.PutBlockPublicAccessConfigurationOutput{})
 	return PutBlockPublicAccessConfigurationRequest{Request: req, Input: input, Copy: c.PutBlockPublicAccessConfigurationRequest}
 }
 
@@ -96,8 +46,8 @@ func (c *Client) PutBlockPublicAccessConfigurationRequest(input *PutBlockPublicA
 // PutBlockPublicAccessConfiguration API operation.
 type PutBlockPublicAccessConfigurationRequest struct {
 	*aws.Request
-	Input *PutBlockPublicAccessConfigurationInput
-	Copy  func(*PutBlockPublicAccessConfigurationInput) PutBlockPublicAccessConfigurationRequest
+	Input *types.PutBlockPublicAccessConfigurationInput
+	Copy  func(*types.PutBlockPublicAccessConfigurationInput) PutBlockPublicAccessConfigurationRequest
 }
 
 // Send marshals and sends the PutBlockPublicAccessConfiguration API request.
@@ -109,7 +59,7 @@ func (r PutBlockPublicAccessConfigurationRequest) Send(ctx context.Context) (*Pu
 	}
 
 	resp := &PutBlockPublicAccessConfigurationResponse{
-		PutBlockPublicAccessConfigurationOutput: r.Request.Data.(*PutBlockPublicAccessConfigurationOutput),
+		PutBlockPublicAccessConfigurationOutput: r.Request.Data.(*types.PutBlockPublicAccessConfigurationOutput),
 		response:                                &aws.Response{Request: r.Request},
 	}
 
@@ -119,7 +69,7 @@ func (r PutBlockPublicAccessConfigurationRequest) Send(ctx context.Context) (*Pu
 // PutBlockPublicAccessConfigurationResponse is the response type for the
 // PutBlockPublicAccessConfiguration API operation.
 type PutBlockPublicAccessConfigurationResponse struct {
-	*PutBlockPublicAccessConfigurationOutput
+	*types.PutBlockPublicAccessConfigurationOutput
 
 	response *aws.Response
 }

@@ -6,88 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/s3/types"
 )
-
-type GetBucketVersioningInput struct {
-	_ struct{} `type:"structure"`
-
-	// Bucket is a required field
-	Bucket *string `location:"uri" locationName:"Bucket" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetBucketVersioningInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetBucketVersioningInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetBucketVersioningInput"}
-
-	if s.Bucket == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Bucket"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-func (s *GetBucketVersioningInput) getBucket() (v string) {
-	if s.Bucket == nil {
-		return v
-	}
-	return *s.Bucket
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetBucketVersioningInput) MarshalFields(e protocol.FieldEncoder) error {
-
-	if s.Bucket != nil {
-		v := *s.Bucket
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "Bucket", protocol.StringValue(v), metadata)
-	}
-	return nil
-}
-
-type GetBucketVersioningOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Specifies whether MFA delete is enabled in the bucket versioning configuration.
-	// This element is only returned if the bucket has been configured with MFA
-	// delete. If the bucket has never been so configured, this element is not returned.
-	MFADelete MFADeleteStatus `locationName:"MfaDelete" type:"string" enum:"true"`
-
-	// The versioning state of the bucket.
-	Status BucketVersioningStatus `type:"string" enum:"true"`
-}
-
-// String returns the string representation
-func (s GetBucketVersioningOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetBucketVersioningOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.MFADelete) > 0 {
-		v := s.MFADelete
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "MfaDelete", v, metadata)
-	}
-	if len(s.Status) > 0 {
-		v := s.Status
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "Status", v, metadata)
-	}
-	return nil
-}
 
 const opGetBucketVersioning = "GetBucketVersioning"
 
@@ -95,6 +15,20 @@ const opGetBucketVersioning = "GetBucketVersioning"
 // Amazon Simple Storage Service.
 //
 // Returns the versioning state of a bucket.
+//
+// To retrieve the versioning state of a bucket, you must be the bucket owner.
+//
+// This implementation also returns the MFA Delete status of the versioning
+// state, i.e., if the MFA Delete status is enabled, the bucket owner must use
+// an authentication device to change the versioning state of the bucket.
+//
+// The following operations are related to GetBucketVersioning:
+//
+//    * GetObject
+//
+//    * PutObject
+//
+//    * DeleteObject
 //
 //    // Example sending a request using GetBucketVersioningRequest.
 //    req := client.GetBucketVersioningRequest(params)
@@ -104,7 +38,7 @@ const opGetBucketVersioning = "GetBucketVersioning"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetBucketVersioning
-func (c *Client) GetBucketVersioningRequest(input *GetBucketVersioningInput) GetBucketVersioningRequest {
+func (c *Client) GetBucketVersioningRequest(input *types.GetBucketVersioningInput) GetBucketVersioningRequest {
 	op := &aws.Operation{
 		Name:       opGetBucketVersioning,
 		HTTPMethod: "GET",
@@ -112,10 +46,10 @@ func (c *Client) GetBucketVersioningRequest(input *GetBucketVersioningInput) Get
 	}
 
 	if input == nil {
-		input = &GetBucketVersioningInput{}
+		input = &types.GetBucketVersioningInput{}
 	}
 
-	req := c.newRequest(op, input, &GetBucketVersioningOutput{})
+	req := c.newRequest(op, input, &types.GetBucketVersioningOutput{})
 	return GetBucketVersioningRequest{Request: req, Input: input, Copy: c.GetBucketVersioningRequest}
 }
 
@@ -123,8 +57,8 @@ func (c *Client) GetBucketVersioningRequest(input *GetBucketVersioningInput) Get
 // GetBucketVersioning API operation.
 type GetBucketVersioningRequest struct {
 	*aws.Request
-	Input *GetBucketVersioningInput
-	Copy  func(*GetBucketVersioningInput) GetBucketVersioningRequest
+	Input *types.GetBucketVersioningInput
+	Copy  func(*types.GetBucketVersioningInput) GetBucketVersioningRequest
 }
 
 // Send marshals and sends the GetBucketVersioning API request.
@@ -136,7 +70,7 @@ func (r GetBucketVersioningRequest) Send(ctx context.Context) (*GetBucketVersion
 	}
 
 	resp := &GetBucketVersioningResponse{
-		GetBucketVersioningOutput: r.Request.Data.(*GetBucketVersioningOutput),
+		GetBucketVersioningOutput: r.Request.Data.(*types.GetBucketVersioningOutput),
 		response:                  &aws.Response{Request: r.Request},
 	}
 
@@ -146,7 +80,7 @@ func (r GetBucketVersioningRequest) Send(ctx context.Context) (*GetBucketVersion
 // GetBucketVersioningResponse is the response type for the
 // GetBucketVersioning API operation.
 type GetBucketVersioningResponse struct {
-	*GetBucketVersioningOutput
+	*types.GetBucketVersioningOutput
 
 	response *aws.Response
 }

@@ -6,90 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/pinpointemail/types"
 )
-
-// A request to obtain a list of dedicated IP pools.
-type ListDedicatedIpPoolsInput struct {
-	_ struct{} `type:"structure"`
-
-	// A token returned from a previous call to ListDedicatedIpPools to indicate
-	// the position in the list of dedicated IP pools.
-	NextToken *string `location:"querystring" locationName:"NextToken" type:"string"`
-
-	// The number of results to show in a single call to ListDedicatedIpPools. If
-	// the number of results is larger than the number you specified in this parameter,
-	// then the response includes a NextToken element, which you can use to obtain
-	// additional results.
-	PageSize *int64 `location:"querystring" locationName:"PageSize" type:"integer"`
-}
-
-// String returns the string representation
-func (s ListDedicatedIpPoolsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListDedicatedIpPoolsInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.PageSize != nil {
-		v := *s.PageSize
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "PageSize", protocol.Int64Value(v), metadata)
-	}
-	return nil
-}
-
-// A list of dedicated IP pools.
-type ListDedicatedIpPoolsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A list of all of the dedicated IP pools that are associated with your Amazon
-	// Pinpoint account.
-	DedicatedIpPools []string `type:"list"`
-
-	// A token that indicates that there are additional IP pools to list. To view
-	// additional IP pools, issue another request to ListDedicatedIpPools, passing
-	// this token in the NextToken parameter.
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s ListDedicatedIpPoolsOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListDedicatedIpPoolsOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.DedicatedIpPools != nil {
-		v := s.DedicatedIpPools
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "DedicatedIpPools", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
-		}
-		ls0.End()
-
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opListDedicatedIpPools = "ListDedicatedIpPools"
 
@@ -107,7 +25,7 @@ const opListDedicatedIpPools = "ListDedicatedIpPools"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/ListDedicatedIpPools
-func (c *Client) ListDedicatedIpPoolsRequest(input *ListDedicatedIpPoolsInput) ListDedicatedIpPoolsRequest {
+func (c *Client) ListDedicatedIpPoolsRequest(input *types.ListDedicatedIpPoolsInput) ListDedicatedIpPoolsRequest {
 	op := &aws.Operation{
 		Name:       opListDedicatedIpPools,
 		HTTPMethod: "GET",
@@ -121,10 +39,10 @@ func (c *Client) ListDedicatedIpPoolsRequest(input *ListDedicatedIpPoolsInput) L
 	}
 
 	if input == nil {
-		input = &ListDedicatedIpPoolsInput{}
+		input = &types.ListDedicatedIpPoolsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListDedicatedIpPoolsOutput{})
+	req := c.newRequest(op, input, &types.ListDedicatedIpPoolsOutput{})
 	return ListDedicatedIpPoolsRequest{Request: req, Input: input, Copy: c.ListDedicatedIpPoolsRequest}
 }
 
@@ -132,8 +50,8 @@ func (c *Client) ListDedicatedIpPoolsRequest(input *ListDedicatedIpPoolsInput) L
 // ListDedicatedIpPools API operation.
 type ListDedicatedIpPoolsRequest struct {
 	*aws.Request
-	Input *ListDedicatedIpPoolsInput
-	Copy  func(*ListDedicatedIpPoolsInput) ListDedicatedIpPoolsRequest
+	Input *types.ListDedicatedIpPoolsInput
+	Copy  func(*types.ListDedicatedIpPoolsInput) ListDedicatedIpPoolsRequest
 }
 
 // Send marshals and sends the ListDedicatedIpPools API request.
@@ -145,7 +63,7 @@ func (r ListDedicatedIpPoolsRequest) Send(ctx context.Context) (*ListDedicatedIp
 	}
 
 	resp := &ListDedicatedIpPoolsResponse{
-		ListDedicatedIpPoolsOutput: r.Request.Data.(*ListDedicatedIpPoolsOutput),
+		ListDedicatedIpPoolsOutput: r.Request.Data.(*types.ListDedicatedIpPoolsOutput),
 		response:                   &aws.Response{Request: r.Request},
 	}
 
@@ -175,7 +93,7 @@ func NewListDedicatedIpPoolsPaginator(req ListDedicatedIpPoolsRequest) ListDedic
 	return ListDedicatedIpPoolsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListDedicatedIpPoolsInput
+				var inCpy *types.ListDedicatedIpPoolsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -195,14 +113,14 @@ type ListDedicatedIpPoolsPaginator struct {
 	aws.Pager
 }
 
-func (p *ListDedicatedIpPoolsPaginator) CurrentPage() *ListDedicatedIpPoolsOutput {
-	return p.Pager.CurrentPage().(*ListDedicatedIpPoolsOutput)
+func (p *ListDedicatedIpPoolsPaginator) CurrentPage() *types.ListDedicatedIpPoolsOutput {
+	return p.Pager.CurrentPage().(*types.ListDedicatedIpPoolsOutput)
 }
 
 // ListDedicatedIpPoolsResponse is the response type for the
 // ListDedicatedIpPools API operation.
 type ListDedicatedIpPoolsResponse struct {
-	*ListDedicatedIpPoolsOutput
+	*types.ListDedicatedIpPoolsOutput
 
 	response *aws.Response
 }

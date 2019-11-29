@@ -4,86 +4,10 @@ package gamelift
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/gamelift/types"
 )
-
-// Represents the input for a request action.
-type CreateGameSessionQueueInput struct {
-	_ struct{} `type:"structure"`
-
-	// List of fleets that can be used to fulfill game session placement requests
-	// in the queue. Fleets are identified by either a fleet ARN or a fleet alias
-	// ARN. Destinations are listed in default preference order.
-	Destinations []GameSessionQueueDestination `type:"list"`
-
-	// Descriptive label that is associated with game session queue. Queue names
-	// must be unique within each region.
-	//
-	// Name is a required field
-	Name *string `min:"1" type:"string" required:"true"`
-
-	// Collection of latency policies to apply when processing game sessions placement
-	// requests with player latency information. Multiple policies are evaluated
-	// in order of the maximum latency value, starting with the lowest latency values.
-	// With just one policy, it is enforced at the start of the game session placement
-	// for the duration period. With multiple policies, each policy is enforced
-	// consecutively for its duration period. For example, a queue might enforce
-	// a 60-second policy followed by a 120-second policy, and then no policy for
-	// the remainder of the placement. A player latency policy must set a value
-	// for MaximumIndividualPlayerLatencyMilliseconds; if none is set, this API
-	// requests will fail.
-	PlayerLatencyPolicies []PlayerLatencyPolicy `type:"list"`
-
-	// Maximum time, in seconds, that a new game session placement request remains
-	// in the queue. When a request exceeds this time, the game session placement
-	// changes to a TIMED_OUT status.
-	TimeoutInSeconds *int64 `type:"integer"`
-}
-
-// String returns the string representation
-func (s CreateGameSessionQueueInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateGameSessionQueueInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateGameSessionQueueInput"}
-
-	if s.Name == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Name"))
-	}
-	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
-	}
-	if s.Destinations != nil {
-		for i, v := range s.Destinations {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Destinations", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Represents the returned data in response to a request action.
-type CreateGameSessionQueueOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Object that describes the newly created game session queue.
-	GameSessionQueue *GameSessionQueue `type:"structure"`
-}
-
-// String returns the string representation
-func (s CreateGameSessionQueueOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCreateGameSessionQueue = "CreateGameSessionQueue"
 
@@ -137,7 +61,7 @@ const opCreateGameSessionQueue = "CreateGameSessionQueue"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/CreateGameSessionQueue
-func (c *Client) CreateGameSessionQueueRequest(input *CreateGameSessionQueueInput) CreateGameSessionQueueRequest {
+func (c *Client) CreateGameSessionQueueRequest(input *types.CreateGameSessionQueueInput) CreateGameSessionQueueRequest {
 	op := &aws.Operation{
 		Name:       opCreateGameSessionQueue,
 		HTTPMethod: "POST",
@@ -145,10 +69,10 @@ func (c *Client) CreateGameSessionQueueRequest(input *CreateGameSessionQueueInpu
 	}
 
 	if input == nil {
-		input = &CreateGameSessionQueueInput{}
+		input = &types.CreateGameSessionQueueInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateGameSessionQueueOutput{})
+	req := c.newRequest(op, input, &types.CreateGameSessionQueueOutput{})
 	return CreateGameSessionQueueRequest{Request: req, Input: input, Copy: c.CreateGameSessionQueueRequest}
 }
 
@@ -156,8 +80,8 @@ func (c *Client) CreateGameSessionQueueRequest(input *CreateGameSessionQueueInpu
 // CreateGameSessionQueue API operation.
 type CreateGameSessionQueueRequest struct {
 	*aws.Request
-	Input *CreateGameSessionQueueInput
-	Copy  func(*CreateGameSessionQueueInput) CreateGameSessionQueueRequest
+	Input *types.CreateGameSessionQueueInput
+	Copy  func(*types.CreateGameSessionQueueInput) CreateGameSessionQueueRequest
 }
 
 // Send marshals and sends the CreateGameSessionQueue API request.
@@ -169,7 +93,7 @@ func (r CreateGameSessionQueueRequest) Send(ctx context.Context) (*CreateGameSes
 	}
 
 	resp := &CreateGameSessionQueueResponse{
-		CreateGameSessionQueueOutput: r.Request.Data.(*CreateGameSessionQueueOutput),
+		CreateGameSessionQueueOutput: r.Request.Data.(*types.CreateGameSessionQueueOutput),
 		response:                     &aws.Response{Request: r.Request},
 	}
 
@@ -179,7 +103,7 @@ func (r CreateGameSessionQueueRequest) Send(ctx context.Context) (*CreateGameSes
 // CreateGameSessionQueueResponse is the response type for the
 // CreateGameSessionQueue API operation.
 type CreateGameSessionQueueResponse struct {
-	*CreateGameSessionQueueOutput
+	*types.CreateGameSessionQueueOutput
 
 	response *aws.Response
 }

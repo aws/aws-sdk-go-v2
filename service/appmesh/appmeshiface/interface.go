@@ -10,6 +10,7 @@ package appmeshiface
 
 import (
 	"github.com/aws/aws-sdk-go-v2/service/appmesh"
+	"github.com/aws/aws-sdk-go-v2/service/appmesh/types"
 )
 
 // ClientAPI provides an interface to enable mocking the
@@ -43,7 +44,7 @@ import (
 //    type mockClientClient struct {
 //        appmeshiface.ClientPI
 //    }
-//    func (m *mockClientClient) CreateMesh(input *appmesh.CreateMeshInput) (*appmesh.CreateMeshOutput, error) {
+//    func (m *mockClientClient) CreateMesh(input *types.CreateMeshInput) (*types.CreateMeshOutput, error) {
 //        // mock response/functionality
 //    }
 //
@@ -61,61 +62,61 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type ClientAPI interface {
-	CreateMeshRequest(*appmesh.CreateMeshInput) appmesh.CreateMeshRequest
+	CreateMeshRequest(*types.CreateMeshInput) appmesh.CreateMeshRequest
 
-	CreateRouteRequest(*appmesh.CreateRouteInput) appmesh.CreateRouteRequest
+	CreateRouteRequest(*types.CreateRouteInput) appmesh.CreateRouteRequest
 
-	CreateVirtualNodeRequest(*appmesh.CreateVirtualNodeInput) appmesh.CreateVirtualNodeRequest
+	CreateVirtualNodeRequest(*types.CreateVirtualNodeInput) appmesh.CreateVirtualNodeRequest
 
-	CreateVirtualRouterRequest(*appmesh.CreateVirtualRouterInput) appmesh.CreateVirtualRouterRequest
+	CreateVirtualRouterRequest(*types.CreateVirtualRouterInput) appmesh.CreateVirtualRouterRequest
 
-	CreateVirtualServiceRequest(*appmesh.CreateVirtualServiceInput) appmesh.CreateVirtualServiceRequest
+	CreateVirtualServiceRequest(*types.CreateVirtualServiceInput) appmesh.CreateVirtualServiceRequest
 
-	DeleteMeshRequest(*appmesh.DeleteMeshInput) appmesh.DeleteMeshRequest
+	DeleteMeshRequest(*types.DeleteMeshInput) appmesh.DeleteMeshRequest
 
-	DeleteRouteRequest(*appmesh.DeleteRouteInput) appmesh.DeleteRouteRequest
+	DeleteRouteRequest(*types.DeleteRouteInput) appmesh.DeleteRouteRequest
 
-	DeleteVirtualNodeRequest(*appmesh.DeleteVirtualNodeInput) appmesh.DeleteVirtualNodeRequest
+	DeleteVirtualNodeRequest(*types.DeleteVirtualNodeInput) appmesh.DeleteVirtualNodeRequest
 
-	DeleteVirtualRouterRequest(*appmesh.DeleteVirtualRouterInput) appmesh.DeleteVirtualRouterRequest
+	DeleteVirtualRouterRequest(*types.DeleteVirtualRouterInput) appmesh.DeleteVirtualRouterRequest
 
-	DeleteVirtualServiceRequest(*appmesh.DeleteVirtualServiceInput) appmesh.DeleteVirtualServiceRequest
+	DeleteVirtualServiceRequest(*types.DeleteVirtualServiceInput) appmesh.DeleteVirtualServiceRequest
 
-	DescribeMeshRequest(*appmesh.DescribeMeshInput) appmesh.DescribeMeshRequest
+	DescribeMeshRequest(*types.DescribeMeshInput) appmesh.DescribeMeshRequest
 
-	DescribeRouteRequest(*appmesh.DescribeRouteInput) appmesh.DescribeRouteRequest
+	DescribeRouteRequest(*types.DescribeRouteInput) appmesh.DescribeRouteRequest
 
-	DescribeVirtualNodeRequest(*appmesh.DescribeVirtualNodeInput) appmesh.DescribeVirtualNodeRequest
+	DescribeVirtualNodeRequest(*types.DescribeVirtualNodeInput) appmesh.DescribeVirtualNodeRequest
 
-	DescribeVirtualRouterRequest(*appmesh.DescribeVirtualRouterInput) appmesh.DescribeVirtualRouterRequest
+	DescribeVirtualRouterRequest(*types.DescribeVirtualRouterInput) appmesh.DescribeVirtualRouterRequest
 
-	DescribeVirtualServiceRequest(*appmesh.DescribeVirtualServiceInput) appmesh.DescribeVirtualServiceRequest
+	DescribeVirtualServiceRequest(*types.DescribeVirtualServiceInput) appmesh.DescribeVirtualServiceRequest
 
-	ListMeshesRequest(*appmesh.ListMeshesInput) appmesh.ListMeshesRequest
+	ListMeshesRequest(*types.ListMeshesInput) appmesh.ListMeshesRequest
 
-	ListRoutesRequest(*appmesh.ListRoutesInput) appmesh.ListRoutesRequest
+	ListRoutesRequest(*types.ListRoutesInput) appmesh.ListRoutesRequest
 
-	ListTagsForResourceRequest(*appmesh.ListTagsForResourceInput) appmesh.ListTagsForResourceRequest
+	ListTagsForResourceRequest(*types.ListTagsForResourceInput) appmesh.ListTagsForResourceRequest
 
-	ListVirtualNodesRequest(*appmesh.ListVirtualNodesInput) appmesh.ListVirtualNodesRequest
+	ListVirtualNodesRequest(*types.ListVirtualNodesInput) appmesh.ListVirtualNodesRequest
 
-	ListVirtualRoutersRequest(*appmesh.ListVirtualRoutersInput) appmesh.ListVirtualRoutersRequest
+	ListVirtualRoutersRequest(*types.ListVirtualRoutersInput) appmesh.ListVirtualRoutersRequest
 
-	ListVirtualServicesRequest(*appmesh.ListVirtualServicesInput) appmesh.ListVirtualServicesRequest
+	ListVirtualServicesRequest(*types.ListVirtualServicesInput) appmesh.ListVirtualServicesRequest
 
-	TagResourceRequest(*appmesh.TagResourceInput) appmesh.TagResourceRequest
+	TagResourceRequest(*types.TagResourceInput) appmesh.TagResourceRequest
 
-	UntagResourceRequest(*appmesh.UntagResourceInput) appmesh.UntagResourceRequest
+	UntagResourceRequest(*types.UntagResourceInput) appmesh.UntagResourceRequest
 
-	UpdateMeshRequest(*appmesh.UpdateMeshInput) appmesh.UpdateMeshRequest
+	UpdateMeshRequest(*types.UpdateMeshInput) appmesh.UpdateMeshRequest
 
-	UpdateRouteRequest(*appmesh.UpdateRouteInput) appmesh.UpdateRouteRequest
+	UpdateRouteRequest(*types.UpdateRouteInput) appmesh.UpdateRouteRequest
 
-	UpdateVirtualNodeRequest(*appmesh.UpdateVirtualNodeInput) appmesh.UpdateVirtualNodeRequest
+	UpdateVirtualNodeRequest(*types.UpdateVirtualNodeInput) appmesh.UpdateVirtualNodeRequest
 
-	UpdateVirtualRouterRequest(*appmesh.UpdateVirtualRouterInput) appmesh.UpdateVirtualRouterRequest
+	UpdateVirtualRouterRequest(*types.UpdateVirtualRouterInput) appmesh.UpdateVirtualRouterRequest
 
-	UpdateVirtualServiceRequest(*appmesh.UpdateVirtualServiceInput) appmesh.UpdateVirtualServiceRequest
+	UpdateVirtualServiceRequest(*types.UpdateVirtualServiceInput) appmesh.UpdateVirtualServiceRequest
 }
 
 var _ ClientAPI = (*appmesh.Client)(nil)

@@ -6,54 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-type ExportClientVpnClientConfigurationInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the Client VPN endpoint.
-	//
-	// ClientVpnEndpointId is a required field
-	ClientVpnEndpointId *string `type:"string" required:"true"`
-
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have
-	// the required permissions, the error response is DryRunOperation. Otherwise,
-	// it is UnauthorizedOperation.
-	DryRun *bool `type:"boolean"`
-}
-
-// String returns the string representation
-func (s ExportClientVpnClientConfigurationInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ExportClientVpnClientConfigurationInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ExportClientVpnClientConfigurationInput"}
-
-	if s.ClientVpnEndpointId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ClientVpnEndpointId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ExportClientVpnClientConfigurationOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The contents of the Client VPN endpoint configuration file.
-	ClientConfiguration *string `locationName:"clientConfiguration" type:"string"`
-}
-
-// String returns the string representation
-func (s ExportClientVpnClientConfigurationOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opExportClientVpnClientConfiguration = "ExportClientVpnClientConfiguration"
 
@@ -73,7 +27,7 @@ const opExportClientVpnClientConfiguration = "ExportClientVpnClientConfiguration
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ExportClientVpnClientConfiguration
-func (c *Client) ExportClientVpnClientConfigurationRequest(input *ExportClientVpnClientConfigurationInput) ExportClientVpnClientConfigurationRequest {
+func (c *Client) ExportClientVpnClientConfigurationRequest(input *types.ExportClientVpnClientConfigurationInput) ExportClientVpnClientConfigurationRequest {
 	op := &aws.Operation{
 		Name:       opExportClientVpnClientConfiguration,
 		HTTPMethod: "POST",
@@ -81,10 +35,10 @@ func (c *Client) ExportClientVpnClientConfigurationRequest(input *ExportClientVp
 	}
 
 	if input == nil {
-		input = &ExportClientVpnClientConfigurationInput{}
+		input = &types.ExportClientVpnClientConfigurationInput{}
 	}
 
-	req := c.newRequest(op, input, &ExportClientVpnClientConfigurationOutput{})
+	req := c.newRequest(op, input, &types.ExportClientVpnClientConfigurationOutput{})
 	return ExportClientVpnClientConfigurationRequest{Request: req, Input: input, Copy: c.ExportClientVpnClientConfigurationRequest}
 }
 
@@ -92,8 +46,8 @@ func (c *Client) ExportClientVpnClientConfigurationRequest(input *ExportClientVp
 // ExportClientVpnClientConfiguration API operation.
 type ExportClientVpnClientConfigurationRequest struct {
 	*aws.Request
-	Input *ExportClientVpnClientConfigurationInput
-	Copy  func(*ExportClientVpnClientConfigurationInput) ExportClientVpnClientConfigurationRequest
+	Input *types.ExportClientVpnClientConfigurationInput
+	Copy  func(*types.ExportClientVpnClientConfigurationInput) ExportClientVpnClientConfigurationRequest
 }
 
 // Send marshals and sends the ExportClientVpnClientConfiguration API request.
@@ -105,7 +59,7 @@ func (r ExportClientVpnClientConfigurationRequest) Send(ctx context.Context) (*E
 	}
 
 	resp := &ExportClientVpnClientConfigurationResponse{
-		ExportClientVpnClientConfigurationOutput: r.Request.Data.(*ExportClientVpnClientConfigurationOutput),
+		ExportClientVpnClientConfigurationOutput: r.Request.Data.(*types.ExportClientVpnClientConfigurationOutput),
 		response:                                 &aws.Response{Request: r.Request},
 	}
 
@@ -115,7 +69,7 @@ func (r ExportClientVpnClientConfigurationRequest) Send(ctx context.Context) (*E
 // ExportClientVpnClientConfigurationResponse is the response type for the
 // ExportClientVpnClientConfiguration API operation.
 type ExportClientVpnClientConfigurationResponse struct {
-	*ExportClientVpnClientConfigurationOutput
+	*types.ExportClientVpnClientConfigurationOutput
 
 	response *aws.Response
 }

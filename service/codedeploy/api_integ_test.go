@@ -13,6 +13,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws/awserr"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting/integration"
 	"github.com/aws/aws-sdk-go-v2/service/codedeploy"
+	"github.com/aws/aws-sdk-go-v2/service/codedeploy/types"
 )
 
 var _ aws.Config
@@ -24,7 +25,7 @@ func TestInteg_00_ListApplications(t *testing.T) {
 
 	cfg := integration.ConfigWithDefaultRegion("us-west-2")
 	svc := codedeploy.New(cfg)
-	params := &codedeploy.ListApplicationsInput{}
+	params := &types.ListApplicationsInput{}
 
 	req := svc.ListApplicationsRequest(params)
 
@@ -39,7 +40,7 @@ func TestInteg_01_GetDeployment(t *testing.T) {
 
 	cfg := integration.ConfigWithDefaultRegion("us-west-2")
 	svc := codedeploy.New(cfg)
-	params := &codedeploy.GetDeploymentInput{
+	params := &types.GetDeploymentInput{
 		DeploymentId: aws.String("d-USUAELQEX"),
 	}
 

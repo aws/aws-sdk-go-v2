@@ -6,53 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/ec2query"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-type SendDiagnosticInterruptInput struct {
-	_ struct{} `type:"structure"`
-
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have
-	// the required permissions, the error response is DryRunOperation. Otherwise,
-	// it is UnauthorizedOperation.
-	DryRun *bool `type:"boolean"`
-
-	// The ID of the instance.
-	//
-	// InstanceId is a required field
-	InstanceId *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s SendDiagnosticInterruptInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *SendDiagnosticInterruptInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "SendDiagnosticInterruptInput"}
-
-	if s.InstanceId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("InstanceId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type SendDiagnosticInterruptOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s SendDiagnosticInterruptOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opSendDiagnosticInterrupt = "SendDiagnosticInterrupt"
 
@@ -86,7 +43,7 @@ const opSendDiagnosticInterrupt = "SendDiagnosticInterrupt"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/SendDiagnosticInterrupt
-func (c *Client) SendDiagnosticInterruptRequest(input *SendDiagnosticInterruptInput) SendDiagnosticInterruptRequest {
+func (c *Client) SendDiagnosticInterruptRequest(input *types.SendDiagnosticInterruptInput) SendDiagnosticInterruptRequest {
 	op := &aws.Operation{
 		Name:       opSendDiagnosticInterrupt,
 		HTTPMethod: "POST",
@@ -94,10 +51,10 @@ func (c *Client) SendDiagnosticInterruptRequest(input *SendDiagnosticInterruptIn
 	}
 
 	if input == nil {
-		input = &SendDiagnosticInterruptInput{}
+		input = &types.SendDiagnosticInterruptInput{}
 	}
 
-	req := c.newRequest(op, input, &SendDiagnosticInterruptOutput{})
+	req := c.newRequest(op, input, &types.SendDiagnosticInterruptOutput{})
 	req.Handlers.Unmarshal.Remove(ec2query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return SendDiagnosticInterruptRequest{Request: req, Input: input, Copy: c.SendDiagnosticInterruptRequest}
@@ -107,8 +64,8 @@ func (c *Client) SendDiagnosticInterruptRequest(input *SendDiagnosticInterruptIn
 // SendDiagnosticInterrupt API operation.
 type SendDiagnosticInterruptRequest struct {
 	*aws.Request
-	Input *SendDiagnosticInterruptInput
-	Copy  func(*SendDiagnosticInterruptInput) SendDiagnosticInterruptRequest
+	Input *types.SendDiagnosticInterruptInput
+	Copy  func(*types.SendDiagnosticInterruptInput) SendDiagnosticInterruptRequest
 }
 
 // Send marshals and sends the SendDiagnosticInterrupt API request.
@@ -120,7 +77,7 @@ func (r SendDiagnosticInterruptRequest) Send(ctx context.Context) (*SendDiagnost
 	}
 
 	resp := &SendDiagnosticInterruptResponse{
-		SendDiagnosticInterruptOutput: r.Request.Data.(*SendDiagnosticInterruptOutput),
+		SendDiagnosticInterruptOutput: r.Request.Data.(*types.SendDiagnosticInterruptOutput),
 		response:                      &aws.Response{Request: r.Request},
 	}
 
@@ -130,7 +87,7 @@ func (r SendDiagnosticInterruptRequest) Send(ctx context.Context) (*SendDiagnost
 // SendDiagnosticInterruptResponse is the response type for the
 // SendDiagnosticInterrupt API operation.
 type SendDiagnosticInterruptResponse struct {
-	*SendDiagnosticInterruptOutput
+	*types.SendDiagnosticInterruptOutput
 
 	response *aws.Response
 }

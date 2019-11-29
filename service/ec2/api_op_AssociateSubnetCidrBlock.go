@@ -6,60 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-type AssociateSubnetCidrBlockInput struct {
-	_ struct{} `type:"structure"`
-
-	// The IPv6 CIDR block for your subnet. The subnet must have a /64 prefix length.
-	//
-	// Ipv6CidrBlock is a required field
-	Ipv6CidrBlock *string `locationName:"ipv6CidrBlock" type:"string" required:"true"`
-
-	// The ID of your subnet.
-	//
-	// SubnetId is a required field
-	SubnetId *string `locationName:"subnetId" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s AssociateSubnetCidrBlockInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *AssociateSubnetCidrBlockInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "AssociateSubnetCidrBlockInput"}
-
-	if s.Ipv6CidrBlock == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Ipv6CidrBlock"))
-	}
-
-	if s.SubnetId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("SubnetId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type AssociateSubnetCidrBlockOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Information about the IPv6 CIDR block association.
-	Ipv6CidrBlockAssociation *SubnetIpv6CidrBlockAssociation `locationName:"ipv6CidrBlockAssociation" type:"structure"`
-
-	// The ID of the subnet.
-	SubnetId *string `locationName:"subnetId" type:"string"`
-}
-
-// String returns the string representation
-func (s AssociateSubnetCidrBlockOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opAssociateSubnetCidrBlock = "AssociateSubnetCidrBlock"
 
@@ -78,7 +26,7 @@ const opAssociateSubnetCidrBlock = "AssociateSubnetCidrBlock"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AssociateSubnetCidrBlock
-func (c *Client) AssociateSubnetCidrBlockRequest(input *AssociateSubnetCidrBlockInput) AssociateSubnetCidrBlockRequest {
+func (c *Client) AssociateSubnetCidrBlockRequest(input *types.AssociateSubnetCidrBlockInput) AssociateSubnetCidrBlockRequest {
 	op := &aws.Operation{
 		Name:       opAssociateSubnetCidrBlock,
 		HTTPMethod: "POST",
@@ -86,10 +34,10 @@ func (c *Client) AssociateSubnetCidrBlockRequest(input *AssociateSubnetCidrBlock
 	}
 
 	if input == nil {
-		input = &AssociateSubnetCidrBlockInput{}
+		input = &types.AssociateSubnetCidrBlockInput{}
 	}
 
-	req := c.newRequest(op, input, &AssociateSubnetCidrBlockOutput{})
+	req := c.newRequest(op, input, &types.AssociateSubnetCidrBlockOutput{})
 	return AssociateSubnetCidrBlockRequest{Request: req, Input: input, Copy: c.AssociateSubnetCidrBlockRequest}
 }
 
@@ -97,8 +45,8 @@ func (c *Client) AssociateSubnetCidrBlockRequest(input *AssociateSubnetCidrBlock
 // AssociateSubnetCidrBlock API operation.
 type AssociateSubnetCidrBlockRequest struct {
 	*aws.Request
-	Input *AssociateSubnetCidrBlockInput
-	Copy  func(*AssociateSubnetCidrBlockInput) AssociateSubnetCidrBlockRequest
+	Input *types.AssociateSubnetCidrBlockInput
+	Copy  func(*types.AssociateSubnetCidrBlockInput) AssociateSubnetCidrBlockRequest
 }
 
 // Send marshals and sends the AssociateSubnetCidrBlock API request.
@@ -110,7 +58,7 @@ func (r AssociateSubnetCidrBlockRequest) Send(ctx context.Context) (*AssociateSu
 	}
 
 	resp := &AssociateSubnetCidrBlockResponse{
-		AssociateSubnetCidrBlockOutput: r.Request.Data.(*AssociateSubnetCidrBlockOutput),
+		AssociateSubnetCidrBlockOutput: r.Request.Data.(*types.AssociateSubnetCidrBlockOutput),
 		response:                       &aws.Response{Request: r.Request},
 	}
 
@@ -120,7 +68,7 @@ func (r AssociateSubnetCidrBlockRequest) Send(ctx context.Context) (*AssociateSu
 // AssociateSubnetCidrBlockResponse is the response type for the
 // AssociateSubnetCidrBlock API operation.
 type AssociateSubnetCidrBlockResponse struct {
-	*AssociateSubnetCidrBlockOutput
+	*types.AssociateSubnetCidrBlockOutput
 
 	response *aws.Response
 }

@@ -6,62 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/waf/types"
 )
-
-type ListSizeConstraintSetsInput struct {
-	_ struct{} `type:"structure"`
-
-	// Specifies the number of SizeConstraintSet objects that you want AWS WAF to
-	// return for this request. If you have more SizeConstraintSets objects than
-	// the number you specify for Limit, the response includes a NextMarker value
-	// that you can use to get another batch of SizeConstraintSet objects.
-	Limit *int64 `type:"integer"`
-
-	// If you specify a value for Limit and you have more SizeConstraintSets than
-	// the value of Limit, AWS WAF returns a NextMarker value in the response that
-	// allows you to list another group of SizeConstraintSets. For the second and
-	// subsequent ListSizeConstraintSets requests, specify the value of NextMarker
-	// from the previous response to get information about another batch of SizeConstraintSets.
-	NextMarker *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s ListSizeConstraintSetsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListSizeConstraintSetsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListSizeConstraintSetsInput"}
-	if s.NextMarker != nil && len(*s.NextMarker) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("NextMarker", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ListSizeConstraintSetsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// If you have more SizeConstraintSet objects than the number that you specified
-	// for Limit in the request, the response includes a NextMarker value. To list
-	// more SizeConstraintSet objects, submit another ListSizeConstraintSets request,
-	// and specify the NextMarker value from the response in the NextMarker value
-	// in the next request.
-	NextMarker *string `min:"1" type:"string"`
-
-	// An array of SizeConstraintSetSummary objects.
-	SizeConstraintSets []SizeConstraintSetSummary `type:"list"`
-}
-
-// String returns the string representation
-func (s ListSizeConstraintSetsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListSizeConstraintSets = "ListSizeConstraintSets"
 
@@ -78,7 +24,7 @@ const opListSizeConstraintSets = "ListSizeConstraintSets"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/ListSizeConstraintSets
-func (c *Client) ListSizeConstraintSetsRequest(input *ListSizeConstraintSetsInput) ListSizeConstraintSetsRequest {
+func (c *Client) ListSizeConstraintSetsRequest(input *types.ListSizeConstraintSetsInput) ListSizeConstraintSetsRequest {
 	op := &aws.Operation{
 		Name:       opListSizeConstraintSets,
 		HTTPMethod: "POST",
@@ -86,10 +32,10 @@ func (c *Client) ListSizeConstraintSetsRequest(input *ListSizeConstraintSetsInpu
 	}
 
 	if input == nil {
-		input = &ListSizeConstraintSetsInput{}
+		input = &types.ListSizeConstraintSetsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListSizeConstraintSetsOutput{})
+	req := c.newRequest(op, input, &types.ListSizeConstraintSetsOutput{})
 	return ListSizeConstraintSetsRequest{Request: req, Input: input, Copy: c.ListSizeConstraintSetsRequest}
 }
 
@@ -97,8 +43,8 @@ func (c *Client) ListSizeConstraintSetsRequest(input *ListSizeConstraintSetsInpu
 // ListSizeConstraintSets API operation.
 type ListSizeConstraintSetsRequest struct {
 	*aws.Request
-	Input *ListSizeConstraintSetsInput
-	Copy  func(*ListSizeConstraintSetsInput) ListSizeConstraintSetsRequest
+	Input *types.ListSizeConstraintSetsInput
+	Copy  func(*types.ListSizeConstraintSetsInput) ListSizeConstraintSetsRequest
 }
 
 // Send marshals and sends the ListSizeConstraintSets API request.
@@ -110,7 +56,7 @@ func (r ListSizeConstraintSetsRequest) Send(ctx context.Context) (*ListSizeConst
 	}
 
 	resp := &ListSizeConstraintSetsResponse{
-		ListSizeConstraintSetsOutput: r.Request.Data.(*ListSizeConstraintSetsOutput),
+		ListSizeConstraintSetsOutput: r.Request.Data.(*types.ListSizeConstraintSetsOutput),
 		response:                     &aws.Response{Request: r.Request},
 	}
 
@@ -120,7 +66,7 @@ func (r ListSizeConstraintSetsRequest) Send(ctx context.Context) (*ListSizeConst
 // ListSizeConstraintSetsResponse is the response type for the
 // ListSizeConstraintSets API operation.
 type ListSizeConstraintSetsResponse struct {
-	*ListSizeConstraintSetsOutput
+	*types.ListSizeConstraintSetsOutput
 
 	response *aws.Response
 }

@@ -4,110 +4,10 @@ package lightsail
 
 import (
 	"context"
-	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/lightsail/types"
 )
-
-type GetInstanceMetricDataInput struct {
-	_ struct{} `type:"structure"`
-
-	// The end time of the time period.
-	//
-	// EndTime is a required field
-	EndTime *time.Time `locationName:"endTime" type:"timestamp" required:"true"`
-
-	// The name of the instance for which you want to get metrics data.
-	//
-	// InstanceName is a required field
-	InstanceName *string `locationName:"instanceName" type:"string" required:"true"`
-
-	// The metric name to get data about.
-	//
-	// MetricName is a required field
-	MetricName InstanceMetricName `locationName:"metricName" type:"string" required:"true" enum:"true"`
-
-	// The granularity, in seconds, of the returned data points.
-	//
-	// Period is a required field
-	Period *int64 `locationName:"period" min:"60" type:"integer" required:"true"`
-
-	// The start time of the time period.
-	//
-	// StartTime is a required field
-	StartTime *time.Time `locationName:"startTime" type:"timestamp" required:"true"`
-
-	// The instance statistics.
-	//
-	// Statistics is a required field
-	Statistics []MetricStatistic `locationName:"statistics" type:"list" required:"true"`
-
-	// The unit. The list of valid values is below.
-	//
-	// Unit is a required field
-	Unit MetricUnit `locationName:"unit" type:"string" required:"true" enum:"true"`
-}
-
-// String returns the string representation
-func (s GetInstanceMetricDataInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetInstanceMetricDataInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetInstanceMetricDataInput"}
-
-	if s.EndTime == nil {
-		invalidParams.Add(aws.NewErrParamRequired("EndTime"))
-	}
-
-	if s.InstanceName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("InstanceName"))
-	}
-	if len(s.MetricName) == 0 {
-		invalidParams.Add(aws.NewErrParamRequired("MetricName"))
-	}
-
-	if s.Period == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Period"))
-	}
-	if s.Period != nil && *s.Period < 60 {
-		invalidParams.Add(aws.NewErrParamMinValue("Period", 60))
-	}
-
-	if s.StartTime == nil {
-		invalidParams.Add(aws.NewErrParamRequired("StartTime"))
-	}
-
-	if s.Statistics == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Statistics"))
-	}
-	if len(s.Unit) == 0 {
-		invalidParams.Add(aws.NewErrParamRequired("Unit"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type GetInstanceMetricDataOutput struct {
-	_ struct{} `type:"structure"`
-
-	// An array of key-value pairs containing information about the results of your
-	// get instance metric data request.
-	MetricData []MetricDatapoint `locationName:"metricData" type:"list"`
-
-	// The metric name to return data for.
-	MetricName InstanceMetricName `locationName:"metricName" type:"string" enum:"true"`
-}
-
-// String returns the string representation
-func (s GetInstanceMetricDataOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetInstanceMetricData = "GetInstanceMetricData"
 
@@ -125,7 +25,7 @@ const opGetInstanceMetricData = "GetInstanceMetricData"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetInstanceMetricData
-func (c *Client) GetInstanceMetricDataRequest(input *GetInstanceMetricDataInput) GetInstanceMetricDataRequest {
+func (c *Client) GetInstanceMetricDataRequest(input *types.GetInstanceMetricDataInput) GetInstanceMetricDataRequest {
 	op := &aws.Operation{
 		Name:       opGetInstanceMetricData,
 		HTTPMethod: "POST",
@@ -133,10 +33,10 @@ func (c *Client) GetInstanceMetricDataRequest(input *GetInstanceMetricDataInput)
 	}
 
 	if input == nil {
-		input = &GetInstanceMetricDataInput{}
+		input = &types.GetInstanceMetricDataInput{}
 	}
 
-	req := c.newRequest(op, input, &GetInstanceMetricDataOutput{})
+	req := c.newRequest(op, input, &types.GetInstanceMetricDataOutput{})
 	return GetInstanceMetricDataRequest{Request: req, Input: input, Copy: c.GetInstanceMetricDataRequest}
 }
 
@@ -144,8 +44,8 @@ func (c *Client) GetInstanceMetricDataRequest(input *GetInstanceMetricDataInput)
 // GetInstanceMetricData API operation.
 type GetInstanceMetricDataRequest struct {
 	*aws.Request
-	Input *GetInstanceMetricDataInput
-	Copy  func(*GetInstanceMetricDataInput) GetInstanceMetricDataRequest
+	Input *types.GetInstanceMetricDataInput
+	Copy  func(*types.GetInstanceMetricDataInput) GetInstanceMetricDataRequest
 }
 
 // Send marshals and sends the GetInstanceMetricData API request.
@@ -157,7 +57,7 @@ func (r GetInstanceMetricDataRequest) Send(ctx context.Context) (*GetInstanceMet
 	}
 
 	resp := &GetInstanceMetricDataResponse{
-		GetInstanceMetricDataOutput: r.Request.Data.(*GetInstanceMetricDataOutput),
+		GetInstanceMetricDataOutput: r.Request.Data.(*types.GetInstanceMetricDataOutput),
 		response:                    &aws.Response{Request: r.Request},
 	}
 
@@ -167,7 +67,7 @@ func (r GetInstanceMetricDataRequest) Send(ctx context.Context) (*GetInstanceMet
 // GetInstanceMetricDataResponse is the response type for the
 // GetInstanceMetricData API operation.
 type GetInstanceMetricDataResponse struct {
-	*GetInstanceMetricDataOutput
+	*types.GetInstanceMetricDataOutput
 
 	response *aws.Response
 }

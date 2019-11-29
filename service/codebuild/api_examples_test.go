@@ -12,6 +12,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws/awserr"
 	"github.com/aws/aws-sdk-go-v2/aws/external"
 	"github.com/aws/aws-sdk-go-v2/service/codebuild"
+	"github.com/aws/aws-sdk-go-v2/service/codebuild/types"
 )
 
 var _ time.Duration
@@ -36,7 +37,7 @@ func ExampleClient_BatchGetBuildsRequest_shared00() {
 	}
 
 	svc := codebuild.New(cfg)
-	input := &codebuild.BatchGetBuildsInput{
+	input := &types.BatchGetBuildsInput{
 		Ids: []string{
 			"codebuild-demo-project:9b0ac37f-d19e-4254-9079-f47e9a389eEX",
 			"codebuild-demo-project:b79a46f7-1473-4636-a23f-da9c45c208EX",

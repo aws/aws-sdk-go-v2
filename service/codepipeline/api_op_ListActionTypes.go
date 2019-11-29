@@ -6,58 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/codepipeline/types"
 )
-
-// Represents the input of a ListActionTypes action.
-type ListActionTypesInput struct {
-	_ struct{} `type:"structure"`
-
-	// Filters the list of action types to those created by a specified entity.
-	ActionOwnerFilter ActionOwner `locationName:"actionOwnerFilter" type:"string" enum:"true"`
-
-	// An identifier that was returned from the previous list action types call,
-	// which can be used to return the next set of action types in the list.
-	NextToken *string `locationName:"nextToken" min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s ListActionTypesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListActionTypesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListActionTypesInput"}
-	if s.NextToken != nil && len(*s.NextToken) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Represents the output of a ListActionTypes action.
-type ListActionTypesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Provides details of the action types.
-	//
-	// ActionTypes is a required field
-	ActionTypes []ActionType `locationName:"actionTypes" type:"list" required:"true"`
-
-	// If the amount of returned information is significantly large, an identifier
-	// is also returned. It can be used in a subsequent list action types call to
-	// return the next set of action types in the list.
-	NextToken *string `locationName:"nextToken" min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s ListActionTypesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListActionTypes = "ListActionTypes"
 
@@ -75,7 +25,7 @@ const opListActionTypes = "ListActionTypes"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/ListActionTypes
-func (c *Client) ListActionTypesRequest(input *ListActionTypesInput) ListActionTypesRequest {
+func (c *Client) ListActionTypesRequest(input *types.ListActionTypesInput) ListActionTypesRequest {
 	op := &aws.Operation{
 		Name:       opListActionTypes,
 		HTTPMethod: "POST",
@@ -89,10 +39,10 @@ func (c *Client) ListActionTypesRequest(input *ListActionTypesInput) ListActionT
 	}
 
 	if input == nil {
-		input = &ListActionTypesInput{}
+		input = &types.ListActionTypesInput{}
 	}
 
-	req := c.newRequest(op, input, &ListActionTypesOutput{})
+	req := c.newRequest(op, input, &types.ListActionTypesOutput{})
 	return ListActionTypesRequest{Request: req, Input: input, Copy: c.ListActionTypesRequest}
 }
 
@@ -100,8 +50,8 @@ func (c *Client) ListActionTypesRequest(input *ListActionTypesInput) ListActionT
 // ListActionTypes API operation.
 type ListActionTypesRequest struct {
 	*aws.Request
-	Input *ListActionTypesInput
-	Copy  func(*ListActionTypesInput) ListActionTypesRequest
+	Input *types.ListActionTypesInput
+	Copy  func(*types.ListActionTypesInput) ListActionTypesRequest
 }
 
 // Send marshals and sends the ListActionTypes API request.
@@ -113,7 +63,7 @@ func (r ListActionTypesRequest) Send(ctx context.Context) (*ListActionTypesRespo
 	}
 
 	resp := &ListActionTypesResponse{
-		ListActionTypesOutput: r.Request.Data.(*ListActionTypesOutput),
+		ListActionTypesOutput: r.Request.Data.(*types.ListActionTypesOutput),
 		response:              &aws.Response{Request: r.Request},
 	}
 
@@ -143,7 +93,7 @@ func NewListActionTypesPaginator(req ListActionTypesRequest) ListActionTypesPagi
 	return ListActionTypesPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListActionTypesInput
+				var inCpy *types.ListActionTypesInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -163,14 +113,14 @@ type ListActionTypesPaginator struct {
 	aws.Pager
 }
 
-func (p *ListActionTypesPaginator) CurrentPage() *ListActionTypesOutput {
-	return p.Pager.CurrentPage().(*ListActionTypesOutput)
+func (p *ListActionTypesPaginator) CurrentPage() *types.ListActionTypesOutput {
+	return p.Pager.CurrentPage().(*types.ListActionTypesOutput)
 }
 
 // ListActionTypesResponse is the response type for the
 // ListActionTypes API operation.
 type ListActionTypesResponse struct {
-	*ListActionTypesOutput
+	*types.ListActionTypesOutput
 
 	response *aws.Response
 }

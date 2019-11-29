@@ -6,94 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/appsync/types"
 )
-
-type CreateApiKeyInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID for your GraphQL API.
-	//
-	// ApiId is a required field
-	ApiId *string `location:"uri" locationName:"apiId" type:"string" required:"true"`
-
-	// A description of the purpose of the API key.
-	Description *string `locationName:"description" type:"string"`
-
-	// The time from creation time after which the API key expires. The date is
-	// represented as seconds since the epoch, rounded down to the nearest hour.
-	// The default value for this parameter is 7 days from creation time. For more
-	// information, see .
-	Expires *int64 `locationName:"expires" type:"long"`
-}
-
-// String returns the string representation
-func (s CreateApiKeyInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateApiKeyInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateApiKeyInput"}
-
-	if s.ApiId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ApiId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s CreateApiKeyInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.Description != nil {
-		v := *s.Description
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "description", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Expires != nil {
-		v := *s.Expires
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "expires", protocol.Int64Value(v), metadata)
-	}
-	if s.ApiId != nil {
-		v := *s.ApiId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "apiId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type CreateApiKeyOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The API key.
-	ApiKey *ApiKey `locationName:"apiKey" type:"structure"`
-}
-
-// String returns the string representation
-func (s CreateApiKeyOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s CreateApiKeyOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.ApiKey != nil {
-		v := s.ApiKey
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "apiKey", v, metadata)
-	}
-	return nil
-}
 
 const opCreateApiKey = "CreateApiKey"
 
@@ -111,7 +25,7 @@ const opCreateApiKey = "CreateApiKey"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/CreateApiKey
-func (c *Client) CreateApiKeyRequest(input *CreateApiKeyInput) CreateApiKeyRequest {
+func (c *Client) CreateApiKeyRequest(input *types.CreateApiKeyInput) CreateApiKeyRequest {
 	op := &aws.Operation{
 		Name:       opCreateApiKey,
 		HTTPMethod: "POST",
@@ -119,10 +33,10 @@ func (c *Client) CreateApiKeyRequest(input *CreateApiKeyInput) CreateApiKeyReque
 	}
 
 	if input == nil {
-		input = &CreateApiKeyInput{}
+		input = &types.CreateApiKeyInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateApiKeyOutput{})
+	req := c.newRequest(op, input, &types.CreateApiKeyOutput{})
 	return CreateApiKeyRequest{Request: req, Input: input, Copy: c.CreateApiKeyRequest}
 }
 
@@ -130,8 +44,8 @@ func (c *Client) CreateApiKeyRequest(input *CreateApiKeyInput) CreateApiKeyReque
 // CreateApiKey API operation.
 type CreateApiKeyRequest struct {
 	*aws.Request
-	Input *CreateApiKeyInput
-	Copy  func(*CreateApiKeyInput) CreateApiKeyRequest
+	Input *types.CreateApiKeyInput
+	Copy  func(*types.CreateApiKeyInput) CreateApiKeyRequest
 }
 
 // Send marshals and sends the CreateApiKey API request.
@@ -143,7 +57,7 @@ func (r CreateApiKeyRequest) Send(ctx context.Context) (*CreateApiKeyResponse, e
 	}
 
 	resp := &CreateApiKeyResponse{
-		CreateApiKeyOutput: r.Request.Data.(*CreateApiKeyOutput),
+		CreateApiKeyOutput: r.Request.Data.(*types.CreateApiKeyOutput),
 		response:           &aws.Response{Request: r.Request},
 	}
 
@@ -153,7 +67,7 @@ func (r CreateApiKeyRequest) Send(ctx context.Context) (*CreateApiKeyResponse, e
 // CreateApiKeyResponse is the response type for the
 // CreateApiKey API operation.
 type CreateApiKeyResponse struct {
-	*CreateApiKeyOutput
+	*types.CreateApiKeyOutput
 
 	response *aws.Response
 }

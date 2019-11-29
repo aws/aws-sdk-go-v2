@@ -6,117 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/worklink/types"
 )
-
-type ListDevicesInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ARN of the fleet.
-	//
-	// FleetArn is a required field
-	FleetArn *string `min:"20" type:"string" required:"true"`
-
-	// The maximum number of results to be included in the next page.
-	MaxResults *int64 `min:"1" type:"integer"`
-
-	// The pagination token used to retrieve the next page of results for this operation.
-	// If this value is null, it retrieves the first page.
-	NextToken *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s ListDevicesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListDevicesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListDevicesInput"}
-
-	if s.FleetArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("FleetArn"))
-	}
-	if s.FleetArn != nil && len(*s.FleetArn) < 20 {
-		invalidParams.Add(aws.NewErrParamMinLen("FleetArn", 20))
-	}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-	if s.NextToken != nil && len(*s.NextToken) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListDevicesInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.FleetArn != nil {
-		v := *s.FleetArn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "FleetArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.MaxResults != nil {
-		v := *s.MaxResults
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "MaxResults", protocol.Int64Value(v), metadata)
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type ListDevicesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Information about the devices.
-	Devices []DeviceSummary `type:"list"`
-
-	// The pagination token used to retrieve the next page of results for this operation.
-	// If there are no more pages, this value is null.
-	NextToken *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s ListDevicesOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListDevicesOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.Devices != nil {
-		v := s.Devices
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "Devices", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opListDevices = "ListDevices"
 
@@ -133,7 +24,7 @@ const opListDevices = "ListDevices"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/worklink-2018-09-25/ListDevices
-func (c *Client) ListDevicesRequest(input *ListDevicesInput) ListDevicesRequest {
+func (c *Client) ListDevicesRequest(input *types.ListDevicesInput) ListDevicesRequest {
 	op := &aws.Operation{
 		Name:       opListDevices,
 		HTTPMethod: "POST",
@@ -147,10 +38,10 @@ func (c *Client) ListDevicesRequest(input *ListDevicesInput) ListDevicesRequest 
 	}
 
 	if input == nil {
-		input = &ListDevicesInput{}
+		input = &types.ListDevicesInput{}
 	}
 
-	req := c.newRequest(op, input, &ListDevicesOutput{})
+	req := c.newRequest(op, input, &types.ListDevicesOutput{})
 	return ListDevicesRequest{Request: req, Input: input, Copy: c.ListDevicesRequest}
 }
 
@@ -158,8 +49,8 @@ func (c *Client) ListDevicesRequest(input *ListDevicesInput) ListDevicesRequest 
 // ListDevices API operation.
 type ListDevicesRequest struct {
 	*aws.Request
-	Input *ListDevicesInput
-	Copy  func(*ListDevicesInput) ListDevicesRequest
+	Input *types.ListDevicesInput
+	Copy  func(*types.ListDevicesInput) ListDevicesRequest
 }
 
 // Send marshals and sends the ListDevices API request.
@@ -171,7 +62,7 @@ func (r ListDevicesRequest) Send(ctx context.Context) (*ListDevicesResponse, err
 	}
 
 	resp := &ListDevicesResponse{
-		ListDevicesOutput: r.Request.Data.(*ListDevicesOutput),
+		ListDevicesOutput: r.Request.Data.(*types.ListDevicesOutput),
 		response:          &aws.Response{Request: r.Request},
 	}
 
@@ -201,7 +92,7 @@ func NewListDevicesPaginator(req ListDevicesRequest) ListDevicesPaginator {
 	return ListDevicesPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListDevicesInput
+				var inCpy *types.ListDevicesInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -221,14 +112,14 @@ type ListDevicesPaginator struct {
 	aws.Pager
 }
 
-func (p *ListDevicesPaginator) CurrentPage() *ListDevicesOutput {
-	return p.Pager.CurrentPage().(*ListDevicesOutput)
+func (p *ListDevicesPaginator) CurrentPage() *types.ListDevicesOutput {
+	return p.Pager.CurrentPage().(*types.ListDevicesOutput)
 }
 
 // ListDevicesResponse is the response type for the
 // ListDevices API operation.
 type ListDevicesResponse struct {
-	*ListDevicesOutput
+	*types.ListDevicesOutput
 
 	response *aws.Response
 }

@@ -6,120 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/mediaconvert/types"
 )
-
-// You can send list queues requests with an empty body. You can optionally
-// specify the maximum number, up to twenty, of queues to be returned.
-type ListQueuesInput struct {
-	_ struct{} `type:"structure"`
-
-	// Optional. When you request a list of queues, you can choose to list them
-	// alphabetically by NAME or chronologically by CREATION_DATE. If you don't
-	// specify, the service will list them by creation date.
-	ListBy QueueListBy `location:"querystring" locationName:"listBy" type:"string" enum:"true"`
-
-	// Optional. Number of queues, up to twenty, that will be returned at one time.
-	MaxResults *int64 `location:"querystring" locationName:"maxResults" min:"1" type:"integer"`
-
-	// Use this string, provided with the response to a previous request, to request
-	// the next batch of queues.
-	NextToken *string `location:"querystring" locationName:"nextToken" type:"string"`
-
-	// When you request lists of resources, you can optionally specify whether they
-	// are sorted in ASCENDING or DESCENDING order. Default varies by resource.
-	Order Order `location:"querystring" locationName:"order" type:"string" enum:"true"`
-}
-
-// String returns the string representation
-func (s ListQueuesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListQueuesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListQueuesInput"}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListQueuesInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if len(s.ListBy) > 0 {
-		v := s.ListBy
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "listBy", protocol.QuotedValue{ValueMarshaler: v}, metadata)
-	}
-	if s.MaxResults != nil {
-		v := *s.MaxResults
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "maxResults", protocol.Int64Value(v), metadata)
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if len(s.Order) > 0 {
-		v := s.Order
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "order", protocol.QuotedValue{ValueMarshaler: v}, metadata)
-	}
-	return nil
-}
-
-// Successful list queues requests return a JSON array of queues. If you don't
-// specify how they are ordered, you will receive them alphabetically by name.
-type ListQueuesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Use this string to request the next batch of queues.
-	NextToken *string `locationName:"nextToken" type:"string"`
-
-	// List of queues.
-	Queues []Queue `locationName:"queues" type:"list"`
-}
-
-// String returns the string representation
-func (s ListQueuesOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListQueuesOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Queues != nil {
-		v := s.Queues
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "queues", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	return nil
-}
 
 const opListQueues = "ListQueues"
 
@@ -138,7 +26,7 @@ const opListQueues = "ListQueues"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/ListQueues
-func (c *Client) ListQueuesRequest(input *ListQueuesInput) ListQueuesRequest {
+func (c *Client) ListQueuesRequest(input *types.ListQueuesInput) ListQueuesRequest {
 	op := &aws.Operation{
 		Name:       opListQueues,
 		HTTPMethod: "GET",
@@ -152,10 +40,10 @@ func (c *Client) ListQueuesRequest(input *ListQueuesInput) ListQueuesRequest {
 	}
 
 	if input == nil {
-		input = &ListQueuesInput{}
+		input = &types.ListQueuesInput{}
 	}
 
-	req := c.newRequest(op, input, &ListQueuesOutput{})
+	req := c.newRequest(op, input, &types.ListQueuesOutput{})
 	return ListQueuesRequest{Request: req, Input: input, Copy: c.ListQueuesRequest}
 }
 
@@ -163,8 +51,8 @@ func (c *Client) ListQueuesRequest(input *ListQueuesInput) ListQueuesRequest {
 // ListQueues API operation.
 type ListQueuesRequest struct {
 	*aws.Request
-	Input *ListQueuesInput
-	Copy  func(*ListQueuesInput) ListQueuesRequest
+	Input *types.ListQueuesInput
+	Copy  func(*types.ListQueuesInput) ListQueuesRequest
 }
 
 // Send marshals and sends the ListQueues API request.
@@ -176,7 +64,7 @@ func (r ListQueuesRequest) Send(ctx context.Context) (*ListQueuesResponse, error
 	}
 
 	resp := &ListQueuesResponse{
-		ListQueuesOutput: r.Request.Data.(*ListQueuesOutput),
+		ListQueuesOutput: r.Request.Data.(*types.ListQueuesOutput),
 		response:         &aws.Response{Request: r.Request},
 	}
 
@@ -206,7 +94,7 @@ func NewListQueuesPaginator(req ListQueuesRequest) ListQueuesPaginator {
 	return ListQueuesPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListQueuesInput
+				var inCpy *types.ListQueuesInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -226,14 +114,14 @@ type ListQueuesPaginator struct {
 	aws.Pager
 }
 
-func (p *ListQueuesPaginator) CurrentPage() *ListQueuesOutput {
-	return p.Pager.CurrentPage().(*ListQueuesOutput)
+func (p *ListQueuesPaginator) CurrentPage() *types.ListQueuesOutput {
+	return p.Pager.CurrentPage().(*types.ListQueuesOutput)
 }
 
 // ListQueuesResponse is the response type for the
 // ListQueues API operation.
 type ListQueuesResponse struct {
-	*ListQueuesOutput
+	*types.ListQueuesOutput
 
 	response *aws.Response
 }

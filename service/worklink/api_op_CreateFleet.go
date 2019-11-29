@@ -6,95 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/worklink/types"
 )
-
-type CreateFleetInput struct {
-	_ struct{} `type:"structure"`
-
-	// The fleet name to display.
-	DisplayName *string `type:"string"`
-
-	// A unique name for the fleet.
-	//
-	// FleetName is a required field
-	FleetName *string `min:"1" type:"string" required:"true"`
-
-	// The option to optimize for better performance by routing traffic through
-	// the closest AWS Region to users, which may be outside of your home Region.
-	OptimizeForEndUserLocation *bool `type:"boolean"`
-}
-
-// String returns the string representation
-func (s CreateFleetInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateFleetInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateFleetInput"}
-
-	if s.FleetName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("FleetName"))
-	}
-	if s.FleetName != nil && len(*s.FleetName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("FleetName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s CreateFleetInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.DisplayName != nil {
-		v := *s.DisplayName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "DisplayName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.FleetName != nil {
-		v := *s.FleetName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "FleetName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.OptimizeForEndUserLocation != nil {
-		v := *s.OptimizeForEndUserLocation
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "OptimizeForEndUserLocation", protocol.BoolValue(v), metadata)
-	}
-	return nil
-}
-
-type CreateFleetOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The ARN of the fleet.
-	FleetArn *string `min:"20" type:"string"`
-}
-
-// String returns the string representation
-func (s CreateFleetOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s CreateFleetOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.FleetArn != nil {
-		v := *s.FleetArn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "FleetArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opCreateFleet = "CreateFleet"
 
@@ -113,7 +26,7 @@ const opCreateFleet = "CreateFleet"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/worklink-2018-09-25/CreateFleet
-func (c *Client) CreateFleetRequest(input *CreateFleetInput) CreateFleetRequest {
+func (c *Client) CreateFleetRequest(input *types.CreateFleetInput) CreateFleetRequest {
 	op := &aws.Operation{
 		Name:       opCreateFleet,
 		HTTPMethod: "POST",
@@ -121,10 +34,10 @@ func (c *Client) CreateFleetRequest(input *CreateFleetInput) CreateFleetRequest 
 	}
 
 	if input == nil {
-		input = &CreateFleetInput{}
+		input = &types.CreateFleetInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateFleetOutput{})
+	req := c.newRequest(op, input, &types.CreateFleetOutput{})
 	return CreateFleetRequest{Request: req, Input: input, Copy: c.CreateFleetRequest}
 }
 
@@ -132,8 +45,8 @@ func (c *Client) CreateFleetRequest(input *CreateFleetInput) CreateFleetRequest 
 // CreateFleet API operation.
 type CreateFleetRequest struct {
 	*aws.Request
-	Input *CreateFleetInput
-	Copy  func(*CreateFleetInput) CreateFleetRequest
+	Input *types.CreateFleetInput
+	Copy  func(*types.CreateFleetInput) CreateFleetRequest
 }
 
 // Send marshals and sends the CreateFleet API request.
@@ -145,7 +58,7 @@ func (r CreateFleetRequest) Send(ctx context.Context) (*CreateFleetResponse, err
 	}
 
 	resp := &CreateFleetResponse{
-		CreateFleetOutput: r.Request.Data.(*CreateFleetOutput),
+		CreateFleetOutput: r.Request.Data.(*types.CreateFleetOutput),
 		response:          &aws.Response{Request: r.Request},
 	}
 
@@ -155,7 +68,7 @@ func (r CreateFleetRequest) Send(ctx context.Context) (*CreateFleetResponse, err
 // CreateFleetResponse is the response type for the
 // CreateFleet API operation.
 type CreateFleetResponse struct {
-	*CreateFleetOutput
+	*types.CreateFleetOutput
 
 	response *aws.Response
 }

@@ -6,74 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/types"
 )
-
-type UpdateIdentityProviderInput struct {
-	_ struct{} `type:"structure"`
-
-	// The identity provider attribute mapping to be changed.
-	AttributeMapping map[string]string `type:"map"`
-
-	// A list of identity provider identifiers.
-	IdpIdentifiers []string `type:"list"`
-
-	// The identity provider details to be updated, such as MetadataURL and MetadataFile.
-	ProviderDetails map[string]string `type:"map"`
-
-	// The identity provider name.
-	//
-	// ProviderName is a required field
-	ProviderName *string `min:"1" type:"string" required:"true"`
-
-	// The user pool ID.
-	//
-	// UserPoolId is a required field
-	UserPoolId *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s UpdateIdentityProviderInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateIdentityProviderInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateIdentityProviderInput"}
-
-	if s.ProviderName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ProviderName"))
-	}
-	if s.ProviderName != nil && len(*s.ProviderName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ProviderName", 1))
-	}
-
-	if s.UserPoolId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("UserPoolId"))
-	}
-	if s.UserPoolId != nil && len(*s.UserPoolId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("UserPoolId", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type UpdateIdentityProviderOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The identity provider object.
-	//
-	// IdentityProvider is a required field
-	IdentityProvider *IdentityProviderType `type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s UpdateIdentityProviderOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opUpdateIdentityProvider = "UpdateIdentityProvider"
 
@@ -90,7 +24,7 @@ const opUpdateIdentityProvider = "UpdateIdentityProvider"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/UpdateIdentityProvider
-func (c *Client) UpdateIdentityProviderRequest(input *UpdateIdentityProviderInput) UpdateIdentityProviderRequest {
+func (c *Client) UpdateIdentityProviderRequest(input *types.UpdateIdentityProviderInput) UpdateIdentityProviderRequest {
 	op := &aws.Operation{
 		Name:       opUpdateIdentityProvider,
 		HTTPMethod: "POST",
@@ -98,10 +32,10 @@ func (c *Client) UpdateIdentityProviderRequest(input *UpdateIdentityProviderInpu
 	}
 
 	if input == nil {
-		input = &UpdateIdentityProviderInput{}
+		input = &types.UpdateIdentityProviderInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateIdentityProviderOutput{})
+	req := c.newRequest(op, input, &types.UpdateIdentityProviderOutput{})
 	return UpdateIdentityProviderRequest{Request: req, Input: input, Copy: c.UpdateIdentityProviderRequest}
 }
 
@@ -109,8 +43,8 @@ func (c *Client) UpdateIdentityProviderRequest(input *UpdateIdentityProviderInpu
 // UpdateIdentityProvider API operation.
 type UpdateIdentityProviderRequest struct {
 	*aws.Request
-	Input *UpdateIdentityProviderInput
-	Copy  func(*UpdateIdentityProviderInput) UpdateIdentityProviderRequest
+	Input *types.UpdateIdentityProviderInput
+	Copy  func(*types.UpdateIdentityProviderInput) UpdateIdentityProviderRequest
 }
 
 // Send marshals and sends the UpdateIdentityProvider API request.
@@ -122,7 +56,7 @@ func (r UpdateIdentityProviderRequest) Send(ctx context.Context) (*UpdateIdentit
 	}
 
 	resp := &UpdateIdentityProviderResponse{
-		UpdateIdentityProviderOutput: r.Request.Data.(*UpdateIdentityProviderOutput),
+		UpdateIdentityProviderOutput: r.Request.Data.(*types.UpdateIdentityProviderOutput),
 		response:                     &aws.Response{Request: r.Request},
 	}
 
@@ -132,7 +66,7 @@ func (r UpdateIdentityProviderRequest) Send(ctx context.Context) (*UpdateIdentit
 // UpdateIdentityProviderResponse is the response type for the
 // UpdateIdentityProvider API operation.
 type UpdateIdentityProviderResponse struct {
-	*UpdateIdentityProviderOutput
+	*types.UpdateIdentityProviderOutput
 
 	response *aws.Response
 }

@@ -6,47 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
+	"github.com/aws/aws-sdk-go-v2/service/globalaccelerator/types"
 )
-
-type DeleteEndpointGroupInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the endpoint group to delete.
-	//
-	// EndpointGroupArn is a required field
-	EndpointGroupArn *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteEndpointGroupInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteEndpointGroupInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteEndpointGroupInput"}
-
-	if s.EndpointGroupArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("EndpointGroupArn"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteEndpointGroupOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteEndpointGroupOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteEndpointGroup = "DeleteEndpointGroup"
 
@@ -63,7 +26,7 @@ const opDeleteEndpointGroup = "DeleteEndpointGroup"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/DeleteEndpointGroup
-func (c *Client) DeleteEndpointGroupRequest(input *DeleteEndpointGroupInput) DeleteEndpointGroupRequest {
+func (c *Client) DeleteEndpointGroupRequest(input *types.DeleteEndpointGroupInput) DeleteEndpointGroupRequest {
 	op := &aws.Operation{
 		Name:       opDeleteEndpointGroup,
 		HTTPMethod: "POST",
@@ -71,10 +34,10 @@ func (c *Client) DeleteEndpointGroupRequest(input *DeleteEndpointGroupInput) Del
 	}
 
 	if input == nil {
-		input = &DeleteEndpointGroupInput{}
+		input = &types.DeleteEndpointGroupInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteEndpointGroupOutput{})
+	req := c.newRequest(op, input, &types.DeleteEndpointGroupOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return DeleteEndpointGroupRequest{Request: req, Input: input, Copy: c.DeleteEndpointGroupRequest}
@@ -84,8 +47,8 @@ func (c *Client) DeleteEndpointGroupRequest(input *DeleteEndpointGroupInput) Del
 // DeleteEndpointGroup API operation.
 type DeleteEndpointGroupRequest struct {
 	*aws.Request
-	Input *DeleteEndpointGroupInput
-	Copy  func(*DeleteEndpointGroupInput) DeleteEndpointGroupRequest
+	Input *types.DeleteEndpointGroupInput
+	Copy  func(*types.DeleteEndpointGroupInput) DeleteEndpointGroupRequest
 }
 
 // Send marshals and sends the DeleteEndpointGroup API request.
@@ -97,7 +60,7 @@ func (r DeleteEndpointGroupRequest) Send(ctx context.Context) (*DeleteEndpointGr
 	}
 
 	resp := &DeleteEndpointGroupResponse{
-		DeleteEndpointGroupOutput: r.Request.Data.(*DeleteEndpointGroupOutput),
+		DeleteEndpointGroupOutput: r.Request.Data.(*types.DeleteEndpointGroupOutput),
 		response:                  &aws.Response{Request: r.Request},
 	}
 
@@ -107,7 +70,7 @@ func (r DeleteEndpointGroupRequest) Send(ctx context.Context) (*DeleteEndpointGr
 // DeleteEndpointGroupResponse is the response type for the
 // DeleteEndpointGroup API operation.
 type DeleteEndpointGroupResponse struct {
-	*DeleteEndpointGroupOutput
+	*types.DeleteEndpointGroupOutput
 
 	response *aws.Response
 }

@@ -4,166 +4,10 @@ package workdocs
 
 import (
 	"context"
-	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/workdocs/types"
 )
-
-type InitiateDocumentVersionUploadInput struct {
-	_ struct{} `type:"structure"`
-
-	// Amazon WorkDocs authentication token. Do not set this field when using administrative
-	// API actions, as in accessing the API using AWS credentials.
-	AuthenticationToken *string `location:"header" locationName:"Authentication" min:"1" type:"string" sensitive:"true"`
-
-	// The timestamp when the content of the document was originally created.
-	ContentCreatedTimestamp *time.Time `type:"timestamp"`
-
-	// The timestamp when the content of the document was modified.
-	ContentModifiedTimestamp *time.Time `type:"timestamp"`
-
-	// The content type of the document.
-	ContentType *string `min:"1" type:"string"`
-
-	// The size of the document, in bytes.
-	DocumentSizeInBytes *int64 `type:"long"`
-
-	// The ID of the document.
-	Id *string `min:"1" type:"string"`
-
-	// The name of the document.
-	Name *string `min:"1" type:"string"`
-
-	// The ID of the parent folder.
-	//
-	// ParentFolderId is a required field
-	ParentFolderId *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s InitiateDocumentVersionUploadInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *InitiateDocumentVersionUploadInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "InitiateDocumentVersionUploadInput"}
-	if s.AuthenticationToken != nil && len(*s.AuthenticationToken) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("AuthenticationToken", 1))
-	}
-	if s.ContentType != nil && len(*s.ContentType) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ContentType", 1))
-	}
-	if s.Id != nil && len(*s.Id) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Id", 1))
-	}
-	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
-	}
-
-	if s.ParentFolderId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ParentFolderId"))
-	}
-	if s.ParentFolderId != nil && len(*s.ParentFolderId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ParentFolderId", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s InitiateDocumentVersionUploadInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.ContentCreatedTimestamp != nil {
-		v := *s.ContentCreatedTimestamp
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "ContentCreatedTimestamp",
-			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
-	}
-	if s.ContentModifiedTimestamp != nil {
-		v := *s.ContentModifiedTimestamp
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "ContentModifiedTimestamp",
-			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
-	}
-	if s.ContentType != nil {
-		v := *s.ContentType
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "ContentType", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.DocumentSizeInBytes != nil {
-		v := *s.DocumentSizeInBytes
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "DocumentSizeInBytes", protocol.Int64Value(v), metadata)
-	}
-	if s.Id != nil {
-		v := *s.Id
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "Id", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Name != nil {
-		v := *s.Name
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "Name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.ParentFolderId != nil {
-		v := *s.ParentFolderId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "ParentFolderId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.AuthenticationToken != nil {
-		v := *s.AuthenticationToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "Authentication", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type InitiateDocumentVersionUploadOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The document metadata.
-	Metadata *DocumentMetadata `type:"structure"`
-
-	// The upload metadata.
-	UploadMetadata *UploadMetadata `type:"structure"`
-}
-
-// String returns the string representation
-func (s InitiateDocumentVersionUploadOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s InitiateDocumentVersionUploadOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.Metadata != nil {
-		v := s.Metadata
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "Metadata", v, metadata)
-	}
-	if s.UploadMetadata != nil {
-		v := s.UploadMetadata
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "UploadMetadata", v, metadata)
-	}
-	return nil
-}
 
 const opInitiateDocumentVersionUpload = "InitiateDocumentVersionUpload"
 
@@ -187,7 +31,7 @@ const opInitiateDocumentVersionUpload = "InitiateDocumentVersionUpload"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/InitiateDocumentVersionUpload
-func (c *Client) InitiateDocumentVersionUploadRequest(input *InitiateDocumentVersionUploadInput) InitiateDocumentVersionUploadRequest {
+func (c *Client) InitiateDocumentVersionUploadRequest(input *types.InitiateDocumentVersionUploadInput) InitiateDocumentVersionUploadRequest {
 	op := &aws.Operation{
 		Name:       opInitiateDocumentVersionUpload,
 		HTTPMethod: "POST",
@@ -195,10 +39,10 @@ func (c *Client) InitiateDocumentVersionUploadRequest(input *InitiateDocumentVer
 	}
 
 	if input == nil {
-		input = &InitiateDocumentVersionUploadInput{}
+		input = &types.InitiateDocumentVersionUploadInput{}
 	}
 
-	req := c.newRequest(op, input, &InitiateDocumentVersionUploadOutput{})
+	req := c.newRequest(op, input, &types.InitiateDocumentVersionUploadOutput{})
 	return InitiateDocumentVersionUploadRequest{Request: req, Input: input, Copy: c.InitiateDocumentVersionUploadRequest}
 }
 
@@ -206,8 +50,8 @@ func (c *Client) InitiateDocumentVersionUploadRequest(input *InitiateDocumentVer
 // InitiateDocumentVersionUpload API operation.
 type InitiateDocumentVersionUploadRequest struct {
 	*aws.Request
-	Input *InitiateDocumentVersionUploadInput
-	Copy  func(*InitiateDocumentVersionUploadInput) InitiateDocumentVersionUploadRequest
+	Input *types.InitiateDocumentVersionUploadInput
+	Copy  func(*types.InitiateDocumentVersionUploadInput) InitiateDocumentVersionUploadRequest
 }
 
 // Send marshals and sends the InitiateDocumentVersionUpload API request.
@@ -219,7 +63,7 @@ func (r InitiateDocumentVersionUploadRequest) Send(ctx context.Context) (*Initia
 	}
 
 	resp := &InitiateDocumentVersionUploadResponse{
-		InitiateDocumentVersionUploadOutput: r.Request.Data.(*InitiateDocumentVersionUploadOutput),
+		InitiateDocumentVersionUploadOutput: r.Request.Data.(*types.InitiateDocumentVersionUploadOutput),
 		response:                            &aws.Response{Request: r.Request},
 	}
 
@@ -229,7 +73,7 @@ func (r InitiateDocumentVersionUploadRequest) Send(ctx context.Context) (*Initia
 // InitiateDocumentVersionUploadResponse is the response type for the
 // InitiateDocumentVersionUpload API operation.
 type InitiateDocumentVersionUploadResponse struct {
-	*InitiateDocumentVersionUploadOutput
+	*types.InitiateDocumentVersionUploadOutput
 
 	response *aws.Response
 }

@@ -4,156 +4,10 @@ package opsworks
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/opsworks/types"
 )
-
-type CreateLayerInput struct {
-	_ struct{} `type:"structure"`
-
-	// One or more user-defined key-value pairs to be added to the stack attributes.
-	//
-	// To create a cluster layer, set the EcsClusterArn attribute to the cluster's
-	// ARN.
-	Attributes map[string]string `type:"map"`
-
-	// Whether to automatically assign an Elastic IP address (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html)
-	// to the layer's instances. For more information, see How to Edit a Layer (https://docs.aws.amazon.com/opsworks/latest/userguide/workinglayers-basics-edit.html).
-	AutoAssignElasticIps *bool `type:"boolean"`
-
-	// For stacks that are running in a VPC, whether to automatically assign a public
-	// IP address to the layer's instances. For more information, see How to Edit
-	// a Layer (https://docs.aws.amazon.com/opsworks/latest/userguide/workinglayers-basics-edit.html).
-	AutoAssignPublicIps *bool `type:"boolean"`
-
-	// Specifies CloudWatch Logs configuration options for the layer. For more information,
-	// see CloudWatchLogsLogStream.
-	CloudWatchLogsConfiguration *CloudWatchLogsConfiguration `type:"structure"`
-
-	// The ARN of an IAM profile to be used for the layer's EC2 instances. For more
-	// information about IAM ARNs, see Using Identifiers (https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html).
-	CustomInstanceProfileArn *string `type:"string"`
-
-	// A JSON-formatted string containing custom stack configuration and deployment
-	// attributes to be installed on the layer's instances. For more information,
-	// see Using Custom JSON (https://docs.aws.amazon.com/opsworks/latest/userguide/workingcookbook-json-override.html).
-	// This feature is supported as of version 1.7.42 of the AWS CLI.
-	CustomJson *string `type:"string"`
-
-	// A LayerCustomRecipes object that specifies the layer custom recipes.
-	CustomRecipes *Recipes `type:"structure"`
-
-	// An array containing the layer custom security group IDs.
-	CustomSecurityGroupIds []string `type:"list"`
-
-	// Whether to disable auto healing for the layer.
-	EnableAutoHealing *bool `type:"boolean"`
-
-	// Whether to install operating system and package updates when the instance
-	// boots. The default value is true. To control when updates are installed,
-	// set this value to false. You must then update your instances manually by
-	// using CreateDeployment to run the update_dependencies stack command or by
-	// manually running yum (Amazon Linux) or apt-get (Ubuntu) on the instances.
-	//
-	// To ensure that your instances have the latest security updates, we strongly
-	// recommend using the default value of true.
-	InstallUpdatesOnBoot *bool `type:"boolean"`
-
-	// A LifeCycleEventConfiguration object that you can use to configure the Shutdown
-	// event to specify an execution timeout and enable or disable Elastic Load
-	// Balancer connection draining.
-	LifecycleEventConfiguration *LifecycleEventConfiguration `type:"structure"`
-
-	// The layer name, which is used by the console.
-	//
-	// Name is a required field
-	Name *string `type:"string" required:"true"`
-
-	// An array of Package objects that describes the layer packages.
-	Packages []string `type:"list"`
-
-	// For custom layers only, use this parameter to specify the layer's short name,
-	// which is used internally by AWS OpsWorks Stacks and by Chef recipes. The
-	// short name is also used as the name for the directory where your app files
-	// are installed. It can have a maximum of 200 characters, which are limited
-	// to the alphanumeric characters, '-', '_', and '.'.
-	//
-	// The built-in layers' short names are defined by AWS OpsWorks Stacks. For
-	// more information, see the Layer Reference (https://docs.aws.amazon.com/opsworks/latest/userguide/layers.html).
-	//
-	// Shortname is a required field
-	Shortname *string `type:"string" required:"true"`
-
-	// The layer stack ID.
-	//
-	// StackId is a required field
-	StackId *string `type:"string" required:"true"`
-
-	// The layer type. A stack cannot have more than one built-in layer of the same
-	// type. It can have any number of custom layers. Built-in layers are not available
-	// in Chef 12 stacks.
-	//
-	// Type is a required field
-	Type LayerType `type:"string" required:"true" enum:"true"`
-
-	// Whether to use Amazon EBS-optimized instances.
-	UseEbsOptimizedInstances *bool `type:"boolean"`
-
-	// A VolumeConfigurations object that describes the layer's Amazon EBS volumes.
-	VolumeConfigurations []VolumeConfiguration `type:"list"`
-}
-
-// String returns the string representation
-func (s CreateLayerInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateLayerInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateLayerInput"}
-
-	if s.Name == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Name"))
-	}
-
-	if s.Shortname == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Shortname"))
-	}
-
-	if s.StackId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("StackId"))
-	}
-	if len(s.Type) == 0 {
-		invalidParams.Add(aws.NewErrParamRequired("Type"))
-	}
-	if s.VolumeConfigurations != nil {
-		for i, v := range s.VolumeConfigurations {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "VolumeConfigurations", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Contains the response to a CreateLayer request.
-type CreateLayerOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The layer ID.
-	LayerId *string `type:"string"`
-}
-
-// String returns the string representation
-func (s CreateLayerOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCreateLayer = "CreateLayer"
 
@@ -182,7 +36,7 @@ const opCreateLayer = "CreateLayer"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/CreateLayer
-func (c *Client) CreateLayerRequest(input *CreateLayerInput) CreateLayerRequest {
+func (c *Client) CreateLayerRequest(input *types.CreateLayerInput) CreateLayerRequest {
 	op := &aws.Operation{
 		Name:       opCreateLayer,
 		HTTPMethod: "POST",
@@ -190,10 +44,10 @@ func (c *Client) CreateLayerRequest(input *CreateLayerInput) CreateLayerRequest 
 	}
 
 	if input == nil {
-		input = &CreateLayerInput{}
+		input = &types.CreateLayerInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateLayerOutput{})
+	req := c.newRequest(op, input, &types.CreateLayerOutput{})
 	return CreateLayerRequest{Request: req, Input: input, Copy: c.CreateLayerRequest}
 }
 
@@ -201,8 +55,8 @@ func (c *Client) CreateLayerRequest(input *CreateLayerInput) CreateLayerRequest 
 // CreateLayer API operation.
 type CreateLayerRequest struct {
 	*aws.Request
-	Input *CreateLayerInput
-	Copy  func(*CreateLayerInput) CreateLayerRequest
+	Input *types.CreateLayerInput
+	Copy  func(*types.CreateLayerInput) CreateLayerRequest
 }
 
 // Send marshals and sends the CreateLayer API request.
@@ -214,7 +68,7 @@ func (r CreateLayerRequest) Send(ctx context.Context) (*CreateLayerResponse, err
 	}
 
 	resp := &CreateLayerResponse{
-		CreateLayerOutput: r.Request.Data.(*CreateLayerOutput),
+		CreateLayerOutput: r.Request.Data.(*types.CreateLayerOutput),
 		response:          &aws.Response{Request: r.Request},
 	}
 
@@ -224,7 +78,7 @@ func (r CreateLayerRequest) Send(ctx context.Context) (*CreateLayerResponse, err
 // CreateLayerResponse is the response type for the
 // CreateLayer API operation.
 type CreateLayerResponse struct {
-	*CreateLayerOutput
+	*types.CreateLayerOutput
 
 	response *aws.Response
 }

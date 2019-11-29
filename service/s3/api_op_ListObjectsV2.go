@@ -6,291 +6,42 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/s3/types"
 )
-
-type ListObjectsV2Input struct {
-	_ struct{} `type:"structure"`
-
-	// Name of the bucket to list.
-	//
-	// Bucket is a required field
-	Bucket *string `location:"uri" locationName:"Bucket" type:"string" required:"true"`
-
-	// ContinuationToken indicates Amazon S3 that the list is being continued on
-	// this bucket with a token. ContinuationToken is obfuscated and is not a real
-	// key
-	ContinuationToken *string `location:"querystring" locationName:"continuation-token" type:"string"`
-
-	// A delimiter is a character you use to group keys.
-	Delimiter *string `location:"querystring" locationName:"delimiter" type:"string"`
-
-	// Encoding type used by Amazon S3 to encode object keys in the response.
-	EncodingType EncodingType `location:"querystring" locationName:"encoding-type" type:"string" enum:"true"`
-
-	// The owner field is not present in listV2 by default, if you want to return
-	// owner field with each key in the result then set the fetch owner field to
-	// true
-	FetchOwner *bool `location:"querystring" locationName:"fetch-owner" type:"boolean"`
-
-	// Sets the maximum number of keys returned in the response. The response might
-	// contain fewer keys but will never contain more.
-	MaxKeys *int64 `location:"querystring" locationName:"max-keys" type:"integer"`
-
-	// Limits the response to keys that begin with the specified prefix.
-	Prefix *string `location:"querystring" locationName:"prefix" type:"string"`
-
-	// Confirms that the requester knows that she or he will be charged for the
-	// list objects request in V2 style. Bucket owners need not specify this parameter
-	// in their requests.
-	RequestPayer RequestPayer `location:"header" locationName:"x-amz-request-payer" type:"string" enum:"true"`
-
-	// StartAfter is where you want Amazon S3 to start listing from. Amazon S3 starts
-	// listing after this specified key. StartAfter can be any key in the bucket
-	StartAfter *string `location:"querystring" locationName:"start-after" type:"string"`
-}
-
-// String returns the string representation
-func (s ListObjectsV2Input) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListObjectsV2Input) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListObjectsV2Input"}
-
-	if s.Bucket == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Bucket"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-func (s *ListObjectsV2Input) getBucket() (v string) {
-	if s.Bucket == nil {
-		return v
-	}
-	return *s.Bucket
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListObjectsV2Input) MarshalFields(e protocol.FieldEncoder) error {
-
-	if len(s.RequestPayer) > 0 {
-		v := s.RequestPayer
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "x-amz-request-payer", v, metadata)
-	}
-	if s.Bucket != nil {
-		v := *s.Bucket
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "Bucket", protocol.StringValue(v), metadata)
-	}
-	if s.ContinuationToken != nil {
-		v := *s.ContinuationToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "continuation-token", protocol.StringValue(v), metadata)
-	}
-	if s.Delimiter != nil {
-		v := *s.Delimiter
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "delimiter", protocol.StringValue(v), metadata)
-	}
-	if len(s.EncodingType) > 0 {
-		v := s.EncodingType
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "encoding-type", v, metadata)
-	}
-	if s.FetchOwner != nil {
-		v := *s.FetchOwner
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "fetch-owner", protocol.BoolValue(v), metadata)
-	}
-	if s.MaxKeys != nil {
-		v := *s.MaxKeys
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "max-keys", protocol.Int64Value(v), metadata)
-	}
-	if s.Prefix != nil {
-		v := *s.Prefix
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "prefix", protocol.StringValue(v), metadata)
-	}
-	if s.StartAfter != nil {
-		v := *s.StartAfter
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "start-after", protocol.StringValue(v), metadata)
-	}
-	return nil
-}
-
-type ListObjectsV2Output struct {
-	_ struct{} `type:"structure"`
-
-	// CommonPrefixes contains all (if there are any) keys between Prefix and the
-	// next occurrence of the string specified by delimiter
-	CommonPrefixes []CommonPrefix `type:"list" flattened:"true"`
-
-	// Metadata about each object returned.
-	Contents []Object `type:"list" flattened:"true"`
-
-	// ContinuationToken indicates Amazon S3 that the list is being continued on
-	// this bucket with a token. ContinuationToken is obfuscated and is not a real
-	// key
-	ContinuationToken *string `type:"string"`
-
-	// A delimiter is a character you use to group keys.
-	Delimiter *string `type:"string"`
-
-	// Encoding type used by Amazon S3 to encode object keys in the response.
-	EncodingType EncodingType `type:"string" enum:"true"`
-
-	// A flag that indicates whether or not Amazon S3 returned all of the results
-	// that satisfied the search criteria.
-	IsTruncated *bool `type:"boolean"`
-
-	// KeyCount is the number of keys returned with this request. KeyCount will
-	// always be less than equals to MaxKeys field. Say you ask for 50 keys, your
-	// result will include less than equals 50 keys
-	KeyCount *int64 `type:"integer"`
-
-	// Sets the maximum number of keys returned in the response. The response might
-	// contain fewer keys but will never contain more.
-	MaxKeys *int64 `type:"integer"`
-
-	// Name of the bucket to list.
-	Name *string `type:"string"`
-
-	// NextContinuationToken is sent when isTruncated is true which means there
-	// are more keys in the bucket that can be listed. The next list requests to
-	// Amazon S3 can be continued with this NextContinuationToken. NextContinuationToken
-	// is obfuscated and is not a real key
-	NextContinuationToken *string `type:"string"`
-
-	// Limits the response to keys that begin with the specified prefix.
-	Prefix *string `type:"string"`
-
-	// StartAfter is where you want Amazon S3 to start listing from. Amazon S3 starts
-	// listing after this specified key. StartAfter can be any key in the bucket
-	StartAfter *string `type:"string"`
-}
-
-// String returns the string representation
-func (s ListObjectsV2Output) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListObjectsV2Output) MarshalFields(e protocol.FieldEncoder) error {
-	if s.CommonPrefixes != nil {
-		v := s.CommonPrefixes
-
-		metadata := protocol.Metadata{Flatten: true}
-		ls0 := e.List(protocol.BodyTarget, "CommonPrefixes", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	if s.Contents != nil {
-		v := s.Contents
-
-		metadata := protocol.Metadata{Flatten: true}
-		ls0 := e.List(protocol.BodyTarget, "Contents", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	if s.ContinuationToken != nil {
-		v := *s.ContinuationToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "ContinuationToken", protocol.StringValue(v), metadata)
-	}
-	if s.Delimiter != nil {
-		v := *s.Delimiter
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "Delimiter", protocol.StringValue(v), metadata)
-	}
-	if len(s.EncodingType) > 0 {
-		v := s.EncodingType
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "EncodingType", v, metadata)
-	}
-	if s.IsTruncated != nil {
-		v := *s.IsTruncated
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "IsTruncated", protocol.BoolValue(v), metadata)
-	}
-	if s.KeyCount != nil {
-		v := *s.KeyCount
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "KeyCount", protocol.Int64Value(v), metadata)
-	}
-	if s.MaxKeys != nil {
-		v := *s.MaxKeys
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "MaxKeys", protocol.Int64Value(v), metadata)
-	}
-	if s.Name != nil {
-		v := *s.Name
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "Name", protocol.StringValue(v), metadata)
-	}
-	if s.NextContinuationToken != nil {
-		v := *s.NextContinuationToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "NextContinuationToken", protocol.StringValue(v), metadata)
-	}
-	if s.Prefix != nil {
-		v := *s.Prefix
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "Prefix", protocol.StringValue(v), metadata)
-	}
-	if s.StartAfter != nil {
-		v := *s.StartAfter
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "StartAfter", protocol.StringValue(v), metadata)
-	}
-	return nil
-}
 
 const opListObjectsV2 = "ListObjectsV2"
 
 // ListObjectsV2Request returns a request value for making API operation for
 // Amazon Simple Storage Service.
 //
-// Returns some or all (up to 1000) of the objects in a bucket. You can use
+// Returns some or all (up to 1,000) of the objects in a bucket. You can use
 // the request parameters as selection criteria to return a subset of the objects
-// in a bucket. Note: ListObjectsV2 is the revised List Objects API and we recommend
-// you use this revised API for new application development.
+// in a bucket. A 200 OK response can contain valid or invalid XML. Make sure
+// to design your application to parse the contents of the response and handle
+// it appropriately.
+//
+// To use thisoperation, you must have READ access to the bucket.
+//
+// To use this operation in an AWS Identity and Access Management (IAM) policy,
+// you must have permissions to perform the s3:ListBucket action. The bucket
+// owner has this permission by default and can grant this permission to others.
+// For more information about permissions, see Permissions Related to Bucket
+// Subresource Operations (https://docs.aws.amazon.com/AmazonS3/latest/dev/using-with-s3-actions.html#using-with-s3-actions-related-to-bucket-subresources)
+// and Managing Access Permissions to Your Amazon S3 Resources (https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-access-control.html).
+//
+// This section describes the latest revision of the API. We recommend that
+// you use this revised API for application development. For backward compatibility,
+// Amazon S3 continues to support the prior version of this API, ListObjects.
+//
+// To get a list of your buckets, see ListBuckets.
+//
+// The following operations are related to ListObjectsV2:
+//
+//    * GetObject
+//
+//    * PutObject
+//
+//    * CreateBucket
 //
 //    // Example sending a request using ListObjectsV2Request.
 //    req := client.ListObjectsV2Request(params)
@@ -300,7 +51,7 @@ const opListObjectsV2 = "ListObjectsV2"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/ListObjectsV2
-func (c *Client) ListObjectsV2Request(input *ListObjectsV2Input) ListObjectsV2Request {
+func (c *Client) ListObjectsV2Request(input *types.ListObjectsV2Input) ListObjectsV2Request {
 	op := &aws.Operation{
 		Name:       opListObjectsV2,
 		HTTPMethod: "GET",
@@ -314,10 +65,10 @@ func (c *Client) ListObjectsV2Request(input *ListObjectsV2Input) ListObjectsV2Re
 	}
 
 	if input == nil {
-		input = &ListObjectsV2Input{}
+		input = &types.ListObjectsV2Input{}
 	}
 
-	req := c.newRequest(op, input, &ListObjectsV2Output{})
+	req := c.newRequest(op, input, &types.ListObjectsV2Output{})
 	return ListObjectsV2Request{Request: req, Input: input, Copy: c.ListObjectsV2Request}
 }
 
@@ -325,8 +76,8 @@ func (c *Client) ListObjectsV2Request(input *ListObjectsV2Input) ListObjectsV2Re
 // ListObjectsV2 API operation.
 type ListObjectsV2Request struct {
 	*aws.Request
-	Input *ListObjectsV2Input
-	Copy  func(*ListObjectsV2Input) ListObjectsV2Request
+	Input *types.ListObjectsV2Input
+	Copy  func(*types.ListObjectsV2Input) ListObjectsV2Request
 }
 
 // Send marshals and sends the ListObjectsV2 API request.
@@ -338,7 +89,7 @@ func (r ListObjectsV2Request) Send(ctx context.Context) (*ListObjectsV2Response,
 	}
 
 	resp := &ListObjectsV2Response{
-		ListObjectsV2Output: r.Request.Data.(*ListObjectsV2Output),
+		ListObjectsV2Output: r.Request.Data.(*types.ListObjectsV2Output),
 		response:            &aws.Response{Request: r.Request},
 	}
 
@@ -368,7 +119,7 @@ func NewListObjectsV2Paginator(req ListObjectsV2Request) ListObjectsV2Paginator 
 	return ListObjectsV2Paginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListObjectsV2Input
+				var inCpy *types.ListObjectsV2Input
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -388,14 +139,14 @@ type ListObjectsV2Paginator struct {
 	aws.Pager
 }
 
-func (p *ListObjectsV2Paginator) CurrentPage() *ListObjectsV2Output {
-	return p.Pager.CurrentPage().(*ListObjectsV2Output)
+func (p *ListObjectsV2Paginator) CurrentPage() *types.ListObjectsV2Output {
+	return p.Pager.CurrentPage().(*types.ListObjectsV2Output)
 }
 
 // ListObjectsV2Response is the response type for the
 // ListObjectsV2 API operation.
 type ListObjectsV2Response struct {
-	*ListObjectsV2Output
+	*types.ListObjectsV2Output
 
 	response *aws.Response
 }

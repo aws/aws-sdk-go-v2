@@ -6,220 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/s3control/types"
 )
-
-type CreateJobInput struct {
-	_ struct{} `locationName:"CreateJobRequest" type:"structure" xmlURI:"http://awss3control.amazonaws.com/doc/2018-08-20/"`
-
-	// AccountId is a required field
-	AccountId *string `location:"header" locationName:"x-amz-account-id" type:"string" required:"true"`
-
-	// An idempotency token to ensure that you don't accidentally submit the same
-	// request twice. You can use any string up to the maximum length.
-	//
-	// ClientRequestToken is a required field
-	ClientRequestToken *string `min:"1" type:"string" required:"true" idempotencyToken:"true"`
-
-	// Indicates whether confirmation is required before Amazon S3 runs the job.
-	// Confirmation is only required for jobs created through the Amazon S3 console.
-	ConfirmationRequired *bool `type:"boolean"`
-
-	// A description for this job. You can use any string within the permitted length.
-	// Descriptions don't need to be unique and can be used for multiple jobs.
-	Description *string `min:"1" type:"string"`
-
-	// Configuration parameters for the manifest.
-	//
-	// Manifest is a required field
-	Manifest *JobManifest `type:"structure" required:"true"`
-
-	// The operation that you want this job to perform on each object listed in
-	// the manifest. For more information about the available operations, see Available
-	// Operations (https://docs.aws.amazon.com/AmazonS3/latest/dev/batch-ops-operations.html)
-	// in the Amazon Simple Storage Service Developer Guide.
-	//
-	// Operation is a required field
-	Operation *JobOperation `type:"structure" required:"true"`
-
-	// The numerical priority for this job. Higher numbers indicate higher priority.
-	//
-	// Priority is a required field
-	Priority *int64 `type:"integer" required:"true"`
-
-	// Configuration parameters for the optional job-completion report.
-	//
-	// Report is a required field
-	Report *JobReport `type:"structure" required:"true"`
-
-	// The Amazon Resource Name (ARN) for the Identity and Access Management (IAM)
-	// Role that batch operations will use to execute this job's operation on each
-	// object in the manifest.
-	//
-	// RoleArn is a required field
-	RoleArn *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s CreateJobInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateJobInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateJobInput"}
-
-	if s.AccountId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("AccountId"))
-	}
-
-	if s.ClientRequestToken == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ClientRequestToken"))
-	}
-	if s.ClientRequestToken != nil && len(*s.ClientRequestToken) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ClientRequestToken", 1))
-	}
-	if s.Description != nil && len(*s.Description) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Description", 1))
-	}
-
-	if s.Manifest == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Manifest"))
-	}
-
-	if s.Operation == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Operation"))
-	}
-
-	if s.Priority == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Priority"))
-	}
-
-	if s.Report == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Report"))
-	}
-
-	if s.RoleArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("RoleArn"))
-	}
-	if s.RoleArn != nil && len(*s.RoleArn) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("RoleArn", 1))
-	}
-	if s.Manifest != nil {
-		if err := s.Manifest.Validate(); err != nil {
-			invalidParams.AddNested("Manifest", err.(aws.ErrInvalidParams))
-		}
-	}
-	if s.Operation != nil {
-		if err := s.Operation.Validate(); err != nil {
-			invalidParams.AddNested("Operation", err.(aws.ErrInvalidParams))
-		}
-	}
-	if s.Report != nil {
-		if err := s.Report.Validate(); err != nil {
-			invalidParams.AddNested("Report", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s CreateJobInput) MarshalFields(e protocol.FieldEncoder) error {
-
-	e.SetFields(protocol.BodyTarget, "CreateJobRequest", protocol.FieldMarshalerFunc(func(e protocol.FieldEncoder) error {
-		var ClientRequestToken string
-		if s.ClientRequestToken != nil {
-			ClientRequestToken = *s.ClientRequestToken
-		} else {
-			ClientRequestToken = protocol.GetIdempotencyToken()
-		}
-		{
-			v := ClientRequestToken
-
-			metadata := protocol.Metadata{}
-			e.SetValue(protocol.BodyTarget, "ClientRequestToken", protocol.StringValue(v), metadata)
-		}
-		if s.ConfirmationRequired != nil {
-			v := *s.ConfirmationRequired
-
-			metadata := protocol.Metadata{}
-			e.SetValue(protocol.BodyTarget, "ConfirmationRequired", protocol.BoolValue(v), metadata)
-		}
-		if s.Description != nil {
-			v := *s.Description
-
-			metadata := protocol.Metadata{}
-			e.SetValue(protocol.BodyTarget, "Description", protocol.StringValue(v), metadata)
-		}
-		if s.Manifest != nil {
-			v := s.Manifest
-
-			metadata := protocol.Metadata{}
-			e.SetFields(protocol.BodyTarget, "Manifest", v, metadata)
-		}
-		if s.Operation != nil {
-			v := s.Operation
-
-			metadata := protocol.Metadata{}
-			e.SetFields(protocol.BodyTarget, "Operation", v, metadata)
-		}
-		if s.Priority != nil {
-			v := *s.Priority
-
-			metadata := protocol.Metadata{}
-			e.SetValue(protocol.BodyTarget, "Priority", protocol.Int64Value(v), metadata)
-		}
-		if s.Report != nil {
-			v := s.Report
-
-			metadata := protocol.Metadata{}
-			e.SetFields(protocol.BodyTarget, "Report", v, metadata)
-		}
-		if s.RoleArn != nil {
-			v := *s.RoleArn
-
-			metadata := protocol.Metadata{}
-			e.SetValue(protocol.BodyTarget, "RoleArn", protocol.StringValue(v), metadata)
-		}
-		return nil
-	}), protocol.Metadata{XMLNamespaceURI: "http://awss3control.amazonaws.com/doc/2018-08-20/"})
-	if s.AccountId != nil {
-		v := *s.AccountId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "x-amz-account-id", protocol.StringValue(v), metadata)
-	}
-	return nil
-}
-
-type CreateJobOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID for this job. Amazon S3 generates this ID automatically and returns
-	// it after a successful Create Job request.
-	JobId *string `min:"5" type:"string"`
-}
-
-// String returns the string representation
-func (s CreateJobOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s CreateJobOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.JobId != nil {
-		v := *s.JobId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "JobId", protocol.StringValue(v), metadata)
-	}
-	return nil
-}
 
 const opCreateJob = "CreateJob"
 
@@ -236,7 +24,7 @@ const opCreateJob = "CreateJob"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/CreateJob
-func (c *Client) CreateJobRequest(input *CreateJobInput) CreateJobRequest {
+func (c *Client) CreateJobRequest(input *types.CreateJobInput) CreateJobRequest {
 	op := &aws.Operation{
 		Name:       opCreateJob,
 		HTTPMethod: "POST",
@@ -244,10 +32,10 @@ func (c *Client) CreateJobRequest(input *CreateJobInput) CreateJobRequest {
 	}
 
 	if input == nil {
-		input = &CreateJobInput{}
+		input = &types.CreateJobInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateJobOutput{})
+	req := c.newRequest(op, input, &types.CreateJobOutput{})
 	req.Handlers.Build.PushBackNamed(buildPrefixHostHandler("AccountID", aws.StringValue(input.AccountId)))
 	req.Handlers.Build.PushBackNamed(buildRemoveHeaderHandler("X-Amz-Account-Id"))
 	return CreateJobRequest{Request: req, Input: input, Copy: c.CreateJobRequest}
@@ -257,8 +45,8 @@ func (c *Client) CreateJobRequest(input *CreateJobInput) CreateJobRequest {
 // CreateJob API operation.
 type CreateJobRequest struct {
 	*aws.Request
-	Input *CreateJobInput
-	Copy  func(*CreateJobInput) CreateJobRequest
+	Input *types.CreateJobInput
+	Copy  func(*types.CreateJobInput) CreateJobRequest
 }
 
 // Send marshals and sends the CreateJob API request.
@@ -270,7 +58,7 @@ func (r CreateJobRequest) Send(ctx context.Context) (*CreateJobResponse, error) 
 	}
 
 	resp := &CreateJobResponse{
-		CreateJobOutput: r.Request.Data.(*CreateJobOutput),
+		CreateJobOutput: r.Request.Data.(*types.CreateJobOutput),
 		response:        &aws.Response{Request: r.Request},
 	}
 
@@ -280,7 +68,7 @@ func (r CreateJobRequest) Send(ctx context.Context) (*CreateJobResponse, error) 
 // CreateJobResponse is the response type for the
 // CreateJob API operation.
 type CreateJobResponse struct {
-	*CreateJobOutput
+	*types.CreateJobOutput
 
 	response *aws.Response
 }

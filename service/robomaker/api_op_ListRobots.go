@@ -4,142 +4,10 @@ package robomaker
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/robomaker/types"
 )
-
-type ListRobotsInput struct {
-	_ struct{} `type:"structure"`
-
-	// Optional filters to limit results.
-	//
-	// The filter names status and fleetName are supported. When filtering, you
-	// must use the complete value of the filtered item. You can use up to three
-	// filters, but they must be for the same named item. For example, if you are
-	// looking for items with the status Registered or the status Available.
-	Filters []Filter `locationName:"filters" min:"1" type:"list"`
-
-	// The maximum number of deployment job results returned by ListRobots in paginated
-	// output. When this parameter is used, ListRobots only returns maxResults results
-	// in a single page along with a nextToken response element. The remaining results
-	// of the initial request can be seen by sending another ListRobots request
-	// with the returned nextToken value. This value can be between 1 and 100. If
-	// this parameter is not used, then ListRobots returns up to 100 results and
-	// a nextToken value if applicable.
-	MaxResults *int64 `locationName:"maxResults" type:"integer"`
-
-	// The nextToken value returned from a previous paginated ListRobots request
-	// where maxResults was used and the results exceeded the value of that parameter.
-	// Pagination continues from the end of the previous results that returned the
-	// nextToken value.
-	//
-	// This token should be treated as an opaque identifier that is only used to
-	// retrieve the next items in a list and not for other programmatic purposes.
-	NextToken *string `locationName:"nextToken" min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s ListRobotsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListRobotsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListRobotsInput"}
-	if s.Filters != nil && len(s.Filters) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Filters", 1))
-	}
-	if s.NextToken != nil && len(*s.NextToken) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
-	}
-	if s.Filters != nil {
-		for i, v := range s.Filters {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListRobotsInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.Filters != nil {
-		v := s.Filters
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "filters", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	if s.MaxResults != nil {
-		v := *s.MaxResults
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "maxResults", protocol.Int64Value(v), metadata)
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type ListRobotsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The nextToken value to include in a future ListRobots request. When the results
-	// of a ListRobot request exceed maxResults, this value can be used to retrieve
-	// the next page of results. This value is null when there are no more results
-	// to return.
-	NextToken *string `locationName:"nextToken" min:"1" type:"string"`
-
-	// A list of robots that meet the criteria of the request.
-	Robots []Robot `locationName:"robots" type:"list"`
-}
-
-// String returns the string representation
-func (s ListRobotsOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListRobotsOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Robots != nil {
-		v := s.Robots
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "robots", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	return nil
-}
 
 const opListRobots = "ListRobots"
 
@@ -157,7 +25,7 @@ const opListRobots = "ListRobots"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/ListRobots
-func (c *Client) ListRobotsRequest(input *ListRobotsInput) ListRobotsRequest {
+func (c *Client) ListRobotsRequest(input *types.ListRobotsInput) ListRobotsRequest {
 	op := &aws.Operation{
 		Name:       opListRobots,
 		HTTPMethod: "POST",
@@ -171,10 +39,10 @@ func (c *Client) ListRobotsRequest(input *ListRobotsInput) ListRobotsRequest {
 	}
 
 	if input == nil {
-		input = &ListRobotsInput{}
+		input = &types.ListRobotsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListRobotsOutput{})
+	req := c.newRequest(op, input, &types.ListRobotsOutput{})
 	return ListRobotsRequest{Request: req, Input: input, Copy: c.ListRobotsRequest}
 }
 
@@ -182,8 +50,8 @@ func (c *Client) ListRobotsRequest(input *ListRobotsInput) ListRobotsRequest {
 // ListRobots API operation.
 type ListRobotsRequest struct {
 	*aws.Request
-	Input *ListRobotsInput
-	Copy  func(*ListRobotsInput) ListRobotsRequest
+	Input *types.ListRobotsInput
+	Copy  func(*types.ListRobotsInput) ListRobotsRequest
 }
 
 // Send marshals and sends the ListRobots API request.
@@ -195,7 +63,7 @@ func (r ListRobotsRequest) Send(ctx context.Context) (*ListRobotsResponse, error
 	}
 
 	resp := &ListRobotsResponse{
-		ListRobotsOutput: r.Request.Data.(*ListRobotsOutput),
+		ListRobotsOutput: r.Request.Data.(*types.ListRobotsOutput),
 		response:         &aws.Response{Request: r.Request},
 	}
 
@@ -225,7 +93,7 @@ func NewListRobotsPaginator(req ListRobotsRequest) ListRobotsPaginator {
 	return ListRobotsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListRobotsInput
+				var inCpy *types.ListRobotsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -245,14 +113,14 @@ type ListRobotsPaginator struct {
 	aws.Pager
 }
 
-func (p *ListRobotsPaginator) CurrentPage() *ListRobotsOutput {
-	return p.Pager.CurrentPage().(*ListRobotsOutput)
+func (p *ListRobotsPaginator) CurrentPage() *types.ListRobotsOutput {
+	return p.Pager.CurrentPage().(*types.ListRobotsOutput)
 }
 
 // ListRobotsResponse is the response type for the
 // ListRobots API operation.
 type ListRobotsResponse struct {
-	*ListRobotsOutput
+	*types.ListRobotsOutput
 
 	response *aws.Response
 }

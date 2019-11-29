@@ -6,50 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/opsworks/types"
 )
-
-type DescribeLoadBasedAutoScalingInput struct {
-	_ struct{} `type:"structure"`
-
-	// An array of layer IDs.
-	//
-	// LayerIds is a required field
-	LayerIds []string `type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeLoadBasedAutoScalingInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeLoadBasedAutoScalingInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeLoadBasedAutoScalingInput"}
-
-	if s.LayerIds == nil {
-		invalidParams.Add(aws.NewErrParamRequired("LayerIds"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Contains the response to a DescribeLoadBasedAutoScaling request.
-type DescribeLoadBasedAutoScalingOutput struct {
-	_ struct{} `type:"structure"`
-
-	// An array of LoadBasedAutoScalingConfiguration objects that describe each
-	// layer's configuration.
-	LoadBasedAutoScalingConfigurations []LoadBasedAutoScalingConfiguration `type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeLoadBasedAutoScalingOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeLoadBasedAutoScaling = "DescribeLoadBasedAutoScaling"
 
@@ -73,7 +31,7 @@ const opDescribeLoadBasedAutoScaling = "DescribeLoadBasedAutoScaling"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DescribeLoadBasedAutoScaling
-func (c *Client) DescribeLoadBasedAutoScalingRequest(input *DescribeLoadBasedAutoScalingInput) DescribeLoadBasedAutoScalingRequest {
+func (c *Client) DescribeLoadBasedAutoScalingRequest(input *types.DescribeLoadBasedAutoScalingInput) DescribeLoadBasedAutoScalingRequest {
 	op := &aws.Operation{
 		Name:       opDescribeLoadBasedAutoScaling,
 		HTTPMethod: "POST",
@@ -81,10 +39,10 @@ func (c *Client) DescribeLoadBasedAutoScalingRequest(input *DescribeLoadBasedAut
 	}
 
 	if input == nil {
-		input = &DescribeLoadBasedAutoScalingInput{}
+		input = &types.DescribeLoadBasedAutoScalingInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeLoadBasedAutoScalingOutput{})
+	req := c.newRequest(op, input, &types.DescribeLoadBasedAutoScalingOutput{})
 	return DescribeLoadBasedAutoScalingRequest{Request: req, Input: input, Copy: c.DescribeLoadBasedAutoScalingRequest}
 }
 
@@ -92,8 +50,8 @@ func (c *Client) DescribeLoadBasedAutoScalingRequest(input *DescribeLoadBasedAut
 // DescribeLoadBasedAutoScaling API operation.
 type DescribeLoadBasedAutoScalingRequest struct {
 	*aws.Request
-	Input *DescribeLoadBasedAutoScalingInput
-	Copy  func(*DescribeLoadBasedAutoScalingInput) DescribeLoadBasedAutoScalingRequest
+	Input *types.DescribeLoadBasedAutoScalingInput
+	Copy  func(*types.DescribeLoadBasedAutoScalingInput) DescribeLoadBasedAutoScalingRequest
 }
 
 // Send marshals and sends the DescribeLoadBasedAutoScaling API request.
@@ -105,7 +63,7 @@ func (r DescribeLoadBasedAutoScalingRequest) Send(ctx context.Context) (*Describ
 	}
 
 	resp := &DescribeLoadBasedAutoScalingResponse{
-		DescribeLoadBasedAutoScalingOutput: r.Request.Data.(*DescribeLoadBasedAutoScalingOutput),
+		DescribeLoadBasedAutoScalingOutput: r.Request.Data.(*types.DescribeLoadBasedAutoScalingOutput),
 		response:                           &aws.Response{Request: r.Request},
 	}
 
@@ -115,7 +73,7 @@ func (r DescribeLoadBasedAutoScalingRequest) Send(ctx context.Context) (*Describ
 // DescribeLoadBasedAutoScalingResponse is the response type for the
 // DescribeLoadBasedAutoScaling API operation.
 type DescribeLoadBasedAutoScalingResponse struct {
-	*DescribeLoadBasedAutoScalingOutput
+	*types.DescribeLoadBasedAutoScalingOutput
 
 	response *aws.Response
 }

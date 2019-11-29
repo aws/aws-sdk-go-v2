@@ -4,93 +4,22 @@ package elasticloadbalancingv2
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/elasticloadbalancingv2/types"
 )
-
-type ModifyRuleInput struct {
-	_ struct{} `type:"structure"`
-
-	// The actions. Each rule must include exactly one of the following types of
-	// actions: forward, fixed-response, or redirect.
-	//
-	// If the action type is forward, you specify a target group. The protocol of
-	// the target group must be HTTP or HTTPS for an Application Load Balancer.
-	// The protocol of the target group must be TCP, TLS, UDP, or TCP_UDP for a
-	// Network Load Balancer.
-	//
-	// [HTTPS listeners] If the action type is authenticate-oidc, you authenticate
-	// users through an identity provider that is OpenID Connect (OIDC) compliant.
-	//
-	// [HTTPS listeners] If the action type is authenticate-cognito, you authenticate
-	// users through the user pools supported by Amazon Cognito.
-	//
-	// [Application Load Balancer] If the action type is redirect, you redirect
-	// specified client requests from one URL to another.
-	//
-	// [Application Load Balancer] If the action type is fixed-response, you drop
-	// specified client requests and return a custom HTTP response.
-	Actions []Action `type:"list"`
-
-	// The conditions. Each rule can include zero or one of the following conditions:
-	// http-request-method, host-header, path-pattern, and source-ip, and zero or
-	// more of the following conditions: http-header and query-string.
-	Conditions []RuleCondition `type:"list"`
-
-	// The Amazon Resource Name (ARN) of the rule.
-	//
-	// RuleArn is a required field
-	RuleArn *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s ModifyRuleInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ModifyRuleInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ModifyRuleInput"}
-
-	if s.RuleArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("RuleArn"))
-	}
-	if s.Actions != nil {
-		for i, v := range s.Actions {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Actions", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ModifyRuleOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Information about the modified rule.
-	Rules []Rule `type:"list"`
-}
-
-// String returns the string representation
-func (s ModifyRuleOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opModifyRule = "ModifyRule"
 
 // ModifyRuleRequest returns a request value for making API operation for
 // Elastic Load Balancing.
 //
-// Modifies the specified rule.
+// Replaces the specified properties of the specified rule. Any properties that
+// you do not specify are unchanged.
 //
-// Any existing properties that you do not modify retain their current values.
+// To add an item to a list, remove an item from a list, or update an item in
+// a list, you must provide the entire list. For example, to add an action,
+// specify a list with the current actions plus the new action.
 //
 // To modify the actions for the default rule, use ModifyListener.
 //
@@ -102,7 +31,7 @@ const opModifyRule = "ModifyRule"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/ModifyRule
-func (c *Client) ModifyRuleRequest(input *ModifyRuleInput) ModifyRuleRequest {
+func (c *Client) ModifyRuleRequest(input *types.ModifyRuleInput) ModifyRuleRequest {
 	op := &aws.Operation{
 		Name:       opModifyRule,
 		HTTPMethod: "POST",
@@ -110,10 +39,10 @@ func (c *Client) ModifyRuleRequest(input *ModifyRuleInput) ModifyRuleRequest {
 	}
 
 	if input == nil {
-		input = &ModifyRuleInput{}
+		input = &types.ModifyRuleInput{}
 	}
 
-	req := c.newRequest(op, input, &ModifyRuleOutput{})
+	req := c.newRequest(op, input, &types.ModifyRuleOutput{})
 	return ModifyRuleRequest{Request: req, Input: input, Copy: c.ModifyRuleRequest}
 }
 
@@ -121,8 +50,8 @@ func (c *Client) ModifyRuleRequest(input *ModifyRuleInput) ModifyRuleRequest {
 // ModifyRule API operation.
 type ModifyRuleRequest struct {
 	*aws.Request
-	Input *ModifyRuleInput
-	Copy  func(*ModifyRuleInput) ModifyRuleRequest
+	Input *types.ModifyRuleInput
+	Copy  func(*types.ModifyRuleInput) ModifyRuleRequest
 }
 
 // Send marshals and sends the ModifyRule API request.
@@ -134,7 +63,7 @@ func (r ModifyRuleRequest) Send(ctx context.Context) (*ModifyRuleResponse, error
 	}
 
 	resp := &ModifyRuleResponse{
-		ModifyRuleOutput: r.Request.Data.(*ModifyRuleOutput),
+		ModifyRuleOutput: r.Request.Data.(*types.ModifyRuleOutput),
 		response:         &aws.Response{Request: r.Request},
 	}
 
@@ -144,7 +73,7 @@ func (r ModifyRuleRequest) Send(ctx context.Context) (*ModifyRuleResponse, error
 // ModifyRuleResponse is the response type for the
 // ModifyRule API operation.
 type ModifyRuleResponse struct {
-	*ModifyRuleOutput
+	*types.ModifyRuleOutput
 
 	response *aws.Response
 }

@@ -6,53 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/codecommit/types"
 )
-
-// Represents the input of a batch get repositories operation.
-type BatchGetRepositoriesInput struct {
-	_ struct{} `type:"structure"`
-
-	// The names of the repositories to get information about.
-	//
-	// RepositoryNames is a required field
-	RepositoryNames []string `locationName:"repositoryNames" type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s BatchGetRepositoriesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *BatchGetRepositoriesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "BatchGetRepositoriesInput"}
-
-	if s.RepositoryNames == nil {
-		invalidParams.Add(aws.NewErrParamRequired("RepositoryNames"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Represents the output of a batch get repositories operation.
-type BatchGetRepositoriesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A list of repositories returned by the batch get repositories operation.
-	Repositories []RepositoryMetadata `locationName:"repositories" type:"list"`
-
-	// Returns a list of repository names for which information could not be found.
-	RepositoriesNotFound []string `locationName:"repositoriesNotFound" type:"list"`
-}
-
-// String returns the string representation
-func (s BatchGetRepositoriesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opBatchGetRepositories = "BatchGetRepositories"
 
@@ -63,9 +18,9 @@ const opBatchGetRepositories = "BatchGetRepositories"
 //
 // The description field for a repository accepts all HTML characters and all
 // valid Unicode characters. Applications that do not HTML-encode the description
-// and display it in a web page could expose users to potentially malicious
-// code. Make sure that you HTML-encode the description field in any application
-// that uses this API to display the repository description on a web page.
+// and display it in a webpage can expose users to potentially malicious code.
+// Make sure that you HTML-encode the description field in any application that
+// uses this API to display the repository description on a webpage.
 //
 //    // Example sending a request using BatchGetRepositoriesRequest.
 //    req := client.BatchGetRepositoriesRequest(params)
@@ -75,7 +30,7 @@ const opBatchGetRepositories = "BatchGetRepositories"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/BatchGetRepositories
-func (c *Client) BatchGetRepositoriesRequest(input *BatchGetRepositoriesInput) BatchGetRepositoriesRequest {
+func (c *Client) BatchGetRepositoriesRequest(input *types.BatchGetRepositoriesInput) BatchGetRepositoriesRequest {
 	op := &aws.Operation{
 		Name:       opBatchGetRepositories,
 		HTTPMethod: "POST",
@@ -83,10 +38,10 @@ func (c *Client) BatchGetRepositoriesRequest(input *BatchGetRepositoriesInput) B
 	}
 
 	if input == nil {
-		input = &BatchGetRepositoriesInput{}
+		input = &types.BatchGetRepositoriesInput{}
 	}
 
-	req := c.newRequest(op, input, &BatchGetRepositoriesOutput{})
+	req := c.newRequest(op, input, &types.BatchGetRepositoriesOutput{})
 	return BatchGetRepositoriesRequest{Request: req, Input: input, Copy: c.BatchGetRepositoriesRequest}
 }
 
@@ -94,8 +49,8 @@ func (c *Client) BatchGetRepositoriesRequest(input *BatchGetRepositoriesInput) B
 // BatchGetRepositories API operation.
 type BatchGetRepositoriesRequest struct {
 	*aws.Request
-	Input *BatchGetRepositoriesInput
-	Copy  func(*BatchGetRepositoriesInput) BatchGetRepositoriesRequest
+	Input *types.BatchGetRepositoriesInput
+	Copy  func(*types.BatchGetRepositoriesInput) BatchGetRepositoriesRequest
 }
 
 // Send marshals and sends the BatchGetRepositories API request.
@@ -107,7 +62,7 @@ func (r BatchGetRepositoriesRequest) Send(ctx context.Context) (*BatchGetReposit
 	}
 
 	resp := &BatchGetRepositoriesResponse{
-		BatchGetRepositoriesOutput: r.Request.Data.(*BatchGetRepositoriesOutput),
+		BatchGetRepositoriesOutput: r.Request.Data.(*types.BatchGetRepositoriesOutput),
 		response:                   &aws.Response{Request: r.Request},
 	}
 
@@ -117,7 +72,7 @@ func (r BatchGetRepositoriesRequest) Send(ctx context.Context) (*BatchGetReposit
 // BatchGetRepositoriesResponse is the response type for the
 // BatchGetRepositories API operation.
 type BatchGetRepositoriesResponse struct {
-	*BatchGetRepositoriesOutput
+	*types.BatchGetRepositoriesOutput
 
 	response *aws.Response
 }

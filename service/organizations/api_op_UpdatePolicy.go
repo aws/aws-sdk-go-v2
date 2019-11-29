@@ -6,74 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/organizations/types"
 )
-
-type UpdatePolicyInput struct {
-	_ struct{} `type:"structure"`
-
-	// If provided, the new content for the policy. The text must be correctly formatted
-	// JSON that complies with the syntax for the policy's type. For more information,
-	// see Service Control Policy Syntax (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_reference_scp-syntax.html)
-	// in the AWS Organizations User Guide.
-	Content *string `min:"1" type:"string"`
-
-	// If provided, the new description for the policy.
-	Description *string `type:"string"`
-
-	// If provided, the new name for the policy.
-	//
-	// The regex pattern (http://wikipedia.org/wiki/regex) that is used to validate
-	// this parameter is a string of any of the characters in the ASCII character
-	// range.
-	Name *string `min:"1" type:"string"`
-
-	// The unique identifier (ID) of the policy that you want to update.
-	//
-	// The regex pattern (http://wikipedia.org/wiki/regex) for a policy ID string
-	// requires "p-" followed by from 8 to 128 lower-case letters or digits.
-	//
-	// PolicyId is a required field
-	PolicyId *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s UpdatePolicyInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdatePolicyInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdatePolicyInput"}
-	if s.Content != nil && len(*s.Content) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Content", 1))
-	}
-	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
-	}
-
-	if s.PolicyId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("PolicyId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type UpdatePolicyOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A structure that contains details about the updated policy, showing the requested
-	// changes.
-	Policy *Policy `type:"structure"`
-}
-
-// String returns the string representation
-func (s UpdatePolicyOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opUpdatePolicy = "UpdatePolicy"
 
@@ -94,7 +28,7 @@ const opUpdatePolicy = "UpdatePolicy"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/UpdatePolicy
-func (c *Client) UpdatePolicyRequest(input *UpdatePolicyInput) UpdatePolicyRequest {
+func (c *Client) UpdatePolicyRequest(input *types.UpdatePolicyInput) UpdatePolicyRequest {
 	op := &aws.Operation{
 		Name:       opUpdatePolicy,
 		HTTPMethod: "POST",
@@ -102,10 +36,10 @@ func (c *Client) UpdatePolicyRequest(input *UpdatePolicyInput) UpdatePolicyReque
 	}
 
 	if input == nil {
-		input = &UpdatePolicyInput{}
+		input = &types.UpdatePolicyInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdatePolicyOutput{})
+	req := c.newRequest(op, input, &types.UpdatePolicyOutput{})
 	return UpdatePolicyRequest{Request: req, Input: input, Copy: c.UpdatePolicyRequest}
 }
 
@@ -113,8 +47,8 @@ func (c *Client) UpdatePolicyRequest(input *UpdatePolicyInput) UpdatePolicyReque
 // UpdatePolicy API operation.
 type UpdatePolicyRequest struct {
 	*aws.Request
-	Input *UpdatePolicyInput
-	Copy  func(*UpdatePolicyInput) UpdatePolicyRequest
+	Input *types.UpdatePolicyInput
+	Copy  func(*types.UpdatePolicyInput) UpdatePolicyRequest
 }
 
 // Send marshals and sends the UpdatePolicy API request.
@@ -126,7 +60,7 @@ func (r UpdatePolicyRequest) Send(ctx context.Context) (*UpdatePolicyResponse, e
 	}
 
 	resp := &UpdatePolicyResponse{
-		UpdatePolicyOutput: r.Request.Data.(*UpdatePolicyOutput),
+		UpdatePolicyOutput: r.Request.Data.(*types.UpdatePolicyOutput),
 		response:           &aws.Response{Request: r.Request},
 	}
 
@@ -136,7 +70,7 @@ func (r UpdatePolicyRequest) Send(ctx context.Context) (*UpdatePolicyResponse, e
 // UpdatePolicyResponse is the response type for the
 // UpdatePolicy API operation.
 type UpdatePolicyResponse struct {
-	*UpdatePolicyOutput
+	*types.UpdatePolicyOutput
 
 	response *aws.Response
 }

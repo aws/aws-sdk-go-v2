@@ -4,127 +4,10 @@ package apigatewayv2
 
 import (
 	"context"
-	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/apigatewayv2/types"
 )
-
-type CreateDeploymentInput struct {
-	_ struct{} `type:"structure"`
-
-	// ApiId is a required field
-	ApiId *string `location:"uri" locationName:"apiId" type:"string" required:"true"`
-
-	// A string with a length between [0-1024].
-	Description *string `locationName:"description" type:"string"`
-
-	// A string with a length between [1-128].
-	StageName *string `locationName:"stageName" type:"string"`
-}
-
-// String returns the string representation
-func (s CreateDeploymentInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateDeploymentInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateDeploymentInput"}
-
-	if s.ApiId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ApiId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s CreateDeploymentInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.Description != nil {
-		v := *s.Description
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "description", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.StageName != nil {
-		v := *s.StageName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "stageName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.ApiId != nil {
-		v := *s.ApiId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "apiId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type CreateDeploymentOutput struct {
-	_ struct{} `type:"structure"`
-
-	CreatedDate *time.Time `locationName:"createdDate" type:"timestamp" timestampFormat:"iso8601"`
-
-	// The identifier.
-	DeploymentId *string `locationName:"deploymentId" type:"string"`
-
-	// Represents a deployment status.
-	DeploymentStatus DeploymentStatus `locationName:"deploymentStatus" type:"string" enum:"true"`
-
-	DeploymentStatusMessage *string `locationName:"deploymentStatusMessage" type:"string"`
-
-	// A string with a length between [0-1024].
-	Description *string `locationName:"description" type:"string"`
-}
-
-// String returns the string representation
-func (s CreateDeploymentOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s CreateDeploymentOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.CreatedDate != nil {
-		v := *s.CreatedDate
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "createdDate",
-			protocol.TimeValue{V: v, Format: "iso8601", QuotedFormatTime: true}, metadata)
-	}
-	if s.DeploymentId != nil {
-		v := *s.DeploymentId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "deploymentId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if len(s.DeploymentStatus) > 0 {
-		v := s.DeploymentStatus
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "deploymentStatus", protocol.QuotedValue{ValueMarshaler: v}, metadata)
-	}
-	if s.DeploymentStatusMessage != nil {
-		v := *s.DeploymentStatusMessage
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "deploymentStatusMessage", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Description != nil {
-		v := *s.Description
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "description", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opCreateDeployment = "CreateDeployment"
 
@@ -141,7 +24,7 @@ const opCreateDeployment = "CreateDeployment"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/apigatewayv2-2018-11-29/CreateDeployment
-func (c *Client) CreateDeploymentRequest(input *CreateDeploymentInput) CreateDeploymentRequest {
+func (c *Client) CreateDeploymentRequest(input *types.CreateDeploymentInput) CreateDeploymentRequest {
 	op := &aws.Operation{
 		Name:       opCreateDeployment,
 		HTTPMethod: "POST",
@@ -149,10 +32,10 @@ func (c *Client) CreateDeploymentRequest(input *CreateDeploymentInput) CreateDep
 	}
 
 	if input == nil {
-		input = &CreateDeploymentInput{}
+		input = &types.CreateDeploymentInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateDeploymentOutput{})
+	req := c.newRequest(op, input, &types.CreateDeploymentOutput{})
 	return CreateDeploymentRequest{Request: req, Input: input, Copy: c.CreateDeploymentRequest}
 }
 
@@ -160,8 +43,8 @@ func (c *Client) CreateDeploymentRequest(input *CreateDeploymentInput) CreateDep
 // CreateDeployment API operation.
 type CreateDeploymentRequest struct {
 	*aws.Request
-	Input *CreateDeploymentInput
-	Copy  func(*CreateDeploymentInput) CreateDeploymentRequest
+	Input *types.CreateDeploymentInput
+	Copy  func(*types.CreateDeploymentInput) CreateDeploymentRequest
 }
 
 // Send marshals and sends the CreateDeployment API request.
@@ -173,7 +56,7 @@ func (r CreateDeploymentRequest) Send(ctx context.Context) (*CreateDeploymentRes
 	}
 
 	resp := &CreateDeploymentResponse{
-		CreateDeploymentOutput: r.Request.Data.(*CreateDeploymentOutput),
+		CreateDeploymentOutput: r.Request.Data.(*types.CreateDeploymentOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -183,7 +66,7 @@ func (r CreateDeploymentRequest) Send(ctx context.Context) (*CreateDeploymentRes
 // CreateDeploymentResponse is the response type for the
 // CreateDeployment API operation.
 type CreateDeploymentResponse struct {
-	*CreateDeploymentOutput
+	*types.CreateDeploymentOutput
 
 	response *aws.Response
 }

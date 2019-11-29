@@ -6,70 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/iot1clickdevicesservice/types"
 )
-
-type InitiateDeviceClaimInput struct {
-	_ struct{} `type:"structure"`
-
-	// DeviceId is a required field
-	DeviceId *string `location:"uri" locationName:"deviceId" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s InitiateDeviceClaimInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *InitiateDeviceClaimInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "InitiateDeviceClaimInput"}
-
-	if s.DeviceId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DeviceId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s InitiateDeviceClaimInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.DeviceId != nil {
-		v := *s.DeviceId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "deviceId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type InitiateDeviceClaimOutput struct {
-	_ struct{} `type:"structure"`
-
-	State *string `locationName:"state" type:"string"`
-}
-
-// String returns the string representation
-func (s InitiateDeviceClaimOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s InitiateDeviceClaimOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.State != nil {
-		v := *s.State
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "state", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opInitiateDeviceClaim = "InitiateDeviceClaim"
 
@@ -90,7 +28,7 @@ const opInitiateDeviceClaim = "InitiateDeviceClaim"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/devices-2018-05-14/InitiateDeviceClaim
-func (c *Client) InitiateDeviceClaimRequest(input *InitiateDeviceClaimInput) InitiateDeviceClaimRequest {
+func (c *Client) InitiateDeviceClaimRequest(input *types.InitiateDeviceClaimInput) InitiateDeviceClaimRequest {
 	op := &aws.Operation{
 		Name:       opInitiateDeviceClaim,
 		HTTPMethod: "PUT",
@@ -98,10 +36,10 @@ func (c *Client) InitiateDeviceClaimRequest(input *InitiateDeviceClaimInput) Ini
 	}
 
 	if input == nil {
-		input = &InitiateDeviceClaimInput{}
+		input = &types.InitiateDeviceClaimInput{}
 	}
 
-	req := c.newRequest(op, input, &InitiateDeviceClaimOutput{})
+	req := c.newRequest(op, input, &types.InitiateDeviceClaimOutput{})
 	return InitiateDeviceClaimRequest{Request: req, Input: input, Copy: c.InitiateDeviceClaimRequest}
 }
 
@@ -109,8 +47,8 @@ func (c *Client) InitiateDeviceClaimRequest(input *InitiateDeviceClaimInput) Ini
 // InitiateDeviceClaim API operation.
 type InitiateDeviceClaimRequest struct {
 	*aws.Request
-	Input *InitiateDeviceClaimInput
-	Copy  func(*InitiateDeviceClaimInput) InitiateDeviceClaimRequest
+	Input *types.InitiateDeviceClaimInput
+	Copy  func(*types.InitiateDeviceClaimInput) InitiateDeviceClaimRequest
 }
 
 // Send marshals and sends the InitiateDeviceClaim API request.
@@ -122,7 +60,7 @@ func (r InitiateDeviceClaimRequest) Send(ctx context.Context) (*InitiateDeviceCl
 	}
 
 	resp := &InitiateDeviceClaimResponse{
-		InitiateDeviceClaimOutput: r.Request.Data.(*InitiateDeviceClaimOutput),
+		InitiateDeviceClaimOutput: r.Request.Data.(*types.InitiateDeviceClaimOutput),
 		response:                  &aws.Response{Request: r.Request},
 	}
 
@@ -132,7 +70,7 @@ func (r InitiateDeviceClaimRequest) Send(ctx context.Context) (*InitiateDeviceCl
 // InitiateDeviceClaimResponse is the response type for the
 // InitiateDeviceClaim API operation.
 type InitiateDeviceClaimResponse struct {
-	*InitiateDeviceClaimOutput
+	*types.InitiateDeviceClaimOutput
 
 	response *aws.Response
 }

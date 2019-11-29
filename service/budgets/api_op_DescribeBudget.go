@@ -6,66 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/budgets/types"
 )
-
-// Request of DescribeBudget
-type DescribeBudgetInput struct {
-	_ struct{} `type:"structure"`
-
-	// The accountId that is associated with the budget that you want a description
-	// of.
-	//
-	// AccountId is a required field
-	AccountId *string `min:"12" type:"string" required:"true"`
-
-	// The name of the budget that you want a description of.
-	//
-	// BudgetName is a required field
-	BudgetName *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeBudgetInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeBudgetInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeBudgetInput"}
-
-	if s.AccountId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("AccountId"))
-	}
-	if s.AccountId != nil && len(*s.AccountId) < 12 {
-		invalidParams.Add(aws.NewErrParamMinLen("AccountId", 12))
-	}
-
-	if s.BudgetName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("BudgetName"))
-	}
-	if s.BudgetName != nil && len(*s.BudgetName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("BudgetName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Response of DescribeBudget
-type DescribeBudgetOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The description of the budget.
-	Budget *Budget `type:"structure"`
-}
-
-// String returns the string representation
-func (s DescribeBudgetOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeBudget = "DescribeBudget"
 
@@ -84,7 +26,7 @@ const opDescribeBudget = "DescribeBudget"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) DescribeBudgetRequest(input *DescribeBudgetInput) DescribeBudgetRequest {
+func (c *Client) DescribeBudgetRequest(input *types.DescribeBudgetInput) DescribeBudgetRequest {
 	op := &aws.Operation{
 		Name:       opDescribeBudget,
 		HTTPMethod: "POST",
@@ -92,10 +34,10 @@ func (c *Client) DescribeBudgetRequest(input *DescribeBudgetInput) DescribeBudge
 	}
 
 	if input == nil {
-		input = &DescribeBudgetInput{}
+		input = &types.DescribeBudgetInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeBudgetOutput{})
+	req := c.newRequest(op, input, &types.DescribeBudgetOutput{})
 	return DescribeBudgetRequest{Request: req, Input: input, Copy: c.DescribeBudgetRequest}
 }
 
@@ -103,8 +45,8 @@ func (c *Client) DescribeBudgetRequest(input *DescribeBudgetInput) DescribeBudge
 // DescribeBudget API operation.
 type DescribeBudgetRequest struct {
 	*aws.Request
-	Input *DescribeBudgetInput
-	Copy  func(*DescribeBudgetInput) DescribeBudgetRequest
+	Input *types.DescribeBudgetInput
+	Copy  func(*types.DescribeBudgetInput) DescribeBudgetRequest
 }
 
 // Send marshals and sends the DescribeBudget API request.
@@ -116,7 +58,7 @@ func (r DescribeBudgetRequest) Send(ctx context.Context) (*DescribeBudgetRespons
 	}
 
 	resp := &DescribeBudgetResponse{
-		DescribeBudgetOutput: r.Request.Data.(*DescribeBudgetOutput),
+		DescribeBudgetOutput: r.Request.Data.(*types.DescribeBudgetOutput),
 		response:             &aws.Response{Request: r.Request},
 	}
 
@@ -126,7 +68,7 @@ func (r DescribeBudgetRequest) Send(ctx context.Context) (*DescribeBudgetRespons
 // DescribeBudgetResponse is the response type for the
 // DescribeBudget API operation.
 type DescribeBudgetResponse struct {
-	*DescribeBudgetOutput
+	*types.DescribeBudgetOutput
 
 	response *aws.Response
 }

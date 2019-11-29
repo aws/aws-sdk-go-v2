@@ -6,54 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/alexaforbusiness/types"
 )
-
-type AssociateDeviceWithNetworkProfileInput struct {
-	_ struct{} `type:"structure"`
-
-	// The device ARN.
-	//
-	// DeviceArn is a required field
-	DeviceArn *string `type:"string" required:"true"`
-
-	// The ARN of the network profile to associate with a device.
-	//
-	// NetworkProfileArn is a required field
-	NetworkProfileArn *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s AssociateDeviceWithNetworkProfileInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *AssociateDeviceWithNetworkProfileInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "AssociateDeviceWithNetworkProfileInput"}
-
-	if s.DeviceArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DeviceArn"))
-	}
-
-	if s.NetworkProfileArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("NetworkProfileArn"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type AssociateDeviceWithNetworkProfileOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s AssociateDeviceWithNetworkProfileOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opAssociateDeviceWithNetworkProfile = "AssociateDeviceWithNetworkProfile"
 
@@ -70,7 +24,7 @@ const opAssociateDeviceWithNetworkProfile = "AssociateDeviceWithNetworkProfile"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/AssociateDeviceWithNetworkProfile
-func (c *Client) AssociateDeviceWithNetworkProfileRequest(input *AssociateDeviceWithNetworkProfileInput) AssociateDeviceWithNetworkProfileRequest {
+func (c *Client) AssociateDeviceWithNetworkProfileRequest(input *types.AssociateDeviceWithNetworkProfileInput) AssociateDeviceWithNetworkProfileRequest {
 	op := &aws.Operation{
 		Name:       opAssociateDeviceWithNetworkProfile,
 		HTTPMethod: "POST",
@@ -78,10 +32,10 @@ func (c *Client) AssociateDeviceWithNetworkProfileRequest(input *AssociateDevice
 	}
 
 	if input == nil {
-		input = &AssociateDeviceWithNetworkProfileInput{}
+		input = &types.AssociateDeviceWithNetworkProfileInput{}
 	}
 
-	req := c.newRequest(op, input, &AssociateDeviceWithNetworkProfileOutput{})
+	req := c.newRequest(op, input, &types.AssociateDeviceWithNetworkProfileOutput{})
 	return AssociateDeviceWithNetworkProfileRequest{Request: req, Input: input, Copy: c.AssociateDeviceWithNetworkProfileRequest}
 }
 
@@ -89,8 +43,8 @@ func (c *Client) AssociateDeviceWithNetworkProfileRequest(input *AssociateDevice
 // AssociateDeviceWithNetworkProfile API operation.
 type AssociateDeviceWithNetworkProfileRequest struct {
 	*aws.Request
-	Input *AssociateDeviceWithNetworkProfileInput
-	Copy  func(*AssociateDeviceWithNetworkProfileInput) AssociateDeviceWithNetworkProfileRequest
+	Input *types.AssociateDeviceWithNetworkProfileInput
+	Copy  func(*types.AssociateDeviceWithNetworkProfileInput) AssociateDeviceWithNetworkProfileRequest
 }
 
 // Send marshals and sends the AssociateDeviceWithNetworkProfile API request.
@@ -102,7 +56,7 @@ func (r AssociateDeviceWithNetworkProfileRequest) Send(ctx context.Context) (*As
 	}
 
 	resp := &AssociateDeviceWithNetworkProfileResponse{
-		AssociateDeviceWithNetworkProfileOutput: r.Request.Data.(*AssociateDeviceWithNetworkProfileOutput),
+		AssociateDeviceWithNetworkProfileOutput: r.Request.Data.(*types.AssociateDeviceWithNetworkProfileOutput),
 		response:                                &aws.Response{Request: r.Request},
 	}
 
@@ -112,7 +66,7 @@ func (r AssociateDeviceWithNetworkProfileRequest) Send(ctx context.Context) (*As
 // AssociateDeviceWithNetworkProfileResponse is the response type for the
 // AssociateDeviceWithNetworkProfile API operation.
 type AssociateDeviceWithNetworkProfileResponse struct {
-	*AssociateDeviceWithNetworkProfileOutput
+	*types.AssociateDeviceWithNetworkProfileOutput
 
 	response *aws.Response
 }

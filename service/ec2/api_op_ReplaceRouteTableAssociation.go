@@ -6,63 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-type ReplaceRouteTableAssociationInput struct {
-	_ struct{} `type:"structure"`
-
-	// The association ID.
-	//
-	// AssociationId is a required field
-	AssociationId *string `locationName:"associationId" type:"string" required:"true"`
-
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have
-	// the required permissions, the error response is DryRunOperation. Otherwise,
-	// it is UnauthorizedOperation.
-	DryRun *bool `locationName:"dryRun" type:"boolean"`
-
-	// The ID of the new route table to associate with the subnet.
-	//
-	// RouteTableId is a required field
-	RouteTableId *string `locationName:"routeTableId" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s ReplaceRouteTableAssociationInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ReplaceRouteTableAssociationInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ReplaceRouteTableAssociationInput"}
-
-	if s.AssociationId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("AssociationId"))
-	}
-
-	if s.RouteTableId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("RouteTableId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ReplaceRouteTableAssociationOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the new association.
-	NewAssociationId *string `locationName:"newAssociationId" type:"string"`
-}
-
-// String returns the string representation
-func (s ReplaceRouteTableAssociationOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opReplaceRouteTableAssociation = "ReplaceRouteTableAssociation"
 
@@ -87,7 +32,7 @@ const opReplaceRouteTableAssociation = "ReplaceRouteTableAssociation"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ReplaceRouteTableAssociation
-func (c *Client) ReplaceRouteTableAssociationRequest(input *ReplaceRouteTableAssociationInput) ReplaceRouteTableAssociationRequest {
+func (c *Client) ReplaceRouteTableAssociationRequest(input *types.ReplaceRouteTableAssociationInput) ReplaceRouteTableAssociationRequest {
 	op := &aws.Operation{
 		Name:       opReplaceRouteTableAssociation,
 		HTTPMethod: "POST",
@@ -95,10 +40,10 @@ func (c *Client) ReplaceRouteTableAssociationRequest(input *ReplaceRouteTableAss
 	}
 
 	if input == nil {
-		input = &ReplaceRouteTableAssociationInput{}
+		input = &types.ReplaceRouteTableAssociationInput{}
 	}
 
-	req := c.newRequest(op, input, &ReplaceRouteTableAssociationOutput{})
+	req := c.newRequest(op, input, &types.ReplaceRouteTableAssociationOutput{})
 	return ReplaceRouteTableAssociationRequest{Request: req, Input: input, Copy: c.ReplaceRouteTableAssociationRequest}
 }
 
@@ -106,8 +51,8 @@ func (c *Client) ReplaceRouteTableAssociationRequest(input *ReplaceRouteTableAss
 // ReplaceRouteTableAssociation API operation.
 type ReplaceRouteTableAssociationRequest struct {
 	*aws.Request
-	Input *ReplaceRouteTableAssociationInput
-	Copy  func(*ReplaceRouteTableAssociationInput) ReplaceRouteTableAssociationRequest
+	Input *types.ReplaceRouteTableAssociationInput
+	Copy  func(*types.ReplaceRouteTableAssociationInput) ReplaceRouteTableAssociationRequest
 }
 
 // Send marshals and sends the ReplaceRouteTableAssociation API request.
@@ -119,7 +64,7 @@ func (r ReplaceRouteTableAssociationRequest) Send(ctx context.Context) (*Replace
 	}
 
 	resp := &ReplaceRouteTableAssociationResponse{
-		ReplaceRouteTableAssociationOutput: r.Request.Data.(*ReplaceRouteTableAssociationOutput),
+		ReplaceRouteTableAssociationOutput: r.Request.Data.(*types.ReplaceRouteTableAssociationOutput),
 		response:                           &aws.Response{Request: r.Request},
 	}
 
@@ -129,7 +74,7 @@ func (r ReplaceRouteTableAssociationRequest) Send(ctx context.Context) (*Replace
 // ReplaceRouteTableAssociationResponse is the response type for the
 // ReplaceRouteTableAssociation API operation.
 type ReplaceRouteTableAssociationResponse struct {
-	*ReplaceRouteTableAssociationOutput
+	*types.ReplaceRouteTableAssociationOutput
 
 	response *aws.Response
 }

@@ -6,82 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/directoryservice/types"
 )
-
-type StartSchemaExtensionInput struct {
-	_ struct{} `type:"structure"`
-
-	// If true, creates a snapshot of the directory before applying the schema extension.
-	//
-	// CreateSnapshotBeforeSchemaExtension is a required field
-	CreateSnapshotBeforeSchemaExtension *bool `type:"boolean" required:"true"`
-
-	// A description of the schema extension.
-	//
-	// Description is a required field
-	Description *string `type:"string" required:"true"`
-
-	// The identifier of the directory for which the schema extension will be applied
-	// to.
-	//
-	// DirectoryId is a required field
-	DirectoryId *string `type:"string" required:"true"`
-
-	// The LDIF file represented as a string. To construct the LdifContent string,
-	// precede each line as it would be formatted in an ldif file with \n. See the
-	// example request below for more details. The file size can be no larger than
-	// 1MB.
-	//
-	// LdifContent is a required field
-	LdifContent *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s StartSchemaExtensionInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *StartSchemaExtensionInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "StartSchemaExtensionInput"}
-
-	if s.CreateSnapshotBeforeSchemaExtension == nil {
-		invalidParams.Add(aws.NewErrParamRequired("CreateSnapshotBeforeSchemaExtension"))
-	}
-
-	if s.Description == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Description"))
-	}
-
-	if s.DirectoryId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DirectoryId"))
-	}
-
-	if s.LdifContent == nil {
-		invalidParams.Add(aws.NewErrParamRequired("LdifContent"))
-	}
-	if s.LdifContent != nil && len(*s.LdifContent) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("LdifContent", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type StartSchemaExtensionOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The identifier of the schema extension that will be applied.
-	SchemaExtensionId *string `type:"string"`
-}
-
-// String returns the string representation
-func (s StartSchemaExtensionOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opStartSchemaExtension = "StartSchemaExtension"
 
@@ -98,7 +24,7 @@ const opStartSchemaExtension = "StartSchemaExtension"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/StartSchemaExtension
-func (c *Client) StartSchemaExtensionRequest(input *StartSchemaExtensionInput) StartSchemaExtensionRequest {
+func (c *Client) StartSchemaExtensionRequest(input *types.StartSchemaExtensionInput) StartSchemaExtensionRequest {
 	op := &aws.Operation{
 		Name:       opStartSchemaExtension,
 		HTTPMethod: "POST",
@@ -106,10 +32,10 @@ func (c *Client) StartSchemaExtensionRequest(input *StartSchemaExtensionInput) S
 	}
 
 	if input == nil {
-		input = &StartSchemaExtensionInput{}
+		input = &types.StartSchemaExtensionInput{}
 	}
 
-	req := c.newRequest(op, input, &StartSchemaExtensionOutput{})
+	req := c.newRequest(op, input, &types.StartSchemaExtensionOutput{})
 	return StartSchemaExtensionRequest{Request: req, Input: input, Copy: c.StartSchemaExtensionRequest}
 }
 
@@ -117,8 +43,8 @@ func (c *Client) StartSchemaExtensionRequest(input *StartSchemaExtensionInput) S
 // StartSchemaExtension API operation.
 type StartSchemaExtensionRequest struct {
 	*aws.Request
-	Input *StartSchemaExtensionInput
-	Copy  func(*StartSchemaExtensionInput) StartSchemaExtensionRequest
+	Input *types.StartSchemaExtensionInput
+	Copy  func(*types.StartSchemaExtensionInput) StartSchemaExtensionRequest
 }
 
 // Send marshals and sends the StartSchemaExtension API request.
@@ -130,7 +56,7 @@ func (r StartSchemaExtensionRequest) Send(ctx context.Context) (*StartSchemaExte
 	}
 
 	resp := &StartSchemaExtensionResponse{
-		StartSchemaExtensionOutput: r.Request.Data.(*StartSchemaExtensionOutput),
+		StartSchemaExtensionOutput: r.Request.Data.(*types.StartSchemaExtensionOutput),
 		response:                   &aws.Response{Request: r.Request},
 	}
 
@@ -140,7 +66,7 @@ func (r StartSchemaExtensionRequest) Send(ctx context.Context) (*StartSchemaExte
 // StartSchemaExtensionResponse is the response type for the
 // StartSchemaExtension API operation.
 type StartSchemaExtensionResponse struct {
-	*StartSchemaExtensionOutput
+	*types.StartSchemaExtensionOutput
 
 	response *aws.Response
 }

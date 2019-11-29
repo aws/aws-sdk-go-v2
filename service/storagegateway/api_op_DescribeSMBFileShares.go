@@ -6,54 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/storagegateway/types"
 )
-
-// DescribeSMBFileSharesInput
-type DescribeSMBFileSharesInput struct {
-	_ struct{} `type:"structure"`
-
-	// An array containing the Amazon Resource Name (ARN) of each file share to
-	// be described.
-	//
-	// FileShareARNList is a required field
-	FileShareARNList []string `min:"1" type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeSMBFileSharesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeSMBFileSharesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeSMBFileSharesInput"}
-
-	if s.FileShareARNList == nil {
-		invalidParams.Add(aws.NewErrParamRequired("FileShareARNList"))
-	}
-	if s.FileShareARNList != nil && len(s.FileShareARNList) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("FileShareARNList", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// DescribeSMBFileSharesOutput
-type DescribeSMBFileSharesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// An array containing a description for each requested file share.
-	SMBFileShareInfoList []SMBFileShareInfo `type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeSMBFileSharesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeSMBFileShares = "DescribeSMBFileShares"
 
@@ -71,7 +25,7 @@ const opDescribeSMBFileShares = "DescribeSMBFileShares"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DescribeSMBFileShares
-func (c *Client) DescribeSMBFileSharesRequest(input *DescribeSMBFileSharesInput) DescribeSMBFileSharesRequest {
+func (c *Client) DescribeSMBFileSharesRequest(input *types.DescribeSMBFileSharesInput) DescribeSMBFileSharesRequest {
 	op := &aws.Operation{
 		Name:       opDescribeSMBFileShares,
 		HTTPMethod: "POST",
@@ -79,10 +33,10 @@ func (c *Client) DescribeSMBFileSharesRequest(input *DescribeSMBFileSharesInput)
 	}
 
 	if input == nil {
-		input = &DescribeSMBFileSharesInput{}
+		input = &types.DescribeSMBFileSharesInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeSMBFileSharesOutput{})
+	req := c.newRequest(op, input, &types.DescribeSMBFileSharesOutput{})
 	return DescribeSMBFileSharesRequest{Request: req, Input: input, Copy: c.DescribeSMBFileSharesRequest}
 }
 
@@ -90,8 +44,8 @@ func (c *Client) DescribeSMBFileSharesRequest(input *DescribeSMBFileSharesInput)
 // DescribeSMBFileShares API operation.
 type DescribeSMBFileSharesRequest struct {
 	*aws.Request
-	Input *DescribeSMBFileSharesInput
-	Copy  func(*DescribeSMBFileSharesInput) DescribeSMBFileSharesRequest
+	Input *types.DescribeSMBFileSharesInput
+	Copy  func(*types.DescribeSMBFileSharesInput) DescribeSMBFileSharesRequest
 }
 
 // Send marshals and sends the DescribeSMBFileShares API request.
@@ -103,7 +57,7 @@ func (r DescribeSMBFileSharesRequest) Send(ctx context.Context) (*DescribeSMBFil
 	}
 
 	resp := &DescribeSMBFileSharesResponse{
-		DescribeSMBFileSharesOutput: r.Request.Data.(*DescribeSMBFileSharesOutput),
+		DescribeSMBFileSharesOutput: r.Request.Data.(*types.DescribeSMBFileSharesOutput),
 		response:                    &aws.Response{Request: r.Request},
 	}
 
@@ -113,7 +67,7 @@ func (r DescribeSMBFileSharesRequest) Send(ctx context.Context) (*DescribeSMBFil
 // DescribeSMBFileSharesResponse is the response type for the
 // DescribeSMBFileShares API operation.
 type DescribeSMBFileSharesResponse struct {
-	*DescribeSMBFileSharesOutput
+	*types.DescribeSMBFileSharesOutput
 
 	response *aws.Response
 }

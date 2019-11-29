@@ -10,6 +10,7 @@ package sagemakerruntimeiface
 
 import (
 	"github.com/aws/aws-sdk-go-v2/service/sagemakerruntime"
+	"github.com/aws/aws-sdk-go-v2/service/sagemakerruntime/types"
 )
 
 // ClientAPI provides an interface to enable mocking the
@@ -43,7 +44,7 @@ import (
 //    type mockClientClient struct {
 //        sagemakerruntimeiface.ClientPI
 //    }
-//    func (m *mockClientClient) InvokeEndpoint(input *sagemakerruntime.InvokeEndpointInput) (*sagemakerruntime.InvokeEndpointOutput, error) {
+//    func (m *mockClientClient) InvokeEndpoint(input *types.InvokeEndpointInput) (*types.InvokeEndpointOutput, error) {
 //        // mock response/functionality
 //    }
 //
@@ -61,7 +62,7 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type ClientAPI interface {
-	InvokeEndpointRequest(*sagemakerruntime.InvokeEndpointInput) sagemakerruntime.InvokeEndpointRequest
+	InvokeEndpointRequest(*types.InvokeEndpointInput) sagemakerruntime.InvokeEndpointRequest
 }
 
 var _ ClientAPI = (*sagemakerruntime.Client)(nil)

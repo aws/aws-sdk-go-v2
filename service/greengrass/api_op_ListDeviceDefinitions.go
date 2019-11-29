@@ -6,77 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/greengrass/types"
 )
-
-type ListDeviceDefinitionsInput struct {
-	_ struct{} `type:"structure"`
-
-	MaxResults *string `location:"querystring" locationName:"MaxResults" type:"string"`
-
-	NextToken *string `location:"querystring" locationName:"NextToken" type:"string"`
-}
-
-// String returns the string representation
-func (s ListDeviceDefinitionsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListDeviceDefinitionsInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.MaxResults != nil {
-		v := *s.MaxResults
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "MaxResults", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type ListDeviceDefinitionsOutput struct {
-	_ struct{} `type:"structure"`
-
-	Definitions []DefinitionInformation `type:"list"`
-
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s ListDeviceDefinitionsOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListDeviceDefinitionsOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.Definitions != nil {
-		v := s.Definitions
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "Definitions", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opListDeviceDefinitions = "ListDeviceDefinitions"
 
@@ -93,7 +24,7 @@ const opListDeviceDefinitions = "ListDeviceDefinitions"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/ListDeviceDefinitions
-func (c *Client) ListDeviceDefinitionsRequest(input *ListDeviceDefinitionsInput) ListDeviceDefinitionsRequest {
+func (c *Client) ListDeviceDefinitionsRequest(input *types.ListDeviceDefinitionsInput) ListDeviceDefinitionsRequest {
 	op := &aws.Operation{
 		Name:       opListDeviceDefinitions,
 		HTTPMethod: "GET",
@@ -101,10 +32,10 @@ func (c *Client) ListDeviceDefinitionsRequest(input *ListDeviceDefinitionsInput)
 	}
 
 	if input == nil {
-		input = &ListDeviceDefinitionsInput{}
+		input = &types.ListDeviceDefinitionsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListDeviceDefinitionsOutput{})
+	req := c.newRequest(op, input, &types.ListDeviceDefinitionsOutput{})
 	return ListDeviceDefinitionsRequest{Request: req, Input: input, Copy: c.ListDeviceDefinitionsRequest}
 }
 
@@ -112,8 +43,8 @@ func (c *Client) ListDeviceDefinitionsRequest(input *ListDeviceDefinitionsInput)
 // ListDeviceDefinitions API operation.
 type ListDeviceDefinitionsRequest struct {
 	*aws.Request
-	Input *ListDeviceDefinitionsInput
-	Copy  func(*ListDeviceDefinitionsInput) ListDeviceDefinitionsRequest
+	Input *types.ListDeviceDefinitionsInput
+	Copy  func(*types.ListDeviceDefinitionsInput) ListDeviceDefinitionsRequest
 }
 
 // Send marshals and sends the ListDeviceDefinitions API request.
@@ -125,7 +56,7 @@ func (r ListDeviceDefinitionsRequest) Send(ctx context.Context) (*ListDeviceDefi
 	}
 
 	resp := &ListDeviceDefinitionsResponse{
-		ListDeviceDefinitionsOutput: r.Request.Data.(*ListDeviceDefinitionsOutput),
+		ListDeviceDefinitionsOutput: r.Request.Data.(*types.ListDeviceDefinitionsOutput),
 		response:                    &aws.Response{Request: r.Request},
 	}
 
@@ -135,7 +66,7 @@ func (r ListDeviceDefinitionsRequest) Send(ctx context.Context) (*ListDeviceDefi
 // ListDeviceDefinitionsResponse is the response type for the
 // ListDeviceDefinitions API operation.
 type ListDeviceDefinitionsResponse struct {
-	*ListDeviceDefinitionsOutput
+	*types.ListDeviceDefinitionsOutput
 
 	response *aws.Response
 }

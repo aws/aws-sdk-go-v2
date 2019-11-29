@@ -6,51 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/workspaces/types"
 )
-
-type StartWorkspacesInput struct {
-	_ struct{} `type:"structure"`
-
-	// The WorkSpaces to start. You can specify up to 25 WorkSpaces.
-	//
-	// StartWorkspaceRequests is a required field
-	StartWorkspaceRequests []StartRequest `min:"1" type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s StartWorkspacesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *StartWorkspacesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "StartWorkspacesInput"}
-
-	if s.StartWorkspaceRequests == nil {
-		invalidParams.Add(aws.NewErrParamRequired("StartWorkspaceRequests"))
-	}
-	if s.StartWorkspaceRequests != nil && len(s.StartWorkspaceRequests) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("StartWorkspaceRequests", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type StartWorkspacesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Information about the WorkSpaces that could not be started.
-	FailedRequests []FailedWorkspaceChangeRequest `type:"list"`
-}
-
-// String returns the string representation
-func (s StartWorkspacesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opStartWorkspaces = "StartWorkspaces"
 
@@ -70,7 +27,7 @@ const opStartWorkspaces = "StartWorkspaces"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/StartWorkspaces
-func (c *Client) StartWorkspacesRequest(input *StartWorkspacesInput) StartWorkspacesRequest {
+func (c *Client) StartWorkspacesRequest(input *types.StartWorkspacesInput) StartWorkspacesRequest {
 	op := &aws.Operation{
 		Name:       opStartWorkspaces,
 		HTTPMethod: "POST",
@@ -78,10 +35,10 @@ func (c *Client) StartWorkspacesRequest(input *StartWorkspacesInput) StartWorksp
 	}
 
 	if input == nil {
-		input = &StartWorkspacesInput{}
+		input = &types.StartWorkspacesInput{}
 	}
 
-	req := c.newRequest(op, input, &StartWorkspacesOutput{})
+	req := c.newRequest(op, input, &types.StartWorkspacesOutput{})
 	return StartWorkspacesRequest{Request: req, Input: input, Copy: c.StartWorkspacesRequest}
 }
 
@@ -89,8 +46,8 @@ func (c *Client) StartWorkspacesRequest(input *StartWorkspacesInput) StartWorksp
 // StartWorkspaces API operation.
 type StartWorkspacesRequest struct {
 	*aws.Request
-	Input *StartWorkspacesInput
-	Copy  func(*StartWorkspacesInput) StartWorkspacesRequest
+	Input *types.StartWorkspacesInput
+	Copy  func(*types.StartWorkspacesInput) StartWorkspacesRequest
 }
 
 // Send marshals and sends the StartWorkspaces API request.
@@ -102,7 +59,7 @@ func (r StartWorkspacesRequest) Send(ctx context.Context) (*StartWorkspacesRespo
 	}
 
 	resp := &StartWorkspacesResponse{
-		StartWorkspacesOutput: r.Request.Data.(*StartWorkspacesOutput),
+		StartWorkspacesOutput: r.Request.Data.(*types.StartWorkspacesOutput),
 		response:              &aws.Response{Request: r.Request},
 	}
 
@@ -112,7 +69,7 @@ func (r StartWorkspacesRequest) Send(ctx context.Context) (*StartWorkspacesRespo
 // StartWorkspacesResponse is the response type for the
 // StartWorkspaces API operation.
 type StartWorkspacesResponse struct {
-	*StartWorkspacesOutput
+	*types.StartWorkspacesOutput
 
 	response *aws.Response
 }

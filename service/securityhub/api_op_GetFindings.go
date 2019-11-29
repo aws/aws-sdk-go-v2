@@ -6,124 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/securityhub/types"
 )
-
-type GetFindingsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The findings attributes used to define a condition to filter the findings
-	// returned.
-	Filters *AwsSecurityFindingFilters `type:"structure"`
-
-	// The maximum number of findings to return.
-	MaxResults *int64 `min:"1" type:"integer"`
-
-	// Paginates results. On your first call to the GetFindings operation, set the
-	// value of this parameter to NULL. For subsequent calls to the operation, fill
-	// nextToken in the request with the value of nextToken from the previous response
-	// to continue listing data.
-	NextToken *string `type:"string"`
-
-	// Findings attributes used to sort the list of findings returned.
-	SortCriteria []SortCriterion `type:"list"`
-}
-
-// String returns the string representation
-func (s GetFindingsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetFindingsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetFindingsInput"}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetFindingsInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.Filters != nil {
-		v := s.Filters
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "Filters", v, metadata)
-	}
-	if s.MaxResults != nil {
-		v := *s.MaxResults
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "MaxResults", protocol.Int64Value(v), metadata)
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.SortCriteria != nil {
-		v := s.SortCriteria
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "SortCriteria", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	return nil
-}
-
-type GetFindingsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The findings that matched the filters specified in the request.
-	//
-	// Findings is a required field
-	Findings []AwsSecurityFinding `type:"list" required:"true"`
-
-	// The token that is required for pagination.
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s GetFindingsOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetFindingsOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.Findings != nil {
-		v := s.Findings
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "Findings", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opGetFindings = "GetFindings"
 
@@ -140,7 +24,7 @@ const opGetFindings = "GetFindings"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/GetFindings
-func (c *Client) GetFindingsRequest(input *GetFindingsInput) GetFindingsRequest {
+func (c *Client) GetFindingsRequest(input *types.GetFindingsInput) GetFindingsRequest {
 	op := &aws.Operation{
 		Name:       opGetFindings,
 		HTTPMethod: "POST",
@@ -154,10 +38,10 @@ func (c *Client) GetFindingsRequest(input *GetFindingsInput) GetFindingsRequest 
 	}
 
 	if input == nil {
-		input = &GetFindingsInput{}
+		input = &types.GetFindingsInput{}
 	}
 
-	req := c.newRequest(op, input, &GetFindingsOutput{})
+	req := c.newRequest(op, input, &types.GetFindingsOutput{})
 	return GetFindingsRequest{Request: req, Input: input, Copy: c.GetFindingsRequest}
 }
 
@@ -165,8 +49,8 @@ func (c *Client) GetFindingsRequest(input *GetFindingsInput) GetFindingsRequest 
 // GetFindings API operation.
 type GetFindingsRequest struct {
 	*aws.Request
-	Input *GetFindingsInput
-	Copy  func(*GetFindingsInput) GetFindingsRequest
+	Input *types.GetFindingsInput
+	Copy  func(*types.GetFindingsInput) GetFindingsRequest
 }
 
 // Send marshals and sends the GetFindings API request.
@@ -178,7 +62,7 @@ func (r GetFindingsRequest) Send(ctx context.Context) (*GetFindingsResponse, err
 	}
 
 	resp := &GetFindingsResponse{
-		GetFindingsOutput: r.Request.Data.(*GetFindingsOutput),
+		GetFindingsOutput: r.Request.Data.(*types.GetFindingsOutput),
 		response:          &aws.Response{Request: r.Request},
 	}
 
@@ -208,7 +92,7 @@ func NewGetFindingsPaginator(req GetFindingsRequest) GetFindingsPaginator {
 	return GetFindingsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *GetFindingsInput
+				var inCpy *types.GetFindingsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -228,14 +112,14 @@ type GetFindingsPaginator struct {
 	aws.Pager
 }
 
-func (p *GetFindingsPaginator) CurrentPage() *GetFindingsOutput {
-	return p.Pager.CurrentPage().(*GetFindingsOutput)
+func (p *GetFindingsPaginator) CurrentPage() *types.GetFindingsOutput {
+	return p.Pager.CurrentPage().(*types.GetFindingsOutput)
 }
 
 // GetFindingsResponse is the response type for the
 // GetFindings API operation.
 type GetFindingsResponse struct {
-	*GetFindingsOutput
+	*types.GetFindingsOutput
 
 	response *aws.Response
 }

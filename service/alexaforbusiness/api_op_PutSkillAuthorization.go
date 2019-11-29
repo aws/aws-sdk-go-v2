@@ -6,58 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/alexaforbusiness/types"
 )
-
-type PutSkillAuthorizationInput struct {
-	_ struct{} `type:"structure"`
-
-	// The authorization result specific to OAUTH code grant output. "Code” must
-	// be populated in the AuthorizationResult map to establish the authorization.
-	//
-	// AuthorizationResult is a required field
-	AuthorizationResult map[string]string `type:"map" required:"true" sensitive:"true"`
-
-	// The room that the skill is authorized for.
-	RoomArn *string `type:"string"`
-
-	// The unique identifier of a skill.
-	//
-	// SkillId is a required field
-	SkillId *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s PutSkillAuthorizationInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *PutSkillAuthorizationInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "PutSkillAuthorizationInput"}
-
-	if s.AuthorizationResult == nil {
-		invalidParams.Add(aws.NewErrParamRequired("AuthorizationResult"))
-	}
-
-	if s.SkillId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("SkillId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type PutSkillAuthorizationOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s PutSkillAuthorizationOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opPutSkillAuthorization = "PutSkillAuthorization"
 
@@ -77,7 +27,7 @@ const opPutSkillAuthorization = "PutSkillAuthorization"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/PutSkillAuthorization
-func (c *Client) PutSkillAuthorizationRequest(input *PutSkillAuthorizationInput) PutSkillAuthorizationRequest {
+func (c *Client) PutSkillAuthorizationRequest(input *types.PutSkillAuthorizationInput) PutSkillAuthorizationRequest {
 	op := &aws.Operation{
 		Name:       opPutSkillAuthorization,
 		HTTPMethod: "POST",
@@ -85,10 +35,10 @@ func (c *Client) PutSkillAuthorizationRequest(input *PutSkillAuthorizationInput)
 	}
 
 	if input == nil {
-		input = &PutSkillAuthorizationInput{}
+		input = &types.PutSkillAuthorizationInput{}
 	}
 
-	req := c.newRequest(op, input, &PutSkillAuthorizationOutput{})
+	req := c.newRequest(op, input, &types.PutSkillAuthorizationOutput{})
 	return PutSkillAuthorizationRequest{Request: req, Input: input, Copy: c.PutSkillAuthorizationRequest}
 }
 
@@ -96,8 +46,8 @@ func (c *Client) PutSkillAuthorizationRequest(input *PutSkillAuthorizationInput)
 // PutSkillAuthorization API operation.
 type PutSkillAuthorizationRequest struct {
 	*aws.Request
-	Input *PutSkillAuthorizationInput
-	Copy  func(*PutSkillAuthorizationInput) PutSkillAuthorizationRequest
+	Input *types.PutSkillAuthorizationInput
+	Copy  func(*types.PutSkillAuthorizationInput) PutSkillAuthorizationRequest
 }
 
 // Send marshals and sends the PutSkillAuthorization API request.
@@ -109,7 +59,7 @@ func (r PutSkillAuthorizationRequest) Send(ctx context.Context) (*PutSkillAuthor
 	}
 
 	resp := &PutSkillAuthorizationResponse{
-		PutSkillAuthorizationOutput: r.Request.Data.(*PutSkillAuthorizationOutput),
+		PutSkillAuthorizationOutput: r.Request.Data.(*types.PutSkillAuthorizationOutput),
 		response:                    &aws.Response{Request: r.Request},
 	}
 
@@ -119,7 +69,7 @@ func (r PutSkillAuthorizationRequest) Send(ctx context.Context) (*PutSkillAuthor
 // PutSkillAuthorizationResponse is the response type for the
 // PutSkillAuthorization API operation.
 type PutSkillAuthorizationResponse struct {
-	*PutSkillAuthorizationOutput
+	*types.PutSkillAuthorizationOutput
 
 	response *aws.Response
 }

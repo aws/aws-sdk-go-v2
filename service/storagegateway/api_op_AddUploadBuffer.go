@@ -6,64 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/storagegateway/types"
 )
-
-type AddUploadBufferInput struct {
-	_ struct{} `type:"structure"`
-
-	// An array of strings that identify disks that are to be configured as working
-	// storage. Each string have a minimum length of 1 and maximum length of 300.
-	// You can get the disk IDs from the ListLocalDisks API.
-	//
-	// DiskIds is a required field
-	DiskIds []string `type:"list" required:"true"`
-
-	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation
-	// to return a list of gateways for your account and AWS Region.
-	//
-	// GatewayARN is a required field
-	GatewayARN *string `min:"50" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s AddUploadBufferInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *AddUploadBufferInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "AddUploadBufferInput"}
-
-	if s.DiskIds == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DiskIds"))
-	}
-
-	if s.GatewayARN == nil {
-		invalidParams.Add(aws.NewErrParamRequired("GatewayARN"))
-	}
-	if s.GatewayARN != nil && len(*s.GatewayARN) < 50 {
-		invalidParams.Add(aws.NewErrParamMinLen("GatewayARN", 50))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type AddUploadBufferOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation
-	// to return a list of gateways for your account and AWS Region.
-	GatewayARN *string `min:"50" type:"string"`
-}
-
-// String returns the string representation
-func (s AddUploadBufferOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opAddUploadBuffer = "AddUploadBuffer"
 
@@ -86,7 +30,7 @@ const opAddUploadBuffer = "AddUploadBuffer"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/AddUploadBuffer
-func (c *Client) AddUploadBufferRequest(input *AddUploadBufferInput) AddUploadBufferRequest {
+func (c *Client) AddUploadBufferRequest(input *types.AddUploadBufferInput) AddUploadBufferRequest {
 	op := &aws.Operation{
 		Name:       opAddUploadBuffer,
 		HTTPMethod: "POST",
@@ -94,10 +38,10 @@ func (c *Client) AddUploadBufferRequest(input *AddUploadBufferInput) AddUploadBu
 	}
 
 	if input == nil {
-		input = &AddUploadBufferInput{}
+		input = &types.AddUploadBufferInput{}
 	}
 
-	req := c.newRequest(op, input, &AddUploadBufferOutput{})
+	req := c.newRequest(op, input, &types.AddUploadBufferOutput{})
 	return AddUploadBufferRequest{Request: req, Input: input, Copy: c.AddUploadBufferRequest}
 }
 
@@ -105,8 +49,8 @@ func (c *Client) AddUploadBufferRequest(input *AddUploadBufferInput) AddUploadBu
 // AddUploadBuffer API operation.
 type AddUploadBufferRequest struct {
 	*aws.Request
-	Input *AddUploadBufferInput
-	Copy  func(*AddUploadBufferInput) AddUploadBufferRequest
+	Input *types.AddUploadBufferInput
+	Copy  func(*types.AddUploadBufferInput) AddUploadBufferRequest
 }
 
 // Send marshals and sends the AddUploadBuffer API request.
@@ -118,7 +62,7 @@ func (r AddUploadBufferRequest) Send(ctx context.Context) (*AddUploadBufferRespo
 	}
 
 	resp := &AddUploadBufferResponse{
-		AddUploadBufferOutput: r.Request.Data.(*AddUploadBufferOutput),
+		AddUploadBufferOutput: r.Request.Data.(*types.AddUploadBufferOutput),
 		response:              &aws.Response{Request: r.Request},
 	}
 
@@ -128,7 +72,7 @@ func (r AddUploadBufferRequest) Send(ctx context.Context) (*AddUploadBufferRespo
 // AddUploadBufferResponse is the response type for the
 // AddUploadBuffer API operation.
 type AddUploadBufferResponse struct {
-	*AddUploadBufferOutput
+	*types.AddUploadBufferOutput
 
 	response *aws.Response
 }

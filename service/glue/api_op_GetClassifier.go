@@ -6,51 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/glue/types"
 )
-
-type GetClassifierInput struct {
-	_ struct{} `type:"structure"`
-
-	// Name of the classifier to retrieve.
-	//
-	// Name is a required field
-	Name *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetClassifierInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetClassifierInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetClassifierInput"}
-
-	if s.Name == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Name"))
-	}
-	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type GetClassifierOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The requested classifier.
-	Classifier *Classifier `type:"structure"`
-}
-
-// String returns the string representation
-func (s GetClassifierOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetClassifier = "GetClassifier"
 
@@ -67,7 +24,7 @@ const opGetClassifier = "GetClassifier"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetClassifier
-func (c *Client) GetClassifierRequest(input *GetClassifierInput) GetClassifierRequest {
+func (c *Client) GetClassifierRequest(input *types.GetClassifierInput) GetClassifierRequest {
 	op := &aws.Operation{
 		Name:       opGetClassifier,
 		HTTPMethod: "POST",
@@ -75,10 +32,10 @@ func (c *Client) GetClassifierRequest(input *GetClassifierInput) GetClassifierRe
 	}
 
 	if input == nil {
-		input = &GetClassifierInput{}
+		input = &types.GetClassifierInput{}
 	}
 
-	req := c.newRequest(op, input, &GetClassifierOutput{})
+	req := c.newRequest(op, input, &types.GetClassifierOutput{})
 	return GetClassifierRequest{Request: req, Input: input, Copy: c.GetClassifierRequest}
 }
 
@@ -86,8 +43,8 @@ func (c *Client) GetClassifierRequest(input *GetClassifierInput) GetClassifierRe
 // GetClassifier API operation.
 type GetClassifierRequest struct {
 	*aws.Request
-	Input *GetClassifierInput
-	Copy  func(*GetClassifierInput) GetClassifierRequest
+	Input *types.GetClassifierInput
+	Copy  func(*types.GetClassifierInput) GetClassifierRequest
 }
 
 // Send marshals and sends the GetClassifier API request.
@@ -99,7 +56,7 @@ func (r GetClassifierRequest) Send(ctx context.Context) (*GetClassifierResponse,
 	}
 
 	resp := &GetClassifierResponse{
-		GetClassifierOutput: r.Request.Data.(*GetClassifierOutput),
+		GetClassifierOutput: r.Request.Data.(*types.GetClassifierOutput),
 		response:            &aws.Response{Request: r.Request},
 	}
 
@@ -109,7 +66,7 @@ func (r GetClassifierRequest) Send(ctx context.Context) (*GetClassifierResponse,
 // GetClassifierResponse is the response type for the
 // GetClassifier API operation.
 type GetClassifierResponse struct {
-	*GetClassifierOutput
+	*types.GetClassifierOutput
 
 	response *aws.Response
 }

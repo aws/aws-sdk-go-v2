@@ -6,99 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/kinesisvideo/types"
 )
-
-type TagStreamInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the resource that you want to add the tag
-	// or tags to.
-	StreamARN *string `min:"1" type:"string"`
-
-	// The name of the stream that you want to add the tag or tags to.
-	StreamName *string `min:"1" type:"string"`
-
-	// A list of tags to associate with the specified stream. Each tag is a key-value
-	// pair (the value is optional).
-	//
-	// Tags is a required field
-	Tags map[string]string `min:"1" type:"map" required:"true"`
-}
-
-// String returns the string representation
-func (s TagStreamInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *TagStreamInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "TagStreamInput"}
-	if s.StreamARN != nil && len(*s.StreamARN) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("StreamARN", 1))
-	}
-	if s.StreamName != nil && len(*s.StreamName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("StreamName", 1))
-	}
-
-	if s.Tags == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Tags"))
-	}
-	if s.Tags != nil && len(s.Tags) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Tags", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s TagStreamInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.StreamARN != nil {
-		v := *s.StreamARN
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "StreamARN", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.StreamName != nil {
-		v := *s.StreamName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "StreamName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Tags != nil {
-		v := s.Tags
-
-		metadata := protocol.Metadata{}
-		ms0 := e.Map(protocol.BodyTarget, "Tags", metadata)
-		ms0.Start()
-		for k1, v1 := range v {
-			ms0.MapSetValue(k1, protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
-		}
-		ms0.End()
-
-	}
-	return nil
-}
-
-type TagStreamOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s TagStreamOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s TagStreamOutput) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
 
 const opTagStream = "TagStream"
 
@@ -126,7 +35,7 @@ const opTagStream = "TagStream"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesisvideo-2017-09-30/TagStream
-func (c *Client) TagStreamRequest(input *TagStreamInput) TagStreamRequest {
+func (c *Client) TagStreamRequest(input *types.TagStreamInput) TagStreamRequest {
 	op := &aws.Operation{
 		Name:       opTagStream,
 		HTTPMethod: "POST",
@@ -134,10 +43,10 @@ func (c *Client) TagStreamRequest(input *TagStreamInput) TagStreamRequest {
 	}
 
 	if input == nil {
-		input = &TagStreamInput{}
+		input = &types.TagStreamInput{}
 	}
 
-	req := c.newRequest(op, input, &TagStreamOutput{})
+	req := c.newRequest(op, input, &types.TagStreamOutput{})
 	return TagStreamRequest{Request: req, Input: input, Copy: c.TagStreamRequest}
 }
 
@@ -145,8 +54,8 @@ func (c *Client) TagStreamRequest(input *TagStreamInput) TagStreamRequest {
 // TagStream API operation.
 type TagStreamRequest struct {
 	*aws.Request
-	Input *TagStreamInput
-	Copy  func(*TagStreamInput) TagStreamRequest
+	Input *types.TagStreamInput
+	Copy  func(*types.TagStreamInput) TagStreamRequest
 }
 
 // Send marshals and sends the TagStream API request.
@@ -158,7 +67,7 @@ func (r TagStreamRequest) Send(ctx context.Context) (*TagStreamResponse, error) 
 	}
 
 	resp := &TagStreamResponse{
-		TagStreamOutput: r.Request.Data.(*TagStreamOutput),
+		TagStreamOutput: r.Request.Data.(*types.TagStreamOutput),
 		response:        &aws.Response{Request: r.Request},
 	}
 
@@ -168,7 +77,7 @@ func (r TagStreamRequest) Send(ctx context.Context) (*TagStreamResponse, error) 
 // TagStreamResponse is the response type for the
 // TagStream API operation.
 type TagStreamResponse struct {
-	*TagStreamOutput
+	*types.TagStreamOutput
 
 	response *aws.Response
 }

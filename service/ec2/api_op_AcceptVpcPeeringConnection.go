@@ -6,39 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-type AcceptVpcPeeringConnectionInput struct {
-	_ struct{} `type:"structure"`
-
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have
-	// the required permissions, the error response is DryRunOperation. Otherwise,
-	// it is UnauthorizedOperation.
-	DryRun *bool `locationName:"dryRun" type:"boolean"`
-
-	// The ID of the VPC peering connection. You must specify this parameter in
-	// the request.
-	VpcPeeringConnectionId *string `locationName:"vpcPeeringConnectionId" type:"string"`
-}
-
-// String returns the string representation
-func (s AcceptVpcPeeringConnectionInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type AcceptVpcPeeringConnectionOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Information about the VPC peering connection.
-	VpcPeeringConnection *VpcPeeringConnection `locationName:"vpcPeeringConnection" type:"structure"`
-}
-
-// String returns the string representation
-func (s AcceptVpcPeeringConnectionOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opAcceptVpcPeeringConnection = "AcceptVpcPeeringConnection"
 
@@ -61,7 +30,7 @@ const opAcceptVpcPeeringConnection = "AcceptVpcPeeringConnection"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AcceptVpcPeeringConnection
-func (c *Client) AcceptVpcPeeringConnectionRequest(input *AcceptVpcPeeringConnectionInput) AcceptVpcPeeringConnectionRequest {
+func (c *Client) AcceptVpcPeeringConnectionRequest(input *types.AcceptVpcPeeringConnectionInput) AcceptVpcPeeringConnectionRequest {
 	op := &aws.Operation{
 		Name:       opAcceptVpcPeeringConnection,
 		HTTPMethod: "POST",
@@ -69,10 +38,10 @@ func (c *Client) AcceptVpcPeeringConnectionRequest(input *AcceptVpcPeeringConnec
 	}
 
 	if input == nil {
-		input = &AcceptVpcPeeringConnectionInput{}
+		input = &types.AcceptVpcPeeringConnectionInput{}
 	}
 
-	req := c.newRequest(op, input, &AcceptVpcPeeringConnectionOutput{})
+	req := c.newRequest(op, input, &types.AcceptVpcPeeringConnectionOutput{})
 	return AcceptVpcPeeringConnectionRequest{Request: req, Input: input, Copy: c.AcceptVpcPeeringConnectionRequest}
 }
 
@@ -80,8 +49,8 @@ func (c *Client) AcceptVpcPeeringConnectionRequest(input *AcceptVpcPeeringConnec
 // AcceptVpcPeeringConnection API operation.
 type AcceptVpcPeeringConnectionRequest struct {
 	*aws.Request
-	Input *AcceptVpcPeeringConnectionInput
-	Copy  func(*AcceptVpcPeeringConnectionInput) AcceptVpcPeeringConnectionRequest
+	Input *types.AcceptVpcPeeringConnectionInput
+	Copy  func(*types.AcceptVpcPeeringConnectionInput) AcceptVpcPeeringConnectionRequest
 }
 
 // Send marshals and sends the AcceptVpcPeeringConnection API request.
@@ -93,7 +62,7 @@ func (r AcceptVpcPeeringConnectionRequest) Send(ctx context.Context) (*AcceptVpc
 	}
 
 	resp := &AcceptVpcPeeringConnectionResponse{
-		AcceptVpcPeeringConnectionOutput: r.Request.Data.(*AcceptVpcPeeringConnectionOutput),
+		AcceptVpcPeeringConnectionOutput: r.Request.Data.(*types.AcceptVpcPeeringConnectionOutput),
 		response:                         &aws.Response{Request: r.Request},
 	}
 
@@ -103,7 +72,7 @@ func (r AcceptVpcPeeringConnectionRequest) Send(ctx context.Context) (*AcceptVpc
 // AcceptVpcPeeringConnectionResponse is the response type for the
 // AcceptVpcPeeringConnection API operation.
 type AcceptVpcPeeringConnectionResponse struct {
-	*AcceptVpcPeeringConnectionOutput
+	*types.AcceptVpcPeeringConnectionOutput
 
 	response *aws.Response
 }

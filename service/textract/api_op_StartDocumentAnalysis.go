@@ -6,95 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/textract/types"
 )
-
-type StartDocumentAnalysisInput struct {
-	_ struct{} `type:"structure"`
-
-	// The idempotent token that you use to identify the start request. If you use
-	// the same token with multiple StartDocumentAnalysis requests, the same JobId
-	// is returned. Use ClientRequestToken to prevent the same job from being accidentally
-	// started more than once.
-	ClientRequestToken *string `min:"1" type:"string"`
-
-	// The location of the document to be processed.
-	//
-	// DocumentLocation is a required field
-	DocumentLocation *DocumentLocation `type:"structure" required:"true"`
-
-	// A list of the types of analysis to perform. Add TABLES to the list to return
-	// information about the tables that are detected in the input document. Add
-	// FORMS to return detected fields and the associated text. To perform both
-	// types of analysis, add TABLES and FORMS to FeatureTypes. All selectable elements
-	// (SELECTION_ELEMENT) that are detected are returned, whatever the value of
-	// FeatureTypes.
-	//
-	// FeatureTypes is a required field
-	FeatureTypes []FeatureType `type:"list" required:"true"`
-
-	// An identifier you specify that's included in the completion notification
-	// that's published to the Amazon SNS topic. For example, you can use JobTag
-	// to identify the type of document, such as a tax form or a receipt, that the
-	// completion notification corresponds to.
-	JobTag *string `min:"1" type:"string"`
-
-	// The Amazon SNS topic ARN that you want Amazon Textract to publish the completion
-	// status of the operation to.
-	NotificationChannel *NotificationChannel `type:"structure"`
-}
-
-// String returns the string representation
-func (s StartDocumentAnalysisInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *StartDocumentAnalysisInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "StartDocumentAnalysisInput"}
-	if s.ClientRequestToken != nil && len(*s.ClientRequestToken) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ClientRequestToken", 1))
-	}
-
-	if s.DocumentLocation == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DocumentLocation"))
-	}
-
-	if s.FeatureTypes == nil {
-		invalidParams.Add(aws.NewErrParamRequired("FeatureTypes"))
-	}
-	if s.JobTag != nil && len(*s.JobTag) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("JobTag", 1))
-	}
-	if s.DocumentLocation != nil {
-		if err := s.DocumentLocation.Validate(); err != nil {
-			invalidParams.AddNested("DocumentLocation", err.(aws.ErrInvalidParams))
-		}
-	}
-	if s.NotificationChannel != nil {
-		if err := s.NotificationChannel.Validate(); err != nil {
-			invalidParams.AddNested("NotificationChannel", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type StartDocumentAnalysisOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The identifier for the document text detection job. Use JobId to identify
-	// the job in a subsequent call to GetDocumentAnalysis.
-	JobId *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s StartDocumentAnalysisOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opStartDocumentAnalysis = "StartDocumentAnalysis"
 
@@ -126,7 +39,7 @@ const opStartDocumentAnalysis = "StartDocumentAnalysis"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/textract-2018-06-27/StartDocumentAnalysis
-func (c *Client) StartDocumentAnalysisRequest(input *StartDocumentAnalysisInput) StartDocumentAnalysisRequest {
+func (c *Client) StartDocumentAnalysisRequest(input *types.StartDocumentAnalysisInput) StartDocumentAnalysisRequest {
 	op := &aws.Operation{
 		Name:       opStartDocumentAnalysis,
 		HTTPMethod: "POST",
@@ -134,10 +47,10 @@ func (c *Client) StartDocumentAnalysisRequest(input *StartDocumentAnalysisInput)
 	}
 
 	if input == nil {
-		input = &StartDocumentAnalysisInput{}
+		input = &types.StartDocumentAnalysisInput{}
 	}
 
-	req := c.newRequest(op, input, &StartDocumentAnalysisOutput{})
+	req := c.newRequest(op, input, &types.StartDocumentAnalysisOutput{})
 	return StartDocumentAnalysisRequest{Request: req, Input: input, Copy: c.StartDocumentAnalysisRequest}
 }
 
@@ -145,8 +58,8 @@ func (c *Client) StartDocumentAnalysisRequest(input *StartDocumentAnalysisInput)
 // StartDocumentAnalysis API operation.
 type StartDocumentAnalysisRequest struct {
 	*aws.Request
-	Input *StartDocumentAnalysisInput
-	Copy  func(*StartDocumentAnalysisInput) StartDocumentAnalysisRequest
+	Input *types.StartDocumentAnalysisInput
+	Copy  func(*types.StartDocumentAnalysisInput) StartDocumentAnalysisRequest
 }
 
 // Send marshals and sends the StartDocumentAnalysis API request.
@@ -158,7 +71,7 @@ func (r StartDocumentAnalysisRequest) Send(ctx context.Context) (*StartDocumentA
 	}
 
 	resp := &StartDocumentAnalysisResponse{
-		StartDocumentAnalysisOutput: r.Request.Data.(*StartDocumentAnalysisOutput),
+		StartDocumentAnalysisOutput: r.Request.Data.(*types.StartDocumentAnalysisOutput),
 		response:                    &aws.Response{Request: r.Request},
 	}
 
@@ -168,7 +81,7 @@ func (r StartDocumentAnalysisRequest) Send(ctx context.Context) (*StartDocumentA
 // StartDocumentAnalysisResponse is the response type for the
 // StartDocumentAnalysis API operation.
 type StartDocumentAnalysisResponse struct {
-	*StartDocumentAnalysisOutput
+	*types.StartDocumentAnalysisOutput
 
 	response *aws.Response
 }

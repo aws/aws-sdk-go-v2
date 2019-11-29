@@ -6,52 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/cloudhsm/types"
 )
-
-// Contains the inputs for the DeleteHsm operation.
-type DeleteHsmInput struct {
-	_ struct{} `locationName:"DeleteHsmRequest" type:"structure"`
-
-	// The ARN of the HSM to delete.
-	//
-	// HsmArn is a required field
-	HsmArn *string `locationName:"HsmArn" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteHsmInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteHsmInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteHsmInput"}
-
-	if s.HsmArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("HsmArn"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Contains the output of the DeleteHsm operation.
-type DeleteHsmOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The status of the operation.
-	//
-	// Status is a required field
-	Status *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteHsmOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteHsm = "DeleteHsm"
 
@@ -78,7 +34,7 @@ const opDeleteHsm = "DeleteHsm"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/DeleteHsm
-func (c *Client) DeleteHsmRequest(input *DeleteHsmInput) DeleteHsmRequest {
+func (c *Client) DeleteHsmRequest(input *types.DeleteHsmInput) DeleteHsmRequest {
 	op := &aws.Operation{
 		Name:       opDeleteHsm,
 		HTTPMethod: "POST",
@@ -86,10 +42,10 @@ func (c *Client) DeleteHsmRequest(input *DeleteHsmInput) DeleteHsmRequest {
 	}
 
 	if input == nil {
-		input = &DeleteHsmInput{}
+		input = &types.DeleteHsmInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteHsmOutput{})
+	req := c.newRequest(op, input, &types.DeleteHsmOutput{})
 	return DeleteHsmRequest{Request: req, Input: input, Copy: c.DeleteHsmRequest}
 }
 
@@ -97,8 +53,8 @@ func (c *Client) DeleteHsmRequest(input *DeleteHsmInput) DeleteHsmRequest {
 // DeleteHsm API operation.
 type DeleteHsmRequest struct {
 	*aws.Request
-	Input *DeleteHsmInput
-	Copy  func(*DeleteHsmInput) DeleteHsmRequest
+	Input *types.DeleteHsmInput
+	Copy  func(*types.DeleteHsmInput) DeleteHsmRequest
 }
 
 // Send marshals and sends the DeleteHsm API request.
@@ -110,7 +66,7 @@ func (r DeleteHsmRequest) Send(ctx context.Context) (*DeleteHsmResponse, error) 
 	}
 
 	resp := &DeleteHsmResponse{
-		DeleteHsmOutput: r.Request.Data.(*DeleteHsmOutput),
+		DeleteHsmOutput: r.Request.Data.(*types.DeleteHsmOutput),
 		response:        &aws.Response{Request: r.Request},
 	}
 
@@ -120,7 +76,7 @@ func (r DeleteHsmRequest) Send(ctx context.Context) (*DeleteHsmResponse, error) 
 // DeleteHsmResponse is the response type for the
 // DeleteHsm API operation.
 type DeleteHsmResponse struct {
-	*DeleteHsmOutput
+	*types.DeleteHsmOutput
 
 	response *aws.Response
 }

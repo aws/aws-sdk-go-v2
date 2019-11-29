@@ -6,57 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
+	"github.com/aws/aws-sdk-go-v2/service/transfer/types"
 )
-
-type DeleteUserInput struct {
-	_ struct{} `type:"structure"`
-
-	// A system-assigned unique identifier for an SFTP server instance that has
-	// the user assigned to it.
-	//
-	// ServerId is a required field
-	ServerId *string `type:"string" required:"true"`
-
-	// A unique string that identifies a user that is being deleted from the server.
-	//
-	// UserName is a required field
-	UserName *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteUserInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteUserInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteUserInput"}
-
-	if s.ServerId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ServerId"))
-	}
-
-	if s.UserName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("UserName"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteUserOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteUserOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteUser = "DeleteUser"
 
@@ -77,7 +30,7 @@ const opDeleteUser = "DeleteUser"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/DeleteUser
-func (c *Client) DeleteUserRequest(input *DeleteUserInput) DeleteUserRequest {
+func (c *Client) DeleteUserRequest(input *types.DeleteUserInput) DeleteUserRequest {
 	op := &aws.Operation{
 		Name:       opDeleteUser,
 		HTTPMethod: "POST",
@@ -85,10 +38,10 @@ func (c *Client) DeleteUserRequest(input *DeleteUserInput) DeleteUserRequest {
 	}
 
 	if input == nil {
-		input = &DeleteUserInput{}
+		input = &types.DeleteUserInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteUserOutput{})
+	req := c.newRequest(op, input, &types.DeleteUserOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return DeleteUserRequest{Request: req, Input: input, Copy: c.DeleteUserRequest}
@@ -98,8 +51,8 @@ func (c *Client) DeleteUserRequest(input *DeleteUserInput) DeleteUserRequest {
 // DeleteUser API operation.
 type DeleteUserRequest struct {
 	*aws.Request
-	Input *DeleteUserInput
-	Copy  func(*DeleteUserInput) DeleteUserRequest
+	Input *types.DeleteUserInput
+	Copy  func(*types.DeleteUserInput) DeleteUserRequest
 }
 
 // Send marshals and sends the DeleteUser API request.
@@ -111,7 +64,7 @@ func (r DeleteUserRequest) Send(ctx context.Context) (*DeleteUserResponse, error
 	}
 
 	resp := &DeleteUserResponse{
-		DeleteUserOutput: r.Request.Data.(*DeleteUserOutput),
+		DeleteUserOutput: r.Request.Data.(*types.DeleteUserOutput),
 		response:         &aws.Response{Request: r.Request},
 	}
 
@@ -121,7 +74,7 @@ func (r DeleteUserRequest) Send(ctx context.Context) (*DeleteUserResponse, error
 // DeleteUserResponse is the response type for the
 // DeleteUser API operation.
 type DeleteUserResponse struct {
-	*DeleteUserOutput
+	*types.DeleteUserOutput
 
 	response *aws.Response
 }

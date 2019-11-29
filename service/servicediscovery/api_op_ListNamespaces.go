@@ -4,87 +4,10 @@ package servicediscovery
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/servicediscovery/types"
 )
-
-type ListNamespacesInput struct {
-	_ struct{} `type:"structure"`
-
-	// A complex type that contains specifications for the namespaces that you want
-	// to list.
-	//
-	// If you specify more than one filter, a namespace must match all filters to
-	// be returned by ListNamespaces.
-	Filters []NamespaceFilter `type:"list"`
-
-	// The maximum number of namespaces that you want AWS Cloud Map to return in
-	// the response to a ListNamespaces request. If you don't specify a value for
-	// MaxResults, AWS Cloud Map returns up to 100 namespaces.
-	MaxResults *int64 `min:"1" type:"integer"`
-
-	// For the first ListNamespaces request, omit this value.
-	//
-	// If the response contains NextToken, submit another ListNamespaces request
-	// to get the next group of results. Specify the value of NextToken from the
-	// previous response in the next request.
-	//
-	// AWS Cloud Map gets MaxResults namespaces and then filters them based on the
-	// specified criteria. It's possible that no namespaces in the first MaxResults
-	// namespaces matched the specified criteria but that subsequent groups of MaxResults
-	// namespaces do contain namespaces that match the criteria.
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s ListNamespacesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListNamespacesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListNamespacesInput"}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-	if s.Filters != nil {
-		for i, v := range s.Filters {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ListNamespacesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// An array that contains one NamespaceSummary object for each namespace that
-	// matches the specified filter criteria.
-	Namespaces []NamespaceSummary `type:"list"`
-
-	// If the response contains NextToken, submit another ListNamespaces request
-	// to get the next group of results. Specify the value of NextToken from the
-	// previous response in the next request.
-	//
-	// AWS Cloud Map gets MaxResults namespaces and then filters them based on the
-	// specified criteria. It's possible that no namespaces in the first MaxResults
-	// namespaces matched the specified criteria but that subsequent groups of MaxResults
-	// namespaces do contain namespaces that match the criteria.
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s ListNamespacesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListNamespaces = "ListNamespaces"
 
@@ -102,7 +25,7 @@ const opListNamespaces = "ListNamespaces"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicediscovery-2017-03-14/ListNamespaces
-func (c *Client) ListNamespacesRequest(input *ListNamespacesInput) ListNamespacesRequest {
+func (c *Client) ListNamespacesRequest(input *types.ListNamespacesInput) ListNamespacesRequest {
 	op := &aws.Operation{
 		Name:       opListNamespaces,
 		HTTPMethod: "POST",
@@ -116,10 +39,10 @@ func (c *Client) ListNamespacesRequest(input *ListNamespacesInput) ListNamespace
 	}
 
 	if input == nil {
-		input = &ListNamespacesInput{}
+		input = &types.ListNamespacesInput{}
 	}
 
-	req := c.newRequest(op, input, &ListNamespacesOutput{})
+	req := c.newRequest(op, input, &types.ListNamespacesOutput{})
 	return ListNamespacesRequest{Request: req, Input: input, Copy: c.ListNamespacesRequest}
 }
 
@@ -127,8 +50,8 @@ func (c *Client) ListNamespacesRequest(input *ListNamespacesInput) ListNamespace
 // ListNamespaces API operation.
 type ListNamespacesRequest struct {
 	*aws.Request
-	Input *ListNamespacesInput
-	Copy  func(*ListNamespacesInput) ListNamespacesRequest
+	Input *types.ListNamespacesInput
+	Copy  func(*types.ListNamespacesInput) ListNamespacesRequest
 }
 
 // Send marshals and sends the ListNamespaces API request.
@@ -140,7 +63,7 @@ func (r ListNamespacesRequest) Send(ctx context.Context) (*ListNamespacesRespons
 	}
 
 	resp := &ListNamespacesResponse{
-		ListNamespacesOutput: r.Request.Data.(*ListNamespacesOutput),
+		ListNamespacesOutput: r.Request.Data.(*types.ListNamespacesOutput),
 		response:             &aws.Response{Request: r.Request},
 	}
 
@@ -170,7 +93,7 @@ func NewListNamespacesPaginator(req ListNamespacesRequest) ListNamespacesPaginat
 	return ListNamespacesPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListNamespacesInput
+				var inCpy *types.ListNamespacesInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -190,14 +113,14 @@ type ListNamespacesPaginator struct {
 	aws.Pager
 }
 
-func (p *ListNamespacesPaginator) CurrentPage() *ListNamespacesOutput {
-	return p.Pager.CurrentPage().(*ListNamespacesOutput)
+func (p *ListNamespacesPaginator) CurrentPage() *types.ListNamespacesOutput {
+	return p.Pager.CurrentPage().(*types.ListNamespacesOutput)
 }
 
 // ListNamespacesResponse is the response type for the
 // ListNamespaces API operation.
 type ListNamespacesResponse struct {
-	*ListNamespacesOutput
+	*types.ListNamespacesOutput
 
 	response *aws.Response
 }

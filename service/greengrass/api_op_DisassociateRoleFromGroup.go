@@ -6,72 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/greengrass/types"
 )
-
-type DisassociateRoleFromGroupInput struct {
-	_ struct{} `type:"structure"`
-
-	// GroupId is a required field
-	GroupId *string `location:"uri" locationName:"GroupId" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DisassociateRoleFromGroupInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DisassociateRoleFromGroupInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DisassociateRoleFromGroupInput"}
-
-	if s.GroupId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("GroupId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DisassociateRoleFromGroupInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.GroupId != nil {
-		v := *s.GroupId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "GroupId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type DisassociateRoleFromGroupOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The time, in milliseconds since the epoch, when the role was disassociated
-	// from the group.
-	DisassociatedAt *string `type:"string"`
-}
-
-// String returns the string representation
-func (s DisassociateRoleFromGroupOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DisassociateRoleFromGroupOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.DisassociatedAt != nil {
-		v := *s.DisassociatedAt
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "DisassociatedAt", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opDisassociateRoleFromGroup = "DisassociateRoleFromGroup"
 
@@ -88,7 +24,7 @@ const opDisassociateRoleFromGroup = "DisassociateRoleFromGroup"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/DisassociateRoleFromGroup
-func (c *Client) DisassociateRoleFromGroupRequest(input *DisassociateRoleFromGroupInput) DisassociateRoleFromGroupRequest {
+func (c *Client) DisassociateRoleFromGroupRequest(input *types.DisassociateRoleFromGroupInput) DisassociateRoleFromGroupRequest {
 	op := &aws.Operation{
 		Name:       opDisassociateRoleFromGroup,
 		HTTPMethod: "DELETE",
@@ -96,10 +32,10 @@ func (c *Client) DisassociateRoleFromGroupRequest(input *DisassociateRoleFromGro
 	}
 
 	if input == nil {
-		input = &DisassociateRoleFromGroupInput{}
+		input = &types.DisassociateRoleFromGroupInput{}
 	}
 
-	req := c.newRequest(op, input, &DisassociateRoleFromGroupOutput{})
+	req := c.newRequest(op, input, &types.DisassociateRoleFromGroupOutput{})
 	return DisassociateRoleFromGroupRequest{Request: req, Input: input, Copy: c.DisassociateRoleFromGroupRequest}
 }
 
@@ -107,8 +43,8 @@ func (c *Client) DisassociateRoleFromGroupRequest(input *DisassociateRoleFromGro
 // DisassociateRoleFromGroup API operation.
 type DisassociateRoleFromGroupRequest struct {
 	*aws.Request
-	Input *DisassociateRoleFromGroupInput
-	Copy  func(*DisassociateRoleFromGroupInput) DisassociateRoleFromGroupRequest
+	Input *types.DisassociateRoleFromGroupInput
+	Copy  func(*types.DisassociateRoleFromGroupInput) DisassociateRoleFromGroupRequest
 }
 
 // Send marshals and sends the DisassociateRoleFromGroup API request.
@@ -120,7 +56,7 @@ func (r DisassociateRoleFromGroupRequest) Send(ctx context.Context) (*Disassocia
 	}
 
 	resp := &DisassociateRoleFromGroupResponse{
-		DisassociateRoleFromGroupOutput: r.Request.Data.(*DisassociateRoleFromGroupOutput),
+		DisassociateRoleFromGroupOutput: r.Request.Data.(*types.DisassociateRoleFromGroupOutput),
 		response:                        &aws.Response{Request: r.Request},
 	}
 
@@ -130,7 +66,7 @@ func (r DisassociateRoleFromGroupRequest) Send(ctx context.Context) (*Disassocia
 // DisassociateRoleFromGroupResponse is the response type for the
 // DisassociateRoleFromGroup API operation.
 type DisassociateRoleFromGroupResponse struct {
-	*DisassociateRoleFromGroupOutput
+	*types.DisassociateRoleFromGroupOutput
 
 	response *aws.Response
 }

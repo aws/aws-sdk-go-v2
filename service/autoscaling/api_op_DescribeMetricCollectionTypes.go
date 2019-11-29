@@ -6,32 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/autoscaling/types"
 )
-
-type DescribeMetricCollectionTypesInput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DescribeMetricCollectionTypesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type DescribeMetricCollectionTypesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The granularities for the metrics.
-	Granularities []MetricGranularityType `type:"list"`
-
-	// One or more metrics.
-	Metrics []MetricCollectionType `type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeMetricCollectionTypesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeMetricCollectionTypes = "DescribeMetricCollectionTypes"
 
@@ -51,7 +27,7 @@ const opDescribeMetricCollectionTypes = "DescribeMetricCollectionTypes"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DescribeMetricCollectionTypes
-func (c *Client) DescribeMetricCollectionTypesRequest(input *DescribeMetricCollectionTypesInput) DescribeMetricCollectionTypesRequest {
+func (c *Client) DescribeMetricCollectionTypesRequest(input *types.DescribeMetricCollectionTypesInput) DescribeMetricCollectionTypesRequest {
 	op := &aws.Operation{
 		Name:       opDescribeMetricCollectionTypes,
 		HTTPMethod: "POST",
@@ -59,10 +35,10 @@ func (c *Client) DescribeMetricCollectionTypesRequest(input *DescribeMetricColle
 	}
 
 	if input == nil {
-		input = &DescribeMetricCollectionTypesInput{}
+		input = &types.DescribeMetricCollectionTypesInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeMetricCollectionTypesOutput{})
+	req := c.newRequest(op, input, &types.DescribeMetricCollectionTypesOutput{})
 	return DescribeMetricCollectionTypesRequest{Request: req, Input: input, Copy: c.DescribeMetricCollectionTypesRequest}
 }
 
@@ -70,8 +46,8 @@ func (c *Client) DescribeMetricCollectionTypesRequest(input *DescribeMetricColle
 // DescribeMetricCollectionTypes API operation.
 type DescribeMetricCollectionTypesRequest struct {
 	*aws.Request
-	Input *DescribeMetricCollectionTypesInput
-	Copy  func(*DescribeMetricCollectionTypesInput) DescribeMetricCollectionTypesRequest
+	Input *types.DescribeMetricCollectionTypesInput
+	Copy  func(*types.DescribeMetricCollectionTypesInput) DescribeMetricCollectionTypesRequest
 }
 
 // Send marshals and sends the DescribeMetricCollectionTypes API request.
@@ -83,7 +59,7 @@ func (r DescribeMetricCollectionTypesRequest) Send(ctx context.Context) (*Descri
 	}
 
 	resp := &DescribeMetricCollectionTypesResponse{
-		DescribeMetricCollectionTypesOutput: r.Request.Data.(*DescribeMetricCollectionTypesOutput),
+		DescribeMetricCollectionTypesOutput: r.Request.Data.(*types.DescribeMetricCollectionTypesOutput),
 		response:                            &aws.Response{Request: r.Request},
 	}
 
@@ -93,7 +69,7 @@ func (r DescribeMetricCollectionTypesRequest) Send(ctx context.Context) (*Descri
 // DescribeMetricCollectionTypesResponse is the response type for the
 // DescribeMetricCollectionTypes API operation.
 type DescribeMetricCollectionTypesResponse struct {
-	*DescribeMetricCollectionTypesOutput
+	*types.DescribeMetricCollectionTypesOutput
 
 	response *aws.Response
 }

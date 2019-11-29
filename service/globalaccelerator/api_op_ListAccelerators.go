@@ -6,54 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/globalaccelerator/types"
 )
-
-type ListAcceleratorsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The number of Global Accelerator objects that you want to return with this
-	// call. The default value is 10.
-	MaxResults *int64 `min:"1" type:"integer"`
-
-	// The token for the next set of results. You receive this token from a previous
-	// call.
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s ListAcceleratorsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListAcceleratorsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListAcceleratorsInput"}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ListAcceleratorsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The list of accelerators for a customer account.
-	Accelerators []Accelerator `type:"list"`
-
-	// The token for the next set of results. You receive this token from a previous
-	// call.
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s ListAcceleratorsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListAccelerators = "ListAccelerators"
 
@@ -70,7 +24,7 @@ const opListAccelerators = "ListAccelerators"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/ListAccelerators
-func (c *Client) ListAcceleratorsRequest(input *ListAcceleratorsInput) ListAcceleratorsRequest {
+func (c *Client) ListAcceleratorsRequest(input *types.ListAcceleratorsInput) ListAcceleratorsRequest {
 	op := &aws.Operation{
 		Name:       opListAccelerators,
 		HTTPMethod: "POST",
@@ -78,10 +32,10 @@ func (c *Client) ListAcceleratorsRequest(input *ListAcceleratorsInput) ListAccel
 	}
 
 	if input == nil {
-		input = &ListAcceleratorsInput{}
+		input = &types.ListAcceleratorsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListAcceleratorsOutput{})
+	req := c.newRequest(op, input, &types.ListAcceleratorsOutput{})
 	return ListAcceleratorsRequest{Request: req, Input: input, Copy: c.ListAcceleratorsRequest}
 }
 
@@ -89,8 +43,8 @@ func (c *Client) ListAcceleratorsRequest(input *ListAcceleratorsInput) ListAccel
 // ListAccelerators API operation.
 type ListAcceleratorsRequest struct {
 	*aws.Request
-	Input *ListAcceleratorsInput
-	Copy  func(*ListAcceleratorsInput) ListAcceleratorsRequest
+	Input *types.ListAcceleratorsInput
+	Copy  func(*types.ListAcceleratorsInput) ListAcceleratorsRequest
 }
 
 // Send marshals and sends the ListAccelerators API request.
@@ -102,7 +56,7 @@ func (r ListAcceleratorsRequest) Send(ctx context.Context) (*ListAcceleratorsRes
 	}
 
 	resp := &ListAcceleratorsResponse{
-		ListAcceleratorsOutput: r.Request.Data.(*ListAcceleratorsOutput),
+		ListAcceleratorsOutput: r.Request.Data.(*types.ListAcceleratorsOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -112,7 +66,7 @@ func (r ListAcceleratorsRequest) Send(ctx context.Context) (*ListAcceleratorsRes
 // ListAcceleratorsResponse is the response type for the
 // ListAccelerators API operation.
 type ListAcceleratorsResponse struct {
-	*ListAcceleratorsOutput
+	*types.ListAcceleratorsOutput
 
 	response *aws.Response
 }

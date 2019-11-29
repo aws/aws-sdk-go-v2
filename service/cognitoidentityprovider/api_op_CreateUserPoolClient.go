@@ -6,162 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/types"
 )
-
-// Represents the request to create a user pool client.
-type CreateUserPoolClientInput struct {
-	_ struct{} `type:"structure"`
-
-	// Set to code to initiate a code grant flow, which provides an authorization
-	// code as the response. This code can be exchanged for access tokens with the
-	// token endpoint.
-	//
-	// Set to token to specify that the client should get the access token (and,
-	// optionally, ID token, based on scopes) directly.
-	AllowedOAuthFlows []OAuthFlowType `type:"list"`
-
-	// Set to True if the client is allowed to follow the OAuth protocol when interacting
-	// with Cognito user pools.
-	AllowedOAuthFlowsUserPoolClient *bool `type:"boolean"`
-
-	// A list of allowed OAuth scopes. Currently supported values are "phone", "email",
-	// "openid", and "Cognito". In addition to these values, custom scopes created
-	// in Resource Servers are also supported.
-	AllowedOAuthScopes []string `type:"list"`
-
-	// The Amazon Pinpoint analytics configuration for collecting metrics for this
-	// user pool.
-	AnalyticsConfiguration *AnalyticsConfigurationType `type:"structure"`
-
-	// A list of allowed redirect (callback) URLs for the identity providers.
-	//
-	// A redirect URI must:
-	//
-	//    * Be an absolute URI.
-	//
-	//    * Be registered with the authorization server.
-	//
-	//    * Not include a fragment component.
-	//
-	// See OAuth 2.0 - Redirection Endpoint (https://tools.ietf.org/html/rfc6749#section-3.1.2).
-	//
-	// Amazon Cognito requires HTTPS over HTTP except for http://localhost for testing
-	// purposes only.
-	//
-	// App callback URLs such as myapp://example are also supported.
-	CallbackURLs []string `type:"list"`
-
-	// The client name for the user pool client you would like to create.
-	//
-	// ClientName is a required field
-	ClientName *string `min:"1" type:"string" required:"true"`
-
-	// The default redirect URI. Must be in the CallbackURLs list.
-	//
-	// A redirect URI must:
-	//
-	//    * Be an absolute URI.
-	//
-	//    * Be registered with the authorization server.
-	//
-	//    * Not include a fragment component.
-	//
-	// See OAuth 2.0 - Redirection Endpoint (https://tools.ietf.org/html/rfc6749#section-3.1.2).
-	//
-	// Amazon Cognito requires HTTPS over HTTP except for http://localhost for testing
-	// purposes only.
-	//
-	// App callback URLs such as myapp://example are also supported.
-	DefaultRedirectURI *string `min:"1" type:"string"`
-
-	// The explicit authentication flows.
-	ExplicitAuthFlows []ExplicitAuthFlowsType `type:"list"`
-
-	// Boolean to specify whether you want to generate a secret for the user pool
-	// client being created.
-	GenerateSecret *bool `type:"boolean"`
-
-	// A list of allowed logout URLs for the identity providers.
-	LogoutURLs []string `type:"list"`
-
-	// The read attributes.
-	ReadAttributes []string `type:"list"`
-
-	// The time limit, in days, after which the refresh token is no longer valid
-	// and cannot be used.
-	RefreshTokenValidity *int64 `type:"integer"`
-
-	// A list of provider names for the identity providers that are supported on
-	// this client. The following are supported: COGNITO, Facebook, Google and LoginWithAmazon.
-	SupportedIdentityProviders []string `type:"list"`
-
-	// The user pool ID for the user pool where you want to create a user pool client.
-	//
-	// UserPoolId is a required field
-	UserPoolId *string `min:"1" type:"string" required:"true"`
-
-	// The user pool attributes that the app client can write to.
-	//
-	// If your app client allows users to sign in through an identity provider,
-	// this array must include all attributes that are mapped to identity provider
-	// attributes. Amazon Cognito updates mapped attributes when users sign in to
-	// your application through an identity provider. If your app client lacks write
-	// access to a mapped attribute, Amazon Cognito throws an error when it attempts
-	// to update the attribute. For more information, see Specifying Identity Provider
-	// Attribute Mappings for Your User Pool (https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-specifying-attribute-mapping.html).
-	WriteAttributes []string `type:"list"`
-}
-
-// String returns the string representation
-func (s CreateUserPoolClientInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateUserPoolClientInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateUserPoolClientInput"}
-
-	if s.ClientName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ClientName"))
-	}
-	if s.ClientName != nil && len(*s.ClientName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ClientName", 1))
-	}
-	if s.DefaultRedirectURI != nil && len(*s.DefaultRedirectURI) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("DefaultRedirectURI", 1))
-	}
-
-	if s.UserPoolId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("UserPoolId"))
-	}
-	if s.UserPoolId != nil && len(*s.UserPoolId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("UserPoolId", 1))
-	}
-	if s.AnalyticsConfiguration != nil {
-		if err := s.AnalyticsConfiguration.Validate(); err != nil {
-			invalidParams.AddNested("AnalyticsConfiguration", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Represents the response from the server to create a user pool client.
-type CreateUserPoolClientOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The user pool client that was just created.
-	UserPoolClient *UserPoolClientType `type:"structure"`
-}
-
-// String returns the string representation
-func (s CreateUserPoolClientOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCreateUserPoolClient = "CreateUserPoolClient"
 
@@ -178,7 +24,7 @@ const opCreateUserPoolClient = "CreateUserPoolClient"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/CreateUserPoolClient
-func (c *Client) CreateUserPoolClientRequest(input *CreateUserPoolClientInput) CreateUserPoolClientRequest {
+func (c *Client) CreateUserPoolClientRequest(input *types.CreateUserPoolClientInput) CreateUserPoolClientRequest {
 	op := &aws.Operation{
 		Name:       opCreateUserPoolClient,
 		HTTPMethod: "POST",
@@ -186,10 +32,10 @@ func (c *Client) CreateUserPoolClientRequest(input *CreateUserPoolClientInput) C
 	}
 
 	if input == nil {
-		input = &CreateUserPoolClientInput{}
+		input = &types.CreateUserPoolClientInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateUserPoolClientOutput{})
+	req := c.newRequest(op, input, &types.CreateUserPoolClientOutput{})
 	return CreateUserPoolClientRequest{Request: req, Input: input, Copy: c.CreateUserPoolClientRequest}
 }
 
@@ -197,8 +43,8 @@ func (c *Client) CreateUserPoolClientRequest(input *CreateUserPoolClientInput) C
 // CreateUserPoolClient API operation.
 type CreateUserPoolClientRequest struct {
 	*aws.Request
-	Input *CreateUserPoolClientInput
-	Copy  func(*CreateUserPoolClientInput) CreateUserPoolClientRequest
+	Input *types.CreateUserPoolClientInput
+	Copy  func(*types.CreateUserPoolClientInput) CreateUserPoolClientRequest
 }
 
 // Send marshals and sends the CreateUserPoolClient API request.
@@ -210,7 +56,7 @@ func (r CreateUserPoolClientRequest) Send(ctx context.Context) (*CreateUserPoolC
 	}
 
 	resp := &CreateUserPoolClientResponse{
-		CreateUserPoolClientOutput: r.Request.Data.(*CreateUserPoolClientOutput),
+		CreateUserPoolClientOutput: r.Request.Data.(*types.CreateUserPoolClientOutput),
 		response:                   &aws.Response{Request: r.Request},
 	}
 
@@ -220,7 +66,7 @@ func (r CreateUserPoolClientRequest) Send(ctx context.Context) (*CreateUserPoolC
 // CreateUserPoolClientResponse is the response type for the
 // CreateUserPoolClient API operation.
 type CreateUserPoolClientResponse struct {
-	*CreateUserPoolClientOutput
+	*types.CreateUserPoolClientOutput
 
 	response *aws.Response
 }

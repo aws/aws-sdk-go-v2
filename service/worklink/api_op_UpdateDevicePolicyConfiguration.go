@@ -6,80 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/worklink/types"
 )
-
-type UpdateDevicePolicyConfigurationInput struct {
-	_ struct{} `type:"structure"`
-
-	// The certificate chain, including intermediate certificates and the root certificate
-	// authority certificate used to issue device certificates.
-	DeviceCaCertificate *string `min:"1" type:"string"`
-
-	// The ARN of the fleet.
-	//
-	// FleetArn is a required field
-	FleetArn *string `min:"20" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s UpdateDevicePolicyConfigurationInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateDevicePolicyConfigurationInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateDevicePolicyConfigurationInput"}
-	if s.DeviceCaCertificate != nil && len(*s.DeviceCaCertificate) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("DeviceCaCertificate", 1))
-	}
-
-	if s.FleetArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("FleetArn"))
-	}
-	if s.FleetArn != nil && len(*s.FleetArn) < 20 {
-		invalidParams.Add(aws.NewErrParamMinLen("FleetArn", 20))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s UpdateDevicePolicyConfigurationInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.DeviceCaCertificate != nil {
-		v := *s.DeviceCaCertificate
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "DeviceCaCertificate", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.FleetArn != nil {
-		v := *s.FleetArn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "FleetArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type UpdateDevicePolicyConfigurationOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s UpdateDevicePolicyConfigurationOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s UpdateDevicePolicyConfigurationOutput) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
 
 const opUpdateDevicePolicyConfiguration = "UpdateDevicePolicyConfiguration"
 
@@ -96,7 +24,7 @@ const opUpdateDevicePolicyConfiguration = "UpdateDevicePolicyConfiguration"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/worklink-2018-09-25/UpdateDevicePolicyConfiguration
-func (c *Client) UpdateDevicePolicyConfigurationRequest(input *UpdateDevicePolicyConfigurationInput) UpdateDevicePolicyConfigurationRequest {
+func (c *Client) UpdateDevicePolicyConfigurationRequest(input *types.UpdateDevicePolicyConfigurationInput) UpdateDevicePolicyConfigurationRequest {
 	op := &aws.Operation{
 		Name:       opUpdateDevicePolicyConfiguration,
 		HTTPMethod: "POST",
@@ -104,10 +32,10 @@ func (c *Client) UpdateDevicePolicyConfigurationRequest(input *UpdateDevicePolic
 	}
 
 	if input == nil {
-		input = &UpdateDevicePolicyConfigurationInput{}
+		input = &types.UpdateDevicePolicyConfigurationInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateDevicePolicyConfigurationOutput{})
+	req := c.newRequest(op, input, &types.UpdateDevicePolicyConfigurationOutput{})
 	return UpdateDevicePolicyConfigurationRequest{Request: req, Input: input, Copy: c.UpdateDevicePolicyConfigurationRequest}
 }
 
@@ -115,8 +43,8 @@ func (c *Client) UpdateDevicePolicyConfigurationRequest(input *UpdateDevicePolic
 // UpdateDevicePolicyConfiguration API operation.
 type UpdateDevicePolicyConfigurationRequest struct {
 	*aws.Request
-	Input *UpdateDevicePolicyConfigurationInput
-	Copy  func(*UpdateDevicePolicyConfigurationInput) UpdateDevicePolicyConfigurationRequest
+	Input *types.UpdateDevicePolicyConfigurationInput
+	Copy  func(*types.UpdateDevicePolicyConfigurationInput) UpdateDevicePolicyConfigurationRequest
 }
 
 // Send marshals and sends the UpdateDevicePolicyConfiguration API request.
@@ -128,7 +56,7 @@ func (r UpdateDevicePolicyConfigurationRequest) Send(ctx context.Context) (*Upda
 	}
 
 	resp := &UpdateDevicePolicyConfigurationResponse{
-		UpdateDevicePolicyConfigurationOutput: r.Request.Data.(*UpdateDevicePolicyConfigurationOutput),
+		UpdateDevicePolicyConfigurationOutput: r.Request.Data.(*types.UpdateDevicePolicyConfigurationOutput),
 		response:                              &aws.Response{Request: r.Request},
 	}
 
@@ -138,7 +66,7 @@ func (r UpdateDevicePolicyConfigurationRequest) Send(ctx context.Context) (*Upda
 // UpdateDevicePolicyConfigurationResponse is the response type for the
 // UpdateDevicePolicyConfiguration API operation.
 type UpdateDevicePolicyConfigurationResponse struct {
-	*UpdateDevicePolicyConfigurationOutput
+	*types.UpdateDevicePolicyConfigurationOutput
 
 	response *aws.Response
 }

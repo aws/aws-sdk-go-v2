@@ -6,66 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/cloudsearch/types"
 )
-
-// Container for the parameters to the DescribeSuggester operation. Specifies
-// the name of the domain you want to describe. To restrict the response to
-// particular suggesters, specify the names of the suggesters you want to describe.
-// To show the active configuration and exclude any pending changes, set the
-// Deployed option to true.
-type DescribeSuggestersInput struct {
-	_ struct{} `type:"structure"`
-
-	// Whether to display the deployed configuration (true) or include any pending
-	// changes (false). Defaults to false.
-	Deployed *bool `type:"boolean"`
-
-	// The name of the domain you want to describe.
-	//
-	// DomainName is a required field
-	DomainName *string `min:"3" type:"string" required:"true"`
-
-	// The suggesters you want to describe.
-	SuggesterNames []string `type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeSuggestersInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeSuggestersInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeSuggestersInput"}
-
-	if s.DomainName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DomainName"))
-	}
-	if s.DomainName != nil && len(*s.DomainName) < 3 {
-		invalidParams.Add(aws.NewErrParamMinLen("DomainName", 3))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// The result of a DescribeSuggesters request.
-type DescribeSuggestersOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The suggesters configured for the domain specified in the request.
-	//
-	// Suggesters is a required field
-	Suggesters []SuggesterStatus `type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeSuggestersOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeSuggesters = "DescribeSuggesters"
 
@@ -86,7 +28,7 @@ const opDescribeSuggesters = "DescribeSuggesters"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) DescribeSuggestersRequest(input *DescribeSuggestersInput) DescribeSuggestersRequest {
+func (c *Client) DescribeSuggestersRequest(input *types.DescribeSuggestersInput) DescribeSuggestersRequest {
 	op := &aws.Operation{
 		Name:       opDescribeSuggesters,
 		HTTPMethod: "POST",
@@ -94,10 +36,10 @@ func (c *Client) DescribeSuggestersRequest(input *DescribeSuggestersInput) Descr
 	}
 
 	if input == nil {
-		input = &DescribeSuggestersInput{}
+		input = &types.DescribeSuggestersInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeSuggestersOutput{})
+	req := c.newRequest(op, input, &types.DescribeSuggestersOutput{})
 	return DescribeSuggestersRequest{Request: req, Input: input, Copy: c.DescribeSuggestersRequest}
 }
 
@@ -105,8 +47,8 @@ func (c *Client) DescribeSuggestersRequest(input *DescribeSuggestersInput) Descr
 // DescribeSuggesters API operation.
 type DescribeSuggestersRequest struct {
 	*aws.Request
-	Input *DescribeSuggestersInput
-	Copy  func(*DescribeSuggestersInput) DescribeSuggestersRequest
+	Input *types.DescribeSuggestersInput
+	Copy  func(*types.DescribeSuggestersInput) DescribeSuggestersRequest
 }
 
 // Send marshals and sends the DescribeSuggesters API request.
@@ -118,7 +60,7 @@ func (r DescribeSuggestersRequest) Send(ctx context.Context) (*DescribeSuggester
 	}
 
 	resp := &DescribeSuggestersResponse{
-		DescribeSuggestersOutput: r.Request.Data.(*DescribeSuggestersOutput),
+		DescribeSuggestersOutput: r.Request.Data.(*types.DescribeSuggestersOutput),
 		response:                 &aws.Response{Request: r.Request},
 	}
 
@@ -128,7 +70,7 @@ func (r DescribeSuggestersRequest) Send(ctx context.Context) (*DescribeSuggester
 // DescribeSuggestersResponse is the response type for the
 // DescribeSuggesters API operation.
 type DescribeSuggestersResponse struct {
-	*DescribeSuggestersOutput
+	*types.DescribeSuggestersOutput
 
 	response *aws.Response
 }

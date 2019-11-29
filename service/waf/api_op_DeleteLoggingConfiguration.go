@@ -6,49 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/waf/types"
 )
-
-type DeleteLoggingConfigurationInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the web ACL from which you want to delete
-	// the LoggingConfiguration.
-	//
-	// ResourceArn is a required field
-	ResourceArn *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteLoggingConfigurationInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteLoggingConfigurationInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteLoggingConfigurationInput"}
-
-	if s.ResourceArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ResourceArn"))
-	}
-	if s.ResourceArn != nil && len(*s.ResourceArn) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ResourceArn", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteLoggingConfigurationOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteLoggingConfigurationOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteLoggingConfiguration = "DeleteLoggingConfiguration"
 
@@ -65,7 +24,7 @@ const opDeleteLoggingConfiguration = "DeleteLoggingConfiguration"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/DeleteLoggingConfiguration
-func (c *Client) DeleteLoggingConfigurationRequest(input *DeleteLoggingConfigurationInput) DeleteLoggingConfigurationRequest {
+func (c *Client) DeleteLoggingConfigurationRequest(input *types.DeleteLoggingConfigurationInput) DeleteLoggingConfigurationRequest {
 	op := &aws.Operation{
 		Name:       opDeleteLoggingConfiguration,
 		HTTPMethod: "POST",
@@ -73,10 +32,10 @@ func (c *Client) DeleteLoggingConfigurationRequest(input *DeleteLoggingConfigura
 	}
 
 	if input == nil {
-		input = &DeleteLoggingConfigurationInput{}
+		input = &types.DeleteLoggingConfigurationInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteLoggingConfigurationOutput{})
+	req := c.newRequest(op, input, &types.DeleteLoggingConfigurationOutput{})
 	return DeleteLoggingConfigurationRequest{Request: req, Input: input, Copy: c.DeleteLoggingConfigurationRequest}
 }
 
@@ -84,8 +43,8 @@ func (c *Client) DeleteLoggingConfigurationRequest(input *DeleteLoggingConfigura
 // DeleteLoggingConfiguration API operation.
 type DeleteLoggingConfigurationRequest struct {
 	*aws.Request
-	Input *DeleteLoggingConfigurationInput
-	Copy  func(*DeleteLoggingConfigurationInput) DeleteLoggingConfigurationRequest
+	Input *types.DeleteLoggingConfigurationInput
+	Copy  func(*types.DeleteLoggingConfigurationInput) DeleteLoggingConfigurationRequest
 }
 
 // Send marshals and sends the DeleteLoggingConfiguration API request.
@@ -97,7 +56,7 @@ func (r DeleteLoggingConfigurationRequest) Send(ctx context.Context) (*DeleteLog
 	}
 
 	resp := &DeleteLoggingConfigurationResponse{
-		DeleteLoggingConfigurationOutput: r.Request.Data.(*DeleteLoggingConfigurationOutput),
+		DeleteLoggingConfigurationOutput: r.Request.Data.(*types.DeleteLoggingConfigurationOutput),
 		response:                         &aws.Response{Request: r.Request},
 	}
 
@@ -107,7 +66,7 @@ func (r DeleteLoggingConfigurationRequest) Send(ctx context.Context) (*DeleteLog
 // DeleteLoggingConfigurationResponse is the response type for the
 // DeleteLoggingConfiguration API operation.
 type DeleteLoggingConfigurationResponse struct {
-	*DeleteLoggingConfigurationOutput
+	*types.DeleteLoggingConfigurationOutput
 
 	response *aws.Response
 }

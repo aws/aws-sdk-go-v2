@@ -6,52 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/organizations/types"
 )
-
-type DescribeAccountInput struct {
-	_ struct{} `type:"structure"`
-
-	// The unique identifier (ID) of the AWS account that you want information about.
-	// You can get the ID from the ListAccounts or ListAccountsForParent operations.
-	//
-	// The regex pattern (http://wikipedia.org/wiki/regex) for an account ID string
-	// requires exactly 12 digits.
-	//
-	// AccountId is a required field
-	AccountId *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeAccountInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeAccountInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeAccountInput"}
-
-	if s.AccountId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("AccountId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribeAccountOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A structure that contains information about the requested account.
-	Account *Account `type:"structure"`
-}
-
-// String returns the string representation
-func (s DescribeAccountOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeAccount = "DescribeAccount"
 
@@ -70,7 +26,7 @@ const opDescribeAccount = "DescribeAccount"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/DescribeAccount
-func (c *Client) DescribeAccountRequest(input *DescribeAccountInput) DescribeAccountRequest {
+func (c *Client) DescribeAccountRequest(input *types.DescribeAccountInput) DescribeAccountRequest {
 	op := &aws.Operation{
 		Name:       opDescribeAccount,
 		HTTPMethod: "POST",
@@ -78,10 +34,10 @@ func (c *Client) DescribeAccountRequest(input *DescribeAccountInput) DescribeAcc
 	}
 
 	if input == nil {
-		input = &DescribeAccountInput{}
+		input = &types.DescribeAccountInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeAccountOutput{})
+	req := c.newRequest(op, input, &types.DescribeAccountOutput{})
 	return DescribeAccountRequest{Request: req, Input: input, Copy: c.DescribeAccountRequest}
 }
 
@@ -89,8 +45,8 @@ func (c *Client) DescribeAccountRequest(input *DescribeAccountInput) DescribeAcc
 // DescribeAccount API operation.
 type DescribeAccountRequest struct {
 	*aws.Request
-	Input *DescribeAccountInput
-	Copy  func(*DescribeAccountInput) DescribeAccountRequest
+	Input *types.DescribeAccountInput
+	Copy  func(*types.DescribeAccountInput) DescribeAccountRequest
 }
 
 // Send marshals and sends the DescribeAccount API request.
@@ -102,7 +58,7 @@ func (r DescribeAccountRequest) Send(ctx context.Context) (*DescribeAccountRespo
 	}
 
 	resp := &DescribeAccountResponse{
-		DescribeAccountOutput: r.Request.Data.(*DescribeAccountOutput),
+		DescribeAccountOutput: r.Request.Data.(*types.DescribeAccountOutput),
 		response:              &aws.Response{Request: r.Request},
 	}
 
@@ -112,7 +68,7 @@ func (r DescribeAccountRequest) Send(ctx context.Context) (*DescribeAccountRespo
 // DescribeAccountResponse is the response type for the
 // DescribeAccount API operation.
 type DescribeAccountResponse struct {
-	*DescribeAccountOutput
+	*types.DescribeAccountOutput
 
 	response *aws.Response
 }

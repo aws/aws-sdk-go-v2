@@ -6,87 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/pinpoint/types"
 )
-
-type GetCampaignInput struct {
-	_ struct{} `type:"structure"`
-
-	// ApplicationId is a required field
-	ApplicationId *string `location:"uri" locationName:"application-id" type:"string" required:"true"`
-
-	// CampaignId is a required field
-	CampaignId *string `location:"uri" locationName:"campaign-id" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetCampaignInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetCampaignInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetCampaignInput"}
-
-	if s.ApplicationId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ApplicationId"))
-	}
-
-	if s.CampaignId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("CampaignId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetCampaignInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.ApplicationId != nil {
-		v := *s.ApplicationId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "application-id", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.CampaignId != nil {
-		v := *s.CampaignId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "campaign-id", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type GetCampaignOutput struct {
-	_ struct{} `type:"structure" payload:"CampaignResponse"`
-
-	// Provides information about the status, configuration, and other settings
-	// for a campaign.
-	//
-	// CampaignResponse is a required field
-	CampaignResponse *CampaignResponse `type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s GetCampaignOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetCampaignOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.CampaignResponse != nil {
-		v := s.CampaignResponse
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.PayloadTarget, "CampaignResponse", v, metadata)
-	}
-	return nil
-}
 
 const opGetCampaign = "GetCampaign"
 
@@ -104,7 +25,7 @@ const opGetCampaign = "GetCampaign"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetCampaign
-func (c *Client) GetCampaignRequest(input *GetCampaignInput) GetCampaignRequest {
+func (c *Client) GetCampaignRequest(input *types.GetCampaignInput) GetCampaignRequest {
 	op := &aws.Operation{
 		Name:       opGetCampaign,
 		HTTPMethod: "GET",
@@ -112,10 +33,10 @@ func (c *Client) GetCampaignRequest(input *GetCampaignInput) GetCampaignRequest 
 	}
 
 	if input == nil {
-		input = &GetCampaignInput{}
+		input = &types.GetCampaignInput{}
 	}
 
-	req := c.newRequest(op, input, &GetCampaignOutput{})
+	req := c.newRequest(op, input, &types.GetCampaignOutput{})
 	return GetCampaignRequest{Request: req, Input: input, Copy: c.GetCampaignRequest}
 }
 
@@ -123,8 +44,8 @@ func (c *Client) GetCampaignRequest(input *GetCampaignInput) GetCampaignRequest 
 // GetCampaign API operation.
 type GetCampaignRequest struct {
 	*aws.Request
-	Input *GetCampaignInput
-	Copy  func(*GetCampaignInput) GetCampaignRequest
+	Input *types.GetCampaignInput
+	Copy  func(*types.GetCampaignInput) GetCampaignRequest
 }
 
 // Send marshals and sends the GetCampaign API request.
@@ -136,7 +57,7 @@ func (r GetCampaignRequest) Send(ctx context.Context) (*GetCampaignResponse, err
 	}
 
 	resp := &GetCampaignResponse{
-		GetCampaignOutput: r.Request.Data.(*GetCampaignOutput),
+		GetCampaignOutput: r.Request.Data.(*types.GetCampaignOutput),
 		response:          &aws.Response{Request: r.Request},
 	}
 
@@ -146,7 +67,7 @@ func (r GetCampaignRequest) Send(ctx context.Context) (*GetCampaignResponse, err
 // GetCampaignResponse is the response type for the
 // GetCampaign API operation.
 type GetCampaignResponse struct {
-	*GetCampaignOutput
+	*types.GetCampaignOutput
 
 	response *aws.Response
 }

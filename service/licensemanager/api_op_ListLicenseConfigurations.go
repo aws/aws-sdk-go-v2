@@ -6,45 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/licensemanager/types"
 )
-
-type ListLicenseConfigurationsInput struct {
-	_ struct{} `type:"structure"`
-
-	// One or more filters.
-	Filters []Filter `type:"list"`
-
-	// An array of ARNs for the calling account’s license configurations.
-	LicenseConfigurationArns []string `type:"list"`
-
-	// Maximum number of results to return in a single call. To retrieve the remaining
-	// results, make another call with the returned NextToken value.
-	MaxResults *int64 `type:"integer"`
-
-	// Token for the next set of results.
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s ListLicenseConfigurationsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type ListLicenseConfigurationsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Array of license configuration objects.
-	LicenseConfigurations []LicenseConfiguration `type:"list"`
-
-	// Token for the next set of results.
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s ListLicenseConfigurationsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListLicenseConfigurations = "ListLicenseConfigurations"
 
@@ -63,7 +26,7 @@ const opListLicenseConfigurations = "ListLicenseConfigurations"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/license-manager-2018-08-01/ListLicenseConfigurations
-func (c *Client) ListLicenseConfigurationsRequest(input *ListLicenseConfigurationsInput) ListLicenseConfigurationsRequest {
+func (c *Client) ListLicenseConfigurationsRequest(input *types.ListLicenseConfigurationsInput) ListLicenseConfigurationsRequest {
 	op := &aws.Operation{
 		Name:       opListLicenseConfigurations,
 		HTTPMethod: "POST",
@@ -71,10 +34,10 @@ func (c *Client) ListLicenseConfigurationsRequest(input *ListLicenseConfiguratio
 	}
 
 	if input == nil {
-		input = &ListLicenseConfigurationsInput{}
+		input = &types.ListLicenseConfigurationsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListLicenseConfigurationsOutput{})
+	req := c.newRequest(op, input, &types.ListLicenseConfigurationsOutput{})
 	return ListLicenseConfigurationsRequest{Request: req, Input: input, Copy: c.ListLicenseConfigurationsRequest}
 }
 
@@ -82,8 +45,8 @@ func (c *Client) ListLicenseConfigurationsRequest(input *ListLicenseConfiguratio
 // ListLicenseConfigurations API operation.
 type ListLicenseConfigurationsRequest struct {
 	*aws.Request
-	Input *ListLicenseConfigurationsInput
-	Copy  func(*ListLicenseConfigurationsInput) ListLicenseConfigurationsRequest
+	Input *types.ListLicenseConfigurationsInput
+	Copy  func(*types.ListLicenseConfigurationsInput) ListLicenseConfigurationsRequest
 }
 
 // Send marshals and sends the ListLicenseConfigurations API request.
@@ -95,7 +58,7 @@ func (r ListLicenseConfigurationsRequest) Send(ctx context.Context) (*ListLicens
 	}
 
 	resp := &ListLicenseConfigurationsResponse{
-		ListLicenseConfigurationsOutput: r.Request.Data.(*ListLicenseConfigurationsOutput),
+		ListLicenseConfigurationsOutput: r.Request.Data.(*types.ListLicenseConfigurationsOutput),
 		response:                        &aws.Response{Request: r.Request},
 	}
 
@@ -105,7 +68,7 @@ func (r ListLicenseConfigurationsRequest) Send(ctx context.Context) (*ListLicens
 // ListLicenseConfigurationsResponse is the response type for the
 // ListLicenseConfigurations API operation.
 type ListLicenseConfigurationsResponse struct {
-	*ListLicenseConfigurationsOutput
+	*types.ListLicenseConfigurationsOutput
 
 	response *aws.Response
 }

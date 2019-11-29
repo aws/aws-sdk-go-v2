@@ -13,6 +13,8 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws/awserr"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting/integration"
 	"github.com/aws/aws-sdk-go-v2/service/cloudwatch"
+	"github.com/aws/aws-sdk-go-v2/service/cloudwatch/enums"
+	"github.com/aws/aws-sdk-go-v2/service/cloudwatch/types"
 )
 
 var _ aws.Config
@@ -24,7 +26,7 @@ func TestInteg_00_ListMetrics(t *testing.T) {
 
 	cfg := integration.ConfigWithDefaultRegion("us-west-2")
 	svc := cloudwatch.New(cfg)
-	params := &cloudwatch.ListMetricsInput{
+	params := &types.ListMetricsInput{
 		Namespace: aws.String("AWS/EC2"),
 	}
 
@@ -41,10 +43,10 @@ func TestInteg_01_SetAlarmState(t *testing.T) {
 
 	cfg := integration.ConfigWithDefaultRegion("us-west-2")
 	svc := cloudwatch.New(cfg)
-	params := &cloudwatch.SetAlarmStateInput{
+	params := &types.SetAlarmStateInput{
 		AlarmName:   aws.String("abc"),
 		StateReason: aws.String("xyz"),
-		StateValue:  cloudwatch.StateValue("mno"),
+		StateValue:  enums.StateValue("mno"),
 	}
 
 	req := svc.SetAlarmStateRequest(params)

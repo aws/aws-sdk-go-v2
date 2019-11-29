@@ -6,63 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/route53resolver/types"
 )
-
-type PutResolverRulePolicyInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the account that you want to grant permissions
-	// to.
-	//
-	// Arn is a required field
-	Arn *string `min:"1" type:"string" required:"true"`
-
-	// An AWS Identity and Access Management policy statement that lists the permissions
-	// that you want to grant to another AWS account.
-	//
-	// ResolverRulePolicy is a required field
-	ResolverRulePolicy *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s PutResolverRulePolicyInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *PutResolverRulePolicyInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "PutResolverRulePolicyInput"}
-
-	if s.Arn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Arn"))
-	}
-	if s.Arn != nil && len(*s.Arn) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Arn", 1))
-	}
-
-	if s.ResolverRulePolicy == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ResolverRulePolicy"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// The response to a PutResolverRulePolicy request.
-type PutResolverRulePolicyOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Whether the PutResolverRulePolicy request was successful.
-	ReturnValue *bool `type:"boolean"`
-}
-
-// String returns the string representation
-func (s PutResolverRulePolicyOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opPutResolverRulePolicy = "PutResolverRulePolicy"
 
@@ -80,7 +25,7 @@ const opPutResolverRulePolicy = "PutResolverRulePolicy"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/PutResolverRulePolicy
-func (c *Client) PutResolverRulePolicyRequest(input *PutResolverRulePolicyInput) PutResolverRulePolicyRequest {
+func (c *Client) PutResolverRulePolicyRequest(input *types.PutResolverRulePolicyInput) PutResolverRulePolicyRequest {
 	op := &aws.Operation{
 		Name:       opPutResolverRulePolicy,
 		HTTPMethod: "POST",
@@ -88,10 +33,10 @@ func (c *Client) PutResolverRulePolicyRequest(input *PutResolverRulePolicyInput)
 	}
 
 	if input == nil {
-		input = &PutResolverRulePolicyInput{}
+		input = &types.PutResolverRulePolicyInput{}
 	}
 
-	req := c.newRequest(op, input, &PutResolverRulePolicyOutput{})
+	req := c.newRequest(op, input, &types.PutResolverRulePolicyOutput{})
 	return PutResolverRulePolicyRequest{Request: req, Input: input, Copy: c.PutResolverRulePolicyRequest}
 }
 
@@ -99,8 +44,8 @@ func (c *Client) PutResolverRulePolicyRequest(input *PutResolverRulePolicyInput)
 // PutResolverRulePolicy API operation.
 type PutResolverRulePolicyRequest struct {
 	*aws.Request
-	Input *PutResolverRulePolicyInput
-	Copy  func(*PutResolverRulePolicyInput) PutResolverRulePolicyRequest
+	Input *types.PutResolverRulePolicyInput
+	Copy  func(*types.PutResolverRulePolicyInput) PutResolverRulePolicyRequest
 }
 
 // Send marshals and sends the PutResolverRulePolicy API request.
@@ -112,7 +57,7 @@ func (r PutResolverRulePolicyRequest) Send(ctx context.Context) (*PutResolverRul
 	}
 
 	resp := &PutResolverRulePolicyResponse{
-		PutResolverRulePolicyOutput: r.Request.Data.(*PutResolverRulePolicyOutput),
+		PutResolverRulePolicyOutput: r.Request.Data.(*types.PutResolverRulePolicyOutput),
 		response:                    &aws.Response{Request: r.Request},
 	}
 
@@ -122,7 +67,7 @@ func (r PutResolverRulePolicyRequest) Send(ctx context.Context) (*PutResolverRul
 // PutResolverRulePolicyResponse is the response type for the
 // PutResolverRulePolicy API operation.
 type PutResolverRulePolicyResponse struct {
-	*PutResolverRulePolicyOutput
+	*types.PutResolverRulePolicyOutput
 
 	response *aws.Response
 }

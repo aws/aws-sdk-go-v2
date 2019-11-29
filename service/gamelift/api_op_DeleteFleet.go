@@ -6,48 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
+	"github.com/aws/aws-sdk-go-v2/service/gamelift/types"
 )
-
-// Represents the input for a request action.
-type DeleteFleetInput struct {
-	_ struct{} `type:"structure"`
-
-	// Unique identifier for a fleet to be deleted.
-	//
-	// FleetId is a required field
-	FleetId *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteFleetInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteFleetInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteFleetInput"}
-
-	if s.FleetId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("FleetId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteFleetOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteFleetOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteFleet = "DeleteFleet"
 
@@ -94,7 +56,7 @@ const opDeleteFleet = "DeleteFleet"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DeleteFleet
-func (c *Client) DeleteFleetRequest(input *DeleteFleetInput) DeleteFleetRequest {
+func (c *Client) DeleteFleetRequest(input *types.DeleteFleetInput) DeleteFleetRequest {
 	op := &aws.Operation{
 		Name:       opDeleteFleet,
 		HTTPMethod: "POST",
@@ -102,10 +64,10 @@ func (c *Client) DeleteFleetRequest(input *DeleteFleetInput) DeleteFleetRequest 
 	}
 
 	if input == nil {
-		input = &DeleteFleetInput{}
+		input = &types.DeleteFleetInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteFleetOutput{})
+	req := c.newRequest(op, input, &types.DeleteFleetOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return DeleteFleetRequest{Request: req, Input: input, Copy: c.DeleteFleetRequest}
@@ -115,8 +77,8 @@ func (c *Client) DeleteFleetRequest(input *DeleteFleetInput) DeleteFleetRequest 
 // DeleteFleet API operation.
 type DeleteFleetRequest struct {
 	*aws.Request
-	Input *DeleteFleetInput
-	Copy  func(*DeleteFleetInput) DeleteFleetRequest
+	Input *types.DeleteFleetInput
+	Copy  func(*types.DeleteFleetInput) DeleteFleetRequest
 }
 
 // Send marshals and sends the DeleteFleet API request.
@@ -128,7 +90,7 @@ func (r DeleteFleetRequest) Send(ctx context.Context) (*DeleteFleetResponse, err
 	}
 
 	resp := &DeleteFleetResponse{
-		DeleteFleetOutput: r.Request.Data.(*DeleteFleetOutput),
+		DeleteFleetOutput: r.Request.Data.(*types.DeleteFleetOutput),
 		response:          &aws.Response{Request: r.Request},
 	}
 
@@ -138,7 +100,7 @@ func (r DeleteFleetRequest) Send(ctx context.Context) (*DeleteFleetResponse, err
 // DeleteFleetResponse is the response type for the
 // DeleteFleet API operation.
 type DeleteFleetResponse struct {
-	*DeleteFleetOutput
+	*types.DeleteFleetOutput
 
 	response *aws.Response
 }

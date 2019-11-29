@@ -6,30 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/cloudhsm/types"
 )
-
-// Contains the inputs for the ListAvailableZones action.
-type ListAvailableZonesInput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s ListAvailableZonesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type ListAvailableZonesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The list of Availability Zones that have available AWS CloudHSM capacity.
-	AZList []string `type:"list"`
-}
-
-// String returns the string representation
-func (s ListAvailableZonesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListAvailableZones = "ListAvailableZones"
 
@@ -55,7 +33,7 @@ const opListAvailableZones = "ListAvailableZones"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/ListAvailableZones
-func (c *Client) ListAvailableZonesRequest(input *ListAvailableZonesInput) ListAvailableZonesRequest {
+func (c *Client) ListAvailableZonesRequest(input *types.ListAvailableZonesInput) ListAvailableZonesRequest {
 	op := &aws.Operation{
 		Name:       opListAvailableZones,
 		HTTPMethod: "POST",
@@ -63,10 +41,10 @@ func (c *Client) ListAvailableZonesRequest(input *ListAvailableZonesInput) ListA
 	}
 
 	if input == nil {
-		input = &ListAvailableZonesInput{}
+		input = &types.ListAvailableZonesInput{}
 	}
 
-	req := c.newRequest(op, input, &ListAvailableZonesOutput{})
+	req := c.newRequest(op, input, &types.ListAvailableZonesOutput{})
 	return ListAvailableZonesRequest{Request: req, Input: input, Copy: c.ListAvailableZonesRequest}
 }
 
@@ -74,8 +52,8 @@ func (c *Client) ListAvailableZonesRequest(input *ListAvailableZonesInput) ListA
 // ListAvailableZones API operation.
 type ListAvailableZonesRequest struct {
 	*aws.Request
-	Input *ListAvailableZonesInput
-	Copy  func(*ListAvailableZonesInput) ListAvailableZonesRequest
+	Input *types.ListAvailableZonesInput
+	Copy  func(*types.ListAvailableZonesInput) ListAvailableZonesRequest
 }
 
 // Send marshals and sends the ListAvailableZones API request.
@@ -87,7 +65,7 @@ func (r ListAvailableZonesRequest) Send(ctx context.Context) (*ListAvailableZone
 	}
 
 	resp := &ListAvailableZonesResponse{
-		ListAvailableZonesOutput: r.Request.Data.(*ListAvailableZonesOutput),
+		ListAvailableZonesOutput: r.Request.Data.(*types.ListAvailableZonesOutput),
 		response:                 &aws.Response{Request: r.Request},
 	}
 
@@ -97,7 +75,7 @@ func (r ListAvailableZonesRequest) Send(ctx context.Context) (*ListAvailableZone
 // ListAvailableZonesResponse is the response type for the
 // ListAvailableZones API operation.
 type ListAvailableZonesResponse struct {
-	*ListAvailableZonesOutput
+	*types.ListAvailableZonesOutput
 
 	response *aws.Response
 }

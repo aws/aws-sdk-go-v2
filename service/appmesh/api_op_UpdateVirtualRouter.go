@@ -6,126 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/appmesh/types"
 )
-
-type UpdateVirtualRouterInput struct {
-	_ struct{} `type:"structure"`
-
-	ClientToken *string `locationName:"clientToken" type:"string" idempotencyToken:"true"`
-
-	// MeshName is a required field
-	MeshName *string `location:"uri" locationName:"meshName" min:"1" type:"string" required:"true"`
-
-	// An object representing the specification of a virtual router.
-	//
-	// Spec is a required field
-	Spec *VirtualRouterSpec `locationName:"spec" type:"structure" required:"true"`
-
-	// VirtualRouterName is a required field
-	VirtualRouterName *string `location:"uri" locationName:"virtualRouterName" min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s UpdateVirtualRouterInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateVirtualRouterInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateVirtualRouterInput"}
-
-	if s.MeshName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("MeshName"))
-	}
-	if s.MeshName != nil && len(*s.MeshName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("MeshName", 1))
-	}
-
-	if s.Spec == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Spec"))
-	}
-
-	if s.VirtualRouterName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("VirtualRouterName"))
-	}
-	if s.VirtualRouterName != nil && len(*s.VirtualRouterName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("VirtualRouterName", 1))
-	}
-	if s.Spec != nil {
-		if err := s.Spec.Validate(); err != nil {
-			invalidParams.AddNested("Spec", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s UpdateVirtualRouterInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	var ClientToken string
-	if s.ClientToken != nil {
-		ClientToken = *s.ClientToken
-	} else {
-		ClientToken = protocol.GetIdempotencyToken()
-	}
-	{
-		v := ClientToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "clientToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Spec != nil {
-		v := s.Spec
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "spec", v, metadata)
-	}
-	if s.MeshName != nil {
-		v := *s.MeshName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "meshName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.VirtualRouterName != nil {
-		v := *s.VirtualRouterName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "virtualRouterName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type UpdateVirtualRouterOutput struct {
-	_ struct{} `type:"structure" payload:"VirtualRouter"`
-
-	// An object representing a virtual router returned by a describe operation.
-	//
-	// VirtualRouter is a required field
-	VirtualRouter *VirtualRouterData `locationName:"virtualRouter" type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s UpdateVirtualRouterOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s UpdateVirtualRouterOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.VirtualRouter != nil {
-		v := s.VirtualRouter
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.PayloadTarget, "virtualRouter", v, metadata)
-	}
-	return nil
-}
 
 const opUpdateVirtualRouter = "UpdateVirtualRouter"
 
@@ -142,7 +24,7 @@ const opUpdateVirtualRouter = "UpdateVirtualRouter"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/UpdateVirtualRouter
-func (c *Client) UpdateVirtualRouterRequest(input *UpdateVirtualRouterInput) UpdateVirtualRouterRequest {
+func (c *Client) UpdateVirtualRouterRequest(input *types.UpdateVirtualRouterInput) UpdateVirtualRouterRequest {
 	op := &aws.Operation{
 		Name:       opUpdateVirtualRouter,
 		HTTPMethod: "PUT",
@@ -150,10 +32,10 @@ func (c *Client) UpdateVirtualRouterRequest(input *UpdateVirtualRouterInput) Upd
 	}
 
 	if input == nil {
-		input = &UpdateVirtualRouterInput{}
+		input = &types.UpdateVirtualRouterInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateVirtualRouterOutput{})
+	req := c.newRequest(op, input, &types.UpdateVirtualRouterOutput{})
 	return UpdateVirtualRouterRequest{Request: req, Input: input, Copy: c.UpdateVirtualRouterRequest}
 }
 
@@ -161,8 +43,8 @@ func (c *Client) UpdateVirtualRouterRequest(input *UpdateVirtualRouterInput) Upd
 // UpdateVirtualRouter API operation.
 type UpdateVirtualRouterRequest struct {
 	*aws.Request
-	Input *UpdateVirtualRouterInput
-	Copy  func(*UpdateVirtualRouterInput) UpdateVirtualRouterRequest
+	Input *types.UpdateVirtualRouterInput
+	Copy  func(*types.UpdateVirtualRouterInput) UpdateVirtualRouterRequest
 }
 
 // Send marshals and sends the UpdateVirtualRouter API request.
@@ -174,7 +56,7 @@ func (r UpdateVirtualRouterRequest) Send(ctx context.Context) (*UpdateVirtualRou
 	}
 
 	resp := &UpdateVirtualRouterResponse{
-		UpdateVirtualRouterOutput: r.Request.Data.(*UpdateVirtualRouterOutput),
+		UpdateVirtualRouterOutput: r.Request.Data.(*types.UpdateVirtualRouterOutput),
 		response:                  &aws.Response{Request: r.Request},
 	}
 
@@ -184,7 +66,7 @@ func (r UpdateVirtualRouterRequest) Send(ctx context.Context) (*UpdateVirtualRou
 // UpdateVirtualRouterResponse is the response type for the
 // UpdateVirtualRouter API operation.
 type UpdateVirtualRouterResponse struct {
-	*UpdateVirtualRouterOutput
+	*types.UpdateVirtualRouterOutput
 
 	response *aws.Response
 }

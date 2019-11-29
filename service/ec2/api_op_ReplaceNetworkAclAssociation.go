@@ -6,64 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-type ReplaceNetworkAclAssociationInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the current association between the original network ACL and the
-	// subnet.
-	//
-	// AssociationId is a required field
-	AssociationId *string `locationName:"associationId" type:"string" required:"true"`
-
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have
-	// the required permissions, the error response is DryRunOperation. Otherwise,
-	// it is UnauthorizedOperation.
-	DryRun *bool `locationName:"dryRun" type:"boolean"`
-
-	// The ID of the new network ACL to associate with the subnet.
-	//
-	// NetworkAclId is a required field
-	NetworkAclId *string `locationName:"networkAclId" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s ReplaceNetworkAclAssociationInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ReplaceNetworkAclAssociationInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ReplaceNetworkAclAssociationInput"}
-
-	if s.AssociationId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("AssociationId"))
-	}
-
-	if s.NetworkAclId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("NetworkAclId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ReplaceNetworkAclAssociationOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the new association.
-	NewAssociationId *string `locationName:"newAssociationId" type:"string"`
-}
-
-// String returns the string representation
-func (s ReplaceNetworkAclAssociationOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opReplaceNetworkAclAssociation = "ReplaceNetworkAclAssociation"
 
@@ -85,7 +29,7 @@ const opReplaceNetworkAclAssociation = "ReplaceNetworkAclAssociation"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ReplaceNetworkAclAssociation
-func (c *Client) ReplaceNetworkAclAssociationRequest(input *ReplaceNetworkAclAssociationInput) ReplaceNetworkAclAssociationRequest {
+func (c *Client) ReplaceNetworkAclAssociationRequest(input *types.ReplaceNetworkAclAssociationInput) ReplaceNetworkAclAssociationRequest {
 	op := &aws.Operation{
 		Name:       opReplaceNetworkAclAssociation,
 		HTTPMethod: "POST",
@@ -93,10 +37,10 @@ func (c *Client) ReplaceNetworkAclAssociationRequest(input *ReplaceNetworkAclAss
 	}
 
 	if input == nil {
-		input = &ReplaceNetworkAclAssociationInput{}
+		input = &types.ReplaceNetworkAclAssociationInput{}
 	}
 
-	req := c.newRequest(op, input, &ReplaceNetworkAclAssociationOutput{})
+	req := c.newRequest(op, input, &types.ReplaceNetworkAclAssociationOutput{})
 	return ReplaceNetworkAclAssociationRequest{Request: req, Input: input, Copy: c.ReplaceNetworkAclAssociationRequest}
 }
 
@@ -104,8 +48,8 @@ func (c *Client) ReplaceNetworkAclAssociationRequest(input *ReplaceNetworkAclAss
 // ReplaceNetworkAclAssociation API operation.
 type ReplaceNetworkAclAssociationRequest struct {
 	*aws.Request
-	Input *ReplaceNetworkAclAssociationInput
-	Copy  func(*ReplaceNetworkAclAssociationInput) ReplaceNetworkAclAssociationRequest
+	Input *types.ReplaceNetworkAclAssociationInput
+	Copy  func(*types.ReplaceNetworkAclAssociationInput) ReplaceNetworkAclAssociationRequest
 }
 
 // Send marshals and sends the ReplaceNetworkAclAssociation API request.
@@ -117,7 +61,7 @@ func (r ReplaceNetworkAclAssociationRequest) Send(ctx context.Context) (*Replace
 	}
 
 	resp := &ReplaceNetworkAclAssociationResponse{
-		ReplaceNetworkAclAssociationOutput: r.Request.Data.(*ReplaceNetworkAclAssociationOutput),
+		ReplaceNetworkAclAssociationOutput: r.Request.Data.(*types.ReplaceNetworkAclAssociationOutput),
 		response:                           &aws.Response{Request: r.Request},
 	}
 
@@ -127,7 +71,7 @@ func (r ReplaceNetworkAclAssociationRequest) Send(ctx context.Context) (*Replace
 // ReplaceNetworkAclAssociationResponse is the response type for the
 // ReplaceNetworkAclAssociation API operation.
 type ReplaceNetworkAclAssociationResponse struct {
-	*ReplaceNetworkAclAssociationOutput
+	*types.ReplaceNetworkAclAssociationOutput
 
 	response *aws.Response
 }

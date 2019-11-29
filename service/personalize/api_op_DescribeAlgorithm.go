@@ -6,48 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/personalize/types"
 )
-
-type DescribeAlgorithmInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the algorithm to describe.
-	//
-	// AlgorithmArn is a required field
-	AlgorithmArn *string `locationName:"algorithmArn" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeAlgorithmInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeAlgorithmInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeAlgorithmInput"}
-
-	if s.AlgorithmArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("AlgorithmArn"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribeAlgorithmOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A listing of the properties of the algorithm.
-	Algorithm *Algorithm `locationName:"algorithm" type:"structure"`
-}
-
-// String returns the string representation
-func (s DescribeAlgorithmOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeAlgorithm = "DescribeAlgorithm"
 
@@ -64,7 +24,7 @@ const opDescribeAlgorithm = "DescribeAlgorithm"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/DescribeAlgorithm
-func (c *Client) DescribeAlgorithmRequest(input *DescribeAlgorithmInput) DescribeAlgorithmRequest {
+func (c *Client) DescribeAlgorithmRequest(input *types.DescribeAlgorithmInput) DescribeAlgorithmRequest {
 	op := &aws.Operation{
 		Name:       opDescribeAlgorithm,
 		HTTPMethod: "POST",
@@ -72,10 +32,10 @@ func (c *Client) DescribeAlgorithmRequest(input *DescribeAlgorithmInput) Describ
 	}
 
 	if input == nil {
-		input = &DescribeAlgorithmInput{}
+		input = &types.DescribeAlgorithmInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeAlgorithmOutput{})
+	req := c.newRequest(op, input, &types.DescribeAlgorithmOutput{})
 	return DescribeAlgorithmRequest{Request: req, Input: input, Copy: c.DescribeAlgorithmRequest}
 }
 
@@ -83,8 +43,8 @@ func (c *Client) DescribeAlgorithmRequest(input *DescribeAlgorithmInput) Describ
 // DescribeAlgorithm API operation.
 type DescribeAlgorithmRequest struct {
 	*aws.Request
-	Input *DescribeAlgorithmInput
-	Copy  func(*DescribeAlgorithmInput) DescribeAlgorithmRequest
+	Input *types.DescribeAlgorithmInput
+	Copy  func(*types.DescribeAlgorithmInput) DescribeAlgorithmRequest
 }
 
 // Send marshals and sends the DescribeAlgorithm API request.
@@ -96,7 +56,7 @@ func (r DescribeAlgorithmRequest) Send(ctx context.Context) (*DescribeAlgorithmR
 	}
 
 	resp := &DescribeAlgorithmResponse{
-		DescribeAlgorithmOutput: r.Request.Data.(*DescribeAlgorithmOutput),
+		DescribeAlgorithmOutput: r.Request.Data.(*types.DescribeAlgorithmOutput),
 		response:                &aws.Response{Request: r.Request},
 	}
 
@@ -106,7 +66,7 @@ func (r DescribeAlgorithmRequest) Send(ctx context.Context) (*DescribeAlgorithmR
 // DescribeAlgorithmResponse is the response type for the
 // DescribeAlgorithm API operation.
 type DescribeAlgorithmResponse struct {
-	*DescribeAlgorithmOutput
+	*types.DescribeAlgorithmOutput
 
 	response *aws.Response
 }

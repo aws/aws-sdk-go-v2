@@ -6,66 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/databasemigrationservice/types"
 )
-
-type ModifyEventSubscriptionInput struct {
-	_ struct{} `type:"structure"`
-
-	// A Boolean value; set to true to activate the subscription.
-	Enabled *bool `type:"boolean"`
-
-	// A list of event categories for a source type that you want to subscribe to.
-	// Use the DescribeEventCategories action to see a list of event categories.
-	EventCategories []string `type:"list"`
-
-	// The Amazon Resource Name (ARN) of the Amazon SNS topic created for event
-	// notification. The ARN is created by Amazon SNS when you create a topic and
-	// subscribe to it.
-	SnsTopicArn *string `type:"string"`
-
-	// The type of AWS DMS resource that generates the events you want to subscribe
-	// to.
-	//
-	// Valid values: replication-instance | replication-task
-	SourceType *string `type:"string"`
-
-	// The name of the AWS DMS event notification subscription to be modified.
-	//
-	// SubscriptionName is a required field
-	SubscriptionName *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s ModifyEventSubscriptionInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ModifyEventSubscriptionInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ModifyEventSubscriptionInput"}
-
-	if s.SubscriptionName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("SubscriptionName"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ModifyEventSubscriptionOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The modified event subscription.
-	EventSubscription *EventSubscription `type:"structure"`
-}
-
-// String returns the string representation
-func (s ModifyEventSubscriptionOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opModifyEventSubscription = "ModifyEventSubscription"
 
@@ -82,7 +24,7 @@ const opModifyEventSubscription = "ModifyEventSubscription"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/ModifyEventSubscription
-func (c *Client) ModifyEventSubscriptionRequest(input *ModifyEventSubscriptionInput) ModifyEventSubscriptionRequest {
+func (c *Client) ModifyEventSubscriptionRequest(input *types.ModifyEventSubscriptionInput) ModifyEventSubscriptionRequest {
 	op := &aws.Operation{
 		Name:       opModifyEventSubscription,
 		HTTPMethod: "POST",
@@ -90,10 +32,10 @@ func (c *Client) ModifyEventSubscriptionRequest(input *ModifyEventSubscriptionIn
 	}
 
 	if input == nil {
-		input = &ModifyEventSubscriptionInput{}
+		input = &types.ModifyEventSubscriptionInput{}
 	}
 
-	req := c.newRequest(op, input, &ModifyEventSubscriptionOutput{})
+	req := c.newRequest(op, input, &types.ModifyEventSubscriptionOutput{})
 	return ModifyEventSubscriptionRequest{Request: req, Input: input, Copy: c.ModifyEventSubscriptionRequest}
 }
 
@@ -101,8 +43,8 @@ func (c *Client) ModifyEventSubscriptionRequest(input *ModifyEventSubscriptionIn
 // ModifyEventSubscription API operation.
 type ModifyEventSubscriptionRequest struct {
 	*aws.Request
-	Input *ModifyEventSubscriptionInput
-	Copy  func(*ModifyEventSubscriptionInput) ModifyEventSubscriptionRequest
+	Input *types.ModifyEventSubscriptionInput
+	Copy  func(*types.ModifyEventSubscriptionInput) ModifyEventSubscriptionRequest
 }
 
 // Send marshals and sends the ModifyEventSubscription API request.
@@ -114,7 +56,7 @@ func (r ModifyEventSubscriptionRequest) Send(ctx context.Context) (*ModifyEventS
 	}
 
 	resp := &ModifyEventSubscriptionResponse{
-		ModifyEventSubscriptionOutput: r.Request.Data.(*ModifyEventSubscriptionOutput),
+		ModifyEventSubscriptionOutput: r.Request.Data.(*types.ModifyEventSubscriptionOutput),
 		response:                      &aws.Response{Request: r.Request},
 	}
 
@@ -124,7 +66,7 @@ func (r ModifyEventSubscriptionRequest) Send(ctx context.Context) (*ModifyEventS
 // ModifyEventSubscriptionResponse is the response type for the
 // ModifyEventSubscription API operation.
 type ModifyEventSubscriptionResponse struct {
-	*ModifyEventSubscriptionOutput
+	*types.ModifyEventSubscriptionOutput
 
 	response *aws.Response
 }

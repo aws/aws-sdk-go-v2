@@ -6,58 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/waf/types"
 )
-
-type PutLoggingConfigurationInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Kinesis Data Firehose that contains the inspected traffic information,
-	// the redacted fields details, and the Amazon Resource Name (ARN) of the web
-	// ACL to monitor.
-	//
-	// When specifying Type in RedactedFields, you must use one of the following
-	// values: URI, QUERY_STRING, HEADER, or METHOD.
-	//
-	// LoggingConfiguration is a required field
-	LoggingConfiguration *LoggingConfiguration `type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s PutLoggingConfigurationInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *PutLoggingConfigurationInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "PutLoggingConfigurationInput"}
-
-	if s.LoggingConfiguration == nil {
-		invalidParams.Add(aws.NewErrParamRequired("LoggingConfiguration"))
-	}
-	if s.LoggingConfiguration != nil {
-		if err := s.LoggingConfiguration.Validate(); err != nil {
-			invalidParams.AddNested("LoggingConfiguration", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type PutLoggingConfigurationOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The LoggingConfiguration that you submitted in the request.
-	LoggingConfiguration *LoggingConfiguration `type:"structure"`
-}
-
-// String returns the string representation
-func (s PutLoggingConfigurationOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opPutLoggingConfiguration = "PutLoggingConfiguration"
 
@@ -93,7 +43,7 @@ const opPutLoggingConfiguration = "PutLoggingConfiguration"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/PutLoggingConfiguration
-func (c *Client) PutLoggingConfigurationRequest(input *PutLoggingConfigurationInput) PutLoggingConfigurationRequest {
+func (c *Client) PutLoggingConfigurationRequest(input *types.PutLoggingConfigurationInput) PutLoggingConfigurationRequest {
 	op := &aws.Operation{
 		Name:       opPutLoggingConfiguration,
 		HTTPMethod: "POST",
@@ -101,10 +51,10 @@ func (c *Client) PutLoggingConfigurationRequest(input *PutLoggingConfigurationIn
 	}
 
 	if input == nil {
-		input = &PutLoggingConfigurationInput{}
+		input = &types.PutLoggingConfigurationInput{}
 	}
 
-	req := c.newRequest(op, input, &PutLoggingConfigurationOutput{})
+	req := c.newRequest(op, input, &types.PutLoggingConfigurationOutput{})
 	return PutLoggingConfigurationRequest{Request: req, Input: input, Copy: c.PutLoggingConfigurationRequest}
 }
 
@@ -112,8 +62,8 @@ func (c *Client) PutLoggingConfigurationRequest(input *PutLoggingConfigurationIn
 // PutLoggingConfiguration API operation.
 type PutLoggingConfigurationRequest struct {
 	*aws.Request
-	Input *PutLoggingConfigurationInput
-	Copy  func(*PutLoggingConfigurationInput) PutLoggingConfigurationRequest
+	Input *types.PutLoggingConfigurationInput
+	Copy  func(*types.PutLoggingConfigurationInput) PutLoggingConfigurationRequest
 }
 
 // Send marshals and sends the PutLoggingConfiguration API request.
@@ -125,7 +75,7 @@ func (r PutLoggingConfigurationRequest) Send(ctx context.Context) (*PutLoggingCo
 	}
 
 	resp := &PutLoggingConfigurationResponse{
-		PutLoggingConfigurationOutput: r.Request.Data.(*PutLoggingConfigurationOutput),
+		PutLoggingConfigurationOutput: r.Request.Data.(*types.PutLoggingConfigurationOutput),
 		response:                      &aws.Response{Request: r.Request},
 	}
 
@@ -135,7 +85,7 @@ func (r PutLoggingConfigurationRequest) Send(ctx context.Context) (*PutLoggingCo
 // PutLoggingConfigurationResponse is the response type for the
 // PutLoggingConfiguration API operation.
 type PutLoggingConfigurationResponse struct {
-	*PutLoggingConfigurationOutput
+	*types.PutLoggingConfigurationOutput
 
 	response *aws.Response
 }

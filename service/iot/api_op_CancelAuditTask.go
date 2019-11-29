@@ -6,68 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/iot/types"
 )
-
-type CancelAuditTaskInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the audit you want to cancel. You can only cancel an audit that
-	// is "IN_PROGRESS".
-	//
-	// TaskId is a required field
-	TaskId *string `location:"uri" locationName:"taskId" min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s CancelAuditTaskInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CancelAuditTaskInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CancelAuditTaskInput"}
-
-	if s.TaskId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("TaskId"))
-	}
-	if s.TaskId != nil && len(*s.TaskId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("TaskId", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s CancelAuditTaskInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.TaskId != nil {
-		v := *s.TaskId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "taskId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type CancelAuditTaskOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s CancelAuditTaskOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s CancelAuditTaskOutput) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
 
 const opCancelAuditTask = "CancelAuditTask"
 
@@ -84,7 +24,7 @@ const opCancelAuditTask = "CancelAuditTask"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) CancelAuditTaskRequest(input *CancelAuditTaskInput) CancelAuditTaskRequest {
+func (c *Client) CancelAuditTaskRequest(input *types.CancelAuditTaskInput) CancelAuditTaskRequest {
 	op := &aws.Operation{
 		Name:       opCancelAuditTask,
 		HTTPMethod: "PUT",
@@ -92,10 +32,10 @@ func (c *Client) CancelAuditTaskRequest(input *CancelAuditTaskInput) CancelAudit
 	}
 
 	if input == nil {
-		input = &CancelAuditTaskInput{}
+		input = &types.CancelAuditTaskInput{}
 	}
 
-	req := c.newRequest(op, input, &CancelAuditTaskOutput{})
+	req := c.newRequest(op, input, &types.CancelAuditTaskOutput{})
 	return CancelAuditTaskRequest{Request: req, Input: input, Copy: c.CancelAuditTaskRequest}
 }
 
@@ -103,8 +43,8 @@ func (c *Client) CancelAuditTaskRequest(input *CancelAuditTaskInput) CancelAudit
 // CancelAuditTask API operation.
 type CancelAuditTaskRequest struct {
 	*aws.Request
-	Input *CancelAuditTaskInput
-	Copy  func(*CancelAuditTaskInput) CancelAuditTaskRequest
+	Input *types.CancelAuditTaskInput
+	Copy  func(*types.CancelAuditTaskInput) CancelAuditTaskRequest
 }
 
 // Send marshals and sends the CancelAuditTask API request.
@@ -116,7 +56,7 @@ func (r CancelAuditTaskRequest) Send(ctx context.Context) (*CancelAuditTaskRespo
 	}
 
 	resp := &CancelAuditTaskResponse{
-		CancelAuditTaskOutput: r.Request.Data.(*CancelAuditTaskOutput),
+		CancelAuditTaskOutput: r.Request.Data.(*types.CancelAuditTaskOutput),
 		response:              &aws.Response{Request: r.Request},
 	}
 
@@ -126,7 +66,7 @@ func (r CancelAuditTaskRequest) Send(ctx context.Context) (*CancelAuditTaskRespo
 // CancelAuditTaskResponse is the response type for the
 // CancelAuditTask API operation.
 type CancelAuditTaskResponse struct {
-	*CancelAuditTaskOutput
+	*types.CancelAuditTaskOutput
 
 	response *aws.Response
 }

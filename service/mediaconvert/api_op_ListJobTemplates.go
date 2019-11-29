@@ -6,134 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/mediaconvert/types"
 )
-
-// You can send list job templates requests with an empty body. Optionally,
-// you can filter the response by category by specifying it in your request
-// body. You can also optionally specify the maximum number, up to twenty, of
-// job templates to be returned.
-type ListJobTemplatesInput struct {
-	_ struct{} `type:"structure"`
-
-	// Optionally, specify a job template category to limit responses to only job
-	// templates from that category.
-	Category *string `location:"querystring" locationName:"category" type:"string"`
-
-	// Optional. When you request a list of job templates, you can choose to list
-	// them alphabetically by NAME or chronologically by CREATION_DATE. If you don't
-	// specify, the service will list them by name.
-	ListBy JobTemplateListBy `location:"querystring" locationName:"listBy" type:"string" enum:"true"`
-
-	// Optional. Number of job templates, up to twenty, that will be returned at
-	// one time.
-	MaxResults *int64 `location:"querystring" locationName:"maxResults" min:"1" type:"integer"`
-
-	// Use this string, provided with the response to a previous request, to request
-	// the next batch of job templates.
-	NextToken *string `location:"querystring" locationName:"nextToken" type:"string"`
-
-	// When you request lists of resources, you can optionally specify whether they
-	// are sorted in ASCENDING or DESCENDING order. Default varies by resource.
-	Order Order `location:"querystring" locationName:"order" type:"string" enum:"true"`
-}
-
-// String returns the string representation
-func (s ListJobTemplatesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListJobTemplatesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListJobTemplatesInput"}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListJobTemplatesInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.Category != nil {
-		v := *s.Category
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "category", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if len(s.ListBy) > 0 {
-		v := s.ListBy
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "listBy", protocol.QuotedValue{ValueMarshaler: v}, metadata)
-	}
-	if s.MaxResults != nil {
-		v := *s.MaxResults
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "maxResults", protocol.Int64Value(v), metadata)
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if len(s.Order) > 0 {
-		v := s.Order
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "order", protocol.QuotedValue{ValueMarshaler: v}, metadata)
-	}
-	return nil
-}
-
-// Successful list job templates requests return a JSON array of job templates.
-// If you don't specify how they are ordered, you will receive them in alphabetical
-// order by name.
-type ListJobTemplatesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// List of Job templates.
-	JobTemplates []JobTemplate `locationName:"jobTemplates" type:"list"`
-
-	// Use this string to request the next batch of job templates.
-	NextToken *string `locationName:"nextToken" type:"string"`
-}
-
-// String returns the string representation
-func (s ListJobTemplatesOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListJobTemplatesOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.JobTemplates != nil {
-		v := s.JobTemplates
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "jobTemplates", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opListJobTemplates = "ListJobTemplates"
 
@@ -152,7 +26,7 @@ const opListJobTemplates = "ListJobTemplates"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/ListJobTemplates
-func (c *Client) ListJobTemplatesRequest(input *ListJobTemplatesInput) ListJobTemplatesRequest {
+func (c *Client) ListJobTemplatesRequest(input *types.ListJobTemplatesInput) ListJobTemplatesRequest {
 	op := &aws.Operation{
 		Name:       opListJobTemplates,
 		HTTPMethod: "GET",
@@ -166,10 +40,10 @@ func (c *Client) ListJobTemplatesRequest(input *ListJobTemplatesInput) ListJobTe
 	}
 
 	if input == nil {
-		input = &ListJobTemplatesInput{}
+		input = &types.ListJobTemplatesInput{}
 	}
 
-	req := c.newRequest(op, input, &ListJobTemplatesOutput{})
+	req := c.newRequest(op, input, &types.ListJobTemplatesOutput{})
 	return ListJobTemplatesRequest{Request: req, Input: input, Copy: c.ListJobTemplatesRequest}
 }
 
@@ -177,8 +51,8 @@ func (c *Client) ListJobTemplatesRequest(input *ListJobTemplatesInput) ListJobTe
 // ListJobTemplates API operation.
 type ListJobTemplatesRequest struct {
 	*aws.Request
-	Input *ListJobTemplatesInput
-	Copy  func(*ListJobTemplatesInput) ListJobTemplatesRequest
+	Input *types.ListJobTemplatesInput
+	Copy  func(*types.ListJobTemplatesInput) ListJobTemplatesRequest
 }
 
 // Send marshals and sends the ListJobTemplates API request.
@@ -190,7 +64,7 @@ func (r ListJobTemplatesRequest) Send(ctx context.Context) (*ListJobTemplatesRes
 	}
 
 	resp := &ListJobTemplatesResponse{
-		ListJobTemplatesOutput: r.Request.Data.(*ListJobTemplatesOutput),
+		ListJobTemplatesOutput: r.Request.Data.(*types.ListJobTemplatesOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -220,7 +94,7 @@ func NewListJobTemplatesPaginator(req ListJobTemplatesRequest) ListJobTemplatesP
 	return ListJobTemplatesPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListJobTemplatesInput
+				var inCpy *types.ListJobTemplatesInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -240,14 +114,14 @@ type ListJobTemplatesPaginator struct {
 	aws.Pager
 }
 
-func (p *ListJobTemplatesPaginator) CurrentPage() *ListJobTemplatesOutput {
-	return p.Pager.CurrentPage().(*ListJobTemplatesOutput)
+func (p *ListJobTemplatesPaginator) CurrentPage() *types.ListJobTemplatesOutput {
+	return p.Pager.CurrentPage().(*types.ListJobTemplatesOutput)
 }
 
 // ListJobTemplatesResponse is the response type for the
 // ListJobTemplates API operation.
 type ListJobTemplatesResponse struct {
-	*ListJobTemplatesOutput
+	*types.ListJobTemplatesOutput
 
 	response *aws.Response
 }

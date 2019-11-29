@@ -6,93 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/clouddirectory/types"
 )
-
-type UpdateSchemaInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the schema.
-	//
-	// Name is a required field
-	Name *string `min:"1" type:"string" required:"true"`
-
-	// The Amazon Resource Name (ARN) of the development schema. For more information,
-	// see arns.
-	//
-	// SchemaArn is a required field
-	SchemaArn *string `location:"header" locationName:"x-amz-data-partition" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s UpdateSchemaInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateSchemaInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateSchemaInput"}
-
-	if s.Name == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Name"))
-	}
-	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
-	}
-
-	if s.SchemaArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("SchemaArn"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s UpdateSchemaInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.Name != nil {
-		v := *s.Name
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "Name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.SchemaArn != nil {
-		v := *s.SchemaArn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "x-amz-data-partition", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type UpdateSchemaOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The ARN that is associated with the updated schema. For more information,
-	// see arns.
-	SchemaArn *string `type:"string"`
-}
-
-// String returns the string representation
-func (s UpdateSchemaOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s UpdateSchemaOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.SchemaArn != nil {
-		v := *s.SchemaArn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "SchemaArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opUpdateSchema = "UpdateSchema"
 
@@ -110,7 +25,7 @@ const opUpdateSchema = "UpdateSchema"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/UpdateSchema
-func (c *Client) UpdateSchemaRequest(input *UpdateSchemaInput) UpdateSchemaRequest {
+func (c *Client) UpdateSchemaRequest(input *types.UpdateSchemaInput) UpdateSchemaRequest {
 	op := &aws.Operation{
 		Name:       opUpdateSchema,
 		HTTPMethod: "PUT",
@@ -118,10 +33,10 @@ func (c *Client) UpdateSchemaRequest(input *UpdateSchemaInput) UpdateSchemaReque
 	}
 
 	if input == nil {
-		input = &UpdateSchemaInput{}
+		input = &types.UpdateSchemaInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateSchemaOutput{})
+	req := c.newRequest(op, input, &types.UpdateSchemaOutput{})
 	return UpdateSchemaRequest{Request: req, Input: input, Copy: c.UpdateSchemaRequest}
 }
 
@@ -129,8 +44,8 @@ func (c *Client) UpdateSchemaRequest(input *UpdateSchemaInput) UpdateSchemaReque
 // UpdateSchema API operation.
 type UpdateSchemaRequest struct {
 	*aws.Request
-	Input *UpdateSchemaInput
-	Copy  func(*UpdateSchemaInput) UpdateSchemaRequest
+	Input *types.UpdateSchemaInput
+	Copy  func(*types.UpdateSchemaInput) UpdateSchemaRequest
 }
 
 // Send marshals and sends the UpdateSchema API request.
@@ -142,7 +57,7 @@ func (r UpdateSchemaRequest) Send(ctx context.Context) (*UpdateSchemaResponse, e
 	}
 
 	resp := &UpdateSchemaResponse{
-		UpdateSchemaOutput: r.Request.Data.(*UpdateSchemaOutput),
+		UpdateSchemaOutput: r.Request.Data.(*types.UpdateSchemaOutput),
 		response:           &aws.Response{Request: r.Request},
 	}
 
@@ -152,7 +67,7 @@ func (r UpdateSchemaRequest) Send(ctx context.Context) (*UpdateSchemaResponse, e
 // UpdateSchemaResponse is the response type for the
 // UpdateSchema API operation.
 type UpdateSchemaResponse struct {
-	*UpdateSchemaOutput
+	*types.UpdateSchemaOutput
 
 	response *aws.Response
 }

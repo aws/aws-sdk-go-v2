@@ -6,69 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/directoryservice/types"
 )
-
-// Contains the inputs for the DisableSso operation.
-type DisableSsoInput struct {
-	_ struct{} `type:"structure"`
-
-	// The identifier of the directory for which to disable single-sign on.
-	//
-	// DirectoryId is a required field
-	DirectoryId *string `type:"string" required:"true"`
-
-	// The password of an alternate account to use to disable single-sign on. This
-	// is only used for AD Connector directories. For more information, see the
-	// UserName parameter.
-	Password *string `min:"1" type:"string" sensitive:"true"`
-
-	// The username of an alternate account to use to disable single-sign on. This
-	// is only used for AD Connector directories. This account must have privileges
-	// to remove a service principal name.
-	//
-	// If the AD Connector service account does not have privileges to remove a
-	// service principal name, you can specify an alternate account with the UserName
-	// and Password parameters. These credentials are only used to disable single
-	// sign-on and are not stored by the service. The AD Connector service account
-	// is not changed.
-	UserName *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s DisableSsoInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DisableSsoInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DisableSsoInput"}
-
-	if s.DirectoryId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DirectoryId"))
-	}
-	if s.Password != nil && len(*s.Password) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Password", 1))
-	}
-	if s.UserName != nil && len(*s.UserName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("UserName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Contains the results of the DisableSso operation.
-type DisableSsoOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DisableSsoOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDisableSso = "DisableSso"
 
@@ -85,7 +24,7 @@ const opDisableSso = "DisableSso"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DisableSso
-func (c *Client) DisableSsoRequest(input *DisableSsoInput) DisableSsoRequest {
+func (c *Client) DisableSsoRequest(input *types.DisableSsoInput) DisableSsoRequest {
 	op := &aws.Operation{
 		Name:       opDisableSso,
 		HTTPMethod: "POST",
@@ -93,10 +32,10 @@ func (c *Client) DisableSsoRequest(input *DisableSsoInput) DisableSsoRequest {
 	}
 
 	if input == nil {
-		input = &DisableSsoInput{}
+		input = &types.DisableSsoInput{}
 	}
 
-	req := c.newRequest(op, input, &DisableSsoOutput{})
+	req := c.newRequest(op, input, &types.DisableSsoOutput{})
 	return DisableSsoRequest{Request: req, Input: input, Copy: c.DisableSsoRequest}
 }
 
@@ -104,8 +43,8 @@ func (c *Client) DisableSsoRequest(input *DisableSsoInput) DisableSsoRequest {
 // DisableSso API operation.
 type DisableSsoRequest struct {
 	*aws.Request
-	Input *DisableSsoInput
-	Copy  func(*DisableSsoInput) DisableSsoRequest
+	Input *types.DisableSsoInput
+	Copy  func(*types.DisableSsoInput) DisableSsoRequest
 }
 
 // Send marshals and sends the DisableSso API request.
@@ -117,7 +56,7 @@ func (r DisableSsoRequest) Send(ctx context.Context) (*DisableSsoResponse, error
 	}
 
 	resp := &DisableSsoResponse{
-		DisableSsoOutput: r.Request.Data.(*DisableSsoOutput),
+		DisableSsoOutput: r.Request.Data.(*types.DisableSsoOutput),
 		response:         &aws.Response{Request: r.Request},
 	}
 
@@ -127,7 +66,7 @@ func (r DisableSsoRequest) Send(ctx context.Context) (*DisableSsoResponse, error
 // DisableSsoResponse is the response type for the
 // DisableSso API operation.
 type DisableSsoResponse struct {
-	*DisableSsoOutput
+	*types.DisableSsoOutput
 
 	response *aws.Response
 }

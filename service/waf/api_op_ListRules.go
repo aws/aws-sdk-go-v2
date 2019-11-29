@@ -6,60 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/waf/types"
 )
-
-type ListRulesInput struct {
-	_ struct{} `type:"structure"`
-
-	// Specifies the number of Rules that you want AWS WAF to return for this request.
-	// If you have more Rules than the number that you specify for Limit, the response
-	// includes a NextMarker value that you can use to get another batch of Rules.
-	Limit *int64 `type:"integer"`
-
-	// If you specify a value for Limit and you have more Rules than the value of
-	// Limit, AWS WAF returns a NextMarker value in the response that allows you
-	// to list another group of Rules. For the second and subsequent ListRules requests,
-	// specify the value of NextMarker from the previous response to get information
-	// about another batch of Rules.
-	NextMarker *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s ListRulesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListRulesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListRulesInput"}
-	if s.NextMarker != nil && len(*s.NextMarker) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("NextMarker", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ListRulesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// If you have more Rules than the number that you specified for Limit in the
-	// request, the response includes a NextMarker value. To list more Rules, submit
-	// another ListRules request, and specify the NextMarker value from the response
-	// in the NextMarker value in the next request.
-	NextMarker *string `min:"1" type:"string"`
-
-	// An array of RuleSummary objects.
-	Rules []RuleSummary `type:"list"`
-}
-
-// String returns the string representation
-func (s ListRulesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListRules = "ListRules"
 
@@ -76,7 +24,7 @@ const opListRules = "ListRules"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/ListRules
-func (c *Client) ListRulesRequest(input *ListRulesInput) ListRulesRequest {
+func (c *Client) ListRulesRequest(input *types.ListRulesInput) ListRulesRequest {
 	op := &aws.Operation{
 		Name:       opListRules,
 		HTTPMethod: "POST",
@@ -84,10 +32,10 @@ func (c *Client) ListRulesRequest(input *ListRulesInput) ListRulesRequest {
 	}
 
 	if input == nil {
-		input = &ListRulesInput{}
+		input = &types.ListRulesInput{}
 	}
 
-	req := c.newRequest(op, input, &ListRulesOutput{})
+	req := c.newRequest(op, input, &types.ListRulesOutput{})
 	return ListRulesRequest{Request: req, Input: input, Copy: c.ListRulesRequest}
 }
 
@@ -95,8 +43,8 @@ func (c *Client) ListRulesRequest(input *ListRulesInput) ListRulesRequest {
 // ListRules API operation.
 type ListRulesRequest struct {
 	*aws.Request
-	Input *ListRulesInput
-	Copy  func(*ListRulesInput) ListRulesRequest
+	Input *types.ListRulesInput
+	Copy  func(*types.ListRulesInput) ListRulesRequest
 }
 
 // Send marshals and sends the ListRules API request.
@@ -108,7 +56,7 @@ func (r ListRulesRequest) Send(ctx context.Context) (*ListRulesResponse, error) 
 	}
 
 	resp := &ListRulesResponse{
-		ListRulesOutput: r.Request.Data.(*ListRulesOutput),
+		ListRulesOutput: r.Request.Data.(*types.ListRulesOutput),
 		response:        &aws.Response{Request: r.Request},
 	}
 
@@ -118,7 +66,7 @@ func (r ListRulesRequest) Send(ctx context.Context) (*ListRulesResponse, error) 
 // ListRulesResponse is the response type for the
 // ListRules API operation.
 type ListRulesResponse struct {
-	*ListRulesOutput
+	*types.ListRulesOutput
 
 	response *aws.Response
 }

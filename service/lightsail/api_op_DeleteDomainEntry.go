@@ -6,58 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/lightsail/types"
 )
-
-type DeleteDomainEntryInput struct {
-	_ struct{} `type:"structure"`
-
-	// An array of key-value pairs containing information about your domain entries.
-	//
-	// DomainEntry is a required field
-	DomainEntry *DomainEntry `locationName:"domainEntry" type:"structure" required:"true"`
-
-	// The name of the domain entry to delete.
-	//
-	// DomainName is a required field
-	DomainName *string `locationName:"domainName" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteDomainEntryInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteDomainEntryInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteDomainEntryInput"}
-
-	if s.DomainEntry == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DomainEntry"))
-	}
-
-	if s.DomainName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DomainName"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteDomainEntryOutput struct {
-	_ struct{} `type:"structure"`
-
-	// An array of key-value pairs containing information about the results of your
-	// delete domain entry request.
-	Operation *Operation `locationName:"operation" type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteDomainEntryOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteDomainEntry = "DeleteDomainEntry"
 
@@ -78,7 +28,7 @@ const opDeleteDomainEntry = "DeleteDomainEntry"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/DeleteDomainEntry
-func (c *Client) DeleteDomainEntryRequest(input *DeleteDomainEntryInput) DeleteDomainEntryRequest {
+func (c *Client) DeleteDomainEntryRequest(input *types.DeleteDomainEntryInput) DeleteDomainEntryRequest {
 	op := &aws.Operation{
 		Name:       opDeleteDomainEntry,
 		HTTPMethod: "POST",
@@ -86,10 +36,10 @@ func (c *Client) DeleteDomainEntryRequest(input *DeleteDomainEntryInput) DeleteD
 	}
 
 	if input == nil {
-		input = &DeleteDomainEntryInput{}
+		input = &types.DeleteDomainEntryInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteDomainEntryOutput{})
+	req := c.newRequest(op, input, &types.DeleteDomainEntryOutput{})
 	return DeleteDomainEntryRequest{Request: req, Input: input, Copy: c.DeleteDomainEntryRequest}
 }
 
@@ -97,8 +47,8 @@ func (c *Client) DeleteDomainEntryRequest(input *DeleteDomainEntryInput) DeleteD
 // DeleteDomainEntry API operation.
 type DeleteDomainEntryRequest struct {
 	*aws.Request
-	Input *DeleteDomainEntryInput
-	Copy  func(*DeleteDomainEntryInput) DeleteDomainEntryRequest
+	Input *types.DeleteDomainEntryInput
+	Copy  func(*types.DeleteDomainEntryInput) DeleteDomainEntryRequest
 }
 
 // Send marshals and sends the DeleteDomainEntry API request.
@@ -110,7 +60,7 @@ func (r DeleteDomainEntryRequest) Send(ctx context.Context) (*DeleteDomainEntryR
 	}
 
 	resp := &DeleteDomainEntryResponse{
-		DeleteDomainEntryOutput: r.Request.Data.(*DeleteDomainEntryOutput),
+		DeleteDomainEntryOutput: r.Request.Data.(*types.DeleteDomainEntryOutput),
 		response:                &aws.Response{Request: r.Request},
 	}
 
@@ -120,7 +70,7 @@ func (r DeleteDomainEntryRequest) Send(ctx context.Context) (*DeleteDomainEntryR
 // DeleteDomainEntryResponse is the response type for the
 // DeleteDomainEntry API operation.
 type DeleteDomainEntryResponse struct {
-	*DeleteDomainEntryOutput
+	*types.DeleteDomainEntryOutput
 
 	response *aws.Response
 }

@@ -6,110 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/personalizeruntime/types"
 )
-
-type GetRecommendationsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the campaign to use for getting recommendations.
-	//
-	// CampaignArn is a required field
-	CampaignArn *string `locationName:"campaignArn" type:"string" required:"true"`
-
-	// The item ID to provide recommendations for.
-	//
-	// Required for RELATED_ITEMS recipe type.
-	ItemId *string `locationName:"itemId" type:"string"`
-
-	// The number of results to return. The default is 25. The maximum is 100.
-	NumResults *int64 `locationName:"numResults" type:"integer"`
-
-	// The user ID to provide recommendations for.
-	//
-	// Required for USER_PERSONALIZATION recipe type.
-	UserId *string `locationName:"userId" type:"string"`
-}
-
-// String returns the string representation
-func (s GetRecommendationsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetRecommendationsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetRecommendationsInput"}
-
-	if s.CampaignArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("CampaignArn"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetRecommendationsInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.CampaignArn != nil {
-		v := *s.CampaignArn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "campaignArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.ItemId != nil {
-		v := *s.ItemId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "itemId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.NumResults != nil {
-		v := *s.NumResults
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "numResults", protocol.Int64Value(v), metadata)
-	}
-	if s.UserId != nil {
-		v := *s.UserId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "userId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type GetRecommendationsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A list of recommendations.
-	ItemList []PredictedItem `locationName:"itemList" type:"list"`
-}
-
-// String returns the string representation
-func (s GetRecommendationsOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetRecommendationsOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.ItemList != nil {
-		v := s.ItemList
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "itemList", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	return nil
-}
 
 const opGetRecommendations = "GetRecommendations"
 
@@ -134,7 +32,7 @@ const opGetRecommendations = "GetRecommendations"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/personalize-runtime-2018-05-22/GetRecommendations
-func (c *Client) GetRecommendationsRequest(input *GetRecommendationsInput) GetRecommendationsRequest {
+func (c *Client) GetRecommendationsRequest(input *types.GetRecommendationsInput) GetRecommendationsRequest {
 	op := &aws.Operation{
 		Name:       opGetRecommendations,
 		HTTPMethod: "POST",
@@ -142,10 +40,10 @@ func (c *Client) GetRecommendationsRequest(input *GetRecommendationsInput) GetRe
 	}
 
 	if input == nil {
-		input = &GetRecommendationsInput{}
+		input = &types.GetRecommendationsInput{}
 	}
 
-	req := c.newRequest(op, input, &GetRecommendationsOutput{})
+	req := c.newRequest(op, input, &types.GetRecommendationsOutput{})
 	return GetRecommendationsRequest{Request: req, Input: input, Copy: c.GetRecommendationsRequest}
 }
 
@@ -153,8 +51,8 @@ func (c *Client) GetRecommendationsRequest(input *GetRecommendationsInput) GetRe
 // GetRecommendations API operation.
 type GetRecommendationsRequest struct {
 	*aws.Request
-	Input *GetRecommendationsInput
-	Copy  func(*GetRecommendationsInput) GetRecommendationsRequest
+	Input *types.GetRecommendationsInput
+	Copy  func(*types.GetRecommendationsInput) GetRecommendationsRequest
 }
 
 // Send marshals and sends the GetRecommendations API request.
@@ -166,7 +64,7 @@ func (r GetRecommendationsRequest) Send(ctx context.Context) (*GetRecommendation
 	}
 
 	resp := &GetRecommendationsResponse{
-		GetRecommendationsOutput: r.Request.Data.(*GetRecommendationsOutput),
+		GetRecommendationsOutput: r.Request.Data.(*types.GetRecommendationsOutput),
 		response:                 &aws.Response{Request: r.Request},
 	}
 
@@ -176,7 +74,7 @@ func (r GetRecommendationsRequest) Send(ctx context.Context) (*GetRecommendation
 // GetRecommendationsResponse is the response type for the
 // GetRecommendations API operation.
 type GetRecommendationsResponse struct {
-	*GetRecommendationsOutput
+	*types.GetRecommendationsOutput
 
 	response *aws.Response
 }

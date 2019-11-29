@@ -6,55 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
+	"github.com/aws/aws-sdk-go-v2/service/opsworks/types"
 )
-
-type StopInstanceInput struct {
-	_ struct{} `type:"structure"`
-
-	// Specifies whether to force an instance to stop. If the instance's root device
-	// type is ebs, or EBS-backed, adding the Force parameter to the StopInstances
-	// API call disassociates the AWS OpsWorks Stacks instance from EC2, and forces
-	// deletion of only the OpsWorks Stacks instance. You must also delete the formerly-associated
-	// instance in EC2 after troubleshooting and replacing the AWS OpsWorks Stacks
-	// instance with a new one.
-	Force *bool `type:"boolean"`
-
-	// The instance ID.
-	//
-	// InstanceId is a required field
-	InstanceId *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s StopInstanceInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *StopInstanceInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "StopInstanceInput"}
-
-	if s.InstanceId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("InstanceId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type StopInstanceOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s StopInstanceOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opStopInstance = "StopInstance"
 
@@ -79,7 +34,7 @@ const opStopInstance = "StopInstance"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/StopInstance
-func (c *Client) StopInstanceRequest(input *StopInstanceInput) StopInstanceRequest {
+func (c *Client) StopInstanceRequest(input *types.StopInstanceInput) StopInstanceRequest {
 	op := &aws.Operation{
 		Name:       opStopInstance,
 		HTTPMethod: "POST",
@@ -87,10 +42,10 @@ func (c *Client) StopInstanceRequest(input *StopInstanceInput) StopInstanceReque
 	}
 
 	if input == nil {
-		input = &StopInstanceInput{}
+		input = &types.StopInstanceInput{}
 	}
 
-	req := c.newRequest(op, input, &StopInstanceOutput{})
+	req := c.newRequest(op, input, &types.StopInstanceOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return StopInstanceRequest{Request: req, Input: input, Copy: c.StopInstanceRequest}
@@ -100,8 +55,8 @@ func (c *Client) StopInstanceRequest(input *StopInstanceInput) StopInstanceReque
 // StopInstance API operation.
 type StopInstanceRequest struct {
 	*aws.Request
-	Input *StopInstanceInput
-	Copy  func(*StopInstanceInput) StopInstanceRequest
+	Input *types.StopInstanceInput
+	Copy  func(*types.StopInstanceInput) StopInstanceRequest
 }
 
 // Send marshals and sends the StopInstance API request.
@@ -113,7 +68,7 @@ func (r StopInstanceRequest) Send(ctx context.Context) (*StopInstanceResponse, e
 	}
 
 	resp := &StopInstanceResponse{
-		StopInstanceOutput: r.Request.Data.(*StopInstanceOutput),
+		StopInstanceOutput: r.Request.Data.(*types.StopInstanceOutput),
 		response:           &aws.Response{Request: r.Request},
 	}
 
@@ -123,7 +78,7 @@ func (r StopInstanceRequest) Send(ctx context.Context) (*StopInstanceResponse, e
 // StopInstanceResponse is the response type for the
 // StopInstance API operation.
 type StopInstanceResponse struct {
-	*StopInstanceOutput
+	*types.StopInstanceOutput
 
 	response *aws.Response
 }

@@ -6,63 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/kinesisanalyticsv2/types"
 )
-
-type StartApplicationInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the application.
-	//
-	// ApplicationName is a required field
-	ApplicationName *string `min:"1" type:"string" required:"true"`
-
-	// Identifies the run configuration (start parameters) of a Kinesis Data Analytics
-	// application.
-	//
-	// RunConfiguration is a required field
-	RunConfiguration *RunConfiguration `type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s StartApplicationInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *StartApplicationInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "StartApplicationInput"}
-
-	if s.ApplicationName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ApplicationName"))
-	}
-	if s.ApplicationName != nil && len(*s.ApplicationName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ApplicationName", 1))
-	}
-
-	if s.RunConfiguration == nil {
-		invalidParams.Add(aws.NewErrParamRequired("RunConfiguration"))
-	}
-	if s.RunConfiguration != nil {
-		if err := s.RunConfiguration.Validate(); err != nil {
-			invalidParams.AddNested("RunConfiguration", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type StartApplicationOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s StartApplicationOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opStartApplication = "StartApplication"
 
@@ -80,7 +25,7 @@ const opStartApplication = "StartApplication"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/StartApplication
-func (c *Client) StartApplicationRequest(input *StartApplicationInput) StartApplicationRequest {
+func (c *Client) StartApplicationRequest(input *types.StartApplicationInput) StartApplicationRequest {
 	op := &aws.Operation{
 		Name:       opStartApplication,
 		HTTPMethod: "POST",
@@ -88,10 +33,10 @@ func (c *Client) StartApplicationRequest(input *StartApplicationInput) StartAppl
 	}
 
 	if input == nil {
-		input = &StartApplicationInput{}
+		input = &types.StartApplicationInput{}
 	}
 
-	req := c.newRequest(op, input, &StartApplicationOutput{})
+	req := c.newRequest(op, input, &types.StartApplicationOutput{})
 	return StartApplicationRequest{Request: req, Input: input, Copy: c.StartApplicationRequest}
 }
 
@@ -99,8 +44,8 @@ func (c *Client) StartApplicationRequest(input *StartApplicationInput) StartAppl
 // StartApplication API operation.
 type StartApplicationRequest struct {
 	*aws.Request
-	Input *StartApplicationInput
-	Copy  func(*StartApplicationInput) StartApplicationRequest
+	Input *types.StartApplicationInput
+	Copy  func(*types.StartApplicationInput) StartApplicationRequest
 }
 
 // Send marshals and sends the StartApplication API request.
@@ -112,7 +57,7 @@ func (r StartApplicationRequest) Send(ctx context.Context) (*StartApplicationRes
 	}
 
 	resp := &StartApplicationResponse{
-		StartApplicationOutput: r.Request.Data.(*StartApplicationOutput),
+		StartApplicationOutput: r.Request.Data.(*types.StartApplicationOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -122,7 +67,7 @@ func (r StartApplicationRequest) Send(ctx context.Context) (*StartApplicationRes
 // StartApplicationResponse is the response type for the
 // StartApplication API operation.
 type StartApplicationResponse struct {
-	*StartApplicationOutput
+	*types.StartApplicationOutput
 
 	response *aws.Response
 }

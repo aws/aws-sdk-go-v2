@@ -6,89 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/rds/types"
 )
-
-type CreateOptionGroupInput struct {
-	_ struct{} `type:"structure"`
-
-	// Specifies the name of the engine that this option group should be associated
-	// with.
-	//
-	// EngineName is a required field
-	EngineName *string `type:"string" required:"true"`
-
-	// Specifies the major version of the engine that this option group should be
-	// associated with.
-	//
-	// MajorEngineVersion is a required field
-	MajorEngineVersion *string `type:"string" required:"true"`
-
-	// The description of the option group.
-	//
-	// OptionGroupDescription is a required field
-	OptionGroupDescription *string `type:"string" required:"true"`
-
-	// Specifies the name of the option group to be created.
-	//
-	// Constraints:
-	//
-	//    * Must be 1 to 255 letters, numbers, or hyphens
-	//
-	//    * First character must be a letter
-	//
-	//    * Can't end with a hyphen or contain two consecutive hyphens
-	//
-	// Example: myoptiongroup
-	//
-	// OptionGroupName is a required field
-	OptionGroupName *string `type:"string" required:"true"`
-
-	// Tags to assign to the option group.
-	Tags []Tag `locationNameList:"Tag" type:"list"`
-}
-
-// String returns the string representation
-func (s CreateOptionGroupInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateOptionGroupInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateOptionGroupInput"}
-
-	if s.EngineName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("EngineName"))
-	}
-
-	if s.MajorEngineVersion == nil {
-		invalidParams.Add(aws.NewErrParamRequired("MajorEngineVersion"))
-	}
-
-	if s.OptionGroupDescription == nil {
-		invalidParams.Add(aws.NewErrParamRequired("OptionGroupDescription"))
-	}
-
-	if s.OptionGroupName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("OptionGroupName"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type CreateOptionGroupOutput struct {
-	_ struct{} `type:"structure"`
-
-	OptionGroup *OptionGroup `type:"structure"`
-}
-
-// String returns the string representation
-func (s CreateOptionGroupOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCreateOptionGroup = "CreateOptionGroup"
 
@@ -105,7 +24,7 @@ const opCreateOptionGroup = "CreateOptionGroup"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateOptionGroup
-func (c *Client) CreateOptionGroupRequest(input *CreateOptionGroupInput) CreateOptionGroupRequest {
+func (c *Client) CreateOptionGroupRequest(input *types.CreateOptionGroupInput) CreateOptionGroupRequest {
 	op := &aws.Operation{
 		Name:       opCreateOptionGroup,
 		HTTPMethod: "POST",
@@ -113,10 +32,10 @@ func (c *Client) CreateOptionGroupRequest(input *CreateOptionGroupInput) CreateO
 	}
 
 	if input == nil {
-		input = &CreateOptionGroupInput{}
+		input = &types.CreateOptionGroupInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateOptionGroupOutput{})
+	req := c.newRequest(op, input, &types.CreateOptionGroupOutput{})
 	return CreateOptionGroupRequest{Request: req, Input: input, Copy: c.CreateOptionGroupRequest}
 }
 
@@ -124,8 +43,8 @@ func (c *Client) CreateOptionGroupRequest(input *CreateOptionGroupInput) CreateO
 // CreateOptionGroup API operation.
 type CreateOptionGroupRequest struct {
 	*aws.Request
-	Input *CreateOptionGroupInput
-	Copy  func(*CreateOptionGroupInput) CreateOptionGroupRequest
+	Input *types.CreateOptionGroupInput
+	Copy  func(*types.CreateOptionGroupInput) CreateOptionGroupRequest
 }
 
 // Send marshals and sends the CreateOptionGroup API request.
@@ -137,7 +56,7 @@ func (r CreateOptionGroupRequest) Send(ctx context.Context) (*CreateOptionGroupR
 	}
 
 	resp := &CreateOptionGroupResponse{
-		CreateOptionGroupOutput: r.Request.Data.(*CreateOptionGroupOutput),
+		CreateOptionGroupOutput: r.Request.Data.(*types.CreateOptionGroupOutput),
 		response:                &aws.Response{Request: r.Request},
 	}
 
@@ -147,7 +66,7 @@ func (r CreateOptionGroupRequest) Send(ctx context.Context) (*CreateOptionGroupR
 // CreateOptionGroupResponse is the response type for the
 // CreateOptionGroup API operation.
 type CreateOptionGroupResponse struct {
-	*CreateOptionGroupOutput
+	*types.CreateOptionGroupOutput
 
 	response *aws.Response
 }

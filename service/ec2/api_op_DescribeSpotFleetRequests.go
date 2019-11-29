@@ -6,52 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-// Contains the parameters for DescribeSpotFleetRequests.
-type DescribeSpotFleetRequestsInput struct {
-	_ struct{} `type:"structure"`
-
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have
-	// the required permissions, the error response is DryRunOperation. Otherwise,
-	// it is UnauthorizedOperation.
-	DryRun *bool `locationName:"dryRun" type:"boolean"`
-
-	// The maximum number of results to return in a single call. Specify a value
-	// between 1 and 1000. The default value is 1000. To retrieve the remaining
-	// results, make another call with the returned NextToken value.
-	MaxResults *int64 `locationName:"maxResults" type:"integer"`
-
-	// The token for the next set of results.
-	NextToken *string `locationName:"nextToken" type:"string"`
-
-	// The IDs of the Spot Fleet requests.
-	SpotFleetRequestIds []string `locationName:"spotFleetRequestId" locationNameList:"item" type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeSpotFleetRequestsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Contains the output of DescribeSpotFleetRequests.
-type DescribeSpotFleetRequestsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The token required to retrieve the next set of results. This value is null
-	// when there are no more results to return.
-	NextToken *string `locationName:"nextToken" type:"string"`
-
-	// Information about the configuration of your Spot Fleet.
-	SpotFleetRequestConfigs []SpotFleetRequestConfig `locationName:"spotFleetRequestConfigSet" locationNameList:"item" type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeSpotFleetRequestsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeSpotFleetRequests = "DescribeSpotFleetRequests"
 
@@ -71,7 +27,7 @@ const opDescribeSpotFleetRequests = "DescribeSpotFleetRequests"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeSpotFleetRequests
-func (c *Client) DescribeSpotFleetRequestsRequest(input *DescribeSpotFleetRequestsInput) DescribeSpotFleetRequestsRequest {
+func (c *Client) DescribeSpotFleetRequestsRequest(input *types.DescribeSpotFleetRequestsInput) DescribeSpotFleetRequestsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeSpotFleetRequests,
 		HTTPMethod: "POST",
@@ -85,10 +41,10 @@ func (c *Client) DescribeSpotFleetRequestsRequest(input *DescribeSpotFleetReques
 	}
 
 	if input == nil {
-		input = &DescribeSpotFleetRequestsInput{}
+		input = &types.DescribeSpotFleetRequestsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeSpotFleetRequestsOutput{})
+	req := c.newRequest(op, input, &types.DescribeSpotFleetRequestsOutput{})
 	return DescribeSpotFleetRequestsRequest{Request: req, Input: input, Copy: c.DescribeSpotFleetRequestsRequest}
 }
 
@@ -96,8 +52,8 @@ func (c *Client) DescribeSpotFleetRequestsRequest(input *DescribeSpotFleetReques
 // DescribeSpotFleetRequests API operation.
 type DescribeSpotFleetRequestsRequest struct {
 	*aws.Request
-	Input *DescribeSpotFleetRequestsInput
-	Copy  func(*DescribeSpotFleetRequestsInput) DescribeSpotFleetRequestsRequest
+	Input *types.DescribeSpotFleetRequestsInput
+	Copy  func(*types.DescribeSpotFleetRequestsInput) DescribeSpotFleetRequestsRequest
 }
 
 // Send marshals and sends the DescribeSpotFleetRequests API request.
@@ -109,7 +65,7 @@ func (r DescribeSpotFleetRequestsRequest) Send(ctx context.Context) (*DescribeSp
 	}
 
 	resp := &DescribeSpotFleetRequestsResponse{
-		DescribeSpotFleetRequestsOutput: r.Request.Data.(*DescribeSpotFleetRequestsOutput),
+		DescribeSpotFleetRequestsOutput: r.Request.Data.(*types.DescribeSpotFleetRequestsOutput),
 		response:                        &aws.Response{Request: r.Request},
 	}
 
@@ -139,7 +95,7 @@ func NewDescribeSpotFleetRequestsPaginator(req DescribeSpotFleetRequestsRequest)
 	return DescribeSpotFleetRequestsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *DescribeSpotFleetRequestsInput
+				var inCpy *types.DescribeSpotFleetRequestsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -159,14 +115,14 @@ type DescribeSpotFleetRequestsPaginator struct {
 	aws.Pager
 }
 
-func (p *DescribeSpotFleetRequestsPaginator) CurrentPage() *DescribeSpotFleetRequestsOutput {
-	return p.Pager.CurrentPage().(*DescribeSpotFleetRequestsOutput)
+func (p *DescribeSpotFleetRequestsPaginator) CurrentPage() *types.DescribeSpotFleetRequestsOutput {
+	return p.Pager.CurrentPage().(*types.DescribeSpotFleetRequestsOutput)
 }
 
 // DescribeSpotFleetRequestsResponse is the response type for the
 // DescribeSpotFleetRequests API operation.
 type DescribeSpotFleetRequestsResponse struct {
-	*DescribeSpotFleetRequestsOutput
+	*types.DescribeSpotFleetRequestsOutput
 
 	response *aws.Response
 }

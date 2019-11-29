@@ -6,75 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/cloudwatchlogs/types"
 )
-
-type DescribeSubscriptionFiltersInput struct {
-	_ struct{} `type:"structure"`
-
-	// The prefix to match. If you don't specify a value, no prefix filter is applied.
-	FilterNamePrefix *string `locationName:"filterNamePrefix" min:"1" type:"string"`
-
-	// The maximum number of items returned. If you don't specify a value, the default
-	// is up to 50 items.
-	Limit *int64 `locationName:"limit" min:"1" type:"integer"`
-
-	// The name of the log group.
-	//
-	// LogGroupName is a required field
-	LogGroupName *string `locationName:"logGroupName" min:"1" type:"string" required:"true"`
-
-	// The token for the next set of items to return. (You received this token from
-	// a previous call.)
-	NextToken *string `locationName:"nextToken" min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeSubscriptionFiltersInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeSubscriptionFiltersInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeSubscriptionFiltersInput"}
-	if s.FilterNamePrefix != nil && len(*s.FilterNamePrefix) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("FilterNamePrefix", 1))
-	}
-	if s.Limit != nil && *s.Limit < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("Limit", 1))
-	}
-
-	if s.LogGroupName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("LogGroupName"))
-	}
-	if s.LogGroupName != nil && len(*s.LogGroupName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("LogGroupName", 1))
-	}
-	if s.NextToken != nil && len(*s.NextToken) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribeSubscriptionFiltersOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The token for the next set of items to return. The token expires after 24
-	// hours.
-	NextToken *string `locationName:"nextToken" min:"1" type:"string"`
-
-	// The subscription filters.
-	SubscriptionFilters []SubscriptionFilter `locationName:"subscriptionFilters" type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeSubscriptionFiltersOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeSubscriptionFilters = "DescribeSubscriptionFilters"
 
@@ -93,7 +26,7 @@ const opDescribeSubscriptionFilters = "DescribeSubscriptionFilters"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/DescribeSubscriptionFilters
-func (c *Client) DescribeSubscriptionFiltersRequest(input *DescribeSubscriptionFiltersInput) DescribeSubscriptionFiltersRequest {
+func (c *Client) DescribeSubscriptionFiltersRequest(input *types.DescribeSubscriptionFiltersInput) DescribeSubscriptionFiltersRequest {
 	op := &aws.Operation{
 		Name:       opDescribeSubscriptionFilters,
 		HTTPMethod: "POST",
@@ -107,10 +40,10 @@ func (c *Client) DescribeSubscriptionFiltersRequest(input *DescribeSubscriptionF
 	}
 
 	if input == nil {
-		input = &DescribeSubscriptionFiltersInput{}
+		input = &types.DescribeSubscriptionFiltersInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeSubscriptionFiltersOutput{})
+	req := c.newRequest(op, input, &types.DescribeSubscriptionFiltersOutput{})
 	return DescribeSubscriptionFiltersRequest{Request: req, Input: input, Copy: c.DescribeSubscriptionFiltersRequest}
 }
 
@@ -118,8 +51,8 @@ func (c *Client) DescribeSubscriptionFiltersRequest(input *DescribeSubscriptionF
 // DescribeSubscriptionFilters API operation.
 type DescribeSubscriptionFiltersRequest struct {
 	*aws.Request
-	Input *DescribeSubscriptionFiltersInput
-	Copy  func(*DescribeSubscriptionFiltersInput) DescribeSubscriptionFiltersRequest
+	Input *types.DescribeSubscriptionFiltersInput
+	Copy  func(*types.DescribeSubscriptionFiltersInput) DescribeSubscriptionFiltersRequest
 }
 
 // Send marshals and sends the DescribeSubscriptionFilters API request.
@@ -131,7 +64,7 @@ func (r DescribeSubscriptionFiltersRequest) Send(ctx context.Context) (*Describe
 	}
 
 	resp := &DescribeSubscriptionFiltersResponse{
-		DescribeSubscriptionFiltersOutput: r.Request.Data.(*DescribeSubscriptionFiltersOutput),
+		DescribeSubscriptionFiltersOutput: r.Request.Data.(*types.DescribeSubscriptionFiltersOutput),
 		response:                          &aws.Response{Request: r.Request},
 	}
 
@@ -161,7 +94,7 @@ func NewDescribeSubscriptionFiltersPaginator(req DescribeSubscriptionFiltersRequ
 	return DescribeSubscriptionFiltersPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *DescribeSubscriptionFiltersInput
+				var inCpy *types.DescribeSubscriptionFiltersInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -181,14 +114,14 @@ type DescribeSubscriptionFiltersPaginator struct {
 	aws.Pager
 }
 
-func (p *DescribeSubscriptionFiltersPaginator) CurrentPage() *DescribeSubscriptionFiltersOutput {
-	return p.Pager.CurrentPage().(*DescribeSubscriptionFiltersOutput)
+func (p *DescribeSubscriptionFiltersPaginator) CurrentPage() *types.DescribeSubscriptionFiltersOutput {
+	return p.Pager.CurrentPage().(*types.DescribeSubscriptionFiltersOutput)
 }
 
 // DescribeSubscriptionFiltersResponse is the response type for the
 // DescribeSubscriptionFilters API operation.
 type DescribeSubscriptionFiltersResponse struct {
-	*DescribeSubscriptionFiltersOutput
+	*types.DescribeSubscriptionFiltersOutput
 
 	response *aws.Response
 }

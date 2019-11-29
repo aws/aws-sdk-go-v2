@@ -6,114 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/restjson"
+	"github.com/aws/aws-sdk-go-v2/service/workdocs/types"
 )
-
-type UpdateDocumentInput struct {
-	_ struct{} `type:"structure"`
-
-	// Amazon WorkDocs authentication token. Do not set this field when using administrative
-	// API actions, as in accessing the API using AWS credentials.
-	AuthenticationToken *string `location:"header" locationName:"Authentication" min:"1" type:"string" sensitive:"true"`
-
-	// The ID of the document.
-	//
-	// DocumentId is a required field
-	DocumentId *string `location:"uri" locationName:"DocumentId" min:"1" type:"string" required:"true"`
-
-	// The name of the document.
-	Name *string `min:"1" type:"string"`
-
-	// The ID of the parent folder.
-	ParentFolderId *string `min:"1" type:"string"`
-
-	// The resource state of the document. Only ACTIVE and RECYCLED are supported.
-	ResourceState ResourceStateType `type:"string" enum:"true"`
-}
-
-// String returns the string representation
-func (s UpdateDocumentInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateDocumentInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateDocumentInput"}
-	if s.AuthenticationToken != nil && len(*s.AuthenticationToken) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("AuthenticationToken", 1))
-	}
-
-	if s.DocumentId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DocumentId"))
-	}
-	if s.DocumentId != nil && len(*s.DocumentId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("DocumentId", 1))
-	}
-	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
-	}
-	if s.ParentFolderId != nil && len(*s.ParentFolderId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ParentFolderId", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s UpdateDocumentInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.Name != nil {
-		v := *s.Name
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "Name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.ParentFolderId != nil {
-		v := *s.ParentFolderId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "ParentFolderId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if len(s.ResourceState) > 0 {
-		v := s.ResourceState
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "ResourceState", protocol.QuotedValue{ValueMarshaler: v}, metadata)
-	}
-	if s.AuthenticationToken != nil {
-		v := *s.AuthenticationToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "Authentication", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.DocumentId != nil {
-		v := *s.DocumentId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "DocumentId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type UpdateDocumentOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s UpdateDocumentOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s UpdateDocumentOutput) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
 
 const opUpdateDocument = "UpdateDocument"
 
@@ -131,7 +27,7 @@ const opUpdateDocument = "UpdateDocument"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/UpdateDocument
-func (c *Client) UpdateDocumentRequest(input *UpdateDocumentInput) UpdateDocumentRequest {
+func (c *Client) UpdateDocumentRequest(input *types.UpdateDocumentInput) UpdateDocumentRequest {
 	op := &aws.Operation{
 		Name:       opUpdateDocument,
 		HTTPMethod: "PATCH",
@@ -139,10 +35,10 @@ func (c *Client) UpdateDocumentRequest(input *UpdateDocumentInput) UpdateDocumen
 	}
 
 	if input == nil {
-		input = &UpdateDocumentInput{}
+		input = &types.UpdateDocumentInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateDocumentOutput{})
+	req := c.newRequest(op, input, &types.UpdateDocumentOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return UpdateDocumentRequest{Request: req, Input: input, Copy: c.UpdateDocumentRequest}
@@ -152,8 +48,8 @@ func (c *Client) UpdateDocumentRequest(input *UpdateDocumentInput) UpdateDocumen
 // UpdateDocument API operation.
 type UpdateDocumentRequest struct {
 	*aws.Request
-	Input *UpdateDocumentInput
-	Copy  func(*UpdateDocumentInput) UpdateDocumentRequest
+	Input *types.UpdateDocumentInput
+	Copy  func(*types.UpdateDocumentInput) UpdateDocumentRequest
 }
 
 // Send marshals and sends the UpdateDocument API request.
@@ -165,7 +61,7 @@ func (r UpdateDocumentRequest) Send(ctx context.Context) (*UpdateDocumentRespons
 	}
 
 	resp := &UpdateDocumentResponse{
-		UpdateDocumentOutput: r.Request.Data.(*UpdateDocumentOutput),
+		UpdateDocumentOutput: r.Request.Data.(*types.UpdateDocumentOutput),
 		response:             &aws.Response{Request: r.Request},
 	}
 
@@ -175,7 +71,7 @@ func (r UpdateDocumentRequest) Send(ctx context.Context) (*UpdateDocumentRespons
 // UpdateDocumentResponse is the response type for the
 // UpdateDocument API operation.
 type UpdateDocumentResponse struct {
-	*UpdateDocumentOutput
+	*types.UpdateDocumentOutput
 
 	response *aws.Response
 }

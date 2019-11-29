@@ -4,64 +4,10 @@ package route53domains
 
 import (
 	"context"
-	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/route53domains/types"
 )
-
-// The ViewBilling request includes the following elements.
-type ViewBillingInput struct {
-	_ struct{} `type:"structure"`
-
-	// The end date and time for the time period for which you want a list of billing
-	// records. Specify the date and time in Coordinated Universal time (UTC).
-	End *time.Time `type:"timestamp"`
-
-	// For an initial request for a list of billing records, omit this element.
-	// If the number of billing records that are associated with the current AWS
-	// account during the specified period is greater than the value that you specified
-	// for MaxItems, you can use Marker to return additional billing records. Get
-	// the value of NextPageMarker from the previous response, and submit another
-	// request that includes the value of NextPageMarker in the Marker element.
-	//
-	// Constraints: The marker must match the value of NextPageMarker that was returned
-	// in the previous response.
-	Marker *string `type:"string"`
-
-	// The number of billing records to be returned.
-	//
-	// Default: 20
-	MaxItems *int64 `type:"integer"`
-
-	// The beginning date and time for the time period for which you want a list
-	// of billing records. Specify the date and time in Coordinated Universal time
-	// (UTC).
-	Start *time.Time `type:"timestamp"`
-}
-
-// String returns the string representation
-func (s ViewBillingInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// The ViewBilling response includes the following elements.
-type ViewBillingOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A summary of billing records.
-	BillingRecords []BillingRecord `type:"list"`
-
-	// If there are more billing records than you specified for MaxItems in the
-	// request, submit another request and include the value of NextPageMarker in
-	// the value of Marker.
-	NextPageMarker *string `type:"string"`
-}
-
-// String returns the string representation
-func (s ViewBillingOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opViewBilling = "ViewBilling"
 
@@ -79,7 +25,7 @@ const opViewBilling = "ViewBilling"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/ViewBilling
-func (c *Client) ViewBillingRequest(input *ViewBillingInput) ViewBillingRequest {
+func (c *Client) ViewBillingRequest(input *types.ViewBillingInput) ViewBillingRequest {
 	op := &aws.Operation{
 		Name:       opViewBilling,
 		HTTPMethod: "POST",
@@ -87,10 +33,10 @@ func (c *Client) ViewBillingRequest(input *ViewBillingInput) ViewBillingRequest 
 	}
 
 	if input == nil {
-		input = &ViewBillingInput{}
+		input = &types.ViewBillingInput{}
 	}
 
-	req := c.newRequest(op, input, &ViewBillingOutput{})
+	req := c.newRequest(op, input, &types.ViewBillingOutput{})
 	return ViewBillingRequest{Request: req, Input: input, Copy: c.ViewBillingRequest}
 }
 
@@ -98,8 +44,8 @@ func (c *Client) ViewBillingRequest(input *ViewBillingInput) ViewBillingRequest 
 // ViewBilling API operation.
 type ViewBillingRequest struct {
 	*aws.Request
-	Input *ViewBillingInput
-	Copy  func(*ViewBillingInput) ViewBillingRequest
+	Input *types.ViewBillingInput
+	Copy  func(*types.ViewBillingInput) ViewBillingRequest
 }
 
 // Send marshals and sends the ViewBilling API request.
@@ -111,7 +57,7 @@ func (r ViewBillingRequest) Send(ctx context.Context) (*ViewBillingResponse, err
 	}
 
 	resp := &ViewBillingResponse{
-		ViewBillingOutput: r.Request.Data.(*ViewBillingOutput),
+		ViewBillingOutput: r.Request.Data.(*types.ViewBillingOutput),
 		response:          &aws.Response{Request: r.Request},
 	}
 
@@ -121,7 +67,7 @@ func (r ViewBillingRequest) Send(ctx context.Context) (*ViewBillingResponse, err
 // ViewBillingResponse is the response type for the
 // ViewBilling API operation.
 type ViewBillingResponse struct {
-	*ViewBillingOutput
+	*types.ViewBillingOutput
 
 	response *aws.Response
 }

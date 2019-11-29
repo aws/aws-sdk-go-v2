@@ -6,65 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
+	"github.com/aws/aws-sdk-go-v2/service/servicediscovery/types"
 )
-
-type UpdateInstanceCustomHealthStatusInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the instance that you want to change the health status for.
-	//
-	// InstanceId is a required field
-	InstanceId *string `type:"string" required:"true"`
-
-	// The ID of the service that includes the configuration for the custom health
-	// check that you want to change the status for.
-	//
-	// ServiceId is a required field
-	ServiceId *string `type:"string" required:"true"`
-
-	// The new status of the instance, HEALTHY or UNHEALTHY.
-	//
-	// Status is a required field
-	Status CustomHealthStatus `type:"string" required:"true" enum:"true"`
-}
-
-// String returns the string representation
-func (s UpdateInstanceCustomHealthStatusInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateInstanceCustomHealthStatusInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateInstanceCustomHealthStatusInput"}
-
-	if s.InstanceId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("InstanceId"))
-	}
-
-	if s.ServiceId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ServiceId"))
-	}
-	if len(s.Status) == 0 {
-		invalidParams.Add(aws.NewErrParamRequired("Status"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type UpdateInstanceCustomHealthStatusOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s UpdateInstanceCustomHealthStatusOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opUpdateInstanceCustomHealthStatus = "UpdateInstanceCustomHealthStatus"
 
@@ -89,7 +34,7 @@ const opUpdateInstanceCustomHealthStatus = "UpdateInstanceCustomHealthStatus"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicediscovery-2017-03-14/UpdateInstanceCustomHealthStatus
-func (c *Client) UpdateInstanceCustomHealthStatusRequest(input *UpdateInstanceCustomHealthStatusInput) UpdateInstanceCustomHealthStatusRequest {
+func (c *Client) UpdateInstanceCustomHealthStatusRequest(input *types.UpdateInstanceCustomHealthStatusInput) UpdateInstanceCustomHealthStatusRequest {
 	op := &aws.Operation{
 		Name:       opUpdateInstanceCustomHealthStatus,
 		HTTPMethod: "POST",
@@ -97,10 +42,10 @@ func (c *Client) UpdateInstanceCustomHealthStatusRequest(input *UpdateInstanceCu
 	}
 
 	if input == nil {
-		input = &UpdateInstanceCustomHealthStatusInput{}
+		input = &types.UpdateInstanceCustomHealthStatusInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateInstanceCustomHealthStatusOutput{})
+	req := c.newRequest(op, input, &types.UpdateInstanceCustomHealthStatusOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return UpdateInstanceCustomHealthStatusRequest{Request: req, Input: input, Copy: c.UpdateInstanceCustomHealthStatusRequest}
@@ -110,8 +55,8 @@ func (c *Client) UpdateInstanceCustomHealthStatusRequest(input *UpdateInstanceCu
 // UpdateInstanceCustomHealthStatus API operation.
 type UpdateInstanceCustomHealthStatusRequest struct {
 	*aws.Request
-	Input *UpdateInstanceCustomHealthStatusInput
-	Copy  func(*UpdateInstanceCustomHealthStatusInput) UpdateInstanceCustomHealthStatusRequest
+	Input *types.UpdateInstanceCustomHealthStatusInput
+	Copy  func(*types.UpdateInstanceCustomHealthStatusInput) UpdateInstanceCustomHealthStatusRequest
 }
 
 // Send marshals and sends the UpdateInstanceCustomHealthStatus API request.
@@ -123,7 +68,7 @@ func (r UpdateInstanceCustomHealthStatusRequest) Send(ctx context.Context) (*Upd
 	}
 
 	resp := &UpdateInstanceCustomHealthStatusResponse{
-		UpdateInstanceCustomHealthStatusOutput: r.Request.Data.(*UpdateInstanceCustomHealthStatusOutput),
+		UpdateInstanceCustomHealthStatusOutput: r.Request.Data.(*types.UpdateInstanceCustomHealthStatusOutput),
 		response:                               &aws.Response{Request: r.Request},
 	}
 
@@ -133,7 +78,7 @@ func (r UpdateInstanceCustomHealthStatusRequest) Send(ctx context.Context) (*Upd
 // UpdateInstanceCustomHealthStatusResponse is the response type for the
 // UpdateInstanceCustomHealthStatus API operation.
 type UpdateInstanceCustomHealthStatusResponse struct {
-	*UpdateInstanceCustomHealthStatusOutput
+	*types.UpdateInstanceCustomHealthStatusOutput
 
 	response *aws.Response
 }

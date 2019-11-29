@@ -6,52 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/dax/types"
 )
-
-type CreateParameterGroupInput struct {
-	_ struct{} `type:"structure"`
-
-	// A description of the parameter group.
-	Description *string `type:"string"`
-
-	// The name of the parameter group to apply to all of the clusters in this replication
-	// group.
-	//
-	// ParameterGroupName is a required field
-	ParameterGroupName *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s CreateParameterGroupInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateParameterGroupInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateParameterGroupInput"}
-
-	if s.ParameterGroupName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ParameterGroupName"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type CreateParameterGroupOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Represents the output of a CreateParameterGroup action.
-	ParameterGroup *ParameterGroup `type:"structure"`
-}
-
-// String returns the string representation
-func (s CreateParameterGroupOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCreateParameterGroup = "CreateParameterGroup"
 
@@ -69,7 +25,7 @@ const opCreateParameterGroup = "CreateParameterGroup"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dax-2017-04-19/CreateParameterGroup
-func (c *Client) CreateParameterGroupRequest(input *CreateParameterGroupInput) CreateParameterGroupRequest {
+func (c *Client) CreateParameterGroupRequest(input *types.CreateParameterGroupInput) CreateParameterGroupRequest {
 	op := &aws.Operation{
 		Name:       opCreateParameterGroup,
 		HTTPMethod: "POST",
@@ -77,10 +33,10 @@ func (c *Client) CreateParameterGroupRequest(input *CreateParameterGroupInput) C
 	}
 
 	if input == nil {
-		input = &CreateParameterGroupInput{}
+		input = &types.CreateParameterGroupInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateParameterGroupOutput{})
+	req := c.newRequest(op, input, &types.CreateParameterGroupOutput{})
 	return CreateParameterGroupRequest{Request: req, Input: input, Copy: c.CreateParameterGroupRequest}
 }
 
@@ -88,8 +44,8 @@ func (c *Client) CreateParameterGroupRequest(input *CreateParameterGroupInput) C
 // CreateParameterGroup API operation.
 type CreateParameterGroupRequest struct {
 	*aws.Request
-	Input *CreateParameterGroupInput
-	Copy  func(*CreateParameterGroupInput) CreateParameterGroupRequest
+	Input *types.CreateParameterGroupInput
+	Copy  func(*types.CreateParameterGroupInput) CreateParameterGroupRequest
 }
 
 // Send marshals and sends the CreateParameterGroup API request.
@@ -101,7 +57,7 @@ func (r CreateParameterGroupRequest) Send(ctx context.Context) (*CreateParameter
 	}
 
 	resp := &CreateParameterGroupResponse{
-		CreateParameterGroupOutput: r.Request.Data.(*CreateParameterGroupOutput),
+		CreateParameterGroupOutput: r.Request.Data.(*types.CreateParameterGroupOutput),
 		response:                   &aws.Response{Request: r.Request},
 	}
 
@@ -111,7 +67,7 @@ func (r CreateParameterGroupRequest) Send(ctx context.Context) (*CreateParameter
 // CreateParameterGroupResponse is the response type for the
 // CreateParameterGroup API operation.
 type CreateParameterGroupResponse struct {
-	*CreateParameterGroupOutput
+	*types.CreateParameterGroupOutput
 
 	response *aws.Response
 }

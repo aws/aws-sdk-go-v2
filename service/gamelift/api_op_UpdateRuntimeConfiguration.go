@@ -6,71 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/gamelift/types"
 )
-
-// Represents the input for a request action.
-type UpdateRuntimeConfigurationInput struct {
-	_ struct{} `type:"structure"`
-
-	// Unique identifier for a fleet to update run-time configuration for.
-	//
-	// FleetId is a required field
-	FleetId *string `type:"string" required:"true"`
-
-	// Instructions for launching server processes on each instance in the fleet.
-	// Server processes run either a custom game build executable or a Realtime
-	// Servers script. The run-time configuration lists the types of server processes
-	// to run on an instance and includes the following configuration settings:
-	// the server executable or launch script file, launch parameters, and the number
-	// of processes to run concurrently on each instance. A CreateFleet request
-	// must include a run-time configuration with at least one server process configuration.
-	//
-	// RuntimeConfiguration is a required field
-	RuntimeConfiguration *RuntimeConfiguration `type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s UpdateRuntimeConfigurationInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateRuntimeConfigurationInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateRuntimeConfigurationInput"}
-
-	if s.FleetId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("FleetId"))
-	}
-
-	if s.RuntimeConfiguration == nil {
-		invalidParams.Add(aws.NewErrParamRequired("RuntimeConfiguration"))
-	}
-	if s.RuntimeConfiguration != nil {
-		if err := s.RuntimeConfiguration.Validate(); err != nil {
-			invalidParams.AddNested("RuntimeConfiguration", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Represents the returned data in response to a request action.
-type UpdateRuntimeConfigurationOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The run-time configuration currently in force. If the update was successful,
-	// this object matches the one in the request.
-	RuntimeConfiguration *RuntimeConfiguration `type:"structure"`
-}
-
-// String returns the string representation
-func (s UpdateRuntimeConfigurationOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opUpdateRuntimeConfiguration = "UpdateRuntimeConfiguration"
 
@@ -121,7 +58,7 @@ const opUpdateRuntimeConfiguration = "UpdateRuntimeConfiguration"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/UpdateRuntimeConfiguration
-func (c *Client) UpdateRuntimeConfigurationRequest(input *UpdateRuntimeConfigurationInput) UpdateRuntimeConfigurationRequest {
+func (c *Client) UpdateRuntimeConfigurationRequest(input *types.UpdateRuntimeConfigurationInput) UpdateRuntimeConfigurationRequest {
 	op := &aws.Operation{
 		Name:       opUpdateRuntimeConfiguration,
 		HTTPMethod: "POST",
@@ -129,10 +66,10 @@ func (c *Client) UpdateRuntimeConfigurationRequest(input *UpdateRuntimeConfigura
 	}
 
 	if input == nil {
-		input = &UpdateRuntimeConfigurationInput{}
+		input = &types.UpdateRuntimeConfigurationInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateRuntimeConfigurationOutput{})
+	req := c.newRequest(op, input, &types.UpdateRuntimeConfigurationOutput{})
 	return UpdateRuntimeConfigurationRequest{Request: req, Input: input, Copy: c.UpdateRuntimeConfigurationRequest}
 }
 
@@ -140,8 +77,8 @@ func (c *Client) UpdateRuntimeConfigurationRequest(input *UpdateRuntimeConfigura
 // UpdateRuntimeConfiguration API operation.
 type UpdateRuntimeConfigurationRequest struct {
 	*aws.Request
-	Input *UpdateRuntimeConfigurationInput
-	Copy  func(*UpdateRuntimeConfigurationInput) UpdateRuntimeConfigurationRequest
+	Input *types.UpdateRuntimeConfigurationInput
+	Copy  func(*types.UpdateRuntimeConfigurationInput) UpdateRuntimeConfigurationRequest
 }
 
 // Send marshals and sends the UpdateRuntimeConfiguration API request.
@@ -153,7 +90,7 @@ func (r UpdateRuntimeConfigurationRequest) Send(ctx context.Context) (*UpdateRun
 	}
 
 	resp := &UpdateRuntimeConfigurationResponse{
-		UpdateRuntimeConfigurationOutput: r.Request.Data.(*UpdateRuntimeConfigurationOutput),
+		UpdateRuntimeConfigurationOutput: r.Request.Data.(*types.UpdateRuntimeConfigurationOutput),
 		response:                         &aws.Response{Request: r.Request},
 	}
 
@@ -163,7 +100,7 @@ func (r UpdateRuntimeConfigurationRequest) Send(ctx context.Context) (*UpdateRun
 // UpdateRuntimeConfigurationResponse is the response type for the
 // UpdateRuntimeConfiguration API operation.
 type UpdateRuntimeConfigurationResponse struct {
-	*UpdateRuntimeConfigurationOutput
+	*types.UpdateRuntimeConfigurationOutput
 
 	response *aws.Response
 }

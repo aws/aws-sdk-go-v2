@@ -6,77 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/fsx/types"
 )
-
-// The request object for DeleteFileSystem operation.
-type DeleteFileSystemInput struct {
-	_ struct{} `type:"structure"`
-
-	// (Optional) A string of up to 64 ASCII characters that Amazon FSx uses to
-	// ensure idempotent deletion. This is automatically filled on your behalf when
-	// using the AWS CLI or SDK.
-	ClientRequestToken *string `min:"1" type:"string" idempotencyToken:"true"`
-
-	// The ID of the file system you want to delete.
-	//
-	// FileSystemId is a required field
-	FileSystemId *string `min:"11" type:"string" required:"true"`
-
-	// The configuration object for the Microsoft Windows file system used in the
-	// DeleteFileSystem operation.
-	WindowsConfiguration *DeleteFileSystemWindowsConfiguration `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteFileSystemInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteFileSystemInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteFileSystemInput"}
-	if s.ClientRequestToken != nil && len(*s.ClientRequestToken) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ClientRequestToken", 1))
-	}
-
-	if s.FileSystemId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("FileSystemId"))
-	}
-	if s.FileSystemId != nil && len(*s.FileSystemId) < 11 {
-		invalidParams.Add(aws.NewErrParamMinLen("FileSystemId", 11))
-	}
-	if s.WindowsConfiguration != nil {
-		if err := s.WindowsConfiguration.Validate(); err != nil {
-			invalidParams.AddNested("WindowsConfiguration", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// The response object for the DeleteFileSystem operation.
-type DeleteFileSystemOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the file system being deleted.
-	FileSystemId *string `min:"11" type:"string"`
-
-	// The file system lifecycle for the deletion request. Should be DELETING.
-	Lifecycle FileSystemLifecycle `type:"string" enum:"true"`
-
-	// The response object for the Microsoft Windows file system used in the DeleteFileSystem
-	// operation.
-	WindowsResponse *DeleteFileSystemWindowsResponse `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteFileSystemOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteFileSystem = "DeleteFileSystem"
 
@@ -108,7 +39,7 @@ const opDeleteFileSystem = "DeleteFileSystem"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/DeleteFileSystem
-func (c *Client) DeleteFileSystemRequest(input *DeleteFileSystemInput) DeleteFileSystemRequest {
+func (c *Client) DeleteFileSystemRequest(input *types.DeleteFileSystemInput) DeleteFileSystemRequest {
 	op := &aws.Operation{
 		Name:       opDeleteFileSystem,
 		HTTPMethod: "POST",
@@ -116,10 +47,10 @@ func (c *Client) DeleteFileSystemRequest(input *DeleteFileSystemInput) DeleteFil
 	}
 
 	if input == nil {
-		input = &DeleteFileSystemInput{}
+		input = &types.DeleteFileSystemInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteFileSystemOutput{})
+	req := c.newRequest(op, input, &types.DeleteFileSystemOutput{})
 	return DeleteFileSystemRequest{Request: req, Input: input, Copy: c.DeleteFileSystemRequest}
 }
 
@@ -127,8 +58,8 @@ func (c *Client) DeleteFileSystemRequest(input *DeleteFileSystemInput) DeleteFil
 // DeleteFileSystem API operation.
 type DeleteFileSystemRequest struct {
 	*aws.Request
-	Input *DeleteFileSystemInput
-	Copy  func(*DeleteFileSystemInput) DeleteFileSystemRequest
+	Input *types.DeleteFileSystemInput
+	Copy  func(*types.DeleteFileSystemInput) DeleteFileSystemRequest
 }
 
 // Send marshals and sends the DeleteFileSystem API request.
@@ -140,7 +71,7 @@ func (r DeleteFileSystemRequest) Send(ctx context.Context) (*DeleteFileSystemRes
 	}
 
 	resp := &DeleteFileSystemResponse{
-		DeleteFileSystemOutput: r.Request.Data.(*DeleteFileSystemOutput),
+		DeleteFileSystemOutput: r.Request.Data.(*types.DeleteFileSystemOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -150,7 +81,7 @@ func (r DeleteFileSystemRequest) Send(ctx context.Context) (*DeleteFileSystemRes
 // DeleteFileSystemResponse is the response type for the
 // DeleteFileSystem API operation.
 type DeleteFileSystemResponse struct {
-	*DeleteFileSystemOutput
+	*types.DeleteFileSystemOutput
 
 	response *aws.Response
 }

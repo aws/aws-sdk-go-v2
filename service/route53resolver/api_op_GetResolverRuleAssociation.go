@@ -6,53 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/route53resolver/types"
 )
-
-type GetResolverRuleAssociationInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the resolver rule association that you want to get information
-	// about.
-	//
-	// ResolverRuleAssociationId is a required field
-	ResolverRuleAssociationId *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetResolverRuleAssociationInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetResolverRuleAssociationInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetResolverRuleAssociationInput"}
-
-	if s.ResolverRuleAssociationId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ResolverRuleAssociationId"))
-	}
-	if s.ResolverRuleAssociationId != nil && len(*s.ResolverRuleAssociationId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ResolverRuleAssociationId", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type GetResolverRuleAssociationOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Information about the resolver rule association that you specified in a GetResolverRuleAssociation
-	// request.
-	ResolverRuleAssociation *ResolverRuleAssociation `type:"structure"`
-}
-
-// String returns the string representation
-func (s GetResolverRuleAssociationOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetResolverRuleAssociation = "GetResolverRuleAssociation"
 
@@ -70,7 +25,7 @@ const opGetResolverRuleAssociation = "GetResolverRuleAssociation"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/GetResolverRuleAssociation
-func (c *Client) GetResolverRuleAssociationRequest(input *GetResolverRuleAssociationInput) GetResolverRuleAssociationRequest {
+func (c *Client) GetResolverRuleAssociationRequest(input *types.GetResolverRuleAssociationInput) GetResolverRuleAssociationRequest {
 	op := &aws.Operation{
 		Name:       opGetResolverRuleAssociation,
 		HTTPMethod: "POST",
@@ -78,10 +33,10 @@ func (c *Client) GetResolverRuleAssociationRequest(input *GetResolverRuleAssocia
 	}
 
 	if input == nil {
-		input = &GetResolverRuleAssociationInput{}
+		input = &types.GetResolverRuleAssociationInput{}
 	}
 
-	req := c.newRequest(op, input, &GetResolverRuleAssociationOutput{})
+	req := c.newRequest(op, input, &types.GetResolverRuleAssociationOutput{})
 	return GetResolverRuleAssociationRequest{Request: req, Input: input, Copy: c.GetResolverRuleAssociationRequest}
 }
 
@@ -89,8 +44,8 @@ func (c *Client) GetResolverRuleAssociationRequest(input *GetResolverRuleAssocia
 // GetResolverRuleAssociation API operation.
 type GetResolverRuleAssociationRequest struct {
 	*aws.Request
-	Input *GetResolverRuleAssociationInput
-	Copy  func(*GetResolverRuleAssociationInput) GetResolverRuleAssociationRequest
+	Input *types.GetResolverRuleAssociationInput
+	Copy  func(*types.GetResolverRuleAssociationInput) GetResolverRuleAssociationRequest
 }
 
 // Send marshals and sends the GetResolverRuleAssociation API request.
@@ -102,7 +57,7 @@ func (r GetResolverRuleAssociationRequest) Send(ctx context.Context) (*GetResolv
 	}
 
 	resp := &GetResolverRuleAssociationResponse{
-		GetResolverRuleAssociationOutput: r.Request.Data.(*GetResolverRuleAssociationOutput),
+		GetResolverRuleAssociationOutput: r.Request.Data.(*types.GetResolverRuleAssociationOutput),
 		response:                         &aws.Response{Request: r.Request},
 	}
 
@@ -112,7 +67,7 @@ func (r GetResolverRuleAssociationRequest) Send(ctx context.Context) (*GetResolv
 // GetResolverRuleAssociationResponse is the response type for the
 // GetResolverRuleAssociation API operation.
 type GetResolverRuleAssociationResponse struct {
-	*GetResolverRuleAssociationOutput
+	*types.GetResolverRuleAssociationOutput
 
 	response *aws.Response
 }

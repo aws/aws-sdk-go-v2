@@ -4,67 +4,10 @@ package applicationinsights
 
 import (
 	"context"
-	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/applicationinsights/types"
 )
-
-type ListProblemsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The time when the problem ended, in epoch seconds. If not specified, problems
-	// within the past seven days are returned.
-	EndTime *time.Time `type:"timestamp"`
-
-	// The maximum number of results to return in a single call. To retrieve the
-	// remaining results, make another call with the returned NextToken value.
-	MaxResults *int64 `min:"1" type:"integer"`
-
-	// The token to request the next page of results.
-	NextToken *string `type:"string"`
-
-	// The name of the resource group.
-	ResourceGroupName *string `type:"string"`
-
-	// The time when the problem was detected, in epoch seconds. If you don't specify
-	// a time frame for the request, problems within the past seven days are returned.
-	StartTime *time.Time `type:"timestamp"`
-}
-
-// String returns the string representation
-func (s ListProblemsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListProblemsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListProblemsInput"}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ListProblemsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The token used to retrieve the next page of results. This value is null when
-	// there are no more results to return.
-	NextToken *string `type:"string"`
-
-	// The list of problems.
-	ProblemList []Problem `type:"list"`
-}
-
-// String returns the string representation
-func (s ListProblemsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListProblems = "ListProblems"
 
@@ -81,7 +24,7 @@ const opListProblems = "ListProblems"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/application-insights-2018-11-25/ListProblems
-func (c *Client) ListProblemsRequest(input *ListProblemsInput) ListProblemsRequest {
+func (c *Client) ListProblemsRequest(input *types.ListProblemsInput) ListProblemsRequest {
 	op := &aws.Operation{
 		Name:       opListProblems,
 		HTTPMethod: "POST",
@@ -95,10 +38,10 @@ func (c *Client) ListProblemsRequest(input *ListProblemsInput) ListProblemsReque
 	}
 
 	if input == nil {
-		input = &ListProblemsInput{}
+		input = &types.ListProblemsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListProblemsOutput{})
+	req := c.newRequest(op, input, &types.ListProblemsOutput{})
 	return ListProblemsRequest{Request: req, Input: input, Copy: c.ListProblemsRequest}
 }
 
@@ -106,8 +49,8 @@ func (c *Client) ListProblemsRequest(input *ListProblemsInput) ListProblemsReque
 // ListProblems API operation.
 type ListProblemsRequest struct {
 	*aws.Request
-	Input *ListProblemsInput
-	Copy  func(*ListProblemsInput) ListProblemsRequest
+	Input *types.ListProblemsInput
+	Copy  func(*types.ListProblemsInput) ListProblemsRequest
 }
 
 // Send marshals and sends the ListProblems API request.
@@ -119,7 +62,7 @@ func (r ListProblemsRequest) Send(ctx context.Context) (*ListProblemsResponse, e
 	}
 
 	resp := &ListProblemsResponse{
-		ListProblemsOutput: r.Request.Data.(*ListProblemsOutput),
+		ListProblemsOutput: r.Request.Data.(*types.ListProblemsOutput),
 		response:           &aws.Response{Request: r.Request},
 	}
 
@@ -149,7 +92,7 @@ func NewListProblemsPaginator(req ListProblemsRequest) ListProblemsPaginator {
 	return ListProblemsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListProblemsInput
+				var inCpy *types.ListProblemsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -169,14 +112,14 @@ type ListProblemsPaginator struct {
 	aws.Pager
 }
 
-func (p *ListProblemsPaginator) CurrentPage() *ListProblemsOutput {
-	return p.Pager.CurrentPage().(*ListProblemsOutput)
+func (p *ListProblemsPaginator) CurrentPage() *types.ListProblemsOutput {
+	return p.Pager.CurrentPage().(*types.ListProblemsOutput)
 }
 
 // ListProblemsResponse is the response type for the
 // ListProblems API operation.
 type ListProblemsResponse struct {
-	*ListProblemsOutput
+	*types.ListProblemsOutput
 
 	response *aws.Response
 }

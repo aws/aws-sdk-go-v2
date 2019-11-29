@@ -10,6 +10,7 @@ package costexploreriface
 
 import (
 	"github.com/aws/aws-sdk-go-v2/service/costexplorer"
+	"github.com/aws/aws-sdk-go-v2/service/costexplorer/types"
 )
 
 // ClientAPI provides an interface to enable mocking the
@@ -43,7 +44,7 @@ import (
 //    type mockClientClient struct {
 //        costexploreriface.ClientPI
 //    }
-//    func (m *mockClientClient) GetCostAndUsage(input *costexplorer.GetCostAndUsageInput) (*costexplorer.GetCostAndUsageOutput, error) {
+//    func (m *mockClientClient) GetCostAndUsage(input *types.GetCostAndUsageInput) (*types.GetCostAndUsageOutput, error) {
 //        // mock response/functionality
 //    }
 //
@@ -61,23 +62,33 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type ClientAPI interface {
-	GetCostAndUsageRequest(*costexplorer.GetCostAndUsageInput) costexplorer.GetCostAndUsageRequest
+	GetCostAndUsageRequest(*types.GetCostAndUsageInput) costexplorer.GetCostAndUsageRequest
 
-	GetCostForecastRequest(*costexplorer.GetCostForecastInput) costexplorer.GetCostForecastRequest
+	GetCostAndUsageWithResourcesRequest(*types.GetCostAndUsageWithResourcesInput) costexplorer.GetCostAndUsageWithResourcesRequest
 
-	GetDimensionValuesRequest(*costexplorer.GetDimensionValuesInput) costexplorer.GetDimensionValuesRequest
+	GetCostForecastRequest(*types.GetCostForecastInput) costexplorer.GetCostForecastRequest
 
-	GetReservationCoverageRequest(*costexplorer.GetReservationCoverageInput) costexplorer.GetReservationCoverageRequest
+	GetDimensionValuesRequest(*types.GetDimensionValuesInput) costexplorer.GetDimensionValuesRequest
 
-	GetReservationPurchaseRecommendationRequest(*costexplorer.GetReservationPurchaseRecommendationInput) costexplorer.GetReservationPurchaseRecommendationRequest
+	GetReservationCoverageRequest(*types.GetReservationCoverageInput) costexplorer.GetReservationCoverageRequest
 
-	GetReservationUtilizationRequest(*costexplorer.GetReservationUtilizationInput) costexplorer.GetReservationUtilizationRequest
+	GetReservationPurchaseRecommendationRequest(*types.GetReservationPurchaseRecommendationInput) costexplorer.GetReservationPurchaseRecommendationRequest
 
-	GetRightsizingRecommendationRequest(*costexplorer.GetRightsizingRecommendationInput) costexplorer.GetRightsizingRecommendationRequest
+	GetReservationUtilizationRequest(*types.GetReservationUtilizationInput) costexplorer.GetReservationUtilizationRequest
 
-	GetTagsRequest(*costexplorer.GetTagsInput) costexplorer.GetTagsRequest
+	GetRightsizingRecommendationRequest(*types.GetRightsizingRecommendationInput) costexplorer.GetRightsizingRecommendationRequest
 
-	GetUsageForecastRequest(*costexplorer.GetUsageForecastInput) costexplorer.GetUsageForecastRequest
+	GetSavingsPlansCoverageRequest(*types.GetSavingsPlansCoverageInput) costexplorer.GetSavingsPlansCoverageRequest
+
+	GetSavingsPlansPurchaseRecommendationRequest(*types.GetSavingsPlansPurchaseRecommendationInput) costexplorer.GetSavingsPlansPurchaseRecommendationRequest
+
+	GetSavingsPlansUtilizationRequest(*types.GetSavingsPlansUtilizationInput) costexplorer.GetSavingsPlansUtilizationRequest
+
+	GetSavingsPlansUtilizationDetailsRequest(*types.GetSavingsPlansUtilizationDetailsInput) costexplorer.GetSavingsPlansUtilizationDetailsRequest
+
+	GetTagsRequest(*types.GetTagsInput) costexplorer.GetTagsRequest
+
+	GetUsageForecastRequest(*types.GetUsageForecastInput) costexplorer.GetUsageForecastRequest
 }
 
 var _ ClientAPI = (*costexplorer.Client)(nil)

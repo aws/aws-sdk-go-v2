@@ -6,59 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/codepipeline/types"
 )
-
-// Represents the input of a StartPipelineExecution action.
-type StartPipelineExecutionInput struct {
-	_ struct{} `type:"structure"`
-
-	// The system-generated unique ID used to identify a unique execution request.
-	ClientRequestToken *string `locationName:"clientRequestToken" min:"1" type:"string" idempotencyToken:"true"`
-
-	// The name of the pipeline to start.
-	//
-	// Name is a required field
-	Name *string `locationName:"name" min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s StartPipelineExecutionInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *StartPipelineExecutionInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "StartPipelineExecutionInput"}
-	if s.ClientRequestToken != nil && len(*s.ClientRequestToken) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ClientRequestToken", 1))
-	}
-
-	if s.Name == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Name"))
-	}
-	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Represents the output of a StartPipelineExecution action.
-type StartPipelineExecutionOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The unique system-generated ID of the pipeline execution that was started.
-	PipelineExecutionId *string `locationName:"pipelineExecutionId" type:"string"`
-}
-
-// String returns the string representation
-func (s StartPipelineExecutionOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opStartPipelineExecution = "StartPipelineExecution"
 
@@ -76,7 +25,7 @@ const opStartPipelineExecution = "StartPipelineExecution"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/StartPipelineExecution
-func (c *Client) StartPipelineExecutionRequest(input *StartPipelineExecutionInput) StartPipelineExecutionRequest {
+func (c *Client) StartPipelineExecutionRequest(input *types.StartPipelineExecutionInput) StartPipelineExecutionRequest {
 	op := &aws.Operation{
 		Name:       opStartPipelineExecution,
 		HTTPMethod: "POST",
@@ -84,10 +33,10 @@ func (c *Client) StartPipelineExecutionRequest(input *StartPipelineExecutionInpu
 	}
 
 	if input == nil {
-		input = &StartPipelineExecutionInput{}
+		input = &types.StartPipelineExecutionInput{}
 	}
 
-	req := c.newRequest(op, input, &StartPipelineExecutionOutput{})
+	req := c.newRequest(op, input, &types.StartPipelineExecutionOutput{})
 	return StartPipelineExecutionRequest{Request: req, Input: input, Copy: c.StartPipelineExecutionRequest}
 }
 
@@ -95,8 +44,8 @@ func (c *Client) StartPipelineExecutionRequest(input *StartPipelineExecutionInpu
 // StartPipelineExecution API operation.
 type StartPipelineExecutionRequest struct {
 	*aws.Request
-	Input *StartPipelineExecutionInput
-	Copy  func(*StartPipelineExecutionInput) StartPipelineExecutionRequest
+	Input *types.StartPipelineExecutionInput
+	Copy  func(*types.StartPipelineExecutionInput) StartPipelineExecutionRequest
 }
 
 // Send marshals and sends the StartPipelineExecution API request.
@@ -108,7 +57,7 @@ func (r StartPipelineExecutionRequest) Send(ctx context.Context) (*StartPipeline
 	}
 
 	resp := &StartPipelineExecutionResponse{
-		StartPipelineExecutionOutput: r.Request.Data.(*StartPipelineExecutionOutput),
+		StartPipelineExecutionOutput: r.Request.Data.(*types.StartPipelineExecutionOutput),
 		response:                     &aws.Response{Request: r.Request},
 	}
 
@@ -118,7 +67,7 @@ func (r StartPipelineExecutionRequest) Send(ctx context.Context) (*StartPipeline
 // StartPipelineExecutionResponse is the response type for the
 // StartPipelineExecution API operation.
 type StartPipelineExecutionResponse struct {
-	*StartPipelineExecutionOutput
+	*types.StartPipelineExecutionOutput
 
 	response *aws.Response
 }

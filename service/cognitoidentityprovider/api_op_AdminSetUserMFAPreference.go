@@ -6,66 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/types"
 )
-
-type AdminSetUserMFAPreferenceInput struct {
-	_ struct{} `type:"structure"`
-
-	// The SMS text message MFA settings.
-	SMSMfaSettings *SMSMfaSettingsType `type:"structure"`
-
-	// The time-based one-time password software token MFA settings.
-	SoftwareTokenMfaSettings *SoftwareTokenMfaSettingsType `type:"structure"`
-
-	// The user pool ID.
-	//
-	// UserPoolId is a required field
-	UserPoolId *string `min:"1" type:"string" required:"true"`
-
-	// The user pool username or alias.
-	//
-	// Username is a required field
-	Username *string `min:"1" type:"string" required:"true" sensitive:"true"`
-}
-
-// String returns the string representation
-func (s AdminSetUserMFAPreferenceInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *AdminSetUserMFAPreferenceInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "AdminSetUserMFAPreferenceInput"}
-
-	if s.UserPoolId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("UserPoolId"))
-	}
-	if s.UserPoolId != nil && len(*s.UserPoolId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("UserPoolId", 1))
-	}
-
-	if s.Username == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Username"))
-	}
-	if s.Username != nil && len(*s.Username) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Username", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type AdminSetUserMFAPreferenceOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s AdminSetUserMFAPreferenceOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opAdminSetUserMFAPreference = "AdminSetUserMFAPreference"
 
@@ -87,7 +29,7 @@ const opAdminSetUserMFAPreference = "AdminSetUserMFAPreference"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AdminSetUserMFAPreference
-func (c *Client) AdminSetUserMFAPreferenceRequest(input *AdminSetUserMFAPreferenceInput) AdminSetUserMFAPreferenceRequest {
+func (c *Client) AdminSetUserMFAPreferenceRequest(input *types.AdminSetUserMFAPreferenceInput) AdminSetUserMFAPreferenceRequest {
 	op := &aws.Operation{
 		Name:       opAdminSetUserMFAPreference,
 		HTTPMethod: "POST",
@@ -95,10 +37,10 @@ func (c *Client) AdminSetUserMFAPreferenceRequest(input *AdminSetUserMFAPreferen
 	}
 
 	if input == nil {
-		input = &AdminSetUserMFAPreferenceInput{}
+		input = &types.AdminSetUserMFAPreferenceInput{}
 	}
 
-	req := c.newRequest(op, input, &AdminSetUserMFAPreferenceOutput{})
+	req := c.newRequest(op, input, &types.AdminSetUserMFAPreferenceOutput{})
 	return AdminSetUserMFAPreferenceRequest{Request: req, Input: input, Copy: c.AdminSetUserMFAPreferenceRequest}
 }
 
@@ -106,8 +48,8 @@ func (c *Client) AdminSetUserMFAPreferenceRequest(input *AdminSetUserMFAPreferen
 // AdminSetUserMFAPreference API operation.
 type AdminSetUserMFAPreferenceRequest struct {
 	*aws.Request
-	Input *AdminSetUserMFAPreferenceInput
-	Copy  func(*AdminSetUserMFAPreferenceInput) AdminSetUserMFAPreferenceRequest
+	Input *types.AdminSetUserMFAPreferenceInput
+	Copy  func(*types.AdminSetUserMFAPreferenceInput) AdminSetUserMFAPreferenceRequest
 }
 
 // Send marshals and sends the AdminSetUserMFAPreference API request.
@@ -119,7 +61,7 @@ func (r AdminSetUserMFAPreferenceRequest) Send(ctx context.Context) (*AdminSetUs
 	}
 
 	resp := &AdminSetUserMFAPreferenceResponse{
-		AdminSetUserMFAPreferenceOutput: r.Request.Data.(*AdminSetUserMFAPreferenceOutput),
+		AdminSetUserMFAPreferenceOutput: r.Request.Data.(*types.AdminSetUserMFAPreferenceOutput),
 		response:                        &aws.Response{Request: r.Request},
 	}
 
@@ -129,7 +71,7 @@ func (r AdminSetUserMFAPreferenceRequest) Send(ctx context.Context) (*AdminSetUs
 // AdminSetUserMFAPreferenceResponse is the response type for the
 // AdminSetUserMFAPreference API operation.
 type AdminSetUserMFAPreferenceResponse struct {
-	*AdminSetUserMFAPreferenceOutput
+	*types.AdminSetUserMFAPreferenceOutput
 
 	response *aws.Response
 }

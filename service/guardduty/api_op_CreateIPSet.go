@@ -6,188 +6,19 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/guardduty/types"
 )
-
-type CreateIPSetInput struct {
-	_ struct{} `type:"structure"`
-
-	// A boolean value that indicates whether GuardDuty is to start using the uploaded
-	// IPSet.
-	//
-	// Activate is a required field
-	Activate *bool `locationName:"activate" type:"boolean" required:"true"`
-
-	// The idempotency token for the create request.
-	ClientToken *string `locationName:"clientToken" type:"string" idempotencyToken:"true"`
-
-	// The unique ID of the detector of the GuardDuty account for which you want
-	// to create an IPSet.
-	//
-	// DetectorId is a required field
-	DetectorId *string `location:"uri" locationName:"detectorId" min:"1" type:"string" required:"true"`
-
-	// The format of the file that contains the IPSet.
-	//
-	// Format is a required field
-	Format IpSetFormat `locationName:"format" min:"1" type:"string" required:"true" enum:"true"`
-
-	// The URI of the file that contains the IPSet. For example (https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key)
-	//
-	// Location is a required field
-	Location *string `locationName:"location" min:"1" type:"string" required:"true"`
-
-	// The user friendly name to identify the IPSet. This name is displayed in all
-	// findings that are triggered by activity that involves IP addresses included
-	// in this IPSet.
-	//
-	// Name is a required field
-	Name *string `locationName:"name" min:"1" type:"string" required:"true"`
-
-	// The tags to be added to a new IP set resource.
-	Tags map[string]string `locationName:"tags" min:"1" type:"map"`
-}
-
-// String returns the string representation
-func (s CreateIPSetInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateIPSetInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateIPSetInput"}
-
-	if s.Activate == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Activate"))
-	}
-
-	if s.DetectorId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DetectorId"))
-	}
-	if s.DetectorId != nil && len(*s.DetectorId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("DetectorId", 1))
-	}
-	if len(s.Format) == 0 {
-		invalidParams.Add(aws.NewErrParamRequired("Format"))
-	}
-
-	if s.Location == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Location"))
-	}
-	if s.Location != nil && len(*s.Location) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Location", 1))
-	}
-
-	if s.Name == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Name"))
-	}
-	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
-	}
-	if s.Tags != nil && len(s.Tags) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Tags", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s CreateIPSetInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.Activate != nil {
-		v := *s.Activate
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "activate", protocol.BoolValue(v), metadata)
-	}
-	var ClientToken string
-	if s.ClientToken != nil {
-		ClientToken = *s.ClientToken
-	} else {
-		ClientToken = protocol.GetIdempotencyToken()
-	}
-	{
-		v := ClientToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "clientToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if len(s.Format) > 0 {
-		v := s.Format
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "format", protocol.QuotedValue{ValueMarshaler: v}, metadata)
-	}
-	if s.Location != nil {
-		v := *s.Location
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "location", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Name != nil {
-		v := *s.Name
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Tags != nil {
-		v := s.Tags
-
-		metadata := protocol.Metadata{}
-		ms0 := e.Map(protocol.BodyTarget, "tags", metadata)
-		ms0.Start()
-		for k1, v1 := range v {
-			ms0.MapSetValue(k1, protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
-		}
-		ms0.End()
-
-	}
-	if s.DetectorId != nil {
-		v := *s.DetectorId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "detectorId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type CreateIPSetOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the IPSet resource.
-	//
-	// IpSetId is a required field
-	IpSetId *string `locationName:"ipSetId" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s CreateIPSetOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s CreateIPSetOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.IpSetId != nil {
-		v := *s.IpSetId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "ipSetId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opCreateIPSet = "CreateIPSet"
 
 // CreateIPSetRequest returns a request value for making API operation for
 // Amazon GuardDuty.
 //
-// Creates a new IPSet - a list of trusted IP addresses that have been whitelisted
-// for secure communication with AWS infrastructure and applications.
+// Creates a new IPSet, called Trusted IP list in the consoler user interface.
+// An IPSet is a list IP addresses trusted for secure communication with AWS
+// infrastructure and applications. GuardDuty does not generate findings for
+// IP addresses included in IPSets. Only users from the master account can use
+// this operation.
 //
 //    // Example sending a request using CreateIPSetRequest.
 //    req := client.CreateIPSetRequest(params)
@@ -197,7 +28,7 @@ const opCreateIPSet = "CreateIPSet"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/CreateIPSet
-func (c *Client) CreateIPSetRequest(input *CreateIPSetInput) CreateIPSetRequest {
+func (c *Client) CreateIPSetRequest(input *types.CreateIPSetInput) CreateIPSetRequest {
 	op := &aws.Operation{
 		Name:       opCreateIPSet,
 		HTTPMethod: "POST",
@@ -205,10 +36,10 @@ func (c *Client) CreateIPSetRequest(input *CreateIPSetInput) CreateIPSetRequest 
 	}
 
 	if input == nil {
-		input = &CreateIPSetInput{}
+		input = &types.CreateIPSetInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateIPSetOutput{})
+	req := c.newRequest(op, input, &types.CreateIPSetOutput{})
 	return CreateIPSetRequest{Request: req, Input: input, Copy: c.CreateIPSetRequest}
 }
 
@@ -216,8 +47,8 @@ func (c *Client) CreateIPSetRequest(input *CreateIPSetInput) CreateIPSetRequest 
 // CreateIPSet API operation.
 type CreateIPSetRequest struct {
 	*aws.Request
-	Input *CreateIPSetInput
-	Copy  func(*CreateIPSetInput) CreateIPSetRequest
+	Input *types.CreateIPSetInput
+	Copy  func(*types.CreateIPSetInput) CreateIPSetRequest
 }
 
 // Send marshals and sends the CreateIPSet API request.
@@ -229,7 +60,7 @@ func (r CreateIPSetRequest) Send(ctx context.Context) (*CreateIPSetResponse, err
 	}
 
 	resp := &CreateIPSetResponse{
-		CreateIPSetOutput: r.Request.Data.(*CreateIPSetOutput),
+		CreateIPSetOutput: r.Request.Data.(*types.CreateIPSetOutput),
 		response:          &aws.Response{Request: r.Request},
 	}
 
@@ -239,7 +70,7 @@ func (r CreateIPSetRequest) Send(ctx context.Context) (*CreateIPSetResponse, err
 // CreateIPSetResponse is the response type for the
 // CreateIPSet API operation.
 type CreateIPSetResponse struct {
-	*CreateIPSetOutput
+	*types.CreateIPSetOutput
 
 	response *aws.Response
 }

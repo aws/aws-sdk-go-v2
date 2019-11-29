@@ -6,78 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/migrationhub/types"
 )
-
-type DisassociateCreatedArtifactInput struct {
-	_ struct{} `type:"structure"`
-
-	// An ARN of the AWS resource related to the migration (e.g., AMI, EC2 instance,
-	// RDS instance, etc.)
-	//
-	// CreatedArtifactName is a required field
-	CreatedArtifactName *string `min:"1" type:"string" required:"true"`
-
-	// Optional boolean flag to indicate whether any effect should take place. Used
-	// to test if the caller has permission to make the call.
-	DryRun *bool `type:"boolean"`
-
-	// Unique identifier that references the migration task to be disassociated
-	// with the artifact.
-	//
-	// MigrationTaskName is a required field
-	MigrationTaskName *string `min:"1" type:"string" required:"true"`
-
-	// The name of the ProgressUpdateStream.
-	//
-	// ProgressUpdateStream is a required field
-	ProgressUpdateStream *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DisassociateCreatedArtifactInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DisassociateCreatedArtifactInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DisassociateCreatedArtifactInput"}
-
-	if s.CreatedArtifactName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("CreatedArtifactName"))
-	}
-	if s.CreatedArtifactName != nil && len(*s.CreatedArtifactName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("CreatedArtifactName", 1))
-	}
-
-	if s.MigrationTaskName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("MigrationTaskName"))
-	}
-	if s.MigrationTaskName != nil && len(*s.MigrationTaskName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("MigrationTaskName", 1))
-	}
-
-	if s.ProgressUpdateStream == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ProgressUpdateStream"))
-	}
-	if s.ProgressUpdateStream != nil && len(*s.ProgressUpdateStream) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ProgressUpdateStream", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DisassociateCreatedArtifactOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DisassociateCreatedArtifactOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDisassociateCreatedArtifact = "DisassociateCreatedArtifact"
 
@@ -106,7 +36,7 @@ const opDisassociateCreatedArtifact = "DisassociateCreatedArtifact"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/DisassociateCreatedArtifact
-func (c *Client) DisassociateCreatedArtifactRequest(input *DisassociateCreatedArtifactInput) DisassociateCreatedArtifactRequest {
+func (c *Client) DisassociateCreatedArtifactRequest(input *types.DisassociateCreatedArtifactInput) DisassociateCreatedArtifactRequest {
 	op := &aws.Operation{
 		Name:       opDisassociateCreatedArtifact,
 		HTTPMethod: "POST",
@@ -114,10 +44,10 @@ func (c *Client) DisassociateCreatedArtifactRequest(input *DisassociateCreatedAr
 	}
 
 	if input == nil {
-		input = &DisassociateCreatedArtifactInput{}
+		input = &types.DisassociateCreatedArtifactInput{}
 	}
 
-	req := c.newRequest(op, input, &DisassociateCreatedArtifactOutput{})
+	req := c.newRequest(op, input, &types.DisassociateCreatedArtifactOutput{})
 	return DisassociateCreatedArtifactRequest{Request: req, Input: input, Copy: c.DisassociateCreatedArtifactRequest}
 }
 
@@ -125,8 +55,8 @@ func (c *Client) DisassociateCreatedArtifactRequest(input *DisassociateCreatedAr
 // DisassociateCreatedArtifact API operation.
 type DisassociateCreatedArtifactRequest struct {
 	*aws.Request
-	Input *DisassociateCreatedArtifactInput
-	Copy  func(*DisassociateCreatedArtifactInput) DisassociateCreatedArtifactRequest
+	Input *types.DisassociateCreatedArtifactInput
+	Copy  func(*types.DisassociateCreatedArtifactInput) DisassociateCreatedArtifactRequest
 }
 
 // Send marshals and sends the DisassociateCreatedArtifact API request.
@@ -138,7 +68,7 @@ func (r DisassociateCreatedArtifactRequest) Send(ctx context.Context) (*Disassoc
 	}
 
 	resp := &DisassociateCreatedArtifactResponse{
-		DisassociateCreatedArtifactOutput: r.Request.Data.(*DisassociateCreatedArtifactOutput),
+		DisassociateCreatedArtifactOutput: r.Request.Data.(*types.DisassociateCreatedArtifactOutput),
 		response:                          &aws.Response{Request: r.Request},
 	}
 
@@ -148,7 +78,7 @@ func (r DisassociateCreatedArtifactRequest) Send(ctx context.Context) (*Disassoc
 // DisassociateCreatedArtifactResponse is the response type for the
 // DisassociateCreatedArtifact API operation.
 type DisassociateCreatedArtifactResponse struct {
-	*DisassociateCreatedArtifactOutput
+	*types.DisassociateCreatedArtifactOutput
 
 	response *aws.Response
 }

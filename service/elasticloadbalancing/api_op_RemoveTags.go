@@ -4,70 +4,10 @@ package elasticloadbalancing
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/elasticloadbalancing/types"
 )
-
-// Contains the parameters for RemoveTags.
-type RemoveTagsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the load balancer. You can specify a maximum of one load balancer
-	// name.
-	//
-	// LoadBalancerNames is a required field
-	LoadBalancerNames []string `type:"list" required:"true"`
-
-	// The list of tag keys to remove.
-	//
-	// Tags is a required field
-	Tags []TagKeyOnly `min:"1" type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s RemoveTagsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *RemoveTagsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "RemoveTagsInput"}
-
-	if s.LoadBalancerNames == nil {
-		invalidParams.Add(aws.NewErrParamRequired("LoadBalancerNames"))
-	}
-
-	if s.Tags == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Tags"))
-	}
-	if s.Tags != nil && len(s.Tags) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Tags", 1))
-	}
-	if s.Tags != nil {
-		for i, v := range s.Tags {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Contains the output of RemoveTags.
-type RemoveTagsOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s RemoveTagsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opRemoveTags = "RemoveTags"
 
@@ -84,7 +24,7 @@ const opRemoveTags = "RemoveTags"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/RemoveTags
-func (c *Client) RemoveTagsRequest(input *RemoveTagsInput) RemoveTagsRequest {
+func (c *Client) RemoveTagsRequest(input *types.RemoveTagsInput) RemoveTagsRequest {
 	op := &aws.Operation{
 		Name:       opRemoveTags,
 		HTTPMethod: "POST",
@@ -92,10 +32,10 @@ func (c *Client) RemoveTagsRequest(input *RemoveTagsInput) RemoveTagsRequest {
 	}
 
 	if input == nil {
-		input = &RemoveTagsInput{}
+		input = &types.RemoveTagsInput{}
 	}
 
-	req := c.newRequest(op, input, &RemoveTagsOutput{})
+	req := c.newRequest(op, input, &types.RemoveTagsOutput{})
 	return RemoveTagsRequest{Request: req, Input: input, Copy: c.RemoveTagsRequest}
 }
 
@@ -103,8 +43,8 @@ func (c *Client) RemoveTagsRequest(input *RemoveTagsInput) RemoveTagsRequest {
 // RemoveTags API operation.
 type RemoveTagsRequest struct {
 	*aws.Request
-	Input *RemoveTagsInput
-	Copy  func(*RemoveTagsInput) RemoveTagsRequest
+	Input *types.RemoveTagsInput
+	Copy  func(*types.RemoveTagsInput) RemoveTagsRequest
 }
 
 // Send marshals and sends the RemoveTags API request.
@@ -116,7 +56,7 @@ func (r RemoveTagsRequest) Send(ctx context.Context) (*RemoveTagsResponse, error
 	}
 
 	resp := &RemoveTagsResponse{
-		RemoveTagsOutput: r.Request.Data.(*RemoveTagsOutput),
+		RemoveTagsOutput: r.Request.Data.(*types.RemoveTagsOutput),
 		response:         &aws.Response{Request: r.Request},
 	}
 
@@ -126,7 +66,7 @@ func (r RemoveTagsRequest) Send(ctx context.Context) (*RemoveTagsResponse, error
 // RemoveTagsResponse is the response type for the
 // RemoveTags API operation.
 type RemoveTagsResponse struct {
-	*RemoveTagsOutput
+	*types.RemoveTagsOutput
 
 	response *aws.Response
 }

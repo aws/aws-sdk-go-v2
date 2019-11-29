@@ -6,142 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/guardduty/types"
 )
-
-type GetThreatIntelSetInput struct {
-	_ struct{} `type:"structure"`
-
-	// The unique ID of the detector the threatIntelSet is associated with.
-	//
-	// DetectorId is a required field
-	DetectorId *string `location:"uri" locationName:"detectorId" min:"1" type:"string" required:"true"`
-
-	// The unique ID of the threatIntelSet you want to get.
-	//
-	// ThreatIntelSetId is a required field
-	ThreatIntelSetId *string `location:"uri" locationName:"threatIntelSetId" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetThreatIntelSetInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetThreatIntelSetInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetThreatIntelSetInput"}
-
-	if s.DetectorId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DetectorId"))
-	}
-	if s.DetectorId != nil && len(*s.DetectorId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("DetectorId", 1))
-	}
-
-	if s.ThreatIntelSetId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ThreatIntelSetId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetThreatIntelSetInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.DetectorId != nil {
-		v := *s.DetectorId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "detectorId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.ThreatIntelSetId != nil {
-		v := *s.ThreatIntelSetId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "threatIntelSetId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type GetThreatIntelSetOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The format of the threatIntelSet.
-	//
-	// Format is a required field
-	Format ThreatIntelSetFormat `locationName:"format" min:"1" type:"string" required:"true" enum:"true"`
-
-	// The URI of the file that contains the ThreatIntelSet. For example (https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key).
-	//
-	// Location is a required field
-	Location *string `locationName:"location" min:"1" type:"string" required:"true"`
-
-	// A user-friendly ThreatIntelSet name that is displayed in all finding generated
-	// by activity that involves IP addresses included in this ThreatIntelSet.
-	//
-	// Name is a required field
-	Name *string `locationName:"name" min:"1" type:"string" required:"true"`
-
-	// The status of threatIntelSet file uploaded.
-	//
-	// Status is a required field
-	Status ThreatIntelSetStatus `locationName:"status" min:"1" type:"string" required:"true" enum:"true"`
-
-	// The tags of the Threat List resource.
-	Tags map[string]string `locationName:"tags" min:"1" type:"map"`
-}
-
-// String returns the string representation
-func (s GetThreatIntelSetOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetThreatIntelSetOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.Format) > 0 {
-		v := s.Format
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "format", protocol.QuotedValue{ValueMarshaler: v}, metadata)
-	}
-	if s.Location != nil {
-		v := *s.Location
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "location", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Name != nil {
-		v := *s.Name
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if len(s.Status) > 0 {
-		v := s.Status
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "status", protocol.QuotedValue{ValueMarshaler: v}, metadata)
-	}
-	if s.Tags != nil {
-		v := s.Tags
-
-		metadata := protocol.Metadata{}
-		ms0 := e.Map(protocol.BodyTarget, "tags", metadata)
-		ms0.Start()
-		for k1, v1 := range v {
-			ms0.MapSetValue(k1, protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
-		}
-		ms0.End()
-
-	}
-	return nil
-}
 
 const opGetThreatIntelSet = "GetThreatIntelSet"
 
@@ -158,7 +24,7 @@ const opGetThreatIntelSet = "GetThreatIntelSet"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetThreatIntelSet
-func (c *Client) GetThreatIntelSetRequest(input *GetThreatIntelSetInput) GetThreatIntelSetRequest {
+func (c *Client) GetThreatIntelSetRequest(input *types.GetThreatIntelSetInput) GetThreatIntelSetRequest {
 	op := &aws.Operation{
 		Name:       opGetThreatIntelSet,
 		HTTPMethod: "GET",
@@ -166,10 +32,10 @@ func (c *Client) GetThreatIntelSetRequest(input *GetThreatIntelSetInput) GetThre
 	}
 
 	if input == nil {
-		input = &GetThreatIntelSetInput{}
+		input = &types.GetThreatIntelSetInput{}
 	}
 
-	req := c.newRequest(op, input, &GetThreatIntelSetOutput{})
+	req := c.newRequest(op, input, &types.GetThreatIntelSetOutput{})
 	return GetThreatIntelSetRequest{Request: req, Input: input, Copy: c.GetThreatIntelSetRequest}
 }
 
@@ -177,8 +43,8 @@ func (c *Client) GetThreatIntelSetRequest(input *GetThreatIntelSetInput) GetThre
 // GetThreatIntelSet API operation.
 type GetThreatIntelSetRequest struct {
 	*aws.Request
-	Input *GetThreatIntelSetInput
-	Copy  func(*GetThreatIntelSetInput) GetThreatIntelSetRequest
+	Input *types.GetThreatIntelSetInput
+	Copy  func(*types.GetThreatIntelSetInput) GetThreatIntelSetRequest
 }
 
 // Send marshals and sends the GetThreatIntelSet API request.
@@ -190,7 +56,7 @@ func (r GetThreatIntelSetRequest) Send(ctx context.Context) (*GetThreatIntelSetR
 	}
 
 	resp := &GetThreatIntelSetResponse{
-		GetThreatIntelSetOutput: r.Request.Data.(*GetThreatIntelSetOutput),
+		GetThreatIntelSetOutput: r.Request.Data.(*types.GetThreatIntelSetOutput),
 		response:                &aws.Response{Request: r.Request},
 	}
 
@@ -200,7 +66,7 @@ func (r GetThreatIntelSetRequest) Send(ctx context.Context) (*GetThreatIntelSetR
 // GetThreatIntelSetResponse is the response type for the
 // GetThreatIntelSet API operation.
 type GetThreatIntelSetResponse struct {
-	*GetThreatIntelSetOutput
+	*types.GetThreatIntelSetOutput
 
 	response *aws.Response
 }

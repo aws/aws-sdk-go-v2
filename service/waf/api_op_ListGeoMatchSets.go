@@ -6,62 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/waf/types"
 )
-
-type ListGeoMatchSetsInput struct {
-	_ struct{} `type:"structure"`
-
-	// Specifies the number of GeoMatchSet objects that you want AWS WAF to return
-	// for this request. If you have more GeoMatchSet objects than the number you
-	// specify for Limit, the response includes a NextMarker value that you can
-	// use to get another batch of GeoMatchSet objects.
-	Limit *int64 `type:"integer"`
-
-	// If you specify a value for Limit and you have more GeoMatchSets than the
-	// value of Limit, AWS WAF returns a NextMarker value in the response that allows
-	// you to list another group of GeoMatchSet objects. For the second and subsequent
-	// ListGeoMatchSets requests, specify the value of NextMarker from the previous
-	// response to get information about another batch of GeoMatchSet objects.
-	NextMarker *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s ListGeoMatchSetsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListGeoMatchSetsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListGeoMatchSetsInput"}
-	if s.NextMarker != nil && len(*s.NextMarker) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("NextMarker", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ListGeoMatchSetsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// An array of GeoMatchSetSummary objects.
-	GeoMatchSets []GeoMatchSetSummary `type:"list"`
-
-	// If you have more GeoMatchSet objects than the number that you specified for
-	// Limit in the request, the response includes a NextMarker value. To list more
-	// GeoMatchSet objects, submit another ListGeoMatchSets request, and specify
-	// the NextMarker value from the response in the NextMarker value in the next
-	// request.
-	NextMarker *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s ListGeoMatchSetsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListGeoMatchSets = "ListGeoMatchSets"
 
@@ -78,7 +24,7 @@ const opListGeoMatchSets = "ListGeoMatchSets"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/ListGeoMatchSets
-func (c *Client) ListGeoMatchSetsRequest(input *ListGeoMatchSetsInput) ListGeoMatchSetsRequest {
+func (c *Client) ListGeoMatchSetsRequest(input *types.ListGeoMatchSetsInput) ListGeoMatchSetsRequest {
 	op := &aws.Operation{
 		Name:       opListGeoMatchSets,
 		HTTPMethod: "POST",
@@ -86,10 +32,10 @@ func (c *Client) ListGeoMatchSetsRequest(input *ListGeoMatchSetsInput) ListGeoMa
 	}
 
 	if input == nil {
-		input = &ListGeoMatchSetsInput{}
+		input = &types.ListGeoMatchSetsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListGeoMatchSetsOutput{})
+	req := c.newRequest(op, input, &types.ListGeoMatchSetsOutput{})
 	return ListGeoMatchSetsRequest{Request: req, Input: input, Copy: c.ListGeoMatchSetsRequest}
 }
 
@@ -97,8 +43,8 @@ func (c *Client) ListGeoMatchSetsRequest(input *ListGeoMatchSetsInput) ListGeoMa
 // ListGeoMatchSets API operation.
 type ListGeoMatchSetsRequest struct {
 	*aws.Request
-	Input *ListGeoMatchSetsInput
-	Copy  func(*ListGeoMatchSetsInput) ListGeoMatchSetsRequest
+	Input *types.ListGeoMatchSetsInput
+	Copy  func(*types.ListGeoMatchSetsInput) ListGeoMatchSetsRequest
 }
 
 // Send marshals and sends the ListGeoMatchSets API request.
@@ -110,7 +56,7 @@ func (r ListGeoMatchSetsRequest) Send(ctx context.Context) (*ListGeoMatchSetsRes
 	}
 
 	resp := &ListGeoMatchSetsResponse{
-		ListGeoMatchSetsOutput: r.Request.Data.(*ListGeoMatchSetsOutput),
+		ListGeoMatchSetsOutput: r.Request.Data.(*types.ListGeoMatchSetsOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -120,7 +66,7 @@ func (r ListGeoMatchSetsRequest) Send(ctx context.Context) (*ListGeoMatchSetsRes
 // ListGeoMatchSetsResponse is the response type for the
 // ListGeoMatchSets API operation.
 type ListGeoMatchSetsResponse struct {
-	*ListGeoMatchSetsOutput
+	*types.ListGeoMatchSetsOutput
 
 	response *aws.Response
 }

@@ -6,54 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-type AcceptTransitGatewayVpcAttachmentInput struct {
-	_ struct{} `type:"structure"`
-
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have
-	// the required permissions, the error response is DryRunOperation. Otherwise,
-	// it is UnauthorizedOperation.
-	DryRun *bool `type:"boolean"`
-
-	// The ID of the attachment.
-	//
-	// TransitGatewayAttachmentId is a required field
-	TransitGatewayAttachmentId *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s AcceptTransitGatewayVpcAttachmentInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *AcceptTransitGatewayVpcAttachmentInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "AcceptTransitGatewayVpcAttachmentInput"}
-
-	if s.TransitGatewayAttachmentId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("TransitGatewayAttachmentId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type AcceptTransitGatewayVpcAttachmentOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The VPC attachment.
-	TransitGatewayVpcAttachment *TransitGatewayVpcAttachment `locationName:"transitGatewayVpcAttachment" type:"structure"`
-}
-
-// String returns the string representation
-func (s AcceptTransitGatewayVpcAttachmentOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opAcceptTransitGatewayVpcAttachment = "AcceptTransitGatewayVpcAttachment"
 
@@ -74,7 +28,7 @@ const opAcceptTransitGatewayVpcAttachment = "AcceptTransitGatewayVpcAttachment"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AcceptTransitGatewayVpcAttachment
-func (c *Client) AcceptTransitGatewayVpcAttachmentRequest(input *AcceptTransitGatewayVpcAttachmentInput) AcceptTransitGatewayVpcAttachmentRequest {
+func (c *Client) AcceptTransitGatewayVpcAttachmentRequest(input *types.AcceptTransitGatewayVpcAttachmentInput) AcceptTransitGatewayVpcAttachmentRequest {
 	op := &aws.Operation{
 		Name:       opAcceptTransitGatewayVpcAttachment,
 		HTTPMethod: "POST",
@@ -82,10 +36,10 @@ func (c *Client) AcceptTransitGatewayVpcAttachmentRequest(input *AcceptTransitGa
 	}
 
 	if input == nil {
-		input = &AcceptTransitGatewayVpcAttachmentInput{}
+		input = &types.AcceptTransitGatewayVpcAttachmentInput{}
 	}
 
-	req := c.newRequest(op, input, &AcceptTransitGatewayVpcAttachmentOutput{})
+	req := c.newRequest(op, input, &types.AcceptTransitGatewayVpcAttachmentOutput{})
 	return AcceptTransitGatewayVpcAttachmentRequest{Request: req, Input: input, Copy: c.AcceptTransitGatewayVpcAttachmentRequest}
 }
 
@@ -93,8 +47,8 @@ func (c *Client) AcceptTransitGatewayVpcAttachmentRequest(input *AcceptTransitGa
 // AcceptTransitGatewayVpcAttachment API operation.
 type AcceptTransitGatewayVpcAttachmentRequest struct {
 	*aws.Request
-	Input *AcceptTransitGatewayVpcAttachmentInput
-	Copy  func(*AcceptTransitGatewayVpcAttachmentInput) AcceptTransitGatewayVpcAttachmentRequest
+	Input *types.AcceptTransitGatewayVpcAttachmentInput
+	Copy  func(*types.AcceptTransitGatewayVpcAttachmentInput) AcceptTransitGatewayVpcAttachmentRequest
 }
 
 // Send marshals and sends the AcceptTransitGatewayVpcAttachment API request.
@@ -106,7 +60,7 @@ func (r AcceptTransitGatewayVpcAttachmentRequest) Send(ctx context.Context) (*Ac
 	}
 
 	resp := &AcceptTransitGatewayVpcAttachmentResponse{
-		AcceptTransitGatewayVpcAttachmentOutput: r.Request.Data.(*AcceptTransitGatewayVpcAttachmentOutput),
+		AcceptTransitGatewayVpcAttachmentOutput: r.Request.Data.(*types.AcceptTransitGatewayVpcAttachmentOutput),
 		response:                                &aws.Response{Request: r.Request},
 	}
 
@@ -116,7 +70,7 @@ func (r AcceptTransitGatewayVpcAttachmentRequest) Send(ctx context.Context) (*Ac
 // AcceptTransitGatewayVpcAttachmentResponse is the response type for the
 // AcceptTransitGatewayVpcAttachment API operation.
 type AcceptTransitGatewayVpcAttachmentResponse struct {
-	*AcceptTransitGatewayVpcAttachmentOutput
+	*types.AcceptTransitGatewayVpcAttachmentOutput
 
 	response *aws.Response
 }

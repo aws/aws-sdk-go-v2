@@ -6,71 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/gamelift/types"
 )
-
-// Represents the input for a request action.
-type CreateVpcPeeringAuthorizationInput struct {
-	_ struct{} `type:"structure"`
-
-	// Unique identifier for the AWS account that you use to manage your Amazon
-	// GameLift fleet. You can find your Account ID in the AWS Management Console
-	// under account settings.
-	//
-	// GameLiftAwsAccountId is a required field
-	GameLiftAwsAccountId *string `min:"1" type:"string" required:"true"`
-
-	// Unique identifier for a VPC with resources to be accessed by your Amazon
-	// GameLift fleet. The VPC must be in the same region where your fleet is deployed.
-	// Look up a VPC ID using the VPC Dashboard (https://console.aws.amazon.com/vpc/)
-	// in the AWS Management Console. Learn more about VPC peering in VPC Peering
-	// with Amazon GameLift Fleets (https://docs.aws.amazon.com/gamelift/latest/developerguide/vpc-peering.html).
-	//
-	// PeerVpcId is a required field
-	PeerVpcId *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s CreateVpcPeeringAuthorizationInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateVpcPeeringAuthorizationInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateVpcPeeringAuthorizationInput"}
-
-	if s.GameLiftAwsAccountId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("GameLiftAwsAccountId"))
-	}
-	if s.GameLiftAwsAccountId != nil && len(*s.GameLiftAwsAccountId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("GameLiftAwsAccountId", 1))
-	}
-
-	if s.PeerVpcId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("PeerVpcId"))
-	}
-	if s.PeerVpcId != nil && len(*s.PeerVpcId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("PeerVpcId", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Represents the returned data in response to a request action.
-type CreateVpcPeeringAuthorizationOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Details on the requested VPC peering authorization, including expiration.
-	VpcPeeringAuthorization *VpcPeeringAuthorization `type:"structure"`
-}
-
-// String returns the string representation
-func (s CreateVpcPeeringAuthorizationOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCreateVpcPeeringAuthorization = "CreateVpcPeeringAuthorization"
 
@@ -126,7 +63,7 @@ const opCreateVpcPeeringAuthorization = "CreateVpcPeeringAuthorization"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/CreateVpcPeeringAuthorization
-func (c *Client) CreateVpcPeeringAuthorizationRequest(input *CreateVpcPeeringAuthorizationInput) CreateVpcPeeringAuthorizationRequest {
+func (c *Client) CreateVpcPeeringAuthorizationRequest(input *types.CreateVpcPeeringAuthorizationInput) CreateVpcPeeringAuthorizationRequest {
 	op := &aws.Operation{
 		Name:       opCreateVpcPeeringAuthorization,
 		HTTPMethod: "POST",
@@ -134,10 +71,10 @@ func (c *Client) CreateVpcPeeringAuthorizationRequest(input *CreateVpcPeeringAut
 	}
 
 	if input == nil {
-		input = &CreateVpcPeeringAuthorizationInput{}
+		input = &types.CreateVpcPeeringAuthorizationInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateVpcPeeringAuthorizationOutput{})
+	req := c.newRequest(op, input, &types.CreateVpcPeeringAuthorizationOutput{})
 	return CreateVpcPeeringAuthorizationRequest{Request: req, Input: input, Copy: c.CreateVpcPeeringAuthorizationRequest}
 }
 
@@ -145,8 +82,8 @@ func (c *Client) CreateVpcPeeringAuthorizationRequest(input *CreateVpcPeeringAut
 // CreateVpcPeeringAuthorization API operation.
 type CreateVpcPeeringAuthorizationRequest struct {
 	*aws.Request
-	Input *CreateVpcPeeringAuthorizationInput
-	Copy  func(*CreateVpcPeeringAuthorizationInput) CreateVpcPeeringAuthorizationRequest
+	Input *types.CreateVpcPeeringAuthorizationInput
+	Copy  func(*types.CreateVpcPeeringAuthorizationInput) CreateVpcPeeringAuthorizationRequest
 }
 
 // Send marshals and sends the CreateVpcPeeringAuthorization API request.
@@ -158,7 +95,7 @@ func (r CreateVpcPeeringAuthorizationRequest) Send(ctx context.Context) (*Create
 	}
 
 	resp := &CreateVpcPeeringAuthorizationResponse{
-		CreateVpcPeeringAuthorizationOutput: r.Request.Data.(*CreateVpcPeeringAuthorizationOutput),
+		CreateVpcPeeringAuthorizationOutput: r.Request.Data.(*types.CreateVpcPeeringAuthorizationOutput),
 		response:                            &aws.Response{Request: r.Request},
 	}
 
@@ -168,7 +105,7 @@ func (r CreateVpcPeeringAuthorizationRequest) Send(ctx context.Context) (*Create
 // CreateVpcPeeringAuthorizationResponse is the response type for the
 // CreateVpcPeeringAuthorization API operation.
 type CreateVpcPeeringAuthorizationResponse struct {
-	*CreateVpcPeeringAuthorizationOutput
+	*types.CreateVpcPeeringAuthorizationOutput
 
 	response *aws.Response
 }

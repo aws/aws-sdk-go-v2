@@ -6,65 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/gamelift/types"
 )
-
-// Represents the input for a request action.
-type DescribeGameSessionQueuesInput struct {
-	_ struct{} `type:"structure"`
-
-	// Maximum number of results to return. Use this parameter with NextToken to
-	// get results as a set of sequential pages.
-	Limit *int64 `min:"1" type:"integer"`
-
-	// List of queue names to retrieve information for. To request settings for
-	// all queues, leave this parameter empty.
-	Names []string `type:"list"`
-
-	// Token that indicates the start of the next sequential page of results. Use
-	// the token that is returned with a previous call to this action. To start
-	// at the beginning of the result set, do not specify a value.
-	NextToken *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeGameSessionQueuesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeGameSessionQueuesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeGameSessionQueuesInput"}
-	if s.Limit != nil && *s.Limit < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("Limit", 1))
-	}
-	if s.NextToken != nil && len(*s.NextToken) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Represents the returned data in response to a request action.
-type DescribeGameSessionQueuesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Collection of objects that describes the requested game session queues.
-	GameSessionQueues []GameSessionQueue `type:"list"`
-
-	// Token that indicates where to resume retrieving results on the next call
-	// to this action. If no token is returned, these results represent the end
-	// of the list.
-	NextToken *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeGameSessionQueuesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeGameSessionQueues = "DescribeGameSessionQueues"
 
@@ -93,7 +36,7 @@ const opDescribeGameSessionQueues = "DescribeGameSessionQueues"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DescribeGameSessionQueues
-func (c *Client) DescribeGameSessionQueuesRequest(input *DescribeGameSessionQueuesInput) DescribeGameSessionQueuesRequest {
+func (c *Client) DescribeGameSessionQueuesRequest(input *types.DescribeGameSessionQueuesInput) DescribeGameSessionQueuesRequest {
 	op := &aws.Operation{
 		Name:       opDescribeGameSessionQueues,
 		HTTPMethod: "POST",
@@ -101,10 +44,10 @@ func (c *Client) DescribeGameSessionQueuesRequest(input *DescribeGameSessionQueu
 	}
 
 	if input == nil {
-		input = &DescribeGameSessionQueuesInput{}
+		input = &types.DescribeGameSessionQueuesInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeGameSessionQueuesOutput{})
+	req := c.newRequest(op, input, &types.DescribeGameSessionQueuesOutput{})
 	return DescribeGameSessionQueuesRequest{Request: req, Input: input, Copy: c.DescribeGameSessionQueuesRequest}
 }
 
@@ -112,8 +55,8 @@ func (c *Client) DescribeGameSessionQueuesRequest(input *DescribeGameSessionQueu
 // DescribeGameSessionQueues API operation.
 type DescribeGameSessionQueuesRequest struct {
 	*aws.Request
-	Input *DescribeGameSessionQueuesInput
-	Copy  func(*DescribeGameSessionQueuesInput) DescribeGameSessionQueuesRequest
+	Input *types.DescribeGameSessionQueuesInput
+	Copy  func(*types.DescribeGameSessionQueuesInput) DescribeGameSessionQueuesRequest
 }
 
 // Send marshals and sends the DescribeGameSessionQueues API request.
@@ -125,7 +68,7 @@ func (r DescribeGameSessionQueuesRequest) Send(ctx context.Context) (*DescribeGa
 	}
 
 	resp := &DescribeGameSessionQueuesResponse{
-		DescribeGameSessionQueuesOutput: r.Request.Data.(*DescribeGameSessionQueuesOutput),
+		DescribeGameSessionQueuesOutput: r.Request.Data.(*types.DescribeGameSessionQueuesOutput),
 		response:                        &aws.Response{Request: r.Request},
 	}
 
@@ -135,7 +78,7 @@ func (r DescribeGameSessionQueuesRequest) Send(ctx context.Context) (*DescribeGa
 // DescribeGameSessionQueuesResponse is the response type for the
 // DescribeGameSessionQueues API operation.
 type DescribeGameSessionQueuesResponse struct {
-	*DescribeGameSessionQueuesOutput
+	*types.DescribeGameSessionQueuesOutput
 
 	response *aws.Response
 }

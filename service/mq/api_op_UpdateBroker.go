@@ -6,182 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/mq/types"
 )
-
-type UpdateBrokerInput struct {
-	_ struct{} `type:"structure"`
-
-	AutoMinorVersionUpgrade *bool `locationName:"autoMinorVersionUpgrade" type:"boolean"`
-
-	// BrokerId is a required field
-	BrokerId *string `location:"uri" locationName:"broker-id" type:"string" required:"true"`
-
-	// A list of information about the configuration.
-	Configuration *ConfigurationId `locationName:"configuration" type:"structure"`
-
-	EngineVersion *string `locationName:"engineVersion" type:"string"`
-
-	HostInstanceType *string `locationName:"hostInstanceType" type:"string"`
-
-	// The list of information about logs to be enabled for the specified broker.
-	Logs *Logs `locationName:"logs" type:"structure"`
-
-	SecurityGroups []string `locationName:"securityGroups" type:"list"`
-}
-
-// String returns the string representation
-func (s UpdateBrokerInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateBrokerInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateBrokerInput"}
-
-	if s.BrokerId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("BrokerId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s UpdateBrokerInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.AutoMinorVersionUpgrade != nil {
-		v := *s.AutoMinorVersionUpgrade
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "autoMinorVersionUpgrade", protocol.BoolValue(v), metadata)
-	}
-	if s.Configuration != nil {
-		v := s.Configuration
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "configuration", v, metadata)
-	}
-	if s.EngineVersion != nil {
-		v := *s.EngineVersion
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "engineVersion", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.HostInstanceType != nil {
-		v := *s.HostInstanceType
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "hostInstanceType", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Logs != nil {
-		v := s.Logs
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "logs", v, metadata)
-	}
-	if s.SecurityGroups != nil {
-		v := s.SecurityGroups
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "securityGroups", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
-		}
-		ls0.End()
-
-	}
-	if s.BrokerId != nil {
-		v := *s.BrokerId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "broker-id", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type UpdateBrokerOutput struct {
-	_ struct{} `type:"structure"`
-
-	AutoMinorVersionUpgrade *bool `locationName:"autoMinorVersionUpgrade" type:"boolean"`
-
-	BrokerId *string `locationName:"brokerId" type:"string"`
-
-	// A list of information about the configuration.
-	Configuration *ConfigurationId `locationName:"configuration" type:"structure"`
-
-	EngineVersion *string `locationName:"engineVersion" type:"string"`
-
-	HostInstanceType *string `locationName:"hostInstanceType" type:"string"`
-
-	// The list of information about logs to be enabled for the specified broker.
-	Logs *Logs `locationName:"logs" type:"structure"`
-
-	SecurityGroups []string `locationName:"securityGroups" type:"list"`
-}
-
-// String returns the string representation
-func (s UpdateBrokerOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s UpdateBrokerOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.AutoMinorVersionUpgrade != nil {
-		v := *s.AutoMinorVersionUpgrade
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "autoMinorVersionUpgrade", protocol.BoolValue(v), metadata)
-	}
-	if s.BrokerId != nil {
-		v := *s.BrokerId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "brokerId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Configuration != nil {
-		v := s.Configuration
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "configuration", v, metadata)
-	}
-	if s.EngineVersion != nil {
-		v := *s.EngineVersion
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "engineVersion", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.HostInstanceType != nil {
-		v := *s.HostInstanceType
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "hostInstanceType", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Logs != nil {
-		v := s.Logs
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "logs", v, metadata)
-	}
-	if s.SecurityGroups != nil {
-		v := s.SecurityGroups
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "securityGroups", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
-		}
-		ls0.End()
-
-	}
-	return nil
-}
 
 const opUpdateBroker = "UpdateBroker"
 
@@ -198,7 +24,7 @@ const opUpdateBroker = "UpdateBroker"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/UpdateBroker
-func (c *Client) UpdateBrokerRequest(input *UpdateBrokerInput) UpdateBrokerRequest {
+func (c *Client) UpdateBrokerRequest(input *types.UpdateBrokerInput) UpdateBrokerRequest {
 	op := &aws.Operation{
 		Name:       opUpdateBroker,
 		HTTPMethod: "PUT",
@@ -206,10 +32,10 @@ func (c *Client) UpdateBrokerRequest(input *UpdateBrokerInput) UpdateBrokerReque
 	}
 
 	if input == nil {
-		input = &UpdateBrokerInput{}
+		input = &types.UpdateBrokerInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateBrokerOutput{})
+	req := c.newRequest(op, input, &types.UpdateBrokerOutput{})
 	return UpdateBrokerRequest{Request: req, Input: input, Copy: c.UpdateBrokerRequest}
 }
 
@@ -217,8 +43,8 @@ func (c *Client) UpdateBrokerRequest(input *UpdateBrokerInput) UpdateBrokerReque
 // UpdateBroker API operation.
 type UpdateBrokerRequest struct {
 	*aws.Request
-	Input *UpdateBrokerInput
-	Copy  func(*UpdateBrokerInput) UpdateBrokerRequest
+	Input *types.UpdateBrokerInput
+	Copy  func(*types.UpdateBrokerInput) UpdateBrokerRequest
 }
 
 // Send marshals and sends the UpdateBroker API request.
@@ -230,7 +56,7 @@ func (r UpdateBrokerRequest) Send(ctx context.Context) (*UpdateBrokerResponse, e
 	}
 
 	resp := &UpdateBrokerResponse{
-		UpdateBrokerOutput: r.Request.Data.(*UpdateBrokerOutput),
+		UpdateBrokerOutput: r.Request.Data.(*types.UpdateBrokerOutput),
 		response:           &aws.Response{Request: r.Request},
 	}
 
@@ -240,7 +66,7 @@ func (r UpdateBrokerRequest) Send(ctx context.Context) (*UpdateBrokerResponse, e
 // UpdateBrokerResponse is the response type for the
 // UpdateBroker API operation.
 type UpdateBrokerResponse struct {
-	*UpdateBrokerOutput
+	*types.UpdateBrokerOutput
 
 	response *aws.Response
 }

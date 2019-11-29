@@ -6,76 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/storagegateway/types"
 )
-
-type DescribeSMBSettingsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation
-	// to return a list of gateways for your account and AWS Region.
-	//
-	// GatewayARN is a required field
-	GatewayARN *string `min:"50" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeSMBSettingsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeSMBSettingsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeSMBSettingsInput"}
-
-	if s.GatewayARN == nil {
-		invalidParams.Add(aws.NewErrParamRequired("GatewayARN"))
-	}
-	if s.GatewayARN != nil && len(*s.GatewayARN) < 50 {
-		invalidParams.Add(aws.NewErrParamMinLen("GatewayARN", 50))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribeSMBSettingsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the domain that the gateway is joined to.
-	DomainName *string `min:"1" type:"string"`
-
-	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation
-	// to return a list of gateways for your account and AWS Region.
-	GatewayARN *string `min:"50" type:"string"`
-
-	// This value is true if a password for the guest user “smbguest” is set,
-	// and otherwise false.
-	SMBGuestPasswordSet *bool `type:"boolean"`
-
-	// The type of security strategy that was specified for file gateway.
-	//
-	// ClientSpecified: if you use this option, requests are established based on
-	// what is negotiated by the client. This option is recommended when you want
-	// to maximize compatibility across different clients in your environment.
-	//
-	// MandatorySigning: if you use this option, file gateway only allows connections
-	// from SMBv2 or SMBv3 clients that have signing enabled. This option works
-	// with SMB clients on Microsoft Windows Vista, Windows Server 2008 or newer.
-	//
-	// MandatoryEncryption: if you use this option, file gateway only allows connections
-	// from SMBv3 clients that have encryption enabled. This option is highly recommended
-	// for environments that handle sensitive data. This option works with SMB clients
-	// on Microsoft Windows 8, Windows Server 2012 or newer.
-	SMBSecurityStrategy SMBSecurityStrategy `type:"string" enum:"true"`
-}
-
-// String returns the string representation
-func (s DescribeSMBSettingsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeSMBSettings = "DescribeSMBSettings"
 
@@ -93,7 +25,7 @@ const opDescribeSMBSettings = "DescribeSMBSettings"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DescribeSMBSettings
-func (c *Client) DescribeSMBSettingsRequest(input *DescribeSMBSettingsInput) DescribeSMBSettingsRequest {
+func (c *Client) DescribeSMBSettingsRequest(input *types.DescribeSMBSettingsInput) DescribeSMBSettingsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeSMBSettings,
 		HTTPMethod: "POST",
@@ -101,10 +33,10 @@ func (c *Client) DescribeSMBSettingsRequest(input *DescribeSMBSettingsInput) Des
 	}
 
 	if input == nil {
-		input = &DescribeSMBSettingsInput{}
+		input = &types.DescribeSMBSettingsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeSMBSettingsOutput{})
+	req := c.newRequest(op, input, &types.DescribeSMBSettingsOutput{})
 	return DescribeSMBSettingsRequest{Request: req, Input: input, Copy: c.DescribeSMBSettingsRequest}
 }
 
@@ -112,8 +44,8 @@ func (c *Client) DescribeSMBSettingsRequest(input *DescribeSMBSettingsInput) Des
 // DescribeSMBSettings API operation.
 type DescribeSMBSettingsRequest struct {
 	*aws.Request
-	Input *DescribeSMBSettingsInput
-	Copy  func(*DescribeSMBSettingsInput) DescribeSMBSettingsRequest
+	Input *types.DescribeSMBSettingsInput
+	Copy  func(*types.DescribeSMBSettingsInput) DescribeSMBSettingsRequest
 }
 
 // Send marshals and sends the DescribeSMBSettings API request.
@@ -125,7 +57,7 @@ func (r DescribeSMBSettingsRequest) Send(ctx context.Context) (*DescribeSMBSetti
 	}
 
 	resp := &DescribeSMBSettingsResponse{
-		DescribeSMBSettingsOutput: r.Request.Data.(*DescribeSMBSettingsOutput),
+		DescribeSMBSettingsOutput: r.Request.Data.(*types.DescribeSMBSettingsOutput),
 		response:                  &aws.Response{Request: r.Request},
 	}
 
@@ -135,7 +67,7 @@ func (r DescribeSMBSettingsRequest) Send(ctx context.Context) (*DescribeSMBSetti
 // DescribeSMBSettingsResponse is the response type for the
 // DescribeSMBSettings API operation.
 type DescribeSMBSettingsResponse struct {
-	*DescribeSMBSettingsOutput
+	*types.DescribeSMBSettingsOutput
 
 	response *aws.Response
 }

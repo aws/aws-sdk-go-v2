@@ -6,62 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/inspector/types"
 )
-
-type DescribeRulesPackagesInput struct {
-	_ struct{} `type:"structure"`
-
-	// The locale that you want to translate a rules package description into.
-	Locale Locale `locationName:"locale" type:"string" enum:"true"`
-
-	// The ARN that specifies the rules package that you want to describe.
-	//
-	// RulesPackageArns is a required field
-	RulesPackageArns []string `locationName:"rulesPackageArns" min:"1" type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeRulesPackagesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeRulesPackagesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeRulesPackagesInput"}
-
-	if s.RulesPackageArns == nil {
-		invalidParams.Add(aws.NewErrParamRequired("RulesPackageArns"))
-	}
-	if s.RulesPackageArns != nil && len(s.RulesPackageArns) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("RulesPackageArns", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribeRulesPackagesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Rules package details that cannot be described. An error code is provided
-	// for each failed item.
-	//
-	// FailedItems is a required field
-	FailedItems map[string]FailedItemDetails `locationName:"failedItems" type:"map" required:"true"`
-
-	// Information about the rules package.
-	//
-	// RulesPackages is a required field
-	RulesPackages []RulesPackage `locationName:"rulesPackages" type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeRulesPackagesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeRulesPackages = "DescribeRulesPackages"
 
@@ -79,7 +25,7 @@ const opDescribeRulesPackages = "DescribeRulesPackages"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/DescribeRulesPackages
-func (c *Client) DescribeRulesPackagesRequest(input *DescribeRulesPackagesInput) DescribeRulesPackagesRequest {
+func (c *Client) DescribeRulesPackagesRequest(input *types.DescribeRulesPackagesInput) DescribeRulesPackagesRequest {
 	op := &aws.Operation{
 		Name:       opDescribeRulesPackages,
 		HTTPMethod: "POST",
@@ -87,10 +33,10 @@ func (c *Client) DescribeRulesPackagesRequest(input *DescribeRulesPackagesInput)
 	}
 
 	if input == nil {
-		input = &DescribeRulesPackagesInput{}
+		input = &types.DescribeRulesPackagesInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeRulesPackagesOutput{})
+	req := c.newRequest(op, input, &types.DescribeRulesPackagesOutput{})
 	return DescribeRulesPackagesRequest{Request: req, Input: input, Copy: c.DescribeRulesPackagesRequest}
 }
 
@@ -98,8 +44,8 @@ func (c *Client) DescribeRulesPackagesRequest(input *DescribeRulesPackagesInput)
 // DescribeRulesPackages API operation.
 type DescribeRulesPackagesRequest struct {
 	*aws.Request
-	Input *DescribeRulesPackagesInput
-	Copy  func(*DescribeRulesPackagesInput) DescribeRulesPackagesRequest
+	Input *types.DescribeRulesPackagesInput
+	Copy  func(*types.DescribeRulesPackagesInput) DescribeRulesPackagesRequest
 }
 
 // Send marshals and sends the DescribeRulesPackages API request.
@@ -111,7 +57,7 @@ func (r DescribeRulesPackagesRequest) Send(ctx context.Context) (*DescribeRulesP
 	}
 
 	resp := &DescribeRulesPackagesResponse{
-		DescribeRulesPackagesOutput: r.Request.Data.(*DescribeRulesPackagesOutput),
+		DescribeRulesPackagesOutput: r.Request.Data.(*types.DescribeRulesPackagesOutput),
 		response:                    &aws.Response{Request: r.Request},
 	}
 
@@ -121,7 +67,7 @@ func (r DescribeRulesPackagesRequest) Send(ctx context.Context) (*DescribeRulesP
 // DescribeRulesPackagesResponse is the response type for the
 // DescribeRulesPackages API operation.
 type DescribeRulesPackagesResponse struct {
-	*DescribeRulesPackagesOutput
+	*types.DescribeRulesPackagesOutput
 
 	response *aws.Response
 }

@@ -4,99 +4,10 @@ package ioteventsdata
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/ioteventsdata/types"
 )
-
-type BatchUpdateDetectorInput struct {
-	_ struct{} `type:"structure"`
-
-	// The list of detectors (instances) to update, along with the values to update.
-	//
-	// Detectors is a required field
-	Detectors []UpdateDetectorRequest `locationName:"detectors" min:"1" type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s BatchUpdateDetectorInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *BatchUpdateDetectorInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "BatchUpdateDetectorInput"}
-
-	if s.Detectors == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Detectors"))
-	}
-	if s.Detectors != nil && len(s.Detectors) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Detectors", 1))
-	}
-	if s.Detectors != nil {
-		for i, v := range s.Detectors {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Detectors", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s BatchUpdateDetectorInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.Detectors != nil {
-		v := s.Detectors
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "detectors", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	return nil
-}
-
-type BatchUpdateDetectorOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A list of those detector updates that resulted in errors. (If an error is
-	// listed here, the specific update did not occur.)
-	BatchUpdateDetectorErrorEntries []BatchUpdateDetectorErrorEntry `locationName:"batchUpdateDetectorErrorEntries" type:"list"`
-}
-
-// String returns the string representation
-func (s BatchUpdateDetectorOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s BatchUpdateDetectorOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.BatchUpdateDetectorErrorEntries != nil {
-		v := s.BatchUpdateDetectorErrorEntries
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "batchUpdateDetectorErrorEntries", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	return nil
-}
 
 const opBatchUpdateDetector = "BatchUpdateDetector"
 
@@ -114,7 +25,7 @@ const opBatchUpdateDetector = "BatchUpdateDetector"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iotevents-data-2018-10-23/BatchUpdateDetector
-func (c *Client) BatchUpdateDetectorRequest(input *BatchUpdateDetectorInput) BatchUpdateDetectorRequest {
+func (c *Client) BatchUpdateDetectorRequest(input *types.BatchUpdateDetectorInput) BatchUpdateDetectorRequest {
 	op := &aws.Operation{
 		Name:       opBatchUpdateDetector,
 		HTTPMethod: "POST",
@@ -122,10 +33,10 @@ func (c *Client) BatchUpdateDetectorRequest(input *BatchUpdateDetectorInput) Bat
 	}
 
 	if input == nil {
-		input = &BatchUpdateDetectorInput{}
+		input = &types.BatchUpdateDetectorInput{}
 	}
 
-	req := c.newRequest(op, input, &BatchUpdateDetectorOutput{})
+	req := c.newRequest(op, input, &types.BatchUpdateDetectorOutput{})
 	return BatchUpdateDetectorRequest{Request: req, Input: input, Copy: c.BatchUpdateDetectorRequest}
 }
 
@@ -133,8 +44,8 @@ func (c *Client) BatchUpdateDetectorRequest(input *BatchUpdateDetectorInput) Bat
 // BatchUpdateDetector API operation.
 type BatchUpdateDetectorRequest struct {
 	*aws.Request
-	Input *BatchUpdateDetectorInput
-	Copy  func(*BatchUpdateDetectorInput) BatchUpdateDetectorRequest
+	Input *types.BatchUpdateDetectorInput
+	Copy  func(*types.BatchUpdateDetectorInput) BatchUpdateDetectorRequest
 }
 
 // Send marshals and sends the BatchUpdateDetector API request.
@@ -146,7 +57,7 @@ func (r BatchUpdateDetectorRequest) Send(ctx context.Context) (*BatchUpdateDetec
 	}
 
 	resp := &BatchUpdateDetectorResponse{
-		BatchUpdateDetectorOutput: r.Request.Data.(*BatchUpdateDetectorOutput),
+		BatchUpdateDetectorOutput: r.Request.Data.(*types.BatchUpdateDetectorOutput),
 		response:                  &aws.Response{Request: r.Request},
 	}
 
@@ -156,7 +67,7 @@ func (r BatchUpdateDetectorRequest) Send(ctx context.Context) (*BatchUpdateDetec
 // BatchUpdateDetectorResponse is the response type for the
 // BatchUpdateDetector API operation.
 type BatchUpdateDetectorResponse struct {
-	*BatchUpdateDetectorOutput
+	*types.BatchUpdateDetectorOutput
 
 	response *aws.Response
 }

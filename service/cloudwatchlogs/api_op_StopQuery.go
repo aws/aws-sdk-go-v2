@@ -6,49 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/cloudwatchlogs/types"
 )
-
-type StopQueryInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID number of the query to stop. If necessary, you can use DescribeQueries
-	// to find this ID number.
-	//
-	// QueryId is a required field
-	QueryId *string `locationName:"queryId" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s StopQueryInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *StopQueryInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "StopQueryInput"}
-
-	if s.QueryId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("QueryId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type StopQueryOutput struct {
-	_ struct{} `type:"structure"`
-
-	// This is true if the query was stopped by the StopQuery operation.
-	Success *bool `locationName:"success" type:"boolean"`
-}
-
-// String returns the string representation
-func (s StopQueryOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opStopQuery = "StopQuery"
 
@@ -67,7 +26,7 @@ const opStopQuery = "StopQuery"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/StopQuery
-func (c *Client) StopQueryRequest(input *StopQueryInput) StopQueryRequest {
+func (c *Client) StopQueryRequest(input *types.StopQueryInput) StopQueryRequest {
 	op := &aws.Operation{
 		Name:       opStopQuery,
 		HTTPMethod: "POST",
@@ -75,10 +34,10 @@ func (c *Client) StopQueryRequest(input *StopQueryInput) StopQueryRequest {
 	}
 
 	if input == nil {
-		input = &StopQueryInput{}
+		input = &types.StopQueryInput{}
 	}
 
-	req := c.newRequest(op, input, &StopQueryOutput{})
+	req := c.newRequest(op, input, &types.StopQueryOutput{})
 	return StopQueryRequest{Request: req, Input: input, Copy: c.StopQueryRequest}
 }
 
@@ -86,8 +45,8 @@ func (c *Client) StopQueryRequest(input *StopQueryInput) StopQueryRequest {
 // StopQuery API operation.
 type StopQueryRequest struct {
 	*aws.Request
-	Input *StopQueryInput
-	Copy  func(*StopQueryInput) StopQueryRequest
+	Input *types.StopQueryInput
+	Copy  func(*types.StopQueryInput) StopQueryRequest
 }
 
 // Send marshals and sends the StopQuery API request.
@@ -99,7 +58,7 @@ func (r StopQueryRequest) Send(ctx context.Context) (*StopQueryResponse, error) 
 	}
 
 	resp := &StopQueryResponse{
-		StopQueryOutput: r.Request.Data.(*StopQueryOutput),
+		StopQueryOutput: r.Request.Data.(*types.StopQueryOutput),
 		response:        &aws.Response{Request: r.Request},
 	}
 
@@ -109,7 +68,7 @@ func (r StopQueryRequest) Send(ctx context.Context) (*StopQueryResponse, error) 
 // StopQueryResponse is the response type for the
 // StopQuery API operation.
 type StopQueryResponse struct {
-	*StopQueryOutput
+	*types.StopQueryOutput
 
 	response *aws.Response
 }

@@ -6,62 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/resourcegroupstaggingapi/types"
 )
-
-type GetTagValuesInput struct {
-	_ struct{} `type:"structure"`
-
-	// The key for which you want to list all existing values in the specified region
-	// for the AWS account.
-	//
-	// Key is a required field
-	Key *string `min:"1" type:"string" required:"true"`
-
-	// A string that indicates that additional data is available. Leave this value
-	// empty for your initial request. If the response includes a PaginationToken,
-	// use that string for this value to request an additional page of data.
-	PaginationToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s GetTagValuesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetTagValuesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetTagValuesInput"}
-
-	if s.Key == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Key"))
-	}
-	if s.Key != nil && len(*s.Key) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Key", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type GetTagValuesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A string that indicates that the response contains more data than can be
-	// returned in a single response. To receive additional data, specify this string
-	// for the PaginationToken value in a subsequent request.
-	PaginationToken *string `type:"string"`
-
-	// A list of all tag values for the specified key in the AWS account.
-	TagValues []string `type:"list"`
-}
-
-// String returns the string representation
-func (s GetTagValuesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetTagValues = "GetTagValues"
 
@@ -79,7 +25,7 @@ const opGetTagValues = "GetTagValues"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/resourcegroupstaggingapi-2017-01-26/GetTagValues
-func (c *Client) GetTagValuesRequest(input *GetTagValuesInput) GetTagValuesRequest {
+func (c *Client) GetTagValuesRequest(input *types.GetTagValuesInput) GetTagValuesRequest {
 	op := &aws.Operation{
 		Name:       opGetTagValues,
 		HTTPMethod: "POST",
@@ -93,10 +39,10 @@ func (c *Client) GetTagValuesRequest(input *GetTagValuesInput) GetTagValuesReque
 	}
 
 	if input == nil {
-		input = &GetTagValuesInput{}
+		input = &types.GetTagValuesInput{}
 	}
 
-	req := c.newRequest(op, input, &GetTagValuesOutput{})
+	req := c.newRequest(op, input, &types.GetTagValuesOutput{})
 	return GetTagValuesRequest{Request: req, Input: input, Copy: c.GetTagValuesRequest}
 }
 
@@ -104,8 +50,8 @@ func (c *Client) GetTagValuesRequest(input *GetTagValuesInput) GetTagValuesReque
 // GetTagValues API operation.
 type GetTagValuesRequest struct {
 	*aws.Request
-	Input *GetTagValuesInput
-	Copy  func(*GetTagValuesInput) GetTagValuesRequest
+	Input *types.GetTagValuesInput
+	Copy  func(*types.GetTagValuesInput) GetTagValuesRequest
 }
 
 // Send marshals and sends the GetTagValues API request.
@@ -117,7 +63,7 @@ func (r GetTagValuesRequest) Send(ctx context.Context) (*GetTagValuesResponse, e
 	}
 
 	resp := &GetTagValuesResponse{
-		GetTagValuesOutput: r.Request.Data.(*GetTagValuesOutput),
+		GetTagValuesOutput: r.Request.Data.(*types.GetTagValuesOutput),
 		response:           &aws.Response{Request: r.Request},
 	}
 
@@ -147,7 +93,7 @@ func NewGetTagValuesPaginator(req GetTagValuesRequest) GetTagValuesPaginator {
 	return GetTagValuesPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *GetTagValuesInput
+				var inCpy *types.GetTagValuesInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -167,14 +113,14 @@ type GetTagValuesPaginator struct {
 	aws.Pager
 }
 
-func (p *GetTagValuesPaginator) CurrentPage() *GetTagValuesOutput {
-	return p.Pager.CurrentPage().(*GetTagValuesOutput)
+func (p *GetTagValuesPaginator) CurrentPage() *types.GetTagValuesOutput {
+	return p.Pager.CurrentPage().(*types.GetTagValuesOutput)
 }
 
 // GetTagValuesResponse is the response type for the
 // GetTagValues API operation.
 type GetTagValuesResponse struct {
-	*GetTagValuesOutput
+	*types.GetTagValuesOutput
 
 	response *aws.Response
 }

@@ -6,66 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/elastictranscoder/types"
 )
-
-// The DeletePipelineRequest structure.
-type DeletePipelineInput struct {
-	_ struct{} `type:"structure"`
-
-	// The identifier of the pipeline that you want to delete.
-	//
-	// Id is a required field
-	Id *string `location:"uri" locationName:"Id" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeletePipelineInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeletePipelineInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeletePipelineInput"}
-
-	if s.Id == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Id"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeletePipelineInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.Id != nil {
-		v := *s.Id
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "Id", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-// The DeletePipelineResponse structure.
-type DeletePipelineOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeletePipelineOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeletePipelineOutput) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
 
 const opDeletePipeline = "DeletePipeline"
 
@@ -84,7 +26,7 @@ const opDeletePipeline = "DeletePipeline"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) DeletePipelineRequest(input *DeletePipelineInput) DeletePipelineRequest {
+func (c *Client) DeletePipelineRequest(input *types.DeletePipelineInput) DeletePipelineRequest {
 	op := &aws.Operation{
 		Name:       opDeletePipeline,
 		HTTPMethod: "DELETE",
@@ -92,10 +34,10 @@ func (c *Client) DeletePipelineRequest(input *DeletePipelineInput) DeletePipelin
 	}
 
 	if input == nil {
-		input = &DeletePipelineInput{}
+		input = &types.DeletePipelineInput{}
 	}
 
-	req := c.newRequest(op, input, &DeletePipelineOutput{})
+	req := c.newRequest(op, input, &types.DeletePipelineOutput{})
 	return DeletePipelineRequest{Request: req, Input: input, Copy: c.DeletePipelineRequest}
 }
 
@@ -103,8 +45,8 @@ func (c *Client) DeletePipelineRequest(input *DeletePipelineInput) DeletePipelin
 // DeletePipeline API operation.
 type DeletePipelineRequest struct {
 	*aws.Request
-	Input *DeletePipelineInput
-	Copy  func(*DeletePipelineInput) DeletePipelineRequest
+	Input *types.DeletePipelineInput
+	Copy  func(*types.DeletePipelineInput) DeletePipelineRequest
 }
 
 // Send marshals and sends the DeletePipeline API request.
@@ -116,7 +58,7 @@ func (r DeletePipelineRequest) Send(ctx context.Context) (*DeletePipelineRespons
 	}
 
 	resp := &DeletePipelineResponse{
-		DeletePipelineOutput: r.Request.Data.(*DeletePipelineOutput),
+		DeletePipelineOutput: r.Request.Data.(*types.DeletePipelineOutput),
 		response:             &aws.Response{Request: r.Request},
 	}
 
@@ -126,7 +68,7 @@ func (r DeletePipelineRequest) Send(ctx context.Context) (*DeletePipelineRespons
 // DeletePipelineResponse is the response type for the
 // DeletePipeline API operation.
 type DeletePipelineResponse struct {
-	*DeletePipelineOutput
+	*types.DeletePipelineOutput
 
 	response *aws.Response
 }

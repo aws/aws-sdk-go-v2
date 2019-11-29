@@ -6,56 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/snowball/types"
 )
-
-type DescribeJobInput struct {
-	_ struct{} `type:"structure"`
-
-	// The automatically generated ID for a job, for example JID123e4567-e89b-12d3-a456-426655440000.
-	//
-	// JobId is a required field
-	JobId *string `min:"39" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeJobInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeJobInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeJobInput"}
-
-	if s.JobId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("JobId"))
-	}
-	if s.JobId != nil && len(*s.JobId) < 39 {
-		invalidParams.Add(aws.NewErrParamMinLen("JobId", 39))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribeJobOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Information about a specific job, including shipping information, job status,
-	// and other important metadata.
-	JobMetadata *JobMetadata `type:"structure"`
-
-	// Information about a specific job part (in the case of an export job), including
-	// shipping information, job status, and other important metadata.
-	SubJobMetadata []JobMetadata `type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeJobOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeJob = "DescribeJob"
 
@@ -73,7 +25,7 @@ const opDescribeJob = "DescribeJob"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/DescribeJob
-func (c *Client) DescribeJobRequest(input *DescribeJobInput) DescribeJobRequest {
+func (c *Client) DescribeJobRequest(input *types.DescribeJobInput) DescribeJobRequest {
 	op := &aws.Operation{
 		Name:       opDescribeJob,
 		HTTPMethod: "POST",
@@ -81,10 +33,10 @@ func (c *Client) DescribeJobRequest(input *DescribeJobInput) DescribeJobRequest 
 	}
 
 	if input == nil {
-		input = &DescribeJobInput{}
+		input = &types.DescribeJobInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeJobOutput{})
+	req := c.newRequest(op, input, &types.DescribeJobOutput{})
 	return DescribeJobRequest{Request: req, Input: input, Copy: c.DescribeJobRequest}
 }
 
@@ -92,8 +44,8 @@ func (c *Client) DescribeJobRequest(input *DescribeJobInput) DescribeJobRequest 
 // DescribeJob API operation.
 type DescribeJobRequest struct {
 	*aws.Request
-	Input *DescribeJobInput
-	Copy  func(*DescribeJobInput) DescribeJobRequest
+	Input *types.DescribeJobInput
+	Copy  func(*types.DescribeJobInput) DescribeJobRequest
 }
 
 // Send marshals and sends the DescribeJob API request.
@@ -105,7 +57,7 @@ func (r DescribeJobRequest) Send(ctx context.Context) (*DescribeJobResponse, err
 	}
 
 	resp := &DescribeJobResponse{
-		DescribeJobOutput: r.Request.Data.(*DescribeJobOutput),
+		DescribeJobOutput: r.Request.Data.(*types.DescribeJobOutput),
 		response:          &aws.Response{Request: r.Request},
 	}
 
@@ -115,7 +67,7 @@ func (r DescribeJobRequest) Send(ctx context.Context) (*DescribeJobResponse, err
 // DescribeJobResponse is the response type for the
 // DescribeJob API operation.
 type DescribeJobResponse struct {
-	*DescribeJobOutput
+	*types.DescribeJobOutput
 
 	response *aws.Response
 }

@@ -6,85 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/worklink/types"
 )
-
-type SignOutUserInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ARN of the fleet.
-	//
-	// FleetArn is a required field
-	FleetArn *string `min:"20" type:"string" required:"true"`
-
-	// The name of the user.
-	//
-	// Username is a required field
-	Username *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s SignOutUserInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *SignOutUserInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "SignOutUserInput"}
-
-	if s.FleetArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("FleetArn"))
-	}
-	if s.FleetArn != nil && len(*s.FleetArn) < 20 {
-		invalidParams.Add(aws.NewErrParamMinLen("FleetArn", 20))
-	}
-
-	if s.Username == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Username"))
-	}
-	if s.Username != nil && len(*s.Username) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Username", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s SignOutUserInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.FleetArn != nil {
-		v := *s.FleetArn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "FleetArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Username != nil {
-		v := *s.Username
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "Username", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type SignOutUserOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s SignOutUserOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s SignOutUserOutput) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
 
 const opSignOutUser = "SignOutUser"
 
@@ -102,7 +25,7 @@ const opSignOutUser = "SignOutUser"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/worklink-2018-09-25/SignOutUser
-func (c *Client) SignOutUserRequest(input *SignOutUserInput) SignOutUserRequest {
+func (c *Client) SignOutUserRequest(input *types.SignOutUserInput) SignOutUserRequest {
 	op := &aws.Operation{
 		Name:       opSignOutUser,
 		HTTPMethod: "POST",
@@ -110,10 +33,10 @@ func (c *Client) SignOutUserRequest(input *SignOutUserInput) SignOutUserRequest 
 	}
 
 	if input == nil {
-		input = &SignOutUserInput{}
+		input = &types.SignOutUserInput{}
 	}
 
-	req := c.newRequest(op, input, &SignOutUserOutput{})
+	req := c.newRequest(op, input, &types.SignOutUserOutput{})
 	return SignOutUserRequest{Request: req, Input: input, Copy: c.SignOutUserRequest}
 }
 
@@ -121,8 +44,8 @@ func (c *Client) SignOutUserRequest(input *SignOutUserInput) SignOutUserRequest 
 // SignOutUser API operation.
 type SignOutUserRequest struct {
 	*aws.Request
-	Input *SignOutUserInput
-	Copy  func(*SignOutUserInput) SignOutUserRequest
+	Input *types.SignOutUserInput
+	Copy  func(*types.SignOutUserInput) SignOutUserRequest
 }
 
 // Send marshals and sends the SignOutUser API request.
@@ -134,7 +57,7 @@ func (r SignOutUserRequest) Send(ctx context.Context) (*SignOutUserResponse, err
 	}
 
 	resp := &SignOutUserResponse{
-		SignOutUserOutput: r.Request.Data.(*SignOutUserOutput),
+		SignOutUserOutput: r.Request.Data.(*types.SignOutUserOutput),
 		response:          &aws.Response{Request: r.Request},
 	}
 
@@ -144,7 +67,7 @@ func (r SignOutUserRequest) Send(ctx context.Context) (*SignOutUserResponse, err
 // SignOutUserResponse is the response type for the
 // SignOutUser API operation.
 type SignOutUserResponse struct {
-	*SignOutUserOutput
+	*types.SignOutUserOutput
 
 	response *aws.Response
 }

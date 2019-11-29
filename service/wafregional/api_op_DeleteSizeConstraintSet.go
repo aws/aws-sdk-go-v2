@@ -6,66 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/wafregional/types"
 )
-
-type DeleteSizeConstraintSetInput struct {
-	_ struct{} `type:"structure"`
-
-	// The value returned by the most recent call to GetChangeToken.
-	//
-	// ChangeToken is a required field
-	ChangeToken *string `min:"1" type:"string" required:"true"`
-
-	// The SizeConstraintSetId of the SizeConstraintSet that you want to delete.
-	// SizeConstraintSetId is returned by CreateSizeConstraintSet and by ListSizeConstraintSets.
-	//
-	// SizeConstraintSetId is a required field
-	SizeConstraintSetId *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteSizeConstraintSetInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteSizeConstraintSetInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteSizeConstraintSetInput"}
-
-	if s.ChangeToken == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ChangeToken"))
-	}
-	if s.ChangeToken != nil && len(*s.ChangeToken) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ChangeToken", 1))
-	}
-
-	if s.SizeConstraintSetId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("SizeConstraintSetId"))
-	}
-	if s.SizeConstraintSetId != nil && len(*s.SizeConstraintSetId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("SizeConstraintSetId", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteSizeConstraintSetOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The ChangeToken that you used to submit the DeleteSizeConstraintSet request.
-	// You can also use this value to query the status of the request. For more
-	// information, see GetChangeTokenStatus.
-	ChangeToken *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s DeleteSizeConstraintSetOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteSizeConstraintSet = "DeleteSizeConstraintSet"
 
@@ -96,7 +38,7 @@ const opDeleteSizeConstraintSet = "DeleteSizeConstraintSet"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/DeleteSizeConstraintSet
-func (c *Client) DeleteSizeConstraintSetRequest(input *DeleteSizeConstraintSetInput) DeleteSizeConstraintSetRequest {
+func (c *Client) DeleteSizeConstraintSetRequest(input *types.DeleteSizeConstraintSetInput) DeleteSizeConstraintSetRequest {
 	op := &aws.Operation{
 		Name:       opDeleteSizeConstraintSet,
 		HTTPMethod: "POST",
@@ -104,10 +46,10 @@ func (c *Client) DeleteSizeConstraintSetRequest(input *DeleteSizeConstraintSetIn
 	}
 
 	if input == nil {
-		input = &DeleteSizeConstraintSetInput{}
+		input = &types.DeleteSizeConstraintSetInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteSizeConstraintSetOutput{})
+	req := c.newRequest(op, input, &types.DeleteSizeConstraintSetOutput{})
 	return DeleteSizeConstraintSetRequest{Request: req, Input: input, Copy: c.DeleteSizeConstraintSetRequest}
 }
 
@@ -115,8 +57,8 @@ func (c *Client) DeleteSizeConstraintSetRequest(input *DeleteSizeConstraintSetIn
 // DeleteSizeConstraintSet API operation.
 type DeleteSizeConstraintSetRequest struct {
 	*aws.Request
-	Input *DeleteSizeConstraintSetInput
-	Copy  func(*DeleteSizeConstraintSetInput) DeleteSizeConstraintSetRequest
+	Input *types.DeleteSizeConstraintSetInput
+	Copy  func(*types.DeleteSizeConstraintSetInput) DeleteSizeConstraintSetRequest
 }
 
 // Send marshals and sends the DeleteSizeConstraintSet API request.
@@ -128,7 +70,7 @@ func (r DeleteSizeConstraintSetRequest) Send(ctx context.Context) (*DeleteSizeCo
 	}
 
 	resp := &DeleteSizeConstraintSetResponse{
-		DeleteSizeConstraintSetOutput: r.Request.Data.(*DeleteSizeConstraintSetOutput),
+		DeleteSizeConstraintSetOutput: r.Request.Data.(*types.DeleteSizeConstraintSetOutput),
 		response:                      &aws.Response{Request: r.Request},
 	}
 
@@ -138,7 +80,7 @@ func (r DeleteSizeConstraintSetRequest) Send(ctx context.Context) (*DeleteSizeCo
 // DeleteSizeConstraintSetResponse is the response type for the
 // DeleteSizeConstraintSet API operation.
 type DeleteSizeConstraintSetResponse struct {
-	*DeleteSizeConstraintSetOutput
+	*types.DeleteSizeConstraintSetOutput
 
 	response *aws.Response
 }

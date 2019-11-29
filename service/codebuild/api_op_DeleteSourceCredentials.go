@@ -6,51 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/codebuild/types"
 )
-
-type DeleteSourceCredentialsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the token.
-	//
-	// Arn is a required field
-	Arn *string `locationName:"arn" min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteSourceCredentialsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteSourceCredentialsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteSourceCredentialsInput"}
-
-	if s.Arn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Arn"))
-	}
-	if s.Arn != nil && len(*s.Arn) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Arn", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteSourceCredentialsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the token.
-	Arn *string `locationName:"arn" min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s DeleteSourceCredentialsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteSourceCredentials = "DeleteSourceCredentials"
 
@@ -67,7 +24,7 @@ const opDeleteSourceCredentials = "DeleteSourceCredentials"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/DeleteSourceCredentials
-func (c *Client) DeleteSourceCredentialsRequest(input *DeleteSourceCredentialsInput) DeleteSourceCredentialsRequest {
+func (c *Client) DeleteSourceCredentialsRequest(input *types.DeleteSourceCredentialsInput) DeleteSourceCredentialsRequest {
 	op := &aws.Operation{
 		Name:       opDeleteSourceCredentials,
 		HTTPMethod: "POST",
@@ -75,10 +32,10 @@ func (c *Client) DeleteSourceCredentialsRequest(input *DeleteSourceCredentialsIn
 	}
 
 	if input == nil {
-		input = &DeleteSourceCredentialsInput{}
+		input = &types.DeleteSourceCredentialsInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteSourceCredentialsOutput{})
+	req := c.newRequest(op, input, &types.DeleteSourceCredentialsOutput{})
 	return DeleteSourceCredentialsRequest{Request: req, Input: input, Copy: c.DeleteSourceCredentialsRequest}
 }
 
@@ -86,8 +43,8 @@ func (c *Client) DeleteSourceCredentialsRequest(input *DeleteSourceCredentialsIn
 // DeleteSourceCredentials API operation.
 type DeleteSourceCredentialsRequest struct {
 	*aws.Request
-	Input *DeleteSourceCredentialsInput
-	Copy  func(*DeleteSourceCredentialsInput) DeleteSourceCredentialsRequest
+	Input *types.DeleteSourceCredentialsInput
+	Copy  func(*types.DeleteSourceCredentialsInput) DeleteSourceCredentialsRequest
 }
 
 // Send marshals and sends the DeleteSourceCredentials API request.
@@ -99,7 +56,7 @@ func (r DeleteSourceCredentialsRequest) Send(ctx context.Context) (*DeleteSource
 	}
 
 	resp := &DeleteSourceCredentialsResponse{
-		DeleteSourceCredentialsOutput: r.Request.Data.(*DeleteSourceCredentialsOutput),
+		DeleteSourceCredentialsOutput: r.Request.Data.(*types.DeleteSourceCredentialsOutput),
 		response:                      &aws.Response{Request: r.Request},
 	}
 
@@ -109,7 +66,7 @@ func (r DeleteSourceCredentialsRequest) Send(ctx context.Context) (*DeleteSource
 // DeleteSourceCredentialsResponse is the response type for the
 // DeleteSourceCredentials API operation.
 type DeleteSourceCredentialsResponse struct {
-	*DeleteSourceCredentialsOutput
+	*types.DeleteSourceCredentialsOutput
 
 	response *aws.Response
 }

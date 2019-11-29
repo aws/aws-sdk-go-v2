@@ -6,58 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/workmail/types"
 )
-
-type DeregisterFromWorkMailInput struct {
-	_ struct{} `type:"structure"`
-
-	// The identifier for the member (user or group) to be updated.
-	//
-	// EntityId is a required field
-	EntityId *string `min:"12" type:"string" required:"true"`
-
-	// The identifier for the organization under which the Amazon WorkMail entity
-	// exists.
-	//
-	// OrganizationId is a required field
-	OrganizationId *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeregisterFromWorkMailInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeregisterFromWorkMailInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeregisterFromWorkMailInput"}
-
-	if s.EntityId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("EntityId"))
-	}
-	if s.EntityId != nil && len(*s.EntityId) < 12 {
-		invalidParams.Add(aws.NewErrParamMinLen("EntityId", 12))
-	}
-
-	if s.OrganizationId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("OrganizationId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeregisterFromWorkMailOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeregisterFromWorkMailOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeregisterFromWorkMail = "DeregisterFromWorkMail"
 
@@ -77,7 +27,7 @@ const opDeregisterFromWorkMail = "DeregisterFromWorkMail"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/DeregisterFromWorkMail
-func (c *Client) DeregisterFromWorkMailRequest(input *DeregisterFromWorkMailInput) DeregisterFromWorkMailRequest {
+func (c *Client) DeregisterFromWorkMailRequest(input *types.DeregisterFromWorkMailInput) DeregisterFromWorkMailRequest {
 	op := &aws.Operation{
 		Name:       opDeregisterFromWorkMail,
 		HTTPMethod: "POST",
@@ -85,10 +35,10 @@ func (c *Client) DeregisterFromWorkMailRequest(input *DeregisterFromWorkMailInpu
 	}
 
 	if input == nil {
-		input = &DeregisterFromWorkMailInput{}
+		input = &types.DeregisterFromWorkMailInput{}
 	}
 
-	req := c.newRequest(op, input, &DeregisterFromWorkMailOutput{})
+	req := c.newRequest(op, input, &types.DeregisterFromWorkMailOutput{})
 	return DeregisterFromWorkMailRequest{Request: req, Input: input, Copy: c.DeregisterFromWorkMailRequest}
 }
 
@@ -96,8 +46,8 @@ func (c *Client) DeregisterFromWorkMailRequest(input *DeregisterFromWorkMailInpu
 // DeregisterFromWorkMail API operation.
 type DeregisterFromWorkMailRequest struct {
 	*aws.Request
-	Input *DeregisterFromWorkMailInput
-	Copy  func(*DeregisterFromWorkMailInput) DeregisterFromWorkMailRequest
+	Input *types.DeregisterFromWorkMailInput
+	Copy  func(*types.DeregisterFromWorkMailInput) DeregisterFromWorkMailRequest
 }
 
 // Send marshals and sends the DeregisterFromWorkMail API request.
@@ -109,7 +59,7 @@ func (r DeregisterFromWorkMailRequest) Send(ctx context.Context) (*DeregisterFro
 	}
 
 	resp := &DeregisterFromWorkMailResponse{
-		DeregisterFromWorkMailOutput: r.Request.Data.(*DeregisterFromWorkMailOutput),
+		DeregisterFromWorkMailOutput: r.Request.Data.(*types.DeregisterFromWorkMailOutput),
 		response:                     &aws.Response{Request: r.Request},
 	}
 
@@ -119,7 +69,7 @@ func (r DeregisterFromWorkMailRequest) Send(ctx context.Context) (*DeregisterFro
 // DeregisterFromWorkMailResponse is the response type for the
 // DeregisterFromWorkMail API operation.
 type DeregisterFromWorkMailResponse struct {
-	*DeregisterFromWorkMailOutput
+	*types.DeregisterFromWorkMailOutput
 
 	response *aws.Response
 }

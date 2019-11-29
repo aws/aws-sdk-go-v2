@@ -6,56 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/lightsail/types"
 )
-
-type DisableAddOnInput struct {
-	_ struct{} `type:"structure"`
-
-	// The add-on type to disable.
-	//
-	// AddOnType is a required field
-	AddOnType AddOnType `locationName:"addOnType" type:"string" required:"true" enum:"true"`
-
-	// The name of the source resource from which to disable the add-on.
-	//
-	// ResourceName is a required field
-	ResourceName *string `locationName:"resourceName" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DisableAddOnInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DisableAddOnInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DisableAddOnInput"}
-	if len(s.AddOnType) == 0 {
-		invalidParams.Add(aws.NewErrParamRequired("AddOnType"))
-	}
-
-	if s.ResourceName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ResourceName"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DisableAddOnOutput struct {
-	_ struct{} `type:"structure"`
-
-	// An array of objects that describe the result of your request.
-	Operations []Operation `locationName:"operations" type:"list"`
-}
-
-// String returns the string representation
-func (s DisableAddOnOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDisableAddOn = "DisableAddOn"
 
@@ -73,7 +25,7 @@ const opDisableAddOn = "DisableAddOn"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/DisableAddOn
-func (c *Client) DisableAddOnRequest(input *DisableAddOnInput) DisableAddOnRequest {
+func (c *Client) DisableAddOnRequest(input *types.DisableAddOnInput) DisableAddOnRequest {
 	op := &aws.Operation{
 		Name:       opDisableAddOn,
 		HTTPMethod: "POST",
@@ -81,10 +33,10 @@ func (c *Client) DisableAddOnRequest(input *DisableAddOnInput) DisableAddOnReque
 	}
 
 	if input == nil {
-		input = &DisableAddOnInput{}
+		input = &types.DisableAddOnInput{}
 	}
 
-	req := c.newRequest(op, input, &DisableAddOnOutput{})
+	req := c.newRequest(op, input, &types.DisableAddOnOutput{})
 	return DisableAddOnRequest{Request: req, Input: input, Copy: c.DisableAddOnRequest}
 }
 
@@ -92,8 +44,8 @@ func (c *Client) DisableAddOnRequest(input *DisableAddOnInput) DisableAddOnReque
 // DisableAddOn API operation.
 type DisableAddOnRequest struct {
 	*aws.Request
-	Input *DisableAddOnInput
-	Copy  func(*DisableAddOnInput) DisableAddOnRequest
+	Input *types.DisableAddOnInput
+	Copy  func(*types.DisableAddOnInput) DisableAddOnRequest
 }
 
 // Send marshals and sends the DisableAddOn API request.
@@ -105,7 +57,7 @@ func (r DisableAddOnRequest) Send(ctx context.Context) (*DisableAddOnResponse, e
 	}
 
 	resp := &DisableAddOnResponse{
-		DisableAddOnOutput: r.Request.Data.(*DisableAddOnOutput),
+		DisableAddOnOutput: r.Request.Data.(*types.DisableAddOnOutput),
 		response:           &aws.Response{Request: r.Request},
 	}
 
@@ -115,7 +67,7 @@ func (r DisableAddOnRequest) Send(ctx context.Context) (*DisableAddOnResponse, e
 // DisableAddOnResponse is the response type for the
 // DisableAddOn API operation.
 type DisableAddOnResponse struct {
-	*DisableAddOnOutput
+	*types.DisableAddOnOutput
 
 	response *aws.Response
 }

@@ -6,66 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/machinelearning/types"
 )
-
-type UpdateMLModelInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID assigned to the MLModel during creation.
-	//
-	// MLModelId is a required field
-	MLModelId *string `min:"1" type:"string" required:"true"`
-
-	// A user-supplied name or description of the MLModel.
-	MLModelName *string `type:"string"`
-
-	// The ScoreThreshold used in binary classification MLModel that marks the boundary
-	// between a positive prediction and a negative prediction.
-	//
-	// Output values greater than or equal to the ScoreThreshold receive a positive
-	// result from the MLModel, such as true. Output values less than the ScoreThreshold
-	// receive a negative response from the MLModel, such as false.
-	ScoreThreshold *float64 `type:"float"`
-}
-
-// String returns the string representation
-func (s UpdateMLModelInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateMLModelInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateMLModelInput"}
-
-	if s.MLModelId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("MLModelId"))
-	}
-	if s.MLModelId != nil && len(*s.MLModelId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("MLModelId", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Represents the output of an UpdateMLModel operation.
-//
-// You can see the updated content by using the GetMLModel operation.
-type UpdateMLModelOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID assigned to the MLModel during creation. This value should be identical
-	// to the value of the MLModelID in the request.
-	MLModelId *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s UpdateMLModelOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opUpdateMLModel = "UpdateMLModel"
 
@@ -83,7 +25,7 @@ const opUpdateMLModel = "UpdateMLModel"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) UpdateMLModelRequest(input *UpdateMLModelInput) UpdateMLModelRequest {
+func (c *Client) UpdateMLModelRequest(input *types.UpdateMLModelInput) UpdateMLModelRequest {
 	op := &aws.Operation{
 		Name:       opUpdateMLModel,
 		HTTPMethod: "POST",
@@ -91,10 +33,10 @@ func (c *Client) UpdateMLModelRequest(input *UpdateMLModelInput) UpdateMLModelRe
 	}
 
 	if input == nil {
-		input = &UpdateMLModelInput{}
+		input = &types.UpdateMLModelInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateMLModelOutput{})
+	req := c.newRequest(op, input, &types.UpdateMLModelOutput{})
 	return UpdateMLModelRequest{Request: req, Input: input, Copy: c.UpdateMLModelRequest}
 }
 
@@ -102,8 +44,8 @@ func (c *Client) UpdateMLModelRequest(input *UpdateMLModelInput) UpdateMLModelRe
 // UpdateMLModel API operation.
 type UpdateMLModelRequest struct {
 	*aws.Request
-	Input *UpdateMLModelInput
-	Copy  func(*UpdateMLModelInput) UpdateMLModelRequest
+	Input *types.UpdateMLModelInput
+	Copy  func(*types.UpdateMLModelInput) UpdateMLModelRequest
 }
 
 // Send marshals and sends the UpdateMLModel API request.
@@ -115,7 +57,7 @@ func (r UpdateMLModelRequest) Send(ctx context.Context) (*UpdateMLModelResponse,
 	}
 
 	resp := &UpdateMLModelResponse{
-		UpdateMLModelOutput: r.Request.Data.(*UpdateMLModelOutput),
+		UpdateMLModelOutput: r.Request.Data.(*types.UpdateMLModelOutput),
 		response:            &aws.Response{Request: r.Request},
 	}
 
@@ -125,7 +67,7 @@ func (r UpdateMLModelRequest) Send(ctx context.Context) (*UpdateMLModelResponse,
 // UpdateMLModelResponse is the response type for the
 // UpdateMLModel API operation.
 type UpdateMLModelResponse struct {
-	*UpdateMLModelOutput
+	*types.UpdateMLModelOutput
 
 	response *aws.Response
 }

@@ -6,38 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/support/types"
 )
-
-type DescribeServicesInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ISO 639-1 code for the language in which AWS provides support. AWS Support
-	// currently supports English ("en") and Japanese ("ja"). Language parameters
-	// must be passed explicitly for operations that take them.
-	Language *string `locationName:"language" type:"string"`
-
-	// A JSON-formatted list of service codes available for AWS services.
-	ServiceCodeList []string `locationName:"serviceCodeList" type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeServicesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// The list of AWS services returned by the DescribeServices operation.
-type DescribeServicesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A JSON-formatted list of AWS services.
-	Services []Service `locationName:"services" type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeServicesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeServices = "DescribeServices"
 
@@ -64,7 +34,7 @@ const opDescribeServices = "DescribeServices"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/support-2013-04-15/DescribeServices
-func (c *Client) DescribeServicesRequest(input *DescribeServicesInput) DescribeServicesRequest {
+func (c *Client) DescribeServicesRequest(input *types.DescribeServicesInput) DescribeServicesRequest {
 	op := &aws.Operation{
 		Name:       opDescribeServices,
 		HTTPMethod: "POST",
@@ -72,10 +42,10 @@ func (c *Client) DescribeServicesRequest(input *DescribeServicesInput) DescribeS
 	}
 
 	if input == nil {
-		input = &DescribeServicesInput{}
+		input = &types.DescribeServicesInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeServicesOutput{})
+	req := c.newRequest(op, input, &types.DescribeServicesOutput{})
 	return DescribeServicesRequest{Request: req, Input: input, Copy: c.DescribeServicesRequest}
 }
 
@@ -83,8 +53,8 @@ func (c *Client) DescribeServicesRequest(input *DescribeServicesInput) DescribeS
 // DescribeServices API operation.
 type DescribeServicesRequest struct {
 	*aws.Request
-	Input *DescribeServicesInput
-	Copy  func(*DescribeServicesInput) DescribeServicesRequest
+	Input *types.DescribeServicesInput
+	Copy  func(*types.DescribeServicesInput) DescribeServicesRequest
 }
 
 // Send marshals and sends the DescribeServices API request.
@@ -96,7 +66,7 @@ func (r DescribeServicesRequest) Send(ctx context.Context) (*DescribeServicesRes
 	}
 
 	resp := &DescribeServicesResponse{
-		DescribeServicesOutput: r.Request.Data.(*DescribeServicesOutput),
+		DescribeServicesOutput: r.Request.Data.(*types.DescribeServicesOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -106,7 +76,7 @@ func (r DescribeServicesRequest) Send(ctx context.Context) (*DescribeServicesRes
 // DescribeServicesResponse is the response type for the
 // DescribeServices API operation.
 type DescribeServicesResponse struct {
-	*DescribeServicesOutput
+	*types.DescribeServicesOutput
 
 	response *aws.Response
 }

@@ -6,60 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-type DeleteQueuedReservedInstancesInput struct {
-	_ struct{} `type:"structure"`
-
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have
-	// the required permissions, the error response is DryRunOperation. Otherwise,
-	// it is UnauthorizedOperation.
-	DryRun *bool `type:"boolean"`
-
-	// The IDs of the Reserved Instances.
-	//
-	// ReservedInstancesIds is a required field
-	ReservedInstancesIds []string `locationName:"ReservedInstancesId" locationNameList:"item" min:"1" type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteQueuedReservedInstancesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteQueuedReservedInstancesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteQueuedReservedInstancesInput"}
-
-	if s.ReservedInstancesIds == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ReservedInstancesIds"))
-	}
-	if s.ReservedInstancesIds != nil && len(s.ReservedInstancesIds) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ReservedInstancesIds", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteQueuedReservedInstancesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Information about the queued purchases that could not be deleted.
-	FailedQueuedPurchaseDeletions []FailedQueuedPurchaseDeletion `locationName:"failedQueuedPurchaseDeletionSet" locationNameList:"item" type:"list"`
-
-	// Information about the queued purchases that were successfully deleted.
-	SuccessfulQueuedPurchaseDeletions []SuccessfulQueuedPurchaseDeletion `locationName:"successfulQueuedPurchaseDeletionSet" locationNameList:"item" type:"list"`
-}
-
-// String returns the string representation
-func (s DeleteQueuedReservedInstancesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteQueuedReservedInstances = "DeleteQueuedReservedInstances"
 
@@ -76,7 +24,7 @@ const opDeleteQueuedReservedInstances = "DeleteQueuedReservedInstances"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteQueuedReservedInstances
-func (c *Client) DeleteQueuedReservedInstancesRequest(input *DeleteQueuedReservedInstancesInput) DeleteQueuedReservedInstancesRequest {
+func (c *Client) DeleteQueuedReservedInstancesRequest(input *types.DeleteQueuedReservedInstancesInput) DeleteQueuedReservedInstancesRequest {
 	op := &aws.Operation{
 		Name:       opDeleteQueuedReservedInstances,
 		HTTPMethod: "POST",
@@ -84,10 +32,10 @@ func (c *Client) DeleteQueuedReservedInstancesRequest(input *DeleteQueuedReserve
 	}
 
 	if input == nil {
-		input = &DeleteQueuedReservedInstancesInput{}
+		input = &types.DeleteQueuedReservedInstancesInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteQueuedReservedInstancesOutput{})
+	req := c.newRequest(op, input, &types.DeleteQueuedReservedInstancesOutput{})
 	return DeleteQueuedReservedInstancesRequest{Request: req, Input: input, Copy: c.DeleteQueuedReservedInstancesRequest}
 }
 
@@ -95,8 +43,8 @@ func (c *Client) DeleteQueuedReservedInstancesRequest(input *DeleteQueuedReserve
 // DeleteQueuedReservedInstances API operation.
 type DeleteQueuedReservedInstancesRequest struct {
 	*aws.Request
-	Input *DeleteQueuedReservedInstancesInput
-	Copy  func(*DeleteQueuedReservedInstancesInput) DeleteQueuedReservedInstancesRequest
+	Input *types.DeleteQueuedReservedInstancesInput
+	Copy  func(*types.DeleteQueuedReservedInstancesInput) DeleteQueuedReservedInstancesRequest
 }
 
 // Send marshals and sends the DeleteQueuedReservedInstances API request.
@@ -108,7 +56,7 @@ func (r DeleteQueuedReservedInstancesRequest) Send(ctx context.Context) (*Delete
 	}
 
 	resp := &DeleteQueuedReservedInstancesResponse{
-		DeleteQueuedReservedInstancesOutput: r.Request.Data.(*DeleteQueuedReservedInstancesOutput),
+		DeleteQueuedReservedInstancesOutput: r.Request.Data.(*types.DeleteQueuedReservedInstancesOutput),
 		response:                            &aws.Response{Request: r.Request},
 	}
 
@@ -118,7 +66,7 @@ func (r DeleteQueuedReservedInstancesRequest) Send(ctx context.Context) (*Delete
 // DeleteQueuedReservedInstancesResponse is the response type for the
 // DeleteQueuedReservedInstances API operation.
 type DeleteQueuedReservedInstancesResponse struct {
-	*DeleteQueuedReservedInstancesOutput
+	*types.DeleteQueuedReservedInstancesOutput
 
 	response *aws.Response
 }

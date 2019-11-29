@@ -6,98 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/greengrass/types"
 )
-
-// Information about a group reset request.
-type ResetDeploymentsInput struct {
-	_ struct{} `type:"structure"`
-
-	AmznClientToken *string `location:"header" locationName:"X-Amzn-Client-Token" type:"string"`
-
-	// If true, performs a best-effort only core reset.
-	Force *bool `type:"boolean"`
-
-	// GroupId is a required field
-	GroupId *string `location:"uri" locationName:"GroupId" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s ResetDeploymentsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ResetDeploymentsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ResetDeploymentsInput"}
-
-	if s.GroupId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("GroupId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ResetDeploymentsInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.Force != nil {
-		v := *s.Force
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "Force", protocol.BoolValue(v), metadata)
-	}
-	if s.AmznClientToken != nil {
-		v := *s.AmznClientToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "X-Amzn-Client-Token", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.GroupId != nil {
-		v := *s.GroupId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "GroupId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type ResetDeploymentsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The ARN of the deployment.
-	DeploymentArn *string `type:"string"`
-
-	// The ID of the deployment.
-	DeploymentId *string `type:"string"`
-}
-
-// String returns the string representation
-func (s ResetDeploymentsOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ResetDeploymentsOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.DeploymentArn != nil {
-		v := *s.DeploymentArn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "DeploymentArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.DeploymentId != nil {
-		v := *s.DeploymentId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "DeploymentId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opResetDeployments = "ResetDeployments"
 
@@ -114,7 +24,7 @@ const opResetDeployments = "ResetDeployments"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/ResetDeployments
-func (c *Client) ResetDeploymentsRequest(input *ResetDeploymentsInput) ResetDeploymentsRequest {
+func (c *Client) ResetDeploymentsRequest(input *types.ResetDeploymentsInput) ResetDeploymentsRequest {
 	op := &aws.Operation{
 		Name:       opResetDeployments,
 		HTTPMethod: "POST",
@@ -122,10 +32,10 @@ func (c *Client) ResetDeploymentsRequest(input *ResetDeploymentsInput) ResetDepl
 	}
 
 	if input == nil {
-		input = &ResetDeploymentsInput{}
+		input = &types.ResetDeploymentsInput{}
 	}
 
-	req := c.newRequest(op, input, &ResetDeploymentsOutput{})
+	req := c.newRequest(op, input, &types.ResetDeploymentsOutput{})
 	return ResetDeploymentsRequest{Request: req, Input: input, Copy: c.ResetDeploymentsRequest}
 }
 
@@ -133,8 +43,8 @@ func (c *Client) ResetDeploymentsRequest(input *ResetDeploymentsInput) ResetDepl
 // ResetDeployments API operation.
 type ResetDeploymentsRequest struct {
 	*aws.Request
-	Input *ResetDeploymentsInput
-	Copy  func(*ResetDeploymentsInput) ResetDeploymentsRequest
+	Input *types.ResetDeploymentsInput
+	Copy  func(*types.ResetDeploymentsInput) ResetDeploymentsRequest
 }
 
 // Send marshals and sends the ResetDeployments API request.
@@ -146,7 +56,7 @@ func (r ResetDeploymentsRequest) Send(ctx context.Context) (*ResetDeploymentsRes
 	}
 
 	resp := &ResetDeploymentsResponse{
-		ResetDeploymentsOutput: r.Request.Data.(*ResetDeploymentsOutput),
+		ResetDeploymentsOutput: r.Request.Data.(*types.ResetDeploymentsOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -156,7 +66,7 @@ func (r ResetDeploymentsRequest) Send(ctx context.Context) (*ResetDeploymentsRes
 // ResetDeploymentsResponse is the response type for the
 // ResetDeployments API operation.
 type ResetDeploymentsResponse struct {
-	*ResetDeploymentsOutput
+	*types.ResetDeploymentsOutput
 
 	response *aws.Response
 }

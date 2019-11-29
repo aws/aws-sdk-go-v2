@@ -6,66 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/fsx/types"
 )
-
-// The request object for DescribeFileSystems operation.
-type DescribeFileSystemsInput struct {
-	_ struct{} `type:"structure"`
-
-	// (Optional) IDs of the file systems whose descriptions you want to retrieve
-	// (String).
-	FileSystemIds []string `type:"list"`
-
-	// (Optional) Maximum number of file systems to return in the response (integer).
-	// This parameter value must be greater than 0. The number of items that Amazon
-	// FSx returns is the minimum of the MaxResults parameter specified in the request
-	// and the service's internal maximum number of items per page.
-	MaxResults *int64 `min:"1" type:"integer"`
-
-	// (Optional) Opaque pagination token returned from a previous DescribeFileSystems
-	// operation (String). If a token present, the action continues the list from
-	// where the returning call left off.
-	NextToken *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeFileSystemsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeFileSystemsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeFileSystemsInput"}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-	if s.NextToken != nil && len(*s.NextToken) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// The response object for DescribeFileSystems operation.
-type DescribeFileSystemsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// An array of file system descriptions.
-	FileSystems []FileSystem `type:"list"`
-
-	// Present if there are more file systems than returned in the response (String).
-	// You can use the NextToken value in the later request to fetch the descriptions.
-	NextToken *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeFileSystemsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeFileSystems = "DescribeFileSystems"
 
@@ -105,7 +47,7 @@ const opDescribeFileSystems = "DescribeFileSystems"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/DescribeFileSystems
-func (c *Client) DescribeFileSystemsRequest(input *DescribeFileSystemsInput) DescribeFileSystemsRequest {
+func (c *Client) DescribeFileSystemsRequest(input *types.DescribeFileSystemsInput) DescribeFileSystemsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeFileSystems,
 		HTTPMethod: "POST",
@@ -119,10 +61,10 @@ func (c *Client) DescribeFileSystemsRequest(input *DescribeFileSystemsInput) Des
 	}
 
 	if input == nil {
-		input = &DescribeFileSystemsInput{}
+		input = &types.DescribeFileSystemsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeFileSystemsOutput{})
+	req := c.newRequest(op, input, &types.DescribeFileSystemsOutput{})
 	return DescribeFileSystemsRequest{Request: req, Input: input, Copy: c.DescribeFileSystemsRequest}
 }
 
@@ -130,8 +72,8 @@ func (c *Client) DescribeFileSystemsRequest(input *DescribeFileSystemsInput) Des
 // DescribeFileSystems API operation.
 type DescribeFileSystemsRequest struct {
 	*aws.Request
-	Input *DescribeFileSystemsInput
-	Copy  func(*DescribeFileSystemsInput) DescribeFileSystemsRequest
+	Input *types.DescribeFileSystemsInput
+	Copy  func(*types.DescribeFileSystemsInput) DescribeFileSystemsRequest
 }
 
 // Send marshals and sends the DescribeFileSystems API request.
@@ -143,7 +85,7 @@ func (r DescribeFileSystemsRequest) Send(ctx context.Context) (*DescribeFileSyst
 	}
 
 	resp := &DescribeFileSystemsResponse{
-		DescribeFileSystemsOutput: r.Request.Data.(*DescribeFileSystemsOutput),
+		DescribeFileSystemsOutput: r.Request.Data.(*types.DescribeFileSystemsOutput),
 		response:                  &aws.Response{Request: r.Request},
 	}
 
@@ -173,7 +115,7 @@ func NewDescribeFileSystemsPaginator(req DescribeFileSystemsRequest) DescribeFil
 	return DescribeFileSystemsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *DescribeFileSystemsInput
+				var inCpy *types.DescribeFileSystemsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -193,14 +135,14 @@ type DescribeFileSystemsPaginator struct {
 	aws.Pager
 }
 
-func (p *DescribeFileSystemsPaginator) CurrentPage() *DescribeFileSystemsOutput {
-	return p.Pager.CurrentPage().(*DescribeFileSystemsOutput)
+func (p *DescribeFileSystemsPaginator) CurrentPage() *types.DescribeFileSystemsOutput {
+	return p.Pager.CurrentPage().(*types.DescribeFileSystemsOutput)
 }
 
 // DescribeFileSystemsResponse is the response type for the
 // DescribeFileSystems API operation.
 type DescribeFileSystemsResponse struct {
-	*DescribeFileSystemsOutput
+	*types.DescribeFileSystemsOutput
 
 	response *aws.Response
 }

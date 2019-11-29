@@ -6,115 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/iot/types"
 )
-
-// The input for the UpdateThing operation.
-type UpdateThingInput struct {
-	_ struct{} `type:"structure"`
-
-	// A list of thing attributes, a JSON string containing name-value pairs. For
-	// example:
-	//
-	// {\"attributes\":{\"name1\":\"value2\"}}
-	//
-	// This data is used to add new attributes or update existing attributes.
-	AttributePayload *AttributePayload `locationName:"attributePayload" type:"structure"`
-
-	// The expected version of the thing record in the registry. If the version
-	// of the record in the registry does not match the expected version specified
-	// in the request, the UpdateThing request is rejected with a VersionConflictException.
-	ExpectedVersion *int64 `locationName:"expectedVersion" type:"long"`
-
-	// Remove a thing type association. If true, the association is removed.
-	RemoveThingType *bool `locationName:"removeThingType" type:"boolean"`
-
-	// The name of the thing to update.
-	//
-	// ThingName is a required field
-	ThingName *string `location:"uri" locationName:"thingName" min:"1" type:"string" required:"true"`
-
-	// The name of the thing type.
-	ThingTypeName *string `locationName:"thingTypeName" min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s UpdateThingInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateThingInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateThingInput"}
-
-	if s.ThingName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ThingName"))
-	}
-	if s.ThingName != nil && len(*s.ThingName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ThingName", 1))
-	}
-	if s.ThingTypeName != nil && len(*s.ThingTypeName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ThingTypeName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s UpdateThingInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.AttributePayload != nil {
-		v := s.AttributePayload
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "attributePayload", v, metadata)
-	}
-	if s.ExpectedVersion != nil {
-		v := *s.ExpectedVersion
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "expectedVersion", protocol.Int64Value(v), metadata)
-	}
-	if s.RemoveThingType != nil {
-		v := *s.RemoveThingType
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "removeThingType", protocol.BoolValue(v), metadata)
-	}
-	if s.ThingTypeName != nil {
-		v := *s.ThingTypeName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "thingTypeName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.ThingName != nil {
-		v := *s.ThingName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "thingName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-// The output from the UpdateThing operation.
-type UpdateThingOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s UpdateThingOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s UpdateThingOutput) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
 
 const opUpdateThing = "UpdateThing"
 
@@ -129,7 +22,7 @@ const opUpdateThing = "UpdateThing"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) UpdateThingRequest(input *UpdateThingInput) UpdateThingRequest {
+func (c *Client) UpdateThingRequest(input *types.UpdateThingInput) UpdateThingRequest {
 	op := &aws.Operation{
 		Name:       opUpdateThing,
 		HTTPMethod: "PATCH",
@@ -137,10 +30,10 @@ func (c *Client) UpdateThingRequest(input *UpdateThingInput) UpdateThingRequest 
 	}
 
 	if input == nil {
-		input = &UpdateThingInput{}
+		input = &types.UpdateThingInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateThingOutput{})
+	req := c.newRequest(op, input, &types.UpdateThingOutput{})
 	return UpdateThingRequest{Request: req, Input: input, Copy: c.UpdateThingRequest}
 }
 
@@ -148,8 +41,8 @@ func (c *Client) UpdateThingRequest(input *UpdateThingInput) UpdateThingRequest 
 // UpdateThing API operation.
 type UpdateThingRequest struct {
 	*aws.Request
-	Input *UpdateThingInput
-	Copy  func(*UpdateThingInput) UpdateThingRequest
+	Input *types.UpdateThingInput
+	Copy  func(*types.UpdateThingInput) UpdateThingRequest
 }
 
 // Send marshals and sends the UpdateThing API request.
@@ -161,7 +54,7 @@ func (r UpdateThingRequest) Send(ctx context.Context) (*UpdateThingResponse, err
 	}
 
 	resp := &UpdateThingResponse{
-		UpdateThingOutput: r.Request.Data.(*UpdateThingOutput),
+		UpdateThingOutput: r.Request.Data.(*types.UpdateThingOutput),
 		response:          &aws.Response{Request: r.Request},
 	}
 
@@ -171,7 +64,7 @@ func (r UpdateThingRequest) Send(ctx context.Context) (*UpdateThingResponse, err
 // UpdateThingResponse is the response type for the
 // UpdateThing API operation.
 type UpdateThingResponse struct {
-	*UpdateThingOutput
+	*types.UpdateThingOutput
 
 	response *aws.Response
 }

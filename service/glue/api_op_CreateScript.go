@@ -4,68 +4,10 @@ package glue
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/glue/types"
 )
-
-type CreateScriptInput struct {
-	_ struct{} `type:"structure"`
-
-	// A list of the edges in the DAG.
-	DagEdges []CodeGenEdge `type:"list"`
-
-	// A list of the nodes in the DAG.
-	DagNodes []CodeGenNode `type:"list"`
-
-	// The programming language of the resulting code from the DAG.
-	Language Language `type:"string" enum:"true"`
-}
-
-// String returns the string representation
-func (s CreateScriptInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateScriptInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateScriptInput"}
-	if s.DagEdges != nil {
-		for i, v := range s.DagEdges {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "DagEdges", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-	if s.DagNodes != nil {
-		for i, v := range s.DagNodes {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "DagNodes", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type CreateScriptOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The Python script generated from the DAG.
-	PythonScript *string `type:"string"`
-
-	// The Scala code generated from the DAG.
-	ScalaCode *string `type:"string"`
-}
-
-// String returns the string representation
-func (s CreateScriptOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCreateScript = "CreateScript"
 
@@ -82,7 +24,7 @@ const opCreateScript = "CreateScript"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CreateScript
-func (c *Client) CreateScriptRequest(input *CreateScriptInput) CreateScriptRequest {
+func (c *Client) CreateScriptRequest(input *types.CreateScriptInput) CreateScriptRequest {
 	op := &aws.Operation{
 		Name:       opCreateScript,
 		HTTPMethod: "POST",
@@ -90,10 +32,10 @@ func (c *Client) CreateScriptRequest(input *CreateScriptInput) CreateScriptReque
 	}
 
 	if input == nil {
-		input = &CreateScriptInput{}
+		input = &types.CreateScriptInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateScriptOutput{})
+	req := c.newRequest(op, input, &types.CreateScriptOutput{})
 	return CreateScriptRequest{Request: req, Input: input, Copy: c.CreateScriptRequest}
 }
 
@@ -101,8 +43,8 @@ func (c *Client) CreateScriptRequest(input *CreateScriptInput) CreateScriptReque
 // CreateScript API operation.
 type CreateScriptRequest struct {
 	*aws.Request
-	Input *CreateScriptInput
-	Copy  func(*CreateScriptInput) CreateScriptRequest
+	Input *types.CreateScriptInput
+	Copy  func(*types.CreateScriptInput) CreateScriptRequest
 }
 
 // Send marshals and sends the CreateScript API request.
@@ -114,7 +56,7 @@ func (r CreateScriptRequest) Send(ctx context.Context) (*CreateScriptResponse, e
 	}
 
 	resp := &CreateScriptResponse{
-		CreateScriptOutput: r.Request.Data.(*CreateScriptOutput),
+		CreateScriptOutput: r.Request.Data.(*types.CreateScriptOutput),
 		response:           &aws.Response{Request: r.Request},
 	}
 
@@ -124,7 +66,7 @@ func (r CreateScriptRequest) Send(ctx context.Context) (*CreateScriptResponse, e
 // CreateScriptResponse is the response type for the
 // CreateScript API operation.
 type CreateScriptResponse struct {
-	*CreateScriptOutput
+	*types.CreateScriptOutput
 
 	response *aws.Response
 }

@@ -6,88 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/types"
 )
-
-// The UpdateUserPoolDomain request input.
-type UpdateUserPoolDomainInput struct {
-	_ struct{} `type:"structure"`
-
-	// The configuration for a custom domain that hosts the sign-up and sign-in
-	// pages for your application. Use this object to specify an SSL certificate
-	// that is managed by ACM.
-	//
-	// CustomDomainConfig is a required field
-	CustomDomainConfig *CustomDomainConfigType `type:"structure" required:"true"`
-
-	// The domain name for the custom domain that hosts the sign-up and sign-in
-	// pages for your application. For example: auth.example.com.
-	//
-	// This string can include only lowercase letters, numbers, and hyphens. Do
-	// not use a hyphen for the first or last character. Use periods to separate
-	// subdomain names.
-	//
-	// Domain is a required field
-	Domain *string `min:"1" type:"string" required:"true"`
-
-	// The ID of the user pool that is associated with the custom domain that you
-	// are updating the certificate for.
-	//
-	// UserPoolId is a required field
-	UserPoolId *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s UpdateUserPoolDomainInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateUserPoolDomainInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateUserPoolDomainInput"}
-
-	if s.CustomDomainConfig == nil {
-		invalidParams.Add(aws.NewErrParamRequired("CustomDomainConfig"))
-	}
-
-	if s.Domain == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Domain"))
-	}
-	if s.Domain != nil && len(*s.Domain) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Domain", 1))
-	}
-
-	if s.UserPoolId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("UserPoolId"))
-	}
-	if s.UserPoolId != nil && len(*s.UserPoolId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("UserPoolId", 1))
-	}
-	if s.CustomDomainConfig != nil {
-		if err := s.CustomDomainConfig.Validate(); err != nil {
-			invalidParams.AddNested("CustomDomainConfig", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// The UpdateUserPoolDomain response output.
-type UpdateUserPoolDomainOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon CloudFront endpoint that Amazon Cognito set up when you added
-	// the custom domain to your user pool.
-	CloudFrontDomain *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s UpdateUserPoolDomainOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opUpdateUserPoolDomain = "UpdateUserPoolDomain"
 
@@ -132,7 +52,7 @@ const opUpdateUserPoolDomain = "UpdateUserPoolDomain"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/UpdateUserPoolDomain
-func (c *Client) UpdateUserPoolDomainRequest(input *UpdateUserPoolDomainInput) UpdateUserPoolDomainRequest {
+func (c *Client) UpdateUserPoolDomainRequest(input *types.UpdateUserPoolDomainInput) UpdateUserPoolDomainRequest {
 	op := &aws.Operation{
 		Name:       opUpdateUserPoolDomain,
 		HTTPMethod: "POST",
@@ -140,10 +60,10 @@ func (c *Client) UpdateUserPoolDomainRequest(input *UpdateUserPoolDomainInput) U
 	}
 
 	if input == nil {
-		input = &UpdateUserPoolDomainInput{}
+		input = &types.UpdateUserPoolDomainInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateUserPoolDomainOutput{})
+	req := c.newRequest(op, input, &types.UpdateUserPoolDomainOutput{})
 	return UpdateUserPoolDomainRequest{Request: req, Input: input, Copy: c.UpdateUserPoolDomainRequest}
 }
 
@@ -151,8 +71,8 @@ func (c *Client) UpdateUserPoolDomainRequest(input *UpdateUserPoolDomainInput) U
 // UpdateUserPoolDomain API operation.
 type UpdateUserPoolDomainRequest struct {
 	*aws.Request
-	Input *UpdateUserPoolDomainInput
-	Copy  func(*UpdateUserPoolDomainInput) UpdateUserPoolDomainRequest
+	Input *types.UpdateUserPoolDomainInput
+	Copy  func(*types.UpdateUserPoolDomainInput) UpdateUserPoolDomainRequest
 }
 
 // Send marshals and sends the UpdateUserPoolDomain API request.
@@ -164,7 +84,7 @@ func (r UpdateUserPoolDomainRequest) Send(ctx context.Context) (*UpdateUserPoolD
 	}
 
 	resp := &UpdateUserPoolDomainResponse{
-		UpdateUserPoolDomainOutput: r.Request.Data.(*UpdateUserPoolDomainOutput),
+		UpdateUserPoolDomainOutput: r.Request.Data.(*types.UpdateUserPoolDomainOutput),
 		response:                   &aws.Response{Request: r.Request},
 	}
 
@@ -174,7 +94,7 @@ func (r UpdateUserPoolDomainRequest) Send(ctx context.Context) (*UpdateUserPoolD
 // UpdateUserPoolDomainResponse is the response type for the
 // UpdateUserPoolDomain API operation.
 type UpdateUserPoolDomainResponse struct {
-	*UpdateUserPoolDomainOutput
+	*types.UpdateUserPoolDomainOutput
 
 	response *aws.Response
 }

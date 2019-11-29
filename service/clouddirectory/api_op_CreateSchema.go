@@ -6,78 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/clouddirectory/types"
 )
-
-type CreateSchemaInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name that is associated with the schema. This is unique to each account
-	// and in each region.
-	//
-	// Name is a required field
-	Name *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s CreateSchemaInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateSchemaInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateSchemaInput"}
-
-	if s.Name == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Name"))
-	}
-	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s CreateSchemaInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.Name != nil {
-		v := *s.Name
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "Name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type CreateSchemaOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) that is associated with the schema. For more
-	// information, see arns.
-	SchemaArn *string `type:"string"`
-}
-
-// String returns the string representation
-func (s CreateSchemaOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s CreateSchemaOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.SchemaArn != nil {
-		v := *s.SchemaArn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "SchemaArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opCreateSchema = "CreateSchema"
 
@@ -106,7 +36,7 @@ const opCreateSchema = "CreateSchema"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/CreateSchema
-func (c *Client) CreateSchemaRequest(input *CreateSchemaInput) CreateSchemaRequest {
+func (c *Client) CreateSchemaRequest(input *types.CreateSchemaInput) CreateSchemaRequest {
 	op := &aws.Operation{
 		Name:       opCreateSchema,
 		HTTPMethod: "PUT",
@@ -114,10 +44,10 @@ func (c *Client) CreateSchemaRequest(input *CreateSchemaInput) CreateSchemaReque
 	}
 
 	if input == nil {
-		input = &CreateSchemaInput{}
+		input = &types.CreateSchemaInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateSchemaOutput{})
+	req := c.newRequest(op, input, &types.CreateSchemaOutput{})
 	return CreateSchemaRequest{Request: req, Input: input, Copy: c.CreateSchemaRequest}
 }
 
@@ -125,8 +55,8 @@ func (c *Client) CreateSchemaRequest(input *CreateSchemaInput) CreateSchemaReque
 // CreateSchema API operation.
 type CreateSchemaRequest struct {
 	*aws.Request
-	Input *CreateSchemaInput
-	Copy  func(*CreateSchemaInput) CreateSchemaRequest
+	Input *types.CreateSchemaInput
+	Copy  func(*types.CreateSchemaInput) CreateSchemaRequest
 }
 
 // Send marshals and sends the CreateSchema API request.
@@ -138,7 +68,7 @@ func (r CreateSchemaRequest) Send(ctx context.Context) (*CreateSchemaResponse, e
 	}
 
 	resp := &CreateSchemaResponse{
-		CreateSchemaOutput: r.Request.Data.(*CreateSchemaOutput),
+		CreateSchemaOutput: r.Request.Data.(*types.CreateSchemaOutput),
 		response:           &aws.Response{Request: r.Request},
 	}
 
@@ -148,7 +78,7 @@ func (r CreateSchemaRequest) Send(ctx context.Context) (*CreateSchemaResponse, e
 // CreateSchemaResponse is the response type for the
 // CreateSchema API operation.
 type CreateSchemaResponse struct {
-	*CreateSchemaOutput
+	*types.CreateSchemaOutput
 
 	response *aws.Response
 }

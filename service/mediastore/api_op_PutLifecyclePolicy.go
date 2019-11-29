@@ -6,58 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/mediastore/types"
 )
-
-type PutLifecyclePolicyInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the container that you want to assign the object lifecycle policy
-	// to.
-	//
-	// ContainerName is a required field
-	ContainerName *string `min:"1" type:"string" required:"true"`
-
-	// The object lifecycle policy to apply to the container.
-	//
-	// LifecyclePolicy is a required field
-	LifecyclePolicy *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s PutLifecyclePolicyInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *PutLifecyclePolicyInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "PutLifecyclePolicyInput"}
-
-	if s.ContainerName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ContainerName"))
-	}
-	if s.ContainerName != nil && len(*s.ContainerName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ContainerName", 1))
-	}
-
-	if s.LifecyclePolicy == nil {
-		invalidParams.Add(aws.NewErrParamRequired("LifecyclePolicy"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type PutLifecyclePolicyOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s PutLifecyclePolicyOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opPutLifecyclePolicy = "PutLifecyclePolicy"
 
@@ -79,7 +29,7 @@ const opPutLifecyclePolicy = "PutLifecyclePolicy"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mediastore-2017-09-01/PutLifecyclePolicy
-func (c *Client) PutLifecyclePolicyRequest(input *PutLifecyclePolicyInput) PutLifecyclePolicyRequest {
+func (c *Client) PutLifecyclePolicyRequest(input *types.PutLifecyclePolicyInput) PutLifecyclePolicyRequest {
 	op := &aws.Operation{
 		Name:       opPutLifecyclePolicy,
 		HTTPMethod: "POST",
@@ -87,10 +37,10 @@ func (c *Client) PutLifecyclePolicyRequest(input *PutLifecyclePolicyInput) PutLi
 	}
 
 	if input == nil {
-		input = &PutLifecyclePolicyInput{}
+		input = &types.PutLifecyclePolicyInput{}
 	}
 
-	req := c.newRequest(op, input, &PutLifecyclePolicyOutput{})
+	req := c.newRequest(op, input, &types.PutLifecyclePolicyOutput{})
 	return PutLifecyclePolicyRequest{Request: req, Input: input, Copy: c.PutLifecyclePolicyRequest}
 }
 
@@ -98,8 +48,8 @@ func (c *Client) PutLifecyclePolicyRequest(input *PutLifecyclePolicyInput) PutLi
 // PutLifecyclePolicy API operation.
 type PutLifecyclePolicyRequest struct {
 	*aws.Request
-	Input *PutLifecyclePolicyInput
-	Copy  func(*PutLifecyclePolicyInput) PutLifecyclePolicyRequest
+	Input *types.PutLifecyclePolicyInput
+	Copy  func(*types.PutLifecyclePolicyInput) PutLifecyclePolicyRequest
 }
 
 // Send marshals and sends the PutLifecyclePolicy API request.
@@ -111,7 +61,7 @@ func (r PutLifecyclePolicyRequest) Send(ctx context.Context) (*PutLifecyclePolic
 	}
 
 	resp := &PutLifecyclePolicyResponse{
-		PutLifecyclePolicyOutput: r.Request.Data.(*PutLifecyclePolicyOutput),
+		PutLifecyclePolicyOutput: r.Request.Data.(*types.PutLifecyclePolicyOutput),
 		response:                 &aws.Response{Request: r.Request},
 	}
 
@@ -121,7 +71,7 @@ func (r PutLifecyclePolicyRequest) Send(ctx context.Context) (*PutLifecyclePolic
 // PutLifecyclePolicyResponse is the response type for the
 // PutLifecyclePolicy API operation.
 type PutLifecyclePolicyResponse struct {
-	*PutLifecyclePolicyOutput
+	*types.PutLifecyclePolicyOutput
 
 	response *aws.Response
 }

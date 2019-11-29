@@ -6,56 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/wafregional/types"
 )
-
-type DisassociateWebACLInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ARN (Amazon Resource Name) of the resource from which the web ACL is
-	// being removed, either an application load balancer or Amazon API Gateway
-	// stage.
-	//
-	// The ARN should be in one of the following formats:
-	//
-	//    * For an Application Load Balancer: arn:aws:elasticloadbalancing:region:account-id:loadbalancer/app/load-balancer-name/load-balancer-id
-	//
-	//    * For an Amazon API Gateway stage: arn:aws:apigateway:region::/restapis/api-id/stages/stage-name
-	//
-	// ResourceArn is a required field
-	ResourceArn *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DisassociateWebACLInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DisassociateWebACLInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DisassociateWebACLInput"}
-
-	if s.ResourceArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ResourceArn"))
-	}
-	if s.ResourceArn != nil && len(*s.ResourceArn) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ResourceArn", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DisassociateWebACLOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DisassociateWebACLOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDisassociateWebACL = "DisassociateWebACL"
 
@@ -73,7 +25,7 @@ const opDisassociateWebACL = "DisassociateWebACL"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/DisassociateWebACL
-func (c *Client) DisassociateWebACLRequest(input *DisassociateWebACLInput) DisassociateWebACLRequest {
+func (c *Client) DisassociateWebACLRequest(input *types.DisassociateWebACLInput) DisassociateWebACLRequest {
 	op := &aws.Operation{
 		Name:       opDisassociateWebACL,
 		HTTPMethod: "POST",
@@ -81,10 +33,10 @@ func (c *Client) DisassociateWebACLRequest(input *DisassociateWebACLInput) Disas
 	}
 
 	if input == nil {
-		input = &DisassociateWebACLInput{}
+		input = &types.DisassociateWebACLInput{}
 	}
 
-	req := c.newRequest(op, input, &DisassociateWebACLOutput{})
+	req := c.newRequest(op, input, &types.DisassociateWebACLOutput{})
 	return DisassociateWebACLRequest{Request: req, Input: input, Copy: c.DisassociateWebACLRequest}
 }
 
@@ -92,8 +44,8 @@ func (c *Client) DisassociateWebACLRequest(input *DisassociateWebACLInput) Disas
 // DisassociateWebACL API operation.
 type DisassociateWebACLRequest struct {
 	*aws.Request
-	Input *DisassociateWebACLInput
-	Copy  func(*DisassociateWebACLInput) DisassociateWebACLRequest
+	Input *types.DisassociateWebACLInput
+	Copy  func(*types.DisassociateWebACLInput) DisassociateWebACLRequest
 }
 
 // Send marshals and sends the DisassociateWebACL API request.
@@ -105,7 +57,7 @@ func (r DisassociateWebACLRequest) Send(ctx context.Context) (*DisassociateWebAC
 	}
 
 	resp := &DisassociateWebACLResponse{
-		DisassociateWebACLOutput: r.Request.Data.(*DisassociateWebACLOutput),
+		DisassociateWebACLOutput: r.Request.Data.(*types.DisassociateWebACLOutput),
 		response:                 &aws.Response{Request: r.Request},
 	}
 
@@ -115,7 +67,7 @@ func (r DisassociateWebACLRequest) Send(ctx context.Context) (*DisassociateWebAC
 // DisassociateWebACLResponse is the response type for the
 // DisassociateWebACL API operation.
 type DisassociateWebACLResponse struct {
-	*DisassociateWebACLOutput
+	*types.DisassociateWebACLOutput
 
 	response *aws.Response
 }

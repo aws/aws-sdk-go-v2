@@ -4,67 +4,10 @@ package ecr
 
 import (
 	"context"
-	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ecr/types"
 )
-
-type DeleteLifecyclePolicyInput struct {
-	_ struct{} `type:"structure"`
-
-	// The AWS account ID associated with the registry that contains the repository.
-	// If you do not specify a registry, the default registry is assumed.
-	RegistryId *string `locationName:"registryId" type:"string"`
-
-	// The name of the repository.
-	//
-	// RepositoryName is a required field
-	RepositoryName *string `locationName:"repositoryName" min:"2" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteLifecyclePolicyInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteLifecyclePolicyInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteLifecyclePolicyInput"}
-
-	if s.RepositoryName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("RepositoryName"))
-	}
-	if s.RepositoryName != nil && len(*s.RepositoryName) < 2 {
-		invalidParams.Add(aws.NewErrParamMinLen("RepositoryName", 2))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteLifecyclePolicyOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The time stamp of the last time that the lifecycle policy was run.
-	LastEvaluatedAt *time.Time `locationName:"lastEvaluatedAt" type:"timestamp"`
-
-	// The JSON lifecycle policy text.
-	LifecyclePolicyText *string `locationName:"lifecyclePolicyText" min:"100" type:"string"`
-
-	// The registry ID associated with the request.
-	RegistryId *string `locationName:"registryId" type:"string"`
-
-	// The repository name associated with the request.
-	RepositoryName *string `locationName:"repositoryName" min:"2" type:"string"`
-}
-
-// String returns the string representation
-func (s DeleteLifecyclePolicyOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteLifecyclePolicy = "DeleteLifecyclePolicy"
 
@@ -81,7 +24,7 @@ const opDeleteLifecyclePolicy = "DeleteLifecyclePolicy"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/DeleteLifecyclePolicy
-func (c *Client) DeleteLifecyclePolicyRequest(input *DeleteLifecyclePolicyInput) DeleteLifecyclePolicyRequest {
+func (c *Client) DeleteLifecyclePolicyRequest(input *types.DeleteLifecyclePolicyInput) DeleteLifecyclePolicyRequest {
 	op := &aws.Operation{
 		Name:       opDeleteLifecyclePolicy,
 		HTTPMethod: "POST",
@@ -89,10 +32,10 @@ func (c *Client) DeleteLifecyclePolicyRequest(input *DeleteLifecyclePolicyInput)
 	}
 
 	if input == nil {
-		input = &DeleteLifecyclePolicyInput{}
+		input = &types.DeleteLifecyclePolicyInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteLifecyclePolicyOutput{})
+	req := c.newRequest(op, input, &types.DeleteLifecyclePolicyOutput{})
 	return DeleteLifecyclePolicyRequest{Request: req, Input: input, Copy: c.DeleteLifecyclePolicyRequest}
 }
 
@@ -100,8 +43,8 @@ func (c *Client) DeleteLifecyclePolicyRequest(input *DeleteLifecyclePolicyInput)
 // DeleteLifecyclePolicy API operation.
 type DeleteLifecyclePolicyRequest struct {
 	*aws.Request
-	Input *DeleteLifecyclePolicyInput
-	Copy  func(*DeleteLifecyclePolicyInput) DeleteLifecyclePolicyRequest
+	Input *types.DeleteLifecyclePolicyInput
+	Copy  func(*types.DeleteLifecyclePolicyInput) DeleteLifecyclePolicyRequest
 }
 
 // Send marshals and sends the DeleteLifecyclePolicy API request.
@@ -113,7 +56,7 @@ func (r DeleteLifecyclePolicyRequest) Send(ctx context.Context) (*DeleteLifecycl
 	}
 
 	resp := &DeleteLifecyclePolicyResponse{
-		DeleteLifecyclePolicyOutput: r.Request.Data.(*DeleteLifecyclePolicyOutput),
+		DeleteLifecyclePolicyOutput: r.Request.Data.(*types.DeleteLifecyclePolicyOutput),
 		response:                    &aws.Response{Request: r.Request},
 	}
 
@@ -123,7 +66,7 @@ func (r DeleteLifecyclePolicyRequest) Send(ctx context.Context) (*DeleteLifecycl
 // DeleteLifecyclePolicyResponse is the response type for the
 // DeleteLifecyclePolicy API operation.
 type DeleteLifecyclePolicyResponse struct {
-	*DeleteLifecyclePolicyOutput
+	*types.DeleteLifecyclePolicyOutput
 
 	response *aws.Response
 }

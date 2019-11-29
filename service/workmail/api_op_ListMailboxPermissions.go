@@ -6,79 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/workmail/types"
 )
-
-type ListMailboxPermissionsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The identifier of the user, group, or resource for which to list mailbox
-	// permissions.
-	//
-	// EntityId is a required field
-	EntityId *string `min:"12" type:"string" required:"true"`
-
-	// The maximum number of results to return in a single call.
-	MaxResults *int64 `min:"1" type:"integer"`
-
-	// The token to use to retrieve the next page of results. The first call does
-	// not contain any tokens.
-	NextToken *string `min:"1" type:"string"`
-
-	// The identifier of the organization under which the user, group, or resource
-	// exists.
-	//
-	// OrganizationId is a required field
-	OrganizationId *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s ListMailboxPermissionsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListMailboxPermissionsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListMailboxPermissionsInput"}
-
-	if s.EntityId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("EntityId"))
-	}
-	if s.EntityId != nil && len(*s.EntityId) < 12 {
-		invalidParams.Add(aws.NewErrParamMinLen("EntityId", 12))
-	}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-	if s.NextToken != nil && len(*s.NextToken) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
-	}
-
-	if s.OrganizationId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("OrganizationId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ListMailboxPermissionsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The token to use to retrieve the next page of results. The value is "null"
-	// when there are no more results to return.
-	NextToken *string `min:"1" type:"string"`
-
-	// One page of the user, group, or resource mailbox permissions.
-	Permissions []Permission `type:"list"`
-}
-
-// String returns the string representation
-func (s ListMailboxPermissionsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListMailboxPermissions = "ListMailboxPermissions"
 
@@ -96,7 +25,7 @@ const opListMailboxPermissions = "ListMailboxPermissions"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/ListMailboxPermissions
-func (c *Client) ListMailboxPermissionsRequest(input *ListMailboxPermissionsInput) ListMailboxPermissionsRequest {
+func (c *Client) ListMailboxPermissionsRequest(input *types.ListMailboxPermissionsInput) ListMailboxPermissionsRequest {
 	op := &aws.Operation{
 		Name:       opListMailboxPermissions,
 		HTTPMethod: "POST",
@@ -110,10 +39,10 @@ func (c *Client) ListMailboxPermissionsRequest(input *ListMailboxPermissionsInpu
 	}
 
 	if input == nil {
-		input = &ListMailboxPermissionsInput{}
+		input = &types.ListMailboxPermissionsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListMailboxPermissionsOutput{})
+	req := c.newRequest(op, input, &types.ListMailboxPermissionsOutput{})
 	return ListMailboxPermissionsRequest{Request: req, Input: input, Copy: c.ListMailboxPermissionsRequest}
 }
 
@@ -121,8 +50,8 @@ func (c *Client) ListMailboxPermissionsRequest(input *ListMailboxPermissionsInpu
 // ListMailboxPermissions API operation.
 type ListMailboxPermissionsRequest struct {
 	*aws.Request
-	Input *ListMailboxPermissionsInput
-	Copy  func(*ListMailboxPermissionsInput) ListMailboxPermissionsRequest
+	Input *types.ListMailboxPermissionsInput
+	Copy  func(*types.ListMailboxPermissionsInput) ListMailboxPermissionsRequest
 }
 
 // Send marshals and sends the ListMailboxPermissions API request.
@@ -134,7 +63,7 @@ func (r ListMailboxPermissionsRequest) Send(ctx context.Context) (*ListMailboxPe
 	}
 
 	resp := &ListMailboxPermissionsResponse{
-		ListMailboxPermissionsOutput: r.Request.Data.(*ListMailboxPermissionsOutput),
+		ListMailboxPermissionsOutput: r.Request.Data.(*types.ListMailboxPermissionsOutput),
 		response:                     &aws.Response{Request: r.Request},
 	}
 
@@ -164,7 +93,7 @@ func NewListMailboxPermissionsPaginator(req ListMailboxPermissionsRequest) ListM
 	return ListMailboxPermissionsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListMailboxPermissionsInput
+				var inCpy *types.ListMailboxPermissionsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -184,14 +113,14 @@ type ListMailboxPermissionsPaginator struct {
 	aws.Pager
 }
 
-func (p *ListMailboxPermissionsPaginator) CurrentPage() *ListMailboxPermissionsOutput {
-	return p.Pager.CurrentPage().(*ListMailboxPermissionsOutput)
+func (p *ListMailboxPermissionsPaginator) CurrentPage() *types.ListMailboxPermissionsOutput {
+	return p.Pager.CurrentPage().(*types.ListMailboxPermissionsOutput)
 }
 
 // ListMailboxPermissionsResponse is the response type for the
 // ListMailboxPermissions API operation.
 type ListMailboxPermissionsResponse struct {
-	*ListMailboxPermissionsOutput
+	*types.ListMailboxPermissionsOutput
 
 	response *aws.Response
 }

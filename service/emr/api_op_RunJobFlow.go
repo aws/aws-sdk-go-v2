@@ -4,240 +4,10 @@ package emr
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/emr/types"
 )
-
-// Input to the RunJobFlow operation.
-type RunJobFlowInput struct {
-	_ struct{} `type:"structure"`
-
-	// A JSON string for selecting additional features.
-	AdditionalInfo *string `type:"string"`
-
-	// Applies only to Amazon EMR AMI versions 3.x and 2.x. For Amazon EMR releases
-	// 4.0 and later, ReleaseLabel is used. To specify a custom AMI, use CustomAmiID.
-	AmiVersion *string `type:"string"`
-
-	// Applies to Amazon EMR releases 4.0 and later. A case-insensitive list of
-	// applications for Amazon EMR to install and configure when launching the cluster.
-	// For a list of applications available for each Amazon EMR release version,
-	// see the Amazon EMR Release Guide (https://docs.aws.amazon.com/emr/latest/ReleaseGuide/).
-	Applications []Application `type:"list"`
-
-	// An IAM role for automatic scaling policies. The default role is EMR_AutoScaling_DefaultRole.
-	// The IAM role provides permissions that the automatic scaling feature requires
-	// to launch and terminate EC2 instances in an instance group.
-	AutoScalingRole *string `type:"string"`
-
-	// A list of bootstrap actions to run before Hadoop starts on the cluster nodes.
-	BootstrapActions []BootstrapActionConfig `type:"list"`
-
-	// For Amazon EMR releases 4.0 and later. The list of configurations supplied
-	// for the EMR cluster you are creating.
-	Configurations []Configuration `type:"list"`
-
-	// Available only in Amazon EMR version 5.7.0 and later. The ID of a custom
-	// Amazon EBS-backed Linux AMI. If specified, Amazon EMR uses this AMI when
-	// it launches cluster EC2 instances. For more information about custom AMIs
-	// in Amazon EMR, see Using a Custom AMI (https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-custom-ami.html)
-	// in the Amazon EMR Management Guide. If omitted, the cluster uses the base
-	// Linux AMI for the ReleaseLabel specified. For Amazon EMR versions 2.x and
-	// 3.x, use AmiVersion instead.
-	//
-	// For information about creating a custom AMI, see Creating an Amazon EBS-Backed
-	// Linux AMI (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/creating-an-ami-ebs.html)
-	// in the Amazon Elastic Compute Cloud User Guide for Linux Instances. For information
-	// about finding an AMI ID, see Finding a Linux AMI (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/finding-an-ami.html).
-	CustomAmiId *string `type:"string"`
-
-	// The size, in GiB, of the EBS root device volume of the Linux AMI that is
-	// used for each EC2 instance. Available in Amazon EMR version 4.x and later.
-	EbsRootVolumeSize *int64 `type:"integer"`
-
-	// A specification of the number and type of Amazon EC2 instances.
-	//
-	// Instances is a required field
-	Instances *JobFlowInstancesConfig `type:"structure" required:"true"`
-
-	// Also called instance profile and EC2 role. An IAM role for an EMR cluster.
-	// The EC2 instances of the cluster assume this role. The default role is EMR_EC2_DefaultRole.
-	// In order to use the default role, you must have already created it using
-	// the CLI or console.
-	JobFlowRole *string `type:"string"`
-
-	// Attributes for Kerberos configuration when Kerberos authentication is enabled
-	// using a security configuration. For more information see Use Kerberos Authentication
-	// (https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-kerberos.html)
-	// in the EMR Management Guide.
-	KerberosAttributes *KerberosAttributes `type:"structure"`
-
-	// The location in Amazon S3 to write the log files of the job flow. If a value
-	// is not provided, logs are not created.
-	LogUri *string `type:"string"`
-
-	// The name of the job flow.
-	//
-	// Name is a required field
-	Name *string `type:"string" required:"true"`
-
-	//
-	// For Amazon EMR releases 3.x and 2.x. For Amazon EMR releases 4.x and later,
-	// use Applications.
-	//
-	// A list of strings that indicates third-party software to use with the job
-	// flow that accepts a user argument list. EMR accepts and forwards the argument
-	// list to the corresponding installation script as bootstrap action arguments.
-	// For more information, see "Launch a Job Flow on the MapR Distribution for
-	// Hadoop" in the Amazon EMR Developer Guide (https://docs.aws.amazon.com/emr/latest/DeveloperGuide/emr-dg.pdf).
-	// Supported values are:
-	//
-	//    * "mapr-m3" - launch the cluster using MapR M3 Edition.
-	//
-	//    * "mapr-m5" - launch the cluster using MapR M5 Edition.
-	//
-	//    * "mapr" with the user arguments specifying "--edition,m3" or "--edition,m5"
-	//    - launch the job flow using MapR M3 or M5 Edition respectively.
-	//
-	//    * "mapr-m7" - launch the cluster using MapR M7 Edition.
-	//
-	//    * "hunk" - launch the cluster with the Hunk Big Data Analtics Platform.
-	//
-	//    * "hue"- launch the cluster with Hue installed.
-	//
-	//    * "spark" - launch the cluster with Apache Spark installed.
-	//
-	//    * "ganglia" - launch the cluster with the Ganglia Monitoring System installed.
-	NewSupportedProducts []SupportedProductConfig `type:"list"`
-
-	// The Amazon EMR release label, which determines the version of open-source
-	// application packages installed on the cluster. Release labels are in the
-	// form emr-x.x.x, where x.x.x is an Amazon EMR release version such as emr-5.14.0.
-	// For more information about Amazon EMR release versions and included application
-	// versions and features, see https://docs.aws.amazon.com/emr/latest/ReleaseGuide/
-	// (https://docs.aws.amazon.com/emr/latest/ReleaseGuide/). The release label
-	// applies only to Amazon EMR releases version 4.0 and later. Earlier versions
-	// use AmiVersion.
-	ReleaseLabel *string `type:"string"`
-
-	// Applies only when CustomAmiID is used. Specifies which updates from the Amazon
-	// Linux AMI package repositories to apply automatically when the instance boots
-	// using the AMI. If omitted, the default is SECURITY, which indicates that
-	// only security updates are applied. If NONE is specified, no updates are applied,
-	// and all updates must be applied manually.
-	RepoUpgradeOnBoot RepoUpgradeOnBoot `type:"string" enum:"true"`
-
-	// Specifies the way that individual Amazon EC2 instances terminate when an
-	// automatic scale-in activity occurs or an instance group is resized. TERMINATE_AT_INSTANCE_HOUR
-	// indicates that Amazon EMR terminates nodes at the instance-hour boundary,
-	// regardless of when the request to terminate the instance was submitted. This
-	// option is only available with Amazon EMR 5.1.0 and later and is the default
-	// for clusters created using that version. TERMINATE_AT_TASK_COMPLETION indicates
-	// that Amazon EMR blacklists and drains tasks from nodes before terminating
-	// the Amazon EC2 instances, regardless of the instance-hour boundary. With
-	// either behavior, Amazon EMR removes the least active nodes first and blocks
-	// instance termination if it could lead to HDFS corruption. TERMINATE_AT_TASK_COMPLETION
-	// available only in Amazon EMR version 4.1.0 and later, and is the default
-	// for versions of Amazon EMR earlier than 5.1.0.
-	ScaleDownBehavior ScaleDownBehavior `type:"string" enum:"true"`
-
-	// The name of a security configuration to apply to the cluster.
-	SecurityConfiguration *string `type:"string"`
-
-	// The IAM role that will be assumed by the Amazon EMR service to access AWS
-	// resources on your behalf.
-	ServiceRole *string `type:"string"`
-
-	// A list of steps to run.
-	Steps []StepConfig `type:"list"`
-
-	//
-	// For Amazon EMR releases 3.x and 2.x. For Amazon EMR releases 4.x and later,
-	// use Applications.
-	//
-	// A list of strings that indicates third-party software to use. For more information,
-	// see the Amazon EMR Developer Guide (https://docs.aws.amazon.com/emr/latest/DeveloperGuide/emr-dg.pdf).
-	// Currently supported values are:
-	//
-	//    * "mapr-m3" - launch the job flow using MapR M3 Edition.
-	//
-	//    * "mapr-m5" - launch the job flow using MapR M5 Edition.
-	SupportedProducts []string `type:"list"`
-
-	// A list of tags to associate with a cluster and propagate to Amazon EC2 instances.
-	Tags []Tag `type:"list"`
-
-	// This member will be deprecated.
-	//
-	// Whether the cluster is visible to all IAM users of the AWS account associated
-	// with the cluster. If this value is set to true, all IAM users of that AWS
-	// account can view and (if they have the proper policy permissions set) manage
-	// the cluster. If it is set to false, only the IAM user that created the cluster
-	// can view and manage it.
-	VisibleToAllUsers *bool `type:"boolean"`
-}
-
-// String returns the string representation
-func (s RunJobFlowInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *RunJobFlowInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "RunJobFlowInput"}
-
-	if s.Instances == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Instances"))
-	}
-
-	if s.Name == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Name"))
-	}
-	if s.BootstrapActions != nil {
-		for i, v := range s.BootstrapActions {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "BootstrapActions", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-	if s.Instances != nil {
-		if err := s.Instances.Validate(); err != nil {
-			invalidParams.AddNested("Instances", err.(aws.ErrInvalidParams))
-		}
-	}
-	if s.KerberosAttributes != nil {
-		if err := s.KerberosAttributes.Validate(); err != nil {
-			invalidParams.AddNested("KerberosAttributes", err.(aws.ErrInvalidParams))
-		}
-	}
-	if s.Steps != nil {
-		for i, v := range s.Steps {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Steps", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// The result of the RunJobFlow operation.
-type RunJobFlowOutput struct {
-	_ struct{} `type:"structure"`
-
-	// An unique identifier for the job flow.
-	JobFlowId *string `type:"string"`
-}
-
-// String returns the string representation
-func (s RunJobFlowOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opRunJobFlow = "RunJobFlow"
 
@@ -280,7 +50,7 @@ const opRunJobFlow = "RunJobFlow"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/RunJobFlow
-func (c *Client) RunJobFlowRequest(input *RunJobFlowInput) RunJobFlowRequest {
+func (c *Client) RunJobFlowRequest(input *types.RunJobFlowInput) RunJobFlowRequest {
 	op := &aws.Operation{
 		Name:       opRunJobFlow,
 		HTTPMethod: "POST",
@@ -288,10 +58,10 @@ func (c *Client) RunJobFlowRequest(input *RunJobFlowInput) RunJobFlowRequest {
 	}
 
 	if input == nil {
-		input = &RunJobFlowInput{}
+		input = &types.RunJobFlowInput{}
 	}
 
-	req := c.newRequest(op, input, &RunJobFlowOutput{})
+	req := c.newRequest(op, input, &types.RunJobFlowOutput{})
 	return RunJobFlowRequest{Request: req, Input: input, Copy: c.RunJobFlowRequest}
 }
 
@@ -299,8 +69,8 @@ func (c *Client) RunJobFlowRequest(input *RunJobFlowInput) RunJobFlowRequest {
 // RunJobFlow API operation.
 type RunJobFlowRequest struct {
 	*aws.Request
-	Input *RunJobFlowInput
-	Copy  func(*RunJobFlowInput) RunJobFlowRequest
+	Input *types.RunJobFlowInput
+	Copy  func(*types.RunJobFlowInput) RunJobFlowRequest
 }
 
 // Send marshals and sends the RunJobFlow API request.
@@ -312,7 +82,7 @@ func (r RunJobFlowRequest) Send(ctx context.Context) (*RunJobFlowResponse, error
 	}
 
 	resp := &RunJobFlowResponse{
-		RunJobFlowOutput: r.Request.Data.(*RunJobFlowOutput),
+		RunJobFlowOutput: r.Request.Data.(*types.RunJobFlowOutput),
 		response:         &aws.Response{Request: r.Request},
 	}
 
@@ -322,7 +92,7 @@ func (r RunJobFlowRequest) Send(ctx context.Context) (*RunJobFlowResponse, error
 // RunJobFlowResponse is the response type for the
 // RunJobFlow API operation.
 type RunJobFlowResponse struct {
-	*RunJobFlowOutput
+	*types.RunJobFlowOutput
 
 	response *aws.Response
 }

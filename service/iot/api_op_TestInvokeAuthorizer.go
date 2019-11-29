@@ -6,155 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/iot/types"
 )
-
-type TestInvokeAuthorizerInput struct {
-	_ struct{} `type:"structure"`
-
-	// The custom authorizer name.
-	//
-	// AuthorizerName is a required field
-	AuthorizerName *string `location:"uri" locationName:"authorizerName" min:"1" type:"string" required:"true"`
-
-	// The token returned by your custom authentication service.
-	//
-	// Token is a required field
-	Token *string `locationName:"token" min:"1" type:"string" required:"true"`
-
-	// The signature made with the token and your custom authentication service's
-	// private key.
-	//
-	// TokenSignature is a required field
-	TokenSignature *string `locationName:"tokenSignature" min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s TestInvokeAuthorizerInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *TestInvokeAuthorizerInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "TestInvokeAuthorizerInput"}
-
-	if s.AuthorizerName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("AuthorizerName"))
-	}
-	if s.AuthorizerName != nil && len(*s.AuthorizerName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("AuthorizerName", 1))
-	}
-
-	if s.Token == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Token"))
-	}
-	if s.Token != nil && len(*s.Token) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Token", 1))
-	}
-
-	if s.TokenSignature == nil {
-		invalidParams.Add(aws.NewErrParamRequired("TokenSignature"))
-	}
-	if s.TokenSignature != nil && len(*s.TokenSignature) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("TokenSignature", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s TestInvokeAuthorizerInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.Token != nil {
-		v := *s.Token
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "token", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.TokenSignature != nil {
-		v := *s.TokenSignature
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "tokenSignature", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.AuthorizerName != nil {
-		v := *s.AuthorizerName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "authorizerName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type TestInvokeAuthorizerOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The number of seconds after which the connection is terminated.
-	DisconnectAfterInSeconds *int64 `locationName:"disconnectAfterInSeconds" type:"integer"`
-
-	// True if the token is authenticated, otherwise false.
-	IsAuthenticated *bool `locationName:"isAuthenticated" type:"boolean"`
-
-	// IAM policy documents.
-	PolicyDocuments []string `locationName:"policyDocuments" type:"list"`
-
-	// The principal ID.
-	PrincipalId *string `locationName:"principalId" min:"1" type:"string"`
-
-	// The number of seconds after which the temporary credentials are refreshed.
-	RefreshAfterInSeconds *int64 `locationName:"refreshAfterInSeconds" type:"integer"`
-}
-
-// String returns the string representation
-func (s TestInvokeAuthorizerOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s TestInvokeAuthorizerOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.DisconnectAfterInSeconds != nil {
-		v := *s.DisconnectAfterInSeconds
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "disconnectAfterInSeconds", protocol.Int64Value(v), metadata)
-	}
-	if s.IsAuthenticated != nil {
-		v := *s.IsAuthenticated
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "isAuthenticated", protocol.BoolValue(v), metadata)
-	}
-	if s.PolicyDocuments != nil {
-		v := s.PolicyDocuments
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "policyDocuments", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
-		}
-		ls0.End()
-
-	}
-	if s.PrincipalId != nil {
-		v := *s.PrincipalId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "principalId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.RefreshAfterInSeconds != nil {
-		v := *s.RefreshAfterInSeconds
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "refreshAfterInSeconds", protocol.Int64Value(v), metadata)
-	}
-	return nil
-}
 
 const opTestInvokeAuthorizer = "TestInvokeAuthorizer"
 
@@ -171,7 +24,7 @@ const opTestInvokeAuthorizer = "TestInvokeAuthorizer"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) TestInvokeAuthorizerRequest(input *TestInvokeAuthorizerInput) TestInvokeAuthorizerRequest {
+func (c *Client) TestInvokeAuthorizerRequest(input *types.TestInvokeAuthorizerInput) TestInvokeAuthorizerRequest {
 	op := &aws.Operation{
 		Name:       opTestInvokeAuthorizer,
 		HTTPMethod: "POST",
@@ -179,10 +32,10 @@ func (c *Client) TestInvokeAuthorizerRequest(input *TestInvokeAuthorizerInput) T
 	}
 
 	if input == nil {
-		input = &TestInvokeAuthorizerInput{}
+		input = &types.TestInvokeAuthorizerInput{}
 	}
 
-	req := c.newRequest(op, input, &TestInvokeAuthorizerOutput{})
+	req := c.newRequest(op, input, &types.TestInvokeAuthorizerOutput{})
 	return TestInvokeAuthorizerRequest{Request: req, Input: input, Copy: c.TestInvokeAuthorizerRequest}
 }
 
@@ -190,8 +43,8 @@ func (c *Client) TestInvokeAuthorizerRequest(input *TestInvokeAuthorizerInput) T
 // TestInvokeAuthorizer API operation.
 type TestInvokeAuthorizerRequest struct {
 	*aws.Request
-	Input *TestInvokeAuthorizerInput
-	Copy  func(*TestInvokeAuthorizerInput) TestInvokeAuthorizerRequest
+	Input *types.TestInvokeAuthorizerInput
+	Copy  func(*types.TestInvokeAuthorizerInput) TestInvokeAuthorizerRequest
 }
 
 // Send marshals and sends the TestInvokeAuthorizer API request.
@@ -203,7 +56,7 @@ func (r TestInvokeAuthorizerRequest) Send(ctx context.Context) (*TestInvokeAutho
 	}
 
 	resp := &TestInvokeAuthorizerResponse{
-		TestInvokeAuthorizerOutput: r.Request.Data.(*TestInvokeAuthorizerOutput),
+		TestInvokeAuthorizerOutput: r.Request.Data.(*types.TestInvokeAuthorizerOutput),
 		response:                   &aws.Response{Request: r.Request},
 	}
 
@@ -213,7 +66,7 @@ func (r TestInvokeAuthorizerRequest) Send(ctx context.Context) (*TestInvokeAutho
 // TestInvokeAuthorizerResponse is the response type for the
 // TestInvokeAuthorizer API operation.
 type TestInvokeAuthorizerResponse struct {
-	*TestInvokeAuthorizerOutput
+	*types.TestInvokeAuthorizerOutput
 
 	response *aws.Response
 }

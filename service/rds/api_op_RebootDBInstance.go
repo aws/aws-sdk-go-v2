@@ -6,61 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/rds/types"
 )
-
-type RebootDBInstanceInput struct {
-	_ struct{} `type:"structure"`
-
-	// The DB instance identifier. This parameter is stored as a lowercase string.
-	//
-	// Constraints:
-	//
-	//    * Must match the identifier of an existing DBInstance.
-	//
-	// DBInstanceIdentifier is a required field
-	DBInstanceIdentifier *string `type:"string" required:"true"`
-
-	// A value that indicates whether the reboot is conducted through a Multi-AZ
-	// failover.
-	//
-	// Constraint: You can't enable force failover if the instance is not configured
-	// for Multi-AZ.
-	ForceFailover *bool `type:"boolean"`
-}
-
-// String returns the string representation
-func (s RebootDBInstanceInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *RebootDBInstanceInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "RebootDBInstanceInput"}
-
-	if s.DBInstanceIdentifier == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DBInstanceIdentifier"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type RebootDBInstanceOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Contains the details of an Amazon RDS DB instance.
-	//
-	// This data type is used as a response element in the DescribeDBInstances action.
-	DBInstance *DBInstance `type:"structure"`
-}
-
-// String returns the string representation
-func (s RebootDBInstanceOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opRebootDBInstance = "RebootDBInstance"
 
@@ -87,7 +34,7 @@ const opRebootDBInstance = "RebootDBInstance"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RebootDBInstance
-func (c *Client) RebootDBInstanceRequest(input *RebootDBInstanceInput) RebootDBInstanceRequest {
+func (c *Client) RebootDBInstanceRequest(input *types.RebootDBInstanceInput) RebootDBInstanceRequest {
 	op := &aws.Operation{
 		Name:       opRebootDBInstance,
 		HTTPMethod: "POST",
@@ -95,10 +42,10 @@ func (c *Client) RebootDBInstanceRequest(input *RebootDBInstanceInput) RebootDBI
 	}
 
 	if input == nil {
-		input = &RebootDBInstanceInput{}
+		input = &types.RebootDBInstanceInput{}
 	}
 
-	req := c.newRequest(op, input, &RebootDBInstanceOutput{})
+	req := c.newRequest(op, input, &types.RebootDBInstanceOutput{})
 	return RebootDBInstanceRequest{Request: req, Input: input, Copy: c.RebootDBInstanceRequest}
 }
 
@@ -106,8 +53,8 @@ func (c *Client) RebootDBInstanceRequest(input *RebootDBInstanceInput) RebootDBI
 // RebootDBInstance API operation.
 type RebootDBInstanceRequest struct {
 	*aws.Request
-	Input *RebootDBInstanceInput
-	Copy  func(*RebootDBInstanceInput) RebootDBInstanceRequest
+	Input *types.RebootDBInstanceInput
+	Copy  func(*types.RebootDBInstanceInput) RebootDBInstanceRequest
 }
 
 // Send marshals and sends the RebootDBInstance API request.
@@ -119,7 +66,7 @@ func (r RebootDBInstanceRequest) Send(ctx context.Context) (*RebootDBInstanceRes
 	}
 
 	resp := &RebootDBInstanceResponse{
-		RebootDBInstanceOutput: r.Request.Data.(*RebootDBInstanceOutput),
+		RebootDBInstanceOutput: r.Request.Data.(*types.RebootDBInstanceOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -129,7 +76,7 @@ func (r RebootDBInstanceRequest) Send(ctx context.Context) (*RebootDBInstanceRes
 // RebootDBInstanceResponse is the response type for the
 // RebootDBInstance API operation.
 type RebootDBInstanceResponse struct {
-	*RebootDBInstanceOutput
+	*types.RebootDBInstanceOutput
 
 	response *aws.Response
 }

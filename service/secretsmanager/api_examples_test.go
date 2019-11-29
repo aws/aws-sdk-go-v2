@@ -12,6 +12,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws/awserr"
 	"github.com/aws/aws-sdk-go-v2/aws/external"
 	"github.com/aws/aws-sdk-go-v2/service/secretsmanager"
+	"github.com/aws/aws-sdk-go-v2/service/secretsmanager/types"
 )
 
 var _ time.Duration
@@ -38,7 +39,7 @@ func ExampleClient_CancelRotateSecretRequest_shared00() {
 	}
 
 	svc := secretsmanager.New(cfg)
-	input := &secretsmanager.CancelRotateSecretInput{
+	input := &types.CancelRotateSecretInput{
 		SecretId: aws.String("MyTestDatabaseSecret"),
 	}
 
@@ -80,7 +81,7 @@ func ExampleClient_CreateSecretRequest_shared00() {
 	}
 
 	svc := secretsmanager.New(cfg)
-	input := &secretsmanager.CreateSecretInput{
+	input := &types.CreateSecretInput{
 		ClientRequestToken: aws.String("EXAMPLE1-90ab-cdef-fedc-ba987SECRET1"),
 		Description:        aws.String("My test database secret created with the CLI"),
 		Name:               aws.String("MyTestDatabaseSecret"),
@@ -135,7 +136,7 @@ func ExampleClient_DeleteResourcePolicyRequest_shared00() {
 	}
 
 	svc := secretsmanager.New(cfg)
-	input := &secretsmanager.DeleteResourcePolicyInput{
+	input := &types.DeleteResourcePolicyInput{
 		SecretId: aws.String("MyTestDatabaseSecret"),
 	}
 
@@ -177,7 +178,7 @@ func ExampleClient_DeleteSecretRequest_shared00() {
 	}
 
 	svc := secretsmanager.New(cfg)
-	input := &secretsmanager.DeleteSecretInput{
+	input := &types.DeleteSecretInput{
 		RecoveryWindowInDays: aws.Int64(7),
 		SecretId:             aws.String("MyTestDatabaseSecret1"),
 	}
@@ -219,7 +220,7 @@ func ExampleClient_DescribeSecretRequest_shared00() {
 	}
 
 	svc := secretsmanager.New(cfg)
-	input := &secretsmanager.DescribeSecretInput{
+	input := &types.DescribeSecretInput{
 		SecretId: aws.String("MyTestDatabaseSecret"),
 	}
 
@@ -258,7 +259,7 @@ func ExampleClient_GetRandomPasswordRequest_shared00() {
 	}
 
 	svc := secretsmanager.New(cfg)
-	input := &secretsmanager.GetRandomPasswordInput{
+	input := &types.GetRandomPasswordInput{
 		IncludeSpace:            aws.Bool(true),
 		PasswordLength:          aws.Int64(20),
 		RequireEachIncludedType: aws.Bool(true),
@@ -300,7 +301,7 @@ func ExampleClient_GetResourcePolicyRequest_shared00() {
 	}
 
 	svc := secretsmanager.New(cfg)
-	input := &secretsmanager.GetResourcePolicyInput{
+	input := &types.GetResourcePolicyInput{
 		SecretId: aws.String("MyTestDatabaseSecret"),
 	}
 
@@ -342,7 +343,7 @@ func ExampleClient_GetSecretValueRequest_shared00() {
 	}
 
 	svc := secretsmanager.New(cfg)
-	input := &secretsmanager.GetSecretValueInput{
+	input := &types.GetSecretValueInput{
 		SecretId:     aws.String("MyTestDatabaseSecret"),
 		VersionStage: aws.String("AWSPREVIOUS"),
 	}
@@ -387,7 +388,7 @@ func ExampleClient_ListSecretVersionIdsRequest_shared00() {
 	}
 
 	svc := secretsmanager.New(cfg)
-	input := &secretsmanager.ListSecretVersionIdsInput{
+	input := &types.ListSecretVersionIdsInput{
 		IncludeDeprecated: aws.Bool(true),
 		SecretId:          aws.String("MyTestDatabaseSecret"),
 	}
@@ -427,7 +428,7 @@ func ExampleClient_ListSecretsRequest_shared00() {
 	}
 
 	svc := secretsmanager.New(cfg)
-	input := &secretsmanager.ListSecretsInput{}
+	input := &types.ListSecretsInput{}
 
 	req := svc.ListSecretsRequest(input)
 	result, err := req.Send(context.Background())
@@ -464,7 +465,7 @@ func ExampleClient_PutResourcePolicyRequest_shared00() {
 	}
 
 	svc := secretsmanager.New(cfg)
-	input := &secretsmanager.PutResourcePolicyInput{
+	input := &types.PutResourcePolicyInput{
 		ResourcePolicy: aws.String("{\n\"Version\":\"2012-10-17\",\n\"Statement\":[{\n\"Effect\":\"Allow\",\n\"Principal\":{\n\"AWS\":\"arn:aws:iam::123456789012:root\"\n},\n\"Action\":\"secretsmanager:GetSecretValue\",\n\"Resource\":\"*\"\n}]\n}"),
 		SecretId:       aws.String("MyTestDatabaseSecret"),
 	}
@@ -509,7 +510,7 @@ func ExampleClient_PutSecretValueRequest_shared00() {
 	}
 
 	svc := secretsmanager.New(cfg)
-	input := &secretsmanager.PutSecretValueInput{
+	input := &types.PutSecretValueInput{
 		ClientRequestToken: aws.String("EXAMPLE2-90ab-cdef-fedc-ba987EXAMPLE"),
 		SecretId:           aws.String("MyTestDatabaseSecret"),
 		SecretString:       aws.String("{\"username\":\"david\",\"password\":\"BnQw!XDWgaEeT9XGTT29\"}"),
@@ -559,7 +560,7 @@ func ExampleClient_RestoreSecretRequest_shared00() {
 	}
 
 	svc := secretsmanager.New(cfg)
-	input := &secretsmanager.RestoreSecretInput{
+	input := &types.RestoreSecretInput{
 		SecretId: aws.String("MyTestDatabaseSecret"),
 	}
 
@@ -603,9 +604,9 @@ func ExampleClient_RotateSecretRequest_shared00() {
 	}
 
 	svc := secretsmanager.New(cfg)
-	input := &secretsmanager.RotateSecretInput{
+	input := &types.RotateSecretInput{
 		RotationLambdaARN: aws.String("arn:aws:lambda:us-west-2:123456789012:function:MyTestDatabaseRotationLambda"),
-		RotationRules: &secretsmanager.RotationRulesType{
+		RotationRules: &types.RotationRulesType{
 			AutomaticallyAfterDays: aws.Int64(30),
 		},
 		SecretId: aws.String("MyTestDatabaseSecret"),
@@ -650,7 +651,7 @@ func ExampleClient_RotateSecretRequest_shared01() {
 	}
 
 	svc := secretsmanager.New(cfg)
-	input := &secretsmanager.RotateSecretInput{
+	input := &types.RotateSecretInput{
 		SecretId: aws.String("MyTestDatabaseSecret"),
 	}
 
@@ -693,9 +694,9 @@ func ExampleClient_TagResourceRequest_shared00() {
 	}
 
 	svc := secretsmanager.New(cfg)
-	input := &secretsmanager.TagResourceInput{
+	input := &types.TagResourceInput{
 		SecretId: aws.String("MyExampleSecret"),
-		Tags: []secretsmanager.Tag{
+		Tags: []types.Tag{
 			{
 				Key:   aws.String("FirstTag"),
 				Value: aws.String("SomeValue"),
@@ -746,7 +747,7 @@ func ExampleClient_UntagResourceRequest_shared00() {
 	}
 
 	svc := secretsmanager.New(cfg)
-	input := &secretsmanager.UntagResourceInput{
+	input := &types.UntagResourceInput{
 		SecretId: aws.String("MyTestDatabaseSecret"),
 		TagKeys: []string{
 			"FirstTag",
@@ -791,7 +792,7 @@ func ExampleClient_UpdateSecretRequest_shared00() {
 	}
 
 	svc := secretsmanager.New(cfg)
-	input := &secretsmanager.UpdateSecretInput{
+	input := &types.UpdateSecretInput{
 		ClientRequestToken: aws.String("EXAMPLE1-90ab-cdef-fedc-ba987EXAMPLE"),
 		Description:        aws.String("This is a new description for the secret."),
 		SecretId:           aws.String("MyTestDatabaseSecret"),
@@ -845,7 +846,7 @@ func ExampleClient_UpdateSecretRequest_shared01() {
 	}
 
 	svc := secretsmanager.New(cfg)
-	input := &secretsmanager.UpdateSecretInput{
+	input := &types.UpdateSecretInput{
 		KmsKeyId: aws.String("arn:aws:kms:us-west-2:123456789012:key/EXAMPLE2-90ab-cdef-fedc-ba987EXAMPLE"),
 		SecretId: aws.String("MyTestDatabaseSecret"),
 	}
@@ -898,7 +899,7 @@ func ExampleClient_UpdateSecretRequest_shared02() {
 	}
 
 	svc := secretsmanager.New(cfg)
-	input := &secretsmanager.UpdateSecretInput{
+	input := &types.UpdateSecretInput{
 		SecretId:     aws.String("MyTestDatabaseSecret"),
 		SecretString: aws.String("{JSON STRING WITH CREDENTIALS}"),
 	}
@@ -952,7 +953,7 @@ func ExampleClient_UpdateSecretVersionStageRequest_shared00() {
 	}
 
 	svc := secretsmanager.New(cfg)
-	input := &secretsmanager.UpdateSecretVersionStageInput{
+	input := &types.UpdateSecretVersionStageInput{
 		MoveToVersionId: aws.String("EXAMPLE1-90ab-cdef-fedc-ba987SECRET1"),
 		SecretId:        aws.String("MyTestDatabaseSecret"),
 		VersionStage:    aws.String("STAGINGLABEL1"),
@@ -999,7 +1000,7 @@ func ExampleClient_UpdateSecretVersionStageRequest_shared01() {
 	}
 
 	svc := secretsmanager.New(cfg)
-	input := &secretsmanager.UpdateSecretVersionStageInput{
+	input := &types.UpdateSecretVersionStageInput{
 		RemoveFromVersionId: aws.String("EXAMPLE1-90ab-cdef-fedc-ba987SECRET1"),
 		SecretId:            aws.String("MyTestDatabaseSecret"),
 		VersionStage:        aws.String("STAGINGLABEL1"),
@@ -1047,7 +1048,7 @@ func ExampleClient_UpdateSecretVersionStageRequest_shared02() {
 	}
 
 	svc := secretsmanager.New(cfg)
-	input := &secretsmanager.UpdateSecretVersionStageInput{
+	input := &types.UpdateSecretVersionStageInput{
 		MoveToVersionId:     aws.String("EXAMPLE2-90ab-cdef-fedc-ba987SECRET2"),
 		RemoveFromVersionId: aws.String("EXAMPLE1-90ab-cdef-fedc-ba987SECRET1"),
 		SecretId:            aws.String("MyTestDatabaseSecret"),

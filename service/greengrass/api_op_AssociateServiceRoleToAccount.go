@@ -6,73 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/greengrass/types"
 )
-
-type AssociateServiceRoleToAccountInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ARN of the service role you wish to associate with your account.
-	//
-	// RoleArn is a required field
-	RoleArn *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s AssociateServiceRoleToAccountInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *AssociateServiceRoleToAccountInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "AssociateServiceRoleToAccountInput"}
-
-	if s.RoleArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("RoleArn"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s AssociateServiceRoleToAccountInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.RoleArn != nil {
-		v := *s.RoleArn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "RoleArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type AssociateServiceRoleToAccountOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The time when the service role was associated with the account.
-	AssociatedAt *string `type:"string"`
-}
-
-// String returns the string representation
-func (s AssociateServiceRoleToAccountOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s AssociateServiceRoleToAccountOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.AssociatedAt != nil {
-		v := *s.AssociatedAt
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "AssociatedAt", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opAssociateServiceRoleToAccount = "AssociateServiceRoleToAccount"
 
@@ -92,7 +27,7 @@ const opAssociateServiceRoleToAccount = "AssociateServiceRoleToAccount"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/AssociateServiceRoleToAccount
-func (c *Client) AssociateServiceRoleToAccountRequest(input *AssociateServiceRoleToAccountInput) AssociateServiceRoleToAccountRequest {
+func (c *Client) AssociateServiceRoleToAccountRequest(input *types.AssociateServiceRoleToAccountInput) AssociateServiceRoleToAccountRequest {
 	op := &aws.Operation{
 		Name:       opAssociateServiceRoleToAccount,
 		HTTPMethod: "PUT",
@@ -100,10 +35,10 @@ func (c *Client) AssociateServiceRoleToAccountRequest(input *AssociateServiceRol
 	}
 
 	if input == nil {
-		input = &AssociateServiceRoleToAccountInput{}
+		input = &types.AssociateServiceRoleToAccountInput{}
 	}
 
-	req := c.newRequest(op, input, &AssociateServiceRoleToAccountOutput{})
+	req := c.newRequest(op, input, &types.AssociateServiceRoleToAccountOutput{})
 	return AssociateServiceRoleToAccountRequest{Request: req, Input: input, Copy: c.AssociateServiceRoleToAccountRequest}
 }
 
@@ -111,8 +46,8 @@ func (c *Client) AssociateServiceRoleToAccountRequest(input *AssociateServiceRol
 // AssociateServiceRoleToAccount API operation.
 type AssociateServiceRoleToAccountRequest struct {
 	*aws.Request
-	Input *AssociateServiceRoleToAccountInput
-	Copy  func(*AssociateServiceRoleToAccountInput) AssociateServiceRoleToAccountRequest
+	Input *types.AssociateServiceRoleToAccountInput
+	Copy  func(*types.AssociateServiceRoleToAccountInput) AssociateServiceRoleToAccountRequest
 }
 
 // Send marshals and sends the AssociateServiceRoleToAccount API request.
@@ -124,7 +59,7 @@ func (r AssociateServiceRoleToAccountRequest) Send(ctx context.Context) (*Associ
 	}
 
 	resp := &AssociateServiceRoleToAccountResponse{
-		AssociateServiceRoleToAccountOutput: r.Request.Data.(*AssociateServiceRoleToAccountOutput),
+		AssociateServiceRoleToAccountOutput: r.Request.Data.(*types.AssociateServiceRoleToAccountOutput),
 		response:                            &aws.Response{Request: r.Request},
 	}
 
@@ -134,7 +69,7 @@ func (r AssociateServiceRoleToAccountRequest) Send(ctx context.Context) (*Associ
 // AssociateServiceRoleToAccountResponse is the response type for the
 // AssociateServiceRoleToAccount API operation.
 type AssociateServiceRoleToAccountResponse struct {
-	*AssociateServiceRoleToAccountOutput
+	*types.AssociateServiceRoleToAccountOutput
 
 	response *aws.Response
 }

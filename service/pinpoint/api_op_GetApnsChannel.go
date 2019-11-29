@@ -6,74 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/pinpoint/types"
 )
-
-type GetApnsChannelInput struct {
-	_ struct{} `type:"structure"`
-
-	// ApplicationId is a required field
-	ApplicationId *string `location:"uri" locationName:"application-id" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetApnsChannelInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetApnsChannelInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetApnsChannelInput"}
-
-	if s.ApplicationId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ApplicationId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetApnsChannelInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.ApplicationId != nil {
-		v := *s.ApplicationId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "application-id", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type GetApnsChannelOutput struct {
-	_ struct{} `type:"structure" payload:"APNSChannelResponse"`
-
-	// Provides information about the status and settings of the APNs (Apple Push
-	// Notification service) channel for an application.
-	//
-	// APNSChannelResponse is a required field
-	APNSChannelResponse *APNSChannelResponse `type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s GetApnsChannelOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetApnsChannelOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.APNSChannelResponse != nil {
-		v := s.APNSChannelResponse
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.PayloadTarget, "APNSChannelResponse", v, metadata)
-	}
-	return nil
-}
 
 const opGetApnsChannel = "GetApnsChannel"
 
@@ -91,7 +25,7 @@ const opGetApnsChannel = "GetApnsChannel"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetApnsChannel
-func (c *Client) GetApnsChannelRequest(input *GetApnsChannelInput) GetApnsChannelRequest {
+func (c *Client) GetApnsChannelRequest(input *types.GetApnsChannelInput) GetApnsChannelRequest {
 	op := &aws.Operation{
 		Name:       opGetApnsChannel,
 		HTTPMethod: "GET",
@@ -99,10 +33,10 @@ func (c *Client) GetApnsChannelRequest(input *GetApnsChannelInput) GetApnsChanne
 	}
 
 	if input == nil {
-		input = &GetApnsChannelInput{}
+		input = &types.GetApnsChannelInput{}
 	}
 
-	req := c.newRequest(op, input, &GetApnsChannelOutput{})
+	req := c.newRequest(op, input, &types.GetApnsChannelOutput{})
 	return GetApnsChannelRequest{Request: req, Input: input, Copy: c.GetApnsChannelRequest}
 }
 
@@ -110,8 +44,8 @@ func (c *Client) GetApnsChannelRequest(input *GetApnsChannelInput) GetApnsChanne
 // GetApnsChannel API operation.
 type GetApnsChannelRequest struct {
 	*aws.Request
-	Input *GetApnsChannelInput
-	Copy  func(*GetApnsChannelInput) GetApnsChannelRequest
+	Input *types.GetApnsChannelInput
+	Copy  func(*types.GetApnsChannelInput) GetApnsChannelRequest
 }
 
 // Send marshals and sends the GetApnsChannel API request.
@@ -123,7 +57,7 @@ func (r GetApnsChannelRequest) Send(ctx context.Context) (*GetApnsChannelRespons
 	}
 
 	resp := &GetApnsChannelResponse{
-		GetApnsChannelOutput: r.Request.Data.(*GetApnsChannelOutput),
+		GetApnsChannelOutput: r.Request.Data.(*types.GetApnsChannelOutput),
 		response:             &aws.Response{Request: r.Request},
 	}
 
@@ -133,7 +67,7 @@ func (r GetApnsChannelRequest) Send(ctx context.Context) (*GetApnsChannelRespons
 // GetApnsChannelResponse is the response type for the
 // GetApnsChannel API operation.
 type GetApnsChannelResponse struct {
-	*GetApnsChannelOutput
+	*types.GetApnsChannelOutput
 
 	response *aws.Response
 }

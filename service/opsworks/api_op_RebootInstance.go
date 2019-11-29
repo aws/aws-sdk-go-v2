@@ -6,47 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
+	"github.com/aws/aws-sdk-go-v2/service/opsworks/types"
 )
-
-type RebootInstanceInput struct {
-	_ struct{} `type:"structure"`
-
-	// The instance ID.
-	//
-	// InstanceId is a required field
-	InstanceId *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s RebootInstanceInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *RebootInstanceInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "RebootInstanceInput"}
-
-	if s.InstanceId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("InstanceId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type RebootInstanceOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s RebootInstanceOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opRebootInstance = "RebootInstance"
 
@@ -69,7 +32,7 @@ const opRebootInstance = "RebootInstance"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/RebootInstance
-func (c *Client) RebootInstanceRequest(input *RebootInstanceInput) RebootInstanceRequest {
+func (c *Client) RebootInstanceRequest(input *types.RebootInstanceInput) RebootInstanceRequest {
 	op := &aws.Operation{
 		Name:       opRebootInstance,
 		HTTPMethod: "POST",
@@ -77,10 +40,10 @@ func (c *Client) RebootInstanceRequest(input *RebootInstanceInput) RebootInstanc
 	}
 
 	if input == nil {
-		input = &RebootInstanceInput{}
+		input = &types.RebootInstanceInput{}
 	}
 
-	req := c.newRequest(op, input, &RebootInstanceOutput{})
+	req := c.newRequest(op, input, &types.RebootInstanceOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return RebootInstanceRequest{Request: req, Input: input, Copy: c.RebootInstanceRequest}
@@ -90,8 +53,8 @@ func (c *Client) RebootInstanceRequest(input *RebootInstanceInput) RebootInstanc
 // RebootInstance API operation.
 type RebootInstanceRequest struct {
 	*aws.Request
-	Input *RebootInstanceInput
-	Copy  func(*RebootInstanceInput) RebootInstanceRequest
+	Input *types.RebootInstanceInput
+	Copy  func(*types.RebootInstanceInput) RebootInstanceRequest
 }
 
 // Send marshals and sends the RebootInstance API request.
@@ -103,7 +66,7 @@ func (r RebootInstanceRequest) Send(ctx context.Context) (*RebootInstanceRespons
 	}
 
 	resp := &RebootInstanceResponse{
-		RebootInstanceOutput: r.Request.Data.(*RebootInstanceOutput),
+		RebootInstanceOutput: r.Request.Data.(*types.RebootInstanceOutput),
 		response:             &aws.Response{Request: r.Request},
 	}
 
@@ -113,7 +76,7 @@ func (r RebootInstanceRequest) Send(ctx context.Context) (*RebootInstanceRespons
 // RebootInstanceResponse is the response type for the
 // RebootInstance API operation.
 type RebootInstanceResponse struct {
-	*RebootInstanceOutput
+	*types.RebootInstanceOutput
 
 	response *aws.Response
 }

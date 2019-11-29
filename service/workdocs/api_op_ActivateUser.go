@@ -6,89 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/workdocs/types"
 )
-
-type ActivateUserInput struct {
-	_ struct{} `type:"structure"`
-
-	// Amazon WorkDocs authentication token. Do not set this field when using administrative
-	// API actions, as in accessing the API using AWS credentials.
-	AuthenticationToken *string `location:"header" locationName:"Authentication" min:"1" type:"string" sensitive:"true"`
-
-	// The ID of the user.
-	//
-	// UserId is a required field
-	UserId *string `location:"uri" locationName:"UserId" min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s ActivateUserInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ActivateUserInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ActivateUserInput"}
-	if s.AuthenticationToken != nil && len(*s.AuthenticationToken) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("AuthenticationToken", 1))
-	}
-
-	if s.UserId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("UserId"))
-	}
-	if s.UserId != nil && len(*s.UserId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("UserId", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ActivateUserInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.AuthenticationToken != nil {
-		v := *s.AuthenticationToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "Authentication", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.UserId != nil {
-		v := *s.UserId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "UserId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type ActivateUserOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The user information.
-	User *User `type:"structure"`
-}
-
-// String returns the string representation
-func (s ActivateUserOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ActivateUserOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.User != nil {
-		v := s.User
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "User", v, metadata)
-	}
-	return nil
-}
 
 const opActivateUser = "ActivateUser"
 
@@ -105,7 +24,7 @@ const opActivateUser = "ActivateUser"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/ActivateUser
-func (c *Client) ActivateUserRequest(input *ActivateUserInput) ActivateUserRequest {
+func (c *Client) ActivateUserRequest(input *types.ActivateUserInput) ActivateUserRequest {
 	op := &aws.Operation{
 		Name:       opActivateUser,
 		HTTPMethod: "POST",
@@ -113,10 +32,10 @@ func (c *Client) ActivateUserRequest(input *ActivateUserInput) ActivateUserReque
 	}
 
 	if input == nil {
-		input = &ActivateUserInput{}
+		input = &types.ActivateUserInput{}
 	}
 
-	req := c.newRequest(op, input, &ActivateUserOutput{})
+	req := c.newRequest(op, input, &types.ActivateUserOutput{})
 	return ActivateUserRequest{Request: req, Input: input, Copy: c.ActivateUserRequest}
 }
 
@@ -124,8 +43,8 @@ func (c *Client) ActivateUserRequest(input *ActivateUserInput) ActivateUserReque
 // ActivateUser API operation.
 type ActivateUserRequest struct {
 	*aws.Request
-	Input *ActivateUserInput
-	Copy  func(*ActivateUserInput) ActivateUserRequest
+	Input *types.ActivateUserInput
+	Copy  func(*types.ActivateUserInput) ActivateUserRequest
 }
 
 // Send marshals and sends the ActivateUser API request.
@@ -137,7 +56,7 @@ func (r ActivateUserRequest) Send(ctx context.Context) (*ActivateUserResponse, e
 	}
 
 	resp := &ActivateUserResponse{
-		ActivateUserOutput: r.Request.Data.(*ActivateUserOutput),
+		ActivateUserOutput: r.Request.Data.(*types.ActivateUserOutput),
 		response:           &aws.Response{Request: r.Request},
 	}
 
@@ -147,7 +66,7 @@ func (r ActivateUserRequest) Send(ctx context.Context) (*ActivateUserResponse, e
 // ActivateUserResponse is the response type for the
 // ActivateUser API operation.
 type ActivateUserResponse struct {
-	*ActivateUserOutput
+	*types.ActivateUserOutput
 
 	response *aws.Response
 }

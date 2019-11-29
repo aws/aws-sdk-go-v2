@@ -6,78 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/workmail/types"
 )
-
-type ListResourceDelegatesInput struct {
-	_ struct{} `type:"structure"`
-
-	// The number of maximum results in a page.
-	MaxResults *int64 `min:"1" type:"integer"`
-
-	// The token used to paginate through the delegates associated with a resource.
-	NextToken *string `min:"1" type:"string"`
-
-	// The identifier for the organization that contains the resource for which
-	// delegates are listed.
-	//
-	// OrganizationId is a required field
-	OrganizationId *string `type:"string" required:"true"`
-
-	// The identifier for the resource whose delegates are listed.
-	//
-	// ResourceId is a required field
-	ResourceId *string `min:"12" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s ListResourceDelegatesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListResourceDelegatesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListResourceDelegatesInput"}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-	if s.NextToken != nil && len(*s.NextToken) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
-	}
-
-	if s.OrganizationId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("OrganizationId"))
-	}
-
-	if s.ResourceId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ResourceId"))
-	}
-	if s.ResourceId != nil && len(*s.ResourceId) < 12 {
-		invalidParams.Add(aws.NewErrParamMinLen("ResourceId", 12))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ListResourceDelegatesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// One page of the resource's delegates.
-	Delegates []Delegate `type:"list"`
-
-	// The token used to paginate through the delegates associated with a resource.
-	// While results are still available, it has an associated value. When the last
-	// page is reached, the token is empty.
-	NextToken *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s ListResourceDelegatesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListResourceDelegates = "ListResourceDelegates"
 
@@ -95,7 +25,7 @@ const opListResourceDelegates = "ListResourceDelegates"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/ListResourceDelegates
-func (c *Client) ListResourceDelegatesRequest(input *ListResourceDelegatesInput) ListResourceDelegatesRequest {
+func (c *Client) ListResourceDelegatesRequest(input *types.ListResourceDelegatesInput) ListResourceDelegatesRequest {
 	op := &aws.Operation{
 		Name:       opListResourceDelegates,
 		HTTPMethod: "POST",
@@ -109,10 +39,10 @@ func (c *Client) ListResourceDelegatesRequest(input *ListResourceDelegatesInput)
 	}
 
 	if input == nil {
-		input = &ListResourceDelegatesInput{}
+		input = &types.ListResourceDelegatesInput{}
 	}
 
-	req := c.newRequest(op, input, &ListResourceDelegatesOutput{})
+	req := c.newRequest(op, input, &types.ListResourceDelegatesOutput{})
 	return ListResourceDelegatesRequest{Request: req, Input: input, Copy: c.ListResourceDelegatesRequest}
 }
 
@@ -120,8 +50,8 @@ func (c *Client) ListResourceDelegatesRequest(input *ListResourceDelegatesInput)
 // ListResourceDelegates API operation.
 type ListResourceDelegatesRequest struct {
 	*aws.Request
-	Input *ListResourceDelegatesInput
-	Copy  func(*ListResourceDelegatesInput) ListResourceDelegatesRequest
+	Input *types.ListResourceDelegatesInput
+	Copy  func(*types.ListResourceDelegatesInput) ListResourceDelegatesRequest
 }
 
 // Send marshals and sends the ListResourceDelegates API request.
@@ -133,7 +63,7 @@ func (r ListResourceDelegatesRequest) Send(ctx context.Context) (*ListResourceDe
 	}
 
 	resp := &ListResourceDelegatesResponse{
-		ListResourceDelegatesOutput: r.Request.Data.(*ListResourceDelegatesOutput),
+		ListResourceDelegatesOutput: r.Request.Data.(*types.ListResourceDelegatesOutput),
 		response:                    &aws.Response{Request: r.Request},
 	}
 
@@ -163,7 +93,7 @@ func NewListResourceDelegatesPaginator(req ListResourceDelegatesRequest) ListRes
 	return ListResourceDelegatesPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListResourceDelegatesInput
+				var inCpy *types.ListResourceDelegatesInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -183,14 +113,14 @@ type ListResourceDelegatesPaginator struct {
 	aws.Pager
 }
 
-func (p *ListResourceDelegatesPaginator) CurrentPage() *ListResourceDelegatesOutput {
-	return p.Pager.CurrentPage().(*ListResourceDelegatesOutput)
+func (p *ListResourceDelegatesPaginator) CurrentPage() *types.ListResourceDelegatesOutput {
+	return p.Pager.CurrentPage().(*types.ListResourceDelegatesOutput)
 }
 
 // ListResourceDelegatesResponse is the response type for the
 // ListResourceDelegates API operation.
 type ListResourceDelegatesResponse struct {
-	*ListResourceDelegatesOutput
+	*types.ListResourceDelegatesOutput
 
 	response *aws.Response
 }

@@ -4,162 +4,10 @@ package directconnect
 
 import (
 	"context"
-	"fmt"
-	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/directconnect/types"
 )
-
-type CreateConnectionInput struct {
-	_ struct{} `type:"structure"`
-
-	// The bandwidth of the connection.
-	//
-	// Bandwidth is a required field
-	Bandwidth *string `locationName:"bandwidth" type:"string" required:"true"`
-
-	// The name of the connection.
-	//
-	// ConnectionName is a required field
-	ConnectionName *string `locationName:"connectionName" type:"string" required:"true"`
-
-	// The ID of the LAG.
-	LagId *string `locationName:"lagId" type:"string"`
-
-	// The location of the connection.
-	//
-	// Location is a required field
-	Location *string `locationName:"location" type:"string" required:"true"`
-
-	// The name of the service provider associated with the requested connection.
-	ProviderName *string `locationName:"providerName" type:"string"`
-
-	// The tags to associate with the lag.
-	Tags []Tag `locationName:"tags" min:"1" type:"list"`
-}
-
-// String returns the string representation
-func (s CreateConnectionInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateConnectionInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateConnectionInput"}
-
-	if s.Bandwidth == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Bandwidth"))
-	}
-
-	if s.ConnectionName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ConnectionName"))
-	}
-
-	if s.Location == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Location"))
-	}
-	if s.Tags != nil && len(s.Tags) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Tags", 1))
-	}
-	if s.Tags != nil {
-		for i, v := range s.Tags {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Information about an AWS Direct Connect connection.
-type CreateConnectionOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The Direct Connect endpoint on which the physical connection terminates.
-	AwsDevice *string `locationName:"awsDevice" deprecated:"true" type:"string"`
-
-	// The Direct Connect endpoint on which the physical connection terminates.
-	AwsDeviceV2 *string `locationName:"awsDeviceV2" type:"string"`
-
-	// The bandwidth of the connection.
-	Bandwidth *string `locationName:"bandwidth" type:"string"`
-
-	// The ID of the connection.
-	ConnectionId *string `locationName:"connectionId" type:"string"`
-
-	// The name of the connection.
-	ConnectionName *string `locationName:"connectionName" type:"string"`
-
-	// The state of the connection. The following are the possible values:
-	//
-	//    * ordering: The initial state of a hosted connection provisioned on an
-	//    interconnect. The connection stays in the ordering state until the owner
-	//    of the hosted connection confirms or declines the connection order.
-	//
-	//    * requested: The initial state of a standard connection. The connection
-	//    stays in the requested state until the Letter of Authorization (LOA) is
-	//    sent to the customer.
-	//
-	//    * pending: The connection has been approved and is being initialized.
-	//
-	//    * available: The network link is up and the connection is ready for use.
-	//
-	//    * down: The network link is down.
-	//
-	//    * deleting: The connection is being deleted.
-	//
-	//    * deleted: The connection has been deleted.
-	//
-	//    * rejected: A hosted connection in the ordering state enters the rejected
-	//    state if it is deleted by the customer.
-	//
-	//    * unknown: The state of the connection is not available.
-	ConnectionState ConnectionState `locationName:"connectionState" type:"string" enum:"true"`
-
-	// Indicates whether the connection supports a secondary BGP peer in the same
-	// address family (IPv4/IPv6).
-	HasLogicalRedundancy HasLogicalRedundancy `locationName:"hasLogicalRedundancy" type:"string" enum:"true"`
-
-	// Indicates whether jumbo frames (9001 MTU) are supported.
-	JumboFrameCapable *bool `locationName:"jumboFrameCapable" type:"boolean"`
-
-	// The ID of the LAG.
-	LagId *string `locationName:"lagId" type:"string"`
-
-	// The time of the most recent call to DescribeLoa for this connection.
-	LoaIssueTime *time.Time `locationName:"loaIssueTime" type:"timestamp"`
-
-	// The location of the connection.
-	Location *string `locationName:"location" type:"string"`
-
-	// The ID of the AWS account that owns the connection.
-	OwnerAccount *string `locationName:"ownerAccount" type:"string"`
-
-	// The name of the AWS Direct Connect service provider associated with the connection.
-	PartnerName *string `locationName:"partnerName" type:"string"`
-
-	// The name of the service provider associated with the connection.
-	ProviderName *string `locationName:"providerName" type:"string"`
-
-	// The AWS Region where the connection is located.
-	Region *string `locationName:"region" type:"string"`
-
-	// The tags associated with the connection.
-	Tags []Tag `locationName:"tags" min:"1" type:"list"`
-
-	// The ID of the VLAN.
-	Vlan *int64 `locationName:"vlan" type:"integer"`
-}
-
-// String returns the string representation
-func (s CreateConnectionOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCreateConnection = "CreateConnection"
 
@@ -189,7 +37,7 @@ const opCreateConnection = "CreateConnection"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/CreateConnection
-func (c *Client) CreateConnectionRequest(input *CreateConnectionInput) CreateConnectionRequest {
+func (c *Client) CreateConnectionRequest(input *types.CreateConnectionInput) CreateConnectionRequest {
 	op := &aws.Operation{
 		Name:       opCreateConnection,
 		HTTPMethod: "POST",
@@ -197,10 +45,10 @@ func (c *Client) CreateConnectionRequest(input *CreateConnectionInput) CreateCon
 	}
 
 	if input == nil {
-		input = &CreateConnectionInput{}
+		input = &types.CreateConnectionInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateConnectionOutput{})
+	req := c.newRequest(op, input, &types.CreateConnectionOutput{})
 	return CreateConnectionRequest{Request: req, Input: input, Copy: c.CreateConnectionRequest}
 }
 
@@ -208,8 +56,8 @@ func (c *Client) CreateConnectionRequest(input *CreateConnectionInput) CreateCon
 // CreateConnection API operation.
 type CreateConnectionRequest struct {
 	*aws.Request
-	Input *CreateConnectionInput
-	Copy  func(*CreateConnectionInput) CreateConnectionRequest
+	Input *types.CreateConnectionInput
+	Copy  func(*types.CreateConnectionInput) CreateConnectionRequest
 }
 
 // Send marshals and sends the CreateConnection API request.
@@ -221,7 +69,7 @@ func (r CreateConnectionRequest) Send(ctx context.Context) (*CreateConnectionRes
 	}
 
 	resp := &CreateConnectionResponse{
-		CreateConnectionOutput: r.Request.Data.(*CreateConnectionOutput),
+		CreateConnectionOutput: r.Request.Data.(*types.CreateConnectionOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -231,7 +79,7 @@ func (r CreateConnectionRequest) Send(ctx context.Context) (*CreateConnectionRes
 // CreateConnectionResponse is the response type for the
 // CreateConnection API operation.
 type CreateConnectionResponse struct {
-	*CreateConnectionOutput
+	*types.CreateConnectionOutput
 
 	response *aws.Response
 }

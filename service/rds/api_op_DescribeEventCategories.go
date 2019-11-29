@@ -4,58 +4,10 @@ package rds
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/rds/types"
 )
-
-type DescribeEventCategoriesInput struct {
-	_ struct{} `type:"structure"`
-
-	// This parameter is not currently supported.
-	Filters []Filter `locationNameList:"Filter" type:"list"`
-
-	// The type of source that is generating the events.
-	//
-	// Valid values: db-instance | db-parameter-group | db-security-group | db-snapshot
-	SourceType *string `type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeEventCategoriesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeEventCategoriesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeEventCategoriesInput"}
-	if s.Filters != nil {
-		for i, v := range s.Filters {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Data returned from the DescribeEventCategories action.
-type DescribeEventCategoriesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A list of EventCategoriesMap data types.
-	EventCategoriesMapList []EventCategoriesMap `locationNameList:"EventCategoriesMap" type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeEventCategoriesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeEventCategories = "DescribeEventCategories"
 
@@ -75,7 +27,7 @@ const opDescribeEventCategories = "DescribeEventCategories"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeEventCategories
-func (c *Client) DescribeEventCategoriesRequest(input *DescribeEventCategoriesInput) DescribeEventCategoriesRequest {
+func (c *Client) DescribeEventCategoriesRequest(input *types.DescribeEventCategoriesInput) DescribeEventCategoriesRequest {
 	op := &aws.Operation{
 		Name:       opDescribeEventCategories,
 		HTTPMethod: "POST",
@@ -83,10 +35,10 @@ func (c *Client) DescribeEventCategoriesRequest(input *DescribeEventCategoriesIn
 	}
 
 	if input == nil {
-		input = &DescribeEventCategoriesInput{}
+		input = &types.DescribeEventCategoriesInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeEventCategoriesOutput{})
+	req := c.newRequest(op, input, &types.DescribeEventCategoriesOutput{})
 	return DescribeEventCategoriesRequest{Request: req, Input: input, Copy: c.DescribeEventCategoriesRequest}
 }
 
@@ -94,8 +46,8 @@ func (c *Client) DescribeEventCategoriesRequest(input *DescribeEventCategoriesIn
 // DescribeEventCategories API operation.
 type DescribeEventCategoriesRequest struct {
 	*aws.Request
-	Input *DescribeEventCategoriesInput
-	Copy  func(*DescribeEventCategoriesInput) DescribeEventCategoriesRequest
+	Input *types.DescribeEventCategoriesInput
+	Copy  func(*types.DescribeEventCategoriesInput) DescribeEventCategoriesRequest
 }
 
 // Send marshals and sends the DescribeEventCategories API request.
@@ -107,7 +59,7 @@ func (r DescribeEventCategoriesRequest) Send(ctx context.Context) (*DescribeEven
 	}
 
 	resp := &DescribeEventCategoriesResponse{
-		DescribeEventCategoriesOutput: r.Request.Data.(*DescribeEventCategoriesOutput),
+		DescribeEventCategoriesOutput: r.Request.Data.(*types.DescribeEventCategoriesOutput),
 		response:                      &aws.Response{Request: r.Request},
 	}
 
@@ -117,7 +69,7 @@ func (r DescribeEventCategoriesRequest) Send(ctx context.Context) (*DescribeEven
 // DescribeEventCategoriesResponse is the response type for the
 // DescribeEventCategories API operation.
 type DescribeEventCategoriesResponse struct {
-	*DescribeEventCategoriesOutput
+	*types.DescribeEventCategoriesOutput
 
 	response *aws.Response
 }

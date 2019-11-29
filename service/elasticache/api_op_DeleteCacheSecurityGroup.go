@@ -6,50 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/query"
+	"github.com/aws/aws-sdk-go-v2/service/elasticache/types"
 )
-
-// Represents the input of a DeleteCacheSecurityGroup operation.
-type DeleteCacheSecurityGroupInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the cache security group to delete.
-	//
-	// You cannot delete the default security group.
-	//
-	// CacheSecurityGroupName is a required field
-	CacheSecurityGroupName *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteCacheSecurityGroupInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteCacheSecurityGroupInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteCacheSecurityGroupInput"}
-
-	if s.CacheSecurityGroupName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("CacheSecurityGroupName"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteCacheSecurityGroupOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteCacheSecurityGroupOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteCacheSecurityGroup = "DeleteCacheSecurityGroup"
 
@@ -68,7 +28,7 @@ const opDeleteCacheSecurityGroup = "DeleteCacheSecurityGroup"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DeleteCacheSecurityGroup
-func (c *Client) DeleteCacheSecurityGroupRequest(input *DeleteCacheSecurityGroupInput) DeleteCacheSecurityGroupRequest {
+func (c *Client) DeleteCacheSecurityGroupRequest(input *types.DeleteCacheSecurityGroupInput) DeleteCacheSecurityGroupRequest {
 	op := &aws.Operation{
 		Name:       opDeleteCacheSecurityGroup,
 		HTTPMethod: "POST",
@@ -76,10 +36,10 @@ func (c *Client) DeleteCacheSecurityGroupRequest(input *DeleteCacheSecurityGroup
 	}
 
 	if input == nil {
-		input = &DeleteCacheSecurityGroupInput{}
+		input = &types.DeleteCacheSecurityGroupInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteCacheSecurityGroupOutput{})
+	req := c.newRequest(op, input, &types.DeleteCacheSecurityGroupOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return DeleteCacheSecurityGroupRequest{Request: req, Input: input, Copy: c.DeleteCacheSecurityGroupRequest}
@@ -89,8 +49,8 @@ func (c *Client) DeleteCacheSecurityGroupRequest(input *DeleteCacheSecurityGroup
 // DeleteCacheSecurityGroup API operation.
 type DeleteCacheSecurityGroupRequest struct {
 	*aws.Request
-	Input *DeleteCacheSecurityGroupInput
-	Copy  func(*DeleteCacheSecurityGroupInput) DeleteCacheSecurityGroupRequest
+	Input *types.DeleteCacheSecurityGroupInput
+	Copy  func(*types.DeleteCacheSecurityGroupInput) DeleteCacheSecurityGroupRequest
 }
 
 // Send marshals and sends the DeleteCacheSecurityGroup API request.
@@ -102,7 +62,7 @@ func (r DeleteCacheSecurityGroupRequest) Send(ctx context.Context) (*DeleteCache
 	}
 
 	resp := &DeleteCacheSecurityGroupResponse{
-		DeleteCacheSecurityGroupOutput: r.Request.Data.(*DeleteCacheSecurityGroupOutput),
+		DeleteCacheSecurityGroupOutput: r.Request.Data.(*types.DeleteCacheSecurityGroupOutput),
 		response:                       &aws.Response{Request: r.Request},
 	}
 
@@ -112,7 +72,7 @@ func (r DeleteCacheSecurityGroupRequest) Send(ctx context.Context) (*DeleteCache
 // DeleteCacheSecurityGroupResponse is the response type for the
 // DeleteCacheSecurityGroup API operation.
 type DeleteCacheSecurityGroupResponse struct {
-	*DeleteCacheSecurityGroupOutput
+	*types.DeleteCacheSecurityGroupOutput
 
 	response *aws.Response
 }

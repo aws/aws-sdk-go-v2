@@ -6,127 +6,16 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/connect/types"
 )
-
-type ListUsersInput struct {
-	_ struct{} `type:"structure"`
-
-	// The identifier for your Amazon Connect instance. To find the ID of your instance,
-	// open the AWS console and select Amazon Connect. Select the alias of the instance
-	// in the Instance alias column. The instance ID is displayed in the Overview
-	// section of your instance settings. For example, the instance ID is the set
-	// of characters at the end of the instance ARN, after instance/, such as 10a4c4eb-f57e-4d4c-b602-bf39176ced07.
-	//
-	// InstanceId is a required field
-	InstanceId *string `location:"uri" locationName:"InstanceId" min:"1" type:"string" required:"true"`
-
-	// The maximum number of results to return in the response.
-	MaxResults *int64 `location:"querystring" locationName:"maxResults" min:"1" type:"integer"`
-
-	// The token for the next set of results. Use the value returned in the previous
-	// response in the next request to retrieve the next set of results.
-	NextToken *string `location:"querystring" locationName:"nextToken" type:"string"`
-}
-
-// String returns the string representation
-func (s ListUsersInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListUsersInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListUsersInput"}
-
-	if s.InstanceId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("InstanceId"))
-	}
-	if s.InstanceId != nil && len(*s.InstanceId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("InstanceId", 1))
-	}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListUsersInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.InstanceId != nil {
-		v := *s.InstanceId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "InstanceId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.MaxResults != nil {
-		v := *s.MaxResults
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "maxResults", protocol.Int64Value(v), metadata)
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type ListUsersOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A string returned in the response. Use the value returned in the response
-	// as the value of the NextToken in a subsequent request to retrieve the next
-	// set of results.
-	NextToken *string `type:"string"`
-
-	// An array of UserSummary objects that contain information about the users
-	// in your instance.
-	UserSummaryList []UserSummary `type:"list"`
-}
-
-// String returns the string representation
-func (s ListUsersOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListUsersOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.UserSummaryList != nil {
-		v := s.UserSummaryList
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "UserSummaryList", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	return nil
-}
 
 const opListUsers = "ListUsers"
 
 // ListUsersRequest returns a request value for making API operation for
 // Amazon Connect Service.
 //
-// Returns a UserSummaryList, which is an array of UserSummary objects.
+// Provides summary information about the users for the specified Amazon Connect
+// instance.
 //
 //    // Example sending a request using ListUsersRequest.
 //    req := client.ListUsersRequest(params)
@@ -136,18 +25,24 @@ const opListUsers = "ListUsers"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListUsers
-func (c *Client) ListUsersRequest(input *ListUsersInput) ListUsersRequest {
+func (c *Client) ListUsersRequest(input *types.ListUsersInput) ListUsersRequest {
 	op := &aws.Operation{
 		Name:       opListUsers,
 		HTTPMethod: "GET",
 		HTTPPath:   "/users-summary/{InstanceId}",
+		Paginator: &aws.Paginator{
+			InputTokens:     []string{"NextToken"},
+			OutputTokens:    []string{"NextToken"},
+			LimitToken:      "MaxResults",
+			TruncationToken: "",
+		},
 	}
 
 	if input == nil {
-		input = &ListUsersInput{}
+		input = &types.ListUsersInput{}
 	}
 
-	req := c.newRequest(op, input, &ListUsersOutput{})
+	req := c.newRequest(op, input, &types.ListUsersOutput{})
 	return ListUsersRequest{Request: req, Input: input, Copy: c.ListUsersRequest}
 }
 
@@ -155,8 +50,8 @@ func (c *Client) ListUsersRequest(input *ListUsersInput) ListUsersRequest {
 // ListUsers API operation.
 type ListUsersRequest struct {
 	*aws.Request
-	Input *ListUsersInput
-	Copy  func(*ListUsersInput) ListUsersRequest
+	Input *types.ListUsersInput
+	Copy  func(*types.ListUsersInput) ListUsersRequest
 }
 
 // Send marshals and sends the ListUsers API request.
@@ -168,17 +63,64 @@ func (r ListUsersRequest) Send(ctx context.Context) (*ListUsersResponse, error) 
 	}
 
 	resp := &ListUsersResponse{
-		ListUsersOutput: r.Request.Data.(*ListUsersOutput),
+		ListUsersOutput: r.Request.Data.(*types.ListUsersOutput),
 		response:        &aws.Response{Request: r.Request},
 	}
 
 	return resp, nil
 }
 
+// NewListUsersRequestPaginator returns a paginator for ListUsers.
+// Use Next method to get the next page, and CurrentPage to get the current
+// response page from the paginator. Next will return false, if there are
+// no more pages, or an error was encountered.
+//
+// Note: This operation can generate multiple requests to a service.
+//
+//   // Example iterating over pages.
+//   req := client.ListUsersRequest(input)
+//   p := connect.NewListUsersRequestPaginator(req)
+//
+//   for p.Next(context.TODO()) {
+//       page := p.CurrentPage()
+//   }
+//
+//   if err := p.Err(); err != nil {
+//       return err
+//   }
+//
+func NewListUsersPaginator(req ListUsersRequest) ListUsersPaginator {
+	return ListUsersPaginator{
+		Pager: aws.Pager{
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
+				var inCpy *types.ListUsersInput
+				if req.Input != nil {
+					tmp := *req.Input
+					inCpy = &tmp
+				}
+
+				newReq := req.Copy(inCpy)
+				newReq.SetContext(ctx)
+				return newReq.Request, nil
+			},
+		},
+	}
+}
+
+// ListUsersPaginator is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type ListUsersPaginator struct {
+	aws.Pager
+}
+
+func (p *ListUsersPaginator) CurrentPage() *types.ListUsersOutput {
+	return p.Pager.CurrentPage().(*types.ListUsersOutput)
+}
+
 // ListUsersResponse is the response type for the
 // ListUsers API operation.
 type ListUsersResponse struct {
-	*ListUsersOutput
+	*types.ListUsersOutput
 
 	response *aws.Response
 }

@@ -4,92 +4,10 @@ package waf
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/waf/types"
 )
-
-type UpdateRuleInput struct {
-	_ struct{} `type:"structure"`
-
-	// The value returned by the most recent call to GetChangeToken.
-	//
-	// ChangeToken is a required field
-	ChangeToken *string `min:"1" type:"string" required:"true"`
-
-	// The RuleId of the Rule that you want to update. RuleId is returned by CreateRule
-	// and by ListRules.
-	//
-	// RuleId is a required field
-	RuleId *string `min:"1" type:"string" required:"true"`
-
-	// An array of RuleUpdate objects that you want to insert into or delete from
-	// a Rule. For more information, see the applicable data types:
-	//
-	//    * RuleUpdate: Contains Action and Predicate
-	//
-	//    * Predicate: Contains DataId, Negated, and Type
-	//
-	//    * FieldToMatch: Contains Data and Type
-	//
-	// Updates is a required field
-	Updates []RuleUpdate `type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s UpdateRuleInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateRuleInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateRuleInput"}
-
-	if s.ChangeToken == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ChangeToken"))
-	}
-	if s.ChangeToken != nil && len(*s.ChangeToken) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ChangeToken", 1))
-	}
-
-	if s.RuleId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("RuleId"))
-	}
-	if s.RuleId != nil && len(*s.RuleId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("RuleId", 1))
-	}
-
-	if s.Updates == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Updates"))
-	}
-	if s.Updates != nil {
-		for i, v := range s.Updates {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Updates", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type UpdateRuleOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The ChangeToken that you used to submit the UpdateRule request. You can also
-	// use this value to query the status of the request. For more information,
-	// see GetChangeTokenStatus.
-	ChangeToken *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s UpdateRuleOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opUpdateRule = "UpdateRule"
 
@@ -139,7 +57,7 @@ const opUpdateRule = "UpdateRule"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/UpdateRule
-func (c *Client) UpdateRuleRequest(input *UpdateRuleInput) UpdateRuleRequest {
+func (c *Client) UpdateRuleRequest(input *types.UpdateRuleInput) UpdateRuleRequest {
 	op := &aws.Operation{
 		Name:       opUpdateRule,
 		HTTPMethod: "POST",
@@ -147,10 +65,10 @@ func (c *Client) UpdateRuleRequest(input *UpdateRuleInput) UpdateRuleRequest {
 	}
 
 	if input == nil {
-		input = &UpdateRuleInput{}
+		input = &types.UpdateRuleInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateRuleOutput{})
+	req := c.newRequest(op, input, &types.UpdateRuleOutput{})
 	return UpdateRuleRequest{Request: req, Input: input, Copy: c.UpdateRuleRequest}
 }
 
@@ -158,8 +76,8 @@ func (c *Client) UpdateRuleRequest(input *UpdateRuleInput) UpdateRuleRequest {
 // UpdateRule API operation.
 type UpdateRuleRequest struct {
 	*aws.Request
-	Input *UpdateRuleInput
-	Copy  func(*UpdateRuleInput) UpdateRuleRequest
+	Input *types.UpdateRuleInput
+	Copy  func(*types.UpdateRuleInput) UpdateRuleRequest
 }
 
 // Send marshals and sends the UpdateRule API request.
@@ -171,7 +89,7 @@ func (r UpdateRuleRequest) Send(ctx context.Context) (*UpdateRuleResponse, error
 	}
 
 	resp := &UpdateRuleResponse{
-		UpdateRuleOutput: r.Request.Data.(*UpdateRuleOutput),
+		UpdateRuleOutput: r.Request.Data.(*types.UpdateRuleOutput),
 		response:         &aws.Response{Request: r.Request},
 	}
 
@@ -181,7 +99,7 @@ func (r UpdateRuleRequest) Send(ctx context.Context) (*UpdateRuleResponse, error
 // UpdateRuleResponse is the response type for the
 // UpdateRule API operation.
 type UpdateRuleResponse struct {
-	*UpdateRuleOutput
+	*types.UpdateRuleOutput
 
 	response *aws.Response
 }

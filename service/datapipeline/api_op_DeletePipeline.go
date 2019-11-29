@@ -6,51 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
+	"github.com/aws/aws-sdk-go-v2/service/datapipeline/types"
 )
-
-// Contains the parameters for DeletePipeline.
-type DeletePipelineInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the pipeline.
-	//
-	// PipelineId is a required field
-	PipelineId *string `locationName:"pipelineId" min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeletePipelineInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeletePipelineInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeletePipelineInput"}
-
-	if s.PipelineId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("PipelineId"))
-	}
-	if s.PipelineId != nil && len(*s.PipelineId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("PipelineId", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeletePipelineOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeletePipelineOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeletePipeline = "DeletePipeline"
 
@@ -74,7 +33,7 @@ const opDeletePipeline = "DeletePipeline"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/datapipeline-2012-10-29/DeletePipeline
-func (c *Client) DeletePipelineRequest(input *DeletePipelineInput) DeletePipelineRequest {
+func (c *Client) DeletePipelineRequest(input *types.DeletePipelineInput) DeletePipelineRequest {
 	op := &aws.Operation{
 		Name:       opDeletePipeline,
 		HTTPMethod: "POST",
@@ -82,10 +41,10 @@ func (c *Client) DeletePipelineRequest(input *DeletePipelineInput) DeletePipelin
 	}
 
 	if input == nil {
-		input = &DeletePipelineInput{}
+		input = &types.DeletePipelineInput{}
 	}
 
-	req := c.newRequest(op, input, &DeletePipelineOutput{})
+	req := c.newRequest(op, input, &types.DeletePipelineOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return DeletePipelineRequest{Request: req, Input: input, Copy: c.DeletePipelineRequest}
@@ -95,8 +54,8 @@ func (c *Client) DeletePipelineRequest(input *DeletePipelineInput) DeletePipelin
 // DeletePipeline API operation.
 type DeletePipelineRequest struct {
 	*aws.Request
-	Input *DeletePipelineInput
-	Copy  func(*DeletePipelineInput) DeletePipelineRequest
+	Input *types.DeletePipelineInput
+	Copy  func(*types.DeletePipelineInput) DeletePipelineRequest
 }
 
 // Send marshals and sends the DeletePipeline API request.
@@ -108,7 +67,7 @@ func (r DeletePipelineRequest) Send(ctx context.Context) (*DeletePipelineRespons
 	}
 
 	resp := &DeletePipelineResponse{
-		DeletePipelineOutput: r.Request.Data.(*DeletePipelineOutput),
+		DeletePipelineOutput: r.Request.Data.(*types.DeletePipelineOutput),
 		response:             &aws.Response{Request: r.Request},
 	}
 
@@ -118,7 +77,7 @@ func (r DeletePipelineRequest) Send(ctx context.Context) (*DeletePipelineRespons
 // DeletePipelineResponse is the response type for the
 // DeletePipeline API operation.
 type DeletePipelineResponse struct {
-	*DeletePipelineOutput
+	*types.DeletePipelineOutput
 
 	response *aws.Response
 }

@@ -6,72 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ses/types"
 )
-
-// Represents a request to return the details of a configuration set. Configuration
-// sets enable you to publish email sending events. For information about using
-// configuration sets, see the Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html).
-type DescribeConfigurationSetInput struct {
-	_ struct{} `type:"structure"`
-
-	// A list of configuration set attributes to return.
-	ConfigurationSetAttributeNames []ConfigurationSetAttribute `type:"list"`
-
-	// The name of the configuration set to describe.
-	//
-	// ConfigurationSetName is a required field
-	ConfigurationSetName *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeConfigurationSetInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeConfigurationSetInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeConfigurationSetInput"}
-
-	if s.ConfigurationSetName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ConfigurationSetName"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Represents the details of a configuration set. Configuration sets enable
-// you to publish email sending events. For information about using configuration
-// sets, see the Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html).
-type DescribeConfigurationSetOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The configuration set object associated with the specified configuration
-	// set.
-	ConfigurationSet *ConfigurationSet `type:"structure"`
-
-	// Specifies whether messages that use the configuration set are required to
-	// use Transport Layer Security (TLS).
-	DeliveryOptions *DeliveryOptions `type:"structure"`
-
-	// A list of event destinations associated with the configuration set.
-	EventDestinations []EventDestination `type:"list"`
-
-	// An object that represents the reputation settings for the configuration set.
-	ReputationOptions *ReputationOptions `type:"structure"`
-
-	// The name of the custom open and click tracking domain associated with the
-	// configuration set.
-	TrackingOptions *TrackingOptions `type:"structure"`
-}
-
-// String returns the string representation
-func (s DescribeConfigurationSetOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeConfigurationSet = "DescribeConfigurationSet"
 
@@ -91,7 +27,7 @@ const opDescribeConfigurationSet = "DescribeConfigurationSet"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/DescribeConfigurationSet
-func (c *Client) DescribeConfigurationSetRequest(input *DescribeConfigurationSetInput) DescribeConfigurationSetRequest {
+func (c *Client) DescribeConfigurationSetRequest(input *types.DescribeConfigurationSetInput) DescribeConfigurationSetRequest {
 	op := &aws.Operation{
 		Name:       opDescribeConfigurationSet,
 		HTTPMethod: "POST",
@@ -99,10 +35,10 @@ func (c *Client) DescribeConfigurationSetRequest(input *DescribeConfigurationSet
 	}
 
 	if input == nil {
-		input = &DescribeConfigurationSetInput{}
+		input = &types.DescribeConfigurationSetInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeConfigurationSetOutput{})
+	req := c.newRequest(op, input, &types.DescribeConfigurationSetOutput{})
 	return DescribeConfigurationSetRequest{Request: req, Input: input, Copy: c.DescribeConfigurationSetRequest}
 }
 
@@ -110,8 +46,8 @@ func (c *Client) DescribeConfigurationSetRequest(input *DescribeConfigurationSet
 // DescribeConfigurationSet API operation.
 type DescribeConfigurationSetRequest struct {
 	*aws.Request
-	Input *DescribeConfigurationSetInput
-	Copy  func(*DescribeConfigurationSetInput) DescribeConfigurationSetRequest
+	Input *types.DescribeConfigurationSetInput
+	Copy  func(*types.DescribeConfigurationSetInput) DescribeConfigurationSetRequest
 }
 
 // Send marshals and sends the DescribeConfigurationSet API request.
@@ -123,7 +59,7 @@ func (r DescribeConfigurationSetRequest) Send(ctx context.Context) (*DescribeCon
 	}
 
 	resp := &DescribeConfigurationSetResponse{
-		DescribeConfigurationSetOutput: r.Request.Data.(*DescribeConfigurationSetOutput),
+		DescribeConfigurationSetOutput: r.Request.Data.(*types.DescribeConfigurationSetOutput),
 		response:                       &aws.Response{Request: r.Request},
 	}
 
@@ -133,7 +69,7 @@ func (r DescribeConfigurationSetRequest) Send(ctx context.Context) (*DescribeCon
 // DescribeConfigurationSetResponse is the response type for the
 // DescribeConfigurationSet API operation.
 type DescribeConfigurationSetResponse struct {
-	*DescribeConfigurationSetOutput
+	*types.DescribeConfigurationSetOutput
 
 	response *aws.Response
 }

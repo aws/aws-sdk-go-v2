@@ -6,50 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
+	"github.com/aws/aws-sdk-go-v2/service/configservice/types"
 )
-
-type DeleteOrganizationConfigRuleInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of organization config rule that you want to delete.
-	//
-	// OrganizationConfigRuleName is a required field
-	OrganizationConfigRuleName *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteOrganizationConfigRuleInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteOrganizationConfigRuleInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteOrganizationConfigRuleInput"}
-
-	if s.OrganizationConfigRuleName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("OrganizationConfigRuleName"))
-	}
-	if s.OrganizationConfigRuleName != nil && len(*s.OrganizationConfigRuleName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("OrganizationConfigRuleName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteOrganizationConfigRuleOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteOrganizationConfigRuleOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteOrganizationConfigRule = "DeleteOrganizationConfigRule"
 
@@ -71,7 +31,7 @@ const opDeleteOrganizationConfigRule = "DeleteOrganizationConfigRule"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DeleteOrganizationConfigRule
-func (c *Client) DeleteOrganizationConfigRuleRequest(input *DeleteOrganizationConfigRuleInput) DeleteOrganizationConfigRuleRequest {
+func (c *Client) DeleteOrganizationConfigRuleRequest(input *types.DeleteOrganizationConfigRuleInput) DeleteOrganizationConfigRuleRequest {
 	op := &aws.Operation{
 		Name:       opDeleteOrganizationConfigRule,
 		HTTPMethod: "POST",
@@ -79,10 +39,10 @@ func (c *Client) DeleteOrganizationConfigRuleRequest(input *DeleteOrganizationCo
 	}
 
 	if input == nil {
-		input = &DeleteOrganizationConfigRuleInput{}
+		input = &types.DeleteOrganizationConfigRuleInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteOrganizationConfigRuleOutput{})
+	req := c.newRequest(op, input, &types.DeleteOrganizationConfigRuleOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return DeleteOrganizationConfigRuleRequest{Request: req, Input: input, Copy: c.DeleteOrganizationConfigRuleRequest}
@@ -92,8 +52,8 @@ func (c *Client) DeleteOrganizationConfigRuleRequest(input *DeleteOrganizationCo
 // DeleteOrganizationConfigRule API operation.
 type DeleteOrganizationConfigRuleRequest struct {
 	*aws.Request
-	Input *DeleteOrganizationConfigRuleInput
-	Copy  func(*DeleteOrganizationConfigRuleInput) DeleteOrganizationConfigRuleRequest
+	Input *types.DeleteOrganizationConfigRuleInput
+	Copy  func(*types.DeleteOrganizationConfigRuleInput) DeleteOrganizationConfigRuleRequest
 }
 
 // Send marshals and sends the DeleteOrganizationConfigRule API request.
@@ -105,7 +65,7 @@ func (r DeleteOrganizationConfigRuleRequest) Send(ctx context.Context) (*DeleteO
 	}
 
 	resp := &DeleteOrganizationConfigRuleResponse{
-		DeleteOrganizationConfigRuleOutput: r.Request.Data.(*DeleteOrganizationConfigRuleOutput),
+		DeleteOrganizationConfigRuleOutput: r.Request.Data.(*types.DeleteOrganizationConfigRuleOutput),
 		response:                           &aws.Response{Request: r.Request},
 	}
 
@@ -115,7 +75,7 @@ func (r DeleteOrganizationConfigRuleRequest) Send(ctx context.Context) (*DeleteO
 // DeleteOrganizationConfigRuleResponse is the response type for the
 // DeleteOrganizationConfigRule API operation.
 type DeleteOrganizationConfigRuleResponse struct {
-	*DeleteOrganizationConfigRuleOutput
+	*types.DeleteOrganizationConfigRuleOutput
 
 	response *aws.Response
 }

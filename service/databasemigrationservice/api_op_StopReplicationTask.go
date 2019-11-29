@@ -6,48 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/databasemigrationservice/types"
 )
-
-type StopReplicationTaskInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name(ARN) of the replication task to be stopped.
-	//
-	// ReplicationTaskArn is a required field
-	ReplicationTaskArn *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s StopReplicationTaskInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *StopReplicationTaskInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "StopReplicationTaskInput"}
-
-	if s.ReplicationTaskArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ReplicationTaskArn"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type StopReplicationTaskOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The replication task stopped.
-	ReplicationTask *ReplicationTask `type:"structure"`
-}
-
-// String returns the string representation
-func (s StopReplicationTaskOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opStopReplicationTask = "StopReplicationTask"
 
@@ -64,7 +24,7 @@ const opStopReplicationTask = "StopReplicationTask"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/StopReplicationTask
-func (c *Client) StopReplicationTaskRequest(input *StopReplicationTaskInput) StopReplicationTaskRequest {
+func (c *Client) StopReplicationTaskRequest(input *types.StopReplicationTaskInput) StopReplicationTaskRequest {
 	op := &aws.Operation{
 		Name:       opStopReplicationTask,
 		HTTPMethod: "POST",
@@ -72,10 +32,10 @@ func (c *Client) StopReplicationTaskRequest(input *StopReplicationTaskInput) Sto
 	}
 
 	if input == nil {
-		input = &StopReplicationTaskInput{}
+		input = &types.StopReplicationTaskInput{}
 	}
 
-	req := c.newRequest(op, input, &StopReplicationTaskOutput{})
+	req := c.newRequest(op, input, &types.StopReplicationTaskOutput{})
 	return StopReplicationTaskRequest{Request: req, Input: input, Copy: c.StopReplicationTaskRequest}
 }
 
@@ -83,8 +43,8 @@ func (c *Client) StopReplicationTaskRequest(input *StopReplicationTaskInput) Sto
 // StopReplicationTask API operation.
 type StopReplicationTaskRequest struct {
 	*aws.Request
-	Input *StopReplicationTaskInput
-	Copy  func(*StopReplicationTaskInput) StopReplicationTaskRequest
+	Input *types.StopReplicationTaskInput
+	Copy  func(*types.StopReplicationTaskInput) StopReplicationTaskRequest
 }
 
 // Send marshals and sends the StopReplicationTask API request.
@@ -96,7 +56,7 @@ func (r StopReplicationTaskRequest) Send(ctx context.Context) (*StopReplicationT
 	}
 
 	resp := &StopReplicationTaskResponse{
-		StopReplicationTaskOutput: r.Request.Data.(*StopReplicationTaskOutput),
+		StopReplicationTaskOutput: r.Request.Data.(*types.StopReplicationTaskOutput),
 		response:                  &aws.Response{Request: r.Request},
 	}
 
@@ -106,7 +66,7 @@ func (r StopReplicationTaskRequest) Send(ctx context.Context) (*StopReplicationT
 // StopReplicationTaskResponse is the response type for the
 // StopReplicationTask API operation.
 type StopReplicationTaskResponse struct {
-	*StopReplicationTaskOutput
+	*types.StopReplicationTaskOutput
 
 	response *aws.Response
 }

@@ -6,29 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/lightsail/types"
 )
-
-type IsVpcPeeredInput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s IsVpcPeeredInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type IsVpcPeeredOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Returns true if the Lightsail VPC is peered; otherwise, false.
-	IsPeered *bool `locationName:"isPeered" type:"boolean"`
-}
-
-// String returns the string representation
-func (s IsVpcPeeredOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opIsVpcPeered = "IsVpcPeered"
 
@@ -45,7 +24,7 @@ const opIsVpcPeered = "IsVpcPeered"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/IsVpcPeered
-func (c *Client) IsVpcPeeredRequest(input *IsVpcPeeredInput) IsVpcPeeredRequest {
+func (c *Client) IsVpcPeeredRequest(input *types.IsVpcPeeredInput) IsVpcPeeredRequest {
 	op := &aws.Operation{
 		Name:       opIsVpcPeered,
 		HTTPMethod: "POST",
@@ -53,10 +32,10 @@ func (c *Client) IsVpcPeeredRequest(input *IsVpcPeeredInput) IsVpcPeeredRequest 
 	}
 
 	if input == nil {
-		input = &IsVpcPeeredInput{}
+		input = &types.IsVpcPeeredInput{}
 	}
 
-	req := c.newRequest(op, input, &IsVpcPeeredOutput{})
+	req := c.newRequest(op, input, &types.IsVpcPeeredOutput{})
 	return IsVpcPeeredRequest{Request: req, Input: input, Copy: c.IsVpcPeeredRequest}
 }
 
@@ -64,8 +43,8 @@ func (c *Client) IsVpcPeeredRequest(input *IsVpcPeeredInput) IsVpcPeeredRequest 
 // IsVpcPeered API operation.
 type IsVpcPeeredRequest struct {
 	*aws.Request
-	Input *IsVpcPeeredInput
-	Copy  func(*IsVpcPeeredInput) IsVpcPeeredRequest
+	Input *types.IsVpcPeeredInput
+	Copy  func(*types.IsVpcPeeredInput) IsVpcPeeredRequest
 }
 
 // Send marshals and sends the IsVpcPeered API request.
@@ -77,7 +56,7 @@ func (r IsVpcPeeredRequest) Send(ctx context.Context) (*IsVpcPeeredResponse, err
 	}
 
 	resp := &IsVpcPeeredResponse{
-		IsVpcPeeredOutput: r.Request.Data.(*IsVpcPeeredOutput),
+		IsVpcPeeredOutput: r.Request.Data.(*types.IsVpcPeeredOutput),
 		response:          &aws.Response{Request: r.Request},
 	}
 
@@ -87,7 +66,7 @@ func (r IsVpcPeeredRequest) Send(ctx context.Context) (*IsVpcPeeredResponse, err
 // IsVpcPeeredResponse is the response type for the
 // IsVpcPeered API operation.
 type IsVpcPeeredResponse struct {
-	*IsVpcPeeredOutput
+	*types.IsVpcPeeredOutput
 
 	response *aws.Response
 }

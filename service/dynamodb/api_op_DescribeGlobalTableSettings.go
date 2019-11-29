@@ -6,54 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/dynamodb/types"
 )
-
-type DescribeGlobalTableSettingsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the global table to describe.
-	//
-	// GlobalTableName is a required field
-	GlobalTableName *string `min:"3" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeGlobalTableSettingsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeGlobalTableSettingsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeGlobalTableSettingsInput"}
-
-	if s.GlobalTableName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("GlobalTableName"))
-	}
-	if s.GlobalTableName != nil && len(*s.GlobalTableName) < 3 {
-		invalidParams.Add(aws.NewErrParamMinLen("GlobalTableName", 3))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribeGlobalTableSettingsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the global table.
-	GlobalTableName *string `min:"3" type:"string"`
-
-	// The Region-specific settings for the global table.
-	ReplicaSettings []ReplicaSettingsDescription `type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeGlobalTableSettingsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeGlobalTableSettings = "DescribeGlobalTableSettings"
 
@@ -70,7 +24,7 @@ const opDescribeGlobalTableSettings = "DescribeGlobalTableSettings"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/DescribeGlobalTableSettings
-func (c *Client) DescribeGlobalTableSettingsRequest(input *DescribeGlobalTableSettingsInput) DescribeGlobalTableSettingsRequest {
+func (c *Client) DescribeGlobalTableSettingsRequest(input *types.DescribeGlobalTableSettingsInput) DescribeGlobalTableSettingsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeGlobalTableSettings,
 		HTTPMethod: "POST",
@@ -78,10 +32,10 @@ func (c *Client) DescribeGlobalTableSettingsRequest(input *DescribeGlobalTableSe
 	}
 
 	if input == nil {
-		input = &DescribeGlobalTableSettingsInput{}
+		input = &types.DescribeGlobalTableSettingsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeGlobalTableSettingsOutput{})
+	req := c.newRequest(op, input, &types.DescribeGlobalTableSettingsOutput{})
 	return DescribeGlobalTableSettingsRequest{Request: req, Input: input, Copy: c.DescribeGlobalTableSettingsRequest}
 }
 
@@ -89,8 +43,8 @@ func (c *Client) DescribeGlobalTableSettingsRequest(input *DescribeGlobalTableSe
 // DescribeGlobalTableSettings API operation.
 type DescribeGlobalTableSettingsRequest struct {
 	*aws.Request
-	Input *DescribeGlobalTableSettingsInput
-	Copy  func(*DescribeGlobalTableSettingsInput) DescribeGlobalTableSettingsRequest
+	Input *types.DescribeGlobalTableSettingsInput
+	Copy  func(*types.DescribeGlobalTableSettingsInput) DescribeGlobalTableSettingsRequest
 }
 
 // Send marshals and sends the DescribeGlobalTableSettings API request.
@@ -102,7 +56,7 @@ func (r DescribeGlobalTableSettingsRequest) Send(ctx context.Context) (*Describe
 	}
 
 	resp := &DescribeGlobalTableSettingsResponse{
-		DescribeGlobalTableSettingsOutput: r.Request.Data.(*DescribeGlobalTableSettingsOutput),
+		DescribeGlobalTableSettingsOutput: r.Request.Data.(*types.DescribeGlobalTableSettingsOutput),
 		response:                          &aws.Response{Request: r.Request},
 	}
 
@@ -112,7 +66,7 @@ func (r DescribeGlobalTableSettingsRequest) Send(ctx context.Context) (*Describe
 // DescribeGlobalTableSettingsResponse is the response type for the
 // DescribeGlobalTableSettings API operation.
 type DescribeGlobalTableSettingsResponse struct {
-	*DescribeGlobalTableSettingsOutput
+	*types.DescribeGlobalTableSettingsOutput
 
 	response *aws.Response
 }

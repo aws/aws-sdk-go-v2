@@ -6,57 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/lightsail/types"
 )
-
-type PutInstancePublicPortsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Lightsail instance name of the public port(s) you are setting.
-	//
-	// InstanceName is a required field
-	InstanceName *string `locationName:"instanceName" type:"string" required:"true"`
-
-	// Specifies information about the public port(s).
-	//
-	// PortInfos is a required field
-	PortInfos []PortInfo `locationName:"portInfos" type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s PutInstancePublicPortsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *PutInstancePublicPortsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "PutInstancePublicPortsInput"}
-
-	if s.InstanceName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("InstanceName"))
-	}
-
-	if s.PortInfos == nil {
-		invalidParams.Add(aws.NewErrParamRequired("PortInfos"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type PutInstancePublicPortsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Describes metadata about the operation you just executed.
-	Operation *Operation `locationName:"operation" type:"structure"`
-}
-
-// String returns the string representation
-func (s PutInstancePublicPortsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opPutInstancePublicPorts = "PutInstancePublicPorts"
 
@@ -78,7 +29,7 @@ const opPutInstancePublicPorts = "PutInstancePublicPorts"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/PutInstancePublicPorts
-func (c *Client) PutInstancePublicPortsRequest(input *PutInstancePublicPortsInput) PutInstancePublicPortsRequest {
+func (c *Client) PutInstancePublicPortsRequest(input *types.PutInstancePublicPortsInput) PutInstancePublicPortsRequest {
 	op := &aws.Operation{
 		Name:       opPutInstancePublicPorts,
 		HTTPMethod: "POST",
@@ -86,10 +37,10 @@ func (c *Client) PutInstancePublicPortsRequest(input *PutInstancePublicPortsInpu
 	}
 
 	if input == nil {
-		input = &PutInstancePublicPortsInput{}
+		input = &types.PutInstancePublicPortsInput{}
 	}
 
-	req := c.newRequest(op, input, &PutInstancePublicPortsOutput{})
+	req := c.newRequest(op, input, &types.PutInstancePublicPortsOutput{})
 	return PutInstancePublicPortsRequest{Request: req, Input: input, Copy: c.PutInstancePublicPortsRequest}
 }
 
@@ -97,8 +48,8 @@ func (c *Client) PutInstancePublicPortsRequest(input *PutInstancePublicPortsInpu
 // PutInstancePublicPorts API operation.
 type PutInstancePublicPortsRequest struct {
 	*aws.Request
-	Input *PutInstancePublicPortsInput
-	Copy  func(*PutInstancePublicPortsInput) PutInstancePublicPortsRequest
+	Input *types.PutInstancePublicPortsInput
+	Copy  func(*types.PutInstancePublicPortsInput) PutInstancePublicPortsRequest
 }
 
 // Send marshals and sends the PutInstancePublicPorts API request.
@@ -110,7 +61,7 @@ func (r PutInstancePublicPortsRequest) Send(ctx context.Context) (*PutInstancePu
 	}
 
 	resp := &PutInstancePublicPortsResponse{
-		PutInstancePublicPortsOutput: r.Request.Data.(*PutInstancePublicPortsOutput),
+		PutInstancePublicPortsOutput: r.Request.Data.(*types.PutInstancePublicPortsOutput),
 		response:                     &aws.Response{Request: r.Request},
 	}
 
@@ -120,7 +71,7 @@ func (r PutInstancePublicPortsRequest) Send(ctx context.Context) (*PutInstancePu
 // PutInstancePublicPortsResponse is the response type for the
 // PutInstancePublicPorts API operation.
 type PutInstancePublicPortsResponse struct {
-	*PutInstancePublicPortsOutput
+	*types.PutInstancePublicPortsOutput
 
 	response *aws.Response
 }

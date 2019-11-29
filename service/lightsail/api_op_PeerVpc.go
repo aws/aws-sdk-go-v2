@@ -6,29 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/lightsail/types"
 )
-
-type PeerVpcInput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s PeerVpcInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type PeerVpcOutput struct {
-	_ struct{} `type:"structure"`
-
-	// An array of key-value pairs containing information about the request operation.
-	Operation *Operation `locationName:"operation" type:"structure"`
-}
-
-// String returns the string representation
-func (s PeerVpcOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opPeerVpc = "PeerVpc"
 
@@ -45,7 +24,7 @@ const opPeerVpc = "PeerVpc"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/PeerVpc
-func (c *Client) PeerVpcRequest(input *PeerVpcInput) PeerVpcRequest {
+func (c *Client) PeerVpcRequest(input *types.PeerVpcInput) PeerVpcRequest {
 	op := &aws.Operation{
 		Name:       opPeerVpc,
 		HTTPMethod: "POST",
@@ -53,10 +32,10 @@ func (c *Client) PeerVpcRequest(input *PeerVpcInput) PeerVpcRequest {
 	}
 
 	if input == nil {
-		input = &PeerVpcInput{}
+		input = &types.PeerVpcInput{}
 	}
 
-	req := c.newRequest(op, input, &PeerVpcOutput{})
+	req := c.newRequest(op, input, &types.PeerVpcOutput{})
 	return PeerVpcRequest{Request: req, Input: input, Copy: c.PeerVpcRequest}
 }
 
@@ -64,8 +43,8 @@ func (c *Client) PeerVpcRequest(input *PeerVpcInput) PeerVpcRequest {
 // PeerVpc API operation.
 type PeerVpcRequest struct {
 	*aws.Request
-	Input *PeerVpcInput
-	Copy  func(*PeerVpcInput) PeerVpcRequest
+	Input *types.PeerVpcInput
+	Copy  func(*types.PeerVpcInput) PeerVpcRequest
 }
 
 // Send marshals and sends the PeerVpc API request.
@@ -77,7 +56,7 @@ func (r PeerVpcRequest) Send(ctx context.Context) (*PeerVpcResponse, error) {
 	}
 
 	resp := &PeerVpcResponse{
-		PeerVpcOutput: r.Request.Data.(*PeerVpcOutput),
+		PeerVpcOutput: r.Request.Data.(*types.PeerVpcOutput),
 		response:      &aws.Response{Request: r.Request},
 	}
 
@@ -87,7 +66,7 @@ func (r PeerVpcRequest) Send(ctx context.Context) (*PeerVpcResponse, error) {
 // PeerVpcResponse is the response type for the
 // PeerVpc API operation.
 type PeerVpcResponse struct {
-	*PeerVpcOutput
+	*types.PeerVpcOutput
 
 	response *aws.Response
 }

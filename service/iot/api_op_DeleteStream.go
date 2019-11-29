@@ -6,67 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/iot/types"
 )
-
-type DeleteStreamInput struct {
-	_ struct{} `type:"structure"`
-
-	// The stream ID.
-	//
-	// StreamId is a required field
-	StreamId *string `location:"uri" locationName:"streamId" min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteStreamInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteStreamInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteStreamInput"}
-
-	if s.StreamId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("StreamId"))
-	}
-	if s.StreamId != nil && len(*s.StreamId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("StreamId", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteStreamInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.StreamId != nil {
-		v := *s.StreamId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "streamId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type DeleteStreamOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteStreamOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteStreamOutput) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
 
 const opDeleteStream = "DeleteStream"
 
@@ -81,7 +22,7 @@ const opDeleteStream = "DeleteStream"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) DeleteStreamRequest(input *DeleteStreamInput) DeleteStreamRequest {
+func (c *Client) DeleteStreamRequest(input *types.DeleteStreamInput) DeleteStreamRequest {
 	op := &aws.Operation{
 		Name:       opDeleteStream,
 		HTTPMethod: "DELETE",
@@ -89,10 +30,10 @@ func (c *Client) DeleteStreamRequest(input *DeleteStreamInput) DeleteStreamReque
 	}
 
 	if input == nil {
-		input = &DeleteStreamInput{}
+		input = &types.DeleteStreamInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteStreamOutput{})
+	req := c.newRequest(op, input, &types.DeleteStreamOutput{})
 	return DeleteStreamRequest{Request: req, Input: input, Copy: c.DeleteStreamRequest}
 }
 
@@ -100,8 +41,8 @@ func (c *Client) DeleteStreamRequest(input *DeleteStreamInput) DeleteStreamReque
 // DeleteStream API operation.
 type DeleteStreamRequest struct {
 	*aws.Request
-	Input *DeleteStreamInput
-	Copy  func(*DeleteStreamInput) DeleteStreamRequest
+	Input *types.DeleteStreamInput
+	Copy  func(*types.DeleteStreamInput) DeleteStreamRequest
 }
 
 // Send marshals and sends the DeleteStream API request.
@@ -113,7 +54,7 @@ func (r DeleteStreamRequest) Send(ctx context.Context) (*DeleteStreamResponse, e
 	}
 
 	resp := &DeleteStreamResponse{
-		DeleteStreamOutput: r.Request.Data.(*DeleteStreamOutput),
+		DeleteStreamOutput: r.Request.Data.(*types.DeleteStreamOutput),
 		response:           &aws.Response{Request: r.Request},
 	}
 
@@ -123,7 +64,7 @@ func (r DeleteStreamRequest) Send(ctx context.Context) (*DeleteStreamResponse, e
 // DeleteStreamResponse is the response type for the
 // DeleteStream API operation.
 type DeleteStreamResponse struct {
-	*DeleteStreamOutput
+	*types.DeleteStreamOutput
 
 	response *aws.Response
 }

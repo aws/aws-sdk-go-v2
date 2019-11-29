@@ -6,54 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-type DeleteClientVpnEndpointInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the Client VPN to be deleted.
-	//
-	// ClientVpnEndpointId is a required field
-	ClientVpnEndpointId *string `type:"string" required:"true"`
-
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have
-	// the required permissions, the error response is DryRunOperation. Otherwise,
-	// it is UnauthorizedOperation.
-	DryRun *bool `type:"boolean"`
-}
-
-// String returns the string representation
-func (s DeleteClientVpnEndpointInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteClientVpnEndpointInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteClientVpnEndpointInput"}
-
-	if s.ClientVpnEndpointId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ClientVpnEndpointId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteClientVpnEndpointOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The current state of the Client VPN endpoint.
-	Status *VpnEndpointStatus `locationName:"status" type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteClientVpnEndpointOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteClientVpnEndpoint = "DeleteClientVpnEndpoint"
 
@@ -71,7 +25,7 @@ const opDeleteClientVpnEndpoint = "DeleteClientVpnEndpoint"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteClientVpnEndpoint
-func (c *Client) DeleteClientVpnEndpointRequest(input *DeleteClientVpnEndpointInput) DeleteClientVpnEndpointRequest {
+func (c *Client) DeleteClientVpnEndpointRequest(input *types.DeleteClientVpnEndpointInput) DeleteClientVpnEndpointRequest {
 	op := &aws.Operation{
 		Name:       opDeleteClientVpnEndpoint,
 		HTTPMethod: "POST",
@@ -79,10 +33,10 @@ func (c *Client) DeleteClientVpnEndpointRequest(input *DeleteClientVpnEndpointIn
 	}
 
 	if input == nil {
-		input = &DeleteClientVpnEndpointInput{}
+		input = &types.DeleteClientVpnEndpointInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteClientVpnEndpointOutput{})
+	req := c.newRequest(op, input, &types.DeleteClientVpnEndpointOutput{})
 	return DeleteClientVpnEndpointRequest{Request: req, Input: input, Copy: c.DeleteClientVpnEndpointRequest}
 }
 
@@ -90,8 +44,8 @@ func (c *Client) DeleteClientVpnEndpointRequest(input *DeleteClientVpnEndpointIn
 // DeleteClientVpnEndpoint API operation.
 type DeleteClientVpnEndpointRequest struct {
 	*aws.Request
-	Input *DeleteClientVpnEndpointInput
-	Copy  func(*DeleteClientVpnEndpointInput) DeleteClientVpnEndpointRequest
+	Input *types.DeleteClientVpnEndpointInput
+	Copy  func(*types.DeleteClientVpnEndpointInput) DeleteClientVpnEndpointRequest
 }
 
 // Send marshals and sends the DeleteClientVpnEndpoint API request.
@@ -103,7 +57,7 @@ func (r DeleteClientVpnEndpointRequest) Send(ctx context.Context) (*DeleteClient
 	}
 
 	resp := &DeleteClientVpnEndpointResponse{
-		DeleteClientVpnEndpointOutput: r.Request.Data.(*DeleteClientVpnEndpointOutput),
+		DeleteClientVpnEndpointOutput: r.Request.Data.(*types.DeleteClientVpnEndpointOutput),
 		response:                      &aws.Response{Request: r.Request},
 	}
 
@@ -113,7 +67,7 @@ func (r DeleteClientVpnEndpointRequest) Send(ctx context.Context) (*DeleteClient
 // DeleteClientVpnEndpointResponse is the response type for the
 // DeleteClientVpnEndpoint API operation.
 type DeleteClientVpnEndpointResponse struct {
-	*DeleteClientVpnEndpointOutput
+	*types.DeleteClientVpnEndpointOutput
 
 	response *aws.Response
 }

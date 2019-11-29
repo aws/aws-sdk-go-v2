@@ -6,103 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/worklink/types"
 )
-
-type AssociateWebsiteAuthorizationProviderInput struct {
-	_ struct{} `type:"structure"`
-
-	// The authorization provider type.
-	//
-	// AuthorizationProviderType is a required field
-	AuthorizationProviderType AuthorizationProviderType `type:"string" required:"true" enum:"true"`
-
-	// The domain name of the authorization provider. This applies only to SAML-based
-	// authorization providers.
-	DomainName *string `min:"1" type:"string"`
-
-	// The ARN of the fleet.
-	//
-	// FleetArn is a required field
-	FleetArn *string `min:"20" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s AssociateWebsiteAuthorizationProviderInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *AssociateWebsiteAuthorizationProviderInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "AssociateWebsiteAuthorizationProviderInput"}
-	if len(s.AuthorizationProviderType) == 0 {
-		invalidParams.Add(aws.NewErrParamRequired("AuthorizationProviderType"))
-	}
-	if s.DomainName != nil && len(*s.DomainName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("DomainName", 1))
-	}
-
-	if s.FleetArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("FleetArn"))
-	}
-	if s.FleetArn != nil && len(*s.FleetArn) < 20 {
-		invalidParams.Add(aws.NewErrParamMinLen("FleetArn", 20))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s AssociateWebsiteAuthorizationProviderInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if len(s.AuthorizationProviderType) > 0 {
-		v := s.AuthorizationProviderType
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "AuthorizationProviderType", protocol.QuotedValue{ValueMarshaler: v}, metadata)
-	}
-	if s.DomainName != nil {
-		v := *s.DomainName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "DomainName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.FleetArn != nil {
-		v := *s.FleetArn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "FleetArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type AssociateWebsiteAuthorizationProviderOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A unique identifier for the authorization provider.
-	AuthorizationProviderId *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s AssociateWebsiteAuthorizationProviderOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s AssociateWebsiteAuthorizationProviderOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.AuthorizationProviderId != nil {
-		v := *s.AuthorizationProviderId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "AuthorizationProviderId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opAssociateWebsiteAuthorizationProvider = "AssociateWebsiteAuthorizationProvider"
 
@@ -120,7 +25,7 @@ const opAssociateWebsiteAuthorizationProvider = "AssociateWebsiteAuthorizationPr
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/worklink-2018-09-25/AssociateWebsiteAuthorizationProvider
-func (c *Client) AssociateWebsiteAuthorizationProviderRequest(input *AssociateWebsiteAuthorizationProviderInput) AssociateWebsiteAuthorizationProviderRequest {
+func (c *Client) AssociateWebsiteAuthorizationProviderRequest(input *types.AssociateWebsiteAuthorizationProviderInput) AssociateWebsiteAuthorizationProviderRequest {
 	op := &aws.Operation{
 		Name:       opAssociateWebsiteAuthorizationProvider,
 		HTTPMethod: "POST",
@@ -128,10 +33,10 @@ func (c *Client) AssociateWebsiteAuthorizationProviderRequest(input *AssociateWe
 	}
 
 	if input == nil {
-		input = &AssociateWebsiteAuthorizationProviderInput{}
+		input = &types.AssociateWebsiteAuthorizationProviderInput{}
 	}
 
-	req := c.newRequest(op, input, &AssociateWebsiteAuthorizationProviderOutput{})
+	req := c.newRequest(op, input, &types.AssociateWebsiteAuthorizationProviderOutput{})
 	return AssociateWebsiteAuthorizationProviderRequest{Request: req, Input: input, Copy: c.AssociateWebsiteAuthorizationProviderRequest}
 }
 
@@ -139,8 +44,8 @@ func (c *Client) AssociateWebsiteAuthorizationProviderRequest(input *AssociateWe
 // AssociateWebsiteAuthorizationProvider API operation.
 type AssociateWebsiteAuthorizationProviderRequest struct {
 	*aws.Request
-	Input *AssociateWebsiteAuthorizationProviderInput
-	Copy  func(*AssociateWebsiteAuthorizationProviderInput) AssociateWebsiteAuthorizationProviderRequest
+	Input *types.AssociateWebsiteAuthorizationProviderInput
+	Copy  func(*types.AssociateWebsiteAuthorizationProviderInput) AssociateWebsiteAuthorizationProviderRequest
 }
 
 // Send marshals and sends the AssociateWebsiteAuthorizationProvider API request.
@@ -152,7 +57,7 @@ func (r AssociateWebsiteAuthorizationProviderRequest) Send(ctx context.Context) 
 	}
 
 	resp := &AssociateWebsiteAuthorizationProviderResponse{
-		AssociateWebsiteAuthorizationProviderOutput: r.Request.Data.(*AssociateWebsiteAuthorizationProviderOutput),
+		AssociateWebsiteAuthorizationProviderOutput: r.Request.Data.(*types.AssociateWebsiteAuthorizationProviderOutput),
 		response: &aws.Response{Request: r.Request},
 	}
 
@@ -162,7 +67,7 @@ func (r AssociateWebsiteAuthorizationProviderRequest) Send(ctx context.Context) 
 // AssociateWebsiteAuthorizationProviderResponse is the response type for the
 // AssociateWebsiteAuthorizationProvider API operation.
 type AssociateWebsiteAuthorizationProviderResponse struct {
-	*AssociateWebsiteAuthorizationProviderOutput
+	*types.AssociateWebsiteAuthorizationProviderOutput
 
 	response *aws.Response
 }

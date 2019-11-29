@@ -6,57 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/cloudsearch/types"
 )
-
-// Container for the parameters to the CreateDomain operation. Specifies a name
-// for the new search domain.
-type CreateDomainInput struct {
-	_ struct{} `type:"structure"`
-
-	// A name for the domain you are creating. Allowed characters are a-z (lower-case
-	// letters), 0-9, and hyphen (-). Domain names must start with a letter or number
-	// and be at least 3 and no more than 28 characters long.
-	//
-	// DomainName is a required field
-	DomainName *string `min:"3" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s CreateDomainInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateDomainInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateDomainInput"}
-
-	if s.DomainName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DomainName"))
-	}
-	if s.DomainName != nil && len(*s.DomainName) < 3 {
-		invalidParams.Add(aws.NewErrParamMinLen("DomainName", 3))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// The result of a CreateDomainRequest. Contains the status of a newly created
-// domain.
-type CreateDomainOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The current status of the search domain.
-	DomainStatus *DomainStatus `type:"structure"`
-}
-
-// String returns the string representation
-func (s CreateDomainOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCreateDomain = "CreateDomain"
 
@@ -73,7 +24,7 @@ const opCreateDomain = "CreateDomain"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) CreateDomainRequest(input *CreateDomainInput) CreateDomainRequest {
+func (c *Client) CreateDomainRequest(input *types.CreateDomainInput) CreateDomainRequest {
 	op := &aws.Operation{
 		Name:       opCreateDomain,
 		HTTPMethod: "POST",
@@ -81,10 +32,10 @@ func (c *Client) CreateDomainRequest(input *CreateDomainInput) CreateDomainReque
 	}
 
 	if input == nil {
-		input = &CreateDomainInput{}
+		input = &types.CreateDomainInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateDomainOutput{})
+	req := c.newRequest(op, input, &types.CreateDomainOutput{})
 	return CreateDomainRequest{Request: req, Input: input, Copy: c.CreateDomainRequest}
 }
 
@@ -92,8 +43,8 @@ func (c *Client) CreateDomainRequest(input *CreateDomainInput) CreateDomainReque
 // CreateDomain API operation.
 type CreateDomainRequest struct {
 	*aws.Request
-	Input *CreateDomainInput
-	Copy  func(*CreateDomainInput) CreateDomainRequest
+	Input *types.CreateDomainInput
+	Copy  func(*types.CreateDomainInput) CreateDomainRequest
 }
 
 // Send marshals and sends the CreateDomain API request.
@@ -105,7 +56,7 @@ func (r CreateDomainRequest) Send(ctx context.Context) (*CreateDomainResponse, e
 	}
 
 	resp := &CreateDomainResponse{
-		CreateDomainOutput: r.Request.Data.(*CreateDomainOutput),
+		CreateDomainOutput: r.Request.Data.(*types.CreateDomainOutput),
 		response:           &aws.Response{Request: r.Request},
 	}
 
@@ -115,7 +66,7 @@ func (r CreateDomainRequest) Send(ctx context.Context) (*CreateDomainResponse, e
 // CreateDomainResponse is the response type for the
 // CreateDomain API operation.
 type CreateDomainResponse struct {
-	*CreateDomainOutput
+	*types.CreateDomainOutput
 
 	response *aws.Response
 }

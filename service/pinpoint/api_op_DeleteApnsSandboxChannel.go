@@ -6,74 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/pinpoint/types"
 )
-
-type DeleteApnsSandboxChannelInput struct {
-	_ struct{} `type:"structure"`
-
-	// ApplicationId is a required field
-	ApplicationId *string `location:"uri" locationName:"application-id" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteApnsSandboxChannelInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteApnsSandboxChannelInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteApnsSandboxChannelInput"}
-
-	if s.ApplicationId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ApplicationId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteApnsSandboxChannelInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.ApplicationId != nil {
-		v := *s.ApplicationId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "application-id", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type DeleteApnsSandboxChannelOutput struct {
-	_ struct{} `type:"structure" payload:"APNSSandboxChannelResponse"`
-
-	// Provides information about the status and settings of the APNs (Apple Push
-	// Notification service) sandbox channel for an application.
-	//
-	// APNSSandboxChannelResponse is a required field
-	APNSSandboxChannelResponse *APNSSandboxChannelResponse `type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteApnsSandboxChannelOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteApnsSandboxChannelOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.APNSSandboxChannelResponse != nil {
-		v := s.APNSSandboxChannelResponse
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.PayloadTarget, "APNSSandboxChannelResponse", v, metadata)
-	}
-	return nil
-}
 
 const opDeleteApnsSandboxChannel = "DeleteApnsSandboxChannel"
 
@@ -91,7 +25,7 @@ const opDeleteApnsSandboxChannel = "DeleteApnsSandboxChannel"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/DeleteApnsSandboxChannel
-func (c *Client) DeleteApnsSandboxChannelRequest(input *DeleteApnsSandboxChannelInput) DeleteApnsSandboxChannelRequest {
+func (c *Client) DeleteApnsSandboxChannelRequest(input *types.DeleteApnsSandboxChannelInput) DeleteApnsSandboxChannelRequest {
 	op := &aws.Operation{
 		Name:       opDeleteApnsSandboxChannel,
 		HTTPMethod: "DELETE",
@@ -99,10 +33,10 @@ func (c *Client) DeleteApnsSandboxChannelRequest(input *DeleteApnsSandboxChannel
 	}
 
 	if input == nil {
-		input = &DeleteApnsSandboxChannelInput{}
+		input = &types.DeleteApnsSandboxChannelInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteApnsSandboxChannelOutput{})
+	req := c.newRequest(op, input, &types.DeleteApnsSandboxChannelOutput{})
 	return DeleteApnsSandboxChannelRequest{Request: req, Input: input, Copy: c.DeleteApnsSandboxChannelRequest}
 }
 
@@ -110,8 +44,8 @@ func (c *Client) DeleteApnsSandboxChannelRequest(input *DeleteApnsSandboxChannel
 // DeleteApnsSandboxChannel API operation.
 type DeleteApnsSandboxChannelRequest struct {
 	*aws.Request
-	Input *DeleteApnsSandboxChannelInput
-	Copy  func(*DeleteApnsSandboxChannelInput) DeleteApnsSandboxChannelRequest
+	Input *types.DeleteApnsSandboxChannelInput
+	Copy  func(*types.DeleteApnsSandboxChannelInput) DeleteApnsSandboxChannelRequest
 }
 
 // Send marshals and sends the DeleteApnsSandboxChannel API request.
@@ -123,7 +57,7 @@ func (r DeleteApnsSandboxChannelRequest) Send(ctx context.Context) (*DeleteApnsS
 	}
 
 	resp := &DeleteApnsSandboxChannelResponse{
-		DeleteApnsSandboxChannelOutput: r.Request.Data.(*DeleteApnsSandboxChannelOutput),
+		DeleteApnsSandboxChannelOutput: r.Request.Data.(*types.DeleteApnsSandboxChannelOutput),
 		response:                       &aws.Response{Request: r.Request},
 	}
 
@@ -133,7 +67,7 @@ func (r DeleteApnsSandboxChannelRequest) Send(ctx context.Context) (*DeleteApnsS
 // DeleteApnsSandboxChannelResponse is the response type for the
 // DeleteApnsSandboxChannel API operation.
 type DeleteApnsSandboxChannelResponse struct {
-	*DeleteApnsSandboxChannelOutput
+	*types.DeleteApnsSandboxChannelOutput
 
 	response *aws.Response
 }

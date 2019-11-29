@@ -6,55 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/acmpca/types"
 )
-
-type GetCertificateAuthorityCsrInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) that was returned when you called the CreateCertificateAuthority
-	// action. This must be of the form:
-	//
-	// arn:aws:acm-pca:region:account:certificate-authority/12345678-1234-1234-1234-123456789012
-	//
-	// CertificateAuthorityArn is a required field
-	CertificateAuthorityArn *string `min:"5" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetCertificateAuthorityCsrInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetCertificateAuthorityCsrInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetCertificateAuthorityCsrInput"}
-
-	if s.CertificateAuthorityArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("CertificateAuthorityArn"))
-	}
-	if s.CertificateAuthorityArn != nil && len(*s.CertificateAuthorityArn) < 5 {
-		invalidParams.Add(aws.NewErrParamMinLen("CertificateAuthorityArn", 5))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type GetCertificateAuthorityCsrOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The base64 PEM-encoded certificate signing request (CSR) for your private
-	// CA certificate.
-	Csr *string `type:"string"`
-}
-
-// String returns the string representation
-func (s GetCertificateAuthorityCsrOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetCertificateAuthorityCsr = "GetCertificateAuthorityCsr"
 
@@ -76,7 +29,7 @@ const opGetCertificateAuthorityCsr = "GetCertificateAuthorityCsr"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/acm-pca-2017-08-22/GetCertificateAuthorityCsr
-func (c *Client) GetCertificateAuthorityCsrRequest(input *GetCertificateAuthorityCsrInput) GetCertificateAuthorityCsrRequest {
+func (c *Client) GetCertificateAuthorityCsrRequest(input *types.GetCertificateAuthorityCsrInput) GetCertificateAuthorityCsrRequest {
 	op := &aws.Operation{
 		Name:       opGetCertificateAuthorityCsr,
 		HTTPMethod: "POST",
@@ -84,10 +37,10 @@ func (c *Client) GetCertificateAuthorityCsrRequest(input *GetCertificateAuthorit
 	}
 
 	if input == nil {
-		input = &GetCertificateAuthorityCsrInput{}
+		input = &types.GetCertificateAuthorityCsrInput{}
 	}
 
-	req := c.newRequest(op, input, &GetCertificateAuthorityCsrOutput{})
+	req := c.newRequest(op, input, &types.GetCertificateAuthorityCsrOutput{})
 	return GetCertificateAuthorityCsrRequest{Request: req, Input: input, Copy: c.GetCertificateAuthorityCsrRequest}
 }
 
@@ -95,8 +48,8 @@ func (c *Client) GetCertificateAuthorityCsrRequest(input *GetCertificateAuthorit
 // GetCertificateAuthorityCsr API operation.
 type GetCertificateAuthorityCsrRequest struct {
 	*aws.Request
-	Input *GetCertificateAuthorityCsrInput
-	Copy  func(*GetCertificateAuthorityCsrInput) GetCertificateAuthorityCsrRequest
+	Input *types.GetCertificateAuthorityCsrInput
+	Copy  func(*types.GetCertificateAuthorityCsrInput) GetCertificateAuthorityCsrRequest
 }
 
 // Send marshals and sends the GetCertificateAuthorityCsr API request.
@@ -108,7 +61,7 @@ func (r GetCertificateAuthorityCsrRequest) Send(ctx context.Context) (*GetCertif
 	}
 
 	resp := &GetCertificateAuthorityCsrResponse{
-		GetCertificateAuthorityCsrOutput: r.Request.Data.(*GetCertificateAuthorityCsrOutput),
+		GetCertificateAuthorityCsrOutput: r.Request.Data.(*types.GetCertificateAuthorityCsrOutput),
 		response:                         &aws.Response{Request: r.Request},
 	}
 
@@ -118,7 +71,7 @@ func (r GetCertificateAuthorityCsrRequest) Send(ctx context.Context) (*GetCertif
 // GetCertificateAuthorityCsrResponse is the response type for the
 // GetCertificateAuthorityCsr API operation.
 type GetCertificateAuthorityCsrResponse struct {
-	*GetCertificateAuthorityCsrOutput
+	*types.GetCertificateAuthorityCsrOutput
 
 	response *aws.Response
 }

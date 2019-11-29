@@ -6,45 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/alexaforbusiness/types"
 )
-
-type StartSmartHomeApplianceDiscoveryInput struct {
-	_ struct{} `type:"structure"`
-
-	// The room where smart home appliance discovery was initiated.
-	//
-	// RoomArn is a required field
-	RoomArn *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s StartSmartHomeApplianceDiscoveryInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *StartSmartHomeApplianceDiscoveryInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "StartSmartHomeApplianceDiscoveryInput"}
-
-	if s.RoomArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("RoomArn"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type StartSmartHomeApplianceDiscoveryOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s StartSmartHomeApplianceDiscoveryOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opStartSmartHomeApplianceDiscovery = "StartSmartHomeApplianceDiscovery"
 
@@ -62,7 +25,7 @@ const opStartSmartHomeApplianceDiscovery = "StartSmartHomeApplianceDiscovery"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/StartSmartHomeApplianceDiscovery
-func (c *Client) StartSmartHomeApplianceDiscoveryRequest(input *StartSmartHomeApplianceDiscoveryInput) StartSmartHomeApplianceDiscoveryRequest {
+func (c *Client) StartSmartHomeApplianceDiscoveryRequest(input *types.StartSmartHomeApplianceDiscoveryInput) StartSmartHomeApplianceDiscoveryRequest {
 	op := &aws.Operation{
 		Name:       opStartSmartHomeApplianceDiscovery,
 		HTTPMethod: "POST",
@@ -70,10 +33,10 @@ func (c *Client) StartSmartHomeApplianceDiscoveryRequest(input *StartSmartHomeAp
 	}
 
 	if input == nil {
-		input = &StartSmartHomeApplianceDiscoveryInput{}
+		input = &types.StartSmartHomeApplianceDiscoveryInput{}
 	}
 
-	req := c.newRequest(op, input, &StartSmartHomeApplianceDiscoveryOutput{})
+	req := c.newRequest(op, input, &types.StartSmartHomeApplianceDiscoveryOutput{})
 	return StartSmartHomeApplianceDiscoveryRequest{Request: req, Input: input, Copy: c.StartSmartHomeApplianceDiscoveryRequest}
 }
 
@@ -81,8 +44,8 @@ func (c *Client) StartSmartHomeApplianceDiscoveryRequest(input *StartSmartHomeAp
 // StartSmartHomeApplianceDiscovery API operation.
 type StartSmartHomeApplianceDiscoveryRequest struct {
 	*aws.Request
-	Input *StartSmartHomeApplianceDiscoveryInput
-	Copy  func(*StartSmartHomeApplianceDiscoveryInput) StartSmartHomeApplianceDiscoveryRequest
+	Input *types.StartSmartHomeApplianceDiscoveryInput
+	Copy  func(*types.StartSmartHomeApplianceDiscoveryInput) StartSmartHomeApplianceDiscoveryRequest
 }
 
 // Send marshals and sends the StartSmartHomeApplianceDiscovery API request.
@@ -94,7 +57,7 @@ func (r StartSmartHomeApplianceDiscoveryRequest) Send(ctx context.Context) (*Sta
 	}
 
 	resp := &StartSmartHomeApplianceDiscoveryResponse{
-		StartSmartHomeApplianceDiscoveryOutput: r.Request.Data.(*StartSmartHomeApplianceDiscoveryOutput),
+		StartSmartHomeApplianceDiscoveryOutput: r.Request.Data.(*types.StartSmartHomeApplianceDiscoveryOutput),
 		response:                               &aws.Response{Request: r.Request},
 	}
 
@@ -104,7 +67,7 @@ func (r StartSmartHomeApplianceDiscoveryRequest) Send(ctx context.Context) (*Sta
 // StartSmartHomeApplianceDiscoveryResponse is the response type for the
 // StartSmartHomeApplianceDiscovery API operation.
 type StartSmartHomeApplianceDiscoveryResponse struct {
-	*StartSmartHomeApplianceDiscoveryOutput
+	*types.StartSmartHomeApplianceDiscoveryOutput
 
 	response *aws.Response
 }

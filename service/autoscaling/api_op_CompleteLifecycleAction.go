@@ -6,84 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/autoscaling/types"
 )
-
-type CompleteLifecycleActionInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the Auto Scaling group.
-	//
-	// AutoScalingGroupName is a required field
-	AutoScalingGroupName *string `min:"1" type:"string" required:"true"`
-
-	// The ID of the instance.
-	InstanceId *string `min:"1" type:"string"`
-
-	// The action for the group to take. This parameter can be either CONTINUE or
-	// ABANDON.
-	//
-	// LifecycleActionResult is a required field
-	LifecycleActionResult *string `type:"string" required:"true"`
-
-	// A universally unique identifier (UUID) that identifies a specific lifecycle
-	// action associated with an instance. Amazon EC2 Auto Scaling sends this token
-	// to the notification target you specified when you created the lifecycle hook.
-	LifecycleActionToken *string `min:"36" type:"string"`
-
-	// The name of the lifecycle hook.
-	//
-	// LifecycleHookName is a required field
-	LifecycleHookName *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s CompleteLifecycleActionInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CompleteLifecycleActionInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CompleteLifecycleActionInput"}
-
-	if s.AutoScalingGroupName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("AutoScalingGroupName"))
-	}
-	if s.AutoScalingGroupName != nil && len(*s.AutoScalingGroupName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("AutoScalingGroupName", 1))
-	}
-	if s.InstanceId != nil && len(*s.InstanceId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("InstanceId", 1))
-	}
-
-	if s.LifecycleActionResult == nil {
-		invalidParams.Add(aws.NewErrParamRequired("LifecycleActionResult"))
-	}
-	if s.LifecycleActionToken != nil && len(*s.LifecycleActionToken) < 36 {
-		invalidParams.Add(aws.NewErrParamMinLen("LifecycleActionToken", 36))
-	}
-
-	if s.LifecycleHookName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("LifecycleHookName"))
-	}
-	if s.LifecycleHookName != nil && len(*s.LifecycleHookName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("LifecycleHookName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type CompleteLifecycleActionOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s CompleteLifecycleActionOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCompleteLifecycleAction = "CompleteLifecycleAction"
 
@@ -123,7 +47,7 @@ const opCompleteLifecycleAction = "CompleteLifecycleAction"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/CompleteLifecycleAction
-func (c *Client) CompleteLifecycleActionRequest(input *CompleteLifecycleActionInput) CompleteLifecycleActionRequest {
+func (c *Client) CompleteLifecycleActionRequest(input *types.CompleteLifecycleActionInput) CompleteLifecycleActionRequest {
 	op := &aws.Operation{
 		Name:       opCompleteLifecycleAction,
 		HTTPMethod: "POST",
@@ -131,10 +55,10 @@ func (c *Client) CompleteLifecycleActionRequest(input *CompleteLifecycleActionIn
 	}
 
 	if input == nil {
-		input = &CompleteLifecycleActionInput{}
+		input = &types.CompleteLifecycleActionInput{}
 	}
 
-	req := c.newRequest(op, input, &CompleteLifecycleActionOutput{})
+	req := c.newRequest(op, input, &types.CompleteLifecycleActionOutput{})
 	return CompleteLifecycleActionRequest{Request: req, Input: input, Copy: c.CompleteLifecycleActionRequest}
 }
 
@@ -142,8 +66,8 @@ func (c *Client) CompleteLifecycleActionRequest(input *CompleteLifecycleActionIn
 // CompleteLifecycleAction API operation.
 type CompleteLifecycleActionRequest struct {
 	*aws.Request
-	Input *CompleteLifecycleActionInput
-	Copy  func(*CompleteLifecycleActionInput) CompleteLifecycleActionRequest
+	Input *types.CompleteLifecycleActionInput
+	Copy  func(*types.CompleteLifecycleActionInput) CompleteLifecycleActionRequest
 }
 
 // Send marshals and sends the CompleteLifecycleAction API request.
@@ -155,7 +79,7 @@ func (r CompleteLifecycleActionRequest) Send(ctx context.Context) (*CompleteLife
 	}
 
 	resp := &CompleteLifecycleActionResponse{
-		CompleteLifecycleActionOutput: r.Request.Data.(*CompleteLifecycleActionOutput),
+		CompleteLifecycleActionOutput: r.Request.Data.(*types.CompleteLifecycleActionOutput),
 		response:                      &aws.Response{Request: r.Request},
 	}
 
@@ -165,7 +89,7 @@ func (r CompleteLifecycleActionRequest) Send(ctx context.Context) (*CompleteLife
 // CompleteLifecycleActionResponse is the response type for the
 // CompleteLifecycleAction API operation.
 type CompleteLifecycleActionResponse struct {
-	*CompleteLifecycleActionOutput
+	*types.CompleteLifecycleActionOutput
 
 	response *aws.Response
 }

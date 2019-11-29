@@ -6,49 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/lightsail/types"
 )
-
-type DetachDiskInput struct {
-	_ struct{} `type:"structure"`
-
-	// The unique name of the disk you want to detach from your instance (e.g.,
-	// my-disk).
-	//
-	// DiskName is a required field
-	DiskName *string `locationName:"diskName" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DetachDiskInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DetachDiskInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DetachDiskInput"}
-
-	if s.DiskName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DiskName"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DetachDiskOutput struct {
-	_ struct{} `type:"structure"`
-
-	// An object describing the API operations.
-	Operations []Operation `locationName:"operations" type:"list"`
-}
-
-// String returns the string representation
-func (s DetachDiskOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDetachDisk = "DetachDisk"
 
@@ -71,7 +30,7 @@ const opDetachDisk = "DetachDisk"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/DetachDisk
-func (c *Client) DetachDiskRequest(input *DetachDiskInput) DetachDiskRequest {
+func (c *Client) DetachDiskRequest(input *types.DetachDiskInput) DetachDiskRequest {
 	op := &aws.Operation{
 		Name:       opDetachDisk,
 		HTTPMethod: "POST",
@@ -79,10 +38,10 @@ func (c *Client) DetachDiskRequest(input *DetachDiskInput) DetachDiskRequest {
 	}
 
 	if input == nil {
-		input = &DetachDiskInput{}
+		input = &types.DetachDiskInput{}
 	}
 
-	req := c.newRequest(op, input, &DetachDiskOutput{})
+	req := c.newRequest(op, input, &types.DetachDiskOutput{})
 	return DetachDiskRequest{Request: req, Input: input, Copy: c.DetachDiskRequest}
 }
 
@@ -90,8 +49,8 @@ func (c *Client) DetachDiskRequest(input *DetachDiskInput) DetachDiskRequest {
 // DetachDisk API operation.
 type DetachDiskRequest struct {
 	*aws.Request
-	Input *DetachDiskInput
-	Copy  func(*DetachDiskInput) DetachDiskRequest
+	Input *types.DetachDiskInput
+	Copy  func(*types.DetachDiskInput) DetachDiskRequest
 }
 
 // Send marshals and sends the DetachDisk API request.
@@ -103,7 +62,7 @@ func (r DetachDiskRequest) Send(ctx context.Context) (*DetachDiskResponse, error
 	}
 
 	resp := &DetachDiskResponse{
-		DetachDiskOutput: r.Request.Data.(*DetachDiskOutput),
+		DetachDiskOutput: r.Request.Data.(*types.DetachDiskOutput),
 		response:         &aws.Response{Request: r.Request},
 	}
 
@@ -113,7 +72,7 @@ func (r DetachDiskRequest) Send(ctx context.Context) (*DetachDiskResponse, error
 // DetachDiskResponse is the response type for the
 // DetachDisk API operation.
 type DetachDiskResponse struct {
-	*DetachDiskOutput
+	*types.DetachDiskOutput
 
 	response *aws.Response
 }

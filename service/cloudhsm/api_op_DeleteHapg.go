@@ -6,52 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/cloudhsm/types"
 )
-
-// Contains the inputs for the DeleteHapg action.
-type DeleteHapgInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ARN of the high-availability partition group to delete.
-	//
-	// HapgArn is a required field
-	HapgArn *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteHapgInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteHapgInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteHapgInput"}
-
-	if s.HapgArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("HapgArn"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Contains the output of the DeleteHapg action.
-type DeleteHapgOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The status of the action.
-	//
-	// Status is a required field
-	Status *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteHapgOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteHapg = "DeleteHapg"
 
@@ -77,7 +33,7 @@ const opDeleteHapg = "DeleteHapg"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/DeleteHapg
-func (c *Client) DeleteHapgRequest(input *DeleteHapgInput) DeleteHapgRequest {
+func (c *Client) DeleteHapgRequest(input *types.DeleteHapgInput) DeleteHapgRequest {
 	op := &aws.Operation{
 		Name:       opDeleteHapg,
 		HTTPMethod: "POST",
@@ -85,10 +41,10 @@ func (c *Client) DeleteHapgRequest(input *DeleteHapgInput) DeleteHapgRequest {
 	}
 
 	if input == nil {
-		input = &DeleteHapgInput{}
+		input = &types.DeleteHapgInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteHapgOutput{})
+	req := c.newRequest(op, input, &types.DeleteHapgOutput{})
 	return DeleteHapgRequest{Request: req, Input: input, Copy: c.DeleteHapgRequest}
 }
 
@@ -96,8 +52,8 @@ func (c *Client) DeleteHapgRequest(input *DeleteHapgInput) DeleteHapgRequest {
 // DeleteHapg API operation.
 type DeleteHapgRequest struct {
 	*aws.Request
-	Input *DeleteHapgInput
-	Copy  func(*DeleteHapgInput) DeleteHapgRequest
+	Input *types.DeleteHapgInput
+	Copy  func(*types.DeleteHapgInput) DeleteHapgRequest
 }
 
 // Send marshals and sends the DeleteHapg API request.
@@ -109,7 +65,7 @@ func (r DeleteHapgRequest) Send(ctx context.Context) (*DeleteHapgResponse, error
 	}
 
 	resp := &DeleteHapgResponse{
-		DeleteHapgOutput: r.Request.Data.(*DeleteHapgOutput),
+		DeleteHapgOutput: r.Request.Data.(*types.DeleteHapgOutput),
 		response:         &aws.Response{Request: r.Request},
 	}
 
@@ -119,7 +75,7 @@ func (r DeleteHapgRequest) Send(ctx context.Context) (*DeleteHapgResponse, error
 // DeleteHapgResponse is the response type for the
 // DeleteHapg API operation.
 type DeleteHapgResponse struct {
-	*DeleteHapgOutput
+	*types.DeleteHapgOutput
 
 	response *aws.Response
 }

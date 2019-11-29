@@ -6,49 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/kms/types"
 )
-
-type ConnectCustomKeyStoreInput struct {
-	_ struct{} `type:"structure"`
-
-	// Enter the key store ID of the custom key store that you want to connect.
-	// To find the ID of a custom key store, use the DescribeCustomKeyStores operation.
-	//
-	// CustomKeyStoreId is a required field
-	CustomKeyStoreId *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s ConnectCustomKeyStoreInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ConnectCustomKeyStoreInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ConnectCustomKeyStoreInput"}
-
-	if s.CustomKeyStoreId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("CustomKeyStoreId"))
-	}
-	if s.CustomKeyStoreId != nil && len(*s.CustomKeyStoreId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("CustomKeyStoreId", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ConnectCustomKeyStoreOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s ConnectCustomKeyStoreOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opConnectCustomKeyStore = "ConnectCustomKeyStore"
 
@@ -102,7 +61,7 @@ const opConnectCustomKeyStore = "ConnectCustomKeyStore"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/ConnectCustomKeyStore
-func (c *Client) ConnectCustomKeyStoreRequest(input *ConnectCustomKeyStoreInput) ConnectCustomKeyStoreRequest {
+func (c *Client) ConnectCustomKeyStoreRequest(input *types.ConnectCustomKeyStoreInput) ConnectCustomKeyStoreRequest {
 	op := &aws.Operation{
 		Name:       opConnectCustomKeyStore,
 		HTTPMethod: "POST",
@@ -110,10 +69,10 @@ func (c *Client) ConnectCustomKeyStoreRequest(input *ConnectCustomKeyStoreInput)
 	}
 
 	if input == nil {
-		input = &ConnectCustomKeyStoreInput{}
+		input = &types.ConnectCustomKeyStoreInput{}
 	}
 
-	req := c.newRequest(op, input, &ConnectCustomKeyStoreOutput{})
+	req := c.newRequest(op, input, &types.ConnectCustomKeyStoreOutput{})
 	return ConnectCustomKeyStoreRequest{Request: req, Input: input, Copy: c.ConnectCustomKeyStoreRequest}
 }
 
@@ -121,8 +80,8 @@ func (c *Client) ConnectCustomKeyStoreRequest(input *ConnectCustomKeyStoreInput)
 // ConnectCustomKeyStore API operation.
 type ConnectCustomKeyStoreRequest struct {
 	*aws.Request
-	Input *ConnectCustomKeyStoreInput
-	Copy  func(*ConnectCustomKeyStoreInput) ConnectCustomKeyStoreRequest
+	Input *types.ConnectCustomKeyStoreInput
+	Copy  func(*types.ConnectCustomKeyStoreInput) ConnectCustomKeyStoreRequest
 }
 
 // Send marshals and sends the ConnectCustomKeyStore API request.
@@ -134,7 +93,7 @@ func (r ConnectCustomKeyStoreRequest) Send(ctx context.Context) (*ConnectCustomK
 	}
 
 	resp := &ConnectCustomKeyStoreResponse{
-		ConnectCustomKeyStoreOutput: r.Request.Data.(*ConnectCustomKeyStoreOutput),
+		ConnectCustomKeyStoreOutput: r.Request.Data.(*types.ConnectCustomKeyStoreOutput),
 		response:                    &aws.Response{Request: r.Request},
 	}
 
@@ -144,7 +103,7 @@ func (r ConnectCustomKeyStoreRequest) Send(ctx context.Context) (*ConnectCustomK
 // ConnectCustomKeyStoreResponse is the response type for the
 // ConnectCustomKeyStore API operation.
 type ConnectCustomKeyStoreResponse struct {
-	*ConnectCustomKeyStoreOutput
+	*types.ConnectCustomKeyStoreOutput
 
 	response *aws.Response
 }

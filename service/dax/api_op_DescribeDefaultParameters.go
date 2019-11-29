@@ -6,44 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/dax/types"
 )
-
-type DescribeDefaultParametersInput struct {
-	_ struct{} `type:"structure"`
-
-	// The maximum number of results to include in the response. If more results
-	// exist than the specified MaxResults value, a token is included in the response
-	// so that the remaining results can be retrieved.
-	//
-	// The value for MaxResults must be between 20 and 100.
-	MaxResults *int64 `type:"integer"`
-
-	// An optional token returned from a prior request. Use this token for pagination
-	// of results from this action. If this parameter is specified, the response
-	// includes only results beyond the token, up to the value specified by MaxResults.
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeDefaultParametersInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type DescribeDefaultParametersOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Provides an identifier to allow retrieval of paginated results.
-	NextToken *string `type:"string"`
-
-	// A list of parameters. Each element in the list represents one parameter.
-	Parameters []Parameter `type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeDefaultParametersOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeDefaultParameters = "DescribeDefaultParameters"
 
@@ -60,7 +24,7 @@ const opDescribeDefaultParameters = "DescribeDefaultParameters"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dax-2017-04-19/DescribeDefaultParameters
-func (c *Client) DescribeDefaultParametersRequest(input *DescribeDefaultParametersInput) DescribeDefaultParametersRequest {
+func (c *Client) DescribeDefaultParametersRequest(input *types.DescribeDefaultParametersInput) DescribeDefaultParametersRequest {
 	op := &aws.Operation{
 		Name:       opDescribeDefaultParameters,
 		HTTPMethod: "POST",
@@ -68,10 +32,10 @@ func (c *Client) DescribeDefaultParametersRequest(input *DescribeDefaultParamete
 	}
 
 	if input == nil {
-		input = &DescribeDefaultParametersInput{}
+		input = &types.DescribeDefaultParametersInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeDefaultParametersOutput{})
+	req := c.newRequest(op, input, &types.DescribeDefaultParametersOutput{})
 	return DescribeDefaultParametersRequest{Request: req, Input: input, Copy: c.DescribeDefaultParametersRequest}
 }
 
@@ -79,8 +43,8 @@ func (c *Client) DescribeDefaultParametersRequest(input *DescribeDefaultParamete
 // DescribeDefaultParameters API operation.
 type DescribeDefaultParametersRequest struct {
 	*aws.Request
-	Input *DescribeDefaultParametersInput
-	Copy  func(*DescribeDefaultParametersInput) DescribeDefaultParametersRequest
+	Input *types.DescribeDefaultParametersInput
+	Copy  func(*types.DescribeDefaultParametersInput) DescribeDefaultParametersRequest
 }
 
 // Send marshals and sends the DescribeDefaultParameters API request.
@@ -92,7 +56,7 @@ func (r DescribeDefaultParametersRequest) Send(ctx context.Context) (*DescribeDe
 	}
 
 	resp := &DescribeDefaultParametersResponse{
-		DescribeDefaultParametersOutput: r.Request.Data.(*DescribeDefaultParametersOutput),
+		DescribeDefaultParametersOutput: r.Request.Data.(*types.DescribeDefaultParametersOutput),
 		response:                        &aws.Response{Request: r.Request},
 	}
 
@@ -102,7 +66,7 @@ func (r DescribeDefaultParametersRequest) Send(ctx context.Context) (*DescribeDe
 // DescribeDefaultParametersResponse is the response type for the
 // DescribeDefaultParameters API operation.
 type DescribeDefaultParametersResponse struct {
-	*DescribeDefaultParametersOutput
+	*types.DescribeDefaultParametersOutput
 
 	response *aws.Response
 }

@@ -6,41 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/iot/types"
 )
-
-// The input for the DeleteRegistrationCode operation.
-type DeleteRegistrationCodeInput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteRegistrationCodeInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteRegistrationCodeInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	return nil
-}
-
-// The output for the DeleteRegistrationCode operation.
-type DeleteRegistrationCodeOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteRegistrationCodeOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteRegistrationCodeOutput) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
 
 const opDeleteRegistrationCode = "DeleteRegistrationCode"
 
@@ -55,7 +22,7 @@ const opDeleteRegistrationCode = "DeleteRegistrationCode"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) DeleteRegistrationCodeRequest(input *DeleteRegistrationCodeInput) DeleteRegistrationCodeRequest {
+func (c *Client) DeleteRegistrationCodeRequest(input *types.DeleteRegistrationCodeInput) DeleteRegistrationCodeRequest {
 	op := &aws.Operation{
 		Name:       opDeleteRegistrationCode,
 		HTTPMethod: "DELETE",
@@ -63,10 +30,10 @@ func (c *Client) DeleteRegistrationCodeRequest(input *DeleteRegistrationCodeInpu
 	}
 
 	if input == nil {
-		input = &DeleteRegistrationCodeInput{}
+		input = &types.DeleteRegistrationCodeInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteRegistrationCodeOutput{})
+	req := c.newRequest(op, input, &types.DeleteRegistrationCodeOutput{})
 	return DeleteRegistrationCodeRequest{Request: req, Input: input, Copy: c.DeleteRegistrationCodeRequest}
 }
 
@@ -74,8 +41,8 @@ func (c *Client) DeleteRegistrationCodeRequest(input *DeleteRegistrationCodeInpu
 // DeleteRegistrationCode API operation.
 type DeleteRegistrationCodeRequest struct {
 	*aws.Request
-	Input *DeleteRegistrationCodeInput
-	Copy  func(*DeleteRegistrationCodeInput) DeleteRegistrationCodeRequest
+	Input *types.DeleteRegistrationCodeInput
+	Copy  func(*types.DeleteRegistrationCodeInput) DeleteRegistrationCodeRequest
 }
 
 // Send marshals and sends the DeleteRegistrationCode API request.
@@ -87,7 +54,7 @@ func (r DeleteRegistrationCodeRequest) Send(ctx context.Context) (*DeleteRegistr
 	}
 
 	resp := &DeleteRegistrationCodeResponse{
-		DeleteRegistrationCodeOutput: r.Request.Data.(*DeleteRegistrationCodeOutput),
+		DeleteRegistrationCodeOutput: r.Request.Data.(*types.DeleteRegistrationCodeOutput),
 		response:                     &aws.Response{Request: r.Request},
 	}
 
@@ -97,7 +64,7 @@ func (r DeleteRegistrationCodeRequest) Send(ctx context.Context) (*DeleteRegistr
 // DeleteRegistrationCodeResponse is the response type for the
 // DeleteRegistrationCode API operation.
 type DeleteRegistrationCodeResponse struct {
-	*DeleteRegistrationCodeOutput
+	*types.DeleteRegistrationCodeOutput
 
 	response *aws.Response
 }

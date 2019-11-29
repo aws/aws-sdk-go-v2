@@ -13,6 +13,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws/awserr"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting/integration"
 	"github.com/aws/aws-sdk-go-v2/service/sns"
+	"github.com/aws/aws-sdk-go-v2/service/sns/types"
 )
 
 var _ aws.Config
@@ -24,7 +25,7 @@ func TestInteg_00_ListTopics(t *testing.T) {
 
 	cfg := integration.ConfigWithDefaultRegion("us-west-2")
 	svc := sns.New(cfg)
-	params := &sns.ListTopicsInput{}
+	params := &types.ListTopicsInput{}
 
 	req := svc.ListTopicsRequest(params)
 
@@ -39,7 +40,7 @@ func TestInteg_01_Publish(t *testing.T) {
 
 	cfg := integration.ConfigWithDefaultRegion("us-west-2")
 	svc := sns.New(cfg)
-	params := &sns.PublishInput{
+	params := &types.PublishInput{
 		Message:  aws.String("hello"),
 		TopicArn: aws.String("fake_topic"),
 	}

@@ -6,97 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/securityhub/types"
 )
-
-type ListInvitationsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The maximum number of items that you want in the response.
-	MaxResults *int64 `location:"querystring" locationName:"MaxResults" min:"1" type:"integer"`
-
-	// Paginates results. On your first call to the ListInvitations operation, set
-	// the value of this parameter to NULL. For subsequent calls to the operation,
-	// fill nextToken in the request with the value of NextToken from the previous
-	// response to continue listing data.
-	NextToken *string `location:"querystring" locationName:"NextToken" type:"string"`
-}
-
-// String returns the string representation
-func (s ListInvitationsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListInvitationsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListInvitationsInput"}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListInvitationsInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.MaxResults != nil {
-		v := *s.MaxResults
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "MaxResults", protocol.Int64Value(v), metadata)
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type ListInvitationsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The details of the invitations returned by the operation.
-	Invitations []Invitation `type:"list"`
-
-	// The token that is required for pagination.
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s ListInvitationsOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListInvitationsOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.Invitations != nil {
-		v := s.Invitations
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "Invitations", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opListInvitations = "ListInvitations"
 
@@ -114,7 +25,7 @@ const opListInvitations = "ListInvitations"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ListInvitations
-func (c *Client) ListInvitationsRequest(input *ListInvitationsInput) ListInvitationsRequest {
+func (c *Client) ListInvitationsRequest(input *types.ListInvitationsInput) ListInvitationsRequest {
 	op := &aws.Operation{
 		Name:       opListInvitations,
 		HTTPMethod: "GET",
@@ -122,10 +33,10 @@ func (c *Client) ListInvitationsRequest(input *ListInvitationsInput) ListInvitat
 	}
 
 	if input == nil {
-		input = &ListInvitationsInput{}
+		input = &types.ListInvitationsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListInvitationsOutput{})
+	req := c.newRequest(op, input, &types.ListInvitationsOutput{})
 	return ListInvitationsRequest{Request: req, Input: input, Copy: c.ListInvitationsRequest}
 }
 
@@ -133,8 +44,8 @@ func (c *Client) ListInvitationsRequest(input *ListInvitationsInput) ListInvitat
 // ListInvitations API operation.
 type ListInvitationsRequest struct {
 	*aws.Request
-	Input *ListInvitationsInput
-	Copy  func(*ListInvitationsInput) ListInvitationsRequest
+	Input *types.ListInvitationsInput
+	Copy  func(*types.ListInvitationsInput) ListInvitationsRequest
 }
 
 // Send marshals and sends the ListInvitations API request.
@@ -146,7 +57,7 @@ func (r ListInvitationsRequest) Send(ctx context.Context) (*ListInvitationsRespo
 	}
 
 	resp := &ListInvitationsResponse{
-		ListInvitationsOutput: r.Request.Data.(*ListInvitationsOutput),
+		ListInvitationsOutput: r.Request.Data.(*types.ListInvitationsOutput),
 		response:              &aws.Response{Request: r.Request},
 	}
 
@@ -156,7 +67,7 @@ func (r ListInvitationsRequest) Send(ctx context.Context) (*ListInvitationsRespo
 // ListInvitationsResponse is the response type for the
 // ListInvitations API operation.
 type ListInvitationsResponse struct {
-	*ListInvitationsOutput
+	*types.ListInvitationsOutput
 
 	response *aws.Response
 }

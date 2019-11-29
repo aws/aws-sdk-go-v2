@@ -13,6 +13,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws/awserr"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting/integration"
 	"github.com/aws/aws-sdk-go-v2/service/applicationdiscoveryservice"
+	"github.com/aws/aws-sdk-go-v2/service/applicationdiscoveryservice/types"
 )
 
 var _ aws.Config
@@ -24,7 +25,7 @@ func TestInteg_00_DescribeAgents(t *testing.T) {
 
 	cfg := integration.ConfigWithDefaultRegion("us-west-2")
 	svc := applicationdiscoveryservice.New(cfg)
-	params := &applicationdiscoveryservice.DescribeAgentsInput{}
+	params := &types.DescribeAgentsInput{}
 
 	req := svc.DescribeAgentsRequest(params)
 

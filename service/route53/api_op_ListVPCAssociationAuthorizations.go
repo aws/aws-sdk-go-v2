@@ -6,133 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/route53/types"
 )
-
-// A complex type that contains information about that can be associated with
-// your hosted zone.
-type ListVPCAssociationAuthorizationsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the hosted zone for which you want a list of VPCs that can be associated
-	// with the hosted zone.
-	//
-	// HostedZoneId is a required field
-	HostedZoneId *string `location:"uri" locationName:"Id" type:"string" required:"true"`
-
-	// Optional: An integer that specifies the maximum number of VPCs that you want
-	// Amazon Route 53 to return. If you don't specify a value for MaxResults, Route
-	// 53 returns up to 50 VPCs per page.
-	MaxResults *string `location:"querystring" locationName:"maxresults" type:"string"`
-
-	// Optional: If a response includes a NextToken element, there are more VPCs
-	// that can be associated with the specified hosted zone. To get the next page
-	// of results, submit another request, and include the value of NextToken from
-	// the response in the nexttoken parameter in another ListVPCAssociationAuthorizations
-	// request.
-	NextToken *string `location:"querystring" locationName:"nexttoken" type:"string"`
-}
-
-// String returns the string representation
-func (s ListVPCAssociationAuthorizationsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListVPCAssociationAuthorizationsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListVPCAssociationAuthorizationsInput"}
-
-	if s.HostedZoneId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("HostedZoneId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListVPCAssociationAuthorizationsInput) MarshalFields(e protocol.FieldEncoder) error {
-
-	if s.HostedZoneId != nil {
-		v := *s.HostedZoneId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "Id", protocol.StringValue(v), metadata)
-	}
-	if s.MaxResults != nil {
-		v := *s.MaxResults
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "maxresults", protocol.StringValue(v), metadata)
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "nexttoken", protocol.StringValue(v), metadata)
-	}
-	return nil
-}
-
-// A complex type that contains the response information for the request.
-type ListVPCAssociationAuthorizationsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the hosted zone that you can associate the listed VPCs with.
-	//
-	// HostedZoneId is a required field
-	HostedZoneId *string `type:"string" required:"true"`
-
-	// When the response includes a NextToken element, there are more VPCs that
-	// can be associated with the specified hosted zone. To get the next page of
-	// VPCs, submit another ListVPCAssociationAuthorizations request, and include
-	// the value of the NextToken element from the response in the nexttoken request
-	// parameter.
-	NextToken *string `type:"string"`
-
-	// The list of VPCs that are authorized to be associated with the specified
-	// hosted zone.
-	//
-	// VPCs is a required field
-	VPCs []VPC `locationNameList:"VPC" min:"1" type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s ListVPCAssociationAuthorizationsOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListVPCAssociationAuthorizationsOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.HostedZoneId != nil {
-		v := *s.HostedZoneId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "HostedZoneId", protocol.StringValue(v), metadata)
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "NextToken", protocol.StringValue(v), metadata)
-	}
-	if s.VPCs != nil {
-		v := s.VPCs
-
-		metadata := protocol.Metadata{ListLocationName: "VPC"}
-		ls0 := e.List(protocol.BodyTarget, "VPCs", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	return nil
-}
 
 const opListVPCAssociationAuthorizations = "ListVPCAssociationAuthorizations"
 
@@ -154,7 +29,7 @@ const opListVPCAssociationAuthorizations = "ListVPCAssociationAuthorizations"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/ListVPCAssociationAuthorizations
-func (c *Client) ListVPCAssociationAuthorizationsRequest(input *ListVPCAssociationAuthorizationsInput) ListVPCAssociationAuthorizationsRequest {
+func (c *Client) ListVPCAssociationAuthorizationsRequest(input *types.ListVPCAssociationAuthorizationsInput) ListVPCAssociationAuthorizationsRequest {
 	op := &aws.Operation{
 		Name:       opListVPCAssociationAuthorizations,
 		HTTPMethod: "GET",
@@ -162,10 +37,10 @@ func (c *Client) ListVPCAssociationAuthorizationsRequest(input *ListVPCAssociati
 	}
 
 	if input == nil {
-		input = &ListVPCAssociationAuthorizationsInput{}
+		input = &types.ListVPCAssociationAuthorizationsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListVPCAssociationAuthorizationsOutput{})
+	req := c.newRequest(op, input, &types.ListVPCAssociationAuthorizationsOutput{})
 	return ListVPCAssociationAuthorizationsRequest{Request: req, Input: input, Copy: c.ListVPCAssociationAuthorizationsRequest}
 }
 
@@ -173,8 +48,8 @@ func (c *Client) ListVPCAssociationAuthorizationsRequest(input *ListVPCAssociati
 // ListVPCAssociationAuthorizations API operation.
 type ListVPCAssociationAuthorizationsRequest struct {
 	*aws.Request
-	Input *ListVPCAssociationAuthorizationsInput
-	Copy  func(*ListVPCAssociationAuthorizationsInput) ListVPCAssociationAuthorizationsRequest
+	Input *types.ListVPCAssociationAuthorizationsInput
+	Copy  func(*types.ListVPCAssociationAuthorizationsInput) ListVPCAssociationAuthorizationsRequest
 }
 
 // Send marshals and sends the ListVPCAssociationAuthorizations API request.
@@ -186,7 +61,7 @@ func (r ListVPCAssociationAuthorizationsRequest) Send(ctx context.Context) (*Lis
 	}
 
 	resp := &ListVPCAssociationAuthorizationsResponse{
-		ListVPCAssociationAuthorizationsOutput: r.Request.Data.(*ListVPCAssociationAuthorizationsOutput),
+		ListVPCAssociationAuthorizationsOutput: r.Request.Data.(*types.ListVPCAssociationAuthorizationsOutput),
 		response:                               &aws.Response{Request: r.Request},
 	}
 
@@ -196,7 +71,7 @@ func (r ListVPCAssociationAuthorizationsRequest) Send(ctx context.Context) (*Lis
 // ListVPCAssociationAuthorizationsResponse is the response type for the
 // ListVPCAssociationAuthorizations API operation.
 type ListVPCAssociationAuthorizationsResponse struct {
-	*ListVPCAssociationAuthorizationsOutput
+	*types.ListVPCAssociationAuthorizationsOutput
 
 	response *aws.Response
 }

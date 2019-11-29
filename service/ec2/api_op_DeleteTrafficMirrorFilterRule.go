@@ -6,54 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-type DeleteTrafficMirrorFilterRuleInput struct {
-	_ struct{} `type:"structure"`
-
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have
-	// the required permissions, the error response is DryRunOperation. Otherwise,
-	// it is UnauthorizedOperation.
-	DryRun *bool `type:"boolean"`
-
-	// The ID of the Traffic Mirror rule.
-	//
-	// TrafficMirrorFilterRuleId is a required field
-	TrafficMirrorFilterRuleId *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteTrafficMirrorFilterRuleInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteTrafficMirrorFilterRuleInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteTrafficMirrorFilterRuleInput"}
-
-	if s.TrafficMirrorFilterRuleId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("TrafficMirrorFilterRuleId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteTrafficMirrorFilterRuleOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the deleted Traffic Mirror rule.
-	TrafficMirrorFilterRuleId *string `locationName:"trafficMirrorFilterRuleId" type:"string"`
-}
-
-// String returns the string representation
-func (s DeleteTrafficMirrorFilterRuleOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteTrafficMirrorFilterRule = "DeleteTrafficMirrorFilterRule"
 
@@ -70,7 +24,7 @@ const opDeleteTrafficMirrorFilterRule = "DeleteTrafficMirrorFilterRule"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteTrafficMirrorFilterRule
-func (c *Client) DeleteTrafficMirrorFilterRuleRequest(input *DeleteTrafficMirrorFilterRuleInput) DeleteTrafficMirrorFilterRuleRequest {
+func (c *Client) DeleteTrafficMirrorFilterRuleRequest(input *types.DeleteTrafficMirrorFilterRuleInput) DeleteTrafficMirrorFilterRuleRequest {
 	op := &aws.Operation{
 		Name:       opDeleteTrafficMirrorFilterRule,
 		HTTPMethod: "POST",
@@ -78,10 +32,10 @@ func (c *Client) DeleteTrafficMirrorFilterRuleRequest(input *DeleteTrafficMirror
 	}
 
 	if input == nil {
-		input = &DeleteTrafficMirrorFilterRuleInput{}
+		input = &types.DeleteTrafficMirrorFilterRuleInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteTrafficMirrorFilterRuleOutput{})
+	req := c.newRequest(op, input, &types.DeleteTrafficMirrorFilterRuleOutput{})
 	return DeleteTrafficMirrorFilterRuleRequest{Request: req, Input: input, Copy: c.DeleteTrafficMirrorFilterRuleRequest}
 }
 
@@ -89,8 +43,8 @@ func (c *Client) DeleteTrafficMirrorFilterRuleRequest(input *DeleteTrafficMirror
 // DeleteTrafficMirrorFilterRule API operation.
 type DeleteTrafficMirrorFilterRuleRequest struct {
 	*aws.Request
-	Input *DeleteTrafficMirrorFilterRuleInput
-	Copy  func(*DeleteTrafficMirrorFilterRuleInput) DeleteTrafficMirrorFilterRuleRequest
+	Input *types.DeleteTrafficMirrorFilterRuleInput
+	Copy  func(*types.DeleteTrafficMirrorFilterRuleInput) DeleteTrafficMirrorFilterRuleRequest
 }
 
 // Send marshals and sends the DeleteTrafficMirrorFilterRule API request.
@@ -102,7 +56,7 @@ func (r DeleteTrafficMirrorFilterRuleRequest) Send(ctx context.Context) (*Delete
 	}
 
 	resp := &DeleteTrafficMirrorFilterRuleResponse{
-		DeleteTrafficMirrorFilterRuleOutput: r.Request.Data.(*DeleteTrafficMirrorFilterRuleOutput),
+		DeleteTrafficMirrorFilterRuleOutput: r.Request.Data.(*types.DeleteTrafficMirrorFilterRuleOutput),
 		response:                            &aws.Response{Request: r.Request},
 	}
 
@@ -112,7 +66,7 @@ func (r DeleteTrafficMirrorFilterRuleRequest) Send(ctx context.Context) (*Delete
 // DeleteTrafficMirrorFilterRuleResponse is the response type for the
 // DeleteTrafficMirrorFilterRule API operation.
 type DeleteTrafficMirrorFilterRuleResponse struct {
-	*DeleteTrafficMirrorFilterRuleOutput
+	*types.DeleteTrafficMirrorFilterRuleOutput
 
 	response *aws.Response
 }

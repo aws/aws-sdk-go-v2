@@ -6,73 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/chime/types"
 )
-
-type GetPhoneNumberOrderInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID for the phone number order.
-	//
-	// PhoneNumberOrderId is a required field
-	PhoneNumberOrderId *string `location:"uri" locationName:"phoneNumberOrderId" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetPhoneNumberOrderInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetPhoneNumberOrderInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetPhoneNumberOrderInput"}
-
-	if s.PhoneNumberOrderId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("PhoneNumberOrderId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetPhoneNumberOrderInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.PhoneNumberOrderId != nil {
-		v := *s.PhoneNumberOrderId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "phoneNumberOrderId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type GetPhoneNumberOrderOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The phone number order details.
-	PhoneNumberOrder *PhoneNumberOrder `type:"structure"`
-}
-
-// String returns the string representation
-func (s GetPhoneNumberOrderOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetPhoneNumberOrderOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.PhoneNumberOrder != nil {
-		v := s.PhoneNumberOrder
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "PhoneNumberOrder", v, metadata)
-	}
-	return nil
-}
 
 const opGetPhoneNumberOrder = "GetPhoneNumberOrder"
 
@@ -90,7 +25,7 @@ const opGetPhoneNumberOrder = "GetPhoneNumberOrder"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/GetPhoneNumberOrder
-func (c *Client) GetPhoneNumberOrderRequest(input *GetPhoneNumberOrderInput) GetPhoneNumberOrderRequest {
+func (c *Client) GetPhoneNumberOrderRequest(input *types.GetPhoneNumberOrderInput) GetPhoneNumberOrderRequest {
 	op := &aws.Operation{
 		Name:       opGetPhoneNumberOrder,
 		HTTPMethod: "GET",
@@ -98,10 +33,10 @@ func (c *Client) GetPhoneNumberOrderRequest(input *GetPhoneNumberOrderInput) Get
 	}
 
 	if input == nil {
-		input = &GetPhoneNumberOrderInput{}
+		input = &types.GetPhoneNumberOrderInput{}
 	}
 
-	req := c.newRequest(op, input, &GetPhoneNumberOrderOutput{})
+	req := c.newRequest(op, input, &types.GetPhoneNumberOrderOutput{})
 	return GetPhoneNumberOrderRequest{Request: req, Input: input, Copy: c.GetPhoneNumberOrderRequest}
 }
 
@@ -109,8 +44,8 @@ func (c *Client) GetPhoneNumberOrderRequest(input *GetPhoneNumberOrderInput) Get
 // GetPhoneNumberOrder API operation.
 type GetPhoneNumberOrderRequest struct {
 	*aws.Request
-	Input *GetPhoneNumberOrderInput
-	Copy  func(*GetPhoneNumberOrderInput) GetPhoneNumberOrderRequest
+	Input *types.GetPhoneNumberOrderInput
+	Copy  func(*types.GetPhoneNumberOrderInput) GetPhoneNumberOrderRequest
 }
 
 // Send marshals and sends the GetPhoneNumberOrder API request.
@@ -122,7 +57,7 @@ func (r GetPhoneNumberOrderRequest) Send(ctx context.Context) (*GetPhoneNumberOr
 	}
 
 	resp := &GetPhoneNumberOrderResponse{
-		GetPhoneNumberOrderOutput: r.Request.Data.(*GetPhoneNumberOrderOutput),
+		GetPhoneNumberOrderOutput: r.Request.Data.(*types.GetPhoneNumberOrderOutput),
 		response:                  &aws.Response{Request: r.Request},
 	}
 
@@ -132,7 +67,7 @@ func (r GetPhoneNumberOrderRequest) Send(ctx context.Context) (*GetPhoneNumberOr
 // GetPhoneNumberOrderResponse is the response type for the
 // GetPhoneNumberOrder API operation.
 type GetPhoneNumberOrderResponse struct {
-	*GetPhoneNumberOrderOutput
+	*types.GetPhoneNumberOrderOutput
 
 	response *aws.Response
 }

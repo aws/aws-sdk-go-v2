@@ -6,55 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/cloudhsm/types"
 )
-
-type ModifyHapgInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ARN of the high-availability partition group to modify.
-	//
-	// HapgArn is a required field
-	HapgArn *string `type:"string" required:"true"`
-
-	// The new label for the high-availability partition group.
-	Label *string `type:"string"`
-
-	// The list of partition serial numbers to make members of the high-availability
-	// partition group.
-	PartitionSerialList []string `type:"list"`
-}
-
-// String returns the string representation
-func (s ModifyHapgInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ModifyHapgInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ModifyHapgInput"}
-
-	if s.HapgArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("HapgArn"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ModifyHapgOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The ARN of the high-availability partition group.
-	HapgArn *string `type:"string"`
-}
-
-// String returns the string representation
-func (s ModifyHapgOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opModifyHapg = "ModifyHapg"
 
@@ -80,7 +33,7 @@ const opModifyHapg = "ModifyHapg"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/ModifyHapg
-func (c *Client) ModifyHapgRequest(input *ModifyHapgInput) ModifyHapgRequest {
+func (c *Client) ModifyHapgRequest(input *types.ModifyHapgInput) ModifyHapgRequest {
 	op := &aws.Operation{
 		Name:       opModifyHapg,
 		HTTPMethod: "POST",
@@ -88,10 +41,10 @@ func (c *Client) ModifyHapgRequest(input *ModifyHapgInput) ModifyHapgRequest {
 	}
 
 	if input == nil {
-		input = &ModifyHapgInput{}
+		input = &types.ModifyHapgInput{}
 	}
 
-	req := c.newRequest(op, input, &ModifyHapgOutput{})
+	req := c.newRequest(op, input, &types.ModifyHapgOutput{})
 	return ModifyHapgRequest{Request: req, Input: input, Copy: c.ModifyHapgRequest}
 }
 
@@ -99,8 +52,8 @@ func (c *Client) ModifyHapgRequest(input *ModifyHapgInput) ModifyHapgRequest {
 // ModifyHapg API operation.
 type ModifyHapgRequest struct {
 	*aws.Request
-	Input *ModifyHapgInput
-	Copy  func(*ModifyHapgInput) ModifyHapgRequest
+	Input *types.ModifyHapgInput
+	Copy  func(*types.ModifyHapgInput) ModifyHapgRequest
 }
 
 // Send marshals and sends the ModifyHapg API request.
@@ -112,7 +65,7 @@ func (r ModifyHapgRequest) Send(ctx context.Context) (*ModifyHapgResponse, error
 	}
 
 	resp := &ModifyHapgResponse{
-		ModifyHapgOutput: r.Request.Data.(*ModifyHapgOutput),
+		ModifyHapgOutput: r.Request.Data.(*types.ModifyHapgOutput),
 		response:         &aws.Response{Request: r.Request},
 	}
 
@@ -122,7 +75,7 @@ func (r ModifyHapgRequest) Send(ctx context.Context) (*ModifyHapgResponse, error
 // ModifyHapgResponse is the response type for the
 // ModifyHapg API operation.
 type ModifyHapgResponse struct {
-	*ModifyHapgOutput
+	*types.ModifyHapgOutput
 
 	response *aws.Response
 }

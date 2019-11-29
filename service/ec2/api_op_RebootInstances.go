@@ -6,53 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/ec2query"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-type RebootInstancesInput struct {
-	_ struct{} `type:"structure"`
-
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have
-	// the required permissions, the error response is DryRunOperation. Otherwise,
-	// it is UnauthorizedOperation.
-	DryRun *bool `locationName:"dryRun" type:"boolean"`
-
-	// The instance IDs.
-	//
-	// InstanceIds is a required field
-	InstanceIds []string `locationName:"InstanceId" locationNameList:"InstanceId" type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s RebootInstancesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *RebootInstancesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "RebootInstancesInput"}
-
-	if s.InstanceIds == nil {
-		invalidParams.Add(aws.NewErrParamRequired("InstanceIds"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type RebootInstancesOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s RebootInstancesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opRebootInstances = "RebootInstances"
 
@@ -79,7 +36,7 @@ const opRebootInstances = "RebootInstances"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/RebootInstances
-func (c *Client) RebootInstancesRequest(input *RebootInstancesInput) RebootInstancesRequest {
+func (c *Client) RebootInstancesRequest(input *types.RebootInstancesInput) RebootInstancesRequest {
 	op := &aws.Operation{
 		Name:       opRebootInstances,
 		HTTPMethod: "POST",
@@ -87,10 +44,10 @@ func (c *Client) RebootInstancesRequest(input *RebootInstancesInput) RebootInsta
 	}
 
 	if input == nil {
-		input = &RebootInstancesInput{}
+		input = &types.RebootInstancesInput{}
 	}
 
-	req := c.newRequest(op, input, &RebootInstancesOutput{})
+	req := c.newRequest(op, input, &types.RebootInstancesOutput{})
 	req.Handlers.Unmarshal.Remove(ec2query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return RebootInstancesRequest{Request: req, Input: input, Copy: c.RebootInstancesRequest}
@@ -100,8 +57,8 @@ func (c *Client) RebootInstancesRequest(input *RebootInstancesInput) RebootInsta
 // RebootInstances API operation.
 type RebootInstancesRequest struct {
 	*aws.Request
-	Input *RebootInstancesInput
-	Copy  func(*RebootInstancesInput) RebootInstancesRequest
+	Input *types.RebootInstancesInput
+	Copy  func(*types.RebootInstancesInput) RebootInstancesRequest
 }
 
 // Send marshals and sends the RebootInstances API request.
@@ -113,7 +70,7 @@ func (r RebootInstancesRequest) Send(ctx context.Context) (*RebootInstancesRespo
 	}
 
 	resp := &RebootInstancesResponse{
-		RebootInstancesOutput: r.Request.Data.(*RebootInstancesOutput),
+		RebootInstancesOutput: r.Request.Data.(*types.RebootInstancesOutput),
 		response:              &aws.Response{Request: r.Request},
 	}
 
@@ -123,7 +80,7 @@ func (r RebootInstancesRequest) Send(ctx context.Context) (*RebootInstancesRespo
 // RebootInstancesResponse is the response type for the
 // RebootInstances API operation.
 type RebootInstancesResponse struct {
-	*RebootInstancesOutput
+	*types.RebootInstancesOutput
 
 	response *aws.Response
 }

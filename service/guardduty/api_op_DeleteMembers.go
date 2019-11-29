@@ -6,109 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/guardduty/types"
 )
-
-type DeleteMembersInput struct {
-	_ struct{} `type:"structure"`
-
-	// A list of account IDs of the GuardDuty member accounts that you want to delete.
-	//
-	// AccountIds is a required field
-	AccountIds []string `locationName:"accountIds" min:"1" type:"list" required:"true"`
-
-	// The unique ID of the detector of the GuardDuty account whose members you
-	// want to delete.
-	//
-	// DetectorId is a required field
-	DetectorId *string `location:"uri" locationName:"detectorId" min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteMembersInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteMembersInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteMembersInput"}
-
-	if s.AccountIds == nil {
-		invalidParams.Add(aws.NewErrParamRequired("AccountIds"))
-	}
-	if s.AccountIds != nil && len(s.AccountIds) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("AccountIds", 1))
-	}
-
-	if s.DetectorId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DetectorId"))
-	}
-	if s.DetectorId != nil && len(*s.DetectorId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("DetectorId", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteMembersInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.AccountIds != nil {
-		v := s.AccountIds
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "accountIds", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
-		}
-		ls0.End()
-
-	}
-	if s.DetectorId != nil {
-		v := *s.DetectorId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "detectorId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type DeleteMembersOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The accounts that could not be processed.
-	//
-	// UnprocessedAccounts is a required field
-	UnprocessedAccounts []UnprocessedAccount `locationName:"unprocessedAccounts" type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteMembersOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteMembersOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.UnprocessedAccounts != nil {
-		v := s.UnprocessedAccounts
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "unprocessedAccounts", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	return nil
-}
 
 const opDeleteMembers = "DeleteMembers"
 
@@ -126,7 +25,7 @@ const opDeleteMembers = "DeleteMembers"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DeleteMembers
-func (c *Client) DeleteMembersRequest(input *DeleteMembersInput) DeleteMembersRequest {
+func (c *Client) DeleteMembersRequest(input *types.DeleteMembersInput) DeleteMembersRequest {
 	op := &aws.Operation{
 		Name:       opDeleteMembers,
 		HTTPMethod: "POST",
@@ -134,10 +33,10 @@ func (c *Client) DeleteMembersRequest(input *DeleteMembersInput) DeleteMembersRe
 	}
 
 	if input == nil {
-		input = &DeleteMembersInput{}
+		input = &types.DeleteMembersInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteMembersOutput{})
+	req := c.newRequest(op, input, &types.DeleteMembersOutput{})
 	return DeleteMembersRequest{Request: req, Input: input, Copy: c.DeleteMembersRequest}
 }
 
@@ -145,8 +44,8 @@ func (c *Client) DeleteMembersRequest(input *DeleteMembersInput) DeleteMembersRe
 // DeleteMembers API operation.
 type DeleteMembersRequest struct {
 	*aws.Request
-	Input *DeleteMembersInput
-	Copy  func(*DeleteMembersInput) DeleteMembersRequest
+	Input *types.DeleteMembersInput
+	Copy  func(*types.DeleteMembersInput) DeleteMembersRequest
 }
 
 // Send marshals and sends the DeleteMembers API request.
@@ -158,7 +57,7 @@ func (r DeleteMembersRequest) Send(ctx context.Context) (*DeleteMembersResponse,
 	}
 
 	resp := &DeleteMembersResponse{
-		DeleteMembersOutput: r.Request.Data.(*DeleteMembersOutput),
+		DeleteMembersOutput: r.Request.Data.(*types.DeleteMembersOutput),
 		response:            &aws.Response{Request: r.Request},
 	}
 
@@ -168,7 +67,7 @@ func (r DeleteMembersRequest) Send(ctx context.Context) (*DeleteMembersResponse,
 // DeleteMembersResponse is the response type for the
 // DeleteMembers API operation.
 type DeleteMembersResponse struct {
-	*DeleteMembersOutput
+	*types.DeleteMembersOutput
 
 	response *aws.Response
 }

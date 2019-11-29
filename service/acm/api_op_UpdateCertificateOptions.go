@@ -6,65 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
+	"github.com/aws/aws-sdk-go-v2/service/acm/types"
 )
-
-type UpdateCertificateOptionsInput struct {
-	_ struct{} `type:"structure"`
-
-	// ARN of the requested certificate to update. This must be of the form:
-	//
-	// arn:aws:acm:us-east-1:account:certificate/12345678-1234-1234-1234-123456789012
-	//
-	// CertificateArn is a required field
-	CertificateArn *string `min:"20" type:"string" required:"true"`
-
-	// Use to update the options for your certificate. Currently, you can specify
-	// whether to add your certificate to a transparency log. Certificate transparency
-	// makes it possible to detect SSL/TLS certificates that have been mistakenly
-	// or maliciously issued. Certificates that have not been logged typically produce
-	// an error message in a browser.
-	//
-	// Options is a required field
-	Options *CertificateOptions `type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s UpdateCertificateOptionsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateCertificateOptionsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateCertificateOptionsInput"}
-
-	if s.CertificateArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("CertificateArn"))
-	}
-	if s.CertificateArn != nil && len(*s.CertificateArn) < 20 {
-		invalidParams.Add(aws.NewErrParamMinLen("CertificateArn", 20))
-	}
-
-	if s.Options == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Options"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type UpdateCertificateOptionsOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s UpdateCertificateOptionsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opUpdateCertificateOptions = "UpdateCertificateOptions"
 
@@ -84,7 +29,7 @@ const opUpdateCertificateOptions = "UpdateCertificateOptions"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/UpdateCertificateOptions
-func (c *Client) UpdateCertificateOptionsRequest(input *UpdateCertificateOptionsInput) UpdateCertificateOptionsRequest {
+func (c *Client) UpdateCertificateOptionsRequest(input *types.UpdateCertificateOptionsInput) UpdateCertificateOptionsRequest {
 	op := &aws.Operation{
 		Name:       opUpdateCertificateOptions,
 		HTTPMethod: "POST",
@@ -92,10 +37,10 @@ func (c *Client) UpdateCertificateOptionsRequest(input *UpdateCertificateOptions
 	}
 
 	if input == nil {
-		input = &UpdateCertificateOptionsInput{}
+		input = &types.UpdateCertificateOptionsInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateCertificateOptionsOutput{})
+	req := c.newRequest(op, input, &types.UpdateCertificateOptionsOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return UpdateCertificateOptionsRequest{Request: req, Input: input, Copy: c.UpdateCertificateOptionsRequest}
@@ -105,8 +50,8 @@ func (c *Client) UpdateCertificateOptionsRequest(input *UpdateCertificateOptions
 // UpdateCertificateOptions API operation.
 type UpdateCertificateOptionsRequest struct {
 	*aws.Request
-	Input *UpdateCertificateOptionsInput
-	Copy  func(*UpdateCertificateOptionsInput) UpdateCertificateOptionsRequest
+	Input *types.UpdateCertificateOptionsInput
+	Copy  func(*types.UpdateCertificateOptionsInput) UpdateCertificateOptionsRequest
 }
 
 // Send marshals and sends the UpdateCertificateOptions API request.
@@ -118,7 +63,7 @@ func (r UpdateCertificateOptionsRequest) Send(ctx context.Context) (*UpdateCerti
 	}
 
 	resp := &UpdateCertificateOptionsResponse{
-		UpdateCertificateOptionsOutput: r.Request.Data.(*UpdateCertificateOptionsOutput),
+		UpdateCertificateOptionsOutput: r.Request.Data.(*types.UpdateCertificateOptionsOutput),
 		response:                       &aws.Response{Request: r.Request},
 	}
 
@@ -128,7 +73,7 @@ func (r UpdateCertificateOptionsRequest) Send(ctx context.Context) (*UpdateCerti
 // UpdateCertificateOptionsResponse is the response type for the
 // UpdateCertificateOptions API operation.
 type UpdateCertificateOptionsResponse struct {
-	*UpdateCertificateOptionsOutput
+	*types.UpdateCertificateOptionsOutput
 
 	response *aws.Response
 }

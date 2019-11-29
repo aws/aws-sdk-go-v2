@@ -13,6 +13,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws/awserr"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting/integration"
 	"github.com/aws/aws-sdk-go-v2/service/cloudhsmv2"
+	"github.com/aws/aws-sdk-go-v2/service/cloudhsmv2/types"
 )
 
 var _ aws.Config
@@ -24,7 +25,7 @@ func TestInteg_00_DescribeClusters(t *testing.T) {
 
 	cfg := integration.ConfigWithDefaultRegion("us-west-2")
 	svc := cloudhsmv2.New(cfg)
-	params := &cloudhsmv2.DescribeClustersInput{}
+	params := &types.DescribeClustersInput{}
 
 	req := svc.DescribeClustersRequest(params)
 
@@ -39,7 +40,7 @@ func TestInteg_01_ListTags(t *testing.T) {
 
 	cfg := integration.ConfigWithDefaultRegion("us-west-2")
 	svc := cloudhsmv2.New(cfg)
-	params := &cloudhsmv2.ListTagsInput{
+	params := &types.ListTagsInput{
 		ResourceId: aws.String("bogus-arn"),
 	}
 

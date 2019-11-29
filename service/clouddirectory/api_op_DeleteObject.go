@@ -6,80 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/clouddirectory/types"
 )
-
-type DeleteObjectInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) that is associated with the Directory where
-	// the object resides. For more information, see arns.
-	//
-	// DirectoryArn is a required field
-	DirectoryArn *string `location:"header" locationName:"x-amz-data-partition" type:"string" required:"true"`
-
-	// A reference that identifies the object.
-	//
-	// ObjectReference is a required field
-	ObjectReference *ObjectReference `type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteObjectInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteObjectInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteObjectInput"}
-
-	if s.DirectoryArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DirectoryArn"))
-	}
-
-	if s.ObjectReference == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ObjectReference"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteObjectInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.ObjectReference != nil {
-		v := s.ObjectReference
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "ObjectReference", v, metadata)
-	}
-	if s.DirectoryArn != nil {
-		v := *s.DirectoryArn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "x-amz-data-partition", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type DeleteObjectOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteObjectOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteObjectOutput) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
 
 const opDeleteObject = "DeleteObject"
 
@@ -99,7 +27,7 @@ const opDeleteObject = "DeleteObject"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/DeleteObject
-func (c *Client) DeleteObjectRequest(input *DeleteObjectInput) DeleteObjectRequest {
+func (c *Client) DeleteObjectRequest(input *types.DeleteObjectInput) DeleteObjectRequest {
 	op := &aws.Operation{
 		Name:       opDeleteObject,
 		HTTPMethod: "PUT",
@@ -107,10 +35,10 @@ func (c *Client) DeleteObjectRequest(input *DeleteObjectInput) DeleteObjectReque
 	}
 
 	if input == nil {
-		input = &DeleteObjectInput{}
+		input = &types.DeleteObjectInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteObjectOutput{})
+	req := c.newRequest(op, input, &types.DeleteObjectOutput{})
 	return DeleteObjectRequest{Request: req, Input: input, Copy: c.DeleteObjectRequest}
 }
 
@@ -118,8 +46,8 @@ func (c *Client) DeleteObjectRequest(input *DeleteObjectInput) DeleteObjectReque
 // DeleteObject API operation.
 type DeleteObjectRequest struct {
 	*aws.Request
-	Input *DeleteObjectInput
-	Copy  func(*DeleteObjectInput) DeleteObjectRequest
+	Input *types.DeleteObjectInput
+	Copy  func(*types.DeleteObjectInput) DeleteObjectRequest
 }
 
 // Send marshals and sends the DeleteObject API request.
@@ -131,7 +59,7 @@ func (r DeleteObjectRequest) Send(ctx context.Context) (*DeleteObjectResponse, e
 	}
 
 	resp := &DeleteObjectResponse{
-		DeleteObjectOutput: r.Request.Data.(*DeleteObjectOutput),
+		DeleteObjectOutput: r.Request.Data.(*types.DeleteObjectOutput),
 		response:           &aws.Response{Request: r.Request},
 	}
 
@@ -141,7 +69,7 @@ func (r DeleteObjectRequest) Send(ctx context.Context) (*DeleteObjectResponse, e
 // DeleteObjectResponse is the response type for the
 // DeleteObject API operation.
 type DeleteObjectResponse struct {
-	*DeleteObjectOutput
+	*types.DeleteObjectOutput
 
 	response *aws.Response
 }

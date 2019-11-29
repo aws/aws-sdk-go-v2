@@ -6,54 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/storagegateway/types"
 )
-
-// DisableGatewayInput
-type DisableGatewayInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation
-	// to return a list of gateways for your account and AWS Region.
-	//
-	// GatewayARN is a required field
-	GatewayARN *string `min:"50" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DisableGatewayInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DisableGatewayInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DisableGatewayInput"}
-
-	if s.GatewayARN == nil {
-		invalidParams.Add(aws.NewErrParamRequired("GatewayARN"))
-	}
-	if s.GatewayARN != nil && len(*s.GatewayARN) < 50 {
-		invalidParams.Add(aws.NewErrParamMinLen("GatewayARN", 50))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// DisableGatewayOutput
-type DisableGatewayOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The unique Amazon Resource Name (ARN) of the disabled gateway.
-	GatewayARN *string `min:"50" type:"string"`
-}
-
-// String returns the string representation
-func (s DisableGatewayOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDisableGateway = "DisableGateway"
 
@@ -77,7 +31,7 @@ const opDisableGateway = "DisableGateway"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DisableGateway
-func (c *Client) DisableGatewayRequest(input *DisableGatewayInput) DisableGatewayRequest {
+func (c *Client) DisableGatewayRequest(input *types.DisableGatewayInput) DisableGatewayRequest {
 	op := &aws.Operation{
 		Name:       opDisableGateway,
 		HTTPMethod: "POST",
@@ -85,10 +39,10 @@ func (c *Client) DisableGatewayRequest(input *DisableGatewayInput) DisableGatewa
 	}
 
 	if input == nil {
-		input = &DisableGatewayInput{}
+		input = &types.DisableGatewayInput{}
 	}
 
-	req := c.newRequest(op, input, &DisableGatewayOutput{})
+	req := c.newRequest(op, input, &types.DisableGatewayOutput{})
 	return DisableGatewayRequest{Request: req, Input: input, Copy: c.DisableGatewayRequest}
 }
 
@@ -96,8 +50,8 @@ func (c *Client) DisableGatewayRequest(input *DisableGatewayInput) DisableGatewa
 // DisableGateway API operation.
 type DisableGatewayRequest struct {
 	*aws.Request
-	Input *DisableGatewayInput
-	Copy  func(*DisableGatewayInput) DisableGatewayRequest
+	Input *types.DisableGatewayInput
+	Copy  func(*types.DisableGatewayInput) DisableGatewayRequest
 }
 
 // Send marshals and sends the DisableGateway API request.
@@ -109,7 +63,7 @@ func (r DisableGatewayRequest) Send(ctx context.Context) (*DisableGatewayRespons
 	}
 
 	resp := &DisableGatewayResponse{
-		DisableGatewayOutput: r.Request.Data.(*DisableGatewayOutput),
+		DisableGatewayOutput: r.Request.Data.(*types.DisableGatewayOutput),
 		response:             &aws.Response{Request: r.Request},
 	}
 
@@ -119,7 +73,7 @@ func (r DisableGatewayRequest) Send(ctx context.Context) (*DisableGatewayRespons
 // DisableGatewayResponse is the response type for the
 // DisableGateway API operation.
 type DisableGatewayResponse struct {
-	*DisableGatewayOutput
+	*types.DisableGatewayOutput
 
 	response *aws.Response
 }

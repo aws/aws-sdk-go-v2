@@ -6,56 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/query"
+	"github.com/aws/aws-sdk-go-v2/service/autoscaling/types"
 )
-
-type DeletePolicyInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the Auto Scaling group.
-	AutoScalingGroupName *string `min:"1" type:"string"`
-
-	// The name or Amazon Resource Name (ARN) of the policy.
-	//
-	// PolicyName is a required field
-	PolicyName *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeletePolicyInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeletePolicyInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeletePolicyInput"}
-	if s.AutoScalingGroupName != nil && len(*s.AutoScalingGroupName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("AutoScalingGroupName", 1))
-	}
-
-	if s.PolicyName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("PolicyName"))
-	}
-	if s.PolicyName != nil && len(*s.PolicyName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("PolicyName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeletePolicyOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeletePolicyOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeletePolicy = "DeletePolicy"
 
@@ -79,7 +33,7 @@ const opDeletePolicy = "DeletePolicy"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DeletePolicy
-func (c *Client) DeletePolicyRequest(input *DeletePolicyInput) DeletePolicyRequest {
+func (c *Client) DeletePolicyRequest(input *types.DeletePolicyInput) DeletePolicyRequest {
 	op := &aws.Operation{
 		Name:       opDeletePolicy,
 		HTTPMethod: "POST",
@@ -87,10 +41,10 @@ func (c *Client) DeletePolicyRequest(input *DeletePolicyInput) DeletePolicyReque
 	}
 
 	if input == nil {
-		input = &DeletePolicyInput{}
+		input = &types.DeletePolicyInput{}
 	}
 
-	req := c.newRequest(op, input, &DeletePolicyOutput{})
+	req := c.newRequest(op, input, &types.DeletePolicyOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return DeletePolicyRequest{Request: req, Input: input, Copy: c.DeletePolicyRequest}
@@ -100,8 +54,8 @@ func (c *Client) DeletePolicyRequest(input *DeletePolicyInput) DeletePolicyReque
 // DeletePolicy API operation.
 type DeletePolicyRequest struct {
 	*aws.Request
-	Input *DeletePolicyInput
-	Copy  func(*DeletePolicyInput) DeletePolicyRequest
+	Input *types.DeletePolicyInput
+	Copy  func(*types.DeletePolicyInput) DeletePolicyRequest
 }
 
 // Send marshals and sends the DeletePolicy API request.
@@ -113,7 +67,7 @@ func (r DeletePolicyRequest) Send(ctx context.Context) (*DeletePolicyResponse, e
 	}
 
 	resp := &DeletePolicyResponse{
-		DeletePolicyOutput: r.Request.Data.(*DeletePolicyOutput),
+		DeletePolicyOutput: r.Request.Data.(*types.DeletePolicyOutput),
 		response:           &aws.Response{Request: r.Request},
 	}
 
@@ -123,7 +77,7 @@ func (r DeletePolicyRequest) Send(ctx context.Context) (*DeletePolicyResponse, e
 // DeletePolicyResponse is the response type for the
 // DeletePolicy API operation.
 type DeletePolicyResponse struct {
-	*DeletePolicyOutput
+	*types.DeletePolicyOutput
 
 	response *aws.Response
 }

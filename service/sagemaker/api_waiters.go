@@ -7,6 +7,7 @@ import (
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
 )
 
 // WaitUntilEndpointDeleted uses the SageMaker API operation
@@ -18,7 +19,7 @@ import (
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Client) WaitUntilEndpointDeleted(ctx context.Context, input *DescribeEndpointInput, opts ...aws.WaiterOption) error {
+func (c *Client) WaitUntilEndpointDeleted(ctx context.Context, input *types.DescribeEndpointInput, opts ...aws.WaiterOption) error {
 	w := aws.Waiter{
 		Name:        "WaitUntilEndpointDeleted",
 		MaxAttempts: 60,
@@ -37,7 +38,7 @@ func (c *Client) WaitUntilEndpointDeleted(ctx context.Context, input *DescribeEn
 		},
 		Logger: c.Config.Logger,
 		NewRequest: func(opts []aws.Option) (*aws.Request, error) {
-			var inCpy *DescribeEndpointInput
+			var inCpy *types.DescribeEndpointInput
 			if input != nil {
 				tmp := *input
 				inCpy = &tmp
@@ -62,7 +63,7 @@ func (c *Client) WaitUntilEndpointDeleted(ctx context.Context, input *DescribeEn
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Client) WaitUntilEndpointInService(ctx context.Context, input *DescribeEndpointInput, opts ...aws.WaiterOption) error {
+func (c *Client) WaitUntilEndpointInService(ctx context.Context, input *types.DescribeEndpointInput, opts ...aws.WaiterOption) error {
 	w := aws.Waiter{
 		Name:        "WaitUntilEndpointInService",
 		MaxAttempts: 120,
@@ -86,7 +87,7 @@ func (c *Client) WaitUntilEndpointInService(ctx context.Context, input *Describe
 		},
 		Logger: c.Config.Logger,
 		NewRequest: func(opts []aws.Option) (*aws.Request, error) {
-			var inCpy *DescribeEndpointInput
+			var inCpy *types.DescribeEndpointInput
 			if input != nil {
 				tmp := *input
 				inCpy = &tmp
@@ -111,7 +112,7 @@ func (c *Client) WaitUntilEndpointInService(ctx context.Context, input *Describe
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Client) WaitUntilNotebookInstanceDeleted(ctx context.Context, input *DescribeNotebookInstanceInput, opts ...aws.WaiterOption) error {
+func (c *Client) WaitUntilNotebookInstanceDeleted(ctx context.Context, input *types.DescribeNotebookInstanceInput, opts ...aws.WaiterOption) error {
 	w := aws.Waiter{
 		Name:        "WaitUntilNotebookInstanceDeleted",
 		MaxAttempts: 60,
@@ -130,7 +131,7 @@ func (c *Client) WaitUntilNotebookInstanceDeleted(ctx context.Context, input *De
 		},
 		Logger: c.Config.Logger,
 		NewRequest: func(opts []aws.Option) (*aws.Request, error) {
-			var inCpy *DescribeNotebookInstanceInput
+			var inCpy *types.DescribeNotebookInstanceInput
 			if input != nil {
 				tmp := *input
 				inCpy = &tmp
@@ -155,7 +156,7 @@ func (c *Client) WaitUntilNotebookInstanceDeleted(ctx context.Context, input *De
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Client) WaitUntilNotebookInstanceInService(ctx context.Context, input *DescribeNotebookInstanceInput, opts ...aws.WaiterOption) error {
+func (c *Client) WaitUntilNotebookInstanceInService(ctx context.Context, input *types.DescribeNotebookInstanceInput, opts ...aws.WaiterOption) error {
 	w := aws.Waiter{
 		Name:        "WaitUntilNotebookInstanceInService",
 		MaxAttempts: 60,
@@ -174,7 +175,7 @@ func (c *Client) WaitUntilNotebookInstanceInService(ctx context.Context, input *
 		},
 		Logger: c.Config.Logger,
 		NewRequest: func(opts []aws.Option) (*aws.Request, error) {
-			var inCpy *DescribeNotebookInstanceInput
+			var inCpy *types.DescribeNotebookInstanceInput
 			if input != nil {
 				tmp := *input
 				inCpy = &tmp
@@ -199,7 +200,7 @@ func (c *Client) WaitUntilNotebookInstanceInService(ctx context.Context, input *
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Client) WaitUntilNotebookInstanceStopped(ctx context.Context, input *DescribeNotebookInstanceInput, opts ...aws.WaiterOption) error {
+func (c *Client) WaitUntilNotebookInstanceStopped(ctx context.Context, input *types.DescribeNotebookInstanceInput, opts ...aws.WaiterOption) error {
 	w := aws.Waiter{
 		Name:        "WaitUntilNotebookInstanceStopped",
 		MaxAttempts: 60,
@@ -218,7 +219,7 @@ func (c *Client) WaitUntilNotebookInstanceStopped(ctx context.Context, input *De
 		},
 		Logger: c.Config.Logger,
 		NewRequest: func(opts []aws.Option) (*aws.Request, error) {
-			var inCpy *DescribeNotebookInstanceInput
+			var inCpy *types.DescribeNotebookInstanceInput
 			if input != nil {
 				tmp := *input
 				inCpy = &tmp
@@ -243,7 +244,7 @@ func (c *Client) WaitUntilNotebookInstanceStopped(ctx context.Context, input *De
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Client) WaitUntilTrainingJobCompletedOrStopped(ctx context.Context, input *DescribeTrainingJobInput, opts ...aws.WaiterOption) error {
+func (c *Client) WaitUntilTrainingJobCompletedOrStopped(ctx context.Context, input *types.DescribeTrainingJobInput, opts ...aws.WaiterOption) error {
 	w := aws.Waiter{
 		Name:        "WaitUntilTrainingJobCompletedOrStopped",
 		MaxAttempts: 180,
@@ -272,7 +273,7 @@ func (c *Client) WaitUntilTrainingJobCompletedOrStopped(ctx context.Context, inp
 		},
 		Logger: c.Config.Logger,
 		NewRequest: func(opts []aws.Option) (*aws.Request, error) {
-			var inCpy *DescribeTrainingJobInput
+			var inCpy *types.DescribeTrainingJobInput
 			if input != nil {
 				tmp := *input
 				inCpy = &tmp
@@ -297,7 +298,7 @@ func (c *Client) WaitUntilTrainingJobCompletedOrStopped(ctx context.Context, inp
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Client) WaitUntilTransformJobCompletedOrStopped(ctx context.Context, input *DescribeTransformJobInput, opts ...aws.WaiterOption) error {
+func (c *Client) WaitUntilTransformJobCompletedOrStopped(ctx context.Context, input *types.DescribeTransformJobInput, opts ...aws.WaiterOption) error {
 	w := aws.Waiter{
 		Name:        "WaitUntilTransformJobCompletedOrStopped",
 		MaxAttempts: 60,
@@ -326,7 +327,7 @@ func (c *Client) WaitUntilTransformJobCompletedOrStopped(ctx context.Context, in
 		},
 		Logger: c.Config.Logger,
 		NewRequest: func(opts []aws.Option) (*aws.Request, error) {
-			var inCpy *DescribeTransformJobInput
+			var inCpy *types.DescribeTransformJobInput
 			if input != nil {
 				tmp := *input
 				inCpy = &tmp

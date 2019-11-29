@@ -6,114 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
+	"github.com/aws/aws-sdk-go-v2/service/cloudwatchlogs/types"
 )
-
-type PutSubscriptionFilterInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ARN of the destination to deliver matching log events to. Currently,
-	// the supported destinations are:
-	//
-	//    * An Amazon Kinesis stream belonging to the same account as the subscription
-	//    filter, for same-account delivery.
-	//
-	//    * A logical destination (specified using an ARN) belonging to a different
-	//    account, for cross-account delivery.
-	//
-	//    * An Amazon Kinesis Firehose delivery stream belonging to the same account
-	//    as the subscription filter, for same-account delivery.
-	//
-	//    * An AWS Lambda function belonging to the same account as the subscription
-	//    filter, for same-account delivery.
-	//
-	// DestinationArn is a required field
-	DestinationArn *string `locationName:"destinationArn" min:"1" type:"string" required:"true"`
-
-	// The method used to distribute log data to the destination. By default log
-	// data is grouped by log stream, but the grouping can be set to random for
-	// a more even distribution. This property is only applicable when the destination
-	// is an Amazon Kinesis stream.
-	Distribution Distribution `locationName:"distribution" type:"string" enum:"true"`
-
-	// A name for the subscription filter. If you are updating an existing filter,
-	// you must specify the correct name in filterName. Otherwise, the call fails
-	// because you cannot associate a second filter with a log group. To find the
-	// name of the filter currently associated with a log group, use DescribeSubscriptionFilters.
-	//
-	// FilterName is a required field
-	FilterName *string `locationName:"filterName" min:"1" type:"string" required:"true"`
-
-	// A filter pattern for subscribing to a filtered stream of log events.
-	//
-	// FilterPattern is a required field
-	FilterPattern *string `locationName:"filterPattern" type:"string" required:"true"`
-
-	// The name of the log group.
-	//
-	// LogGroupName is a required field
-	LogGroupName *string `locationName:"logGroupName" min:"1" type:"string" required:"true"`
-
-	// The ARN of an IAM role that grants CloudWatch Logs permissions to deliver
-	// ingested log events to the destination stream. You don't need to provide
-	// the ARN when you are working with a logical destination for cross-account
-	// delivery.
-	RoleArn *string `locationName:"roleArn" min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s PutSubscriptionFilterInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *PutSubscriptionFilterInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "PutSubscriptionFilterInput"}
-
-	if s.DestinationArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DestinationArn"))
-	}
-	if s.DestinationArn != nil && len(*s.DestinationArn) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("DestinationArn", 1))
-	}
-
-	if s.FilterName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("FilterName"))
-	}
-	if s.FilterName != nil && len(*s.FilterName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("FilterName", 1))
-	}
-
-	if s.FilterPattern == nil {
-		invalidParams.Add(aws.NewErrParamRequired("FilterPattern"))
-	}
-
-	if s.LogGroupName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("LogGroupName"))
-	}
-	if s.LogGroupName != nil && len(*s.LogGroupName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("LogGroupName", 1))
-	}
-	if s.RoleArn != nil && len(*s.RoleArn) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("RoleArn", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type PutSubscriptionFilterOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s PutSubscriptionFilterOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opPutSubscriptionFilter = "PutSubscriptionFilter"
 
@@ -150,7 +46,7 @@ const opPutSubscriptionFilter = "PutSubscriptionFilter"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/PutSubscriptionFilter
-func (c *Client) PutSubscriptionFilterRequest(input *PutSubscriptionFilterInput) PutSubscriptionFilterRequest {
+func (c *Client) PutSubscriptionFilterRequest(input *types.PutSubscriptionFilterInput) PutSubscriptionFilterRequest {
 	op := &aws.Operation{
 		Name:       opPutSubscriptionFilter,
 		HTTPMethod: "POST",
@@ -158,10 +54,10 @@ func (c *Client) PutSubscriptionFilterRequest(input *PutSubscriptionFilterInput)
 	}
 
 	if input == nil {
-		input = &PutSubscriptionFilterInput{}
+		input = &types.PutSubscriptionFilterInput{}
 	}
 
-	req := c.newRequest(op, input, &PutSubscriptionFilterOutput{})
+	req := c.newRequest(op, input, &types.PutSubscriptionFilterOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return PutSubscriptionFilterRequest{Request: req, Input: input, Copy: c.PutSubscriptionFilterRequest}
@@ -171,8 +67,8 @@ func (c *Client) PutSubscriptionFilterRequest(input *PutSubscriptionFilterInput)
 // PutSubscriptionFilter API operation.
 type PutSubscriptionFilterRequest struct {
 	*aws.Request
-	Input *PutSubscriptionFilterInput
-	Copy  func(*PutSubscriptionFilterInput) PutSubscriptionFilterRequest
+	Input *types.PutSubscriptionFilterInput
+	Copy  func(*types.PutSubscriptionFilterInput) PutSubscriptionFilterRequest
 }
 
 // Send marshals and sends the PutSubscriptionFilter API request.
@@ -184,7 +80,7 @@ func (r PutSubscriptionFilterRequest) Send(ctx context.Context) (*PutSubscriptio
 	}
 
 	resp := &PutSubscriptionFilterResponse{
-		PutSubscriptionFilterOutput: r.Request.Data.(*PutSubscriptionFilterOutput),
+		PutSubscriptionFilterOutput: r.Request.Data.(*types.PutSubscriptionFilterOutput),
 		response:                    &aws.Response{Request: r.Request},
 	}
 
@@ -194,7 +90,7 @@ func (r PutSubscriptionFilterRequest) Send(ctx context.Context) (*PutSubscriptio
 // PutSubscriptionFilterResponse is the response type for the
 // PutSubscriptionFilter API operation.
 type PutSubscriptionFilterResponse struct {
-	*PutSubscriptionFilterOutput
+	*types.PutSubscriptionFilterOutput
 
 	response *aws.Response
 }

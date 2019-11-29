@@ -6,53 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
+	"github.com/aws/aws-sdk-go-v2/service/opsworks/types"
 )
-
-type UpdateRdsDbInstanceInput struct {
-	_ struct{} `type:"structure"`
-
-	// The database password.
-	DbPassword *string `type:"string"`
-
-	// The master user name.
-	DbUser *string `type:"string"`
-
-	// The Amazon RDS instance's ARN.
-	//
-	// RdsDbInstanceArn is a required field
-	RdsDbInstanceArn *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s UpdateRdsDbInstanceInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateRdsDbInstanceInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateRdsDbInstanceInput"}
-
-	if s.RdsDbInstanceArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("RdsDbInstanceArn"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type UpdateRdsDbInstanceOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s UpdateRdsDbInstanceOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opUpdateRdsDbInstance = "UpdateRdsDbInstance"
 
@@ -74,7 +31,7 @@ const opUpdateRdsDbInstance = "UpdateRdsDbInstance"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/UpdateRdsDbInstance
-func (c *Client) UpdateRdsDbInstanceRequest(input *UpdateRdsDbInstanceInput) UpdateRdsDbInstanceRequest {
+func (c *Client) UpdateRdsDbInstanceRequest(input *types.UpdateRdsDbInstanceInput) UpdateRdsDbInstanceRequest {
 	op := &aws.Operation{
 		Name:       opUpdateRdsDbInstance,
 		HTTPMethod: "POST",
@@ -82,10 +39,10 @@ func (c *Client) UpdateRdsDbInstanceRequest(input *UpdateRdsDbInstanceInput) Upd
 	}
 
 	if input == nil {
-		input = &UpdateRdsDbInstanceInput{}
+		input = &types.UpdateRdsDbInstanceInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateRdsDbInstanceOutput{})
+	req := c.newRequest(op, input, &types.UpdateRdsDbInstanceOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return UpdateRdsDbInstanceRequest{Request: req, Input: input, Copy: c.UpdateRdsDbInstanceRequest}
@@ -95,8 +52,8 @@ func (c *Client) UpdateRdsDbInstanceRequest(input *UpdateRdsDbInstanceInput) Upd
 // UpdateRdsDbInstance API operation.
 type UpdateRdsDbInstanceRequest struct {
 	*aws.Request
-	Input *UpdateRdsDbInstanceInput
-	Copy  func(*UpdateRdsDbInstanceInput) UpdateRdsDbInstanceRequest
+	Input *types.UpdateRdsDbInstanceInput
+	Copy  func(*types.UpdateRdsDbInstanceInput) UpdateRdsDbInstanceRequest
 }
 
 // Send marshals and sends the UpdateRdsDbInstance API request.
@@ -108,7 +65,7 @@ func (r UpdateRdsDbInstanceRequest) Send(ctx context.Context) (*UpdateRdsDbInsta
 	}
 
 	resp := &UpdateRdsDbInstanceResponse{
-		UpdateRdsDbInstanceOutput: r.Request.Data.(*UpdateRdsDbInstanceOutput),
+		UpdateRdsDbInstanceOutput: r.Request.Data.(*types.UpdateRdsDbInstanceOutput),
 		response:                  &aws.Response{Request: r.Request},
 	}
 
@@ -118,7 +75,7 @@ func (r UpdateRdsDbInstanceRequest) Send(ctx context.Context) (*UpdateRdsDbInsta
 // UpdateRdsDbInstanceResponse is the response type for the
 // UpdateRdsDbInstance API operation.
 type UpdateRdsDbInstanceResponse struct {
-	*UpdateRdsDbInstanceOutput
+	*types.UpdateRdsDbInstanceOutput
 
 	response *aws.Response
 }

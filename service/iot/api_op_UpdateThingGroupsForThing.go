@@ -6,103 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/iot/types"
 )
-
-type UpdateThingGroupsForThingInput struct {
-	_ struct{} `type:"structure"`
-
-	// Override dynamic thing groups with static thing groups when 10-group limit
-	// is reached. If a thing belongs to 10 thing groups, and one or more of those
-	// groups are dynamic thing groups, adding a thing to a static group removes
-	// the thing from the last dynamic group.
-	OverrideDynamicGroups *bool `locationName:"overrideDynamicGroups" type:"boolean"`
-
-	// The groups to which the thing will be added.
-	ThingGroupsToAdd []string `locationName:"thingGroupsToAdd" type:"list"`
-
-	// The groups from which the thing will be removed.
-	ThingGroupsToRemove []string `locationName:"thingGroupsToRemove" type:"list"`
-
-	// The thing whose group memberships will be updated.
-	ThingName *string `locationName:"thingName" min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s UpdateThingGroupsForThingInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateThingGroupsForThingInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateThingGroupsForThingInput"}
-	if s.ThingName != nil && len(*s.ThingName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ThingName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s UpdateThingGroupsForThingInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.OverrideDynamicGroups != nil {
-		v := *s.OverrideDynamicGroups
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "overrideDynamicGroups", protocol.BoolValue(v), metadata)
-	}
-	if s.ThingGroupsToAdd != nil {
-		v := s.ThingGroupsToAdd
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "thingGroupsToAdd", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
-		}
-		ls0.End()
-
-	}
-	if s.ThingGroupsToRemove != nil {
-		v := s.ThingGroupsToRemove
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "thingGroupsToRemove", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
-		}
-		ls0.End()
-
-	}
-	if s.ThingName != nil {
-		v := *s.ThingName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "thingName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type UpdateThingGroupsForThingOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s UpdateThingGroupsForThingOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s UpdateThingGroupsForThingOutput) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
 
 const opUpdateThingGroupsForThing = "UpdateThingGroupsForThing"
 
@@ -117,7 +22,7 @@ const opUpdateThingGroupsForThing = "UpdateThingGroupsForThing"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) UpdateThingGroupsForThingRequest(input *UpdateThingGroupsForThingInput) UpdateThingGroupsForThingRequest {
+func (c *Client) UpdateThingGroupsForThingRequest(input *types.UpdateThingGroupsForThingInput) UpdateThingGroupsForThingRequest {
 	op := &aws.Operation{
 		Name:       opUpdateThingGroupsForThing,
 		HTTPMethod: "PUT",
@@ -125,10 +30,10 @@ func (c *Client) UpdateThingGroupsForThingRequest(input *UpdateThingGroupsForThi
 	}
 
 	if input == nil {
-		input = &UpdateThingGroupsForThingInput{}
+		input = &types.UpdateThingGroupsForThingInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateThingGroupsForThingOutput{})
+	req := c.newRequest(op, input, &types.UpdateThingGroupsForThingOutput{})
 	return UpdateThingGroupsForThingRequest{Request: req, Input: input, Copy: c.UpdateThingGroupsForThingRequest}
 }
 
@@ -136,8 +41,8 @@ func (c *Client) UpdateThingGroupsForThingRequest(input *UpdateThingGroupsForThi
 // UpdateThingGroupsForThing API operation.
 type UpdateThingGroupsForThingRequest struct {
 	*aws.Request
-	Input *UpdateThingGroupsForThingInput
-	Copy  func(*UpdateThingGroupsForThingInput) UpdateThingGroupsForThingRequest
+	Input *types.UpdateThingGroupsForThingInput
+	Copy  func(*types.UpdateThingGroupsForThingInput) UpdateThingGroupsForThingRequest
 }
 
 // Send marshals and sends the UpdateThingGroupsForThing API request.
@@ -149,7 +54,7 @@ func (r UpdateThingGroupsForThingRequest) Send(ctx context.Context) (*UpdateThin
 	}
 
 	resp := &UpdateThingGroupsForThingResponse{
-		UpdateThingGroupsForThingOutput: r.Request.Data.(*UpdateThingGroupsForThingOutput),
+		UpdateThingGroupsForThingOutput: r.Request.Data.(*types.UpdateThingGroupsForThingOutput),
 		response:                        &aws.Response{Request: r.Request},
 	}
 
@@ -159,7 +64,7 @@ func (r UpdateThingGroupsForThingRequest) Send(ctx context.Context) (*UpdateThin
 // UpdateThingGroupsForThingResponse is the response type for the
 // UpdateThingGroupsForThing API operation.
 type UpdateThingGroupsForThingResponse struct {
-	*UpdateThingGroupsForThingOutput
+	*types.UpdateThingGroupsForThingOutput
 
 	response *aws.Response
 }

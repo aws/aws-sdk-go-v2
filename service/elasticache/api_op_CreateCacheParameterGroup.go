@@ -6,71 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/elasticache/types"
 )
-
-// Represents the input of a CreateCacheParameterGroup operation.
-type CreateCacheParameterGroupInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the cache parameter group family that the cache parameter group
-	// can be used with.
-	//
-	// Valid values are: memcached1.4 | memcached1.5 | redis2.6 | redis2.8 | redis3.2
-	// | redis4.0 | redis5.0 |
-	//
-	// CacheParameterGroupFamily is a required field
-	CacheParameterGroupFamily *string `type:"string" required:"true"`
-
-	// A user-specified name for the cache parameter group.
-	//
-	// CacheParameterGroupName is a required field
-	CacheParameterGroupName *string `type:"string" required:"true"`
-
-	// A user-specified description for the cache parameter group.
-	//
-	// Description is a required field
-	Description *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s CreateCacheParameterGroupInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateCacheParameterGroupInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateCacheParameterGroupInput"}
-
-	if s.CacheParameterGroupFamily == nil {
-		invalidParams.Add(aws.NewErrParamRequired("CacheParameterGroupFamily"))
-	}
-
-	if s.CacheParameterGroupName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("CacheParameterGroupName"))
-	}
-
-	if s.Description == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Description"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type CreateCacheParameterGroupOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Represents the output of a CreateCacheParameterGroup operation.
-	CacheParameterGroup *CacheParameterGroup `type:"structure"`
-}
-
-// String returns the string representation
-func (s CreateCacheParameterGroupOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCreateCacheParameterGroup = "CreateCacheParameterGroup"
 
@@ -100,7 +37,7 @@ const opCreateCacheParameterGroup = "CreateCacheParameterGroup"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CreateCacheParameterGroup
-func (c *Client) CreateCacheParameterGroupRequest(input *CreateCacheParameterGroupInput) CreateCacheParameterGroupRequest {
+func (c *Client) CreateCacheParameterGroupRequest(input *types.CreateCacheParameterGroupInput) CreateCacheParameterGroupRequest {
 	op := &aws.Operation{
 		Name:       opCreateCacheParameterGroup,
 		HTTPMethod: "POST",
@@ -108,10 +45,10 @@ func (c *Client) CreateCacheParameterGroupRequest(input *CreateCacheParameterGro
 	}
 
 	if input == nil {
-		input = &CreateCacheParameterGroupInput{}
+		input = &types.CreateCacheParameterGroupInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateCacheParameterGroupOutput{})
+	req := c.newRequest(op, input, &types.CreateCacheParameterGroupOutput{})
 	return CreateCacheParameterGroupRequest{Request: req, Input: input, Copy: c.CreateCacheParameterGroupRequest}
 }
 
@@ -119,8 +56,8 @@ func (c *Client) CreateCacheParameterGroupRequest(input *CreateCacheParameterGro
 // CreateCacheParameterGroup API operation.
 type CreateCacheParameterGroupRequest struct {
 	*aws.Request
-	Input *CreateCacheParameterGroupInput
-	Copy  func(*CreateCacheParameterGroupInput) CreateCacheParameterGroupRequest
+	Input *types.CreateCacheParameterGroupInput
+	Copy  func(*types.CreateCacheParameterGroupInput) CreateCacheParameterGroupRequest
 }
 
 // Send marshals and sends the CreateCacheParameterGroup API request.
@@ -132,7 +69,7 @@ func (r CreateCacheParameterGroupRequest) Send(ctx context.Context) (*CreateCach
 	}
 
 	resp := &CreateCacheParameterGroupResponse{
-		CreateCacheParameterGroupOutput: r.Request.Data.(*CreateCacheParameterGroupOutput),
+		CreateCacheParameterGroupOutput: r.Request.Data.(*types.CreateCacheParameterGroupOutput),
 		response:                        &aws.Response{Request: r.Request},
 	}
 
@@ -142,7 +79,7 @@ func (r CreateCacheParameterGroupRequest) Send(ctx context.Context) (*CreateCach
 // CreateCacheParameterGroupResponse is the response type for the
 // CreateCacheParameterGroup API operation.
 type CreateCacheParameterGroupResponse struct {
-	*CreateCacheParameterGroupOutput
+	*types.CreateCacheParameterGroupOutput
 
 	response *aws.Response
 }

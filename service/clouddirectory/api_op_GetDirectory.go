@@ -6,75 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/clouddirectory/types"
 )
-
-type GetDirectoryInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ARN of the directory.
-	//
-	// DirectoryArn is a required field
-	DirectoryArn *string `location:"header" locationName:"x-amz-data-partition" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetDirectoryInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetDirectoryInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetDirectoryInput"}
-
-	if s.DirectoryArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DirectoryArn"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetDirectoryInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.DirectoryArn != nil {
-		v := *s.DirectoryArn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "x-amz-data-partition", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type GetDirectoryOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Metadata about the directory.
-	//
-	// Directory is a required field
-	Directory *Directory `type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s GetDirectoryOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetDirectoryOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.Directory != nil {
-		v := s.Directory
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "Directory", v, metadata)
-	}
-	return nil
-}
 
 const opGetDirectory = "GetDirectory"
 
@@ -91,7 +24,7 @@ const opGetDirectory = "GetDirectory"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/GetDirectory
-func (c *Client) GetDirectoryRequest(input *GetDirectoryInput) GetDirectoryRequest {
+func (c *Client) GetDirectoryRequest(input *types.GetDirectoryInput) GetDirectoryRequest {
 	op := &aws.Operation{
 		Name:       opGetDirectory,
 		HTTPMethod: "POST",
@@ -99,10 +32,10 @@ func (c *Client) GetDirectoryRequest(input *GetDirectoryInput) GetDirectoryReque
 	}
 
 	if input == nil {
-		input = &GetDirectoryInput{}
+		input = &types.GetDirectoryInput{}
 	}
 
-	req := c.newRequest(op, input, &GetDirectoryOutput{})
+	req := c.newRequest(op, input, &types.GetDirectoryOutput{})
 	return GetDirectoryRequest{Request: req, Input: input, Copy: c.GetDirectoryRequest}
 }
 
@@ -110,8 +43,8 @@ func (c *Client) GetDirectoryRequest(input *GetDirectoryInput) GetDirectoryReque
 // GetDirectory API operation.
 type GetDirectoryRequest struct {
 	*aws.Request
-	Input *GetDirectoryInput
-	Copy  func(*GetDirectoryInput) GetDirectoryRequest
+	Input *types.GetDirectoryInput
+	Copy  func(*types.GetDirectoryInput) GetDirectoryRequest
 }
 
 // Send marshals and sends the GetDirectory API request.
@@ -123,7 +56,7 @@ func (r GetDirectoryRequest) Send(ctx context.Context) (*GetDirectoryResponse, e
 	}
 
 	resp := &GetDirectoryResponse{
-		GetDirectoryOutput: r.Request.Data.(*GetDirectoryOutput),
+		GetDirectoryOutput: r.Request.Data.(*types.GetDirectoryOutput),
 		response:           &aws.Response{Request: r.Request},
 	}
 
@@ -133,7 +66,7 @@ func (r GetDirectoryRequest) Send(ctx context.Context) (*GetDirectoryResponse, e
 // GetDirectoryResponse is the response type for the
 // GetDirectory API operation.
 type GetDirectoryResponse struct {
-	*GetDirectoryOutput
+	*types.GetDirectoryOutput
 
 	response *aws.Response
 }

@@ -6,80 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/iotdataplane/types"
 )
-
-// The input for the DeleteThingShadow operation.
-type DeleteThingShadowInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the thing.
-	//
-	// ThingName is a required field
-	ThingName *string `location:"uri" locationName:"thingName" min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteThingShadowInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteThingShadowInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteThingShadowInput"}
-
-	if s.ThingName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ThingName"))
-	}
-	if s.ThingName != nil && len(*s.ThingName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ThingName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteThingShadowInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.ThingName != nil {
-		v := *s.ThingName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "thingName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-// The output from the DeleteThingShadow operation.
-type DeleteThingShadowOutput struct {
-	_ struct{} `type:"structure" payload:"Payload"`
-
-	// The state information, in JSON format.
-	//
-	// Payload is a required field
-	Payload []byte `locationName:"payload" type:"blob" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteThingShadowOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteThingShadowOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.Payload != nil {
-		v := s.Payload
-
-		metadata := protocol.Metadata{}
-		e.SetStream(protocol.PayloadTarget, "payload", protocol.BytesStream(v), metadata)
-	}
-	return nil
-}
 
 const opDeleteThingShadow = "DeleteThingShadow"
 
@@ -97,7 +25,7 @@ const opDeleteThingShadow = "DeleteThingShadow"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) DeleteThingShadowRequest(input *DeleteThingShadowInput) DeleteThingShadowRequest {
+func (c *Client) DeleteThingShadowRequest(input *types.DeleteThingShadowInput) DeleteThingShadowRequest {
 	op := &aws.Operation{
 		Name:       opDeleteThingShadow,
 		HTTPMethod: "DELETE",
@@ -105,10 +33,10 @@ func (c *Client) DeleteThingShadowRequest(input *DeleteThingShadowInput) DeleteT
 	}
 
 	if input == nil {
-		input = &DeleteThingShadowInput{}
+		input = &types.DeleteThingShadowInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteThingShadowOutput{})
+	req := c.newRequest(op, input, &types.DeleteThingShadowOutput{})
 	return DeleteThingShadowRequest{Request: req, Input: input, Copy: c.DeleteThingShadowRequest}
 }
 
@@ -116,8 +44,8 @@ func (c *Client) DeleteThingShadowRequest(input *DeleteThingShadowInput) DeleteT
 // DeleteThingShadow API operation.
 type DeleteThingShadowRequest struct {
 	*aws.Request
-	Input *DeleteThingShadowInput
-	Copy  func(*DeleteThingShadowInput) DeleteThingShadowRequest
+	Input *types.DeleteThingShadowInput
+	Copy  func(*types.DeleteThingShadowInput) DeleteThingShadowRequest
 }
 
 // Send marshals and sends the DeleteThingShadow API request.
@@ -129,7 +57,7 @@ func (r DeleteThingShadowRequest) Send(ctx context.Context) (*DeleteThingShadowR
 	}
 
 	resp := &DeleteThingShadowResponse{
-		DeleteThingShadowOutput: r.Request.Data.(*DeleteThingShadowOutput),
+		DeleteThingShadowOutput: r.Request.Data.(*types.DeleteThingShadowOutput),
 		response:                &aws.Response{Request: r.Request},
 	}
 
@@ -139,7 +67,7 @@ func (r DeleteThingShadowRequest) Send(ctx context.Context) (*DeleteThingShadowR
 // DeleteThingShadowResponse is the response type for the
 // DeleteThingShadow API operation.
 type DeleteThingShadowResponse struct {
-	*DeleteThingShadowOutput
+	*types.DeleteThingShadowOutput
 
 	response *aws.Response
 }

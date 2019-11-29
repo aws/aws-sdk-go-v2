@@ -10,6 +10,7 @@ package kinesisvideoiface
 
 import (
 	"github.com/aws/aws-sdk-go-v2/service/kinesisvideo"
+	"github.com/aws/aws-sdk-go-v2/service/kinesisvideo/types"
 )
 
 // ClientAPI provides an interface to enable mocking the
@@ -43,7 +44,7 @@ import (
 //    type mockClientClient struct {
 //        kinesisvideoiface.ClientPI
 //    }
-//    func (m *mockClientClient) CreateStream(input *kinesisvideo.CreateStreamInput) (*kinesisvideo.CreateStreamOutput, error) {
+//    func (m *mockClientClient) CreateStream(input *types.CreateStreamInput) (*types.CreateStreamOutput, error) {
 //        // mock response/functionality
 //    }
 //
@@ -61,25 +62,25 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type ClientAPI interface {
-	CreateStreamRequest(*kinesisvideo.CreateStreamInput) kinesisvideo.CreateStreamRequest
+	CreateStreamRequest(*types.CreateStreamInput) kinesisvideo.CreateStreamRequest
 
-	DeleteStreamRequest(*kinesisvideo.DeleteStreamInput) kinesisvideo.DeleteStreamRequest
+	DeleteStreamRequest(*types.DeleteStreamInput) kinesisvideo.DeleteStreamRequest
 
-	DescribeStreamRequest(*kinesisvideo.DescribeStreamInput) kinesisvideo.DescribeStreamRequest
+	DescribeStreamRequest(*types.DescribeStreamInput) kinesisvideo.DescribeStreamRequest
 
-	GetDataEndpointRequest(*kinesisvideo.GetDataEndpointInput) kinesisvideo.GetDataEndpointRequest
+	GetDataEndpointRequest(*types.GetDataEndpointInput) kinesisvideo.GetDataEndpointRequest
 
-	ListStreamsRequest(*kinesisvideo.ListStreamsInput) kinesisvideo.ListStreamsRequest
+	ListStreamsRequest(*types.ListStreamsInput) kinesisvideo.ListStreamsRequest
 
-	ListTagsForStreamRequest(*kinesisvideo.ListTagsForStreamInput) kinesisvideo.ListTagsForStreamRequest
+	ListTagsForStreamRequest(*types.ListTagsForStreamInput) kinesisvideo.ListTagsForStreamRequest
 
-	TagStreamRequest(*kinesisvideo.TagStreamInput) kinesisvideo.TagStreamRequest
+	TagStreamRequest(*types.TagStreamInput) kinesisvideo.TagStreamRequest
 
-	UntagStreamRequest(*kinesisvideo.UntagStreamInput) kinesisvideo.UntagStreamRequest
+	UntagStreamRequest(*types.UntagStreamInput) kinesisvideo.UntagStreamRequest
 
-	UpdateDataRetentionRequest(*kinesisvideo.UpdateDataRetentionInput) kinesisvideo.UpdateDataRetentionRequest
+	UpdateDataRetentionRequest(*types.UpdateDataRetentionInput) kinesisvideo.UpdateDataRetentionRequest
 
-	UpdateStreamRequest(*kinesisvideo.UpdateStreamInput) kinesisvideo.UpdateStreamRequest
+	UpdateStreamRequest(*types.UpdateStreamInput) kinesisvideo.UpdateStreamRequest
 }
 
 var _ ClientAPI = (*kinesisvideo.Client)(nil)

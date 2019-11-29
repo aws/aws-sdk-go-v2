@@ -6,107 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/rds/types"
 )
-
-type ModifyDBClusterEndpointInput struct {
-	_ struct{} `type:"structure"`
-
-	// The identifier of the endpoint to modify. This parameter is stored as a lowercase
-	// string.
-	//
-	// DBClusterEndpointIdentifier is a required field
-	DBClusterEndpointIdentifier *string `type:"string" required:"true"`
-
-	// The type of the endpoint. One of: READER, WRITER, ANY.
-	EndpointType *string `type:"string"`
-
-	// List of DB instance identifiers that aren't part of the custom endpoint group.
-	// All other eligible instances are reachable through the custom endpoint. Only
-	// relevant if the list of static members is empty.
-	ExcludedMembers []string `type:"list"`
-
-	// List of DB instance identifiers that are part of the custom endpoint group.
-	StaticMembers []string `type:"list"`
-}
-
-// String returns the string representation
-func (s ModifyDBClusterEndpointInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ModifyDBClusterEndpointInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ModifyDBClusterEndpointInput"}
-
-	if s.DBClusterEndpointIdentifier == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DBClusterEndpointIdentifier"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// This data type represents the information you need to connect to an Amazon
-// Aurora DB cluster. This data type is used as a response element in the following
-// actions:
-//
-//    * CreateDBClusterEndpoint
-//
-//    * DescribeDBClusterEndpoints
-//
-//    * ModifyDBClusterEndpoint
-//
-//    * DeleteDBClusterEndpoint
-//
-// For the data structure that represents Amazon RDS DB instance endpoints,
-// see Endpoint.
-type ModifyDBClusterEndpointOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The type associated with a custom endpoint. One of: READER, WRITER, ANY.
-	CustomEndpointType *string `type:"string"`
-
-	// The Amazon Resource Name (ARN) for the endpoint.
-	DBClusterEndpointArn *string `type:"string"`
-
-	// The identifier associated with the endpoint. This parameter is stored as
-	// a lowercase string.
-	DBClusterEndpointIdentifier *string `type:"string"`
-
-	// A unique system-generated identifier for an endpoint. It remains the same
-	// for the whole life of the endpoint.
-	DBClusterEndpointResourceIdentifier *string `type:"string"`
-
-	// The DB cluster identifier of the DB cluster associated with the endpoint.
-	// This parameter is stored as a lowercase string.
-	DBClusterIdentifier *string `type:"string"`
-
-	// The DNS address of the endpoint.
-	Endpoint *string `type:"string"`
-
-	// The type of the endpoint. One of: READER, WRITER, CUSTOM.
-	EndpointType *string `type:"string"`
-
-	// List of DB instance identifiers that aren't part of the custom endpoint group.
-	// All other eligible instances are reachable through the custom endpoint. Only
-	// relevant if the list of static members is empty.
-	ExcludedMembers []string `type:"list"`
-
-	// List of DB instance identifiers that are part of the custom endpoint group.
-	StaticMembers []string `type:"list"`
-
-	// The current status of the endpoint. One of: creating, available, deleting,
-	// modifying.
-	Status *string `type:"string"`
-}
-
-// String returns the string representation
-func (s ModifyDBClusterEndpointOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opModifyDBClusterEndpoint = "ModifyDBClusterEndpoint"
 
@@ -125,7 +26,7 @@ const opModifyDBClusterEndpoint = "ModifyDBClusterEndpoint"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyDBClusterEndpoint
-func (c *Client) ModifyDBClusterEndpointRequest(input *ModifyDBClusterEndpointInput) ModifyDBClusterEndpointRequest {
+func (c *Client) ModifyDBClusterEndpointRequest(input *types.ModifyDBClusterEndpointInput) ModifyDBClusterEndpointRequest {
 	op := &aws.Operation{
 		Name:       opModifyDBClusterEndpoint,
 		HTTPMethod: "POST",
@@ -133,10 +34,10 @@ func (c *Client) ModifyDBClusterEndpointRequest(input *ModifyDBClusterEndpointIn
 	}
 
 	if input == nil {
-		input = &ModifyDBClusterEndpointInput{}
+		input = &types.ModifyDBClusterEndpointInput{}
 	}
 
-	req := c.newRequest(op, input, &ModifyDBClusterEndpointOutput{})
+	req := c.newRequest(op, input, &types.ModifyDBClusterEndpointOutput{})
 	return ModifyDBClusterEndpointRequest{Request: req, Input: input, Copy: c.ModifyDBClusterEndpointRequest}
 }
 
@@ -144,8 +45,8 @@ func (c *Client) ModifyDBClusterEndpointRequest(input *ModifyDBClusterEndpointIn
 // ModifyDBClusterEndpoint API operation.
 type ModifyDBClusterEndpointRequest struct {
 	*aws.Request
-	Input *ModifyDBClusterEndpointInput
-	Copy  func(*ModifyDBClusterEndpointInput) ModifyDBClusterEndpointRequest
+	Input *types.ModifyDBClusterEndpointInput
+	Copy  func(*types.ModifyDBClusterEndpointInput) ModifyDBClusterEndpointRequest
 }
 
 // Send marshals and sends the ModifyDBClusterEndpoint API request.
@@ -157,7 +58,7 @@ func (r ModifyDBClusterEndpointRequest) Send(ctx context.Context) (*ModifyDBClus
 	}
 
 	resp := &ModifyDBClusterEndpointResponse{
-		ModifyDBClusterEndpointOutput: r.Request.Data.(*ModifyDBClusterEndpointOutput),
+		ModifyDBClusterEndpointOutput: r.Request.Data.(*types.ModifyDBClusterEndpointOutput),
 		response:                      &aws.Response{Request: r.Request},
 	}
 
@@ -167,7 +68,7 @@ func (r ModifyDBClusterEndpointRequest) Send(ctx context.Context) (*ModifyDBClus
 // ModifyDBClusterEndpointResponse is the response type for the
 // ModifyDBClusterEndpoint API operation.
 type ModifyDBClusterEndpointResponse struct {
-	*ModifyDBClusterEndpointOutput
+	*types.ModifyDBClusterEndpointOutput
 
 	response *aws.Response
 }

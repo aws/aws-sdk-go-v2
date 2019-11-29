@@ -6,74 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/polly/types"
 )
-
-type ListLexiconsInput struct {
-	_ struct{} `type:"structure"`
-
-	// An opaque pagination token returned from previous ListLexicons operation.
-	// If present, indicates where to continue the list of lexicons.
-	NextToken *string `location:"querystring" locationName:"NextToken" type:"string"`
-}
-
-// String returns the string representation
-func (s ListLexiconsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListLexiconsInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type ListLexiconsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A list of lexicon names and attributes.
-	Lexicons []LexiconDescription `type:"list"`
-
-	// The pagination token to use in the next request to continue the listing of
-	// lexicons. NextToken is returned only if the response is truncated.
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s ListLexiconsOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListLexiconsOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.Lexicons != nil {
-		v := s.Lexicons
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "Lexicons", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opListLexicons = "ListLexicons"
 
@@ -91,7 +25,7 @@ const opListLexicons = "ListLexicons"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/polly-2016-06-10/ListLexicons
-func (c *Client) ListLexiconsRequest(input *ListLexiconsInput) ListLexiconsRequest {
+func (c *Client) ListLexiconsRequest(input *types.ListLexiconsInput) ListLexiconsRequest {
 	op := &aws.Operation{
 		Name:       opListLexicons,
 		HTTPMethod: "GET",
@@ -99,10 +33,10 @@ func (c *Client) ListLexiconsRequest(input *ListLexiconsInput) ListLexiconsReque
 	}
 
 	if input == nil {
-		input = &ListLexiconsInput{}
+		input = &types.ListLexiconsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListLexiconsOutput{})
+	req := c.newRequest(op, input, &types.ListLexiconsOutput{})
 	return ListLexiconsRequest{Request: req, Input: input, Copy: c.ListLexiconsRequest}
 }
 
@@ -110,8 +44,8 @@ func (c *Client) ListLexiconsRequest(input *ListLexiconsInput) ListLexiconsReque
 // ListLexicons API operation.
 type ListLexiconsRequest struct {
 	*aws.Request
-	Input *ListLexiconsInput
-	Copy  func(*ListLexiconsInput) ListLexiconsRequest
+	Input *types.ListLexiconsInput
+	Copy  func(*types.ListLexiconsInput) ListLexiconsRequest
 }
 
 // Send marshals and sends the ListLexicons API request.
@@ -123,7 +57,7 @@ func (r ListLexiconsRequest) Send(ctx context.Context) (*ListLexiconsResponse, e
 	}
 
 	resp := &ListLexiconsResponse{
-		ListLexiconsOutput: r.Request.Data.(*ListLexiconsOutput),
+		ListLexiconsOutput: r.Request.Data.(*types.ListLexiconsOutput),
 		response:           &aws.Response{Request: r.Request},
 	}
 
@@ -133,7 +67,7 @@ func (r ListLexiconsRequest) Send(ctx context.Context) (*ListLexiconsResponse, e
 // ListLexiconsResponse is the response type for the
 // ListLexicons API operation.
 type ListLexiconsResponse struct {
-	*ListLexiconsOutput
+	*types.ListLexiconsOutput
 
 	response *aws.Response
 }

@@ -4,61 +4,10 @@ package workspaces
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/workspaces/types"
 )
-
-type RebuildWorkspacesInput struct {
-	_ struct{} `type:"structure"`
-
-	// The WorkSpace to rebuild. You can specify a single WorkSpace.
-	//
-	// RebuildWorkspaceRequests is a required field
-	RebuildWorkspaceRequests []RebuildRequest `min:"1" type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s RebuildWorkspacesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *RebuildWorkspacesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "RebuildWorkspacesInput"}
-
-	if s.RebuildWorkspaceRequests == nil {
-		invalidParams.Add(aws.NewErrParamRequired("RebuildWorkspaceRequests"))
-	}
-	if s.RebuildWorkspaceRequests != nil && len(s.RebuildWorkspaceRequests) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("RebuildWorkspaceRequests", 1))
-	}
-	if s.RebuildWorkspaceRequests != nil {
-		for i, v := range s.RebuildWorkspaceRequests {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "RebuildWorkspaceRequests", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type RebuildWorkspacesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Information about the WorkSpace that could not be rebuilt.
-	FailedRequests []FailedWorkspaceChangeRequest `type:"list"`
-}
-
-// String returns the string representation
-func (s RebuildWorkspacesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opRebuildWorkspaces = "RebuildWorkspaces"
 
@@ -83,7 +32,7 @@ const opRebuildWorkspaces = "RebuildWorkspaces"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/RebuildWorkspaces
-func (c *Client) RebuildWorkspacesRequest(input *RebuildWorkspacesInput) RebuildWorkspacesRequest {
+func (c *Client) RebuildWorkspacesRequest(input *types.RebuildWorkspacesInput) RebuildWorkspacesRequest {
 	op := &aws.Operation{
 		Name:       opRebuildWorkspaces,
 		HTTPMethod: "POST",
@@ -91,10 +40,10 @@ func (c *Client) RebuildWorkspacesRequest(input *RebuildWorkspacesInput) Rebuild
 	}
 
 	if input == nil {
-		input = &RebuildWorkspacesInput{}
+		input = &types.RebuildWorkspacesInput{}
 	}
 
-	req := c.newRequest(op, input, &RebuildWorkspacesOutput{})
+	req := c.newRequest(op, input, &types.RebuildWorkspacesOutput{})
 	return RebuildWorkspacesRequest{Request: req, Input: input, Copy: c.RebuildWorkspacesRequest}
 }
 
@@ -102,8 +51,8 @@ func (c *Client) RebuildWorkspacesRequest(input *RebuildWorkspacesInput) Rebuild
 // RebuildWorkspaces API operation.
 type RebuildWorkspacesRequest struct {
 	*aws.Request
-	Input *RebuildWorkspacesInput
-	Copy  func(*RebuildWorkspacesInput) RebuildWorkspacesRequest
+	Input *types.RebuildWorkspacesInput
+	Copy  func(*types.RebuildWorkspacesInput) RebuildWorkspacesRequest
 }
 
 // Send marshals and sends the RebuildWorkspaces API request.
@@ -115,7 +64,7 @@ func (r RebuildWorkspacesRequest) Send(ctx context.Context) (*RebuildWorkspacesR
 	}
 
 	resp := &RebuildWorkspacesResponse{
-		RebuildWorkspacesOutput: r.Request.Data.(*RebuildWorkspacesOutput),
+		RebuildWorkspacesOutput: r.Request.Data.(*types.RebuildWorkspacesOutput),
 		response:                &aws.Response{Request: r.Request},
 	}
 
@@ -125,7 +74,7 @@ func (r RebuildWorkspacesRequest) Send(ctx context.Context) (*RebuildWorkspacesR
 // RebuildWorkspacesResponse is the response type for the
 // RebuildWorkspaces API operation.
 type RebuildWorkspacesResponse struct {
-	*RebuildWorkspacesOutput
+	*types.RebuildWorkspacesOutput
 
 	response *aws.Response
 }

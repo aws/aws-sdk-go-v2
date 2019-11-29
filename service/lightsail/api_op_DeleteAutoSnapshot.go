@@ -6,60 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/lightsail/types"
 )
-
-type DeleteAutoSnapshotInput struct {
-	_ struct{} `type:"structure"`
-
-	// The date of the automatic snapshot to delete in YYYY-MM-DD format.
-	//
-	// Use the get auto snapshots operation to get the available automatic snapshots
-	// for a resource.
-	//
-	// Date is a required field
-	Date *string `locationName:"date" type:"string" required:"true"`
-
-	// The name of the source resource from which to delete the automatic snapshot.
-	//
-	// ResourceName is a required field
-	ResourceName *string `locationName:"resourceName" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteAutoSnapshotInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteAutoSnapshotInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteAutoSnapshotInput"}
-
-	if s.Date == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Date"))
-	}
-
-	if s.ResourceName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ResourceName"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteAutoSnapshotOutput struct {
-	_ struct{} `type:"structure"`
-
-	// An array of objects that describe the result of your request.
-	Operations []Operation `locationName:"operations" type:"list"`
-}
-
-// String returns the string representation
-func (s DeleteAutoSnapshotOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteAutoSnapshot = "DeleteAutoSnapshot"
 
@@ -76,7 +24,7 @@ const opDeleteAutoSnapshot = "DeleteAutoSnapshot"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/DeleteAutoSnapshot
-func (c *Client) DeleteAutoSnapshotRequest(input *DeleteAutoSnapshotInput) DeleteAutoSnapshotRequest {
+func (c *Client) DeleteAutoSnapshotRequest(input *types.DeleteAutoSnapshotInput) DeleteAutoSnapshotRequest {
 	op := &aws.Operation{
 		Name:       opDeleteAutoSnapshot,
 		HTTPMethod: "POST",
@@ -84,10 +32,10 @@ func (c *Client) DeleteAutoSnapshotRequest(input *DeleteAutoSnapshotInput) Delet
 	}
 
 	if input == nil {
-		input = &DeleteAutoSnapshotInput{}
+		input = &types.DeleteAutoSnapshotInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteAutoSnapshotOutput{})
+	req := c.newRequest(op, input, &types.DeleteAutoSnapshotOutput{})
 	return DeleteAutoSnapshotRequest{Request: req, Input: input, Copy: c.DeleteAutoSnapshotRequest}
 }
 
@@ -95,8 +43,8 @@ func (c *Client) DeleteAutoSnapshotRequest(input *DeleteAutoSnapshotInput) Delet
 // DeleteAutoSnapshot API operation.
 type DeleteAutoSnapshotRequest struct {
 	*aws.Request
-	Input *DeleteAutoSnapshotInput
-	Copy  func(*DeleteAutoSnapshotInput) DeleteAutoSnapshotRequest
+	Input *types.DeleteAutoSnapshotInput
+	Copy  func(*types.DeleteAutoSnapshotInput) DeleteAutoSnapshotRequest
 }
 
 // Send marshals and sends the DeleteAutoSnapshot API request.
@@ -108,7 +56,7 @@ func (r DeleteAutoSnapshotRequest) Send(ctx context.Context) (*DeleteAutoSnapsho
 	}
 
 	resp := &DeleteAutoSnapshotResponse{
-		DeleteAutoSnapshotOutput: r.Request.Data.(*DeleteAutoSnapshotOutput),
+		DeleteAutoSnapshotOutput: r.Request.Data.(*types.DeleteAutoSnapshotOutput),
 		response:                 &aws.Response{Request: r.Request},
 	}
 
@@ -118,7 +66,7 @@ func (r DeleteAutoSnapshotRequest) Send(ctx context.Context) (*DeleteAutoSnapsho
 // DeleteAutoSnapshotResponse is the response type for the
 // DeleteAutoSnapshot API operation.
 type DeleteAutoSnapshotResponse struct {
-	*DeleteAutoSnapshotOutput
+	*types.DeleteAutoSnapshotOutput
 
 	response *aws.Response
 }

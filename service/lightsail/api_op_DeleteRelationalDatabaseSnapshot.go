@@ -6,49 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/lightsail/types"
 )
-
-type DeleteRelationalDatabaseSnapshotInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the database snapshot that you are deleting.
-	//
-	// RelationalDatabaseSnapshotName is a required field
-	RelationalDatabaseSnapshotName *string `locationName:"relationalDatabaseSnapshotName" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteRelationalDatabaseSnapshotInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteRelationalDatabaseSnapshotInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteRelationalDatabaseSnapshotInput"}
-
-	if s.RelationalDatabaseSnapshotName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("RelationalDatabaseSnapshotName"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteRelationalDatabaseSnapshotOutput struct {
-	_ struct{} `type:"structure"`
-
-	// An object describing the result of your delete relational database snapshot
-	// request.
-	Operations []Operation `locationName:"operations" type:"list"`
-}
-
-// String returns the string representation
-func (s DeleteRelationalDatabaseSnapshotOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteRelationalDatabaseSnapshot = "DeleteRelationalDatabaseSnapshot"
 
@@ -69,7 +28,7 @@ const opDeleteRelationalDatabaseSnapshot = "DeleteRelationalDatabaseSnapshot"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/DeleteRelationalDatabaseSnapshot
-func (c *Client) DeleteRelationalDatabaseSnapshotRequest(input *DeleteRelationalDatabaseSnapshotInput) DeleteRelationalDatabaseSnapshotRequest {
+func (c *Client) DeleteRelationalDatabaseSnapshotRequest(input *types.DeleteRelationalDatabaseSnapshotInput) DeleteRelationalDatabaseSnapshotRequest {
 	op := &aws.Operation{
 		Name:       opDeleteRelationalDatabaseSnapshot,
 		HTTPMethod: "POST",
@@ -77,10 +36,10 @@ func (c *Client) DeleteRelationalDatabaseSnapshotRequest(input *DeleteRelational
 	}
 
 	if input == nil {
-		input = &DeleteRelationalDatabaseSnapshotInput{}
+		input = &types.DeleteRelationalDatabaseSnapshotInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteRelationalDatabaseSnapshotOutput{})
+	req := c.newRequest(op, input, &types.DeleteRelationalDatabaseSnapshotOutput{})
 	return DeleteRelationalDatabaseSnapshotRequest{Request: req, Input: input, Copy: c.DeleteRelationalDatabaseSnapshotRequest}
 }
 
@@ -88,8 +47,8 @@ func (c *Client) DeleteRelationalDatabaseSnapshotRequest(input *DeleteRelational
 // DeleteRelationalDatabaseSnapshot API operation.
 type DeleteRelationalDatabaseSnapshotRequest struct {
 	*aws.Request
-	Input *DeleteRelationalDatabaseSnapshotInput
-	Copy  func(*DeleteRelationalDatabaseSnapshotInput) DeleteRelationalDatabaseSnapshotRequest
+	Input *types.DeleteRelationalDatabaseSnapshotInput
+	Copy  func(*types.DeleteRelationalDatabaseSnapshotInput) DeleteRelationalDatabaseSnapshotRequest
 }
 
 // Send marshals and sends the DeleteRelationalDatabaseSnapshot API request.
@@ -101,7 +60,7 @@ func (r DeleteRelationalDatabaseSnapshotRequest) Send(ctx context.Context) (*Del
 	}
 
 	resp := &DeleteRelationalDatabaseSnapshotResponse{
-		DeleteRelationalDatabaseSnapshotOutput: r.Request.Data.(*DeleteRelationalDatabaseSnapshotOutput),
+		DeleteRelationalDatabaseSnapshotOutput: r.Request.Data.(*types.DeleteRelationalDatabaseSnapshotOutput),
 		response:                               &aws.Response{Request: r.Request},
 	}
 
@@ -111,7 +70,7 @@ func (r DeleteRelationalDatabaseSnapshotRequest) Send(ctx context.Context) (*Del
 // DeleteRelationalDatabaseSnapshotResponse is the response type for the
 // DeleteRelationalDatabaseSnapshot API operation.
 type DeleteRelationalDatabaseSnapshotResponse struct {
-	*DeleteRelationalDatabaseSnapshotOutput
+	*types.DeleteRelationalDatabaseSnapshotOutput
 
 	response *aws.Response
 }

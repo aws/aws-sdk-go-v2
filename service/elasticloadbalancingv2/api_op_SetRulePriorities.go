@@ -4,58 +4,10 @@ package elasticloadbalancingv2
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/elasticloadbalancingv2/types"
 )
-
-type SetRulePrioritiesInput struct {
-	_ struct{} `type:"structure"`
-
-	// The rule priorities.
-	//
-	// RulePriorities is a required field
-	RulePriorities []RulePriorityPair `type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s SetRulePrioritiesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *SetRulePrioritiesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "SetRulePrioritiesInput"}
-
-	if s.RulePriorities == nil {
-		invalidParams.Add(aws.NewErrParamRequired("RulePriorities"))
-	}
-	if s.RulePriorities != nil {
-		for i, v := range s.RulePriorities {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "RulePriorities", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type SetRulePrioritiesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Information about the rules.
-	Rules []Rule `type:"list"`
-}
-
-// String returns the string representation
-func (s SetRulePrioritiesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opSetRulePriorities = "SetRulePriorities"
 
@@ -76,7 +28,7 @@ const opSetRulePriorities = "SetRulePriorities"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/SetRulePriorities
-func (c *Client) SetRulePrioritiesRequest(input *SetRulePrioritiesInput) SetRulePrioritiesRequest {
+func (c *Client) SetRulePrioritiesRequest(input *types.SetRulePrioritiesInput) SetRulePrioritiesRequest {
 	op := &aws.Operation{
 		Name:       opSetRulePriorities,
 		HTTPMethod: "POST",
@@ -84,10 +36,10 @@ func (c *Client) SetRulePrioritiesRequest(input *SetRulePrioritiesInput) SetRule
 	}
 
 	if input == nil {
-		input = &SetRulePrioritiesInput{}
+		input = &types.SetRulePrioritiesInput{}
 	}
 
-	req := c.newRequest(op, input, &SetRulePrioritiesOutput{})
+	req := c.newRequest(op, input, &types.SetRulePrioritiesOutput{})
 	return SetRulePrioritiesRequest{Request: req, Input: input, Copy: c.SetRulePrioritiesRequest}
 }
 
@@ -95,8 +47,8 @@ func (c *Client) SetRulePrioritiesRequest(input *SetRulePrioritiesInput) SetRule
 // SetRulePriorities API operation.
 type SetRulePrioritiesRequest struct {
 	*aws.Request
-	Input *SetRulePrioritiesInput
-	Copy  func(*SetRulePrioritiesInput) SetRulePrioritiesRequest
+	Input *types.SetRulePrioritiesInput
+	Copy  func(*types.SetRulePrioritiesInput) SetRulePrioritiesRequest
 }
 
 // Send marshals and sends the SetRulePriorities API request.
@@ -108,7 +60,7 @@ func (r SetRulePrioritiesRequest) Send(ctx context.Context) (*SetRulePrioritiesR
 	}
 
 	resp := &SetRulePrioritiesResponse{
-		SetRulePrioritiesOutput: r.Request.Data.(*SetRulePrioritiesOutput),
+		SetRulePrioritiesOutput: r.Request.Data.(*types.SetRulePrioritiesOutput),
 		response:                &aws.Response{Request: r.Request},
 	}
 
@@ -118,7 +70,7 @@ func (r SetRulePrioritiesRequest) Send(ctx context.Context) (*SetRulePrioritiesR
 // SetRulePrioritiesResponse is the response type for the
 // SetRulePriorities API operation.
 type SetRulePrioritiesResponse struct {
-	*SetRulePrioritiesOutput
+	*types.SetRulePrioritiesOutput
 
 	response *aws.Response
 }

@@ -6,33 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/iam/types"
 )
-
-type GenerateCredentialReportInput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s GenerateCredentialReportInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Contains the response to a successful GenerateCredentialReport request.
-type GenerateCredentialReportOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Information about the credential report.
-	Description *string `type:"string"`
-
-	// Information about the state of the credential report.
-	State ReportStateType `type:"string" enum:"true"`
-}
-
-// String returns the string representation
-func (s GenerateCredentialReportOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGenerateCredentialReport = "GenerateCredentialReport"
 
@@ -51,7 +26,7 @@ const opGenerateCredentialReport = "GenerateCredentialReport"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GenerateCredentialReport
-func (c *Client) GenerateCredentialReportRequest(input *GenerateCredentialReportInput) GenerateCredentialReportRequest {
+func (c *Client) GenerateCredentialReportRequest(input *types.GenerateCredentialReportInput) GenerateCredentialReportRequest {
 	op := &aws.Operation{
 		Name:       opGenerateCredentialReport,
 		HTTPMethod: "POST",
@@ -59,10 +34,10 @@ func (c *Client) GenerateCredentialReportRequest(input *GenerateCredentialReport
 	}
 
 	if input == nil {
-		input = &GenerateCredentialReportInput{}
+		input = &types.GenerateCredentialReportInput{}
 	}
 
-	req := c.newRequest(op, input, &GenerateCredentialReportOutput{})
+	req := c.newRequest(op, input, &types.GenerateCredentialReportOutput{})
 	return GenerateCredentialReportRequest{Request: req, Input: input, Copy: c.GenerateCredentialReportRequest}
 }
 
@@ -70,8 +45,8 @@ func (c *Client) GenerateCredentialReportRequest(input *GenerateCredentialReport
 // GenerateCredentialReport API operation.
 type GenerateCredentialReportRequest struct {
 	*aws.Request
-	Input *GenerateCredentialReportInput
-	Copy  func(*GenerateCredentialReportInput) GenerateCredentialReportRequest
+	Input *types.GenerateCredentialReportInput
+	Copy  func(*types.GenerateCredentialReportInput) GenerateCredentialReportRequest
 }
 
 // Send marshals and sends the GenerateCredentialReport API request.
@@ -83,7 +58,7 @@ func (r GenerateCredentialReportRequest) Send(ctx context.Context) (*GenerateCre
 	}
 
 	resp := &GenerateCredentialReportResponse{
-		GenerateCredentialReportOutput: r.Request.Data.(*GenerateCredentialReportOutput),
+		GenerateCredentialReportOutput: r.Request.Data.(*types.GenerateCredentialReportOutput),
 		response:                       &aws.Response{Request: r.Request},
 	}
 
@@ -93,7 +68,7 @@ func (r GenerateCredentialReportRequest) Send(ctx context.Context) (*GenerateCre
 // GenerateCredentialReportResponse is the response type for the
 // GenerateCredentialReport API operation.
 type GenerateCredentialReportResponse struct {
-	*GenerateCredentialReportOutput
+	*types.GenerateCredentialReportOutput
 
 	response *aws.Response
 }

@@ -6,71 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/types"
 )
-
-type ListBudgetsForResourceInput struct {
-	_ struct{} `type:"structure"`
-
-	// The language code.
-	//
-	//    * en - English (default)
-	//
-	//    * jp - Japanese
-	//
-	//    * zh - Chinese
-	AcceptLanguage *string `type:"string"`
-
-	// The maximum number of items to return with this call.
-	PageSize *int64 `type:"integer"`
-
-	// The page token for the next set of results. To retrieve the first set of
-	// results, use null.
-	PageToken *string `type:"string"`
-
-	// The resource identifier.
-	//
-	// ResourceId is a required field
-	ResourceId *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s ListBudgetsForResourceInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListBudgetsForResourceInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListBudgetsForResourceInput"}
-
-	if s.ResourceId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ResourceId"))
-	}
-	if s.ResourceId != nil && len(*s.ResourceId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ResourceId", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ListBudgetsForResourceOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Information about the associated budgets.
-	Budgets []BudgetDetail `type:"list"`
-
-	// The page token to use to retrieve the next set of results. If there are no
-	// additional results, this value is null.
-	NextPageToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s ListBudgetsForResourceOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListBudgetsForResource = "ListBudgetsForResource"
 
@@ -87,7 +24,7 @@ const opListBudgetsForResource = "ListBudgetsForResource"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ListBudgetsForResource
-func (c *Client) ListBudgetsForResourceRequest(input *ListBudgetsForResourceInput) ListBudgetsForResourceRequest {
+func (c *Client) ListBudgetsForResourceRequest(input *types.ListBudgetsForResourceInput) ListBudgetsForResourceRequest {
 	op := &aws.Operation{
 		Name:       opListBudgetsForResource,
 		HTTPMethod: "POST",
@@ -101,10 +38,10 @@ func (c *Client) ListBudgetsForResourceRequest(input *ListBudgetsForResourceInpu
 	}
 
 	if input == nil {
-		input = &ListBudgetsForResourceInput{}
+		input = &types.ListBudgetsForResourceInput{}
 	}
 
-	req := c.newRequest(op, input, &ListBudgetsForResourceOutput{})
+	req := c.newRequest(op, input, &types.ListBudgetsForResourceOutput{})
 	return ListBudgetsForResourceRequest{Request: req, Input: input, Copy: c.ListBudgetsForResourceRequest}
 }
 
@@ -112,8 +49,8 @@ func (c *Client) ListBudgetsForResourceRequest(input *ListBudgetsForResourceInpu
 // ListBudgetsForResource API operation.
 type ListBudgetsForResourceRequest struct {
 	*aws.Request
-	Input *ListBudgetsForResourceInput
-	Copy  func(*ListBudgetsForResourceInput) ListBudgetsForResourceRequest
+	Input *types.ListBudgetsForResourceInput
+	Copy  func(*types.ListBudgetsForResourceInput) ListBudgetsForResourceRequest
 }
 
 // Send marshals and sends the ListBudgetsForResource API request.
@@ -125,7 +62,7 @@ func (r ListBudgetsForResourceRequest) Send(ctx context.Context) (*ListBudgetsFo
 	}
 
 	resp := &ListBudgetsForResourceResponse{
-		ListBudgetsForResourceOutput: r.Request.Data.(*ListBudgetsForResourceOutput),
+		ListBudgetsForResourceOutput: r.Request.Data.(*types.ListBudgetsForResourceOutput),
 		response:                     &aws.Response{Request: r.Request},
 	}
 
@@ -155,7 +92,7 @@ func NewListBudgetsForResourcePaginator(req ListBudgetsForResourceRequest) ListB
 	return ListBudgetsForResourcePaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListBudgetsForResourceInput
+				var inCpy *types.ListBudgetsForResourceInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -175,14 +112,14 @@ type ListBudgetsForResourcePaginator struct {
 	aws.Pager
 }
 
-func (p *ListBudgetsForResourcePaginator) CurrentPage() *ListBudgetsForResourceOutput {
-	return p.Pager.CurrentPage().(*ListBudgetsForResourceOutput)
+func (p *ListBudgetsForResourcePaginator) CurrentPage() *types.ListBudgetsForResourceOutput {
+	return p.Pager.CurrentPage().(*types.ListBudgetsForResourceOutput)
 }
 
 // ListBudgetsForResourceResponse is the response type for the
 // ListBudgetsForResource API operation.
 type ListBudgetsForResourceResponse struct {
-	*ListBudgetsForResourceOutput
+	*types.ListBudgetsForResourceOutput
 
 	response *aws.Response
 }

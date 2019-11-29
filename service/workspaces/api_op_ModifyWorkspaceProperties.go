@@ -6,54 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/workspaces/types"
 )
-
-type ModifyWorkspacePropertiesInput struct {
-	_ struct{} `type:"structure"`
-
-	// The identifier of the WorkSpace.
-	//
-	// WorkspaceId is a required field
-	WorkspaceId *string `type:"string" required:"true"`
-
-	// The properties of the WorkSpace.
-	//
-	// WorkspaceProperties is a required field
-	WorkspaceProperties *WorkspaceProperties `type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s ModifyWorkspacePropertiesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ModifyWorkspacePropertiesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ModifyWorkspacePropertiesInput"}
-
-	if s.WorkspaceId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("WorkspaceId"))
-	}
-
-	if s.WorkspaceProperties == nil {
-		invalidParams.Add(aws.NewErrParamRequired("WorkspaceProperties"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ModifyWorkspacePropertiesOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s ModifyWorkspacePropertiesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opModifyWorkspaceProperties = "ModifyWorkspaceProperties"
 
@@ -70,7 +24,7 @@ const opModifyWorkspaceProperties = "ModifyWorkspaceProperties"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/ModifyWorkspaceProperties
-func (c *Client) ModifyWorkspacePropertiesRequest(input *ModifyWorkspacePropertiesInput) ModifyWorkspacePropertiesRequest {
+func (c *Client) ModifyWorkspacePropertiesRequest(input *types.ModifyWorkspacePropertiesInput) ModifyWorkspacePropertiesRequest {
 	op := &aws.Operation{
 		Name:       opModifyWorkspaceProperties,
 		HTTPMethod: "POST",
@@ -78,10 +32,10 @@ func (c *Client) ModifyWorkspacePropertiesRequest(input *ModifyWorkspaceProperti
 	}
 
 	if input == nil {
-		input = &ModifyWorkspacePropertiesInput{}
+		input = &types.ModifyWorkspacePropertiesInput{}
 	}
 
-	req := c.newRequest(op, input, &ModifyWorkspacePropertiesOutput{})
+	req := c.newRequest(op, input, &types.ModifyWorkspacePropertiesOutput{})
 	return ModifyWorkspacePropertiesRequest{Request: req, Input: input, Copy: c.ModifyWorkspacePropertiesRequest}
 }
 
@@ -89,8 +43,8 @@ func (c *Client) ModifyWorkspacePropertiesRequest(input *ModifyWorkspaceProperti
 // ModifyWorkspaceProperties API operation.
 type ModifyWorkspacePropertiesRequest struct {
 	*aws.Request
-	Input *ModifyWorkspacePropertiesInput
-	Copy  func(*ModifyWorkspacePropertiesInput) ModifyWorkspacePropertiesRequest
+	Input *types.ModifyWorkspacePropertiesInput
+	Copy  func(*types.ModifyWorkspacePropertiesInput) ModifyWorkspacePropertiesRequest
 }
 
 // Send marshals and sends the ModifyWorkspaceProperties API request.
@@ -102,7 +56,7 @@ func (r ModifyWorkspacePropertiesRequest) Send(ctx context.Context) (*ModifyWork
 	}
 
 	resp := &ModifyWorkspacePropertiesResponse{
-		ModifyWorkspacePropertiesOutput: r.Request.Data.(*ModifyWorkspacePropertiesOutput),
+		ModifyWorkspacePropertiesOutput: r.Request.Data.(*types.ModifyWorkspacePropertiesOutput),
 		response:                        &aws.Response{Request: r.Request},
 	}
 
@@ -112,7 +66,7 @@ func (r ModifyWorkspacePropertiesRequest) Send(ctx context.Context) (*ModifyWork
 // ModifyWorkspacePropertiesResponse is the response type for the
 // ModifyWorkspaceProperties API operation.
 type ModifyWorkspacePropertiesResponse struct {
-	*ModifyWorkspacePropertiesOutput
+	*types.ModifyWorkspacePropertiesOutput
 
 	response *aws.Response
 }

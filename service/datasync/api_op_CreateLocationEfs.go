@@ -4,104 +4,10 @@ package datasync
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/datasync/types"
 )
-
-// CreateLocationEfsRequest
-type CreateLocationEfsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The subnet and security group that the Amazon EFS file system uses. The security
-	// group that you provide needs to be able to communicate with the security
-	// group on the mount target in the subnet specified.
-	//
-	// The exact relationship between security group M (of the mount target) and
-	// security group S (which you provide for DataSync to use at this stage) is
-	// as follows:
-	//
-	//    * Security group M (which you associate with the mount target) must allow
-	//    inbound access for the Transmission Control Protocol (TCP) on the NFS
-	//    port (2049) from security group S. You can enable inbound connections
-	//    either by IP address (CIDR range) or security group.
-	//
-	//    * Security group S (provided to DataSync to access EFS) should have a
-	//    rule that enables outbound connections to the NFS port on one of the file
-	//    system’s mount targets. You can enable outbound connections either by
-	//    IP address (CIDR range) or security group. For information about security
-	//    groups and mount targets, see Security Groups for Amazon EC2 Instances
-	//    and Mount Targets in the Amazon EFS User Guide.
-	//
-	// Ec2Config is a required field
-	Ec2Config *Ec2Config `type:"structure" required:"true"`
-
-	// The Amazon Resource Name (ARN) for the Amazon EFS file system.
-	//
-	// EfsFilesystemArn is a required field
-	EfsFilesystemArn *string `type:"string" required:"true"`
-
-	// A subdirectory in the location’s path. This subdirectory in the EFS file
-	// system is used to read data from the EFS source location or write data to
-	// the EFS destination. By default, AWS DataSync uses the root directory.
-	Subdirectory *string `type:"string"`
-
-	// The key-value pair that represents a tag that you want to add to the resource.
-	// The value can be an empty string. This value helps you manage, filter, and
-	// search for your resources. We recommend that you create a name tag for your
-	// location.
-	Tags []TagListEntry `type:"list"`
-}
-
-// String returns the string representation
-func (s CreateLocationEfsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateLocationEfsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateLocationEfsInput"}
-
-	if s.Ec2Config == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Ec2Config"))
-	}
-
-	if s.EfsFilesystemArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("EfsFilesystemArn"))
-	}
-	if s.Ec2Config != nil {
-		if err := s.Ec2Config.Validate(); err != nil {
-			invalidParams.AddNested("Ec2Config", err.(aws.ErrInvalidParams))
-		}
-	}
-	if s.Tags != nil {
-		for i, v := range s.Tags {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// CreateLocationEfs
-type CreateLocationEfsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the Amazon EFS file system location that
-	// is created.
-	LocationArn *string `type:"string"`
-}
-
-// String returns the string representation
-func (s CreateLocationEfsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCreateLocationEfs = "CreateLocationEfs"
 
@@ -118,7 +24,7 @@ const opCreateLocationEfs = "CreateLocationEfs"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/CreateLocationEfs
-func (c *Client) CreateLocationEfsRequest(input *CreateLocationEfsInput) CreateLocationEfsRequest {
+func (c *Client) CreateLocationEfsRequest(input *types.CreateLocationEfsInput) CreateLocationEfsRequest {
 	op := &aws.Operation{
 		Name:       opCreateLocationEfs,
 		HTTPMethod: "POST",
@@ -126,10 +32,10 @@ func (c *Client) CreateLocationEfsRequest(input *CreateLocationEfsInput) CreateL
 	}
 
 	if input == nil {
-		input = &CreateLocationEfsInput{}
+		input = &types.CreateLocationEfsInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateLocationEfsOutput{})
+	req := c.newRequest(op, input, &types.CreateLocationEfsOutput{})
 	return CreateLocationEfsRequest{Request: req, Input: input, Copy: c.CreateLocationEfsRequest}
 }
 
@@ -137,8 +43,8 @@ func (c *Client) CreateLocationEfsRequest(input *CreateLocationEfsInput) CreateL
 // CreateLocationEfs API operation.
 type CreateLocationEfsRequest struct {
 	*aws.Request
-	Input *CreateLocationEfsInput
-	Copy  func(*CreateLocationEfsInput) CreateLocationEfsRequest
+	Input *types.CreateLocationEfsInput
+	Copy  func(*types.CreateLocationEfsInput) CreateLocationEfsRequest
 }
 
 // Send marshals and sends the CreateLocationEfs API request.
@@ -150,7 +56,7 @@ func (r CreateLocationEfsRequest) Send(ctx context.Context) (*CreateLocationEfsR
 	}
 
 	resp := &CreateLocationEfsResponse{
-		CreateLocationEfsOutput: r.Request.Data.(*CreateLocationEfsOutput),
+		CreateLocationEfsOutput: r.Request.Data.(*types.CreateLocationEfsOutput),
 		response:                &aws.Response{Request: r.Request},
 	}
 
@@ -160,7 +66,7 @@ func (r CreateLocationEfsRequest) Send(ctx context.Context) (*CreateLocationEfsR
 // CreateLocationEfsResponse is the response type for the
 // CreateLocationEfs API operation.
 type CreateLocationEfsResponse struct {
-	*CreateLocationEfsOutput
+	*types.CreateLocationEfsOutput
 
 	response *aws.Response
 }

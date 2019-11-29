@@ -6,46 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/datasync/types"
 )
-
-// DeleteLocation
-type DeleteLocationInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the location to delete.
-	//
-	// LocationArn is a required field
-	LocationArn *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteLocationInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteLocationInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteLocationInput"}
-
-	if s.LocationArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("LocationArn"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteLocationOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteLocationOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteLocation = "DeleteLocation"
 
@@ -62,7 +24,7 @@ const opDeleteLocation = "DeleteLocation"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/DeleteLocation
-func (c *Client) DeleteLocationRequest(input *DeleteLocationInput) DeleteLocationRequest {
+func (c *Client) DeleteLocationRequest(input *types.DeleteLocationInput) DeleteLocationRequest {
 	op := &aws.Operation{
 		Name:       opDeleteLocation,
 		HTTPMethod: "POST",
@@ -70,10 +32,10 @@ func (c *Client) DeleteLocationRequest(input *DeleteLocationInput) DeleteLocatio
 	}
 
 	if input == nil {
-		input = &DeleteLocationInput{}
+		input = &types.DeleteLocationInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteLocationOutput{})
+	req := c.newRequest(op, input, &types.DeleteLocationOutput{})
 	return DeleteLocationRequest{Request: req, Input: input, Copy: c.DeleteLocationRequest}
 }
 
@@ -81,8 +43,8 @@ func (c *Client) DeleteLocationRequest(input *DeleteLocationInput) DeleteLocatio
 // DeleteLocation API operation.
 type DeleteLocationRequest struct {
 	*aws.Request
-	Input *DeleteLocationInput
-	Copy  func(*DeleteLocationInput) DeleteLocationRequest
+	Input *types.DeleteLocationInput
+	Copy  func(*types.DeleteLocationInput) DeleteLocationRequest
 }
 
 // Send marshals and sends the DeleteLocation API request.
@@ -94,7 +56,7 @@ func (r DeleteLocationRequest) Send(ctx context.Context) (*DeleteLocationRespons
 	}
 
 	resp := &DeleteLocationResponse{
-		DeleteLocationOutput: r.Request.Data.(*DeleteLocationOutput),
+		DeleteLocationOutput: r.Request.Data.(*types.DeleteLocationOutput),
 		response:             &aws.Response{Request: r.Request},
 	}
 
@@ -104,7 +66,7 @@ func (r DeleteLocationRequest) Send(ctx context.Context) (*DeleteLocationRespons
 // DeleteLocationResponse is the response type for the
 // DeleteLocation API operation.
 type DeleteLocationResponse struct {
-	*DeleteLocationOutput
+	*types.DeleteLocationOutput
 
 	response *aws.Response
 }

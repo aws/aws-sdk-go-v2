@@ -6,43 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/configservice/types"
 )
-
-type StartConfigRulesEvaluationInput struct {
-	_ struct{} `type:"structure"`
-
-	// The list of names of AWS Config rules that you want to run evaluations for.
-	ConfigRuleNames []string `min:"1" type:"list"`
-}
-
-// String returns the string representation
-func (s StartConfigRulesEvaluationInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *StartConfigRulesEvaluationInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "StartConfigRulesEvaluationInput"}
-	if s.ConfigRuleNames != nil && len(s.ConfigRuleNames) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ConfigRuleNames", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// The output when you start the evaluation for the specified AWS Config rule.
-type StartConfigRulesEvaluationOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s StartConfigRulesEvaluationOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opStartConfigRulesEvaluation = "StartConfigRulesEvaluation"
 
@@ -88,7 +53,7 @@ const opStartConfigRulesEvaluation = "StartConfigRulesEvaluation"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/StartConfigRulesEvaluation
-func (c *Client) StartConfigRulesEvaluationRequest(input *StartConfigRulesEvaluationInput) StartConfigRulesEvaluationRequest {
+func (c *Client) StartConfigRulesEvaluationRequest(input *types.StartConfigRulesEvaluationInput) StartConfigRulesEvaluationRequest {
 	op := &aws.Operation{
 		Name:       opStartConfigRulesEvaluation,
 		HTTPMethod: "POST",
@@ -96,10 +61,10 @@ func (c *Client) StartConfigRulesEvaluationRequest(input *StartConfigRulesEvalua
 	}
 
 	if input == nil {
-		input = &StartConfigRulesEvaluationInput{}
+		input = &types.StartConfigRulesEvaluationInput{}
 	}
 
-	req := c.newRequest(op, input, &StartConfigRulesEvaluationOutput{})
+	req := c.newRequest(op, input, &types.StartConfigRulesEvaluationOutput{})
 	return StartConfigRulesEvaluationRequest{Request: req, Input: input, Copy: c.StartConfigRulesEvaluationRequest}
 }
 
@@ -107,8 +72,8 @@ func (c *Client) StartConfigRulesEvaluationRequest(input *StartConfigRulesEvalua
 // StartConfigRulesEvaluation API operation.
 type StartConfigRulesEvaluationRequest struct {
 	*aws.Request
-	Input *StartConfigRulesEvaluationInput
-	Copy  func(*StartConfigRulesEvaluationInput) StartConfigRulesEvaluationRequest
+	Input *types.StartConfigRulesEvaluationInput
+	Copy  func(*types.StartConfigRulesEvaluationInput) StartConfigRulesEvaluationRequest
 }
 
 // Send marshals and sends the StartConfigRulesEvaluation API request.
@@ -120,7 +85,7 @@ func (r StartConfigRulesEvaluationRequest) Send(ctx context.Context) (*StartConf
 	}
 
 	resp := &StartConfigRulesEvaluationResponse{
-		StartConfigRulesEvaluationOutput: r.Request.Data.(*StartConfigRulesEvaluationOutput),
+		StartConfigRulesEvaluationOutput: r.Request.Data.(*types.StartConfigRulesEvaluationOutput),
 		response:                         &aws.Response{Request: r.Request},
 	}
 
@@ -130,7 +95,7 @@ func (r StartConfigRulesEvaluationRequest) Send(ctx context.Context) (*StartConf
 // StartConfigRulesEvaluationResponse is the response type for the
 // StartConfigRulesEvaluation API operation.
 type StartConfigRulesEvaluationResponse struct {
-	*StartConfigRulesEvaluationOutput
+	*types.StartConfigRulesEvaluationOutput
 
 	response *aws.Response
 }

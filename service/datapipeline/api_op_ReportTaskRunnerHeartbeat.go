@@ -6,72 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/datapipeline/types"
 )
-
-// Contains the parameters for ReportTaskRunnerHeartbeat.
-type ReportTaskRunnerHeartbeatInput struct {
-	_ struct{} `type:"structure"`
-
-	// The public DNS name of the task runner.
-	Hostname *string `locationName:"hostname" min:"1" type:"string"`
-
-	// The ID of the task runner. This value should be unique across your AWS account.
-	// In the case of AWS Data Pipeline Task Runner launched on a resource managed
-	// by AWS Data Pipeline, the web service provides a unique identifier when it
-	// launches the application. If you have written a custom task runner, you should
-	// assign a unique identifier for the task runner.
-	//
-	// TaskrunnerId is a required field
-	TaskrunnerId *string `locationName:"taskrunnerId" min:"1" type:"string" required:"true"`
-
-	// The type of task the task runner is configured to accept and process. The
-	// worker group is set as a field on objects in the pipeline when they are created.
-	// You can only specify a single value for workerGroup. There are no wildcard
-	// values permitted in workerGroup; the string must be an exact, case-sensitive,
-	// match.
-	WorkerGroup *string `locationName:"workerGroup" type:"string"`
-}
-
-// String returns the string representation
-func (s ReportTaskRunnerHeartbeatInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ReportTaskRunnerHeartbeatInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ReportTaskRunnerHeartbeatInput"}
-	if s.Hostname != nil && len(*s.Hostname) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Hostname", 1))
-	}
-
-	if s.TaskrunnerId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("TaskrunnerId"))
-	}
-	if s.TaskrunnerId != nil && len(*s.TaskrunnerId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("TaskrunnerId", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Contains the output of ReportTaskRunnerHeartbeat.
-type ReportTaskRunnerHeartbeatOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Indicates whether the calling task runner should terminate.
-	//
-	// Terminate is a required field
-	Terminate *bool `locationName:"terminate" type:"boolean" required:"true"`
-}
-
-// String returns the string representation
-func (s ReportTaskRunnerHeartbeatOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opReportTaskRunnerHeartbeat = "ReportTaskRunnerHeartbeat"
 
@@ -92,7 +28,7 @@ const opReportTaskRunnerHeartbeat = "ReportTaskRunnerHeartbeat"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/datapipeline-2012-10-29/ReportTaskRunnerHeartbeat
-func (c *Client) ReportTaskRunnerHeartbeatRequest(input *ReportTaskRunnerHeartbeatInput) ReportTaskRunnerHeartbeatRequest {
+func (c *Client) ReportTaskRunnerHeartbeatRequest(input *types.ReportTaskRunnerHeartbeatInput) ReportTaskRunnerHeartbeatRequest {
 	op := &aws.Operation{
 		Name:       opReportTaskRunnerHeartbeat,
 		HTTPMethod: "POST",
@@ -100,10 +36,10 @@ func (c *Client) ReportTaskRunnerHeartbeatRequest(input *ReportTaskRunnerHeartbe
 	}
 
 	if input == nil {
-		input = &ReportTaskRunnerHeartbeatInput{}
+		input = &types.ReportTaskRunnerHeartbeatInput{}
 	}
 
-	req := c.newRequest(op, input, &ReportTaskRunnerHeartbeatOutput{})
+	req := c.newRequest(op, input, &types.ReportTaskRunnerHeartbeatOutput{})
 	return ReportTaskRunnerHeartbeatRequest{Request: req, Input: input, Copy: c.ReportTaskRunnerHeartbeatRequest}
 }
 
@@ -111,8 +47,8 @@ func (c *Client) ReportTaskRunnerHeartbeatRequest(input *ReportTaskRunnerHeartbe
 // ReportTaskRunnerHeartbeat API operation.
 type ReportTaskRunnerHeartbeatRequest struct {
 	*aws.Request
-	Input *ReportTaskRunnerHeartbeatInput
-	Copy  func(*ReportTaskRunnerHeartbeatInput) ReportTaskRunnerHeartbeatRequest
+	Input *types.ReportTaskRunnerHeartbeatInput
+	Copy  func(*types.ReportTaskRunnerHeartbeatInput) ReportTaskRunnerHeartbeatRequest
 }
 
 // Send marshals and sends the ReportTaskRunnerHeartbeat API request.
@@ -124,7 +60,7 @@ func (r ReportTaskRunnerHeartbeatRequest) Send(ctx context.Context) (*ReportTask
 	}
 
 	resp := &ReportTaskRunnerHeartbeatResponse{
-		ReportTaskRunnerHeartbeatOutput: r.Request.Data.(*ReportTaskRunnerHeartbeatOutput),
+		ReportTaskRunnerHeartbeatOutput: r.Request.Data.(*types.ReportTaskRunnerHeartbeatOutput),
 		response:                        &aws.Response{Request: r.Request},
 	}
 
@@ -134,7 +70,7 @@ func (r ReportTaskRunnerHeartbeatRequest) Send(ctx context.Context) (*ReportTask
 // ReportTaskRunnerHeartbeatResponse is the response type for the
 // ReportTaskRunnerHeartbeat API operation.
 type ReportTaskRunnerHeartbeatResponse struct {
-	*ReportTaskRunnerHeartbeatOutput
+	*types.ReportTaskRunnerHeartbeatOutput
 
 	response *aws.Response
 }

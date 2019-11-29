@@ -4,65 +4,10 @@ package elasticloadbalancingv2
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/elasticloadbalancingv2/types"
 )
-
-type DeregisterTargetsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the target group.
-	//
-	// TargetGroupArn is a required field
-	TargetGroupArn *string `type:"string" required:"true"`
-
-	// The targets. If you specified a port override when you registered a target,
-	// you must specify both the target ID and the port when you deregister it.
-	//
-	// Targets is a required field
-	Targets []TargetDescription `type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s DeregisterTargetsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeregisterTargetsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeregisterTargetsInput"}
-
-	if s.TargetGroupArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("TargetGroupArn"))
-	}
-
-	if s.Targets == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Targets"))
-	}
-	if s.Targets != nil {
-		for i, v := range s.Targets {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Targets", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeregisterTargetsOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeregisterTargetsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeregisterTargets = "DeregisterTargets"
 
@@ -81,7 +26,7 @@ const opDeregisterTargets = "DeregisterTargets"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/DeregisterTargets
-func (c *Client) DeregisterTargetsRequest(input *DeregisterTargetsInput) DeregisterTargetsRequest {
+func (c *Client) DeregisterTargetsRequest(input *types.DeregisterTargetsInput) DeregisterTargetsRequest {
 	op := &aws.Operation{
 		Name:       opDeregisterTargets,
 		HTTPMethod: "POST",
@@ -89,10 +34,10 @@ func (c *Client) DeregisterTargetsRequest(input *DeregisterTargetsInput) Deregis
 	}
 
 	if input == nil {
-		input = &DeregisterTargetsInput{}
+		input = &types.DeregisterTargetsInput{}
 	}
 
-	req := c.newRequest(op, input, &DeregisterTargetsOutput{})
+	req := c.newRequest(op, input, &types.DeregisterTargetsOutput{})
 	return DeregisterTargetsRequest{Request: req, Input: input, Copy: c.DeregisterTargetsRequest}
 }
 
@@ -100,8 +45,8 @@ func (c *Client) DeregisterTargetsRequest(input *DeregisterTargetsInput) Deregis
 // DeregisterTargets API operation.
 type DeregisterTargetsRequest struct {
 	*aws.Request
-	Input *DeregisterTargetsInput
-	Copy  func(*DeregisterTargetsInput) DeregisterTargetsRequest
+	Input *types.DeregisterTargetsInput
+	Copy  func(*types.DeregisterTargetsInput) DeregisterTargetsRequest
 }
 
 // Send marshals and sends the DeregisterTargets API request.
@@ -113,7 +58,7 @@ func (r DeregisterTargetsRequest) Send(ctx context.Context) (*DeregisterTargetsR
 	}
 
 	resp := &DeregisterTargetsResponse{
-		DeregisterTargetsOutput: r.Request.Data.(*DeregisterTargetsOutput),
+		DeregisterTargetsOutput: r.Request.Data.(*types.DeregisterTargetsOutput),
 		response:                &aws.Response{Request: r.Request},
 	}
 
@@ -123,7 +68,7 @@ func (r DeregisterTargetsRequest) Send(ctx context.Context) (*DeregisterTargetsR
 // DeregisterTargetsResponse is the response type for the
 // DeregisterTargets API operation.
 type DeregisterTargetsResponse struct {
-	*DeregisterTargetsOutput
+	*types.DeregisterTargetsOutput
 
 	response *aws.Response
 }

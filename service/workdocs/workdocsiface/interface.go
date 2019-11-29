@@ -10,6 +10,7 @@ package workdocsiface
 
 import (
 	"github.com/aws/aws-sdk-go-v2/service/workdocs"
+	"github.com/aws/aws-sdk-go-v2/service/workdocs/types"
 )
 
 // ClientAPI provides an interface to enable mocking the
@@ -43,7 +44,7 @@ import (
 //    type mockClientClient struct {
 //        workdocsiface.ClientPI
 //    }
-//    func (m *mockClientClient) AbortDocumentVersionUpload(input *workdocs.AbortDocumentVersionUploadInput) (*workdocs.AbortDocumentVersionUploadOutput, error) {
+//    func (m *mockClientClient) AbortDocumentVersionUpload(input *types.AbortDocumentVersionUploadInput) (*types.AbortDocumentVersionUploadOutput, error) {
 //        // mock response/functionality
 //    }
 //
@@ -61,87 +62,87 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type ClientAPI interface {
-	AbortDocumentVersionUploadRequest(*workdocs.AbortDocumentVersionUploadInput) workdocs.AbortDocumentVersionUploadRequest
+	AbortDocumentVersionUploadRequest(*types.AbortDocumentVersionUploadInput) workdocs.AbortDocumentVersionUploadRequest
 
-	ActivateUserRequest(*workdocs.ActivateUserInput) workdocs.ActivateUserRequest
+	ActivateUserRequest(*types.ActivateUserInput) workdocs.ActivateUserRequest
 
-	AddResourcePermissionsRequest(*workdocs.AddResourcePermissionsInput) workdocs.AddResourcePermissionsRequest
+	AddResourcePermissionsRequest(*types.AddResourcePermissionsInput) workdocs.AddResourcePermissionsRequest
 
-	CreateCommentRequest(*workdocs.CreateCommentInput) workdocs.CreateCommentRequest
+	CreateCommentRequest(*types.CreateCommentInput) workdocs.CreateCommentRequest
 
-	CreateCustomMetadataRequest(*workdocs.CreateCustomMetadataInput) workdocs.CreateCustomMetadataRequest
+	CreateCustomMetadataRequest(*types.CreateCustomMetadataInput) workdocs.CreateCustomMetadataRequest
 
-	CreateFolderRequest(*workdocs.CreateFolderInput) workdocs.CreateFolderRequest
+	CreateFolderRequest(*types.CreateFolderInput) workdocs.CreateFolderRequest
 
-	CreateLabelsRequest(*workdocs.CreateLabelsInput) workdocs.CreateLabelsRequest
+	CreateLabelsRequest(*types.CreateLabelsInput) workdocs.CreateLabelsRequest
 
-	CreateNotificationSubscriptionRequest(*workdocs.CreateNotificationSubscriptionInput) workdocs.CreateNotificationSubscriptionRequest
+	CreateNotificationSubscriptionRequest(*types.CreateNotificationSubscriptionInput) workdocs.CreateNotificationSubscriptionRequest
 
-	CreateUserRequest(*workdocs.CreateUserInput) workdocs.CreateUserRequest
+	CreateUserRequest(*types.CreateUserInput) workdocs.CreateUserRequest
 
-	DeactivateUserRequest(*workdocs.DeactivateUserInput) workdocs.DeactivateUserRequest
+	DeactivateUserRequest(*types.DeactivateUserInput) workdocs.DeactivateUserRequest
 
-	DeleteCommentRequest(*workdocs.DeleteCommentInput) workdocs.DeleteCommentRequest
+	DeleteCommentRequest(*types.DeleteCommentInput) workdocs.DeleteCommentRequest
 
-	DeleteCustomMetadataRequest(*workdocs.DeleteCustomMetadataInput) workdocs.DeleteCustomMetadataRequest
+	DeleteCustomMetadataRequest(*types.DeleteCustomMetadataInput) workdocs.DeleteCustomMetadataRequest
 
-	DeleteDocumentRequest(*workdocs.DeleteDocumentInput) workdocs.DeleteDocumentRequest
+	DeleteDocumentRequest(*types.DeleteDocumentInput) workdocs.DeleteDocumentRequest
 
-	DeleteFolderRequest(*workdocs.DeleteFolderInput) workdocs.DeleteFolderRequest
+	DeleteFolderRequest(*types.DeleteFolderInput) workdocs.DeleteFolderRequest
 
-	DeleteFolderContentsRequest(*workdocs.DeleteFolderContentsInput) workdocs.DeleteFolderContentsRequest
+	DeleteFolderContentsRequest(*types.DeleteFolderContentsInput) workdocs.DeleteFolderContentsRequest
 
-	DeleteLabelsRequest(*workdocs.DeleteLabelsInput) workdocs.DeleteLabelsRequest
+	DeleteLabelsRequest(*types.DeleteLabelsInput) workdocs.DeleteLabelsRequest
 
-	DeleteNotificationSubscriptionRequest(*workdocs.DeleteNotificationSubscriptionInput) workdocs.DeleteNotificationSubscriptionRequest
+	DeleteNotificationSubscriptionRequest(*types.DeleteNotificationSubscriptionInput) workdocs.DeleteNotificationSubscriptionRequest
 
-	DeleteUserRequest(*workdocs.DeleteUserInput) workdocs.DeleteUserRequest
+	DeleteUserRequest(*types.DeleteUserInput) workdocs.DeleteUserRequest
 
-	DescribeActivitiesRequest(*workdocs.DescribeActivitiesInput) workdocs.DescribeActivitiesRequest
+	DescribeActivitiesRequest(*types.DescribeActivitiesInput) workdocs.DescribeActivitiesRequest
 
-	DescribeCommentsRequest(*workdocs.DescribeCommentsInput) workdocs.DescribeCommentsRequest
+	DescribeCommentsRequest(*types.DescribeCommentsInput) workdocs.DescribeCommentsRequest
 
-	DescribeDocumentVersionsRequest(*workdocs.DescribeDocumentVersionsInput) workdocs.DescribeDocumentVersionsRequest
+	DescribeDocumentVersionsRequest(*types.DescribeDocumentVersionsInput) workdocs.DescribeDocumentVersionsRequest
 
-	DescribeFolderContentsRequest(*workdocs.DescribeFolderContentsInput) workdocs.DescribeFolderContentsRequest
+	DescribeFolderContentsRequest(*types.DescribeFolderContentsInput) workdocs.DescribeFolderContentsRequest
 
-	DescribeGroupsRequest(*workdocs.DescribeGroupsInput) workdocs.DescribeGroupsRequest
+	DescribeGroupsRequest(*types.DescribeGroupsInput) workdocs.DescribeGroupsRequest
 
-	DescribeNotificationSubscriptionsRequest(*workdocs.DescribeNotificationSubscriptionsInput) workdocs.DescribeNotificationSubscriptionsRequest
+	DescribeNotificationSubscriptionsRequest(*types.DescribeNotificationSubscriptionsInput) workdocs.DescribeNotificationSubscriptionsRequest
 
-	DescribeResourcePermissionsRequest(*workdocs.DescribeResourcePermissionsInput) workdocs.DescribeResourcePermissionsRequest
+	DescribeResourcePermissionsRequest(*types.DescribeResourcePermissionsInput) workdocs.DescribeResourcePermissionsRequest
 
-	DescribeRootFoldersRequest(*workdocs.DescribeRootFoldersInput) workdocs.DescribeRootFoldersRequest
+	DescribeRootFoldersRequest(*types.DescribeRootFoldersInput) workdocs.DescribeRootFoldersRequest
 
-	DescribeUsersRequest(*workdocs.DescribeUsersInput) workdocs.DescribeUsersRequest
+	DescribeUsersRequest(*types.DescribeUsersInput) workdocs.DescribeUsersRequest
 
-	GetCurrentUserRequest(*workdocs.GetCurrentUserInput) workdocs.GetCurrentUserRequest
+	GetCurrentUserRequest(*types.GetCurrentUserInput) workdocs.GetCurrentUserRequest
 
-	GetDocumentRequest(*workdocs.GetDocumentInput) workdocs.GetDocumentRequest
+	GetDocumentRequest(*types.GetDocumentInput) workdocs.GetDocumentRequest
 
-	GetDocumentPathRequest(*workdocs.GetDocumentPathInput) workdocs.GetDocumentPathRequest
+	GetDocumentPathRequest(*types.GetDocumentPathInput) workdocs.GetDocumentPathRequest
 
-	GetDocumentVersionRequest(*workdocs.GetDocumentVersionInput) workdocs.GetDocumentVersionRequest
+	GetDocumentVersionRequest(*types.GetDocumentVersionInput) workdocs.GetDocumentVersionRequest
 
-	GetFolderRequest(*workdocs.GetFolderInput) workdocs.GetFolderRequest
+	GetFolderRequest(*types.GetFolderInput) workdocs.GetFolderRequest
 
-	GetFolderPathRequest(*workdocs.GetFolderPathInput) workdocs.GetFolderPathRequest
+	GetFolderPathRequest(*types.GetFolderPathInput) workdocs.GetFolderPathRequest
 
-	GetResourcesRequest(*workdocs.GetResourcesInput) workdocs.GetResourcesRequest
+	GetResourcesRequest(*types.GetResourcesInput) workdocs.GetResourcesRequest
 
-	InitiateDocumentVersionUploadRequest(*workdocs.InitiateDocumentVersionUploadInput) workdocs.InitiateDocumentVersionUploadRequest
+	InitiateDocumentVersionUploadRequest(*types.InitiateDocumentVersionUploadInput) workdocs.InitiateDocumentVersionUploadRequest
 
-	RemoveAllResourcePermissionsRequest(*workdocs.RemoveAllResourcePermissionsInput) workdocs.RemoveAllResourcePermissionsRequest
+	RemoveAllResourcePermissionsRequest(*types.RemoveAllResourcePermissionsInput) workdocs.RemoveAllResourcePermissionsRequest
 
-	RemoveResourcePermissionRequest(*workdocs.RemoveResourcePermissionInput) workdocs.RemoveResourcePermissionRequest
+	RemoveResourcePermissionRequest(*types.RemoveResourcePermissionInput) workdocs.RemoveResourcePermissionRequest
 
-	UpdateDocumentRequest(*workdocs.UpdateDocumentInput) workdocs.UpdateDocumentRequest
+	UpdateDocumentRequest(*types.UpdateDocumentInput) workdocs.UpdateDocumentRequest
 
-	UpdateDocumentVersionRequest(*workdocs.UpdateDocumentVersionInput) workdocs.UpdateDocumentVersionRequest
+	UpdateDocumentVersionRequest(*types.UpdateDocumentVersionInput) workdocs.UpdateDocumentVersionRequest
 
-	UpdateFolderRequest(*workdocs.UpdateFolderInput) workdocs.UpdateFolderRequest
+	UpdateFolderRequest(*types.UpdateFolderInput) workdocs.UpdateFolderRequest
 
-	UpdateUserRequest(*workdocs.UpdateUserInput) workdocs.UpdateUserRequest
+	UpdateUserRequest(*types.UpdateUserInput) workdocs.UpdateUserRequest
 }
 
 var _ ClientAPI = (*workdocs.Client)(nil)

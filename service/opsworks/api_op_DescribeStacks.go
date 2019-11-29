@@ -6,34 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/opsworks/types"
 )
-
-type DescribeStacksInput struct {
-	_ struct{} `type:"structure"`
-
-	// An array of stack IDs that specify the stacks to be described. If you omit
-	// this parameter, DescribeStacks returns a description of every stack.
-	StackIds []string `type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeStacksInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Contains the response to a DescribeStacks request.
-type DescribeStacksOutput struct {
-	_ struct{} `type:"structure"`
-
-	// An array of Stack objects that describe the stacks.
-	Stacks []Stack `type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeStacksOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeStacks = "DescribeStacks"
 
@@ -55,7 +29,7 @@ const opDescribeStacks = "DescribeStacks"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DescribeStacks
-func (c *Client) DescribeStacksRequest(input *DescribeStacksInput) DescribeStacksRequest {
+func (c *Client) DescribeStacksRequest(input *types.DescribeStacksInput) DescribeStacksRequest {
 	op := &aws.Operation{
 		Name:       opDescribeStacks,
 		HTTPMethod: "POST",
@@ -63,10 +37,10 @@ func (c *Client) DescribeStacksRequest(input *DescribeStacksInput) DescribeStack
 	}
 
 	if input == nil {
-		input = &DescribeStacksInput{}
+		input = &types.DescribeStacksInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeStacksOutput{})
+	req := c.newRequest(op, input, &types.DescribeStacksOutput{})
 	return DescribeStacksRequest{Request: req, Input: input, Copy: c.DescribeStacksRequest}
 }
 
@@ -74,8 +48,8 @@ func (c *Client) DescribeStacksRequest(input *DescribeStacksInput) DescribeStack
 // DescribeStacks API operation.
 type DescribeStacksRequest struct {
 	*aws.Request
-	Input *DescribeStacksInput
-	Copy  func(*DescribeStacksInput) DescribeStacksRequest
+	Input *types.DescribeStacksInput
+	Copy  func(*types.DescribeStacksInput) DescribeStacksRequest
 }
 
 // Send marshals and sends the DescribeStacks API request.
@@ -87,7 +61,7 @@ func (r DescribeStacksRequest) Send(ctx context.Context) (*DescribeStacksRespons
 	}
 
 	resp := &DescribeStacksResponse{
-		DescribeStacksOutput: r.Request.Data.(*DescribeStacksOutput),
+		DescribeStacksOutput: r.Request.Data.(*types.DescribeStacksOutput),
 		response:             &aws.Response{Request: r.Request},
 	}
 
@@ -97,7 +71,7 @@ func (r DescribeStacksRequest) Send(ctx context.Context) (*DescribeStacksRespons
 // DescribeStacksResponse is the response type for the
 // DescribeStacks API operation.
 type DescribeStacksResponse struct {
-	*DescribeStacksOutput
+	*types.DescribeStacksOutput
 
 	response *aws.Response
 }

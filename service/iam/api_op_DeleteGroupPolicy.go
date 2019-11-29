@@ -6,71 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/query"
+	"github.com/aws/aws-sdk-go-v2/service/iam/types"
 )
-
-type DeleteGroupPolicyInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name (friendly name, not ARN) identifying the group that the policy is
-	// embedded in.
-	//
-	// This parameter allows (through its regex pattern (http://wikipedia.org/wiki/regex))
-	// a string of characters consisting of upper and lowercase alphanumeric characters
-	// with no spaces. You can also include any of the following characters: _+=,.@-
-	//
-	// GroupName is a required field
-	GroupName *string `min:"1" type:"string" required:"true"`
-
-	// The name identifying the policy document to delete.
-	//
-	// This parameter allows (through its regex pattern (http://wikipedia.org/wiki/regex))
-	// a string of characters consisting of upper and lowercase alphanumeric characters
-	// with no spaces. You can also include any of the following characters: _+=,.@-
-	//
-	// PolicyName is a required field
-	PolicyName *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteGroupPolicyInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteGroupPolicyInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteGroupPolicyInput"}
-
-	if s.GroupName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("GroupName"))
-	}
-	if s.GroupName != nil && len(*s.GroupName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("GroupName", 1))
-	}
-
-	if s.PolicyName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("PolicyName"))
-	}
-	if s.PolicyName != nil && len(*s.PolicyName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("PolicyName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteGroupPolicyOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteGroupPolicyOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteGroupPolicy = "DeleteGroupPolicy"
 
@@ -93,7 +32,7 @@ const opDeleteGroupPolicy = "DeleteGroupPolicy"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeleteGroupPolicy
-func (c *Client) DeleteGroupPolicyRequest(input *DeleteGroupPolicyInput) DeleteGroupPolicyRequest {
+func (c *Client) DeleteGroupPolicyRequest(input *types.DeleteGroupPolicyInput) DeleteGroupPolicyRequest {
 	op := &aws.Operation{
 		Name:       opDeleteGroupPolicy,
 		HTTPMethod: "POST",
@@ -101,10 +40,10 @@ func (c *Client) DeleteGroupPolicyRequest(input *DeleteGroupPolicyInput) DeleteG
 	}
 
 	if input == nil {
-		input = &DeleteGroupPolicyInput{}
+		input = &types.DeleteGroupPolicyInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteGroupPolicyOutput{})
+	req := c.newRequest(op, input, &types.DeleteGroupPolicyOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return DeleteGroupPolicyRequest{Request: req, Input: input, Copy: c.DeleteGroupPolicyRequest}
@@ -114,8 +53,8 @@ func (c *Client) DeleteGroupPolicyRequest(input *DeleteGroupPolicyInput) DeleteG
 // DeleteGroupPolicy API operation.
 type DeleteGroupPolicyRequest struct {
 	*aws.Request
-	Input *DeleteGroupPolicyInput
-	Copy  func(*DeleteGroupPolicyInput) DeleteGroupPolicyRequest
+	Input *types.DeleteGroupPolicyInput
+	Copy  func(*types.DeleteGroupPolicyInput) DeleteGroupPolicyRequest
 }
 
 // Send marshals and sends the DeleteGroupPolicy API request.
@@ -127,7 +66,7 @@ func (r DeleteGroupPolicyRequest) Send(ctx context.Context) (*DeleteGroupPolicyR
 	}
 
 	resp := &DeleteGroupPolicyResponse{
-		DeleteGroupPolicyOutput: r.Request.Data.(*DeleteGroupPolicyOutput),
+		DeleteGroupPolicyOutput: r.Request.Data.(*types.DeleteGroupPolicyOutput),
 		response:                &aws.Response{Request: r.Request},
 	}
 
@@ -137,7 +76,7 @@ func (r DeleteGroupPolicyRequest) Send(ctx context.Context) (*DeleteGroupPolicyR
 // DeleteGroupPolicyResponse is the response type for the
 // DeleteGroupPolicy API operation.
 type DeleteGroupPolicyResponse struct {
-	*DeleteGroupPolicyOutput
+	*types.DeleteGroupPolicyOutput
 
 	response *aws.Response
 }

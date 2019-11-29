@@ -6,63 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/mturk/types"
 )
-
-type SendTestEventNotificationInput struct {
-	_ struct{} `type:"structure"`
-
-	// The notification specification to test. This value is identical to the value
-	// you would provide to the UpdateNotificationSettings operation when you establish
-	// the notification specification for a HIT type.
-	//
-	// Notification is a required field
-	Notification *NotificationSpecification `type:"structure" required:"true"`
-
-	// The event to simulate to test the notification specification. This event
-	// is included in the test message even if the notification specification does
-	// not include the event type. The notification specification does not filter
-	// out the test event.
-	//
-	// TestEventType is a required field
-	TestEventType EventType `type:"string" required:"true" enum:"true"`
-}
-
-// String returns the string representation
-func (s SendTestEventNotificationInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *SendTestEventNotificationInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "SendTestEventNotificationInput"}
-
-	if s.Notification == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Notification"))
-	}
-	if len(s.TestEventType) == 0 {
-		invalidParams.Add(aws.NewErrParamRequired("TestEventType"))
-	}
-	if s.Notification != nil {
-		if err := s.Notification.Validate(); err != nil {
-			invalidParams.AddNested("Notification", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type SendTestEventNotificationOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s SendTestEventNotificationOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opSendTestEventNotification = "SendTestEventNotification"
 
@@ -84,7 +29,7 @@ const opSendTestEventNotification = "SendTestEventNotification"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/SendTestEventNotification
-func (c *Client) SendTestEventNotificationRequest(input *SendTestEventNotificationInput) SendTestEventNotificationRequest {
+func (c *Client) SendTestEventNotificationRequest(input *types.SendTestEventNotificationInput) SendTestEventNotificationRequest {
 	op := &aws.Operation{
 		Name:       opSendTestEventNotification,
 		HTTPMethod: "POST",
@@ -92,10 +37,10 @@ func (c *Client) SendTestEventNotificationRequest(input *SendTestEventNotificati
 	}
 
 	if input == nil {
-		input = &SendTestEventNotificationInput{}
+		input = &types.SendTestEventNotificationInput{}
 	}
 
-	req := c.newRequest(op, input, &SendTestEventNotificationOutput{})
+	req := c.newRequest(op, input, &types.SendTestEventNotificationOutput{})
 	return SendTestEventNotificationRequest{Request: req, Input: input, Copy: c.SendTestEventNotificationRequest}
 }
 
@@ -103,8 +48,8 @@ func (c *Client) SendTestEventNotificationRequest(input *SendTestEventNotificati
 // SendTestEventNotification API operation.
 type SendTestEventNotificationRequest struct {
 	*aws.Request
-	Input *SendTestEventNotificationInput
-	Copy  func(*SendTestEventNotificationInput) SendTestEventNotificationRequest
+	Input *types.SendTestEventNotificationInput
+	Copy  func(*types.SendTestEventNotificationInput) SendTestEventNotificationRequest
 }
 
 // Send marshals and sends the SendTestEventNotification API request.
@@ -116,7 +61,7 @@ func (r SendTestEventNotificationRequest) Send(ctx context.Context) (*SendTestEv
 	}
 
 	resp := &SendTestEventNotificationResponse{
-		SendTestEventNotificationOutput: r.Request.Data.(*SendTestEventNotificationOutput),
+		SendTestEventNotificationOutput: r.Request.Data.(*types.SendTestEventNotificationOutput),
 		response:                        &aws.Response{Request: r.Request},
 	}
 
@@ -126,7 +71,7 @@ func (r SendTestEventNotificationRequest) Send(ctx context.Context) (*SendTestEv
 // SendTestEventNotificationResponse is the response type for the
 // SendTestEventNotification API operation.
 type SendTestEventNotificationResponse struct {
-	*SendTestEventNotificationOutput
+	*types.SendTestEventNotificationOutput
 
 	response *aws.Response
 }

@@ -6,54 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/codedeploy/types"
 )
-
-// Represents the input of a GetApplication operation.
-type GetApplicationInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of an AWS CodeDeploy application associated with the IAM user or
-	// AWS account.
-	//
-	// ApplicationName is a required field
-	ApplicationName *string `locationName:"applicationName" min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetApplicationInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetApplicationInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetApplicationInput"}
-
-	if s.ApplicationName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ApplicationName"))
-	}
-	if s.ApplicationName != nil && len(*s.ApplicationName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ApplicationName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Represents the output of a GetApplication operation.
-type GetApplicationOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Information about the application.
-	Application *ApplicationInfo `locationName:"application" type:"structure"`
-}
-
-// String returns the string representation
-func (s GetApplicationOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetApplication = "GetApplication"
 
@@ -70,7 +24,7 @@ const opGetApplication = "GetApplication"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/GetApplication
-func (c *Client) GetApplicationRequest(input *GetApplicationInput) GetApplicationRequest {
+func (c *Client) GetApplicationRequest(input *types.GetApplicationInput) GetApplicationRequest {
 	op := &aws.Operation{
 		Name:       opGetApplication,
 		HTTPMethod: "POST",
@@ -78,10 +32,10 @@ func (c *Client) GetApplicationRequest(input *GetApplicationInput) GetApplicatio
 	}
 
 	if input == nil {
-		input = &GetApplicationInput{}
+		input = &types.GetApplicationInput{}
 	}
 
-	req := c.newRequest(op, input, &GetApplicationOutput{})
+	req := c.newRequest(op, input, &types.GetApplicationOutput{})
 	return GetApplicationRequest{Request: req, Input: input, Copy: c.GetApplicationRequest}
 }
 
@@ -89,8 +43,8 @@ func (c *Client) GetApplicationRequest(input *GetApplicationInput) GetApplicatio
 // GetApplication API operation.
 type GetApplicationRequest struct {
 	*aws.Request
-	Input *GetApplicationInput
-	Copy  func(*GetApplicationInput) GetApplicationRequest
+	Input *types.GetApplicationInput
+	Copy  func(*types.GetApplicationInput) GetApplicationRequest
 }
 
 // Send marshals and sends the GetApplication API request.
@@ -102,7 +56,7 @@ func (r GetApplicationRequest) Send(ctx context.Context) (*GetApplicationRespons
 	}
 
 	resp := &GetApplicationResponse{
-		GetApplicationOutput: r.Request.Data.(*GetApplicationOutput),
+		GetApplicationOutput: r.Request.Data.(*types.GetApplicationOutput),
 		response:             &aws.Response{Request: r.Request},
 	}
 
@@ -112,7 +66,7 @@ func (r GetApplicationRequest) Send(ctx context.Context) (*GetApplicationRespons
 // GetApplicationResponse is the response type for the
 // GetApplication API operation.
 type GetApplicationResponse struct {
-	*GetApplicationOutput
+	*types.GetApplicationOutput
 
 	response *aws.Response
 }

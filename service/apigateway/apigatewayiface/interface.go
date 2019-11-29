@@ -10,6 +10,7 @@ package apigatewayiface
 
 import (
 	"github.com/aws/aws-sdk-go-v2/service/apigateway"
+	"github.com/aws/aws-sdk-go-v2/service/apigateway/types"
 )
 
 // ClientAPI provides an interface to enable mocking the
@@ -43,7 +44,7 @@ import (
 //    type mockClientClient struct {
 //        apigatewayiface.ClientPI
 //    }
-//    func (m *mockClientClient) CreateApiKey(input *apigateway.CreateApiKeyInput) (*apigateway.CreateApiKeyOutput, error) {
+//    func (m *mockClientClient) CreateApiKey(input *types.CreateApiKeyInput) (*types.CreateApiKeyOutput, error) {
 //        // mock response/functionality
 //    }
 //
@@ -61,245 +62,245 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type ClientAPI interface {
-	CreateApiKeyRequest(*apigateway.CreateApiKeyInput) apigateway.CreateApiKeyRequest
+	CreateApiKeyRequest(*types.CreateApiKeyInput) apigateway.CreateApiKeyRequest
 
-	CreateAuthorizerRequest(*apigateway.CreateAuthorizerInput) apigateway.CreateAuthorizerRequest
+	CreateAuthorizerRequest(*types.CreateAuthorizerInput) apigateway.CreateAuthorizerRequest
 
-	CreateBasePathMappingRequest(*apigateway.CreateBasePathMappingInput) apigateway.CreateBasePathMappingRequest
+	CreateBasePathMappingRequest(*types.CreateBasePathMappingInput) apigateway.CreateBasePathMappingRequest
 
-	CreateDeploymentRequest(*apigateway.CreateDeploymentInput) apigateway.CreateDeploymentRequest
+	CreateDeploymentRequest(*types.CreateDeploymentInput) apigateway.CreateDeploymentRequest
 
-	CreateDocumentationPartRequest(*apigateway.CreateDocumentationPartInput) apigateway.CreateDocumentationPartRequest
+	CreateDocumentationPartRequest(*types.CreateDocumentationPartInput) apigateway.CreateDocumentationPartRequest
 
-	CreateDocumentationVersionRequest(*apigateway.CreateDocumentationVersionInput) apigateway.CreateDocumentationVersionRequest
+	CreateDocumentationVersionRequest(*types.CreateDocumentationVersionInput) apigateway.CreateDocumentationVersionRequest
 
-	CreateDomainNameRequest(*apigateway.CreateDomainNameInput) apigateway.CreateDomainNameRequest
+	CreateDomainNameRequest(*types.CreateDomainNameInput) apigateway.CreateDomainNameRequest
 
-	CreateModelRequest(*apigateway.CreateModelInput) apigateway.CreateModelRequest
+	CreateModelRequest(*types.CreateModelInput) apigateway.CreateModelRequest
 
-	CreateRequestValidatorRequest(*apigateway.CreateRequestValidatorInput) apigateway.CreateRequestValidatorRequest
+	CreateRequestValidatorRequest(*types.CreateRequestValidatorInput) apigateway.CreateRequestValidatorRequest
 
-	CreateResourceRequest(*apigateway.CreateResourceInput) apigateway.CreateResourceRequest
+	CreateResourceRequest(*types.CreateResourceInput) apigateway.CreateResourceRequest
 
-	CreateRestApiRequest(*apigateway.CreateRestApiInput) apigateway.CreateRestApiRequest
+	CreateRestApiRequest(*types.CreateRestApiInput) apigateway.CreateRestApiRequest
 
-	CreateStageRequest(*apigateway.CreateStageInput) apigateway.CreateStageRequest
+	CreateStageRequest(*types.CreateStageInput) apigateway.CreateStageRequest
 
-	CreateUsagePlanRequest(*apigateway.CreateUsagePlanInput) apigateway.CreateUsagePlanRequest
+	CreateUsagePlanRequest(*types.CreateUsagePlanInput) apigateway.CreateUsagePlanRequest
 
-	CreateUsagePlanKeyRequest(*apigateway.CreateUsagePlanKeyInput) apigateway.CreateUsagePlanKeyRequest
+	CreateUsagePlanKeyRequest(*types.CreateUsagePlanKeyInput) apigateway.CreateUsagePlanKeyRequest
 
-	CreateVpcLinkRequest(*apigateway.CreateVpcLinkInput) apigateway.CreateVpcLinkRequest
+	CreateVpcLinkRequest(*types.CreateVpcLinkInput) apigateway.CreateVpcLinkRequest
 
-	DeleteApiKeyRequest(*apigateway.DeleteApiKeyInput) apigateway.DeleteApiKeyRequest
+	DeleteApiKeyRequest(*types.DeleteApiKeyInput) apigateway.DeleteApiKeyRequest
 
-	DeleteAuthorizerRequest(*apigateway.DeleteAuthorizerInput) apigateway.DeleteAuthorizerRequest
+	DeleteAuthorizerRequest(*types.DeleteAuthorizerInput) apigateway.DeleteAuthorizerRequest
 
-	DeleteBasePathMappingRequest(*apigateway.DeleteBasePathMappingInput) apigateway.DeleteBasePathMappingRequest
+	DeleteBasePathMappingRequest(*types.DeleteBasePathMappingInput) apigateway.DeleteBasePathMappingRequest
 
-	DeleteClientCertificateRequest(*apigateway.DeleteClientCertificateInput) apigateway.DeleteClientCertificateRequest
+	DeleteClientCertificateRequest(*types.DeleteClientCertificateInput) apigateway.DeleteClientCertificateRequest
 
-	DeleteDeploymentRequest(*apigateway.DeleteDeploymentInput) apigateway.DeleteDeploymentRequest
+	DeleteDeploymentRequest(*types.DeleteDeploymentInput) apigateway.DeleteDeploymentRequest
 
-	DeleteDocumentationPartRequest(*apigateway.DeleteDocumentationPartInput) apigateway.DeleteDocumentationPartRequest
+	DeleteDocumentationPartRequest(*types.DeleteDocumentationPartInput) apigateway.DeleteDocumentationPartRequest
 
-	DeleteDocumentationVersionRequest(*apigateway.DeleteDocumentationVersionInput) apigateway.DeleteDocumentationVersionRequest
+	DeleteDocumentationVersionRequest(*types.DeleteDocumentationVersionInput) apigateway.DeleteDocumentationVersionRequest
 
-	DeleteDomainNameRequest(*apigateway.DeleteDomainNameInput) apigateway.DeleteDomainNameRequest
+	DeleteDomainNameRequest(*types.DeleteDomainNameInput) apigateway.DeleteDomainNameRequest
 
-	DeleteGatewayResponseRequest(*apigateway.DeleteGatewayResponseInput) apigateway.DeleteGatewayResponseRequest
+	DeleteGatewayResponseRequest(*types.DeleteGatewayResponseInput) apigateway.DeleteGatewayResponseRequest
 
-	DeleteIntegrationRequest(*apigateway.DeleteIntegrationInput) apigateway.DeleteIntegrationRequest
+	DeleteIntegrationRequest(*types.DeleteIntegrationInput) apigateway.DeleteIntegrationRequest
 
-	DeleteIntegrationResponseRequest(*apigateway.DeleteIntegrationResponseInput) apigateway.DeleteIntegrationResponseRequest
+	DeleteIntegrationResponseRequest(*types.DeleteIntegrationResponseInput) apigateway.DeleteIntegrationResponseRequest
 
-	DeleteMethodRequest(*apigateway.DeleteMethodInput) apigateway.DeleteMethodRequest
+	DeleteMethodRequest(*types.DeleteMethodInput) apigateway.DeleteMethodRequest
 
-	DeleteMethodResponseRequest(*apigateway.DeleteMethodResponseInput) apigateway.DeleteMethodResponseRequest
+	DeleteMethodResponseRequest(*types.DeleteMethodResponseInput) apigateway.DeleteMethodResponseRequest
 
-	DeleteModelRequest(*apigateway.DeleteModelInput) apigateway.DeleteModelRequest
+	DeleteModelRequest(*types.DeleteModelInput) apigateway.DeleteModelRequest
 
-	DeleteRequestValidatorRequest(*apigateway.DeleteRequestValidatorInput) apigateway.DeleteRequestValidatorRequest
+	DeleteRequestValidatorRequest(*types.DeleteRequestValidatorInput) apigateway.DeleteRequestValidatorRequest
 
-	DeleteResourceRequest(*apigateway.DeleteResourceInput) apigateway.DeleteResourceRequest
+	DeleteResourceRequest(*types.DeleteResourceInput) apigateway.DeleteResourceRequest
 
-	DeleteRestApiRequest(*apigateway.DeleteRestApiInput) apigateway.DeleteRestApiRequest
+	DeleteRestApiRequest(*types.DeleteRestApiInput) apigateway.DeleteRestApiRequest
 
-	DeleteStageRequest(*apigateway.DeleteStageInput) apigateway.DeleteStageRequest
+	DeleteStageRequest(*types.DeleteStageInput) apigateway.DeleteStageRequest
 
-	DeleteUsagePlanRequest(*apigateway.DeleteUsagePlanInput) apigateway.DeleteUsagePlanRequest
+	DeleteUsagePlanRequest(*types.DeleteUsagePlanInput) apigateway.DeleteUsagePlanRequest
 
-	DeleteUsagePlanKeyRequest(*apigateway.DeleteUsagePlanKeyInput) apigateway.DeleteUsagePlanKeyRequest
+	DeleteUsagePlanKeyRequest(*types.DeleteUsagePlanKeyInput) apigateway.DeleteUsagePlanKeyRequest
 
-	DeleteVpcLinkRequest(*apigateway.DeleteVpcLinkInput) apigateway.DeleteVpcLinkRequest
+	DeleteVpcLinkRequest(*types.DeleteVpcLinkInput) apigateway.DeleteVpcLinkRequest
 
-	FlushStageAuthorizersCacheRequest(*apigateway.FlushStageAuthorizersCacheInput) apigateway.FlushStageAuthorizersCacheRequest
+	FlushStageAuthorizersCacheRequest(*types.FlushStageAuthorizersCacheInput) apigateway.FlushStageAuthorizersCacheRequest
 
-	FlushStageCacheRequest(*apigateway.FlushStageCacheInput) apigateway.FlushStageCacheRequest
+	FlushStageCacheRequest(*types.FlushStageCacheInput) apigateway.FlushStageCacheRequest
 
-	GenerateClientCertificateRequest(*apigateway.GenerateClientCertificateInput) apigateway.GenerateClientCertificateRequest
+	GenerateClientCertificateRequest(*types.GenerateClientCertificateInput) apigateway.GenerateClientCertificateRequest
 
-	GetAccountRequest(*apigateway.GetAccountInput) apigateway.GetAccountRequest
+	GetAccountRequest(*types.GetAccountInput) apigateway.GetAccountRequest
 
-	GetApiKeyRequest(*apigateway.GetApiKeyInput) apigateway.GetApiKeyRequest
+	GetApiKeyRequest(*types.GetApiKeyInput) apigateway.GetApiKeyRequest
 
-	GetApiKeysRequest(*apigateway.GetApiKeysInput) apigateway.GetApiKeysRequest
+	GetApiKeysRequest(*types.GetApiKeysInput) apigateway.GetApiKeysRequest
 
-	GetAuthorizerRequest(*apigateway.GetAuthorizerInput) apigateway.GetAuthorizerRequest
+	GetAuthorizerRequest(*types.GetAuthorizerInput) apigateway.GetAuthorizerRequest
 
-	GetAuthorizersRequest(*apigateway.GetAuthorizersInput) apigateway.GetAuthorizersRequest
+	GetAuthorizersRequest(*types.GetAuthorizersInput) apigateway.GetAuthorizersRequest
 
-	GetBasePathMappingRequest(*apigateway.GetBasePathMappingInput) apigateway.GetBasePathMappingRequest
+	GetBasePathMappingRequest(*types.GetBasePathMappingInput) apigateway.GetBasePathMappingRequest
 
-	GetBasePathMappingsRequest(*apigateway.GetBasePathMappingsInput) apigateway.GetBasePathMappingsRequest
+	GetBasePathMappingsRequest(*types.GetBasePathMappingsInput) apigateway.GetBasePathMappingsRequest
 
-	GetClientCertificateRequest(*apigateway.GetClientCertificateInput) apigateway.GetClientCertificateRequest
+	GetClientCertificateRequest(*types.GetClientCertificateInput) apigateway.GetClientCertificateRequest
 
-	GetClientCertificatesRequest(*apigateway.GetClientCertificatesInput) apigateway.GetClientCertificatesRequest
+	GetClientCertificatesRequest(*types.GetClientCertificatesInput) apigateway.GetClientCertificatesRequest
 
-	GetDeploymentRequest(*apigateway.GetDeploymentInput) apigateway.GetDeploymentRequest
+	GetDeploymentRequest(*types.GetDeploymentInput) apigateway.GetDeploymentRequest
 
-	GetDeploymentsRequest(*apigateway.GetDeploymentsInput) apigateway.GetDeploymentsRequest
+	GetDeploymentsRequest(*types.GetDeploymentsInput) apigateway.GetDeploymentsRequest
 
-	GetDocumentationPartRequest(*apigateway.GetDocumentationPartInput) apigateway.GetDocumentationPartRequest
+	GetDocumentationPartRequest(*types.GetDocumentationPartInput) apigateway.GetDocumentationPartRequest
 
-	GetDocumentationPartsRequest(*apigateway.GetDocumentationPartsInput) apigateway.GetDocumentationPartsRequest
+	GetDocumentationPartsRequest(*types.GetDocumentationPartsInput) apigateway.GetDocumentationPartsRequest
 
-	GetDocumentationVersionRequest(*apigateway.GetDocumentationVersionInput) apigateway.GetDocumentationVersionRequest
+	GetDocumentationVersionRequest(*types.GetDocumentationVersionInput) apigateway.GetDocumentationVersionRequest
 
-	GetDocumentationVersionsRequest(*apigateway.GetDocumentationVersionsInput) apigateway.GetDocumentationVersionsRequest
+	GetDocumentationVersionsRequest(*types.GetDocumentationVersionsInput) apigateway.GetDocumentationVersionsRequest
 
-	GetDomainNameRequest(*apigateway.GetDomainNameInput) apigateway.GetDomainNameRequest
+	GetDomainNameRequest(*types.GetDomainNameInput) apigateway.GetDomainNameRequest
 
-	GetDomainNamesRequest(*apigateway.GetDomainNamesInput) apigateway.GetDomainNamesRequest
+	GetDomainNamesRequest(*types.GetDomainNamesInput) apigateway.GetDomainNamesRequest
 
-	GetExportRequest(*apigateway.GetExportInput) apigateway.GetExportRequest
+	GetExportRequest(*types.GetExportInput) apigateway.GetExportRequest
 
-	GetGatewayResponseRequest(*apigateway.GetGatewayResponseInput) apigateway.GetGatewayResponseRequest
+	GetGatewayResponseRequest(*types.GetGatewayResponseInput) apigateway.GetGatewayResponseRequest
 
-	GetGatewayResponsesRequest(*apigateway.GetGatewayResponsesInput) apigateway.GetGatewayResponsesRequest
+	GetGatewayResponsesRequest(*types.GetGatewayResponsesInput) apigateway.GetGatewayResponsesRequest
 
-	GetIntegrationRequest(*apigateway.GetIntegrationInput) apigateway.GetIntegrationRequest
+	GetIntegrationRequest(*types.GetIntegrationInput) apigateway.GetIntegrationRequest
 
-	GetIntegrationResponseRequest(*apigateway.GetIntegrationResponseInput) apigateway.GetIntegrationResponseRequest
+	GetIntegrationResponseRequest(*types.GetIntegrationResponseInput) apigateway.GetIntegrationResponseRequest
 
-	GetMethodRequest(*apigateway.GetMethodInput) apigateway.GetMethodRequest
+	GetMethodRequest(*types.GetMethodInput) apigateway.GetMethodRequest
 
-	GetMethodResponseRequest(*apigateway.GetMethodResponseInput) apigateway.GetMethodResponseRequest
+	GetMethodResponseRequest(*types.GetMethodResponseInput) apigateway.GetMethodResponseRequest
 
-	GetModelRequest(*apigateway.GetModelInput) apigateway.GetModelRequest
+	GetModelRequest(*types.GetModelInput) apigateway.GetModelRequest
 
-	GetModelTemplateRequest(*apigateway.GetModelTemplateInput) apigateway.GetModelTemplateRequest
+	GetModelTemplateRequest(*types.GetModelTemplateInput) apigateway.GetModelTemplateRequest
 
-	GetModelsRequest(*apigateway.GetModelsInput) apigateway.GetModelsRequest
+	GetModelsRequest(*types.GetModelsInput) apigateway.GetModelsRequest
 
-	GetRequestValidatorRequest(*apigateway.GetRequestValidatorInput) apigateway.GetRequestValidatorRequest
+	GetRequestValidatorRequest(*types.GetRequestValidatorInput) apigateway.GetRequestValidatorRequest
 
-	GetRequestValidatorsRequest(*apigateway.GetRequestValidatorsInput) apigateway.GetRequestValidatorsRequest
+	GetRequestValidatorsRequest(*types.GetRequestValidatorsInput) apigateway.GetRequestValidatorsRequest
 
-	GetResourceRequest(*apigateway.GetResourceInput) apigateway.GetResourceRequest
+	GetResourceRequest(*types.GetResourceInput) apigateway.GetResourceRequest
 
-	GetResourcesRequest(*apigateway.GetResourcesInput) apigateway.GetResourcesRequest
+	GetResourcesRequest(*types.GetResourcesInput) apigateway.GetResourcesRequest
 
-	GetRestApiRequest(*apigateway.GetRestApiInput) apigateway.GetRestApiRequest
+	GetRestApiRequest(*types.GetRestApiInput) apigateway.GetRestApiRequest
 
-	GetRestApisRequest(*apigateway.GetRestApisInput) apigateway.GetRestApisRequest
+	GetRestApisRequest(*types.GetRestApisInput) apigateway.GetRestApisRequest
 
-	GetSdkRequest(*apigateway.GetSdkInput) apigateway.GetSdkRequest
+	GetSdkRequest(*types.GetSdkInput) apigateway.GetSdkRequest
 
-	GetSdkTypeRequest(*apigateway.GetSdkTypeInput) apigateway.GetSdkTypeRequest
+	GetSdkTypeRequest(*types.GetSdkTypeInput) apigateway.GetSdkTypeRequest
 
-	GetSdkTypesRequest(*apigateway.GetSdkTypesInput) apigateway.GetSdkTypesRequest
+	GetSdkTypesRequest(*types.GetSdkTypesInput) apigateway.GetSdkTypesRequest
 
-	GetStageRequest(*apigateway.GetStageInput) apigateway.GetStageRequest
+	GetStageRequest(*types.GetStageInput) apigateway.GetStageRequest
 
-	GetStagesRequest(*apigateway.GetStagesInput) apigateway.GetStagesRequest
+	GetStagesRequest(*types.GetStagesInput) apigateway.GetStagesRequest
 
-	GetTagsRequest(*apigateway.GetTagsInput) apigateway.GetTagsRequest
+	GetTagsRequest(*types.GetTagsInput) apigateway.GetTagsRequest
 
-	GetUsageRequest(*apigateway.GetUsageInput) apigateway.GetUsageRequest
+	GetUsageRequest(*types.GetUsageInput) apigateway.GetUsageRequest
 
-	GetUsagePlanRequest(*apigateway.GetUsagePlanInput) apigateway.GetUsagePlanRequest
+	GetUsagePlanRequest(*types.GetUsagePlanInput) apigateway.GetUsagePlanRequest
 
-	GetUsagePlanKeyRequest(*apigateway.GetUsagePlanKeyInput) apigateway.GetUsagePlanKeyRequest
+	GetUsagePlanKeyRequest(*types.GetUsagePlanKeyInput) apigateway.GetUsagePlanKeyRequest
 
-	GetUsagePlanKeysRequest(*apigateway.GetUsagePlanKeysInput) apigateway.GetUsagePlanKeysRequest
+	GetUsagePlanKeysRequest(*types.GetUsagePlanKeysInput) apigateway.GetUsagePlanKeysRequest
 
-	GetUsagePlansRequest(*apigateway.GetUsagePlansInput) apigateway.GetUsagePlansRequest
+	GetUsagePlansRequest(*types.GetUsagePlansInput) apigateway.GetUsagePlansRequest
 
-	GetVpcLinkRequest(*apigateway.GetVpcLinkInput) apigateway.GetVpcLinkRequest
+	GetVpcLinkRequest(*types.GetVpcLinkInput) apigateway.GetVpcLinkRequest
 
-	GetVpcLinksRequest(*apigateway.GetVpcLinksInput) apigateway.GetVpcLinksRequest
+	GetVpcLinksRequest(*types.GetVpcLinksInput) apigateway.GetVpcLinksRequest
 
-	ImportApiKeysRequest(*apigateway.ImportApiKeysInput) apigateway.ImportApiKeysRequest
+	ImportApiKeysRequest(*types.ImportApiKeysInput) apigateway.ImportApiKeysRequest
 
-	ImportDocumentationPartsRequest(*apigateway.ImportDocumentationPartsInput) apigateway.ImportDocumentationPartsRequest
+	ImportDocumentationPartsRequest(*types.ImportDocumentationPartsInput) apigateway.ImportDocumentationPartsRequest
 
-	ImportRestApiRequest(*apigateway.ImportRestApiInput) apigateway.ImportRestApiRequest
+	ImportRestApiRequest(*types.ImportRestApiInput) apigateway.ImportRestApiRequest
 
-	PutGatewayResponseRequest(*apigateway.PutGatewayResponseInput) apigateway.PutGatewayResponseRequest
+	PutGatewayResponseRequest(*types.PutGatewayResponseInput) apigateway.PutGatewayResponseRequest
 
-	PutIntegrationRequest(*apigateway.PutIntegrationInput) apigateway.PutIntegrationRequest
+	PutIntegrationRequest(*types.PutIntegrationInput) apigateway.PutIntegrationRequest
 
-	PutIntegrationResponseRequest(*apigateway.PutIntegrationResponseInput) apigateway.PutIntegrationResponseRequest
+	PutIntegrationResponseRequest(*types.PutIntegrationResponseInput) apigateway.PutIntegrationResponseRequest
 
-	PutMethodRequest(*apigateway.PutMethodInput) apigateway.PutMethodRequest
+	PutMethodRequest(*types.PutMethodInput) apigateway.PutMethodRequest
 
-	PutMethodResponseRequest(*apigateway.PutMethodResponseInput) apigateway.PutMethodResponseRequest
+	PutMethodResponseRequest(*types.PutMethodResponseInput) apigateway.PutMethodResponseRequest
 
-	PutRestApiRequest(*apigateway.PutRestApiInput) apigateway.PutRestApiRequest
+	PutRestApiRequest(*types.PutRestApiInput) apigateway.PutRestApiRequest
 
-	TagResourceRequest(*apigateway.TagResourceInput) apigateway.TagResourceRequest
+	TagResourceRequest(*types.TagResourceInput) apigateway.TagResourceRequest
 
-	TestInvokeAuthorizerRequest(*apigateway.TestInvokeAuthorizerInput) apigateway.TestInvokeAuthorizerRequest
+	TestInvokeAuthorizerRequest(*types.TestInvokeAuthorizerInput) apigateway.TestInvokeAuthorizerRequest
 
-	TestInvokeMethodRequest(*apigateway.TestInvokeMethodInput) apigateway.TestInvokeMethodRequest
+	TestInvokeMethodRequest(*types.TestInvokeMethodInput) apigateway.TestInvokeMethodRequest
 
-	UntagResourceRequest(*apigateway.UntagResourceInput) apigateway.UntagResourceRequest
+	UntagResourceRequest(*types.UntagResourceInput) apigateway.UntagResourceRequest
 
-	UpdateAccountRequest(*apigateway.UpdateAccountInput) apigateway.UpdateAccountRequest
+	UpdateAccountRequest(*types.UpdateAccountInput) apigateway.UpdateAccountRequest
 
-	UpdateApiKeyRequest(*apigateway.UpdateApiKeyInput) apigateway.UpdateApiKeyRequest
+	UpdateApiKeyRequest(*types.UpdateApiKeyInput) apigateway.UpdateApiKeyRequest
 
-	UpdateAuthorizerRequest(*apigateway.UpdateAuthorizerInput) apigateway.UpdateAuthorizerRequest
+	UpdateAuthorizerRequest(*types.UpdateAuthorizerInput) apigateway.UpdateAuthorizerRequest
 
-	UpdateBasePathMappingRequest(*apigateway.UpdateBasePathMappingInput) apigateway.UpdateBasePathMappingRequest
+	UpdateBasePathMappingRequest(*types.UpdateBasePathMappingInput) apigateway.UpdateBasePathMappingRequest
 
-	UpdateClientCertificateRequest(*apigateway.UpdateClientCertificateInput) apigateway.UpdateClientCertificateRequest
+	UpdateClientCertificateRequest(*types.UpdateClientCertificateInput) apigateway.UpdateClientCertificateRequest
 
-	UpdateDeploymentRequest(*apigateway.UpdateDeploymentInput) apigateway.UpdateDeploymentRequest
+	UpdateDeploymentRequest(*types.UpdateDeploymentInput) apigateway.UpdateDeploymentRequest
 
-	UpdateDocumentationPartRequest(*apigateway.UpdateDocumentationPartInput) apigateway.UpdateDocumentationPartRequest
+	UpdateDocumentationPartRequest(*types.UpdateDocumentationPartInput) apigateway.UpdateDocumentationPartRequest
 
-	UpdateDocumentationVersionRequest(*apigateway.UpdateDocumentationVersionInput) apigateway.UpdateDocumentationVersionRequest
+	UpdateDocumentationVersionRequest(*types.UpdateDocumentationVersionInput) apigateway.UpdateDocumentationVersionRequest
 
-	UpdateDomainNameRequest(*apigateway.UpdateDomainNameInput) apigateway.UpdateDomainNameRequest
+	UpdateDomainNameRequest(*types.UpdateDomainNameInput) apigateway.UpdateDomainNameRequest
 
-	UpdateGatewayResponseRequest(*apigateway.UpdateGatewayResponseInput) apigateway.UpdateGatewayResponseRequest
+	UpdateGatewayResponseRequest(*types.UpdateGatewayResponseInput) apigateway.UpdateGatewayResponseRequest
 
-	UpdateIntegrationRequest(*apigateway.UpdateIntegrationInput) apigateway.UpdateIntegrationRequest
+	UpdateIntegrationRequest(*types.UpdateIntegrationInput) apigateway.UpdateIntegrationRequest
 
-	UpdateIntegrationResponseRequest(*apigateway.UpdateIntegrationResponseInput) apigateway.UpdateIntegrationResponseRequest
+	UpdateIntegrationResponseRequest(*types.UpdateIntegrationResponseInput) apigateway.UpdateIntegrationResponseRequest
 
-	UpdateMethodRequest(*apigateway.UpdateMethodInput) apigateway.UpdateMethodRequest
+	UpdateMethodRequest(*types.UpdateMethodInput) apigateway.UpdateMethodRequest
 
-	UpdateMethodResponseRequest(*apigateway.UpdateMethodResponseInput) apigateway.UpdateMethodResponseRequest
+	UpdateMethodResponseRequest(*types.UpdateMethodResponseInput) apigateway.UpdateMethodResponseRequest
 
-	UpdateModelRequest(*apigateway.UpdateModelInput) apigateway.UpdateModelRequest
+	UpdateModelRequest(*types.UpdateModelInput) apigateway.UpdateModelRequest
 
-	UpdateRequestValidatorRequest(*apigateway.UpdateRequestValidatorInput) apigateway.UpdateRequestValidatorRequest
+	UpdateRequestValidatorRequest(*types.UpdateRequestValidatorInput) apigateway.UpdateRequestValidatorRequest
 
-	UpdateResourceRequest(*apigateway.UpdateResourceInput) apigateway.UpdateResourceRequest
+	UpdateResourceRequest(*types.UpdateResourceInput) apigateway.UpdateResourceRequest
 
-	UpdateRestApiRequest(*apigateway.UpdateRestApiInput) apigateway.UpdateRestApiRequest
+	UpdateRestApiRequest(*types.UpdateRestApiInput) apigateway.UpdateRestApiRequest
 
-	UpdateStageRequest(*apigateway.UpdateStageInput) apigateway.UpdateStageRequest
+	UpdateStageRequest(*types.UpdateStageInput) apigateway.UpdateStageRequest
 
-	UpdateUsageRequest(*apigateway.UpdateUsageInput) apigateway.UpdateUsageRequest
+	UpdateUsageRequest(*types.UpdateUsageInput) apigateway.UpdateUsageRequest
 
-	UpdateUsagePlanRequest(*apigateway.UpdateUsagePlanInput) apigateway.UpdateUsagePlanRequest
+	UpdateUsagePlanRequest(*types.UpdateUsagePlanInput) apigateway.UpdateUsagePlanRequest
 
-	UpdateVpcLinkRequest(*apigateway.UpdateVpcLinkInput) apigateway.UpdateVpcLinkRequest
+	UpdateVpcLinkRequest(*types.UpdateVpcLinkInput) apigateway.UpdateVpcLinkRequest
 }
 
 var _ ClientAPI = (*apigateway.Client)(nil)

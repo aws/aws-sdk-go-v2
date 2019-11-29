@@ -6,62 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
+	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/types"
 )
-
-type DeleteIdentityProviderInput struct {
-	_ struct{} `type:"structure"`
-
-	// The identity provider name.
-	//
-	// ProviderName is a required field
-	ProviderName *string `min:"1" type:"string" required:"true"`
-
-	// The user pool ID.
-	//
-	// UserPoolId is a required field
-	UserPoolId *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteIdentityProviderInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteIdentityProviderInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteIdentityProviderInput"}
-
-	if s.ProviderName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ProviderName"))
-	}
-	if s.ProviderName != nil && len(*s.ProviderName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ProviderName", 1))
-	}
-
-	if s.UserPoolId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("UserPoolId"))
-	}
-	if s.UserPoolId != nil && len(*s.UserPoolId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("UserPoolId", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteIdentityProviderOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteIdentityProviderOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteIdentityProvider = "DeleteIdentityProvider"
 
@@ -78,7 +26,7 @@ const opDeleteIdentityProvider = "DeleteIdentityProvider"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/DeleteIdentityProvider
-func (c *Client) DeleteIdentityProviderRequest(input *DeleteIdentityProviderInput) DeleteIdentityProviderRequest {
+func (c *Client) DeleteIdentityProviderRequest(input *types.DeleteIdentityProviderInput) DeleteIdentityProviderRequest {
 	op := &aws.Operation{
 		Name:       opDeleteIdentityProvider,
 		HTTPMethod: "POST",
@@ -86,10 +34,10 @@ func (c *Client) DeleteIdentityProviderRequest(input *DeleteIdentityProviderInpu
 	}
 
 	if input == nil {
-		input = &DeleteIdentityProviderInput{}
+		input = &types.DeleteIdentityProviderInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteIdentityProviderOutput{})
+	req := c.newRequest(op, input, &types.DeleteIdentityProviderOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return DeleteIdentityProviderRequest{Request: req, Input: input, Copy: c.DeleteIdentityProviderRequest}
@@ -99,8 +47,8 @@ func (c *Client) DeleteIdentityProviderRequest(input *DeleteIdentityProviderInpu
 // DeleteIdentityProvider API operation.
 type DeleteIdentityProviderRequest struct {
 	*aws.Request
-	Input *DeleteIdentityProviderInput
-	Copy  func(*DeleteIdentityProviderInput) DeleteIdentityProviderRequest
+	Input *types.DeleteIdentityProviderInput
+	Copy  func(*types.DeleteIdentityProviderInput) DeleteIdentityProviderRequest
 }
 
 // Send marshals and sends the DeleteIdentityProvider API request.
@@ -112,7 +60,7 @@ func (r DeleteIdentityProviderRequest) Send(ctx context.Context) (*DeleteIdentit
 	}
 
 	resp := &DeleteIdentityProviderResponse{
-		DeleteIdentityProviderOutput: r.Request.Data.(*DeleteIdentityProviderOutput),
+		DeleteIdentityProviderOutput: r.Request.Data.(*types.DeleteIdentityProviderOutput),
 		response:                     &aws.Response{Request: r.Request},
 	}
 
@@ -122,7 +70,7 @@ func (r DeleteIdentityProviderRequest) Send(ctx context.Context) (*DeleteIdentit
 // DeleteIdentityProviderResponse is the response type for the
 // DeleteIdentityProvider API operation.
 type DeleteIdentityProviderResponse struct {
-	*DeleteIdentityProviderOutput
+	*types.DeleteIdentityProviderOutput
 
 	response *aws.Response
 }

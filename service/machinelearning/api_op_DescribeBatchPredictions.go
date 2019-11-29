@@ -6,127 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/machinelearning/types"
 )
-
-type DescribeBatchPredictionsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The equal to operator. The BatchPrediction results will have FilterVariable
-	// values that exactly match the value specified with EQ.
-	EQ *string `type:"string"`
-
-	// Use one of the following variables to filter a list of BatchPrediction:
-	//
-	//    * CreatedAt - Sets the search criteria to the BatchPrediction creation
-	//    date.
-	//
-	//    * Status - Sets the search criteria to the BatchPrediction status.
-	//
-	//    * Name - Sets the search criteria to the contents of the BatchPrediction
-	//    Name.
-	//
-	//    * IAMUser - Sets the search criteria to the user account that invoked
-	//    the BatchPrediction creation.
-	//
-	//    * MLModelId - Sets the search criteria to the MLModel used in the BatchPrediction.
-	//
-	//    * DataSourceId - Sets the search criteria to the DataSource used in the
-	//    BatchPrediction.
-	//
-	//    * DataURI - Sets the search criteria to the data file(s) used in the BatchPrediction.
-	//    The URL can identify either a file or an Amazon Simple Storage Solution
-	//    (Amazon S3) bucket or directory.
-	FilterVariable BatchPredictionFilterVariable `type:"string" enum:"true"`
-
-	// The greater than or equal to operator. The BatchPrediction results will have
-	// FilterVariable values that are greater than or equal to the value specified
-	// with GE.
-	GE *string `type:"string"`
-
-	// The greater than operator. The BatchPrediction results will have FilterVariable
-	// values that are greater than the value specified with GT.
-	GT *string `type:"string"`
-
-	// The less than or equal to operator. The BatchPrediction results will have
-	// FilterVariable values that are less than or equal to the value specified
-	// with LE.
-	LE *string `type:"string"`
-
-	// The less than operator. The BatchPrediction results will have FilterVariable
-	// values that are less than the value specified with LT.
-	LT *string `type:"string"`
-
-	// The number of pages of information to include in the result. The range of
-	// acceptable values is 1 through 100. The default value is 100.
-	Limit *int64 `min:"1" type:"integer"`
-
-	// The not equal to operator. The BatchPrediction results will have FilterVariable
-	// values not equal to the value specified with NE.
-	NE *string `type:"string"`
-
-	// An ID of the page in the paginated results.
-	NextToken *string `type:"string"`
-
-	// A string that is found at the beginning of a variable, such as Name or Id.
-	//
-	// For example, a Batch Prediction operation could have the Name 2014-09-09-HolidayGiftMailer.
-	// To search for this BatchPrediction, select Name for the FilterVariable and
-	// any of the following strings for the Prefix:
-	//
-	//    * 2014-09
-	//
-	//    * 2014-09-09
-	//
-	//    * 2014-09-09-Holiday
-	Prefix *string `type:"string"`
-
-	// A two-value parameter that determines the sequence of the resulting list
-	// of MLModels.
-	//
-	//    * asc - Arranges the list in ascending order (A-Z, 0-9).
-	//
-	//    * dsc - Arranges the list in descending order (Z-A, 9-0).
-	//
-	// Results are sorted by FilterVariable.
-	SortOrder SortOrder `type:"string" enum:"true"`
-}
-
-// String returns the string representation
-func (s DescribeBatchPredictionsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeBatchPredictionsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeBatchPredictionsInput"}
-	if s.Limit != nil && *s.Limit < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("Limit", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Represents the output of a DescribeBatchPredictions operation. The content
-// is essentially a list of BatchPredictions.
-type DescribeBatchPredictionsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the next page in the paginated results that indicates at least
-	// one more page follows.
-	NextToken *string `type:"string"`
-
-	// A list of BatchPrediction objects that meet the search criteria.
-	Results []BatchPrediction `type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeBatchPredictionsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeBatchPredictions = "DescribeBatchPredictions"
 
@@ -142,7 +23,7 @@ const opDescribeBatchPredictions = "DescribeBatchPredictions"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) DescribeBatchPredictionsRequest(input *DescribeBatchPredictionsInput) DescribeBatchPredictionsRequest {
+func (c *Client) DescribeBatchPredictionsRequest(input *types.DescribeBatchPredictionsInput) DescribeBatchPredictionsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeBatchPredictions,
 		HTTPMethod: "POST",
@@ -156,10 +37,10 @@ func (c *Client) DescribeBatchPredictionsRequest(input *DescribeBatchPredictions
 	}
 
 	if input == nil {
-		input = &DescribeBatchPredictionsInput{}
+		input = &types.DescribeBatchPredictionsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeBatchPredictionsOutput{})
+	req := c.newRequest(op, input, &types.DescribeBatchPredictionsOutput{})
 	return DescribeBatchPredictionsRequest{Request: req, Input: input, Copy: c.DescribeBatchPredictionsRequest}
 }
 
@@ -167,8 +48,8 @@ func (c *Client) DescribeBatchPredictionsRequest(input *DescribeBatchPredictions
 // DescribeBatchPredictions API operation.
 type DescribeBatchPredictionsRequest struct {
 	*aws.Request
-	Input *DescribeBatchPredictionsInput
-	Copy  func(*DescribeBatchPredictionsInput) DescribeBatchPredictionsRequest
+	Input *types.DescribeBatchPredictionsInput
+	Copy  func(*types.DescribeBatchPredictionsInput) DescribeBatchPredictionsRequest
 }
 
 // Send marshals and sends the DescribeBatchPredictions API request.
@@ -180,7 +61,7 @@ func (r DescribeBatchPredictionsRequest) Send(ctx context.Context) (*DescribeBat
 	}
 
 	resp := &DescribeBatchPredictionsResponse{
-		DescribeBatchPredictionsOutput: r.Request.Data.(*DescribeBatchPredictionsOutput),
+		DescribeBatchPredictionsOutput: r.Request.Data.(*types.DescribeBatchPredictionsOutput),
 		response:                       &aws.Response{Request: r.Request},
 	}
 
@@ -210,7 +91,7 @@ func NewDescribeBatchPredictionsPaginator(req DescribeBatchPredictionsRequest) D
 	return DescribeBatchPredictionsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *DescribeBatchPredictionsInput
+				var inCpy *types.DescribeBatchPredictionsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -230,14 +111,14 @@ type DescribeBatchPredictionsPaginator struct {
 	aws.Pager
 }
 
-func (p *DescribeBatchPredictionsPaginator) CurrentPage() *DescribeBatchPredictionsOutput {
-	return p.Pager.CurrentPage().(*DescribeBatchPredictionsOutput)
+func (p *DescribeBatchPredictionsPaginator) CurrentPage() *types.DescribeBatchPredictionsOutput {
+	return p.Pager.CurrentPage().(*types.DescribeBatchPredictionsOutput)
 }
 
 // DescribeBatchPredictionsResponse is the response type for the
 // DescribeBatchPredictions API operation.
 type DescribeBatchPredictionsResponse struct {
-	*DescribeBatchPredictionsOutput
+	*types.DescribeBatchPredictionsOutput
 
 	response *aws.Response
 }

@@ -6,84 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/restjson"
+	"github.com/aws/aws-sdk-go-v2/service/iot/types"
 )
-
-// The input for the DeletePolicyVersion operation.
-type DeletePolicyVersionInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the policy.
-	//
-	// PolicyName is a required field
-	PolicyName *string `location:"uri" locationName:"policyName" min:"1" type:"string" required:"true"`
-
-	// The policy version ID.
-	//
-	// PolicyVersionId is a required field
-	PolicyVersionId *string `location:"uri" locationName:"policyVersionId" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeletePolicyVersionInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeletePolicyVersionInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeletePolicyVersionInput"}
-
-	if s.PolicyName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("PolicyName"))
-	}
-	if s.PolicyName != nil && len(*s.PolicyName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("PolicyName", 1))
-	}
-
-	if s.PolicyVersionId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("PolicyVersionId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeletePolicyVersionInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.PolicyName != nil {
-		v := *s.PolicyName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "policyName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.PolicyVersionId != nil {
-		v := *s.PolicyVersionId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "policyVersionId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type DeletePolicyVersionOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeletePolicyVersionOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeletePolicyVersionOutput) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
 
 const opDeletePolicyVersion = "DeletePolicyVersion"
 
@@ -101,7 +27,7 @@ const opDeletePolicyVersion = "DeletePolicyVersion"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) DeletePolicyVersionRequest(input *DeletePolicyVersionInput) DeletePolicyVersionRequest {
+func (c *Client) DeletePolicyVersionRequest(input *types.DeletePolicyVersionInput) DeletePolicyVersionRequest {
 	op := &aws.Operation{
 		Name:       opDeletePolicyVersion,
 		HTTPMethod: "DELETE",
@@ -109,10 +35,10 @@ func (c *Client) DeletePolicyVersionRequest(input *DeletePolicyVersionInput) Del
 	}
 
 	if input == nil {
-		input = &DeletePolicyVersionInput{}
+		input = &types.DeletePolicyVersionInput{}
 	}
 
-	req := c.newRequest(op, input, &DeletePolicyVersionOutput{})
+	req := c.newRequest(op, input, &types.DeletePolicyVersionOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return DeletePolicyVersionRequest{Request: req, Input: input, Copy: c.DeletePolicyVersionRequest}
@@ -122,8 +48,8 @@ func (c *Client) DeletePolicyVersionRequest(input *DeletePolicyVersionInput) Del
 // DeletePolicyVersion API operation.
 type DeletePolicyVersionRequest struct {
 	*aws.Request
-	Input *DeletePolicyVersionInput
-	Copy  func(*DeletePolicyVersionInput) DeletePolicyVersionRequest
+	Input *types.DeletePolicyVersionInput
+	Copy  func(*types.DeletePolicyVersionInput) DeletePolicyVersionRequest
 }
 
 // Send marshals and sends the DeletePolicyVersion API request.
@@ -135,7 +61,7 @@ func (r DeletePolicyVersionRequest) Send(ctx context.Context) (*DeletePolicyVers
 	}
 
 	resp := &DeletePolicyVersionResponse{
-		DeletePolicyVersionOutput: r.Request.Data.(*DeletePolicyVersionOutput),
+		DeletePolicyVersionOutput: r.Request.Data.(*types.DeletePolicyVersionOutput),
 		response:                  &aws.Response{Request: r.Request},
 	}
 
@@ -145,7 +71,7 @@ func (r DeletePolicyVersionRequest) Send(ctx context.Context) (*DeletePolicyVers
 // DeletePolicyVersionResponse is the response type for the
 // DeletePolicyVersion API operation.
 type DeletePolicyVersionResponse struct {
-	*DeletePolicyVersionOutput
+	*types.DeletePolicyVersionOutput
 
 	response *aws.Response
 }

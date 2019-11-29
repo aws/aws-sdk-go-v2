@@ -6,62 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-type CreateEgressOnlyInternetGatewayInput struct {
-	_ struct{} `type:"structure"`
-
-	// Unique, case-sensitive identifier that you provide to ensure the idempotency
-	// of the request. For more information, see How to Ensure Idempotency (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Run_Instance_Idempotency.html).
-	ClientToken *string `type:"string"`
-
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have
-	// the required permissions, the error response is DryRunOperation. Otherwise,
-	// it is UnauthorizedOperation.
-	DryRun *bool `type:"boolean"`
-
-	// The ID of the VPC for which to create the egress-only internet gateway.
-	//
-	// VpcId is a required field
-	VpcId *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s CreateEgressOnlyInternetGatewayInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateEgressOnlyInternetGatewayInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateEgressOnlyInternetGatewayInput"}
-
-	if s.VpcId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("VpcId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type CreateEgressOnlyInternetGatewayOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Unique, case-sensitive identifier that you provide to ensure the idempotency
-	// of the request.
-	ClientToken *string `locationName:"clientToken" type:"string"`
-
-	// Information about the egress-only internet gateway.
-	EgressOnlyInternetGateway *EgressOnlyInternetGateway `locationName:"egressOnlyInternetGateway" type:"structure"`
-}
-
-// String returns the string representation
-func (s CreateEgressOnlyInternetGatewayOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCreateEgressOnlyInternetGateway = "CreateEgressOnlyInternetGateway"
 
@@ -81,7 +27,7 @@ const opCreateEgressOnlyInternetGateway = "CreateEgressOnlyInternetGateway"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateEgressOnlyInternetGateway
-func (c *Client) CreateEgressOnlyInternetGatewayRequest(input *CreateEgressOnlyInternetGatewayInput) CreateEgressOnlyInternetGatewayRequest {
+func (c *Client) CreateEgressOnlyInternetGatewayRequest(input *types.CreateEgressOnlyInternetGatewayInput) CreateEgressOnlyInternetGatewayRequest {
 	op := &aws.Operation{
 		Name:       opCreateEgressOnlyInternetGateway,
 		HTTPMethod: "POST",
@@ -89,10 +35,10 @@ func (c *Client) CreateEgressOnlyInternetGatewayRequest(input *CreateEgressOnlyI
 	}
 
 	if input == nil {
-		input = &CreateEgressOnlyInternetGatewayInput{}
+		input = &types.CreateEgressOnlyInternetGatewayInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateEgressOnlyInternetGatewayOutput{})
+	req := c.newRequest(op, input, &types.CreateEgressOnlyInternetGatewayOutput{})
 	return CreateEgressOnlyInternetGatewayRequest{Request: req, Input: input, Copy: c.CreateEgressOnlyInternetGatewayRequest}
 }
 
@@ -100,8 +46,8 @@ func (c *Client) CreateEgressOnlyInternetGatewayRequest(input *CreateEgressOnlyI
 // CreateEgressOnlyInternetGateway API operation.
 type CreateEgressOnlyInternetGatewayRequest struct {
 	*aws.Request
-	Input *CreateEgressOnlyInternetGatewayInput
-	Copy  func(*CreateEgressOnlyInternetGatewayInput) CreateEgressOnlyInternetGatewayRequest
+	Input *types.CreateEgressOnlyInternetGatewayInput
+	Copy  func(*types.CreateEgressOnlyInternetGatewayInput) CreateEgressOnlyInternetGatewayRequest
 }
 
 // Send marshals and sends the CreateEgressOnlyInternetGateway API request.
@@ -113,7 +59,7 @@ func (r CreateEgressOnlyInternetGatewayRequest) Send(ctx context.Context) (*Crea
 	}
 
 	resp := &CreateEgressOnlyInternetGatewayResponse{
-		CreateEgressOnlyInternetGatewayOutput: r.Request.Data.(*CreateEgressOnlyInternetGatewayOutput),
+		CreateEgressOnlyInternetGatewayOutput: r.Request.Data.(*types.CreateEgressOnlyInternetGatewayOutput),
 		response:                              &aws.Response{Request: r.Request},
 	}
 
@@ -123,7 +69,7 @@ func (r CreateEgressOnlyInternetGatewayRequest) Send(ctx context.Context) (*Crea
 // CreateEgressOnlyInternetGatewayResponse is the response type for the
 // CreateEgressOnlyInternetGateway API operation.
 type CreateEgressOnlyInternetGatewayResponse struct {
-	*CreateEgressOnlyInternetGatewayOutput
+	*types.CreateEgressOnlyInternetGatewayOutput
 
 	response *aws.Response
 }

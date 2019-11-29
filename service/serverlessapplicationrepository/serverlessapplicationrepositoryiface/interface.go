@@ -10,6 +10,7 @@ package serverlessapplicationrepositoryiface
 
 import (
 	"github.com/aws/aws-sdk-go-v2/service/serverlessapplicationrepository"
+	"github.com/aws/aws-sdk-go-v2/service/serverlessapplicationrepository/types"
 )
 
 // ClientAPI provides an interface to enable mocking the
@@ -43,7 +44,7 @@ import (
 //    type mockClientClient struct {
 //        serverlessapplicationrepositoryiface.ClientPI
 //    }
-//    func (m *mockClientClient) CreateApplication(input *serverlessapplicationrepository.CreateApplicationInput) (*serverlessapplicationrepository.CreateApplicationOutput, error) {
+//    func (m *mockClientClient) CreateApplication(input *types.CreateApplicationInput) (*types.CreateApplicationOutput, error) {
 //        // mock response/functionality
 //    }
 //
@@ -61,31 +62,31 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type ClientAPI interface {
-	CreateApplicationRequest(*serverlessapplicationrepository.CreateApplicationInput) serverlessapplicationrepository.CreateApplicationRequest
+	CreateApplicationRequest(*types.CreateApplicationInput) serverlessapplicationrepository.CreateApplicationRequest
 
-	CreateApplicationVersionRequest(*serverlessapplicationrepository.CreateApplicationVersionInput) serverlessapplicationrepository.CreateApplicationVersionRequest
+	CreateApplicationVersionRequest(*types.CreateApplicationVersionInput) serverlessapplicationrepository.CreateApplicationVersionRequest
 
-	CreateCloudFormationChangeSetRequest(*serverlessapplicationrepository.CreateCloudFormationChangeSetInput) serverlessapplicationrepository.CreateCloudFormationChangeSetRequest
+	CreateCloudFormationChangeSetRequest(*types.CreateCloudFormationChangeSetInput) serverlessapplicationrepository.CreateCloudFormationChangeSetRequest
 
-	CreateCloudFormationTemplateRequest(*serverlessapplicationrepository.CreateCloudFormationTemplateInput) serverlessapplicationrepository.CreateCloudFormationTemplateRequest
+	CreateCloudFormationTemplateRequest(*types.CreateCloudFormationTemplateInput) serverlessapplicationrepository.CreateCloudFormationTemplateRequest
 
-	DeleteApplicationRequest(*serverlessapplicationrepository.DeleteApplicationInput) serverlessapplicationrepository.DeleteApplicationRequest
+	DeleteApplicationRequest(*types.DeleteApplicationInput) serverlessapplicationrepository.DeleteApplicationRequest
 
-	GetApplicationRequest(*serverlessapplicationrepository.GetApplicationInput) serverlessapplicationrepository.GetApplicationRequest
+	GetApplicationRequest(*types.GetApplicationInput) serverlessapplicationrepository.GetApplicationRequest
 
-	GetApplicationPolicyRequest(*serverlessapplicationrepository.GetApplicationPolicyInput) serverlessapplicationrepository.GetApplicationPolicyRequest
+	GetApplicationPolicyRequest(*types.GetApplicationPolicyInput) serverlessapplicationrepository.GetApplicationPolicyRequest
 
-	GetCloudFormationTemplateRequest(*serverlessapplicationrepository.GetCloudFormationTemplateInput) serverlessapplicationrepository.GetCloudFormationTemplateRequest
+	GetCloudFormationTemplateRequest(*types.GetCloudFormationTemplateInput) serverlessapplicationrepository.GetCloudFormationTemplateRequest
 
-	ListApplicationDependenciesRequest(*serverlessapplicationrepository.ListApplicationDependenciesInput) serverlessapplicationrepository.ListApplicationDependenciesRequest
+	ListApplicationDependenciesRequest(*types.ListApplicationDependenciesInput) serverlessapplicationrepository.ListApplicationDependenciesRequest
 
-	ListApplicationVersionsRequest(*serverlessapplicationrepository.ListApplicationVersionsInput) serverlessapplicationrepository.ListApplicationVersionsRequest
+	ListApplicationVersionsRequest(*types.ListApplicationVersionsInput) serverlessapplicationrepository.ListApplicationVersionsRequest
 
-	ListApplicationsRequest(*serverlessapplicationrepository.ListApplicationsInput) serverlessapplicationrepository.ListApplicationsRequest
+	ListApplicationsRequest(*types.ListApplicationsInput) serverlessapplicationrepository.ListApplicationsRequest
 
-	PutApplicationPolicyRequest(*serverlessapplicationrepository.PutApplicationPolicyInput) serverlessapplicationrepository.PutApplicationPolicyRequest
+	PutApplicationPolicyRequest(*types.PutApplicationPolicyInput) serverlessapplicationrepository.PutApplicationPolicyRequest
 
-	UpdateApplicationRequest(*serverlessapplicationrepository.UpdateApplicationInput) serverlessapplicationrepository.UpdateApplicationRequest
+	UpdateApplicationRequest(*types.UpdateApplicationInput) serverlessapplicationrepository.UpdateApplicationRequest
 }
 
 var _ ClientAPI = (*serverlessapplicationrepository.Client)(nil)

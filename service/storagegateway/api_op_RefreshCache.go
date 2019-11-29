@@ -6,75 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/storagegateway/types"
 )
-
-// RefreshCacheInput
-type RefreshCacheInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the file share you want to refresh.
-	//
-	// FileShareARN is a required field
-	FileShareARN *string `min:"50" type:"string" required:"true"`
-
-	// A comma-separated list of the paths of folders to refresh in the cache. The
-	// default is ["/"]. The default refreshes objects and folders at the root of
-	// the Amazon S3 bucket. If Recursive is set to "true", the entire S3 bucket
-	// that the file share has access to is refreshed.
-	FolderList []string `min:"1" type:"list"`
-
-	// A value that specifies whether to recursively refresh folders in the cache.
-	// The refresh includes folders that were in the cache the last time the gateway
-	// listed the folder's contents. If this value set to "true", each folder that
-	// is listed in FolderList is recursively updated. Otherwise, subfolders listed
-	// in FolderList are not refreshed. Only objects that are in folders listed
-	// directly under FolderList are found and used for the update. The default
-	// is "true".
-	Recursive *bool `type:"boolean"`
-}
-
-// String returns the string representation
-func (s RefreshCacheInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *RefreshCacheInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "RefreshCacheInput"}
-
-	if s.FileShareARN == nil {
-		invalidParams.Add(aws.NewErrParamRequired("FileShareARN"))
-	}
-	if s.FileShareARN != nil && len(*s.FileShareARN) < 50 {
-		invalidParams.Add(aws.NewErrParamMinLen("FileShareARN", 50))
-	}
-	if s.FolderList != nil && len(s.FolderList) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("FolderList", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// RefreshCacheOutput
-type RefreshCacheOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the file share.
-	FileShareARN *string `min:"50" type:"string"`
-
-	// The randomly generated ID of the notification that was sent. This ID is in
-	// UUID format.
-	NotificationId *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s RefreshCacheOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opRefreshCache = "RefreshCache"
 
@@ -95,6 +28,17 @@ const opRefreshCache = "RefreshCache"
 // for new files on the gateway file share. You can subscribe to be notified
 // through an CloudWatch event when your RefreshCache operation completes.
 //
+// Throttle limit: This API is asynchronous so the gateway will accept no more
+// than two refreshes at any time. We recommend using the refresh-complete CloudWatch
+// event notification before issuing additional requests. For more information,
+// see Getting Notified About File Operations (https://docs.aws.amazon.com/storagegateway/latest/userguide/monitoring-file-gateway.html#get-notification).
+//
+// If you invoke the RefreshCache API when two requests are already being processed,
+// any new request will cause an InvalidGatewayRequestException error because
+// too many requests were sent to the server.
+//
+// For more information, see "https://docs.aws.amazon.com/storagegateway/latest/userguide/monitoring-file-gateway.html#get-notification".
+//
 //    // Example sending a request using RefreshCacheRequest.
 //    req := client.RefreshCacheRequest(params)
 //    resp, err := req.Send(context.TODO())
@@ -103,7 +47,7 @@ const opRefreshCache = "RefreshCache"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/RefreshCache
-func (c *Client) RefreshCacheRequest(input *RefreshCacheInput) RefreshCacheRequest {
+func (c *Client) RefreshCacheRequest(input *types.RefreshCacheInput) RefreshCacheRequest {
 	op := &aws.Operation{
 		Name:       opRefreshCache,
 		HTTPMethod: "POST",
@@ -111,10 +55,10 @@ func (c *Client) RefreshCacheRequest(input *RefreshCacheInput) RefreshCacheReque
 	}
 
 	if input == nil {
-		input = &RefreshCacheInput{}
+		input = &types.RefreshCacheInput{}
 	}
 
-	req := c.newRequest(op, input, &RefreshCacheOutput{})
+	req := c.newRequest(op, input, &types.RefreshCacheOutput{})
 	return RefreshCacheRequest{Request: req, Input: input, Copy: c.RefreshCacheRequest}
 }
 
@@ -122,8 +66,8 @@ func (c *Client) RefreshCacheRequest(input *RefreshCacheInput) RefreshCacheReque
 // RefreshCache API operation.
 type RefreshCacheRequest struct {
 	*aws.Request
-	Input *RefreshCacheInput
-	Copy  func(*RefreshCacheInput) RefreshCacheRequest
+	Input *types.RefreshCacheInput
+	Copy  func(*types.RefreshCacheInput) RefreshCacheRequest
 }
 
 // Send marshals and sends the RefreshCache API request.
@@ -135,7 +79,7 @@ func (r RefreshCacheRequest) Send(ctx context.Context) (*RefreshCacheResponse, e
 	}
 
 	resp := &RefreshCacheResponse{
-		RefreshCacheOutput: r.Request.Data.(*RefreshCacheOutput),
+		RefreshCacheOutput: r.Request.Data.(*types.RefreshCacheOutput),
 		response:           &aws.Response{Request: r.Request},
 	}
 
@@ -145,7 +89,7 @@ func (r RefreshCacheRequest) Send(ctx context.Context) (*RefreshCacheResponse, e
 // RefreshCacheResponse is the response type for the
 // RefreshCache API operation.
 type RefreshCacheResponse struct {
-	*RefreshCacheOutput
+	*types.RefreshCacheOutput
 
 	response *aws.Response
 }

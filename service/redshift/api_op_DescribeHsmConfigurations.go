@@ -6,75 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/redshift/types"
 )
-
-type DescribeHsmConfigurationsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The identifier of a specific Amazon Redshift HSM configuration to be described.
-	// If no identifier is specified, information is returned for all HSM configurations
-	// owned by your AWS customer account.
-	HsmConfigurationIdentifier *string `type:"string"`
-
-	// An optional parameter that specifies the starting point to return a set of
-	// response records. When the results of a DescribeHsmConfigurations request
-	// exceed the value specified in MaxRecords, AWS returns a value in the Marker
-	// field of the response. You can retrieve the next set of response records
-	// by providing the returned marker value in the Marker parameter and retrying
-	// the request.
-	Marker *string `type:"string"`
-
-	// The maximum number of response records to return in each call. If the number
-	// of remaining response records exceeds the specified MaxRecords value, a value
-	// is returned in a marker field of the response. You can retrieve the next
-	// set of records by retrying the command with the returned marker value.
-	//
-	// Default: 100
-	//
-	// Constraints: minimum 20, maximum 100.
-	MaxRecords *int64 `type:"integer"`
-
-	// A tag key or keys for which you want to return all matching HSM configurations
-	// that are associated with the specified key or keys. For example, suppose
-	// that you have HSM configurations that are tagged with keys called owner and
-	// environment. If you specify both of these tag keys in the request, Amazon
-	// Redshift returns a response with the HSM configurations that have either
-	// or both of these tag keys associated with them.
-	TagKeys []string `locationNameList:"TagKey" type:"list"`
-
-	// A tag value or values for which you want to return all matching HSM configurations
-	// that are associated with the specified tag value or values. For example,
-	// suppose that you have HSM configurations that are tagged with values called
-	// admin and test. If you specify both of these tag values in the request, Amazon
-	// Redshift returns a response with the HSM configurations that have either
-	// or both of these tag values associated with them.
-	TagValues []string `locationNameList:"TagValue" type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeHsmConfigurationsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type DescribeHsmConfigurationsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A list of HsmConfiguration objects.
-	HsmConfigurations []HsmConfiguration `locationNameList:"HsmConfiguration" type:"list"`
-
-	// A value that indicates the starting point for the next set of response records
-	// in a subsequent request. If a value is returned in a response, you can retrieve
-	// the next set of records by providing this returned marker value in the Marker
-	// parameter and retrying the command. If the Marker field is empty, all response
-	// records have been retrieved for the request.
-	Marker *string `type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeHsmConfigurationsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeHsmConfigurations = "DescribeHsmConfigurations"
 
@@ -103,7 +36,7 @@ const opDescribeHsmConfigurations = "DescribeHsmConfigurations"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeHsmConfigurations
-func (c *Client) DescribeHsmConfigurationsRequest(input *DescribeHsmConfigurationsInput) DescribeHsmConfigurationsRequest {
+func (c *Client) DescribeHsmConfigurationsRequest(input *types.DescribeHsmConfigurationsInput) DescribeHsmConfigurationsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeHsmConfigurations,
 		HTTPMethod: "POST",
@@ -117,10 +50,10 @@ func (c *Client) DescribeHsmConfigurationsRequest(input *DescribeHsmConfiguratio
 	}
 
 	if input == nil {
-		input = &DescribeHsmConfigurationsInput{}
+		input = &types.DescribeHsmConfigurationsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeHsmConfigurationsOutput{})
+	req := c.newRequest(op, input, &types.DescribeHsmConfigurationsOutput{})
 	return DescribeHsmConfigurationsRequest{Request: req, Input: input, Copy: c.DescribeHsmConfigurationsRequest}
 }
 
@@ -128,8 +61,8 @@ func (c *Client) DescribeHsmConfigurationsRequest(input *DescribeHsmConfiguratio
 // DescribeHsmConfigurations API operation.
 type DescribeHsmConfigurationsRequest struct {
 	*aws.Request
-	Input *DescribeHsmConfigurationsInput
-	Copy  func(*DescribeHsmConfigurationsInput) DescribeHsmConfigurationsRequest
+	Input *types.DescribeHsmConfigurationsInput
+	Copy  func(*types.DescribeHsmConfigurationsInput) DescribeHsmConfigurationsRequest
 }
 
 // Send marshals and sends the DescribeHsmConfigurations API request.
@@ -141,7 +74,7 @@ func (r DescribeHsmConfigurationsRequest) Send(ctx context.Context) (*DescribeHs
 	}
 
 	resp := &DescribeHsmConfigurationsResponse{
-		DescribeHsmConfigurationsOutput: r.Request.Data.(*DescribeHsmConfigurationsOutput),
+		DescribeHsmConfigurationsOutput: r.Request.Data.(*types.DescribeHsmConfigurationsOutput),
 		response:                        &aws.Response{Request: r.Request},
 	}
 
@@ -171,7 +104,7 @@ func NewDescribeHsmConfigurationsPaginator(req DescribeHsmConfigurationsRequest)
 	return DescribeHsmConfigurationsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *DescribeHsmConfigurationsInput
+				var inCpy *types.DescribeHsmConfigurationsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -191,14 +124,14 @@ type DescribeHsmConfigurationsPaginator struct {
 	aws.Pager
 }
 
-func (p *DescribeHsmConfigurationsPaginator) CurrentPage() *DescribeHsmConfigurationsOutput {
-	return p.Pager.CurrentPage().(*DescribeHsmConfigurationsOutput)
+func (p *DescribeHsmConfigurationsPaginator) CurrentPage() *types.DescribeHsmConfigurationsOutput {
+	return p.Pager.CurrentPage().(*types.DescribeHsmConfigurationsOutput)
 }
 
 // DescribeHsmConfigurationsResponse is the response type for the
 // DescribeHsmConfigurations API operation.
 type DescribeHsmConfigurationsResponse struct {
-	*DescribeHsmConfigurationsOutput
+	*types.DescribeHsmConfigurationsOutput
 
 	response *aws.Response
 }

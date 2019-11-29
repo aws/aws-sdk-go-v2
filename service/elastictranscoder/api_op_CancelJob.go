@@ -6,70 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/elastictranscoder/types"
 )
-
-// The CancelJobRequest structure.
-type CancelJobInput struct {
-	_ struct{} `type:"structure"`
-
-	// The identifier of the job that you want to cancel.
-	//
-	// To get a list of the jobs (including their jobId) that have a status of Submitted,
-	// use the ListJobsByStatus API action.
-	//
-	// Id is a required field
-	Id *string `location:"uri" locationName:"Id" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s CancelJobInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CancelJobInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CancelJobInput"}
-
-	if s.Id == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Id"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s CancelJobInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.Id != nil {
-		v := *s.Id
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "Id", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-// The response body contains a JSON object. If the job is successfully canceled,
-// the value of Success is true.
-type CancelJobOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s CancelJobOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s CancelJobOutput) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
 
 const opCancelJob = "CancelJob"
 
@@ -88,7 +26,7 @@ const opCancelJob = "CancelJob"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) CancelJobRequest(input *CancelJobInput) CancelJobRequest {
+func (c *Client) CancelJobRequest(input *types.CancelJobInput) CancelJobRequest {
 	op := &aws.Operation{
 		Name:       opCancelJob,
 		HTTPMethod: "DELETE",
@@ -96,10 +34,10 @@ func (c *Client) CancelJobRequest(input *CancelJobInput) CancelJobRequest {
 	}
 
 	if input == nil {
-		input = &CancelJobInput{}
+		input = &types.CancelJobInput{}
 	}
 
-	req := c.newRequest(op, input, &CancelJobOutput{})
+	req := c.newRequest(op, input, &types.CancelJobOutput{})
 	return CancelJobRequest{Request: req, Input: input, Copy: c.CancelJobRequest}
 }
 
@@ -107,8 +45,8 @@ func (c *Client) CancelJobRequest(input *CancelJobInput) CancelJobRequest {
 // CancelJob API operation.
 type CancelJobRequest struct {
 	*aws.Request
-	Input *CancelJobInput
-	Copy  func(*CancelJobInput) CancelJobRequest
+	Input *types.CancelJobInput
+	Copy  func(*types.CancelJobInput) CancelJobRequest
 }
 
 // Send marshals and sends the CancelJob API request.
@@ -120,7 +58,7 @@ func (r CancelJobRequest) Send(ctx context.Context) (*CancelJobResponse, error) 
 	}
 
 	resp := &CancelJobResponse{
-		CancelJobOutput: r.Request.Data.(*CancelJobOutput),
+		CancelJobOutput: r.Request.Data.(*types.CancelJobOutput),
 		response:        &aws.Response{Request: r.Request},
 	}
 
@@ -130,7 +68,7 @@ func (r CancelJobRequest) Send(ctx context.Context) (*CancelJobResponse, error) 
 // CancelJobResponse is the response type for the
 // CancelJob API operation.
 type CancelJobResponse struct {
-	*CancelJobOutput
+	*types.CancelJobOutput
 
 	response *aws.Response
 }

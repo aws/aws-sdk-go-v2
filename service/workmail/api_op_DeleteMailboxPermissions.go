@@ -6,71 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/workmail/types"
 )
-
-type DeleteMailboxPermissionsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The identifier of the member (user or group)that owns the mailbox.
-	//
-	// EntityId is a required field
-	EntityId *string `min:"12" type:"string" required:"true"`
-
-	// The identifier of the member (user or group) for which to delete granted
-	// permissions.
-	//
-	// GranteeId is a required field
-	GranteeId *string `min:"12" type:"string" required:"true"`
-
-	// The identifier of the organization under which the member (user or group)
-	// exists.
-	//
-	// OrganizationId is a required field
-	OrganizationId *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteMailboxPermissionsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteMailboxPermissionsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteMailboxPermissionsInput"}
-
-	if s.EntityId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("EntityId"))
-	}
-	if s.EntityId != nil && len(*s.EntityId) < 12 {
-		invalidParams.Add(aws.NewErrParamMinLen("EntityId", 12))
-	}
-
-	if s.GranteeId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("GranteeId"))
-	}
-	if s.GranteeId != nil && len(*s.GranteeId) < 12 {
-		invalidParams.Add(aws.NewErrParamMinLen("GranteeId", 12))
-	}
-
-	if s.OrganizationId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("OrganizationId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteMailboxPermissionsOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteMailboxPermissionsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteMailboxPermissions = "DeleteMailboxPermissions"
 
@@ -87,7 +24,7 @@ const opDeleteMailboxPermissions = "DeleteMailboxPermissions"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/DeleteMailboxPermissions
-func (c *Client) DeleteMailboxPermissionsRequest(input *DeleteMailboxPermissionsInput) DeleteMailboxPermissionsRequest {
+func (c *Client) DeleteMailboxPermissionsRequest(input *types.DeleteMailboxPermissionsInput) DeleteMailboxPermissionsRequest {
 	op := &aws.Operation{
 		Name:       opDeleteMailboxPermissions,
 		HTTPMethod: "POST",
@@ -95,10 +32,10 @@ func (c *Client) DeleteMailboxPermissionsRequest(input *DeleteMailboxPermissions
 	}
 
 	if input == nil {
-		input = &DeleteMailboxPermissionsInput{}
+		input = &types.DeleteMailboxPermissionsInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteMailboxPermissionsOutput{})
+	req := c.newRequest(op, input, &types.DeleteMailboxPermissionsOutput{})
 	return DeleteMailboxPermissionsRequest{Request: req, Input: input, Copy: c.DeleteMailboxPermissionsRequest}
 }
 
@@ -106,8 +43,8 @@ func (c *Client) DeleteMailboxPermissionsRequest(input *DeleteMailboxPermissions
 // DeleteMailboxPermissions API operation.
 type DeleteMailboxPermissionsRequest struct {
 	*aws.Request
-	Input *DeleteMailboxPermissionsInput
-	Copy  func(*DeleteMailboxPermissionsInput) DeleteMailboxPermissionsRequest
+	Input *types.DeleteMailboxPermissionsInput
+	Copy  func(*types.DeleteMailboxPermissionsInput) DeleteMailboxPermissionsRequest
 }
 
 // Send marshals and sends the DeleteMailboxPermissions API request.
@@ -119,7 +56,7 @@ func (r DeleteMailboxPermissionsRequest) Send(ctx context.Context) (*DeleteMailb
 	}
 
 	resp := &DeleteMailboxPermissionsResponse{
-		DeleteMailboxPermissionsOutput: r.Request.Data.(*DeleteMailboxPermissionsOutput),
+		DeleteMailboxPermissionsOutput: r.Request.Data.(*types.DeleteMailboxPermissionsOutput),
 		response:                       &aws.Response{Request: r.Request},
 	}
 
@@ -129,7 +66,7 @@ func (r DeleteMailboxPermissionsRequest) Send(ctx context.Context) (*DeleteMailb
 // DeleteMailboxPermissionsResponse is the response type for the
 // DeleteMailboxPermissions API operation.
 type DeleteMailboxPermissionsResponse struct {
-	*DeleteMailboxPermissionsOutput
+	*types.DeleteMailboxPermissionsOutput
 
 	response *aws.Response
 }

@@ -6,51 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/glue/types"
 )
-
-type DeleteTriggerInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the trigger to delete.
-	//
-	// Name is a required field
-	Name *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteTriggerInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteTriggerInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteTriggerInput"}
-
-	if s.Name == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Name"))
-	}
-	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteTriggerOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the trigger that was deleted.
-	Name *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s DeleteTriggerOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteTrigger = "DeleteTrigger"
 
@@ -68,7 +25,7 @@ const opDeleteTrigger = "DeleteTrigger"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DeleteTrigger
-func (c *Client) DeleteTriggerRequest(input *DeleteTriggerInput) DeleteTriggerRequest {
+func (c *Client) DeleteTriggerRequest(input *types.DeleteTriggerInput) DeleteTriggerRequest {
 	op := &aws.Operation{
 		Name:       opDeleteTrigger,
 		HTTPMethod: "POST",
@@ -76,10 +33,10 @@ func (c *Client) DeleteTriggerRequest(input *DeleteTriggerInput) DeleteTriggerRe
 	}
 
 	if input == nil {
-		input = &DeleteTriggerInput{}
+		input = &types.DeleteTriggerInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteTriggerOutput{})
+	req := c.newRequest(op, input, &types.DeleteTriggerOutput{})
 	return DeleteTriggerRequest{Request: req, Input: input, Copy: c.DeleteTriggerRequest}
 }
 
@@ -87,8 +44,8 @@ func (c *Client) DeleteTriggerRequest(input *DeleteTriggerInput) DeleteTriggerRe
 // DeleteTrigger API operation.
 type DeleteTriggerRequest struct {
 	*aws.Request
-	Input *DeleteTriggerInput
-	Copy  func(*DeleteTriggerInput) DeleteTriggerRequest
+	Input *types.DeleteTriggerInput
+	Copy  func(*types.DeleteTriggerInput) DeleteTriggerRequest
 }
 
 // Send marshals and sends the DeleteTrigger API request.
@@ -100,7 +57,7 @@ func (r DeleteTriggerRequest) Send(ctx context.Context) (*DeleteTriggerResponse,
 	}
 
 	resp := &DeleteTriggerResponse{
-		DeleteTriggerOutput: r.Request.Data.(*DeleteTriggerOutput),
+		DeleteTriggerOutput: r.Request.Data.(*types.DeleteTriggerOutput),
 		response:            &aws.Response{Request: r.Request},
 	}
 
@@ -110,7 +67,7 @@ func (r DeleteTriggerRequest) Send(ctx context.Context) (*DeleteTriggerResponse,
 // DeleteTriggerResponse is the response type for the
 // DeleteTrigger API operation.
 type DeleteTriggerResponse struct {
-	*DeleteTriggerOutput
+	*types.DeleteTriggerOutput
 
 	response *aws.Response
 }

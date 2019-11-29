@@ -6,68 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/elasticbeanstalk/types"
 )
-
-type UpdateApplicationResourceLifecycleInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the application.
-	//
-	// ApplicationName is a required field
-	ApplicationName *string `min:"1" type:"string" required:"true"`
-
-	// The lifecycle configuration.
-	//
-	// ResourceLifecycleConfig is a required field
-	ResourceLifecycleConfig *ApplicationResourceLifecycleConfig `type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s UpdateApplicationResourceLifecycleInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateApplicationResourceLifecycleInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateApplicationResourceLifecycleInput"}
-
-	if s.ApplicationName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ApplicationName"))
-	}
-	if s.ApplicationName != nil && len(*s.ApplicationName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ApplicationName", 1))
-	}
-
-	if s.ResourceLifecycleConfig == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ResourceLifecycleConfig"))
-	}
-	if s.ResourceLifecycleConfig != nil {
-		if err := s.ResourceLifecycleConfig.Validate(); err != nil {
-			invalidParams.AddNested("ResourceLifecycleConfig", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type UpdateApplicationResourceLifecycleOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the application.
-	ApplicationName *string `min:"1" type:"string"`
-
-	// The lifecycle configuration.
-	ResourceLifecycleConfig *ApplicationResourceLifecycleConfig `type:"structure"`
-}
-
-// String returns the string representation
-func (s UpdateApplicationResourceLifecycleOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opUpdateApplicationResourceLifecycle = "UpdateApplicationResourceLifecycle"
 
@@ -84,7 +24,7 @@ const opUpdateApplicationResourceLifecycle = "UpdateApplicationResourceLifecycle
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/UpdateApplicationResourceLifecycle
-func (c *Client) UpdateApplicationResourceLifecycleRequest(input *UpdateApplicationResourceLifecycleInput) UpdateApplicationResourceLifecycleRequest {
+func (c *Client) UpdateApplicationResourceLifecycleRequest(input *types.UpdateApplicationResourceLifecycleInput) UpdateApplicationResourceLifecycleRequest {
 	op := &aws.Operation{
 		Name:       opUpdateApplicationResourceLifecycle,
 		HTTPMethod: "POST",
@@ -92,10 +32,10 @@ func (c *Client) UpdateApplicationResourceLifecycleRequest(input *UpdateApplicat
 	}
 
 	if input == nil {
-		input = &UpdateApplicationResourceLifecycleInput{}
+		input = &types.UpdateApplicationResourceLifecycleInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateApplicationResourceLifecycleOutput{})
+	req := c.newRequest(op, input, &types.UpdateApplicationResourceLifecycleOutput{})
 	return UpdateApplicationResourceLifecycleRequest{Request: req, Input: input, Copy: c.UpdateApplicationResourceLifecycleRequest}
 }
 
@@ -103,8 +43,8 @@ func (c *Client) UpdateApplicationResourceLifecycleRequest(input *UpdateApplicat
 // UpdateApplicationResourceLifecycle API operation.
 type UpdateApplicationResourceLifecycleRequest struct {
 	*aws.Request
-	Input *UpdateApplicationResourceLifecycleInput
-	Copy  func(*UpdateApplicationResourceLifecycleInput) UpdateApplicationResourceLifecycleRequest
+	Input *types.UpdateApplicationResourceLifecycleInput
+	Copy  func(*types.UpdateApplicationResourceLifecycleInput) UpdateApplicationResourceLifecycleRequest
 }
 
 // Send marshals and sends the UpdateApplicationResourceLifecycle API request.
@@ -116,7 +56,7 @@ func (r UpdateApplicationResourceLifecycleRequest) Send(ctx context.Context) (*U
 	}
 
 	resp := &UpdateApplicationResourceLifecycleResponse{
-		UpdateApplicationResourceLifecycleOutput: r.Request.Data.(*UpdateApplicationResourceLifecycleOutput),
+		UpdateApplicationResourceLifecycleOutput: r.Request.Data.(*types.UpdateApplicationResourceLifecycleOutput),
 		response:                                 &aws.Response{Request: r.Request},
 	}
 
@@ -126,7 +66,7 @@ func (r UpdateApplicationResourceLifecycleRequest) Send(ctx context.Context) (*U
 // UpdateApplicationResourceLifecycleResponse is the response type for the
 // UpdateApplicationResourceLifecycle API operation.
 type UpdateApplicationResourceLifecycleResponse struct {
-	*UpdateApplicationResourceLifecycleOutput
+	*types.UpdateApplicationResourceLifecycleOutput
 
 	response *aws.Response
 }

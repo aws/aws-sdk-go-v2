@@ -4,83 +4,10 @@ package machinelearning
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/machinelearning/types"
 )
-
-type AddTagsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the ML object to tag. For example, exampleModelId.
-	//
-	// ResourceId is a required field
-	ResourceId *string `min:"1" type:"string" required:"true"`
-
-	// The type of the ML object to tag.
-	//
-	// ResourceType is a required field
-	ResourceType TaggableResourceType `type:"string" required:"true" enum:"true"`
-
-	// The key-value pairs to use to create tags. If you specify a key without specifying
-	// a value, Amazon ML creates a tag with the specified key and a value of null.
-	//
-	// Tags is a required field
-	Tags []Tag `type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s AddTagsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *AddTagsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "AddTagsInput"}
-
-	if s.ResourceId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ResourceId"))
-	}
-	if s.ResourceId != nil && len(*s.ResourceId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ResourceId", 1))
-	}
-	if len(s.ResourceType) == 0 {
-		invalidParams.Add(aws.NewErrParamRequired("ResourceType"))
-	}
-
-	if s.Tags == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Tags"))
-	}
-	if s.Tags != nil {
-		for i, v := range s.Tags {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Amazon ML returns the following elements.
-type AddTagsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the ML object that was tagged.
-	ResourceId *string `min:"1" type:"string"`
-
-	// The type of the ML object that was tagged.
-	ResourceType TaggableResourceType `type:"string" enum:"true"`
-}
-
-// String returns the string representation
-func (s AddTagsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opAddTags = "AddTags"
 
@@ -97,7 +24,7 @@ const opAddTags = "AddTags"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) AddTagsRequest(input *AddTagsInput) AddTagsRequest {
+func (c *Client) AddTagsRequest(input *types.AddTagsInput) AddTagsRequest {
 	op := &aws.Operation{
 		Name:       opAddTags,
 		HTTPMethod: "POST",
@@ -105,10 +32,10 @@ func (c *Client) AddTagsRequest(input *AddTagsInput) AddTagsRequest {
 	}
 
 	if input == nil {
-		input = &AddTagsInput{}
+		input = &types.AddTagsInput{}
 	}
 
-	req := c.newRequest(op, input, &AddTagsOutput{})
+	req := c.newRequest(op, input, &types.AddTagsOutput{})
 	return AddTagsRequest{Request: req, Input: input, Copy: c.AddTagsRequest}
 }
 
@@ -116,8 +43,8 @@ func (c *Client) AddTagsRequest(input *AddTagsInput) AddTagsRequest {
 // AddTags API operation.
 type AddTagsRequest struct {
 	*aws.Request
-	Input *AddTagsInput
-	Copy  func(*AddTagsInput) AddTagsRequest
+	Input *types.AddTagsInput
+	Copy  func(*types.AddTagsInput) AddTagsRequest
 }
 
 // Send marshals and sends the AddTags API request.
@@ -129,7 +56,7 @@ func (r AddTagsRequest) Send(ctx context.Context) (*AddTagsResponse, error) {
 	}
 
 	resp := &AddTagsResponse{
-		AddTagsOutput: r.Request.Data.(*AddTagsOutput),
+		AddTagsOutput: r.Request.Data.(*types.AddTagsOutput),
 		response:      &aws.Response{Request: r.Request},
 	}
 
@@ -139,7 +66,7 @@ func (r AddTagsRequest) Send(ctx context.Context) (*AddTagsResponse, error) {
 // AddTagsResponse is the response type for the
 // AddTags API operation.
 type AddTagsResponse struct {
-	*AddTagsOutput
+	*types.AddTagsOutput
 
 	response *aws.Response
 }

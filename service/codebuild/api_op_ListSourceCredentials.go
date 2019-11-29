@@ -6,31 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/codebuild/types"
 )
-
-type ListSourceCredentialsInput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s ListSourceCredentialsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type ListSourceCredentialsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A list of SourceCredentialsInfo objects. Each SourceCredentialsInfo object
-	// includes the authentication type, token ARN, and type of source provider
-	// for one set of credentials.
-	SourceCredentialsInfos []SourceCredentialsInfo `locationName:"sourceCredentialsInfos" type:"list"`
-}
-
-// String returns the string representation
-func (s ListSourceCredentialsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListSourceCredentials = "ListSourceCredentials"
 
@@ -47,7 +24,7 @@ const opListSourceCredentials = "ListSourceCredentials"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/ListSourceCredentials
-func (c *Client) ListSourceCredentialsRequest(input *ListSourceCredentialsInput) ListSourceCredentialsRequest {
+func (c *Client) ListSourceCredentialsRequest(input *types.ListSourceCredentialsInput) ListSourceCredentialsRequest {
 	op := &aws.Operation{
 		Name:       opListSourceCredentials,
 		HTTPMethod: "POST",
@@ -55,10 +32,10 @@ func (c *Client) ListSourceCredentialsRequest(input *ListSourceCredentialsInput)
 	}
 
 	if input == nil {
-		input = &ListSourceCredentialsInput{}
+		input = &types.ListSourceCredentialsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListSourceCredentialsOutput{})
+	req := c.newRequest(op, input, &types.ListSourceCredentialsOutput{})
 	return ListSourceCredentialsRequest{Request: req, Input: input, Copy: c.ListSourceCredentialsRequest}
 }
 
@@ -66,8 +43,8 @@ func (c *Client) ListSourceCredentialsRequest(input *ListSourceCredentialsInput)
 // ListSourceCredentials API operation.
 type ListSourceCredentialsRequest struct {
 	*aws.Request
-	Input *ListSourceCredentialsInput
-	Copy  func(*ListSourceCredentialsInput) ListSourceCredentialsRequest
+	Input *types.ListSourceCredentialsInput
+	Copy  func(*types.ListSourceCredentialsInput) ListSourceCredentialsRequest
 }
 
 // Send marshals and sends the ListSourceCredentials API request.
@@ -79,7 +56,7 @@ func (r ListSourceCredentialsRequest) Send(ctx context.Context) (*ListSourceCred
 	}
 
 	resp := &ListSourceCredentialsResponse{
-		ListSourceCredentialsOutput: r.Request.Data.(*ListSourceCredentialsOutput),
+		ListSourceCredentialsOutput: r.Request.Data.(*types.ListSourceCredentialsOutput),
 		response:                    &aws.Response{Request: r.Request},
 	}
 
@@ -89,7 +66,7 @@ func (r ListSourceCredentialsRequest) Send(ctx context.Context) (*ListSourceCred
 // ListSourceCredentialsResponse is the response type for the
 // ListSourceCredentials API operation.
 type ListSourceCredentialsResponse struct {
-	*ListSourceCredentialsOutput
+	*types.ListSourceCredentialsOutput
 
 	response *aws.Response
 }

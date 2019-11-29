@@ -6,33 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/snowball/types"
 )
-
-type GetSnowballUsageInput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s GetSnowballUsageInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type GetSnowballUsageOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The service limit for number of Snowballs this account can have at once.
-	// The default service limit is 1 (one).
-	SnowballLimit *int64 `type:"integer"`
-
-	// The number of Snowballs that this account is currently using.
-	SnowballsInUse *int64 `type:"integer"`
-}
-
-// String returns the string representation
-func (s GetSnowballUsageOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetSnowballUsage = "GetSnowballUsage"
 
@@ -53,7 +28,7 @@ const opGetSnowballUsage = "GetSnowballUsage"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/GetSnowballUsage
-func (c *Client) GetSnowballUsageRequest(input *GetSnowballUsageInput) GetSnowballUsageRequest {
+func (c *Client) GetSnowballUsageRequest(input *types.GetSnowballUsageInput) GetSnowballUsageRequest {
 	op := &aws.Operation{
 		Name:       opGetSnowballUsage,
 		HTTPMethod: "POST",
@@ -61,10 +36,10 @@ func (c *Client) GetSnowballUsageRequest(input *GetSnowballUsageInput) GetSnowba
 	}
 
 	if input == nil {
-		input = &GetSnowballUsageInput{}
+		input = &types.GetSnowballUsageInput{}
 	}
 
-	req := c.newRequest(op, input, &GetSnowballUsageOutput{})
+	req := c.newRequest(op, input, &types.GetSnowballUsageOutput{})
 	return GetSnowballUsageRequest{Request: req, Input: input, Copy: c.GetSnowballUsageRequest}
 }
 
@@ -72,8 +47,8 @@ func (c *Client) GetSnowballUsageRequest(input *GetSnowballUsageInput) GetSnowba
 // GetSnowballUsage API operation.
 type GetSnowballUsageRequest struct {
 	*aws.Request
-	Input *GetSnowballUsageInput
-	Copy  func(*GetSnowballUsageInput) GetSnowballUsageRequest
+	Input *types.GetSnowballUsageInput
+	Copy  func(*types.GetSnowballUsageInput) GetSnowballUsageRequest
 }
 
 // Send marshals and sends the GetSnowballUsage API request.
@@ -85,7 +60,7 @@ func (r GetSnowballUsageRequest) Send(ctx context.Context) (*GetSnowballUsageRes
 	}
 
 	resp := &GetSnowballUsageResponse{
-		GetSnowballUsageOutput: r.Request.Data.(*GetSnowballUsageOutput),
+		GetSnowballUsageOutput: r.Request.Data.(*types.GetSnowballUsageOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -95,7 +70,7 @@ func (r GetSnowballUsageRequest) Send(ctx context.Context) (*GetSnowballUsageRes
 // GetSnowballUsageResponse is the response type for the
 // GetSnowballUsage API operation.
 type GetSnowballUsageResponse struct {
-	*GetSnowballUsageOutput
+	*types.GetSnowballUsageOutput
 
 	response *aws.Response
 }

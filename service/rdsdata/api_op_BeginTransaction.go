@@ -6,114 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/rdsdata/types"
 )
-
-// The request parameters represent the input of a request to start a SQL transaction.
-type BeginTransactionInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the database.
-	Database *string `locationName:"database" type:"string"`
-
-	// The Amazon Resource Name (ARN) of the Aurora Serverless DB cluster.
-	//
-	// ResourceArn is a required field
-	ResourceArn *string `locationName:"resourceArn" min:"11" type:"string" required:"true"`
-
-	// The name of the database schema.
-	Schema *string `locationName:"schema" type:"string"`
-
-	// The name or ARN of the secret that enables access to the DB cluster.
-	//
-	// SecretArn is a required field
-	SecretArn *string `locationName:"secretArn" min:"11" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s BeginTransactionInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *BeginTransactionInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "BeginTransactionInput"}
-
-	if s.ResourceArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ResourceArn"))
-	}
-	if s.ResourceArn != nil && len(*s.ResourceArn) < 11 {
-		invalidParams.Add(aws.NewErrParamMinLen("ResourceArn", 11))
-	}
-
-	if s.SecretArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("SecretArn"))
-	}
-	if s.SecretArn != nil && len(*s.SecretArn) < 11 {
-		invalidParams.Add(aws.NewErrParamMinLen("SecretArn", 11))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s BeginTransactionInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.Database != nil {
-		v := *s.Database
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "database", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.ResourceArn != nil {
-		v := *s.ResourceArn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "resourceArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Schema != nil {
-		v := *s.Schema
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "schema", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.SecretArn != nil {
-		v := *s.SecretArn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "secretArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-// The response elements represent the output of a request to start a SQL transaction.
-type BeginTransactionOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The transaction ID of the transaction started by the call.
-	TransactionId *string `locationName:"transactionId" type:"string"`
-}
-
-// String returns the string representation
-func (s BeginTransactionOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s BeginTransactionOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.TransactionId != nil {
-		v := *s.TransactionId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "transactionId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opBeginTransaction = "BeginTransaction"
 
@@ -138,7 +32,7 @@ const opBeginTransaction = "BeginTransaction"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-data-2018-08-01/BeginTransaction
-func (c *Client) BeginTransactionRequest(input *BeginTransactionInput) BeginTransactionRequest {
+func (c *Client) BeginTransactionRequest(input *types.BeginTransactionInput) BeginTransactionRequest {
 	op := &aws.Operation{
 		Name:       opBeginTransaction,
 		HTTPMethod: "POST",
@@ -146,10 +40,10 @@ func (c *Client) BeginTransactionRequest(input *BeginTransactionInput) BeginTran
 	}
 
 	if input == nil {
-		input = &BeginTransactionInput{}
+		input = &types.BeginTransactionInput{}
 	}
 
-	req := c.newRequest(op, input, &BeginTransactionOutput{})
+	req := c.newRequest(op, input, &types.BeginTransactionOutput{})
 	return BeginTransactionRequest{Request: req, Input: input, Copy: c.BeginTransactionRequest}
 }
 
@@ -157,8 +51,8 @@ func (c *Client) BeginTransactionRequest(input *BeginTransactionInput) BeginTran
 // BeginTransaction API operation.
 type BeginTransactionRequest struct {
 	*aws.Request
-	Input *BeginTransactionInput
-	Copy  func(*BeginTransactionInput) BeginTransactionRequest
+	Input *types.BeginTransactionInput
+	Copy  func(*types.BeginTransactionInput) BeginTransactionRequest
 }
 
 // Send marshals and sends the BeginTransaction API request.
@@ -170,7 +64,7 @@ func (r BeginTransactionRequest) Send(ctx context.Context) (*BeginTransactionRes
 	}
 
 	resp := &BeginTransactionResponse{
-		BeginTransactionOutput: r.Request.Data.(*BeginTransactionOutput),
+		BeginTransactionOutput: r.Request.Data.(*types.BeginTransactionOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -180,7 +74,7 @@ func (r BeginTransactionRequest) Send(ctx context.Context) (*BeginTransactionRes
 // BeginTransactionResponse is the response type for the
 // BeginTransaction API operation.
 type BeginTransactionResponse struct {
-	*BeginTransactionOutput
+	*types.BeginTransactionOutput
 
 	response *aws.Response
 }

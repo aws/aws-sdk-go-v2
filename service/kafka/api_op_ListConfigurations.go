@@ -6,96 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/kafka/types"
 )
-
-type ListConfigurationsInput struct {
-	_ struct{} `type:"structure"`
-
-	MaxResults *int64 `location:"querystring" locationName:"maxResults" min:"1" type:"integer"`
-
-	NextToken *string `location:"querystring" locationName:"nextToken" type:"string"`
-}
-
-// String returns the string representation
-func (s ListConfigurationsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListConfigurationsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListConfigurationsInput"}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListConfigurationsInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.MaxResults != nil {
-		v := *s.MaxResults
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "maxResults", protocol.Int64Value(v), metadata)
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-// The response contains an array of Configuration and a next token if the response
-// is truncated.
-type ListConfigurationsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// An array of MSK configurations.
-	Configurations []Configuration `locationName:"configurations" type:"list"`
-
-	// The paginated results marker. When the result of a ListConfigurations operation
-	// is truncated, the call returns NextToken in the response. To get another
-	// batch of configurations, provide this token in your next request.
-	NextToken *string `locationName:"nextToken" type:"string"`
-}
-
-// String returns the string representation
-func (s ListConfigurationsOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListConfigurationsOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.Configurations != nil {
-		v := s.Configurations
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "configurations", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opListConfigurations = "ListConfigurations"
 
@@ -112,7 +24,7 @@ const opListConfigurations = "ListConfigurations"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/ListConfigurations
-func (c *Client) ListConfigurationsRequest(input *ListConfigurationsInput) ListConfigurationsRequest {
+func (c *Client) ListConfigurationsRequest(input *types.ListConfigurationsInput) ListConfigurationsRequest {
 	op := &aws.Operation{
 		Name:       opListConfigurations,
 		HTTPMethod: "GET",
@@ -126,10 +38,10 @@ func (c *Client) ListConfigurationsRequest(input *ListConfigurationsInput) ListC
 	}
 
 	if input == nil {
-		input = &ListConfigurationsInput{}
+		input = &types.ListConfigurationsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListConfigurationsOutput{})
+	req := c.newRequest(op, input, &types.ListConfigurationsOutput{})
 	return ListConfigurationsRequest{Request: req, Input: input, Copy: c.ListConfigurationsRequest}
 }
 
@@ -137,8 +49,8 @@ func (c *Client) ListConfigurationsRequest(input *ListConfigurationsInput) ListC
 // ListConfigurations API operation.
 type ListConfigurationsRequest struct {
 	*aws.Request
-	Input *ListConfigurationsInput
-	Copy  func(*ListConfigurationsInput) ListConfigurationsRequest
+	Input *types.ListConfigurationsInput
+	Copy  func(*types.ListConfigurationsInput) ListConfigurationsRequest
 }
 
 // Send marshals and sends the ListConfigurations API request.
@@ -150,7 +62,7 @@ func (r ListConfigurationsRequest) Send(ctx context.Context) (*ListConfiguration
 	}
 
 	resp := &ListConfigurationsResponse{
-		ListConfigurationsOutput: r.Request.Data.(*ListConfigurationsOutput),
+		ListConfigurationsOutput: r.Request.Data.(*types.ListConfigurationsOutput),
 		response:                 &aws.Response{Request: r.Request},
 	}
 
@@ -180,7 +92,7 @@ func NewListConfigurationsPaginator(req ListConfigurationsRequest) ListConfigura
 	return ListConfigurationsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListConfigurationsInput
+				var inCpy *types.ListConfigurationsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -200,14 +112,14 @@ type ListConfigurationsPaginator struct {
 	aws.Pager
 }
 
-func (p *ListConfigurationsPaginator) CurrentPage() *ListConfigurationsOutput {
-	return p.Pager.CurrentPage().(*ListConfigurationsOutput)
+func (p *ListConfigurationsPaginator) CurrentPage() *types.ListConfigurationsOutput {
+	return p.Pager.CurrentPage().(*types.ListConfigurationsOutput)
 }
 
 // ListConfigurationsResponse is the response type for the
 // ListConfigurations API operation.
 type ListConfigurationsResponse struct {
-	*ListConfigurationsOutput
+	*types.ListConfigurationsOutput
 
 	response *aws.Response
 }

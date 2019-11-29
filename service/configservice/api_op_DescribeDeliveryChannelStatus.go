@@ -6,34 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/configservice/types"
 )
-
-// The input for the DeliveryChannelStatus action.
-type DescribeDeliveryChannelStatusInput struct {
-	_ struct{} `type:"structure"`
-
-	// A list of delivery channel names.
-	DeliveryChannelNames []string `type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeDeliveryChannelStatusInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// The output for the DescribeDeliveryChannelStatus action.
-type DescribeDeliveryChannelStatusOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A list that contains the status of a specified delivery channel.
-	DeliveryChannelsStatus []DeliveryChannelStatus `type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeDeliveryChannelStatusOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeDeliveryChannelStatus = "DescribeDeliveryChannelStatus"
 
@@ -54,7 +28,7 @@ const opDescribeDeliveryChannelStatus = "DescribeDeliveryChannelStatus"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DescribeDeliveryChannelStatus
-func (c *Client) DescribeDeliveryChannelStatusRequest(input *DescribeDeliveryChannelStatusInput) DescribeDeliveryChannelStatusRequest {
+func (c *Client) DescribeDeliveryChannelStatusRequest(input *types.DescribeDeliveryChannelStatusInput) DescribeDeliveryChannelStatusRequest {
 	op := &aws.Operation{
 		Name:       opDescribeDeliveryChannelStatus,
 		HTTPMethod: "POST",
@@ -62,10 +36,10 @@ func (c *Client) DescribeDeliveryChannelStatusRequest(input *DescribeDeliveryCha
 	}
 
 	if input == nil {
-		input = &DescribeDeliveryChannelStatusInput{}
+		input = &types.DescribeDeliveryChannelStatusInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeDeliveryChannelStatusOutput{})
+	req := c.newRequest(op, input, &types.DescribeDeliveryChannelStatusOutput{})
 	return DescribeDeliveryChannelStatusRequest{Request: req, Input: input, Copy: c.DescribeDeliveryChannelStatusRequest}
 }
 
@@ -73,8 +47,8 @@ func (c *Client) DescribeDeliveryChannelStatusRequest(input *DescribeDeliveryCha
 // DescribeDeliveryChannelStatus API operation.
 type DescribeDeliveryChannelStatusRequest struct {
 	*aws.Request
-	Input *DescribeDeliveryChannelStatusInput
-	Copy  func(*DescribeDeliveryChannelStatusInput) DescribeDeliveryChannelStatusRequest
+	Input *types.DescribeDeliveryChannelStatusInput
+	Copy  func(*types.DescribeDeliveryChannelStatusInput) DescribeDeliveryChannelStatusRequest
 }
 
 // Send marshals and sends the DescribeDeliveryChannelStatus API request.
@@ -86,7 +60,7 @@ func (r DescribeDeliveryChannelStatusRequest) Send(ctx context.Context) (*Descri
 	}
 
 	resp := &DescribeDeliveryChannelStatusResponse{
-		DescribeDeliveryChannelStatusOutput: r.Request.Data.(*DescribeDeliveryChannelStatusOutput),
+		DescribeDeliveryChannelStatusOutput: r.Request.Data.(*types.DescribeDeliveryChannelStatusOutput),
 		response:                            &aws.Response{Request: r.Request},
 	}
 
@@ -96,7 +70,7 @@ func (r DescribeDeliveryChannelStatusRequest) Send(ctx context.Context) (*Descri
 // DescribeDeliveryChannelStatusResponse is the response type for the
 // DescribeDeliveryChannelStatus API operation.
 type DescribeDeliveryChannelStatusResponse struct {
-	*DescribeDeliveryChannelStatusOutput
+	*types.DescribeDeliveryChannelStatusOutput
 
 	response *aws.Response
 }

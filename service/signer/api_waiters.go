@@ -7,6 +7,7 @@ import (
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
+	"github.com/aws/aws-sdk-go-v2/service/signer/types"
 )
 
 // WaitUntilSuccessfulSigningJob uses the signer API operation
@@ -18,7 +19,7 @@ import (
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Client) WaitUntilSuccessfulSigningJob(ctx context.Context, input *DescribeSigningJobInput, opts ...aws.WaiterOption) error {
+func (c *Client) WaitUntilSuccessfulSigningJob(ctx context.Context, input *types.DescribeSigningJobInput, opts ...aws.WaiterOption) error {
 	w := aws.Waiter{
 		Name:        "WaitUntilSuccessfulSigningJob",
 		MaxAttempts: 25,
@@ -42,7 +43,7 @@ func (c *Client) WaitUntilSuccessfulSigningJob(ctx context.Context, input *Descr
 		},
 		Logger: c.Config.Logger,
 		NewRequest: func(opts []aws.Option) (*aws.Request, error) {
-			var inCpy *DescribeSigningJobInput
+			var inCpy *types.DescribeSigningJobInput
 			if input != nil {
 				tmp := *input
 				inCpy = &tmp

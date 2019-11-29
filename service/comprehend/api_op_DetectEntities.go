@@ -6,66 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/comprehend/types"
 )
-
-type DetectEntitiesInput struct {
-	_ struct{} `type:"structure"`
-
-	// The language of the input documents. You can specify any of the primary languages
-	// supported by Amazon Comprehend: German ("de"), English ("en"), Spanish ("es"),
-	// French ("fr"), Italian ("it"), or Portuguese ("pt"). All documents must be
-	// in the same language.
-	//
-	// LanguageCode is a required field
-	LanguageCode LanguageCode `type:"string" required:"true" enum:"true"`
-
-	// A UTF-8 text string. Each string must contain fewer that 5,000 bytes of UTF-8
-	// encoded characters.
-	//
-	// Text is a required field
-	Text *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DetectEntitiesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DetectEntitiesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DetectEntitiesInput"}
-	if len(s.LanguageCode) == 0 {
-		invalidParams.Add(aws.NewErrParamRequired("LanguageCode"))
-	}
-
-	if s.Text == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Text"))
-	}
-	if s.Text != nil && len(*s.Text) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Text", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DetectEntitiesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A collection of entities identified in the input text. For each entity, the
-	// response provides the entity text, entity type, where the entity text begins
-	// and ends, and the level of confidence that Amazon Comprehend has in the detection.
-	// For a list of entity types, see how-entities.
-	Entities []Entity `type:"list"`
-}
-
-// String returns the string representation
-func (s DetectEntitiesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDetectEntities = "DetectEntities"
 
@@ -83,7 +25,7 @@ const opDetectEntities = "DetectEntities"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/DetectEntities
-func (c *Client) DetectEntitiesRequest(input *DetectEntitiesInput) DetectEntitiesRequest {
+func (c *Client) DetectEntitiesRequest(input *types.DetectEntitiesInput) DetectEntitiesRequest {
 	op := &aws.Operation{
 		Name:       opDetectEntities,
 		HTTPMethod: "POST",
@@ -91,10 +33,10 @@ func (c *Client) DetectEntitiesRequest(input *DetectEntitiesInput) DetectEntitie
 	}
 
 	if input == nil {
-		input = &DetectEntitiesInput{}
+		input = &types.DetectEntitiesInput{}
 	}
 
-	req := c.newRequest(op, input, &DetectEntitiesOutput{})
+	req := c.newRequest(op, input, &types.DetectEntitiesOutput{})
 	return DetectEntitiesRequest{Request: req, Input: input, Copy: c.DetectEntitiesRequest}
 }
 
@@ -102,8 +44,8 @@ func (c *Client) DetectEntitiesRequest(input *DetectEntitiesInput) DetectEntitie
 // DetectEntities API operation.
 type DetectEntitiesRequest struct {
 	*aws.Request
-	Input *DetectEntitiesInput
-	Copy  func(*DetectEntitiesInput) DetectEntitiesRequest
+	Input *types.DetectEntitiesInput
+	Copy  func(*types.DetectEntitiesInput) DetectEntitiesRequest
 }
 
 // Send marshals and sends the DetectEntities API request.
@@ -115,7 +57,7 @@ func (r DetectEntitiesRequest) Send(ctx context.Context) (*DetectEntitiesRespons
 	}
 
 	resp := &DetectEntitiesResponse{
-		DetectEntitiesOutput: r.Request.Data.(*DetectEntitiesOutput),
+		DetectEntitiesOutput: r.Request.Data.(*types.DetectEntitiesOutput),
 		response:             &aws.Response{Request: r.Request},
 	}
 
@@ -125,7 +67,7 @@ func (r DetectEntitiesRequest) Send(ctx context.Context) (*DetectEntitiesRespons
 // DetectEntitiesResponse is the response type for the
 // DetectEntities API operation.
 type DetectEntitiesResponse struct {
-	*DetectEntitiesOutput
+	*types.DetectEntitiesOutput
 
 	response *aws.Response
 }

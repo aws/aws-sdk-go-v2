@@ -6,71 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-type DescribeHostsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The filters.
-	//
-	//    * auto-placement - Whether auto-placement is enabled or disabled (on |
-	//    off).
-	//
-	//    * availability-zone - The Availability Zone of the host.
-	//
-	//    * client-token - The idempotency token that you provided when you allocated
-	//    the host.
-	//
-	//    * host-reservation-id - The ID of the reservation assigned to this host.
-	//
-	//    * instance-type - The instance type size that the Dedicated Host is configured
-	//    to support.
-	//
-	//    * state - The allocation state of the Dedicated Host (available | under-assessment
-	//    | permanent-failure | released | released-permanent-failure).
-	//
-	//    * tag-key - The key of a tag assigned to the resource. Use this filter
-	//    to find all resources assigned a tag with a specific key, regardless of
-	//    the tag value.
-	Filter []Filter `locationName:"filter" locationNameList:"Filter" type:"list"`
-
-	// The IDs of the Dedicated Hosts. The IDs are used for targeted instance launches.
-	HostIds []string `locationName:"hostId" locationNameList:"item" type:"list"`
-
-	// The maximum number of results to return for the request in a single page.
-	// The remaining results can be seen by sending another request with the returned
-	// nextToken value. This value can be between 5 and 500. If maxResults is given
-	// a larger value than 500, you receive an error.
-	//
-	// You cannot specify this parameter and the host IDs parameter in the same
-	// request.
-	MaxResults *int64 `locationName:"maxResults" type:"integer"`
-
-	// The token to use to retrieve the next page of results.
-	NextToken *string `locationName:"nextToken" type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeHostsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type DescribeHostsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Information about the Dedicated Hosts.
-	Hosts []Host `locationName:"hostSet" locationNameList:"item" type:"list"`
-
-	// The token to use to retrieve the next page of results. This value is null
-	// when there are no more results to return.
-	NextToken *string `locationName:"nextToken" type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeHostsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeHosts = "DescribeHosts"
 
@@ -91,7 +28,7 @@ const opDescribeHosts = "DescribeHosts"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeHosts
-func (c *Client) DescribeHostsRequest(input *DescribeHostsInput) DescribeHostsRequest {
+func (c *Client) DescribeHostsRequest(input *types.DescribeHostsInput) DescribeHostsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeHosts,
 		HTTPMethod: "POST",
@@ -105,10 +42,10 @@ func (c *Client) DescribeHostsRequest(input *DescribeHostsInput) DescribeHostsRe
 	}
 
 	if input == nil {
-		input = &DescribeHostsInput{}
+		input = &types.DescribeHostsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeHostsOutput{})
+	req := c.newRequest(op, input, &types.DescribeHostsOutput{})
 	return DescribeHostsRequest{Request: req, Input: input, Copy: c.DescribeHostsRequest}
 }
 
@@ -116,8 +53,8 @@ func (c *Client) DescribeHostsRequest(input *DescribeHostsInput) DescribeHostsRe
 // DescribeHosts API operation.
 type DescribeHostsRequest struct {
 	*aws.Request
-	Input *DescribeHostsInput
-	Copy  func(*DescribeHostsInput) DescribeHostsRequest
+	Input *types.DescribeHostsInput
+	Copy  func(*types.DescribeHostsInput) DescribeHostsRequest
 }
 
 // Send marshals and sends the DescribeHosts API request.
@@ -129,7 +66,7 @@ func (r DescribeHostsRequest) Send(ctx context.Context) (*DescribeHostsResponse,
 	}
 
 	resp := &DescribeHostsResponse{
-		DescribeHostsOutput: r.Request.Data.(*DescribeHostsOutput),
+		DescribeHostsOutput: r.Request.Data.(*types.DescribeHostsOutput),
 		response:            &aws.Response{Request: r.Request},
 	}
 
@@ -159,7 +96,7 @@ func NewDescribeHostsPaginator(req DescribeHostsRequest) DescribeHostsPaginator 
 	return DescribeHostsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *DescribeHostsInput
+				var inCpy *types.DescribeHostsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -179,14 +116,14 @@ type DescribeHostsPaginator struct {
 	aws.Pager
 }
 
-func (p *DescribeHostsPaginator) CurrentPage() *DescribeHostsOutput {
-	return p.Pager.CurrentPage().(*DescribeHostsOutput)
+func (p *DescribeHostsPaginator) CurrentPage() *types.DescribeHostsOutput {
+	return p.Pager.CurrentPage().(*types.DescribeHostsOutput)
 }
 
 // DescribeHostsResponse is the response type for the
 // DescribeHosts API operation.
 type DescribeHostsResponse struct {
-	*DescribeHostsOutput
+	*types.DescribeHostsOutput
 
 	response *aws.Response
 }

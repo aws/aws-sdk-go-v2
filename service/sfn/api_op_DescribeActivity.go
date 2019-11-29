@@ -4,78 +4,10 @@ package sfn
 
 import (
 	"context"
-	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/sfn/types"
 )
-
-type DescribeActivityInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the activity to describe.
-	//
-	// ActivityArn is a required field
-	ActivityArn *string `locationName:"activityArn" min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeActivityInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeActivityInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeActivityInput"}
-
-	if s.ActivityArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ActivityArn"))
-	}
-	if s.ActivityArn != nil && len(*s.ActivityArn) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ActivityArn", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribeActivityOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) that identifies the activity.
-	//
-	// ActivityArn is a required field
-	ActivityArn *string `locationName:"activityArn" min:"1" type:"string" required:"true"`
-
-	// The date the activity is created.
-	//
-	// CreationDate is a required field
-	CreationDate *time.Time `locationName:"creationDate" type:"timestamp" required:"true"`
-
-	// The name of the activity.
-	//
-	// A name must not contain:
-	//
-	//    * white space
-	//
-	//    * brackets < > { } [ ]
-	//
-	//    * wildcard characters ? *
-	//
-	//    * special characters " # % \ ^ | ~ ` $ & , ; : /
-	//
-	//    * control characters (U+0000-001F, U+007F-009F)
-	//
-	// Name is a required field
-	Name *string `locationName:"name" min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeActivityOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeActivity = "DescribeActivity"
 
@@ -95,7 +27,7 @@ const opDescribeActivity = "DescribeActivity"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/DescribeActivity
-func (c *Client) DescribeActivityRequest(input *DescribeActivityInput) DescribeActivityRequest {
+func (c *Client) DescribeActivityRequest(input *types.DescribeActivityInput) DescribeActivityRequest {
 	op := &aws.Operation{
 		Name:       opDescribeActivity,
 		HTTPMethod: "POST",
@@ -103,10 +35,10 @@ func (c *Client) DescribeActivityRequest(input *DescribeActivityInput) DescribeA
 	}
 
 	if input == nil {
-		input = &DescribeActivityInput{}
+		input = &types.DescribeActivityInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeActivityOutput{})
+	req := c.newRequest(op, input, &types.DescribeActivityOutput{})
 	return DescribeActivityRequest{Request: req, Input: input, Copy: c.DescribeActivityRequest}
 }
 
@@ -114,8 +46,8 @@ func (c *Client) DescribeActivityRequest(input *DescribeActivityInput) DescribeA
 // DescribeActivity API operation.
 type DescribeActivityRequest struct {
 	*aws.Request
-	Input *DescribeActivityInput
-	Copy  func(*DescribeActivityInput) DescribeActivityRequest
+	Input *types.DescribeActivityInput
+	Copy  func(*types.DescribeActivityInput) DescribeActivityRequest
 }
 
 // Send marshals and sends the DescribeActivity API request.
@@ -127,7 +59,7 @@ func (r DescribeActivityRequest) Send(ctx context.Context) (*DescribeActivityRes
 	}
 
 	resp := &DescribeActivityResponse{
-		DescribeActivityOutput: r.Request.Data.(*DescribeActivityOutput),
+		DescribeActivityOutput: r.Request.Data.(*types.DescribeActivityOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -137,7 +69,7 @@ func (r DescribeActivityRequest) Send(ctx context.Context) (*DescribeActivityRes
 // DescribeActivityResponse is the response type for the
 // DescribeActivity API operation.
 type DescribeActivityResponse struct {
-	*DescribeActivityOutput
+	*types.DescribeActivityOutput
 
 	response *aws.Response
 }

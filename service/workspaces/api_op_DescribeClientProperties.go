@@ -6,51 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/workspaces/types"
 )
-
-type DescribeClientPropertiesInput struct {
-	_ struct{} `type:"structure"`
-
-	// The resource identifier, in the form of directory IDs.
-	//
-	// ResourceIds is a required field
-	ResourceIds []string `min:"1" type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeClientPropertiesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeClientPropertiesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeClientPropertiesInput"}
-
-	if s.ResourceIds == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ResourceIds"))
-	}
-	if s.ResourceIds != nil && len(s.ResourceIds) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ResourceIds", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribeClientPropertiesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Information about the specified Amazon WorkSpaces clients.
-	ClientPropertiesList []PropertiesResult `type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeClientPropertiesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeClientProperties = "DescribeClientProperties"
 
@@ -67,7 +24,7 @@ const opDescribeClientProperties = "DescribeClientProperties"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DescribeClientProperties
-func (c *Client) DescribeClientPropertiesRequest(input *DescribeClientPropertiesInput) DescribeClientPropertiesRequest {
+func (c *Client) DescribeClientPropertiesRequest(input *types.DescribeClientPropertiesInput) DescribeClientPropertiesRequest {
 	op := &aws.Operation{
 		Name:       opDescribeClientProperties,
 		HTTPMethod: "POST",
@@ -75,10 +32,10 @@ func (c *Client) DescribeClientPropertiesRequest(input *DescribeClientProperties
 	}
 
 	if input == nil {
-		input = &DescribeClientPropertiesInput{}
+		input = &types.DescribeClientPropertiesInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeClientPropertiesOutput{})
+	req := c.newRequest(op, input, &types.DescribeClientPropertiesOutput{})
 	return DescribeClientPropertiesRequest{Request: req, Input: input, Copy: c.DescribeClientPropertiesRequest}
 }
 
@@ -86,8 +43,8 @@ func (c *Client) DescribeClientPropertiesRequest(input *DescribeClientProperties
 // DescribeClientProperties API operation.
 type DescribeClientPropertiesRequest struct {
 	*aws.Request
-	Input *DescribeClientPropertiesInput
-	Copy  func(*DescribeClientPropertiesInput) DescribeClientPropertiesRequest
+	Input *types.DescribeClientPropertiesInput
+	Copy  func(*types.DescribeClientPropertiesInput) DescribeClientPropertiesRequest
 }
 
 // Send marshals and sends the DescribeClientProperties API request.
@@ -99,7 +56,7 @@ func (r DescribeClientPropertiesRequest) Send(ctx context.Context) (*DescribeCli
 	}
 
 	resp := &DescribeClientPropertiesResponse{
-		DescribeClientPropertiesOutput: r.Request.Data.(*DescribeClientPropertiesOutput),
+		DescribeClientPropertiesOutput: r.Request.Data.(*types.DescribeClientPropertiesOutput),
 		response:                       &aws.Response{Request: r.Request},
 	}
 
@@ -109,7 +66,7 @@ func (r DescribeClientPropertiesRequest) Send(ctx context.Context) (*DescribeCli
 // DescribeClientPropertiesResponse is the response type for the
 // DescribeClientProperties API operation.
 type DescribeClientPropertiesResponse struct {
-	*DescribeClientPropertiesOutput
+	*types.DescribeClientPropertiesOutput
 
 	response *aws.Response
 }

@@ -6,49 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
+	"github.com/aws/aws-sdk-go-v2/service/opsworks/types"
 )
-
-type DeregisterVolumeInput struct {
-	_ struct{} `type:"structure"`
-
-	// The AWS OpsWorks Stacks volume ID, which is the GUID that AWS OpsWorks Stacks
-	// assigned to the instance when you registered the volume with the stack, not
-	// the Amazon EC2 volume ID.
-	//
-	// VolumeId is a required field
-	VolumeId *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeregisterVolumeInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeregisterVolumeInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeregisterVolumeInput"}
-
-	if s.VolumeId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("VolumeId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeregisterVolumeOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeregisterVolumeOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeregisterVolume = "DeregisterVolume"
 
@@ -71,7 +32,7 @@ const opDeregisterVolume = "DeregisterVolume"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DeregisterVolume
-func (c *Client) DeregisterVolumeRequest(input *DeregisterVolumeInput) DeregisterVolumeRequest {
+func (c *Client) DeregisterVolumeRequest(input *types.DeregisterVolumeInput) DeregisterVolumeRequest {
 	op := &aws.Operation{
 		Name:       opDeregisterVolume,
 		HTTPMethod: "POST",
@@ -79,10 +40,10 @@ func (c *Client) DeregisterVolumeRequest(input *DeregisterVolumeInput) Deregiste
 	}
 
 	if input == nil {
-		input = &DeregisterVolumeInput{}
+		input = &types.DeregisterVolumeInput{}
 	}
 
-	req := c.newRequest(op, input, &DeregisterVolumeOutput{})
+	req := c.newRequest(op, input, &types.DeregisterVolumeOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return DeregisterVolumeRequest{Request: req, Input: input, Copy: c.DeregisterVolumeRequest}
@@ -92,8 +53,8 @@ func (c *Client) DeregisterVolumeRequest(input *DeregisterVolumeInput) Deregiste
 // DeregisterVolume API operation.
 type DeregisterVolumeRequest struct {
 	*aws.Request
-	Input *DeregisterVolumeInput
-	Copy  func(*DeregisterVolumeInput) DeregisterVolumeRequest
+	Input *types.DeregisterVolumeInput
+	Copy  func(*types.DeregisterVolumeInput) DeregisterVolumeRequest
 }
 
 // Send marshals and sends the DeregisterVolume API request.
@@ -105,7 +66,7 @@ func (r DeregisterVolumeRequest) Send(ctx context.Context) (*DeregisterVolumeRes
 	}
 
 	resp := &DeregisterVolumeResponse{
-		DeregisterVolumeOutput: r.Request.Data.(*DeregisterVolumeOutput),
+		DeregisterVolumeOutput: r.Request.Data.(*types.DeregisterVolumeOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -115,7 +76,7 @@ func (r DeregisterVolumeRequest) Send(ctx context.Context) (*DeregisterVolumeRes
 // DeregisterVolumeResponse is the response type for the
 // DeregisterVolume API operation.
 type DeregisterVolumeResponse struct {
-	*DeregisterVolumeOutput
+	*types.DeregisterVolumeOutput
 
 	response *aws.Response
 }

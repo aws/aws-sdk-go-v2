@@ -6,94 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/devicefarm/types"
 )
-
-// Represents the result of a list devices request.
-type ListDevicesInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the project.
-	Arn *string `locationName:"arn" min:"32" type:"string"`
-
-	// Used to select a set of devices. A filter is made up of an attribute, an
-	// operator, and one or more values.
-	//
-	//    * Attribute: The aspect of a device such as platform or model used as
-	//    the selection criteria in a device filter. Allowed values include: ARN:
-	//    The Amazon Resource Name (ARN) of the device. For example, "arn:aws:devicefarm:us-west-2::device:12345Example".
-	//    PLATFORM: The device platform. Valid values are "ANDROID" or "IOS". OS_VERSION:
-	//    The operating system version. For example, "10.3.2". MODEL: The device
-	//    model. For example, "iPad 5th Gen". AVAILABILITY: The current availability
-	//    of the device. Valid values are "AVAILABLE", "HIGHLY_AVAILABLE", "BUSY",
-	//    or "TEMPORARY_NOT_AVAILABLE". FORM_FACTOR: The device form factor. Valid
-	//    values are "PHONE" or "TABLET". MANUFACTURER: The device manufacturer.
-	//    For example, "Apple". REMOTE_ACCESS_ENABLED: Whether the device is enabled
-	//    for remote access. Valid values are "TRUE" or "FALSE". REMOTE_DEBUG_ENABLED:
-	//    Whether the device is enabled for remote debugging. Valid values are "TRUE"
-	//    or "FALSE". This attribute will be ignored, as remote debugging is no
-	//    longer supported (https://docs.aws.amazon.com/devicefarm/latest/developerguide/history.html).
-	//    INSTANCE_ARN: The Amazon Resource Name (ARN) of the device instance. INSTANCE_LABELS:
-	//    The label of the device instance. FLEET_TYPE: The fleet type. Valid values
-	//    are "PUBLIC" or "PRIVATE".
-	//
-	//    * Operator: The filter operator. The EQUALS operator is available for
-	//    every attribute except INSTANCE_LABELS. The CONTAINS operator is available
-	//    for the INSTANCE_LABELS and MODEL attributes. The IN and NOT_IN operators
-	//    are available for the ARN, OS_VERSION, MODEL, MANUFACTURER, and INSTANCE_ARN
-	//    attributes. The LESS_THAN, GREATER_THAN, LESS_THAN_OR_EQUALS, and GREATER_THAN_OR_EQUALS
-	//    operators are also available for the OS_VERSION attribute.
-	//
-	//    * Values: An array of one or more filter values. The IN and NOT_IN operators
-	//    take a values array that has one or more elements. The other operators
-	//    require an array with a single element. In a request, the AVAILABILITY
-	//    attribute takes "AVAILABLE", "HIGHLY_AVAILABLE", "BUSY", or "TEMPORARY_NOT_AVAILABLE"
-	//    as values.
-	Filters []DeviceFilter `locationName:"filters" type:"list"`
-
-	// An identifier that was returned from the previous call to this operation,
-	// which can be used to return the next set of items in the list.
-	NextToken *string `locationName:"nextToken" min:"4" type:"string"`
-}
-
-// String returns the string representation
-func (s ListDevicesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListDevicesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListDevicesInput"}
-	if s.Arn != nil && len(*s.Arn) < 32 {
-		invalidParams.Add(aws.NewErrParamMinLen("Arn", 32))
-	}
-	if s.NextToken != nil && len(*s.NextToken) < 4 {
-		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 4))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Represents the result of a list devices operation.
-type ListDevicesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Information about the devices.
-	Devices []Device `locationName:"devices" type:"list"`
-
-	// If the number of items that are returned is significantly large, this is
-	// an identifier that is also returned, which can be used in a subsequent call
-	// to this operation to return the next set of items in the list.
-	NextToken *string `locationName:"nextToken" min:"4" type:"string"`
-}
-
-// String returns the string representation
-func (s ListDevicesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListDevices = "ListDevices"
 
@@ -110,7 +24,7 @@ const opListDevices = "ListDevices"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ListDevices
-func (c *Client) ListDevicesRequest(input *ListDevicesInput) ListDevicesRequest {
+func (c *Client) ListDevicesRequest(input *types.ListDevicesInput) ListDevicesRequest {
 	op := &aws.Operation{
 		Name:       opListDevices,
 		HTTPMethod: "POST",
@@ -124,10 +38,10 @@ func (c *Client) ListDevicesRequest(input *ListDevicesInput) ListDevicesRequest 
 	}
 
 	if input == nil {
-		input = &ListDevicesInput{}
+		input = &types.ListDevicesInput{}
 	}
 
-	req := c.newRequest(op, input, &ListDevicesOutput{})
+	req := c.newRequest(op, input, &types.ListDevicesOutput{})
 	return ListDevicesRequest{Request: req, Input: input, Copy: c.ListDevicesRequest}
 }
 
@@ -135,8 +49,8 @@ func (c *Client) ListDevicesRequest(input *ListDevicesInput) ListDevicesRequest 
 // ListDevices API operation.
 type ListDevicesRequest struct {
 	*aws.Request
-	Input *ListDevicesInput
-	Copy  func(*ListDevicesInput) ListDevicesRequest
+	Input *types.ListDevicesInput
+	Copy  func(*types.ListDevicesInput) ListDevicesRequest
 }
 
 // Send marshals and sends the ListDevices API request.
@@ -148,7 +62,7 @@ func (r ListDevicesRequest) Send(ctx context.Context) (*ListDevicesResponse, err
 	}
 
 	resp := &ListDevicesResponse{
-		ListDevicesOutput: r.Request.Data.(*ListDevicesOutput),
+		ListDevicesOutput: r.Request.Data.(*types.ListDevicesOutput),
 		response:          &aws.Response{Request: r.Request},
 	}
 
@@ -178,7 +92,7 @@ func NewListDevicesPaginator(req ListDevicesRequest) ListDevicesPaginator {
 	return ListDevicesPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListDevicesInput
+				var inCpy *types.ListDevicesInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -198,14 +112,14 @@ type ListDevicesPaginator struct {
 	aws.Pager
 }
 
-func (p *ListDevicesPaginator) CurrentPage() *ListDevicesOutput {
-	return p.Pager.CurrentPage().(*ListDevicesOutput)
+func (p *ListDevicesPaginator) CurrentPage() *types.ListDevicesOutput {
+	return p.Pager.CurrentPage().(*types.ListDevicesOutput)
 }
 
 // ListDevicesResponse is the response type for the
 // ListDevices API operation.
 type ListDevicesResponse struct {
-	*ListDevicesOutput
+	*types.ListDevicesOutput
 
 	response *aws.Response
 }

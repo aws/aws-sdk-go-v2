@@ -6,110 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ecs/types"
 )
-
-type UpdateServiceInput struct {
-	_ struct{} `type:"structure"`
-
-	// The short name or full Amazon Resource Name (ARN) of the cluster that your
-	// service is running on. If you do not specify a cluster, the default cluster
-	// is assumed.
-	Cluster *string `locationName:"cluster" type:"string"`
-
-	// Optional deployment parameters that control how many tasks run during the
-	// deployment and the ordering of stopping and starting tasks.
-	DeploymentConfiguration *DeploymentConfiguration `locationName:"deploymentConfiguration" type:"structure"`
-
-	// The number of instantiations of the task to place and keep running in your
-	// service.
-	DesiredCount *int64 `locationName:"desiredCount" type:"integer"`
-
-	// Whether to force a new deployment of the service. Deployments are not forced
-	// by default. You can use this option to trigger a new deployment with no service
-	// definition changes. For example, you can update a service's tasks to use
-	// a newer Docker image with the same image/tag combination (my_image:latest)
-	// or to roll Fargate tasks onto a newer platform version.
-	ForceNewDeployment *bool `locationName:"forceNewDeployment" type:"boolean"`
-
-	// The period of time, in seconds, that the Amazon ECS service scheduler should
-	// ignore unhealthy Elastic Load Balancing target health checks after a task
-	// has first started. This is only valid if your service is configured to use
-	// a load balancer. If your service's tasks take a while to start and respond
-	// to Elastic Load Balancing health checks, you can specify a health check grace
-	// period of up to 2,147,483,647 seconds. During that time, the ECS service
-	// scheduler ignores the Elastic Load Balancing health check status. This grace
-	// period can prevent the ECS service scheduler from marking tasks as unhealthy
-	// and stopping them before they have time to come up.
-	HealthCheckGracePeriodSeconds *int64 `locationName:"healthCheckGracePeriodSeconds" type:"integer"`
-
-	// The network configuration for the service. This parameter is required for
-	// task definitions that use the awsvpc network mode to receive their own elastic
-	// network interface, and it is not supported for other network modes. For more
-	// information, see Task Networking (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-networking.html)
-	// in the Amazon Elastic Container Service Developer Guide.
-	//
-	// Updating a service to add a subnet to a list of existing subnets does not
-	// trigger a service deployment. For example, if your network configuration
-	// change is to keep the existing subnets and simply add another subnet to the
-	// network configuration, this does not trigger a new service deployment.
-	NetworkConfiguration *NetworkConfiguration `locationName:"networkConfiguration" type:"structure"`
-
-	// The platform version on which your tasks in the service are running. A platform
-	// version is only specified for tasks using the Fargate launch type. If one
-	// is not specified, the LATEST platform version is used by default. For more
-	// information, see AWS Fargate Platform Versions (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/platform_versions.html)
-	// in the Amazon Elastic Container Service Developer Guide.
-	PlatformVersion *string `locationName:"platformVersion" type:"string"`
-
-	// The name of the service to update.
-	//
-	// Service is a required field
-	Service *string `locationName:"service" type:"string" required:"true"`
-
-	// The family and revision (family:revision) or full ARN of the task definition
-	// to run in your service. If a revision is not specified, the latest ACTIVE
-	// revision is used. If you modify the task definition with UpdateService, Amazon
-	// ECS spawns a task with the new version of the task definition and then stops
-	// an old task after the new version is running.
-	TaskDefinition *string `locationName:"taskDefinition" type:"string"`
-}
-
-// String returns the string representation
-func (s UpdateServiceInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateServiceInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateServiceInput"}
-
-	if s.Service == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Service"))
-	}
-	if s.NetworkConfiguration != nil {
-		if err := s.NetworkConfiguration.Validate(); err != nil {
-			invalidParams.AddNested("NetworkConfiguration", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type UpdateServiceOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The full description of your service following the update call.
-	Service *Service `locationName:"service" type:"structure"`
-}
-
-// String returns the string representation
-func (s UpdateServiceOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opUpdateService = "UpdateService"
 
@@ -214,7 +112,7 @@ const opUpdateService = "UpdateService"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/UpdateService
-func (c *Client) UpdateServiceRequest(input *UpdateServiceInput) UpdateServiceRequest {
+func (c *Client) UpdateServiceRequest(input *types.UpdateServiceInput) UpdateServiceRequest {
 	op := &aws.Operation{
 		Name:       opUpdateService,
 		HTTPMethod: "POST",
@@ -222,10 +120,10 @@ func (c *Client) UpdateServiceRequest(input *UpdateServiceInput) UpdateServiceRe
 	}
 
 	if input == nil {
-		input = &UpdateServiceInput{}
+		input = &types.UpdateServiceInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateServiceOutput{})
+	req := c.newRequest(op, input, &types.UpdateServiceOutput{})
 	return UpdateServiceRequest{Request: req, Input: input, Copy: c.UpdateServiceRequest}
 }
 
@@ -233,8 +131,8 @@ func (c *Client) UpdateServiceRequest(input *UpdateServiceInput) UpdateServiceRe
 // UpdateService API operation.
 type UpdateServiceRequest struct {
 	*aws.Request
-	Input *UpdateServiceInput
-	Copy  func(*UpdateServiceInput) UpdateServiceRequest
+	Input *types.UpdateServiceInput
+	Copy  func(*types.UpdateServiceInput) UpdateServiceRequest
 }
 
 // Send marshals and sends the UpdateService API request.
@@ -246,7 +144,7 @@ func (r UpdateServiceRequest) Send(ctx context.Context) (*UpdateServiceResponse,
 	}
 
 	resp := &UpdateServiceResponse{
-		UpdateServiceOutput: r.Request.Data.(*UpdateServiceOutput),
+		UpdateServiceOutput: r.Request.Data.(*types.UpdateServiceOutput),
 		response:            &aws.Response{Request: r.Request},
 	}
 
@@ -256,7 +154,7 @@ func (r UpdateServiceRequest) Send(ctx context.Context) (*UpdateServiceResponse,
 // UpdateServiceResponse is the response type for the
 // UpdateService API operation.
 type UpdateServiceResponse struct {
-	*UpdateServiceOutput
+	*types.UpdateServiceOutput
 
 	response *aws.Response
 }

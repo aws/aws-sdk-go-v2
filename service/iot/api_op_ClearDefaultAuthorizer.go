@@ -6,39 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/iot/types"
 )
-
-type ClearDefaultAuthorizerInput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s ClearDefaultAuthorizerInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ClearDefaultAuthorizerInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	return nil
-}
-
-type ClearDefaultAuthorizerOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s ClearDefaultAuthorizerOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ClearDefaultAuthorizerOutput) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
 
 const opClearDefaultAuthorizer = "ClearDefaultAuthorizer"
 
@@ -53,7 +22,7 @@ const opClearDefaultAuthorizer = "ClearDefaultAuthorizer"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) ClearDefaultAuthorizerRequest(input *ClearDefaultAuthorizerInput) ClearDefaultAuthorizerRequest {
+func (c *Client) ClearDefaultAuthorizerRequest(input *types.ClearDefaultAuthorizerInput) ClearDefaultAuthorizerRequest {
 	op := &aws.Operation{
 		Name:       opClearDefaultAuthorizer,
 		HTTPMethod: "DELETE",
@@ -61,10 +30,10 @@ func (c *Client) ClearDefaultAuthorizerRequest(input *ClearDefaultAuthorizerInpu
 	}
 
 	if input == nil {
-		input = &ClearDefaultAuthorizerInput{}
+		input = &types.ClearDefaultAuthorizerInput{}
 	}
 
-	req := c.newRequest(op, input, &ClearDefaultAuthorizerOutput{})
+	req := c.newRequest(op, input, &types.ClearDefaultAuthorizerOutput{})
 	return ClearDefaultAuthorizerRequest{Request: req, Input: input, Copy: c.ClearDefaultAuthorizerRequest}
 }
 
@@ -72,8 +41,8 @@ func (c *Client) ClearDefaultAuthorizerRequest(input *ClearDefaultAuthorizerInpu
 // ClearDefaultAuthorizer API operation.
 type ClearDefaultAuthorizerRequest struct {
 	*aws.Request
-	Input *ClearDefaultAuthorizerInput
-	Copy  func(*ClearDefaultAuthorizerInput) ClearDefaultAuthorizerRequest
+	Input *types.ClearDefaultAuthorizerInput
+	Copy  func(*types.ClearDefaultAuthorizerInput) ClearDefaultAuthorizerRequest
 }
 
 // Send marshals and sends the ClearDefaultAuthorizer API request.
@@ -85,7 +54,7 @@ func (r ClearDefaultAuthorizerRequest) Send(ctx context.Context) (*ClearDefaultA
 	}
 
 	resp := &ClearDefaultAuthorizerResponse{
-		ClearDefaultAuthorizerOutput: r.Request.Data.(*ClearDefaultAuthorizerOutput),
+		ClearDefaultAuthorizerOutput: r.Request.Data.(*types.ClearDefaultAuthorizerOutput),
 		response:                     &aws.Response{Request: r.Request},
 	}
 
@@ -95,7 +64,7 @@ func (r ClearDefaultAuthorizerRequest) Send(ctx context.Context) (*ClearDefaultA
 // ClearDefaultAuthorizerResponse is the response type for the
 // ClearDefaultAuthorizer API operation.
 type ClearDefaultAuthorizerResponse struct {
-	*ClearDefaultAuthorizerOutput
+	*types.ClearDefaultAuthorizerOutput
 
 	response *aws.Response
 }

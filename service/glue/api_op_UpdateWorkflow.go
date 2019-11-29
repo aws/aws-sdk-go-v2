@@ -6,57 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/glue/types"
 )
-
-type UpdateWorkflowInput struct {
-	_ struct{} `type:"structure"`
-
-	// A collection of properties to be used as part of each execution of the workflow.
-	DefaultRunProperties map[string]string `type:"map"`
-
-	// The description of the workflow.
-	Description *string `type:"string"`
-
-	// Name of the workflow to be updated.
-	//
-	// Name is a required field
-	Name *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s UpdateWorkflowInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateWorkflowInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateWorkflowInput"}
-
-	if s.Name == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Name"))
-	}
-	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type UpdateWorkflowOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the workflow which was specified in input.
-	Name *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s UpdateWorkflowOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opUpdateWorkflow = "UpdateWorkflow"
 
@@ -73,7 +24,7 @@ const opUpdateWorkflow = "UpdateWorkflow"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/UpdateWorkflow
-func (c *Client) UpdateWorkflowRequest(input *UpdateWorkflowInput) UpdateWorkflowRequest {
+func (c *Client) UpdateWorkflowRequest(input *types.UpdateWorkflowInput) UpdateWorkflowRequest {
 	op := &aws.Operation{
 		Name:       opUpdateWorkflow,
 		HTTPMethod: "POST",
@@ -81,10 +32,10 @@ func (c *Client) UpdateWorkflowRequest(input *UpdateWorkflowInput) UpdateWorkflo
 	}
 
 	if input == nil {
-		input = &UpdateWorkflowInput{}
+		input = &types.UpdateWorkflowInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateWorkflowOutput{})
+	req := c.newRequest(op, input, &types.UpdateWorkflowOutput{})
 	return UpdateWorkflowRequest{Request: req, Input: input, Copy: c.UpdateWorkflowRequest}
 }
 
@@ -92,8 +43,8 @@ func (c *Client) UpdateWorkflowRequest(input *UpdateWorkflowInput) UpdateWorkflo
 // UpdateWorkflow API operation.
 type UpdateWorkflowRequest struct {
 	*aws.Request
-	Input *UpdateWorkflowInput
-	Copy  func(*UpdateWorkflowInput) UpdateWorkflowRequest
+	Input *types.UpdateWorkflowInput
+	Copy  func(*types.UpdateWorkflowInput) UpdateWorkflowRequest
 }
 
 // Send marshals and sends the UpdateWorkflow API request.
@@ -105,7 +56,7 @@ func (r UpdateWorkflowRequest) Send(ctx context.Context) (*UpdateWorkflowRespons
 	}
 
 	resp := &UpdateWorkflowResponse{
-		UpdateWorkflowOutput: r.Request.Data.(*UpdateWorkflowOutput),
+		UpdateWorkflowOutput: r.Request.Data.(*types.UpdateWorkflowOutput),
 		response:             &aws.Response{Request: r.Request},
 	}
 
@@ -115,7 +66,7 @@ func (r UpdateWorkflowRequest) Send(ctx context.Context) (*UpdateWorkflowRespons
 // UpdateWorkflowResponse is the response type for the
 // UpdateWorkflow API operation.
 type UpdateWorkflowResponse struct {
-	*UpdateWorkflowOutput
+	*types.UpdateWorkflowOutput
 
 	response *aws.Response
 }

@@ -14,6 +14,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/service/s3"
 	"github.com/aws/aws-sdk-go-v2/service/s3/s3iface"
+	"github.com/aws/aws-sdk-go-v2/service/s3/types"
 )
 
 // MaxUploadParts is the maximum allowed number of parts in a multi-part upload
@@ -502,7 +503,7 @@ func readFillBuf(r io.Reader, b []byte) (offset int, err error) {
 func (u *uploader) singlePart(buf io.ReadSeeker, cleanup func()) (*UploadOutput, error) {
 	defer cleanup()
 
-	params := &s3.PutObjectInput{}
+	params := &types.PutObjectInput{}
 	awsutil.Copy(params, u.in)
 	params.Body = buf
 
@@ -541,7 +542,7 @@ type chunk struct {
 
 // completedParts is a wrapper to make parts sortable by their part number,
 // since S3 required this list to be sent in sorted order.
-type completedParts []s3.CompletedPart
+type completedParts []types.CompletedPart
 
 func (a completedParts) Len() int           { return len(a) }
 func (a completedParts) Swap(i, j int)      { a[i], a[j] = a[j], a[i] }
@@ -550,7 +551,7 @@ func (a completedParts) Less(i, j int) bool { return *a[i].PartNumber < *a[j].Pa
 // upload will perform a multipart upload using the firstBuf buffer containing
 // the first chunk of data.
 func (u *multiuploader) upload(firstBuf io.ReadSeeker, cleanup func()) (*UploadOutput, error) {
-	params := &s3.CreateMultipartUploadInput{}
+	params := &types.CreateMultipartUploadInput{}
 	awsutil.Copy(params, u.in)
 
 	// Create the multipart
@@ -614,7 +615,7 @@ func (u *multiuploader) upload(firstBuf io.ReadSeeker, cleanup func()) (*UploadO
 
 	// Create a presigned URL of the S3 Get Object in order to have parity with
 	// single part upload.
-	getReq := u.cfg.S3.GetObjectRequest(&s3.GetObjectInput{
+	getReq := u.cfg.S3.GetObjectRequest(&types.GetObjectInput{
 		Bucket: u.in.Bucket,
 		Key:    u.in.Key,
 	})
@@ -679,7 +680,7 @@ func (u *multiuploader) readChunk(ch chan chunk) {
 // send performs an UploadPart request and keeps track of the completed
 // part information.
 func (u *multiuploader) send(c chunk) error {
-	params := &s3.UploadPartInput{
+	params := &types.UploadPartInput{
 		Bucket:               u.in.Bucket,
 		Key:                  u.in.Key,
 		Body:                 c.buf,
@@ -697,7 +698,7 @@ func (u *multiuploader) send(c chunk) error {
 	}
 
 	n := c.num
-	completed := s3.CompletedPart{ETag: resp.ETag, PartNumber: &n}
+	completed := types.CompletedPart{ETag: resp.ETag, PartNumber: &n}
 
 	u.m.Lock()
 	u.parts = append(u.parts, completed)
@@ -728,7 +729,7 @@ func (u *multiuploader) fail() {
 		return
 	}
 
-	params := &s3.AbortMultipartUploadInput{
+	params := &types.AbortMultipartUploadInput{
 		Bucket:   u.in.Bucket,
 		Key:      u.in.Key,
 		UploadId: &u.uploadID,
@@ -741,7 +742,7 @@ func (u *multiuploader) fail() {
 }
 
 // complete successfully completes a multipart upload and returns the response.
-func (u *multiuploader) complete() *s3.CompleteMultipartUploadOutput {
+func (u *multiuploader) complete() *types.CompleteMultipartUploadOutput {
 	if u.geterr() != nil {
 		u.fail()
 		return nil
@@ -750,11 +751,11 @@ func (u *multiuploader) complete() *s3.CompleteMultipartUploadOutput {
 	// Parts must be sorted in PartNumber order.
 	sort.Sort(u.parts)
 
-	params := &s3.CompleteMultipartUploadInput{
+	params := &types.CompleteMultipartUploadInput{
 		Bucket:          u.in.Bucket,
 		Key:             u.in.Key,
 		UploadId:        &u.uploadID,
-		MultipartUpload: &s3.CompletedMultipartUpload{Parts: u.parts},
+		MultipartUpload: &types.CompletedMultipartUpload{Parts: u.parts},
 	}
 	req := u.cfg.S3.CompleteMultipartUploadRequest(params)
 	req.ApplyOptions(u.cfg.RequestOptions...)

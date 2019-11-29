@@ -6,111 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/rdsdata/types"
 )
-
-// The request parameters represent the input of a commit transaction request.
-type CommitTransactionInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the Aurora Serverless DB cluster.
-	//
-	// ResourceArn is a required field
-	ResourceArn *string `locationName:"resourceArn" min:"11" type:"string" required:"true"`
-
-	// The name or ARN of the secret that enables access to the DB cluster.
-	//
-	// SecretArn is a required field
-	SecretArn *string `locationName:"secretArn" min:"11" type:"string" required:"true"`
-
-	// The identifier of the transaction to end and commit.
-	//
-	// TransactionId is a required field
-	TransactionId *string `locationName:"transactionId" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s CommitTransactionInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CommitTransactionInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CommitTransactionInput"}
-
-	if s.ResourceArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ResourceArn"))
-	}
-	if s.ResourceArn != nil && len(*s.ResourceArn) < 11 {
-		invalidParams.Add(aws.NewErrParamMinLen("ResourceArn", 11))
-	}
-
-	if s.SecretArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("SecretArn"))
-	}
-	if s.SecretArn != nil && len(*s.SecretArn) < 11 {
-		invalidParams.Add(aws.NewErrParamMinLen("SecretArn", 11))
-	}
-
-	if s.TransactionId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("TransactionId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s CommitTransactionInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.ResourceArn != nil {
-		v := *s.ResourceArn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "resourceArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.SecretArn != nil {
-		v := *s.SecretArn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "secretArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.TransactionId != nil {
-		v := *s.TransactionId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "transactionId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-// The response elements represent the output of a commit transaction request.
-type CommitTransactionOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The status of the commit operation.
-	TransactionStatus *string `locationName:"transactionStatus" type:"string"`
-}
-
-// String returns the string representation
-func (s CommitTransactionOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s CommitTransactionOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.TransactionStatus != nil {
-		v := *s.TransactionStatus
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "transactionStatus", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opCommitTransaction = "CommitTransaction"
 
@@ -128,7 +25,7 @@ const opCommitTransaction = "CommitTransaction"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-data-2018-08-01/CommitTransaction
-func (c *Client) CommitTransactionRequest(input *CommitTransactionInput) CommitTransactionRequest {
+func (c *Client) CommitTransactionRequest(input *types.CommitTransactionInput) CommitTransactionRequest {
 	op := &aws.Operation{
 		Name:       opCommitTransaction,
 		HTTPMethod: "POST",
@@ -136,10 +33,10 @@ func (c *Client) CommitTransactionRequest(input *CommitTransactionInput) CommitT
 	}
 
 	if input == nil {
-		input = &CommitTransactionInput{}
+		input = &types.CommitTransactionInput{}
 	}
 
-	req := c.newRequest(op, input, &CommitTransactionOutput{})
+	req := c.newRequest(op, input, &types.CommitTransactionOutput{})
 	return CommitTransactionRequest{Request: req, Input: input, Copy: c.CommitTransactionRequest}
 }
 
@@ -147,8 +44,8 @@ func (c *Client) CommitTransactionRequest(input *CommitTransactionInput) CommitT
 // CommitTransaction API operation.
 type CommitTransactionRequest struct {
 	*aws.Request
-	Input *CommitTransactionInput
-	Copy  func(*CommitTransactionInput) CommitTransactionRequest
+	Input *types.CommitTransactionInput
+	Copy  func(*types.CommitTransactionInput) CommitTransactionRequest
 }
 
 // Send marshals and sends the CommitTransaction API request.
@@ -160,7 +57,7 @@ func (r CommitTransactionRequest) Send(ctx context.Context) (*CommitTransactionR
 	}
 
 	resp := &CommitTransactionResponse{
-		CommitTransactionOutput: r.Request.Data.(*CommitTransactionOutput),
+		CommitTransactionOutput: r.Request.Data.(*types.CommitTransactionOutput),
 		response:                &aws.Response{Request: r.Request},
 	}
 
@@ -170,7 +67,7 @@ func (r CommitTransactionRequest) Send(ctx context.Context) (*CommitTransactionR
 // CommitTransactionResponse is the response type for the
 // CommitTransaction API operation.
 type CommitTransactionResponse struct {
-	*CommitTransactionOutput
+	*types.CommitTransactionOutput
 
 	response *aws.Response
 }

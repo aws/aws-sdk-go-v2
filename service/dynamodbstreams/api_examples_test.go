@@ -12,6 +12,8 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws/awserr"
 	"github.com/aws/aws-sdk-go-v2/aws/external"
 	"github.com/aws/aws-sdk-go-v2/service/dynamodbstreams"
+	"github.com/aws/aws-sdk-go-v2/service/dynamodbstreams/enums"
+	"github.com/aws/aws-sdk-go-v2/service/dynamodbstreams/types"
 )
 
 var _ time.Duration
@@ -36,7 +38,7 @@ func ExampleClient_DescribeStreamRequest_shared00() {
 	}
 
 	svc := dynamodbstreams.New(cfg)
-	input := &dynamodbstreams.DescribeStreamInput{
+	input := &types.DescribeStreamInput{
 		StreamArn: aws.String("arn:aws:dynamodb:us-west-2:111122223333:table/Forum/stream/2015-05-20T20:51:10.252"),
 	}
 
@@ -73,7 +75,7 @@ func ExampleClient_GetRecordsRequest_shared00() {
 	}
 
 	svc := dynamodbstreams.New(cfg)
-	input := &dynamodbstreams.GetRecordsInput{
+	input := &types.GetRecordsInput{
 		ShardIterator: aws.String("arn:aws:dynamodb:us-west-2:111122223333:table/Forum/stream/2015-05-20T20:51:10.252|1|AAAAAAAAAAEvJp6D+zaQ...  <remaining characters omitted> ..."),
 	}
 
@@ -117,9 +119,9 @@ func ExampleClient_GetShardIteratorRequest_shared00() {
 	}
 
 	svc := dynamodbstreams.New(cfg)
-	input := &dynamodbstreams.GetShardIteratorInput{
+	input := &types.GetShardIteratorInput{
 		ShardId:           aws.String("00000001414576573621-f55eea83"),
-		ShardIteratorType: dynamodbstreams.ShardIteratorTypeTrimHorizon,
+		ShardIteratorType: enums.ShardIteratorTypeTrimHorizon,
 		StreamArn:         aws.String("arn:aws:dynamodb:us-west-2:111122223333:table/Forum/stream/2015-05-20T20:51:10.252"),
 	}
 
@@ -158,7 +160,7 @@ func ExampleClient_ListStreamsRequest_shared00() {
 	}
 
 	svc := dynamodbstreams.New(cfg)
-	input := &dynamodbstreams.ListStreamsInput{}
+	input := &types.ListStreamsInput{}
 
 	req := svc.ListStreamsRequest(input)
 	result, err := req.Send(context.Background())

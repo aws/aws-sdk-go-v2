@@ -6,233 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/amplify/types"
 )
-
-// Request structure for a branch create request.
-type CreateBranchInput struct {
-	_ struct{} `type:"structure"`
-
-	// Unique Id for an Amplify App.
-	//
-	// AppId is a required field
-	AppId *string `location:"uri" locationName:"appId" min:"1" type:"string" required:"true"`
-
-	// Basic Authorization credentials for the branch.
-	BasicAuthCredentials *string `locationName:"basicAuthCredentials" type:"string"`
-
-	// Name for the branch.
-	//
-	// BranchName is a required field
-	BranchName *string `locationName:"branchName" min:"1" type:"string" required:"true"`
-
-	// BuildSpec for the branch.
-	BuildSpec *string `locationName:"buildSpec" min:"1" type:"string"`
-
-	// Description for the branch.
-	Description *string `locationName:"description" type:"string"`
-
-	// Display name for a branch, will use as the default domain prefix.
-	DisplayName *string `locationName:"displayName" type:"string"`
-
-	// Enables auto building for the branch.
-	EnableAutoBuild *bool `locationName:"enableAutoBuild" type:"boolean"`
-
-	// Enables Basic Auth for the branch.
-	EnableBasicAuth *bool `locationName:"enableBasicAuth" type:"boolean"`
-
-	// Enables notifications for the branch.
-	EnableNotification *bool `locationName:"enableNotification" type:"boolean"`
-
-	// Enables Pull Request Preview for this branch.
-	EnablePullRequestPreview *bool `locationName:"enablePullRequestPreview" type:"boolean"`
-
-	// Environment Variables for the branch.
-	EnvironmentVariables map[string]string `locationName:"environmentVariables" type:"map"`
-
-	// Framework for the branch.
-	Framework *string `locationName:"framework" type:"string"`
-
-	// Stage for the branch.
-	Stage Stage `locationName:"stage" type:"string" enum:"true"`
-
-	// Tag for the branch.
-	Tags map[string]string `locationName:"tags" min:"1" type:"map"`
-
-	// The content TTL for the website in seconds.
-	Ttl *string `locationName:"ttl" type:"string"`
-}
-
-// String returns the string representation
-func (s CreateBranchInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateBranchInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateBranchInput"}
-
-	if s.AppId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("AppId"))
-	}
-	if s.AppId != nil && len(*s.AppId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("AppId", 1))
-	}
-
-	if s.BranchName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("BranchName"))
-	}
-	if s.BranchName != nil && len(*s.BranchName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("BranchName", 1))
-	}
-	if s.BuildSpec != nil && len(*s.BuildSpec) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("BuildSpec", 1))
-	}
-	if s.Tags != nil && len(s.Tags) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Tags", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s CreateBranchInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.BasicAuthCredentials != nil {
-		v := *s.BasicAuthCredentials
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "basicAuthCredentials", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.BranchName != nil {
-		v := *s.BranchName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "branchName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.BuildSpec != nil {
-		v := *s.BuildSpec
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "buildSpec", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Description != nil {
-		v := *s.Description
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "description", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.DisplayName != nil {
-		v := *s.DisplayName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "displayName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.EnableAutoBuild != nil {
-		v := *s.EnableAutoBuild
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "enableAutoBuild", protocol.BoolValue(v), metadata)
-	}
-	if s.EnableBasicAuth != nil {
-		v := *s.EnableBasicAuth
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "enableBasicAuth", protocol.BoolValue(v), metadata)
-	}
-	if s.EnableNotification != nil {
-		v := *s.EnableNotification
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "enableNotification", protocol.BoolValue(v), metadata)
-	}
-	if s.EnablePullRequestPreview != nil {
-		v := *s.EnablePullRequestPreview
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "enablePullRequestPreview", protocol.BoolValue(v), metadata)
-	}
-	if s.EnvironmentVariables != nil {
-		v := s.EnvironmentVariables
-
-		metadata := protocol.Metadata{}
-		ms0 := e.Map(protocol.BodyTarget, "environmentVariables", metadata)
-		ms0.Start()
-		for k1, v1 := range v {
-			ms0.MapSetValue(k1, protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
-		}
-		ms0.End()
-
-	}
-	if s.Framework != nil {
-		v := *s.Framework
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "framework", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if len(s.Stage) > 0 {
-		v := s.Stage
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "stage", protocol.QuotedValue{ValueMarshaler: v}, metadata)
-	}
-	if s.Tags != nil {
-		v := s.Tags
-
-		metadata := protocol.Metadata{}
-		ms0 := e.Map(protocol.BodyTarget, "tags", metadata)
-		ms0.Start()
-		for k1, v1 := range v {
-			ms0.MapSetValue(k1, protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
-		}
-		ms0.End()
-
-	}
-	if s.Ttl != nil {
-		v := *s.Ttl
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "ttl", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.AppId != nil {
-		v := *s.AppId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "appId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-// Result structure for create branch request.
-type CreateBranchOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Branch structure for an Amplify App.
-	//
-	// Branch is a required field
-	Branch *Branch `locationName:"branch" type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s CreateBranchOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s CreateBranchOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.Branch != nil {
-		v := s.Branch
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "branch", v, metadata)
-	}
-	return nil
-}
 
 const opCreateBranch = "CreateBranch"
 
@@ -249,7 +24,7 @@ const opCreateBranch = "CreateBranch"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/CreateBranch
-func (c *Client) CreateBranchRequest(input *CreateBranchInput) CreateBranchRequest {
+func (c *Client) CreateBranchRequest(input *types.CreateBranchInput) CreateBranchRequest {
 	op := &aws.Operation{
 		Name:       opCreateBranch,
 		HTTPMethod: "POST",
@@ -257,10 +32,10 @@ func (c *Client) CreateBranchRequest(input *CreateBranchInput) CreateBranchReque
 	}
 
 	if input == nil {
-		input = &CreateBranchInput{}
+		input = &types.CreateBranchInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateBranchOutput{})
+	req := c.newRequest(op, input, &types.CreateBranchOutput{})
 	return CreateBranchRequest{Request: req, Input: input, Copy: c.CreateBranchRequest}
 }
 
@@ -268,8 +43,8 @@ func (c *Client) CreateBranchRequest(input *CreateBranchInput) CreateBranchReque
 // CreateBranch API operation.
 type CreateBranchRequest struct {
 	*aws.Request
-	Input *CreateBranchInput
-	Copy  func(*CreateBranchInput) CreateBranchRequest
+	Input *types.CreateBranchInput
+	Copy  func(*types.CreateBranchInput) CreateBranchRequest
 }
 
 // Send marshals and sends the CreateBranch API request.
@@ -281,7 +56,7 @@ func (r CreateBranchRequest) Send(ctx context.Context) (*CreateBranchResponse, e
 	}
 
 	resp := &CreateBranchResponse{
-		CreateBranchOutput: r.Request.Data.(*CreateBranchOutput),
+		CreateBranchOutput: r.Request.Data.(*types.CreateBranchOutput),
 		response:           &aws.Response{Request: r.Request},
 	}
 
@@ -291,7 +66,7 @@ func (r CreateBranchRequest) Send(ctx context.Context) (*CreateBranchResponse, e
 // CreateBranchResponse is the response type for the
 // CreateBranch API operation.
 type CreateBranchResponse struct {
-	*CreateBranchOutput
+	*types.CreateBranchOutput
 
 	response *aws.Response
 }

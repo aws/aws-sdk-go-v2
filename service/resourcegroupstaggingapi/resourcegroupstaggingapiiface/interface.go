@@ -10,6 +10,7 @@ package resourcegroupstaggingapiiface
 
 import (
 	"github.com/aws/aws-sdk-go-v2/service/resourcegroupstaggingapi"
+	"github.com/aws/aws-sdk-go-v2/service/resourcegroupstaggingapi/types"
 )
 
 // ClientAPI provides an interface to enable mocking the
@@ -43,7 +44,7 @@ import (
 //    type mockClientClient struct {
 //        resourcegroupstaggingapiiface.ClientPI
 //    }
-//    func (m *mockClientClient) GetResources(input *resourcegroupstaggingapi.GetResourcesInput) (*resourcegroupstaggingapi.GetResourcesOutput, error) {
+//    func (m *mockClientClient) GetResources(input *types.GetResourcesInput) (*types.GetResourcesOutput, error) {
 //        // mock response/functionality
 //    }
 //
@@ -61,15 +62,15 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type ClientAPI interface {
-	GetResourcesRequest(*resourcegroupstaggingapi.GetResourcesInput) resourcegroupstaggingapi.GetResourcesRequest
+	GetResourcesRequest(*types.GetResourcesInput) resourcegroupstaggingapi.GetResourcesRequest
 
-	GetTagKeysRequest(*resourcegroupstaggingapi.GetTagKeysInput) resourcegroupstaggingapi.GetTagKeysRequest
+	GetTagKeysRequest(*types.GetTagKeysInput) resourcegroupstaggingapi.GetTagKeysRequest
 
-	GetTagValuesRequest(*resourcegroupstaggingapi.GetTagValuesInput) resourcegroupstaggingapi.GetTagValuesRequest
+	GetTagValuesRequest(*types.GetTagValuesInput) resourcegroupstaggingapi.GetTagValuesRequest
 
-	TagResourcesRequest(*resourcegroupstaggingapi.TagResourcesInput) resourcegroupstaggingapi.TagResourcesRequest
+	TagResourcesRequest(*types.TagResourcesInput) resourcegroupstaggingapi.TagResourcesRequest
 
-	UntagResourcesRequest(*resourcegroupstaggingapi.UntagResourcesInput) resourcegroupstaggingapi.UntagResourcesRequest
+	UntagResourcesRequest(*types.UntagResourcesInput) resourcegroupstaggingapi.UntagResourcesRequest
 }
 
 var _ ClientAPI = (*resourcegroupstaggingapi.Client)(nil)

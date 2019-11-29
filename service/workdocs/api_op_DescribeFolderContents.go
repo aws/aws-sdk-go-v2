@@ -6,184 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/workdocs/types"
 )
-
-type DescribeFolderContentsInput struct {
-	_ struct{} `type:"structure"`
-
-	// Amazon WorkDocs authentication token. Do not set this field when using administrative
-	// API actions, as in accessing the API using AWS credentials.
-	AuthenticationToken *string `location:"header" locationName:"Authentication" min:"1" type:"string" sensitive:"true"`
-
-	// The ID of the folder.
-	//
-	// FolderId is a required field
-	FolderId *string `location:"uri" locationName:"FolderId" min:"1" type:"string" required:"true"`
-
-	// The contents to include. Specify "INITIALIZED" to include initialized documents.
-	Include *string `location:"querystring" locationName:"include" min:"1" type:"string"`
-
-	// The maximum number of items to return with this call.
-	Limit *int64 `location:"querystring" locationName:"limit" min:"1" type:"integer"`
-
-	// The marker for the next set of results. This marker was received from a previous
-	// call.
-	Marker *string `location:"querystring" locationName:"marker" min:"1" type:"string"`
-
-	// The order for the contents of the folder.
-	Order OrderType `location:"querystring" locationName:"order" type:"string" enum:"true"`
-
-	// The sorting criteria.
-	Sort ResourceSortType `location:"querystring" locationName:"sort" type:"string" enum:"true"`
-
-	// The type of items.
-	Type FolderContentType `location:"querystring" locationName:"type" type:"string" enum:"true"`
-}
-
-// String returns the string representation
-func (s DescribeFolderContentsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeFolderContentsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeFolderContentsInput"}
-	if s.AuthenticationToken != nil && len(*s.AuthenticationToken) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("AuthenticationToken", 1))
-	}
-
-	if s.FolderId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("FolderId"))
-	}
-	if s.FolderId != nil && len(*s.FolderId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("FolderId", 1))
-	}
-	if s.Include != nil && len(*s.Include) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Include", 1))
-	}
-	if s.Limit != nil && *s.Limit < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("Limit", 1))
-	}
-	if s.Marker != nil && len(*s.Marker) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Marker", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DescribeFolderContentsInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.AuthenticationToken != nil {
-		v := *s.AuthenticationToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "Authentication", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.FolderId != nil {
-		v := *s.FolderId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "FolderId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Include != nil {
-		v := *s.Include
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "include", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Limit != nil {
-		v := *s.Limit
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "limit", protocol.Int64Value(v), metadata)
-	}
-	if s.Marker != nil {
-		v := *s.Marker
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "marker", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if len(s.Order) > 0 {
-		v := s.Order
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "order", protocol.QuotedValue{ValueMarshaler: v}, metadata)
-	}
-	if len(s.Sort) > 0 {
-		v := s.Sort
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "sort", protocol.QuotedValue{ValueMarshaler: v}, metadata)
-	}
-	if len(s.Type) > 0 {
-		v := s.Type
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "type", protocol.QuotedValue{ValueMarshaler: v}, metadata)
-	}
-	return nil
-}
-
-type DescribeFolderContentsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The documents in the specified folder.
-	Documents []DocumentMetadata `type:"list"`
-
-	// The subfolders in the specified folder.
-	Folders []FolderMetadata `type:"list"`
-
-	// The marker to use when requesting the next set of results. If there are no
-	// additional results, the string is empty.
-	Marker *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeFolderContentsOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DescribeFolderContentsOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.Documents != nil {
-		v := s.Documents
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "Documents", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	if s.Folders != nil {
-		v := s.Folders
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "Folders", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	if s.Marker != nil {
-		v := *s.Marker
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "Marker", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opDescribeFolderContents = "DescribeFolderContents"
 
@@ -206,7 +30,7 @@ const opDescribeFolderContents = "DescribeFolderContents"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/DescribeFolderContents
-func (c *Client) DescribeFolderContentsRequest(input *DescribeFolderContentsInput) DescribeFolderContentsRequest {
+func (c *Client) DescribeFolderContentsRequest(input *types.DescribeFolderContentsInput) DescribeFolderContentsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeFolderContents,
 		HTTPMethod: "GET",
@@ -220,10 +44,10 @@ func (c *Client) DescribeFolderContentsRequest(input *DescribeFolderContentsInpu
 	}
 
 	if input == nil {
-		input = &DescribeFolderContentsInput{}
+		input = &types.DescribeFolderContentsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeFolderContentsOutput{})
+	req := c.newRequest(op, input, &types.DescribeFolderContentsOutput{})
 	return DescribeFolderContentsRequest{Request: req, Input: input, Copy: c.DescribeFolderContentsRequest}
 }
 
@@ -231,8 +55,8 @@ func (c *Client) DescribeFolderContentsRequest(input *DescribeFolderContentsInpu
 // DescribeFolderContents API operation.
 type DescribeFolderContentsRequest struct {
 	*aws.Request
-	Input *DescribeFolderContentsInput
-	Copy  func(*DescribeFolderContentsInput) DescribeFolderContentsRequest
+	Input *types.DescribeFolderContentsInput
+	Copy  func(*types.DescribeFolderContentsInput) DescribeFolderContentsRequest
 }
 
 // Send marshals and sends the DescribeFolderContents API request.
@@ -244,7 +68,7 @@ func (r DescribeFolderContentsRequest) Send(ctx context.Context) (*DescribeFolde
 	}
 
 	resp := &DescribeFolderContentsResponse{
-		DescribeFolderContentsOutput: r.Request.Data.(*DescribeFolderContentsOutput),
+		DescribeFolderContentsOutput: r.Request.Data.(*types.DescribeFolderContentsOutput),
 		response:                     &aws.Response{Request: r.Request},
 	}
 
@@ -274,7 +98,7 @@ func NewDescribeFolderContentsPaginator(req DescribeFolderContentsRequest) Descr
 	return DescribeFolderContentsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *DescribeFolderContentsInput
+				var inCpy *types.DescribeFolderContentsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -294,14 +118,14 @@ type DescribeFolderContentsPaginator struct {
 	aws.Pager
 }
 
-func (p *DescribeFolderContentsPaginator) CurrentPage() *DescribeFolderContentsOutput {
-	return p.Pager.CurrentPage().(*DescribeFolderContentsOutput)
+func (p *DescribeFolderContentsPaginator) CurrentPage() *types.DescribeFolderContentsOutput {
+	return p.Pager.CurrentPage().(*types.DescribeFolderContentsOutput)
 }
 
 // DescribeFolderContentsResponse is the response type for the
 // DescribeFolderContents API operation.
 type DescribeFolderContentsResponse struct {
-	*DescribeFolderContentsOutput
+	*types.DescribeFolderContentsOutput
 
 	response *aws.Response
 }

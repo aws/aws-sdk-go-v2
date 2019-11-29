@@ -6,38 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/lightsail/types"
 )
-
-type GetOperationsInput struct {
-	_ struct{} `type:"structure"`
-
-	// A token used for advancing to the next page of results from your get operations
-	// request.
-	PageToken *string `locationName:"pageToken" type:"string"`
-}
-
-// String returns the string representation
-func (s GetOperationsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type GetOperationsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A token used for advancing to the next page of results from your get operations
-	// request.
-	NextPageToken *string `locationName:"nextPageToken" type:"string"`
-
-	// An array of key-value pairs containing information about the results of your
-	// get operations request.
-	Operations []Operation `locationName:"operations" type:"list"`
-}
-
-// String returns the string representation
-func (s GetOperationsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetOperations = "GetOperations"
 
@@ -58,7 +28,7 @@ const opGetOperations = "GetOperations"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetOperations
-func (c *Client) GetOperationsRequest(input *GetOperationsInput) GetOperationsRequest {
+func (c *Client) GetOperationsRequest(input *types.GetOperationsInput) GetOperationsRequest {
 	op := &aws.Operation{
 		Name:       opGetOperations,
 		HTTPMethod: "POST",
@@ -66,10 +36,10 @@ func (c *Client) GetOperationsRequest(input *GetOperationsInput) GetOperationsRe
 	}
 
 	if input == nil {
-		input = &GetOperationsInput{}
+		input = &types.GetOperationsInput{}
 	}
 
-	req := c.newRequest(op, input, &GetOperationsOutput{})
+	req := c.newRequest(op, input, &types.GetOperationsOutput{})
 	return GetOperationsRequest{Request: req, Input: input, Copy: c.GetOperationsRequest}
 }
 
@@ -77,8 +47,8 @@ func (c *Client) GetOperationsRequest(input *GetOperationsInput) GetOperationsRe
 // GetOperations API operation.
 type GetOperationsRequest struct {
 	*aws.Request
-	Input *GetOperationsInput
-	Copy  func(*GetOperationsInput) GetOperationsRequest
+	Input *types.GetOperationsInput
+	Copy  func(*types.GetOperationsInput) GetOperationsRequest
 }
 
 // Send marshals and sends the GetOperations API request.
@@ -90,7 +60,7 @@ func (r GetOperationsRequest) Send(ctx context.Context) (*GetOperationsResponse,
 	}
 
 	resp := &GetOperationsResponse{
-		GetOperationsOutput: r.Request.Data.(*GetOperationsOutput),
+		GetOperationsOutput: r.Request.Data.(*types.GetOperationsOutput),
 		response:            &aws.Response{Request: r.Request},
 	}
 
@@ -100,7 +70,7 @@ func (r GetOperationsRequest) Send(ctx context.Context) (*GetOperationsResponse,
 // GetOperationsResponse is the response type for the
 // GetOperations API operation.
 type GetOperationsResponse struct {
-	*GetOperationsOutput
+	*types.GetOperationsOutput
 
 	response *aws.Response
 }

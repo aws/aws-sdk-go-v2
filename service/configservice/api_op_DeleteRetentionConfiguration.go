@@ -6,50 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
+	"github.com/aws/aws-sdk-go-v2/service/configservice/types"
 )
-
-type DeleteRetentionConfigurationInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the retention configuration to delete.
-	//
-	// RetentionConfigurationName is a required field
-	RetentionConfigurationName *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteRetentionConfigurationInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteRetentionConfigurationInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteRetentionConfigurationInput"}
-
-	if s.RetentionConfigurationName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("RetentionConfigurationName"))
-	}
-	if s.RetentionConfigurationName != nil && len(*s.RetentionConfigurationName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("RetentionConfigurationName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteRetentionConfigurationOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteRetentionConfigurationOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteRetentionConfiguration = "DeleteRetentionConfiguration"
 
@@ -66,7 +26,7 @@ const opDeleteRetentionConfiguration = "DeleteRetentionConfiguration"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DeleteRetentionConfiguration
-func (c *Client) DeleteRetentionConfigurationRequest(input *DeleteRetentionConfigurationInput) DeleteRetentionConfigurationRequest {
+func (c *Client) DeleteRetentionConfigurationRequest(input *types.DeleteRetentionConfigurationInput) DeleteRetentionConfigurationRequest {
 	op := &aws.Operation{
 		Name:       opDeleteRetentionConfiguration,
 		HTTPMethod: "POST",
@@ -74,10 +34,10 @@ func (c *Client) DeleteRetentionConfigurationRequest(input *DeleteRetentionConfi
 	}
 
 	if input == nil {
-		input = &DeleteRetentionConfigurationInput{}
+		input = &types.DeleteRetentionConfigurationInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteRetentionConfigurationOutput{})
+	req := c.newRequest(op, input, &types.DeleteRetentionConfigurationOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return DeleteRetentionConfigurationRequest{Request: req, Input: input, Copy: c.DeleteRetentionConfigurationRequest}
@@ -87,8 +47,8 @@ func (c *Client) DeleteRetentionConfigurationRequest(input *DeleteRetentionConfi
 // DeleteRetentionConfiguration API operation.
 type DeleteRetentionConfigurationRequest struct {
 	*aws.Request
-	Input *DeleteRetentionConfigurationInput
-	Copy  func(*DeleteRetentionConfigurationInput) DeleteRetentionConfigurationRequest
+	Input *types.DeleteRetentionConfigurationInput
+	Copy  func(*types.DeleteRetentionConfigurationInput) DeleteRetentionConfigurationRequest
 }
 
 // Send marshals and sends the DeleteRetentionConfiguration API request.
@@ -100,7 +60,7 @@ func (r DeleteRetentionConfigurationRequest) Send(ctx context.Context) (*DeleteR
 	}
 
 	resp := &DeleteRetentionConfigurationResponse{
-		DeleteRetentionConfigurationOutput: r.Request.Data.(*DeleteRetentionConfigurationOutput),
+		DeleteRetentionConfigurationOutput: r.Request.Data.(*types.DeleteRetentionConfigurationOutput),
 		response:                           &aws.Response{Request: r.Request},
 	}
 
@@ -110,7 +70,7 @@ func (r DeleteRetentionConfigurationRequest) Send(ctx context.Context) (*DeleteR
 // DeleteRetentionConfigurationResponse is the response type for the
 // DeleteRetentionConfiguration API operation.
 type DeleteRetentionConfigurationResponse struct {
-	*DeleteRetentionConfigurationOutput
+	*types.DeleteRetentionConfigurationOutput
 
 	response *aws.Response
 }

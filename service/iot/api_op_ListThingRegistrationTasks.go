@@ -6,104 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/iot/types"
 )
-
-type ListThingRegistrationTasksInput struct {
-	_ struct{} `type:"structure"`
-
-	// The maximum number of results to return at one time.
-	MaxResults *int64 `location:"querystring" locationName:"maxResults" min:"1" type:"integer"`
-
-	// The token to retrieve the next set of results.
-	NextToken *string `location:"querystring" locationName:"nextToken" type:"string"`
-
-	// The status of the bulk thing provisioning task.
-	Status Status `location:"querystring" locationName:"status" type:"string" enum:"true"`
-}
-
-// String returns the string representation
-func (s ListThingRegistrationTasksInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListThingRegistrationTasksInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListThingRegistrationTasksInput"}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListThingRegistrationTasksInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.MaxResults != nil {
-		v := *s.MaxResults
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "maxResults", protocol.Int64Value(v), metadata)
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if len(s.Status) > 0 {
-		v := s.Status
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "status", protocol.QuotedValue{ValueMarshaler: v}, metadata)
-	}
-	return nil
-}
-
-type ListThingRegistrationTasksOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The token used to get the next set of results, or null if there are no additional
-	// results.
-	NextToken *string `locationName:"nextToken" type:"string"`
-
-	// A list of bulk thing provisioning task IDs.
-	TaskIds []string `locationName:"taskIds" type:"list"`
-}
-
-// String returns the string representation
-func (s ListThingRegistrationTasksOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListThingRegistrationTasksOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.TaskIds != nil {
-		v := s.TaskIds
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "taskIds", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
-		}
-		ls0.End()
-
-	}
-	return nil
-}
 
 const opListThingRegistrationTasks = "ListThingRegistrationTasks"
 
@@ -118,7 +22,7 @@ const opListThingRegistrationTasks = "ListThingRegistrationTasks"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) ListThingRegistrationTasksRequest(input *ListThingRegistrationTasksInput) ListThingRegistrationTasksRequest {
+func (c *Client) ListThingRegistrationTasksRequest(input *types.ListThingRegistrationTasksInput) ListThingRegistrationTasksRequest {
 	op := &aws.Operation{
 		Name:       opListThingRegistrationTasks,
 		HTTPMethod: "GET",
@@ -126,10 +30,10 @@ func (c *Client) ListThingRegistrationTasksRequest(input *ListThingRegistrationT
 	}
 
 	if input == nil {
-		input = &ListThingRegistrationTasksInput{}
+		input = &types.ListThingRegistrationTasksInput{}
 	}
 
-	req := c.newRequest(op, input, &ListThingRegistrationTasksOutput{})
+	req := c.newRequest(op, input, &types.ListThingRegistrationTasksOutput{})
 	return ListThingRegistrationTasksRequest{Request: req, Input: input, Copy: c.ListThingRegistrationTasksRequest}
 }
 
@@ -137,8 +41,8 @@ func (c *Client) ListThingRegistrationTasksRequest(input *ListThingRegistrationT
 // ListThingRegistrationTasks API operation.
 type ListThingRegistrationTasksRequest struct {
 	*aws.Request
-	Input *ListThingRegistrationTasksInput
-	Copy  func(*ListThingRegistrationTasksInput) ListThingRegistrationTasksRequest
+	Input *types.ListThingRegistrationTasksInput
+	Copy  func(*types.ListThingRegistrationTasksInput) ListThingRegistrationTasksRequest
 }
 
 // Send marshals and sends the ListThingRegistrationTasks API request.
@@ -150,7 +54,7 @@ func (r ListThingRegistrationTasksRequest) Send(ctx context.Context) (*ListThing
 	}
 
 	resp := &ListThingRegistrationTasksResponse{
-		ListThingRegistrationTasksOutput: r.Request.Data.(*ListThingRegistrationTasksOutput),
+		ListThingRegistrationTasksOutput: r.Request.Data.(*types.ListThingRegistrationTasksOutput),
 		response:                         &aws.Response{Request: r.Request},
 	}
 
@@ -160,7 +64,7 @@ func (r ListThingRegistrationTasksRequest) Send(ctx context.Context) (*ListThing
 // ListThingRegistrationTasksResponse is the response type for the
 // ListThingRegistrationTasks API operation.
 type ListThingRegistrationTasksResponse struct {
-	*ListThingRegistrationTasksOutput
+	*types.ListThingRegistrationTasksOutput
 
 	response *aws.Response
 }

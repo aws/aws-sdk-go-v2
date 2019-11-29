@@ -6,58 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/lakeformation/types"
 )
-
-type ListResourcesInput struct {
-	_ struct{} `type:"structure"`
-
-	// Any applicable row-level and/or column-level filtering conditions for the
-	// resources.
-	FilterConditionList []FilterCondition `min:"1" type:"list"`
-
-	// The maximum number of resource results.
-	MaxResults *int64 `min:"1" type:"integer"`
-
-	// A continuation token, if this is not the first call to retrieve these resources.
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s ListResourcesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListResourcesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListResourcesInput"}
-	if s.FilterConditionList != nil && len(s.FilterConditionList) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("FilterConditionList", 1))
-	}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ListResourcesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A continuation token, if this is not the first call to retrieve these resources.
-	NextToken *string `type:"string"`
-
-	// A summary of the data lake resources.
-	ResourceInfoList []ResourceInfo `type:"list"`
-}
-
-// String returns the string representation
-func (s ListResourcesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListResources = "ListResources"
 
@@ -74,7 +24,7 @@ const opListResources = "ListResources"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/ListResources
-func (c *Client) ListResourcesRequest(input *ListResourcesInput) ListResourcesRequest {
+func (c *Client) ListResourcesRequest(input *types.ListResourcesInput) ListResourcesRequest {
 	op := &aws.Operation{
 		Name:       opListResources,
 		HTTPMethod: "POST",
@@ -88,10 +38,10 @@ func (c *Client) ListResourcesRequest(input *ListResourcesInput) ListResourcesRe
 	}
 
 	if input == nil {
-		input = &ListResourcesInput{}
+		input = &types.ListResourcesInput{}
 	}
 
-	req := c.newRequest(op, input, &ListResourcesOutput{})
+	req := c.newRequest(op, input, &types.ListResourcesOutput{})
 	return ListResourcesRequest{Request: req, Input: input, Copy: c.ListResourcesRequest}
 }
 
@@ -99,8 +49,8 @@ func (c *Client) ListResourcesRequest(input *ListResourcesInput) ListResourcesRe
 // ListResources API operation.
 type ListResourcesRequest struct {
 	*aws.Request
-	Input *ListResourcesInput
-	Copy  func(*ListResourcesInput) ListResourcesRequest
+	Input *types.ListResourcesInput
+	Copy  func(*types.ListResourcesInput) ListResourcesRequest
 }
 
 // Send marshals and sends the ListResources API request.
@@ -112,7 +62,7 @@ func (r ListResourcesRequest) Send(ctx context.Context) (*ListResourcesResponse,
 	}
 
 	resp := &ListResourcesResponse{
-		ListResourcesOutput: r.Request.Data.(*ListResourcesOutput),
+		ListResourcesOutput: r.Request.Data.(*types.ListResourcesOutput),
 		response:            &aws.Response{Request: r.Request},
 	}
 
@@ -142,7 +92,7 @@ func NewListResourcesPaginator(req ListResourcesRequest) ListResourcesPaginator 
 	return ListResourcesPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListResourcesInput
+				var inCpy *types.ListResourcesInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -162,14 +112,14 @@ type ListResourcesPaginator struct {
 	aws.Pager
 }
 
-func (p *ListResourcesPaginator) CurrentPage() *ListResourcesOutput {
-	return p.Pager.CurrentPage().(*ListResourcesOutput)
+func (p *ListResourcesPaginator) CurrentPage() *types.ListResourcesOutput {
+	return p.Pager.CurrentPage().(*types.ListResourcesOutput)
 }
 
 // ListResourcesResponse is the response type for the
 // ListResources API operation.
 type ListResourcesResponse struct {
-	*ListResourcesOutput
+	*types.ListResourcesOutput
 
 	response *aws.Response
 }

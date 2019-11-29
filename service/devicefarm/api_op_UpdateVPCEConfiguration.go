@@ -6,67 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/devicefarm/types"
 )
-
-type UpdateVPCEConfigurationInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the VPC endpoint configuration you want
-	// to update.
-	//
-	// Arn is a required field
-	Arn *string `locationName:"arn" min:"32" type:"string" required:"true"`
-
-	// The DNS (domain) name used to connect to your private service in your Amazon
-	// VPC. The DNS name must not already be in use on the Internet.
-	ServiceDnsName *string `locationName:"serviceDnsName" type:"string"`
-
-	// An optional description, providing more details about your VPC endpoint configuration.
-	VpceConfigurationDescription *string `locationName:"vpceConfigurationDescription" type:"string"`
-
-	// The friendly name you give to your VPC endpoint configuration, to manage
-	// your configurations more easily.
-	VpceConfigurationName *string `locationName:"vpceConfigurationName" type:"string"`
-
-	// The name of the VPC endpoint service running inside your AWS account that
-	// you want Device Farm to test.
-	VpceServiceName *string `locationName:"vpceServiceName" type:"string"`
-}
-
-// String returns the string representation
-func (s UpdateVPCEConfigurationInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateVPCEConfigurationInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateVPCEConfigurationInput"}
-
-	if s.Arn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Arn"))
-	}
-	if s.Arn != nil && len(*s.Arn) < 32 {
-		invalidParams.Add(aws.NewErrParamMinLen("Arn", 32))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type UpdateVPCEConfigurationOutput struct {
-	_ struct{} `type:"structure"`
-
-	// An object containing information about your VPC endpoint configuration.
-	VpceConfiguration *VPCEConfiguration `locationName:"vpceConfiguration" type:"structure"`
-}
-
-// String returns the string representation
-func (s UpdateVPCEConfigurationOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opUpdateVPCEConfiguration = "UpdateVPCEConfiguration"
 
@@ -84,7 +25,7 @@ const opUpdateVPCEConfiguration = "UpdateVPCEConfiguration"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/UpdateVPCEConfiguration
-func (c *Client) UpdateVPCEConfigurationRequest(input *UpdateVPCEConfigurationInput) UpdateVPCEConfigurationRequest {
+func (c *Client) UpdateVPCEConfigurationRequest(input *types.UpdateVPCEConfigurationInput) UpdateVPCEConfigurationRequest {
 	op := &aws.Operation{
 		Name:       opUpdateVPCEConfiguration,
 		HTTPMethod: "POST",
@@ -92,10 +33,10 @@ func (c *Client) UpdateVPCEConfigurationRequest(input *UpdateVPCEConfigurationIn
 	}
 
 	if input == nil {
-		input = &UpdateVPCEConfigurationInput{}
+		input = &types.UpdateVPCEConfigurationInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateVPCEConfigurationOutput{})
+	req := c.newRequest(op, input, &types.UpdateVPCEConfigurationOutput{})
 	return UpdateVPCEConfigurationRequest{Request: req, Input: input, Copy: c.UpdateVPCEConfigurationRequest}
 }
 
@@ -103,8 +44,8 @@ func (c *Client) UpdateVPCEConfigurationRequest(input *UpdateVPCEConfigurationIn
 // UpdateVPCEConfiguration API operation.
 type UpdateVPCEConfigurationRequest struct {
 	*aws.Request
-	Input *UpdateVPCEConfigurationInput
-	Copy  func(*UpdateVPCEConfigurationInput) UpdateVPCEConfigurationRequest
+	Input *types.UpdateVPCEConfigurationInput
+	Copy  func(*types.UpdateVPCEConfigurationInput) UpdateVPCEConfigurationRequest
 }
 
 // Send marshals and sends the UpdateVPCEConfiguration API request.
@@ -116,7 +57,7 @@ func (r UpdateVPCEConfigurationRequest) Send(ctx context.Context) (*UpdateVPCECo
 	}
 
 	resp := &UpdateVPCEConfigurationResponse{
-		UpdateVPCEConfigurationOutput: r.Request.Data.(*UpdateVPCEConfigurationOutput),
+		UpdateVPCEConfigurationOutput: r.Request.Data.(*types.UpdateVPCEConfigurationOutput),
 		response:                      &aws.Response{Request: r.Request},
 	}
 
@@ -126,7 +67,7 @@ func (r UpdateVPCEConfigurationRequest) Send(ctx context.Context) (*UpdateVPCECo
 // UpdateVPCEConfigurationResponse is the response type for the
 // UpdateVPCEConfiguration API operation.
 type UpdateVPCEConfigurationResponse struct {
-	*UpdateVPCEConfigurationOutput
+	*types.UpdateVPCEConfigurationOutput
 
 	response *aws.Response
 }

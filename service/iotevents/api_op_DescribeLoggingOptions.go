@@ -6,48 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/iotevents/types"
 )
-
-type DescribeLoggingOptionsInput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DescribeLoggingOptionsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DescribeLoggingOptionsInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	return nil
-}
-
-type DescribeLoggingOptionsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The current settings of the AWS IoT Events logging options.
-	LoggingOptions *LoggingOptions `locationName:"loggingOptions" type:"structure"`
-}
-
-// String returns the string representation
-func (s DescribeLoggingOptionsOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DescribeLoggingOptionsOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.LoggingOptions != nil {
-		v := s.LoggingOptions
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "loggingOptions", v, metadata)
-	}
-	return nil
-}
 
 const opDescribeLoggingOptions = "DescribeLoggingOptions"
 
@@ -64,7 +24,7 @@ const opDescribeLoggingOptions = "DescribeLoggingOptions"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iotevents-2018-07-27/DescribeLoggingOptions
-func (c *Client) DescribeLoggingOptionsRequest(input *DescribeLoggingOptionsInput) DescribeLoggingOptionsRequest {
+func (c *Client) DescribeLoggingOptionsRequest(input *types.DescribeLoggingOptionsInput) DescribeLoggingOptionsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeLoggingOptions,
 		HTTPMethod: "GET",
@@ -72,10 +32,10 @@ func (c *Client) DescribeLoggingOptionsRequest(input *DescribeLoggingOptionsInpu
 	}
 
 	if input == nil {
-		input = &DescribeLoggingOptionsInput{}
+		input = &types.DescribeLoggingOptionsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeLoggingOptionsOutput{})
+	req := c.newRequest(op, input, &types.DescribeLoggingOptionsOutput{})
 	return DescribeLoggingOptionsRequest{Request: req, Input: input, Copy: c.DescribeLoggingOptionsRequest}
 }
 
@@ -83,8 +43,8 @@ func (c *Client) DescribeLoggingOptionsRequest(input *DescribeLoggingOptionsInpu
 // DescribeLoggingOptions API operation.
 type DescribeLoggingOptionsRequest struct {
 	*aws.Request
-	Input *DescribeLoggingOptionsInput
-	Copy  func(*DescribeLoggingOptionsInput) DescribeLoggingOptionsRequest
+	Input *types.DescribeLoggingOptionsInput
+	Copy  func(*types.DescribeLoggingOptionsInput) DescribeLoggingOptionsRequest
 }
 
 // Send marshals and sends the DescribeLoggingOptions API request.
@@ -96,7 +56,7 @@ func (r DescribeLoggingOptionsRequest) Send(ctx context.Context) (*DescribeLoggi
 	}
 
 	resp := &DescribeLoggingOptionsResponse{
-		DescribeLoggingOptionsOutput: r.Request.Data.(*DescribeLoggingOptionsOutput),
+		DescribeLoggingOptionsOutput: r.Request.Data.(*types.DescribeLoggingOptionsOutput),
 		response:                     &aws.Response{Request: r.Request},
 	}
 
@@ -106,7 +66,7 @@ func (r DescribeLoggingOptionsRequest) Send(ctx context.Context) (*DescribeLoggi
 // DescribeLoggingOptionsResponse is the response type for the
 // DescribeLoggingOptions API operation.
 type DescribeLoggingOptionsResponse struct {
-	*DescribeLoggingOptionsOutput
+	*types.DescribeLoggingOptionsOutput
 
 	response *aws.Response
 }

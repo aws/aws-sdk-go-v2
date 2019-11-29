@@ -6,87 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/iam/types"
 )
-
-type ListSigningCertificatesInput struct {
-	_ struct{} `type:"structure"`
-
-	// Use this parameter only when paginating results and only after you receive
-	// a response indicating that the results are truncated. Set it to the value
-	// of the Marker element in the response that you received to indicate where
-	// the next call should start.
-	Marker *string `min:"1" type:"string"`
-
-	// Use this only when paginating results to indicate the maximum number of items
-	// you want in the response. If additional items exist beyond the maximum you
-	// specify, the IsTruncated response element is true.
-	//
-	// If you do not include this parameter, the number of items defaults to 100.
-	// Note that IAM might return fewer results, even when there are more results
-	// available. In that case, the IsTruncated response element returns true, and
-	// Marker contains a value to include in the subsequent call that tells the
-	// service where to continue from.
-	MaxItems *int64 `min:"1" type:"integer"`
-
-	// The name of the IAM user whose signing certificates you want to examine.
-	//
-	// This parameter allows (through its regex pattern (http://wikipedia.org/wiki/regex))
-	// a string of characters consisting of upper and lowercase alphanumeric characters
-	// with no spaces. You can also include any of the following characters: _+=,.@-
-	UserName *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s ListSigningCertificatesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListSigningCertificatesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListSigningCertificatesInput"}
-	if s.Marker != nil && len(*s.Marker) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Marker", 1))
-	}
-	if s.MaxItems != nil && *s.MaxItems < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxItems", 1))
-	}
-	if s.UserName != nil && len(*s.UserName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("UserName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Contains the response to a successful ListSigningCertificates request.
-type ListSigningCertificatesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A list of the user's signing certificate information.
-	//
-	// Certificates is a required field
-	Certificates []SigningCertificate `type:"list" required:"true"`
-
-	// A flag that indicates whether there are more items to return. If your results
-	// were truncated, you can make a subsequent pagination request using the Marker
-	// request parameter to retrieve more items. Note that IAM might return fewer
-	// than the MaxItems number of results even when there are more results available.
-	// We recommend that you check IsTruncated after every call to ensure that you
-	// receive all your results.
-	IsTruncated *bool `type:"boolean"`
-
-	// When IsTruncated is true, this element is present and contains the value
-	// to use for the Marker parameter in a subsequent pagination request.
-	Marker *string `type:"string"`
-}
-
-// String returns the string representation
-func (s ListSigningCertificatesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListSigningCertificates = "ListSigningCertificates"
 
@@ -113,7 +34,7 @@ const opListSigningCertificates = "ListSigningCertificates"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListSigningCertificates
-func (c *Client) ListSigningCertificatesRequest(input *ListSigningCertificatesInput) ListSigningCertificatesRequest {
+func (c *Client) ListSigningCertificatesRequest(input *types.ListSigningCertificatesInput) ListSigningCertificatesRequest {
 	op := &aws.Operation{
 		Name:       opListSigningCertificates,
 		HTTPMethod: "POST",
@@ -127,10 +48,10 @@ func (c *Client) ListSigningCertificatesRequest(input *ListSigningCertificatesIn
 	}
 
 	if input == nil {
-		input = &ListSigningCertificatesInput{}
+		input = &types.ListSigningCertificatesInput{}
 	}
 
-	req := c.newRequest(op, input, &ListSigningCertificatesOutput{})
+	req := c.newRequest(op, input, &types.ListSigningCertificatesOutput{})
 	return ListSigningCertificatesRequest{Request: req, Input: input, Copy: c.ListSigningCertificatesRequest}
 }
 
@@ -138,8 +59,8 @@ func (c *Client) ListSigningCertificatesRequest(input *ListSigningCertificatesIn
 // ListSigningCertificates API operation.
 type ListSigningCertificatesRequest struct {
 	*aws.Request
-	Input *ListSigningCertificatesInput
-	Copy  func(*ListSigningCertificatesInput) ListSigningCertificatesRequest
+	Input *types.ListSigningCertificatesInput
+	Copy  func(*types.ListSigningCertificatesInput) ListSigningCertificatesRequest
 }
 
 // Send marshals and sends the ListSigningCertificates API request.
@@ -151,7 +72,7 @@ func (r ListSigningCertificatesRequest) Send(ctx context.Context) (*ListSigningC
 	}
 
 	resp := &ListSigningCertificatesResponse{
-		ListSigningCertificatesOutput: r.Request.Data.(*ListSigningCertificatesOutput),
+		ListSigningCertificatesOutput: r.Request.Data.(*types.ListSigningCertificatesOutput),
 		response:                      &aws.Response{Request: r.Request},
 	}
 
@@ -181,7 +102,7 @@ func NewListSigningCertificatesPaginator(req ListSigningCertificatesRequest) Lis
 	return ListSigningCertificatesPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListSigningCertificatesInput
+				var inCpy *types.ListSigningCertificatesInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -201,14 +122,14 @@ type ListSigningCertificatesPaginator struct {
 	aws.Pager
 }
 
-func (p *ListSigningCertificatesPaginator) CurrentPage() *ListSigningCertificatesOutput {
-	return p.Pager.CurrentPage().(*ListSigningCertificatesOutput)
+func (p *ListSigningCertificatesPaginator) CurrentPage() *types.ListSigningCertificatesOutput {
+	return p.Pager.CurrentPage().(*types.ListSigningCertificatesOutput)
 }
 
 // ListSigningCertificatesResponse is the response type for the
 // ListSigningCertificates API operation.
 type ListSigningCertificatesResponse struct {
-	*ListSigningCertificatesOutput
+	*types.ListSigningCertificatesOutput
 
 	response *aws.Response
 }

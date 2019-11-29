@@ -6,54 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/iot/types"
 )
-
-type UpdateEventConfigurationsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The new event configuration values.
-	EventConfigurations map[string]Configuration `locationName:"eventConfigurations" type:"map"`
-}
-
-// String returns the string representation
-func (s UpdateEventConfigurationsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s UpdateEventConfigurationsInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.EventConfigurations != nil {
-		v := s.EventConfigurations
-
-		metadata := protocol.Metadata{}
-		ms0 := e.Map(protocol.BodyTarget, "eventConfigurations", metadata)
-		ms0.Start()
-		for k1, v1 := range v {
-			ms0.MapSetFields(k1, v1)
-		}
-		ms0.End()
-
-	}
-	return nil
-}
-
-type UpdateEventConfigurationsOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s UpdateEventConfigurationsOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s UpdateEventConfigurationsOutput) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
 
 const opUpdateEventConfigurations = "UpdateEventConfigurations"
 
@@ -68,7 +22,7 @@ const opUpdateEventConfigurations = "UpdateEventConfigurations"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) UpdateEventConfigurationsRequest(input *UpdateEventConfigurationsInput) UpdateEventConfigurationsRequest {
+func (c *Client) UpdateEventConfigurationsRequest(input *types.UpdateEventConfigurationsInput) UpdateEventConfigurationsRequest {
 	op := &aws.Operation{
 		Name:       opUpdateEventConfigurations,
 		HTTPMethod: "PATCH",
@@ -76,10 +30,10 @@ func (c *Client) UpdateEventConfigurationsRequest(input *UpdateEventConfiguratio
 	}
 
 	if input == nil {
-		input = &UpdateEventConfigurationsInput{}
+		input = &types.UpdateEventConfigurationsInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateEventConfigurationsOutput{})
+	req := c.newRequest(op, input, &types.UpdateEventConfigurationsOutput{})
 	return UpdateEventConfigurationsRequest{Request: req, Input: input, Copy: c.UpdateEventConfigurationsRequest}
 }
 
@@ -87,8 +41,8 @@ func (c *Client) UpdateEventConfigurationsRequest(input *UpdateEventConfiguratio
 // UpdateEventConfigurations API operation.
 type UpdateEventConfigurationsRequest struct {
 	*aws.Request
-	Input *UpdateEventConfigurationsInput
-	Copy  func(*UpdateEventConfigurationsInput) UpdateEventConfigurationsRequest
+	Input *types.UpdateEventConfigurationsInput
+	Copy  func(*types.UpdateEventConfigurationsInput) UpdateEventConfigurationsRequest
 }
 
 // Send marshals and sends the UpdateEventConfigurations API request.
@@ -100,7 +54,7 @@ func (r UpdateEventConfigurationsRequest) Send(ctx context.Context) (*UpdateEven
 	}
 
 	resp := &UpdateEventConfigurationsResponse{
-		UpdateEventConfigurationsOutput: r.Request.Data.(*UpdateEventConfigurationsOutput),
+		UpdateEventConfigurationsOutput: r.Request.Data.(*types.UpdateEventConfigurationsOutput),
 		response:                        &aws.Response{Request: r.Request},
 	}
 
@@ -110,7 +64,7 @@ func (r UpdateEventConfigurationsRequest) Send(ctx context.Context) (*UpdateEven
 // UpdateEventConfigurationsResponse is the response type for the
 // UpdateEventConfigurations API operation.
 type UpdateEventConfigurationsResponse struct {
-	*UpdateEventConfigurationsOutput
+	*types.UpdateEventConfigurationsOutput
 
 	response *aws.Response
 }

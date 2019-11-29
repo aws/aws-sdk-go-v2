@@ -6,89 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/pinpoint/types"
 )
-
-type CreateEmailTemplateInput struct {
-	_ struct{} `type:"structure" payload:"EmailTemplateRequest"`
-
-	// Specifies the content and settings for a message template that can be used
-	// in messages that are sent through the email channel.
-	//
-	// EmailTemplateRequest is a required field
-	EmailTemplateRequest *EmailTemplateRequest `type:"structure" required:"true"`
-
-	// TemplateName is a required field
-	TemplateName *string `location:"uri" locationName:"template-name" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s CreateEmailTemplateInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateEmailTemplateInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateEmailTemplateInput"}
-
-	if s.EmailTemplateRequest == nil {
-		invalidParams.Add(aws.NewErrParamRequired("EmailTemplateRequest"))
-	}
-
-	if s.TemplateName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("TemplateName"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s CreateEmailTemplateInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.TemplateName != nil {
-		v := *s.TemplateName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "template-name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.EmailTemplateRequest != nil {
-		v := s.EmailTemplateRequest
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.PayloadTarget, "EmailTemplateRequest", v, metadata)
-	}
-	return nil
-}
-
-type CreateEmailTemplateOutput struct {
-	_ struct{} `type:"structure" payload:"CreateTemplateMessageBody"`
-
-	// Provides information about an API request or response.
-	//
-	// CreateTemplateMessageBody is a required field
-	CreateTemplateMessageBody *CreateTemplateMessageBody `type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s CreateEmailTemplateOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s CreateEmailTemplateOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.CreateTemplateMessageBody != nil {
-		v := s.CreateTemplateMessageBody
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.PayloadTarget, "CreateTemplateMessageBody", v, metadata)
-	}
-	return nil
-}
 
 const opCreateEmailTemplate = "CreateEmailTemplate"
 
@@ -106,7 +25,7 @@ const opCreateEmailTemplate = "CreateEmailTemplate"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/CreateEmailTemplate
-func (c *Client) CreateEmailTemplateRequest(input *CreateEmailTemplateInput) CreateEmailTemplateRequest {
+func (c *Client) CreateEmailTemplateRequest(input *types.CreateEmailTemplateInput) CreateEmailTemplateRequest {
 	op := &aws.Operation{
 		Name:       opCreateEmailTemplate,
 		HTTPMethod: "POST",
@@ -114,10 +33,10 @@ func (c *Client) CreateEmailTemplateRequest(input *CreateEmailTemplateInput) Cre
 	}
 
 	if input == nil {
-		input = &CreateEmailTemplateInput{}
+		input = &types.CreateEmailTemplateInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateEmailTemplateOutput{})
+	req := c.newRequest(op, input, &types.CreateEmailTemplateOutput{})
 	return CreateEmailTemplateRequest{Request: req, Input: input, Copy: c.CreateEmailTemplateRequest}
 }
 
@@ -125,8 +44,8 @@ func (c *Client) CreateEmailTemplateRequest(input *CreateEmailTemplateInput) Cre
 // CreateEmailTemplate API operation.
 type CreateEmailTemplateRequest struct {
 	*aws.Request
-	Input *CreateEmailTemplateInput
-	Copy  func(*CreateEmailTemplateInput) CreateEmailTemplateRequest
+	Input *types.CreateEmailTemplateInput
+	Copy  func(*types.CreateEmailTemplateInput) CreateEmailTemplateRequest
 }
 
 // Send marshals and sends the CreateEmailTemplate API request.
@@ -138,7 +57,7 @@ func (r CreateEmailTemplateRequest) Send(ctx context.Context) (*CreateEmailTempl
 	}
 
 	resp := &CreateEmailTemplateResponse{
-		CreateEmailTemplateOutput: r.Request.Data.(*CreateEmailTemplateOutput),
+		CreateEmailTemplateOutput: r.Request.Data.(*types.CreateEmailTemplateOutput),
 		response:                  &aws.Response{Request: r.Request},
 	}
 
@@ -148,7 +67,7 @@ func (r CreateEmailTemplateRequest) Send(ctx context.Context) (*CreateEmailTempl
 // CreateEmailTemplateResponse is the response type for the
 // CreateEmailTemplate API operation.
 type CreateEmailTemplateResponse struct {
-	*CreateEmailTemplateOutput
+	*types.CreateEmailTemplateOutput
 
 	response *aws.Response
 }

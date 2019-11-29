@@ -6,139 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/batch/types"
 )
-
-type ListJobsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The job ID for an array job. Specifying an array job ID with this parameter
-	// lists all child jobs from within the specified array.
-	ArrayJobId *string `locationName:"arrayJobId" type:"string"`
-
-	// The name or full Amazon Resource Name (ARN) of the job queue with which to
-	// list jobs.
-	JobQueue *string `locationName:"jobQueue" type:"string"`
-
-	// The job status with which to filter jobs in the specified queue. If you do
-	// not specify a status, only RUNNING jobs are returned.
-	JobStatus JobStatus `locationName:"jobStatus" type:"string" enum:"true"`
-
-	// The maximum number of results returned by ListJobs in paginated output. When
-	// this parameter is used, ListJobs only returns maxResults results in a single
-	// page along with a nextToken response element. The remaining results of the
-	// initial request can be seen by sending another ListJobs request with the
-	// returned nextToken value. This value can be between 1 and 100. If this parameter
-	// is not used, then ListJobs returns up to 100 results and a nextToken value
-	// if applicable.
-	MaxResults *int64 `locationName:"maxResults" type:"integer"`
-
-	// The job ID for a multi-node parallel job. Specifying a multi-node parallel
-	// job ID with this parameter lists all nodes that are associated with the specified
-	// job.
-	MultiNodeJobId *string `locationName:"multiNodeJobId" type:"string"`
-
-	// The nextToken value returned from a previous paginated ListJobs request where
-	// maxResults was used and the results exceeded the value of that parameter.
-	// Pagination continues from the end of the previous results that returned the
-	// nextToken value. This value is null when there are no more results to return.
-	//
-	// This token should be treated as an opaque identifier that is only used to
-	// retrieve the next items in a list and not for other programmatic purposes.
-	NextToken *string `locationName:"nextToken" type:"string"`
-}
-
-// String returns the string representation
-func (s ListJobsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListJobsInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.ArrayJobId != nil {
-		v := *s.ArrayJobId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "arrayJobId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.JobQueue != nil {
-		v := *s.JobQueue
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "jobQueue", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if len(s.JobStatus) > 0 {
-		v := s.JobStatus
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "jobStatus", protocol.QuotedValue{ValueMarshaler: v}, metadata)
-	}
-	if s.MaxResults != nil {
-		v := *s.MaxResults
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "maxResults", protocol.Int64Value(v), metadata)
-	}
-	if s.MultiNodeJobId != nil {
-		v := *s.MultiNodeJobId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "multiNodeJobId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type ListJobsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A list of job summaries that match the request.
-	//
-	// JobSummaryList is a required field
-	JobSummaryList []JobSummary `locationName:"jobSummaryList" type:"list" required:"true"`
-
-	// The nextToken value to include in a future ListJobs request. When the results
-	// of a ListJobs request exceed maxResults, this value can be used to retrieve
-	// the next page of results. This value is null when there are no more results
-	// to return.
-	NextToken *string `locationName:"nextToken" type:"string"`
-}
-
-// String returns the string representation
-func (s ListJobsOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListJobsOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.JobSummaryList != nil {
-		v := s.JobSummaryList
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "jobSummaryList", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opListJobs = "ListJobs"
 
@@ -166,7 +35,7 @@ const opListJobs = "ListJobs"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/ListJobs
-func (c *Client) ListJobsRequest(input *ListJobsInput) ListJobsRequest {
+func (c *Client) ListJobsRequest(input *types.ListJobsInput) ListJobsRequest {
 	op := &aws.Operation{
 		Name:       opListJobs,
 		HTTPMethod: "POST",
@@ -180,10 +49,10 @@ func (c *Client) ListJobsRequest(input *ListJobsInput) ListJobsRequest {
 	}
 
 	if input == nil {
-		input = &ListJobsInput{}
+		input = &types.ListJobsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListJobsOutput{})
+	req := c.newRequest(op, input, &types.ListJobsOutput{})
 	return ListJobsRequest{Request: req, Input: input, Copy: c.ListJobsRequest}
 }
 
@@ -191,8 +60,8 @@ func (c *Client) ListJobsRequest(input *ListJobsInput) ListJobsRequest {
 // ListJobs API operation.
 type ListJobsRequest struct {
 	*aws.Request
-	Input *ListJobsInput
-	Copy  func(*ListJobsInput) ListJobsRequest
+	Input *types.ListJobsInput
+	Copy  func(*types.ListJobsInput) ListJobsRequest
 }
 
 // Send marshals and sends the ListJobs API request.
@@ -204,7 +73,7 @@ func (r ListJobsRequest) Send(ctx context.Context) (*ListJobsResponse, error) {
 	}
 
 	resp := &ListJobsResponse{
-		ListJobsOutput: r.Request.Data.(*ListJobsOutput),
+		ListJobsOutput: r.Request.Data.(*types.ListJobsOutput),
 		response:       &aws.Response{Request: r.Request},
 	}
 
@@ -234,7 +103,7 @@ func NewListJobsPaginator(req ListJobsRequest) ListJobsPaginator {
 	return ListJobsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListJobsInput
+				var inCpy *types.ListJobsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -254,14 +123,14 @@ type ListJobsPaginator struct {
 	aws.Pager
 }
 
-func (p *ListJobsPaginator) CurrentPage() *ListJobsOutput {
-	return p.Pager.CurrentPage().(*ListJobsOutput)
+func (p *ListJobsPaginator) CurrentPage() *types.ListJobsOutput {
+	return p.Pager.CurrentPage().(*types.ListJobsOutput)
 }
 
 // ListJobsResponse is the response type for the
 // ListJobs API operation.
 type ListJobsResponse struct {
-	*ListJobsOutput
+	*types.ListJobsOutput
 
 	response *aws.Response
 }

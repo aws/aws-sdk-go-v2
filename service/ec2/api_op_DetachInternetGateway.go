@@ -6,62 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/ec2query"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-type DetachInternetGatewayInput struct {
-	_ struct{} `type:"structure"`
-
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have
-	// the required permissions, the error response is DryRunOperation. Otherwise,
-	// it is UnauthorizedOperation.
-	DryRun *bool `locationName:"dryRun" type:"boolean"`
-
-	// The ID of the internet gateway.
-	//
-	// InternetGatewayId is a required field
-	InternetGatewayId *string `locationName:"internetGatewayId" type:"string" required:"true"`
-
-	// The ID of the VPC.
-	//
-	// VpcId is a required field
-	VpcId *string `locationName:"vpcId" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DetachInternetGatewayInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DetachInternetGatewayInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DetachInternetGatewayInput"}
-
-	if s.InternetGatewayId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("InternetGatewayId"))
-	}
-
-	if s.VpcId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("VpcId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DetachInternetGatewayOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DetachInternetGatewayOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDetachInternetGateway = "DetachInternetGateway"
 
@@ -80,7 +28,7 @@ const opDetachInternetGateway = "DetachInternetGateway"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DetachInternetGateway
-func (c *Client) DetachInternetGatewayRequest(input *DetachInternetGatewayInput) DetachInternetGatewayRequest {
+func (c *Client) DetachInternetGatewayRequest(input *types.DetachInternetGatewayInput) DetachInternetGatewayRequest {
 	op := &aws.Operation{
 		Name:       opDetachInternetGateway,
 		HTTPMethod: "POST",
@@ -88,10 +36,10 @@ func (c *Client) DetachInternetGatewayRequest(input *DetachInternetGatewayInput)
 	}
 
 	if input == nil {
-		input = &DetachInternetGatewayInput{}
+		input = &types.DetachInternetGatewayInput{}
 	}
 
-	req := c.newRequest(op, input, &DetachInternetGatewayOutput{})
+	req := c.newRequest(op, input, &types.DetachInternetGatewayOutput{})
 	req.Handlers.Unmarshal.Remove(ec2query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return DetachInternetGatewayRequest{Request: req, Input: input, Copy: c.DetachInternetGatewayRequest}
@@ -101,8 +49,8 @@ func (c *Client) DetachInternetGatewayRequest(input *DetachInternetGatewayInput)
 // DetachInternetGateway API operation.
 type DetachInternetGatewayRequest struct {
 	*aws.Request
-	Input *DetachInternetGatewayInput
-	Copy  func(*DetachInternetGatewayInput) DetachInternetGatewayRequest
+	Input *types.DetachInternetGatewayInput
+	Copy  func(*types.DetachInternetGatewayInput) DetachInternetGatewayRequest
 }
 
 // Send marshals and sends the DetachInternetGateway API request.
@@ -114,7 +62,7 @@ func (r DetachInternetGatewayRequest) Send(ctx context.Context) (*DetachInternet
 	}
 
 	resp := &DetachInternetGatewayResponse{
-		DetachInternetGatewayOutput: r.Request.Data.(*DetachInternetGatewayOutput),
+		DetachInternetGatewayOutput: r.Request.Data.(*types.DetachInternetGatewayOutput),
 		response:                    &aws.Response{Request: r.Request},
 	}
 
@@ -124,7 +72,7 @@ func (r DetachInternetGatewayRequest) Send(ctx context.Context) (*DetachInternet
 // DetachInternetGatewayResponse is the response type for the
 // DetachInternetGateway API operation.
 type DetachInternetGatewayResponse struct {
-	*DetachInternetGatewayOutput
+	*types.DetachInternetGatewayOutput
 
 	response *aws.Response
 }

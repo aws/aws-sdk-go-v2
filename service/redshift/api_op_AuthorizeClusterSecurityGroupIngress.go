@@ -6,61 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/redshift/types"
 )
-
-type AuthorizeClusterSecurityGroupIngressInput struct {
-	_ struct{} `type:"structure"`
-
-	// The IP range to be added the Amazon Redshift security group.
-	CIDRIP *string `type:"string"`
-
-	// The name of the security group to which the ingress rule is added.
-	//
-	// ClusterSecurityGroupName is a required field
-	ClusterSecurityGroupName *string `type:"string" required:"true"`
-
-	// The EC2 security group to be added the Amazon Redshift security group.
-	EC2SecurityGroupName *string `type:"string"`
-
-	// The AWS account number of the owner of the security group specified by the
-	// EC2SecurityGroupName parameter. The AWS Access Key ID is not an acceptable
-	// value.
-	//
-	// Example: 111122223333
-	EC2SecurityGroupOwnerId *string `type:"string"`
-}
-
-// String returns the string representation
-func (s AuthorizeClusterSecurityGroupIngressInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *AuthorizeClusterSecurityGroupIngressInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "AuthorizeClusterSecurityGroupIngressInput"}
-
-	if s.ClusterSecurityGroupName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ClusterSecurityGroupName"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type AuthorizeClusterSecurityGroupIngressOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Describes a security group.
-	ClusterSecurityGroup *ClusterSecurityGroup `type:"structure"`
-}
-
-// String returns the string representation
-func (s AuthorizeClusterSecurityGroupIngressOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opAuthorizeClusterSecurityGroupIngress = "AuthorizeClusterSecurityGroupIngress"
 
@@ -96,7 +43,7 @@ const opAuthorizeClusterSecurityGroupIngress = "AuthorizeClusterSecurityGroupIng
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/AuthorizeClusterSecurityGroupIngress
-func (c *Client) AuthorizeClusterSecurityGroupIngressRequest(input *AuthorizeClusterSecurityGroupIngressInput) AuthorizeClusterSecurityGroupIngressRequest {
+func (c *Client) AuthorizeClusterSecurityGroupIngressRequest(input *types.AuthorizeClusterSecurityGroupIngressInput) AuthorizeClusterSecurityGroupIngressRequest {
 	op := &aws.Operation{
 		Name:       opAuthorizeClusterSecurityGroupIngress,
 		HTTPMethod: "POST",
@@ -104,10 +51,10 @@ func (c *Client) AuthorizeClusterSecurityGroupIngressRequest(input *AuthorizeClu
 	}
 
 	if input == nil {
-		input = &AuthorizeClusterSecurityGroupIngressInput{}
+		input = &types.AuthorizeClusterSecurityGroupIngressInput{}
 	}
 
-	req := c.newRequest(op, input, &AuthorizeClusterSecurityGroupIngressOutput{})
+	req := c.newRequest(op, input, &types.AuthorizeClusterSecurityGroupIngressOutput{})
 	return AuthorizeClusterSecurityGroupIngressRequest{Request: req, Input: input, Copy: c.AuthorizeClusterSecurityGroupIngressRequest}
 }
 
@@ -115,8 +62,8 @@ func (c *Client) AuthorizeClusterSecurityGroupIngressRequest(input *AuthorizeClu
 // AuthorizeClusterSecurityGroupIngress API operation.
 type AuthorizeClusterSecurityGroupIngressRequest struct {
 	*aws.Request
-	Input *AuthorizeClusterSecurityGroupIngressInput
-	Copy  func(*AuthorizeClusterSecurityGroupIngressInput) AuthorizeClusterSecurityGroupIngressRequest
+	Input *types.AuthorizeClusterSecurityGroupIngressInput
+	Copy  func(*types.AuthorizeClusterSecurityGroupIngressInput) AuthorizeClusterSecurityGroupIngressRequest
 }
 
 // Send marshals and sends the AuthorizeClusterSecurityGroupIngress API request.
@@ -128,7 +75,7 @@ func (r AuthorizeClusterSecurityGroupIngressRequest) Send(ctx context.Context) (
 	}
 
 	resp := &AuthorizeClusterSecurityGroupIngressResponse{
-		AuthorizeClusterSecurityGroupIngressOutput: r.Request.Data.(*AuthorizeClusterSecurityGroupIngressOutput),
+		AuthorizeClusterSecurityGroupIngressOutput: r.Request.Data.(*types.AuthorizeClusterSecurityGroupIngressOutput),
 		response: &aws.Response{Request: r.Request},
 	}
 
@@ -138,7 +85,7 @@ func (r AuthorizeClusterSecurityGroupIngressRequest) Send(ctx context.Context) (
 // AuthorizeClusterSecurityGroupIngressResponse is the response type for the
 // AuthorizeClusterSecurityGroupIngress API operation.
 type AuthorizeClusterSecurityGroupIngressResponse struct {
-	*AuthorizeClusterSecurityGroupIngressOutput
+	*types.AuthorizeClusterSecurityGroupIngressOutput
 
 	response *aws.Response
 }

@@ -6,63 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/licensemanager/types"
 )
-
-type UpdateLicenseConfigurationInput struct {
-	_ struct{} `type:"structure"`
-
-	// New human-friendly description of the license configuration.
-	Description *string `type:"string"`
-
-	// ARN for a license configuration.
-	//
-	// LicenseConfigurationArn is a required field
-	LicenseConfigurationArn *string `type:"string" required:"true"`
-
-	// New status of the license configuration (ACTIVE or INACTIVE).
-	LicenseConfigurationStatus LicenseConfigurationStatus `type:"string" enum:"true"`
-
-	// New number of licenses managed by the license configuration.
-	LicenseCount *int64 `type:"long"`
-
-	// Sets the number of available licenses as a hard limit.
-	LicenseCountHardLimit *bool `type:"boolean"`
-
-	// List of flexible text strings designating license rules.
-	LicenseRules []string `type:"list"`
-
-	// New name of the license configuration.
-	Name *string `type:"string"`
-}
-
-// String returns the string representation
-func (s UpdateLicenseConfigurationInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateLicenseConfigurationInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateLicenseConfigurationInput"}
-
-	if s.LicenseConfigurationArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("LicenseConfigurationArn"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type UpdateLicenseConfigurationOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s UpdateLicenseConfigurationOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opUpdateLicenseConfiguration = "UpdateLicenseConfiguration"
 
@@ -84,7 +29,7 @@ const opUpdateLicenseConfiguration = "UpdateLicenseConfiguration"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/license-manager-2018-08-01/UpdateLicenseConfiguration
-func (c *Client) UpdateLicenseConfigurationRequest(input *UpdateLicenseConfigurationInput) UpdateLicenseConfigurationRequest {
+func (c *Client) UpdateLicenseConfigurationRequest(input *types.UpdateLicenseConfigurationInput) UpdateLicenseConfigurationRequest {
 	op := &aws.Operation{
 		Name:       opUpdateLicenseConfiguration,
 		HTTPMethod: "POST",
@@ -92,10 +37,10 @@ func (c *Client) UpdateLicenseConfigurationRequest(input *UpdateLicenseConfigura
 	}
 
 	if input == nil {
-		input = &UpdateLicenseConfigurationInput{}
+		input = &types.UpdateLicenseConfigurationInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateLicenseConfigurationOutput{})
+	req := c.newRequest(op, input, &types.UpdateLicenseConfigurationOutput{})
 	return UpdateLicenseConfigurationRequest{Request: req, Input: input, Copy: c.UpdateLicenseConfigurationRequest}
 }
 
@@ -103,8 +48,8 @@ func (c *Client) UpdateLicenseConfigurationRequest(input *UpdateLicenseConfigura
 // UpdateLicenseConfiguration API operation.
 type UpdateLicenseConfigurationRequest struct {
 	*aws.Request
-	Input *UpdateLicenseConfigurationInput
-	Copy  func(*UpdateLicenseConfigurationInput) UpdateLicenseConfigurationRequest
+	Input *types.UpdateLicenseConfigurationInput
+	Copy  func(*types.UpdateLicenseConfigurationInput) UpdateLicenseConfigurationRequest
 }
 
 // Send marshals and sends the UpdateLicenseConfiguration API request.
@@ -116,7 +61,7 @@ func (r UpdateLicenseConfigurationRequest) Send(ctx context.Context) (*UpdateLic
 	}
 
 	resp := &UpdateLicenseConfigurationResponse{
-		UpdateLicenseConfigurationOutput: r.Request.Data.(*UpdateLicenseConfigurationOutput),
+		UpdateLicenseConfigurationOutput: r.Request.Data.(*types.UpdateLicenseConfigurationOutput),
 		response:                         &aws.Response{Request: r.Request},
 	}
 
@@ -126,7 +71,7 @@ func (r UpdateLicenseConfigurationRequest) Send(ctx context.Context) (*UpdateLic
 // UpdateLicenseConfigurationResponse is the response type for the
 // UpdateLicenseConfiguration API operation.
 type UpdateLicenseConfigurationResponse struct {
-	*UpdateLicenseConfigurationOutput
+	*types.UpdateLicenseConfigurationOutput
 
 	response *aws.Response
 }

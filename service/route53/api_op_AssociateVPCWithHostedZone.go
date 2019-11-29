@@ -6,115 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/route53/types"
 )
-
-// A complex type that contains information about the request to associate a
-// VPC with a private hosted zone.
-type AssociateVPCWithHostedZoneInput struct {
-	_ struct{} `locationName:"AssociateVPCWithHostedZoneRequest" type:"structure" xmlURI:"https://route53.amazonaws.com/doc/2013-04-01/"`
-
-	// Optional: A comment about the association request.
-	Comment *string `type:"string"`
-
-	// The ID of the private hosted zone that you want to associate an Amazon VPC
-	// with.
-	//
-	// Note that you can't associate a VPC with a hosted zone that doesn't have
-	// an existing VPC association.
-	//
-	// HostedZoneId is a required field
-	HostedZoneId *string `location:"uri" locationName:"Id" type:"string" required:"true"`
-
-	// A complex type that contains information about the VPC that you want to associate
-	// with a private hosted zone.
-	//
-	// VPC is a required field
-	VPC *VPC `type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s AssociateVPCWithHostedZoneInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *AssociateVPCWithHostedZoneInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "AssociateVPCWithHostedZoneInput"}
-
-	if s.HostedZoneId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("HostedZoneId"))
-	}
-
-	if s.VPC == nil {
-		invalidParams.Add(aws.NewErrParamRequired("VPC"))
-	}
-	if s.VPC != nil {
-		if err := s.VPC.Validate(); err != nil {
-			invalidParams.AddNested("VPC", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s AssociateVPCWithHostedZoneInput) MarshalFields(e protocol.FieldEncoder) error {
-
-	e.SetFields(protocol.BodyTarget, "AssociateVPCWithHostedZoneRequest", protocol.FieldMarshalerFunc(func(e protocol.FieldEncoder) error {
-		if s.Comment != nil {
-			v := *s.Comment
-
-			metadata := protocol.Metadata{}
-			e.SetValue(protocol.BodyTarget, "Comment", protocol.StringValue(v), metadata)
-		}
-		if s.VPC != nil {
-			v := s.VPC
-
-			metadata := protocol.Metadata{}
-			e.SetFields(protocol.BodyTarget, "VPC", v, metadata)
-		}
-		return nil
-	}), protocol.Metadata{XMLNamespaceURI: "https://route53.amazonaws.com/doc/2013-04-01/"})
-	if s.HostedZoneId != nil {
-		v := *s.HostedZoneId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "Id", protocol.StringValue(v), metadata)
-	}
-	return nil
-}
-
-// A complex type that contains the response information for the AssociateVPCWithHostedZone
-// request.
-type AssociateVPCWithHostedZoneOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A complex type that describes the changes made to your hosted zone.
-	//
-	// ChangeInfo is a required field
-	ChangeInfo *ChangeInfo `type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s AssociateVPCWithHostedZoneOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s AssociateVPCWithHostedZoneOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.ChangeInfo != nil {
-		v := s.ChangeInfo
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "ChangeInfo", v, metadata)
-	}
-	return nil
-}
 
 const opAssociateVPCWithHostedZone = "AssociateVPCWithHostedZone"
 
@@ -140,7 +33,7 @@ const opAssociateVPCWithHostedZone = "AssociateVPCWithHostedZone"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/AssociateVPCWithHostedZone
-func (c *Client) AssociateVPCWithHostedZoneRequest(input *AssociateVPCWithHostedZoneInput) AssociateVPCWithHostedZoneRequest {
+func (c *Client) AssociateVPCWithHostedZoneRequest(input *types.AssociateVPCWithHostedZoneInput) AssociateVPCWithHostedZoneRequest {
 	op := &aws.Operation{
 		Name:       opAssociateVPCWithHostedZone,
 		HTTPMethod: "POST",
@@ -148,10 +41,10 @@ func (c *Client) AssociateVPCWithHostedZoneRequest(input *AssociateVPCWithHosted
 	}
 
 	if input == nil {
-		input = &AssociateVPCWithHostedZoneInput{}
+		input = &types.AssociateVPCWithHostedZoneInput{}
 	}
 
-	req := c.newRequest(op, input, &AssociateVPCWithHostedZoneOutput{})
+	req := c.newRequest(op, input, &types.AssociateVPCWithHostedZoneOutput{})
 	return AssociateVPCWithHostedZoneRequest{Request: req, Input: input, Copy: c.AssociateVPCWithHostedZoneRequest}
 }
 
@@ -159,8 +52,8 @@ func (c *Client) AssociateVPCWithHostedZoneRequest(input *AssociateVPCWithHosted
 // AssociateVPCWithHostedZone API operation.
 type AssociateVPCWithHostedZoneRequest struct {
 	*aws.Request
-	Input *AssociateVPCWithHostedZoneInput
-	Copy  func(*AssociateVPCWithHostedZoneInput) AssociateVPCWithHostedZoneRequest
+	Input *types.AssociateVPCWithHostedZoneInput
+	Copy  func(*types.AssociateVPCWithHostedZoneInput) AssociateVPCWithHostedZoneRequest
 }
 
 // Send marshals and sends the AssociateVPCWithHostedZone API request.
@@ -172,7 +65,7 @@ func (r AssociateVPCWithHostedZoneRequest) Send(ctx context.Context) (*Associate
 	}
 
 	resp := &AssociateVPCWithHostedZoneResponse{
-		AssociateVPCWithHostedZoneOutput: r.Request.Data.(*AssociateVPCWithHostedZoneOutput),
+		AssociateVPCWithHostedZoneOutput: r.Request.Data.(*types.AssociateVPCWithHostedZoneOutput),
 		response:                         &aws.Response{Request: r.Request},
 	}
 
@@ -182,7 +75,7 @@ func (r AssociateVPCWithHostedZoneRequest) Send(ctx context.Context) (*Associate
 // AssociateVPCWithHostedZoneResponse is the response type for the
 // AssociateVPCWithHostedZone API operation.
 type AssociateVPCWithHostedZoneResponse struct {
-	*AssociateVPCWithHostedZoneOutput
+	*types.AssociateVPCWithHostedZoneOutput
 
 	response *aws.Response
 }

@@ -4,112 +4,10 @@ package chime
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/chime/types"
 )
-
-type BatchUpdateUserInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Chime account ID.
-	//
-	// AccountId is a required field
-	AccountId *string `location:"uri" locationName:"accountId" type:"string" required:"true"`
-
-	// The request containing the user IDs and details to update.
-	//
-	// UpdateUserRequestItems is a required field
-	UpdateUserRequestItems []UpdateUserRequestItem `type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s BatchUpdateUserInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *BatchUpdateUserInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "BatchUpdateUserInput"}
-
-	if s.AccountId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("AccountId"))
-	}
-
-	if s.UpdateUserRequestItems == nil {
-		invalidParams.Add(aws.NewErrParamRequired("UpdateUserRequestItems"))
-	}
-	if s.UpdateUserRequestItems != nil {
-		for i, v := range s.UpdateUserRequestItems {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "UpdateUserRequestItems", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s BatchUpdateUserInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.UpdateUserRequestItems != nil {
-		v := s.UpdateUserRequestItems
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "UpdateUserRequestItems", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	if s.AccountId != nil {
-		v := *s.AccountId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "accountId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type BatchUpdateUserOutput struct {
-	_ struct{} `type:"structure"`
-
-	// If the BatchUpdateUser action fails for one or more of the user IDs in the
-	// request, a list of the user IDs is returned, along with error codes and error
-	// messages.
-	UserErrors []UserError `type:"list"`
-}
-
-// String returns the string representation
-func (s BatchUpdateUserOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s BatchUpdateUserOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.UserErrors != nil {
-		v := s.UserErrors
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "UserErrors", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	return nil
-}
 
 const opBatchUpdateUser = "BatchUpdateUser"
 
@@ -128,7 +26,7 @@ const opBatchUpdateUser = "BatchUpdateUser"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/BatchUpdateUser
-func (c *Client) BatchUpdateUserRequest(input *BatchUpdateUserInput) BatchUpdateUserRequest {
+func (c *Client) BatchUpdateUserRequest(input *types.BatchUpdateUserInput) BatchUpdateUserRequest {
 	op := &aws.Operation{
 		Name:       opBatchUpdateUser,
 		HTTPMethod: "POST",
@@ -136,10 +34,10 @@ func (c *Client) BatchUpdateUserRequest(input *BatchUpdateUserInput) BatchUpdate
 	}
 
 	if input == nil {
-		input = &BatchUpdateUserInput{}
+		input = &types.BatchUpdateUserInput{}
 	}
 
-	req := c.newRequest(op, input, &BatchUpdateUserOutput{})
+	req := c.newRequest(op, input, &types.BatchUpdateUserOutput{})
 	return BatchUpdateUserRequest{Request: req, Input: input, Copy: c.BatchUpdateUserRequest}
 }
 
@@ -147,8 +45,8 @@ func (c *Client) BatchUpdateUserRequest(input *BatchUpdateUserInput) BatchUpdate
 // BatchUpdateUser API operation.
 type BatchUpdateUserRequest struct {
 	*aws.Request
-	Input *BatchUpdateUserInput
-	Copy  func(*BatchUpdateUserInput) BatchUpdateUserRequest
+	Input *types.BatchUpdateUserInput
+	Copy  func(*types.BatchUpdateUserInput) BatchUpdateUserRequest
 }
 
 // Send marshals and sends the BatchUpdateUser API request.
@@ -160,7 +58,7 @@ func (r BatchUpdateUserRequest) Send(ctx context.Context) (*BatchUpdateUserRespo
 	}
 
 	resp := &BatchUpdateUserResponse{
-		BatchUpdateUserOutput: r.Request.Data.(*BatchUpdateUserOutput),
+		BatchUpdateUserOutput: r.Request.Data.(*types.BatchUpdateUserOutput),
 		response:              &aws.Response{Request: r.Request},
 	}
 
@@ -170,7 +68,7 @@ func (r BatchUpdateUserRequest) Send(ctx context.Context) (*BatchUpdateUserRespo
 // BatchUpdateUserResponse is the response type for the
 // BatchUpdateUser API operation.
 type BatchUpdateUserResponse struct {
-	*BatchUpdateUserOutput
+	*types.BatchUpdateUserOutput
 
 	response *aws.Response
 }

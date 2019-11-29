@@ -6,96 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
+	"github.com/aws/aws-sdk-go-v2/service/acm/types"
 )
-
-type ResendValidationEmailInput struct {
-	_ struct{} `type:"structure"`
-
-	// String that contains the ARN of the requested certificate. The certificate
-	// ARN is generated and returned by the RequestCertificate action as soon as
-	// the request is made. By default, using this parameter causes email to be
-	// sent to all top-level domains you specified in the certificate request. The
-	// ARN must be of the form:
-	//
-	// arn:aws:acm:us-east-1:123456789012:certificate/12345678-1234-1234-1234-123456789012
-	//
-	// CertificateArn is a required field
-	CertificateArn *string `min:"20" type:"string" required:"true"`
-
-	// The fully qualified domain name (FQDN) of the certificate that needs to be
-	// validated.
-	//
-	// Domain is a required field
-	Domain *string `min:"1" type:"string" required:"true"`
-
-	// The base validation domain that will act as the suffix of the email addresses
-	// that are used to send the emails. This must be the same as the Domain value
-	// or a superdomain of the Domain value. For example, if you requested a certificate
-	// for site.subdomain.example.com and specify a ValidationDomain of subdomain.example.com,
-	// ACM sends email to the domain registrant, technical contact, and administrative
-	// contact in WHOIS and the following five addresses:
-	//
-	//    * admin@subdomain.example.com
-	//
-	//    * administrator@subdomain.example.com
-	//
-	//    * hostmaster@subdomain.example.com
-	//
-	//    * postmaster@subdomain.example.com
-	//
-	//    * webmaster@subdomain.example.com
-	//
-	// ValidationDomain is a required field
-	ValidationDomain *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s ResendValidationEmailInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ResendValidationEmailInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ResendValidationEmailInput"}
-
-	if s.CertificateArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("CertificateArn"))
-	}
-	if s.CertificateArn != nil && len(*s.CertificateArn) < 20 {
-		invalidParams.Add(aws.NewErrParamMinLen("CertificateArn", 20))
-	}
-
-	if s.Domain == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Domain"))
-	}
-	if s.Domain != nil && len(*s.Domain) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Domain", 1))
-	}
-
-	if s.ValidationDomain == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ValidationDomain"))
-	}
-	if s.ValidationDomain != nil && len(*s.ValidationDomain) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ValidationDomain", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ResendValidationEmailOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s ResendValidationEmailOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opResendValidationEmail = "ResendValidationEmail"
 
@@ -122,7 +36,7 @@ const opResendValidationEmail = "ResendValidationEmail"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/ResendValidationEmail
-func (c *Client) ResendValidationEmailRequest(input *ResendValidationEmailInput) ResendValidationEmailRequest {
+func (c *Client) ResendValidationEmailRequest(input *types.ResendValidationEmailInput) ResendValidationEmailRequest {
 	op := &aws.Operation{
 		Name:       opResendValidationEmail,
 		HTTPMethod: "POST",
@@ -130,10 +44,10 @@ func (c *Client) ResendValidationEmailRequest(input *ResendValidationEmailInput)
 	}
 
 	if input == nil {
-		input = &ResendValidationEmailInput{}
+		input = &types.ResendValidationEmailInput{}
 	}
 
-	req := c.newRequest(op, input, &ResendValidationEmailOutput{})
+	req := c.newRequest(op, input, &types.ResendValidationEmailOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return ResendValidationEmailRequest{Request: req, Input: input, Copy: c.ResendValidationEmailRequest}
@@ -143,8 +57,8 @@ func (c *Client) ResendValidationEmailRequest(input *ResendValidationEmailInput)
 // ResendValidationEmail API operation.
 type ResendValidationEmailRequest struct {
 	*aws.Request
-	Input *ResendValidationEmailInput
-	Copy  func(*ResendValidationEmailInput) ResendValidationEmailRequest
+	Input *types.ResendValidationEmailInput
+	Copy  func(*types.ResendValidationEmailInput) ResendValidationEmailRequest
 }
 
 // Send marshals and sends the ResendValidationEmail API request.
@@ -156,7 +70,7 @@ func (r ResendValidationEmailRequest) Send(ctx context.Context) (*ResendValidati
 	}
 
 	resp := &ResendValidationEmailResponse{
-		ResendValidationEmailOutput: r.Request.Data.(*ResendValidationEmailOutput),
+		ResendValidationEmailOutput: r.Request.Data.(*types.ResendValidationEmailOutput),
 		response:                    &aws.Response{Request: r.Request},
 	}
 
@@ -166,7 +80,7 @@ func (r ResendValidationEmailRequest) Send(ctx context.Context) (*ResendValidati
 // ResendValidationEmailResponse is the response type for the
 // ResendValidationEmail API operation.
 type ResendValidationEmailResponse struct {
-	*ResendValidationEmailOutput
+	*types.ResendValidationEmailOutput
 
 	response *aws.Response
 }

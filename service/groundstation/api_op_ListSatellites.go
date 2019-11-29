@@ -6,77 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/groundstation/types"
 )
-
-type ListSatellitesInput struct {
-	_ struct{} `type:"structure"`
-
-	MaxResults *int64 `location:"querystring" locationName:"maxResults" type:"integer"`
-
-	NextToken *string `location:"querystring" locationName:"nextToken" type:"string"`
-}
-
-// String returns the string representation
-func (s ListSatellitesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListSatellitesInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.MaxResults != nil {
-		v := *s.MaxResults
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "maxResults", protocol.Int64Value(v), metadata)
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type ListSatellitesOutput struct {
-	_ struct{} `type:"structure"`
-
-	NextToken *string `locationName:"nextToken" type:"string"`
-
-	Satellites []SatelliteListItem `locationName:"satellites" type:"list"`
-}
-
-// String returns the string representation
-func (s ListSatellitesOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListSatellitesOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Satellites != nil {
-		v := s.Satellites
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "satellites", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	return nil
-}
 
 const opListSatellites = "ListSatellites"
 
@@ -93,7 +24,7 @@ const opListSatellites = "ListSatellites"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/groundstation-2019-05-23/ListSatellites
-func (c *Client) ListSatellitesRequest(input *ListSatellitesInput) ListSatellitesRequest {
+func (c *Client) ListSatellitesRequest(input *types.ListSatellitesInput) ListSatellitesRequest {
 	op := &aws.Operation{
 		Name:       opListSatellites,
 		HTTPMethod: "GET",
@@ -107,10 +38,10 @@ func (c *Client) ListSatellitesRequest(input *ListSatellitesInput) ListSatellite
 	}
 
 	if input == nil {
-		input = &ListSatellitesInput{}
+		input = &types.ListSatellitesInput{}
 	}
 
-	req := c.newRequest(op, input, &ListSatellitesOutput{})
+	req := c.newRequest(op, input, &types.ListSatellitesOutput{})
 	return ListSatellitesRequest{Request: req, Input: input, Copy: c.ListSatellitesRequest}
 }
 
@@ -118,8 +49,8 @@ func (c *Client) ListSatellitesRequest(input *ListSatellitesInput) ListSatellite
 // ListSatellites API operation.
 type ListSatellitesRequest struct {
 	*aws.Request
-	Input *ListSatellitesInput
-	Copy  func(*ListSatellitesInput) ListSatellitesRequest
+	Input *types.ListSatellitesInput
+	Copy  func(*types.ListSatellitesInput) ListSatellitesRequest
 }
 
 // Send marshals and sends the ListSatellites API request.
@@ -131,7 +62,7 @@ func (r ListSatellitesRequest) Send(ctx context.Context) (*ListSatellitesRespons
 	}
 
 	resp := &ListSatellitesResponse{
-		ListSatellitesOutput: r.Request.Data.(*ListSatellitesOutput),
+		ListSatellitesOutput: r.Request.Data.(*types.ListSatellitesOutput),
 		response:             &aws.Response{Request: r.Request},
 	}
 
@@ -161,7 +92,7 @@ func NewListSatellitesPaginator(req ListSatellitesRequest) ListSatellitesPaginat
 	return ListSatellitesPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListSatellitesInput
+				var inCpy *types.ListSatellitesInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -181,14 +112,14 @@ type ListSatellitesPaginator struct {
 	aws.Pager
 }
 
-func (p *ListSatellitesPaginator) CurrentPage() *ListSatellitesOutput {
-	return p.Pager.CurrentPage().(*ListSatellitesOutput)
+func (p *ListSatellitesPaginator) CurrentPage() *types.ListSatellitesOutput {
+	return p.Pager.CurrentPage().(*types.ListSatellitesOutput)
 }
 
 // ListSatellitesResponse is the response type for the
 // ListSatellites API operation.
 type ListSatellitesResponse struct {
-	*ListSatellitesOutput
+	*types.ListSatellitesOutput
 
 	response *aws.Response
 }

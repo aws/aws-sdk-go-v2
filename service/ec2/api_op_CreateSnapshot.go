@@ -4,120 +4,10 @@ package ec2
 
 import (
 	"context"
-	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-// Contains the parameters for CreateSnapshot.
-type CreateSnapshotInput struct {
-	_ struct{} `type:"structure"`
-
-	// A description for the snapshot.
-	Description *string `type:"string"`
-
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have
-	// the required permissions, the error response is DryRunOperation. Otherwise,
-	// it is UnauthorizedOperation.
-	DryRun *bool `locationName:"dryRun" type:"boolean"`
-
-	// The tags to apply to the snapshot during creation.
-	TagSpecifications []TagSpecification `locationName:"TagSpecification" locationNameList:"item" type:"list"`
-
-	// The ID of the EBS volume.
-	//
-	// VolumeId is a required field
-	VolumeId *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s CreateSnapshotInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateSnapshotInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateSnapshotInput"}
-
-	if s.VolumeId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("VolumeId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Describes a snapshot.
-type CreateSnapshotOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The data encryption key identifier for the snapshot. This value is a unique
-	// identifier that corresponds to the data encryption key that was used to encrypt
-	// the original volume or snapshot copy. Because data encryption keys are inherited
-	// by volumes created from snapshots, and vice versa, if snapshots share the
-	// same data encryption key identifier, then they belong to the same volume/snapshot
-	// lineage. This parameter is only returned by DescribeSnapshots.
-	DataEncryptionKeyId *string `locationName:"dataEncryptionKeyId" type:"string"`
-
-	// The description for the snapshot.
-	Description *string `locationName:"description" type:"string"`
-
-	// Indicates whether the snapshot is encrypted.
-	Encrypted *bool `locationName:"encrypted" type:"boolean"`
-
-	// The Amazon Resource Name (ARN) of the AWS Key Management Service (AWS KMS)
-	// customer master key (CMK) that was used to protect the volume encryption
-	// key for the parent volume.
-	KmsKeyId *string `locationName:"kmsKeyId" type:"string"`
-
-	// Value from an Amazon-maintained list (amazon | self | all | aws-marketplace
-	// | microsoft) of snapshot owners. Not to be confused with the user-configured
-	// AWS account alias, which is set from the IAM console.
-	OwnerAlias *string `locationName:"ownerAlias" type:"string"`
-
-	// The AWS account ID of the EBS snapshot owner.
-	OwnerId *string `locationName:"ownerId" type:"string"`
-
-	// The progress of the snapshot, as a percentage.
-	Progress *string `locationName:"progress" type:"string"`
-
-	// The ID of the snapshot. Each snapshot receives a unique identifier when it
-	// is created.
-	SnapshotId *string `locationName:"snapshotId" type:"string"`
-
-	// The time stamp when the snapshot was initiated.
-	StartTime *time.Time `locationName:"startTime" type:"timestamp"`
-
-	// The snapshot state.
-	State SnapshotState `locationName:"status" type:"string" enum:"true"`
-
-	// Encrypted Amazon EBS snapshots are copied asynchronously. If a snapshot copy
-	// operation fails (for example, if the proper AWS Key Management Service (AWS
-	// KMS) permissions are not obtained) this field displays error state details
-	// to help you diagnose why the error occurred. This parameter is only returned
-	// by DescribeSnapshots.
-	StateMessage *string `locationName:"statusMessage" type:"string"`
-
-	// Any tags assigned to the snapshot.
-	Tags []Tag `locationName:"tagSet" locationNameList:"item" type:"list"`
-
-	// The ID of the volume that was used to create the snapshot. Snapshots created
-	// by the CopySnapshot action have an arbitrary volume ID that should not be
-	// used for any purpose.
-	VolumeId *string `locationName:"volumeId" type:"string"`
-
-	// The size of the volume, in GiB.
-	VolumeSize *int64 `locationName:"volumeSize" type:"integer"`
-}
-
-// String returns the string representation
-func (s CreateSnapshotOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCreateSnapshot = "CreateSnapshot"
 
@@ -165,7 +55,7 @@ const opCreateSnapshot = "CreateSnapshot"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateSnapshot
-func (c *Client) CreateSnapshotRequest(input *CreateSnapshotInput) CreateSnapshotRequest {
+func (c *Client) CreateSnapshotRequest(input *types.CreateSnapshotInput) CreateSnapshotRequest {
 	op := &aws.Operation{
 		Name:       opCreateSnapshot,
 		HTTPMethod: "POST",
@@ -173,10 +63,10 @@ func (c *Client) CreateSnapshotRequest(input *CreateSnapshotInput) CreateSnapsho
 	}
 
 	if input == nil {
-		input = &CreateSnapshotInput{}
+		input = &types.CreateSnapshotInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateSnapshotOutput{})
+	req := c.newRequest(op, input, &types.CreateSnapshotOutput{})
 	return CreateSnapshotRequest{Request: req, Input: input, Copy: c.CreateSnapshotRequest}
 }
 
@@ -184,8 +74,8 @@ func (c *Client) CreateSnapshotRequest(input *CreateSnapshotInput) CreateSnapsho
 // CreateSnapshot API operation.
 type CreateSnapshotRequest struct {
 	*aws.Request
-	Input *CreateSnapshotInput
-	Copy  func(*CreateSnapshotInput) CreateSnapshotRequest
+	Input *types.CreateSnapshotInput
+	Copy  func(*types.CreateSnapshotInput) CreateSnapshotRequest
 }
 
 // Send marshals and sends the CreateSnapshot API request.
@@ -197,7 +87,7 @@ func (r CreateSnapshotRequest) Send(ctx context.Context) (*CreateSnapshotRespons
 	}
 
 	resp := &CreateSnapshotResponse{
-		CreateSnapshotOutput: r.Request.Data.(*CreateSnapshotOutput),
+		CreateSnapshotOutput: r.Request.Data.(*types.CreateSnapshotOutput),
 		response:             &aws.Response{Request: r.Request},
 	}
 
@@ -207,7 +97,7 @@ func (r CreateSnapshotRequest) Send(ctx context.Context) (*CreateSnapshotRespons
 // CreateSnapshotResponse is the response type for the
 // CreateSnapshot API operation.
 type CreateSnapshotResponse struct {
-	*CreateSnapshotOutput
+	*types.CreateSnapshotOutput
 
 	response *aws.Response
 }

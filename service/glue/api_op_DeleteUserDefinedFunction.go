@@ -6,67 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/glue/types"
 )
-
-type DeleteUserDefinedFunctionInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the Data Catalog where the function to be deleted is located. If
-	// none is supplied, the AWS account ID is used by default.
-	CatalogId *string `min:"1" type:"string"`
-
-	// The name of the catalog database where the function is located.
-	//
-	// DatabaseName is a required field
-	DatabaseName *string `min:"1" type:"string" required:"true"`
-
-	// The name of the function definition to be deleted.
-	//
-	// FunctionName is a required field
-	FunctionName *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteUserDefinedFunctionInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteUserDefinedFunctionInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteUserDefinedFunctionInput"}
-	if s.CatalogId != nil && len(*s.CatalogId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("CatalogId", 1))
-	}
-
-	if s.DatabaseName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DatabaseName"))
-	}
-	if s.DatabaseName != nil && len(*s.DatabaseName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("DatabaseName", 1))
-	}
-
-	if s.FunctionName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("FunctionName"))
-	}
-	if s.FunctionName != nil && len(*s.FunctionName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("FunctionName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteUserDefinedFunctionOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteUserDefinedFunctionOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteUserDefinedFunction = "DeleteUserDefinedFunction"
 
@@ -83,7 +24,7 @@ const opDeleteUserDefinedFunction = "DeleteUserDefinedFunction"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DeleteUserDefinedFunction
-func (c *Client) DeleteUserDefinedFunctionRequest(input *DeleteUserDefinedFunctionInput) DeleteUserDefinedFunctionRequest {
+func (c *Client) DeleteUserDefinedFunctionRequest(input *types.DeleteUserDefinedFunctionInput) DeleteUserDefinedFunctionRequest {
 	op := &aws.Operation{
 		Name:       opDeleteUserDefinedFunction,
 		HTTPMethod: "POST",
@@ -91,10 +32,10 @@ func (c *Client) DeleteUserDefinedFunctionRequest(input *DeleteUserDefinedFuncti
 	}
 
 	if input == nil {
-		input = &DeleteUserDefinedFunctionInput{}
+		input = &types.DeleteUserDefinedFunctionInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteUserDefinedFunctionOutput{})
+	req := c.newRequest(op, input, &types.DeleteUserDefinedFunctionOutput{})
 	return DeleteUserDefinedFunctionRequest{Request: req, Input: input, Copy: c.DeleteUserDefinedFunctionRequest}
 }
 
@@ -102,8 +43,8 @@ func (c *Client) DeleteUserDefinedFunctionRequest(input *DeleteUserDefinedFuncti
 // DeleteUserDefinedFunction API operation.
 type DeleteUserDefinedFunctionRequest struct {
 	*aws.Request
-	Input *DeleteUserDefinedFunctionInput
-	Copy  func(*DeleteUserDefinedFunctionInput) DeleteUserDefinedFunctionRequest
+	Input *types.DeleteUserDefinedFunctionInput
+	Copy  func(*types.DeleteUserDefinedFunctionInput) DeleteUserDefinedFunctionRequest
 }
 
 // Send marshals and sends the DeleteUserDefinedFunction API request.
@@ -115,7 +56,7 @@ func (r DeleteUserDefinedFunctionRequest) Send(ctx context.Context) (*DeleteUser
 	}
 
 	resp := &DeleteUserDefinedFunctionResponse{
-		DeleteUserDefinedFunctionOutput: r.Request.Data.(*DeleteUserDefinedFunctionOutput),
+		DeleteUserDefinedFunctionOutput: r.Request.Data.(*types.DeleteUserDefinedFunctionOutput),
 		response:                        &aws.Response{Request: r.Request},
 	}
 
@@ -125,7 +66,7 @@ func (r DeleteUserDefinedFunctionRequest) Send(ctx context.Context) (*DeleteUser
 // DeleteUserDefinedFunctionResponse is the response type for the
 // DeleteUserDefinedFunction API operation.
 type DeleteUserDefinedFunctionResponse struct {
-	*DeleteUserDefinedFunctionOutput
+	*types.DeleteUserDefinedFunctionOutput
 
 	response *aws.Response
 }

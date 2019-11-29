@@ -6,69 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-type ImportKeyPairInput struct {
-	_ struct{} `type:"structure"`
-
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have
-	// the required permissions, the error response is DryRunOperation. Otherwise,
-	// it is UnauthorizedOperation.
-	DryRun *bool `locationName:"dryRun" type:"boolean"`
-
-	// A unique name for the key pair.
-	//
-	// KeyName is a required field
-	KeyName *string `locationName:"keyName" type:"string" required:"true"`
-
-	// The public key. For API calls, the text must be base64-encoded. For command
-	// line tools, base64 encoding is performed for you.
-	//
-	// PublicKeyMaterial is automatically base64 encoded/decoded by the SDK.
-	//
-	// PublicKeyMaterial is a required field
-	PublicKeyMaterial []byte `locationName:"publicKeyMaterial" type:"blob" required:"true"`
-}
-
-// String returns the string representation
-func (s ImportKeyPairInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ImportKeyPairInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ImportKeyPairInput"}
-
-	if s.KeyName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("KeyName"))
-	}
-
-	if s.PublicKeyMaterial == nil {
-		invalidParams.Add(aws.NewErrParamRequired("PublicKeyMaterial"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ImportKeyPairOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The MD5 public key fingerprint as specified in section 4 of RFC 4716.
-	KeyFingerprint *string `locationName:"keyFingerprint" type:"string"`
-
-	// The key pair name you provided.
-	KeyName *string `locationName:"keyName" type:"string"`
-}
-
-// String returns the string representation
-func (s ImportKeyPairOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opImportKeyPair = "ImportKeyPair"
 
@@ -92,7 +31,7 @@ const opImportKeyPair = "ImportKeyPair"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ImportKeyPair
-func (c *Client) ImportKeyPairRequest(input *ImportKeyPairInput) ImportKeyPairRequest {
+func (c *Client) ImportKeyPairRequest(input *types.ImportKeyPairInput) ImportKeyPairRequest {
 	op := &aws.Operation{
 		Name:       opImportKeyPair,
 		HTTPMethod: "POST",
@@ -100,10 +39,10 @@ func (c *Client) ImportKeyPairRequest(input *ImportKeyPairInput) ImportKeyPairRe
 	}
 
 	if input == nil {
-		input = &ImportKeyPairInput{}
+		input = &types.ImportKeyPairInput{}
 	}
 
-	req := c.newRequest(op, input, &ImportKeyPairOutput{})
+	req := c.newRequest(op, input, &types.ImportKeyPairOutput{})
 	return ImportKeyPairRequest{Request: req, Input: input, Copy: c.ImportKeyPairRequest}
 }
 
@@ -111,8 +50,8 @@ func (c *Client) ImportKeyPairRequest(input *ImportKeyPairInput) ImportKeyPairRe
 // ImportKeyPair API operation.
 type ImportKeyPairRequest struct {
 	*aws.Request
-	Input *ImportKeyPairInput
-	Copy  func(*ImportKeyPairInput) ImportKeyPairRequest
+	Input *types.ImportKeyPairInput
+	Copy  func(*types.ImportKeyPairInput) ImportKeyPairRequest
 }
 
 // Send marshals and sends the ImportKeyPair API request.
@@ -124,7 +63,7 @@ func (r ImportKeyPairRequest) Send(ctx context.Context) (*ImportKeyPairResponse,
 	}
 
 	resp := &ImportKeyPairResponse{
-		ImportKeyPairOutput: r.Request.Data.(*ImportKeyPairOutput),
+		ImportKeyPairOutput: r.Request.Data.(*types.ImportKeyPairOutput),
 		response:            &aws.Response{Request: r.Request},
 	}
 
@@ -134,7 +73,7 @@ func (r ImportKeyPairRequest) Send(ctx context.Context) (*ImportKeyPairResponse,
 // ImportKeyPairResponse is the response type for the
 // ImportKeyPair API operation.
 type ImportKeyPairResponse struct {
-	*ImportKeyPairOutput
+	*types.ImportKeyPairOutput
 
 	response *aws.Response
 }

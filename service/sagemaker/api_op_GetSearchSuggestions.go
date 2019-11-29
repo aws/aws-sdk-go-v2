@@ -6,56 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
 )
-
-type GetSearchSuggestionsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the Amazon SageMaker resource to Search for. The only valid Resource
-	// value is TrainingJob.
-	//
-	// Resource is a required field
-	Resource ResourceType `type:"string" required:"true" enum:"true"`
-
-	// Limits the property names that are included in the response.
-	SuggestionQuery *SuggestionQuery `type:"structure"`
-}
-
-// String returns the string representation
-func (s GetSearchSuggestionsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetSearchSuggestionsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetSearchSuggestionsInput"}
-	if len(s.Resource) == 0 {
-		invalidParams.Add(aws.NewErrParamRequired("Resource"))
-	}
-	if s.SuggestionQuery != nil {
-		if err := s.SuggestionQuery.Validate(); err != nil {
-			invalidParams.AddNested("SuggestionQuery", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type GetSearchSuggestionsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A list of property names for a Resource that match a SuggestionQuery.
-	PropertyNameSuggestions []PropertyNameSuggestion `type:"list"`
-}
-
-// String returns the string representation
-func (s GetSearchSuggestionsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetSearchSuggestions = "GetSearchSuggestions"
 
@@ -75,7 +27,7 @@ const opGetSearchSuggestions = "GetSearchSuggestions"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/GetSearchSuggestions
-func (c *Client) GetSearchSuggestionsRequest(input *GetSearchSuggestionsInput) GetSearchSuggestionsRequest {
+func (c *Client) GetSearchSuggestionsRequest(input *types.GetSearchSuggestionsInput) GetSearchSuggestionsRequest {
 	op := &aws.Operation{
 		Name:       opGetSearchSuggestions,
 		HTTPMethod: "POST",
@@ -83,10 +35,10 @@ func (c *Client) GetSearchSuggestionsRequest(input *GetSearchSuggestionsInput) G
 	}
 
 	if input == nil {
-		input = &GetSearchSuggestionsInput{}
+		input = &types.GetSearchSuggestionsInput{}
 	}
 
-	req := c.newRequest(op, input, &GetSearchSuggestionsOutput{})
+	req := c.newRequest(op, input, &types.GetSearchSuggestionsOutput{})
 	return GetSearchSuggestionsRequest{Request: req, Input: input, Copy: c.GetSearchSuggestionsRequest}
 }
 
@@ -94,8 +46,8 @@ func (c *Client) GetSearchSuggestionsRequest(input *GetSearchSuggestionsInput) G
 // GetSearchSuggestions API operation.
 type GetSearchSuggestionsRequest struct {
 	*aws.Request
-	Input *GetSearchSuggestionsInput
-	Copy  func(*GetSearchSuggestionsInput) GetSearchSuggestionsRequest
+	Input *types.GetSearchSuggestionsInput
+	Copy  func(*types.GetSearchSuggestionsInput) GetSearchSuggestionsRequest
 }
 
 // Send marshals and sends the GetSearchSuggestions API request.
@@ -107,7 +59,7 @@ func (r GetSearchSuggestionsRequest) Send(ctx context.Context) (*GetSearchSugges
 	}
 
 	resp := &GetSearchSuggestionsResponse{
-		GetSearchSuggestionsOutput: r.Request.Data.(*GetSearchSuggestionsOutput),
+		GetSearchSuggestionsOutput: r.Request.Data.(*types.GetSearchSuggestionsOutput),
 		response:                   &aws.Response{Request: r.Request},
 	}
 
@@ -117,7 +69,7 @@ func (r GetSearchSuggestionsRequest) Send(ctx context.Context) (*GetSearchSugges
 // GetSearchSuggestionsResponse is the response type for the
 // GetSearchSuggestions API operation.
 type GetSearchSuggestionsResponse struct {
-	*GetSearchSuggestionsOutput
+	*types.GetSearchSuggestionsOutput
 
 	response *aws.Response
 }

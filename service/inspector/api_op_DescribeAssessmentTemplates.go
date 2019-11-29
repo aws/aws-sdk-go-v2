@@ -6,57 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/inspector/types"
 )
-
-type DescribeAssessmentTemplatesInput struct {
-	_ struct{} `type:"structure"`
-
-	// AssessmentTemplateArns is a required field
-	AssessmentTemplateArns []string `locationName:"assessmentTemplateArns" min:"1" type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeAssessmentTemplatesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeAssessmentTemplatesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeAssessmentTemplatesInput"}
-
-	if s.AssessmentTemplateArns == nil {
-		invalidParams.Add(aws.NewErrParamRequired("AssessmentTemplateArns"))
-	}
-	if s.AssessmentTemplateArns != nil && len(s.AssessmentTemplateArns) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("AssessmentTemplateArns", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribeAssessmentTemplatesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Information about the assessment templates.
-	//
-	// AssessmentTemplates is a required field
-	AssessmentTemplates []AssessmentTemplate `locationName:"assessmentTemplates" type:"list" required:"true"`
-
-	// Assessment template details that cannot be described. An error code is provided
-	// for each failed item.
-	//
-	// FailedItems is a required field
-	FailedItems map[string]FailedItemDetails `locationName:"failedItems" type:"map" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeAssessmentTemplatesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeAssessmentTemplates = "DescribeAssessmentTemplates"
 
@@ -74,7 +25,7 @@ const opDescribeAssessmentTemplates = "DescribeAssessmentTemplates"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/DescribeAssessmentTemplates
-func (c *Client) DescribeAssessmentTemplatesRequest(input *DescribeAssessmentTemplatesInput) DescribeAssessmentTemplatesRequest {
+func (c *Client) DescribeAssessmentTemplatesRequest(input *types.DescribeAssessmentTemplatesInput) DescribeAssessmentTemplatesRequest {
 	op := &aws.Operation{
 		Name:       opDescribeAssessmentTemplates,
 		HTTPMethod: "POST",
@@ -82,10 +33,10 @@ func (c *Client) DescribeAssessmentTemplatesRequest(input *DescribeAssessmentTem
 	}
 
 	if input == nil {
-		input = &DescribeAssessmentTemplatesInput{}
+		input = &types.DescribeAssessmentTemplatesInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeAssessmentTemplatesOutput{})
+	req := c.newRequest(op, input, &types.DescribeAssessmentTemplatesOutput{})
 	return DescribeAssessmentTemplatesRequest{Request: req, Input: input, Copy: c.DescribeAssessmentTemplatesRequest}
 }
 
@@ -93,8 +44,8 @@ func (c *Client) DescribeAssessmentTemplatesRequest(input *DescribeAssessmentTem
 // DescribeAssessmentTemplates API operation.
 type DescribeAssessmentTemplatesRequest struct {
 	*aws.Request
-	Input *DescribeAssessmentTemplatesInput
-	Copy  func(*DescribeAssessmentTemplatesInput) DescribeAssessmentTemplatesRequest
+	Input *types.DescribeAssessmentTemplatesInput
+	Copy  func(*types.DescribeAssessmentTemplatesInput) DescribeAssessmentTemplatesRequest
 }
 
 // Send marshals and sends the DescribeAssessmentTemplates API request.
@@ -106,7 +57,7 @@ func (r DescribeAssessmentTemplatesRequest) Send(ctx context.Context) (*Describe
 	}
 
 	resp := &DescribeAssessmentTemplatesResponse{
-		DescribeAssessmentTemplatesOutput: r.Request.Data.(*DescribeAssessmentTemplatesOutput),
+		DescribeAssessmentTemplatesOutput: r.Request.Data.(*types.DescribeAssessmentTemplatesOutput),
 		response:                          &aws.Response{Request: r.Request},
 	}
 
@@ -116,7 +67,7 @@ func (r DescribeAssessmentTemplatesRequest) Send(ctx context.Context) (*Describe
 // DescribeAssessmentTemplatesResponse is the response type for the
 // DescribeAssessmentTemplates API operation.
 type DescribeAssessmentTemplatesResponse struct {
-	*DescribeAssessmentTemplatesOutput
+	*types.DescribeAssessmentTemplatesOutput
 
 	response *aws.Response
 }

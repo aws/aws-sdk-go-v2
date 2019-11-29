@@ -6,90 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/rekognition/types"
 )
-
-type GetContentModerationInput struct {
-	_ struct{} `type:"structure"`
-
-	// The identifier for the unsafe content job. Use JobId to identify the job
-	// in a subsequent call to GetContentModeration.
-	//
-	// JobId is a required field
-	JobId *string `min:"1" type:"string" required:"true"`
-
-	// Maximum number of results to return per paginated call. The largest value
-	// you can specify is 1000. If you specify a value greater than 1000, a maximum
-	// of 1000 results is returned. The default value is 1000.
-	MaxResults *int64 `min:"1" type:"integer"`
-
-	// If the previous response was incomplete (because there is more data to retrieve),
-	// Amazon Rekognition returns a pagination token in the response. You can use
-	// this pagination token to retrieve the next set of unsafe content labels.
-	NextToken *string `type:"string"`
-
-	// Sort to use for elements in the ModerationLabelDetections array. Use TIMESTAMP
-	// to sort array elements by the time labels are detected. Use NAME to alphabetically
-	// group elements for a label together. Within each label group, the array element
-	// are sorted by detection confidence. The default sort is by TIMESTAMP.
-	SortBy ContentModerationSortBy `type:"string" enum:"true"`
-}
-
-// String returns the string representation
-func (s GetContentModerationInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetContentModerationInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetContentModerationInput"}
-
-	if s.JobId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("JobId"))
-	}
-	if s.JobId != nil && len(*s.JobId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("JobId", 1))
-	}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type GetContentModerationOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The current status of the unsafe content analysis job.
-	JobStatus VideoJobStatus `type:"string" enum:"true"`
-
-	// The detected unsafe content labels and the time(s) they were detected.
-	ModerationLabels []ContentModerationDetection `type:"list"`
-
-	// Version number of the moderation detection model that was used to detect
-	// unsafe content.
-	ModerationModelVersion *string `type:"string"`
-
-	// If the response is truncated, Amazon Rekognition Video returns this token
-	// that you can use in the subsequent request to retrieve the next set of unsafe
-	// content labels.
-	NextToken *string `type:"string"`
-
-	// If the job fails, StatusMessage provides a descriptive error message.
-	StatusMessage *string `type:"string"`
-
-	// Information about a video that Amazon Rekognition analyzed. Videometadata
-	// is returned in every page of paginated responses from GetContentModeration.
-	VideoMetadata *VideoMetadata `type:"structure"`
-}
-
-// String returns the string representation
-func (s GetContentModerationOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetContentModeration = "GetContentModeration"
 
@@ -136,7 +54,7 @@ const opGetContentModeration = "GetContentModeration"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) GetContentModerationRequest(input *GetContentModerationInput) GetContentModerationRequest {
+func (c *Client) GetContentModerationRequest(input *types.GetContentModerationInput) GetContentModerationRequest {
 	op := &aws.Operation{
 		Name:       opGetContentModeration,
 		HTTPMethod: "POST",
@@ -150,10 +68,10 @@ func (c *Client) GetContentModerationRequest(input *GetContentModerationInput) G
 	}
 
 	if input == nil {
-		input = &GetContentModerationInput{}
+		input = &types.GetContentModerationInput{}
 	}
 
-	req := c.newRequest(op, input, &GetContentModerationOutput{})
+	req := c.newRequest(op, input, &types.GetContentModerationOutput{})
 	return GetContentModerationRequest{Request: req, Input: input, Copy: c.GetContentModerationRequest}
 }
 
@@ -161,8 +79,8 @@ func (c *Client) GetContentModerationRequest(input *GetContentModerationInput) G
 // GetContentModeration API operation.
 type GetContentModerationRequest struct {
 	*aws.Request
-	Input *GetContentModerationInput
-	Copy  func(*GetContentModerationInput) GetContentModerationRequest
+	Input *types.GetContentModerationInput
+	Copy  func(*types.GetContentModerationInput) GetContentModerationRequest
 }
 
 // Send marshals and sends the GetContentModeration API request.
@@ -174,7 +92,7 @@ func (r GetContentModerationRequest) Send(ctx context.Context) (*GetContentModer
 	}
 
 	resp := &GetContentModerationResponse{
-		GetContentModerationOutput: r.Request.Data.(*GetContentModerationOutput),
+		GetContentModerationOutput: r.Request.Data.(*types.GetContentModerationOutput),
 		response:                   &aws.Response{Request: r.Request},
 	}
 
@@ -204,7 +122,7 @@ func NewGetContentModerationPaginator(req GetContentModerationRequest) GetConten
 	return GetContentModerationPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *GetContentModerationInput
+				var inCpy *types.GetContentModerationInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -224,14 +142,14 @@ type GetContentModerationPaginator struct {
 	aws.Pager
 }
 
-func (p *GetContentModerationPaginator) CurrentPage() *GetContentModerationOutput {
-	return p.Pager.CurrentPage().(*GetContentModerationOutput)
+func (p *GetContentModerationPaginator) CurrentPage() *types.GetContentModerationOutput {
+	return p.Pager.CurrentPage().(*types.GetContentModerationOutput)
 }
 
 // GetContentModerationResponse is the response type for the
 // GetContentModeration API operation.
 type GetContentModerationResponse struct {
-	*GetContentModerationOutput
+	*types.GetContentModerationOutput
 
 	response *aws.Response
 }

@@ -6,62 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
+	"github.com/aws/aws-sdk-go-v2/service/cloudwatchlogs/types"
 )
-
-type DeleteLogStreamInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the log group.
-	//
-	// LogGroupName is a required field
-	LogGroupName *string `locationName:"logGroupName" min:"1" type:"string" required:"true"`
-
-	// The name of the log stream.
-	//
-	// LogStreamName is a required field
-	LogStreamName *string `locationName:"logStreamName" min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteLogStreamInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteLogStreamInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteLogStreamInput"}
-
-	if s.LogGroupName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("LogGroupName"))
-	}
-	if s.LogGroupName != nil && len(*s.LogGroupName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("LogGroupName", 1))
-	}
-
-	if s.LogStreamName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("LogStreamName"))
-	}
-	if s.LogStreamName != nil && len(*s.LogStreamName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("LogStreamName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteLogStreamOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteLogStreamOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteLogStream = "DeleteLogStream"
 
@@ -79,7 +27,7 @@ const opDeleteLogStream = "DeleteLogStream"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/DeleteLogStream
-func (c *Client) DeleteLogStreamRequest(input *DeleteLogStreamInput) DeleteLogStreamRequest {
+func (c *Client) DeleteLogStreamRequest(input *types.DeleteLogStreamInput) DeleteLogStreamRequest {
 	op := &aws.Operation{
 		Name:       opDeleteLogStream,
 		HTTPMethod: "POST",
@@ -87,10 +35,10 @@ func (c *Client) DeleteLogStreamRequest(input *DeleteLogStreamInput) DeleteLogSt
 	}
 
 	if input == nil {
-		input = &DeleteLogStreamInput{}
+		input = &types.DeleteLogStreamInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteLogStreamOutput{})
+	req := c.newRequest(op, input, &types.DeleteLogStreamOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return DeleteLogStreamRequest{Request: req, Input: input, Copy: c.DeleteLogStreamRequest}
@@ -100,8 +48,8 @@ func (c *Client) DeleteLogStreamRequest(input *DeleteLogStreamInput) DeleteLogSt
 // DeleteLogStream API operation.
 type DeleteLogStreamRequest struct {
 	*aws.Request
-	Input *DeleteLogStreamInput
-	Copy  func(*DeleteLogStreamInput) DeleteLogStreamRequest
+	Input *types.DeleteLogStreamInput
+	Copy  func(*types.DeleteLogStreamInput) DeleteLogStreamRequest
 }
 
 // Send marshals and sends the DeleteLogStream API request.
@@ -113,7 +61,7 @@ func (r DeleteLogStreamRequest) Send(ctx context.Context) (*DeleteLogStreamRespo
 	}
 
 	resp := &DeleteLogStreamResponse{
-		DeleteLogStreamOutput: r.Request.Data.(*DeleteLogStreamOutput),
+		DeleteLogStreamOutput: r.Request.Data.(*types.DeleteLogStreamOutput),
 		response:              &aws.Response{Request: r.Request},
 	}
 
@@ -123,7 +71,7 @@ func (r DeleteLogStreamRequest) Send(ctx context.Context) (*DeleteLogStreamRespo
 // DeleteLogStreamResponse is the response type for the
 // DeleteLogStream API operation.
 type DeleteLogStreamResponse struct {
-	*DeleteLogStreamOutput
+	*types.DeleteLogStreamOutput
 
 	response *aws.Response
 }

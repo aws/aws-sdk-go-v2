@@ -6,61 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/iam/types"
 )
-
-type GetAccessKeyLastUsedInput struct {
-	_ struct{} `type:"structure"`
-
-	// The identifier of an access key.
-	//
-	// This parameter allows (through its regex pattern (http://wikipedia.org/wiki/regex))
-	// a string of characters that can consist of any upper or lowercased letter
-	// or digit.
-	//
-	// AccessKeyId is a required field
-	AccessKeyId *string `min:"16" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetAccessKeyLastUsedInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetAccessKeyLastUsedInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetAccessKeyLastUsedInput"}
-
-	if s.AccessKeyId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("AccessKeyId"))
-	}
-	if s.AccessKeyId != nil && len(*s.AccessKeyId) < 16 {
-		invalidParams.Add(aws.NewErrParamMinLen("AccessKeyId", 16))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Contains the response to a successful GetAccessKeyLastUsed request. It is
-// also returned as a member of the AccessKeyMetaData structure returned by
-// the ListAccessKeys action.
-type GetAccessKeyLastUsedOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Contains information about the last time the access key was used.
-	AccessKeyLastUsed *AccessKeyLastUsed `type:"structure"`
-
-	// The name of the AWS IAM user that owns this access key.
-	UserName *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s GetAccessKeyLastUsedOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetAccessKeyLastUsed = "GetAccessKeyLastUsed"
 
@@ -80,7 +27,7 @@ const opGetAccessKeyLastUsed = "GetAccessKeyLastUsed"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetAccessKeyLastUsed
-func (c *Client) GetAccessKeyLastUsedRequest(input *GetAccessKeyLastUsedInput) GetAccessKeyLastUsedRequest {
+func (c *Client) GetAccessKeyLastUsedRequest(input *types.GetAccessKeyLastUsedInput) GetAccessKeyLastUsedRequest {
 	op := &aws.Operation{
 		Name:       opGetAccessKeyLastUsed,
 		HTTPMethod: "POST",
@@ -88,10 +35,10 @@ func (c *Client) GetAccessKeyLastUsedRequest(input *GetAccessKeyLastUsedInput) G
 	}
 
 	if input == nil {
-		input = &GetAccessKeyLastUsedInput{}
+		input = &types.GetAccessKeyLastUsedInput{}
 	}
 
-	req := c.newRequest(op, input, &GetAccessKeyLastUsedOutput{})
+	req := c.newRequest(op, input, &types.GetAccessKeyLastUsedOutput{})
 	return GetAccessKeyLastUsedRequest{Request: req, Input: input, Copy: c.GetAccessKeyLastUsedRequest}
 }
 
@@ -99,8 +46,8 @@ func (c *Client) GetAccessKeyLastUsedRequest(input *GetAccessKeyLastUsedInput) G
 // GetAccessKeyLastUsed API operation.
 type GetAccessKeyLastUsedRequest struct {
 	*aws.Request
-	Input *GetAccessKeyLastUsedInput
-	Copy  func(*GetAccessKeyLastUsedInput) GetAccessKeyLastUsedRequest
+	Input *types.GetAccessKeyLastUsedInput
+	Copy  func(*types.GetAccessKeyLastUsedInput) GetAccessKeyLastUsedRequest
 }
 
 // Send marshals and sends the GetAccessKeyLastUsed API request.
@@ -112,7 +59,7 @@ func (r GetAccessKeyLastUsedRequest) Send(ctx context.Context) (*GetAccessKeyLas
 	}
 
 	resp := &GetAccessKeyLastUsedResponse{
-		GetAccessKeyLastUsedOutput: r.Request.Data.(*GetAccessKeyLastUsedOutput),
+		GetAccessKeyLastUsedOutput: r.Request.Data.(*types.GetAccessKeyLastUsedOutput),
 		response:                   &aws.Response{Request: r.Request},
 	}
 
@@ -122,7 +69,7 @@ func (r GetAccessKeyLastUsedRequest) Send(ctx context.Context) (*GetAccessKeyLas
 // GetAccessKeyLastUsedResponse is the response type for the
 // GetAccessKeyLastUsed API operation.
 type GetAccessKeyLastUsedResponse struct {
-	*GetAccessKeyLastUsedOutput
+	*types.GetAccessKeyLastUsedOutput
 
 	response *aws.Response
 }

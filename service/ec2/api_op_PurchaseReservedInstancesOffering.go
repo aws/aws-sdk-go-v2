@@ -4,76 +4,10 @@ package ec2
 
 import (
 	"context"
-	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-// Contains the parameters for PurchaseReservedInstancesOffering.
-type PurchaseReservedInstancesOfferingInput struct {
-	_ struct{} `type:"structure"`
-
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have
-	// the required permissions, the error response is DryRunOperation. Otherwise,
-	// it is UnauthorizedOperation.
-	DryRun *bool `locationName:"dryRun" type:"boolean"`
-
-	// The number of Reserved Instances to purchase.
-	//
-	// InstanceCount is a required field
-	InstanceCount *int64 `type:"integer" required:"true"`
-
-	// Specified for Reserved Instance Marketplace offerings to limit the total
-	// order and ensure that the Reserved Instances are not purchased at unexpected
-	// prices.
-	LimitPrice *ReservedInstanceLimitPrice `locationName:"limitPrice" type:"structure"`
-
-	// The time at which to purchase the Reserved Instance.
-	PurchaseTime *time.Time `type:"timestamp"`
-
-	// The ID of the Reserved Instance offering to purchase.
-	//
-	// ReservedInstancesOfferingId is a required field
-	ReservedInstancesOfferingId *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s PurchaseReservedInstancesOfferingInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *PurchaseReservedInstancesOfferingInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "PurchaseReservedInstancesOfferingInput"}
-
-	if s.InstanceCount == nil {
-		invalidParams.Add(aws.NewErrParamRequired("InstanceCount"))
-	}
-
-	if s.ReservedInstancesOfferingId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ReservedInstancesOfferingId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Contains the output of PurchaseReservedInstancesOffering.
-type PurchaseReservedInstancesOfferingOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The IDs of the purchased Reserved Instances.
-	ReservedInstancesId *string `locationName:"reservedInstancesId" type:"string"`
-}
-
-// String returns the string representation
-func (s PurchaseReservedInstancesOfferingOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opPurchaseReservedInstancesOffering = "PurchaseReservedInstancesOffering"
 
@@ -102,7 +36,7 @@ const opPurchaseReservedInstancesOffering = "PurchaseReservedInstancesOffering"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/PurchaseReservedInstancesOffering
-func (c *Client) PurchaseReservedInstancesOfferingRequest(input *PurchaseReservedInstancesOfferingInput) PurchaseReservedInstancesOfferingRequest {
+func (c *Client) PurchaseReservedInstancesOfferingRequest(input *types.PurchaseReservedInstancesOfferingInput) PurchaseReservedInstancesOfferingRequest {
 	op := &aws.Operation{
 		Name:       opPurchaseReservedInstancesOffering,
 		HTTPMethod: "POST",
@@ -110,10 +44,10 @@ func (c *Client) PurchaseReservedInstancesOfferingRequest(input *PurchaseReserve
 	}
 
 	if input == nil {
-		input = &PurchaseReservedInstancesOfferingInput{}
+		input = &types.PurchaseReservedInstancesOfferingInput{}
 	}
 
-	req := c.newRequest(op, input, &PurchaseReservedInstancesOfferingOutput{})
+	req := c.newRequest(op, input, &types.PurchaseReservedInstancesOfferingOutput{})
 	return PurchaseReservedInstancesOfferingRequest{Request: req, Input: input, Copy: c.PurchaseReservedInstancesOfferingRequest}
 }
 
@@ -121,8 +55,8 @@ func (c *Client) PurchaseReservedInstancesOfferingRequest(input *PurchaseReserve
 // PurchaseReservedInstancesOffering API operation.
 type PurchaseReservedInstancesOfferingRequest struct {
 	*aws.Request
-	Input *PurchaseReservedInstancesOfferingInput
-	Copy  func(*PurchaseReservedInstancesOfferingInput) PurchaseReservedInstancesOfferingRequest
+	Input *types.PurchaseReservedInstancesOfferingInput
+	Copy  func(*types.PurchaseReservedInstancesOfferingInput) PurchaseReservedInstancesOfferingRequest
 }
 
 // Send marshals and sends the PurchaseReservedInstancesOffering API request.
@@ -134,7 +68,7 @@ func (r PurchaseReservedInstancesOfferingRequest) Send(ctx context.Context) (*Pu
 	}
 
 	resp := &PurchaseReservedInstancesOfferingResponse{
-		PurchaseReservedInstancesOfferingOutput: r.Request.Data.(*PurchaseReservedInstancesOfferingOutput),
+		PurchaseReservedInstancesOfferingOutput: r.Request.Data.(*types.PurchaseReservedInstancesOfferingOutput),
 		response:                                &aws.Response{Request: r.Request},
 	}
 
@@ -144,7 +78,7 @@ func (r PurchaseReservedInstancesOfferingRequest) Send(ctx context.Context) (*Pu
 // PurchaseReservedInstancesOfferingResponse is the response type for the
 // PurchaseReservedInstancesOffering API operation.
 type PurchaseReservedInstancesOfferingResponse struct {
-	*PurchaseReservedInstancesOfferingOutput
+	*types.PurchaseReservedInstancesOfferingOutput
 
 	response *aws.Response
 }

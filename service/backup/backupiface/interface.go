@@ -10,6 +10,7 @@ package backupiface
 
 import (
 	"github.com/aws/aws-sdk-go-v2/service/backup"
+	"github.com/aws/aws-sdk-go-v2/service/backup/types"
 )
 
 // ClientAPI provides an interface to enable mocking the
@@ -43,7 +44,7 @@ import (
 //    type mockClientClient struct {
 //        backupiface.ClientPI
 //    }
-//    func (m *mockClientClient) CreateBackupPlan(input *backup.CreateBackupPlanInput) (*backup.CreateBackupPlanOutput, error) {
+//    func (m *mockClientClient) CreateBackupPlan(input *types.CreateBackupPlanInput) (*types.CreateBackupPlanOutput, error) {
 //        // mock response/functionality
 //    }
 //
@@ -61,91 +62,91 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type ClientAPI interface {
-	CreateBackupPlanRequest(*backup.CreateBackupPlanInput) backup.CreateBackupPlanRequest
+	CreateBackupPlanRequest(*types.CreateBackupPlanInput) backup.CreateBackupPlanRequest
 
-	CreateBackupSelectionRequest(*backup.CreateBackupSelectionInput) backup.CreateBackupSelectionRequest
+	CreateBackupSelectionRequest(*types.CreateBackupSelectionInput) backup.CreateBackupSelectionRequest
 
-	CreateBackupVaultRequest(*backup.CreateBackupVaultInput) backup.CreateBackupVaultRequest
+	CreateBackupVaultRequest(*types.CreateBackupVaultInput) backup.CreateBackupVaultRequest
 
-	DeleteBackupPlanRequest(*backup.DeleteBackupPlanInput) backup.DeleteBackupPlanRequest
+	DeleteBackupPlanRequest(*types.DeleteBackupPlanInput) backup.DeleteBackupPlanRequest
 
-	DeleteBackupSelectionRequest(*backup.DeleteBackupSelectionInput) backup.DeleteBackupSelectionRequest
+	DeleteBackupSelectionRequest(*types.DeleteBackupSelectionInput) backup.DeleteBackupSelectionRequest
 
-	DeleteBackupVaultRequest(*backup.DeleteBackupVaultInput) backup.DeleteBackupVaultRequest
+	DeleteBackupVaultRequest(*types.DeleteBackupVaultInput) backup.DeleteBackupVaultRequest
 
-	DeleteBackupVaultAccessPolicyRequest(*backup.DeleteBackupVaultAccessPolicyInput) backup.DeleteBackupVaultAccessPolicyRequest
+	DeleteBackupVaultAccessPolicyRequest(*types.DeleteBackupVaultAccessPolicyInput) backup.DeleteBackupVaultAccessPolicyRequest
 
-	DeleteBackupVaultNotificationsRequest(*backup.DeleteBackupVaultNotificationsInput) backup.DeleteBackupVaultNotificationsRequest
+	DeleteBackupVaultNotificationsRequest(*types.DeleteBackupVaultNotificationsInput) backup.DeleteBackupVaultNotificationsRequest
 
-	DeleteRecoveryPointRequest(*backup.DeleteRecoveryPointInput) backup.DeleteRecoveryPointRequest
+	DeleteRecoveryPointRequest(*types.DeleteRecoveryPointInput) backup.DeleteRecoveryPointRequest
 
-	DescribeBackupJobRequest(*backup.DescribeBackupJobInput) backup.DescribeBackupJobRequest
+	DescribeBackupJobRequest(*types.DescribeBackupJobInput) backup.DescribeBackupJobRequest
 
-	DescribeBackupVaultRequest(*backup.DescribeBackupVaultInput) backup.DescribeBackupVaultRequest
+	DescribeBackupVaultRequest(*types.DescribeBackupVaultInput) backup.DescribeBackupVaultRequest
 
-	DescribeProtectedResourceRequest(*backup.DescribeProtectedResourceInput) backup.DescribeProtectedResourceRequest
+	DescribeProtectedResourceRequest(*types.DescribeProtectedResourceInput) backup.DescribeProtectedResourceRequest
 
-	DescribeRecoveryPointRequest(*backup.DescribeRecoveryPointInput) backup.DescribeRecoveryPointRequest
+	DescribeRecoveryPointRequest(*types.DescribeRecoveryPointInput) backup.DescribeRecoveryPointRequest
 
-	DescribeRestoreJobRequest(*backup.DescribeRestoreJobInput) backup.DescribeRestoreJobRequest
+	DescribeRestoreJobRequest(*types.DescribeRestoreJobInput) backup.DescribeRestoreJobRequest
 
-	ExportBackupPlanTemplateRequest(*backup.ExportBackupPlanTemplateInput) backup.ExportBackupPlanTemplateRequest
+	ExportBackupPlanTemplateRequest(*types.ExportBackupPlanTemplateInput) backup.ExportBackupPlanTemplateRequest
 
-	GetBackupPlanRequest(*backup.GetBackupPlanInput) backup.GetBackupPlanRequest
+	GetBackupPlanRequest(*types.GetBackupPlanInput) backup.GetBackupPlanRequest
 
-	GetBackupPlanFromJSONRequest(*backup.GetBackupPlanFromJSONInput) backup.GetBackupPlanFromJSONRequest
+	GetBackupPlanFromJSONRequest(*types.GetBackupPlanFromJSONInput) backup.GetBackupPlanFromJSONRequest
 
-	GetBackupPlanFromTemplateRequest(*backup.GetBackupPlanFromTemplateInput) backup.GetBackupPlanFromTemplateRequest
+	GetBackupPlanFromTemplateRequest(*types.GetBackupPlanFromTemplateInput) backup.GetBackupPlanFromTemplateRequest
 
-	GetBackupSelectionRequest(*backup.GetBackupSelectionInput) backup.GetBackupSelectionRequest
+	GetBackupSelectionRequest(*types.GetBackupSelectionInput) backup.GetBackupSelectionRequest
 
-	GetBackupVaultAccessPolicyRequest(*backup.GetBackupVaultAccessPolicyInput) backup.GetBackupVaultAccessPolicyRequest
+	GetBackupVaultAccessPolicyRequest(*types.GetBackupVaultAccessPolicyInput) backup.GetBackupVaultAccessPolicyRequest
 
-	GetBackupVaultNotificationsRequest(*backup.GetBackupVaultNotificationsInput) backup.GetBackupVaultNotificationsRequest
+	GetBackupVaultNotificationsRequest(*types.GetBackupVaultNotificationsInput) backup.GetBackupVaultNotificationsRequest
 
-	GetRecoveryPointRestoreMetadataRequest(*backup.GetRecoveryPointRestoreMetadataInput) backup.GetRecoveryPointRestoreMetadataRequest
+	GetRecoveryPointRestoreMetadataRequest(*types.GetRecoveryPointRestoreMetadataInput) backup.GetRecoveryPointRestoreMetadataRequest
 
-	GetSupportedResourceTypesRequest(*backup.GetSupportedResourceTypesInput) backup.GetSupportedResourceTypesRequest
+	GetSupportedResourceTypesRequest(*types.GetSupportedResourceTypesInput) backup.GetSupportedResourceTypesRequest
 
-	ListBackupJobsRequest(*backup.ListBackupJobsInput) backup.ListBackupJobsRequest
+	ListBackupJobsRequest(*types.ListBackupJobsInput) backup.ListBackupJobsRequest
 
-	ListBackupPlanTemplatesRequest(*backup.ListBackupPlanTemplatesInput) backup.ListBackupPlanTemplatesRequest
+	ListBackupPlanTemplatesRequest(*types.ListBackupPlanTemplatesInput) backup.ListBackupPlanTemplatesRequest
 
-	ListBackupPlanVersionsRequest(*backup.ListBackupPlanVersionsInput) backup.ListBackupPlanVersionsRequest
+	ListBackupPlanVersionsRequest(*types.ListBackupPlanVersionsInput) backup.ListBackupPlanVersionsRequest
 
-	ListBackupPlansRequest(*backup.ListBackupPlansInput) backup.ListBackupPlansRequest
+	ListBackupPlansRequest(*types.ListBackupPlansInput) backup.ListBackupPlansRequest
 
-	ListBackupSelectionsRequest(*backup.ListBackupSelectionsInput) backup.ListBackupSelectionsRequest
+	ListBackupSelectionsRequest(*types.ListBackupSelectionsInput) backup.ListBackupSelectionsRequest
 
-	ListBackupVaultsRequest(*backup.ListBackupVaultsInput) backup.ListBackupVaultsRequest
+	ListBackupVaultsRequest(*types.ListBackupVaultsInput) backup.ListBackupVaultsRequest
 
-	ListProtectedResourcesRequest(*backup.ListProtectedResourcesInput) backup.ListProtectedResourcesRequest
+	ListProtectedResourcesRequest(*types.ListProtectedResourcesInput) backup.ListProtectedResourcesRequest
 
-	ListRecoveryPointsByBackupVaultRequest(*backup.ListRecoveryPointsByBackupVaultInput) backup.ListRecoveryPointsByBackupVaultRequest
+	ListRecoveryPointsByBackupVaultRequest(*types.ListRecoveryPointsByBackupVaultInput) backup.ListRecoveryPointsByBackupVaultRequest
 
-	ListRecoveryPointsByResourceRequest(*backup.ListRecoveryPointsByResourceInput) backup.ListRecoveryPointsByResourceRequest
+	ListRecoveryPointsByResourceRequest(*types.ListRecoveryPointsByResourceInput) backup.ListRecoveryPointsByResourceRequest
 
-	ListRestoreJobsRequest(*backup.ListRestoreJobsInput) backup.ListRestoreJobsRequest
+	ListRestoreJobsRequest(*types.ListRestoreJobsInput) backup.ListRestoreJobsRequest
 
-	ListTagsRequest(*backup.ListTagsInput) backup.ListTagsRequest
+	ListTagsRequest(*types.ListTagsInput) backup.ListTagsRequest
 
-	PutBackupVaultAccessPolicyRequest(*backup.PutBackupVaultAccessPolicyInput) backup.PutBackupVaultAccessPolicyRequest
+	PutBackupVaultAccessPolicyRequest(*types.PutBackupVaultAccessPolicyInput) backup.PutBackupVaultAccessPolicyRequest
 
-	PutBackupVaultNotificationsRequest(*backup.PutBackupVaultNotificationsInput) backup.PutBackupVaultNotificationsRequest
+	PutBackupVaultNotificationsRequest(*types.PutBackupVaultNotificationsInput) backup.PutBackupVaultNotificationsRequest
 
-	StartBackupJobRequest(*backup.StartBackupJobInput) backup.StartBackupJobRequest
+	StartBackupJobRequest(*types.StartBackupJobInput) backup.StartBackupJobRequest
 
-	StartRestoreJobRequest(*backup.StartRestoreJobInput) backup.StartRestoreJobRequest
+	StartRestoreJobRequest(*types.StartRestoreJobInput) backup.StartRestoreJobRequest
 
-	StopBackupJobRequest(*backup.StopBackupJobInput) backup.StopBackupJobRequest
+	StopBackupJobRequest(*types.StopBackupJobInput) backup.StopBackupJobRequest
 
-	TagResourceRequest(*backup.TagResourceInput) backup.TagResourceRequest
+	TagResourceRequest(*types.TagResourceInput) backup.TagResourceRequest
 
-	UntagResourceRequest(*backup.UntagResourceInput) backup.UntagResourceRequest
+	UntagResourceRequest(*types.UntagResourceInput) backup.UntagResourceRequest
 
-	UpdateBackupPlanRequest(*backup.UpdateBackupPlanInput) backup.UpdateBackupPlanRequest
+	UpdateBackupPlanRequest(*types.UpdateBackupPlanInput) backup.UpdateBackupPlanRequest
 
-	UpdateRecoveryPointLifecycleRequest(*backup.UpdateRecoveryPointLifecycleInput) backup.UpdateRecoveryPointLifecycleRequest
+	UpdateRecoveryPointLifecycleRequest(*types.UpdateRecoveryPointLifecycleInput) backup.UpdateRecoveryPointLifecycleRequest
 }
 
 var _ ClientAPI = (*backup.Client)(nil)

@@ -6,60 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/mturk/types"
 )
-
-type UpdateHITTypeOfHITInput struct {
-	_ struct{} `type:"structure"`
-
-	// The HIT to update.
-	//
-	// HITId is a required field
-	HITId *string `min:"1" type:"string" required:"true"`
-
-	// The ID of the new HIT type.
-	//
-	// HITTypeId is a required field
-	HITTypeId *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s UpdateHITTypeOfHITInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateHITTypeOfHITInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateHITTypeOfHITInput"}
-
-	if s.HITId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("HITId"))
-	}
-	if s.HITId != nil && len(*s.HITId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("HITId", 1))
-	}
-
-	if s.HITTypeId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("HITTypeId"))
-	}
-	if s.HITTypeId != nil && len(*s.HITTypeId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("HITTypeId", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type UpdateHITTypeOfHITOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s UpdateHITTypeOfHITOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opUpdateHITTypeOfHIT = "UpdateHITTypeOfHIT"
 
@@ -79,7 +27,7 @@ const opUpdateHITTypeOfHIT = "UpdateHITTypeOfHIT"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/UpdateHITTypeOfHIT
-func (c *Client) UpdateHITTypeOfHITRequest(input *UpdateHITTypeOfHITInput) UpdateHITTypeOfHITRequest {
+func (c *Client) UpdateHITTypeOfHITRequest(input *types.UpdateHITTypeOfHITInput) UpdateHITTypeOfHITRequest {
 	op := &aws.Operation{
 		Name:       opUpdateHITTypeOfHIT,
 		HTTPMethod: "POST",
@@ -87,10 +35,10 @@ func (c *Client) UpdateHITTypeOfHITRequest(input *UpdateHITTypeOfHITInput) Updat
 	}
 
 	if input == nil {
-		input = &UpdateHITTypeOfHITInput{}
+		input = &types.UpdateHITTypeOfHITInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateHITTypeOfHITOutput{})
+	req := c.newRequest(op, input, &types.UpdateHITTypeOfHITOutput{})
 	return UpdateHITTypeOfHITRequest{Request: req, Input: input, Copy: c.UpdateHITTypeOfHITRequest}
 }
 
@@ -98,8 +46,8 @@ func (c *Client) UpdateHITTypeOfHITRequest(input *UpdateHITTypeOfHITInput) Updat
 // UpdateHITTypeOfHIT API operation.
 type UpdateHITTypeOfHITRequest struct {
 	*aws.Request
-	Input *UpdateHITTypeOfHITInput
-	Copy  func(*UpdateHITTypeOfHITInput) UpdateHITTypeOfHITRequest
+	Input *types.UpdateHITTypeOfHITInput
+	Copy  func(*types.UpdateHITTypeOfHITInput) UpdateHITTypeOfHITRequest
 }
 
 // Send marshals and sends the UpdateHITTypeOfHIT API request.
@@ -111,7 +59,7 @@ func (r UpdateHITTypeOfHITRequest) Send(ctx context.Context) (*UpdateHITTypeOfHI
 	}
 
 	resp := &UpdateHITTypeOfHITResponse{
-		UpdateHITTypeOfHITOutput: r.Request.Data.(*UpdateHITTypeOfHITOutput),
+		UpdateHITTypeOfHITOutput: r.Request.Data.(*types.UpdateHITTypeOfHITOutput),
 		response:                 &aws.Response{Request: r.Request},
 	}
 
@@ -121,7 +69,7 @@ func (r UpdateHITTypeOfHITRequest) Send(ctx context.Context) (*UpdateHITTypeOfHI
 // UpdateHITTypeOfHITResponse is the response type for the
 // UpdateHITTypeOfHIT API operation.
 type UpdateHITTypeOfHITResponse struct {
-	*UpdateHITTypeOfHITOutput
+	*types.UpdateHITTypeOfHITOutput
 
 	response *aws.Response
 }

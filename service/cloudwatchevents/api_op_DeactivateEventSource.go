@@ -6,50 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
+	"github.com/aws/aws-sdk-go-v2/service/cloudwatchevents/types"
 )
-
-type DeactivateEventSourceInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the partner event source to deactivate.
-	//
-	// Name is a required field
-	Name *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeactivateEventSourceInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeactivateEventSourceInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeactivateEventSourceInput"}
-
-	if s.Name == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Name"))
-	}
-	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeactivateEventSourceOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeactivateEventSourceOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeactivateEventSource = "DeactivateEventSource"
 
@@ -72,7 +32,7 @@ const opDeactivateEventSource = "DeactivateEventSource"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/DeactivateEventSource
-func (c *Client) DeactivateEventSourceRequest(input *DeactivateEventSourceInput) DeactivateEventSourceRequest {
+func (c *Client) DeactivateEventSourceRequest(input *types.DeactivateEventSourceInput) DeactivateEventSourceRequest {
 	op := &aws.Operation{
 		Name:       opDeactivateEventSource,
 		HTTPMethod: "POST",
@@ -80,10 +40,10 @@ func (c *Client) DeactivateEventSourceRequest(input *DeactivateEventSourceInput)
 	}
 
 	if input == nil {
-		input = &DeactivateEventSourceInput{}
+		input = &types.DeactivateEventSourceInput{}
 	}
 
-	req := c.newRequest(op, input, &DeactivateEventSourceOutput{})
+	req := c.newRequest(op, input, &types.DeactivateEventSourceOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return DeactivateEventSourceRequest{Request: req, Input: input, Copy: c.DeactivateEventSourceRequest}
@@ -93,8 +53,8 @@ func (c *Client) DeactivateEventSourceRequest(input *DeactivateEventSourceInput)
 // DeactivateEventSource API operation.
 type DeactivateEventSourceRequest struct {
 	*aws.Request
-	Input *DeactivateEventSourceInput
-	Copy  func(*DeactivateEventSourceInput) DeactivateEventSourceRequest
+	Input *types.DeactivateEventSourceInput
+	Copy  func(*types.DeactivateEventSourceInput) DeactivateEventSourceRequest
 }
 
 // Send marshals and sends the DeactivateEventSource API request.
@@ -106,7 +66,7 @@ func (r DeactivateEventSourceRequest) Send(ctx context.Context) (*DeactivateEven
 	}
 
 	resp := &DeactivateEventSourceResponse{
-		DeactivateEventSourceOutput: r.Request.Data.(*DeactivateEventSourceOutput),
+		DeactivateEventSourceOutput: r.Request.Data.(*types.DeactivateEventSourceOutput),
 		response:                    &aws.Response{Request: r.Request},
 	}
 
@@ -116,7 +76,7 @@ func (r DeactivateEventSourceRequest) Send(ctx context.Context) (*DeactivateEven
 // DeactivateEventSourceResponse is the response type for the
 // DeactivateEventSource API operation.
 type DeactivateEventSourceResponse struct {
-	*DeactivateEventSourceOutput
+	*types.DeactivateEventSourceOutput
 
 	response *aws.Response
 }

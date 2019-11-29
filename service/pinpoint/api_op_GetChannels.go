@@ -6,74 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/pinpoint/types"
 )
-
-type GetChannelsInput struct {
-	_ struct{} `type:"structure"`
-
-	// ApplicationId is a required field
-	ApplicationId *string `location:"uri" locationName:"application-id" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetChannelsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetChannelsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetChannelsInput"}
-
-	if s.ApplicationId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ApplicationId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetChannelsInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.ApplicationId != nil {
-		v := *s.ApplicationId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "application-id", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type GetChannelsOutput struct {
-	_ struct{} `type:"structure" payload:"ChannelsResponse"`
-
-	// Provides information about the general settings and status of all channels
-	// for an application, including channels that aren't enabled for the application.
-	//
-	// ChannelsResponse is a required field
-	ChannelsResponse *ChannelsResponse `type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s GetChannelsOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetChannelsOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.ChannelsResponse != nil {
-		v := s.ChannelsResponse
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.PayloadTarget, "ChannelsResponse", v, metadata)
-	}
-	return nil
-}
 
 const opGetChannels = "GetChannels"
 
@@ -91,7 +25,7 @@ const opGetChannels = "GetChannels"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetChannels
-func (c *Client) GetChannelsRequest(input *GetChannelsInput) GetChannelsRequest {
+func (c *Client) GetChannelsRequest(input *types.GetChannelsInput) GetChannelsRequest {
 	op := &aws.Operation{
 		Name:       opGetChannels,
 		HTTPMethod: "GET",
@@ -99,10 +33,10 @@ func (c *Client) GetChannelsRequest(input *GetChannelsInput) GetChannelsRequest 
 	}
 
 	if input == nil {
-		input = &GetChannelsInput{}
+		input = &types.GetChannelsInput{}
 	}
 
-	req := c.newRequest(op, input, &GetChannelsOutput{})
+	req := c.newRequest(op, input, &types.GetChannelsOutput{})
 	return GetChannelsRequest{Request: req, Input: input, Copy: c.GetChannelsRequest}
 }
 
@@ -110,8 +44,8 @@ func (c *Client) GetChannelsRequest(input *GetChannelsInput) GetChannelsRequest 
 // GetChannels API operation.
 type GetChannelsRequest struct {
 	*aws.Request
-	Input *GetChannelsInput
-	Copy  func(*GetChannelsInput) GetChannelsRequest
+	Input *types.GetChannelsInput
+	Copy  func(*types.GetChannelsInput) GetChannelsRequest
 }
 
 // Send marshals and sends the GetChannels API request.
@@ -123,7 +57,7 @@ func (r GetChannelsRequest) Send(ctx context.Context) (*GetChannelsResponse, err
 	}
 
 	resp := &GetChannelsResponse{
-		GetChannelsOutput: r.Request.Data.(*GetChannelsOutput),
+		GetChannelsOutput: r.Request.Data.(*types.GetChannelsOutput),
 		response:          &aws.Response{Request: r.Request},
 	}
 
@@ -133,7 +67,7 @@ func (r GetChannelsRequest) Send(ctx context.Context) (*GetChannelsResponse, err
 // GetChannelsResponse is the response type for the
 // GetChannels API operation.
 type GetChannelsResponse struct {
-	*GetChannelsOutput
+	*types.GetChannelsOutput
 
 	response *aws.Response
 }

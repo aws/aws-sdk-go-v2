@@ -6,37 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-// Contains the parameters for DescribeSpotDatafeedSubscription.
-type DescribeSpotDatafeedSubscriptionInput struct {
-	_ struct{} `type:"structure"`
-
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have
-	// the required permissions, the error response is DryRunOperation. Otherwise,
-	// it is UnauthorizedOperation.
-	DryRun *bool `locationName:"dryRun" type:"boolean"`
-}
-
-// String returns the string representation
-func (s DescribeSpotDatafeedSubscriptionInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Contains the output of DescribeSpotDatafeedSubscription.
-type DescribeSpotDatafeedSubscriptionOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The Spot Instance data feed subscription.
-	SpotDatafeedSubscription *SpotDatafeedSubscription `locationName:"spotDatafeedSubscription" type:"structure"`
-}
-
-// String returns the string representation
-func (s DescribeSpotDatafeedSubscriptionOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeSpotDatafeedSubscription = "DescribeSpotDatafeedSubscription"
 
@@ -55,7 +26,7 @@ const opDescribeSpotDatafeedSubscription = "DescribeSpotDatafeedSubscription"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeSpotDatafeedSubscription
-func (c *Client) DescribeSpotDatafeedSubscriptionRequest(input *DescribeSpotDatafeedSubscriptionInput) DescribeSpotDatafeedSubscriptionRequest {
+func (c *Client) DescribeSpotDatafeedSubscriptionRequest(input *types.DescribeSpotDatafeedSubscriptionInput) DescribeSpotDatafeedSubscriptionRequest {
 	op := &aws.Operation{
 		Name:       opDescribeSpotDatafeedSubscription,
 		HTTPMethod: "POST",
@@ -63,10 +34,10 @@ func (c *Client) DescribeSpotDatafeedSubscriptionRequest(input *DescribeSpotData
 	}
 
 	if input == nil {
-		input = &DescribeSpotDatafeedSubscriptionInput{}
+		input = &types.DescribeSpotDatafeedSubscriptionInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeSpotDatafeedSubscriptionOutput{})
+	req := c.newRequest(op, input, &types.DescribeSpotDatafeedSubscriptionOutput{})
 	return DescribeSpotDatafeedSubscriptionRequest{Request: req, Input: input, Copy: c.DescribeSpotDatafeedSubscriptionRequest}
 }
 
@@ -74,8 +45,8 @@ func (c *Client) DescribeSpotDatafeedSubscriptionRequest(input *DescribeSpotData
 // DescribeSpotDatafeedSubscription API operation.
 type DescribeSpotDatafeedSubscriptionRequest struct {
 	*aws.Request
-	Input *DescribeSpotDatafeedSubscriptionInput
-	Copy  func(*DescribeSpotDatafeedSubscriptionInput) DescribeSpotDatafeedSubscriptionRequest
+	Input *types.DescribeSpotDatafeedSubscriptionInput
+	Copy  func(*types.DescribeSpotDatafeedSubscriptionInput) DescribeSpotDatafeedSubscriptionRequest
 }
 
 // Send marshals and sends the DescribeSpotDatafeedSubscription API request.
@@ -87,7 +58,7 @@ func (r DescribeSpotDatafeedSubscriptionRequest) Send(ctx context.Context) (*Des
 	}
 
 	resp := &DescribeSpotDatafeedSubscriptionResponse{
-		DescribeSpotDatafeedSubscriptionOutput: r.Request.Data.(*DescribeSpotDatafeedSubscriptionOutput),
+		DescribeSpotDatafeedSubscriptionOutput: r.Request.Data.(*types.DescribeSpotDatafeedSubscriptionOutput),
 		response:                               &aws.Response{Request: r.Request},
 	}
 
@@ -97,7 +68,7 @@ func (r DescribeSpotDatafeedSubscriptionRequest) Send(ctx context.Context) (*Des
 // DescribeSpotDatafeedSubscriptionResponse is the response type for the
 // DescribeSpotDatafeedSubscription API operation.
 type DescribeSpotDatafeedSubscriptionResponse struct {
-	*DescribeSpotDatafeedSubscriptionOutput
+	*types.DescribeSpotDatafeedSubscriptionOutput
 
 	response *aws.Response
 }

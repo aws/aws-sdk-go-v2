@@ -6,26 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/shield/types"
 )
-
-type DeleteSubscriptionInput struct {
-	_ struct{} `deprecated:"true" type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteSubscriptionInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type DeleteSubscriptionOutput struct {
-	_ struct{} `deprecated:"true" type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteSubscriptionOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteSubscription = "DeleteSubscription"
 
@@ -44,7 +26,7 @@ const opDeleteSubscription = "DeleteSubscription"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/DeleteSubscription
-func (c *Client) DeleteSubscriptionRequest(input *DeleteSubscriptionInput) DeleteSubscriptionRequest {
+func (c *Client) DeleteSubscriptionRequest(input *types.DeleteSubscriptionInput) DeleteSubscriptionRequest {
 	if c.Client.Config.Logger != nil {
 		c.Client.Config.Logger.Log("This operation, DeleteSubscription, has been deprecated")
 	}
@@ -55,10 +37,10 @@ func (c *Client) DeleteSubscriptionRequest(input *DeleteSubscriptionInput) Delet
 	}
 
 	if input == nil {
-		input = &DeleteSubscriptionInput{}
+		input = &types.DeleteSubscriptionInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteSubscriptionOutput{})
+	req := c.newRequest(op, input, &types.DeleteSubscriptionOutput{})
 	return DeleteSubscriptionRequest{Request: req, Input: input, Copy: c.DeleteSubscriptionRequest}
 }
 
@@ -66,8 +48,8 @@ func (c *Client) DeleteSubscriptionRequest(input *DeleteSubscriptionInput) Delet
 // DeleteSubscription API operation.
 type DeleteSubscriptionRequest struct {
 	*aws.Request
-	Input *DeleteSubscriptionInput
-	Copy  func(*DeleteSubscriptionInput) DeleteSubscriptionRequest
+	Input *types.DeleteSubscriptionInput
+	Copy  func(*types.DeleteSubscriptionInput) DeleteSubscriptionRequest
 }
 
 // Send marshals and sends the DeleteSubscription API request.
@@ -79,7 +61,7 @@ func (r DeleteSubscriptionRequest) Send(ctx context.Context) (*DeleteSubscriptio
 	}
 
 	resp := &DeleteSubscriptionResponse{
-		DeleteSubscriptionOutput: r.Request.Data.(*DeleteSubscriptionOutput),
+		DeleteSubscriptionOutput: r.Request.Data.(*types.DeleteSubscriptionOutput),
 		response:                 &aws.Response{Request: r.Request},
 	}
 
@@ -89,7 +71,7 @@ func (r DeleteSubscriptionRequest) Send(ctx context.Context) (*DeleteSubscriptio
 // DeleteSubscriptionResponse is the response type for the
 // DeleteSubscription API operation.
 type DeleteSubscriptionResponse struct {
-	*DeleteSubscriptionOutput
+	*types.DeleteSubscriptionOutput
 
 	response *aws.Response
 }

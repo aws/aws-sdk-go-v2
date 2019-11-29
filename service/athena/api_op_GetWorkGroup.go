@@ -6,48 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/athena/types"
 )
-
-type GetWorkGroupInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the workgroup.
-	//
-	// WorkGroup is a required field
-	WorkGroup *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetWorkGroupInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetWorkGroupInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetWorkGroupInput"}
-
-	if s.WorkGroup == nil {
-		invalidParams.Add(aws.NewErrParamRequired("WorkGroup"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type GetWorkGroupOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Information about the workgroup.
-	WorkGroup *WorkGroup `type:"structure"`
-}
-
-// String returns the string representation
-func (s GetWorkGroupOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetWorkGroup = "GetWorkGroup"
 
@@ -64,7 +24,7 @@ const opGetWorkGroup = "GetWorkGroup"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/GetWorkGroup
-func (c *Client) GetWorkGroupRequest(input *GetWorkGroupInput) GetWorkGroupRequest {
+func (c *Client) GetWorkGroupRequest(input *types.GetWorkGroupInput) GetWorkGroupRequest {
 	op := &aws.Operation{
 		Name:       opGetWorkGroup,
 		HTTPMethod: "POST",
@@ -72,10 +32,10 @@ func (c *Client) GetWorkGroupRequest(input *GetWorkGroupInput) GetWorkGroupReque
 	}
 
 	if input == nil {
-		input = &GetWorkGroupInput{}
+		input = &types.GetWorkGroupInput{}
 	}
 
-	req := c.newRequest(op, input, &GetWorkGroupOutput{})
+	req := c.newRequest(op, input, &types.GetWorkGroupOutput{})
 	return GetWorkGroupRequest{Request: req, Input: input, Copy: c.GetWorkGroupRequest}
 }
 
@@ -83,8 +43,8 @@ func (c *Client) GetWorkGroupRequest(input *GetWorkGroupInput) GetWorkGroupReque
 // GetWorkGroup API operation.
 type GetWorkGroupRequest struct {
 	*aws.Request
-	Input *GetWorkGroupInput
-	Copy  func(*GetWorkGroupInput) GetWorkGroupRequest
+	Input *types.GetWorkGroupInput
+	Copy  func(*types.GetWorkGroupInput) GetWorkGroupRequest
 }
 
 // Send marshals and sends the GetWorkGroup API request.
@@ -96,7 +56,7 @@ func (r GetWorkGroupRequest) Send(ctx context.Context) (*GetWorkGroupResponse, e
 	}
 
 	resp := &GetWorkGroupResponse{
-		GetWorkGroupOutput: r.Request.Data.(*GetWorkGroupOutput),
+		GetWorkGroupOutput: r.Request.Data.(*types.GetWorkGroupOutput),
 		response:           &aws.Response{Request: r.Request},
 	}
 
@@ -106,7 +66,7 @@ func (r GetWorkGroupRequest) Send(ctx context.Context) (*GetWorkGroupResponse, e
 // GetWorkGroupResponse is the response type for the
 // GetWorkGroup API operation.
 type GetWorkGroupResponse struct {
-	*GetWorkGroupOutput
+	*types.GetWorkGroupOutput
 
 	response *aws.Response
 }

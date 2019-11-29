@@ -6,91 +6,25 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/chime/types"
 )
-
-type UpdatePhoneNumberInput struct {
-	_ struct{} `type:"structure"`
-
-	// The phone number ID.
-	//
-	// PhoneNumberId is a required field
-	PhoneNumberId *string `location:"uri" locationName:"phoneNumberId" type:"string" required:"true"`
-
-	// The product type.
-	ProductType PhoneNumberProductType `type:"string" enum:"true"`
-}
-
-// String returns the string representation
-func (s UpdatePhoneNumberInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdatePhoneNumberInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdatePhoneNumberInput"}
-
-	if s.PhoneNumberId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("PhoneNumberId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s UpdatePhoneNumberInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if len(s.ProductType) > 0 {
-		v := s.ProductType
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "ProductType", protocol.QuotedValue{ValueMarshaler: v}, metadata)
-	}
-	if s.PhoneNumberId != nil {
-		v := *s.PhoneNumberId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "phoneNumberId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type UpdatePhoneNumberOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The updated phone number details.
-	PhoneNumber *PhoneNumber `type:"structure"`
-}
-
-// String returns the string representation
-func (s UpdatePhoneNumberOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s UpdatePhoneNumberOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.PhoneNumber != nil {
-		v := s.PhoneNumber
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "PhoneNumber", v, metadata)
-	}
-	return nil
-}
 
 const opUpdatePhoneNumber = "UpdatePhoneNumber"
 
 // UpdatePhoneNumberRequest returns a request value for making API operation for
 // Amazon Chime.
 //
-// Updates phone number details, such as product type, for the specified phone
-// number ID. For toll-free numbers, you can use only the Amazon Chime Voice
-// Connector product type.
+// Updates phone number details, such as product type or calling name, for the
+// specified phone number ID. You can update one phone number detail at a time.
+// For example, you can update either the product type or the calling name in
+// one action.
+//
+// For toll-free numbers, you must use the Amazon Chime Voice Connector product
+// type.
+//
+// Updates to outbound calling names can take up to 72 hours to complete. Pending
+// updates to outbound calling names must be complete before you can request
+// another update.
 //
 //    // Example sending a request using UpdatePhoneNumberRequest.
 //    req := client.UpdatePhoneNumberRequest(params)
@@ -100,7 +34,7 @@ const opUpdatePhoneNumber = "UpdatePhoneNumber"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/UpdatePhoneNumber
-func (c *Client) UpdatePhoneNumberRequest(input *UpdatePhoneNumberInput) UpdatePhoneNumberRequest {
+func (c *Client) UpdatePhoneNumberRequest(input *types.UpdatePhoneNumberInput) UpdatePhoneNumberRequest {
 	op := &aws.Operation{
 		Name:       opUpdatePhoneNumber,
 		HTTPMethod: "POST",
@@ -108,10 +42,10 @@ func (c *Client) UpdatePhoneNumberRequest(input *UpdatePhoneNumberInput) UpdateP
 	}
 
 	if input == nil {
-		input = &UpdatePhoneNumberInput{}
+		input = &types.UpdatePhoneNumberInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdatePhoneNumberOutput{})
+	req := c.newRequest(op, input, &types.UpdatePhoneNumberOutput{})
 	return UpdatePhoneNumberRequest{Request: req, Input: input, Copy: c.UpdatePhoneNumberRequest}
 }
 
@@ -119,8 +53,8 @@ func (c *Client) UpdatePhoneNumberRequest(input *UpdatePhoneNumberInput) UpdateP
 // UpdatePhoneNumber API operation.
 type UpdatePhoneNumberRequest struct {
 	*aws.Request
-	Input *UpdatePhoneNumberInput
-	Copy  func(*UpdatePhoneNumberInput) UpdatePhoneNumberRequest
+	Input *types.UpdatePhoneNumberInput
+	Copy  func(*types.UpdatePhoneNumberInput) UpdatePhoneNumberRequest
 }
 
 // Send marshals and sends the UpdatePhoneNumber API request.
@@ -132,7 +66,7 @@ func (r UpdatePhoneNumberRequest) Send(ctx context.Context) (*UpdatePhoneNumberR
 	}
 
 	resp := &UpdatePhoneNumberResponse{
-		UpdatePhoneNumberOutput: r.Request.Data.(*UpdatePhoneNumberOutput),
+		UpdatePhoneNumberOutput: r.Request.Data.(*types.UpdatePhoneNumberOutput),
 		response:                &aws.Response{Request: r.Request},
 	}
 
@@ -142,7 +76,7 @@ func (r UpdatePhoneNumberRequest) Send(ctx context.Context) (*UpdatePhoneNumberR
 // UpdatePhoneNumberResponse is the response type for the
 // UpdatePhoneNumber API operation.
 type UpdatePhoneNumberResponse struct {
-	*UpdatePhoneNumberOutput
+	*types.UpdatePhoneNumberOutput
 
 	response *aws.Response
 }

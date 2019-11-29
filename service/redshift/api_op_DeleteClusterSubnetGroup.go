@@ -6,47 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/query"
+	"github.com/aws/aws-sdk-go-v2/service/redshift/types"
 )
-
-type DeleteClusterSubnetGroupInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the cluster subnet group name to be deleted.
-	//
-	// ClusterSubnetGroupName is a required field
-	ClusterSubnetGroupName *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteClusterSubnetGroupInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteClusterSubnetGroupInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteClusterSubnetGroupInput"}
-
-	if s.ClusterSubnetGroupName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ClusterSubnetGroupName"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteClusterSubnetGroupOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteClusterSubnetGroupOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteClusterSubnetGroup = "DeleteClusterSubnetGroup"
 
@@ -63,7 +26,7 @@ const opDeleteClusterSubnetGroup = "DeleteClusterSubnetGroup"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DeleteClusterSubnetGroup
-func (c *Client) DeleteClusterSubnetGroupRequest(input *DeleteClusterSubnetGroupInput) DeleteClusterSubnetGroupRequest {
+func (c *Client) DeleteClusterSubnetGroupRequest(input *types.DeleteClusterSubnetGroupInput) DeleteClusterSubnetGroupRequest {
 	op := &aws.Operation{
 		Name:       opDeleteClusterSubnetGroup,
 		HTTPMethod: "POST",
@@ -71,10 +34,10 @@ func (c *Client) DeleteClusterSubnetGroupRequest(input *DeleteClusterSubnetGroup
 	}
 
 	if input == nil {
-		input = &DeleteClusterSubnetGroupInput{}
+		input = &types.DeleteClusterSubnetGroupInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteClusterSubnetGroupOutput{})
+	req := c.newRequest(op, input, &types.DeleteClusterSubnetGroupOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return DeleteClusterSubnetGroupRequest{Request: req, Input: input, Copy: c.DeleteClusterSubnetGroupRequest}
@@ -84,8 +47,8 @@ func (c *Client) DeleteClusterSubnetGroupRequest(input *DeleteClusterSubnetGroup
 // DeleteClusterSubnetGroup API operation.
 type DeleteClusterSubnetGroupRequest struct {
 	*aws.Request
-	Input *DeleteClusterSubnetGroupInput
-	Copy  func(*DeleteClusterSubnetGroupInput) DeleteClusterSubnetGroupRequest
+	Input *types.DeleteClusterSubnetGroupInput
+	Copy  func(*types.DeleteClusterSubnetGroupInput) DeleteClusterSubnetGroupRequest
 }
 
 // Send marshals and sends the DeleteClusterSubnetGroup API request.
@@ -97,7 +60,7 @@ func (r DeleteClusterSubnetGroupRequest) Send(ctx context.Context) (*DeleteClust
 	}
 
 	resp := &DeleteClusterSubnetGroupResponse{
-		DeleteClusterSubnetGroupOutput: r.Request.Data.(*DeleteClusterSubnetGroupOutput),
+		DeleteClusterSubnetGroupOutput: r.Request.Data.(*types.DeleteClusterSubnetGroupOutput),
 		response:                       &aws.Response{Request: r.Request},
 	}
 
@@ -107,7 +70,7 @@ func (r DeleteClusterSubnetGroupRequest) Send(ctx context.Context) (*DeleteClust
 // DeleteClusterSubnetGroupResponse is the response type for the
 // DeleteClusterSubnetGroup API operation.
 type DeleteClusterSubnetGroupResponse struct {
-	*DeleteClusterSubnetGroupOutput
+	*types.DeleteClusterSubnetGroupOutput
 
 	response *aws.Response
 }

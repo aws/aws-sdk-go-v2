@@ -7,6 +7,7 @@ import (
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
+	"github.com/aws/aws-sdk-go-v2/service/machinelearning/types"
 )
 
 // WaitUntilBatchPredictionAvailable uses the Amazon Machine Learning API operation
@@ -18,7 +19,7 @@ import (
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Client) WaitUntilBatchPredictionAvailable(ctx context.Context, input *DescribeBatchPredictionsInput, opts ...aws.WaiterOption) error {
+func (c *Client) WaitUntilBatchPredictionAvailable(ctx context.Context, input *types.DescribeBatchPredictionsInput, opts ...aws.WaiterOption) error {
 	w := aws.Waiter{
 		Name:        "WaitUntilBatchPredictionAvailable",
 		MaxAttempts: 60,
@@ -37,7 +38,7 @@ func (c *Client) WaitUntilBatchPredictionAvailable(ctx context.Context, input *D
 		},
 		Logger: c.Config.Logger,
 		NewRequest: func(opts []aws.Option) (*aws.Request, error) {
-			var inCpy *DescribeBatchPredictionsInput
+			var inCpy *types.DescribeBatchPredictionsInput
 			if input != nil {
 				tmp := *input
 				inCpy = &tmp
@@ -62,7 +63,7 @@ func (c *Client) WaitUntilBatchPredictionAvailable(ctx context.Context, input *D
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Client) WaitUntilDataSourceAvailable(ctx context.Context, input *DescribeDataSourcesInput, opts ...aws.WaiterOption) error {
+func (c *Client) WaitUntilDataSourceAvailable(ctx context.Context, input *types.DescribeDataSourcesInput, opts ...aws.WaiterOption) error {
 	w := aws.Waiter{
 		Name:        "WaitUntilDataSourceAvailable",
 		MaxAttempts: 60,
@@ -81,7 +82,7 @@ func (c *Client) WaitUntilDataSourceAvailable(ctx context.Context, input *Descri
 		},
 		Logger: c.Config.Logger,
 		NewRequest: func(opts []aws.Option) (*aws.Request, error) {
-			var inCpy *DescribeDataSourcesInput
+			var inCpy *types.DescribeDataSourcesInput
 			if input != nil {
 				tmp := *input
 				inCpy = &tmp
@@ -106,7 +107,7 @@ func (c *Client) WaitUntilDataSourceAvailable(ctx context.Context, input *Descri
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Client) WaitUntilEvaluationAvailable(ctx context.Context, input *DescribeEvaluationsInput, opts ...aws.WaiterOption) error {
+func (c *Client) WaitUntilEvaluationAvailable(ctx context.Context, input *types.DescribeEvaluationsInput, opts ...aws.WaiterOption) error {
 	w := aws.Waiter{
 		Name:        "WaitUntilEvaluationAvailable",
 		MaxAttempts: 60,
@@ -125,7 +126,7 @@ func (c *Client) WaitUntilEvaluationAvailable(ctx context.Context, input *Descri
 		},
 		Logger: c.Config.Logger,
 		NewRequest: func(opts []aws.Option) (*aws.Request, error) {
-			var inCpy *DescribeEvaluationsInput
+			var inCpy *types.DescribeEvaluationsInput
 			if input != nil {
 				tmp := *input
 				inCpy = &tmp
@@ -150,7 +151,7 @@ func (c *Client) WaitUntilEvaluationAvailable(ctx context.Context, input *Descri
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Client) WaitUntilMLModelAvailable(ctx context.Context, input *DescribeMLModelsInput, opts ...aws.WaiterOption) error {
+func (c *Client) WaitUntilMLModelAvailable(ctx context.Context, input *types.DescribeMLModelsInput, opts ...aws.WaiterOption) error {
 	w := aws.Waiter{
 		Name:        "WaitUntilMLModelAvailable",
 		MaxAttempts: 60,
@@ -169,7 +170,7 @@ func (c *Client) WaitUntilMLModelAvailable(ctx context.Context, input *DescribeM
 		},
 		Logger: c.Config.Logger,
 		NewRequest: func(opts []aws.Option) (*aws.Request, error) {
-			var inCpy *DescribeMLModelsInput
+			var inCpy *types.DescribeMLModelsInput
 			if input != nil {
 				tmp := *input
 				inCpy = &tmp

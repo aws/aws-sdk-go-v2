@@ -6,140 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/greengrass/types"
 )
-
-type GetFunctionDefinitionVersionInput struct {
-	_ struct{} `type:"structure"`
-
-	// FunctionDefinitionId is a required field
-	FunctionDefinitionId *string `location:"uri" locationName:"FunctionDefinitionId" type:"string" required:"true"`
-
-	// FunctionDefinitionVersionId is a required field
-	FunctionDefinitionVersionId *string `location:"uri" locationName:"FunctionDefinitionVersionId" type:"string" required:"true"`
-
-	NextToken *string `location:"querystring" locationName:"NextToken" type:"string"`
-}
-
-// String returns the string representation
-func (s GetFunctionDefinitionVersionInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetFunctionDefinitionVersionInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetFunctionDefinitionVersionInput"}
-
-	if s.FunctionDefinitionId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("FunctionDefinitionId"))
-	}
-
-	if s.FunctionDefinitionVersionId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("FunctionDefinitionVersionId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetFunctionDefinitionVersionInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.FunctionDefinitionId != nil {
-		v := *s.FunctionDefinitionId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "FunctionDefinitionId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.FunctionDefinitionVersionId != nil {
-		v := *s.FunctionDefinitionVersionId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "FunctionDefinitionVersionId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-// Information about a function definition version.
-type GetFunctionDefinitionVersionOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The ARN of the function definition version.
-	Arn *string `type:"string"`
-
-	// The time, in milliseconds since the epoch, when the function definition version
-	// was created.
-	CreationTimestamp *string `type:"string"`
-
-	// Information on the definition.
-	Definition *FunctionDefinitionVersion `type:"structure"`
-
-	// The ID of the function definition version.
-	Id *string `type:"string"`
-
-	// The token for the next set of results, or ''null'' if there are no additional
-	// results.
-	NextToken *string `type:"string"`
-
-	// The version of the function definition version.
-	Version *string `type:"string"`
-}
-
-// String returns the string representation
-func (s GetFunctionDefinitionVersionOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetFunctionDefinitionVersionOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.Arn != nil {
-		v := *s.Arn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "Arn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.CreationTimestamp != nil {
-		v := *s.CreationTimestamp
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "CreationTimestamp", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Definition != nil {
-		v := s.Definition
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "Definition", v, metadata)
-	}
-	if s.Id != nil {
-		v := *s.Id
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "Id", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Version != nil {
-		v := *s.Version
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "Version", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opGetFunctionDefinitionVersion = "GetFunctionDefinitionVersion"
 
@@ -157,7 +25,7 @@ const opGetFunctionDefinitionVersion = "GetFunctionDefinitionVersion"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GetFunctionDefinitionVersion
-func (c *Client) GetFunctionDefinitionVersionRequest(input *GetFunctionDefinitionVersionInput) GetFunctionDefinitionVersionRequest {
+func (c *Client) GetFunctionDefinitionVersionRequest(input *types.GetFunctionDefinitionVersionInput) GetFunctionDefinitionVersionRequest {
 	op := &aws.Operation{
 		Name:       opGetFunctionDefinitionVersion,
 		HTTPMethod: "GET",
@@ -165,10 +33,10 @@ func (c *Client) GetFunctionDefinitionVersionRequest(input *GetFunctionDefinitio
 	}
 
 	if input == nil {
-		input = &GetFunctionDefinitionVersionInput{}
+		input = &types.GetFunctionDefinitionVersionInput{}
 	}
 
-	req := c.newRequest(op, input, &GetFunctionDefinitionVersionOutput{})
+	req := c.newRequest(op, input, &types.GetFunctionDefinitionVersionOutput{})
 	return GetFunctionDefinitionVersionRequest{Request: req, Input: input, Copy: c.GetFunctionDefinitionVersionRequest}
 }
 
@@ -176,8 +44,8 @@ func (c *Client) GetFunctionDefinitionVersionRequest(input *GetFunctionDefinitio
 // GetFunctionDefinitionVersion API operation.
 type GetFunctionDefinitionVersionRequest struct {
 	*aws.Request
-	Input *GetFunctionDefinitionVersionInput
-	Copy  func(*GetFunctionDefinitionVersionInput) GetFunctionDefinitionVersionRequest
+	Input *types.GetFunctionDefinitionVersionInput
+	Copy  func(*types.GetFunctionDefinitionVersionInput) GetFunctionDefinitionVersionRequest
 }
 
 // Send marshals and sends the GetFunctionDefinitionVersion API request.
@@ -189,7 +57,7 @@ func (r GetFunctionDefinitionVersionRequest) Send(ctx context.Context) (*GetFunc
 	}
 
 	resp := &GetFunctionDefinitionVersionResponse{
-		GetFunctionDefinitionVersionOutput: r.Request.Data.(*GetFunctionDefinitionVersionOutput),
+		GetFunctionDefinitionVersionOutput: r.Request.Data.(*types.GetFunctionDefinitionVersionOutput),
 		response:                           &aws.Response{Request: r.Request},
 	}
 
@@ -199,7 +67,7 @@ func (r GetFunctionDefinitionVersionRequest) Send(ctx context.Context) (*GetFunc
 // GetFunctionDefinitionVersionResponse is the response type for the
 // GetFunctionDefinitionVersion API operation.
 type GetFunctionDefinitionVersionResponse struct {
-	*GetFunctionDefinitionVersionOutput
+	*types.GetFunctionDefinitionVersionOutput
 
 	response *aws.Response
 }

@@ -6,54 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-type DeleteTransitGatewayVpcAttachmentInput struct {
-	_ struct{} `type:"structure"`
-
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have
-	// the required permissions, the error response is DryRunOperation. Otherwise,
-	// it is UnauthorizedOperation.
-	DryRun *bool `type:"boolean"`
-
-	// The ID of the attachment.
-	//
-	// TransitGatewayAttachmentId is a required field
-	TransitGatewayAttachmentId *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteTransitGatewayVpcAttachmentInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteTransitGatewayVpcAttachmentInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteTransitGatewayVpcAttachmentInput"}
-
-	if s.TransitGatewayAttachmentId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("TransitGatewayAttachmentId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteTransitGatewayVpcAttachmentOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Information about the deleted VPC attachment.
-	TransitGatewayVpcAttachment *TransitGatewayVpcAttachment `locationName:"transitGatewayVpcAttachment" type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteTransitGatewayVpcAttachmentOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteTransitGatewayVpcAttachment = "DeleteTransitGatewayVpcAttachment"
 
@@ -70,7 +24,7 @@ const opDeleteTransitGatewayVpcAttachment = "DeleteTransitGatewayVpcAttachment"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteTransitGatewayVpcAttachment
-func (c *Client) DeleteTransitGatewayVpcAttachmentRequest(input *DeleteTransitGatewayVpcAttachmentInput) DeleteTransitGatewayVpcAttachmentRequest {
+func (c *Client) DeleteTransitGatewayVpcAttachmentRequest(input *types.DeleteTransitGatewayVpcAttachmentInput) DeleteTransitGatewayVpcAttachmentRequest {
 	op := &aws.Operation{
 		Name:       opDeleteTransitGatewayVpcAttachment,
 		HTTPMethod: "POST",
@@ -78,10 +32,10 @@ func (c *Client) DeleteTransitGatewayVpcAttachmentRequest(input *DeleteTransitGa
 	}
 
 	if input == nil {
-		input = &DeleteTransitGatewayVpcAttachmentInput{}
+		input = &types.DeleteTransitGatewayVpcAttachmentInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteTransitGatewayVpcAttachmentOutput{})
+	req := c.newRequest(op, input, &types.DeleteTransitGatewayVpcAttachmentOutput{})
 	return DeleteTransitGatewayVpcAttachmentRequest{Request: req, Input: input, Copy: c.DeleteTransitGatewayVpcAttachmentRequest}
 }
 
@@ -89,8 +43,8 @@ func (c *Client) DeleteTransitGatewayVpcAttachmentRequest(input *DeleteTransitGa
 // DeleteTransitGatewayVpcAttachment API operation.
 type DeleteTransitGatewayVpcAttachmentRequest struct {
 	*aws.Request
-	Input *DeleteTransitGatewayVpcAttachmentInput
-	Copy  func(*DeleteTransitGatewayVpcAttachmentInput) DeleteTransitGatewayVpcAttachmentRequest
+	Input *types.DeleteTransitGatewayVpcAttachmentInput
+	Copy  func(*types.DeleteTransitGatewayVpcAttachmentInput) DeleteTransitGatewayVpcAttachmentRequest
 }
 
 // Send marshals and sends the DeleteTransitGatewayVpcAttachment API request.
@@ -102,7 +56,7 @@ func (r DeleteTransitGatewayVpcAttachmentRequest) Send(ctx context.Context) (*De
 	}
 
 	resp := &DeleteTransitGatewayVpcAttachmentResponse{
-		DeleteTransitGatewayVpcAttachmentOutput: r.Request.Data.(*DeleteTransitGatewayVpcAttachmentOutput),
+		DeleteTransitGatewayVpcAttachmentOutput: r.Request.Data.(*types.DeleteTransitGatewayVpcAttachmentOutput),
 		response:                                &aws.Response{Request: r.Request},
 	}
 
@@ -112,7 +66,7 @@ func (r DeleteTransitGatewayVpcAttachmentRequest) Send(ctx context.Context) (*De
 // DeleteTransitGatewayVpcAttachmentResponse is the response type for the
 // DeleteTransitGatewayVpcAttachment API operation.
 type DeleteTransitGatewayVpcAttachmentResponse struct {
-	*DeleteTransitGatewayVpcAttachmentOutput
+	*types.DeleteTransitGatewayVpcAttachmentOutput
 
 	response *aws.Response
 }

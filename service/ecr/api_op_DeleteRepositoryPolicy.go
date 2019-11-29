@@ -6,63 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ecr/types"
 )
-
-type DeleteRepositoryPolicyInput struct {
-	_ struct{} `type:"structure"`
-
-	// The AWS account ID associated with the registry that contains the repository
-	// policy to delete. If you do not specify a registry, the default registry
-	// is assumed.
-	RegistryId *string `locationName:"registryId" type:"string"`
-
-	// The name of the repository that is associated with the repository policy
-	// to delete.
-	//
-	// RepositoryName is a required field
-	RepositoryName *string `locationName:"repositoryName" min:"2" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteRepositoryPolicyInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteRepositoryPolicyInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteRepositoryPolicyInput"}
-
-	if s.RepositoryName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("RepositoryName"))
-	}
-	if s.RepositoryName != nil && len(*s.RepositoryName) < 2 {
-		invalidParams.Add(aws.NewErrParamMinLen("RepositoryName", 2))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteRepositoryPolicyOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The JSON repository policy that was deleted from the repository.
-	PolicyText *string `locationName:"policyText" type:"string"`
-
-	// The registry ID associated with the request.
-	RegistryId *string `locationName:"registryId" type:"string"`
-
-	// The repository name associated with the request.
-	RepositoryName *string `locationName:"repositoryName" min:"2" type:"string"`
-}
-
-// String returns the string representation
-func (s DeleteRepositoryPolicyOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteRepositoryPolicy = "DeleteRepositoryPolicy"
 
@@ -79,7 +24,7 @@ const opDeleteRepositoryPolicy = "DeleteRepositoryPolicy"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/DeleteRepositoryPolicy
-func (c *Client) DeleteRepositoryPolicyRequest(input *DeleteRepositoryPolicyInput) DeleteRepositoryPolicyRequest {
+func (c *Client) DeleteRepositoryPolicyRequest(input *types.DeleteRepositoryPolicyInput) DeleteRepositoryPolicyRequest {
 	op := &aws.Operation{
 		Name:       opDeleteRepositoryPolicy,
 		HTTPMethod: "POST",
@@ -87,10 +32,10 @@ func (c *Client) DeleteRepositoryPolicyRequest(input *DeleteRepositoryPolicyInpu
 	}
 
 	if input == nil {
-		input = &DeleteRepositoryPolicyInput{}
+		input = &types.DeleteRepositoryPolicyInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteRepositoryPolicyOutput{})
+	req := c.newRequest(op, input, &types.DeleteRepositoryPolicyOutput{})
 	return DeleteRepositoryPolicyRequest{Request: req, Input: input, Copy: c.DeleteRepositoryPolicyRequest}
 }
 
@@ -98,8 +43,8 @@ func (c *Client) DeleteRepositoryPolicyRequest(input *DeleteRepositoryPolicyInpu
 // DeleteRepositoryPolicy API operation.
 type DeleteRepositoryPolicyRequest struct {
 	*aws.Request
-	Input *DeleteRepositoryPolicyInput
-	Copy  func(*DeleteRepositoryPolicyInput) DeleteRepositoryPolicyRequest
+	Input *types.DeleteRepositoryPolicyInput
+	Copy  func(*types.DeleteRepositoryPolicyInput) DeleteRepositoryPolicyRequest
 }
 
 // Send marshals and sends the DeleteRepositoryPolicy API request.
@@ -111,7 +56,7 @@ func (r DeleteRepositoryPolicyRequest) Send(ctx context.Context) (*DeleteReposit
 	}
 
 	resp := &DeleteRepositoryPolicyResponse{
-		DeleteRepositoryPolicyOutput: r.Request.Data.(*DeleteRepositoryPolicyOutput),
+		DeleteRepositoryPolicyOutput: r.Request.Data.(*types.DeleteRepositoryPolicyOutput),
 		response:                     &aws.Response{Request: r.Request},
 	}
 
@@ -121,7 +66,7 @@ func (r DeleteRepositoryPolicyRequest) Send(ctx context.Context) (*DeleteReposit
 // DeleteRepositoryPolicyResponse is the response type for the
 // DeleteRepositoryPolicy API operation.
 type DeleteRepositoryPolicyResponse struct {
-	*DeleteRepositoryPolicyOutput
+	*types.DeleteRepositoryPolicyOutput
 
 	response *aws.Response
 }

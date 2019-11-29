@@ -6,57 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
+	"github.com/aws/aws-sdk-go-v2/service/opsworks/types"
 )
-
-type DetachElasticLoadBalancerInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Elastic Load Balancing instance's name.
-	//
-	// ElasticLoadBalancerName is a required field
-	ElasticLoadBalancerName *string `type:"string" required:"true"`
-
-	// The ID of the layer that the Elastic Load Balancing instance is attached
-	// to.
-	//
-	// LayerId is a required field
-	LayerId *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DetachElasticLoadBalancerInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DetachElasticLoadBalancerInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DetachElasticLoadBalancerInput"}
-
-	if s.ElasticLoadBalancerName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ElasticLoadBalancerName"))
-	}
-
-	if s.LayerId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("LayerId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DetachElasticLoadBalancerOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DetachElasticLoadBalancerOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDetachElasticLoadBalancer = "DetachElasticLoadBalancer"
 
@@ -78,7 +31,7 @@ const opDetachElasticLoadBalancer = "DetachElasticLoadBalancer"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DetachElasticLoadBalancer
-func (c *Client) DetachElasticLoadBalancerRequest(input *DetachElasticLoadBalancerInput) DetachElasticLoadBalancerRequest {
+func (c *Client) DetachElasticLoadBalancerRequest(input *types.DetachElasticLoadBalancerInput) DetachElasticLoadBalancerRequest {
 	op := &aws.Operation{
 		Name:       opDetachElasticLoadBalancer,
 		HTTPMethod: "POST",
@@ -86,10 +39,10 @@ func (c *Client) DetachElasticLoadBalancerRequest(input *DetachElasticLoadBalanc
 	}
 
 	if input == nil {
-		input = &DetachElasticLoadBalancerInput{}
+		input = &types.DetachElasticLoadBalancerInput{}
 	}
 
-	req := c.newRequest(op, input, &DetachElasticLoadBalancerOutput{})
+	req := c.newRequest(op, input, &types.DetachElasticLoadBalancerOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return DetachElasticLoadBalancerRequest{Request: req, Input: input, Copy: c.DetachElasticLoadBalancerRequest}
@@ -99,8 +52,8 @@ func (c *Client) DetachElasticLoadBalancerRequest(input *DetachElasticLoadBalanc
 // DetachElasticLoadBalancer API operation.
 type DetachElasticLoadBalancerRequest struct {
 	*aws.Request
-	Input *DetachElasticLoadBalancerInput
-	Copy  func(*DetachElasticLoadBalancerInput) DetachElasticLoadBalancerRequest
+	Input *types.DetachElasticLoadBalancerInput
+	Copy  func(*types.DetachElasticLoadBalancerInput) DetachElasticLoadBalancerRequest
 }
 
 // Send marshals and sends the DetachElasticLoadBalancer API request.
@@ -112,7 +65,7 @@ func (r DetachElasticLoadBalancerRequest) Send(ctx context.Context) (*DetachElas
 	}
 
 	resp := &DetachElasticLoadBalancerResponse{
-		DetachElasticLoadBalancerOutput: r.Request.Data.(*DetachElasticLoadBalancerOutput),
+		DetachElasticLoadBalancerOutput: r.Request.Data.(*types.DetachElasticLoadBalancerOutput),
 		response:                        &aws.Response{Request: r.Request},
 	}
 
@@ -122,7 +75,7 @@ func (r DetachElasticLoadBalancerRequest) Send(ctx context.Context) (*DetachElas
 // DetachElasticLoadBalancerResponse is the response type for the
 // DetachElasticLoadBalancer API operation.
 type DetachElasticLoadBalancerResponse struct {
-	*DetachElasticLoadBalancerOutput
+	*types.DetachElasticLoadBalancerOutput
 
 	response *aws.Response
 }

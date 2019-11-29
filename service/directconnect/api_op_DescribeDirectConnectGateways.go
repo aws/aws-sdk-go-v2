@@ -6,44 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/directconnect/types"
 )
-
-type DescribeDirectConnectGatewaysInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the Direct Connect gateway.
-	DirectConnectGatewayId *string `locationName:"directConnectGatewayId" type:"string"`
-
-	// The maximum number of results to return with a single call. To retrieve the
-	// remaining results, make another call with the returned nextToken value.
-	//
-	// If MaxResults is given a value larger than 100, only 100 results are returned.
-	MaxResults *int64 `locationName:"maxResults" type:"integer"`
-
-	// The token provided in the previous call to retrieve the next page.
-	NextToken *string `locationName:"nextToken" type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeDirectConnectGatewaysInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type DescribeDirectConnectGatewaysOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The Direct Connect gateways.
-	DirectConnectGateways []DirectConnectGateway `locationName:"directConnectGateways" type:"list"`
-
-	// The token to retrieve the next page.
-	NextToken *string `locationName:"nextToken" type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeDirectConnectGatewaysOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeDirectConnectGateways = "DescribeDirectConnectGateways"
 
@@ -61,7 +25,7 @@ const opDescribeDirectConnectGateways = "DescribeDirectConnectGateways"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DescribeDirectConnectGateways
-func (c *Client) DescribeDirectConnectGatewaysRequest(input *DescribeDirectConnectGatewaysInput) DescribeDirectConnectGatewaysRequest {
+func (c *Client) DescribeDirectConnectGatewaysRequest(input *types.DescribeDirectConnectGatewaysInput) DescribeDirectConnectGatewaysRequest {
 	op := &aws.Operation{
 		Name:       opDescribeDirectConnectGateways,
 		HTTPMethod: "POST",
@@ -69,10 +33,10 @@ func (c *Client) DescribeDirectConnectGatewaysRequest(input *DescribeDirectConne
 	}
 
 	if input == nil {
-		input = &DescribeDirectConnectGatewaysInput{}
+		input = &types.DescribeDirectConnectGatewaysInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeDirectConnectGatewaysOutput{})
+	req := c.newRequest(op, input, &types.DescribeDirectConnectGatewaysOutput{})
 	return DescribeDirectConnectGatewaysRequest{Request: req, Input: input, Copy: c.DescribeDirectConnectGatewaysRequest}
 }
 
@@ -80,8 +44,8 @@ func (c *Client) DescribeDirectConnectGatewaysRequest(input *DescribeDirectConne
 // DescribeDirectConnectGateways API operation.
 type DescribeDirectConnectGatewaysRequest struct {
 	*aws.Request
-	Input *DescribeDirectConnectGatewaysInput
-	Copy  func(*DescribeDirectConnectGatewaysInput) DescribeDirectConnectGatewaysRequest
+	Input *types.DescribeDirectConnectGatewaysInput
+	Copy  func(*types.DescribeDirectConnectGatewaysInput) DescribeDirectConnectGatewaysRequest
 }
 
 // Send marshals and sends the DescribeDirectConnectGateways API request.
@@ -93,7 +57,7 @@ func (r DescribeDirectConnectGatewaysRequest) Send(ctx context.Context) (*Descri
 	}
 
 	resp := &DescribeDirectConnectGatewaysResponse{
-		DescribeDirectConnectGatewaysOutput: r.Request.Data.(*DescribeDirectConnectGatewaysOutput),
+		DescribeDirectConnectGatewaysOutput: r.Request.Data.(*types.DescribeDirectConnectGatewaysOutput),
 		response:                            &aws.Response{Request: r.Request},
 	}
 
@@ -103,7 +67,7 @@ func (r DescribeDirectConnectGatewaysRequest) Send(ctx context.Context) (*Descri
 // DescribeDirectConnectGatewaysResponse is the response type for the
 // DescribeDirectConnectGateways API operation.
 type DescribeDirectConnectGatewaysResponse struct {
-	*DescribeDirectConnectGatewaysOutput
+	*types.DescribeDirectConnectGatewaysOutput
 
 	response *aws.Response
 }

@@ -6,51 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/glue/types"
 )
-
-type GetJobBookmarkInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the job in question.
-	//
-	// JobName is a required field
-	JobName *string `type:"string" required:"true"`
-
-	// The unique run identifier associated with this job run.
-	RunId *string `type:"string"`
-}
-
-// String returns the string representation
-func (s GetJobBookmarkInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetJobBookmarkInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetJobBookmarkInput"}
-
-	if s.JobName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("JobName"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type GetJobBookmarkOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A structure that defines a point that a job can resume processing.
-	JobBookmarkEntry *JobBookmarkEntry `type:"structure"`
-}
-
-// String returns the string representation
-func (s GetJobBookmarkOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetJobBookmark = "GetJobBookmark"
 
@@ -67,7 +24,7 @@ const opGetJobBookmark = "GetJobBookmark"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetJobBookmark
-func (c *Client) GetJobBookmarkRequest(input *GetJobBookmarkInput) GetJobBookmarkRequest {
+func (c *Client) GetJobBookmarkRequest(input *types.GetJobBookmarkInput) GetJobBookmarkRequest {
 	op := &aws.Operation{
 		Name:       opGetJobBookmark,
 		HTTPMethod: "POST",
@@ -75,10 +32,10 @@ func (c *Client) GetJobBookmarkRequest(input *GetJobBookmarkInput) GetJobBookmar
 	}
 
 	if input == nil {
-		input = &GetJobBookmarkInput{}
+		input = &types.GetJobBookmarkInput{}
 	}
 
-	req := c.newRequest(op, input, &GetJobBookmarkOutput{})
+	req := c.newRequest(op, input, &types.GetJobBookmarkOutput{})
 	return GetJobBookmarkRequest{Request: req, Input: input, Copy: c.GetJobBookmarkRequest}
 }
 
@@ -86,8 +43,8 @@ func (c *Client) GetJobBookmarkRequest(input *GetJobBookmarkInput) GetJobBookmar
 // GetJobBookmark API operation.
 type GetJobBookmarkRequest struct {
 	*aws.Request
-	Input *GetJobBookmarkInput
-	Copy  func(*GetJobBookmarkInput) GetJobBookmarkRequest
+	Input *types.GetJobBookmarkInput
+	Copy  func(*types.GetJobBookmarkInput) GetJobBookmarkRequest
 }
 
 // Send marshals and sends the GetJobBookmark API request.
@@ -99,7 +56,7 @@ func (r GetJobBookmarkRequest) Send(ctx context.Context) (*GetJobBookmarkRespons
 	}
 
 	resp := &GetJobBookmarkResponse{
-		GetJobBookmarkOutput: r.Request.Data.(*GetJobBookmarkOutput),
+		GetJobBookmarkOutput: r.Request.Data.(*types.GetJobBookmarkOutput),
 		response:             &aws.Response{Request: r.Request},
 	}
 
@@ -109,7 +66,7 @@ func (r GetJobBookmarkRequest) Send(ctx context.Context) (*GetJobBookmarkRespons
 // GetJobBookmarkResponse is the response type for the
 // GetJobBookmark API operation.
 type GetJobBookmarkResponse struct {
-	*GetJobBookmarkOutput
+	*types.GetJobBookmarkOutput
 
 	response *aws.Response
 }

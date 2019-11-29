@@ -6,47 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
+	"github.com/aws/aws-sdk-go-v2/service/opsworks/types"
 )
-
-type StopStackInput struct {
-	_ struct{} `type:"structure"`
-
-	// The stack ID.
-	//
-	// StackId is a required field
-	StackId *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s StopStackInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *StopStackInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "StopStackInput"}
-
-	if s.StackId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("StackId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type StopStackOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s StopStackOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opStopStack = "StopStack"
 
@@ -68,7 +31,7 @@ const opStopStack = "StopStack"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/StopStack
-func (c *Client) StopStackRequest(input *StopStackInput) StopStackRequest {
+func (c *Client) StopStackRequest(input *types.StopStackInput) StopStackRequest {
 	op := &aws.Operation{
 		Name:       opStopStack,
 		HTTPMethod: "POST",
@@ -76,10 +39,10 @@ func (c *Client) StopStackRequest(input *StopStackInput) StopStackRequest {
 	}
 
 	if input == nil {
-		input = &StopStackInput{}
+		input = &types.StopStackInput{}
 	}
 
-	req := c.newRequest(op, input, &StopStackOutput{})
+	req := c.newRequest(op, input, &types.StopStackOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return StopStackRequest{Request: req, Input: input, Copy: c.StopStackRequest}
@@ -89,8 +52,8 @@ func (c *Client) StopStackRequest(input *StopStackInput) StopStackRequest {
 // StopStack API operation.
 type StopStackRequest struct {
 	*aws.Request
-	Input *StopStackInput
-	Copy  func(*StopStackInput) StopStackRequest
+	Input *types.StopStackInput
+	Copy  func(*types.StopStackInput) StopStackRequest
 }
 
 // Send marshals and sends the StopStack API request.
@@ -102,7 +65,7 @@ func (r StopStackRequest) Send(ctx context.Context) (*StopStackResponse, error) 
 	}
 
 	resp := &StopStackResponse{
-		StopStackOutput: r.Request.Data.(*StopStackOutput),
+		StopStackOutput: r.Request.Data.(*types.StopStackOutput),
 		response:        &aws.Response{Request: r.Request},
 	}
 
@@ -112,7 +75,7 @@ func (r StopStackRequest) Send(ctx context.Context) (*StopStackResponse, error) 
 // StopStackResponse is the response type for the
 // StopStack API operation.
 type StopStackResponse struct {
-	*StopStackOutput
+	*types.StopStackOutput
 
 	response *aws.Response
 }

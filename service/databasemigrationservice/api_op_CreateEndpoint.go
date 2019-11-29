@@ -6,180 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/databasemigrationservice/types"
 )
-
-type CreateEndpointInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) for the certificate.
-	CertificateArn *string `type:"string"`
-
-	// The name of the endpoint database.
-	DatabaseName *string `type:"string"`
-
-	// The settings in JSON format for the DMS transfer type of source endpoint.
-	//
-	// Possible settings include the following:
-	//
-	//    * ServiceAccessRoleArn - The IAM role that has permission to access the
-	//    Amazon S3 bucket.
-	//
-	//    * BucketName - The name of the S3 bucket to use.
-	//
-	//    * CompressionType - An optional parameter to use GZIP to compress the
-	//    target files. To use GZIP, set this value to NONE (the default). To keep
-	//    the files uncompressed, don't use this value.
-	//
-	// Shorthand syntax for these settings is as follows: ServiceAccessRoleArn=string,BucketName=string,CompressionType=string
-	//
-	// JSON syntax for these settings is as follows: { "ServiceAccessRoleArn": "string",
-	// "BucketName": "string", "CompressionType": "none"|"gzip" }
-	DmsTransferSettings *DmsTransferSettings `type:"structure"`
-
-	// Settings in JSON format for the target Amazon DynamoDB endpoint. For more
-	// information about the available settings, see Using Object Mapping to Migrate
-	// Data to DynamoDB (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.DynamoDB.html)
-	// in the AWS Database Migration Service User Guide.
-	DynamoDbSettings *DynamoDbSettings `type:"structure"`
-
-	// Settings in JSON format for the target Elasticsearch endpoint. For more information
-	// about the available settings, see Extra Connection Attributes When Using
-	// Elasticsearch as a Target for AWS DMS (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.Elasticsearch.html#CHAP_Target.Elasticsearch.Configuration)
-	// in the AWS Database Migration User Guide.
-	ElasticsearchSettings *ElasticsearchSettings `type:"structure"`
-
-	// The database endpoint identifier. Identifiers must begin with a letter; must
-	// contain only ASCII letters, digits, and hyphens; and must not end with a
-	// hyphen or contain two consecutive hyphens.
-	//
-	// EndpointIdentifier is a required field
-	EndpointIdentifier *string `type:"string" required:"true"`
-
-	// The type of endpoint. Valid values are source and target.
-	//
-	// EndpointType is a required field
-	EndpointType ReplicationEndpointTypeValue `type:"string" required:"true" enum:"true"`
-
-	// The type of engine for the endpoint. Valid values, depending on the EndpointType
-	// value, include mysql, oracle, postgres, mariadb, aurora, aurora-postgresql,
-	// redshift, s3, db2, azuredb, sybase, dynamodb, mongodb, and sqlserver.
-	//
-	// EngineName is a required field
-	EngineName *string `type:"string" required:"true"`
-
-	// The external table definition.
-	ExternalTableDefinition *string `type:"string"`
-
-	// Additional attributes associated with the connection. Each attribute is specified
-	// as a name-value pair associated by an equal sign (=). Multiple attributes
-	// are separated by a semicolon (;) with no additional white space. For information
-	// on the attributes available for connecting your source or target endpoint,
-	// see Working with AWS DMS Endpoints (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Endpoints.html)
-	// in the AWS Database Migration Service User Guide.
-	ExtraConnectionAttributes *string `type:"string"`
-
-	// Settings in JSON format for the target Amazon Kinesis Data Streams endpoint.
-	// For more information about the available settings, see Using Object Mapping
-	// to Migrate Data to a Kinesis Data Stream (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.Kinesis.html#CHAP_Target.Kinesis.ObjectMapping)
-	// in the AWS Database Migration User Guide.
-	KinesisSettings *KinesisSettings `type:"structure"`
-
-	// An AWS KMS key identifier that is used to encrypt the connection parameters
-	// for the endpoint.
-	//
-	// If you don't specify a value for the KmsKeyId parameter, then AWS DMS uses
-	// your default encryption key.
-	//
-	// AWS KMS creates the default encryption key for your AWS account. Your AWS
-	// account has a different default encryption key for each AWS Region.
-	KmsKeyId *string `type:"string"`
-
-	// Settings in JSON format for the source MongoDB endpoint. For more information
-	// about the available settings, see the configuration properties section in
-	// Using MongoDB as a Target for AWS Database Migration Service (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.MongoDB.html)
-	// in the AWS Database Migration Service User Guide.
-	MongoDbSettings *MongoDbSettings `type:"structure"`
-
-	// The password to be used to log in to the endpoint database.
-	Password *string `type:"string" sensitive:"true"`
-
-	// The port used by the endpoint database.
-	Port *int64 `type:"integer"`
-
-	RedshiftSettings *RedshiftSettings `type:"structure"`
-
-	// Settings in JSON format for the target Amazon S3 endpoint. For more information
-	// about the available settings, see Extra Connection Attributes When Using
-	// Amazon S3 as a Target for AWS DMS (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.S3.html#CHAP_Target.S3.Configuring)
-	// in the AWS Database Migration Service User Guide.
-	S3Settings *S3Settings `type:"structure"`
-
-	// The name of the server where the endpoint database resides.
-	ServerName *string `type:"string"`
-
-	// The Amazon Resource Name (ARN) for the service access role that you want
-	// to use to create the endpoint.
-	ServiceAccessRoleArn *string `type:"string"`
-
-	// The Secure Sockets Layer (SSL) mode to use for the SSL connection. The default
-	// is none
-	SslMode DmsSslModeValue `type:"string" enum:"true"`
-
-	// One or more tags to be assigned to the endpoint.
-	Tags []Tag `type:"list"`
-
-	// The user name to be used to log in to the endpoint database.
-	Username *string `type:"string"`
-}
-
-// String returns the string representation
-func (s CreateEndpointInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateEndpointInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateEndpointInput"}
-
-	if s.EndpointIdentifier == nil {
-		invalidParams.Add(aws.NewErrParamRequired("EndpointIdentifier"))
-	}
-	if len(s.EndpointType) == 0 {
-		invalidParams.Add(aws.NewErrParamRequired("EndpointType"))
-	}
-
-	if s.EngineName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("EngineName"))
-	}
-	if s.DynamoDbSettings != nil {
-		if err := s.DynamoDbSettings.Validate(); err != nil {
-			invalidParams.AddNested("DynamoDbSettings", err.(aws.ErrInvalidParams))
-		}
-	}
-	if s.ElasticsearchSettings != nil {
-		if err := s.ElasticsearchSettings.Validate(); err != nil {
-			invalidParams.AddNested("ElasticsearchSettings", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type CreateEndpointOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The endpoint that was created.
-	Endpoint *Endpoint `type:"structure"`
-}
-
-// String returns the string representation
-func (s CreateEndpointOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCreateEndpoint = "CreateEndpoint"
 
@@ -196,7 +24,7 @@ const opCreateEndpoint = "CreateEndpoint"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/CreateEndpoint
-func (c *Client) CreateEndpointRequest(input *CreateEndpointInput) CreateEndpointRequest {
+func (c *Client) CreateEndpointRequest(input *types.CreateEndpointInput) CreateEndpointRequest {
 	op := &aws.Operation{
 		Name:       opCreateEndpoint,
 		HTTPMethod: "POST",
@@ -204,10 +32,10 @@ func (c *Client) CreateEndpointRequest(input *CreateEndpointInput) CreateEndpoin
 	}
 
 	if input == nil {
-		input = &CreateEndpointInput{}
+		input = &types.CreateEndpointInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateEndpointOutput{})
+	req := c.newRequest(op, input, &types.CreateEndpointOutput{})
 	return CreateEndpointRequest{Request: req, Input: input, Copy: c.CreateEndpointRequest}
 }
 
@@ -215,8 +43,8 @@ func (c *Client) CreateEndpointRequest(input *CreateEndpointInput) CreateEndpoin
 // CreateEndpoint API operation.
 type CreateEndpointRequest struct {
 	*aws.Request
-	Input *CreateEndpointInput
-	Copy  func(*CreateEndpointInput) CreateEndpointRequest
+	Input *types.CreateEndpointInput
+	Copy  func(*types.CreateEndpointInput) CreateEndpointRequest
 }
 
 // Send marshals and sends the CreateEndpoint API request.
@@ -228,7 +56,7 @@ func (r CreateEndpointRequest) Send(ctx context.Context) (*CreateEndpointRespons
 	}
 
 	resp := &CreateEndpointResponse{
-		CreateEndpointOutput: r.Request.Data.(*CreateEndpointOutput),
+		CreateEndpointOutput: r.Request.Data.(*types.CreateEndpointOutput),
 		response:             &aws.Response{Request: r.Request},
 	}
 
@@ -238,7 +66,7 @@ func (r CreateEndpointRequest) Send(ctx context.Context) (*CreateEndpointRespons
 // CreateEndpointResponse is the response type for the
 // CreateEndpoint API operation.
 type CreateEndpointResponse struct {
-	*CreateEndpointOutput
+	*types.CreateEndpointOutput
 
 	response *aws.Response
 }

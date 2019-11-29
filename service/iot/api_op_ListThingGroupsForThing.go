@@ -6,113 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/iot/types"
 )
-
-type ListThingGroupsForThingInput struct {
-	_ struct{} `type:"structure"`
-
-	// The maximum number of results to return at one time.
-	MaxResults *int64 `location:"querystring" locationName:"maxResults" min:"1" type:"integer"`
-
-	// The token to retrieve the next set of results.
-	NextToken *string `location:"querystring" locationName:"nextToken" type:"string"`
-
-	// The thing name.
-	//
-	// ThingName is a required field
-	ThingName *string `location:"uri" locationName:"thingName" min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s ListThingGroupsForThingInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListThingGroupsForThingInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListThingGroupsForThingInput"}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-
-	if s.ThingName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ThingName"))
-	}
-	if s.ThingName != nil && len(*s.ThingName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ThingName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListThingGroupsForThingInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.ThingName != nil {
-		v := *s.ThingName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "thingName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.MaxResults != nil {
-		v := *s.MaxResults
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "maxResults", protocol.Int64Value(v), metadata)
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type ListThingGroupsForThingOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The token used to get the next set of results, or null if there are no additional
-	// results.
-	NextToken *string `locationName:"nextToken" type:"string"`
-
-	// The thing groups.
-	ThingGroups []GroupNameAndArn `locationName:"thingGroups" type:"list"`
-}
-
-// String returns the string representation
-func (s ListThingGroupsForThingOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListThingGroupsForThingOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.ThingGroups != nil {
-		v := s.ThingGroups
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "thingGroups", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	return nil
-}
 
 const opListThingGroupsForThing = "ListThingGroupsForThing"
 
@@ -127,7 +22,7 @@ const opListThingGroupsForThing = "ListThingGroupsForThing"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) ListThingGroupsForThingRequest(input *ListThingGroupsForThingInput) ListThingGroupsForThingRequest {
+func (c *Client) ListThingGroupsForThingRequest(input *types.ListThingGroupsForThingInput) ListThingGroupsForThingRequest {
 	op := &aws.Operation{
 		Name:       opListThingGroupsForThing,
 		HTTPMethod: "GET",
@@ -135,10 +30,10 @@ func (c *Client) ListThingGroupsForThingRequest(input *ListThingGroupsForThingIn
 	}
 
 	if input == nil {
-		input = &ListThingGroupsForThingInput{}
+		input = &types.ListThingGroupsForThingInput{}
 	}
 
-	req := c.newRequest(op, input, &ListThingGroupsForThingOutput{})
+	req := c.newRequest(op, input, &types.ListThingGroupsForThingOutput{})
 	return ListThingGroupsForThingRequest{Request: req, Input: input, Copy: c.ListThingGroupsForThingRequest}
 }
 
@@ -146,8 +41,8 @@ func (c *Client) ListThingGroupsForThingRequest(input *ListThingGroupsForThingIn
 // ListThingGroupsForThing API operation.
 type ListThingGroupsForThingRequest struct {
 	*aws.Request
-	Input *ListThingGroupsForThingInput
-	Copy  func(*ListThingGroupsForThingInput) ListThingGroupsForThingRequest
+	Input *types.ListThingGroupsForThingInput
+	Copy  func(*types.ListThingGroupsForThingInput) ListThingGroupsForThingRequest
 }
 
 // Send marshals and sends the ListThingGroupsForThing API request.
@@ -159,7 +54,7 @@ func (r ListThingGroupsForThingRequest) Send(ctx context.Context) (*ListThingGro
 	}
 
 	resp := &ListThingGroupsForThingResponse{
-		ListThingGroupsForThingOutput: r.Request.Data.(*ListThingGroupsForThingOutput),
+		ListThingGroupsForThingOutput: r.Request.Data.(*types.ListThingGroupsForThingOutput),
 		response:                      &aws.Response{Request: r.Request},
 	}
 
@@ -169,7 +64,7 @@ func (r ListThingGroupsForThingRequest) Send(ctx context.Context) (*ListThingGro
 // ListThingGroupsForThingResponse is the response type for the
 // ListThingGroupsForThing API operation.
 type ListThingGroupsForThingResponse struct {
-	*ListThingGroupsForThingOutput
+	*types.ListThingGroupsForThingOutput
 
 	response *aws.Response
 }

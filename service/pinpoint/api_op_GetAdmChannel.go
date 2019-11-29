@@ -6,74 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/pinpoint/types"
 )
-
-type GetAdmChannelInput struct {
-	_ struct{} `type:"structure"`
-
-	// ApplicationId is a required field
-	ApplicationId *string `location:"uri" locationName:"application-id" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetAdmChannelInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetAdmChannelInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetAdmChannelInput"}
-
-	if s.ApplicationId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ApplicationId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetAdmChannelInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.ApplicationId != nil {
-		v := *s.ApplicationId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "application-id", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type GetAdmChannelOutput struct {
-	_ struct{} `type:"structure" payload:"ADMChannelResponse"`
-
-	// Provides information about the status and settings of the ADM (Amazon Device
-	// Messaging) channel for an application.
-	//
-	// ADMChannelResponse is a required field
-	ADMChannelResponse *ADMChannelResponse `type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s GetAdmChannelOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetAdmChannelOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.ADMChannelResponse != nil {
-		v := s.ADMChannelResponse
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.PayloadTarget, "ADMChannelResponse", v, metadata)
-	}
-	return nil
-}
 
 const opGetAdmChannel = "GetAdmChannel"
 
@@ -91,7 +25,7 @@ const opGetAdmChannel = "GetAdmChannel"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetAdmChannel
-func (c *Client) GetAdmChannelRequest(input *GetAdmChannelInput) GetAdmChannelRequest {
+func (c *Client) GetAdmChannelRequest(input *types.GetAdmChannelInput) GetAdmChannelRequest {
 	op := &aws.Operation{
 		Name:       opGetAdmChannel,
 		HTTPMethod: "GET",
@@ -99,10 +33,10 @@ func (c *Client) GetAdmChannelRequest(input *GetAdmChannelInput) GetAdmChannelRe
 	}
 
 	if input == nil {
-		input = &GetAdmChannelInput{}
+		input = &types.GetAdmChannelInput{}
 	}
 
-	req := c.newRequest(op, input, &GetAdmChannelOutput{})
+	req := c.newRequest(op, input, &types.GetAdmChannelOutput{})
 	return GetAdmChannelRequest{Request: req, Input: input, Copy: c.GetAdmChannelRequest}
 }
 
@@ -110,8 +44,8 @@ func (c *Client) GetAdmChannelRequest(input *GetAdmChannelInput) GetAdmChannelRe
 // GetAdmChannel API operation.
 type GetAdmChannelRequest struct {
 	*aws.Request
-	Input *GetAdmChannelInput
-	Copy  func(*GetAdmChannelInput) GetAdmChannelRequest
+	Input *types.GetAdmChannelInput
+	Copy  func(*types.GetAdmChannelInput) GetAdmChannelRequest
 }
 
 // Send marshals and sends the GetAdmChannel API request.
@@ -123,7 +57,7 @@ func (r GetAdmChannelRequest) Send(ctx context.Context) (*GetAdmChannelResponse,
 	}
 
 	resp := &GetAdmChannelResponse{
-		GetAdmChannelOutput: r.Request.Data.(*GetAdmChannelOutput),
+		GetAdmChannelOutput: r.Request.Data.(*types.GetAdmChannelOutput),
 		response:            &aws.Response{Request: r.Request},
 	}
 
@@ -133,7 +67,7 @@ func (r GetAdmChannelRequest) Send(ctx context.Context) (*GetAdmChannelResponse,
 // GetAdmChannelResponse is the response type for the
 // GetAdmChannel API operation.
 type GetAdmChannelResponse struct {
-	*GetAdmChannelOutput
+	*types.GetAdmChannelOutput
 
 	response *aws.Response
 }

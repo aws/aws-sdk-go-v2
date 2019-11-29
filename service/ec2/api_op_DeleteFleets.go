@@ -6,67 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-type DeleteFleetsInput struct {
-	_ struct{} `type:"structure"`
-
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have
-	// the required permissions, the error response is DryRunOperation. Otherwise,
-	// it is UnauthorizedOperation.
-	DryRun *bool `type:"boolean"`
-
-	// The IDs of the EC2 Fleets.
-	//
-	// FleetIds is a required field
-	FleetIds []string `locationName:"FleetId" type:"list" required:"true"`
-
-	// Indicates whether to terminate instances for an EC2 Fleet if it is deleted
-	// successfully.
-	//
-	// TerminateInstances is a required field
-	TerminateInstances *bool `type:"boolean" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteFleetsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteFleetsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteFleetsInput"}
-
-	if s.FleetIds == nil {
-		invalidParams.Add(aws.NewErrParamRequired("FleetIds"))
-	}
-
-	if s.TerminateInstances == nil {
-		invalidParams.Add(aws.NewErrParamRequired("TerminateInstances"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteFleetsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Information about the EC2 Fleets that are successfully deleted.
-	SuccessfulFleetDeletions []DeleteFleetSuccessItem `locationName:"successfulFleetDeletionSet" locationNameList:"item" type:"list"`
-
-	// Information about the EC2 Fleets that are not successfully deleted.
-	UnsuccessfulFleetDeletions []DeleteFleetErrorItem `locationName:"unsuccessfulFleetDeletionSet" locationNameList:"item" type:"list"`
-}
-
-// String returns the string representation
-func (s DeleteFleetsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteFleets = "DeleteFleets"
 
@@ -89,7 +30,7 @@ const opDeleteFleets = "DeleteFleets"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteFleets
-func (c *Client) DeleteFleetsRequest(input *DeleteFleetsInput) DeleteFleetsRequest {
+func (c *Client) DeleteFleetsRequest(input *types.DeleteFleetsInput) DeleteFleetsRequest {
 	op := &aws.Operation{
 		Name:       opDeleteFleets,
 		HTTPMethod: "POST",
@@ -97,10 +38,10 @@ func (c *Client) DeleteFleetsRequest(input *DeleteFleetsInput) DeleteFleetsReque
 	}
 
 	if input == nil {
-		input = &DeleteFleetsInput{}
+		input = &types.DeleteFleetsInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteFleetsOutput{})
+	req := c.newRequest(op, input, &types.DeleteFleetsOutput{})
 	return DeleteFleetsRequest{Request: req, Input: input, Copy: c.DeleteFleetsRequest}
 }
 
@@ -108,8 +49,8 @@ func (c *Client) DeleteFleetsRequest(input *DeleteFleetsInput) DeleteFleetsReque
 // DeleteFleets API operation.
 type DeleteFleetsRequest struct {
 	*aws.Request
-	Input *DeleteFleetsInput
-	Copy  func(*DeleteFleetsInput) DeleteFleetsRequest
+	Input *types.DeleteFleetsInput
+	Copy  func(*types.DeleteFleetsInput) DeleteFleetsRequest
 }
 
 // Send marshals and sends the DeleteFleets API request.
@@ -121,7 +62,7 @@ func (r DeleteFleetsRequest) Send(ctx context.Context) (*DeleteFleetsResponse, e
 	}
 
 	resp := &DeleteFleetsResponse{
-		DeleteFleetsOutput: r.Request.Data.(*DeleteFleetsOutput),
+		DeleteFleetsOutput: r.Request.Data.(*types.DeleteFleetsOutput),
 		response:           &aws.Response{Request: r.Request},
 	}
 
@@ -131,7 +72,7 @@ func (r DeleteFleetsRequest) Send(ctx context.Context) (*DeleteFleetsResponse, e
 // DeleteFleetsResponse is the response type for the
 // DeleteFleets API operation.
 type DeleteFleetsResponse struct {
-	*DeleteFleetsOutput
+	*types.DeleteFleetsOutput
 
 	response *aws.Response
 }

@@ -6,82 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/guardduty/types"
 )
-
-type DeleteFilterInput struct {
-	_ struct{} `type:"structure"`
-
-	// The unique ID of the detector the filter is associated with.
-	//
-	// DetectorId is a required field
-	DetectorId *string `location:"uri" locationName:"detectorId" min:"1" type:"string" required:"true"`
-
-	// The name of the filter you want to delete.
-	//
-	// FilterName is a required field
-	FilterName *string `location:"uri" locationName:"filterName" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteFilterInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteFilterInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteFilterInput"}
-
-	if s.DetectorId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DetectorId"))
-	}
-	if s.DetectorId != nil && len(*s.DetectorId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("DetectorId", 1))
-	}
-
-	if s.FilterName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("FilterName"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteFilterInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.DetectorId != nil {
-		v := *s.DetectorId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "detectorId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.FilterName != nil {
-		v := *s.FilterName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "filterName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type DeleteFilterOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteFilterOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteFilterOutput) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
 
 const opDeleteFilter = "DeleteFilter"
 
@@ -98,7 +24,7 @@ const opDeleteFilter = "DeleteFilter"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DeleteFilter
-func (c *Client) DeleteFilterRequest(input *DeleteFilterInput) DeleteFilterRequest {
+func (c *Client) DeleteFilterRequest(input *types.DeleteFilterInput) DeleteFilterRequest {
 	op := &aws.Operation{
 		Name:       opDeleteFilter,
 		HTTPMethod: "DELETE",
@@ -106,10 +32,10 @@ func (c *Client) DeleteFilterRequest(input *DeleteFilterInput) DeleteFilterReque
 	}
 
 	if input == nil {
-		input = &DeleteFilterInput{}
+		input = &types.DeleteFilterInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteFilterOutput{})
+	req := c.newRequest(op, input, &types.DeleteFilterOutput{})
 	return DeleteFilterRequest{Request: req, Input: input, Copy: c.DeleteFilterRequest}
 }
 
@@ -117,8 +43,8 @@ func (c *Client) DeleteFilterRequest(input *DeleteFilterInput) DeleteFilterReque
 // DeleteFilter API operation.
 type DeleteFilterRequest struct {
 	*aws.Request
-	Input *DeleteFilterInput
-	Copy  func(*DeleteFilterInput) DeleteFilterRequest
+	Input *types.DeleteFilterInput
+	Copy  func(*types.DeleteFilterInput) DeleteFilterRequest
 }
 
 // Send marshals and sends the DeleteFilter API request.
@@ -130,7 +56,7 @@ func (r DeleteFilterRequest) Send(ctx context.Context) (*DeleteFilterResponse, e
 	}
 
 	resp := &DeleteFilterResponse{
-		DeleteFilterOutput: r.Request.Data.(*DeleteFilterOutput),
+		DeleteFilterOutput: r.Request.Data.(*types.DeleteFilterOutput),
 		response:           &aws.Response{Request: r.Request},
 	}
 
@@ -140,7 +66,7 @@ func (r DeleteFilterRequest) Send(ctx context.Context) (*DeleteFilterResponse, e
 // DeleteFilterResponse is the response type for the
 // DeleteFilter API operation.
 type DeleteFilterResponse struct {
-	*DeleteFilterOutput
+	*types.DeleteFilterOutput
 
 	response *aws.Response
 }

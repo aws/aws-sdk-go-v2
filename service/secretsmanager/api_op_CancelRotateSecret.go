@@ -6,75 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/secretsmanager/types"
 )
-
-type CancelRotateSecretInput struct {
-	_ struct{} `type:"structure"`
-
-	// Specifies the secret for which you want to cancel a rotation request. You
-	// can specify either the Amazon Resource Name (ARN) or the friendly name of
-	// the secret.
-	//
-	// If you specify an ARN, we generally recommend that you specify a complete
-	// ARN. You can specify a partial ARN too—for example, if you don’t include
-	// the final hyphen and six random characters that Secrets Manager adds at the
-	// end of the ARN when you created the secret. A partial ARN match can work
-	// as long as it uniquely matches only one secret. However, if your secret has
-	// a name that ends in a hyphen followed by six characters (before Secrets Manager
-	// adds the hyphen and six characters to the ARN) and you try to use that as
-	// a partial ARN, then those characters cause Secrets Manager to assume that
-	// you’re specifying a complete ARN. This confusion can cause unexpected results.
-	// To avoid this situation, we recommend that you don’t create secret names
-	// that end with a hyphen followed by six characters.
-	//
-	// SecretId is a required field
-	SecretId *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s CancelRotateSecretInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CancelRotateSecretInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CancelRotateSecretInput"}
-
-	if s.SecretId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("SecretId"))
-	}
-	if s.SecretId != nil && len(*s.SecretId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("SecretId", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type CancelRotateSecretOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The ARN of the secret for which rotation was canceled.
-	ARN *string `min:"20" type:"string"`
-
-	// The friendly name of the secret for which rotation was canceled.
-	Name *string `min:"1" type:"string"`
-
-	// The unique identifier of the version of the secret that was created during
-	// the rotation. This version might not be complete, and should be evaluated
-	// for possible deletion. At the very least, you should remove the VersionStage
-	// value AWSPENDING to enable this version to be deleted. Failing to clean up
-	// a cancelled rotation can block you from successfully starting future rotations.
-	VersionId *string `min:"32" type:"string"`
-}
-
-// String returns the string representation
-func (s CancelRotateSecretOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCancelRotateSecret = "CancelRotateSecret"
 
@@ -132,7 +65,7 @@ const opCancelRotateSecret = "CancelRotateSecret"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/secretsmanager-2017-10-17/CancelRotateSecret
-func (c *Client) CancelRotateSecretRequest(input *CancelRotateSecretInput) CancelRotateSecretRequest {
+func (c *Client) CancelRotateSecretRequest(input *types.CancelRotateSecretInput) CancelRotateSecretRequest {
 	op := &aws.Operation{
 		Name:       opCancelRotateSecret,
 		HTTPMethod: "POST",
@@ -140,10 +73,10 @@ func (c *Client) CancelRotateSecretRequest(input *CancelRotateSecretInput) Cance
 	}
 
 	if input == nil {
-		input = &CancelRotateSecretInput{}
+		input = &types.CancelRotateSecretInput{}
 	}
 
-	req := c.newRequest(op, input, &CancelRotateSecretOutput{})
+	req := c.newRequest(op, input, &types.CancelRotateSecretOutput{})
 	return CancelRotateSecretRequest{Request: req, Input: input, Copy: c.CancelRotateSecretRequest}
 }
 
@@ -151,8 +84,8 @@ func (c *Client) CancelRotateSecretRequest(input *CancelRotateSecretInput) Cance
 // CancelRotateSecret API operation.
 type CancelRotateSecretRequest struct {
 	*aws.Request
-	Input *CancelRotateSecretInput
-	Copy  func(*CancelRotateSecretInput) CancelRotateSecretRequest
+	Input *types.CancelRotateSecretInput
+	Copy  func(*types.CancelRotateSecretInput) CancelRotateSecretRequest
 }
 
 // Send marshals and sends the CancelRotateSecret API request.
@@ -164,7 +97,7 @@ func (r CancelRotateSecretRequest) Send(ctx context.Context) (*CancelRotateSecre
 	}
 
 	resp := &CancelRotateSecretResponse{
-		CancelRotateSecretOutput: r.Request.Data.(*CancelRotateSecretOutput),
+		CancelRotateSecretOutput: r.Request.Data.(*types.CancelRotateSecretOutput),
 		response:                 &aws.Response{Request: r.Request},
 	}
 
@@ -174,7 +107,7 @@ func (r CancelRotateSecretRequest) Send(ctx context.Context) (*CancelRotateSecre
 // CancelRotateSecretResponse is the response type for the
 // CancelRotateSecret API operation.
 type CancelRotateSecretResponse struct {
-	*CancelRotateSecretOutput
+	*types.CancelRotateSecretOutput
 
 	response *aws.Response
 }

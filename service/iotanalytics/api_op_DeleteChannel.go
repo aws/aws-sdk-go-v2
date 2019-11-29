@@ -6,68 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/restjson"
+	"github.com/aws/aws-sdk-go-v2/service/iotanalytics/types"
 )
-
-type DeleteChannelInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the channel to delete.
-	//
-	// ChannelName is a required field
-	ChannelName *string `location:"uri" locationName:"channelName" min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteChannelInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteChannelInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteChannelInput"}
-
-	if s.ChannelName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ChannelName"))
-	}
-	if s.ChannelName != nil && len(*s.ChannelName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ChannelName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteChannelInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.ChannelName != nil {
-		v := *s.ChannelName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "channelName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type DeleteChannelOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteChannelOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteChannelOutput) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
 
 const opDeleteChannel = "DeleteChannel"
 
@@ -84,7 +26,7 @@ const opDeleteChannel = "DeleteChannel"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iotanalytics-2017-11-27/DeleteChannel
-func (c *Client) DeleteChannelRequest(input *DeleteChannelInput) DeleteChannelRequest {
+func (c *Client) DeleteChannelRequest(input *types.DeleteChannelInput) DeleteChannelRequest {
 	op := &aws.Operation{
 		Name:       opDeleteChannel,
 		HTTPMethod: "DELETE",
@@ -92,10 +34,10 @@ func (c *Client) DeleteChannelRequest(input *DeleteChannelInput) DeleteChannelRe
 	}
 
 	if input == nil {
-		input = &DeleteChannelInput{}
+		input = &types.DeleteChannelInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteChannelOutput{})
+	req := c.newRequest(op, input, &types.DeleteChannelOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return DeleteChannelRequest{Request: req, Input: input, Copy: c.DeleteChannelRequest}
@@ -105,8 +47,8 @@ func (c *Client) DeleteChannelRequest(input *DeleteChannelInput) DeleteChannelRe
 // DeleteChannel API operation.
 type DeleteChannelRequest struct {
 	*aws.Request
-	Input *DeleteChannelInput
-	Copy  func(*DeleteChannelInput) DeleteChannelRequest
+	Input *types.DeleteChannelInput
+	Copy  func(*types.DeleteChannelInput) DeleteChannelRequest
 }
 
 // Send marshals and sends the DeleteChannel API request.
@@ -118,7 +60,7 @@ func (r DeleteChannelRequest) Send(ctx context.Context) (*DeleteChannelResponse,
 	}
 
 	resp := &DeleteChannelResponse{
-		DeleteChannelOutput: r.Request.Data.(*DeleteChannelOutput),
+		DeleteChannelOutput: r.Request.Data.(*types.DeleteChannelOutput),
 		response:            &aws.Response{Request: r.Request},
 	}
 
@@ -128,7 +70,7 @@ func (r DeleteChannelRequest) Send(ctx context.Context) (*DeleteChannelResponse,
 // DeleteChannelResponse is the response type for the
 // DeleteChannel API operation.
 type DeleteChannelResponse struct {
-	*DeleteChannelOutput
+	*types.DeleteChannelOutput
 
 	response *aws.Response
 }

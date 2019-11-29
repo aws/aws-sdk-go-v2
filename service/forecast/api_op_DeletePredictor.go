@@ -6,47 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
+	"github.com/aws/aws-sdk-go-v2/service/forecast/types"
 )
-
-type DeletePredictorInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the predictor to delete.
-	//
-	// PredictorArn is a required field
-	PredictorArn *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeletePredictorInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeletePredictorInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeletePredictorInput"}
-
-	if s.PredictorArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("PredictorArn"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeletePredictorOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeletePredictorOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeletePredictor = "DeletePredictor"
 
@@ -67,7 +30,7 @@ const opDeletePredictor = "DeletePredictor"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/DeletePredictor
-func (c *Client) DeletePredictorRequest(input *DeletePredictorInput) DeletePredictorRequest {
+func (c *Client) DeletePredictorRequest(input *types.DeletePredictorInput) DeletePredictorRequest {
 	op := &aws.Operation{
 		Name:       opDeletePredictor,
 		HTTPMethod: "POST",
@@ -75,10 +38,10 @@ func (c *Client) DeletePredictorRequest(input *DeletePredictorInput) DeletePredi
 	}
 
 	if input == nil {
-		input = &DeletePredictorInput{}
+		input = &types.DeletePredictorInput{}
 	}
 
-	req := c.newRequest(op, input, &DeletePredictorOutput{})
+	req := c.newRequest(op, input, &types.DeletePredictorOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return DeletePredictorRequest{Request: req, Input: input, Copy: c.DeletePredictorRequest}
@@ -88,8 +51,8 @@ func (c *Client) DeletePredictorRequest(input *DeletePredictorInput) DeletePredi
 // DeletePredictor API operation.
 type DeletePredictorRequest struct {
 	*aws.Request
-	Input *DeletePredictorInput
-	Copy  func(*DeletePredictorInput) DeletePredictorRequest
+	Input *types.DeletePredictorInput
+	Copy  func(*types.DeletePredictorInput) DeletePredictorRequest
 }
 
 // Send marshals and sends the DeletePredictor API request.
@@ -101,7 +64,7 @@ func (r DeletePredictorRequest) Send(ctx context.Context) (*DeletePredictorRespo
 	}
 
 	resp := &DeletePredictorResponse{
-		DeletePredictorOutput: r.Request.Data.(*DeletePredictorOutput),
+		DeletePredictorOutput: r.Request.Data.(*types.DeletePredictorOutput),
 		response:              &aws.Response{Request: r.Request},
 	}
 
@@ -111,7 +74,7 @@ func (r DeletePredictorRequest) Send(ctx context.Context) (*DeletePredictorRespo
 // DeletePredictorResponse is the response type for the
 // DeletePredictor API operation.
 type DeletePredictorResponse struct {
-	*DeletePredictorOutput
+	*types.DeletePredictorOutput
 
 	response *aws.Response
 }

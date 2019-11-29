@@ -6,30 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/iam/types"
 )
-
-type ListSAMLProvidersInput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s ListSAMLProvidersInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Contains the response to a successful ListSAMLProviders request.
-type ListSAMLProvidersOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The list of SAML provider resource objects defined in IAM for this AWS account.
-	SAMLProviderList []SAMLProviderListEntry `type:"list"`
-}
-
-// String returns the string representation
-func (s ListSAMLProvidersOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListSAMLProviders = "ListSAMLProviders"
 
@@ -48,7 +26,7 @@ const opListSAMLProviders = "ListSAMLProviders"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListSAMLProviders
-func (c *Client) ListSAMLProvidersRequest(input *ListSAMLProvidersInput) ListSAMLProvidersRequest {
+func (c *Client) ListSAMLProvidersRequest(input *types.ListSAMLProvidersInput) ListSAMLProvidersRequest {
 	op := &aws.Operation{
 		Name:       opListSAMLProviders,
 		HTTPMethod: "POST",
@@ -56,10 +34,10 @@ func (c *Client) ListSAMLProvidersRequest(input *ListSAMLProvidersInput) ListSAM
 	}
 
 	if input == nil {
-		input = &ListSAMLProvidersInput{}
+		input = &types.ListSAMLProvidersInput{}
 	}
 
-	req := c.newRequest(op, input, &ListSAMLProvidersOutput{})
+	req := c.newRequest(op, input, &types.ListSAMLProvidersOutput{})
 	return ListSAMLProvidersRequest{Request: req, Input: input, Copy: c.ListSAMLProvidersRequest}
 }
 
@@ -67,8 +45,8 @@ func (c *Client) ListSAMLProvidersRequest(input *ListSAMLProvidersInput) ListSAM
 // ListSAMLProviders API operation.
 type ListSAMLProvidersRequest struct {
 	*aws.Request
-	Input *ListSAMLProvidersInput
-	Copy  func(*ListSAMLProvidersInput) ListSAMLProvidersRequest
+	Input *types.ListSAMLProvidersInput
+	Copy  func(*types.ListSAMLProvidersInput) ListSAMLProvidersRequest
 }
 
 // Send marshals and sends the ListSAMLProviders API request.
@@ -80,7 +58,7 @@ func (r ListSAMLProvidersRequest) Send(ctx context.Context) (*ListSAMLProvidersR
 	}
 
 	resp := &ListSAMLProvidersResponse{
-		ListSAMLProvidersOutput: r.Request.Data.(*ListSAMLProvidersOutput),
+		ListSAMLProvidersOutput: r.Request.Data.(*types.ListSAMLProvidersOutput),
 		response:                &aws.Response{Request: r.Request},
 	}
 
@@ -90,7 +68,7 @@ func (r ListSAMLProvidersRequest) Send(ctx context.Context) (*ListSAMLProvidersR
 // ListSAMLProvidersResponse is the response type for the
 // ListSAMLProviders API operation.
 type ListSAMLProvidersResponse struct {
-	*ListSAMLProvidersOutput
+	*types.ListSAMLProvidersOutput
 
 	response *aws.Response
 }

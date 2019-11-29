@@ -10,6 +10,7 @@ package cloud9iface
 
 import (
 	"github.com/aws/aws-sdk-go-v2/service/cloud9"
+	"github.com/aws/aws-sdk-go-v2/service/cloud9/types"
 )
 
 // ClientAPI provides an interface to enable mocking the
@@ -43,7 +44,7 @@ import (
 //    type mockClientClient struct {
 //        cloud9iface.ClientPI
 //    }
-//    func (m *mockClientClient) CreateEnvironmentEC2(input *cloud9.CreateEnvironmentEC2Input) (*cloud9.CreateEnvironmentEC2Output, error) {
+//    func (m *mockClientClient) CreateEnvironmentEC2(input *types.CreateEnvironmentEC2Input) (*types.CreateEnvironmentEC2Output, error) {
 //        // mock response/functionality
 //    }
 //
@@ -61,25 +62,25 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type ClientAPI interface {
-	CreateEnvironmentEC2Request(*cloud9.CreateEnvironmentEC2Input) cloud9.CreateEnvironmentEC2Request
+	CreateEnvironmentEC2Request(*types.CreateEnvironmentEC2Input) cloud9.CreateEnvironmentEC2Request
 
-	CreateEnvironmentMembershipRequest(*cloud9.CreateEnvironmentMembershipInput) cloud9.CreateEnvironmentMembershipRequest
+	CreateEnvironmentMembershipRequest(*types.CreateEnvironmentMembershipInput) cloud9.CreateEnvironmentMembershipRequest
 
-	DeleteEnvironmentRequest(*cloud9.DeleteEnvironmentInput) cloud9.DeleteEnvironmentRequest
+	DeleteEnvironmentRequest(*types.DeleteEnvironmentInput) cloud9.DeleteEnvironmentRequest
 
-	DeleteEnvironmentMembershipRequest(*cloud9.DeleteEnvironmentMembershipInput) cloud9.DeleteEnvironmentMembershipRequest
+	DeleteEnvironmentMembershipRequest(*types.DeleteEnvironmentMembershipInput) cloud9.DeleteEnvironmentMembershipRequest
 
-	DescribeEnvironmentMembershipsRequest(*cloud9.DescribeEnvironmentMembershipsInput) cloud9.DescribeEnvironmentMembershipsRequest
+	DescribeEnvironmentMembershipsRequest(*types.DescribeEnvironmentMembershipsInput) cloud9.DescribeEnvironmentMembershipsRequest
 
-	DescribeEnvironmentStatusRequest(*cloud9.DescribeEnvironmentStatusInput) cloud9.DescribeEnvironmentStatusRequest
+	DescribeEnvironmentStatusRequest(*types.DescribeEnvironmentStatusInput) cloud9.DescribeEnvironmentStatusRequest
 
-	DescribeEnvironmentsRequest(*cloud9.DescribeEnvironmentsInput) cloud9.DescribeEnvironmentsRequest
+	DescribeEnvironmentsRequest(*types.DescribeEnvironmentsInput) cloud9.DescribeEnvironmentsRequest
 
-	ListEnvironmentsRequest(*cloud9.ListEnvironmentsInput) cloud9.ListEnvironmentsRequest
+	ListEnvironmentsRequest(*types.ListEnvironmentsInput) cloud9.ListEnvironmentsRequest
 
-	UpdateEnvironmentRequest(*cloud9.UpdateEnvironmentInput) cloud9.UpdateEnvironmentRequest
+	UpdateEnvironmentRequest(*types.UpdateEnvironmentInput) cloud9.UpdateEnvironmentRequest
 
-	UpdateEnvironmentMembershipRequest(*cloud9.UpdateEnvironmentMembershipInput) cloud9.UpdateEnvironmentMembershipRequest
+	UpdateEnvironmentMembershipRequest(*types.UpdateEnvironmentMembershipInput) cloud9.UpdateEnvironmentMembershipRequest
 }
 
 var _ ClientAPI = (*cloud9.Client)(nil)

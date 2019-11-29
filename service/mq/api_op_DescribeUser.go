@@ -6,123 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/mq/types"
 )
-
-type DescribeUserInput struct {
-	_ struct{} `type:"structure"`
-
-	// BrokerId is a required field
-	BrokerId *string `location:"uri" locationName:"broker-id" type:"string" required:"true"`
-
-	// Username is a required field
-	Username *string `location:"uri" locationName:"username" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeUserInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeUserInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeUserInput"}
-
-	if s.BrokerId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("BrokerId"))
-	}
-
-	if s.Username == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Username"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DescribeUserInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.BrokerId != nil {
-		v := *s.BrokerId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "broker-id", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Username != nil {
-		v := *s.Username
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "username", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type DescribeUserOutput struct {
-	_ struct{} `type:"structure"`
-
-	BrokerId *string `locationName:"brokerId" type:"string"`
-
-	ConsoleAccess *bool `locationName:"consoleAccess" type:"boolean"`
-
-	Groups []string `locationName:"groups" type:"list"`
-
-	// Returns information about the status of the changes pending for the ActiveMQ
-	// user.
-	Pending *UserPendingChanges `locationName:"pending" type:"structure"`
-
-	Username *string `locationName:"username" type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeUserOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DescribeUserOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.BrokerId != nil {
-		v := *s.BrokerId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "brokerId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.ConsoleAccess != nil {
-		v := *s.ConsoleAccess
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "consoleAccess", protocol.BoolValue(v), metadata)
-	}
-	if s.Groups != nil {
-		v := s.Groups
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "groups", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
-		}
-		ls0.End()
-
-	}
-	if s.Pending != nil {
-		v := s.Pending
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "pending", v, metadata)
-	}
-	if s.Username != nil {
-		v := *s.Username
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "username", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opDescribeUser = "DescribeUser"
 
@@ -139,7 +24,7 @@ const opDescribeUser = "DescribeUser"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/DescribeUser
-func (c *Client) DescribeUserRequest(input *DescribeUserInput) DescribeUserRequest {
+func (c *Client) DescribeUserRequest(input *types.DescribeUserInput) DescribeUserRequest {
 	op := &aws.Operation{
 		Name:       opDescribeUser,
 		HTTPMethod: "GET",
@@ -147,10 +32,10 @@ func (c *Client) DescribeUserRequest(input *DescribeUserInput) DescribeUserReque
 	}
 
 	if input == nil {
-		input = &DescribeUserInput{}
+		input = &types.DescribeUserInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeUserOutput{})
+	req := c.newRequest(op, input, &types.DescribeUserOutput{})
 	return DescribeUserRequest{Request: req, Input: input, Copy: c.DescribeUserRequest}
 }
 
@@ -158,8 +43,8 @@ func (c *Client) DescribeUserRequest(input *DescribeUserInput) DescribeUserReque
 // DescribeUser API operation.
 type DescribeUserRequest struct {
 	*aws.Request
-	Input *DescribeUserInput
-	Copy  func(*DescribeUserInput) DescribeUserRequest
+	Input *types.DescribeUserInput
+	Copy  func(*types.DescribeUserInput) DescribeUserRequest
 }
 
 // Send marshals and sends the DescribeUser API request.
@@ -171,7 +56,7 @@ func (r DescribeUserRequest) Send(ctx context.Context) (*DescribeUserResponse, e
 	}
 
 	resp := &DescribeUserResponse{
-		DescribeUserOutput: r.Request.Data.(*DescribeUserOutput),
+		DescribeUserOutput: r.Request.Data.(*types.DescribeUserOutput),
 		response:           &aws.Response{Request: r.Request},
 	}
 
@@ -181,7 +66,7 @@ func (r DescribeUserRequest) Send(ctx context.Context) (*DescribeUserResponse, e
 // DescribeUserResponse is the response type for the
 // DescribeUser API operation.
 type DescribeUserResponse struct {
-	*DescribeUserOutput
+	*types.DescribeUserOutput
 
 	response *aws.Response
 }

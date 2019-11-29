@@ -6,54 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ecs/types"
 )
-
-type UpdateContainerAgentInput struct {
-	_ struct{} `type:"structure"`
-
-	// The short name or full Amazon Resource Name (ARN) of the cluster that your
-	// container instance is running on. If you do not specify a cluster, the default
-	// cluster is assumed.
-	Cluster *string `locationName:"cluster" type:"string"`
-
-	// The container instance ID or full ARN entries for the container instance
-	// on which you would like to update the Amazon ECS container agent.
-	//
-	// ContainerInstance is a required field
-	ContainerInstance *string `locationName:"containerInstance" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s UpdateContainerAgentInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateContainerAgentInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateContainerAgentInput"}
-
-	if s.ContainerInstance == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ContainerInstance"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type UpdateContainerAgentOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The container instance for which the container agent was updated.
-	ContainerInstance *ContainerInstance `locationName:"containerInstance" type:"structure"`
-}
-
-// String returns the string representation
-func (s UpdateContainerAgentOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opUpdateContainerAgent = "UpdateContainerAgent"
 
@@ -80,7 +34,7 @@ const opUpdateContainerAgent = "UpdateContainerAgent"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/UpdateContainerAgent
-func (c *Client) UpdateContainerAgentRequest(input *UpdateContainerAgentInput) UpdateContainerAgentRequest {
+func (c *Client) UpdateContainerAgentRequest(input *types.UpdateContainerAgentInput) UpdateContainerAgentRequest {
 	op := &aws.Operation{
 		Name:       opUpdateContainerAgent,
 		HTTPMethod: "POST",
@@ -88,10 +42,10 @@ func (c *Client) UpdateContainerAgentRequest(input *UpdateContainerAgentInput) U
 	}
 
 	if input == nil {
-		input = &UpdateContainerAgentInput{}
+		input = &types.UpdateContainerAgentInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateContainerAgentOutput{})
+	req := c.newRequest(op, input, &types.UpdateContainerAgentOutput{})
 	return UpdateContainerAgentRequest{Request: req, Input: input, Copy: c.UpdateContainerAgentRequest}
 }
 
@@ -99,8 +53,8 @@ func (c *Client) UpdateContainerAgentRequest(input *UpdateContainerAgentInput) U
 // UpdateContainerAgent API operation.
 type UpdateContainerAgentRequest struct {
 	*aws.Request
-	Input *UpdateContainerAgentInput
-	Copy  func(*UpdateContainerAgentInput) UpdateContainerAgentRequest
+	Input *types.UpdateContainerAgentInput
+	Copy  func(*types.UpdateContainerAgentInput) UpdateContainerAgentRequest
 }
 
 // Send marshals and sends the UpdateContainerAgent API request.
@@ -112,7 +66,7 @@ func (r UpdateContainerAgentRequest) Send(ctx context.Context) (*UpdateContainer
 	}
 
 	resp := &UpdateContainerAgentResponse{
-		UpdateContainerAgentOutput: r.Request.Data.(*UpdateContainerAgentOutput),
+		UpdateContainerAgentOutput: r.Request.Data.(*types.UpdateContainerAgentOutput),
 		response:                   &aws.Response{Request: r.Request},
 	}
 
@@ -122,7 +76,7 @@ func (r UpdateContainerAgentRequest) Send(ctx context.Context) (*UpdateContainer
 // UpdateContainerAgentResponse is the response type for the
 // UpdateContainerAgent API operation.
 type UpdateContainerAgentResponse struct {
-	*UpdateContainerAgentOutput
+	*types.UpdateContainerAgentOutput
 
 	response *aws.Response
 }

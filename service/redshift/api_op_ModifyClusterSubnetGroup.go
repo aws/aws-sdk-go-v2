@@ -6,61 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/redshift/types"
 )
-
-type ModifyClusterSubnetGroupInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the subnet group to be modified.
-	//
-	// ClusterSubnetGroupName is a required field
-	ClusterSubnetGroupName *string `type:"string" required:"true"`
-
-	// A text description of the subnet group to be modified.
-	Description *string `type:"string"`
-
-	// An array of VPC subnet IDs. A maximum of 20 subnets can be modified in a
-	// single request.
-	//
-	// SubnetIds is a required field
-	SubnetIds []string `locationNameList:"SubnetIdentifier" type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s ModifyClusterSubnetGroupInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ModifyClusterSubnetGroupInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ModifyClusterSubnetGroupInput"}
-
-	if s.ClusterSubnetGroupName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ClusterSubnetGroupName"))
-	}
-
-	if s.SubnetIds == nil {
-		invalidParams.Add(aws.NewErrParamRequired("SubnetIds"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ModifyClusterSubnetGroupOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Describes a subnet group.
-	ClusterSubnetGroup *ClusterSubnetGroup `type:"structure"`
-}
-
-// String returns the string representation
-func (s ModifyClusterSubnetGroupOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opModifyClusterSubnetGroup = "ModifyClusterSubnetGroup"
 
@@ -79,7 +26,7 @@ const opModifyClusterSubnetGroup = "ModifyClusterSubnetGroup"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ModifyClusterSubnetGroup
-func (c *Client) ModifyClusterSubnetGroupRequest(input *ModifyClusterSubnetGroupInput) ModifyClusterSubnetGroupRequest {
+func (c *Client) ModifyClusterSubnetGroupRequest(input *types.ModifyClusterSubnetGroupInput) ModifyClusterSubnetGroupRequest {
 	op := &aws.Operation{
 		Name:       opModifyClusterSubnetGroup,
 		HTTPMethod: "POST",
@@ -87,10 +34,10 @@ func (c *Client) ModifyClusterSubnetGroupRequest(input *ModifyClusterSubnetGroup
 	}
 
 	if input == nil {
-		input = &ModifyClusterSubnetGroupInput{}
+		input = &types.ModifyClusterSubnetGroupInput{}
 	}
 
-	req := c.newRequest(op, input, &ModifyClusterSubnetGroupOutput{})
+	req := c.newRequest(op, input, &types.ModifyClusterSubnetGroupOutput{})
 	return ModifyClusterSubnetGroupRequest{Request: req, Input: input, Copy: c.ModifyClusterSubnetGroupRequest}
 }
 
@@ -98,8 +45,8 @@ func (c *Client) ModifyClusterSubnetGroupRequest(input *ModifyClusterSubnetGroup
 // ModifyClusterSubnetGroup API operation.
 type ModifyClusterSubnetGroupRequest struct {
 	*aws.Request
-	Input *ModifyClusterSubnetGroupInput
-	Copy  func(*ModifyClusterSubnetGroupInput) ModifyClusterSubnetGroupRequest
+	Input *types.ModifyClusterSubnetGroupInput
+	Copy  func(*types.ModifyClusterSubnetGroupInput) ModifyClusterSubnetGroupRequest
 }
 
 // Send marshals and sends the ModifyClusterSubnetGroup API request.
@@ -111,7 +58,7 @@ func (r ModifyClusterSubnetGroupRequest) Send(ctx context.Context) (*ModifyClust
 	}
 
 	resp := &ModifyClusterSubnetGroupResponse{
-		ModifyClusterSubnetGroupOutput: r.Request.Data.(*ModifyClusterSubnetGroupOutput),
+		ModifyClusterSubnetGroupOutput: r.Request.Data.(*types.ModifyClusterSubnetGroupOutput),
 		response:                       &aws.Response{Request: r.Request},
 	}
 
@@ -121,7 +68,7 @@ func (r ModifyClusterSubnetGroupRequest) Send(ctx context.Context) (*ModifyClust
 // ModifyClusterSubnetGroupResponse is the response type for the
 // ModifyClusterSubnetGroup API operation.
 type ModifyClusterSubnetGroupResponse struct {
-	*ModifyClusterSubnetGroupOutput
+	*types.ModifyClusterSubnetGroupOutput
 
 	response *aws.Response
 }

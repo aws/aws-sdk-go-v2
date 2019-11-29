@@ -6,61 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-// Contains the parameters for ModifySpotFleetRequest.
-type ModifySpotFleetRequestInput struct {
-	_ struct{} `type:"structure"`
-
-	// Indicates whether running Spot Instances should be terminated if the target
-	// capacity of the Spot Fleet request is decreased below the current size of
-	// the Spot Fleet.
-	ExcessCapacityTerminationPolicy ExcessCapacityTerminationPolicy `locationName:"excessCapacityTerminationPolicy" type:"string" enum:"true"`
-
-	// The number of On-Demand Instances in the fleet.
-	OnDemandTargetCapacity *int64 `type:"integer"`
-
-	// The ID of the Spot Fleet request.
-	//
-	// SpotFleetRequestId is a required field
-	SpotFleetRequestId *string `locationName:"spotFleetRequestId" type:"string" required:"true"`
-
-	// The size of the fleet.
-	TargetCapacity *int64 `locationName:"targetCapacity" type:"integer"`
-}
-
-// String returns the string representation
-func (s ModifySpotFleetRequestInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ModifySpotFleetRequestInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ModifySpotFleetRequestInput"}
-
-	if s.SpotFleetRequestId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("SpotFleetRequestId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Contains the output of ModifySpotFleetRequest.
-type ModifySpotFleetRequestOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Is true if the request succeeds, and an error otherwise.
-	Return *bool `locationName:"return" type:"boolean"`
-}
-
-// String returns the string representation
-func (s ModifySpotFleetRequestOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opModifySpotFleetRequest = "ModifySpotFleetRequest"
 
@@ -106,7 +53,7 @@ const opModifySpotFleetRequest = "ModifySpotFleetRequest"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifySpotFleetRequest
-func (c *Client) ModifySpotFleetRequestRequest(input *ModifySpotFleetRequestInput) ModifySpotFleetRequestRequest {
+func (c *Client) ModifySpotFleetRequestRequest(input *types.ModifySpotFleetRequestInput) ModifySpotFleetRequestRequest {
 	op := &aws.Operation{
 		Name:       opModifySpotFleetRequest,
 		HTTPMethod: "POST",
@@ -114,10 +61,10 @@ func (c *Client) ModifySpotFleetRequestRequest(input *ModifySpotFleetRequestInpu
 	}
 
 	if input == nil {
-		input = &ModifySpotFleetRequestInput{}
+		input = &types.ModifySpotFleetRequestInput{}
 	}
 
-	req := c.newRequest(op, input, &ModifySpotFleetRequestOutput{})
+	req := c.newRequest(op, input, &types.ModifySpotFleetRequestOutput{})
 	return ModifySpotFleetRequestRequest{Request: req, Input: input, Copy: c.ModifySpotFleetRequestRequest}
 }
 
@@ -125,8 +72,8 @@ func (c *Client) ModifySpotFleetRequestRequest(input *ModifySpotFleetRequestInpu
 // ModifySpotFleetRequest API operation.
 type ModifySpotFleetRequestRequest struct {
 	*aws.Request
-	Input *ModifySpotFleetRequestInput
-	Copy  func(*ModifySpotFleetRequestInput) ModifySpotFleetRequestRequest
+	Input *types.ModifySpotFleetRequestInput
+	Copy  func(*types.ModifySpotFleetRequestInput) ModifySpotFleetRequestRequest
 }
 
 // Send marshals and sends the ModifySpotFleetRequest API request.
@@ -138,7 +85,7 @@ func (r ModifySpotFleetRequestRequest) Send(ctx context.Context) (*ModifySpotFle
 	}
 
 	resp := &ModifySpotFleetRequestResponse{
-		ModifySpotFleetRequestOutput: r.Request.Data.(*ModifySpotFleetRequestOutput),
+		ModifySpotFleetRequestOutput: r.Request.Data.(*types.ModifySpotFleetRequestOutput),
 		response:                     &aws.Response{Request: r.Request},
 	}
 
@@ -148,7 +95,7 @@ func (r ModifySpotFleetRequestRequest) Send(ctx context.Context) (*ModifySpotFle
 // ModifySpotFleetRequestResponse is the response type for the
 // ModifySpotFleetRequest API operation.
 type ModifySpotFleetRequestResponse struct {
-	*ModifySpotFleetRequestOutput
+	*types.ModifySpotFleetRequestOutput
 
 	response *aws.Response
 }

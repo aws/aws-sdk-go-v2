@@ -6,64 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/glue/types"
 )
-
-type StartImportLabelsTaskRunInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Simple Storage Service (Amazon S3) path from where you import
-	// the labels.
-	//
-	// InputS3Path is a required field
-	InputS3Path *string `type:"string" required:"true"`
-
-	// Indicates whether to overwrite your existing labels.
-	ReplaceAllLabels *bool `type:"boolean"`
-
-	// The unique identifier of the machine learning transform.
-	//
-	// TransformId is a required field
-	TransformId *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s StartImportLabelsTaskRunInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *StartImportLabelsTaskRunInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "StartImportLabelsTaskRunInput"}
-
-	if s.InputS3Path == nil {
-		invalidParams.Add(aws.NewErrParamRequired("InputS3Path"))
-	}
-
-	if s.TransformId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("TransformId"))
-	}
-	if s.TransformId != nil && len(*s.TransformId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("TransformId", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type StartImportLabelsTaskRunOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The unique identifier for the task run.
-	TaskRunId *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s StartImportLabelsTaskRunOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opStartImportLabelsTaskRun = "StartImportLabelsTaskRun"
 
@@ -105,7 +49,7 @@ const opStartImportLabelsTaskRun = "StartImportLabelsTaskRun"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/StartImportLabelsTaskRun
-func (c *Client) StartImportLabelsTaskRunRequest(input *StartImportLabelsTaskRunInput) StartImportLabelsTaskRunRequest {
+func (c *Client) StartImportLabelsTaskRunRequest(input *types.StartImportLabelsTaskRunInput) StartImportLabelsTaskRunRequest {
 	op := &aws.Operation{
 		Name:       opStartImportLabelsTaskRun,
 		HTTPMethod: "POST",
@@ -113,10 +57,10 @@ func (c *Client) StartImportLabelsTaskRunRequest(input *StartImportLabelsTaskRun
 	}
 
 	if input == nil {
-		input = &StartImportLabelsTaskRunInput{}
+		input = &types.StartImportLabelsTaskRunInput{}
 	}
 
-	req := c.newRequest(op, input, &StartImportLabelsTaskRunOutput{})
+	req := c.newRequest(op, input, &types.StartImportLabelsTaskRunOutput{})
 	return StartImportLabelsTaskRunRequest{Request: req, Input: input, Copy: c.StartImportLabelsTaskRunRequest}
 }
 
@@ -124,8 +68,8 @@ func (c *Client) StartImportLabelsTaskRunRequest(input *StartImportLabelsTaskRun
 // StartImportLabelsTaskRun API operation.
 type StartImportLabelsTaskRunRequest struct {
 	*aws.Request
-	Input *StartImportLabelsTaskRunInput
-	Copy  func(*StartImportLabelsTaskRunInput) StartImportLabelsTaskRunRequest
+	Input *types.StartImportLabelsTaskRunInput
+	Copy  func(*types.StartImportLabelsTaskRunInput) StartImportLabelsTaskRunRequest
 }
 
 // Send marshals and sends the StartImportLabelsTaskRun API request.
@@ -137,7 +81,7 @@ func (r StartImportLabelsTaskRunRequest) Send(ctx context.Context) (*StartImport
 	}
 
 	resp := &StartImportLabelsTaskRunResponse{
-		StartImportLabelsTaskRunOutput: r.Request.Data.(*StartImportLabelsTaskRunOutput),
+		StartImportLabelsTaskRunOutput: r.Request.Data.(*types.StartImportLabelsTaskRunOutput),
 		response:                       &aws.Response{Request: r.Request},
 	}
 
@@ -147,7 +91,7 @@ func (r StartImportLabelsTaskRunRequest) Send(ctx context.Context) (*StartImport
 // StartImportLabelsTaskRunResponse is the response type for the
 // StartImportLabelsTaskRun API operation.
 type StartImportLabelsTaskRunResponse struct {
-	*StartImportLabelsTaskRunOutput
+	*types.StartImportLabelsTaskRunOutput
 
 	response *aws.Response
 }

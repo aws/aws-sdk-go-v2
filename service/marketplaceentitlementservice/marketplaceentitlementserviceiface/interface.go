@@ -10,6 +10,7 @@ package marketplaceentitlementserviceiface
 
 import (
 	"github.com/aws/aws-sdk-go-v2/service/marketplaceentitlementservice"
+	"github.com/aws/aws-sdk-go-v2/service/marketplaceentitlementservice/types"
 )
 
 // ClientAPI provides an interface to enable mocking the
@@ -43,7 +44,7 @@ import (
 //    type mockClientClient struct {
 //        marketplaceentitlementserviceiface.ClientPI
 //    }
-//    func (m *mockClientClient) GetEntitlements(input *marketplaceentitlementservice.GetEntitlementsInput) (*marketplaceentitlementservice.GetEntitlementsOutput, error) {
+//    func (m *mockClientClient) GetEntitlements(input *types.GetEntitlementsInput) (*types.GetEntitlementsOutput, error) {
 //        // mock response/functionality
 //    }
 //
@@ -61,7 +62,7 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type ClientAPI interface {
-	GetEntitlementsRequest(*marketplaceentitlementservice.GetEntitlementsInput) marketplaceentitlementservice.GetEntitlementsRequest
+	GetEntitlementsRequest(*types.GetEntitlementsInput) marketplaceentitlementservice.GetEntitlementsRequest
 }
 
 var _ ClientAPI = (*marketplaceentitlementservice.Client)(nil)

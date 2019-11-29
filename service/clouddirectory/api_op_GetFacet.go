@@ -6,92 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/clouddirectory/types"
 )
-
-type GetFacetInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the facet to retrieve.
-	//
-	// Name is a required field
-	Name *string `min:"1" type:"string" required:"true"`
-
-	// The Amazon Resource Name (ARN) that is associated with the Facet. For more
-	// information, see arns.
-	//
-	// SchemaArn is a required field
-	SchemaArn *string `location:"header" locationName:"x-amz-data-partition" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetFacetInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetFacetInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetFacetInput"}
-
-	if s.Name == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Name"))
-	}
-	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
-	}
-
-	if s.SchemaArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("SchemaArn"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetFacetInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.Name != nil {
-		v := *s.Name
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "Name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.SchemaArn != nil {
-		v := *s.SchemaArn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "x-amz-data-partition", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type GetFacetOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The Facet structure that is associated with the facet.
-	Facet *Facet `type:"structure"`
-}
-
-// String returns the string representation
-func (s GetFacetOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetFacetOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.Facet != nil {
-		v := s.Facet
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "Facet", v, metadata)
-	}
-	return nil
-}
 
 const opGetFacet = "GetFacet"
 
@@ -110,7 +26,7 @@ const opGetFacet = "GetFacet"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/GetFacet
-func (c *Client) GetFacetRequest(input *GetFacetInput) GetFacetRequest {
+func (c *Client) GetFacetRequest(input *types.GetFacetInput) GetFacetRequest {
 	op := &aws.Operation{
 		Name:       opGetFacet,
 		HTTPMethod: "POST",
@@ -118,10 +34,10 @@ func (c *Client) GetFacetRequest(input *GetFacetInput) GetFacetRequest {
 	}
 
 	if input == nil {
-		input = &GetFacetInput{}
+		input = &types.GetFacetInput{}
 	}
 
-	req := c.newRequest(op, input, &GetFacetOutput{})
+	req := c.newRequest(op, input, &types.GetFacetOutput{})
 	return GetFacetRequest{Request: req, Input: input, Copy: c.GetFacetRequest}
 }
 
@@ -129,8 +45,8 @@ func (c *Client) GetFacetRequest(input *GetFacetInput) GetFacetRequest {
 // GetFacet API operation.
 type GetFacetRequest struct {
 	*aws.Request
-	Input *GetFacetInput
-	Copy  func(*GetFacetInput) GetFacetRequest
+	Input *types.GetFacetInput
+	Copy  func(*types.GetFacetInput) GetFacetRequest
 }
 
 // Send marshals and sends the GetFacet API request.
@@ -142,7 +58,7 @@ func (r GetFacetRequest) Send(ctx context.Context) (*GetFacetResponse, error) {
 	}
 
 	resp := &GetFacetResponse{
-		GetFacetOutput: r.Request.Data.(*GetFacetOutput),
+		GetFacetOutput: r.Request.Data.(*types.GetFacetOutput),
 		response:       &aws.Response{Request: r.Request},
 	}
 
@@ -152,7 +68,7 @@ func (r GetFacetRequest) Send(ctx context.Context) (*GetFacetResponse, error) {
 // GetFacetResponse is the response type for the
 // GetFacet API operation.
 type GetFacetResponse struct {
-	*GetFacetOutput
+	*types.GetFacetOutput
 
 	response *aws.Response
 }

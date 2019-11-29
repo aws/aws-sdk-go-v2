@@ -6,51 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/types"
 )
-
-type DescribeUserPoolDomainInput struct {
-	_ struct{} `type:"structure"`
-
-	// The domain string.
-	//
-	// Domain is a required field
-	Domain *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeUserPoolDomainInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeUserPoolDomainInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeUserPoolDomainInput"}
-
-	if s.Domain == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Domain"))
-	}
-	if s.Domain != nil && len(*s.Domain) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Domain", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribeUserPoolDomainOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A domain description object containing information about the domain.
-	DomainDescription *DomainDescriptionType `type:"structure"`
-}
-
-// String returns the string representation
-func (s DescribeUserPoolDomainOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeUserPoolDomain = "DescribeUserPoolDomain"
 
@@ -67,7 +24,7 @@ const opDescribeUserPoolDomain = "DescribeUserPoolDomain"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/DescribeUserPoolDomain
-func (c *Client) DescribeUserPoolDomainRequest(input *DescribeUserPoolDomainInput) DescribeUserPoolDomainRequest {
+func (c *Client) DescribeUserPoolDomainRequest(input *types.DescribeUserPoolDomainInput) DescribeUserPoolDomainRequest {
 	op := &aws.Operation{
 		Name:       opDescribeUserPoolDomain,
 		HTTPMethod: "POST",
@@ -75,10 +32,10 @@ func (c *Client) DescribeUserPoolDomainRequest(input *DescribeUserPoolDomainInpu
 	}
 
 	if input == nil {
-		input = &DescribeUserPoolDomainInput{}
+		input = &types.DescribeUserPoolDomainInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeUserPoolDomainOutput{})
+	req := c.newRequest(op, input, &types.DescribeUserPoolDomainOutput{})
 	return DescribeUserPoolDomainRequest{Request: req, Input: input, Copy: c.DescribeUserPoolDomainRequest}
 }
 
@@ -86,8 +43,8 @@ func (c *Client) DescribeUserPoolDomainRequest(input *DescribeUserPoolDomainInpu
 // DescribeUserPoolDomain API operation.
 type DescribeUserPoolDomainRequest struct {
 	*aws.Request
-	Input *DescribeUserPoolDomainInput
-	Copy  func(*DescribeUserPoolDomainInput) DescribeUserPoolDomainRequest
+	Input *types.DescribeUserPoolDomainInput
+	Copy  func(*types.DescribeUserPoolDomainInput) DescribeUserPoolDomainRequest
 }
 
 // Send marshals and sends the DescribeUserPoolDomain API request.
@@ -99,7 +56,7 @@ func (r DescribeUserPoolDomainRequest) Send(ctx context.Context) (*DescribeUserP
 	}
 
 	resp := &DescribeUserPoolDomainResponse{
-		DescribeUserPoolDomainOutput: r.Request.Data.(*DescribeUserPoolDomainOutput),
+		DescribeUserPoolDomainOutput: r.Request.Data.(*types.DescribeUserPoolDomainOutput),
 		response:                     &aws.Response{Request: r.Request},
 	}
 
@@ -109,7 +66,7 @@ func (r DescribeUserPoolDomainRequest) Send(ctx context.Context) (*DescribeUserP
 // DescribeUserPoolDomainResponse is the response type for the
 // DescribeUserPoolDomain API operation.
 type DescribeUserPoolDomainResponse struct {
-	*DescribeUserPoolDomainOutput
+	*types.DescribeUserPoolDomainOutput
 
 	response *aws.Response
 }

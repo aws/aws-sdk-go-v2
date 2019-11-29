@@ -6,117 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/restjson"
+	"github.com/aws/aws-sdk-go-v2/service/workdocs/types"
 )
-
-type DeleteCommentInput struct {
-	_ struct{} `type:"structure"`
-
-	// Amazon WorkDocs authentication token. Do not set this field when using administrative
-	// API actions, as in accessing the API using AWS credentials.
-	AuthenticationToken *string `location:"header" locationName:"Authentication" min:"1" type:"string" sensitive:"true"`
-
-	// The ID of the comment.
-	//
-	// CommentId is a required field
-	CommentId *string `location:"uri" locationName:"CommentId" min:"1" type:"string" required:"true"`
-
-	// The ID of the document.
-	//
-	// DocumentId is a required field
-	DocumentId *string `location:"uri" locationName:"DocumentId" min:"1" type:"string" required:"true"`
-
-	// The ID of the document version.
-	//
-	// VersionId is a required field
-	VersionId *string `location:"uri" locationName:"VersionId" min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteCommentInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteCommentInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteCommentInput"}
-	if s.AuthenticationToken != nil && len(*s.AuthenticationToken) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("AuthenticationToken", 1))
-	}
-
-	if s.CommentId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("CommentId"))
-	}
-	if s.CommentId != nil && len(*s.CommentId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("CommentId", 1))
-	}
-
-	if s.DocumentId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DocumentId"))
-	}
-	if s.DocumentId != nil && len(*s.DocumentId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("DocumentId", 1))
-	}
-
-	if s.VersionId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("VersionId"))
-	}
-	if s.VersionId != nil && len(*s.VersionId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("VersionId", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteCommentInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.AuthenticationToken != nil {
-		v := *s.AuthenticationToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "Authentication", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.CommentId != nil {
-		v := *s.CommentId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "CommentId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.DocumentId != nil {
-		v := *s.DocumentId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "DocumentId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.VersionId != nil {
-		v := *s.VersionId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "VersionId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type DeleteCommentOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteCommentOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteCommentOutput) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
 
 const opDeleteComment = "DeleteComment"
 
@@ -133,7 +26,7 @@ const opDeleteComment = "DeleteComment"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/DeleteComment
-func (c *Client) DeleteCommentRequest(input *DeleteCommentInput) DeleteCommentRequest {
+func (c *Client) DeleteCommentRequest(input *types.DeleteCommentInput) DeleteCommentRequest {
 	op := &aws.Operation{
 		Name:       opDeleteComment,
 		HTTPMethod: "DELETE",
@@ -141,10 +34,10 @@ func (c *Client) DeleteCommentRequest(input *DeleteCommentInput) DeleteCommentRe
 	}
 
 	if input == nil {
-		input = &DeleteCommentInput{}
+		input = &types.DeleteCommentInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteCommentOutput{})
+	req := c.newRequest(op, input, &types.DeleteCommentOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return DeleteCommentRequest{Request: req, Input: input, Copy: c.DeleteCommentRequest}
@@ -154,8 +47,8 @@ func (c *Client) DeleteCommentRequest(input *DeleteCommentInput) DeleteCommentRe
 // DeleteComment API operation.
 type DeleteCommentRequest struct {
 	*aws.Request
-	Input *DeleteCommentInput
-	Copy  func(*DeleteCommentInput) DeleteCommentRequest
+	Input *types.DeleteCommentInput
+	Copy  func(*types.DeleteCommentInput) DeleteCommentRequest
 }
 
 // Send marshals and sends the DeleteComment API request.
@@ -167,7 +60,7 @@ func (r DeleteCommentRequest) Send(ctx context.Context) (*DeleteCommentResponse,
 	}
 
 	resp := &DeleteCommentResponse{
-		DeleteCommentOutput: r.Request.Data.(*DeleteCommentOutput),
+		DeleteCommentOutput: r.Request.Data.(*types.DeleteCommentOutput),
 		response:            &aws.Response{Request: r.Request},
 	}
 
@@ -177,7 +70,7 @@ func (r DeleteCommentRequest) Send(ctx context.Context) (*DeleteCommentResponse,
 // DeleteCommentResponse is the response type for the
 // DeleteComment API operation.
 type DeleteCommentResponse struct {
-	*DeleteCommentOutput
+	*types.DeleteCommentOutput
 
 	response *aws.Response
 }

@@ -6,87 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/lightsail/types"
 )
-
-type CreateLoadBalancerInput struct {
-	_ struct{} `type:"structure"`
-
-	// The optional alternative domains and subdomains to use with your SSL/TLS
-	// certificate (e.g., www.example.com, example.com, m.example.com, blog.example.com).
-	CertificateAlternativeNames []string `locationName:"certificateAlternativeNames" type:"list"`
-
-	// The domain name with which your certificate is associated (e.g., example.com).
-	//
-	// If you specify certificateDomainName, then certificateName is required (and
-	// vice-versa).
-	CertificateDomainName *string `locationName:"certificateDomainName" type:"string"`
-
-	// The name of the SSL/TLS certificate.
-	//
-	// If you specify certificateName, then certificateDomainName is required (and
-	// vice-versa).
-	CertificateName *string `locationName:"certificateName" type:"string"`
-
-	// The path you provided to perform the load balancer health check. If you didn't
-	// specify a health check path, Lightsail uses the root path of your website
-	// (e.g., "/").
-	//
-	// You may want to specify a custom health check path other than the root of
-	// your application if your home page loads slowly or has a lot of media or
-	// scripting on it.
-	HealthCheckPath *string `locationName:"healthCheckPath" type:"string"`
-
-	// The instance port where you're creating your load balancer.
-	//
-	// InstancePort is a required field
-	InstancePort *int64 `locationName:"instancePort" type:"integer" required:"true"`
-
-	// The name of your load balancer.
-	//
-	// LoadBalancerName is a required field
-	LoadBalancerName *string `locationName:"loadBalancerName" type:"string" required:"true"`
-
-	// The tag keys and optional values to add to the resource during create.
-	//
-	// To tag a resource after it has been created, see the tag resource operation.
-	Tags []Tag `locationName:"tags" type:"list"`
-}
-
-// String returns the string representation
-func (s CreateLoadBalancerInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateLoadBalancerInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateLoadBalancerInput"}
-
-	if s.InstancePort == nil {
-		invalidParams.Add(aws.NewErrParamRequired("InstancePort"))
-	}
-
-	if s.LoadBalancerName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("LoadBalancerName"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type CreateLoadBalancerOutput struct {
-	_ struct{} `type:"structure"`
-
-	// An object containing information about the API operations.
-	Operations []Operation `locationName:"operations" type:"list"`
-}
-
-// String returns the string representation
-func (s CreateLoadBalancerOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCreateLoadBalancer = "CreateLoadBalancer"
 
@@ -113,7 +34,7 @@ const opCreateLoadBalancer = "CreateLoadBalancer"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/CreateLoadBalancer
-func (c *Client) CreateLoadBalancerRequest(input *CreateLoadBalancerInput) CreateLoadBalancerRequest {
+func (c *Client) CreateLoadBalancerRequest(input *types.CreateLoadBalancerInput) CreateLoadBalancerRequest {
 	op := &aws.Operation{
 		Name:       opCreateLoadBalancer,
 		HTTPMethod: "POST",
@@ -121,10 +42,10 @@ func (c *Client) CreateLoadBalancerRequest(input *CreateLoadBalancerInput) Creat
 	}
 
 	if input == nil {
-		input = &CreateLoadBalancerInput{}
+		input = &types.CreateLoadBalancerInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateLoadBalancerOutput{})
+	req := c.newRequest(op, input, &types.CreateLoadBalancerOutput{})
 	return CreateLoadBalancerRequest{Request: req, Input: input, Copy: c.CreateLoadBalancerRequest}
 }
 
@@ -132,8 +53,8 @@ func (c *Client) CreateLoadBalancerRequest(input *CreateLoadBalancerInput) Creat
 // CreateLoadBalancer API operation.
 type CreateLoadBalancerRequest struct {
 	*aws.Request
-	Input *CreateLoadBalancerInput
-	Copy  func(*CreateLoadBalancerInput) CreateLoadBalancerRequest
+	Input *types.CreateLoadBalancerInput
+	Copy  func(*types.CreateLoadBalancerInput) CreateLoadBalancerRequest
 }
 
 // Send marshals and sends the CreateLoadBalancer API request.
@@ -145,7 +66,7 @@ func (r CreateLoadBalancerRequest) Send(ctx context.Context) (*CreateLoadBalance
 	}
 
 	resp := &CreateLoadBalancerResponse{
-		CreateLoadBalancerOutput: r.Request.Data.(*CreateLoadBalancerOutput),
+		CreateLoadBalancerOutput: r.Request.Data.(*types.CreateLoadBalancerOutput),
 		response:                 &aws.Response{Request: r.Request},
 	}
 
@@ -155,7 +76,7 @@ func (r CreateLoadBalancerRequest) Send(ctx context.Context) (*CreateLoadBalance
 // CreateLoadBalancerResponse is the response type for the
 // CreateLoadBalancer API operation.
 type CreateLoadBalancerResponse struct {
-	*CreateLoadBalancerOutput
+	*types.CreateLoadBalancerOutput
 
 	response *aws.Response
 }

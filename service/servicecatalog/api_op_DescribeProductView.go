@@ -6,63 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/types"
 )
-
-type DescribeProductViewInput struct {
-	_ struct{} `type:"structure"`
-
-	// The language code.
-	//
-	//    * en - English (default)
-	//
-	//    * jp - Japanese
-	//
-	//    * zh - Chinese
-	AcceptLanguage *string `type:"string"`
-
-	// The product view identifier.
-	//
-	// Id is a required field
-	Id *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeProductViewInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeProductViewInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeProductViewInput"}
-
-	if s.Id == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Id"))
-	}
-	if s.Id != nil && len(*s.Id) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Id", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribeProductViewOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Summary information about the product.
-	ProductViewSummary *ProductViewSummary `type:"structure"`
-
-	// Information about the provisioning artifacts for the product.
-	ProvisioningArtifacts []ProvisioningArtifact `type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeProductViewOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeProductView = "DescribeProductView"
 
@@ -79,7 +24,7 @@ const opDescribeProductView = "DescribeProductView"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DescribeProductView
-func (c *Client) DescribeProductViewRequest(input *DescribeProductViewInput) DescribeProductViewRequest {
+func (c *Client) DescribeProductViewRequest(input *types.DescribeProductViewInput) DescribeProductViewRequest {
 	op := &aws.Operation{
 		Name:       opDescribeProductView,
 		HTTPMethod: "POST",
@@ -87,10 +32,10 @@ func (c *Client) DescribeProductViewRequest(input *DescribeProductViewInput) Des
 	}
 
 	if input == nil {
-		input = &DescribeProductViewInput{}
+		input = &types.DescribeProductViewInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeProductViewOutput{})
+	req := c.newRequest(op, input, &types.DescribeProductViewOutput{})
 	return DescribeProductViewRequest{Request: req, Input: input, Copy: c.DescribeProductViewRequest}
 }
 
@@ -98,8 +43,8 @@ func (c *Client) DescribeProductViewRequest(input *DescribeProductViewInput) Des
 // DescribeProductView API operation.
 type DescribeProductViewRequest struct {
 	*aws.Request
-	Input *DescribeProductViewInput
-	Copy  func(*DescribeProductViewInput) DescribeProductViewRequest
+	Input *types.DescribeProductViewInput
+	Copy  func(*types.DescribeProductViewInput) DescribeProductViewRequest
 }
 
 // Send marshals and sends the DescribeProductView API request.
@@ -111,7 +56,7 @@ func (r DescribeProductViewRequest) Send(ctx context.Context) (*DescribeProductV
 	}
 
 	resp := &DescribeProductViewResponse{
-		DescribeProductViewOutput: r.Request.Data.(*DescribeProductViewOutput),
+		DescribeProductViewOutput: r.Request.Data.(*types.DescribeProductViewOutput),
 		response:                  &aws.Response{Request: r.Request},
 	}
 
@@ -121,7 +66,7 @@ func (r DescribeProductViewRequest) Send(ctx context.Context) (*DescribeProductV
 // DescribeProductViewResponse is the response type for the
 // DescribeProductView API operation.
 type DescribeProductViewResponse struct {
-	*DescribeProductViewOutput
+	*types.DescribeProductViewOutput
 
 	response *aws.Response
 }

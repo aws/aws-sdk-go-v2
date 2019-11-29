@@ -6,110 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/iot/types"
 )
-
-type UpdateMitigationActionInput struct {
-	_ struct{} `type:"structure"`
-
-	// The friendly name for the mitigation action. You can't change the name by
-	// using UpdateMitigationAction. Instead, you must delete and re-create the
-	// mitigation action with the new name.
-	//
-	// ActionName is a required field
-	ActionName *string `location:"uri" locationName:"actionName" type:"string" required:"true"`
-
-	// Defines the type of action and the parameters for that action.
-	ActionParams *MitigationActionParams `locationName:"actionParams" type:"structure"`
-
-	// The ARN of the IAM role that is used to apply the mitigation action.
-	RoleArn *string `locationName:"roleArn" min:"20" type:"string"`
-}
-
-// String returns the string representation
-func (s UpdateMitigationActionInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateMitigationActionInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateMitigationActionInput"}
-
-	if s.ActionName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ActionName"))
-	}
-	if s.RoleArn != nil && len(*s.RoleArn) < 20 {
-		invalidParams.Add(aws.NewErrParamMinLen("RoleArn", 20))
-	}
-	if s.ActionParams != nil {
-		if err := s.ActionParams.Validate(); err != nil {
-			invalidParams.AddNested("ActionParams", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s UpdateMitigationActionInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.ActionParams != nil {
-		v := s.ActionParams
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "actionParams", v, metadata)
-	}
-	if s.RoleArn != nil {
-		v := *s.RoleArn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "roleArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.ActionName != nil {
-		v := *s.ActionName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "actionName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type UpdateMitigationActionOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The ARN for the new mitigation action.
-	ActionArn *string `locationName:"actionArn" type:"string"`
-
-	// A unique identifier for the mitigation action.
-	ActionId *string `locationName:"actionId" type:"string"`
-}
-
-// String returns the string representation
-func (s UpdateMitigationActionOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s UpdateMitigationActionOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.ActionArn != nil {
-		v := *s.ActionArn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "actionArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.ActionId != nil {
-		v := *s.ActionId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "actionId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opUpdateMitigationAction = "UpdateMitigationAction"
 
@@ -124,7 +22,7 @@ const opUpdateMitigationAction = "UpdateMitigationAction"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) UpdateMitigationActionRequest(input *UpdateMitigationActionInput) UpdateMitigationActionRequest {
+func (c *Client) UpdateMitigationActionRequest(input *types.UpdateMitigationActionInput) UpdateMitigationActionRequest {
 	op := &aws.Operation{
 		Name:       opUpdateMitigationAction,
 		HTTPMethod: "PATCH",
@@ -132,10 +30,10 @@ func (c *Client) UpdateMitigationActionRequest(input *UpdateMitigationActionInpu
 	}
 
 	if input == nil {
-		input = &UpdateMitigationActionInput{}
+		input = &types.UpdateMitigationActionInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateMitigationActionOutput{})
+	req := c.newRequest(op, input, &types.UpdateMitigationActionOutput{})
 	return UpdateMitigationActionRequest{Request: req, Input: input, Copy: c.UpdateMitigationActionRequest}
 }
 
@@ -143,8 +41,8 @@ func (c *Client) UpdateMitigationActionRequest(input *UpdateMitigationActionInpu
 // UpdateMitigationAction API operation.
 type UpdateMitigationActionRequest struct {
 	*aws.Request
-	Input *UpdateMitigationActionInput
-	Copy  func(*UpdateMitigationActionInput) UpdateMitigationActionRequest
+	Input *types.UpdateMitigationActionInput
+	Copy  func(*types.UpdateMitigationActionInput) UpdateMitigationActionRequest
 }
 
 // Send marshals and sends the UpdateMitigationAction API request.
@@ -156,7 +54,7 @@ func (r UpdateMitigationActionRequest) Send(ctx context.Context) (*UpdateMitigat
 	}
 
 	resp := &UpdateMitigationActionResponse{
-		UpdateMitigationActionOutput: r.Request.Data.(*UpdateMitigationActionOutput),
+		UpdateMitigationActionOutput: r.Request.Data.(*types.UpdateMitigationActionOutput),
 		response:                     &aws.Response{Request: r.Request},
 	}
 
@@ -166,7 +64,7 @@ func (r UpdateMitigationActionRequest) Send(ctx context.Context) (*UpdateMitigat
 // UpdateMitigationActionResponse is the response type for the
 // UpdateMitigationAction API operation.
 type UpdateMitigationActionResponse struct {
-	*UpdateMitigationActionOutput
+	*types.UpdateMitigationActionOutput
 
 	response *aws.Response
 }

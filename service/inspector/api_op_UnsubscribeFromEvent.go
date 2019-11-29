@@ -6,71 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
+	"github.com/aws/aws-sdk-go-v2/service/inspector/types"
 )
-
-type UnsubscribeFromEventInput struct {
-	_ struct{} `type:"structure"`
-
-	// The event for which you want to stop receiving SNS notifications.
-	//
-	// Event is a required field
-	Event InspectorEvent `locationName:"event" type:"string" required:"true" enum:"true"`
-
-	// The ARN of the assessment template that is used during the event for which
-	// you want to stop receiving SNS notifications.
-	//
-	// ResourceArn is a required field
-	ResourceArn *string `locationName:"resourceArn" min:"1" type:"string" required:"true"`
-
-	// The ARN of the SNS topic to which SNS notifications are sent.
-	//
-	// TopicArn is a required field
-	TopicArn *string `locationName:"topicArn" min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s UnsubscribeFromEventInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UnsubscribeFromEventInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UnsubscribeFromEventInput"}
-	if len(s.Event) == 0 {
-		invalidParams.Add(aws.NewErrParamRequired("Event"))
-	}
-
-	if s.ResourceArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ResourceArn"))
-	}
-	if s.ResourceArn != nil && len(*s.ResourceArn) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ResourceArn", 1))
-	}
-
-	if s.TopicArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("TopicArn"))
-	}
-	if s.TopicArn != nil && len(*s.TopicArn) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("TopicArn", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type UnsubscribeFromEventOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s UnsubscribeFromEventOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opUnsubscribeFromEvent = "UnsubscribeFromEvent"
 
@@ -88,7 +27,7 @@ const opUnsubscribeFromEvent = "UnsubscribeFromEvent"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/UnsubscribeFromEvent
-func (c *Client) UnsubscribeFromEventRequest(input *UnsubscribeFromEventInput) UnsubscribeFromEventRequest {
+func (c *Client) UnsubscribeFromEventRequest(input *types.UnsubscribeFromEventInput) UnsubscribeFromEventRequest {
 	op := &aws.Operation{
 		Name:       opUnsubscribeFromEvent,
 		HTTPMethod: "POST",
@@ -96,10 +35,10 @@ func (c *Client) UnsubscribeFromEventRequest(input *UnsubscribeFromEventInput) U
 	}
 
 	if input == nil {
-		input = &UnsubscribeFromEventInput{}
+		input = &types.UnsubscribeFromEventInput{}
 	}
 
-	req := c.newRequest(op, input, &UnsubscribeFromEventOutput{})
+	req := c.newRequest(op, input, &types.UnsubscribeFromEventOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return UnsubscribeFromEventRequest{Request: req, Input: input, Copy: c.UnsubscribeFromEventRequest}
@@ -109,8 +48,8 @@ func (c *Client) UnsubscribeFromEventRequest(input *UnsubscribeFromEventInput) U
 // UnsubscribeFromEvent API operation.
 type UnsubscribeFromEventRequest struct {
 	*aws.Request
-	Input *UnsubscribeFromEventInput
-	Copy  func(*UnsubscribeFromEventInput) UnsubscribeFromEventRequest
+	Input *types.UnsubscribeFromEventInput
+	Copy  func(*types.UnsubscribeFromEventInput) UnsubscribeFromEventRequest
 }
 
 // Send marshals and sends the UnsubscribeFromEvent API request.
@@ -122,7 +61,7 @@ func (r UnsubscribeFromEventRequest) Send(ctx context.Context) (*UnsubscribeFrom
 	}
 
 	resp := &UnsubscribeFromEventResponse{
-		UnsubscribeFromEventOutput: r.Request.Data.(*UnsubscribeFromEventOutput),
+		UnsubscribeFromEventOutput: r.Request.Data.(*types.UnsubscribeFromEventOutput),
 		response:                   &aws.Response{Request: r.Request},
 	}
 
@@ -132,7 +71,7 @@ func (r UnsubscribeFromEventRequest) Send(ctx context.Context) (*UnsubscribeFrom
 // UnsubscribeFromEventResponse is the response type for the
 // UnsubscribeFromEvent API operation.
 type UnsubscribeFromEventResponse struct {
-	*UnsubscribeFromEventOutput
+	*types.UnsubscribeFromEventOutput
 
 	response *aws.Response
 }

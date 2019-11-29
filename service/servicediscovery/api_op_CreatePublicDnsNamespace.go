@@ -6,57 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/servicediscovery/types"
 )
-
-type CreatePublicDnsNamespaceInput struct {
-	_ struct{} `type:"structure"`
-
-	// A unique string that identifies the request and that allows failed CreatePublicDnsNamespace
-	// requests to be retried without the risk of executing the operation twice.
-	// CreatorRequestId can be any unique string, for example, a date/time stamp.
-	CreatorRequestId *string `type:"string" idempotencyToken:"true"`
-
-	// A description for the namespace.
-	Description *string `type:"string"`
-
-	// The name that you want to assign to this namespace.
-	//
-	// Name is a required field
-	Name *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s CreatePublicDnsNamespaceInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreatePublicDnsNamespaceInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreatePublicDnsNamespaceInput"}
-
-	if s.Name == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Name"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type CreatePublicDnsNamespaceOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A value that you can use to determine whether the request completed successfully.
-	// To get the status of the operation, see GetOperation.
-	OperationId *string `type:"string"`
-}
-
-// String returns the string representation
-func (s CreatePublicDnsNamespaceOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCreatePublicDnsNamespace = "CreatePublicDnsNamespace"
 
@@ -79,7 +30,7 @@ const opCreatePublicDnsNamespace = "CreatePublicDnsNamespace"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicediscovery-2017-03-14/CreatePublicDnsNamespace
-func (c *Client) CreatePublicDnsNamespaceRequest(input *CreatePublicDnsNamespaceInput) CreatePublicDnsNamespaceRequest {
+func (c *Client) CreatePublicDnsNamespaceRequest(input *types.CreatePublicDnsNamespaceInput) CreatePublicDnsNamespaceRequest {
 	op := &aws.Operation{
 		Name:       opCreatePublicDnsNamespace,
 		HTTPMethod: "POST",
@@ -87,10 +38,10 @@ func (c *Client) CreatePublicDnsNamespaceRequest(input *CreatePublicDnsNamespace
 	}
 
 	if input == nil {
-		input = &CreatePublicDnsNamespaceInput{}
+		input = &types.CreatePublicDnsNamespaceInput{}
 	}
 
-	req := c.newRequest(op, input, &CreatePublicDnsNamespaceOutput{})
+	req := c.newRequest(op, input, &types.CreatePublicDnsNamespaceOutput{})
 	return CreatePublicDnsNamespaceRequest{Request: req, Input: input, Copy: c.CreatePublicDnsNamespaceRequest}
 }
 
@@ -98,8 +49,8 @@ func (c *Client) CreatePublicDnsNamespaceRequest(input *CreatePublicDnsNamespace
 // CreatePublicDnsNamespace API operation.
 type CreatePublicDnsNamespaceRequest struct {
 	*aws.Request
-	Input *CreatePublicDnsNamespaceInput
-	Copy  func(*CreatePublicDnsNamespaceInput) CreatePublicDnsNamespaceRequest
+	Input *types.CreatePublicDnsNamespaceInput
+	Copy  func(*types.CreatePublicDnsNamespaceInput) CreatePublicDnsNamespaceRequest
 }
 
 // Send marshals and sends the CreatePublicDnsNamespace API request.
@@ -111,7 +62,7 @@ func (r CreatePublicDnsNamespaceRequest) Send(ctx context.Context) (*CreatePubli
 	}
 
 	resp := &CreatePublicDnsNamespaceResponse{
-		CreatePublicDnsNamespaceOutput: r.Request.Data.(*CreatePublicDnsNamespaceOutput),
+		CreatePublicDnsNamespaceOutput: r.Request.Data.(*types.CreatePublicDnsNamespaceOutput),
 		response:                       &aws.Response{Request: r.Request},
 	}
 
@@ -121,7 +72,7 @@ func (r CreatePublicDnsNamespaceRequest) Send(ctx context.Context) (*CreatePubli
 // CreatePublicDnsNamespaceResponse is the response type for the
 // CreatePublicDnsNamespace API operation.
 type CreatePublicDnsNamespaceResponse struct {
-	*CreatePublicDnsNamespaceOutput
+	*types.CreatePublicDnsNamespaceOutput
 
 	response *aws.Response
 }

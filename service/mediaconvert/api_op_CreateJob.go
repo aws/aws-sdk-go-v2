@@ -6,236 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/mediaconvert/types"
 )
-
-// Send your create job request with your job settings and IAM role. Optionally,
-// include user metadata and the ARN for the queue.
-type CreateJobInput struct {
-	_ struct{} `type:"structure"`
-
-	// Accelerated transcoding can significantly speed up jobs with long, visually
-	// complex content. Outputs that use this feature incur pro-tier pricing. For
-	// information about feature limitations, see the AWS Elemental MediaConvert
-	// User Guide.
-	AccelerationSettings *AccelerationSettings `locationName:"accelerationSettings" type:"structure"`
-
-	// Optional. Choose a tag type that AWS Billing and Cost Management will use
-	// to sort your AWS Elemental MediaConvert costs on any billing report that
-	// you set up. Any transcoding outputs that don't have an associated tag will
-	// appear in your billing report unsorted. If you don't choose a valid value
-	// for this field, your job outputs will appear on the billing report unsorted.
-	BillingTagsSource BillingTagsSource `locationName:"billingTagsSource" type:"string" enum:"true"`
-
-	// Idempotency token for CreateJob operation.
-	ClientRequestToken *string `locationName:"clientRequestToken" type:"string" idempotencyToken:"true"`
-
-	// When you create a job, you can either specify a job template or specify the
-	// transcoding settings individually
-	JobTemplate *string `locationName:"jobTemplate" type:"string"`
-
-	// Specify the relative priority for this job. In any given queue, the service
-	// begins processing the job with the highest value first. When more than one
-	// job has the same priority, the service begins processing the job that you
-	// submitted first. If you don't specify a priority, the service uses the default
-	// value 0.
-	Priority *int64 `locationName:"priority" type:"integer"`
-
-	// Optional. When you create a job, you can specify a queue to send it to. If
-	// you don't specify, the job will go to the default queue. For more about queues,
-	// see the User Guide topic at http://docs.aws.amazon.com/mediaconvert/latest/ug/what-is.html.
-	Queue *string `locationName:"queue" type:"string"`
-
-	// Required. The IAM role you use for creating this job. For details about permissions,
-	// see the User Guide topic at the User Guide at http://docs.aws.amazon.com/mediaconvert/latest/ug/iam-role.html.
-	//
-	// Role is a required field
-	Role *string `locationName:"role" type:"string" required:"true"`
-
-	// JobSettings contains all the transcode settings for a job.
-	//
-	// Settings is a required field
-	Settings *JobSettings `locationName:"settings" type:"structure" required:"true"`
-
-	// Enable this setting when you run a test job to estimate how many reserved
-	// transcoding slots (RTS) you need. When this is enabled, MediaConvert runs
-	// your job from an on-demand queue with similar performance to what you will
-	// see with one RTS in a reserved queue. This setting is disabled by default.
-	SimulateReservedQueue SimulateReservedQueue `locationName:"simulateReservedQueue" type:"string" enum:"true"`
-
-	// Specify how often MediaConvert sends STATUS_UPDATE events to Amazon CloudWatch
-	// Events. Set the interval, in seconds, between status updates. MediaConvert
-	// sends an update at this interval from the time the service begins processing
-	// your job to the time it completes the transcode or encounters an error.
-	StatusUpdateInterval StatusUpdateInterval `locationName:"statusUpdateInterval" type:"string" enum:"true"`
-
-	// The tags that you want to add to the resource. You can tag resources with
-	// a key-value pair or with only a key.
-	Tags map[string]string `locationName:"tags" type:"map"`
-
-	// User-defined metadata that you want to associate with an MediaConvert job.
-	// You specify metadata in key/value pairs.
-	UserMetadata map[string]string `locationName:"userMetadata" type:"map"`
-}
-
-// String returns the string representation
-func (s CreateJobInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateJobInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateJobInput"}
-	if s.Priority != nil && *s.Priority < -50 {
-		invalidParams.Add(aws.NewErrParamMinValue("Priority", -50))
-	}
-
-	if s.Role == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Role"))
-	}
-
-	if s.Settings == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Settings"))
-	}
-	if s.AccelerationSettings != nil {
-		if err := s.AccelerationSettings.Validate(); err != nil {
-			invalidParams.AddNested("AccelerationSettings", err.(aws.ErrInvalidParams))
-		}
-	}
-	if s.Settings != nil {
-		if err := s.Settings.Validate(); err != nil {
-			invalidParams.AddNested("Settings", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s CreateJobInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.AccelerationSettings != nil {
-		v := s.AccelerationSettings
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "accelerationSettings", v, metadata)
-	}
-	if len(s.BillingTagsSource) > 0 {
-		v := s.BillingTagsSource
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "billingTagsSource", protocol.QuotedValue{ValueMarshaler: v}, metadata)
-	}
-	var ClientRequestToken string
-	if s.ClientRequestToken != nil {
-		ClientRequestToken = *s.ClientRequestToken
-	} else {
-		ClientRequestToken = protocol.GetIdempotencyToken()
-	}
-	{
-		v := ClientRequestToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "clientRequestToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.JobTemplate != nil {
-		v := *s.JobTemplate
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "jobTemplate", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Priority != nil {
-		v := *s.Priority
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "priority", protocol.Int64Value(v), metadata)
-	}
-	if s.Queue != nil {
-		v := *s.Queue
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "queue", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Role != nil {
-		v := *s.Role
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "role", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Settings != nil {
-		v := s.Settings
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "settings", v, metadata)
-	}
-	if len(s.SimulateReservedQueue) > 0 {
-		v := s.SimulateReservedQueue
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "simulateReservedQueue", protocol.QuotedValue{ValueMarshaler: v}, metadata)
-	}
-	if len(s.StatusUpdateInterval) > 0 {
-		v := s.StatusUpdateInterval
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "statusUpdateInterval", protocol.QuotedValue{ValueMarshaler: v}, metadata)
-	}
-	if s.Tags != nil {
-		v := s.Tags
-
-		metadata := protocol.Metadata{}
-		ms0 := e.Map(protocol.BodyTarget, "tags", metadata)
-		ms0.Start()
-		for k1, v1 := range v {
-			ms0.MapSetValue(k1, protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
-		}
-		ms0.End()
-
-	}
-	if s.UserMetadata != nil {
-		v := s.UserMetadata
-
-		metadata := protocol.Metadata{}
-		ms0 := e.Map(protocol.BodyTarget, "userMetadata", metadata)
-		ms0.Start()
-		for k1, v1 := range v {
-			ms0.MapSetValue(k1, protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
-		}
-		ms0.End()
-
-	}
-	return nil
-}
-
-// Successful create job requests will return the job JSON.
-type CreateJobOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Each job converts an input file into an output file or files. For more information,
-	// see the User Guide at http://docs.aws.amazon.com/mediaconvert/latest/ug/what-is.html
-	Job *Job `locationName:"job" type:"structure"`
-}
-
-// String returns the string representation
-func (s CreateJobOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s CreateJobOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.Job != nil {
-		v := s.Job
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "job", v, metadata)
-	}
-	return nil
-}
 
 const opCreateJob = "CreateJob"
 
@@ -253,7 +25,7 @@ const opCreateJob = "CreateJob"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/CreateJob
-func (c *Client) CreateJobRequest(input *CreateJobInput) CreateJobRequest {
+func (c *Client) CreateJobRequest(input *types.CreateJobInput) CreateJobRequest {
 	op := &aws.Operation{
 		Name:       opCreateJob,
 		HTTPMethod: "POST",
@@ -261,10 +33,10 @@ func (c *Client) CreateJobRequest(input *CreateJobInput) CreateJobRequest {
 	}
 
 	if input == nil {
-		input = &CreateJobInput{}
+		input = &types.CreateJobInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateJobOutput{})
+	req := c.newRequest(op, input, &types.CreateJobOutput{})
 	return CreateJobRequest{Request: req, Input: input, Copy: c.CreateJobRequest}
 }
 
@@ -272,8 +44,8 @@ func (c *Client) CreateJobRequest(input *CreateJobInput) CreateJobRequest {
 // CreateJob API operation.
 type CreateJobRequest struct {
 	*aws.Request
-	Input *CreateJobInput
-	Copy  func(*CreateJobInput) CreateJobRequest
+	Input *types.CreateJobInput
+	Copy  func(*types.CreateJobInput) CreateJobRequest
 }
 
 // Send marshals and sends the CreateJob API request.
@@ -285,7 +57,7 @@ func (r CreateJobRequest) Send(ctx context.Context) (*CreateJobResponse, error) 
 	}
 
 	resp := &CreateJobResponse{
-		CreateJobOutput: r.Request.Data.(*CreateJobOutput),
+		CreateJobOutput: r.Request.Data.(*types.CreateJobOutput),
 		response:        &aws.Response{Request: r.Request},
 	}
 
@@ -295,7 +67,7 @@ func (r CreateJobRequest) Send(ctx context.Context) (*CreateJobResponse, error) 
 // CreateJobResponse is the response type for the
 // CreateJob API operation.
 type CreateJobResponse struct {
-	*CreateJobOutput
+	*types.CreateJobOutput
 
 	response *aws.Response
 }

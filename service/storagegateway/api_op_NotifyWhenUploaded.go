@@ -6,55 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/storagegateway/types"
 )
-
-type NotifyWhenUploadedInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the file share.
-	//
-	// FileShareARN is a required field
-	FileShareARN *string `min:"50" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s NotifyWhenUploadedInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *NotifyWhenUploadedInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "NotifyWhenUploadedInput"}
-
-	if s.FileShareARN == nil {
-		invalidParams.Add(aws.NewErrParamRequired("FileShareARN"))
-	}
-	if s.FileShareARN != nil && len(*s.FileShareARN) < 50 {
-		invalidParams.Add(aws.NewErrParamMinLen("FileShareARN", 50))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type NotifyWhenUploadedOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the file share.
-	FileShareARN *string `min:"50" type:"string"`
-
-	// The randomly generated ID of the notification that was sent. This ID is in
-	// UUID format.
-	NotificationId *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s NotifyWhenUploadedOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opNotifyWhenUploaded = "NotifyWhenUploaded"
 
@@ -84,7 +37,7 @@ const opNotifyWhenUploaded = "NotifyWhenUploaded"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/NotifyWhenUploaded
-func (c *Client) NotifyWhenUploadedRequest(input *NotifyWhenUploadedInput) NotifyWhenUploadedRequest {
+func (c *Client) NotifyWhenUploadedRequest(input *types.NotifyWhenUploadedInput) NotifyWhenUploadedRequest {
 	op := &aws.Operation{
 		Name:       opNotifyWhenUploaded,
 		HTTPMethod: "POST",
@@ -92,10 +45,10 @@ func (c *Client) NotifyWhenUploadedRequest(input *NotifyWhenUploadedInput) Notif
 	}
 
 	if input == nil {
-		input = &NotifyWhenUploadedInput{}
+		input = &types.NotifyWhenUploadedInput{}
 	}
 
-	req := c.newRequest(op, input, &NotifyWhenUploadedOutput{})
+	req := c.newRequest(op, input, &types.NotifyWhenUploadedOutput{})
 	return NotifyWhenUploadedRequest{Request: req, Input: input, Copy: c.NotifyWhenUploadedRequest}
 }
 
@@ -103,8 +56,8 @@ func (c *Client) NotifyWhenUploadedRequest(input *NotifyWhenUploadedInput) Notif
 // NotifyWhenUploaded API operation.
 type NotifyWhenUploadedRequest struct {
 	*aws.Request
-	Input *NotifyWhenUploadedInput
-	Copy  func(*NotifyWhenUploadedInput) NotifyWhenUploadedRequest
+	Input *types.NotifyWhenUploadedInput
+	Copy  func(*types.NotifyWhenUploadedInput) NotifyWhenUploadedRequest
 }
 
 // Send marshals and sends the NotifyWhenUploaded API request.
@@ -116,7 +69,7 @@ func (r NotifyWhenUploadedRequest) Send(ctx context.Context) (*NotifyWhenUploade
 	}
 
 	resp := &NotifyWhenUploadedResponse{
-		NotifyWhenUploadedOutput: r.Request.Data.(*NotifyWhenUploadedOutput),
+		NotifyWhenUploadedOutput: r.Request.Data.(*types.NotifyWhenUploadedOutput),
 		response:                 &aws.Response{Request: r.Request},
 	}
 
@@ -126,7 +79,7 @@ func (r NotifyWhenUploadedRequest) Send(ctx context.Context) (*NotifyWhenUploade
 // NotifyWhenUploadedResponse is the response type for the
 // NotifyWhenUploaded API operation.
 type NotifyWhenUploadedResponse struct {
-	*NotifyWhenUploadedOutput
+	*types.NotifyWhenUploadedOutput
 
 	response *aws.Response
 }

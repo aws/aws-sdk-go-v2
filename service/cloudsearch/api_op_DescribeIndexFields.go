@@ -6,68 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/cloudsearch/types"
 )
-
-// Container for the parameters to the DescribeIndexFields operation. Specifies
-// the name of the domain you want to describe. To restrict the response to
-// particular index fields, specify the names of the index fields you want to
-// describe. To show the active configuration and exclude any pending changes,
-// set the Deployed option to true.
-type DescribeIndexFieldsInput struct {
-	_ struct{} `type:"structure"`
-
-	// Whether to display the deployed configuration (true) or include any pending
-	// changes (false). Defaults to false.
-	Deployed *bool `type:"boolean"`
-
-	// The name of the domain you want to describe.
-	//
-	// DomainName is a required field
-	DomainName *string `min:"3" type:"string" required:"true"`
-
-	// A list of the index fields you want to describe. If not specified, information
-	// is returned for all configured index fields.
-	FieldNames []string `type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeIndexFieldsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeIndexFieldsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeIndexFieldsInput"}
-
-	if s.DomainName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DomainName"))
-	}
-	if s.DomainName != nil && len(*s.DomainName) < 3 {
-		invalidParams.Add(aws.NewErrParamMinLen("DomainName", 3))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// The result of a DescribeIndexFields request. Contains the index fields configured
-// for the domain specified in the request.
-type DescribeIndexFieldsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The index fields configured for the domain.
-	//
-	// IndexFields is a required field
-	IndexFields []IndexFieldStatus `type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeIndexFieldsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeIndexFields = "DescribeIndexFields"
 
@@ -87,7 +27,7 @@ const opDescribeIndexFields = "DescribeIndexFields"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) DescribeIndexFieldsRequest(input *DescribeIndexFieldsInput) DescribeIndexFieldsRequest {
+func (c *Client) DescribeIndexFieldsRequest(input *types.DescribeIndexFieldsInput) DescribeIndexFieldsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeIndexFields,
 		HTTPMethod: "POST",
@@ -95,10 +35,10 @@ func (c *Client) DescribeIndexFieldsRequest(input *DescribeIndexFieldsInput) Des
 	}
 
 	if input == nil {
-		input = &DescribeIndexFieldsInput{}
+		input = &types.DescribeIndexFieldsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeIndexFieldsOutput{})
+	req := c.newRequest(op, input, &types.DescribeIndexFieldsOutput{})
 	return DescribeIndexFieldsRequest{Request: req, Input: input, Copy: c.DescribeIndexFieldsRequest}
 }
 
@@ -106,8 +46,8 @@ func (c *Client) DescribeIndexFieldsRequest(input *DescribeIndexFieldsInput) Des
 // DescribeIndexFields API operation.
 type DescribeIndexFieldsRequest struct {
 	*aws.Request
-	Input *DescribeIndexFieldsInput
-	Copy  func(*DescribeIndexFieldsInput) DescribeIndexFieldsRequest
+	Input *types.DescribeIndexFieldsInput
+	Copy  func(*types.DescribeIndexFieldsInput) DescribeIndexFieldsRequest
 }
 
 // Send marshals and sends the DescribeIndexFields API request.
@@ -119,7 +59,7 @@ func (r DescribeIndexFieldsRequest) Send(ctx context.Context) (*DescribeIndexFie
 	}
 
 	resp := &DescribeIndexFieldsResponse{
-		DescribeIndexFieldsOutput: r.Request.Data.(*DescribeIndexFieldsOutput),
+		DescribeIndexFieldsOutput: r.Request.Data.(*types.DescribeIndexFieldsOutput),
 		response:                  &aws.Response{Request: r.Request},
 	}
 
@@ -129,7 +69,7 @@ func (r DescribeIndexFieldsRequest) Send(ctx context.Context) (*DescribeIndexFie
 // DescribeIndexFieldsResponse is the response type for the
 // DescribeIndexFields API operation.
 type DescribeIndexFieldsResponse struct {
-	*DescribeIndexFieldsOutput
+	*types.DescribeIndexFieldsOutput
 
 	response *aws.Response
 }

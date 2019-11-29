@@ -6,74 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/inspector/types"
 )
-
-type ListAssessmentTargetsInput struct {
-	_ struct{} `type:"structure"`
-
-	// You can use this parameter to specify a subset of data to be included in
-	// the action's response.
-	//
-	// For a record to match a filter, all specified filter attributes must match.
-	// When multiple values are specified for a filter attribute, any of the values
-	// can match.
-	Filter *AssessmentTargetFilter `locationName:"filter" type:"structure"`
-
-	// You can use this parameter to indicate the maximum number of items you want
-	// in the response. The default value is 10. The maximum value is 500.
-	MaxResults *int64 `locationName:"maxResults" type:"integer"`
-
-	// You can use this parameter when paginating results. Set the value of this
-	// parameter to null on your first call to the ListAssessmentTargets action.
-	// Subsequent calls to the action fill nextToken in the request with the value
-	// of NextToken from the previous response to continue listing data.
-	NextToken *string `locationName:"nextToken" min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s ListAssessmentTargetsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListAssessmentTargetsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListAssessmentTargetsInput"}
-	if s.NextToken != nil && len(*s.NextToken) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
-	}
-	if s.Filter != nil {
-		if err := s.Filter.Validate(); err != nil {
-			invalidParams.AddNested("Filter", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ListAssessmentTargetsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A list of ARNs that specifies the assessment targets that are returned by
-	// the action.
-	//
-	// AssessmentTargetArns is a required field
-	AssessmentTargetArns []string `locationName:"assessmentTargetArns" type:"list" required:"true"`
-
-	// When a response is generated, if there is more data to be listed, this parameter
-	// is present in the response and contains the value to use for the nextToken
-	// parameter in a subsequent pagination request. If there is no more data to
-	// be listed, this parameter is set to null.
-	NextToken *string `locationName:"nextToken" min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s ListAssessmentTargetsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListAssessmentTargets = "ListAssessmentTargets"
 
@@ -92,7 +26,7 @@ const opListAssessmentTargets = "ListAssessmentTargets"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/ListAssessmentTargets
-func (c *Client) ListAssessmentTargetsRequest(input *ListAssessmentTargetsInput) ListAssessmentTargetsRequest {
+func (c *Client) ListAssessmentTargetsRequest(input *types.ListAssessmentTargetsInput) ListAssessmentTargetsRequest {
 	op := &aws.Operation{
 		Name:       opListAssessmentTargets,
 		HTTPMethod: "POST",
@@ -106,10 +40,10 @@ func (c *Client) ListAssessmentTargetsRequest(input *ListAssessmentTargetsInput)
 	}
 
 	if input == nil {
-		input = &ListAssessmentTargetsInput{}
+		input = &types.ListAssessmentTargetsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListAssessmentTargetsOutput{})
+	req := c.newRequest(op, input, &types.ListAssessmentTargetsOutput{})
 	return ListAssessmentTargetsRequest{Request: req, Input: input, Copy: c.ListAssessmentTargetsRequest}
 }
 
@@ -117,8 +51,8 @@ func (c *Client) ListAssessmentTargetsRequest(input *ListAssessmentTargetsInput)
 // ListAssessmentTargets API operation.
 type ListAssessmentTargetsRequest struct {
 	*aws.Request
-	Input *ListAssessmentTargetsInput
-	Copy  func(*ListAssessmentTargetsInput) ListAssessmentTargetsRequest
+	Input *types.ListAssessmentTargetsInput
+	Copy  func(*types.ListAssessmentTargetsInput) ListAssessmentTargetsRequest
 }
 
 // Send marshals and sends the ListAssessmentTargets API request.
@@ -130,7 +64,7 @@ func (r ListAssessmentTargetsRequest) Send(ctx context.Context) (*ListAssessment
 	}
 
 	resp := &ListAssessmentTargetsResponse{
-		ListAssessmentTargetsOutput: r.Request.Data.(*ListAssessmentTargetsOutput),
+		ListAssessmentTargetsOutput: r.Request.Data.(*types.ListAssessmentTargetsOutput),
 		response:                    &aws.Response{Request: r.Request},
 	}
 
@@ -160,7 +94,7 @@ func NewListAssessmentTargetsPaginator(req ListAssessmentTargetsRequest) ListAss
 	return ListAssessmentTargetsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListAssessmentTargetsInput
+				var inCpy *types.ListAssessmentTargetsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -180,14 +114,14 @@ type ListAssessmentTargetsPaginator struct {
 	aws.Pager
 }
 
-func (p *ListAssessmentTargetsPaginator) CurrentPage() *ListAssessmentTargetsOutput {
-	return p.Pager.CurrentPage().(*ListAssessmentTargetsOutput)
+func (p *ListAssessmentTargetsPaginator) CurrentPage() *types.ListAssessmentTargetsOutput {
+	return p.Pager.CurrentPage().(*types.ListAssessmentTargetsOutput)
 }
 
 // ListAssessmentTargetsResponse is the response type for the
 // ListAssessmentTargets API operation.
 type ListAssessmentTargetsResponse struct {
-	*ListAssessmentTargetsOutput
+	*types.ListAssessmentTargetsOutput
 
 	response *aws.Response
 }

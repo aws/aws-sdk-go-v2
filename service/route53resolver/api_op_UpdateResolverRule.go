@@ -6,65 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/route53resolver/types"
 )
-
-type UpdateResolverRuleInput struct {
-	_ struct{} `type:"structure"`
-
-	// The new settings for the resolver rule.
-	//
-	// Config is a required field
-	Config *ResolverRuleConfig `type:"structure" required:"true"`
-
-	// The ID of the resolver rule that you want to update.
-	//
-	// ResolverRuleId is a required field
-	ResolverRuleId *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s UpdateResolverRuleInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateResolverRuleInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateResolverRuleInput"}
-
-	if s.Config == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Config"))
-	}
-
-	if s.ResolverRuleId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ResolverRuleId"))
-	}
-	if s.ResolverRuleId != nil && len(*s.ResolverRuleId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ResolverRuleId", 1))
-	}
-	if s.Config != nil {
-		if err := s.Config.Validate(); err != nil {
-			invalidParams.AddNested("Config", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type UpdateResolverRuleOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The response to an UpdateResolverRule request.
-	ResolverRule *ResolverRule `type:"structure"`
-}
-
-// String returns the string representation
-func (s UpdateResolverRuleOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opUpdateResolverRule = "UpdateResolverRule"
 
@@ -83,7 +26,7 @@ const opUpdateResolverRule = "UpdateResolverRule"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/UpdateResolverRule
-func (c *Client) UpdateResolverRuleRequest(input *UpdateResolverRuleInput) UpdateResolverRuleRequest {
+func (c *Client) UpdateResolverRuleRequest(input *types.UpdateResolverRuleInput) UpdateResolverRuleRequest {
 	op := &aws.Operation{
 		Name:       opUpdateResolverRule,
 		HTTPMethod: "POST",
@@ -91,10 +34,10 @@ func (c *Client) UpdateResolverRuleRequest(input *UpdateResolverRuleInput) Updat
 	}
 
 	if input == nil {
-		input = &UpdateResolverRuleInput{}
+		input = &types.UpdateResolverRuleInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateResolverRuleOutput{})
+	req := c.newRequest(op, input, &types.UpdateResolverRuleOutput{})
 	return UpdateResolverRuleRequest{Request: req, Input: input, Copy: c.UpdateResolverRuleRequest}
 }
 
@@ -102,8 +45,8 @@ func (c *Client) UpdateResolverRuleRequest(input *UpdateResolverRuleInput) Updat
 // UpdateResolverRule API operation.
 type UpdateResolverRuleRequest struct {
 	*aws.Request
-	Input *UpdateResolverRuleInput
-	Copy  func(*UpdateResolverRuleInput) UpdateResolverRuleRequest
+	Input *types.UpdateResolverRuleInput
+	Copy  func(*types.UpdateResolverRuleInput) UpdateResolverRuleRequest
 }
 
 // Send marshals and sends the UpdateResolverRule API request.
@@ -115,7 +58,7 @@ func (r UpdateResolverRuleRequest) Send(ctx context.Context) (*UpdateResolverRul
 	}
 
 	resp := &UpdateResolverRuleResponse{
-		UpdateResolverRuleOutput: r.Request.Data.(*UpdateResolverRuleOutput),
+		UpdateResolverRuleOutput: r.Request.Data.(*types.UpdateResolverRuleOutput),
 		response:                 &aws.Response{Request: r.Request},
 	}
 
@@ -125,7 +68,7 @@ func (r UpdateResolverRuleRequest) Send(ctx context.Context) (*UpdateResolverRul
 // UpdateResolverRuleResponse is the response type for the
 // UpdateResolverRule API operation.
 type UpdateResolverRuleResponse struct {
-	*UpdateResolverRuleOutput
+	*types.UpdateResolverRuleOutput
 
 	response *aws.Response
 }

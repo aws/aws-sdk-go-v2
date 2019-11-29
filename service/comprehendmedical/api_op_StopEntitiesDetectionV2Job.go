@@ -6,51 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/comprehendmedical/types"
 )
-
-type StopEntitiesDetectionV2JobInput struct {
-	_ struct{} `type:"structure"`
-
-	// The identifier of the medical entities job to stop.
-	//
-	// JobId is a required field
-	JobId *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s StopEntitiesDetectionV2JobInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *StopEntitiesDetectionV2JobInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "StopEntitiesDetectionV2JobInput"}
-
-	if s.JobId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("JobId"))
-	}
-	if s.JobId != nil && len(*s.JobId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("JobId", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type StopEntitiesDetectionV2JobOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The identifier of the medical entities detection job that was stopped.
-	JobId *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s StopEntitiesDetectionV2JobOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opStopEntitiesDetectionV2Job = "StopEntitiesDetectionV2Job"
 
@@ -67,7 +24,7 @@ const opStopEntitiesDetectionV2Job = "StopEntitiesDetectionV2Job"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/comprehendmedical-2018-10-30/StopEntitiesDetectionV2Job
-func (c *Client) StopEntitiesDetectionV2JobRequest(input *StopEntitiesDetectionV2JobInput) StopEntitiesDetectionV2JobRequest {
+func (c *Client) StopEntitiesDetectionV2JobRequest(input *types.StopEntitiesDetectionV2JobInput) StopEntitiesDetectionV2JobRequest {
 	op := &aws.Operation{
 		Name:       opStopEntitiesDetectionV2Job,
 		HTTPMethod: "POST",
@@ -75,10 +32,10 @@ func (c *Client) StopEntitiesDetectionV2JobRequest(input *StopEntitiesDetectionV
 	}
 
 	if input == nil {
-		input = &StopEntitiesDetectionV2JobInput{}
+		input = &types.StopEntitiesDetectionV2JobInput{}
 	}
 
-	req := c.newRequest(op, input, &StopEntitiesDetectionV2JobOutput{})
+	req := c.newRequest(op, input, &types.StopEntitiesDetectionV2JobOutput{})
 	return StopEntitiesDetectionV2JobRequest{Request: req, Input: input, Copy: c.StopEntitiesDetectionV2JobRequest}
 }
 
@@ -86,8 +43,8 @@ func (c *Client) StopEntitiesDetectionV2JobRequest(input *StopEntitiesDetectionV
 // StopEntitiesDetectionV2Job API operation.
 type StopEntitiesDetectionV2JobRequest struct {
 	*aws.Request
-	Input *StopEntitiesDetectionV2JobInput
-	Copy  func(*StopEntitiesDetectionV2JobInput) StopEntitiesDetectionV2JobRequest
+	Input *types.StopEntitiesDetectionV2JobInput
+	Copy  func(*types.StopEntitiesDetectionV2JobInput) StopEntitiesDetectionV2JobRequest
 }
 
 // Send marshals and sends the StopEntitiesDetectionV2Job API request.
@@ -99,7 +56,7 @@ func (r StopEntitiesDetectionV2JobRequest) Send(ctx context.Context) (*StopEntit
 	}
 
 	resp := &StopEntitiesDetectionV2JobResponse{
-		StopEntitiesDetectionV2JobOutput: r.Request.Data.(*StopEntitiesDetectionV2JobOutput),
+		StopEntitiesDetectionV2JobOutput: r.Request.Data.(*types.StopEntitiesDetectionV2JobOutput),
 		response:                         &aws.Response{Request: r.Request},
 	}
 
@@ -109,7 +66,7 @@ func (r StopEntitiesDetectionV2JobRequest) Send(ctx context.Context) (*StopEntit
 // StopEntitiesDetectionV2JobResponse is the response type for the
 // StopEntitiesDetectionV2Job API operation.
 type StopEntitiesDetectionV2JobResponse struct {
-	*StopEntitiesDetectionV2JobOutput
+	*types.StopEntitiesDetectionV2JobOutput
 
 	response *aws.Response
 }

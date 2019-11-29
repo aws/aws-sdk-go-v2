@@ -6,57 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/cloudformation/types"
 )
-
-// The input for ListStacks action.
-type ListStacksInput struct {
-	_ struct{} `type:"structure"`
-
-	// A string that identifies the next page of stacks that you want to retrieve.
-	NextToken *string `min:"1" type:"string"`
-
-	// Stack status to use as a filter. Specify one or more stack status codes to
-	// list only stacks with the specified status codes. For a complete list of
-	// stack status codes, see the StackStatus parameter of the Stack data type.
-	StackStatusFilter []StackStatus `type:"list"`
-}
-
-// String returns the string representation
-func (s ListStacksInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListStacksInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListStacksInput"}
-	if s.NextToken != nil && len(*s.NextToken) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// The output for ListStacks action.
-type ListStacksOutput struct {
-	_ struct{} `type:"structure"`
-
-	// If the output exceeds 1 MB in size, a string that identifies the next page
-	// of stacks. If no additional page exists, this value is null.
-	NextToken *string `min:"1" type:"string"`
-
-	// A list of StackSummary structures containing information about the specified
-	// stacks.
-	StackSummaries []StackSummary `type:"list"`
-}
-
-// String returns the string representation
-func (s ListStacksOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListStacks = "ListStacks"
 
@@ -77,7 +28,7 @@ const opListStacks = "ListStacks"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ListStacks
-func (c *Client) ListStacksRequest(input *ListStacksInput) ListStacksRequest {
+func (c *Client) ListStacksRequest(input *types.ListStacksInput) ListStacksRequest {
 	op := &aws.Operation{
 		Name:       opListStacks,
 		HTTPMethod: "POST",
@@ -91,10 +42,10 @@ func (c *Client) ListStacksRequest(input *ListStacksInput) ListStacksRequest {
 	}
 
 	if input == nil {
-		input = &ListStacksInput{}
+		input = &types.ListStacksInput{}
 	}
 
-	req := c.newRequest(op, input, &ListStacksOutput{})
+	req := c.newRequest(op, input, &types.ListStacksOutput{})
 	return ListStacksRequest{Request: req, Input: input, Copy: c.ListStacksRequest}
 }
 
@@ -102,8 +53,8 @@ func (c *Client) ListStacksRequest(input *ListStacksInput) ListStacksRequest {
 // ListStacks API operation.
 type ListStacksRequest struct {
 	*aws.Request
-	Input *ListStacksInput
-	Copy  func(*ListStacksInput) ListStacksRequest
+	Input *types.ListStacksInput
+	Copy  func(*types.ListStacksInput) ListStacksRequest
 }
 
 // Send marshals and sends the ListStacks API request.
@@ -115,7 +66,7 @@ func (r ListStacksRequest) Send(ctx context.Context) (*ListStacksResponse, error
 	}
 
 	resp := &ListStacksResponse{
-		ListStacksOutput: r.Request.Data.(*ListStacksOutput),
+		ListStacksOutput: r.Request.Data.(*types.ListStacksOutput),
 		response:         &aws.Response{Request: r.Request},
 	}
 
@@ -145,7 +96,7 @@ func NewListStacksPaginator(req ListStacksRequest) ListStacksPaginator {
 	return ListStacksPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListStacksInput
+				var inCpy *types.ListStacksInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -165,14 +116,14 @@ type ListStacksPaginator struct {
 	aws.Pager
 }
 
-func (p *ListStacksPaginator) CurrentPage() *ListStacksOutput {
-	return p.Pager.CurrentPage().(*ListStacksOutput)
+func (p *ListStacksPaginator) CurrentPage() *types.ListStacksOutput {
+	return p.Pager.CurrentPage().(*types.ListStacksOutput)
 }
 
 // ListStacksResponse is the response type for the
 // ListStacks API operation.
 type ListStacksResponse struct {
-	*ListStacksOutput
+	*types.ListStacksOutput
 
 	response *aws.Response
 }

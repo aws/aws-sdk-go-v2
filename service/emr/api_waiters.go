@@ -7,6 +7,7 @@ import (
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
+	"github.com/aws/aws-sdk-go-v2/service/emr/types"
 )
 
 // WaitUntilClusterRunning uses the Amazon EMR API operation
@@ -18,7 +19,7 @@ import (
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Client) WaitUntilClusterRunning(ctx context.Context, input *DescribeClusterInput, opts ...aws.WaiterOption) error {
+func (c *Client) WaitUntilClusterRunning(ctx context.Context, input *types.DescribeClusterInput, opts ...aws.WaiterOption) error {
 	w := aws.Waiter{
 		Name:        "WaitUntilClusterRunning",
 		MaxAttempts: 60,
@@ -52,7 +53,7 @@ func (c *Client) WaitUntilClusterRunning(ctx context.Context, input *DescribeClu
 		},
 		Logger: c.Config.Logger,
 		NewRequest: func(opts []aws.Option) (*aws.Request, error) {
-			var inCpy *DescribeClusterInput
+			var inCpy *types.DescribeClusterInput
 			if input != nil {
 				tmp := *input
 				inCpy = &tmp
@@ -77,7 +78,7 @@ func (c *Client) WaitUntilClusterRunning(ctx context.Context, input *DescribeClu
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Client) WaitUntilClusterTerminated(ctx context.Context, input *DescribeClusterInput, opts ...aws.WaiterOption) error {
+func (c *Client) WaitUntilClusterTerminated(ctx context.Context, input *types.DescribeClusterInput, opts ...aws.WaiterOption) error {
 	w := aws.Waiter{
 		Name:        "WaitUntilClusterTerminated",
 		MaxAttempts: 60,
@@ -96,7 +97,7 @@ func (c *Client) WaitUntilClusterTerminated(ctx context.Context, input *Describe
 		},
 		Logger: c.Config.Logger,
 		NewRequest: func(opts []aws.Option) (*aws.Request, error) {
-			var inCpy *DescribeClusterInput
+			var inCpy *types.DescribeClusterInput
 			if input != nil {
 				tmp := *input
 				inCpy = &tmp
@@ -121,7 +122,7 @@ func (c *Client) WaitUntilClusterTerminated(ctx context.Context, input *Describe
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Client) WaitUntilStepComplete(ctx context.Context, input *DescribeStepInput, opts ...aws.WaiterOption) error {
+func (c *Client) WaitUntilStepComplete(ctx context.Context, input *types.DescribeStepInput, opts ...aws.WaiterOption) error {
 	w := aws.Waiter{
 		Name:        "WaitUntilStepComplete",
 		MaxAttempts: 60,
@@ -145,7 +146,7 @@ func (c *Client) WaitUntilStepComplete(ctx context.Context, input *DescribeStepI
 		},
 		Logger: c.Config.Logger,
 		NewRequest: func(opts []aws.Option) (*aws.Request, error) {
-			var inCpy *DescribeStepInput
+			var inCpy *types.DescribeStepInput
 			if input != nil {
 				tmp := *input
 				inCpy = &tmp

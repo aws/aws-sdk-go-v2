@@ -6,42 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/codedeploy/types"
 )
-
-type PutLifecycleEventHookExecutionStatusInput struct {
-	_ struct{} `type:"structure"`
-
-	// The unique ID of a deployment. Pass this ID to a Lambda function that validates
-	// a deployment lifecycle event.
-	DeploymentId *string `locationName:"deploymentId" type:"string"`
-
-	// The execution ID of a deployment's lifecycle hook. A deployment lifecycle
-	// hook is specified in the hooks section of the AppSpec file.
-	LifecycleEventHookExecutionId *string `locationName:"lifecycleEventHookExecutionId" type:"string"`
-
-	// The result of a Lambda function that validates a deployment lifecycle event
-	// (Succeeded or Failed).
-	Status LifecycleEventStatus `locationName:"status" type:"string" enum:"true"`
-}
-
-// String returns the string representation
-func (s PutLifecycleEventHookExecutionStatusInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type PutLifecycleEventHookExecutionStatusOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The execution ID of the lifecycle event hook. A hook is specified in the
-	// hooks section of the deployment's AppSpec file.
-	LifecycleEventHookExecutionId *string `locationName:"lifecycleEventHookExecutionId" type:"string"`
-}
-
-// String returns the string representation
-func (s PutLifecycleEventHookExecutionStatusOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opPutLifecycleEventHookExecutionStatus = "PutLifecycleEventHookExecutionStatus"
 
@@ -60,7 +26,7 @@ const opPutLifecycleEventHookExecutionStatus = "PutLifecycleEventHookExecutionSt
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/PutLifecycleEventHookExecutionStatus
-func (c *Client) PutLifecycleEventHookExecutionStatusRequest(input *PutLifecycleEventHookExecutionStatusInput) PutLifecycleEventHookExecutionStatusRequest {
+func (c *Client) PutLifecycleEventHookExecutionStatusRequest(input *types.PutLifecycleEventHookExecutionStatusInput) PutLifecycleEventHookExecutionStatusRequest {
 	op := &aws.Operation{
 		Name:       opPutLifecycleEventHookExecutionStatus,
 		HTTPMethod: "POST",
@@ -68,10 +34,10 @@ func (c *Client) PutLifecycleEventHookExecutionStatusRequest(input *PutLifecycle
 	}
 
 	if input == nil {
-		input = &PutLifecycleEventHookExecutionStatusInput{}
+		input = &types.PutLifecycleEventHookExecutionStatusInput{}
 	}
 
-	req := c.newRequest(op, input, &PutLifecycleEventHookExecutionStatusOutput{})
+	req := c.newRequest(op, input, &types.PutLifecycleEventHookExecutionStatusOutput{})
 	return PutLifecycleEventHookExecutionStatusRequest{Request: req, Input: input, Copy: c.PutLifecycleEventHookExecutionStatusRequest}
 }
 
@@ -79,8 +45,8 @@ func (c *Client) PutLifecycleEventHookExecutionStatusRequest(input *PutLifecycle
 // PutLifecycleEventHookExecutionStatus API operation.
 type PutLifecycleEventHookExecutionStatusRequest struct {
 	*aws.Request
-	Input *PutLifecycleEventHookExecutionStatusInput
-	Copy  func(*PutLifecycleEventHookExecutionStatusInput) PutLifecycleEventHookExecutionStatusRequest
+	Input *types.PutLifecycleEventHookExecutionStatusInput
+	Copy  func(*types.PutLifecycleEventHookExecutionStatusInput) PutLifecycleEventHookExecutionStatusRequest
 }
 
 // Send marshals and sends the PutLifecycleEventHookExecutionStatus API request.
@@ -92,7 +58,7 @@ func (r PutLifecycleEventHookExecutionStatusRequest) Send(ctx context.Context) (
 	}
 
 	resp := &PutLifecycleEventHookExecutionStatusResponse{
-		PutLifecycleEventHookExecutionStatusOutput: r.Request.Data.(*PutLifecycleEventHookExecutionStatusOutput),
+		PutLifecycleEventHookExecutionStatusOutput: r.Request.Data.(*types.PutLifecycleEventHookExecutionStatusOutput),
 		response: &aws.Response{Request: r.Request},
 	}
 
@@ -102,7 +68,7 @@ func (r PutLifecycleEventHookExecutionStatusRequest) Send(ctx context.Context) (
 // PutLifecycleEventHookExecutionStatusResponse is the response type for the
 // PutLifecycleEventHookExecutionStatus API operation.
 type PutLifecycleEventHookExecutionStatusResponse struct {
-	*PutLifecycleEventHookExecutionStatusOutput
+	*types.PutLifecycleEventHookExecutionStatusOutput
 
 	response *aws.Response
 }

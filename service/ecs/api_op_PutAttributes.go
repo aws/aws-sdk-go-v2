@@ -4,65 +4,10 @@ package ecs
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ecs/types"
 )
-
-type PutAttributesInput struct {
-	_ struct{} `type:"structure"`
-
-	// The attributes to apply to your resource. You can specify up to 10 custom
-	// attributes per resource. You can specify up to 10 attributes in a single
-	// call.
-	//
-	// Attributes is a required field
-	Attributes []Attribute `locationName:"attributes" type:"list" required:"true"`
-
-	// The short name or full Amazon Resource Name (ARN) of the cluster that contains
-	// the resource to apply attributes. If you do not specify a cluster, the default
-	// cluster is assumed.
-	Cluster *string `locationName:"cluster" type:"string"`
-}
-
-// String returns the string representation
-func (s PutAttributesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *PutAttributesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "PutAttributesInput"}
-
-	if s.Attributes == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Attributes"))
-	}
-	if s.Attributes != nil {
-		for i, v := range s.Attributes {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Attributes", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type PutAttributesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The attributes applied to your resource.
-	Attributes []Attribute `locationName:"attributes" type:"list"`
-}
-
-// String returns the string representation
-func (s PutAttributesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opPutAttributes = "PutAttributes"
 
@@ -83,7 +28,7 @@ const opPutAttributes = "PutAttributes"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/PutAttributes
-func (c *Client) PutAttributesRequest(input *PutAttributesInput) PutAttributesRequest {
+func (c *Client) PutAttributesRequest(input *types.PutAttributesInput) PutAttributesRequest {
 	op := &aws.Operation{
 		Name:       opPutAttributes,
 		HTTPMethod: "POST",
@@ -91,10 +36,10 @@ func (c *Client) PutAttributesRequest(input *PutAttributesInput) PutAttributesRe
 	}
 
 	if input == nil {
-		input = &PutAttributesInput{}
+		input = &types.PutAttributesInput{}
 	}
 
-	req := c.newRequest(op, input, &PutAttributesOutput{})
+	req := c.newRequest(op, input, &types.PutAttributesOutput{})
 	return PutAttributesRequest{Request: req, Input: input, Copy: c.PutAttributesRequest}
 }
 
@@ -102,8 +47,8 @@ func (c *Client) PutAttributesRequest(input *PutAttributesInput) PutAttributesRe
 // PutAttributes API operation.
 type PutAttributesRequest struct {
 	*aws.Request
-	Input *PutAttributesInput
-	Copy  func(*PutAttributesInput) PutAttributesRequest
+	Input *types.PutAttributesInput
+	Copy  func(*types.PutAttributesInput) PutAttributesRequest
 }
 
 // Send marshals and sends the PutAttributes API request.
@@ -115,7 +60,7 @@ func (r PutAttributesRequest) Send(ctx context.Context) (*PutAttributesResponse,
 	}
 
 	resp := &PutAttributesResponse{
-		PutAttributesOutput: r.Request.Data.(*PutAttributesOutput),
+		PutAttributesOutput: r.Request.Data.(*types.PutAttributesOutput),
 		response:            &aws.Response{Request: r.Request},
 	}
 
@@ -125,7 +70,7 @@ func (r PutAttributesRequest) Send(ctx context.Context) (*PutAttributesResponse,
 // PutAttributesResponse is the response type for the
 // PutAttributes API operation.
 type PutAttributesResponse struct {
-	*PutAttributesOutput
+	*types.PutAttributesOutput
 
 	response *aws.Response
 }

@@ -6,50 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/rds/types"
 )
-
-type StartDBInstanceInput struct {
-	_ struct{} `type:"structure"`
-
-	// The user-supplied instance identifier.
-	//
-	// DBInstanceIdentifier is a required field
-	DBInstanceIdentifier *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s StartDBInstanceInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *StartDBInstanceInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "StartDBInstanceInput"}
-
-	if s.DBInstanceIdentifier == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DBInstanceIdentifier"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type StartDBInstanceOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Contains the details of an Amazon RDS DB instance.
-	//
-	// This data type is used as a response element in the DescribeDBInstances action.
-	DBInstance *DBInstance `type:"structure"`
-}
-
-// String returns the string representation
-func (s StartDBInstanceOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opStartDBInstance = "StartDBInstance"
 
@@ -74,7 +32,7 @@ const opStartDBInstance = "StartDBInstance"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/StartDBInstance
-func (c *Client) StartDBInstanceRequest(input *StartDBInstanceInput) StartDBInstanceRequest {
+func (c *Client) StartDBInstanceRequest(input *types.StartDBInstanceInput) StartDBInstanceRequest {
 	op := &aws.Operation{
 		Name:       opStartDBInstance,
 		HTTPMethod: "POST",
@@ -82,10 +40,10 @@ func (c *Client) StartDBInstanceRequest(input *StartDBInstanceInput) StartDBInst
 	}
 
 	if input == nil {
-		input = &StartDBInstanceInput{}
+		input = &types.StartDBInstanceInput{}
 	}
 
-	req := c.newRequest(op, input, &StartDBInstanceOutput{})
+	req := c.newRequest(op, input, &types.StartDBInstanceOutput{})
 	return StartDBInstanceRequest{Request: req, Input: input, Copy: c.StartDBInstanceRequest}
 }
 
@@ -93,8 +51,8 @@ func (c *Client) StartDBInstanceRequest(input *StartDBInstanceInput) StartDBInst
 // StartDBInstance API operation.
 type StartDBInstanceRequest struct {
 	*aws.Request
-	Input *StartDBInstanceInput
-	Copy  func(*StartDBInstanceInput) StartDBInstanceRequest
+	Input *types.StartDBInstanceInput
+	Copy  func(*types.StartDBInstanceInput) StartDBInstanceRequest
 }
 
 // Send marshals and sends the StartDBInstance API request.
@@ -106,7 +64,7 @@ func (r StartDBInstanceRequest) Send(ctx context.Context) (*StartDBInstanceRespo
 	}
 
 	resp := &StartDBInstanceResponse{
-		StartDBInstanceOutput: r.Request.Data.(*StartDBInstanceOutput),
+		StartDBInstanceOutput: r.Request.Data.(*types.StartDBInstanceOutput),
 		response:              &aws.Response{Request: r.Request},
 	}
 
@@ -116,7 +74,7 @@ func (r StartDBInstanceRequest) Send(ctx context.Context) (*StartDBInstanceRespo
 // StartDBInstanceResponse is the response type for the
 // StartDBInstance API operation.
 type StartDBInstanceResponse struct {
-	*StartDBInstanceOutput
+	*types.StartDBInstanceOutput
 
 	response *aws.Response
 }

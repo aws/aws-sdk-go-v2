@@ -6,58 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/iam/types"
 )
-
-type GetLoginProfileInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the user whose login profile you want to retrieve.
-	//
-	// This parameter allows (through its regex pattern (http://wikipedia.org/wiki/regex))
-	// a string of characters consisting of upper and lowercase alphanumeric characters
-	// with no spaces. You can also include any of the following characters: _+=,.@-
-	//
-	// UserName is a required field
-	UserName *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetLoginProfileInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetLoginProfileInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetLoginProfileInput"}
-
-	if s.UserName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("UserName"))
-	}
-	if s.UserName != nil && len(*s.UserName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("UserName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Contains the response to a successful GetLoginProfile request.
-type GetLoginProfileOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A structure containing the user name and password create date for the user.
-	//
-	// LoginProfile is a required field
-	LoginProfile *LoginProfile `type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s GetLoginProfileOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetLoginProfile = "GetLoginProfile"
 
@@ -76,7 +26,7 @@ const opGetLoginProfile = "GetLoginProfile"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetLoginProfile
-func (c *Client) GetLoginProfileRequest(input *GetLoginProfileInput) GetLoginProfileRequest {
+func (c *Client) GetLoginProfileRequest(input *types.GetLoginProfileInput) GetLoginProfileRequest {
 	op := &aws.Operation{
 		Name:       opGetLoginProfile,
 		HTTPMethod: "POST",
@@ -84,10 +34,10 @@ func (c *Client) GetLoginProfileRequest(input *GetLoginProfileInput) GetLoginPro
 	}
 
 	if input == nil {
-		input = &GetLoginProfileInput{}
+		input = &types.GetLoginProfileInput{}
 	}
 
-	req := c.newRequest(op, input, &GetLoginProfileOutput{})
+	req := c.newRequest(op, input, &types.GetLoginProfileOutput{})
 	return GetLoginProfileRequest{Request: req, Input: input, Copy: c.GetLoginProfileRequest}
 }
 
@@ -95,8 +45,8 @@ func (c *Client) GetLoginProfileRequest(input *GetLoginProfileInput) GetLoginPro
 // GetLoginProfile API operation.
 type GetLoginProfileRequest struct {
 	*aws.Request
-	Input *GetLoginProfileInput
-	Copy  func(*GetLoginProfileInput) GetLoginProfileRequest
+	Input *types.GetLoginProfileInput
+	Copy  func(*types.GetLoginProfileInput) GetLoginProfileRequest
 }
 
 // Send marshals and sends the GetLoginProfile API request.
@@ -108,7 +58,7 @@ func (r GetLoginProfileRequest) Send(ctx context.Context) (*GetLoginProfileRespo
 	}
 
 	resp := &GetLoginProfileResponse{
-		GetLoginProfileOutput: r.Request.Data.(*GetLoginProfileOutput),
+		GetLoginProfileOutput: r.Request.Data.(*types.GetLoginProfileOutput),
 		response:              &aws.Response{Request: r.Request},
 	}
 
@@ -118,7 +68,7 @@ func (r GetLoginProfileRequest) Send(ctx context.Context) (*GetLoginProfileRespo
 // GetLoginProfileResponse is the response type for the
 // GetLoginProfile API operation.
 type GetLoginProfileResponse struct {
-	*GetLoginProfileOutput
+	*types.GetLoginProfileOutput
 
 	response *aws.Response
 }

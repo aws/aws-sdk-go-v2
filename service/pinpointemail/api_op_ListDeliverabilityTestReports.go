@@ -6,97 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/pinpointemail/types"
 )
-
-// A request to list all of the predictive inbox placement tests that you've
-// performed.
-type ListDeliverabilityTestReportsInput struct {
-	_ struct{} `type:"structure"`
-
-	// A token returned from a previous call to ListDeliverabilityTestReports to
-	// indicate the position in the list of predictive inbox placement tests.
-	NextToken *string `location:"querystring" locationName:"NextToken" type:"string"`
-
-	// The number of results to show in a single call to ListDeliverabilityTestReports.
-	// If the number of results is larger than the number you specified in this
-	// parameter, then the response includes a NextToken element, which you can
-	// use to obtain additional results.
-	//
-	// The value you specify has to be at least 0, and can be no more than 1000.
-	PageSize *int64 `location:"querystring" locationName:"PageSize" type:"integer"`
-}
-
-// String returns the string representation
-func (s ListDeliverabilityTestReportsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListDeliverabilityTestReportsInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.PageSize != nil {
-		v := *s.PageSize
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "PageSize", protocol.Int64Value(v), metadata)
-	}
-	return nil
-}
-
-// A list of the predictive inbox placement test reports that are available
-// for your account, regardless of whether or not those tests are complete.
-type ListDeliverabilityTestReportsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// An object that contains a lists of predictive inbox placement tests that
-	// you've performed.
-	//
-	// DeliverabilityTestReports is a required field
-	DeliverabilityTestReports []DeliverabilityTestReport `type:"list" required:"true"`
-
-	// A token that indicates that there are additional predictive inbox placement
-	// tests to list. To view additional predictive inbox placement tests, issue
-	// another request to ListDeliverabilityTestReports, and pass this token in
-	// the NextToken parameter.
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s ListDeliverabilityTestReportsOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s ListDeliverabilityTestReportsOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.DeliverabilityTestReports != nil {
-		v := s.DeliverabilityTestReports
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "DeliverabilityTestReports", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	if s.NextToken != nil {
-		v := *s.NextToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opListDeliverabilityTestReports = "ListDeliverabilityTestReports"
 
@@ -116,7 +27,7 @@ const opListDeliverabilityTestReports = "ListDeliverabilityTestReports"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/ListDeliverabilityTestReports
-func (c *Client) ListDeliverabilityTestReportsRequest(input *ListDeliverabilityTestReportsInput) ListDeliverabilityTestReportsRequest {
+func (c *Client) ListDeliverabilityTestReportsRequest(input *types.ListDeliverabilityTestReportsInput) ListDeliverabilityTestReportsRequest {
 	op := &aws.Operation{
 		Name:       opListDeliverabilityTestReports,
 		HTTPMethod: "GET",
@@ -130,10 +41,10 @@ func (c *Client) ListDeliverabilityTestReportsRequest(input *ListDeliverabilityT
 	}
 
 	if input == nil {
-		input = &ListDeliverabilityTestReportsInput{}
+		input = &types.ListDeliverabilityTestReportsInput{}
 	}
 
-	req := c.newRequest(op, input, &ListDeliverabilityTestReportsOutput{})
+	req := c.newRequest(op, input, &types.ListDeliverabilityTestReportsOutput{})
 	return ListDeliverabilityTestReportsRequest{Request: req, Input: input, Copy: c.ListDeliverabilityTestReportsRequest}
 }
 
@@ -141,8 +52,8 @@ func (c *Client) ListDeliverabilityTestReportsRequest(input *ListDeliverabilityT
 // ListDeliverabilityTestReports API operation.
 type ListDeliverabilityTestReportsRequest struct {
 	*aws.Request
-	Input *ListDeliverabilityTestReportsInput
-	Copy  func(*ListDeliverabilityTestReportsInput) ListDeliverabilityTestReportsRequest
+	Input *types.ListDeliverabilityTestReportsInput
+	Copy  func(*types.ListDeliverabilityTestReportsInput) ListDeliverabilityTestReportsRequest
 }
 
 // Send marshals and sends the ListDeliverabilityTestReports API request.
@@ -154,7 +65,7 @@ func (r ListDeliverabilityTestReportsRequest) Send(ctx context.Context) (*ListDe
 	}
 
 	resp := &ListDeliverabilityTestReportsResponse{
-		ListDeliverabilityTestReportsOutput: r.Request.Data.(*ListDeliverabilityTestReportsOutput),
+		ListDeliverabilityTestReportsOutput: r.Request.Data.(*types.ListDeliverabilityTestReportsOutput),
 		response:                            &aws.Response{Request: r.Request},
 	}
 
@@ -184,7 +95,7 @@ func NewListDeliverabilityTestReportsPaginator(req ListDeliverabilityTestReports
 	return ListDeliverabilityTestReportsPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListDeliverabilityTestReportsInput
+				var inCpy *types.ListDeliverabilityTestReportsInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -204,14 +115,14 @@ type ListDeliverabilityTestReportsPaginator struct {
 	aws.Pager
 }
 
-func (p *ListDeliverabilityTestReportsPaginator) CurrentPage() *ListDeliverabilityTestReportsOutput {
-	return p.Pager.CurrentPage().(*ListDeliverabilityTestReportsOutput)
+func (p *ListDeliverabilityTestReportsPaginator) CurrentPage() *types.ListDeliverabilityTestReportsOutput {
+	return p.Pager.CurrentPage().(*types.ListDeliverabilityTestReportsOutput)
 }
 
 // ListDeliverabilityTestReportsResponse is the response type for the
 // ListDeliverabilityTestReports API operation.
 type ListDeliverabilityTestReportsResponse struct {
-	*ListDeliverabilityTestReportsOutput
+	*types.ListDeliverabilityTestReportsOutput
 
 	response *aws.Response
 }

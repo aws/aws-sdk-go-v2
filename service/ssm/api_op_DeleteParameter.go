@@ -6,48 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ssm/types"
 )
-
-type DeleteParameterInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the parameter to delete.
-	//
-	// Name is a required field
-	Name *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteParameterInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteParameterInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteParameterInput"}
-
-	if s.Name == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Name"))
-	}
-	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteParameterOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteParameterOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteParameter = "DeleteParameter"
 
@@ -64,7 +24,7 @@ const opDeleteParameter = "DeleteParameter"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DeleteParameter
-func (c *Client) DeleteParameterRequest(input *DeleteParameterInput) DeleteParameterRequest {
+func (c *Client) DeleteParameterRequest(input *types.DeleteParameterInput) DeleteParameterRequest {
 	op := &aws.Operation{
 		Name:       opDeleteParameter,
 		HTTPMethod: "POST",
@@ -72,10 +32,10 @@ func (c *Client) DeleteParameterRequest(input *DeleteParameterInput) DeleteParam
 	}
 
 	if input == nil {
-		input = &DeleteParameterInput{}
+		input = &types.DeleteParameterInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteParameterOutput{})
+	req := c.newRequest(op, input, &types.DeleteParameterOutput{})
 	return DeleteParameterRequest{Request: req, Input: input, Copy: c.DeleteParameterRequest}
 }
 
@@ -83,8 +43,8 @@ func (c *Client) DeleteParameterRequest(input *DeleteParameterInput) DeleteParam
 // DeleteParameter API operation.
 type DeleteParameterRequest struct {
 	*aws.Request
-	Input *DeleteParameterInput
-	Copy  func(*DeleteParameterInput) DeleteParameterRequest
+	Input *types.DeleteParameterInput
+	Copy  func(*types.DeleteParameterInput) DeleteParameterRequest
 }
 
 // Send marshals and sends the DeleteParameter API request.
@@ -96,7 +56,7 @@ func (r DeleteParameterRequest) Send(ctx context.Context) (*DeleteParameterRespo
 	}
 
 	resp := &DeleteParameterResponse{
-		DeleteParameterOutput: r.Request.Data.(*DeleteParameterOutput),
+		DeleteParameterOutput: r.Request.Data.(*types.DeleteParameterOutput),
 		response:              &aws.Response{Request: r.Request},
 	}
 
@@ -106,7 +66,7 @@ func (r DeleteParameterRequest) Send(ctx context.Context) (*DeleteParameterRespo
 // DeleteParameterResponse is the response type for the
 // DeleteParameter API operation.
 type DeleteParameterResponse struct {
-	*DeleteParameterOutput
+	*types.DeleteParameterOutput
 
 	response *aws.Response
 }

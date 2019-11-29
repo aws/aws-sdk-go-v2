@@ -6,54 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-type WithdrawByoipCidrInput struct {
-	_ struct{} `type:"structure"`
-
-	// The public IPv4 address range, in CIDR notation.
-	//
-	// Cidr is a required field
-	Cidr *string `type:"string" required:"true"`
-
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have
-	// the required permissions, the error response is DryRunOperation. Otherwise,
-	// it is UnauthorizedOperation.
-	DryRun *bool `type:"boolean"`
-}
-
-// String returns the string representation
-func (s WithdrawByoipCidrInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *WithdrawByoipCidrInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "WithdrawByoipCidrInput"}
-
-	if s.Cidr == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Cidr"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type WithdrawByoipCidrOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Information about the address pool.
-	ByoipCidr *ByoipCidr `locationName:"byoipCidr" type:"structure"`
-}
-
-// String returns the string representation
-func (s WithdrawByoipCidrOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opWithdrawByoipCidr = "WithdrawByoipCidr"
 
@@ -77,7 +31,7 @@ const opWithdrawByoipCidr = "WithdrawByoipCidr"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/WithdrawByoipCidr
-func (c *Client) WithdrawByoipCidrRequest(input *WithdrawByoipCidrInput) WithdrawByoipCidrRequest {
+func (c *Client) WithdrawByoipCidrRequest(input *types.WithdrawByoipCidrInput) WithdrawByoipCidrRequest {
 	op := &aws.Operation{
 		Name:       opWithdrawByoipCidr,
 		HTTPMethod: "POST",
@@ -85,10 +39,10 @@ func (c *Client) WithdrawByoipCidrRequest(input *WithdrawByoipCidrInput) Withdra
 	}
 
 	if input == nil {
-		input = &WithdrawByoipCidrInput{}
+		input = &types.WithdrawByoipCidrInput{}
 	}
 
-	req := c.newRequest(op, input, &WithdrawByoipCidrOutput{})
+	req := c.newRequest(op, input, &types.WithdrawByoipCidrOutput{})
 	return WithdrawByoipCidrRequest{Request: req, Input: input, Copy: c.WithdrawByoipCidrRequest}
 }
 
@@ -96,8 +50,8 @@ func (c *Client) WithdrawByoipCidrRequest(input *WithdrawByoipCidrInput) Withdra
 // WithdrawByoipCidr API operation.
 type WithdrawByoipCidrRequest struct {
 	*aws.Request
-	Input *WithdrawByoipCidrInput
-	Copy  func(*WithdrawByoipCidrInput) WithdrawByoipCidrRequest
+	Input *types.WithdrawByoipCidrInput
+	Copy  func(*types.WithdrawByoipCidrInput) WithdrawByoipCidrRequest
 }
 
 // Send marshals and sends the WithdrawByoipCidr API request.
@@ -109,7 +63,7 @@ func (r WithdrawByoipCidrRequest) Send(ctx context.Context) (*WithdrawByoipCidrR
 	}
 
 	resp := &WithdrawByoipCidrResponse{
-		WithdrawByoipCidrOutput: r.Request.Data.(*WithdrawByoipCidrOutput),
+		WithdrawByoipCidrOutput: r.Request.Data.(*types.WithdrawByoipCidrOutput),
 		response:                &aws.Response{Request: r.Request},
 	}
 
@@ -119,7 +73,7 @@ func (r WithdrawByoipCidrRequest) Send(ctx context.Context) (*WithdrawByoipCidrR
 // WithdrawByoipCidrResponse is the response type for the
 // WithdrawByoipCidr API operation.
 type WithdrawByoipCidrResponse struct {
-	*WithdrawByoipCidrOutput
+	*types.WithdrawByoipCidrOutput
 
 	response *aws.Response
 }

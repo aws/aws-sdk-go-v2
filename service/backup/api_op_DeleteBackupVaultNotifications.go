@@ -6,68 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/restjson"
+	"github.com/aws/aws-sdk-go-v2/service/backup/types"
 )
-
-type DeleteBackupVaultNotificationsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of a logical container where backups are stored. Backup vaults are
-	// identified by names that are unique to the account used to create them and
-	// the Region where they are created. They consist of lowercase letters, numbers,
-	// and hyphens.
-	//
-	// BackupVaultName is a required field
-	BackupVaultName *string `location:"uri" locationName:"backupVaultName" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteBackupVaultNotificationsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteBackupVaultNotificationsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteBackupVaultNotificationsInput"}
-
-	if s.BackupVaultName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("BackupVaultName"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteBackupVaultNotificationsInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.BackupVaultName != nil {
-		v := *s.BackupVaultName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "backupVaultName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type DeleteBackupVaultNotificationsOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteBackupVaultNotificationsOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteBackupVaultNotificationsOutput) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
 
 const opDeleteBackupVaultNotifications = "DeleteBackupVaultNotifications"
 
@@ -84,7 +26,7 @@ const opDeleteBackupVaultNotifications = "DeleteBackupVaultNotifications"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/DeleteBackupVaultNotifications
-func (c *Client) DeleteBackupVaultNotificationsRequest(input *DeleteBackupVaultNotificationsInput) DeleteBackupVaultNotificationsRequest {
+func (c *Client) DeleteBackupVaultNotificationsRequest(input *types.DeleteBackupVaultNotificationsInput) DeleteBackupVaultNotificationsRequest {
 	op := &aws.Operation{
 		Name:       opDeleteBackupVaultNotifications,
 		HTTPMethod: "DELETE",
@@ -92,10 +34,10 @@ func (c *Client) DeleteBackupVaultNotificationsRequest(input *DeleteBackupVaultN
 	}
 
 	if input == nil {
-		input = &DeleteBackupVaultNotificationsInput{}
+		input = &types.DeleteBackupVaultNotificationsInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteBackupVaultNotificationsOutput{})
+	req := c.newRequest(op, input, &types.DeleteBackupVaultNotificationsOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return DeleteBackupVaultNotificationsRequest{Request: req, Input: input, Copy: c.DeleteBackupVaultNotificationsRequest}
@@ -105,8 +47,8 @@ func (c *Client) DeleteBackupVaultNotificationsRequest(input *DeleteBackupVaultN
 // DeleteBackupVaultNotifications API operation.
 type DeleteBackupVaultNotificationsRequest struct {
 	*aws.Request
-	Input *DeleteBackupVaultNotificationsInput
-	Copy  func(*DeleteBackupVaultNotificationsInput) DeleteBackupVaultNotificationsRequest
+	Input *types.DeleteBackupVaultNotificationsInput
+	Copy  func(*types.DeleteBackupVaultNotificationsInput) DeleteBackupVaultNotificationsRequest
 }
 
 // Send marshals and sends the DeleteBackupVaultNotifications API request.
@@ -118,7 +60,7 @@ func (r DeleteBackupVaultNotificationsRequest) Send(ctx context.Context) (*Delet
 	}
 
 	resp := &DeleteBackupVaultNotificationsResponse{
-		DeleteBackupVaultNotificationsOutput: r.Request.Data.(*DeleteBackupVaultNotificationsOutput),
+		DeleteBackupVaultNotificationsOutput: r.Request.Data.(*types.DeleteBackupVaultNotificationsOutput),
 		response:                             &aws.Response{Request: r.Request},
 	}
 
@@ -128,7 +70,7 @@ func (r DeleteBackupVaultNotificationsRequest) Send(ctx context.Context) (*Delet
 // DeleteBackupVaultNotificationsResponse is the response type for the
 // DeleteBackupVaultNotifications API operation.
 type DeleteBackupVaultNotificationsResponse struct {
-	*DeleteBackupVaultNotificationsOutput
+	*types.DeleteBackupVaultNotificationsOutput
 
 	response *aws.Response
 }

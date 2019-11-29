@@ -6,78 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
+	"github.com/aws/aws-sdk-go-v2/service/codepipeline/types"
 )
-
-// Represents the input of a PutThirdPartyJobFailureResult action.
-type PutThirdPartyJobFailureResultInput struct {
-	_ struct{} `type:"structure"`
-
-	// The clientToken portion of the clientId and clientToken pair used to verify
-	// that the calling entity is allowed access to the job and its details.
-	//
-	// ClientToken is a required field
-	ClientToken *string `locationName:"clientToken" min:"1" type:"string" required:"true"`
-
-	// Represents information about failure details.
-	//
-	// FailureDetails is a required field
-	FailureDetails *FailureDetails `locationName:"failureDetails" type:"structure" required:"true"`
-
-	// The ID of the job that failed. This is the same ID returned from PollForThirdPartyJobs.
-	//
-	// JobId is a required field
-	JobId *string `locationName:"jobId" min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s PutThirdPartyJobFailureResultInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *PutThirdPartyJobFailureResultInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "PutThirdPartyJobFailureResultInput"}
-
-	if s.ClientToken == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ClientToken"))
-	}
-	if s.ClientToken != nil && len(*s.ClientToken) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ClientToken", 1))
-	}
-
-	if s.FailureDetails == nil {
-		invalidParams.Add(aws.NewErrParamRequired("FailureDetails"))
-	}
-
-	if s.JobId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("JobId"))
-	}
-	if s.JobId != nil && len(*s.JobId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("JobId", 1))
-	}
-	if s.FailureDetails != nil {
-		if err := s.FailureDetails.Validate(); err != nil {
-			invalidParams.AddNested("FailureDetails", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type PutThirdPartyJobFailureResultOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s PutThirdPartyJobFailureResultOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opPutThirdPartyJobFailureResult = "PutThirdPartyJobFailureResult"
 
@@ -95,7 +27,7 @@ const opPutThirdPartyJobFailureResult = "PutThirdPartyJobFailureResult"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/PutThirdPartyJobFailureResult
-func (c *Client) PutThirdPartyJobFailureResultRequest(input *PutThirdPartyJobFailureResultInput) PutThirdPartyJobFailureResultRequest {
+func (c *Client) PutThirdPartyJobFailureResultRequest(input *types.PutThirdPartyJobFailureResultInput) PutThirdPartyJobFailureResultRequest {
 	op := &aws.Operation{
 		Name:       opPutThirdPartyJobFailureResult,
 		HTTPMethod: "POST",
@@ -103,10 +35,10 @@ func (c *Client) PutThirdPartyJobFailureResultRequest(input *PutThirdPartyJobFai
 	}
 
 	if input == nil {
-		input = &PutThirdPartyJobFailureResultInput{}
+		input = &types.PutThirdPartyJobFailureResultInput{}
 	}
 
-	req := c.newRequest(op, input, &PutThirdPartyJobFailureResultOutput{})
+	req := c.newRequest(op, input, &types.PutThirdPartyJobFailureResultOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return PutThirdPartyJobFailureResultRequest{Request: req, Input: input, Copy: c.PutThirdPartyJobFailureResultRequest}
@@ -116,8 +48,8 @@ func (c *Client) PutThirdPartyJobFailureResultRequest(input *PutThirdPartyJobFai
 // PutThirdPartyJobFailureResult API operation.
 type PutThirdPartyJobFailureResultRequest struct {
 	*aws.Request
-	Input *PutThirdPartyJobFailureResultInput
-	Copy  func(*PutThirdPartyJobFailureResultInput) PutThirdPartyJobFailureResultRequest
+	Input *types.PutThirdPartyJobFailureResultInput
+	Copy  func(*types.PutThirdPartyJobFailureResultInput) PutThirdPartyJobFailureResultRequest
 }
 
 // Send marshals and sends the PutThirdPartyJobFailureResult API request.
@@ -129,7 +61,7 @@ func (r PutThirdPartyJobFailureResultRequest) Send(ctx context.Context) (*PutThi
 	}
 
 	resp := &PutThirdPartyJobFailureResultResponse{
-		PutThirdPartyJobFailureResultOutput: r.Request.Data.(*PutThirdPartyJobFailureResultOutput),
+		PutThirdPartyJobFailureResultOutput: r.Request.Data.(*types.PutThirdPartyJobFailureResultOutput),
 		response:                            &aws.Response{Request: r.Request},
 	}
 
@@ -139,7 +71,7 @@ func (r PutThirdPartyJobFailureResultRequest) Send(ctx context.Context) (*PutThi
 // PutThirdPartyJobFailureResultResponse is the response type for the
 // PutThirdPartyJobFailureResult API operation.
 type PutThirdPartyJobFailureResultResponse struct {
-	*PutThirdPartyJobFailureResultOutput
+	*types.PutThirdPartyJobFailureResultOutput
 
 	response *aws.Response
 }

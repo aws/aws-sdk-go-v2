@@ -4,64 +4,12 @@ package inspector
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
+	"github.com/aws/aws-sdk-go-v2/service/inspector/types"
 )
-
-type SetTagsForResourceInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ARN of the assessment template that you want to set tags to.
-	//
-	// ResourceArn is a required field
-	ResourceArn *string `locationName:"resourceArn" min:"1" type:"string" required:"true"`
-
-	// A collection of key and value pairs that you want to set to the assessment
-	// template.
-	Tags []Tag `locationName:"tags" type:"list"`
-}
-
-// String returns the string representation
-func (s SetTagsForResourceInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *SetTagsForResourceInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "SetTagsForResourceInput"}
-
-	if s.ResourceArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ResourceArn"))
-	}
-	if s.ResourceArn != nil && len(*s.ResourceArn) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ResourceArn", 1))
-	}
-	if s.Tags != nil {
-		for i, v := range s.Tags {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type SetTagsForResourceOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s SetTagsForResourceOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opSetTagsForResource = "SetTagsForResource"
 
@@ -79,7 +27,7 @@ const opSetTagsForResource = "SetTagsForResource"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/SetTagsForResource
-func (c *Client) SetTagsForResourceRequest(input *SetTagsForResourceInput) SetTagsForResourceRequest {
+func (c *Client) SetTagsForResourceRequest(input *types.SetTagsForResourceInput) SetTagsForResourceRequest {
 	op := &aws.Operation{
 		Name:       opSetTagsForResource,
 		HTTPMethod: "POST",
@@ -87,10 +35,10 @@ func (c *Client) SetTagsForResourceRequest(input *SetTagsForResourceInput) SetTa
 	}
 
 	if input == nil {
-		input = &SetTagsForResourceInput{}
+		input = &types.SetTagsForResourceInput{}
 	}
 
-	req := c.newRequest(op, input, &SetTagsForResourceOutput{})
+	req := c.newRequest(op, input, &types.SetTagsForResourceOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return SetTagsForResourceRequest{Request: req, Input: input, Copy: c.SetTagsForResourceRequest}
@@ -100,8 +48,8 @@ func (c *Client) SetTagsForResourceRequest(input *SetTagsForResourceInput) SetTa
 // SetTagsForResource API operation.
 type SetTagsForResourceRequest struct {
 	*aws.Request
-	Input *SetTagsForResourceInput
-	Copy  func(*SetTagsForResourceInput) SetTagsForResourceRequest
+	Input *types.SetTagsForResourceInput
+	Copy  func(*types.SetTagsForResourceInput) SetTagsForResourceRequest
 }
 
 // Send marshals and sends the SetTagsForResource API request.
@@ -113,7 +61,7 @@ func (r SetTagsForResourceRequest) Send(ctx context.Context) (*SetTagsForResourc
 	}
 
 	resp := &SetTagsForResourceResponse{
-		SetTagsForResourceOutput: r.Request.Data.(*SetTagsForResourceOutput),
+		SetTagsForResourceOutput: r.Request.Data.(*types.SetTagsForResourceOutput),
 		response:                 &aws.Response{Request: r.Request},
 	}
 
@@ -123,7 +71,7 @@ func (r SetTagsForResourceRequest) Send(ctx context.Context) (*SetTagsForResourc
 // SetTagsForResourceResponse is the response type for the
 // SetTagsForResource API operation.
 type SetTagsForResourceResponse struct {
-	*SetTagsForResourceOutput
+	*types.SetTagsForResourceOutput
 
 	response *aws.Response
 }

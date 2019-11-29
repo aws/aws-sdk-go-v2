@@ -6,61 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ses/types"
 )
-
-// Represents a request to set the position of a receipt rule in a receipt rule
-// set. You use receipt rule sets to receive email with Amazon SES. For more
-// information, see the Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-concepts.html).
-type SetReceiptRulePositionInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the receipt rule after which to place the specified receipt rule.
-	After *string `type:"string"`
-
-	// The name of the receipt rule to reposition.
-	//
-	// RuleName is a required field
-	RuleName *string `type:"string" required:"true"`
-
-	// The name of the receipt rule set that contains the receipt rule to reposition.
-	//
-	// RuleSetName is a required field
-	RuleSetName *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s SetReceiptRulePositionInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *SetReceiptRulePositionInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "SetReceiptRulePositionInput"}
-
-	if s.RuleName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("RuleName"))
-	}
-
-	if s.RuleSetName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("RuleSetName"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// An empty element returned on a successful request.
-type SetReceiptRulePositionOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s SetReceiptRulePositionOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opSetReceiptRulePosition = "SetReceiptRulePosition"
 
@@ -82,7 +29,7 @@ const opSetReceiptRulePosition = "SetReceiptRulePosition"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/SetReceiptRulePosition
-func (c *Client) SetReceiptRulePositionRequest(input *SetReceiptRulePositionInput) SetReceiptRulePositionRequest {
+func (c *Client) SetReceiptRulePositionRequest(input *types.SetReceiptRulePositionInput) SetReceiptRulePositionRequest {
 	op := &aws.Operation{
 		Name:       opSetReceiptRulePosition,
 		HTTPMethod: "POST",
@@ -90,10 +37,10 @@ func (c *Client) SetReceiptRulePositionRequest(input *SetReceiptRulePositionInpu
 	}
 
 	if input == nil {
-		input = &SetReceiptRulePositionInput{}
+		input = &types.SetReceiptRulePositionInput{}
 	}
 
-	req := c.newRequest(op, input, &SetReceiptRulePositionOutput{})
+	req := c.newRequest(op, input, &types.SetReceiptRulePositionOutput{})
 	return SetReceiptRulePositionRequest{Request: req, Input: input, Copy: c.SetReceiptRulePositionRequest}
 }
 
@@ -101,8 +48,8 @@ func (c *Client) SetReceiptRulePositionRequest(input *SetReceiptRulePositionInpu
 // SetReceiptRulePosition API operation.
 type SetReceiptRulePositionRequest struct {
 	*aws.Request
-	Input *SetReceiptRulePositionInput
-	Copy  func(*SetReceiptRulePositionInput) SetReceiptRulePositionRequest
+	Input *types.SetReceiptRulePositionInput
+	Copy  func(*types.SetReceiptRulePositionInput) SetReceiptRulePositionRequest
 }
 
 // Send marshals and sends the SetReceiptRulePosition API request.
@@ -114,7 +61,7 @@ func (r SetReceiptRulePositionRequest) Send(ctx context.Context) (*SetReceiptRul
 	}
 
 	resp := &SetReceiptRulePositionResponse{
-		SetReceiptRulePositionOutput: r.Request.Data.(*SetReceiptRulePositionOutput),
+		SetReceiptRulePositionOutput: r.Request.Data.(*types.SetReceiptRulePositionOutput),
 		response:                     &aws.Response{Request: r.Request},
 	}
 
@@ -124,7 +71,7 @@ func (r SetReceiptRulePositionRequest) Send(ctx context.Context) (*SetReceiptRul
 // SetReceiptRulePositionResponse is the response type for the
 // SetReceiptRulePosition API operation.
 type SetReceiptRulePositionResponse struct {
-	*SetReceiptRulePositionOutput
+	*types.SetReceiptRulePositionOutput
 
 	response *aws.Response
 }

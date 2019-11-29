@@ -6,88 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/greengrass/types"
 )
-
-type AssociateRoleToGroupInput struct {
-	_ struct{} `type:"structure"`
-
-	// GroupId is a required field
-	GroupId *string `location:"uri" locationName:"GroupId" type:"string" required:"true"`
-
-	// The ARN of the role you wish to associate with this group. The existence
-	// of the role is not validated.
-	//
-	// RoleArn is a required field
-	RoleArn *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s AssociateRoleToGroupInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *AssociateRoleToGroupInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "AssociateRoleToGroupInput"}
-
-	if s.GroupId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("GroupId"))
-	}
-
-	if s.RoleArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("RoleArn"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s AssociateRoleToGroupInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.RoleArn != nil {
-		v := *s.RoleArn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "RoleArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.GroupId != nil {
-		v := *s.GroupId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "GroupId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type AssociateRoleToGroupOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The time, in milliseconds since the epoch, when the role ARN was associated
-	// with the group.
-	AssociatedAt *string `type:"string"`
-}
-
-// String returns the string representation
-func (s AssociateRoleToGroupOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s AssociateRoleToGroupOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.AssociatedAt != nil {
-		v := *s.AssociatedAt
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "AssociatedAt", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
 
 const opAssociateRoleToGroup = "AssociateRoleToGroup"
 
@@ -106,7 +26,7 @@ const opAssociateRoleToGroup = "AssociateRoleToGroup"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/AssociateRoleToGroup
-func (c *Client) AssociateRoleToGroupRequest(input *AssociateRoleToGroupInput) AssociateRoleToGroupRequest {
+func (c *Client) AssociateRoleToGroupRequest(input *types.AssociateRoleToGroupInput) AssociateRoleToGroupRequest {
 	op := &aws.Operation{
 		Name:       opAssociateRoleToGroup,
 		HTTPMethod: "PUT",
@@ -114,10 +34,10 @@ func (c *Client) AssociateRoleToGroupRequest(input *AssociateRoleToGroupInput) A
 	}
 
 	if input == nil {
-		input = &AssociateRoleToGroupInput{}
+		input = &types.AssociateRoleToGroupInput{}
 	}
 
-	req := c.newRequest(op, input, &AssociateRoleToGroupOutput{})
+	req := c.newRequest(op, input, &types.AssociateRoleToGroupOutput{})
 	return AssociateRoleToGroupRequest{Request: req, Input: input, Copy: c.AssociateRoleToGroupRequest}
 }
 
@@ -125,8 +45,8 @@ func (c *Client) AssociateRoleToGroupRequest(input *AssociateRoleToGroupInput) A
 // AssociateRoleToGroup API operation.
 type AssociateRoleToGroupRequest struct {
 	*aws.Request
-	Input *AssociateRoleToGroupInput
-	Copy  func(*AssociateRoleToGroupInput) AssociateRoleToGroupRequest
+	Input *types.AssociateRoleToGroupInput
+	Copy  func(*types.AssociateRoleToGroupInput) AssociateRoleToGroupRequest
 }
 
 // Send marshals and sends the AssociateRoleToGroup API request.
@@ -138,7 +58,7 @@ func (r AssociateRoleToGroupRequest) Send(ctx context.Context) (*AssociateRoleTo
 	}
 
 	resp := &AssociateRoleToGroupResponse{
-		AssociateRoleToGroupOutput: r.Request.Data.(*AssociateRoleToGroupOutput),
+		AssociateRoleToGroupOutput: r.Request.Data.(*types.AssociateRoleToGroupOutput),
 		response:                   &aws.Response{Request: r.Request},
 	}
 
@@ -148,7 +68,7 @@ func (r AssociateRoleToGroupRequest) Send(ctx context.Context) (*AssociateRoleTo
 // AssociateRoleToGroupResponse is the response type for the
 // AssociateRoleToGroup API operation.
 type AssociateRoleToGroupResponse struct {
-	*AssociateRoleToGroupOutput
+	*types.AssociateRoleToGroupOutput
 
 	response *aws.Response
 }

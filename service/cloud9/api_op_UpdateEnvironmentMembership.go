@@ -6,72 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/cloud9/types"
 )
-
-type UpdateEnvironmentMembershipInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the environment for the environment member whose settings you want
-	// to change.
-	//
-	// EnvironmentId is a required field
-	EnvironmentId *string `locationName:"environmentId" type:"string" required:"true"`
-
-	// The replacement type of environment member permissions you want to associate
-	// with this environment member. Available values include:
-	//
-	//    * read-only: Has read-only access to the environment.
-	//
-	//    * read-write: Has read-write access to the environment.
-	//
-	// Permissions is a required field
-	Permissions MemberPermissions `locationName:"permissions" type:"string" required:"true" enum:"true"`
-
-	// The Amazon Resource Name (ARN) of the environment member whose settings you
-	// want to change.
-	//
-	// UserArn is a required field
-	UserArn *string `locationName:"userArn" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s UpdateEnvironmentMembershipInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateEnvironmentMembershipInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateEnvironmentMembershipInput"}
-
-	if s.EnvironmentId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("EnvironmentId"))
-	}
-	if len(s.Permissions) == 0 {
-		invalidParams.Add(aws.NewErrParamRequired("Permissions"))
-	}
-
-	if s.UserArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("UserArn"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type UpdateEnvironmentMembershipOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Information about the environment member whose settings were changed.
-	Membership *EnvironmentMember `locationName:"membership" type:"structure"`
-}
-
-// String returns the string representation
-func (s UpdateEnvironmentMembershipOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opUpdateEnvironmentMembership = "UpdateEnvironmentMembership"
 
@@ -89,7 +25,7 @@ const opUpdateEnvironmentMembership = "UpdateEnvironmentMembership"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloud9-2017-09-23/UpdateEnvironmentMembership
-func (c *Client) UpdateEnvironmentMembershipRequest(input *UpdateEnvironmentMembershipInput) UpdateEnvironmentMembershipRequest {
+func (c *Client) UpdateEnvironmentMembershipRequest(input *types.UpdateEnvironmentMembershipInput) UpdateEnvironmentMembershipRequest {
 	op := &aws.Operation{
 		Name:       opUpdateEnvironmentMembership,
 		HTTPMethod: "POST",
@@ -97,10 +33,10 @@ func (c *Client) UpdateEnvironmentMembershipRequest(input *UpdateEnvironmentMemb
 	}
 
 	if input == nil {
-		input = &UpdateEnvironmentMembershipInput{}
+		input = &types.UpdateEnvironmentMembershipInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateEnvironmentMembershipOutput{})
+	req := c.newRequest(op, input, &types.UpdateEnvironmentMembershipOutput{})
 	return UpdateEnvironmentMembershipRequest{Request: req, Input: input, Copy: c.UpdateEnvironmentMembershipRequest}
 }
 
@@ -108,8 +44,8 @@ func (c *Client) UpdateEnvironmentMembershipRequest(input *UpdateEnvironmentMemb
 // UpdateEnvironmentMembership API operation.
 type UpdateEnvironmentMembershipRequest struct {
 	*aws.Request
-	Input *UpdateEnvironmentMembershipInput
-	Copy  func(*UpdateEnvironmentMembershipInput) UpdateEnvironmentMembershipRequest
+	Input *types.UpdateEnvironmentMembershipInput
+	Copy  func(*types.UpdateEnvironmentMembershipInput) UpdateEnvironmentMembershipRequest
 }
 
 // Send marshals and sends the UpdateEnvironmentMembership API request.
@@ -121,7 +57,7 @@ func (r UpdateEnvironmentMembershipRequest) Send(ctx context.Context) (*UpdateEn
 	}
 
 	resp := &UpdateEnvironmentMembershipResponse{
-		UpdateEnvironmentMembershipOutput: r.Request.Data.(*UpdateEnvironmentMembershipOutput),
+		UpdateEnvironmentMembershipOutput: r.Request.Data.(*types.UpdateEnvironmentMembershipOutput),
 		response:                          &aws.Response{Request: r.Request},
 	}
 
@@ -131,7 +67,7 @@ func (r UpdateEnvironmentMembershipRequest) Send(ctx context.Context) (*UpdateEn
 // UpdateEnvironmentMembershipResponse is the response type for the
 // UpdateEnvironmentMembership API operation.
 type UpdateEnvironmentMembershipResponse struct {
-	*UpdateEnvironmentMembershipOutput
+	*types.UpdateEnvironmentMembershipOutput
 
 	response *aws.Response
 }

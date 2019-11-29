@@ -4,108 +4,10 @@ package elasticache
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/elasticache/types"
 )
-
-// Represents the input for a ModifyReplicationGroupShardConfiguration operation.
-type ModifyReplicationGroupShardConfigurationInput struct {
-	_ struct{} `type:"structure"`
-
-	// Indicates that the shard reconfiguration process begins immediately. At present,
-	// the only permitted value for this parameter is true.
-	//
-	// Value: true
-	//
-	// ApplyImmediately is a required field
-	ApplyImmediately *bool `type:"boolean" required:"true"`
-
-	// The number of node groups (shards) that results from the modification of
-	// the shard configuration.
-	//
-	// NodeGroupCount is a required field
-	NodeGroupCount *int64 `type:"integer" required:"true"`
-
-	// If the value of NodeGroupCount is less than the current number of node groups
-	// (shards), then either NodeGroupsToRemove or NodeGroupsToRetain is required.
-	// NodeGroupsToRemove is a list of NodeGroupIds to remove from the cluster.
-	//
-	// ElastiCache for Redis will attempt to remove all node groups listed by NodeGroupsToRemove
-	// from the cluster.
-	NodeGroupsToRemove []string `locationNameList:"NodeGroupToRemove" type:"list"`
-
-	// If the value of NodeGroupCount is less than the current number of node groups
-	// (shards), then either NodeGroupsToRemove or NodeGroupsToRetain is required.
-	// NodeGroupsToRetain is a list of NodeGroupIds to retain in the cluster.
-	//
-	// ElastiCache for Redis will attempt to remove all node groups except those
-	// listed by NodeGroupsToRetain from the cluster.
-	NodeGroupsToRetain []string `locationNameList:"NodeGroupToRetain" type:"list"`
-
-	// The name of the Redis (cluster mode enabled) cluster (replication group)
-	// on which the shards are to be configured.
-	//
-	// ReplicationGroupId is a required field
-	ReplicationGroupId *string `type:"string" required:"true"`
-
-	// Specifies the preferred availability zones for each node group in the cluster.
-	// If the value of NodeGroupCount is greater than the current number of node
-	// groups (shards), you can use this parameter to specify the preferred availability
-	// zones of the cluster's shards. If you omit this parameter ElastiCache selects
-	// availability zones for you.
-	//
-	// You can specify this parameter only if the value of NodeGroupCount is greater
-	// than the current number of node groups (shards).
-	ReshardingConfiguration []ReshardingConfiguration `locationNameList:"ReshardingConfiguration" type:"list"`
-}
-
-// String returns the string representation
-func (s ModifyReplicationGroupShardConfigurationInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ModifyReplicationGroupShardConfigurationInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ModifyReplicationGroupShardConfigurationInput"}
-
-	if s.ApplyImmediately == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ApplyImmediately"))
-	}
-
-	if s.NodeGroupCount == nil {
-		invalidParams.Add(aws.NewErrParamRequired("NodeGroupCount"))
-	}
-
-	if s.ReplicationGroupId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ReplicationGroupId"))
-	}
-	if s.ReshardingConfiguration != nil {
-		for i, v := range s.ReshardingConfiguration {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "ReshardingConfiguration", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ModifyReplicationGroupShardConfigurationOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Contains all of the attributes of a specific Redis replication group.
-	ReplicationGroup *ReplicationGroup `type:"structure"`
-}
-
-// String returns the string representation
-func (s ModifyReplicationGroupShardConfigurationOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opModifyReplicationGroupShardConfiguration = "ModifyReplicationGroupShardConfiguration"
 
@@ -123,7 +25,7 @@ const opModifyReplicationGroupShardConfiguration = "ModifyReplicationGroupShardC
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/ModifyReplicationGroupShardConfiguration
-func (c *Client) ModifyReplicationGroupShardConfigurationRequest(input *ModifyReplicationGroupShardConfigurationInput) ModifyReplicationGroupShardConfigurationRequest {
+func (c *Client) ModifyReplicationGroupShardConfigurationRequest(input *types.ModifyReplicationGroupShardConfigurationInput) ModifyReplicationGroupShardConfigurationRequest {
 	op := &aws.Operation{
 		Name:       opModifyReplicationGroupShardConfiguration,
 		HTTPMethod: "POST",
@@ -131,10 +33,10 @@ func (c *Client) ModifyReplicationGroupShardConfigurationRequest(input *ModifyRe
 	}
 
 	if input == nil {
-		input = &ModifyReplicationGroupShardConfigurationInput{}
+		input = &types.ModifyReplicationGroupShardConfigurationInput{}
 	}
 
-	req := c.newRequest(op, input, &ModifyReplicationGroupShardConfigurationOutput{})
+	req := c.newRequest(op, input, &types.ModifyReplicationGroupShardConfigurationOutput{})
 	return ModifyReplicationGroupShardConfigurationRequest{Request: req, Input: input, Copy: c.ModifyReplicationGroupShardConfigurationRequest}
 }
 
@@ -142,8 +44,8 @@ func (c *Client) ModifyReplicationGroupShardConfigurationRequest(input *ModifyRe
 // ModifyReplicationGroupShardConfiguration API operation.
 type ModifyReplicationGroupShardConfigurationRequest struct {
 	*aws.Request
-	Input *ModifyReplicationGroupShardConfigurationInput
-	Copy  func(*ModifyReplicationGroupShardConfigurationInput) ModifyReplicationGroupShardConfigurationRequest
+	Input *types.ModifyReplicationGroupShardConfigurationInput
+	Copy  func(*types.ModifyReplicationGroupShardConfigurationInput) ModifyReplicationGroupShardConfigurationRequest
 }
 
 // Send marshals and sends the ModifyReplicationGroupShardConfiguration API request.
@@ -155,7 +57,7 @@ func (r ModifyReplicationGroupShardConfigurationRequest) Send(ctx context.Contex
 	}
 
 	resp := &ModifyReplicationGroupShardConfigurationResponse{
-		ModifyReplicationGroupShardConfigurationOutput: r.Request.Data.(*ModifyReplicationGroupShardConfigurationOutput),
+		ModifyReplicationGroupShardConfigurationOutput: r.Request.Data.(*types.ModifyReplicationGroupShardConfigurationOutput),
 		response: &aws.Response{Request: r.Request},
 	}
 
@@ -165,7 +67,7 @@ func (r ModifyReplicationGroupShardConfigurationRequest) Send(ctx context.Contex
 // ModifyReplicationGroupShardConfigurationResponse is the response type for the
 // ModifyReplicationGroupShardConfiguration API operation.
 type ModifyReplicationGroupShardConfigurationResponse struct {
-	*ModifyReplicationGroupShardConfigurationOutput
+	*types.ModifyReplicationGroupShardConfigurationOutput
 
 	response *aws.Response
 }

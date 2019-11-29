@@ -6,48 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/alexaforbusiness/types"
 )
-
-type AssociateSkillWithSkillGroupInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ARN of the skill group to associate the skill to. Required.
-	SkillGroupArn *string `type:"string"`
-
-	// The unique identifier of the skill.
-	//
-	// SkillId is a required field
-	SkillId *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s AssociateSkillWithSkillGroupInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *AssociateSkillWithSkillGroupInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "AssociateSkillWithSkillGroupInput"}
-
-	if s.SkillId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("SkillId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type AssociateSkillWithSkillGroupOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s AssociateSkillWithSkillGroupOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opAssociateSkillWithSkillGroup = "AssociateSkillWithSkillGroup"
 
@@ -64,7 +24,7 @@ const opAssociateSkillWithSkillGroup = "AssociateSkillWithSkillGroup"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/AssociateSkillWithSkillGroup
-func (c *Client) AssociateSkillWithSkillGroupRequest(input *AssociateSkillWithSkillGroupInput) AssociateSkillWithSkillGroupRequest {
+func (c *Client) AssociateSkillWithSkillGroupRequest(input *types.AssociateSkillWithSkillGroupInput) AssociateSkillWithSkillGroupRequest {
 	op := &aws.Operation{
 		Name:       opAssociateSkillWithSkillGroup,
 		HTTPMethod: "POST",
@@ -72,10 +32,10 @@ func (c *Client) AssociateSkillWithSkillGroupRequest(input *AssociateSkillWithSk
 	}
 
 	if input == nil {
-		input = &AssociateSkillWithSkillGroupInput{}
+		input = &types.AssociateSkillWithSkillGroupInput{}
 	}
 
-	req := c.newRequest(op, input, &AssociateSkillWithSkillGroupOutput{})
+	req := c.newRequest(op, input, &types.AssociateSkillWithSkillGroupOutput{})
 	return AssociateSkillWithSkillGroupRequest{Request: req, Input: input, Copy: c.AssociateSkillWithSkillGroupRequest}
 }
 
@@ -83,8 +43,8 @@ func (c *Client) AssociateSkillWithSkillGroupRequest(input *AssociateSkillWithSk
 // AssociateSkillWithSkillGroup API operation.
 type AssociateSkillWithSkillGroupRequest struct {
 	*aws.Request
-	Input *AssociateSkillWithSkillGroupInput
-	Copy  func(*AssociateSkillWithSkillGroupInput) AssociateSkillWithSkillGroupRequest
+	Input *types.AssociateSkillWithSkillGroupInput
+	Copy  func(*types.AssociateSkillWithSkillGroupInput) AssociateSkillWithSkillGroupRequest
 }
 
 // Send marshals and sends the AssociateSkillWithSkillGroup API request.
@@ -96,7 +56,7 @@ func (r AssociateSkillWithSkillGroupRequest) Send(ctx context.Context) (*Associa
 	}
 
 	resp := &AssociateSkillWithSkillGroupResponse{
-		AssociateSkillWithSkillGroupOutput: r.Request.Data.(*AssociateSkillWithSkillGroupOutput),
+		AssociateSkillWithSkillGroupOutput: r.Request.Data.(*types.AssociateSkillWithSkillGroupOutput),
 		response:                           &aws.Response{Request: r.Request},
 	}
 
@@ -106,7 +66,7 @@ func (r AssociateSkillWithSkillGroupRequest) Send(ctx context.Context) (*Associa
 // AssociateSkillWithSkillGroupResponse is the response type for the
 // AssociateSkillWithSkillGroup API operation.
 type AssociateSkillWithSkillGroupResponse struct {
-	*AssociateSkillWithSkillGroupOutput
+	*types.AssociateSkillWithSkillGroupOutput
 
 	response *aws.Response
 }

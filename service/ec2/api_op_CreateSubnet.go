@@ -6,76 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-type CreateSubnetInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Availability Zone for the subnet.
-	//
-	// Default: AWS selects one for you. If you create more than one subnet in your
-	// VPC, we may not necessarily select a different zone for each subnet.
-	AvailabilityZone *string `type:"string"`
-
-	// The AZ ID of the subnet.
-	AvailabilityZoneId *string `type:"string"`
-
-	// The IPv4 network range for the subnet, in CIDR notation. For example, 10.0.0.0/24.
-	//
-	// CidrBlock is a required field
-	CidrBlock *string `type:"string" required:"true"`
-
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have
-	// the required permissions, the error response is DryRunOperation. Otherwise,
-	// it is UnauthorizedOperation.
-	DryRun *bool `locationName:"dryRun" type:"boolean"`
-
-	// The IPv6 network range for the subnet, in CIDR notation. The subnet size
-	// must use a /64 prefix length.
-	Ipv6CidrBlock *string `type:"string"`
-
-	// The ID of the VPC.
-	//
-	// VpcId is a required field
-	VpcId *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s CreateSubnetInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateSubnetInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateSubnetInput"}
-
-	if s.CidrBlock == nil {
-		invalidParams.Add(aws.NewErrParamRequired("CidrBlock"))
-	}
-
-	if s.VpcId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("VpcId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type CreateSubnetOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Information about the subnet.
-	Subnet *Subnet `locationName:"subnet" type:"structure"`
-}
-
-// String returns the string representation
-func (s CreateSubnetOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCreateSubnet = "CreateSubnet"
 
@@ -118,7 +50,7 @@ const opCreateSubnet = "CreateSubnet"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateSubnet
-func (c *Client) CreateSubnetRequest(input *CreateSubnetInput) CreateSubnetRequest {
+func (c *Client) CreateSubnetRequest(input *types.CreateSubnetInput) CreateSubnetRequest {
 	op := &aws.Operation{
 		Name:       opCreateSubnet,
 		HTTPMethod: "POST",
@@ -126,10 +58,10 @@ func (c *Client) CreateSubnetRequest(input *CreateSubnetInput) CreateSubnetReque
 	}
 
 	if input == nil {
-		input = &CreateSubnetInput{}
+		input = &types.CreateSubnetInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateSubnetOutput{})
+	req := c.newRequest(op, input, &types.CreateSubnetOutput{})
 	return CreateSubnetRequest{Request: req, Input: input, Copy: c.CreateSubnetRequest}
 }
 
@@ -137,8 +69,8 @@ func (c *Client) CreateSubnetRequest(input *CreateSubnetInput) CreateSubnetReque
 // CreateSubnet API operation.
 type CreateSubnetRequest struct {
 	*aws.Request
-	Input *CreateSubnetInput
-	Copy  func(*CreateSubnetInput) CreateSubnetRequest
+	Input *types.CreateSubnetInput
+	Copy  func(*types.CreateSubnetInput) CreateSubnetRequest
 }
 
 // Send marshals and sends the CreateSubnet API request.
@@ -150,7 +82,7 @@ func (r CreateSubnetRequest) Send(ctx context.Context) (*CreateSubnetResponse, e
 	}
 
 	resp := &CreateSubnetResponse{
-		CreateSubnetOutput: r.Request.Data.(*CreateSubnetOutput),
+		CreateSubnetOutput: r.Request.Data.(*types.CreateSubnetOutput),
 		response:           &aws.Response{Request: r.Request},
 	}
 
@@ -160,7 +92,7 @@ func (r CreateSubnetRequest) Send(ctx context.Context) (*CreateSubnetResponse, e
 // CreateSubnetResponse is the response type for the
 // CreateSubnet API operation.
 type CreateSubnetResponse struct {
-	*CreateSubnetOutput
+	*types.CreateSubnetOutput
 
 	response *aws.Response
 }

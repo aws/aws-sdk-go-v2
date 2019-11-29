@@ -6,74 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/pinpoint/types"
 )
-
-type GetBaiduChannelInput struct {
-	_ struct{} `type:"structure"`
-
-	// ApplicationId is a required field
-	ApplicationId *string `location:"uri" locationName:"application-id" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetBaiduChannelInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetBaiduChannelInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetBaiduChannelInput"}
-
-	if s.ApplicationId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ApplicationId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetBaiduChannelInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.ApplicationId != nil {
-		v := *s.ApplicationId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "application-id", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type GetBaiduChannelOutput struct {
-	_ struct{} `type:"structure" payload:"BaiduChannelResponse"`
-
-	// Provides information about the status and settings of the Baidu (Baidu Cloud
-	// Push) channel for an application.
-	//
-	// BaiduChannelResponse is a required field
-	BaiduChannelResponse *BaiduChannelResponse `type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s GetBaiduChannelOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s GetBaiduChannelOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.BaiduChannelResponse != nil {
-		v := s.BaiduChannelResponse
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.PayloadTarget, "BaiduChannelResponse", v, metadata)
-	}
-	return nil
-}
 
 const opGetBaiduChannel = "GetBaiduChannel"
 
@@ -91,7 +25,7 @@ const opGetBaiduChannel = "GetBaiduChannel"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetBaiduChannel
-func (c *Client) GetBaiduChannelRequest(input *GetBaiduChannelInput) GetBaiduChannelRequest {
+func (c *Client) GetBaiduChannelRequest(input *types.GetBaiduChannelInput) GetBaiduChannelRequest {
 	op := &aws.Operation{
 		Name:       opGetBaiduChannel,
 		HTTPMethod: "GET",
@@ -99,10 +33,10 @@ func (c *Client) GetBaiduChannelRequest(input *GetBaiduChannelInput) GetBaiduCha
 	}
 
 	if input == nil {
-		input = &GetBaiduChannelInput{}
+		input = &types.GetBaiduChannelInput{}
 	}
 
-	req := c.newRequest(op, input, &GetBaiduChannelOutput{})
+	req := c.newRequest(op, input, &types.GetBaiduChannelOutput{})
 	return GetBaiduChannelRequest{Request: req, Input: input, Copy: c.GetBaiduChannelRequest}
 }
 
@@ -110,8 +44,8 @@ func (c *Client) GetBaiduChannelRequest(input *GetBaiduChannelInput) GetBaiduCha
 // GetBaiduChannel API operation.
 type GetBaiduChannelRequest struct {
 	*aws.Request
-	Input *GetBaiduChannelInput
-	Copy  func(*GetBaiduChannelInput) GetBaiduChannelRequest
+	Input *types.GetBaiduChannelInput
+	Copy  func(*types.GetBaiduChannelInput) GetBaiduChannelRequest
 }
 
 // Send marshals and sends the GetBaiduChannel API request.
@@ -123,7 +57,7 @@ func (r GetBaiduChannelRequest) Send(ctx context.Context) (*GetBaiduChannelRespo
 	}
 
 	resp := &GetBaiduChannelResponse{
-		GetBaiduChannelOutput: r.Request.Data.(*GetBaiduChannelOutput),
+		GetBaiduChannelOutput: r.Request.Data.(*types.GetBaiduChannelOutput),
 		response:              &aws.Response{Request: r.Request},
 	}
 
@@ -133,7 +67,7 @@ func (r GetBaiduChannelRequest) Send(ctx context.Context) (*GetBaiduChannelRespo
 // GetBaiduChannelResponse is the response type for the
 // GetBaiduChannel API operation.
 type GetBaiduChannelResponse struct {
-	*GetBaiduChannelOutput
+	*types.GetBaiduChannelOutput
 
 	response *aws.Response
 }

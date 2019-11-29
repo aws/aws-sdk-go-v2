@@ -6,64 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
+	"github.com/aws/aws-sdk-go-v2/service/kinesis/types"
 )
-
-// Represents the input for IncreaseStreamRetentionPeriod.
-type IncreaseStreamRetentionPeriodInput struct {
-	_ struct{} `type:"structure"`
-
-	// The new retention period of the stream, in hours. Must be more than the current
-	// retention period.
-	//
-	// RetentionPeriodHours is a required field
-	RetentionPeriodHours *int64 `min:"1" type:"integer" required:"true"`
-
-	// The name of the stream to modify.
-	//
-	// StreamName is a required field
-	StreamName *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s IncreaseStreamRetentionPeriodInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *IncreaseStreamRetentionPeriodInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "IncreaseStreamRetentionPeriodInput"}
-
-	if s.RetentionPeriodHours == nil {
-		invalidParams.Add(aws.NewErrParamRequired("RetentionPeriodHours"))
-	}
-	if s.RetentionPeriodHours != nil && *s.RetentionPeriodHours < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("RetentionPeriodHours", 1))
-	}
-
-	if s.StreamName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("StreamName"))
-	}
-	if s.StreamName != nil && len(*s.StreamName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("StreamName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type IncreaseStreamRetentionPeriodOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s IncreaseStreamRetentionPeriodOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opIncreaseStreamRetentionPeriod = "IncreaseStreamRetentionPeriod"
 
@@ -90,7 +36,7 @@ const opIncreaseStreamRetentionPeriod = "IncreaseStreamRetentionPeriod"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/IncreaseStreamRetentionPeriod
-func (c *Client) IncreaseStreamRetentionPeriodRequest(input *IncreaseStreamRetentionPeriodInput) IncreaseStreamRetentionPeriodRequest {
+func (c *Client) IncreaseStreamRetentionPeriodRequest(input *types.IncreaseStreamRetentionPeriodInput) IncreaseStreamRetentionPeriodRequest {
 	op := &aws.Operation{
 		Name:       opIncreaseStreamRetentionPeriod,
 		HTTPMethod: "POST",
@@ -98,10 +44,10 @@ func (c *Client) IncreaseStreamRetentionPeriodRequest(input *IncreaseStreamReten
 	}
 
 	if input == nil {
-		input = &IncreaseStreamRetentionPeriodInput{}
+		input = &types.IncreaseStreamRetentionPeriodInput{}
 	}
 
-	req := c.newRequest(op, input, &IncreaseStreamRetentionPeriodOutput{})
+	req := c.newRequest(op, input, &types.IncreaseStreamRetentionPeriodOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return IncreaseStreamRetentionPeriodRequest{Request: req, Input: input, Copy: c.IncreaseStreamRetentionPeriodRequest}
@@ -111,8 +57,8 @@ func (c *Client) IncreaseStreamRetentionPeriodRequest(input *IncreaseStreamReten
 // IncreaseStreamRetentionPeriod API operation.
 type IncreaseStreamRetentionPeriodRequest struct {
 	*aws.Request
-	Input *IncreaseStreamRetentionPeriodInput
-	Copy  func(*IncreaseStreamRetentionPeriodInput) IncreaseStreamRetentionPeriodRequest
+	Input *types.IncreaseStreamRetentionPeriodInput
+	Copy  func(*types.IncreaseStreamRetentionPeriodInput) IncreaseStreamRetentionPeriodRequest
 }
 
 // Send marshals and sends the IncreaseStreamRetentionPeriod API request.
@@ -124,7 +70,7 @@ func (r IncreaseStreamRetentionPeriodRequest) Send(ctx context.Context) (*Increa
 	}
 
 	resp := &IncreaseStreamRetentionPeriodResponse{
-		IncreaseStreamRetentionPeriodOutput: r.Request.Data.(*IncreaseStreamRetentionPeriodOutput),
+		IncreaseStreamRetentionPeriodOutput: r.Request.Data.(*types.IncreaseStreamRetentionPeriodOutput),
 		response:                            &aws.Response{Request: r.Request},
 	}
 
@@ -134,7 +80,7 @@ func (r IncreaseStreamRetentionPeriodRequest) Send(ctx context.Context) (*Increa
 // IncreaseStreamRetentionPeriodResponse is the response type for the
 // IncreaseStreamRetentionPeriod API operation.
 type IncreaseStreamRetentionPeriodResponse struct {
-	*IncreaseStreamRetentionPeriodOutput
+	*types.IncreaseStreamRetentionPeriodOutput
 
 	response *aws.Response
 }

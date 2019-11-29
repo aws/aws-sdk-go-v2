@@ -6,64 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/query"
+	"github.com/aws/aws-sdk-go-v2/service/iam/types"
 )
-
-type PutRolePermissionsBoundaryInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ARN of the policy that is used to set the permissions boundary for the
-	// role.
-	//
-	// PermissionsBoundary is a required field
-	PermissionsBoundary *string `min:"20" type:"string" required:"true"`
-
-	// The name (friendly name, not ARN) of the IAM role for which you want to set
-	// the permissions boundary.
-	//
-	// RoleName is a required field
-	RoleName *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s PutRolePermissionsBoundaryInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *PutRolePermissionsBoundaryInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "PutRolePermissionsBoundaryInput"}
-
-	if s.PermissionsBoundary == nil {
-		invalidParams.Add(aws.NewErrParamRequired("PermissionsBoundary"))
-	}
-	if s.PermissionsBoundary != nil && len(*s.PermissionsBoundary) < 20 {
-		invalidParams.Add(aws.NewErrParamMinLen("PermissionsBoundary", 20))
-	}
-
-	if s.RoleName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("RoleName"))
-	}
-	if s.RoleName != nil && len(*s.RoleName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("RoleName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type PutRolePermissionsBoundaryOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s PutRolePermissionsBoundaryOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opPutRolePermissionsBoundary = "PutRolePermissionsBoundary"
 
@@ -92,7 +38,7 @@ const opPutRolePermissionsBoundary = "PutRolePermissionsBoundary"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/PutRolePermissionsBoundary
-func (c *Client) PutRolePermissionsBoundaryRequest(input *PutRolePermissionsBoundaryInput) PutRolePermissionsBoundaryRequest {
+func (c *Client) PutRolePermissionsBoundaryRequest(input *types.PutRolePermissionsBoundaryInput) PutRolePermissionsBoundaryRequest {
 	op := &aws.Operation{
 		Name:       opPutRolePermissionsBoundary,
 		HTTPMethod: "POST",
@@ -100,10 +46,10 @@ func (c *Client) PutRolePermissionsBoundaryRequest(input *PutRolePermissionsBoun
 	}
 
 	if input == nil {
-		input = &PutRolePermissionsBoundaryInput{}
+		input = &types.PutRolePermissionsBoundaryInput{}
 	}
 
-	req := c.newRequest(op, input, &PutRolePermissionsBoundaryOutput{})
+	req := c.newRequest(op, input, &types.PutRolePermissionsBoundaryOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return PutRolePermissionsBoundaryRequest{Request: req, Input: input, Copy: c.PutRolePermissionsBoundaryRequest}
@@ -113,8 +59,8 @@ func (c *Client) PutRolePermissionsBoundaryRequest(input *PutRolePermissionsBoun
 // PutRolePermissionsBoundary API operation.
 type PutRolePermissionsBoundaryRequest struct {
 	*aws.Request
-	Input *PutRolePermissionsBoundaryInput
-	Copy  func(*PutRolePermissionsBoundaryInput) PutRolePermissionsBoundaryRequest
+	Input *types.PutRolePermissionsBoundaryInput
+	Copy  func(*types.PutRolePermissionsBoundaryInput) PutRolePermissionsBoundaryRequest
 }
 
 // Send marshals and sends the PutRolePermissionsBoundary API request.
@@ -126,7 +72,7 @@ func (r PutRolePermissionsBoundaryRequest) Send(ctx context.Context) (*PutRolePe
 	}
 
 	resp := &PutRolePermissionsBoundaryResponse{
-		PutRolePermissionsBoundaryOutput: r.Request.Data.(*PutRolePermissionsBoundaryOutput),
+		PutRolePermissionsBoundaryOutput: r.Request.Data.(*types.PutRolePermissionsBoundaryOutput),
 		response:                         &aws.Response{Request: r.Request},
 	}
 
@@ -136,7 +82,7 @@ func (r PutRolePermissionsBoundaryRequest) Send(ctx context.Context) (*PutRolePe
 // PutRolePermissionsBoundaryResponse is the response type for the
 // PutRolePermissionsBoundary API operation.
 type PutRolePermissionsBoundaryResponse struct {
-	*PutRolePermissionsBoundaryOutput
+	*types.PutRolePermissionsBoundaryOutput
 
 	response *aws.Response
 }

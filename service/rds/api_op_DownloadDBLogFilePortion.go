@@ -6,99 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/rds/types"
 )
-
-type DownloadDBLogFilePortionInput struct {
-	_ struct{} `type:"structure"`
-
-	// The customer-assigned name of the DB instance that contains the log files
-	// you want to list.
-	//
-	// Constraints:
-	//
-	//    * Must match the identifier of an existing DBInstance.
-	//
-	// DBInstanceIdentifier is a required field
-	DBInstanceIdentifier *string `type:"string" required:"true"`
-
-	// The name of the log file to be downloaded.
-	//
-	// LogFileName is a required field
-	LogFileName *string `type:"string" required:"true"`
-
-	// The pagination token provided in the previous request or "0". If the Marker
-	// parameter is specified the response includes only records beyond the marker
-	// until the end of the file or up to NumberOfLines.
-	Marker *string `type:"string"`
-
-	// The number of lines to download. If the number of lines specified results
-	// in a file over 1 MB in size, the file is truncated at 1 MB in size.
-	//
-	// If the NumberOfLines parameter is specified, then the block of lines returned
-	// can be from the beginning or the end of the log file, depending on the value
-	// of the Marker parameter.
-	//
-	//    * If neither Marker or NumberOfLines are specified, the entire log file
-	//    is returned up to a maximum of 10000 lines, starting with the most recent
-	//    log entries first.
-	//
-	//    * If NumberOfLines is specified and Marker is not specified, then the
-	//    most recent lines from the end of the log file are returned.
-	//
-	//    * If Marker is specified as "0", then the specified number of lines from
-	//    the beginning of the log file are returned.
-	//
-	//    * You can download the log file in blocks of lines by specifying the size
-	//    of the block using the NumberOfLines parameter, and by specifying a value
-	//    of "0" for the Marker parameter in your first request. Include the Marker
-	//    value returned in the response as the Marker value for the next request,
-	//    continuing until the AdditionalDataPending response element returns false.
-	NumberOfLines *int64 `type:"integer"`
-}
-
-// String returns the string representation
-func (s DownloadDBLogFilePortionInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DownloadDBLogFilePortionInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DownloadDBLogFilePortionInput"}
-
-	if s.DBInstanceIdentifier == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DBInstanceIdentifier"))
-	}
-
-	if s.LogFileName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("LogFileName"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// This data type is used as a response element to DownloadDBLogFilePortion.
-type DownloadDBLogFilePortionOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Boolean value that if true, indicates there is more data to be downloaded.
-	AdditionalDataPending *bool `type:"boolean"`
-
-	// Entries from the specified log file.
-	LogFileData *string `type:"string"`
-
-	// A pagination token that can be used in a subsequent DownloadDBLogFilePortion
-	// request.
-	Marker *string `type:"string"`
-}
-
-// String returns the string representation
-func (s DownloadDBLogFilePortionOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDownloadDBLogFilePortion = "DownloadDBLogFilePortion"
 
@@ -115,7 +24,7 @@ const opDownloadDBLogFilePortion = "DownloadDBLogFilePortion"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DownloadDBLogFilePortion
-func (c *Client) DownloadDBLogFilePortionRequest(input *DownloadDBLogFilePortionInput) DownloadDBLogFilePortionRequest {
+func (c *Client) DownloadDBLogFilePortionRequest(input *types.DownloadDBLogFilePortionInput) DownloadDBLogFilePortionRequest {
 	op := &aws.Operation{
 		Name:       opDownloadDBLogFilePortion,
 		HTTPMethod: "POST",
@@ -129,10 +38,10 @@ func (c *Client) DownloadDBLogFilePortionRequest(input *DownloadDBLogFilePortion
 	}
 
 	if input == nil {
-		input = &DownloadDBLogFilePortionInput{}
+		input = &types.DownloadDBLogFilePortionInput{}
 	}
 
-	req := c.newRequest(op, input, &DownloadDBLogFilePortionOutput{})
+	req := c.newRequest(op, input, &types.DownloadDBLogFilePortionOutput{})
 	return DownloadDBLogFilePortionRequest{Request: req, Input: input, Copy: c.DownloadDBLogFilePortionRequest}
 }
 
@@ -140,8 +49,8 @@ func (c *Client) DownloadDBLogFilePortionRequest(input *DownloadDBLogFilePortion
 // DownloadDBLogFilePortion API operation.
 type DownloadDBLogFilePortionRequest struct {
 	*aws.Request
-	Input *DownloadDBLogFilePortionInput
-	Copy  func(*DownloadDBLogFilePortionInput) DownloadDBLogFilePortionRequest
+	Input *types.DownloadDBLogFilePortionInput
+	Copy  func(*types.DownloadDBLogFilePortionInput) DownloadDBLogFilePortionRequest
 }
 
 // Send marshals and sends the DownloadDBLogFilePortion API request.
@@ -153,7 +62,7 @@ func (r DownloadDBLogFilePortionRequest) Send(ctx context.Context) (*DownloadDBL
 	}
 
 	resp := &DownloadDBLogFilePortionResponse{
-		DownloadDBLogFilePortionOutput: r.Request.Data.(*DownloadDBLogFilePortionOutput),
+		DownloadDBLogFilePortionOutput: r.Request.Data.(*types.DownloadDBLogFilePortionOutput),
 		response:                       &aws.Response{Request: r.Request},
 	}
 
@@ -183,7 +92,7 @@ func NewDownloadDBLogFilePortionPaginator(req DownloadDBLogFilePortionRequest) D
 	return DownloadDBLogFilePortionPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *DownloadDBLogFilePortionInput
+				var inCpy *types.DownloadDBLogFilePortionInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -203,14 +112,14 @@ type DownloadDBLogFilePortionPaginator struct {
 	aws.Pager
 }
 
-func (p *DownloadDBLogFilePortionPaginator) CurrentPage() *DownloadDBLogFilePortionOutput {
-	return p.Pager.CurrentPage().(*DownloadDBLogFilePortionOutput)
+func (p *DownloadDBLogFilePortionPaginator) CurrentPage() *types.DownloadDBLogFilePortionOutput {
+	return p.Pager.CurrentPage().(*types.DownloadDBLogFilePortionOutput)
 }
 
 // DownloadDBLogFilePortionResponse is the response type for the
 // DownloadDBLogFilePortion API operation.
 type DownloadDBLogFilePortionResponse struct {
-	*DownloadDBLogFilePortionOutput
+	*types.DownloadDBLogFilePortionOutput
 
 	response *aws.Response
 }

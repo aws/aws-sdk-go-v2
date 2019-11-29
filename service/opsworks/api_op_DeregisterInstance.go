@@ -6,47 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
+	"github.com/aws/aws-sdk-go-v2/service/opsworks/types"
 )
-
-type DeregisterInstanceInput struct {
-	_ struct{} `type:"structure"`
-
-	// The instance ID.
-	//
-	// InstanceId is a required field
-	InstanceId *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeregisterInstanceInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeregisterInstanceInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeregisterInstanceInput"}
-
-	if s.InstanceId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("InstanceId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeregisterInstanceOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeregisterInstanceOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeregisterInstance = "DeregisterInstance"
 
@@ -70,7 +33,7 @@ const opDeregisterInstance = "DeregisterInstance"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DeregisterInstance
-func (c *Client) DeregisterInstanceRequest(input *DeregisterInstanceInput) DeregisterInstanceRequest {
+func (c *Client) DeregisterInstanceRequest(input *types.DeregisterInstanceInput) DeregisterInstanceRequest {
 	op := &aws.Operation{
 		Name:       opDeregisterInstance,
 		HTTPMethod: "POST",
@@ -78,10 +41,10 @@ func (c *Client) DeregisterInstanceRequest(input *DeregisterInstanceInput) Dereg
 	}
 
 	if input == nil {
-		input = &DeregisterInstanceInput{}
+		input = &types.DeregisterInstanceInput{}
 	}
 
-	req := c.newRequest(op, input, &DeregisterInstanceOutput{})
+	req := c.newRequest(op, input, &types.DeregisterInstanceOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return DeregisterInstanceRequest{Request: req, Input: input, Copy: c.DeregisterInstanceRequest}
@@ -91,8 +54,8 @@ func (c *Client) DeregisterInstanceRequest(input *DeregisterInstanceInput) Dereg
 // DeregisterInstance API operation.
 type DeregisterInstanceRequest struct {
 	*aws.Request
-	Input *DeregisterInstanceInput
-	Copy  func(*DeregisterInstanceInput) DeregisterInstanceRequest
+	Input *types.DeregisterInstanceInput
+	Copy  func(*types.DeregisterInstanceInput) DeregisterInstanceRequest
 }
 
 // Send marshals and sends the DeregisterInstance API request.
@@ -104,7 +67,7 @@ func (r DeregisterInstanceRequest) Send(ctx context.Context) (*DeregisterInstanc
 	}
 
 	resp := &DeregisterInstanceResponse{
-		DeregisterInstanceOutput: r.Request.Data.(*DeregisterInstanceOutput),
+		DeregisterInstanceOutput: r.Request.Data.(*types.DeregisterInstanceOutput),
 		response:                 &aws.Response{Request: r.Request},
 	}
 
@@ -114,7 +77,7 @@ func (r DeregisterInstanceRequest) Send(ctx context.Context) (*DeregisterInstanc
 // DeregisterInstanceResponse is the response type for the
 // DeregisterInstance API operation.
 type DeregisterInstanceResponse struct {
-	*DeregisterInstanceOutput
+	*types.DeregisterInstanceOutput
 
 	response *aws.Response
 }

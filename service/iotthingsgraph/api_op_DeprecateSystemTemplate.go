@@ -6,49 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/iotthingsgraph/types"
 )
-
-type DeprecateSystemTemplateInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the system to delete.
-	//
-	// The ID should be in the following format.
-	//
-	// urn:tdm:REGION/ACCOUNT ID/default:system:SYSTEMNAME
-	//
-	// Id is a required field
-	Id *string `locationName:"id" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeprecateSystemTemplateInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeprecateSystemTemplateInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeprecateSystemTemplateInput"}
-
-	if s.Id == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Id"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeprecateSystemTemplateOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeprecateSystemTemplateOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeprecateSystemTemplate = "DeprecateSystemTemplate"
 
@@ -65,7 +24,7 @@ const opDeprecateSystemTemplate = "DeprecateSystemTemplate"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iotthingsgraph-2018-09-06/DeprecateSystemTemplate
-func (c *Client) DeprecateSystemTemplateRequest(input *DeprecateSystemTemplateInput) DeprecateSystemTemplateRequest {
+func (c *Client) DeprecateSystemTemplateRequest(input *types.DeprecateSystemTemplateInput) DeprecateSystemTemplateRequest {
 	op := &aws.Operation{
 		Name:       opDeprecateSystemTemplate,
 		HTTPMethod: "POST",
@@ -73,10 +32,10 @@ func (c *Client) DeprecateSystemTemplateRequest(input *DeprecateSystemTemplateIn
 	}
 
 	if input == nil {
-		input = &DeprecateSystemTemplateInput{}
+		input = &types.DeprecateSystemTemplateInput{}
 	}
 
-	req := c.newRequest(op, input, &DeprecateSystemTemplateOutput{})
+	req := c.newRequest(op, input, &types.DeprecateSystemTemplateOutput{})
 	return DeprecateSystemTemplateRequest{Request: req, Input: input, Copy: c.DeprecateSystemTemplateRequest}
 }
 
@@ -84,8 +43,8 @@ func (c *Client) DeprecateSystemTemplateRequest(input *DeprecateSystemTemplateIn
 // DeprecateSystemTemplate API operation.
 type DeprecateSystemTemplateRequest struct {
 	*aws.Request
-	Input *DeprecateSystemTemplateInput
-	Copy  func(*DeprecateSystemTemplateInput) DeprecateSystemTemplateRequest
+	Input *types.DeprecateSystemTemplateInput
+	Copy  func(*types.DeprecateSystemTemplateInput) DeprecateSystemTemplateRequest
 }
 
 // Send marshals and sends the DeprecateSystemTemplate API request.
@@ -97,7 +56,7 @@ func (r DeprecateSystemTemplateRequest) Send(ctx context.Context) (*DeprecateSys
 	}
 
 	resp := &DeprecateSystemTemplateResponse{
-		DeprecateSystemTemplateOutput: r.Request.Data.(*DeprecateSystemTemplateOutput),
+		DeprecateSystemTemplateOutput: r.Request.Data.(*types.DeprecateSystemTemplateOutput),
 		response:                      &aws.Response{Request: r.Request},
 	}
 
@@ -107,7 +66,7 @@ func (r DeprecateSystemTemplateRequest) Send(ctx context.Context) (*DeprecateSys
 // DeprecateSystemTemplateResponse is the response type for the
 // DeprecateSystemTemplate API operation.
 type DeprecateSystemTemplateResponse struct {
-	*DeprecateSystemTemplateOutput
+	*types.DeprecateSystemTemplateOutput
 
 	response *aws.Response
 }

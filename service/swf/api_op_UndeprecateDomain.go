@@ -6,50 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
+	"github.com/aws/aws-sdk-go-v2/service/swf/types"
 )
-
-type UndeprecateDomainInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the domain of the deprecated workflow type.
-	//
-	// Name is a required field
-	Name *string `locationName:"name" min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s UndeprecateDomainInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UndeprecateDomainInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UndeprecateDomainInput"}
-
-	if s.Name == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Name"))
-	}
-	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type UndeprecateDomainOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s UndeprecateDomainOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opUndeprecateDomain = "UndeprecateDomain"
 
@@ -87,7 +47,7 @@ const opUndeprecateDomain = "UndeprecateDomain"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) UndeprecateDomainRequest(input *UndeprecateDomainInput) UndeprecateDomainRequest {
+func (c *Client) UndeprecateDomainRequest(input *types.UndeprecateDomainInput) UndeprecateDomainRequest {
 	op := &aws.Operation{
 		Name:       opUndeprecateDomain,
 		HTTPMethod: "POST",
@@ -95,10 +55,10 @@ func (c *Client) UndeprecateDomainRequest(input *UndeprecateDomainInput) Undepre
 	}
 
 	if input == nil {
-		input = &UndeprecateDomainInput{}
+		input = &types.UndeprecateDomainInput{}
 	}
 
-	req := c.newRequest(op, input, &UndeprecateDomainOutput{})
+	req := c.newRequest(op, input, &types.UndeprecateDomainOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return UndeprecateDomainRequest{Request: req, Input: input, Copy: c.UndeprecateDomainRequest}
@@ -108,8 +68,8 @@ func (c *Client) UndeprecateDomainRequest(input *UndeprecateDomainInput) Undepre
 // UndeprecateDomain API operation.
 type UndeprecateDomainRequest struct {
 	*aws.Request
-	Input *UndeprecateDomainInput
-	Copy  func(*UndeprecateDomainInput) UndeprecateDomainRequest
+	Input *types.UndeprecateDomainInput
+	Copy  func(*types.UndeprecateDomainInput) UndeprecateDomainRequest
 }
 
 // Send marshals and sends the UndeprecateDomain API request.
@@ -121,7 +81,7 @@ func (r UndeprecateDomainRequest) Send(ctx context.Context) (*UndeprecateDomainR
 	}
 
 	resp := &UndeprecateDomainResponse{
-		UndeprecateDomainOutput: r.Request.Data.(*UndeprecateDomainOutput),
+		UndeprecateDomainOutput: r.Request.Data.(*types.UndeprecateDomainOutput),
 		response:                &aws.Response{Request: r.Request},
 	}
 
@@ -131,7 +91,7 @@ func (r UndeprecateDomainRequest) Send(ctx context.Context) (*UndeprecateDomainR
 // UndeprecateDomainResponse is the response type for the
 // UndeprecateDomain API operation.
 type UndeprecateDomainResponse struct {
-	*UndeprecateDomainOutput
+	*types.UndeprecateDomainOutput
 
 	response *aws.Response
 }

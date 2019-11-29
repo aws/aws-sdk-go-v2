@@ -6,72 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/kafka/types"
 )
-
-type DescribeClusterOperationInput struct {
-	_ struct{} `type:"structure"`
-
-	// ClusterOperationArn is a required field
-	ClusterOperationArn *string `location:"uri" locationName:"clusterOperationArn" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeClusterOperationInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeClusterOperationInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeClusterOperationInput"}
-
-	if s.ClusterOperationArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ClusterOperationArn"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DescribeClusterOperationInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.ClusterOperationArn != nil {
-		v := *s.ClusterOperationArn
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "clusterOperationArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-// Information about a cluster operation.
-type DescribeClusterOperationOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Cluster operation information
-	ClusterOperationInfo *ClusterOperationInfo `locationName:"clusterOperationInfo" type:"structure"`
-}
-
-// String returns the string representation
-func (s DescribeClusterOperationOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DescribeClusterOperationOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.ClusterOperationInfo != nil {
-		v := s.ClusterOperationInfo
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "clusterOperationInfo", v, metadata)
-	}
-	return nil
-}
 
 const opDescribeClusterOperation = "DescribeClusterOperation"
 
@@ -88,7 +24,7 @@ const opDescribeClusterOperation = "DescribeClusterOperation"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/DescribeClusterOperation
-func (c *Client) DescribeClusterOperationRequest(input *DescribeClusterOperationInput) DescribeClusterOperationRequest {
+func (c *Client) DescribeClusterOperationRequest(input *types.DescribeClusterOperationInput) DescribeClusterOperationRequest {
 	op := &aws.Operation{
 		Name:       opDescribeClusterOperation,
 		HTTPMethod: "GET",
@@ -96,10 +32,10 @@ func (c *Client) DescribeClusterOperationRequest(input *DescribeClusterOperation
 	}
 
 	if input == nil {
-		input = &DescribeClusterOperationInput{}
+		input = &types.DescribeClusterOperationInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeClusterOperationOutput{})
+	req := c.newRequest(op, input, &types.DescribeClusterOperationOutput{})
 	return DescribeClusterOperationRequest{Request: req, Input: input, Copy: c.DescribeClusterOperationRequest}
 }
 
@@ -107,8 +43,8 @@ func (c *Client) DescribeClusterOperationRequest(input *DescribeClusterOperation
 // DescribeClusterOperation API operation.
 type DescribeClusterOperationRequest struct {
 	*aws.Request
-	Input *DescribeClusterOperationInput
-	Copy  func(*DescribeClusterOperationInput) DescribeClusterOperationRequest
+	Input *types.DescribeClusterOperationInput
+	Copy  func(*types.DescribeClusterOperationInput) DescribeClusterOperationRequest
 }
 
 // Send marshals and sends the DescribeClusterOperation API request.
@@ -120,7 +56,7 @@ func (r DescribeClusterOperationRequest) Send(ctx context.Context) (*DescribeClu
 	}
 
 	resp := &DescribeClusterOperationResponse{
-		DescribeClusterOperationOutput: r.Request.Data.(*DescribeClusterOperationOutput),
+		DescribeClusterOperationOutput: r.Request.Data.(*types.DescribeClusterOperationOutput),
 		response:                       &aws.Response{Request: r.Request},
 	}
 
@@ -130,7 +66,7 @@ func (r DescribeClusterOperationRequest) Send(ctx context.Context) (*DescribeClu
 // DescribeClusterOperationResponse is the response type for the
 // DescribeClusterOperation API operation.
 type DescribeClusterOperationResponse struct {
-	*DescribeClusterOperationOutput
+	*types.DescribeClusterOperationOutput
 
 	response *aws.Response
 }

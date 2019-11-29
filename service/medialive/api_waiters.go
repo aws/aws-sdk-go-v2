@@ -7,6 +7,7 @@ import (
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
+	"github.com/aws/aws-sdk-go-v2/service/medialive/types"
 )
 
 // WaitUntilChannelCreated uses the MediaLive API operation
@@ -18,7 +19,7 @@ import (
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Client) WaitUntilChannelCreated(ctx context.Context, input *DescribeChannelInput, opts ...aws.WaiterOption) error {
+func (c *Client) WaitUntilChannelCreated(ctx context.Context, input *types.DescribeChannelInput, opts ...aws.WaiterOption) error {
 	w := aws.Waiter{
 		Name:        "WaitUntilChannelCreated",
 		MaxAttempts: 5,
@@ -47,7 +48,7 @@ func (c *Client) WaitUntilChannelCreated(ctx context.Context, input *DescribeCha
 		},
 		Logger: c.Config.Logger,
 		NewRequest: func(opts []aws.Option) (*aws.Request, error) {
-			var inCpy *DescribeChannelInput
+			var inCpy *types.DescribeChannelInput
 			if input != nil {
 				tmp := *input
 				inCpy = &tmp
@@ -72,7 +73,7 @@ func (c *Client) WaitUntilChannelCreated(ctx context.Context, input *DescribeCha
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Client) WaitUntilChannelDeleted(ctx context.Context, input *DescribeChannelInput, opts ...aws.WaiterOption) error {
+func (c *Client) WaitUntilChannelDeleted(ctx context.Context, input *types.DescribeChannelInput, opts ...aws.WaiterOption) error {
 	w := aws.Waiter{
 		Name:        "WaitUntilChannelDeleted",
 		MaxAttempts: 20,
@@ -96,7 +97,7 @@ func (c *Client) WaitUntilChannelDeleted(ctx context.Context, input *DescribeCha
 		},
 		Logger: c.Config.Logger,
 		NewRequest: func(opts []aws.Option) (*aws.Request, error) {
-			var inCpy *DescribeChannelInput
+			var inCpy *types.DescribeChannelInput
 			if input != nil {
 				tmp := *input
 				inCpy = &tmp
@@ -121,7 +122,7 @@ func (c *Client) WaitUntilChannelDeleted(ctx context.Context, input *DescribeCha
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Client) WaitUntilChannelRunning(ctx context.Context, input *DescribeChannelInput, opts ...aws.WaiterOption) error {
+func (c *Client) WaitUntilChannelRunning(ctx context.Context, input *types.DescribeChannelInput, opts ...aws.WaiterOption) error {
 	w := aws.Waiter{
 		Name:        "WaitUntilChannelRunning",
 		MaxAttempts: 120,
@@ -145,7 +146,7 @@ func (c *Client) WaitUntilChannelRunning(ctx context.Context, input *DescribeCha
 		},
 		Logger: c.Config.Logger,
 		NewRequest: func(opts []aws.Option) (*aws.Request, error) {
-			var inCpy *DescribeChannelInput
+			var inCpy *types.DescribeChannelInput
 			if input != nil {
 				tmp := *input
 				inCpy = &tmp
@@ -170,7 +171,7 @@ func (c *Client) WaitUntilChannelRunning(ctx context.Context, input *DescribeCha
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Client) WaitUntilChannelStopped(ctx context.Context, input *DescribeChannelInput, opts ...aws.WaiterOption) error {
+func (c *Client) WaitUntilChannelStopped(ctx context.Context, input *types.DescribeChannelInput, opts ...aws.WaiterOption) error {
 	w := aws.Waiter{
 		Name:        "WaitUntilChannelStopped",
 		MaxAttempts: 28,
@@ -194,7 +195,7 @@ func (c *Client) WaitUntilChannelStopped(ctx context.Context, input *DescribeCha
 		},
 		Logger: c.Config.Logger,
 		NewRequest: func(opts []aws.Option) (*aws.Request, error) {
-			var inCpy *DescribeChannelInput
+			var inCpy *types.DescribeChannelInput
 			if input != nil {
 				tmp := *input
 				inCpy = &tmp

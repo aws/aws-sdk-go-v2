@@ -6,48 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/codepipeline/types"
 )
-
-type DeleteWebhookInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the webhook you want to delete.
-	//
-	// Name is a required field
-	Name *string `locationName:"name" min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteWebhookInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteWebhookInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteWebhookInput"}
-
-	if s.Name == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Name"))
-	}
-	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteWebhookOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteWebhookOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteWebhook = "DeleteWebhook"
 
@@ -68,7 +28,7 @@ const opDeleteWebhook = "DeleteWebhook"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/DeleteWebhook
-func (c *Client) DeleteWebhookRequest(input *DeleteWebhookInput) DeleteWebhookRequest {
+func (c *Client) DeleteWebhookRequest(input *types.DeleteWebhookInput) DeleteWebhookRequest {
 	op := &aws.Operation{
 		Name:       opDeleteWebhook,
 		HTTPMethod: "POST",
@@ -76,10 +36,10 @@ func (c *Client) DeleteWebhookRequest(input *DeleteWebhookInput) DeleteWebhookRe
 	}
 
 	if input == nil {
-		input = &DeleteWebhookInput{}
+		input = &types.DeleteWebhookInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteWebhookOutput{})
+	req := c.newRequest(op, input, &types.DeleteWebhookOutput{})
 	return DeleteWebhookRequest{Request: req, Input: input, Copy: c.DeleteWebhookRequest}
 }
 
@@ -87,8 +47,8 @@ func (c *Client) DeleteWebhookRequest(input *DeleteWebhookInput) DeleteWebhookRe
 // DeleteWebhook API operation.
 type DeleteWebhookRequest struct {
 	*aws.Request
-	Input *DeleteWebhookInput
-	Copy  func(*DeleteWebhookInput) DeleteWebhookRequest
+	Input *types.DeleteWebhookInput
+	Copy  func(*types.DeleteWebhookInput) DeleteWebhookRequest
 }
 
 // Send marshals and sends the DeleteWebhook API request.
@@ -100,7 +60,7 @@ func (r DeleteWebhookRequest) Send(ctx context.Context) (*DeleteWebhookResponse,
 	}
 
 	resp := &DeleteWebhookResponse{
-		DeleteWebhookOutput: r.Request.Data.(*DeleteWebhookOutput),
+		DeleteWebhookOutput: r.Request.Data.(*types.DeleteWebhookOutput),
 		response:            &aws.Response{Request: r.Request},
 	}
 
@@ -110,7 +70,7 @@ func (r DeleteWebhookRequest) Send(ctx context.Context) (*DeleteWebhookResponse,
 // DeleteWebhookResponse is the response type for the
 // DeleteWebhook API operation.
 type DeleteWebhookResponse struct {
-	*DeleteWebhookOutput
+	*types.DeleteWebhookOutput
 
 	response *aws.Response
 }

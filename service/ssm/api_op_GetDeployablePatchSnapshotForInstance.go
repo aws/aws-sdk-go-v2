@@ -6,71 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ssm/types"
 )
-
-type GetDeployablePatchSnapshotForInstanceInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the instance for which the appropriate patch snapshot should be
-	// retrieved.
-	//
-	// InstanceId is a required field
-	InstanceId *string `type:"string" required:"true"`
-
-	// The user-defined snapshot ID.
-	//
-	// SnapshotId is a required field
-	SnapshotId *string `min:"36" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetDeployablePatchSnapshotForInstanceInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetDeployablePatchSnapshotForInstanceInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetDeployablePatchSnapshotForInstanceInput"}
-
-	if s.InstanceId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("InstanceId"))
-	}
-
-	if s.SnapshotId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("SnapshotId"))
-	}
-	if s.SnapshotId != nil && len(*s.SnapshotId) < 36 {
-		invalidParams.Add(aws.NewErrParamMinLen("SnapshotId", 36))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type GetDeployablePatchSnapshotForInstanceOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the instance.
-	InstanceId *string `type:"string"`
-
-	// Returns the specific operating system (for example Windows Server 2012 or
-	// Amazon Linux 2015.09) on the instance for the specified patch snapshot.
-	Product *string `type:"string"`
-
-	// A pre-signed Amazon S3 URL that can be used to download the patch snapshot.
-	SnapshotDownloadUrl *string `type:"string"`
-
-	// The user-defined snapshot ID.
-	SnapshotId *string `min:"36" type:"string"`
-}
-
-// String returns the string representation
-func (s GetDeployablePatchSnapshotForInstanceOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetDeployablePatchSnapshotForInstance = "GetDeployablePatchSnapshotForInstance"
 
@@ -88,7 +25,7 @@ const opGetDeployablePatchSnapshotForInstance = "GetDeployablePatchSnapshotForIn
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetDeployablePatchSnapshotForInstance
-func (c *Client) GetDeployablePatchSnapshotForInstanceRequest(input *GetDeployablePatchSnapshotForInstanceInput) GetDeployablePatchSnapshotForInstanceRequest {
+func (c *Client) GetDeployablePatchSnapshotForInstanceRequest(input *types.GetDeployablePatchSnapshotForInstanceInput) GetDeployablePatchSnapshotForInstanceRequest {
 	op := &aws.Operation{
 		Name:       opGetDeployablePatchSnapshotForInstance,
 		HTTPMethod: "POST",
@@ -96,10 +33,10 @@ func (c *Client) GetDeployablePatchSnapshotForInstanceRequest(input *GetDeployab
 	}
 
 	if input == nil {
-		input = &GetDeployablePatchSnapshotForInstanceInput{}
+		input = &types.GetDeployablePatchSnapshotForInstanceInput{}
 	}
 
-	req := c.newRequest(op, input, &GetDeployablePatchSnapshotForInstanceOutput{})
+	req := c.newRequest(op, input, &types.GetDeployablePatchSnapshotForInstanceOutput{})
 	return GetDeployablePatchSnapshotForInstanceRequest{Request: req, Input: input, Copy: c.GetDeployablePatchSnapshotForInstanceRequest}
 }
 
@@ -107,8 +44,8 @@ func (c *Client) GetDeployablePatchSnapshotForInstanceRequest(input *GetDeployab
 // GetDeployablePatchSnapshotForInstance API operation.
 type GetDeployablePatchSnapshotForInstanceRequest struct {
 	*aws.Request
-	Input *GetDeployablePatchSnapshotForInstanceInput
-	Copy  func(*GetDeployablePatchSnapshotForInstanceInput) GetDeployablePatchSnapshotForInstanceRequest
+	Input *types.GetDeployablePatchSnapshotForInstanceInput
+	Copy  func(*types.GetDeployablePatchSnapshotForInstanceInput) GetDeployablePatchSnapshotForInstanceRequest
 }
 
 // Send marshals and sends the GetDeployablePatchSnapshotForInstance API request.
@@ -120,7 +57,7 @@ func (r GetDeployablePatchSnapshotForInstanceRequest) Send(ctx context.Context) 
 	}
 
 	resp := &GetDeployablePatchSnapshotForInstanceResponse{
-		GetDeployablePatchSnapshotForInstanceOutput: r.Request.Data.(*GetDeployablePatchSnapshotForInstanceOutput),
+		GetDeployablePatchSnapshotForInstanceOutput: r.Request.Data.(*types.GetDeployablePatchSnapshotForInstanceOutput),
 		response: &aws.Response{Request: r.Request},
 	}
 
@@ -130,7 +67,7 @@ func (r GetDeployablePatchSnapshotForInstanceRequest) Send(ctx context.Context) 
 // GetDeployablePatchSnapshotForInstanceResponse is the response type for the
 // GetDeployablePatchSnapshotForInstance API operation.
 type GetDeployablePatchSnapshotForInstanceResponse struct {
-	*GetDeployablePatchSnapshotForInstanceOutput
+	*types.GetDeployablePatchSnapshotForInstanceOutput
 
 	response *aws.Response
 }

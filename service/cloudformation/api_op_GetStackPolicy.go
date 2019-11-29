@@ -6,53 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/cloudformation/types"
 )
-
-// The input for the GetStackPolicy action.
-type GetStackPolicyInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name or unique stack ID that is associated with the stack whose policy
-	// you want to get.
-	//
-	// StackName is a required field
-	StackName *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetStackPolicyInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetStackPolicyInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetStackPolicyInput"}
-
-	if s.StackName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("StackName"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// The output for the GetStackPolicy action.
-type GetStackPolicyOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Structure containing the stack policy body. (For more information, go to
-	// Prevent Updates to Stack Resources (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/protect-stack-resources.html)
-	// in the AWS CloudFormation User Guide.)
-	StackPolicyBody *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s GetStackPolicyOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetStackPolicy = "GetStackPolicy"
 
@@ -70,7 +25,7 @@ const opGetStackPolicy = "GetStackPolicy"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/GetStackPolicy
-func (c *Client) GetStackPolicyRequest(input *GetStackPolicyInput) GetStackPolicyRequest {
+func (c *Client) GetStackPolicyRequest(input *types.GetStackPolicyInput) GetStackPolicyRequest {
 	op := &aws.Operation{
 		Name:       opGetStackPolicy,
 		HTTPMethod: "POST",
@@ -78,10 +33,10 @@ func (c *Client) GetStackPolicyRequest(input *GetStackPolicyInput) GetStackPolic
 	}
 
 	if input == nil {
-		input = &GetStackPolicyInput{}
+		input = &types.GetStackPolicyInput{}
 	}
 
-	req := c.newRequest(op, input, &GetStackPolicyOutput{})
+	req := c.newRequest(op, input, &types.GetStackPolicyOutput{})
 	return GetStackPolicyRequest{Request: req, Input: input, Copy: c.GetStackPolicyRequest}
 }
 
@@ -89,8 +44,8 @@ func (c *Client) GetStackPolicyRequest(input *GetStackPolicyInput) GetStackPolic
 // GetStackPolicy API operation.
 type GetStackPolicyRequest struct {
 	*aws.Request
-	Input *GetStackPolicyInput
-	Copy  func(*GetStackPolicyInput) GetStackPolicyRequest
+	Input *types.GetStackPolicyInput
+	Copy  func(*types.GetStackPolicyInput) GetStackPolicyRequest
 }
 
 // Send marshals and sends the GetStackPolicy API request.
@@ -102,7 +57,7 @@ func (r GetStackPolicyRequest) Send(ctx context.Context) (*GetStackPolicyRespons
 	}
 
 	resp := &GetStackPolicyResponse{
-		GetStackPolicyOutput: r.Request.Data.(*GetStackPolicyOutput),
+		GetStackPolicyOutput: r.Request.Data.(*types.GetStackPolicyOutput),
 		response:             &aws.Response{Request: r.Request},
 	}
 
@@ -112,7 +67,7 @@ func (r GetStackPolicyRequest) Send(ctx context.Context) (*GetStackPolicyRespons
 // GetStackPolicyResponse is the response type for the
 // GetStackPolicy API operation.
 type GetStackPolicyResponse struct {
-	*GetStackPolicyOutput
+	*types.GetStackPolicyOutput
 
 	response *aws.Response
 }

@@ -6,54 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/directconnect/types"
 )
-
-type CreateDirectConnectGatewayInput struct {
-	_ struct{} `type:"structure"`
-
-	// The autonomous system number (ASN) for Border Gateway Protocol (BGP) to be
-	// configured on the Amazon side of the connection. The ASN must be in the private
-	// range of 64,512 to 65,534 or 4,200,000,000 to 4,294,967,294. The default
-	// is 64512.
-	AmazonSideAsn *int64 `locationName:"amazonSideAsn" type:"long"`
-
-	// The name of the Direct Connect gateway.
-	//
-	// DirectConnectGatewayName is a required field
-	DirectConnectGatewayName *string `locationName:"directConnectGatewayName" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s CreateDirectConnectGatewayInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateDirectConnectGatewayInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateDirectConnectGatewayInput"}
-
-	if s.DirectConnectGatewayName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DirectConnectGatewayName"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type CreateDirectConnectGatewayOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The Direct Connect gateway.
-	DirectConnectGateway *DirectConnectGateway `locationName:"directConnectGateway" type:"structure"`
-}
-
-// String returns the string representation
-func (s CreateDirectConnectGatewayOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCreateDirectConnectGateway = "CreateDirectConnectGateway"
 
@@ -76,7 +30,7 @@ const opCreateDirectConnectGateway = "CreateDirectConnectGateway"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/CreateDirectConnectGateway
-func (c *Client) CreateDirectConnectGatewayRequest(input *CreateDirectConnectGatewayInput) CreateDirectConnectGatewayRequest {
+func (c *Client) CreateDirectConnectGatewayRequest(input *types.CreateDirectConnectGatewayInput) CreateDirectConnectGatewayRequest {
 	op := &aws.Operation{
 		Name:       opCreateDirectConnectGateway,
 		HTTPMethod: "POST",
@@ -84,10 +38,10 @@ func (c *Client) CreateDirectConnectGatewayRequest(input *CreateDirectConnectGat
 	}
 
 	if input == nil {
-		input = &CreateDirectConnectGatewayInput{}
+		input = &types.CreateDirectConnectGatewayInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateDirectConnectGatewayOutput{})
+	req := c.newRequest(op, input, &types.CreateDirectConnectGatewayOutput{})
 	return CreateDirectConnectGatewayRequest{Request: req, Input: input, Copy: c.CreateDirectConnectGatewayRequest}
 }
 
@@ -95,8 +49,8 @@ func (c *Client) CreateDirectConnectGatewayRequest(input *CreateDirectConnectGat
 // CreateDirectConnectGateway API operation.
 type CreateDirectConnectGatewayRequest struct {
 	*aws.Request
-	Input *CreateDirectConnectGatewayInput
-	Copy  func(*CreateDirectConnectGatewayInput) CreateDirectConnectGatewayRequest
+	Input *types.CreateDirectConnectGatewayInput
+	Copy  func(*types.CreateDirectConnectGatewayInput) CreateDirectConnectGatewayRequest
 }
 
 // Send marshals and sends the CreateDirectConnectGateway API request.
@@ -108,7 +62,7 @@ func (r CreateDirectConnectGatewayRequest) Send(ctx context.Context) (*CreateDir
 	}
 
 	resp := &CreateDirectConnectGatewayResponse{
-		CreateDirectConnectGatewayOutput: r.Request.Data.(*CreateDirectConnectGatewayOutput),
+		CreateDirectConnectGatewayOutput: r.Request.Data.(*types.CreateDirectConnectGatewayOutput),
 		response:                         &aws.Response{Request: r.Request},
 	}
 
@@ -118,7 +72,7 @@ func (r CreateDirectConnectGatewayRequest) Send(ctx context.Context) (*CreateDir
 // CreateDirectConnectGatewayResponse is the response type for the
 // CreateDirectConnectGateway API operation.
 type CreateDirectConnectGatewayResponse struct {
-	*CreateDirectConnectGatewayOutput
+	*types.CreateDirectConnectGatewayOutput
 
 	response *aws.Response
 }

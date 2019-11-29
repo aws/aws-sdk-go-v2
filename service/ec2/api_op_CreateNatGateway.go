@@ -6,69 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-type CreateNatGatewayInput struct {
-	_ struct{} `type:"structure"`
-
-	// The allocation ID of an Elastic IP address to associate with the NAT gateway.
-	// If the Elastic IP address is associated with another resource, you must first
-	// disassociate it.
-	//
-	// AllocationId is a required field
-	AllocationId *string `type:"string" required:"true"`
-
-	// Unique, case-sensitive identifier that you provide to ensure the idempotency
-	// of the request. For more information, see How to Ensure Idempotency (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html).
-	//
-	// Constraint: Maximum 64 ASCII characters.
-	ClientToken *string `type:"string"`
-
-	// The subnet in which to create the NAT gateway.
-	//
-	// SubnetId is a required field
-	SubnetId *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s CreateNatGatewayInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateNatGatewayInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateNatGatewayInput"}
-
-	if s.AllocationId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("AllocationId"))
-	}
-
-	if s.SubnetId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("SubnetId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type CreateNatGatewayOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Unique, case-sensitive identifier to ensure the idempotency of the request.
-	// Only returned if a client token was provided in the request.
-	ClientToken *string `locationName:"clientToken" type:"string"`
-
-	// Information about the NAT gateway.
-	NatGateway *NatGateway `locationName:"natGateway" type:"structure"`
-}
-
-// String returns the string representation
-func (s CreateNatGatewayOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCreateNatGateway = "CreateNatGateway"
 
@@ -91,7 +30,7 @@ const opCreateNatGateway = "CreateNatGateway"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateNatGateway
-func (c *Client) CreateNatGatewayRequest(input *CreateNatGatewayInput) CreateNatGatewayRequest {
+func (c *Client) CreateNatGatewayRequest(input *types.CreateNatGatewayInput) CreateNatGatewayRequest {
 	op := &aws.Operation{
 		Name:       opCreateNatGateway,
 		HTTPMethod: "POST",
@@ -99,10 +38,10 @@ func (c *Client) CreateNatGatewayRequest(input *CreateNatGatewayInput) CreateNat
 	}
 
 	if input == nil {
-		input = &CreateNatGatewayInput{}
+		input = &types.CreateNatGatewayInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateNatGatewayOutput{})
+	req := c.newRequest(op, input, &types.CreateNatGatewayOutput{})
 	return CreateNatGatewayRequest{Request: req, Input: input, Copy: c.CreateNatGatewayRequest}
 }
 
@@ -110,8 +49,8 @@ func (c *Client) CreateNatGatewayRequest(input *CreateNatGatewayInput) CreateNat
 // CreateNatGateway API operation.
 type CreateNatGatewayRequest struct {
 	*aws.Request
-	Input *CreateNatGatewayInput
-	Copy  func(*CreateNatGatewayInput) CreateNatGatewayRequest
+	Input *types.CreateNatGatewayInput
+	Copy  func(*types.CreateNatGatewayInput) CreateNatGatewayRequest
 }
 
 // Send marshals and sends the CreateNatGateway API request.
@@ -123,7 +62,7 @@ func (r CreateNatGatewayRequest) Send(ctx context.Context) (*CreateNatGatewayRes
 	}
 
 	resp := &CreateNatGatewayResponse{
-		CreateNatGatewayOutput: r.Request.Data.(*CreateNatGatewayOutput),
+		CreateNatGatewayOutput: r.Request.Data.(*types.CreateNatGatewayOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -133,7 +72,7 @@ func (r CreateNatGatewayRequest) Send(ctx context.Context) (*CreateNatGatewayRes
 // CreateNatGatewayResponse is the response type for the
 // CreateNatGateway API operation.
 type CreateNatGatewayResponse struct {
-	*CreateNatGatewayOutput
+	*types.CreateNatGatewayOutput
 
 	response *aws.Response
 }

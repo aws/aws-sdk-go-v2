@@ -12,6 +12,8 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws/awserr"
 	"github.com/aws/aws-sdk-go-v2/aws/external"
 	"github.com/aws/aws-sdk-go-v2/service/ses"
+	"github.com/aws/aws-sdk-go-v2/service/ses/enums"
+	"github.com/aws/aws-sdk-go-v2/service/ses/types"
 )
 
 var _ time.Duration
@@ -36,7 +38,7 @@ func ExampleClient_CloneReceiptRuleSetRequest_shared00() {
 	}
 
 	svc := ses.New(cfg)
-	input := &ses.CloneReceiptRuleSetInput{
+	input := &types.CloneReceiptRuleSetInput{
 		OriginalRuleSetName: aws.String("RuleSetToClone"),
 		RuleSetName:         aws.String("RuleSetToCreate"),
 	}
@@ -76,11 +78,11 @@ func ExampleClient_CreateReceiptFilterRequest_shared00() {
 	}
 
 	svc := ses.New(cfg)
-	input := &ses.CreateReceiptFilterInput{
-		Filter: &ses.ReceiptFilter{
-			IpFilter: &ses.ReceiptIpFilter{
+	input := &types.CreateReceiptFilterInput{
+		Filter: &types.ReceiptFilter{
+			IpFilter: &types.ReceiptIpFilter{
 				Cidr:   aws.String("1.2.3.4/24"),
-				Policy: ses.ReceiptFilterPolicyAllow,
+				Policy: enums.ReceiptFilterPolicyAllow,
 			},
 			Name: aws.String("MyFilter"),
 		},
@@ -119,16 +121,16 @@ func ExampleClient_CreateReceiptRuleRequest_shared00() {
 	}
 
 	svc := ses.New(cfg)
-	input := &ses.CreateReceiptRuleInput{
+	input := &types.CreateReceiptRuleInput{
 		After: aws.String(""),
-		Rule: &ses.ReceiptRule{
-			Actions: []ses.ReceiptAction{
+		Rule: &types.ReceiptRule{
+			Actions: []types.ReceiptAction{
 				{},
 			},
 			Enabled:     aws.Bool(true),
 			Name:        aws.String("MyRule"),
 			ScanEnabled: aws.Bool(true),
-			TlsPolicy:   ses.TlsPolicyOptional,
+			TlsPolicy:   enums.TlsPolicyOptional,
 		},
 		RuleSetName: aws.String("MyRuleSet"),
 	}
@@ -176,7 +178,7 @@ func ExampleClient_CreateReceiptRuleSetRequest_shared00() {
 	}
 
 	svc := ses.New(cfg)
-	input := &ses.CreateReceiptRuleSetInput{
+	input := &types.CreateReceiptRuleSetInput{
 		RuleSetName: aws.String("MyRuleSet"),
 	}
 
@@ -214,7 +216,7 @@ func ExampleClient_DeleteIdentityRequest_shared00() {
 	}
 
 	svc := ses.New(cfg)
-	input := &ses.DeleteIdentityInput{
+	input := &types.DeleteIdentityInput{
 		Identity: aws.String("user@example.com"),
 	}
 
@@ -247,7 +249,7 @@ func ExampleClient_DeleteIdentityPolicyRequest_shared00() {
 	}
 
 	svc := ses.New(cfg)
-	input := &ses.DeleteIdentityPolicyInput{
+	input := &types.DeleteIdentityPolicyInput{
 		Identity:   aws.String("user@example.com"),
 		PolicyName: aws.String("MyPolicy"),
 	}
@@ -281,7 +283,7 @@ func ExampleClient_DeleteReceiptFilterRequest_shared00() {
 	}
 
 	svc := ses.New(cfg)
-	input := &ses.DeleteReceiptFilterInput{
+	input := &types.DeleteReceiptFilterInput{
 		FilterName: aws.String("MyFilter"),
 	}
 
@@ -314,7 +316,7 @@ func ExampleClient_DeleteReceiptRuleRequest_shared00() {
 	}
 
 	svc := ses.New(cfg)
-	input := &ses.DeleteReceiptRuleInput{
+	input := &types.DeleteReceiptRuleInput{
 		RuleName:    aws.String("MyRule"),
 		RuleSetName: aws.String("MyRuleSet"),
 	}
@@ -350,7 +352,7 @@ func ExampleClient_DeleteReceiptRuleSetRequest_shared00() {
 	}
 
 	svc := ses.New(cfg)
-	input := &ses.DeleteReceiptRuleSetInput{
+	input := &types.DeleteReceiptRuleSetInput{
 		RuleSetName: aws.String("MyRuleSet"),
 	}
 
@@ -386,7 +388,7 @@ func ExampleClient_DeleteVerifiedEmailAddressRequest_shared00() {
 	}
 
 	svc := ses.New(cfg)
-	input := &ses.DeleteVerifiedEmailAddressInput{
+	input := &types.DeleteVerifiedEmailAddressInput{
 		EmailAddress: aws.String("user@example.com"),
 	}
 
@@ -420,7 +422,7 @@ func ExampleClient_DescribeActiveReceiptRuleSetRequest_shared00() {
 	}
 
 	svc := ses.New(cfg)
-	input := &ses.DescribeActiveReceiptRuleSetInput{}
+	input := &types.DescribeActiveReceiptRuleSetInput{}
 
 	req := svc.DescribeActiveReceiptRuleSetRequest(input)
 	result, err := req.Send(context.Background())
@@ -451,7 +453,7 @@ func ExampleClient_DescribeReceiptRuleRequest_shared00() {
 	}
 
 	svc := ses.New(cfg)
-	input := &ses.DescribeReceiptRuleInput{
+	input := &types.DescribeReceiptRuleInput{
 		RuleName:    aws.String("MyRule"),
 		RuleSetName: aws.String("MyRuleSet"),
 	}
@@ -489,7 +491,7 @@ func ExampleClient_DescribeReceiptRuleSetRequest_shared00() {
 	}
 
 	svc := ses.New(cfg)
-	input := &ses.DescribeReceiptRuleSetInput{
+	input := &types.DescribeReceiptRuleSetInput{
 		RuleSetName: aws.String("MyRuleSet"),
 	}
 
@@ -525,7 +527,7 @@ func ExampleClient_GetAccountSendingEnabledRequest_shared00() {
 	}
 
 	svc := ses.New(cfg)
-	input := &ses.GetAccountSendingEnabledInput{}
+	input := &types.GetAccountSendingEnabledInput{}
 
 	req := svc.GetAccountSendingEnabledRequest(input)
 	result, err := req.Send(context.Background())
@@ -557,7 +559,7 @@ func ExampleClient_GetIdentityDkimAttributesRequest_shared00() {
 	}
 
 	svc := ses.New(cfg)
-	input := &ses.GetIdentityDkimAttributesInput{
+	input := &types.GetIdentityDkimAttributesInput{
 		Identities: []string{
 			"example.com",
 			"user@example.com",
@@ -593,7 +595,7 @@ func ExampleClient_GetIdentityMailFromDomainAttributesRequest_shared00() {
 	}
 
 	svc := ses.New(cfg)
-	input := &ses.GetIdentityMailFromDomainAttributesInput{
+	input := &types.GetIdentityMailFromDomainAttributesInput{
 		Identities: []string{
 			"example.com",
 		},
@@ -628,7 +630,7 @@ func ExampleClient_GetIdentityNotificationAttributesRequest_shared00() {
 	}
 
 	svc := ses.New(cfg)
-	input := &ses.GetIdentityNotificationAttributesInput{
+	input := &types.GetIdentityNotificationAttributesInput{
 		Identities: []string{
 			"example.com",
 		},
@@ -663,7 +665,7 @@ func ExampleClient_GetIdentityPoliciesRequest_shared00() {
 	}
 
 	svc := ses.New(cfg)
-	input := &ses.GetIdentityPoliciesInput{
+	input := &types.GetIdentityPoliciesInput{
 		Identity: aws.String("example.com"),
 		PolicyNames: []string{
 			"MyPolicy",
@@ -700,7 +702,7 @@ func ExampleClient_GetIdentityVerificationAttributesRequest_shared00() {
 	}
 
 	svc := ses.New(cfg)
-	input := &ses.GetIdentityVerificationAttributesInput{
+	input := &types.GetIdentityVerificationAttributesInput{
 		Identities: []string{
 			"example.com",
 		},
@@ -735,7 +737,7 @@ func ExampleClient_GetSendQuotaRequest_shared00() {
 	}
 
 	svc := ses.New(cfg)
-	input := &ses.GetSendQuotaInput{}
+	input := &types.GetSendQuotaInput{}
 
 	req := svc.GetSendQuotaRequest(input)
 	result, err := req.Send(context.Background())
@@ -766,7 +768,7 @@ func ExampleClient_GetSendStatisticsRequest_shared00() {
 	}
 
 	svc := ses.New(cfg)
-	input := &ses.GetSendStatisticsInput{}
+	input := &types.GetSendStatisticsInput{}
 
 	req := svc.GetSendStatisticsRequest(input)
 	result, err := req.Send(context.Background())
@@ -798,8 +800,8 @@ func ExampleClient_ListIdentitiesRequest_shared00() {
 	}
 
 	svc := ses.New(cfg)
-	input := &ses.ListIdentitiesInput{
-		IdentityType: ses.IdentityTypeEmailAddress,
+	input := &types.ListIdentitiesInput{
+		IdentityType: enums.IdentityTypeEmailAddress,
 		MaxItems:     aws.Int64(123),
 		NextToken:    aws.String(""),
 	}
@@ -834,7 +836,7 @@ func ExampleClient_ListIdentityPoliciesRequest_shared00() {
 	}
 
 	svc := ses.New(cfg)
-	input := &ses.ListIdentityPoliciesInput{
+	input := &types.ListIdentityPoliciesInput{
 		Identity: aws.String("example.com"),
 	}
 
@@ -868,7 +870,7 @@ func ExampleClient_ListReceiptFiltersRequest_shared00() {
 	}
 
 	svc := ses.New(cfg)
-	input := &ses.ListReceiptFiltersInput{}
+	input := &types.ListReceiptFiltersInput{}
 
 	req := svc.ListReceiptFiltersRequest(input)
 	result, err := req.Send(context.Background())
@@ -899,7 +901,7 @@ func ExampleClient_ListReceiptRuleSetsRequest_shared00() {
 	}
 
 	svc := ses.New(cfg)
-	input := &ses.ListReceiptRuleSetsInput{
+	input := &types.ListReceiptRuleSetsInput{
 		NextToken: aws.String(""),
 	}
 
@@ -933,7 +935,7 @@ func ExampleClient_ListVerifiedEmailAddressesRequest_shared00() {
 	}
 
 	svc := ses.New(cfg)
-	input := &ses.ListVerifiedEmailAddressesInput{}
+	input := &types.ListVerifiedEmailAddressesInput{}
 
 	req := svc.ListVerifiedEmailAddressesRequest(input)
 	result, err := req.Send(context.Background())
@@ -964,7 +966,7 @@ func ExampleClient_PutIdentityPolicyRequest_shared00() {
 	}
 
 	svc := ses.New(cfg)
-	input := &ses.PutIdentityPolicyInput{
+	input := &types.PutIdentityPolicyInput{
 		Identity:   aws.String("example.com"),
 		Policy:     aws.String("{\"Version\":\"2008-10-17\",\"Statement\":[{\"Sid\":\"stmt1469123904194\",\"Effect\":\"Allow\",\"Principal\":{\"AWS\":\"arn:aws:iam::123456789012:root\"},\"Action\":[\"ses:SendEmail\",\"ses:SendRawEmail\"],\"Resource\":\"arn:aws:ses:us-east-1:EXAMPLE65304:identity/example.com\"}]}"),
 		PolicyName: aws.String("MyPolicy"),
@@ -1001,7 +1003,7 @@ func ExampleClient_ReorderReceiptRuleSetRequest_shared00() {
 	}
 
 	svc := ses.New(cfg)
-	input := &ses.ReorderReceiptRuleSetInput{
+	input := &types.ReorderReceiptRuleSetInput{
 		RuleNames: []string{
 			"MyRule",
 			"MyOtherRule",
@@ -1042,8 +1044,8 @@ func ExampleClient_SendEmailRequest_shared00() {
 	}
 
 	svc := ses.New(cfg)
-	input := &ses.SendEmailInput{
-		Destination: &ses.Destination{
+	input := &types.SendEmailInput{
+		Destination: &types.Destination{
 			CcAddresses: []string{
 				"recipient3@example.com",
 			},
@@ -1052,18 +1054,18 @@ func ExampleClient_SendEmailRequest_shared00() {
 				"recipient2@example.com",
 			},
 		},
-		Message: &ses.Message{
-			Body: &ses.Body{
-				Html: &ses.Content{
+		Message: &types.Message{
+			Body: &types.Body{
+				Html: &types.Content{
 					Charset: aws.String("UTF-8"),
 					Data:    aws.String("This message body contains HTML formatting. It can, for example, contain links like this one: <a class=\"ulink\" href=\"http://docs.aws.amazon.com/ses/latest/DeveloperGuide\" target=\"_blank\">Amazon SES Developer Guide</a>."),
 				},
-				Text: &ses.Content{
+				Text: &types.Content{
 					Charset: aws.String("UTF-8"),
 					Data:    aws.String("This is the message body in text format."),
 				},
 			},
-			Subject: &ses.Content{
+			Subject: &types.Content{
 				Charset: aws.String("UTF-8"),
 				Data:    aws.String("Test email"),
 			},
@@ -1113,9 +1115,9 @@ func ExampleClient_SendRawEmailRequest_shared00() {
 	}
 
 	svc := ses.New(cfg)
-	input := &ses.SendRawEmailInput{
+	input := &types.SendRawEmailInput{
 		FromArn: aws.String(""),
-		RawMessage: &ses.RawMessage{
+		RawMessage: &types.RawMessage{
 			Data: []byte("From: sender@example.com\\nTo: recipient@example.com\\nSubject: Test email (contains an attachment)\\nMIME-Version: 1.0\\nContent-type: Multipart/Mixed; boundary=\"NextPart\"\\n\\n--NextPart\\nContent-Type: text/plain\\n\\nThis is the message body.\\n\\n--NextPart\\nContent-Type: text/plain;\\nContent-Disposition: attachment; filename=\"attachment.txt\"\\n\\nThis is the text in the attachment.\\n\\n--NextPart--"),
 		},
 		ReturnPathArn: aws.String(""),
@@ -1162,7 +1164,7 @@ func ExampleClient_SetActiveReceiptRuleSetRequest_shared00() {
 	}
 
 	svc := ses.New(cfg)
-	input := &ses.SetActiveReceiptRuleSetInput{
+	input := &types.SetActiveReceiptRuleSetInput{
 		RuleSetName: aws.String("RuleSetToActivate"),
 	}
 
@@ -1198,7 +1200,7 @@ func ExampleClient_SetIdentityDkimEnabledRequest_shared00() {
 	}
 
 	svc := ses.New(cfg)
-	input := &ses.SetIdentityDkimEnabledInput{
+	input := &types.SetIdentityDkimEnabledInput{
 		DkimEnabled: aws.Bool(true),
 		Identity:    aws.String("user@example.com"),
 	}
@@ -1233,7 +1235,7 @@ func ExampleClient_SetIdentityFeedbackForwardingEnabledRequest_shared00() {
 	}
 
 	svc := ses.New(cfg)
-	input := &ses.SetIdentityFeedbackForwardingEnabledInput{
+	input := &types.SetIdentityFeedbackForwardingEnabledInput{
 		ForwardingEnabled: aws.Bool(true),
 		Identity:          aws.String("user@example.com"),
 	}
@@ -1268,10 +1270,10 @@ func ExampleClient_SetIdentityHeadersInNotificationsEnabledRequest_shared00() {
 	}
 
 	svc := ses.New(cfg)
-	input := &ses.SetIdentityHeadersInNotificationsEnabledInput{
+	input := &types.SetIdentityHeadersInNotificationsEnabledInput{
 		Enabled:          aws.Bool(true),
 		Identity:         aws.String("user@example.com"),
-		NotificationType: ses.NotificationTypeBounce,
+		NotificationType: enums.NotificationTypeBounce,
 	}
 
 	req := svc.SetIdentityHeadersInNotificationsEnabledRequest(input)
@@ -1304,8 +1306,8 @@ func ExampleClient_SetIdentityMailFromDomainRequest_shared00() {
 	}
 
 	svc := ses.New(cfg)
-	input := &ses.SetIdentityMailFromDomainInput{
-		BehaviorOnMXFailure: ses.BehaviorOnMXFailureUseDefaultValue,
+	input := &types.SetIdentityMailFromDomainInput{
+		BehaviorOnMXFailure: enums.BehaviorOnMXFailureUseDefaultValue,
 		Identity:            aws.String("user@example.com"),
 		MailFromDomain:      aws.String("bounces.example.com"),
 	}
@@ -1341,9 +1343,9 @@ func ExampleClient_SetIdentityNotificationTopicRequest_shared00() {
 	}
 
 	svc := ses.New(cfg)
-	input := &ses.SetIdentityNotificationTopicInput{
+	input := &types.SetIdentityNotificationTopicInput{
 		Identity:         aws.String("user@example.com"),
-		NotificationType: ses.NotificationTypeBounce,
+		NotificationType: enums.NotificationTypeBounce,
 		SnsTopic:         aws.String("arn:aws:sns:us-west-2:111122223333:MyTopic"),
 	}
 
@@ -1376,7 +1378,7 @@ func ExampleClient_SetReceiptRulePositionRequest_shared00() {
 	}
 
 	svc := ses.New(cfg)
-	input := &ses.SetReceiptRulePositionInput{
+	input := &types.SetReceiptRulePositionInput{
 		After:       aws.String("PutRuleAfterThisRule"),
 		RuleName:    aws.String("RuleToReposition"),
 		RuleSetName: aws.String("MyRuleSet"),
@@ -1415,7 +1417,7 @@ func ExampleClient_UpdateAccountSendingEnabledRequest_shared00() {
 	}
 
 	svc := ses.New(cfg)
-	input := &ses.UpdateAccountSendingEnabledInput{
+	input := &types.UpdateAccountSendingEnabledInput{
 		Enabled: aws.Bool(true),
 	}
 
@@ -1448,7 +1450,7 @@ func ExampleClient_UpdateConfigurationSetReputationMetricsEnabledRequest_shared0
 	}
 
 	svc := ses.New(cfg)
-	input := &ses.UpdateConfigurationSetReputationMetricsEnabledInput{
+	input := &types.UpdateConfigurationSetReputationMetricsEnabledInput{
 		ConfigurationSetName: aws.String("foo"),
 		Enabled:              aws.Bool(true),
 	}
@@ -1484,7 +1486,7 @@ func ExampleClient_UpdateConfigurationSetSendingEnabledRequest_shared00() {
 	}
 
 	svc := ses.New(cfg)
-	input := &ses.UpdateConfigurationSetSendingEnabledInput{
+	input := &types.UpdateConfigurationSetSendingEnabledInput{
 		ConfigurationSetName: aws.String("foo"),
 		Enabled:              aws.Bool(true),
 	}
@@ -1520,15 +1522,15 @@ func ExampleClient_UpdateReceiptRuleRequest_shared00() {
 	}
 
 	svc := ses.New(cfg)
-	input := &ses.UpdateReceiptRuleInput{
-		Rule: &ses.ReceiptRule{
-			Actions: []ses.ReceiptAction{
+	input := &types.UpdateReceiptRuleInput{
+		Rule: &types.ReceiptRule{
+			Actions: []types.ReceiptAction{
 				{},
 			},
 			Enabled:     aws.Bool(true),
 			Name:        aws.String("MyRule"),
 			ScanEnabled: aws.Bool(true),
-			TlsPolicy:   ses.TlsPolicyOptional,
+			TlsPolicy:   enums.TlsPolicyOptional,
 		},
 		RuleSetName: aws.String("MyRuleSet"),
 	}
@@ -1575,7 +1577,7 @@ func ExampleClient_VerifyDomainDkimRequest_shared00() {
 	}
 
 	svc := ses.New(cfg)
-	input := &ses.VerifyDomainDkimInput{
+	input := &types.VerifyDomainDkimInput{
 		Domain: aws.String("example.com"),
 	}
 
@@ -1608,7 +1610,7 @@ func ExampleClient_VerifyDomainIdentityRequest_shared00() {
 	}
 
 	svc := ses.New(cfg)
-	input := &ses.VerifyDomainIdentityInput{
+	input := &types.VerifyDomainIdentityInput{
 		Domain: aws.String("example.com"),
 	}
 
@@ -1641,7 +1643,7 @@ func ExampleClient_VerifyEmailAddressRequest_shared00() {
 	}
 
 	svc := ses.New(cfg)
-	input := &ses.VerifyEmailAddressInput{
+	input := &types.VerifyEmailAddressInput{
 		EmailAddress: aws.String("user@example.com"),
 	}
 
@@ -1674,7 +1676,7 @@ func ExampleClient_VerifyEmailIdentityRequest_shared00() {
 	}
 
 	svc := ses.New(cfg)
-	input := &ses.VerifyEmailIdentityInput{
+	input := &types.VerifyEmailIdentityInput{
 		EmailAddress: aws.String("user@example.com"),
 	}
 

@@ -6,97 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/pinpoint/types"
 )
-
-type CreateExportJobInput struct {
-	_ struct{} `type:"structure" payload:"ExportJobRequest"`
-
-	// ApplicationId is a required field
-	ApplicationId *string `location:"uri" locationName:"application-id" type:"string" required:"true"`
-
-	// Specifies the settings for a job that exports endpoint definitions to an
-	// Amazon Simple Storage Service (Amazon S3) bucket.
-	//
-	// ExportJobRequest is a required field
-	ExportJobRequest *ExportJobRequest `type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s CreateExportJobInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateExportJobInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateExportJobInput"}
-
-	if s.ApplicationId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ApplicationId"))
-	}
-
-	if s.ExportJobRequest == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ExportJobRequest"))
-	}
-	if s.ExportJobRequest != nil {
-		if err := s.ExportJobRequest.Validate(); err != nil {
-			invalidParams.AddNested("ExportJobRequest", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s CreateExportJobInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.ApplicationId != nil {
-		v := *s.ApplicationId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "application-id", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.ExportJobRequest != nil {
-		v := s.ExportJobRequest
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.PayloadTarget, "ExportJobRequest", v, metadata)
-	}
-	return nil
-}
-
-type CreateExportJobOutput struct {
-	_ struct{} `type:"structure" payload:"ExportJobResponse"`
-
-	// Provides information about the status and settings of a job that exports
-	// endpoint definitions to a file. The file can be added directly to an Amazon
-	// Simple Storage Service (Amazon S3) bucket by using the Amazon Pinpoint API
-	// or downloaded directly to a computer by using the Amazon Pinpoint console.
-	//
-	// ExportJobResponse is a required field
-	ExportJobResponse *ExportJobResponse `type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s CreateExportJobOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s CreateExportJobOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.ExportJobResponse != nil {
-		v := s.ExportJobResponse
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.PayloadTarget, "ExportJobResponse", v, metadata)
-	}
-	return nil
-}
 
 const opCreateExportJob = "CreateExportJob"
 
@@ -113,7 +24,7 @@ const opCreateExportJob = "CreateExportJob"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/CreateExportJob
-func (c *Client) CreateExportJobRequest(input *CreateExportJobInput) CreateExportJobRequest {
+func (c *Client) CreateExportJobRequest(input *types.CreateExportJobInput) CreateExportJobRequest {
 	op := &aws.Operation{
 		Name:       opCreateExportJob,
 		HTTPMethod: "POST",
@@ -121,10 +32,10 @@ func (c *Client) CreateExportJobRequest(input *CreateExportJobInput) CreateExpor
 	}
 
 	if input == nil {
-		input = &CreateExportJobInput{}
+		input = &types.CreateExportJobInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateExportJobOutput{})
+	req := c.newRequest(op, input, &types.CreateExportJobOutput{})
 	return CreateExportJobRequest{Request: req, Input: input, Copy: c.CreateExportJobRequest}
 }
 
@@ -132,8 +43,8 @@ func (c *Client) CreateExportJobRequest(input *CreateExportJobInput) CreateExpor
 // CreateExportJob API operation.
 type CreateExportJobRequest struct {
 	*aws.Request
-	Input *CreateExportJobInput
-	Copy  func(*CreateExportJobInput) CreateExportJobRequest
+	Input *types.CreateExportJobInput
+	Copy  func(*types.CreateExportJobInput) CreateExportJobRequest
 }
 
 // Send marshals and sends the CreateExportJob API request.
@@ -145,7 +56,7 @@ func (r CreateExportJobRequest) Send(ctx context.Context) (*CreateExportJobRespo
 	}
 
 	resp := &CreateExportJobResponse{
-		CreateExportJobOutput: r.Request.Data.(*CreateExportJobOutput),
+		CreateExportJobOutput: r.Request.Data.(*types.CreateExportJobOutput),
 		response:              &aws.Response{Request: r.Request},
 	}
 
@@ -155,7 +66,7 @@ func (r CreateExportJobRequest) Send(ctx context.Context) (*CreateExportJobRespo
 // CreateExportJobResponse is the response type for the
 // CreateExportJob API operation.
 type CreateExportJobResponse struct {
-	*CreateExportJobOutput
+	*types.CreateExportJobOutput
 
 	response *aws.Response
 }

@@ -6,123 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/appmesh/types"
 )
-
-type UpdateVirtualServiceInput struct {
-	_ struct{} `type:"structure"`
-
-	ClientToken *string `locationName:"clientToken" type:"string" idempotencyToken:"true"`
-
-	// MeshName is a required field
-	MeshName *string `location:"uri" locationName:"meshName" min:"1" type:"string" required:"true"`
-
-	// An object representing the specification of a virtual service.
-	//
-	// Spec is a required field
-	Spec *VirtualServiceSpec `locationName:"spec" type:"structure" required:"true"`
-
-	// VirtualServiceName is a required field
-	VirtualServiceName *string `location:"uri" locationName:"virtualServiceName" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s UpdateVirtualServiceInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateVirtualServiceInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateVirtualServiceInput"}
-
-	if s.MeshName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("MeshName"))
-	}
-	if s.MeshName != nil && len(*s.MeshName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("MeshName", 1))
-	}
-
-	if s.Spec == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Spec"))
-	}
-
-	if s.VirtualServiceName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("VirtualServiceName"))
-	}
-	if s.Spec != nil {
-		if err := s.Spec.Validate(); err != nil {
-			invalidParams.AddNested("Spec", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s UpdateVirtualServiceInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	var ClientToken string
-	if s.ClientToken != nil {
-		ClientToken = *s.ClientToken
-	} else {
-		ClientToken = protocol.GetIdempotencyToken()
-	}
-	{
-		v := ClientToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "clientToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Spec != nil {
-		v := s.Spec
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "spec", v, metadata)
-	}
-	if s.MeshName != nil {
-		v := *s.MeshName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "meshName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.VirtualServiceName != nil {
-		v := *s.VirtualServiceName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "virtualServiceName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type UpdateVirtualServiceOutput struct {
-	_ struct{} `type:"structure" payload:"VirtualService"`
-
-	// An object representing a virtual service returned by a describe operation.
-	//
-	// VirtualService is a required field
-	VirtualService *VirtualServiceData `locationName:"virtualService" type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s UpdateVirtualServiceOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s UpdateVirtualServiceOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.VirtualService != nil {
-		v := s.VirtualService
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.PayloadTarget, "virtualService", v, metadata)
-	}
-	return nil
-}
 
 const opUpdateVirtualService = "UpdateVirtualService"
 
@@ -139,7 +24,7 @@ const opUpdateVirtualService = "UpdateVirtualService"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/UpdateVirtualService
-func (c *Client) UpdateVirtualServiceRequest(input *UpdateVirtualServiceInput) UpdateVirtualServiceRequest {
+func (c *Client) UpdateVirtualServiceRequest(input *types.UpdateVirtualServiceInput) UpdateVirtualServiceRequest {
 	op := &aws.Operation{
 		Name:       opUpdateVirtualService,
 		HTTPMethod: "PUT",
@@ -147,10 +32,10 @@ func (c *Client) UpdateVirtualServiceRequest(input *UpdateVirtualServiceInput) U
 	}
 
 	if input == nil {
-		input = &UpdateVirtualServiceInput{}
+		input = &types.UpdateVirtualServiceInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateVirtualServiceOutput{})
+	req := c.newRequest(op, input, &types.UpdateVirtualServiceOutput{})
 	return UpdateVirtualServiceRequest{Request: req, Input: input, Copy: c.UpdateVirtualServiceRequest}
 }
 
@@ -158,8 +43,8 @@ func (c *Client) UpdateVirtualServiceRequest(input *UpdateVirtualServiceInput) U
 // UpdateVirtualService API operation.
 type UpdateVirtualServiceRequest struct {
 	*aws.Request
-	Input *UpdateVirtualServiceInput
-	Copy  func(*UpdateVirtualServiceInput) UpdateVirtualServiceRequest
+	Input *types.UpdateVirtualServiceInput
+	Copy  func(*types.UpdateVirtualServiceInput) UpdateVirtualServiceRequest
 }
 
 // Send marshals and sends the UpdateVirtualService API request.
@@ -171,7 +56,7 @@ func (r UpdateVirtualServiceRequest) Send(ctx context.Context) (*UpdateVirtualSe
 	}
 
 	resp := &UpdateVirtualServiceResponse{
-		UpdateVirtualServiceOutput: r.Request.Data.(*UpdateVirtualServiceOutput),
+		UpdateVirtualServiceOutput: r.Request.Data.(*types.UpdateVirtualServiceOutput),
 		response:                   &aws.Response{Request: r.Request},
 	}
 
@@ -181,7 +66,7 @@ func (r UpdateVirtualServiceRequest) Send(ctx context.Context) (*UpdateVirtualSe
 // UpdateVirtualServiceResponse is the response type for the
 // UpdateVirtualService API operation.
 type UpdateVirtualServiceResponse struct {
-	*UpdateVirtualServiceOutput
+	*types.UpdateVirtualServiceOutput
 
 	response *aws.Response
 }

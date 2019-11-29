@@ -6,53 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/datapipeline/types"
 )
-
-// Contains the parameters for DescribePipelines.
-type DescribePipelinesInput struct {
-	_ struct{} `type:"structure"`
-
-	// The IDs of the pipelines to describe. You can pass as many as 25 identifiers
-	// in a single call. To obtain pipeline IDs, call ListPipelines.
-	//
-	// PipelineIds is a required field
-	PipelineIds []string `locationName:"pipelineIds" type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribePipelinesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribePipelinesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribePipelinesInput"}
-
-	if s.PipelineIds == nil {
-		invalidParams.Add(aws.NewErrParamRequired("PipelineIds"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Contains the output of DescribePipelines.
-type DescribePipelinesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// An array of descriptions for the specified pipelines.
-	//
-	// PipelineDescriptionList is a required field
-	PipelineDescriptionList []PipelineDescription `locationName:"pipelineDescriptionList" type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribePipelinesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribePipelines = "DescribePipelines"
 
@@ -77,7 +32,7 @@ const opDescribePipelines = "DescribePipelines"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/datapipeline-2012-10-29/DescribePipelines
-func (c *Client) DescribePipelinesRequest(input *DescribePipelinesInput) DescribePipelinesRequest {
+func (c *Client) DescribePipelinesRequest(input *types.DescribePipelinesInput) DescribePipelinesRequest {
 	op := &aws.Operation{
 		Name:       opDescribePipelines,
 		HTTPMethod: "POST",
@@ -85,10 +40,10 @@ func (c *Client) DescribePipelinesRequest(input *DescribePipelinesInput) Describ
 	}
 
 	if input == nil {
-		input = &DescribePipelinesInput{}
+		input = &types.DescribePipelinesInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribePipelinesOutput{})
+	req := c.newRequest(op, input, &types.DescribePipelinesOutput{})
 	return DescribePipelinesRequest{Request: req, Input: input, Copy: c.DescribePipelinesRequest}
 }
 
@@ -96,8 +51,8 @@ func (c *Client) DescribePipelinesRequest(input *DescribePipelinesInput) Describ
 // DescribePipelines API operation.
 type DescribePipelinesRequest struct {
 	*aws.Request
-	Input *DescribePipelinesInput
-	Copy  func(*DescribePipelinesInput) DescribePipelinesRequest
+	Input *types.DescribePipelinesInput
+	Copy  func(*types.DescribePipelinesInput) DescribePipelinesRequest
 }
 
 // Send marshals and sends the DescribePipelines API request.
@@ -109,7 +64,7 @@ func (r DescribePipelinesRequest) Send(ctx context.Context) (*DescribePipelinesR
 	}
 
 	resp := &DescribePipelinesResponse{
-		DescribePipelinesOutput: r.Request.Data.(*DescribePipelinesOutput),
+		DescribePipelinesOutput: r.Request.Data.(*types.DescribePipelinesOutput),
 		response:                &aws.Response{Request: r.Request},
 	}
 
@@ -119,7 +74,7 @@ func (r DescribePipelinesRequest) Send(ctx context.Context) (*DescribePipelinesR
 // DescribePipelinesResponse is the response type for the
 // DescribePipelines API operation.
 type DescribePipelinesResponse struct {
-	*DescribePipelinesOutput
+	*types.DescribePipelinesOutput
 
 	response *aws.Response
 }

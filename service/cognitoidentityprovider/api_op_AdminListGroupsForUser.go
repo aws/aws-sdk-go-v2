@@ -6,77 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/types"
 )
-
-type AdminListGroupsForUserInput struct {
-	_ struct{} `type:"structure"`
-
-	// The limit of the request to list groups.
-	Limit *int64 `type:"integer"`
-
-	// An identifier that was returned from the previous call to this operation,
-	// which can be used to return the next set of items in the list.
-	NextToken *string `min:"1" type:"string"`
-
-	// The user pool ID for the user pool.
-	//
-	// UserPoolId is a required field
-	UserPoolId *string `min:"1" type:"string" required:"true"`
-
-	// The username for the user.
-	//
-	// Username is a required field
-	Username *string `min:"1" type:"string" required:"true" sensitive:"true"`
-}
-
-// String returns the string representation
-func (s AdminListGroupsForUserInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *AdminListGroupsForUserInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "AdminListGroupsForUserInput"}
-	if s.NextToken != nil && len(*s.NextToken) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
-	}
-
-	if s.UserPoolId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("UserPoolId"))
-	}
-	if s.UserPoolId != nil && len(*s.UserPoolId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("UserPoolId", 1))
-	}
-
-	if s.Username == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Username"))
-	}
-	if s.Username != nil && len(*s.Username) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Username", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type AdminListGroupsForUserOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The groups that the user belongs to.
-	Groups []GroupType `type:"list"`
-
-	// An identifier that was returned from the previous call to this operation,
-	// which can be used to return the next set of items in the list.
-	NextToken *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s AdminListGroupsForUserOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opAdminListGroupsForUser = "AdminListGroupsForUser"
 
@@ -95,7 +26,7 @@ const opAdminListGroupsForUser = "AdminListGroupsForUser"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AdminListGroupsForUser
-func (c *Client) AdminListGroupsForUserRequest(input *AdminListGroupsForUserInput) AdminListGroupsForUserRequest {
+func (c *Client) AdminListGroupsForUserRequest(input *types.AdminListGroupsForUserInput) AdminListGroupsForUserRequest {
 	op := &aws.Operation{
 		Name:       opAdminListGroupsForUser,
 		HTTPMethod: "POST",
@@ -109,10 +40,10 @@ func (c *Client) AdminListGroupsForUserRequest(input *AdminListGroupsForUserInpu
 	}
 
 	if input == nil {
-		input = &AdminListGroupsForUserInput{}
+		input = &types.AdminListGroupsForUserInput{}
 	}
 
-	req := c.newRequest(op, input, &AdminListGroupsForUserOutput{})
+	req := c.newRequest(op, input, &types.AdminListGroupsForUserOutput{})
 	return AdminListGroupsForUserRequest{Request: req, Input: input, Copy: c.AdminListGroupsForUserRequest}
 }
 
@@ -120,8 +51,8 @@ func (c *Client) AdminListGroupsForUserRequest(input *AdminListGroupsForUserInpu
 // AdminListGroupsForUser API operation.
 type AdminListGroupsForUserRequest struct {
 	*aws.Request
-	Input *AdminListGroupsForUserInput
-	Copy  func(*AdminListGroupsForUserInput) AdminListGroupsForUserRequest
+	Input *types.AdminListGroupsForUserInput
+	Copy  func(*types.AdminListGroupsForUserInput) AdminListGroupsForUserRequest
 }
 
 // Send marshals and sends the AdminListGroupsForUser API request.
@@ -133,7 +64,7 @@ func (r AdminListGroupsForUserRequest) Send(ctx context.Context) (*AdminListGrou
 	}
 
 	resp := &AdminListGroupsForUserResponse{
-		AdminListGroupsForUserOutput: r.Request.Data.(*AdminListGroupsForUserOutput),
+		AdminListGroupsForUserOutput: r.Request.Data.(*types.AdminListGroupsForUserOutput),
 		response:                     &aws.Response{Request: r.Request},
 	}
 
@@ -163,7 +94,7 @@ func NewAdminListGroupsForUserPaginator(req AdminListGroupsForUserRequest) Admin
 	return AdminListGroupsForUserPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *AdminListGroupsForUserInput
+				var inCpy *types.AdminListGroupsForUserInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -183,14 +114,14 @@ type AdminListGroupsForUserPaginator struct {
 	aws.Pager
 }
 
-func (p *AdminListGroupsForUserPaginator) CurrentPage() *AdminListGroupsForUserOutput {
-	return p.Pager.CurrentPage().(*AdminListGroupsForUserOutput)
+func (p *AdminListGroupsForUserPaginator) CurrentPage() *types.AdminListGroupsForUserOutput {
+	return p.Pager.CurrentPage().(*types.AdminListGroupsForUserOutput)
 }
 
 // AdminListGroupsForUserResponse is the response type for the
 // AdminListGroupsForUser API operation.
 type AdminListGroupsForUserResponse struct {
-	*AdminListGroupsForUserOutput
+	*types.AdminListGroupsForUserOutput
 
 	response *aws.Response
 }

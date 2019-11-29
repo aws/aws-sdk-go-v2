@@ -6,57 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/sns/types"
 )
-
-// Input for ListSubscriptionsByTopic action.
-type ListSubscriptionsByTopicInput struct {
-	_ struct{} `type:"structure"`
-
-	// Token returned by the previous ListSubscriptionsByTopic request.
-	NextToken *string `type:"string"`
-
-	// The ARN of the topic for which you wish to find subscriptions.
-	//
-	// TopicArn is a required field
-	TopicArn *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s ListSubscriptionsByTopicInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListSubscriptionsByTopicInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListSubscriptionsByTopicInput"}
-
-	if s.TopicArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("TopicArn"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Response for ListSubscriptionsByTopic action.
-type ListSubscriptionsByTopicOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Token to pass along to the next ListSubscriptionsByTopic request. This element
-	// is returned if there are more subscriptions to retrieve.
-	NextToken *string `type:"string"`
-
-	// A list of subscriptions.
-	Subscriptions []Subscription `type:"list"`
-}
-
-// String returns the string representation
-func (s ListSubscriptionsByTopicOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListSubscriptionsByTopic = "ListSubscriptionsByTopic"
 
@@ -78,7 +29,7 @@ const opListSubscriptionsByTopic = "ListSubscriptionsByTopic"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/ListSubscriptionsByTopic
-func (c *Client) ListSubscriptionsByTopicRequest(input *ListSubscriptionsByTopicInput) ListSubscriptionsByTopicRequest {
+func (c *Client) ListSubscriptionsByTopicRequest(input *types.ListSubscriptionsByTopicInput) ListSubscriptionsByTopicRequest {
 	op := &aws.Operation{
 		Name:       opListSubscriptionsByTopic,
 		HTTPMethod: "POST",
@@ -92,10 +43,10 @@ func (c *Client) ListSubscriptionsByTopicRequest(input *ListSubscriptionsByTopic
 	}
 
 	if input == nil {
-		input = &ListSubscriptionsByTopicInput{}
+		input = &types.ListSubscriptionsByTopicInput{}
 	}
 
-	req := c.newRequest(op, input, &ListSubscriptionsByTopicOutput{})
+	req := c.newRequest(op, input, &types.ListSubscriptionsByTopicOutput{})
 	return ListSubscriptionsByTopicRequest{Request: req, Input: input, Copy: c.ListSubscriptionsByTopicRequest}
 }
 
@@ -103,8 +54,8 @@ func (c *Client) ListSubscriptionsByTopicRequest(input *ListSubscriptionsByTopic
 // ListSubscriptionsByTopic API operation.
 type ListSubscriptionsByTopicRequest struct {
 	*aws.Request
-	Input *ListSubscriptionsByTopicInput
-	Copy  func(*ListSubscriptionsByTopicInput) ListSubscriptionsByTopicRequest
+	Input *types.ListSubscriptionsByTopicInput
+	Copy  func(*types.ListSubscriptionsByTopicInput) ListSubscriptionsByTopicRequest
 }
 
 // Send marshals and sends the ListSubscriptionsByTopic API request.
@@ -116,7 +67,7 @@ func (r ListSubscriptionsByTopicRequest) Send(ctx context.Context) (*ListSubscri
 	}
 
 	resp := &ListSubscriptionsByTopicResponse{
-		ListSubscriptionsByTopicOutput: r.Request.Data.(*ListSubscriptionsByTopicOutput),
+		ListSubscriptionsByTopicOutput: r.Request.Data.(*types.ListSubscriptionsByTopicOutput),
 		response:                       &aws.Response{Request: r.Request},
 	}
 
@@ -146,7 +97,7 @@ func NewListSubscriptionsByTopicPaginator(req ListSubscriptionsByTopicRequest) L
 	return ListSubscriptionsByTopicPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListSubscriptionsByTopicInput
+				var inCpy *types.ListSubscriptionsByTopicInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -166,14 +117,14 @@ type ListSubscriptionsByTopicPaginator struct {
 	aws.Pager
 }
 
-func (p *ListSubscriptionsByTopicPaginator) CurrentPage() *ListSubscriptionsByTopicOutput {
-	return p.Pager.CurrentPage().(*ListSubscriptionsByTopicOutput)
+func (p *ListSubscriptionsByTopicPaginator) CurrentPage() *types.ListSubscriptionsByTopicOutput {
+	return p.Pager.CurrentPage().(*types.ListSubscriptionsByTopicOutput)
 }
 
 // ListSubscriptionsByTopicResponse is the response type for the
 // ListSubscriptionsByTopic API operation.
 type ListSubscriptionsByTopicResponse struct {
-	*ListSubscriptionsByTopicOutput
+	*types.ListSubscriptionsByTopicOutput
 
 	response *aws.Response
 }

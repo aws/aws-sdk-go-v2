@@ -6,48 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/personalize/types"
 )
-
-type DescribeDatasetGroupInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the dataset group to describe.
-	//
-	// DatasetGroupArn is a required field
-	DatasetGroupArn *string `locationName:"datasetGroupArn" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeDatasetGroupInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeDatasetGroupInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeDatasetGroupInput"}
-
-	if s.DatasetGroupArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DatasetGroupArn"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribeDatasetGroupOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A listing of the dataset group's properties.
-	DatasetGroup *DatasetGroup `locationName:"datasetGroup" type:"structure"`
-}
-
-// String returns the string representation
-func (s DescribeDatasetGroupOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeDatasetGroup = "DescribeDatasetGroup"
 
@@ -65,7 +25,7 @@ const opDescribeDatasetGroup = "DescribeDatasetGroup"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/DescribeDatasetGroup
-func (c *Client) DescribeDatasetGroupRequest(input *DescribeDatasetGroupInput) DescribeDatasetGroupRequest {
+func (c *Client) DescribeDatasetGroupRequest(input *types.DescribeDatasetGroupInput) DescribeDatasetGroupRequest {
 	op := &aws.Operation{
 		Name:       opDescribeDatasetGroup,
 		HTTPMethod: "POST",
@@ -73,10 +33,10 @@ func (c *Client) DescribeDatasetGroupRequest(input *DescribeDatasetGroupInput) D
 	}
 
 	if input == nil {
-		input = &DescribeDatasetGroupInput{}
+		input = &types.DescribeDatasetGroupInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeDatasetGroupOutput{})
+	req := c.newRequest(op, input, &types.DescribeDatasetGroupOutput{})
 	return DescribeDatasetGroupRequest{Request: req, Input: input, Copy: c.DescribeDatasetGroupRequest}
 }
 
@@ -84,8 +44,8 @@ func (c *Client) DescribeDatasetGroupRequest(input *DescribeDatasetGroupInput) D
 // DescribeDatasetGroup API operation.
 type DescribeDatasetGroupRequest struct {
 	*aws.Request
-	Input *DescribeDatasetGroupInput
-	Copy  func(*DescribeDatasetGroupInput) DescribeDatasetGroupRequest
+	Input *types.DescribeDatasetGroupInput
+	Copy  func(*types.DescribeDatasetGroupInput) DescribeDatasetGroupRequest
 }
 
 // Send marshals and sends the DescribeDatasetGroup API request.
@@ -97,7 +57,7 @@ func (r DescribeDatasetGroupRequest) Send(ctx context.Context) (*DescribeDataset
 	}
 
 	resp := &DescribeDatasetGroupResponse{
-		DescribeDatasetGroupOutput: r.Request.Data.(*DescribeDatasetGroupOutput),
+		DescribeDatasetGroupOutput: r.Request.Data.(*types.DescribeDatasetGroupOutput),
 		response:                   &aws.Response{Request: r.Request},
 	}
 
@@ -107,7 +67,7 @@ func (r DescribeDatasetGroupRequest) Send(ctx context.Context) (*DescribeDataset
 // DescribeDatasetGroupResponse is the response type for the
 // DescribeDatasetGroup API operation.
 type DescribeDatasetGroupResponse struct {
-	*DescribeDatasetGroupOutput
+	*types.DescribeDatasetGroupOutput
 
 	response *aws.Response
 }

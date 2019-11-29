@@ -12,6 +12,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws/awserr"
 	"github.com/aws/aws-sdk-go-v2/aws/external"
 	"github.com/aws/aws-sdk-go-v2/service/storagegateway"
+	"github.com/aws/aws-sdk-go-v2/service/storagegateway/types"
 )
 
 var _ time.Duration
@@ -36,7 +37,7 @@ func ExampleClient_ActivateGatewayRequest_shared00() {
 	}
 
 	svc := storagegateway.New(cfg)
-	input := &storagegateway.ActivateGatewayInput{
+	input := &types.ActivateGatewayInput{
 		ActivationKey:     aws.String("29AV1-3OFV9-VVIUB-NKT0I-LRO6V"),
 		GatewayName:       aws.String("My_Gateway"),
 		GatewayRegion:     aws.String("us-east-1"),
@@ -79,7 +80,7 @@ func ExampleClient_AddCacheRequest_shared00() {
 	}
 
 	svc := storagegateway.New(cfg)
-	input := &storagegateway.AddCacheInput{
+	input := &types.AddCacheInput{
 		DiskIds: []string{
 			"pci-0000:03:00.0-scsi-0:0:0:0",
 			"pci-0000:03:00.0-scsi-0:0:1:0",
@@ -120,9 +121,9 @@ func ExampleClient_AddTagsToResourceRequest_shared00() {
 	}
 
 	svc := storagegateway.New(cfg)
-	input := &storagegateway.AddTagsToResourceInput{
+	input := &types.AddTagsToResourceInput{
 		ResourceARN: aws.String("arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-11A2222B"),
-		Tags: []storagegateway.Tag{
+		Tags: []types.Tag{
 			{
 				Key:   aws.String("Dev Gatgeway Region"),
 				Value: aws.String("East Coast"),
@@ -163,7 +164,7 @@ func ExampleClient_AddUploadBufferRequest_shared00() {
 	}
 
 	svc := storagegateway.New(cfg)
-	input := &storagegateway.AddUploadBufferInput{
+	input := &types.AddUploadBufferInput{
 		DiskIds: []string{
 			"pci-0000:03:00.0-scsi-0:0:0:0",
 			"pci-0000:03:00.0-scsi-0:0:1:0",
@@ -205,7 +206,7 @@ func ExampleClient_AddWorkingStorageRequest_shared00() {
 	}
 
 	svc := storagegateway.New(cfg)
-	input := &storagegateway.AddWorkingStorageInput{
+	input := &types.AddWorkingStorageInput{
 		DiskIds: []string{
 			"pci-0000:03:00.0-scsi-0:0:0:0",
 			"pci-0000:03:00.0-scsi-0:0:1:0",
@@ -247,7 +248,7 @@ func ExampleClient_CancelArchivalRequest_shared00() {
 	}
 
 	svc := storagegateway.New(cfg)
-	input := &storagegateway.CancelArchivalInput{
+	input := &types.CancelArchivalInput{
 		GatewayARN: aws.String("arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B"),
 		TapeARN:    aws.String("arn:aws:storagegateway:us-east-1:999999999999:tape/AMZN01A2A4"),
 	}
@@ -286,7 +287,7 @@ func ExampleClient_CancelRetrievalRequest_shared00() {
 	}
 
 	svc := storagegateway.New(cfg)
-	input := &storagegateway.CancelRetrievalInput{
+	input := &types.CancelRetrievalInput{
 		GatewayARN: aws.String("arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B"),
 		TapeARN:    aws.String("arn:aws:storagegateway:us-east-1:999999999999:tape/AMZN01A2A4"),
 	}
@@ -324,7 +325,7 @@ func ExampleClient_CreateCachediSCSIVolumeRequest_shared00() {
 	}
 
 	svc := storagegateway.New(cfg)
-	input := &storagegateway.CreateCachediSCSIVolumeInput{
+	input := &types.CreateCachediSCSIVolumeInput{
 		ClientToken:        aws.String("cachedvol112233"),
 		GatewayARN:         aws.String("arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B"),
 		NetworkInterfaceId: aws.String("10.1.1.1"),
@@ -366,7 +367,7 @@ func ExampleClient_CreateSnapshotRequest_shared00() {
 	}
 
 	svc := storagegateway.New(cfg)
-	input := &storagegateway.CreateSnapshotInput{
+	input := &types.CreateSnapshotInput{
 		SnapshotDescription: aws.String("My root volume snapshot as of 10/03/2017"),
 		VolumeARN:           aws.String("arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B/volume/vol-1122AABB"),
 	}
@@ -406,7 +407,7 @@ func ExampleClient_CreateSnapshotFromVolumeRecoveryPointRequest_shared00() {
 	}
 
 	svc := storagegateway.New(cfg)
-	input := &storagegateway.CreateSnapshotFromVolumeRecoveryPointInput{
+	input := &types.CreateSnapshotFromVolumeRecoveryPointInput{
 		SnapshotDescription: aws.String("My root volume snapshot as of 2017-06-30T10:10:10.000Z"),
 		VolumeARN:           aws.String("arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B/volume/vol-1122AABB"),
 	}
@@ -446,7 +447,7 @@ func ExampleClient_CreateStorediSCSIVolumeRequest_shared00() {
 	}
 
 	svc := storagegateway.New(cfg)
-	input := &storagegateway.CreateStorediSCSIVolumeInput{
+	input := &types.CreateStorediSCSIVolumeInput{
 		DiskId:               aws.String("pci-0000:03:00.0-scsi-0:0:0:0"),
 		GatewayARN:           aws.String("arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B"),
 		NetworkInterfaceId:   aws.String("10.1.1.1"),
@@ -488,7 +489,7 @@ func ExampleClient_CreateTapeWithBarcodeRequest_shared00() {
 	}
 
 	svc := storagegateway.New(cfg)
-	input := &storagegateway.CreateTapeWithBarcodeInput{
+	input := &types.CreateTapeWithBarcodeInput{
 		GatewayARN:      aws.String("arn:aws:storagegateway:us-east-1:999999999999:gateway/sgw-12A3456B"),
 		TapeBarcode:     aws.String("TEST12345"),
 		TapeSizeInBytes: aws.Int64(107374182400),
@@ -527,7 +528,7 @@ func ExampleClient_CreateTapesRequest_shared00() {
 	}
 
 	svc := storagegateway.New(cfg)
-	input := &storagegateway.CreateTapesInput{
+	input := &types.CreateTapesInput{
 		ClientToken:       aws.String("77777"),
 		GatewayARN:        aws.String("arn:aws:storagegateway:us-east-1:999999999999:gateway/sgw-12A3456B"),
 		NumTapesToCreate:  aws.Int64(3),
@@ -569,7 +570,7 @@ func ExampleClient_DeleteBandwidthRateLimitRequest_shared00() {
 	}
 
 	svc := storagegateway.New(cfg)
-	input := &storagegateway.DeleteBandwidthRateLimitInput{
+	input := &types.DeleteBandwidthRateLimitInput{
 		BandwidthType: aws.String("All"),
 		GatewayARN:    aws.String("arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B"),
 	}
@@ -608,7 +609,7 @@ func ExampleClient_DeleteChapCredentialsRequest_shared00() {
 	}
 
 	svc := storagegateway.New(cfg)
-	input := &storagegateway.DeleteChapCredentialsInput{
+	input := &types.DeleteChapCredentialsInput{
 		InitiatorName: aws.String("iqn.1991-05.com.microsoft:computername.domain.example.com"),
 		TargetARN:     aws.String("arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B/target/iqn.1997-05.com.amazon:myvolume"),
 	}
@@ -646,7 +647,7 @@ func ExampleClient_DeleteGatewayRequest_shared00() {
 	}
 
 	svc := storagegateway.New(cfg)
-	input := &storagegateway.DeleteGatewayInput{
+	input := &types.DeleteGatewayInput{
 		GatewayARN: aws.String("arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B"),
 	}
 
@@ -683,7 +684,7 @@ func ExampleClient_DeleteSnapshotScheduleRequest_shared00() {
 	}
 
 	svc := storagegateway.New(cfg)
-	input := &storagegateway.DeleteSnapshotScheduleInput{
+	input := &types.DeleteSnapshotScheduleInput{
 		VolumeARN: aws.String("arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B/volume/vol-1122AABB"),
 	}
 
@@ -720,7 +721,7 @@ func ExampleClient_DeleteTapeRequest_shared00() {
 	}
 
 	svc := storagegateway.New(cfg)
-	input := &storagegateway.DeleteTapeInput{
+	input := &types.DeleteTapeInput{
 		GatewayARN: aws.String("arn:aws:storagegateway:us-east-1:204469490176:gateway/sgw-12A3456B"),
 		TapeARN:    aws.String("arn:aws:storagegateway:us-east-1:204469490176:tape/TEST05A2A0"),
 	}
@@ -758,7 +759,7 @@ func ExampleClient_DeleteTapeArchiveRequest_shared00() {
 	}
 
 	svc := storagegateway.New(cfg)
-	input := &storagegateway.DeleteTapeArchiveInput{
+	input := &types.DeleteTapeArchiveInput{
 		TapeARN: aws.String("arn:aws:storagegateway:us-east-1:204469490176:tape/TEST05A2A0"),
 	}
 
@@ -796,7 +797,7 @@ func ExampleClient_DeleteVolumeRequest_shared00() {
 	}
 
 	svc := storagegateway.New(cfg)
-	input := &storagegateway.DeleteVolumeInput{
+	input := &types.DeleteVolumeInput{
 		VolumeARN: aws.String("arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B/volume/vol-1122AABB"),
 	}
 
@@ -834,7 +835,7 @@ func ExampleClient_DescribeBandwidthRateLimitRequest_shared00() {
 	}
 
 	svc := storagegateway.New(cfg)
-	input := &storagegateway.DescribeBandwidthRateLimitInput{
+	input := &types.DescribeBandwidthRateLimitInput{
 		GatewayARN: aws.String("arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B"),
 	}
 
@@ -871,7 +872,7 @@ func ExampleClient_DescribeCacheRequest_shared00() {
 	}
 
 	svc := storagegateway.New(cfg)
-	input := &storagegateway.DescribeCacheInput{
+	input := &types.DescribeCacheInput{
 		GatewayARN: aws.String("arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B"),
 	}
 
@@ -908,7 +909,7 @@ func ExampleClient_DescribeCachediSCSIVolumesRequest_shared00() {
 	}
 
 	svc := storagegateway.New(cfg)
-	input := &storagegateway.DescribeCachediSCSIVolumesInput{
+	input := &types.DescribeCachediSCSIVolumesInput{
 		VolumeARNs: []string{
 			"arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B/volume/vol-1122AABB",
 		},
@@ -948,7 +949,7 @@ func ExampleClient_DescribeChapCredentialsRequest_shared00() {
 	}
 
 	svc := storagegateway.New(cfg)
-	input := &storagegateway.DescribeChapCredentialsInput{
+	input := &types.DescribeChapCredentialsInput{
 		TargetARN: aws.String("arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B/target/iqn.1997-05.com.amazon:myvolume"),
 	}
 
@@ -986,7 +987,7 @@ func ExampleClient_DescribeGatewayInformationRequest_shared00() {
 	}
 
 	svc := storagegateway.New(cfg)
-	input := &storagegateway.DescribeGatewayInformationInput{
+	input := &types.DescribeGatewayInformationInput{
 		GatewayARN: aws.String("arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B"),
 	}
 
@@ -1024,7 +1025,7 @@ func ExampleClient_DescribeMaintenanceStartTimeRequest_shared00() {
 	}
 
 	svc := storagegateway.New(cfg)
-	input := &storagegateway.DescribeMaintenanceStartTimeInput{
+	input := &types.DescribeMaintenanceStartTimeInput{
 		GatewayARN: aws.String("arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B"),
 	}
 
@@ -1062,7 +1063,7 @@ func ExampleClient_DescribeSnapshotScheduleRequest_shared00() {
 	}
 
 	svc := storagegateway.New(cfg)
-	input := &storagegateway.DescribeSnapshotScheduleInput{
+	input := &types.DescribeSnapshotScheduleInput{
 		VolumeARN: aws.String("arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B/volume/vol-1122AABB"),
 	}
 
@@ -1100,7 +1101,7 @@ func ExampleClient_DescribeStorediSCSIVolumesRequest_shared00() {
 	}
 
 	svc := storagegateway.New(cfg)
-	input := &storagegateway.DescribeStorediSCSIVolumesInput{
+	input := &types.DescribeStorediSCSIVolumesInput{
 		VolumeARNs: []string{
 			"arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B/volume/vol-1122AABB",
 		},
@@ -1139,7 +1140,7 @@ func ExampleClient_DescribeTapeArchivesRequest_shared00() {
 	}
 
 	svc := storagegateway.New(cfg)
-	input := &storagegateway.DescribeTapeArchivesInput{
+	input := &types.DescribeTapeArchivesInput{
 		Limit:  aws.Int64(123),
 		Marker: aws.String("1"),
 		TapeARNs: []string{
@@ -1182,7 +1183,7 @@ func ExampleClient_DescribeTapeRecoveryPointsRequest_shared00() {
 	}
 
 	svc := storagegateway.New(cfg)
-	input := &storagegateway.DescribeTapeRecoveryPointsInput{
+	input := &types.DescribeTapeRecoveryPointsInput{
 		GatewayARN: aws.String("arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B"),
 		Limit:      aws.Int64(1),
 		Marker:     aws.String("1"),
@@ -1222,7 +1223,7 @@ func ExampleClient_DescribeTapesRequest_shared00() {
 	}
 
 	svc := storagegateway.New(cfg)
-	input := &storagegateway.DescribeTapesInput{
+	input := &types.DescribeTapesInput{
 		GatewayARN: aws.String("arn:aws:storagegateway:us-east-1:999999999999:gateway/sgw-12A3456B"),
 		Limit:      aws.Int64(2),
 		Marker:     aws.String("1"),
@@ -1266,7 +1267,7 @@ func ExampleClient_DescribeUploadBufferRequest_shared00() {
 	}
 
 	svc := storagegateway.New(cfg)
-	input := &storagegateway.DescribeUploadBufferInput{
+	input := &types.DescribeUploadBufferInput{
 		GatewayARN: aws.String("arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B"),
 	}
 
@@ -1304,7 +1305,7 @@ func ExampleClient_DescribeUploadBufferRequest_shared01() {
 	}
 
 	svc := storagegateway.New(cfg)
-	input := &storagegateway.DescribeUploadBufferInput{
+	input := &types.DescribeUploadBufferInput{
 		GatewayARN: aws.String("arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B"),
 	}
 
@@ -1341,7 +1342,7 @@ func ExampleClient_DescribeVTLDevicesRequest_shared00() {
 	}
 
 	svc := storagegateway.New(cfg)
-	input := &storagegateway.DescribeVTLDevicesInput{
+	input := &types.DescribeVTLDevicesInput{
 		GatewayARN: aws.String("arn:aws:storagegateway:us-east-1:999999999999:gateway/sgw-12A3456B"),
 		Limit:      aws.Int64(123),
 		Marker:     aws.String("1"),
@@ -1382,7 +1383,7 @@ func ExampleClient_DescribeWorkingStorageRequest_shared00() {
 	}
 
 	svc := storagegateway.New(cfg)
-	input := &storagegateway.DescribeWorkingStorageInput{
+	input := &types.DescribeWorkingStorageInput{
 		GatewayARN: aws.String("arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B"),
 	}
 
@@ -1420,7 +1421,7 @@ func ExampleClient_DisableGatewayRequest_shared00() {
 	}
 
 	svc := storagegateway.New(cfg)
-	input := &storagegateway.DisableGatewayInput{
+	input := &types.DisableGatewayInput{
 		GatewayARN: aws.String("arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B"),
 	}
 
@@ -1458,7 +1459,7 @@ func ExampleClient_ListGatewaysRequest_shared00() {
 	}
 
 	svc := storagegateway.New(cfg)
-	input := &storagegateway.ListGatewaysInput{
+	input := &types.ListGatewaysInput{
 		Limit:  aws.Int64(2),
 		Marker: aws.String("1"),
 	}
@@ -1497,7 +1498,7 @@ func ExampleClient_ListLocalDisksRequest_shared00() {
 	}
 
 	svc := storagegateway.New(cfg)
-	input := &storagegateway.ListLocalDisksInput{
+	input := &types.ListLocalDisksInput{
 		GatewayARN: aws.String("arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B"),
 	}
 
@@ -1534,7 +1535,7 @@ func ExampleClient_ListTagsForResourceRequest_shared00() {
 	}
 
 	svc := storagegateway.New(cfg)
-	input := &storagegateway.ListTagsForResourceInput{
+	input := &types.ListTagsForResourceInput{
 		Limit:       aws.Int64(1),
 		Marker:      aws.String("1"),
 		ResourceARN: aws.String("arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-11A2222B"),
@@ -1574,7 +1575,7 @@ func ExampleClient_ListVolumeRecoveryPointsRequest_shared00() {
 	}
 
 	svc := storagegateway.New(cfg)
-	input := &storagegateway.ListVolumeRecoveryPointsInput{
+	input := &types.ListVolumeRecoveryPointsInput{
 		GatewayARN: aws.String("arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B"),
 	}
 
@@ -1612,7 +1613,7 @@ func ExampleClient_ListVolumesRequest_shared00() {
 	}
 
 	svc := storagegateway.New(cfg)
-	input := &storagegateway.ListVolumesInput{
+	input := &types.ListVolumesInput{
 		GatewayARN: aws.String("arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B"),
 		Limit:      aws.Int64(2),
 		Marker:     aws.String("1"),
@@ -1652,7 +1653,7 @@ func ExampleClient_RemoveTagsFromResourceRequest_shared00() {
 	}
 
 	svc := storagegateway.New(cfg)
-	input := &storagegateway.RemoveTagsFromResourceInput{
+	input := &types.RemoveTagsFromResourceInput{
 		ResourceARN: aws.String("arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-11A2222B"),
 		TagKeys: []string{
 			"Dev Gatgeway Region",
@@ -1694,7 +1695,7 @@ func ExampleClient_ResetCacheRequest_shared00() {
 	}
 
 	svc := storagegateway.New(cfg)
-	input := &storagegateway.ResetCacheInput{
+	input := &types.ResetCacheInput{
 		GatewayARN: aws.String("arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-13B4567C"),
 	}
 
@@ -1732,7 +1733,7 @@ func ExampleClient_RetrieveTapeArchiveRequest_shared00() {
 	}
 
 	svc := storagegateway.New(cfg)
-	input := &storagegateway.RetrieveTapeArchiveInput{
+	input := &types.RetrieveTapeArchiveInput{
 		GatewayARN: aws.String("arn:aws:storagegateway:us-east-1:999999999999:gateway/sgw-12A3456B"),
 		TapeARN:    aws.String("arn:aws:storagegateway:us-east-1:999999999999:tape/TEST0AA2AF"),
 	}
@@ -1770,7 +1771,7 @@ func ExampleClient_RetrieveTapeRecoveryPointRequest_shared00() {
 	}
 
 	svc := storagegateway.New(cfg)
-	input := &storagegateway.RetrieveTapeRecoveryPointInput{
+	input := &types.RetrieveTapeRecoveryPointInput{
 		GatewayARN: aws.String("arn:aws:storagegateway:us-east-1:999999999999:gateway/sgw-12A3456B"),
 		TapeARN:    aws.String("arn:aws:storagegateway:us-east-1:999999999999:tape/TEST0AA2AF"),
 	}
@@ -1808,7 +1809,7 @@ func ExampleClient_SetLocalConsolePasswordRequest_shared00() {
 	}
 
 	svc := storagegateway.New(cfg)
-	input := &storagegateway.SetLocalConsolePasswordInput{
+	input := &types.SetLocalConsolePasswordInput{
 		GatewayARN:           aws.String("arn:aws:storagegateway:us-east-1:999999999999:gateway/sgw-12A3456B"),
 		LocalConsolePassword: aws.String("PassWordMustBeAtLeast6Chars."),
 	}
@@ -1847,7 +1848,7 @@ func ExampleClient_ShutdownGatewayRequest_shared00() {
 	}
 
 	svc := storagegateway.New(cfg)
-	input := &storagegateway.ShutdownGatewayInput{
+	input := &types.ShutdownGatewayInput{
 		GatewayARN: aws.String("arn:aws:storagegateway:us-east-1:999999999999:gateway/sgw-12A3456B"),
 	}
 
@@ -1884,7 +1885,7 @@ func ExampleClient_StartGatewayRequest_shared00() {
 	}
 
 	svc := storagegateway.New(cfg)
-	input := &storagegateway.StartGatewayInput{
+	input := &types.StartGatewayInput{
 		GatewayARN: aws.String("arn:aws:storagegateway:us-east-1:999999999999:gateway/sgw-12A3456B"),
 	}
 
@@ -1923,7 +1924,7 @@ func ExampleClient_UpdateBandwidthRateLimitRequest_shared00() {
 	}
 
 	svc := storagegateway.New(cfg)
-	input := &storagegateway.UpdateBandwidthRateLimitInput{
+	input := &types.UpdateBandwidthRateLimitInput{
 		AverageDownloadRateLimitInBitsPerSec: aws.Int64(102400),
 		AverageUploadRateLimitInBitsPerSec:   aws.Int64(51200),
 		GatewayARN:                           aws.String("arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B"),
@@ -1963,7 +1964,7 @@ func ExampleClient_UpdateChapCredentialsRequest_shared00() {
 	}
 
 	svc := storagegateway.New(cfg)
-	input := &storagegateway.UpdateChapCredentialsInput{
+	input := &types.UpdateChapCredentialsInput{
 		InitiatorName:                 aws.String("iqn.1991-05.com.microsoft:computername.domain.example.com"),
 		SecretToAuthenticateInitiator: aws.String("111111111111"),
 		SecretToAuthenticateTarget:    aws.String("222222222222"),
@@ -2003,7 +2004,7 @@ func ExampleClient_UpdateGatewayInformationRequest_shared00() {
 	}
 
 	svc := storagegateway.New(cfg)
-	input := &storagegateway.UpdateGatewayInformationInput{
+	input := &types.UpdateGatewayInformationInput{
 		GatewayARN:      aws.String("arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B"),
 		GatewayName:     aws.String("MyGateway2"),
 		GatewayTimezone: aws.String("GMT-12:00"),
@@ -2043,7 +2044,7 @@ func ExampleClient_UpdateGatewaySoftwareNowRequest_shared00() {
 	}
 
 	svc := storagegateway.New(cfg)
-	input := &storagegateway.UpdateGatewaySoftwareNowInput{
+	input := &types.UpdateGatewaySoftwareNowInput{
 		GatewayARN: aws.String("arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B"),
 	}
 
@@ -2081,7 +2082,7 @@ func ExampleClient_UpdateMaintenanceStartTimeRequest_shared00() {
 	}
 
 	svc := storagegateway.New(cfg)
-	input := &storagegateway.UpdateMaintenanceStartTimeInput{
+	input := &types.UpdateMaintenanceStartTimeInput{
 		DayOfWeek:    aws.Int64(2),
 		GatewayARN:   aws.String("arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B"),
 		HourOfDay:    aws.Int64(0),
@@ -2121,7 +2122,7 @@ func ExampleClient_UpdateSnapshotScheduleRequest_shared00() {
 	}
 
 	svc := storagegateway.New(cfg)
-	input := &storagegateway.UpdateSnapshotScheduleInput{
+	input := &types.UpdateSnapshotScheduleInput{
 		Description:       aws.String("Hourly snapshot"),
 		RecurrenceInHours: aws.Int64(1),
 		StartAt:           aws.Int64(0),
@@ -2161,7 +2162,7 @@ func ExampleClient_UpdateVTLDeviceTypeRequest_shared00() {
 	}
 
 	svc := storagegateway.New(cfg)
-	input := &storagegateway.UpdateVTLDeviceTypeInput{
+	input := &types.UpdateVTLDeviceTypeInput{
 		DeviceType:   aws.String("Medium Changer"),
 		VTLDeviceARN: aws.String("arn:aws:storagegateway:us-east-1:999999999999:gateway/sgw-12A3456B/device/AMZN_SGW-1FAD4876_MEDIACHANGER_00001"),
 	}

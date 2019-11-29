@@ -6,48 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/rds/types"
 )
-
-type DeleteGlobalClusterInput struct {
-	_ struct{} `type:"structure"`
-
-	// The cluster identifier of the global database cluster being deleted.
-	//
-	// GlobalClusterIdentifier is a required field
-	GlobalClusterIdentifier *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteGlobalClusterInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteGlobalClusterInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteGlobalClusterInput"}
-
-	if s.GlobalClusterIdentifier == nil {
-		invalidParams.Add(aws.NewErrParamRequired("GlobalClusterIdentifier"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteGlobalClusterOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A data type representing an Aurora global database.
-	GlobalCluster *GlobalCluster `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteGlobalClusterOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteGlobalCluster = "DeleteGlobalCluster"
 
@@ -67,7 +27,7 @@ const opDeleteGlobalCluster = "DeleteGlobalCluster"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteGlobalCluster
-func (c *Client) DeleteGlobalClusterRequest(input *DeleteGlobalClusterInput) DeleteGlobalClusterRequest {
+func (c *Client) DeleteGlobalClusterRequest(input *types.DeleteGlobalClusterInput) DeleteGlobalClusterRequest {
 	op := &aws.Operation{
 		Name:       opDeleteGlobalCluster,
 		HTTPMethod: "POST",
@@ -75,10 +35,10 @@ func (c *Client) DeleteGlobalClusterRequest(input *DeleteGlobalClusterInput) Del
 	}
 
 	if input == nil {
-		input = &DeleteGlobalClusterInput{}
+		input = &types.DeleteGlobalClusterInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteGlobalClusterOutput{})
+	req := c.newRequest(op, input, &types.DeleteGlobalClusterOutput{})
 	return DeleteGlobalClusterRequest{Request: req, Input: input, Copy: c.DeleteGlobalClusterRequest}
 }
 
@@ -86,8 +46,8 @@ func (c *Client) DeleteGlobalClusterRequest(input *DeleteGlobalClusterInput) Del
 // DeleteGlobalCluster API operation.
 type DeleteGlobalClusterRequest struct {
 	*aws.Request
-	Input *DeleteGlobalClusterInput
-	Copy  func(*DeleteGlobalClusterInput) DeleteGlobalClusterRequest
+	Input *types.DeleteGlobalClusterInput
+	Copy  func(*types.DeleteGlobalClusterInput) DeleteGlobalClusterRequest
 }
 
 // Send marshals and sends the DeleteGlobalCluster API request.
@@ -99,7 +59,7 @@ func (r DeleteGlobalClusterRequest) Send(ctx context.Context) (*DeleteGlobalClus
 	}
 
 	resp := &DeleteGlobalClusterResponse{
-		DeleteGlobalClusterOutput: r.Request.Data.(*DeleteGlobalClusterOutput),
+		DeleteGlobalClusterOutput: r.Request.Data.(*types.DeleteGlobalClusterOutput),
 		response:                  &aws.Response{Request: r.Request},
 	}
 
@@ -109,7 +69,7 @@ func (r DeleteGlobalClusterRequest) Send(ctx context.Context) (*DeleteGlobalClus
 // DeleteGlobalClusterResponse is the response type for the
 // DeleteGlobalCluster API operation.
 type DeleteGlobalClusterResponse struct {
-	*DeleteGlobalClusterOutput
+	*types.DeleteGlobalClusterOutput
 
 	response *aws.Response
 }

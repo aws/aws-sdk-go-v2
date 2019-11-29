@@ -6,51 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/dynamodb/types"
 )
-
-type DeleteBackupInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ARN associated with the backup.
-	//
-	// BackupArn is a required field
-	BackupArn *string `min:"37" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteBackupInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteBackupInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteBackupInput"}
-
-	if s.BackupArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("BackupArn"))
-	}
-	if s.BackupArn != nil && len(*s.BackupArn) < 37 {
-		invalidParams.Add(aws.NewErrParamMinLen("BackupArn", 37))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteBackupOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Contains the description of the backup created for the table.
-	BackupDescription *BackupDescription `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteBackupOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteBackup = "DeleteBackup"
 
@@ -69,7 +26,7 @@ const opDeleteBackup = "DeleteBackup"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/DeleteBackup
-func (c *Client) DeleteBackupRequest(input *DeleteBackupInput) DeleteBackupRequest {
+func (c *Client) DeleteBackupRequest(input *types.DeleteBackupInput) DeleteBackupRequest {
 	op := &aws.Operation{
 		Name:       opDeleteBackup,
 		HTTPMethod: "POST",
@@ -77,10 +34,10 @@ func (c *Client) DeleteBackupRequest(input *DeleteBackupInput) DeleteBackupReque
 	}
 
 	if input == nil {
-		input = &DeleteBackupInput{}
+		input = &types.DeleteBackupInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteBackupOutput{})
+	req := c.newRequest(op, input, &types.DeleteBackupOutput{})
 	return DeleteBackupRequest{Request: req, Input: input, Copy: c.DeleteBackupRequest}
 }
 
@@ -88,8 +45,8 @@ func (c *Client) DeleteBackupRequest(input *DeleteBackupInput) DeleteBackupReque
 // DeleteBackup API operation.
 type DeleteBackupRequest struct {
 	*aws.Request
-	Input *DeleteBackupInput
-	Copy  func(*DeleteBackupInput) DeleteBackupRequest
+	Input *types.DeleteBackupInput
+	Copy  func(*types.DeleteBackupInput) DeleteBackupRequest
 }
 
 // Send marshals and sends the DeleteBackup API request.
@@ -101,7 +58,7 @@ func (r DeleteBackupRequest) Send(ctx context.Context) (*DeleteBackupResponse, e
 	}
 
 	resp := &DeleteBackupResponse{
-		DeleteBackupOutput: r.Request.Data.(*DeleteBackupOutput),
+		DeleteBackupOutput: r.Request.Data.(*types.DeleteBackupOutput),
 		response:           &aws.Response{Request: r.Request},
 	}
 
@@ -111,7 +68,7 @@ func (r DeleteBackupRequest) Send(ctx context.Context) (*DeleteBackupResponse, e
 // DeleteBackupResponse is the response type for the
 // DeleteBackup API operation.
 type DeleteBackupResponse struct {
-	*DeleteBackupOutput
+	*types.DeleteBackupOutput
 
 	response *aws.Response
 }

@@ -6,52 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
+	"github.com/aws/aws-sdk-go-v2/service/configservice/types"
 )
-
-// The input for the StartConfigurationRecorder action.
-type StartConfigurationRecorderInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the recorder object that records each configuration change made
-	// to the resources.
-	//
-	// ConfigurationRecorderName is a required field
-	ConfigurationRecorderName *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s StartConfigurationRecorderInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *StartConfigurationRecorderInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "StartConfigurationRecorderInput"}
-
-	if s.ConfigurationRecorderName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ConfigurationRecorderName"))
-	}
-	if s.ConfigurationRecorderName != nil && len(*s.ConfigurationRecorderName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ConfigurationRecorderName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type StartConfigurationRecorderOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s StartConfigurationRecorderOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opStartConfigurationRecorder = "StartConfigurationRecorder"
 
@@ -72,7 +30,7 @@ const opStartConfigurationRecorder = "StartConfigurationRecorder"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/StartConfigurationRecorder
-func (c *Client) StartConfigurationRecorderRequest(input *StartConfigurationRecorderInput) StartConfigurationRecorderRequest {
+func (c *Client) StartConfigurationRecorderRequest(input *types.StartConfigurationRecorderInput) StartConfigurationRecorderRequest {
 	op := &aws.Operation{
 		Name:       opStartConfigurationRecorder,
 		HTTPMethod: "POST",
@@ -80,10 +38,10 @@ func (c *Client) StartConfigurationRecorderRequest(input *StartConfigurationReco
 	}
 
 	if input == nil {
-		input = &StartConfigurationRecorderInput{}
+		input = &types.StartConfigurationRecorderInput{}
 	}
 
-	req := c.newRequest(op, input, &StartConfigurationRecorderOutput{})
+	req := c.newRequest(op, input, &types.StartConfigurationRecorderOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return StartConfigurationRecorderRequest{Request: req, Input: input, Copy: c.StartConfigurationRecorderRequest}
@@ -93,8 +51,8 @@ func (c *Client) StartConfigurationRecorderRequest(input *StartConfigurationReco
 // StartConfigurationRecorder API operation.
 type StartConfigurationRecorderRequest struct {
 	*aws.Request
-	Input *StartConfigurationRecorderInput
-	Copy  func(*StartConfigurationRecorderInput) StartConfigurationRecorderRequest
+	Input *types.StartConfigurationRecorderInput
+	Copy  func(*types.StartConfigurationRecorderInput) StartConfigurationRecorderRequest
 }
 
 // Send marshals and sends the StartConfigurationRecorder API request.
@@ -106,7 +64,7 @@ func (r StartConfigurationRecorderRequest) Send(ctx context.Context) (*StartConf
 	}
 
 	resp := &StartConfigurationRecorderResponse{
-		StartConfigurationRecorderOutput: r.Request.Data.(*StartConfigurationRecorderOutput),
+		StartConfigurationRecorderOutput: r.Request.Data.(*types.StartConfigurationRecorderOutput),
 		response:                         &aws.Response{Request: r.Request},
 	}
 
@@ -116,7 +74,7 @@ func (r StartConfigurationRecorderRequest) Send(ctx context.Context) (*StartConf
 // StartConfigurationRecorderResponse is the response type for the
 // StartConfigurationRecorder API operation.
 type StartConfigurationRecorderResponse struct {
-	*StartConfigurationRecorderOutput
+	*types.StartConfigurationRecorderOutput
 
 	response *aws.Response
 }

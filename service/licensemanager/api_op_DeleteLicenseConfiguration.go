@@ -6,45 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/licensemanager/types"
 )
-
-type DeleteLicenseConfigurationInput struct {
-	_ struct{} `type:"structure"`
-
-	// Unique ID of the configuration object to delete.
-	//
-	// LicenseConfigurationArn is a required field
-	LicenseConfigurationArn *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteLicenseConfigurationInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteLicenseConfigurationInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteLicenseConfigurationInput"}
-
-	if s.LicenseConfigurationArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("LicenseConfigurationArn"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteLicenseConfigurationOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteLicenseConfigurationOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteLicenseConfiguration = "DeleteLicenseConfiguration"
 
@@ -62,7 +25,7 @@ const opDeleteLicenseConfiguration = "DeleteLicenseConfiguration"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/license-manager-2018-08-01/DeleteLicenseConfiguration
-func (c *Client) DeleteLicenseConfigurationRequest(input *DeleteLicenseConfigurationInput) DeleteLicenseConfigurationRequest {
+func (c *Client) DeleteLicenseConfigurationRequest(input *types.DeleteLicenseConfigurationInput) DeleteLicenseConfigurationRequest {
 	op := &aws.Operation{
 		Name:       opDeleteLicenseConfiguration,
 		HTTPMethod: "POST",
@@ -70,10 +33,10 @@ func (c *Client) DeleteLicenseConfigurationRequest(input *DeleteLicenseConfigura
 	}
 
 	if input == nil {
-		input = &DeleteLicenseConfigurationInput{}
+		input = &types.DeleteLicenseConfigurationInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteLicenseConfigurationOutput{})
+	req := c.newRequest(op, input, &types.DeleteLicenseConfigurationOutput{})
 	return DeleteLicenseConfigurationRequest{Request: req, Input: input, Copy: c.DeleteLicenseConfigurationRequest}
 }
 
@@ -81,8 +44,8 @@ func (c *Client) DeleteLicenseConfigurationRequest(input *DeleteLicenseConfigura
 // DeleteLicenseConfiguration API operation.
 type DeleteLicenseConfigurationRequest struct {
 	*aws.Request
-	Input *DeleteLicenseConfigurationInput
-	Copy  func(*DeleteLicenseConfigurationInput) DeleteLicenseConfigurationRequest
+	Input *types.DeleteLicenseConfigurationInput
+	Copy  func(*types.DeleteLicenseConfigurationInput) DeleteLicenseConfigurationRequest
 }
 
 // Send marshals and sends the DeleteLicenseConfiguration API request.
@@ -94,7 +57,7 @@ func (r DeleteLicenseConfigurationRequest) Send(ctx context.Context) (*DeleteLic
 	}
 
 	resp := &DeleteLicenseConfigurationResponse{
-		DeleteLicenseConfigurationOutput: r.Request.Data.(*DeleteLicenseConfigurationOutput),
+		DeleteLicenseConfigurationOutput: r.Request.Data.(*types.DeleteLicenseConfigurationOutput),
 		response:                         &aws.Response{Request: r.Request},
 	}
 
@@ -104,7 +67,7 @@ func (r DeleteLicenseConfigurationRequest) Send(ctx context.Context) (*DeleteLic
 // DeleteLicenseConfigurationResponse is the response type for the
 // DeleteLicenseConfiguration API operation.
 type DeleteLicenseConfigurationResponse struct {
-	*DeleteLicenseConfigurationOutput
+	*types.DeleteLicenseConfigurationOutput
 
 	response *aws.Response
 }

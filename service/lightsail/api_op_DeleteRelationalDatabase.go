@@ -6,71 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/lightsail/types"
 )
-
-type DeleteRelationalDatabaseInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the database snapshot created if skip final snapshot is false,
-	// which is the default value for that parameter.
-	//
-	// Specifying this parameter and also specifying the skip final snapshot parameter
-	// to true results in an error.
-	//
-	// Constraints:
-	//
-	//    * Must contain from 2 to 255 alphanumeric characters, or hyphens.
-	//
-	//    * The first and last character must be a letter or number.
-	FinalRelationalDatabaseSnapshotName *string `locationName:"finalRelationalDatabaseSnapshotName" type:"string"`
-
-	// The name of the database that you are deleting.
-	//
-	// RelationalDatabaseName is a required field
-	RelationalDatabaseName *string `locationName:"relationalDatabaseName" type:"string" required:"true"`
-
-	// Determines whether a final database snapshot is created before your database
-	// is deleted. If true is specified, no database snapshot is created. If false
-	// is specified, a database snapshot is created before your database is deleted.
-	//
-	// You must specify the final relational database snapshot name parameter if
-	// the skip final snapshot parameter is false.
-	//
-	// Default: false
-	SkipFinalSnapshot *bool `locationName:"skipFinalSnapshot" type:"boolean"`
-}
-
-// String returns the string representation
-func (s DeleteRelationalDatabaseInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteRelationalDatabaseInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteRelationalDatabaseInput"}
-
-	if s.RelationalDatabaseName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("RelationalDatabaseName"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DeleteRelationalDatabaseOutput struct {
-	_ struct{} `type:"structure"`
-
-	// An object describing the result of your delete relational database request.
-	Operations []Operation `locationName:"operations" type:"list"`
-}
-
-// String returns the string representation
-func (s DeleteRelationalDatabaseOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteRelationalDatabase = "DeleteRelationalDatabase"
 
@@ -91,7 +28,7 @@ const opDeleteRelationalDatabase = "DeleteRelationalDatabase"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/DeleteRelationalDatabase
-func (c *Client) DeleteRelationalDatabaseRequest(input *DeleteRelationalDatabaseInput) DeleteRelationalDatabaseRequest {
+func (c *Client) DeleteRelationalDatabaseRequest(input *types.DeleteRelationalDatabaseInput) DeleteRelationalDatabaseRequest {
 	op := &aws.Operation{
 		Name:       opDeleteRelationalDatabase,
 		HTTPMethod: "POST",
@@ -99,10 +36,10 @@ func (c *Client) DeleteRelationalDatabaseRequest(input *DeleteRelationalDatabase
 	}
 
 	if input == nil {
-		input = &DeleteRelationalDatabaseInput{}
+		input = &types.DeleteRelationalDatabaseInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteRelationalDatabaseOutput{})
+	req := c.newRequest(op, input, &types.DeleteRelationalDatabaseOutput{})
 	return DeleteRelationalDatabaseRequest{Request: req, Input: input, Copy: c.DeleteRelationalDatabaseRequest}
 }
 
@@ -110,8 +47,8 @@ func (c *Client) DeleteRelationalDatabaseRequest(input *DeleteRelationalDatabase
 // DeleteRelationalDatabase API operation.
 type DeleteRelationalDatabaseRequest struct {
 	*aws.Request
-	Input *DeleteRelationalDatabaseInput
-	Copy  func(*DeleteRelationalDatabaseInput) DeleteRelationalDatabaseRequest
+	Input *types.DeleteRelationalDatabaseInput
+	Copy  func(*types.DeleteRelationalDatabaseInput) DeleteRelationalDatabaseRequest
 }
 
 // Send marshals and sends the DeleteRelationalDatabase API request.
@@ -123,7 +60,7 @@ func (r DeleteRelationalDatabaseRequest) Send(ctx context.Context) (*DeleteRelat
 	}
 
 	resp := &DeleteRelationalDatabaseResponse{
-		DeleteRelationalDatabaseOutput: r.Request.Data.(*DeleteRelationalDatabaseOutput),
+		DeleteRelationalDatabaseOutput: r.Request.Data.(*types.DeleteRelationalDatabaseOutput),
 		response:                       &aws.Response{Request: r.Request},
 	}
 
@@ -133,7 +70,7 @@ func (r DeleteRelationalDatabaseRequest) Send(ctx context.Context) (*DeleteRelat
 // DeleteRelationalDatabaseResponse is the response type for the
 // DeleteRelationalDatabase API operation.
 type DeleteRelationalDatabaseResponse struct {
-	*DeleteRelationalDatabaseOutput
+	*types.DeleteRelationalDatabaseOutput
 
 	response *aws.Response
 }

@@ -6,61 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
+	"github.com/aws/aws-sdk-go-v2/service/cloudwatchlogs/types"
 )
-
-type PutRetentionPolicyInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the log group.
-	//
-	// LogGroupName is a required field
-	LogGroupName *string `locationName:"logGroupName" min:"1" type:"string" required:"true"`
-
-	// The number of days to retain the log events in the specified log group. Possible
-	// values are: 1, 3, 5, 7, 14, 30, 60, 90, 120, 150, 180, 365, 400, 545, 731,
-	// 1827, and 3653.
-	//
-	// RetentionInDays is a required field
-	RetentionInDays *int64 `locationName:"retentionInDays" type:"integer" required:"true"`
-}
-
-// String returns the string representation
-func (s PutRetentionPolicyInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *PutRetentionPolicyInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "PutRetentionPolicyInput"}
-
-	if s.LogGroupName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("LogGroupName"))
-	}
-	if s.LogGroupName != nil && len(*s.LogGroupName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("LogGroupName", 1))
-	}
-
-	if s.RetentionInDays == nil {
-		invalidParams.Add(aws.NewErrParamRequired("RetentionInDays"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type PutRetentionPolicyOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s PutRetentionPolicyOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opPutRetentionPolicy = "PutRetentionPolicy"
 
@@ -79,7 +28,7 @@ const opPutRetentionPolicy = "PutRetentionPolicy"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/PutRetentionPolicy
-func (c *Client) PutRetentionPolicyRequest(input *PutRetentionPolicyInput) PutRetentionPolicyRequest {
+func (c *Client) PutRetentionPolicyRequest(input *types.PutRetentionPolicyInput) PutRetentionPolicyRequest {
 	op := &aws.Operation{
 		Name:       opPutRetentionPolicy,
 		HTTPMethod: "POST",
@@ -87,10 +36,10 @@ func (c *Client) PutRetentionPolicyRequest(input *PutRetentionPolicyInput) PutRe
 	}
 
 	if input == nil {
-		input = &PutRetentionPolicyInput{}
+		input = &types.PutRetentionPolicyInput{}
 	}
 
-	req := c.newRequest(op, input, &PutRetentionPolicyOutput{})
+	req := c.newRequest(op, input, &types.PutRetentionPolicyOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return PutRetentionPolicyRequest{Request: req, Input: input, Copy: c.PutRetentionPolicyRequest}
@@ -100,8 +49,8 @@ func (c *Client) PutRetentionPolicyRequest(input *PutRetentionPolicyInput) PutRe
 // PutRetentionPolicy API operation.
 type PutRetentionPolicyRequest struct {
 	*aws.Request
-	Input *PutRetentionPolicyInput
-	Copy  func(*PutRetentionPolicyInput) PutRetentionPolicyRequest
+	Input *types.PutRetentionPolicyInput
+	Copy  func(*types.PutRetentionPolicyInput) PutRetentionPolicyRequest
 }
 
 // Send marshals and sends the PutRetentionPolicy API request.
@@ -113,7 +62,7 @@ func (r PutRetentionPolicyRequest) Send(ctx context.Context) (*PutRetentionPolic
 	}
 
 	resp := &PutRetentionPolicyResponse{
-		PutRetentionPolicyOutput: r.Request.Data.(*PutRetentionPolicyOutput),
+		PutRetentionPolicyOutput: r.Request.Data.(*types.PutRetentionPolicyOutput),
 		response:                 &aws.Response{Request: r.Request},
 	}
 
@@ -123,7 +72,7 @@ func (r PutRetentionPolicyRequest) Send(ctx context.Context) (*PutRetentionPolic
 // PutRetentionPolicyResponse is the response type for the
 // PutRetentionPolicy API operation.
 type PutRetentionPolicyResponse struct {
-	*PutRetentionPolicyOutput
+	*types.PutRetentionPolicyOutput
 
 	response *aws.Response
 }

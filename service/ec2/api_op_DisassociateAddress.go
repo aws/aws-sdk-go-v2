@@ -6,40 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/ec2query"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-type DisassociateAddressInput struct {
-	_ struct{} `type:"structure"`
-
-	// [EC2-VPC] The association ID. Required for EC2-VPC.
-	AssociationId *string `type:"string"`
-
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have
-	// the required permissions, the error response is DryRunOperation. Otherwise,
-	// it is UnauthorizedOperation.
-	DryRun *bool `locationName:"dryRun" type:"boolean"`
-
-	// [EC2-Classic] The Elastic IP address. Required for EC2-Classic.
-	PublicIp *string `type:"string"`
-}
-
-// String returns the string representation
-func (s DisassociateAddressInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type DisassociateAddressOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DisassociateAddressOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDisassociateAddress = "DisassociateAddress"
 
@@ -64,7 +34,7 @@ const opDisassociateAddress = "DisassociateAddress"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DisassociateAddress
-func (c *Client) DisassociateAddressRequest(input *DisassociateAddressInput) DisassociateAddressRequest {
+func (c *Client) DisassociateAddressRequest(input *types.DisassociateAddressInput) DisassociateAddressRequest {
 	op := &aws.Operation{
 		Name:       opDisassociateAddress,
 		HTTPMethod: "POST",
@@ -72,10 +42,10 @@ func (c *Client) DisassociateAddressRequest(input *DisassociateAddressInput) Dis
 	}
 
 	if input == nil {
-		input = &DisassociateAddressInput{}
+		input = &types.DisassociateAddressInput{}
 	}
 
-	req := c.newRequest(op, input, &DisassociateAddressOutput{})
+	req := c.newRequest(op, input, &types.DisassociateAddressOutput{})
 	req.Handlers.Unmarshal.Remove(ec2query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return DisassociateAddressRequest{Request: req, Input: input, Copy: c.DisassociateAddressRequest}
@@ -85,8 +55,8 @@ func (c *Client) DisassociateAddressRequest(input *DisassociateAddressInput) Dis
 // DisassociateAddress API operation.
 type DisassociateAddressRequest struct {
 	*aws.Request
-	Input *DisassociateAddressInput
-	Copy  func(*DisassociateAddressInput) DisassociateAddressRequest
+	Input *types.DisassociateAddressInput
+	Copy  func(*types.DisassociateAddressInput) DisassociateAddressRequest
 }
 
 // Send marshals and sends the DisassociateAddress API request.
@@ -98,7 +68,7 @@ func (r DisassociateAddressRequest) Send(ctx context.Context) (*DisassociateAddr
 	}
 
 	resp := &DisassociateAddressResponse{
-		DisassociateAddressOutput: r.Request.Data.(*DisassociateAddressOutput),
+		DisassociateAddressOutput: r.Request.Data.(*types.DisassociateAddressOutput),
 		response:                  &aws.Response{Request: r.Request},
 	}
 
@@ -108,7 +78,7 @@ func (r DisassociateAddressRequest) Send(ctx context.Context) (*DisassociateAddr
 // DisassociateAddressResponse is the response type for the
 // DisassociateAddress API operation.
 type DisassociateAddressResponse struct {
-	*DisassociateAddressOutput
+	*types.DisassociateAddressOutput
 
 	response *aws.Response
 }

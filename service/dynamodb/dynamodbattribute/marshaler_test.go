@@ -8,7 +8,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/aws/awserr"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/service/dynamodb"
+	"github.com/aws/aws-sdk-go-v2/service/dynamodb/types"
 )
 
 type simpleMarshalStruct struct {
@@ -46,44 +46,44 @@ var falseValue = false
 var marshalerScalarInputs = []marshallerTestInput{
 	{
 		input:    nil,
-		expected: &dynamodb.AttributeValue{NULL: &trueValue},
+		expected: &types.AttributeValue{NULL: &trueValue},
 	},
 	{
 		input:    "some string",
-		expected: &dynamodb.AttributeValue{S: aws.String("some string")},
+		expected: &types.AttributeValue{S: aws.String("some string")},
 	},
 	{
 		input:    true,
-		expected: &dynamodb.AttributeValue{BOOL: &trueValue},
+		expected: &types.AttributeValue{BOOL: &trueValue},
 	},
 	{
 		input:    false,
-		expected: &dynamodb.AttributeValue{BOOL: &falseValue},
+		expected: &types.AttributeValue{BOOL: &falseValue},
 	},
 	{
 		input:    3.14,
-		expected: &dynamodb.AttributeValue{N: aws.String("3.14")},
+		expected: &types.AttributeValue{N: aws.String("3.14")},
 	},
 	{
 		input:    math.MaxFloat32,
-		expected: &dynamodb.AttributeValue{N: aws.String("340282346638528860000000000000000000000")},
+		expected: &types.AttributeValue{N: aws.String("340282346638528860000000000000000000000")},
 	},
 	{
 		input:    math.MaxFloat64,
-		expected: &dynamodb.AttributeValue{N: aws.String("179769313486231570000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000")},
+		expected: &types.AttributeValue{N: aws.String("179769313486231570000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000")},
 	},
 	{
 		input:    12,
-		expected: &dynamodb.AttributeValue{N: aws.String("12")},
+		expected: &types.AttributeValue{N: aws.String("12")},
 	},
 	{
 		input:    Number("12"),
-		expected: &dynamodb.AttributeValue{N: aws.String("12")},
+		expected: &types.AttributeValue{N: aws.String("12")},
 	},
 	{
 		input: simpleMarshalStruct{},
-		expected: &dynamodb.AttributeValue{
-			M: map[string]dynamodb.AttributeValue{
+		expected: &types.AttributeValue{
+			M: map[string]types.AttributeValue{
 				"Byte":    {NULL: &trueValue},
 				"Bool":    {BOOL: &falseValue},
 				"Float32": {N: aws.String("0")},
@@ -101,62 +101,62 @@ var marshallerMapTestInputs = []marshallerTestInput{
 	// Scalar tests
 	{
 		input:    nil,
-		expected: map[string]dynamodb.AttributeValue{},
+		expected: map[string]types.AttributeValue{},
 	},
 	{
 		input:    map[string]interface{}{"string": "some string"},
-		expected: map[string]dynamodb.AttributeValue{"string": {S: aws.String("some string")}},
+		expected: map[string]types.AttributeValue{"string": {S: aws.String("some string")}},
 	},
 	{
 		input:    map[string]interface{}{"bool": true},
-		expected: map[string]dynamodb.AttributeValue{"bool": {BOOL: &trueValue}},
+		expected: map[string]types.AttributeValue{"bool": {BOOL: &trueValue}},
 	},
 	{
 		input:    map[string]interface{}{"bool": false},
-		expected: map[string]dynamodb.AttributeValue{"bool": {BOOL: &falseValue}},
+		expected: map[string]types.AttributeValue{"bool": {BOOL: &falseValue}},
 	},
 	{
 		input:    map[string]interface{}{"null": nil},
-		expected: map[string]dynamodb.AttributeValue{"null": {NULL: &trueValue}},
+		expected: map[string]types.AttributeValue{"null": {NULL: &trueValue}},
 	},
 	{
 		input:    map[string]interface{}{"float": 3.14},
-		expected: map[string]dynamodb.AttributeValue{"float": {N: aws.String("3.14")}},
+		expected: map[string]types.AttributeValue{"float": {N: aws.String("3.14")}},
 	},
 	{
 		input:    map[string]interface{}{"float": math.MaxFloat32},
-		expected: map[string]dynamodb.AttributeValue{"float": {N: aws.String("340282346638528860000000000000000000000")}},
+		expected: map[string]types.AttributeValue{"float": {N: aws.String("340282346638528860000000000000000000000")}},
 	},
 	{
 		input:    map[string]interface{}{"float": math.MaxFloat64},
-		expected: map[string]dynamodb.AttributeValue{"float": {N: aws.String("179769313486231570000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000")}},
+		expected: map[string]types.AttributeValue{"float": {N: aws.String("179769313486231570000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000")}},
 	},
 	{
 		input:    map[string]interface{}{"num": 12.},
-		expected: map[string]dynamodb.AttributeValue{"num": {N: aws.String("12")}},
+		expected: map[string]types.AttributeValue{"num": {N: aws.String("12")}},
 	},
 	{
 		input:    map[string]interface{}{"byte": []byte{48, 49}},
-		expected: map[string]dynamodb.AttributeValue{"byte": {B: []byte{48, 49}}},
+		expected: map[string]types.AttributeValue{"byte": {B: []byte{48, 49}}},
 	},
 	{
 		input:    struct{ Byte []byte }{Byte: []byte{48, 49}},
-		expected: map[string]dynamodb.AttributeValue{"Byte": {B: []byte{48, 49}}},
+		expected: map[string]types.AttributeValue{"Byte": {B: []byte{48, 49}}},
 	},
 	{
 		input:    map[string]interface{}{"byte_set": [][]byte{{48, 49}, {50, 51}}},
-		expected: map[string]dynamodb.AttributeValue{"byte_set": {BS: [][]byte{{48, 49}, {50, 51}}}},
+		expected: map[string]types.AttributeValue{"byte_set": {BS: [][]byte{{48, 49}, {50, 51}}}},
 	},
 	{
 		input:    struct{ ByteSet [][]byte }{ByteSet: [][]byte{{48, 49}, {50, 51}}},
-		expected: map[string]dynamodb.AttributeValue{"ByteSet": {BS: [][]byte{{48, 49}, {50, 51}}}},
+		expected: map[string]types.AttributeValue{"ByteSet": {BS: [][]byte{{48, 49}, {50, 51}}}},
 	},
 	// List
 	{
 		input: map[string]interface{}{"list": []interface{}{"a string", 12., 3.14, true, nil, false}},
-		expected: map[string]dynamodb.AttributeValue{
+		expected: map[string]types.AttributeValue{
 			"list": {
-				L: []dynamodb.AttributeValue{
+				L: []types.AttributeValue{
 					{S: aws.String("a string")},
 					{N: aws.String("12")},
 					{N: aws.String("3.14")},
@@ -170,9 +170,9 @@ var marshallerMapTestInputs = []marshallerTestInput{
 	// Map
 	{
 		input: map[string]interface{}{"map": map[string]interface{}{"nestednum": 12.}},
-		expected: map[string]dynamodb.AttributeValue{
+		expected: map[string]types.AttributeValue{
 			"map": {
-				M: map[string]dynamodb.AttributeValue{
+				M: map[string]types.AttributeValue{
 					"nestednum": {
 						N: aws.String("12"),
 					},
@@ -183,7 +183,7 @@ var marshallerMapTestInputs = []marshallerTestInput{
 	// Structs
 	{
 		input: simpleMarshalStruct{},
-		expected: map[string]dynamodb.AttributeValue{
+		expected: map[string]types.AttributeValue{
 			"Byte":    {NULL: &trueValue},
 			"Bool":    {BOOL: &falseValue},
 			"Float32": {N: aws.String("0")},
@@ -196,7 +196,7 @@ var marshallerMapTestInputs = []marshallerTestInput{
 	},
 	{
 		input: complexMarshalStruct{},
-		expected: map[string]dynamodb.AttributeValue{
+		expected: map[string]types.AttributeValue{
 			"Simple": {NULL: &trueValue},
 		},
 	},
@@ -204,7 +204,7 @@ var marshallerMapTestInputs = []marshallerTestInput{
 		input: struct {
 			Simple []string `json:"simple"`
 		}{},
-		expected: map[string]dynamodb.AttributeValue{
+		expected: map[string]types.AttributeValue{
 			"simple": {NULL: &trueValue},
 		},
 	},
@@ -212,21 +212,21 @@ var marshallerMapTestInputs = []marshallerTestInput{
 		input: struct {
 			Simple []string `json:"simple,omitempty"`
 		}{},
-		expected: map[string]dynamodb.AttributeValue{},
+		expected: map[string]types.AttributeValue{},
 	},
 	{
 		input: struct {
 			Simple []string `json:"-"`
 		}{},
-		expected: map[string]dynamodb.AttributeValue{},
+		expected: map[string]types.AttributeValue{},
 	},
 	{
 		input: complexMarshalStruct{Simple: []simpleMarshalStruct{{Int: -2}, {Uint: 5}}},
-		expected: map[string]dynamodb.AttributeValue{
+		expected: map[string]types.AttributeValue{
 			"Simple": {
-				L: []dynamodb.AttributeValue{
+				L: []types.AttributeValue{
 					{
-						M: map[string]dynamodb.AttributeValue{
+						M: map[string]types.AttributeValue{
 							"Byte":    {NULL: &trueValue},
 							"Bool":    {BOOL: &falseValue},
 							"Float32": {N: aws.String("0")},
@@ -238,7 +238,7 @@ var marshallerMapTestInputs = []marshallerTestInput{
 						},
 					},
 					{
-						M: map[string]dynamodb.AttributeValue{
+						M: map[string]types.AttributeValue{
 							"Byte":    {NULL: &trueValue},
 							"Bool":    {BOOL: &falseValue},
 							"Float32": {N: aws.String("0")},
@@ -258,19 +258,19 @@ var marshallerMapTestInputs = []marshallerTestInput{
 var marshallerListTestInputs = []marshallerTestInput{
 	{
 		input:    nil,
-		expected: []dynamodb.AttributeValue{},
+		expected: []types.AttributeValue{},
 	},
 	{
 		input:    []interface{}{},
-		expected: []dynamodb.AttributeValue{},
+		expected: []types.AttributeValue{},
 	},
 	{
 		input:    []simpleMarshalStruct{},
-		expected: []dynamodb.AttributeValue{},
+		expected: []types.AttributeValue{},
 	},
 	{
 		input: []interface{}{"a string", 12., 3.14, true, nil, false},
-		expected: []dynamodb.AttributeValue{
+		expected: []types.AttributeValue{
 			{S: aws.String("a string")},
 			{N: aws.String("12")},
 			{N: aws.String("3.14")},
@@ -281,9 +281,9 @@ var marshallerListTestInputs = []marshallerTestInput{
 	},
 	{
 		input: []simpleMarshalStruct{{}},
-		expected: []dynamodb.AttributeValue{
+		expected: []types.AttributeValue{
 			{
-				M: map[string]dynamodb.AttributeValue{
+				M: map[string]types.AttributeValue{
 					"Byte":    {NULL: &trueValue},
 					"Bool":    {BOOL: &falseValue},
 					"Float32": {N: aws.String("0")},
@@ -327,7 +327,7 @@ func Test_New_Unmarshal(t *testing.T) {
 			continue
 		}
 		actual := reflect.New(reflect.TypeOf(test.input)).Interface()
-		if err := Unmarshal(test.expected.(*dynamodb.AttributeValue), actual); err != nil {
+		if err := Unmarshal(test.expected.(*types.AttributeValue), actual); err != nil {
 			t.Errorf("Unmarshal %d, with input %#v retured error `%s`", i+1, test.expected, err)
 		}
 		compareObjects(t, test.input, reflect.ValueOf(actual).Elem().Interface())
@@ -391,7 +391,7 @@ func Test_New_UnmarshalMap(t *testing.T) {
 			continue
 		}
 		actual := reflect.New(reflect.TypeOf(test.input)).Interface()
-		if err := UnmarshalMap(test.expected.(map[string]dynamodb.AttributeValue), actual); err != nil {
+		if err := UnmarshalMap(test.expected.(map[string]types.AttributeValue), actual); err != nil {
 			t.Errorf("Unmarshal %d, with input %#v retured error `%s`", i+1, test.expected, err)
 		}
 		compareObjects(t, test.input, reflect.ValueOf(actual).Elem().Interface())
@@ -461,7 +461,7 @@ func Test_New_UnmarshalList(t *testing.T) {
 			actual.Elem().Set(reflect.MakeSlice(iv.Type(), iv.Len(), iv.Cap()))
 		}
 
-		if err := UnmarshalList(test.expected.([]dynamodb.AttributeValue), actual.Interface()); err != nil {
+		if err := UnmarshalList(test.expected.([]types.AttributeValue), actual.Interface()); err != nil {
 			t.Errorf("Unmarshal %d, with input %#v retured error `%s`", i+1, test.expected, err)
 		}
 		compareObjects(t, test.input, actual.Elem().Interface())
@@ -553,8 +553,8 @@ func Test_Encode_YAML_TagKey(t *testing.T) {
 		NoTag: "NoTag",
 	}
 
-	expected := &dynamodb.AttributeValue{
-		M: map[string]dynamodb.AttributeValue{
+	expected := &types.AttributeValue{
+		M: map[string]types.AttributeValue{
 			"string":  {S: aws.String("String")},
 			"empty":   {NULL: &trueValue},
 			"byte":    {NULL: &trueValue},
@@ -563,13 +563,13 @@ func Test_Encode_YAML_TagKey(t *testing.T) {
 			"int":     {N: aws.String("0")},
 			"uint":    {N: aws.String("0")},
 			"slice": {
-				L: []dynamodb.AttributeValue{
+				L: []types.AttributeValue{
 					{S: aws.String("one")},
 					{S: aws.String("two")},
 				},
 			},
 			"map": {
-				M: map[string]dynamodb.AttributeValue{
+				M: map[string]types.AttributeValue{
 					"one": {N: aws.String("1")},
 					"two": {N: aws.String("2")},
 				},

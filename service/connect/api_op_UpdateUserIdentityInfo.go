@@ -6,115 +6,17 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/restjson"
+	"github.com/aws/aws-sdk-go-v2/service/connect/types"
 )
-
-type UpdateUserIdentityInfoInput struct {
-	_ struct{} `type:"structure"`
-
-	// A UserIdentityInfo object.
-	//
-	// IdentityInfo is a required field
-	IdentityInfo *UserIdentityInfo `type:"structure" required:"true"`
-
-	// The identifier for your Amazon Connect instance. To find the ID of your instance,
-	// open the AWS console and select Amazon Connect. Select the alias of the instance
-	// in the Instance alias column. The instance ID is displayed in the Overview
-	// section of your instance settings. For example, the instance ID is the set
-	// of characters at the end of the instance ARN, after instance/, such as 10a4c4eb-f57e-4d4c-b602-bf39176ced07.
-	//
-	// InstanceId is a required field
-	InstanceId *string `location:"uri" locationName:"InstanceId" min:"1" type:"string" required:"true"`
-
-	// The identifier for the user account to update identity information for.
-	//
-	// UserId is a required field
-	UserId *string `location:"uri" locationName:"UserId" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s UpdateUserIdentityInfoInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateUserIdentityInfoInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateUserIdentityInfoInput"}
-
-	if s.IdentityInfo == nil {
-		invalidParams.Add(aws.NewErrParamRequired("IdentityInfo"))
-	}
-
-	if s.InstanceId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("InstanceId"))
-	}
-	if s.InstanceId != nil && len(*s.InstanceId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("InstanceId", 1))
-	}
-
-	if s.UserId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("UserId"))
-	}
-	if s.IdentityInfo != nil {
-		if err := s.IdentityInfo.Validate(); err != nil {
-			invalidParams.AddNested("IdentityInfo", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s UpdateUserIdentityInfoInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.IdentityInfo != nil {
-		v := s.IdentityInfo
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "IdentityInfo", v, metadata)
-	}
-	if s.InstanceId != nil {
-		v := *s.InstanceId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "InstanceId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.UserId != nil {
-		v := *s.UserId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "UserId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type UpdateUserIdentityInfoOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s UpdateUserIdentityInfoOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s UpdateUserIdentityInfoOutput) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
 
 const opUpdateUserIdentityInfo = "UpdateUserIdentityInfo"
 
 // UpdateUserIdentityInfoRequest returns a request value for making API operation for
 // Amazon Connect Service.
 //
-// Updates the identity information for the specified user in a UserIdentityInfo
-// object, including email, first name, and last name.
+// Updates the identity information for the specified user.
 //
 //    // Example sending a request using UpdateUserIdentityInfoRequest.
 //    req := client.UpdateUserIdentityInfoRequest(params)
@@ -124,7 +26,7 @@ const opUpdateUserIdentityInfo = "UpdateUserIdentityInfo"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdateUserIdentityInfo
-func (c *Client) UpdateUserIdentityInfoRequest(input *UpdateUserIdentityInfoInput) UpdateUserIdentityInfoRequest {
+func (c *Client) UpdateUserIdentityInfoRequest(input *types.UpdateUserIdentityInfoInput) UpdateUserIdentityInfoRequest {
 	op := &aws.Operation{
 		Name:       opUpdateUserIdentityInfo,
 		HTTPMethod: "POST",
@@ -132,10 +34,10 @@ func (c *Client) UpdateUserIdentityInfoRequest(input *UpdateUserIdentityInfoInpu
 	}
 
 	if input == nil {
-		input = &UpdateUserIdentityInfoInput{}
+		input = &types.UpdateUserIdentityInfoInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateUserIdentityInfoOutput{})
+	req := c.newRequest(op, input, &types.UpdateUserIdentityInfoOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return UpdateUserIdentityInfoRequest{Request: req, Input: input, Copy: c.UpdateUserIdentityInfoRequest}
@@ -145,8 +47,8 @@ func (c *Client) UpdateUserIdentityInfoRequest(input *UpdateUserIdentityInfoInpu
 // UpdateUserIdentityInfo API operation.
 type UpdateUserIdentityInfoRequest struct {
 	*aws.Request
-	Input *UpdateUserIdentityInfoInput
-	Copy  func(*UpdateUserIdentityInfoInput) UpdateUserIdentityInfoRequest
+	Input *types.UpdateUserIdentityInfoInput
+	Copy  func(*types.UpdateUserIdentityInfoInput) UpdateUserIdentityInfoRequest
 }
 
 // Send marshals and sends the UpdateUserIdentityInfo API request.
@@ -158,7 +60,7 @@ func (r UpdateUserIdentityInfoRequest) Send(ctx context.Context) (*UpdateUserIde
 	}
 
 	resp := &UpdateUserIdentityInfoResponse{
-		UpdateUserIdentityInfoOutput: r.Request.Data.(*UpdateUserIdentityInfoOutput),
+		UpdateUserIdentityInfoOutput: r.Request.Data.(*types.UpdateUserIdentityInfoOutput),
 		response:                     &aws.Response{Request: r.Request},
 	}
 
@@ -168,7 +70,7 @@ func (r UpdateUserIdentityInfoRequest) Send(ctx context.Context) (*UpdateUserIde
 // UpdateUserIdentityInfoResponse is the response type for the
 // UpdateUserIdentityInfo API operation.
 type UpdateUserIdentityInfoResponse struct {
-	*UpdateUserIdentityInfoOutput
+	*types.UpdateUserIdentityInfoOutput
 
 	response *aws.Response
 }

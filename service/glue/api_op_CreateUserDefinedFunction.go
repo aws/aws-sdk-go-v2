@@ -6,69 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/glue/types"
 )
-
-type CreateUserDefinedFunctionInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the Data Catalog in which to create the function. If none is provided,
-	// the AWS account ID is used by default.
-	CatalogId *string `min:"1" type:"string"`
-
-	// The name of the catalog database in which to create the function.
-	//
-	// DatabaseName is a required field
-	DatabaseName *string `min:"1" type:"string" required:"true"`
-
-	// A FunctionInput object that defines the function to create in the Data Catalog.
-	//
-	// FunctionInput is a required field
-	FunctionInput *UserDefinedFunctionInput `type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s CreateUserDefinedFunctionInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateUserDefinedFunctionInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateUserDefinedFunctionInput"}
-	if s.CatalogId != nil && len(*s.CatalogId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("CatalogId", 1))
-	}
-
-	if s.DatabaseName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DatabaseName"))
-	}
-	if s.DatabaseName != nil && len(*s.DatabaseName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("DatabaseName", 1))
-	}
-
-	if s.FunctionInput == nil {
-		invalidParams.Add(aws.NewErrParamRequired("FunctionInput"))
-	}
-	if s.FunctionInput != nil {
-		if err := s.FunctionInput.Validate(); err != nil {
-			invalidParams.AddNested("FunctionInput", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type CreateUserDefinedFunctionOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s CreateUserDefinedFunctionOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCreateUserDefinedFunction = "CreateUserDefinedFunction"
 
@@ -85,7 +24,7 @@ const opCreateUserDefinedFunction = "CreateUserDefinedFunction"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CreateUserDefinedFunction
-func (c *Client) CreateUserDefinedFunctionRequest(input *CreateUserDefinedFunctionInput) CreateUserDefinedFunctionRequest {
+func (c *Client) CreateUserDefinedFunctionRequest(input *types.CreateUserDefinedFunctionInput) CreateUserDefinedFunctionRequest {
 	op := &aws.Operation{
 		Name:       opCreateUserDefinedFunction,
 		HTTPMethod: "POST",
@@ -93,10 +32,10 @@ func (c *Client) CreateUserDefinedFunctionRequest(input *CreateUserDefinedFuncti
 	}
 
 	if input == nil {
-		input = &CreateUserDefinedFunctionInput{}
+		input = &types.CreateUserDefinedFunctionInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateUserDefinedFunctionOutput{})
+	req := c.newRequest(op, input, &types.CreateUserDefinedFunctionOutput{})
 	return CreateUserDefinedFunctionRequest{Request: req, Input: input, Copy: c.CreateUserDefinedFunctionRequest}
 }
 
@@ -104,8 +43,8 @@ func (c *Client) CreateUserDefinedFunctionRequest(input *CreateUserDefinedFuncti
 // CreateUserDefinedFunction API operation.
 type CreateUserDefinedFunctionRequest struct {
 	*aws.Request
-	Input *CreateUserDefinedFunctionInput
-	Copy  func(*CreateUserDefinedFunctionInput) CreateUserDefinedFunctionRequest
+	Input *types.CreateUserDefinedFunctionInput
+	Copy  func(*types.CreateUserDefinedFunctionInput) CreateUserDefinedFunctionRequest
 }
 
 // Send marshals and sends the CreateUserDefinedFunction API request.
@@ -117,7 +56,7 @@ func (r CreateUserDefinedFunctionRequest) Send(ctx context.Context) (*CreateUser
 	}
 
 	resp := &CreateUserDefinedFunctionResponse{
-		CreateUserDefinedFunctionOutput: r.Request.Data.(*CreateUserDefinedFunctionOutput),
+		CreateUserDefinedFunctionOutput: r.Request.Data.(*types.CreateUserDefinedFunctionOutput),
 		response:                        &aws.Response{Request: r.Request},
 	}
 
@@ -127,7 +66,7 @@ func (r CreateUserDefinedFunctionRequest) Send(ctx context.Context) (*CreateUser
 // CreateUserDefinedFunctionResponse is the response type for the
 // CreateUserDefinedFunction API operation.
 type CreateUserDefinedFunctionResponse struct {
-	*CreateUserDefinedFunctionOutput
+	*types.CreateUserDefinedFunctionOutput
 
 	response *aws.Response
 }

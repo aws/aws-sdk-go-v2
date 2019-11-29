@@ -6,66 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/restjson"
+	"github.com/aws/aws-sdk-go-v2/service/apigateway/types"
 )
-
-// A request to delete the ClientCertificate resource.
-type DeleteClientCertificateInput struct {
-	_ struct{} `type:"structure"`
-
-	// [Required] The identifier of the ClientCertificate resource to be deleted.
-	//
-	// ClientCertificateId is a required field
-	ClientCertificateId *string `location:"uri" locationName:"clientcertificate_id" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteClientCertificateInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteClientCertificateInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteClientCertificateInput"}
-
-	if s.ClientCertificateId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ClientCertificateId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteClientCertificateInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.ClientCertificateId != nil {
-		v := *s.ClientCertificateId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "clientcertificate_id", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type DeleteClientCertificateOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteClientCertificateOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s DeleteClientCertificateOutput) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
 
 const opDeleteClientCertificate = "DeleteClientCertificate"
 
@@ -80,7 +24,7 @@ const opDeleteClientCertificate = "DeleteClientCertificate"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) DeleteClientCertificateRequest(input *DeleteClientCertificateInput) DeleteClientCertificateRequest {
+func (c *Client) DeleteClientCertificateRequest(input *types.DeleteClientCertificateInput) DeleteClientCertificateRequest {
 	op := &aws.Operation{
 		Name:       opDeleteClientCertificate,
 		HTTPMethod: "DELETE",
@@ -88,10 +32,10 @@ func (c *Client) DeleteClientCertificateRequest(input *DeleteClientCertificateIn
 	}
 
 	if input == nil {
-		input = &DeleteClientCertificateInput{}
+		input = &types.DeleteClientCertificateInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteClientCertificateOutput{})
+	req := c.newRequest(op, input, &types.DeleteClientCertificateOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return DeleteClientCertificateRequest{Request: req, Input: input, Copy: c.DeleteClientCertificateRequest}
@@ -101,8 +45,8 @@ func (c *Client) DeleteClientCertificateRequest(input *DeleteClientCertificateIn
 // DeleteClientCertificate API operation.
 type DeleteClientCertificateRequest struct {
 	*aws.Request
-	Input *DeleteClientCertificateInput
-	Copy  func(*DeleteClientCertificateInput) DeleteClientCertificateRequest
+	Input *types.DeleteClientCertificateInput
+	Copy  func(*types.DeleteClientCertificateInput) DeleteClientCertificateRequest
 }
 
 // Send marshals and sends the DeleteClientCertificate API request.
@@ -114,7 +58,7 @@ func (r DeleteClientCertificateRequest) Send(ctx context.Context) (*DeleteClient
 	}
 
 	resp := &DeleteClientCertificateResponse{
-		DeleteClientCertificateOutput: r.Request.Data.(*DeleteClientCertificateOutput),
+		DeleteClientCertificateOutput: r.Request.Data.(*types.DeleteClientCertificateOutput),
 		response:                      &aws.Response{Request: r.Request},
 	}
 
@@ -124,7 +68,7 @@ func (r DeleteClientCertificateRequest) Send(ctx context.Context) (*DeleteClient
 // DeleteClientCertificateResponse is the response type for the
 // DeleteClientCertificate API operation.
 type DeleteClientCertificateResponse struct {
-	*DeleteClientCertificateOutput
+	*types.DeleteClientCertificateOutput
 
 	response *aws.Response
 }

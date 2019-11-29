@@ -6,48 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/mediastore/types"
 )
-
-type StartAccessLoggingInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the container that you want to start access logging on.
-	//
-	// ContainerName is a required field
-	ContainerName *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s StartAccessLoggingInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *StartAccessLoggingInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "StartAccessLoggingInput"}
-
-	if s.ContainerName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ContainerName"))
-	}
-	if s.ContainerName != nil && len(*s.ContainerName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ContainerName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type StartAccessLoggingOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s StartAccessLoggingOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opStartAccessLogging = "StartAccessLogging"
 
@@ -66,7 +26,7 @@ const opStartAccessLogging = "StartAccessLogging"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mediastore-2017-09-01/StartAccessLogging
-func (c *Client) StartAccessLoggingRequest(input *StartAccessLoggingInput) StartAccessLoggingRequest {
+func (c *Client) StartAccessLoggingRequest(input *types.StartAccessLoggingInput) StartAccessLoggingRequest {
 	op := &aws.Operation{
 		Name:       opStartAccessLogging,
 		HTTPMethod: "POST",
@@ -74,10 +34,10 @@ func (c *Client) StartAccessLoggingRequest(input *StartAccessLoggingInput) Start
 	}
 
 	if input == nil {
-		input = &StartAccessLoggingInput{}
+		input = &types.StartAccessLoggingInput{}
 	}
 
-	req := c.newRequest(op, input, &StartAccessLoggingOutput{})
+	req := c.newRequest(op, input, &types.StartAccessLoggingOutput{})
 	return StartAccessLoggingRequest{Request: req, Input: input, Copy: c.StartAccessLoggingRequest}
 }
 
@@ -85,8 +45,8 @@ func (c *Client) StartAccessLoggingRequest(input *StartAccessLoggingInput) Start
 // StartAccessLogging API operation.
 type StartAccessLoggingRequest struct {
 	*aws.Request
-	Input *StartAccessLoggingInput
-	Copy  func(*StartAccessLoggingInput) StartAccessLoggingRequest
+	Input *types.StartAccessLoggingInput
+	Copy  func(*types.StartAccessLoggingInput) StartAccessLoggingRequest
 }
 
 // Send marshals and sends the StartAccessLogging API request.
@@ -98,7 +58,7 @@ func (r StartAccessLoggingRequest) Send(ctx context.Context) (*StartAccessLoggin
 	}
 
 	resp := &StartAccessLoggingResponse{
-		StartAccessLoggingOutput: r.Request.Data.(*StartAccessLoggingOutput),
+		StartAccessLoggingOutput: r.Request.Data.(*types.StartAccessLoggingOutput),
 		response:                 &aws.Response{Request: r.Request},
 	}
 
@@ -108,7 +68,7 @@ func (r StartAccessLoggingRequest) Send(ctx context.Context) (*StartAccessLoggin
 // StartAccessLoggingResponse is the response type for the
 // StartAccessLogging API operation.
 type StartAccessLoggingResponse struct {
-	*StartAccessLoggingOutput
+	*types.StartAccessLoggingOutput
 
 	response *aws.Response
 }

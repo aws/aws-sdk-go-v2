@@ -6,70 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/greengrass/types"
 )
-
-type UpdateConnectorDefinitionInput struct {
-	_ struct{} `type:"structure"`
-
-	// ConnectorDefinitionId is a required field
-	ConnectorDefinitionId *string `location:"uri" locationName:"ConnectorDefinitionId" type:"string" required:"true"`
-
-	Name *string `type:"string"`
-}
-
-// String returns the string representation
-func (s UpdateConnectorDefinitionInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateConnectorDefinitionInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateConnectorDefinitionInput"}
-
-	if s.ConnectorDefinitionId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ConnectorDefinitionId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s UpdateConnectorDefinitionInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.Name != nil {
-		v := *s.Name
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "Name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.ConnectorDefinitionId != nil {
-		v := *s.ConnectorDefinitionId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "ConnectorDefinitionId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type UpdateConnectorDefinitionOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s UpdateConnectorDefinitionOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s UpdateConnectorDefinitionOutput) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
 
 const opUpdateConnectorDefinition = "UpdateConnectorDefinition"
 
@@ -86,7 +24,7 @@ const opUpdateConnectorDefinition = "UpdateConnectorDefinition"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/UpdateConnectorDefinition
-func (c *Client) UpdateConnectorDefinitionRequest(input *UpdateConnectorDefinitionInput) UpdateConnectorDefinitionRequest {
+func (c *Client) UpdateConnectorDefinitionRequest(input *types.UpdateConnectorDefinitionInput) UpdateConnectorDefinitionRequest {
 	op := &aws.Operation{
 		Name:       opUpdateConnectorDefinition,
 		HTTPMethod: "PUT",
@@ -94,10 +32,10 @@ func (c *Client) UpdateConnectorDefinitionRequest(input *UpdateConnectorDefiniti
 	}
 
 	if input == nil {
-		input = &UpdateConnectorDefinitionInput{}
+		input = &types.UpdateConnectorDefinitionInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateConnectorDefinitionOutput{})
+	req := c.newRequest(op, input, &types.UpdateConnectorDefinitionOutput{})
 	return UpdateConnectorDefinitionRequest{Request: req, Input: input, Copy: c.UpdateConnectorDefinitionRequest}
 }
 
@@ -105,8 +43,8 @@ func (c *Client) UpdateConnectorDefinitionRequest(input *UpdateConnectorDefiniti
 // UpdateConnectorDefinition API operation.
 type UpdateConnectorDefinitionRequest struct {
 	*aws.Request
-	Input *UpdateConnectorDefinitionInput
-	Copy  func(*UpdateConnectorDefinitionInput) UpdateConnectorDefinitionRequest
+	Input *types.UpdateConnectorDefinitionInput
+	Copy  func(*types.UpdateConnectorDefinitionInput) UpdateConnectorDefinitionRequest
 }
 
 // Send marshals and sends the UpdateConnectorDefinition API request.
@@ -118,7 +56,7 @@ func (r UpdateConnectorDefinitionRequest) Send(ctx context.Context) (*UpdateConn
 	}
 
 	resp := &UpdateConnectorDefinitionResponse{
-		UpdateConnectorDefinitionOutput: r.Request.Data.(*UpdateConnectorDefinitionOutput),
+		UpdateConnectorDefinitionOutput: r.Request.Data.(*types.UpdateConnectorDefinitionOutput),
 		response:                        &aws.Response{Request: r.Request},
 	}
 
@@ -128,7 +66,7 @@ func (r UpdateConnectorDefinitionRequest) Send(ctx context.Context) (*UpdateConn
 // UpdateConnectorDefinitionResponse is the response type for the
 // UpdateConnectorDefinition API operation.
 type UpdateConnectorDefinitionResponse struct {
-	*UpdateConnectorDefinitionOutput
+	*types.UpdateConnectorDefinitionOutput
 
 	response *aws.Response
 }

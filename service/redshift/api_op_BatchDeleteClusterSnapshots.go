@@ -4,61 +4,10 @@ package redshift
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/redshift/types"
 )
-
-type BatchDeleteClusterSnapshotsInput struct {
-	_ struct{} `type:"structure"`
-
-	// A list of identifiers for the snapshots that you want to delete.
-	//
-	// Identifiers is a required field
-	Identifiers []DeleteClusterSnapshotMessage `locationNameList:"DeleteClusterSnapshotMessage" type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s BatchDeleteClusterSnapshotsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *BatchDeleteClusterSnapshotsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "BatchDeleteClusterSnapshotsInput"}
-
-	if s.Identifiers == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Identifiers"))
-	}
-	if s.Identifiers != nil {
-		for i, v := range s.Identifiers {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Identifiers", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type BatchDeleteClusterSnapshotsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A list of any errors returned.
-	Errors []SnapshotErrorMessage `locationNameList:"SnapshotErrorMessage" type:"list"`
-
-	// A list of the snapshot identifiers that were deleted.
-	Resources []string `locationNameList:"String" type:"list"`
-}
-
-// String returns the string representation
-func (s BatchDeleteClusterSnapshotsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opBatchDeleteClusterSnapshots = "BatchDeleteClusterSnapshots"
 
@@ -75,7 +24,7 @@ const opBatchDeleteClusterSnapshots = "BatchDeleteClusterSnapshots"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/BatchDeleteClusterSnapshots
-func (c *Client) BatchDeleteClusterSnapshotsRequest(input *BatchDeleteClusterSnapshotsInput) BatchDeleteClusterSnapshotsRequest {
+func (c *Client) BatchDeleteClusterSnapshotsRequest(input *types.BatchDeleteClusterSnapshotsInput) BatchDeleteClusterSnapshotsRequest {
 	op := &aws.Operation{
 		Name:       opBatchDeleteClusterSnapshots,
 		HTTPMethod: "POST",
@@ -83,10 +32,10 @@ func (c *Client) BatchDeleteClusterSnapshotsRequest(input *BatchDeleteClusterSna
 	}
 
 	if input == nil {
-		input = &BatchDeleteClusterSnapshotsInput{}
+		input = &types.BatchDeleteClusterSnapshotsInput{}
 	}
 
-	req := c.newRequest(op, input, &BatchDeleteClusterSnapshotsOutput{})
+	req := c.newRequest(op, input, &types.BatchDeleteClusterSnapshotsOutput{})
 	return BatchDeleteClusterSnapshotsRequest{Request: req, Input: input, Copy: c.BatchDeleteClusterSnapshotsRequest}
 }
 
@@ -94,8 +43,8 @@ func (c *Client) BatchDeleteClusterSnapshotsRequest(input *BatchDeleteClusterSna
 // BatchDeleteClusterSnapshots API operation.
 type BatchDeleteClusterSnapshotsRequest struct {
 	*aws.Request
-	Input *BatchDeleteClusterSnapshotsInput
-	Copy  func(*BatchDeleteClusterSnapshotsInput) BatchDeleteClusterSnapshotsRequest
+	Input *types.BatchDeleteClusterSnapshotsInput
+	Copy  func(*types.BatchDeleteClusterSnapshotsInput) BatchDeleteClusterSnapshotsRequest
 }
 
 // Send marshals and sends the BatchDeleteClusterSnapshots API request.
@@ -107,7 +56,7 @@ func (r BatchDeleteClusterSnapshotsRequest) Send(ctx context.Context) (*BatchDel
 	}
 
 	resp := &BatchDeleteClusterSnapshotsResponse{
-		BatchDeleteClusterSnapshotsOutput: r.Request.Data.(*BatchDeleteClusterSnapshotsOutput),
+		BatchDeleteClusterSnapshotsOutput: r.Request.Data.(*types.BatchDeleteClusterSnapshotsOutput),
 		response:                          &aws.Response{Request: r.Request},
 	}
 
@@ -117,7 +66,7 @@ func (r BatchDeleteClusterSnapshotsRequest) Send(ctx context.Context) (*BatchDel
 // BatchDeleteClusterSnapshotsResponse is the response type for the
 // BatchDeleteClusterSnapshots API operation.
 type BatchDeleteClusterSnapshotsResponse struct {
-	*BatchDeleteClusterSnapshotsOutput
+	*types.BatchDeleteClusterSnapshotsOutput
 
 	response *aws.Response
 }

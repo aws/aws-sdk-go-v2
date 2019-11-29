@@ -6,91 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/rekognition/types"
 )
-
-type GetFaceSearchInput struct {
-	_ struct{} `type:"structure"`
-
-	// The job identifer for the search request. You get the job identifier from
-	// an initial call to StartFaceSearch.
-	//
-	// JobId is a required field
-	JobId *string `min:"1" type:"string" required:"true"`
-
-	// Maximum number of results to return per paginated call. The largest value
-	// you can specify is 1000. If you specify a value greater than 1000, a maximum
-	// of 1000 results is returned. The default value is 1000.
-	MaxResults *int64 `min:"1" type:"integer"`
-
-	// If the previous response was incomplete (because there is more search results
-	// to retrieve), Amazon Rekognition Video returns a pagination token in the
-	// response. You can use this pagination token to retrieve the next set of search
-	// results.
-	NextToken *string `type:"string"`
-
-	// Sort to use for grouping faces in the response. Use TIMESTAMP to group faces
-	// by the time that they are recognized. Use INDEX to sort by recognized faces.
-	SortBy FaceSearchSortBy `type:"string" enum:"true"`
-}
-
-// String returns the string representation
-func (s GetFaceSearchInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetFaceSearchInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetFaceSearchInput"}
-
-	if s.JobId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("JobId"))
-	}
-	if s.JobId != nil && len(*s.JobId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("JobId", 1))
-	}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type GetFaceSearchOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The current status of the face search job.
-	JobStatus VideoJobStatus `type:"string" enum:"true"`
-
-	// If the response is truncated, Amazon Rekognition Video returns this token
-	// that you can use in the subsequent request to retrieve the next set of search
-	// results.
-	NextToken *string `type:"string"`
-
-	// An array of persons, PersonMatch, in the video whose face(s) match the face(s)
-	// in an Amazon Rekognition collection. It also includes time information for
-	// when persons are matched in the video. You specify the input collection in
-	// an initial call to StartFaceSearch. Each Persons element includes a time
-	// the person was matched, face match details (FaceMatches) for matching faces
-	// in the collection, and person information (Person) for the matched person.
-	Persons []PersonMatch `type:"list"`
-
-	// If the job fails, StatusMessage provides a descriptive error message.
-	StatusMessage *string `type:"string"`
-
-	// Information about a video that Amazon Rekognition analyzed. Videometadata
-	// is returned in every page of paginated responses from a Amazon Rekognition
-	// Video operation.
-	VideoMetadata *VideoMetadata `type:"structure"`
-}
-
-// String returns the string representation
-func (s GetFaceSearchOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetFaceSearch = "GetFaceSearch"
 
@@ -135,7 +52,7 @@ const opGetFaceSearch = "GetFaceSearch"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) GetFaceSearchRequest(input *GetFaceSearchInput) GetFaceSearchRequest {
+func (c *Client) GetFaceSearchRequest(input *types.GetFaceSearchInput) GetFaceSearchRequest {
 	op := &aws.Operation{
 		Name:       opGetFaceSearch,
 		HTTPMethod: "POST",
@@ -149,10 +66,10 @@ func (c *Client) GetFaceSearchRequest(input *GetFaceSearchInput) GetFaceSearchRe
 	}
 
 	if input == nil {
-		input = &GetFaceSearchInput{}
+		input = &types.GetFaceSearchInput{}
 	}
 
-	req := c.newRequest(op, input, &GetFaceSearchOutput{})
+	req := c.newRequest(op, input, &types.GetFaceSearchOutput{})
 	return GetFaceSearchRequest{Request: req, Input: input, Copy: c.GetFaceSearchRequest}
 }
 
@@ -160,8 +77,8 @@ func (c *Client) GetFaceSearchRequest(input *GetFaceSearchInput) GetFaceSearchRe
 // GetFaceSearch API operation.
 type GetFaceSearchRequest struct {
 	*aws.Request
-	Input *GetFaceSearchInput
-	Copy  func(*GetFaceSearchInput) GetFaceSearchRequest
+	Input *types.GetFaceSearchInput
+	Copy  func(*types.GetFaceSearchInput) GetFaceSearchRequest
 }
 
 // Send marshals and sends the GetFaceSearch API request.
@@ -173,7 +90,7 @@ func (r GetFaceSearchRequest) Send(ctx context.Context) (*GetFaceSearchResponse,
 	}
 
 	resp := &GetFaceSearchResponse{
-		GetFaceSearchOutput: r.Request.Data.(*GetFaceSearchOutput),
+		GetFaceSearchOutput: r.Request.Data.(*types.GetFaceSearchOutput),
 		response:            &aws.Response{Request: r.Request},
 	}
 
@@ -203,7 +120,7 @@ func NewGetFaceSearchPaginator(req GetFaceSearchRequest) GetFaceSearchPaginator 
 	return GetFaceSearchPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *GetFaceSearchInput
+				var inCpy *types.GetFaceSearchInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -223,14 +140,14 @@ type GetFaceSearchPaginator struct {
 	aws.Pager
 }
 
-func (p *GetFaceSearchPaginator) CurrentPage() *GetFaceSearchOutput {
-	return p.Pager.CurrentPage().(*GetFaceSearchOutput)
+func (p *GetFaceSearchPaginator) CurrentPage() *types.GetFaceSearchOutput {
+	return p.Pager.CurrentPage().(*types.GetFaceSearchOutput)
 }
 
 // GetFaceSearchResponse is the response type for the
 // GetFaceSearch API operation.
 type GetFaceSearchResponse struct {
-	*GetFaceSearchOutput
+	*types.GetFaceSearchOutput
 
 	response *aws.Response
 }

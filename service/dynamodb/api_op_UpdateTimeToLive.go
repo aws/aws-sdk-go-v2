@@ -6,67 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/dynamodb/types"
 )
-
-// Represents the input of an UpdateTimeToLive operation.
-type UpdateTimeToLiveInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the table to be configured.
-	//
-	// TableName is a required field
-	TableName *string `min:"3" type:"string" required:"true"`
-
-	// Represents the settings used to enable or disable Time to Live for the specified
-	// table.
-	//
-	// TimeToLiveSpecification is a required field
-	TimeToLiveSpecification *TimeToLiveSpecification `type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s UpdateTimeToLiveInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateTimeToLiveInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateTimeToLiveInput"}
-
-	if s.TableName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("TableName"))
-	}
-	if s.TableName != nil && len(*s.TableName) < 3 {
-		invalidParams.Add(aws.NewErrParamMinLen("TableName", 3))
-	}
-
-	if s.TimeToLiveSpecification == nil {
-		invalidParams.Add(aws.NewErrParamRequired("TimeToLiveSpecification"))
-	}
-	if s.TimeToLiveSpecification != nil {
-		if err := s.TimeToLiveSpecification.Validate(); err != nil {
-			invalidParams.AddNested("TimeToLiveSpecification", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type UpdateTimeToLiveOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Represents the output of an UpdateTimeToLive operation.
-	TimeToLiveSpecification *TimeToLiveSpecification `type:"structure"`
-}
-
-// String returns the string representation
-func (s UpdateTimeToLiveOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opUpdateTimeToLive = "UpdateTimeToLive"
 
@@ -110,7 +51,7 @@ const opUpdateTimeToLive = "UpdateTimeToLive"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/UpdateTimeToLive
-func (c *Client) UpdateTimeToLiveRequest(input *UpdateTimeToLiveInput) UpdateTimeToLiveRequest {
+func (c *Client) UpdateTimeToLiveRequest(input *types.UpdateTimeToLiveInput) UpdateTimeToLiveRequest {
 	op := &aws.Operation{
 		Name:       opUpdateTimeToLive,
 		HTTPMethod: "POST",
@@ -118,10 +59,10 @@ func (c *Client) UpdateTimeToLiveRequest(input *UpdateTimeToLiveInput) UpdateTim
 	}
 
 	if input == nil {
-		input = &UpdateTimeToLiveInput{}
+		input = &types.UpdateTimeToLiveInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateTimeToLiveOutput{})
+	req := c.newRequest(op, input, &types.UpdateTimeToLiveOutput{})
 	return UpdateTimeToLiveRequest{Request: req, Input: input, Copy: c.UpdateTimeToLiveRequest}
 }
 
@@ -129,8 +70,8 @@ func (c *Client) UpdateTimeToLiveRequest(input *UpdateTimeToLiveInput) UpdateTim
 // UpdateTimeToLive API operation.
 type UpdateTimeToLiveRequest struct {
 	*aws.Request
-	Input *UpdateTimeToLiveInput
-	Copy  func(*UpdateTimeToLiveInput) UpdateTimeToLiveRequest
+	Input *types.UpdateTimeToLiveInput
+	Copy  func(*types.UpdateTimeToLiveInput) UpdateTimeToLiveRequest
 }
 
 // Send marshals and sends the UpdateTimeToLive API request.
@@ -142,7 +83,7 @@ func (r UpdateTimeToLiveRequest) Send(ctx context.Context) (*UpdateTimeToLiveRes
 	}
 
 	resp := &UpdateTimeToLiveResponse{
-		UpdateTimeToLiveOutput: r.Request.Data.(*UpdateTimeToLiveOutput),
+		UpdateTimeToLiveOutput: r.Request.Data.(*types.UpdateTimeToLiveOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -152,7 +93,7 @@ func (r UpdateTimeToLiveRequest) Send(ctx context.Context) (*UpdateTimeToLiveRes
 // UpdateTimeToLiveResponse is the response type for the
 // UpdateTimeToLive API operation.
 type UpdateTimeToLiveResponse struct {
-	*UpdateTimeToLiveOutput
+	*types.UpdateTimeToLiveOutput
 
 	response *aws.Response
 }

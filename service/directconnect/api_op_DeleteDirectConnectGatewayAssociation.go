@@ -6,38 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/directconnect/types"
 )
-
-type DeleteDirectConnectGatewayAssociationInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the Direct Connect gateway association.
-	AssociationId *string `locationName:"associationId" type:"string"`
-
-	// The ID of the Direct Connect gateway.
-	DirectConnectGatewayId *string `locationName:"directConnectGatewayId" type:"string"`
-
-	// The ID of the virtual private gateway.
-	VirtualGatewayId *string `locationName:"virtualGatewayId" type:"string"`
-}
-
-// String returns the string representation
-func (s DeleteDirectConnectGatewayAssociationInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type DeleteDirectConnectGatewayAssociationOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Information about the deleted association.
-	DirectConnectGatewayAssociation *DirectConnectGatewayAssociation `locationName:"directConnectGatewayAssociation" type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteDirectConnectGatewayAssociationOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteDirectConnectGatewayAssociation = "DeleteDirectConnectGatewayAssociation"
 
@@ -60,7 +30,7 @@ const opDeleteDirectConnectGatewayAssociation = "DeleteDirectConnectGatewayAssoc
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DeleteDirectConnectGatewayAssociation
-func (c *Client) DeleteDirectConnectGatewayAssociationRequest(input *DeleteDirectConnectGatewayAssociationInput) DeleteDirectConnectGatewayAssociationRequest {
+func (c *Client) DeleteDirectConnectGatewayAssociationRequest(input *types.DeleteDirectConnectGatewayAssociationInput) DeleteDirectConnectGatewayAssociationRequest {
 	op := &aws.Operation{
 		Name:       opDeleteDirectConnectGatewayAssociation,
 		HTTPMethod: "POST",
@@ -68,10 +38,10 @@ func (c *Client) DeleteDirectConnectGatewayAssociationRequest(input *DeleteDirec
 	}
 
 	if input == nil {
-		input = &DeleteDirectConnectGatewayAssociationInput{}
+		input = &types.DeleteDirectConnectGatewayAssociationInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteDirectConnectGatewayAssociationOutput{})
+	req := c.newRequest(op, input, &types.DeleteDirectConnectGatewayAssociationOutput{})
 	return DeleteDirectConnectGatewayAssociationRequest{Request: req, Input: input, Copy: c.DeleteDirectConnectGatewayAssociationRequest}
 }
 
@@ -79,8 +49,8 @@ func (c *Client) DeleteDirectConnectGatewayAssociationRequest(input *DeleteDirec
 // DeleteDirectConnectGatewayAssociation API operation.
 type DeleteDirectConnectGatewayAssociationRequest struct {
 	*aws.Request
-	Input *DeleteDirectConnectGatewayAssociationInput
-	Copy  func(*DeleteDirectConnectGatewayAssociationInput) DeleteDirectConnectGatewayAssociationRequest
+	Input *types.DeleteDirectConnectGatewayAssociationInput
+	Copy  func(*types.DeleteDirectConnectGatewayAssociationInput) DeleteDirectConnectGatewayAssociationRequest
 }
 
 // Send marshals and sends the DeleteDirectConnectGatewayAssociation API request.
@@ -92,7 +62,7 @@ func (r DeleteDirectConnectGatewayAssociationRequest) Send(ctx context.Context) 
 	}
 
 	resp := &DeleteDirectConnectGatewayAssociationResponse{
-		DeleteDirectConnectGatewayAssociationOutput: r.Request.Data.(*DeleteDirectConnectGatewayAssociationOutput),
+		DeleteDirectConnectGatewayAssociationOutput: r.Request.Data.(*types.DeleteDirectConnectGatewayAssociationOutput),
 		response: &aws.Response{Request: r.Request},
 	}
 
@@ -102,7 +72,7 @@ func (r DeleteDirectConnectGatewayAssociationRequest) Send(ctx context.Context) 
 // DeleteDirectConnectGatewayAssociationResponse is the response type for the
 // DeleteDirectConnectGatewayAssociation API operation.
 type DeleteDirectConnectGatewayAssociationResponse struct {
-	*DeleteDirectConnectGatewayAssociationOutput
+	*types.DeleteDirectConnectGatewayAssociationOutput
 
 	response *aws.Response
 }

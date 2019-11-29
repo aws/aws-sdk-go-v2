@@ -6,67 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/simpledb/types"
 )
-
-type SelectInput struct {
-	_ struct{} `type:"structure"`
-
-	// Determines whether or not strong consistency should be enforced when data
-	// is read from SimpleDB. If
-	//    true
-	// , any data previously written to SimpleDB will be returned. Otherwise, results
-	// will be consistent eventually, and the client may not see data that was written
-	// immediately before your read.
-	ConsistentRead *bool `type:"boolean"`
-
-	// A string informing Amazon SimpleDB where to start the next list of
-	//    ItemNames
-	// .
-	NextToken *string `type:"string"`
-
-	// The expression used to query the domain.
-	//
-	// SelectExpression is a required field
-	SelectExpression *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s SelectInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *SelectInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "SelectInput"}
-
-	if s.SelectExpression == nil {
-		invalidParams.Add(aws.NewErrParamRequired("SelectExpression"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type SelectOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A list of items that match the select expression.
-	Items []Item `locationNameList:"Item" type:"list" flattened:"true"`
-
-	// An opaque token indicating that more items than
-	//    MaxNumberOfItems
-	//  were matched, the response size exceeded 1 megabyte, or the execution time
-	//  exceeded 5 seconds.
-	NextToken *string `type:"string"`
-}
-
-// String returns the string representation
-func (s SelectOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opSelect = "Select"
 
@@ -91,7 +32,7 @@ const opSelect = "Select"
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Client) SelectRequest(input *SelectInput) SelectRequest {
+func (c *Client) SelectRequest(input *types.SelectInput) SelectRequest {
 	op := &aws.Operation{
 		Name:       opSelect,
 		HTTPMethod: "POST",
@@ -105,10 +46,10 @@ func (c *Client) SelectRequest(input *SelectInput) SelectRequest {
 	}
 
 	if input == nil {
-		input = &SelectInput{}
+		input = &types.SelectInput{}
 	}
 
-	req := c.newRequest(op, input, &SelectOutput{})
+	req := c.newRequest(op, input, &types.SelectOutput{})
 	return SelectRequest{Request: req, Input: input, Copy: c.SelectRequest}
 }
 
@@ -116,8 +57,8 @@ func (c *Client) SelectRequest(input *SelectInput) SelectRequest {
 // Select API operation.
 type SelectRequest struct {
 	*aws.Request
-	Input *SelectInput
-	Copy  func(*SelectInput) SelectRequest
+	Input *types.SelectInput
+	Copy  func(*types.SelectInput) SelectRequest
 }
 
 // Send marshals and sends the Select API request.
@@ -129,7 +70,7 @@ func (r SelectRequest) Send(ctx context.Context) (*SelectResponse, error) {
 	}
 
 	resp := &SelectResponse{
-		SelectOutput: r.Request.Data.(*SelectOutput),
+		SelectOutput: r.Request.Data.(*types.SelectOutput),
 		response:     &aws.Response{Request: r.Request},
 	}
 
@@ -159,7 +100,7 @@ func NewSelectPaginator(req SelectRequest) SelectPaginator {
 	return SelectPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *SelectInput
+				var inCpy *types.SelectInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -179,14 +120,14 @@ type SelectPaginator struct {
 	aws.Pager
 }
 
-func (p *SelectPaginator) CurrentPage() *SelectOutput {
-	return p.Pager.CurrentPage().(*SelectOutput)
+func (p *SelectPaginator) CurrentPage() *types.SelectOutput {
+	return p.Pager.CurrentPage().(*types.SelectOutput)
 }
 
 // SelectResponse is the response type for the
 // Select API operation.
 type SelectResponse struct {
-	*SelectOutput
+	*types.SelectOutput
 
 	response *aws.Response
 }

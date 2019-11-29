@@ -6,53 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ses/types"
 )
-
-// A request to modify the delivery options for a configuration set.
-type PutConfigurationSetDeliveryOptionsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the configuration set that you want to specify the delivery options
-	// for.
-	//
-	// ConfigurationSetName is a required field
-	ConfigurationSetName *string `type:"string" required:"true"`
-
-	// Specifies whether messages that use the configuration set are required to
-	// use Transport Layer Security (TLS).
-	DeliveryOptions *DeliveryOptions `type:"structure"`
-}
-
-// String returns the string representation
-func (s PutConfigurationSetDeliveryOptionsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *PutConfigurationSetDeliveryOptionsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "PutConfigurationSetDeliveryOptionsInput"}
-
-	if s.ConfigurationSetName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ConfigurationSetName"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// An HTTP 200 response if the request succeeds, or an error message if the
-// request fails.
-type PutConfigurationSetDeliveryOptionsOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s PutConfigurationSetDeliveryOptionsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opPutConfigurationSetDeliveryOptions = "PutConfigurationSetDeliveryOptions"
 
@@ -69,7 +24,7 @@ const opPutConfigurationSetDeliveryOptions = "PutConfigurationSetDeliveryOptions
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/PutConfigurationSetDeliveryOptions
-func (c *Client) PutConfigurationSetDeliveryOptionsRequest(input *PutConfigurationSetDeliveryOptionsInput) PutConfigurationSetDeliveryOptionsRequest {
+func (c *Client) PutConfigurationSetDeliveryOptionsRequest(input *types.PutConfigurationSetDeliveryOptionsInput) PutConfigurationSetDeliveryOptionsRequest {
 	op := &aws.Operation{
 		Name:       opPutConfigurationSetDeliveryOptions,
 		HTTPMethod: "POST",
@@ -77,10 +32,10 @@ func (c *Client) PutConfigurationSetDeliveryOptionsRequest(input *PutConfigurati
 	}
 
 	if input == nil {
-		input = &PutConfigurationSetDeliveryOptionsInput{}
+		input = &types.PutConfigurationSetDeliveryOptionsInput{}
 	}
 
-	req := c.newRequest(op, input, &PutConfigurationSetDeliveryOptionsOutput{})
+	req := c.newRequest(op, input, &types.PutConfigurationSetDeliveryOptionsOutput{})
 	return PutConfigurationSetDeliveryOptionsRequest{Request: req, Input: input, Copy: c.PutConfigurationSetDeliveryOptionsRequest}
 }
 
@@ -88,8 +43,8 @@ func (c *Client) PutConfigurationSetDeliveryOptionsRequest(input *PutConfigurati
 // PutConfigurationSetDeliveryOptions API operation.
 type PutConfigurationSetDeliveryOptionsRequest struct {
 	*aws.Request
-	Input *PutConfigurationSetDeliveryOptionsInput
-	Copy  func(*PutConfigurationSetDeliveryOptionsInput) PutConfigurationSetDeliveryOptionsRequest
+	Input *types.PutConfigurationSetDeliveryOptionsInput
+	Copy  func(*types.PutConfigurationSetDeliveryOptionsInput) PutConfigurationSetDeliveryOptionsRequest
 }
 
 // Send marshals and sends the PutConfigurationSetDeliveryOptions API request.
@@ -101,7 +56,7 @@ func (r PutConfigurationSetDeliveryOptionsRequest) Send(ctx context.Context) (*P
 	}
 
 	resp := &PutConfigurationSetDeliveryOptionsResponse{
-		PutConfigurationSetDeliveryOptionsOutput: r.Request.Data.(*PutConfigurationSetDeliveryOptionsOutput),
+		PutConfigurationSetDeliveryOptionsOutput: r.Request.Data.(*types.PutConfigurationSetDeliveryOptionsOutput),
 		response:                                 &aws.Response{Request: r.Request},
 	}
 
@@ -111,7 +66,7 @@ func (r PutConfigurationSetDeliveryOptionsRequest) Send(ctx context.Context) (*P
 // PutConfigurationSetDeliveryOptionsResponse is the response type for the
 // PutConfigurationSetDeliveryOptions API operation.
 type PutConfigurationSetDeliveryOptionsResponse struct {
-	*PutConfigurationSetDeliveryOptionsOutput
+	*types.PutConfigurationSetDeliveryOptionsOutput
 
 	response *aws.Response
 }

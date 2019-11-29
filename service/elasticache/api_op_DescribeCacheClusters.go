@@ -6,63 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/elasticache/types"
 )
-
-// Represents the input of a DescribeCacheClusters operation.
-type DescribeCacheClustersInput struct {
-	_ struct{} `type:"structure"`
-
-	// The user-supplied cluster identifier. If this parameter is specified, only
-	// information about that specific cluster is returned. This parameter isn't
-	// case sensitive.
-	CacheClusterId *string `type:"string"`
-
-	// An optional marker returned from a prior request. Use this marker for pagination
-	// of results from this operation. If this parameter is specified, the response
-	// includes only records beyond the marker, up to the value specified by MaxRecords.
-	Marker *string `type:"string"`
-
-	// The maximum number of records to include in the response. If more records
-	// exist than the specified MaxRecords value, a marker is included in the response
-	// so that the remaining results can be retrieved.
-	//
-	// Default: 100
-	//
-	// Constraints: minimum 20; maximum 100.
-	MaxRecords *int64 `type:"integer"`
-
-	// An optional flag that can be included in the DescribeCacheCluster request
-	// to show only nodes (API/CLI: clusters) that are not members of a replication
-	// group. In practice, this mean Memcached and single node Redis clusters.
-	ShowCacheClustersNotInReplicationGroups *bool `type:"boolean"`
-
-	// An optional flag that can be included in the DescribeCacheCluster request
-	// to retrieve information about the individual cache nodes.
-	ShowCacheNodeInfo *bool `type:"boolean"`
-}
-
-// String returns the string representation
-func (s DescribeCacheClustersInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Represents the output of a DescribeCacheClusters operation.
-type DescribeCacheClustersOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A list of clusters. Each item in the list contains detailed information about
-	// one cluster.
-	CacheClusters []CacheCluster `locationNameList:"CacheCluster" type:"list"`
-
-	// Provides an identifier to allow retrieval of paginated results.
-	Marker *string `type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeCacheClustersOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeCacheClusters = "DescribeCacheClusters"
 
@@ -100,7 +45,7 @@ const opDescribeCacheClusters = "DescribeCacheClusters"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DescribeCacheClusters
-func (c *Client) DescribeCacheClustersRequest(input *DescribeCacheClustersInput) DescribeCacheClustersRequest {
+func (c *Client) DescribeCacheClustersRequest(input *types.DescribeCacheClustersInput) DescribeCacheClustersRequest {
 	op := &aws.Operation{
 		Name:       opDescribeCacheClusters,
 		HTTPMethod: "POST",
@@ -114,10 +59,10 @@ func (c *Client) DescribeCacheClustersRequest(input *DescribeCacheClustersInput)
 	}
 
 	if input == nil {
-		input = &DescribeCacheClustersInput{}
+		input = &types.DescribeCacheClustersInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeCacheClustersOutput{})
+	req := c.newRequest(op, input, &types.DescribeCacheClustersOutput{})
 	return DescribeCacheClustersRequest{Request: req, Input: input, Copy: c.DescribeCacheClustersRequest}
 }
 
@@ -125,8 +70,8 @@ func (c *Client) DescribeCacheClustersRequest(input *DescribeCacheClustersInput)
 // DescribeCacheClusters API operation.
 type DescribeCacheClustersRequest struct {
 	*aws.Request
-	Input *DescribeCacheClustersInput
-	Copy  func(*DescribeCacheClustersInput) DescribeCacheClustersRequest
+	Input *types.DescribeCacheClustersInput
+	Copy  func(*types.DescribeCacheClustersInput) DescribeCacheClustersRequest
 }
 
 // Send marshals and sends the DescribeCacheClusters API request.
@@ -138,7 +83,7 @@ func (r DescribeCacheClustersRequest) Send(ctx context.Context) (*DescribeCacheC
 	}
 
 	resp := &DescribeCacheClustersResponse{
-		DescribeCacheClustersOutput: r.Request.Data.(*DescribeCacheClustersOutput),
+		DescribeCacheClustersOutput: r.Request.Data.(*types.DescribeCacheClustersOutput),
 		response:                    &aws.Response{Request: r.Request},
 	}
 
@@ -168,7 +113,7 @@ func NewDescribeCacheClustersPaginator(req DescribeCacheClustersRequest) Describ
 	return DescribeCacheClustersPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *DescribeCacheClustersInput
+				var inCpy *types.DescribeCacheClustersInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -188,14 +133,14 @@ type DescribeCacheClustersPaginator struct {
 	aws.Pager
 }
 
-func (p *DescribeCacheClustersPaginator) CurrentPage() *DescribeCacheClustersOutput {
-	return p.Pager.CurrentPage().(*DescribeCacheClustersOutput)
+func (p *DescribeCacheClustersPaginator) CurrentPage() *types.DescribeCacheClustersOutput {
+	return p.Pager.CurrentPage().(*types.DescribeCacheClustersOutput)
 }
 
 // DescribeCacheClustersResponse is the response type for the
 // DescribeCacheClusters API operation.
 type DescribeCacheClustersResponse struct {
-	*DescribeCacheClustersOutput
+	*types.DescribeCacheClustersOutput
 
 	response *aws.Response
 }

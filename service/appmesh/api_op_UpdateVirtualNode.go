@@ -6,126 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/appmesh/types"
 )
-
-type UpdateVirtualNodeInput struct {
-	_ struct{} `type:"structure"`
-
-	ClientToken *string `locationName:"clientToken" type:"string" idempotencyToken:"true"`
-
-	// MeshName is a required field
-	MeshName *string `location:"uri" locationName:"meshName" min:"1" type:"string" required:"true"`
-
-	// An object representing the specification of a virtual node.
-	//
-	// Spec is a required field
-	Spec *VirtualNodeSpec `locationName:"spec" type:"structure" required:"true"`
-
-	// VirtualNodeName is a required field
-	VirtualNodeName *string `location:"uri" locationName:"virtualNodeName" min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s UpdateVirtualNodeInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateVirtualNodeInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateVirtualNodeInput"}
-
-	if s.MeshName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("MeshName"))
-	}
-	if s.MeshName != nil && len(*s.MeshName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("MeshName", 1))
-	}
-
-	if s.Spec == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Spec"))
-	}
-
-	if s.VirtualNodeName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("VirtualNodeName"))
-	}
-	if s.VirtualNodeName != nil && len(*s.VirtualNodeName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("VirtualNodeName", 1))
-	}
-	if s.Spec != nil {
-		if err := s.Spec.Validate(); err != nil {
-			invalidParams.AddNested("Spec", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s UpdateVirtualNodeInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	var ClientToken string
-	if s.ClientToken != nil {
-		ClientToken = *s.ClientToken
-	} else {
-		ClientToken = protocol.GetIdempotencyToken()
-	}
-	{
-		v := ClientToken
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "clientToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Spec != nil {
-		v := s.Spec
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "spec", v, metadata)
-	}
-	if s.MeshName != nil {
-		v := *s.MeshName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "meshName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.VirtualNodeName != nil {
-		v := *s.VirtualNodeName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "virtualNodeName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type UpdateVirtualNodeOutput struct {
-	_ struct{} `type:"structure" payload:"VirtualNode"`
-
-	// An object representing a virtual node returned by a describe operation.
-	//
-	// VirtualNode is a required field
-	VirtualNode *VirtualNodeData `locationName:"virtualNode" type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s UpdateVirtualNodeOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s UpdateVirtualNodeOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.VirtualNode != nil {
-		v := s.VirtualNode
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.PayloadTarget, "virtualNode", v, metadata)
-	}
-	return nil
-}
 
 const opUpdateVirtualNode = "UpdateVirtualNode"
 
@@ -142,7 +24,7 @@ const opUpdateVirtualNode = "UpdateVirtualNode"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/UpdateVirtualNode
-func (c *Client) UpdateVirtualNodeRequest(input *UpdateVirtualNodeInput) UpdateVirtualNodeRequest {
+func (c *Client) UpdateVirtualNodeRequest(input *types.UpdateVirtualNodeInput) UpdateVirtualNodeRequest {
 	op := &aws.Operation{
 		Name:       opUpdateVirtualNode,
 		HTTPMethod: "PUT",
@@ -150,10 +32,10 @@ func (c *Client) UpdateVirtualNodeRequest(input *UpdateVirtualNodeInput) UpdateV
 	}
 
 	if input == nil {
-		input = &UpdateVirtualNodeInput{}
+		input = &types.UpdateVirtualNodeInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateVirtualNodeOutput{})
+	req := c.newRequest(op, input, &types.UpdateVirtualNodeOutput{})
 	return UpdateVirtualNodeRequest{Request: req, Input: input, Copy: c.UpdateVirtualNodeRequest}
 }
 
@@ -161,8 +43,8 @@ func (c *Client) UpdateVirtualNodeRequest(input *UpdateVirtualNodeInput) UpdateV
 // UpdateVirtualNode API operation.
 type UpdateVirtualNodeRequest struct {
 	*aws.Request
-	Input *UpdateVirtualNodeInput
-	Copy  func(*UpdateVirtualNodeInput) UpdateVirtualNodeRequest
+	Input *types.UpdateVirtualNodeInput
+	Copy  func(*types.UpdateVirtualNodeInput) UpdateVirtualNodeRequest
 }
 
 // Send marshals and sends the UpdateVirtualNode API request.
@@ -174,7 +56,7 @@ func (r UpdateVirtualNodeRequest) Send(ctx context.Context) (*UpdateVirtualNodeR
 	}
 
 	resp := &UpdateVirtualNodeResponse{
-		UpdateVirtualNodeOutput: r.Request.Data.(*UpdateVirtualNodeOutput),
+		UpdateVirtualNodeOutput: r.Request.Data.(*types.UpdateVirtualNodeOutput),
 		response:                &aws.Response{Request: r.Request},
 	}
 
@@ -184,7 +66,7 @@ func (r UpdateVirtualNodeRequest) Send(ctx context.Context) (*UpdateVirtualNodeR
 // UpdateVirtualNodeResponse is the response type for the
 // UpdateVirtualNode API operation.
 type UpdateVirtualNodeResponse struct {
-	*UpdateVirtualNodeOutput
+	*types.UpdateVirtualNodeOutput
 
 	response *aws.Response
 }

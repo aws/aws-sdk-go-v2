@@ -6,32 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/alexaforbusiness/types"
 )
-
-type GetSkillGroupInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ARN of the skill group for which to get details. Required.
-	SkillGroupArn *string `type:"string"`
-}
-
-// String returns the string representation
-func (s GetSkillGroupInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-type GetSkillGroupOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The details of the skill group requested. Required.
-	SkillGroup *SkillGroup `type:"structure"`
-}
-
-// String returns the string representation
-func (s GetSkillGroupOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetSkillGroup = "GetSkillGroup"
 
@@ -48,7 +24,7 @@ const opGetSkillGroup = "GetSkillGroup"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/GetSkillGroup
-func (c *Client) GetSkillGroupRequest(input *GetSkillGroupInput) GetSkillGroupRequest {
+func (c *Client) GetSkillGroupRequest(input *types.GetSkillGroupInput) GetSkillGroupRequest {
 	op := &aws.Operation{
 		Name:       opGetSkillGroup,
 		HTTPMethod: "POST",
@@ -56,10 +32,10 @@ func (c *Client) GetSkillGroupRequest(input *GetSkillGroupInput) GetSkillGroupRe
 	}
 
 	if input == nil {
-		input = &GetSkillGroupInput{}
+		input = &types.GetSkillGroupInput{}
 	}
 
-	req := c.newRequest(op, input, &GetSkillGroupOutput{})
+	req := c.newRequest(op, input, &types.GetSkillGroupOutput{})
 	return GetSkillGroupRequest{Request: req, Input: input, Copy: c.GetSkillGroupRequest}
 }
 
@@ -67,8 +43,8 @@ func (c *Client) GetSkillGroupRequest(input *GetSkillGroupInput) GetSkillGroupRe
 // GetSkillGroup API operation.
 type GetSkillGroupRequest struct {
 	*aws.Request
-	Input *GetSkillGroupInput
-	Copy  func(*GetSkillGroupInput) GetSkillGroupRequest
+	Input *types.GetSkillGroupInput
+	Copy  func(*types.GetSkillGroupInput) GetSkillGroupRequest
 }
 
 // Send marshals and sends the GetSkillGroup API request.
@@ -80,7 +56,7 @@ func (r GetSkillGroupRequest) Send(ctx context.Context) (*GetSkillGroupResponse,
 	}
 
 	resp := &GetSkillGroupResponse{
-		GetSkillGroupOutput: r.Request.Data.(*GetSkillGroupOutput),
+		GetSkillGroupOutput: r.Request.Data.(*types.GetSkillGroupOutput),
 		response:            &aws.Response{Request: r.Request},
 	}
 
@@ -90,7 +66,7 @@ func (r GetSkillGroupRequest) Send(ctx context.Context) (*GetSkillGroupResponse,
 // GetSkillGroupResponse is the response type for the
 // GetSkillGroup API operation.
 type GetSkillGroupResponse struct {
-	*GetSkillGroupOutput
+	*types.GetSkillGroupOutput
 
 	response *aws.Response
 }

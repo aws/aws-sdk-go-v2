@@ -13,6 +13,7 @@ import (
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/kinesis"
+	"github.com/aws/aws-sdk-go-v2/service/kinesis/types"
 )
 
 // ClientAPI provides an interface to enable mocking the
@@ -46,7 +47,7 @@ import (
 //    type mockClientClient struct {
 //        kinesisiface.ClientPI
 //    }
-//    func (m *mockClientClient) AddTagsToStream(input *kinesis.AddTagsToStreamInput) (*kinesis.AddTagsToStreamOutput, error) {
+//    func (m *mockClientClient) AddTagsToStream(input *types.AddTagsToStreamInput) (*types.AddTagsToStreamOutput, error) {
 //        // mock response/functionality
 //    }
 //
@@ -64,63 +65,63 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type ClientAPI interface {
-	AddTagsToStreamRequest(*kinesis.AddTagsToStreamInput) kinesis.AddTagsToStreamRequest
+	AddTagsToStreamRequest(*types.AddTagsToStreamInput) kinesis.AddTagsToStreamRequest
 
-	CreateStreamRequest(*kinesis.CreateStreamInput) kinesis.CreateStreamRequest
+	CreateStreamRequest(*types.CreateStreamInput) kinesis.CreateStreamRequest
 
-	DecreaseStreamRetentionPeriodRequest(*kinesis.DecreaseStreamRetentionPeriodInput) kinesis.DecreaseStreamRetentionPeriodRequest
+	DecreaseStreamRetentionPeriodRequest(*types.DecreaseStreamRetentionPeriodInput) kinesis.DecreaseStreamRetentionPeriodRequest
 
-	DeleteStreamRequest(*kinesis.DeleteStreamInput) kinesis.DeleteStreamRequest
+	DeleteStreamRequest(*types.DeleteStreamInput) kinesis.DeleteStreamRequest
 
-	DeregisterStreamConsumerRequest(*kinesis.DeregisterStreamConsumerInput) kinesis.DeregisterStreamConsumerRequest
+	DeregisterStreamConsumerRequest(*types.DeregisterStreamConsumerInput) kinesis.DeregisterStreamConsumerRequest
 
-	DescribeLimitsRequest(*kinesis.DescribeLimitsInput) kinesis.DescribeLimitsRequest
+	DescribeLimitsRequest(*types.DescribeLimitsInput) kinesis.DescribeLimitsRequest
 
-	DescribeStreamRequest(*kinesis.DescribeStreamInput) kinesis.DescribeStreamRequest
+	DescribeStreamRequest(*types.DescribeStreamInput) kinesis.DescribeStreamRequest
 
-	DescribeStreamConsumerRequest(*kinesis.DescribeStreamConsumerInput) kinesis.DescribeStreamConsumerRequest
+	DescribeStreamConsumerRequest(*types.DescribeStreamConsumerInput) kinesis.DescribeStreamConsumerRequest
 
-	DescribeStreamSummaryRequest(*kinesis.DescribeStreamSummaryInput) kinesis.DescribeStreamSummaryRequest
+	DescribeStreamSummaryRequest(*types.DescribeStreamSummaryInput) kinesis.DescribeStreamSummaryRequest
 
-	DisableEnhancedMonitoringRequest(*kinesis.DisableEnhancedMonitoringInput) kinesis.DisableEnhancedMonitoringRequest
+	DisableEnhancedMonitoringRequest(*types.DisableEnhancedMonitoringInput) kinesis.DisableEnhancedMonitoringRequest
 
-	EnableEnhancedMonitoringRequest(*kinesis.EnableEnhancedMonitoringInput) kinesis.EnableEnhancedMonitoringRequest
+	EnableEnhancedMonitoringRequest(*types.EnableEnhancedMonitoringInput) kinesis.EnableEnhancedMonitoringRequest
 
-	GetRecordsRequest(*kinesis.GetRecordsInput) kinesis.GetRecordsRequest
+	GetRecordsRequest(*types.GetRecordsInput) kinesis.GetRecordsRequest
 
-	GetShardIteratorRequest(*kinesis.GetShardIteratorInput) kinesis.GetShardIteratorRequest
+	GetShardIteratorRequest(*types.GetShardIteratorInput) kinesis.GetShardIteratorRequest
 
-	IncreaseStreamRetentionPeriodRequest(*kinesis.IncreaseStreamRetentionPeriodInput) kinesis.IncreaseStreamRetentionPeriodRequest
+	IncreaseStreamRetentionPeriodRequest(*types.IncreaseStreamRetentionPeriodInput) kinesis.IncreaseStreamRetentionPeriodRequest
 
-	ListShardsRequest(*kinesis.ListShardsInput) kinesis.ListShardsRequest
+	ListShardsRequest(*types.ListShardsInput) kinesis.ListShardsRequest
 
-	ListStreamConsumersRequest(*kinesis.ListStreamConsumersInput) kinesis.ListStreamConsumersRequest
+	ListStreamConsumersRequest(*types.ListStreamConsumersInput) kinesis.ListStreamConsumersRequest
 
-	ListStreamsRequest(*kinesis.ListStreamsInput) kinesis.ListStreamsRequest
+	ListStreamsRequest(*types.ListStreamsInput) kinesis.ListStreamsRequest
 
-	ListTagsForStreamRequest(*kinesis.ListTagsForStreamInput) kinesis.ListTagsForStreamRequest
+	ListTagsForStreamRequest(*types.ListTagsForStreamInput) kinesis.ListTagsForStreamRequest
 
-	MergeShardsRequest(*kinesis.MergeShardsInput) kinesis.MergeShardsRequest
+	MergeShardsRequest(*types.MergeShardsInput) kinesis.MergeShardsRequest
 
-	PutRecordRequest(*kinesis.PutRecordInput) kinesis.PutRecordRequest
+	PutRecordRequest(*types.PutRecordInput) kinesis.PutRecordRequest
 
-	PutRecordsRequest(*kinesis.PutRecordsInput) kinesis.PutRecordsRequest
+	PutRecordsRequest(*types.PutRecordsInput) kinesis.PutRecordsRequest
 
-	RegisterStreamConsumerRequest(*kinesis.RegisterStreamConsumerInput) kinesis.RegisterStreamConsumerRequest
+	RegisterStreamConsumerRequest(*types.RegisterStreamConsumerInput) kinesis.RegisterStreamConsumerRequest
 
-	RemoveTagsFromStreamRequest(*kinesis.RemoveTagsFromStreamInput) kinesis.RemoveTagsFromStreamRequest
+	RemoveTagsFromStreamRequest(*types.RemoveTagsFromStreamInput) kinesis.RemoveTagsFromStreamRequest
 
-	SplitShardRequest(*kinesis.SplitShardInput) kinesis.SplitShardRequest
+	SplitShardRequest(*types.SplitShardInput) kinesis.SplitShardRequest
 
-	StartStreamEncryptionRequest(*kinesis.StartStreamEncryptionInput) kinesis.StartStreamEncryptionRequest
+	StartStreamEncryptionRequest(*types.StartStreamEncryptionInput) kinesis.StartStreamEncryptionRequest
 
-	StopStreamEncryptionRequest(*kinesis.StopStreamEncryptionInput) kinesis.StopStreamEncryptionRequest
+	StopStreamEncryptionRequest(*types.StopStreamEncryptionInput) kinesis.StopStreamEncryptionRequest
 
-	UpdateShardCountRequest(*kinesis.UpdateShardCountInput) kinesis.UpdateShardCountRequest
+	UpdateShardCountRequest(*types.UpdateShardCountInput) kinesis.UpdateShardCountRequest
 
-	WaitUntilStreamExists(context.Context, *kinesis.DescribeStreamInput, ...aws.WaiterOption) error
+	WaitUntilStreamExists(context.Context, *types.DescribeStreamInput, ...aws.WaiterOption) error
 
-	WaitUntilStreamNotExists(context.Context, *kinesis.DescribeStreamInput, ...aws.WaiterOption) error
+	WaitUntilStreamNotExists(context.Context, *types.DescribeStreamInput, ...aws.WaiterOption) error
 }
 
 var _ ClientAPI = (*kinesis.Client)(nil)

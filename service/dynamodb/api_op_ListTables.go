@@ -6,69 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/dynamodb/types"
 )
-
-// Represents the input of a ListTables operation.
-type ListTablesInput struct {
-	_ struct{} `type:"structure"`
-
-	// The first table name that this operation will evaluate. Use the value that
-	// was returned for LastEvaluatedTableName in a previous operation, so that
-	// you can obtain the next page of results.
-	ExclusiveStartTableName *string `min:"3" type:"string"`
-
-	// A maximum number of table names to return. If this parameter is not specified,
-	// the limit is 100.
-	Limit *int64 `min:"1" type:"integer"`
-}
-
-// String returns the string representation
-func (s ListTablesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ListTablesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ListTablesInput"}
-	if s.ExclusiveStartTableName != nil && len(*s.ExclusiveStartTableName) < 3 {
-		invalidParams.Add(aws.NewErrParamMinLen("ExclusiveStartTableName", 3))
-	}
-	if s.Limit != nil && *s.Limit < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("Limit", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Represents the output of a ListTables operation.
-type ListTablesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the last table in the current page of results. Use this value
-	// as the ExclusiveStartTableName in a new request to obtain the next page of
-	// results, until all the table names are returned.
-	//
-	// If you do not receive a LastEvaluatedTableName value in the response, this
-	// means that there are no more table names to be retrieved.
-	LastEvaluatedTableName *string `min:"3" type:"string"`
-
-	// The names of the tables associated with the current account at the current
-	// endpoint. The maximum size of this array is 100.
-	//
-	// If LastEvaluatedTableName also appears in the output, you can use this value
-	// as the ExclusiveStartTableName parameter in a subsequent ListTables request
-	// and obtain the next page of results.
-	TableNames []string `type:"list"`
-}
-
-// String returns the string representation
-func (s ListTablesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opListTables = "ListTables"
 
@@ -87,7 +26,7 @@ const opListTables = "ListTables"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/ListTables
-func (c *Client) ListTablesRequest(input *ListTablesInput) ListTablesRequest {
+func (c *Client) ListTablesRequest(input *types.ListTablesInput) ListTablesRequest {
 	op := &aws.Operation{
 		Name:       opListTables,
 		HTTPMethod: "POST",
@@ -101,10 +40,10 @@ func (c *Client) ListTablesRequest(input *ListTablesInput) ListTablesRequest {
 	}
 
 	if input == nil {
-		input = &ListTablesInput{}
+		input = &types.ListTablesInput{}
 	}
 
-	req := c.newRequest(op, input, &ListTablesOutput{})
+	req := c.newRequest(op, input, &types.ListTablesOutput{})
 	return ListTablesRequest{Request: req, Input: input, Copy: c.ListTablesRequest}
 }
 
@@ -112,8 +51,8 @@ func (c *Client) ListTablesRequest(input *ListTablesInput) ListTablesRequest {
 // ListTables API operation.
 type ListTablesRequest struct {
 	*aws.Request
-	Input *ListTablesInput
-	Copy  func(*ListTablesInput) ListTablesRequest
+	Input *types.ListTablesInput
+	Copy  func(*types.ListTablesInput) ListTablesRequest
 }
 
 // Send marshals and sends the ListTables API request.
@@ -125,7 +64,7 @@ func (r ListTablesRequest) Send(ctx context.Context) (*ListTablesResponse, error
 	}
 
 	resp := &ListTablesResponse{
-		ListTablesOutput: r.Request.Data.(*ListTablesOutput),
+		ListTablesOutput: r.Request.Data.(*types.ListTablesOutput),
 		response:         &aws.Response{Request: r.Request},
 	}
 
@@ -155,7 +94,7 @@ func NewListTablesPaginator(req ListTablesRequest) ListTablesPaginator {
 	return ListTablesPaginator{
 		Pager: aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy *ListTablesInput
+				var inCpy *types.ListTablesInput
 				if req.Input != nil {
 					tmp := *req.Input
 					inCpy = &tmp
@@ -175,14 +114,14 @@ type ListTablesPaginator struct {
 	aws.Pager
 }
 
-func (p *ListTablesPaginator) CurrentPage() *ListTablesOutput {
-	return p.Pager.CurrentPage().(*ListTablesOutput)
+func (p *ListTablesPaginator) CurrentPage() *types.ListTablesOutput {
+	return p.Pager.CurrentPage().(*types.ListTablesOutput)
 }
 
 // ListTablesResponse is the response type for the
 // ListTables API operation.
 type ListTablesResponse struct {
-	*ListTablesOutput
+	*types.ListTablesOutput
 
 	response *aws.Response
 }

@@ -10,6 +10,7 @@ package dlmiface
 
 import (
 	"github.com/aws/aws-sdk-go-v2/service/dlm"
+	"github.com/aws/aws-sdk-go-v2/service/dlm/types"
 )
 
 // ClientAPI provides an interface to enable mocking the
@@ -43,7 +44,7 @@ import (
 //    type mockClientClient struct {
 //        dlmiface.ClientPI
 //    }
-//    func (m *mockClientClient) CreateLifecyclePolicy(input *dlm.CreateLifecyclePolicyInput) (*dlm.CreateLifecyclePolicyOutput, error) {
+//    func (m *mockClientClient) CreateLifecyclePolicy(input *types.CreateLifecyclePolicyInput) (*types.CreateLifecyclePolicyOutput, error) {
 //        // mock response/functionality
 //    }
 //
@@ -61,15 +62,21 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type ClientAPI interface {
-	CreateLifecyclePolicyRequest(*dlm.CreateLifecyclePolicyInput) dlm.CreateLifecyclePolicyRequest
+	CreateLifecyclePolicyRequest(*types.CreateLifecyclePolicyInput) dlm.CreateLifecyclePolicyRequest
 
-	DeleteLifecyclePolicyRequest(*dlm.DeleteLifecyclePolicyInput) dlm.DeleteLifecyclePolicyRequest
+	DeleteLifecyclePolicyRequest(*types.DeleteLifecyclePolicyInput) dlm.DeleteLifecyclePolicyRequest
 
-	GetLifecyclePoliciesRequest(*dlm.GetLifecyclePoliciesInput) dlm.GetLifecyclePoliciesRequest
+	GetLifecyclePoliciesRequest(*types.GetLifecyclePoliciesInput) dlm.GetLifecyclePoliciesRequest
 
-	GetLifecyclePolicyRequest(*dlm.GetLifecyclePolicyInput) dlm.GetLifecyclePolicyRequest
+	GetLifecyclePolicyRequest(*types.GetLifecyclePolicyInput) dlm.GetLifecyclePolicyRequest
 
-	UpdateLifecyclePolicyRequest(*dlm.UpdateLifecyclePolicyInput) dlm.UpdateLifecyclePolicyRequest
+	ListTagsForResourceRequest(*types.ListTagsForResourceInput) dlm.ListTagsForResourceRequest
+
+	TagResourceRequest(*types.TagResourceInput) dlm.TagResourceRequest
+
+	UntagResourceRequest(*types.UntagResourceInput) dlm.UntagResourceRequest
+
+	UpdateLifecyclePolicyRequest(*types.UpdateLifecyclePolicyInput) dlm.UpdateLifecyclePolicyRequest
 }
 
 var _ ClientAPI = (*dlm.Client)(nil)

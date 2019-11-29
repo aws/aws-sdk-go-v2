@@ -6,80 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/restjson"
+	"github.com/aws/aws-sdk-go-v2/service/chime/types"
 )
-
-type PutVoiceConnectorTerminationCredentialsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The termination SIP credentials.
-	Credentials []Credential `type:"list"`
-
-	// The Amazon Chime Voice Connector ID.
-	//
-	// VoiceConnectorId is a required field
-	VoiceConnectorId *string `location:"uri" locationName:"voiceConnectorId" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s PutVoiceConnectorTerminationCredentialsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *PutVoiceConnectorTerminationCredentialsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "PutVoiceConnectorTerminationCredentialsInput"}
-
-	if s.VoiceConnectorId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("VoiceConnectorId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s PutVoiceConnectorTerminationCredentialsInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.Credentials != nil {
-		v := s.Credentials
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "Credentials", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddFields(v1)
-		}
-		ls0.End()
-
-	}
-	if s.VoiceConnectorId != nil {
-		v := *s.VoiceConnectorId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "voiceConnectorId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-type PutVoiceConnectorTerminationCredentialsOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s PutVoiceConnectorTerminationCredentialsOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s PutVoiceConnectorTerminationCredentialsOutput) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
 
 const opPutVoiceConnectorTerminationCredentials = "PutVoiceConnectorTerminationCredentials"
 
@@ -96,7 +26,7 @@ const opPutVoiceConnectorTerminationCredentials = "PutVoiceConnectorTerminationC
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/PutVoiceConnectorTerminationCredentials
-func (c *Client) PutVoiceConnectorTerminationCredentialsRequest(input *PutVoiceConnectorTerminationCredentialsInput) PutVoiceConnectorTerminationCredentialsRequest {
+func (c *Client) PutVoiceConnectorTerminationCredentialsRequest(input *types.PutVoiceConnectorTerminationCredentialsInput) PutVoiceConnectorTerminationCredentialsRequest {
 	op := &aws.Operation{
 		Name:       opPutVoiceConnectorTerminationCredentials,
 		HTTPMethod: "POST",
@@ -104,10 +34,10 @@ func (c *Client) PutVoiceConnectorTerminationCredentialsRequest(input *PutVoiceC
 	}
 
 	if input == nil {
-		input = &PutVoiceConnectorTerminationCredentialsInput{}
+		input = &types.PutVoiceConnectorTerminationCredentialsInput{}
 	}
 
-	req := c.newRequest(op, input, &PutVoiceConnectorTerminationCredentialsOutput{})
+	req := c.newRequest(op, input, &types.PutVoiceConnectorTerminationCredentialsOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return PutVoiceConnectorTerminationCredentialsRequest{Request: req, Input: input, Copy: c.PutVoiceConnectorTerminationCredentialsRequest}
@@ -117,8 +47,8 @@ func (c *Client) PutVoiceConnectorTerminationCredentialsRequest(input *PutVoiceC
 // PutVoiceConnectorTerminationCredentials API operation.
 type PutVoiceConnectorTerminationCredentialsRequest struct {
 	*aws.Request
-	Input *PutVoiceConnectorTerminationCredentialsInput
-	Copy  func(*PutVoiceConnectorTerminationCredentialsInput) PutVoiceConnectorTerminationCredentialsRequest
+	Input *types.PutVoiceConnectorTerminationCredentialsInput
+	Copy  func(*types.PutVoiceConnectorTerminationCredentialsInput) PutVoiceConnectorTerminationCredentialsRequest
 }
 
 // Send marshals and sends the PutVoiceConnectorTerminationCredentials API request.
@@ -130,7 +60,7 @@ func (r PutVoiceConnectorTerminationCredentialsRequest) Send(ctx context.Context
 	}
 
 	resp := &PutVoiceConnectorTerminationCredentialsResponse{
-		PutVoiceConnectorTerminationCredentialsOutput: r.Request.Data.(*PutVoiceConnectorTerminationCredentialsOutput),
+		PutVoiceConnectorTerminationCredentialsOutput: r.Request.Data.(*types.PutVoiceConnectorTerminationCredentialsOutput),
 		response: &aws.Response{Request: r.Request},
 	}
 
@@ -140,7 +70,7 @@ func (r PutVoiceConnectorTerminationCredentialsRequest) Send(ctx context.Context
 // PutVoiceConnectorTerminationCredentialsResponse is the response type for the
 // PutVoiceConnectorTerminationCredentials API operation.
 type PutVoiceConnectorTerminationCredentialsResponse struct {
-	*PutVoiceConnectorTerminationCredentialsOutput
+	*types.PutVoiceConnectorTerminationCredentialsOutput
 
 	response *aws.Response
 }

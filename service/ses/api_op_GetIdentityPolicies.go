@@ -6,70 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/ses/types"
 )
-
-// Represents a request to return the requested sending authorization policies
-// for an identity. Sending authorization is an Amazon SES feature that enables
-// you to authorize other senders to use your identities. For information, see
-// the Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html).
-type GetIdentityPoliciesInput struct {
-	_ struct{} `type:"structure"`
-
-	// The identity for which the policies will be retrieved. You can specify an
-	// identity by using its name or by using its Amazon Resource Name (ARN). Examples:
-	// user@example.com, example.com, arn:aws:ses:us-east-1:123456789012:identity/example.com.
-	//
-	// To successfully call this API, you must own the identity.
-	//
-	// Identity is a required field
-	Identity *string `type:"string" required:"true"`
-
-	// A list of the names of policies to be retrieved. You can retrieve a maximum
-	// of 20 policies at a time. If you do not know the names of the policies that
-	// are attached to the identity, you can use ListIdentityPolicies.
-	//
-	// PolicyNames is a required field
-	PolicyNames []string `type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s GetIdentityPoliciesInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetIdentityPoliciesInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetIdentityPoliciesInput"}
-
-	if s.Identity == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Identity"))
-	}
-
-	if s.PolicyNames == nil {
-		invalidParams.Add(aws.NewErrParamRequired("PolicyNames"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Represents the requested sending authorization policies.
-type GetIdentityPoliciesOutput struct {
-	_ struct{} `type:"structure"`
-
-	// A map of policy names to policies.
-	//
-	// Policies is a required field
-	Policies map[string]string `type:"map" required:"true"`
-}
-
-// String returns the string representation
-func (s GetIdentityPoliciesOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opGetIdentityPolicies = "GetIdentityPolicies"
 
@@ -98,7 +36,7 @@ const opGetIdentityPolicies = "GetIdentityPolicies"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/GetIdentityPolicies
-func (c *Client) GetIdentityPoliciesRequest(input *GetIdentityPoliciesInput) GetIdentityPoliciesRequest {
+func (c *Client) GetIdentityPoliciesRequest(input *types.GetIdentityPoliciesInput) GetIdentityPoliciesRequest {
 	op := &aws.Operation{
 		Name:       opGetIdentityPolicies,
 		HTTPMethod: "POST",
@@ -106,10 +44,10 @@ func (c *Client) GetIdentityPoliciesRequest(input *GetIdentityPoliciesInput) Get
 	}
 
 	if input == nil {
-		input = &GetIdentityPoliciesInput{}
+		input = &types.GetIdentityPoliciesInput{}
 	}
 
-	req := c.newRequest(op, input, &GetIdentityPoliciesOutput{})
+	req := c.newRequest(op, input, &types.GetIdentityPoliciesOutput{})
 	return GetIdentityPoliciesRequest{Request: req, Input: input, Copy: c.GetIdentityPoliciesRequest}
 }
 
@@ -117,8 +55,8 @@ func (c *Client) GetIdentityPoliciesRequest(input *GetIdentityPoliciesInput) Get
 // GetIdentityPolicies API operation.
 type GetIdentityPoliciesRequest struct {
 	*aws.Request
-	Input *GetIdentityPoliciesInput
-	Copy  func(*GetIdentityPoliciesInput) GetIdentityPoliciesRequest
+	Input *types.GetIdentityPoliciesInput
+	Copy  func(*types.GetIdentityPoliciesInput) GetIdentityPoliciesRequest
 }
 
 // Send marshals and sends the GetIdentityPolicies API request.
@@ -130,7 +68,7 @@ func (r GetIdentityPoliciesRequest) Send(ctx context.Context) (*GetIdentityPolic
 	}
 
 	resp := &GetIdentityPoliciesResponse{
-		GetIdentityPoliciesOutput: r.Request.Data.(*GetIdentityPoliciesOutput),
+		GetIdentityPoliciesOutput: r.Request.Data.(*types.GetIdentityPoliciesOutput),
 		response:                  &aws.Response{Request: r.Request},
 	}
 
@@ -140,7 +78,7 @@ func (r GetIdentityPoliciesRequest) Send(ctx context.Context) (*GetIdentityPolic
 // GetIdentityPoliciesResponse is the response type for the
 // GetIdentityPolicies API operation.
 type GetIdentityPoliciesResponse struct {
-	*GetIdentityPoliciesOutput
+	*types.GetIdentityPoliciesOutput
 
 	response *aws.Response
 }

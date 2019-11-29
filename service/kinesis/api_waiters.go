@@ -7,6 +7,7 @@ import (
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
+	"github.com/aws/aws-sdk-go-v2/service/kinesis/types"
 )
 
 // WaitUntilStreamExists uses the Kinesis API operation
@@ -18,7 +19,7 @@ import (
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Client) WaitUntilStreamExists(ctx context.Context, input *DescribeStreamInput, opts ...aws.WaiterOption) error {
+func (c *Client) WaitUntilStreamExists(ctx context.Context, input *types.DescribeStreamInput, opts ...aws.WaiterOption) error {
 	w := aws.Waiter{
 		Name:        "WaitUntilStreamExists",
 		MaxAttempts: 18,
@@ -32,7 +33,7 @@ func (c *Client) WaitUntilStreamExists(ctx context.Context, input *DescribeStrea
 		},
 		Logger: c.Config.Logger,
 		NewRequest: func(opts []aws.Option) (*aws.Request, error) {
-			var inCpy *DescribeStreamInput
+			var inCpy *types.DescribeStreamInput
 			if input != nil {
 				tmp := *input
 				inCpy = &tmp
@@ -57,7 +58,7 @@ func (c *Client) WaitUntilStreamExists(ctx context.Context, input *DescribeStrea
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Client) WaitUntilStreamNotExists(ctx context.Context, input *DescribeStreamInput, opts ...aws.WaiterOption) error {
+func (c *Client) WaitUntilStreamNotExists(ctx context.Context, input *types.DescribeStreamInput, opts ...aws.WaiterOption) error {
 	w := aws.Waiter{
 		Name:        "WaitUntilStreamNotExists",
 		MaxAttempts: 18,
@@ -71,7 +72,7 @@ func (c *Client) WaitUntilStreamNotExists(ctx context.Context, input *DescribeSt
 		},
 		Logger: c.Config.Logger,
 		NewRequest: func(opts []aws.Option) (*aws.Request, error) {
-			var inCpy *DescribeStreamInput
+			var inCpy *types.DescribeStreamInput
 			if input != nil {
 				tmp := *input
 				inCpy = &tmp

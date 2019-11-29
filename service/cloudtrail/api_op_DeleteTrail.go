@@ -6,49 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/cloudtrail/types"
 )
-
-// The request that specifies the name of a trail to delete.
-type DeleteTrailInput struct {
-	_ struct{} `type:"structure"`
-
-	// Specifies the name or the CloudTrail ARN of the trail to be deleted. The
-	// format of a trail ARN is: arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail
-	//
-	// Name is a required field
-	Name *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DeleteTrailInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DeleteTrailInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DeleteTrailInput"}
-
-	if s.Name == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Name"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Returns the objects or data listed below if successful. Otherwise, returns
-// an error.
-type DeleteTrailOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteTrailOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDeleteTrail = "DeleteTrail"
 
@@ -67,7 +26,7 @@ const opDeleteTrail = "DeleteTrail"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/DeleteTrail
-func (c *Client) DeleteTrailRequest(input *DeleteTrailInput) DeleteTrailRequest {
+func (c *Client) DeleteTrailRequest(input *types.DeleteTrailInput) DeleteTrailRequest {
 	op := &aws.Operation{
 		Name:       opDeleteTrail,
 		HTTPMethod: "POST",
@@ -75,10 +34,10 @@ func (c *Client) DeleteTrailRequest(input *DeleteTrailInput) DeleteTrailRequest 
 	}
 
 	if input == nil {
-		input = &DeleteTrailInput{}
+		input = &types.DeleteTrailInput{}
 	}
 
-	req := c.newRequest(op, input, &DeleteTrailOutput{})
+	req := c.newRequest(op, input, &types.DeleteTrailOutput{})
 	return DeleteTrailRequest{Request: req, Input: input, Copy: c.DeleteTrailRequest}
 }
 
@@ -86,8 +45,8 @@ func (c *Client) DeleteTrailRequest(input *DeleteTrailInput) DeleteTrailRequest 
 // DeleteTrail API operation.
 type DeleteTrailRequest struct {
 	*aws.Request
-	Input *DeleteTrailInput
-	Copy  func(*DeleteTrailInput) DeleteTrailRequest
+	Input *types.DeleteTrailInput
+	Copy  func(*types.DeleteTrailInput) DeleteTrailRequest
 }
 
 // Send marshals and sends the DeleteTrail API request.
@@ -99,7 +58,7 @@ func (r DeleteTrailRequest) Send(ctx context.Context) (*DeleteTrailResponse, err
 	}
 
 	resp := &DeleteTrailResponse{
-		DeleteTrailOutput: r.Request.Data.(*DeleteTrailOutput),
+		DeleteTrailOutput: r.Request.Data.(*types.DeleteTrailOutput),
 		response:          &aws.Response{Request: r.Request},
 	}
 
@@ -109,7 +68,7 @@ func (r DeleteTrailRequest) Send(ctx context.Context) (*DeleteTrailResponse, err
 // DeleteTrailResponse is the response type for the
 // DeleteTrail API operation.
 type DeleteTrailResponse struct {
-	*DeleteTrailOutput
+	*types.DeleteTrailOutput
 
 	response *aws.Response
 }

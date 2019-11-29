@@ -6,61 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/alexaforbusiness/types"
 )
-
-type UpdateBusinessReportScheduleInput struct {
-	_ struct{} `type:"structure"`
-
-	// The format of the generated report (individual CSV files or zipped files
-	// of individual files).
-	Format BusinessReportFormat `type:"string" enum:"true"`
-
-	// The recurrence of the reports.
-	Recurrence *BusinessReportRecurrence `type:"structure"`
-
-	// The S3 location of the output reports.
-	S3BucketName *string `type:"string"`
-
-	// The S3 key where the report is delivered.
-	S3KeyPrefix *string `type:"string"`
-
-	// The ARN of the business report schedule.
-	//
-	// ScheduleArn is a required field
-	ScheduleArn *string `type:"string" required:"true"`
-
-	// The name identifier of the schedule.
-	ScheduleName *string `type:"string"`
-}
-
-// String returns the string representation
-func (s UpdateBusinessReportScheduleInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *UpdateBusinessReportScheduleInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "UpdateBusinessReportScheduleInput"}
-
-	if s.ScheduleArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ScheduleArn"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type UpdateBusinessReportScheduleOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s UpdateBusinessReportScheduleOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opUpdateBusinessReportSchedule = "UpdateBusinessReportSchedule"
 
@@ -78,7 +25,7 @@ const opUpdateBusinessReportSchedule = "UpdateBusinessReportSchedule"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/UpdateBusinessReportSchedule
-func (c *Client) UpdateBusinessReportScheduleRequest(input *UpdateBusinessReportScheduleInput) UpdateBusinessReportScheduleRequest {
+func (c *Client) UpdateBusinessReportScheduleRequest(input *types.UpdateBusinessReportScheduleInput) UpdateBusinessReportScheduleRequest {
 	op := &aws.Operation{
 		Name:       opUpdateBusinessReportSchedule,
 		HTTPMethod: "POST",
@@ -86,10 +33,10 @@ func (c *Client) UpdateBusinessReportScheduleRequest(input *UpdateBusinessReport
 	}
 
 	if input == nil {
-		input = &UpdateBusinessReportScheduleInput{}
+		input = &types.UpdateBusinessReportScheduleInput{}
 	}
 
-	req := c.newRequest(op, input, &UpdateBusinessReportScheduleOutput{})
+	req := c.newRequest(op, input, &types.UpdateBusinessReportScheduleOutput{})
 	return UpdateBusinessReportScheduleRequest{Request: req, Input: input, Copy: c.UpdateBusinessReportScheduleRequest}
 }
 
@@ -97,8 +44,8 @@ func (c *Client) UpdateBusinessReportScheduleRequest(input *UpdateBusinessReport
 // UpdateBusinessReportSchedule API operation.
 type UpdateBusinessReportScheduleRequest struct {
 	*aws.Request
-	Input *UpdateBusinessReportScheduleInput
-	Copy  func(*UpdateBusinessReportScheduleInput) UpdateBusinessReportScheduleRequest
+	Input *types.UpdateBusinessReportScheduleInput
+	Copy  func(*types.UpdateBusinessReportScheduleInput) UpdateBusinessReportScheduleRequest
 }
 
 // Send marshals and sends the UpdateBusinessReportSchedule API request.
@@ -110,7 +57,7 @@ func (r UpdateBusinessReportScheduleRequest) Send(ctx context.Context) (*UpdateB
 	}
 
 	resp := &UpdateBusinessReportScheduleResponse{
-		UpdateBusinessReportScheduleOutput: r.Request.Data.(*UpdateBusinessReportScheduleOutput),
+		UpdateBusinessReportScheduleOutput: r.Request.Data.(*types.UpdateBusinessReportScheduleOutput),
 		response:                           &aws.Response{Request: r.Request},
 	}
 
@@ -120,7 +67,7 @@ func (r UpdateBusinessReportScheduleRequest) Send(ctx context.Context) (*UpdateB
 // UpdateBusinessReportScheduleResponse is the response type for the
 // UpdateBusinessReportSchedule API operation.
 type UpdateBusinessReportScheduleResponse struct {
-	*UpdateBusinessReportScheduleOutput
+	*types.UpdateBusinessReportScheduleOutput
 
 	response *aws.Response
 }

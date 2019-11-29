@@ -6,48 +6,10 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
+	"github.com/aws/aws-sdk-go-v2/service/emr/types"
 )
-
-// Input to the TerminateJobFlows operation.
-type TerminateJobFlowsInput struct {
-	_ struct{} `type:"structure"`
-
-	// A list of job flows to be shutdown.
-	//
-	// JobFlowIds is a required field
-	JobFlowIds []string `type:"list" required:"true"`
-}
-
-// String returns the string representation
-func (s TerminateJobFlowsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *TerminateJobFlowsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "TerminateJobFlowsInput"}
-
-	if s.JobFlowIds == nil {
-		invalidParams.Add(aws.NewErrParamRequired("JobFlowIds"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type TerminateJobFlowsOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s TerminateJobFlowsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opTerminateJobFlows = "TerminateJobFlows"
 
@@ -73,7 +35,7 @@ const opTerminateJobFlows = "TerminateJobFlows"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/TerminateJobFlows
-func (c *Client) TerminateJobFlowsRequest(input *TerminateJobFlowsInput) TerminateJobFlowsRequest {
+func (c *Client) TerminateJobFlowsRequest(input *types.TerminateJobFlowsInput) TerminateJobFlowsRequest {
 	op := &aws.Operation{
 		Name:       opTerminateJobFlows,
 		HTTPMethod: "POST",
@@ -81,10 +43,10 @@ func (c *Client) TerminateJobFlowsRequest(input *TerminateJobFlowsInput) Termina
 	}
 
 	if input == nil {
-		input = &TerminateJobFlowsInput{}
+		input = &types.TerminateJobFlowsInput{}
 	}
 
-	req := c.newRequest(op, input, &TerminateJobFlowsOutput{})
+	req := c.newRequest(op, input, &types.TerminateJobFlowsOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return TerminateJobFlowsRequest{Request: req, Input: input, Copy: c.TerminateJobFlowsRequest}
@@ -94,8 +56,8 @@ func (c *Client) TerminateJobFlowsRequest(input *TerminateJobFlowsInput) Termina
 // TerminateJobFlows API operation.
 type TerminateJobFlowsRequest struct {
 	*aws.Request
-	Input *TerminateJobFlowsInput
-	Copy  func(*TerminateJobFlowsInput) TerminateJobFlowsRequest
+	Input *types.TerminateJobFlowsInput
+	Copy  func(*types.TerminateJobFlowsInput) TerminateJobFlowsRequest
 }
 
 // Send marshals and sends the TerminateJobFlows API request.
@@ -107,7 +69,7 @@ func (r TerminateJobFlowsRequest) Send(ctx context.Context) (*TerminateJobFlowsR
 	}
 
 	resp := &TerminateJobFlowsResponse{
-		TerminateJobFlowsOutput: r.Request.Data.(*TerminateJobFlowsOutput),
+		TerminateJobFlowsOutput: r.Request.Data.(*types.TerminateJobFlowsOutput),
 		response:                &aws.Response{Request: r.Request},
 	}
 
@@ -117,7 +79,7 @@ func (r TerminateJobFlowsRequest) Send(ctx context.Context) (*TerminateJobFlowsR
 // TerminateJobFlowsResponse is the response type for the
 // TerminateJobFlows API operation.
 type TerminateJobFlowsResponse struct {
-	*TerminateJobFlowsOutput
+	*types.TerminateJobFlowsOutput
 
 	response *aws.Response
 }

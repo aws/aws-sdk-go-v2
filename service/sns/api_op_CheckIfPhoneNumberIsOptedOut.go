@@ -6,56 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/sns/types"
 )
-
-// The input for the CheckIfPhoneNumberIsOptedOut action.
-type CheckIfPhoneNumberIsOptedOutInput struct {
-	_ struct{} `type:"structure"`
-
-	// The phone number for which you want to check the opt out status.
-	//
-	// PhoneNumber is a required field
-	PhoneNumber *string `locationName:"phoneNumber" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s CheckIfPhoneNumberIsOptedOutInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CheckIfPhoneNumberIsOptedOutInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CheckIfPhoneNumberIsOptedOutInput"}
-
-	if s.PhoneNumber == nil {
-		invalidParams.Add(aws.NewErrParamRequired("PhoneNumber"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// The response from the CheckIfPhoneNumberIsOptedOut action.
-type CheckIfPhoneNumberIsOptedOutOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Indicates whether the phone number is opted out:
-	//
-	//    * true – The phone number is opted out, meaning you cannot publish SMS
-	//    messages to it.
-	//
-	//    * false – The phone number is opted in, meaning you can publish SMS
-	//    messages to it.
-	IsOptedOut *bool `locationName:"isOptedOut" type:"boolean"`
-}
-
-// String returns the string representation
-func (s CheckIfPhoneNumberIsOptedOutOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opCheckIfPhoneNumberIsOptedOut = "CheckIfPhoneNumberIsOptedOut"
 
@@ -77,7 +29,7 @@ const opCheckIfPhoneNumberIsOptedOut = "CheckIfPhoneNumberIsOptedOut"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/CheckIfPhoneNumberIsOptedOut
-func (c *Client) CheckIfPhoneNumberIsOptedOutRequest(input *CheckIfPhoneNumberIsOptedOutInput) CheckIfPhoneNumberIsOptedOutRequest {
+func (c *Client) CheckIfPhoneNumberIsOptedOutRequest(input *types.CheckIfPhoneNumberIsOptedOutInput) CheckIfPhoneNumberIsOptedOutRequest {
 	op := &aws.Operation{
 		Name:       opCheckIfPhoneNumberIsOptedOut,
 		HTTPMethod: "POST",
@@ -85,10 +37,10 @@ func (c *Client) CheckIfPhoneNumberIsOptedOutRequest(input *CheckIfPhoneNumberIs
 	}
 
 	if input == nil {
-		input = &CheckIfPhoneNumberIsOptedOutInput{}
+		input = &types.CheckIfPhoneNumberIsOptedOutInput{}
 	}
 
-	req := c.newRequest(op, input, &CheckIfPhoneNumberIsOptedOutOutput{})
+	req := c.newRequest(op, input, &types.CheckIfPhoneNumberIsOptedOutOutput{})
 	return CheckIfPhoneNumberIsOptedOutRequest{Request: req, Input: input, Copy: c.CheckIfPhoneNumberIsOptedOutRequest}
 }
 
@@ -96,8 +48,8 @@ func (c *Client) CheckIfPhoneNumberIsOptedOutRequest(input *CheckIfPhoneNumberIs
 // CheckIfPhoneNumberIsOptedOut API operation.
 type CheckIfPhoneNumberIsOptedOutRequest struct {
 	*aws.Request
-	Input *CheckIfPhoneNumberIsOptedOutInput
-	Copy  func(*CheckIfPhoneNumberIsOptedOutInput) CheckIfPhoneNumberIsOptedOutRequest
+	Input *types.CheckIfPhoneNumberIsOptedOutInput
+	Copy  func(*types.CheckIfPhoneNumberIsOptedOutInput) CheckIfPhoneNumberIsOptedOutRequest
 }
 
 // Send marshals and sends the CheckIfPhoneNumberIsOptedOut API request.
@@ -109,7 +61,7 @@ func (r CheckIfPhoneNumberIsOptedOutRequest) Send(ctx context.Context) (*CheckIf
 	}
 
 	resp := &CheckIfPhoneNumberIsOptedOutResponse{
-		CheckIfPhoneNumberIsOptedOutOutput: r.Request.Data.(*CheckIfPhoneNumberIsOptedOutOutput),
+		CheckIfPhoneNumberIsOptedOutOutput: r.Request.Data.(*types.CheckIfPhoneNumberIsOptedOutOutput),
 		response:                           &aws.Response{Request: r.Request},
 	}
 
@@ -119,7 +71,7 @@ func (r CheckIfPhoneNumberIsOptedOutRequest) Send(ctx context.Context) (*CheckIf
 // CheckIfPhoneNumberIsOptedOutResponse is the response type for the
 // CheckIfPhoneNumberIsOptedOut API operation.
 type CheckIfPhoneNumberIsOptedOutResponse struct {
-	*CheckIfPhoneNumberIsOptedOutOutput
+	*types.CheckIfPhoneNumberIsOptedOutOutput
 
 	response *aws.Response
 }

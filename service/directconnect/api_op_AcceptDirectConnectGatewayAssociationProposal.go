@@ -6,74 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/directconnect/types"
 )
-
-type AcceptDirectConnectGatewayAssociationProposalInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the AWS account that owns the virtual private gateway or transit
-	// gateway.
-	//
-	// AssociatedGatewayOwnerAccount is a required field
-	AssociatedGatewayOwnerAccount *string `locationName:"associatedGatewayOwnerAccount" type:"string" required:"true"`
-
-	// The ID of the Direct Connect gateway.
-	//
-	// DirectConnectGatewayId is a required field
-	DirectConnectGatewayId *string `locationName:"directConnectGatewayId" type:"string" required:"true"`
-
-	// Overrides the Amazon VPC prefixes advertised to the Direct Connect gateway.
-	//
-	// For information about how to set the prefixes, see Allowed Prefixes (https://docs.aws.amazon.com/directconnect/latest/UserGuide/multi-account-associate-vgw.html#allowed-prefixes)
-	// in the AWS Direct Connect User Guide.
-	OverrideAllowedPrefixesToDirectConnectGateway []RouteFilterPrefix `locationName:"overrideAllowedPrefixesToDirectConnectGateway" type:"list"`
-
-	// The ID of the request proposal.
-	//
-	// ProposalId is a required field
-	ProposalId *string `locationName:"proposalId" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s AcceptDirectConnectGatewayAssociationProposalInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *AcceptDirectConnectGatewayAssociationProposalInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "AcceptDirectConnectGatewayAssociationProposalInput"}
-
-	if s.AssociatedGatewayOwnerAccount == nil {
-		invalidParams.Add(aws.NewErrParamRequired("AssociatedGatewayOwnerAccount"))
-	}
-
-	if s.DirectConnectGatewayId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DirectConnectGatewayId"))
-	}
-
-	if s.ProposalId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ProposalId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type AcceptDirectConnectGatewayAssociationProposalOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Information about an association between a Direct Connect gateway and a virtual
-	// private gateway or transit gateway.
-	DirectConnectGatewayAssociation *DirectConnectGatewayAssociation `locationName:"directConnectGatewayAssociation" type:"structure"`
-}
-
-// String returns the string representation
-func (s AcceptDirectConnectGatewayAssociationProposalOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opAcceptDirectConnectGatewayAssociationProposal = "AcceptDirectConnectGatewayAssociationProposal"
 
@@ -91,7 +25,7 @@ const opAcceptDirectConnectGatewayAssociationProposal = "AcceptDirectConnectGate
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/AcceptDirectConnectGatewayAssociationProposal
-func (c *Client) AcceptDirectConnectGatewayAssociationProposalRequest(input *AcceptDirectConnectGatewayAssociationProposalInput) AcceptDirectConnectGatewayAssociationProposalRequest {
+func (c *Client) AcceptDirectConnectGatewayAssociationProposalRequest(input *types.AcceptDirectConnectGatewayAssociationProposalInput) AcceptDirectConnectGatewayAssociationProposalRequest {
 	op := &aws.Operation{
 		Name:       opAcceptDirectConnectGatewayAssociationProposal,
 		HTTPMethod: "POST",
@@ -99,10 +33,10 @@ func (c *Client) AcceptDirectConnectGatewayAssociationProposalRequest(input *Acc
 	}
 
 	if input == nil {
-		input = &AcceptDirectConnectGatewayAssociationProposalInput{}
+		input = &types.AcceptDirectConnectGatewayAssociationProposalInput{}
 	}
 
-	req := c.newRequest(op, input, &AcceptDirectConnectGatewayAssociationProposalOutput{})
+	req := c.newRequest(op, input, &types.AcceptDirectConnectGatewayAssociationProposalOutput{})
 	return AcceptDirectConnectGatewayAssociationProposalRequest{Request: req, Input: input, Copy: c.AcceptDirectConnectGatewayAssociationProposalRequest}
 }
 
@@ -110,8 +44,8 @@ func (c *Client) AcceptDirectConnectGatewayAssociationProposalRequest(input *Acc
 // AcceptDirectConnectGatewayAssociationProposal API operation.
 type AcceptDirectConnectGatewayAssociationProposalRequest struct {
 	*aws.Request
-	Input *AcceptDirectConnectGatewayAssociationProposalInput
-	Copy  func(*AcceptDirectConnectGatewayAssociationProposalInput) AcceptDirectConnectGatewayAssociationProposalRequest
+	Input *types.AcceptDirectConnectGatewayAssociationProposalInput
+	Copy  func(*types.AcceptDirectConnectGatewayAssociationProposalInput) AcceptDirectConnectGatewayAssociationProposalRequest
 }
 
 // Send marshals and sends the AcceptDirectConnectGatewayAssociationProposal API request.
@@ -123,7 +57,7 @@ func (r AcceptDirectConnectGatewayAssociationProposalRequest) Send(ctx context.C
 	}
 
 	resp := &AcceptDirectConnectGatewayAssociationProposalResponse{
-		AcceptDirectConnectGatewayAssociationProposalOutput: r.Request.Data.(*AcceptDirectConnectGatewayAssociationProposalOutput),
+		AcceptDirectConnectGatewayAssociationProposalOutput: r.Request.Data.(*types.AcceptDirectConnectGatewayAssociationProposalOutput),
 		response: &aws.Response{Request: r.Request},
 	}
 
@@ -133,7 +67,7 @@ func (r AcceptDirectConnectGatewayAssociationProposalRequest) Send(ctx context.C
 // AcceptDirectConnectGatewayAssociationProposalResponse is the response type for the
 // AcceptDirectConnectGatewayAssociationProposal API operation.
 type AcceptDirectConnectGatewayAssociationProposalResponse struct {
-	*AcceptDirectConnectGatewayAssociationProposalOutput
+	*types.AcceptDirectConnectGatewayAssociationProposalOutput
 
 	response *aws.Response
 }

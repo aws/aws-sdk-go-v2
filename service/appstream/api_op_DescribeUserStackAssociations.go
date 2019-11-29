@@ -6,71 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/appstream/types"
 )
-
-type DescribeUserStackAssociationsInput struct {
-	_ struct{} `type:"structure"`
-
-	// The authentication type for the user who is associated with the stack. You
-	// must specify USERPOOL.
-	AuthenticationType AuthenticationType `type:"string" enum:"true"`
-
-	// The maximum size of each page of results.
-	MaxResults *int64 `type:"integer"`
-
-	// The pagination token to use to retrieve the next page of results for this
-	// operation. If this value is null, it retrieves the first page.
-	NextToken *string `min:"1" type:"string"`
-
-	// The name of the stack that is associated with the user.
-	StackName *string `min:"1" type:"string"`
-
-	// The email address of the user who is associated with the stack.
-	//
-	// Users' email addresses are case-sensitive.
-	UserName *string `min:"1" type:"string" sensitive:"true"`
-}
-
-// String returns the string representation
-func (s DescribeUserStackAssociationsInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeUserStackAssociationsInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeUserStackAssociationsInput"}
-	if s.NextToken != nil && len(*s.NextToken) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
-	}
-	if s.StackName != nil && len(*s.StackName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("StackName", 1))
-	}
-	if s.UserName != nil && len(*s.UserName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("UserName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribeUserStackAssociationsOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The pagination token to use to retrieve the next page of results for this
-	// operation. If there are no more pages, this value is null.
-	NextToken *string `min:"1" type:"string"`
-
-	// The UserStackAssociation objects.
-	UserStackAssociations []UserStackAssociation `min:"1" type:"list"`
-}
-
-// String returns the string representation
-func (s DescribeUserStackAssociationsOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeUserStackAssociations = "DescribeUserStackAssociations"
 
@@ -93,7 +30,7 @@ const opDescribeUserStackAssociations = "DescribeUserStackAssociations"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DescribeUserStackAssociations
-func (c *Client) DescribeUserStackAssociationsRequest(input *DescribeUserStackAssociationsInput) DescribeUserStackAssociationsRequest {
+func (c *Client) DescribeUserStackAssociationsRequest(input *types.DescribeUserStackAssociationsInput) DescribeUserStackAssociationsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeUserStackAssociations,
 		HTTPMethod: "POST",
@@ -101,10 +38,10 @@ func (c *Client) DescribeUserStackAssociationsRequest(input *DescribeUserStackAs
 	}
 
 	if input == nil {
-		input = &DescribeUserStackAssociationsInput{}
+		input = &types.DescribeUserStackAssociationsInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeUserStackAssociationsOutput{})
+	req := c.newRequest(op, input, &types.DescribeUserStackAssociationsOutput{})
 	return DescribeUserStackAssociationsRequest{Request: req, Input: input, Copy: c.DescribeUserStackAssociationsRequest}
 }
 
@@ -112,8 +49,8 @@ func (c *Client) DescribeUserStackAssociationsRequest(input *DescribeUserStackAs
 // DescribeUserStackAssociations API operation.
 type DescribeUserStackAssociationsRequest struct {
 	*aws.Request
-	Input *DescribeUserStackAssociationsInput
-	Copy  func(*DescribeUserStackAssociationsInput) DescribeUserStackAssociationsRequest
+	Input *types.DescribeUserStackAssociationsInput
+	Copy  func(*types.DescribeUserStackAssociationsInput) DescribeUserStackAssociationsRequest
 }
 
 // Send marshals and sends the DescribeUserStackAssociations API request.
@@ -125,7 +62,7 @@ func (r DescribeUserStackAssociationsRequest) Send(ctx context.Context) (*Descri
 	}
 
 	resp := &DescribeUserStackAssociationsResponse{
-		DescribeUserStackAssociationsOutput: r.Request.Data.(*DescribeUserStackAssociationsOutput),
+		DescribeUserStackAssociationsOutput: r.Request.Data.(*types.DescribeUserStackAssociationsOutput),
 		response:                            &aws.Response{Request: r.Request},
 	}
 
@@ -135,7 +72,7 @@ func (r DescribeUserStackAssociationsRequest) Send(ctx context.Context) (*Descri
 // DescribeUserStackAssociationsResponse is the response type for the
 // DescribeUserStackAssociations API operation.
 type DescribeUserStackAssociationsResponse struct {
-	*DescribeUserStackAssociationsOutput
+	*types.DescribeUserStackAssociationsOutput
 
 	response *aws.Response
 }

@@ -6,45 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/alexaforbusiness/types"
 )
-
-type ApproveSkillInput struct {
-	_ struct{} `type:"structure"`
-
-	// The unique identifier of the skill.
-	//
-	// SkillId is a required field
-	SkillId *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s ApproveSkillInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ApproveSkillInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ApproveSkillInput"}
-
-	if s.SkillId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("SkillId"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type ApproveSkillOutput struct {
-	_ struct{} `type:"structure"`
-}
-
-// String returns the string representation
-func (s ApproveSkillOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opApproveSkill = "ApproveSkill"
 
@@ -63,7 +26,7 @@ const opApproveSkill = "ApproveSkill"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/ApproveSkill
-func (c *Client) ApproveSkillRequest(input *ApproveSkillInput) ApproveSkillRequest {
+func (c *Client) ApproveSkillRequest(input *types.ApproveSkillInput) ApproveSkillRequest {
 	op := &aws.Operation{
 		Name:       opApproveSkill,
 		HTTPMethod: "POST",
@@ -71,10 +34,10 @@ func (c *Client) ApproveSkillRequest(input *ApproveSkillInput) ApproveSkillReque
 	}
 
 	if input == nil {
-		input = &ApproveSkillInput{}
+		input = &types.ApproveSkillInput{}
 	}
 
-	req := c.newRequest(op, input, &ApproveSkillOutput{})
+	req := c.newRequest(op, input, &types.ApproveSkillOutput{})
 	return ApproveSkillRequest{Request: req, Input: input, Copy: c.ApproveSkillRequest}
 }
 
@@ -82,8 +45,8 @@ func (c *Client) ApproveSkillRequest(input *ApproveSkillInput) ApproveSkillReque
 // ApproveSkill API operation.
 type ApproveSkillRequest struct {
 	*aws.Request
-	Input *ApproveSkillInput
-	Copy  func(*ApproveSkillInput) ApproveSkillRequest
+	Input *types.ApproveSkillInput
+	Copy  func(*types.ApproveSkillInput) ApproveSkillRequest
 }
 
 // Send marshals and sends the ApproveSkill API request.
@@ -95,7 +58,7 @@ func (r ApproveSkillRequest) Send(ctx context.Context) (*ApproveSkillResponse, e
 	}
 
 	resp := &ApproveSkillResponse{
-		ApproveSkillOutput: r.Request.Data.(*ApproveSkillOutput),
+		ApproveSkillOutput: r.Request.Data.(*types.ApproveSkillOutput),
 		response:           &aws.Response{Request: r.Request},
 	}
 
@@ -105,7 +68,7 @@ func (r ApproveSkillRequest) Send(ctx context.Context) (*ApproveSkillResponse, e
 // ApproveSkillResponse is the response type for the
 // ApproveSkill API operation.
 type ApproveSkillResponse struct {
-	*ApproveSkillOutput
+	*types.ApproveSkillOutput
 
 	response *aws.Response
 }

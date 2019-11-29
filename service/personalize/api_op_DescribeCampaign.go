@@ -6,48 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/personalize/types"
 )
-
-type DescribeCampaignInput struct {
-	_ struct{} `type:"structure"`
-
-	// The Amazon Resource Name (ARN) of the campaign.
-	//
-	// CampaignArn is a required field
-	CampaignArn *string `locationName:"campaignArn" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeCampaignInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeCampaignInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeCampaignInput"}
-
-	if s.CampaignArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("CampaignArn"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribeCampaignOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The properties of the campaign.
-	Campaign *Campaign `locationName:"campaign" type:"structure"`
-}
-
-// String returns the string representation
-func (s DescribeCampaignOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeCampaign = "DescribeCampaign"
 
@@ -75,7 +35,7 @@ const opDescribeCampaign = "DescribeCampaign"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/DescribeCampaign
-func (c *Client) DescribeCampaignRequest(input *DescribeCampaignInput) DescribeCampaignRequest {
+func (c *Client) DescribeCampaignRequest(input *types.DescribeCampaignInput) DescribeCampaignRequest {
 	op := &aws.Operation{
 		Name:       opDescribeCampaign,
 		HTTPMethod: "POST",
@@ -83,10 +43,10 @@ func (c *Client) DescribeCampaignRequest(input *DescribeCampaignInput) DescribeC
 	}
 
 	if input == nil {
-		input = &DescribeCampaignInput{}
+		input = &types.DescribeCampaignInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeCampaignOutput{})
+	req := c.newRequest(op, input, &types.DescribeCampaignOutput{})
 	return DescribeCampaignRequest{Request: req, Input: input, Copy: c.DescribeCampaignRequest}
 }
 
@@ -94,8 +54,8 @@ func (c *Client) DescribeCampaignRequest(input *DescribeCampaignInput) DescribeC
 // DescribeCampaign API operation.
 type DescribeCampaignRequest struct {
 	*aws.Request
-	Input *DescribeCampaignInput
-	Copy  func(*DescribeCampaignInput) DescribeCampaignRequest
+	Input *types.DescribeCampaignInput
+	Copy  func(*types.DescribeCampaignInput) DescribeCampaignRequest
 }
 
 // Send marshals and sends the DescribeCampaign API request.
@@ -107,7 +67,7 @@ func (r DescribeCampaignRequest) Send(ctx context.Context) (*DescribeCampaignRes
 	}
 
 	resp := &DescribeCampaignResponse{
-		DescribeCampaignOutput: r.Request.Data.(*DescribeCampaignOutput),
+		DescribeCampaignOutput: r.Request.Data.(*types.DescribeCampaignOutput),
 		response:               &aws.Response{Request: r.Request},
 	}
 
@@ -117,7 +77,7 @@ func (r DescribeCampaignRequest) Send(ctx context.Context) (*DescribeCampaignRes
 // DescribeCampaignResponse is the response type for the
 // DescribeCampaign API operation.
 type DescribeCampaignResponse struct {
-	*DescribeCampaignOutput
+	*types.DescribeCampaignOutput
 
 	response *aws.Response
 }

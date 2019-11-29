@@ -6,137 +6,8 @@ import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/service/quicksight/types"
 )
-
-// The request object for this operation.
-type CreateGroupInput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID for the AWS account that the group is in. Currently, you use the ID
-	// for the AWS account that contains your Amazon QuickSight account.
-	//
-	// AwsAccountId is a required field
-	AwsAccountId *string `location:"uri" locationName:"AwsAccountId" min:"12" type:"string" required:"true"`
-
-	// A description for the group that you want to create.
-	Description *string `min:"1" type:"string"`
-
-	// A name for the group that you want to create.
-	//
-	// GroupName is a required field
-	GroupName *string `min:"1" type:"string" required:"true"`
-
-	// The namespace. Currently, you should set this to default.
-	//
-	// Namespace is a required field
-	Namespace *string `location:"uri" locationName:"Namespace" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s CreateGroupInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CreateGroupInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CreateGroupInput"}
-
-	if s.AwsAccountId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("AwsAccountId"))
-	}
-	if s.AwsAccountId != nil && len(*s.AwsAccountId) < 12 {
-		invalidParams.Add(aws.NewErrParamMinLen("AwsAccountId", 12))
-	}
-	if s.Description != nil && len(*s.Description) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Description", 1))
-	}
-
-	if s.GroupName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("GroupName"))
-	}
-	if s.GroupName != nil && len(*s.GroupName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("GroupName", 1))
-	}
-
-	if s.Namespace == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Namespace"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s CreateGroupInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
-
-	if s.Description != nil {
-		v := *s.Description
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "Description", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.GroupName != nil {
-		v := *s.GroupName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "GroupName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.AwsAccountId != nil {
-		v := *s.AwsAccountId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "AwsAccountId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Namespace != nil {
-		v := *s.Namespace
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "Namespace", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	return nil
-}
-
-// The response object for this operation.
-type CreateGroupOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the group.
-	Group *Group `type:"structure"`
-
-	// The AWS request ID for this operation.
-	RequestId *string `type:"string"`
-
-	// The http status of the request.
-	Status *int64 `location:"statusCode" type:"integer"`
-}
-
-// String returns the string representation
-func (s CreateGroupOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s CreateGroupOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.Group != nil {
-		v := s.Group
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "Group", v, metadata)
-	}
-	if s.RequestId != nil {
-		v := *s.RequestId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "RequestId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	// ignoring invalid encode state, StatusCode. Status
-	return nil
-}
 
 const opCreateGroup = "CreateGroup"
 
@@ -162,7 +33,7 @@ const opCreateGroup = "CreateGroup"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/CreateGroup
-func (c *Client) CreateGroupRequest(input *CreateGroupInput) CreateGroupRequest {
+func (c *Client) CreateGroupRequest(input *types.CreateGroupInput) CreateGroupRequest {
 	op := &aws.Operation{
 		Name:       opCreateGroup,
 		HTTPMethod: "POST",
@@ -170,10 +41,10 @@ func (c *Client) CreateGroupRequest(input *CreateGroupInput) CreateGroupRequest 
 	}
 
 	if input == nil {
-		input = &CreateGroupInput{}
+		input = &types.CreateGroupInput{}
 	}
 
-	req := c.newRequest(op, input, &CreateGroupOutput{})
+	req := c.newRequest(op, input, &types.CreateGroupOutput{})
 	return CreateGroupRequest{Request: req, Input: input, Copy: c.CreateGroupRequest}
 }
 
@@ -181,8 +52,8 @@ func (c *Client) CreateGroupRequest(input *CreateGroupInput) CreateGroupRequest 
 // CreateGroup API operation.
 type CreateGroupRequest struct {
 	*aws.Request
-	Input *CreateGroupInput
-	Copy  func(*CreateGroupInput) CreateGroupRequest
+	Input *types.CreateGroupInput
+	Copy  func(*types.CreateGroupInput) CreateGroupRequest
 }
 
 // Send marshals and sends the CreateGroup API request.
@@ -194,7 +65,7 @@ func (r CreateGroupRequest) Send(ctx context.Context) (*CreateGroupResponse, err
 	}
 
 	resp := &CreateGroupResponse{
-		CreateGroupOutput: r.Request.Data.(*CreateGroupOutput),
+		CreateGroupOutput: r.Request.Data.(*types.CreateGroupOutput),
 		response:          &aws.Response{Request: r.Request},
 	}
 
@@ -204,7 +75,7 @@ func (r CreateGroupRequest) Send(ctx context.Context) (*CreateGroupResponse, err
 // CreateGroupResponse is the response type for the
 // CreateGroup API operation.
 type CreateGroupResponse struct {
-	*CreateGroupOutput
+	*types.CreateGroupOutput
 
 	response *aws.Response
 }

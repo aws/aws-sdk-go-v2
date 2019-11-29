@@ -4,84 +4,10 @@ package neptune
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/service/neptune/types"
 )
-
-type DescribeDBClustersInput struct {
-	_ struct{} `type:"structure"`
-
-	// The user-supplied DB cluster identifier. If this parameter is specified,
-	// information from only the specific DB cluster is returned. This parameter
-	// isn't case-sensitive.
-	//
-	// Constraints:
-	//
-	//    * If supplied, must match an existing DBClusterIdentifier.
-	DBClusterIdentifier *string `type:"string"`
-
-	// A filter that specifies one or more DB clusters to describe.
-	//
-	// Supported filters:
-	//
-	//    * db-cluster-id - Accepts DB cluster identifiers and DB cluster Amazon
-	//    Resource Names (ARNs). The results list will only include information
-	//    about the DB clusters identified by these ARNs.
-	Filters []Filter `locationNameList:"Filter" type:"list"`
-
-	// An optional pagination token provided by a previous DescribeDBClusters request.
-	// If this parameter is specified, the response includes only records beyond
-	// the marker, up to the value specified by MaxRecords.
-	Marker *string `type:"string"`
-
-	// The maximum number of records to include in the response. If more records
-	// exist than the specified MaxRecords value, a pagination token called a marker
-	// is included in the response so that the remaining results can be retrieved.
-	//
-	// Default: 100
-	//
-	// Constraints: Minimum 20, maximum 100.
-	MaxRecords *int64 `type:"integer"`
-}
-
-// String returns the string representation
-func (s DescribeDBClustersInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeDBClustersInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeDBClustersInput"}
-	if s.Filters != nil {
-		for i, v := range s.Filters {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-type DescribeDBClustersOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Contains a list of DB clusters for the user.
-	DBClusters []DBCluster `locationNameList:"DBCluster" type:"list"`
-
-	// A pagination token that can be used in a subsequent DescribeDBClusters request.
-	Marker *string `type:"string"`
-}
-
-// String returns the string representation
-func (s DescribeDBClustersOutput) String() string {
-	return awsutil.Prettify(s)
-}
 
 const opDescribeDBClusters = "DescribeDBClusters"
 
@@ -98,7 +24,7 @@ const opDescribeDBClusters = "DescribeDBClusters"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/DescribeDBClusters
-func (c *Client) DescribeDBClustersRequest(input *DescribeDBClustersInput) DescribeDBClustersRequest {
+func (c *Client) DescribeDBClustersRequest(input *types.DescribeDBClustersInput) DescribeDBClustersRequest {
 	op := &aws.Operation{
 		Name:       opDescribeDBClusters,
 		HTTPMethod: "POST",
@@ -106,10 +32,10 @@ func (c *Client) DescribeDBClustersRequest(input *DescribeDBClustersInput) Descr
 	}
 
 	if input == nil {
-		input = &DescribeDBClustersInput{}
+		input = &types.DescribeDBClustersInput{}
 	}
 
-	req := c.newRequest(op, input, &DescribeDBClustersOutput{})
+	req := c.newRequest(op, input, &types.DescribeDBClustersOutput{})
 	return DescribeDBClustersRequest{Request: req, Input: input, Copy: c.DescribeDBClustersRequest}
 }
 
@@ -117,8 +43,8 @@ func (c *Client) DescribeDBClustersRequest(input *DescribeDBClustersInput) Descr
 // DescribeDBClusters API operation.
 type DescribeDBClustersRequest struct {
 	*aws.Request
-	Input *DescribeDBClustersInput
-	Copy  func(*DescribeDBClustersInput) DescribeDBClustersRequest
+	Input *types.DescribeDBClustersInput
+	Copy  func(*types.DescribeDBClustersInput) DescribeDBClustersRequest
 }
 
 // Send marshals and sends the DescribeDBClusters API request.
@@ -130,7 +56,7 @@ func (r DescribeDBClustersRequest) Send(ctx context.Context) (*DescribeDBCluster
 	}
 
 	resp := &DescribeDBClustersResponse{
-		DescribeDBClustersOutput: r.Request.Data.(*DescribeDBClustersOutput),
+		DescribeDBClustersOutput: r.Request.Data.(*types.DescribeDBClustersOutput),
 		response:                 &aws.Response{Request: r.Request},
 	}
 
@@ -140,7 +66,7 @@ func (r DescribeDBClustersRequest) Send(ctx context.Context) (*DescribeDBCluster
 // DescribeDBClustersResponse is the response type for the
 // DescribeDBClusters API operation.
 type DescribeDBClustersResponse struct {
-	*DescribeDBClustersOutput
+	*types.DescribeDBClustersOutput
 
 	response *aws.Response
 }

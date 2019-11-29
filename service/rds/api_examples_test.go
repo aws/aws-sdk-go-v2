@@ -12,6 +12,8 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws/awserr"
 	"github.com/aws/aws-sdk-go-v2/aws/external"
 	"github.com/aws/aws-sdk-go-v2/service/rds"
+	"github.com/aws/aws-sdk-go-v2/service/rds/enums"
+	"github.com/aws/aws-sdk-go-v2/service/rds/types"
 )
 
 var _ time.Duration
@@ -36,7 +38,7 @@ func ExampleClient_AddSourceIdentifierToSubscriptionRequest_shared00() {
 	}
 
 	svc := rds.New(cfg)
-	input := &rds.AddSourceIdentifierToSubscriptionInput{
+	input := &types.AddSourceIdentifierToSubscriptionInput{
 		SourceIdentifier: aws.String("mymysqlinstance"),
 		SubscriptionName: aws.String("mymysqleventsubscription"),
 	}
@@ -74,9 +76,9 @@ func ExampleClient_AddTagsToResourceRequest_shared00() {
 	}
 
 	svc := rds.New(cfg)
-	input := &rds.AddTagsToResourceInput{
+	input := &types.AddTagsToResourceInput{
 		ResourceName: aws.String("arn:aws:rds:us-east-1:992648334831:og:mymysqloptiongroup"),
-		Tags: []rds.Tag{
+		Tags: []types.Tag{
 			{
 				Key:   aws.String("Staging"),
 				Value: aws.String("LocationDB"),
@@ -119,7 +121,7 @@ func ExampleClient_ApplyPendingMaintenanceActionRequest_shared00() {
 	}
 
 	svc := rds.New(cfg)
-	input := &rds.ApplyPendingMaintenanceActionInput{
+	input := &types.ApplyPendingMaintenanceActionInput{
 		ApplyAction:        aws.String("system-update"),
 		OptInType:          aws.String("immediate"),
 		ResourceIdentifier: aws.String("arn:aws:rds:us-east-1:992648334831:db:mymysqlinstance"),
@@ -161,7 +163,7 @@ func ExampleClient_AuthorizeDBSecurityGroupIngressRequest_shared00() {
 	}
 
 	svc := rds.New(cfg)
-	input := &rds.AuthorizeDBSecurityGroupIngressInput{
+	input := &types.AuthorizeDBSecurityGroupIngressInput{
 		CIDRIP:              aws.String("203.0.113.5/32"),
 		DBSecurityGroupName: aws.String("mydbsecuritygroup"),
 	}
@@ -203,7 +205,7 @@ func ExampleClient_CopyDBClusterParameterGroupRequest_shared00() {
 	}
 
 	svc := rds.New(cfg)
-	input := &rds.CopyDBClusterParameterGroupInput{
+	input := &types.CopyDBClusterParameterGroupInput{
 		SourceDBClusterParameterGroupIdentifier:  aws.String("mydbclusterparametergroup"),
 		TargetDBClusterParameterGroupDescription: aws.String("My DB cluster parameter group copy"),
 		TargetDBClusterParameterGroupIdentifier:  aws.String("mydbclusterparametergroup-copy"),
@@ -245,7 +247,7 @@ func ExampleClient_CopyDBClusterSnapshotRequest_shared00() {
 	}
 
 	svc := rds.New(cfg)
-	input := &rds.CopyDBClusterSnapshotInput{
+	input := &types.CopyDBClusterSnapshotInput{
 		SourceDBClusterSnapshotIdentifier: aws.String("rds:sample-cluster-2016-09-14-10-38"),
 		TargetDBClusterSnapshotIdentifier: aws.String("cluster-snapshot-copy-1"),
 	}
@@ -291,7 +293,7 @@ func ExampleClient_CopyDBParameterGroupRequest_shared00() {
 	}
 
 	svc := rds.New(cfg)
-	input := &rds.CopyDBParameterGroupInput{
+	input := &types.CopyDBParameterGroupInput{
 		SourceDBParameterGroupIdentifier:  aws.String("mymysqlparametergroup"),
 		TargetDBParameterGroupDescription: aws.String("My MySQL parameter group copy"),
 		TargetDBParameterGroupIdentifier:  aws.String("mymysqlparametergroup-copy"),
@@ -332,7 +334,7 @@ func ExampleClient_CopyDBSnapshotRequest_shared00() {
 	}
 
 	svc := rds.New(cfg)
-	input := &rds.CopyDBSnapshotInput{
+	input := &types.CopyDBSnapshotInput{
 		SourceDBSnapshotIdentifier: aws.String("mydbsnapshot"),
 		TargetDBSnapshotIdentifier: aws.String("mydbsnapshot-copy"),
 	}
@@ -376,7 +378,7 @@ func ExampleClient_CopyOptionGroupRequest_shared00() {
 	}
 
 	svc := rds.New(cfg)
-	input := &rds.CopyOptionGroupInput{
+	input := &types.CopyOptionGroupInput{
 		SourceOptionGroupIdentifier:  aws.String("mymysqloptiongroup"),
 		TargetOptionGroupDescription: aws.String("My MySQL option group copy"),
 		TargetOptionGroupIdentifier:  aws.String("mymysqloptiongroup-copy"),
@@ -417,7 +419,7 @@ func ExampleClient_CreateDBClusterRequest_shared00() {
 	}
 
 	svc := rds.New(cfg)
-	input := &rds.CreateDBClusterInput{
+	input := &types.CreateDBClusterInput{
 		AvailabilityZones: []string{
 			"us-east-1a",
 		},
@@ -498,7 +500,7 @@ func ExampleClient_CreateDBClusterParameterGroupRequest_shared00() {
 	}
 
 	svc := rds.New(cfg)
-	input := &rds.CreateDBClusterParameterGroupInput{
+	input := &types.CreateDBClusterParameterGroupInput{
 		DBClusterParameterGroupName: aws.String("mydbclusterparametergroup"),
 		DBParameterGroupFamily:      aws.String("aurora5.6"),
 		Description:                 aws.String("My DB cluster parameter group"),
@@ -537,7 +539,7 @@ func ExampleClient_CreateDBClusterSnapshotRequest_shared00() {
 	}
 
 	svc := rds.New(cfg)
-	input := &rds.CreateDBClusterSnapshotInput{
+	input := &types.CreateDBClusterSnapshotInput{
 		DBClusterIdentifier:         aws.String("mydbcluster"),
 		DBClusterSnapshotIdentifier: aws.String("mydbclustersnapshot"),
 	}
@@ -581,7 +583,7 @@ func ExampleClient_CreateDBInstanceRequest_shared00() {
 	}
 
 	svc := rds.New(cfg)
-	input := &rds.CreateDBInstanceInput{
+	input := &types.CreateDBInstanceInput{
 		AllocatedStorage:     aws.Int64(5),
 		DBInstanceClass:      aws.String("db.t2.micro"),
 		DBInstanceIdentifier: aws.String("mymysqlinstance"),
@@ -657,7 +659,7 @@ func ExampleClient_CreateDBInstanceReadReplicaRequest_shared00() {
 	}
 
 	svc := rds.New(cfg)
-	input := &rds.CreateDBInstanceReadReplicaInput{
+	input := &types.CreateDBInstanceReadReplicaInput{
 		AvailabilityZone:           aws.String("us-east-1a"),
 		CopyTagsToSnapshot:         aws.Bool(true),
 		DBInstanceClass:            aws.String("db.t2.micro"),
@@ -665,7 +667,7 @@ func ExampleClient_CreateDBInstanceReadReplicaRequest_shared00() {
 		PubliclyAccessible:         aws.Bool(true),
 		SourceDBInstanceIdentifier: aws.String("mymysqlinstance"),
 		StorageType:                aws.String("gp2"),
-		Tags: []rds.Tag{
+		Tags: []types.Tag{
 			{
 				Key:   aws.String("mydbreadreplicakey"),
 				Value: aws.String("mydbreadreplicavalue"),
@@ -740,7 +742,7 @@ func ExampleClient_CreateDBParameterGroupRequest_shared00() {
 	}
 
 	svc := rds.New(cfg)
-	input := &rds.CreateDBParameterGroupInput{
+	input := &types.CreateDBParameterGroupInput{
 		DBParameterGroupFamily: aws.String("mysql5.6"),
 		DBParameterGroupName:   aws.String("mymysqlparametergroup"),
 		Description:            aws.String("My MySQL parameter group"),
@@ -779,7 +781,7 @@ func ExampleClient_CreateDBSecurityGroupRequest_shared00() {
 	}
 
 	svc := rds.New(cfg)
-	input := &rds.CreateDBSecurityGroupInput{
+	input := &types.CreateDBSecurityGroupInput{
 		DBSecurityGroupDescription: aws.String("My DB security group"),
 		DBSecurityGroupName:        aws.String("mydbsecuritygroup"),
 	}
@@ -819,7 +821,7 @@ func ExampleClient_CreateDBSnapshotRequest_shared00() {
 	}
 
 	svc := rds.New(cfg)
-	input := &rds.CreateDBSnapshotInput{
+	input := &types.CreateDBSnapshotInput{
 		DBInstanceIdentifier: aws.String("mymysqlinstance"),
 		DBSnapshotIdentifier: aws.String("mydbsnapshot"),
 	}
@@ -861,7 +863,7 @@ func ExampleClient_CreateDBSubnetGroupRequest_shared00() {
 	}
 
 	svc := rds.New(cfg)
-	input := &rds.CreateDBSubnetGroupInput{
+	input := &types.CreateDBSubnetGroupInput{
 		DBSubnetGroupDescription: aws.String("My DB subnet group"),
 		DBSubnetGroupName:        aws.String("mydbsubnetgroup"),
 		SubnetIds: []string{
@@ -909,7 +911,7 @@ func ExampleClient_CreateEventSubscriptionRequest_shared00() {
 	}
 
 	svc := rds.New(cfg)
-	input := &rds.CreateEventSubscriptionInput{
+	input := &types.CreateEventSubscriptionInput{
 		Enabled: aws.Bool(true),
 		EventCategories: []string{
 			"availability",
@@ -965,7 +967,7 @@ func ExampleClient_CreateOptionGroupRequest_shared00() {
 	}
 
 	svc := rds.New(cfg)
-	input := &rds.CreateOptionGroupInput{
+	input := &types.CreateOptionGroupInput{
 		EngineName:             aws.String("MySQL"),
 		MajorEngineVersion:     aws.String("5.6"),
 		OptionGroupDescription: aws.String("My MySQL 5.6 option group"),
@@ -1005,7 +1007,7 @@ func ExampleClient_DeleteDBClusterRequest_shared00() {
 	}
 
 	svc := rds.New(cfg)
-	input := &rds.DeleteDBClusterInput{
+	input := &types.DeleteDBClusterInput{
 		DBClusterIdentifier: aws.String("mydbcluster"),
 		SkipFinalSnapshot:   aws.Bool(true),
 	}
@@ -1049,7 +1051,7 @@ func ExampleClient_DeleteDBClusterParameterGroupRequest_shared00() {
 	}
 
 	svc := rds.New(cfg)
-	input := &rds.DeleteDBClusterParameterGroupInput{
+	input := &types.DeleteDBClusterParameterGroupInput{
 		DBClusterParameterGroupName: aws.String("mydbclusterparametergroup"),
 	}
 
@@ -1086,7 +1088,7 @@ func ExampleClient_DeleteDBClusterSnapshotRequest_shared00() {
 	}
 
 	svc := rds.New(cfg)
-	input := &rds.DeleteDBClusterSnapshotInput{
+	input := &types.DeleteDBClusterSnapshotInput{
 		DBClusterSnapshotIdentifier: aws.String("mydbclustersnapshot"),
 	}
 
@@ -1123,7 +1125,7 @@ func ExampleClient_DeleteDBInstanceRequest_shared00() {
 	}
 
 	svc := rds.New(cfg)
-	input := &rds.DeleteDBInstanceInput{
+	input := &types.DeleteDBInstanceInput{
 		DBInstanceIdentifier: aws.String("mymysqlinstance"),
 		SkipFinalSnapshot:    aws.Bool(true),
 	}
@@ -1169,7 +1171,7 @@ func ExampleClient_DeleteDBParameterGroupRequest_shared00() {
 	}
 
 	svc := rds.New(cfg)
-	input := &rds.DeleteDBParameterGroupInput{
+	input := &types.DeleteDBParameterGroupInput{
 		DBParameterGroupName: aws.String("mydbparamgroup3"),
 	}
 
@@ -1206,7 +1208,7 @@ func ExampleClient_DeleteDBSecurityGroupRequest_shared00() {
 	}
 
 	svc := rds.New(cfg)
-	input := &rds.DeleteDBSecurityGroupInput{
+	input := &types.DeleteDBSecurityGroupInput{
 		DBSecurityGroupName: aws.String("mysecgroup"),
 	}
 
@@ -1243,7 +1245,7 @@ func ExampleClient_DeleteDBSnapshotRequest_shared00() {
 	}
 
 	svc := rds.New(cfg)
-	input := &rds.DeleteDBSnapshotInput{
+	input := &types.DeleteDBSnapshotInput{
 		DBSnapshotIdentifier: aws.String("mydbsnapshot"),
 	}
 
@@ -1280,7 +1282,7 @@ func ExampleClient_DeleteDBSubnetGroupRequest_shared00() {
 	}
 
 	svc := rds.New(cfg)
-	input := &rds.DeleteDBSubnetGroupInput{
+	input := &types.DeleteDBSubnetGroupInput{
 		DBSubnetGroupName: aws.String("mydbsubnetgroup"),
 	}
 
@@ -1319,7 +1321,7 @@ func ExampleClient_DeleteEventSubscriptionRequest_shared00() {
 	}
 
 	svc := rds.New(cfg)
-	input := &rds.DeleteEventSubscriptionInput{
+	input := &types.DeleteEventSubscriptionInput{
 		SubscriptionName: aws.String("myeventsubscription"),
 	}
 
@@ -1356,7 +1358,7 @@ func ExampleClient_DeleteOptionGroupRequest_shared00() {
 	}
 
 	svc := rds.New(cfg)
-	input := &rds.DeleteOptionGroupInput{
+	input := &types.DeleteOptionGroupInput{
 		OptionGroupName: aws.String("mydboptiongroup"),
 	}
 
@@ -1393,7 +1395,7 @@ func ExampleClient_DescribeAccountAttributesRequest_shared00() {
 	}
 
 	svc := rds.New(cfg)
-	input := &rds.DescribeAccountAttributesInput{}
+	input := &types.DescribeAccountAttributesInput{}
 
 	req := svc.DescribeAccountAttributesRequest(input)
 	result, err := req.Send(context.Background())
@@ -1424,7 +1426,7 @@ func ExampleClient_DescribeCertificatesRequest_shared00() {
 	}
 
 	svc := rds.New(cfg)
-	input := &rds.DescribeCertificatesInput{
+	input := &types.DescribeCertificatesInput{
 		CertificateIdentifier: aws.String("rds-ca-2015"),
 		MaxRecords:            aws.Int64(20),
 	}
@@ -1460,7 +1462,7 @@ func ExampleClient_DescribeDBClusterParameterGroupsRequest_shared00() {
 	}
 
 	svc := rds.New(cfg)
-	input := &rds.DescribeDBClusterParameterGroupsInput{
+	input := &types.DescribeDBClusterParameterGroupsInput{
 		DBClusterParameterGroupName: aws.String("mydbclusterparametergroup"),
 	}
 
@@ -1495,7 +1497,7 @@ func ExampleClient_DescribeDBClusterParametersRequest_shared00() {
 	}
 
 	svc := rds.New(cfg)
-	input := &rds.DescribeDBClusterParametersInput{
+	input := &types.DescribeDBClusterParametersInput{
 		DBClusterParameterGroupName: aws.String("mydbclusterparametergroup"),
 		Source:                      aws.String("system"),
 	}
@@ -1531,7 +1533,7 @@ func ExampleClient_DescribeDBClusterSnapshotAttributesRequest_shared00() {
 	}
 
 	svc := rds.New(cfg)
-	input := &rds.DescribeDBClusterSnapshotAttributesInput{
+	input := &types.DescribeDBClusterSnapshotAttributesInput{
 		DBClusterSnapshotIdentifier: aws.String("mydbclustersnapshot"),
 	}
 
@@ -1566,7 +1568,7 @@ func ExampleClient_DescribeDBClusterSnapshotsRequest_shared00() {
 	}
 
 	svc := rds.New(cfg)
-	input := &rds.DescribeDBClusterSnapshotsInput{
+	input := &types.DescribeDBClusterSnapshotsInput{
 		DBClusterSnapshotIdentifier: aws.String("mydbclustersnapshot"),
 		SnapshotType:                aws.String("manual"),
 	}
@@ -1602,7 +1604,7 @@ func ExampleClient_DescribeDBClustersRequest_shared00() {
 	}
 
 	svc := rds.New(cfg)
-	input := &rds.DescribeDBClustersInput{
+	input := &types.DescribeDBClustersInput{
 		DBClusterIdentifier: aws.String("mynewdbcluster"),
 	}
 
@@ -1637,7 +1639,7 @@ func ExampleClient_DescribeDBEngineVersionsRequest_shared00() {
 	}
 
 	svc := rds.New(cfg)
-	input := &rds.DescribeDBEngineVersionsInput{
+	input := &types.DescribeDBEngineVersionsInput{
 		DBParameterGroupFamily:     aws.String("mysql5.6"),
 		DefaultOnly:                aws.Bool(true),
 		Engine:                     aws.String("mysql"),
@@ -1674,7 +1676,7 @@ func ExampleClient_DescribeDBInstancesRequest_shared00() {
 	}
 
 	svc := rds.New(cfg)
-	input := &rds.DescribeDBInstancesInput{
+	input := &types.DescribeDBInstancesInput{
 		DBInstanceIdentifier: aws.String("mymysqlinstance"),
 	}
 
@@ -1710,7 +1712,7 @@ func ExampleClient_DescribeDBLogFilesRequest_shared00() {
 	}
 
 	svc := rds.New(cfg)
-	input := &rds.DescribeDBLogFilesInput{
+	input := &types.DescribeDBLogFilesInput{
 		DBInstanceIdentifier: aws.String("mymysqlinstance"),
 		FileLastWritten:      aws.Int64(1470873600000),
 		FileSize:             aws.Int64(0),
@@ -1748,7 +1750,7 @@ func ExampleClient_DescribeDBParameterGroupsRequest_shared00() {
 	}
 
 	svc := rds.New(cfg)
-	input := &rds.DescribeDBParameterGroupsInput{
+	input := &types.DescribeDBParameterGroupsInput{
 		DBParameterGroupName: aws.String("mymysqlparametergroup"),
 	}
 
@@ -1784,7 +1786,7 @@ func ExampleClient_DescribeDBParametersRequest_shared00() {
 	}
 
 	svc := rds.New(cfg)
-	input := &rds.DescribeDBParametersInput{
+	input := &types.DescribeDBParametersInput{
 		DBParameterGroupName: aws.String("mymysqlparametergroup"),
 		MaxRecords:           aws.Int64(20),
 		Source:               aws.String("system"),
@@ -1821,7 +1823,7 @@ func ExampleClient_DescribeDBSecurityGroupsRequest_shared00() {
 	}
 
 	svc := rds.New(cfg)
-	input := &rds.DescribeDBSecurityGroupsInput{
+	input := &types.DescribeDBSecurityGroupsInput{
 		DBSecurityGroupName: aws.String("mydbsecuritygroup"),
 	}
 
@@ -1856,7 +1858,7 @@ func ExampleClient_DescribeDBSnapshotAttributesRequest_shared00() {
 	}
 
 	svc := rds.New(cfg)
-	input := &rds.DescribeDBSnapshotAttributesInput{
+	input := &types.DescribeDBSnapshotAttributesInput{
 		DBSnapshotIdentifier: aws.String("mydbsnapshot"),
 	}
 
@@ -1891,7 +1893,7 @@ func ExampleClient_DescribeDBSnapshotsRequest_shared00() {
 	}
 
 	svc := rds.New(cfg)
-	input := &rds.DescribeDBSnapshotsInput{
+	input := &types.DescribeDBSnapshotsInput{
 		DBInstanceIdentifier: aws.String("mymysqlinstance"),
 		IncludePublic:        aws.Bool(false),
 		IncludeShared:        aws.Bool(true),
@@ -1929,7 +1931,7 @@ func ExampleClient_DescribeDBSubnetGroupsRequest_shared00() {
 	}
 
 	svc := rds.New(cfg)
-	input := &rds.DescribeDBSubnetGroupsInput{
+	input := &types.DescribeDBSubnetGroupsInput{
 		DBSubnetGroupName: aws.String("mydbsubnetgroup"),
 	}
 
@@ -1964,7 +1966,7 @@ func ExampleClient_DescribeEngineDefaultClusterParametersRequest_shared00() {
 	}
 
 	svc := rds.New(cfg)
-	input := &rds.DescribeEngineDefaultClusterParametersInput{
+	input := &types.DescribeEngineDefaultClusterParametersInput{
 		DBParameterGroupFamily: aws.String("aurora5.6"),
 	}
 
@@ -1997,7 +1999,7 @@ func ExampleClient_DescribeEngineDefaultParametersRequest_shared00() {
 	}
 
 	svc := rds.New(cfg)
-	input := &rds.DescribeEngineDefaultParametersInput{
+	input := &types.DescribeEngineDefaultParametersInput{
 		DBParameterGroupFamily: aws.String("mysql5.6"),
 	}
 
@@ -2030,7 +2032,7 @@ func ExampleClient_DescribeEventCategoriesRequest_shared00() {
 	}
 
 	svc := rds.New(cfg)
-	input := &rds.DescribeEventCategoriesInput{
+	input := &types.DescribeEventCategoriesInput{
 		SourceType: aws.String("db-instance"),
 	}
 
@@ -2063,7 +2065,7 @@ func ExampleClient_DescribeEventSubscriptionsRequest_shared00() {
 	}
 
 	svc := rds.New(cfg)
-	input := &rds.DescribeEventSubscriptionsInput{
+	input := &types.DescribeEventSubscriptionsInput{
 		SubscriptionName: aws.String("mymysqleventsubscription"),
 	}
 
@@ -2099,13 +2101,13 @@ func ExampleClient_DescribeEventsRequest_shared00() {
 	}
 
 	svc := rds.New(cfg)
-	input := &rds.DescribeEventsInput{
+	input := &types.DescribeEventsInput{
 		Duration: aws.Int64(10080),
 		EventCategories: []string{
 			"backup",
 		},
 		SourceIdentifier: aws.String("mymysqlinstance"),
-		SourceType:       rds.SourceTypeDbInstance,
+		SourceType:       enums.SourceTypeDbInstance,
 	}
 
 	req := svc.DescribeEventsRequest(input)
@@ -2138,7 +2140,7 @@ func ExampleClient_DescribeOptionGroupOptionsRequest_shared00() {
 	}
 
 	svc := rds.New(cfg)
-	input := &rds.DescribeOptionGroupOptionsInput{
+	input := &types.DescribeOptionGroupOptionsInput{
 		EngineName:         aws.String("mysql"),
 		MajorEngineVersion: aws.String("5.6"),
 	}
@@ -2172,7 +2174,7 @@ func ExampleClient_DescribeOptionGroupsRequest_shared00() {
 	}
 
 	svc := rds.New(cfg)
-	input := &rds.DescribeOptionGroupsInput{
+	input := &types.DescribeOptionGroupsInput{
 		EngineName:         aws.String("mysql"),
 		MajorEngineVersion: aws.String("5.6"),
 	}
@@ -2209,7 +2211,7 @@ func ExampleClient_DescribeOrderableDBInstanceOptionsRequest_shared00() {
 	}
 
 	svc := rds.New(cfg)
-	input := &rds.DescribeOrderableDBInstanceOptionsInput{
+	input := &types.DescribeOrderableDBInstanceOptionsInput{
 		DBInstanceClass: aws.String("db.t2.micro"),
 		Engine:          aws.String("mysql"),
 		EngineVersion:   aws.String("5.6.27"),
@@ -2247,7 +2249,7 @@ func ExampleClient_DescribePendingMaintenanceActionsRequest_shared00() {
 	}
 
 	svc := rds.New(cfg)
-	input := &rds.DescribePendingMaintenanceActionsInput{
+	input := &types.DescribePendingMaintenanceActionsInput{
 		ResourceIdentifier: aws.String("arn:aws:rds:us-east-1:992648334831:db:mymysqlinstance"),
 	}
 
@@ -2283,7 +2285,7 @@ func ExampleClient_DescribeReservedDBInstancesRequest_shared00() {
 	}
 
 	svc := rds.New(cfg)
-	input := &rds.DescribeReservedDBInstancesInput{
+	input := &types.DescribeReservedDBInstancesInput{
 		DBInstanceClass:    aws.String("db.t2.micro"),
 		Duration:           aws.String("1y"),
 		MultiAZ:            aws.Bool(false),
@@ -2323,7 +2325,7 @@ func ExampleClient_DescribeReservedDBInstancesOfferingsRequest_shared00() {
 	}
 
 	svc := rds.New(cfg)
-	input := &rds.DescribeReservedDBInstancesOfferingsInput{
+	input := &types.DescribeReservedDBInstancesOfferingsInput{
 		DBInstanceClass:    aws.String("db.t2.micro"),
 		Duration:           aws.String("1y"),
 		MultiAZ:            aws.Bool(false),
@@ -2362,7 +2364,7 @@ func ExampleClient_DescribeSourceRegionsRequest_shared00() {
 	}
 
 	svc := rds.New(cfg)
-	input := &rds.DescribeSourceRegionsInput{}
+	input := &types.DescribeSourceRegionsInput{}
 
 	req := svc.DescribeSourceRegionsRequest(input)
 	result, err := req.Send(context.Background())
@@ -2393,7 +2395,7 @@ func ExampleClient_DownloadDBLogFilePortionRequest_shared00() {
 	}
 
 	svc := rds.New(cfg)
-	input := &rds.DownloadDBLogFilePortionInput{
+	input := &types.DownloadDBLogFilePortionInput{
 		DBInstanceIdentifier: aws.String("mymysqlinstance"),
 		LogFileName:          aws.String("mysqlUpgrade"),
 	}
@@ -2432,7 +2434,7 @@ func ExampleClient_FailoverDBClusterRequest_shared00() {
 	}
 
 	svc := rds.New(cfg)
-	input := &rds.FailoverDBClusterInput{
+	input := &types.FailoverDBClusterInput{
 		DBClusterIdentifier:        aws.String("myaurorainstance-cluster"),
 		TargetDBInstanceIdentifier: aws.String("myaurorareplica"),
 	}
@@ -2473,7 +2475,7 @@ func ExampleClient_ListTagsForResourceRequest_shared00() {
 	}
 
 	svc := rds.New(cfg)
-	input := &rds.ListTagsForResourceInput{
+	input := &types.ListTagsForResourceInput{
 		ResourceName: aws.String("arn:aws:rds:us-east-1:992648334831:og:mymysqloptiongroup"),
 	}
 
@@ -2512,7 +2514,7 @@ func ExampleClient_ModifyDBClusterRequest_shared00() {
 	}
 
 	svc := rds.New(cfg)
-	input := &rds.ModifyDBClusterInput{
+	input := &types.ModifyDBClusterInput{
 		ApplyImmediately:           aws.Bool(true),
 		DBClusterIdentifier:        aws.String("mydbcluster"),
 		MasterUserPassword:         aws.String("mynewpassword"),
@@ -2575,11 +2577,11 @@ func ExampleClient_ModifyDBClusterParameterGroupRequest_shared00() {
 	}
 
 	svc := rds.New(cfg)
-	input := &rds.ModifyDBClusterParameterGroupInput{
+	input := &types.ModifyDBClusterParameterGroupInput{
 		DBClusterParameterGroupName: aws.String("mydbclusterparametergroup"),
-		Parameters: []rds.Parameter{
+		Parameters: []types.Parameter{
 			{
-				ApplyMethod:    rds.ApplyMethodImmediate,
+				ApplyMethod:    enums.ApplyMethodImmediate,
 				ParameterName:  aws.String("time_zone"),
 				ParameterValue: aws.String("America/Phoenix"),
 			},
@@ -2620,7 +2622,7 @@ func ExampleClient_ModifyDBClusterSnapshotAttributeRequest_shared00() {
 	}
 
 	svc := rds.New(cfg)
-	input := &rds.ModifyDBClusterSnapshotAttributeInput{
+	input := &types.ModifyDBClusterSnapshotAttributeInput{
 		AttributeName:               aws.String("restore"),
 		DBClusterSnapshotIdentifier: aws.String("manual-cluster-snapshot1"),
 		ValuesToAdd: []string{
@@ -2667,7 +2669,7 @@ func ExampleClient_ModifyDBInstanceRequest_shared00() {
 	}
 
 	svc := rds.New(cfg)
-	input := &rds.ModifyDBInstanceInput{
+	input := &types.ModifyDBInstanceInput{
 		AllocatedStorage:           aws.Int64(10),
 		ApplyImmediately:           aws.Bool(true),
 		BackupRetentionPeriod:      aws.Int64(1),
@@ -2742,11 +2744,11 @@ func ExampleClient_ModifyDBParameterGroupRequest_shared00() {
 	}
 
 	svc := rds.New(cfg)
-	input := &rds.ModifyDBParameterGroupInput{
+	input := &types.ModifyDBParameterGroupInput{
 		DBParameterGroupName: aws.String("mymysqlparametergroup"),
-		Parameters: []rds.Parameter{
+		Parameters: []types.Parameter{
 			{
-				ApplyMethod:    rds.ApplyMethodImmediate,
+				ApplyMethod:    enums.ApplyMethodImmediate,
 				ParameterName:  aws.String("time_zone"),
 				ParameterValue: aws.String("America/Phoenix"),
 			},
@@ -2786,7 +2788,7 @@ func ExampleClient_ModifyDBSnapshotAttributeRequest_shared00() {
 	}
 
 	svc := rds.New(cfg)
-	input := &rds.ModifyDBSnapshotAttributeInput{
+	input := &types.ModifyDBSnapshotAttributeInput{
 		AttributeName:        aws.String("restore"),
 		DBSnapshotIdentifier: aws.String("mydbsnapshot"),
 		ValuesToAdd: []string{
@@ -2829,7 +2831,7 @@ func ExampleClient_ModifyDBSubnetGroupRequest_shared00() {
 	}
 
 	svc := rds.New(cfg)
-	input := &rds.ModifyDBSubnetGroupInput{
+	input := &types.ModifyDBSubnetGroupInput{
 		DBSubnetGroupName: aws.String("mydbsubnetgroup"),
 		SubnetIds: []string{
 			"subnet-70e1975a",
@@ -2876,7 +2878,7 @@ func ExampleClient_ModifyEventSubscriptionRequest_shared00() {
 	}
 
 	svc := rds.New(cfg)
-	input := &rds.ModifyEventSubscriptionInput{
+	input := &types.ModifyEventSubscriptionInput{
 		Enabled: aws.Bool(true),
 		EventCategories: []string{
 			"deletion",
@@ -2927,10 +2929,10 @@ func ExampleClient_ModifyOptionGroupRequest_shared00() {
 	}
 
 	svc := rds.New(cfg)
-	input := &rds.ModifyOptionGroupInput{
+	input := &types.ModifyOptionGroupInput{
 		ApplyImmediately: aws.Bool(true),
 		OptionGroupName:  aws.String("myawsuser-og02"),
-		OptionsToInclude: []rds.OptionConfiguration{
+		OptionsToInclude: []types.OptionConfiguration{
 			{
 				DBSecurityGroupMemberships: []string{
 					"default",
@@ -2974,7 +2976,7 @@ func ExampleClient_PromoteReadReplicaRequest_shared00() {
 	}
 
 	svc := rds.New(cfg)
-	input := &rds.PromoteReadReplicaInput{
+	input := &types.PromoteReadReplicaInput{
 		BackupRetentionPeriod: aws.Int64(1),
 		DBInstanceIdentifier:  aws.String("mydbreadreplica"),
 		PreferredBackupWindow: aws.String("03:30-04:00"),
@@ -3014,7 +3016,7 @@ func ExampleClient_PurchaseReservedDBInstancesOfferingRequest_shared00() {
 	}
 
 	svc := rds.New(cfg)
-	input := &rds.PurchaseReservedDBInstancesOfferingInput{
+	input := &types.PurchaseReservedDBInstancesOfferingInput{
 		ReservedDBInstanceId:          aws.String("myreservationid"),
 		ReservedDBInstancesOfferingId: aws.String("fb29428a-646d-4390-850e-5fe89926e727"),
 	}
@@ -3054,7 +3056,7 @@ func ExampleClient_RebootDBInstanceRequest_shared00() {
 	}
 
 	svc := rds.New(cfg)
-	input := &rds.RebootDBInstanceInput{
+	input := &types.RebootDBInstanceInput{
 		DBInstanceIdentifier: aws.String("mymysqlinstance"),
 		ForceFailover:        aws.Bool(false),
 	}
@@ -3093,7 +3095,7 @@ func ExampleClient_RemoveSourceIdentifierFromSubscriptionRequest_shared00() {
 	}
 
 	svc := rds.New(cfg)
-	input := &rds.RemoveSourceIdentifierFromSubscriptionInput{
+	input := &types.RemoveSourceIdentifierFromSubscriptionInput{
 		SourceIdentifier: aws.String("mymysqlinstance"),
 		SubscriptionName: aws.String("myeventsubscription"),
 	}
@@ -3131,7 +3133,7 @@ func ExampleClient_RemoveTagsFromResourceRequest_shared00() {
 	}
 
 	svc := rds.New(cfg)
-	input := &rds.RemoveTagsFromResourceInput{
+	input := &types.RemoveTagsFromResourceInput{
 		ResourceName: aws.String("arn:aws:rds:us-east-1:992648334831:og:mydboptiongroup"),
 		TagKeys: []string{
 			"MyKey",
@@ -3174,7 +3176,7 @@ func ExampleClient_ResetDBClusterParameterGroupRequest_shared00() {
 	}
 
 	svc := rds.New(cfg)
-	input := &rds.ResetDBClusterParameterGroupInput{
+	input := &types.ResetDBClusterParameterGroupInput{
 		DBClusterParameterGroupName: aws.String("mydbclusterparametergroup"),
 		ResetAllParameters:          aws.Bool(true),
 	}
@@ -3213,7 +3215,7 @@ func ExampleClient_ResetDBParameterGroupRequest_shared00() {
 	}
 
 	svc := rds.New(cfg)
-	input := &rds.ResetDBParameterGroupInput{
+	input := &types.ResetDBParameterGroupInput{
 		DBParameterGroupName: aws.String("mydbparametergroup"),
 		ResetAllParameters:   aws.Bool(true),
 	}
@@ -3251,7 +3253,7 @@ func ExampleClient_RestoreDBClusterFromSnapshotRequest_shared00() {
 	}
 
 	svc := rds.New(cfg)
-	input := &rds.RestoreDBClusterFromSnapshotInput{
+	input := &types.RestoreDBClusterFromSnapshotInput{
 		DBClusterIdentifier: aws.String("restored-cluster1"),
 		Engine:              aws.String("aurora"),
 		SnapshotIdentifier:  aws.String("sample-cluster-snapshot1"),
@@ -3321,7 +3323,7 @@ func ExampleClient_RestoreDBClusterToPointInTimeRequest_shared00() {
 	}
 
 	svc := rds.New(cfg)
-	input := &rds.RestoreDBClusterToPointInTimeInput{
+	input := &types.RestoreDBClusterToPointInTimeInput{
 		DBClusterIdentifier:       aws.String("sample-restored-cluster1"),
 		RestoreToTime:             parseTime("2006-01-02T15:04:05Z", "2016-09-13T18:45:00Z"),
 		SourceDBClusterIdentifier: aws.String("sample-cluster1"),
@@ -3392,7 +3394,7 @@ func ExampleClient_RestoreDBInstanceFromDBSnapshotRequest_shared00() {
 	}
 
 	svc := rds.New(cfg)
-	input := &rds.RestoreDBInstanceFromDBSnapshotInput{
+	input := &types.RestoreDBInstanceFromDBSnapshotInput{
 		DBInstanceIdentifier: aws.String("mysqldb-restored"),
 		DBSnapshotIdentifier: aws.String("rds:mysqldb-2014-04-22-08-15"),
 	}
@@ -3467,7 +3469,7 @@ func ExampleClient_RestoreDBInstanceToPointInTimeRequest_shared00() {
 	}
 
 	svc := rds.New(cfg)
-	input := &rds.RestoreDBInstanceToPointInTimeInput{
+	input := &types.RestoreDBInstanceToPointInTimeInput{
 		RestoreTime:                parseTime("2006-01-02T15:04:05Z", "2016-09-13T18:45:00Z"),
 		SourceDBInstanceIdentifier: aws.String("mysql-sample"),
 		TargetDBInstanceIdentifier: aws.String("mysql-sample-restored"),
@@ -3547,7 +3549,7 @@ func ExampleClient_RevokeDBSecurityGroupIngressRequest_shared00() {
 	}
 
 	svc := rds.New(cfg)
-	input := &rds.RevokeDBSecurityGroupIngressInput{
+	input := &types.RevokeDBSecurityGroupIngressInput{
 		CIDRIP:              aws.String("203.0.113.5/32"),
 		DBSecurityGroupName: aws.String("mydbsecuritygroup"),
 	}

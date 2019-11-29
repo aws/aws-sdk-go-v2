@@ -10,6 +10,7 @@ package budgetsiface
 
 import (
 	"github.com/aws/aws-sdk-go-v2/service/budgets"
+	"github.com/aws/aws-sdk-go-v2/service/budgets/types"
 )
 
 // ClientAPI provides an interface to enable mocking the
@@ -43,7 +44,7 @@ import (
 //    type mockClientClient struct {
 //        budgetsiface.ClientPI
 //    }
-//    func (m *mockClientClient) CreateBudget(input *budgets.CreateBudgetInput) (*budgets.CreateBudgetOutput, error) {
+//    func (m *mockClientClient) CreateBudget(input *types.CreateBudgetInput) (*types.CreateBudgetOutput, error) {
 //        // mock response/functionality
 //    }
 //
@@ -61,33 +62,33 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type ClientAPI interface {
-	CreateBudgetRequest(*budgets.CreateBudgetInput) budgets.CreateBudgetRequest
+	CreateBudgetRequest(*types.CreateBudgetInput) budgets.CreateBudgetRequest
 
-	CreateNotificationRequest(*budgets.CreateNotificationInput) budgets.CreateNotificationRequest
+	CreateNotificationRequest(*types.CreateNotificationInput) budgets.CreateNotificationRequest
 
-	CreateSubscriberRequest(*budgets.CreateSubscriberInput) budgets.CreateSubscriberRequest
+	CreateSubscriberRequest(*types.CreateSubscriberInput) budgets.CreateSubscriberRequest
 
-	DeleteBudgetRequest(*budgets.DeleteBudgetInput) budgets.DeleteBudgetRequest
+	DeleteBudgetRequest(*types.DeleteBudgetInput) budgets.DeleteBudgetRequest
 
-	DeleteNotificationRequest(*budgets.DeleteNotificationInput) budgets.DeleteNotificationRequest
+	DeleteNotificationRequest(*types.DeleteNotificationInput) budgets.DeleteNotificationRequest
 
-	DeleteSubscriberRequest(*budgets.DeleteSubscriberInput) budgets.DeleteSubscriberRequest
+	DeleteSubscriberRequest(*types.DeleteSubscriberInput) budgets.DeleteSubscriberRequest
 
-	DescribeBudgetRequest(*budgets.DescribeBudgetInput) budgets.DescribeBudgetRequest
+	DescribeBudgetRequest(*types.DescribeBudgetInput) budgets.DescribeBudgetRequest
 
-	DescribeBudgetPerformanceHistoryRequest(*budgets.DescribeBudgetPerformanceHistoryInput) budgets.DescribeBudgetPerformanceHistoryRequest
+	DescribeBudgetPerformanceHistoryRequest(*types.DescribeBudgetPerformanceHistoryInput) budgets.DescribeBudgetPerformanceHistoryRequest
 
-	DescribeBudgetsRequest(*budgets.DescribeBudgetsInput) budgets.DescribeBudgetsRequest
+	DescribeBudgetsRequest(*types.DescribeBudgetsInput) budgets.DescribeBudgetsRequest
 
-	DescribeNotificationsForBudgetRequest(*budgets.DescribeNotificationsForBudgetInput) budgets.DescribeNotificationsForBudgetRequest
+	DescribeNotificationsForBudgetRequest(*types.DescribeNotificationsForBudgetInput) budgets.DescribeNotificationsForBudgetRequest
 
-	DescribeSubscribersForNotificationRequest(*budgets.DescribeSubscribersForNotificationInput) budgets.DescribeSubscribersForNotificationRequest
+	DescribeSubscribersForNotificationRequest(*types.DescribeSubscribersForNotificationInput) budgets.DescribeSubscribersForNotificationRequest
 
-	UpdateBudgetRequest(*budgets.UpdateBudgetInput) budgets.UpdateBudgetRequest
+	UpdateBudgetRequest(*types.UpdateBudgetInput) budgets.UpdateBudgetRequest
 
-	UpdateNotificationRequest(*budgets.UpdateNotificationInput) budgets.UpdateNotificationRequest
+	UpdateNotificationRequest(*types.UpdateNotificationInput) budgets.UpdateNotificationRequest
 
-	UpdateSubscriberRequest(*budgets.UpdateSubscriberInput) budgets.UpdateSubscriberRequest
+	UpdateSubscriberRequest(*types.UpdateSubscriberInput) budgets.UpdateSubscriberRequest
 }
 
 var _ ClientAPI = (*budgets.Client)(nil)
